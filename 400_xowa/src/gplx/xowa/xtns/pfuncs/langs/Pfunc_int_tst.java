@@ -104,8 +104,7 @@ class Pf_msg_mgr_fxt {
 		alt_fxt.Test_parse_tmpl_str_test(raw, "{{test}}"	, expd);
 	}
 	public void Test_parse_lang(String other_lang_id, String raw, String expd) {
-		Xol_lang_itm other_lang = fxt.App().Lang_mgr().Get_by_or_new(Bry_.new_a7(other_lang_id));
-		other_lang.Init_by_load();
+		Xol_lang_itm other_lang = fxt.App().Lang_mgr().Get_by_or_load(Bry_.new_a7(other_lang_id));
 		fxt.Page().Lang_(other_lang); 
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}", expd);
 		fxt.Page().Lang_(en_lang);	// NOTE: must reset back to en_lang, else rest of tests will look up under fr

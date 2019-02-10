@@ -36,7 +36,7 @@ public class Pft_func_time extends Pf_func_base {
 			if (Bry_.Len_gt_0(arg_lang)) {
 				Xol_lang_stub specified_lang_itm = Xol_lang_stub_.Get_by_key_or_null(arg_lang);
 				if (specified_lang_itm != null) {	// NOTE: if lang_code is bad, then ignore (EX:bad_code)
-					Xol_lang_itm specified_lang = wiki.Appe().Lang_mgr().Get_by_or_new(arg_lang);
+					Xol_lang_itm specified_lang = wiki.Appe().Lang_mgr().Get_by_or_load(arg_lang);
 					lang = specified_lang;	
 				}
 			}
@@ -59,9 +59,9 @@ public class Pft_func_time extends Pf_func_base {
 }
 class DateAdpTranslator_xapp {
 	public static void Translate(Xowe_wiki wiki, Xol_lang_itm lang, int type, int val, Bry_bfr bb) {
-		lang.Init_by_load_assert();
-		byte[] itm_val = lang.Msg_mgr().Val_by_id(type + val); if (itm_val == null) return;
-		bb.Add(itm_val);
+		byte[] itm_val = lang.Msg_mgr().Val_by_id(type + val); 
+		if (itm_val != null)
+			bb.Add(itm_val);
 	}
 }
 class Pfxtp_roman {

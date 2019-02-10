@@ -153,7 +153,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	}
 	public boolean GetFallbacksFor(Scrib_proc_args args, Scrib_proc_rslt rslt) {	
 		byte[] lang_code = args.Pull_bry(0);
-		Xol_lang_itm lang = core.App().Lang_mgr().Get_by(lang_code);
+		Xol_lang_itm lang = core.App().Lang_mgr().Get_by_or_null(lang_code);
 		if (lang == null) return rslt.Init_bry_ary(Bry_.Ary("en"));	// lang is not valid; return en; REF:/languages/Language.php|getFallbacksFor; ISSUE#:340; DATE:2019-02-01
 		return rslt.Init_bry_ary(lang.Fallback_bry_ary());
 	}

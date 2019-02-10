@@ -25,8 +25,10 @@ import gplx.xowa.apps.*; import gplx.xowa.files.exts.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.guis.tabs.*;
 public class Xoa_app_fxt {
-	public static Xoae_app Make__app__edit() {
-		Io_mgr.Instance.InitEngine_mem();
+	public static Xoae_app Make__app__edit() {return Make__app__edit(true);}
+	public static Xoae_app Make__app__edit(boolean reset_fsys) {
+		if (reset_fsys)
+			Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();
 		return Make__app__edit("linux", Io_url_.mem_dir_("mem/xowa/"));
 	}

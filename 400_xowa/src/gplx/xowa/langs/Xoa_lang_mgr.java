@@ -33,20 +33,28 @@ public class Xoa_lang_mgr implements Gfo_invk {
 	public int						Len() {return hash.Count();}
 	public void						Add(Xol_lang_itm itm)		{hash.Add(itm.Key_bry(), itm);}
 	public Io_url					Root_dir() {return root_dir;} private final    Io_url root_dir;
-	public Xol_lang_itm				Get_at(int i)				{return (Xol_lang_itm)hash.Get_at(i);}
-	public Xol_lang_itm				Get_by(byte[] key)			{return (Xol_lang_itm)hash.Get_by(key);}
-	public Xol_lang_itm				Get_by_or_load(byte[] key)	{return Get_by_or_new(key).Init_by_load_assert();}
-	public Xol_lang_itm				Get_by_or_en(byte[] key) {	// called by Xowv_wiki for its .Lang()
-		Xol_lang_itm rv = Get_by(key);
-		return rv == null ? lang_en : rv;
+	public Xol_lang_itm Get_by_or_null(byte[] key) {return (Xol_lang_itm)hash.Get_by(key);} // check if exists
+	public Xol_lang_itm Get_by_or_load(byte[] key) { // main call
+		Xol_lang_itm rv = Get_by_or_null(key);
+		if (rv == null) {
+			rv = Xol_lang_itm.New(this, key);
+			rv.Init_by_load();
+			this.Add(rv);
+		}
+		return rv;
 	}
-	public Xol_lang_itm				Get_by_or_new(byte[] key) {
-		Xol_lang_itm rv = Get_by(key);
+	public Xol_lang_itm Get_by_or_new(byte[] key) { // largely deprecated; should only be used for builders
+		Xol_lang_itm rv = Get_by_or_null(key);
 		if (rv == null) {
 			rv = Xol_lang_itm.New(this, key);
 			this.Add(rv);
 		}
 		return rv;
+	}
+	public Xol_lang_itm Get_at(int i) {return (Xol_lang_itm)hash.Get_at(i);}   // called by Xol_mw_lang_parser
+	public Xol_lang_itm Get_by_or_en(byte[] key) {	// called by Xowv_wiki to set .Lang() for DRD
+		Xol_lang_itm rv = Get_by_or_null(key);
+		return rv == null ? lang_en : rv;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))					return Get_by_or_new(m.ReadBry("key"));

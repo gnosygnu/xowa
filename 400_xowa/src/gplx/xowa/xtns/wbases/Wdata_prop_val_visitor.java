@@ -29,7 +29,7 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 	public void Init(Bry_bfr bfr, Wdata_hwtr_msgs msgs, byte[] lang_key, boolean mode_is_statements) {
 		// init some member variables; 
 		this.bfr = bfr; this.msgs = msgs;
-		this.lang = app.Lang_mgr().Get_by(lang_key);
+		this.lang = app.Lang_mgr().Get_by_or_null(lang_key);
 		if (lang == null) lang = app.Lang_mgr().Lang_en();	// TEST: needed for one test; DATE:2016-10-20
 		this.mode_is_statements = mode_is_statements;
 	}

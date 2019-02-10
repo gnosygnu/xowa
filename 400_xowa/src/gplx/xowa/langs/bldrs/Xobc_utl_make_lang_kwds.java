@@ -45,7 +45,7 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 		int hash_len = hash.Count();
 		for (int i = 0; i < hash_len; i++) {
 			Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.Get_at(i); 
-			Xol_lang_itm lang = lang_mgr.Get_by(cfg_lang.Key_bry()); if (lang == null) continue;
+			Xol_lang_itm lang = lang_mgr.Get_by_or_null(cfg_lang.Key_bry()); if (lang == null) continue;
 			int cfg_grp_len = cfg_lang.Grps().length;
 			for (int j = 0; j < cfg_grp_len; j++) {					
 				Xobcl_kwd_row cfg_grp = cfg_lang.Grps()[j];

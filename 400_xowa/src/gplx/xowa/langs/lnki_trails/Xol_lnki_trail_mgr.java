@@ -16,7 +16,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.lnki_trails; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*;
 public class Xol_lnki_trail_mgr implements Gfo_invk {
-	public Xol_lnki_trail_mgr(Xol_lang_itm lang) {}
 	public void Clear() {trie.Clear();}
 	public int Count() {return trie.Count();}
 	public Btrie_slim_mgr Trie() {return trie;} private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();

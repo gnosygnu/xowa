@@ -34,7 +34,11 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 	public Xow_wiki					Wikii() {return this.Wiki();}
 	public int						Gender() {return Xol_gender_.Tid_unknown;}
 	public Xoae_app					Appe() {return app;} private final    Xoae_app app;
-	public Xol_lang_itm Lang() {if (lang == null) {lang = app.Lang_mgr().Get_by_or_new(app.Sys_cfg().Lang()); lang.Init_by_load();} return lang;} private Xol_lang_itm lang;		
+	public Xol_lang_itm Lang() {
+		if (lang == null)
+			lang = app.Lang_mgr().Get_by_or_load(app.Sys_cfg().Lang());
+		return lang;
+	} private Xol_lang_itm lang;		
 	public void Lang_(Xol_lang_itm v) {
 		lang = v;
 		this.Msg_mgr().Lang_(v);

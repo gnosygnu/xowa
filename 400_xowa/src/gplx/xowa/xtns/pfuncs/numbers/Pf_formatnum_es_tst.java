@@ -20,7 +20,7 @@ public class Pf_formatnum_es_tst {
 	private Xop_fxt fxt;
 	@Before public void init() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
-		Xol_lang_itm lang = Xol_lang_itm.New(app.Lang_mgr(), Bry_.new_a7("es")).Init_by_load_assert();
+		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_load(Bry_.new_a7("es"));
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "es.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 	}

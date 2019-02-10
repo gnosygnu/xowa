@@ -21,6 +21,7 @@ import gplx.xowa.apps.gfs.*; import gplx.xowa.apps.fsys.*; import gplx.core.intl
 import gplx.xowa.guis.langs.*;
 public class Xol_lang_itm implements Gfo_invk {
 	private boolean loaded = false;
+	private final    Object thread_lock = new Object();
 	public Xol_lang_itm(Xoa_lang_mgr lang_mgr, byte[] key_bry) {
 		this.lang_mgr = lang_mgr; this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry);
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(key_bry); if (lang_itm == null) throw Err_.new_wo_type("unknown lang_key", "key", String_.new_u8(key_bry));
@@ -32,7 +33,6 @@ public class Xol_lang_itm implements Gfo_invk {
 		this.specials_mgr = new Xol_specials_mgr(this);
 		this.case_mgr = Env_.Mode_testing() ? Xol_case_mgr_.A7() : Xol_case_mgr_.U8(); // NOTE: if test load ascii b/c utf8 is large; NOTE: placed here b/c tests do not call load; DATE:2014-07-04
 		this.num_mgr = Xol_num_mgr_.new_by_lang_id(lang_id);
-		this.lnki_trail_mgr = new Xol_lnki_trail_mgr(this);
 		this.vnt_mgr = new Xol_vnt_mgr(this);			
 		this.grammar = Xol_grammar_.new_by_lang_id(lang_id);
 		this.gender = Xol_gender_.new_by_lang_id(lang_id);
@@ -78,7 +78,7 @@ public class Xol_lang_itm implements Gfo_invk {
 	public Xol_gender			Gender() {return gender;} private final    Xol_gender gender;
 	public Xol_plural			Plural() {return plural;} private final    Xol_plural plural;
 	public Xol_duration_mgr		Duration_mgr() {return duration_mgr;} private final    Xol_duration_mgr duration_mgr;
-	public Xol_lnki_trail_mgr	Lnki_trail_mgr() {return lnki_trail_mgr;} private final    Xol_lnki_trail_mgr lnki_trail_mgr;
+	public Xol_lnki_trail_mgr	Lnki_trail_mgr() {return lnki_trail_mgr;} private final    Xol_lnki_trail_mgr lnki_trail_mgr = new Xol_lnki_trail_mgr();
 	public Xop_lnki_arg_parser	Lnki_arg_parser() {return lnki_arg_parser;} private Xop_lnki_arg_parser lnki_arg_parser = new Xop_lnki_arg_parser(); 
 	public Xol_func_regy		Func_regy() {return func_regy;} private final    Xol_func_regy func_regy;
 	public int					Img_thumb_halign_default() {return img_thumb_halign_default;} private int img_thumb_halign_default = Xop_lnki_align_h_.Right;
@@ -119,18 +119,20 @@ public class Xol_lang_itm implements Gfo_invk {
 	;
 
 	private static final    Hash_adp_bry fallback_dupes_regy = Hash_adp_bry.cs(); // to prevent cyclical loops during loading
-	public Xol_lang_itm Init_by_load_assert() {if (!loaded) Init_by_load(); return this;}
-	public boolean Init_by_load() {
-		if (this.loaded) return false;
-		fallback_dupes_regy.Clear();
-		this.loaded = true;
-		boolean lang_is_en = lang_id == Xol_lang_stub_.Id_en;
-		if (!lang_is_en) Xol_lang_itm_.Lang_init(this);
-		msg_mgr.Itm_by_key_or_new(Bry_.new_a7("Lang")).Atrs_set(key_bry, false, false);	// set "Lang" keyword; EX: for "fr", "{{int:Lang}}" -> "fr"
-		Load_lang(key_bry);
-		ns_aliases.Ary_add_(Xow_ns_canonical_.Ary);	// NOTE: always add English canonical as aliases to all languages
-		this.Evt_lang_changed();
-		return true;
+	public Xol_lang_itm Init_by_load() {
+		synchronized (thread_lock) { // Scribunto can create langs outside of wiki_lang; EX:dewiki and multiple scripts call isRTL for fr; ISSUE#:330; DATE:2019-02-09
+			if (!loaded) {
+				this.loaded = true;
+				fallback_dupes_regy.Clear();
+				boolean lang_is_en = lang_id == Xol_lang_stub_.Id_en;
+				if (!lang_is_en) Xol_lang_itm_.Lang_init(this);
+				msg_mgr.Itm_by_key_or_new(Bry_.new_a7("Lang")).Atrs_set(key_bry, false, false);	// set "Lang" keyword; EX: for "fr", "{{int:Lang}}" -> "fr"
+				Load_lang(key_bry);
+				ns_aliases.Ary_add_(Xow_ns_canonical_.Ary);	// NOTE: always add English canonical as aliases to all languages
+				this.Evt_lang_changed();
+			}
+		}
+		return this;
 	}
 	private void Exec_fallback_load(byte[] fallback_lang) {
 		Fallback_bry_(fallback_lang);

@@ -81,8 +81,11 @@ public class Scrib_lib_language_tst {
 		));
 	}
 	@Test  public void FormatNum() {
-		Xol_lang_itm other_lang = fxt.Core().App().Lang_mgr().Get_by_or_new(Bry_.new_a7("de")).Init_by_load_assert();	// NOTE: must call Init_by_load_assert, else load will be called by scrib and sprs below will get overwritten during load;
+		// init
+		Xol_lang_itm other_lang = fxt.Core().App().Lang_mgr().Get_by_or_load(Bry_.new_a7("de"));	// NOTE: must call load now, else load will be called by scrib and sprs below will get overwritten during load;
 		fxt.Parser_fxt().Init_lang_numbers_separators(other_lang, ".", ",");
+
+		// test
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("de", 1234), "1.234");		// german spr
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", 1234), "1,234");		// english spr
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234"), "1,234");		// String passed (not int)

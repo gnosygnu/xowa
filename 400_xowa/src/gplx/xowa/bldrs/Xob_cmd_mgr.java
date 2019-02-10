@@ -94,7 +94,8 @@ public class Xob_cmd_mgr implements Gfo_invk {
 	}
 	private Object Add_many(GfoMsg m) {
 		Xowe_wiki wiki = Wiki_get_or_make(m);
-		wiki.Lang().Init_by_load_assert();	// NOTE: must check that lang is loaded; else case_mgr will not initialize; DATE:2013-05-11
+		// TOMBSTONE: redundant since Wiki_get_or_make also calls Init_by_load(); DATE:2019-02-09
+		// wiki.Lang().Init_by_load_assert();	// NOTE: must check that lang is loaded; else case_mgr will not initialize; DATE:2013-05-11
 		int args_len = m.Args_count();
 		String[] cmds = new String[args_len - 1];	// -1 b/c 1st arg is wiki
 		for (int i = 1; i < args_len; i++) {

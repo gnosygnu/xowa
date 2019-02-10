@@ -148,7 +148,7 @@ public class Xol_msg_mgr_ {
 			Xoa_lang_mgr lang_mgr = wiki.App().Lang_mgr();
 			for (int i = 0; i < fallback_ary_len; i++) {
 				byte[] fallback = fallback_ary[i];
-				Xol_lang_itm fallback_lang = lang_mgr.Get_by(fallback);
+				Xol_lang_itm fallback_lang = lang_mgr.Get_by_or_null(fallback);
 				if (fallback_lang == null) continue;	// NOTE: en has fallback of "false"; ignore bad fallbacks;
 				rv = fallback_lang.Msg_mgr().Itm_by_key_or_null(msg_key_sub_root);
 				if (rv != null) break;

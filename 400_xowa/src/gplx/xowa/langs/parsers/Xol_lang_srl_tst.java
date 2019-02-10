@@ -165,8 +165,7 @@ public class Xol_lang_srl_tst {
 	@Test  public void Fallback_circular() {	// PURPOSE: pt and pt-br cite each other as fallback in Messages*.php; DATE:2013-02-18
 		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt")		, "fallback_load('pt-br');");
 		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt-br")	, "fallback_load('pt');");
-		Xol_lang_itm lang = Xol_lang_itm.New(fxt.App().Lang_mgr(), Bry_.new_a7("pt"));
-		lang.Init_by_load();
+		fxt.App().Lang_mgr().Get_by_or_load(Bry_.new_a7("pt")); // fails if test-suite gets stuck
 	}
 	@Test  public void Num_fmt() {
 		String raw = String_.Concat_lines_nl
@@ -203,7 +202,7 @@ class Xol_lang_srl_fxt {
 		app = Xoa_app_fxt.Make__app__edit();
 		lang = Xol_lang_itm.New(app.Lang_mgr(), Bry_.new_a7("fr"));
 		Xoa_gfs_mgr.Msg_parser_init();	// required by fallback_load
-	}	GfsCtx ctx = GfsCtx.new_(); Xoa_gfs_bldr bldr = new Xoa_gfs_bldr(); //Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	}	GfsCtx ctx = GfsCtx.new_(); Xoa_gfs_bldr bldr = new Xoa_gfs_bldr();
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xol_lang_itm Lang() {return lang;} private Xol_lang_itm lang;
 	public Xow_ns ns_(int id, String s) {return new Xow_ns(id, Xow_ns_case_.Tid__1st, Bry_.new_u8(s), false);}

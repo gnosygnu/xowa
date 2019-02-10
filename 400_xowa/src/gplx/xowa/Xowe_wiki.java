@@ -229,11 +229,10 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		parser_mgr.Init_by_wiki();
 
 		// init ns_mgr
-		if (lang.Init_by_load()) {
-			if (domain_tid == Xow_domain_tid_.Tid__wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
-				ns_mgr.Aliases_add(Xow_ns_.Tid__project, Xow_ns_.Alias__wikipedia);
-			special_mgr.Evt_lang_changed(lang);
-		}
+		lang.Init_by_load();
+		if (domain_tid == Xow_domain_tid_.Tid__wikipedia)	// NOTE: if type is wikipedia, add "Wikipedia" as an alias; PAGE:en.w:pt.wikipedia.org/wiki/Página principal which redirects to Wikipedia:Página principal
+			ns_mgr.Aliases_add(Xow_ns_.Tid__project, Xow_ns_.Alias__wikipedia);
+		special_mgr.Evt_lang_changed(lang);
 		app.Gfs_mgr().Run_url_for(this, app.Fsys_mgr().Cfg_wiki_core_dir().GenSubFil(domain_str + ".gfs"));		// NOTE: must be run after lang.Init_by_load b/c lang will reload ns_mgr; DATE:2015-04-17run cfg for wiki by user ; EX: /xowa/user/anonymous/wiki/en.wikipedia.org/cfg/user_wiki.gfs
 		cfg_parser.Xtns().Itm_pages().Init(ns_mgr);	// init ns_mgr for Page / Index ns just before rebuild; usually set by #cfg file
 		Xow_ns_mgr_.rebuild_(lang, ns_mgr);	// always rebuild; may be changed by user_wiki.gfs; different lang will change namespaces; EX: de.wikisource.org will have Seite for File and none of {{#lst}} will work

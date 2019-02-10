@@ -75,7 +75,7 @@ public class Xol_mw_lang_parser {
 				String lang_key = String_.Replace(String_.Lower(String_.Mid(url.NameOnly(), 8)), "_", "-");	// 8=Messages.length; lower b/c format is MessagesEn.php (need "en")
 				// if (String_.In(lang_key, "qqq", "enrtl", "bbc", "bbc-latn")) continue;
 				String text = Io_mgr.Instance.LoadFilStr(url);
-				Xol_lang_itm lang = lang_mgr.Get_by_or_new(Bry_.new_u8(lang_key));
+				Xol_lang_itm lang = lang_mgr.Get_by_or_new(Bry_.new_u8(lang_key)); // NOTE: cannot be Get_by_or_load else will load from XO; actual definitions will be loaded from MW below
 				this.Parse_core(text, lang, bfr, lang_transform);
 			} catch (Exception exc) {Err_.Noop(exc); Console_adp__sys.Instance.Write_str_w_nl("failed to parse " + url.NameOnly() + Err_.Message_gplx_log(exc));}
 		}
