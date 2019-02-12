@@ -1,239 +1,0 @@
-[33mcommit cd56234e281079c95afad775cb4da2ba70c03783[m
-Author: gnosygnu <gnosygnu@gmail.com>
-Date:   Sun Feb 3 23:48:23 2019 -0500
-
-    HTML Databases: Show redlinks for htxt [#320]
-
-[1mdiff --git a/400_xowa/src/gplx/xowa/htmls/core/wkrs/Xoh_hdoc_wkr__make.java b/400_xowa/src/gplx/xowa/htmls/core/wkrs/Xoh_hdoc_wkr__make.java[m
-[1mindex 1323bc1..44d4766 100644[m
-[1m--- a/400_xowa/src/gplx/xowa/htmls/core/wkrs/Xoh_hdoc_wkr__make.java[m
-[1m+++ b/400_xowa/src/gplx/xowa/htmls/core/wkrs/Xoh_hdoc_wkr__make.java[m
-[36m@@ -14,21 +14,54 @@[m [mGPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt[m
- Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt[m
- */[m
- package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;[m
-[31m-import gplx.langs.htmls.docs.*;[m
-[31m-import gplx.xowa.wikis.ttls.*;[m
-[31m-import gplx.xowa.htmls.core.hzips.*;[m
-[31m-import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;[m
-[32m+[m[32mimport gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*;[m[41m[m
-[32m+[m[32mimport gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;[m[41m[m
-[32m+[m[32mimport gplx.xowa.wikis.ttls.*;[m[41m [m
- public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {[m
- 	private Xoh_hzip_bfr bfr; private Xoh_page hpg; private Xoh_hdoc_ctx hctx; private byte[] src;[m
- 	private final    Xoh_hdr_wtr wkr__hdr = new Xoh_hdr_wtr();[m
-[31m-	private final    Xoh_img_wtr wkr__img = new Xoh_img_wtr();		[m
-[32m+[m	[32mprivate final    Xoh_img_wtr wkr__img = new Xoh_img_wtr();[m[41m[m
-[32m+[m	[32mprivate int html_uid;[m[41m[m
- 	public void On_new_page(Xoh_hzip_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {[m
- 		this.bfr = bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;[m
-[32m+[m		[32mthis.html_uid = 0;[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32mpublic void On_txt(int rng_bgn, int rng_end) {[m[41m[m
-[32m+[m		[32m// text; just add it[m[41m[m
-[32m+[m		[32mbfr.Add_mid(src, rng_bgn, rng_end);[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32mpublic void On_escape(gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data) {[m[41m[m
-[32m+[m		[32m// hzip escape byte ((byte)27); should never happen but if it does, add it[m[41m[m
-[32m+[m		[32mbfr.Add(data.Hook());[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32mpublic void On_xnde(gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser data) {[m[41m[m
-[32m+[m		[32m// regular xml node; just add it[m[41m[m
-[32m+[m		[32mbfr.Add_mid(src, data.Src_bgn(), data.Src_end());[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32mpublic void On_lnki(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_data data)	{[m[41m[m
-[32m+[m		[32m// <a> node[m[41m[m
-[32m+[m		[32m// handle "#"[m[41m[m
-[32m+[m		[32mif (data.Href_itm().Tid() == Xoh_anch_href_data.Tid__anch) {[m[41m[m
-[32m+[m			[32mbfr.Add_mid(src, data.Src_bgn(), data.Src_end());[m[41m[m
-[32m+[m			[32mreturn;[m[41m[m
-[32m+[m		[32m}[m[41m[m
-[32m+[m[41m[m
-[32m+[m		[32m// increment html_uid and add "id=xolnki_"[m[41m[m
-[32m+[m		[32mbyte[] ttl_bry = data.Href_itm().Ttl_page_db();[m[41m[m
-[32m+[m		[32mthis.html_uid = Lnki_redlink_reg(hpg, hctx, ttl_bry, html_uid);[m[41m[m
-[32m+[m		[32mint src_bgn_lhs = data.Src_bgn();[m[41m[m
-[32m+[m		[32mint src_bgn_rhs = src_bgn_lhs + 3; // +3 to skip over "<a "[m[41m[m
-[32m+[m		[32mif (Bry_.Match(src, src_bgn_lhs, src_bgn_rhs, Bry__a__bgn)) {[m[41m[m
-[32m+[m			[32mbfr.Add(Bry__a__id);[m[41m[m
-[32m+[m			[32mbfr.Add_int_variable(html_uid);[m[41m[m
-[32m+[m			[32mbfr.Add_byte_quote().Add_byte_space();[m[41m[m
-[32m+[m			[32mbfr.Add_mid(src, src_bgn_rhs, data.Src_end());[m[41m[m
-[32m+[m		[32m}[m[41m[m
-[32m+[m		[32melse {[m[41m[m
-[32m+[m			[32mbfr.Add_mid(src, data.Src_bgn(), data.Src_end());[m[41m[m
-[32m+[m			[32mGfo_usr_dlg_.Instance.Warn_many("", "", "anchor hook should start with <a; url=~{0}", hpg.Url_bry_safe());[m[41m[m
-[32m+[m		[32m}[m[41m[m
- 	}[m
-[31m-	public void On_txt		(int rng_bgn, int rng_end)									{bfr.Add_mid(src, rng_bgn, rng_end);}[m
-[31m-	public void On_escape	(gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data)	{bfr.Add(data.Hook());}[m
-[31m-	public void On_xnde		(gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser data)		{bfr.Add_mid(src, data.Src_bgn(), data.Src_end());}[m
-[31m-	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_data data)		{bfr.Add_mid(src, data.Src_bgn(), data.Src_end());}[m
- 	public void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_data data) {[m
- 		Xoh_img_data img_data = (gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_data)data.Img_data();[m
- 		bfr.Add_mid(src, data.Src_bgn(), img_data.Src_bgn());		[m
-[36m@@ -50,4 +83,18 @@[m [mpublic class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {[m
- 		}[m
- 		return true;[m
- 	}[m
-[32m+[m	[32mpublic static int Lnki_redlink_reg(Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] href_bry, int html_uid) {[m[41m[m
-[32m+[m		[32mif (hctx.Mode_is_diff()) return html_uid; // PERF: don't do redlinks during hzip_diff[m[41m[m
-[32m+[m		[32mtry {[m[41m[m
-[32m+[m			[32mXoa_ttl ttl = hpg.Wiki().Ttl_parse(Gfo_url_encoder_.Href.Decode(href_bry));[m[41m[m
-[32m+[m			[32mXopg_lnki_itm__hdump lnki_itm = new Xopg_lnki_itm__hdump(ttl);[m[41m[m
-[32m+[m			[32mhpg.Html_data().Redlink_list().Add(lnki_itm);[m[41m[m
-[32m+[m			[32mreturn lnki_itm.Html_uid();[m[41m[m
-[32m+[m		[32m}[m[41m [m
-[32m+[m		[32mcatch (Exception e) {[m[41m[m
-[32m+[m			[32mGfo_log_.Instance.Warn("failed to add lnki to redlinks", "page", hpg.Url_bry_safe(), "href_bry", href_bry, "e", Err_.Message_gplx_log(e));[m[41m[m
-[32m+[m			[32mreturn html_uid;[m[41m[m
-[32m+[m		[32m}[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32mprivate static final    byte[] Bry__a__bgn = Bry_.new_a7("<a "), Bry__a__id = Bry_.new_a7("<a id=\"xolnki_");[m[41m[m
- }[m
-[1mdiff --git a/400_xowa/src/gplx/xowa/htmls/core/wkrs/Xoh_htxt_fxt.java b/400_xowa/src/gplx/xowa/htmls/core/wkrs/Xoh_htxt_fxt.java[m
-[1mnew file mode 100644[m
-[1mindex 0000000..d9393ec[m
-[1m--- /dev/null[m
-[1m+++ b/400_xowa/src/gplx/xowa/htmls/core/wkrs/Xoh_htxt_fxt.java[m
-[36m@@ -0,0 +1,58 @@[m
-[32m+[m[32m/*[m
-[32m+[m[32mXOWA: the XOWA Offline Wiki Application[m
-[32m+[m[32mCopyright (C) 2012-2017 gnosygnu@gmail.com[m
-[32m+[m
-[32m+[m[32mXOWA is licensed under the terms of the General Public License (GPL) Version 3,[m
-[32m+[m[32mor alternatively under the terms of the Apache License Version 2.0.[m
-[32m+[m
-[32m+[m[32mYou may use XOWA according to either of these licenses as is most appropriate[m
-[32m+[m[32mfor your project on a case-by-case basis.[m
-[32m+[m
-[32m+[m[32mThe terms of each license can be found in the source code repository:[m
-[32m+[m
-[32m+[m[32mGPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt[m
-[32m+[m[32mApache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt[m
-[32m+[m[32m*/[m
-[32m+[m[32mpackage gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;[m[41m[m
-[32m+[m[32mimport gplx.core.tests.*;[m[41m	[m
-[32m+[m[32mimport gplx.xowa.files.caches.*;[m[41m[m
-[32m+[m[32mimport gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.pages.*;[m[41m[m
-[32m+[m[32mimport gplx.xowa.wikis.pages.lnkis.*;[m[41m[m
-[32m+[m[32mpublic class Xoh_htxt_fxt {[m[41m[m
-[32m+[m	[32mprivate final    Xowe_wiki wiki;[m[41m[m
-[32m+[m	[32mprivate final    Xop_fxt parser_fxt = new Xop_fxt();[m[41m[m
-[32m+[m	[32mprivate final    Xoh_page hpg = new Xoh_page();[m[41m[m
-[32m+[m	[32mprivate final    Xoh_make_mgr make_mgr = new Xoh_make_mgr();[m[41m[m
-[32m+[m	[32mpublic Xoh_htxt_fxt() {[m[41m[m
-[32m+[m		[32mthis.wiki = parser_fxt.Wiki();[m[41m[m
-[32m+[m		[32mXoa_app_fxt.repo2_(parser_fxt.App(), wiki);	// needed else will be old "mem/wiki/repo/trg/thumb/" instead of standard "mem/file/en.wikipedia.org/thumb/"[m[41m[m
-[32m+[m		[32mwiki.Html__hdump_mgr().Init_by_db(parser_fxt.Wiki());[m[41m[m
-[32m+[m		[32mparser_fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hzip__none));[m[41m[m
-[32m+[m		[32mhpg.Ctor_by_hview(wiki, Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32mpublic Xow_wiki Wiki() {return wiki;}[m[41m[m
-[32m+[m	[32mpublic Xoa_page Page() {return hpg;}[m[41m[m
-[32m+[m	[32mpublic void Clear() {hpg.Clear();}[m[41m[m
-[32m+[m	[32mpublic void Test__decode(String htxt) {Test__decode(htxt, htxt);}[m[41m[m
-[32m+[m	[32mpublic void Test__decode(String htxt, String html) {[m[41m[m
-[32m+[m		[32mhtxt = Gfh_utl.Replace_apos(htxt);[m[41m[m
-[32m+[m		[32mhtml = Gfh_utl.Replace_apos(html);[m[41m[m
-[32m+[m		[32mTest__decode__raw(htxt, html);[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32mpublic void Test__decode__raw(String htxt, String expd) {[m[41m[m
-[32m+[m		[32mhpg.Section_mgr().Clear();[m[41m[m
-[32m+[m		[32mbyte[] actl = make_mgr.Parse(Bry_.new_u8(htxt), hpg, hpg.Wiki());[m[41m[m
-[32m+[m		[32mTfds.Eq_str_lines(expd, String_.new_u8(actl));[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32mpublic void Test__hpg__redlinks(String... expd_ttls) {[m[41m[m
-[32m+[m		[32mXopg_lnki_list actl_list = hpg.Html_data().Redlink_list();[m[41m[m
-[32m+[m		[32mint len = actl_list.Len();[m[41m[m
-[32m+[m		[32mString[] actl_ttls = new String[len];[m[41m[m
-[32m+[m		[32mfor (int i = 0; i < len; i++) {[m[41m[m
-[32m+[m			[32mXopg_lnki_itm actl_itm = actl_list.Get_at(i);[m[41m[m
-[32m+[m			[32mactl_ttls[i] = actl_itm.Ttl().Full_db_as_str();[m[41m[m
-[32m+[m		[32m}[m[41m[m
-[32m+[m		[32mGftest.Eq__ary(expd_ttls, actl_ttls);[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32mpublic static String Escape(String v) {return String_.Replace(v, "~", "");}[m[41m[m
-[32m+[m[32m}[m[41m[m
-[1mdiff --git a/400_xowa/src/gplx/xowa/htmls/core/wkrs/escapes/Xoh_escape_hzip.java b/400_xowa/src/gplx/xowa/htmls/core/wkrs/escapes/Xoh_escape_hzip.java[m
-[1mindex ded5b82..531e06d 100644[m
-[1m--- a/400_xowa/src/gplx/xowa/htmls/core/wkrs/escapes/Xoh_escape_hzip.java[m
-[1m+++ b/400_xowa/src/gplx/xowa/htmls/core/wkrs/escapes/Xoh_escape_hzip.java[m
-[36m@@ -22,6 +22,7 @@[m [mpublic class Xoh_escape_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {[m
- 	public byte[] Hook() {return hook;} private byte[] hook;[m
- 	public String Key() {return Xoh_hzip_dict_.Key__escape;}[m
- 	public Gfo_poolable_itm Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {[m
-[32m+[m		[32m// escapes an escape byte; should not happen, since (byte)27 doesn't exist in an html document, but just to be sure[m[41m[m
- 		Xoh_escape_data data = (Xoh_escape_data)data_obj;[m
- 		bfr.Add(hook);			// EX: 1,0[m
- 		bfr.Add(data.Hook());	// EX: 2[m
-[1mdiff --git a/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xoh_lnki_htxt__tst.java b/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xoh_lnki_htxt__tst.java[m
-[1mnew file mode 100644[m
-[1mindex 0000000..d70bd37[m
-[1m--- /dev/null[m
-[1m+++ b/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xoh_lnki_htxt__tst.java[m
-[36m@@ -0,0 +1,32 @@[m
-[32m+[m[32m/*[m
-[32m+[m[32mXOWA: the XOWA Offline Wiki Application[m
-[32m+[m[32mCopyright (C) 2012-2017 gnosygnu@gmail.com[m
-[32m+[m
-[32m+[m[32mXOWA is licensed under the terms of the General Public License (GPL) Version 3,[m
-[32m+[m[32mor alternatively under the terms of the Apache License Version 2.0.[m
-[32m+[m
-[32m+[m[32mYou may use XOWA according to either of these licenses as is most appropriate[m
-[32m+[m[32mfor your project on a case-by-case basis.[m
-[32m+[m
-[32m+[m[32mThe terms of each license can be found in the source code repository:[m
-[32m+[m
-[32m+[m[32mGPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt[m
-[32m+[m[32mApache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt[m
-[32m+[m[32m*/[m
-[32m+[m[32mpackage gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;[m[41m[m
-[32m+[m[32mimport org.junit.*;[m[41m[m
-[32m+[m[32mpublic class Xoh_lnki_htxt__tst {[m[41m[m
-[32m+[m	[32mprivate final    Xoh_htxt_fxt fxt = new Xoh_htxt_fxt();[m[41m[m
-[32m+[m	[32m@Test   public void Redlink__basic() {[m[41m[m
-[32m+[m		[32mfxt.Test__decode[m[41m[m
-[32m+[m		[32m( "<a href='/wiki/A'>a</a> <a href='/wiki/B'>b</a>"[m[41m[m
-[32m+[m		[32m, "<a id='xolnki_2' href='/wiki/A'>a</a> <a id='xolnki_3' href='/wiki/B'>b</a>");[m[41m[m
-[32m+[m		[32mfxt.Test__hpg__redlinks("A", "B");[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m	[32m@Test   public void Redlink__anchor() {[m[41m[m
-[32m+[m		[32mfxt.Test__decode[m[41m[m
-[32m+[m		[32m( "<a href='#A'>a</a>"[m[41m[m
-[32m+[m		[32m, "<a href='#A'>a</a>");[m[41m[m
-[32m+[m		[32mfxt.Test__hpg__redlinks();[m[41m[m
-[32m+[m	[32m}[m[41m[m
-[32m+[m[32m}[m[41m[m
-[1mdiff --git a/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xoh_lnki_hzip.java b/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xoh_lnki_hzip.java[m
-[1mindex 889f2bb..41186df 100644[m
-[1m--- a/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xoh_lnki_hzip.java[m
-[1m+++ b/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xoh_lnki_hzip.java[m
-[36m@@ -124,14 +124,7 @@[m [mpublic class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {[m
- 				href_bry = tmp_bfr.To_bry_and_clear();[m
- [m
- 				// generate stub for redlink[m
-[31m-				if (	!hctx.Mode_is_diff()) {	// PERF: don't do redlinks during hzip_diff[m
-[31m-					try {[m
-[31m-						Xoa_ttl ttl = hpg.Wiki().Ttl_parse(Gfo_url_encoder_.Href.Decode(href_bry));[m
-[31m-						Xopg_lnki_itm__hdump lnki_itm = new Xopg_lnki_itm__hdump(ttl);[m
-[31m-						hpg.Html_data().Redlink_list().Add(lnki_itm);[m
-[31m-						html_uid = lnki_itm.Html_uid();[m
-[31m-					}	catch (Exception e) {Gfo_log_.Instance.Warn("failed to add lnki to redlinks", "page", hpg.Url_bry_safe(), "href_bry", href_bry, "e", Err_.Message_gplx_log(e));}[m
-[31m-				}[m
-[32m+[m				[32mhtml_uid = Xoh_hdoc_wkr__make.Lnki_redlink_reg(hpg, hctx, href_bry, html_uid);[m[41m[m
- 				break;[m
- 		}[m
- 		byte[] capt_bry = Xoh_lnki_hzip_.Bld_capt(tmp_bfr, href_type, text_type, capt_has_ns, capt_cs0_tid, ns_bry, src, text_0_bgn, text_0_end, src, text_1_bgn, text_1_end);[m
-[1mdiff --git a/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xopg_lnki_itm__hdump.java b/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xopg_lnki_itm__hdump.java[m
-[1mindex 2af9d2f..dc8fb60 100644[m
-[1m--- a/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xopg_lnki_itm__hdump.java[m
-[1m+++ b/400_xowa/src/gplx/xowa/htmls/core/wkrs/lnkis/Xopg_lnki_itm__hdump.java[m
-[36m@@ -15,7 +15,7 @@[m [mApache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt[m
- */[m
- package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;[m
- import gplx.xowa.wikis.pages.lnkis.*;[m
-[31m-class Xopg_lnki_itm__hdump implements Xopg_lnki_itm {[m
-[32m+[m[32mpublic class Xopg_lnki_itm__hdump implements Xopg_lnki_itm {[m[41m[m
- 	public Xopg_lnki_itm__hdump(Xoa_ttl ttl) {this.ttl = ttl;}[m
- 	public Xoa_ttl	Ttl() {return

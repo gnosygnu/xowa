@@ -184,6 +184,7 @@ public class Wdata_pf_property__basic__tst {
 
 		fxt.Test_parse("{{#property:p1|from=P2}}", "a");
 		fxt.Test_parse("{{#property:p1|from=}}", "");
+		fxt.Test_parse("{{#property:p1| from = P2 }}", "a"); // PURPOSE: trim ws; ISSUE#:361; DATE:2019-02-11
 	}
 	@Test   public void Pid_as_name() {
 		fxt.Init__docs__add(fxt.Wdoc("Q2")

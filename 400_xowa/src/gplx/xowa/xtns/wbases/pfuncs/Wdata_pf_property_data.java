@@ -35,6 +35,12 @@ public class Wdata_pf_property_data {
 			Arg_itm_tkn nde_key = nde.Key_tkn();
 			int key_bgn = nde_key.Src_bgn(), key_end = nde_key.Src_end();
 			if (key_bgn == key_end && key_bgn == -1) continue;	// null arg; ignore, else will throw warning below; EX: {{#property:p1|}}; DATE:2013-11-15
+
+			// trim ws; ISSUE#:361; DATE:2019-02-11
+			key_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, key_bgn, key_end);
+			key_end = Bry_find_.Find_bwd__while_space_or_tab(src, key_end, key_bgn);
+
+			// get key_tid
 			byte key_tid = atrs_hash.Get_as_byte_or(src, key_bgn, key_end, Byte_.Max_value_127);
 			switch (key_tid) {
 				case Byte_.Max_value_127:
