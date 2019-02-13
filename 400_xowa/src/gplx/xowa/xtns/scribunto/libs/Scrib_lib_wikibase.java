@@ -267,6 +267,7 @@ public function formatValues( $snaksSerialization ) {
 	public Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core, boolean logMissing) {
 		// get qid / pid from scrib_arg[0]; if none, return null;
 		byte[] xid_bry = args.Pull_bry(0); if (Bry_.Len_eq_0(xid_bry)) return null;	// NOTE: some Modules do not pass in an argument; return early, else spurious warning "invalid qid for ttl" (since ttl is blank); EX:w:Module:Authority_control; DATE:2013-10-27
+		xid_bry = Bry_.Trim(xid_bry); // trim, b/c some pages will literally pass in "Property:P5\n"; PAGE:de.w:Mailand–Sanremo_2016 ISSUE#:363; DATE:2019-02-12
 
 		// get wdoc
 		Wdata_doc wdoc = entity_mgr.Get_by_xid_or_null(xid_bry); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"

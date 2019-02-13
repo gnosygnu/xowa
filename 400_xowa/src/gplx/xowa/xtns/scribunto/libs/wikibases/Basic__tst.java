@@ -122,6 +122,19 @@ public class Basic__tst {
 		, "      value=b"
 		));
 	}
+	@Test  public void GetEntity_ws() {  // PURPOSE: trim, b/c some pages will literally pass in "Property:P5\n"; PAGE:de.w:Mailand–Sanremo_2016 ISSUE#:363; DATE:2019-02-12
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("en", "b").Xto_wdoc());
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary(" q2\n\t", false), String_.Concat_lines_nl_skip_last
+		( "1="
+		, "  id=q2"
+		, "  type=item"
+		, "  schemaVersion=2"
+		, "  labels="
+		, "    en="
+		, "      language=en"
+		, "      value=b"
+		));
+	}
 //		@Test  public void GetEntity__missing() { // PURPOSE: missing entity should return empty kv array; PAGE:de.w:Critérium_International_2016 DATE:2017-12-30
 //			fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getEntity, Object_.Ary("q2", false), String_.Concat_lines_nl_skip_last
 //			( "1=" // not ""

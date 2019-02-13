@@ -59,8 +59,12 @@ public class Xol_lang_itm implements Gfo_invk {
 	public Xol_lang_itm			Fallback_bry_(byte[] v) {
 		fallback_bry = v;
 		fallback_bry_ary = Fallbacy_bry_ary__bld(v);
-		for (byte[] key : fallback_bry_ary) {
-			fallback_hash.Add_as_key_and_val(String_.new_u8(key));
+		try {
+			for (byte[] key : fallback_bry_ary) {
+				fallback_hash.Add_as_key_and_val(String_.new_u8(key));
+			}
+		} catch (Exception exc) {
+			throw Err_.new_wo_type("failed to add fallback_bry_ary; v=~{0} err=~{1}", v, Err_.Message_gplx_log(exc));
 		}
 		return this;
 	}	private byte[] fallback_bry;
