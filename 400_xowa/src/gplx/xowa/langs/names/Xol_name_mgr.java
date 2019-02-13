@@ -71,7 +71,7 @@ public class Xol_name_mgr {
 
 			Cldr_name_file cldr_file = cldr_loader.Load_or_empty(inLanguage);
 			if (cldr_file == Cldr_name_file.Empty) {
-				Gfo_usr_dlg_.Instance.Warn_many("", "", "lang does not have a cldrName file; lang=~{0} page=~{1}", inLanguage, page_url);
+				Gfo_usr_dlg_.Instance.Log_many("", "", "lang does not have a cldrName file; lang=~{0} page=~{1}", inLanguage, page_url);
 			}
 
 			if (lang_names_cached == null)
