@@ -263,7 +263,13 @@ public class Scrib_lib_language implements Scrib_lib {
 	}
 	private Xol_lang_itm lang_(Scrib_proc_args args) {
 		byte[] lang_code = args.Cast_bry_or_null(0);
-		Xol_lang_itm lang = lang_code == null ? null : core.App().Lang_mgr().Get_by_or_load(lang_code);
+		Xol_lang_itm lang = null;
+		try {
+			lang = lang_code == null ? null : core.App().Lang_mgr().Get_by_or_load(lang_code);
+		}
+		catch (Exception exc) {
+			throw Err_.new_wo_type("mw.lang: Unable to get lang", "page", core.Page().Url_bry_safe(), "lang", lang_code, "err", Err_.Message_gplx_log(exc));
+		}
 		if (lang == null) throw Err_.new_wo_type("lang_code is not valid", "lang_code", String_.new_u8(lang_code));
 		return lang;
 	}
