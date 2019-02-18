@@ -21,7 +21,7 @@ public class Xol_lang_itm_tst {
 	@Test  public void Fallback_bry__dupes() { // ISSUE#:330; DATE:2019-02-17
 		Xol_lang_itm lang = fxt.Make("qqq");
 		fxt.Init_fallback_bry(lang, "en");
-		fxt.Init_fallback_bry(lang, "en"); // duplicate call would throw error; note that dupes can happen b/c "en" is default language; EX: isRTL("gl") -> "pt-br,en" -> "pt,en"
+		fxt.Init_fallback_bry(lang, "en"); // dupes would throw error; note that dupes can happen b/c "en" is default language; EX: isRTL("gl") -> "pt-br,en" -> "pt,en"
 		Gftest.Eq__str("en", lang.Fallback_bry());
 	}
 }

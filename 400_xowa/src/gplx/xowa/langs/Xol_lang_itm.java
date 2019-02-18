@@ -62,6 +62,10 @@ public class Xol_lang_itm implements Gfo_invk {
 		try {
 			for (byte[] key : fallback_bry_ary) {
 				String val = String_.new_u8(key);
+				// NOTE: dupes can happen, b/c fallback works by loading current language, and then loading each fallback's langs to cur language;
+				// EX:
+				// * lang.Load_lang("gl") calls lang.Fallback_bry_ with "pt" (the fallback_lang) and "en" (the default lang)
+				// * then lang.Fallback_bry_ calls lang.Exec_fallback_load("pt") which calls lang.Fallack_bry_ with "pt-br"(the fallback_lang) and "en" (the default lang)
 				fallback_hash.Add_if_dupe_use_1st(val, val);
 			}
 		} catch (Exception exc) {
