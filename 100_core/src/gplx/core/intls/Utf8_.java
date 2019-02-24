@@ -88,7 +88,7 @@ public class Utf8_ {
 		for (int i = pos - 1; i >= stop; i--) {	// start at pos - 1, and move bwd; NOTE: pos - 1 to skip pos, b/c pos will never definitively yield any char_len info
 			byte b = bry[i];
 			int char_len = Len_of_char_by_1st_byte(b);
-			switch (char_len) {	// if char_len is multi-byte and pos is at correct multi-byte pos (pos - i = # of bytes - 1), then pos0 found; EX: � = {226,130,172}; 172 is skipped; 130 has len of 1 -> continue; 226 has len of 3 and is found at correct pos for 3 byte char -> return
+			switch (char_len) {	// if char_len is multi-byte and pos is at correct multi-byte pos (pos - i = # of bytes - 1), then pos0 found; EX: € = {226,130,172}; 172 is skipped; 130 has len of 1 -> continue; 226 has len of 3 and is found at correct pos for 3 byte char -> return
 				case 2: if (pos - i == 1) return i; break;
 				case 3: if (pos - i == 2) return i; break;
 				case 4: if (pos - i == 3) return i; break;
@@ -111,7 +111,7 @@ public class Utf8_ {
 		// loop maximum of 4 times; note that UTF8 char has max of 4 bytes
 		for (int i = 0; i < 4; i++) {
 			int char_len = Len_of_char_by_1st_byte(b);
-			switch (char_len) {	// if char_len is multi-byte and cur is at correct multi-byte pos (cur - i = # of bytes - 1), then pos0 found; EX: � = {226,130,172}; 172 is skipped; 130 has len of 1 -> continue; 226 has len of 3 and is found at correct cur for 3 byte char -> return
+			switch (char_len) {	// if char_len is multi-byte and cur is at correct multi-byte pos (cur - i = # of bytes - 1), then pos0 found; EX: € = {226,130,172}; 172 is skipped; 130 has len of 1 -> continue; 226 has len of 3 and is found at correct cur for 3 byte char -> return
 				case 2: if (i == 1) return pos; break;
 				case 3: if (i == 2) return pos; break;
 				case 4: if (i == 3) return pos; break;
@@ -141,3 +141,48 @@ public class Utf8_ {
 	, Codepoint_surrogate_end = 0xDFFF
 	;
 }
+/*
+== Definitions ==
+=== a7 vs u8 ===
+* a7 -> ASCII (7 bits)
+* u8 -> UTF-8 (8 bytes)
+
+In retrospect, better abbreviations would have been:
+* ascii -> ASCII
+* utf08 -> UTF-8
+* utf16 -> UTF-16
+
+=== General ===
+==== Byte ====
+* Standard definition; 8 bits (2^8 or 256)
+
+==== Codepoint ====
+* Represents 1 atomic character but can be composed of multiple bytes
+** Examples:
+<pre>
+1 byte : "a"  (letter a)
+2 bytes: "¢"  (cent)
+3 bytes: "€"  (euro)
+4 bytes: "𤭢" (Chinese character)
+</pre>
+* Defined by unicode as a sequence of 4 hexadecimals (2 bytes) or 8 hexadecimals (4 bytes); REF:http://www.unicode.org
+** 4 hexadecimal is 2 bytes (2^(4 * 4) -> 2^16)
+
+==== char ====
+* Java definition of a codepoint which is encoded as 2 bytes (2^16 or 65,536)
+* For Western langauges: 1 codepoint equals 1 char (2 bytes);
+** For example, chars like "a", "œ", "é" are 1 Java char
+* For Eastern langauges: 1 codepoint can equal 2 chars (4 bytes);
+** For example, chars like "駣" are 2 Java chars though they represent 1 conceptual codepoint (in English terms, "駣" is a single letter just like the letter "a")
+
+==== Supplementary characters ====
+* Represents a codepoint which is defined by 3 or 4 bytes
+* Is defined by 1 surrogate pair
+** lo-surrogate : 2 bytes
+** hi-surrogate : 2 bytes
+
+=== Conventions ===
+* Codepoints will be rendered as one int (4 bytes), not 4 hexadecimals (1 byte) 8 hexadecimal (4 bytes)
+* The "char" datatype will rarely be used in code; instead byte arrays or codepoint-ints will be used
+* The "character" word will not be used in comments; instead the "codepoint" word will be used
+*/
