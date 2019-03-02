@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.langs.*;
+import gplx.xowa.mediawiki.*;
 import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.langs.durations.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_language implements Scrib_lib {
@@ -182,9 +183,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		if (num != null) {	// MW: if num present, check options table for noCommafy arg;
 			Keyval[] kv_ary = args.Cast_kv_ary_or_null(2);
 			if (kv_ary != null) {
-				Object skip_commafy_obj = Keyval_.Ary_get_by_key_or_null(kv_ary, "noCommafy");
-				if (skip_commafy_obj != null)
-					skip_commafy = Bool_.Cast(skip_commafy_obj);
+				skip_commafy = !XophpUtility.empty_obj(Keyval_.Ary_get_by_key_or_null(kv_ary, "noCommafy"));
 			}
 		}
 		byte[] rv = lang.Num_mgr().Format_num(num, skip_commafy);

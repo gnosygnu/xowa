@@ -91,6 +91,7 @@ public class Scrib_lib_language_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234"), "1,234");		// String passed (not int)
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", Keyval_.Ary(Keyval_.new_("noCommafy", true)))		, "1234");		// noCommafy.y
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", Keyval_.Ary(Keyval_.new_("noCommafy", false)))	, "1,234");		// noCommafy.n
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", Keyval_.Ary(Keyval_.new_("noCommafy", "y")))		, "1234");		// noCommafy."y"; ISSUE#:372 DATE:2019-03-02
 	}
 	@Test  public void FormatDate() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d", "2013-03-17", false), "2013-03-17");
