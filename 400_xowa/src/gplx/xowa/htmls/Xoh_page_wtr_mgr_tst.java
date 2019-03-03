@@ -38,7 +38,7 @@ public class Xoh_page_wtr_mgr_tst {
 		, "-{zh-hans:A;zh-hant:B;}-"
 		), String_.Concat_lines_nl_skip_last
 		( "<span id='xowa_math_txt_0'>x_{1}-1</span>"		// not converted
-		, "<span id='xowa_math_txt_0'>x-{1+2}-1</span>"		// not converted
+		, "<span id='xowa_math_txt_1'>x-{1+2}-1</span>"		// not converted
 		, "A" // converted
 		));
 	}

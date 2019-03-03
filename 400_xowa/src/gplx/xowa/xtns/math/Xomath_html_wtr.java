@@ -37,7 +37,7 @@ class Xomath_html_wtr {
 		if (scrubbed_js != null) math_bry = scrubbed_js;	// js found; use clean version; DATE:2013-08-26
 
 		// if latex, (a) calc md5 and url; (b) write <img> or add to queue
-		int uid = page.File_math().Count();
+		int uid = page.Xtn__math_uid__next();
 		if (is_latex) {
 			byte[] math_src = subst_mgr.Subst(math_bry);
 			byte[] md5 = md5_wkr.Hash_bry_as_bry(math_src);

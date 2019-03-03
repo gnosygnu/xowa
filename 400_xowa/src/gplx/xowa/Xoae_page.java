@@ -48,6 +48,7 @@ public class Xoae_page implements Xoa_page {
 	public void						Xtn_gallery_packed_exists_y_() {html.Xtn_gallery_packed_exists_y_();}
 	public boolean						Xtn__timeline_exists() {return false;}	// drd always sets timeline
 	public boolean					Xtn__gallery_exists() {return false;}	// drd does not need to set gallery.style.css
+	public int						Xtn__math_uid__next() {return xtn__math_uid++;}	private int xtn__math_uid;
 	public Xoa_kv_hash              Kv_data() {return kv_data;} private final    Xoa_kv_hash kv_data = new Xoa_kv_hash();
 	private Guid_adp page_guid;
 	public Guid_adp Page_guid() {
@@ -83,6 +84,7 @@ public class Xoae_page implements Xoa_page {
 		hdump.Clear();
 		wtxt.Clear();
 		kv_data.Clear();
+		xtn__math_uid = 0;
 
 		lnki_list.Clear();
 		file_math.Clear();
