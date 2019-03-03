@@ -319,7 +319,7 @@ public class Xoh_html_wtr_tst {
 		fxt.Test_parse_page_wiki_str("<div id='a b'></div>", "<div id='a_b'></div>");
 	}
 	@Test  public void Timeline() {// PURPOSE: embed timeline contents in pre; DATE:2014-05-22
-		fxt.Test_parse_page_wiki_str("<timeline>a</timeline>", "<pre class='xowa-timeline'>a</pre>");
+		fxt.Test_parse_page_wiki_str("<timeline>a</timeline>", "<div class=\"timeline-wrapper\" style=\"line-height:0;font-size:0\"><pre class='xowa-timeline'>a</pre></div>");
 	}
 	@Test  public void Amp_ncr_should_not_be_rendered_as_bytes() {	// PURPOSE: &#160; should be rendered as &#160; not as literal bytes {192,160}; DATE:2013-12-09
 		fxt.Test_parse_page_wiki_str("a&#160;b", "a&#160;b");
