@@ -51,21 +51,19 @@ public class Xoh_lnke_html {
 			||	hctx.Mode_is_hdump()		// if hdump, never write xwiki format (/site/); always write in url format (https:); note that xwiki is set when wiki is installed locally
 			||	hctx.Mode_is_file_dump()
 			) {
-			if (lnke.Lnke_relative()) {		// relative; EX: //a.org
-				bfr.Add(ctx.Wiki().Utl__url_parser().Url_parser().Relative_url_protocol_bry()).Add_mid(src, href_bgn, href_end);
-				return true;
+			// xowa; EX: "xowa:some_cmd"
+			if (proto_is_xowa) {
+				bfr.Add(Xop_lnke_wkr.Bry_xowa_protocol);
+				gfs_encoder.Encode(bfr, src, href_bgn, href_end);
+				return false;
 			}
-			else {							// xowa or regular; EX: http://a.org
-				if (proto_is_xowa) {
-					bfr.Add(Xop_lnke_wkr.Bry_xowa_protocol);
-					gfs_encoder.Encode(bfr, src, href_bgn, href_end);
-					return false;
-				}
-				else {						// regular; add href
-					bfr.Add_mid(src, href_bgn, href_end);
-					return true;
-				}
+
+			// either relative (EX: "//a.org") or regular (EX: "http://a.org")
+			if (lnke.Lnke_relative()) {
+				bfr.Add(ctx.Wiki().Utl__url_parser().Url_parser().Relative_url_protocol_bry());
 			}
+			Xoh_html_wtr_escaper.Escape(ctx.App().Parser_amp_mgr(), bfr, src, href_bgn, href_end, true, false); // escape &amp; ISSUE#:371; DATE:2019-03-03
+			return true;
 		}
 		else {	// xwiki
 			byte[] xwiki_page_enc = href_encoder.Encode(lnke.Lnke_xwiki_page());

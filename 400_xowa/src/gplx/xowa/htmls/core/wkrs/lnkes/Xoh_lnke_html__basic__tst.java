@@ -41,4 +41,11 @@ public class Xoh_lnke_html__basic__tst {
 		fxt.Test__parse__wtxt_to_html(wtxt, html_https);			// https b/c hdump, even though wiki installed
 		fxt.Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Basic);
 	}
+	@Test  public void Ampersand() {
+		// relative
+		fxt.Test_parse_page_wiki_str("[//a.org/b?c1=d1&c2=d2 e]", "<a href=\"https://a.org/b?c1=d1&amp;c2=d2\" rel=\"nofollow\" class=\"external text\">e</a>");
+
+		// regular
+		fxt.Test_parse_page_wiki_str("[https://a.org/b?c1=d1&c2=d2 e]" , "<a href=\"https://a.org/b?c1=d1&amp;c2=d2\" rel=\"nofollow\" class=\"external text\">e</a>");
+	}
 }
