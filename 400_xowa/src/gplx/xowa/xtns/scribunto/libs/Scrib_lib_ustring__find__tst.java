@@ -21,6 +21,7 @@ public class Scrib_lib_ustring__find__tst {
 	private final    Scrib_lib_ustring__find__fxt fxt = new Scrib_lib_ustring__find__fxt();
 	@Test  public void Plain() {
 		fxt.Test__find("aabaab"        , "b"    ,  2, Bool_.Y, "3;3"); // bytes=1
+		fxt.Test__find("¢¢b¢¢b"        , "b"    ,  2, Bool_.Y, "3;3"); // bytes=2
 		fxt.Test__find("€€b€€b"        , "b"    ,  2, Bool_.Y, "3;3"); // bytes=3
 		fxt.Test__find("𤭢𤭢b𤭢𤭢b"    , "b"    ,  2, Bool_.Y, "3;3"); // bytes=4
 		fxt.Test__find("()()"          , "("    ,  2, Bool_.Y, "3;3"); // exact match; note that "(" is invalid regx
@@ -33,10 +34,14 @@ public class Scrib_lib_ustring__find__tst {
 		fxt.Test__find("𤭢"            , "𤭢"   , -1, Bool_.Y, "1;1"); // fails if "" b/c it would have counted -1 as -1 char instead of -1 codepoint
 	}
 	@Test  public void Regx__simple() {
-		fxt.Test__find("abcd"          , "b"       ,  1, Bool_.N, "2;2");   // basic
-		fxt.Test__find("abad"          , "a"       ,  2, Bool_.N, "3;3");   // bgn
-		fxt.Test__find("abcd"          , "x"       ,  1, Bool_.N, "");      // no-match
-		fxt.Test__find("abcd"          , ""        ,  2, Bool_.N, "2;1");   // empty regx should return values; regx; EX:w:Fool's_mate; DATE:2014-03-04
+		fxt.Test__find("aabaab"        , "b"       ,  2, Bool_.N, "3;3"); // bytes=1
+		fxt.Test__find("¢¢b¢¢b"        , "b"       ,  2, Bool_.N, "3;3"); // bytes=2
+		fxt.Test__find("€€b€€b"        , "b"       ,  2, Bool_.N, "3;3"); // bytes=3
+		fxt.Test__find("𤭢𤭢b𤭢𤭢b"    , "b"       ,  2, Bool_.N, "3;3"); // bytes=4
+		fxt.Test__find("abcd"          , "b"       ,  1, Bool_.N, "2;2"); // basic
+		fxt.Test__find("abad"          , "a"       ,  2, Bool_.N, "3;3"); // bgn
+		fxt.Test__find("abcd"          , "x"       ,  1, Bool_.N, "");    // no-match
+		fxt.Test__find("abcd"          , ""        ,  2, Bool_.N, "2;1"); // empty regx should return values; regx; EX:w:Fool's_mate; DATE:2014-03-04
 	}
 	@Test   public void Regx__int() { // PURPOSE: allow int find; PAGE:ro.w:Innsbruck DATE:2015-09-12
 		fxt.Test__find(123             , "2"       ,  1, Bool_.N, "2;2");

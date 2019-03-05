@@ -106,8 +106,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		// add to tmp_list
 		Regx_match match = regx_rslts[0]; // NOTE: take only 1st result; DATE:2014-08-27
 		List_adp tmp_list = List_adp_.New();
-		tmp_list.Add(text_map.Get_code_for_char_or_neg1(match.Find_bgn()) + Scrib_lib_ustring.Base1);
-		tmp_list.Add(text_map.Get_code_for_char_or_neg1(match.Find_end()) + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
+		tmp_list.Add(text_map.Get_code_for_char_or_fail(match.Find_bgn()) + Scrib_lib_ustring.Base1);
+		tmp_list.Add(text_map.Get_code_for_char_or_fail(match.Find_end()) + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
 		AddCapturesFromMatch(tmp_list, match, text_str, regx_converter.Capt_ary(), false);
 		return rslt.Init_many_list(tmp_list);
 	}
