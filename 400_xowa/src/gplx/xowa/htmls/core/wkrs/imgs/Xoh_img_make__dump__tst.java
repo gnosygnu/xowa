@@ -36,6 +36,33 @@ public class Xoh_img_make__dump__tst {
 			.Imgs__add("en.w", "A.png", Xop_lnki_type.Id_null, 0.5, 220, 110, -1, -1)
 		);
 	}
+	@Test   public void Media_div() {
+		String orig = String_.Concat_lines_nl("<div class='thumb tright'>"
+				, "<div class='thumbinner' style='width:220px;'>"
+				, "<div class='xowa_media_div'>"
+				, "<div><a href='/wiki/File:A.ogv' class='image' title='A.ogv' xowa_title='A.ogv'><img src='file:////home/lnxusr/xowa/file/commons.wikimedia.org/thumb/4/2/8/6/A.ogv/220px.jpg' width='220' height='165' alt=''></a></div>"
+				, "<div><a href='' xowa_title='A.ogv' class='xowa_media_play' style='width:218px;max-width:220px;' alt='Play sound'></a></div>"
+				, "</div>"
+				, "<div class='thumbcaption'>"
+				, "<div class='magnify'><a href='/wiki/File:A.ogv' class='@gplx.Internal protected' title='abcde'></a></div>"
+				, "xyz</div>"
+				, "</div>"
+				, "</div>");
+		String expd = String_.Concat_lines_nl("<div class='thumb tright'>"
+				, "<div class='thumbinner' style='width:220px;'>"
+				, "<div class='xowa_media_div'>"
+				, "<div><a href='/wiki/File:A.ogv' class='image' title='A.ogv' xowa_title='A.ogv'><img id='xoimg_0' src='file:////home/lnxusr/xowa/file/commons.wikimedia.org/thumb/4/2/8/6/A.ogv/220px.jpg' width='220' height='165' alt=''></a></div>"
+				, "<div><a id='xowa_file_play_0' href='' xowa_title='A.ogv' class='xowa_media_play' style='width:218px;max-width:220px;' alt='Play sound'></a></div>"
+				, "</div>"
+				, "<div class='thumbcaption'>"
+				, "<div class='magnify'><a href='/wiki/File:A.ogv' class='@gplx.Internal protected' title='abcde'></a></div>"
+				, "xyz</div>"
+				, "</div>"
+				, "</div>");
+		fxt.Test__make(orig, fxt.Page_chkr().Body_(expd)
+			.Imgs__add("c", "A.png", Xop_lnki_type.Tid_orig_known, -1, 220, -1, -1, -1)
+		);
+	}
 //		@Test   public void Html_exists__y__cache() {
 //			String
 //			  orig = "<a href='/wiki/File:A.png' class='image' title='abc'><img alt='abc' data-xoimg='0|220|110|0.5|-1|-1' src='file:///mem/xowa/file/en.wikipedia.org/thumb/7/0/A.png/220px.png' width='220' height='110'/></a>"

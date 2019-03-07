@@ -53,6 +53,8 @@ public class Xoh_img_data implements Xoh_data_itm {
 	public boolean Init_by_parse(Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Gfh_tag_rdr tag_rdr, byte[] src, Gfh_tag anch_head, Gfh_tag unused) {
 		Gfh_tag img_tag = anch_head;
 		Bry_err_wkr err_wkr = tag_rdr.Err_wkr();
+		// NOTE: src_bgn must be set at bgn of data; bug wherein it was being set after video / audio tag below; ISSUE#:369; DATE:2019-03-07
+		this.src_bgn = anch_head.Src_bgn();                                                             // <a
 		this.img_wo_anch = anch_head.Name_id() == Gfh_tag_.Id__img;
 		if (img_wo_anch) {
 			Gfh_atr xowa_title = anch_head.Atrs__get_by_or_empty(Xoh_img_xoimg_data.Bry__data_xowa_title);	// data-xowa-title='A.png'
@@ -65,7 +67,6 @@ public class Xoh_img_data implements Xoh_data_itm {
 				tag_rdr.Tag__move_fwd_head();				// next <div>
 				anch_head = tag_rdr.Tag__move_fwd_head();	// next <div>
 			}
-			this.src_bgn = anch_head.Src_bgn();															// <a
 			if (!anch_href.Parse(err_wkr, hctx, src, anch_head)) return false;							// href='/wiki/File:A.png'
 			if (!anch_cls.Parse(err_wkr, src, anch_head)) return false;									// class='image'
 			Gfh_atr anch_title = anch_head.Atrs__get_by_or_empty(Gfh_atr_.Bry__title);					// title='abc'
