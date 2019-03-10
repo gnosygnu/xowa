@@ -62,7 +62,7 @@ public class Xoh_lnke_html {
 			if (lnke.Lnke_relative()) {
 				bfr.Add(ctx.Wiki().Utl__url_parser().Url_parser().Relative_url_protocol_bry());
 			}
-			Xoh_html_wtr_escaper.Escape(ctx.App().Parser_amp_mgr(), bfr, src, href_bgn, href_end, true, false); // escape &amp; ISSUE#:371; DATE:2019-03-03
+			Xoh_html_wtr_escaper.Escape(ctx.App().Parser_amp_mgr(), bfr, src, href_bgn, href_end, true, false); // escape "&" ISSUE#:371; DATE:2019-03-03
 			return true;
 		}
 		else {	// xwiki

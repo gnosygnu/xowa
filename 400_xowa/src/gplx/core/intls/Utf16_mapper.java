@@ -55,7 +55,7 @@ public class Utf16_mapper {
 
 			// get lengths
 			int cur_len_in_bytes = Utf8_.Len_of_char_by_1st_byte(src_bry[pos_in_bytes]);
-			int cur_len_in_chars = cur_len_in_bytes == 4 ? 2 : 1; // NOTE: 3 bytes represent up to U+FFFF (65,536) which will fit in 1 char; REF:en.w:UTF-8; ISSUE#:377; DATE:2019-03-04
+			int cur_len_in_chars = cur_len_in_bytes == 4 ? 2 : 1; // NOTE: 3 bytes represent up to U+FFFF (65,536) which will fit in 1; REF:en.w:UTF-8; ISSUE#:377; DATE:2019-03-04
 
 			// increment
 			pos_in_bytes += cur_len_in_bytes;
