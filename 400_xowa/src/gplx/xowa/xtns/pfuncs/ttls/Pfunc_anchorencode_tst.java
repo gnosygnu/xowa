@@ -24,6 +24,7 @@ public class Pfunc_anchorencode_tst {
 	@Test  public void Lnki_trg()			{fxt.Test_parse_tmpl_str_test("{{anchorencode:a [[b]] c}}"						, "{{test}}"	, "a_b_c");}
 	@Test  public void Lnki_caption()		{fxt.Test_parse_tmpl_str_test("{{anchorencode:a [[b|c]] c}}"					, "{{test}}"	, "a_c_c");}
 	@Test  public void Lnki_file()			{fxt.Test_parse_tmpl_str_test("{{anchorencode:a [[Image:b|thumb|c]] d}}"		, "{{test}}"	, "a_thumb.7Cc_d");}
+	@Test  public void Lnki_trailing()      {fxt.Test_parse_tmpl_str_test("{{anchorencode:a [[b]]c d}}"                     , "{{test}}"    , "a_bc_d");}
 	@Test  public void Xnde()				{fxt.Test_parse_tmpl_str_test("{{anchorencode:a <i>b</i> c}}"					, "{{test}}"	, "a_b_c");}
 	@Test  public void Html_ncr()			{fxt.Test_parse_tmpl_str_test("{{anchorencode:a &#34; b}}"						, "{{test}}"	, "a_.22_b");}
 	@Test  public void Html_ref()			{fxt.Test_parse_tmpl_str_test("{{anchorencode:a &quot; b}}"						, "{{test}}"	, "a_.22_b");}

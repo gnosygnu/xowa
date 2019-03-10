@@ -46,8 +46,9 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 			return Xop_lnki_wkr_.Invalidate_lnki(ctx, src, root, lnki, bgn_pos);
 		if (lnki.Ns_id() != Xow_ns_.Tid__main && Bry_.Len_eq_0(lnki.Ttl().Page_txt()))	// handle anchor-only pages; EX:[[File:#A]] PAGE:en.w:Spindale,_North_Carolina; DATE:2015-12-28
 			return Xop_lnki_wkr_.Invalidate_lnki(ctx, src, root, lnki, bgn_pos);
-		if (Xop_lnki_wkr_.Adjust_for_brack_end_len_of_3(ctx, tkn_mkr, root, src, src_len, cur_pos, lnki))	// convert "]]]" into "]" + "]]", not "]]" + "]"				
+		if (Xop_lnki_wkr_.Adjust_for_brack_end_len_of_3(ctx, tkn_mkr, root, src, src_len, cur_pos, lnki))	// convert "]]]" into "]" + "]]", not "]]" + "]"; EX: "[[a|[b]]]"
 			++cur_pos;																						// position "]]" at end of "]]]"
+		lnki.Brack_end_pos_(cur_pos - Xop_tkn_.Lnki_end_len); // brack_end_pos defined as first "]" in "]]"; ISSUE#:373; DATE:2019-03-10
 		cur_pos = Xop_lnki_wkr_.Chk_for_tail(ctx.Lang(), src, cur_pos, src_len, lnki);
 		lnki.Src_end_(cur_pos);	// NOTE: must happen after Chk_for_tail; redundant with above, but above needed b/c of returns
 		root.Subs_del_after(lnki.Tkn_sub_idx() + 1);	// all tkns should now be converted to args in owner; delete everything in root

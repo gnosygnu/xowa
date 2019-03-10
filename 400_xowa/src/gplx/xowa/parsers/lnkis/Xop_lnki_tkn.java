@@ -47,6 +47,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base implements gplx.xowa.wikis.pa
 	public int				Html_uid() {return html_uid;} public void Html_uid_(int v) {html_uid = v;} private int html_uid;
 	public int				Pipe_count() {return pipe_count;} private int pipe_count;
 	public boolean				Pipe_count_is_zero() {return pipe_count++ == 0;} 
+	public int              Brack_end_pos() {return brack_end_pos;} public void Brack_end_pos_(int v) {this.brack_end_pos = v;} private int brack_end_pos;
 	public boolean				Xtn_sites_link() {return xtn_sites_link;} public void Xtn_sites_link_(boolean v) {xtn_sites_link = v;} private boolean xtn_sites_link;
 	public Xoh_file_fmtr Lnki_file_wkr() {return lnki_file_wkr;} public void Lnki_file_wkr_(Xoh_file_fmtr v) {lnki_file_wkr = v;} private Xoh_file_fmtr lnki_file_wkr;
 	public byte[] Target;

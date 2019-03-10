@@ -76,18 +76,21 @@ public class Pfunc_anchorencode_mgr {	// TS
 			tmp_bfr.Add_mid(src, lnke_sub.Src_bgn_grp(lnke, i), lnke_sub.Src_end_grp(lnke, i));
 		}
 	}
-	private static void Lnki(byte[] src, Xop_lnki_tkn lnki, Bry_bfr tmp_bfr) {
-		int src_end = lnki.Src_end();
-		int trg_end = lnki.Trg_tkn().Src_end();
-		
-		if (trg_end == src_end - Xop_tkn_.Lnki_end_len) {		// only trg
+	private static void Lnki(byte[] src, Xop_lnki_tkn lnki, Bry_bfr tmp_bfr) {			
+		int trg_end = lnki.Trg_tkn().Src_end(); // pos after last trg char; EX: "]" in "[[A]]"; "|" in "[[A|b]]"
+		if (lnki.Pipe_count_is_zero()) { // trg only; EX: [[A]]
 			int trg_bgn = lnki.Trg_tkn().Src_bgn();
-			if (lnki.Ttl().ForceLiteralLink()) ++trg_bgn;		// literal link; skip colon; EX: [[:a]] -> a
-			tmp_bfr.Add_mid(src, trg_bgn, trg_end);			
+			if (lnki.Ttl().ForceLiteralLink()) // literal link; skip colon; EX: [[:a]] -> a
+				++trg_bgn; 
+
+			// add trg only
+			tmp_bfr.Add_mid(src, trg_bgn, trg_end);
 		}
-		else {
-			tmp_bfr.Add_mid(src, trg_end + 1, src_end - Xop_tkn_.Lnki_end_len); //+1 is len of pipe
+		else { // trg + caption + other; EX: [[A|b]]; [[File:A.png|thumb|caption]]
+			tmp_bfr.Add_mid(src, trg_end + 1, lnki.Brack_end_pos()); //+1 is len of pipe
 		}
+		if (lnki.Tail_bgn() != -1)
+			tmp_bfr.Add_mid(src, lnki.Tail_bgn(), lnki.Tail_end());
 	}
 	private static void Xnde(Xop_ctx ctx, byte[] src, Xop_xnde_tkn xnde, Bry_bfr tmp_bfr) {
 		int subs_len = xnde.Subs_len();
