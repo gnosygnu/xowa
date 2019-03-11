@@ -22,7 +22,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TextLibrary.html" id="xolnki_2" title="Module:Diagnostics/TextLibrary">Module:Diagnostics/TextLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TextLibrary" id="xolnki_2" title="Module:Diagnostics/TextLibrary">Module:Diagnostics/TextLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>TextLibrary.php</b> and <b>mw.text.lua</b>
@@ -45,19 +45,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           init_text_for_wiki (via listToText)
         </td>
         <td>
           {{#invoke:Diagnostics/TextLibrary|listToText|a|b|c}}
         </td>
         <td>
-          a, b and c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a, b and c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           unstrip
         </td>
@@ -65,13 +71,16 @@
           {{#invoke:Diagnostics/TextLibrary|unstrip|abc}}
         </td>
         <td>
-          abc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          abc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getEntityTable (via decode)
         </td>
@@ -80,9 +89,6 @@
         </td>
         <td>
           &gt;
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
         </td>
       </tr>
     </table>

@@ -22,7 +22,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary.html" id="xolnki_2" title="Module:Diagnostics/UstringLibrary">Module:Diagnostics/UstringLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary" id="xolnki_2" title="Module:Diagnostics/UstringLibrary">Module:Diagnostics/UstringLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>UstringLibrary.php</b> and <b>mw.ustring.lua</b>
@@ -45,19 +45,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           match (via trim)
         </td>
         <td>
           {{#invoke:Diagnostics/UstringLibrary|match| a b c |^%s*(.-)%s*$}}
         </td>
         <td>
-          a b c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a b c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           match error; only regx passed
         </td>
@@ -65,12 +71,15 @@
           {{#invoke:Diagnostics/UstringLibrary|match_error__regx_only}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;replacement is string
         </td>
@@ -78,13 +87,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_string|abcabc|[a]|A}}
         </td>
         <td>
-          AbcAbc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          AbcAbc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;replacement is table
         </td>
@@ -92,13 +104,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_table}}
         </td>
         <td>
-          AbCAbC
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          AbCAbC 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;replacement is function (lua); basic
         </td>
@@ -106,13 +121,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_function_lua_basic}}
         </td>
         <td>
-          AbcAbc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          AbcAbc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;replacement is function (lua); grouping
         </td>
@@ -120,13 +138,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_function_lua_grouping}}
         </td>
         <td>
-          AbcAbc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          AbcAbc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;balanced group;<br>
           (will fail on Java 1.6, but not on Java 1.7+)
@@ -135,13 +156,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_string |(a)|%b()|c}}
         </td>
         <td>
-          c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;regex with %W;<br>
           (will fail on Java 1.6, but not on Java 1.7+)
@@ -150,13 +174,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_string|[a]|[%W]|-}}
         </td>
         <td>
-          -a-
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          -a- 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gmatch_init and gmatch_callback (via gmatch)
         </td>
@@ -164,13 +191,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gmatch|abcabc|a(b)}}
         </td>
         <td>
-          b,;b,;
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          b,;b,; 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub; non-ASCII<br>
           (will print unrecognizable character)
@@ -179,10 +209,10 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_string|bß|[a]ß|c}}
         </td>
         <td>
-          cß
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          cß 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>

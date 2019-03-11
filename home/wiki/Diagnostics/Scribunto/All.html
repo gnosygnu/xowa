@@ -27,7 +27,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Basic.html" id="xolnki_2" title="Module:Diagnostics/Basic" class="xowa-visited">Module:Diagnostics/Basic</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Basic" id="xolnki_2" title="Module:Diagnostics/Basic" class="xowa-visited">Module:Diagnostics/Basic</a>
       </li>
       <li>
         Tests basic Scribunto functionality
@@ -50,19 +50,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           Init; Load; executeFunctionChunk
         </td>
         <td>
           {{#invoke:Diagnostics/Basic|print}}
         </td>
         <td>
-          print
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          print 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           new line behavior
         </td>
@@ -74,9 +80,9 @@
           <p>
             b
           </p>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -88,13 +94,13 @@
         Calls code in 
         <ul>
           <li>
-            <a href="http://xowa.org/home/wiki/Module:Diagnostics/LuaCommon.html" id="xolnki_3" title="Module:Diagnostics/LuaCommon">Module:Diagnostics/LuaCommon</a>
+            <a href="http://xowa.org/home/wiki/Module:Diagnostics/LuaCommon" id="xolnki_3" title="Module:Diagnostics/LuaCommon">Module:Diagnostics/LuaCommon</a>
           </li>
           <li>
-            <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/getFrameTitle_parent.html" id="xolnki_4" title="Template:Diagnostics/LuaCommon/getFrameTitle parent">Template:Diagnostics/LuaCommon/getFrameTitle parent</a>
+            <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/getFrameTitle_parent" id="xolnki_4" title="Template:Diagnostics/LuaCommon/getFrameTitle parent">Template:Diagnostics/LuaCommon/getFrameTitle parent</a>
           </li>
           <li>
-            <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/preprocess_args_parent.html" id="xolnki_5" title="Template:Diagnostics/LuaCommon/preprocess args parent">Template:Diagnostics/LuaCommon/preprocess args parent</a>
+            <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/preprocess_args_parent" id="xolnki_5" title="Template:Diagnostics/LuaCommon/preprocess args parent">Template:Diagnostics/LuaCommon/preprocess args parent</a>
           </li>
         </ul>
       </li>
@@ -119,19 +125,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           getExpandedArgument
         </td>
         <td>
           {{#invoke:Diagnostics/LuaCommon|getExpandedArgument_number_2 |val_1|val_2}}
         </td>
         <td>
-          arg_1 is 'val_1'; arg_2 is 'val_2'
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          arg_1 is 'val_1'; arg_2 is 'val_2' 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getExpandedArgument_byOrdinal
         </td>
@@ -139,13 +151,16 @@
           {{#invoke:Diagnostics/LuaCommon|getExpandedArgument_by_ordinal |key_1=val_1|val_2}}
         </td>
         <td>
-          [1] is 'val_2'
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          [1] is 'val_2' 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getAllExpandedArguments
         </td>
@@ -153,13 +168,16 @@
           {{#invoke:Diagnostics/LuaCommon|getAllExpandedArguments |val_1|val_2|val_3}}
         </td>
         <td>
-          1:val_1;2:val_2;3:val_3;
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1:val_1;2:val_2;3:val_3; 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getAllExpandedArgs;key_is_int
         </td>
@@ -167,13 +185,16 @@
           {{#invoke:Diagnostics/LuaCommon|getAllExpandedArguments_int_key|1=a}}
         </td>
         <td>
-          a
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           preprocess;redundant_keys
         </td>
@@ -181,13 +202,16 @@
           {{#invoke:Diagnostics/LuaCommon|preprocess_ifeq_as_yn |val_1|val_1|when_true_val=y1|when_false_val=n1|when_true_val=y2}}
         </td>
         <td>
-          y2
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          y2 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           expandTemplate
         </td>
@@ -195,13 +219,16 @@
           {{#invoke:Diagnostics/LuaCommon|expandTemplate|val_1|val_2}}
         </td>
         <td>
-          arg_1 is val_1; arg_2 is val_2
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          arg_1 is val_1; arg_2 is val_2 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           expandTemplate; PHP bool; true -&gt; 1 false -&gt; ""
         </td>
@@ -209,13 +236,16 @@
           {{#invoke:Diagnostics/LuaCommon|expandTemplate_bool}}
         </td>
         <td>
-          bool_true is "1"; bool_false is "";
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          bool_true is "1"; bool_false is ""; 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           callParserFunction
         </td>
@@ -223,13 +253,16 @@
           {{#invoke:Diagnostics/LuaCommon|callParserFunction|urlencode|abc}}
         </td>
         <td>
-          abc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          abc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isSubsting;false
         </td>
@@ -237,13 +270,16 @@
           {{#invoke:Diagnostics/LuaCommon|isSubsting}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isSubsting;true
         </td>
@@ -251,13 +287,16 @@
           {{safesubst:#invoke:Diagnostics/LuaCommon|isSubsting}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getFrameTitle_current
         </td>
@@ -265,13 +304,16 @@
           {{#invoke:Diagnostics/LuaCommon|getFrameTitle_current}}
         </td>
         <td>
-          Module:Diagnostics/LuaCommon
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Module:Diagnostics/LuaCommon 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getFrameTitle_parent
         </td>
@@ -279,13 +321,16 @@
           {{Diagnostics/LuaCommon/getFrameTitle_parent}}
         </td>
         <td>
-          Template:Diagnostics/LuaCommon/getFrameTitle parent
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Template:Diagnostics/LuaCommon/getFrameTitle parent 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getFrameTitle_parent.upper
         </td>
@@ -293,13 +338,16 @@
           {{diagnostics/LuaCommon/getFrameTitle_parent}}
         </td>
         <td>
-          Template:Diagnostics/LuaCommon/getFrameTitle parent
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Template:Diagnostics/LuaCommon/getFrameTitle parent 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           newChildFrame.title
         </td>
@@ -307,13 +355,16 @@
           {{#invoke:Diagnostics/LuaCommon|newChildFrame_titled}}
         </td>
         <td>
-          title:Title0; arg1:v1
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          title:Title0; arg1:v1 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           newChildFrame.title
         </td>
@@ -321,13 +372,16 @@
           {{#invoke:Diagnostics/LuaCommon|newChildFrame_untitled}}
         </td>
         <td>
-          title:Module:Diagnostics/LuaCommon; arg1:v1
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          title:Module:Diagnostics/LuaCommon; arg1:v1 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           preprocess_args;frame is current
         </td>
@@ -335,13 +389,16 @@
           {{#invoke:Diagnostics/LuaCommon|preprocess_args_current|match|y|n}}
         </td>
         <td>
-          y
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          y 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           preprocess_args;frame is parent
         </td>
@@ -349,13 +406,16 @@
           {{Diagnostics/LuaCommon/preprocess_args_parent|match|y|n}}
         </td>
         <td>
-          y
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          y 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           preprocess calling Module functions should not call them twice; fails if onceonce
         </td>
@@ -363,10 +423,10 @@
           {{#invoke:Diagnostics/LuaCommon|preprocess_nested_main}}
         </td>
         <td>
-          once
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          once 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -375,7 +435,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary.html" id="xolnki_6" title="Module:Diagnostics/UstringLibrary">Module:Diagnostics/UstringLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary" id="xolnki_6" title="Module:Diagnostics/UstringLibrary">Module:Diagnostics/UstringLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>UstringLibrary.php</b> and <b>mw.ustring.lua</b>
@@ -398,19 +458,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           match (via trim)
         </td>
         <td>
           {{#invoke:Diagnostics/UstringLibrary|match| a b c |^%s*(.-)%s*$}}
         </td>
         <td>
-          a b c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a b c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           match error; only regx passed
         </td>
@@ -418,12 +484,15 @@
           {{#invoke:Diagnostics/UstringLibrary|match_error__regx_only}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;replacement is string
         </td>
@@ -431,13 +500,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_string|abcabc|[a]|A}}
         </td>
         <td>
-          AbcAbc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          AbcAbc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;replacement is table
         </td>
@@ -445,13 +517,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_table}}
         </td>
         <td>
-          AbCAbC
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          AbCAbC 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;replacement is function (lua); basic
         </td>
@@ -459,13 +534,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_function_lua_basic}}
         </td>
         <td>
-          AbcAbc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          AbcAbc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;replacement is function (lua); grouping
         </td>
@@ -473,13 +551,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_function_lua_grouping}}
         </td>
         <td>
-          AbcAbc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          AbcAbc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;balanced group;<br>
           (will fail on Java 1.6, but not on Java 1.7+)
@@ -488,13 +569,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_string |(a)|%b()|c}}
         </td>
         <td>
-          c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub;regex with %W;<br>
           (will fail on Java 1.6, but not on Java 1.7+)
@@ -503,13 +587,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_string|[a]|[%W]|-}}
         </td>
         <td>
-          -a-
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          -a- 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gmatch_init and gmatch_callback (via gmatch)
         </td>
@@ -517,13 +604,16 @@
           {{#invoke:Diagnostics/UstringLibrary|gmatch|abcabc|a(b)}}
         </td>
         <td>
-          b,;b,;
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          b,;b,; 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           gsub; non-ASCII<br>
           (will print unrecognizable character)
@@ -532,10 +622,10 @@
           {{#invoke:Diagnostics/UstringLibrary|gsub_string|bß|[a]ß|c}}
         </td>
         <td>
-          cß
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          cß 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -544,7 +634,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UriLibrary.html" id="xolnki_7" title="Module:Diagnostics/UriLibrary">Module:Diagnostics/UriLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UriLibrary" id="xolnki_7" title="Module:Diagnostics/UriLibrary">Module:Diagnostics/UriLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>UriLibrary.php</b> and <b>mw.uri.lua</b>
@@ -567,19 +657,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           anchorEncode
         </td>
         <td>
           {{#invoke:Diagnostics/UriLibrary|anchorEncode|[irc://a b c]}}
         </td>
         <td>
-          b_c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          b_c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           localUrl
         </td>
@@ -587,13 +683,16 @@
           {{#invoke:Diagnostics/UriLibrary|localUrl|a&amp;b! c}}
         </td>
         <td>
-          /wiki/A%26b!_c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          /wiki/A%26b!_c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           fullUrl
         </td>
@@ -601,13 +700,16 @@
           {{#invoke:Diagnostics/UriLibrary|fullUrl|a&amp;b! c}}
         </td>
         <td>
-          //home/wiki/A%26b!_c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          //home/wiki/A%26b!_c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           defaultUrl
         </td>
@@ -615,10 +717,10 @@
           {{#invoke:Diagnostics/UriLibrary|defaultUrl}}
         </td>
         <td>
-          //home/wiki/Diagnostics/Scribunto/All
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          //home/wiki/Diagnostics/Scribunto/All 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -627,7 +729,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/LanguageLibrary.html" id="xolnki_8" title="Module:Diagnostics/LanguageLibrary">Module:Diagnostics/LanguageLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/LanguageLibrary" id="xolnki_8" title="Module:Diagnostics/LanguageLibrary" class="xowa-visited">Module:Diagnostics/LanguageLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>LanguageLibrary.php</b> and <b>mw.language.lua</b>
@@ -650,19 +752,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           getContLangCode (by getContentLanguage)
         </td>
         <td>
           {{#invoke:Diagnostics/LanguageLibrary|getContLangCode}}
         </td>
         <td>
-          en
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          en 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isKnownLanguageTag; true
         </td>
@@ -670,13 +778,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isKnownLanguageTag|en}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isKnownLanguageTag; false
         </td>
@@ -684,13 +795,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isKnownLanguageTag|xyz}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isValidCode; true
         </td>
@@ -698,13 +812,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isValidCode|en}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isValidCode; false
         </td>
@@ -712,13 +829,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isValidCode|a[b}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isValidBuiltInCode; true
         </td>
@@ -726,13 +846,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isValidBuiltInCode|en}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isValidBuiltInCode; false
         </td>
@@ -740,13 +863,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isValidBuiltInCode|a#b}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           fetchLanguageName; code only
         </td>
@@ -754,13 +880,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|fetchLanguageName|en|en}}
         </td>
         <td>
-          English
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          English 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           fetchLanguageNames_get
         </td>
@@ -768,13 +897,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|fetchLanguageNames_get|fr}}
         </td>
         <td>
-          French
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          français 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           new
         </td>
@@ -782,13 +914,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|new_lang_code|fr}}
         </td>
         <td>
-          fr
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          fr 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           formatNum; en
         </td>
@@ -796,13 +931,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|formatNum|1234}}
         </td>
         <td>
-          1,234
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1,234 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           parseFormatteNum; en
         </td>
@@ -810,13 +948,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|parseFormattedNum|1,234}}
         </td>
         <td>
-          1,234
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1,234 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           formatDate via pcall; y;
         </td>
@@ -824,13 +965,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|formatDate_valid|Y-m-d|2014-03-25}}
         </td>
         <td>
-          y
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          y 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           formatDate via pcall; n;
         </td>
@@ -838,13 +982,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|formatDate_valid|Y-m-d|fail}}
         </td>
         <td>
-          n
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          n 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           convertGrammar
         </td>
@@ -852,13 +999,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|convertGrammar|fi|talo|elative}}
         </td>
         <td>
-          talosta
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          talosta 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isRTL; en
         </td>
@@ -866,13 +1016,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isRTL|en}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isRTL; ar
         </td>
@@ -880,13 +1033,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isRTL|ar}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           format_durations_hms
         </td>
@@ -894,13 +1050,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|format_durations_hms|123}}
         </td>
         <td>
-          2 minutes and 3 seconds
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          2 minutes and 3 seconds 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           get_duration_intervals_hms
         </td>
@@ -908,10 +1067,10 @@
           {{#invoke:Diagnostics/LanguageLibrary|get_duration_intervals_hms|123}}
         </td>
         <td>
-          ,2,3
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          ,2,3 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -920,7 +1079,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/SiteLibrary.html" id="xolnki_9" title="Module:Diagnostics/SiteLibrary">Module:Diagnostics/SiteLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/SiteLibrary" id="xolnki_9" title="Module:Diagnostics/SiteLibrary">Module:Diagnostics/SiteLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>SiteLibrary.php</b> and <b>mw.site.lua</b>
@@ -943,19 +1102,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           siteName
         </td>
         <td>
           {{#invoke:Diagnostics/SiteLibrary|siteName}}
         </td>
         <td>
-          home
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          home 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           ns_name
         </td>
@@ -963,10 +1128,10 @@
           {{#invoke:Diagnostics/SiteLibrary|ns_associated|Help}}
         </td>
         <td>
-          Help talk
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Help talk 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -975,7 +1140,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleLibrary.html" id="xolnki_10" title="Module:Diagnostics/TitleLibrary">Module:Diagnostics/TitleLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleLibrary" id="xolnki_10" title="Module:Diagnostics/TitleLibrary">Module:Diagnostics/TitleLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>TitleLibrary.php</b> and <b>mw.title.lua</b>
@@ -998,19 +1163,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           newTitle
         </td>
         <td>
           {{#invoke:Diagnostics/TitleLibrary|newTitle|Main_Page}}
         </td>
         <td>
-          Main Page
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Main Page 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           newTitle; namespace arg
         </td>
@@ -1018,13 +1189,16 @@
           {{#invoke:Diagnostics/TitleLibrary|newTitle|Contents|Help}}
         </td>
         <td>
-          Help:Contents
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Help:Contents 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           makeTitle
         </td>
@@ -1032,13 +1206,16 @@
           {{#invoke:Diagnostics/TitleLibrary|makeTitle|Help|Contents|Overview|home}}
         </td>
         <td>
-          home:Help:Contents#Overview
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          home:Help:Contents#Overview 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           fullUrl
         </td>
@@ -1046,13 +1223,16 @@
           {{#invoke:Diagnostics/TitleLibrary|fullUrl|Help|Contents}}
         </td>
         <td>
-          //home/wiki/Help:Contents
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          //home/wiki/Help:Contents 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getCurrentTitle
         </td>
@@ -1060,10 +1240,10 @@
           {{#invoke:Diagnostics/TitleLibrary|getCurrentTitle}}
         </td>
         <td>
-          Diagnostics/Scribunto/All
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Diagnostics/Scribunto/All 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -1072,7 +1252,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TextLibrary.html" id="xolnki_11" title="Module:Diagnostics/TextLibrary">Module:Diagnostics/TextLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TextLibrary" id="xolnki_11" title="Module:Diagnostics/TextLibrary">Module:Diagnostics/TextLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>TextLibrary.php</b> and <b>mw.text.lua</b>
@@ -1095,19 +1275,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           init_text_for_wiki (via listToText)
         </td>
         <td>
           {{#invoke:Diagnostics/TextLibrary|listToText|a|b|c}}
         </td>
         <td>
-          a, b and c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a, b and c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           unstrip
         </td>
@@ -1115,13 +1301,16 @@
           {{#invoke:Diagnostics/TextLibrary|unstrip|abc}}
         </td>
         <td>
-          abc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          abc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getEntityTable (via decode)
         </td>
@@ -1131,9 +1320,6 @@
         <td>
           &gt;
         </td>
-        <td>
-          <span style='color: green;'>pass</span>
-        </td>
       </tr>
     </table>
     <h2>
@@ -1141,7 +1327,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/HtmlLibrary.html" id="xolnki_12" title="Module:Diagnostics/HtmlLibrary">Module:Diagnostics/HtmlLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/HtmlLibrary" id="xolnki_12" title="Module:Diagnostics/HtmlLibrary">Module:Diagnostics/HtmlLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>mw.html.lua</b>
@@ -1164,16 +1350,19 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           create
         </td>
         <td>
           {{#invoke:Diagnostics/HtmlLibrary|create_span}}
         </td>
         <td>
-          span
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          span 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -1182,7 +1371,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/MessageLibrary.html" id="xolnki_13" title="Module:Diagnostics/MessageLibrary">Module:Diagnostics/MessageLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/MessageLibrary" id="xolnki_13" title="Module:Diagnostics/MessageLibrary">Module:Diagnostics/MessageLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>MessageLibrary.php</b> and <b>mw.message.lua</b>
@@ -1205,19 +1394,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           init_message_for_lang (via getDefaultLanguage)
         </td>
         <td>
           {{#invoke:Diagnostics/MessageLibrary|getDefaultLanguage}}
         </td>
         <td>
-          en
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          en 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           plain
         </td>
@@ -1225,13 +1420,16 @@
           {{#invoke:Diagnostics/MessageLibrary|plain|mainpage}}
         </td>
         <td>
-          Main Page
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Main Page 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           plain; params
         </td>
@@ -1239,13 +1437,16 @@
           {{#invoke:Diagnostics/MessageLibrary|plain|redirectedfrom|A}}
         </td>
         <td>
-          (Redirected from A)
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          (Redirected from A) 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           exists; true
         </td>
@@ -1253,13 +1454,16 @@
           {{#invoke:Diagnostics/MessageLibrary|check|exists|sun}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           exists; false
         </td>
@@ -1267,13 +1471,16 @@
           {{#invoke:Diagnostics/MessageLibrary|check|exists|sunx}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isBlank; false
         </td>
@@ -1281,13 +1488,16 @@
           {{#invoke:Diagnostics/MessageLibrary|check|isBlank|sun}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isDisabled; false
         </td>
@@ -1295,13 +1505,22 @@
           {{#invoke:Diagnostics/MessageLibrary|check|isDisabled|sun}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: red;'>fail:<br>
+          'Sun</span>
+<pre>
+<span style='color: red;'>'<br>
+'Dim.
+ '</span>
+</pre>
+        </td>
         <td>
           inLanguage
         </td>
@@ -1309,13 +1528,16 @@
           {{#invoke:Diagnostics/MessageLibrary|plain_inLanguage|fr|sun}}
         </td>
         <td>
-          Dim.
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Sun 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           rawMessage_toString
         </td>
@@ -1323,10 +1545,10 @@
           {{#invoke:Diagnostics/MessageLibrary|plain_rawMessage|a$1c|b}}
         </td>
         <td>
-          abc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          abc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -1338,7 +1560,7 @@
         Wikidata needs to be installed for these tests to work
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/WikibaseLibrary.html" id="xolnki_14" title="Module:Diagnostics/WikibaseLibrary">Module:Diagnostics/WikibaseLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/WikibaseLibrary" id="xolnki_14" title="Module:Diagnostics/WikibaseLibrary">Module:Diagnostics/WikibaseLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>WikibaseLibrary.php</b> and <b>mw.wikibase.lua</b>
@@ -1361,16 +1583,19 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           getEntity
         </td>
         <td>
           {{#invoke:Diagnostics/WikibaseLibrary|label|q2}}
         </td>
         <td>
-          Earth
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Earth 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -1385,13 +1610,13 @@
         Applies to the Luaj engine (as opposed to the Lua engine)
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj.html" id="xolnki_15" title="Module:Diagnostics/Luaj" class="xowa-visited">Module:Diagnostics/Luaj</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj" id="xolnki_15" title="Module:Diagnostics/Luaj" class="xowa-visited">Module:Diagnostics/Luaj</a>
       </li>
       <li>
         Tests changes to the luaj_xowa.jar
       </li>
       <li>
-        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj.html" id="xolnki_16" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>
+        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj" id="xolnki_16" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>
       </li>
     </ul>
     <h3>
@@ -1414,19 +1639,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           string.format fails for bad format; fails with ""
         </td>
         <td>
           {{#invoke:Diagnostics/Luaj|string_format_2|%d:%02.f|3|4}}
         </td>
         <td>
-          3:04
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          3:04 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           os.time does not handle dates before 1970 on Windows; fails with false on Windows<br>
           NOTE: always fails on Windows with the lua engine
@@ -1435,13 +1666,16 @@
           {{#invoke:Diagnostics/Luaj|os_time|1234|05|06}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           pairs.next fails when setting val to null; fails with ""
         </td>
@@ -1449,10 +1683,10 @@
           {{#invoke:Diagnostics/Luaj|pairs_next}}
         </td>
         <td>
-          ok
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          ok 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -1476,19 +1710,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           string.gfind deprecated; should be alias to gmatch; fails with ""
         </td>
         <td>
           {{#invoke:Diagnostics/Luaj|string_gfind|ab cd|%w+}}
         </td>
         <td>
-          ab
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          ab 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           tonumber returns original value if value has decimal and base is 10; fails with ""
         </td>
@@ -1496,13 +1736,16 @@
           {{#invoke:Diagnostics/Luaj|tonumber|12.34|10}}
         </td>
         <td>
-          12.34
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          12.34 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           tonumber('-') should be nil not 0
         </td>
@@ -1510,12 +1753,15 @@
           {{#invoke:Diagnostics/Luaj|tonumber_lone|-}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           math.log10 deprecated; now calls Math.log10; fails with ""
         </td>
@@ -1523,13 +1769,16 @@
           {{#invoke:Diagnostics/Luaj|math_log10|100}}
         </td>
         <td>
-          2
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          2 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           math.mod deprecated; now aliased to math.fmod; fails with ""
         </td>
@@ -1537,13 +1786,16 @@
           {{#invoke:Diagnostics/Luaj|math_mod|3|2}}
         </td>
         <td>
-          1
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           table.maxn deprecated; fails with ""
         </td>
@@ -1551,13 +1803,16 @@
           {{#invoke:Diagnostics/Luaj|table_maxn}}
         </td>
         <td>
-          3
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          3 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           table.getn deprecated -- key_is_num; fails with ""
         </td>
@@ -1565,13 +1820,16 @@
           {{#invoke:Diagnostics/Luaj|table_getn__key_is_num}}
         </td>
         <td>
-          3
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          3 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           table.getn deprecated -- key_is_str; fails with ""
         </td>
@@ -1579,13 +1837,16 @@
           {{#invoke:Diagnostics/Luaj|table_getn__key_is_str}}
         </td>
         <td>
-          0
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          0 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           automatic arg variable in varargs function deprecated; fails with ""
         </td>
@@ -1593,10 +1854,10 @@
           {{#invoke:Diagnostics/Luaj|varargs_arg}}
         </td>
         <td>
-          a
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -1620,19 +1881,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           tonumber should trim all white space, not just \s; fails with ""
         </td>
         <td>
           {{#invoke:Diagnostics/Luaj|value_tonumber_trim}}
         </td>
         <td>
-          123
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          123 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.rep fails if negative repetition; return ""; fails with ""
         </td>
@@ -1640,13 +1907,16 @@
           {{#invoke:Diagnostics/Luaj|string_rep_test|a|-1}}
         </td>
         <td>
-          pass:
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          pass: 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.gsub fails with ArrayIndexOutOfBoundsException; check for OutOfBounds; fails with ""
         </td>
@@ -1654,13 +1924,16 @@
           {{#invoke:Diagnostics/Luaj|string_gsub|a#b|#|}}
         </td>
         <td>
-          ab
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          ab 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.gsub fails if src is empty string; exit early if empty; fails with ""
         </td>
@@ -1668,12 +1941,15 @@
           {{#invoke:Diagnostics/Luaj|string_gsub||%b&lt;&gt;|}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.gmatch: non-match
         </td>
@@ -1681,13 +1957,16 @@
           {{#invoke:Diagnostics/Luaj|string_gmatch|a|[^,]*}}
         </td>
         <td>
-          a;;
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a;; 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.gmatch: match
         </td>
@@ -1695,13 +1974,16 @@
           {{#invoke:Diagnostics/Luaj|string_gmatch|a,b|[^,]*}}
         </td>
         <td>
-          a;;b;;
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a;;b;; 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.gmatch: convert example; plain text
         </td>
@@ -1709,12 +1991,15 @@
           {{#invoke:Diagnostics/Luaj|string_gmatch_convert|a}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.gmatch: convert example; lnki
         </td>
@@ -1722,12 +2007,15 @@
           {{#invoke:Diagnostics/Luaj|string_gmatch_convert|[[a]]}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.format does not use format args for double; call java.lang.String.format; fails with 1.234
         </td>
@@ -1735,13 +2023,16 @@
           {{#invoke:Diagnostics/Luaj|string_format|%.1f|1.234}}
         </td>
         <td>
-          1.2
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1.2 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.format fails for bad format; fails with ""
         </td>
@@ -1749,13 +2040,16 @@
           {{#invoke:Diagnostics/Luaj|string_format|(%0.1f%%)|1.234}}
         </td>
         <td>
-          (1.2%)
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          (1.2%) 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.format fails if no number after "."; fails with ""
         </td>
@@ -1763,13 +2057,16 @@
           {{#invoke:Diagnostics/Luaj|string_format|%02.f|3}}
         </td>
         <td>
-          03
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          03 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.format fails for char; fails with ""
         </td>
@@ -1777,13 +2074,16 @@
           {{#invoke:Diagnostics/Luaj|string_format|%c|97}}
         </td>
         <td>
-          a
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.format fails for multibyte chars; fails with ""
         </td>
@@ -1791,13 +2091,16 @@
           {{#invoke:Diagnostics/Luaj|string_format|âbç%f|1}}
         </td>
         <td>
-          âbç1.0
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          âbç1.0 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           multibyte strings not supported; fails with ""
         </td>
@@ -1805,13 +2108,16 @@
           {{#invoke:Diagnostics/Luaj|string_multibyte_2}}
         </td>
         <td>
-          â
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          â 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           multibyte strings not supported; fails with ""
         </td>
@@ -1819,13 +2125,16 @@
           {{#invoke:Diagnostics/Luaj|string_multibyte_3}}
         </td>
         <td>
-          อา
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          อา 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           multibyte chars in lua variables; used to return "?"
         </td>
@@ -1833,13 +2142,16 @@
           {{#invoke:Diagnostics/Luaj|ustring_match_multibyte|𠀀}}
         </td>
         <td>
-          𠀀
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          𠀀 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           handle backslash-escaped sequences like \239\191\185; used to return "11"
         </td>
@@ -1847,12 +2159,15 @@
           {{#invoke:Diagnostics/Luaj|multibyte__backslash_escaped}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           surrogate pair chars not supported; fails with ""
         </td>
@@ -1860,13 +2175,16 @@
           {{#invoke:Diagnostics/Luaj|string_surrogate_pair}}
         </td>
         <td>
-          1
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           table.concat fails if end is nil; convert nil to list len; fails with ""
         </td>
@@ -1874,13 +2192,16 @@
           {{#invoke:Diagnostics/Luaj|table_concat|.|1||a|b|c}}
         </td>
         <td>
-          a.b.c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a.b.c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           table.concat fails if sep is nil; convert nil to ""; fails with ""
         </td>
@@ -1888,13 +2209,16 @@
           {{#invoke:Diagnostics/Luaj|table_concat_nil_sep}}
         </td>
         <td>
-          ab
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          ab 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           table.concat fails if 1st argument is nil; fails with "bad argument: string expected, got nil"
         </td>
@@ -1902,13 +2226,16 @@
           {{#invoke:Diagnostics/Luaj|table_remove_nil_arg_at_pos_1}}
         </td>
         <td>
-          ab
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          ab 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           os_date does not accept utc argument; fails with ""<br>
           NOTE: test assumes EST / EDT; if ! is not applied, then date would be 1969-12-31
@@ -1917,13 +2244,16 @@
           {{#invoke:Diagnostics/Luaj|os_date|!*t|3600}}
         </td>
         <td>
-          1970-01-01
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1970-01-01 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           os_date non-utc check;
         </td>
@@ -1931,13 +2261,16 @@
           {{#invoke:Diagnostics/Luaj|os_date|*t|0}}
         </td>
         <td>
-          1969-12-31
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1969-12-31 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           os_date format: %e; fails with ""; NOTE: test assumes time zone within 11 hours of UTC
         </td>
@@ -1945,13 +2278,16 @@
           {{#invoke:Diagnostics/Luaj|os_date_format|%e|2014|07|15|1|2|3}}
         </td>
         <td>
-          15
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          15 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           os_date format: %R; fails with ""
         </td>
@@ -1959,13 +2295,16 @@
           {{#invoke:Diagnostics/Luaj|os_date_format|%R|2014|07|15|13|2|3}}
         </td>
         <td>
-          13:02
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          13:02 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           match.balanced: fails with out of bounds;
         </td>
@@ -1973,12 +2312,15 @@
           {{#invoke:Diagnostics/Luaj|string_match|a|%b()}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           match.balanced: fails with out of bounds; ^ at beginning
         </td>
@@ -1986,12 +2328,15 @@
           {{#invoke:Diagnostics/Luaj|string_match|a|^(.) ?%b()}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           match.frontier:error
         </td>
@@ -1999,12 +2344,15 @@
           {{#invoke:Diagnostics/Luaj|string_gmatch|a|%f[%a]b}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           match.frontier:bad-implementation; used to return ""
         </td>
@@ -2012,13 +2360,16 @@
           {{#invoke:Diagnostics/Luaj|lua_match|bz|%f[%a][%a]z$}}
         </td>
         <td>
-          bz
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          bz 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           tonumber hex fails if incomplete
         </td>
@@ -2026,12 +2377,15 @@
           {{#invoke:Diagnostics/Luaj|tonumber_hex|0x}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           tonumber hex check
         </td>
@@ -2039,13 +2393,16 @@
           {{#invoke:Diagnostics/Luaj|tonumber_hex|0xFF}}
         </td>
         <td>
-          255
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          255 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           string.gsub does not match $ at end of string
         </td>
@@ -2053,13 +2410,16 @@
           {{#invoke:Diagnostics/Luaj|string_gsub|ab|e?$|1}}
         </td>
         <td>
-          abe
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          abe 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           table.unpack does not handle nil args; fails with error
         </td>
@@ -2067,13 +2427,16 @@
           {{#invoke:Diagnostics/Luaj|table_unpack_nil}}
         </td>
         <td>
-          a,b,c,d
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a,b,c,d 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           surrogate pairs not handled correctly; fails with wrong 1st char: 𢱌
         </td>
@@ -2081,13 +2444,16 @@
           {{#invoke:Diagnostics/Luaj|core_surrogate_pairs}}
         </td>
         <td>
-          𣂁 - 脁 - 晁
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          𣂁 - 脁 - 晁 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           zero-length regex fails
         </td>
@@ -2095,12 +2461,15 @@
           {{#invoke:Diagnostics/Luaj|lua_match|text|}}
         </td>
         <td>
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           utf-8 char fails
         </td>
@@ -2108,30 +2477,27 @@
           {{#invoke:Diagnostics/Luaj|var|â|}}
         </td>
         <td>
-          â
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          â 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
         <td>
-          gsub fails with bracketed utf-8
+          <span style='color: green;'>pass</span>
         </td>
         <td>
-          {{#invoke:Diagnostics/Luaj|string_gsub_w_multibyte_pattern}}
+          fails if "2." is coerced to 2
         </td>
         <td>
-          a-z
+          {{#invoke:Diagnostics/Luaj|table_overwrite_int_with_string}}
         </td>
         <td>
-          <span style='color: red;'>fail:<br>
-          'a-z</span>
-<pre>
-<span style='color: red;'>'<br>
-'a-146z
- '</span>
-</pre>
+          2. 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -2140,7 +2506,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/ParserFunctions.html" id="xolnki_17" title="Module:Diagnostics/ParserFunctions">Module:Diagnostics/ParserFunctions</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/ParserFunctions" id="xolnki_17" title="Module:Diagnostics/ParserFunctions">Module:Diagnostics/ParserFunctions</a>
       </li>
       <li>
         Tests functionality for mw.ext.ParserFunctions.lua
@@ -2163,16 +2529,19 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           basic expr
         </td>
         <td>
           {{#invoke:Diagnostics/ParserFunctions|expr|1 + 2}}
         </td>
         <td>
-          3
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          3 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -2181,7 +2550,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleBlacklist.html" id="xolnki_18" title="Module:Diagnostics/TitleBlacklist">Module:Diagnostics/TitleBlacklist</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleBlacklist" id="xolnki_18" title="Module:Diagnostics/TitleBlacklist">Module:Diagnostics/TitleBlacklist</a>
       </li>
       <li>
         Tests functionality for mw.ext.TitleBlacklist.lua
@@ -2204,16 +2573,19 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           basic test; note that TitleBlacklists are not implemented in XOWA
         </td>
         <td>
           {{#invoke:Diagnostics/TitleBlacklist|test|Title_to_check_for_blacklist}}
         </td>
         <td>
-          pass
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          pass 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
@@ -2225,7 +2597,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/FlaggedRevs.html" id="xolnki_19" title="Module:Diagnostics/FlaggedRevs">Module:Diagnostics/FlaggedRevs</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/FlaggedRevs" id="xolnki_19" title="Module:Diagnostics/FlaggedRevs">Module:Diagnostics/FlaggedRevs</a>
       </li>
       <li>
         Tests functionality for mw.ext.FlaggedRevs.lua
@@ -2248,16 +2620,19 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           basic test; note that FlaggedRevs are not implemented in XOWA
         </td>
         <td>
           {{#invoke:Diagnostics/FlaggedRevs|test}}
         </td>
         <td>
-          0;;infinity
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          0;;infinity 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>

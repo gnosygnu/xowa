@@ -45,19 +45,22 @@
         <li class="toclevel-1 tocsection-7">
           <a href="#Why_do_some_characters_show_up_as_boxes.3F"><span class="tocnumber">7</span> <span class="toctext">Why do some characters show up as boxes?</span></a>
         </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#Why_are_some_date-related_pages_empty_or_show_error_messages.3F"><span class="tocnumber">8</span> <span class="toctext">Why are some date-related pages empty or show error messages?</span></a>
+        </li>
       </ul>
     </div>
     <h2>
       <span class="mw-headline" id="I.27ve_found_a_bug._How_do_I_report_it.3F">I've found a bug. How do I report it?</span>
     </h2>
     <p>
-      Report it through Github, Wikipedia or by email! See <a href="http://xowa.org/home/wiki/Help/Feedback.html" id="xolnki_2" title="Help/Feedback">Help/Feedback</a>
+      Report it through Github, Wikipedia or by email! See <a href="http://xowa.org/home/wiki/Help/Feedback" id="xolnki_2" title="Help/Feedback">Help/Feedback</a>
     </p>
     <h2>
       <span class="mw-headline" id="How_do_you_pronounce_XOWA.3F">How do you pronounce XOWA?</span>
     </h2>
     <p>
-      The preferred pronunciation is "X' - O - WA". In <a href="https://en.wikipedia.org/wiki/IPA" rel="nofollow" class="external text">IPA</a>, it would be <code>ɛksˈ ō wə</code>.
+      The preferred pronunciation is "X' - O - WA". In <a href="/site/en.wikipedia.org/wiki/IPA">IPA</a>, it would be <code>ɛksˈ ō wə</code>.
     </p>
     <p>
       An accepted pronunciation is "ZO' - WA". In IPA, it would be <code>zō wə</code>.
@@ -66,10 +69,10 @@
       <span class="mw-headline" id="Why_are_language_links_to_other_wikis_not_listed.3F">Why are language links to other wikis not listed?</span>
     </h2>
     <p>
-      Short answer: Set up the Wikidata wiki (www.wikidata.org). See <a href="http://xowa.org/home/wiki/Dashboard/Import/Online.html" id="xolnki_3" title="Dashboard/Import/Online" class="xowa-visited">Dashboard/Import/Online</a>. After you install the Wikidata wiki, language links to other wikis will be listed at the bottom of the article.
+      Short answer: Set up the Wikidata wiki (www.wikidata.org). See <a href="http://xowa.org/home/wiki/Dashboard/Import/Online" id="xolnki_3" title="Dashboard/Import/Online" class="xowa-visited">Dashboard/Import/Online</a>. After you install the Wikidata wiki, language links to other wikis will be listed at the bottom of the article.
     </p>
     <p>
-      Long answer: See <a href="http://xowa.org/home/wiki/App/Wiki_types/Wikidata.html" id="xolnki_4" title="App/Wiki types/Wikidata">App/Wiki_types/Wikidata</a>
+      Long answer: See <a href="http://xowa.org/home/wiki/App/Wiki_types/Wikidata" id="xolnki_4" title="App/Wiki types/Wikidata">App/Wiki_types/Wikidata</a>
     </p>
     <h2>
       <span class="mw-headline" id="Why_do_some_pages_have_sections_that_overlap_each_other.3F">Why do some pages have sections that overlap each other?</span>
@@ -109,9 +112,21 @@
         <b>Ugaritic</b>: Install the fonts from <a href="http://ftp.gnu.org/gnu/freefont/freefont-ttf-20120503.zip" rel="nofollow" class="external free">http://ftp.gnu.org/gnu/freefont/freefont-ttf-20120503.zip</a>
       </li>
       <li>
-        <b>Cuneiform</b>: Install the fonts from <a href="http://oracc.museum.upenn.edu/downloads/CuneiformComposite-1001.zip" rel="nofollow" class="external free">http://oracc.museum.upenn.edu/downloads/CuneiformComposite-1001.zip</a> (see also <a href="https://en.wikipedia.org/wiki/Help:Multilingual_support#Cuneiform" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Help:Multilingual_support#Cuneiform</a> and <a href="http://oracc.museum.upenn.edu/doc/user/fonts/#Cuneiform_Fonts" rel="nofollow" class="external free">http://oracc.museum.upenn.edu/doc/user/fonts/#Cuneiform_Fonts</a>)
+        <b>Cuneiform</b>: Install the fonts from <a href="http://oracc.museum.upenn.edu/downloads/CuneiformComposite-1001.zip" rel="nofollow" class="external free">http://oracc.museum.upenn.edu/downloads/CuneiformComposite-1001.zip</a> (see also <a href="/site/en.wikipedia.org/wiki/Help:Multilingual_support">https://en.wikipedia.org/wiki/Help:Multilingual_support#Cuneiform</a> and <a href="http://oracc.museum.upenn.edu/doc/user/fonts/#Cuneiform_Fonts" rel="nofollow" class="external free">http://oracc.museum.upenn.edu/doc/user/fonts/#Cuneiform_Fonts</a>)
       </li>
     </ul>
+    <h2>
+      <span class="mw-headline" id="Why_are_some_date-related_pages_empty_or_show_error_messages.3F">Why are some date-related pages empty or show error messages?</span>
+    </h2>
+    <p>
+      For example, if today's date is 2019-02-15, and you open en.wikipedia.org/wiki/Portal:Current_events/2019_February_15 in XOWA, it will not show correctly
+    </p>
+    <p>
+      This is because Wikipedia has bots which will automatically create pages for the current / next day. In contrast, XOWA snapshots whatever pages were in the Wikipedia dump. So a 2019-02 dump will only have pages up to 2019-02-01, and not 2019-02-15. XOWA does not reproduce the bot logic for automaticaly creating new pages.
+    </p>
+    <p>
+      For more info, see <a href="https://github.com/gnosygnu/xowa/issues/367" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/367</a>.
+    </p>
     <p>
       <br>
     </p>

@@ -25,13 +25,13 @@
         Calls code in 
         <ul>
           <li>
-            <a href="http://xowa.org/home/wiki/Module:Diagnostics/LuaCommon.html" id="xolnki_2" title="Module:Diagnostics/LuaCommon">Module:Diagnostics/LuaCommon</a>
+            <a href="http://xowa.org/home/wiki/Module:Diagnostics/LuaCommon" id="xolnki_2" title="Module:Diagnostics/LuaCommon">Module:Diagnostics/LuaCommon</a>
           </li>
           <li>
-            <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/getFrameTitle_parent.html" id="xolnki_3" title="Template:Diagnostics/LuaCommon/getFrameTitle parent">Template:Diagnostics/LuaCommon/getFrameTitle parent</a>
+            <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/getFrameTitle_parent" id="xolnki_3" title="Template:Diagnostics/LuaCommon/getFrameTitle parent">Template:Diagnostics/LuaCommon/getFrameTitle parent</a>
           </li>
           <li>
-            <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/preprocess_args_parent.html" id="xolnki_4" title="Template:Diagnostics/LuaCommon/preprocess args parent">Template:Diagnostics/LuaCommon/preprocess args parent</a>
+            <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/preprocess_args_parent" id="xolnki_4" title="Template:Diagnostics/LuaCommon/preprocess args parent">Template:Diagnostics/LuaCommon/preprocess args parent</a>
           </li>
         </ul>
       </li>
@@ -56,19 +56,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           getExpandedArgument
         </td>
         <td>
           {{#invoke:Diagnostics/LuaCommon|getExpandedArgument_number_2 |val_1|val_2}}
         </td>
         <td>
-          arg_1 is 'val_1'; arg_2 is 'val_2'
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          arg_1 is 'val_1'; arg_2 is 'val_2' 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getExpandedArgument_byOrdinal
         </td>
@@ -76,13 +82,16 @@
           {{#invoke:Diagnostics/LuaCommon|getExpandedArgument_by_ordinal |key_1=val_1|val_2}}
         </td>
         <td>
-          [1] is 'val_2'
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          [1] is 'val_2' 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getAllExpandedArguments
         </td>
@@ -90,13 +99,16 @@
           {{#invoke:Diagnostics/LuaCommon|getAllExpandedArguments |val_1|val_2|val_3}}
         </td>
         <td>
-          1:val_1;2:val_2;3:val_3;
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1:val_1;2:val_2;3:val_3; 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getAllExpandedArgs;key_is_int
         </td>
@@ -104,13 +116,16 @@
           {{#invoke:Diagnostics/LuaCommon|getAllExpandedArguments_int_key|1=a}}
         </td>
         <td>
-          a
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          a 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           preprocess;redundant_keys
         </td>
@@ -118,13 +133,16 @@
           {{#invoke:Diagnostics/LuaCommon|preprocess_ifeq_as_yn |val_1|val_1|when_true_val=y1|when_false_val=n1|when_true_val=y2}}
         </td>
         <td>
-          y2
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          y2 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           expandTemplate
         </td>
@@ -132,13 +150,16 @@
           {{#invoke:Diagnostics/LuaCommon|expandTemplate|val_1|val_2}}
         </td>
         <td>
-          arg_1 is val_1; arg_2 is val_2
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          arg_1 is val_1; arg_2 is val_2 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           expandTemplate; PHP bool; true -&gt; 1 false -&gt; ""
         </td>
@@ -146,13 +167,16 @@
           {{#invoke:Diagnostics/LuaCommon|expandTemplate_bool}}
         </td>
         <td>
-          bool_true is "1"; bool_false is "";
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          bool_true is "1"; bool_false is ""; 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           callParserFunction
         </td>
@@ -160,13 +184,16 @@
           {{#invoke:Diagnostics/LuaCommon|callParserFunction|urlencode|abc}}
         </td>
         <td>
-          abc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          abc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isSubsting;false
         </td>
@@ -174,13 +201,16 @@
           {{#invoke:Diagnostics/LuaCommon|isSubsting}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isSubsting;true
         </td>
@@ -188,13 +218,16 @@
           {{safesubst:#invoke:Diagnostics/LuaCommon|isSubsting}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getFrameTitle_current
         </td>
@@ -202,13 +235,16 @@
           {{#invoke:Diagnostics/LuaCommon|getFrameTitle_current}}
         </td>
         <td>
-          Module:Diagnostics/LuaCommon
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Module:Diagnostics/LuaCommon 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getFrameTitle_parent
         </td>
@@ -216,13 +252,16 @@
           {{Diagnostics/LuaCommon/getFrameTitle_parent}}
         </td>
         <td>
-          Template:Diagnostics/LuaCommon/getFrameTitle parent
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Template:Diagnostics/LuaCommon/getFrameTitle parent 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getFrameTitle_parent.upper
         </td>
@@ -230,13 +269,16 @@
           {{diagnostics/LuaCommon/getFrameTitle_parent}}
         </td>
         <td>
-          Template:Diagnostics/LuaCommon/getFrameTitle parent
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Template:Diagnostics/LuaCommon/getFrameTitle parent 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           newChildFrame.title
         </td>
@@ -244,13 +286,16 @@
           {{#invoke:Diagnostics/LuaCommon|newChildFrame_titled}}
         </td>
         <td>
-          title:Title0; arg1:v1
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          title:Title0; arg1:v1 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           newChildFrame.title
         </td>
@@ -258,13 +303,16 @@
           {{#invoke:Diagnostics/LuaCommon|newChildFrame_untitled}}
         </td>
         <td>
-          title:Module:Diagnostics/LuaCommon; arg1:v1
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          title:Module:Diagnostics/LuaCommon; arg1:v1 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           preprocess_args;frame is current
         </td>
@@ -272,13 +320,16 @@
           {{#invoke:Diagnostics/LuaCommon|preprocess_args_current|match|y|n}}
         </td>
         <td>
-          y
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          y 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           preprocess_args;frame is parent
         </td>
@@ -286,13 +337,16 @@
           {{Diagnostics/LuaCommon/preprocess_args_parent|match|y|n}}
         </td>
         <td>
-          y
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          y 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           preprocess calling Module functions should not call them twice; fails if onceonce
         </td>
@@ -300,10 +354,10 @@
           {{#invoke:Diagnostics/LuaCommon|preprocess_nested_main}}
         </td>
         <td>
-          once
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          once 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>

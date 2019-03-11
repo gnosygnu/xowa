@@ -22,7 +22,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/MessageLibrary.html" id="xolnki_2" title="Module:Diagnostics/MessageLibrary">Module:Diagnostics/MessageLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/MessageLibrary" id="xolnki_2" title="Module:Diagnostics/MessageLibrary">Module:Diagnostics/MessageLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>MessageLibrary.php</b> and <b>mw.message.lua</b>
@@ -45,19 +45,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           init_message_for_lang (via getDefaultLanguage)
         </td>
         <td>
           {{#invoke:Diagnostics/MessageLibrary|getDefaultLanguage}}
         </td>
         <td>
-          en
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          en 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           plain
         </td>
@@ -65,13 +71,16 @@
           {{#invoke:Diagnostics/MessageLibrary|plain|mainpage}}
         </td>
         <td>
-          Main Page
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Main Page 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           plain; params
         </td>
@@ -79,13 +88,16 @@
           {{#invoke:Diagnostics/MessageLibrary|plain|redirectedfrom|A}}
         </td>
         <td>
-          (Redirected from A)
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          (Redirected from A) 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           exists; true
         </td>
@@ -93,13 +105,16 @@
           {{#invoke:Diagnostics/MessageLibrary|check|exists|sun}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           exists; false
         </td>
@@ -107,13 +122,16 @@
           {{#invoke:Diagnostics/MessageLibrary|check|exists|sunx}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isBlank; false
         </td>
@@ -121,13 +139,16 @@
           {{#invoke:Diagnostics/MessageLibrary|check|isBlank|sun}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isDisabled; false
         </td>
@@ -135,13 +156,22 @@
           {{#invoke:Diagnostics/MessageLibrary|check|isDisabled|sun}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: red;'>fail:<br>
+          'Sun</span>
+<pre>
+<span style='color: red;'>'<br>
+'Dim.
+ '</span>
+</pre>
+        </td>
         <td>
           inLanguage
         </td>
@@ -149,13 +179,16 @@
           {{#invoke:Diagnostics/MessageLibrary|plain_inLanguage|fr|sun}}
         </td>
         <td>
-          Dim.
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Sun 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           rawMessage_toString
         </td>
@@ -163,10 +196,10 @@
           {{#invoke:Diagnostics/MessageLibrary|plain_rawMessage|a$1c|b}}
         </td>
         <td>
-          abc
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          abc 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>

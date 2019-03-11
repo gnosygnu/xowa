@@ -22,7 +22,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/LanguageLibrary.html" id="xolnki_2" title="Module:Diagnostics/LanguageLibrary">Module:Diagnostics/LanguageLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/LanguageLibrary" id="xolnki_2" title="Module:Diagnostics/LanguageLibrary" class="xowa-visited">Module:Diagnostics/LanguageLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>LanguageLibrary.php</b> and <b>mw.language.lua</b>
@@ -45,19 +45,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           getContLangCode (by getContentLanguage)
         </td>
         <td>
           {{#invoke:Diagnostics/LanguageLibrary|getContLangCode}}
         </td>
         <td>
-          en
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          en 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isKnownLanguageTag; true
         </td>
@@ -65,13 +71,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isKnownLanguageTag|en}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isKnownLanguageTag; false
         </td>
@@ -79,13 +88,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isKnownLanguageTag|xyz}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isValidCode; true
         </td>
@@ -93,13 +105,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isValidCode|en}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isValidCode; false
         </td>
@@ -107,13 +122,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isValidCode|a[b}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isValidBuiltInCode; true
         </td>
@@ -121,13 +139,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isValidBuiltInCode|en}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isValidBuiltInCode; false
         </td>
@@ -135,13 +156,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isValidBuiltInCode|a#b}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           fetchLanguageName; code only
         </td>
@@ -149,13 +173,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|fetchLanguageName|en|en}}
         </td>
         <td>
-          English
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          English 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           fetchLanguageNames_get
         </td>
@@ -163,13 +190,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|fetchLanguageNames_get|fr}}
         </td>
         <td>
-          French
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          français 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           new
         </td>
@@ -177,13 +207,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|new_lang_code|fr}}
         </td>
         <td>
-          fr
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          fr 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           formatNum; en
         </td>
@@ -191,13 +224,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|formatNum|1234}}
         </td>
         <td>
-          1,234
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1,234 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           parseFormatteNum; en
         </td>
@@ -205,13 +241,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|parseFormattedNum|1,234}}
         </td>
         <td>
-          1,234
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          1,234 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           formatDate via pcall; y;
         </td>
@@ -219,13 +258,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|formatDate_valid|Y-m-d|2014-03-25}}
         </td>
         <td>
-          y
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          y 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           formatDate via pcall; n;
         </td>
@@ -233,13 +275,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|formatDate_valid|Y-m-d|fail}}
         </td>
         <td>
-          n
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          n 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           convertGrammar
         </td>
@@ -247,13 +292,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|convertGrammar|fi|talo|elative}}
         </td>
         <td>
-          talosta
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          talosta 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isRTL; en
         </td>
@@ -261,13 +309,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isRTL|en}}
         </td>
         <td>
-          false
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          false 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           isRTL; ar
         </td>
@@ -275,13 +326,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|isRTL|ar}}
         </td>
         <td>
-          true
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          true 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           format_durations_hms
         </td>
@@ -289,13 +343,16 @@
           {{#invoke:Diagnostics/LanguageLibrary|format_durations_hms|123}}
         </td>
         <td>
-          2 minutes and 3 seconds
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          2 minutes and 3 seconds 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           get_duration_intervals_hms
         </td>
@@ -303,10 +360,10 @@
           {{#invoke:Diagnostics/LanguageLibrary|get_duration_intervals_hms|123}}
         </td>
         <td>
-          ,2,3
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          ,2,3 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>

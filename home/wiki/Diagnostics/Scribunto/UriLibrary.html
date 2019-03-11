@@ -22,7 +22,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UriLibrary.html" id="xolnki_2" title="Module:Diagnostics/UriLibrary">Module:Diagnostics/UriLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UriLibrary" id="xolnki_2" title="Module:Diagnostics/UriLibrary">Module:Diagnostics/UriLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>UriLibrary.php</b> and <b>mw.uri.lua</b>
@@ -45,19 +45,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           anchorEncode
         </td>
         <td>
           {{#invoke:Diagnostics/UriLibrary|anchorEncode|[irc://a b c]}}
         </td>
         <td>
-          b_c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          b_c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           localUrl
         </td>
@@ -65,13 +71,16 @@
           {{#invoke:Diagnostics/UriLibrary|localUrl|a&amp;b! c}}
         </td>
         <td>
-          /wiki/A%26b!_c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          /wiki/A%26b!_c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           fullUrl
         </td>
@@ -79,13 +88,16 @@
           {{#invoke:Diagnostics/UriLibrary|fullUrl|a&amp;b! c}}
         </td>
         <td>
-          //home/wiki/A%26b!_c
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          //home/wiki/A%26b!_c 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           defaultUrl
         </td>
@@ -93,10 +105,10 @@
           {{#invoke:Diagnostics/UriLibrary|defaultUrl}}
         </td>
         <td>
-          //home/wiki/Diagnostics/Scribunto/UriLibrary
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          //home/wiki/Diagnostics/Scribunto/UriLibrary 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>

@@ -22,7 +22,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleLibrary.html" id="xolnki_2" title="Module:Diagnostics/TitleLibrary">Module:Diagnostics/TitleLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleLibrary" id="xolnki_2" title="Module:Diagnostics/TitleLibrary">Module:Diagnostics/TitleLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>TitleLibrary.php</b> and <b>mw.title.lua</b>
@@ -45,19 +45,25 @@
       </tr>
       <tr>
         <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
           newTitle
         </td>
         <td>
           {{#invoke:Diagnostics/TitleLibrary|newTitle|Main_Page}}
         </td>
         <td>
-          Main Page
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Main Page 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           newTitle; namespace arg
         </td>
@@ -65,13 +71,16 @@
           {{#invoke:Diagnostics/TitleLibrary|newTitle|Contents|Help}}
         </td>
         <td>
-          Help:Contents
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Help:Contents 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           makeTitle
         </td>
@@ -79,13 +88,16 @@
           {{#invoke:Diagnostics/TitleLibrary|makeTitle|Help|Contents|Overview|home}}
         </td>
         <td>
-          home:Help:Contents#Overview
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          home:Help:Contents#Overview 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           fullUrl
         </td>
@@ -93,13 +105,16 @@
           {{#invoke:Diagnostics/TitleLibrary|fullUrl|Help|Contents}}
         </td>
         <td>
-          //home/wiki/Help:Contents
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          //home/wiki/Help:Contents 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
       <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
         <td>
           getCurrentTitle
         </td>
@@ -107,10 +122,10 @@
           {{#invoke:Diagnostics/TitleLibrary|getCurrentTitle}}
         </td>
         <td>
-          Diagnostics/Scribunto/TitleLibrary
-        </td>
-        <td>
-          <span style='color: green;'>pass</span>
+          Diagnostics/Scribunto/TitleLibrary 
+          <p>
+            <br>
+          </p>
         </td>
       </tr>
     </table>
