@@ -56,7 +56,7 @@
         <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath=""
 		  srcdir   ="${root_dir}/src/400_xowa"
 		  destdir  ="${root_dir}/src/400_xowa/bin"
-		  classpath="${root_dir}/src/lib/junit.jar:${root_dir}/src/100_core/bin:${root_dir}/src/110_gfml/bin:${root_dir}/src/140_dbs/bin:${root_dir}/src/150_gfui/bin:${root_dir}/src/gplx.gflucene/bin:${root_dir}/bin/any/java/luaj/luaj_xowa.jar:${root_dir}/bin/any/java/jtidy/jtidy_xowa.jar:${root_dir}/bin/any/java/icu4j/icu4j-4_8.jar">
+		  classpath="${root_dir}/src/lib/junit.jar:${root_dir}/src/100_core/bin:${root_dir}/src/110_gfml/bin:${root_dir}/src/140_dbs/bin:${root_dir}/src/150_gfui/bin:${root_dir}/src/gplx.gflucene/bin:${root_dir}/bin/any/java/luaj/luaj_xowa.jar:${root_dir}/bin/any/java/jtidy/jtidy_xowa.jar:${root_dir}/bin/any/java/icu4j/icu4j-57_1.jar">
           <compilerarg line="-encoding utf-8"/>
           <include name="**/*.java"/>
         </javac>
