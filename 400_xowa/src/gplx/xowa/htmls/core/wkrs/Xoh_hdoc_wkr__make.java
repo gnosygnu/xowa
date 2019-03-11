@@ -72,8 +72,16 @@ public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
 		bfr.Add_mid(src, img_data.Src_end(), data.Src_end());
 	}
 	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_data data) {
-		// <gallery> section; add entire src, and enable gallery flage
-		bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
+		// <gallery> section; loop itms and call wkr__img on each image while concatenating anything inbetween
+		int prv = data.Src_bgn();
+		int len = data.Itms__len();
+		for (int i = 0; i < len; i++) {
+			gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_itm_data itm = data.Itms__get_at(i);
+			bfr.Add_mid(src, prv, itm.Img_data().Src_bgn());
+			prv = itm.Img_data().Src_end();
+			wkr__img.Init_by_parse(bfr, hpg, hctx, src, (Xoh_img_data)itm.Img_data());
+		}
+		bfr.Add_mid(src, prv, data.Src_end());
 		hpg.Xtn__gallery_exists_y_();
 	}
 	public boolean Process_parse(Xoh_data_itm data) {

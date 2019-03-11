@@ -180,6 +180,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 		bfr				   .Add_int_variable(html_uid);
 		bfr.Add_byte_pipe().Add_int_variable(lnki_exec_tid);
 		bfr.Add_byte_pipe().Add(lnki_wiki_abrv);
+		bfr.Add_byte_pipe().Add(lnki_ttl);
 		bfr.Add_byte_pipe().Add_int_variable(lnki_type);
 		bfr.Add_byte_pipe().Add_double(lnki_upright);
 		bfr.Add_byte_pipe().Add_int_variable(lnki_upright_patch);

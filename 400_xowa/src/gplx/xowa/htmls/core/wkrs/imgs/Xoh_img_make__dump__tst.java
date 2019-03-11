@@ -33,7 +33,7 @@ public class Xoh_img_make__dump__tst {
 		, expd = "<a href='/wiki/File:A%C3%A9_b.png' class='image' title='abc' xowa_title='Aé_b.png'><img id='xoimg_0' data-xowa-title='Aé_b.png' data-xoimg='0|220|110|0.5|-1|-1' src='' width='0' height='0' alt='abc'></a>"
 		;
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(expd)
-			.Imgs__add("en.w", "A.png", Xop_lnki_type.Id_null, 0.5, 220, 110, -1, -1)
+			.Imgs__add("en.w", "Aé_b.png", Xop_lnki_type.Id_null, 0.5, 220, 110, -1, -1)
 		);
 	}
 	@Test   public void Media_div() {
@@ -60,7 +60,7 @@ public class Xoh_img_make__dump__tst {
 				, "</div>"
 				, "</div>");
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(expd)
-			.Imgs__add("c", "A.png", Xop_lnki_type.Tid_orig_known, -1, 220, -1, -1, -1)
+			.Imgs__add("c", "A.ogv", Xop_lnki_type.Tid_orig_known, -1, 220, -1, -1, -1)
 		);
 	}
 //		@Test   public void Html_exists__y__cache() {

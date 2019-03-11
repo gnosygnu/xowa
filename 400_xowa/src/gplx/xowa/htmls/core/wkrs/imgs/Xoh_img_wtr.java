@@ -84,7 +84,10 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		this.fsdb_itm = hpg.Img_mgr().Make_img(data.Img_is_gallery());
 
 		byte[] file_ttl_bry = data.Anch_xo_ttl().Val();
-		byte[] lnki_ttl = Xoa_ttl.Replace_spaces(Gfo_url_encoder_.Href_quotes.Decode(data.Img_src().File_ttl_bry()));	// NOTE: must decode for fsdb.lnki_ttl as well as xowa_title; EX: A%C3%A9b -> A�b
+		byte[] img_src_bry_temp = data.Img_src().File_ttl_bry();
+		byte[] lnki_ttl = img_src_bry_temp == null  // img_src will be empty for htxt; use file_ttl_bry instead; EX: '<img src="">' DATE:2019-03-10
+			? file_ttl_bry 
+			: Xoa_ttl.Replace_spaces(Gfo_url_encoder_.Href_quotes.Decode(img_src_bry_temp));	// NOTE: must decode for fsdb.lnki_ttl as well as xowa_title; EX: A%C3%A9b -> A�b
 
 		boolean write_xowa_file_title = true;
 		if		(data.Img_pgbnr().Exists()) {
