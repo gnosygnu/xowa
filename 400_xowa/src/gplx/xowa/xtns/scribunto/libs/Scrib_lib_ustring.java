@@ -54,12 +54,10 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		boolean plain             = args.Cast_bool_or_n(3);
 
 		// init text vars
-		byte[] text_bry = Bry_.new_u8(text_str);
-		int text_bry_len = text_bry.length;
-		Utf16_mapper text_map = new Utf16_mapper(text_str, text_bry, text_bry_len); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
+		Unicode_string text_ucs = Unicode_string_.New(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
 
 		// convert bgn from base_1 to base_0
-		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_map.Len_in_codes());
+		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.Len_codes());
 
 		/*
 		int offset = 0;
@@ -81,33 +79,33 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		// if plain, just do literal match of find and exit
 		if (plain) {
 			// find pos by literal match
-			byte[] find_bry = Bry_.new_u8(find_str);
-			int pos = Bry_find_.Find_fwd(text_bry, find_bry, text_map.Get_byte_for_code_or_fail(bgn_as_codes));
+			Unicode_string find_ucs = Unicode_string_.New(find_str);
+			byte[] find_bry = find_ucs.Src_bytes();
+			int pos = Bry_find_.Find_fwd(text_ucs.Src_bytes(), find_bry, text_ucs.Pos_codes_to_bytes(bgn_as_codes));
 
 			// nothing found; return empty
 			if (pos == Bry_find_.Not_found)
 				return rslt.Init_ary_empty();
 
 			// bgn: convert pos from bytes back to codes; also adjust for base1
-			int bgn = text_map.Get_code_for_byte_or_fail(pos) + Base1;
+			int bgn = text_ucs.Pos_bytes_to_codes(pos) + Base1;
 
 			// end: add find.Len_in_codes and adjust end for PHP/LUA
-			Utf16_mapper find_map = new Utf16_mapper(find_str, find_bry, find_bry.length);
-			int end = bgn + find_map.Len_in_codes() - End_adj;
+			int end = bgn + find_ucs.Len_codes() - End_adj;
 
 			return rslt.Init_many_objs(bgn, end);
 		}
 
 		// run regex
 		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
-		Regx_match[] regx_rslts = Run_regex_or_null(text_map, regx_converter, find_str, bgn_as_codes);
+		Regx_match[] regx_rslts = Run_regex_or_null(text_ucs, regx_converter, find_str, bgn_as_codes);
 		if (regx_rslts.length == 0) return rslt.Init_ary_empty();
 
 		// add to tmp_list
 		Regx_match match = regx_rslts[0]; // NOTE: take only 1st result; DATE:2014-08-27
 		List_adp tmp_list = List_adp_.New();
-		tmp_list.Add(text_map.Get_code_for_char_or_fail(match.Find_bgn()) + Scrib_lib_ustring.Base1);
-		tmp_list.Add(text_map.Get_code_for_char_or_fail(match.Find_end()) + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
+		tmp_list.Add(text_ucs.Pos_chars_to_codes(match.Find_bgn()) + Scrib_lib_ustring.Base1);
+		tmp_list.Add(text_ucs.Pos_chars_to_codes(match.Find_end()) + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
 		AddCapturesFromMatch(tmp_list, match, text_str, regx_converter.Capt_ary(), false);
 		return rslt.Init_many_list(tmp_list);
 	}
@@ -120,13 +118,12 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		// validate / adjust
 		if (text_str == null) // if no text_str is passed, do not fail; return empty; EX:d:changed; DATE:2014-02-06 
 			return rslt.Init_many_list(List_adp_.Noop);
-		byte[] text_bry = Bry_.new_u8(text_str); int text_bry_len = text_bry.length;
-		Utf16_mapper text_map = new Utf16_mapper(text_str, text_bry, text_bry_len); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
-		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_map.Len_in_codes());
+		Unicode_string text_ucs = Unicode_string_.New(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
+		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.Len_codes());
 
 		// run regex
 		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
-		Regx_match[] regx_rslts = Run_regex_or_null(text_map, regx_converter, find_str, bgn_as_codes);
+		Regx_match[] regx_rslts = Run_regex_or_null(text_ucs, regx_converter, find_str, bgn_as_codes);
 		if (regx_rslts.length == 0) return rslt.Init_null();	// return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02; confirmed with en.d:民; DATE:2015-01-30
 
 		// TOMBSTONE: add 1st match only; do not add all; PAGE:en.d:действительное_причастие_настоящего_времени DATE:2017-04-23
@@ -141,7 +138,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	}
 	public boolean Gmatch_init(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// String text = Scrib_kv_utl_.Val_to_str(values, 0);
-		byte[] regx = args.Pull_bry(1);
+		String regx = args.Pull_str(1);
 		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
 		String pcre = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_null);
 		return rslt.Init_many_objs(pcre, regx_converter.Capt_ary());
@@ -181,13 +178,13 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			bgn_as_codes = 0;
 		return bgn_as_codes;
 	}
-	private Regx_match[] Run_regex_or_null(Utf16_mapper text_map, Scrib_regx_converter regx_converter, String find_str, int bgn_as_codes) {
+	private Regx_match[] Run_regex_or_null(Unicode_string text_ucs, Scrib_regx_converter regx_converter, String find_str, int bgn_as_codes) {
 		// convert regex from lua to java
-		find_str = regx_converter.patternToRegex(Bry_.new_u8(find_str), Scrib_regx_converter.Anchor_G);
+		find_str = regx_converter.patternToRegex(find_str, Scrib_regx_converter.Anchor_G);
 
 		// run regex
 		Regx_adp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), find_str);
-		return regx_adp.Match_all(text_map.Src_str(), text_map.Get_char_for_code_or_fail(bgn_as_codes));	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
+		return regx_adp.Match_all(text_ucs.Src_string(), text_ucs.Pos_codes_to_chars(bgn_as_codes));	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
 	}
 	private void AddCapturesFromMatch(List_adp tmp_list, Regx_match rslt, String text, Keyval[] capts, boolean op_is_match) {// NOTE: this matches behavior in UstringLibrary.php!addCapturesFromMatch
 		int capts_len = capts == null ? 0 : capts.length;

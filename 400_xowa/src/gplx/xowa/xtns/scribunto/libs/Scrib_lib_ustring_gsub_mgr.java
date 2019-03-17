@@ -32,7 +32,7 @@ class Scrib_lib_ustring_gsub_mgr {
 
 		// get @pattern; NOTE: sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
 		String regx = args.Xstr_str_or_null(1);
-		regx = regx_converter.patternToRegex(Bry_.new_u8(regx), Scrib_regx_converter.Anchor_pow);
+		regx = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_pow);
 
 		// get @repl
 		Object repl_obj = args.Cast_obj_or_null(2);

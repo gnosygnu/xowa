@@ -50,6 +50,9 @@ public class Scrib_regx_converter_tst {
 	@Test   public void Mbcs() {	// PURPOSE: handle regex for multi-byte chars; PAGE:en.d:どう; DATE:2016-01-22; .NET.REGX:fails 
 		fxt.Test_replace("𠀀"					, "[𠀀-𯨟]"	, "a", "a");
 	}
+	@Test   public void Invalid_range() {// PURPOSE: if range is invalid, take 1st char only; note range is multi-byte; ISSUE#:383; PAGE:en.d:dictionary DATE:2019-03-16
+		fxt.Test_parse("[ড়-য়]"	, "[ড়]"); // 2492-2479
+	}
 //		@Test   public void Brack_empty_all()	{fxt.Test_parse("[]"					, "(?:(*FAIL))");}
 //		@Test   public void Brack_empty_not()	{fxt.Test_parse("[^]"					, ".");}
 }
@@ -61,11 +64,11 @@ class Scrib_regx_converter_fxt {
 		}
 	}
 	public void Test_parse(String raw, String expd) {
-		under.patternToRegex(Bry_.new_u8(raw), Scrib_regx_converter.Anchor_G);
+		under.patternToRegex(raw, Scrib_regx_converter.Anchor_G);
 		Tfds.Eq(expd, under.Regx());
 	}
 	public void Test_replace(String text, String find, String replace, String expd) {
-		String regex_str = under.patternToRegex(Bry_.new_u8(find), Scrib_regx_converter.Anchor_G);
+		String regex_str = under.patternToRegex(find, Scrib_regx_converter.Anchor_G);
 		String actl = Regx_adp_.Replace(text, regex_str, replace);
 		Tfds.Eq(expd, actl);
 	}

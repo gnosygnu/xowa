@@ -19,6 +19,7 @@ public class Gftest {
 	private static final    Bry_bfr bfr = Bry_bfr_.New();
 	public static void Eq__ary(Object[] expd, Object[] actl, String msg_fmt, Object... msg_args)      {Eq__array(Type_ids_.Id__obj, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(boolean[] expd, boolean[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__bool, expd, actl, msg_fmt, msg_args);}
+	public static void Eq__ary(int[] expd, int[] actl)                                                      {Eq__array(Type_ids_.Id__int, expd, actl, "");}
 	public static void Eq__ary(int[] expd, int[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__int, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(long[] expd, long[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__long, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(byte[] expd, byte[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__byte, expd, actl, msg_fmt, msg_args);}

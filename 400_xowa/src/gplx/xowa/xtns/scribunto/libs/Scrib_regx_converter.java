@@ -14,27 +14,31 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.core.brys.fmtrs.*;
+import gplx.core.brys.fmtrs.*; import gplx.core.intls.*;
 import gplx.langs.regxs.*;
 public class Scrib_regx_converter {
-	private final    Hash_adp_bry percent_hash = Hash_adp_bry.cs(), brack_hash = Hash_adp_bry.cs();
 	private final    Scrib_regx_grp_mgr grp_mgr = new Scrib_regx_grp_mgr();
 	private final    Bry_bfr bfr = Bry_bfr_.New();
 	private Bry_bfr tmp_bfr;
 	private Bry_fmtr fmtr_balanced; private Bry_bfr bfr_balanced;
-	public Scrib_regx_converter() {Init();}
+	private final    Lua_cls_to_regx_map percent_map, brack_map;
+	public Scrib_regx_converter() {
+		percent_map = Lua_cls_matcher.Instance.Percent();
+		brack_map = Lua_cls_matcher.Instance.Brack();
+	}
 	public String Regx() {return regx;} private String regx;
 	public Keyval[] Capt_ary() {return grp_mgr.Capt__to_ary();}
 	public boolean Any_pos() {return any_pos;} private boolean any_pos;
 	public Regx_match[] Adjust_balanced(Regx_match[] rslts) {return grp_mgr.Adjust_balanced(rslts);}
-	public String patternToRegex(byte[] pat, byte[] anchor) {
+	public String patternToRegex(String pat_str, byte[] anchor) {
+		Unicode_string pat_ucs = Unicode_string_.New(pat_str);
 		// TODO.CACHE: if (!$this->patternRegexCache->has($cacheKey)) 
 		grp_mgr.Clear();
 		any_pos = false;
 		boolean q_flag = false;
-		
+
 		// bfr.Add_byte(Byte_ascii.Slash); // TOMBSTONE: do not add PHP "/" at start
-		int len = pat.length;
+		int len = pat_ucs.Len_codes();
 		int grps_len = 0;
 		int bct = 0;
 
@@ -42,7 +46,7 @@ public class Scrib_regx_converter {
 		for (int i = 0; i < len; i++) {
 			int i_end = i + 1;
 			q_flag = false; // must be reset; REF.MW:UstringLibrary.php|patternToRegex; DATE:2014-02-08
-			byte cur = pat[i];
+			int cur = pat_ucs.Val_codes(i);
 			switch (cur) {
 				case Byte_ascii.Pow:
 					q_flag = i != 0;
@@ -59,7 +63,7 @@ public class Scrib_regx_converter {
 					int grp_idx = grp_mgr.Capt__len() + 1;
 
 					// check for "()"; enables anypos flag
-					boolean is_empty_capture = pat[i + 1] == Byte_ascii.Paren_end;
+					boolean is_empty_capture = pat_ucs.Val_codes(i + 1) == Byte_ascii.Paren_end;
 					if (is_empty_capture)
 						any_pos = true;
 					grp_mgr.Capt__add__real(grp_idx, is_empty_capture);
@@ -77,19 +81,19 @@ public class Scrib_regx_converter {
 					i++;
 					if (i >= len)
 						throw Err_.new_wo_type("malformed pattern (ends with '%')");
-					Object percent_obj = percent_hash.Get_by_mid(pat, i, i + 1);
-					if (percent_obj != null) {
-						bfr.Add((byte[])percent_obj);
+					byte[] percent_bry = percent_map.Get_or_null(pat_ucs.Val_codes(i));
+					if (percent_bry != null) {
+						bfr.Add(percent_bry);
 						q_flag = true;
 					}
 					else {
-						byte nxt = pat[i];
+						int nxt = pat_ucs.Val_codes(i);
 						switch (nxt) {
 							case Byte_ascii.Ltr_b:	// EX: "%b()"
 								i += 2;
 								if (i >= len) throw Err_.new_wo_type("malformed pattern (missing arguments to '%b')");
-								byte char_0 = pat[i - 1];
-								byte char_1 = pat[i];
+								int char_0 = pat_ucs.Val_codes(i - 1);
+								int char_1 = pat_ucs.Val_codes(i);
 								if (char_0 == char_1) {		// same char: easier regex; REF.MW: $bfr .= "{$d1}[^$d1]*$d1";
 									bfr.Add(Bry_bf0_seg_0);
 									Regx_quote(bfr, char_0);
@@ -109,18 +113,18 @@ public class Scrib_regx_converter {
 									synchronized (fmtr_balanced) {
 										++bct;
 										int balanced_idx = grp_mgr.Full__len();
-										fmtr_balanced.Bld_bfr(bfr_balanced, Int_.To_bry(bct), Byte_.Ary(char_0), Byte_.Ary(char_1), Int_.To_bry(balanced_idx + 1), Int_.To_bry(balanced_idx + 2));
+										fmtr_balanced.Bld_bfr(bfr_balanced, Int_.To_bry(bct), Utf16_.Encode_int_to_bry(char_0), Utf16_.Encode_int_to_bry(char_1), Int_.To_bry(balanced_idx + 1), Int_.To_bry(balanced_idx + 2));
 										grp_mgr.Capt__add__fake(2);
 										bfr.Add(bfr_balanced.To_bry_and_clear());
 									}
 								}
 								break;
 							case Byte_ascii.Ltr_f: {	// EX: lua frontier pattern; "%f[%a]"; DATE:2015-07-21
-								if (i + 1 >= len || pat[++i] != Byte_ascii.Brack_bgn)
+								if (i + 1 >= len || pat_ucs.Val_codes(++i) != Byte_ascii.Brack_bgn)
 									throw Err_.new_("scribunto", "missing '[' after %f in pattern at pattern character " + Int_.To_str(i_end));
 								// %f always followed by bracketed term; convert lua bracketed term to regex
 								if (tmp_bfr == null) tmp_bfr = Bry_bfr_.New();
-								i = bracketedCharSetToRegex(tmp_bfr, pat, i, len);
+								i = bracketedCharSetToRegex(tmp_bfr, pat_ucs, i, len);
 								byte[] re2 = tmp_bfr.To_bry_and_clear();
 								
 								// scrib has following comment: 'Because %f considers the beginning and end of the String to be \0, determine if $re2 matches that and take it into account with "^" and "$".'
@@ -148,7 +152,7 @@ public class Scrib_regx_converter {
 					}
 					break;
 				case Byte_ascii.Brack_bgn:
-					i = bracketedCharSetToRegex(bfr, pat, i, len);
+					i = bracketedCharSetToRegex(bfr, pat_ucs, i, len);
 					q_flag = true;
 					break;
 				case Byte_ascii.Brack_end:
@@ -163,12 +167,12 @@ public class Scrib_regx_converter {
 					break;
 			}
 			if (q_flag && i + 1 < len) {
-				byte tmp_b = pat[i + 1];
+				int tmp_b = pat_ucs.Val_codes(i + 1);
 				switch (tmp_b) {
 					case Byte_ascii.Star:
 					case Byte_ascii.Plus:
 					case Byte_ascii.Question:
-						bfr.Add_byte(tmp_b);
+						bfr.Add_byte((byte)tmp_b);
 						++i;
 						break;
 					case Byte_ascii.Dash:
@@ -184,35 +188,35 @@ public class Scrib_regx_converter {
 		regx = bfr.To_str_and_clear();
 		return regx;
 	}
-	private int bracketedCharSetToRegex(Bry_bfr bfr, byte[] pat, int i, int len) {
+	private int bracketedCharSetToRegex(Bry_bfr bfr, Unicode_string pat_ucs, int i, int len) {
 		bfr.Add_byte(Byte_ascii.Brack_bgn);
 		i++;
-		if (i < len && pat[i] == Byte_ascii.Pow) {	// ^
+		if (i < len && pat_ucs.Val_codes(i) == Byte_ascii.Pow) {	// ^
 			bfr.Add_byte(Byte_ascii.Pow);
 			i++;
 		}
-		for (int j = i; i < len && (j == i || pat[i] != Byte_ascii.Brack_end); i++) {
-			if (pat[i] == Byte_ascii.Percent) {
+		for (int j = i; i < len && (j == i || pat_ucs.Val_codes(i) != Byte_ascii.Brack_end); i++) {
+			if (pat_ucs.Val_codes(i) == Byte_ascii.Percent) {
 				i++;
 				if (i >= len) {
 					break;
 				}
-				Object brack_obj = brack_hash.Get_by_mid(pat, i, i + 1);
-				if (brack_obj != null)
-					bfr.Add((byte[])brack_obj);
+				byte[] brack_bry = brack_map.Get_or_null(pat_ucs.Val_codes(i));
+				if (brack_bry != null)
+					bfr.Add(brack_bry);
 				else
-					Regx_quote(bfr, pat[i]);
+					Regx_quote(bfr, pat_ucs.Val_codes(i));
 			}
-			else if (i + 2 < len && pat[i + 1] == Byte_ascii.Dash && pat[i + 2] != Byte_ascii.Brack_end && pat[i + 2] != Byte_ascii.Hash) {
-				if (pat[i] <= pat[i + 2]) {
-					Regx_quote(bfr, pat[i]);
+			else if (i + 2 < len && pat_ucs.Val_codes(i + 1) == Byte_ascii.Dash && pat_ucs.Val_codes(i + 2) != Byte_ascii.Brack_end && pat_ucs.Val_codes(i + 2) != Byte_ascii.Hash) {
+				if (pat_ucs.Val_codes(i) <= pat_ucs.Val_codes(i + 2)) {
+					Regx_quote(bfr, pat_ucs.Val_codes(i));
 					bfr.Add_byte(Byte_ascii.Dash);
-					Regx_quote(bfr, pat[i + 2]);
+					Regx_quote(bfr, pat_ucs.Val_codes(i + 2));
 				}
 				i += 2;
 			}
 			else {
-				Regx_quote(bfr, pat[i]);
+				Regx_quote(bfr, pat_ucs.Val_codes(i));
 			}
 		}
 		if (i > len) throw Err_.new_wo_type("Missing close-bracket for character set beginning at pattern character $nxt_pos");
@@ -233,12 +237,12 @@ public class Scrib_regx_converter {
 			}
 		return i;
 	}
-	private void Regx_quote(Bry_bfr bfr, byte b) {
-		if (Regx_char(b)) bfr.Add_byte(Byte_ascii.Backslash);
-		bfr.Add_byte(b);
+	private void Regx_quote(Bry_bfr bfr, int code) {
+		if (Regx_char(code)) bfr.Add_byte(Byte_ascii.Backslash);
+		bfr.Add_u8_int(code);
 	}
-	private boolean Regx_char(byte b) {
-		switch (b) {
+	private boolean Regx_char(int code) {
+		switch (code) {
 			case Byte_ascii.Dot: case Byte_ascii.Slash: case Byte_ascii.Plus: case Byte_ascii.Star: case Byte_ascii.Question:
 			case Byte_ascii.Pow: case Byte_ascii.Dollar: case Byte_ascii.Eq: case Byte_ascii.Bang: case Byte_ascii.Pipe:
 			case Byte_ascii.Colon: case Byte_ascii.Dash:
@@ -257,7 +261,10 @@ public class Scrib_regx_converter {
 	, Bry_star_question = Bry_.new_a7("*?")	// was *?
 	;
 	public static final    byte[] Anchor_null = null, Anchor_G = Bry_.new_a7("\\G"), Anchor_pow = Bry_.new_a7("^");
-	private void Init() {
+}
+class Lua_cls_matcher {
+        public static final    Lua_cls_matcher Instance = new Lua_cls_matcher();
+	Lua_cls_matcher() {
 		String regx_w = "\\w"; // JRE.7: \w not support in JRE.6; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
 		String regx_W = "\\W"; // JRE.7: \w not support in JRE.6; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
 		Init_itm(Bool_.Y, "a", "\\p{L}");
@@ -288,15 +295,32 @@ public class Scrib_regx_converter {
 		Init_itm(Bool_.N, "X", "\\x00-\\x2f\\x3a-\\x40\\x47-\\x60\\x67-\\x{ff0f}\\x{ff1a}-\\x{ff20}\\x{ff27}-\\x{ff40}\\x{ff47}-\\x{10ffff}");
 		Init_itm(Bool_.N, "Z", "\\x01-\\x{10ffff}");
 	}
+	public Lua_cls_to_regx_map Percent() {return percent_map;} private final    Lua_cls_to_regx_map percent_map = new Lua_cls_to_regx_map();
+	public Lua_cls_to_regx_map Brack() {return brack_map;} private final    Lua_cls_to_regx_map brack_map = new Lua_cls_to_regx_map();
+
 	private void Init_itm(boolean add_to_percent_hash, String lua, String php) {
-		byte[] lua_bry = Bry_.new_a7(lua);
+		int lua_len = String_.Len(lua);
+		if (lua_len != 1) throw Err_.new_wo_type("lua must be 1 char only", "lua", lua);
+		int lua_code = (int)String_.CharAt(lua, 0);
+		if (lua_code < Byte_ascii.Ltr_A || lua_code > Byte_ascii.Ltr_z) throw Err_.new_wo_type("lua must be between A and z", "lua", lua);
+
 		byte[] php_bry = Bry_.new_a7(php);
 		if (add_to_percent_hash) {
-			percent_hash.Add_bry_obj(lua_bry, php_bry);
-			brack_hash.Add_bry_obj(lua_bry, php_bry);	// always add to brack_hash; brack_hash = percent_hash + other characters
+			percent_map.Set(lua_code, php_bry);
+			brack_map.Set(lua_code, php_bry);  // always add to brack_hash; brack_hash = percent_hash + other characters
 		}
 		else {
-			brack_hash.Add_if_dupe_use_nth(lua_bry, php_bry);	// replace percent_hash definitions
+			brack_map.Set(lua_code, php_bry); // replace percent_hash definitions
 		}
+	}
+}
+class Lua_cls_to_regx_map {
+	private static final    int MAX = Byte_ascii.Max_7_bit;
+	private final    byte[][] map = new byte[MAX][];
+	public byte[] Get_or_null(int code) {
+		return code < MAX ? map[code] : null;
+	}
+	public void Set(int code, byte[] val) {
+		map[code] = val;
 	}
 }

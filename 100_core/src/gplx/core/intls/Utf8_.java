@@ -52,6 +52,7 @@ public class Utf8_ {
 			default: throw Err_.new_wo_type("invalid initial utf8 byte", "byte", b);
 		}
 	}
+	public static int Len_of_char_by_bytes_len(int v) {return v == 4 ? 2 : 1;} // 1 to 3 UTF bytes will encode up to 65,536 and fit in 1 char
 	public static byte[] Get_char_at_pos_as_bry(byte[] bry, int pos) {
 		int len = Len_of_char_by_1st_byte(bry[pos]);
 		return Bry_.Mid(bry, pos, pos + len);
