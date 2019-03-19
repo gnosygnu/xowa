@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-public class Cite_xtn_mgr extends Xox_mgr_base {
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final    byte[] XTN_KEY = Bry_.new_a7("cite");
-	@Override public Xox_mgr Xtn_clone_new() {return new Cite_xtn_mgr();}
+package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
+public class Gfh_atr_itm {
+	public Gfh_atr_itm(byte[] key, byte[] val) {
+		this.key = key;
+		this.val = val;
+	}
+	public byte[] Key() {return key;} private final    byte[] key;
+	public byte[] Val() {return val;} private final    byte[] val;
+	public static Gfh_atr_itm New(byte[] key, String val) {return new Gfh_atr_itm(key, Bry_.new_u8(val));}
+	public static Gfh_atr_itm New(byte[] key, byte[] val) {return new Gfh_atr_itm(key, val);}
 }

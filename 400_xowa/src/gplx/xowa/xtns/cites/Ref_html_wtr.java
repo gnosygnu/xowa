@@ -19,22 +19,20 @@ import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Ref_html_wtr {
 	private final    Xoh_ref_list_fmtr grp_list_fmtr = new Xoh_ref_list_fmtr();
-	private final    Bfr_arg__bry_fmtr grp_key_fmtr = Bfr_arg_.New_bry_fmtr__null(), itm_id_fmtr = Bfr_arg_.New_bry_fmtr__null(), grp_id_fmtr = Bfr_arg_.New_bry_fmtr__null();
+	private final    Bfr_arg__bry_fmtr itm_id_fmtr = Bfr_arg_.New_bry_fmtr__null(), grp_id_fmtr = Bfr_arg_.New_bry_fmtr__null();
+	private final    Cite_mgr mgr;
 	public Ref_html_wtr(Xowe_wiki wiki) {
 		cfg = Ref_html_wtr_cfg.new_();
+		mgr = new Cite_mgr(wiki);
 	}
 	public void Xnde_ref(Xoh_wtr_ctx opts, Bry_bfr bfr, byte[] src, Xop_xnde_tkn xnde) {
 		Ref_nde itm = (Ref_nde)xnde.Xnde_xtn();
 		if (itm == null) return;
 		if (itm.Follow_y()) return;	// NOTE: "follow" is always appended to preceding ref; will never generate its own ^ a  
-		byte[] itm_group = itm.Group();
-		boolean itm_group_is_default = Bry_.Eq(itm_group, Bry_.Empty) || Bry_.Eq(itm_group, Cite_xtn_mgr.Group_default_name());	// do not show "lower-alpha"; PAGE:en.w:Moon; DATE:2014-07-21
 		cfg.Itm_html().Bld_bfr_many(bfr
 			, Itm_id(itm, true)
 			, Grp_id(itm)
-			, itm_group_is_default
-			? itm.Idx_major() + 1
-			: (Object)grp_key_fmtr.Set(cfg.Itm_grp_text(), itm.Group(), itm.Idx_major() + 1)
+			, mgr.getLinkLabel(itm.Idx_major() + 1, itm.Group())
 			);
 	}
 	public Ref_html_wtr_cfg Cfg() {return cfg;} private Ref_html_wtr_cfg cfg;

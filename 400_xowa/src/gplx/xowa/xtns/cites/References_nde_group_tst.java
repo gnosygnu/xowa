@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class References_nde_group_tst {	
-	@Before public void init() {fxt.Clear_ref_mgr();} private final Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Clear_ref_mgr();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Basic() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
@@ -39,10 +39,10 @@ public class References_nde_group_tst {
 			, ""
 			));
 	}
-	@Test  public void Lower_alpha_is_ignored() {
+	@Test  public void Unknown() {
 		String expd = 
 			String_.Concat_lines_nl_skip_last
-			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>"	// note:do not show lower-alpha; DATE:2014-07-21
+			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[unknown 1]</a></sup>"
 			, "<sup id=\"cite_ref-1\" class=\"reference\"><a href=\"#cite_note-1\">[1]</a></sup>"
 			, "<ol class=\"references\">"
 			, "<li id=\"cite_note-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-0\">^</a></span> <span class=\"reference-text\">x</span></li>"
@@ -53,9 +53,9 @@ public class References_nde_group_tst {
 			, ""
 			);
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
-			( "<ref group='lower-alpha'>x</ref>"
+			( "<ref group='unknown'>x</ref>"
 			, "<ref>y</ref>"
-			, "<references group='lower-alpha'/>"
+			, "<references group='unknown'/>"
 			, "<references group=''/>"
 			), expd);
 	}

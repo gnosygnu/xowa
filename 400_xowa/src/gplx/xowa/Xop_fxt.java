@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa; import gplx.*;
 import gplx.core.tests.*; import gplx.core.log_msgs.*;
 import gplx.xowa.apps.cfgs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*;
@@ -160,6 +160,10 @@ public class Xop_fxt {
 		Xot_prm_chkr rv = new Xot_prm_chkr();
 		rv.Find_tkn_(tkn_arg_itm_(find));
 		return rv;
+	}
+	public void     Init__msg(String key, String val) {
+		Xol_msg_itm msg_itm = wiki.Msg_mgr().Get_or_make(Bry_.new_u8(key));
+		msg_itm.Atrs_set(Bry_.new_u8(val), false, false);
 	}
 	public Xop_fxt	Init_para_y_() {ctx.Para().Enabled_y_(); return this;}
 	public Xop_fxt	Init_para_n_() {ctx.Para().Enabled_n_(); return this;}

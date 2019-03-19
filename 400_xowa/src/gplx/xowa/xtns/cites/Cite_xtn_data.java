@@ -14,7 +14,21 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-public class Cite_xtn_mgr extends Xox_mgr_base {
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final    byte[] XTN_KEY = Bry_.new_a7("cite");
-	@Override public Xox_mgr Xtn_clone_new() {return new Cite_xtn_mgr();}
+import gplx.core.data_stores.*;
+class Cite_xtn_data implements Gfo_data_itm {
+	public String Key() {return KEY;}
+	public void Clear() {
+		link_labels.Clear();
+	}
+	public Cite_link_label_mgr Link_labels() {return link_labels;} private final    Cite_link_label_mgr link_labels = new Cite_link_label_mgr();
+
+	private static final String KEY = "xtn.Cite";
+	public static Cite_xtn_data Get_or_make(Gfo_data_store data_store) {
+		Cite_xtn_data rv = (Cite_xtn_data)data_store.Get_or_null(KEY);
+		if (rv == null) {
+			rv = new Cite_xtn_data();
+			data_store.Set(rv);
+		}
+		return rv;
+	}
 }

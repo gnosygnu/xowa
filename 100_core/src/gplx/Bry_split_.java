@@ -134,6 +134,24 @@ public class Bry_split_ {
 		}
 		return rv;
 	}
+	public static byte[][] Split_ws(byte[] src) {// REF.PHP: preg_split('/\s+/', $text)
+		int len = src.length;
+		if (len == 0) return Bry_.Ary_empty;
+
+		List_adp list = List_adp_.New();
+		int pos = 0;
+		while (true) {
+			int bgn = Bry_find_.Find_fwd_while_ws(src, pos, len);
+			if (bgn == len) break; // EOS
+			int end = Bry_find_.Find_fwd_until_ws(src, bgn + 1, len);
+			if (end == -1) end = len;
+			list.Add(Bry_.Mid(src, bgn, end));
+			pos = end + 1;
+			if (pos >= len) break;
+		}
+		return (byte[][])list.To_ary_and_clear(byte[].class);
+	}
+
 
 	public static final int Rv__ok = 0, Rv__extend = 1, Rv__cancel = 2;
 }

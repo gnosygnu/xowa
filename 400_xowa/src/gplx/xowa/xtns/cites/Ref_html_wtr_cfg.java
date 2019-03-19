@@ -20,7 +20,6 @@ public class Ref_html_wtr_cfg {
 	public Bry_fmtr Itm_id_uid() 		{return itm_id_uid;} 		private Bry_fmtr itm_id_uid; 		public Ref_html_wtr_cfg Itm_id_uid_(String v) {itm_id_uid 			= Bry_fmtr.new_(v, "uid"); return this;}
 	public Bry_fmtr Itm_id_key_one() 	{return itm_id_key_one;} 	private Bry_fmtr itm_id_key_one; 	public Ref_html_wtr_cfg Itm_id_key_one_(String v) {itm_id_key_one 	= Bry_fmtr.new_(v, "itm_key", "uid", "minor"); return this;}
 	public Bry_fmtr Itm_id_key_many() 	{return itm_id_key_many;} 	private Bry_fmtr itm_id_key_many; 	public Ref_html_wtr_cfg Itm_id_key_many_(String v) {itm_id_key_many	= Bry_fmtr.new_(v, "itm_key", "uid"); return this;}
-	public Bry_fmtr Itm_grp_text() 		{return itm_grp_text;} 		private Bry_fmtr itm_grp_text; 		public Ref_html_wtr_cfg Itm_grp_text_(String v) {itm_grp_text 		= Bry_fmtr.new_(v, "grp_key", "major"); return this;}
 	public Bry_fmtr Grp_html_one() 		{return grp_html_one;} 		private Bry_fmtr grp_html_one; 		public Ref_html_wtr_cfg Grp_html_one_(String v) {grp_html_one 		= Bry_fmtr.new_(v, "grp_id", "itm_id", "text"); return this;}
 	public Bry_fmtr Grp_html_many() 	{return grp_html_many;}		private Bry_fmtr grp_html_many; 	public Ref_html_wtr_cfg Grp_html_many_(String v) {grp_html_many 	= Bry_fmtr.new_(v, "grp_id", "related_ids", "text"); return this;}
 	public Bry_fmtr Grp_html_list()		{return grp_html_list;}		private Bry_fmtr grp_html_list;		public Ref_html_wtr_cfg Grp_html_list_(String v) {grp_html_list		= Bry_fmtr.new_(v, "itm_id", "backlabel"); return this;}
@@ -47,7 +46,6 @@ public class Ref_html_wtr_cfg {
 		rv.Itm_id_uid_		("~{uid}");
 		rv.Itm_id_key_one_	("~{itm_key}_~{uid}-~{minor}");
 		rv.Itm_id_key_many_	("~{itm_key}-~{uid}");
-		rv.Itm_grp_text_	("~{grp_key} ~{major}");
 		rv.Grp_html_one_	("<li id=\"cite_note-~{grp_id}\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-~{itm_id}\">^</a></span> <span class=\"reference-text\">~{text}</span></li>\n");
 		rv.Grp_html_many_	("<li id=\"cite_note-~{grp_id}\"><span class=\"mw-cite-backlink\">^~{related_ids}</span> <span class=\"reference-text\">~{text}</span></li>\n");
 		rv.Grp_html_list_	(" <sup><a href=\"#cite_ref-~{itm_id}\">~{backlabel}</a></sup>");

@@ -49,6 +49,11 @@ public class Bry_split__tst {
 		fxt.Test__split_w_max("a"                    , Byte_ascii.Pipe, 2, "a", null);		// max is more
 		fxt.Test__split_w_max("|"                    , Byte_ascii.Pipe, 2, "", "");		    // empty itms
 	}
+	@Test  public void Split_ws() {
+		fxt.Test__split_ws("a b", "a", "b");
+		fxt.Test__split_ws(" a ", "a");
+		fxt.Test__split_ws("  abc   def  ", "abc", "def");
+	}
 }
 class Bry_split__fxt {
 	private final    Bry_split_wkr__example wkr = new Bry_split_wkr__example();
@@ -63,6 +68,10 @@ class Bry_split__fxt {
 	}
 	public void Test__split_w_max(String src, byte dlm, int max, String... expd) {
 		Gftest.Eq__ary(expd, String_.Ary(Bry_split_.Split_w_max(Bry_.new_u8(src), dlm, max)));
+	}
+	public void Test__split_ws(String raw, String... expd) {
+		byte[][] actl = Bry_split_.Split_ws(Bry_.new_u8(raw));
+		Gftest.Eq__ary(Bry_.Ary(expd), actl, raw);
 	}
 }
 class Bry_split_wkr__example implements gplx.core.brys.Bry_split_wkr {

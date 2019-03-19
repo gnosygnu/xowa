@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
+import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.data_stores.*;
 import gplx.xowa.wikis.*; import gplx.core.envs.*;
 import gplx.xowa.files.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.ttls.*;
@@ -28,6 +28,7 @@ public class Xow_parser_mgr {
 	}
 	public Xop_ctx					Ctx()				{return ctx;} private final    Xop_ctx ctx;
 	public Xop_parser				Main()				{return parser;} private final    Xop_parser parser;
+	public Gfo_data_store           Data_store()        {return data_store;} private final    Gfo_data_store data_store = new Gfo_data_store();
 	public Scrib_core_mgr			Scrib()				{return scrib;} private final    Scrib_core_mgr scrib = new Scrib_core_mgr();
 	public Xof_img_size				Img_size()			{return img_size;} private final    Xof_img_size img_size = new Xof_img_size();
 	public Pfunc_ifexist_mgr		Ifexist_mgr()		{return ifexist_mgr;} private final    Pfunc_ifexist_mgr ifexist_mgr = new Pfunc_ifexist_mgr();
