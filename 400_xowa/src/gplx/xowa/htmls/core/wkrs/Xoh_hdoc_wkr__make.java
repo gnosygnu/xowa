@@ -49,8 +49,8 @@ public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
 	}
 	public void On_lnki(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_data data)	{
 		// <a> node
-		// handle "#"
-		if (data.Href_itm().Tid() == Xoh_anch_href_data.Tid__anch) {
+		// if not "/wiki/" link, just add html and exit; ISSUE#:391; DATE:2019-03-20
+		if (data.Href_itm().Tid() != Xoh_anch_href_data.Tid__wiki) {
 			bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
 			return;
 		}
