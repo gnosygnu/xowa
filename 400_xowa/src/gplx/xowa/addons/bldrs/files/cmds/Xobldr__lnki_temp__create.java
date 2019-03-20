@@ -55,7 +55,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	}
 	@Override protected void Cmd_bgn_end() {
 		ns_file_is_case_match_all = Ns_file_is_case_match_all(wiki);							// NOTE: must call after wiki.init
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Ctgs_enabled_(false);			// disable categories else progress messages written (also for PERF)
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Ctgs_enabled_(false);			// disable categories else progress messages written (also for PERF)
 		if (wiki.File__bin_mgr() != null)
 			wiki.File__bin_mgr().Wkrs__del(gplx.xowa.files.bins.Xof_bin_wkr_.Key_http_wmf);		// remove wmf wkr, else will try to download images during parsing
 		commons_wiki = app.Wiki_mgr().Get_by_or_make(Xow_domain_itm_.Bry__commons);
@@ -119,7 +119,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 			parser.Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), page_src);
 			if (	gen_html
 				&&	page.Redirect_trail().Itms__len() == 0)	// don't generate html for redirected pages
-				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Page().Root_(root), Xopg_page_.Tid_read);
+				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Page().Root_(root), Xopg_view_mode_.Tid__read);
 			if (gen_hdump)
 				hdump_bldr.Insert(ctx, page.Root_(root));
 			root.Clear();

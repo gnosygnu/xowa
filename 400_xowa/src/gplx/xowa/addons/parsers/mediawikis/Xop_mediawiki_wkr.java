@@ -56,7 +56,7 @@ public class Xop_mediawiki_wkr {
 		boolean is_wikitext = Xow_page_tid.Identify(wpg.Wiki().Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext;
 		byte[] orig_bry = Bry_.Empty;
 		if (is_wikitext) {
-			wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_hdump(tmp_bfr, pctx, Xoh_wtr_ctx.Hdump, wpg);
+			wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_hdump(tmp_bfr, pctx, Xoh_wtr_ctx.Hdump, wpg);
 
 			// write categories
 			int ctgs_len = wpg.Wtxt().Ctgs__len();

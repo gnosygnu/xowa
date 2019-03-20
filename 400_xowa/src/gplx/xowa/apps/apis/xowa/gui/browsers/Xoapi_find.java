@@ -50,7 +50,7 @@ class Xog_find_box {
 	public void Hide() {
 		app.Gui_mgr().Layout().Find_close();
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
-		if (tab.View_mode() == Xopg_page_.Tid_read)	// do not fire find("") for edit / html, else focus issues; DATE:2015-06-10
+		if (tab.View_mode() == Xopg_view_mode_.Tid__read)	// do not fire find("") for edit / html, else focus issues; DATE:2015-06-10
 			Exec_find(prv_find_text, Bool_.N);
 	}
 	public void Show_by_paste()	{
@@ -72,7 +72,7 @@ class Xog_find_box {
 	private void Exec_find(String find, boolean highlight_matches) {
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		find = String_.Replace(find, "\\", "\\\\");		// NOTE: backslashes are always literal, never escape codes; EX: "C:\new" "\n" means "\n", not (byte)10; DATE:2015-08-17
-		boolean find_in_hdoc = tab.View_mode() == Xopg_page_.Tid_read;
+		boolean find_in_hdoc = tab.View_mode() == Xopg_view_mode_.Tid__read;
 		if (find_in_hdoc)
 			tab.Html_box().Html_js_eval_proc_as_str(Xog_js_procs.Win__find_in_hdoc		, find, dir_fwd, case_match, wrap_search, highlight_matches);
 		else

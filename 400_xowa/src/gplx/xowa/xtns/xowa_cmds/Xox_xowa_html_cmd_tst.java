@@ -49,7 +49,7 @@ class Xox_xowa_html_cmd_fxt {
 		Xop_root_tkn root = fxt.Exec_parse_page_all_as_root(raw_bry);
 		fxt.Page().Root_(root);
 		html_mgr.Html_wtr().Write_doc(bfr, fxt.Ctx(), raw_bry, root);
-		html_mgr.Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_page(bfr, fxt.Page(), fxt.Ctx(), Xoh_page_html_source_.Wtr);
+		html_mgr.Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_page(bfr, fxt.Page(), fxt.Ctx(), Xoh_page_html_source_.Wtr);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}
 }

@@ -25,7 +25,7 @@ public class Xoh_page_wtr_mgr_tst {
 		Gfo_invk_.Invk_by_val(portal_mgr, Xow_portal_mgr.Invk_div_logo_, Bry_.new_a7("~{portal_nav_main_href}"));
 		portal_mgr.Init_assert();
 		Xoh_page_wtr_mgr page_wtr_mgr = new Xoh_page_wtr_mgr(true);
-		page_wtr_mgr.Gen(wiki.Parser_mgr().Ctx().Page(), Xopg_page_.Tid_read);
+		page_wtr_mgr.Gen(wiki.Parser_mgr().Ctx().Page(), Xopg_view_mode_.Tid__read);
 		Tfds.Eq(String_.new_a7(portal_mgr.Div_logo_bry(true)), "/site/en.wikipedia.org/wiki/");
 	}
 	@Test   public void Skip__math__basic() {

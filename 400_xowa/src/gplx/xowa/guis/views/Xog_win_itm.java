@@ -69,17 +69,17 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Gfui_html.Evt_location_changing))				Page__navigate_by_href(tab_mgr.Active_tab(), Xoh_href_gui_utl.Standardize_xowa_link(m.ReadStr("v")));
 		else if (ctx.Match(k, Invk_page_refresh))							Page__refresh();
 		else if	(ctx.Match(k, Invk_page_async_exec))						Xog_async_wkr.Async(((Xog_tab_itm)m.ReadObj("v")));
-		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xopg_page_.Tid_read);
+		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xopg_view_mode_.Tid__read);
 		else if	(ctx.Match(k, Invk_page_view_edit))							Page__mode_edit_();
-		else if	(ctx.Match(k, Invk_page_view_html))							Page__mode_(Xopg_page_.Tid_html);
+		else if	(ctx.Match(k, Invk_page_view_html))							Page__mode_(Xopg_view_mode_.Tid__html);
 		else if (ctx.Match(k, Invk_page_edit_save))							Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), Bool_.N);
 		else if (ctx.Match(k, Invk_page_edit_save_draft))					Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), Bool_.Y);
 		else if (ctx.Match(k, Invk_page_edit_preview))						Xog_tab_itm_edit_mgr.Preview(tab_mgr.Active_tab());
 		else if (ctx.Match(k, Invk_page_edit_rename))						Xog_tab_itm_edit_mgr.Rename(tab_mgr.Active_tab());
 		else if	(ctx.Match(k, Invk_page_edit_focus_box)) 					Xog_tab_itm_edit_mgr.Focus(this, Xog_html_itm.Elem_id__xowa_edit_data_box);
 		else if	(ctx.Match(k, Invk_page_edit_focus_first)) 					Xog_tab_itm_edit_mgr.Focus(this, Xog_html_itm.Elem_id__first_heading);
-		else if	(ctx.Match(k, Invk_page_dbg_html))							Xog_tab_itm_edit_mgr.Debug(this, Xopg_page_.Tid_html);
-		else if	(ctx.Match(k, Invk_page_dbg_wiki))							Xog_tab_itm_edit_mgr.Debug(this, Xopg_page_.Tid_edit);
+		else if	(ctx.Match(k, Invk_page_dbg_html))							Xog_tab_itm_edit_mgr.Debug(this, Xopg_view_mode_.Tid__html);
+		else if	(ctx.Match(k, Invk_page_dbg_wiki))							Xog_tab_itm_edit_mgr.Debug(this, Xopg_view_mode_.Tid__edit);
 		else if	(ctx.Match(k, Invk_page_goto))								Page__navigate_by_url_bar(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_page_goto_recent))						Page__navigate_by_url_bar(app.Usere().History_mgr().Get_at_last());
 		else if	(ctx.Match(k, Invk_history_bwd))							{Page__navigate_by_history(Bool_.N);}
@@ -162,11 +162,11 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		// HACK: when "edit" is clicked, always reload page from database; handles rarely-reproducible issue of "edit-after-rename" causing older versions to show up
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki();
 		page = wiki.Page_mgr().Load_page(page.Url(), page.Ttl(), tab);
-		Page__mode_(Xopg_page_.Tid_edit);
+		Page__mode_(Xopg_view_mode_.Tid__edit);
 	}
 	public void Page__mode_(byte new_mode_tid) {
 		Xog_tab_itm tab = tab_mgr.Active_tab(); Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki();
-		if (	new_mode_tid == Xopg_page_.Tid_read	// used to be && cur_view_tid == Edit; removed clause else redlinks wouldn't show when going form html to read (or clicking read multiple times) DATE: 2013-11-26;
+		if (	new_mode_tid == Xopg_view_mode_.Tid__read	// used to be && cur_view_tid == Edit; removed clause else redlinks wouldn't show when going form html to read (or clicking read multiple times) DATE: 2013-11-26;
 			&&	page.Db().Page().Exists()			// if new page, don't try to reload
 			) {
 			// NOTE: if moving from "Edit" to "Read", reload page (else Preview changes will still show); NOTE: do not call Exec_page_reload / Exec_page_refresh, which will fire redlinks code

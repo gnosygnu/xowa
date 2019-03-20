@@ -109,7 +109,12 @@ public class Xog_tab_itm implements Gfo_invk {
 		tab_box.Tab_name_(tab_name);
 	}
 	public Xog_history_mgr		History_mgr() {return history_mgr;} private Xog_history_mgr history_mgr = new Xog_history_mgr();
-	public byte					View_mode() {return view_mode;} public Xog_tab_itm View_mode_(byte v) {view_mode = v; return this;} private byte view_mode = Xopg_page_.Tid_read;
+	public byte View_mode() {return view_mode;} private byte view_mode = Xopg_view_mode_.Tid__read;
+	public void View_mode_(byte v) {
+		view_mode = v;
+		if (view_mode != Xopg_view_mode_.Tid__read) // if read, don't bother adding "action=read"
+			page.Url().Qargs_mgr().Set_val_by_bry(Xoa_url_.Qarg__action, Xopg_view_mode_.To_bry(v));
+	}
 	public void Pin_toggle() {}
 	public void Show_url_bgn(Xoa_url url) {
 		this.tab_is_loading = true;
@@ -161,7 +166,8 @@ public class Xog_tab_itm implements Gfo_invk {
 				if (wiki.Db_mgr().Save_mgr().Create_enabled()
 					|| wiki.Page_mgr().Sync_mgr().Auto_enabled()) {
 					page = Xoae_page.New_edit(wiki, ttl);
-					view_mode = Xopg_page_.Tid_edit;
+					page.Url_(url); // NOTE: need to set url else query args like action=edit will be lost; DATE:2019-03-20
+					view_mode = Xopg_view_mode_.Tid__edit;
 					history_mgr.Add(page);	// NOTE: must put new_page on stack so that pressing back will pop new_page, not previous page
 					Xog_tab_itm_read_mgr.Show_page(this, page, false);
 				}

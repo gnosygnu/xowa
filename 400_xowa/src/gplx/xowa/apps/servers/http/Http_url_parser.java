@@ -67,11 +67,11 @@ class Http_url_parser {
 			Gfo_qarg_mgr qarg_mgr = new Gfo_qarg_mgr().Init(url_obj.Qargs());
 			byte[] action_val = qarg_mgr.Read_bry_or("action", Bry_.Empty);
 			if      (Bry_.Eq(action_val, Xoa_url_.Qarg__action__read))
-				this.action = Xopg_page_.Tid_read;
+				this.action = Xopg_view_mode_.Tid__read;
 			else if (Bry_.Eq(action_val, Xoa_url_.Qarg__action__edit))
-				this.action = Xopg_page_.Tid_edit;
+				this.action = Xopg_view_mode_.Tid__edit;
 			else if (Bry_.Eq(action_val, Xoa_url_.Qarg__action__html))
-				this.action = Xopg_page_.Tid_html;
+				this.action = Xopg_view_mode_.Tid__html;
 			else if (Bry_.Eq(action_val, Qarg__action__popup)) {
 				this.popup = true;
 				this.popup_id = qarg_mgr.Read_str_or_null(Bry_.new_a7("popup_id"));

@@ -22,14 +22,14 @@ public class Xoapi_edit implements Gfo_invk {
 		win = app.Gui_mgr().Browser_win();
 	}
 	private boolean Active_tab_is_null() {return win.Tab_mgr().Active_tab_is_null();}
-	private boolean Active_tab_is_edit() {return !win.Tab_mgr().Active_tab_is_null() && win.Tab_mgr().Active_tab().View_mode() == Xopg_page_.Tid_edit;}
+	private boolean Active_tab_is_edit() {return !win.Tab_mgr().Active_tab_is_null() && win.Tab_mgr().Active_tab().View_mode() == Xopg_view_mode_.Tid__edit;}
 	public void Copy()			{if (Active_tab_is_null()) return; win.Kit().Clipboard().Copy(win.Active_html_itm().Html_selected_get_text_or_href());}
 	public void Select_all()	{if (Active_tab_is_null()) return; Gfo_invk_.Invk_by_key(win.Win_box().Kit().Clipboard(), Gfui_clipboard_.Invk_select_all);}
 	public void Save()			{if (!Active_tab_is_edit()) return; Xog_tab_itm_edit_mgr.Save(win.Active_tab(), false);}
 	public void Save_draft()	{if (!Active_tab_is_edit()) return; Xog_tab_itm_edit_mgr.Save(win.Active_tab(), true);}
 	public void Preview()		{if (!Active_tab_is_edit()) return; Xog_tab_itm_edit_mgr.Preview(win.Active_tab());}
-	public void Dbg_tmpl()		{if (!Active_tab_is_edit()) return; Xog_tab_itm_edit_mgr.Debug(win, Xopg_page_.Tid_edit);}
-	public void Dbg_html()		{if (!Active_tab_is_edit()) return; Xog_tab_itm_edit_mgr.Debug(win, Xopg_page_.Tid_html);}
+	public void Dbg_tmpl()		{if (!Active_tab_is_edit()) return; Xog_tab_itm_edit_mgr.Debug(win, Xopg_view_mode_.Tid__edit);}
+	public void Dbg_html()		{if (!Active_tab_is_edit()) return; Xog_tab_itm_edit_mgr.Debug(win, Xopg_view_mode_.Tid__html);}
 	public void Focus_edit_box(){if (!Active_tab_is_edit()) return; Xog_tab_itm_edit_mgr.Focus(win, Xog_html_itm.Elem_id__xowa_edit_data_box);}
 	public void Exec() {
 	}

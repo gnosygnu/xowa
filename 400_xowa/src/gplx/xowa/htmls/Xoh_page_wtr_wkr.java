@@ -41,16 +41,16 @@ public class Xoh_page_wtr_wkr {
 				wdata_lang_wtr.Page_(page);
 				byte view_mode = page_mode;
 				switch (page_mode) {
-					case Xopg_page_.Tid_edit:	fmtr = mgr.Page_edit_fmtr(); break;
-					case Xopg_page_.Tid_html:	fmtr = mgr.Page_read_fmtr(); view_mode = Xopg_page_.Tid_read; break; // set view_mode to read, so that "read" is highlighted in HTML
-					case Xopg_page_.Tid_read:	fmtr = mgr.Page_read_fmtr(); 
+					case Xopg_view_mode_.Tid__edit:	fmtr = mgr.Page_edit_fmtr(); break;
+					case Xopg_view_mode_.Tid__html:	fmtr = mgr.Page_read_fmtr(); view_mode = Xopg_view_mode_.Tid__read; break; // set view_mode to read, so that "read" is highlighted in HTML
+					case Xopg_view_mode_.Tid__read:	fmtr = mgr.Page_read_fmtr(); 
 						// ctx.Page().Redlink_list().Clear();	// not sure if this is the best place to put it, but redlinks (a) must only fire once; (b) must fire before html generation; (c) cannot fire during edit (preview will handle separately); NOTE: probably put in to handle reusable redlink lists; redlink lists are now instantiated per page, so clear is not useful
 						break;
 				}
 				Bry_bfr page_bfr = wiki.Utl__bfr_mkr().Get_m001();	// NOTE: get separate page rv to output page; do not reuse tmp_bfr b/c it will be used inside Fmt_do
 				try {
 				Xoh_wtr_ctx hctx = null;
-				if (page_mode == Xopg_page_.Tid_html 
+				if (page_mode == Xopg_view_mode_.Tid__html 
 					&& wiki.Html__hdump_mgr().Load_mgr().Html_mode().Tid() == Xow_hdump_mode.Hdump_save.Tid()) {
 					hctx = Xoh_wtr_ctx.Hdump;
 					Write_body(page_bfr, ctx, hctx, page);
@@ -62,7 +62,7 @@ public class Xoh_page_wtr_wkr {
 					Write_body(page_bfr, ctx, hctx, page);
 					Write_page_by_tid(ctx, hctx, view_mode, rv, fmtr, page_bfr.To_bry_and_rls());
 					scripting_mgr.Write(rv, wiki, page);
-					if (page_mode == Xopg_page_.Tid_html)	// if html, write page again, but wrap it in html skin this time
+					if (page_mode == Xopg_view_mode_.Tid__html)	// if html, write page again, but wrap it in html skin this time
 						Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(rv.To_bry_and_clear()));
 					wdata_lang_wtr.Page_(null);
 				}
@@ -94,7 +94,7 @@ public class Xoh_page_wtr_wkr {
 		// byte[] html_content_editable = wiki.Gui_mgr().Cfg_browser().Content_editable() ? Content_editable_bry : Bry_.Empty;
 		byte[] html_content_editable = Bry_.Empty;
 		byte[] page_content_sub = Xoh_page_wtr_wkr_.Bld_page_content_sub(app, wiki, page, tmp_bfr);
-		byte[] js_edit_toolbar_bry = html_gen_tid == Xopg_page_.Tid_edit ? wiki.Fragment_mgr().Html_js_edit_toolbar() : Bry_.Empty;
+		byte[] js_edit_toolbar_bry = html_gen_tid == Xopg_view_mode_.Tid__edit ? wiki.Fragment_mgr().Html_js_edit_toolbar() : Bry_.Empty;
 		Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
 		if (vnt_mgr.Enabled()) {
 			byte[] converted_title = vnt_mgr.Convert_lang().Converted_title();	// prefer converted title
@@ -110,7 +110,7 @@ public class Xoh_page_wtr_wkr {
 		fmtr.Bld_bfr_many(bfr
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
 		, page.Db().Page().Id(), page.Ttl().Full_db()
-		, page_name, page.Html_data().Page_heading().Init(wiki, html_gen_tid == Xopg_page_.Tid_read, page.Html_data(), page.Ttl().Full_db(), page_display_title)
+		, page_name, page.Html_data().Page_heading().Init(wiki, html_gen_tid == Xopg_view_mode_.Tid__read, page.Html_data(), page.Ttl().Full_db(), page_display_title)
 		, modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry()
 		, mgr.Css_night_bry(nightmode_enabled)
@@ -146,7 +146,7 @@ public class Xoh_page_wtr_wkr {
 			byte[] data_raw = page.Db().Text().Text_bry();
 			int bfr_page_bgn = bfr.Len();
 			boolean page_tid_uses_pre = false;
-			if (page_mode == Xopg_page_.Tid_edit)
+			if (page_mode == Xopg_view_mode_.Tid__edit)
 				Write_body_edit(bfr, data_raw, page_ns_id, page_tid);
 			else {
 				switch (page_tid) {

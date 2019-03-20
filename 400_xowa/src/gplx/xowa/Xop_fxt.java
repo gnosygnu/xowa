@@ -464,7 +464,7 @@ public class Xop_fxt {
 		Xop_root_tkn root = Exec_parse_page_all_as_root(src_bry);
 		Xoae_page page = this.Page();
 		page.Root_(root);
-		byte[] actl = wiki.Html_mgr().Page_wtr_mgr().Gen(page, gplx.xowa.wikis.pages.Xopg_page_.Tid_read);
+		byte[] actl = wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_view_mode_.Tid__read);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 	public String Exec__parse_to_html_w_skin(String raw) {
@@ -476,7 +476,7 @@ public class Xop_fxt {
 		Xop_root_tkn root = this.Exec_parse_page_all_as_root(raw_bry);
 		this.Page().Root_(root);
 
-		html_mgr.Page_wtr_mgr().Wkr(Xopg_page_.Tid_read).Write_page(bfr, this.Page(), this.Ctx(), Xoh_page_html_source_.Wtr);
+		html_mgr.Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_page(bfr, this.Page(), this.Ctx(), Xoh_page_html_source_.Wtr);
 		return bfr.To_str_and_clear();
 	}
 	public void Test__parse_to_html_w_skin(String raw, String expd) {

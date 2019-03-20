@@ -19,7 +19,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Xog_tab_itm_edit_mgr {
 	public static void Save(Xog_tab_itm tab, boolean quick_save) {
-		if (tab.View_mode() != Xopg_page_.Tid_edit) return;	// exit if not edit; handles ctrl+s being pressed in read/html modes
+		if (tab.View_mode() != Xopg_view_mode_.Tid__edit) return;	// exit if not edit; handles ctrl+s being pressed in read/html modes
 
 		// get text and save directly to text_db
 		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
@@ -52,7 +52,7 @@ public class Xog_tab_itm_edit_mgr {
 
 			// update categories
 			try {
-				wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_page_.Tid_read); // NOTE: need to write html to fill Wtxt().Ctgs
+				wiki.Html_mgr().Page_wtr_mgr().Gen(page, Xopg_view_mode_.Tid__read); // NOTE: need to write html to fill Wtxt().Ctgs
 				gplx.xowa.addons.wikis.ctgs.edits.Xoctg_edit_mgr.Update(wiki, page.Ttl().Page_db(), page_id, page.Wtxt().Ctgs__to_ary());
 			} catch (Exception e) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to update categories; err=~{0}", Err_.Message_gplx_log(e));
@@ -70,12 +70,12 @@ public class Xog_tab_itm_edit_mgr {
 
 			// force full reload of page; needed to refresh page_modified; DATE:2017-03-06
 			tab.Show_url_bgn(page.Url());
-//				win_itm.Page__mode_(Xopg_page_.Tid_read);
+//				win_itm.Page__mode_(Xopg_view_mode_.Tid__read);
 //				win_itm.Page__async__bgn(tab);
 		}
 	}
 	public static void Preview(Xog_tab_itm tab) {
-		if (tab.View_mode() != Xopg_page_.Tid_edit) return;	// exit if not edit; handles preview somehow being called?
+		if (tab.View_mode() != Xopg_view_mode_.Tid__edit) return;	// exit if not edit; handles preview somehow being called?
 		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		Xog_html_itm html_itm = tab.Html_itm();
 
@@ -88,18 +88,18 @@ public class Xog_tab_itm_edit_mgr {
 		tab.Page_(new_page); new_page.Tab_data().Tab_(tab);			// replace old page with new_page; DATE:2014-10-09
 
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
-		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_page_.Tid_read);
+		Xoh_page_wtr_wkr wkr = wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read);
 		wkr.Write_body(tmp_bfr, wiki.Parser_mgr().Ctx(), Xoh_wtr_ctx.Basic, new_page);
 		byte[] new_html = tmp_bfr.To_bry_and_rls();
 		new_page.Html_data().Edit_preview_(new_html);
 
 		Invalidate(wiki);
-		win_itm.Page__mode_(Xopg_page_.Tid_edit);
+		win_itm.Page__mode_(Xopg_view_mode_.Tid__edit);
 		html_itm.Scroll_page_by_id_gui(Xog_html_itm.Elem_id__first_heading);// NOTE: was originally directly; changed to call on thread; DATE:2014-05-03
 		win_itm.Page__async__bgn(tab);	// NOTE: needed to show images during preview; DATE:2014-06-21
 	}
 	public static void Rename(Xog_tab_itm tab) {
-		if (tab.View_mode() != Xopg_page_.Tid_edit) return;	// exit if not edit; handles ctrl+r being pressed
+		if (tab.View_mode() != Xopg_view_mode_.Tid__edit) return;	// exit if not edit; handles ctrl+r being pressed
 		Xoae_page page = tab.Page(); Xowe_wiki wiki = tab.Wiki(); Xog_win_itm win_itm = tab.Tab_mgr().Win();
 		if (Bry_.Eq(page.Ttl().Page_db(), wiki.Props().Main_page())) {
 			win_itm.Usr_dlg().Warn_many("", "", "The Main Page cannot be renamed");
@@ -117,7 +117,7 @@ public class Xog_tab_itm_edit_mgr {
 		}
 		wiki.Db_mgr().Save_mgr().Data_rename(page, new_ns_id, new_text);
 		page.Ttl_(Xoa_ttl.Parse(wiki, Bry_.Add(page.Ttl().Ns().Name_db_w_colon(), new_text)));
-		win_itm.Page__mode_(Xopg_page_.Tid_read);
+		win_itm.Page__mode_(Xopg_view_mode_.Tid__read);
 		win_itm.Usr_dlg().Prog_one("", "", "renamed page to {0}", String_.new_u8(page.Ttl().Full_txt_raw()));
 	}
 	public static void Focus(Xog_win_itm win, String elem_focus_id) {

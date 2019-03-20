@@ -17,6 +17,7 @@ package gplx.xowa.addons.bldrs.mass_parses.parses.wkrs; import gplx.*; import gp
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 import gplx.xowa.files.origs.*;
 import gplx.xowa.htmls.core.bldrs.*;
+import gplx.xowa.wikis.pages.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.mgrs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.pools.*;
 import gplx.xowa.addons.wikis.fulltexts.indexers.bldrs.*;
@@ -75,7 +76,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		wiki.File_mgr().Fsdb_mode().Tid__v2__mp__y_();
 
 		// enable disable categories according to flag
-		wiki.Html_mgr().Page_wtr_mgr().Wkr(gplx.xowa.wikis.pages.Xopg_page_.Tid_read).Ctgs_enabled_(cfg.Hdump_catboxs());
+		wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Ctgs_enabled_(cfg.Hdump_catboxs());
 
 		// enable lnki_temp
 		Xomp_lnki_temp_wkr logger = null;

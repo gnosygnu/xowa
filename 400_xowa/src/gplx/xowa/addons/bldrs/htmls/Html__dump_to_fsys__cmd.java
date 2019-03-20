@@ -52,8 +52,8 @@ public class Html__dump_to_fsys__cmd extends Xob_cmd__base {
 				Xoae_page page = wiki.Data_mgr().Load_page_and_parse(wiki.Utl__url_parser().Parse(page_ttl.Page_db()), page_ttl);
 				wiki.Parser_mgr().Parse(page, true);
 				page.Wikie().Html_mgr().Page_wtr_mgr().Page_read_fmtr().Fmt_("~{page_data}");
-				page.Wikie().Html_mgr().Page_wtr_mgr().Wkr(gplx.xowa.wikis.pages.Xopg_page_.Tid_read).Write_body(bfr, wiki.Parser_mgr().Ctx(), hctx, page);
-				byte[] html_src = bfr.To_bry_and_clear();//page.Wikie().Html_mgr().Page_wtr_mgr().Gen(page, gplx.xowa.wikis.pages.Xopg_page_.Tid_read);	// NOTE: must use wiki of page, not of owner tab; DATE:2015-03-05
+				page.Wikie().Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_body(bfr, wiki.Parser_mgr().Ctx(), hctx, page);
+				byte[] html_src = bfr.To_bry_and_clear();//page.Wikie().Html_mgr().Page_wtr_mgr().Gen(page, gplx.xowa.wikis.pages.Xopg_view_mode_.Tid__read);	// NOTE: must use wiki of page, not of owner tab; DATE:2015-03-05
 				byte[] html_head = page.Html_data().Custom_head_tags().To_html__style(bfr);
 
 				// fmt with mustache; write to file

@@ -33,10 +33,10 @@ public class Http_url_parser_tst {
 		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1/A/B/C", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1/A/B/C"));
 
 		// action=edit
-		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1?action=edit", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1").Action_(Xopg_page_.Tid_edit));
+		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1?action=edit", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1").Action_(Xopg_view_mode_.Tid__edit));
 
 		// action=html
-		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1?action=html", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1").Action_(Xopg_page_.Tid_html));
+		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1?action=html", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1").Action_(Xopg_view_mode_.Tid__html));
 
 		// action=popup
 		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1?action=popup", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1").Popup_(true));

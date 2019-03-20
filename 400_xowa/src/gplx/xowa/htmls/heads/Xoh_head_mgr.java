@@ -72,7 +72,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		itm__xo_elem.Enabled_y_();
 		itm__collapsible.Enabled_y_();
 		itm__navframe.Enabled_y_();
-		boolean popups_enabled = html_gen_tid != Xopg_page_.Tid_edit && wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled();	
+		boolean popups_enabled = html_gen_tid != Xopg_view_mode_.Tid__edit && wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled();	
 		itm__popups.Enabled_(popups_enabled);
 		return this;
 	}

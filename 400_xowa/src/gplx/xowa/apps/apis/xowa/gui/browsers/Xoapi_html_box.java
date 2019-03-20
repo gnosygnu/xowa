@@ -23,7 +23,7 @@ public class Xoapi_html_box implements Gfo_invk {
 		Xog_tab_itm tab = win.Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		Gfui_html html_box = tab.Html_itm().Html_box();
 		html_box.Focus();
-		if (tab.View_mode() != Xopg_page_.Tid_read)	// if edit / html, place focus in edit box
+		if (tab.View_mode() != Xopg_view_mode_.Tid__read)	// if edit / html, place focus in edit box
 			html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__elem_focus, Xog_html_itm.Elem_id__xowa_edit_data_box);
 	}
 	public void Selection_focus() {

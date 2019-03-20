@@ -22,17 +22,17 @@ public class Xog_tab_itm_read_mgr {
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read) {Show_page(tab, new_page, reset_to_read, false, false, Xog_history_stack.Nav_fwd);}
 	public static void Show_page(Xog_tab_itm tab, Xoae_page new_page, boolean reset_to_read, boolean new_page_is_same, boolean show_is_err, byte history_nav_type) {
 		if (reset_to_read)
-			tab.View_mode_(Xopg_page_.Tid_read);
+			tab.View_mode_(Xopg_view_mode_.Tid__read);
 
 		// set View_mode based on "action="; DATE:2018-11-03
 		byte[] action_val = new_page.Url().Qargs_mgr().Get_val_bry_or(Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__read);
-		byte view_mode = Xopg_page_.Tid_read;
+		byte view_mode = Xopg_view_mode_.Tid__read;
 		if      (Bry_.Eq(action_val, Xoa_url_.Qarg__action__read))
-			view_mode = Xopg_page_.Tid_read;
+			view_mode = Xopg_view_mode_.Tid__read;
 		else if (Bry_.Eq(action_val, Xoa_url_.Qarg__action__edit))
-			view_mode = Xopg_page_.Tid_edit;
+			view_mode = Xopg_view_mode_.Tid__edit;
 		else if (Bry_.Eq(action_val, Xoa_url_.Qarg__action__html))
-			view_mode = Xopg_page_.Tid_html;
+			view_mode = Xopg_view_mode_.Tid__html;
 		tab.View_mode_(view_mode);
 
 		Xoae_page cur_page = tab.Page(); Xog_html_itm html_itm = tab.Html_itm(); Gfui_html html_box = html_itm.Html_box();
@@ -63,7 +63,7 @@ public class Xog_tab_itm_read_mgr {
 		tab.Tab_mgr().Tab_mgr().Focus();
 		html_box.Focus();
 		win.Usr_dlg().Prog_none("", "", "");	// blank out status bar
-		if (tab.View_mode() == Xopg_page_.Tid_read)
+		if (tab.View_mode() == Xopg_view_mode_.Tid__read)
 			html_itm.Scroll_page_by_bmk_gui();
 		else
 			Gfo_invk_.Invk_by_val(tab.Html_itm().Cmd_async(), Xog_html_itm.Invk_html_elem_focus, Xog_html_itm.Elem_id__xowa_edit_data_box);	// NOTE: must be async, else won't work; DATE:2014-06-05
@@ -90,7 +90,7 @@ public class Xog_tab_itm_read_mgr {
 		win.Usr_dlg().Warn_many("", "", err_msg);
 		win.App().Log_wtr().Queue_enabled_(false);
 		Xoae_page fail_page = wiki.Data_mgr().Load_page_by_ttl(ttl);
-		tab.View_mode_(Xopg_page_.Tid_edit);
+		tab.View_mode_(Xopg_view_mode_.Tid__edit);
 		Update_selected_tab(win, url, ttl);
 		Show_page(tab, fail_page, false, false, true, Xog_history_stack.Nav_fwd);
 		win.Win_box().Text_(err_msg);

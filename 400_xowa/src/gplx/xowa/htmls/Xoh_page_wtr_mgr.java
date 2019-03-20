@@ -21,9 +21,9 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	private Xoh_page_wtr_wkr edit_wtr, html_wtr, read_wtr;
 	public Xoh_page_wtr_mgr(boolean html_capable) {
 		this.html_capable = html_capable;
-		this.read_wtr = new Xoh_page_wtr_wkr(this, Xopg_page_.Tid_read);
-		this.edit_wtr = new Xoh_page_wtr_wkr(this, Xopg_page_.Tid_edit);
-		this.html_wtr = new Xoh_page_wtr_wkr(this, Xopg_page_.Tid_html);
+		this.read_wtr = new Xoh_page_wtr_wkr(this, Xopg_view_mode_.Tid__read);
+		this.edit_wtr = new Xoh_page_wtr_wkr(this, Xopg_view_mode_.Tid__edit);
+		this.html_wtr = new Xoh_page_wtr_wkr(this, Xopg_view_mode_.Tid__html);
 	}
 	public boolean Html_capable() {return html_capable;} public Xoh_page_wtr_mgr Html_capable_(boolean v) {html_capable = v; return this;} private boolean html_capable;
 	public byte[] Css_common_bry() {return css_common_bry;} private byte[] css_common_bry;
@@ -61,9 +61,9 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	}
 	public Xoh_page_wtr_wkr Wkr(byte output_tid) {
 		switch (output_tid) {
-			case Xopg_page_.Tid_edit: return edit_wtr;
-			case Xopg_page_.Tid_html: return html_wtr;
-			case Xopg_page_.Tid_read: return read_wtr;
+			case Xopg_view_mode_.Tid__edit: return edit_wtr;
+			case Xopg_view_mode_.Tid__html: return html_wtr;
+			case Xopg_view_mode_.Tid__read: return read_wtr;
 			default: throw Err_.new_unhandled(output_tid);
 		}
 	}

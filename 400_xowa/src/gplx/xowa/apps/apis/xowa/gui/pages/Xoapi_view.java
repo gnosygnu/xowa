@@ -23,9 +23,9 @@ public class Xoapi_view implements Gfo_invk {
 		this.app = app; this.win = app.Gui_mgr().Browser_win();
 	}
 	private boolean Active_tab_is_null() {return win.Tab_mgr().Active_tab_is_null();}
-	public void Mode_read()				{Mode(Xopg_page_.Tid_read);}
-	public void Mode_edit()				{Mode(Xopg_page_.Tid_edit);}
-	public void Mode_html()				{Mode(Xopg_page_.Tid_html);}
+	public void Mode_read()				{Mode(Xopg_view_mode_.Tid__read);}
+	public void Mode_edit()				{Mode(Xopg_view_mode_.Tid__edit);}
+	public void Mode_html()				{Mode(Xopg_view_mode_.Tid__html);}
 	private void Mode(byte v)			{if (Active_tab_is_null()) return; win.Page__mode_(v);}
 	public void Reload()				{if (Active_tab_is_null()) return; win.Page__reload();}
 	public void Refresh()				{if (Active_tab_is_null()) return; win.Page__refresh();}

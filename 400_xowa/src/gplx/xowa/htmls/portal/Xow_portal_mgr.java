@@ -133,9 +133,9 @@ public class Xow_portal_mgr implements Gfo_invk {
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
 		byte[] read_cls = Bry_.Empty, edit_cls = Bry_.Empty, html_cls = Bry_.Empty;
 		switch (output_tid) {
-			case Xopg_page_.Tid_read: read_cls = Cls_selected_y; break;
-			case Xopg_page_.Tid_edit: edit_cls = Cls_selected_y; break;
-			case Xopg_page_.Tid_html: html_cls = Cls_selected_y; break;
+			case Xopg_view_mode_.Tid__read: read_cls = Cls_selected_y; break;
+			case Xopg_view_mode_.Tid__edit: edit_cls = Cls_selected_y; break;
+			case Xopg_view_mode_.Tid__html: html_cls = Cls_selected_y; break;
 		}
 
 		// build url_fragment with action query argument; EX: "/wiki/Page_name?action="

@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa; import gplx.*;
+import gplx.xowa.wikis.pages.*;
 public class Xoa_url_ {
 	public static final int Tid_unknown = 0, Tid_page = 1, Tid_anch = 2, Tid_inet = 3, Tid_file = 4, Tid_xcmd = 5;
 	public static boolean Tid_is_pagelike(int tid) {
@@ -28,9 +29,9 @@ public class Xoa_url_ {
 	  Qarg__redirect            = Bry_.new_a7("redirect")
 	, Qarg__redirect__no        = Bry_.new_a7("no")
 	, Qarg__action              = Bry_.new_a7("action")
-	, Qarg__action__read        = Bry_.new_a7("read")
-	, Qarg__action__edit        = Bry_.new_a7("edit")
-	, Qarg__action__html        = Bry_.new_a7("html")
+	, Qarg__action__read        = Xopg_view_mode_.Bry__read
+	, Qarg__action__edit        = Xopg_view_mode_.Bry__edit
+	, Qarg__action__html        = Xopg_view_mode_.Bry__html
 	, Qarg__curid               = Bry_.new_a7("curid")
 	;
 }
