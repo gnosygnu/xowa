@@ -18,9 +18,9 @@ import gplx.langs.htmls.docs.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.wkrs.tags.*; import gplx.xowa.htmls.core.wkrs.txts.*; import gplx.xowa.htmls.core.wkrs.escapes.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_hdoc_parser {
-	private final Xoh_hdoc_wkr hdoc_wkr;
-	private final Gfh_doc_parser hdoc_parser;
-	private final Xoh_tag_parser tag_parser;
+	private final    Xoh_hdoc_wkr hdoc_wkr;
+	private final    Gfh_doc_parser hdoc_parser;
+	private final    Xoh_tag_parser tag_parser;
 	public Xoh_hdoc_parser(Xoh_hdoc_wkr hdoc_wkr) {
 		this.hdoc_wkr = hdoc_wkr;
 		this.tag_parser = new Xoh_tag_parser(hdoc_wkr);
