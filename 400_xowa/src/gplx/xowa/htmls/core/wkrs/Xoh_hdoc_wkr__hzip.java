@@ -20,10 +20,11 @@ public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 	private final    Xoh_stat_itm stat_itm = new Xoh_stat_itm();
 	private Xoh_hzip_bfr bfr; private Xoh_hdoc_ctx hctx; private byte[] src;
 	private Xoh_page hpg;
-	public void On_new_page(Xoh_hzip_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
-		this.bfr = bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;
+	public void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
+		this.bfr = (Xoh_hzip_bfr)bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;
 		stat_itm.Clear();
 	}
+	public void On_page_end() {}
 	public void On_txt		(int rng_bgn, int rng_end)									{bfr.Add_mid(src, rng_bgn, rng_end);}
 	public void On_escape	(gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data)	{hctx.Pool_mgr__hzip().Mw__escape().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
 	public void On_xnde		(gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser data)		{hctx.Pool_mgr__hzip().Mw__xnde().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}

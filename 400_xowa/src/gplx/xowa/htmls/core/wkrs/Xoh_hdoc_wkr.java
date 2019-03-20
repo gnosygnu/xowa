@@ -18,7 +18,8 @@ import gplx.langs.htmls.docs.*;
 import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.htmls.core.hzips.*;
 public interface Xoh_hdoc_wkr {
-	void On_new_page(Xoh_hzip_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end);
+	void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end);
+	void On_page_end();
 	void On_txt		(int rng_bgn, int rng_end);
 	void On_escape	(gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data);
 	void On_xnde	(gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser parser);

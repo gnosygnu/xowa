@@ -15,16 +15,25 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*;
-import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
+import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
 import gplx.xowa.wikis.ttls.*; 
 public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
-	private Xoh_hzip_bfr bfr; private Xoh_page hpg; private Xoh_hdoc_ctx hctx; private byte[] src;
+	private Bry_bfr bfr; private Xoh_page hpg; private Xoh_hdoc_ctx hctx; private byte[] src;
 	private final    Xoh_hdr_wtr wkr__hdr = new Xoh_hdr_wtr();
 	private final    Xoh_img_wtr wkr__img = new Xoh_img_wtr();
+	private final    Xoh_page_bfr page_bfr = new Xoh_page_bfr();
+	private boolean toc_enabled;
 	private int html_uid;
-	public void On_new_page(Xoh_hzip_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
+	public void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		this.bfr = bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;
 		this.html_uid = 0;
+		this.toc_enabled = !gplx.core.envs.Op_sys.Cur().Tid_is_drd();
+		if (toc_enabled)
+			this.page_bfr.Init(bfr);
+	}
+	public void On_page_end() {
+		if (toc_enabled)
+			page_bfr.Commit(hpg);
 	}
 	public void On_txt(int rng_bgn, int rng_end) {
 		// text; just add it
@@ -90,10 +99,12 @@ public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
 				return wkr__hdr.Init_by_parse(bfr, hpg, hctx, src, (Xoh_hdr_data)data);
 			case Xoh_hzip_dict_.Tid__img:
 				return wkr__img.Init_by_parse(bfr, hpg, hctx, src, (Xoh_img_data)data);
-			// TODO: see toc_mode; change make_mgr to stitch together html before and after toc for pgbnr; see Xoh_page_bfr
 			case Xoh_hzip_dict_.Tid__toc:
-				bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
-				// this.toc_mode = toc_lhs.Atrs__has(Xoh_toc_wtr.Atr__data__toc__mode) ? Toc_mode__pgbnr : Toc_mode__basic;
+				// process <xowa_toc> tag by splitting bfr into two: bfr-before-toc and bfr-after-toc
+				if (toc_enabled) {
+					Xoh_toc_data toc_data = (Xoh_toc_data)data;
+					this.bfr = page_bfr.Split_by_toc(toc_data.Toc_mode());
+				}
 				break;
 			// hzip_lnke just reconstructs html
 			case Xoh_hzip_dict_.Tid__lnke:
