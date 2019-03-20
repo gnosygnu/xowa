@@ -20,6 +20,7 @@ public class Xowd_cat_core_tbl implements Db_tbl {
 	private final    String fld_id, fld_pages, fld_subcats, fld_files, fld_hidden, fld_link_db_id;
 	private final    Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select;
 	private final    Xowd_cat_core_tbl__in_wkr in_wkr = new Xowd_cat_core_tbl__in_wkr();
+	private final    Object thread_lock = new Object();
 	public Db_conn Conn() {return conn;}
 	public Xowd_cat_core_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
@@ -73,25 +74,31 @@ public class Xowd_cat_core_tbl implements Db_tbl {
 	}
 	public Xowd_category_itm Select(int id) {
 		if (stmt_select == null) stmt_select = conn.Stmt_select(tbl_name, flds, fld_id);
-		Db_rdr rdr = stmt_select.Clear().Crt_int(fld_id, id).Exec_select__rls_manual();
-		try {return rdr.Move_next() ? Load_itm(rdr) : Xowd_category_itm.Null;} finally {rdr.Rls();}
+		synchronized (thread_lock) {// THREAD: pagesincategory can call this from multiple threads which can cause db-locking; ERROR:"database link_db_1 is already in use"; PAGE:en.d:Category:Clothing; ISSUE#:389; DATE:2019-03-20
+			Db_rdr rdr = stmt_select.Clear().Crt_int(fld_id, id).Exec_select__rls_manual();
+			try {return rdr.Move_next() ? Load_itm(rdr) : Xowd_category_itm.Null;} finally {rdr.Rls();}
+		}
 	}
 	public void Select_by_cat_id_in(Cancelable cancelable, Ordered_hash rv, int bgn, int end) {
-		in_wkr.Init(rv);
-		in_wkr.Select_in(cancelable, conn, bgn, end);
+		synchronized (thread_lock) {// THREAD: locking pre-emptively; ISSUE#:389; DATE:2019-03-20
+			in_wkr.Init(rv);
+			in_wkr.Select_in(cancelable, conn, bgn, end);
+		}
 	}
 	public void Select_by_cat_id_many(Select_in_cbk cbk) {
-		int pos = 0;
-		Bry_bfr bfr = Bry_bfr_.New();
-		Select_in_wkr wkr = Select_in_wkr.New(bfr, tbl_name, String_.Ary(fld_id, fld_pages, fld_subcats, fld_files, fld_hidden), fld_id);
-		while (true) {
-			pos = wkr.Make_sql_or_null(bfr, cbk, pos);
-			if (pos == -1) break;
-			Db_rdr rdr = conn.Stmt_sql(bfr.To_str_and_clear()).Exec_select__rls_auto();
-			try {
-				while (rdr.Move_next())
-					cbk.Read_data(rdr);
-			} finally {rdr.Rls();}
+		synchronized (thread_lock) {// THREAD: locking pre-emptively; ISSUE#:389; DATE:2019-03-20
+			int pos = 0;
+			Bry_bfr bfr = Bry_bfr_.New();
+			Select_in_wkr wkr = Select_in_wkr.New(bfr, tbl_name, String_.Ary(fld_id, fld_pages, fld_subcats, fld_files, fld_hidden), fld_id);
+			while (true) {
+				pos = wkr.Make_sql_or_null(bfr, cbk, pos);
+				if (pos == -1) break;
+				Db_rdr rdr = conn.Stmt_sql(bfr.To_str_and_clear()).Exec_select__rls_auto();
+				try {
+					while (rdr.Move_next())
+						cbk.Read_data(rdr);
+				} finally {rdr.Rls();}
+			}
 		}
 	}
 	public Xowd_category_itm Load_itm(Db_rdr rdr) {
