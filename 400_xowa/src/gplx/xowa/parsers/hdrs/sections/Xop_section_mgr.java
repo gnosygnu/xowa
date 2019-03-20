@@ -42,7 +42,7 @@ public class Xop_section_mgr implements Gfo_invk {
 		if (section_key == null) return src;
 
 		// parse wikitext into list of headers
-		Xop_section_list section_list = new Xop_section_list().Parse(wiki, tidy_mgr, src);
+		Xop_section_list section_list = new Xop_section_list().Parse(wiki, tidy_mgr, url, src);
 		byte[] rv = section_list.Slice_bry_or_null(section_key);
 		if (rv == null) {
 			app.Gui_mgr().Kit().Ask_ok("", "", String_.Format("Section extraction failed!\nPlease do not edit this page else data will be lost!!\n\nwiki={0}\npage={1}\nsection={2}", url.Wiki_bry(), ttl.Full_db(), section_key));
@@ -59,7 +59,7 @@ public class Xop_section_mgr implements Gfo_invk {
 		if (section_key == null) return edit;
 
 		// parse orig
-		Xop_section_list section_list = new Xop_section_list().Parse(wiki, tidy_mgr, orig);
+		Xop_section_list section_list = new Xop_section_list().Parse(wiki, tidy_mgr, url, orig);
 		byte[] rv = section_list.Merge_bry_or_null(section_key, edit);
 		if (rv == null)
 			throw Err_.new_wo_type("could not merge section_key", "page", url.To_str(), "section_key", section_key);

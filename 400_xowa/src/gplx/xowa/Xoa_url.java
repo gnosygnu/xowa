@@ -63,7 +63,8 @@ public class Xoa_url {
 		byte[] anch_spr = anch == null ? null : Byte_ascii.Hash_bry;
 		return Bry_.Add(page, anch_spr, anch);
 	}
-	public byte[] To_bry_full_wo_qargs()	{return To_bry(Bool_.Y, Bool_.N);}
+	public byte[] To_bry()                  {return To_bry(Bool_.Y, Bool_.Y);}
+	public byte[] To_bry_full_wo_qargs()    {return To_bry(Bool_.Y, Bool_.N);}
 	public byte[] To_bry(boolean full, boolean show_qargs) {							// currently used for status bar; not embedded in any html
 		switch (tid) {
 			case Xoa_url_.Tid_unknown:											// unknown; should not occur?
@@ -104,6 +105,7 @@ public class Xoa_url {
 	}
 	public static final    Xoa_url Null = null;
 	public static Xoa_url blank() {return new Xoa_url();}
+	public static Xoa_url Test() {return New(Bry_.new_a7("test_wiki"), Bry_.new_a7("test_page"));}
 	public static Xoa_url New(Xow_wiki wiki, Xoa_ttl ttl) {return New(wiki.Domain_bry(), ttl.Full_txt_w_ttl_case());}
 	public static Xoa_url New(byte[] wiki, byte[] page) {
 		Xoa_url rv = new Xoa_url();

@@ -56,7 +56,7 @@ class Xoh_toc_wkr__txt__fxt {
 	public void Clear() {
 		wkr.Clear();
 		tidy_mgr.Clear();
-		wkr.Init(tidy_mgr, Xoa_page_.Main_page_bry);
+		wkr.Init(tidy_mgr, Xoa_url.Test());
 	}
 	public void Init__tidy(String html, String tidy)		{tidy_mgr.Add(Bry_.new_u8(html), Bry_.new_u8(tidy));}
 	public void Test__anch(String html, String expd_anch)	{Test__both(html, expd_anch, null);}

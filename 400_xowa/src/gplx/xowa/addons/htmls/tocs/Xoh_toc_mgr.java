@@ -32,10 +32,10 @@ public class Xoh_toc_mgr {
 		htmlr.Clear();
 		toc_bgn = -1;
 	}
-	public void Init(Xow_tidy_mgr_interface tidy_mgr, byte[] toc_title, byte[] page_name) {
+	public void Init(Xow_tidy_mgr_interface tidy_mgr, Xoa_url page_url, byte[] toc_title) {
 		this.Clear();
 		htmlr.Init(toc_title);
-		txt_wkr.Init(tidy_mgr, page_name);
+		txt_wkr.Init(tidy_mgr, page_url);
 	}
 	public Xoh_toc_itm Add(int hdr_num, byte[] hdr_txt) {
 		Xoh_toc_itm itm = new Xoh_toc_itm();

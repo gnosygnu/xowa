@@ -23,13 +23,13 @@ class Xop_section_list implements Xomw_heading_cbk {
 	private byte[] src;
 	private Xowe_wiki wiki;
 
-	public Xop_section_list Parse(Xowe_wiki wiki, Xow_tidy_mgr_interface tidy_mgr, byte[] src) {
+	public Xop_section_list Parse(Xowe_wiki wiki, Xow_tidy_mgr_interface tidy_mgr, Xoa_url page_url, byte[] src) {
 		// clear
 		this.wiki = wiki;
 		this.src = src;
 		hash.Clear();
 		toc_mgr.Clear();
-		toc_mgr.Init(tidy_mgr, Bry_.Empty, Bry_.Empty);
+		toc_mgr.Init(tidy_mgr, page_url, Bry_.Empty);
 
 		// parse
 		hdr_wkr.Parse(src, 0, src.length, this);

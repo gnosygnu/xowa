@@ -60,7 +60,7 @@ public class Xoh_page implements Xoa_page {
 		this.lang = wiki.Lang();
 		this.Clear();
 		html.Redlink_list().Disabled_(page_ttl.Ns().Id_is_module());	// never redlink in Module ns; particularly since Lua has multi-line comments for [[ ]]
-		html.Toc_mgr().Init(gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface_.Noop, wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val(), page_url.Raw());
+		html.Toc_mgr().Init(gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface_.Noop, page_url, wiki.Lang().Msg_mgr().Itm_by_id_or_null(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc).Val());
 	}
 	public Xoh_page Ctor_by_hdiff(Bry_bfr tmp_bfr, Xoae_page page, byte[] toc_label) {
 		this.wiki = page.Wiki(); this.page_url = page.Url(); this.page_ttl = page.Ttl(); this.page_id = page.Db().Page().Id();			
@@ -76,7 +76,7 @@ public class Xoh_page implements Xoa_page {
 		this.content_sub = html.Content_sub();
 		this.sidebar_div = Xoh_page_.Save_sidebars(tmp_bfr, page, html);
 
-		html.Toc_mgr().Init(page.Wikie().Html_mgr().Tidy_mgr(), toc_label, page_url.Page_bry());	// NOTE: do not pass in noop tidy_mgr, else broken TOC html will never get corrected during hdump; DATE:2016-08-14
+		html.Toc_mgr().Init(page.Wikie().Html_mgr().Tidy_mgr(), page_url, toc_label);	// NOTE: do not pass in noop tidy_mgr, else broken TOC html will never get corrected during hdump; DATE:2016-08-14
 		return this;
 	}
 	public void Ctor_by_db(int head_flag, byte[] display_ttl, byte[] content_sub, byte[] sidebar_div, int zip_tid, int hzip_tid, byte[] body) {

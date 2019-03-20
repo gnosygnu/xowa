@@ -23,38 +23,38 @@ class Xoh_toc_wkr__txt {
 	private final    Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
 	private final    Hash_adp anch_hash = Hash_adp_bry.ci_u8(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
 	private Xow_tidy_mgr_interface tidy_mgr;
-	private byte[] page_name;
+	private byte[] page_url_bry;
 	public void Clear() {
 		anch_bfr.Clear();
 		text_bfr.Clear();
 		anch_hash.Clear();
 	}
-	public void Init(Xow_tidy_mgr_interface tidy_mgr, byte[] page_name) {
+	public void Init(Xow_tidy_mgr_interface tidy_mgr, Xoa_url page_url) {
 		this.tidy_mgr = tidy_mgr;
-		this.page_name = page_name;
+		this.page_url_bry = page_url == null ? Bry_.new_a7("null_url") : page_url.To_bry();
 	}
 	public void Calc_anch_text(Xoh_toc_itm rv, byte[] src) {	// text within hdr; EX: <h2>Abc</h2> -> Abc
 		int end = src.length;
 		src = Gfh_utl.Del_comments(text_bfr, src, 0, end);
 		end = src.length;
-		tag_rdr.Init(page_name, src, 0, end);
+		tag_rdr.Init(page_url_bry, src, 0, end);
 		try {
 			if (!Calc_anch_text_recurse(src, 0, end)) {
-				Gfo_usr_dlg_.Instance.Log_many("", "", "toc:invalid html; page=~{0} src=~{1}", page_name, src);
+				Gfo_usr_dlg_.Instance.Log_many("", "", "toc:invalid html; page=~{0} src=~{1}", page_url_bry, src);
 
 				// tidy html; note reusing text_bfr as temp bfr
 				text_bfr.Clear().Add(src);
-				tidy_mgr.Exec_tidy(text_bfr, Bool_.N, page_name);
+				tidy_mgr.Exec_tidy(text_bfr, Bool_.N, page_url_bry);
 				src = text_bfr.To_bry_and_clear();
 				end = src.length;
-				tag_rdr.Init(page_name, src, 0, end);
+				tag_rdr.Init(page_url_bry, src, 0, end);
 
 				// try to calc again; if fail, give up
 				if (!Calc_anch_text_recurse(src, 0, end))
 					throw Err_.new_wo_type("could not tidy html");
 			}
 		} catch (Exception e) {
-			Gfo_usr_dlg_.Instance.Warn_many("", "", "toc:failed while generating anch_text; page=~{0} src=~{1} err=~{2}", page_name, src, Err_.Message_gplx_log(e));
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "toc:failed while generating anch_text; page=~{0} src=~{1} err=~{2}", page_url_bry, src, Err_.Message_gplx_log(e));
 			text_bfr.Clear().Add(src);
 			anch_encoder.Encode(anch_bfr, src);
 		}
@@ -138,7 +138,7 @@ class Xoh_toc_wkr__txt {
 			int rhs_bgn = -1, rhs_end = -1, new_pos = lhs_end;
 			if (lhs_is_pair) {			// get rhs unless inline
 				if (tag_id == Gfh_tag_.Id__any) {
-					Gfo_usr_dlg_.Instance.Warn_many("", "", "unknown tag in toc: page=~{0} tag=~{1}", page_name, lhs_bry);
+					Gfo_usr_dlg_.Instance.Warn_many("", "", "unknown tag in toc: page=~{0} tag=~{1}", page_url_bry, lhs_bry);
 					Gfh_tag rhs = tag_rdr.Tag__peek_fwd_tail(lhs_bry);
 					if (rhs.Name_id() == Gfh_tag_.Id__eos) return false;
 					rhs_bgn = rhs.Src_bgn(); rhs_end = rhs.Src_end();
