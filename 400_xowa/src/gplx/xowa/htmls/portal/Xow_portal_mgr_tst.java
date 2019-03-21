@@ -42,6 +42,19 @@ public class Xow_portal_mgr_tst {
 		fxt.Portal_mgr().Init();
 		fxt.Test_logo_frag(Bool_.Y, "file:///mem/xowa/user/test_user/wiki/en.wikipedia.org/html/logo_night.png");
 	}
+	@Test  public void Jumpto() {
+		fxt.Wiki().Msg_mgr().Set("jumpto", "Jump to:");
+		fxt.Wiki().Msg_mgr().Set("jumptonavigation", "navigation");
+		fxt.Wiki().Msg_mgr().Set("jumptosearch", "search");
+		fxt.Portal_mgr().Init();
+		Gftest.Eq__ary__lines(String_.Concat_lines_nl
+		( ""
+		, "    <div id=\"jump-to-nav\" class=\"mw-jump\">"
+		, "    <a class=\"mw-jump-link\" href=\"#mw-navigation\">Jump to:navigation</a>"
+		, "    <a class=\"mw-jump-link\" href=\"#p-search\">Jump to:search</a>"
+		, "    </div>"
+		), fxt.Portal_mgr().Div_jump_to());
+	}
 }
 class Xowh_portal_mgr_fxt {
 	private Xow_portal_mgr portal_mgr;
@@ -54,7 +67,8 @@ class Xowh_portal_mgr_fxt {
 			portal_mgr.Init_assert();	// needed for personal
 			portal_mgr.Missing_ns_cls_(Bry_.new_a7("xowa_display_none"));
 		}
-	}	private Xoae_app app; Xowe_wiki wiki;
+	}	private Xoae_app app;
+	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public void Test_div_ns_bry(String ttl, String expd) {
 		Tfds.Eq(expd, String_.new_a7(wiki.Html_mgr().Portal_mgr().Div_ns_bry(wiki.Utl__bfr_mkr(), Xoa_ttl.Parse(wiki, Bry_.new_a7(ttl)), wiki.Ns_mgr())));
 	}

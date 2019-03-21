@@ -79,7 +79,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 		div_home_bry = Init_fmtr(tmp_bfr, eval_mgr, div_home_fmtr);
 		div_wikis_fmtr.Eval_mgr_(eval_mgr);
 		Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
-		div_jump_to = Div_jump_to_fmtr.Bld_bry_many(tmp_bfr, msg_mgr.Val_by_key_obj("jumpto"), msg_mgr.Val_by_key_obj("jumptonavigation"), msg_mgr.Val_by_key_obj("comma-separator"), msg_mgr.Val_by_key_obj("jumptosearch"));
+		div_jump_to = Div_jump_to_fmtr.Bld_bry_many(tmp_bfr, msg_mgr.Val_by_key_obj("jumpto"), msg_mgr.Val_by_key_obj("jumptonavigation"), msg_mgr.Val_by_key_obj("jumptosearch"));
 		tmp_bfr.Mkr_rls();
 		sidebar_mgr.Init_by_wiki();
 	}	private boolean init_needed = true;
@@ -199,9 +199,15 @@ public class Xow_portal_mgr implements Gfo_invk {
 	, Invk_div_sync_ = "div_sync_", Invk_div_wikis_ = "div_wikis_";
 	public static final String Invk_div_logo_ = "div_logo_";
 	private static final    byte[] Missing_ns_cls_hide = Bry_.new_a7("xowa_display_none");
-	private static final    Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_
-	( "\n    <div id=\"jump-to-nav\" class=\"mw-jump\">~{jumpto}<a href=\"#mw-navigation\">~{jumptonavigation}</a>~{comma-separator}<a href=\"#p-search\">~{jumptosearch}</a></div>"
-	, "jumpto", "jumptonavigation", "comma-separator", "jumptosearch");
+
+	// NOTE: emulate recent change but support backward compatibility; ISSUE#:394; REF.MW:https://phabricator.wikimedia.org/source/Vector/browse/master/includes/templates/index.mustache DATE:2019-03-20
+	// TODO: use "vector-jumptosearch", but need to update language.gfs files
+	private static final    Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_(String_.Concat
+	( "\n    <div id=\"jump-to-nav\" class=\"mw-jump\">" // NOTE:class=mw-jump is for backward compatibility
+	, "\n    <a class=\"mw-jump-link\" href=\"#mw-navigation\">~{jumpto}~{jumptonavigation}</a>"
+	, "\n    <a class=\"mw-jump-link\" href=\"#p-search\">~{jumpto}~{jumptosearch}</a>"
+	, "\n    </div>" // NOTE: </div> is for backward compatibility; current MW places right after jump-to-nav
+	), "jumpto", "jumptonavigation", "jumptosearch");
 
 	private static final String
 	  Cfg__missing_class				= "xowa.html.portal.missing_class"

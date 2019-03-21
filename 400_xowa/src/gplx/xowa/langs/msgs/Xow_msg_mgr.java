@@ -105,6 +105,13 @@ public class Xow_msg_mgr implements Gfo_invk {
 			return null;
 		}
 	}	private static final    byte[] CONST_prefix_tooltip = Bry_.new_a7("tooltip-"), CONST_prefix_accesskey = Bry_.new_a7("accesskey-"), CONST_atr_title = Bry_.new_a7(" title=\""), CONST_atr_accesskey = Bry_.new_a7(" accesskey=\"");
+	public Xol_msg_itm Set(String key_str, String val_str) { // TEST
+		Xol_msg_itm msg_itm = this.Get_or_make(Bry_.new_u8(key_str));
+		msg_itm.Atrs_set(Bry_.new_u8(val_str), false, false);
+		msg_itm.Defined_in_(Xol_msg_itm.Defined_in__lang);
+		return msg_itm;
+	}
+
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))							return this.Val_by_key_obj(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_get_html_accesskey_and_title))	return this.Val_html_accesskey_and_title(m.ReadBry("v"));
