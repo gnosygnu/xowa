@@ -91,6 +91,11 @@ public class Scrib_lib_ustring__gsub__tst {
 		Exec_gsub("aa"			, "(a)%1"				, 1, "%1z", "az;1");	// capture; handle %1+; PAGE:en.w:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 		Exec_gsub("a\"b'c\"d"	, "([\"'])(.-)%1"		, 1, "%1z", "a\"zd;1");	// capture; http://www.lua.org/pil/20.3.html; {{#invoke:test|gsub_string|a"b'c"d|(["'])(.-)%1|%1z}}
 	}
+	@Test  public void Regx__capture_wo_group() {
+		Exec_gsub("Ab", "%u", 1, "<%0>", "<A>b;1");
+		Exec_gsub("Ab", "%u", 1, "<%1>", "<A>b;1"); // NOTE: %1 should be same as %0 if no matches; ISSUE#:393; DATE:2019-03-20
+		Exec_gsub_fail("Ab", "%u", 1, "<%2>", "invalid capture index %2 in replacement String");
+	}
 	@Test  public void Regx__frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; DATE:2015-07-21
 		Exec_gsub("a b c", "%f[%W]", 5, "()", "a() b() c();3");
 		Exec_gsub("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", Int_.Max_value, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
@@ -119,6 +124,15 @@ public class Scrib_lib_ustring__gsub__tst {
 	}
 	private void Exec_gsub(String text, Object regx, int limit, Object repl, String expd) {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(text, regx, repl, limit), expd);
+	}
+	private void Exec_gsub_fail(String text, Object regx, int limit, Object repl, String expd) {
+		try {
+			fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(text, regx, repl, limit), expd);
+		} catch (Exception e) {
+			Gftest.Eq__bool(true, String_.Has(Err_.Message_gplx_log(e), expd));
+			return;
+		}
+		throw Err_.new_wo_type("expected failure");
 	}
 }
 class Mock_proc__recursive extends Mock_proc_fxt {	private final    Mock_scrib_fxt fxt; private final    Scrib_lib lib; private final    Mock_proc__recursive inner;

@@ -134,18 +134,21 @@ class Scrib_lib_ustring_gsub_mgr {
 									case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
 									case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
 										int idx = b - Byte_ascii.Num_0;
-										if (idx == 0)	// NOTE: 0 means take result; REF.MW:if ($x === '0'); return $m[0]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
+										// REF.MW: https://github.com/wikimedia/mediawiki-extensions-Scribunto/blob/master/includes/engines/LuaCommon/UstringLibrary.php#L785-L796
+										// NOTE: 0 means take result; REF.MW:if ($x === '0'); return $m[0]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
+										if (idx == 0)
 											tmp_bfr.Add_str_u8(String_.Mid(text, match.Find_bgn(), match.Find_end()));											
-										else {			// NOTE: > 0 means get from groups if it exists; REF.MW:elseif (isset($m["m$x"])) return $m["m$x"]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
-											idx -= List_adp_.Base1;
-											if (idx < match.Groups().length) {	// retrieve numbered capture; TODO_OLD: support more than 9 captures
-												Regx_group grp = match.Groups()[idx];
-												tmp_bfr.Add_str_u8(String_.Mid(text, grp.Bgn(), grp.End()));	// NOTE: grp.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
-											}
-											else {
-												tmp_bfr.Add_byte(Byte_ascii.Percent);
-												tmp_bfr.Add_byte(b);
-											}
+										// NOTE: > 0 means get from groups if it exists; REF.MW:elseif (isset($m["m$x"])) return $m["m$x"]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
+										else if (idx - 1 < match.Groups().length) {	// retrieve numbered capture; TODO_OLD: support more than 9 captures
+											Regx_group grp = match.Groups()[idx - 1];
+											tmp_bfr.Add_str_u8(String_.Mid(text, grp.Bgn(), grp.End()));	// NOTE: grp.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
+										}
+										// NOTE: 1 per MW "Match undocumented Lua String.gsub behavior"; PAGE:en.d:Wiktionary:Scripts ISSUE#:393; DATE:2019-03-20
+										else if (idx == 1) {
+											tmp_bfr.Add_str_u8(String_.Mid(text, match.Find_bgn(), match.Find_end()));
+										}
+										else {
+											throw Err_.new_wo_type("invalid capture index %" + Char_.To_str(b) + " in replacement String");
 										}
 										break;
 									case Byte_ascii.Percent:
