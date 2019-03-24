@@ -246,19 +246,19 @@
     </p>
     <ul>
       <li>
-        (fix) [broken since:v0.12.3] Xwiki: [[en:]] should link to en.wikipedia.org, not to self. See: <a href="/site/fr.wikipedia.org/wiki/Main_page">http://fr.wikipedia.org/wiki/Main_page</a>
+        (fix) [broken since:v0.12.3] Xwiki: [[en:]] should link to en.wikipedia.org, not to self. See: <a href="http://fr.wikipedia.org/wiki/Main_page" rel="nofollow" class="external free">http://fr.wikipedia.org/wiki/Main_page</a>
       </li>
       <li>
-        (change) Parser: Titles starting with multi-byte character now upper-cased properly; EX:[[ⱥ]]. See: <a href="/site/en.wikipedia.org/wiki/%C2%B5">http://en.wikipedia.org/wiki/µ</a> <a href="/site/en.wikipedia.org/wiki/Latin_script_in_Unicode">http://en.wikipedia.org/wiki/Latin_script_in_Unicode</a> <a href="/site/en.wikipedia.org/wiki/List_of_Unicode_characters">http://en.wikipedia.org/wiki/List_of_Unicode_characters</a> <a href="/site/fr.wikipedia.org/wiki/Liste_de_caract%C3%A8res_Unicode_latins_pr%C3%A9compos%C3%A9s">http://fr.wikipedia.org/wiki/Liste_de_caractères_Unicode_latins_précomposés</a>
+        (change) Parser: Titles starting with multi-byte character now upper-cased properly; EX:[[ⱥ]]. See: <a href="/site/en.wikipedia.org/wiki/%C2%B5">http://en.wikipedia.org/wiki/µ</a> <a href="/site/en.wikipedia.org/wiki/Latin_script_in_Unicode">http://en.wikipedia.org/wiki/Latin_script_in_Unicode</a> <a href="/site/en.wikipedia.org/wiki/List_of_Unicode_characters">http://en.wikipedia.org/wiki/List_of_Unicode_characters</a> <a href="http://fr.wikipedia.org/wiki/Liste_de_caractères_Unicode_latins_précomposés" rel="nofollow" class="external free">http://fr.wikipedia.org/wiki/Liste_de_caractères_Unicode_latins_précomposés</a>
       </li>
       <li>
-        (change) Parser: {{lc}} now handles multi-byte characters. See: <a href="/site/fr.wikipedia.org/wiki/%CA%BFAmr_ibn_Kult%CC%A0h%C5%ABm">http://fr.wikipedia.org/wiki/%CA%BFAmr_ibn_Kult%CC%A0h%C5%ABm</a>
+        (change) Parser: {{lc}} now handles multi-byte characters. See: <a href="http://fr.wikipedia.org/wiki/%CA%BFAmr_ibn_Kult%CC%A0h%C5%ABm" rel="nofollow" class="external free">http://fr.wikipedia.org/wiki/%CA%BFAmr_ibn_Kult%CC%A0h%C5%ABm</a>
       </li>
       <li>
         (change) Parser: {{anchorencode}} now supports templates, literal links; EX:{{#anchorencode:{{A}}}} {{#anchorencode:[[:A]]}}. See: <a href="/site/en.wiktionary.org/wiki/%CE%BC">http://en.wiktionary.org/wiki/μ</a>
       </li>
       <li>
-        (change) Scribunto: GetUrl should accept multiple key vals for query args; EX:action=edit, preload=Modèle:Documentation/Preload2. See: <a href="/site/fr.wikipedia.org/wiki/Wikipedia:Image_du_jour/Date">http://fr.wikipedia.org/wiki/Wikipedia:Image_du_jour/Date</a>
+        (change) Scribunto: GetUrl should accept multiple key vals for query args; EX:action=edit, preload=Modèle:Documentation/Preload2. See: <a href="http://fr.wikipedia.org/wiki/Wikipedia:Image_du_jour/Date" rel="nofollow" class="external free">http://fr.wikipedia.org/wiki/Wikipedia:Image_du_jour/Date</a>
       </li>
       <li>
         (change) File/v2: Video thumbnails don't always show. See: <a href="/site/en.wikipedia.org/wiki/Echidna">http://en.wikipedia.org/wiki/Echidna</a> <a href="/site/en.wikipedia.org/wiki/WWI">http://en.wikipedia.org/wiki/WWI</a>
@@ -302,7 +302,7 @@
         (add) DynamicPageList: Improved support for wikibooks, wikiversity, wikinews. See: <a href="http://en.wikibooks.org/wiki/Subject:Computer_programming" rel="nofollow" class="external free">http://en.wikibooks.org/wiki/Subject:Computer_programming</a>
       </li>
       <li>
-        (change) Scribunto: Gsub_match_callback should return integer positions as strings, not integers; EX:{{#invoke:Biblio|ouvrage}} . See: <a href="/site/fr.wikipedia.org/wiki/Atoum">http://fr.wikipedia.org/wiki/Atoum</a>
+        (change) Scribunto: Gsub_match_callback should return integer positions as strings, not integers; EX:{{#invoke:Biblio|ouvrage}} . See: <a href="http://fr.wikipedia.org/wiki/Atoum" rel="nofollow" class="external free">http://fr.wikipedia.org/wiki/Atoum</a>
       </li>
     </ul>
     <p>
@@ -325,7 +325,7 @@
         (change) Scribunto: FormatDate should take indexed args; EX:formatDate((1, 'pl'), (2, 'Y-m'), (4, false)). See: <a href="http://pl.wikipedia.org/wiki/L._Frank_Baum" rel="nofollow" class="external free">http://pl.wikipedia.org/wiki/L._Frank_Baum</a>
       </li>
       <li>
-        (change) Scribunto: Handle Lua balanced regex (requires java 1.7); EX:%b(). See: <a href="/site/fr.wikipedia.org/wiki/Astronomie">http://fr.wikipedia.org/wiki/Astronomie</a>
+        (change) Scribunto: Handle Lua balanced regex (requires java 1.7); EX:%b(). See: <a href="http://fr.wikipedia.org/wiki/Astronomie" rel="nofollow" class="external free">http://fr.wikipedia.org/wiki/Astronomie</a>
       </li>
       <li>
         (change) Parser: Clicking on images sometimes doesn't open page b/c of HTML entities; EX:File:A.png|link=A&amp;nbsp;b {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Template:Formel-1-Saison_2001">http://de.wikipedia.org/wiki/Template:Formel-1-Saison_2001</a>
@@ -386,7 +386,7 @@
     </p>
     <ul>
       <li>
-        (fix) Import: species.wikimedia.org had wrong domain name; EX:species.wikispecies.org {detected by Miles}. See: <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline" id="xolnki_5" title="Dashboard/Import/Offline">Dashboard/Import/Offline</a>
+        (fix) Import: species.wikimedia.org had wrong domain name; EX:species.wikispecies.org {detected by Miles}. See: <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline" id="xolnki_5" title="Dashboard/Import/Offline" class="xowa-visited">Dashboard/Import/Offline</a>
       </li>
       <li>
         (change) Parser: Category should not show in TOC; EX:== a [[Category:b]] ==. See: <a href="/site/en.wikipedia.org/wiki/Tamil_Nadu">http://en.wikipedia.org/wiki/Tamil_Nadu</a>
@@ -395,7 +395,7 @@
         (change) Parser: Html numeric entities should be rendered literally, not as bytes; EX:ab -&gt; ab not a{192,149}b. See: <a href="/site/de.wikipedia.org/wiki/Magnus_Carlsen">http://de.wikipedia.org/wiki/Magnus_Carlsen</a>
       </li>
       <li>
-        (change) Parser: Unclosed row was being discarded; EX:{|\n|-\n&lt;td&gt;a&lt;/td&gt;\n|-b\n|}. See: <a href="/site/fr.wikipedia.org/wiki/Napol%C3%A9on_Ier">http://fr.wikipedia.org/wiki/Napoléon_Ier</a>
+        (change) Parser: Unclosed row was being discarded; EX:{|\n|-\n&lt;td&gt;a&lt;/td&gt;\n|-b\n|}. See: <a href="http://fr.wikipedia.org/wiki/Napoléon_Ier" rel="nofollow" class="external free">http://fr.wikipedia.org/wiki/Napoléon_Ier</a>
       </li>
       <li>
         (change) Parser: {{#ifeq}} fails when more than one colon appears; EX:{{#ifeq: :|a|b|c}}. See: <a href="http://de.wiktionary.org/wiki/glitschig" rel="nofollow" class="external free">http://de.wiktionary.org/wiki/glitschig</a>
@@ -1609,7 +1609,7 @@
         (add) Import: Sqlite database import available for wikidata.
       </li>
       <li>
-        (add) Tidy: Bookend spaces inside xml node should be relocated outside; EX:a&lt;span&gt; c &lt;/span&gt;d -&gt; a &lt;span&gt;c&lt;/span&gt; d; {{Palette|Histoire de France}}. See: <a href="/site/fr.wikipedia.org/wiki/France">http://fr.wikipedia.org/wiki/France</a>
+        (add) Tidy: Bookend spaces inside xml node should be relocated outside; EX:a&lt;span&gt; c &lt;/span&gt;d -&gt; a &lt;span&gt;c&lt;/span&gt; d; {{Palette|Histoire de France}}. See: <a href="http://fr.wikipedia.org/wiki/France" rel="nofollow" class="external free">http://fr.wikipedia.org/wiki/France</a>
       </li>
     </ul>
     <p>
@@ -1691,7 +1691,7 @@
         (add) Search: Search now supports AllPages mode {requested by Schnark}. See: <a href="http://xowa.org/home/wiki/Options/Search_suggest" id="xolnki_38" title="Options/Search suggest">Options/Search_suggest</a>
       </li>
       <li>
-        (add) Import: Import/Script redesigned to be more intuitive {contributed by Schnark}. See: <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline" id="xolnki_39" title="Dashboard/Import/Offline">Dashboard/Import/Offline</a>
+        (add) Import: Import/Script redesigned to be more intuitive {contributed by Schnark}. See: <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline" id="xolnki_39" title="Dashboard/Import/Offline" class="xowa-visited">Dashboard/Import/Offline</a>
       </li>
     </ul>
     <p>
@@ -1822,7 +1822,7 @@
         (add) Timeline: Tabs in text data supported; EX:http://de.wikipedia.org/wiki/Hilfe:Zeitleisten#TextData {contributed by Schnark}.
       </li>
       <li>
-        (add) Import: allow GUI selection of data dump file {requested by hidp123;Karimoune}. See: <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline" id="xolnki_42" title="Dashboard/Import/Offline">Dashboard/Import/Offline</a>
+        (add) Import: allow GUI selection of data dump file {requested by hidp123;Karimoune}. See: <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline" id="xolnki_42" title="Dashboard/Import/Offline" class="xowa-visited">Dashboard/Import/Offline</a>
       </li>
       <li>
         (add) Import: if offline and importing new wiki, automatically copy home wiki's /html/ directory.
@@ -1860,7 +1860,7 @@
         (add) Search syntax supports AND, OR, quotes; EX:http://en.wikipedia.org/wiki/Special:Search/Earth_AND_History?fulltext=y&amp;search=Earth+AND+History {requested by Schnark}. See <a href="http://xowa.org/home/wiki/App/Search" id="xolnki_46" title="App/Search">App/Search</a>
       </li>
       <li>
-        (add) Version 2 category upgrade can be done through UI. See <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline" id="xolnki_47" title="Dashboard/Import/Offline">Dashboard/Import/Offline</a> and <a href="http://xowa.org/home/wiki/Help:Core/Category/V2/Setup" id="xolnki_48" title="Help:Core/Category/V2/Setup">Help:Core/Category/V2/Setup</a>
+        (add) Version 2 category upgrade can be done through UI. See <a href="http://xowa.org/home/wiki/Dashboard/Import/Offline" id="xolnki_47" title="Dashboard/Import/Offline" class="xowa-visited">Dashboard/Import/Offline</a> and <a href="http://xowa.org/home/wiki/Help:Core/Category/V2/Setup" id="xolnki_48" title="Help:Core/Category/V2/Setup">Help:Core/Category/V2/Setup</a>
       </li>
       <li>
         (add) Wiki import can read directly from bz2; no need to unzip to xml {requested by Schark, Miles}. See <a href="http://xowa.org/home/wiki/Dev/Design/Data_dump_format" id="xolnki_49" title="Dev/Design/Data dump format">Dev/Design/Data_dump_format</a>

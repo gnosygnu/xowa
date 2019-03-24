@@ -45,7 +45,7 @@
       
       <option value='xowa.gui.nightmode' >Gui - Nightmode</option>
       
-      <option value='xowa.wiki.hdumps'  selected='selected'>Wiki - HTML Databases</option>
+      <option value='xowa.wiki.hdumps' >Wiki - HTML Databases</option>
       
       <option value='xowa.wiki.edit' >Wiki - Editing</option>
       
@@ -65,7 +65,7 @@
       
       <option value='xowa.html.scripting' >HTML - Scripting</option>
       
-      <option value='xowa.files.general' >Files - General</option>
+      <option value='xowa.files.general'  selected='selected'>Files - General</option>
       
       <option value='xowa.files.apps' >Files - Apps</option>
       
@@ -106,41 +106,103 @@
     <p id='page_help_para'></p>
   </div>
 
-  <h2>General</h2>
+  <h2>Basic</h2>
 
   
   <div class="xocfg_row flex_div">
     <!-- BTN:help_item -->
     <div class='xocfg_itm_help'>
-      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.hdumps.read_preferred")' title='view more info'>&nbsp;</span>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.retrieval_enabled")' title='view more info'>&nbsp;</span>
     </div>
     
     <!-- TEXT:key -->
-    <div id='xowa.wiki.hdumps.read_preferred__name' class='xocfg_itm_name'>Prefer HTML Databases for Read tab</div>
+    <div id='xowa.files.retrieval_enabled__name' class='xocfg_itm_name'>Retrieval enabled</div>
 
     <!-- BTN:undo -->
-    <div id='xowa.wiki.hdumps.read_preferred__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
-      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.read_preferred")' title="reset to &quot;y&quot;">&nbsp;</span>
+    <div id='xowa.files.retrieval_enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.retrieval_enabled")' title="reset to &quot;y&quot;">&nbsp;</span>
     </div>
     
     <!-- TEXT:val -->
     <div class='xocfg_itm_data'>
-<input id="xowa.wiki.hdumps.read_preferred" data-xocfg-key="xowa.wiki.hdumps.read_preferred" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+<input id="xowa.files.retrieval_enabled" data-xocfg-key="xowa.files.retrieval_enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
     
     <!-- HIDDEN:key,ctx -->
-    <input type='hidden' id='xowa.wiki.hdumps.read_preferred__key_box' value='xowa.wiki.hdumps.read_preferred'></input>
-    <input type='hidden' id='xowa.wiki.hdumps.read_preferred__ctx_box' value='app'></input>
+    <input type='hidden' id='xowa.files.retrieval_enabled__key_box' value='xowa.files.retrieval_enabled'></input>
+    <input type='hidden' id='xowa.files.retrieval_enabled__ctx_box' value='app'></input>
   </div>
   
   <!-- DIV:help -->
-  <div id='xowa.wiki.hdumps.read_preferred_help_div' class='xohelp_div'>
-    <div id='xowa.wiki.hdumps.read_preferred_help_msg' class='xohelp_msg'><p>Choose one of the following:
+  <div id='xowa.files.retrieval_enabled_help_div' class='xohelp_div'>
+    <div id='xowa.files.retrieval_enabled_help_msg' class='xohelp_msg'><p>Choose one of the following:
 </p>
 
 <ul>
-  <li> <b>checked</b>: Read tab uses HTML databases. Note that this will be faster, but there may be some inaccuracies. (These inaccuracies are being worked on)
+  <li> <b>checked</b> to automatically download images / retrieve images from database
+
+    <ul>
+      <li> ImageMagick and Inkscape <b>must</b> be installed (See <a href="/wiki/Dev/File/Setup" id="xolnki_27" title="Dev/File/Setup" tabindex="-1">Dev/File/Setup</a>)
+      </li>
+      <li> An internet connection must be available, or a local tarball must be set up. (See <a href="/wiki/Archive/Usage/Offline_images" id="xolnki_28" title="Archive/Usage/Offline images" tabindex="-1">Archive/Usage/Offline_images</a>)
+      </li>
+    </ul>
   </li>
-  <li> <b>unchecked</b>:  Read tab uses Wikitext. Note that this will be slower, but more accurate.
+  <li> <b>unchecked</b> to leave images unprocessed
+  </li>
+</ul>
+</div>
+  </div>
+  
+
+  <h2>Cache</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_min")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.files.cache.fsys_size_min__name' class='xocfg_itm_name'>Minimum disk space used</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.files.cache.fsys_size_min__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_min")' title="reset to &quot;75&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.files.cache.fsys_size_min" data-xocfg-key="xowa.files.cache.fsys_size_min" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="75"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.files.cache.fsys_size_min__key_box' value='xowa.files.cache.fsys_size_min'></input>
+    <input type='hidden' id='xowa.files.cache.fsys_size_min__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.files.cache.fsys_size_min_help_div' class='xohelp_div'>
+    <div id='xowa.files.cache.fsys_size_min_help_msg' class='xohelp_msg'><p>Enter a minimum size for the cache to use (in MB)<br/>
+</p>
+
+<p>This is an advanced configuration tweak. When the cache reaches its maximum size, it will delete files to free space. It will continue deleting files until the minimum size is reached.<br/>
+</p>
+
+<p>For example:
+</p>
+
+<ul>
+  <li> If the max is set to 100 MB
+  </li>
+  <li> ... and the current size of all files in the cache is 99.9 MB
+  </li>
+  <li> ... and a 200 KB file is added
+  </li>
+  <li> Then the cache size will be temporarily 100.1 MB
+  </li>
+  <li> ... triggering the delete mechanism
+  </li>
+  <li> ... which will reduce the current size of all files to 75 MB
   </li>
 </ul>
 </div>
@@ -149,47 +211,128 @@
   <div class="xocfg_row flex_div">
     <!-- BTN:help_item -->
     <div class='xocfg_itm_help'>
-      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.hdumps.html_mode")' title='view more info'>&nbsp;</span>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.fsys_size_max")' title='view more info'>&nbsp;</span>
     </div>
     
     <!-- TEXT:key -->
-    <div id='xowa.wiki.hdumps.html_mode__name' class='xocfg_itm_name'>HTML tab mode</div>
+    <div id='xowa.files.cache.fsys_size_max__name' class='xocfg_itm_name'>Maximum disk space used</div>
 
     <!-- BTN:undo -->
-    <div id='xowa.wiki.hdumps.html_mode__undo' data-xocfg-type='list:xowa.wiki.hdumps.html_mode' class='xocfg_itm_delete'>
-      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.html_mode")' title="reset to &quot;shown&quot;">&nbsp;</span>
+    <div id='xowa.files.cache.fsys_size_max__undo' data-xocfg-type='int' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.fsys_size_max")' title="reset to &quot;100&quot;">&nbsp;</span>
     </div>
     
     <!-- TEXT:val -->
     <div class='xocfg_itm_data'>
-<select id="xowa.wiki.hdumps.html_mode" data-xocfg-key="xowa.wiki.hdumps.html_mode" data-xocfg-type="list:xowa.wiki.hdumps.html_mode" accesskey="d" class="xocfg_data__list" size="4">
-<option value="shown">Shown</option>
-<option value="swt_browser" selected="selected">SWT Browser</option>
-<option value="hdump_save">Saved for HTML DB</option>
-<option value="hdump_load">Loaded by HTML DB</option>
-</select>
-</div>
+<input id="xowa.files.cache.fsys_size_max" data-xocfg-key="xowa.files.cache.fsys_size_max" data-xocfg-type="int" accesskey="d" class="xocfg_data__int" type="text" value="100"></input></div>
     
     <!-- HIDDEN:key,ctx -->
-    <input type='hidden' id='xowa.wiki.hdumps.html_mode__key_box' value='xowa.wiki.hdumps.html_mode'></input>
-    <input type='hidden' id='xowa.wiki.hdumps.html_mode__ctx_box' value='app'></input>
+    <input type='hidden' id='xowa.files.cache.fsys_size_max__key_box' value='xowa.files.cache.fsys_size_max'></input>
+    <input type='hidden' id='xowa.files.cache.fsys_size_max__ctx_box' value='app'></input>
   </div>
   
   <!-- DIV:help -->
-  <div id='xowa.wiki.hdumps.html_mode_help_div' class='xohelp_div'>
-    <div id='xowa.wiki.hdumps.html_mode_help_msg' class='xohelp_msg'><p>Choose one of the following to show in HTML tab:
+  <div id='xowa.files.cache.fsys_size_max_help_div' class='xohelp_div'>
+    <div id='xowa.files.cache.fsys_size_max_help_msg' class='xohelp_msg'><p>Enter a maximum size for the cache to use (in MB)<br/>
 </p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.reduce_to_min")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.files.cache.reduce_to_min__name' class='xocfg_itm_name'>Reduce cache to min</div>
 
-<ul>
-  <li> <b>Shown</b>: HTML as generated by XOWA
-  </li>
-  <li> <b>SWT browser</b>: HTML as currently shown in SWT browser (useful for Special pages and javascript calls)
-  </li>
-  <li> <b>Saved for HTML DB</b>:  HTML as saved in the HTML database. Note that this is for developer purposes only.
-  </li>
-  <li> <b>Loaded for HTML DB</b>:  HTML as saved in the HTML database but post-processed with image urls. Note that this is for developer purposes only.
-  </li>
-</ul>
+    <!-- BTN:undo -->
+    <div id='xowa.files.cache.reduce_to_min__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.reduce_to_min")' title="reset to &quot;&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<button id="xowa.files.cache.reduce_to_min" data-xocfg-key="xowa.files.cache.reduce_to_min" data-xocfg-type="btn" class="xocfg_data__btn" >Reduce cache to min</button></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.files.cache.reduce_to_min__key_box' value='xowa.files.cache.reduce_to_min'></input>
+    <input type='hidden' id='xowa.files.cache.reduce_to_min__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.files.cache.reduce_to_min_help_div' class='xohelp_div'>
+    <div id='xowa.files.cache.reduce_to_min_help_msg' class='xohelp_msg'><p>Press to reduce the cache to the minimum now (typically 75 MB).
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.clear")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.files.cache.clear__name' class='xocfg_itm_name'>Clear cache</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.files.cache.clear__undo' data-xocfg-type='btn' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.clear")' title="reset to &quot;&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<button id="xowa.files.cache.clear" data-xocfg-key="xowa.files.cache.clear" data-xocfg-type="btn" class="xocfg_data__btn" >Clear cache</button></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.files.cache.clear__key_box' value='xowa.files.cache.clear'></input>
+    <input type='hidden' id='xowa.files.cache.clear__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.files.cache.clear_help_div' class='xohelp_div'>
+    <div id='xowa.files.cache.clear_help_msg' class='xohelp_msg'><p>Press to clear the cache (reduces to 0 MB).
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.files.cache.info")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.files.cache.info__name' class='xocfg_itm_name'>Info</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.files.cache.info__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.files.cache.info")' title="reset to &quot;cache folder: C:\xowa\file
+space used: 110.524 MB
+file count: 6665
+oldest file: 2019-03-19 18:30:25
+&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<textarea id="xowa.files.cache.info" data-xocfg-key="xowa.files.cache.info" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo xocfg_data__readonly" readonly="true">cache folder: C:\xowa\file
+space used: 110.524 MB
+file count: 6665
+oldest file: 2019-03-19 18:30:25
+</textarea></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.files.cache.info__key_box' value='xowa.files.cache.info'></input>
+    <input type='hidden' id='xowa.files.cache.info__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.files.cache.info_help_div' class='xohelp_div'>
+    <div id='xowa.files.cache.info_help_msg' class='xohelp_msg'><p>Miscellaneous information about the cache
+</p>
 </div>
   </div>
   
