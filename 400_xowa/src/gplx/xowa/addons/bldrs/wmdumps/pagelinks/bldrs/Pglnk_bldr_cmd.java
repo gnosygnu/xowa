@@ -17,35 +17,15 @@ package gplx.xowa.addons.bldrs.wmdumps.pagelinks.bldrs; import gplx.*; import gp
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.sql_dumps.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.data.*; import gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs.*;
 public class Pglnk_bldr_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk {
-	private Db_conn conn;
-	private Pglnk_page_link_temp_tbl temp_tbl;
+	private Pglnk_tempdb_mgr tempdb_mgr;
 	private int tmp_src_id, tmp_trg_ns; private byte[] tmp_trg_ttl;
-	private int rows = 0;
+	private int row_max = 200 * 1000 * 1000;
 	public Pglnk_bldr_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.make_fil_len = Io_mgr.Len_mb;}
 	@Override public String Sql_file_name() {return Dump_type_key;} public static final String Dump_type_key = "pagelinks";
 	@Override protected Xosql_dump_parser New_parser() {return new Xosql_dump_parser(this, "pl_from", "pl_namespace", "pl_title");}
 	@Override public void Cmd_bgn_hook(Xob_bldr bldr, Xosql_dump_parser parser) {
 		wiki.Init_assert();
-		Xob_db_file page_link_db = Xob_db_file.New__page_link(wiki);
-		this.conn = page_link_db.Conn();
-		this.temp_tbl = new Pglnk_page_link_temp_tbl(conn);
-		conn.Meta_tbl_delete(temp_tbl.Tbl_name());
-		temp_tbl.Create_tbl();
-		temp_tbl.Insert_bgn();
-	}
-	@Override public void Cmd_end() {
-		if (fail) return;
-		temp_tbl.Insert_end();
-		temp_tbl.Create_idx();
-		Pglnk_page_link_tbl actl_tbl = new Pglnk_page_link_tbl(conn);
-		conn.Meta_tbl_delete(actl_tbl.Tbl_name());
-		actl_tbl.Create_tbl();
-		new Db_attach_mgr(conn, new Db_attach_itm("page_db", wiki.Data__core_mgr().Db__core().Conn()))
-			.Exec_sql_w_msg("updating page_link", Sql__page_link__make);
-		conn.Meta_tbl_delete(temp_tbl.Tbl_name());
-		actl_tbl.Create_idx__src_trg();
-		actl_tbl.Create_idx__trg_src();
-		conn.Env_vacuum();
+		tempdb_mgr = new Pglnk_tempdb_mgr(usr_dlg, wiki, row_max);
 	}
 	public void On_fld_done(int fld_idx, byte[] src, int val_bgn, int val_end) {
 		switch (fld_idx) {
@@ -55,19 +35,20 @@ public class Pglnk_bldr_cmd extends Xob_sql_dump_base implements Xosql_dump_cbk 
 		}
 	}
 	public void On_row_done() {
-		temp_tbl.Insert(tmp_src_id, tmp_trg_ns, tmp_trg_ttl);
-		if (++rows % 100000 == 0) usr_dlg.Prog_many("", "", "reading row ~{0}", Int_.To_str_fmt(rows, "#,##0"));
+		tempdb_mgr.Dump__insert_row(tmp_src_id, tmp_trg_ns, tmp_trg_ttl);
 	}
+	@Override public void Cmd_end() {
+		if (fail) return;
+		tempdb_mgr.Live__create();
+	}
+	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+		if		(ctx.Match(k, Invk_row_max_))			row_max = m.ReadInt("v");
+		else	return super.Invk(ctx, ikey, k, m);
+		return this;
+	}
+
 	private static final byte Fld__pl_from = 0, Fld__pl_namespace = 1, Fld__pl_title = 2;
-	private static final    String Sql__page_link__make = String_.Concat_lines_nl_skip_last
-	(	"INSERT INTO page_link (src_id, trg_id, trg_count)"
-	,	"SELECT  pl.src_id"
-	,	",       p.page_id"
-	,	",       Count(p.page_id)"
-	,	"FROM    page_link_temp pl"
-	,	"        JOIN <page_db>page p ON pl.trg_ns = p.page_namespace AND pl.trg_ttl = p.page_title"
-	,	"GROUP BY pl.src_id, p.page_id"
-	);
+	private static final String Invk_row_max_ = "row_max_";
 
 	public static final String BLDR_CMD_KEY = "wiki.page_link";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}
