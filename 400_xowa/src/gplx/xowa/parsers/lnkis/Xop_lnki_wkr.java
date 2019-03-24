@@ -102,15 +102,26 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 						arg_tid = Xop_lnki_arg_parser.Tid_target;
 				}
 
-				// if just "class" or "alt", treat as caption; EX:[[A|alt]] -> caption=alt x> caption=A ISSUE#:303 DATE:2018-12-16
-				switch (arg_tid) {
-					case Xop_lnki_arg_parser.Tid_class:
-					case Xop_lnki_arg_parser.Tid_alt:
-						if (!arg.KeyTkn_exists()){
-							arg_tid = Xop_lnki_arg_parser.Tid_caption;
-						}
-						break;
+				// if not File / Media ns, then treat as caption; ISSUE#:303; DATE:2019-03-24
+				if (lnki.Ttl() != null && !lnki.Ttl().Ns().Id_is_file_or_media()) {
+					arg_tid = Xop_lnki_arg_parser.Tid_caption;
 				}
+				// if key-less keyword, treat as caption; EX:[[File:A.png|alt]] -> caption=alt x> caption=A.png ISSUE#:303 DATE:2018-12-16
+				else {
+					switch (arg_tid) {
+						case Xop_lnki_arg_parser.Tid_class:
+						case Xop_lnki_arg_parser.Tid_alt:
+						case Xop_lnki_arg_parser.Tid_link:
+						case Xop_lnki_arg_parser.Tid_page:
+						case Xop_lnki_arg_parser.Tid_thumbtime:
+						// case Xop_lnki_arg_parser.Tid_noicon: TODO: uncomment b/c keyword is deprecated; WHEN: when integrating TimedMediaHandler; REF.MW:https://www.mediawiki.org/wiki/Extension:TimedMediaHandler; DATE:2019-03-24
+							if (!arg.KeyTkn_exists()){
+								arg_tid = Xop_lnki_arg_parser.Tid_caption;
+							}
+							break;
+					}
+				}
+
 				switch (arg_tid) {
 					case Xop_lnki_arg_parser.Tid_none:			lnki.Align_h_(Xop_lnki_type.Id_none); break;
 					case Xop_lnki_arg_parser.Tid_border:		lnki.Border_(Bool_.Y_byte); break;

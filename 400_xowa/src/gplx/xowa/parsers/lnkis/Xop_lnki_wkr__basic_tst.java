@@ -312,9 +312,25 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_all_str("[[Src]]"		, "<a href=\"/wiki/Src\" class=\"xowa-visited\">Src</a>");	// show [[Src]] as visited since it exists in history
 		fxt.Test_parse_page_all_str("[[Other]]"		, "<a href=\"/wiki/Other\">Other</a>");						// show other pages as not visited
 	}
-	@Test   public void Caption__outlier() {
+	@Test   public void File_keywords__ignore_if_not_file_ns() { // ISSUE#:303 DATE:2019-03-24
 		fxt.Test_parse_page_all_str("[[A|class]]", "<a href=\"/wiki/A\">class</a>");
 		fxt.Test_parse_page_all_str("[[A|alt]]", "<a href=\"/wiki/A\">alt</a>");
+		fxt.Test_parse_page_all_str("[[A|sub]]", "<a href=\"/wiki/A\">sub</a>");
+		fxt.Test_parse_page_all_str("[[A|sup]]", "<a href=\"/wiki/A\">sup</a>");
 		fxt.Test_parse_page_all_str("[[A|alt|a|b]]", "<a href=\"/wiki/A\">alt|a|b</a>");
+	}
+	@Test   public void File_keywords__ignore_if_no_key() { // ISSUE#:303; DATE:2019-03-24
+		// assert treated as captions if no key
+		Test__File_keywords__ignore_if_no_key("class", "alt", "link", "page", "thumbtime");
+
+		// assert not treated as captions if no key
+		fxt.Test_parse_page_all_str("[[File:A.png|top]]", "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>");
+	}
+	private void Test__File_keywords__ignore_if_no_key(String... keywords) {
+		for (String keyword : keywords) {
+			String wtxt = "[[File:A.png|" + keyword + "]]";
+			String html = "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"" + keyword + "\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" /></a>";
+			fxt.Test_parse_page_all_str(wtxt, html);
+		}
 	}
 }
