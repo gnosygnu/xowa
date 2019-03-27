@@ -110,6 +110,7 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 	}
 	public void Init_by_decode(byte[] src, boolean file_is_orig, byte[] file_ttl_bry, int file_w, double file_time, int file_page) {
 		this.src_bry = src; this.src_bgn = 0; this.src_end = src.length;
+		this.src_mid = Bry_.Mid(src, src_bgn, src_end);
 		this.file_is_orig = file_is_orig;
 		this.file_ttl_bry = file_ttl_bry; this.file_w = file_w; this.file_time = file_time; this.file_page = file_page;
 	}

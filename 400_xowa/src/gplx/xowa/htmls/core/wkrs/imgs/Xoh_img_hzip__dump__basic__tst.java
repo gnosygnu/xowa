@@ -105,4 +105,9 @@ public class Xoh_img_hzip__dump__basic__tst {
 		, "<img data-xowa-title='A.png' data-xoimg='1|220|180|-1|-1|-1' src='' width='0' height='0' alt='' usemap='#imagemap_1_1'>"
 		);
 	}
+	@Test   public void Existing_src_causes_npe() { // ISSUE#:400; DATE:2019-03-26
+		fxt.Test__decode
+		( "%}'h+bAA.png/!6!1bA.png"
+		, "<a href=\"/wiki/Help:A\" class=\"image\" xowa_title=\"A.png\"><img src=\"file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/20px.png\" width=\"20\" height=\"15\" alt=\"b\"></a>");
+	}
 }
