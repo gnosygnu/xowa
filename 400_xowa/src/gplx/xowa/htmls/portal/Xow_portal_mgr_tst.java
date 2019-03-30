@@ -50,7 +50,7 @@ public class Xow_portal_mgr_tst {
 		Gftest.Eq__ary__lines(String_.Concat_lines_nl
 		( ""
 		, "    <div id=\"jump-to-nav\" class=\"mw-jump\">"
-		, "    <a class=\"mw-jump-link\" href=\"#mw-navigation\">Jump to:navigation</a>"
+		, "    <a class=\"mw-jump-link\" href=\"#mw-head\">Jump to:navigation</a>"
 		, "    <a class=\"mw-jump-link\" href=\"#p-search\">Jump to:search</a>"
 		, "    </div>"
 		), fxt.Portal_mgr().Div_jump_to());

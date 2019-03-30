@@ -204,7 +204,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 	// TODO: use "vector-jumptosearch", but need to update language.gfs files
 	private static final    Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_(String_.Concat
 	( "\n    <div id=\"jump-to-nav\" class=\"mw-jump\">" // NOTE:class=mw-jump is for backward compatibility
-	, "\n    <a class=\"mw-jump-link\" href=\"#mw-navigation\">~{jumpto}~{jumptonavigation}</a>"
+	, "\n    <a class=\"mw-jump-link\" href=\"#mw-head\">~{jumpto}~{jumptonavigation}</a>"
 	, "\n    <a class=\"mw-jump-link\" href=\"#p-search\">~{jumpto}~{jumptosearch}</a>"
 	, "\n    </div>" // NOTE: </div> is for backward compatibility; current MW places right after jump-to-nav
 	), "jumpto", "jumptonavigation", "jumptosearch");
