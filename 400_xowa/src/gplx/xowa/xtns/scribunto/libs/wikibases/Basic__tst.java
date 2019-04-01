@@ -55,8 +55,8 @@ public class Basic__tst {
 			);
 
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("Earth"							), "Q2");
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("missing_page"					), "");
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary(""								), ""); // PAGE:en.w:Water_treader DATE:2018-07-01
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary("missing_page"					), null);
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityId, Object_.Ary(""								), null); // PAGE:en.w:Water_treader DATE:2018-07-01
 	}
 	@Test  public void GetReferencedEntityId() {
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("Q1").Xto_wdoc());
