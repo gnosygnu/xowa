@@ -98,6 +98,13 @@ public class Template_styles_nde_tst {
 		, ""
 		);
 	}
+	@Test  public void Error__missing_src() {
+		fxt.Test__parse
+		( "<templatestyles src{{=}}'Missing.css'/>"// PAGE:en.w:Switzerland; ISSUE#:416; DATE:2019-03-31
+		, "<strong class=\"error\">Invalid title for TemplateStyles src attribute.</strong>"
+		, ""
+		);
+	}
 }
 class Template_styles_nde_fxt {
 	private final    Xop_fxt parser_fxt = new Xop_fxt();

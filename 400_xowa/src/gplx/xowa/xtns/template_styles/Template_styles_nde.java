@@ -34,7 +34,7 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_bgn);
 		Xox_xnde_.Parse_xatrs(wiki, this, xatrs_hash, src, xnde);
 		// get css_ttl
-		css_ttl = wiki.Ttl_parse(css_ttl_bry);
+		css_ttl = css_ttl_bry == null ? null : wiki.Ttl_parse(css_ttl_bry); // must check for null ttl; EX:"<templatestyle src{{=}}A.css>"; PAGE:en.w:Switzerland; ISSUE#:416; DATE:2019-03-31
 		if (css_ttl == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "Template_styles_nde.invalid_ttl: wiki=~{0} page=~{1} css_ttl=~{2}", wiki.Domain_bry(), ctx.Page().Url_bry_safe(), css_ttl_bry);
 			return;
