@@ -10,5 +10,7 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/gplx.gflucene"/>
 	<classpathentry exported="true" kind="lib" path="lib/icu4j-57_1.jar"/>
+	<classpathentry kind="lib" path="lib/vnu.jar"/>
+	<classpathentry kind="lib" path="lib/Saxon-HE-9.9.1-2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

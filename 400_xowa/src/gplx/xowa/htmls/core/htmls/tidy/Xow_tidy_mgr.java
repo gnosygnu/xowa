@@ -20,6 +20,7 @@ public class Xow_tidy_mgr implements Gfo_invk, Xow_tidy_mgr_interface {
 	private Xoae_app app;
 	private final    Xoh_tidy_wkr_tidy	wkr__tidy = new Xoh_tidy_wkr_tidy();	// NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
 	private final    Xoh_tidy_wkr_jtidy wkr__jtidy = new Xoh_tidy_wkr_jtidy();
+	private final    Xoh_tidy_wkr__vnu  wkr__vnu = new Xoh_tidy_wkr__vnu();
 	private Xoh_tidy_wkr wkr = Xoh_tidy_wkr_.Wkr_null; // TEST: set default wkr to null
 	private boolean enabled = true;
 	public void Init_by_wiki(Xowe_wiki wiki) {
@@ -42,6 +43,7 @@ public class Xow_tidy_mgr implements Gfo_invk, Xow_tidy_mgr_interface {
 			String engine_str = m.ReadStr("v");
 			if		(String_.Eq(engine_str, "tidy"))	wkr = wkr__tidy; // NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
 			else if (String_.Eq(engine_str, "jtidy"))	wkr = wkr__jtidy;
+			else if (String_.Eq(engine_str, "vnu"))     wkr = wkr__vnu;
 			else										throw Err_.new_unhandled_default(engine_str);
 			wkr.Init_by_app(app);
 		}

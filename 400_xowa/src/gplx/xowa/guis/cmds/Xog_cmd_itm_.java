@@ -145,6 +145,7 @@ public class Xog_cmd_itm_ {
 	, Key_html_tidy_toggle										= new_dflt_(Xog_ctg_itm_.Tid_html			, "xowa.html.tidy.toggle")
 	, Key_html_tidy_engine_tidy_								= new_dflt_(Xog_ctg_itm_.Tid_html			, "xowa.html.tidy.engine_tidy_")
 	, Key_html_tidy_engine_jtidy_								= new_dflt_(Xog_ctg_itm_.Tid_html			, "xowa.html.tidy.engine_jtidy_")
+	, Key_html_tidy_engine_vnu_								    = new_dflt_(Xog_ctg_itm_.Tid_html			, "xowa.html.tidy.engine_vnu_")
 
 	, Key_net_enabled											= new_dflt_(Xog_ctg_itm_.Tid_net			, "xowa.net.enabled")
 	, Key_net_enabled_n_										= new_dflt_(Xog_ctg_itm_.Tid_net			, "xowa.net.enabled_n_")
