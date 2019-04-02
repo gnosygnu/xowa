@@ -27,7 +27,7 @@ public class Scrib_lib_ustring__match__tst {
 		Exec_match("abcd"	, "a"				, 2, String_.Null_mark);			// bgn
 		Exec_match("abcd"	, "b(c)"			, 1, "c");							// group
 		Exec_match(" a b "	, "^%s*(.-)%s*$"	, 1, "a b");						// trim; NOTE: changed back from "a b;" to "a b"; DATE:2017-04-23; changed from "a b" to "a b;"; DATE:2015-01-30
-		Exec_match("abcd"	, "a"				, 0, "a");							// handle 0; note that php/lua is super-1, but some modules pass in 0; ru.w:Module:Infocards; DATE:2013-11-08
+		Exec_match("abcd"	, "a"				, 0, "a");							// handle 0; note that php/lua is BASE_1, but some modules pass in 0; ru.w:Module:Infocards; DATE:2013-11-08
 		Exec_match("abcd"	, "."				, -1, "d");							// -1
 		Exec_match("aaa"	, "a"				, 1, "a");							// should return 1st match not many
 		Exec_match("aaa"	, "(a)"				, 1, "a");							// should return 1st match only; PAGE:en.d:действительное_причастие_настоящего_времени DATE:2017-04-23

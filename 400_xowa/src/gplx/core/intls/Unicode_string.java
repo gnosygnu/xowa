@@ -24,6 +24,7 @@ public interface Unicode_string {
 	int Val_codes(int i);
 	int Pos_codes_to_bytes(int i);
 	int Pos_codes_to_chars(int i);
+	int Pos_bytes_to_chars(int i);
 	int Pos_bytes_to_codes(int i);
 	int Pos_chars_to_codes(int i);
 }
@@ -43,7 +44,8 @@ class Unicode_string_single implements Unicode_string { // 1 byte == 1 codepoint
 	public int Len_bytes() {return codes_len;}
 	public int Val_codes(int i) {return codes[i];}
 	public int Pos_codes_to_bytes(int i) {if (i < 0 || i > codes_len) throw Err_.new_wo_type("invalid idx", "src", src_string, "idx", i); return i;}
-	public int Pos_codes_to_chars(int i) {if (i < 0 || i > codes_len) throw Err_.new_wo_type("invalid idx", "src", src_string, "idx", i);return i;}
-	public int Pos_bytes_to_codes(int i) {if (i < 0 || i > codes_len) throw Err_.new_wo_type("invalid idx", "src", src_string, "idx", i);return i;}
-	public int Pos_chars_to_codes(int i) {if (i < 0 || i > codes_len) throw Err_.new_wo_type("invalid idx", "src", src_string, "idx", i);return i;}
+	public int Pos_codes_to_chars(int i) {if (i < 0 || i > codes_len) throw Err_.new_wo_type("invalid idx", "src", src_string, "idx", i); return i;}
+	public int Pos_bytes_to_chars(int i) {if (i < 0 || i > codes_len) throw Err_.new_wo_type("invalid idx", "src", src_string, "idx", i); return i;}
+	public int Pos_bytes_to_codes(int i) {if (i < 0 || i > codes_len) throw Err_.new_wo_type("invalid idx", "src", src_string, "idx", i); return i;}
+	public int Pos_chars_to_codes(int i) {if (i < 0 || i > codes_len) throw Err_.new_wo_type("invalid idx", "src", src_string, "idx", i); return i;}
 }

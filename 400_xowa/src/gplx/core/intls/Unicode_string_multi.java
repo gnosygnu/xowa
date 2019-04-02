@@ -18,6 +18,7 @@ class Unicode_string_multi implements Unicode_string {
 	private final    int[] codes;
 	private final    int[] codes_to_bytes;
 	private final    int[] codes_to_chars;
+	private final    int[] bytes_to_chars;
 	private final    int[] bytes_to_codes;
 	private final    int[] chars_to_codes;
 
@@ -34,6 +35,7 @@ class Unicode_string_multi implements Unicode_string {
 		this.codes_to_bytes = new int[codes_len + Adj_end];
 		this.codes_to_chars = new int[codes_len + Adj_end];
 		this.bytes_to_codes = New_int_ary(bytes_len);
+		this.bytes_to_chars = New_int_ary(bytes_len);
 		this.chars_to_codes = New_int_ary(chars_len);
 
 		// init loop
@@ -46,6 +48,7 @@ class Unicode_string_multi implements Unicode_string {
 			// update
 			codes_to_bytes[codes_pos] = bytes_pos;
 			codes_to_chars[codes_pos] = chars_pos;
+			bytes_to_chars[bytes_pos] = chars_pos;
 			bytes_to_codes[bytes_pos] = codes_pos;
 			chars_to_codes[chars_pos] = codes_pos;
 
@@ -67,6 +70,7 @@ class Unicode_string_multi implements Unicode_string {
 	public int Val_codes(int i) {return codes[i];}
 	public int Pos_codes_to_bytes(int i) {return codes_to_bytes[i];}
 	public int Pos_codes_to_chars(int i) {return codes_to_chars[i];}
+	public int Pos_bytes_to_chars(int i) {int rv = bytes_to_chars[i]; if (rv == Invalid) throw Err_.new_wo_type("invalid i", "src", src, "type", "bytes_to_chars", "i", i); return rv;}
 	public int Pos_bytes_to_codes(int i) {int rv = bytes_to_codes[i]; if (rv == Invalid) throw Err_.new_wo_type("invalid i", "src", src, "type", "bytes_to_codes", "i", i); return rv;}
 	public int Pos_chars_to_codes(int i) {int rv = chars_to_codes[i]; if (rv == Invalid) throw Err_.new_wo_type("invalid i", "src", src, "type", "chars_to_codes", "i", i); return rv;}
 

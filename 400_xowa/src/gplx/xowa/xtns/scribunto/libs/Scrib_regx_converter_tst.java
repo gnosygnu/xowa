@@ -64,11 +64,11 @@ class Scrib_regx_converter_fxt {
 		}
 	}
 	public void Test_parse(String raw, String expd) {
-		under.patternToRegex(raw, Scrib_regx_converter.Anchor_G);
+		under.patternToRegex(raw, Scrib_regx_converter.Anchor_G, true);
 		Tfds.Eq(expd, under.Regx());
 	}
 	public void Test_replace(String text, String find, String replace, String expd) {
-		String regex_str = under.patternToRegex(find, Scrib_regx_converter.Anchor_G);
+		String regex_str = under.patternToRegex(find, Scrib_regx_converter.Anchor_G, true);
 		String actl = Regx_adp_.Replace(text, regex_str, replace);
 		Tfds.Eq(expd, actl);
 	}

@@ -17,6 +17,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.core.intls.*; import gplx.langs.regxs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.xtns.scribunto.procs.*;
+import gplx.xowa.xtns.scribunto.libs.patterns.*;
 public class Scrib_lib_ustring implements Scrib_lib {
 	public Scrib_lib_ustring(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
@@ -98,7 +99,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 
 		// run regex
 		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
-		Regx_match[] regx_rslts = Run_regex_or_null(text_ucs, regx_converter, find_str, bgn_as_codes);
+		Regx_match[] regx_rslts = Scrib_pattern_matcher_.Instance().Match(core.Ctx().Page().Url(), text_ucs, regx_converter, find_str, bgn_as_codes);
 		if (regx_rslts.length == 0) return rslt.Init_ary_empty();
 
 		// add to tmp_list
@@ -123,7 +124,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 
 		// run regex
 		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
-		Regx_match[] regx_rslts = Run_regex_or_null(text_ucs, regx_converter, find_str, bgn_as_codes);
+		Regx_match[] regx_rslts = Scrib_pattern_matcher_.Instance().Match(core.Ctx().Page().Url(), text_ucs, regx_converter, find_str, bgn_as_codes);
 		if (regx_rslts.length == 0) return rslt.Init_null();	// return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02; confirmed with en.d:民; DATE:2015-01-30
 
 		// TOMBSTONE: add 1st match only; do not add all; PAGE:en.d:действительное_причастие_настоящего_времени DATE:2017-04-23
@@ -140,7 +141,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		// String text = Scrib_kv_utl_.Val_to_str(values, 0);
 		String regx = args.Pull_str(1);
 		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
-		String pcre = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_null);
+		String pcre = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_null, true);
 		return rslt.Init_many_objs(pcre, regx_converter.Capt_ary());
 	}
 	public boolean Gmatch_callback(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -148,7 +149,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		String regx = args.Pull_str(1);
 		Keyval[] capt = args.Cast_kv_ary_or_null(2);
 		int pos = args.Pull_int(3);
-		Regx_adp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
+		Regx_adp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx().Page().Url(), regx);
 		Regx_match[] regx_rslts = regx_adp.Match_all(text, pos);
 		int len = regx_rslts.length;
 		if (len == 0) return rslt.Init_many_objs(pos, Keyval_.Ary_empty);
@@ -178,14 +179,6 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			bgn_as_codes = 0;
 		return bgn_as_codes;
 	}
-	private Regx_match[] Run_regex_or_null(Unicode_string text_ucs, Scrib_regx_converter regx_converter, String find_str, int bgn_as_codes) {
-		// convert regex from lua to java
-		find_str = regx_converter.patternToRegex(find_str, Scrib_regx_converter.Anchor_G);
-
-		// run regex
-		Regx_adp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), find_str);
-		return regx_adp.Match_all(text_ucs.Src_string(), text_ucs.Pos_codes_to_chars(bgn_as_codes));	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
-	}
 	private void AddCapturesFromMatch(List_adp tmp_list, Regx_match rslt, String text, Keyval[] capts, boolean op_is_match) {// NOTE: this matches behavior in UstringLibrary.php!addCapturesFromMatch
 		int capts_len = capts == null ? 0 : capts.length;
 		if (capts_len > 0) { // NOTE: changed from "grps_len > 0"; PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
@@ -205,12 +198,12 @@ public class Scrib_lib_ustring implements Scrib_lib {
 				&&	tmp_list.Count() == 0)	// only add match once; EX: "aaaa", "a" will have four matches; get 1st; DATE:2014-04-02
 			tmp_list.Add(String_.Mid(text, rslt.Find_bgn(), rslt.Find_end()));
 	}
-	public static Regx_adp RegxAdp_new_(Xop_ctx ctx, String regx) {
+	public static Regx_adp RegxAdp_new_(Xoa_url url, String regx) {
 		Regx_adp rv = Regx_adp_.new_(regx);
 		if (rv.Pattern_is_invalid()) {
 			// try to identify [z-a] errors; PAGE:https://en.wiktionary.org/wiki/Module:scripts/data;  DATE:2017-04-23
 			Exception exc = rv.Pattern_is_invalid_exception();
-			ctx.App().Usr_dlg().Log_many("", "", "regx is invalid: regx=~{0} page=~{1} exc=~{2}", regx, ctx.Page().Ttl().Page_db(), Err_.Message_gplx_log(exc));
+			Gfo_usr_dlg_.Instance.Log_many("", "", "regx is invalid: regx=~{0} page=~{1} exc=~{2}", regx, url.To_bry(), Err_.Message_gplx_log(exc));
 		}
 		return rv;
 	}

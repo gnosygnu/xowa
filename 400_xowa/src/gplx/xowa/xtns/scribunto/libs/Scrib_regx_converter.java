@@ -30,7 +30,7 @@ public class Scrib_regx_converter {
 	public Keyval[] Capt_ary() {return grp_mgr.Capt__to_ary();}
 	public boolean Any_pos() {return any_pos;} private boolean any_pos;
 	public Regx_match[] Adjust_balanced(Regx_match[] rslts) {return grp_mgr.Adjust_balanced(rslts);}
-	public String patternToRegex(String pat_str, byte[] anchor) {
+	public String patternToRegex(String pat_str, byte[] anchor, boolean mode_is_regx) {
 		Unicode_string pat_ucs = Unicode_string_.New(pat_str);
 		// TODO.CACHE: if (!$this->patternRegexCache->has($cacheKey)) 
 		grp_mgr.Clear();
@@ -49,10 +49,18 @@ public class Scrib_regx_converter {
 			int cur = pat_ucs.Val_codes(i);
 			switch (cur) {
 				case Byte_ascii.Pow:
+					if (!mode_is_regx) {
+						bfr.Add_byte(Byte_ascii.Pow);
+						continue;
+					}
 					q_flag = i != 0;
 					bfr.Add((anchor == Anchor_null || q_flag) ? Bry_pow_escaped : anchor); // NOTE: must add anchor \G when using offsets; EX:cs.n:Category:1._zárí_2008; DATE:2014-05-07
 					break;
 				case Byte_ascii.Dollar:
+					if (!mode_is_regx) {
+						bfr.Add_byte(Byte_ascii.Dollar);
+						continue;
+					}
 					q_flag = i < len - 1;
 					bfr.Add(q_flag ? Bry_dollar_escaped : Bry_dollar_literal);
 					break;
@@ -78,6 +86,10 @@ public class Scrib_regx_converter {
 					bfr.Add_byte(Byte_ascii.Paren_end);
 					break;
 				case Byte_ascii.Percent:
+					if (!mode_is_regx) {
+						bfr.Add_byte(Byte_ascii.Percent);
+						continue;
+					}
 					i++;
 					if (i >= len)
 						throw Err_.new_wo_type("malformed pattern (ends with '%')");
@@ -114,7 +126,8 @@ public class Scrib_regx_converter {
 										++bct;
 										int balanced_idx = grp_mgr.Full__len();
 										fmtr_balanced.Bld_bfr(bfr_balanced, Int_.To_bry(bct), Utf16_.Encode_int_to_bry(char_0), Utf16_.Encode_int_to_bry(char_1), Int_.To_bry(balanced_idx + 1), Int_.To_bry(balanced_idx + 2));
-										grp_mgr.Capt__add__fake(2);
+										if (mode_is_regx)
+											grp_mgr.Capt__add__fake(2);
 										bfr.Add(bfr_balanced.To_bry_and_clear());
 									}
 								}
@@ -152,16 +165,32 @@ public class Scrib_regx_converter {
 					}
 					break;
 				case Byte_ascii.Brack_bgn:
+					if (!mode_is_regx) {
+						bfr.Add_byte(Byte_ascii.Brack_bgn);
+						continue;
+					}
 					i = bracketedCharSetToRegex(bfr, pat_ucs, i, len);
 					q_flag = true;
 					break;
 				case Byte_ascii.Brack_end:
+					if (!mode_is_regx) {
+						bfr.Add_byte(Byte_ascii.Brack_end);
+						continue;
+					}
 					throw Err_.new_wo_type("Unmatched close-bracket at pattern character " + Int_.To_str(i_end));
 				case Byte_ascii.Dot:
+					if (!mode_is_regx) {
+						bfr.Add_byte(Byte_ascii.Dot);
+						continue;
+					}
 					bfr.Add_byte(Byte_ascii.Dot);
 					q_flag = true;
 					break;
 				default:
+					if (!mode_is_regx) {
+						bfr.Add_u8_int(cur);
+						continue;
+					}
 					Regx_quote(bfr, cur);
 					q_flag = true;
 					break;

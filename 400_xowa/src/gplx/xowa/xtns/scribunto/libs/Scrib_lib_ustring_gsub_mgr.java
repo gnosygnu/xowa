@@ -32,7 +32,7 @@ class Scrib_lib_ustring_gsub_mgr {
 
 		// get @pattern; NOTE: sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
 		String regx = args.Xstr_str_or_null(1);
-		regx = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_pow);
+		regx = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_pow, true);
 
 		// get @repl
 		Object repl_obj = args.Cast_obj_or_null(2);
@@ -82,7 +82,7 @@ class Scrib_lib_ustring_gsub_mgr {
 	}
 	private String Exec_repl(byte repl_tid, String text, String regx, int limit) {
 		// parse regx
-		Regx_adp regx_mgr = Scrib_lib_ustring.RegxAdp_new_(core.Ctx(), regx);
+		Regx_adp regx_mgr = Scrib_lib_ustring.RegxAdp_new_(core.Ctx().Page().Url(), regx);
 		if (regx_mgr.Pattern_is_invalid()) return text; // NOTE: invalid patterns should return self; EX:[^]; DATE:2014-09-02)
 
 		// exec regx
