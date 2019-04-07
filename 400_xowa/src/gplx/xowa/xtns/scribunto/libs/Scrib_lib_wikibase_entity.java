@@ -63,7 +63,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 		// get wdoc
 		Wdata_doc wdoc = wdata_mgr.Doc_mgr.Get_by_loose_id_or_null(qid);
 		if (wdoc == null) {
-			Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), qid);
+			Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), "FormatPropertyValues", qid);
 			return rslt.Init_str_empty(); // NOTE: return empty String, not nil; PAGE:fr.s:Henri_Bergson; DATE:2014-08-13
 		}
 

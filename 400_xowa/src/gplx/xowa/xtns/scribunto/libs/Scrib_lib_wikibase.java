@@ -163,11 +163,11 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		return rslt.Init_obj(wkr.Get_referenced_entity());
 	}
 	public boolean EntityExists(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Wdata_doc wdoc = Get_wdoc_or_null(args, core, false); 
+		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "EntityExists", false); 
 		return rslt.Init_obj(wdoc != null);
 	}
 	public boolean GetEntity(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Wdata_doc wdoc = Get_wdoc_or_null(args, core, true); 
+		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetEntity", true); 
 		if (wdoc == null) {
 			return rslt.Init_ary_empty();
 			// return rslt.Init_obj(Keyval_.Ary(Keyval_.new_("schemaVersion", 2))); // NOTE: was "rslt.Init_ary_empty()" PAGE:de.w:Critérium_International_2016 DATE:2017-12-30
@@ -218,8 +218,46 @@ public function formatValues( $snaksSerialization ) {
 		throw Err_.new_unimplemented();
 	}
 	public boolean ResolvePropertyId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
-		Wdata_doc wdoc = Get_wdoc_or_null(args, core, true); if (wdoc == null) return rslt.Init_ary_empty();	// NOTE: prop should be of form "P123"; do not add "P"; PAGE:no.w:Anne_Enger; DATE:2015-10-27
-		return rslt.Init_obj(wdoc.Label_list__get_or_fallback(core.Lang()));
+		byte[] rv = null;
+		byte[] pid = Get_xid_from_args(args);
+		if (pid != null) {
+			// if pid is "P####", look-up in db by title
+			byte b0 = pid[0];
+			if (b0 == Byte_ascii.Ltr_P || b0 == Byte_ascii.Ltr_p) {
+				// check if rest is numeric
+				boolean numeric = true;
+				for (int i = 1; i < pid.length; i++) {
+					if (!Byte_ascii.Is_num(pid[i])) {
+						numeric = false;
+						break;
+					}
+				}
+				if (numeric) {
+					byte[] key = pid;
+					if (b0 == Byte_ascii.Ltr_p) key[0] = Byte_ascii.Ltr_P; // uppercase key
+					Wdata_doc wdoc = entity_mgr.Get_by_xid_or_null(key); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
+					if (wdoc != null) rv = key; // found wdoc; set rv
+				}
+			}
+
+			// pid is non-numeric or does not exist; look-up by label
+			if (rv == null) {
+				Wdata_wiki_mgr wdata_mgr = core.Wiki().Appe().Wiki_mgr().Wdata_mgr();
+				int pid_int = wdata_mgr.Pid_mgr.Get_pid_or_neg1(core.Wiki().Wdata_wiki_lang(), pid);
+				if (pid_int != gplx.xowa.xtns.wbases.core.Wbase_pid.Id_null) {
+					Bry_bfr tmp_bfr = Bry_bfr_.New();
+					tmp_bfr.Add_byte(Byte_ascii.Ltr_P);
+					tmp_bfr.Add_long_variable(pid_int);
+					rv = tmp_bfr.To_bry_and_clear();
+				}
+			}
+		}
+		if (rv == null) {
+			Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), "ResolvePropertyId", pid);
+			return rslt.Init_null(); // NOTE: should be null, not empty; verified with "=mw.wikibase.resolvePropertyId('')" -> nil; DATE:2019-04-07
+		}
+		else
+			return rslt.Init_obj(rv);
 	}
 	public boolean GetPropertyOrder(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		throw Err_.new_("wbase", "getPropertyOrder not implemented", "url", core.Page().Url().To_str());
@@ -228,7 +266,7 @@ public function formatValues( $snaksSerialization ) {
 		throw Err_.new_("wbase", "orderProperties not implemented", "url", core.Page().Url().To_str());
 	}
 	public boolean GetLabel(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
-		Wdata_doc wdoc = Get_wdoc_or_null(args, core, true); 
+		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetLabel", true); 
 		if (wdoc == null) 
 			return rslt.Init_ary_empty();
 		else
@@ -240,12 +278,12 @@ public function formatValues( $snaksSerialization ) {
 		return rslt.Init_obj(wikibaseLanguageIndependentLuaBindings.getLabelByLanguage(prefixedEntityId, languageCode));
 	}
 	public boolean GetSiteLinkPageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
-		Wdata_doc wdoc = Get_wdoc_or_null(args, core, true); if (wdoc == null) return rslt.Init_ary_empty();	// NOTE: prop should be of form "P123"; do not add "P"; PAGE:no.w:Anne_Enger; DATE:2015-10-27
+		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetSiteLinkPageName", true); if (wdoc == null) return rslt.Init_ary_empty();	// NOTE: prop should be of form "P123"; do not add "P"; PAGE:no.w:Anne_Enger; DATE:2015-10-27
 		Xow_domain_itm domain_itm = core.Wiki().Domain_itm();
 		return rslt.Init_obj(wdoc.Slink_list__get_or_fallback(domain_itm.Abrv_wm()));
 	}
 	public boolean GetDescription(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
-		Wdata_doc wdoc = Get_wdoc_or_null(args, core, true); if (wdoc == null) return rslt.Init_ary_empty();
+		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetDescription", true); if (wdoc == null) return rslt.Init_ary_empty();
 		return rslt.Init_obj(wdoc.Descr_list__get_or_fallback(core.Lang()));
 	}
 	public boolean GetUserLang(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
@@ -264,14 +302,21 @@ public function formatValues( $snaksSerialization ) {
 	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_obj(Keyval_.Ary_empty);	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)
 	}
-	public Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core, boolean logMissing) {
-		// get qid / pid from scrib_arg[0]; if none, return null;
-		byte[] xid_bry = args.Pull_bry(0); if (Bry_.Len_eq_0(xid_bry)) return null;	// NOTE: some Modules do not pass in an argument; return early, else spurious warning "invalid qid for ttl" (since ttl is blank); EX:w:Module:Authority_control; DATE:2013-10-27
-		xid_bry = Bry_.Trim(xid_bry); // trim, b/c some pages will literally pass in "Property:P5\n"; PAGE:de.w:Mailand–Sanremo_2016 ISSUE#:363; DATE:2019-02-12
+	private byte[] Get_xid_from_args(Scrib_proc_args args) {
+		// get qid / pid from scrib_arg[0]
+		byte[] xid_bry = args.Pull_bry(0);
+		// NOTE: some Modules do not pass in an argument; return early, else spurious warning "invalid qid for ttl" (since ttl is blank); EX:w:Module:Authority_control; DATE:2013-10-27
+		return Bry_.Len_eq_0(xid_bry)
+			? null
+			: Bry_.Trim(xid_bry); // trim, b/c some pages will literally pass in "Property:P5\n"; PAGE:de.w:Mailand–Sanremo_2016 ISSUE#:363; DATE:2019-02-12
+	}
+	private Wdata_doc Get_wdoc_or_null(Scrib_proc_args args, Scrib_core core, String type, boolean logMissing) {
+		byte[] xid_bry = Get_xid_from_args(args);
+		if (xid_bry == null) return null;
 
 		// get wdoc
 		Wdata_doc wdoc = entity_mgr.Get_by_xid_or_null(xid_bry); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
-		if (wdoc == null && logMissing) Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), xid_bry);
+		if (wdoc == null && logMissing) Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), type, xid_bry);
 		return wdoc;
 	}
 }

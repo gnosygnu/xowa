@@ -140,10 +140,6 @@ public class Basic__tst {
 //			( "1=" // not ""
 //			));
 //		}
-	@Test  public void ResolvePropertyId() {
-		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("Property:p2").Add_label("zh-hans", "prop_a").Xto_wdoc());
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_resolvePropertyId, Object_.Ary("p2"), "prop_a");
-	}
 	@Test  public void RenderSnaks() {
 		Keyval[] args = Wbase_snak_utl_.Get_snaks_ary(wdata_fxt, wdata_fxt.Make_claim_monolingual(3, "en", "P3_en"), wdata_fxt.Make_claim_monolingual(3, "de", "P3_de"));
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnaks, args, "P3_en, P3_de");

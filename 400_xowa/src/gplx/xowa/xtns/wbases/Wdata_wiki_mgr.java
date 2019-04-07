@@ -194,7 +194,8 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		}
 		return false;
 	}
-	public static void Log_missing_qid(Xop_ctx ctx, byte[] qid) {
-		ctx.Wiki().Appe().Usr_dlg().Log_many("", "", "qid not found in wikidata; qid=~{0} page=~{1}", String_.new_u8(qid), String_.new_u8(ctx.Page().Url_bry_safe()));
+	public static void Log_missing_qid(Xop_ctx ctx, String type, byte[] id) {
+		if (id == null) id = Bry_.Empty;
+		ctx.Wiki().Appe().Usr_dlg().Log_many("", "", "Unknown id in wikidata; type=~{0} id=~{1} page=~{2}", type, id, ctx.Page().Url_bry_safe());
 	}
 }
