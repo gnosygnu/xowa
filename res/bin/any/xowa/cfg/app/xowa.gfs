@@ -268,7 +268,7 @@ app.wikis.get('~{wiki_key}').html.article {
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub" class="visible">~{page_content_sub}</div>~{page_jumpto}
-    <div id="mw-content-text" lang="en" dir="~{page_lang_ltr}" class="mw-content-~{page_lang_ltr}">~{page_data}
+    <div id="mw-content-text" lang="en" dir="~{page_lang_ltr}" class="mw-content-~{page_lang_ltr} mw-parser-output">~{page_data}
       <div class="visualClear">
 ~{page_langs}
       </div>
@@ -347,7 +347,7 @@ app.wikis.get('~{wiki_key}').html.article {
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub" class="visible">~{page_content_sub}</div>
-    <div id="mw-content-text" lang="en" dir="~{page_lang_ltr}" class="mw-content-~{page_lang_ltr}">
+    <div id="mw-content-text" lang="en" dir="~{page_lang_ltr}" class="mw-content-~{page_lang_ltr} mw-parser-output">
       <div id="xowa_page_edit_preview_id">~{edit_div_preview}</div>
       <form id="editform" name="editform">
         <textarea id='xowa_edit_data_box' cols="80" rows="25">~{page_data}</textarea>  <!-- NOTE: do not place on different line (EX: \n~{page_text}\n); textarea will interpret new line literally and page saves will include new whitespace -->
@@ -425,7 +425,7 @@ app.wikis.get('~{wiki_key}').html.article {
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub">&nbsp;</div>
-    <div id="mw-content-text" lang="en" dir="~{page_lang_ltr}" class="mw-content-~{page_lang_ltr}">
+    <div id="mw-content-text" lang="en" dir="~{page_lang_ltr}" class="mw-content-~{page_lang_ltr} mw-parser-output">
       <textarea id='xowa_edit_data_box' cols="80" rows="25">~{page_data}</textarea>  <!-- NOTE: do not place on different line (EX: \n~{page_text}\n); textarea will interpret new line literally and page saves will include new whitespace -->
     </div>
   </div>
