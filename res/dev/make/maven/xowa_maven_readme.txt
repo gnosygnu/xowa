@@ -61,7 +61,8 @@ Finally, note that directories are given for example purposes only. Feel free to
 https://github.com/mintty/mintty/issues/602
 
 === Boot ===
-* Copy xowa_maven_boot.sh to C:\xowa_dev\xowa_maven_boot.sh
+* Copy xowa_maven_boot.txt to C:\xowa_dev\xowa_maven_boot.txt
+* Rename it to xowa_maven_boot.sh
 * Review all the exports and make sure they match
 ** The platform type (windows vs linux vs macosx)
 ** The directories on your machine

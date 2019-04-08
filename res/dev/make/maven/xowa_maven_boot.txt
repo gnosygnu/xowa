@@ -15,7 +15,7 @@ export mvn=C:/xowa_dev/bin/apache_maven/bin/mvn
 # set "verbose=y" or "verbose="
 export verbose=
 
-echo '* XOWA: downloading latest xowa'
+echo "* XOWA: downloading latest xowa"
 cd $root
 rm -rf ./src
 mkdir src
@@ -23,7 +23,7 @@ cd src
 git clone https://github.com/gnosygnu/xowa.git
 cd ..
 
-echo '* XOWA: copying maven files to root'
+echo "* XOWA: copying maven files to root"
 cp -rf ./src/xowa/res/dev/make/maven/* ./
 
 # run other shell scripts
