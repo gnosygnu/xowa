@@ -1,18 +1,26 @@
-echo * XOWA: copy res to xowa_maven
+echo "* XOWA: regen xowa_maven root"
+rm -rf ./src/xowa_maven
+mkdir -p ./src/xowa_maven
+
+echo "* XOWA: copying maven pom.xml and build.xml"
+cp -rf ./pom.xml ./src/xowa_maven/
+cp -rf ./build.xml ./src/xowa_maven/
+
+echo "* XOWA: copy res to xowa_maven"
 cp -R$verbose ./src/xowa/res             ./src/xowa_maven
 
-echo * XOWA: copy user / bin to runtime locations
+echo "* XOWA: copy user / bin to runtime locations"
 cp -R$verbose ./src/xowa_maven/res/user  ./src/xowa_maven
 cp -R$verbose ./src/xowa_maven/res/bin   ./src/xowa_maven
 
-echo * XOWA: prepare source directories
+echo "* XOWA: prepare source directories"
 mkdir -p ./src/xowa_maven/src/main/java/gplx
 mkdir -p ./src/xowa_maven/src/test/java/gplx
 
-echo * XOWA: create mavenize_xowa function
+echo "* XOWA: create mavenize_xowa function"
 mavenize_xowa () 
 {
-  echo * XOWA: mavenizing $1
+  echo "* XOWA: mavenizing $1"
   # main <- all non test files
   find $1 -depth -type f      \
     \( ! -name '*_tst.java'   \
