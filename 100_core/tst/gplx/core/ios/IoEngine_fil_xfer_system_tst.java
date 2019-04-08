@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
-public class IoEngine_fil_xfer_system_tst extends IoEngine_fil_xfer_base {
+public class IoEngine_fil_xfer_system_tst extends IoEngine_fil_xfer_base_tst {
 	@Override protected void setup_hook() {
 		root = Tfds.RscDir.GenSubDir_nest("100_core", "ioEngineTest", "_temp");
 		IoEngine_xrg_deleteDir.new_(root.OwnerDir()).Recur_().ReadOnlyFails_off().Exec();

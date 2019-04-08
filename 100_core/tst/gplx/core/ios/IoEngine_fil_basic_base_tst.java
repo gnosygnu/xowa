@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.texts.*;/*EncodingAdp_*/ import gplx.core.ios.streams.*;
-public abstract class IoEngine_fil_basic_base {
+public abstract class IoEngine_fil_basic_base_tst {
 	@Before public void setup() {
 		engine = engine_();
 		fx = IoEngineFxt.new_();

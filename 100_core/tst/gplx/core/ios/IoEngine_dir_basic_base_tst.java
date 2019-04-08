@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
-public abstract class IoEngine_dir_basic_base {
+public abstract class IoEngine_dir_basic_base_tst {
 	@Before public void setup() {
 		engine = engine_();
 		fx = IoEngineFxt.new_();
@@ -58,20 +58,20 @@ public abstract class IoEngine_dir_basic_base {
 		
 		fx.tst_ScanDir(root, dir1, fil);
 	}
-	@Test public void MoveDir() {
-	Io_url src = root.GenSubDir_nest("src"), trg = root.GenSubDir_nest("trg");
-	engine.CreateDir(src);
-	fx.tst_ExistsPaths(true, src); fx.tst_ExistsPaths(false, trg);
-
-	engine.MoveDir(src, trg);
-	fx.tst_ExistsPaths(false, src); fx.tst_ExistsPaths(true, trg);
-}
-@Test @gplx.Virtual public void CopyDir() {
-	Io_url src = root.GenSubDir_nest("src"), trg = root.GenSubDir_nest("trg");
-	engine.CreateDir(src);
-	fx.tst_ExistsPaths(true, src); fx.tst_ExistsPaths(false, trg);
-
-	engine.CopyDir(src, trg);
-	fx.tst_ExistsPaths(true, src, trg);
-}
-}
+		@Test  public void MoveDir() {
+		Io_url src = root.GenSubDir_nest("src"), trg = root.GenSubDir_nest("trg");
+		engine.CreateDir(src);
+		fx.tst_ExistsPaths(true, src); fx.tst_ExistsPaths(false, trg);
+	
+		engine.MoveDir(src, trg);
+		fx.tst_ExistsPaths(false, src); fx.tst_ExistsPaths(true, trg);
+	}
+	@Test  @gplx.Virtual public void CopyDir() {
+		Io_url src = root.GenSubDir_nest("src"), trg = root.GenSubDir_nest("trg");
+		engine.CreateDir(src);
+		fx.tst_ExistsPaths(true, src); fx.tst_ExistsPaths(false, trg);
+	
+		engine.CopyDir(src, trg);
+		fx.tst_ExistsPaths(true, src, trg);
+	}
+	}

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
-public class IoEngine_dir_deep_memory_tst extends IoEngine_dir_deep_base {
+public class IoEngine_dir_deep_memory_tst extends IoEngine_dir_deep_base_tst {
 	@Override protected void setup_hook() {
 		root = Io_url_.mem_dir_("mem/root");
 	}	@Override protected IoEngine engine_() {return IoEngine_.Mem_init_();}

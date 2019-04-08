@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
-public class IoEngine_fil_basic_system_tst extends IoEngine_fil_basic_base {
+public class IoEngine_fil_basic_system_tst extends IoEngine_fil_basic_base_tst {
 	@Override protected void setup_hook() {
 		root = Tfds.RscDir.GenSubDir_nest("100_core", "ioEngineTest", "_temp");
 		fil = root.GenSubFil("fil.txt");

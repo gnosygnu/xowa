@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
-public abstract class IoEngine_fil_xfer_base {
+public abstract class IoEngine_fil_xfer_base_tst {
 	@Before public void setup() {
 		engine = engine_();
 		fx = IoEngineFxt.new_();
