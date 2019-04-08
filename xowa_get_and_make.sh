@@ -54,5 +54,5 @@ find ./src -type f -name '*_fxt.java' -delete
 find ./src -type f -name '*_mok.java' -delete
 
 # == BUILD XOWA ==
-$ANT_BINARY -v -buildfile ./dev/make/xowa_compile.xml  -Droot_dir=$ROOT_DIR -Djdk=$JAVA_JDK_VERSION 
-$ANT_BINARY -v -buildfile ./dev/make/xowa_make_jar.xml -Droot_dir=$ROOT_DIR -Dplat_name=$PLAT_NAME -Dxowa_jar_path=$ROOT_DIR/xowa_dev.jar
+$ANT_BINARY -v -buildfile ./dev/make/ant/xowa_compile.xml  -Droot_dir=$ROOT_DIR -Djdk=$JAVA_JDK_VERSION 
+$ANT_BINARY -v -buildfile ./dev/make/ant/xowa_make_jar.xml -Droot_dir=$ROOT_DIR -Dplat_name=$PLAT_NAME -Dxowa_jar_path=$ROOT_DIR/xowa_dev.jar

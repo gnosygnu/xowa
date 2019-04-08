@@ -1,0 +1,270 @@
+<project
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd"
+>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>gplx</groupId>
+  <artifactId>xowa_maven</artifactId>
+  <packaging>jar</packaging>
+  <version>0.1</version>
+  <name>xowa_maven</name>
+  <url>http://menmachinesmaterials.com</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  <dependencies>
+    <!-- https://mvnrepository.com/artifact/junit/junit -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency> 
+ 
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-compress</artifactId>
+      <version>1.5</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.ibm.icu/icu4j -->
+    <dependency>
+      <groupId>com.ibm.icu</groupId>
+      <artifactId>icu4j</artifactId>
+      <version>63.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+    <dependency>
+      <groupId>org.xerial</groupId>
+      <artifactId>sqlite-jdbc</artifactId>
+      <version>3.18.0</version>
+    </dependency>
+ 
+    <dependency>
+      <groupId>xowa</groupId>
+      <artifactId>jtidy_xowa</artifactId>
+      <version>r938</version>
+    </dependency>
+
+    <dependency>
+      <groupId>xowa</groupId>
+      <artifactId>luaj_xowa</artifactId>
+      <version>2.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.github.veithen.cosmos.bootstrap/org.tukaani.xz -->
+    <dependency>
+      <groupId>com.github.veithen.cosmos.bootstrap</groupId>
+      <artifactId>org.tukaani.xz</artifactId>
+      <version>0.3</version>
+    </dependency>
+ 
+    <!-- https://mvnrepository.com/artifact/org.eclipse.swt/org.eclipse.swt.gtk.linux.x86_64 -->
+    <dependency>
+      <groupId>org.eclipse.swt</groupId>
+      <artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
+      <version>4.3</version>
+    </dependency>
+
+    <!--hack -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-analyzers-common-mobile</artifactId>
+      <version>5.3.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-core -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core-mobile</artifactId>
+      <version>5.3.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-highlighter -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-highlighter-mobile</artifactId>
+      <version>5.3.0</version>
+    </dependency>
+ 
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-memory -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-memory-mobile</artifactId>
+      <version>5.3.0</version>
+    </dependency>
+ 
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queries -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-queries-mobile</artifactId>
+      <version>5.3.0</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.apache.lucene/lucene-queryparser -->
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-queryparser-mobile</artifactId>
+      <version>5.3.0</version>
+    </dependency>
+ 
+    <!-- https://mvnrepository.com/artifact/nu.validator/validator -->
+    <dependency>
+        <groupId>nu.validator</groupId>
+        <artifactId>validator</artifactId>
+        <version>18.11.5</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/net.sf.saxon/Saxon-HE -->
+    <dependency>
+        <groupId>net.sf.saxon</groupId>
+        <artifactId>Saxon-HE</artifactId>
+        <version>9.9.1-2</version>
+    </dependency>
+
+<!-- 
+    <dependency>
+      <groupId>xowa</groupId>
+      <artifactId>nnio</artifactId>
+      <version>0.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.lucene</groupId>
+      <artifactId>lucene-core-mobile</artifactId>
+      <version>5.3.0</version>
+    </dependency>
+-->
+ 
+    <!-- https://mvnrepository.com/artifact/org.json/json
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20180813</version>
+    </dependency>
+-->
+  </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.8</version>
+        <executions>
+          <execution>
+            <id>create-jar</id>
+            <phase>package</phase>
+            <configuration>
+              <target>
+                <property name="compile_classpath" refid="maven.compile.classpath"/>
+                <property name="runtime_classpath" refid="maven.runtime.classpath"/>
+                <!-- <property name="test_classpath" refid="maven.test.classpath"/> -->
+                <property name="plugin_classpath" refid="maven.plugin.classpath"/>
+                <property name="outputDir" value="${project.build.outputDirectory}" />
+                <property name="sourceDir" value="${project.build.sourceDirectory}" />
+                <ant antfile="${basedir}/build.xml">
+                  <target name="create_jar"/>
+                </ant>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+    <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+      <plugins>
+
+        <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
+        <plugin>
+          <artifactId>maven-clean-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+
+        <!-- default lifecycle, jar packaging: see https://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_jar_packaging -->
+        <plugin>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>3.0.2</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.8.0</version>
+          <configuration>
+            <source>1.8</source>
+            <target>1.8</target>
+            <debug>true</debug>
+            <debuglevel>lines,vars,source</debuglevel>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.22.1</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.0.2</version>
+          <configuration>
+            <archive>
+              <manifest>
+                <addClasspath>true</addClasspath>
+                <!-- <classpathPrefix>repo/</classpathPrefix> -->
+                <mainClass>gplx.xowa.Xowa_main</mainClass>
+              </manifest>
+            </archive>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-install-plugin</artifactId>
+          <version>2.5.2</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>2.8.2</version>
+        </plugin>
+
+        <!-- site lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#site_Lifecycle -->
+        <plugin>
+          <artifactId>maven-site-plugin</artifactId>
+          <version>3.7.1</version>
+        </plugin>
+
+        <plugin>
+          <artifactId>maven-project-info-reports-plugin</artifactId>
+          <version>3.0.0</version>
+        </plugin>
+
+        <plugin>
+          <groupId>net.revelc.code.formatter</groupId>
+          <artifactId>formatter-maven-plugin</artifactId>
+          <version>2.8.1</version>
+          <!-- <configuration> -->
+          <!--   <directories> -->
+          <!--     <directory>${project.build.sourceDirectory}</directory> -->
+          <!--     <directory>${project.build.directory}/generated-sources</directory> -->
+          <!--   </directories> -->
+          <!-- </configuration> -->
+          <executions>
+            <execution>
+              <goals>
+                <goal>format</goal>
+                <goal>validate</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>
