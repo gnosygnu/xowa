@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.mapSources; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 class Map_math {// REF.MW:MapSources_math.php
 	private int word_idx_nsew;
