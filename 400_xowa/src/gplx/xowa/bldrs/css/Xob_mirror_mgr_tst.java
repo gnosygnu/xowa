@@ -28,10 +28,10 @@ public class Xob_mirror_mgr_tst {
 }
 class Xob_mirror_mgr_fxt {
 //		private Xob_mirror_mgr mirror_mgr;
-	public Io_fsys_fxt Fsys() {return fsys;} private final Io_fsys_fxt fsys = new Io_fsys_fxt();
+	public Io_fsys_fxt Fsys() {return fsys;} private final    Io_fsys_fxt fsys = new Io_fsys_fxt();
 	public void Clear() {
 		fsys.Clear();
-//			mirror_mgr = new Xob_mirror_mgr(Gfo_usr_dlg_.Noop, new Xof_download_wkr_test(), Bry_.new_a7("mem/http/enwiki"), Bry_.new_a7("mem/http/enwiki/wiki/Main_Page"), Io_url_.new_dir_("mem/fsys"));
+//			mirror_mgr = new Xob_mirror_mgr(Gfo_usr_dlg_.Noop, new Xof_download_wkr_mock(), Bry_.new_a7("mem/http/enwiki"), Bry_.new_a7("mem/http/enwiki/wiki/Main_Page"), Io_url_.new_dir_("mem/fsys"));
 	}
 	public void Test_css(String raw, String expd) {
 //			byte[] raw_bry = Bry_.new_u8(raw);

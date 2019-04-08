@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.downloads; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.ios.*;
-public class Xof_download_wkr_test implements Xof_download_wkr {
+public class Xof_download_wkr_mock implements Xof_download_wkr {
 	public IoEngine_xrg_downloadFil Download_xrg() {return IoEngine_xrg_downloadFil.new_("", Io_url_.Empty).Trg_engine_key_(IoEngine_.MemKey);}
 	public byte Download(boolean src_is_web, String src_str, Io_url trg_url, String prog_fmt_hdr) {
 		Io_mgr.Instance.CreateDirIfAbsent(trg_url.OwnerDir());

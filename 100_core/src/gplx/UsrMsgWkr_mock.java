@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-public class UsrMsgWkr_test implements UsrMsgWkr {
+public class UsrMsgWkr_mock implements UsrMsgWkr {
 	public void ExecUsrMsg(int type, UsrMsg m) {
 		msgs.Add(m);
 	}
@@ -25,8 +25,8 @@ public class UsrMsgWkr_test implements UsrMsgWkr {
 		}
 		return false;
 	}
-	public static UsrMsgWkr_test RegAll(UsrDlg dlg) {
-		UsrMsgWkr_test wkr = new UsrMsgWkr_test();
+	public static UsrMsgWkr_mock RegAll(UsrDlg dlg) {
+		UsrMsgWkr_mock wkr = new UsrMsgWkr_mock();
 		dlg.Reg(UsrMsgWkr_.Type_Note, wkr);
 		dlg.Reg(UsrMsgWkr_.Type_Stop, wkr);
 		dlg.Reg(UsrMsgWkr_.Type_Warn, wkr);

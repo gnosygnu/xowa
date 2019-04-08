@@ -31,12 +31,12 @@ public class Xoa_css_extractor_fxt {
 			.Failover_dir_(Io_url_.new_any_("mem/xowa/bin/any/html/xowa/import/"))	// "mem/xowa/user/anonymous/wiki/home/html/"
 			.Wiki_html_dir_(Io_url_.new_any_("mem/xowa/user/anonymous/wiki/en.wikipedia.org/html/"))
 			;
-		page_fetcher = new Xow_page_fetcher_test();
+		page_fetcher = new Xow_page_fetcher_mock();
 		css_installer.Page_fetcher_(page_fetcher);
 		Xoa_css_img_downloader css_img_downloader = new Xoa_css_img_downloader();
-		css_img_downloader.Ctor(usr_dlg, new Xof_download_wkr_test(), Bry_.new_a7("mem/http/"));
+		css_img_downloader.Ctor(usr_dlg, new Xof_download_wkr_mock(), Bry_.new_a7("mem/http/"));
 		css_installer.Css_img_downloader_(css_img_downloader);
-	}	private Xow_page_fetcher_test page_fetcher;
+	}	private Xow_page_fetcher_mock page_fetcher;
 	public Xoa_css_extractor Css_installer() {return css_installer;} private Xoa_css_extractor css_installer;
 	public void Init_page(int ns_id, String ttl, String text) {
 		page_fetcher.Add(ns_id, Bry_.new_a7(ttl), Bry_.new_a7(text));

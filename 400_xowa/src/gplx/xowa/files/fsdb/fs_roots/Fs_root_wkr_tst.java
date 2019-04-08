@@ -37,7 +37,7 @@ class Fs_root_wkr_fxt {
 		Io_mgr.Instance.InitEngine_mem();
 		url = Io_url_.mem_dir_("mem/dir/");
 		root_dir = new Fs_root_wkr();
-		Xof_img_wkr_query_img_size img_size_wkr = new Xof_img_wkr_query_img_size_test();
+		Xof_img_wkr_query_img_size img_size_wkr = new Xof_img_wkr_query_img_size_mock();
 		root_dir.Init(img_size_wkr, url);
 	}
 	public Orig_fil_mok itm_() {return new Orig_fil_mok();}

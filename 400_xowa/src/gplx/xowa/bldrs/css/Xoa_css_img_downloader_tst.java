@@ -168,7 +168,7 @@ class Xoa_css_img_downloader_fxt {
 	public Xoa_css_img_downloader Downloader() {return downloader;} private Xoa_css_img_downloader downloader;
 	public void Clear() {
 		downloader = new Xoa_css_img_downloader();
-		downloader.Ctor(Gfo_usr_dlg_.Test(), new Xof_download_wkr_test(), Bry_.Empty);
+		downloader.Ctor(Gfo_usr_dlg_.Test(), new Xof_download_wkr_mock(), Bry_.Empty);
 	}
 	public void Test_css_convert(String raw, String expd, String... expd_img_ary) {
 		List_adp actl_img_list = List_adp_.New();

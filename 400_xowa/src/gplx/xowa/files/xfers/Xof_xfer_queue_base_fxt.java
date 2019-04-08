@@ -33,7 +33,7 @@ public class Xof_xfer_queue_base_fxt {
 			
 			Xof_file_mgr file_mgr = app.File_mgr();
 			file_mgr.Img_mgr().Wkr_resize_img_(Xof_img_wkr_resize_img_mok.Instance);
-			file_mgr.Img_mgr().Wkr_query_img_size_(new Xof_img_wkr_query_img_size_test());
+			file_mgr.Img_mgr().Wkr_query_img_size_(new Xof_img_wkr_query_img_size_mock());
 			app.Wmf_mgr().Api_mgr().Api_orig_(api_size);
 
 			byte[] src_commons = Bry_.new_a7("src_commons");
