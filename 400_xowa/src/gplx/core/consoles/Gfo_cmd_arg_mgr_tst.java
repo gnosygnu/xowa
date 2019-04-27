@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.consoles; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.envs.*;
 public class Gfo_cmd_arg_mgr_tst {		
-	@Before public void init() {fxt.Clear();} private final Gfo_cmd_arg_mgr_fxt fxt = new Gfo_cmd_arg_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final    Gfo_cmd_arg_mgr_fxt fxt = new Gfo_cmd_arg_mgr_fxt();
 	@Test  public void Val__many() {
 		fxt.Init_args(fxt.Make_arg("a"), fxt.Make_arg("b"));
 		fxt.Exec_process("--a", "0", "--b", "1");
@@ -67,9 +67,9 @@ public class Gfo_cmd_arg_mgr_tst {
 	}
 }
 class Gfo_cmd_arg_mgr_fxt {
-	private final Tst_mgr tst_mgr = new Tst_mgr();
+	private final    Tst_mgr tst_mgr = new Tst_mgr();
 	public Gfo_usr_dlg Usr_dlg() {return usr_dlg;} Gfo_usr_dlg usr_dlg;
-	public Gfo_cmd_arg_mgr Mgr() {return mgr;} private final Gfo_cmd_arg_mgr mgr = new Gfo_cmd_arg_mgr();
+	public Gfo_cmd_arg_mgr Mgr() {return mgr;} private final    Gfo_cmd_arg_mgr mgr = new Gfo_cmd_arg_mgr();
 	public Gfo_cmd_arg_mgr_fxt Clear() {
 		if (usr_dlg == null)
 			usr_dlg = Gfo_usr_dlg_.Test();
@@ -100,7 +100,7 @@ class Gfo_cmd_arg_mgr_fxt {
 		return this;
 	}
 	public Gfo_cmd_arg_mgr_fxt Test_write(String... expd) {
-		Tfds.Eq_ary_str(expd, ((Gfo_usr_dlg__gui_test)usr_dlg.Gui_wkr()).Msgs().To_str_ary_and_clear());
+		Tfds.Eq_ary_str(expd, ((Gfo_usr_dlg__gui_mock)usr_dlg.Gui_wkr()).Msgs().To_str_ary_and_clear());
 		return this;
 	}
 	public void Test_val_as_url_rel_dir_or(String root_dir, String dir_spr, String val, String expd) {

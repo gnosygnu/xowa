@@ -18,7 +18,7 @@ import gplx.core.consoles.*; import gplx.core.lists.rings.*;
 public class Gfo_usr_dlg__gui_ {
 	public static final    Gfo_usr_dlg__gui Noop		= new Gfo_usr_dlg__gui_noop();
 	public static final    Gfo_usr_dlg__gui Console		= new Gfo_usr_dlg__gui_console();
-	public static final    Gfo_usr_dlg__gui Test		= new Gfo_usr_dlg__gui_test();
+	public static final    Gfo_usr_dlg__gui Test		= new Gfo_usr_dlg__gui_mock();
 	public static final    Gfo_usr_dlg__gui Mem			= new Gfo_usr_dlg__gui_mem_string();
 	public static String Mem_file() {return ((Gfo_usr_dlg__gui_mem_string)Mem).file;}
 }
