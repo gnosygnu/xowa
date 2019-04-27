@@ -38,13 +38,15 @@ public class Wbase_pid_mgr {	// EX: "en|road_map" -> 15 ("Property:P15")
 		byte[] pid_key = Bry_.Add(lang_key, Byte_ascii.Pipe_bry, pid_name);
 
 		// get from cache
-		int rv = cache.Get_as_int_or(pid_key, -1);
-		if (rv == -1) {
-			// get from db
-			rv = wbase_mgr.Wdata_wiki().Db_mgr().Load_mgr().Load_pid(lang_key, pid_name);
-			if (rv == Wbase_pid.Id_null) rv = Wbase_pid.Id_null;
-			Add(pid_key, rv);
+		synchronized (cache)  {
+			int rv = cache.Get_as_int_or(pid_key, -1);
+			if (rv == -1) {
+				// get from db
+				rv = wbase_mgr.Wdata_wiki().Db_mgr().Load_mgr().Load_pid(lang_key, pid_name);
+				if (rv == Wbase_pid.Id_null) rv = Wbase_pid.Id_null;
+				Add(pid_key, rv);
+			}
+			return rv;
 		}
-		return rv;
 	}
 }

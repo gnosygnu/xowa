@@ -39,14 +39,16 @@ public class Wbase_qid_mgr {// EX: "enwiki|0|Earth" -> "Q2"
 		byte[] key = Bry_.Add(wdata_wiki_abrv, Byte_ascii.Pipe_bry, ttl.Ns().Num_bry(), Byte_ascii.Pipe_bry, ttl.Page_db());
 
 		// get from cache
-		byte[] rv = (byte[])cache.Get_by(key);
-		if (rv == null) {
-			// get from db
-			rv = wbase_mgr.Wdata_wiki().Db_mgr().Load_mgr().Load_qid(wdata_wiki_abrv, ttl.Ns().Id(), ttl.Page_db());
-			byte[] val_for_hash = rv == null ? Bry_.Empty : rv;		// JAVA: hashtable does not accept null as value; use Bry_.Empty
-			this.Add(key, val_for_hash);							// NOTE: if not in db, will insert Bry_.Empty; DATE:2014-07-23
+		synchronized (cache) {
+			byte[] rv = (byte[])cache.Get_by(key);
+			if (rv == null) {
+				// get from db
+				rv = wbase_mgr.Wdata_wiki().Db_mgr().Load_mgr().Load_qid(wdata_wiki_abrv, ttl.Ns().Id(), ttl.Page_db());
+				byte[] val_for_hash = rv == null ? Bry_.Empty : rv;		// JAVA: hashtable does not accept null as value; use Bry_.Empty
+				this.Add(key, val_for_hash);							// NOTE: if not in db, will insert Bry_.Empty; DATE:2014-07-23
+			}
+			return Bry_.Len_eq_0(rv) ? null : rv;						// JAVA: convert Bry_.Empty to null which is what callers expect
 		}
-		return Bry_.Len_eq_0(rv) ? null : rv;						// JAVA: convert Bry_.Empty to null which is what callers expect
 	}
 	private void Add(byte[] key, byte[] val) {
 		synchronized (cache) { // LOCK:app-level
