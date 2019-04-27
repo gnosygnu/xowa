@@ -55,6 +55,7 @@ public class Xop_comm_lxr implements Xop_lxr {
 					break;
 				case Xop_tkn_itm_.Tid_newLine:				// new_line found; anything afterwards is a \s or a \t; SEE.WIKT:coincidence
 					nl_lhs = i;
+					i = -1; // gobble new line, else para runs on to next; ISSUE#:437 DATE:2019-04-27
 					break;
 				default:
 					i = -1;

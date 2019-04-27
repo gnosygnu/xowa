@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_comm_lxr_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {
 		fxt.Test_parse_page_all_str("a<!-- b -->c", "ac");
 	}
@@ -92,6 +92,23 @@ public class Xop_comm_lxr_tst {
 		), String_.Concat_lines_nl_skip_last
 		( "<p>a"
 		, "b"
+		, "</p>"
+		, ""
+		));
+		fxt.Init_para_n_();
+	}
+	@Test  public void Comment_should_not_gobble_paras() {// ISSUE#:437 DATE:2019-04-27
+		fxt.Init_para_y_();
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "a"
+		, ""
+		, "<!-- z --> "
+		, "b"
+		), String_.Concat_lines_nl_skip_last // was <p>a\nb\<p>
+		( "<p>a"
+		, "</p>"
+		, ""
+		, "<p>b"
 		, "</p>"
 		, ""
 		));
