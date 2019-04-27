@@ -18,10 +18,12 @@ public class Wbase_claim_entity_type_ {
 	public static final byte
 	  Tid__item									=  0
 	, Tid__property								=  1
+	, Tid__lexeme								=  2
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.entity_type", 2);
+	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.entity_type", 3);
 	public static final    Wbase_enum_itm
 	  Itm__item						= Reg.Add(Tid__item				, "item")
 	, Itm__property					= Reg.Add(Tid__property			, "property")
+	, Itm__lexeme					= Reg.Add(Tid__lexeme			, "lexeme")
 	;
 }
