@@ -25,6 +25,7 @@ public class Scrib_core {
 	public Scrib_core(Xoae_app app, Xop_ctx ctx) {// NOTE: ctx needed for language reg
 		this.app = app; this.ctx = ctx;
 		this.wiki = ctx.Wiki(); this.page = ctx.Page();	// NOTE: wiki / page needed for title reg; DATE:2014-02-05
+		this.page_url = page.Url_bry_safe();
 		this.lang = wiki.Lang();
 		this.Engine_(Scrib_engine_type.Type_lua, false);	// TEST: default to lua
 		fsys_mgr.Root_dir_(app.Fsys_mgr().Bin_xtns_dir().GenSubDir_nest("Scribunto"));
@@ -45,6 +46,7 @@ public class Scrib_core {
 	public Xol_lang_itm Lang() {return lang;} private Xol_lang_itm lang;
 	@gplx.Internal protected void Wiki_(Xowe_wiki v) {this.wiki = v;} // TEST:
 	public Xoae_page Page() {return page;} private Xoae_page page;
+	public byte[] Page_url() {return page_url;} private byte[] page_url;
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
 	public void Engine_(Scrib_engine v) {this.engine = v;}
 	private void Engine_(byte type, boolean luaj_debug_enabled) {
@@ -92,6 +94,7 @@ public class Scrib_core {
 		mods.Clear();	// clear any loaded modules
 		Xow_wiki wiki = page.Wiki();
 		this.page = page;
+		this.page_url = page.Url_bry_safe();
 		byte[] new_wiki = wiki.Domain_bry();
 		if (!Bry_.Eq(cur_wiki, new_wiki)) {
 			cur_wiki = new_wiki;

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Scrib_err_filter_mgr_tst {
-	@Before public void init() {fxt.Clear();} private final Scrib_err_filter_mgr_fxt fxt = new Scrib_err_filter_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final    Scrib_err_filter_mgr_fxt fxt = new Scrib_err_filter_mgr_fxt();
 	@Test   public void Basic() {
 		fxt.Exec_add(11, "Mod_1", "Fnc_1", "Err_11", "Comm_11");
 		fxt.Exec_add(12, "Mod_1", "Fnc_2", "Err_12", "Comm_12");
@@ -34,7 +34,7 @@ public class Scrib_err_filter_mgr_tst {
 	}
 }
 class Scrib_err_filter_mgr_fxt {
-	private final Scrib_err_filter_mgr err_mgr = new Scrib_err_filter_mgr();
+	private final    Scrib_err_filter_mgr err_mgr = new Scrib_err_filter_mgr();
 	public void Clear() {err_mgr.Clear();}
 	public void Exec_add(int expd, String mod, String fnc, String err, String comment) {err_mgr.Add(expd, mod, fnc, err, comment);}
 	public void Test_match_y(String mod, String fnc, String err) {Test_match(Bool_.Y, mod, fnc, err);}

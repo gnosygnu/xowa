@@ -32,6 +32,7 @@ public class Xocfg_mgr implements Gfo_invk {
 	public void Bind_many_app	(Gfo_invk sub, String... keys)					{Bind_many(Bool_.Y, sub, Xocfg_mgr.Ctx__app, keys);}
 	public void Bind_many_wiki	(Gfo_invk sub, Xow_wiki wiki, String... keys)		{Bind_many(Bool_.Y, sub, wiki.Domain_itm().Abrv_xo_str(), keys);}
 	private void Bind_many(boolean pub, Gfo_invk sub, String ctx, String... keys) {
+		if (gplx.core.envs.Env_.Mode_testing()) return;
 		for (String key : keys) {
 			try {
 				cache_mgr.Sub(sub, ctx, key, key);
