@@ -4,7 +4,7 @@
         <jar destfile="./xowa_maven.jar">
             <manifest>
                 <attribute name="Main-Class" value="gplx.xowa.Xowa_main"/>
-                <attribute name="Class-Path" value=". bin/${plat_name}/swt/swt.jar bin/any/java/apache/commons-compress-1.5.jar bin/any/java/jdbc/sqlite/sqlite-jdbc-3.18.0.jar bin/any/java/luaj/luaj_xowa.jar bin/any/java/jtidy/jtidy_xowa.jar bin/any/java/vnu/vnu.jar bin/any/java/vnu/Saxon-HE-9.9.1-2.jar"/>
+                <attribute name="Class-Path" value=". bin/${plat_name}/swt/swt.jar bin/any/java/apache/commons-compress-1.18.jar bin/any/java/jdbc/sqlite/sqlite-jdbc-3.18.0.jar bin/any/java/luaj/luaj_xowa.jar bin/any/java/jtidy/jtidy_xowa.jar bin/any/java/vnu/vnu.jar bin/any/java/vnu/Saxon-HE-9.9.1-2.jar"/>
             </manifest>
             <fileset dir="target/classes/"/>
         </jar>
