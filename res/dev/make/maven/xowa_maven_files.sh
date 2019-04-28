@@ -40,6 +40,9 @@ mavenize_xowa ()
     -exec cp --parents -pr$verbose '{}' './src/xowa_maven/src/test/java/gplx/' ';'
 }
 
+# package: baselib
+mavenize_xowa ./src/xowa/baselib/
+
 # package: core
 mavenize_xowa ./src/xowa/100_core/
 

@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="compile_xowa" name="create runnable jar for XOWA">
+    <target name="compile_baselib">
+        <delete dir="${root_dir}/src/baselib/bin"/>
+        <mkdir  dir="${root_dir}/src/baselib/bin"/>
+        <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath="" 
+		  srcdir   ="${root_dir}/src/baselib"
+		  destdir  ="${root_dir}/src/baselib/bin"
+		  classpath="${root_dir}/src/lib/junit.jar">
+          <include name="**/*.java"/>
+        </javac>
+    </target>
     <target name="compile_core">
         <delete dir="${root_dir}/src/100_core/bin"/>
         <mkdir  dir="${root_dir}/src/100_core/bin"/>
@@ -50,7 +60,7 @@
           <include name="**/*.java"/>
         </javac>
     </target>
-    <target name="compile_xowa" depends="compile_core,compile_gfml,compile_dbs,compile_gfui,compile_gflucene">
+    <target name="compile_xowa" depends="compile_baselib,compile_core,compile_gfml,compile_dbs,compile_gfui,compile_gflucene">
         <delete dir="${root_dir}/src/400_xowa/bin"/>
         <mkdir  dir="${root_dir}/src/400_xowa/bin"/>
         <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath=""
