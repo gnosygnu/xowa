@@ -41,7 +41,7 @@ mavenize_xowa ()
 }
 
 # package: baselib
-mavenize_xowa ./src/xowa/baselib/
+# mavenize_xowa ./src/xowa/baselib/ # commenting out b/c of ClassName collision between baselib
 
 # package: core
 mavenize_xowa ./src/xowa/100_core/

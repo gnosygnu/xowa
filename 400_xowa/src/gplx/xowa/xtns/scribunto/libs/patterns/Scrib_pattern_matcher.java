@@ -22,7 +22,7 @@ public abstract class Scrib_pattern_matcher {
 	public abstract Regx_match Match_one(Ustring src_ucs, String pat_str, int bgn_as_codes, boolean replace);
 	public abstract String Gsub(Scrib_lib_ustring_gsub_mgr gsub_mgr, Ustring src_ucs, String pat_str, int bgn_as_codes);
 
-	public static boolean Mode_is_xowa() {return false;} 
+	public static boolean Mode_is_xowa() {return Bool_.Y;} 
 	public static Scrib_pattern_matcher New(byte[] page_url) {
 		return Mode_is_xowa()
 			? (Scrib_pattern_matcher)new Scrib_pattern_matcher__xowa(page_url)
