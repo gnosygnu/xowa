@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import gplx.core.strings.*; import gplx.langs.gfs.*;
 public class Int_ {
+	// -------- BASELIB_COPY --------
 	public static final String Cls_val_name = "int";
 	public static final    Class<?> Cls_ref_type = Integer.class; 
 
@@ -37,6 +38,72 @@ public class Int_ {
 			throw Err_.new_type_mismatch_w_exc(exc, int.class, obj);
 		}
 	}
+
+	public static String To_str(int v) {return new Integer(v).toString();}
+	public static int Parse_or(String raw, int or) {
+		// process args
+		if (raw == null) return or;
+		int raw_len = String_.Len(raw);
+		if (raw_len == 0) return or;
+
+		// loop backwards from nth to 0th char
+		int rv = 0, power_of_10 = 1;
+		for (int idx = raw_len - 1; idx >= 0; idx--) {
+			char cur = String_.CharAt(raw, idx);
+			int digit = -1;
+			switch (cur) {
+				// numbers -> assign digit
+				case '0': digit = 0; break; case '1': digit = 1; break; case '2': digit = 2; break; case '3': digit = 3; break; case '4': digit = 4; break;
+				case '5': digit = 5; break; case '6': digit = 6; break; case '7': digit = 7; break; case '8': digit = 8; break; case '9': digit = 9; break;
+
+				// negative sign
+				case '-': 
+					if (idx != 0) { // invalid if not 1st
+						return or;
+					}
+					else { // is first; multiply by -1
+						rv *= -1;
+						continue;
+					}
+
+				// anything else
+				default:
+					return or;
+			}
+			rv += (digit * power_of_10);
+			power_of_10 *= 10;
+		}
+		return rv;
+	}
+
+	public static int[] Log10Ary = new int[] {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, Int_.Max_value};
+	public static int Log10AryLen = 11;
+	public static int Log10(int v) {
+		if (v == 0) return 0;
+		int sign = 1;
+		if (v < 0) {
+			if (v == Int_.Min_value) return -9;	// NOTE: Int_.Min_value * -1 = Int_.Min_value
+			v *= -1;
+			sign = -1;
+		}
+		int rv = Log10AryLen - 2;	// rv will only happen when v == Int_.Max_value
+		int bgn = 0;
+		if (v > 1000) {				// optimization to reduce number of ops to < 5
+			bgn = 3;
+			if (v > 1000000) bgn = 6;
+		}
+		for (int i = bgn; i < Log10AryLen; i++) {
+			if (v < Log10Ary[i]) {rv = i - 1; break;}
+		}
+		return rv * sign;
+	}
+
+	public static int DigitCount(int v) {
+		int log10 = Log10(v);
+		return v > -1 ? log10 + 1 : log10 * -1 + 2;
+	}
+
+	// -------- TO_MIGRATE --------
 	public static int Cast_or(Object obj, int or) {
 		try {
 			return (Integer)obj;
@@ -55,23 +122,7 @@ public class Int_ {
 	}
 
 	public static int Parse(String raw) {try {return Integer.parseInt(raw);} catch(Exception e) {throw Err_.new_parse_exc(e, int.class, raw);}}
-	public static int Parse_or(String raw, int or) {
-		if (raw == null) return or;
-		int rawLen = String_.Len(raw); if (rawLen == 0) return or;
-		int rv = 0, tmp = 0, factor = 1;
-		for (int i = rawLen; i > 0; i--) {
-			char c = String_.CharAt(raw, i - 1);
-			switch (c) {
-				case '0': tmp = 0; break; case '1': tmp = 1; break; case '2': tmp = 2; break; case '3': tmp = 3; break; case '4': tmp = 4; break;
-				case '5': tmp = 5; break; case '6': tmp = 6; break; case '7': tmp = 7; break; case '8': tmp = 8; break; case '9': tmp = 9; break;
-				case '-': rv *= -1; continue;	// NOTE: note continue
-				default: return or;
-			}
-			rv += (tmp * factor);
-			factor *= 10;
-		}
-		return rv;
-	}
+
 
 	public static int By_double(double v) {return (int)v;}
 	public static int By_hex_bry(byte[] src) {return By_hex_bry(src, 0, src.length);}
@@ -99,7 +150,6 @@ public class Int_ {
 	}
 
 	public static byte[] To_bry(int v) {return Bry_.new_a7(To_str(v));}
-	public static String To_str(int v) {return new Integer(v).toString();}
 	public static String To_str_fmt(int v, String fmt) {return new java.text.DecimalFormat(fmt).format(v);}
 	public static String To_str_pad_bgn_space(int val, int reqd_len)   {return To_str_pad(val, reqd_len, Bool_.Y, Byte_ascii.Space);}	// EX: 1, 3 returns "  1"
 	public static String To_str_pad_bgn_zero (int val, int reqd_len)   {return To_str_pad(val, reqd_len, Bool_.Y, Byte_ascii.Num_0);}	// EX: 1, 3 returns "001"
@@ -189,32 +239,5 @@ public class Int_ {
 	public static int Mult(int v, float multiplier) {
 		float product = ((float)v * multiplier);	// WORKAROUND (DotNet): (int)((float)v * multiplier) returns 0 for 100 and .01f
 		return (int)product;
-	}
-
-	public static int[] Log10Ary = new int[] {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, Int_.Max_value};
-	public static int Log10AryLen = 11;
-	public static int Log10(int v) {
-		if (v == 0) return 0;
-		int sign = 1;
-		if (v < 0) {
-			if (v == Int_.Min_value) return -9;	// NOTE: Int_.Min_value * -1 = Int_.Min_value
-			v *= -1;
-			sign = -1;
-		}
-		int rv = Log10AryLen - 2;	// rv will only happen when v == Int_.Max_value
-		int bgn = 0;
-		if (v > 1000) {				// optimization to reduce number of ops to < 5
-			bgn = 3;
-			if (v > 1000000) bgn = 6;
-		}
-		for (int i = bgn; i < Log10AryLen; i++) {
-			if (v < Log10Ary[i]) {rv = i - 1; break;}
-		}
-		return rv * sign;
-	}
-
-	public static int DigitCount(int v) {
-		int log10 = Log10(v);
-		return v > -1 ? log10 + 1 : log10 * -1 + 2;
 	}
 }

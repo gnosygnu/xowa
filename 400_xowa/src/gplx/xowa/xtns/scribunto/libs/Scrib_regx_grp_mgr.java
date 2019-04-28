@@ -58,24 +58,28 @@ class Scrib_regx_grp_mgr {
 		int actl_idx = Int_.Cast(idx_list.Get_by(regx_idx));
 		bfr.Add_int_variable(actl_idx);
 	}
-	public Regx_match[] Adjust_balanced(Regx_match[] matches) {
+	public Regx_match[] Adjust_balanced_many(Regx_match[] matches) {
 		if (fake_count == 0) return matches;
 
 		int matches_len = matches.length;
 		Regx_match[] rv = new Regx_match[matches_len];
 		for (int i = 0; i < matches_len; i++) {
-			Regx_match match = matches[i];
-			Regx_group[] old_groups = match.Groups();
-			Regx_group[] new_groups = new Regx_group[full_list.Len() - fake_count];
-			int group_idx = 0;
-			for (int j = 0; j < old_groups.length; j++) {
-				Scrib_regx_grp_itm itm = (Scrib_regx_grp_itm)full_list.Get_at(j);
-				if (itm.Is_fake()) continue;
-				new_groups[group_idx++] = old_groups[j];
-			}
-			rv[i] = new Regx_match(match.Rslt(), match.Find_bgn(), match.Find_end(), new_groups);
+			rv[i] = Adjust_balanced_one(matches[i]);
 		}
 		return rv;
+	}
+	public Regx_match Adjust_balanced_one(Regx_match match) {
+		if (full_list.Len() == 0) return match; // no capture groups, so don't bother adjusting for balanced; DATE:2019-04-16
+
+		Regx_group[] old_groups = match.Groups();
+		Regx_group[] new_groups = new Regx_group[full_list.Len() - fake_count];
+		int group_idx = 0;
+		for (int j = 0; j < old_groups.length; j++) {
+			Scrib_regx_grp_itm itm = (Scrib_regx_grp_itm)full_list.Get_at(j);
+			if (itm.Is_fake()) continue;
+			new_groups[group_idx++] = old_groups[j];
+		}
+		return new Regx_match(match.Rslt(), match.Find_bgn(), match.Find_end(), new_groups);
 	}
 }
 class Scrib_regx_grp_itm {

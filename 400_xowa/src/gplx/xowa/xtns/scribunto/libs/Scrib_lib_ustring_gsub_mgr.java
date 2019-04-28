@@ -15,35 +15,39 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.langs.regxs.*;
+import gplx.objects.strings.unicodes.*;
+import gplx.xowa.xtns.scribunto.libs.patterns.*;
 import gplx.xowa.xtns.scribunto.procs.*;
-class Scrib_lib_ustring_gsub_mgr {
+public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 	private final    Scrib_core core;
-	private final    Scrib_regx_converter regx_converter;
+	private String src_str;
+	private String pat_str;
+	private int limit;
+	private byte repl_tid;
 	private byte[] repl_bry; private Hash_adp repl_hash; private Scrib_lua_proc repl_func;
-	private int repl_count = 0;
-	public Scrib_lib_ustring_gsub_mgr(Scrib_core core, Scrib_regx_converter regx_converter) {
+	public int repl_count = 0;
+	public Scrib_lib_ustring_gsub_mgr(Scrib_core core) {
 		this.core = core;
-		this.regx_converter = regx_converter;
 	}
+	public void Repl_count__add() {repl_count++;}
+	public boolean Repl_count__done() {return repl_count == limit;}
 	public boolean Exec(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		// get @text; NOTE: sometimes int; DATE:2013-11-06
-		String text = args.Xstr_str_or_null(0);
-		if (args.Len() == 2) return rslt.Init_obj(text); // if no @replace, return @text; PAGE:en.d:'orse; DATE:2013-10-13
+		// get @src_str; NOTE: sometimes int; DATE:2013-11-06
+		this.src_str = args.Xstr_str_or_null(0);
+		if (args.Len() == 2) return rslt.Init_obj(src_str); // if no @replace, return @src_str; PAGE:en.d:'orse; DATE:2013-10-13
 
 		// get @pattern; NOTE: sometimes int; PAGE:en.d:λύω; DATE:2014-09-02
-		String regx = args.Xstr_str_or_null(1);
-		regx = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_pow, true);
+		this.pat_str = args.Xstr_str_or_null(1);
 
 		// get @repl
 		Object repl_obj = args.Cast_obj_or_null(2);
-		byte repl_tid = Identify_repl(repl_obj);
+		this.repl_tid = Identify_repl(repl_obj);
 
 		// get @limit; reset repl_count
-		int limit = args.Cast_int_or(3, -1);
-		repl_count = 0;
+		this.limit = args.Cast_int_or(3, -1);
 
 		// do repl
-		String repl = Exec_repl(repl_tid, text, regx, limit);
+		String repl = Scrib_pattern_matcher.New(core.Page_url()).Gsub(this, Ustring_.New_codepoints(src_str), pat_str, 0);
 		return rslt.Init_many_objs(repl, repl_count);
 	}
 	private byte Identify_repl(Object repl_obj) {
@@ -80,44 +84,7 @@ class Scrib_lib_ustring_gsub_mgr {
 			throw Err_.new_unhandled(Type_.Name(repl_type));
 		return repl_tid;
 	}
-	private String Exec_repl(byte repl_tid, String text, String regx, int limit) {
-		// parse regx
-		Regx_adp regx_mgr = Scrib_lib_ustring.RegxAdp_new_(core.Ctx().Page().Url(), regx);
-		if (regx_mgr.Pattern_is_invalid()) return text; // NOTE: invalid patterns should return self; EX:[^]; DATE:2014-09-02)
-
-		// exec regx
-		Regx_match[] rslts = regx_mgr.Match_all(text, 0);
-		if (rslts.length == 0) return text; // PHP: If matches are found, the new subject will be returned, otherwise subject will be returned unchanged.; http://php.net/manual/en/function.preg-replace-callback.php
-		rslts = regx_converter.Adjust_balanced(rslts);
-
-		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		int rslts_len = rslts.length;
-		int text_pos = 0;
-		for (int i = 0; i < rslts_len; i++) {
-			if (repl_count == limit) break; // stop if repl_count reaches limit; note that limit = -1 by default, unless specified
-
-			// add text up to find.bgn
-			Regx_match rslt = rslts[i];
-			tmp_bfr.Add_str_u8(String_.Mid(text, text_pos, rslt.Find_bgn()));	// NOTE: regx returns char text_pos (not bry); must add as String, not bry; DATE:2013-07-17
-			
-			// replace result
-			if (!Exec_repl_itm(tmp_bfr, repl_tid, text, rslt)) {
-				// will be false when gsub_proc returns nothing; PAGE:en.d:tracer PAGE:en.d:שלום DATE:2017-04-22;
-				tmp_bfr.Add_str_u8(String_.Mid(text, rslt.Find_bgn(), rslt.Find_end()));
-			}
-
-			// update
-			text_pos = rslt.Find_end();
-			repl_count++;
-		}
-
-		// add rest of String
-		int text_len = String_.Len(text);
-		if (text_pos < text_len)
-			tmp_bfr.Add_str_u8(String_.Mid(text, text_pos, text_len));			// NOTE: regx returns char text_pos (not bry); must add as String, not bry; DATE:2013-07-17
-		return tmp_bfr.To_str_and_clear();
-	}
-	private boolean Exec_repl_itm(Bry_bfr tmp_bfr, byte repl_tid, String text, Regx_match match) {
+	public boolean Exec_repl_itm(Bry_bfr tmp_bfr, Scrib_regx_converter regx_converter, Regx_match match) {
 		switch (repl_tid) {
 			case Repl_tid_string:
 				int len = repl_bry.length;
@@ -137,15 +104,15 @@ class Scrib_lib_ustring_gsub_mgr {
 										// REF.MW: https://github.com/wikimedia/mediawiki-extensions-Scribunto/blob/master/includes/engines/LuaCommon/UstringLibrary.php#L785-L796
 										// NOTE: 0 means take result; REF.MW:if ($x === '0'); return $m[0]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 										if (idx == 0)
-											tmp_bfr.Add_str_u8(String_.Mid(text, match.Find_bgn(), match.Find_end()));											
+											tmp_bfr.Add_str_u8(String_.Mid(src_str, match.Find_bgn(), match.Find_end()));
 										// NOTE: > 0 means get from groups if it exists; REF.MW:elseif (isset($m["m$x"])) return $m["m$x"]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 										else if (idx - 1 < match.Groups().length) {	// retrieve numbered capture; TODO_OLD: support more than 9 captures
 											Regx_group grp = match.Groups()[idx - 1];
-											tmp_bfr.Add_str_u8(String_.Mid(text, grp.Bgn(), grp.End()));	// NOTE: grp.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
+											tmp_bfr.Add_str_u8(String_.Mid(src_str, grp.Bgn(), grp.End()));	// NOTE: grp.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
 										}
 										// NOTE: 1 per MW "Match undocumented Lua String.gsub behavior"; PAGE:en.d:Wiktionary:Scripts ISSUE#:393; DATE:2019-03-20
 										else if (idx == 1) {
-											tmp_bfr.Add_str_u8(String_.Mid(text, match.Find_bgn(), match.Find_end()));
+											tmp_bfr.Add_str_u8(String_.Mid(src_str, match.Find_bgn(), match.Find_end()));
 										}
 										else {
 											throw Err_.new_wo_type("invalid capture index %" + Char_.To_str(b) + " in replacement String");
@@ -180,7 +147,7 @@ class Scrib_lib_ustring_gsub_mgr {
 					match_bgn = grp.Bgn();
 					match_end = grp.End();
 				}
-				String find_str = String_.Mid(text, match_bgn, match_end);	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
+				String find_str = String_.Mid(src_str, match_bgn, match_end);	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
 				Object actl_repl_obj = repl_hash.Get_by(find_str);
 				if (actl_repl_obj == null)			// match found, but no replacement specified; EX:"abc", "[ab]", "a:A"; "b" in regex but not in tbl; EX:d:DVD; DATE:2014-03-31
 					tmp_bfr.Add_str_u8(find_str);
@@ -194,7 +161,7 @@ class Scrib_lib_ustring_gsub_mgr {
 				int grps_len = grps.length;
 				// no grps; pass 1 arg based on @match: EX: ("ace", "[b-d]"); args -> ("c")
 				if (grps_len == 0) {
-					String find_str = String_.Mid(text, match.Find_bgn(), match.Find_end());
+					String find_str = String_.Mid(src_str, match.Find_bgn(), match.Find_end());
 					luacbk_args = Scrib_kv_utl_.base1_obj_(find_str);
 				}
 				// grps exist; pass n args based on grp[n].match; EX: ("acfg", "([b-d])([e-g])"); args -> ("c", "f")
@@ -202,7 +169,7 @@ class Scrib_lib_ustring_gsub_mgr {
 					// memoize any_pos args for loop
 					boolean any_pos = regx_converter.Any_pos();
 					Keyval[] capt_ary = regx_converter.Capt_ary();
-					int capt_ary_len = capt_ary.length;
+					int capt_ary_len = capt_ary == null ? 0 : capt_ary.length; // capt_ary can be null b/c xowa_gsub will always create one group;
 
 					// loop grps; for each grp, create corresponding arg in luacbk
 					luacbk_args = new Keyval[grps_len];
@@ -212,7 +179,7 @@ class Scrib_lib_ustring_gsub_mgr {
 						// anypos will create @offset arg; everything else creates a @match arg based on grp
 						Object val = any_pos && i < capt_ary_len && Bool_.Cast(capt_ary[i].Val())
 								? (Object)grp.Bgn()
-								: (Object)String_.Mid(text, grp.Bgn(), grp.End());
+								: (Object)String_.Mid(src_str, grp.Bgn(), grp.End());
 						luacbk_args[i] = Keyval_.int_(i + Scrib_core.Base_1, val);
 					}
 				}

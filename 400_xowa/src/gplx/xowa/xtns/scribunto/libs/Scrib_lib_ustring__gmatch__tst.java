@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_ustring__gmatch__tst {
-	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
+	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
 		fxt.Clear();
 		lib = fxt.Core().Lib_ustring().Init();
@@ -47,5 +47,8 @@ public class Scrib_lib_ustring__gmatch__tst {
 		, "2="
 		, "  1=2"
 		));
+	}
+	@Test  public void Callback__pattern() {
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_ustring.Invk_gmatch_callback, Object_.Ary("a", "%a+", Scrib_kv_utl_.base1_many_(false), 1)	, "1=1\n2="); // fails if "a" is returned; note that 1 should be eos
 	}
 }

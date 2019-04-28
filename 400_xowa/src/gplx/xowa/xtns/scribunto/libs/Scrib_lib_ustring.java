@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.objects.strings.unicodes.*;
 import gplx.core.intls.*; import gplx.langs.regxs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.xtns.scribunto.procs.*;
@@ -55,10 +56,10 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		boolean plain             = args.Cast_bool_or_n(3);
 
 		// init text vars
-		Unicode_string text_ucs = Unicode_string_.New(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
+		Ustring text_ucs = Ustring_.New_codepoints(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
 
 		// convert bgn from base_1 to base_0
-		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.Len_codes());
+		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.Len_in_data());
 
 		/*
 		int offset = 0;
@@ -80,34 +81,35 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		// if plain, just do literal match of find and exit
 		if (plain) {
 			// find pos by literal match
-			Unicode_string find_ucs = Unicode_string_.New(find_str);
-			byte[] find_bry = find_ucs.Src_bytes();
-			int pos = Bry_find_.Find_fwd(text_ucs.Src_bytes(), find_bry, text_ucs.Pos_codes_to_bytes(bgn_as_codes));
+			Ustring find_ucs = Ustring_.New_codepoints(find_str);
+			int pos = String_.FindFwd(text_str, find_str, bgn_as_codes);
 
-			// nothing found; return empty
-			if (pos == Bry_find_.Not_found)
+			// if nothing found, return empty
+			if (pos == String_.Find_none)
 				return rslt.Init_ary_empty();
+			// else, convert char_idx to code_idx
+			else
+				pos = text_ucs.Map_char_to_data(pos);
 
 			// bgn: convert pos from bytes back to codes; also adjust for base1
-			int bgn = text_ucs.Pos_bytes_to_codes(pos) + Base1;
+			int bgn = pos + Base1;
 
 			// end: add find.Len_in_codes and adjust end for PHP/LUA
-			int end = bgn + find_ucs.Len_codes() - End_adj;
+			int end = bgn + find_ucs.Len_in_data() - End_adj;
 
 			return rslt.Init_many_objs(bgn, end);
 		}
 
-		// run regex
-		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
-		Regx_match[] regx_rslts = Scrib_pattern_matcher_.Instance().Match(core.Ctx().Page().Url(), text_ucs, regx_converter, find_str, bgn_as_codes);
-		if (regx_rslts.length == 0) return rslt.Init_ary_empty();
+		// run regex; NOTE: take only 1st result; DATE:2014-08-27
+		Scrib_pattern_matcher matcher = Scrib_pattern_matcher.New(core.Page_url());
+		Regx_match match = matcher.Match_one(text_ucs, find_str, bgn_as_codes, true);
+		if (match.Rslt_none()) return rslt.Init_null(); // null verified on MW; EX: =mw.ustring.find("abc", "z"); DATE:2019-04-11
 
 		// add to tmp_list
-		Regx_match match = regx_rslts[0]; // NOTE: take only 1st result; DATE:2014-08-27
 		List_adp tmp_list = List_adp_.New();
-		tmp_list.Add(text_ucs.Pos_chars_to_codes(match.Find_bgn()) + Scrib_lib_ustring.Base1);
-		tmp_list.Add(text_ucs.Pos_chars_to_codes(match.Find_end()) + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
-		AddCapturesFromMatch(tmp_list, match, text_str, regx_converter.Capt_ary(), false);
+		tmp_list.Add(text_ucs.Map_char_to_data(match.Find_bgn()) + Scrib_lib_ustring.Base1);
+		tmp_list.Add(text_ucs.Map_char_to_data(match.Find_end()) + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
+		AddCapturesFromMatch(tmp_list, match, text_str, matcher.Capt_ary(), false);
 		return rslt.Init_many_list(tmp_list);
 	}
 	public boolean Match(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -119,41 +121,42 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		// validate / adjust
 		if (text_str == null) // if no text_str is passed, do not fail; return empty; EX:d:changed; DATE:2014-02-06 
 			return rslt.Init_many_list(List_adp_.Noop);
-		Unicode_string text_ucs = Unicode_string_.New(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
-		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.Len_codes());
+		Ustring text_ucs = Ustring_.New_codepoints(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
+		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.Len_in_data());
 
-		// run regex
-		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
-		Regx_match[] regx_rslts = Scrib_pattern_matcher_.Instance().Match(core.Ctx().Page().Url(), text_ucs, regx_converter, find_str, bgn_as_codes);
-		if (regx_rslts.length == 0) return rslt.Init_null();	// return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02; confirmed with en.d:民; DATE:2015-01-30
+		// run regex; NOTE add 1st match only; do not add all; PAGE:en.d:действительное_причастие_настоящего_времени DATE:2017-04-23
+		Scrib_pattern_matcher matcher = Scrib_pattern_matcher.New(core.Page_url());
+		Regx_match match = matcher.Match_one(text_ucs, find_str, bgn_as_codes, true);
+		if (match.Rslt_none()) return rslt.Init_null(); // return null if no matches found; EX:w:Mount_Gambier_(volcano); DATE:2014-04-02; confirmed with en.d:民; DATE:2015-01-30
 
-		// TOMBSTONE: add 1st match only; do not add all; PAGE:en.d:действительное_причастие_настоящего_времени DATE:2017-04-23
-		regx_rslts = regx_converter.Adjust_balanced(regx_rslts);
 		List_adp tmp_list = List_adp_.New();
-		AddCapturesFromMatch(tmp_list, regx_rslts[0], text_str, regx_converter.Capt_ary(), true);
+		AddCapturesFromMatch(tmp_list, match, text_str, matcher.Capt_ary(), true);
 		return rslt.Init_many_list(tmp_list);
 	}
 	public boolean Gsub(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		Scrib_lib_ustring_gsub_mgr gsub_mgr = new Scrib_lib_ustring_gsub_mgr(core, new Scrib_regx_converter());
+		Scrib_lib_ustring_gsub_mgr gsub_mgr = new Scrib_lib_ustring_gsub_mgr(core);
 		return gsub_mgr.Exec(args, rslt);
 	}
 	public boolean Gmatch_init(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// String text = Scrib_kv_utl_.Val_to_str(values, 0);
 		String regx = args.Pull_str(1);
 		Scrib_regx_converter regx_converter = new Scrib_regx_converter();
-		String pcre = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_null, true);
-		return rslt.Init_many_objs(pcre, regx_converter.Capt_ary());
+		if (Scrib_pattern_matcher.Mode_is_xowa())
+			regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_null, true);
+		else
+			regx = regx_converter.patternToRegex(regx, Scrib_regx_converter.Anchor_null, true);
+		return rslt.Init_many_objs(regx, regx_converter.Capt_ary());
 	}
 	public boolean Gmatch_callback(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String text = args.Xstr_str_or_null(0); // NOTE: UstringLibrary.php!ustringGmatchCallback calls preg_match directly; $s can be any type, and php casts automatically; 
 		String regx = args.Pull_str(1);
 		Keyval[] capt = args.Cast_kv_ary_or_null(2);
 		int pos = args.Pull_int(3);
-		Regx_adp regx_adp = Scrib_lib_ustring.RegxAdp_new_(core.Ctx().Page().Url(), regx);
-		Regx_match[] regx_rslts = regx_adp.Match_all(text, pos);
-		int len = regx_rslts.length;
-		if (len == 0) return rslt.Init_many_objs(pos, Keyval_.Ary_empty);
-		Regx_match match = regx_rslts[0];	// NOTE: take only 1st result
+
+		Ustring text_ucs = Ustring_.New_codepoints(text);
+		// int pos_as_codes = To_java_by_lua(pos, text_ucs.Len_in_data());
+		Regx_match match = Scrib_pattern_matcher.New(core.Page_url()).Match_one(text_ucs, regx, pos, false);
+		if (match.Rslt_none()) return rslt.Init_many_objs(pos, Keyval_.Ary_empty);
 		List_adp tmp_list = List_adp_.New();
 		AddCapturesFromMatch(tmp_list, match, text, capt, true);	// NOTE: was incorrectly set as false; DATE:2014-04-23
 		return rslt.Init_many_objs(match.Find_end(), Scrib_kv_utl_.base1_list_(tmp_list));
@@ -198,12 +201,12 @@ public class Scrib_lib_ustring implements Scrib_lib {
 				&&	tmp_list.Count() == 0)	// only add match once; EX: "aaaa", "a" will have four matches; get 1st; DATE:2014-04-02
 			tmp_list.Add(String_.Mid(text, rslt.Find_bgn(), rslt.Find_end()));
 	}
-	public static Regx_adp RegxAdp_new_(Xoa_url url, String regx) {
+	public static Regx_adp RegxAdp_new_(byte[] page_url, String regx) {
 		Regx_adp rv = Regx_adp_.new_(regx);
 		if (rv.Pattern_is_invalid()) {
 			// try to identify [z-a] errors; PAGE:https://en.wiktionary.org/wiki/Module:scripts/data;  DATE:2017-04-23
 			Exception exc = rv.Pattern_is_invalid_exception();
-			Gfo_usr_dlg_.Instance.Log_many("", "", "regx is invalid: regx=~{0} page=~{1} exc=~{2}", regx, url.To_bry(), Err_.Message_gplx_log(exc));
+			Gfo_usr_dlg_.Instance.Log_many("", "", "regx is invalid: regx=~{0} page=~{1} exc=~{2}", regx, page_url, Err_.Message_gplx_log(exc));
 		}
 		return rv;
 	}

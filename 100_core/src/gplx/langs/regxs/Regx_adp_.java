@@ -16,17 +16,16 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
 public class Regx_adp_ {
 	public static Regx_adp new_(String pattern) {return new Regx_adp(pattern);}
-	public static List_adp Find_all(String input, String find) {
-		Regx_adp regx = Regx_adp_.new_(find);
-		int idx = 0;
+	public static List_adp Find_all(String src, String pat) {
+		int src_len = String_.Len(src);
+		Regx_adp regx = Regx_adp_.new_(pat);
+		int pos = 0;
 		List_adp rv = List_adp_.New();
-		while (true)  {
-			Regx_match match = regx.Match(input, idx);
+		while (pos < src_len) {
+			Regx_match match = regx.Match(src, pos);
 			if (match.Rslt_none()) break;
 			rv.Add(match);
-			int findBgn = match.Find_bgn();
-			idx = findBgn + match.Find_len();
-			if (idx > String_.Len(input)) break;
+			pos = match.Find_bgn() + match.Find_len();
 		}
 		return rv;
 	}

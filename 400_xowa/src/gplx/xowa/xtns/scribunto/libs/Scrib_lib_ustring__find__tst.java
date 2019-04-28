@@ -40,7 +40,7 @@ public class Scrib_lib_ustring__find__tst {
 		fxt.Test__find("𤭢𤭢b𤭢𤭢b"    , "b"       ,  2, Bool_.N, "3;3"); // bytes=4
 		fxt.Test__find("abcd"          , "b"       ,  1, Bool_.N, "2;2"); // basic
 		fxt.Test__find("abad"          , "a"       ,  2, Bool_.N, "3;3"); // bgn
-		fxt.Test__find("abcd"          , "x"       ,  1, Bool_.N, "");    // no-match
+		fxt.Test__find("abcd"          , "x"       ,  1, Bool_.N, String_.Null_mark);  // no-match
 		fxt.Test__find("abcd"          , ""        ,  2, Bool_.N, "2;1"); // empty regx should return values; regx; EX:w:Fool's_mate; DATE:2014-03-04
 	}
 	@Test   public void Regx__int() { // PURPOSE: allow int find; PAGE:ro.w:Innsbruck DATE:2015-09-12
@@ -63,6 +63,9 @@ public class Scrib_lib_ustring__find__tst {
 	@Test  public void Surrogate__find__empty() {	// PURPOSE: handle surrogates in Find PAGE:zh.w:南北鐵路_(越南); DATE:2014-08-28
 		fxt.Test__find("aé𡼾\nbî𡼾\n"  , ""        ,  1, Bool_.N, "1;0"); // 4 b/c \n starts at pos 4 (super 1)
 		fxt.Test__find("aé𡼾\nbî𡼾\n"  , ""        ,  5, Bool_.N, "5;4"); // 8 b/c \n starts at pos 8 (super 1)
+	}
+	@Test  public void Balanced__numbered_1() {	// PURPOSE: handle mix of balanced and regular capture; PAGE:en.w:Bahamas
+		fxt.Test__find("[[5]]XccY", "%b[]X(%a)%1Y", 1, Bool_.N, "1;9;c");
 	}
 }
 class Scrib_lib_ustring__find__fxt {

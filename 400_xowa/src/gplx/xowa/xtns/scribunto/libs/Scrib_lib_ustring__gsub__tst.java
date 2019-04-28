@@ -43,6 +43,15 @@ public class Scrib_lib_ustring__gsub__tst {
 	@Test  public void Replace__double() {	// PURPOSE: do not fail if double is passed in for @replace; PAGE:de.v:Wikivoyage:Wikidata/Test_Modul:Wikidata2 DATE:2016-04-21
 		Exec_gsub("abcd", 1	 , -1, 1.23d	, "abcd;0");
 	}
+	@Test  public void Replace__anypos() {	// PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
+		Exec_gsub("'''a'''b", "()'''(.-'*)'''", 1, "z", "zb;1");
+	}
+	@Test  public void Replace__balanced_and_grouping() {	// PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
+		Exec_gsub("[[b]]", "%[(%b[])%]"			, -1, "z"		, "z;1"); // NOTE: not "[z]"
+	}
+	@Test  public void Replace__initial() {	// PURPOSE:whitespace being replaced during gsub replacement; DATE:2019-04-21
+		Exec_gsub("a b c", "^%s*", -1, "x", "xa b c;1"); // fails if xabxc
+	}
 	@Test  public void Replace__table() {
 		Exec_gsub("abcd", "[ac]"		, -1, Scrib_kv_utl_.flat_many_("a", "A", "c", "C")	, "AbCd;2");
 		Exec_gsub("abc" , "[ab]"		, -1, Scrib_kv_utl_.flat_many_("a", "A")			, "Abc;2");	// PURPOSE: match not in regex should still print itself; in this case [c] is not in tbl regex; DATE:2014-03-31
@@ -122,6 +131,17 @@ public class Scrib_lib_ustring__gsub__tst {
 		fxt.Init__cbk(proc);
 		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), "aBYz;2");
 	}
+	@Test   public void Luacbk__balanced() { // PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
+		String text = "}a{{b}}c{{d}}";
+		String regx = "%b{}"; // "()" is anypos, which inserts find_pos to results
+		Mock_proc__verify_args proc = new Mock_proc__verify_args(0, new Object[]{"x", "{{b}}"}, new Object[]{"y", "{{d}}"});
+		fxt.Init__cbk(proc);
+		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), "}axcy;2");
+	}
+//  Mock_proc__verify_args proc = new Mock_proc__verify_args(0, new Object[]{"x", "{{yes2}}"}, new Object[]{"x", "{{flagicon|USA}}"});
+//  fxt.Init__cbk(proc);
+//  Exec_gsub("}\n|-\n|28\n|{{yes2}}Win\n|28–0\n|style=\"text-align:left;\"|{{flagicon|USA}}", "%b{}", -1, proc.To_scrib_lua_proc(), "}axbx;2");	}
+//
 	private void Exec_gsub(String text, Object regx, int limit, Object repl, String expd) {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(text, regx, repl, limit), expd);
 	}

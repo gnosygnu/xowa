@@ -14,8 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs.patterns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
-import gplx.core.intls.*;
+import gplx.objects.strings.unicodes.*;
 import gplx.langs.regxs.*;
-public interface Scrib_pattern_matcher {
-	Regx_match[] Match(Xoa_url url, Unicode_string text_ucs, Scrib_regx_converter regx_converter, String find_str, int bgn_as_codes);
+public abstract class Scrib_pattern_matcher {
+	protected final    Scrib_regx_converter regx_converter = new Scrib_regx_converter();
+	public Keyval[] Capt_ary() {return regx_converter.Capt_ary();}
+	public abstract Regx_match Match_one(Ustring src_ucs, String pat_str, int bgn_as_codes, boolean replace);
+	public abstract String Gsub(Scrib_lib_ustring_gsub_mgr gsub_mgr, Ustring src_ucs, String pat_str, int bgn_as_codes);
+
+	public static boolean Mode_is_xowa() {return false;} 
+	public static Scrib_pattern_matcher New(byte[] page_url) {
+		return Mode_is_xowa()
+			? (Scrib_pattern_matcher)new Scrib_pattern_matcher__xowa(page_url)
+			: (Scrib_pattern_matcher)new Scrib_pattern_matcher__regx(page_url)
+			;
+	}
 }

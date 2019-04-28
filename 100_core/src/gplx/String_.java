@@ -17,8 +17,17 @@ package gplx;
 import java.lang.*;
 import gplx.core.strings.*; import gplx.langs.gfs.*; import gplx.core.envs.*;
 public class String_ {
+	// -------- BASELIB_COPY --------
+	public static final    Class<?> Cls_ref_type = String.class;
+	public static final String Cls_val_name = "str" + "ing";
+	public static final int Find_none = -1, Pos_neg1 = -1;
+	public static final String Empty = "", Null_mark = "<<NULL>>", Tab = "\t", Lf = "\n", CrLf = "\r\n";
+
+	public static boolean Eq(String lhs, String rhs) {return lhs == null ? rhs == null : lhs.equals(rhs);} 
 	public static int Len(String s)					{return s.length();}	
 	public static char CharAt(String s, int i)		{return s.charAt(i);}		
+
+	public static String new_u8(byte[] v) {return v == null ? null : new_u8(v, 0, v.length);}
 	public static String new_u8(byte[] v, int bgn, int end) {
 		try {
 			return v == null
@@ -28,10 +37,62 @@ public class String_ {
 		catch (Exception e) {Err_.Noop(e); throw Err_.new_("core", "unsupported encoding", "bgn", bgn, "end", end);}
 	}
 
-	public static final    Class<?> Cls_ref_type = String.class;
-	public static final String Cls_val_name = "str" + "ing";
-	public static final int Find_none = -1, Pos_neg1 = -1;
-	public static final String Null = null, Empty = "", Null_mark = "<<NULL>>", Tab = "\t", Lf = "\n", CrLf = "\r\n";
+	// use C# flavor ("a {0}") rather than Java format ("a %s"); also: (a) don't fail on format errors; (b) escape brackets by doubling
+	private static final char FORMAT_ITM_LHS = '{', FORMAT_ITM_RHS = '}';
+	public static String Format(String fmt, Object... args) {
+		// method vars
+		int args_len = Array_.Len_obj(args); 
+		if (args_len == 0) return fmt; // nothing to format
+		int fmt_len = Len(fmt); 
+
+		// loop vars
+		int pos = 0; String arg_idx_str = ""; boolean inside_brackets = false;
+		String_bldr bfr = String_bldr_.new_();
+		while (pos < fmt_len) { // loop over every char; NOTE: UT8-SAFE b/c only checking for "{"; "}"
+			char c = CharAt(fmt, pos);
+			if (inside_brackets) {
+				if (c == FORMAT_ITM_LHS) { // first FORMAT_ITM_LHS is fake; add FORMAT_ITM_LHS and whatever is in arg_idx_str
+					bfr.Add(FORMAT_ITM_LHS).Add(arg_idx_str);
+					arg_idx_str = "";
+				}
+				else if (c == FORMAT_ITM_RHS) { // itm completed
+					int args_idx = Int_.Parse_or(arg_idx_str, Int_.Min_value);
+					String itm = args_idx != Int_.Min_value && Int_.Between(args_idx, 0, args_len - 1) // check (a) args_idx is num; (b) args_idx is in bounds
+						? Object_.Xto_str_strict_or_empty(args[args_idx])                   // valid; add itm   
+						: String_.Concat_any(FORMAT_ITM_LHS, arg_idx_str, FORMAT_ITM_RHS);  // not valid; just add String
+					bfr.Add(itm);
+					inside_brackets = false;
+					arg_idx_str = "";
+				}
+				else
+					arg_idx_str += c;
+			}
+			else {
+				if (c == FORMAT_ITM_LHS || c == FORMAT_ITM_RHS) {
+					boolean pos_is_end = pos == fmt_len - 1;
+					if (pos_is_end) // last char is "{" or "}" (and not inside_brackets); ignore and just ad
+						bfr.Add(c);
+					else {
+						char next = CharAt(fmt, pos + 1);
+						if (next == c) {	// "{{" or "}}": escape by doubling
+							bfr.Add(c);
+							pos++;
+						}
+						else
+							inside_brackets = true;
+					}
+				}
+				else
+					bfr.Add(c);
+			}
+			pos++;
+		}
+		if (Len(arg_idx_str) > 0)	// unclosed bracket; add FORMAT_ITM_LHS and whatever is in arg_idx_str; ex: "{0"
+			bfr.Add(FORMAT_ITM_LHS).Add(arg_idx_str);
+		return bfr.To_str();
+	}
+
+	// -------- TO_MIGRATE --------
 	public static String cast(Object v) {return (String)v;}
 	public static String as_(Object obj) {return obj instanceof String ? (String)obj : null;}
 	public static String new_a7(byte[] v) {return v == null ? null : new_a7(v, 0, v.length);}
@@ -43,7 +104,6 @@ public class String_ {
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "core", "unsupported encoding");}
 	}	
-	public static String new_u8(byte[] v) {return v == null ? null : new_u8(v, 0, v.length);}
 	public static String new_u8__by_len(byte[] v, int bgn, int len)	{
 		int v_len = v.length;
 		if (bgn + len > v_len) len = v_len - bgn;
@@ -111,7 +171,6 @@ public class String_ {
 		}	while (true);
 		return count;
 	}
-	public static boolean Eq(String lhs, String rhs) {return lhs == null ? rhs == null : lhs.equals(rhs);} 
 	public static boolean EqAny(String lhs, String... rhsAry) {
 		for (int i = 0; i < rhsAry.length; i++)
 			if (Eq(lhs, rhsAry[i])) return true;
@@ -267,7 +326,6 @@ public class String_ {
 		if (pos < 0 || pos >= String_.Len(s)) throw Err_.new_wo_type("String_.Insert failed; pos invalid", "pos", pos, "s", s, "toInsert", toInsert);
 		return s.substring(0, pos) + toInsert + s.substring(pos);
 	}
-	public static String Format(String fmt, Object... args) {return Format_do(fmt, args);}
 	public static String FormatOrEmptyStrIfNull(String fmt, Object arg) {return arg == null ? "" : Format(fmt, arg);}
 	public static String Concat(char... ary) {return new String(ary);}
 	public static String Concat(String s1, String s2, String s3) {return s1 + s2 + s3;}
@@ -381,57 +439,6 @@ public class String_ {
 	public static String[] SplitLines_any(String s) {return Split_do(s, Op_sys.Lnx.Nl_str(), true);}
 	public static String[] Split_lang(String s, char c) {return s.split(Character.toString(c));}	
 
-	static String Format_do(String s, Object[] ary) {
-		int aryLength = Array_.Len_obj(ary); if (aryLength == 0) return s; // nothing to format
-		String_bldr sb = String_bldr_.new_();
-		char bracketBgn = '{', bracketEnd = '}';
-		String aryVal = null; char c, next;
-		int pos = 0; int textLength = Len(s); String numberStr = ""; boolean bracketsOn = false;
-		while (true) {
-			if (pos == textLength) break; 
-			c = CharAt(s, pos);				
-			if (bracketsOn) {	// mode=bracketsOn
-				if (c == bracketBgn) {	// first bracketBgn is fake; add bracketBgn and whatever is in numberStr
-					sb.Add(bracketBgn).Add(numberStr);
-					numberStr = "";
-				}
-				else if (c == bracketEnd) {
-					int aryIdx = Int_.Parse_or(numberStr, Int_.Min_value);
-					if (aryIdx != Int_.Min_value && Int_.Between(aryIdx, 0, aryLength - 1))	// check (a) aryIdx is num; (b) aryIdx is in bounds
-						aryVal = Object_.Xto_str_strict_or_empty(ary[aryIdx]);
-					else
-						aryVal = String_.Concat_any(bracketBgn, numberStr, bracketEnd);		// not valid, just add String
-					sb.Add(aryVal);
-					bracketsOn = false;
-					numberStr = "";
-				}
-				else	// char=anythingElse
-					numberStr += c;
-			}
-			else {	// mode=bracketsOff
-				if (c == bracketBgn || c == bracketEnd) {
-					boolean isEnd = pos == textLength - 1;
-					if (isEnd)
-						sb.Add(c);
-					else {
-						next = CharAt(s, pos + 1);
-						if (next == c) {	// "{{" or "}}": escape by doubling
-							sb.Add(c);
-							pos++;
-						}
-						else
-							bracketsOn = true;
-					}
-				}
-				else // char=anythingElse
-					sb.Add(c);
-			}
-			pos++;
-		}
-		if (Len(numberStr) > 0)	// unclosed bracket; add bracketBgn and whatever is in numberStr; ex: "{0"
-			sb.Add(bracketBgn).Add(numberStr);
-		return sb.To_str();
-	}
 	static String[] Split_do(String s, String spr, boolean skipChar13) {
 		if (String_.Eq(s, "")			// "".Split('a') return array with one member: ""
 			|| String_.Eq(spr, ""))		// "a".Split('\0') returns array with one member: "a"

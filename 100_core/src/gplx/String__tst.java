@@ -16,11 +16,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import org.junit.*;
 public class String__tst {
-	@Test  public void Len() {
-		tst_Len("", 0);
-		tst_Len("abc", 3);
-	}	void tst_Len(String v, int expd) {Tfds.Eq(expd, String_.Len(v), "Len");}
-
 	@Test  public void LimitToFirst() {
 		tst_LimitToFirst("abc", 0, "");
 		tst_LimitToFirst("abc", 1, "a");
@@ -120,20 +115,6 @@ public class String__tst {
 	@Test  public void Repeat() {
 		Tfds.Eq("333", String_.Repeat("3", 3));
 	}
-	@Test  public void Format() {
-		tst_Format("", "");										// empty
-		tst_Format("no args", "no args");						// no args
-		tst_Format("0", "{0}", 0);								// one
-		tst_Format("0 and 1", "{0} and {1}", 0, 1);				// many
-		tst_Format("{", "{{", 0);								// escape bracketBgn
-		tst_Format("}", "}}", 0);								// escape bracketEnd
-		tst_Format("{a0c}", "{a{0}c}", 0);						// nested;
-		tst_Format("{a{b}c}", "{a{b}c}", 0);					// invalid invalid
-		tst_Format("{1}", "{1}", 1);							// invalid array index
-		tst_Format("{a} {b}", "{a} {b}", 0);					// invalid many
-		tst_Format("{a}0{b}1", "{a}{0}{b}{1}", 0, 1);			// invalid and valid
-		tst_Format("{0", "{0", 0);								// invalid dangling
-	}	void tst_Format(String expd, String fmt, Object... ary) {Tfds.Eq(expd, String_.Format(fmt, ary));}
 	@Test  public void Split() {
 		tst_Split("ab", " ", "ab");							// no match -> return array with original input
 		tst_Split("ab cd", " ", "ab", "cd");				// separator.length = 1
