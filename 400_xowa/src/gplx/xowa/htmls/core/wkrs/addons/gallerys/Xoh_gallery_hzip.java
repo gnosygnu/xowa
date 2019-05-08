@@ -25,7 +25,6 @@ public class Xoh_gallery_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 
 		bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
 
-		hctx.Hzip__stat().Gallery_add();
 		return this;
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {

@@ -32,6 +32,7 @@ public class Xoh_lnke_html {
 			bfr.Add(Gfh_tag_.Div_rhs);
 			return;
 		}
+		ctx.Page().Stat_itm().Lnke_count++;
 		if (!hctx.Mode_is_alt()) {					// do not write "<a ...>" if mode is alt
 			bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);
 			if (Write_href(bfr, hctx, ctx, src, lnke, href_bgn, href_end, proto_is_xowa))

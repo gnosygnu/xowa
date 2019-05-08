@@ -18,7 +18,7 @@ import gplx.core.brys.*; import gplx.core.encoders.*;
 import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.*;
 public class Xoh_img_xoimg_hzip {
-	public void Encode(Bry_bfr bfr, Xoh_stat_itm stat_itm, byte[] src, Xoh_img_xoimg_data arg) {
+	public void Encode(Bry_bfr bfr, byte[] src, Xoh_img_xoimg_data arg) {
 		boolean page_exists = arg.Lnki_page() != Xof_lnki_page.Null;
 		boolean time_exists = arg.Lnki_time() != Xof_lnki_time.Null;
 		boolean upright_exists = arg.Lnki_upright() != Xof_img_size.Upright_null;

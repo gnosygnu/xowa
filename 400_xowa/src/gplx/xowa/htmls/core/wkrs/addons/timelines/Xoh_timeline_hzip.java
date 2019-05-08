@@ -26,7 +26,6 @@ public class Xoh_timeline_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		// just add the entire thing; not worth trying to compress "<pre class='xowa-timeline'>"
 		bfr.Add_mid(src, data.Src_bgn(), data.Src_end());
 
-		hctx.Hzip__stat().Timeline_add();
 		return this;
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {

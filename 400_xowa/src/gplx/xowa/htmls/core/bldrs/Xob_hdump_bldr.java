@@ -22,11 +22,11 @@ import gplx.xowa.parsers.*;
 public class Xob_hdump_bldr implements Gfo_invk {
 	private boolean enabled, hzip_enabled, hzip_diff, hzip_b256; private byte zip_tid = Byte_.Max_value_127;
 	private Xowe_wiki wiki; private Xob_hdump_tbl_retriever html_tbl_retriever;
-	private Xoh_stat_tbl stat_tbl; private Xoh_stat_itm stat_itm;
 	private int prv_row_len = 0;
 	private final    Xoh_page tmp_hpg = new Xoh_page(); private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private boolean op_sys_is_wnt;
 	private byte[] toc_label = Bry_.Empty;
+	public Xoh_page Tmp_hpg() {return tmp_hpg;}
 	public Xob_hdump_bldr Enabled_(boolean v) {this.enabled = v; return this;}
 	public Xob_hdump_bldr Hzip_enabled_(boolean v) {this.hzip_enabled = v; return this;}
 	public Xob_hdump_bldr Hzip_diff_(boolean v) {this.hzip_diff = v; return this;}
@@ -36,7 +36,6 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		if (!enabled) return false;
 		this.op_sys_is_wnt = gplx.core.envs.Op_sys.Cur().Tid_is_wnt();
 		this.wiki = wiki; this.hdump_mgr = wiki.Html__hdump_mgr(); this.html_tbl_retriever = html_tbl_retriever;
-		this.stat_tbl = new Xoh_stat_tbl(make_conn); this.stat_itm = hdump_mgr.Hzip_mgr().Hctx().Hzip__stat();
 		this.toc_label = wiki.Msg_mgr().Val_by_id(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc);
 		
 		if (zip_tid == Byte_.Max_value_127) zip_tid = Xobldr_cfg.Zip_mode__html(wiki.App());
@@ -64,7 +63,7 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		// save to db
 		Xowd_html_tbl html_tbl = html_tbl_retriever.Get_html_tbl(wpg.Ttl().Ns(), prv_row_len);	// get html_tbl
 		this.prv_row_len = hdump_mgr.Save_mgr().Save(wpg, tmp_hpg.Ctor_by_hdiff(tmp_bfr, wpg, toc_label), html_tbl, true, is_wikitext);	// save to db
-		stat_tbl.Insert(tmp_hpg, stat_itm, wpg.Root().Root_src().length, tmp_hpg.Db().Html().Html_bry().length, prv_row_len); // save stats
+		tmp_hpg.Db().Html().Zip_len_(prv_row_len);
 
 		// run hzip diff if enabled
 		if (hzip_diff && is_wikitext) {

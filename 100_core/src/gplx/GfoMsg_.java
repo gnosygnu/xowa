@@ -72,6 +72,16 @@ public class GfoMsg_ {
 			rv.Add("", vals[i]);
 		return rv;
 	}
+	public static Hash_adp Read_str_ary_as_hash(GfoMsg m, String k) {
+		String[] ary = m.ReadStrAry(k, "|");
+		int ary_len = ary.length;
+		if (ary_len == 0) return Hash_adp_.Noop;
+		Hash_adp rv = Hash_adp_.New();
+		for (int i = 0; i < ary_len; i++) {
+			 rv.Add_if_dupe_use_1st(ary[i], ary[i]);
+		}
+		return rv;
+	}
 }
 class GfoMsg_wtr extends GfoMsg_base {
 	@Override protected Object ReadOr(String k, Object defaultOr) {

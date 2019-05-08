@@ -20,8 +20,12 @@ public class Xomp_make_cmd extends Xob_cmd__base {
 	public Xomp_make_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_run() {
 		wiki.Init_assert();
-		new Xomp_make_html().Exec(wiki, cfg);
-		new Xomp_make_lnki().Exec(wiki, cfg, 10000);
+		if (cfg.Mode().Has("html"))
+			new Xomp_make_html().Exec(wiki, cfg);
+		if (cfg.Mode().Has("lnki"))
+			new Xomp_make_lnki().Exec(wiki, cfg, 10000);
+		if (cfg.Mode().Has("stat"))
+			new Xomp_make_stat().Exec(wiki, cfg);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__cfg))		return cfg;

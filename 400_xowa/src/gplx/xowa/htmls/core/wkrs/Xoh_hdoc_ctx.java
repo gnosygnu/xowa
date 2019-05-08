@@ -41,7 +41,6 @@ public class Xoh_hdoc_ctx {
 	public Xoh_pool_mgr__hzip		Pool_mgr__hzip()	{return pool_mgr__hzip;} private final    Xoh_pool_mgr__hzip pool_mgr__hzip = new Xoh_pool_mgr__hzip();
 	public Xoh_pool_mgr__data		Pool_mgr__data()	{return pool_mgr__data;} private final    Xoh_pool_mgr__data pool_mgr__data = new Xoh_pool_mgr__data();
 	public Xoh_pool_mgr__wtr		Pool_mgr__wtr()		{return pool_mgr__wtr;} private final    Xoh_pool_mgr__wtr pool_mgr__wtr = new Xoh_pool_mgr__wtr();
-	public Xoh_stat_itm				Hzip__stat()		{return hzip__stat;} private final    Xoh_stat_itm hzip__stat = new Xoh_stat_itm();
 	public Xohz_tag_regy			Hzip__xnde__regy()	{return hzip__xnde__regy;} private final    Xohz_tag_regy hzip__xnde__regy = Xohz_tag_regy_.New_dflt();
 	public Xoh_xnde_dict_reg		Hzip__xnde__dict()	{return hzip__xnde__dict;} private final    Xoh_xnde_dict_reg hzip__xnde__dict = new Xoh_xnde_dict_reg();
 	public int						Uid__gly__nxt()		{return ++uid__gly;} private int uid__gly;
@@ -87,7 +86,6 @@ public class Xoh_hdoc_ctx {
 		this.Clear();
 	}		
 	private void Clear() {
-		hzip__stat.Clear();
 		this.uid__gly = -1;
 	}
 

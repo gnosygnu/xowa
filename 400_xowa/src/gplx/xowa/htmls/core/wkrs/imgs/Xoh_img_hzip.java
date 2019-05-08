@@ -105,7 +105,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			if (img_src.File_page_exists())		Gfo_hzip_int_.Encode(1, bfr, Gfo_hzip_int_.Neg_1_adj + img_src.File_page());
 		}
 		else
-			xoimg.Encode(bfr, hctx.Hzip__stat(), src, img_xoimg);
+			xoimg.Encode(bfr, src, img_xoimg);
 		if (anch_title_exists)					bfr.Add_hzip_mid(src, data.Anch_title_bgn(), data.Anch_title_end());
 		if (img__alt_diff_from_anch_title)		bfr.Add_hzip_mid(src, data.Img_alt_bgn(), data.Img_alt_end());
 		if (img_cls.Other_exists())				bfr.Add_hzip_mid(src, img_cls.Other_bgn(), img_cls.Other_end());

@@ -25,14 +25,13 @@ public class Xoh_lnke_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		boolean title_exists	= flag_bldr.Set_as_bool(Flag__title_exists		, data.Title_exists());
 		boolean auto_exists		= flag_bldr.Set_as_bool(Flag__auto_exists		, data.Auto_exists());
 		boolean capt_exists		= flag_bldr.Set_as_bool(Flag__capt_exists		, data.Capt_exists());
-		byte    lnke_tid		= flag_bldr.Set_as_byte(Flag__lnke_tid			, data.Lnke_tid());
+		flag_bldr.Set_as_byte(Flag__lnke_tid			, data.Lnke_tid());
 		bfr.Add(hook);
 		bfr.Add_hzip_int(1, flag_bldr.Encode());										// add flag
 		bfr.Add_hzip_mid(src, data.Href_bgn(), data.Href_end());						// add href
 		if (auto_exists)	bfr.Add_hzip_int(1, data.Auto_id());						// add autonumber
 		if (capt_exists)	bfr.Add_hzip_mid(src, data.Capt_bgn(), data.Capt_end());	// add caption
 		if (title_exists)	bfr.Add_hzip_mid(src, data.Title_bgn(), data.Title_end());	// add title
-		hctx.Hzip__stat().Lnke_add(lnke_tid);
 		return this;
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {

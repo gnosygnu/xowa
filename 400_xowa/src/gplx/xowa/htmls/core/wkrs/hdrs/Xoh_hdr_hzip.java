@@ -24,7 +24,7 @@ public class Xoh_hdr_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		Xoh_hdr_data data = (Xoh_hdr_data)data_obj;
 		boolean capt_rhs_exists	= flag_bldr.Set_as_bool	(Flag__capt_rhs_exists		, data.Capt_rhs_exists());
 		boolean anch_is_diff		= flag_bldr.Set_as_bool	(Flag__anch_is_diff			, data.Anch_is_diff());
-		int hdr_level			= flag_bldr.Set_as_int	(Flag__hdr_level			, data.Hdr_level());
+		flag_bldr.Set_as_int	(Flag__hdr_level			, data.Hdr_level());
 
 		bfr.Add(hook);
 		bfr.Add_hzip_int(1, flag_bldr.Encode());
@@ -32,7 +32,6 @@ public class Xoh_hdr_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		if (anch_is_diff)		bfr.Add_hzip_mid(src, data.Anch_bgn(), data.Anch_end());		// add anchor
 		if (capt_rhs_exists)	bfr.Add_hzip_mid(src, data.Capt_rhs_bgn(), data.Capt_rhs_end());// add capt_rhs
 
-		hctx.Hzip__stat().Hdr_add(hdr_level);
 		return this;
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
@@ -50,7 +49,7 @@ public class Xoh_hdr_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		Xoh_hdr_data data = (Xoh_hdr_data)data_itm;
 		data.Init_by_decode(hdr_level, anch_is_diff, anch_bgn, anch_end, capt_bgn, capt_end, capt_rhs_bgn, capt_rhs_end);
 	}
-	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_ (1, 1, 3);
+	private final    Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_ (1, 1, 3);
 	private static final int // SERIALIZED
 	  Flag__capt_rhs_exists	=  0
 	, Flag__anch_is_diff		=  1

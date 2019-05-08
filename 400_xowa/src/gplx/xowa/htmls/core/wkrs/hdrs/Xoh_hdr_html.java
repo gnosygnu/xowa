@@ -26,6 +26,7 @@ public class Xoh_hdr_html {
 		// init
 		int hdr_num = hdr.Num();
 		boolean hdr_is_valid = hdr_num > 0;	// hdr_num == 0 when dangling
+		page.Stat_itm().Hdr_count++;
 
 		// register hdr with TOC
 		byte[] hdr_text_bry = Bld_hdr_html(hdr_text_bfr, wtr, page, ctx, hctx, src, hdr);

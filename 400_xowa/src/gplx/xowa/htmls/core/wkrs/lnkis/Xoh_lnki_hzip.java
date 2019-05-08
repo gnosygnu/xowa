@@ -38,7 +38,6 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 								  flag_bldr.Set_as_int(Flag__capt_cs0_tid		, data.Capt_itm().Cs0_tid());
 		byte text_type			= flag_bldr.Set_as_byte(Flag__text_type			, data.Text_tid());
 		// Tfds.Dbg(flag_bldr.Encode(), Array_.To_str(flag_bldr.Val_ary()), text_type);
-		int bfr_bgn = bfr.Len();
 		int flag = flag_bldr.Encode();
 		bfr.Add(hook);
 		bfr.Add_hzip_int(1, flag);
@@ -57,7 +56,6 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 				break;
 		}
 		if (title_tid == Xoh_lnki_data.Title__diff)	bfr.Add_hzip_mid(src, data.Title_bgn(), data.Title_end());
-		hctx.Hzip__stat().Lnki_add(data.Src_end() - data.Src_bgn(), bfr.Len() - bfr_bgn, flag);
 		return this;
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {

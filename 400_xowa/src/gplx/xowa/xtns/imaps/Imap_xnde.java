@@ -35,6 +35,7 @@ public class Imap_xnde implements Xox_xnde {
 
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (imap_data.Invalid()) return;
+		wpg.Stat_itm().Imap_count++;
 		html_wtr.Write_tkn_to_html(bfr, ctx, hctx, imap_data.Img_src(), xnde, Xoh_html_wtr.Sub_idx_null, imap_data.Img().Img_link());
 	}
 }

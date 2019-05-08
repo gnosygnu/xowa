@@ -26,6 +26,7 @@ public class Xomath_xnde implements Xox_xnde {
 			ctx.Page().Html_data().Head_mgr().Itm__mathjax().Enabled_y_();
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
+		wpg.Stat_itm().Math_count++;
 		ctx.Wiki().Parser_mgr().Math__core().Write(bfr, ctx, xnde, src);
 	}
 	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;

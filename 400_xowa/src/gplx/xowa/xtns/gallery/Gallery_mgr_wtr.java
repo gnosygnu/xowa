@@ -25,6 +25,8 @@ public class Gallery_mgr_wtr {
 		boolean hctx_is_hdump = hctx.Mode_is_hdump();
 		int itm_default_w = mgr.Itm_default_w();
 		int itms_per_row = mgr.Itms_per_row();
+		page.Stat_itm().Gallery_count++;
+		if (Gallery_mgr_base_.Mode_is_packed(xnde.Mode())) page.Stat_itm().Gallery_packed_count++;
 
 		// write <ul> lhs
 		int	ul_uid = page.Html_data().Xtn_gallery_next_id();

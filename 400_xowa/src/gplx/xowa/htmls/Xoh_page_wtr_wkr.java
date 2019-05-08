@@ -204,8 +204,11 @@ public class Xoh_page_wtr_wkr {
 		// if (ns_id == Xow_ns_.Tid__category) wiki.Ctg__catpage_mgr().Write_catpage(tidy_bfr, page, hctx);
 
 		// tidy html
-		if (ns_id != Xow_ns_.Tid__special) // skip Special b/c
+		if (ns_id != Xow_ns_.Tid__special) { // skip Special b/c
+			long tidy_time = gplx.core.envs.System_.Ticks();
 			wiki.Html_mgr().Tidy_mgr().Exec_tidy(tidy_bfr, !hctx.Mode_is_hdump(), page.Url_bry_safe());
+			page.Stat_itm().Tidy_time = gplx.core.envs.System_.Ticks__elapsed_in_frac(tidy_time);
+		}
 		
 		// add back to main bfr
 		bfr.Add_bfr_and_clear(tidy_bfr);

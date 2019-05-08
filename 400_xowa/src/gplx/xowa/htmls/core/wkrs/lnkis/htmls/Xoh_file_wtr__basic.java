@@ -93,6 +93,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 				? caption_fmtr.To_bry(ctx, hctx, src, lnki.Caption_val_tkn(), Bool_.N, Xoh_lnki_text_fmtr.Null__fmt)
 				: lnki.Ttl().Full_db();
 			html_fmtr.Add_media(bfr, hctx.Mode_is_hdump(), img_orig_src, lnki_ttl_bry, media_html);	// NOTE: use orig_src not view_src; DATE:2014-01-19
+			page.Stat_itm().Media_count++;
 		}
 		else {
 			// orig_is_video 
@@ -110,11 +111,16 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 			if (orig_is_video) {	
 				xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_vid);		// mark as vid for js_mgr
 				this.Write_file_video(bfr, ctx, hctx, src, lnki, img_orig_src, uid, div_width, lnki_halign_bry, lnki_href, img_alt, lnki_ttl_bry, img_view_src, xfer_itm);
+				page.Stat_itm().Video_count++;
 			}
-			else if  (orig_ext.Id_is_audio())						// audio
+			else if  (orig_ext.Id_is_audio()) {						// audio
 				this.Write_file_audio(bfr, ctx, hctx, src, lnki, img_orig_src, uid, div_width, lnki_halign_bry, lnki_href, img_alt, lnki_ttl_bry);
-			else													// image
+				page.Stat_itm().Audio_count++;
+			}
+			else {													// image
 				this.Write_file_image(bfr, ctx, hctx, src, lnki, img_orig_src, uid, div_width, lnki_halign_bry, lnki_href, img_alt, lnki_ttl_bry, img_view_src, xfer_itm, lnki_is_thumbable, lnki_halign, orig_ext);
+				page.Stat_itm().Image_count++;
+			}
 		}
 	}
 	private void Write_file_audio(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] img_orig_src, int uid, int div_width, byte[] lnki_halign_bry, byte[] lnki_href, byte[] alt, byte[] lnki_ttl) {

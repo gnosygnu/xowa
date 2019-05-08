@@ -17,12 +17,10 @@ package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.ttls.*;
 public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
-	private final    Xoh_stat_itm stat_itm = new Xoh_stat_itm();
 	private Xoh_hzip_bfr bfr; private Xoh_hdoc_ctx hctx; private byte[] src;
 	private Xoh_page hpg;
 	public void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		this.bfr = (Xoh_hzip_bfr)bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;
-		stat_itm.Clear();
 	}
 	public void On_page_end() {}
 	public void On_txt		(int rng_bgn, int rng_end)									{bfr.Add_mid(src, rng_bgn, rng_end);}

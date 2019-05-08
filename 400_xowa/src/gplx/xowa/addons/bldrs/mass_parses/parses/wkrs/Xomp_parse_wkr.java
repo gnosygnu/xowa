@@ -40,7 +40,9 @@ public class Xomp_parse_wkr implements Gfo_invk {
 	private final    Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr();
 	private final    int uid;
 	private Xomp_wkr_db wkr_db;
+	private Xomp_stat_tbl stat_tbl;
 
+	// indexer vars
 	private final    Xofulltext_indexer_wkr indexer;
 
 	private final    List_adp list = List_adp_.New(); private int list_idx = 0, list_len = 0;		
@@ -64,9 +66,9 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		// wkr-specific vars
 		this.wiki = wiki; this.uid = uid;
 		this.wkr_db = Xomp_wkr_db.New(Xomp_mgr_db.New__url(wiki), uid);
+		this.stat_tbl = new Xomp_stat_tbl(wkr_db.Conn());
 	}
 	public void Exec() {
-		// init
 		Xow_parser_mgr parser_mgr = wiki.Parser_mgr();
 
 		// disable file download
@@ -86,7 +88,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 			logger.Bgn();
 		}
 
-		// init log_mgr / property_wkr
+		// init log_mgr / property_wkr / stats
 		Xop_log_wkr_factory wkr_factory = new Xop_log_wkr_factory(wkr_db.Conn());
 		if (cfg.Log_math()) wiki.Parser_mgr().Math__core().Log_wkr_(wkr_factory);
 
@@ -94,6 +96,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		hdump_bldr.Enabled_(cfg.Hdump_enabled()).Hzip_enabled_(cfg.Hzip_enabled()).Hzip_diff_(cfg.Hdiff_enabled()).Zip_tid_(cfg.Zip_tid());
 		hdump_bldr.Init(wiki, wkr_db.Conn(), new Xob_hdump_tbl_retriever__xomp(wkr_db.Html_tbl()));
 		wkr_db.Conn().Txn_bgn("xomp");
+		stat_tbl.Stmt_new();
 
 		// set status to running
 		mgr_db.Tbl__wkr().Update_status(uid, Xomp_wkr_tbl.Status__running);
@@ -110,8 +113,9 @@ public class Xomp_parse_wkr implements Gfo_invk {
 			if (ppg.Text() == null) continue; // some pages have no text; ignore them else null ref; PAGE: it.d:miercuri DATE:2015-12-05
 			
 			try {
-				// init page
 				long done_bgn = gplx.core.envs.System_.Ticks();
+
+				// get ns / ttl
 				int cur_ns = ppg.Ns_id();
 				Xoa_ttl ttl = wiki.Ttl_parse(cur_ns, ppg.Ttl_bry());
 				// if ns changed and prv_ns is main
@@ -120,10 +124,13 @@ public class Xomp_parse_wkr implements Gfo_invk {
 						wiki.Cache_mgr().Free_mem__all();	// NOTE: clears page and wbase cache only; needed else OutOfMemory error for en.w in 25th hour; DATE:2017-01-11
 					prv_ns = cur_ns;
 				}
+
+				// init page
 				Xoae_page wpg = Xoae_page.New(wiki, ttl);
 				wpg.Bldr__ns_ord_(ns_ord_mgr.Get_ord_by_ns_id(cur_ns));	// NOTE: must set ns_id for tier_id in lnki_temp; DATE:2016-09-19
 				wpg.Db().Text().Text_bry_(ppg.Text());
 				wpg.Db().Page().Init_by_mp(ppg.Id(), ppg.Page_score());
+				wpg.Stat_itm().Init(uid);
 
 				// parse page
 				Xop_ctx pctx = parser_mgr.Ctx();
@@ -134,16 +141,22 @@ public class Xomp_parse_wkr implements Gfo_invk {
 				hdump_bldr.Insert(pctx, wpg);
 
 				// index
-				if (indexer != null) indexer.Index(wpg);
+				long fulltext_time = 0;
+				if (indexer != null) {
+					fulltext_time = gplx.core.envs.System_.Ticks();
+					indexer.Index(wpg);
+					fulltext_time = gplx.core.envs.System_.Ticks__elapsed_in_frac(fulltext_time);
+				}
 
 				// mark done for sake of progress
 				prog_mgr.Mark_done(ppg.Id());
 
 				// update stats
 				long time_cur = gplx.core.envs.System_.Ticks();
-				done_time += time_cur - done_bgn;
-				done_bgn = time_cur;
+				long page_time = time_cur - done_bgn;
+				done_time += page_time;
 				++done_count;
+				stat_tbl.Insert(wpg, hdump_bldr.Tmp_hpg(), uid, page_time, fulltext_time);
 
 				// cleanup
 				// ctx.App().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
@@ -165,6 +178,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		if (logger != null) logger.End();
 		wkr_db.Conn().Txn_end();
 		wkr_db.Conn().Rls_conn();
+		stat_tbl.Stmt_rls();
 		mgr.Wkrs_done_add_1();		// NOTE: must release latch last else thread errors
 	}
 	public void Bld_stats(Bry_bfr bfr) {

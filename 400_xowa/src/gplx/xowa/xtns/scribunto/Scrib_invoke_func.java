@@ -25,6 +25,8 @@ public class Scrib_invoke_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_invoke;}
 	@Override public Pf_func New(int id, byte[] name) {return new Scrib_invoke_func().Name_(name);}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {// {{#invoke:mod_name|prc_name|prc_args...}}
+		boolean stat_enabled = ctx.Page().Stat_itm().Enabled();
+		if (stat_enabled) ctx.Page().Stat_itm().Scrib().Bgn();
 		Xowe_wiki wiki = ctx.Wiki();
 		byte[] mod_name = Eval_argx(ctx, src, caller, self);
 		if (Bry_.Len_eq_0(mod_name)) {Error(bfr, wiki.Msg_mgr(), Err_mod_missing); return;}		// EX: "{{#invoke:}}"
@@ -65,11 +67,12 @@ public class Scrib_invoke_func extends Pf_func_base {
 			Error(bfr, wiki.Msg_mgr(), err);
 			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr == null ? null : invoke_wkr.Err_filter_mgr();
 			if (	err_filter_mgr == null																				// no err_filter_mgr defined;
-				||	err_filter_mgr.Count_eq_0(	)																		// err_filter_mgr exists, but no definitions
+				||	err_filter_mgr.Count_eq_0()																			// err_filter_mgr exists, but no definitions
 				||	!err_filter_mgr.Match(String_.new_u8(mod_name), String_.new_u8(fnc_name), err.To_str__msg_only()))	// NOTE: must be To_str__msg_only; err_filter_mgr has defintion and it doesn't match current; print warn; DATE:2015-07-24
 				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Page().Ttl().Raw(), Bry_.Replace_nl_w_tab(src, self.Src_bgn(), self.Src_end()), err.To_str__log());
 			wiki.Parser_mgr().Scrib().Terminate_when_page_changes_y_();	// NOTE: terminate core when page changes; not terminating now, else page with many errors will be very slow due to multiple remakes of core; PAGE:th.d:all; DATE:2014-10-03
 		}
+		if (stat_enabled) ctx.Page().Stat_itm().Scrib().End();
 	}
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, Err err) {Error(bfr, msg_mgr, Err_.Cast_or_make(err).To_str__top_wo_args());}// NOTE: must use "short" error message to show in wikitext; DATE:2015-07-27
 	public static void Error(Bry_bfr bfr, Xow_msg_mgr msg_mgr, String error) {

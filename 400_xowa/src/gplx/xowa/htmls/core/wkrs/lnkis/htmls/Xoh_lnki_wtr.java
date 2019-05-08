@@ -65,9 +65,22 @@ public class Xoh_lnki_wtr {
 		redlinks_mgr.Add(lnki);
 		boolean stage_is_alt = hctx.Mode_is_alt();
 		switch (lnki.Ns_id()) {
-			case Xow_ns_.Tid__media:	if (!stage_is_alt) file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return; // NOTE: literal ":" has no effect; PAGE:en.w:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]
-			case Xow_ns_.Tid__file:		if (!literal_link && !stage_is_alt) {file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); return;} break;
-			case Xow_ns_.Tid__category:	if (!literal_link) {page.Wtxt().Ctgs__add(lnki.Ttl()); return;} break;
+			case Xow_ns_.Tid__media:
+				if (!stage_is_alt) 
+					file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); 
+				return; // NOTE: literal ":" has no effect; PAGE:en.w:Beethoven and [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]
+			case Xow_ns_.Tid__file:	
+				if (!literal_link && !stage_is_alt) {
+					file_wtr.Write_or_queue(bfr, page, ctx, hctx, src, lnki); 
+					return;
+				}
+				break;
+			case Xow_ns_.Tid__category:
+				if (!literal_link) {
+					page.Wtxt().Ctgs__add(lnki.Ttl());
+					return;
+				}
+				break;
 		}
 		Write_plain_by_tkn(bfr, hctx, src, lnki, lnki_ttl);
 	}
@@ -98,6 +111,7 @@ public class Xoh_lnki_wtr {
 			}
 		}
 		if (lnki.Xtn_sites_link()) return;							// lnki marked for relatedSites; don't write to page
+		page.Stat_itm().Lnki_count++;
 		if (hctx.Mode_is_alt())
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
 		else {
