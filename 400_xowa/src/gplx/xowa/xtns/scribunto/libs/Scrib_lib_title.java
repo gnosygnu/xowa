@@ -176,7 +176,7 @@ public class Scrib_lib_title implements Scrib_lib {
 	public boolean GetContent(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		byte[] rv = GetContentInternal(core, core.Wiki(), ttl_bry);
-		return rv == null ? rslt.Init_obj(null) : rslt.Init_obj(String_.new_u8(rv));
+		return rv == null ? rslt.Init_obj(null) : rslt.Init_obj(String_.new_u8(rv)); // NOTE: if content is null, then return null; EX:=mw.title.new('Wikipedia:Recent additions/2099/June'):getContent() DATE:2019-05-08
 	}
 	public boolean GetCurrentTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_obj(GetInexpensiveTitleData(core.Page().Ttl()));
