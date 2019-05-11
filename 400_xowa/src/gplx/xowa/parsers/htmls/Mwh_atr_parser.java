@@ -70,7 +70,13 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 				}
 				break;
 			}
+
 			byte b = src[pos];
+			int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
+			if (b == Byte_ascii.Null) throw Err_.new_wo_type("null byte is invalid in byte array; src=", "src", String_.new_u8(src, src_bgn, src_end));
+			if (b_len > 1) {
+				b = Byte_ascii.Null; // NOTE: hacky, but if there is a Byte_ascii.Null, then it will have a b_len of 1
+			}
 			switch (area) {
 				case Area__invalid:
 					switch (b) {
@@ -104,6 +110,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
 						case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 						case Byte_ascii.Colon: case Byte_ascii.Underline:
+						case Byte_ascii.Null:
 							area = Area__key;
 							if (atr_bgn == -1) atr_bgn = pos;	// NOTE: atr_bgn == -1 needed b/c of spaces
 							key_bgn = pos;
@@ -140,6 +147,9 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 						case Byte_ascii.Colon: case Byte_ascii.Underline: case Byte_ascii.Dash: case Byte_ascii.Dot:
 							if (key_bfr_on) key_bfr.Add_byte(b);
+							break;
+						case Byte_ascii.Null:
+							if (key_bfr_on) key_bfr.Add_mid(src, pos, pos + b_len);
 							break;
 						// ws -> end key
 						case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
@@ -191,6 +201,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
 						case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
 						case Byte_ascii.Colon: case Byte_ascii.Underline:
+						case Byte_ascii.Null:
 							Make(src, pos);
 							area = Area__key;
 							atr_bgn = key_bgn = pos;
@@ -232,6 +243,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						case Byte_ascii.Question: case Byte_ascii.At:
 						case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end: case Byte_ascii.Pow: case Byte_ascii.Underline: case Byte_ascii.Tick:
 						case Byte_ascii.Curly_bgn: case Byte_ascii.Curly_end: case Byte_ascii.Pipe: case Byte_ascii.Tilde:
+						case Byte_ascii.Null:
 							area = Area__val_naked;
 							val_bgn = pos;
 							break;
@@ -262,7 +274,8 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 									val_end = pos;
 								}
 								else {					// quote is just char; EX: title="1 o'clock" or title='The "C" way'
-									prv_is_ws = false; if (val_bfr_on) val_bfr.Add_byte(b);		// INLINE: add char
+									prv_is_ws = false;
+									if (val_bfr_on) val_bfr.Add_byte(b);
 								}
 							}
 							break;
@@ -276,7 +289,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 								if (!val_bfr_on) {val_bfr.Add_mid(src, val_bgn, pos); val_bfr_on = true;}	// INLINE: val_bfr.init
 								if (prv_is_ws) {}	// noop; only allow one ws at a time; EX: "a  b" -> "a b"; "a\n\nb" -> "a b"
 								else {
-									prv_is_ws = true; val_bfr.Add_byte(Byte_ascii.Space);									
+									prv_is_ws = true; val_bfr.Add_byte(Byte_ascii.Space);
 								}
 							}
 							break;
@@ -285,7 +298,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
 							if (gt_pos == Bry_find_.Not_found) {	
 								// area = Area__invalid;	// "<" inside quote is invalid; EX: <span title='a<b'>c</span>
-								if (val_bfr_on) val_bfr.Add_byte(b);		// INLINE: add char
+								if (val_bfr_on) val_bfr.Add_byte(b);
 							}
 							else {
 								if (qte_closed) {}
@@ -301,7 +314,8 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 							if (qte_closed)
 								area = Area__invalid;
 							else {
-								prv_is_ws = false; if (val_bfr_on) val_bfr.Add_byte(b);		// INLINE: add char
+								prv_is_ws = false;
+								if (val_bfr_on) val_bfr.Add_mid(src, pos, pos + b_len);
 							}
 							break;
 					}
@@ -328,7 +342,10 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						case Byte_ascii.Question: case Byte_ascii.At:
 						case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end: case Byte_ascii.Pow: case Byte_ascii.Underline: case Byte_ascii.Tick:
 						case Byte_ascii.Curly_bgn: case Byte_ascii.Curly_end: case Byte_ascii.Pipe: case Byte_ascii.Tilde:
-							if (val_bfr_on) val_bfr.Add_byte(b);		// INLINE: add char
+							if (val_bfr_on) val_bfr.Add_byte(b);
+							break;
+						case Byte_ascii.Null:
+							if (val_bfr_on) val_bfr.Add_mid(src, pos, pos + b_len);
 							break;
 						// case Byte_ascii.Angle_end: NOTE: valid in MW; making invalid now until finding counter-example
 						// angle_bgn -> check for <nowiki>; EX: a=b<nowiki>c</nowiki>d
@@ -364,7 +381,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 					}
 					break;			
 			}
-			++pos;
+			pos += b_len;
 		}
 
 		// iterate atrs and notify

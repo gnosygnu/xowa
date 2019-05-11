@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Mwh_atr_parser_tst {
-	private final Mwh_atr_parser_fxt fxt = new Mwh_atr_parser_fxt();
+	private final    Mwh_atr_parser_fxt fxt = new Mwh_atr_parser_fxt();
 	@Test   public void Pair__quote__double() 			{fxt.Test_parse("a=\"b\""			, fxt.Make_pair("a"		, "b"));}
 	@Test   public void Pair__quote__single()			{fxt.Test_parse("a='b'"				, fxt.Make_pair("a"		, "b"));}
 	@Test   public void Pair__quote__none()				{fxt.Test_parse("a=b"				, fxt.Make_pair("a"		, "b"));}
@@ -63,6 +63,11 @@ public class Mwh_atr_parser_tst {
 	@Test   public void Nowiki__val__quote_2()			{fxt.Test_parse("a=\"b<nowiki>c</nowiki>d<nowiki>e</nowiki>f\"", fxt.Make_pair("a", "bcdef"));}
 
 	@Test   public void Val__as_int() 					{fxt.Test_val_as_int("-123"		, -123);}
+
+	@Test   public void Utf_8() {
+		fxt.Test_parse("a=𤭢 b=2", fxt.Make_pair("a", "𤭢"), fxt.Make_pair("b", "2"));
+		fxt.Test_parse("a=1 𤭢=2", fxt.Make_pair("a", "1"), fxt.Make_pair("𤭢", "2"));
+	}
 
 //		@Test   public void Embedded() {	// PURPOSE: handle html inside attrib; PAGE:en.w:Economy_of_Greece DATE:2015-10-15
 //			fxt.Test_parse("title='<sup id='cite_ref-a_1-0' class='reference'><a href='#cite_note-a-1'>[1]</a></sup> c'"
