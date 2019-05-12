@@ -40,30 +40,38 @@ class Http_url_parser {
 	// Parse urls of form "/wiki_name/wiki/Page_name?action=val"
 	public boolean Parse(byte[] url) {
 		try {
-			// initial validations
+			// validate
 			if (url == null) return Fail(null, "invalid url; url is null");
 			int url_len = url.length;
 			if (url_len == 0) return Fail(null, "invalid url; url is empty");
 			if (url[0] != Byte_ascii.Slash) return Fail(url, "invalid url; must start with '/'");
 
+			// parse
 			Gfo_url_parser url_parser = new Gfo_url_parser();
 			Gfo_url url_obj = url_parser.Parse(url);
-			this.wiki = url_obj.Segs()[0];
+			byte[][] segs = url_obj.Segs();
+			int segs_len = segs.length;
 
-			int segs_len = url_obj.Segs().length;
-			if (segs_len > 1) {
-				byte[] x =  url_obj.Segs()[2];
-				if (segs_len > 2) {
-					Bry_bfr bfr = Bry_bfr_.New();
-					for (int i = 2; i < segs_len; i++) {
-						if (i != 2) bfr.Add_byte_slash();
-						bfr.Add(url_obj.Segs()[i]);
-					}
-					x = bfr.To_bry_and_clear();
+			// get wiki
+			if (segs_len == 0) return Fail(url, "invalid url; no wiki");
+			this.wiki = segs[0];
+
+			// get page
+			// only page; EX: wiki_name/wiki/Page
+			if (segs_len == 3) {
+				this.page = segs[2];
+			}
+			// page and subs; EX: wiki_name/wiki/Page/A/B/C
+			else if (segs_len > 3) {
+				Bry_bfr bfr = Bry_bfr_.New();
+				for (int i = 2; i < segs_len; i++) {
+					if (i != 2) bfr.Add_byte_slash();
+					bfr.Add(segs[i]);
 				}
-				this.page = x;
+				this.page = bfr.To_bry_and_clear();
 			}
 
+			// get qargs
 			Gfo_qarg_mgr qarg_mgr = new Gfo_qarg_mgr().Init(url_obj.Qargs());
 			byte[] action_val = qarg_mgr.Read_bry_or("action", Bry_.Empty);
 			if      (Bry_.Eq(action_val, Xoa_url_.Qarg__action__read))

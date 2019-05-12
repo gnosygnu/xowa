@@ -23,6 +23,9 @@ public class Http_url_parser_tst {
 		// wiki-only
 		fxt.Test__parse("/en.wikipedia.org", fxt.Make().Wiki_("en.wikipedia.org"));
 
+		// wiki w/ trailing slash; ISSUE#:459 DATE:2019-05-11
+		fxt.Test__parse("/en.wikipedia.org/", fxt.Make().Wiki_("en.wikipedia.org"));
+
 		// wiki + page
 		fxt.Test__parse("/en.wikipedia.org/wiki/Page_1", fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1"));
 
@@ -52,6 +55,7 @@ public class Http_url_parser_tst {
 
 		// fail: missing '/' at start
 		fxt.Test__parse("en.wikipedia.org", fxt.Make().Err_msg_("invalid url; must start with '/'; url=en.wikipedia.org"));
+
 /*
 		// fail: missing '/wiki/'
 		fxt.Test__parse("/en.wikipedia.org/Page_1", fxt.Make().Err_msg_("invalid url; must have '/wiki/' after wiki_domain; url=/en.wikipedia.org/Page_1"));

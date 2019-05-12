@@ -24,7 +24,7 @@ public class Xoh_file_wtr__djvu__tst {
 			, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
 			, "    <a href=\"/wiki/File:A.djvu\" class=\"image\" xowa_title=\"A.djvu\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/6/A.djvu/220px-1.jpg\" width=\"0\" height=\"0\" /></a>"
 			, "    <div class=\"thumbcaption\">"
-			, "<div class=\"magnify\"><a href=\"/wiki/File:A.djvu\" class=\"@gplx.Internal protected\" title=\"Enlarge\"></a></div>"
+			, "<div class=\"magnify\"><a href=\"/wiki/File:A.djvu\" class=\"internal\" title=\"Enlarge\"></a></div>"
 			, "    </div>"
 			, "  </div>"
 			, "</div>")
