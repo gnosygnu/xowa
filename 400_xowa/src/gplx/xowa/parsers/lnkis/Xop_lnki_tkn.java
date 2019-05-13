@@ -50,6 +50,13 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base implements gplx.xowa.wikis.pa
 	public int              Brack_end_pos() {return brack_end_pos;} public void Brack_end_pos_(int v) {this.brack_end_pos = v;} private int brack_end_pos;
 	public boolean				Xtn_sites_link() {return xtn_sites_link;} public void Xtn_sites_link_(boolean v) {xtn_sites_link = v;} private boolean xtn_sites_link;
 	public Xoh_file_fmtr Lnki_file_wkr() {return lnki_file_wkr;} public void Lnki_file_wkr_(Xoh_file_fmtr v) {lnki_file_wkr = v;} private Xoh_file_fmtr lnki_file_wkr;
+	public List_adp Args_list() {return args_list;}
+	public void Args_list_add(Arg_nde_tkn arg, int arg_tid) {
+		if (args_list == null)
+			args_list = List_adp_.New();
+		arg.Arg_tid_(arg_tid);
+		args_list.Add(arg);
+	}   private List_adp args_list;
 	public byte[] Target;
 	public byte[] Ttl_ary() {
 		return ttl.ForceLiteralLink() || ns_id != Xow_ns_.Tid__main		// if [[:]] or non-main (Category, Template)

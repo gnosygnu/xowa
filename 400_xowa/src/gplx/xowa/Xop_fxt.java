@@ -482,6 +482,21 @@ public class Xop_fxt {
 	public void Test__parse_to_html_w_skin(String raw, String expd) {
 		Tfds.Eq_str_lines(expd, Exec__parse_to_html_w_skin(raw));
 	}
+	public String Make__test_string(String expr, String expd) {
+		/*
+		{| class=wikitable
+		! rslt !! expd !! actl !! code
+		|}
+		*/
+		Bry_bfr bfr = Bry_bfr_.New();
+		bfr.Add_str_a7("|-\n");
+		bfr.Add_str_u8("| {{#ifeq:" + expd + "|" + expr + "|<span style='color:green'>pass</span>|<span style='color:red'>fail</span>}}\n");
+		bfr.Add_str_u8("| " + expd + "\n");
+		bfr.Add_str_u8("| " + expr + "\n");
+		bfr.Add_str_u8("| <nowiki>" + expr + "</nowiki>\n");
+		return bfr.To_str();
+	}
+
 	public static Xop_fxt New_app_html() {
 		Xop_fxt fxt = new Xop_fxt();
 		fxt.Wiki().Html_mgr().Page_wtr_mgr().Page_read_fmtr().Fmt_("~{page_data}");

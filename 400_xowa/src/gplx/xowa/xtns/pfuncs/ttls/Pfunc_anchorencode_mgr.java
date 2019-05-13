@@ -17,44 +17,60 @@ package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gp
 import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
-public class Pfunc_anchorencode_mgr {	// TS
+public class Pfunc_anchorencode_mgr {
 	private final    Xop_parser parser; // create a special-parser for handling wikitext inside {{anchorencode:}}
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);		
-	public Pfunc_anchorencode_mgr(Xowe_wiki wiki) {
-		this.parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), Xop_lxr_mgr.new_anchor_encoder());
-		parser.Init_by_wiki(wiki);
-		parser.Init_by_lang(wiki.Lang());
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final    Xop_ctx ctx;
+	private final    byte[] src;
+	public Pfunc_anchorencode_mgr(Xop_parser parser, Xop_ctx owner_ctx, byte[] src) {
+		this.parser = parser;
+		this.ctx = Xop_ctx.New__sub__reuse_page(owner_ctx);
+		this.ctx.Lnki().Build_args_list_(true);
+		this.src = src;
 	}
-	public boolean Used() {return used;} private boolean used;
-	public void Used_(boolean v) {used = v;}
-	public void Encode_anchor(Bry_bfr bfr, Xop_ctx ctx, byte[] src) {
-		// parse {{anchorencode:}}; note that wikitext inside anchorencode gets serialized by different rules
+	public void Encode_anchor(Bry_bfr bfr) {
+		// parse
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
-		boolean para_enabled = ctx.Para().Enabled();
-		ctx.Para().Enabled_n_();	// HACK: disable para
-		try {
-			Xop_root_tkn root = tkn_mkr.Root(src);
-			parser.Parse_wtxt_to_wdom(root, ctx, tkn_mkr, src, Xop_parser_.Doc_bgn_bos);
-			int subs_len = root.Subs_len();
-			for (int i = 0; i < subs_len; i++) {
-				Xop_tkn_itm sub = root.Subs_get(i);
-				Tkn(ctx, src, sub, root, i, tmp_bfr);
-			}
-		} finally {ctx.Para().Enabled_(para_enabled);}
+		Xop_root_tkn root = tkn_mkr.Root(src);
+		parser.Parse_wtxt_to_wdom(root, ctx, tkn_mkr, src, Xop_parser_.Doc_bgn_bos);
+		int subs_len = root.Subs_len();
+		for (int i = 0; i < subs_len; i++) {
+			Xop_tkn_itm sub = root.Subs_get(i);
+			Tkn(sub);
+		}
 
 		// write to bfr and encode it
 		byte[] unencoded = tmp_bfr.To_bry_and_clear();
 		Gfo_url_encoder_.Id.Encode(tmp_bfr, unencoded);
 		bfr.Add_bfr_and_clear(tmp_bfr);
 	}
-	private static void Tkn(Xop_ctx ctx, byte[] src, Xop_tkn_itm sub, Xop_tkn_grp grp, int sub_idx, Bry_bfr tmp_bfr) {
+	private void Tkn(Xop_tkn_itm sub) {
 		switch (sub.Tkn_tid()) {
-			case Xop_tkn_itm_.Tid_lnke: Lnke(src, (Xop_lnke_tkn)sub, tmp_bfr); break;	// FUTURE: need to move number to lnke_tkn so that number will be correct/consistent? 
-			case Xop_tkn_itm_.Tid_lnki: Lnki(src, (Xop_lnki_tkn)sub, tmp_bfr); break;
-			case Xop_tkn_itm_.Tid_apos: break; // noop
-			case Xop_tkn_itm_.Tid_xnde: Xnde(ctx, src, (Xop_xnde_tkn)sub, tmp_bfr); break;
-			case Xop_tkn_itm_.Tid_html_ncr: tmp_bfr.Add_u8_int(((Xop_amp_tkn_num)sub).Val()); break;
-			case Xop_tkn_itm_.Tid_html_ref: tmp_bfr.Add_u8_int(((Xop_amp_tkn_ent)sub).Char_int()); break;
+			case Xop_tkn_itm_.Tid_apos: // noop
+				break;
+			case Xop_tkn_itm_.Tid_html_ncr:
+				tmp_bfr.Add_u8_int(((Xop_amp_tkn_num)sub).Val());
+				break;
+			case Xop_tkn_itm_.Tid_html_ref:
+				tmp_bfr.Add_u8_int(((Xop_amp_tkn_ent)sub).Char_int());
+				break;
+			case Xop_tkn_itm_.Tid_lnke: { // FUTURE: need to move number to lnke_tkn so that number will be correct/consistent? 
+				Xop_lnke_tkn lnke = (Xop_lnke_tkn)sub;
+				int subs_len = lnke.Subs_len();
+				for (int i = 0; i < subs_len; i++) {
+					Xop_tkn_itm lnke_sub = lnke.Subs_get(i);
+					tmp_bfr.Add_mid(src, lnke_sub.Src_bgn(), lnke_sub.Src_end());
+				}
+				break;
+			}
+			case Xop_tkn_itm_.Tid_xnde: {
+				Xop_xnde_tkn xnde = (Xop_xnde_tkn)sub;
+				int subs_len = xnde.Subs_len();
+				for (int i = 0; i < subs_len; i++) {
+					Tkn(xnde.Subs_get(i));
+				}
+				break;
+			}
 			case Xop_tkn_itm_.Tid_tmpl_invk:
 				Xot_invk_tkn invk_tkn = (Xot_invk_tkn)sub;
 				Arg_itm_tkn name_tkn = invk_tkn.Name_tkn().Key_tkn();
@@ -66,36 +82,44 @@ public class Pfunc_anchorencode_mgr {	// TS
 				else																// regular tmpl; EX: {{a}}
 					tmp_bfr.Add(ctx.Wiki().Ns_mgr().Ns_template().Gen_ttl(name_ary));
 				break;
-			default: tmp_bfr.Add_mid(src, sub.Src_bgn_grp(grp, sub_idx), sub.Src_end_grp(grp, sub_idx)); break;
+			case Xop_tkn_itm_.Tid_lnki:
+				Lnki((Xop_lnki_tkn)sub);
+				break;
+			default:
+				tmp_bfr.Add_mid(src, sub.Src_bgn(), sub.Src_end());
+				break;
 		}		
 	}
-	private static void Lnke(byte[] src, Xop_lnke_tkn lnke, Bry_bfr tmp_bfr) {
-		int subs_len = lnke.Subs_len();
-		for (int i = 0; i < subs_len; i++) {
-			Xop_tkn_itm lnke_sub = lnke.Subs_get(i);
-			tmp_bfr.Add_mid(src, lnke_sub.Src_bgn_grp(lnke, i), lnke_sub.Src_end_grp(lnke, i));
-		}
-	}
-	private static void Lnki(byte[] src, Xop_lnki_tkn lnki, Bry_bfr tmp_bfr) {			
-		int trg_end = lnki.Trg_tkn().Src_end(); // pos after last trg char; EX: "]" in "[[A]]"; "|" in "[[A|b]]"
+	private void Lnki(Xop_lnki_tkn lnki) {
 		if (lnki.Pipe_count_is_zero()) { // trg only; EX: [[A]]
 			int trg_bgn = lnki.Trg_tkn().Src_bgn();
 			if (lnki.Ttl().ForceLiteralLink()) // literal link; skip colon; EX: [[:a]] -> a
-				++trg_bgn; 
-
-			// add trg only
-			tmp_bfr.Add_mid(src, trg_bgn, trg_end);
+				++trg_bgn;
+			tmp_bfr.Add_mid(src, trg_bgn, lnki.Trg_tkn().Src_end()); // pos after last trg char; EX: "]" in "[[A]]"
 		}
 		else { // trg + caption + other; EX: [[A|b]]; [[File:A.png|thumb|caption]]
-			tmp_bfr.Add_mid(src, trg_end + 1, lnki.Brack_end_pos()); //+1 is len of pipe
+			List_adp args_list = lnki.Args_list();
+			int len = args_list.Len();
+			for (int i = 0; i < len; i++) {
+				if (i != 0) tmp_bfr.Add_byte_pipe();
+				Arg_nde_tkn arg = (Arg_nde_tkn)args_list.Get_at(i);
+				switch (arg.Arg_tid()) {
+					case Xop_lnki_arg_parser.Tid_caption:
+						Xop_tkn_itm caption_tkn = lnki.Caption_val_tkn();
+						int caption_subs_len = caption_tkn.Subs_len();
+						for (int j = 0; j < caption_subs_len; j++) {
+							Tkn(caption_tkn.Subs_get(j));
+						}
+						break;
+					default:
+						tmp_bfr.Add_mid(src, arg.Src_bgn(), arg.Src_end());
+						break;
+				}
+			}
 		}
+
+		// add tail; EX: [[A]]b
 		if (lnki.Tail_bgn() != -1)
 			tmp_bfr.Add_mid(src, lnki.Tail_bgn(), lnki.Tail_end());
-	}
-	private static void Xnde(Xop_ctx ctx, byte[] src, Xop_xnde_tkn xnde, Bry_bfr tmp_bfr) {
-		int subs_len = xnde.Subs_len();
-		for (int i = 0; i < subs_len; i++) {
-			Tkn(ctx, src, xnde.Subs_get(i), xnde, i, tmp_bfr);
-		}		
 	}
 }

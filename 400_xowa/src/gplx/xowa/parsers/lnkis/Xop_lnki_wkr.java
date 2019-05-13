@@ -28,6 +28,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	}
 	public void Page_end(Xop_ctx ctx, Xop_root_tkn root, byte[] src, int src_len) {}
 	public Xop_file_logger File_logger() {return lnki_logger;} public Xop_lnki_wkr File_logger_(Xop_file_logger v) {lnki_logger = v; return this;} private Xop_file_logger lnki_logger = Xop_file_logger_.Noop;
+	public boolean Build_args_list() {return build_args_list;} public void Build_args_list_(boolean v) {build_args_list = v;} private boolean build_args_list;
 	public void Auto_close(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, Xop_tkn_itm tkn) {
 		Xop_lnki_tkn lnki = (Xop_lnki_tkn)tkn;
 		lnki.Tkn_tid_to_txt();
@@ -195,6 +196,11 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 					case Xop_lnki_arg_parser.Tid_noicon:		lnki.Media_icon_n_();  break;
 					case Xop_lnki_arg_parser.Tid_page:			Xop_lnki_wkr_.Page_parse(ctx, src, number_parser, lnki, arg); break;
 					case Xop_lnki_arg_parser.Tid_thumbtime:		Xop_lnki_wkr_.Thumbtime_parse(ctx, src, number_parser, lnki, arg); break;
+				}
+
+				// anchorencode uses build_args_list; ISSUE#:460 DATE:2019-05-12
+				if (build_args_list) {
+					lnki.Args_list_add(arg, arg_tid);
 				}
 			}
 			return true;

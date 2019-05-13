@@ -87,19 +87,8 @@ class Scrib_lib_ustring__find__fxt {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_find, Scrib_kv_utl_.base1_many_(text, regx, bgn, plain), expd);
 	}
 	private String Bld_test_string(Object text, String regx, int bgn, boolean plain, String expd) {
-		/*
-		{| class=wikitable
-		! rslt !! expd !! actl !! code
-		|}
-		*/
 		String invk = "{{" + String_.Format("#invoke:Sandbox/Gnosygnu|ustring_find|{0}|{1}|{2}|{3}", Object_.Xto_str_strict_or_empty(text), regx, bgn, plain ? Bool_.True_str : Bool_.False_str) + "}}";
-		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_str_a7("|-\n");
-		bfr.Add_str_u8("| {{#ifeq:" + invk + "|" + expd + "|<span style='color:green'>pass</span>|<span style='color:red'>fail</span>}}\n");
-		bfr.Add_str_u8("| " + expd + "\n");
-		bfr.Add_str_u8("| " + invk + "\n");
-		bfr.Add_str_u8("| <nowiki>" + invk + "</nowiki>\n");
-		return bfr.To_str();
+		return fxt.Parser_fxt().Make__test_string(invk, expd);
 	}
 }
 /*
