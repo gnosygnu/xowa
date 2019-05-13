@@ -71,17 +71,6 @@ public class Pfunc_anchorencode_mgr {
 				}
 				break;
 			}
-			case Xop_tkn_itm_.Tid_tmpl_invk:
-				Xot_invk_tkn invk_tkn = (Xot_invk_tkn)sub;
-				Arg_itm_tkn name_tkn = invk_tkn.Name_tkn().Key_tkn();
-				int name_ary_bgn = name_tkn.Src_bgn() + 1, name_ary_end = name_tkn.Src_end();
-				byte[] name_ary = Bry_.Mid(src, name_ary_bgn, name_ary_end);	// + 1 to skip :
-				int name_ary_len = name_ary_end - name_ary_bgn; 
-				if (name_ary_len > 0 && name_ary[0] == Byte_ascii.Colon)			// has initial colon; EX: {{:a}
-					tmp_bfr.Add_mid(name_ary, 1, name_ary_len);						// 1 to skip initial colon
-				else																// regular tmpl; EX: {{a}}
-					tmp_bfr.Add(ctx.Wiki().Ns_mgr().Ns_template().Gen_ttl(name_ary));
-				break;
 			case Xop_tkn_itm_.Tid_lnki:
 				Lnki((Xop_lnki_tkn)sub);
 				break;

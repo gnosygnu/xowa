@@ -31,6 +31,9 @@ public class Pfunc_anchorencode_tst {
 	@Test  public void Html_ref() {
 		fxt.Test("{{anchorencode:a &quot; b}}", "a_&quot;_b");
 	}
+	@Test  public void Xnde() {
+		fxt.Test("{{anchorencode:a <i>b</i> c}}", "a_b_c");
+	}
 	@Test  public void Lnke() {
 		fxt.Test("{{anchorencode:[irc://a b c]}}", "b_c");
 	}
@@ -52,14 +55,15 @@ public class Pfunc_anchorencode_tst {
 	@Test  public void Lnki_caption_html() { // ISSUE#:460
 		fxt.Test("{{anchorencode:[[a|<span style=\"color:red\">b</span>]]}}", "b");
 	}
-	@Test  public void Xnde() {
-		fxt.Test("{{anchorencode:a <i>b</i> c}}", "a_b_c");
+	@Test  public void Lnki_missing_basic() {
+		fxt.Test("{{anchorencode:{{Xowa_missing}}}}", "Template:Xowa_missing");
 	}
-	@Test  public void Tmpl_missing_basic() {
-		fxt.Test("{{anchorencode:{{xowa_na}}}}", "Template:xowa_na");
+	@Test  public void Lnki_missing_colon() {
+		fxt.Test("{{anchorencode:{{:Xowa_missing}}}}", "Xowa_missing");
 	}
-	@Test  public void Tmpl_missing_colon() {
-		fxt.Test("{{anchorencode:{{:xowa_na}}}}", "xowa_na"); // NOTE: changed from "Template:A" to "a"; DATE:2016-06-24
+	@Test  public void Tmpl() {
+		fxt.Make_page("Template:Xowa1", "a<span>b</span>c");
+		fxt.Test(false, "{{anchorencode:{{Xowa1}}}}", "abc");
 	}
 }
 class Pfunc_anchorenchode_fxt {
@@ -71,7 +75,11 @@ class Pfunc_anchorenchode_fxt {
 	public void Reset() {
 		fxt.Reset();
 	}
-	public void Test(String raw, String expd) {
+	public void Make_page(String ttl, String text) {
+		fxt.Init_page_create(ttl, text);
+	}
+	public void Test(String raw, String expd) {this.Test(dbg, raw, expd);}
+	public void Test(boolean dbg, String raw, String expd) {
 		if (dbg) Console_adp__sys.Instance.Write_str(fxt.Make__test_string(raw, expd));
 		fxt.Test_str_full(raw, expd, fxt.Exec_parse_page_all_as_str(raw));
 	}
