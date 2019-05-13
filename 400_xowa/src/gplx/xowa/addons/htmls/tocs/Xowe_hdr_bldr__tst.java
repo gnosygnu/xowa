@@ -178,7 +178,7 @@ public class Xowe_hdr_bldr__tst {
 		, "==a+b=="
 		), fxt.toc_tbl_nl_y
 		( "  <ul>"
-		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#a.2Bb\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">a+b</span></a>"
+		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#a+b\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">a+b</span></a>" // ISSUE#:462; DATE:2019-05-12
 		, "    </li>"
 		, "  </ul>"
 		));
@@ -403,11 +403,11 @@ public class Xowe_hdr_bldr__tst {
 		, String_.Concat_lines_nl
 		( fxt.toc_tbl_nl_n
 		( "  <ul>"
-		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#.5Ba.5D\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">&#91;a&#93;</span></a>"
+		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#[a]\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">&#91;a&#93;</span></a>" // ISSUE#:462; DATE:2019-05-12
 		, "    </li>"
 		, "  </ul>"
 		)
-		, "<h2><span class='mw-headline' id='.5Ba.5D'>&#91;a&#93;</span></h2>"
+		, "<h2><span class='mw-headline' id='[a]'>&#91;a&#93;</span></h2>"// ISSUE#:462; DATE:2019-05-12
 		));
 	}
 	@Test    public void Fix_large_before_small() {	// PURPOSE.fix: "===a===\n===b===\n" followed by "==c==" causes improper formatting; DATE:2013-05-16
@@ -469,11 +469,11 @@ public class Xowe_hdr_bldr__tst {
 		, String_.Concat_lines_nl
 		( fxt.toc_tbl_nl_n
 		( "  <ul>"
-		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#a.5B1.5D\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">a<sup>[1]</sup></span></a>"
+		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#a[1]\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">a<sup>[1]</sup></span></a>" // ISSUE#:462; DATE:2019-05-12
 		, "    </li>"
 		, "  </ul>"
 		)
-		, "<h2><span class='mw-headline' id='a.5B1.5D'>a<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup></span></h2>"
+		, "<h2><span class='mw-headline' id='a[1]'>a<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup></span></h2>"// ISSUE#:462; DATE:2019-05-12
 		));
 	}
 	@Test   public void Category() { // PURPOSE: Category should not show in in TOC; DATE:2013-12-09
@@ -529,11 +529,11 @@ public class Xowe_hdr_bldr__tst {
 		, String_.Concat_lines_nl
 		( fxt.toc_tbl_nl_n
 		( "  <ul>"
-		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#.5B.5B.5D.5D\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">[[]]</span></a>"
+		, "    <li class=\"toclevel-1 tocsection-1\"><a href=\"#[[]]\"><span class=\"tocnumber\">1</span> <span class=\"toctext\">[[]]</span></a>" // ISSUE#:462; DATE:2019-05-12
 		, "    </li>"
 		, "  </ul>"
 		)
-		, "<h2><span class='mw-headline' id='.5B.5B.5D.5D'>[[]]</span></h2>"
+		, "<h2><span class='mw-headline' id='[[]]'>[[]]</span></h2>" // ISSUE#:462; DATE:2019-05-12
 		));
 	}
 	@Test   public void File_in_tbl() { // PURPOSE: two issues (a) don't show file if in tbl; (b) if v2, file inside tbl fails; PAGE:en.w:Holmes County,_Mississippi; DATE:2014-06-22

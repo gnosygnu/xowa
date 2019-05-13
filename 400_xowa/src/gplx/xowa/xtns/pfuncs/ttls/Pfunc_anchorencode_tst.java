@@ -20,16 +20,16 @@ public class Pfunc_anchorencode_tst {
 	private final    Pfunc_anchorenchode_fxt fxt = new Pfunc_anchorenchode_fxt(Bool_.N);
 	@Before public void init() {fxt.Reset();}
 	@Test  public void Text_apos() {
-		fxt.Test("{{anchorencode:a 'b c}}", "a_.27b_c");
+		fxt.Test("{{anchorencode:a 'b c}}", "a_'b_c");
 	}
 	@Test  public void Apos_bold() {
 		fxt.Test("{{anchorencode:a ''b'' c}}", "a_b_c");
 	}
 	@Test  public void Html_ncr() {
-		fxt.Test("{{anchorencode:a &#34; b}}", "a_.22_b");
+		fxt.Test("{{anchorencode:a &#34; b}}", "a_&quot;_b");
 	}
 	@Test  public void Html_ref() {
-		fxt.Test("{{anchorencode:a &quot; b}}", "a_.22_b");
+		fxt.Test("{{anchorencode:a &quot; b}}", "a_&quot;_b");
 	}
 	@Test  public void Lnke() {
 		fxt.Test("{{anchorencode:[irc://a b c]}}", "b_c");
@@ -41,7 +41,7 @@ public class Pfunc_anchorencode_tst {
 		fxt.Test("{{anchorencode:a [[b|c]] c}}", "a_c_c");
 	}
 	@Test  public void Lnki_file() {
-		fxt.Test("{{anchorencode:a [[Image:b|thumb|123px|c]] d}}", "a_thumb.7C123px.7Cc_d");
+		fxt.Test("{{anchorencode:a [[Image:b|thumb|123px|c]] d}}", "a_thumb|123px|c_d");
 	}
 	@Test  public void Lnki_trailing() {
 		fxt.Test("{{anchorencode:a [[b]]c d}}", "a_bc_d");
@@ -59,7 +59,7 @@ public class Pfunc_anchorencode_tst {
 		fxt.Test("{{anchorencode:{{xowa_na}}}}", "Template:xowa_na");
 	}
 	@Test  public void Tmpl_missing_colon() {
-		fxt.Test("{{anchorencode:{{:a}}}}", "a"); // NOTE: changed from "Template:A" to "a"; DATE:2016-06-24
+		fxt.Test("{{anchorencode:{{:xowa_na}}}}", "xowa_na"); // NOTE: changed from "Template:A" to "a"; DATE:2016-06-24
 	}
 }
 class Pfunc_anchorenchode_fxt {
@@ -73,6 +73,6 @@ class Pfunc_anchorenchode_fxt {
 	}
 	public void Test(String raw, String expd) {
 		if (dbg) Console_adp__sys.Instance.Write_str(fxt.Make__test_string(raw, expd));
-		fxt.Test__parse__tmpl_to_html(raw, expd);
+		fxt.Test_str_full(raw, expd, fxt.Exec_parse_page_all_as_str(raw));
 	}
 }

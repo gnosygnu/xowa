@@ -76,7 +76,11 @@ class Gfo_url_encoder_itm_hex implements Gfo_url_encoder_itm {
 } 
 class Gfo_url_encoder_itm_html_ent implements Gfo_url_encoder_itm {
 	private final    Btrie_slim_mgr amp_trie;
-	public Gfo_url_encoder_itm_html_ent(Btrie_slim_mgr amp_trie) {this.amp_trie = amp_trie;}
+	private final    boolean encode_unknown_amp;
+	public Gfo_url_encoder_itm_html_ent(Btrie_slim_mgr amp_trie, boolean encode_unknown_amp) {
+		this.encode_unknown_amp = encode_unknown_amp;
+		this.amp_trie = amp_trie;
+	}
 	public int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b) {
 		++idx;					// b is &; get next character afterwards
 		if (idx == end) {		// & is last char; return
@@ -86,7 +90,10 @@ class Gfo_url_encoder_itm_html_ent implements Gfo_url_encoder_itm {
 		b = src[idx];
 		Object o = amp_trie.Match_bgn_w_byte(b, src, idx, end);
 		if (o == null) {	// unknown entity (EX:&unknown;); return &;
-			Gfo_url_encoder_itm_hex.Encode_byte(Byte_ascii.Amp, bfr, Byte_ascii.Dot);
+			if (encode_unknown_amp)
+				Gfo_url_encoder_itm_hex.Encode_byte(Byte_ascii.Amp, bfr, Byte_ascii.Dot);
+			else
+				bfr.Add_byte(Byte_ascii.Amp);
 			return 0;
 		}
 		else {

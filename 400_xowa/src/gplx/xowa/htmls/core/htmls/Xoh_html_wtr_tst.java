@@ -315,7 +315,7 @@ public class Xoh_html_wtr_tst {
 		fxt.Test_parse_page_wiki_str("<div/>", "<div></div>");
 	}
 	@Test  public void Xnde_id_encode() { // PURPOSE: id should be url-encoded; DATE: 2013-11-13;
-		fxt.Test_parse_page_wiki_str("<div id='a*'></div>", "<div id='a.2A'></div>");
+		fxt.Test_parse_page_wiki_str("<div id='a*'></div>", "<div id='a*'></div>"); // ISSUE#:462; DATE:2019-05-12
 		fxt.Test_parse_page_wiki_str("<div id='a b'></div>", "<div id='a_b'></div>");
 	}
 	@Test  public void Timeline() {// PURPOSE: embed timeline contents in pre; DATE:2014-05-22

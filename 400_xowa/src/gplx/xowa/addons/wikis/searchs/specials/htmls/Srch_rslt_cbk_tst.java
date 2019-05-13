@@ -17,15 +17,15 @@ package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gpl
 import org.junit.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.guis.cbks.js.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_rslt_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Srch_rslt_cbk_fxt fxt = new Srch_rslt_cbk_fxt();
-	@Test   public void Basic() {			
-		fxt.Test_add(fxt.Make_rslt(50, "L"), fxt.Make_args_append("xowa_insert_w"	, "w.7CL"));	// insert new
-		fxt.Test_add(fxt.Make_rslt(30, "N"), fxt.Make_args_append("xowa_insert_w"	, "w.7CN"));	// insert below last
-		fxt.Test_add(fxt.Make_rslt(70, "J"), fxt.Make_args_append("w.7CL"			, "w.7CJ"));	// insert above first
-		fxt.Test_add(fxt.Make_rslt(60, "K"), fxt.Make_args_append("w.7CL"			, "w.7CK"));	// insert above mid
-		fxt.Test_add(fxt.Make_rslt(40, "M"), fxt.Make_args_append("w.7CN"			, "w.7CM"));	// insert below mid
-		fxt.Test_add(fxt.Make_rslt(10, "P"));														// insert noop			
-		fxt.Test_add(fxt.Make_rslt(80, "I"), fxt.Make_args_append("w.7CJ"			, "w.7CI") , fxt.Make_args_replace("w.7CN"));	// insert displace all
-		fxt.Test_add(fxt.Make_rslt(61, "K1"), fxt.Make_args_append("w.7CK"			, "w.7CK1"), fxt.Make_args_replace("w.7CM"));	// insert displace mid
+	@Test   public void Basic() {// ISSUE#:462; DATE:2019-05-12
+		fxt.Test_add(fxt.Make_rslt(50, "L"), fxt.Make_args_append("xowa_insert_w"   , "w|L")); // insert new
+		fxt.Test_add(fxt.Make_rslt(30, "N"), fxt.Make_args_append("xowa_insert_w"   , "w|N")); // insert below last
+		fxt.Test_add(fxt.Make_rslt(70, "J"), fxt.Make_args_append("w|L"             , "w|J")); // insert above first
+		fxt.Test_add(fxt.Make_rslt(60, "K"), fxt.Make_args_append("w|L"             , "w|K")); // insert above mid
+		fxt.Test_add(fxt.Make_rslt(40, "M"), fxt.Make_args_append("w|N"             , "w|M")); // insert below mid
+		fxt.Test_add(fxt.Make_rslt(10, "P"));                                                  // insert noop
+		fxt.Test_add(fxt.Make_rslt(80, "I"), fxt.Make_args_append("w|J"             , "w|I") , fxt.Make_args_replace("w|N")); // insert displace all
+		fxt.Test_add(fxt.Make_rslt(61, "K1"), fxt.Make_args_append("w|K"            , "w|K1"), fxt.Make_args_replace("w|M")); // insert displace mid
 	}
 }
 class Srch_rslt_cbk_fxt {

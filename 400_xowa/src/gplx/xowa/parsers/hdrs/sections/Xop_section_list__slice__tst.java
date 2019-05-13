@@ -87,7 +87,7 @@ public class Xop_section_list__slice__tst {
 		, "== Hdr 2 =="
 		, "Para 2"
 		);
-		fxt.Test__slice_bry_or_null(".5Cdelta", String_.Concat_lines_nl_skip_last
+		fxt.Test__slice_bry_or_null("\\delta", String_.Concat_lines_nl_skip_last // ISSUE#:462; DATE:2019-05-12
 		( "== <math>\\delta</math> =="
 		, "Para 1"
 		));

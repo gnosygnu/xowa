@@ -40,7 +40,7 @@ public class Xow_url_parser__qarg__tst {
 		fxt.Exec__parse("A?B").Test__wiki("en.wikipedia.org").Test__page("A?B").Test__qargs("");
 	}
 	@Test  public void Question_is_anchor() {
-		fxt.Exec__parse("A#b?c").Test__wiki("en.wikipedia.org").Test__page("A").Test__anch("b.3Fc");
+		fxt.Exec__parse("A#b?c").Test__wiki("en.wikipedia.org").Test__page("A").Test__anch("b?c");// ISSUE#:462; DATE:2019-05-12
 	}
 	@Test  public void Title_remove_w() {	// PURPOSE: fix /w/ showing up as seg; DATE:2014-05-30
 		fxt.Exec__parse("http://en.wikipedia.org/w/index.php?title=A").Test__wiki("en.wikipedia.org").Test__page("A");

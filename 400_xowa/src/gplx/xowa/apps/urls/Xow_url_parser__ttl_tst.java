@@ -30,7 +30,7 @@ public class Xow_url_parser__ttl_tst {
 		tstr.Exec__parse("A#b").Test__wiki("en.wikipedia.org").Test__page("A").Test__anch("b");
 	}
 	@Test   public void Anch_w_slash() {	// PURPOSE: A/b#c/d was not parsing correctly; PAGE:en.w:Enlightenment_Spain#Enlightened_despotism_.281759%E2%80%931788.29
-		tstr.Exec__parse("A/b#c/d").Test__page("A/b").Test__anch("c.2Fd");
+		tstr.Exec__parse("A/b#c/d").Test__page("A/b").Test__anch("c/d");// ISSUE#:462; DATE:2019-05-12
 	}
 	@Test  public void Ns_category() {
 		tstr.Exec__parse("Category:A").Test__wiki("en.wikipedia.org").Test__page("Category:A");

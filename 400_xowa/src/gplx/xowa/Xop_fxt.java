@@ -490,7 +490,7 @@ public class Xop_fxt {
 		*/
 		Bry_bfr bfr = Bry_bfr_.New();
 		bfr.Add_str_a7("|-\n");
-		bfr.Add_str_u8("| {{#ifeq:" + expd + "|" + expr + "|<span style='color:green'>pass</span>|<span style='color:red'>fail</span>}}\n");
+		bfr.Add_str_u8("| {{#ifeq:" + String_.Replace(expd, "|", "{{!}}") + "|" + String_.Replace(expr, "|", "{{!}}") + "|<span style='color:green'>pass</span>|<span style='color:red'>fail</span>}}\n");
 		bfr.Add_str_u8("| " + expd + "\n");
 		bfr.Add_str_u8("| " + expr + "\n");
 		bfr.Add_str_u8("| <nowiki>" + expr + "</nowiki>\n");

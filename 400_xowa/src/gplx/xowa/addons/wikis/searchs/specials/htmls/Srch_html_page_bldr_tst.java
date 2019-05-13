@@ -29,13 +29,13 @@ public class Srch_html_page_bldr_tst {
 	@Test   public void Rows() {
 		fxt.Test_rows(new Srch_rslt_row[] {fxt.Make_row(10, "A"), fxt.Make_row(20, "B")}, String_.Concat_lines_nl_skip_last
 		( ""
-		, "  <tr id='w.7C1'>"
+		, "  <tr id='w|1'>" // ISSUE#:462; DATE:2019-05-12
 		, "    <td style='padding-right:5px; vertical-align:top; text-align:right;'>10"
 		, "    </td>"
 		, "    <td style='padding-left:5px; vertical-align:top;'><a href='/site/w/wiki/A' title='A'>A</a>"
 		, "    </td>"
 		, "  </tr>"
-		, "  <tr id='w.7C2'>"
+		, "  <tr id='w|2'>" // ISSUE#:462; DATE:2019-05-12
 		, "    <td style='padding-right:5px; vertical-align:top; text-align:right;'>20"
 		, "    </td>"
 		, "    <td style='padding-left:5px; vertical-align:top;'><a href='/site/w/wiki/B' title='B'>B</a>"

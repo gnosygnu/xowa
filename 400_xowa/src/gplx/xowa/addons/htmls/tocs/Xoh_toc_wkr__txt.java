@@ -19,7 +19,7 @@ import gplx.xowa.parsers.amps.*; import gplx.core.primitives.*;
 class Xoh_toc_wkr__txt {
 	private final    Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html();
 	private final    Bry_bfr anch_bfr = Bry_bfr_.New(), text_bfr = Bry_bfr_.New();
-	private final    Gfo_url_encoder anch_encoder = Gfo_url_encoder_.New__id();
+	private final    Gfo_url_encoder anch_encoder = Gfo_url_encoder_.New__html_id().Make();
 	private final    Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
 	private final    Hash_adp anch_hash = Hash_adp_bry.ci_u8(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
 	private Xow_tidy_mgr_interface tidy_mgr;

@@ -30,10 +30,10 @@ public class Xoh_toc_wkr__txt__basic__tst {
 		fxt.Test__both("", "", "");
 	}
 	@Test   public void Amp__ncr() {
-		fxt.Test__both("&#91;a&#93;", ".5Ba.5D", "&#91;a&#93;");
+		fxt.Test__both("&#91;a&#93;", "[a]", "&#91;a&#93;");// ISSUE#:462; DATE:2019-05-12
 	}
 	@Test   public void Encode() {
-		fxt.Test__both("a+b", "a.2Bb", "a+b");
+		fxt.Test__both("a+b", "a+b", "a+b");// ISSUE#:462; DATE:2019-05-12
 	}
 	@Test   public void Comment() {
 		fxt.Test__text("a<!--b-->c", "ac");

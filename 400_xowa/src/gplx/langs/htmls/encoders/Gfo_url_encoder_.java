@@ -17,12 +17,14 @@ package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gp
 import gplx.core.btries.*;
 import gplx.langs.htmls.entitys.*;
 public class Gfo_url_encoder_ {
-	public static Gfo_url_encoder New__id() {return Gfo_url_encoder_.New__html_id().Make();}
-	public static Gfo_url_encoder_mkr New__html_id() {			// EX: "<a id='a�b'>" -> "<a id='a.C3.A9b'>"
-		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Dot).Init_common(Bool_.Y)
+	public static Gfo_url_encoder_mkr New__html_id() { // EX: "<a id='a�b'>" -> "<a id='a.C3.A9b'>"
+		return new Gfo_url_encoder_mkr()
+			.Init(Byte_ascii.Dot)
+			.Init__same__rng(0, 255) // clear everything and set to do-not-encode
+			.Init__encode_hex(Byte_ascii.Angle_bgn, Byte_ascii.Angle_end) // NOTE: should not be encoded, but will break existings tests; EX:{{#tag:pre|a|id='<br/>'}}; DATE:2019-05-12
 			.Init__decode_mark(Byte_ascii.Dot)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
-			.Init__html_ent(Byte_ascii.Amp, Gfh_entity_trie.Instance);
+			.Init__html_ent(Byte_ascii.Amp, Gfh_entity_trie.Instance, false);
 	}
 	public static Gfo_url_encoder_mkr New__html_href_mw(boolean use_anchor_encoder) {		// EX: "<a href='^#^'>" -> "<a href='%5E#.5E'>"; REF.MW: ";:@$!*(),/"
 		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent).Init_common(Bool_.Y)
@@ -84,9 +86,10 @@ public class Gfo_url_encoder_ {
 			.Init__same__many(Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Apos, Byte_ascii.Semic);
 	}
 	public static Gfo_url_encoder_mkr New__mw_ttl() {
-		return new Gfo_url_encoder_mkr().Init(Byte_ascii.Percent)
+		return new Gfo_url_encoder_mkr()
+			.Init(Byte_ascii.Percent)
 			.Init__same__rng(0, 255)
-			.Init__diff__many(Byte_ascii.Percent, Byte_ascii.Amp, Byte_ascii.Apos, Byte_ascii.Eq, Byte_ascii.Plus)
+			.Init__diff__many(Byte_ascii.Amp, Byte_ascii.Apos, Byte_ascii.Eq, Byte_ascii.Plus)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline)
 			;
 	}

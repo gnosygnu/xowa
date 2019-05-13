@@ -246,7 +246,7 @@ public class Xop_lnki_wkr__basic_tst {
 		fxt.Test_parse_page_all_str("[[B|=]]", "<a href=\"/wiki/B\">=</a>");		
 	}
 	@Test  public void Href_encode_anchor() {	// PURPOSE: test separate encoding for ttl (%) and anchor (.)
-		fxt.Test_parse_page_all_str("[[^#^]]", "<a href=\"/wiki/%5E#.5E\">^#^</a>");
+		fxt.Test_parse_page_all_str("[[^#^]]", "<a href=\"/wiki/%5E#^\">^#^</a>"); // ISSUE#:462; DATE:2019-05-12
 	}
 	@Test  public void Href_question() {	// PURPOSE.fix: ttl with ? at end should not be considered qarg; DATE:2013-02-08
 		fxt.Test_parse_page_all_str("[[A?]]", "<a href=\"/wiki/A%3F\">A?</a>");
