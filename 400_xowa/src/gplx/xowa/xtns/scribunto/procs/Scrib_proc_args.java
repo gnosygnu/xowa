@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.procs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+import gplx.langs.htmls.encoders.*;
 public class Scrib_proc_args {		
 	private Keyval[] ary; private int ary_len;
 	public Scrib_proc_args(Keyval[] v) {
@@ -156,15 +157,16 @@ public class Scrib_proc_args {
 		if		(qry_args_cls == String.class)
 			return Bry_.new_u8((String)qry_args_obj);
 		else if (qry_args_cls == Keyval[].class) {
+			// ISSUE#:465; SEE:Pfunc_urlfunc; DATE:2019-05-18
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 			Keyval[] kvs = (Keyval[])qry_args_obj;
 			int len = kvs.length;
 			for (int i = 0; i < len; i++) {
 				Keyval kv = kvs[i];
 				if (i != 0) bfr.Add_byte(Byte_ascii.Amp);
-				bfr.Add_str_u8(kv.Key());
+				Gfo_url_encoder_.Php_urlencode.Encode(bfr, Bry_.new_u8(kv.Key()));
 				bfr.Add_byte(Byte_ascii.Eq);
-				bfr.Add_str_u8(kv.Val_to_str_or_empty());
+				Gfo_url_encoder_.Php_urlencode.Encode(bfr, kv.Val_to_bry());
 			}
 			return bfr.To_bry_and_rls();
 		}

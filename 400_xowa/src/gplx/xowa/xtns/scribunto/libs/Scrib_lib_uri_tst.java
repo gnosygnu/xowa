@@ -31,6 +31,19 @@ public class Scrib_lib_uri_tst {
 	@Test  public void Url__args_many() {	// PUPROSE: GetUrl sometimes passes in kvs for qry_args; it.w:Astronomie; DATE:2014-01-18
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_fullUrl, Object_.Ary("A", Keyval_.Ary(Keyval_.new_("action", "edit"))), "//en.wikipedia.org/wiki/A?action=edit");
 	}
+	@Test  public void Url__args_encode() {	// PUPROSE: GetUrl should url-encode arguments; ISSUE#:465 DATE:2019-05-18
+		// NOTE: tested with following
+		// =mw.uri.fullUrl("A", {"b / c", "d / e"})
+		// en.wikipedia.org/w/index.php?title=A&b+%2F+c=d+%2F+e
+		// =mw.uri.fullUrl("A", "b / c=d / e")
+		// en.wikipedia.org/w/index.php?title=A&b+%2F+c=d+%2F+e {still encoded b/c of mw.uri.lua}
+
+		// encode if array
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_fullUrl, Object_.Ary("A", Keyval_.Ary(Keyval_.new_("a / b", "c / d"))), "//en.wikipedia.org/wiki/A?a+%2F+b=c+%2F+d");
+
+		// do not encode if String
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_fullUrl, Object_.Ary("A", "a / b=c / d"), "//en.wikipedia.org/wiki/A?a / b=c / d");
+	}
 	@Test  public void AnchorEncode() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_uri.Invk_anchorEncode	, Object_.Ary("[irc://a b c]"				), "b_c");
 	}

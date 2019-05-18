@@ -24,6 +24,10 @@ NOTE.1: This is a liberal translation of /includes/parser/CoreParserFunctions.ph
 
 NOTE.2: Both fullurle: and localurle: performed additional character escaping on the resulting link, but no example is known where that still has any additional effect.
 REF: http://meta.wikimedia.org/wiki/Help:Parser_function
+
+NOTE.3: For query_args, Title.php|fixUrlQueryArgs will call wfArrayToCgi to urlencode if $query is array. However, if $query is String, it does nothing
+To match this behavior, qry_arg should be an Object, but this is a significant change (not to mention loosening type-rules)
+Instead, assuming that only Scribunto functions will be using qry_arg as an array, and putting wfArrayToCgi logic in Extract_qry_args instead of here
 */
 public class Pfunc_urlfunc extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
