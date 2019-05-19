@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_expr_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()				{fxt.Reset();}
 	@Test  public void Null()				{fxt.Test_parse_tmpl_str_test("{{#expr:}}"										, "{{test}}"	, "");}
 	@Test  public void Num_len1()			{fxt.Test_parse_tmpl_str_test("{{#expr:1}}"										, "{{test}}"	, "1");}
@@ -60,6 +60,7 @@ public class Pfunc_expr_tst {
 	@Test  public void E_op_inf()			{fxt.Test_parse_tmpl_str_test("{{#expr:1.2 e 309}}"								, "{{test}}"	, "INF");}		// PURPOSE:constrain to PHP double (e308); PAGE:en.w:Factorial; en.w:Astatine; DATE:2015-04-09
 	@Test  public void E_op_inf_2()			{fxt.Test_parse_tmpl_str_test("{{#expr:1.8 e 308}}"								, "{{test}}"	, "INF");}		// PURPOSE:constrain to PHP double (1.8 e308); PAGE:en.w:Mathematics_of_Sudoku DATE:2015-04-21
 	@Test  public void E_op_large()			{fxt.Test_parse_tmpl_str_test("{{#expr:1E28}}"									, "{{test}}"	, "1E+28");}	// PURPOSE:number should print in exponent notation (1E307), not full literal String (10000000...); DATE:2015-04-09;
+	@Test  public void E_precedence()       {fxt.Test_parse_tmpl_str_test("{{#expr:floor(ln2E+3)}}"                         , "{{test}}"    , "7");}	    // PURPOSE:E takes precedence over ln; ISSUE#:397; DATE:2019-05-19
 	@Test  public void Ceil_neg()			{fxt.Test_parse_tmpl_str_test("{{#expr:ceil(-1.2)}}"							, "{{test}}"	, "-1");}
 	@Test  public void Trunc_neg()			{fxt.Test_parse_tmpl_str_test("{{#expr:trunc(-1.2)}}"							, "{{test}}"	, "-1");}
 	@Test  public void Floor_neg()			{fxt.Test_parse_tmpl_str_test("{{#expr:floor(-1.2)}}"							, "{{test}}"	, "-2");}

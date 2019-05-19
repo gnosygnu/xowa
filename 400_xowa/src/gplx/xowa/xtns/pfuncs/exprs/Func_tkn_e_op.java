@@ -18,7 +18,7 @@ import gplx.xowa.parsers.*;
 class Func_tkn_e_op extends Func_tkn_base {
 	public Func_tkn_e_op(String v) {this.Ctor(v);}
 	@Override public int ArgCount()		{return 2;}
-	@Override public int Precedence()	{return 9;}	// NOTE: needs to be < than - sign
+	@Override public int Precedence()	{return 10;} // NOTE: needs to be on same level as - sign / + sign; ISSUE#:397; DATE:2019-05-19
 	@Override public Func_tkn GetAlt() {return Func_tkn_e_const.Instance;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		Decimal_adp rhs = val_stack.Pop();
