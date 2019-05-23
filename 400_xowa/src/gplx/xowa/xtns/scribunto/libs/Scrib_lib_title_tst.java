@@ -31,6 +31,10 @@ public class Scrib_lib_title_tst {
 	@Test  public void NewTitle_int() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary(1234)					, ttl_fast(0	, "", "1234", "", "", "1234"));
 	}
+	@Test  public void NewTitle_ns() {// ns in title takes precedence over argument; ISSUE#:473 DATE:2019-05-22
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("Template:A", "Template"), ttl_fast(10   , "Template", "A"));
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("Help:A"    , "Template"), ttl_fast(12   , "Help", "A"));
+	}
 	@Test  public void NewTitle__foreign() {// PURPOSE: must be local language's version; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
 		fxt.Core().Wiki().Ns_mgr().Ns_template().Name_bry_(Bry_.new_a7("Template_in_nonenglish_name"));
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("A", "Template")			, ttl_fast(10	, "Template_in_nonenglish_name", "A"));	// "Template_in_nonenglish_name" not "Template"

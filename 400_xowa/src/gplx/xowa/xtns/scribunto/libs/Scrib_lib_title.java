@@ -60,21 +60,30 @@ public class Scrib_lib_title implements Scrib_lib {
 	;
 	private static final    String[] Proc_names = String_.Ary(Invk_newTitle, Invk_makeTitle, Invk_getExpensiveData, Invk_getUrl, Invk_getContent, Invk_getFileInfo, Invk_getCurrentTitle, Invk_protectionLevels, Invk_cascadingProtection, Invk_redirectTarget);
 	public boolean NewTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		// validate args
 		if (args.Len() == 0) return rslt.Init_obj(null);	// invalid title, return null; EX:{{#invoke:Message box|fmbox}} DATE:2015-03-04
 		byte[] ttl_bry = args.Xstr_bry_or_null(0);			// NOTE: Pull_bry fails if caller passes int; PAGE:de.w:Wikipedia:Lua/Modul/Pinging/Test/recipients; DATE:2016-04-21
 		Object ns_obj = args.Cast_obj_or_null(1);
-		Xowe_wiki wiki = core.Wiki();
 		byte[] ns_bry = null;
+		Xowe_wiki wiki = core.Wiki();
 		if (ns_obj != null) {
 			ns_bry = Parse_ns(wiki, ns_obj); if (ns_bry == null) throw Err_.new_wo_type("unknown ns", "ns", Object_.Xto_str_strict_or_empty(ns_obj));
 		}
-		if (ns_bry != null) {
+
+		// parse ttl
+		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
+
+		// apply ns only if main ns; also, ns in title takes precedence over argument; ISSUE#:473 DATE:2019-05-22
+		if (   ttl != null
+			&& ttl.Ns().Id_is_main() 
+			&& ns_bry != null) {
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-			ttl_bry = bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add(ttl_bry).To_bry_and_rls();
+			ttl_bry = bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add(ttl.Full_db_w_anch()).To_bry_and_rls();
+			ttl = wiki.Ttl_parse(ttl_bry);
 		}
-		Xoa_ttl ttl = Xoa_ttl.Parse(core.Wiki(), ttl_bry);
-		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit; matches MW logic
-		return rslt.Init_obj(GetInexpensiveTitleData(ttl));
+		return ttl == null
+			? rslt.Init_obj(null)	// invalid title; exit; matches MW logic
+		    : rslt.Init_obj(GetInexpensiveTitleData(ttl));
 	}
 	public void Notify_page_changed() {if (notify_page_changed_fnc != null) core.Interpreter().CallFunction(notify_page_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean GetUrl(Scrib_proc_args args, Scrib_proc_rslt rslt) {
