@@ -34,7 +34,6 @@ public class Xomp_stat_tbl implements Rls_able {
 	public Xomp_stat_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.Create_tbl();
-		conn.Stmt_delete(tbl_name).Exec_delete(); // always zap table
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_page_id)));}
