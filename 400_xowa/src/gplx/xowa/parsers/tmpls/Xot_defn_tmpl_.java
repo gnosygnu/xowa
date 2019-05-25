@@ -16,13 +16,16 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.xowa.wikis.nss.*;
 public class Xot_defn_tmpl_ {
-	public static Xot_invk CopyNew(Xop_ctx ctx, Xot_defn_tmpl orig_defn, Xot_invk orig, Xot_invk caller, byte[] src, byte[] frame_ttl) {	// SEE:NOTE_1
+	public static Xot_invk CopyNew(Xop_ctx ctx, Xot_defn_tmpl orig_defn, Xot_invk orig, Xot_invk caller, byte[] src, int frame_ns, byte[] frame_ttl) {	// SEE:NOTE_1
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		byte[] orig_src = orig_defn.Data_raw();
 		Xowe_wiki wiki = ctx.Wiki();
-		Xot_invk_temp rv = new Xot_invk_temp(orig.Defn_tid(), orig_src, orig.Name_tkn(), caller.Src_bgn(), caller.Src_end());
+		Xot_invk_temp rv = Xot_invk_temp.New(orig.Defn_tid(), orig.Name_tkn(), orig_src, caller.Src_bgn(), caller.Src_end());
 		frame_ttl = wiki.Lang().Case_mgr().Case_reuse_1st_upper(frame_ttl);	// NOTE: always uppercase 1st; EX:{{navbox -> "Template:Navbox"; PAGE:en.w:Achilles DATE:2014-06-21
-		rv.Frame_ttl_(Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), Xoa_ttl.Replace_unders(frame_ttl)));		// NOTE: always prepend "Template:" to frame_ttl; DATE:2014-06-13; always use spaces; DATE:2014-08-14; must be local language; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
+		frame_ttl = Xoa_ttl.Replace_unders(frame_ttl);
+		if (frame_ns == Xow_ns_.Tid__template)
+			frame_ttl = Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), Xoa_ttl.Replace_unders(frame_ttl)); // NOTE: always prepend "Template:" to frame_ttl; DATE:2014-06-13; always use spaces; DATE:2014-08-14; must be local language; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
+		rv.Frame_ttl_(frame_ttl);
 		int orig_args_len = orig.Args_len();
 		boolean tmpl_args_parsing_orig = ctx.Tmpl_args_parsing();
 		ctx.Tmpl_args_parsing_(true);

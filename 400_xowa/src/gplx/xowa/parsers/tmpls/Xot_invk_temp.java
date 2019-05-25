@@ -17,36 +17,39 @@ package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.primitives.*;
 import gplx.xowa.xtns.scribunto.*;
 public class Xot_invk_temp implements Xot_invk {
-	private List_adp			list = List_adp_.New();
-	private Hash_adp_bry		arg_key_hash;
-	private Hash_adp			arg_idx_hash; private Int_obj_ref arg_idx_ref;
-	Xot_invk_temp() {}
-	public Xot_invk_temp(boolean root_frame) {this.root_frame = root_frame;}
-	public Xot_invk_temp(byte defn_tid, byte[] src, Arg_nde_tkn name_tkn, int src_bgn, int src_end) {
-		this.defn_tid = defn_tid; this.src = src;
-		this.name_tkn = name_tkn; this.src_bgn = src_bgn; this.src_end = src_end;
+	private List_adp     list;
+	private Hash_adp_bry arg_key_hash;
+	private Hash_adp     arg_idx_hash; private Int_obj_ref arg_idx_ref;
+	Xot_invk_temp(boolean root_frame, byte defn_tid, Arg_nde_tkn name_tkn, byte[] src, int src_bgn, int src_end) {
+		this.root_frame = root_frame;
+		this.defn_tid = defn_tid;
+		this.name_tkn = name_tkn;
+		this.src = src; this.src_bgn = src_bgn; this.src_end = src_end;
 	}
+	public byte Defn_tid() {return defn_tid;} private final    byte defn_tid;
+	public Arg_nde_tkn Name_tkn() {return name_tkn;} private final    Arg_nde_tkn name_tkn;
 	public byte[] Src() {return src;} private byte[] src; public Xot_invk_temp Src_(byte[] src) {this.src = src; return this;}
-	public byte Defn_tid() {return defn_tid;} private byte defn_tid = Xot_defn_.Tid_null;
-	public boolean Frame_is_root() {return root_frame;} private boolean root_frame;
+	public int Src_bgn() {return src_bgn;} private final    int src_bgn;
+	public int Src_end() {return src_end;} private final    int src_end;
+	public boolean Frame_is_root() {return root_frame;} private final    boolean root_frame;
 	public byte Frame_tid() {return scrib_tid;} public void Frame_tid_(byte v) {scrib_tid = v;} private byte scrib_tid;
 	public byte[] Frame_ttl() {return frame_ttl;} public void Frame_ttl_(byte[] v) {frame_ttl = v;} private byte[] frame_ttl = Bry_.Empty;	// NOTE: set frame_ttl to non-null value; PAGE:en.w:Constantine_the_Great {{Christianity}}; DATE:2014-06-26
 	public int Frame_lifetime() {return frame_lifetime;} public void Frame_lifetime_(int v) {frame_lifetime = v;} private int frame_lifetime;
 	public boolean Rslt_is_redirect() {return rslt_is_redirect;} public void Rslt_is_redirect_(boolean v) {rslt_is_redirect = v;} private boolean rslt_is_redirect;
-	public int Src_bgn() {return src_bgn;} private int src_bgn;
-	public int Src_end() {return src_end;} private int src_end;
-	public Arg_nde_tkn Name_tkn() {return name_tkn;} private Arg_nde_tkn name_tkn;
-	public int Args_len() {return list.Count();}
+	public int Args_len() {return list == null ? 0 : list.Count();}
 	public Arg_nde_tkn Args_eval_by_idx(byte[] src, int idx) {			// NOTE: idx is base0
 		return arg_idx_hash == null										// only true if no args, or all args are keys; EX: {{A|b=1|c=2}}
 			? null
 			: (Arg_nde_tkn)arg_idx_hash.Get_by(arg_idx_ref.Val_(idx));	// lookup int in hash; needed b/c multiple identical keys should retrieve last, not first; EX: {{A|1=a|1=b}}; PAGE:el.d:ἔχω DATE:2014-07-23
 	}
-	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)list.Get_at(i);}
+	public Arg_nde_tkn Args_get_by_idx(int i) {return list == null ? null : (Arg_nde_tkn)list.Get_at(i);}
 	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {
 		return arg_key_hash == null ? null : (Arg_nde_tkn)arg_key_hash.Get_by_bry(key);
 	}
-	public void Args_add(Arg_nde_tkn arg) {list.Add(arg);}
+	public void Args_add(Arg_nde_tkn arg) {
+		if (list == null) list = List_adp_.New();
+		list.Add(arg);
+	}
 	public void Args_add_by_key(byte[] key, Arg_nde_tkn arg) {
 		if (arg_key_hash == null) arg_key_hash = Hash_adp_bry.cs();	// PERF: lazy
 		arg_key_hash.Add_if_dupe_use_nth(key, arg);
@@ -63,8 +66,17 @@ public class Xot_invk_temp implements Xot_invk {
 		arg_idx_hash.Add_if_dupe_use_nth(Int_obj_ref.New(int_key), arg);	// Add_if_dupe_use_nth to keep latest version; needed for {{A|1=a|1=b}} DATE:2014-07-23
 	}
 
-	public static final    Xot_invk_temp Page_is_caller = new Xot_invk_temp(true);	// SEE NOTE_2
 	public static final    Xot_invk Null_frame = null;
+
+	public static Xot_invk_temp New_root_w_src(byte[] src) {
+		return new Xot_invk_temp(true, Xot_defn_.Tid_page, null, src, 0, src.length);
+	}
+	public static Xot_invk_temp New_root() {
+		return new Xot_invk_temp(true, Xot_defn_.Tid_page, null, null, -1, -1);
+	}
+	public static Xot_invk_temp New(byte defn_tid, Arg_nde_tkn name_tkn, byte[] src, int src_bgn, int src_end) {
+		return new Xot_invk_temp(false, defn_tid, name_tkn, src, src_bgn, src_end);
+	}
 }
 /*
 NOTE_1:
@@ -83,6 +95,4 @@ TEXT: "a {{{1}}}b c"
 Note that in order to resolve mwo_concat we need to pass in an Xot_invk
 This Xot_invk is the "Page_is_caller" ref
 Note this has no parameters and is always empty
-
-Does this static ref have multi-threaded issues? DATE:2017-09-01
 */

@@ -269,7 +269,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			default:
 				Xot_defn_tmpl defn_tmpl = (Xot_defn_tmpl)defn;
 				if (defn_tmpl.Root() == null) defn_tmpl.Parse_tmpl(ctx);	// NOTE: defn_tmpl.Root can be null after clearing out cache; must be non-null else will fail in trace; DATE:2013-02-01
-				Xot_invk invk_tmpl = Xot_defn_tmpl_.CopyNew(ctx, defn_tmpl, this, caller, src, name_ary);
+				Xot_invk invk_tmpl = Xot_defn_tmpl_.CopyNew(ctx, defn_tmpl, this, caller, src, Xow_ns_.Tid__template, name_ary);
 				invk_tmpl.Frame_ttl_(defn_tmpl.Frame_ttl());	// set frame_ttl; needed for redirects; PAGE:en.w:Statutory_city; DATE:2014-08-22
 				trace.Trace_bgn(ctx, src, name_ary, caller, invk_tmpl, defn);
 
@@ -344,16 +344,16 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		if (transclude_src !=  null) {
 			// NOTE: must use new page, not current, else transcluded page can cause inconsistent TOC state; PAGE:de.w:Game_of_Thrones DATE:2016-11-21
 			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(Xop_ctx.New__sub(wiki, ctx, Xoae_page.New(wiki, page_ttl)), ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), transclude_src);
-			return Eval_sub(ctx, transclude_tmpl, caller, src, bfr);
+			return Eval_sub(ctx, page_ttl, transclude_tmpl, caller, src, bfr);
 		}
 		else {				
 			Xot_invk_tkn_.Print_not_found__by_transclude(bfr, wiki.Ns_mgr(), template_prefix_found, name_ary);
 			return false;
 		}
 	}
-	private boolean Eval_sub(Xop_ctx ctx, Xot_defn_tmpl transclude_tmpl, Xot_invk caller, byte[] src, Bry_bfr doc) {
+	private boolean Eval_sub(Xop_ctx ctx, Xoa_ttl transclude_ttl, Xot_defn_tmpl transclude_tmpl, Xot_invk caller, byte[] src, Bry_bfr doc) {
 		boolean rv = false;
-		Xot_invk tmp_tmpl = Xot_defn_tmpl_.CopyNew(ctx, transclude_tmpl, this, caller, src, transclude_tmpl.Name());
+		Xot_invk tmp_tmpl = Xot_defn_tmpl_.CopyNew(ctx, transclude_tmpl, this, caller, src, transclude_ttl.Ns().Id(), transclude_tmpl.Name());
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(doc);
 		rv = transclude_tmpl.Tmpl_evaluate(ctx, tmp_tmpl, tmp_bfr);
@@ -389,7 +389,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			bfr.Add(Xop_tkn_.Lnki_bgn).Add(name_ary).Add(Xop_tkn_.Lnki_end);		// indicate template was not found; DATE:2014-02-12
 			return false;
 		}
-		return Eval_sub(ctx, transclude_tmpl, caller, src_for_tkn, bfr);
+		return Eval_sub(ctx, page_ttl, transclude_tmpl, caller, src_for_tkn, bfr);
 	}
 	public int Args_len() {return args_len;} private int args_len = 0;
 	public Arg_nde_tkn Args_get_by_idx(int idx) {return args[idx];}

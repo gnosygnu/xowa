@@ -16,11 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 public class Xot_defn_ {
-	public static final Xot_defn Null = Xot_defn_null.Instance;
+	public static final    Xot_defn Null = Xot_defn_null.Instance;
 	public static final byte 
 	  Tid_null = 0
 	, Tid_func = 1
 	, Tid_tmpl = 2
+	, Tid_page = 3
 	, Tid_subst = Xol_kwd_grp_.Id_subst
 	, Tid_safesubst = Xol_kwd_grp_.Id_safesubst
 	, Tid_raw = Xol_kwd_grp_.Id_raw

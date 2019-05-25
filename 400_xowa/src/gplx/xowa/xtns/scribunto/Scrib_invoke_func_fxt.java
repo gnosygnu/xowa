@@ -115,7 +115,7 @@ public class Scrib_invoke_func_fxt {
 		fxt = new Xop_fxt(app, Xoa_app_fxt.Make__wiki__edit(app, domain, app.Lang_mgr().Get_by_or_new(Bry_.new_u8(lang)))); // NOTE: don't try to cache fxt on func_fxt level; causes errors in Language_lib
 		core_fxt = new Scrib_core_fxt(fxt);
 		core = core_fxt.Core();
-		Xot_invk parent_frame = new Xot_invk_temp(true); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 
+		Xot_invk parent_frame = Xot_invk_temp.New_root(); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 
 		Xot_invk current_frame = Xot_invk_mock.test_(Bry_.new_a7("Module:Mod_0"));
 		core.Invoke_init(core.Wiki(), core.Ctx(), Bry_.Empty, parent_frame, current_frame);
 		core.When_page_changed(fxt.Page());

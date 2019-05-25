@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.core.primitives.*;
+import gplx.xowa.xtns.scribunto.procs.*;
 public abstract class Mock_proc_fxt {
 	public Mock_proc_fxt(int id, String key) {this.id = id; this.key = key;}
 	public int Id() {return id;} private final    int id;
@@ -22,21 +23,44 @@ public abstract class Mock_proc_fxt {
 	public Scrib_lua_proc To_scrib_lua_proc() {return new Scrib_lua_proc(key, id);}
 	public abstract Keyval[] Exec_by_scrib(Keyval[] args);
 }
-class Mock_engine implements Scrib_engine {
-	private final    Hash_adp hash = Hash_adp_.New();
-	private final    Int_obj_ref tmp_hash_id = Int_obj_ref.New_neg1();
-	public boolean				Dbg_print() {return false;}	public void Dbg_print_(boolean v) {}
-	public Scrib_server		Server() {return server;} public void Server_(Scrib_server v) {} private final    Mock_server server = new Mock_server();
-	public Scrib_lua_proc	LoadString(String name, String text) {return null;}
-	public Keyval[]			CallFunction(int id, Keyval[] args) {
-		Mock_proc_fxt proc = (Mock_proc_fxt)hash.Get_by_or_fail(tmp_hash_id.Val_(id));
-		return proc.Exec_by_scrib(args);
+class Mock_exec_module extends Mock_proc_fxt { 	private final    Mock_engine engine;
+	public Mock_exec_module(int mod_id, Mock_engine engine) {super(mod_id, "mockExecuteModule");
+		this.engine = engine;
 	}
-	public void				RegisterLibrary(Keyval[] functions_ary) {}
-	public Keyval[]			ExecuteModule(int mod_id) {return null;}
-	public void				CleanupChunks(Keyval[] ids) {}
-	public void				Clear() {hash.Clear();}
-	public void				RegisterLibraryForTest(Mock_proc_fxt proc) {
-		hash.Add(Int_obj_ref.New(proc.Id()), proc);
+	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
+		Scrib_lua_proc mod_proc = (Scrib_lua_proc)args[0].Val();
+		String fnc_name = (String)args[1].Val();
+		return new Keyval[] {Keyval_.int_(0, true), Keyval_.int_(1, engine.Get_module_func(mod_proc.Id(), fnc_name))};
+	}
+}
+class Mock_exec_function extends Mock_proc_fxt { 	private final    Mock_engine engine;
+	public Mock_exec_function(int func_id, Mock_engine engine) {super(func_id, "mockExecuteFuntion");
+		this.engine = engine;
+	}
+	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
+		Scrib_lua_proc mod_proc = (Scrib_lua_proc)args[0].Val();
+		return engine.CallFunction(mod_proc.Id(), args);
+	}
+}
+class Mock_exec_lib extends Mock_proc_fxt { 	private Scrib_lib lib;
+	private String proc_name;
+	private Keyval[] proc_args;
+	public Mock_exec_lib(int fnc_id, String fnc_name, Scrib_lib lib, String proc_name, Object... proc_obj_args) {super(fnc_id, fnc_name);
+		this.lib = lib;
+		this.proc_name = proc_name;
+		int len = proc_obj_args.length;
+		this.proc_args = new Keyval[len];
+		for (int i = 0; i < len; i++) {
+			proc_args[i] = Keyval_.int_(i + 1, proc_obj_args[i]);
+		}
+	}
+	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
+		Scrib_proc proc = lib.Procs().Get_by_key(proc_name);
+		Scrib_proc_rslt proc_rslt = new Scrib_proc_rslt();
+		proc.Proc_exec(new Scrib_proc_args(proc_args), proc_rslt);
+		return Extract_rslt(proc_rslt);
+	}
+	private Keyval[] Extract_rslt(Scrib_proc_rslt proc_rslt) {
+		return new Keyval[] {Keyval_.int_(1, Object_.Xto_str_strict_or_null_mark(proc_rslt.Ary()[0].Val()))};
 	}
 }
