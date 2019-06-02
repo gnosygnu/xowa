@@ -103,7 +103,7 @@ public class Json_parser {
 				case Byte_ascii.Backslash:
 					++pos;	// backslash
 					switch (src[pos]) {
-						case Byte_ascii.Ltr_u:		pos += 4; break;	// \uFFFF	4 hex-dec
+						case Byte_ascii.Ltr_u:		pos += 5; break;	// \uFFFF	1 u + 4 hex-dec; ISSUE#:486; DATE:2019-06-02
 						default:					++pos;	break;		// \?		" \ / b f n r t
 					}
 					exact = false;
