@@ -20,7 +20,7 @@ public class Hxtn_blob_tbl implements Rls_able {
 	private static final String tbl_name = "hxtn_blob"; private static final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private static final    String
 	  fld_blob_tid = flds.Add_int("blob_tid"), fld_wiki_id = flds.Add_int("wiki_id"), fld_blob_id = flds.Add_int("blob_id")
-	, fld_zip_tid = flds.Add_byte("zip_tid"), fld_blob_data = flds.Add_bry("blob_data");		
+	, fld_zip_tid = flds.Add_byte("zip_tid"), fld_blob_data = flds.Add_bry("blob_data");
 	private final    Db_conn conn; private Db_stmt stmt_insert;
 	private final    byte zip_tid_default;
 	private final    Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
