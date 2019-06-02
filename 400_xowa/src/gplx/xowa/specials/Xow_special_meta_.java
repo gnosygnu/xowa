@@ -32,6 +32,7 @@ public class Xow_special_meta_ {
 	, Ttl__page_history			= "XowaHistory"
 	, Ttl__bookmarks			= "XowaBookmarks"
 	, Ttl__diag					= "XowaDiag"
+	, Ttl__error				= "XowaError"
 	;
 	public static final    Xow_special_meta
 	  Itm__all_pages			= new Xow_special_meta(Src__mw		, Ttl__all_pages)
@@ -49,5 +50,6 @@ public class Xow_special_meta_ {
 	, Itm__page_history			= new Xow_special_meta(Src__xowa	, Ttl__page_history)
 	, Itm__bookmarks			= new Xow_special_meta(Src__xowa	, Ttl__bookmarks)
 	, Itm__diag					= new Xow_special_meta(Src__xowa	, Ttl__diag)
+	, Itm__error                = new Xow_special_meta(Src__xowa    , Ttl__error)
 	;
 }

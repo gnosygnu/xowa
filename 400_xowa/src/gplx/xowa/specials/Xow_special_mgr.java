@@ -18,7 +18,7 @@ import gplx.xowa.users.history.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
-import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.addons.wikis.imports.*; import gplx.xowa.specials.xowa.diags.*; import gplx.xowa.xtns.wbases.mediawiki.repo.includes.specials.*;
+import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.addons.wikis.imports.*; import gplx.xowa.specials.xowa.diags.*; import gplx.xowa.xtns.wbases.mediawiki.repo.includes.specials.*; import gplx.xowa.specials.xowa.errors.*;
 import gplx.xowa.xtns.wbases.specials.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.specials.mgrs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
@@ -47,6 +47,7 @@ public class Xow_special_mgr {
 	public Popup_history_page			Page_popup_history() {return page_popup_history;} private final    Popup_history_page page_popup_history = new Popup_history_page();
 	public Xows_bmk_page				Page_bmk() {return page_bmk;} private final    Xows_bmk_page page_bmk = new Xows_bmk_page();
 	public Xows_diag_page				Page_diag() {return page_diag;} private final    Xows_diag_page page_diag = new Xows_diag_page();
+	public Xoerror_special				Page_error() {return page_error;} private final    Xoerror_special page_error = new Xoerror_special();
 	public void Evt_lang_changed(Xol_lang_itm lang) {
 		// add special pages by old manual method; DEPRECATED
 		hash.Clear();
@@ -66,6 +67,7 @@ public class Xow_special_mgr {
 		hash.Add_str_obj(Xow_special_meta_.Ttl__popup_history			, page_popup_history);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__bookmarks				, page_bmk);
 		hash.Add_str_obj(Xow_special_meta_.Ttl__diag					, page_diag);
+		hash.Add_str_obj(Xow_special_meta_.Ttl__error					, page_error);
 
 		// add app's Special_regy to hash table; needed for case insensitivity by wiki's lang; EX: Special:rANDom; NOTE: needs to go before lang aliases
 		Xoa_special_regy special_regy = app.Special_regy();

@@ -33,6 +33,7 @@ import gplx.core.threads.*; import gplx.core.net.*; import gplx.core.primitives.
 import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.pages.*;
 import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
+import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.errors.*;
 public class Http_server_mgr implements Gfo_invk {
 	private final    Object thread_lock = new Object();
 	private final    Gfo_usr_dlg usr_dlg;
@@ -116,7 +117,13 @@ public class Http_server_mgr implements Gfo_invk {
 				} finally {tmp_bfr.Mkr_rls();}
 			}
 			Xoa_url url = wiki.Utl__url_parser().Parse(ttl_bry);
-			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, url.To_bry_page_w_anch()); // changed from ttl_bry to page_w_anch; DATE:2017-07-24
+			Xoa_ttl ttl = wiki.Ttl_parse(url.To_bry_page_w_anch()); // changed from ttl_bry to page_w_anch; DATE:2017-07-24
+
+			// handle invalid titles like "Earth]"; ISSUE#:480; DATE:2019-06-02
+			if (ttl == null) {
+				ttl = wiki.Ttl_parse(Xow_special_meta_.Itm__error.Ttl_bry());
+				url = wiki.Utl__url_parser().Parse(Xoerror_special.Make_url__invalidTitle(ttl_bry));
+			}
 
 			// get the page
 			gplx.xowa.guis.views.Xog_tab_itm tab = Gxw_html_server.Assert_tab2(app, wiki);	// HACK: assert tab exists
