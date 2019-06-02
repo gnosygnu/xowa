@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
+import gplx.core.intls.*;
 public class Json_itm_str extends Json_itm_base {
 	private final    boolean exact; private final    Json_doc doc;
 	private String data_str; private byte[] data_bry = null;
@@ -56,11 +57,28 @@ public class Json_itm_str extends Json_itm_base {
 						case Byte_ascii.Ltr_b:				bfr.Add_byte(Byte_ascii.Backfeed); break;
 						case Byte_ascii.Ltr_f:				bfr.Add_byte(Byte_ascii.Formfeed); break;
 						case Byte_ascii.Ltr_u:
-							int utf8_val = gplx.core.encoders.Hex_utl_.Parse_or(src, i + 1, i + 5, -1);
+							i += 1; // +1 to skip "u"
+							int utf8_val = gplx.core.encoders.Hex_utl_.Parse_or(src, i, i + 4, -1); 
+							// check for UTF surrogate-pairs; ISSUE#:487; DATE:2019-06-02
+							// hi: 0xD800-0xDBFF; 55,296-56,319
+							if (utf8_val >= Utf16_.Surrogate_hi_bgn && utf8_val <= Utf16_.Surrogate_hi_end) {
+								int lo_bgn = i + 4;   // +4 to skip 4 hex-dec chars
+								if (lo_bgn + 6 <= end // +6 to handle encoded String; EX: '\u0022'
+									&& src[lo_bgn]     == Byte_ascii.Backslash 
+									&& src[lo_bgn + 1] == Byte_ascii.Ltr_u) {
+									lo_bgn = lo_bgn + 2; // +2 to skip '\' and 'u'
+									int lo = gplx.core.encoders.Hex_utl_.Parse_or(src, lo_bgn, lo_bgn + 4, -1);
+									// lo: 0xDC00-0xDFFF; 56,320-57,343
+									if (lo >= Utf16_.Surrogate_lo_bgn && lo <= Utf16_.Surrogate_lo_end) {
+										utf8_val = Utf16_.Surrogate_merge(utf8_val, lo);
+										i += 6; // +6 to skip entire lo-String; EX: '\u0022'
+									}
+								}
+							}
 							int len = gplx.core.intls.Utf16_.Encode_int(utf8_val, utf8_bry, 0);
 							bfr.Add_mid(utf8_bry, 0, len);
-							i += 4;
-							break;	// \uFFFF	4 hex-dec
+							i += 3; // +3 b/c for-loop will do another +1 to bring total to 4; EX: '0022'
+							break;
 						case Byte_ascii.Backslash:
 						case Byte_ascii.Slash:
 						default:

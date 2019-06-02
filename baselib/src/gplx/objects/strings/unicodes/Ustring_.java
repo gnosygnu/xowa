@@ -46,6 +46,6 @@ public class Ustring_ {
 	, Surrogate_lo_end = 0xDFFF   //    57,343: Surrogate low end
 	, Surrogate_cp_bgn = 0x010000 //    65,536: Surrogate codepoint start
 	, Surrogate_cp_end = 0x10FFFF // 1,114,111: Surrogate codepoint end
-	, Surrogate_range  = 0x400    //     1,024: Surrogate range (end - start) for high / low 
+	, Surrogate_range  = 0x400    //     1,024: Surrogate range (end - start) for high / low
 	;
 }

@@ -25,7 +25,8 @@ public class Json_parser_tst {
 	@Test   public void Num_neg()				{fxt.Test_parse_val0("{'k0':-123}"			, -123);}
 	@Test   public void Str()					{fxt.Test_parse_val0("{'k0':'v0'}"			, "v0");}
 	@Test   public void Str_esc_quote()			{fxt.Test_parse_val0("{'k0':'a\\\"b'}"		, "a\"b");}
-	@Test   public void Str_esc_hex4()			{fxt.Test_parse_val0("{'k0':'a\\u0021b'}"	, "a!b");}
+	@Test   public void Str_encoded_basic()     {fxt.Test_parse_val0("{'k0':'a\\u0021b'}"       , "a!b");}
+	@Test   public void Str_encoded_surrogate() {fxt.Test_parse_val0("{'k0':'a\\ud83c\\udf0eb'}", "a🌎b");} // check for UTF surrogate-pairs; symbol is earth globe americas (U+1F30E); ISSUE#:487; DATE:2019-06-02
 	@Test   public void Num_dec()				{fxt.Test_parse("{'k0':1.23}"				, fxt.itm_nde_().Add_many(fxt.itm_kv_dec_("k0", "1.23")));}
 	@Test   public void Num_exp()				{fxt.Test_parse("{'k0':1e+2}"				, fxt.itm_nde_().Add_many(fxt.itm_kv_dec_("k0", "1e+2")));}
 	@Test   public void Num_mix()				{fxt.Test_parse("{'k0':-1.23e-1}"			, fxt.itm_nde_().Add_many(fxt.itm_kv_dec_("k0", "-1.23e-1")));}

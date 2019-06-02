@@ -132,4 +132,13 @@ public class Utf16_ {
 		else if (c <    65536)	return 3;		// 1 << 16
 		else throw Err_.new_wo_type("UTF-16 int must be between 0 and 65536", "char", c);
 	}
+	public static final int // REF: https://en.wikipedia.org/wiki/Universal_Character_Set_characters
+	  Surrogate_hi_bgn = 0xD800   //    55,296: Surrogate high start
+	, Surrogate_hi_end = 0xDBFF   //    56,319: Surrogate high end
+	, Surrogate_lo_bgn = 0xDC00   //    56,320: Surrogate low start
+	, Surrogate_lo_end = 0xDFFF   //    57,343: Surrogate low end
+	, Surrogate_cp_bgn = 0x010000 //    65,536: Surrogate codepoint start
+	, Surrogate_cp_end = 0x10FFFF // 1,114,111: Surrogate codepoint end
+	, Surrogate_range  = 0x400    //     1,024: Surrogate range (end - start) for high / low
+	;
 }
