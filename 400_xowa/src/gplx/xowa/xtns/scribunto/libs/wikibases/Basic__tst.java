@@ -173,6 +173,14 @@ public class Basic__tst {
 		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, wdata_fxt.Make_claim_monolingual(3, "en", "abc_en"));
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "abc_en");
 	}
+	@Test  public void RenderSnak__no_value() {
+		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, new Wbase_claim_string(3, Wbase_claim_value_type_.Tid__novalue, null));
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "");
+	}
+	@Test  public void RenderSnak__data_value_is_null() {
+		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, new Wbase_claim_string(3, Wbase_claim_value_type_.Tid__somevalue, null));
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "");
+	}
 	@Test  public void GetEntityUrl() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getEntityUrl, Object_.Ary("Q2"							), "https://www.wikidata.org/wiki/Special:EntityPage/Q2");
 	}
