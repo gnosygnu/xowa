@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.core.ios.*;
 import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.htmls.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xow_hdump_mgr__load implements Gfo_invk {
@@ -34,6 +34,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		gplx.xowa.addons.apps.cfgs.Xocfg_mgr cfg_mgr = wiki.App().Cfg();
 		Xow_hdump_mode.Cfg__reg_type(cfg_mgr.Type_mgr());
 		cfg_mgr.Bind_many_wiki(this, wiki, Cfg__read_preferred, Cfg__html_mode);
+		wiki.Hxtn_mgr().Init_by_wiki(wiki, Bool_.N);
 	}
 	public void Load_by_xowe(Xoae_page wpg) {
 		tmp_hpg.Ctor_by_hview(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Db().Page().Id());
@@ -72,6 +73,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 			}
 
 			hpg.Db().Html().Html_bry_(src);
+			wiki.Hxtn_mgr().Load_by_page(hpg, ttl);
 			return true;
 		}
 	}
@@ -102,6 +104,8 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		html_data.Display_ttl_(tmp_hpg.Display_ttl());
 		html_data.Content_sub_(tmp_hpg.Content_sub());			
 		html_data.Xtn_skin_mgr().Add(new Xopg_xtn_skin_itm_stub(tmp_hpg.Sidebar_div()));
+		html_data.Custom_head_tags().Add(hpg.Html_data().Custom_head_tags().To_ary());
+
 		Xoh_head_mgr wpg_head = html_data.Head_mgr();
 		Xopg_module_mgr hpg_head = hpg.Head_mgr();			
 		wpg_head.Itm__mathjax().Enabled_		(hpg_head.Math_exists());

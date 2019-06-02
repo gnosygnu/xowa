@@ -19,7 +19,9 @@ public class Xopg_tag_mgr {
 	public Xopg_tag_mgr(boolean pos_is_head) {this.pos_is_head = pos_is_head;}
 	public boolean Pos_is_head() {return pos_is_head;} private final    boolean pos_is_head;
 	public int Len() {return list.Len();}
+	public void Clear() {list.Clear();}
 	public Xopg_tag_itm Get_at(int i) {return (Xopg_tag_itm)list.Get_at(i);}
+	public Xopg_tag_itm[] To_ary() {return (Xopg_tag_itm[])list.To_ary(Xopg_tag_itm.class);}
 	public void Add(Xopg_tag_itm... ary) {for (Xopg_tag_itm itm : ary) list.Add(itm);}
 	public void Copy(Xopg_tag_mgr src) {
 		int len = src.Len();

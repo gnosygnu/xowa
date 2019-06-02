@@ -26,6 +26,8 @@ public class Xomp_make_cmd extends Xob_cmd__base {
 			new Xomp_make_lnki().Exec(wiki, cfg, 10000);
 		if (cfg.Mode().Has("stat"))
 			new Xomp_make_stat().Exec(wiki, cfg);
+		if (cfg.Mode().Has("hxtn"))
+			new Xomp_make_hxtn().Exec(wiki, cfg);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__cfg))		return cfg;

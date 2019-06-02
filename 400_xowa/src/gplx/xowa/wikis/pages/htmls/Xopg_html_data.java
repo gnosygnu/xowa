@@ -71,6 +71,7 @@ public class Xopg_html_data {
 	public void Clear() {
 		redlink_list.Clear();
 		toc_mgr.Clear();
+		head_tags.Clear();
 
 		html_restricted = true;
 		display_ttl = content_sub = display_ttl_vnt = null;

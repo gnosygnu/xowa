@@ -23,6 +23,7 @@ class Xomp_make_stat {
 		Db_conn mgr_conn = mgr_db.Conn();
 		Xomp_stat_tbl mgr_tbl = new Xomp_stat_tbl(mgr_conn);
 		mgr_conn.Txn_bgn("xomp_stats");
+		mgr_conn.Stmt_delete("xomp_stats", Dbmeta_fld_itm.Str_ary_empty).Exec_delete();
 		mgr_tbl.Stmt_new();
 
 		// loop wkrs

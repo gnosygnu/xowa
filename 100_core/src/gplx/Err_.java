@@ -28,6 +28,7 @@ public class Err_ {
 	}
 	public static Err new_unhandled(Object val)										{return new Err(Bool_.Y, Trace_null, Type__gplx, "val is not in switch/if", "val", val);}
 	public static Err new_unhandled_default(Object val)								{return new Err(Bool_.Y, Trace_null, Type__gplx, "val is not in switch", "val", val);}
+	public static Err new_unhandled_default_w_msg(Object val, String msg)           {return new Err(Bool_.Y, Trace_null, Type__gplx, "val is not in switch", "val", val, "msg", msg);}
 	public static Err new_unsupported()												{return new Err(Bool_.Y, Trace_null, Type__gplx, "method not supported");}
 	public static Err new_unimplemented()											{return new Err(Bool_.Y, Trace_null, Type__gplx, "method not implemented");}
 	public static Err new_unimplemented_w_msg(String msg, Object... args)		{return new Err(Bool_.Y, Trace_null, Type__gplx, msg, args);}

@@ -18,7 +18,7 @@ import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.ios.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.addons.*; import gplx.xowa.wikis.fsys.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.meta.*; import gplx.fsdb.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
+import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.htmls.hxtns.pages.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.apps.urls.*;
 public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
@@ -61,5 +61,6 @@ public interface Xow_wiki extends Xow_ttl_parser, Gfo_invk {
 	Xoax_addon_mgr				Addon_mgr();
 	boolean                     Embeddable_enabled(); void Embeddable_enabled_(boolean v);
 	void						Init_needed_y_();
+        Hxtn_page_mgr               Hxtn_mgr();
 	void						Rls();
 }

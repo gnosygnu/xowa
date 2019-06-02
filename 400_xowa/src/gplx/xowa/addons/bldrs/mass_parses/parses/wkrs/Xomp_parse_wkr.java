@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.parses.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 import gplx.xowa.files.origs.*;
-import gplx.xowa.htmls.core.bldrs.*;
+import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.htmls.hxtns.pages.*;
 import gplx.xowa.wikis.pages.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.mgrs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.pools.*;
@@ -41,6 +41,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 	private final    int uid;
 	private Xomp_wkr_db wkr_db;
 	private Xomp_stat_tbl stat_tbl;
+	private Hxtn_page_mgr hxtn_mgr;
 
 	// indexer vars
 	private final    Xofulltext_indexer_wkr indexer;
@@ -67,6 +68,8 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		this.wiki = wiki; this.uid = uid;
 		this.wkr_db = Xomp_wkr_db.New(Xomp_mgr_db.New__url(wiki), uid);
 		this.stat_tbl = new Xomp_stat_tbl(wkr_db.Conn());
+		this.hxtn_mgr = wiki.Hxtn_mgr();
+		this.hxtn_mgr.Init_by_xomp_wkr(wkr_db.Conn(), cfg.Zip_tid());
 	}
 	public void Exec() {
 		Xow_parser_mgr parser_mgr = wiki.Parser_mgr();
@@ -97,6 +100,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		hdump_bldr.Init(wiki, wkr_db.Conn(), new Xob_hdump_tbl_retriever__xomp(wkr_db.Html_tbl()));
 		wkr_db.Conn().Txn_bgn("xomp");
 		stat_tbl.Stmt_new();
+		hxtn_mgr.Insert_bgn(false);
 
 		// set status to running
 		mgr_db.Tbl__wkr().Update_status(uid, Xomp_wkr_tbl.Status__running);
@@ -167,19 +171,26 @@ public class Xomp_parse_wkr implements Gfo_invk {
 					wiki.Parser_mgr().Scrib().Core_term();
 					wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();
 				}
-				if (done_count % commit_interval == 0)
+				if (done_count % commit_interval == 0) {
 					wkr_db.Conn().Txn_sav();
+				}
 			} catch (Exception e) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "mass_parse.fail:ns=~{0} ttl=~{1} err=~{2}", ppg.Ns_id(), ppg.Ttl_bry(), Err_.Message_gplx_log(e));
 			}
 		}
 
 		// cleanup
-		if (logger != null) logger.End();
-		wkr_db.Conn().Txn_end();
-		wkr_db.Conn().Rls_conn();
-		stat_tbl.Stmt_rls();
-		mgr.Wkrs_done_add_1();		// NOTE: must release latch last else thread errors
+		try {
+			if (logger != null) logger.End();
+			wkr_db.Conn().Txn_end();
+			wkr_db.Conn().Rls_conn();
+			stat_tbl.Stmt_rls();
+			hxtn_mgr.Insert_end(false);
+			mgr.Wkrs_done_add_1();		// NOTE: must release latch last else thread errors
+		}
+		catch (Exception e) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "mass_parse.fail_end; err=~{0}", Err_.Message_gplx_log(e));
+		}
 	}
 	public void Bld_stats(Bry_bfr bfr) {
 		int done_time_in_sec = (int)(done_time / 1000); if (done_time_in_sec == 0) done_time_in_sec = 1;

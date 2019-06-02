@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
 public class Xomp_make_cmd_cfg implements Gfo_invk {
-	public Hash_adp Mode() {return mode;} private Hash_adp mode = Hash_adp_.New().Add_and_more("html", "html").Add_and_more("lnki", "lnki").Add_and_more("stat", "stat");
+	public Hash_adp Mode() {return mode;} private Hash_adp mode = Hash_adp_.New().Add_and_more("html", "html").Add_and_more("lnki", "lnki").Add_and_more("stat", "stat").Add_and_more("hxtn", "hxtn");
 	public boolean Delete_html_dbs() {return delete_html_dbs;} private boolean delete_html_dbs = true;
 	public Ordered_hash Merger_wkrs() {return merger_wkrs;} private final    Ordered_hash merger_wkrs = Ordered_hash_.New();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
