@@ -16,14 +16,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.core.primitives.*;
 import gplx.xowa.xtns.scribunto.procs.*;
-public abstract class Mock_proc_fxt {
-	public Mock_proc_fxt(int id, String key) {this.id = id; this.key = key;}
+public abstract class Mock_proc_stub {
+	public Mock_proc_stub(int id, String key) {this.id = id; this.key = key;}
 	public int Id() {return id;} private final    int id;
 	public String Key() {return key;} private final    String key;
 	public Scrib_lua_proc To_scrib_lua_proc() {return new Scrib_lua_proc(key, id);}
 	public abstract Keyval[] Exec_by_scrib(Keyval[] args);
 }
-class Mock_exec_module extends Mock_proc_fxt { 	private final    Mock_engine engine;
+class Mock_exec_module extends Mock_proc_stub { 	private final    Mock_engine engine;
 	public Mock_exec_module(int mod_id, Mock_engine engine) {super(mod_id, "mockExecuteModule");
 		this.engine = engine;
 	}
@@ -33,7 +33,7 @@ class Mock_exec_module extends Mock_proc_fxt { 	private final    Mock_engine eng
 		return new Keyval[] {Keyval_.int_(0, true), Keyval_.int_(1, engine.Get_module_func(mod_proc.Id(), fnc_name))};
 	}
 }
-class Mock_exec_function extends Mock_proc_fxt { 	private final    Mock_engine engine;
+class Mock_exec_function extends Mock_proc_stub { 	private final    Mock_engine engine;
 	public Mock_exec_function(int func_id, Mock_engine engine) {super(func_id, "mockExecuteFuntion");
 		this.engine = engine;
 	}
@@ -42,7 +42,7 @@ class Mock_exec_function extends Mock_proc_fxt { 	private final    Mock_engine e
 		return engine.CallFunction(mod_proc.Id(), args);
 	}
 }
-class Mock_exec_lib extends Mock_proc_fxt { 	private Scrib_lib lib;
+class Mock_exec_lib extends Mock_proc_stub { 	private Scrib_lib lib;
 	private String proc_name;
 	private Keyval[] proc_args;
 	public Mock_exec_lib(int fnc_id, String fnc_name, Scrib_lib lib, String proc_name, Object... proc_obj_args) {super(fnc_id, fnc_name);

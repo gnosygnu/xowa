@@ -28,7 +28,7 @@ public class Mock_engine implements Scrib_engine {
 		return (Scrib_lua_proc)mod_init_hash.Get_by(name);
 	}
 	public Keyval[] CallFunction(int id, Keyval[] args) {
-		Mock_proc_fxt fnc = (Mock_proc_fxt)fnc_hash.Get_by_or_fail(id);
+		Mock_proc_stub fnc = (Mock_proc_stub)fnc_hash.Get_by_or_fail(id);
 		return fnc.Exec_by_scrib(args);
 	}
 	public void RegisterLibrary(Keyval[] functions_ary) {}
@@ -36,14 +36,14 @@ public class Mock_engine implements Scrib_engine {
 	public void CleanupChunks(Keyval[] ids) {}
 	public void	Clear() {fnc_hash.Clear();}
 
-	public void	InitFunctionForTest(Mock_proc_fxt proc) {
+	public void	InitFunctionForTest(Mock_proc_stub proc) {
 		fnc_hash.Add(proc.Id(), proc);
 	}
 
 	public void Init_module(String mod_name, int mod_id) {
 		mod_init_hash.Add_if_dupe_use_nth(mod_name, new Scrib_lua_proc(mod_name, mod_id));
 	}
-	public void Init_module_func(int mod_id, Mock_proc_fxt fnc) {
+	public void Init_module_func(int mod_id, Mock_proc_stub fnc) {
 		Hash_adp funcs = (Hash_adp)mod_fnc_hash.Get_by_or_null(mod_id);
 		if (funcs == null) {
 			funcs = Hash_adp_.New();
@@ -56,4 +56,14 @@ public class Mock_engine implements Scrib_engine {
 		Hash_adp funcs = (Hash_adp)mod_fnc_hash.Get_by_or_fail(mod_id);
 		return (Scrib_lua_proc)funcs.Get_by_or_fail(fnc_name);
 	}
+}
+class Mock_server implements Scrib_server {
+	public void		Init(String... process_args) {}
+	public int		Server_timeout() {return server_timeout;} public Scrib_server Server_timeout_(int v) {server_timeout = v; return this;} private int server_timeout = 60;
+	public int		Server_timeout_polling() {return server_timeout_polling;} public Scrib_server Server_timeout_polling_(int v) {server_timeout_polling = v; return this;} private int server_timeout_polling = 1;
+	public int		Server_timeout_busy_wait() {return server_timeout_busy_wait;} public Scrib_server Server_timeout_busy_wait_(int v) {server_timeout_busy_wait = v; return this;} private int server_timeout_busy_wait = 1;
+	public byte[]	Server_comm(byte[] cmd, Object[] cmd_objs) {return Bry_.Empty;}
+	public void		Server_send(byte[] cmd, Object[] cmd_objs) {}
+	public byte[]	Server_recv() {return Bry_.Empty;}
+	public void		Term() {}
 }

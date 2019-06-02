@@ -36,9 +36,9 @@ public class Mock_scrib_fxt {
 		core.Invoke_init(core.Wiki(), core.Ctx(), Bry_.Empty, parent_frame, current_frame);
 		core.When_page_changed(parser_fxt.Page());
 	}
-	public void Init__cbk(Mock_proc_fxt... ary) {
+	public void Init__cbk(Mock_proc_stub... ary) {
 		engine.Clear();
-		for (Mock_proc_fxt proc : ary)
+		for (Mock_proc_stub proc : ary)
 			engine.InitFunctionForTest(proc);
 	}
 	public void Init__page(String ttl, String txt) {parser_fxt.Init_page_create(ttl, txt);}
@@ -50,17 +50,17 @@ public class Mock_scrib_fxt {
 		engine.InitFunctionForTest(new Mock_exec_module(8, engine));
 		engine.InitFunctionForTest(new Mock_exec_function(9, engine));
 	}
-	public void Init__mock_mod(Scrib_lib lib, String mod_name, Mock_proc_fxt... prc_ary) {
+	public void Init__mock_mod(Scrib_lib lib, String mod_name, Mock_proc_stub... prc_ary) {
 		int mod_id = mock_mod_id_next++;
 		String mod_text = "";
 		engine.Init_module("=" + mod_name, mod_id);
-		for (Mock_proc_fxt prc : prc_ary) {
+		for (Mock_proc_stub prc : prc_ary) {
 			mod_text = mod_text + prc.Key() + "\n";
 			engine.Init_module_func(mod_id, prc);
 		}
 		parser_fxt.Init_page_create(mod_name, mod_text);
 	}
-	public Mock_proc_fxt Init__mock_fnc_for_lib(String fnc_name, Scrib_lib lib, String proc_name, Object... proc_args) {
+	public Mock_proc_stub Init__mock_fnc_for_lib(String fnc_name, Scrib_lib lib, String proc_name, Object... proc_args) {
 		return new Mock_exec_lib(mock_mod_id_next++, fnc_name, lib, proc_name, proc_args);
 	}
 	public void Test__proc__ints      (Scrib_lib lib, String proc_name, Object[] args, int expd)		{Test__proc__kvps(lib, proc_name, Bool_.Y, Int_.To_str(expd), Scrib_kv_utl_.base1_many_(args));}
@@ -111,14 +111,4 @@ class Mock_scrib_fxt_ {
 		}
 		return bfr.To_str_and_clear();
 	}
-}
-class Mock_server implements Scrib_server {
-	public void		Init(String... process_args) {}
-	public int		Server_timeout() {return server_timeout;} public Scrib_server Server_timeout_(int v) {server_timeout = v; return this;} private int server_timeout = 60;
-	public int		Server_timeout_polling() {return server_timeout_polling;} public Scrib_server Server_timeout_polling_(int v) {server_timeout_polling = v; return this;} private int server_timeout_polling = 1;
-	public int		Server_timeout_busy_wait() {return server_timeout_busy_wait;} public Scrib_server Server_timeout_busy_wait_(int v) {server_timeout_busy_wait = v; return this;} private int server_timeout_busy_wait = 1;
-	public byte[]	Server_comm(byte[] cmd, Object[] cmd_objs) {return Bry_.Empty;}
-	public void		Server_send(byte[] cmd, Object[] cmd_objs) {}
-	public byte[]	Server_recv() {return Bry_.Empty;}
-	public void		Term() {}
 }
