@@ -74,7 +74,7 @@ public class Pp_pages_nde_hdr_tst {
 		// next only
 		fxt.Page_ttl_("Page/1");
 		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
-		(	"<p>value=toc;current=<b>Page/1</b>;next=<a href=\"/wiki/Page/2\">Page/2</a>;"
+		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/1</a>;next=<a href=\"/wiki/Page/2\">Page/2</a>;"
 		,	"</p>"
 		,	""
 		,	"<p><br/>"
@@ -84,7 +84,7 @@ public class Pp_pages_nde_hdr_tst {
 		// next and prev
 		fxt.Page_ttl_("Page/2");
 		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
-		(	"<p>value=toc;current=<b>Page/2</b>;prev=<a href=\"/wiki/Page/1\">Page/1</a>;next=<a href=\"/wiki/Page/3\">Page/3</a>;"
+		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/2</a>;prev=<a href=\"/wiki/Page/1\">Page/1</a>;next=<a href=\"/wiki/Page/3\">Page/3</a>;"
 		,	"</p>"
 		,	""
 		,	"<p><br/>"
@@ -94,7 +94,7 @@ public class Pp_pages_nde_hdr_tst {
 		// prev only
 		fxt.Page_ttl_("Page/3");
 		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
-		(	"<p>value=toc;current=<b>Page/3</b>;prev=<a href=\"/wiki/Page/2\">Page/2</a>;"
+		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/3</a>;prev=<a href=\"/wiki/Page/2\">Page/2</a>;"
 		,	"</p>"
 		,	""
 		,	"<p><br/>"
@@ -129,7 +129,7 @@ public class Pp_pages_nde_hdr_tst {
 
 		fxt.Page_ttl_("Page/2");
 		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
-		(	"<p>value=toc;current=<b>Page/2</b>;prev=<a href=\"/wiki/Page/1\">Caption_1</a>;next=<a href=\"/wiki/Page/3\">Page/3</a>;"
+		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/2</a>;prev=<a href=\"/wiki/Page/1\">Caption_1</a>;next=<a href=\"/wiki/Page/3\">Page/3</a>;"
 		,	"</p>"
 		,	""
 		,	"<p><br/>"
@@ -145,7 +145,7 @@ public class Pp_pages_nde_hdr_tst {
 		// next only
 		fxt.Page_ttl_("Page/1");
 		fxt.Test_parse_page_wiki_str("<pages index='A' />", String_.Concat_lines_nl
-		(	"<p>value=toc;current=<b>Page/1</b>;next=<a href=\"/site/commons.wikimedia.org/wiki/File:A.png\">File:A.png</a>;"
+		(	"<p>value=toc;current=<a class=\"mw-selflink selflink\">Page/1</a>;next=<a href=\"/site/commons.wikimedia.org/wiki/File:A.png\">File:A.png</a>;"
 		,	"</p>"
 		,	""
 		,	"<p><br/>"

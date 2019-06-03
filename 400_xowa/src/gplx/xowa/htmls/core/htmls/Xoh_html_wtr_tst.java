@@ -37,7 +37,7 @@ public class Xoh_html_wtr_tst {
 	}
 	@Test  public void Lnki_category()				{fxt.Test_parse_page_wiki_str("[[Category:A]]"		, "");}	// NOTE: Category does not get written in main page bfr
 	@Test  public void Lnki_category_force()		{fxt.Test_parse_page_wiki_str("[[:Category:A]]"		, "<a href=\"/wiki/Category:A\">Category:A</a>");}
-	@Test  public void Lnki_matches_page()			{fxt.Test_parse_page_wiki_str("[[test page|t1]]", "<b>t1</b>");}	// NOTE: "Test page" is hardcoded to be the test page name
+	@Test  public void Lnki_matches_page()			{fxt.Test_parse_page_wiki_str("[[test page|t1]]", "<a class=\"mw-selflink selflink\">t1</a>");}	// NOTE: "Test page" is hardcoded to be the test page name
 	@Test  public void Lnki_matches_page_but_has_anchor()	{fxt.Test_parse_page_wiki_str("[[Test page#a|test 1]]", "<a href=\"/wiki/Test_page#a\">test 1</a>");}	// NOTE: "Test page" is hardcoded to be the test page name
 	@Test  public void Lnki_anchor()				{fxt.Test_parse_page_wiki_str("[[A#b]]"				, "<a href=\"/wiki/A#b\">A#b</a>");}
 //		@Test  public void Img_invalid_wnt_char() {
