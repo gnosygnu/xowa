@@ -605,9 +605,10 @@ function MWServer:newEnvironment()
 	env.setfenv, env.getfenv = mw.makeProtectedEnvFuncs(
 		self.protectedEnvironments, self.protectedFunctions )
 
---	env.debug = {
---		traceback = debug.traceback
---	}
+  -- XOWA:uncommented env.debug; ISSUE#:475; DATE:2019-06-02
+	env.debug = {
+		traceback = debug.traceback
+	}
 	env.os = {
 		date = os.date,
 		difftime = os.difftime,
