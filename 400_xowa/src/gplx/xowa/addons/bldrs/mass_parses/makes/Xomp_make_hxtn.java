@@ -35,8 +35,9 @@ class Xomp_make_hxtn {
 			Xomp_wkr_db wkr_db = Xomp_wkr_db.New(mgr_db.Dir(), i);
 
 			// insert page_tbl
+			page_tbl.Conn().Env_db_attach("wkr_db", wkr_db.Url());
 			page_tbl.Conn().Txn_bgn("hxtn_page");
-			Db_rdr rdr = wkr_db.Conn().Stmt_sql("SELECT * FROM hxtn_page;").Exec_select__rls_auto();	// ANSI.Y
+			Db_rdr rdr = page_tbl.Conn().Stmt_sql("SELECT DISTINCT src.page_id, src.wkr_id, src.data_id FROM wkr_db.hxtn_page src LEFT JOIN hxtn_page trg ON src.page_id = trg.page_id AND src.wkr_id = trg.wkr_id AND src.data_id = trg.data_id WHERE trg.id IS NULL;").Exec_select__rls_auto();	// ANSI.Y
 			try {
 				while (rdr.Move_next()) {
 					page_tbl.Insert_by_rdr(rdr);
@@ -47,12 +48,13 @@ class Xomp_make_hxtn {
 				}
 			} finally {rdr.Rls();}
 			page_tbl.Conn().Txn_end();
+			page_tbl.Conn().Env_db_detach("wkr_db");
 
 			// insert blob tbl; note that dupes can exist across wkr_dbs (wkr_db 1 and wkr_db 2 both have Template:Abcd)
 			count = 0;
 			blob_tbl.Conn().Env_db_attach("wkr_db", wkr_db.Url());
 			blob_tbl.Conn().Txn_bgn("hxtn_blob");
-			rdr = blob_tbl.Conn().Stmt_sql("SELECT src.* FROM wkr_db.hxtn_blob src LEFT JOIN hxtn_blob trg ON src.wiki_id = trg.wiki_id AND src.blob_id = trg.blob_id AND src.blob_tid = trg.blob_tid WHERE trg.blob_id IS NULL;").Exec_select__rls_auto();	// ANSI.Y
+			rdr = blob_tbl.Conn().Stmt_sql("SELECT DISTINCT src.blob_tid, src.wiki_id, src.blob_id, src.zip_tid, src.blob_data FROM wkr_db.hxtn_blob src LEFT JOIN hxtn_blob trg ON src.wiki_id = trg.wiki_id AND src.blob_id = trg.blob_id AND src.blob_tid = trg.blob_tid WHERE trg.blob_id IS NULL;").Exec_select__rls_auto();	// ANSI.Y
 			try {
 				while (rdr.Move_next()) {
 					blob_tbl.Insert_by_rdr(rdr);

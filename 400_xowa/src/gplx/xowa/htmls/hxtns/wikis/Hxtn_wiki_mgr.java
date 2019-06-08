@@ -19,9 +19,11 @@ public class Hxtn_wiki_mgr {
 	private Hxtn_wiki_tbl wiki_tbl;
 	public void Init_by_xomp_merge(Db_conn conn, String wiki_domain) {
 		wiki_tbl = new Hxtn_wiki_tbl(conn);
-		wiki_tbl.Create_tbl();
-		wiki_tbl.Insert(Hxtn_wiki_itm.Tid__self    , wiki_domain);
-		wiki_tbl.Insert(Hxtn_wiki_itm.Tid__commons , "commons.wikimedia.org");
-		wiki_tbl.Insert(Hxtn_wiki_itm.Tid__wikidata, "www.wikidata.org");
+		if (!conn.Meta_tbl_exists(wiki_tbl.Tbl_name())) {
+			wiki_tbl.Create_tbl();
+			wiki_tbl.Insert(Hxtn_wiki_itm.Tid__self    , wiki_domain);
+			wiki_tbl.Insert(Hxtn_wiki_itm.Tid__commons , "commons.wikimedia.org");
+			wiki_tbl.Insert(Hxtn_wiki_itm.Tid__wikidata, "www.wikidata.org");
+		}
 	}
 }

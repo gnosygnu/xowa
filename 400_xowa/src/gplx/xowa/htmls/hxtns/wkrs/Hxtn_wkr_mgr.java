@@ -20,8 +20,10 @@ public class Hxtn_wkr_mgr {
 	private Hxtn_wkr_tbl  wkr_tbl;
 	public void Init_by_xomp_merge(Db_conn conn) {
 		wkr_tbl = new Hxtn_wkr_tbl(conn);
-		wkr_tbl.Create_tbl();
-		Reg_wkr(new gplx.xowa.xtns.template_styles.Hxtn_page_wkr__template_styles(null)); // TODO:do formal registration of extensions; WHEN: rework tkn_mkr
+		if (!conn.Meta_tbl_exists(wkr_tbl.Tbl_name())) {
+			wkr_tbl.Create_tbl();
+			Reg_wkr(new gplx.xowa.xtns.template_styles.Hxtn_page_wkr__template_styles(null)); // TODO:do formal registration of extensions; WHEN: rework tkn_mkr
+		}
 	}
 	private void Reg_wkr(Hxtn_page_wkr wkr) {
 		wkr_tbl.Insert(wkr.Id(), wkr.Key());

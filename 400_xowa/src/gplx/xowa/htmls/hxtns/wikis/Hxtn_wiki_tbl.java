@@ -25,6 +25,7 @@ public class Hxtn_wiki_tbl implements Rls_able {
 		this.conn = conn;
 		conn.Rls_reg(this);
 	}
+	public String Tbl_name() {return tbl_name;}
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
 	}

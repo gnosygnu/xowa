@@ -40,7 +40,8 @@ public class Hxtn_blob_tbl implements Rls_able {
 	}
 	public void Stmt_end() {
 		this.Rls();
-		conn.Meta_idx_create(Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_blob_id, fld_wiki_id, fld_blob_tid));
+		if (!conn.Meta_idx_exists(tbl_name, "pkey"))
+			conn.Meta_idx_create(Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_blob_id, fld_wiki_id, fld_blob_tid));
 	}
 	public void Insert_by_rdr(Db_rdr rdr) {
 		Db_stmt_.Insert_by_rdr(flds, rdr, stmt_insert);
