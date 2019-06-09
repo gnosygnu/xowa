@@ -36,6 +36,13 @@ public class Xoctg_catpage_loader {
 			return null;
 		}
 
+		// make loader
+		Xoctg_catlink_loader loader
+			= cat_core_itm.File_idx() == -1	// v3 or v4: loop over all cat_link dbs {
+			? Xoctg_catlink_loader.New_v3_v4(wiki, catpage_mgr, page_tbl, db_mgr, cat_core_tbl.Conn())
+			: Xoctg_catlink_loader.New_v2   (wiki, catpage_mgr, page_tbl, db_mgr, cat_core_itm.File_idx())
+			;
+
 		// load itms from cat_link_db for each grp_tid
 		Xoctg_catpage_ctg rv = new Xoctg_catpage_ctg(cat_id, cat_ttl.Page_txt());
 		for (byte grp_tid = Xoa_ctg_mgr.Tid__subc; grp_tid < Xoa_ctg_mgr.Tid___max; ++grp_tid) {
@@ -57,12 +64,7 @@ public class Xoctg_catpage_loader {
 			}
 
 			// load links
-			Xoctg_catlink_loader loader = new Xoctg_catlink_loader();
-			if (cat_core_itm.File_idx() == -1)	// v3 or v4: loop over all cat_link dbs {
-				loader.Make_attach_mgr__v3_v4	(db_mgr, cat_core_tbl.Conn());
-			else								// v2: use cat_link_db
-				loader.Make_attach_mgr__v2		(db_mgr, cat_core_itm.File_idx());
-			loader.Run(rv, wiki, catpage_mgr, page_tbl, cat_id, grp_tid, url_is_from, url_sortkey, limit);
+			loader.Run(rv, cat_id, grp_tid, url_is_from, url_sortkey, limit);
 		}
 		return rv;
 	}
