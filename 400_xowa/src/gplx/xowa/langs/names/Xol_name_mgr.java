@@ -177,7 +177,7 @@ public class Xol_name_mgr {
 		//	$inLanguage = 'en';
 		Ordered_hash names = Ordered_hash_.New();
 
-		// XOWA: 'LanguageGetTranslatedLanguageNames' is only hooked by cldr_names
+		// XOWA: 'LanguageGetTranslatedLanguageNames' is only hooked by cldr_names; REF.MW:/cldr/extension.json
 		// if ( $inLanguage ) {
 		//	# TODO: also include when $inLanguage is null, when this code is more efficient
 		//	Hooks::run( 'LanguageGetTranslatedLanguageNames', [ &$names, $inLanguage ] );
@@ -193,6 +193,7 @@ public class Xol_name_mgr {
 
 		// REF.MW: /languages/data/Names.php
 		// $mwNames = $wgExtraLanguageNames + MediaWiki\Languages\Data\Names::$names;
+		// TODO:also include /LocalNames/ REF.MW:/cldr/includes/LanguageNames.php
 		Ordered_hash mwNames = lang_names;
 		int mwNames_len = mwNames.Len();
 		for (int i = 0; i < mwNames_len; i++) {
