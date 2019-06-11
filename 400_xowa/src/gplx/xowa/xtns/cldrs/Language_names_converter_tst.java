@@ -53,12 +53,12 @@ public class Language_names_converter_tst {
 		, "]"
 		));
 	}
-	@Test   public void Convert() {
-		Language_names_converter converter = new Language_names_converter();
-		Language_name[] names = converter.Parse_fil(Io_url_.new_dir_("C:\\000\\100_bin\\200_server\\200_http\\100_apache\\100_v2.4\\htdocs\\mediawiki\\v1.29.1\\languages\\data\\Names.php"));
-		String json = converter.To_json(names);
-		Io_mgr.Instance.SaveFilStr(Io_url_.new_fil_("C:\\xowa\\bin\\any\\xowa\\cfg\\lang\\data\\names.json"), json);
-	}
+//		@Test   public void Convert() {
+//			Language_names_converter converter = new Language_names_converter();
+//			Language_name[] names = converter.Parse_fil(Io_url_.new_dir_("C:\\000\\100_bin\\200_server\\200_http\\100_apache\\100_v2.4\\htdocs\\mediawiki\\v1.29.1\\languages\\data\\Names.php"));
+//			String json = converter.To_json(names);
+//			Io_mgr.Instance.SaveFilStr(Io_url_.new_fil_("C:\\xowa\\bin\\any\\xowa\\cfg\\lang\\data\\names.json"), json);
+//		}
 }
 class Language_names_converter_fxt {
 	private final    Language_names_converter converter = new Language_names_converter();

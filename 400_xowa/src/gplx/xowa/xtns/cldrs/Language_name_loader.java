@@ -43,6 +43,7 @@ public class Language_name_loader {
 		List_adp list = List_adp_.New();
 
 		Json_doc jdoc = parser.Parse(json);
+		if (jdoc == null) return Language_name.Ary_empty;
 		Json_ary root = jdoc.Root_ary();
 		int len = root.Len();
 		for (int i = 0; i < len; i++) {

@@ -29,16 +29,3 @@ public class Cldr_name_loader_tst {
 		fxt.Test__load_file_is_empty(Bool_.Y, "en_gb");
 	}
 }
-class Cldr_name_loader_fxt {
-	private static final    String Dir_name = "mem/CldrNames/";
-	private final    Cldr_name_loader name_loader = new Cldr_name_loader(Io_url_.mem_dir_(Dir_name));
-
-	public void Clear() {name_loader.Clear();}
-	public void Init__file(String fil_name, String txt) {
-		Io_mgr.Instance.SaveFilStr(Io_url_.new_fil_(Dir_name + fil_name), txt);
-	}
-	public void Test__load_file_is_empty(boolean expd, String lang_key) {
-		Cldr_name_file name_file = name_loader.Load_or_empty(lang_key);
-		Gftest.Eq__bool(expd, name_file == Cldr_name_file.Empty);
-	}
-}

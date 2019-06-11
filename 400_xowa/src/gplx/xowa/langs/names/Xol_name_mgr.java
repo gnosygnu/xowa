@@ -38,7 +38,7 @@ public class Xol_name_mgr {
 	*/
 	public String fetchLanguageName(String code, String inLanguage, String include, byte[] page_url) {
 		code = String_.Lower(code);
-		if (include == null) include = "all";
+		if (include == null) include = Scope__str__all;
 		Ordered_hash array = fetchLanguageNames(inLanguage, include, page_url);
 		Keyval rv = (Keyval)array.Get_by(code);
 		return rv == null ? "" : rv.Val_to_str_or_null();
@@ -66,8 +66,8 @@ public class Xol_name_mgr {
 			languageNameCache = Ordered_hash_.New();
 		Ordered_hash ret = (Ordered_hash)languageNameCache.Get_by(cacheKey);
 		if (ret == null) {
-			Byte_obj_val include_byte = (Byte_obj_val)fetchLanguageNamesUncachedEnum.Get_by(include_str);
-			byte include = include_byte == null ? fetchLanguageNamesUncached__all : include_byte.Val();
+			Byte_obj_val include_byte = (Byte_obj_val)Scope__hash.Get_by(include_str);
+			byte include = include_byte == null ? Scope__int__all : include_byte.Val();
 
 			Cldr_name_file cldr_file = cldr_loader.Load_or_empty(inLanguage);
 			if (cldr_file == Cldr_name_file.Empty) {
@@ -142,19 +142,28 @@ public class Xol_name_mgr {
 //				lang_files.Add(code, Keyval_.new_(code, code));
 //			}
 //
-//			hash = fetchLanguageNamesUncached(host_lang, fetchLanguageNamesUncached__mw, cldr_names, lang_names, lang_files);
+//			hash = fetchLanguageNamesUncached(host_lang, Scope__int__mw, cldr_names, lang_names, lang_files);
 //			kvs = (Keyval[])hash.To_ary(typeof(Keyval));
 //		}
 
+	/*
+	Scope__mw__str
+	Scope__hash
+	*/
 	public static final byte 
-		  fetchLanguageNamesUncached__mw      = 0 // cldr + Names.php + *.json|*.php 
-		, fetchLanguageNamesUncached__all     = 1 // cldr + Names.php
-		, fetchLanguageNamesUncached__mwFile  = 2 // *.json|*.php
+		  Scope__int__mw      = 0 // cldr + Names.php + *.json|*.php 
+		, Scope__int__all     = 1 // cldr + Names.php
+		, Scope__int__mwFile  = 2 // *.json|*.php
 		;
-	private static final    Hash_adp fetchLanguageNamesUncachedEnum = Hash_adp_.New()
-		.Add_and_more("mw"    , Byte_obj_val.new_(fetchLanguageNamesUncached__mw))
-		.Add_and_more("all"   , Byte_obj_val.new_(fetchLanguageNamesUncached__all))
-		.Add_and_more("mwFile", Byte_obj_val.new_(fetchLanguageNamesUncached__mwFile))
+	public static final    String
+		  Scope__str__mw      = "mw"
+		, Scope__str__all     = "all"
+		, Scope__str__mwFile  = "mwFile"
+		;
+	private static final    Hash_adp Scope__hash = Hash_adp_.New()
+		.Add_and_more(Scope__str__mw    , Byte_obj_val.new_(Scope__int__mw))
+		.Add_and_more(Scope__str__all   , Byte_obj_val.new_(Scope__int__all))
+		.Add_and_more(Scope__str__mwFile, Byte_obj_val.new_(Scope__int__mwFile))
 		;
 	public static Ordered_hash fetchLanguageNamesUncached
 		( String inLanguage, byte include
@@ -196,7 +205,7 @@ public class Xol_name_mgr {
 			}
 		}
 
-		if (include == fetchLanguageNamesUncached__all) {
+		if (include == Scope__int__all) {
 			names.Sort_by(Hash_kv_sorter.Instance);
 			return names;
 		}
@@ -211,7 +220,7 @@ public class Xol_name_mgr {
 
 		// REF.MW: /languages/classes/i18n/*.json
 		// REF.MW: /languages/classes/messages/Messages*.php
-		if (include == fetchLanguageNamesUncached__mwFile) {
+		if (include == Scope__int__mwFile) {
 			Ordered_hash namesMwFile = Ordered_hash_.New();
 			// # We do this using a foreach over the codes instead of a directory
 			// # loop so that messages files in extensions will work correctly.

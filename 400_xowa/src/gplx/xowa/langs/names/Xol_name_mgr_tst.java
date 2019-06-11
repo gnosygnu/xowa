@@ -22,7 +22,7 @@ public class Xol_name_mgr_tst {
 
 	@Test   public void Cldr_only() {
 		fxt.Test__fetchLanguageNamesUncached
-			( "en", Xol_name_mgr.fetchLanguageNamesUncached__all
+			( "en", Xol_name_mgr.Scope__int__all
 			, fxt.Make__cldr_names("en", "de")
 			, fxt.Make__lang_names()
 			, fxt.Make__lang_files()
@@ -33,7 +33,7 @@ public class Xol_name_mgr_tst {
 	}
 	@Test   public void Lang_name__langs() {
 		fxt.Test__fetchLanguageNamesUncached
-			( "en", Xol_name_mgr.fetchLanguageNamesUncached__all
+			( "en", Xol_name_mgr.Scope__int__all
 			, fxt.Make__cldr_names("en", "de", "es")
 			, fxt.Make__lang_names("en", "de", "fr")
 			, fxt.Make__lang_files()
@@ -46,7 +46,7 @@ public class Xol_name_mgr_tst {
 	}
 	@Test   public void mwFile() {
 		fxt.Test__fetchLanguageNamesUncached
-			( "en", Xol_name_mgr.fetchLanguageNamesUncached__mwFile
+			( "en", Xol_name_mgr.Scope__int__mwFile
 			, fxt.Make__cldr_names("en", "de")
 			, fxt.Make__lang_names("en", "de", "fr")
 			, fxt.Make__lang_files("en", "de", "es")
@@ -57,7 +57,7 @@ public class Xol_name_mgr_tst {
 	}
 	@Test   public void mw() {
 		fxt.Test__fetchLanguageNamesUncached
-			( "en", Xol_name_mgr.fetchLanguageNamesUncached__mw
+			( "en", Xol_name_mgr.Scope__int__mw
 			, fxt.Make__cldr_names("en", "de")
 			, fxt.Make__lang_names("en", "de", "fr")
 			, fxt.Make__lang_files("en", "de", "es")

@@ -28,4 +28,6 @@ public class Language_name implements gplx.core.brys.Bry_bfr_able {
 		bfr.Add(name).Add_byte_pipe();
 		bfr.Add(note);
 	}
+
+	public static final    Language_name[] Ary_empty = new Language_name[0];
 }

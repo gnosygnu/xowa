@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.langs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.names.*;
 import gplx.xowa.mediawiki.*;
 import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.langs.durations.*;
 import gplx.xowa.xtns.scribunto.procs.*;
@@ -82,14 +82,26 @@ public class Scrib_lib_language implements Scrib_lib {
 	public void Notify_lang_changed() {if (notify_lang_changed_fnc != null) core.Interpreter().CallFunction(notify_lang_changed_fnc.Id(), Keyval_.Ary_empty);}
 	public boolean GetContLangCode(Scrib_proc_args args, Scrib_proc_rslt rslt)		{return rslt.Init_obj(core.Ctx().Lang().Key_str());}
 	public boolean IsSupportedLanguage(Scrib_proc_args args, Scrib_proc_rslt rslt)	{return IsKnownLanguageTag(args, rslt);}// NOTE: checks if "MessagesXX.php" exists; note that xowa has all "MessagesXX.php"; for now, assume same functionality as IsKnownLanguageTag (worst case is that a small wiki depends on a lang not being there; will need to put in a "wiki.Langs()" then)
-	public boolean IsKnownLanguageTag(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// NOTE: checks if in languages/Names.php; TODO: support foreign translations; EX: Englische is en in de.w
+	public boolean IsKnownLanguageTag(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// NOTE: checks if in languages/data/Names.php; TODO: support foreign translations; EX: Englische is en in de.w
 		String lang_code = args.Cast_str_or_null(0);
 		boolean exists = false;
+
+		// TODO:create literal equivalent of Language.php|isValidBuiltInCode; WHEN:refactor
+		// * REF: https://github.com/wikimedia/mediawiki-extensions-Scribunto/blob/master/includes/engines/LuaCommon/LanguageLibrary.php#L86
+		// * REF: https://github.com/wikimedia/mediawiki/blob/master/languages/Language.php#L427
+
+		// check lang stubs which correlates roughly to languages/data/Names.php;
 		if (	lang_code != null									// null check; protecting against Module passing in nil from lua
 			&&	String_.Eq(lang_code, String_.Lower(lang_code))		// must be lower-case; REF.MW: $code === strtolower( $code )
 			&&	Xol_lang_stub_.Exists(Bry_.new_a7(lang_code))
 			)
 			exists = true;
+
+		// check cldr names; ISSUE#:388; EX:goh in CldrNamesEn.json; DATE:2019-06-11
+		if (!exists) {
+			String lang_name = core.App().Lang_mgr().Name_mgr().fetchLanguageName(lang_code, core.Lang().Key_str(), Xol_name_mgr.Scope__str__all, core.Page_url());
+			exists = String_.Len_gt_0(lang_name); // NOTE: missing langs will come back as empty String
+		}
 		return rslt.Init_obj(exists);
 	}
 	public boolean IsValidCode(Scrib_proc_args args, Scrib_proc_rslt rslt) {	// REF.MW: Language.php!isValidCode

@@ -17,6 +17,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import org.junit.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
+import gplx.xowa.xtns.cldrs.*;
 public class Scrib_lib_language_tst {
 	@Before public void init() {
 		fxt.Clear_for_lib();
@@ -33,6 +34,11 @@ public class Scrib_lib_language_tst {
 	@Test  public void IsKnownLanguageTag() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_language.Invk_isKnownLanguageTag, Object_.Ary("fr"), true);
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_language.Invk_isKnownLanguageTag, Object_.Ary("qq"), false);
+	}
+	@Test  public void IsKnownLanguageTag_cldr() {
+		Io_mgr.Instance.InitEngine_mem();
+		Cldr_name_loader_fxt.Create_file_w_langs(fxt.Core().Lang().Key_str(), Keyval_.Ary(Keyval_.new_("goh", "goh_name")));
+		fxt.Test_scrib_proc_bool(lib, Scrib_lib_language.Invk_isKnownLanguageTag, Object_.Ary("goh"), true);
 	}
 	@Test  public void IsValidCode() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_language.Invk_isValidCode, Object_.Ary("a,b"), true);
