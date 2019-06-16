@@ -65,6 +65,7 @@ public class Xop_amp_mgr {	// TS
 		// find semic; fail if none found
 		int semic_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, num_bgn, src_len);
 		if (semic_pos == Bry_find_.Not_found) return rv.Pass_n_(fail_pos);
+		if (semic_pos == num_bgn) return rv.Pass_n_(fail_pos); // handle "&#x;" where there is no hex/dec number; ISSUE#:494; DATE:2019-06-16
 		int num_end = semic_pos - 1;	// num_end = pos before semicolon
 
 		// calc amp_val; EX: &#x3A3; -> 931; &#931; -> 931;

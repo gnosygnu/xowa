@@ -24,6 +24,7 @@ public class Xop_amp_mgr__decode__tst {
 	@Test  public void Name_fail_amp_only()			{fxt.Test__decode_as_bry("a&"				, "a&");}
 	@Test  public void Num_fail()					{fxt.Test__decode_as_bry("&#!;"				, "&#!;");}		// ! is not valid num
 	@Test  public void Hex_fail()					{fxt.Test__decode_as_bry("&#x!;"			, "&#x!;");}	// ! is not valid hex
+	@Test  public void Hex_fail_x_only()            {fxt.Test__decode_as_bry("&#x;"             , "&#x;");}     // ISSUE#:494; handle "&#x;"; DATE:2019-06-16
 	@Test  public void Num_basic()					{fxt.Test__decode_as_bry("&#0931;"			, "Σ");}
 	@Test  public void Num_zero_padded()			{fxt.Test__decode_as_bry("&#00931;"			, "Σ");}
 	@Test  public void Hex_upper()					{fxt.Test__decode_as_bry("&#x3A3;"			, "Σ");}
