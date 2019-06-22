@@ -17,8 +17,9 @@ package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*; import gp
 import gplx.dbs.*;
 import gplx.xowa.wikis.caches.*;
 public class Xomp_tmpl_cache_bldr {
-	public static Xow_page_cache New(Xowe_wiki wiki, boolean fill_all) {
+	public static Xow_page_cache New(Xowe_wiki wiki, boolean fill_all, long page_cache_max) {
 		Xow_page_cache rv = new Xow_page_cache(wiki);
+		rv.Max_(page_cache_max);
 		if (fill_all) Fill_all(rv, wiki);
 		return rv;
 	}
@@ -53,12 +54,7 @@ public class Xomp_tmpl_cache_bldr {
 				text_db_loader.Add(rdr.Read_int("page_text_db_id"), itm);
 				
 				// ignore duplicate page_titles in cache; EX:ru.n:Модуль:Weather/data DATE:2017-03-16
-				if (cache.Get_or_null(page_ttl.Full_db()) == null) {
-					cache.Add(page_ttl.Full_db(), itm);
-				}
-				else {
-					Gfo_usr_dlg_.Instance.Warn_many("", "", "mass_parse: ignoring duplicate page title in page cache; title=~{0} id=~{1}", page_ttl.Full_db(), page_id);
-				}
+				cache.Add_itm(page_ttl.Full_db_as_str(), itm);
 
 				page_regy.Add(page_id, itm);
 

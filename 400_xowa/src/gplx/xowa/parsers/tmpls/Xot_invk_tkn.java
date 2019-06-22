@@ -333,7 +333,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 			if (tmpl != null) transclude_src = tmpl.Data_raw();
 		}
 		if (transclude_src == null && ctx.Tmpl_load_enabled()) {	// ttl is template not in cache, or some other ns; do load
-			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(page_ttl);
+			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(page_ttl);
 			if (	cache_itm != null
 //					&&  Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Page().Page_ttl().Full_db())	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
 				) {
@@ -377,7 +377,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				return true;
 		}
 		if (transclude_tmpl == null && ctx.Tmpl_load_enabled()) {	// ttl is template not in cache, or some other ns; do load
-			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(page_ttl);
+			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(page_ttl);
 			if (	cache_itm != null) {
 				if (!Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Page().Ttl().Full_db())) {	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
 					transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), page_ttl.Ns(), page_ttl.Page_db(), cache_itm.Wtxt__direct());

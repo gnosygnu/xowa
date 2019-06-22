@@ -14,14 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.mass_parses.parses.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
+import gplx.xowa.wikis.caches.*;
 public class Xomp_prog_mgr {
 	private final    Object thread_lock = new Object();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private Xow_page_cache page_cache;
 	private int prog_interval, perf_interval;
 	private int pages_done, pages_total;
 	private long prog_bgn, prog_prv, prog_done, perf_prv;
 	private Io_url perf_url;
-	public void Init(int pages_total, int prog_interval, int perf_interval, Io_url perf_url) {
+	public void Init(Xow_page_cache page_cache, int pages_total, int prog_interval, int perf_interval, Io_url perf_url) {
+		this.page_cache = page_cache;
 		this.pages_total = pages_total;
 		this.prog_interval = prog_interval;
 		this.perf_interval = perf_interval;
@@ -39,7 +42,7 @@ public class Xomp_prog_mgr {
 				double rate_cur = pages_done / (prog_done / Time_span_.Ratio_f_to_s);
 				String time_past = gplx.xowa.addons.bldrs.centrals.utils.Time_dhms_.To_str(tmp_bfr, (int)((prog_cur - prog_bgn) / 1000), true, 0);
 				String time_left = gplx.xowa.addons.bldrs.centrals.utils.Time_dhms_.To_str(tmp_bfr, (int)(pages_left / rate_cur), true, 0);
-				Gfo_usr_dlg_.Instance.Prog_many("", "", "done=~{1} left=~{2} rate=~{3} time_past=~{4} time_left=~{5}", id, pages_done, pages_left, (int)rate_cur, time_past, time_left);
+				Gfo_usr_dlg_.Instance.Prog_many("", "", "done=~{1} left=~{2} rate=~{3} time_past=~{4} time_left=~{5} cache_stats=~{6}", id, pages_done, pages_left, (int)rate_cur, time_past, time_left, page_cache.To_str());
 				prog_prv = prog_cur;
 			}
 			if (pages_done % perf_interval == 0) {

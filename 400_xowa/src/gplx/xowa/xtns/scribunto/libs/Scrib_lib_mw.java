@@ -97,7 +97,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			return rslt.Init_obj(core.Interpreter().LoadString("@" + mod_name + ".lua", mod_code));
 		Xoa_ttl ttl = Xoa_ttl.Parse(cur_wiki, Bry_.new_u8(mod_name));// NOTE: should have Module: prefix
 		if (ttl == null) return rslt.Init_ary_empty();
-		byte[] page_db = cur_wiki.Cache_mgr().Page_cache().Get_or_load_as_src(ttl);
+		byte[] page_db = cur_wiki.Cache_mgr().Page_cache().Get_src_else_load_or_null(ttl);
 		if (page_db == null) return rslt.Init_ary_empty();
 		Scrib_lua_mod mod = new Scrib_lua_mod(core, mod_name);
 		return rslt.Init_obj(mod.LoadString(String_.new_u8(page_db)));
@@ -316,25 +316,28 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (!ttl.ForceLiteralLink() && ttl.Ns().Id_is_main())	// title is not literal and is not prefixed with Template; parse again as template; EX: ":A" and "Template:A" are fine; "A" is parsed again as "Template:A"
 			ttl = Xoa_ttl.Parse(cur_wiki, Bry_.Add(cur_wiki.Ns_mgr().Ns_template().Name_db_w_colon(), ttl_bry));	// parse again, but add "Template:"
 		Keyval[] args_ary = args.Pull_kv_ary_safe(2);
-		// BLOCK.bgn:Xot_invk_tkn.Transclude; cannot reuse b/c Transclude needs invk_tkn, and invk_tkn is manufactured late; DATE:2014-01-02
+
 		byte[] sub_src = null;
-		if (ttl.Ns().Id_is_tmpl()) {				// ttl is template; check tmpl_regy first before going to data_mgr
+		// ttl is template; check tmpl_regy first before going to data_mgr
+		if (ttl.Ns().Id_is_tmpl()) {
 			Xot_defn_tmpl tmpl = (Xot_defn_tmpl)core.Wiki().Cache_mgr().Defn_cache().Get_by_key(ttl.Page_db());
-			if (tmpl != null) sub_src = tmpl.Data_raw();
+			if (tmpl != null)
+				sub_src = tmpl.Data_raw();
 		}
-		if (sub_src == null)						// ttl is not in template cache, or is a ttl in non-Template ns; load title
-			sub_src = core.Wiki().Cache_mgr().Page_cache().Get_or_load_as_src(ttl);
-		if (sub_src !=  null) {
-			Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt_w_ttl_case(), args_ary);	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-09-21
-			Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
-			Bry_bfr sub_bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
-			transclude_tmpl.Tmpl_evaluate(ctx, sub_frame, sub_bfr);
-			return rslt.Init_obj(sub_bfr.To_str_and_rls());
-		}
-		else {
+
+		// ttl is not in template cache; load title
+		if (sub_src == null)
+			sub_src = core.Wiki().Cache_mgr().Page_cache().Get_src_else_load_or_null(ttl);
+
+		// ttl does not exist; fail
+		if (sub_src == null)
 			return rslt.Init_fail("expandTemplate: template \"" + ttl_str + "\" does not exist");	// NOTE: must return error if template is missing; PAGE:en.w:Flag_of_Greenland DATE:2016-05-02
-		}
-		// BLOCK.end:Xot_invk_tkn.Transclude
+
+		Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt_w_ttl_case(), args_ary);	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-09-21
+		Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
+		Bry_bfr sub_bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
+		transclude_tmpl.Tmpl_evaluate(ctx, sub_frame, sub_bfr);
+		return rslt.Init_obj(sub_bfr.To_str_and_rls());
 	}
 
 	public boolean IncrementExpensiveFunctionCount(Scrib_proc_args args, Scrib_proc_rslt rslt) {return rslt.Init_obj(Keyval_.Ary_empty);}	// NOTE: for now, always return null (XOWA does not care about expensive parser functions)

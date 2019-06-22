@@ -22,9 +22,6 @@ public class Xop_mediawiki_wkr {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xop_mediawiki_wkr(Xowe_wiki wiki, Xop_mediawiki_loader loader) {
 		this.wiki = wiki;
-		this.Loader_(loader);
-	}
-	public void Loader_(Xop_mediawiki_loader loader) {
 		if (loader != null)
 			wiki.Cache_mgr().Load_wkr_(new Xow_page_cache_wkr__embeddable(wiki, loader));
 	}
@@ -33,10 +30,6 @@ public class Xop_mediawiki_wkr {
 		wiki.Cache_mgr().Free_mem__page();
 		wiki.Parser_mgr().Scrib().Core_term();
 		wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();
-	}
-	public void Clear_cache(String page) {
-		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.new_u8(page));
-		wiki.Cache_mgr().Page_cache().Del(ttl.Full_db());
 	}
 	public String Parse(String page, String wikitext) {
 		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.new_u8(page));

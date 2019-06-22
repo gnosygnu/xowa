@@ -49,7 +49,7 @@ public class Xot_invk_tkn_ {
 		}
 	}
 	public static Xot_defn_tmpl Load_defn(Xowe_wiki wiki, Xop_ctx ctx, Xot_invk_tkn invk_tkn, Xoa_ttl ttl, byte[] name_ary) {	// recursive loading of templates
-		Xow_page_cache_itm tmpl_page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(ttl);
+		Xow_page_cache_itm tmpl_page_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(ttl);
 		byte[] tmpl_page_bry = tmpl_page_itm == null ? null : tmpl_page_itm.Wtxt__direct();
 		Xot_defn_tmpl rv = null;
 		if (tmpl_page_bry != null) {

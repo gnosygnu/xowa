@@ -53,7 +53,7 @@ public class Xow_ifexist_cache {
 		if (ns_loaded_hash.Has(ttl.Ns().Id())) return Bool_.N_byte;
 
 		// check page_cache since full page + text could be loaded there
-		Xow_page_cache_itm itm = (Xow_page_cache_itm)page_cache.Get_or_null(key);
+		Xow_page_cache_itm itm = (Xow_page_cache_itm)page_cache.Get_itm_or_null(ttl.Full_db_as_str());
 		if		(itm == Xow_page_cache_itm.Missing)
 			return Bool_.N_byte;
 		else if (itm != null)

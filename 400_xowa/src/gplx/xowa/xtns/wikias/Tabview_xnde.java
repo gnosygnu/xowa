@@ -120,7 +120,7 @@ class Tabview_tab_itm {
 					if (Bry_.Has_at_bgn(page_ttl_bry, Byte_ascii.Angle_bgn) || Bry_.Has_at_end(page_ttl_bry, Byte_ascii.Angle_end)) return null;
 					Xoa_ttl page_ttl = wiki.Ttl_parse(page_ttl_bry);
 					if (page_ttl == null) return null;
-					gplx.xowa.wikis.caches.Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm(page_ttl);
+					gplx.xowa.wikis.caches.Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(page_ttl);
 					if (page_itm == null) return null;
 					page_body = page_itm.Wtxt__redirect_or_direct();
 					page_body = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), page_body, false);

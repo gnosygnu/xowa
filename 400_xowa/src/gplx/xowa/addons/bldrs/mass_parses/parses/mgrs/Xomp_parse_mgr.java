@@ -31,12 +31,13 @@ public class Xomp_parse_mgr {
 		// init page_pool
 		Xomp_page_pool_loader page_pool_loader = new Xomp_page_pool_loader(wiki, mgr_db.Conn(), cfg.Num_pages_in_pool(), cfg.Show_msg__fetched_pool());
 		Xomp_page_pool page_pool = new Xomp_page_pool(page_pool_loader, cfg.Num_pages_per_wkr());
-		Xomp_prog_mgr prog_mgr = new Xomp_prog_mgr();
-		prog_mgr.Init(page_pool_loader.Get_pending_count(), cfg.Progress_interval(), cfg.Perf_interval(), mgr_db.Url().GenNewNameAndExt("xomp.perf.csv"));
 
 		// cache: preload tmpls and imglinks
-		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, cfg.Load_all_templates());
+		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, cfg.Load_all_templates(), cfg.Page_cache_max());
 		wiki.App().User().User_db_mgr().Cache_mgr().Enabled_n_();	// disable db lookups of user cache
+
+		Xomp_prog_mgr prog_mgr = new Xomp_prog_mgr();
+		prog_mgr.Init(page_cache, page_pool_loader.Get_pending_count(), cfg.Progress_interval(), cfg.Perf_interval(), mgr_db.Url().GenNewNameAndExt("xomp.perf.csv"));
 
 		Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(Int_.Max_value).Reduce_by_(Int_.Max_value);
 		Xow_ifexist_cache ifexist_cache = new Xow_ifexist_cache(wiki, page_cache).Cache_sizes_(Int_.Max_value, Int_.Max_value);
@@ -70,6 +71,7 @@ public class Xomp_parse_mgr {
 			// make wiki
 			Xowe_wiki wkr_wiki = Xow_wiki_utl_.Clone_wiki(wiki, wiki.Fsys_mgr().Root_dir());
 			wkr_wiki.Cache_mgr().Page_cache_(page_cache).Commons_cache_(commons_cache).Ifexist_cache_(ifexist_cache);				
+
 
 			// make wkr
 			Xomp_parse_wkr wkr = new Xomp_parse_wkr(this, cfg, mgr_db, page_pool, prog_mgr, file_orig_wkr, ns_ord_mgr, wkr_wiki, indexer, i + wkr_uid_bgn);

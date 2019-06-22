@@ -51,7 +51,7 @@ public class Scrib_invoke_func extends Pf_func_base {
 		if (mod == null) {
 			Xow_ns module_ns = wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__module);
 			Xoa_ttl mod_ttl = Xoa_ttl.Parse(wiki, Bry_.Add(module_ns.Name_db_w_colon(), mod_name));
-			mod_raw = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(mod_ttl);
+			mod_raw = wiki.Cache_mgr().Page_cache().Get_src_else_load_or_null(mod_ttl);
 			if (mod_raw == null) {Error(bfr, wiki.Msg_mgr(), Err_mod_missing); return;} // EX: "{{#invoke:missing_mod}}"
 		}
 		else

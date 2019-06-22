@@ -195,7 +195,7 @@ public class Scrib_lib_title implements Scrib_lib {
 	}
 	public static byte[] GetContentInternal(Scrib_core core, Xowe_wiki wiki, byte[] ttl_bry) {
 		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry); if (ttl == null) return null;
-		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm_2(ttl);
+		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(ttl);
 		byte[] rv = null;
 		if (page_itm != null) {
 			byte[] redirected_src = page_itm.Wtxt__redirect();

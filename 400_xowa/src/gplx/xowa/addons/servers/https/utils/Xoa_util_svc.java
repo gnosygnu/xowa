@@ -43,7 +43,7 @@ public class Xoa_util_svc {
 
 		// get page
 		Xoa_ttl ttl = wiki.Ttl_parse(page_bry);
-		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm_2(ttl);
+		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(ttl);
 		byte[] page_text = page_itm == null ? null : page_itm.Wtxt__direct();
 		if (page_text == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "Xoa_utl_svc:page not found: wiki=~{0} page=~{1}", wiki_bry, page_bry);

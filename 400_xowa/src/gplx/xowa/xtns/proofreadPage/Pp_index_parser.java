@@ -19,7 +19,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 class Pp_index_parser {
 	public static Pp_index_page Parse(Xowe_wiki wiki, Xop_ctx ctx, Xoa_ttl index_ttl, int ns_page_id) {
-		byte[] src = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(index_ttl);
+		byte[] src = wiki.Cache_mgr().Page_cache().Get_src_else_load_or_null(index_ttl);
 		if (src == null) return Pp_index_page.Null;
 		Xop_parser sub_parser = Xop_parser.new_(wiki, wiki.Parser_mgr().Main().Tmpl_lxr_mgr(), wiki.Parser_mgr().Main().Wtxt_lxr_mgr());
 		Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);

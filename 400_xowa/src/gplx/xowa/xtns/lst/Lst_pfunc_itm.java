@@ -35,7 +35,8 @@ public class Lst_pfunc_itm {
 			// get sub_src;
 			Xop_ctx sub_ctx = Xop_ctx.New__top(wiki).Ref_ignore_(true);
 			sub_ctx.Page().Ttl_(ctx.Page().Ttl());	// NOTE: must set ttl on page, else test fails;
-			byte[] sub_src = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(ttl); if (sub_src == null) return null; // {{#lst:missing}} -> ""
+			byte[] sub_src = wiki.Cache_mgr().Page_cache().Get_src_else_load_or_null(ttl); 
+			if (sub_src == null) return null; // {{#lst:missing}} -> ""
 			
 			// parse page; note adding to stack to prevent circular recursions
 			if (!wiki.Parser_mgr().Tmpl_stack_add(ttl.Full_db())) return null;
@@ -75,7 +76,8 @@ public class Lst_pfunc_itm {
 			// get sub_ctx: note new ctx is needed b/c sub_page objects must not get added to owner_page; for example, references / hdrs / lnki.files
 			Xop_ctx sub_ctx = Xop_ctx.New__top(wiki).Ref_ignore_(true);
 			sub_ctx.Page().Ttl_(ctx.Page().Ttl());	// NOTE: must set ttl on page, else test fails;
-			byte[] sub_src = wiki.Cache_mgr().Page_cache().Get_or_load_as_src(ttl); if (sub_src == null) return null; // {{#lst:missing}} -> ""
+			byte[] sub_src = wiki.Cache_mgr().Page_cache().Get_src_else_load_or_null(ttl);
+			if (sub_src == null) return null; // {{#lst:missing}} -> ""
 
 			// parse sub_src; note adding to page's stack to prevent circular recursions
 			if (!wiki.Parser_mgr().Tmpl_stack_add(ttl.Full_db())) return null;

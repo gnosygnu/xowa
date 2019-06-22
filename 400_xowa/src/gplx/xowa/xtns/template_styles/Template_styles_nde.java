@@ -49,7 +49,7 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		}
 
 		// get page
-		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_or_load_as_itm_2(css_ttl);
+		Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(css_ttl);
 		if (page_itm != null) {
 			css_src = page_itm.Wtxt__direct();
 			css_page_id = page_itm.Page_id();
