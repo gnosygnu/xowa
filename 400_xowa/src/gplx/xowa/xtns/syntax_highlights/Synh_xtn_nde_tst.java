@@ -21,13 +21,13 @@ public class Synh_xtn_nde_tst {
 		fxt.Test_parse_page_all_str("<syntaxHighlight>abc</syntaxHighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">abc</pre></div>");
 	}
 	@Test   public void Text() {
-		fxt.Test_parse_page_all_str("<syntaxHighlight lang=\"text\">abc</syntaxHighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">abc</pre></div>");
+		fxt.Test_parse_page_all_str("<syntaxHighlight lang=\"text\">abc</syntaxHighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\" class=\"prettyprint lang-text\">abc</pre></div>");
 	}
 	@Test   public void Style_pre() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight style=\"color:red;\">abc</syntaxHighlight>", "<div class=\"mw-highlight\" style=\"color:red;\"><pre style=\"overflow:auto\">abc</pre></div>");
 	}
 	@Test   public void Style_code() {
-		fxt.Test_parse_page_all_str("<syntaxHighlight lang=\"text\" style=\"color:red;\">abc</syntaxHighlight>", "<div class=\"mw-highlight\" style=\"color:red;\"><pre style=\"overflow:auto\">abc</pre></div>");
+		fxt.Test_parse_page_all_str("<syntaxHighlight lang=\"text\" style=\"color:red;\">abc</syntaxHighlight>", "<div class=\"mw-highlight\" style=\"color:red;\"><pre style=\"overflow:auto\" class=\"prettyprint lang-text\">abc</pre></div>");
 	}
 	@Test   public void Trim_ws() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl

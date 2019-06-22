@@ -27,7 +27,12 @@ class Synh_xtn_nde_ {
 			bfr.Add(Bry__div_bgn);
 			if (style != null) bfr.Add(Xoh_consts.Style_atr).Add(style).Add_byte(Byte_ascii.Quote);
 			bfr.Add_byte(Byte_ascii.Angle_end);
-			bfr.Add(Xoh_consts.Pre_bgn_overflow);
+			Gfh_tag_.Bld_lhs_bgn(bfr, Gfh_tag_.Id__pre);
+			Gfh_atr_.Add(bfr, Gfh_atr_.Bry__style, Bry__style__overflow__auto);
+			if (Bry_.Len_gt_0(lang)) {
+				Gfh_atr_.Add(bfr, Gfh_atr_.Bry__class, Bry_.Add(Bry__pretty_print, lang));
+			}
+			Gfh_tag_.Bld_lhs_end_nde(bfr);
 		}
 		int text_bgn = src_bgn;
 		int text_end = Bry_find_.Find_bwd_while(src, src_end, -1, Byte_ascii.Space) + 1; // trim space from end; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
@@ -70,6 +75,8 @@ class Synh_xtn_nde_ {
 	private static final    byte[] 
 	  Enclose_none = Bry_.new_a7("none")
 	, Style_line = Bry_.new_a7("-moz-user-select:none;"), Style_highlight = Bry_.new_a7("background-color: #FFFFCC;")
+	, Bry__style__overflow__auto = Bry_.new_a7("overflow:auto")
+	, Bry__pretty_print = Bry_.new_a7("prettyprint lang-")
 	, Bry__div_bgn = Bry_.new_a7("<div class=\"mw-highlight\"")
 	, Bry__code_bgn = Bry_.new_a7("<code class=\"mw-highlight\"")
 	;

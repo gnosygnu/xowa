@@ -279,6 +279,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	;
 	public static final    byte[] Rhs_bgn = Bry_.new_a7("</");
 	public static void Bld_lhs_bgn(Bry_bfr bfr, byte[] tag) {bfr.Add_byte(Byte_ascii.Lt).Add(tag);}						// <tag
+	public static void Bld_lhs_bgn(Bry_bfr bfr, int tag_id) {bfr.Add_byte(Byte_ascii.Lt).Add_str_a7(To_str(tag_id));}   // <tag
 	public static void Bld_lhs_end_nde(Bry_bfr bfr)			{bfr.Add_byte(Byte_ascii.Gt);}								// >
 	public static void Bld_lhs_end_inl(Bry_bfr bfr)			{bfr.Add_byte(Byte_ascii.Slash).Add_byte(Byte_ascii.Gt);}	// "/>"
 	public static void Bld_rhs(Bry_bfr bfr, byte[] name)	{bfr.Add(Rhs_bgn).Add(name).Add_byte(Byte_ascii.Angle_end);}	// EX:"</tag_name>"
