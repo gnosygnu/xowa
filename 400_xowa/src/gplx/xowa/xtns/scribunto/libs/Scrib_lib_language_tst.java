@@ -109,6 +109,9 @@ public class Scrib_lib_language_tst {
 	@Test   public void FormatDate__utc() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d", "+00000002010-05-01T00:00:00Z", false), "2010-05-01");		// handle Wikidata style dates; PAGE:en.w:Mountain_Province; DATE:2015-07-29
 	}
+	@Test   public void FormatDate__bce() {
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d", "+0065-12-08T00:00:00Z", false), "0065-12-08"); // ISSUE#:500
+	}
 	@Test  public void FormatDate_date_omitted() {	// PURPOSE: some calls skip the date; retrieve arg_4 by int; EX: pl.w:L._Frank_Baum
 		Datetime_now.Manual_y_();
 		Datetime_now.Manual_(DateAdp_.new_(2013, 12, 19, 1, 2, 3, 4));

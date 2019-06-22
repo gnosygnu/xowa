@@ -202,29 +202,45 @@ public class Scrib_lib_language implements Scrib_lib {
 		return rslt.Init_obj(rv);
 	}
 	public boolean FormatDate(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		// init args
 		Xol_lang_itm lang = lang_(args);
 		byte[] fmt_bry = args.Pull_bry(1);
-		byte[] date_bry = args.Cast_bry_or_empty(2);	// NOTE: optional empty is required b/c date is sometimes null; use Bry_.Empty b/c this is what Pft_func_time.ParseDate takes; DATE:2013-04-05
+		byte[] date_bry = args.Cast_bry_or_empty(2); // NOTE: optional empty is required b/c date is sometimes null; use Bry_.Empty b/c this is what Pft_func_time.ParseDate takes; DATE:2013-04-05
 		boolean utc = args.Cast_bool_or_n(3);
+
+		// init vars
+		int date_bry_len = date_bry.length;
+		Pft_fmt_itm[] fmt_ary = Pft_fmt_itm_.Parse(core.Ctx(), fmt_bry);
 		Xowe_wiki wiki = core.Wiki();
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
-		Pft_fmt_itm[] fmt_ary = Pft_fmt_itm_.Parse(core.Ctx(), fmt_bry);
+
+		// parse date
 		DateAdp date = null;
-		if (Bry_.Len_eq_0(date_bry))
+		if (Bry_.Len_eq_0(date_bry)) { // empty dates should be today
 			date = Datetime_now.Get();
-		else {				
-			if (date_bry[0] == Byte_ascii.Plus) {				// detect wikidata-style dates; EX: +00000002010-05-01T00:00:00Z; PAGE:en.w:Mountain_Province; DATE:2015-07-29
-				int date_bry_len = date_bry.length;
-				if (	date_bry[date_bry_len -  1] == Byte_ascii.Ltr_Z
-					&&	date_bry[date_bry_len - 10] == Byte_ascii.Ltr_T) {
-					int year_bgn = Bry_find_.Find_fwd_while(date_bry, 1, date_bry_len, Byte_ascii.Num_0);
-					date_bry = Bry_.Mid(date_bry, year_bgn);	// lop off beginning "+000000..."
+		}			
+		else {
+			// handle wikidata-style dates; EX: +00000002010-05-01T00:00:00Z; PAGE:en.w:Mountain_Province; DATE:2015-07-29; EX: +0065-12-08T00:00:00Z; {{#invoke:Wikidata|getDateValue|P569|FETCH_WIKIDATA|y|BCE}}; PAGE:en.w:Horace; DATE:2019-06-22
+			if      (  date_bry_len > 10
+					&& date_bry[0] == Byte_ascii.Plus
+					&& date_bry[date_bry_len -  1] == Byte_ascii.Ltr_Z
+					&& date_bry[date_bry_len - 10] == Byte_ascii.Ltr_T
+					) {
+				int dash_pos = Bry_find_.Find_fwd(date_bry, Byte_ascii.Dash);
+				if (dash_pos <= 0) { // handle dash as first char (dash_pos = 0) as well as no dash found (dash_pos = -1)
+					tmp_bfr.Mkr_rls();
+					return rslt.Init_fail("bad argument #2 to 'formatDate' (not a valid timestamp)");
 				}
+				date_bry = Bry_.Mid(date_bry, dash_pos - 4, date_bry.length); // take only 4 digits for years; lops off "+0000000" as well as "+"; FOOTNOTE:WIKIDATA_DATES
 			}
 			date = Pft_func_time.ParseDate(date_bry, utc, tmp_bfr);	// NOTE: not using java's datetime parse b/c it is more strict; not reconstructing PHP's datetime parse b/c it is very complicated (state machine); re-using MW's parser b/c it is inbetween; DATE:2015-07-29
 		}
-		if (date == null || tmp_bfr.Len() > 0) {tmp_bfr.Mkr_rls(); return rslt.Init_fail("bad argument #2 to 'formatDate' (not a valid timestamp)");}
+		if (date == null || tmp_bfr.Len() > 0) {
+			tmp_bfr.Mkr_rls();
+			return rslt.Init_fail("bad argument #2 to 'formatDate' (not a valid timestamp)");
+		}
 		
+		// format and return
 		wiki.Parser_mgr().Date_fmt_bldr().Format(tmp_bfr, wiki, lang, date, fmt_ary);
 		byte[] rv = tmp_bfr.To_bry_and_rls();
 		return rslt.Init_obj(rv);
@@ -279,3 +295,32 @@ public class Scrib_lib_language implements Scrib_lib {
 		return lang;
 	}
 }
+/*
+== FOOTNOTE:WIKIDATA_DATES ==
+
+The main problem is date-parsing:
+* MediaWiki uses PHP's date-parsing which is very lenient on inputs
+** "$dateObject = new DateTime( $date, $utc )"; REF:https://github.com/wikimedia/mediawiki-extensions-Scribunto/blob/master/includes/engines/LuaCommon/LanguageLibrary.php
+* Java's date-parsing is too strict and will reject many inputs
+* XOWA's date-parsing approximates PHP's but is not the same
+
+XOWA's date-parsing cannot handle wikidata-style dates: "+00000002010-05-01T00:00:00Z"
+* Note that MediaWiki's #time does not handle this style also
+** {{#time:Y-m-d|+00000002010-05-01T00:00:00Z}} -> Error: Invalid time.
+* Theoretically, #time also uses "new DateTime", so it may be worth investigating why MediaWiki fails for #time, but works for "new DateTime"
+
+Originally, XOWA had code to lop off "+" and the "0000000" to get "+2010-05-01T00:00:00Z"
+
+However, ISSUE#:500 showed that this would take "+0065-12-08T00:00:00Z", trim to "65-12-08", and then generate "2065-12-08" instead of "2016-12-08"
+* Note that this actually matches MediaWiki's #time
+* {{#time:Y-m-d|+0065-12-08T00:00:00Z}} -> 2065-12-08
+
+Instead, the new approach is to get the first dash_pos, and start the date_bry from dash_pos - 4 chars.
+* This would handle "+00000002010-" as well as "+0065-"
+
+This assumes that the date time String has:
+* a format of "4_digit_year-...", which should be valid since we're checking earlier for "T" and "Z" in the String
+* a length of at least 4, which will be valid since we're checking for length > 10
+* no negative sign at the start ("-0065-12-08T00:00:00Z") which will be valid, since we're checking for that earlier
+** Note that {{#time:Y-m-d|-0065-12-08T00:00:00Z}} generates "Error: #time only supports years from 0."
+*/
