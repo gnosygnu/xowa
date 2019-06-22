@@ -31,7 +31,7 @@ class Synh_xtn_nde_ {
 		}
 		int text_bgn = src_bgn;
 		int text_end = Bry_find_.Find_bwd_while(src, src_end, -1, Byte_ascii.Space) + 1; // trim space from end; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
-		if (line_enabled) {
+		if (line_enabled || highlight_idxs != Int_rng_mgr_null.Instance) { // NOTE: if "highlight" specified without "line" highlight_idxs will not be null instance; add '<span style="background-color: #FFFFCC;">' below; ISSUE#:498; DATE:2019-06-22
 			bfr.Add_byte_nl();
 			byte[][] lines = Bry_split_.Split_lines(Bry_.Mid(src, text_bgn, text_end));
 			int lines_len = lines.length;
@@ -40,7 +40,7 @@ class Synh_xtn_nde_ {
 			int digits_max = Int_.DigitCount(line_end);
 			for (int i = 0; i < lines_len; i++) {
 				byte[] line = lines[i]; if (i == 0 && Bry_.Len_eq_0(line)) continue;
-				if (line_enabled) {
+				if (line_enabled) { // add '<span style="-moz-user-select:none;">1 </span>' if "line" is enabled
 					bfr.Add(Xoh_consts.Span_bgn_open).Add(Xoh_consts.Style_atr).Add(Style_line).Add(Xoh_consts.__end_quote);
 					int pad = digits_max - Int_.DigitCount(line_idx);
 					if (pad > 0) bfr.Add_byte_repeat(Byte_ascii.Space, pad);
@@ -67,7 +67,7 @@ class Synh_xtn_nde_ {
 			bfr.Add(Gfh_bldr_.Bry__div_rhs);
 		}
 	}
-	private static final byte[] 
+	private static final    byte[] 
 	  Enclose_none = Bry_.new_a7("none")
 	, Style_line = Bry_.new_a7("-moz-user-select:none;"), Style_highlight = Bry_.new_a7("background-color: #FFFFCC;")
 	, Bry__div_bgn = Bry_.new_a7("<div class=\"mw-highlight\"")

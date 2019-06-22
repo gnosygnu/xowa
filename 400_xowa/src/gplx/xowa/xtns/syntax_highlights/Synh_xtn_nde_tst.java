@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.syntax_highlights; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Synh_xtn_nde_tst {
-	private final Xop_fxt fxt = new Xop_fxt();
+	private final    Xop_fxt fxt = new Xop_fxt();
 	@Test   public void Basic() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight>abc</syntaxHighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">abc</pre></div>");
 	}
@@ -78,6 +78,21 @@ public class Synh_xtn_nde_tst {
 		,	"<span style=\"-moz-user-select:none;\">1 </span><span style=\"background-color: #FFFFCC;\">a</span>"
 		,	"<span style=\"-moz-user-select:none;\">2 </span><span>b</span>"
 		,	"<span style=\"-moz-user-select:none;\">3 </span><span style=\"background-color: #FFFFCC;\">c</span>"
+		,	"</pre></div>"
+		));
+	}
+	@Test   public void Highlight_wo_line_arg() {
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
+		(	"<syntaxHighlight highlight='1,3'>"
+		,	"a"
+		,	"b"
+		,	"c"
+		,	"</syntaxHighlight>"
+		), String_.Concat_lines_nl
+		(	"<div class=\"mw-highlight\"><pre style=\"overflow:auto\">"
+		,	"<span style=\"background-color: #FFFFCC;\">a</span>"
+		,	"<span>b</span>"
+		,	"<span style=\"background-color: #FFFFCC;\">c</span>"
 		,	"</pre></div>"
 		));
 	}
