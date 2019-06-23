@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.stores.*;
-public class Srl__tst {
+public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 	@Before public void init() {fxt.Clear();} private Srl__fxt fxt = new Srl__fxt();
 	@Test   public void Label() {
 		fxt.Init_label("en", "Earth").Init_label("fr", "Terre").Init_label("de", "Erde");
@@ -328,7 +328,21 @@ public class Srl__tst {
 	}
 	@Test   public void Qualifiers() {
 		Wdata_wiki_mgr_fxt wdata_fxt = fxt.Wdata_fxt();
-		fxt.Init_prop(wdata_fxt.Make_claim_string(2, "Earth").Qualifiers_(wdata_fxt.Make_qualifiers(wdata_fxt.Make_qualifiers_grp(3, wdata_fxt.Make_claim_time(3, "2001-02-03 04:05:06")))));
+		fxt.Init_prop
+		(	wdata_fxt.Make_claim_string(2, "Earth")
+			.Qualifiers_
+			(	wdata_fxt.Make_qualifiers
+				(	wdata_fxt.Make_qualifiers_grp
+					(	3, wdata_fxt.Make_claim_time(3, "2001-02-03 04:05:06")
+					)
+				,	wdata_fxt.Make_qualifiers_grp
+					(	1, wdata_fxt.Make_claim_string(1, "val1")
+				)
+				)
+			)
+			.Qualifiers_order_(Int_ary_.New(3, 1))
+		)
+		;
 		fxt.Test
 		(	"claims:"
 		,	"  P2:"
@@ -358,6 +372,17 @@ public class Srl__tst {
 		,	"            property:'P3'"
 		,	"            snaktype:'value'"
 		,	"            datatype:'time'"
+		,	"        P1:"
+		,	"          1:"
+		,	"            datavalue:"
+		,	"              type:'string'"
+		,	"              value:'val1'"
+		,	"            property:'P1'"
+		,	"            snaktype:'value'"
+		,	"            datatype:'string'"
+		,	"      qualifiers-order:"
+		,	"        1:'P3'"
+		,	"        2:'P1'"
 		,	""
 		);
 	}
@@ -418,4 +443,9 @@ public class Srl__tst {
 		Keyval keyval = Keyval_find_.Find(true, visitor.Rv(), "value", "numeric-id");
 		Gftest.Eq__int(456, (int)keyval.Val());	// NOTE: must be 456 not "456"
 	}
-}	
+}
+/*
+FOOTNOTE:VIEWING_WIKIDATA_JSON
+* https://www.wikidata.org/w/api.php?action=wbgetentities&ids=q2
+* https://www.wikidata.org/wiki/Special:Export/Q2
+*/

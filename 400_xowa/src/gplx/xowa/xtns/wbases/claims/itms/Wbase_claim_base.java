@@ -34,7 +34,7 @@ public abstract class Wbase_claim_base implements CompareAble {
 	public Wbase_claim_base			Rank_tid_(byte v) {this.rank_tid = v; return this;} 
 	public void						Wguid_(byte[] v) {this.wguid = v;} 
 	public Wbase_claim_base			Qualifiers_(Wbase_claim_grp_list v) {qualifiers = v; return this;} 
-	public void						Qualifiers_order_(int[] v) {qualifiers_order = v;} 
+	public Wbase_claim_base         Qualifiers_order_(int[] v) {qualifiers_order = v; return this;} 
 	public void						References_(Wbase_references_grp[] v) {references = v;} 
 
 	public int compareTo(Object obj) {
