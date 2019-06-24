@@ -14,9 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
+import gplx.objects.strings.unicodes.*;
+import gplx.core.encoders.*;
 public class Json_doc_wtr {
 	private int indent = -2;
 	private Bry_bfr bfr = Bry_bfr_.Reset(255);
+	public void Opt_unicode_y_() {opt_unicode = true;} private boolean opt_unicode;
 	public Json_doc_wtr Indent() {return Indent(indent);}
 	private Json_doc_wtr Indent(int v) {if (v > 0) bfr.Add_byte_repeat(Byte_ascii.Space, v); return this;}
 	public Json_doc_wtr Indent_add() {indent += 2; return this;}
@@ -31,10 +34,58 @@ public class Json_doc_wtr {
 			bfr.Add(Object_.Bry__null);
 		else {
 			bfr.Add_byte(Byte_ascii.Quote);
-			bfr.Add_bry_escape(Byte_ascii.Quote, Escaped__quote, v, 0, v.length);
+			if (opt_unicode) {
+				Ustring ustr = Ustring_.New_codepoints(String_.new_u8(v));
+				int ustr_len = ustr.Len_in_data();
+				for (int i = 0; i < ustr_len; i++) {
+					int cp = ustr.Get_data(i);
+					Write_str_codepoint(bfr, cp);
+				}
+			}
+			else {
+				bfr.Add_bry_escape(Byte_ascii.Quote, Escaped__quote, v, 0, v.length);
+			}
 			bfr.Add_byte(Byte_ascii.Quote);
 		}
 		return this;
+	}
+	private void Write_str_codepoint(Bry_bfr bfr, int val) {
+		switch (val) { // REF: https://www.json.org/
+			case Byte_ascii.Quote:
+				bfr.Add_byte_backslash().Add_byte(Byte_ascii.Quote);
+				break;
+			case Byte_ascii.Backslash:
+				bfr.Add_byte_backslash().Add_byte(Byte_ascii.Backslash);
+				break;
+			case Byte_ascii.Backfeed:
+				bfr.Add_byte_backslash().Add_byte(Byte_ascii.Ltr_b);
+				break;
+			case Byte_ascii.Formfeed:
+				bfr.Add_byte_backslash().Add_byte(Byte_ascii.Ltr_f);
+				break;
+			case Byte_ascii.Nl:
+				bfr.Add_byte_backslash().Add_byte(Byte_ascii.Ltr_n);
+				break;
+			case Byte_ascii.Cr:
+				bfr.Add_byte_backslash().Add_byte(Byte_ascii.Ltr_r);
+				break;
+			case Byte_ascii.Tab:
+				bfr.Add_byte_backslash().Add_byte(Byte_ascii.Ltr_t);
+				break;
+			default:
+				if (   val < Byte_ascii.Space // control characters
+					|| val == 160  // nbsp
+					|| val == 8206 // left to right
+					|| val == 8207 // right to left
+					) {
+					// convert to \u1234
+					bfr.Add_byte_backslash().Add_byte(Byte_ascii.Ltr_u).Add_str_a7(Hex_utl_.To_str(val, 4));
+				}
+				else {
+					bfr.Add_u8_int(val);
+				}
+				break;
+		}
 	}
 	public Json_doc_wtr Int(int v) {bfr.Add_int_variable(v); return this;}
 	public Json_doc_wtr Double(double v) {bfr.Add_double(v); return this;}

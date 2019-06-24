@@ -73,6 +73,7 @@ class Language_names_converter {
 	}
 	public String To_json(Language_name[] ary) {
 		Json_doc_wtr doc_wtr = new Json_doc_wtr();
+		doc_wtr.Opt_unicode_y_();
 		doc_wtr.Ary_bgn();
 		int len = ary.length;
 		byte[] key_code = Bry_.new_a7("code");

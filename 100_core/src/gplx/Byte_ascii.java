@@ -17,7 +17,7 @@ package gplx;
 public class Byte_ascii {
 	public static final byte
 	      Null			=   0												 , Backfeed         =   8, Tab				=   9
-		, Nl			=  10, Formfeed			=  12, Cr				=  13
+		, Nl			=  10, Vertical_tab     =  11, Formfeed			=  12, Cr				=  13
 		,					   Escape			=  27
 													 , Space			=  32, Bang				=  33, Quote			=  34
 		, Hash			=  35, Dollar           =  36, Percent			=  37, Amp				=  38, Apos				=  39

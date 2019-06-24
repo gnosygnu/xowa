@@ -48,10 +48,10 @@ public class Php_parser_tst {
 	@Test  public void Ary_flat()			{fxt.tst_lines("$a = array('b', 'c', 'd');"	, fxt.line_assign("a", fxt.itm_ary().Subs_(fxt.itm_quote("b"), fxt.itm_quote("c"), fxt.itm_quote("d"))));}
 	@Test  public void Brack_flat()			{fxt.tst_lines("$a = ['b', 'c', 'd'];"		, fxt.line_assign("a", fxt.itm_ary().Subs_(fxt.itm_quote("b"), fxt.itm_quote("c"), fxt.itm_quote("d"))));}
 	@Test  public void Ary_flat_escape() {	// PURPOSE.fix: \\' was being interpreted incorrectly; \\ should escape \, but somehow \' was being escaped
-		fxt.tst_lines("$a = array('b\\\\', 'c');", fxt.line_assign("a", fxt.itm_ary().Subs_(fxt.itm_quote("b\\\\"), fxt.itm_quote("c"))));
+		fxt.tst_lines("$a = array('b\\\\', 'c');", fxt.line_assign("a", fxt.itm_ary().Subs_(fxt.itm_quote("b\\"), fxt.itm_quote("c"))));
 	}
 	@Test  public void Ary_flat_escape2() {	// PURPOSE.fix: \\' was being interpreted incorrectly; \\ should escape \, but somehow \' was being escaped
-		fxt.tst_lines("$a = array('b\\\\\\'c', 'd');", fxt.line_assign("a", fxt.itm_ary().Subs_(fxt.itm_quote("b\\\\\\'c"), fxt.itm_quote("d"))));
+		fxt.tst_lines("$a = array('b\\\\\\'c', 'd');", fxt.line_assign("a", fxt.itm_ary().Subs_(fxt.itm_quote("b\\'c"), fxt.itm_quote("d"))));
 	}
 	@Test  public void Ary_kv()				{fxt.tst_lines("$a = array(k0 => 'v0', k1 => 'v1', k2 => 'v2');", fxt.line_assign("a", fxt.itm_ary().Subs_(fxt.itm_kv_quote("k0", "v0"), fxt.itm_kv_quote("k1", "v1"), fxt.itm_kv_quote("k2", "v2"))));}
 	@Test  public void Brack_kv()			{fxt.tst_lines("$a = [k0 => 'v0', k1 => 'v1', k2 => 'v2'];"		, fxt.line_assign("a", fxt.itm_ary().Subs_(fxt.itm_kv_quote("k0", "v0"), fxt.itm_kv_quote("k1", "v1"), fxt.itm_kv_quote("k2", "v2"))));}
@@ -78,5 +78,27 @@ public class Php_parser_tst {
 				,		fxt.itm_kv_itm("i10", fxt.itm_ary().Subs_(fxt.itm_quote("11"), fxt.itm_quote("12")))
 				,		fxt.itm_kv_itm("i20", fxt.itm_ary().Subs_(fxt.itm_quote("21"), fxt.itm_quote("22")))
 				)));
+	}
+	@Test  public void Quoted() {
+		fxt.Test__string__quotes("a\\\"z"                    , "a\"z");
+		fxt.Test__string__quotes("a\\\\z"                    , "a\\z");
+		fxt.Test__string__quotes("a\\u0008z"                 , "a\bz");
+		fxt.Test__string__quotes("a\\fz"                     , "a\fz");
+		fxt.Test__string__quotes("a\\nz"                     , "a\nz");
+		fxt.Test__string__quotes("a\\rz"                     , "a\rz");
+		fxt.Test__string__quotes("a\\tz"                     , "a\tz");
+		fxt.Test__string__quotes("a\\vz"                     , "a\u000bz");
+		fxt.Test__string__quotes("a\\ez"                     , "a\u001bz");
+		fxt.Test__string__quotes("a\\$z"                     , "a$z");
+		fxt.Test__string__quotes("a\\7z"                     , "a\u0007z");
+		fxt.Test__string__quotes("a\\41z"                    , "a!z");
+		fxt.Test__string__quotes("a\\111z"                   , "aIz");
+		fxt.Test__string__quotes("a\\x9z"                    , "a\tz");
+		fxt.Test__string__quotes("a\\x21z"                   , "a!z");
+		fxt.Test__string__quotes("a\\xE2\\x80\\x8Ez"         , "a\u200Ez");
+		fxt.Test__string__quotes("a\\u9z"                    , "a\tz");
+		fxt.Test__string__quotes("a\\u21z"                   , "a!z");
+		fxt.Test__string__quotes("a\\u113z"                  , "aēz");
+		fxt.Test__string__quotes("a\\u{0008}z"               , "a\bz");
 	}
 }

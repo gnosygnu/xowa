@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+import gplx.core.encoders.*;
 public abstract class Php_tkn_base implements Php_tkn {
 	public abstract byte Tkn_tid();
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
@@ -48,7 +49,9 @@ class Php_tkn_quote extends Php_tkn_base {
 	public Php_tkn_quote(int src_bgn, int src_end, byte quote_tid) {this.Src_rng_(src_bgn, src_end); this.quote_tid = quote_tid;}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_quote;}
 	public byte Quote_tid() {return quote_tid;} private byte quote_tid;
-	public byte[] Quote_text(byte[] src) {return Bry_.Mid(src, this.Src_bgn() + 1, this.Src_end() - 1);}	// NOTE: assume quote are of form 'abc'; +1, -1 to skip flanking chars
+	public byte[] Quote_text(Php_quote_parser quote_parser, byte[] src) {
+		return quote_parser.Parse(src, this.Src_bgn() + 1, this.Src_end() - 1);
+	}
 	public static final    byte Tid_null = 0, Tid_mult = 1, Tid_slash = 2, Tid_hash = 3;
 }
 class Php_tkn_declaration extends Php_tkn_base {

@@ -25,7 +25,11 @@ public class Php_evaluator implements Php_tkn_wkr {
 	private byte mode = Mode_key_bgn, next_tid = 0, next_mode = 0;
 	private Php_line_assign cur_line; private Php_itm_ary cur_ary; private Php_key cur_kv_key;
 	private final    List_adp frame_stack = List_adp_.New();
-	public Php_evaluator(Gfo_msg_log msg_log) {this.msg_log = msg_log;} private Gfo_msg_log msg_log;
+	private final    Php_quote_parser quote_parser = new Php_quote_parser();
+	private final    Gfo_msg_log msg_log;
+	public Php_evaluator(Gfo_msg_log msg_log) {
+		this.msg_log = msg_log;
+	}
 	public void Init(Php_ctx ctx) {src = ctx.Src(); frame_stack.Clear();} private byte[] src;
 	public List_adp List() {return lines;} private final    List_adp lines = List_adp_.New();
 	public Gfo_msg_log Msg_log() {return msg_log;}
@@ -101,7 +105,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 				switch (tkn_tid) {
 					case Php_tkn_.Tid_quote:
 						Php_tkn_quote tkn_quote = (Php_tkn_quote)tkn; 
-						Php_itm_quote key_sub = new Php_itm_quote(tkn_quote.Quote_text(src));
+						Php_itm_quote key_sub = new Php_itm_quote(tkn_quote.Quote_text(quote_parser, src));
 						cur_line.Key_subs_(new Php_key[] {key_sub});
 						mode = Mode_key_end;
 						break;
@@ -121,7 +125,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 					case Php_tkn_.Tid_quote:
 						Expect(Php_tkn_.Tid_semic, Mode_key_bgn);
 						Php_tkn_quote tkn_quote = (Php_tkn_quote)tkn; 
-						line_val = new Php_itm_quote(tkn_quote.Quote_text(src));
+						line_val = new Php_itm_quote(tkn_quote.Quote_text(quote_parser, src));
 						break;
 					case Php_tkn_.Tid_ary:
 					case Php_tkn_.Tid_brack_bgn:
@@ -161,7 +165,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 					case Php_tkn_.Tid_true:		Ary_add_itm(Php_itm_bool_true.Instance); break;
 					case Php_tkn_.Tid_quote:
 						Php_tkn_quote tkn_quote = (Php_tkn_quote)tkn;
-						Ary_add_itm(new Php_itm_quote(tkn_quote.Quote_text(src)));
+						Ary_add_itm(new Php_itm_quote(tkn_quote.Quote_text(quote_parser, src)));
 						break;
 					case Php_tkn_.Tid_num:
 						Php_tkn_num tkn_num = (Php_tkn_num)tkn;

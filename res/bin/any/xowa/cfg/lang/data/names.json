@@ -241,13 +241,13 @@
 ,
   {
     "code":"be-tarask"
-  , "name":"беларуская (тарашкевіца)\xE2\x80\x8E"
+  , "name":"беларуская (тарашкевіца)\u200E"
   , "note":"Belarusian in Taraskievica orthography"
   }
 ,
   {
     "code":"be-x-old"
-  , "name":"беларуская (тарашкевіца)\xE2\x80\x8E"
+  , "name":"беларуская (тарашкевіца)\u200E"
   , "note":"(be-tarask compat)"
   }
 ,
@@ -439,13 +439,13 @@
 ,
   {
     "code":"crh-latn"
-  , "name":"qırımtatarca (Latin)\xE2\x80\x8E"
+  , "name":"qırımtatarca (Latin)\u200E"
   , "note":"Crimean Tatar (Latin)"
   }
 ,
   {
     "code":"crh-cyrl"
-  , "name":"къырымтатарджа (Кирилл)\xE2\x80\x8E"
+  , "name":"къырымтатарджа (Кирилл)\u200E"
   , "note":"Crimean Tatar (Cyrillic)"
   }
 ,
@@ -505,7 +505,7 @@
 ,
   {
     "code":"de-formal"
-  , "name":"Deutsch (Sie-Form)\xE2\x80\x8E"
+  , "name":"Deutsch (Sie-Form)\u200E"
   , "note":"German - formal address (\"Sie\")"
   }
 ,
@@ -715,13 +715,13 @@
 ,
   {
     "code":"gan-hans"
-  , "name":"赣语（简体）\xE2\x80\x8E"
+  , "name":"赣语（简体）\u200E"
   , "note":"Gan (Simplified Han)"
   }
 ,
   {
     "code":"gan-hant"
-  , "name":"贛語（繁體）\xE2\x80\x8E"
+  , "name":"贛語（繁體）\u200E"
   , "note":"Gan (Traditional Han)"
   }
 ,
@@ -1081,37 +1081,37 @@
 ,
   {
     "code":"kk-arab"
-  , "name":"قازاقشا (تٴوتە)\xE2\x80\x8F"
+  , "name":"قازاقشا (تٴوتە)\u200F"
   , "note":"Kazakh Arabic"
   }
 ,
   {
     "code":"kk-cyrl"
-  , "name":"қазақша (кирил)\xE2\x80\x8E"
+  , "name":"қазақша (кирил)\u200E"
   , "note":"Kazakh Cyrillic"
   }
 ,
   {
     "code":"kk-latn"
-  , "name":"qazaqşa (latın)\xE2\x80\x8E"
+  , "name":"qazaqşa (latın)\u200E"
   , "note":"Kazakh Latin"
   }
 ,
   {
     "code":"kk-cn"
-  , "name":"قازاقشا (جۇنگو)\xE2\x80\x8F"
+  , "name":"قازاقشا (جۇنگو)\u200F"
   , "note":"Kazakh (China)"
   }
 ,
   {
     "code":"kk-kz"
-  , "name":"қазақша (Қазақстан)\xE2\x80\x8E"
+  , "name":"қазақша (Қазақстан)\u200E"
   , "note":"Kazakh (Kazakhstan)"
   }
 ,
   {
     "code":"kk-tr"
-  , "name":"qazaqşa (Türkïya)\xE2\x80\x8E"
+  , "name":"qazaqşa (Türkïya)\u200E"
   , "note":"Kazakh (Turkey)"
   }
 ,
@@ -1213,13 +1213,13 @@
 ,
   {
     "code":"ku-latn"
-  , "name":"Kurdî (latînî)\xE2\x80\x8E"
+  , "name":"Kurdî (latînî)\u200E"
   , "note":"Northern Kurdish (Latin script)"
   }
 ,
   {
     "code":"ku-arab"
-  , "name":"كوردي (عەرەبی)\xE2\x80\x8F"
+  , "name":"كوردي (عەرەبی)\u200F"
   , "note":"Northern Kurdish (Arabic script) (falls back to ckb)"
   }
 ,
@@ -1303,7 +1303,7 @@
 ,
   {
     "code":"lki"
-  , "name":"لەکی‎"
+  , "name":"لەکی\u200E"
   , "note":"Laki"
   }
 ,
@@ -1579,7 +1579,7 @@
 ,
   {
     "code":"nl-informal"
-  , "name":"Nederlands (informeel)\xE2\x80\x8E"
+  , "name":"Nederlands (informeel)\u200E"
   , "note":"Dutch (informal address (\"je\"))"
   }
 ,
@@ -2047,13 +2047,13 @@
 ,
   {
     "code":"sr-ec"
-  , "name":"српски (ћирилица)\xE2\x80\x8E"
+  , "name":"српски (ћирилица)\u200E"
   , "note":"Serbian Cyrillic ekavian"
   }
 ,
   {
     "code":"sr-el"
-  , "name":"srpski (latinica)\xE2\x80\x8E"
+  , "name":"srpski (latinica)\u200E"
   , "note":"Serbian Latin ekavian"
   }
 ,
@@ -2461,25 +2461,25 @@
 ,
   {
     "code":"zh-cn"
-  , "name":"中文（中国大陆）\xE2\x80\x8E"
+  , "name":"中文（中国大陆）\u200E"
   , "note":"Chinese (PRC)"
   }
 ,
   {
     "code":"zh-hans"
-  , "name":"中文（简体）\xE2\x80\x8E"
+  , "name":"中文（简体）\u200E"
   , "note":"Mandarin Chinese (Simplified Chinese script) (cmn-hans)"
   }
 ,
   {
     "code":"zh-hant"
-  , "name":"中文（繁體）\xE2\x80\x8E"
+  , "name":"中文（繁體）\u200E"
   , "note":"Mandarin Chinese (Traditional Chinese script) (cmn-hant)"
   }
 ,
   {
     "code":"zh-hk"
-  , "name":"中文（香港）\xE2\x80\x8E"
+  , "name":"中文（香港）\u200E"
   , "note":"Chinese (Hong Kong)"
   }
 ,
@@ -2491,25 +2491,25 @@
 ,
   {
     "code":"zh-mo"
-  , "name":"中文（澳門）\xE2\x80\x8E"
+  , "name":"中文（澳門）\u200E"
   , "note":"Chinese (Macau)"
   }
 ,
   {
     "code":"zh-my"
-  , "name":"中文（马来西亚）\xE2\x80\x8E"
+  , "name":"中文（马来西亚）\u200E"
   , "note":"Chinese (Malaysia)"
   }
 ,
   {
     "code":"zh-sg"
-  , "name":"中文（新加坡）\xE2\x80\x8E"
+  , "name":"中文（新加坡）\u200E"
   , "note":"Chinese (Singapore)"
   }
 ,
   {
     "code":"zh-tw"
-  , "name":"中文（台灣）\xE2\x80\x8E"
+  , "name":"中文（台灣）\u200E"
   , "note":"Chinese (Taiwan)"
   }
 ,

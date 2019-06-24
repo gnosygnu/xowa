@@ -25,6 +25,19 @@ public class Json_doc_wtr_tst {
 		, "  'k1':'v\\\"1'"
 		, "}"));
 	}
+	@Test  public void Quotes() {
+		fxt.Test__string__quotes("a\"z"                      , "a\\\"z");
+		fxt.Test__string__quotes("a\u0008z"                  , "a\\bz");
+		fxt.Test__string__quotes("a\fz"                      , "a\\fz");
+		fxt.Test__string__quotes("a\nz"                      , "a\\nz");
+		fxt.Test__string__quotes("a\rz"                      , "a\\rz");
+		fxt.Test__string__quotes("a\tz"                      , "a\\tz");
+		fxt.Test__string__quotes("aēz"                       , "aēz");
+		fxt.Test__string__quotes("az"                       , "a\\u000Fz");
+		fxt.Test__string__quotes("a z"                       , "a\\u00A0z");
+		fxt.Test__string__quotes("a‎z"                       , "a\\u200Ez");
+		fxt.Test__string__quotes("a‏z"                       , "a\\u200Fz");
+	}
 }
 class Json_doc_wtr_fxt {
 	public Json_doc_wtr Exec__Kv_simple(String key, String val) {
@@ -39,5 +52,13 @@ class Json_doc_wtr_fxt {
 	}
 	public String Exec__Concat_apos(String... ary) {
 		return Json_doc.Make_str_by_apos(ary);
+	}
+	public void Test__string__quotes(String raw, String expd) {
+		Json_doc_wtr doc_wtr = new Json_doc_wtr();
+		doc_wtr.Opt_unicode_y_();
+		doc_wtr.Str(Bry_.new_u8(raw));
+		String actl = doc_wtr.Bld_as_str();
+		actl = String_.Mid(actl, 1, String_.Len(actl) - 1);
+		Gftest.Eq__str(expd, actl);
 	}
 }

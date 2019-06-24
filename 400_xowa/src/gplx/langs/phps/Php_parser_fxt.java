@@ -67,6 +67,15 @@ class Php_parser_fxt {
 		tst_mgr.Tst_ary("", expd, actl);
 		log_mgr_chkr.tst(tst_mgr, line_wkr.Msg_log());
 	}
+	public void Test__string__quotes(String raw, String expd) {
+		line_wkr.Clear();
+		byte[] raw_bry = Bry_.new_u8("$var =\"" + raw +"\";");
+		parser.Parse_tkns(raw_bry, line_wkr);
+		Php_line[] actl_lines = (Php_line[])line_wkr.List().To_ary(Php_line.class);
+		Php_line_assign actl_line = (Php_line_assign)actl_lines[0];
+		Php_itm_quote actl = (Php_itm_quote)actl_line.Val();
+		Tfds.Eq_str(expd, String_.new_u8(actl.Val_obj_bry()));
+	}
 }
 abstract class Php_tkn_chkr_base implements Tst_chkr {
 	public abstract byte Tkn_tid();
