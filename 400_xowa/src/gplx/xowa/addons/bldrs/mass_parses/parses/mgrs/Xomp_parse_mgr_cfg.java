@@ -42,7 +42,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 	public long		Wbase_cache_mru_size()			{return wbase_cache_mru_size;}			private long wbase_cache_mru_size = 100;
 	public long		Wbase_cache_mru_weight()		{return wbase_cache_mru_weight;}		private long wbase_cache_mru_weight = 10;
 	public long		Wbase_cache_mru_compress_size()	{return wbase_cache_mru_compress_size;}	private long wbase_cache_mru_compress_size = 70;
-	public long     Page_cache_max()                {return page_cache_max;}                private long page_cache_max = 8 * (long)Io_mgr.Len_gb;
+	public long     Page_cache_max()                {return page_cache_max;}                private long page_cache_max = 2 * (long)Io_mgr.Len_gb;
 	public void Init(Xowe_wiki wiki) {
 		if (num_wkrs == -1)				num_wkrs = gplx.core.envs.Runtime_.Cpu_count();
 		if (num_pages_in_pool == -1)	num_pages_in_pool = num_wkrs * 1000;
@@ -77,7 +77,7 @@ public class Xomp_parse_mgr_cfg implements Gfo_invk {
 		else if	(ctx.Match(k, "wbase_cache_mru_size_"))				wbase_cache_mru_size = m.ReadLong("v");
 		else if	(ctx.Match(k, "wbase_cache_mru_weight_"))			wbase_cache_mru_weight = m.ReadLong("v");
 		else if	(ctx.Match(k, "wbase_cache_mru_compress_size_"))	wbase_cache_mru_compress_size = m.ReadLong("v");
-		else if	(ctx.Match(k, "page_cache_max_"))                   page_cache_max = m.ReadLong("v");
+		else if	(ctx.Match(k, "page_cache_max_"))                   page_cache_max = gplx.core.ios.Io_size_.parse_or(m.ReadStr("v"), page_cache_max);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}

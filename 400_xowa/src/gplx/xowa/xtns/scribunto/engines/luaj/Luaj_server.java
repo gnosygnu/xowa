@@ -20,6 +20,7 @@ import gplx.xowa.xtns.scribunto.engines.process.*;
 public class Luaj_server implements Scrib_server {
 	private final Luaj_server_func_recv func_recv;
 	private final Luaj_server_func_dbg func_dbg;
+	private String[] init_args;
 	private LuaTable server;
 	public Luaj_server(Luaj_server_func_recv func_recv, Luaj_server_func_dbg func_dbg) {
 		this.func_recv = func_recv;
@@ -27,7 +28,9 @@ public class Luaj_server implements Scrib_server {
 	}
 	public Globals Luaj_globals() {return luaj_globals;} private Globals luaj_globals;
 	public DebugLib Luaj_dbg() {return luaj_dbg;} private DebugLib luaj_dbg;
+	private LuaValue main_fil_val;
 	public void Init(String... init_args) {
+		this.init_args = init_args;
 		luaj_dbg = new DebugLib();	// NOTE: needed for getfenv
 		luaj_globals = JsePlatform.standardGlobals();
 		luaj_globals.load(luaj_dbg);
@@ -36,7 +39,7 @@ public class Luaj_server implements Scrib_server {
 		String root_str = init_args[2];
 		if (Op_sys.Cur().Tid_is_wnt())
 			root_str = String_.Replace(root_str, Op_sys.Wnt.Fsys_dir_spr_str(), Op_sys.Lnx.Fsys_dir_spr_str());
-		LuaValue main_fil_val = LuaValue.valueOf(root_str + "engines/Luaj/mw_main.lua");
+		this.main_fil_val = LuaValue.valueOf(root_str + "engines/Luaj/mw_main.lua");
 		LuaValue package_val = luaj_globals.get("package");
 		package_val.rawset("path", LuaValue.valueOf(root_str + "engines/Luaj/?.lua;" + root_str + "engines/LuaCommon/lualib/?.lua"));
 		server = (LuaTable)luaj_globals.get("dofile").call(main_fil_val);
@@ -64,7 +67,7 @@ public class Luaj_server implements Scrib_server {
 	public byte[] Server_comm(byte[] cmd, Object[] cmd_objs) {return Bry_.Empty;}
 	public void Server_send(byte[] cmd, Object[] cmd_objs) {}
 	public byte[] Server_recv() {return Bry_.Empty;}
-	public void Term() {}	
+	public void Term() {this.Init(init_args);}
 	private static final LuaValue
 	  Val_server_recv 		= LuaValue.valueOf("server_recv")
 	, Val_xchunks			= LuaValue.valueOf("xchunks")
