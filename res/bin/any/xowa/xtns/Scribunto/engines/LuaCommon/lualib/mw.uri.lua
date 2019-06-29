@@ -1,3 +1,4 @@
+-- SYNC:2019-06-29;https://github.com/wikimedia/mediawiki-extensions-Scribunto/blob/master/includes/engines/LuaCommon/lualib/mw.uri.lua
 local uri = {}
 local urifuncs = {}
 local urimt = {}
@@ -36,6 +37,17 @@ local function rawencode( s, space )
 	return ret
 end
 
+local function wikiencode( s )
+	local ret = string.gsub( s, '([^a-zA-Z0-9!$()*,./:;@~_-])', function ( c )
+		if c == ' ' then
+			return '_'
+		else
+			return string.format( '%%%02X', string.byte( c, 1, 1 ) )
+		end
+	end );
+	return ret
+end
+
 local function rawdecode( s )
 	local ret = string.gsub( s, '%%(%x%x)', function ( hex )
 		return string.char( tonumber( hex, 16 ) )
@@ -52,7 +64,7 @@ function uri.encode( s, enctype )
 	elseif enctype == 'PATH' then
 		return rawencode( s, '%20' )
 	elseif enctype == 'WIKI' then
-		return rawencode( s, '_' )
+		return wikiencode( s )
 	else
 		error( "bad argument #2 to 'encode' (expected QUERY, PATH, or WIKI)", 2 )
 	end
@@ -181,7 +193,12 @@ function uri.validate( obj )
 	if obj.host then
 		if type( obj.host ) ~= 'string' then
 			err[#err+1] = '.host must be a string, not ' .. type( obj.host )
-		elseif not string.match( obj.host, '^[^:/?#]*$' ) then
+		elseif not (
+			-- Normal syntax
+			string.match( obj.host, '^[^:/?#]*$' ) or
+			-- IP-literal syntax
+			string.match( obj.host, '^%[[^/?#%[%]@]+%]$' )
+		) then
 			err[#err+1] = 'invalid .host'
 		end
 	end
@@ -290,7 +307,7 @@ function uri.parseQueryString( s, i, j )
 			v = rawdecode( string.sub( s, eq + 1, amp - 1 ) )
 		end
 		if qs[k] then
-			if type( qs[k] ) ~= table then
+			if type( qs[k] ) ~= 'table' then
 				qs[k] = { qs[k], v }
 			else
 				table.insert( qs[k], v )
@@ -440,15 +457,27 @@ function urimt:__newindex( key, value )
 		local host, port = nil, nil
 		if value then
 			checkTypeForIndex( key, value, 'string' )
-			local i = string.find( value, ':', 1, true )
-			if i then
-				host = string.sub( value, 1, i - 1 )
-				port = tonumber( string.sub( value, i + 1 ) )
-				if not port then
-					error( string.format( "Invalid port in '%s'", value ), 2 )
+
+			-- IP-literal syntax, with and without a port
+			host, port = string.match( value, '^(%[[^/?#%[%]@]+%]):(%d+)$' )
+			if port then
+				port = tonumber( port )
+			end
+			if not host then
+				host = string.match( value, '^(%[[^/?#%[%]@]+%])$' )
+			end
+			-- Normal syntax
+			if not host then
+				local i = string.find( value, ':', 1, true )
+				if i then
+					host = string.sub( value, 1, i - 1 )
+					port = tonumber( string.sub( value, i + 1 ) )
+					if not port then
+						error( string.format( "Invalid port in '%s'", value ), 2 )
+					end
+				else
+					host = value
 				end
-			else
-				host = value
 			end
 		end
 		rawset( self, 'host', host )
