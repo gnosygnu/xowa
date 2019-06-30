@@ -82,16 +82,13 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		if (plain) {
 			// find pos by literal match
 			Ustring find_ucs = Ustring_.New_codepoints(find_str);
-			int pos = String_.FindFwd(text_str, find_str, bgn_as_codes);
+			int pos = text_ucs.Index_of(find_ucs, bgn_as_codes);
 
 			// if nothing found, return empty
 			if (pos == String_.Find_none)
 				return rslt.Init_ary_empty();
-			// else, convert char_idx to code_idx
-			else
-				pos = text_ucs.Map_char_to_data(pos);
 
-			// bgn: convert pos from bytes back to codes; also adjust for base1
+			// bgn: adjust for base1
 			int bgn = pos + Base1;
 
 			// end: add find.Len_in_codes and adjust end for PHP/LUA

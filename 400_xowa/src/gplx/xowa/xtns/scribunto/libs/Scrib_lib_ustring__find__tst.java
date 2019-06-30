@@ -28,6 +28,9 @@ public class Scrib_lib_ustring__find__tst {
 		fxt.Test__find("abcd"          , ""     ,  2, Bool_.Y, "2;1"); // empty find should return values; EX:w:Fool's_mate; DATE:2014-03-04
 		fxt.Test__find("a€b"           , "€"    ,  1, Bool_.Y, "2;2"); // find is bytes=3
 	}
+	@Test   public void Plain_u8() {
+		fxt.Test__find("𤭢-a-"         , "-"    ,  3, Bool_.Y, "4;4"); // starts at cp=3 which should be a, not 1st dash; ISSUE#:506; DATE:2019-06-30
+	}
 	@Test   public void Bgn__negative() {
 		fxt.Test__find("abab"          , "b"    , -1, Bool_.Y, "4;4"); // search from back of String
 		fxt.Test__find("abab"          , "b"    , -9, Bool_.Y, "2;2"); // do not throw error if negative index > text.length; ISSUE#:366; DATE:2019-02-23
