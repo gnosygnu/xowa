@@ -20,8 +20,9 @@ public class Xot_invk_temp implements Xot_invk {
 	private List_adp     list;
 	private Hash_adp_bry arg_key_hash;
 	private Hash_adp     arg_idx_hash; private Int_obj_ref arg_idx_ref;
-	Xot_invk_temp(boolean root_frame, byte defn_tid, Arg_nde_tkn name_tkn, byte[] src, int src_bgn, int src_end) {
+	Xot_invk_temp(boolean root_frame, byte defn_tid, byte[] frame_ttl, Arg_nde_tkn name_tkn, byte[] src, int src_bgn, int src_end) {
 		this.root_frame = root_frame;
+		this.frame_ttl = frame_ttl;
 		this.defn_tid = defn_tid;
 		this.name_tkn = name_tkn;
 		this.src = src; this.src_bgn = src_bgn; this.src_end = src_end;
@@ -68,14 +69,14 @@ public class Xot_invk_temp implements Xot_invk {
 
 	public static final    Xot_invk Null_frame = null;
 
-	public static Xot_invk_temp New_root_w_src(byte[] src) {
-		return new Xot_invk_temp(true, Xot_defn_.Tid_page, null, src, 0, src.length);
+	public static Xot_invk_temp New_root_w_src(byte[] frame_ttl, byte[] src) {
+		return new Xot_invk_temp(true, Xot_defn_.Tid_page, frame_ttl, null, src, 0, src.length);
 	}
-	public static Xot_invk_temp New_root() {
-		return new Xot_invk_temp(true, Xot_defn_.Tid_page, null, null, -1, -1);
+	public static Xot_invk_temp New_root(byte[] frame_ttl) {
+		return new Xot_invk_temp(true, Xot_defn_.Tid_page, frame_ttl, null, null, -1, -1);
 	}
-	public static Xot_invk_temp New(byte defn_tid, Arg_nde_tkn name_tkn, byte[] src, int src_bgn, int src_end) {
-		return new Xot_invk_temp(false, defn_tid, name_tkn, src, src_bgn, src_end);
+	public static Xot_invk_temp New(byte defn_tid, byte[] frame_ttl, Arg_nde_tkn name_tkn, byte[] src, int src_bgn, int src_end) {
+		return new Xot_invk_temp(false, defn_tid, frame_ttl, name_tkn, src, src_bgn, src_end);
 	}
 }
 /*

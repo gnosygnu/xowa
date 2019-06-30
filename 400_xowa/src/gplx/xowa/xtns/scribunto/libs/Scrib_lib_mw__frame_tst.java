@@ -45,4 +45,8 @@ public class Scrib_lib_mw__frame_tst {
 		fxt.Test__parse__tmpl_to_html("{{#invoke:Mod_1|Get_frame_title_parent}}", "Test page");
 		fxt.Test__parse__tmpl_to_html("{{#invoke:Mod_1|Get_frame_title_current}}", "Module:Mod 1");
 	}
+	@Test  public void GetFrameTitle__onlyinclude() {
+		fxt.Test__parse__tmpl_to_html("<onlyinclude>{{#invoke:Mod_1|Get_frame_title_parent}}</onlyinclude>", "Test page");
+		fxt.Test__parse__tmpl_to_html("<onlyinclude>{{#invoke:Mod_1|Get_frame_title_current}}</onlyinclude>", "Module:Mod 1");
+	}
 }

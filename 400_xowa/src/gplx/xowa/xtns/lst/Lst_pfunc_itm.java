@@ -46,7 +46,7 @@ public class Lst_pfunc_itm {
 			// eval tmpl
 			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 			try {
-				tmpl.Tmpl_evaluate(sub_ctx, Xot_invk_temp.New_root(), tmp_bfr);
+				tmpl.Tmpl_evaluate(sub_ctx, Xot_invk_temp.New_root(ttl.Page_txt()), tmp_bfr);
 				sub_src = tmp_bfr.To_bry_and_clear();
 			} finally {
 				tmp_bfr.Mkr_rls();

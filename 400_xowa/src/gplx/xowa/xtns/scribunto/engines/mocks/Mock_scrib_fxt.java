@@ -31,7 +31,7 @@ public class Mock_scrib_fxt {
 		core = wiki.Parser_mgr().Scrib().Core_init(wiki.Parser_mgr().Ctx());
 		core.Engine_(engine); engine.Clear();
 		core.Interpreter().Server_(server);
-		Xot_invk parent_frame = Xot_invk_temp.New_root(); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 
+		Xot_invk parent_frame = Xot_invk_temp.New_root(parser_fxt.Page().Ttl().Page_txt()); parent_frame.Frame_tid_(Scrib_frame_.Tid_null); 
 		Xot_invk current_frame = Xot_invk_mock.test_(Bry_.new_a7("Module:Mod_0"));
 		core.Invoke_init(core.Wiki(), core.Ctx(), Bry_.Empty, parent_frame, current_frame);
 		core.When_page_changed(parser_fxt.Page());

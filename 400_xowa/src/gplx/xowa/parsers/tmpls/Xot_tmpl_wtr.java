@@ -53,7 +53,7 @@ public class Xot_tmpl_wtr {
 						// NOTE: originally "if (ctx.Parse_tid() == Xop_parser_tid_.Tid__tmpl) {" but if not needed; Xot_tmpl_wtr should not be called for tmpls and <oi> should not make it to page_wiki
 						Bry_bfr tmp_bfr = Bry_bfr_.New();
 						ctx.Only_include_evaluate_(true);
-						xnde.Tmpl_evaluate(ctx, src, Xot_invk_temp.New_root(), tmp_bfr);
+						xnde.Tmpl_evaluate(ctx, src, Xot_invk_temp.New_root(ctx.Page().Ttl().Page_txt()), tmp_bfr);
 						ctx.Only_include_evaluate_(false);
 						rslt_bfr.Add_bfr_and_preserve(tmp_bfr);
 						break;
@@ -89,7 +89,7 @@ public class Xot_tmpl_wtr {
 				rslt_bfr.Add_mid(src, tkn.Src_bgn(), tkn.Src_end()); break;			// write src from bgn/end
 			case Xop_tkn_itm_.Tid_ignore: break;								// hide comments and <*include*> ndes
 			case Xop_tkn_itm_.Tid_tmpl_prm:
-				tkn.Tmpl_evaluate(ctx, src, Xot_invk_temp.New_root_w_src(src), rslt_bfr);
+				tkn.Tmpl_evaluate(ctx, src, Xot_invk_temp.New_root_w_src(ctx.Page().Ttl().Page_txt(), src), rslt_bfr);
 				break;
 			case Xop_tkn_itm_.Tid_tvar:
 				gplx.xowa.xtns.translates.Xop_tvar_tkn tvar_tkn = (gplx.xowa.xtns.translates.Xop_tvar_tkn)tkn;
@@ -98,7 +98,7 @@ public class Xot_tmpl_wtr {
 			case Xop_tkn_itm_.Tid_tmpl_invk:
 				try {
 					if (frame == Xot_invk_temp.Null_frame) { // NOTE: should probably remove lazy-instantiation and always force frame to be passed in; DATE:2017-09-03
-						frame = Xot_invk_temp.New_root_w_src(src);
+						frame = Xot_invk_temp.New_root_w_src(ctx.Page().Ttl().Page_txt(), src);
 						frame.Frame_ttl_(ctx.Page().Ttl().Full_txt_raw());
 					}
 					tkn.Tmpl_evaluate(ctx, src, frame, rslt_bfr);
