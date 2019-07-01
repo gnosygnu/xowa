@@ -306,7 +306,7 @@ class Lua_cls_matcher {
 		Init_itm(Bool_.Y, "s", "\\s");						// JAVA: \p{Xps} not valid; REF: https://docs.oracle.com/javase/6/docs/api/java/util/regex/Pattern.html
 		Init_itm(Bool_.Y, "u", "\\p{Lu}");
 		Init_itm(Bool_.Y, "w", regx_w);
-		Init_itm(Bool_.Y, "x", "[0-9A-Fa-f0-9A-Fa-f]");
+		Init_itm(Bool_.Y, "x", "[0-9A-Fa-f０-９Ａ-Ｆａ-ｆ]");
 		Init_itm(Bool_.Y, "z", "\\x00");
 
 		Init_itm(Bool_.Y, "A", "\\P{L}");
@@ -317,11 +317,11 @@ class Lua_cls_matcher {
 		Init_itm(Bool_.Y, "S", "\\S");						// JAVA: \P{Xps} not valid
 		Init_itm(Bool_.Y, "U", "\\P{Lu}");
 		Init_itm(Bool_.Y, "W", regx_W);
-		Init_itm(Bool_.Y, "X", "[^0-9A-Fa-f0-9A-Fa-f]");
+		Init_itm(Bool_.Y, "X", "[^0-9A-Fa-f０-９Ａ-Ｆａ-ｆ]");
 		Init_itm(Bool_.Y, "Z", "[^\\x00]");
 
 		Init_itm(Bool_.N, "w", regx_w);
-		Init_itm(Bool_.N, "x", "0-9A-Fa-f0-9A-Fa-f");
+		Init_itm(Bool_.N, "x", "0-9A-Fa-f０-９Ａ-Ｆａ-ｆ");
 		Init_itm(Bool_.N, "W", regx_W);
 		Init_itm(Bool_.N, "X", "\\x00-\\x2f\\x3a-\\x40\\x47-\\x60\\x67-\\x{ff0f}\\x{ff1a}-\\x{ff20}\\x{ff27}-\\x{ff40}\\x{ff47}-\\x{10ffff}");
 		Init_itm(Bool_.N, "Z", "\\x01-\\x{10ffff}");
