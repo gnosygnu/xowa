@@ -20,7 +20,7 @@ public class JCValue {
 	private Ordered_hash value = Ordered_hash_.New();
 	private int statusVal;
 	private XophpStdClass value_as_obj;
-	private Xophp_ary value_as_ary;
+	private XophpArray value_as_ary;
 	private Object value_as_prim;
 	private int value_tid;
 	private boolean sameAsDefaultVal = false;
@@ -45,7 +45,7 @@ public class JCValue {
 	/** @param int status
 	* @param mixed value
 	*/
-	public JCValue(int status, XophpStdClass value_as_obj, Xophp_ary value_as_ary, Object value_as_prim) {
+	public JCValue(int status, XophpStdClass value_as_obj, XophpArray value_as_ary, Object value_as_prim) {
 		this.statusVal = status;
 		this.value_as_obj = value_as_obj;
 		this.value_as_ary = value_as_ary;

@@ -27,6 +27,7 @@ import gplx.xowa.mediawiki.includes.parsers.quotes.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkes.*;
 import gplx.xowa.mediawiki.includes.parsers.magiclinks.*;
 import gplx.xowa.mediawiki.includes.parsers.nbsps.*;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 /**
 * PHP Parser - Processes wiki markup (which uses a more user-friendly
 * syntax, such as "[[link]]" for making links), and provides a one-way
@@ -163,11 +164,13 @@ public class XomwParser implements XomwParserIface {
 //		public $mSubstWords;
 //		# Initialised in constructor
 //		public $mConf, $mExtLinkBracketedRegex, $mUrlProtocols;
-//
-//		# Initialized in getPreprocessor()
-//		/** @var Preprocessor */
-//		public $mPreprocessor;
-//
+
+	// Initialized in getPreprocessor()
+	/** @var Preprocessor */
+	public XomwPreprocessor mPreprocessor;
+
+	private XomwPreprocessor mPreprocessorClass;
+
 //		# Cleared with clearState():
 //		/**
 //		* @var ParserOutput
@@ -282,31 +285,33 @@ public class XomwParser implements XomwParserIface {
 	public XomwSanitizer Sanitizer() {return sanitizer;}
 	public XomwStripState Strip_state() {return mStripState;}
 
-//		/**
-//		* @param array $conf
-//		*/
-//		public function __construct($conf = []) {
+	/**
+	* @param array $conf
+	*/
+	public void __construct() { // $conf = []
 //			this.mConf = $conf;
 //			this.mUrlProtocols = wfUrlProtocols();
 //			this.mExtLinkBracketedRegex = '/\[(((?i)' . this.mUrlProtocols . ')' .
 //				self::EXT_LINK_ADDR .
 //				self::EXT_LINK_URL_CLASS . '*)\p{Zs}*([^\]\\x00-\\x08\\x0a-\\x1F]*?)\]/Su';
-//			if (isset($conf['preprocessorClass'])) {
-//				this.mPreprocessorClass = $conf['preprocessorClass'];
-//			} elseif (defined('HPHP_VERSION')) {
-//				# Preprocessor_Hash is much faster than Preprocessor_DOM under HipHop
-//				this.mPreprocessorClass = 'Preprocessor_Hash';
-//			} elseif (extension_loaded('domxml')) {
-//				# PECL extension that conflicts with the core DOM extension (T15770)
-//				wfDebug("Warning: you have the obsolete domxml extension for PHP. Please remove it!\n");
-//				this.mPreprocessorClass = 'Preprocessor_Hash';
-//			} elseif (extension_loaded('dom')) {
-//				this.mPreprocessorClass = 'Preprocessor_DOM';
-//			} else {
-//				this.mPreprocessorClass = 'Preprocessor_Hash';
-//			}
-//			wfDebug(__CLASS__ . ": using preprocessor: {this.mPreprocessorClass}\n");
-//		}
+
+		this.mPreprocessorClass = XomwPreprocessor_DOM.Instance;
+		//	if (isset($conf['preprocessorClass'])) {
+		//		this.mPreprocessorClass = $conf['preprocessorClass'];
+		//	} elseif (defined('HPHP_VERSION')) {
+		//		# Preprocessor_Hash is much faster than Preprocessor_DOM under HipHop
+		//		this.mPreprocessorClass = 'Preprocessor_Hash';
+		//	} elseif (extension_loaded('domxml')) {
+		//		# PECL extension that conflicts with the core DOM extension (T15770)
+		//		wfDebug("Warning: you have the obsolete domxml extension for PHP. Please remove it!\n");
+		//		this.mPreprocessorClass = 'Preprocessor_Hash';
+		//	} elseif (extension_loaded('dom')) {
+		//		this.mPreprocessorClass = 'Preprocessor_DOM';
+		//	} else {
+		//		this.mPreprocessorClass = 'Preprocessor_Hash';
+		//	}
+		//	wfDebug(__CLASS__ . ": using preprocessor: {this.mPreprocessorClass}\n");
+	}
 	private final    Btrie_slim_mgr protocols_trie;
 	public XomwEnv Env() {return env;}
 	public Xomw_lnki_wkr Lnki_wkr() {return lnkiWkr;}
@@ -314,6 +319,7 @@ public class XomwParser implements XomwParserIface {
 	public byte[] Get_external_link_rel;
 	private static byte[] Atr__rel;
 	public XomwParser(XomwEnv env) {
+		this.__construct();
 		if (regex_space == null) {
 			synchronized (Type_.Type_by_obj(this)) {
 				regex_space = new Xomw_regex_space();
@@ -972,19 +978,19 @@ public class XomwParser implements XomwParserIface {
 //			}
 //			return this.mOptions->getUser();
 //		}
-//
-//		/**
-//		* Get a preprocessor Object
-//		*
-//		* @return Preprocessor
-//		*/
-//		public function getPreprocessor() {
-//			if (!isset(this.mPreprocessor)) {
-//				$class = this.mPreprocessorClass;
-//				this.mPreprocessor = new $class($this);
-//			}
-//			return this.mPreprocessor;
-//		}
+
+	/**
+	* Get a preprocessor Object
+	*
+	* @return Preprocessor
+	*/
+	public XomwPreprocessor getPreprocessor() {
+		if (this.mPreprocessor == null) {
+			XomwPreprocessor factory = this.mPreprocessorClass;
+			this.mPreprocessor = factory.Make_new(this);
+		}
+		return this.mPreprocessor;
+	}
 
 	/**
 	* Get a LinkRenderer instance to make links with
@@ -2124,34 +2130,34 @@ public class XomwParser implements XomwParserIface {
 //			this.mVariables = new MagicWordArray($variableIDs);
 //			this.mSubstWords = new MagicWordArray($substIDs);
 //		}
-//
-//		/**
-//		* Preprocess some wikitext and return the document tree.
-//		* This is the ghost of replace_variables().
-//		*
-//		* @param String $text The text to parse
-//		* @param int $flags Bitwise combination of:
-//		*   - self::PTD_FOR_INCLUSION: Handle "<noinclude>" and "<includeonly>" as if the text is being
-//		*     included. Default is to assume a direct page view.
-//		*
-//		* The generated DOM tree must depend only on the input text and the flags.
-//		* The DOM tree must be the same in OT_HTML and OT_WIKI mode, to avoid a regression of T6899.
-//		*
-//		* Any flag added to the $flags parameter here, or any other parameter liable to cause a
-//		* change in the DOM tree for a given text, must be passed through the section identifier
-//		* in the section edit link and thus back to extractSections().
-//		*
-//		* The output of this function is currently only cached in process memory, but a persistent
-//		* cache may be implemented at a later date which takes further advantage of these strict
-//		* dependency requirements.
-//		*
-//		* @return PPNode
-//		*/
-//		public function preprocessToDom($text, $flags = 0) {
-//			$dom = this.getPreprocessor()->preprocessToObj($text, $flags);
-//			return $dom;
-//		}
-//
+
+	/**
+	* Preprocess some wikitext and return the document tree.
+	* This is the ghost of replace_variables().
+	*
+	* @param String $text The text to parse
+	* @param int $flags Bitwise combination of:
+	*   - self::PTD_FOR_INCLUSION: Handle "<noinclude>" and "<includeonly>" as if the text is being
+	*     included. Default is to assume a direct page view.
+	*
+	* The generated DOM tree must depend only on the input text and the flags.
+	* The DOM tree must be the same in OT_HTML and OT_WIKI mode, to avoid a regression of T6899.
+	*
+	* Any flag added to the $flags parameter here, or any other parameter liable to cause a
+	* change in the DOM tree for a given text, must be passed through the section identifier
+	* in the section edit link and thus back to extractSections().
+	*
+	* The output of this function is currently only cached in process memory, but a persistent
+	* cache may be implemented at a later date which takes further advantage of these strict
+	* dependency requirements.
+	*
+	* @return PPNode
+	*/
+	public XomwPPNode preprocessToDom(String text, int flags) {
+		XomwPPNode dom = this.getPreprocessor().preprocessToObj(text, flags);
+		return dom;
+	}
+
 //		/**
 //		* Return a three-element array: leading whitespace, String contents, trailing whitespace
 //		*
@@ -2171,49 +2177,48 @@ public class XomwParser implements XomwParserIface {
 //			}
 //			return [ $w1, $trimmed, $w2 ];
 //		}
-//
-//		/**
-//		* Replace magic variables, templates, and template arguments
-//		* with the appropriate text. Templates are substituted recursively,
-//		* taking care to avoid infinite loops.
-//		*
-//		* Note that the substitution depends on value of $mOutputType:
-//		*  self::OT_WIKI: only {{subst:}} templates
-//		*  self::OT_PREPROCESS: templates but not extension tags
-//		*  self::OT_HTML: all templates and extension tags
-//		*
-//		* @param String $text The text to transform
-//		* @param boolean|PPFrame $frame Object describing the arguments passed to the
-//		*   template. Arguments may also be provided as an associative array, as
-//		*   was the usual case before MW1.12. Providing arguments this way may be
-//		*   useful for extensions wishing to perform variable replacement
-//		*   explicitly.
-//		* @param boolean $argsOnly Only do argument (triple-brace) expansion, not
-//		*   double-brace expansion.
-//		* @return String
-//		*/
-//		public function replaceVariables($text, $frame = false, $argsOnly = false) {
-//			# Is there any text? Also, Prevent too big inclusions!
-//			$textSize = strlen($text);
-//			if ($textSize < 1 || $textSize > this.mOptions->getMaxIncludeSize()) {
-//				return $text;
-//			}
-//
-//			if ($frame === false) {
-//				$frame = this.getPreprocessor()->newFrame();
-//			} elseif (!($frame instanceof PPFrame)) {
-//				wfDebug(__METHOD__ . " called using plain parameters instead of "
-//					. "a PPFrame instance. Creating custom frame.\n");
-//				$frame = this.getPreprocessor()->newCustomFrame($frame);
-//			}
-//
-//			$dom = this.preprocessToDom($text);
-//			$flags = $argsOnly ? PPFrame::NO_TEMPLATES : 0;
-//			$text = $frame->expand($dom, $flags);
-//
-//			return $text;
-//		}
-//
+
+	/**
+	* Replace magic variables, templates, and template arguments
+	* with the appropriate text. Templates are substituted recursively,
+	* taking care to avoid infinite loops.
+	*
+	* Note that the substitution depends on value of $mOutputType:
+	*  self::OT_WIKI: only {{subst:}} templates
+	*  self::OT_PREPROCESS: templates but not extension tags
+	*  self::OT_HTML: all templates and extension tags
+	*
+	* @param String $text The text to transform
+	* @param boolean|PPFrame $frame Object describing the arguments passed to the
+	*   template. Arguments may also be provided as an associative array, as
+	*   was the usual case before MW1.12. Providing arguments this way may be
+	*   useful for extensions wishing to perform variable replacement
+	*   explicitly.
+	* @param boolean $argsOnly Only do argument (triple-brace) expansion, not
+	*   double-brace expansion.
+	* @return String
+	*/
+	public String replaceVariables(String text, XomwParserCtx pctx, XomwPPFrame frame, boolean argsOnly) {
+		// Is there any text? Also, Prevent too big inclusions!
+		int textSize = String_.Len(text);
+		if (textSize < 1 || textSize > this.mOptions.getMaxIncludeSize()) {
+			return text;
+		}
+
+		if (frame == null) {
+			frame = this.getPreprocessor().newFrame();
+		} else if (!(Type_.Is_assignable_from_by_obj(frame, XomwPPFrame.class))) {
+			// wfDebug(__METHOD__ . " called using plain parameters instead of "
+			//	. "a PPFrame instance. Creating custom frame.\n");
+			frame = this.getPreprocessor().newCustomFrame(frame);
+		}
+
+		XomwPPNode dom = this.preprocessToDom(text, 0);
+		int flags = argsOnly ? XomwPPFrame.NO_TEMPLATES : 0;
+		text = frame.expand(dom, flags);
+		return text;
+	}
+
 //		/**
 //		* Clean up argument array - refactored in 1.9 so parserfunctions can use it, too.
 //		*

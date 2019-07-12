@@ -13,18 +13,155 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.prepros; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
-public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
+/**
+* @ingroup Parser
+*/
+public abstract class XomwPreprocessor {
+
+//		private static final int CACHE_VERSION = 1;
+
+//		/**
+//		* @var array Brace matching rules.
+//		*/
+//		protected $rules = [
+//			'{' => [
+//				'end' => '}',
+//				'names' => [
+//					2 => 'template',
+//					3 => 'tplarg',
+//				],
+//				'min' => 2,
+//				'max' => 3,
+//			],
+//			'[' => [
+//				'end' => ']',
+//				'names' => [ 2 => null ],
+//				'min' => 2,
+//				'max' => 2,
+//			],
+//			'-{' => [
+//				'end' => '}-',
+//				'names' => [ 1 => null ],
+//				'min' => 1,
+//				'max' => 1,
+//			],
+//		];
+//
+//		/**
+//		* Store a document tree in the cache.
+//		*
+//		* @param String $text
+//		* @param int $flags
+//		*/
+//		protected function cacheSetTree($text, $flags, $tree) {
+//			$config = RequestContext::getMain()->getConfig();
+//
+//			$length = strlen($text);
+//			$threshold = $config->get('PreprocessorCacheThreshold');
+//			if ($threshold === false || $length < $threshold || $length > 1e6) {
+//				return false;
+//			}
+//
+//			$key = wfMemcKey(
+//				defined('static::CACHE_PREFIX') ? static::CACHE_PREFIX : static::class,
+//				md5($text), $flags);
+//			$value = sprintf("%08d", static::CACHE_VERSION) . $tree;
+//
+//			$cache = ObjectCache::getInstance($config->get('MainCacheType'));
+//			$cache->set($key, $value, 86400);
+//
+//			LoggerFactory::getInstance('Preprocessor')
+//				->info("Cached preprocessor output (key: $key)");
+//		}
+//
+//		/**
+//		* Attempt to load a precomputed document tree for some given wikitext
+//		* from the cache.
+//		*
+//		* @param String $text
+//		* @param int $flags
+//		* @return PPNode_Hash_Tree|boolean
+//		*/
+//		protected function cacheGetTree($text, $flags) {
+//			$config = RequestContext::getMain()->getConfig();
+//
+//			$length = strlen($text);
+//			$threshold = $config->get('PreprocessorCacheThreshold');
+//			if ($threshold === false || $length < $threshold || $length > 1e6) {
+//				return false;
+//			}
+//
+//			$cache = ObjectCache::getInstance($config->get('MainCacheType'));
+//
+//			$key = wfMemcKey(
+//				defined('static::CACHE_PREFIX') ? static::CACHE_PREFIX : static::class,
+//				md5($text), $flags);
+//
+//			$value = $cache->get($key);
+//			if (!$value) {
+//				return false;
+//			}
+//
+//			$version = intval(substr($value, 0, 8));
+//			if ($version !== static::CACHE_VERSION) {
+//				return false;
+//			}
+//
+//			LoggerFactory::getInstance('Preprocessor')
+//				->info("Loaded preprocessor output from cache (key: $key)");
+//
+//			return substr($value, 8);
+//		}
+
+	/**
+	* Create a new top-level frame for expansion of a page
+	*
+	* @return PPFrame
+	*/
+	public abstract XomwPPFrame newFrame();
+
+	/**
+	* Create a new custom frame for programmatic use of parameter replacement
+	* as used in some extensions.
+	*
+	* @param array $args
+	*
+	* @return PPFrame
+	*/
+	public abstract XomwPPFrame newCustomFrame(XomwPPFrame args);
+
+//		/**
+//		* Create a new custom node for programmatic use of parameter replacement
+//		* as used in some extensions.
+//		*
+//		* @param array $values
+//		*/
+//		abstract public function newPartNodeArray($values);
+
+	/**
+	* Preprocess text to a PPNode
+	*
+	* @param String $text
+	* @param int $flags
+	*
+	* @return PPNode
+	*/
+	public abstract XomwPPNode preprocessToObj(String text, int flags);
+
 	private final    List_adp comments_list = List_adp_.New();
 	private final    Btrie_slim_mgr elements_trie__y = Btrie_slim_mgr.ci_a7(), elements_trie__n = Btrie_slim_mgr.ci_a7();
 	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs().Add_many_str("includeonly", "noinclude", "onlyinclude");
 	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
-	private final    Xomw_prepro_stack stack = new Xomw_prepro_stack();
+	private final    XomwPPDStack stack;
 	private final    Btrie_rv trv = new Btrie_rv();
-	private Bry_bfr accum = Bry_bfr_.New();
+	private Xomw_prepro_accum accum = null;
 
+	public XomwPreprocessor() {
+		this.stack = new XomwPPDStack(this.Factory__accum());
+	}
 	public void Init_by_wiki(String... xmlish_elems_ary) {
 		Elements_trie__init_by_wiki(elements_trie__y, ignored_tags_y, xmlish_elems_ary, "noinclude");
 		Elements_trie__init_by_wiki(elements_trie__n, ignored_tags_n, xmlish_elems_ary, "includeonly");
@@ -50,7 +187,13 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 	private static void Elements_trie__add(Btrie_slim_mgr trie, boolean type_is_comment, String hook, String name) {
 		trie.Add_obj(hook, new Xomw_prepro_elem(type_is_comment ? Xomw_prepro_elem.Type__comment : Xomw_prepro_elem.Type__other, Bry_.new_a7(name)));
 	}
-	public byte[] Preprocess_to_xml(byte[] src, boolean for_inclusion) {
+
+	/**
+	* @param String $text
+	* @param int $flags
+	* @return String
+	*/
+	public byte[] preprocessToXml(byte[] src, boolean for_inclusion) {
 		// RELIC.PROC_VAR:     forInclusion = $flags & Parser::PTD_FOR_INCLUSION;
 		// RELIC.INIT_BY_WIKI: $xmlishElements = parser->getStripList();
 		// RELIC.CLASS_VAR:    $xmlishAllowMissingEndTag = [ 'includeonly', 'noinclude', 'onlyinclude' ];
@@ -97,18 +240,18 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 		int i = 0;
 
 		// Current accumulator
-		accum = stack.Get_accum();
-		accum.Add_str_a7("<root>");
+		accum = this.Accum__set(stack.Get_accum());
+		this.preprocessToObj_root();
 
 		// True to find equals signs in arguments
-		boolean find_equals = false;
+		boolean findEquals = false;
 
 		// True to take notice of pipe characters
-		boolean find_pipe = false;
+		boolean findPipe = false;
 		int heading_index = 1;
 
 		// True if $i is inside a possible heading
-		boolean in_heading = false;
+		boolean inHeading = false;
 
 		// True if there are no more greater-than (>) signs right of $i
 		boolean no_more_gt = false;
@@ -136,11 +279,11 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				int start_pos = Bry_find_.Find_fwd(src, Bry__only_include_bgn, i, src_len);
 				if (start_pos == Bry_find_.Not_found) {
 					// Ignored section runs to the end
-					accum.Add_str_a7("<ignore>").Add_bry_escape_html(src, i, src_len).Add_str_a7("</ignore>");
+					this.preprocessToObj_ignore(src, i, src_len);
 					break;
 				}
 				int tag_end_pos = start_pos + Bry__only_include_bgn.length; // past-the-end
-				accum.Add_str_a7("<ignore>").Add_bry_escape_html(src, i, tag_end_pos).Add_str_a7("</ignore>");
+				this.preprocessToObj_ignore(src, i, tag_end_pos);
 				i = tag_end_pos;
 				find_only_include = false;
 			}
@@ -159,10 +302,10 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					cur_closing = stack.top.close;
 					// RELIC.REGEX: $search .= $currentClosing;
 				}
-				if (find_pipe) {
+				if (findPipe) {
 					// RELIC.REGEX: $search .= '|';
 				}
-				if (find_equals) {
+				if (findEquals) {
 					// First equals will be for the template
 					// RELIC.REGEX: $search .= '=';
 				}
@@ -181,11 +324,11 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 						case Byte_ascii.Nl:
 							loop_stop = true;
 							break;
-						case Byte_ascii.Pipe:   // handle "find_pipe"
-							if (find_pipe)   loop_stop = true;
+						case Byte_ascii.Pipe:   // handle "findPipe"
+							if (findPipe)   loop_stop = true;
 							break;
-						case Byte_ascii.Eq:     // handle "find_equals"
-							if (find_equals) loop_stop = true;
+						case Byte_ascii.Eq:     // handle "findEquals"
+							if (findEquals) loop_stop = true;
 							break;
 						default:                // handle "cur_closing"; specified by piece.close and rule.close, so "\n", "}", "]" and "}-"
 							if (cur_closing != Bry_.Empty) {
@@ -209,7 +352,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 						literal_len++;
 				}
 				if (literal_len > 0) {
-					accum.Add_bry_escape_html(src, i, i + literal_len);
+					this.preprocessToObj_literal(src, i, i + literal_len);
 					i += literal_len;
 				}
 				if (i >= src_len) {
@@ -232,7 +375,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 							case Byte_ascii.Pipe:         found = Found__pipe; break;
 							case Byte_ascii.Eq:           found = Found__equals; break;
 							case Byte_ascii.Angle_bgn:    found = Found__angle; break;
-							case Byte_ascii.Nl:           found = in_heading ? Found__line_end : Found__line_bgn; break;
+							case Byte_ascii.Nl:           found = inHeading ? Found__line_end : Found__line_bgn; break;
 
 							// PORTED: "elseif ( $curChar == $currentClosing )"
 							case Byte_ascii.Curly_end:    found = Found__close; break;
@@ -265,7 +408,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				Xomw_prepro_elem element = (Xomw_prepro_elem)elements_trie.Match_at(trv, src, i + 1, src_len);
 				if (element == null) {
 					// Element name missing or not listed
-					accum.Add(Bry__escaped_lt);
+					this.preprocessToObj_literal(Byte_ascii.Lt_bry);
 					i++;
 					continue;
 				}
@@ -281,7 +424,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					int end_pos = Bry_find_.Find_fwd(src, Bry__comment_end, i + 4, src_len);
 					if (end_pos == Bry_find_.Not_found) {
 						// Unclosed comment in input, runs to end
-						accum.Add_str_a7("<comment>").Add_bry_escape_html(src, i, src_len).Add_str_a7("</comment>");
+						this.preprocessToObj_comment(src, i, src_len);
 						i = src_len;
 					}
 					else {
@@ -318,11 +461,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 							// Remove leading whitespace from the end of the accumulator
 							// Sanity check first though
 							int ws_len = i - ws_bgn;
-							int accum_len = accum.Len();
-							if (	ws_len > 0
-								&&	XophpString.strspn_fwd__space_or_tab(accum.Bfr(), accum_len - ws_len, -1, accum_len) == ws_len) {
-								accum.Del_by(ws_len);
-							}
+							this.preprocessToObj_removeLeadingWhitespaceFromEnd(ws_len);
 
 							// Dump all but the last comment to the accumulator
 							int comments_list_len = comments_list.Len();
@@ -334,7 +473,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 									break;
 								}
 								inner = Bry_.Mid(src, bgn_pos, end_pos);
-								accum.Add_str_a7("<comment>").Add_bry_escape_html(inner).Add_str_a7("</comment>");
+								this.preprocessToObj_comment(inner);
 							}
 
 							// Do a line-start run next time to look for headings after the comment
@@ -347,16 +486,16 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 						}
 
 						if (stack.top != null) {
-							Xomw_prepro_part part = stack.top.Get_current_part();
-							if (!(part.comment_end != -1 && part.comment_end == ws_bgn - 1)) {
-								part.visual_end = ws_bgn;
+							XomwPPDPart part = stack.top.Get_current_part();
+							if (!(part.commentEnd != -1 && part.commentEnd == ws_bgn - 1)) {
+								part.visualEnd = ws_bgn;
 							}
 							// Else comments abutting, no change in visual end
-							part.comment_end = end_pos;
+							part.commentEnd = end_pos;
 						}
 						i = end_pos + 1;
 						inner = Bry_.Mid(src, bgn_pos, end_pos + 1);
-						accum.Add_str_a7("<comment>").Add_bry_escape_html(inner).Add_str_a7("</comment>");
+						this.preprocessToObj_comment(inner);
 					}
 					continue;
 				}
@@ -371,26 +510,26 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					// Infinite backtrack
 					// Disable tag search to prevent worst-case O(N^2) performance
 					no_more_gt = true;
-					accum.Add(Bry__escaped_lt);
+					this.preprocessToObj_literal(Byte_ascii.Lt_bry);
 					i++;
 					continue;
 				}
 
 				// Handle ignored tags
 				if (ignored_tags.Has(name)) {
-					accum.Add_str_a7("<ignore>").Add_bry_escape_html(src, i, tag_end_pos + 1).Add_str_a7("</ignore>");
+					this.preprocessToObj_ignore(src, i, tag_end_pos + 1);
 					i = tag_end_pos + 1;
 					continue;
 				}
 
 				int tag_bgn_pos = i;
 				int atr_end = -1;
-				byte[] close = null;
+				byte[] close = this.preprocessToObj_close_init();
 				if (src[tag_end_pos - 1] == Byte_ascii.Slash) {
 					atr_end = tag_end_pos - 1;
 					inner = null;
 					i = tag_end_pos + 1;
-					close = Bry_.Empty;
+					close = this.preprocessToObj_close_init();
 				}
 				else {
 					atr_end = tag_end_pos;
@@ -429,8 +568,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 						&&	elem_end_found) {
 						inner = Bry_.Mid(src, tag_end_pos + 1, elem_end_lhs);
 						i = elem_end_rhs;
-						tmp_bfr.Add_str_a7("<close>").Add_bry_escape_html(src, elem_end_lhs, elem_end_rhs).Add_str_a7("</close>");
-						close = tmp_bfr.To_bry_and_clear();
+						close = this.preprocessToObj_close_make(src, elem_end_lhs, elem_end_rhs);
 					} 
 					else {
 						// No end tag
@@ -443,7 +581,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 						else {
 							// Don't match the tag, treat opening tag as literal and resume parsing.
 							i = tag_end_pos + 1;
-							accum.Add_bry_escape_html(src, tag_bgn_pos, tag_end_pos + 1);
+							this.preprocessToObj_literal(src, tag_bgn_pos, tag_end_pos + 1);
 							// Cache results, otherwise we have O(N^2) performance for input like <foo><foo><foo>...
 							no_more_closing_tag.Add_if_dupe_use_nth(name, name);
 							continue;
@@ -453,28 +591,11 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 
 				// <includeonly> and <noinclude> just become <ignore> tags
 				if (ignored_elements.Has(name)) {
-					accum.Add_str_a7("<ignore>").Add_bry_escape_html(src, tag_bgn_pos, i).Add_str_a7("</ignore>");
+					this.preprocessToObj_ignore(src, tag_bgn_pos, i);
 					continue;
 				}
 
-				accum.Add_str_a7("<ext>");
-				// PORTED:
-				// if ( $attrEnd <= $attrStart ) {
-				//	 $attr = '';
-				// } else {
-				//   $attr = substr( $text, $attrStart, $attrEnd - $attrStart );
-				// }
-				accum.Add_str_a7("<name>").Add(name).Add_str_a7("</name>");
-				// Note that the attr element contains the whitespace between name and attribute,
-				// this is necessary for precise reconstruction during pre-save transform.
-				accum.Add_str_a7("<attr>");
-				if (atr_end > atr_bgn)
-					accum.Add_bry_escape_html(src, atr_bgn, atr_end);
-				accum.Add_str_a7("</attr>");
-				if (inner != null) {
-					accum.Add_str_a7("<inner>").Add_bry_escape_html(inner).Add_str_a7("</inner>");
-				}
-				accum.Add(close).Add_str_a7("</ext>");
+				this.preprocessToObj_ext(src, name, atr_bgn, atr_end, inner, close);
 			}
 			else if (found == Found__line_bgn) {
 				// Is this the start of a heading?
@@ -482,12 +603,12 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				if (fake_line_start) {
 					fake_line_start = false;
 				} else {
-					accum.Add(cur_char);
+					this.preprocessToObj_literal(cur_char);
 					i++;
 				}
 
 				int count = XophpString.strspn_fwd__byte(src, Byte_ascii.Eq, i, 6, src_len);
-				if (count == 1 && find_equals) {	// EX: "{{a|\n=b=\n"
+				if (count == 1 && findEquals) {	// EX: "{{a|\n=b=\n"
 					// DWIM: This looks kind of like a name/value separator.
 					// Let's let the equals handler have it and break the
 					// potential heading. This is heuristic, but AFAICT the
@@ -495,14 +616,14 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					// complex.
 				}
 				else if (count > 0) {
-					Xomw_prepro_piece piece = new Xomw_prepro_piece(Byte_ascii.Nl_bry, Byte_ascii.Nl_bry, count, i, false);
+					Xomw_prepro_piece piece = new Xomw_prepro_piece(Factory__part(), Byte_ascii.Nl_bry, Byte_ascii.Nl_bry, count, i, false);
 					piece.Add_part(Bry_.Repeat(Byte_ascii.Eq, count));
 					stack.Push(piece);
-					accum = stack.Get_accum();
+					accum = this.Accum__set(stack.Get_accum());
 					Xomw_prepro_flags flags = stack.Get_flags();
-					find_pipe = flags.Find_pipe;
-					find_equals = flags.Find_eq;
-					in_heading = flags.In_heading;
+					findPipe = flags.findPipe;
+					findEquals = flags.findEquals;
+					inHeading = flags.inHeading;
 					i += count;
 				}
 			}
@@ -510,7 +631,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				Xomw_prepro_piece piece = stack.top;
 				// A heading must be open, otherwise \n wouldn't have been in the search list
 				if (!Bry_.Eq(piece.open, Byte_ascii.Nl_bry)) throw Err_.new_wo_type("assertion:piece must start with \\n");
-				Xomw_prepro_part part = piece.Get_current_part();
+				XomwPPDPart part = piece.Get_current_part();
 
 				// Search back through the input to see if it has a proper close.
 				// Do this using the reversed String since the other solutions
@@ -518,17 +639,17 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				int ws_len = XophpString.strspn_bwd__space_or_tab(src, src_len - i, -1);
 				int search_bgn = i - ws_len;
 
-				if (part.comment_end != -1 && search_bgn -1 == part.comment_end) {
+				if (part.commentEnd != -1 && search_bgn -1 == part.commentEnd) {
 					// Comment found at line end
 					// Search for equals signs before the comment
-					search_bgn = part.visual_end;
+					search_bgn = part.visualEnd;
 					search_bgn = Bry_find_.Find_bwd__while_space_or_tab(src, search_bgn, 0);
 					search_bgn -= XophpString.strspn_bwd__space_or_tab(src, search_bgn, -1);
 				}
 				int count = piece.count;
 				int eq_len = XophpString.strspn_bwd__byte(src, Byte_ascii.Eq, search_bgn, -1);
 
-				byte[] element = Bry_.Empty;
+				Xomw_prepro_accum element = null;
 				if (eq_len > 0) {
 					if (search_bgn - eq_len == piece.start_pos) {
 						// This is just a single String of equals signs on its own line
@@ -548,29 +669,29 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					}
 					if (count > 0) {
 						// Normal match, output <h>
-						element = tmp_bfr.Add_str_a7("<h level=\"").Add_int_variable(count).Add_str_a7("\" i=\"").Add_int_variable(heading_index).Add_str_a7("\">").Add_bfr_and_preserve(accum).Add_str_a7("</h>").To_bry_and_clear();
+						element = this.preprocessToObj_heading_init(count, heading_index);
 						heading_index++;
 					} else {
 						// Single equals sign on its own line, count=0
-						element = accum.To_bry();
+						element = accum;
 					}
 				}
 				else {
 					// No match, no <h>, just pass down the inner src
-					element = accum.To_bry();
+					element = accum;
 				}
 
 				// Unwind the stack
 				stack.Pop();
-				accum = stack.Get_accum();
+				this.accum = this.Accum__set(stack.Get_accum());
 				
 				Xomw_prepro_flags flags = stack.Get_flags();
-				find_pipe = flags.Find_pipe;
-				find_equals = flags.Find_eq;
-				in_heading = flags.In_heading;
+				findPipe = flags.findPipe;
+				findEquals = flags.findEquals;
+				inHeading = flags.inHeading;
 
 				// Append the result to the enclosing accumulator
-				accum.Add(element);
+				this.preprocessToObj_heading_end(element);
 				// Note that we do NOT increment the input pointer.
 				// This is because the closing linebreak could be the opening linebreak of
 				// another heading. Infinite loops are avoided because the next iteration MUST
@@ -584,19 +705,19 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 				// we need to add to stack only if opening brace count is enough for one of the rules
 				if (count >= rule.min) {
 					// Add it to the stack
-					Xomw_prepro_piece piece = new Xomw_prepro_piece(cur_char, rule.end, count, -1, i > 0 && src[i - 1] == Byte_ascii.Nl);
+					Xomw_prepro_piece piece = new Xomw_prepro_piece(Factory__part(), cur_char, rule.end, count, -1, i > 0 && src[i - 1] == Byte_ascii.Nl);
 
 					stack.Push(piece);
-					accum = stack.Get_accum();
+					this.accum = this.Accum__set(stack.Get_accum());
 					Xomw_prepro_flags flags = stack.Get_flags();
-					find_pipe = flags.Find_pipe;
-					find_equals = flags.Find_eq;
-					in_heading = flags.In_heading;
+					findPipe = flags.findPipe;
+					findEquals = flags.findEquals;
+					inHeading = flags.inHeading;
 				}
 				else {
 					// Add literal brace(s)
 					for (int j = 0; j < count; j++)
-						accum.Add_bry_escape_html(cur_char);
+						this.preprocessToObj_literal(cur_char);
 				}
 				i += count;
 			}
@@ -628,55 +749,20 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					// No matching element found in callback array
 					// Output a literal closing brace and continue
 					for (int j = 0; j < count; j++)
-						accum.Add_bry_escape_html(cur_char);
+						this.preprocessToObj_literal(cur_char);
 					i += count;
 					continue;
 				}
+
 				int name_type = rule.names[matching_count];
-				byte[] element = null;
+				Xomw_prepro_accum element = null;
 				if (name_type == Xomw_prepro_rule.Name__null) {
 					// No element, just literal text
-					tmp_bfr.Add(piece.Break_syntax(tmp_bfr, matching_count));
-					element = tmp_bfr.Add(Bry_.Repeat_bry(rule.end, matching_count)).To_bry_and_clear();
+					element = this.preprocessToObj_text(element, piece, rule.end, matching_count);
 				}
 				else {
 					// Create XML element
-					// Note: $parts is already XML, does not need to be encoded further
-					List_adp parts = piece.parts;
-					byte[] title = ((Xomw_prepro_part)parts.Get_at(0)).bfr.To_bry_and_clear();
-					parts.Del_at(0);
-
-					// The invocation is at the start of the line if lineStart is set in
-					// the stack, and all opening brackets are used up.
-					byte[] attr = null;
-					if (max_count == matching_count && piece.line_start) {	// RELIC:!empty( $piece->lineStart )
-						attr = Bry_.new_a7(" lineStart=\"1\"");
-					}
-					else {
-						attr = Bry_.Empty;
-					}
-
-					byte[] name_bry = Xomw_prepro_rule.Name(name_type);
-					tmp_bfr.Add_str_a7("<").Add(name_bry).Add(attr).Add_str_a7(">");
-					tmp_bfr.Add_str_a7("<title>").Add(title).Add_str_a7("</title>");
-
-					int arg_idx = 1;
-					int parts_len = parts.Len();
-					for (int j = 0; j < parts_len; j++) {
-						Xomw_prepro_part part = (Xomw_prepro_part)parts.Get_at(j);
-						if (part.Eqpos != -1) {
-							Bry_bfr part_bfr = part.bfr;
-							byte[] part_bfr_bry = part_bfr.Bfr();
-							tmp_bfr.Add_str_a7("<part><name>").Add_mid(part_bfr_bry, 0, part.Eqpos);
-							tmp_bfr.Add_str_a7("</name>=<value>").Add_mid(part_bfr_bry, part.Eqpos + 1, part_bfr.Len());
-							tmp_bfr.Add_str_a7("</value></part>");
-						}
-						else {
-							tmp_bfr.Add_str_a7("<part><name index=\"").Add_int_variable(arg_idx).Add_str_a7("\" /><value>").Add(part.bfr.To_bry()).Add_str_a7("</value></part>");
-							arg_idx++;
-						}
-					}
-					element = tmp_bfr.Add_str_a7("</").Add(name_bry).Add_str_a7(">").To_bry_and_clear();
+					element = this.preprocessToObj_xml(piece, Xomw_prepro_rule.Name(name_type), max_count, matching_count);
 				}
 
 				// Advance input pointer
@@ -684,7 +770,7 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 
 				// Unwind the stack
 				stack.Pop();
-				accum = stack.Get_accum();
+				this.accum = this.Accum__set(stack.Get_accum());
 
 				// Re-add the old stack element if it still has unmatched opening characters remaining
 				if (matching_count < piece.count) {
@@ -695,45 +781,38 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 					int min = Get_rule(piece.open).min;
 					if (piece.count >= min) {
 						stack.Push(piece);
-						accum = stack.Get_accum();
+						this.accum = this.Accum__set(stack.Get_accum());
 					}
 					else {
-						accum.Add(Bry_.Repeat_bry(piece.open, piece.count));
+						this.preprocessToObj_literal(Bry_.Repeat_bry(piece.open, piece.count));
 					}
 				}
 
 				Xomw_prepro_flags flags = stack.Get_flags();
-				find_pipe = flags.Find_pipe;
-				find_equals = flags.Find_eq;
-				in_heading = flags.In_heading;
+				findPipe = flags.findPipe;
+				findEquals = flags.findEquals;
+				inHeading = flags.inHeading;
 
 				// Add XML element to the enclosing accumulator
-				accum.Add(element);
+				this.preprocessToObj_add_element(element);
 			}
 			else if (found == Found__pipe) {
-				find_equals = true; // shortcut for getFlags()
+				findEquals = true; // shortcut for getFlags()
 				stack.Add_part(Bry_.Empty);
-				accum = stack.Get_accum();
+				this.accum = this.Accum__set(stack.Get_accum());
 				i++;
 			}
 			else if (found == Found__equals) {
-				find_equals = false; // shortcut for getFlags()
-				stack.Get_current_part().Eqpos = accum.Len();
-				accum.Add_byte(Byte_ascii.Eq);
+				findEquals = false; // shortcut for getFlags()
+				this.preprocessToObj_equals(stack);
 				i++;
 			}
 		}
 
 		// Output any remaining unclosed brackets
-		Bry_bfr root_accum = stack.Get_root_accum();
-		int stack_len = stack.stack.Len();
-		for (int j = 0; j < stack_len; j++) {
-			Xomw_prepro_piece piece = (Xomw_prepro_piece)stack.stack.Get_at(j);
-			root_accum.Add(piece.Break_syntax(tmp_bfr, -1));
-		}
-		root_accum.Add_str_a7("</root>");
-		return root_accum.To_bry_and_clear();
+		return (byte[])this.preprocessToObj_term(stack);
 	}
+
 	private Xomw_prepro_rule Get_rule(byte[] bry) {
 		if		(Bry_.Eq(bry, rule_curly.bgn))   return rule_curly;
 		else if	(Bry_.Eq(bry, rule_brack.bgn))   return rule_brack;
@@ -759,7 +838,6 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 	, Bry__only_include_end = Bry_.new_a7("</onlyinclude>")
 	, Bry__comment_bgn  = Bry_.new_a7("<!--")
 	, Bry__comment_end  = Bry_.new_a7("-->")
-	, Bry__escaped_lt   = Bry_.new_a7("&lt;")
 	, Bry__end_lhs      = Bry_.new_a7("</")
 	;
 	private static final    int Len__only_include_end = Bry__only_include_end.length;
@@ -783,4 +861,28 @@ public class Xomw_prepro_wkr {	// THREAD.UNSAFE: caching for repeated calls
 		rv.Add_obj(langv_end, new Xomw_prepro_curchar_itm(langv_end, Byte_ascii.At));
 		return rv;
 	}
+
+	protected abstract Xomw_prepro_accum Factory__accum();
+	protected abstract XomwPPDPart Factory__part();
+
+	protected abstract Xomw_prepro_accum Accum__set(Xomw_prepro_accum accum);
+
+	protected abstract void preprocessToObj_root();
+	protected abstract void preprocessToObj_ignore(byte[] src, int bgn, int end);
+	protected abstract void preprocessToObj_literal(byte[] src, int bgn, int end);
+	protected void preprocessToObj_literal(byte[] src) {this.preprocessToObj_literal(src, 0, src.length);}
+	protected abstract void preprocessToObj_comment(byte[] src, int bgn, int end);
+	protected void preprocessToObj_comment(byte[] src) {this.preprocessToObj_comment(src, 0, src.length);}
+	protected abstract byte[] preprocessToObj_close_init();
+	protected abstract byte[] preprocessToObj_close_make(byte[] src, int bgn, int end);
+	protected abstract void preprocessToObj_ext(byte[] src, byte[] name, int atr_bgn, int atr_end, byte[] inner, byte[] close);
+	protected abstract Xomw_prepro_accum preprocessToObj_heading_init(int count, int heading_index);
+	protected abstract void preprocessToObj_heading_end(Xomw_prepro_accum element);
+	protected abstract void preprocessToObj_removeLeadingWhitespaceFromEnd(int ws_len);
+	protected abstract Xomw_prepro_accum preprocessToObj_text(Xomw_prepro_accum element, Xomw_prepro_piece piece, byte[] rule_end, int matching_count);
+	protected abstract Xomw_prepro_accum preprocessToObj_xml(Xomw_prepro_piece piece, byte[] name_bry, int max_count, int matching_count);
+	protected abstract void preprocessToObj_add_element(Xomw_prepro_accum element);
+	protected abstract void preprocessToObj_equals(XomwPPDStack stack);
+	protected abstract Object preprocessToObj_term(XomwPPDStack stack);
+	public abstract XomwPreprocessor Make_new(XomwParser parser);
 }

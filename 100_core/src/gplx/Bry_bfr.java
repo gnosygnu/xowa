@@ -79,7 +79,7 @@ public class Bry_bfr {
 	public Bry_bfr Add(byte[] val) {
 		int val_len = val.length;
 		if (bfr_len + val_len > bfr_max) Resize((bfr_max + val_len) * 2);
-		Bry_.Copy_by_pos(val, 0, val_len, bfr, bfr_len);
+		Bry_.Copy_to(val, 0, val_len, bfr, bfr_len);
 		// Array_.Copy_to(val, 0, bfr, bfr_len, val_len);
 		bfr_len += val_len;
 		return this;
@@ -88,7 +88,7 @@ public class Bry_bfr {
 		int len = end - bgn;
 		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8__by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
-		Bry_.Copy_by_pos(val, bgn, end, bfr, bfr_len);
+		Bry_.Copy_to(val, bgn, end, bfr, bfr_len);
 		// Array_.Copy_to(val, bgn, bfr, bfr_len, len);
 		bfr_len += len;
 		return this;
@@ -97,7 +97,7 @@ public class Bry_bfr {
 		int len = end - bgn;
 		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8__by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
-		Bry_.Copy_by_pos_reversed(val, bgn, end, bfr, bfr_len);
+		Bry_.Copy_to_reversed(val, bgn, end, bfr, bfr_len);
 		// Array_.Copy_to(val, bgn, bfr, bfr_len, len);
 		bfr_len += len;
 		return this;
@@ -118,7 +118,7 @@ public class Bry_bfr {
 	public Bry_bfr Add_bfr_and_preserve(Bry_bfr src) {
 		int len = src.bfr_len;
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
-		Bry_.Copy_by_pos(src.bfr, 0, len, bfr, bfr_len);
+		Bry_.Copy_to(src.bfr, 0, len, bfr, bfr_len);
 		// Array_.Copy_to(src.bfr, 0, bfr, bfr_len, len);
 		bfr_len += len;
 		return this;
@@ -163,7 +163,7 @@ public class Bry_bfr {
 			if (all_ws) return this;
 		}
 		src_len = src_end - src_bgn;
-		Bry_.Copy_by_pos(src.bfr, src_bgn, src_end, bfr, bfr_len);
+		Bry_.Copy_to(src.bfr, src_bgn, src_end, bfr, bfr_len);
 		// Array_.Copy_to(src.bfr, src_bgn, bfr, bfr_len, src_len);
 		bfr_len += src_len;
 		src.Clear();
@@ -304,10 +304,10 @@ public class Bry_bfr {
 			Add_mid(val, bgn, end);
 		return this;
 	}
-	public Bry_bfr Add_bry_many(byte[]... ary) {
-		int len = ary.length;
+	public Bry_bfr Add_bry_many(byte[]... val) {
+		int len = val.length;
 		for (int i = 0; i < len; i++) {
-			byte[] bry = ary[i];
+			byte[] bry = val[i];
 			if (bry != null && bry.length > 0)
 				this.Add(bry);
 		}
@@ -338,10 +338,10 @@ public class Bry_bfr {
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
 	}
-	public Bry_bfr Add_str_u8_many(String... ary) {
-		int len = ary.length;
+	public Bry_bfr Add_str_u8_many(String... val) {
+		int len = val.length;
 		for (int i = 0; i < len; ++i)
-			Add_str_u8(ary[i]);
+			Add_str_u8(val[i]);
 		return this;
 	}
 	public Bry_bfr Add_str_u8_fmt(String fmt, Object... args) {
@@ -363,6 +363,10 @@ public class Bry_bfr {
 			return this;
 		}
 		catch (Exception e) {throw Err_.new_exc(e, "core", "invalid UTF-8 sequence", "s", str);}
+	}
+	public Bry_bfr Add_str_mid(String src, int bgn, int end) {
+		this.Add_str_u8(String_.Mid(src, bgn, end));
+		return this;
 	}
 	public Bry_bfr Add_kv_dlm(boolean line, String key, Object val) {
 		this.Add_str_a7(key).Add_byte_colon().Add_byte_space();
@@ -495,16 +499,16 @@ public class Bry_bfr {
 	}
 	public boolean Match_end_byt(byte b)		{return bfr_len == 0 ? false : bfr[bfr_len - 1] == b;}
 	public boolean Match_end_byt_nl_or_bos()	{return bfr_len == 0 ? true : bfr[bfr_len - 1] == Byte_ascii.Nl;}
-	public boolean Match_end_ary(byte[] ary)	{return Bry_.Match(bfr, bfr_len - ary.length, bfr_len, ary);}
+	public boolean Match_end_ary(byte[] val)   {return Bry_.Match(bfr, bfr_len - val.length, bfr_len, val);}
 	public Bry_bfr Insert_at(int add_pos, byte[] add_bry) {return Insert_at(add_pos, add_bry, 0, add_bry.length);}
 	public Bry_bfr Insert_at(int add_pos, byte[] add_bry, int add_bgn, int add_end) {
 		int add_len = add_end - add_bgn;
 		int new_max = bfr_max + add_len;
 		byte[] new_bfr = new byte[new_max];
 		if (add_pos > 0)
-			Bry_.Copy_by_pos	(bfr	,		0, add_pos, new_bfr, 0);
-		Bry_.Copy_by_pos		(add_bry, add_bgn, add_end, new_bfr, add_pos);
-		Bry_.Copy_by_pos		(bfr	, add_pos, bfr_len, new_bfr, add_pos + add_len);
+			Bry_.Copy_to	(bfr	,		0, add_pos, new_bfr, 0);
+		Bry_.Copy_to		(add_bry, add_bgn, add_end, new_bfr, add_pos);
+		Bry_.Copy_to		(bfr	, add_pos, bfr_len, new_bfr, add_pos + add_len);
 		bfr = new_bfr;
 		bfr_len += add_len;
 		bfr_max = new_max;
@@ -514,7 +518,7 @@ public class Bry_bfr {
 	public Bry_bfr Delete_rng_to_end(int pos) {return Delete_rng(pos, bfr_len);}
 	public Bry_bfr Delete_rng(int rng_bgn, int rng_end) {
 		int rng_len = rng_end - rng_bgn;
-		Bry_.Copy_by_pos(bfr, rng_end, bfr_len, bfr, rng_bgn);
+		Bry_.Copy_to(bfr, rng_end, bfr_len, bfr, rng_bgn);
 		bfr_len -= rng_len;
 		return this;
 	}
@@ -564,10 +568,10 @@ public class Bry_bfr {
 		rv[11] = true;
 		return rv;
 	}
-	public Bry_bfr Concat_skip_empty(byte[] dlm, byte[]... ary) {
-		int ary_len = ary.length;
-		for (int i = 0; i < ary_len; i++) {
-			byte[] itm = ary[i];
+	public Bry_bfr Concat_skip_empty(byte[] dlm, byte[]... val) {
+		int val_len = val.length;
+		for (int i = 0; i < val_len; i++) {
+			byte[] itm = val[i];
 			boolean itm_has_bytes = Bry_.Len_gt_0(itm);
 			if (	i != 0
 				&&	itm_has_bytes

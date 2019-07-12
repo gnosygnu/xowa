@@ -43,7 +43,7 @@ public class JCSingleton {
 	private final    Ordered_hash mapCacheLru = Ordered_hash_.New();
 
 	public Xomw_page_fetcher Store() {return store;} public void Store_(Xomw_page_fetcher v) {this.store = v;} private Xomw_page_fetcher store;
-	public Xophp_ary ConfigModels() {return configModels;} private final    Xophp_ary configModels = new Xophp_ary();
+	public XophpArray ConfigModels() {return configModels;} private final    XophpArray configModels = new XophpArray();
 //		/**
 //		* @var TitleParser cached invariant title parser
 //		*/
@@ -423,8 +423,8 @@ public class JCSingleton {
 		String clz = null;
 		if (configModels.Has(modelId)) {
 			Object val = configModels.Get(modelId);
-			if (Type_.Type_by_obj(val) == Xophp_ary.class) {
-				Xophp_ary val_as_ary = (Xophp_ary)val;
+			if (Type_.Type_by_obj(val) == XophpArray.class) {
+				XophpArray val_as_ary = (XophpArray)val;
 				if (val_as_ary.Has("class")) {
 					Gfo_usr_dlg_.Instance.Warn_many("", "", "JsonConfig: Invalid +$wgJsonConfigModels['modelId'] array " + "value, 'cl"+ "ass' not found");
 				} else {

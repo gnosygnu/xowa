@@ -17,6 +17,7 @@ package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*;
 public class XomwParserOptions {
 	public XomwParserOptions() {
 		this.mThumbSize = 220;
+		initialiseFromUser();
 	}
 //		/**
 //		* Interlanguage links are removed and returned in an array
@@ -68,11 +69,11 @@ public class XomwParserOptions {
 //		*/
 //		private $mTargetLanguage = null;
 //
-//		/**
-//		* Maximum size of template expansions, in bytes
-//		*/
-//		private $mMaxIncludeSize;
-//
+	/**
+	* Maximum size of template expansions, in bytes
+	*/
+	private int mMaxIncludeSize;
+
 //		/**
 //		* Maximum number of nodes touched by PPFrame::expand()
 //		*/
@@ -271,10 +272,10 @@ public class XomwParserOptions {
 //			return this.mTargetLanguage;
 //		}
 //
-//		public function getMaxIncludeSize() {
-//			return this.mMaxIncludeSize;
-//		}
-//
+	public int getMaxIncludeSize() {
+		return this.mMaxIncludeSize;
+	}
+
 //		public function getMaxPPNodeCount() {
 //			return this.mMaxPPNodeCount;
 //		}
@@ -679,28 +680,29 @@ public class XomwParserOptions {
 //		public static function newFromContext( IContextSource $context ) {
 //			return new ParserOptions( $context->getUser(), $context->getLanguage() );
 //		}
-//
-//		/**
-//		* Get user options
-//		*
-//		* @param User $user
-//		* @param Language $lang
-//		*/
-//		private function initialiseFromUser( $user, $lang ) {
+
+	/**
+	* Get user options
+	*
+	* @param User $user
+	* @param Language $lang
+	*/
+	// private function initialiseFromUser( $user, $lang ) {
+	private void initialiseFromUser() {
 //			global $wgInterwikiMagic, $wgAllowExternalImages,
 //				$wgAllowExternalImagesFrom, $wgEnableImageWhitelist, $wgAllowSpecialInclusion,
 //				$wgMaxArticleSize, $wgMaxPPNodeCount, $wgMaxTemplateDepth, $wgMaxPPExpandDepth,
 //				$wgCleanSignatures, $wgExternalLinkTarget, $wgExpensiveParserFunctionLimit,
 //				$wgMaxGeneratedPPNodeCount, $wgDisableLangConversion, $wgDisableTitleConversion,
 //				$wgEnableMagicLinks;
-//
-//			// *UPDATE* ParserOptions::matches() if any of this changes as needed
+
+		// *UPDATE* ParserOptions::matches() if any of this changes as needed
 //			this.mInterwikiMagic = $wgInterwikiMagic;
 //			this.mAllowExternalImages = $wgAllowExternalImages;
 //			this.mAllowExternalImagesFrom = $wgAllowExternalImagesFrom;
 //			this.mEnableImageWhitelist = $wgEnableImageWhitelist;
 //			this.mAllowSpecialInclusion = $wgAllowSpecialInclusion;
-//			this.mMaxIncludeSize = $wgMaxArticleSize * 1024;
+		this.mMaxIncludeSize = XomwDefaultSettings.wgMaxArticleSize * 1024;
 //			this.mMaxPPNodeCount = $wgMaxPPNodeCount;
 //			this.mMaxGeneratedPPNodeCount = $wgMaxGeneratedPPNodeCount;
 //			this.mMaxPPExpandDepth = $wgMaxPPExpandDepth;
@@ -719,7 +721,7 @@ public class XomwParserOptions {
 //			this.mThumbSize = $user->getOption( 'thumbsize' );
 //			this.mStubThreshold = $user->getStubThreshold();
 //			this.mUserLang = $lang;
-//		}
+	}
 //
 //		/**
 //		* Check if these options match that of another options set

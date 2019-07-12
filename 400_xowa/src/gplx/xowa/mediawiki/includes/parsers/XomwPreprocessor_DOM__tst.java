@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.prepros; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*;
-public class Xomw_prepro_wkr__tst {
-	private final    Xomw_prepro_wkr__fxt fxt = new Xomw_prepro_wkr__fxt();
+public class XomwPreprocessor_DOM__tst {
+	private final    XomwPreprocessor_DOM__fxt fxt = new XomwPreprocessor_DOM__fxt();
 	@Test  public void Text() {
 		fxt.Test__parse("abc", "<root>abc</root>");
 	}
@@ -218,16 +218,16 @@ public class Xomw_prepro_wkr__tst {
 		fxt.Test__parse("a<noinclude>b</noinclude>c", "<root>a<ignore>&lt;noinclude&gt;</ignore>b<ignore>&lt;/noinclude&gt;</ignore>c</root>");
 	}
 }
-class Xomw_prepro_wkr__fxt {
-	private final    Xomw_prepro_wkr wkr = new Xomw_prepro_wkr();
+class XomwPreprocessor_DOM__fxt {
+	private final    XomwPreprocessor_DOM wkr = new XomwPreprocessor_DOM();
 	private boolean for_inclusion = false;
-	public Xomw_prepro_wkr__fxt() {
+	public XomwPreprocessor_DOM__fxt() {
 		wkr.Init_by_wiki("pre");
 	}
 	public void Init__for_inclusion_(boolean v) {for_inclusion = v;}
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		byte[] actl = wkr.Preprocess_to_xml(src_bry, for_inclusion);
+		byte[] actl = wkr.preprocessToXml(src_bry, for_inclusion);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl), src_str);
 	}
 }

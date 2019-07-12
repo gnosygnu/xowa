@@ -154,7 +154,7 @@ public class Bry_ {
 	public static byte[] Resize(byte[] src, int src_bgn, int trg_len) {
 		byte[] trg = new byte[trg_len];
 		int src_len = src.length; if (src_len > trg_len) src_len = trg_len;	// trg_len can be less than src_len
-		Copy_by_len(src, src_bgn, src_len, trg, 0);
+		Copy_to(src, src_bgn, src_len, trg, 0);
 		return trg;
 	}
 	public static byte[] Repeat_space(int len) {return Repeat(Byte_ascii.Space, len);}
@@ -178,14 +178,14 @@ public class Bry_ {
 	public static byte[] Add(byte[] src, byte b) {
 		int src_len = src.length;
 		byte[] rv = new byte[src_len + 1];
-		Copy_by_pos(src, 0, src_len, rv, 0);
+		Copy_to(src, 0, src_len, rv, 0);
 		rv[src_len] = b;
 		return rv;
 	}
 	public static byte[] Add(byte b, byte[] src) {
 		int src_len = src.length;
 		byte[] rv = new byte[src_len + 1];
-		Copy_by_pos(src, 0, src_len, rv, 1);
+		Copy_to(src, 0, src_len, rv, 1);
 		rv[0] = b;
 		return rv;
 	}
@@ -297,29 +297,30 @@ public class Bry_ {
 		for (int i = 0; i < repl_len; i++)
 			src[i + bgn] = repl[i];
 	}
-	public static void Copy_by_pos(byte[] src, int src_bgn, int src_end, byte[] trg, int trg_bgn) {
+	public static void Copy_to(byte[] src, int src_bgn, int src_end, byte[] trg, int trg_bgn) {
 		int trg_adj = trg_bgn - src_bgn;
 		for (int i = src_bgn; i < src_end; i++)
 			trg[i + trg_adj] = src[i];
 	}
-	public static void Copy_by_pos_reversed(byte[] src, int src_bgn, int src_end, byte[] trg, int trg_bgn) {
+	public static void Copy_to_reversed(byte[] src, int src_bgn, int src_end, byte[] trg, int trg_bgn) {
+		// copies src to trg, but in reverse order; EX: trg="1" src="432." -> "1.234"
 		int len = src_end - src_bgn;
 		for (int i = 0; i < len; i++)
 			trg[trg_bgn + i] = src[src_end - i - 1];
 	}
-	private static void Copy_by_len(byte[] src, int src_bgn, int src_len, byte[] trg, int trg_bgn) {
-		for (int i = 0; i < src_len; i++)
-			trg[i + trg_bgn] = src[i + src_bgn];
-	}
-	public static byte[] Replace_one(byte[] src, byte[] find, byte[] repl) {
-		int src_len = src.length;
-		int findPos = Bry_find_.Find(src, find, 0, src_len, true); if (findPos == Bry_find_.Not_found) return src;
-		int findLen = find.length, replLen = repl.length;
-		int rvLen = src_len + replLen - findLen;
-		byte[] rv = new byte[rvLen];
-		Copy_by_len(src	, 0					, findPos						, rv, 0		);
-		Copy_by_len(repl, 0					, replLen						, rv, findPos	);
-		Copy_by_len(src	, findPos + findLen	, src_len - findPos - findLen	, rv, findPos + replLen);
+	public static byte[] Replace_one(byte[] orig, byte[] find, byte[] repl) {
+		// find val
+		int orig_len = orig.length;
+		int find_pos = Bry_find_.Find(orig, find, 0, orig_len, true);
+		if (find_pos == Bry_find_.Not_found) return orig; // nothing found; exit
+
+		// do copy
+		int find_len = find.length, repl_len = repl.length;
+		int rv_len = orig_len + repl_len - find_len;
+		byte[] rv = new byte[rv_len];
+		Copy_to(orig, 0                  , find_pos, rv, 0                  ); // copy orig before repl
+		Copy_to(repl, 0                  , repl_len, rv, find_pos           ); // copy repl
+		Copy_to(orig, find_pos + find_len, orig_len, rv, find_pos + repl_len); // copy orig after repl
 		return rv;
 	}
 	public static void Replace_all_direct(byte[] src, byte find, byte repl) {Replace_all_direct(src, find, repl, 0, src.length);}

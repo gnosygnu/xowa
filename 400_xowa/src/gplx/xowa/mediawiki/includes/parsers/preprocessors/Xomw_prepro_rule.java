@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.prepros; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-class Xomw_prepro_rule {
+package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+public class Xomw_prepro_rule {
 	public Xomw_prepro_rule(byte[] bgn, byte[] end, int min, int max, int[] names) {
 		this.bgn = bgn;
 		this.end = end;
@@ -41,24 +41,4 @@ class Xomw_prepro_rule {
 			case Name__null:    return null;
 		}
 	}
-}
-class Xomw_prepro_elem {
-	private static final    byte[] Bry__tag_end = Bry_.new_a7("</");
-	public Xomw_prepro_elem(int type, byte[] name) {
-		this.type = type;
-		this.name = name;
-		this.tag_end_lhs = Bry_.Add(Bry__tag_end, name);
-	}
-	public final    int type;
-	public final    byte[] name;
-	public final    byte[] tag_end_lhs;
-	public static final int Type__comment = 0, Type__other = 1;
-}
-class Xomw_prepro_curchar_itm {
-	public Xomw_prepro_curchar_itm(byte[] bry, byte type) {
-		this.bry = bry;
-		this.type = type;
-	}
-	public byte[] bry;
-	public byte type;
 }

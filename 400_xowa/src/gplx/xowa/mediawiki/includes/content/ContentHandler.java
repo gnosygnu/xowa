@@ -532,7 +532,7 @@ public abstract class ContentHandler {
 			return true; // this means "use the default"
 		}
 
-		return XophpArray.in_array(format, this.mSupportedFormats);
+		return XophpArrayUtl.in_array(format, this.mSupportedFormats);
 	}
 
 	/**

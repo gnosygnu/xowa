@@ -44,7 +44,7 @@ public class Xof_file_wkr_ {
 			if (b == Byte_ascii.Space) {
 				if (!dirty) {
 					dirty = true;
-					rv = new byte[len]; Bry_.Copy_by_pos(src, 0, i, rv, 0);
+					rv = new byte[len]; Bry_.Copy_to(src, 0, i, rv, 0);
 				}
 				rv[i] = Byte_ascii.Underline;
 			}

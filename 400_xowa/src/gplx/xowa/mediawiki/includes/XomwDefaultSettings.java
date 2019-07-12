@@ -2178,12 +2178,12 @@ public class XomwDefaultSettings {
 //		* Allow schema updates
 //		*/
 //		$wgAllowSchemaUpdates = true;
-//
-//		/**
-//		* Maximum article size in kilobytes
-//		*/
-//		$wgMaxArticleSize = 2048;
-//
+
+	/**
+	* Maximum article size in kilobytes
+	*/
+	public static int wgMaxArticleSize = 2048;
+
 //		/**
 //		* The minimum amount of memory that MediaWiki "needs"; MediaWiki will try to
 //		* raise PHP's memory limit if it's below this amount.

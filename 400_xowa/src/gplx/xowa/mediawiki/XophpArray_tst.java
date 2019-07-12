@@ -15,68 +15,68 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*;
-public class Xophp_ary_tst { // REF: http://php.net/manual/en/language.types.array.php
+public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.array.php
 	private final    XophpArray_fxt fxt = new XophpArray_fxt();
 	@Test  public void array__kvs() {
 		// $array = array("foo" => "bar", "bar" => "foo",);
 		fxt.Test__array
-			( Xophp_ary.New()
+			( XophpArray.New()
 			.   Add("foo", "bar")
 			.   Add("bar", "foo")				
-			, Xophp_ary_itm.New("foo", "bar")
-			, Xophp_ary_itm.New("bar", "foo")
+			, XophpArrayItm.New_str("foo", "bar")
+			, XophpArrayItm.New_str("bar", "foo")
 			);
 	}
 	@Test  public void array__casting() {
 		// $array = array(1 => "a", "1" => "b", 1.5 => "c", true => "d",);
 		fxt.Test__array
-			( Xophp_ary.New()
+			( XophpArray.New()
 			.   Add(1   , "a")
 			.   Add("1" , "b")
 			.   Add(1.5 , "c")
 			.   Add(true, "d")				
-			, Xophp_ary_itm.New(1, "d"));
+			, XophpArrayItm.New_int(1, "d"));
 	}
 	@Test  public void array__mixed() {
 		// $array = array("foo" => "bar", "bar" => "foo", 100 => -100, -100 => 100);
 		fxt.Test__array
-			( Xophp_ary.New()
+			( XophpArray.New()
 			.   Add("foo", "bar")
 			.   Add("bar", "foo")
 			.   Add(100, -100)
 			.   Add(-100, 100)
-			, Xophp_ary_itm.New("foo", "bar")
-			, Xophp_ary_itm.New("bar", "foo")
-			, Xophp_ary_itm.New(100, -100)
-			, Xophp_ary_itm.New(-100, 100)
+			, XophpArrayItm.New_str("foo", "bar")
+			, XophpArrayItm.New_str("bar", "foo")
+			, XophpArrayItm.New_int(100, -100)
+			, XophpArrayItm.New_int(-100, 100)
 			);
 	}
 	@Test  public void array__objs() {
 		// $array = array("foo", "bar", "hello", "world");
 		fxt.Test__array
-			( Xophp_ary.New()
+			( XophpArray.New()
 			.   Add("foo")
 			.   Add("bar")
 			.   Add("hello")
 			.   Add("world")
-			, Xophp_ary_itm.New(0, "foo")
-			, Xophp_ary_itm.New(1, "bar")
-			, Xophp_ary_itm.New(2, "hello")
-			, Xophp_ary_itm.New(3, "world")
+			, XophpArrayItm.New_int(0, "foo")
+			, XophpArrayItm.New_int(1, "bar")
+			, XophpArrayItm.New_int(2, "hello")
+			, XophpArrayItm.New_int(3, "world")
 			);
 	}
 	@Test  public void array__unkeyed() {
 		// $array = array("a", "b", 6 => "c", "d");
 		fxt.Test__array
-			( Xophp_ary.New()
+			( XophpArray.New()
 			.   Add("a")
 			.   Add("b")
 			.   Add(6, "c")
 			.   Add("d")
-			, Xophp_ary_itm.New(0, "a")
-			, Xophp_ary_itm.New(1, "b")
-			, Xophp_ary_itm.New(6, "c")
-			, Xophp_ary_itm.New(7, "d")
+			, XophpArrayItm.New_int(0, "a")
+			, XophpArrayItm.New_int(1, "b")
+			, XophpArrayItm.New_int(6, "c")
+			, XophpArrayItm.New_int(7, "d")
 			);
 	}
 	@Test  public void array__multidimensional() {
@@ -92,23 +92,23 @@ public class Xophp_ary_tst { // REF: http://php.net/manual/en/language.types.arr
 		);
 		*/
 		fxt.Test__array
-		( Xophp_ary.New()
+		( XophpArray.New()
 		.    Add("foo"   , "bar")
 		.    Add(42      , 24)
-		.    Add("multi" , Xophp_ary.New()
-		.        Add("dimensional", Xophp_ary.New()
+		.    Add("multi" , XophpArray.New()
+		.        Add("dimensional", XophpArray.New()
 		.            Add("array", "foo")
 		))
-		, Xophp_ary_itm.New("foo", "bar")
-		, Xophp_ary_itm.New(42, "24")
-		, Xophp_ary_itm.New("multi", Xophp_ary.New()
-		.       Add("dimensional", Xophp_ary.New()
+		, XophpArrayItm.New_str("foo", "bar")
+		, XophpArrayItm.New_int(42, "24")
+		, XophpArrayItm.New_str("multi", XophpArray.New()
+		.       Add("dimensional", XophpArray.New()
 		.            Add("array", "foo")
 		))
 		);
 	}
 	@Test  public void array__unset() {
-		Xophp_ary ary = Xophp_ary.New();
+		XophpArray ary = XophpArray.New();
 		ary.Add(0, "a").Add(1, "b");
 
 		// delete all
@@ -118,20 +118,20 @@ public class Xophp_ary_tst { // REF: http://php.net/manual/en/language.types.arr
 
 		// add new and assert idx is 2
 		ary.Add("c");
-		fxt.Test__array(ary, Xophp_ary_itm.New(2, "c"));
+		fxt.Test__array(ary, XophpArrayItm.New_int(2, "c"));
 
 		ary = ary.Values();
 		ary.Add("d");
-		fxt.Test__array(ary, Xophp_ary_itm.New(0, "c"), Xophp_ary_itm.New(1, "d"));
+		fxt.Test__array(ary, XophpArrayItm.New_int(0, "c"), XophpArrayItm.New_int(1, "d"));
 	}
 }
 class XophpArray_fxt {
-	public void Test__array(Xophp_ary ary, Xophp_ary_itm... expd) {
-		Xophp_ary_itm[] actl = ary.To_ary();
+	public void Test__array(XophpArray ary, XophpArrayItm... expd) {
+		XophpArrayItm[] actl = ary.To_ary();
 		Gftest.Eq__ary(expd, actl);
 	}
-	public void Test__unset(Xophp_ary ary, int idx, Xophp_ary_itm... expd) {
-		Xophp_ary_itm[] actl = ary.To_ary();
+	public void Test__unset(XophpArray ary, int idx, XophpArrayItm... expd) {
+		XophpArrayItm[] actl = ary.To_ary();
 		Gftest.Eq__ary(expd, actl);
 	}
 }
