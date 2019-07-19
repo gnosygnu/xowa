@@ -13,19 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists.caches; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
+package gplx.core.caches; import gplx.*; import gplx.core.*;
 public class Lru_cache {
 	private final    Hash_adp map = Hash_adp_.New();
-	private long max;
-	private long cur = 0;
-	private Lru_node head;
-	private Lru_node tail;
-	private long evicts;
-	public void Max_(long max) {
+	private Lru_node head, tail;
+	private long cur, min, max, evicts;
+	public Lru_cache(boolean auto_reg, String key, long min, long max) {
+		this.key = key;
+		this.min = min;
 		this.max = max;
+		if (auto_reg) Lru_cache_root.Instance.Add(this);
 	}
+	public String Key() {return key;} private final    String key;
 	public long Evicts() {return evicts;}
 	public long Cur() {return cur;}
+	public void Min_max_(long min, long max) {
+		this.min = min;
+		this.max = max;
+	}
 	public Object Get_or_null(Object key) {
 		Lru_node nde = (Lru_node)map.Get_by(key);
 		if (nde == null) {
@@ -46,10 +51,7 @@ public class Lru_cache {
 			Add_to_tail(nde);
 		}
 		else {
-			while (cur + size > max) {
-				Del_node_from_this(head);
-				evicts++;
-			}
+			this.Clear_min(size);
 
 			nde = new Lru_node(key, val, size);
 			Add_to_tail(nde);
@@ -63,11 +65,18 @@ public class Lru_cache {
 			Del_node_from_this(nde);
 		}
 	}
-	public void Clear() {
+	public void Clear_all() {
 		map.Clear();
 		head = null;
 		tail = null;
 		cur = 0;
+	}
+	public void Clear_min(long size) {
+		long threshold = min >= 0 ? min : max;
+		while (cur + size > threshold) {
+			Del_node_from_this(head);
+			evicts++;
+		}
 	}
 	private void Del_node_from_this(Lru_node nde) {
 		map.Del(nde.Key());
@@ -96,6 +105,21 @@ public class Lru_cache {
 		if (head == null)
 			head = tail;
 	}
+	public void To_str(Bry_bfr bfr, boolean grps_only_or_both) {
+		bfr.Add_str_a7("g");
+		bfr.Add_byte_pipe().Add_str_u8(key);
+		bfr.Add_byte_pipe().Add_long_variable(cur);
+		bfr.Add_byte_pipe().Add_long_variable(min);
+		bfr.Add_byte_pipe().Add_long_variable(max);
+		bfr.Add_byte_nl();
+		if (grps_only_or_both) {
+			Lru_node nde = head;
+			while (nde != null) {
+				nde.To_str(bfr);
+				nde = nde.Nxt();
+			}
+		}
+	}
 }
 class Lru_node {
 	private final    Object key;
@@ -114,4 +138,10 @@ class Lru_node {
 	public long Size() {return size;}
 	public Lru_node Prv() {return prv;} public void Prv_(Lru_node v) {this.prv = v;}
 	public Lru_node Nxt() {return nxt;} public void Nxt_(Lru_node v) {this.nxt = v;}
+	public void To_str(Bry_bfr bfr) {
+		bfr.Add_str_a7("i");
+		bfr.Add_byte_pipe().Add_str_u8(Object_.Xto_str_strict_or_null_mark(key));
+		bfr.Add_byte_pipe().Add_long_variable(size);
+		bfr.Add_byte_nl();
+	}
 }

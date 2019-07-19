@@ -21,12 +21,8 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.nio.*;
 import java.nio.channels.*;
-import java.util.Date;
-
-import javax.print.FlavorException;
-import javax.tools.JavaCompiler;
 import gplx.core.criterias.*; import gplx.core.bits.*; import gplx.core.envs.*;
-import gplx.core.ios.streams.*;
+import gplx.core.ios.streams.*; import gplx.core.ios.atrs.*;
 import gplx.core.progs.*;
 public class IoEngine_system extends IoEngine_base {
 	@Override public String Key() {return IoEngine_.SysKey;}
@@ -42,6 +38,9 @@ public class IoEngine_system extends IoEngine_base {
 		if (!Fil_Exists(fil)) return;
 		MarkFileWritable(fil, url, args.ReadOnlyFails(), "DeleteFile");
 		DeleteFil_lang(fil, url);
+	}
+	@Override public Io_itm_atr_req Query_itm_atrs(Io_url url, Io_itm_atr_req req) {
+		return Io_itm_atr_wkr.New(url).Process(req);
 	}
 		@Override public boolean ExistsFil_api(Io_url url) {
 		File f = new File(url.Xto_api());
@@ -158,7 +157,9 @@ public class IoEngine_system extends IoEngine_base {
 			&& 	String_.Eq(url.OwnerDir().Raw(), String_.Empty)		// folder is drive; EX: "C:"
 			)
 			url_api = url_api + "\\";								// add "\\"; else listFiles will return working folder's files, not C:; DATE:2016-04-07
+
 		File dirInfo = new File(url_api);
+		rv.ReadOnly_(!dirInfo.canWrite()); // get read-only flag for directories; ISSUE#:509; DATE:2019-07-11
 		if (!dirInfo.exists()) {
 			rv.Exists_set(false);
 			return rv;

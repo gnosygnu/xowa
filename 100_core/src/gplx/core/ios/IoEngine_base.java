@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.ios.streams.*;
+import gplx.core.ios.streams.*; import gplx.core.ios.atrs.*;
+import gplx.core.caches.*;
 public abstract class IoEngine_base implements IoEngine {
 	public abstract String		Key();
 	public abstract boolean		ExistsFil_api(Io_url url);
@@ -24,6 +25,7 @@ public abstract class IoEngine_base implements IoEngine {
 	public abstract void		CopyFil(IoEngine_xrg_xferFil args);
 	public abstract void		MoveFil(IoEngine_xrg_xferFil args);
 	public abstract IoItmFil	QueryFil(Io_url url);
+	public abstract Io_itm_atr_req Query_itm_atrs(Io_url url, Io_itm_atr_req req);
 	public abstract void		UpdateFilAttrib(Io_url url, IoItmAttrib atr); // will fail if file does not exists
 	public abstract void		UpdateFilModifiedTime(Io_url url, DateAdp modified);
 	public abstract IoStream	OpenStreamRead(Io_url url);

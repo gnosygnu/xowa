@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.primitives.*; import gplx.core.ios.*; /*IoItmFil, IoItmDir..*/ import gplx.core.ios.streams.*; import gplx.core.ios.loaders.*;
+import gplx.core.primitives.*;
+import gplx.core.ios.*; /*IoItmFil, IoItmDir..*/ import gplx.core.ios.streams.*; import gplx.core.ios.loaders.*; import gplx.core.ios.atrs.*;
 public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather all cmds under gplx namespace; otherwise need to use gplx.core.ios whenever copying/deleting file
 	public Io_mgr() {evt_mgr = new Gfo_evt_mgr(this);}
 	public Gfo_evt_mgr					Evt_mgr() {return evt_mgr;} private final    Gfo_evt_mgr evt_mgr;
@@ -57,6 +58,7 @@ public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather
 	}
 	public Io_url[]						QueryDir_fils(Io_url dir) {return QueryDir_args(dir).ExecAsUrlAry();}
 	public IoEngine_xrg_queryDir		QueryDir_args(Io_url dir) {return IoEngine_xrg_queryDir.new_(dir);}
+	public Io_itm_atr_req        Query_itm_atrs(Io_url url, Io_itm_atr_req req) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).Query_itm_atrs(url, req);}
 	public void							DeleteDirSubs(Io_url url) {IoEngine_xrg_deleteDir.new_(url).Exec();}
 	public IoEngine_xrg_deleteDir		DeleteDir_cmd(Io_url url) {return IoEngine_xrg_deleteDir.new_(url);}
 	public void							DeleteDirDeep(Io_url url) {IoEngine_xrg_deleteDir.new_(url).Recur_().Exec();}
@@ -149,11 +151,13 @@ public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather
 	}
 	public boolean DownloadFil(String src, Io_url trg) {return IoEngine_xrg_downloadFil.new_(src, trg).Exec();}
 	public IoEngine_xrg_downloadFil DownloadFil_args(String src, Io_url trg) {return IoEngine_xrg_downloadFil.new_(src, trg);}
+	public boolean Query_read_only(Io_url url, int read_only_type) {return IoEngineUtl.Query_read_only(IoEnginePool.Instance.Get_by(url.Info().EngineKey()), url, read_only_type);}
 	public static final    Io_mgr Instance = new Io_mgr();
 	public static final int Len_kb = 1024, Len_mb = 1048576, Len_gb = 1073741824, Len_gb_2 = 2147483647;
 	public static final long Len_mb_long = Len_mb;
 	public static final long Len_null = -1;
 	public static final    String Evt__fil_created = "fil_created";
+	public static final int Read_only__basic__file = 1, Read_only__basic__file_and_dirs = 2, Read_only__perms__file = 3;
 }
 class Io_mgr_ {
 	public static int Delete_dir_empty(Io_url url) {

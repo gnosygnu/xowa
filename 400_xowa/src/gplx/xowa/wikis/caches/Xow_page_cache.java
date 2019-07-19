@@ -14,19 +14,21 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.lists.caches.*;
+import gplx.core.caches.*;
 public class Xow_page_cache {
 	private final    Object thread_lock = new Object(); // NOTE: thread-safety needed for xomp since one page-cache is shared across all wkrs
 	private final    Xowe_wiki wiki;
-	private final    Lru_cache cache = new Lru_cache();
+	private final    Lru_cache cache;
 	private long cache_tries = 0;
 	private long cache_misses = 0;
 	public Xow_page_cache(Xowe_wiki wiki) {
 		this.wiki = wiki;
-		cache.Max_(16 * Io_mgr.Len_mb);
+		this.cache_key = "xowa.app.page_cache.'" + wiki.Domain_str() + "'." + wiki.hashCode();
+		this.cache = new Lru_cache(Bool_.Y, cache_key, 8 * Io_mgr.Len_mb, 16 * Io_mgr.Len_mb);
 	}
+	public String Cache_key() {return cache_key;} private final    String cache_key;
 	public void Load_wkr_(Xow_page_cache_wkr v) {this.load_wkr = v;} private Xow_page_cache_wkr load_wkr;
-	public void Max_(long v) {cache.Max_(v);}
+	public void Min_max_(long min, long max) {cache.Min_max_(min, max);}
 
 	public void Add_itm(String ttl_full_db, Xow_page_cache_itm itm) {
 		synchronized (thread_lock) {
@@ -61,7 +63,7 @@ public class Xow_page_cache {
 	public void Free_mem(boolean clear_permanent_itms) {
 		synchronized (thread_lock) {	// LOCK:app-level; DATE:2016-07-06
 			if (clear_permanent_itms) {
-				cache.Clear();
+				cache.Clear_all();
 			}
 		}
 	}

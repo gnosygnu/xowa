@@ -27,6 +27,7 @@ public class Xocfg_type_mgr {
 		this.Lists__add("list:xowa.addon.http_server.file_retrieve_mode", Keyval_.new_("wait"), Keyval_.new_("skip"), Keyval_.new_("async_server", "async server"));
 		this.Lists__add("list:xowa.addon.scribunto.engine", "luaj", "lua");
 		this.Lists__add("list:xowa.addon.math.renderer", Keyval_.new_("mathjax","MathJax"), Keyval_.new_("latex", "LaTeX"));
+		this.Lists__add("list:xowa.app.dbs.sqlite.read_only_detection", Keyval_.new_("basic_file", "Basic - File only"), Keyval_.new_("basic_file_and_dirs", "Basic - File and parent dirs"), Keyval_.new_("perms_file", "Permissions - File"));
 	}
 	public void	Lists__add(String key, String... vals) {
 		int len = vals.length;

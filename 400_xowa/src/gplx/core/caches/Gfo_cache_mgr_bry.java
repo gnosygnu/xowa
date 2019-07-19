@@ -20,17 +20,17 @@ public class Gfo_cache_mgr_bry extends Gfo_cache_mgr_base {
 	public void Add(byte[] key, Object val) {Base_add(key, val);}
 	public void Del(byte[] key) {Base_del(key);}
 }
-class Gfo_cache_itm {
-	public Gfo_cache_itm(Object key, Object val) {this.key = key; this.val = val; this.Touched_update();}
+class Gfo_cache_itm_bry {
+	public Gfo_cache_itm_bry(Object key, Object val) {this.key = key; this.val = val; this.Touched_update();}
 	public Object Key() {return key;} private Object key;
 	public Object Val() {return val;} private Object val;
 	public long Touched() {return touched;} private long touched;
-	public Gfo_cache_itm Touched_update() {touched = System_.Ticks(); return this;}
+	public Gfo_cache_itm_bry Touched_update() {touched = System_.Ticks(); return this;}
 }
 class Gfo_cache_itm_comparer implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
-		Gfo_cache_itm lhs = (Gfo_cache_itm)lhsObj;
-		Gfo_cache_itm rhs = (Gfo_cache_itm)rhsObj;
+		Gfo_cache_itm_bry lhs = (Gfo_cache_itm_bry)lhsObj;
+		Gfo_cache_itm_bry rhs = (Gfo_cache_itm_bry)rhsObj;
 		return Long_.Compare(lhs.Touched(), rhs.Touched());
 	}
 	public static final    Gfo_cache_itm_comparer Touched_asc = new Gfo_cache_itm_comparer(); // TS.static

@@ -20,11 +20,11 @@ public class Gfo_cache_mgr_base {
 	public int Compress_to() {return compress_to;} public void Compress_to_(int v) {compress_to = v;} private int compress_to = 8;
 	protected Object Base_get_or_null(byte[] key) {
 		Object rv_obj = hash.Get_by(key);
-		return rv_obj == null ? null : ((Gfo_cache_itm)rv_obj).Val();
+		return rv_obj == null ? null : ((Gfo_cache_itm_bry)rv_obj).Val();
 	}
 	protected void Base_add(byte[] key, Object val) {
 		if (hash.Count() >= compress_max) Compress(); 
-		Gfo_cache_itm itm = new Gfo_cache_itm(key, val); 
+		Gfo_cache_itm_bry itm = new Gfo_cache_itm_bry(key, val); 
 		hash.Add(key, itm);
 	}
 	protected void Base_del(byte[] key) {
@@ -35,11 +35,11 @@ public class Gfo_cache_mgr_base {
 		int del_len = hash.Count() - compress_to;
 		List_adp del_list = List_adp_.New();
 		for (int i = 0; i < del_len; i++) {
-			Gfo_cache_itm itm = (Gfo_cache_itm)hash.Get_at(i);
+			Gfo_cache_itm_bry itm = (Gfo_cache_itm_bry)hash.Get_at(i);
 			del_list.Add(itm);
 		}
 		for (int i = 0; i < del_len; i++) {
-			Gfo_cache_itm itm = (Gfo_cache_itm)del_list.Get_at(i);
+			Gfo_cache_itm_bry itm = (Gfo_cache_itm_bry)del_list.Get_at(i);
 			hash.Del(itm.Key());
 		}
 	}

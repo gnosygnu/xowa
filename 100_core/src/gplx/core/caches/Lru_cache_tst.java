@@ -13,25 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists.caches; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
+package gplx.core.caches; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
-import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
 public class Lru_cache_tst {
 	private final    Lru_cache_fxt fxt = new Lru_cache_fxt();
 	@Test  public void Get_one() {
-		fxt.Init__max(10);
 		fxt.Exec__set("a", 5);
 		fxt.Test__get_y("a");
 	}
 	@Test  public void Pop_one() {
-		fxt.Init__max(10);
 		fxt.Exec__set("a", 10);
 		fxt.Exec__set("b", 10);
 		fxt.Test__get_n("a");
 		fxt.Test__get_y("b");
 	}
 	@Test  public void Add_many() {
-		fxt.Init__max(10);
 		fxt.Exec__set("a", 4);
 		fxt.Exec__set("b", 3);
 		fxt.Exec__set("c", 2);
@@ -39,7 +35,6 @@ public class Lru_cache_tst {
 		fxt.Test__get_y("a", "b", "c", "d");
 	}
 	@Test  public void Pop_many() {
-		fxt.Init__max(10);
 		fxt.Exec__set("a", 4);
 		fxt.Exec__set("b", 3);
 		fxt.Exec__set("c", 2);
@@ -49,14 +44,12 @@ public class Lru_cache_tst {
 		fxt.Test__get_n("a", "b");
 	}
 	@Test  public void Set_repeatedly() {
-		fxt.Init__max(10);
 		fxt.Exec__set("a", "a1", 10);
 		fxt.Exec__set("a", "a2", 10);
 		fxt.Exec__set("a", "a3", 10);
 		fxt.Test__get_val("a", "a3");
 	}
 	@Test  public void Set_bumps_priority() {
-		fxt.Init__max(10);
 		fxt.Exec__set("a", 2);
 		fxt.Exec__set("b", 3);
 		fxt.Exec__set("c", 2);
@@ -66,7 +59,6 @@ public class Lru_cache_tst {
 		fxt.Test__get_n("b", "c");
 	}
 	@Test  public void Del() {
-		fxt.Init__max(10);
 		fxt.Exec__set("a", 2);
 		fxt.Exec__set("b", 2);
 		fxt.Exec__del("b");
@@ -74,7 +66,6 @@ public class Lru_cache_tst {
 		fxt.Test__get_n("b");
 	}
 	@Test  public void Clear() {
-		fxt.Init__max(10);
 		fxt.Exec__set("a", 2);
 		fxt.Exec__set("b", 2);
 		fxt.Exec__clear();
@@ -82,10 +73,7 @@ public class Lru_cache_tst {
 	}
 }
 class Lru_cache_fxt {
-	private final    Lru_cache cache = new Lru_cache();
-	public void Init__max(long max) {
-		cache.Max_(max);
-	}
+	private final    Lru_cache cache = new Lru_cache(Bool_.N, "test", -1, 10);
 	public void Exec__set(String key, long size) {
 		cache.Set(key, key, size);
 	}
@@ -96,7 +84,7 @@ class Lru_cache_fxt {
 		cache.Del(key);
 	}
 	public void Exec__clear() {
-		cache.Clear();
+		cache.Clear_all();
 	}
 	public void Test__get_y(String... keys) {
 		for (String key : keys)

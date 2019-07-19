@@ -16,8 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import java.sql.*; 
 import gplx.core.stores.*; import gplx.dbs.engines.*; import gplx.dbs.engines.sqlite.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*;
-import gplx.dbs.qrys.*; 
+import gplx.dbs.qrys.*;
+import gplx.core.consoles.Console_adp_;
+import gplx.core.consoles.Console_adp__sys;
 import gplx.core.ios.IoItmFil;
+
 import org.sqlite.SQLiteConnection;
 public class Sqlite_engine extends Db_engine_sql_base {
 	private final    Sqlite_txn_mgr txn_mgr; private final    Sqlite_schema_mgr schema_mgr;
@@ -68,9 +71,14 @@ public class Sqlite_engine extends Db_engine_sql_base {
 		
 		// set open_mode flag if conn is read-only; needed else all SELECT queries will be very slow; DATE:2016-09-03
 		IoItmFil sqlite_fs_itm = Io_mgr.Instance.QueryFil(sqlite_fs_url);
-		Keyval[] props = sqlite_fs_itm.Exists() && sqlite_fs_itm.ReadOnly()	// NOTE: must check if it exists; else missing-file will be marked as readonly connection, and missing-file will sometimes be dynamically created as read-write; DATE:2016-09-04
+		boolean read_only = sqlite_fs_itm.Exists() // NOTE: must check if it exists; else missing-file will be marked as readonly connection, and missing-file will sometimes be dynamically created as read-write; DATE:2016-09-04
+			  && Io_mgr.Instance.Query_read_only(sqlite_fs_url.OwnerDir(), Sqlite_engine_.Read_only_detection);
+		Keyval[] props = read_only
 			? Keyval_.Ary(Keyval_.new_("open_mode", "1"))
 			: Keyval_.Ary_empty;
+		if (read_only) {
+			Gfo_usr_dlg_.Instance.Note_many("", "", "Sqlite db opened as read-only: url=~{0}", sqlite_fs_url.Xto_api());
+		}
 
 		// open connection
 		Connection rv = Conn__new_by_url_and_props(sqlite_db_url, props);

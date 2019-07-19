@@ -17,7 +17,8 @@ package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.core.criterias.*;
 public class IoItmDir extends IoItm_base {
 	public boolean Exists() {return exists;} public void Exists_set(boolean v) {exists = v;} private boolean exists = true;
-	@Override public int TypeId() {return Type_Dir;} @Override public boolean Type_dir() {return true;} @Override public boolean Type_fil() {return false;} public static final int Type_Dir = 1;
+	@Override public int TypeId() {return Type_Dir;} @Override public boolean Type_dir() {return true;} @Override public boolean Type_fil() {return false;} public static final    int Type_Dir = 1;
+	public boolean ReadOnly() {return readOnly;} public IoItmDir ReadOnly_(boolean val) {this.readOnly = val; return this;} private boolean readOnly;
 	@gplx.New public IoItmDir XtnProps_set(String key, Object val) {return (IoItmDir)super.XtnProps_set(key, val);}
 	public IoItmList SubDirs() {return subDirs;} IoItmList subDirs;
 	public IoItmList SubFils() {return subFils;} IoItmList subFils;

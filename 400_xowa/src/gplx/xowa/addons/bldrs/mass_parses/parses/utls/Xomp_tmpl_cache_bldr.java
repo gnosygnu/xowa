@@ -17,9 +17,9 @@ package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*; import gp
 import gplx.dbs.*;
 import gplx.xowa.wikis.caches.*;
 public class Xomp_tmpl_cache_bldr {
-	public static Xow_page_cache New(Xowe_wiki wiki, boolean fill_all, long page_cache_max) {
+	public static Xow_page_cache New(Xowe_wiki wiki, boolean fill_all, long page_cache_min, long page_cache_max) {
 		Xow_page_cache rv = new Xow_page_cache(wiki);
-		rv.Max_(page_cache_max);
+		rv.Min_max_(page_cache_min, page_cache_max);
 		if (fill_all) Fill_all(rv, wiki);
 		return rv;
 	}

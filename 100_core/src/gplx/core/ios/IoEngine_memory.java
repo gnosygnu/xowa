@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.ios.streams.*;
+import gplx.core.ios.streams.*; import gplx.core.ios.atrs.*;
 public class IoEngine_memory extends IoEngine_base {
 	@Override public String Key() {return key;} private String key = IoEngine_.MemKey;
 	@Override public boolean ExistsFil_api(Io_url url) {return FetchFil(url) != IoItmFil_mem.Null;}
@@ -189,6 +189,9 @@ public class IoEngine_memory extends IoEngine_base {
 		}
 		byte[] bry = Bry_.new_u8(FetchFil(Io_url_.mem_fil_(xrg.Src())).Text());
 		return Io_stream_rdr_.New__mem(bry);
+	}
+	@Override public Io_itm_atr_req Query_itm_atrs(Io_url url, Io_itm_atr_req req) {
+		return req;
 	}
 
 	IoItmHash dirs = IoItmHash.new_();

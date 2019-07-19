@@ -24,7 +24,7 @@ public class IoStream_mock implements IoStream {
 		if (bytes_read > read_limit) bytes_read = read_limit;	// stream may limit maximum read; EX: bfr_len of 16k but only 2k will be filled
 		int bytes_left = data_bry_len - data_bry_pos;
 		if (bytes_read > bytes_left) bytes_read = bytes_left;	// not enough bytes left in data_bry; bytes_read = whatever is left
-		Bry_.Copy_by_pos(data_bry, data_bry_pos, data_bry_pos + bytes_read, bfr, bfr_bgn);
+		Bry_.Copy_to(data_bry, data_bry_pos, data_bry_pos + bytes_read, bfr, bfr_bgn);
 		data_bry_pos += bytes_read;
 		return bytes_read;
 	}

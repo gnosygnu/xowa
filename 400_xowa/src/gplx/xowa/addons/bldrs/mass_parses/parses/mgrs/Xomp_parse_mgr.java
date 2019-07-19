@@ -33,7 +33,7 @@ public class Xomp_parse_mgr {
 		Xomp_page_pool page_pool = new Xomp_page_pool(page_pool_loader, cfg.Num_pages_per_wkr());
 
 		// cache: preload tmpls and imglinks
-		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, cfg.Load_all_templates(), cfg.Page_cache_max());
+		Xow_page_cache page_cache = Xomp_tmpl_cache_bldr.New(wiki, cfg.Load_all_templates(), cfg.Page_cache_min(), cfg.Page_cache_max());
 		wiki.App().User().User_db_mgr().Cache_mgr().Enabled_n_();	// disable db lookups of user cache
 
 		Xomp_prog_mgr prog_mgr = new Xomp_prog_mgr();
@@ -70,6 +70,7 @@ public class Xomp_parse_mgr {
 		for (int i = 0; i < wkr_len; ++i) {
 			// make wiki
 			Xowe_wiki wkr_wiki = Xow_wiki_utl_.Clone_wiki(wiki, wiki.Fsys_mgr().Root_dir());
+			Lru_cache_root.Instance.Del(wkr_wiki.Cache_mgr().Page_cache().Cache_key());
 			wkr_wiki.Cache_mgr().Page_cache_(page_cache).Commons_cache_(commons_cache).Ifexist_cache_(ifexist_cache);				
 
 

@@ -149,6 +149,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		stage = Xoa_stage_.Tid_init;
 		user.Init_by_app(this);
 		cfg.Init_by_app(this);
+		Ctor_dbs();
 		user.User_db_mgr().Cache_mgr().Init_by_app(this);
 		misc_mgr.Init_by_app(this);
 		user.History_mgr().Init_by_app(this);
@@ -207,6 +208,18 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		this.Utl__bfr_mkr().Clear();
 		msg_log.Clear();
 		wiki_mgr.Free_mem(clear_ctx);
+	}
+	private void Ctor_dbs() {
+		if (gplx.core.envs.Env_.Mode_testing()) return;
+		String read_only_detection_str = cfg.Get_str_app_or("xowa.app.dbs.sqlite.read_only_detection", "basic_file");
+		int read_only_detection = Io_mgr.Read_only__basic__file;
+		if (String_.Eq(read_only_detection_str, "basic_file"))
+			read_only_detection = Io_mgr.Read_only__basic__file;
+		else if (String_.Eq(read_only_detection_str, "basic_file_and_dirs"))
+			read_only_detection = Io_mgr.Read_only__basic__file_and_dirs;
+		else if (String_.Eq(read_only_detection_str, "perms_file"))
+			read_only_detection = Io_mgr.Read_only__perms__file;
+		gplx.dbs.engines.sqlite.Sqlite_engine_.Read_only_detection = read_only_detection;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_gui))					return gui_mgr;

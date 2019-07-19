@@ -21,14 +21,14 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 	@Override protected void Add_base(Object key, Object val) {
 		super.Add_base(key, val);
 		ordered.Add(val);
-		AssertCounts();
+		AssertCounts("Add_base", key);
 	}
 	@Override public void Del(Object key) {
 		if (!this.Has_base(key)) return;
 		Object val = this.Fetch_base(key);
 		this.Del_base(key);
 		ordered.Del(val);
-		AssertCounts();
+		AssertCounts("Del", key);
 	}
 	protected Object Get_at_base(int index) {return ordered.Get_at(index);}
 	protected int IndexOf_base(Object obj) {return ordered.Idx_of(obj);}
@@ -50,7 +50,7 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 		if (locked) Lock_fail(); 
 		super.Add_base(key, val);
 		ordered.Add_at(i, val);
-		AssertCounts();
+		AssertCounts("Add_at", key);
 	}
 	public Ordered_hash Add_many_str(String... ary) {
 		int ary_len = ary.length;
@@ -61,8 +61,8 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 		}
 		return this;
 	}
-	void AssertCounts() {
-		if (super.Count() != ordered.Count()) throw Err_.new_wo_type("counts do not match", "hash", super.Count(), "list", ordered.Count());
+	private void AssertCounts(String proc, Object key) {
+		if (super.Count() != ordered.Count()) throw Err_.new_wo_type("counts do not match; same key is either added twice, or delete failed", "proc", proc, "key", Object_.Xto_str_strict_or_null_mark(key), "hash", super.Count(), "list", ordered.Count());
 	}
 	public void Resize_bounds(int i) {if (locked) Lock_fail(); ordered.Resize_bounds(i);}
 	public void Lock() {locked = true;} private boolean locked = false;
