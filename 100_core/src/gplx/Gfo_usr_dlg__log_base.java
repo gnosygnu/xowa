@@ -18,8 +18,9 @@ import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.core.brys.f
 public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	private int archive_dirs_max = 8;
 	private Io_url log_dir, err_fil;
-	private Ordered_hash queued_list = Ordered_hash_.New();
-	private Bry_fmtr fmtr = Bry_fmtr.New__tmp(); private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final    Ordered_hash queued_list = Ordered_hash_.New();
+	private final    Bry_fmtr fmtr = Bry_fmtr.New__tmp();
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public boolean Queue_enabled() {return queue_enabled;} public void Queue_enabled_(boolean v) {queue_enabled = v; if (!v) this.Flush();} private boolean queue_enabled;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public Io_url Session_dir() {return session_dir;} private Io_url session_dir;
@@ -31,18 +32,23 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 			if (fil.Url() == null) {
 				fil.Url_(session_dir.GenSubFil("session.txt"));
 			}
-			fil.Flush();
+			fil.Flush(enabled);
 		}
 	}
 	public Io_url Log_dir() {return log_dir;}
 	public void Log_dir_(Io_url log_dir) {
 		this.log_dir = log_dir;
-		session_dir = log_dir.GenSubDir(Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
-		session_fil = session_dir.GenSubFil("session.txt");
-		err_fil = session_dir.GenSubFil("err.txt");
+		if (enabled) {
+			session_dir = log_dir.GenSubDir(Datetime_now.Get().XtoStr_fmt_yyyyMMdd_HHmmss_fff());
+			session_fil = session_dir.GenSubFil("session.txt");
+			err_fil = session_dir.GenSubFil("err.txt");
+		}
 	}
 	public void Log_term() {
-		if (!enabled) return;
+		if (!enabled) {
+			Io_mgr.Instance.DeleteDirDeep(log_dir);
+			return;
+		}
 		Io_url[] archive_dirs = Io_mgr.Instance.QueryDir_args(log_dir).DirInclude_().DirOnly_().ExecAsUrlAry();
 		int archive_dirs_len = archive_dirs.length;
 		int session_cutoff = archive_dirs_len - archive_dirs_max;
@@ -90,24 +96,29 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 			}
 			fil.Add(txt);
 		}
-		else
-			Io_mgr.Instance.AppendFilStr(url, txt);
+		else {
+			if (enabled)
+				Io_mgr.Instance.AppendFilStr(url, txt);
+		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_enabled_))				enabled = m.ReadYn("v");
-		else if	(ctx.Match(k, Invk_archive_dirs_max_))		archive_dirs_max = m.ReadInt("v");
-		else if	(ctx.Match(k, Invk_log_dir_))				log_dir = m.ReadIoUrl("v");
+		if		(ctx.Match(k, "enabled_"))				enabled = m.ReadYn("v");
+		else if	(ctx.Match(k, "archive_dirs_max_"))		archive_dirs_max = m.ReadInt("v");
+		else if	(ctx.Match(k, "log_dir_"))				log_dir = m.ReadIoUrl("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final String Invk_enabled_ = "enabled_", Invk_archive_dirs_max_ = "archive_dirs_max_", Invk_log_dir_ = "log_dir_";
-	static final String Dir_name_log = "log";
+	}
 	public static final    Gfo_usr_dlg__log_base Instance = new Gfo_usr_dlg__log_base();
 }
 class Usr_log_fil {
-	public Usr_log_fil(Io_url url) {this.url = url;}
-	public Io_url Url() {return url;} public Usr_log_fil Url_(Io_url v) {url = v; return this;} Io_url url;
-	public void Add(String text) {sb.Add(text);} String_bldr sb = String_bldr_.new_();
-	public void Flush() {
+	private final    String_bldr sb = String_bldr_.new_();
+	public Usr_log_fil(Io_url url) {
+		this.url = url;
+	}
+	public Io_url Url() {return url;} public Usr_log_fil Url_(Io_url v) {url = v; return this;} private Io_url url;
+	public void Add(String text) {sb.Add(text);} 
+	public void Flush(boolean enabled) {
+		if (!enabled) return;
 		if (sb.Count() == 0) return;
 		try {
 			Io_mgr.Instance.AppendFilStr(url, sb.To_str_and_clear());

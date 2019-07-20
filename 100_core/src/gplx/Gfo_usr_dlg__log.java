@@ -16,8 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 public interface Gfo_usr_dlg__log extends Gfo_invk {
 	boolean Enabled(); void Enabled_(boolean v);
-	boolean Queue_enabled(); void Queue_enabled_(boolean v);
-	Io_url Log_dir(); void Log_dir_(Io_url v);
+	void Queue_enabled_(boolean v);
+	Io_url Log_dir(); 
+	void Log_dir_(Io_url v);
 	Io_url Session_dir();
 	Io_url Session_fil();
 	void Log_msg_to_url_fmt(Io_url url, String fmt, Object... args);
