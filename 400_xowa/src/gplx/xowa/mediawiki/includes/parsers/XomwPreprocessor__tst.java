@@ -15,9 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*;
-public class XomwPreprocessor_DOM__tst {
-	private final    XomwPreprocessor_DOM__fxt fxt = new XomwPreprocessor_DOM__fxt();
+public class XomwPreprocessor__tst {
+	private final    XomwPreprocessor__fxt fxt = new XomwPreprocessor__fxt();
+	@Before public void init() {fxt.Clear();}
 	@Test  public void Text() {
+		fxt.Init__hash_y();
 		fxt.Test__parse("abc", "<root>abc</root>");
 	}
 	@Test  public void Brack() {
@@ -218,16 +220,37 @@ public class XomwPreprocessor_DOM__tst {
 		fxt.Test__parse("a<noinclude>b</noinclude>c", "<root>a<ignore>&lt;noinclude&gt;</ignore>b<ignore>&lt;/noinclude&gt;</ignore>c</root>");
 	}
 }
-class XomwPreprocessor_DOM__fxt {
-	private final    XomwPreprocessor_DOM wkr = new XomwPreprocessor_DOM();
+class XomwPreprocessor__fxt {
+	private boolean dom_enabled = Bool_.Y, hash_enabled = Bool_.N;
 	private boolean for_inclusion = false;
-	public XomwPreprocessor_DOM__fxt() {
-		wkr.Init_by_wiki("pre");
+	public XomwPreprocessor__fxt() {
+	}
+	public void Clear() {
+		dom_enabled = true;
+		hash_enabled = false;
+		for_inclusion = false;
 	}
 	public void Init__for_inclusion_(boolean v) {for_inclusion = v;}
+	public XomwPreprocessor__fxt Init__hash_y() {hash_enabled = Bool_.Y; return this;}
+	public XomwPreprocessor__fxt Init__dom_n () { dom_enabled = Bool_.N; return this;}
 	public void Test__parse(String src_str, String expd) {
-		byte[] src_bry = Bry_.new_u8(src_str);
-		byte[] actl = wkr.preprocessToXml(src_bry, for_inclusion);
-		Tfds.Eq_str_lines(expd, String_.new_u8(actl), src_str);
+		List_adp list = List_adp_.New();
+		if (hash_enabled) {
+			XomwPreprocessor_Hash wkr_hash = new XomwPreprocessor_Hash();
+			wkr_hash.Init_by_wiki("pre");
+			list.Add(wkr_hash);
+		}
+		if (dom_enabled) {
+			XomwPreprocessor_DOM wkr_dom = new XomwPreprocessor_DOM();
+			wkr_dom.Init_by_wiki("pre");
+			list.Add(wkr_dom);
+		}
+
+		for (int i = 0; i < list.Len(); i++) {
+			XomwPreprocessor wkr = (XomwPreprocessor)list.Get_at(i);
+			byte[] src_bry = Bry_.new_u8(src_str);
+			byte[] actl = wkr.preprocessToDbg(src_bry, for_inclusion);
+			Tfds.Eq_str_lines(expd, String_.new_u8(actl), src_str);
+		}
 	}
 }

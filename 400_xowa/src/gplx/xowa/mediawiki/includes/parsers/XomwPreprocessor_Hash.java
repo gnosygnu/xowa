@@ -15,10 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
-class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum = new XophpArray();
-	@Override public XomwPPNode preprocessToObj(String text, int flags) {
-		return null;			
-	}
+class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum;
 
 	@Override public XomwPPFrame newFrame() {
 		return null;
@@ -28,10 +25,20 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		return null;
 	}
 
-	@Override protected Xomw_prepro_accum Factory__accum() {return Xomw_prepro_accum__hash.Instance;}
+	@Override protected XomwPPDStack Factory__stack() {return new XomwPPDStack_Hash(Xomw_prepro_accum__hash.Instance);}
 	@Override protected XomwPPDPart Factory__part() {return new XomwPPDPart_Hash("");}
-	@Override protected Xomw_prepro_accum Accum__set(Xomw_prepro_accum accum) {return accum;}
+	@Override protected Xomw_prepro_accum Accum__set(Xomw_prepro_accum accum_obj) {
+		this.accum = ((Xomw_prepro_accum__hash)accum_obj).Ary();
+		return accum_obj;
+	}
 
+	@Override public byte[] preprocessToDbg(byte[] src, boolean for_inclusion) {
+		XomwPPNode_Hash_Tree node = (XomwPPNode_Hash_Tree)this.preprocessToObj_base(src, for_inclusion);
+		return Bry_.new_u8(node.toString());
+	}
+	@Override public XomwPPNode preprocessToObj(String text, int flags) {
+		return (XomwPPNode)preprocessToObj_base(Bry_.new_u8(text), gplx.core.bits.Bitmask_.Has_int(flags, XomwParser.PTD_FOR_INCLUSION));
+	}
 	@Override protected void preprocessToObj_root() {} // NOTE: deliberately empty;
 
 	@Override protected void preprocessToObj_ignore(byte[] src, int bgn, int end) {
@@ -47,7 +54,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		int endIndex = accum.Len() - 1;
 		if (	ws_len > 0
 			&&	endIndex >= 0) {
-			Object itm_obj = accum.Get(endIndex);
+			Object itm_obj = accum.Get_at(endIndex);
 			if (Type_.Eq_by_obj(itm_obj, Bry_.Cls_ref_type)) {
 				byte[] itm = (byte[])itm_obj;
 				if (XophpString.strspn_fwd__space_or_tab(itm, 0, itm.length, itm.length) == ws_len) {
@@ -145,35 +152,42 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		stack.Get_current_part().eqpos = accum.Len() - 1;
 	}
 	@Override protected Object preprocessToObj_term(XomwPPDStack stack) {
+		Xomw_prepro_accum__hash stack_accum = (Xomw_prepro_accum__hash)stack.Get_accum();
+		XophpArray stack_ary = stack_accum.Ary();
+		int len = stack_ary.Len();
+		for (int i = 0; i < len; i++) {
+//				XomwPPDPart_Hash piece = (XomwPPDPart_Hash)(stack_ary.Get_at(i).Val());
+//				XophpArrayUtl.array_splice(stack_ary, stack_ary.Len(), 0, piece.breakSyntax());
+		}
 		//	for ( $stack->stack as $piece ) {
 		//		array_splice( $stack->rootAccum, count( $stack->rootAccum ), 0, $piece->breakSyntax() );
 		//	}
-		//
-		//	# Enable top-level headings
+		
+		//	// Enable top-level headings
 		//	for ( $stack->rootAccum as &$node ) {
 		//		if ( is_array( $node ) && $node[PPNode_Hash_Tree::NAME] === 'possible-h' ) {
 		//			$node[PPNode_Hash_Tree::NAME] = 'h';
 		//		}
 		//	}
-		//
-		//	$rootStore = [ [ 'root', $stack->rootAccum ] ];
-		//	$rootNode = new PPNode_Hash_Tree( $rootStore, 0 );
-		//
+
+		
+		XophpArray rootStore = XophpArray.New(XophpArray.New("root", stack.Get_root_accum()));
+		XomwPPNode_Hash_Tree rootNode = new XomwPPNode_Hash_Tree(rootStore, 0);
+
 		//	// Cache
 		//	$tree = json_encode( $rootStore, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
 		//	if ( $tree !== false ) {
 		//		$this->cacheSetTree( $text, $flags, $tree );
 		//	}
 		//
-		//	return $rootNode;
-		return null;
+		return rootNode;
 	}
 
 	private static void addLiteral(XophpArray accum, byte[] text) {addLiteral(accum, String_.new_u8(text));}
 	private static void addLiteral(XophpArray accum, String text) {
 		int n = accum.Len();
 		if (n > 0) {
-			Object itm = accum.Get(n - 1);
+			Object itm = accum.Get_at(n - 1);
 			if (itm != null) {
 				accum.Set(n - 1, ((String)itm) + text);
 				return;

@@ -54,6 +54,7 @@ public class XophpUtility {
 	public static boolean isset(byte[] v)   {return v != null;}
 	public static boolean isset(int v)      {return v != NULL_INT;}
 	public static boolean isset(double v)   {return v != NULL_DOUBLE;}
+	public static boolean isset_obj(Object v){return v != null;}
 	public static boolean istrue(int v)     {return v != NULL_INT;}
 	public static boolean isnumeric(byte[] src) {
 		if (src == null) return false;

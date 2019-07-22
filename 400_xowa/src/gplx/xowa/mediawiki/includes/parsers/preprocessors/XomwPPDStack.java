@@ -23,7 +23,8 @@ public class XomwPPDStack {
 	public final    List_adp stack = List_adp_.New();
 	public Xomw_prepro_piece top;
 	private final    Xomw_prepro_flags flags = new Xomw_prepro_flags();
-	private Xomw_prepro_accum root_accum, accum;
+	protected Xomw_prepro_accum root_accum;
+	protected Xomw_prepro_accum accum;
 
 	public XomwPPDStack(Xomw_prepro_accum prototype) {
 		root_accum = prototype.Make_new();

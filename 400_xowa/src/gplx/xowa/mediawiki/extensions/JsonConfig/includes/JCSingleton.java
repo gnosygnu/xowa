@@ -422,13 +422,13 @@ public class JCSingleton {
 //			);
 		String clz = null;
 		if (configModels.Has(modelId)) {
-			Object val = configModels.Get(modelId);
+			Object val = configModels.Get_by(modelId);
 			if (Type_.Type_by_obj(val) == XophpArray.class) {
 				XophpArray val_as_ary = (XophpArray)val;
 				if (val_as_ary.Has("class")) {
 					Gfo_usr_dlg_.Instance.Warn_many("", "", "JsonConfig: Invalid +$wgJsonConfigModels['modelId'] array " + "value, 'cl"+ "ass' not found");
 				} else {
-					clz = (String)val_as_ary.Get("class");
+					clz = (String)val_as_ary.Get_by("class");
 				}
 			} else {
 				clz = (String)val;

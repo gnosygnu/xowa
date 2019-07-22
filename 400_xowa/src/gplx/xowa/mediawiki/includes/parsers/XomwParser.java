@@ -101,10 +101,10 @@ public class XomwParser implements XomwParserIface {
 //
 //		# Regular expression for a non-newline space
 //		static final SPACE_NOT_NL = '(?:\t|&nbsp;|&\#0*160;|&\#[Xx]0*[Aa]0;|\p{Zs})';
-//
-//		# Flags for preprocessToDom
-//		static final PTD_FOR_INCLUSION = 1;
-//
+
+	// Flags for preprocessToDom
+	public static final int PTD_FOR_INCLUSION = 1;
+
 //		# Allowed values for this.mOutputType
 //		# Parameter to startExternalParse().
 //		static final OT_HTML = 1; # like parse()

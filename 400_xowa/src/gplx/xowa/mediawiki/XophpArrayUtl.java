@@ -17,6 +17,9 @@ package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpArrayUtl {
 	public static boolean popBoolOrN(List_adp list)           {return Bool_.Cast(List_adp_.Pop_or(list, false));}
 	public static byte[] popBryOrNull(List_adp list)       {return (byte[])List_adp_.Pop_or(list, null);}
+	public static boolean isset(XophpArray ary, int idx) {
+		return ary.Get_at(idx) == null;
+	}
 	public static String[] array_keys_str(Ordered_hash array) {
 		int len = array.Len();
 		String[] rv = new String[len];
@@ -68,10 +71,10 @@ public class XophpArrayUtl {
 		return rv;
 	}
 	private static void array_add(XophpArray ary, XophpArrayItm itm) {
-		if (itm.Key_as_str() == null)
+		if (itm.Key_is_int())
 			ary.Add(itm.Val());
 		else
-			ary.Add(itm.Key_as_str(), itm.Val());
+			ary.Add(itm.Key(), itm.Val());
 	}
 	public static XophpArray array_splice(XophpArray src, int bgn)          {return array_splice(src, bgn, src.Len(), null);}
 	public static XophpArray array_splice(XophpArray src, int bgn, int len) {return array_splice(src, bgn, len        , null);}

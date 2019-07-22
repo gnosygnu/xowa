@@ -160,7 +160,7 @@ public abstract class XomwPreprocessor {
 	private Xomw_prepro_accum accum = null;
 
 	public XomwPreprocessor() {
-		this.stack = new XomwPPDStack(this.Factory__accum());
+		this.stack = this.Factory__stack();
 	}
 	public void Init_by_wiki(String... xmlish_elems_ary) {
 		Elements_trie__init_by_wiki(elements_trie__y, ignored_tags_y, xmlish_elems_ary, "noinclude");
@@ -188,12 +188,13 @@ public abstract class XomwPreprocessor {
 		trie.Add_obj(hook, new Xomw_prepro_elem(type_is_comment ? Xomw_prepro_elem.Type__comment : Xomw_prepro_elem.Type__other, Bry_.new_a7(name)));
 	}
 
+	public abstract byte[] preprocessToDbg(byte[] src, boolean for_inclusion);
 	/**
 	* @param String $text
 	* @param int $flags
 	* @return String
 	*/
-	public byte[] preprocessToXml(byte[] src, boolean for_inclusion) {
+	protected Object preprocessToObj_base(byte[] src, boolean for_inclusion) {
 		// RELIC.PROC_VAR:     forInclusion = $flags & Parser::PTD_FOR_INCLUSION;
 		// RELIC.INIT_BY_WIKI: $xmlishElements = parser->getStripList();
 		// RELIC.CLASS_VAR:    $xmlishAllowMissingEndTag = [ 'includeonly', 'noinclude', 'onlyinclude' ];
@@ -810,7 +811,7 @@ public abstract class XomwPreprocessor {
 		}
 
 		// Output any remaining unclosed brackets
-		return (byte[])this.preprocessToObj_term(stack);
+		return this.preprocessToObj_term(stack);
 	}
 
 	private Xomw_prepro_rule Get_rule(byte[] bry) {
@@ -862,8 +863,8 @@ public abstract class XomwPreprocessor {
 		return rv;
 	}
 
-	protected abstract Xomw_prepro_accum Factory__accum();
 	protected abstract XomwPPDPart Factory__part();
+	protected abstract XomwPPDStack Factory__stack();
 
 	protected abstract Xomw_prepro_accum Accum__set(Xomw_prepro_accum accum);
 

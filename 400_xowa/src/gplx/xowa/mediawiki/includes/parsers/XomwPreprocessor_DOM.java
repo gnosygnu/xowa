@@ -20,12 +20,9 @@ import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private Xomw_prepro_accum__dom accum_dom = new Xomw_prepro_accum__dom("");
 
-	@Override protected Xomw_prepro_accum Factory__accum() {return Xomw_prepro_accum__dom.Instance;}
+	@Override protected XomwPPDStack Factory__stack() {return new XomwPPDStack(Xomw_prepro_accum__dom.Instance);}
 	@Override protected XomwPPDPart Factory__part() {return new XomwPPDPart_DOM("");}
 
-	@Override public XomwPPNode preprocessToObj(String text, int flags) {
-		return null;			
-	}
 	@Override public XomwPPFrame newFrame() {
 		return null;
 	}
@@ -37,6 +34,10 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 		return accum;
 	}
 
+	@Override public byte[] preprocessToDbg(byte[] src, boolean for_inclusion) {return (byte[])this.preprocessToObj_base(src, for_inclusion);}
+	@Override public XomwPPNode preprocessToObj(String text, int flags) {
+		return (XomwPPNode)preprocessToObj_base(Bry_.new_u8(text), gplx.core.bits.Bitmask_.Has_int(flags, XomwParser.PTD_FOR_INCLUSION));
+	}
 	@Override protected void preprocessToObj_root() {
 		accum_dom.Clear();
 		accum_dom.Add_str_literal("<root>");

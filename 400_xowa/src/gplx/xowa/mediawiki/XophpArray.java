@@ -25,63 +25,48 @@ public class XophpArray implements Bry_bfr_able {
 	}
 	public XophpArray Add(Object val) {
 		int key = nxt_idx++;
-		XophpArrayItm itm = XophpArrayItm.New_int(key, val);
-		Set_or_add(key, itm);
+		Set(XophpArrayItm.New_int(key, val));
 		return this;
 	}
 	public XophpArray Add(int key, Object val) {
 		nxt_idx = key + 1;
-		XophpArrayItm itm = XophpArrayItm.New_int(key, val);
-		Set_or_add(key, itm);
+		Set(XophpArrayItm.New_int(key, val));
 		return this;
 	}
 	public XophpArray Add(double key, Object val) {
 		int key_as_int = (int)key;
 		nxt_idx = key_as_int + 1;
-		XophpArrayItm itm = XophpArrayItm.New_int(key_as_int, val);
-		Set_or_add(key_as_int, itm);
+		Set(XophpArrayItm.New_int(key_as_int, val));
 		return this;
 	}
 	public XophpArray Add(boolean key, Object val) {
 		int key_as_int = key ? 1 : 0;
 		nxt_idx = key_as_int + 1;
-		XophpArrayItm itm = XophpArrayItm.New_int(key_as_int, val);
-		Set_or_add(key_as_int, itm);
+		Set(XophpArrayItm.New_int(key_as_int, val));
 		return this;
 	}
 	public XophpArray Add(String key, Object val) {
-		XophpArrayItm itm = null;
 		int key_as_int = Int_.Parse_or(key, Int_.Min_value);
 		if (key_as_int == Int_.Min_value) {
-			itm = XophpArrayItm.New_str(key, val);
-			Set_or_add(key, itm);
+			Set(XophpArrayItm.New_str(key, val));
 		}
 		else {
-			itm = XophpArrayItm.New_int(key_as_int, val);
-			Set_or_add(key_as_int, itm);
+			Set(XophpArrayItm.New_int(key_as_int, val));
 			nxt_idx = key_as_int + 1;
 		}
 		return this;
 	}
-	public XophpArrayItm Get_at(int i) {
-		return (XophpArrayItm)hash.Get_at(i);
+	public XophpArray Get_at_ary(int i) {return (XophpArray)Get_at(i);}
+	public String Get_at_str(int i) {return (String)Get_at(i);}
+	public Object Get_at(int i) {
+		if (i < 0 || i >= hash.Len()) return null;
+		XophpArrayItm itm = (XophpArrayItm)hash.Get_at(i);
+		return itm == null ? null : itm.Val();
 	}
 	public void Del_at(int i) {
 		XophpArrayItm itm = (XophpArrayItm)hash.Get_at(i);
 		if (itm != null) {
-			if (itm.Key_as_str() == null)
-				hash.Del(itm.Key_as_int());
-			else
-				hash.Del(itm.Key_as_str());
-		}
-	}
-	private void Set_or_add(Object key, XophpArrayItm val) {
-		XophpArrayItm itm = (XophpArrayItm)hash.Get_by(key);
-		if (itm == null) {
-			hash.Add(key, val);
-		}
-		else {
-			itm.Val_(val.Val());
+			hash.Del(itm.Key());
 		}
 	}
 	public XophpArray Add_many(Object... val) {
@@ -90,28 +75,22 @@ public class XophpArray implements Bry_bfr_able {
 		}
 		return this;
 	}
-	public Object Get(Object key) {
+	public Object Get_by_obj(Object key) {return Get_by(Object_.Xto_str_strict_or_null(key));}
+	public Object Get_by(int key) {return Get_by(Int_.To_str(key));}
+	public Object Get_by(String key) {
 		XophpArrayItm itm = (XophpArrayItm)hash.Get_by(key);
 		return itm.Val();
 	}
 	public void Set(int key, Object val) {
-		hash.Del(key);
-		this.Add(key, val);
+		this.Set(XophpArrayItm.New_int(key, val));
 	}
-	public void Unset(Object key) {
+	public void Unset(int key) {Unset(Int_.To_str(key));}
+	public void Unset(String key) {
 		hash.Del(key);
 	}
-	public boolean Has(Object key) {
+	public boolean Has_obj(Object key) {return Has(Object_.Xto_str_strict_or_null(key));}
+	public boolean Has(String key) {
 		return hash.Has(key);
-	}
-	public XophpArray Values() {
-		XophpArray rv = new XophpArray();
-		int len = hash.Len();
-		for (int i = 0; i < len; i++) {
-			XophpArrayItm old_itm = (XophpArrayItm)hash.Get_at(i);
-			rv.Add(i, old_itm.Val());
-		}
-		return rv;
 	}
 	public XophpArrayItm[] To_ary() {
 		return (XophpArrayItm[])hash.To_ary(XophpArrayItm.class);
@@ -125,6 +104,16 @@ public class XophpArray implements Bry_bfr_able {
 		XophpArrayItm[] itms = To_ary();
 		for (XophpArrayItm itm : itms) {
 			itm.To_bfr(bfr);
+		}
+	}
+	private void Set(XophpArrayItm itm) {
+		String key = itm.Key();
+		XophpArrayItm cur = (XophpArrayItm)hash.Get_by(key);
+		if (cur == null) {
+			hash.Add(key, itm);
+		}
+		else {
+			cur.Val_(itm.Val());
 		}
 	}
 	public static XophpArray New(Object... vals) {

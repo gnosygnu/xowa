@@ -179,7 +179,7 @@ public class JCValue {
 			value_as_obj.Del_by(key);
 		}
 		else if (value_tid == Value_tid__ary && (fld_type == Type_ids_.Id__str || fld_type == Type_ids_.Id__int)) {
-			tmp = value_as_ary.Get(fld);
+			tmp = value_as_ary.Get_by_obj(fld);
 			if (fld_type == Type_ids_.Id__str)
 				value_as_ary.Unset((String)fld);
 			else
@@ -203,7 +203,7 @@ public class JCValue {
 			return value_as_obj.Has((String)fld);
 		}
 		else if (value_tid == Value_tid__ary && (fld_type == Type_ids_.Id__str || fld_type == Type_ids_.Id__int)) {
-			return value_as_ary.Has(fld);
+			return value_as_ary.Has_obj(fld);
 		}
 		throw Err_.new_wo_type("Type mismatch for field " + fld);
 	}
@@ -219,7 +219,7 @@ public class JCValue {
 			return value_as_obj.Get_by_as_obj((String)fld);
 		}
 		else if (value_tid == Value_tid__ary && (fld_type == Type_ids_.Id__str || fld_type == Type_ids_.Id__int)) {
-			return value_as_ary.Get(fld);
+			return value_as_ary.Get_by_obj(fld);
 		}
 		throw Err_.new_wo_type("Type mismatch for field " + fld);
 	}

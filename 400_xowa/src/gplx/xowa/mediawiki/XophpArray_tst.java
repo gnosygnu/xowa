@@ -119,10 +119,6 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 		// add new and assert idx is 2
 		ary.Add("c");
 		fxt.Test__array(ary, XophpArrayItm.New_int(2, "c"));
-
-		ary = ary.Values();
-		ary.Add("d");
-		fxt.Test__array(ary, XophpArrayItm.New_int(0, "c"), XophpArrayItm.New_int(1, "d"));
 	}
 }
 class XophpArray_fxt {
