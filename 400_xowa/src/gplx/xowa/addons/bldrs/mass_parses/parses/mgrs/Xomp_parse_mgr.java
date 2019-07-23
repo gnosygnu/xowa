@@ -29,6 +29,7 @@ public class Xomp_parse_mgr {
 		Xomp_mgr_db mgr_db = Xomp_mgr_db.New__load(cfg.Mgr_url());
 
 		// init page_pool
+		Lru_cache_root.Instance.Del(wiki.Cache_mgr().Page_cache().Cache_key()); // delete defautl page_cache, b/c we will make one below
 		Xomp_page_pool_loader page_pool_loader = new Xomp_page_pool_loader(wiki, mgr_db.Conn(), cfg.Num_pages_in_pool(), cfg.Show_msg__fetched_pool());
 		Xomp_page_pool page_pool = new Xomp_page_pool(page_pool_loader, cfg.Num_pages_per_wkr());
 

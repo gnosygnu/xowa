@@ -23,7 +23,7 @@ public class Xow_page_cache {
 	private long cache_misses = 0;
 	public Xow_page_cache(Xowe_wiki wiki) {
 		this.wiki = wiki;
-		this.cache_key = "xowa.app.page_cache.'" + wiki.Domain_str() + "'." + wiki.hashCode();
+		this.cache_key = "xowa.app.page_cache.'" + wiki.Domain_str() + "'." + this.hashCode();
 		this.cache = new Lru_cache(Bool_.Y, cache_key, 8 * Io_mgr.Len_mb, 16 * Io_mgr.Len_mb);
 	}
 	public String Cache_key() {return cache_key;} private final    String cache_key;
