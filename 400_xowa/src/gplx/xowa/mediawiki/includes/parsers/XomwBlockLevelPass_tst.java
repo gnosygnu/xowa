@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.linkers.*;
-public class XomwBlockLevelPassTest {
-	private final    XomwBlockLevelPassFxt fxt = new XomwBlockLevelPassFxt();
+public class XomwBlockLevelPass_tst {
+	private final    XomwBlockLevelPass_fxt fxt = new XomwBlockLevelPass_fxt();
 	@Test   public void Basic() {
 		fxt.Test__do_block_levels(String_.Concat_lines_nl_skip_last
 		( "a"
@@ -27,7 +27,7 @@ public class XomwBlockLevelPassTest {
 		));
 	}
 }
-class XomwBlockLevelPassFxt {
+class XomwBlockLevelPass_fxt {
 	private final    XomwBlockLevelPass block_level_pass = new XomwBlockLevelPass();
 	private final    XomwParserCtx pctx = new XomwParserCtx();
 	private final    XomwParserBfr pbfr = new XomwParserBfr();

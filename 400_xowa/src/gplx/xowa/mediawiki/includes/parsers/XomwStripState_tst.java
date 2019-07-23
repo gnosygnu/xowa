@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*; import gplx.core.tests.*;
-public class XomwStripStateTest {
-	private final    XomwStripStateFxt fxt = new XomwStripStateFxt();
+public class XomwStripState_tst {
+	private final    XomwStripState_fxt fxt = new XomwStripState_fxt();
 	@Test   public void Basic() {
 		fxt.Init__add    (XomwStripState.TYPE_GENERAL, "\u007f'\"`UNIQ-key-1-QINU`\"'\u007f", "val-1");
 		fxt.Test__nostrip(XomwStripState.TYPE_NOWIKI , "a \u007f'\"`UNIQ-key-1-QINU`\"'\u007f b");
@@ -29,7 +29,7 @@ public class XomwStripStateTest {
 		fxt.Test__unstrip(XomwStripState.TYPE_GENERAL, "a \u007f'\"`UNIQ-key-2-QINU`\"'\u007f b", "a val-1 b");
 	}
 }
-class XomwStripStateFxt {
+class XomwStripState_fxt {
 	private final    XomwStripState stripState = new XomwStripState();
 	public void Init__add(byte tid, String marker, String val) {
 		stripState.addItem(tid, Bry_.new_u8(marker), Bry_.new_u8(val));

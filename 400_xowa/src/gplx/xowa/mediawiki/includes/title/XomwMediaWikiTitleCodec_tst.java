@@ -18,8 +18,8 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.core.btries.*;
 import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.xowa.mediawiki.languages.*; import gplx.xowa.langs.*;
-public class XomwMediaWikiTitleCodecTest {
-	private final    XomwMediaWikiTitleCodecFxt fxt = new XomwMediaWikiTitleCodecFxt();
+public class XomwMediaWikiTitleCodec_tst {
+	private final    XomwMediaWikiTitleCodec_fxt fxt = new XomwMediaWikiTitleCodec_fxt();
 	@Test  public void regexTitlePrefix() {
 		// no match
 		fxt.Test_regexTitlePrefix("a"         , "a", null);
@@ -34,7 +34,7 @@ public class XomwMediaWikiTitleCodecTest {
 		fxt.Test_splitTitleString(codec, "File:A"    , fxt.Make_parts(XomwDefines.NS_FILE, "A"));
 	}
 }
-class XomwMediaWikiTitleCodecFxt {
+class XomwMediaWikiTitleCodec_fxt {
 	private byte[][] regexTitlePrefixResult = new byte[2][];
 	public void Test_regexTitlePrefix(String src, String expd_ns, String expd_ttl) {
 		XomwRegexTitlePrefix.preg_match(regexTitlePrefixResult, Bry_.new_u8(src));

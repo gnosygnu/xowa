@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import org.junit.*; import gplx.core.tests.*;
-public class XomwTitleTest {
-	private final    XomwTitleFxt fxt = new XomwTitleFxt();
+public class XomwTitle_tst {
+	private final    XomwTitle_fxt fxt = new XomwTitle_fxt();
 	@Test  public void Alphanum()           {fxt.Test__find_fwd_while_title("0aB"             , 3);}
 	@Test  public void Angle()              {fxt.Test__find_fwd_while_title("0a<"             , 2);}
 }
-class XomwTitleFxt {
+class XomwTitle_fxt {
 	public void Test__find_fwd_while_title(String src_str, int expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		Gftest.Eq__int(expd, XomwTitle.Find_fwd_while_title(src_bry, 0, src_bry.length, XomwTitle.Title_chars_valid()));

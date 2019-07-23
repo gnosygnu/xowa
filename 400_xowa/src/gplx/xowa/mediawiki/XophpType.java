@@ -25,7 +25,7 @@ public class XophpType {
 	public boolean is_array() {
 		return type_id == Type_ids_.Id__array;
 	}
-	public static XophpType New(Object o) {			
+	public static XophpType New(Object o) {
 		return new XophpType(Type_ids_.To_id_by_obj(o));
 	}
 }

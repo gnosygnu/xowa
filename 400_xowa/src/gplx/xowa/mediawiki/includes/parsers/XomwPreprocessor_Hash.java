@@ -162,7 +162,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		//	for ( $stack->stack as $piece ) {
 		//		array_splice( $stack->rootAccum, count( $stack->rootAccum ), 0, $piece->breakSyntax() );
 		//	}
-		
+
 		//	// Enable top-level headings
 		//	for ( $stack->rootAccum as &$node ) {
 		//		if ( is_array( $node ) && $node[PPNode_Hash_Tree::NAME] === 'possible-h' ) {
@@ -170,7 +170,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		//		}
 		//	}
 
-		
+
 		XophpArray rootStore = XophpArray.New(XophpArray.New("root", stack.Get_root_accum()));
 		XomwPPNode_Hash_Tree rootNode = new XomwPPNode_Hash_Tree(rootStore, 0);
 

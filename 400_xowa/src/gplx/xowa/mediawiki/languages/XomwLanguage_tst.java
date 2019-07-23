@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.languages; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.langs.*;
-public class XomwLanguageTest {
-	private final    XomwLanguageFxt fxt = new XomwLanguageFxt();
+public class XomwLanguage_tst {
+	private final    XomwLanguage_fxt fxt = new XomwLanguage_fxt();
 	@Test  public void Commafy_standard() {
 		// basic
 		fxt.Test_commafy("1"              , "1");
@@ -113,9 +113,9 @@ public class XomwLanguageTest {
 		fxt.Test_commafy("-1234567890"    , "-1,23,45,67,890");
 	}
 }
-class XomwLanguageFxt {
+class XomwLanguage_fxt {
 	private final    XomwLanguage lang;
-	public XomwLanguageFxt() {
+	public XomwLanguage_fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xol_lang_itm xoLang = app.Lang_mgr().Get_by_or_load(Bry_.new_a7("en"));
 		this.lang = new XomwLanguage(xoLang);

@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*; import gplx.core.tests.*;
-public class XomwStringUtilsTest {
-	private final    XomwStringUtilsFxt fxt = new XomwStringUtilsFxt();
+public class XomwStringUtils_tst {
+	private final    XomwStringUtils_fxt fxt = new XomwStringUtils_fxt();
 	@Test  public void Delimiter_explode() {
 		// basic
 		fxt.Test_delimiter_explode("a|b|c"                             , "a", "b", "c");
@@ -52,7 +52,7 @@ public class XomwStringUtilsTest {
 		fxt.Test_delimiterReplace("/*", "*/", "a/*0*/1*/c"      , "9", "a91*/c");
 	}
 }
-class XomwStringUtilsFxt {
+class XomwStringUtils_fxt {
 	public void Test_delimiter_explode(String src_str, String... expd) {
 		List_adp tmp = List_adp_.New();
 		gplx.core.btries.Btrie_rv trv = new gplx.core.btries.Btrie_rv();

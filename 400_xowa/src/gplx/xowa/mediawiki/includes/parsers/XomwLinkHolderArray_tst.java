@@ -16,19 +16,19 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.linkers.*;
-public class XomwLinkHolderArrayTest {
-	private final    XomwLinkHolderArrayFxt fxt = new XomwLinkHolderArrayFxt();
+public class XomwLinkHolderArray_tst {
+	private final    XomwLinkHolderArray_fxt fxt = new XomwLinkHolderArray_fxt();
 	@Test   public void Replace__basic() {
 		fxt.Init__add("A", "a");
 		fxt.Test__replace("a <!--LINK 0--> b", "a <a href='/wiki/A' title='A'>a</a> b");
 	}
 }
-class XomwLinkHolderArrayFxt {
+class XomwLinkHolderArray_fxt {
 	private final    XomwEnv env;
 	private final    XomwLinkHolderArray holders;
 	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
-	public XomwLinkHolderArrayFxt() {
+	public XomwLinkHolderArray_fxt() {
 		XomwParser parser = new XomwParser(XomwEnv.NewTest());
 		this.env = parser.Env();
 		this.holders = new XomwLinkHolderArray(parser);

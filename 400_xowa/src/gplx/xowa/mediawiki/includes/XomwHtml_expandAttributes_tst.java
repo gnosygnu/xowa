@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
-public class XomwHtml_expandAttributesTest {
-	private final    XomwHtml_expandAttributesFxt fxt = new XomwHtml_expandAttributesFxt();
+public class XomwHtml_expandAttributes_tst{
+	private final    XomwHtml_expandAttributes_fxt fxt = new XomwHtml_expandAttributes_fxt();
 	@Test   public void Basic()	{
 		fxt.Test__expand_attributes(" a=\"b\"", "a", "b");
 	}
@@ -25,7 +25,7 @@ public class XomwHtml_expandAttributesTest {
 		fxt.Test__expand_attributes("", "a", null);
 	}
 }
-class XomwHtml_expandAttributesFxt {
+class XomwHtml_expandAttributes_fxt {
 	private final    Bry_bfr bfr = Bry_bfr_.New();
 	private final    XomwHtmlTemp temp = new XomwHtmlTemp();
 	public void Test__expand_attributes(String expd, String... kvs) {

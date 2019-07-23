@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 import gplx.xowa.mediawiki.includes.filerepo.*; import gplx.xowa.mediawiki.includes.filerepo.file.*;
 import gplx.xowa.mediawiki.languages.*;
-public class XomwImageHandlerTest {
+public class XomwImageHandler_tst {
 	private final    XomwImageHandler_fxt fxt = new XomwImageHandler_fxt();
 	@Before public void init() {
 		fxt.Init__file("A.png", 400, 200);

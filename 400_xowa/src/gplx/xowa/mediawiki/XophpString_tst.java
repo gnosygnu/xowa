@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*;
-public class XophpStringTest {
-	private final    XophpStringFxt fxt = new XophpStringFxt();
+public class XophpString_tst {
+	private final    XophpString_fxt fxt = new XophpString_fxt();
 	@Test  public void Strspn_fwd__byte() {
 		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 0, -1, 5);	// basic
 		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 1, -1, 4);	// bgn
@@ -50,7 +50,7 @@ public class XophpStringTest {
 		fxt.Test_strtr_by_trie("ab_01"         , "ab_89");               // EOS
 	}
 }
-class XophpStringFxt {
+class XophpString_fxt {
 	public void Test_strspn_fwd__byte(String src_str, byte find, int bgn, int max, int expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		Gftest.Eq__int(expd, XophpString.strspn_fwd__byte(src_bry, find, bgn, max, src_bry.length));

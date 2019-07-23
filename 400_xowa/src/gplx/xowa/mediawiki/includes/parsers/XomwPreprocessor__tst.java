@@ -107,7 +107,7 @@ public class XomwPreprocessor__tst {
 	}
 	@Test  public void Ext__unclosed() {		// COVERS: "Infinite backtrack"
 		fxt.Test__parse("a<pre bcd", "<root>a&lt;pre bcd</root>");
-	}		
+	}
 	@Test  public void Ext__noinclude() {	    // COVERS: "<includeonly> and <noinclude> just become <ignore> tags"
 		fxt.Init__for_inclusion_(Bool_.N);
 		fxt.Test__parse("a<includeonly>b<noinclude>c</noinclude>d</includeonly>e", "<root>a<ignore>&lt;includeonly&gt;b&lt;noinclude&gt;c&lt;/noinclude&gt;d&lt;/includeonly&gt;</ignore>e</root>");
