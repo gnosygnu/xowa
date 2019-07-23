@@ -45,7 +45,6 @@ public class XomwEnv {
 
 	public XomwEnv File_finder_(XomwFileFinder v) {file_finder = v; return this;} 
 
-	public static XomwEnv NewTest() {return NewTestByApp(Xoa_app_fxt.Make__app__edit());}
 	public static XomwEnv NewTestByApp(Xoae_app app) {
 		return new XomwEnv(Xol_lang_itm_.Lang_en_make(app.Lang_mgr()));
 	}

@@ -27,7 +27,7 @@ class XomwLinker_SplitTrail_fxt {
 		String[] ary = new String[] {"a", "b", "c", "d", "e", "f"};
 		for (String itm : ary)
 			trie.Add_str_str(itm, itm);
-		linker.Init_by_wiki(XomwEnv.NewTest(), trie);
+		linker.Init_by_wiki(XomwEnv_fxt.NewTest(), trie);
 	}
 	public void Test__split_trail(String trail_str, String expd_inside, String expd_trail) {
 		byte[][] split_trail = linker.splitTrail(Bry_.new_u8(trail_str));

@@ -29,7 +29,7 @@ class XomwLinkHolderArray_fxt {
 	private final    XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public XomwLinkHolderArray_fxt() {
-		XomwParser parser = new XomwParser(XomwEnv.NewTest());
+		XomwParser parser = new XomwParser(XomwEnv_fxt.NewTest());
 		this.env = parser.Env();
 		this.holders = new XomwLinkHolderArray(parser);
 	}

@@ -119,7 +119,7 @@ class Xomw_table_wkr__fxt {
 	private final    XomwParserCtx pctx = new XomwParserCtx();
 	private final    Xomw_table_wkr wkr;
 	public Xomw_table_wkr__fxt() {
-		XomwParser parser = new XomwParser(XomwEnv.NewTest());
+		XomwParser parser = new XomwParser(XomwEnv_fxt.NewTest());
 		this.wkr = new Xomw_table_wkr(Bry_bfr_.New(), parser.Sanitizer(), parser.Strip_state());
 	}
 
