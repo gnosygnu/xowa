@@ -66,24 +66,31 @@ public class Lru_cache {
 		}
 	}
 	public void Clear_all() {
+		synchronized (map) {
 		map.Clear();
 		head = null;
 		tail = null;
 		cur = 0;
+		}
 	}
 	public void Clear_min(long size) {
+		synchronized (map) {
 		long threshold = min >= 0 ? min : max;
 		while (cur + size > threshold) {
 			Del_node_from_this(head);
 			evicts++;
 		}
+		}
 	}
 	private void Del_node_from_this(Lru_node nde) {
+		synchronized (map) {
 		map.Del(nde.Key());
 		cur -= nde.Size();
 		Del_node_from_linked_list(nde);
+		}
 	}
 	private void Del_node_from_linked_list(Lru_node nde) {
+		synchronized (map) {
 		if (nde.Prv() == null)
 			head = nde.Nxt();
 		else
@@ -93,8 +100,10 @@ public class Lru_cache {
 			tail = nde.Prv();
 		else
 			nde.Nxt().Prv_(nde.Prv());
+		}
 	}
 	private void Add_to_tail(Lru_node nde) {
+		synchronized (map) {
 		if (tail != null)
 			tail.Nxt_(nde);
 
@@ -104,6 +113,7 @@ public class Lru_cache {
 
 		if (head == null)
 			head = tail;
+		}
 	}
 	public void To_str(Bry_bfr bfr, boolean grps_only_or_both) {
 		bfr.Add_str_a7("g");
