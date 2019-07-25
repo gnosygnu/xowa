@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-public class XomwExceptionUtl {
-	public static Err New_by_method(Class<?> type, String method, String msg) {
-		return Err_.new_wo_type(Type_.Name(type) + "." + method + ":" + msg);
+package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+public class XomwPPDStackOld_Hash extends XomwPPDStackOld { 	public XomwPPDStackOld_Hash(Xomw_prepro_accum prototype) {super(prototype);
+		this.root_accum = prototype.Make_new();
+		this.accum = root_accum;
 	}
 }

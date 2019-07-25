@@ -18,6 +18,7 @@ package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; impor
 /**
 * @ingroup Parser
 */
+import gplx.xowa.mediawiki.includes.exception.*;
 public class XomwPPNode_Hash_Text extends XomwPPNode {	public String value;
 	private final    XophpArray store;
 	private final    int index;
@@ -32,7 +33,7 @@ public class XomwPPNode_Hash_Text extends XomwPPNode {	public String value;
 	public XomwPPNode_Hash_Text(XophpArray store, int index) {
 		Object value_obj = store.Get_at(index);
 		if (!XophpTypeUtl.is_scalar(value_obj)) {
-			throw XomwExceptionUtl.New_by_method(XomwPPNode_Hash_Text.class, "CTOR", "given Object instead of String");
+			throw XomwMWException.New_by_method(XomwPPNode_Hash_Text.class, "CTOR", "given Object instead of String");
 		}
 		this.value = Object_.Xto_str_strict_or_null(value_obj);
 		this.store = store;

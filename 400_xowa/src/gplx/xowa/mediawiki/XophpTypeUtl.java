@@ -29,4 +29,6 @@ public class XophpTypeUtl {
 				return false;
 		}
 	}
+
+	public static boolean is_string(Object obj) {return Type_.Eq_by_obj(obj, String.class);}
 }

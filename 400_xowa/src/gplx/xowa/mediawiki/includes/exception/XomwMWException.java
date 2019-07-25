@@ -17,4 +17,7 @@ package gplx.xowa.mediawiki.includes.exception; import gplx.*; import gplx.xowa.
 public class XomwMWException extends Err {
 	public XomwMWException(String msg) {super(true, "", "", msg);
 	}
+	public static Err New_by_method(Class<?> type, String method, String msg) {
+		return Err_.new_wo_type(Type_.Name(type) + "." + method + ":" + msg);
+	}
 }

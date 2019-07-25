@@ -25,7 +25,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		return null;
 	}
 
-	@Override protected XomwPPDStack Factory__stack() {return new XomwPPDStack_Hash(Xomw_prepro_accum__hash.Instance);}
+	@Override protected XomwPPDStackOld Factory__stack() {return new XomwPPDStackOld_Hash(Xomw_prepro_accum__hash.Instance);}
 	@Override protected XomwPPDPart Factory__part() {return new XomwPPDPart_Hash("");}
 	@Override protected Xomw_prepro_accum Accum__set(Xomw_prepro_accum accum_obj) {
 		this.accum = ((Xomw_prepro_accum__hash)accum_obj).Ary();
@@ -147,11 +147,11 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 	@Override protected void preprocessToObj_add_element(Xomw_prepro_accum element) {
 		XophpArrayUtl.array_splice(accum, accum.Len(), 0, ((Xomw_prepro_accum__hash)element).Ary());
 	}
-	@Override protected void preprocessToObj_equals(XomwPPDStack stack) {
+	@Override protected void preprocessToObj_equals(XomwPPDStackOld stack) {
 		accum.Add(XophpArray.New("equals", XophpArray.New("=")));
 		stack.Get_current_part().eqpos = accum.Len() - 1;
 	}
-	@Override protected Object preprocessToObj_term(XomwPPDStack stack) {
+	@Override protected Object preprocessToObj_term(XomwPPDStackOld stack) {
 		Xomw_prepro_accum__hash stack_accum = (Xomw_prepro_accum__hash)stack.Get_accum();
 		XophpArray stack_ary = stack_accum.Ary();
 		int len = stack_ary.Len();

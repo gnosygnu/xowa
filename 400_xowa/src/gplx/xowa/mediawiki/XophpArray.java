@@ -19,6 +19,7 @@ public class XophpArray implements Bry_bfr_able {
 	private final    Ordered_hash hash = Ordered_hash_.New();
 	private int nxt_idx;
 	public int Len() {return hash.Len();}
+	public int Count() {return hash.Len();}
 	public void Clear() {
 		hash.Clear();
 		nxt_idx = 0;

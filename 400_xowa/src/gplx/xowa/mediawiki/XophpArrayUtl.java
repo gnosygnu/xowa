@@ -17,6 +17,13 @@ package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpArrayUtl {
 	public static boolean popBoolOrN(List_adp list)           {return Bool_.Cast(List_adp_.Pop_or(list, false));}
 	public static byte[] popBryOrNull(List_adp list)       {return (byte[])List_adp_.Pop_or(list, null);}
+	public static Object pop_obj(XophpArray array) {
+		int array_count = array.Count();
+		if (array_count == 0) return null;
+		Object rv = array.Get_at(array_count - 1);
+		array.Del_at(array_count - 1);
+		return rv;
+	}
 	public static boolean isset(XophpArray ary, int idx) {
 		return ary.Get_at(idx) == null;
 	}

@@ -14,82 +14,91 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-// MW.FILE:Preprocessor_DOM
+import gplx.xowa.mediawiki.includes.exception.*;
+// MW.FILE:Preprocessor
 /**
-* Stack class to help Preprocessor::preprocessToObj()
+* Stack clazz to help Preprocessor::preprocessToObj()
 * @ingroup Parser
 */
 public class XomwPPDStack {
-	public final    List_adp stack = List_adp_.New();
-	public Xomw_prepro_piece top;
-	private final    Xomw_prepro_flags flags = new Xomw_prepro_flags();
-	protected Xomw_prepro_accum root_accum;
+	public XophpArray stack;
+	public Xomw_prepro_accum rootAccum;
 	protected Xomw_prepro_accum accum;
 
-	public XomwPPDStack(Xomw_prepro_accum prototype) {
-		root_accum = prototype.Make_new();
-		accum = root_accum;
-	}
-	public void Clear() {
-		stack.Clear();
-		accum.Clear();
-		top = null;
-	}
-	public int Count() {return stack.Len();}
+	/**
+	* @var PPDStack
+	*/
+	public XomwPPDStackElement top;
+//		public $out;
+//		public $elementClass = 'PPDStackElement';
 
-	public Xomw_prepro_accum Get_accum() {return accum;}
-	public Xomw_prepro_accum Get_root_accum() {return root_accum;}
+	public XomwPPDStack (Xomw_prepro_accum prototype) {
+		this.stack = XophpArray.New();
+		this.top = null;
+		this.rootAccum = prototype.Make_new();
+		this.accum = rootAccum;
+	}
 
-	public XomwPPDPart Get_current_part() {
-		if (top == null) {
+	/**
+	* @return int
+	*/
+	public int count() {
+		return this.stack.Count();
+	}
+
+	public Xomw_prepro_accum getAccum() {
+		return this.accum;
+	}
+
+	public XomwPPDPart getCurrentPart() {
+		if (this.top == null) {
 			return null;
+		} else {
+			return this.top.getCurrentPart();
+		}
+	}
+
+	public void push(XomwPPDStackElement data) {
+		if (Type_.Eq_by_obj(data, XomwPPDStackElement.class)) {
+			this.stack.Add(data);
 		}
 		else {
-			return top.Get_current_part();
+//				$class = this.elementClass;
+//				this.stack[] = new $class($data);
 		}
+		this.top = (XomwPPDStackElement)this.stack.Get_at(this.stack.Count() - 1);
+		this.accum = this.top.getAccum();
 	}
 
-	public void Push(Xomw_prepro_piece item) {
-		stack.Add(item);
-		this.top = (Xomw_prepro_piece)stack.Get_at(stack.Len() - 1);			
-		accum = top.Get_accum();
-	}
-
-	public Xomw_prepro_piece Pop() {
-		int len = stack.Count();
-		if (len == 0) {
-			throw Err_.new_wo_type("XomwPPDStack: no elements remaining");
+	public XomwPPDStackElement pop() {
+		if (this.stack.Count() == 0) {
+			throw XomwMWException.New_by_method(XomwPPDStack.class, "pop", "no elements remaining");
 		}
-
-		Xomw_prepro_piece rv = (Xomw_prepro_piece)stack.Get_at(len - 1);
-		stack.Del_at(len - 1);
-		len--;
-
-		if (len > 0) {
-			this.top = (Xomw_prepro_piece)stack.Get_at(stack.Len() - 1);			
-			this.accum = top.Get_accum();
+		XomwPPDStackElement temp = (XomwPPDStackElement)XophpArrayUtl.pop_obj(this.stack);
+		if (this.stack.Count()> 0) {
+			this.top = (XomwPPDStackElement)this.stack.Get_at(this.stack.Count() - 1);
+			this.accum = this.top.getAccum();
 		} else {
 			this.top = null;
-			this.accum = root_accum;
+			this.accum = this.rootAccum;
 		}
-		return rv;
+		return temp;
 	}
 
-	public void Add_part(byte[] bry) {
-		top.Add_part(bry);
-		accum = top.Get_accum();
+	public void addPart(String s) {
+		this.top.addPart(s);
+		this.accum = this.top.getAccum();
 	}
 
-	public Xomw_prepro_flags Get_flags() {
-		if (stack.Count() == 0) {
-			flags.findEquals = false;
-			flags.findPipe = false;
-			flags.inHeading = false;
-			return flags;
+	/**
+	* @return array
+	*/
+	public XomwPPDStackElementFlags getFlags() {
+		if (this.stack.Count() == 0) {
+			return XomwPPDStackElementFlags.Empty;
 		}
 		else {
-			top.Set_flags(flags);
-			return flags;
+			return this.top.getFlags();
 		}
 	}
 }

@@ -14,8 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-public class XomwPPDStack_Hash extends XomwPPDStack { 	public XomwPPDStack_Hash(Xomw_prepro_accum prototype) {super(prototype);
-		this.root_accum = prototype.Make_new();
-		this.accum = root_accum;
+public class XomwPPDStackElementFlags {
+	public XomwPPDStackElementFlags(boolean findPipe, boolean findEquals, boolean inHeading) {
+		this.findPipe = findPipe;
+		this.findEquals = findEquals;
+		this.inHeading = inHeading;
 	}
+	public boolean FindPipe()   {return findPipe;}   private final    boolean findPipe;
+	public boolean FindEquals() {return findEquals;} private final    boolean findEquals;
+	public boolean InHeading()  {return inHeading;}  private final    boolean inHeading;
+
+	public static final    XomwPPDStackElementFlags Empty = new XomwPPDStackElementFlags(false, false, false);
 }

@@ -155,7 +155,7 @@ public abstract class XomwPreprocessor {
 	private final    Btrie_slim_mgr elements_trie__y = Btrie_slim_mgr.ci_a7(), elements_trie__n = Btrie_slim_mgr.ci_a7();
 	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs().Add_many_str("includeonly", "noinclude", "onlyinclude");
 	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
-	private final    XomwPPDStack stack;
+	private final    XomwPPDStackOld stack;
 	private final    Btrie_rv trv = new Btrie_rv();
 	private Xomw_prepro_accum accum = null;
 
@@ -864,7 +864,7 @@ public abstract class XomwPreprocessor {
 	}
 
 	protected abstract XomwPPDPart Factory__part();
-	protected abstract XomwPPDStack Factory__stack();
+	protected abstract XomwPPDStackOld Factory__stack();
 
 	protected abstract Xomw_prepro_accum Accum__set(Xomw_prepro_accum accum);
 
@@ -883,7 +883,7 @@ public abstract class XomwPreprocessor {
 	protected abstract Xomw_prepro_accum preprocessToObj_text(Xomw_prepro_accum element, Xomw_prepro_piece piece, byte[] rule_end, int matching_count);
 	protected abstract Xomw_prepro_accum preprocessToObj_xml(Xomw_prepro_piece piece, byte[] name_bry, int max_count, int matching_count);
 	protected abstract void preprocessToObj_add_element(Xomw_prepro_accum element);
-	protected abstract void preprocessToObj_equals(XomwPPDStack stack);
-	protected abstract Object preprocessToObj_term(XomwPPDStack stack);
+	protected abstract void preprocessToObj_equals(XomwPPDStackOld stack);
+	protected abstract Object preprocessToObj_term(XomwPPDStackOld stack);
 	public abstract XomwPreprocessor Make_new(XomwParser parser);
 }

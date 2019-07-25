@@ -22,7 +22,7 @@ public abstract class XomwPPDPart {
 	/**
 	* @var String Output accumulator String
 	*/
-//		private final    byte[] output;
+//		public final    byte[] output;
 
 	// Optional member variables:
 	//   eqpos        Position of equals sign in output accumulator
@@ -36,13 +36,22 @@ public abstract class XomwPPDPart {
 //			accum.Add_bry(Bry_.new_u8(output));
 //			bfr = ((Xomw_prepro_accum__dom)accum).Bfr();
 	}
-//		private final    Xomw_prepro_accum__dom accum = new Xomw_prepro_accum__dom("");
-//		private final    Bry_bfr bfr;
 	public abstract Xomw_prepro_accum Accum();
-//
-//		public Bry_bfr Bfr() {return bfr;}
-//		public int Len() {return bfr.Len();}
-//		public byte[] To_bry() {return bfr.To_bry();}
 
 	public abstract XomwPPDPart Make_new(String val);
 }
+//	class XomwPPDPart {
+//		/**
+//		* @var String Output accumulator String
+//		*/
+//		public String output;
+//
+//		// Optional member variables:
+//		//   eqpos        Position of equals sign in output accumulator
+//		//   commentEnd   Past-the-end input pointer for the last comment encountered
+//		//   visualEnd    Past-the-end input pointer for the end of the accumulator minus comments
+//
+//		public XomwPPDPart(String output) {
+//			this.output = output;
+//		}
+//	}

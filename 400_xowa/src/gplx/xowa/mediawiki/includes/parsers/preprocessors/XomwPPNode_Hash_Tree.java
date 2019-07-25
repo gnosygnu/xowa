@@ -18,6 +18,7 @@ package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; impor
 /**
 * @ingroup Parser
 */
+import gplx.xowa.mediawiki.includes.exception.*;
 public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String name;
 	/**
 	* The store array for children of this node. It is "raw" in the sense that
@@ -93,7 +94,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 			}
 		}
 		else {
-			throw XomwExceptionUtl.New_by_method(XomwPPNode_Hash_Tree.class, "factory", "invalid node descriptor");
+			throw XomwMWException.New_by_method(XomwPPNode_Hash_Tree.class, "factory", "invalid node descriptor");
 		}
 	}
 

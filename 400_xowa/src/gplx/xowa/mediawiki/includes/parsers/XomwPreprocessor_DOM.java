@@ -20,7 +20,7 @@ import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private Xomw_prepro_accum__dom accum_dom = new Xomw_prepro_accum__dom("");
 
-	@Override protected XomwPPDStack Factory__stack() {return new XomwPPDStack(Xomw_prepro_accum__dom.Instance);}
+	@Override protected XomwPPDStackOld Factory__stack() {return new XomwPPDStackOld(Xomw_prepro_accum__dom.Instance);}
 	@Override protected XomwPPDPart Factory__part() {return new XomwPPDPart_DOM("");}
 
 	@Override public XomwPPFrame newFrame() {
@@ -138,11 +138,11 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 	@Override protected void preprocessToObj_add_element(Xomw_prepro_accum element) {
 		accum_dom.Add_bry(((Xomw_prepro_accum__dom)element).To_bry());
 	}
-	@Override protected void preprocessToObj_equals(XomwPPDStack stack) {
+	@Override protected void preprocessToObj_equals(XomwPPDStackOld stack) {
 		stack.Get_current_part().eqpos = accum_dom.Len();
 		accum_dom.Add_bry(Byte_ascii.Eq_bry);
 	}
-	@Override protected Object preprocessToObj_term(XomwPPDStack stack) {
+	@Override protected Object preprocessToObj_term(XomwPPDStackOld stack) {
 		Bry_bfr root_accum = Bry_bfr_.New().Add_str_u8(((Xomw_prepro_accum__dom)stack.Get_root_accum()).To_str());
 		int stack_len = stack.stack.Len();
 		for (int j = 0; j < stack_len; j++) {

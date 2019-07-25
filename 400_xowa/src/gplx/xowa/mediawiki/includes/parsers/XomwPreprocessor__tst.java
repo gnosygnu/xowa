@@ -19,7 +19,6 @@ public class XomwPreprocessor__tst {
 	private final    XomwPreprocessor__fxt fxt = new XomwPreprocessor__fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Text() {
-		fxt.Init__hash_y();
 		fxt.Test__parse("abc", "<root>abc</root>");
 	}
 	@Test  public void Brack() {

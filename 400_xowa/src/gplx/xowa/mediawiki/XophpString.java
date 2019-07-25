@@ -158,4 +158,14 @@ public class XophpString {
 		return pos == Bry_find_.Not_found ? null : Bry_.Mid(src, pos, src.length);
 	}
 	public static int strlen(byte[] src) {return src.length;}
+	public static String str_repeat(String val, int count) {
+		int val_len = String_.Len(val);
+		char[] chry = new char[val_len];
+		for (int i = 0; i < count; i++) {
+			for (int j = 0; i < val_len; j++) {
+				chry[(i * val_len) + j] = String_.CharAt(val, j);
+			}
+		}
+		return String_.new_charAry_(chry, 0, val_len);
+	}
 }
