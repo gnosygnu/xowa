@@ -31,6 +31,8 @@
       
       <option value='xowa.app.startup' >App - Startup</option>
       
+      <option value='xowa.app.dbs' >App - Databases</option>
+      
       <option value='xowa.app.update' >App - Update</option>
       
       <option value='xowa.gui.general' >Gui - General</option>
@@ -823,12 +825,16 @@ A more detailed explanation follows:<br/>
 
     <!-- BTN:undo -->
     <div id='xowa.addon.popups.wtxt.tmpl_keeplist__undo' data-xocfg-type='memo' class='xocfg_itm_delete xocfg_itm_hide'>
-      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.wtxt.tmpl_keeplist")' title="reset to &quot;en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|&quot;">&nbsp;</span>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.popups.wtxt.tmpl_keeplist")' title="reset to &quot;en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|
+en.wiktionary.org|disabled_for_performance_see_issue_511|
+&quot;">&nbsp;</span>
     </div>
     
     <!-- TEXT:val -->
     <div class='xocfg_itm_data'>
-<textarea id="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-key="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|</textarea></div>
+<textarea id="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-key="xowa.addon.popups.wtxt.tmpl_keeplist" data-xocfg-type="memo" accesskey="d" class="xocfg_data__memo" rows="4">en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|
+en.wiktionary.org|disabled_for_performance_see_issue_511|
+</textarea></div>
     
     <!-- HIDDEN:key,ctx -->
     <input type='hidden' id='xowa.addon.popups.wtxt.tmpl_keeplist__key_box' value='xowa.addon.popups.wtxt.tmpl_keeplist'></input>
@@ -838,54 +844,74 @@ A more detailed explanation follows:<br/>
   <!-- DIV:help -->
   <div id='xowa.addon.popups.wtxt.tmpl_keeplist_help_div' class='xohelp_div'>
     <div id='xowa.addon.popups.wtxt.tmpl_keeplist_help_msg' class='xohelp_msg'><p>Specifies templates to be shown in popup<br/>
-This is a performance optimization for English Wikipedia. It only evaluates listed templates.<br/>
-The format is as follows
+This is a performance optimization
 </p>
 
 <ul>
-  <li> Each rule is in a separate line
+  <li> For English Wiktionary, it disables popups because they are slow. See <a href="https://github.com/gnosygnu/xowa/issues/511" rel="nofollow" class="external free" tabindex="-1">https://github.com/gnosygnu/xowa/issues/511</a>
+  </li>
+  <li> For English Wikipedia, it only evaluates listed templates.
+  </li>
+</ul>
+
+<p>To disable this option, replaces the keep-names with a *. For example: <code>en.wikipedia.org|*|</code>
+<br/>
+The rule format is as follows:
+</p>
+
+<ul>
+  <li> Each rule is on a separate line
   </li>
   <li> Each rule has three parts
 
     <ul>
       <li> Wiki domain: Wiki which will be affected by rule
       </li>
-      <li> Keep-names: Names of templates which will be shown in popup. Note that these names:
+      <li> Keep-names: Names of templates which will be shown in popup.
+      </li>
+      <li> Unless-names: Names of templates which should not be included, even if the keep-name is matched. 
 
         <ul>
-          <li> Are semi-colon separated (<code>;</code>)
-          </li>
-          <li> Match any case of the title. For example, &quot;NAme&quot;, matches &quot;NAME&quot;, &quot;name&quot;, &quot;naME&quot;, etc.
-          </li>
-          <li> Match space or underscore. For example, &quot;two_words&quot; matches &quot;two_words&quot; and &quot;two words&quot;
-          </li>
-          <li> Have one of the following three match patterns
-
-            <ul>
-              <li> Exact name: For example, &quot;name&quot; matches only &quot;name&quot;, and all lowercase/uppercase variants
-              </li>
-              <li> Name at start: For example, &quot;name*&quot; will match anything starting with &quot;name&quot; such as &quot;Names&quot;
-              </li>
-              <li> Name at end: For example, &quot;*name&quot; will match anything ending with &quot;name&quot; such as &quot;Fullname&quot;
-              </li>
-            </ul>
+          <li> For example, <code>en.wikipedia.org|name*|name_to_always_skip</code> will match any template that starts with &quot;name&quot; unless the template is named &quot;name_to_always_skip&quot;.
           </li>
         </ul>
-      </li>
-      <li> Unless-names: Names of templates which should not be included, even if the keep-name is matched. For example, <code>en.wikipedia.org|name*|name_to_always_skip</code> will match any template that starts with &quot;name&quot; unless the template is named &quot;name_to_always_skip&quot;. Note that unless-names have the same rules as keep-names (semi-colon separator; wildcards)<br/>
       </li>
     </ul>
   </li>
 </ul>
 
-<p>To disable this option, replaces the keep-names with a *. For example: <code>en.wikipedia.org|*|</code>
+<p>A keep-name or an unless-name follows the following format
+</p>
+
+<ul>
+  <li> Are semi-colon separated (<code>;</code>)
+  </li>
+  <li> Match any case of the title. For example, &quot;NAme&quot;, matches &quot;NAME&quot;, &quot;name&quot;, &quot;naME&quot;, etc.
+  </li>
+  <li> Match space or underscore. For example, &quot;two_words&quot; matches &quot;two_words&quot; and &quot;two words&quot;
+  </li>
+  <li> Have one of the following three match patterns
+
+    <ul>
+      <li> Exact name: For example, &quot;name&quot; matches only &quot;name&quot;, and all lowercase/uppercase variants
+      </li>
+      <li> Name at start: For example, &quot;name*&quot; will match anything starting with &quot;name&quot; such as &quot;Names&quot;
+      </li>
+      <li> Name at end: For example, &quot;*name&quot; will match anything ending with &quot;name&quot; such as &quot;Fullname&quot;
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><br/>
 </p>
 <hr/>
 
 <p><b>Default option</b>
 </p>
 <pre style='overflow:auto'>
-en.wikipedia.org|formatnum;age_in_days;as_of;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;vgy;iso_639_name;transl;translate;linktext;zh;nihongo;japanese_name;ko-hhrm;|
+en.wikipedia.org|formatnum;age;age_in_days;age_in_years_and_days*;nts;number_table_sorting*;as_of;oldstyledatedy;gregorian_serial_date;currentminute;currentsecond;dmca;spaced_ndash;trim;month*;convert*;worldpop*;ipa*;lang*;nowrap*;h:*;mvar;math;vgy;audio;iso_639_name;transl;translate;linktext;zh;nihongo*;japanese_name;ko-hhrm;mp|
+en.wiktionary.org|disabled_for_performance_see_issue_511|
 </pre>
 </div>
   </div>
