@@ -49,6 +49,11 @@ public class XophpString_tst {
 		fxt.Test_strtr_by_trie("01_ab"         , "89_ab");               // BOS
 		fxt.Test_strtr_by_trie("ab_01"         , "ab_89");               // EOS
 	}
+	@Test   public void Str_repeat() {
+		fxt.Test_str_repeat("abc", 3, "abcabcabc");
+		fxt.Test_str_repeat("", 3, "");
+		fxt.Test_str_repeat("abc", 0, "");
+	}
 }
 class XophpString_fxt {
 	public void Test_strspn_fwd__byte(String src_str, byte find, int bgn, int max, int expd) {
@@ -81,5 +86,8 @@ class XophpString_fxt {
 		Bry_bfr tmp = Bry_bfr_.New();
 		Btrie_rv trv = new Btrie_rv();
 		Gftest.Eq__str(expd, XophpString.strtr(Bry_.new_u8(src), strtr_trie, tmp, trv));
+	}
+	public void Test_str_repeat(String str, int count, String expd) {
+		Gftest.Eq__str(expd, XophpString.str_repeat(str, count));
 	}
 }

@@ -30,12 +30,15 @@ public class XomwPPNode_Hash_Attr extends XomwPPNode { 	public String name, valu
 	* @param integer $index
 	*/
 	public XomwPPNode_Hash_Attr(XophpArray store, int index) {
-//			XophpArray descriptor = (XophpArray)store.Get_at_val(index);
-//			if (!String_.Eq(XophpArrayUtl.Get_nest_val(XomwPPNode_Hash_Tree.NAME, 0), '@')) {
-//				throw Err_.new_wo_type("XomwPPNode_Hash_Attr.CTOR: invalid name in attribute descriptor");
-//			}
-//			this.name = substr($descriptor[PPNode_Hash_Tree::NAME], 1);
-//			this.value = $descriptor[PPNode_Hash_Tree::CHILDREN][0];
+		XophpArray descriptor = (XophpArray)store.Get_at(index);
+		String descriptor_name = descriptor.Get_at_str(XomwPPNode_Hash_Tree.NAME);
+		if (!(String_.CharAt(descriptor_name, 0) ==  '@')) {
+			throw Err_.new_wo_type("XomwPPNode_Hash_Attr.CTOR: invalid name in attribute descriptor");
+		}
+		this.name = String_.new_u8(XophpString.substr(Bry_.new_u8(descriptor_name), 1));
+		XophpArray descriptor_children = (XophpArray)descriptor.Get_at(XomwPPNode_Hash_Tree.CHILDREN);
+		Object value_obj = descriptor_children.Get_at(0);
+		this.value = Type_.Eq_by_obj(value_obj, byte[].class) ? String_.new_u8((byte[])value_obj): value_obj.toString();
 		this.store = store;
 		this.index = index;
 	}

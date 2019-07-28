@@ -220,7 +220,7 @@ public class XomwPreprocessor__tst {
 	}
 }
 class XomwPreprocessor__fxt {
-	private boolean dom_enabled = Bool_.Y, hash_enabled = Bool_.N;
+	private boolean dom_enabled = Bool_.Y, hash_enabled = Bool_.Y;
 	private boolean for_inclusion = false;
 	public XomwPreprocessor__fxt() {
 	}
@@ -248,8 +248,8 @@ class XomwPreprocessor__fxt {
 		for (int i = 0; i < list.Len(); i++) {
 			XomwPreprocessor wkr = (XomwPreprocessor)list.Get_at(i);
 			byte[] src_bry = Bry_.new_u8(src_str);
-			byte[] actl = wkr.preprocessToDbg(src_bry, for_inclusion);
-			Tfds.Eq_str_lines(expd, String_.new_u8(actl), src_str);
+			String actl = wkr.preprocessToDbg(src_bry, for_inclusion);
+			Tfds.Eq_str_lines(expd, actl, src_str);
 		}
 	}
 }

@@ -25,16 +25,18 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		return null;
 	}
 
-	@Override protected XomwPPDStackOld Factory__stack() {return new XomwPPDStackOld_Hash(Xomw_prepro_accum__hash.Instance);}
 	@Override protected XomwPPDPart Factory__part() {return new XomwPPDPart_Hash("");}
+	@Override protected XomwPPDStack Factory__stack() {return new XomwPPDStack(Xomw_prepro_accum__hash.Instance);}
+	@Override protected XomwPPDStackElement Factory__stack_element(XomwPPDPart part_factory, String open, String close, int count, int start_pos, boolean lineStart) {return new XomwPPDStackElement_Hash(part_factory, open, close, count, start_pos, lineStart);}
+
 	@Override protected Xomw_prepro_accum Accum__set(Xomw_prepro_accum accum_obj) {
 		this.accum = ((Xomw_prepro_accum__hash)accum_obj).Ary();
 		return accum_obj;
 	}
 
-	@Override public byte[] preprocessToDbg(byte[] src, boolean for_inclusion) {
+	@Override public String preprocessToDbg(byte[] src, boolean for_inclusion) {
 		XomwPPNode_Hash_Tree node = (XomwPPNode_Hash_Tree)this.preprocessToObj_base(src, for_inclusion);
-		return Bry_.new_u8(node.toString());
+		return node.toString();
 	}
 	@Override public XomwPPNode preprocessToObj(String text, int flags) {
 		return (XomwPPNode)preprocessToObj_base(Bry_.new_u8(text), gplx.core.bits.Bitmask_.Has_int(flags, XomwParser.PTD_FOR_INCLUSION));
@@ -42,22 +44,22 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 	@Override protected void preprocessToObj_root() {} // NOTE: deliberately empty;
 
 	@Override protected void preprocessToObj_ignore(byte[] src, int bgn, int end) {
-		accum.Add(XophpArray.New("ignore", XophpString.substr(src, bgn, end)));
+		accum.Add(XophpArray.New("ignore", XophpArray.New(XophpString.substr(src, bgn, end - bgn))));
 	}
 	@Override protected void preprocessToObj_literal(byte[] src, int bgn, int end) {
-		addLiteral(accum, XophpString.substr(src, bgn, end));
+		addLiteral(accum, XophpString.substr(src, bgn, end - bgn));
 	}
 	@Override protected void preprocessToObj_comment(byte[] src, int bgn, int end) {
-		accum.Add(XophpArray.New("comment", XophpString.substr(src, bgn, end)));
+		accum.Add(XophpArray.New("comment", XophpArray.New(XophpString.substr(src, bgn, end - bgn))));
 	}
 	@Override protected void preprocessToObj_removeLeadingWhitespaceFromEnd(int ws_len) {
 		int endIndex = accum.Len() - 1;
 		if (	ws_len > 0
 			&&	endIndex >= 0) {
 			Object itm_obj = accum.Get_at(endIndex);
-			if (Type_.Eq_by_obj(itm_obj, Bry_.Cls_ref_type)) {
-				byte[] itm = (byte[])itm_obj;
-				if (XophpString.strspn_fwd__space_or_tab(itm, 0, itm.length, itm.length) == ws_len) {
+			if (XophpTypeUtl.is_string(itm_obj)) {
+				byte[] itm = Bry_.new_u8((String)itm_obj);
+				if (XophpString.strspn_fwd__space_or_tab(itm, itm.length - ws_len, -1, itm.length) == ws_len) {
 					accum.Set(endIndex, XophpString.substr(itm, 0, -ws_len));
 				}
 			}
@@ -69,19 +71,19 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 	}
 	@Override protected void preprocessToObj_ext(byte[] src, byte[] name, int atr_bgn, int atr_end, byte[] inner, byte[] close) {
 		XophpArray children = XophpArray.New();
-		children.Add(XophpArray.New("name", name));
-		children.Add(XophpArray.New("attr", Bry_.Mid(src, atr_bgn, atr_end)));
+		children.Add(XophpArray.New("name", XophpArray.New(name)));
+		children.Add(XophpArray.New("attr", XophpArray.New(String_.new_u8(Bry_.Mid(src, atr_bgn, atr_end)))));
 		if (inner != null)
-			children.Add(XophpArray.New("inner", inner));
+			children.Add(XophpArray.New("inner", XophpArray.New(inner)));
 		if (close != null)
-			children.Add(XophpArray.New("close", close));
+			children.Add(XophpArray.New("close", XophpArray.New(close)));
 		accum.Add(XophpArray.New("ext", children));
 	}
 	@Override protected Xomw_prepro_accum preprocessToObj_heading_init(int count, int heading_index) {
-		Xomw_prepro_accum__hash rv = new Xomw_prepro_accum__hash();
+		Xomw_prepro_accum__hash rv = new Xomw_prepro_accum__hash(XophpArray.New());
 		rv.Ary().Add
 		(   XophpArray.New
-			(   "possible-h",
+			(   "h",
 				XophpArrayUtl.array_merge
 				(	XophpArray.New
 					( XophpArray.New("@level", XophpArray.New(count))
@@ -97,62 +99,57 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		XophpArrayUtl.array_splice(accum, accum.Len(), 0, ((Xomw_prepro_accum__hash)element).Ary());
 	}
 
-	@Override protected Xomw_prepro_accum preprocessToObj_text(Xomw_prepro_accum element_obj, Xomw_prepro_piece piece, byte[] rule_end, int matching_count) {
-		Xomw_prepro_accum__hash element = (Xomw_prepro_accum__hash)element_obj;
-		// element = piece.breakSyntax(matchingCount);
-		addLiteral(element.Ary(), String_.new_u8(Bry_.Repeat_bry(rule_end, matching_count)));
-		return element;
+	@Override protected Xomw_prepro_accum preprocessToObj_text(XomwPPDStackElement piece, byte[] rule_end, int matching_count) {
+		XophpArray array = (XophpArray)((XomwPPDStackElement)piece).breakSyntax(matching_count);
+		addLiteral(array, XophpString.str_repeat(String_.new_u8(rule_end), matching_count));
+		return new Xomw_prepro_accum__hash(array);
 	}
-	@Override protected Xomw_prepro_accum preprocessToObj_xml(Xomw_prepro_piece piece, byte[] name_bry, int max_count, int matching_count) {
-		List_adp parts = piece.parts;
-		byte[] title = ((XomwPPDPart_DOM)parts.Get_at(0)).To_bry();
+	@Override protected Xomw_prepro_accum preprocessToObj_xml(XomwPPDStackElement piece, byte[] name_bry, int max_count, int matching_count) {
+		XophpArray parts = piece.parts;
+		Xomw_prepro_accum title = ((XomwPPDPart_Hash)parts.Get_at(0)).Accum();
 		parts.Del_at(0);
 
 		XophpArray children = XophpArray.New();
 
 		// The invocation is at the start of the line if lineStart is set in
 		// the stack, and all opening brackets are used up.
-		if (max_count == matching_count && piece.line_start) {	// RELIC:!empty( $piece->lineStart )
+		if (max_count == matching_count && piece.lineStart) {	// RELIC:!empty( $piece->lineStart )
 			children.Add(XophpArray.New("@lineStart", XophpArray.New(1)));
 		}
 		XophpArray titleNode = XophpArray.New("title", title);
 		children.Add(titleNode);
 
-		// int argIndex = 1;
+		int argIndex = 1;
 		int parts_len = parts.Len();
 		for (int j = 0; j < parts_len; j++) {
-			XomwPPDPart part = (XomwPPDPart)parts.Get_at(j);
+			XomwPPDPart_Hash part = (XomwPPDPart_Hash)parts.Get_at(j);
+			XophpArray part_out = (XophpArray)part.Accum_hash().Ary();
 			if (part.eqpos != -1) {
-				/*
-				Object equalsNode = part.Out()[part.eqpos];
-				XophpArray nameNode  = XophpArray.New("name" , XophpArrayUtl.array_splice(part.Out(), 0, part.eqpos));
-				XophpArray valueNode = XophpArray.New("value", XophpArrayUtl.array_splice(part.Out(), part.eqpos + 1));
-				XophpArray partNode = XophpArray.New("part", XophpArray.New(nameNode, equalsNode, valueNode));
+				Object equalsNode = part_out.Get_at(part.eqpos);
+				XophpArray nameNode  = XophpArray.New("name" , XophpArrayUtl.array_slice(part_out, 0, part.eqpos));
+				XophpArray valueNode = XophpArray.New("value", XophpArrayUtl.array_slice(part_out, part.eqpos + 1));
+				XophpArray partNode  = XophpArray.New("part" , XophpArray.New(nameNode, equalsNode, valueNode));
 				children.Add(partNode);
-				*/
 			}
 			else {
-				/*
 				XophpArray nameNode  = XophpArray.New("name" , XophpArray.New(XophpArray.New("@index", XophpArray.New(argIndex++))));
-				XophpArray valueNode = XophpArray.New("value", part.Out());
-				XophpArray partNode = XophpArray.New("part", XophpArray.New(nameNode, valueNode));
+				XophpArray valueNode = XophpArray.New("value", part_out);
+				XophpArray partNode  = XophpArray.New("part" , XophpArray.New(nameNode, valueNode));
 				children.Add(partNode);
-				*/
 			}
 		}
-		// XophpArray element = XophpArray.New(XophpArray.New(name, children));
-		// return new Xomw_prepro_piece__hash(element);
-		return null;
+		XophpArray element = XophpArray.New(XophpArray.New(String_.new_u8(name_bry), children));
+		return new Xomw_prepro_accum__hash(element);
 	}
 	@Override protected void preprocessToObj_add_element(Xomw_prepro_accum element) {
 		XophpArrayUtl.array_splice(accum, accum.Len(), 0, ((Xomw_prepro_accum__hash)element).Ary());
 	}
-	@Override protected void preprocessToObj_equals(XomwPPDStackOld stack) {
+	@Override protected void preprocessToObj_equals(XomwPPDStack stack) {
 		accum.Add(XophpArray.New("equals", XophpArray.New("=")));
-		stack.Get_current_part().eqpos = accum.Len() - 1;
+		stack.getCurrentPart().eqpos = accum.Len() - 1;
 	}
-	@Override protected Object preprocessToObj_term(XomwPPDStackOld stack) {
-		Xomw_prepro_accum__hash stack_accum = (Xomw_prepro_accum__hash)stack.Get_accum();
+	@Override protected Object preprocessToObj_term(XomwPPDStack stack) {
+		Xomw_prepro_accum__hash stack_accum = (Xomw_prepro_accum__hash)stack.getAccum();
 		XophpArray stack_ary = stack_accum.Ary();
 		int len = stack_ary.Len();
 		for (int i = 0; i < len; i++) {
@@ -186,14 +183,13 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 	private static void addLiteral(XophpArray accum, byte[] text) {addLiteral(accum, String_.new_u8(text));}
 	private static void addLiteral(XophpArray accum, String text) {
 		int n = accum.Len();
-		if (n > 0) {
-			Object itm = accum.Get_at(n - 1);
-			if (itm != null) {
-				accum.Set(n - 1, ((String)itm) + text);
-				return;
-			}
+		Object itm = accum.Get_at(n - 1);
+		if (n > 0 && XophpTypeUtl.is_string(itm)) {
+			accum.Set(n - 1, ((String)itm) + text);
 		}
-		accum.Add(text);
+		else {
+			accum.Add(text);
+		}
 	}
 
 	@Override public XomwPreprocessor Make_new(XomwParser parser) {return new XomwPreprocessor_Hash();}

@@ -18,15 +18,14 @@ package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; impor
 /**
 * @ingroup Parser
 */
-// @codingStandardsIgnoreStart Squiz.Classes.ValidClassName.NotCamelCaps
-public class XomwPPDPart_Hash extends XomwPPDPart {	// @codingStandardsIgnoreEnd
-	private final    Xomw_prepro_accum__hash accum = new Xomw_prepro_accum__hash();
+public class XomwPPDPart_Hash extends XomwPPDPart {	private final    Xomw_prepro_accum__hash accum = new Xomw_prepro_accum__hash(XophpArray.New());
 	public XomwPPDPart_Hash(String output) {super(output);
 		if (output != String_.Empty) {
 			accum.Ary().Add(output);
 		}
 	}
 	@Override public Xomw_prepro_accum Accum() {return accum;}
+	public Xomw_prepro_accum__hash Accum_hash() {return (Xomw_prepro_accum__hash)accum;}
 	@Override public XomwPPDPart Make_new(String val) {
 		return new XomwPPDPart_Hash(val);
 	}

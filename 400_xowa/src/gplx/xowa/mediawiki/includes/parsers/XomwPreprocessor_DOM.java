@@ -20,8 +20,9 @@ import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private Xomw_prepro_accum__dom accum_dom = new Xomw_prepro_accum__dom("");
 
-	@Override protected XomwPPDStackOld Factory__stack() {return new XomwPPDStackOld(Xomw_prepro_accum__dom.Instance);}
 	@Override protected XomwPPDPart Factory__part() {return new XomwPPDPart_DOM("");}
+	@Override protected XomwPPDStack Factory__stack() {return new XomwPPDStack(Xomw_prepro_accum__dom.Instance);}
+	@Override protected XomwPPDStackElement Factory__stack_element(XomwPPDPart part_factory, String open, String close, int count, int start_pos, boolean lineStart) {return new XomwPPDStackElement(part_factory, open, close, count, start_pos, lineStart);}
 
 	@Override public XomwPPFrame newFrame() {
 		return null;
@@ -34,7 +35,7 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 		return accum;
 	}
 
-	@Override public byte[] preprocessToDbg(byte[] src, boolean for_inclusion) {return (byte[])this.preprocessToObj_base(src, for_inclusion);}
+	@Override public String preprocessToDbg(byte[] src, boolean for_inclusion) {return String_.new_u8((byte[])this.preprocessToObj_base(src, for_inclusion));}
 	@Override public XomwPPNode preprocessToObj(String text, int flags) {
 		return (XomwPPNode)preprocessToObj_base(Bry_.new_u8(text), gplx.core.bits.Bitmask_.Has_int(flags, XomwParser.PTD_FOR_INCLUSION));
 	}
@@ -89,25 +90,22 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 	@Override protected void preprocessToObj_heading_end(Xomw_prepro_accum element) {
 		accum_dom.Add_bry(((Xomw_prepro_accum__dom)element).To_bry());
 	}
-	@Override protected Xomw_prepro_accum preprocessToObj_text(Xomw_prepro_accum element_obj, Xomw_prepro_piece piece, byte[] rule_end, int matching_count) {
-		Xomw_prepro_accum__dom element = (Xomw_prepro_accum__dom)element_obj;
-		tmp_bfr.Add(piece.Break_syntax(tmp_bfr, matching_count));
-		if (element != null)
-			tmp_bfr.Add(element.To_bry());
+	@Override protected Xomw_prepro_accum preprocessToObj_text(XomwPPDStackElement piece, byte[] rule_end, int matching_count) {
+		tmp_bfr.Add_str_u8((String)piece.breakSyntax(matching_count));
 		tmp_bfr.Add(Bry_.Repeat_bry(rule_end, matching_count));
 		byte[] rv = tmp_bfr.To_bry_and_clear();
 		return new Xomw_prepro_accum__dom(String_.new_u8(rv));
 	}
-	@Override protected Xomw_prepro_accum preprocessToObj_xml(Xomw_prepro_piece piece, byte[] name_bry, int max_count, int matching_count) {
+	@Override protected Xomw_prepro_accum preprocessToObj_xml(XomwPPDStackElement piece, byte[] name_bry, int max_count, int matching_count) {
 		// Note: $parts is already XML, does not need to be encoded further
-		List_adp parts = piece.parts;
+		XophpArray parts = piece.parts;
 		byte[] title = ((XomwPPDPart_DOM)parts.Get_at(0)).To_bry();
 		parts.Del_at(0);
 
 		// The invocation is at the start of the line if lineStart is set in
 		// the stack, and all opening brackets are used up.
 		byte[] attr = null;
-		if (max_count == matching_count && piece.line_start) {	// RELIC:!empty( $piece->lineStart )
+		if (max_count == matching_count && piece.lineStart) {	// RELIC:!empty( $piece->lineStart )
 			attr = Bry_.new_a7(" lineStart=\"1\"");
 		}
 		else {
@@ -138,11 +136,11 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 	@Override protected void preprocessToObj_add_element(Xomw_prepro_accum element) {
 		accum_dom.Add_bry(((Xomw_prepro_accum__dom)element).To_bry());
 	}
-	@Override protected void preprocessToObj_equals(XomwPPDStackOld stack) {
-		stack.Get_current_part().eqpos = accum_dom.Len();
+	@Override protected void preprocessToObj_equals(XomwPPDStack stack) {
+		stack.getCurrentPart().eqpos = accum_dom.Len();
 		accum_dom.Add_bry(Byte_ascii.Eq_bry);
 	}
-	@Override protected Object preprocessToObj_term(XomwPPDStackOld stack) {
+	@Override protected Object preprocessToObj_term(XomwPPDStack stack) {
 		Bry_bfr root_accum = Bry_bfr_.New().Add_str_u8(((Xomw_prepro_accum__dom)stack.Get_root_accum()).To_str());
 		int stack_len = stack.stack.Len();
 		for (int j = 0; j < stack_len; j++) {

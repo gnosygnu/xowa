@@ -59,13 +59,12 @@ public class XomwPPDStack {
 	}
 
 	public void push(XomwPPDStackElement data) {
-		if (Type_.Eq_by_obj(data, XomwPPDStackElement.class)) {
-			this.stack.Add(data);
-		}
-		else {
+		this.stack.Add(data);
+		// PHP.IGNORE:strong-typing
+//			else {
 //				$class = this.elementClass;
 //				this.stack[] = new $class($data);
-		}
+//			}
 		this.top = (XomwPPDStackElement)this.stack.Get_at(this.stack.Count() - 1);
 		this.accum = this.top.getAccum();
 	}
@@ -101,4 +100,11 @@ public class XomwPPDStack {
 			return this.top.getFlags();
 		}
 	}
+
+	public void Clear() {
+		stack.Clear();
+		accum.Clear();
+		top = null;
+	}
+	public Xomw_prepro_accum Get_root_accum() {return this.rootAccum;}
 }

@@ -15,10 +15,23 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpTypeUtl {
-	// REF.PHP: https://www.php.net/manual/en/function.is-scalar.php
-	public static boolean is_scalar(Object obj) {
-		if (obj == null) return false;
-		int type_id = Type_ids_.To_id_by_type(obj.getClass());
+	public static int To_type_id(Object o) {
+		int type_id = Type_ids_.To_id_by_obj(o);
+		switch (type_id) {
+			case Type_ids_.Id__bry:
+				type_id = Type_ids_.Id__str;
+				break;
+			case Type_ids_.Id__obj:
+				if (Type_.Eq_by_obj(o, XophpArray.class)) {
+					type_id = Type_ids_.Id__array;
+				}
+				break;
+		}
+		return type_id;
+	}
+	public static boolean is_scalar(Object o) { // REF.PHP: https://www.php.net/manual/en/function.is-scalar.php
+		if (o == null) return false;
+		int type_id = To_type_id(o);
 		switch (type_id) {
 			case Type_ids_.Id__int:
 			case Type_ids_.Id__float:
@@ -29,6 +42,7 @@ public class XophpTypeUtl {
 				return false;
 		}
 	}
-
-	public static boolean is_string(Object obj) {return Type_.Eq_by_obj(obj, String.class);}
+	public static boolean is_string(Object o) {
+		return To_type_id(o) == Type_ids_.Id__str;
+	}
 }

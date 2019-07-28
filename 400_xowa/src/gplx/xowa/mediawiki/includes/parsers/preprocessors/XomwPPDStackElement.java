@@ -43,31 +43,38 @@ public class XomwPPDStackElement {
 	* @var boolean True if the open char appeared at the start of the input line.
 	*  Not set for headings.
 	*/
-//		public boolean lineStart;
+	public boolean lineStart;
 
 	public String partClass = "PPDPart";
 
-	public XomwPPDStackElement(String open, String close, int count) {
+	public int start_pos;
+	private final    XomwPPDPart part_factory;
+	public XomwPPDStackElement(XomwPPDPart part_factory, String open, String close, int count, int start_pos, boolean lineStart) {
 		this.parts = new XophpArray();
 
 		this.open = open;
 		this.close = close;
 		this.count = count;
+
+		this.part_factory = part_factory;
+		this.start_pos = start_pos;
+		this.lineStart = lineStart;
+		parts.Add(part_factory.Make_new(""));
 	}
 
 	public Xomw_prepro_accum getAccum() {
-		return (Xomw_prepro_accum)Get_at(this.parts.Count() - 1);
+		return (Xomw_prepro_accum)Get_at(this.parts.Count() - 1).Accum();
 	}
 
 	public void addPart(String s) {
 		this.parts.Add(Make_part(s));
 	}
 	@gplx.Virtual protected XomwPPDPart Make_part(String s) {
-		return new XomwPPDPart_DOM(s);
+		return part_factory.Make_new(s);
 	}
 
 	public XomwPPDPart getCurrentPart() {
-		return (XomwPPDPart)this.parts.Get_at(this.parts.Count() - 1);
+		return (XomwPPDPart)Get_at(this.parts.Count() - 1);
 	}
 
 	/**
@@ -89,10 +96,11 @@ public class XomwPPDStackElement {
 	* @param boolean|int $openingCount
 	* @return String
 	*/
-	@gplx.Virtual public String breakSyntax(int openingCount) {
+	@gplx.Virtual public Object breakSyntax(int openingCount) {
 		Char_bfr bfr = new Char_bfr(16);
 		if (String_.Eq(this.open, "\n")) {
-			bfr.Add_bry(Get_at(0).To_bry());
+			XomwPPDPart_DOM part_0 = (XomwPPDPart_DOM)Get_at(0);
+			bfr.Add_bry(part_0.To_bry());
 		}
 		else {
 			if (openingCount == -1) {
@@ -102,7 +110,7 @@ public class XomwPPDStackElement {
 			boolean first = true;
 			int parts_len = parts.Len();
 			for (int i = 0; i < parts_len; i++) {
-				XomwPPDPart_DOM part = Get_at(i);
+				XomwPPDPart_DOM part = (XomwPPDPart_DOM)Get_at(i);
 				if (first) {
 					first = false;
 				} else {
@@ -113,63 +121,12 @@ public class XomwPPDStackElement {
 		}
 		return bfr.To_str_and_clear();
 	}
-	private XomwPPDPart_DOM Get_at(int i) {
-		return (XomwPPDPart_DOM)this.parts.Get_at(i);
+	public void Parts__renew() {
+		parts.Clear();
+		this.addPart("");
 	}
-}
-// MW.FILE:Preprocessor_Hash
-/**
-* @ingroup Parser
-*/
-class XomwPPDStackElement_Hash extends XomwPPDStackElement { 	public XomwPPDStackElement_Hash(String open, String close, int count) {super(open, close, count);
-	}
-
-	private XomwPPDPart_Hash Get_at_hash(int i) {
-		return (XomwPPDPart_Hash)this.parts.Get_at(i);
-	}
-	/**
-	* Get the accumulator that would result if the close is not found.
-	*
-	* @param int|boolean $openingCount
-	* @return array
-	*/
-	public XophpArray breakSyntax_Hash(int openingCount) {
-		XophpArray accum = null;
-		if (String_.Eq(this.open, "\n")) {
-			accum = (XophpArray)Get_at_hash(0).Accum();
-		}
-		else {
-			if (openingCount == -1) {
-				openingCount = this.count;
-			}
-			accum = XophpArray.New(XophpString.str_repeat(this.open, openingCount));
-			int lastIndex = 0;
-			boolean first = true;
-			int parts_len = parts.Len();
-			for (int i = 0; i < parts_len; i++) {
-				XomwPPDPart_Hash part = Get_at_hash(i);
-				if (first) {
-					first = false;
-				}
-				else if (XophpTypeUtl.is_string(accum.Get_at_str(lastIndex))) {
-					accum.Set(lastIndex, accum.Get_at_str(lastIndex) + "|");
-				} else {
-					accum.Set(++lastIndex, "|");
-				}
-				
-				XophpArray part_out = ((Xomw_prepro_accum__hash)part.Accum()).Ary();
-				int part_out_len = part_out.Len();
-				for (int j = 0; j < part_out_len; j++) {
-					Object node = part_out.Get_at(j);
-					if (XophpTypeUtl.is_string(node) && XophpTypeUtl.is_string(accum.Get_at(lastIndex))) {
-						accum.Set(lastIndex, accum.Get_at_str(lastIndex) + (String)node);
-					} else {
-						accum.Set(++lastIndex, node);
-					}
-				}
-			}
-		}
-		return accum;
+	private XomwPPDPart Get_at(int i) {
+		return (XomwPPDPart)this.parts.Get_at(i);
 	}
 }
 ///**

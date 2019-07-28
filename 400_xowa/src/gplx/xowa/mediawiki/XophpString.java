@@ -160,12 +160,13 @@ public class XophpString {
 	public static int strlen(byte[] src) {return src.length;}
 	public static String str_repeat(String val, int count) {
 		int val_len = String_.Len(val);
-		char[] chry = new char[val_len];
+		int chry_len = val_len * count;
+		char[] chry = new char[chry_len];
 		for (int i = 0; i < count; i++) {
-			for (int j = 0; i < val_len; j++) {
+			for (int j = 0; j < val_len; j++) {
 				chry[(i * val_len) + j] = String_.CharAt(val, j);
 			}
 		}
-		return String_.new_charAry_(chry, 0, val_len);
+		return String_.new_charAry_(chry, 0, chry_len);
 	}
 }

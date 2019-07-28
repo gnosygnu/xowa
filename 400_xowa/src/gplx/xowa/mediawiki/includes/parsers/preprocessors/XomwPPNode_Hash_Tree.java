@@ -41,13 +41,13 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	* The offset of the name within descriptors, used in some places for
 	* readability.
 	*/
-	private static final int NAME = 0;
+	public static final int NAME = 0;
 
 	/**
 	* The offset of the child list within descriptors, used in some places for
 	* readability.
 	*/
-//		private static final int CHILDREN = 1;
+	public static final int CHILDREN = 1;
 
 	/**
 	* Construct an Object using the data from $store[$index]. The rest of the
@@ -62,7 +62,13 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 
 		XophpArray list = this.store.Get_at_ary(index);
 		this.name = list.Get_at_str(0);
-		this.rawChildren = ((Xomw_prepro_accum__hash)(list.Get_at(1))).Ary();
+		Object rawChildrenObj = list.Get_at(1);
+		if (XophpTypeUtl.To_type_id(rawChildrenObj) == Type_ids_.Id__array) {
+			this.rawChildren = (XophpArray)rawChildrenObj;
+		}
+		else {
+			this.rawChildren = ((Xomw_prepro_accum__hash)rawChildrenObj).Ary();
+		}
 	}
 
 	/**
@@ -85,12 +91,12 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 		}
 		else if (type.is_array()) {
 			XophpArray descriptor_array = (XophpArray)descriptor;
-			XophpArray name_array = (XophpArray)(descriptor_array.Get_by(NAME));
-			if (String_.Has_at_bgn(name_array.Get_at_str(0), "@")) {
+			String name = (String)(descriptor_array.Get_by(NAME));
+			if (String_.CharAt(name, 0) == '@') {
 				return new XomwPPNode_Hash_Attr(store, index);
 			}
 			else {
-				return new XomwPPNode_Hash_Text(store, index);
+				return new XomwPPNode_Hash_Tree(store, index);
 			}
 		}
 		else {
@@ -107,15 +113,20 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 		for (XomwPPNode node = this.getFirstChild(); node != null; node = node.getNextSibling()) {
 			if (Type_.Eq_by_obj(node, XomwPPNode_Hash_Attr.class)) {
 				XomwPPNode_Hash_Attr node_attr = (XomwPPNode_Hash_Attr)node;
-				attribs += "  " + node_attr.name + "=\"" + Bry_.Escape_html(Bry_.new_u8(node_attr.value)) + "\"";
+				attribs += " " + node_attr.name + "=\"" + String_.new_u8(Bry_.Escape_html(Bry_.new_u8(node_attr.value))) + "\"";
 			} else {
 				inner += node.toString();
 			}
 		}
-		if (String_.Eq(inner, "")) {
-			return "<" + this.name + attribs + "/>";
+		if (String_.Eq(inner, "") && String_.Eq(name, "name")) {
+			return "<" + this.name + attribs + " />";
 		} else {
-			return "<" + this.name + attribs + ">" + inner + "</" + this.name + ">";
+			if (String_.Eq(name, "equals")) {
+				return inner;
+			}
+			else {
+				return "<" + this.name + attribs + ">" + inner + "</" + this.name + ">";
+			}
 		}
 	}
 

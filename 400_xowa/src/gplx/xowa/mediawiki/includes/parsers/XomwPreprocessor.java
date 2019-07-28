@@ -155,7 +155,7 @@ public abstract class XomwPreprocessor {
 	private final    Btrie_slim_mgr elements_trie__y = Btrie_slim_mgr.ci_a7(), elements_trie__n = Btrie_slim_mgr.ci_a7();
 	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs().Add_many_str("includeonly", "noinclude", "onlyinclude");
 	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
-	private final    XomwPPDStackOld stack;
+	private final    XomwPPDStack stack;
 	private final    Btrie_rv trv = new Btrie_rv();
 	private Xomw_prepro_accum accum = null;
 
@@ -188,7 +188,7 @@ public abstract class XomwPreprocessor {
 		trie.Add_obj(hook, new Xomw_prepro_elem(type_is_comment ? Xomw_prepro_elem.Type__comment : Xomw_prepro_elem.Type__other, Bry_.new_a7(name)));
 	}
 
-	public abstract byte[] preprocessToDbg(byte[] src, boolean for_inclusion);
+	public abstract String preprocessToDbg(byte[] src, boolean for_inclusion);
 	/**
 	* @param String $text
 	* @param int $flags
@@ -241,7 +241,7 @@ public abstract class XomwPreprocessor {
 		int i = 0;
 
 		// Current accumulator
-		accum = this.Accum__set(stack.Get_accum());
+		accum = this.Accum__set(stack.getAccum());
 		this.preprocessToObj_root();
 
 		// True to find equals signs in arguments
@@ -270,7 +270,7 @@ public abstract class XomwPreprocessor {
 		int src_len = src.length;
 		int found = -1;
 		byte[] cur_char = Bry_.Empty;
-		byte[] cur_closing = Bry_.Empty;
+		String cur_closing = "";
 		byte[] inner = null;
 		Xomw_prepro_rule rule = null;
 
@@ -297,7 +297,7 @@ public abstract class XomwPreprocessor {
 				// Find next opening brace, closing brace or pipe		
 				// RELIC.REGEX: $search = $searchBase;
 				if (stack.top == null) {
-					cur_closing = Bry_.Empty;
+					cur_closing = "";
 				}
 				else {
 					cur_closing = stack.top.close;
@@ -332,10 +332,10 @@ public abstract class XomwPreprocessor {
 							if (findEquals) loop_stop = true;
 							break;
 						default:                // handle "cur_closing"; specified by piece.close and rule.close, so "\n", "}", "]" and "}-"
-							if (cur_closing != Bry_.Empty) {
-								byte cur_closing_0 = cur_closing[0];
+							if (String_.EqNot(cur_closing, "")) {
+								byte cur_closing_0 = (byte)String_.CharAt(cur_closing, 0);
 								if (b == cur_closing_0) {
-									if (cur_closing.length == 1) {	// handle "\n", "}", "]"
+									if (String_.Len(cur_closing) == 1) {	// handle "\n", "}", "]"
 										loop_stop = true;
 									}
 									else {// handle "}-"
@@ -357,7 +357,7 @@ public abstract class XomwPreprocessor {
 					i += literal_len;
 				}
 				if (i >= src_len) {
-					if (Bry_.Eq(cur_closing, Byte_ascii.Nl_bry)) {
+					if (String_.Eq(cur_closing, String_.Nl)) {
 						// Do a past-the-end run to finish off the heading
 						cur_char = Bry_.Empty;
 						found = Found__line_end;
@@ -487,7 +487,7 @@ public abstract class XomwPreprocessor {
 						}
 
 						if (stack.top != null) {
-							XomwPPDPart part = stack.top.Get_current_part();
+							XomwPPDPart part = stack.top.getCurrentPart();
 							if (!(part.commentEnd != -1 && part.commentEnd == ws_bgn - 1)) {
 								part.visualEnd = ws_bgn;
 							}
@@ -617,11 +617,11 @@ public abstract class XomwPreprocessor {
 					// complex.
 				}
 				else if (count > 0) {
-					Xomw_prepro_piece piece = new Xomw_prepro_piece(Factory__part(), Byte_ascii.Nl_bry, Byte_ascii.Nl_bry, count, i, false);
-					piece.Add_part(Bry_.Repeat(Byte_ascii.Eq, count));
-					stack.Push(piece);
-					accum = this.Accum__set(stack.Get_accum());
-					Xomw_prepro_flags flags = stack.Get_flags();
+					XomwPPDStackElement piece = Factory__stack_element(Factory__part(), String_.Nl, String_.Nl, count, i, false);
+					piece.addPart(XophpString.str_repeat("=", count));
+					stack.push(piece);
+					accum = this.Accum__set(stack.getAccum());
+					XomwPPDStackElementFlags flags = stack.getFlags();
 					findPipe = flags.findPipe;
 					findEquals = flags.findEquals;
 					inHeading = flags.inHeading;
@@ -629,10 +629,10 @@ public abstract class XomwPreprocessor {
 				}
 			}
 			else if (found == Found__line_end) {
-				Xomw_prepro_piece piece = stack.top;
+				XomwPPDStackElement piece = stack.top;
 				// A heading must be open, otherwise \n wouldn't have been in the search list
-				if (!Bry_.Eq(piece.open, Byte_ascii.Nl_bry)) throw Err_.new_wo_type("assertion:piece must start with \\n");
-				XomwPPDPart part = piece.Get_current_part();
+				if (!String_.Eq(piece.open, String_.Nl)) throw Err_.new_wo_type("assertion:piece must start with \\n");
+				XomwPPDPart part = piece.getCurrentPart();
 
 				// Search back through the input to see if it has a proper close.
 				// Do this using the reversed String since the other solutions
@@ -683,10 +683,10 @@ public abstract class XomwPreprocessor {
 				}
 
 				// Unwind the stack
-				stack.Pop();
-				this.accum = this.Accum__set(stack.Get_accum());
+				stack.pop();
+				this.accum = this.Accum__set(stack.getAccum());
 				
-				Xomw_prepro_flags flags = stack.Get_flags();
+				XomwPPDStackElementFlags flags = stack.getFlags();
 				findPipe = flags.findPipe;
 				findEquals = flags.findEquals;
 				inHeading = flags.inHeading;
@@ -706,11 +706,10 @@ public abstract class XomwPreprocessor {
 				// we need to add to stack only if opening brace count is enough for one of the rules
 				if (count >= rule.min) {
 					// Add it to the stack
-					Xomw_prepro_piece piece = new Xomw_prepro_piece(Factory__part(), cur_char, rule.end, count, -1, i > 0 && src[i - 1] == Byte_ascii.Nl);
-
-					stack.Push(piece);
-					this.accum = this.Accum__set(stack.Get_accum());
-					Xomw_prepro_flags flags = stack.Get_flags();
+					XomwPPDStackElement piece = Factory__stack_element(Factory__part(), String_.new_u8(cur_char), String_.new_u8(rule.end), count, -1, i > 0 && src[i - 1] == Byte_ascii.Nl);
+					stack.push(piece);
+					this.accum = this.Accum__set(stack.getAccum());
+					XomwPPDStackElementFlags flags = stack.getFlags();
 					findPipe = flags.findPipe;
 					findEquals = flags.findEquals;
 					inHeading = flags.inHeading;
@@ -723,7 +722,7 @@ public abstract class XomwPreprocessor {
 				i += count;
 			}
 			else if (found == Found__close) {
-				Xomw_prepro_piece piece = stack.top;
+				XomwPPDStackElement piece = stack.top;
 				// lets check if there are enough characters for closing brace
 				int max_count = piece.count;
 				int count = XophpString.strspn_fwd__byte(src, cur_char[0], i, max_count, src_len);
@@ -759,7 +758,7 @@ public abstract class XomwPreprocessor {
 				Xomw_prepro_accum element = null;
 				if (name_type == Xomw_prepro_rule.Name__null) {
 					// No element, just literal text
-					element = this.preprocessToObj_text(element, piece, rule.end, matching_count);
+					element = this.preprocessToObj_text(piece, rule.end, matching_count);
 				}
 				else {
 					// Create XML element
@@ -770,8 +769,8 @@ public abstract class XomwPreprocessor {
 				i += matching_count;
 
 				// Unwind the stack
-				stack.Pop();
-				this.accum = this.Accum__set(stack.Get_accum());
+				stack.pop();
+				this.accum = this.Accum__set(stack.getAccum());
 
 				// Re-add the old stack element if it still has unmatched opening characters remaining
 				if (matching_count < piece.count) {
@@ -781,15 +780,15 @@ public abstract class XomwPreprocessor {
 					// do we still qualify for any callback with remaining count?
 					int min = Get_rule(piece.open).min;
 					if (piece.count >= min) {
-						stack.Push(piece);
-						this.accum = this.Accum__set(stack.Get_accum());
+						stack.push(piece);
+						this.accum = this.Accum__set(stack.getAccum());
 					}
 					else {
-						this.preprocessToObj_literal(Bry_.Repeat_bry(piece.open, piece.count));
+						this.preprocessToObj_literal(Bry_.new_u8(XophpString.str_repeat(piece.open, piece.count)));
 					}
 				}
 
-				Xomw_prepro_flags flags = stack.Get_flags();
+				XomwPPDStackElementFlags flags = stack.getFlags();
 				findPipe = flags.findPipe;
 				findEquals = flags.findEquals;
 				inHeading = flags.inHeading;
@@ -799,8 +798,8 @@ public abstract class XomwPreprocessor {
 			}
 			else if (found == Found__pipe) {
 				findEquals = true; // shortcut for getFlags()
-				stack.Add_part(Bry_.Empty);
-				this.accum = this.Accum__set(stack.Get_accum());
+				stack.addPart("");
+				this.accum = this.Accum__set(stack.getAccum());
 				i++;
 			}
 			else if (found == Found__equals) {
@@ -814,6 +813,7 @@ public abstract class XomwPreprocessor {
 		return this.preprocessToObj_term(stack);
 	}
 
+	private Xomw_prepro_rule Get_rule(String str) {return Get_rule(Bry_.new_u8(str));}
 	private Xomw_prepro_rule Get_rule(byte[] bry) {
 		if		(Bry_.Eq(bry, rule_curly.bgn))   return rule_curly;
 		else if	(Bry_.Eq(bry, rule_brack.bgn))   return rule_brack;
@@ -864,7 +864,8 @@ public abstract class XomwPreprocessor {
 	}
 
 	protected abstract XomwPPDPart Factory__part();
-	protected abstract XomwPPDStackOld Factory__stack();
+	protected abstract XomwPPDStack Factory__stack();
+	protected abstract XomwPPDStackElement Factory__stack_element(XomwPPDPart part_factory, String open, String close, int count, int start_pos, boolean lineStart);
 
 	protected abstract Xomw_prepro_accum Accum__set(Xomw_prepro_accum accum);
 
@@ -880,10 +881,10 @@ public abstract class XomwPreprocessor {
 	protected abstract Xomw_prepro_accum preprocessToObj_heading_init(int count, int heading_index);
 	protected abstract void preprocessToObj_heading_end(Xomw_prepro_accum element);
 	protected abstract void preprocessToObj_removeLeadingWhitespaceFromEnd(int ws_len);
-	protected abstract Xomw_prepro_accum preprocessToObj_text(Xomw_prepro_accum element, Xomw_prepro_piece piece, byte[] rule_end, int matching_count);
-	protected abstract Xomw_prepro_accum preprocessToObj_xml(Xomw_prepro_piece piece, byte[] name_bry, int max_count, int matching_count);
+	protected abstract Xomw_prepro_accum preprocessToObj_text(XomwPPDStackElement piece, byte[] rule_end, int matching_count);
+	protected abstract Xomw_prepro_accum preprocessToObj_xml(XomwPPDStackElement piece, byte[] name_bry, int max_count, int matching_count);
 	protected abstract void preprocessToObj_add_element(Xomw_prepro_accum element);
-	protected abstract void preprocessToObj_equals(XomwPPDStackOld stack);
-	protected abstract Object preprocessToObj_term(XomwPPDStackOld stack);
+	protected abstract void preprocessToObj_equals(XomwPPDStack stack);
+	protected abstract Object preprocessToObj_term(XomwPPDStack stack);
 	public abstract XomwPreprocessor Make_new(XomwParser parser);
 }

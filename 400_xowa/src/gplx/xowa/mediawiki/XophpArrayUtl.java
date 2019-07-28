@@ -140,4 +140,14 @@ public class XophpArrayUtl {
 		}
 		return rv;
 	}
+	// ( array $array , int $offset [, int $length = NULL [, boolean $preserve_keys = FALSE ]] ) : 
+	public static XophpArray array_slice(XophpArray array, int offset) {return array_slice(array, offset, array.Len());}
+	public static XophpArray array_slice(XophpArray array, int offset, int length) {
+		XophpArray rv = new XophpArray();
+		int end = offset + length;
+		for (int i = offset; i< end; i++) {
+			rv.Add(array.Get_at(i));
+		}
+		return rv;
+	}
 }
