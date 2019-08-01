@@ -26,45 +26,84 @@ public class Xow_domain_itm_ {
 		~www.~{type}.org		EX: mediawiki; wikidata;
 		*/
 		int raw_len = raw.length;
+
+		// find 1st dot
 		int dot_0 = Bry_find_.Find_fwd(raw, Byte_ascii.Dot, 0, raw_len);
-		if (dot_0 == Bry_find_.Not_found) {	// 0 dots; check for "home"
+
+		// 0 dots; check for "home"
+		if (dot_0 == Bry_find_.Not_found) {
 			return Bry_.Eq(raw, Xow_domain_tid_.Bry__home)
 				? Xow_domain_uid_.To_domain(Xow_domain_uid_.Tid_xowa)
 				: new_other(raw);
 		}
+
+		// find 2nd dot
 		int dot_1 = Bry_find_.Find_fwd(raw, Byte_ascii.Dot, dot_0 + 1, raw_len);
-		if (dot_1 == Bry_find_.Not_found) {	// 1 dot;
+
+		// 1 dot only -> return "wikisource.org" or other
+		if (dot_1 == Bry_find_.Not_found) {
+			// wikisource.org
+			if (Bry_.Eq(raw, Xow_domain_itm_.Bry__wikisource_org)) {
+				return Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__wikisource_org, Xol_lang_stub_.Key__unknown);
+			}
+			else {
+				return new_other(raw);
+			}
+		}
+
+		// 2 dots
+		// seg_1 is type?; EX: ".wikipedia."
+		int seg_1_tid = Xow_domain_tid_.Get_type_as_tid(raw, dot_0 + 1, dot_1);
+
+		// seg_1 is not a type -> return other
+		if (seg_1_tid == Xow_domain_tid_.Tid__null) {
 			return new_other(raw);
 		}
-		// 2 dots
-		int seg_1_tid = Xow_domain_tid_.Get_type_as_tid(raw, dot_0 + 1, dot_1);	// parse middle; EX: ".wikipedia."
-		if (seg_1_tid == Xow_domain_tid_.Tid__null) return new_other(raw);			// seg_1 is unknown; return other;
+
+		// seg_1 is known
 		switch (seg_1_tid) {
+			// ~{lang}.~{type}.org
 			case Xow_domain_tid_.Tid__wikipedia: case Xow_domain_tid_.Tid__wiktionary: case Xow_domain_tid_.Tid__wikisource: case Xow_domain_tid_.Tid__wikibooks:
-			case Xow_domain_tid_.Tid__wikiversity: case Xow_domain_tid_.Tid__wikiquote: case Xow_domain_tid_.Tid__wikinews: case Xow_domain_tid_.Tid__wikivoyage:	// ~{lang}.~{type}.org
+			case Xow_domain_tid_.Tid__wikiversity: case Xow_domain_tid_.Tid__wikiquote: case Xow_domain_tid_.Tid__wikinews: case Xow_domain_tid_.Tid__wikivoyage:
 				byte[] lang_orig = Bry_.Mid(raw, 0, dot_0);
 				byte[] lang_actl = Get_lang_code_for_mw_messages_file(lang_orig);
-				return Xow_domain_itm.new_(raw, seg_1_tid, lang_actl, lang_orig);	// NOTE: seg_tids must match wiki_tids
-			case Xow_domain_tid_.Tid__wikidata: case Xow_domain_tid_.Tid__mediawiki:// ~www.~{type}.org
+				return Xow_domain_itm.new_(raw, seg_1_tid, lang_actl, lang_orig); // NOTE: seg_tids must match wiki_tids
+
+			// ~www.~{type}.org
+			case Xow_domain_tid_.Tid__wikidata: case Xow_domain_tid_.Tid__mediawiki:
 				return Xow_domain_itm.new_(raw, seg_1_tid, Xol_lang_stub_.Key__unknown);
-			case Xow_domain_tid_.Tid__wikimedia:									// ~{type}.wikimedia.org;
-				int seg_0_tid = Xow_domain_tid_.Get_type_as_tid(raw, 0, dot_0);	// try to get "incubator", "meta", etc..
-				if (seg_0_tid == Xow_domain_tid_.Tid__null) {						// not a known name; try language
-					byte[] lang_override = Xow_abrv_wm_override.To_lang_key_or_null(raw);	// handle "lang-like" wikimedia domains like "ar.wikimedia.org" which is actually to "Argentina Wikimedia"
+
+			// ~{type}.wikimedia.org;
+			case Xow_domain_tid_.Tid__wikimedia:					
+				// seg_0 is type?; EX: "incubator", "meta", etc..
+				int seg_0_tid = Xow_domain_tid_.Get_type_as_tid(raw, 0, dot_0);
+
+				// seg_0 is not a type
+				if (seg_0_tid == Xow_domain_tid_.Tid__null) {
+					// seg_0 is language?; handles "lang-like" wikimedia domains like "ar.wikimedia.org" which is actually to "Argentina Wikimedia"
+					byte[] lang_override = Xow_abrv_wm_override.To_lang_key_or_null(raw);
+
+					// seg_0 is not a language
 					if (lang_override == null) {
 						Xol_lang_stub wikimedia_lang = Xol_lang_stub_.Get_by_key_or_null(raw, 0, dot_0);
 						return wikimedia_lang == null ? new_other(raw) : Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__wikimedia, wikimedia_lang.Key());
 					}
+					// seg_0 is a language; use language override; EX: "ar.wikimedia.org"
 					else
 						return Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__wikimedia, lang_override, Bry_.Mid(raw, 0, dot_0));
 				}
+
+				// seg_0 is a type
 				switch (seg_0_tid) {
-					case Xow_domain_tid_.Tid__commons: case Xow_domain_tid_.Tid__species: case Xow_domain_tid_.Tid__meta: case Xow_domain_tid_.Tid__incubator:
+					case Xow_domain_tid_.Tid__commons: case Xow_domain_tid_.Tid__species: case Xow_domain_tid_.Tid__meta:
+					case Xow_domain_tid_.Tid__incubator: case Xow_domain_tid_.Tid__wikimania: case Xow_domain_tid_.Tid__wikisource_org:
 					case Xow_domain_tid_.Tid__wmfblog:
-						return Xow_domain_itm.new_(raw, seg_0_tid, Xol_lang_stub_.Key__unknown);						// NOTE: seg_tids must match wiki_tids; NOTE: lang_key is "en" (really, "multi" but making things easier)
+						return Xow_domain_itm.new_(raw, seg_0_tid, Xol_lang_stub_.Key__unknown); // NOTE: seg_tids must match wiki_tids; NOTE: lang_key is "en" (really, "multi" but making things easier)
 					default:
 						return new_other(raw);
 				}
+
+			// unknown type
 			case Xow_domain_tid_.Tid__other:
 			default:
 				return new_other(raw);
@@ -130,6 +169,8 @@ public class Xow_domain_itm_ {
 	, Str__mediawiki							= "www.mediawiki.org"
 	, Str__meta									= "meta.wikimedia.org"
 	, Str__incubator							= "incubator.wikimedia.org"
+	, Str__wikimania							= "wikimania.wikimedia.org"
+	, Str__wikisource_org						= "wikisource.org"
 	, Str__wmforg								= "foundation.wikimedia.org"
 	, Str__home									= "home"
 	;
@@ -141,6 +182,8 @@ public class Xow_domain_itm_ {
 	, Bry__mediawiki							= Bry_.new_a7(Str__mediawiki)
 	, Bry__meta									= Bry_.new_a7(Str__meta)
 	, Bry__incubator							= Bry_.new_a7(Str__incubator)
+	, Bry__wikimania							= Bry_.new_a7(Str__wikimania)
+	, Bry__wikisource_org						= Bry_.new_a7(Str__wikisource_org)
 	, Bry__wmforg								= Bry_.new_a7(Str__wmforg)
 	, Bry__home									= Bry_.new_a7(Str__home)
 	, Bry__simplewiki							= Bry_.new_a7("simple.wikipedia.org")

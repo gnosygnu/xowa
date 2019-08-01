@@ -59,6 +59,16 @@ public class Xow_abrv_wm_tst {
 	@Test  public void To_abrv_by_lang() {
 		fxt.Test_to_abrv_by_lang("en", Xow_domain_tid_.Tid__wikipedia, "enwiki");
 	}
+	@Test  public void Wikimania() {
+		fxt.Test_parse("wikimaniawiki", Xol_lang_stub_.Id__intl, Xow_domain_tid_.Tid__wikimania);
+		fxt.Test_to_domain_itm("wikimaniawiki", "", "wikimania.wikimedia.org");
+		fxt.Test_to_abrv("wikimania.wikimedia.org", "wikimaniawiki");
+	}
+	@Test  public void Wikisources() {
+		fxt.Test_parse("sourceswiki", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikisource_org);
+		fxt.Test_to_domain_itm("sourceswiki", "", "wikisource.org");
+		fxt.Test_to_abrv("wikisource.org", "sourceswiki");
+	}
 }
 class Xow_abrv_wm_fxt {
 	public void Test_parse(String raw, int expd_lang_id, int expd_domain_tid) {

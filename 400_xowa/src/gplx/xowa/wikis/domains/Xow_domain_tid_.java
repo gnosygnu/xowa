@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_domain_tid_ {
-	public static final int
+	public static final int //  SERIALIZED.NONE (ASSUMPTION); DATE:2019-07-31
 	  Tid__null					=  0
 	, Tid__wikipedia			=  1
 	, Tid__wiktionary			=  2
@@ -32,10 +32,12 @@ public class Xow_domain_tid_ {
 	, Tid__mediawiki			= 13
 	, Tid__meta					= 14
 	, Tid__incubator			= 15
-	, Tid__wmfblog				= 16
-	, Tid__home					= 17
-	, Tid__other				= 18
-	, Tid___len					= 19
+	, Tid__wikimania			= 16
+	, Tid__wikisource_org		= 17
+	, Tid__wmfblog				= 18
+	, Tid__home					= 19
+	, Tid__other				= 20
+	, Tid___len					= 21
 	;
 	public static final    String	// SERIALIZED:xowa.gfs
 	  Str__wikipedia			= "wikipedia"
@@ -53,6 +55,7 @@ public class Xow_domain_tid_ {
 	, Str__mediawiki			= "mediawiki"
 	, Str__meta					= "meta"
 	, Str__incubator			= "incubator"
+	, Str__wikimania            = "wikimania"
 	, Str__wmforg				= "wikimediafoundation"
 	, Str__home					= "home"
 	, Str__other				= "other"
@@ -73,6 +76,7 @@ public class Xow_domain_tid_ {
 	, Bry__mediawiki			= Bry_.new_a7(Str__mediawiki)
 	, Bry__meta					= Bry_.new_a7(Str__meta)
 	, Bry__incubator			= Bry_.new_a7(Str__incubator)
+	, Bry__wikimania            = Bry_.new_a7(Str__wikimania)
 	, Bry__wmforg				= Bry_.new_a7(Str__wmforg)
 	, Bry__home					= Bry_.new_a7(Str__home)
 	, Bry__other				= Bry_.new_a7(Str__other)
@@ -96,8 +100,10 @@ public class Xow_domain_tid_ {
 	, Itm__mediawiki			= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__mediawiki		, Bry__mediawiki		, "mw"			, Xow_domain_itm_.Str__mediawiki)
 	, Itm__meta					= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__meta				, Bry__meta				, "meta"		, Xow_domain_itm_.Str__meta)
 	, Itm__incubator			= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__incubator		, Bry__incubator		, "qb"			, Xow_domain_itm_.Str__incubator)
+	, Itm__wikimania			= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__wikimania        , Bry__wikimania        , "wikimania"   , Xow_domain_itm_.Str__wikimania)
+	, Itm__wikisource_org       = new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__wikisource_org   , Xow_domain_itm_.Bry__wikisource_org, "wikisource_org"  , Xow_domain_itm_.Str__wikisource_org)
 	, Itm__wmforg				= new_(Bool_.N	, Xow_domain_tid.Src__wmf	, Tid__wmfblog			, Bry__wmforg			, "wmf"			, Xow_domain_itm_.Str__wmforg)
-	, Itm__home					= new_(Bool_.N	, Xow_domain_tid.Src__xowa, Tid__home				, Bry__home				, "home"		, Xow_domain_itm_.Str__home)
+	, Itm__home					= new_(Bool_.N	, Xow_domain_tid.Src__xowa  , Tid__home				, Bry__home				, "home"		, Xow_domain_itm_.Str__home)
 	, Itm__other				= new_(Bool_.N	, Xow_domain_tid.Src__mw	, Tid__other			, Bry__other			, ""			, "")
 	;
 	private static Xow_domain_tid new_(boolean multi_lang, int src, int tid, byte[] key_bry, String abrv_xo_str, String domain_bry) {

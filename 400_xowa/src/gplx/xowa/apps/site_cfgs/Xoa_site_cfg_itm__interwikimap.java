@@ -57,7 +57,8 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 				xwiki_mgr.Add_by_csv(Csv__peers__lang);								// peer: EX: [[wikt]] -> en.wiktionary.org
 				break;
 			case Xow_domain_tid_.Tid__commons:		case Xow_domain_tid_.Tid__wikidata:
-			case Xow_domain_tid_.Tid__wikimedia:	case Xow_domain_tid_.Tid__species:	case Xow_domain_tid_.Tid__meta: case Xow_domain_tid_.Tid__incubator:
+			case Xow_domain_tid_.Tid__wikimedia:	case Xow_domain_tid_.Tid__species:	case Xow_domain_tid_.Tid__meta:
+			case Xow_domain_tid_.Tid__incubator:    case Xow_domain_tid_.Tid__wikimania: case Xow_domain_tid_.Tid__wikisource_org:
 			case Xow_domain_tid_.Tid__mediawiki:	case Xow_domain_tid_.Tid__wmfblog:
 			case Xow_domain_tid_.Tid__home:			case Xow_domain_tid_.Tid__other:
 				xwiki_mgr.Add_by_sitelink_mgr(Xow_domain_tid_.Tid__wikipedia);		// lang: hardcode to wikipedia; EX: "[[en:]] -> "en.wikipedia.org"
@@ -85,6 +86,8 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 	, "1|mw;mediawikiwiki|www.mediawiki.org"
 	, "1|wmf;wikimedia;foundation|foundation.wikimedia.org"
 	, "1|incubator|incubator.wikimedia.org"
+	, "1|wikimania|wikimania.wikimedia.org"
+	, "1|sourceswiki|wikisource.org"
 	, "0|oldwikisource|https://wikisource.org/wiki/~{0}|Old Wikisoure"
 	, "0|mail|https://lists.wikimedia.org/mailman/listinfo/~{0}|Wikitech Mailing List"
 	))

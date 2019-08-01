@@ -26,6 +26,8 @@ public class Xow_domain_uid_ {
 	, Tid_incubator					= 22
 	, Tid_wmfblog					= 23
 	, Tid_species					= 24
+	, Tid_wikimania					= 25
+	, Tid_wikisource_org			= 26
 	;
 	private static final int
 	  Tid_sub_wikipedia				= 0
@@ -48,6 +50,8 @@ public class Xow_domain_uid_ {
 			case Xow_domain_tid_.Tid__mediawiki:			return Tid_mediawiki;
 			case Xow_domain_tid_.Tid__meta:					return Tid_meta;
 			case Xow_domain_tid_.Tid__incubator:			return Tid_incubator;
+			case Xow_domain_tid_.Tid__wikimania:			return Tid_wikimania;
+			case Xow_domain_tid_.Tid__wikisource_org:       return Tid_wikisource_org;
 			case Xow_domain_tid_.Tid__wmfblog:				return Tid_wmfblog;
 			case Xow_domain_tid_.Tid__species:				return Tid_species;
 			case Xow_domain_tid_.Tid__wikipedia:			domain_tid = Tid_sub_wikipedia; break;
@@ -74,6 +78,8 @@ public class Xow_domain_uid_ {
 			case Tid_mediawiki:								return Xow_domain_itm.new_(Xow_domain_itm_.Bry__mediawiki, Xow_domain_tid_.Tid__mediawiki, Xol_lang_stub_.Key__unknown);
 			case Tid_meta:									return Xow_domain_itm.new_(Xow_domain_itm_.Bry__meta, Xow_domain_tid_.Tid__meta, Xol_lang_stub_.Key__unknown);
 			case Tid_incubator:								return Xow_domain_itm.new_(Xow_domain_itm_.Bry__incubator, Xow_domain_tid_.Tid__incubator, Xol_lang_stub_.Key__unknown);
+			case Tid_wikimania:								return Xow_domain_itm.new_(Xow_domain_itm_.Bry__wikimania, Xow_domain_tid_.Tid__wikimania, Xol_lang_stub_.Key__unknown);
+			case Tid_wikisource_org:						return Xow_domain_itm.new_(Xow_domain_itm_.Bry__wikisource_org, Xow_domain_tid_.Tid__wikisource_org, Xol_lang_stub_.Key__unknown);
 			case Tid_wmfblog:								return Xow_domain_itm.new_(Xow_domain_itm_.Bry__wmforg, Xow_domain_tid_.Tid__wmfblog, Xol_lang_stub_.Key__unknown);
 			case Tid_species:								return Xow_domain_itm.new_(Xow_domain_itm_.Bry__species, Xow_domain_tid_.Tid__species, Xol_lang_stub_.Key__unknown);
 		}

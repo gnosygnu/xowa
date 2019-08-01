@@ -18,18 +18,36 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.langs.*;
 public class Xow_abrv_wm_ {
 	public static Xow_abrv_wm Parse_to_abrv_or_null(byte[] src) {	// EX: parse "enwiki" to abrv_itm
-		if (src == null) return null;			
-		int src_len = src.length; if (src_len == 0) return null;	// empty bry
+		int src_len = src == null ? 0 : src.length;
+
+		// src is empty; return null;
+		if (src_len == 0) return null;
+
+		// check abrv_overrides
+		Xow_abrv_wm rv = Xow_abrv_wm_override.To_abrv_itm_or_null(src);
+
+		// abrv_overrides exists; return it; EX: "arwikimedia" -> "ar.wikimedia.org"
+		if (rv != null) return rv;
+
+		// match end for lang; EX: "enwiki" tries to match "wiki"
 		Btrie_rv trv = new Btrie_rv();
-		Object o = bry_trie.Match_at(trv, src, src_len - 1, -1); if (o == null) return null;
-		Xow_abrv_wm rv = Xow_abrv_wm_override.To_abrv_itm_or_null(src); if (rv != null) return rv;
+		Object o = bry_trie.Match_at(trv, src, src_len - 1, -1);
+
+		// no match; exit
+		if (o == null) return null;
+
+		// check domain type
 		int domain_type = ((Int_obj_ref)o).Val();
+
+		// match start for lang
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_intl(src, 0, trv.Pos() + 1);
 		return new Xow_abrv_wm(src, lang_itm.Key(), lang_itm, domain_type);
 	}
 	public static Xow_domain_itm Parse_to_domain_itm(byte[] src) {	// EX: parse "enwiki" to "en.wikipedia.org" itm
-		if (Bry_.Has(src, Byte_ascii.Underline))	// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
+		// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
+		if (Bry_.Has(src, Byte_ascii.Underline))
 			src = Bry_.Replace_create(src, Byte_ascii.Underline, Byte_ascii.Dash);
+
 		return Xow_domain_itm_.parse(Xow_abrv_wm_.Parse_to_domain_bry(src));
 	}
 	public static byte[] Parse_to_domain_bry(byte[] src) {			// EX: parse "enwiki" to en.wikipedia.org
@@ -55,6 +73,8 @@ public class Xow_abrv_wm_ {
 			case Xow_domain_tid_.Tid__species:			return Xow_domain_itm_.Bry__species;
 			case Xow_domain_tid_.Tid__meta:				return Xow_domain_itm_.Bry__meta;
 			case Xow_domain_tid_.Tid__incubator:		return Xow_domain_itm_.Bry__incubator;
+			case Xow_domain_tid_.Tid__wikimania:        return Xow_domain_itm_.Bry__wikimania;
+			case Xow_domain_tid_.Tid__wikisource_org:   return Xow_domain_itm_.Bry__wikisource_org;
 			case Xow_domain_tid_.Tid__wikipedia:
 			case Xow_domain_tid_.Tid__wiktionary:
 			case Xow_domain_tid_.Tid__wikisource:
@@ -86,6 +106,8 @@ public class Xow_abrv_wm_ {
 			case Xow_domain_tid_.Tid__species:
 			case Xow_domain_tid_.Tid__meta:
 			case Xow_domain_tid_.Tid__incubator:
+			case Xow_domain_tid_.Tid__wikimania:
+			case Xow_domain_tid_.Tid__wikisource_org:
 			case Xow_domain_tid_.Tid__wikidata:
 			case Xow_domain_tid_.Tid__mediawiki:
 			case Xow_domain_tid_.Tid__wmfblog:		bfr.Add(suffix_bry); break;
@@ -101,6 +123,8 @@ public class Xow_abrv_wm_ {
 			case Xow_domain_tid_.Tid__species:
 			case Xow_domain_tid_.Tid__meta:
 			case Xow_domain_tid_.Tid__incubator:
+			case Xow_domain_tid_.Tid__wikimania:
+			case Xow_domain_tid_.Tid__wikisource_org:
 			case Xow_domain_tid_.Tid__wikidata:
 			case Xow_domain_tid_.Tid__mediawiki:
 			case Xow_domain_tid_.Tid__wmfblog:		return suffix;
@@ -134,6 +158,8 @@ public class Xow_abrv_wm_ {
 		Init_trie_itm(rv, int_hash, "specieswiki"			, Xow_domain_tid_.Tid__species);
 		Init_trie_itm(rv, int_hash, "metawiki"				, Xow_domain_tid_.Tid__meta);
 		Init_trie_itm(rv, int_hash, "incubatorwiki"			, Xow_domain_tid_.Tid__incubator);
+		Init_trie_itm(rv, int_hash, "wikimaniawiki"         , Xow_domain_tid_.Tid__wikimania);
+		Init_trie_itm(rv, int_hash, "sourceswiki"           , Xow_domain_tid_.Tid__wikisource_org);
 		Init_trie_itm(rv, int_hash, "wikidatawiki"			, Xow_domain_tid_.Tid__wikidata);
 		Init_trie_itm(rv, int_hash, "mediawikiwiki"			, Xow_domain_tid_.Tid__mediawiki);
 		Init_trie_itm(rv, int_hash, "foundationwiki"		, Xow_domain_tid_.Tid__wmfblog);
@@ -166,6 +192,7 @@ class Xow_abrv_wm_override {
 		itm_hash__add(rv, lang_hash, "ca.wikimedia.org", "cawikimedia", "ca", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikimedia);	// NOTE: ca means Canada not Catalan
 		itm_hash__add(rv, lang_hash, "be.wikimedia.org", "bewikimedia", "be", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikimedia);	// NOTE: be means Belgium not Belarusian
 		itm_hash__add(rv, lang_hash, "se.wikimedia.org", "sewikimedia", "se", Xol_lang_stub_.Id_sv, Xow_domain_tid_.Tid__wikimedia);	// NOTE: se means Swedish not Northern Sami
+		itm_hash__add(rv, lang_hash, "wikisource.org"  , "sourceswiki", "en", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikisource_org);
 		return rv;
 	}
 	private static void itm_hash__add(Hash_adp_bry hash, Hash_adp_bry lang_hash, String domain, String raw, String lang_domain, int lang_actl, int domain_type) {

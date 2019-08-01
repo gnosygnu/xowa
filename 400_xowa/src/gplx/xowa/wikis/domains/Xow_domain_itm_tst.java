@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*; import gplx.core.tests.*;
-public class Xow_domain_itm_tst {		
+public class Xow_domain_itm_tst {
 	private final    Xow_domain_fxt fxt = new Xow_domain_fxt();
 	@Test  public void Parse_en_wikipedia() 			{fxt.Test_parse("en.wikipedia.org"				, "en"				, "en"	, Xow_domain_tid_.Tid__wikipedia);}
 	@Test  public void Parse_fr_wikipedia() 			{fxt.Test_parse("fr.wikipedia.org"				, "fr"				, "fr"	, Xow_domain_tid_.Tid__wikipedia);}
@@ -28,6 +28,8 @@ public class Xow_domain_itm_tst {
 	@Test  public void Parse_other() 					{fxt.Test_parse("other.wiki"					, ""				, ""	, Xow_domain_tid_.Tid__other);}
 	@Test  public void Parse_ua_wikimedia_org() 		{fxt.Test_parse("ua.wikimedia.org"				, "ua"				, "uk"	, Xow_domain_tid_.Tid__wikimedia);}
 	@Test  public void Parse_ar_wikimedia_org() 		{fxt.Test_parse("ar.wikimedia.org"				, "ar"				, "es"	, Xow_domain_tid_.Tid__wikimedia);}
+	@Test  public void Parse_wikimania()                {fxt.Test_parse("wikimania.wikimedia.org"       , ""		        , ""    , Xow_domain_tid_.Tid__wikimania);}
+	@Test  public void Parse_wikisource_org()           {fxt.Test_parse("wikisource.org"                , ""		        , ""    , Xow_domain_tid_.Tid__wikisource_org);}
 	@Test  public void Parse_blank() 					{fxt.Test_parse(""								, ""				, ""	, Xow_domain_tid_.Tid__other);}
 	@Test  public void Match_lang() {
 		fxt.Test__match_lang_y("en", "en.wikipedia.org", "en.wiktionary.org", "simple.wikipedia.org", "species.wikimedia.org", "www.wikidata.org", "commons.wikimedia.org");
