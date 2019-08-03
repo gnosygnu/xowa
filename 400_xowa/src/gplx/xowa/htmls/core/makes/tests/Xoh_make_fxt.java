@@ -45,7 +45,7 @@ public class Xoh_make_fxt {
 		actl.Ctor_by_hview(parser_fxt.Wiki(), Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
 		Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();
 		Xoh_make_mgr make_mgr = parser_fxt.Wiki().Html__hdump_mgr().Load_mgr().Make_mgr();			
-		byte[] actl_body = make_mgr.Parse(Bry_.new_u8(html), actl, parser_fxt.Wiki());
+		byte[] actl_body = make_mgr.Parse(Bry_.new_u8(html), parser_fxt.Wiki(), actl);
 		actl.Db().Html().Html_bry_(actl_body);
 		Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;
 		chkr.Check(actl);

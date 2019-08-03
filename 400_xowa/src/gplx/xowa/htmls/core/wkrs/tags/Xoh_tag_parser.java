@@ -18,6 +18,7 @@ import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*;
+import gplx.xowa.htmls.core.wkrs.addons.forms.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
 import gplx.xowa.wikis.ttls.*;
 public class Xoh_tag_parser implements Gfh_doc_wkr {
@@ -27,6 +28,7 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 	private final    Xoh_lnki_data		wkr__lnki = new Xoh_lnki_data();
 	private final    Xoh_thm_data		wkr__thm = new Xoh_thm_data();
 	private final    Xoh_gly_grp_data	wkr__gly = new Xoh_gly_grp_data();
+	private final    Xoh_form_data      wkr__form = new Xoh_form_data();
 	public byte[] Hook() {return Byte_ascii.Angle_bgn_bry;}
 	public Xoh_tag_parser(Xoh_hdoc_wkr hdoc_wkr) {this.hdoc_wkr = hdoc_wkr;}
 	public void Init(Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
@@ -87,6 +89,10 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 						// rv = Parse_by_data(hdoc_wkr, hctx, tag_rdr, src, cur, null, Xoh_hzip_dict_.Tid__gly);	// COMMENTED: wrote gallery hzip code, but doesn't seem worth enabling for low number of galleries
 						if (wkr__gly.Parse1(hdoc_wkr, hctx, src, tag_rdr, cur)) return wkr__gly.Src_end();
 					}
+					break;
+				case Gfh_tag_.Id__form:
+					if (wkr__form.Parse1(hdoc_wkr, hctx, tag_rdr, src, cur))
+						return wkr__form.Src_end();
 					break;
 			}
 			if (rv == -1) {

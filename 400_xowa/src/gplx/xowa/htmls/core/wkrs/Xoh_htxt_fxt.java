@@ -22,7 +22,7 @@ public class Xoh_htxt_fxt {
 	private final    Xowe_wiki wiki;
 	private final    Xop_fxt parser_fxt = new Xop_fxt();
 	private final    Xoh_page hpg = new Xoh_page();
-	private final    Xoh_make_mgr make_mgr = new Xoh_make_mgr();
+	private final    Xoh_make_mgr make_mgr = Xoh_make_mgr.New_make();
 	public Xoh_htxt_fxt() {
 		this.wiki = parser_fxt.Wiki();
 		Xoa_app_fxt.repo2_(parser_fxt.App(), wiki);	// needed else will be old "mem/wiki/repo/trg/thumb/" instead of standard "mem/file/en.wikipedia.org/thumb/"
@@ -41,7 +41,7 @@ public class Xoh_htxt_fxt {
 	}
 	public void Test__decode__raw(String htxt, String expd) {
 		hpg.Section_mgr().Clear();
-		byte[] actl = make_mgr.Parse(Bry_.new_u8(htxt), hpg, hpg.Wiki());
+		byte[] actl = make_mgr.Parse(Bry_.new_u8(htxt), hpg.Wiki(), hpg);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
 	public void Test__hpg__redlinks(String... expd_ttls) {

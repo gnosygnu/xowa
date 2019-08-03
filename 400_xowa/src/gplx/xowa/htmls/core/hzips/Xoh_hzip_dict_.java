@@ -34,6 +34,7 @@ public class Xoh_hzip_dict_ {
 	, Tid__toc				= 10
 	, Tid__pgbnr			= 11
 	, Tid__media			= 12
+	, Tid__form             = 13
 	;
 	public static final    String
 	  Key__timeline				= "timeline"
@@ -50,6 +51,7 @@ public class Xoh_hzip_dict_ {
 	, Key__toc					= "toc"
 	, Key__pgbnr				= "pgbnr"
 	, Key__media				= "media"
+	, Key__form                 = "form"
 	;
 	public static final int  // SERIALIZED:html_db.html.body_flag
 	  Hzip__none = 0

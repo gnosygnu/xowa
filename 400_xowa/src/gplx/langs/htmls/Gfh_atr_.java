@@ -50,6 +50,8 @@ public class Gfh_atr_ {
 	, Bry__bgcolor				= Bry_.new_a7("bgcolor")		// HTML.v4
 	, Bry__abbr					= Bry_.new_a7("abbr")			// HTML.ua
 	, Bry__srcset				= Bry_.new_a7("srcset")
+	// <form>
+	, Bry__action				= Bry_.new_a7("action")
 	;
 	public static byte[] Make(Bry_bfr bfr, byte[] key, byte[] val) {
 		return bfr.Add_byte_space().Add(key).Add_byte_eq().Add_byte_quote().Add(val).Add_byte_quote().To_bry_and_clear();

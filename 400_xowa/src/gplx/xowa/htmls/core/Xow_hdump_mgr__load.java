@@ -25,7 +25,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 	private Xow_override_mgr override_mgr__html, override_mgr__page;
 	public Xow_hdump_mgr__load(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg, Bry_bfr tmp_bfr) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg; this.tmp_bfr = tmp_bfr;
-		this.make_mgr = new Xoh_make_mgr();
+		this.make_mgr = Xoh_make_mgr.New_make();
 	}
 	public boolean			Read_preferred()		{return read_preferred;}	private boolean read_preferred = true;
 	public Xow_hdump_mode	Html_mode()				{return html_mode;}			private Xow_hdump_mode html_mode = Xow_hdump_mode.Shown;
@@ -83,7 +83,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 			src = zip_mgr.Unzip((byte)zip_tid, src);
 		switch (hzip_tid) {
 			case Xoh_hzip_dict_.Hzip__none:
-				src = make_mgr.Parse(src, hpg, hpg.Wiki());
+				src = make_mgr.Parse(src, hpg.Wiki(), hpg);
 				break;
 			case Xoh_hzip_dict_.Hzip__plain:
 				gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader page_loader = new gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader();

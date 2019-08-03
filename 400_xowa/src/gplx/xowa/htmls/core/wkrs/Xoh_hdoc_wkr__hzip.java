@@ -27,7 +27,7 @@ public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 	public void On_escape	(gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data)	{hctx.Pool_mgr__hzip().Mw__escape().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
 	public void On_xnde		(gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser data)		{hctx.Pool_mgr__hzip().Mw__xnde().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
 	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_data data)		{hctx.Pool_mgr__hzip().Mw__lnki().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
-	public void On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_data data)			{hctx.Pool_mgr__hzip().Mw__thm().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
+	public boolean On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_data data)			{hctx.Pool_mgr__hzip().Mw__thm().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls(); return true;}
 	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_data data)		{hctx.Pool_mgr__hzip().Mw__gly().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
 	public boolean Process_parse(Xoh_data_itm data) {
 		Xoh_hzip_wkr wkr = null;

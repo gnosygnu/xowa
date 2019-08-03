@@ -19,7 +19,7 @@ import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.e
 import gplx.xowa.apps.*;
 import gplx.xowa.htmls.js.*;
 import gplx.xowa.wikis.pages.*;
-class Http_server_wkr implements Gfo_invk {
+public class Http_server_wkr implements Gfo_invk {
 	private final    int uid;
 	private final    Http_server_mgr server_mgr;
 	private final    Http_server_wtr server_wtr;
@@ -150,8 +150,11 @@ class Http_server_wkr implements Gfo_invk {
 		return this;
 	}	public static final String Invk_run = "run";
 	private static final    byte[] 
-	  Url__home = Bry_.new_a7("/"), Url__fsys = Bry_.new_a7("/fsys/")
+	  Url__home = Bry_.new_a7("/")
 	, Url__exec = Bry_.new_a7("/exec/"), Url__exec_2 = Bry_.new_a7("/xowa-cmd:")
+	;
+	public static final    byte[]
+	  Url__fsys = Bry_.new_a7("/fsys/")
 	;
 	private static final    int Url__fsys_len = Url__fsys.length;
 }

@@ -56,8 +56,7 @@ public class Xoh_thm_data implements Gfh_style_wkr {
 		}
 		tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);
 		this.src_end = tag_rdr.Pos();
-		hdoc_wkr.On_thm(this);
-		return true;
+		return hdoc_wkr.On_thm(this);
 	}
 	public boolean On_atr(byte[] src, int atr_idx, int atr_val_bgn, int atr_val_end, int itm_bgn, int itm_End, int key_bgn, int key_end, int val_bgn, int val_end) {
 		if (	Bry_.Match(src, key_bgn, key_end, Gfh_style_key_.Bry__width)
