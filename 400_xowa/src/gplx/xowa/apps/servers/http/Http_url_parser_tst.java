@@ -60,6 +60,21 @@ public class Http_url_parser_tst {
 		// fail: missing '/wiki/'
 		fxt.Test__parse("/en.wikipedia.org/Page_1", fxt.Make().Err_msg_("invalid url; must have '/wiki/' after wiki_domain; url=/en.wikipedia.org/Page_1"));
 */
+		// add qarg_ary and test for qarg;
+	}
+	@Test   public void Popup() {
+		fxt.Test__parse
+		( "/en.wikipedia.org/wiki/Page_1?action=popup&popup_id=xo_2&popup_mode=more"
+		, fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1")
+			.Popup_(true).Popup_id_("xo_2").Popup_mode_("more")
+		);
+	}
+	@Test   public void Qarg__search() {
+		fxt.Test__parse
+		( "/en.wikipedia.org/wiki/Special:XowaSearch?search=earth&fulltext=y"
+		, fxt.Make().Wiki_("en.wikipedia.org").Page_("Special:XowaSearch")
+			.Qarg_("?search=earth&fulltext=y")
+		);
 	}
 }
 class Http_url_parser_fxt {

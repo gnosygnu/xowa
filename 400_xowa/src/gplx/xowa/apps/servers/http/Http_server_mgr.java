@@ -92,7 +92,7 @@ public class Http_server_mgr implements Gfo_invk {
 		String cmd = url_converter.Decode_str(url_encoded_str);
 		app.Gfs_mgr().Run_str(cmd);
 	}
-	public String Parse_page_to_html(Http_data__client data__client, byte[] wiki_domain, byte[] ttl_bry, byte mode, boolean popup_enabled, String popup_mode, String popup_id) {
+	public String Parse_page_to_html(Http_data__client data__client, byte[] wiki_domain, byte[] ttl_bry, byte[] qarg, byte mode, boolean popup_enabled, String popup_mode, String popup_id) {
 		synchronized (thread_lock) {
 			// create a shim gui to automatically handle default XOWA gui JS calls
 			if (init_gui_needed) {
@@ -112,7 +112,7 @@ public class Http_server_mgr implements Gfo_invk {
 			else {
 				Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
 				try {
-					tmp_bfr.Add(wiki.Domain_bry()).Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki).Add(ttl_bry);
+					tmp_bfr.Add(wiki.Domain_bry()).Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki).Add(ttl_bry).Add_safe(qarg);
 					ttl_bry = tmp_bfr.To_bry_and_clear();
 				} finally {tmp_bfr.Mkr_rls();}
 			}

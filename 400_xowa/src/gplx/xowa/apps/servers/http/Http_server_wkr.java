@@ -105,7 +105,7 @@ public class Http_server_wkr implements Gfo_invk {
 			page_html = url_parser.Err_msg();
 		}
 		else {
-			page_html = app.Http_server().Parse_page_to_html(data__client, url_parser.Wiki(), url_parser.Page(), url_parser.Action(), url_parser.Popup(), url_parser.Popup_mode(), url_parser.Popup_id());
+			page_html = app.Http_server().Parse_page_to_html(data__client, url_parser.Wiki(), url_parser.Page(), url_parser.Qarg(), url_parser.Action(), url_parser.Popup(), url_parser.Popup_mode(), url_parser.Popup_id());
 			page_html = Convert_page(page_html, root_dir_http, String_.new_u8(url_parser.Wiki()));
 		}
 		Xosrv_http_wkr_.Write_response_as_html(client_wtr, Bool_.N, page_html);
