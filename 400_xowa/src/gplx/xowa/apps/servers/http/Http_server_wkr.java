@@ -136,10 +136,11 @@ public class Http_server_wkr implements Gfo_invk {
 	.Add_str_int("/exec/gfs"	, Tid_post_url_gfs)
 	;
 	private static String Convert_page(String page_html, String root_dir_http, String wiki_domain) {
+		page_html = String_.Replace(page_html, "file:////home/lnxusr/xowa/file/", "/fsys/file/");
 		page_html = String_.Replace(page_html, root_dir_http		, "/fsys/");
 		page_html = String_.Replace(page_html, "xowa-cmd:"			, "/exec/");
-		page_html = String_.Replace(page_html, "<a href=\"/wiki/"	, "<a href=\"/" + wiki_domain + "/wiki/");
-		page_html = String_.Replace(page_html, "<a href='/wiki/"	, "<a href='/" + wiki_domain + "/wiki/");
+		page_html = String_.Replace(page_html, " href=\"/wiki/"	    , " href=\"/" + wiki_domain + "/wiki/");
+		page_html = String_.Replace(page_html, " href='/wiki/"	    , " href='/" + wiki_domain + "/wiki/");
 		page_html = String_.Replace(page_html, "action=\"/wiki/"	, "action=\"/" + wiki_domain + "/wiki/");
 		page_html = String_.Replace(page_html, "/site"				, "");
 		return page_html;
