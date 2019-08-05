@@ -36,37 +36,45 @@
           </ul>
         </li>
         <li class="toclevel-1 tocsection-4">
-          <a href="#v4.6.2.1907_(2019-07-24)"><span class="tocnumber">2</span> <span class="toctext">v4.6.2.1907 (2019-07-24)</span></a> 
+          <a href="#v4.6.3.1908_(2019-08-04)"><span class="tocnumber">2</span> <span class="toctext">v4.6.3.1908 (2019-08-04)</span></a> 
           <ul>
             <li class="toclevel-2 tocsection-5">
-              <a href="#Wiki"><span class="tocnumber">2.1</span> <span class="toctext">Wiki</span></a>
-            </li>
-            <li class="toclevel-2 tocsection-6">
-              <a href="#PC"><span class="tocnumber">2.2</span> <span class="toctext">PC</span></a>
+              <a href="#PC"><span class="tocnumber">2.1</span> <span class="toctext">PC</span></a>
             </li>
           </ul>
         </li>
-        <li class="toclevel-1 tocsection-7">
-          <a href="#v4.6.1.1903_(2019-03-26)"><span class="tocnumber">3</span> <span class="toctext">v4.6.1.1903 (2019-03-26)</span></a> 
+        <li class="toclevel-1 tocsection-6">
+          <a href="#v4.6.2.1907_(2019-07-24)"><span class="tocnumber">3</span> <span class="toctext">v4.6.2.1907 (2019-07-24)</span></a> 
           <ul>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#Wiki"><span class="tocnumber">3.1</span> <span class="toctext">Wiki</span></a>
+            </li>
             <li class="toclevel-2 tocsection-8">
-              <a href="#PC_2"><span class="tocnumber">3.1</span> <span class="toctext">PC</span></a>
+              <a href="#PC_2"><span class="tocnumber">3.2</span> <span class="toctext">PC</span></a>
             </li>
           </ul>
         </li>
         <li class="toclevel-1 tocsection-9">
-          <a href="#v4.6.0.1903_(2019-03-23)"><span class="tocnumber">4</span> <span class="toctext">v4.6.0.1903 (2019-03-23)</span></a> 
+          <a href="#v4.6.1.1903_(2019-03-26)"><span class="tocnumber">4</span> <span class="toctext">v4.6.1.1903 (2019-03-26)</span></a> 
           <ul>
             <li class="toclevel-2 tocsection-10">
-              <a href="#Wiki_2"><span class="tocnumber">4.1</span> <span class="toctext">Wiki</span></a>
-            </li>
-            <li class="toclevel-2 tocsection-11">
-              <a href="#PC_3"><span class="tocnumber">4.2</span> <span class="toctext">PC</span></a>
+              <a href="#PC_3"><span class="tocnumber">4.1</span> <span class="toctext">PC</span></a>
             </li>
           </ul>
         </li>
-        <li class="toclevel-1 tocsection-12">
-          <a href="#Archives"><span class="tocnumber">5</span> <span class="toctext">Archives</span></a>
+        <li class="toclevel-1 tocsection-11">
+          <a href="#v4.6.0.1903_(2019-03-23)"><span class="tocnumber">5</span> <span class="toctext">v4.6.0.1903 (2019-03-23)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-12">
+              <a href="#Wiki_2"><span class="tocnumber">5.1</span> <span class="toctext">Wiki</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-13">
+              <a href="#PC_4"><span class="tocnumber">5.2</span> <span class="toctext">PC</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-14">
+          <a href="#Archives"><span class="tocnumber">6</span> <span class="toctext">Archives</span></a>
         </li>
       </ul>
     </div>
@@ -129,6 +137,77 @@
       The most important category to review is <b>major</b>. The other categories may be skipped due to lower importance (if they were more important, they would be bumped up to <b>major</b>).
     </p>
     <h2>
+      <span class="mw-headline" id="v4.6.3.1908_(2019-08-04)">v4.6.3.1908 (2019-08-04)</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="PC">PC</span>
+    </h3>
+    <p>
+      <b>major</b>
+    </p>
+    <ul>
+      <li>
+        HTTP Server: Fix links and images not working for 2019-05 enwiki HTML databases. {detected by anonymous}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Resolved by: Swap out /wiki/ and fix broken /fsys/.
+      </dd>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/524" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/524</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        HTTP Server: Fix XowaSearch not working. {detected by ktry}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Resolved by: Append url_args to page.
+      </dd>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/489" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/489</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        HTTP Server: Add search-suggest.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/489" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/489</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix Script error 'Module:convert:328 attempt to compare nil with number'. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Resolved by: Use m_offset when doing string.substring.
+      </dd>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/520" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/520</a>
+      </dd>
+    </dl>
+    <p>
+      <b>trivial</b>
+    </p>
+    <ul>
+      <li>
+        Make: Update wiki domains for 2019-06 Wikidata.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/528" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/528</a>
+      </dd>
+    </dl>
+    <h2>
       <span class="mw-headline" id="v4.6.2.1907_(2019-07-24)">v4.6.2.1907 (2019-07-24)</span>
     </h2>
     <h3>
@@ -145,7 +224,7 @@
       </dd>
     </dl>
     <h3>
-      <span class="mw-headline" id="PC">PC</span>
+      <span class="mw-headline" id="PC_2">PC</span>
     </h3>
     <p>
       <b>major</b>
@@ -739,7 +818,7 @@
       <span class="mw-headline" id="v4.6.1.1903_(2019-03-26)">v4.6.1.1903 (2019-03-26)</span>
     </h2>
     <h3>
-      <span class="mw-headline" id="PC_2">PC</span>
+      <span class="mw-headline" id="PC_3">PC</span>
     </h3>
     <p>
       <b>major</b>
@@ -774,7 +853,7 @@
       </dd>
     </dl>
     <h3>
-      <span class="mw-headline" id="PC_3">PC</span>
+      <span class="mw-headline" id="PC_4">PC</span>
     </h3>
     <p>
       <b>major</b>
