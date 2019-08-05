@@ -27,7 +27,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Basic" id="xolnki_2" title="Module:Diagnostics/Basic" class="xowa-visited">Module:Diagnostics/Basic</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Basic" id="xolnki_2" title="Module:Diagnostics/Basic">Module:Diagnostics/Basic</a>
       </li>
       <li>
         Tests basic Scribunto functionality
@@ -94,7 +94,7 @@
         Calls code in 
         <ul>
           <li>
-            <a href="http://xowa.org/home/wiki/Module:Diagnostics/LuaCommon" id="xolnki_3" title="Module:Diagnostics/LuaCommon">Module:Diagnostics/LuaCommon</a>
+            <a href="http://xowa.org/home/wiki/Module:Diagnostics/LuaCommon" id="xolnki_3" title="Module:Diagnostics/LuaCommon" class="xowa-visited">Module:Diagnostics/LuaCommon</a>
           </li>
           <li>
             <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/getFrameTitle_parent" id="xolnki_4" title="Template:Diagnostics/LuaCommon/getFrameTitle parent">Template:Diagnostics/LuaCommon/getFrameTitle parent</a>
@@ -435,7 +435,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary" id="xolnki_6" title="Module:Diagnostics/UstringLibrary">Module:Diagnostics/UstringLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/UstringLibrary" id="xolnki_6" title="Module:Diagnostics/UstringLibrary" class="xowa-visited">Module:Diagnostics/UstringLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>UstringLibrary.php</b> and <b>mw.ustring.lua</b>
@@ -729,7 +729,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/LanguageLibrary" id="xolnki_8" title="Module:Diagnostics/LanguageLibrary" class="xowa-visited">Module:Diagnostics/LanguageLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/LanguageLibrary" id="xolnki_8" title="Module:Diagnostics/LanguageLibrary">Module:Diagnostics/LanguageLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>LanguageLibrary.php</b> and <b>mw.language.lua</b>
@@ -1513,7 +1513,13 @@
       </tr>
       <tr>
         <td>
-          <span style='color: green;'>pass</span>
+          <span style='color: red;'>fail:<br>
+          'Sun</span>
+<pre>
+<span style='color: red;'>'<br>
+'Dim.
+ '</span>
+</pre>
         </td>
         <td>
           inLanguage
@@ -1522,7 +1528,7 @@
           {{#invoke:Diagnostics/MessageLibrary|plain_inLanguage|fr|sun}}
         </td>
         <td>
-          Dim. 
+          Sun 
           <p>
             <br>
           </p>
