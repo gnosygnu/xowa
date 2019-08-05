@@ -90,6 +90,7 @@ function showSuggestions (suggestions) {
 		return;
 	}
 	suggestionList.style.display = '';
+  suggestionList.style.height = 'auto'; // .vector tabs ul {height:100%} causes all search-suggest rows to collapse into one; DATE:2019-08-04
 	var i, li;
 	for (i = 0; i < suggestions.length; i += 2) {
 		var page_db = suggestions[i];
@@ -168,6 +169,7 @@ function init () {
 	suggestionList = document.createElement('ul');
 	suggestionList.id = 'xowa-search-suggestions';
 	suggestionList.style.display = 'none';
+	suggestionList.style.height = 'auto !important';
 	document.getElementById('simpleSearch').appendChild(suggestionList);
 	searchInput.addEventListener('keyup', onKeyUp, false);
 	searchInput.addEventListener('keydown', onKeyDown, false);
@@ -179,5 +181,4 @@ function init () {
 }
 
 document.addEventListener('DOMContentLoaded', init, false);
-
 })();
