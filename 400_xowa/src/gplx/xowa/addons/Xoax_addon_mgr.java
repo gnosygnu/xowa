@@ -76,6 +76,7 @@ public class Xoax_addon_mgr {
 
 		// jsons
 		, new gplx.xowa.addons.servers.https.utils		.Xoa_util_addon()
+		, new gplx.xowa.addons.wikis.searchs            .Xoax_addon_itm__search_ui()
 		);
 
 		if (app.Mode().Tid_is_http()) {

@@ -5,6 +5,7 @@
 	width: 100%;
 	list-style: none;
 	background: transparent; /*2013-08-20:else blue vertical bar will be visible directly underneath right-edge of search box*/
+  z-index: 128; /*else indicators page-indicator icons will show; EX:en.w:Earth; DATE:2019-08-04*/
 }
 
 #xowa-search-suggestions li {
