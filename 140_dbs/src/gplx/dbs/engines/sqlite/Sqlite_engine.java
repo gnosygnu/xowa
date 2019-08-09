@@ -72,7 +72,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 		// set open_mode flag if conn is read-only; needed else all SELECT queries will be very slow; DATE:2016-09-03
 		IoItmFil sqlite_fs_itm = Io_mgr.Instance.QueryFil(sqlite_fs_url);
 		boolean read_only = sqlite_fs_itm.Exists() // NOTE: must check if it exists; else missing-file will be marked as readonly connection, and missing-file will sometimes be dynamically created as read-write; DATE:2016-09-04
-			  && Io_mgr.Instance.Query_read_only(sqlite_fs_url.OwnerDir(), Sqlite_engine_.Read_only_detection);
+			  && Io_mgr.Instance.Query_read_only(sqlite_fs_url, Sqlite_engine_.Read_only_detection);
 		Keyval[] props = read_only
 			? Keyval_.Ary(Keyval_.new_("open_mode", "1"))
 			: Keyval_.Ary_empty;
