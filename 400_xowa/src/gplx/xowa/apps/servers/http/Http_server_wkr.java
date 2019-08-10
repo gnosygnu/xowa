@@ -136,7 +136,6 @@ public class Http_server_wkr implements Gfo_invk {
 	.Add_str_int("/exec/gfs"	, Tid_post_url_gfs)
 	;
 	private static String Convert_page(String page_html, String root_dir_http, String wiki_domain) {
-		page_html = Replace_fsys_hack(page_html);
 		page_html = String_.Replace(page_html, root_dir_http		, "/fsys/");
 		page_html = String_.Replace(page_html, "xowa-cmd:"			, "/exec/");
 		page_html = String_.Replace(page_html, " href=\"/wiki/"	    , " href=\"/" + wiki_domain + "/wiki/");
@@ -152,10 +151,9 @@ public class Http_server_wkr implements Gfo_invk {
 	, Bry__file_fsys = Bry_.new_a7("/fsys")
 	;
 
-	public static String Replace_fsys_hack(String html_str) {
+	public static byte[] Replace_fsys_hack(byte[] html_bry) {
 		// init
 		Bry_bfr bfr = Bry_bfr_.New();
-		byte[] html_bry = Bry_.new_u8(html_str);
 		int len = html_bry.length;
 		int pos = 0;
 
@@ -228,7 +226,7 @@ public class Http_server_wkr implements Gfo_invk {
 
 		// add rest
 		bfr.Add_mid(html_bry, pos, len);
-		return bfr.To_str_and_clear();
+		return bfr.To_bry_and_clear();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run)) {this.Run();}

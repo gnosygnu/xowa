@@ -144,7 +144,9 @@ public class Http_server_mgr implements Gfo_invk {
 					rv = wiki.Html_mgr().Head_mgr().Popup_mgr().Show_init(popup_id, ttl_bry, ttl_bry);
 			}
 			else {
-				rv = String_.new_u8(wiki.Html_mgr().Page_wtr_mgr().Gen(page, mode)); // NOTE: must generate HTML now in order for "wait" and "async_server" to work with text_dbs; DATE:2016-07-10
+				byte[] page_html = wiki.Html_mgr().Page_wtr_mgr().Gen(page, mode);
+				page_html = Http_server_wkr.Replace_fsys_hack(page_html);
+				rv = String_.new_u8(page_html); // NOTE: must generate HTML now in order for "wait" and "async_server" to work with text_dbs; DATE:2016-07-10
 				boolean rebuild_html = false;
 				switch (retrieve_mode) {
 					case File_retrieve_mode.Mode_skip:	// noop

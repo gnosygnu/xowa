@@ -45,7 +45,7 @@ public class Http_server_wkr_tst {
 class Http_server_wkr_fxt {
 	public void Test__Replace_fsys_hack(String html)              {Test__Replace_fsys_hack(html, html);}
 	public void Test__Replace_fsys_hack(String html, String expd) {
-		String actl = Http_server_wkr.Replace_fsys_hack(html);
+		byte[] actl = Http_server_wkr.Replace_fsys_hack(Bry_.new_u8(html));
 		Gftest.Eq__ary__lines(expd, actl);
 	}
 }
