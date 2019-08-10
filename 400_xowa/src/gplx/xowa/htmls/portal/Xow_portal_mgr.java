@@ -28,6 +28,11 @@ public class Xow_portal_mgr implements Gfo_invk {
 	private final    Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
 	private final    Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 	private boolean sidebar_enabled;
+	private boolean indicators_pagesource_enabled = false;
+	private byte[]
+	  indicators_pagesource_wtxt = Bry_.new_a7("<ul><li>WIKITEXT</li></ul>")
+	, indicators_pagesource_html = Bry_.new_a7("<ul><li>HTML</li></ul>")
+	;
 	public Xow_portal_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.sidebar_mgr = new Xoh_sidebar_mgr(wiki);
@@ -42,7 +47,11 @@ public class Xow_portal_mgr implements Gfo_invk {
 		lang_is_rtl = !lang.Dir_ltr();
 	}
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__divs__footer, Cfg__missing_class, Cfg__sidebar_enabled__desktop, Cfg__sidebar_enabled__server);
+		wiki.App().Cfg().Bind_many_wiki(this, wiki
+			, Cfg__divs__footer, Cfg__missing_class
+			, Cfg__sidebar_enabled__desktop, Cfg__sidebar_enabled__server
+			, Cfg__hdumps_indicators_enabled, Cfg__hdumps_indicators_wtxt, Cfg__hdumps_indicators_html
+			);
 	}
 	private void Sidebar_enabled_(boolean is_desktop, boolean val) {
 		// set sidebar_enabled if (a) is_gui and is_desktop; or (b) is_server and !is_desktop
@@ -64,11 +73,9 @@ public class Xow_portal_mgr implements Gfo_invk {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Init_fmtr(tmp_bfr, eval_mgr, div_view_fmtr);
 		Init_fmtr(tmp_bfr, eval_mgr, div_ns_fmtr);
-		byte[] wiki_user_name = wiki.User().Name();
-		div_personal_bry = Init_fmtr(tmp_bfr, eval_mgr, div_personal_fmtr, Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user).Name_db_w_colon(), wiki_user_name), wiki_user_name, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Tid__user), Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user_talk).Name_db_w_colon(), wiki_user_name), Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Tid__user_talk));
-		byte[] main_page_href_bry = tmp_bfr.Add(Xoh_href_.Bry__site).Add(wiki.Domain_bry()).Add(Xoh_href_.Bry__wiki).To_bry_and_clear();	// NOTE: build /site/en.wikipedia.org/wiki/ href; no Main_Page, as that will be inserted by Xoh_href_parser
 
 		// logo
+		byte[] main_page_href_bry = tmp_bfr.Add(Xoh_href_.Bry__site).Add(wiki.Domain_bry()).Add(Xoh_href_.Bry__wiki).To_bry_and_clear();	// NOTE: build /site/en.wikipedia.org/wiki/ href; no Main_Page, as that will be inserted by Xoh_href_parser
 		Io_url wiki_css_dir = wiki.Appe().Usere().Fsys_mgr().Wiki_root_dir().GenSubDir_nest(wiki.Domain_str(), "html");
 		div_logo_day = Init_fmtr(tmp_bfr, eval_mgr, div_logo_fmtr, main_page_href_bry, fsys_lnx_encoder.Encode_to_file_protocol(wiki_css_dir.GenSubFil_nest("logo.png")));
 
@@ -98,7 +105,22 @@ public class Xow_portal_mgr implements Gfo_invk {
 		return div_footer_bry;
 	}
 
-	public byte[] Div_personal_bry() {return div_personal_bry;} private byte[] div_personal_bry = Bry_.Empty;
+	public byte[] Div_personal_bry(boolean from_hdump) {
+		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		byte[] wiki_user_name = wiki.User().Name();
+		byte[] rv = Init_fmtr(tmp_bfr, wiki.Eval_mgr(), div_personal_fmtr
+			, Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user).Name_db_w_colon(), wiki_user_name)
+			, wiki_user_name
+			, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Tid__user)
+			, Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user_talk).Name_db_w_colon(), wiki_user_name)
+			, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Tid__user_talk)
+			, indicators_pagesource_enabled
+				? (from_hdump ? indicators_pagesource_html : indicators_pagesource_wtxt)
+				: Bry_.Empty
+			);
+		tmp_bfr.Mkr_rls();
+		return rv;
+	}
 	public byte[] Div_ns_bry(Bry_bfr_mkr bfr_mkr, Xoa_ttl ttl, Xow_ns_mgr ns_mgr) {
 		Xow_ns ns = ttl.Ns();
 		byte[] subj_cls = Ns_cls_by_ord(ns_mgr, ns.Ord_subj_id()), talk_cls = Ns_cls_by_ord(ns_mgr, ns.Ord_talk_id());
@@ -168,7 +190,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 		return tmp_bfr.To_bry_and_rls();
 	}
 	private final    Bry_fmtr 
-	  div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls")
+	  div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};~{portal_indicators_pagesource}", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls", "portal_indicators_pagesource")
 	, div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls};~{portal_div_vnts}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls", "portal_div_vnts")
 	, div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text", "portal_view_read_href", "portal_view_edit_href", "portal_view_html_href", "sitename")
 	, div_logo_fmtr = Bry_fmtr.new_("", "portal_nav_main_href", "portal_logo_url")
@@ -192,6 +214,9 @@ public class Xow_portal_mgr implements Gfo_invk {
 		else if (ctx.Match(k, Cfg__sidebar_enabled__desktop))		Sidebar_enabled_(Bool_.Y, m.ReadYn("v"));
 		else if (ctx.Match(k, Cfg__sidebar_enabled__server))		Sidebar_enabled_(Bool_.N, m.ReadYn("v"));
 		else if (ctx.Match(k, Cfg__divs__footer))					div_footer_fmtr.Fmt_(m.ReadBry("v"));
+		else if (ctx.Match(k, Cfg__hdumps_indicators_enabled))      indicators_pagesource_enabled = m.ReadYn("v");
+		else if (ctx.Match(k, Cfg__hdumps_indicators_wtxt))         indicators_pagesource_wtxt = m.ReadBry("v");
+		else if (ctx.Match(k, Cfg__hdumps_indicators_html))         indicators_pagesource_html = m.ReadBry("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
@@ -214,5 +239,8 @@ public class Xow_portal_mgr implements Gfo_invk {
 	, Cfg__sidebar_enabled__desktop		= "xowa.html.portal.sidebar_enabled_desktop"
 	, Cfg__sidebar_enabled__server		= "xowa.html.portal.sidebar_enabled_server"
 	, Cfg__divs__footer					= "xowa.html.divs.footer"
+	, Cfg__hdumps_indicators_enabled    = "xowa.wiki.hdumps.indicators.enabled"
+	, Cfg__hdumps_indicators_wtxt       = "xowa.wiki.hdumps.indicators.html_if_wtxt"
+	, Cfg__hdumps_indicators_html       = "xowa.wiki.hdumps.indicators.html_if_html"
 	;
 }
