@@ -136,7 +136,7 @@ public class Http_server_wkr implements Gfo_invk {
 	.Add_str_int("/exec/gfs"	, Tid_post_url_gfs)
 	;
 	private static String Convert_page(String page_html, String root_dir_http, String wiki_domain) {
-		page_html = String_.Replace(page_html, "file:////home/lnxusr/xowa/file/", "/fsys/file/");
+		page_html = Replace_fsys_hack(page_html);
 		page_html = String_.Replace(page_html, root_dir_http		, "/fsys/");
 		page_html = String_.Replace(page_html, "xowa-cmd:"			, "/exec/");
 		page_html = String_.Replace(page_html, " href=\"/wiki/"	    , " href=\"/" + wiki_domain + "/wiki/");
@@ -144,6 +144,91 @@ public class Http_server_wkr implements Gfo_invk {
 		page_html = String_.Replace(page_html, "action=\"/wiki/"	, "action=\"/" + wiki_domain + "/wiki/");
 		page_html = String_.Replace(page_html, "/site"				, "");
 		return page_html;
+	}
+
+	private static final    byte[]
+	  Bry__file_lhs = Bry_.new_a7("file:")
+	, Bry__file_mid = Bry_.new_a7("/file/")
+	, Bry__file_fsys = Bry_.new_a7("/fsys")
+	;
+
+	public static String Replace_fsys_hack(String html_str) {
+		// init
+		Bry_bfr bfr = Bry_bfr_.New();
+		byte[] html_bry = Bry_.new_u8(html_str);
+		int len = html_bry.length;
+		int pos = 0;
+
+		// loop while finding "file:.*/file/"
+		while (true) {
+			// find "file:"
+			int lhs_bgn = Bry_find_.Find_fwd(html_bry, Bry__file_lhs, pos);
+
+			// exit if nothing found
+			if (lhs_bgn == Bry_find_.Not_found) 
+				break;
+
+			// set lhs_end (after "file:")
+			int lhs_end = lhs_bgn + Bry__file_lhs.length;
+
+			// skip if page literally starts with "file:"
+			if (lhs_bgn == 0) {
+				bfr.Add_mid(html_bry, pos, lhs_end);
+				pos = lhs_end;
+				continue;
+			}
+
+			// get quote char before "file:"
+			int quote_bgn = lhs_bgn - 1;
+			byte quote = html_bry[quote_bgn];
+
+			// skip if no quote found
+			if (quote != Byte_ascii.Apos && quote != Byte_ascii.Quote) {
+				bfr.Add_mid(html_bry, pos, lhs_end);
+				pos = lhs_end;
+				continue;
+			}
+
+			// find end quote
+			int quote_end = Bry_find_.Find_fwd(html_bry, quote, lhs_end);
+
+			// exit if no end quote
+			if (quote_end == Bry_find_.Not_found) 
+				break;
+
+			// skip if "'file: ... '" is too long. should be no more than 300
+			if (quote_end - lhs_end > 300) {
+				bfr.Add_mid(html_bry, pos, quote_end);
+				pos = quote_end;
+				continue;
+			}
+
+			// find "/file/"
+			int mid_bgn = Bry_find_.Find_fwd(html_bry, Bry__file_mid, lhs_bgn, quote_end);
+
+			// skip if no "/file/"
+			if (mid_bgn == Bry_find_.Not_found) {
+				bfr.Add_mid(html_bry, pos, quote_end);
+				pos = quote_end;
+				continue;
+			}
+
+			// add everything up to "file:"
+			bfr.Add_mid(html_bry, pos, lhs_bgn);
+
+			// add "/fsys/"
+			bfr.Add(Bry__file_fsys);
+
+			// add everything up to quote
+			bfr.Add_mid(html_bry, mid_bgn, quote_end);
+
+			// move pos forward
+			pos = quote_end;
+		}
+
+		// add rest
+		bfr.Add_mid(html_bry, pos, len);
+		return bfr.To_str_and_clear();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run)) {this.Run();}
