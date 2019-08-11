@@ -37,11 +37,12 @@ import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.errors.*;
 public class Http_server_mgr implements Gfo_invk {
 	private final    Object thread_lock = new Object();
 	private final    Gfo_usr_dlg usr_dlg;
-	private Http_server_socket wkr;
+	private final    Http_server_socket wkr;
 	private byte retrieve_mode = File_retrieve_mode.Mode_wait;
-	private boolean running, init_gui_needed = true;
+	private boolean running = true;
 	public Http_server_mgr(Xoae_app app) {
 		this.app = app;
+		this.wkr = new Http_server_socket(this);
 		this.usr_dlg = app.Usr_dlg();
 		this.request_parser = new Http_request_parser(server_wtr, false);
 	}
@@ -73,7 +74,6 @@ public class Http_server_mgr implements Gfo_invk {
 		else {
 			if (running) {
 				wkr.Canceled_(true);
-				wkr = null;
 				Note("HTTP Server stopped");
 			}
 			else
@@ -83,7 +83,11 @@ public class Http_server_mgr implements Gfo_invk {
 	}
 	public void Run() {
 		app.Cfg().Bind_many_app(this, Cfg__port, Cfg__file_retrieve_mode);
-		if (wkr == null) wkr = new Http_server_socket(this);
+
+		// create a shim gui to automatically handle default XOWA gui JS calls
+		Gxw_html_server.Init_gui_for_server(app, null);
+
+		// launch listener
 		Thread_adp_.Start_by_key("thread:xowa.http_server.server", wkr, Http_server_socket.Invk_run);
 		Note("HTTP Server started: Navigate to http://localhost:" + Int_.To_str(port));
 	}
@@ -94,12 +98,6 @@ public class Http_server_mgr implements Gfo_invk {
 	}
 	public String Parse_page_to_html(Http_data__client data__client, byte[] wiki_domain, byte[] ttl_bry, byte[] qarg, byte mode, boolean popup_enabled, String popup_mode, String popup_id) {
 		synchronized (thread_lock) {
-			// create a shim gui to automatically handle default XOWA gui JS calls
-			if (init_gui_needed) {
-				init_gui_needed = false;
-				Gxw_html_server.Init_gui_for_server(app, null);
-			}
-
 			// get the wiki
 			Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(wiki_domain);			// assert init for Main_Page; EX:click zh.w on wiki sidebar; DATE:2015-07-19
 			if (Runtime_.Memory_total() > Io_mgr.Len_gb)	Xowe_wiki_.Rls_mem(wiki, true);			// release memory at 1 GB; DATE:2015-09-11

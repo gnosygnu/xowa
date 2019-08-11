@@ -29,7 +29,7 @@ public class Bridge_cmd_itm__srch_suggest implements Bridge_cmd_itm {
 		byte[] cbk_func = data.Get_as_bry("cbk");
 
 		// build vars for search
-		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgri().Get_by_or_null(wiki_bry);
+		Xowe_wiki wiki = (Xowe_wiki)app.Wiki_mgri().Get_by_or_make_init_y(wiki_bry); // handle (a) HTTP_server stoped and (b) text entered directly into search-suggest; wiki not yet instantiated
 		Srch_rslt_cbk__js cbk = new Srch_rslt_cbk__js(cbk_func, search_bry);
 
 		// do search and return result
