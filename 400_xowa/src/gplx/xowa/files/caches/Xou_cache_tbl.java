@@ -92,7 +92,12 @@ public class Xou_cache_tbl implements Rls_able {
 		try {
 			while (rdr.Move_next()) {
 				Xou_cache_itm itm = new_itm(rdr);
-				hash.Add(itm.Lnki_key(), itm);
+				if (hash.Has(itm.Lnki_key())) { // dupes shouldn't happen, but has been reported; ISSUE#:534; DATE:2019-08-11
+					Gfo_usr_dlg_.Instance.Note_many("", "", "user_cache: duplicate key; key=~{0} count=~{1}", itm.Lnki_key(), hash.Count());
+				}
+				else {
+					hash.Add(itm.Lnki_key(), itm);
+				}
 			}
 		}
 		finally {rdr.Rls();}
