@@ -126,7 +126,11 @@ public class Http_request_parser {
 		while (true) {
 			line = Bry_.new_u8(rdr.Read_line());
 			if (Bry_.Has_at_bgn(line, content_type_boundary)) break;
-			tmp_bfr.Add(line).Add_byte_nl();
+
+			// add \n between lines, but not after last line
+			if (tmp_bfr.Len_gt_0())
+				tmp_bfr.Add_byte_nl();
+			tmp_bfr.Add(line);
 		}
 		byte[] val = tmp_bfr.To_bry_and_clear();
 		post_data_hash.Add(key, val);

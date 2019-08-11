@@ -41,8 +41,8 @@ public class Http_request_parser_tst {
 		, "val1"
 		, "-----------------------------12345678901234--"
 		)
-		, fxt.Make_post_data_itm("key0", "val0\n")
-		, fxt.Make_post_data_itm("key1", "val1\n")
+		, fxt.Make_post_data_itm("key0", "val0")
+		, fxt.Make_post_data_itm("key1", "val1")
 		);
 	}
 	@Test   public void Type_accept_charset()	{
