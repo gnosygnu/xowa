@@ -34,7 +34,7 @@ public class Srch_page_tbl_wkr {
 				Srch_rslt_list_.Get_redirect_ttl(page_tbl, tmp_page_row, row);
 				ctx.Rslts_list.Add(row);
 				ctx.Rslts_list.Ids__add(row.Page_id, row);
-				cbk.On_rslts_found(ctx.Qry, ctx.Rslts_list, 0, 1);
+				cbk.On_rslts_found(ctx, ctx.Qry, ctx.Rslts_list, 0, 1);
 				ctx.Rslts_list.Rslts_are_first = false;
 			}
 		}

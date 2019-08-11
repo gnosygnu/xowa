@@ -43,7 +43,7 @@ public class Srch_link_wkr extends Percentile_select_base {
 			// enough results at start; occurs in Special:Search when revisiting slabs; EX: 1-100 -> 101-200 -> 1-100
 			if (ctx.Qry.Slab_end < rslts_list.Len()) {
 				rslts_list.Rslts_are_enough = true;
-				rslt_cbk.On_rslts_found(ctx.Qry, rslts_list, 0, rslts_list.Len());
+				rslt_cbk.On_rslts_found(ctx, ctx.Qry, rslts_list, 0, rslts_list.Len());
 				return;
 			}
 
@@ -111,7 +111,7 @@ public class Srch_link_wkr extends Percentile_select_base {
 		// merge to rslts_list; notify; cleanup;
 		if (tmp_rslts_len > 0) rslts_list.Merge(tmp_rslts);
 		rslts_list.Process_rdr_done(rng, rslts_are_enough, rslts_are_done);
-		rslt_cbk.On_rslts_found(ctx.Qry, rslts_list, rslts_bgn, rslts_end);
+		rslt_cbk.On_rslts_found(ctx, ctx.Qry, rslts_list, rslts_bgn, rslts_end);
 		rslts_list.Rslts_are_first = false;
 		rslts_bgn = rslts_end;
 		// Gfo_usr_dlg_.Instance.Log_many("", "", "search.search rslts; rslts=~{0}", rng_log.To_str_and_clear());

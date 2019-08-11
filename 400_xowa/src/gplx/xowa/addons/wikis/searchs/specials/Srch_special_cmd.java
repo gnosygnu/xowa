@@ -57,7 +57,7 @@ public class Srch_special_cmd implements Gfo_invk, Srch_rslt_cbk, Xog_tab_close_
 	}
 	private void Hide_cancel_btn()			{Thread_adp_.Start_by_key(gplx.xowa.apps.Xoa_thread_.Key_special_search_cancel, this, Invk_hide_cancel);}
 	private void Hide_cancel_btn_async()	{js_wkr.Html_atr_set("xowa_cancel_" + wiki.Domain_str(), "style", "display:none;");}
-	public void On_rslts_found(Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
+	public void On_rslts_found(Srch_search_ctx ctx, Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
 		if (rslts_list.Rslts_are_first) {
 			if (rslts_bgn > qry.Slab_bgn) {
 				for (int i = qry.Slab_bgn; i < rslts_bgn; ++i) {

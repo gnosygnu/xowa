@@ -61,7 +61,7 @@ public class Srch_special_searcher {
 }
 class Srch_rslt_cbk__synchronous implements Srch_rslt_cbk {
 	public Srch_rslt_list Rslts() {return rslts;} private Srch_rslt_list rslts;
-	public void On_rslts_found(Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
+	public void On_rslts_found(Srch_search_ctx ctx, Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
 		this.rslts = rslts_list;	// just assign it
 	}
 	public void On_cancel() {}		// synchronous cannot be canceled

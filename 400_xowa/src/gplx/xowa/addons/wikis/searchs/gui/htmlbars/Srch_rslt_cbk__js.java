@@ -25,9 +25,10 @@ class Srch_rslt_cbk__js implements Srch_rslt_cbk {
 	}
 	public String To_str_and_clear() {return js_wtr.To_str_and_clear();}
 	public void On_cancel() {}
-	@gplx.Virtual public void On_rslts_found(Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
+	@gplx.Virtual public void On_rslts_found(Srch_search_ctx ctx, Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
 		// exit if done
 		if (!rslts_list.Rslts_are_enough && !rslts_list.Rslts_are_done) return;
+
 
 		// build js; EX: "receiveSuggestions('search_word', ["a"])"
 		js_wtr.Func_init(cbk_func);
@@ -38,19 +39,24 @@ class Srch_rslt_cbk__js implements Srch_rslt_cbk {
 		for (int i = 0; i < qry.Slab_end; i++) {
 			if (i >= rslts_len) break;	// rslts_end will overshoot actual rslts_len; check for out of bounds and exit; EX: default suggest will have rslts_end of 25, but "earth time" will retrieve 15 results
 			Srch_rslt_row row = rslts_list.Get_at(i);
+			Highlight(ctx, row);	// always highlight title first; needed for suggest_box to update highlighting when increasing word; EX: Eart -> Earth; "Earth" should be highlighted, not "Eart"
 			js_wtr.Ary_bry(row.Page_ttl.Full_txt_w_ttl_case());
 			js_wtr.Ary_bry(row.Page_ttl_display(Bool_.Y));
 		}
 		js_wtr.Ary_term();
 		js_wtr.Func_term();
 	}
+	private static void Highlight(Srch_search_ctx ctx, Srch_rslt_row row) {
+		try {row.Page_ttl_highlight = ctx.Highlight_mgr.Highlight(row.Page_ttl.Full_txt_w_ttl_case());}	// NOTE: always highlight row; needed for when search done in url_bar (highlight=n) and then same search reused for search (highlight=y)
+		catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "highlight failed; ttl=~{0} err=~{1}", row.Page_ttl_wo_ns, Err_.Message_gplx_log(e));}
+	}
 }
 class Srch_rslt_cbk__swt extends Srch_rslt_cbk__js implements Gfo_invk { 	private final    Xoae_app app;
 	public Srch_rslt_cbk__swt(Xoae_app app, byte[] cbk_func, byte[] search_raw) {super(cbk_func, search_raw);
 		this.app = app;
 	}
-	@Override public void On_rslts_found(Srch_search_qry qry, Srch_rslt_list list, int rslts_bgn, int rslts_end) {
-		super.On_rslts_found(qry, list, rslts_bgn, rslts_end);
+	@Override public void On_rslts_found(Srch_search_ctx ctx, Srch_search_qry qry, Srch_rslt_list list, int rslts_bgn, int rslts_end) {
+		super.On_rslts_found(ctx, qry, list, rslts_bgn, rslts_end);
 		Gfo_invk_.Invk_by_val(app.Gui_mgr().Kit().New_cmd_sync(this), Invk__notify, js_wtr.To_str_and_clear());
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

@@ -29,7 +29,7 @@ public class Srch_rslt_cbk__url_bar implements Srch_rslt_cbk, Gfo_invk {
 		this.app = app; this.url_bar = url_bar; this.max_results = max_results;
 	}
 	public void On_cancel() {}
-	public void On_rslts_found(Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
+	public void On_rslts_found(Srch_search_ctx ctx, Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
 		int rslts_len = rslts_list.Len();
 		this.rslts_finished = rslts_list.Rslts_are_enough || rslts_list.Rslts_are_done;
 
