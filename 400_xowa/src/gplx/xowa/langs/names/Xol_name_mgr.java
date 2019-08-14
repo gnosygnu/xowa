@@ -21,6 +21,7 @@ public class Xol_name_mgr {
 	private final    Cldr_name_loader cldr_loader;
 	private final    Language_name_loader name_loader;
 	private final    Io_url root_dir;
+	private final    Object thread_lock = new Object(); // THREAD:Xol_name_mgr can be used by multiple wiki threads; ISSUE#:549; DATE:2019-08-14
 //		private Ordered_hash hash;
 //		private Keyval[] kvs;
 
@@ -37,11 +38,13 @@ public class Xol_name_mgr {
 	* @since 1.20
 	*/
 	public String fetchLanguageName(String code, String inLanguage, String include, byte[] page_url) {
+		synchronized (thread_lock) {
 		code = String_.Lower(code);
 		if (include == null) include = Scope__str__all;
 		Ordered_hash array = fetchLanguageNames(inLanguage, include, page_url);
 		Keyval rv = (Keyval)array.Get_by(code);
 		return rv == null ? "" : rv.Val_to_str_or_null();
+		}
 	}
 	/**
 	* Get an array of language names, indexed by code.
@@ -60,6 +63,7 @@ public class Xol_name_mgr {
 	private Ordered_hash lang_files_cached;
 
 	public Ordered_hash fetchLanguageNames(String inLanguage, String include_str, byte[] page_url) {
+		synchronized (thread_lock) {
 		if (inLanguage == null) inLanguage = "null";
 		String cacheKey = inLanguage + ":" + include_str;
 		if (languageNameCache == null)
@@ -90,6 +94,7 @@ public class Xol_name_mgr {
 			languageNameCache.Add(cacheKey, ret);
 		}
 		return ret;
+		}
 		/*
 		$ret = self::$languageNameCache->get( $cacheKey );
 		if ( !$ret ) {
