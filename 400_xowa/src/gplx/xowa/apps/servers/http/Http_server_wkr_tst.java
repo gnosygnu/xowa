@@ -20,32 +20,24 @@ public class Http_server_wkr_tst {
 	@Test   public void File_bgn_missing() { // "file:" missing
 		fxt.Test__Replace_fsys_hack("src='file////home/lnxusr/xowa/file/'");
 	}
-	@Test   public void File_bgn_at_bos() { // "file:" at start of page
-		fxt.Test__Replace_fsys_hack("file:////home/lnxusr/xowa/file/");
-	}
-	@Test   public void Quote_bgn_missing() {
-		fxt.Test__Replace_fsys_hack("(file:////home/lnxusr/xowa/file/)");
-	}
-	@Test   public void Quote_end_missing() {
-		fxt.Test__Replace_fsys_hack("a'file:////home/lnxusr/xowa/file/");
-	}
-	@Test   public void Too_long() { // skip if too long
-		fxt.Test__Replace_fsys_hack("'file:" + String_.Repeat("a", 301) + "'");
-	}
-	@Test   public void File_mid_missing() { // skip if no /file/
-		fxt.Test__Replace_fsys_hack("'file:////home/lnxusr/xowa/file_missing/'");
-	}
 	@Test   public void One() {
 		fxt.Test__Replace_fsys_hack("'file:////home/lnxusr/xowa/file/A.png'", "'/fsys/file/A.png'");
 	}
 	@Test   public void Many() {
 		fxt.Test__Replace_fsys_hack("a 'file:////home/lnxusr/xowa/file/A.png' b \"file:////home/lnxusr/xowa/file/B.png\" c", "a '/fsys/file/A.png' b \"/fsys/file/B.png\" c");
 	}
+	@Test   public void Non_file() {
+		fxt.Test__Replace_fsys_hack("a file:////home/lnxusr/xowa/bin/any/xowa/file/app.window/app_icon.png b", "a /fsys/bin/any/xowa/file/app.window/app_icon.png b");
+	}
+	@Test   public void Url() {
+		fxt.Test__Replace_fsys_hack("url(file:////home/lnxusr/xowa/anonymous/wiki/www.wikidata.org/html/logo.png)", "url(/fsys/anonymous/wiki/www.wikidata.org/html/logo.png)");
+	}
 }
 class Http_server_wkr_fxt {
+	private static final    byte[] root_dir_http = Bry_.new_a7("file:////home/lnxusr/xowa/");
 	public void Test__Replace_fsys_hack(String html)              {Test__Replace_fsys_hack(html, html);}
 	public void Test__Replace_fsys_hack(String html, String expd) {
-		byte[] actl = Http_server_wkr.Replace_fsys_hack(Bry_.new_u8(html));
+		byte[] actl = Bry_.Replace_many(Bry_.new_u8(html), root_dir_http, Http_server_wkr.Url__fsys);
 		Gftest.Eq__ary__lines(expd, actl);
 	}
 }

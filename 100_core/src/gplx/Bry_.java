@@ -978,6 +978,43 @@ public class Bry_ {
 		}
 		return bfr.To_bry_and_clear();
 	}
+	public static byte[] Replace_many(byte[] src, byte[] find, byte[] repl) {
+		Bry_bfr bfr = null;
+		int src_len = src.length;
+		int find_len = find.length;
+
+		int pos = 0;
+		while (true) {
+			// find find_bgn
+			int find_bgn = Bry_find_.Find_fwd(src, find, pos, src_len);
+
+			// exit if nothing found
+			if (find_bgn == Bry_find_.Not_found) 
+				break;
+
+			// lazy-instantiation
+			if (bfr == null)
+				bfr = Bry_bfr_.New();
+
+			// add everything up to find_bgn
+			bfr.Add_mid(src, pos, find_bgn);
+
+			// add repl
+			bfr.Add(repl);
+
+			// move pos forward
+			pos = find_bgn + find_len;
+		}
+
+		// nothing found; return src
+		if (bfr == null)
+			return src;
+		else {
+			// add rest
+			bfr.Add_mid(src, pos, src_len);
+			return bfr.To_bry_and_clear();
+		}
+	}
 	public static int Trim_end_pos(byte[] src, int end) {
 		for (int i = end - 1; i > -1; i--) {
 			switch (src[i]) {
