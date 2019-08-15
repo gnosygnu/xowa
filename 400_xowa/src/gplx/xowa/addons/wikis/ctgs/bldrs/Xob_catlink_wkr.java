@@ -68,6 +68,11 @@ class Xob_catlink_wkr {
 		attach_mgr.Detach();	// NOTE: must detach after txn
 	}
 	private static Xodb_cat_link_tbl Make_cat_link_tbl(Xowe_wiki wiki, Xodb_cat_link_tbl cat_link_tbl) {
+		// if all or few, only one cat_link_tbl is needed; do not try to create another else "A table in the database is locked" error; ISSUE#:543; DATE:2019-08-14
+		if (   wiki.Data__core_mgr().Props().Layout_text().Tid_is_all_or_few() 
+			&& cat_link_tbl != null) 
+			return cat_link_tbl;
+
 		Term_cat_link_tbl(cat_link_tbl);
 
 		// get cat_link_conn
