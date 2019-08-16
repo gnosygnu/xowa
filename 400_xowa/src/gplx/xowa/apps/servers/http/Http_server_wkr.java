@@ -144,7 +144,6 @@ public class Http_server_wkr implements Gfo_invk {
 		page_html = String_.Replace(page_html, "/site"				, "");
 		return page_html;
 	}
-
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_run)) {this.Run();}
 		else	return Gfo_invk_.Rv_unhandled;
