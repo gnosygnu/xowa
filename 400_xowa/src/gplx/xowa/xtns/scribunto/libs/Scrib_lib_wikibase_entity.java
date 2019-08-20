@@ -18,10 +18,10 @@ import gplx.xowa.xtns.wbases.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.stores.*;
 import gplx.xowa.xtns.scribunto.procs.*;
-public class Scrib_lib_wikibase_entity implements Scrib_lib {
+public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php
 	public Scrib_lib_wikibase_entity(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
-	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
+	public Scrib_lib Init() {procs.Init_by_lib(this, Proc__names); return this;}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_wikibase_entity(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
@@ -31,25 +31,30 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 	public Scrib_proc_mgr Procs() {return procs;} private Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
-			case Proc_getGlobalSiteId:								return GetGlobalSiteId(args, rslt);
-			case Proc_getLanguageCode:								return GetLanguageCode(args, rslt);
-//				case Proc_formatStatements:								return FormatStatements(args, rslt);
-			case Proc_formatPropertyValues:							return FormatPropertyValues(args, rslt);
+			case Proc__getGlobalSiteId:                             return GetGlobalSiteId(args, rslt);
+			case Proc__getLanguageCode:                             return GetLanguageCode(args, rslt);
+			case Proc__formatStatements:                            return FormatStatements(args, rslt);
+			case Proc__formatPropertyValues:                        return FormatPropertyValues(args, rslt);
+			case Proc__addStatementUsage:                           return AddStatementUsage(args, rslt);
+			case Proc__addLabelUsage:                               return AddLabelUsage(args, rslt);
+			case Proc__addDescriptionUsage:                         return AddDescriptionUsage(args, rslt);
+			case Proc__addSiteLinksUsage:                           return AddSiteLinksUsage(args, rslt);
+			case Proc__addOtherUsage:                               return AddOtherUsage(args, rslt);
+			case Proc__getSetting:                                  return GetSetting(args, rslt);
+			case Proc__incrementStatsKey:                           return IncrementStatsKey(args, rslt);
 			default: throw Err_.new_unhandled(key);
 		}
 	}
-	private static final int Proc_getGlobalSiteId = 0, Proc_getLanguageCode = 1, Proc_formatPropertyValues = 2;
-	public static final String Invk_getGlobalSiteId = "getGlobalSiteId", Invk_getLanguageCode = "getLanguageCode", Invk_formatPropertyValues = "formatPropertyValues";
-	private static final    String[] Proc_names = String_.Ary(Invk_getGlobalSiteId, Invk_getLanguageCode, Invk_formatPropertyValues);
 	public boolean GetGlobalSiteId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		return rslt.Init_obj(core.Wiki().Domain_abrv());	// ;siteGlobalID: This site's global ID (e.g. <code>'itwiki'</code>), as used in the sites table. Default: <code>$wgDBname</code>.; REF:/xtns/Wikibase/docs/options.wiki
 	}
 	public boolean GetLanguageCode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_obj(core.Wiki().Lang().Key_bry());
 	}
-//		public boolean FormatStatements(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+	public boolean FormatStatements(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		throw Err_.new_unimplemented();
 //			return FormatPropertyValues(args, rslt); // NOTE: implementation should be like Visit_entity but return [[A]] instead of <a href='A'>
-//		}
+	}
 	public boolean FormatPropertyValues(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// get qid / pid
 		byte[] qid = args.Pull_bry(0);
@@ -82,4 +87,70 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib {
 		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, lang, Bool_.N);
 		return rslt.Init_obj(bfr.To_bry_and_rls());
 	}
+	public boolean AddStatementUsage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		return rslt.Init_null();
+	}
+	public boolean AddLabelUsage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		return rslt.Init_null();
+	}
+	public boolean AddDescriptionUsage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		return rslt.Init_null();
+	}
+	public boolean AddSiteLinksUsage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		return rslt.Init_null();
+	}
+	public boolean AddOtherUsage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		return rslt.Init_null();
+	}
+	public boolean GetSetting(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		String key = args.Cast_str_or(0, "");
+		if (String_.Eq(key, "fineGrainedLuaTracking")) {// REF.MW: https://gerrit.wikimedia.org/r/#/c/operations/mediawiki-config/+/412664/3/wmf-config/InitialiseSettings.php
+			return rslt.Init_obj(false);
+		}
+		else {
+			throw Err_.new_unimplemented();
+		}
+	}
+	public boolean IncrementStatsKey(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		return rslt.Init_null();
+	}
+	private static final int 
+	  Proc__getGlobalSiteId        =  0
+	, Proc__getLanguageCode        =  1
+	, Proc__formatStatements       =  2
+	, Proc__formatPropertyValues   =  3
+	, Proc__addStatementUsage      =  4
+	, Proc__addLabelUsage          =  5
+	, Proc__addDescriptionUsage    =  6
+	, Proc__addSiteLinksUsage      =  7
+	, Proc__addOtherUsage          =  8
+	, Proc__getSetting             =  9
+	, Proc__incrementStatsKey      = 10
+	;
+	public static final String 
+	  Invk__getGlobalSiteId        = "getGlobalSiteId"
+	, Invk__getLanguageCode        = "getLanguageCode"
+	, Invk__formatStatements       = "formatStatements"
+	, Invk__formatPropertyValues   = "formatPropertyValues"
+	, Invk__addStatmentUsage       = "addStatementUsage"
+	, Invk__addLabelUsage          = "addLabelUsage"
+	, Invk__addDescriptionUsage    = "addDescriptionUsage"
+	, Invk__addSiteLinkUsage       = "addSiteLinkUsage"
+	, Invk__addOtherUsage          = "addOtherUsage"
+	, Invk__getSetting             = "getSetting"
+	, Invk__incrementStatsKey      = "incrementStatsKey"
+	;
+	private static final    String[] Proc__names = String_.Ary
+	( Invk__getGlobalSiteId
+	, Invk__getLanguageCode
+	, Invk__formatStatements
+	, Invk__formatPropertyValues
+	, Invk__addStatmentUsage
+	, Invk__addLabelUsage
+	, Invk__addDescriptionUsage
+	, Invk__addSiteLinkUsage
+	, Invk__addOtherUsage
+	, Invk__getSetting
+	, Invk__incrementStatsKey
+	);
 }
