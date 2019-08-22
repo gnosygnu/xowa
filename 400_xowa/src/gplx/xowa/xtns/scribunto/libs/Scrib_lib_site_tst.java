@@ -47,6 +47,10 @@ public class Scrib_lib_site_tst {
 		, "  files=1"
 		));
 	}
+	@Test   public void PagesInCategory__spaces() { // replace space with underlines (and possibly other normalizations) else TOC will not show; PAGE:en.wiktionary.org/wiki/Category:English_conjunctions; ISSUE#:557; DATE:2019-08-22
+		gplx.xowa.addons.wikis.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A_b"), 3, 2, 1);
+		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A b", "pages")	, 3);
+	}
 	@Test   public void PagesInNs() {
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInNs, Object_.Ary("12"), 0);
 	}
