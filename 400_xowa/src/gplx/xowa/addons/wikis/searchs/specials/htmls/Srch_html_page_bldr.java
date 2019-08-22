@@ -22,6 +22,7 @@ public class Srch_html_page_bldr {
 	private Srch_search_qry qry; private Xow_wiki wiki; private Xol_num_mgr num_mgr;
 	private int slab_idx;
 	private Xoh_lnki_bldr lnki_bldr; private Xoh_anchor_kv_bldr self_lnkr = new Xoh_anchor_kv_bldr(); private Srch_html_row_bldr html_row_bldr;
+	private Srch_search_addon addon;
 	public void Init_by_wiki(Xow_wiki wiki, Xol_num_mgr num_mgr, Srch_search_qry qry) {
 		this.wiki = wiki; this.num_mgr = num_mgr; this.qry = qry;
 		this.lnki_bldr = wiki.Html__lnki_bldr();
@@ -31,6 +32,14 @@ public class Srch_html_page_bldr {
 		self_lnkr.Init_w_qarg(tmp_bfr.Add(Bry__special_search).Add(qry.Phrase.Orig).Add(Bry__fulltext).To_bry_and_clear());
 	}
 	public byte[] Bld_page(byte[] html_tbls_bry) {
+		// show a message if no search databases exist; ISSUE#:539; DATE:2019-08-21
+		if (addon == null) {
+			addon = Srch_search_addon.Get(wiki);
+		}
+		if (addon != null && addon.Db_mgr().Cfg() == null) {
+			return Bry_.new_u8("<span style='color:red'>Search databases are missing</span>");
+		}
+
 		byte[] rslts_hdr = fmtr_rslts.Bld_bry_many(tmp_bfr, num_mgr.Format_num(qry.Slab_bgn + List_adp_.Base1), num_mgr.Format_num(qry.Slab_end), qry.Phrase.Orig);
 		byte[] option_link = lnki_bldr.Href_(Bry_.new_a7("home"), wiki.Ttl_parse(Bry_.new_a7("Options/Search"))).Img_16x16(Xoh_img_path.Img_option).Bld_to_bry();	// HOME
 		fmtr_page.Bld_bfr_many(tmp_bfr, rslts_hdr, option_link, Bld_paging_link(Bool_.N), Bld_paging_link(Bool_.Y), html_tbls_bry);

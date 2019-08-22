@@ -49,6 +49,12 @@ public class Srch_search_mgr implements Gfo_invk {
 	public void Search(Srch_search_qry qry, Srch_rslt_cbk cbk) {	// NOTE: main entry point for search
 		if (qry.Phrase.Orig.length == 0) return;
 
+		// exit early if no search database; else multiple NPE's during search-suggest; ISSUE#:539; DATE:2019-08-21
+		if (addon.Db_mgr().Cfg() == null) {
+			Gfo_usr_dlg_.Instance.Warn_many("", "", "Search databases are missing; wiki=~{0}", wiki.Domain_str());
+			return;
+		}
+
 		// handle obsolete search dbs;
 		if (addon.Db_mgr().Cfg().Version_id__needs_upgrade()
 			&& !upgrade_prompted) {
