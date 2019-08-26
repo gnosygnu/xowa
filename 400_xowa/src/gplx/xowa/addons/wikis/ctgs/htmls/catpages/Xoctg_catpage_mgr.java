@@ -49,19 +49,22 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__missing_class);
 	}
 	public void Free_mem_all() {cache.Clear();}
-	public Xoctg_catpage_ctg Get_or_load_or_null(byte[] page_ttl, Xoctg_catpage_url catpage_url, Xoa_ttl cat_ttl, int limit) {
-		// load categories from cat dbs; exit if not found
+	public Xoctg_catpage_ctg Get_by_cache_or_null(byte[] page_ttl, Xoctg_catpage_url catpage_url, Xoa_ttl cat_ttl, int limit) {
+		// DynamicPageList categories only (b/c of many members); for regular catpages, always retrieve on demand
 		Xoctg_catpage_ctg ctg = (Xoctg_catpage_ctg)cache.Get_by(cat_ttl.Full_db());
 		if (ctg == null) {
 			if (gplx.core.envs.Env_.Mode_testing()) return null;	// needed for dpl test
-			synchronized (thread_lock) {	// LOCK:used by multiple wrks; DATE:2016-09-12
-				ctg = loader.Load_ctg_or_null(wiki, page_ttl, this, catpage_url, cat_ttl, limit);
-			}
+			ctg = Get_by_db_or_null(page_ttl, catpage_url, cat_ttl, limit);
 			if (ctg == null) return null;	// not in cache or db; exit
-			if (limit == Int_.Max_value)	// only add to cache if Max_val (DynamicPageList); for regular catpages, always retrieve on demand
-				cache.Add(cat_ttl.Full_db(), ctg);
+			cache.Add(cat_ttl.Full_db(), ctg);
 		}
 		return ctg;
+	}
+	public Xoctg_catpage_ctg Get_by_db_or_null(byte[] page_ttl, Xoctg_catpage_url catpage_url, Xoa_ttl cat_ttl, int limit) {
+		// load categories from cat dbs; exit if not found
+		synchronized (thread_lock) {	// LOCK:used by multiple wrks; DATE:2016-09-12
+			return loader.Load_ctg_or_null(wiki, page_ttl, this, catpage_url, cat_ttl, limit);
+		}
 	}
 	public void Write_catpage(Bry_bfr bfr, Xoa_page page) {
 		try	{
@@ -69,7 +72,7 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 			Xoctg_catpage_url catpage_url = Xoctg_catpage_url_parser.Parse(page.Url());
 
 			// load categories from cat dbs; exit if not found
-			Xoctg_catpage_ctg ctg = Get_or_load_or_null(page.Ttl().Page_db(), catpage_url, page.Ttl(), grp_max);
+			Xoctg_catpage_ctg ctg = Get_by_db_or_null(page.Ttl().Page_db(), catpage_url, page.Ttl(), grp_max);
 			if (ctg == null) return;
 
 			// write html

@@ -45,8 +45,7 @@ class Xoctg_catlink_loader {
 
 		// sort and reduce list to 200 total
 		catlink_list.Sort_by(new Xoctg_catlink_sorter(url_is_from));
-		Xoctg_page_loader catlink_loader = new Xoctg_page_loader(wiki);
-		Ordered_hash catlink_hash = catlink_loader.Hash();
+		Ordered_hash catlink_hash = Ordered_hash_.New();
 		int catlink_list_len = catlink_list.Len();
 		int max = catlink_list_len < limit ? catlink_list_len : limit;
 		for (int i = 0; i < max; i++) {
@@ -55,7 +54,6 @@ class Xoctg_catlink_loader {
 		}
 
 		// load ns / ttl for each catlink
-		page_tbl.Select_in__id(catlink_loader);
 		Xoctg_catpage_grp grp = rv.Grp_by_tid(grp_tid);
 		grp.Itms_((Xoctg_catpage_itm[])catlink_hash.To_ary_and_clear(Xoctg_catpage_itm.class));
 
@@ -93,7 +91,10 @@ class Xoctg_catlink_loader {
 		, ",       cl_type_id"
 		, ",       {0} AS cl_sortkey"
 		, ",       {1} AS cl_sortkey_prefix"
+		, ",       p.page_namespace"
+		, ",       p.page_title"
 		, "FROM    <link_db_{3}>cat_link cl{2}"
+		, "        LEFT JOIN <page_db>page p ON p.page_id = cl{2}.cl_from"
 		), sortkey_col, sortkey_prefix_fld, sortkey_join, link_db_id);
 		bfr.Add_str_u8_fmt(String_.Concat_lines_nl
 		( "WHERE   cl_to_id = {0}"
@@ -108,12 +109,15 @@ class Xoctg_catlink_loader {
 	}
 	private void Load_catlinks(List_adp catlink_list, String sql) {
 		Db_rdr rdr = Db_rdr_.Empty;
+		int count = 0;
 		try {
 			attach_mgr.Attach();
 			rdr = attach_mgr.Conn_main().Stmt_sql(sql).Exec_select__rls_auto();
 			while (rdr.Move_next()) {
-				Xoctg_catpage_itm itm = Xoctg_catpage_itm.New_by_rdr(rdr, version);
+				Xoctg_catpage_itm itm = Xoctg_catpage_itm.New_by_rdr(wiki, rdr, version);
 				catlink_list.Add(itm);
+				if (count >= 1000 && (count % 1000) == 0) Gfo_usr_dlg_.Instance.Prog_many("", "", "loading cat_links: count=~{0}", count);
+				count++;
 			}
 		}
 		finally {
@@ -197,6 +201,10 @@ class Xoctg_catlink_loader {
 			version = 3;
 			db_1st = cat_core_conn;
 		}
+
+		// add page_db
+		db_list.Add(new Db_attach_itm("page_db", page_tbl.Conn()));
+
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(db_1st, (Db_attach_itm[])db_list.To_ary_and_clear(Db_attach_itm.class));
 		return new Xoctg_catlink_loader(wiki, catpage_mgr, page_tbl, version, link_dbs_len, attach_mgr);
 	}

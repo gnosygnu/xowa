@@ -76,7 +76,7 @@ public class Xoctg_catpage_itm {
 	}
 
 	public static final    Xoctg_catpage_itm[] Ary_empty = new Xoctg_catpage_itm[0];
-	public static Xoctg_catpage_itm New_by_rdr(Db_rdr rdr, byte version) {
+	public static Xoctg_catpage_itm New_by_rdr(Xow_wiki wiki, Db_rdr rdr, byte version) {
 		byte[] sortkey_binary = Bry_.Empty;
 		byte[] sortkey_prefix = Bry_.Empty;
 		if (version == Version__4) {
@@ -87,7 +87,15 @@ public class Xoctg_catpage_itm {
 			sortkey_binary = Bry_.Empty;
 			sortkey_prefix = rdr.Read_bry_by_str("cl_sortkey");
 		}
-		return new Xoctg_catpage_itm(version, rdr.Read_byte("cl_type_id"), rdr.Read_int("cl_from"), sortkey_prefix, sortkey_binary);
+		Xoctg_catpage_itm rv = new Xoctg_catpage_itm(version, rdr.Read_byte("cl_type_id"), rdr.Read_int("cl_from"), sortkey_prefix, sortkey_binary);
+
+		if (version == Version__4) {
+			String ttl_str = rdr.Read_str("page_title");
+			if (ttl_str != null) {// NOTE: ttl_str will be NULL if LEFT JOIN fails on page_db.page
+				rv.Page_ttl_(wiki.Ttl_parse(rdr.Read_int("page_namespace"), Bry_.new_u8(ttl_str)));
+			}
+		}
+		return rv;
 	}
 	public static Xoctg_catpage_itm New_by_ttl(byte grp_tid, int page_id, Xoa_ttl ttl) {	// TEST
 		Xoctg_catpage_itm rv = new Xoctg_catpage_itm(Version__4, grp_tid, page_id, ttl.Page_txt(), Bry_.Empty);

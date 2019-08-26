@@ -40,7 +40,7 @@ class Dpl_itm {
 	public byte Quality_pages() {return quality_pages;} private byte quality_pages;
 	public byte Stable_pages() {return stable_pages;} private byte stable_pages;
 	private Xop_ctx sub_ctx; private Xop_tkn_mkr sub_tkn_mkr; private Xop_root_tkn sub_root;
-	public void Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {	// parse kvps in xnde; EX:<dpl>category=abc\nredirects=y\n</dpl>
+	private void Parse_src(Xowe_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {	// parse kvps in xnde; EX:<dpl>category=abc\nredirects=y\n</dpl>
 		this.page_ttl = page_ttl;
 		sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);
 		sub_tkn_mkr = sub_ctx.Tkn_mkr();
@@ -175,6 +175,11 @@ class Dpl_itm {
 	// boolean ctg_date = false, ctg_date_strip = false;
 	// byte[] ns_include = null;
 	// byte[] ctg_date_fmt;
+	public static Dpl_itm Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] page_ttl, byte[] src, Xop_xnde_tkn xnde) {
+		Dpl_itm rv = new Dpl_itm();
+		rv.Parse_src(wiki, ctx, page_ttl, src, xnde);
+		return rv;
+	}
 }
 class Dpl_stable_tid {
 	public static final byte Tid_null = 0, Tid_include = 1, Tid_only = 2, Tid_exclude = 3;
