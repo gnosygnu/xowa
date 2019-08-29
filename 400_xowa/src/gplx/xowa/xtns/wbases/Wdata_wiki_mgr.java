@@ -18,15 +18,17 @@ import gplx.core.primitives.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.langs.*;
+import gplx.xowa.parsers.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.htmls.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apps.apis.xowa.xtns.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.users.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.pfuncs.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.wbases.stores.*;
-import gplx.xowa.parsers.*;
+import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto.*;
 public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	private final    Xoae_app app;
 	private final    Wdata_prop_val_visitor prop_val_visitor;
 	private final    Wdata_doc_parser wdoc_parser_v1 = new Wdata_doc_parser_v1(), wdoc_parser_v2 = new Wdata_doc_parser_v2();
 	private final    Object thread_lock = new Object();		
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);		
+	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
+	private final    WikibaseLanguageIndependentLuaBindings lua_bindings;
 	public Wdata_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		this.evt_mgr = new Gfo_evt_mgr(this);
@@ -35,6 +37,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		this.Doc_mgr = new Wbase_doc_mgr(this, this.Qid_mgr);
 		this.prop_mgr = new Wbase_prop_mgr(Wbase_prop_mgr_loader_.New_db(this));
 		this.prop_val_visitor = new Wdata_prop_val_visitor(app, this);
+		this.lua_bindings = new WikibaseLanguageIndependentLuaBindings(Doc_mgr);
 		this.Enabled_(true);
 	}
 	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private final    Gfo_evt_mgr evt_mgr;
@@ -42,6 +45,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	public final    Wbase_pid_mgr		Pid_mgr;
 	public final    Wbase_doc_mgr		Doc_mgr;
 	public Wbase_prop_mgr				Prop_mgr() {return prop_mgr;} private final    Wbase_prop_mgr prop_mgr;
+	public WikibaseLanguageIndependentLuaBindings Lua_bindings() {return lua_bindings;}
 	public boolean Enabled() {return enabled;} private boolean enabled;
 	public void Enabled_(boolean v) {
 		this.enabled = v;

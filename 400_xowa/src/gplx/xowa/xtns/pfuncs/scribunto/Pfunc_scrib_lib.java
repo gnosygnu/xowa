@@ -19,6 +19,7 @@ import gplx.xowa.xtns.pfuncs.exprs.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Pfunc_scrib_lib implements Scrib_lib {
 	private Scrib_core core;
+	public String Key() {return "mw.ext.ParserFunctions";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public void Core_(Scrib_core v) {this.core = v;} // TEST:

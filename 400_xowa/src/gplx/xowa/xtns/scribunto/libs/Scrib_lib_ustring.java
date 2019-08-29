@@ -21,6 +21,7 @@ import gplx.xowa.xtns.scribunto.procs.*;
 import gplx.xowa.xtns.scribunto.libs.patterns.*;
 public class Scrib_lib_ustring implements Scrib_lib {
 	public Scrib_lib_ustring(Scrib_core core) {this.core = core;} private Scrib_core core;
+	public String Key() {return "mw.ustring";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public int String_len_max() {return string_len_max;} public Scrib_lib_ustring String_len_max_(int v) {string_len_max = v; return this;} private int string_len_max = Xoa_page_.Page_len_max;
 	public int Pattern_len_max() {return pattern_len_max;} public Scrib_lib_ustring Pattern_len_max_(int v) {pattern_len_max = v; return this;} private int pattern_len_max = 10000;

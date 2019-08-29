@@ -124,7 +124,7 @@ public class Scrib_lib_mw__invoke_tst {
 	private void Init_preprocess() {
 		fxt.Init_tmpl("{{#invoke:Mod_0|Func_0|1|c|d}}");	// current
 		fxt.Init_page("{{test|1|a|b|c}}");					// parent
-		fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_mw(), Scrib_lib_mw.Invk_preprocess);
+		fxt.Init_cbk(fxt.Core().Lib_mw(), Scrib_lib_mw.Invk_preprocess);
 	}
 	private void Exec_preprocess(String frame, String arg_idx, String expd) {
 		fxt.Parser_fxt().Wiki().Cache_mgr().Tmpl_result_cache().Clear();

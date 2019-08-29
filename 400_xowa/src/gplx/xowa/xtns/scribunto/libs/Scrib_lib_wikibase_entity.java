@@ -19,9 +19,18 @@ import gplx.langs.jsons.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.stores.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php
-	public Scrib_lib_wikibase_entity(Scrib_core core) {this.core = core;} private Scrib_core core;
+	private Scrib_core core;
+	private Wdata_wiki_mgr wdata_mgr;
+	public Scrib_lib_wikibase_entity(Scrib_core core) {
+		this.core = core;
+	}
+	public String Key() {return "mw.wikibase.entity";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
-	public Scrib_lib Init() {procs.Init_by_lib(this, Proc__names); return this;}
+	public Scrib_lib Init() {
+		procs.Init_by_lib(this, Proc__names);
+		this.wdata_mgr = core.App().Wiki_mgr().Wdata_mgr();
+		return this;
+	}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_wikibase_entity(core);}
 	public Scrib_lua_mod Register(Scrib_core core, Io_url script_dir) {
 		Init();
@@ -103,13 +112,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 		return rslt.Init_null();
 	}
 	public boolean GetSetting(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		String key = args.Cast_str_or(0, "");
-		if (String_.Eq(key, "fineGrainedLuaTracking")) {// REF.MW: https://gerrit.wikimedia.org/r/#/c/operations/mediawiki-config/+/412664/3/wmf-config/InitialiseSettings.php
-			return rslt.Init_obj(false);
-		}
-		else {
-			throw Err_.new_unimplemented();
-		}
+		return Scrib_lib_wikibase.GetSetting(args, rslt, core, wdata_mgr);
 	}
 	public boolean IncrementStatsKey(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_null();

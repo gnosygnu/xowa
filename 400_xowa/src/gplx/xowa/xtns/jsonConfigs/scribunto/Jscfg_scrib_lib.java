@@ -20,6 +20,7 @@ public class Jscfg_scrib_lib implements Scrib_lib {
 	private final    Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
 	private final    Jscfg_localizer localizer = new Jscfg_localizer();
 	private Scrib_core core;
+	public String Key() {return "JCLuaLibrary";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public void Core_(Scrib_core v) {this.core = v;} // TEST:

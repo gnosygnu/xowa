@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.titleBlacklists; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*; import gplx.xowa.xtns.scribunto.procs.*;
 public class Blacklist_scrib_lib implements Scrib_lib {
+	public String Key() {return "mw.ext.TitleBlacklist";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Blacklist_scrib_lib();}

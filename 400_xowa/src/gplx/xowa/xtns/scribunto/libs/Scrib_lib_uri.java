@@ -20,6 +20,7 @@ import gplx.xowa.parsers.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_uri implements Scrib_lib {
 	public Scrib_lib_uri(Scrib_core core) {this.core = core;} private Scrib_core core;
+	public String Key() {return "mw.uri";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_uri(core);}

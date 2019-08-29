@@ -37,9 +37,9 @@ public class Scrib_core_tst {
 			;
 	}
 	@Test  public void RegisterLibrary() {
-		fxt	.Expd_server_rcvd_add("00000080000000FF{[\"op\"]=\"registerLibrary\",[\"name\"]=\"mw_interface\",[\"functions\"]={[\"prc_0\"]=\"mw_interface-prc_0\",[\"prc_1\"]=\"mw_interface-prc_1\"}}")
+		fxt	.Expd_server_rcvd_add("00000074000000E7{[\"op\"]=\"registerLibrary\",[\"name\"]=\"mw_interface\",[\"functions\"]={[\"prc_0\"]=\"mwInit|prc_0\",[\"prc_1\"]=\"mwInit|prc_1\"}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:0;s:6:\"values\";a:0:{}}")
-			.Test_RegisterLibrary(String_.Ary("prc_0", "prc_1"), String_.Ary("mw_interface-prc_0", "mw_interface-prc_1"))
+			.Test_RegisterLibrary(String_.Ary("prc_0", "prc_1"), String_.Ary("mwInit|prc_0", "mwInit|prc_1"))
 			;
 	}
 	@Test  public void LoadLibraryFromFile() {
@@ -55,13 +55,13 @@ public class Scrib_core_tst {
 			;
 	}
 	@Test  public void CallFunction_cbk() {	// PURPOSE: 'simulates interpreter.CallFunction(mw_lib.Fncs_get_by_key("setup").Id(), "allowEnvFuncs", allow_env_funcs);'
-		fxt	.Expd_server_rcvd_add("0000008C00000117{[\"op\"]=\"registerLibrary\",[\"name\"]=\"mw_interface\",[\"functions\"]={[\"loadPackage\"]=\"mw_interface-loadPackage\",[\"prc_1\"]=\"mw_interface-prc_1\"}}")
+		fxt	.Expd_server_rcvd_add("00000080000000FF{[\"op\"]=\"registerLibrary\",[\"name\"]=\"mw_interface\",[\"functions\"]={[\"loadPackage\"]=\"mwInit|loadPackage\",[\"prc_1\"]=\"mwInit|prc_1\"}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:0;s:6:\"values\";a:0:{}}")
-			.Test_RegisterLibrary(String_.Ary("loadPackage", "prc_1"), String_.Ary("mw_interface-loadPackage", "mw_interface-prc_1"))
+			.Test_RegisterLibrary(String_.Ary("loadPackage", "prc_1"), String_.Ary("mwInit|loadPackage", "mwInit|prc_1"))
 			;		
 		fxt	.Init_lib_fil("package.lua", "package_text")
 			.Expd_server_rcvd_add("000000470000008D{[\"op\"]=\"call\",[\"id\"]=2,[\"nargs\"]=1,[\"args\"]={[1]={[\"key_0\"]=\"val_0\"}}}")
-			.Init_server_prep_add("a:4:{s:2:\"id\";s:24:\"mw_interface-loadPackage\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:1;s:4:\"args\";a:1:{i:1;s:7:\"package\";}}")
+			.Init_server_prep_add("a:4:{s:2:\"id\";s:18:\"mwInit|loadPackage\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:1;s:4:\"args\";a:1:{i:1;s:7:\"package\";}}")
 			.Expd_server_rcvd_add("0000004A00000093{[\"op\"]=\"loadString\",[\"text\"]=\"package_text\",[\"chunkName\"]=\"@package.lua\"}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:14;}}")
 			.Expd_server_rcvd_add("0000003B00000075{[\"op\"]=\"return\",[\"nvalues\"]=1,[\"values\"]={[1]=chunks[14]}}")				                       

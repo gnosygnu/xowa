@@ -36,7 +36,7 @@ public class Scrib_invoke_func_fxt {
 		fxt.Init_page_create("Module:Mod_0");
 		this.Init_lua_rcvd_loadModule(); 
 	}
-	public Scrib_invoke_func_fxt Init_cbk(String lib_name, Scrib_lib lib, String... proc_names) {
+	public Scrib_invoke_func_fxt Init_cbk(Scrib_lib lib, String... proc_names) {
 		int len = proc_names.length;
 		for (int i = 0; i < len; i++) {
 			String proc_name = proc_names[i];
@@ -50,8 +50,8 @@ public class Scrib_invoke_func_fxt {
 	public Scrib_invoke_func_fxt Init_server_print_key_y_() {server.Print_key_(true); return this;}
 	public Scrib_invoke_func_fxt Init_server_print_key_n_() {server.Print_key_(false); return this;}
 	public Scrib_invoke_func_fxt Init_lua_rcvd_raw(String raw) {server.Prep_add(raw); return this;}
-	public Scrib_invoke_func_fxt Init_lua_rcvd(String cbk_name, Keyval... ary) {
-		server.Prep_add(rsp_bldr.Bld_mw_cbk(cbk_name, ary));
+	public Scrib_invoke_func_fxt Init_lua_rcvd(Scrib_lib lib, String cbk_name, Keyval... ary) {
+		server.Prep_add(rsp_bldr.Bld_mw_cbk(lib, cbk_name, ary));
 		return this;
 	}
 	public Scrib_invoke_func_fxt Init_lua_module() {
@@ -63,13 +63,13 @@ public class Scrib_invoke_func_fxt {
 		return this;
 	}
 	public Scrib_invoke_func_fxt Init_lua_rcvd_preprocess(String frame, String cmd) {
-		server.Prep_add(String_.Concat_any("a:4:{s:2:\"id\";s:23:\"mw_interface-preprocess\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:2;s:4:\"args\";a:2:{i:1;s:", String_.Len(frame), ":\"", frame, "\";i:2;s:", String_.Len(cmd), ":\"", cmd, "\";}}"));
+		server.Prep_add(String_.Concat_any("a:4:{s:2:\"id\";s:17:\"mwInit|preprocess\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:2;s:4:\"args\";a:2:{i:1;s:", String_.Len(frame), ":\"", frame, "\";i:2;s:", String_.Len(cmd), ":\"", cmd, "\";}}"));
 		this.Init_lua_rcvd_rv();
 		return this;
 	}
-	public Scrib_invoke_func_fxt Init_lua_rcvd_expandTemplate(String frame, String tmpl_ttl, Keyval... ary) {
+	public Scrib_invoke_func_fxt Init_lua_rcvd_expandTemplate(Scrib_lib lib, String frame, String tmpl_ttl, Keyval... ary) {
 		ary = new Keyval[] {Keyval_.int_(1, "current"), Keyval_.int_(2, tmpl_ttl), Keyval_.int_(3, ary)};
-		server.Prep_add(rsp_bldr.Bld_mw_cbk("expandTemplate", ary));
+		server.Prep_add(rsp_bldr.Bld_mw_cbk(lib, "expandTemplate", ary));
 		this.Init_lua_rcvd_rv();
 		return this;
 	}
@@ -96,8 +96,8 @@ public class Scrib_invoke_func_fxt {
 	}
 	private void Test_lib_proc_internal(Scrib_lib lib, String func_name, Keyval[] args) {
 		Init_lua_module();
-		this.Init_cbk(Scrib_core.Key_mw_interface, lib, func_name);
-		this.Init_lua_rcvd(func_name, args);
+		this.Init_cbk(lib, func_name);
+		this.Init_lua_rcvd(lib, func_name, args);
 		this.Init_lua_rcvd_rv();
 	}
 	public void Test_log_rcvd(int i, String expd) {
@@ -199,8 +199,8 @@ public class Scrib_invoke_func_fxt {
 }
 class Scrib_lua_rsp_bldr {
 	Bry_bfr bfr = Bry_bfr_.Reset(255);
-	public String Bld_mw_cbk(String cbk_name, Keyval... ary) {
-		cbk_name = "mw_interface-" + cbk_name;
+	public String Bld_mw_cbk(Scrib_lib lib, String cbk_name, Keyval... ary) {
+		cbk_name = Scrib_proc.Build_key(lib, cbk_name);
 		bfr.Add_str_a7("a:4:{s:2:\"id\";");
 		Bld_str(bfr, cbk_name);
 		bfr.Add_str_a7("s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:3;s:4:\"args\";");

@@ -114,7 +114,7 @@ public class Scrib_core_fxt {
 	}
 	public Scrib_core_fxt Test_GetExpandedArgument(Keyval[] args, String arg, String expd) {// NOTE: test is rigidly defined; (a) always same 3 arguments in frame; (b) expd={"val_1", "val_2", "val_3", ""}
 		this.Expd_server_rcvd_add("0000003D00000079{[\"op\"]=\"call\",[\"id\"]=8,[\"nargs\"]=1,[\"args\"]={[1]=chunks[9]}}")
-			.Init_server_prep_add("a:4:{s:2:\"id\";s:32:\"mw_interface-getExpandedArgument\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:2;s:4:\"args\";a:2:{i:1;s:7:\"current\";i:2;s:" + String_.Len(arg) + ":\"" + arg + "\";}}");
+			.Init_server_prep_add("a:4:{s:2:\"id\";s:32:\"mwInit|getExpandedArgument\";s:2:\"op\";s:4:\"call\";s:5:\"nargs\";i:2;s:4:\"args\";a:2:{i:1;s:7:\"current\";i:2;s:" + String_.Len(arg) + ":\"" + arg + "\";}}");
 		if (String_.Eq(expd, ""))
 			this.Expd_server_rcvd_add("0000002D00000059{[\"op\"]=\"return\",[\"nvalues\"]=0,[\"values\"]={}}");
 		else

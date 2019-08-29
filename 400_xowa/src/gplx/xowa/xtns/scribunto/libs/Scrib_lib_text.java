@@ -26,6 +26,7 @@ public class Scrib_lib_text implements Scrib_lib {
 		this.core = core;
 		this.trie = nowiki_util.Make_trie(gplx.xowa.parsers.xndes.Xop_xnde_tag_.Tag__nowiki.Name_bry());
 	}
+	public String Key() {return "mw.text";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_lib Init() {procs.Init_by_lib(this, Proc_names); return this;}
 	public Scrib_lib Clone_lib(Scrib_core core) {return new Scrib_lib_text(core);}

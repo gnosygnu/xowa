@@ -41,7 +41,7 @@ public class WikibaseClientDefault {
 		rv.addSetting("entityAccessLimit", 250);
 		rv.addSetting("allowDataAccessInUserLanguage", false);
 		rv.addSetting("sharedCacheDuration", 60 * 60);
-		rv.addSetting("fineGrainedLuaTracking", true);
+		rv.addSetting("fineGrainedLuaTracking", true); // REF.MW: https://gerrit.wikimedia.org/r/#/c/operations/mediawiki-config/+/412664/3/wmf-config/InitialiseSettings.php
 		return rv;
 	}
 }
