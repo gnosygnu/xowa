@@ -46,7 +46,7 @@ public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	}
 	@Override public void Exec_pg_itm_hook(int ns_ord, Xow_ns ns, Xowd_page_itm page, byte[] page_src) {
 		Json_doc jdoc = json_parser.Parse(page_src); if (jdoc == null) return; // not a json document
-		Wdata_doc wdoc = new Wdata_doc(page.Ttl_page_db(), wdata_mgr, jdoc);
+		Wdata_doc wdoc = new Wdata_doc(wdata_mgr, jdoc, page.Ttl_page_db());
 		tbl_mgr.Exec_insert_by_wdoc(lang_key, wdata_mgr, page.Id(), wdoc);
 	}
 	@Override public void Exec_commit_hook() {
@@ -414,9 +414,13 @@ class Xob_wdata_db_visitor implements Wbase_claim_visitor {
 	public void Visit_quantity(Wbase_claim_quantity itm)				{rv = itm.Amount();}
 	public void Visit_time(Wbase_claim_time itm)						{rv = itm.Time();}
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm)	{rv = Bry_.Add_w_dlm(Byte_ascii.Comma, itm.Lat(), itm.Lng());}
-	public void Visit_system(Wbase_claim_value itm)					{rv = Bry_.Empty;}
+	public void Visit_system(Wbase_claim_value itm)                     {rv = Bry_.Empty;}
 	public void Visit_entity(Wbase_claim_entity itm) {
 		Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(itm.Page_ttl_db());
-		rv = entity_doc == null ? Bry_.Empty : entity_doc.Label_list__get(lang_key);
+		if (entity_doc != null) {
+			rv = entity_doc.Get_label_bry_or_null(lang_key);
+		}
+		if (rv == null) // can be null if entity_doc is null or if label is null;
+			rv = Bry_.Empty;
 	}
 }

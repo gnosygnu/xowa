@@ -71,21 +71,21 @@ public class Basic__tst {
 			rv[i] = Keyval_.int_(i, toIds[i]);
 		return rv;
 	}
-	@Test  public void GetLabel__cur() {
+	@Test  public void GetLabel__cur() {// do not get fallback
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hans", "s").Add_label("zh-hant", "t").Xto_wdoc());
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), "s");		// do not get fallback
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), String_.Concat_lines_nl_skip_last("1=s", "2=zh-hans"));
 	}
-	@Test  public void GetLabel__fallback_1() {
+	@Test  public void GetLabel__fallback_1() { // get 1st fallback
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hant", "t").Add_label("zh-hk", "h").Xto_wdoc());
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), "t");		// get 1st fallback
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), String_.Concat_lines_nl_skip_last("1=t", "2=zh-hant"));
 	}
-	@Test  public void GetLabel__fallback_2() {
+	@Test  public void GetLabel__fallback_2() {// get 2nd fallback
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("zh-hk", "hk").Xto_wdoc());
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), "hk");	// get 2nd fallback
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), String_.Concat_lines_nl_skip_last("1=hk", "2=zh-hk"));
 	}
-	@Test  public void GetLabel__fallback_en() {
-		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("en", "en").Xto_wdoc());
-		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), "en");	// get en
+	@Test  public void GetLabel__fallback_en() {// get en
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_label("en", "lbl_en").Xto_wdoc());
+		fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_wikibase.Invk_getLabel, Object_.Ary("q2"), String_.Concat_lines_nl_skip_last("1=lbl_en", "2=en"));
 	}
 	@Test  public void GetDescr() {
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_description("zh-hans", "s").Add_description("zh-hant", "t").Xto_wdoc());

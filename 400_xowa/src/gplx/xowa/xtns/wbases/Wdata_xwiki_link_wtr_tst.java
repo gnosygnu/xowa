@@ -58,7 +58,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "  }"
 		, "}"
 		));
-		Wdata_doc wdata_doc = new Wdata_doc(Bry_.new_a7("Q1"), fxt.App().Wiki_mgr().Wdata_mgr(), jdoc);
+		Wdata_doc wdata_doc = new Wdata_doc(fxt.App().Wiki_mgr().Wdata_mgr(), jdoc, Bry_.new_a7("Q1"));
 		fxt.Init__docs__add(wdata_doc);
 		fxt.Test_xwiki_links("Q1_en", "q1_de", "q1_fr");
 	}
@@ -74,7 +74,7 @@ public class Wdata_xwiki_link_wtr_tst {
 		, "  }"
 		, "}"
 		));
-		Wdata_doc wdata_doc = new Wdata_doc(Bry_.new_a7("Q1"), fxt.App().Wiki_mgr().Wdata_mgr(), jdoc);
+		Wdata_doc wdata_doc = new Wdata_doc(fxt.App().Wiki_mgr().Wdata_mgr(), jdoc, Bry_.new_a7("Q1"));
 		fxt.Init__docs__add(wdata_doc);
 		fxt.Test_xwiki_links("Q1_en", "q1_de", "q1_fr");
 	}

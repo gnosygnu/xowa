@@ -152,7 +152,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 						if		(Bry_.Eq(lang_key, Wikidata_get_label_xowa_title))
 							val_bry = ttl_bry;
 						else {
-							val_bry = page.Label_list__get(lang_key);
+							val_bry = page.Get_label_bry_or_null(lang_key);
 						}
 						if (val_bry == null) continue;
 						rv[i - 1] = String_.new_u8(val_bry);

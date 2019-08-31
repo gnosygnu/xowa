@@ -17,7 +17,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.xtns.scribunto.procs.*;
-import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto.*;
+import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto.*;
 public class Scrib_lib_wikibase implements Scrib_lib {
 	private final    Scrib_core core;
 	private Wbase_doc_mgr entity_mgr;
@@ -268,24 +268,31 @@ public function formatValues( $snaksSerialization ) {
 	}
 	public boolean GetLabel(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetLabel", true); 
-		if (wdoc == null) 
-			return rslt.Init_ary_empty();
-		else
-			return rslt.Init_obj(wdoc.Label_list__get_or_fallback(core.Lang()));
+		if (wdoc == null) return rslt.Init_ary_empty();
+
+		Wdata_langtext_itm itm = wdoc.Get_label_itm_or_null(core.Lang());
+		return itm == null ? rslt.Init_ary_empty() : rslt.Init_many_objs(itm.Text(), itm.Lang());
 	}
 	public boolean GetLabelByLanguage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] prefixedEntityId = args.Pull_bry(0);
 		byte[] languageCode = args.Pull_bry(1);
-		return rslt.Init_obj(wdata_mgr.Lua_bindings().getLabelByLanguage(prefixedEntityId, languageCode));
+		byte[] label = wdata_mgr.Lua_bindings().getLabelByLanguage_or_null(prefixedEntityId, languageCode);
+		return label == null ? rslt.Init_str_empty() : rslt.Init_obj(label);
 	}
 	public boolean GetSiteLinkPageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
-		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetSiteLinkPageName", true); if (wdoc == null) return rslt.Init_ary_empty();	// NOTE: prop should be of form "P123"; do not add "P"; PAGE:no.w:Anne_Enger; DATE:2015-10-27
+		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetSiteLinkPageName", true);  // NOTE: prop should be of form "P123"; do not add "P"; PAGE:no.w:Anne_Enger; DATE:2015-10-27
+		if (wdoc == null) return rslt.Init_ary_empty();
+
 		Xow_domain_itm domain_itm = core.Wiki().Domain_itm();
-		return rslt.Init_obj(wdoc.Slink_list__get_or_fallback(domain_itm.Abrv_wm()));
+		Wdata_sitelink_itm itm = wdoc.Get_slink_itm_or_null(domain_itm.Abrv_wm());
+		return itm == null ? rslt.Init_ary_empty() : rslt.Init_many_objs(itm.Name(), itm.Lang());
 	}
-	public boolean GetDescription(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
-		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetDescription", true); if (wdoc == null) return rslt.Init_ary_empty();
-		return rslt.Init_obj(wdoc.Descr_list__get_or_fallback(core.Lang()));
+	public boolean GetDescription(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetDescription", true);
+		if (wdoc == null) return rslt.Init_ary_empty();
+
+		Wdata_langtext_itm itm = wdoc.Get_descr_itm_or_null(core.Lang());
+		return itm == null ? rslt.Init_ary_empty() : rslt.Init_many_objs(itm.Text(), itm.Lang());
 	}
 	public boolean GetUserLang(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		return rslt.Init_obj(core.App().Usere().Lang().Key_bry());

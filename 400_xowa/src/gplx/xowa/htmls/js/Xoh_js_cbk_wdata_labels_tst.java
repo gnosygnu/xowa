@@ -45,7 +45,7 @@ public class Xoh_js_cbk_wdata_labels_tst {
 	private Wdata_doc doc_(String qid, String src) {
 		Json_doc jdoc = fxt.Make_json(src);
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
-		Wdata_doc rv = new Wdata_doc(Bry_.new_a7(qid), app.Wiki_mgr().Wdata_mgr(), jdoc);
+		Wdata_doc rv = new Wdata_doc(app.Wiki_mgr().Wdata_mgr(), jdoc, Bry_.new_a7(qid));
 		return rv;
 	}
 	private void Tst_wikidata_label_get(String[] args, String[] expd) {

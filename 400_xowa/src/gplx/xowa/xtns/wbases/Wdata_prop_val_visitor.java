@@ -58,11 +58,11 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 			return;
 
 		// get label
-		byte[] label = entity_doc.Label_list__get(lang_key);
+		byte[] label = entity_doc.Get_label_bry_or_null(lang_key);
 
 		// NOTE: some properties may not exist in language of wiki; default to english; DATE:2013-12-19
 		if (label == null && !Bry_.Eq(lang_key, Xol_lang_itm_.Key_en))
-			label = entity_doc.Label_list__get(Xol_lang_itm_.Key_en);
+			label = entity_doc.Get_label_bry_or_null(Xol_lang_itm_.Key_en);
 
 		// if label is still not found, don't add null reference
 		if (label != null) {
@@ -110,7 +110,11 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 			bfr.Add_byte_space();
 			byte[] xid = Bry_.Mid(unit, Wikidata_url.length);
 			Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(xid);
-			bfr.Add(entity_doc.Label_list__get_or_fallback(lang));
+			if (entity_doc != null) {
+				Wdata_langtext_itm label = entity_doc.Get_label_itm_or_null(lang);
+				if (label != null)
+					bfr.Add(label.Text());
+			}
 		}
 	}
 	private static Decimal_adp Decimal__parse_or(byte[] bry, Decimal_adp or) {	// handle missing lbound / ubound; DATE:2016-12-03

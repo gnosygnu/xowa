@@ -126,7 +126,7 @@ public class Wbase_doc_mgr {
 				}
 
 				// is json doc, and not a redirect; return
-				rv = new Wdata_doc(cur_ttl_bry, wbase_mgr, jdoc);
+				rv = new Wdata_doc(wbase_mgr, jdoc, cur_ttl_bry);
 				break;
 			}
 			if (rv == null && load_count >= 2)

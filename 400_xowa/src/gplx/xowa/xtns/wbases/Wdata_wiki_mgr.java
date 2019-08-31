@@ -88,7 +88,8 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	public byte[] Get_claim_or(Xow_domain_itm domain, Xoa_ttl page_ttl, int pid, byte[] or) {
 		byte[] qid = this.Qid_mgr.Get_qid_or_null(domain.Abrv_wm(), page_ttl); if (qid == null) return or;
 		Wdata_doc wdoc = Doc_mgr.Get_by_loose_id_or_null(qid); if (wdoc == null) return or;
-		Wbase_claim_grp claim_grp = wdoc.Claim_list_get(pid); if (claim_grp == null || claim_grp.Len() == 0) return or;
+		Wbase_claim_grp claim_grp = wdoc.Get_claim_grp_or_null(pid);
+		if (claim_grp == null || claim_grp.Len() == 0) return or;
 		Wbase_claim_base claim_itm = claim_grp.Get_at(0);
 		Resolve_claim(tmp_bfr, domain, claim_itm);
 		return tmp_bfr.To_bry_and_clear();

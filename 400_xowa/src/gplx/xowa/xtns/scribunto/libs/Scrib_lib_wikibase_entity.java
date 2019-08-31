@@ -87,7 +87,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 		if (pid_int == Wbase_pid.Id_null) return rslt.Init_str_empty();
 
 		// get prop_grp
-		Wbase_claim_grp prop_grp = wdoc.Claim_list_get(pid_int);
+		Wbase_claim_grp prop_grp = wdoc.Get_claim_grp_or_null(pid_int);
 		if (prop_grp == null)
 			return rslt.Init_str_empty();
 

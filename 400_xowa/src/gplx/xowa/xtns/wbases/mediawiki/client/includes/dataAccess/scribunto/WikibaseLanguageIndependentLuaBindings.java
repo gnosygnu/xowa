@@ -22,8 +22,8 @@ public class WikibaseLanguageIndependentLuaBindings {
 	public WikibaseLanguageIndependentLuaBindings(Wbase_doc_mgr entity_mgr) {
 		this.termLookup = new EntityRetrievingTermLookup(entity_mgr);
 	}
-	public byte[] getLabelByLanguage(byte[] prefixedEntityId, byte[] languageCode) {
-		return termLookup.getLabel(prefixedEntityId, languageCode);
+	public byte[] getLabelByLanguage_or_null(byte[] prefixedEntityId, byte[] languageCode) {
+		return termLookup.getLabel_or_null(prefixedEntityId, languageCode);
 	}
 	public Object getSetting(byte[] key) {
 		return settings.getSetting(key);

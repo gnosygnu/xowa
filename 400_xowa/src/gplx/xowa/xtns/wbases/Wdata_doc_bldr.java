@@ -38,7 +38,7 @@ public class Wdata_doc_bldr {
 	}
 	public Wdata_doc_bldr Add_alias(String lang, String... ary){byte[] key = Bry_.new_u8(lang); alias_list.Add(key, new Wdata_alias_itm	  (key, Bry_.Ary(ary))); return this;}
 	public Wdata_doc Xto_wdoc() {
-		Wdata_doc rv = new Wdata_doc(qid, slink_list, label_list, descr_list, alias_list, claim_list);
+		Wdata_doc rv = new Wdata_doc(null, null, qid).Ctor_by_test(slink_list, label_list, descr_list, alias_list, claim_list);
 		this.Init();
 		return rv;
 	}

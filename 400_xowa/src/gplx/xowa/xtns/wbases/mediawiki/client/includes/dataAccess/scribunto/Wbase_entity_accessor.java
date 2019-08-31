@@ -52,7 +52,7 @@ public class Wbase_entity_accessor {
 		}
 
 		List_adp rv = List_adp_.New();
-		Wbase_claim_grp statements = entity.Claim_list_get(propertyId);
+		Wbase_claim_grp statements = entity.Get_claim_grp_or_null(propertyId);
 		if (statements == null)
 			return null;
 

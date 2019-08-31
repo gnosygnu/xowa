@@ -95,7 +95,8 @@ class Referenced_entity_lookup_wkr {
 		return entity_mgr.Get_by_loose_id_or_null(id);
 	}
 	private Wbase_claim_base[] getMainSnaks(Wdata_doc entity, int propertyId) {
-		Wbase_claim_grp claims = entity.Claim_list_get(propertyId);
+		Wbase_claim_grp claims = entity.Get_claim_grp_or_null(propertyId);
+		if (claims == null) return Wbase_claim_base.Ary_empty;
 		return claims.Get_best(tmp_snak_list);
 	}
 	private byte[] processSnak(Wbase_claim_base snak, Ordered_hash toVisit, Ordered_hash toIds) {

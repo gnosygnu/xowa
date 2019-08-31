@@ -41,4 +41,6 @@ public abstract class Wbase_claim_base implements CompareAble {
 		Wbase_claim_base comp = (Wbase_claim_base)obj;
 		return Int_.Compare(pid, comp.pid);
 	}
+
+	public static final    Wbase_claim_base[] Ary_empty = new Wbase_claim_base[0];
 }

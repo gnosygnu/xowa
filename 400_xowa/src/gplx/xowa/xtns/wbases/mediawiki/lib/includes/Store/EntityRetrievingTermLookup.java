@@ -21,8 +21,8 @@ public class EntityRetrievingTermLookup {
 		this.entity_mgr = entity_mgr;
 	}
 
-	public byte[] getLabel(byte[] entityId, byte[] languageCode) {
+	public byte[] getLabel_or_null(byte[] entityId, byte[] languageCode) {
 		Wdata_doc entity = entity_mgr.Get_by_xid_or_null(entityId);
-		return entity.Label_list__get(languageCode);
+		return entity.Get_label_bry_or_null(languageCode);
 	}
 }
