@@ -138,7 +138,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 	, Invk__addStatmentUsage       = "addStatementUsage"
 	, Invk__addLabelUsage          = "addLabelUsage"
 	, Invk__addDescriptionUsage    = "addDescriptionUsage"
-	, Invk__addSiteLinkUsage       = "addSiteLinkUsage"
+	, Invk__addSiteLinksUsage      = "addSiteLinksUsage"
 	, Invk__addOtherUsage          = "addOtherUsage"
 	, Invk__getSetting             = "getSetting"
 	, Invk__incrementStatsKey      = "incrementStatsKey"
@@ -151,7 +151,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 	, Invk__addStatmentUsage
 	, Invk__addLabelUsage
 	, Invk__addDescriptionUsage
-	, Invk__addSiteLinkUsage
+	, Invk__addSiteLinksUsage
 	, Invk__addOtherUsage
 	, Invk__getSetting
 	, Invk__incrementStatsKey
