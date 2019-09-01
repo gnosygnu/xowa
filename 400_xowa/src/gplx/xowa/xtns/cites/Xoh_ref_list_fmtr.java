@@ -21,11 +21,12 @@ class Xoh_ref_list_fmtr implements gplx.core.brys.Bfr_arg {
 	public void Init(Xowe_wiki wiki, Ref_html_wtr_cfg cfg, Ref_nde itm) {
 		this.wiki = wiki; this.cfg = cfg; this.itm = itm;
 	}
-	public Ref_nde IdentifyTxt() {
+	public Ref_nde Identify_main_ref() {
 		if (HasTxt(itm)) return itm;
 		int itm_related_len = itm.Related_len();
 		for (int i = 0; i < itm_related_len; i++) {
 			Ref_nde rel = itm.Related_get(i);
+			if (rel.Follow_y()) continue; // follow should not be the main item; will be picked up in separate loop later; ISSUE#:555; DATE:2019-09-01
 			if (HasTxt(rel)) return rel;
 		}
 		return itm; // no itm has text; TODO_OLD:WARN

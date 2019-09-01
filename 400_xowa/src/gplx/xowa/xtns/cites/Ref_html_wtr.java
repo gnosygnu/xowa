@@ -75,16 +75,20 @@ public class Ref_html_wtr {
 			Bry_bfr tmp = Bry_bfr_.New();
 			int list_len = List_len(head_itm);
 			grp_list_fmtr.Init(ctx.Wiki(), cfg, head_itm);
-			Ref_nde text_itm = grp_list_fmtr.IdentifyTxt();	// find the item that has the text (there should only be 0 or 1)
-			if (text_itm.Body() != null)
+			Ref_nde text_itm = grp_list_fmtr.Identify_main_ref();// find the item that has the text (there should only be 0 or 1)
+			if (text_itm.Body() != null) {
 				wtr.Write_tkn_to_html(tmp, ctx, opts, text_itm.Body().Root_src(), null, Xoh_html_wtr.Sub_idx_null, text_itm.Body());
+			}
 
 			// add follows
 			int related_len = head_itm.Related_len();
 			for (int k = 0; k < related_len; k++) {
 				Ref_nde related_itm = head_itm.Related_get(k);
-				if (related_itm.Follow_y()) {	// NOTE: both follow and related are in the related list; only add follow
-					tmp.Add_byte_space();	// always add space; REF.MW:Cite_body.php;$this->mRefs[$group][$follow]['text'] = $this->mRefs[$group][$follow]['text'] . ' ' . $str;
+				if (related_itm.Follow_y()) { // NOTE: both follow and related are in the related list; only add follow
+					// add a space if...
+					if (tmp.Len_gt_0() // tmp has text; (ignores 0th)
+						&& related_itm.Body() != null && related_itm.Body().Subs_len() > 0) // this item has text (ignore blank items)
+						tmp.Add_byte_space();// add space; REF.MW:Cite_body.php;$this->mRefs[$group][$follow]['text'] = $this->mRefs[$group][$follow]['text'] . ' ' . $str;
 					wtr.Write_tkn_to_html(tmp, ctx, opts, related_itm.Body().Root_src(), null, Xoh_html_wtr.Sub_idx_null, related_itm.Body());
 				}
 			}

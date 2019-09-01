@@ -181,7 +181,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Follow() {
+	@Test  public void Follow__main_and_follow_have_text() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref name='ref_a'>x</ref>"
 			, "<ref>y</ref>"
@@ -193,6 +193,32 @@ public class References_nde_basic_tst {
 			, "<ol class=\"references\">"
 			, "<li id=\"cite_note-ref_a-0\"><span class=\"mw-cite-backlink\">^ <sup><a href=\"#cite_ref-ref_a_0-0\">a</a></sup></span> <span class=\"reference-text\">x z</span></li>"
 			, "<li id=\"cite_note-1\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-1\">^</a></span> <span class=\"reference-text\">y</span></li>"
+			, "</ol>"
+			, ""
+			));
+	}
+	@Test  public void Follow__follow_only_has_text() {// ISSUE#:555; DATE:2019-09-01
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+			( "<ref name='ref1'/>"
+			, "<ref follow='ref1'>abc</ref>"
+			, "<references/>"
+			), String_.Concat_lines_nl_skip_last
+			( "<sup id=\"cite_ref-ref1_0-0\" class=\"reference\"><a href=\"#cite_note-ref1-0\">[1]</a></sup>"
+			, "<ol class=\"references\">"
+			, "<li id=\"cite_note-ref1-0\"><span class=\"mw-cite-backlink\">^ <sup><a href=\"#cite_ref-ref1_0-0\">a</a></sup></span> <span class=\"reference-text\">abc</span></li>"
+			, "</ol>"
+			, ""
+			));
+	}
+	@Test  public void Follow__main_only_has_text() {
+		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
+			( "<ref name='ref1'>abc</ref>"
+			, "<ref follow='ref1'></ref>"
+			, "<references/>"
+			), String_.Concat_lines_nl_skip_last
+			( "<sup id=\"cite_ref-ref1_0-0\" class=\"reference\"><a href=\"#cite_note-ref1-0\">[1]</a></sup>"
+			, "<ol class=\"references\">"
+			, "<li id=\"cite_note-ref1-0\"><span class=\"mw-cite-backlink\">^ <sup><a href=\"#cite_ref-ref1_0-0\">a</a></sup></span> <span class=\"reference-text\">abc</span></li>"
 			, "</ol>"
 			, ""
 			));

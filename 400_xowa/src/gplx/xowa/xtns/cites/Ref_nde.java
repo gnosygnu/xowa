@@ -40,17 +40,21 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		}
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		if (ctx.Tid_is_popup()) return;
+		if (ctx.Tid_is_popup()) return; // popups don't show <ref>
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair)
 			body = wiki.Parser_mgr().Main().Parse_text_to_wdom_old_ctx(ctx, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()), false);
-		byte[] references_group = ctx.References_group();	// set by <references>
+
+		// override "group" if inside "<references>"
+		byte[] references_group = ctx.References_group();
 		if (references_group != null) {
-			group = references_group;		// override <ref group> with <references group>; note that MW throws an error if nested <ref> has different group than outer <references>; Cite error: <ref> tag in <references> has conflicting group attribute "a".
+			group = references_group; // override <ref group> with <references group>; note that MW throws an error if nested <ref> has different group than outer <references>; Cite error: <ref> tag in <references> has conflicting group attribute "a".
 			head = true;
-			nested = true;					// refs nested in references don't show <a> entry in <references>
+			nested = true; // refs nested in references don't show <a> entry in <references>
 		}
-		if (!ctx.Ref_ignore())				// sub_ctx may be marked to ignore <ref>; EX: <pages>,{{#lst}}; DATE:2014-04-24
+
+		// register <ref>
+		if (!ctx.Ref_ignore()) // sub_ctx may be marked to ignore <ref>; EX: <pages>,{{#lst}}; DATE:2014-04-24
 			ctx.Page().Ref_mgr().Grps_add(group, name, follow, this);
 		this.xnde = xnde;
 	}

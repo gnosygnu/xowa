@@ -28,14 +28,20 @@ public class References_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		}
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		if (ctx.Tid_is_popup()) return;
+		if (ctx.Tid_is_popup()) return; // popups don't show <references>
+
+		// handle <references> inside <references>
 		Ref_itm_mgr ref_mgr = ctx.Page().Ref_mgr();
 		if (ref_mgr.References__recursing()) {
 			xnde.Tag_visible_(false);	// NOTE:do not print empty <references/> tag; especially necessary for recursing references; PAGE:cs.s:Page:Hejčl,_Jan_-_Pentateuch.pdf/128 DATE:2016-09-01
 			return;	// skip nested <references> else refs will be lost; EX:"<references><references/></references>"; PAGE:en.w:Hwair; DATE:2014-06-27
 		}
+
+		// complete parsing
 		ctx.Para().Process_block__bgn_n__end_y(Xop_xnde_tag_.Tag__div);	// xnde generates <block_node>; <references> -> <ol>; close any blocks; PAGE:fr.w:Heidi_(roman); DATE:2014-02-17
 		Xox_xnde_.Xatr__set(wiki, this, xatrs_hash, src, xnde);
+
+		// <references></references>: kick off another parsing with the inner text
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {	// "<references>", "</references>"; parse anything in between but only to pick up <ref> tags; discard everything else; DATE:2014-06-27
 			int itm_bgn = xnde.Tag_open_end(), itm_end = xnde.Tag_close_bgn();
 			Xop_ctx references_ctx = Xop_ctx.New__sub__reuse_lst(wiki, ctx, ctx.Lst_page_regy()).References_group_(group);	// changed from following: "Xop_ctx references_ctx = Xop_ctx.New__sub(wiki).References_group_(group);"; DATE:2015-05-16;
