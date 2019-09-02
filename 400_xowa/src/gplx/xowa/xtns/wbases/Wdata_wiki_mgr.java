@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.langs.jsons.*;
+import gplx.xowa.langs.msgs.*; import gplx.langs.jsons.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.parsers.*;
@@ -101,7 +101,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 			claim_itm.Welcome(prop_val_visitor);
 		}
 	}
-	public void Resolve_to_bfr(Bry_bfr bfr, Wbase_claim_grp prop_grp, byte[] lang_key, boolean mode_is_statements) {
+	public void Resolve_to_bfr(Bry_bfr bfr, Xowe_wiki wiki, Wbase_claim_grp prop_grp, byte[] lang_key, boolean mode_is_statements) {
 		synchronized (thread_lock) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
 			if (hwtr_mgr == null) Hwtr_mgr_assert();
 			int len = prop_grp.Len();
@@ -113,10 +113,14 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 					selected = prop;
 					break;
 				}
-			}
-			switch (selected.Snak_tid()) {
-				case Wbase_claim_value_type_.Tid__novalue	: bfr.Add(Wbase_claim_value_type_.Itm__novalue.Key_bry()); break;
-				case Wbase_claim_value_type_.Tid__somevalue	: bfr.Add(Wbase_claim_value_type_.Itm__somevalue.Key_bry()); break;
+			}			
+			switch (selected.Snak_tid()) { // SEE:NOTE:novalue/somevalue
+				case Wbase_claim_value_type_.Tid__novalue:
+					bfr.Add(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_wikibase_snakview_variations_novalue_label));
+					break;
+				case Wbase_claim_value_type_.Tid__somevalue:
+					bfr.Add(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_wikibase_snakview_variations_somevalue_label));
+					break;
 				default: {
 					prop_val_visitor.Init(bfr, hwtr_mgr.Msgs(), lang_key, mode_is_statements);
 					selected.Welcome(prop_val_visitor);
@@ -204,3 +208,10 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		ctx.Wiki().Appe().Usr_dlg().Log_many("", "", "Unknown id in wikidata; type=~{0} id=~{1} page=~{2}", type, id, ctx.Page().Url_bry_safe());
 	}
 }
+/*
+NOTE:novalue/somevalue
+Rough approximation of wikibase logic which is more involved with its different SnakFormatters
+* https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/lib/includes/Formatters/OutputFormatSnakFormatterFactory.php: formatter factory; note lines for somevalue / novalue
+* https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/lib/includes/Formatters/MessageSnakFormatter.php: formatter definition
+* https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/repo/i18n/en.json: message definitions
+*/

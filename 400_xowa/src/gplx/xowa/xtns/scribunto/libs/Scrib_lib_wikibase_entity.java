@@ -93,7 +93,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 
 		// print it
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		wdata_mgr.Resolve_to_bfr(bfr, prop_grp, lang, Bool_.N);
+		wdata_mgr.Resolve_to_bfr(bfr, core.Wiki(), prop_grp, lang, Bool_.N);
 		return rslt.Init_obj(bfr.To_bry_and_rls());
 	}
 	public boolean AddStatementUsage(Scrib_proc_args args, Scrib_proc_rslt rslt) {

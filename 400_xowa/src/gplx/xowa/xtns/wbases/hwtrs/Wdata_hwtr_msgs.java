@@ -205,7 +205,7 @@ public class Wdata_hwtr_msgs {
 		, "comma-separator", "word-separator", "xowa-wikidata-time-spr"
 		, "xowa-wikidata-plus", "xowa-wikidata-minus", "xowa-wikidata-plusminus"
 		, "parentheses"
-		, "xowa-wikidata-novalue", "xowa-wikidata-somevalue"
+		, "wikibase-snakview-variations-novalue-label", "wikibase-snakview-variations-somevalue-label"
 		, "jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"
 		, "xowa-wikidata-year", "xowa-wikidata-decade", "xowa-wikidata-century", "xowa-wikidata-millenium", "xowa-wikidata-years1e4", "xowa-wikidata-years1e5", "xowa-wikidata-years1e6", "xowa-wikidata-years1e7", "xowa-wikidata-years1e8", "xowa-wikidata-years1e9"
 		, "ago", "xowa-wikidata-bc", "xowa-wikidata-inTime"

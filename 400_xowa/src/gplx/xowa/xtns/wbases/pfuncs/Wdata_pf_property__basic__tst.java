@@ -143,7 +143,7 @@ public class Wdata_pf_property__basic__tst {
 			.Add_sitelink("enwiki", "Test_page")
 			);
 
-		fxt.Test_parse("{{#property:p1}}", "novalue");
+		fxt.Test_parse("{{#property:p1}}", "no value");
 	}
 	@Test   public void Somevalue() {
 		fxt.Init__docs__add(fxt.Wdoc("Q1")				
@@ -151,7 +151,7 @@ public class Wdata_pf_property__basic__tst {
 			.Add_sitelink("enwiki", "Test_page")
 			);
 
-		fxt.Test_parse("{{#property:p1}}", "somevalue");
+		fxt.Test_parse("{{#property:p1}}", "unknown value");
 	}
 	@Test   public void Multiple() {
 		fxt.Init__docs__add(fxt.Wdoc("Q1")				

@@ -52,7 +52,7 @@ public class Wbase_statement_mgr_ {
 		// get val based on pid and doc; EX: {{#property:p123|of=Earth}} -> doc=Q2; pid=123 -> "value of p123 in Q2"
 		Wbase_claim_grp claim_grp = doc.Get_claim_grp_or_null(pid_int);
 		if (claim_grp == null) return;// NOTE: some props may not exist; EX: "Some_known_page" has a qid of 123 but does not have pid 345 required by {{#property:P345|q=123}}
-		wdata_mgr.Resolve_to_bfr(bfr, claim_grp, wiki.Wdata_wiki_lang(), mode_is_statements); // NOTE: was ctx.Page().Lang().Key_bry(), but fails in simplewiki; DATE:2013-12-02
+		wdata_mgr.Resolve_to_bfr(bfr, ctx.Wiki(), claim_grp, wiki.Wdata_wiki_lang(), mode_is_statements); // NOTE: was ctx.Page().Lang().Key_bry(), but fails in simplewiki; DATE:2013-12-02
 		if (property_wkr != null) property_wkr.Eval_end(ctx.Page(), pid_ttl, log_time_bgn);
 	}
 	public static int Parse_pid(Gfo_number_parser num_parser, byte[] bry) {
