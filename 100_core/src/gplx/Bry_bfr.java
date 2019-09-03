@@ -588,7 +588,7 @@ public class Bry_bfr {
 	public byte[] To_bry() {return bfr_len == 0 ? Bry_.Empty : Bry_.Mid(bfr, 0, bfr_len);}
 	public byte[] To_bry_and_clear_and_trim() {return To_bry_and_clear_and_trim(true, true, Bry_.Trim_ary_ws);}
 	public byte[] To_bry_and_clear_and_trim(boolean trim_bgn, boolean trim_end, byte[] trim_bry) {
-		byte[] rv = Bry_.Trim(bfr, 0, bfr_len, trim_bgn, trim_end, trim_bry);
+		byte[] rv = Bry_.Trim(bfr, 0, bfr_len, trim_bgn, trim_end, trim_bry, false); // NOTE: must not reuse bry; ISSUE#:562; DATE:2019-09-02
 		this.Clear();
 		return rv;
 	}

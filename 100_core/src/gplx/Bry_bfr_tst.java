@@ -219,6 +219,20 @@ public class Bry_bfr_tst {
 		fxt.Test__to_bry_ary_and_clear("a\nb\nc"	, "a", "b", "c");		// lines=n
 		fxt.Test__to_bry_ary_and_clear("a\n"		, "a");					// nl at end
 	}
+	@Test   public void To_bry_ary_and_clear_and_trim__memory_reference_bug() {// PURPOSE:test that bry isn't reused; ISSUE#:562; DATE:2019-09-02
+		String str_a = "aaaaaaaaaaaaaaaa" // NOTE: length is 16 b/c bry_bfr init's to 16 len
+			,  str_b = "bbbbbbbbbbbbbbbb";
+		Bry_bfr bfr = Bry_bfr_.New();
+		bfr.Add_str_a7(str_a);
+		byte[] bry_a = bfr.To_bry_and_clear_and_trim();
+		Gftest.Eq__str(str_a, String_.new_u8(bry_a));
+
+		bfr.Add_str_a7(str_b);
+		byte[] bry_b = bfr.To_bry_and_clear_and_trim();
+		Gftest.Eq__str(str_b, String_.new_u8(bry_b));
+
+		Gftest.Eq__str(str_a, String_.new_u8(bry_a)); // fais if bry_b
+	}
 }
 class ByteAryBfr_fxt {
 	private final    Bry_bfr bfr = Bry_bfr_.Reset(16);

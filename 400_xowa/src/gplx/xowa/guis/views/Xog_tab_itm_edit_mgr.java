@@ -154,7 +154,7 @@ public class Xog_tab_itm_edit_mgr {
 		byte[] rv = tab.Html_itm().Get_elem_value_for_edit_box_as_bry();
 		if (orig != null)	// orig == null for Preview
 			rv = tab.Wiki().Parser_mgr().Hdr__section_editable__mgr().Merge_section(tab.Page().Url(), rv, orig);
-		rv = Bry_.Trim(rv, 0, rv.length, false, true, Bry_.Trim_ary_ws);	// MW: trim all trailing ws; REF:EditPage.php!safeUnicodeInput; DATE:2014-04-25
+		rv = Bry_.Trim(rv, 0, rv.length, false, true, Bry_.Trim_ary_ws, true);	// MW: trim all trailing ws; REF:EditPage.php!safeUnicodeInput; DATE:2014-04-25
 		return rv;
 	}
 }

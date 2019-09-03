@@ -90,7 +90,7 @@ class Xoh_toc_wkr__txt {
 			
 			// add any text before tag
 			if (pos < txt_end) {
-				byte[] anch_bry = amp_mgr.Decode_as_bry(Bry_.Trim(src, pos, txt_end, Bool_.Y, Bool_.Y, Trim__anch));	// trim \n else ".0a"; PAGE:en.w:List_of_U-boats_never_deployed DATE:2016-08-13
+				byte[] anch_bry = amp_mgr.Decode_as_bry(Bry_.Trim(src, pos, txt_end, Bool_.Y, Bool_.Y, Trim__anch, Bool_.Y));	// trim \n else ".0a"; PAGE:en.w:List_of_U-boats_never_deployed DATE:2016-08-13
 				anch_encoder.Encode(anch_bfr, anch_bry);
 				text_bfr.Add_mid(src, pos, txt_end);
 			}

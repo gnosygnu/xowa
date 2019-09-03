@@ -21,7 +21,7 @@ public class Wbase_repo_linker {
 	private byte[] articlePath;
 //		private byte[] scriptPath;
 	public Wbase_repo_linker(byte[] baseUrl, byte[] articlePath, byte[] scriptPath) {
-		this.baseUrl = Bry_.Trim(baseUrl, 0, baseUrl.length, false, true, Bry_.mask_(256, Byte_ascii.Slash_bry)); // getBaseUrl
+		this.baseUrl = Bry_.Trim(baseUrl, 0, baseUrl.length, false, true, Bry_.mask_(256, Byte_ascii.Slash_bry), true); // getBaseUrl
 		this.articlePath = articlePath;
 //			this.scriptPath = scriptPath;
 	}

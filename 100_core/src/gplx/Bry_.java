@@ -438,9 +438,9 @@ public class Bry_ {
 		return rv;
 	}
 	public static final    byte[] Trim_ary_ws = mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr, Byte_ascii.Space);
-	public static byte[] Trim(byte[] src) {return Trim(src, 0, src.length, true, true, Trim_ary_ws);}
-	public static byte[] Trim(byte[] src, int bgn, int end) {return Trim(src, bgn, end, true, true, Trim_ary_ws);}
-	public static byte[] Trim(byte[] src, int bgn, int end, boolean trim_bgn, boolean trim_end, byte[] trim_ary) {
+	public static byte[] Trim(byte[] src) {return Trim(src, 0, src.length, true, true, Trim_ary_ws, true);}
+	public static byte[] Trim(byte[] src, int bgn, int end) {return Trim(src, bgn, end, true, true, Trim_ary_ws, true);}
+	public static byte[] Trim(byte[] src, int bgn, int end, boolean trim_bgn, boolean trim_end, byte[] trim_ary, boolean reuse_bry_if_noop) {
 		int txt_bgn = bgn, txt_end = end;
 		boolean all_ws = true;
 		if (trim_bgn) {
@@ -466,7 +466,8 @@ public class Bry_ {
 			if (all_ws) return Bry_.Empty;
 		}
 
-		if (	bgn == 0       && end == src.length	 // Trim is called on entire bry, not subset
+		if (	reuse_bry_if_noop
+			&&  bgn == 0       && end == src.length	 // Trim is called on entire bry, not subset
 			&&	bgn == txt_bgn && end == txt_end     // Trim hasn't trimmed anything
 			) {	
 			return src;
