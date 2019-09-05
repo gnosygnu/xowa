@@ -58,7 +58,10 @@ public class Gfo_cache_mgr {
 		int list_size = 0;
 		for (int i = 0; i < len; ++i) {
 			Gfo_cache_data itm = (Gfo_cache_data)hash.Get_at(i);
-			int new_size = list_size + itm.Size();
+			int itm_size = itm.Size();
+			if (itm_size == 0)
+				itm_size = 1; // if itm_size remains 0, it will never be added to tmp_delete cache; ISSUE#:561; DATE:2019-09-04
+			int new_size = list_size + itm_size;
 			if (new_size > reduce_by)
 				tmp_delete.Add(itm);
 			else
