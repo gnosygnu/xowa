@@ -447,7 +447,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		}
 		if (txt_bb_len == 0) return false;
 		if (wik_bgn == -1 && page_bgn == txt_bb_len) return false;	// if no wiki, but page_bgn is at end, then ttl is ns only; EX: "Help:"; NOTE: "fr:", "fr:Help" is allowed 
-		full_txt = bfr.To_bry_and_clear();
+		full_txt = bfr.To_bry_and_clear_and_trim(); // trim trailing spaces; EX:A&#32; PAGE:it.w:Italo_Toni ISSUE#:567; DATE:2019-09-06
+		if (full_txt.length == 0) return false; // handle &#32;
 		if (	ns.Case_match() == Xow_ns_case_.Tid__1st
 			&&	wik_bgn == -1 ) {	// do not check case if xwiki; EX: "fr:" would have a wik_bgn of 0 (and a wik_end of 3); "A" (and any non-xwiki ttl) would have a wik_bgn == -1
 			byte char_1st = full_txt[page_bgn];
