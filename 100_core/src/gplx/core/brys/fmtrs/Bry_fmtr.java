@@ -124,6 +124,7 @@ public class Bry_fmtr {
 			byte[] trg_bry = new byte[fmt_len]; int trg_pos = 0;
 			boolean lkp_is_active = false, lkp_is_numeric = true;
 			byte nxt_byte, tmp_byte;
+			boolean dirty_disable = true;
 			List_adp list = List_adp_.New();
 			fmt_args_exist = false;
 			while (true) {
@@ -180,6 +181,7 @@ public class Bry_fmtr {
 						if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}	// something pending; add it to list
 						int eval_lhs_bgn = fmt_pos + 2;
 						if (eval_lhs_bgn < fmt_len && fmt[eval_lhs_bgn] == char_eval_bgn) {	// eval found
+							dirty_disable = false; // eval allows args to retrigger compiles; this is probably not used, but just in case, do not disable dirty; TEST: Tfds.Eq("012~{<>3<>}4", fmtr.Bld_str_many("1"));
 							fmt_pos = Compile_eval_cmd(fmt, fmt_len, eval_lhs_bgn, list);
 							continue;
 						}
@@ -210,6 +212,8 @@ public class Bry_fmtr {
 			if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}
 			itms = (Bry_fmtr_itm[])list.To_ary(Bry_fmtr_itm.class);
 			itms_len = itms.length;
+			if (dirty_disable)
+				dirty = false; // ISSUE#:575; DATE:2019-09-16
 			return this;
 		}
 	}
