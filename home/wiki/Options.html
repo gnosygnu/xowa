@@ -158,15 +158,15 @@
     <div id='xowa.wiki.hdumps.html_mode__name' class='xocfg_itm_name'>HTML tab mode</div>
 
     <!-- BTN:undo -->
-    <div id='xowa.wiki.hdumps.html_mode__undo' data-xocfg-type='list:xowa.wiki.hdumps.html_mode' class='xocfg_itm_delete'>
+    <div id='xowa.wiki.hdumps.html_mode__undo' data-xocfg-type='list:xowa.wiki.hdumps.html_mode' class='xocfg_itm_delete xocfg_itm_hide'>
       <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.html_mode")' title="reset to &quot;shown&quot;">&nbsp;</span>
     </div>
     
     <!-- TEXT:val -->
     <div class='xocfg_itm_data'>
 <select id="xowa.wiki.hdumps.html_mode" data-xocfg-key="xowa.wiki.hdumps.html_mode" data-xocfg-type="list:xowa.wiki.hdumps.html_mode" accesskey="d" class="xocfg_data__list" size="4">
-<option value="shown">Shown</option>
-<option value="swt_browser" selected="selected">SWT Browser</option>
+<option value="shown" selected="selected">Shown</option>
+<option value="swt_browser">SWT Browser</option>
 <option value="hdump_save">Saved for HTML DB</option>
 <option value="hdump_load">Loaded by HTML DB</option>
 </select>
@@ -192,6 +192,107 @@
   <li> <b>Loaded for HTML DB</b>:  HTML as saved in the HTML database but post-processed with image urls. Note that this is for developer purposes only.
   </li>
 </ul>
+</div>
+  </div>
+  
+
+  <h2>Indicators</h2>
+
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.hdumps.indicators.enabled")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.wiki.hdumps.indicators.enabled__name' class='xocfg_itm_name'>Enabled</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.wiki.hdumps.indicators.enabled__undo' data-xocfg-type='bool' class='xocfg_itm_delete'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.indicators.enabled")' title="reset to &quot;n&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.wiki.hdumps.indicators.enabled" data-xocfg-key="xowa.wiki.hdumps.indicators.enabled" data-xocfg-type="bool" accesskey="d" class="xocfg_data__bool" type="checkbox" checked="checked"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.wiki.hdumps.indicators.enabled__key_box' value='xowa.wiki.hdumps.indicators.enabled'></input>
+    <input type='hidden' id='xowa.wiki.hdumps.indicators.enabled__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.wiki.hdumps.indicators.enabled_help_div' class='xohelp_div'>
+    <div id='xowa.wiki.hdumps.indicators.enabled_help_msg' class='xohelp_msg'><p>Choose one of the following.
+</p>
+
+<ul>
+  <li> <b>checked</b>           : Shows indicator in top-right corner if page is coming from wikitext or HTML databases
+  </li>
+  <li> <b>unchecked</b>         : Shows nothing
+  </li>
+</ul>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.hdumps.indicators.html_if_wtxt")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.wiki.hdumps.indicators.html_if_wtxt__name' class='xocfg_itm_name'>HTML when Wikitext DB</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.wiki.hdumps.indicators.html_if_wtxt__undo' data-xocfg-type='string' class='xocfg_itm_delete'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.indicators.html_if_wtxt")' title="reset to &quot;<ul><li>WIKITEXT</li></ul>&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.wiki.hdumps.indicators.html_if_wtxt" data-xocfg-key="xowa.wiki.hdumps.indicators.html_if_wtxt" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value=""></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.wiki.hdumps.indicators.html_if_wtxt__key_box' value='xowa.wiki.hdumps.indicators.html_if_wtxt'></input>
+    <input type='hidden' id='xowa.wiki.hdumps.indicators.html_if_wtxt__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.wiki.hdumps.indicators.html_if_wtxt_help_div' class='xohelp_div'>
+    <div id='xowa.wiki.hdumps.indicators.html_if_wtxt_help_msg' class='xohelp_msg'><p>HTML to show for Wikitext databases
+</p>
+</div>
+  </div>
+  
+  <div class="xocfg_row flex_div">
+    <!-- BTN:help_item -->
+    <div class='xocfg_itm_help'>
+      <span class='xoimg_btn_x16 xoimg_help_tip' href='javascript:void(0)' onclick='return xo.help.toggle("xowa.wiki.hdumps.indicators.html_if_html")' title='view more info'>&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:key -->
+    <div id='xowa.wiki.hdumps.indicators.html_if_html__name' class='xocfg_itm_name'>HTML when HTML DB</div>
+
+    <!-- BTN:undo -->
+    <div id='xowa.wiki.hdumps.indicators.html_if_html__undo' data-xocfg-type='string' class='xocfg_itm_delete'>
+      <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.wiki.hdumps.indicators.html_if_html")' title="reset to &quot;<ul><li>HTML</li></ul>&quot;">&nbsp;</span>
+    </div>
+    
+    <!-- TEXT:val -->
+    <div class='xocfg_itm_data'>
+<input id="xowa.wiki.hdumps.indicators.html_if_html" data-xocfg-key="xowa.wiki.hdumps.indicators.html_if_html" data-xocfg-type="string" accesskey="d" class="xocfg_data__str" type="text" value="<ul><li style=&quot;color:red&quot;>HTML</li></ul>"></input></div>
+    
+    <!-- HIDDEN:key,ctx -->
+    <input type='hidden' id='xowa.wiki.hdumps.indicators.html_if_html__key_box' value='xowa.wiki.hdumps.indicators.html_if_html'></input>
+    <input type='hidden' id='xowa.wiki.hdumps.indicators.html_if_html__ctx_box' value='app'></input>
+  </div>
+  
+  <!-- DIV:help -->
+  <div id='xowa.wiki.hdumps.indicators.html_if_html_help_div' class='xohelp_div'>
+    <div id='xowa.wiki.hdumps.indicators.html_if_html_help_msg' class='xohelp_msg'><p>HTML to show for HTML databases
+</p>
 </div>
   </div>
   
