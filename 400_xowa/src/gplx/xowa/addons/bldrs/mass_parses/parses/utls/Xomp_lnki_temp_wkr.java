@@ -30,17 +30,20 @@ public class Xomp_lnki_temp_wkr implements Xop_file_logger {
 	public void Bgn() {
 		tbl.Insert_stmt_make();
 	}
-	public void Log_file(Xop_ctx ctx, Xop_lnki_tkn lnki, byte caller_tid) {
-		if (lnki.Ttl().ForceLiteralLink()) return; // ignore literal links which create a link to file, but do not show the image; EX: [[:File:A.png|thumb|120px]] creates a link to File:A.png, regardless of other display-oriented args
+	public void Log_file(byte caller_tid, Xop_ctx ctx, Xop_lnki_tkn lnki) {
+		Log_file(caller_tid, ctx, lnki.Ttl(), lnki.Ns_id(), lnki.Lnki_type(), lnki.W(), lnki.H(), lnki.Upright(), lnki.Time(), lnki.Page());
+	}
+	public void Log_file(byte caller_tid, Xop_ctx ctx, Xoa_ttl lnki_ttl, int ns_id, byte lnki_type, int lnki_w, int lnki_h, double lnki_upright, double lnki_time, int lnki_page) {
+		if (lnki_ttl.ForceLiteralLink()) return; // ignore literal links which create a link to file, but do not show the image; EX: [[:File:A.png|thumb|120px]] creates a link to File:A.png, regardless of other display-oriented args
 
 		// get lnki_data
-		byte[] ttl = lnki.Ttl().Page_db();
+		byte[] ttl = lnki_ttl.Page_db();
 		Xof_ext ext = Xof_ext_.new_by_ttl_(ttl);
 		byte[] ttl_commons = Xomp_lnki_temp_wkr.To_commons_ttl(ns_file_is_case_match_all, commons_wiki, ttl);
-		if (lnki.Ns_id() == Xow_ns_.Tid__media) caller_tid = Xop_file_logger_.Tid__media;
+		if (ns_id == Xow_ns_.Tid__media) caller_tid = Xop_file_logger_.Tid__media;
 
 		// do insert
-		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Db().Page().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), caller_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki.Time(), lnki.Page());
+		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Db().Page().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki_type, caller_tid, lnki_w, lnki_h, lnki_upright, lnki_time, lnki_page);
 	}
 	public void End() {}
 	public static byte[] To_commons_ttl(boolean ns_file_is_case_match_all, Xowe_wiki commons_wiki, byte[] ttl_bry) { // handle case-sensitive wikis (en.d) vs case-insensitive commons

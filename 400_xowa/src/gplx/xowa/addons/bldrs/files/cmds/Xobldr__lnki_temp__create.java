@@ -121,7 +121,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 				&&	page.Redirect_trail().Itms__len() == 0)	// don't generate html for redirected pages
 				wiki.Html_mgr().Page_wtr_mgr().Gen(ctx.Page().Root_(root), Xopg_view_mode_.Tid__read);
 			if (gen_hdump)
-				hdump_bldr.Insert(ctx, page.Root_(root));
+				hdump_bldr.Insert(ctx, page.Root_(root), gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump); // was hard-coded as Hdump in Xob_hdump_bldr.Insert DATE:2019-09-07
 			root.Clear();
 		}
 	}
@@ -140,19 +140,20 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		wiki.Appe().Log_mgr().Txn_end();
 		tbl.Insert_end();
 	}
-	public void Log_file(Xop_ctx ctx, Xop_lnki_tkn lnki, byte caller_tid) {
-		if (lnki.Ttl().ForceLiteralLink()) return; // ignore literal links which creat a link to file, but do not show the image; EX: [[:File:A.png|thumb|120px]] creates a link to File:A.png, regardless of other display-oriented args
-		byte[] ttl = lnki.Ttl().Page_db();
+	public void Log_file(byte caller_tid, Xop_ctx ctx, Xop_lnki_tkn lnki) {
+		Log_file(caller_tid, ctx, lnki.Ttl(), lnki.Ns_id(), lnki.Lnki_type(), lnki.W(), lnki.H(), lnki.Upright(), lnki.Time(), lnki.Page());
+	}
+	public void Log_file(byte caller_tid, Xop_ctx ctx, Xoa_ttl lnki_ttl, int ns_id, byte lnki_type, int lnki_w, int lnki_h, double lnki_upright, double lnki_time, int lnki_page) {
+		if (lnki_ttl.ForceLiteralLink()) return; // ignore literal links which creat a link to file, but do not show the image; EX: [[:File:A.png|thumb|120px]] creates a link to File:A.png, regardless of other display-oriented args
+		byte[] ttl = lnki_ttl.Page_db();
 		Xof_ext ext = Xof_ext_.new_by_ttl_(ttl);
-		double lnki_time = lnki.Time();
-		int lnki_page = lnki.Page();
 		byte[] ttl_commons = Xomp_lnki_temp_wkr.To_commons_ttl(ns_file_is_case_match_all, commons_wiki, ttl);
 		if (	Xof_lnki_page.Null_n(lnki_page) 				// page set
 			&&	Xof_lnki_time.Null_n(lnki_time))				// thumbtime set
 				usr_dlg.Warn_many("", "", "page and thumbtime both set; this may be an issue with fsdb: page=~{0} ttl=~{1}", ctx.Page().Ttl().Page_db_as_str(), String_.new_u8(ttl));
-		if (lnki.Ns_id() == Xow_ns_.Tid__media)
+		if (ns_id == Xow_ns_.Tid__media)
 			caller_tid = Xop_file_logger_.Tid__media;
-		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Db().Page().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki.Lnki_type(), caller_tid, lnki.W(), lnki.H(), lnki.Upright(), lnki_time, lnki_page);
+		tbl.Insert_cmd_by_batch(ctx.Page().Bldr__ns_ord(), ctx.Page().Db().Page().Id(), ttl, ttl_commons, Byte_.By_int(ext.Id()), lnki_type, caller_tid, lnki_w, lnki_h, lnki_upright, lnki_time, lnki_page);
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wdata_enabled_))				wdata_enabled = m.ReadYn("v");

@@ -196,7 +196,7 @@ public class Pgbnr_func extends Pf_func_base {
 	private static Xof_file_itm File__make_tkn(Xop_ctx ctx, byte tid, Xoa_ttl file_ttl, int file_w, int file_h) {
 		Xop_lnki_tkn lnki = ctx.Tkn_mkr().Lnki(file_w, file_h).Ttl_(file_ttl);
 		ctx.Page().Lnki_list().Add(lnki);
-		ctx.Lnki().File_logger().Log_file(ctx, lnki, tid);	// NOTE: do not set file_wkr ref early (as member var); parse_all sets late
+		ctx.Lnki().File_logger().Log_file(tid, ctx, lnki);	// NOTE: do not set file_wkr ref early (as member var); parse_all sets late
 		Xof_file_itm file_itm = ctx.Wiki().Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, ctx.Page(), lnki);
 		return file_itm;
 	}
