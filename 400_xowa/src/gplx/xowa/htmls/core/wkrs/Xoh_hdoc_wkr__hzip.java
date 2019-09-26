@@ -19,6 +19,7 @@ import gplx.xowa.wikis.ttls.*;
 public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 	private Xoh_hzip_bfr bfr; private Xoh_hdoc_ctx hctx; private byte[] src;
 	private Xoh_page hpg;
+	public Bry_bfr Bfr() {return bfr;}
 	public void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		this.bfr = (Xoh_hzip_bfr)bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;
 	}

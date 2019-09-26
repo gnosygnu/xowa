@@ -18,6 +18,7 @@ import gplx.langs.htmls.docs.*;
 import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.htmls.core.hzips.*;
 public interface Xoh_hdoc_wkr {
+	Bry_bfr Bfr();
 	void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end);
 	void On_page_end();
 	void On_txt		(int rng_bgn, int rng_end);

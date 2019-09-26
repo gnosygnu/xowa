@@ -24,6 +24,7 @@ public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
 	private final    Xoh_page_bfr page_bfr = new Xoh_page_bfr();
 	private boolean toc_enabled;
 	private int html_uid;
+	public Bry_bfr Bfr() {return bfr;}
 	public void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		this.bfr = bfr; this.hpg = hpg; this.hctx = hctx; this.src = src;
 		this.html_uid = 0;

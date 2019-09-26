@@ -22,6 +22,7 @@ import gplx.xowa.htmls.core.wkrs.addons.forms.*;
 class Xoh_hdoc_wkr__http_server implements Xoh_hdoc_wkr {
 	private Bry_bfr bfr; private Xoh_page hpg; private byte[] src;
 	private byte[] root_http_dir; // EX: file:///C:/xowa/
+	public Bry_bfr Bfr() {return bfr;}
 	public void On_page_bgn(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		this.bfr = bfr; this.hpg = hpg; this.src = src;
 		if (root_http_dir == null) {
