@@ -27,6 +27,7 @@ public class Xof_xfer_queue {
 		xfer_list.Clear();
 		html_uid.Val_neg1_();
 	}
+	public Xof_file_itm Get_at(int i) {return (Xof_file_itm)xfer_list.Get_at(i);} // TEST
 	public void Add(Xof_file_itm xfer_itm) {xfer_list.Add(xfer_itm);}
 	public void Exec(Xowe_wiki wiki, Xoae_page page) {
 		if (wiki.File_mgr().Version() == Xow_file_mgr.Version_2)
