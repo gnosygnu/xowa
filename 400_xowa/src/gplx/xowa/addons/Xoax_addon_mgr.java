@@ -60,6 +60,9 @@ public class Xoax_addon_mgr {
 		// xtns
 		, new gplx.xowa.xtns.math						.Xomath_addon()
 		, new gplx.xowa.xtns.template_styles            .Template_styles_addon()
+		, new gplx.xowa.xtns.hieros                     .Hiero_addon()
+		, new gplx.xowa.xtns.imaps                      .Imap_addon()
+		, new gplx.xowa.xtns.graphs                     .Graph_addon()
 
 		// specials
 		, new gplx.xowa.addons.wikis.registrys			.Wiki_registry_addon()

@@ -31,6 +31,9 @@ public class Xoh_hdoc_parser {
 			wkr_ary[i] = new Xoh_escape_data(hdoc_wkr, Xoh_pool_mgr__hzip.Hooks_ary[i - 1]);
 		this.hdoc_parser = new Gfh_doc_parser(new Xoh_txt_parser(hdoc_wkr), wkr_ary);
 	}
+	public void Init_by_wiki(Xow_wiki wiki) {
+		tag_parser.Init_by_wiki(wiki);
+	}
 	public void Parse(Xoh_hzip_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src) {
 		int src_len = src.length;
 		tag_parser.Init(hctx, src, 0, src_len);

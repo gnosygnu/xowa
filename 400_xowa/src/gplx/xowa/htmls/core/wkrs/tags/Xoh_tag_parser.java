@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.hdumps.*;
 import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*;
 import gplx.xowa.htmls.core.wkrs.addons.forms.*;
@@ -29,8 +29,14 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 	private final    Xoh_thm_data		wkr__thm = new Xoh_thm_data();
 	private final    Xoh_gly_grp_data	wkr__gly = new Xoh_gly_grp_data();
 	private final    Xoh_form_data      wkr__form = new Xoh_form_data();
+	private Ordered_hash hdump_wkrs;
 	public byte[] Hook() {return Byte_ascii.Angle_bgn_bry;}
-	public Xoh_tag_parser(Xoh_hdoc_wkr hdoc_wkr) {this.hdoc_wkr = hdoc_wkr;}
+	public Xoh_tag_parser(Xoh_hdoc_wkr hdoc_wkr) {
+		this.hdoc_wkr = hdoc_wkr;
+	}
+	public void Init_by_wiki(Xow_wiki wiki) {
+		hdump_wkrs = wiki.Html__hdump_mgr().Wkrs();
+	}
 	public void Init(Xoh_hdoc_ctx hctx, byte[] src, int src_bgn, int src_end) {
 		this.hctx = hctx;
 		tag_rdr.Init(hctx.Page__url(), src, src_bgn, src_end);
@@ -43,9 +49,24 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 		if (cur.Tag_is_tail())
 			hdoc_wkr.On_txt(pos, cur_end);
 		else {
+			int rv = -1;
+			Gfh_atr hdump_atr = cur.Atrs__get_by_or_empty(Bry__data_xowa_hdump);
+			if (hdump_atr != Gfh_atr.Noop) {
+				Xoh_hdump_wkr hdump_wkr = (Xoh_hdump_wkr)hdump_wkrs.Get_by(hdump_atr.Val());
+				if (hdump_wkr == null) {
+					tag_rdr.Err_wkr().Warn("unable to find hdump_wkr: " + String_.new_a7(hdump_atr.Val()));
+					rv = cur_end;
+					hdoc_wkr.On_txt(pos, rv);
+				}
+				else {
+					rv = hdump_wkr.Process(hdoc_wkr.Bfr(), hctx, hdoc_wkr, tag_rdr, src, cur);
+				}
+				return rv;
+			}
+
+
 			Gfh_tag nxt = null;
 			int cur_name_id = cur.Name_id();
-			int rv = -1;
 			switch (cur_name_id) {
 				case Gfh_tag_.Id__h2: case Gfh_tag_.Id__h3: case Gfh_tag_.Id__h4: case Gfh_tag_.Id__h5: case Gfh_tag_.Id__h6:
 					nxt = tag_rdr.Tag__peek_fwd_head();
@@ -112,4 +133,5 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 		data.Pool__rls();
 		return rv;
 	}
+	public static byte[] Bry__data_xowa_hdump = Bry_.new_a7("data-xowa-hdump");
 }

@@ -22,6 +22,10 @@ public class Xoh_make_mgr {
 	Xoh_make_mgr(Xoh_hdoc_wkr hdoc_wkr) {
 		this.make_parser = new Xoh_hdoc_parser(hdoc_wkr);
 	}
+	public Xoh_hdoc_ctx Hctx() {return hctx;}
+	public void Init_by_wiki(Xow_wiki wiki) {
+		make_parser.Init_by_wiki(wiki);
+	}
 	public byte[] Parse(byte[] src, Xow_wiki wiki, Xoh_page hpg) {
 		hctx.Init_by_page(wiki, hpg);
 		hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n

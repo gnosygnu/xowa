@@ -20,12 +20,14 @@ import gplx.xowa.wikis.data.*;
 public class Xow_hdump_mgr {
 	private final    Xoh_page tmp_hpg = new Xoh_page(); private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private final    Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
+	private final    Ordered_hash wkrs = Ordered_hash_.New_bry();
 	public Xow_hdump_mgr(Xow_wiki wiki) {
 		this.save_mgr = new Xow_hdump_mgr__save(wiki, hzip_mgr, zip_mgr, tmp_hpg);
 		this.load_mgr = new Xow_hdump_mgr__load(wiki, hzip_mgr, zip_mgr, tmp_hpg, tmp_bfr);
 	}
 	public Xow_hdump_mgr__save Save_mgr() {return save_mgr;} private Xow_hdump_mgr__save save_mgr;
 	public Xow_hdump_mgr__load Load_mgr() {return load_mgr;} private Xow_hdump_mgr__load load_mgr;
+	public Ordered_hash Wkrs() {return wkrs;}
 	public Xoh_hzip_mgr Hzip_mgr() {return hzip_mgr;} private final    Xoh_hzip_mgr hzip_mgr = new Xoh_hzip_mgr();
 	public void Init_by_db(Xow_wiki wiki) {
 		byte dflt_zip_tid = gplx.core.ios.streams.Io_stream_tid_.Tid__raw;
@@ -41,7 +43,7 @@ public class Xow_hdump_mgr {
 		load_mgr.Init_by_wiki(wiki);
 	}
 	public void Init_by_db(byte dflt_zip_tid, boolean dflt_hzip_enable, boolean mode_is_b256) {
-		int dflt_hzip_tid = dflt_hzip_enable ? Xoh_hzip_dict_.Hzip__v1 : Xoh_hzip_dict_.Hzip__none;
+		int dflt_hzip_tid = dflt_hzip_enable ? Xoh_hzip_dict_.Hdb__hzip : Xoh_hzip_dict_.Hdb__htxt;
 		save_mgr.Init_by_db(dflt_zip_tid, dflt_hzip_tid, Bool_.N);
 	}
 }
