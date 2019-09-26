@@ -16,31 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.imaps.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Imap_html__hview__tst {
-	@Before public void init() {fxt.Reset();} private final    Imap_xnde_html_fxt fxt = new Imap_xnde_html_fxt();
+	private final    Imap_html__fxt fxt = new Imap_html__fxt();
 	@Test  public void Basic() {
-		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
-		( "<imagemap>"
-		, "File:A.png|thumb|123px|a1"
-		, "circle 0 0 5 [[B|b1]]"
-		, "rect 0 0 4 8 [[C|c1]]"
-		, "desc none"
-		, "</imagemap>"
-		), String_.Concat_lines_nl_skip_last
-		( "<div class=\"thumb tright\">"
-		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"	// NOTE:220px is default w for "non-found" thumb; DATE:2014-09-24
-		, "    <div id=\"imap_div_0\" class=\"noresize\">"
-		, "      <map name=\"imageMap_1_1\">"
-		, "        <area href=\"/wiki/B\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
-		, "        <area href=\"/wiki/C\" shape=\"rect\" coords=\"0,0,4,8\" alt=\"c1\" title=\"c1\"/>"
-		, "      </map>"
-		, "      <img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" usemap=\"#imageMap_1_1\"/>"
-		, "    </div>"
-		, "    <div class=\"thumbcaption\">"
-		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>a1"
-		, "    </div>"
-		, "  </div>"
-		, "</div>"
-		));
+		String wtxt = fxt.Basic__wtxt();
+		fxt.Test__hview(wtxt, fxt.Hdump_n_().Basic__html(Bool_.Y));
+		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Basic__html(Bool_.N), fxt.Basic__html(Bool_.Y), fxt.Basic__fsdb());
 	}
 	@Test  public void Caption_xml() {	// PURPOSE: xnde in caption was being escaped; PAGE:en.w:Council_of_Europe; DATE:2014-07-25
 		fxt.Test_html_full_frag("<imagemap>File:A.png|thumb|<b>c</b>\n</imagemap>", "<b>c</b>");
@@ -69,23 +49,9 @@ public class Imap_html__hview__tst {
 		));
 	}
 	@Test  public void Desc() {
-		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
-		( "<imagemap>"
-		, "File:A.png|123px|a1"
-		, "desc top-left"
-		, "</imagemap>"
-		), String_.Concat_lines_nl_skip_last
-		( "<div id=\"imap_div_0\" class=\"noresize\" style=\"height:0px; width: 123px;\">"
-		, "      <map name=\"imageMap_1_1\">"
-		, "      </map>"
-		, "      <img id=\"xoimg_0\" alt=\"a1\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/123px.png\" width=\"123\" height=\"0\" usemap=\"#imageMap_1_1\"/>"
-		, "      <div style=\"margin-left:0px; margin-top:1px; text-align:left;\">"
-		, "        <a href=\"/wiki/File:A.png\" title=\"click here\">"
-		, "          <img alt=\"click here\" src=\"file:///mem/xowa/bin/any/xowa/xtns/ImageMap/imgs/desc-20.png\" style=\"border: none;\" />"
-		, "        </a>"
-		, "      </div>"
-		, "    </div>"
-		));
+		String wtxt = fxt.Desc__wtxt();
+		fxt.Test__hview(wtxt, fxt.Hdump_n_().Desc__html(Bool_.Y));
+		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Desc__html(Bool_.N), fxt.Desc__html(Bool_.Y), fxt.Basic__fsdb());
 	}
 	@Test  public void Lnke() {	// PURPOSE: handle shapes with lnke; PAGE:en.w:Cholesterolt DATE:2014-07-25
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
@@ -183,24 +149,5 @@ public class Imap_html__hview__tst {
 		, "</ref>"
 		, "</imagemap>"
 		), "id=\"cite_ref-0\"");
-	}
-}
-class Imap_xnde_html_fxt {
-	public void Reset() {
-		fxt.Reset();
-		Xol_msg_itm msg = fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_a7("imagemap_description"));
-		msg.Atrs_set(Bry_.new_a7("click here"), false, false);
-	}
-	public Xop_fxt Fxt() {return fxt;} private final    Xop_fxt fxt = new Xop_fxt();
-	public void Test_html_full_str(String raw, String expd) {fxt.Test_html_full_str(raw, expd);}
-	public void Test_html_full_frag(String raw, String expd) {fxt.Test_html_full_frag(raw, expd);}
-	public String Frag_html_full() {
-		return String_.Concat_lines_nl_skip_last
-		( "<div id=\"imap_div_0\" class=\"noresize\">"
-		, "      <map name=\"imageMap_1_1\">"
-		, "      </map>"
-		, "      <img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"0\" height=\"0\" usemap=\"#imageMap_1_1\"/>"
-		, "    </div>"
-		);
 	}
 }

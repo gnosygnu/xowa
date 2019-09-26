@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.xowa.apps.fsys.*;
 import gplx.xowa.xtns.imaps.itms.*;
 public class Imap_xtn_mgr extends Xox_mgr_base implements Gfo_invk {
 	private boolean init;
@@ -28,7 +29,7 @@ public class Imap_xtn_mgr extends Xox_mgr_base implements Gfo_invk {
 		if (desc_trie == null) {
 			this.desc_trie = Imap_desc_tid.New_trie(wiki);
 			this.desc_msg = wiki.Msg_mgr().Val_by_key_obj("imagemap_description");
-			this.desc_icon_url = wiki.Appe().Fsys_mgr().Bin_xtns_dir().GenSubFil_nest("ImageMap", "imgs", "desc-20.png").To_http_file_bry();
+			this.desc_icon_url = Imap_xtn_mgr.Desc_icon_url(wiki.Appe().Fsys_mgr());
 		}
 		return desc_trie;
 	}	private Btrie_slim_mgr desc_trie;
@@ -40,10 +41,11 @@ public class Imap_xtn_mgr extends Xox_mgr_base implements Gfo_invk {
 	}
 	@Override public void		Xtn_init_by_wiki(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	@Override public Xox_mgr		Xtn_clone_new() {return new Imap_xtn_mgr();}
+	public static byte[] Desc_icon_url(Xoa_fsys_mgr fsys_mgr) {return fsys_mgr.Bin_xtns_dir().GenSubFil_nest("ImageMap", "imgs", "desc-20.png").To_http_file_bry();}
 
 	public static final    byte[]
-	  Bry__usemap__html		= Bry_.new_a7(" usemap=\"#imagemap_1_")
+	  Bry__usemap__html		= Bry_.new_a7(" usemap=\"#imageMap_1_")
 	, Bry__usemap__name		= Bry_.new_a7("usemap")
-	, Bry__usemap__prefix	= Bry_.new_a7("#imagemap_1_")
+	, Bry__usemap__prefix	= Bry_.new_a7("#imageMap_1_")
 	;
 }

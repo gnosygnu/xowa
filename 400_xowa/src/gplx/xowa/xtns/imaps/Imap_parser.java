@@ -196,7 +196,7 @@ public class Imap_parser {
 			imap_img = new Imap_part_img(lnki_tkn);
 			lnki_tkn.Lnki_file_wkr_(imap);
 			wiki_ctx.Page().Lnki_list().Add(lnki_tkn);
-			wiki_ctx.Lnki().File_logger().Log_file(wiki_ctx, lnki_tkn, Xop_file_logger_.Tid__imap);	// NOTE: do not do imap_ctx.Lnki(); imap_ctx is brand new
+			wiki_ctx.Lnki().File_logger().Log_file(Xop_file_logger_.Tid__imap, wiki_ctx, lnki_tkn);	// NOTE: do not do imap_ctx.Lnki(); imap_ctx is brand new
 		}
 		return img_end;
 	}

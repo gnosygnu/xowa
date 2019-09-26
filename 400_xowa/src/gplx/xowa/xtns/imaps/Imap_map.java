@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.files.*; import gplx.xowa.guis.cbks.js.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.xtns.imaps.itms.*; import gplx.xowa.xtns.imaps.htmls.*;
 public class Imap_map implements Xoh_file_fmtr, Js_img_wkr {
 	private byte img_cls_tid; private Imap_xtn_mgr xtn_mgr;
@@ -40,30 +40,24 @@ public class Imap_map implements Xoh_file_fmtr, Js_img_wkr {
 		this.a_href = a_href; this.img_alt = img_alt; this.img_cls_tid = img_cls; this.img_cls_other = img_cls_other;
 		xfer_itm.Html_img_wkr_(this);
 		xfer_itm.Html_elem_tid_(Xof_html_elem.Tid_imap);
+
 		if (hctx.Mode_is_hdump()) {
-			if (xfer_itm.Orig_exists()) {
-				img_w = xfer_itm.Html_w();
-				img_h = xfer_itm.Html_h();
-			}
-			else {
-				img_w = xfer_itm.Lnki_w();	// NOTE: hdump must dump lnki_w, not img_w; GUI will either (a) write -1 and update later thru js_wkr; (b) get correct img_w from cache; hdump can do neither (a) nor (b); DATE:2016-06-17
-				img_h = xfer_itm.Lnki_h();
-			}
+			img_src = Bry_.Empty; // ISSUE#:553 DATE:2019-09-07
 		}
-		Write_imap_div(tmp_bfr, hctx, uid, img_w, img_h, img_src, xfer_itm.Orig_exists(), xfer_itm.Orig_w(), xfer_itm.Orig_h(), a_xowa_title);
+		Write_imap_div(tmp_bfr, hctx, uid, img_w, img_h, img_src, xfer_itm.Orig_w(), xfer_itm.Orig_h(), a_xowa_title);
 	}
 	public void Js_wkr__update_hdoc(Xoa_page page, Xog_js_wkr js_wkr, int html_uid
 		, int html_w, int html_h, Io_url html_view_url
 		, int orig_w, int orig_h, Xof_ext orig_ext, Io_url html_orig_url, byte[] lnki_ttl) {
 		Bry_bfr tmp_bfr = Bry_bfr_.Get();
 		try {
-			Write_imap_div(tmp_bfr, Xoh_wtr_ctx.Basic, html_uid, html_w, html_h, html_view_url.To_http_file_bry(), orig_w > 0, orig_w, orig_h, lnki_ttl);
+			Write_imap_div(tmp_bfr, Xoh_wtr_ctx.Basic, html_uid, html_w, html_h, html_view_url.To_http_file_bry(), orig_w, orig_h, lnki_ttl);
 			js_wkr.Html_elem_replace_html("imap_div_" + Int_.To_str(html_uid), tmp_bfr.To_str_and_rls());
 		} finally {tmp_bfr.Mkr_rls();}
 	}
-	private void Write_imap_div(Bry_bfr bfr, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] img_src, boolean orig_exists, int orig_w, int orig_h, byte[] lnki_ttl) {
+	private void Write_imap_div(Bry_bfr bfr, Xoh_wtr_ctx hctx, int html_uid, int html_w, int html_h, byte[] img_src, int orig_w, int orig_h, byte[] lnki_ttl) {
 		Imap_map_arg map_arg = new Imap_map_arg(id, shapes, Calc_scale(orig_w, orig_h, html_w, html_h));
-		Imap_img_arg img_arg = new Imap_img_arg(hctx, xtn_mgr, this, html_uid, img_alt, img_src, html_w, html_h, Xoh_img_cls_.To_html(img_cls_tid, img_cls_other), a_href, lnki_ttl, orig_exists);
+		Imap_img_arg img_arg = new Imap_img_arg(hctx, xtn_mgr, this, html_uid, img_alt, img_src, html_w, html_h, Xoh_img_cls_.To_html(img_cls_tid, img_cls_other), a_href, lnki_ttl);
 		Imap_html_fmtrs.All.Bld_bfr_many(bfr, html_uid, Calc_desc_style(desc, html_w, html_h), map_arg, img_arg);
 	}
 	private static byte[] Calc_desc_style(Imap_part_desc desc, int html_w, int html_h) {

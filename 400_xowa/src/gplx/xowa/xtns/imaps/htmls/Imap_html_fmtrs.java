@@ -55,9 +55,9 @@ public class Imap_html_fmtrs {
 	( ""
 	, "      <div style=\"margin-left:~{margin_left}px; margin-top:~{margin_top}px; text-align:left;\">"
 	, "        <a href=\"~{img_href}\" title=\"~{msg_desc}\">"
-	, "          <img alt=\"~{msg_desc}\" src=\"~{icon_url}\" style=\"border: none;\" />"
+	, "          <img alt=\"~{msg_desc}\" src=\"~{icon_url}\" style=\"border: none;\" ~{data_xowa_hdump}/>"
 	, "        </a>"
 	, "      </div>"
-	), "margin_left", "margin_top", "img_href", "msg_desc", "icon_url"
+	), "margin_left", "margin_top", "img_href", "msg_desc", "icon_url", "data_xowa_hdump"
 	);
 }

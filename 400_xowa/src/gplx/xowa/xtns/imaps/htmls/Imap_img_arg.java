@@ -24,35 +24,28 @@ public class Imap_img_arg implements gplx.core.brys.Bfr_arg {
 	private final    int img_elem_id, img_w, img_h;
 	private final    byte[] img_alt, img_src, img_cls, img_href, lnki_ttl;
 	private final    Int_2_ref margin_calc = new Int_2_ref();
-	private final    boolean orig_exists;
 	public Imap_img_arg(Xoh_wtr_ctx hctx, Imap_xtn_mgr xtn_mgr, Imap_map map
-		, int img_elem_id, byte[] img_alt, byte[] img_src, int img_w, int img_h, byte[] img_cls, byte[] img_href, byte[] lnki_ttl, boolean orig_exists) {
+		, int img_elem_id, byte[] img_alt, byte[] img_src, int img_w, int img_h, byte[] img_cls, byte[] img_href, byte[] lnki_ttl) {
 		this.hctx = hctx; this.map = map; this.xtn_mgr = xtn_mgr;
 		this.img_elem_id = img_elem_id; this.img_w = img_w; this.img_h = img_h;
 		this.img_alt = img_alt; this.img_src = img_src; this.img_cls = img_cls; this.img_href = img_href;
 		this.lnki_ttl = lnki_ttl;
-		this.orig_exists = orig_exists;
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		Bry_fmtr fmtr = Imap_html_fmtrs.Img_anchor_none;
 		byte[] anchor_href = Bry_.Empty, anchor_text = Bry_.Empty;
 		Imap_part_dflt itm_dflt = map.Dflt();
-		if (hctx.Mode_is_hdump()) {				
+		byte[] img_href_tmp = img_href;
+		if (hctx.Mode_is_hdump()) {
 			Bry_bfr tmp_bfr = Bry_bfr_.Get();
 			try {
 				byte[] data_xowa_image = Xoh_file_fmtr__hdump.Bld_xowa_image_data(tmp_bfr, Xop_lnki_type.Id_none, img_w, img_h, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null, Xof_lnki_page.Null);
 				byte[] data_xowa_title = Gfh_atr_.Make(tmp_bfr, Xoh_img_xoimg_data.Bry__data_xowa_title, lnki_ttl);
 				byte[] usemap = tmp_bfr.Add(Imap_xtn_mgr.Bry__usemap__html).Add_int_variable(map.Id()).Add_byte_quote().To_bry_and_clear();
 				int img_w_tmp = img_w; int img_h_tmp = img_h;
-				byte[] img_src_tmp = img_src;
-				if (orig_exists) {
-					data_xowa_image = data_xowa_title = Bry_.Empty;
-				}
-				else {
-					img_w_tmp = img_h_tmp = 0;
-					img_src_tmp = Bry_.Empty;
-				}
-				Xoh_file_fmtr__hdump.Add_anch_n(tmp_bfr, data_xowa_title, data_xowa_image, img_src_tmp, img_w_tmp, img_h_tmp, Xoh_img_cls_.Tid__none, Bry_.Empty, Bry_.Empty, usemap);
+				byte[] img_src_tmp = Bry_.Empty; // ISSUE#:553; DATE:2019-09-25
+				img_w_tmp = img_h_tmp = 0;
+				Xoh_file_fmtr__hdump.Add_anch_n(tmp_bfr, data_xowa_title, data_xowa_image, img_src_tmp, img_w_tmp, img_h_tmp, Xoh_img_cls_.Tid__none, Bry_.Empty, img_alt, usemap);
 				bfr.Add_byte_nl().Add_byte_repeat(Byte_ascii.Space, 6);
 				bfr.Add_bfr_and_clear(tmp_bfr);
 			} finally {tmp_bfr.Mkr_rls();}
@@ -69,8 +62,14 @@ public class Imap_img_arg implements gplx.core.brys.Bfr_arg {
 		}
 		Imap_part_desc itm_desc = map.Desc();
 		if (itm_desc != null) {
+			byte[] desc_icon_url = xtn_mgr.Desc_icon_url();
+			byte[] data_xowa_hdump = Bry_.Empty;
+			if (hctx.Mode_is_hdump()) {// ISSUE#:553 DATE:2019-09-07
+				desc_icon_url = Bry_.Empty;
+				data_xowa_hdump = Imap_desc_hdump_wkr.HDUMP_ATR;
+			}
 			Imap_desc_tid.Calc_margins(margin_calc, itm_desc.Desc_tid(), img_w, img_h);
-			Imap_html_fmtrs.Desc_main.Bld_bfr_many(bfr, margin_calc.Val_0(), margin_calc.Val_1(), img_href, xtn_mgr.Desc_msg(), xtn_mgr.Desc_icon_url());
+			Imap_html_fmtrs.Desc_main.Bld_bfr_many(bfr, margin_calc.Val_0(), margin_calc.Val_1(), img_href_tmp, xtn_mgr.Desc_msg(), desc_icon_url, data_xowa_hdump);
 		}
 	}
 }

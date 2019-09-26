@@ -330,40 +330,6 @@ public class Xoh_file_wtr__image__basic__tst {
 
 		fxt.Wiki().File__fsdb_mode().Tid__v2__bld__y_();
 	}
-	@Test  public void Imap() {
-		Xof_file_fxt file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
-		file_fxt.Exec_orig_add(Bool_.Y, "A.png", Xof_ext_.Id_png, 320, 300, "");
-		fxt.Wiki().File__fsdb_mode().Tid__v2__mp__y_();
-		fxt.Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump);
-
-		fxt.Test_parse_page_wiki_str
-		( String_.Concat_lines_nl_skip_last
-		( "<imagemap>"
-		, "File:A.png|thumb|320px|a1"
-		, "circle 0 0 5 [[B|b1]]"
-		, "rect 0 0 4 8 [[C|c1]]"
-		, "desc none"
-		, "</imagemap>"
-		)
-		, String_.Concat_lines_nl_skip_last
-		( "<div class=\"thumb tright\">"
-		, "  <div class=\"thumbinner\" style=\"width:320px;\">"
-		, "    <div id=\"imap_div_0\" class=\"noresize\">"
-		, "      <map name=\"imageMap_1_1\">"
-		, "        <area href=\"/wiki/B\" shape=\"circle\" coords=\"0,0,5\" alt=\"b1\" title=\"b1\"/>"
-		, "        <area href=\"/wiki/C\" shape=\"rect\" coords=\"0,0,4,8\" alt=\"c1\" title=\"c1\"/>"
-		, "      </map>"
-		, "      <img src=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" width=\"320\" height=\"300\" alt=\"\" usemap=\"#imagemap_1_1\"/>"
-		, "    </div>"
-		, "    <div class=\"thumbcaption\">"
-		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>a1"
-		, "    </div>"
-		, "  </div>"
-		, "</div>"
-		));
-
-		fxt.Wiki().File__fsdb_mode().Tid__v2__bld__y_();
-	}
 	private void Tst_img_title(String raw, String expd_ttl) {
 		String actl = fxt.Exec_parse_page_wiki_as_str(raw);
 		String actl_ttl = null;
