@@ -54,7 +54,7 @@ public class Xoh_file_wtr__video__tst {
 		( "    <div class=\"xowa_media_div\">"
 		, "      <div>"
 		+	        "<a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\" xowa_title=\"A.ogv\">"
-		+	          "<img src=\"file:///mem/wiki/repo/trg/thumb/d/0/A.ogv/220px-4.jpg\" width=\"220\" height=\"300\" alt=\"\"/>"	// NOTE: src should probably be empty;
+		+	          "<img data-xowa-title=\"A.ogv\" data-xoimg=\"0|-1|-1|-1|4|-1\" alt=\"\" src=\"\" width=\"0\" height=\"0\"/>"	// NOTE: src should probably be empty;
 		+	        "</a>"
 		, "      </div>"
 		,       "<div><a href=\"\" xowa_title=\"A.ogv\" class=\"xowa_media_play\" style=\"width:218px;max-width:220px;\" alt=\"Play sound\"></a></div>"

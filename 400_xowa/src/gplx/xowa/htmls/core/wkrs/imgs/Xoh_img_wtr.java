@@ -142,7 +142,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (img_wo_anch)
-			img_wo_anch_fmtr.Bld_bfr_many(bfr, img_id, img_xowa_title, img_xowa_image, img_src, img_w, img_h, img_cls, img_alt, img_imap_usemap);
+			img_wo_anch_fmtr.Bld_bfr_many(bfr, img_id, img_xowa_title, img_xowa_image, img_alt, img_src, img_w, img_h, img_cls, img_imap_usemap);
 		else {
 			if (img_is_vid) {
 				bfr.Add(Vid__bry__bgn);
@@ -162,7 +162,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	( "<a~{anch_href}~{anch_rel}~{anch_cls}~{anch_title}~{anch_xowa_title}><img~{img_id}~{img_xowa_title}~{img_xowa_image}~{img_src}~{img_w}~{img_h}~{img_cls}~{img_alt}~{img_pgbnr_atrs}></a>"
 	, "anch_href", "anch_rel", "anch_cls", "anch_title", "anch_xowa_title", "img_id", "img_xowa_title", "img_xowa_image", "img_src", "img_w", "img_h", "img_cls", "img_alt", "img_pgbnr_atrs")
 	, img_wo_anch_fmtr = Bry_fmtr.new_
-	( "<img~{img_id}~{img_xowa_title}~{img_xowa_image}~{img_src}~{img_w}~{img_h}~{img_cls}~{img_alt}~{img_imap_usemap}>"
+	( "<img~{img_id}~{img_xowa_title}~{img_xowa_image}~{img_alt}~{img_src}~{img_w}~{img_h}~{img_cls}~{img_imap_usemap}/>"
 	, "img_id", "img_xowa_title", "img_xowa_image", "img_src", "img_w", "img_h", "img_cls", "img_alt", "img_imap_usemap")
 	;
 	private final    Bry_fmt

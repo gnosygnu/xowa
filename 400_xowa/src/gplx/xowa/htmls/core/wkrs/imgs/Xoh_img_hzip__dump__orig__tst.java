@@ -52,7 +52,7 @@ public class Xoh_img_hzip__dump__orig__tst {
 	@Test   public void Link__empty() {	// [[File:A.png|link=|abc]]; PAGE:en.w:Lackawanna_Cut-Off; DATE:2016-08-19
 		fxt.Test__bicode
 		( "~%}([^KA.png~#\"M!babc~A.png~"
-		, "<img src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/128px.png' width='128' height='64' alt='abc'>"
+		, "<img alt='abc' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/128px.png' width='128' height='64'/>"
 		);
 	}
 	@Test   public void Encode_2() {	// [[File:A*C.png|abc]]; PAGE:en.w:Fibonacci_number; DATE:2016-08-10

@@ -41,7 +41,7 @@ public class Xoh_img_bare_hzip__tst {
 	@Test   public void Imap_map() {
 		fxt.Test__bicode
 		( "~%}*BhtA.png~#$m#T\"A.png~"
-		, "<img src=\"file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/330px.png\" width=\"330\" height=\"220\" class=\"thumbimage\" alt=\"\" usemap=\"#imagemap_1_1\">"
+		, "<img class=\"thumbimage\" alt=\"\" src=\"file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/330px.png\" width=\"330\" height=\"220\" usemap=\"#imageMap_1_1\"/>"
 		);
 	}
 }

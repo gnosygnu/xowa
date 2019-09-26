@@ -75,13 +75,13 @@ public class Xoh_img_hzip__dump__link__tst {
 	@Test  public void Link__empty() {	// empty link should not create anchor; EX:[[File:A.png|link=|abc]]; PAGE:en.w:List_of_counties_in_New_York; DATE:2016-01-10
 		fxt.Test__bicode
 		( "~%|iVPA.png~#9#S\":abc~"
-		, "<img data-xowa-title='A.png' data-xoimg='0|220|110|-1|-1|-1' src='' width='0' height='0' alt='abc'>"
+		, "<img data-xowa-title='A.png' data-xoimg='0|220|110|-1|-1|-1' alt='abc' src='' width='0' height='0'/>"
 		);
 	}
 	@Test  public void Link__empty__tidy() {// <a><font><img> should not trigger empty link code; PAGE:en.w:Wikipedia:Reference_Desk_archive_unanswered_2005 ; DATE:2016-01-13
 		fxt.Test__bicode
 		( "<a href=\"/wiki/Image:A.png\" class=\"image\" title=\"\" xowa_title=\"A.png\"><font style=\"color:red\">~%|iVPA.png~#!abc~</font></a>"
-		, "<a href='/wiki/Image:A.png' class='image' title='' xowa_title='A.png'><font style='color:red'><img data-xowa-title='A.png' data-xoimg='0|-1|-1|-1|-1|-1' src='' width='0' height='0' alt='abc'></font></a>"
+		, "<a href='/wiki/Image:A.png' class='image' title='' xowa_title='A.png'><font style='color:red'><img data-xowa-title='A.png' data-xoimg='0|-1|-1|-1|-1|-1' alt='abc' src='' width='0' height='0'/></font></a>"
 		);
 	}
 	@Test   public void Link__ns_alias() {	// [[File:A.png|link=WP:MCB]]; PAGE:en.w:Wikipedia:WikiProject_Molecular_and_Cell_Biology; DATE:2016-01-11

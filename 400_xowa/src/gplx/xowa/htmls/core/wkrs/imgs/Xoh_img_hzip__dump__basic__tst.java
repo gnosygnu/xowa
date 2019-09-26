@@ -102,7 +102,7 @@ public class Xoh_img_hzip__dump__basic__tst {
 	@Test   public void Imap() {
 		fxt.Test__bicode
 		( "~%}#P`uA.png~#:#S#+\""
-		, "<img data-xowa-title='A.png' data-xoimg='1|220|180|-1|-1|-1' src='' width='0' height='0' alt='' usemap='#imagemap_1_1'>"
+		, "<img data-xowa-title='A.png' data-xoimg='1|220|180|-1|-1|-1' alt='' src='' width='0' height='0' usemap='#imageMap_1_1'/>"
 		);
 	}
 	@Test   public void Existing_src_causes_npe() { // ISSUE#:400; DATE:2019-03-26

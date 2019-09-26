@@ -21,7 +21,7 @@ public class Xoh_thm_html_tst {
 		fxt.Test__html("[[File:A.png|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"
 		, "  <div class='thumbinner' style='width:220px;'>"
-		, "    <a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg='4|-1|-1|-1|-1|-1' src='' width='0' height='0' alt=''/></a>"
+		, "    <a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg='4|-1|-1|-1|-1|-1' alt='' src='' width='0' height='0'/></a>"
 		, "    <div class='thumbcaption'>"
 		,       "<div class='magnify'><a href='/wiki/File:A.png' class='internal' title='Enlarge'></a></div>test_caption"
 		, "    </div>"
@@ -50,7 +50,7 @@ public class Xoh_thm_html_tst {
 		( "<div class=\"thumb tright\">"
 		, "  <div class=\"thumbinner\" style=\"width:220px;\">"
 		, "    <div class=\"xowa_media_div\">"
-		, "      <div><a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\" xowa_title=\"A.ogv\"><img data-xowa-title=\"A.ogv\" data-xoimg=\"4|-1|-1|-1|-1|-1\" src=\"\" width=\"0\" height=\"0\" alt=\"\"/></a>"
+		, "      <div><a href=\"/wiki/File:A.ogv\" class=\"image\" title=\"A.ogv\" xowa_title=\"A.ogv\"><img data-xowa-title=\"A.ogv\" data-xoimg=\"4|-1|-1|-1|-1|-1\" alt=\"\" src=\"\" width=\"0\" height=\"0\"/></a>"
 		, "      </div>"
 		,       "<div><a href=\"\" xowa_title=\"A.ogv\" class=\"xowa_media_play\" style=\"width:218px;max-width:220px;\" alt=\"Play sound\"></a></div>"
 		, "    </div>"
