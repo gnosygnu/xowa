@@ -17,6 +17,9 @@ package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.brys.*;
 public class Gftest {
 	private static final    Bry_bfr bfr = Bry_bfr_.New();
+	public static void Fail(String msg_fmt, Object... msg_args) {
+		throw Err_.new_wo_type(String_.Format(msg_fmt, msg_args));
+	}
 	public static void Eq__ary(Object[] expd, Object[] actl, String msg_fmt, Object... msg_args)      {Eq__array(Type_ids_.Id__obj, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(boolean[] expd, boolean[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__bool, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(int[] expd, int[] actl)                                                      {Eq__array(Type_ids_.Id__int, expd, actl, "");}
@@ -61,6 +64,7 @@ public class Gftest {
 		if (actl == null) actl = Str__null;
 		Eq__str(Object_.Xto_str_or(expd, Str__null), Object_.Xto_str_or(actl, null), Str__null);
 	}
+	public static void Eq__bry(byte[] expd, String actl) {Eq__str(String_.new_u8(expd), actl, "no_msg");}
 	public static void Eq__str(String expd, byte[] actl, String msg_fmt, Object... msg_args) {Eq__str(expd, String_.new_u8(actl), msg_fmt, msg_args);}
 	public static void Eq__str(String expd, byte[] actl) {Eq__str(expd, String_.new_u8(actl), null);}
 	public static void Eq__str(String expd, String actl) {Eq__str(expd, actl, null);}
