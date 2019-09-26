@@ -212,6 +212,12 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 			}
 		}
 	}
+	private boolean init_once_done = false;
+	public void Init_once() {
+		if (init_once_done) return;
+		init_once_done = true;
+		app.Addon_mgr().Load_by_wiki(this);
+	}
 	private void Init_wiki(Xoue_user user) {	// NOTE: (a) one-time initialization for all wikis; (b) not called by tests
 		if (init_in_process) {
 			app.Usr_dlg().Log_many("", "", "wiki.init: circular call canceled: ~{0}", domain_str);
@@ -254,7 +260,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		init_in_process = false;
 //			app.Api_root().Wikis().Get(domain_bry).Subscribe(this);
 		app.Site_cfg_mgr().Load(this);
-		app.Addon_mgr().Load_by_wiki(this);
+		Init_once();
 		ctg_pagebox_wtr.Init_by_wiki(this);
 		ctg_catpage_mgr.Init_by_wiki(this);
 

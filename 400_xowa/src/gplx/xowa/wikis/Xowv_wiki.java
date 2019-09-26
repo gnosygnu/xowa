@@ -116,9 +116,15 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		data_mgr__core_mgr.Db__core().Tbl__ns().Select_all(ns_mgr);
 		data_mgr__core_mgr.Db__core().Tbl__site_stats().Select(stats);
 		html__hdump_mgr.Init_by_db(this);
-		app.Addon_mgr().Load_by_wiki(this);
+		Init_once();
 		ctg_pagebox_wtr.Init_by_wiki(this);
 		ctg_catpage_mgr.Init_by_wiki(this);
+	}
+	private boolean init_once_done = false;
+	private void Init_once() {
+		if (init_once_done) return;
+		init_once_done = true;
+		app.Addon_mgr().Load_by_wiki(this);
 	}
 	public void	Init_by_wiki__force() {init_needed = true; Init_by_wiki();}
 	public void Init_by_make(Xowd_core_db_props props, gplx.xowa.bldrs.infos.Xob_info_session info_session) {
