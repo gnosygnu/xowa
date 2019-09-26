@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.makes.tests; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.makes.*;
+import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.htmls.sections.*;
 public class Xoh_make_fxt {
 	public Xoh_make_fxt() {
@@ -27,11 +28,22 @@ public class Xoh_make_fxt {
 	}
 	public Xoh_page_chkr Page_chkr() {return page_chkr;} private final    Xoh_page_chkr page_chkr = new Xoh_page_chkr();
 	public Xop_fxt Parser_fxt() {return parser_fxt;} private final    Xop_fxt parser_fxt = new Xop_fxt();
-	public void Init_img_cache
-		( String wiki_abrv, String lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, double lnki_time, int lnki_page
-		, boolean repo_is_commons, String html_ttl, int html_w, int html_h, double html_time, int html_page
-		) {
-		// fxt.Init_cache("en.wikipedia.org", "A.png", 0, 220, 110, 0.5, -1, -1, Bool_.Y, "B.png", 330, 110, -1, -1);
+	public Xou_cache_finder_mem Init__usr_cache(Xof_fsdb_itm... ary) {
+		Xou_cache_finder_mem rv = Xou_cache_finder_.New_mem();
+		parser_fxt.Wiki().Html__hdump_mgr().Load_mgr().Make_mgr().Hctx().Test__cache__mgr_(rv);
+		for (Xof_fsdb_itm itm : ary)
+			rv.Add(itm);
+		return rv;
+	}
+
+	public Xof_fsdb_itm Init__fsdb_itm(String wiki_abrv, String lnki_ttl, int lnki_w, int lnki_h, int img_w, int img_h, String url) {
+		return Init__fsdb_itm(wiki_abrv, lnki_ttl, Xop_lnki_type.Id_none, -1, lnki_w, lnki_h, img_w, img_h, -1, -1, Io_url_.mem_fil_(url));
+	}
+	public Xof_fsdb_itm Init__fsdb_itm(String wiki_abrv, String lnki_ttl, byte lnki_type, double lnki_upright, int lnki_w, int lnki_h, int img_w, int img_h, double lnki_time, int lnki_page, Io_url url) {
+		Xof_fsdb_itm itm = new Xof_fsdb_itm();
+		itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, Bry_.new_a7(wiki_abrv), Bry_.new_a7(lnki_ttl), lnki_type, lnki_upright, lnki_w, lnki_h, lnki_time, lnki_page, 0);
+		itm.Init_at_cache(true, img_w, img_h, url);
+		return itm;
 	}
 	public void Test__html(String wtxt, String expd) {Test__html(wtxt, expd, true);}
 	public void Test__html(String wtxt, String expd, boolean escape_apos) {
@@ -39,15 +51,18 @@ public class Xoh_make_fxt {
             String actl = parser_fxt.Exec__parse_to_hdump(wtxt);
 		Tfds.Eq_str_lines(expd, actl);
 	}
-	public void Test__make(String html, Xoh_page_chkr chkr) {
+	public void Test__make(String html, Xoh_page_chkr chkr) {Test__make(true, html, chkr);}
+	public void Test__make(boolean print_to_console, String html, Xoh_page_chkr chkr) {
 		html = String_.Replace(html, "'", "\"");
 		Xoh_page actl = new Xoh_page();
 		actl.Ctor_by_hview(parser_fxt.Wiki(), Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
-		Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();
-		Xoh_make_mgr make_mgr = parser_fxt.Wiki().Html__hdump_mgr().Load_mgr().Make_mgr();			
+		if (print_to_console)
+			Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();
+		Xoh_make_mgr make_mgr = parser_fxt.Wiki().Html__hdump_mgr().Load_mgr().Make_mgr();
 		byte[] actl_body = make_mgr.Parse(Bry_.new_u8(html), parser_fxt.Wiki(), actl);
 		actl.Db().Html().Html_bry_(actl_body);
-		Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;
+		if (print_to_console)
+			Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;
 		chkr.Check(actl);
 	}
 }

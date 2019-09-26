@@ -18,7 +18,7 @@ import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*; import gplx.xowa.
 public class Xoh_img_make__dump__tst {
 	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Before public void Init() {fxt.Clear();}
-	@Test   public void Html_exists__n() {
+	@Test   public void Basic() {
 		String
 		  orig = "<a href='/wiki/File:A.png' class='image' title='abc' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|110|0.5|-1|-1' src='file:///mem/xowa/file/en.wikipedia.org/thumb/7/0/A.png/220px.png' width='220' height='110' alt='abc'></a>"
 		, expd = "<a href='/wiki/File:A.png' class='image' title='abc' xowa_title='A.png'><img id='xoimg_0' data-xowa-title='A.png' data-xoimg='0|220|110|0.5|-1|-1' src='' width='0' height='0' alt='abc'></a>"

@@ -63,7 +63,7 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 		rdr.Init_by_wkr(err_wkr, "img.src.xowa", src_bgn, src_end).Fail_throws_err_(fail_throws_err);
 		repo_bgn = rdr.Find_fwd_rr_or(Bry__file, -1);
 		if (repo_bgn == -1) {
-			repo_bgn = rdr.Find_fwd_rr(Bry__math);
+			repo_bgn = rdr.Find_fwd_rr_or(Bry__math, Bry_find_.Not_found);
 			if (repo_bgn == Bry_find_.Not_found) return false;
             this.file_ttl_bry = Bry_.Mid(rdr.Src(), repo_bgn, src_end);
 			this.repo_is_commons = true;

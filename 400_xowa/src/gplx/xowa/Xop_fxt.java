@@ -32,9 +32,18 @@ public class Xop_fxt {
 	public Xop_fxt(Xoae_app app, Xowe_wiki wiki) {
 		this.ctor(app, wiki);
 	}
+	public Xop_fxt(Xowe_wiki wiki) {
+		this.ctor(Xoa_app_fxt.Make__app__edit(), wiki);
+	}
 	private void ctor(Xoae_app app, Xowe_wiki wiki) {
 		this.app = app;
 		this.wiki = wiki;
+
+		// NOTE: Xop_fxt does not call Init_by_app / Init_by_wiki b/c of test issues with DB; DATE:2019-09-15
+		// call these methods manually
+		app.Addon_mgr().Add_dflts_by_app(app).Run_by_app(app);
+		wiki.Init_once();
+
 		app.Wiki_mgr().Add(wiki);
 		app.File_mgr().Repo_mgr().Set("src:wiki", "mem/wiki/repo/src/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2);
 		app.File_mgr().Repo_mgr().Set("trg:wiki", "mem/wiki/repo/trg/", wiki.Domain_str()).Ext_rules_(Xof_rule_grp.Grp_app_default).Dir_depth_(2).Primary_(true);
@@ -169,9 +178,10 @@ public class Xop_fxt {
 	public Xop_fxt	Init_para_n_() {ctx.Para().Enabled_n_(); return this;}
 	public Xop_fxt	Init_log_(Gfo_msg_itm... itms) {for (Gfo_msg_itm itm : itms) log_itms.Add(itm); return this;} List_adp log_itms = List_adp_.New();
 	public void		Init_defn_add(String name, String text) {Init_defn_add(name, text, Xow_ns_case_.Tid__all);}
-	public void		Init_defn_add(String name, String text, byte case_match) {
-		Xot_defn_tmpl itm = run_Parse_tmpl(Bry_.new_a7(name), Bry_.new_u8(text));
-		wiki.Cache_mgr().Defn_cache().Add(itm, case_match);
+	public void		Init_defn_add(String name, String text, byte case_match) {Init_defn_add(wiki, name, text, case_match);}
+	public void		Init_defn_add(Xowe_wiki w, String name, String text, byte case_match) {
+		Xot_defn_tmpl itm = run_Parse_tmpl(w, Bry_.new_a7(name), Bry_.new_u8(text));
+		w.Cache_mgr().Defn_cache().Add(itm, case_match);
 	}
 	public void		Init_defn_clear() {wiki.Cache_mgr().Defn_cache().Free_mem_all();}
 	public Xop_fxt	Init_id_create(int id, int fil_idx, int row_idx, boolean type_redirect, int itm_len, int ns_id, String ttl) {Xow_hive_mgr_fxt.Create_id(app, wiki.Hive_mgr(), id, fil_idx, row_idx, type_redirect, itm_len, ns_id, ttl); return this;}
@@ -210,23 +220,31 @@ public class Xop_fxt {
 		return this;
 	}
 	public void Test_parse_template(String tmpl_raw, String expd) {Test_parse_tmpl_str_test(tmpl_raw, "{{test}}", expd);}
-	public void Test_parse_tmpl_str_test(String tmpl_raw, String page_raw, String expd) {
-		Init_defn_add("test", tmpl_raw);
-		Test_parse_tmpl_str(page_raw, expd);
+	public void Test_parse_tmpl_str_test(String tmpl_raw, String page_raw, String expd) {Test_parse_tmpl_str_test(wiki, tmpl_raw, page_raw, expd);}
+	public void Test_parse_tmpl_str_test(Xowe_wiki w, String tmpl_raw, String page_raw, String expd) {
+		Init_defn_add(w, "test", tmpl_raw, Xow_ns_case_.Tid__all);
+		Test_parse_tmpl_str(w, page_raw, expd);
 	}
-	public void Test_parse_tmpl_str(String raw, String expd) {
-		byte[] actl = Test_parse_tmpl_str_rv(raw);
+	public void Test_parse_tmpl_str(String raw, String expd) {Test_parse_tmpl_str(wiki, raw, expd);}
+	public void Test_parse_tmpl_str(Xowe_wiki w, String raw, String expd) {
+		byte[] actl = Test_parse_tmpl_str_rv(w, raw);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 		tst_Log_check();
 	}
-	public byte[] Test_parse_tmpl_str_rv(String raw) {
+	public byte[] Test_parse_tmpl_str_rv(String raw) {return Test_parse_tmpl_str_rv(wiki, raw);}
+	public byte[] Test_parse_tmpl_str_rv(Xowe_wiki w, String raw) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xop_root_tkn root = tkn_mkr.Root(raw_bry);
-		ctx.Page().Root_(root);
-		ctx.Page().Db().Text().Text_bry_(raw_bry);
-		return parser.Expand_tmpl(root, ctx, tkn_mkr, raw_bry);
+		Xop_ctx c = w.Parser_mgr().Ctx();
+		c.Page().Root_(root);
+		c.Page().Db().Text().Text_bry_(raw_bry);
+		return w.Parser_mgr().Main().Expand_tmpl(root, c, tkn_mkr, raw_bry);
 	}
-	public Xot_defn_tmpl run_Parse_tmpl(byte[] name, byte[] raw) {return parser.Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), wiki.Ns_mgr().Ns_template(), name, raw);}
+	public Xot_defn_tmpl run_Parse_tmpl(byte[] name, byte[] raw) {return run_Parse_tmpl(wiki, name, raw);}
+	public Xot_defn_tmpl run_Parse_tmpl(Xowe_wiki w, byte[] name, byte[] raw) {
+		Xop_ctx c = w.Parser_mgr().Ctx();
+		return w.Parser_mgr().Main().Parse_text_to_defn_obj(c, c.Tkn_mkr(), w.Ns_mgr().Ns_template(), name, raw);
+	}
 	public void Test_parse_tmpl(String raw, Tst_chkr... expd) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		Xot_defn_tmpl itm = run_Parse_tmpl(Bry_.Empty, raw_bry);
@@ -379,7 +397,7 @@ public class Xop_fxt {
 	}
 
 	public void Test_str_full(String raw, String expd, String actl) {
-		Tfds.Eq_str_lines(expd, actl, raw);
+		Tfds.Eq_str_lines(expd, actl, (hctx.Mode_is_hdump() ? "hsave" : "hview") + " \n" + raw);
 	}
 	public void Test_str_part_y(String actl, String... expd_parts) {
 		int expd_parts_len = expd_parts.length;
