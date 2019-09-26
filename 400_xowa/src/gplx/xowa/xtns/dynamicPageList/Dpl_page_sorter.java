@@ -25,7 +25,7 @@ class Dpl_page_sorter implements gplx.core.lists.ComparerAble {
 		Xowd_page_itm rhs = (Xowd_page_itm)rhsObj;
 		int multiplier = itm.Sort_ascending() == Bool_.Y_byte ? 1 : -1;
 		switch (itm.Sort_tid()) {
-			case Dpl_sort.Tid_categorysortkey: 		
+			case Dpl_sort.Tid_categorysortkey:
 			case Dpl_sort.Tid_categoryadd: 			return multiplier * Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db()); 
 		}
 		return CompareAble_.Same;
