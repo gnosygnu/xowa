@@ -42,7 +42,7 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		hdump_mgr.Init_by_db(zip_tid, hzip_enabled, hzip_b256);
 		return true;
 	}
-	public void Insert(Xop_ctx ctx, Xoae_page wpg) {
+	public void Insert(Xop_ctx ctx, Xoae_page wpg, Xoh_wtr_ctx hctx) {
 		// clear
 		tmp_hpg.Clear();			// NOTE: must clear tmp_hpg or else will leak memory during mass build; DATE:2016-01-09
 		wpg.File_queue().Clear();	// need to reset uid to 0, else xowa_file_# will resume from last
@@ -52,7 +52,7 @@ public class Xob_hdump_bldr implements Gfo_invk {
 		boolean is_wikitext = Xow_page_tid.Identify(wpg.Wiki().Domain_tid(), ttl.Ns().Id(), ttl.Page_db()) == Xow_page_tid.Tid_wikitext;
 		byte[] orig_bry = Bry_.Empty;
 		if (is_wikitext) {
-			wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_hdump(tmp_bfr, ctx, Xoh_wtr_ctx.Hdump, wpg);
+			wiki.Html_mgr().Page_wtr_mgr().Wkr(Xopg_view_mode_.Tid__read).Write_hdump(tmp_bfr, ctx, hctx, wpg);
 			orig_bry = tmp_bfr.To_bry_and_clear();
 			wpg.Db().Html().Html_bry_(orig_bry);
 		}

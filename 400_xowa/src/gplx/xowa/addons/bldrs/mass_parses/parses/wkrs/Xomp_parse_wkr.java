@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.parses.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 import gplx.xowa.files.origs.*;
-import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.htmls.hxtns.pages.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.htmls.hxtns.pages.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.pages.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.mgrs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.pools.*;
@@ -101,6 +101,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 		wkr_db.Conn().Txn_bgn("xomp");
 		stat_tbl.Stmt_new();
 		hxtn_mgr.Insert_bgn(false);
+		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump_by_hzip_tid(cfg.Hzip_enabled() ? Xoh_hzip_dict_.Hdb__hzip : Xoh_hzip_dict_.Hdb__htxt); // ISSUE#:553; DATE:2019-09-25
 
 		// set status to running
 		mgr_db.Tbl__wkr().Update_status(uid, Xomp_wkr_tbl.Status__running);
@@ -140,7 +141,7 @@ public class Xomp_parse_wkr implements Gfo_invk {
 				parser_mgr.Parse(wpg, true);
 
 				// gen_html
-				hdump_bldr.Insert(pctx, wpg);
+				hdump_bldr.Insert(pctx, wpg, hctx);
 
 				// index
 				long fulltext_time = 0;
