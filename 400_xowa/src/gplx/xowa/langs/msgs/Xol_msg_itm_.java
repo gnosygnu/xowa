@@ -252,10 +252,8 @@ public static final int
 , Id_xowa_wikidata_links_special = 231
 , Id_xowa_window_allpages_box_tooltip = 232
 , Id_xowa_window_allpages_btn_tooltip = 233
-, Id_wikibase_snakview_variations_novalue_label = 234
-, Id_wikibase_snakview_variations_somevalue_label = 235
 ;
-	public static final int Id__max = 236;
+	public static final int Id__max = 234;
 	public static Xol_msg_itm new_(int id, String key, String val) {return new_(id, Bry_.new_u8(key), Bry_.new_u8(val));}
 	public static Xol_msg_itm new_(int id, byte[] key, byte[] val) {
 		Xol_msg_itm rv = new Xol_msg_itm(id, key);
@@ -514,8 +512,6 @@ case Xol_msg_itm_.Id_xowa_wikidata_deprecated: return new_(Xol_msg_itm_.Id_xowa_
 case Xol_msg_itm_.Id_xowa_wikidata_normal: return new_(Xol_msg_itm_.Id_xowa_wikidata_normal, "xowa-wikidata-normal", "normal");
 case Xol_msg_itm_.Id_xowa_wikidata_preferred: return new_(Xol_msg_itm_.Id_xowa_wikidata_preferred, "xowa-wikidata-preferred", "preferred");
 case Xol_msg_itm_.Id_xowa_wikidata_links_special: return new_(Xol_msg_itm_.Id_xowa_wikidata_links_special, "xowa-wikidata-links-special", "Links (special wikis)");
-case Xol_msg_itm_.Id_wikibase_snakview_variations_novalue_label: return new_(Xol_msg_itm_.Id_wikibase_snakview_variations_novalue_label, "wikibase-snakview-variations-novalue-label", "no value");
-case Xol_msg_itm_.Id_wikibase_snakview_variations_somevalue_label: return new_(Xol_msg_itm_.Id_wikibase_snakview_variations_somevalue_label, "wikibase-snakview-variations-somevalue-label", "unknown value");
 			default: throw Err_.new_unhandled(id);
 		}
 	}

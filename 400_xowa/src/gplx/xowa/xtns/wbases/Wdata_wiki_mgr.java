@@ -116,10 +116,10 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 			}			
 			switch (selected.Snak_tid()) { // SEE:NOTE:novalue/somevalue
 				case Wbase_claim_value_type_.Tid__novalue:
-					bfr.Add(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_wikibase_snakview_variations_novalue_label));
+					bfr.Add(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_xowa_wikidata_novalue));
 					break;
 				case Wbase_claim_value_type_.Tid__somevalue:
-					bfr.Add(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_wikibase_snakview_variations_somevalue_label));
+					bfr.Add(wiki.Msg_mgr().Val_by_id(Xol_msg_itm_.Id_xowa_wikidata_somevalue));
 					break;
 				default: {
 					prop_val_visitor.Init(bfr, hwtr_mgr.Msgs(), lang_key, mode_is_statements);
