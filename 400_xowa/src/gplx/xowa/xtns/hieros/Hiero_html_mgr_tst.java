@@ -16,7 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Hiero_html_mgr_tst {
-	@Before public void init() {fxt.Reset();} private Hiero_html_mgr_fxt fxt = new Hiero_html_mgr_fxt(new Xop_fxt());
+	private Hiero_html_mgr_fxt fxt;
+	private final    Hiero_html_fxt html_fxt = new Hiero_html_fxt();
+	@Before public void init() {
+		fxt = html_fxt.Hiero_fxt();
+		fxt.Reset();
+	}
 	@Test   public void Empty() {
 		fxt.Test_html_full_str
 		( "<hiero></hiero>"
@@ -31,24 +36,9 @@ public class Hiero_html_mgr_tst {
 		));
 	}
 	@Test   public void Glyph_1() {
-		fxt.Init_hiero_A1_B1();
-		fxt.Test_html_full_str
-		( "<hiero>A1</hiero>"
-		, String_.Concat_lines_nl_skip_last
-		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
-		, "  <tr>"
-		, "    <td>"
-		, "      <table class=\"mw-hiero-table\">"
-		, "        <tr>"
-		, "          <td>"
-		, "            <img style='margin: 1px; height: 38px;' src='file:///mem/xowa/bin/any/xowa/xtns/Wikihiero/img/hiero_A1.png' title='A1' alt='A1' />"
-		, "          </td>"
-		, "        </tr>"
-		, "      </table>"
-		, "    </td>"
-		, "  </tr>"
-		, "</table>"
-		));
+		String wtxt = html_fxt.Glyph_1__wtxt();
+		html_fxt.Test__hview(wtxt, html_fxt.Hdump_n_().Glyph_1__html(Bool_.Y));
+		html_fxt.Test__hdump(wtxt, html_fxt.Hdump_y_().Glyph_1__html(Bool_.N), html_fxt.Glyph_1__html(Bool_.Y));
 	}
 	@Test   public void Mirrored() {
 		fxt.Init_hiero_A1_B1();
@@ -181,50 +171,9 @@ public class Hiero_html_mgr_tst {
 		));
 	}
 	@Test   public void Cartouche() {
-		fxt.Init_hiero_A1_B1().Init_hiero_cartouche();
-		fxt.Test_html_full_str
-		( "<hiero>< A1 ></hiero>"
-		, String_.Concat_lines_nl_skip_last
-		( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
-		, "  <tr>"
-		, "    <td>"
-		, "      <table class=\"mw-hiero-table\">"
-		, "        <tr>"
-		, "          <td>"
-		, "            <img src='file:///mem/xowa/bin/any/xowa/xtns/Wikihiero/img/hiero_Ca1.png' height='44' title='&lt;' alt='&lt;' />"
-		, "          </td>"
-		, "          <td>"
-		, "            <table class=\"mw-hiero-table\">"
-		, "              <tr>"
-		, "                <td class='mw-hiero-box' style='height: 2px;'>"
-		, "                </td>"
-		, "              </tr>"
-		, "              <tr>"
-		, "                <td>"
-		, "                  <table class=\"mw-hiero-table\">"
-		, "                    <tr>"
-		, "          <td>"
-		, "            <img style='margin: 1px; height: 38px;' src='file:///mem/xowa/bin/any/xowa/xtns/Wikihiero/img/hiero_A1.png' title='A1' alt='A1' />"
-		, "          </td>"
-		, "                    </tr>"
-		, "                  </table>"
-		, "                </td>"
-		, "              </tr>"
-		, "              <tr>"
-		, "                <td class='mw-hiero-box' style='height: 2px;'>"
-		, "                </td>"
-		, "              </tr>"
-		, "            </table>"
-		, "          </td>"
-		, "          <td>"
-		, "            <img src='file:///mem/xowa/bin/any/xowa/xtns/Wikihiero/img/hiero_Ca2.png' height='44' title='&gt;' alt='&gt;' />"
-		, "          </td>"
-		, "        </tr>"
-		, "      </table>"
-		, "    </td>"
-		, "  </tr>"
-		, "</table>"
-		));
+		String wtxt = html_fxt.Cartouche__wtxt();
+		html_fxt.Test__hview(wtxt, html_fxt.Hdump_n_().Cartouche__html(Bool_.Y));
+		html_fxt.Test__hdump(wtxt, html_fxt.Hdump_y_().Cartouche__html(Bool_.N), html_fxt.Cartouche__html(Bool_.Y));
 	}
 	@Test   public void Superposition_regular() {
 		fxt.Init_hiero_A1_B1();
