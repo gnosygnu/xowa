@@ -35,6 +35,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		Xow_hdump_mode.Cfg__reg_type(cfg_mgr.Type_mgr());
 		cfg_mgr.Bind_many_wiki(this, wiki, Cfg__read_preferred, Cfg__html_mode);
 		wiki.Hxtn_mgr().Init_by_wiki(wiki, Bool_.N);
+		make_mgr.Init_by_wiki(wiki);
 	}
 	public void Load_by_xowe(Xoae_page wpg) {
 		tmp_hpg.Ctor_by_hview(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Db().Page().Id());
@@ -82,14 +83,14 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		if (zip_tid > gplx.core.ios.streams.Io_stream_tid_.Tid__raw)
 			src = zip_mgr.Unzip((byte)zip_tid, src);
 		switch (hzip_tid) {
-			case Xoh_hzip_dict_.Hzip__none:
+			case Xoh_hzip_dict_.Hdb__htxt:
 				src = make_mgr.Parse(src, hpg.Wiki(), hpg);
 				break;
-			case Xoh_hzip_dict_.Hzip__plain:
+			case Xoh_hzip_dict_.Hdb__page_sync:
 				gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader page_loader = new gplx.xowa.addons.wikis.pages.syncs.core.loaders.Xosync_page_loader();
 				src = page_loader.Parse(wiki, hpg, src);
 				break;
-			case Xoh_hzip_dict_.Hzip__v1:
+			case Xoh_hzip_dict_.Hdb__hzip:
 				if (override_mgr__html != null)	// null when Parse is called directly
 					src = override_mgr__html.Get_or_same(hpg.Ttl().Page_db(), src);
 				hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n

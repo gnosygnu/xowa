@@ -25,7 +25,7 @@ public class Xoh_file_wtr__hdump__tst {
 		( "[[File:A.png]]"
 		, String_.Concat_lines_nl_skip_last
 		( "<a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\">"
-		+ "<img data-xowa-title=\"A.png\" data-xoimg=\"0|-1|-1|-1|-1|-1\" src=\"\" width=\"0\" height=\"0\" alt=\"\"/></a>"
+		+ "<img data-xowa-title=\"A.png\" data-xoimg=\"0|-1|-1|-1|-1|-1\" alt=\"\" src=\"\" width=\"0\" height=\"0\"/></a>"
 		));
 	}
 }
@@ -36,15 +36,15 @@ class Xoh_file_wtr__hdump__fxt {
 		fxt.Reset();
 
 		// default to none
-		fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hzip__none));
+		fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hdb__htxt));
 
 		// create file_fx
 		this.file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
 		fxt.Wiki().File__fsdb_mode().Tid__v2__mp__y_();
 		this.Init__orig__add("A.png", 400, 300);
 	}
-	public void Init__hctx__hzip__none() {fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hzip__none));}
-	public void Init__hctx__hzip__v1()   {fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hzip__plain));}
+	public void Init__hctx__hzip__none() {fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hdb__htxt));}
+	public void Init__hctx__hzip__v1()   {fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hdb__page_sync));}
 	public void Init__orig__add(String orig_ttl, int orig_w, int orig_h) {
 		file_fxt.Exec_orig_add(Bool_.Y, orig_ttl, Xof_ext_.new_by_ttl_(Bry_.new_u8(orig_ttl)).Id(), orig_w, orig_h, "");
 	}

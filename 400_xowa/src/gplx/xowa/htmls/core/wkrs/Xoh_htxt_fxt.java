@@ -27,7 +27,7 @@ public class Xoh_htxt_fxt {
 		this.wiki = parser_fxt.Wiki();
 		Xoa_app_fxt.repo2_(parser_fxt.App(), wiki);	// needed else will be old "mem/wiki/repo/trg/thumb/" instead of standard "mem/file/en.wikipedia.org/thumb/"
 		wiki.Html__hdump_mgr().Init_by_db(parser_fxt.Wiki());
-		parser_fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hzip__none));
+		parser_fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hdb__htxt));
 		hpg.Ctor_by_hview(wiki, Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
 	}
 	public Xow_wiki Wiki() {return wiki;}

@@ -54,8 +54,8 @@ public class Xoh_hzip_dict_ {
 	, Key__form                 = "form"
 	;
 	public static final int  // SERIALIZED:html_db.html.body_flag
-	  Hzip__none = 0
-	, Hzip__v1 = 1
-	, Hzip__plain = 2 // used for page_sync
+	  Hdb__htxt      = 0 // XOWA parse; uses "data-xoimg" for files;
+	, Hdb__hzip      = 1 // XOWA parse but additional binary compression
+	, Hdb__page_sync = 2 // WM_api results; aka "page_sync"; uses "xowa:/file" for files; will also have edit-section and other WM artifacts
 	;	
 }

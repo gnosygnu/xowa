@@ -37,7 +37,7 @@ public class Xow_hdump_mgr__save {
 		}
 	}
 	public int Save(Xoae_page page, Xoh_page hpg, Xowd_html_tbl html_tbl, boolean insert, boolean use_hzip_dflt) {
-		int hzip_tid = use_hzip_dflt ? dflt_hzip_tid : Xoh_hzip_dict_.Hzip__none;
+		int hzip_tid = use_hzip_dflt ? dflt_hzip_tid : Xoh_hzip_dict_.Hdb__htxt;
 		byte[] db_body = Write(tmp_bfr, wiki, page, hpg, hzip_mgr, zip_mgr, dflt_zip_tid, hzip_tid, hpg.Db().Html().Html_bry());
 		if (insert)		html_tbl.Insert(hpg, dflt_zip_tid, dflt_hzip_tid, db_body);
 		else			html_tbl.Update(hpg, dflt_zip_tid, dflt_hzip_tid, db_body);
@@ -51,13 +51,13 @@ public class Xow_hdump_mgr__save {
 	}
 	private byte[] Write(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoae_page page, Xoh_page hpg, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, int zip_tid, int hzip_tid, byte[] src) {
 		switch (hzip_tid) {
-			case Xoh_hzip_dict_.Hzip__none:
+			case Xoh_hzip_dict_.Hdb__htxt:
 				break;
-			case Xoh_hzip_dict_.Hzip__v1:
+			case Xoh_hzip_dict_.Hdb__hzip:
 				src = hzip_mgr.Encode_as_bry((Xoh_hzip_bfr)bfr.Clear(), wiki, hpg, src);
 				break;
 			// TOMBSTONE: not used; Xosync_update_mgr calls save directly; unsure if this should be restored for parallelism
-			// case Xoh_hzip_dict_.Hzip__plain:
+			// case Xoh_hzip_dict_.Hdb__page_sync:
 			//	src = plain_parser.Parse_hdoc(wiki.Domain_itm(), page.Url_bry_safe(), hpg.Hdump_mgr().Imgs(), src);
 			//	break;
 		}
