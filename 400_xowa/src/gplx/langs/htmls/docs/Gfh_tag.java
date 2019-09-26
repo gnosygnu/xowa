@@ -150,6 +150,11 @@ public class Gfh_tag implements Mwh_atr_wkr {
 		Gfh_atr atr = new Gfh_atr(atrs_hash.Count(), atr_bgn, atr_end, key_bry, val_bry, src, val_bgn, val_end);
 		atrs_hash.Add(key_bry, atr);
 	}
+	public String To_str() {
+		return src == null || src_bgn < 0 || src_end >= src.length
+			? "tag is invalid!: src_bgn=" + Int_.To_str(src_bgn) + ", src_end=" + Int_.To_str(src_end) + " src=" + (src == null ? "NULL" : String_.new_u8(src))
+			: String_.new_u8(src, src_bgn, src_end);
+	}
 	private static Ordered_hash Copy(Ordered_hash src) {
 		Ordered_hash rv = Ordered_hash_.New();
 		int len = src.Count();
