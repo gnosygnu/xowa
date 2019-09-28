@@ -14,14 +14,19 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*;
+import org.junit.*; import gplx.core.tests.*;
 public class Mwh_atr_mgr_tst {
-	private final Mwh_atr_mgr_fxt fxt = new Mwh_atr_mgr_fxt();
-	@Test  public void Atr_utl_make() 	{
+	private final    Mwh_atr_mgr_fxt fxt = new Mwh_atr_mgr_fxt();
+	@Test  public void Atr_utl_make() {
 		// key="val"
 		fxt.Test_atr_utl_make(Mwh_atr_itm_.Qte_tid__qute, Mwh_atr_itm_.Mask__valid__y, Mwh_atr_itm_.Mask__repeated__n, Mwh_atr_itm_.Mask__key_exists__y, Mwh_atr_itm_.Mask__val_made__n, 42);
 		// key=val key=v<nowiki/>al
 		fxt.Test_atr_utl_make(Mwh_atr_itm_.Qte_tid__none, Mwh_atr_itm_.Mask__valid__y, Mwh_atr_itm_.Mask__repeated__y, Mwh_atr_itm_.Mask__key_exists__y, Mwh_atr_itm_.Mask__val_made__y, 120);
+	}
+	@Test  public void Resize() {
+		Mwh_atr_mgr atr_mgr = new Mwh_atr_mgr(1);
+		atr_mgr.Add(0, 1, true, true, true, 2, 3, 4, 5, Bry_.Empty, 0, 0, 0, 0, Bry_.Empty);
+		atr_mgr.Add(1, 0, true, true, true, 0, 0, 0, 0, Bry_.Empty, 0, 0, 0, 0, Bry_.Empty);
 	}
 }
 class Mwh_atr_mgr_fxt {
