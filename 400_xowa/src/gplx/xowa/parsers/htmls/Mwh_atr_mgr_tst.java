@@ -23,10 +23,15 @@ public class Mwh_atr_mgr_tst {
 		// key=val key=v<nowiki/>al
 		fxt.Test_atr_utl_make(Mwh_atr_itm_.Qte_tid__none, Mwh_atr_itm_.Mask__valid__y, Mwh_atr_itm_.Mask__repeated__y, Mwh_atr_itm_.Mask__key_exists__y, Mwh_atr_itm_.Mask__val_made__y, 120);
 	}
-	@Test  public void Resize() {
+	@Test  public void Resize() {// ISSUE#:
 		Mwh_atr_mgr atr_mgr = new Mwh_atr_mgr(1);
+
+		int[] expd = new int[] {2, 3, 4, 5};
 		atr_mgr.Add(0, 1, true, true, true, 2, 3, 4, 5, Bry_.Empty, 0, 0, 0, 0, Bry_.Empty);
+		Gftest.Eq__ary(expd, Int_ary_.Mid(atr_mgr.Data_ary(), 3, 6));
+
 		atr_mgr.Add(1, 0, true, true, true, 0, 0, 0, 0, Bry_.Empty, 0, 0, 0, 0, Bry_.Empty);
+		Gftest.Eq__ary(expd, Int_ary_.Mid(atr_mgr.Data_ary(), 3, 6));
 	}
 }
 class Mwh_atr_mgr_fxt {

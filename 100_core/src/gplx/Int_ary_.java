@@ -25,6 +25,15 @@ public class Int_ary_ {//RF:DATE:2017-10-09
 			trg[i] = src[i];
 	}
 
+	public static int[] Mid(int[] src, int bgn, int end) {
+		int len = end - bgn + 1;
+		int[] rv = new int[len];
+		for (int i = 0; i < len; i++) {
+			rv[i] = src[i + bgn];
+		}
+		return rv;
+	}
+
 	public static String To_str(String spr, int... ary) {
 		Bry_bfr bfr = Bry_bfr_.New();
 		int len = ary.length;

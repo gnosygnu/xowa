@@ -41,7 +41,7 @@ public class Mwh_atr_mgr {
 		if (data_idx == data_max) {
 			int new_data_max = data_max == 0 ? Idx__mult : data_max * 2;
 			int[] new_data_ary = new int[new_data_max];
-			Int_ary_.Copy_to(data_ary, data_max, data_ary);
+			Int_ary_.Copy_to(data_ary, data_max, new_data_ary);
 			this.data_ary = new_data_ary;
 
 			int text_max = text_ary.length;
