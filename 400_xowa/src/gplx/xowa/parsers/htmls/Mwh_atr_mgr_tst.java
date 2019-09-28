@@ -23,7 +23,7 @@ public class Mwh_atr_mgr_tst {
 		// key=val key=v<nowiki/>al
 		fxt.Test_atr_utl_make(Mwh_atr_itm_.Qte_tid__none, Mwh_atr_itm_.Mask__valid__y, Mwh_atr_itm_.Mask__repeated__y, Mwh_atr_itm_.Mask__key_exists__y, Mwh_atr_itm_.Mask__val_made__y, 120);
 	}
-	@Test  public void Resize() {// ISSUE#:
+	@Test  public void Resize() {// PURPOSE:make sure that array gets resized without losing data; ISSUE#:579 DATE:2019-09-27
 		Mwh_atr_mgr atr_mgr = new Mwh_atr_mgr(1);
 
 		int[] expd = new int[] {2, 3, 4, 5};
