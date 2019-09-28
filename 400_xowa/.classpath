@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" exported="true" path="/baselib"/>
-	<classpathentry kind="src" exported="true" path="/100_core"/>
-	<classpathentry kind="src" exported="true" path="/140_dbs"/>
-	<classpathentry kind="src" exported="true" path="/150_gfui"/>
-	<classpathentry kind="src" exported="true" path="/luaj_xowa"/>
-	<classpathentry kind="src" exported="true" path="/gplx.gflucene"/>
+	<classpathentry exported="true" kind="src" path="/baselib"/>
+	<classpathentry exported="true" kind="src" path="/100_core"/>
+	<classpathentry exported="true" kind="src" path="/140_dbs"/>
+	<classpathentry exported="true" kind="src" path="/150_gfui"/>
+	<classpathentry exported="true" kind="lib" path="lib/jtidy_xowa.jar"/>
+	<classpathentry exported="true" kind="src" path="/gplx.gflucene"/>
 	<classpathentry kind="src" path="src"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry exported="true" kind="lib" path="lib/icu4j-57_1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/vnu.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/Saxon-HE-9.9.1-2.jar"/>
+	<classpathentry exported="true" kind="src" path="/luaj_xowa"/>
 	<classpathentry kind="output" path="bin"/>
-	<classpathentry kind="con" exported="true" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" exported="true" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
-	<classpathentry kind="lib" exported="true" path="lib/jtidy_xowa.jar"/>
-	<classpathentry kind="lib" exported="true" path="lib/icu4j-57_1.jar"/>
-	<classpathentry kind="lib" exported="true" path="lib/vnu.jar"/>
-	<classpathentry kind="lib" exported="true" path="lib/Saxon-HE-9.9.1-2.jar"/>
 </classpath>

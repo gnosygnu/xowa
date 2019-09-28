@@ -127,7 +127,8 @@ public class Xoh_page_wtr_wkr {
 		, portal_mgr.Div_sync_bry(tmp_bfr, wiki.Page_mgr().Sync_mgr().Manual_enabled(), wiki, page)
 		, portal_mgr.Div_wikis_bry(wiki.Utl__bfr_mkr())
 		, portal_mgr.Sidebar_mgr().Html_bry()
-		, mgr.Edit_rename_div_bry(page_ttl), page.Html_data().Edit_preview_w_dbg(), js_edit_toolbar_bry			
+		, mgr.Edit_rename_div_bry(page_ttl), page.Html_data().Edit_preview_w_dbg(), js_edit_toolbar_bry
+		, page.Lang().Key_bry()
 		);
 		Xoh_page_wtr_wkr_.Bld_head_end(bfr, tmp_bfr, page);	// add after </head>
 		Xoh_page_wtr_wkr_.Bld_html_end(bfr, tmp_bfr, page);	// add after </html>			

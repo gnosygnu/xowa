@@ -96,7 +96,8 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	, "portal_div_personal", "portal_div_ns", "portal_div_view"
 	, "portal_div_logo", "portal_div_home", "portal_div_xtn"
 	, "portal_div_admin", "portal_div_wikis", "portal_sidebar"
-	, "edit_div_rename", "edit_div_preview", "js_edit_toolbar"		
+	, "edit_div_rename", "edit_div_preview", "js_edit_toolbar"
+	, "page_lang"
 	};
 	private static final String Cfg__scripting_enabled = "xowa.html.scripting.enabled";
 }
