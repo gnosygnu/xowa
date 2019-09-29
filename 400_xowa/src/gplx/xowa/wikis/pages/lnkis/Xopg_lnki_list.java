@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+import gplx.core.strings.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.parsers.lnkis.*;
 public class Xopg_lnki_list {
 	private final    List_adp list = List_adp_.New();
@@ -42,6 +43,14 @@ public class Xopg_lnki_list {
 	public void	Clear() {
 		lnki_idx = gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_lnki_wtr.Lnki_id_min;	// NOTE: must start at 0, so that ++lnki_idx is > 0; html_wtr checks for > 0; DATE:2014-10-09; OLD_COMMENT: NOTE: should be 0, but for historical reasons, 1st lnki starts at 2; EX: id='xowa_lnki_2'
 		list.Clear();
+	}
+	@Override public String toString() {
+		String_bldr sb = String_bldr_.new_();
+		int len = list.Len();
+		for (int i = 0; i < len; i++) {
+			sb.Add(Object_.Xto_str_strict_or_null_mark(list.Get_at(i))).Add_char_nl();
+		}
+		return sb.toString();
 	}
 
 	public static final String Lnki_id_prefix = "xolnki_";

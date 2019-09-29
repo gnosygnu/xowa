@@ -33,4 +33,8 @@ public class Xoh_lnki_make__basic__tst {
 		String orig = "<a href='https://simple.wikisource.org/wiki/A' title='A'>b</a>";
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(orig));
 	}
+	@Test   public void Redlinks() {// PURPOSE: redlink should have ns and ttl, not just ns; ISSUE#:568 DATE:2019-09-29
+		fxt.Expd__redlinks("Help:A_\"_b");
+		fxt.Test__make("<a href='/wiki/Help:A_%22_b' title='Help:A_\"_b'>Help:A \" b</a>");
+	}
 }
