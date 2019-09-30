@@ -35,6 +35,14 @@ class Luaj_value_ {
 		int rv_idx = 0;
 		LuaValue cur = LuaValue.NIL;	// needed for luaj iterator; tbl.next(cur);
 		
+		// override tbl with xo_orig_table from mw.lua.dataWrapper; ISSUE#:586: DATE:2019-10-29
+		LuaValue metatable_obj = tbl.getmetatable();
+		if (metatable_obj != null && !metatable_obj.isnil()) {
+			LuaValue orig_data_obj = ((LuaTable)metatable_obj).get("xo_orig_data");
+			if (orig_data_obj != null && !orig_data_obj.isnil())
+				tbl = (LuaTable)orig_data_obj;
+		}
+
 		// loop over pairs in tbl; no direct way to get kvs
 		while (true) {
 			// get next itm

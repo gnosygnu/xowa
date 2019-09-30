@@ -19,7 +19,11 @@ function mw.dump_table(o)
   if type(o) == 'table' then
     local s = '{ '
     for k,v in pairs(o) do
-      if type(k) ~= 'number' then k = '"'..k..'"' end
+      if type(k) == 'table' then
+        k = mw.dump_table(k)
+      elseif type(k) ~= 'number' then
+        k = '"'..k..'"'
+      end
       dump_table_count = dump_table_count + 1;
       s = s .. '['..k..'] = ' .. mw.dump_table(v) .. ','
       dump_table_count = dump_table_count - 1;
@@ -712,6 +716,7 @@ local function dataWrapper( data, seen )
 	end
 
 	local mt = {
+    xo_orig_data = data, -- tbl.next does not retrieve data from datawrapper; ISSUE#:586: DATE:2019-10-29
 		mw_loadData = true,
 		__index = function ( tt, k )
 			assert( t == tt )

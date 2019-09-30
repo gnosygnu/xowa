@@ -58,7 +58,7 @@ public class Xoh_make_fxt {
 	}
 	public void Expd__redlinks(String... ary) {
 		int len = ary.length;
-		for (int i = 0; i < len; i++) {				
+		for (int i = 0; i < len; i++) {
 			Xopg_lnki_itm__hdump itm = new Xopg_lnki_itm__hdump(wiki.Ttl_parse(Bry_.new_u8(ary[i])));
 			expd_redlinks.Add(itm);
 		}
