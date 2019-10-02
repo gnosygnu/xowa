@@ -114,6 +114,7 @@ public class Byte_ascii {
 	, Lt_bry				= new byte[] {Byte_ascii.Lt}
 	, Gt_bry				= new byte[] {Byte_ascii.Gt}
 	, Question_bry			= new byte[] {Byte_ascii.Question}
+	, Backslash_bry         = new byte[] {Byte_ascii.Backslash}
 	, Brack_bgn_bry			= new byte[] {Byte_ascii.Brack_bgn}
 	, Brack_end_bry			= new byte[] {Byte_ascii.Brack_end}
 	, Apos_bry				= new byte[] {Byte_ascii.Apos}

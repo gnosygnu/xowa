@@ -100,7 +100,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		}
 		return src;
 	}
-	private void Fill_page(Xoae_page wpg, Xoh_page hpg) {
+	public void Fill_page(Xoae_page wpg, Xoh_page hpg) {
 		Xopg_html_data html_data = wpg.Html_data();
 		html_data.Display_ttl_(tmp_hpg.Display_ttl());
 		html_data.Content_sub_(tmp_hpg.Content_sub());			
@@ -127,8 +127,9 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		int len = src_imgs.Len();
 		for (int i = 0; i < len; ++i) {
 			gplx.xowa.files.Xof_fsdb_itm itm = src_imgs.Get_at(i);
+			if (itm.Orig_ttl() == null) continue; // skip any images without a src; occurs for <score> when lilypond not available; ISSUE#:577 DATE:2019-09-30
 			wpg.Hdump_mgr().Imgs().Add(itm);
-			if (!Io_mgr.Instance.ExistsFil(itm.Html_view_url()))	// if exists, don't add to file_queue; needed for packed; PAGE:en.w:Mexico; DATE:2016-08-14
+			if (!Io_mgr.Instance.ExistsFil(itm.Html_view_url()))// if exists, don't add to file_queue; needed for packed; PAGE:en.w:Mexico; DATE:2016-08-14
 				wpg.File_queue().Add(itm);	// add to file_queue for http_server
 		}
 

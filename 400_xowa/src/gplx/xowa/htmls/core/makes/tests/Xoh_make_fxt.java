@@ -22,6 +22,7 @@ public class Xoh_make_fxt {
 	private final    Xowe_wiki wiki;
 	private final    Xoh_make_mgr make_mgr;
 	private final    Gfo_test_list_base expd_redlinks = new Gfo_test_list_base();
+	private Xoh_page actl;
 	public Xoh_make_fxt() {
 		// set member reference
 		this.wiki = parser_fxt.Wiki();
@@ -75,7 +76,7 @@ public class Xoh_make_fxt {
 		html = String_.Replace(html, "'", "\"");
 
 		// init hpg
-		Xoh_page actl = new Xoh_page();
+		actl = new Xoh_page();
 		actl.Ctor_by_hview(parser_fxt.Wiki(), Xoa_url.blank(), parser_fxt.Wiki().Ttl_parse(Xoa_page_.Main_page_bry), 1);
 
 		// run make
@@ -91,5 +92,8 @@ public class Xoh_make_fxt {
 
 		// check redlinks
 		expd_redlinks.Test(wiki.Html__hdump_mgr().Load_mgr().Make_mgr().Hctx().Page().Html_data().Redlink_list());
+	}
+	public void Exec__Fill_page() {
+		wiki.Html__hdump_mgr().Load_mgr().Fill_page(parser_fxt.Page(), actl);
 	}
 }
