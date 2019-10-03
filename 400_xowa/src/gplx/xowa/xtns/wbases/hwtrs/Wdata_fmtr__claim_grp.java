@@ -261,7 +261,7 @@ class Wdata_fmtr__ref_row implements gplx.core.brys.Bfr_arg {
 		claim_html_wtr.Init(tmp_bfr, wdata_mgr, msgs, lbl_mgr, lang, ttl);
 		for (int i = 0; i < len; ++i) {
 			Wbase_references_grp grp_itm = ref_grps[i];
-			Wbase_claim_grp_list grp = grp_itm.References();
+			Wbase_claim_grp_list grp = grp_itm.Snaks();
 			int grp_len = grp.Len();
 			for (int j = 0; j < grp_len; ++j) {
 				Wbase_claim_grp grp2 = grp.Get_at(j);

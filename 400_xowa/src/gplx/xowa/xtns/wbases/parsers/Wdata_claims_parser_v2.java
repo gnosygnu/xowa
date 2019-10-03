@@ -64,13 +64,14 @@ class Wdata_claims_parser_v2 {
 		return rv;
 	}
 	private Wbase_references_grp Parse_references_grp(byte[] qid, Json_nde owner) {
+		Wbase_claim_grp_list snaks = null;
+		int[] snaks_order = null;
 		int len = owner.Len();
-		Wbase_claim_grp_list snaks = null; int[] snaks_order = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(owner.Get_at(i));
 			byte tid = Wdata_dict_reference.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
-				case Wdata_dict_reference.Tid__hash:	break;	// ignore: "b923b0d68beb300866b87ead39f61e63ec30d8af"
+				case Wdata_dict_reference.Tid__hash: break;	// ignore: "b923b0d68beb300866b87ead39f61e63ec30d8af"
 				case Wdata_dict_reference.Tid__snaks:			snaks = Parse_qualifiers(qid, Json_nde.cast(sub.Val())); break;
 				case Wdata_dict_reference.Tid__snaks_order:		snaks_order = Parse_pid_order(Json_ary.cast_or_null(sub.Val())); break;
 			}

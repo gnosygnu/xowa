@@ -386,6 +386,66 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
+	@Test   public void References() {
+		Wdata_wiki_mgr_fxt wdata_fxt = fxt.Wdata_fxt();
+		fxt.Init_prop
+		(	wdata_fxt.Make_claim_string(2, "Earth")
+			.References_
+			(	wdata_fxt.Make_references
+				(	wdata_fxt.Make_reference_grp
+					(	Int_ary_.New(3, 1)
+					,   wdata_fxt.Make_reference_itm(3, wdata_fxt.Make_claim_time(3, "2001-02-03 04:05:06"))
+					,   wdata_fxt.Make_reference_itm(1, wdata_fxt.Make_claim_string(1, "val1"))
+					)
+				)
+			)
+		)
+		;
+		fxt.Test
+		(	"claims:"
+		,	"  P2:"
+		,	"    1:"
+		,	"      id:'P2'"
+		,	"      mainsnak:"
+		,	"        datavalue:"
+		,	"          type:'string'"
+		,	"          value:'Earth'"
+		,	"        property:'P2'"
+		,	"        snaktype:'value'"
+		,	"        datatype:'string'"
+		,	"      rank:'normal'"
+		,	"      type:'statement'"
+		,	"      references:"
+		,	"        1:"
+		,	"          snaks:"
+		,	"            P3:"
+		,	"              1:"
+		,	"                datavalue:"
+		,	"                  type:'time'"
+		,	"                  value:"
+		,	"                    time:'+00000002001-02-03T04:05:06Z'"
+		,	"                    precision:'14'"
+		,	"                    before:'0'"
+		,	"                    after:'0'"
+		,	"                    timezone:'0'"
+		,	"                    calendarmodel:'http://www.wikidata.org/entity/Q1985727'"
+		,	"                property:'P3'"
+		,	"                snaktype:'value'"
+		,	"                datatype:'time'"
+		,	"            P1:"
+		,	"              1:"
+		,	"                datavalue:"
+		,	"                  type:'string'"
+		,	"                  value:'val1'"
+		,	"                property:'P1'"
+		,	"                snaktype:'value'"
+		,	"                datatype:'string'"
+		,	"          snaks-order:"
+		,	"            1:'P3'"
+		,	"            2:'P1'"
+		,	""
+		);
+	}
 	@Test   public void Claims_time_typed() {
 		Wbase_claim_time claim = (Wbase_claim_time)fxt.Wdata_fxt().Make_claim_time(2, "2001-02-03 04:05:06", 9);
 		Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();

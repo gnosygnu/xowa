@@ -69,6 +69,18 @@ public class Wdata_wiki_mgr_fxt {
 			rv.Add(ary[i]);
 		return rv;
 	}
+	public Wbase_references_grp[] Make_references(Wbase_references_grp... ary) {
+		return ary;
+	}
+	public Wbase_references_grp Make_reference_grp(int[] snaks_order, Wbase_claim_grp... snaks) {
+		Wbase_claim_grp_list list = new Wbase_claim_grp_list();
+		for (Wbase_claim_grp itm : snaks)
+			list.Add(itm);
+		return new Wbase_references_grp(list, snaks_order);
+	}
+	public Wbase_claim_grp Make_reference_itm(int id, Wbase_claim_base... itms) {
+		return new Wbase_claim_grp(Int_obj_ref.New(id), itms);
+	}
 
 	public Wdata_doc_bldr Wdoc(String qid) {return wdoc_bldr.Qid_(qid);}
 	public Wdata_doc doc_(String qid, Wbase_claim_base... props) {return wdoc_bldr.Qid_(qid).Add_claims(props).Xto_wdoc();}

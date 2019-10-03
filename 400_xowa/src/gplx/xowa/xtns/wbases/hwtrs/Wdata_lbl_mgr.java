@@ -101,7 +101,7 @@ public class Wdata_lbl_mgr {
 					int ref_grp_ary_len = ref_grp_ary.length;
 					for (int k = 0; k < ref_grp_ary_len; ++k) {
 						Wbase_references_grp ref_grp = ref_grp_ary[k];
-						Wbase_claim_grp_list ref_list = ref_grp.References();
+						Wbase_claim_grp_list ref_list = ref_grp.Snaks();
 						int ref_list_len = ref_list.Len();
 						for (int m = 0; m < ref_list_len; ++m) {
 							Wbase_claim_grp claim_grp = ref_list.Get_at(m);

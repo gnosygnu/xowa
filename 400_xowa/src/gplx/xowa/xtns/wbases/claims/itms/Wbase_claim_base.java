@@ -35,7 +35,7 @@ public abstract class Wbase_claim_base implements CompareAble {
 	public void						Wguid_(byte[] v) {this.wguid = v;} 
 	public Wbase_claim_base			Qualifiers_(Wbase_claim_grp_list v) {qualifiers = v; return this;} 
 	public Wbase_claim_base         Qualifiers_order_(int[] v) {qualifiers_order = v; return this;} 
-	public void						References_(Wbase_references_grp[] v) {references = v;} 
+	public Wbase_claim_base         References_(Wbase_references_grp[] v) {references = v; return this;}
 
 	public int compareTo(Object obj) {
 		Wbase_claim_base comp = (Wbase_claim_base)obj;

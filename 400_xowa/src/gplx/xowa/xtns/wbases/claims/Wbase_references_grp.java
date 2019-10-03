@@ -15,7 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.claims; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
 public class Wbase_references_grp {
-	public Wbase_references_grp(Wbase_claim_grp_list references, int[] references_order) {this.references = references; this.references_order = references_order;}
-	public Wbase_claim_grp_list References() {return references;} private Wbase_claim_grp_list references;
-	public int[] References_order() {return references_order;} private int[] references_order;
+	public Wbase_references_grp(Wbase_claim_grp_list snaks, int[] snaks_order) {
+		this.snaks = snaks;
+		this.snaks_order = snaks_order;
+	}
+	public Wbase_claim_grp_list Snaks() {return snaks;} private final    Wbase_claim_grp_list snaks;
+	public int[] Snaks_order() {return snaks_order;} private final    int[] snaks_order;
 }

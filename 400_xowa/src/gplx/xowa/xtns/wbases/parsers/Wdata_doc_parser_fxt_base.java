@@ -71,8 +71,8 @@ abstract class Wdata_doc_parser_fxt_base {
 		Json_ary owner = Json_ary.cast_or_null(Json_kv.cast(jdoc.Root_nde().Get_at(0)).Val());
 		Wbase_references_grp[] actl = wdoc_parser.Parse_references(Q1_bry, owner);
 		Wbase_references_grp actl_grp = actl[0];
-		Tfds.Eq_ary(expd_order, actl_grp.References_order());
-		Tfds.Eq_ary_str(expd_itms, To_ary(actl_grp.References()));
+		Tfds.Eq_ary(expd_order, actl_grp.Snaks_order());
+		Tfds.Eq_ary_str(expd_itms, To_ary(actl_grp.Snaks()));
 	}
 	public void Test_pid_order(String raw, int... expd) {
 		Json_doc jdoc = json_parser.Parse_by_apos(raw);
