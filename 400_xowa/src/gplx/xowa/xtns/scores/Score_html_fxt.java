@@ -45,8 +45,12 @@ class Score_html_fxt {
 		return "<score>\\relative c' { f d f a d f e d cis a cis e a g f e }</score>";
 	}
 	public String Basic__html(boolean dir_has_value) {
-		String img_id = hdump && dir_has_value ? "xoimg_0" : "xowa_score_0_img";
-		String img_atrs = hdump && dir_has_value ? " alt=\"\"" : " src=\"\"  ";
+		String img_id = "xowa_score_0_img";
+		String img_atrs = " src=\"\"  ";
+		if (hdump && dir_has_value) { // mode is hload
+			img_id = "xoimg_0";
+			img_atrs = " alt=\"\"";
+		}
 		return String_.Concat_lines_nl
 		( ""
 		, "<div id=\"xowa_score_0_pre\" class=\"xowa-score-lilypond\">"
