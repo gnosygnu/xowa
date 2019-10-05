@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
-public class References_nde_rare_tst {		
+public class References_nde_rare_tst {
 	@Before public void init() {fxt.Clear_ref_mgr(); fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Recursive() {	// PURPOSE: handle recursive situations; EX: ja.w:Kソリューション ; ja.w:Template:cite web。; DATE:2014-03-05
@@ -97,6 +97,19 @@ public class References_nde_rare_tst {
 		, "</references>"
 		), String_.Concat_lines_nl_skip_last
 		( "a<sup id=\"cite_ref-ref_0_0-0\" class=\"reference\"><a href=\"#cite_note-ref_0-0\">[1]</a></sup>c"
+		, "<ol class=\"references\">"
+		, "<li id=\"cite_note-ref_0-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-ref_0_0-0\">^</a></span> <span class=\"reference-text\">b</span></li>"
+		, "</ol>"
+		, ""
+		));
+	}
+	@Test  public void Dangling_references() { // PURPOSE:dangling references should escape AND auto-close ISSUE#:583; DATE:2019-10-05
+		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
+		( "a<ref name='ref_0'>b</ref>c"
+		, "<references>xyz"
+		), String_.Concat_lines_nl_skip_last
+		( "a<sup id=\"cite_ref-ref_0_0-0\" class=\"reference\"><a href=\"#cite_note-ref_0-0\">[1]</a></sup>c"
+		, "&lt;references>xyz"
 		, "<ol class=\"references\">"
 		, "<li id=\"cite_note-ref_0-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-ref_0_0-0\">^</a></span> <span class=\"reference-text\">b</span></li>"
 		, "</ol>"
