@@ -107,13 +107,13 @@ public class References_nde_rare_tst {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a<ref name='ref_0'>b</ref>c"
 		, "<references>xyz"
+		, "[[Category:A]]" // [[Category]] should be processed by category parser; should not show up in output below
 		), String_.Concat_lines_nl_skip_last
 		( "a<sup id=\"cite_ref-ref_0_0-0\" class=\"reference\"><a href=\"#cite_note-ref_0-0\">[1]</a></sup>c"
-		, "&lt;references>xyz"
-		, "<ol class=\"references\">"
+		, "&lt;references><ol class=\"references\">"
 		, "<li id=\"cite_note-ref_0-0\"><span class=\"mw-cite-backlink\"><a href=\"#cite_ref-ref_0_0-0\">^</a></span> <span class=\"reference-text\">b</span></li>"
 		, "</ol>"
-		, ""
+		, "xyz"
 		));
 	}
 }
