@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.progs.*;
-import gplx.core.security.*; import gplx.core.security.files.*;
+import gplx.core.security.algos.*; import gplx.core.security.files.*;
 public class Xobc_cmd__verify_dir extends Xobc_cmd__base {
 	private final    Io_url delete_fil, checksum_fil;
 	public Xobc_cmd__verify_dir(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_idx, Io_url checksum_fil, Io_url delete_fil) {super(task_mgr, task_id, step_id, cmd_idx);
@@ -41,7 +41,7 @@ public class Xobc_cmd__verify_dir extends Xobc_cmd__base {
 			gplx.core.ios.streams.IoStream stream = Io_mgr.Instance.OpenStreamRead(itm.File_url);
 			byte[] actl_hash = Bry_.Empty;
 			this.Prog_data_cur_(prog_data_cur);
-			try {actl_hash = algo.Hash_stream_as_bry(this, stream);}
+			try {actl_hash = Hash_algo_utl.Calc_hash_w_prog_as_bry(algo, stream, this);}
 			finally {stream.Rls();}
 			prog_data_cur += itm.File_size;
 			if (this.Prog_notify_and_chk_if_suspended(prog_data_cur, Prog_data_end())) return;

@@ -17,7 +17,7 @@ package gplx.gfui.imgs; import gplx.*; import gplx.gfui.*;
 import org.junit.*;
 import gplx.core.consoles.*;
 import gplx.core.ios.*;
-import gplx.core.security.*;
+import gplx.core.security.algos.*;
 import gplx.gfui.imgs.*;
 public class ImageAdp_tst {
 	@Before public void setup() {
@@ -39,8 +39,8 @@ public class ImageAdp_tst {
 		Tfds.Eq_true(CompareAble_.Is(CompareAble_.More, afterModifiedTime, beforeModifiedTime));
 
 		Hash_algo algo = Hash_algo_.New__md5();
-		String loadHash = algo.Hash_stream_as_str(Console_adp_.Noop, Io_mgr.Instance.OpenStreamRead(load));
-		String saveHash = algo.Hash_stream_as_str(Console_adp_.Noop, Io_mgr.Instance.OpenStreamRead(save));
+		String loadHash = Hash_algo_utl.Calc_hash_as_str(algo, Io_mgr.Instance.LoadFilBry(load));
+		String saveHash = Hash_algo_utl.Calc_hash_as_str(algo, Io_mgr.Instance.LoadFilBry(save));
 		Tfds.Eq(loadHash, saveHash);
 	}
 }

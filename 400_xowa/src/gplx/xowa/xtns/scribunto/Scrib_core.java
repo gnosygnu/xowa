@@ -38,6 +38,7 @@ public class Scrib_core {
  		lib_message = new Scrib_lib_message(this);
  		lib_text = new Scrib_lib_text(this);
 		lib_html = new Scrib_lib_html(this);
+		lib_hash = new Scrib_lib_hash(this);
 		lib_wikibase = new Scrib_lib_wikibase(this);
 		lib_wikibase_entity = new Scrib_lib_wikibase_entity(this);
 	}
@@ -67,6 +68,7 @@ public class Scrib_core {
 	public Scrib_lib_message Lib_message() {return lib_message;} private Scrib_lib_message lib_message;
 	public Scrib_lib_text Lib_text() {return lib_text;} private Scrib_lib_text lib_text;
 	public Scrib_lib_html Lib_html() {return lib_html;} private Scrib_lib_html lib_html;
+	public Scrib_lib_hash Lib_hash() {return lib_hash;} private Scrib_lib_hash lib_hash;
 	public Scrib_lib_wikibase Lib_wikibase() {return lib_wikibase;} private Scrib_lib_wikibase lib_wikibase;
 	public Scrib_lib_wikibase_entity Lib_wikibase_entity() {return lib_wikibase_entity;} private Scrib_lib_wikibase_entity lib_wikibase_entity;
 	public Scrib_core Init() {	// REF:LuaCommon.php!Load
@@ -80,7 +82,8 @@ public class Scrib_core {
 		,	root_dir.GenSubFil_nest("engines", "LuaStandalone", "mw_main.lua").Raw()
 		,	root_dir.Raw()
 		);
-		Init_register(script_dir, lib_mw, lib_uri, lib_ustring, lib_language, lib_site, lib_title, lib_text, lib_html, lib_message, lib_wikibase, lib_wikibase_entity);
+		Init_register(script_dir, lib_mw, lib_uri, lib_ustring, lib_language, lib_site, lib_title, lib_text, lib_html, lib_message, lib_hash
+			, lib_wikibase, lib_wikibase_entity);
 		xtn_mgr.Lib_mgr().Init_for_core(this, script_dir);
 		return this;
 	}

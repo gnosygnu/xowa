@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*; import gplx.core.envs.*;
+import gplx.core.primitives.*; import gplx.core.envs.*; import gplx.core.security.algos.*;
 import gplx.xowa.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
@@ -54,7 +54,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		Xox_mgr_base.Xtn_write_escape(app, bfr, code);
 		bfr.Add(Xoh_consts.Pre_end);
 	}
-	private static final    gplx.core.security.Hash_algo sha1_hash = gplx.core.security.Hash_algo_.New__sha1();
+	private static final    Hash_algo sha1_hash = Hash_algo_.New__sha1();
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Page();
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
@@ -67,7 +67,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		if (ly_process.Exe_exists() == Bool_.N_byte) {Html_write_code_as_pre(bfr, app); return;}
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
 		tmp_bfr.Add(code).Add_byte_pipe().Add_int_bool(lang_is_abc).Add_byte_pipe().Add_int_bool(code_is_raw);
-		sha1 = sha1_hash.Hash_bry_as_bry(tmp_bfr.To_bry_and_rls()); // NOTE: MW transforms to base32; for now, keep sha1 as raw
+		sha1 = Hash_algo_utl.Calc_hash_as_bry(sha1_hash, tmp_bfr.To_bry_and_rls()); // NOTE: MW transforms to base32; for now, keep sha1 as raw
 		sha1_prefix = String_.new_a7(sha1, 0, 8);
 		output_dir = app.Fsys_mgr().File_dir().GenSubDir_nest(wiki.Domain_str(), "lilypond", Char_.To_str(sha1[0]), Char_.To_str(sha1[1]), String_.new_a7(sha1));	// NOTE: MW also adds an extra level for 8-len; EX: /.../sha1_32_len/sha1_8_len/
 		png_file = output_dir.GenSubFil(sha1_prefix + ".png");

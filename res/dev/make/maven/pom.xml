@@ -125,6 +125,20 @@
         <artifactId>Saxon-HE</artifactId>
         <version>9.9.1-2</version>
     </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on -->
+    <dependency>
+        <groupId>org.bouncycastle</groupId>
+        <artifactId>bcprov-jdk15on</artifactId>
+        <version>1.64</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.gnu/gnu-crypto -->
+    <dependency>
+        <groupId>org.gnu</groupId>
+        <artifactId>gnu-crypto</artifactId>
+        <version>2.0.1</version>
+    </dependency>
 
 <!-- 
     <dependency>

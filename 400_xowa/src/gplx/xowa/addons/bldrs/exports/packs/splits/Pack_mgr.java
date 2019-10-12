@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.packs.splits; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.packs.*;
-import gplx.core.progs.*; import gplx.core.ios.zips.*; import gplx.core.ios.streams.*; import gplx.core.security.*;
+import gplx.core.progs.*; import gplx.core.ios.zips.*; import gplx.core.ios.streams.*; import gplx.core.security.algos.*;
 import gplx.dbs.*;
 import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.steps.*;
@@ -97,7 +97,7 @@ class Pack_mgr {
 			Io_url raw_url = raw_urls[i];
 			IoStream raw_stream = Io_mgr.Instance.OpenStreamRead(raw_url);
 			byte[] raw_md5 = null;
-			try {raw_md5 = hash_algo.Hash_stream_as_bry(Gfo_prog_ui_.Noop, raw_stream);}
+			try {raw_md5 = Hash_algo_utl.Calc_hash_w_prog_as_bry(hash_algo, raw_stream, Gfo_prog_ui_.Noop);}
 			finally {raw_stream.Rls();}
 			tmp_bfr.Add(raw_md5).Add_byte_space().Add_byte(Byte_ascii.Star).Add_str_a7(raw_url.NameAndExt()).Add_byte_nl();
 			raw_size += raw_stream.Len();
@@ -126,7 +126,7 @@ class Pack_mgr {
 		Gfo_log_.Instance.Prog("hashing zip");
 		IoStream zip_stream = Io_mgr.Instance.OpenStreamRead(zip_url);
 		byte[] zip_md5 = null;
-		try		{zip_md5 = hash_algo.Hash_stream_as_bry(Gfo_prog_ui_.Noop, zip_stream);}
+		try     {zip_md5 = Hash_algo_utl.Calc_hash_w_prog_as_bry(hash_algo, zip_stream, Gfo_prog_ui_.Noop);}
 		finally {zip_stream.Rls();}
 		long zip_len = Io_mgr.Instance.QueryFil(zip_url).Size();
 

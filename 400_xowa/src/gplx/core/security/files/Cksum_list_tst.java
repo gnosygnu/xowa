@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.security.files; import gplx.*; import gplx.core.*; import gplx.core.security.*;
 import org.junit.*; import gplx.core.tests.*;
+import gplx.core.security.algos.*;
 public class Cksum_list_tst {
 	private final    Cksum_list_fxt fxt = new Cksum_list_fxt();
 	@Test 	public void Basic() {
@@ -40,7 +41,7 @@ class Cksum_list_fxt {
 	}
 	public Cksum_itm Make__itm(String hash, String file_name, long size) {return new Cksum_itm(Bry_.new_u8(hash), dir.GenSubFil(file_name), size);}
 	public Cksum_list_fxt Test__parse(String raw, long expd_size, Cksum_itm... expd_itms) {
-		Cksum_list actl_list = Cksum_list.Parse(gplx.core.security.Hash_algo_.Tid__md5, dir, Bry_.new_u8(raw));
+		Cksum_list actl_list = Cksum_list.Parse(Hash_algo_.Tid__md5, dir, Bry_.new_u8(raw));
 		Gftest.Eq__long(expd_size, actl_list.Itms_size);
 		Gftest.Eq__ary(expd_itms, actl_list.Itms);
 		return this;

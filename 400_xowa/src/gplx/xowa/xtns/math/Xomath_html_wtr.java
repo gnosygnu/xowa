@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.envs.*;
+import gplx.core.envs.*; import gplx.core.security.algos.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 class Xomath_html_wtr {
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(512);
 	private final    Xomath_subst_mgr subst_mgr = new Xomath_subst_mgr();
-	private final    gplx.core.security.Hash_algo md5_wkr = gplx.core.security.Hash_algo_.New__md5();
+	private final    Hash_algo md5_wkr = Hash_algo_.New__md5();
 	private final    Bry_fmt 
 	  fmt__latex	= Bry_fmt.Auto( "<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>")
 	, fmt__mathjax	= Bry_fmt.Auto("<span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>");
@@ -40,7 +40,7 @@ class Xomath_html_wtr {
 		int uid = page.Xtn__math_uid__next();
 		if (is_latex) {
 			byte[] math_src = subst_mgr.Subst(math_bry);
-			byte[] md5 = md5_wkr.Hash_bry_as_bry(math_src);
+			byte[] md5 = Hash_algo_utl.Calc_hash_as_bry(md5_wkr, math_src);
 
 			// make url
 			byte dir_spr = Op_sys.Cur().Fsys_dir_spr_byte();

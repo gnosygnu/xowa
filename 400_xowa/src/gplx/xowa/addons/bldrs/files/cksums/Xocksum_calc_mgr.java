@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.files.cksums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
-import gplx.core.ios.streams.*; import gplx.core.security.*;
+import gplx.core.ios.streams.*; import gplx.core.security.algos.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.files.cksums.dbs.*;
 import gplx.xowa.files.*; import gplx.fsdb.*; import gplx.fsdb.data.*;
 public class Xocksum_calc_mgr {
@@ -49,7 +49,7 @@ public class Xocksum_calc_mgr {
 					bin_bry = Bry_.Empty;
 				}
 				row.Bin_size_(bin_bry.length);
-				byte[] md5 = md5_algo.Hash_bry_as_bry(bin_bry);
+				byte[] md5 = Hash_algo_utl.Calc_hash_as_bry(md5_algo, bin_bry);
 				if (!Bry_.Eq(md5, row.Cksum_val())) {
 					row.Cksum_val_(md5);
 					updates.Add(row);

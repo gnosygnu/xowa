@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
-import gplx.core.progs.*; import gplx.core.security.*;
+import gplx.core.progs.*; import gplx.core.security.algos.*;
 public class Xobc_cmd__verify_fil extends Xobc_cmd__base {
 	private final    Io_url src_url; private final    byte[] expd_hash;
 	public Xobc_cmd__verify_fil(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_id, Io_url src_url, String expd_hash_str, long prog_data_end) {super(task_mgr, task_id, step_id, cmd_id);
@@ -30,7 +30,7 @@ public class Xobc_cmd__verify_fil extends Xobc_cmd__base {
 		Hash_algo algo = Hash_algo_.New__md5();
 		gplx.core.ios.streams.IoStream stream = Io_mgr.Instance.OpenStreamRead(src_url);
 		byte[] actl_hash = Bry_.Empty;
-		try {actl_hash = algo.Hash_stream_as_bry(this, stream);}
+		try {actl_hash = Hash_algo_utl.Calc_hash_w_prog_as_bry(algo, stream, this);}
 		finally {stream.Rls();}
 		if (this.Prog_status() != Gfo_prog_ui_.Status__suspended && !Bry_.Eq(expd_hash, actl_hash))
 			this.Cmd_exec_err_(Xobc_cmd__verify_fil.Err_make(actl_hash, expd_hash));

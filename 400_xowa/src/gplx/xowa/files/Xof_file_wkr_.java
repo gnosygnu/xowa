@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.consoles.*; import gplx.langs.htmls.encoders.*;
+import gplx.core.consoles.*; import gplx.langs.htmls.encoders.*; import gplx.core.security.algos.*;
 public class Xof_file_wkr_ {
-	private static final    gplx.core.security.Hash_algo md5_hash = gplx.core.security.Hash_algo_.New__md5();
+	private static final    Hash_algo md5_hash = Hash_algo_.New__md5();
 	public static final    Gfo_url_encoder Md5_decoder = Gfo_url_encoder_.New__http_url().Init__same__many(Byte_ascii.Plus).Make();
 	public static byte[] Md5_fast(byte[] v) {
 		synchronized (md5_hash) {
-			return md5_hash.Hash_bry_as_bry(v);
+			return Hash_algo_utl.Calc_hash_as_bry(md5_hash, v);
 		}
 	}
 	public static byte[] Md5(byte[] ttl) {

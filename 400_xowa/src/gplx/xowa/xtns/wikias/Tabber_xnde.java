@@ -14,12 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wikias; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.htmls.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.htmls.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.core.security.algos.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Tabber_xnde implements Xox_xnde {
 	private byte[] id;
 	private Tabber_tab_itm[] tab_itms_ary;
-	private static final    gplx.core.security.Hash_algo md5_hash = gplx.core.security.Hash_algo_.New__md5();
+	private static final    Hash_algo md5_hash = Hash_algo_.New__md5();
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_bgn);
@@ -27,7 +27,7 @@ public class Tabber_xnde implements Xox_xnde {
 		// split on "|-|"; EX: "A|-|B" -> tab_1='A'; tab_2='B'
 		List_adp tab_itms_list = List_adp_.New();
 		byte[] xnde_body = Xox_xnde_.Extract_body_or_null(src, xnde); if (xnde_body == null) return;
-		this.id = Id_test == null ? md5_hash.Hash_bry_as_bry(xnde_body) : Id_test;
+		this.id = Id_test == null ? Hash_algo_utl.Calc_hash_as_bry(md5_hash, xnde_body) : Id_test;
 		byte[][] tab_itms = Bry_split_.Split(xnde_body, Spr__tab_itms);
 		for (int i = 0; i < tab_itms.length; ++i) {
 			byte[] tab_itm = tab_itms[i];
