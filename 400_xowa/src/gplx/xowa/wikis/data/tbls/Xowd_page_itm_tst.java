@@ -23,6 +23,7 @@ public class Xowd_page_itm_tst {
 	}
 }
 class Xowd_page_itm_fxt {
+	private Xow_ns_mgr ns_mgr; Xowd_page_itm tmp_page;
 	public void Init() {
 		if (ns_mgr == null) {
 			ns_mgr = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.A7());
@@ -31,7 +32,7 @@ class Xowd_page_itm_fxt {
 			ns_mgr.Init_w_defaults();
 			tmp_page = new Xowd_page_itm();
 		}
-	}	private Xow_ns_mgr ns_mgr; Xowd_page_itm tmp_page;
+	}
 	public void Test_ttl_(String ttl, int expd_ns, String expd_ttl) {
 		tmp_page.Ttl_(Bry_.new_a7(ttl), ns_mgr);
 	    Tfds.Eq(expd_ns, tmp_page.Ns_id());

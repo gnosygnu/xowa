@@ -102,14 +102,15 @@ public class Xowd_page_itm {
 	}
 	public Xowd_page_itm Ttl_(byte[] v, Xow_ns_mgr ns_mgr) {
 		ttl_full_db = v;
-		Object o = ns_mgr.Names_get_w_colon(v, 0, v.length);
-		if (o == null)	{
+		Xow_ns_mgr_name_itm name_itm = ns_mgr.Names_get_w_colon_or_null(v, 0, v.length);
+		if (name_itm == null)	{
 			ns = ns_mgr.Ns_main();
 			ttl_page_db = v;
 		}
 		else {
-			ns = (Xow_ns)o;
-			ttl_page_db = Bry_.Mid(v, ns.Name_ui_w_colon().length, v.length);	// EX: "Template:A" -> "Template:" + "A"
+			ns = name_itm.Ns();
+			byte[] ns_name_bry = name_itm.Name();
+			ttl_page_db = Bry_.Mid(v, ns_name_bry.length + 1, v.length);	// EX: "Template:A" -> "Template:" + "A"
 		}
 		ns_id = ns.Id();
 		return this;

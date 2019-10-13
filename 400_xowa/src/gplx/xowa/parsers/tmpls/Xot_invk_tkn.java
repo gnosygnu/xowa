@@ -108,7 +108,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				name_bgn = 0;
 			}
 
-			Object ns_eval = wiki.Ns_mgr().Names_get_w_colon(name_ary, 0, name_ary_len);	// match {{:Portal or {{:Wikipedia
+			Xow_ns_mgr_name_itm ns_eval = wiki.Ns_mgr().Names_get_w_colon_or_null(name_ary, 0, name_ary_len);	// match {{:Portal or {{:Wikipedia
 			if (ns_eval != null && !template_prefix_found)									// do not transclude ns if Template prefix seen earlier; EX: {{Template:Wikipedia:A}} should not transclude "Wikipedia:A"; DATE:2013-04-03
 				return SubEval(ctx, wiki, bfr, name_ary, caller, src);
 
@@ -156,9 +156,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					else {																				// colon present;
 						name_ary = Bry_.Mid(name_ary, finder_subst_end + 1, name_ary_len);				// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
 						name_ary_len = name_ary.length;
-						Object ns_eval2 = wiki.Ns_mgr().Names_get_w_colon(name_ary, 0, name_ary_len);	// match {{:Portal or {{:Wikipedia
+						Xow_ns_mgr_name_itm ns_eval2 = wiki.Ns_mgr().Names_get_w_colon_or_null(name_ary, 0, name_ary_len);	// match {{:Portal or {{:Wikipedia
 						if (ns_eval2 != null) {
-							Xow_ns ns_eval_itm = (Xow_ns)ns_eval2;
+							Xow_ns ns_eval_itm = ns_eval2.Ns();
 							int pre_len = ns_eval_itm.Name_enc().length;
 							if (pre_len < name_ary_len && name_ary[pre_len] == Byte_ascii.Colon)
 								return SubEval(ctx, wiki, bfr, name_ary, caller, src);

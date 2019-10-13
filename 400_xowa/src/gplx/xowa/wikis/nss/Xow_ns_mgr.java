@@ -68,11 +68,12 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 		Xow_ns rv = this.Names_get_or_null(name_bry, 0, name_bry.length);
 		return rv == null ? this.Ns_main() : rv;
 	}
-	public Object		Names_get_w_colon(byte[] src, int bgn, int end) {	// NOTE: get ns for a name with a ":"; EX: "Template:A" should return "Template" ns
+	public Xow_ns_mgr_name_itm Names_get_w_colon_or_null(byte[] src, int bgn, int end) { // NOTE: get ns for a name with a ":"; EX: "Template:A" should return "Template" ns
 		int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, bgn, end);
-		if (colon_pos == Bry_find_.Not_found) return null;	// name does not have ":"; return;
-		Object rv = name_hash.Get_by_mid(src, bgn, colon_pos);
-		return rv == null ? null : ((Xow_ns_mgr_name_itm)rv).Ns();
+		return (colon_pos == Bry_find_.Not_found)
+			? (Xow_ns_mgr_name_itm)null	// name does not have ":"; return null;
+			: (Xow_ns_mgr_name_itm)name_hash.Get_by_mid(src, bgn, colon_pos) // NOTE: can return NULL
+			;
 	}
 	public int			Tmpls_get_w_colon(byte[] src, int bgn, int end)  {	// NOTE: get length of template name with a ":"; EX: "Template:A" returns 10; PERF
 		int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, bgn, end); 
@@ -128,7 +129,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 		ns.Name_bry_(Bry_.Replace(ns_name, Project_talk_fmt_arg, project_ns.Name_db()));
 	}	private static final    byte[] Project_talk_fmt_arg = Bry_.new_a7("$1");
 	private void Rebuild_hashes__add(Hash_adp_bry hash, Xow_ns ns, byte[] key) {
-		Xow_ns_mgr_name_itm ns_itm = new Xow_ns_mgr_name_itm(key, ns);
+		Xow_ns_mgr_name_itm ns_itm = new Xow_ns_mgr_name_itm(ns, key);
 		hash.Add_if_dupe_use_nth(key, ns_itm);
 		if (Bry_find_.Find_fwd(key, Byte_ascii.Underline) != Bry_find_.Not_found)	// ns has _; add another entry for space; EX: Help_talk -> Help talk
 			hash.Add_if_dupe_use_nth(Bry_.Replace(key, Byte_ascii.Underline, Byte_ascii.Space), ns_itm);
@@ -164,7 +165,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 		if (!id_hash.Has(id_hash_ref.Val_(ns_id)))		// NOTE: do not add if already exists; avoids alias
 			id_hash.Add(Int_obj_ref.New(ns.Id()), ns);
 		}
-		name_hash.Add_if_dupe_use_nth(ns.Name_db(), new Xow_ns_mgr_name_itm(ns.Name_db(), ns));
+		name_hash.Add_if_dupe_use_nth(ns.Name_db(), new Xow_ns_mgr_name_itm(ns, ns.Name_db()));
 		return this;
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -234,12 +235,6 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 		bfr.Add(text_form ? ns.Name_ui_w_colon() : ns.Name_db_w_colon());
 		bfr.Add(ttl);
 		return bfr.To_bry_and_clear();
-	}
-	class Xow_ns_mgr_name_itm {
-		public Xow_ns_mgr_name_itm(byte[] name, Xow_ns ns) {this.name = name; this.name_len = name.length; this.ns = ns;}
-		public byte[] Name() {return name;} private byte[] name;
-		public int Name_len() {return name_len;} private int name_len;
-		public Xow_ns Ns() {return ns;} private Xow_ns ns;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_clear))				this.Clear();
