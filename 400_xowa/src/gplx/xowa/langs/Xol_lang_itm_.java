@@ -275,5 +275,6 @@ kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_categorytree, "#categorytree");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_assessment, "#assessment");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_statements, "#statements");
 kwd_mgr.New(Bool_.N, Xol_kwd_grp_.Id_translation, "#translation");
+kwd_mgr.New(Bool_.Y, Xol_kwd_grp_.Id_pagelanguage, "PAGELANGUAGE");
 	}
 }

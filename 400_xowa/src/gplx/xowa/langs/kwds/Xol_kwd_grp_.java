@@ -237,8 +237,9 @@ public static final int
 , Id_ttl_root_url = 217
 , Id_statements = 218
 , Id_translation = 219
+, Id_pagelanguage = 220
 ;
-public static final int Id__max = 220;
+public static final int Id__max = 221;
 
 	private static byte[] ary_itm_(int id) {
 		switch (id) {
@@ -462,6 +463,7 @@ case Xol_kwd_grp_.Id_categorytree: return Bry_.new_u8("categorytree");
 case Xol_kwd_grp_.Id_assessment: return Bry_.new_u8("assessment");
 case Xol_kwd_grp_.Id_statements: return Bry_.new_u8("statements");
 case Xol_kwd_grp_.Id_translation: return Bry_.new_u8("translation");
+case Xol_kwd_grp_.Id_pagelanguage: return Bry_.new_u8("pagelanguage");
 default: throw Err_.new_unhandled(id);
 		}
 	}

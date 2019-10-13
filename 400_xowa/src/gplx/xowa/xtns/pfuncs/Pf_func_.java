@@ -258,6 +258,7 @@ public class Pf_func_ {
 	, Xol_kwd_grp_.Id_assessment
 	, Xol_kwd_grp_.Id_statements
 	, Xol_kwd_grp_.Id_translation
+	, Xol_kwd_grp_.Id_pagelanguage
 	};
 	public static Xot_defn Get_prototype(int id) {
 		switch (id) {
@@ -350,6 +351,7 @@ public class Pf_func_ {
 			case Xol_kwd_grp_.Id_page_defaultsort:				return Pfunc_defaultsort.Instance;
 			case Xol_kwd_grp_.Id_noeditsection:					return Pfunc_noeditsection.Instance;
 			case Xol_kwd_grp_.Id_site_pagesincategory:			return Pfunc_pagesincategory.Instance;
+			case Xol_kwd_grp_.Id_pagelanguage:                  return Pfunc_pagelanguage.Instance;
 
 			case Xol_kwd_grp_.Id_url_ns:						return new Pfunc_ns(false);
 			case Xol_kwd_grp_.Id_url_nse:						return new Pfunc_ns(true);
