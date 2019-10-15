@@ -393,7 +393,8 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 			.References_
 			(	wdata_fxt.Make_references
 				(	wdata_fxt.Make_reference_grp
-					(	Int_ary_.New(3, 1)
+					(	"hash-abc"
+					,	Int_ary_.New(3, 1)
 					,   wdata_fxt.Make_reference_itm(3, wdata_fxt.Make_claim_time(3, "2001-02-03 04:05:06"))
 					,   wdata_fxt.Make_reference_itm(1, wdata_fxt.Make_claim_string(1, "val1"))
 					)
@@ -417,6 +418,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	"      type:'statement'"
 		,	"      references:"
 		,	"        1:"
+		,	"          hash:'hash-abc'"
 		,	"          snaks:"
 		,	"            P3:"
 		,	"              1:"

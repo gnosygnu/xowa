@@ -173,9 +173,10 @@ public class Scrib_lib_wikibase_srl {
 		List_adp rv = List_adp_.New();
 		for (int i = 0; i < list_len; ++i) {
 			Wbase_references_grp references_grp = list[i];
-			Keyval[] references_kvs = new Keyval[2];
-			references_kvs[0] = Keyval_.new_("snaks", Srl_qualifiers(prop_mgr, visitor, references_grp.Snaks(), base_adj, page_url));
-			references_kvs[1] = Keyval_.new_("snaks-order", Srl_qualifiers_order(prop_mgr, visitor, references_grp.Snaks_order(), base_adj, page_url));
+			Keyval[] references_kvs = new Keyval[3];
+			references_kvs[0] = Keyval_.new_("hash", references_grp.Hash());
+			references_kvs[1] = Keyval_.new_("snaks", Srl_qualifiers(prop_mgr, visitor, references_grp.Snaks(), base_adj, page_url));
+			references_kvs[2] = Keyval_.new_("snaks-order", Srl_qualifiers_order(prop_mgr, visitor, references_grp.Snaks_order(), base_adj, page_url));
 			rv.Add(Keyval_.int_(i + base_adj, references_kvs));
 		}
 		return (Keyval[])rv.To_ary_and_clear(Keyval.class);
