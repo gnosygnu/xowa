@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.mediawiki.*; import gplx.xowa.xtns.wbases.mediawiki.client.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.*;
+package gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.Wikibase.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.*;
 import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.stores.*;
-import gplx.xowa.xtns.wbases.mediawiki.lib.includes.Store.*; import gplx.xowa.xtns.wbases.mediawiki.client.config.*;
+import gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.config.*;
 public class WikibaseLanguageIndependentLuaBindings {
 	private final    EntityRetrievingTermLookup termLookup;
 	private final    WikibaseClientDefault settings = WikibaseClientDefault.New();

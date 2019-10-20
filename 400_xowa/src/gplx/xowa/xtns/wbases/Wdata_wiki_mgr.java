@@ -21,7 +21,7 @@ import gplx.xowa.langs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.htmls.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apps.apis.xowa.xtns.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.users.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.pfuncs.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.wbases.stores.*;
-import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto.*;
+import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto.*;
 public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	private final    Xoae_app app;
 	private final    Wdata_prop_val_visitor prop_val_visitor;

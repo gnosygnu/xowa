@@ -17,7 +17,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.xtns.scribunto.procs.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.*; import gplx.xowa.xtns.wbases.mediawiki.client.includes.dataAccess.scribunto.*;
+import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto.*;
 public class Scrib_lib_wikibase implements Scrib_lib {
 	private final    Scrib_core core;
 	private Wbase_doc_mgr entity_mgr;
@@ -206,6 +206,8 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	}
 	public boolean FormatValue(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 /*
+		String rv = Wdata_prop_val_visitor_.Render_snaks(core.Wiki(), core.Page().Url_bry_safe(), args.Pull_kv_ary_safe(0));
+		return rslt.Init_obj(rv);
 public function formatValues( $snaksSerialization ) {
 	$this->checkType( 'formatValues', 1, $snaksSerialization, 'table' );
 	try {

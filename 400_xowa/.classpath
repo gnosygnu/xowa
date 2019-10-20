@@ -13,9 +13,9 @@
 	<classpathentry exported="true" kind="lib" path="lib/vnu.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/Saxon-HE-9.9.1-2.jar"/>
 	<classpathentry exported="true" kind="src" path="/luaj_xowa"/>
-	<classpathentry kind="lib" path="lib/utils-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/bcprov-jdk15on-164.jar"/>
-	<classpathentry kind="lib" path="lib/gnu-crypto.jar"/>
-	<classpathentry kind="lib" path="lib/jacksum.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/utils-1.0.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/bcprov-jdk15on-164.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/gnu-crypto.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/jacksum.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

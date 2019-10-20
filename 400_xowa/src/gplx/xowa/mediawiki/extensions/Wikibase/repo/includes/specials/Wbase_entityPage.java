@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.mediawiki.repo.includes.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.mediawiki.*; import gplx.xowa.xtns.wbases.mediawiki.repo.*; import gplx.xowa.xtns.wbases.mediawiki.repo.includes.*;
+package gplx.xowa.mediawiki.extensions.Wikibase.repo.includes.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.Wikibase.*; import gplx.xowa.mediawiki.extensions.Wikibase.repo.*; import gplx.xowa.mediawiki.extensions.Wikibase.repo.includes.*;
 import gplx.xowa.specials.*; import gplx.core.net.qargs.*; import gplx.xowa.xtns.wbases.stores.*; import gplx.xowa.xtns.wbases.core.*;
 public class Wbase_entityPage implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {			

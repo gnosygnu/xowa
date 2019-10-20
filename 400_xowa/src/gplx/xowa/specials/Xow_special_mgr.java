@@ -18,7 +18,7 @@ import gplx.xowa.users.history.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
-import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.addons.wikis.imports.*; import gplx.xowa.specials.xowa.diags.*; import gplx.xowa.xtns.wbases.mediawiki.repo.includes.specials.*; import gplx.xowa.specials.xowa.errors.*;
+import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.addons.wikis.imports.*; import gplx.xowa.specials.xowa.diags.*; import gplx.xowa.mediawiki.extensions.Wikibase.repo.includes.specials.*; import gplx.xowa.specials.xowa.errors.*;
 import gplx.xowa.xtns.wbases.specials.*;
 import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.specials.mgrs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
