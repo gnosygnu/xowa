@@ -18,6 +18,7 @@ import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto.*;
+// REF.MW:https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php
 public class Scrib_lib_wikibase implements Scrib_lib {
 	private final    Scrib_core core;
 	private Wbase_doc_mgr entity_mgr;
@@ -54,6 +55,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 			case Proc_renderSnak:						return RenderSnak(args, rslt);
 			case Proc_formatValue:						return FormatValue(args, rslt);
 			case Proc_renderSnaks:						return RenderSnaks(args, rslt);
+			case Proc_formatValues:						return FormatValues(args, rslt);
 			case Proc_getEntityId:						return GetEntityId(args, rslt);
 			case Proc_getReferencedEntityId:			return GetReferencedEntityId(args, rslt);
 			case Proc_getUserLang:						return GetUserLang(args, rslt);
@@ -69,14 +71,14 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	}
 	private static final int 
 	  Proc_getLabel = 0, Proc_getLabelByLanguage = 1, Proc_getEntity = 2, Proc_entityExists = 3, Proc_getEntityStatements = 4, Proc_getSetting = 5, Proc_getEntityUrl = 6
-	, Proc_renderSnak = 7, Proc_formatValue = 8, Proc_renderSnaks = 9, Proc_getEntityId = 10, Proc_getReferencedEntityId = 11
-	, Proc_getUserLang = 12, Proc_getDescription = 13, Proc_resolvePropertyId = 14, Proc_getSiteLinkPageName = 15, Proc_incrementExpensiveFunctionCount = 16
-	, Proc_isValidEntityId = 17, Proc_getPropertyOrder = 18, Proc_orderProperties = 19;
+	, Proc_renderSnak = 7, Proc_formatValue = 8, Proc_renderSnaks = 9, Proc_formatValues = 10, Proc_getEntityId = 11, Proc_getReferencedEntityId = 12
+	, Proc_getUserLang = 13, Proc_getDescription = 14, Proc_resolvePropertyId = 15, Proc_getSiteLinkPageName = 16, Proc_incrementExpensiveFunctionCount = 17
+	, Proc_isValidEntityId = 18, Proc_getPropertyOrder = 19, Proc_orderProperties = 20;
 	public static final String
 	  Invk_getLabel = "getLabel", Invk_getLabelByLanguage = "getLabelByLanguage", Invk_getEntity = "getEntity", Invk_entityExists = "entityExists"
 	, Invk_getEntityStatements = "getEntityStatements"
 	, Invk_getSetting = "getSetting", Invk_getEntityUrl = "getEntityUrl"
-	, Invk_renderSnak = "renderSnak", Invk_formatValue = "formatValue", Invk_renderSnaks = "renderSnaks"
+	, Invk_renderSnak = "renderSnak", Invk_formatValue = "formatValue", Invk_renderSnaks = "renderSnaks", Invk_formatValues = "formatValues"
 	, Invk_getEntityId = "getEntityId", Invk_getReferencedEntityId = "getReferencedEntityId"
 	, Invk_getUserLang = "getUserLang", Invk_getDescription = "getDescription", Invk_resolvePropertyId = "resolvePropertyId"
 	, Invk_getSiteLinkPageName = "getSiteLinkPageName", Invk_incrementExpensiveFunctionCount = "incrementExpensiveFunctionCount"
@@ -84,7 +86,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	;
 	private static final    String[] Proc_names = String_.Ary
 	( Invk_getLabel, Invk_getLabelByLanguage, Invk_getEntity, Invk_entityExists, Invk_getEntityStatements, Invk_getSetting, Invk_getEntityUrl
-	, Invk_renderSnak, Invk_formatValue, Invk_renderSnaks
+	, Invk_renderSnak, Invk_formatValue, Invk_renderSnaks, Invk_formatValues
 	, Invk_getEntityId, Invk_getReferencedEntityId, Invk_getUserLang, Invk_getDescription, Invk_resolvePropertyId, Invk_getSiteLinkPageName, Invk_incrementExpensiveFunctionCount
 	, Invk_isValidEntityId, Invk_getPropertyOrder, Invk_orderProperties
 	);
@@ -205,9 +207,12 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		return rslt.Init_obj(rv);
 	}
 	public boolean FormatValue(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-/*
-		String rv = Wdata_prop_val_visitor_.Render_snaks(core.Wiki(), core.Page().Url_bry_safe(), args.Pull_kv_ary_safe(0));
+		// WORKAROUND: return same as RenderSnaks until ISSUE:#593 is completed
+		Xowe_wiki wiki = core.Wiki();
+		Wdata_wiki_mgr wdata_mgr = wiki.Appe().Wiki_mgr().Wdata_mgr();
+		String rv = Wdata_prop_val_visitor_.Render_snak(wdata_mgr, wiki, core.Page().Url_bry_safe(), args.Pull_kv_ary_safe(0));
 		return rslt.Init_obj(rv);
+/*
 public function formatValues( $snaksSerialization ) {
 	$this->checkType( 'formatValues', 1, $snaksSerialization, 'table' );
 	try {
@@ -218,7 +223,11 @@ public function formatValues( $snaksSerialization ) {
 	}
 }	
 */
-		throw Err_.new_unimplemented();
+	}
+	public boolean FormatValues(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		// WORKAROUND: return same as RenderSnaks until ISSUE:#593 is completed
+		String rv = Wdata_prop_val_visitor_.Render_snaks(core.Wiki(), core.Page().Url_bry_safe(), args.Pull_kv_ary_safe(0));
+		return rslt.Init_obj(rv);
 	}
 	public boolean ResolvePropertyId(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		byte[] rv = null;
