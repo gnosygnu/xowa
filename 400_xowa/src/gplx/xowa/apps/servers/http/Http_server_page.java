@@ -32,12 +32,12 @@ public class Http_server_page {
 	public byte[] Redirect() {return redirect;} private byte[] redirect;
 	public static Http_server_page Make(Xoae_app app, Http_data__client data__client, byte[] wiki_domain, byte[] ttl_bry, byte[] qarg, byte retrieve_mode, byte mode, boolean popup_enabled, String popup_mode, String popup_id) {
 		Http_server_page page = new Http_server_page(app);
-		page.Make_url(wiki_domain, ttl_bry, qarg);
+		if (!page.Make_url(wiki_domain, ttl_bry, qarg)) return page; // exit early if xwiki
 		page.Make_page(data__client);
 		page.Make_html(retrieve_mode, mode, popup_enabled, popup_mode, popup_id);
 		return page;
 	}
-	public void Make_url(byte[] wiki_domain, byte[] ttl_bry_arg, byte[] qarg) {
+	public boolean Make_url(byte[] wiki_domain, byte[] ttl_bry_arg, byte[] qarg) {
 		// get wiki
 		wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(wiki_domain); // assert init for Main_Page; EX:click zh.w on wiki sidebar; DATE:2015-07-19
 		if (Runtime_.Memory_total() > Io_mgr.Len_gb) Xowe_wiki_.Rls_mem(wiki, true); // release memory at 1 GB; DATE:2015-09-11
@@ -60,8 +60,8 @@ public class Http_server_page {
 		// get url
 		this.url = wiki.Utl__url_parser().Parse(ttl_bry);
 		if (!Bry_.Eq(url.Wiki_bry(), wiki.Domain_bry())) { // handle xwiki; EX: en.wikipedia.org/wiki/it:Roma; ISSUE#:600; DATE:2019-11-02
-			this.wiki = app.Wiki_mgr().Get_by_or_make(url.Wiki_bry());
 			this.redirect = url.To_bry();
+			return false;
 		}
 
 		// get ttl
@@ -70,6 +70,7 @@ public class Http_server_page {
 			this.ttl = wiki.Ttl_parse(Xow_special_meta_.Itm__error.Ttl_bry());
 			this.url = wiki.Utl__url_parser().Parse(Xoerror_special.Make_url__invalidTitle(ttl_bry));
 		}
+		return true;
 	}
 	public void Make_page(Http_data__client data__client) {
 		// get the page
@@ -99,7 +100,7 @@ public class Http_server_page {
 			switch (retrieve_mode) {
 				case File_retrieve_mode.Mode_skip:	// noop
 					break;
-				case File_retrieve_mode.Mode_async_server:	
+				case File_retrieve_mode.Mode_async_server:
 					rebuild_html = true;
 					app.Gui_mgr().Browser_win().Page__async__bgn(tab);
 					break;

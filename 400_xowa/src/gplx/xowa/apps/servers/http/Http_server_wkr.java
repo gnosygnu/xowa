@@ -105,8 +105,15 @@ public class Http_server_wkr implements Gfo_invk {
 			page_html = url_parser.Err_msg();
 		}
 		else {
-			page_html = app.Http_server().Parse_page_to_html(data__client, url_parser.Wiki(), url_parser.Page(), url_parser.Qarg(), url_parser.Action(), url_parser.Popup(), url_parser.Popup_mode(), url_parser.Popup_id());
-			page_html = Convert_page(page_html, root_dir_http, String_.new_u8(url_parser.Wiki()));
+			Http_server_page page = app.Http_server().Parse_page_to_html(data__client, url_parser.Wiki(), url_parser.Page(), url_parser.Qarg(), url_parser.Action(), url_parser.Popup(), url_parser.Popup_mode(), url_parser.Popup_id());
+			if (page.Redirect() != null) {
+				Xosrv_http_wkr_.Write_redirect(client_wtr, page.Redirect());
+				return;
+			}
+			else {
+				page_html = page.Html();
+				page_html = Convert_page(page_html, root_dir_http, String_.new_u8(url_parser.Wiki()));
+			}
 		}
 		Xosrv_http_wkr_.Write_response_as_html(client_wtr, Bool_.N, page_html);
 	}
@@ -175,10 +182,27 @@ class Xosrv_http_wkr_ {
 		} catch (Exception err) {
 			client_wtr.Write_str("Site not found. Check address please, or see console log.\n" + Err_.Message_lang(err));
 			client_wtr.Rls();
-		}		
+		}
+	}
+	public static void Write_redirect(Http_client_wtr client_wtr, byte[] redirect) {
+		try{
+			client_wtr.Write_bry
+			(   Bry_.Add
+				( Rsp__http_redirect
+				, Rsp__location
+				, redirect
+				, Byte_ascii.Nl_bry
+				)
+			);
+		} catch (Exception err) {
+			client_wtr.Write_str("Redirect failed. Check address please, or see console log.\n" + Err_.Message_lang(err));
+			client_wtr.Rls();
+		}
 	}
 	public static final    byte[]
 	  Rsp__http_ok				= Bry_.new_a7("HTTP/1.1 200 OK:\n")
 	, Rsp__content_type_html	= Bry_.new_a7("Content-Type: text/html; charset=utf-8\n")
+	, Rsp__http_redirect        = Bry_.new_a7("HTTP/1.1 302 Found:\n")
+	, Rsp__location             = Bry_.new_a7("Location: /") // "/" to start from root
 	;
 }

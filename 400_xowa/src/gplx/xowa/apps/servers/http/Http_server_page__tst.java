@@ -19,9 +19,8 @@ public class Http_server_page__tst {
 	private final    Http_server_page__fxt fxt = new Http_server_page__fxt();
 	@Test   public void Xwiki() {
 		fxt.Init__xwiki("en.wikipedia.org", "it", "it.wikipedia.org");
-		fxt.Exec__Make_url("en.wikipedia.org", "it:Roma", "");
-		fxt.Test__wiki_domain("it.wikipedia.org");
-		fxt.Test__url("it.wikipedia.org/wiki/Roma");
+		fxt.Test__make_url(false, "en.wikipedia.org", "it:Roma", "");
+		fxt.Test__redirect("it.wikipedia.org/wiki/Roma");
 	}
 }
 class Http_server_page__fxt {
@@ -35,13 +34,11 @@ class Http_server_page__fxt {
 		Xowe_wiki xwiki_wiki = fxt.App().Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki));
 		xwiki_wiki.Xwiki_mgr().Add_by_atrs(abrv, domain);
 	}
-	public void Exec__Make_url(String wiki_domain, String ttl_bry_arg, String qarg) {
-		page.Make_url(Bry_.new_u8(wiki_domain), Bry_.new_u8(ttl_bry_arg), Bry_.new_u8(qarg));
+	public void Test__make_url(boolean expd, String wiki_domain, String ttl_bry_arg, String qarg) {
+		boolean actl = page.Make_url(Bry_.new_u8(wiki_domain), Bry_.new_u8(ttl_bry_arg), Bry_.new_u8(qarg));
+		Gftest.Eq__bool(expd, actl);
 	}
-	public void Test__url(String expd) {
-		Gftest.Eq__str(expd, page.Url().To_str());
-	}
-	public void Test__wiki_domain(String expd) {
-		Gftest.Eq__str(expd, page.Wiki().Domain_bry());
+	public void Test__redirect(String expd) {
+		Gftest.Eq__str(expd, page.Redirect());
 	}
 }
