@@ -216,6 +216,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	}
 	public void Page__reload() {
 		Xog_tab_itm tab = tab_mgr.Active_tab();
+		if (tab.History_mgr().Count() == 0) return; // MISSING_PAGES will generate NPE if (a) is a startup tab and (b) View -> Reload Page is called; FOOTNOTE:MISSING_PAGES_NPE ISSUE#:608; DATE:2019-11-03
 		Xoae_page page = tab.History_mgr().Cur_page(tab.Wiki());	// NOTE: must set to CurPage() else changes will be lost when going Bwd,Fwd
 		tab.Page_(page);
 		page = page.Wikie().Page_mgr().Load_page(page.Url(), page.Ttl(), tab);	// NOTE: must reparse page if (a) Edit -> Read; or (b) "Options" save
@@ -419,3 +420,22 @@ class Xog_url_box__selection_changed implements Gfo_evt_itm {
 		return this;
 	}
 }
+/*
+== MISSING_PAGES_NPE ==
+The NPE occurs because a MISSING_PAGE never adds to the history stack
+* Exit point is `usr_dlg.Prog_one("", "", "could not find page in wiki: ~{0}", String_.new_u8(url.Raw()));`
+* Several lines later, the add occurs: `history_mgr.Add(page);`
+
+This NPE primiarily occurs for a MISSING_PAGE when loaded at start-up
+* It doesn't occur in other situations, because a MISSING_PAGE will always be preceded by a "real" page
+** Note that a "real" page includes Special:XowaDefaultTab (or Ctrl+T)
+* It does occur for start-up b/c there is no "Special:XowaDefaultTab"; just the MISSING_PAGE
+
+This could be fixed properly by...
+* Saving and reloading the entire history stack per tab (right now only the last item is saved)
+* Refactoring the GUI to avoid the NPE
+** This is tricky b/c moving `history_mgr.Add(page)` above the exit point causes other side-effects
+*** MISSING_PAGE will be loaded at start-up as an empty page (no ARTICLE_TEXT, but MediaWiki portal / side bar) instead of a blank page
+**** This is probably desirable, but will need to change behavior to fail when someone tries to edit a read-only wiki (right now, this is the only guard)
+*** Some possibly unknown behavior by registering missing pages into history
+*/
