@@ -84,7 +84,7 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 	public static final    byte[] Bry__cls__wpb_banner_image = Bry_.new_a7("wpb-banner-image");
 	private static final    byte[] Template_dflt = Bry_.New_u8_nl_apos
 	( "<div class='ext-wpb-pagebanner noprint pre-content'>"
-	, "	<div class='wpb-topbanner'>"
+	, "	<div class='wpb-banner-image-panorama wpb-topbanner wpb-positioned-banner'>"
 	, "		{{#isHeadingOverrideEnabled}}<h1 class='wpb-name'>{{title}}</h1>{{/isHeadingOverrideEnabled}}"
 	, "		<a href='{{bannerfile}}' class='image' title='{{tooltip}}' xowa_title='{{file_ttl}}'><img{{{img_id_atr}}}{{{img_xottl}}}{{{img_xoimg}}} src='{{banner}}' width='0' height='0' class='wpb-banner-image {{originx}}' alt='' srcset='{{srcset}}' data-pos-x='{{data-pos-x}}' data-pos-y='{{data-pos-y}}' style='max-width:{{maxWidth}}px'></a>"
 	, "		{{#hasIcons}}"

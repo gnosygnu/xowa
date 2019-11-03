@@ -21,7 +21,7 @@ public class Pgbnr_func_tst {
 	@Test  public void Basic() {			
 		fxt.Test__parse(Bool_.N, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
-		, "	<div class='wpb-topbanner'>"
+		, "	<div class='wpb-banner-image-panorama wpb-topbanner wpb-positioned-banner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
 		, "		<a href='' class='image' title='Test page' xowa_title='A.png'><img id='xoimg_0' src='file:///mem/wiki/repo/trg/orig/7/0/A.png' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
 		, "		<div class='wpb-iconbox'>"
@@ -40,7 +40,7 @@ public class Pgbnr_func_tst {
 	@Test  public void Hdump__basic() {
 		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
-		, "	<div class='wpb-topbanner'>"
+		, "	<div class='wpb-banner-image-panorama wpb-topbanner wpb-positioned-banner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
 		, "		<a href='/wiki/File:A.png' class='image' title='Test page' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg=\"1|-1|-1|-1|-1|-1\" src='' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
 		, "		<div class='wpb-iconbox'>"
@@ -54,7 +54,7 @@ public class Pgbnr_func_tst {
 	@Test  public void Hdump__quote() {	// PAGE:en.v:Europe; DATE:2016-07-12
 		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A\"b.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
-		, "	<div class='wpb-topbanner'>"
+		, "	<div class='wpb-banner-image-panorama wpb-topbanner wpb-positioned-banner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
 		, "		<a href='/wiki/File:A%22b.png' class='image' title='Test page' xowa_title='A%22b.png'><img data-xowa-title=\"A%22b.png\" data-xoimg=\"1|-1|-1|-1|-1|-1\" src='' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
 		, "		<div class='wpb-iconbox'>"
