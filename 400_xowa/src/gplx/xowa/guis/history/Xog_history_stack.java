@@ -46,23 +46,6 @@ public class Xog_history_stack {
 		if (from <= len - 1)
 			list.Del_range(from, len - 1);
 	}
-	public void Srl_save(Bry_bfr bfr) {
-		int len = list.Count();
-		for (int i = 0; i < len; ++i) {
-			Xog_history_itm itm = (Xog_history_itm)list.Get_at(i);
-			itm.Srl_save(bfr);
-		}
-	}
-	public void Srl_load(byte[] bry) {
-		list.Clear();
-		byte[][] lines = Bry_split_.Split_lines(bry);
-		int len = lines.length;
-		for (int i = 0; i < len; ++i) {
-			byte[] line = lines[i];
-			Xog_history_itm itm = Xog_history_itm.Srl_load(line);
-			this.Add(itm);
-		}
-	}
 	public void Cur_pos_(int v) {this.cur_pos = v;}
 	public static final byte Nav_fwd = 1, Nav_bwd = 2, Nav_by_anchor = 3;
 }

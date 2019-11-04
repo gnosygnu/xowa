@@ -54,7 +54,5 @@ public abstract class Xogv_tab_base {
 		return new_hpg;
 	}
 	@gplx.Virtual protected void Fetch_page__bgn(byte[] wiki_domain, byte[] page_bry, byte[] qarg_bry) {}
-	public void Srl_save(Bry_bfr bfr)					{history_stack.Srl_save(bfr);}
-	public void Srl_load(byte[] raw)					{history_stack.Srl_load(raw);}
 	public abstract void Show_page(Xog_history_itm old_itm, Xog_history_itm new_itm, Xoh_page new_hpg);
 }
