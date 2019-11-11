@@ -19,8 +19,8 @@ import gplx.xowa.apps.cfgs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*;
-import gplx.xowa.wikis.nss.*;
+import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.wikis.tdbs.hives.*;
 import gplx.xowa.wikis.pages.*;
 public class Xop_fxt {
@@ -169,6 +169,16 @@ public class Xop_fxt {
 		Xot_prm_chkr rv = new Xot_prm_chkr();
 		rv.Find_tkn_(tkn_arg_itm_(find));
 		return rv;
+	}
+	public void Init__file_find_mgr() {
+		Xowe_wiki commons_wiki = this.app.Wiki_mgr().Get_by_or_make(Xow_domain_itm_.Bry__commons);
+		Xof_repo_itm repo_itm = app.File_mgr().Repo_mgr().Get_at(0);
+		commons_wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Find_file_mgr_(new Xow_find_file_mgr(repo_itm, commons_wiki.Domain_str()));
+		this.wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Find_file_mgr_(new Xow_find_file_mgr(repo_itm, this.wiki.Domain_str()));
+	}
+	public void Init__orig(boolean wiki_is_commons, String orig_ttl, int orig_w, int orig_h) {
+		Xowe_wiki orig_wiki = wiki_is_commons ? (Xowe_wiki)this.wiki : (Xowe_wiki)app.Wiki_mgr().Get_by_or_null(gplx.xowa.wikis.domains.Xow_domain_itm_.Bry__commons);
+		orig_wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Find_file_mgr().Init_file(orig_ttl, orig_w, orig_h);
 	}
 	public void     Init__msg(String key, String val) {
 		Xol_msg_itm msg_itm = wiki.Msg_mgr().Get_or_make(Bry_.new_u8(key));

@@ -18,12 +18,14 @@ import org.junit.*; import gplx.core.brys.*; import gplx.xowa.wikis.pages.skins.
 import gplx.xowa.htmls.core.htmls.*;
 public class Pgbnr_func_tst {
 	private final    Pgbnr_func_fxt fxt = new Pgbnr_func_fxt();
-	@Test  public void Basic() {			
+	@Before public void init() {fxt.Clear();}
+	@Test  public void Basic() {
+		fxt.Init__orig(true, "A.png", 500, 200); // 500 > 200 * 2 for pageBanner;
 		fxt.Test__parse(Bool_.N, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
-		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
-		, "	<div class='wpb-banner-image-panorama wpb-topbanner wpb-positioned-banner'>"
+		( "<div class='ext-wpb-pagebanner pre-content'>"
+		, " <div class='wpb-banner-image-panorama wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
-		, "		<a href='' class='image' title='Test page' xowa_title='A.png'><img id='xoimg_0' src='file:///mem/wiki/repo/trg/orig/7/0/A.png' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
+		, "		<a href='' class='image' title='Test page' xowa_title='A.png'><img id='xoimg_0' src='file:///mem/wiki/repo/src/orig/7/0/A.png' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:500px'></a>"
 		, "		<div class='wpb-iconbox'>"
 		, "				<a href='/wiki/Star_article'><span aria-disabled='false' title='Star article' class='oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-star oo-ui-iconElement oo-ui-iconWidget'></span></a>"
 		, "		</div>"
@@ -39,8 +41,8 @@ public class Pgbnr_func_tst {
 	}
 	@Test  public void Hdump__basic() {
 		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
-		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
-		, "	<div class='wpb-banner-image-panorama wpb-topbanner wpb-positioned-banner'>"
+		( "<div class='ext-wpb-pagebanner pre-content'>"
+		, " <div class='wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
 		, "		<a href='/wiki/File:A.png' class='image' title='Test page' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg=\"1|-1|-1|-1|-1|-1\" src='' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
 		, "		<div class='wpb-iconbox'>"
@@ -53,8 +55,8 @@ public class Pgbnr_func_tst {
 	}
 	@Test  public void Hdump__quote() {	// PAGE:en.v:Europe; DATE:2016-07-12
 		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A\"b.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
-		( "<div class='ext-wpb-pagebanner noprint pre-content'>"
-		, "	<div class='wpb-banner-image-panorama wpb-topbanner wpb-positioned-banner'>"
+		( "<div class='ext-wpb-pagebanner pre-content'>"
+		, " <div class='wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
 		, "		<a href='/wiki/File:A%22b.png' class='image' title='Test page' xowa_title='A%22b.png'><img data-xowa-title=\"A%22b.png\" data-xoimg=\"1|-1|-1|-1|-1|-1\" src='' width='0' height='0' class='wpb-banner-image ' alt='' srcset='' data-pos-x='0' data-pos-y='0' style='max-width:0px'></a>"
 		, "		<div class='wpb-iconbox'>"
@@ -67,11 +69,15 @@ public class Pgbnr_func_tst {
 	}
 }
 class Pgbnr_func_fxt {
-	private final    Xop_fxt fxt;
-	public Pgbnr_func_fxt() {
+	private Xop_fxt fxt;
+	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "en.wikivoyage.org");
 		fxt = new Xop_fxt(app, wiki);
+		fxt.Init__file_find_mgr();
+	}
+	public void Init__orig(boolean wiki_is_commons, String orig_ttl, int orig_w, int orig_h) {
+		fxt.Init__orig(wiki_is_commons, orig_ttl, orig_w, orig_h);
 	}
 	public void Test__parse(boolean hdump, String raw, String expd) {
 		fxt.Exec_parse_page_all_as_str(raw);

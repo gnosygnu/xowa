@@ -18,6 +18,8 @@ import gplx.core.btries.*; import gplx.langs.mustaches.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
 import gplx.xowa.files.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.langs.htmls.encoders.*;
+// REF.MW:https://github.com/wikimedia/mediawiki-extensions-WikidataPageBanner/blob/master/includes/WikidataPageBannerFunctions.php
+// TODO.DATE:2019-11-11: calculate enableToc and hasPosition;
 public class Pgbnr_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_pagebanner;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pgbnr_func().Name_(name);}
@@ -130,8 +132,10 @@ public class Pgbnr_func extends Pf_func_base {
 			itm.Init_hdump(hctx.Mode_is_hdump());
 			banner_html = Get_banner_html(wiki, ctx, hctx, cfg, banner_ttl, itm);
 		}
-		if (banner_html != null)
+		if (banner_html != null) {
 			bfr.Add(banner_html);
+			wiki.Html_mgr().Html_wtr().Cfg().Toc__show_(false); // disable toc, else it will show twice (once in page banner; once in html); DATE:2019-11-11
+		}
 	}
 	public static byte[] Get_banner_html(Xowe_wiki wiki, Xop_ctx ctx, Xoh_wtr_ctx hctx, Pgbnr_cfg cfg, Xoa_ttl banner_ttl, Pgbnr_itm itm) {
 		byte[][] urls = Get_standard_size_urls(wiki, cfg, banner_ttl); if (urls == null) return null;
@@ -144,8 +148,11 @@ public class Pgbnr_func extends Pf_func_base {
 			tmp_bfr.Add(urls[i]).Add_byte_space().Add_int_variable(size).Add_byte(Byte_ascii.Ltr_w); //	REF.MW: $srcset[] = "$url {$size}w";
 		}
 		byte[] srcset = tmp_bfr.To_bry_and_clear();
-		byte[] banner_url = itm.banner_img_src != null ? itm.banner_img_src : urls.length == 0 ? Bry_.Empty : urls[urls_len - 1];	// gets largest url			
-		int max_width = itm.banner_file_itm.Orig_w();  // $file = wfFindFile( banner_file ); $options['max_width'] = $file->getWidth();
+		byte[] banner_url = itm.banner_img_src != null ? itm.banner_img_src : urls.length == 0 ? Bry_.Empty : urls[urls_len - 1];	// gets largest url
+		Xof_file_itm banner_file_itm = itm.banner_file_itm;
+		int max_width = banner_file_itm.Orig_w();  // $file = wfFindFile( banner_file ); $options['max_width'] = $file->getWidth();
+		// Provide information to the logic-less template about whether it is a panorama or not.
+		boolean isPanorama = banner_file_itm.Orig_w() > (banner_file_itm.Orig_h() * 2);
 		byte[] banner_file = null;   // $bannerfile->getLocalUrl();
 
 		byte[] toc_html = null;
@@ -159,7 +166,7 @@ public class Pgbnr_func extends Pf_func_base {
 			ctx.Page().Html_data().Toc_mgr().To_html(tmp_bfr, Xoh_wtr_ctx.Basic, true);
 			toc_html = tmp_bfr.To_bry_and_clear();
 		}
-		itm.Init_from_html(max_width, banner_file, banner_url, srcset, cfg.enable_heading_override, toc_html);
+		itm.Init_from_html(max_width, banner_file, banner_url, srcset, cfg.enable_heading_override, toc_html, isPanorama);
 
 		Mustache_render_ctx mctx = new Mustache_render_ctx().Init(itm);
 		Mustache_bfr mbfr = Mustache_bfr.New_bfr(tmp_bfr);

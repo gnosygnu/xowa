@@ -1,7 +1,7 @@
 <div class="ext-wpb-pagebanner pre-content">
-	<div class="wpb-topbanner{{extraClass}}">
+	<div class="{{#isPanorama}}wpb-banner-image-panorama {{/isPanorama}}wpb-topbanner{{extraClass}}">
 		{{#isHeadingOverrideEnabled}}<h1 class="wpb-name">{{title}}</h1>{{/isHeadingOverrideEnabled}}
-		<a href="{{bannerfile}}" class="image" title="{{tooltip}}" xowa_title="{{file_ttl}}"><img{{{img_id_atr}}}{{{img_xottl}}}{{{img_xoimg}}} src="{{banner}}" width="0" height="0" class="wpb-banner-image {{originx}}" alt="" srcset="{{srcset}}" data-pos-x="{{data-pos-x}}" data-pos-y="{{data-pos-y}}" style="max-width:{{maxWidth}}px"></a>
+		<a class="image" dir="ltr" title="{{tooltip}}" href="{{bannerfile}}" xowa_title="{{file_ttl}}"><img{{{img_id_atr}}}{{{img_xottl}}}{{{img_xoimg}}} src="{{banner}}" srcset="{{srcset}}" class="wpb-banner-image"{{#hasPosition}} data-pos-x="{{data-pos-x}}" data-pos-y="{{data-pos-y}}" {{/hasPosition}}style="max-width:{{maxWidth}}px"></a>
 		{{#hasIcons}}
 		<div class="wpb-iconbox">
 			{{#icons}}
@@ -10,5 +10,5 @@
 		</div>
 		{{/hasIcons}}
 	</div>
-	<div class="wpb-topbanner-toc {{#bottomtoc}}wpb-bottomtoc{{/bottomtoc}}"><div class="wpb-banner-toc">{{{toc}}}</div></div>
+	<div class="wpb-topbanner-toc {{#bottomtoc}}wpb-bottomtoc{{/bottomtoc}}"><div class="wpb-banner-toc">{{#enable-toc}}{{{toc}}}{{/enable-toc}}</div></div>
 </div>
