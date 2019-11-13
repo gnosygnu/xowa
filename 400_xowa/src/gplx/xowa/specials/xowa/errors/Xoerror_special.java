@@ -31,6 +31,10 @@ public class Xoerror_special implements Xow_special_page {
 			title = "Invalid title";
 			msg = "The title has invalid characters: <span style='color:red;font-weight:bold'>" + data + "</span>";
 		}
+		else if (String_.Eq(type, "InvalidWiki")) {
+			title = "Invalid wiki";
+			msg = "The wiki is not installed: <span style='color:red;font-weight:bold'>" + data + "</span>";
+		}
 
 		page.Db().Text().Text_bry_(fmt.Bld_many_to_bry(Bry_bfr_.New(), title, msg));
 	}
@@ -41,7 +45,10 @@ public class Xoerror_special implements Xow_special_page {
 	));
 
 	public Xow_special_page Special__clone() {return this;}
-	public static byte[] Make_url__invalidTitle(byte[] invalid_title) {
-		return Bry_.Add(Xow_special_meta_.Itm__error.Ttl_bry(), Bry_.new_a7("?type=InvalidTitle&data="), invalid_title);
+	public static byte[] Make_url__invalidTitle(byte[] ttl_bry) {
+		return Bry_.Add(Xow_special_meta_.Itm__error.Ttl_bry(), Bry_.new_a7("?type=InvalidTitle&data="), ttl_bry);
+	}
+	public static byte[] Make_url__invalidWiki(byte[] wiki) {
+		return Bry_.Add(Xow_special_meta_.Itm__error.Ttl_bry(), Bry_.new_a7("?type=InvalidWiki&data="), wiki);
 	}
 }

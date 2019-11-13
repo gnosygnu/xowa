@@ -40,6 +40,11 @@ public class Http_server_page {
 	public boolean Make_url(byte[] wiki_domain, byte[] ttl_bry_arg, byte[] qarg) {
 		// get wiki
 		wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_make_init_y(wiki_domain); // assert init for Main_Page; EX:click zh.w on wiki sidebar; DATE:2015-07-19
+		if (!wiki.Installed()) {
+			this.ttl = wiki.Ttl_parse(Xow_special_meta_.Itm__error.Ttl_bry());
+			this.url = wiki.Utl__url_parser().Parse(Xoerror_special.Make_url__invalidWiki(wiki_domain));
+			return true;
+		}
 		if (Runtime_.Memory_total() > Io_mgr.Len_gb) Xowe_wiki_.Rls_mem(wiki, true); // release memory at 1 GB; DATE:2015-09-11
 
 		// get url
