@@ -67,6 +67,7 @@ public class Xog_tab_itm_read_mgr {
 			html_itm.Scroll_page_by_bmk_gui();
 		else
 			Gfo_invk_.Invk_by_val(tab.Html_itm().Cmd_async(), Xog_html_itm.Invk_html_elem_focus, Xog_html_itm.Elem_id__xowa_edit_data_box);	// NOTE: must be async, else won't work; DATE:2014-06-05
+		new_page.Tab_data().Gui_loaded_y_();
 	}
 	public static void Update_selected_tab_blank(Xog_win_itm win) {Update_selected_tab(win, null, null);} // called when all tabs are null
 	public static void Update_selected_tab(Xog_win_itm win, Xoa_url url, Xoa_ttl ttl) {

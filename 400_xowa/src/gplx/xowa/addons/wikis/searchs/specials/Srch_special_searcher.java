@@ -38,7 +38,7 @@ public class Srch_special_searcher {
 					rslt_list = cbk_synchronous.Rslts();
 				}
 				else {
-					Srch_special_cmd cmd = new Srch_special_cmd(this, qry, wiki, page.Tab_data().Close_mgr(), page.Tab_data().Tab().Html_itm(), key, search_is_async);
+					Srch_special_cmd cmd = new Srch_special_cmd(this, qry, wiki, page.Tab_data(), key, search_is_async);
 					cancel_hash.Add(key, cmd);
 					cmd.Search();						// do search; will return immediately b/c async
 					rslt_list = new Srch_rslt_list();	// NOTE: create an empty rslt which will be populated by async calls

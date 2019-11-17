@@ -16,14 +16,17 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import gplx.core.threads.*;
 import gplx.xowa.guis.cbks.js.*; import gplx.xowa.guis.views.*;
+import gplx.xowa.wikis.pages.*;
 import gplx.xowa.addons.wikis.searchs.specials.htmls.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_special_cmd implements Gfo_invk, Srch_rslt_cbk, Xog_tab_close_lnr {
 	private final    Srch_special_searcher mgr; private final    Srch_search_qry qry;
 	public final    Xow_wiki wiki; private final    Xog_tab_close_mgr tab_close_mgr; private final    Xog_js_wkr js_wkr;
+	private final    Xopg_tab_data tab_data;
 	private Srch_html_row_wkr html_row_wkr; private final    boolean async; 
 	public final    byte[] key; private boolean canceled = false;
-	public Srch_special_cmd(Srch_special_searcher mgr, Srch_search_qry qry, Xow_wiki wiki, Xog_tab_close_mgr tab_close_mgr, Xog_js_wkr js_wkr, byte[] key, boolean search_is_async) {
-		this.mgr = mgr; this.qry = qry; this.wiki = wiki; this.tab_close_mgr = tab_close_mgr; this.js_wkr = js_wkr; this.key = key;
+	public Srch_special_cmd(Srch_special_searcher mgr, Srch_search_qry qry, Xow_wiki wiki, Xopg_tab_data tab_data, byte[] key, boolean search_is_async) {
+		this.mgr = mgr; this.qry = qry; this.wiki = wiki;
+		this.tab_data = tab_data; this.tab_close_mgr = tab_data.Close_mgr(); this.js_wkr = tab_data.Tab().Html_itm(); this.key = key;
 		this.async = wiki.App().Mode().Tid_is_gui() && search_is_async;
 	}
 	public void On_cancel() {
@@ -41,6 +44,12 @@ public class Srch_special_cmd implements Gfo_invk, Srch_rslt_cbk, Xog_tab_close_
 			Search_db();
 	}
 	private void Search_db() {
+		for (int loop = 0; loop < 20; loop++) {
+			if (tab_data.Gui_loaded())
+				break;
+			else
+				Thread_adp_.Sleep(1000);
+		}
 		synchronized (mgr) {	// THREAD: needed else multiple Special:Search pages will fail at startup; DATE:2016-03-27
 			tab_close_mgr.Add(this);
 			// DEPRECATE: causes search to fail when using go back / go forward; DELETE:2016-05; DATE:2016-03-27
