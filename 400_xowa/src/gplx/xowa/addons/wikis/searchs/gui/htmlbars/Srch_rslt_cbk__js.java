@@ -41,7 +41,7 @@ class Srch_rslt_cbk__js implements Srch_rslt_cbk {
 			Srch_rslt_row row = rslts_list.Get_at(i);
 			Highlight(ctx, row);	// always highlight title first; needed for suggest_box to update highlighting when increasing word; EX: Eart -> Earth; "Earth" should be highlighted, not "Eart"
 			js_wtr.Ary_bry(row.Page_ttl.Full_txt_w_ttl_case());
-			js_wtr.Ary_bry(row.Page_ttl_display(Bool_.Y));
+			js_wtr.Ary_bry(row.To_display(Srch_rslt_row.Display_type__suggest));
 		}
 		js_wtr.Ary_term();
 		js_wtr.Func_term();

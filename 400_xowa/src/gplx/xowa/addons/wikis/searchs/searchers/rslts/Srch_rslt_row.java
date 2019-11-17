@@ -33,16 +33,28 @@ public class Srch_rslt_row {
 	public final    int			Page_ns;
 	public final    byte[]		Page_ttl_wo_ns;
 	public final    int			Page_len;
-	public final    int			Page_redirect_id;
+	public int			        Page_redirect_id;
 	public final    int			Page_score;
 	public byte[]				Page_redirect_ttl;
-	public byte[]				Page_ttl_highlight;
-	public byte[]				Page_ttl_display(boolean html) {
-		byte[] rv = html ? Page_ttl_highlight : Page_ttl.Full_txt_w_ttl_case();
+	public byte[]               Page_ttl_highlight;
+
+	public byte[] To_display(int display_type) {
+		// NOTE: use Highlight for suggest only; note that url_bar also sets Highlight
+		byte[] rv
+			= display_type == Srch_rslt_row.Display_type__suggest
+			? this.Page_ttl_highlight
+			: Page_ttl.Full_txt_w_ttl_case();
+
+		// no redirect; just return it; EX: "Actual page"
 		if (Page_redirect_id == Page_redirect_id_null)
 			return rv;
+		// redirect exists; add it to display; EX: "Redirect -> Actual page"
 		else {
-			byte[] redirect_dlm = html ? Bry__redirect__html : Bry__redirect__text;
+			// NOTE: "→" does not work for SWT GUI
+			byte[] redirect_dlm
+				= display_type == Srch_rslt_row.Display_type__url_bar
+				? Bry__redirect__text
+				: Bry__redirect__html;
 			return Bry_.Add(rv, redirect_dlm, Page_redirect_ttl);
 		}
 	}
@@ -56,4 +68,9 @@ public class Srch_rslt_row {
 	private static final    byte[] 
 	  Bry__redirect__html = Bry_.new_u8(" → ")	// 8592; 8594
 	, Bry__redirect__text = Bry_.new_a7(Str__redirect__text);
+	public static final int
+	  Display_type__url_bar      = 1
+	, Display_type__suggest      = 2
+	, Display_type__special_page = 3
+	;
 }

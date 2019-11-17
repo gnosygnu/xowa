@@ -458,13 +458,11 @@ if (!window.xowa) {
     elem.insertAdjacentHTML('beforebegin', html);
     
     xowa.js.doc.process_new_elem(elem.parentNode);  // NOTE: elem is placeholder item; html is inserted after it; need to call process_new_elem on parentNode; DATE:2015-08-03
+    return true;
   };
-/*
-  xowa.js.doc.ElemAdd.publish()
-*/
   // PURPOSE: process new element such as adding bindings; DATE:2015-07-09
   xowa.js.doc.process_new_elem = function(elem) {
-     xowa.js.doc.EvtElemAdd.pub(elem);
+     xowa.js.doc.evtElemAdd.pub(elem);
   }
   
   // PURPOSE: async search; gallery; imap

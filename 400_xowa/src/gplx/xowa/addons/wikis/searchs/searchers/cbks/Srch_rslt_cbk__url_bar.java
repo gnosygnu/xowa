@@ -51,7 +51,7 @@ public class Srch_rslt_cbk__url_bar implements Srch_rslt_cbk, Gfo_invk {
 			if (i >= max_results) break;
 			if (i < rslts_len) {
 				Srch_rslt_row rslt = rslts_list.Get_at(i);
-				cbo_itm = String_.new_u8(rslt.Page_ttl_display(Bool_.N));
+				cbo_itm = String_.new_u8(rslt.To_display(Srch_rslt_row.Display_type__url_bar));
 			}
 			cbo_ary[i] = cbo_itm;
 		}

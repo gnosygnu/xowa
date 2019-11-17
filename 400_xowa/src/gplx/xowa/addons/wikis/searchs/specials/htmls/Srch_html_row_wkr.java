@@ -29,14 +29,22 @@ public class Srch_html_row_wkr {
 	}
 	public void Set(int i, Srch_rslt_row row) {rows[i] = row;}
 	public void On_rslt_found(Srch_rslt_row new_row) {
+		// get last row
 		Srch_rslt_row last_row = rows[rows_len - 1];
 		if (last_row != null) {
 			if (Compare(new_row, last_row) == CompareAble_.More_or_same) return;	// new_row is < last_row; exit
 		}
-		int new_row_slot = Find_insert_slot(new_row); if (new_row_slot == -1) return;
+
+		// find where new row goes
+		int new_row_slot = Find_insert_slot(new_row);
+		if (new_row_slot == -1) return;
+
+		// get row and add it
 		Srch_rslt_row insert_row = rows[new_row_slot];
 		byte[] insert_key = insert_row == null ? insert_new_key : insert_row.Key;
 		Displace(new_row_slot, new_row);
+
+		// generate html
 		html_row_bldr.Bld_html(bfr, new_row);
 		String html_tbl = bfr.To_str_and_clear();
 		js_wkr.Html_elem_append_above(Gfh_utl.Encode_id_as_str(insert_key), html_tbl);

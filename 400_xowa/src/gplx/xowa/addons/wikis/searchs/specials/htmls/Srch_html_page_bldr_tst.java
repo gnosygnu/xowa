@@ -77,7 +77,6 @@ class Srch_html_page_bldr_fxt {
 		byte[] ttl_bry = Bry_.new_u8(ttl_str);
 		++page_id;
 		Srch_rslt_row rv = new Srch_rslt_row(Srch_rslt_row.Bld_key(wiki_bry, page_id), wiki_bry, wiki.Ttl_parse(ttl_bry), gplx.xowa.wikis.nss.Xow_ns_.Tid__main, ttl_bry, page_id, len, len, Srch_rslt_row.Page_redirect_id_null);
-		rv.Page_ttl_highlight = rv.Page_ttl.Full_txt_w_ttl_case();
 		return rv;
 	}
 }
