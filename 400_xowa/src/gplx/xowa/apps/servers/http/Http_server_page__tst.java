@@ -33,6 +33,7 @@ class Http_server_page__fxt {
 	public void Init__xwiki(String wiki, String abrv, String domain) {
 		Xowe_wiki xwiki_wiki = fxt.App().Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki));
 		xwiki_wiki.Xwiki_mgr().Add_by_atrs(abrv, domain);
+		xwiki_wiki.Installed_by_test_(Bool_.Y);
 	}
 	public void Test__make_url(boolean expd, String wiki_domain, String ttl_bry_arg, String qarg) {
 		boolean actl = page.Make_url(Bry_.new_u8(wiki_domain), Bry_.new_u8(ttl_bry_arg), Bry_.new_u8(qarg));
