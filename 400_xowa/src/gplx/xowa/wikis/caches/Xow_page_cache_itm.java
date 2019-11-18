@@ -31,9 +31,11 @@ public class Xow_page_cache_itm implements Xowd_text_bry_owner {
 	public boolean   Cache_permanently() {return cache_permanently;} private final    boolean cache_permanently;
 	public long Cache_len() {return cache_len;}
 
-	// used by xomp
-	public int Page_id() {return page_id;} private int page_id;
-	public int Redirect_id() {return redirect_id;} private int redirect_id;
+	// used by xomp; Scrib_ttl
+	public int Page_id() {return page_id;} private int page_id = -1;
+	public boolean Page_exists() {return page_id != -1;}
+	public int Redirect_id() {return redirect_id;} private int redirect_id = -1;
+	public boolean Redirect_exists() {return redirect_id != -1;}
 	public void Set_text_bry_by_db(byte[] v) {
 		this.wtxt__direct = v;
 		this.cache_len = wtxt__direct == null ? 0 : wtxt__direct.length;

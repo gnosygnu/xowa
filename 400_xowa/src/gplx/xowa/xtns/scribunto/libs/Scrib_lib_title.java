@@ -147,11 +147,11 @@ public class Scrib_lib_title implements Scrib_lib {
 		if (ttl == Xoa_ttl.Null) return rslt.Init_null();
 		// TODO_OLD: MW does extra logic here to cache ttl in ttl cache to avoid extra title lookups
 		boolean ttl_exists = false, ttl_redirect = false; int ttl_id = 0;
-		Xowd_page_itm db_page = Xowd_page_itm.new_tmp();
-		ttl_exists = core.Wiki().Db_mgr().Load_mgr().Load_by_ttl(db_page, ttl.Ns(), ttl.Page_db());
-		if (ttl_exists) {
-			ttl_redirect = db_page.Redirected();
-			ttl_id = db_page.Id();
+		Xow_page_cache_itm cache_itm = core.Wiki().Cache_mgr().Page_cache().Get_itm_else_load_or_null(ttl);
+		if (cache_itm != null) {
+			ttl_exists = cache_itm.Page_exists();
+			ttl_id = cache_itm.Page_id();
+			ttl_redirect = cache_itm.Redirect_exists();
 		}
 		Keyval[] rv = new Keyval[4];
 		rv[ 0] = Keyval_.new_("isRedirect"			, ttl_redirect);						// title.isRedirect

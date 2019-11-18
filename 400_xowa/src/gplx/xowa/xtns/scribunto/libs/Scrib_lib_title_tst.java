@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_title_tst {
 	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
@@ -76,6 +76,12 @@ public class Scrib_lib_title_tst {
 	@Test   public void GetExpensiveData_exists() {
 		fxt.Parser_fxt().Init_page_create("A");
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.Y, 0, Bool_.N));
+	}
+	@Test   public void GetExpensiveData_cache() { // ISSUE#:597; DATE:2019-11-18
+		gplx.xowa.wikis.caches.Xow_page_cache cache_mgr = fxt.Parser_fxt().Wiki().Cache_mgr().Page_cache();
+		Gftest.Eq__bool(Bool_.N, cache_mgr.Get_itm_or_null("A") != null); // item does not exist
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.N, 0, Bool_.N));
+		Gftest.Eq__bool(Bool_.Y, cache_mgr.Get_itm_or_null("A") != null); // item exists
 	}
 	@Test   public void GetFileInfo() {
 		Wiki_orig_tbl__create(fxt.Core().Wiki());
