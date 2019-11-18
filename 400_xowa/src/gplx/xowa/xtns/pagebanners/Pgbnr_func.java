@@ -134,7 +134,6 @@ public class Pgbnr_func extends Pf_func_base {
 		}
 		if (banner_html != null) {
 			bfr.Add(banner_html);
-			wiki.Html_mgr().Html_wtr().Cfg().Toc__show_(false); // disable toc, else it will show twice (once in page banner; once in html); DATE:2019-11-11
 		}
 	}
 	public static byte[] Get_banner_html(Xowe_wiki wiki, Xop_ctx ctx, Xoh_wtr_ctx hctx, Pgbnr_cfg cfg, Xoa_ttl banner_ttl, Pgbnr_itm itm) {

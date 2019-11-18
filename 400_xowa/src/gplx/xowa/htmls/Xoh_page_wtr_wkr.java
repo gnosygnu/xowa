@@ -195,7 +195,8 @@ public class Xoh_page_wtr_wkr {
 			if (page.Root() != null) {	// NOTE: will be null if blank; occurs for one test: Logo_has_correct_main_page; DATE:2015-09-29
 				page.Html_data().Toc_mgr().Clear();	// NOTE: always clear tocs before writing html; toc_itms added when writing html_hdr; DATE:2016-07-17
 				wiki.Html_mgr().Html_wtr().Write_doc(tidy_bfr, ctx, hctx, page.Root().Data_mid(), page.Root());
-				if (wiki.Html_mgr().Html_wtr().Cfg().Toc__show())
+				if (wiki.Html_mgr().Html_wtr().Cfg().Toc__show()
+					&& page.Html_data().Xtn_pgbnr().Show_toc_in_html())
 					gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_toc(tidy_bfr, page, hctx);
 			}
 		}

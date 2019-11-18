@@ -37,7 +37,7 @@ public class Xoh_hdr_html {
 
 		// write TOC tag if (a) TOC enabled and (b) 1st hdr
 		if (	hdr.First_in_doc() 
-			&&	cfg.Toc__show() 
+			&&	cfg.Toc__show()
 			&&	page.Wtxt().Toc().Enabled()
 			&&	!page.Wtxt().Toc().Flag__toc())	// __TOC__ not specified; place at top; NOTE: if __TOC__ was specified, then it would be placed wherever __TOC__ appears
 			gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_placeholder(page, bfr);

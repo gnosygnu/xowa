@@ -44,12 +44,15 @@ public class Srch_special_cmd implements Gfo_invk, Srch_rslt_cbk, Xog_tab_close_
 			Search_db();
 	}
 	private void Search_db() {
-		for (int loop = 0; loop < 20; loop++) {
+		// NOTE: wait for gui to load, else AJAX calls will return before SWT is ready; DATE:2019-11-17
+		// NOTE: this fires async in one thread while page_load fires async in another thread;
+		for (int loop = 0; loop < 30; loop++) {
 			if (tab_data.Gui_loaded())
 				break;
 			else
-				Thread_adp_.Sleep(1000);
+				Thread_adp_.Sleep(100);
 		}
+
 		synchronized (mgr) {	// THREAD: needed else multiple Special:Search pages will fail at startup; DATE:2016-03-27
 			tab_close_mgr.Add(this);
 			// DEPRECATE: causes search to fail when using go back / go forward; DELETE:2016-05; DATE:2016-03-27
