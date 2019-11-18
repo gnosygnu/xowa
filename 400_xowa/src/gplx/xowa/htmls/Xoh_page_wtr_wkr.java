@@ -196,7 +196,7 @@ public class Xoh_page_wtr_wkr {
 				page.Html_data().Toc_mgr().Clear();	// NOTE: always clear tocs before writing html; toc_itms added when writing html_hdr; DATE:2016-07-17
 				wiki.Html_mgr().Html_wtr().Write_doc(tidy_bfr, ctx, hctx, page.Root().Data_mid(), page.Root());
 				if (wiki.Html_mgr().Html_wtr().Cfg().Toc__show()
-					&& page.Html_data().Xtn_pgbnr().Show_toc_in_html())
+					&& (page.Html_data().Xtn_pgbnr() == null || page.Html_data().Xtn_pgbnr().Show_toc_in_html())) // do not write TOC in HTML body if pageBanner is enabled
 					gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_toc(tidy_bfr, page, hctx);
 			}
 		}
