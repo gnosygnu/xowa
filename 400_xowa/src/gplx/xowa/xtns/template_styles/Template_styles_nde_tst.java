@@ -84,6 +84,17 @@ public class Template_styles_nde_tst {
 		, fxt.Make__style(0, css)
 		);
 	}
+	@Test   public void Fix_single_word_paragraph() { // PURPOSE:make sure block is closed, else single-word paragraphs; ISSUE#:616; DATE:2019-11-18
+		String css = fxt.Make__css_color("red");
+		fxt.Init__page("Template:Test.css", css);
+		fxt.Parser_fxt().Init_para_y_();
+		fxt.Test__parse
+		( String_.Concat_lines_nl_skip_last("<templatestyles src='Test.css'/>", "a")
+		, String_.Concat_lines_nl_skip_last("", "<p>a", "</p>")
+		, fxt.Make__style(0, css)
+		);
+		fxt.Parser_fxt().Init_para_n_();
+	}
 	@Test  public void Error__invalid_title() {
 		fxt.Test__parse
 		( "<templatestyles src='A|b.css'/>"
@@ -108,6 +119,7 @@ public class Template_styles_nde_tst {
 }
 class Template_styles_nde_fxt {
 	private final    Xop_fxt parser_fxt = new Xop_fxt();
+	public Xop_fxt Parser_fxt() {return parser_fxt;}
 	public void Reset() {
 		parser_fxt.Reset();
 		parser_fxt.Wiki().Xtn_mgr().Init_by_wiki(parser_fxt.Wiki());
