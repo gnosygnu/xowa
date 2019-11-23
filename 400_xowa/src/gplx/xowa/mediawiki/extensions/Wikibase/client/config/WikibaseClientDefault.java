@@ -42,6 +42,7 @@ public class WikibaseClientDefault {
 		rv.addSetting("allowDataAccessInUserLanguage", false);
 		rv.addSetting("sharedCacheDuration", 60 * 60);
 		rv.addSetting("fineGrainedLuaTracking", false); // PERF: setting deliberately to false else every call to entity.sitelinks['frwiki']); will generate another round-trip to Scrib; SEE:mw.wikibase.lua; REF.MW: https://gerrit.wikimedia.org/r/#/c/operations/mediawiki-config/+/412664/3/wmf-config/InitialiseSettings.php
+		rv.addSetting("siteGlobalID", "wikidatawiki");
 		return rv;
 	}
 }
