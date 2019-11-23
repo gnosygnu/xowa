@@ -117,7 +117,9 @@ public class Xow_abrv_wm_ {
 	}
 	public static byte[] To_abrv(Xow_domain_itm domain_itm) {
 		int tid = domain_itm.Domain_type_id();
-		byte[] suffix = (byte[])int_hash.Get_by(Int_obj_ref.New(tid)); if (suffix == null) return null;	
+		byte[] suffix = (byte[])int_hash.Get_by(Int_obj_ref.New(tid));
+		if (suffix == null) // Tid__home and Tid__other (wikia)
+			return domain_itm.Domain_bry(); // return domain; needed for WikibaseLanguageIndependentLuaBindings; DATE:2019-11-23
 		switch (tid) {
 			case Xow_domain_tid_.Tid__commons:
 			case Xow_domain_tid_.Tid__species:

@@ -290,7 +290,7 @@ public function formatValues( $snaksSerialization ) {
 	public boolean GetLabelByLanguage(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] prefixedEntityId = args.Pull_bry(0);
 		byte[] languageCode = args.Pull_bry(1);
-		byte[] label = wdata_mgr.Lua_bindings().getLabelByLanguage_or_null(prefixedEntityId, languageCode);
+		byte[] label = core.Wiki().Xtn_mgr().Xtn_wikibase().Lua_bindings().getLabelByLanguage_or_null(prefixedEntityId, languageCode);
 		return label == null ? rslt.Init_str_empty() : rslt.Init_obj(label);
 	}
 	public boolean GetSiteLinkPageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
@@ -319,7 +319,7 @@ public function formatValues( $snaksSerialization ) {
 	}
 	public static boolean GetSetting(Scrib_proc_args args, Scrib_proc_rslt rslt, Scrib_core core, Wdata_wiki_mgr wdata_mgr) {
 		byte[] key = args.Pull_bry(0);
-		Object rv = wdata_mgr.Lua_bindings().getSetting(key);
+		Object rv = core.Wiki().Xtn_mgr().Xtn_wikibase().Lua_bindings().getSetting(key);
 		if (rv == null) 
 			throw Err_.new_("wbase", "getSetting key missing", "key", key, "url", core.Page().Url().To_str());
 		return rslt.Init_obj(rv);
@@ -333,13 +333,13 @@ public function formatValues( $snaksSerialization ) {
 	public boolean GetEntityModuleName(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String moduleName = "mw.wikibase.entity"; // FOOTNOTE:GetEntityModuleName
 		// String prefixedEntityId = Get_xid_from_args(args);
-		try {
+		// try {
 			// $type = $entityId->getEntityType();
 			// $moduleName = $this->getLuaEntityModules()[$type] ?? 'mw.wikibase.entity';
-		}
-		catch (Exception exc) {
-			moduleName = "mw.wikibase.entity";
-		}
+		// }
+		// catch (Exception exc) {
+		//	moduleName = "mw.wikibase.entity";
+		// }
 		return rslt.Init_obj(moduleName);
 	}
 	private byte[] Get_xid_from_args(Scrib_proc_args args) {

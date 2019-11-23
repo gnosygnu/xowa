@@ -23,7 +23,7 @@ public class WikibaseClientDefault {
 	private void addSetting(String key, Object val) {
 		settingCache.Add(Bry_.new_u8(key), val);
 	}
-	public static WikibaseClientDefault New() {
+	public static WikibaseClientDefault New(byte[] wiki_abrv_wm) {
 		WikibaseClientDefault rv = new WikibaseClientDefault();
 		rv.addSetting("injectRecentChanges", true);
 		rv.addSetting("showExternalRecentChanges", true);
@@ -42,7 +42,7 @@ public class WikibaseClientDefault {
 		rv.addSetting("allowDataAccessInUserLanguage", false);
 		rv.addSetting("sharedCacheDuration", 60 * 60);
 		rv.addSetting("fineGrainedLuaTracking", false); // PERF: setting deliberately to false else every call to entity.sitelinks['frwiki']); will generate another round-trip to Scrib; SEE:mw.wikibase.lua; REF.MW: https://gerrit.wikimedia.org/r/#/c/operations/mediawiki-config/+/412664/3/wmf-config/InitialiseSettings.php
-		rv.addSetting("siteGlobalID", "wikidatawiki");
+		rv.addSetting("siteGlobalID", String_.new_u8(wiki_abrv_wm));
 		return rv;
 	}
 }

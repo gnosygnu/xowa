@@ -17,13 +17,16 @@ package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.langs.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.bldrs.*;
 import gplx.xowa.wikis.*;
+import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto.*;
 public class Wdata_xtn_mgr extends Xox_mgr_base {
-	private static final String XTN_KEY_STR = "Wikibase"; public static final    byte[] XTN_KEY = Bry_.new_a7(XTN_KEY_STR);
+	private WikibaseLanguageIndependentLuaBindings lua_bindings;
+	public WikibaseLanguageIndependentLuaBindings Lua_bindings() {return lua_bindings;}
 	@Override public boolean Enabled_default() {return false;}
 	@Override public byte[] Xtn_key() {return XTN_KEY;} 
 	@Override public Xox_mgr Xtn_clone_new() {return new Wdata_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
-		if (!Enabled()) return;
+		// if (!Enabled()) return; // NOTE: for now, always enable; may change to selectively enable by wiki later; DATE:2019-11-23
+		this.lua_bindings = new WikibaseLanguageIndependentLuaBindings(wiki.Appe().Wiki_mgr().Wdata_mgr().Doc_mgr, wiki.Domain_itm().Abrv_wm());
 	}
 	public void Load_msgs(Xowe_wiki wdata_wiki, Xol_lang_itm lang) {
 		wdata_wiki.Msg_mgr().Lang_(lang);
@@ -35,4 +38,5 @@ public class Wdata_xtn_mgr extends Xox_mgr_base {
 		Io_url url = app.Fsys_mgr().Bin_xtns_dir().GenSubFil_nest(nest_paths);
 		Xob_i18n_parser.Load_msgs(false, wiki.Lang(), url);
 	}
+	private static final String XTN_KEY_STR = "Wikibase"; public static final    byte[] XTN_KEY = Bry_.new_a7(XTN_KEY_STR);
 }

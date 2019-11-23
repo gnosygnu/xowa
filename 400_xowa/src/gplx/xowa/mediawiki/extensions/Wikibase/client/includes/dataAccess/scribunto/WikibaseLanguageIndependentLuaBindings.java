@@ -18,9 +18,10 @@ import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gp
 import gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.config.*;
 public class WikibaseLanguageIndependentLuaBindings {
 	private final    EntityRetrievingTermLookup termLookup;
-	private final    WikibaseClientDefault settings = WikibaseClientDefault.New();
-	public WikibaseLanguageIndependentLuaBindings(Wbase_doc_mgr entity_mgr) {
+	private final    WikibaseClientDefault settings;
+	public WikibaseLanguageIndependentLuaBindings(Wbase_doc_mgr entity_mgr, byte[] wiki_abrv_wm) {
 		this.termLookup = new EntityRetrievingTermLookup(entity_mgr);
+		this.settings = WikibaseClientDefault.New(wiki_abrv_wm);
 	}
 	public byte[] getLabelByLanguage_or_null(byte[] prefixedEntityId, byte[] languageCode) {
 		return termLookup.getLabel_or_null(prefixedEntityId, languageCode);
