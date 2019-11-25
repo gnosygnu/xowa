@@ -94,7 +94,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 
 		// url-decode; must decode since HTML will be url-encoded, but fsdb dbs will be actual characters; EX: A%C3%A9b -> A�b
 		if (lnki_ttl != null) // NOTE: @src and @xowa_title will be null for score
-			lnki_ttl = Gfo_url_encoder_.Mw_wfUrlencode.Decode(lnki_ttl);
+			lnki_ttl = Xoa_ttl.Replace_spaces(Gfo_url_encoder_.Href.Decode(lnki_ttl));
 
 		boolean write_xowa_file_title = true;
 		if		(data.Img_pgbnr().Exists()) {
