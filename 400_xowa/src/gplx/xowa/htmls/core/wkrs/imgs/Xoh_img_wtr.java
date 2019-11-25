@@ -83,11 +83,18 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		this.img_wo_anch = data.Img_wo_anch();
 		this.fsdb_itm = hpg.Img_mgr().Make_img(data.Img_is_gallery());
 
-		byte[] file_ttl_bry = data.Anch_xo_ttl().Val();
-		byte[] img_src_bry_temp = data.Img_src().File_ttl_bry();
-		byte[] lnki_ttl = img_src_bry_temp == null  // img_src will be empty for htxt; use file_ttl_bry instead; EX: '<img src="">' DATE:2019-03-10
-			? file_ttl_bry 
-			: Xoa_ttl.Replace_spaces(Gfo_url_encoder_.Href_quotes.Decode(img_src_bry_temp));	// NOTE: must decode for fsdb.lnki_ttl as well as xowa_title; EX: A%C3%A9b -> A�b
+		byte[] xowa_title = data.Anch_xo_ttl().Val();
+
+		// set lnki_ttl to img_src.file_ttl;
+		byte[] lnki_ttl = data.Img_src().File_ttl_bry();
+		if (lnki_ttl == null) {
+			// in most cases, @src; set lnki_ttl from @xowa_title instead; EX: '<img src="" xowa-title="A.png">' DATE:2019-03-10
+			lnki_ttl = xowa_title;
+		}
+
+		// url-decode; must decode since HTML will be url-encoded, but fsdb dbs will be actual characters; EX: A%C3%A9b -> A�b
+		if (lnki_ttl != null) // NOTE: @src and @xowa_title will be null for score
+			lnki_ttl = Gfo_url_encoder_.Mw_wfUrlencode.Decode(lnki_ttl);
 
 		boolean write_xowa_file_title = true;
 		if		(data.Img_pgbnr().Exists()) {
@@ -125,11 +132,11 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		anch_cls.Set_by_arg(data.Anch_cls());
 		anch_title.Set_by_mid_or_null(src, data.Anch_title_bgn(), data.Anch_title_end());
 		if (	data.Img_wo_anch() 					// anchor-less image
-			||	Bry_.Len_gt_0(file_ttl_bry))		// regular anch with image
-			anch_xowa_title.Set_by_bry(file_ttl_bry);			
+			||	Bry_.Len_gt_0(xowa_title))		// regular anch with image
+			anch_xowa_title.Set_by_bry(xowa_title);
 
 		if (write_xowa_file_title)
-			img_xowa_title.Set_by_bry(file_ttl_bry);
+			img_xowa_title.Set_by_bry(xowa_title);
 		img_alt.Set_by_mid_or_empty(src, data.Img_alt_bgn(), data.Img_alt_end());
 		img_cls.Set_by_arg(data.Img_cls());
 		if (data.Img_imap_idx() != -1) img_imap_usemap.Set(data.Img_imap_idx());

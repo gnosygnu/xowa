@@ -52,6 +52,9 @@ public class Scrib_lib_ustring__gsub__tst {
 	@Test  public void Replace__initial() {	// PURPOSE:whitespace being replaced during gsub replacement; DATE:2019-04-21
 		Exec_gsub("a b c", "^%s*", -1, "x", "xa b c;1"); // fails if xabxc
 	}
+	@Test  public void Replace__digit__superscript() {// PURPOSE: ¹ is not a \d; PAGE:en.w:Vilnius ISSUE#:617; DATE:2019-11-24;
+		Exec_gsub("1796¹", "([%d]+).*", 1, "%1", "1796;1");
+	}
 	@Test  public void Replace__table() {
 		Exec_gsub("abcd", "[ac]"		, -1, Scrib_kv_utl_.flat_many_("a", "A", "c", "C")	, "AbCd;2");
 		Exec_gsub("abc" , "[ab]"		, -1, Scrib_kv_utl_.flat_many_("a", "A")			, "Abc;2");	// PURPOSE: match not in regex should still print itself; in this case [c] is not in tbl regex; DATE:2014-03-31
