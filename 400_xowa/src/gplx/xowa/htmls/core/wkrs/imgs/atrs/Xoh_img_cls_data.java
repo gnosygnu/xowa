@@ -34,7 +34,7 @@ public class Xoh_img_cls_data implements Bfr_arg_clearable {
 	public void Init_by_parse(Bry_err_wkr err_wkr, byte[] src, Gfh_tag tag) {
 		this.Clear();
 		Gfh_atr atr = tag.Atrs__get_by_or_empty(Gfh_atr_.Bry__class);		// EX: class='thumbborder'
-		int src_bgn = atr.Val_bgn(); 
+		int src_bgn = atr.Val_bgn();
 		if (src_bgn == -1) {	// class does not exist; defaults to none and exit;
 			cls_tid = Xoh_img_cls_.Tid__none;
 			return;	
