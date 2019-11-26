@@ -328,19 +328,19 @@
         (change) Scribunto: Handle Lua balanced regex (requires java 1.7); EX:%b(). See: <a href="/site/fr.wikipedia.org/wiki/Astronomie">http://fr.wikipedia.org/wiki/Astronomie</a>
       </li>
       <li>
-        (change) Parser: Clicking on images sometimes doesn't open page b/c of HTML entities; EX:File:A.png|link=A&amp;nbsp;b {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Template:Formel-1-Saison_2001" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Template:Formel-1-Saison_2001</a>
+        (change) Parser: Clicking on images sometimes doesn't open page b/c of HTML entities; EX:File:A.png|link=A&amp;nbsp;b {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Template:Formel-1-Saison_2001">http://de.wikipedia.org/wiki/Template:Formel-1-Saison_2001</a>
       </li>
       <li>
-        (change) Parser: File link with nested file links should not create malformed HTML; EX:[[File:A.png|none|[[File:B.png|20px|d]] c]]. See: <a href="http://de.wikipedia.org/wiki/Wien" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Wien</a>
+        (change) Parser: File link with nested file links should not create malformed HTML; EX:[[File:A.png|none|[[File:B.png|20px|d]] c]]. See: <a href="/site/de.wikipedia.org/wiki/Wien">http://de.wikipedia.org/wiki/Wien</a>
       </li>
       <li>
-        (change) Parser: Double exclamation marks in table should not create table cell; EX:{|\n|-\n|\na !! b\n|} {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Fußball-Weltmeisterschaft_2010/Finalrunde" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Fußball-Weltmeisterschaft_2010/Finalrunde</a>
+        (change) Parser: Double exclamation marks in table should not create table cell; EX:{|\n|-\n|\na !! b\n|} {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Fu%C3%9Fball-Weltmeisterschaft_2010/Finalrunde">http://de.wikipedia.org/wiki/Fußball-Weltmeisterschaft_2010/Finalrunde</a>
       </li>
       <li>
-        (change) Parser: #tag reference sometimes generates bad text with nested templates; EX:{{#tag:ref|{{Metadaten Einwohnerzahl DE-BW{{!}}{{!}}QUELLE}}}} {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Freiburg_im_Breisgau" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Freiburg_im_Breisgau</a>
+        (change) Parser: #tag reference sometimes generates bad text with nested templates; EX:{{#tag:ref|{{Metadaten Einwohnerzahl DE-BW{{!}}{{!}}QUELLE}}}} {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Freiburg_im_Breisgau">http://de.wikipedia.org/wiki/Freiburg_im_Breisgau</a>
       </li>
       <li>
-        (change) Parser: #tag reference should parse contents again; EX:{{#tag:ref|{{Metadaten Einwohnerzahl DE-BW{{!}}{{!}}QUELLE}}}} {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Freiburg_im_Breisgau" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Freiburg_im_Breisgau</a>
+        (change) Parser: #tag reference should parse contents again; EX:{{#tag:ref|{{Metadaten Einwohnerzahl DE-BW{{!}}{{!}}QUELLE}}}} {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Freiburg_im_Breisgau">http://de.wikipedia.org/wiki/Freiburg_im_Breisgau</a>
       </li>
       <li>
         (change) Parser: Unknown xml tags should show as &lt;unknown&gt;&lt;/unknown&gt; not &lt;unknown&gt;&lt;unknown&gt;. See: <a href="http://wikimediafoundation.org" rel="nofollow" class="external free">http://wikimediafoundation.org</a>
@@ -392,7 +392,7 @@
         (change) Parser: Category should not show in TOC; EX:== a [[Category:b]] ==. See: <a href="/site/en.wikipedia.org/wiki/Tamil_Nadu">http://en.wikipedia.org/wiki/Tamil_Nadu</a>
       </li>
       <li>
-        (change) Parser: Html numeric entities should be rendered literally, not as bytes; EX:ab -&gt; ab not a{192,149}b. See: <a href="http://de.wikipedia.org/wiki/Magnus_Carlsen" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Magnus_Carlsen</a>
+        (change) Parser: Html numeric entities should be rendered literally, not as bytes; EX:ab -&gt; ab not a{192,149}b. See: <a href="/site/de.wikipedia.org/wiki/Magnus_Carlsen">http://de.wikipedia.org/wiki/Magnus_Carlsen</a>
       </li>
       <li>
         (change) Parser: Unclosed row was being discarded; EX:{|\n|-\n&lt;td&gt;a&lt;/td&gt;\n|-b\n|}. See: <a href="/site/fr.wikipedia.org/wiki/Napol%C3%A9on_Ier">http://fr.wikipedia.org/wiki/Napoléon_Ier</a>
@@ -407,7 +407,7 @@
         (change) File: Fatal error during image retrieval should not stop redlinks from loading {detected by Schnark}.
       </li>
       <li>
-        (change) File: Image border was not applied; EX:File:A.png|border -&gt; class='thumborder' {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Vorlage:JPN" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Vorlage:JPN</a>
+        (change) File: Image border was not applied; EX:File:A.png|border -&gt; class='thumborder' {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Vorlage:JPN">http://de.wikipedia.org/wiki/Vorlage:JPN</a>
       </li>
       <li>
         (change) Release: Xowa_64.exe now explicitly species -Dfile.encoding="UTF-8" {detected by Anselm}.
@@ -489,7 +489,7 @@
         (change) Wikidata: Simple Wikipedia did not evaluate {{#property}} tags. See: <a href="/site/simple.wikipedia.org/wiki/Google">http://simple.wikipedia.org/wiki/Google</a>
       </li>
       <li>
-        (change) Parser: {{fullurl}} was not adding query arg for offline wikis; EX:{{fullurl:commons:special:upload|uselang=deownwork}}. See: <a href="http://de.wikipedia.org/wiki/Liste_der_denkmalgeschützten_Objekte_im_Okres_Bratislava_I/0–9" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Liste_der_denkmalgeschützten_Objekte_im_Okres_Bratislava_I/0–9</a>
+        (change) Parser: {{fullurl}} was not adding query arg for offline wikis; EX:{{fullurl:commons:special:upload|uselang=deownwork}}. See: <a href="/site/de.wikipedia.org/wiki/Liste_der_denkmalgesch%C3%BCtzten_Objekte_im_Okres_Bratislava_I/0%E2%80%939">http://de.wikipedia.org/wiki/Liste_der_denkmalgeschützten_Objekte_im_Okres_Bratislava_I/0–9</a>
       </li>
       <li>
         (change) Gui: Removed duplicate keybinding Alt+Shift+E for Edit; EX:accesskey='e' and xowa.gfs page_view_edit.
@@ -498,7 +498,7 @@
         (change) Parser: Nested &lt;li&gt; tags inside &lt;ul&gt; should not be escaped; EX:&lt;li&gt;&lt;ul&gt;&lt;li&gt;a&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt; {detected by Anselm}. See: <a href="/site/en.wikipedia.org/wiki/Main_Page">http://en.wikipedia.org/wiki/Main_Page</a>
       </li>
       <li>
-        (change) Css: Changed failover css to en.wikipedia.org, not www.mediawiki.org. See: <a href="http://de.wikipedia.org/wiki/Olympische_Spiele" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Olympische_Spiele</a> <a href="http://bits.wikimedia.org/en.wikipedia.org/load.php?modules=ext.gadget.site|mediawiki.legacy.shared|skins.vector&amp;only=styles&amp;skin=vector&amp;*&amp;debug=true" rel="nofollow" class="external free">http://bits.wikimedia.org/en.wikipedia.org/load.php?modules=ext.gadget.site|mediawiki.legacy.shared|skins.vector&amp;only=styles&amp;skin=vector&amp;*&amp;debug=true</a>
+        (change) Css: Changed failover css to en.wikipedia.org, not www.mediawiki.org. See: <a href="/site/de.wikipedia.org/wiki/Olympische_Spiele">http://de.wikipedia.org/wiki/Olympische_Spiele</a> <a href="http://bits.wikimedia.org/en.wikipedia.org/load.php?modules=ext.gadget.site|mediawiki.legacy.shared|skins.vector&amp;only=styles&amp;skin=vector&amp;*&amp;debug=true" rel="nofollow" class="external free">http://bits.wikimedia.org/en.wikipedia.org/load.php?modules=ext.gadget.site|mediawiki.legacy.shared|skins.vector&amp;only=styles&amp;skin=vector&amp;*&amp;debug=true</a>
       </li>
       <li>
         (change) Html: Anonymous and Talk links in upper left hand corner suppressed; EX:/xowa/xowa.gfs.
@@ -703,7 +703,7 @@
         (change) Scribunto: Integer text argument for Gsub should not fail; EX:gsub(1, "[1]", 1). See: <a href="/site/en.wikipedia.org/wiki/Summerland_Key">http://en.wikipedia.org/wiki/Summerland_Key</a>
       </li>
       <li>
-        (change) Html: Javascript pages should render HTML entities literally; EX:&amp;quot; should be &amp;quot; not " {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/MediaWiki:Gadget-PB2.js" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/MediaWiki:Gadget-PB2.js</a>
+        (change) Html: Javascript pages should render HTML entities literally; EX:&amp;quot; should be &amp;quot; not " {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/MediaWiki:Gadget-PB2.js">http://de.wikipedia.org/wiki/MediaWiki:Gadget-PB2.js</a>
       </li>
       <li>
         (change) Parser/List: DT/DD syntax: colons should be hidden; EX:;a: should be ;a not ;a: {detected by Schnark}. See: <a href="/site/en.wikipedia.org/wiki/Stein">http://en.wikipedia.org/wiki/Stein</a>
@@ -779,7 +779,7 @@
         (done) History: Menu bar's History should always go to home/wiki/Special:XowaPageHistory, not currentWiki/wiki/Special:XowaPageHistory.
       </li>
       <li>
-        (done) Interwiki: Anchor in interwiki should not be dropped; EX:[[en:Blue_Screen_of_Death#Red_Screen_of_Death]] {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Red_Screen_of_Death" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Red_Screen_of_Death</a>
+        (done) Interwiki: Anchor in interwiki should not be dropped; EX:[[en:Blue_Screen_of_Death#Red_Screen_of_Death]] {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Red_Screen_of_Death">http://de.wikipedia.org/wiki/Red_Screen_of_Death</a>
       </li>
       <li>
         (done) Sqlite: Page fails to load if more than 64 categories. See: <a href="/site/en.wikipedia.org/wiki/Space_Liability_Convention">http://en.wikipedia.org/wiki/Space_Liability_Convention</a>
@@ -865,10 +865,10 @@
     </p>
     <ul>
       <li>
-        (done) Parser: Pages beginning with "/" would go to "Current_page/A" instead of "/A" {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Write-Only-Memory" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Write-Only-Memory</a>
+        (done) Parser: Pages beginning with "/" would go to "Current_page/A" instead of "/A" {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Write-Only-Memory">http://de.wikipedia.org/wiki/Write-Only-Memory</a>
       </li>
       <li>
-        (fix) [broken since:v0.9.3] Gallery: Gallery items with no caption would cause page to fail; EX:&lt;gallery&gt;File:A.png&lt;/gallery&gt; {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Lewis_Carroll" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Lewis_Carroll</a>
+        (fix) [broken since:v0.9.3] Gallery: Gallery items with no caption would cause page to fail; EX:&lt;gallery&gt;File:A.png&lt;/gallery&gt; {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Lewis_Carroll">http://de.wikipedia.org/wiki/Lewis_Carroll</a>
       </li>
       <li>
         (add) Gui: HTML box adjustment for Large fonts and Extra large fonts. See: <a href="http://xowa.org/home/wiki/Options/Window" id="xolnki_17" title="Options/Window">Options/Window</a>
@@ -908,7 +908,7 @@
     </p>
     <ul>
       <li>
-        (fix) AllPages: Special:AllPages fails for very 1st page of results {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Special:AllPages?from=A&amp;namespace=828&amp;hideredirects=0" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Special:AllPages?from=A&amp;namespace=828&amp;hideredirects=0</a>
+        (fix) AllPages: Special:AllPages fails for very 1st page of results {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Special:AllPages?from=A&amp;namespace=828&amp;hideredirects=0">http://de.wikipedia.org/wiki/Special:AllPages?from=A&amp;namespace=828&amp;hideredirects=0</a>
       </li>
       <li>
         (done) Scribunto: Explicitly numbered indexes do not work in parent frame; EX:{{test|2=b}} {detected by Schnark}.
@@ -920,7 +920,7 @@
         (done) Parser: Expression fmod now supported; EX:{{#expr: 1.25 fmod .5}}.
       </li>
       <li>
-        (done) Url: Pages beginning with "/" failed to load {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki//dev/null" rel="nofollow" class="external free">http://de.wikipedia.org/wiki//dev/null</a>
+        (done) Url: Pages beginning with "/" failed to load {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki//dev/null">http://de.wikipedia.org/wiki//dev/null</a>
       </li>
       <li>
         (done) Import: Added logging to sqlite database import.
@@ -1195,7 +1195,7 @@
         (done) Scribunto: {{italic title}} now works {detected by treck}.
       </li>
       <li>
-        (done) Addon: &lt;title&gt; tag should not show HTML tags; EX:http://en.wikipedia.org/wiki/gzip http://de.wikipedia.org/wiki/Gerbera {detected by treck}. See: <a href="/site/en.wikipedia.org/wiki/gzip">http://en.wikipedia.org/wiki/gzip</a> <a href="http://de.wikipedia.org/wiki/Gerbera" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Gerbera</a>
+        (done) Addon: &lt;title&gt; tag should not show HTML tags; EX:http://en.wikipedia.org/wiki/gzip http://de.wikipedia.org/wiki/Gerbera {detected by treck}. See: <a href="/site/en.wikipedia.org/wiki/gzip">http://en.wikipedia.org/wiki/gzip</a> <a href="/site/de.wikipedia.org/wiki/Gerbera">http://de.wikipedia.org/wiki/Gerbera</a>
       </li>
       <li>
         (add) Import: Exit during import should prompt for cancelation {requested by hidp123}.
@@ -1401,7 +1401,7 @@
         (fix) AllPages: Lookahead not working for xdat formats {detected by Schnark}.
       </li>
       <li>
-        (fix) Scribunto: Non-ASCII characters can cause certain modules to break {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Alexander_der_Große" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Alexander_der_Große</a>
+        (fix) Scribunto: Non-ASCII characters can cause certain modules to break {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Alexander_der_Gro%C3%9Fe">http://de.wikipedia.org/wiki/Alexander_der_Große</a>
       </li>
       <li>
         (fix) Import: Delete temp files after category2 is completed {detected by hidp123}.
@@ -1508,7 +1508,7 @@
     </p>
     <ul>
       <li>
-        (fix) Parser: "\s__NOTOC__\n" should not produce pre {detected by Schnark}. See: <a href="http://de.wikipedia.org" rel="nofollow" class="external free">http://de.wikipedia.org</a>
+        (fix) Parser: "\s__NOTOC__\n" should not produce pre {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/">http://de.wikipedia.org</a>
       </li>
       <li>
         (fix) AllPages: Added "xowa-visited" class to mark already-visited pages blue {detected by Schnark}.
@@ -1659,7 +1659,7 @@
         (fix) Interwiki: Aliases for languages should point to wikipedia; EX:[[en:Main_Page]] should go to en.wikipedia.org/wiki/Main_Page not en.mediawiki.org/wiki/Main_Page {detected by hidp123,Schnark}. See: <a href="http://www.mediawiki.org/wiki/Extension:EasyTimeline" rel="nofollow" class="external free">http://www.mediawiki.org/wiki/Extension:EasyTimeline</a>
       </li>
       <li>
-        (fix) Timeline: Colors don't render when names contain space {contributed by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Versionsgeschichte_von_Mozilla_Firefox" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Versionsgeschichte_von_Mozilla_Firefox</a>
+        (fix) Timeline: Colors don't render when names contain space {contributed by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Versionsgeschichte_von_Mozilla_Firefox">http://de.wikipedia.org/wiki/Versionsgeschichte_von_Mozilla_Firefox</a>
       </li>
       <li>
         (add) Import: Import did not work for history archives; EX:appropediaorg-20130607-history.xml.
@@ -1711,10 +1711,10 @@
         (fix) Html: Special pages should not show Talk namespace {detected by Schnark}.
       </li>
       <li>
-        (fix) Scribunto: "Module" namespace alias should be available for all foreign language wikis {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Modul:Vorlage:Personenleiste" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Modul:Vorlage:Personenleiste</a>
+        (fix) Scribunto: "Module" namespace alias should be available for all foreign language wikis {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Modul:Vorlage:Personenleiste">http://de.wikipedia.org/wiki/Modul:Vorlage:Personenleiste</a>
       </li>
       <li>
-        (fix) Scribunto: ExpandTemplate should take "Template:A" in addition to "A" {detected by Schnark}. See: <a href="http://de.wikipedia.org/wiki/Modul:Vorlage:Personenleiste" rel="nofollow" class="external free">http://de.wikipedia.org/wiki/Modul:Vorlage:Personenleiste</a>
+        (fix) Scribunto: ExpandTemplate should take "Template:A" in addition to "A" {detected by Schnark}. See: <a href="/site/de.wikipedia.org/wiki/Modul:Vorlage:Personenleiste">http://de.wikipedia.org/wiki/Modul:Vorlage:Personenleiste</a>
       </li>
       <li>
         (add) Gui: Middle-click on linux disabled through .gfs {detected by Schnark}.

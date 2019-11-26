@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Dev/File/Setup/Windows - XOWA</title>
+  <title>Change log/v4.6.4.1908 - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,112 +11,128 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Dev/File/Setup/Windows</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Change log/v4.6.4.1908</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <p>
-      If you run into issues with this install, then you may will need to install the components manually. The sections below provide more detail.
-    </p>
-    <div id="toc" class="toc">
-      <div id="toctitle" class="toctitle">
-        <h2>
-          Contents
-        </h2>
-      </div>
-      <ul>
-        <li class="toclevel-1 tocsection-1">
-          <a href="#ImageMagick"><span class="tocnumber">1</span> <span class="toctext">ImageMagick</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-2">
-          <a href="#Inkscape"><span class="tocnumber">2</span> <span class="toctext">Inkscape</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-3">
-          <a href="#Enable_download"><span class="tocnumber">3</span> <span class="toctext">Enable download</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-4">
-          <a href="#Notes"><span class="tocnumber">4</span> <span class="toctext">Notes</span></a>
-        </li>
-      </ul>
-    </div>
     <h2>
-      <span class="mw-headline" id="ImageMagick">ImageMagick</span>
+      <span class="mw-headline" id="v4.6.4.1908_(2019-08-11)">v4.6.4.1908 (2019-08-11)</span>
     </h2>
+    <h3>
+      <span class="mw-headline" id="PC">PC</span>
+    </h3>
     <p>
-      ImageMagick is used for image rendering. It is a free and open-source library, and is probably used by Wikipedia on its website.
-    </p>
-    <p>
-      Installation should take approximately 5-10 minutes.
+      <b>major</b>
     </p>
     <ul>
       <li>
-        Navigate to <a href="http://www.imagemagick.org/script/binary-releases.php#windows" rel="nofollow" class="external free">http://www.imagemagick.org/script/binary-releases.php#windows</a>
-      </li>
-      <li>
-        Download the latest version of ImageMagick: <b>ImageMagick-*-Q16-windows.zip</b>
-      </li>
-      <li>
-        Unzip the file to <b>C:\xowa\bin\windows_64\imagemagick</b>. When you are done, you should have a file called <b>C:\xowa\bin\windows_64\imagemagick\convert.exe</b>
+        Sqlite: Fix faster wiki loading for read-only devices not working for Read-only files. {detected by Ope30}
       </li>
     </ul>
-    <h2>
-      <span class="mw-headline" id="Inkscape">Inkscape</span>
-    </h2>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/534" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/534</a>
+      </dd>
+    </dl>
     <p>
-      Inkscape is used for SVG rendering. Note that ImageMagick can be designated the SVG renderer, but it will fail to convert a small percentage of SVGs.<sup id="cite_ref-inkscape_0-0" class="reference"><a href="#cite_note-inkscape-0">[1]</a></sup>
-    </p>
-    <p>
-      Inkscape is also a free and open-source library, and may be used by Wikipedia on its website.
-    </p>
-    <p>
-      Installation should take approximately 5-10 minutes.
+      <b>significant</b>
     </p>
     <ul>
       <li>
-        Navigate to the <a href="http://inkscape.org/download/?lang=en" rel="nofollow" class="external free">http://inkscape.org/download/?lang=en</a>
-      </li>
-      <li>
-        Download the 7zip version
-      </li>
-      <li>
-        Unzip the file to <b>C:\xowa\bin\windows_64\inkscape</b>. When you are done, you should have a file called <b>C:\xowa\bin\windows\inkscape_64\inkscape.com</b>.
+        Luaj: Fix '=Module:Bases:148 ' on many fr.w. {detected by desb42}
       </li>
     </ul>
-    <h2>
-      <span class="mw-headline" id="Enable_download">Enable download</span>
-    </h2>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Add deprecated foreach / foreachi.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/531" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/531</a>
+      </dd>
+    </dl>
+    <p>
+      <b>minor</b>
+    </p>
     <ul>
       <li>
-        Navigate to <a href="http://xowa.org/home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.files.general" id="xolnki_2" title="Special:XowaCfg?grp=xowa.files.general">Options: Files - General</a> and check "Download enabled"
-      </li>
-      <li>
-        Restart XOWA and navigate to any page. Any images will be downloaded automatically.
+        Cfg: Fix 'Show search' and 'Show toolbar' not working. {detected by desb42}
       </li>
     </ul>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class="mw-headline" id="Notes">Notes</span>
-    </h2>
-    <ol class="references">
-      <li id="cite_note-inkscape-0">
-        <span class="mw-cite-backlink"><a href="#cite_ref-inkscape_0-0">^</a></span> <span class="reference-text">ImageMagick indicates that it is not a full-fledged SVG solution: <a href="http://www.imagemagick.org/www/formats.html" rel="nofollow" class="external autonumber">[1]</a></span>
-        <blockquote>
-          <span class="reference-text">"Note that SVG is a complex specification and support for the specification in ImageMagick is not complete."</span>
-        </blockquote><span class="reference-text">Specifically, the following SVGs are converted improperly by ImageMagick. (They are marked with a Corel format.)</span>
-        <ul>
-          <li>
-            <span class="reference-text">In en.wikipedia.org/wiki/Black Hole: File:BH-no-escape-1.svg, File:BH-no-escape-2.svg, File:BH-no-escape-3.svg</span>
-          </li>
-          <li>
-            <span class="reference-text">In en.wikipedia.org/wiki/Thornton Affair: File:US flag 29 stars.svg</span>
-          </li>
-        </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: home/wiki/Special:XowaCfg?grp=xowa.gui.general
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/532" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/532</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Html_dump: Add configuration to show WIKITEXT / HTML indicators in top-right. {contributed by desb42}
       </li>
-    </ol>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: home/wiki/Special:XowaCfg?grp=xowa.wiki.hdumps
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/525" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/525</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Search.Suggest: Fix wrong highlighting of search suggest term when removing characters from search-word. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Move highlighting code out of cache pathway to js_wtr.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: kyle -&gt; kyl (kyle still highlighted).
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/538" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/538</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        User.Cfg: Fix page not loading if duplicate keys in user cache. {detected by Ope30}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Ignore duplicate keys in user cache.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/534" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/534</a>
+      </dd>
+    </dl>
+    <p>
+      <b>trivial</b>
+    </p>
+    <ul>
+      <li>
+        HTTP Server: Generalize file:///.*/file/.* logic. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/524" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/524</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        HTTP Server: Fix NullPointerException when restarting HTTP_Server and going directly to search suggest. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/537" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/537</a>
+      </dd>
+    </dl>
   
     </div>
   </div>

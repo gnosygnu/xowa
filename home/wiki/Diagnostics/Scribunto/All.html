@@ -94,7 +94,7 @@
         Calls code in 
         <ul>
           <li>
-            <a href="http://xowa.org/home/wiki/Module:Diagnostics/LuaCommon" id="xolnki_3" title="Module:Diagnostics/LuaCommon" class="xowa-visited">Module:Diagnostics/LuaCommon</a>
+            <a href="http://xowa.org/home/wiki/Module:Diagnostics/LuaCommon" id="xolnki_3" title="Module:Diagnostics/LuaCommon">Module:Diagnostics/LuaCommon</a>
           </li>
           <li>
             <a href="http://xowa.org/home/wiki/Template:Diagnostics/LuaCommon/getFrameTitle_parent" id="xolnki_4" title="Template:Diagnostics/LuaCommon/getFrameTitle parent">Template:Diagnostics/LuaCommon/getFrameTitle parent</a>
@@ -1367,11 +1367,140 @@
       </tr>
     </table>
     <h2>
+      <span class="mw-headline" id="Hash_Library">Hash Library</span>
+    </h2>
+    <ul>
+      <li>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/HashLibrary" id="xolnki_13" title="Module:Diagnostics/HashLibrary" class="xowa-visited">Module:Diagnostics/HashLibrary</a>
+      </li>
+      <li>
+        Tests compatibility for <b>mw.hash.lua</b>
+      </li>
+    </ul>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          listAlgorithms
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|listAlgorithms|md2|tiger128,3|adler32|fnv132|haval128,3}}
+        </td>
+        <td>
+          md2;tiger-128;adler32;fnv132;haval128,3; 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.bouncycastle.md2
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|md2|}}
+        </td>
+        <td>
+          4e8ddff3650292ab5a4108c3aa47940b 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.jacksum.tiger128,3
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|tiger128,3|}}
+        </td>
+        <td>
+          1714a472eee57d30040412bfcc55032a 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.jre.adler32
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|adler32|}}
+        </td>
+        <td>
+          90860b20 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.jre.fnv132
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|fnv132|}}
+        </td>
+        <td>
+          819dafd8 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.gnu_crypto.haval128,3
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|haval128,3|}}
+        </td>
+        <td>
+          dc502247fb3eb8376109eda32d361d82 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+    </table>
+    <h2>
       <span class="mw-headline" id="Message_Library">Message Library</span>
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/MessageLibrary" id="xolnki_13" title="Module:Diagnostics/MessageLibrary">Module:Diagnostics/MessageLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/MessageLibrary" id="xolnki_14" title="Module:Diagnostics/MessageLibrary">Module:Diagnostics/MessageLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>MessageLibrary.php</b> and <b>mw.message.lua</b>
@@ -1560,7 +1689,7 @@
         Wikidata needs to be installed for these tests to work
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/WikibaseLibrary" id="xolnki_14" title="Module:Diagnostics/WikibaseLibrary">Module:Diagnostics/WikibaseLibrary</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/WikibaseLibrary" id="xolnki_15" title="Module:Diagnostics/WikibaseLibrary">Module:Diagnostics/WikibaseLibrary</a>
       </li>
       <li>
         Tests compatibility for <b>WikibaseLibrary.php</b> and <b>mw.wikibase.lua</b>
@@ -1610,13 +1739,13 @@
         Applies to the Luaj engine (as opposed to the Lua engine)
       </li>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj" id="xolnki_15" title="Module:Diagnostics/Luaj" class="xowa-visited">Module:Diagnostics/Luaj</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/Luaj" id="xolnki_16" title="Module:Diagnostics/Luaj" class="xowa-visited">Module:Diagnostics/Luaj</a>
       </li>
       <li>
         Tests changes to the luaj_xowa.jar
       </li>
       <li>
-        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj" id="xolnki_16" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>
+        Further notes available at <a href="http://xowa.org/home/wiki/App/Xtn/Mediawiki/Scribunto/Luaj" id="xolnki_17" title="App/Xtn/Mediawiki/Scribunto/Luaj">App/Xtn/Mediawiki/Scribunto/Luaj</a>
       </li>
     </ul>
     <h3>
@@ -2500,13 +2629,30 @@
           </p>
         </td>
       </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          fails if "a1"
+        </td>
+        <td>
+          {{#invoke:Diagnostics/Luaj|loadDataTest}}
+        </td>
+        <td>
+          pass1 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
     </table>
     <h2>
       <span class="mw-headline" id="ParserFunctions">ParserFunctions</span>
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/ParserFunctions" id="xolnki_17" title="Module:Diagnostics/ParserFunctions">Module:Diagnostics/ParserFunctions</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/ParserFunctions" id="xolnki_18" title="Module:Diagnostics/ParserFunctions">Module:Diagnostics/ParserFunctions</a>
       </li>
       <li>
         Tests functionality for mw.ext.ParserFunctions.lua
@@ -2550,7 +2696,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleBlacklist" id="xolnki_18" title="Module:Diagnostics/TitleBlacklist">Module:Diagnostics/TitleBlacklist</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/TitleBlacklist" id="xolnki_19" title="Module:Diagnostics/TitleBlacklist">Module:Diagnostics/TitleBlacklist</a>
       </li>
       <li>
         Tests functionality for mw.ext.TitleBlacklist.lua
@@ -2597,7 +2743,7 @@
     </h2>
     <ul>
       <li>
-        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/FlaggedRevs" id="xolnki_19" title="Module:Diagnostics/FlaggedRevs">Module:Diagnostics/FlaggedRevs</a>
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/FlaggedRevs" id="xolnki_20" title="Module:Diagnostics/FlaggedRevs">Module:Diagnostics/FlaggedRevs</a>
       </li>
       <li>
         Tests functionality for mw.ext.FlaggedRevs.lua

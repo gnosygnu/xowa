@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Dev/File/Setup/Windows - XOWA</title>
+  <title>Diagnostics/Scribunto/HashLibrary - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,112 +11,141 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Dev/File/Setup/Windows</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Diagnostics/Scribunto/HashLibrary</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
-    <p>
-      If you run into issues with this install, then you may will need to install the components manually. The sections below provide more detail.
-    </p>
-    <div id="toc" class="toc">
-      <div id="toctitle" class="toctitle">
-        <h2>
-          Contents
-        </h2>
-      </div>
-      <ul>
-        <li class="toclevel-1 tocsection-1">
-          <a href="#ImageMagick"><span class="tocnumber">1</span> <span class="toctext">ImageMagick</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-2">
-          <a href="#Inkscape"><span class="tocnumber">2</span> <span class="toctext">Inkscape</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-3">
-          <a href="#Enable_download"><span class="tocnumber">3</span> <span class="toctext">Enable download</span></a>
-        </li>
-        <li class="toclevel-1 tocsection-4">
-          <a href="#Notes"><span class="tocnumber">4</span> <span class="toctext">Notes</span></a>
-        </li>
-      </ul>
-    </div>
     <h2>
-      <span class="mw-headline" id="ImageMagick">ImageMagick</span>
-    </h2>
-    <p>
-      ImageMagick is used for image rendering. It is a free and open-source library, and is probably used by Wikipedia on its website.
-    </p>
-    <p>
-      Installation should take approximately 5-10 minutes.
-    </p>
-    <ul>
-      <li>
-        Navigate to <a href="http://www.imagemagick.org/script/binary-releases.php#windows" rel="nofollow" class="external free">http://www.imagemagick.org/script/binary-releases.php#windows</a>
-      </li>
-      <li>
-        Download the latest version of ImageMagick: <b>ImageMagick-*-Q16-windows.zip</b>
-      </li>
-      <li>
-        Unzip the file to <b>C:\xowa\bin\windows_64\imagemagick</b>. When you are done, you should have a file called <b>C:\xowa\bin\windows_64\imagemagick\convert.exe</b>
-      </li>
-    </ul>
-    <h2>
-      <span class="mw-headline" id="Inkscape">Inkscape</span>
-    </h2>
-    <p>
-      Inkscape is used for SVG rendering. Note that ImageMagick can be designated the SVG renderer, but it will fail to convert a small percentage of SVGs.<sup id="cite_ref-inkscape_0-0" class="reference"><a href="#cite_note-inkscape-0">[1]</a></sup>
-    </p>
-    <p>
-      Inkscape is also a free and open-source library, and may be used by Wikipedia on its website.
-    </p>
-    <p>
-      Installation should take approximately 5-10 minutes.
-    </p>
-    <ul>
-      <li>
-        Navigate to the <a href="http://inkscape.org/download/?lang=en" rel="nofollow" class="external free">http://inkscape.org/download/?lang=en</a>
-      </li>
-      <li>
-        Download the 7zip version
-      </li>
-      <li>
-        Unzip the file to <b>C:\xowa\bin\windows_64\inkscape</b>. When you are done, you should have a file called <b>C:\xowa\bin\windows\inkscape_64\inkscape.com</b>.
-      </li>
-    </ul>
-    <h2>
-      <span class="mw-headline" id="Enable_download">Enable download</span>
+      <span class="mw-headline" id="Hash_Library">Hash Library</span>
     </h2>
     <ul>
       <li>
-        Navigate to <a href="http://xowa.org/home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.files.general" id="xolnki_2" title="Special:XowaCfg?grp=xowa.files.general">Options: Files - General</a> and check "Download enabled"
+        Calls code in <a href="http://xowa.org/home/wiki/Module:Diagnostics/HashLibrary" id="xolnki_2" title="Module:Diagnostics/HashLibrary" class="xowa-visited">Module:Diagnostics/HashLibrary</a>
       </li>
       <li>
-        Restart XOWA and navigate to any page. Any images will be downloaded automatically.
+        Tests compatibility for <b>mw.hash.lua</b>
       </li>
     </ul>
-    <p>
-      <br>
-    </p>
-    <h2>
-      <span class="mw-headline" id="Notes">Notes</span>
-    </h2>
-    <ol class="references">
-      <li id="cite_note-inkscape-0">
-        <span class="mw-cite-backlink"><a href="#cite_ref-inkscape_0-0">^</a></span> <span class="reference-text">ImageMagick indicates that it is not a full-fledged SVG solution: <a href="http://www.imagemagick.org/www/formats.html" rel="nofollow" class="external autonumber">[1]</a></span>
-        <blockquote>
-          <span class="reference-text">"Note that SVG is a complex specification and support for the specification in ImageMagick is not complete."</span>
-        </blockquote><span class="reference-text">Specifically, the following SVGs are converted improperly by ImageMagick. (They are marked with a Corel format.)</span>
-        <ul>
-          <li>
-            <span class="reference-text">In en.wikipedia.org/wiki/Black Hole: File:BH-no-escape-1.svg, File:BH-no-escape-2.svg, File:BH-no-escape-3.svg</span>
-          </li>
-          <li>
-            <span class="reference-text">In en.wikipedia.org/wiki/Thornton Affair: File:US flag 29 stars.svg</span>
-          </li>
-        </ul>
-      </li>
-    </ol>
+    <table class="wikitable">
+      <tr>
+        <th>
+          name
+        </th>
+        <th>
+          code
+        </th>
+        <th>
+          actl
+        </th>
+        <th>
+          rslt
+        </th>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          listAlgorithms
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|listAlgorithms|md2|tiger128,3|adler32|fnv132|haval128,3}}
+        </td>
+        <td>
+          md2;tiger-128;adler32;fnv132;haval128,3; 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.bouncycastle.md2
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|md2|}}
+        </td>
+        <td>
+          4e8ddff3650292ab5a4108c3aa47940b 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.jacksum.tiger128,3
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|tiger128,3|}}
+        </td>
+        <td>
+          1714a472eee57d30040412bfcc55032a 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.jre.adler32
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|adler32|}}
+        </td>
+        <td>
+          90860b20 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.jre.fnv132
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|fnv132|}}
+        </td>
+        <td>
+          819dafd8 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: green;'>pass</span>
+        </td>
+        <td>
+          hash.gnu_crypto.haval128,3
+        </td>
+        <td>
+          {{#invoke:Diagnostics/HashLibrary|hashValue|haval128,3|}}
+        </td>
+        <td>
+          dc502247fb3eb8376109eda32d361d82 
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+    </table>
   
     </div>
   </div>
