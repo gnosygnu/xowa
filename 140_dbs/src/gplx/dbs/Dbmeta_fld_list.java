@@ -29,6 +29,7 @@ public class Dbmeta_fld_list {
 	public String Add_int_pkey_autonum(String name)		{return Add(Dbmeta_fld_itm.new_int(name).Primary_y_().Autonum_y_());}
 	public String Add_int_autonum(String name)			{return Add(Dbmeta_fld_itm.new_int(name).Autonum_y_());}
 	public String Add_int_dflt(String name, int dflt)	{return Add(Dbmeta_fld_itm.new_int(name).Default_(dflt));}
+	public String Add_int_null(String name)             {return Add(Dbmeta_fld_itm.new_int(name).Nullable_y_());}
 	public String Add_long(String name)					{return Add(Dbmeta_fld_itm.new_long(name));}
 	public String Add_float(String name)				{return Add(Dbmeta_fld_itm.new_float(name));}
 	public String Add_double(String name)				{return Add(Dbmeta_fld_itm.new_double(name));}
