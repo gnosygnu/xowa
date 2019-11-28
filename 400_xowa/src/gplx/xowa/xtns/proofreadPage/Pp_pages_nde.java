@@ -21,6 +21,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.xtns.lst.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.parsers.lnkis.files.*;
+import gplx.xowa.mediawiki.*;
 public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private boolean xtn_literal = false;
 	private Xop_root_tkn xtn_root;
@@ -123,8 +124,9 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		else {
 			header = Toc_bry;
 		}
-		if (header != null)
+		if (header != null && XophpBool.is_true(header)) {// check if header is true; ignore values like header=0; ISSUE#:622; DATE:2019-11-28
 			rv = Bld_wikitext_for_header(full_bfr, index_page, rv);
+		}
 		return rv;
 	}	private static final    byte[] Toc_bry = Bry_.new_a7("toc");
 	private byte[] Make_lnki(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {

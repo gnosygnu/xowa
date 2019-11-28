@@ -152,4 +152,11 @@ public class Pp_pages_nde_hdr_tst {
 		,	"</p>"
 		));
 	}
+	@Test  public void Header_is_0() {// PURPOSE: if header is PHP false, ignore; ISSUE#:622 DATE:2019-11-28
+		// fails if TOC is included ("value=0")
+		fxt.Test_parse_page_wiki_str("<pages index='A' include=1 header=0/>", String_.Concat_lines_nl
+		(	"<p>&#32;"
+		,	"</p>"
+		));
+	}
 }
