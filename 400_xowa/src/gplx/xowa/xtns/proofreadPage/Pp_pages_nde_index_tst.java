@@ -231,4 +231,21 @@ public class Pp_pages_nde_index_tst {
 		, "</p>"
 		));
 	}
+	@Test  public void Index__caption_w_xml() { // PURPOSE: do not escape XML in caption; ISSUE#:624 DATE:2019-11-30
+		// create header page with just "prev" token
+		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", "{{{prev}}}\n");
+
+		// create index page with 3 links: "current" page and flanking "prev" and "next" pages; note the xml in the caption
+		fxt.Init_page_create("Index:A", String_.Concat_lines_nl
+		( "[[Test_page_prev|<b>prev</b>]]"
+		, "[[Test_page|<b>cur</b>]]"
+		, "[[Test_page_next|<b>next</b>]]"
+		));
+
+		// parse text; fails if "&lt;b&gt;prev&lt;/b&gt;"
+		fxt.Test_parse_page_wiki_str("<pages index='A' header=1 />", String_.Concat_lines_nl
+		( "<p><a href=\"/wiki/Test_page_prev\"><b>prev</b></a>"
+		, "</p>"
+		));
+	}
 }

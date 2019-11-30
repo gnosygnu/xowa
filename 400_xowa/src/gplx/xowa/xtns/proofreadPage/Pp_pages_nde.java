@@ -145,7 +145,8 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private byte[] Get_caption(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] rv = Bry_.Empty;
 		try {
-			wiki.Html_mgr().Html_wtr().Write_tkn_to_html(full_bfr, ctx, Xoh_wtr_ctx.Basic, index_page_src, null, -1, lnki.Caption_tkn());
+			// NOTE: call "Lnki_wtr().Write_caption", not "Write_tkn_to_html" else XML in caption will be escaped; ISSUE#:624 DATE:2019-11-30
+			wiki.Html_mgr().Html_wtr().Lnki_wtr().Write_caption(full_bfr, Xoh_wtr_ctx.Basic, index_page_src, lnki, lnki.Ttl());
 			rv = full_bfr.To_bry_and_clear();
 		}
 		catch (Exception e) {
