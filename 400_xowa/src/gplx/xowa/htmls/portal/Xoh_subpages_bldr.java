@@ -18,50 +18,74 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
 public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
-	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255), ttl_bfr = Bry_bfr_.Reset(255);
+	private final    Bry_bfr html_bfr = Bry_bfr_.Reset(255), path_bfr = Bry_bfr_.Reset(255);
+	private Xowe_wiki wiki;
 	private byte[][] segs;
-	public byte[] Bld(Xow_ns_mgr ns_mgr, Xoa_ttl ttl) {
+	public byte[] Bld(Xowe_wiki wiki, Xoa_ttl ttl) {
+		// check if subpages is valid
+		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		Xow_ns ns = ttl.Ns();
 		if (!	(	ns.Subpages_enabled()					// ns has subpages
-				&&	ttl.Leaf_bgn() != Bry_find_.Not_found	// ttl has leaf text; EX: Help:A/B
 				&&	ns.Id() != ns_mgr.Ns_page_id()			// ns is not [[Page:]]; PAGE:en.s:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species DATE:2014-09-06
+				&&	ttl.Leaf_bgn() != Bry_find_.Not_found	// ttl has leaf text; EX: Help:A/B
 				)
-			)	return Bry_.Empty;							// doesn't match above; return empty;
+			)
+			return Bry_.Empty; // doesn't match above; return empty;
+
+		// split ttl by slashes; EX: "Help:A/B/C" -> "Help:A", "B", "C"
 		byte[] raw = ttl.Raw();
 		this.segs = Bry_split_.Split(raw, Byte_ascii.Slash);
-		fmtr_grp.Bld_bfr(tmp_bfr, this);
-		return tmp_bfr.To_bry_and_clear();
+
+		// build html
+		this.wiki = wiki;
+		fmtr_grp.Bld_bfr(html_bfr, this);
+		return html_bfr.To_bry_and_clear();
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int segs_len = segs.length - 1;	// last seg is current page; do not print
-		for (int i = 0; i < segs_len; ++i) {
-			byte[] dlm = null;
-			if (i == 0)
-				dlm = Dlm_1st;
-			else {
-				dlm = Dlm_nth;
-				ttl_bfr.Add_byte_slash();
+		int segs_len = segs.length - 1;	// skip last seg which is current page and should not be printed
+
+		byte[] delimiter = Delimiter__1st;
+		for (int i = 0; i < segs_len; i++) {
+			// if not first, change delimiter and add "/" to path bfr
+			if (i != 0) {
+				delimiter = Delimiter__nth;
+				path_bfr.Add_byte_slash();
 			}
-			byte[] seg = segs[i];
-			ttl_bfr.Add(seg);
-			byte[] seg_ttl = ttl_bfr.To_bry();															
-			byte[] seg_ttl_enc = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Encode(ttl_bfr.To_bry());
-			byte[] href = Bry_.Add(Xoh_href_.Bry__wiki, seg_ttl_enc);		// EX: /wiki/Help:A
-			fmtr_itm.Bld_bfr(bfr, dlm, href
-				// NOTE: convert underscore to space; ISSUE#:308 PAGE:en.v:Computer-aided_design/Software DATE:2018-12-23
-				, Xoa_ttl.Replace_unders(seg_ttl)
-				, Xoa_ttl.Replace_unders(seg));
+
+			// get seg and add to path
+			byte[] seg = segs[i]; // EX: "B"
+			path_bfr.Add(seg);    // EX: "Help:A/" + "B" -> "Help:A/B"
+
+			// build subpage_ttl
+			byte[] subpage_ttl_bry = path_bfr.To_bry();
+			Xoa_ttl subpage_ttl = wiki.Ttl_parse(subpage_ttl_bry);
+
+			// re-define subpage_ttl_bry to properly-case title elements; EX: "help:a/b" -> "Help:A/b"
+			subpage_ttl_bry = subpage_ttl.Full_txt_w_ttl_case();
+
+			// if page is missing, skip it; ISSUE#:626; DATE:2019-12-01
+			if (!wiki.Parser_mgr().Ifexist_mgr().Exists(wiki, subpage_ttl_bry)) continue;
+
+			// get subpage_caption; note that 1st seg is Full_url ("Help:A"), but nth is just leaf ("b", not "Help:A/b")
+			byte[] subpage_caption = (i == 0) ? subpage_ttl.Full_url() : subpage_ttl.Leaf_url();
+
+			// add to subpage trail
+			// NOTE: convert underscore to space; ISSUE#:308 PAGE:en.v:Computer-aided_design/Software DATE:2018-12-23
+			fmtr_itm.Bld_bfr(bfr, delimiter
+				, Bry_.Add(Xoh_href_.Bry__wiki, subpage_ttl.Full_url()) // EX: /wiki/Help:A
+				, Xoa_ttl.Replace_unders(subpage_ttl_bry)
+				, Xoa_ttl.Replace_unders(subpage_caption));
 		}
-		ttl_bfr.Clear();
+		path_bfr.Clear();
 	}
-	private static final    byte[] Dlm_1st = Bry_.new_a7("&lt; "), Dlm_nth = Bry_.new_a7("&lrm; | ");
+	private static final    byte[] Delimiter__1st = Bry_.new_a7("&lt; "), Delimiter__nth = Bry_.new_a7("&lrm; | ");
 	private static final    Bry_fmtr
 	  fmtr_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<span class=\"subpages\">~{itms}"
 	, "</span>"
 	), "itms")
 	, fmtr_itm = Bry_fmtr.new_
-	( "~{dlm}<a href=\"~{href}\" title=\"~{title}\">~{caption}</a>"
-	, "dlm", "href", "title", "caption")
+	( "~{delimiter}<a href=\"~{href}\" title=\"~{title}\">~{caption}</a>"
+	, "delimiter", "href", "title", "caption")
 	;
 }
