@@ -120,8 +120,30 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 		ary.Add("c");
 		fxt.Test__array(ary, XophpArrayItm.New_int(2, "c"));
 	}
+	@Test  public void Pop() {
+		XophpArray ary = XophpArray.New();
+		ary.Add(0, "a").Add(1, "b").Add(2, "c");
+
+		// pop all
+		fxt.Test__Pop(ary, "c");
+		fxt.Test__Pop(ary, "b");
+		fxt.Test__Pop(ary, "a");
+		fxt.Test__Count(ary, 0);
+	}
+	@Test   public void Itm_str_concat_end() {
+		XophpArray ary = XophpArray.New();
+		ary.Add(0, "a").Add(1, "b").Add(2, "c");
+
+		// pop all
+		fxt.Test__Itm_str_concat_end(ary, "a0", 0, "0");
+		fxt.Test__Itm_str_concat_end(ary, "b1", 1, "1");
+		fxt.Test__Itm_str_concat_end(ary, "c2", 2, "2");
+	}
 }
 class XophpArray_fxt {
+	public void Test__Count(XophpArray ary, int expd) {
+		Gftest.Eq__int(expd, ary.Count());
+	}
 	public void Test__array(XophpArray ary, XophpArrayItm... expd) {
 		XophpArrayItm[] actl = ary.To_ary();
 		Gftest.Eq__ary(expd, actl);
@@ -129,5 +151,14 @@ class XophpArray_fxt {
 	public void Test__unset(XophpArray ary, int idx, XophpArrayItm... expd) {
 		XophpArrayItm[] actl = ary.To_ary();
 		Gftest.Eq__ary(expd, actl);
+	}
+	public void Test__Pop(XophpArray ary, String expd) {
+		String actl = (String)ary.Pop();
+		Gftest.Eq__str(expd, actl);
+	}
+	public void Test__Itm_str_concat_end(XophpArray ary, String expd, int idx, String v) {
+		ary.Itm_str_concat_end(idx, v);
+		String actl = ary.Get_at_str(idx);
+		Gftest.Eq__str(expd, actl);
 	}
 }

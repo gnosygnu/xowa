@@ -19,6 +19,8 @@ import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 // THREAD.UNSAFE: caching for repeated calls
 class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private Xomw_prepro_accum__dom accum_dom = new Xomw_prepro_accum__dom("");
+	public XomwPreprocessor_DOM(XomwParser parser) {this.parser = parser;}
+	@Override public XomwParser Parser() {return parser;} private final    XomwParser parser;
 
 	@Override protected XomwPPDPart Factory__part() {return new XomwPPDPart_DOM("");}
 	@Override protected XomwPPDStack Factory__stack() {return new XomwPPDStack(Xomw_prepro_accum__dom.Instance);}
@@ -152,6 +154,6 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 		return root_accum.To_bry_and_clear();
 	}
 
-	@Override public XomwPreprocessor Make_new(XomwParser parser) {return new XomwPreprocessor_DOM();}
-	public static final    XomwPreprocessor Instance = new XomwPreprocessor_DOM();
+	@Override public XomwPreprocessor Make_new(XomwParser parser) {return new XomwPreprocessor_DOM(parser);}
+	public static final    XomwPreprocessor Instance = new XomwPreprocessor_DOM(null);
 }

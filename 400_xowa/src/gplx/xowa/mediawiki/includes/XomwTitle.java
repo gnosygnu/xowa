@@ -1438,6 +1438,7 @@ public class XomwTitle {
 		s = XophpString.strtr(s, Byte_ascii.Space, Byte_ascii.Underline);
 		return s;
 	}
+	public String getPrefixedDBkeyStr() {return String_.new_u8(getPrefixedDBkey());}
 
 	/**
 	* Get the prefixed title with spaces.

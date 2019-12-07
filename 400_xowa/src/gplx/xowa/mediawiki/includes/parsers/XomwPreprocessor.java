@@ -20,6 +20,7 @@ import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 * @ingroup Parser
 */
 public abstract class XomwPreprocessor {
+	public abstract XomwParser Parser(); // XOWA: not in MW, but both Preprocessor_DOM and Preprocessor_Hash have the member variable
 
 //		private static final int CACHE_VERSION = 1;
 

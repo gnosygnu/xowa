@@ -1,0 +1,626 @@
+/*
+XOWA: the XOWA Offline Wiki Application
+Copyright (C) 2012-2017 gnosygnu@gmail.com
+
+XOWA is licensed under the terms of the General Public License (GPL) Version 3,
+or alternatively under the terms of the Apache License Version 2.0.
+
+You may use XOWA according to either of these licenses as is most appropriate
+for your project on a case-by-case basis.
+
+The terms of each license can be found in the source code repository:
+
+GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
+Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
+*/
+package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+import gplx.xowa.mediawiki.includes.exception.*;
+import gplx.core.bits.*;
+/**
+* An expansion frame, used as a context to expand the result of preprocessToObj()
+* @ingroup Parser
+*/
+class XomwPPFrame_Hash extends XomwPPFrame { 	/**
+	* @var Parser
+	*/
+	public XomwParser parser;
+
+	/**
+	* @var Preprocessor
+	*/
+	public XomwPreprocessor preprocessor;
+
+	/**
+	* @var Title
+	*/
+	public XomwTitle title;
+	public XophpArray titleCache;
+
+	/**
+	* Hashtable listing templates which are disallowed for expansion in this frame,
+	* having been encountered previously in parent frames.
+	*/
+	public XophpArray loopCheckHash;
+
+	/**
+	* Recursion depth of this frame, top = 0
+	* Note that this is NOT the same as expansion depth in expand()
+	*/
+	public int depth;
+
+	private boolean volatile_bool;
+	private int ttl;
+
+	/**
+	* @var array
+	*/
+	protected XophpArray childExpansionCache;
+
+	/**
+	* Construct a new preprocessor frame.
+	* @param Preprocessor preprocessor The parent preprocessor
+	*/
+	public XomwPPFrame_Hash(XomwPreprocessor preprocessor) {
+		this.preprocessor = preprocessor;
+		this.parser = preprocessor.Parser();
+		this.title = this.parser.mTitle;
+		this.titleCache = XophpArray.New().Add(XophpObject.is_true(this.title) ? this.title.getPrefixedDBkeyStr() : XophpString_.False);
+		this.loopCheckHash = XophpArray.New();
+		this.depth = 0;
+		this.childExpansionCache = XophpArray.New();
+	}
+
+//		/**
+//		* Create a new child frame
+//		* $args is optionally a multi-root PPNode or array containing the template arguments
+//		*
+//		* @param array|boolean|PPNode_Hash_Array $args
+//		* @param Title|boolean $title
+//		* @param int $indexOffset
+//		* @throws MWException
+//		* @return PPTemplateFrame_Hash
+//		*/
+//		public function newChild($args = false, $title = false, $indexOffset = 0) {
+//			$namedArgs = [];
+//			$numberedArgs = [];
+//			if ($title === false) {
+//				$title = this.title;
+//			}
+//			if ($args !== false) {
+//				if ($args instanceof PPNode_Hash_Array) {
+//					$args = $args.value;
+//				} else if (!is_array($args)) {
+//					throw new MWException(__METHOD__ . ': $args must be array or PPNode_Hash_Array');
+//				}
+//				foreach ($args as $arg) {
+//					$bits = $arg.splitArg();
+//					if ($bits['index'] !== '') {
+//						// Numbered parameter
+//						$index = $bits['index'] - $indexOffset;
+//						if (isset($namedArgs[$index]) || isset($numberedArgs[$index])) {
+//							this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
+//								wfEscapeWikiText(this.title),
+//								wfEscapeWikiText($title),
+//								wfEscapeWikiText($index)).text());
+//							this.parser.addTrackingCategory('duplicate-args-category');
+//						}
+//						$numberedArgs[$index] = $bits['value'];
+//						unset($namedArgs[$index]);
+//					} else {
+//						// Named parameter
+//						$name = trim(this.expand($bits['name'], PPFrame.STRIP_COMMENTS));
+//						if (isset($namedArgs[$name]) || isset($numberedArgs[$name])) {
+//							this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
+//								wfEscapeWikiText(this.title),
+//								wfEscapeWikiText($title),
+//								wfEscapeWikiText($name)).text());
+//							this.parser.addTrackingCategory('duplicate-args-category');
+//						}
+//						$namedArgs[$name] = $bits['value'];
+//						unset($numberedArgs[$name]);
+//					}
+//				}
+//			}
+//			return new PPTemplateFrame_Hash(this.preprocessor, $this, $numberedArgs, $namedArgs, $title);
+//		}
+
+	/**
+	* @throws MWException
+	* @param String|int $key
+	* @param String|PPNode $root
+	* @param int $flags
+	* @return String
+	*/
+	public String cachedExpand(String key, Object root, int flags) { // DEFAULT:flags=0
+		// we don't have a parent, so we don't have a cache
+		return this.expand(root, flags);
+	}
+
+	private static int expansionDepth = 0; // MW.GLOBAL:expand
+	private static int expand_flags_default = 0;
+	/**
+	* @throws MWException
+	* @param String|PPNode $root
+	* @param int $flags
+	* @return String
+	*/
+	public String expand(Object root, int flags) {
+		if (XophpString.is_string(root)) {
+			return (String)root;
+		}
+
+//			if (++this.parser.mPPNodeCount > this.parser.mOptions.getMaxPPNodeCount()) {
+//				this.parser.limitationWarn('node-count-exceeded',
+//						this.parser.mPPNodeCount,
+//						this.parser.mOptions.getMaxPPNodeCount()
+//				);
+//				return '<span class="error">Node-count limit exceeded</span>';
+//			}
+//			if (expansionDepth > this.parser.mOptions.getMaxPPExpandDepth()) {
+//				this.parser.limitationWarn('expansion-depth-exceeded',
+//						expansionDepth,
+//						this.parser.mOptions.getMaxPPExpandDepth()
+//				);
+//				return '<span class="error">Expansion depth limit exceeded</span>';
+//			}
+		++expansionDepth;
+		if (expansionDepth > this.parser.mHighestExpansionDepth) {
+			this.parser.mHighestExpansionDepth = expansionDepth;
+		}
+
+		XophpArray outStack = XophpArray.New("", "");
+		XophpArray iteratorStack = XophpArray.New(XophpObject.False, root);
+		XophpArray indexStack = XophpArray.New(0, 0);
+
+		while (iteratorStack.Count() > 1) {
+			int level = outStack.Count() - 1;
+			Object iteratorNode = iteratorStack.Get_at(level);
+			String outItm = outStack.Get_at_str(level);
+			int index = indexStack.Get_at_int(level);
+			Object contextNode;
+			if (XophpArray.is_array(iteratorNode)) {
+				XophpArray iteratorNodeArray = (XophpArray)iteratorNode;
+				if (index >= iteratorNodeArray.Count()) {
+					// All done with this iterator
+					iteratorStack.Set(level, XophpObject.False);
+					contextNode = XophpObject.False;
+				} else {
+					contextNode = iteratorNodeArray.Get_at(index);
+					index++;
+				}
+			} else if (Type_.Eq_by_obj(iteratorNode, XomwPPNode_Hash_Array.class)) {
+				XomwPPNode_Hash_Array iteratorNodeHashArray = (XomwPPNode_Hash_Array)iteratorNode;
+				if (index >= iteratorNodeHashArray.getLength()) {
+					// All done with this iterator
+					iteratorStack.Set(level, XophpObject.False);
+					contextNode = XophpObject.False;
+				} else {
+					contextNode = iteratorNodeHashArray.item(index);
+					index++;
+				}
+			} else {
+				// Copy to contextNode and then delete from iterator stack,
+				// because this is not an iterator but we do have to execute it once
+				contextNode = iteratorStack.Get_at(level);
+				iteratorStack.Set(level, XophpObject.False);
+			}
+
+			Object newIterator = XophpObject.False;
+			String contextName = XophpString_.False;
+			XophpArray contextChildren = XophpArray.False;
+
+			if (contextNode == XophpObject.False) {
+				// nothing to do
+			} else if (XophpString.is_string(contextNode)) {
+				outItm += (String)contextNode;
+			} else if (Type_.Eq_by_obj(contextNode, XomwPPNode_Hash_Array.class)) {
+				newIterator = contextNode;
+			} else if (Type_.Eq_by_obj(contextNode, XomwPPNode_Hash_Attr.class)) {
+				// No output
+			} else if (Type_.Eq_by_obj(contextNode, XomwPPNode_Hash_Text.class)) {
+				outItm += ((XomwPPNode_Hash_Text)contextNode).value;
+			} else if (Type_.Eq_by_obj(contextNode, XomwPPNode_Hash_Tree.class)) {
+				XomwPPNode_Hash_Tree contextNodeHashTree = (XomwPPNode_Hash_Tree)contextNode;
+				contextName = contextNodeHashTree.name;
+				contextChildren = contextNodeHashTree.getRawChildren();
+			} else if (XophpArray.is_array(contextNode)) {
+				XophpArray contextNodeArray = (XophpArray)contextNode;
+				// Node descriptor array
+				if (contextNodeArray.Count() != 2) {
+					throw XomwMWException.New_by_method(XomwPPFrame_Hash.class, "expand", 
+						": found an array where a node descriptor should be");
+				}
+				contextName = (String)contextNodeArray.Get_at(0);
+				contextChildren = contextNodeArray.Get_at_ary(1);
+			} else {
+				throw XomwMWException.New_by_method(XomwPPFrame_Hash.class, "expand", ": Invalid parameter type");
+			}
+
+			// Handle node descriptor array or tree Object
+			if (contextName == XophpString_.False) {
+				// Not a node, already handled above
+			} else if (String_.CharAt(contextName, 0) == '@') {
+				// Attribute: no output
+			} else if (String_.Eq(contextName, "template")) {
+				// Double-brace expansion
+				XophpArray bits = XomwPPNode_Hash_Tree.splitRawTemplate(contextChildren);
+				if (Bitmask_.Has_int(flags, XomwPPFrame.NO_TEMPLATES)) {
+					newIterator = this.virtualBracketedImplode(
+						"{{", "|", "}}",
+						bits.Get_by("title"),
+						bits.Get_by("parts")
+					);
+				} else {
+					XophpArray ret = this.parser.braceSubstitution(bits, this);
+					if (ret.is_set(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+						newIterator = ret.Get_by(Object_.Cls_val_name);
+					} else {
+						outItm += ret.Get_by_str("text");
+					}
+				}
+			} else if (String_.Eq(contextName, "tplarg")) {
+				// Triple-brace expansion
+				XophpArray bits = XomwPPNode_Hash_Tree.splitRawTemplate(contextChildren);
+				if (Bitmask_.Has_int(flags, XomwPPFrame.NO_ARGS)) {
+					newIterator = this.virtualBracketedImplode(
+						"{{{", "|", "}}}",
+						bits.Get_by("title"),
+						bits.Get_by("parts")
+					);
+				} else {
+					XophpArray ret = this.parser.argSubstitution(bits, this);
+					if (ret.is_set(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+						newIterator = ret.Get_by("Object");
+					} else {
+						outItm += ret.Get_by_str("text");
+					}
+				}
+			} else if (String_.Eq(contextName, "comment")) {
+				// HTML-style comment
+				// Remove it in HTML, pre+remove and STRIP_COMMENTS modes
+				// Not in RECOVER_COMMENTS mode (msgnw) though.
+				if ((this.parser.ot.Has("html"))
+					|| (this.parser.ot.Has("pre") && this.parser.mOptions.getRemoveComments())
+					|| (Bitmask_.Has_int(flags, XomwPPFrame.STRIP_COMMENTS))
+					 && !(Bitmask_.Has_int(flags, XomwPPFrame.RECOVER_COMMENTS))
+				) {
+					outItm += ""; // XOWA: no purpose?
+				} else if (this.parser.ot.Has("wiki") && !(Bitmask_.Has_int(flags, XomwPPFrame.RECOVER_COMMENTS))) {
+					// Add a strip marker in PST mode so that pstPass2() can
+					// run some old-fashioned regexes on the result.
+					// Not in RECOVER_COMMENTS mode (extractSections) though.
+					outItm += this.parser.insertStripItem(contextChildren.Get_at_str(0));
+				} else {
+					// Recover the literal comment in RECOVER_COMMENTS and pre+no-remove
+					outItm += contextChildren.Get_at_str(0);
+				}
+			} else if (String_.Eq(contextName, "ignore")) {
+				// Output suppression used by <includeonly> etc.
+				// OT_WIKI will only respect <ignore> in substed templates.
+				// The other output types respect it unless NO_IGNORE is set.
+				// extractSections() sets NO_IGNORE and so never respects it.
+//					if ((!XophpUtility.isset(this.parent) && this.parser.ot.Has("wiki")) // this.parent doesn't exist?
+				if ((this.parser.ot.Has("wiki"))
+					|| (Bitmask_.Has_int(flags, XomwPPFrame.NO_IGNORE))
+				) {
+					outItm += contextChildren.Get_at_str(0);
+				} else {
+					// outItm .= '';
+				}
+			} else if (String_.Eq(contextName, "ext")) {
+				// Extension tag
+				XophpArray bits = XomwPPNode_Hash_Tree.splitRawExt(contextChildren)
+					.Add("attr", null).Add("inner", null).Add("close", null);
+				if (Bitmask_.Has_int(flags, XomwPPFrame.NO_TAGS)) {
+					String s = '<' + ((XomwPPNode_Hash_Text)((XomwPPNode)bits.Get_by("name")).getFirstChild()).value;
+					if (bits.Has("attr")) {
+						s += ((XomwPPNode_Hash_Text)((XomwPPNode)bits.Get_by("attr")).getFirstChild()).value;
+					}
+					if (bits.Has("inner")) {
+						s += '>' + ((XomwPPNode_Hash_Text)((XomwPPNode)bits.Get_by("inner")).getFirstChild()).value;
+						if (bits.Has("close")) {
+							s += ((XomwPPNode_Hash_Text)((XomwPPNode)bits.Get_by("close")).getFirstChild()).value;
+						}
+					} else {
+						s += "/>";
+					}
+					outItm += s;
+				} else {
+					outItm += this.parser.extensionSubstitution(bits, this);
+				}
+			} else if (String_.Eq(contextName, "h")) {
+				// Heading
+				if (this.parser.ot.Has("html")) {
+					// Expand immediately and insert heading index marker
+					String s = this.expand(contextChildren, flags);
+					XophpArray bits = XomwPPNode_Hash_Tree.splitRawHeading(contextChildren);
+//						String titleText = this.title.getPrefixedDBkey();
+//						this.parser.mHeadings[] = [titleText, bits['i']];
+//						serial = count(this.parser.mHeadings) - 1;
+					String marker = XomwParser.MARKER_PREFIX + "-h-serial-" + XomwParser.MARKER_SUFFIX;
+					s = XophpString.substr(s, 0, bits.Get_by_int("level")) + marker + XophpString.substr(s, bits.Get_by_int("level"));
+//						this.parser.mStripState.addGeneral(marker, '');
+					outItm += s;
+				} else {
+					// Expand in virtual stack
+					newIterator = contextChildren;
+				}
+			} else {
+				// Generic recursive expansion
+				newIterator = contextChildren;
+			}
+
+			if (newIterator != XophpObject.False) {
+				outStack.Add("");
+				iteratorStack.Add(newIterator);
+				indexStack.Add(0);
+			} else if (iteratorStack.Get_at(level) == XophpObject.False) {
+				// Return accumulated value to parent
+				// With tail recursion
+				while (iteratorStack.Get_at(level) == XophpObject.False && level > 0) {
+					outStack.Itm_str_concat_end(level - 1, outItm);
+					outStack.Pop();
+					iteratorStack.Pop();
+					indexStack.Pop();
+					level--;
+				}
+			}
+		}
+		--expansionDepth;
+		return outStack.Get_at_str(0);
+	}
+
+	/**
+	* @param String $sep
+	* @param int $flags
+	* @param String|PPNode $args,...
+	* @return String
+	*/
+//		public function implodeWithFlags($sep, $flags /*, ... */) {
+//			$args = array_slice(func_get_args(), 2);
+//
+//			$first = true;
+//			$s = '';
+//			foreach ($args as $root) {
+//				if ($root instanceof PPNode_Hash_Array) {
+//					$root = $root.value;
+//				}
+//				if (!is_array($root)) {
+//					$root = [$root];
+//				}
+//				foreach ($root as $node) {
+//					if ($first) {
+//						$first = false;
+//					} else {
+//						$s .= $sep;
+//					}
+//					$s .= this.expand($node, $flags);
+//				}
+//			}
+//			return $s;
+//		}
+
+	/**
+	* Implode with no flags specified
+	* This previously called implodeWithFlags but has now been inlined to reduce stack depth
+	* @param String $sep
+	* @param String|PPNode $args,...
+	* @return String
+	*/
+	@Override public String implode(String sep, Object... args) {
+		boolean first = true;
+		String s = "";
+		for (Object rootObj : args) {
+			XophpArray root = null;
+			if (Type_.Eq_by_obj(root, XomwPPNode_Hash_Array.class)) {
+				root = ((XomwPPNode_Hash_Array)rootObj).value;
+			}
+			if (!XophpArray.is_array(rootObj)) {
+				root = XophpArray.New().Add(root);
+			}
+			int rootLen = root.Len();
+			for (int i = 0; i < rootLen; i++) {
+				Object node = root.Get_at(i);
+				if (first) {
+					first = false;
+				} else {
+					s += sep;
+				}
+				s += this.expand(node, expand_flags_default);
+			}
+		}
+		return s;
+	}
+
+    /**
+	* Makes an Object that, when expand()ed, will be the same as one obtained
+	* with implode()
+	*
+	* @param String $sep
+	* @param String|PPNode $args,...
+	* @return PPNode_Hash_Array
+	*/
+	@Override public XomwPPNode virtualImplode(String sep, Object... args) {
+		XophpArray outItm = XophpArray.New();
+		boolean first = true;
+
+		for (Object rootObj : args) {
+			XophpArray root = null;
+			if (Type_.Eq_by_obj(root, XomwPPNode_Hash_Array.class)) {
+				root = ((XomwPPNode_Hash_Array)rootObj).value;
+			}
+			if (!XophpArray.is_array(rootObj)) {
+				root = XophpArray.New().Add(root);
+			}
+			int rootLen = root.Len();
+			for (int i = 0; i < rootLen; i++) {
+				Object node = root.Get_at(i);
+				if (first) {
+					first = false;
+				} else {
+					outItm.Add(sep);
+				}
+				outItm.Add(node);
+			}
+		}
+		return new XomwPPNode_Hash_Array(outItm);
+	}
+
+	/**
+	* Virtual implode with brackets
+	*
+	* @param String $start
+	* @param String $sep
+	* @param String $end
+	* @param String|PPNode $args,...
+	* @return PPNode_Hash_Array
+	*/
+	@Override public XomwPPNode virtualBracketedImplode(String start, String sep, String end, Object... args) {
+		XophpArray outItm = XophpArray.New(start);
+		boolean first = true;
+
+		for (Object rootObj : args) {
+			XophpArray root = null;
+			if (Type_.Eq_by_obj(rootObj, XomwPPNode_Hash_Array.class)) {
+				root = ((XomwPPNode_Hash_Array)rootObj).value;
+			}
+			if (!XophpArray.is_array(rootObj)) {
+				root = XophpArray.New((String)rootObj);
+			}
+			int root_len = root.Len();
+			for (int i = 0; i < root_len; i++) {
+				String node = root.Get_at_str(i);
+				if (first) {
+					first = false;
+				} else {
+					outItm.Add(sep);
+				}
+				outItm.Add(node);
+			}
+		}
+		outItm.Add(end);
+		return new XomwPPNode_Hash_Array(outItm);
+	}
+
+//		public function __toString() {
+//			return 'frame{}';
+//		}
+//
+	/**
+	* @param boolean $level
+	* @return array|boolean|String
+	*/
+	public String getPDBK(boolean level) { // DEFAULT:false
+		if (level == false) {
+			return this.title.getPrefixedDBkeyStr();
+		} else {
+			// return isset( $this->titleCache[$level] ) ? $this->titleCache[$level] : false;
+			return this.titleCache.Count() > 0 ? ((String)this.titleCache.Get_at(0)) : XophpString_.False;
+		}
+	}
+
+	/**
+	* @return array
+	*/
+	@Override public XophpArray getArguments() {
+		return XophpArray.False;
+	}
+
+	/**
+	* @return array
+	*/
+	@Override public XophpArray getNumberedArguments() {
+		return XophpArray.False;
+	}
+
+	/**
+	* @return array
+	*/
+	@Override public XophpArray getNamedArguments() {
+		return XophpArray.False;
+	}
+
+	/**
+	* Returns true if there are no arguments in this frame
+	*
+	* @return boolean
+	*/
+	@Override public boolean isEmpty() {
+		return true;
+	}
+
+	/**
+	* @param int|String $name
+	* @return boolean Always false in this implementation.
+	*/
+	@Override public String getArgument(String name) {
+		return XophpString_.False;
+	}
+
+	/**
+	* Returns true if the infinite loop check is OK, false if a loop is detected
+	*
+	* @param Title $title
+	*
+	* @return boolean
+	*/
+	@Override public boolean loopCheck(XomwTitle title) {
+		return !this.loopCheckHash.is_set(title.getPrefixedDBkeyStr());
+	}
+
+	/**
+	* Return true if the frame is a template frame
+	*
+	* @return boolean
+	*/
+	@Override public boolean isTemplate() {
+		return false;
+	}
+
+	/**
+	* Get a title of frame
+	*
+	* @return Title
+	*/
+	@Override public XomwTitle getTitle() {
+		return this.title;
+	}
+
+	/**
+	* Set the volatile_bool flag
+	*
+	* @param boolean $flag
+	*/
+	@Override public void setVolatile(boolean flag) { // DEFAULT: flag = true
+		this.volatile_bool = flag;
+	}
+
+	/**
+	* Get the volatile_bool flag
+	*
+	* @return boolean
+	*/
+	@Override public boolean isVolatile() {
+		return this.volatile_bool;
+	}
+
+	/**
+	* Set the TTL
+	*
+	* @param int ttl
+	*/
+	@Override public void setTTL(int val) {
+		if (this.ttl == Int_.Null || val < this.ttl) {
+			this.ttl = val;
+		}
+	}
+
+	/**
+	* Get the TTL
+	*
+	* @return int|null
+	*/
+	@Override public int getTTL() {
+		return this.ttl;
+	}
+}

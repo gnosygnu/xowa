@@ -18,24 +18,26 @@ package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; impor
 /**
 * @ingroup Parser
 */
-public class XomwPPNode_Hash_Array extends XomwPPNode { //		public $value;
-//
-//		public function __construct( $value ) {
-//			$this->value = $value;
-//		}
+public class XomwPPNode_Hash_Array extends XomwPPNode { 	public XophpArray value;
+
+	public XomwPPNode_Hash_Array(XophpArray value) {
+		this.value = value;
+	}
 
 	@Override public String toString() {
 //			return var_export( $this, true );
 		return null;
 	}
-//
-//		public function getLength() {
-//			return count( $this->value );
-//		}
-//
-//		public function item( $i ) {
-//			return $this->value[$i];
-//		}
+
+	public int getLength() {
+		return -1;
+//			return count( this.value );
+	}
+
+	public Object item(int i) {
+		return null;
+//			return this.value[$i];
+	}
 
 	@Override public String getName() {
 		return "#nodelist";

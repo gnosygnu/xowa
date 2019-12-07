@@ -68,102 +68,102 @@ import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 * @ingroup Parser
 */
 public class XomwParser implements XomwParserIface {
-//		/**
-//		* Update this version number when the ParserOutput format
-//		* changes in an incompatible way, so the parser cache
-//		* can automatically discard old data.
-//		*/
-//		static final VERSION = '1.6.4';
-//
-//		/**
-//		* Update this version number when the output of serialiseHalfParsedText()
-//		* changes in an incompatible way
-//		*/
-//		static final HALF_PARSED_VERSION = 2;
-//
-//		# Flags for Parser::setFunctionHook
-//		static final SFH_NO_HASH = 1;
-//		static final SFH_OBJECT_ARGS = 2;
-//
-//		# Constants needed for external link processing
-//		# Everything except bracket, space, or control characters
-//		# \p{Zs} is unicode 'separator, space' category. It covers the space 0x20
-//		# as well as U+3000 is IDEOGRAPHIC SPACE for T21052
+	/**
+	* Update this version number when the ParserOutput format
+	* changes in an incompatible way, so the parser cache
+	* can automatically discard old data.
+	*/
+//		private static final String VERSION = "1.6.4";
+
+	/**
+	* Update this version number when the output of serialiseHalfParsedText()
+	* changes in an incompatible way
+	*/
+//		private static final int HALF_PARSED_VERSION = 2;
+
+	// Flags for Parser::setFunctionHook
+//		private static final int SFH_NO_HASH = 1;
+//		private static final int SFH_OBJECT_ARGS = 2;
+
+//		// Constants needed for external link processing
+//		// Everything except bracket, space, or control characters
+//		// \p{Zs} is unicode 'separator, space' category. It covers the space 0x20
+//		// as well as U+3000 is IDEOGRAPHIC SPACE for T21052
 //		static final EXT_LINK_URL_CLASS = '[^][<>"\\x00-\\x20\\x7F\p{Zs}]';
-//		# Simplified expression to match an IPv4 or IPv6 address, or
-//		# at least one character of a host name (embeds EXT_LINK_URL_CLASS)
+//		// Simplified expression to match an IPv4 or IPv6 address, or
+//		// at least one character of a host name (embeds EXT_LINK_URL_CLASS)
 //		static final EXT_LINK_ADDR = '(?:[0-9.]+|\\[(?i:[0-9a-f:.]+)\\]|[^][<>"\\x00-\\x20\\x7F\p{Zs}])';
-//		# RegExp to make image URLs (embeds IPv6 part of EXT_LINK_ADDR)
+//		// RegExp to make image URLs (embeds IPv6 part of EXT_LINK_ADDR)
 //		// @codingStandardsIgnoreStart Generic.Files.LineLength
 //		static final EXT_IMAGE_REGEX = '/^(http:\/\/|https:\/\/)((?:\\[(?i:[0-9a-f:.]+)\\])?[^][<>"\\x00-\\x20\\x7F\p{Zs}]+)
 //			\\/([A-Za-z0-9_.,~%\\-+&;#*?!=()@\\x80-\\xFF]+)\\.((?i)gif|png|jpg|jpeg)$/Sxu';
 //		// @codingStandardsIgnoreEnd
 //
-//		# Regular expression for a non-newline space
+//		// Regular expression for a non-newline space
 //		static final SPACE_NOT_NL = '(?:\t|&nbsp;|&\#0*160;|&\#[Xx]0*[Aa]0;|\p{Zs})';
 
 	// Flags for preprocessToDom
 	public static final int PTD_FOR_INCLUSION = 1;
 
-//		# Allowed values for this.mOutputType
-//		# Parameter to startExternalParse().
-//		static final OT_HTML = 1; # like parse()
-//		static final OT_WIKI = 2; # like preSaveTransform()
-//		static final OT_PREPROCESS = 3; # like preprocess()
-//		static final OT_MSG = 3;
-//		static final OT_PLAIN = 4; # like extractSections() - portions of the original are returned unchanged.
+	// Allowed values for this.mOutputType
+	// Parameter to startExternalParse().
+	private static final int OT_HTML = 1; // like parse()
+	private static final int OT_WIKI = 2; // like preSaveTransform()
+	private static final int OT_PREPROCESS = 3; // like preprocess()
+//		private static final int OT_MSG = 3;
+	private static final int OT_PLAIN = 4; // like extractSections() - portions of the original are returned unchanged.
+
+	/**
+	* @var String Prefix and suffix for temporary replacement strings
+	* for the multipass parser.
+	*
+	* \x7f should never appear in input as it's disallowed in XML.
+	* Using it at the front also gives us a little extra robustness
+	* since it shouldn't match when butted up against identifier-like
+	* String constructs.
+	*
+	* Must not consist of all title characters, or else it will change
+	* the behavior of <nowiki> in a link.
+	*
+	* Must have a character that needs escaping in attributes, otherwise
+	* someone could put a strip marker in an attribute, to get around
+	* escaping quote marks, and break out of the attribute. Thus we add
+	* `'".
+	*/
+//		private static final String MARKER_SUFFIX = "-QINU`\"'\x7f";
+//		private static final String MARKER_PREFIX = "\x7f'\"`UNIQ-";
+
+	// Markers used for wrapping the table of contents
+//		private static final String TOC_START = "<mw:toc>";
+//		private static final String TOC_END = "</mw:toc>";
+
+//		// Persistent:
+//		public mTagHooks = [];
+//		public mTransparentTagHooks = [];
+//		public mFunctionHooks = [];
+//		public mFunctionSynonyms = [ 0 => [], 1 => [] ];
+//		public mFunctionTagHooks = [];
+//		public mStripList = [];
+//		public mDefaultStripList = [];
+//		public mVarCache = [];
+//		public mImageParams = [];
+//		public mImageParamsMagicArray = [];
+//		public mMarkerIndex = 0;
+//		public mFirstCall = true;
 //
-//		/**
-//		* @var String Prefix and suffix for temporary replacement strings
-//		* for the multipass parser.
-//		*
-//		* \x7f should never appear in input as it's disallowed in XML.
-//		* Using it at the front also gives us a little extra robustness
-//		* since it shouldn't match when butted up against identifier-like
-//		* String constructs.
-//		*
-//		* Must not consist of all title characters, or else it will change
-//		* the behavior of <nowiki> in a link.
-//		*
-//		* Must have a character that needs escaping in attributes, otherwise
-//		* someone could put a strip marker in an attribute, to get around
-//		* escaping quote marks, and break out of the attribute. Thus we add
-//		* `'".
-//		*/
-//		static final MARKER_SUFFIX = "-QINU`\"'\x7f";
-//		static final MARKER_PREFIX = "\x7f'\"`UNIQ-";
-//
-//		# Markers used for wrapping the table of contents
-//		static final TOC_START = '<mw:toc>';
-//		static final TOC_END = '</mw:toc>';
-//
-//		# Persistent:
-//		public $mTagHooks = [];
-//		public $mTransparentTagHooks = [];
-//		public $mFunctionHooks = [];
-//		public $mFunctionSynonyms = [ 0 => [], 1 => [] ];
-//		public $mFunctionTagHooks = [];
-//		public $mStripList = [];
-//		public $mDefaultStripList = [];
-//		public $mVarCache = [];
-//		public $mImageParams = [];
-//		public $mImageParamsMagicArray = [];
-//		public $mMarkerIndex = 0;
-//		public $mFirstCall = true;
-//
-//		# Initialised by initialiseVariables()
-//
-//		/**
-//		* @var MagicWordArray
-//		*/
-//		public $mVariables;
+//		// Initialised by initialiseVariables()
 //
 //		/**
 //		* @var MagicWordArray
 //		*/
-//		public $mSubstWords;
-//		# Initialised in constructor
-//		public $mConf, $mExtLinkBracketedRegex, $mUrlProtocols;
+//		public mVariables;
+//
+//		/**
+//		* @var MagicWordArray
+//		*/
+//		public mSubstWords;
+//		// Initialised in constructor
+//		public mConf, mExtLinkBracketedRegex, mUrlProtocols;
 
 	// Initialized in getPreprocessor()
 	/** @var Preprocessor */
@@ -171,70 +171,70 @@ public class XomwParser implements XomwParserIface {
 
 	private XomwPreprocessor mPreprocessorClass;
 
-//		# Cleared with clearState():
+//		// Cleared with clearState():
 //		/**
 //		* @var ParserOutput
 //		*/
-//		public $mOutput;
-//		public $mAutonumber;
+//		public mOutput;
+//		public mAutonumber;
 
 	/**
 	* @var StripState
 	*/
 	public XomwStripState mStripState = new XomwStripState();
 
-//		public $mIncludeCount;
+//		public mIncludeCount;
 	/**
 	* @var LinkHolderArray
 	*/
 	public XomwLinkHolderArray mLinkHolders;
 
 	private int mLinkID;
-//		public $mIncludeSizes, $mPPNodeCount, $mGeneratedPPNodeCount, $mHighestExpansionDepth;
-//		public $mDefaultSort;
-//		public $mTplRedirCache, $mTplDomCache, $mHeadings, $mDoubleUnderscores;
-//		public $mExpensiveFunctionCount; # number of expensive parser function calls
-//		public $mShowToc, $mForceTocPosition;
+	public int mIncludeSizes, mPPNodeCount, mGeneratedPPNodeCount, mHighestExpansionDepth;
+//		public mDefaultSort;
+//		public mTplRedirCache, mTplDomCache, mHeadings, mDoubleUnderscores;
+//		public mExpensiveFunctionCount; // number of expensive parser function calls
+//		public mShowToc, mForceTocPosition;
 //
 //		/**
 //		* @var User
 //		*/
-//		public $mUser; # User Object; only used when doing pre-save transform
+//		public mUser; // User Object; only used when doing pre-save transform
 //
-//		# Temporary
-//		# These are variables reset at least once per parse regardless of $clearState
+//		// Temporary
+//		// These are variables reset at least once per parse regardless of $clearState
 
 	/**
 	* @var ParserOptions
 	*/
 	public XomwParserOptions mOptions = new XomwParserOptions();
 
-//		/**
-//		* @var Title
-//		*/
-//		public $mTitle;        # Title context, used for self-link rendering and similar things
-//		public $mOutputType;   # Output type, one of the OT_xxx constants
-//		public $ot;            # Shortcut alias, see setOutputType()
-//		public $mRevisionObject; # The revision Object of the specified revision ID
-//		public $mRevisionId;   # ID to display in {{REVISIONID}} tags
-//		public $mRevisionTimestamp; # The timestamp of the specified revision ID
-//		public $mRevisionUser; # User to display in {{REVISIONUSER}} tag
-//		public $mRevisionSize; # Size to display in {{REVISIONSIZE}} variable
-//		public $mRevIdForTs;   # The revision ID which was used to fetch the timestamp
-//		public $mInputSize = false; # For {{PAGESIZE}} on current page.
+	/**
+	* @var Title
+	*/
+	public XomwTitle mTitle; // Title context, used for self-link rendering and similar things
+	public int mOutputType; // Output type, one of the OT_xxx constants
+	public XophpArray ot; // Shortcut alias, see setOutputType()
+//		public mRevisionObject; // The revision Object of the specified revision ID
+//		public mRevisionId;   // ID to display in {{REVISIONID}} tags
+//		public mRevisionTimestamp; // The timestamp of the specified revision ID
+//		public mRevisionUser; // User to display in {{REVISIONUSER}} tag
+//		public mRevisionSize; // Size to display in {{REVISIONSIZE}} variable
+//		public mRevIdForTs;   // The revision ID which was used to fetch the timestamp
+//		public mInputSize = false; // For {{PAGESIZE}} on current page.
 //
 //		/**
 //		* @var String Deprecated accessor for the strip marker prefix.
 //		* @deprecated since 1.26; use Parser::MARKER_PREFIX instead.
 //		*/
-//		public $mUniqPrefix = Parser::MARKER_PREFIX;
+//		public mUniqPrefix = Parser::MARKER_PREFIX;
 //
 //		/**
 //		* @var array Array with the language name of each language link (i.e. the
 //		* interwiki prefix) in the key, value arbitrary. Used to avoid sending
 //		* duplicate language links to the ParserOutput.
 //		*/
-//		public $mLangLinkLanguages;
+//		public mLangLinkLanguages;
 //
 //		/**
 //		* @var MapCacheLRU|null
@@ -248,10 +248,10 @@ public class XomwParser implements XomwParserIface {
 //		* @var boolean Recursive call protection.
 //		* This variable should be treated as if it were private.
 //		*/
-//		public $mInParse = false;
+//		public mInParse = false;
 //
 //		/** @var SectionProfiler */
-//		protected $mProfiler;
+//		protected mProfiler;
 
 	/**
 	* @var LinkRenderer
@@ -292,17 +292,17 @@ public class XomwParser implements XomwParserIface {
 //			this.mConf = $conf;
 //			this.mUrlProtocols = wfUrlProtocols();
 //			this.mExtLinkBracketedRegex = '/\[(((?i)' . this.mUrlProtocols . ')' .
-//				self::EXT_LINK_ADDR .
-//				self::EXT_LINK_URL_CLASS . '*)\p{Zs}*([^\]\\x00-\\x08\\x0a-\\x1F]*?)\]/Su';
+//				XomwParser.EXT_LINK_ADDR .
+//				XomwParser.EXT_LINK_URL_CLASS . '*)\p{Zs}*([^\]\\x00-\\x08\\x0a-\\x1F]*?)\]/Su';
 
 		this.mPreprocessorClass = XomwPreprocessor_DOM.Instance;
 		//	if (isset($conf['preprocessorClass'])) {
 		//		this.mPreprocessorClass = $conf['preprocessorClass'];
 		//	} elseif (defined('HPHP_VERSION')) {
-		//		# Preprocessor_Hash is much faster than Preprocessor_DOM under HipHop
+		//		// Preprocessor_Hash is much faster than Preprocessor_DOM under HipHop
 		//		this.mPreprocessorClass = 'Preprocessor_Hash';
 		//	} elseif (extension_loaded('domxml')) {
-		//		# PECL extension that conflicts with the core DOM extension (T15770)
+		//		// PECL extension that conflicts with the core DOM extension (T15770)
 		//		wfDebug("Warning: you have the obsolete domxml extension for PHP. Please remove it!\n");
 		//		this.mPreprocessorClass = 'Preprocessor_Hash';
 		//	} elseif (extension_loaded('dom')) {
@@ -428,7 +428,7 @@ public class XomwParser implements XomwParserIface {
 
 		this.mStripState = new XomwStripState();
 
-//			# Clear these on every parse, T6549
+//			// Clear these on every parse, T6549
 //			this.mTplRedirCache = this.mTplDomCache = [];
 //
 //			this.mShowToc = true;
@@ -445,7 +445,7 @@ public class XomwParser implements XomwParserIface {
 //			this.mDoubleUnderscores = [];
 //			this.mExpensiveFunctionCount = 0;
 //
-//			# Fix cloning
+//			// Fix cloning
 //			if (isset(this.mPreprocessor) && this.mPreprocessor->parser !== $this) {
 //				this.mPreprocessor = null;
 //			}
@@ -487,10 +487,10 @@ public class XomwParser implements XomwParserIface {
 //				// We use U+007F DELETE to construct strip markers, so we have to make
 //				// sure that this character does not occur in the input text.
 //				$text = strtr($text, "\x7f", "?");
-//				$magicScopeVariable = this.synchronized();
+//				magicScopeVariable = this.synchronized();
 //			}
 //
-//			this.startParse($title, $options, self::OT_HTML, $clearState);
+//			this.startParse($title, $options, XomwParser.OT_HTML, $clearState);
 //
 //			this.currentRevisionCache = null;
 //			this.mInputSize = strlen($text);
@@ -512,7 +512,7 @@ public class XomwParser implements XomwParserIface {
 //			}
 //
 //			Hooks::run('ParserBeforeStrip', [ &$this, &$text, &this.mStripState ]);
-//			# No more strip!
+//			// No more strip!
 //			Hooks::run('ParserAfterStrip', [ &$this, &$text, &this.mStripState ]);
 		this.internalParse(pbfr, pctx, text);
 //			Hooks::run('ParserAfterParse', [ &$this, &$text, &this.mStripState ]);
@@ -540,10 +540,10 @@ public class XomwParser implements XomwParserIface {
 //				}
 //			}
 //
-//			# Done parsing! Compute runtime adaptive expiry if set
+//			// Done parsing! Compute runtime adaptive expiry if set
 //			this.mOutput->finalizeAdaptiveCacheExpiry();
 //
-//			# Warn if too many heavyweight parser functions were used
+//			// Warn if too many heavyweight parser functions were used
 //			if (this.mExpensiveFunctionCount > this.mOptions->getExpensiveParserFunctionLimit()) {
 //				this.limitationWarn('expensive-parserfunction',
 //					this.mExpensiveFunctionCount,
@@ -551,9 +551,9 @@ public class XomwParser implements XomwParserIface {
 //				);
 //			}
 //
-//			# Information on include size limits, for the benefit of users who try to skirt them
+//			// Information on include size limits, for the benefit of users who try to skirt them
 //			if (this.mOptions->getEnableLimitReport()) {
-//				$max = this.mOptions->getMaxIncludeSize();
+//				max = this.mOptions->getMaxIncludeSize();
 //
 //				$cpuTime = this.mOutput->getTimeSinceStart('cpu');
 //				if ($cpuTime !== null) {
@@ -574,10 +574,10 @@ public class XomwParser implements XomwParserIface {
 //					[ this.mGeneratedPPNodeCount, this.mOptions->getMaxGeneratedPPNodeCount() ]
 //				);
 //				this.mOutput->setLimitReportData('limitreport-postexpandincludesize',
-//					[ this.mIncludeSizes['post-expand'], $max ]
+//					[ this.mIncludeSizes['post-expand'], max ]
 //				);
 //				this.mOutput->setLimitReportData('limitreport-templateargumentsize',
-//					[ this.mIncludeSizes['arg'], $max ]
+//					[ this.mIncludeSizes['arg'], max ]
 //				);
 //				this.mOutput->setLimitReportData('limitreport-expansiondepth',
 //					[ this.mHighestExpansionDepth, this.mOptions->getMaxPPExpandDepth() ]
@@ -734,8 +734,8 @@ public class XomwParser implements XomwParserIface {
 //		public function preprocess($text, Title $title = null,
 //			ParserOptions $options, $revid = null, $frame = false
 //		) {
-//			$magicScopeVariable = this.synchronized();
-//			this.startParse($title, $options, self::OT_PREPROCESS, true);
+//			magicScopeVariable = this.synchronized();
+//			this.startParse($title, $options, XomwParser.OT_PREPROCESS, true);
 //			if ($revid !== null) {
 //				this.mRevisionId = $revid;
 //			}
@@ -775,15 +775,15 @@ public class XomwParser implements XomwParserIface {
 //		* @return String
 //		*/
 //		public function getPreloadText($text, Title $title, ParserOptions $options, $params = []) {
-//			$msg = new RawMessage($text);
-//			$text = $msg->params($params)->plain();
+//			msg = new RawMessage($text);
+//			$text = msg->params($params)->plain();
 //
-//			# Parser (re)initialisation
-//			$magicScopeVariable = this.synchronized();
-//			this.startParse($title, $options, self::OT_PLAIN, true);
+//			// Parser (re)initialisation
+//			magicScopeVariable = this.synchronized();
+//			this.startParse($title, $options, XomwParser.OT_PLAIN, true);
 //
 //			$flags = PPFrame::NO_ARGS | PPFrame::NO_TEMPLATES;
-//			$dom = this.preprocessToDom($text, self::PTD_FOR_INCLUSION);
+//			$dom = this.preprocessToDom($text, XomwParser.PTD_FOR_INCLUSION);
 //			$text = this.getPreprocessor()->newFrame()->expand($dom, $flags);
 //			$text = this.mStripState->unstripBoth($text);
 //			return $text;
@@ -818,7 +818,7 @@ public class XomwParser implements XomwParserIface {
 //		*/
 //		public function uniqPrefix() {
 //			wfDeprecated(__METHOD__, '1.26');
-//			return self::MARKER_PREFIX;
+//			return XomwParser.MARKER_PREFIX;
 //		}
 //
 //		/**
@@ -832,7 +832,7 @@ public class XomwParser implements XomwParserIface {
 //			}
 //
 //			if ($t->hasFragment()) {
-//				# Strip the fragment to avoid various odd effects
+//				// Strip the fragment to avoid various odd effects
 //				this.mTitle = $t->createFragmentTarget('');
 //			} else {
 //				this.mTitle = $t;
@@ -857,23 +857,23 @@ public class XomwParser implements XomwParserIface {
 //		public function Title($x = null) {
 //			return wfSetVar(this.mTitle, $x);
 //		}
-//
-//		/**
-//		* Set the output type
-//		*
-//		* @param int $ot New value
-//		*/
-//		public function setOutputType($ot) {
-//			this.mOutputType = $ot;
-//			# Shortcut alias
-//			this.ot = [
-//				'html' => $ot == self::OT_HTML,
-//				'wiki' => $ot == self::OT_WIKI,
-//				'pre' => $ot == self::OT_PREPROCESS,
-//				'plain' => $ot == self::OT_PLAIN,
-//			];
-//		}
-//
+
+	/**
+	* Set the output type
+	*
+	* @param int ot New value
+	*/
+	public void setOutputType(int otVal) {
+		this.mOutputType = otVal;
+		// Shortcut alias
+		this.ot = XophpArray.New()
+			.Add("html", otVal == XomwParser.OT_HTML)
+			.Add("wiki", otVal == XomwParser.OT_WIKI)
+			.Add("pre", otVal == XomwParser.OT_PREPROCESS)
+			.Add("plain", otVal == XomwParser.OT_PLAIN)
+		;
+	}
+
 //		/**
 //		* Accessor/mutator for the output type
 //		*
@@ -1014,7 +1014,7 @@ public class XomwParser implements XomwParserIface {
 //		/**
 //		* Replaces all occurrences of HTML-style comments and the given tags
 //		* in the text with a random marker and returns the next text. The output
-//		* parameter $matches will be an associative array filled with data in
+//		* parameter matches will be an associative array filled with data in
 //		* the form:
 //		*
 //		* @code
@@ -1027,18 +1027,18 @@ public class XomwParser implements XomwParserIface {
 //		*
 //		* @param array $elements List of element names. Comments are always extracted.
 //		* @param String $text Source text String.
-//		* @param array $matches Out parameter, Array: extracted tags
+//		* @param array matches Out parameter, Array: extracted tags
 //		* @param String|null $uniq_prefix
 //		* @return String Stripped text
 //		* @since 1.26 The uniq_prefix argument is deprecated.
 //		*/
-//		public static function extractTagsAndParams($elements, $text, &$matches, $uniq_prefix = null) {
+//		public static function extractTagsAndParams($elements, $text, &matches, $uniq_prefix = null) {
 //			if ($uniq_prefix !== null) {
 //				wfDeprecated(__METHOD__ . ' called with $prefix argument', '1.26');
 //			}
 //			static $n = 1;
 //			$stripped = '';
-//			$matches = [];
+//			matches = [];
 //
 //			$taglist = implode('|', $elements);
 //			$start = "/<($taglist)(\\s+[^>]*?|\\s*?)(\/?" . ">)|<(!--)/i";
@@ -1050,24 +1050,24 @@ public class XomwParser implements XomwParserIface {
 //					break;
 //				}
 //				if (count($p) > 5) {
-//					# comment
+//					// comment
 //					$element = $p[4];
 //					$attributes = '';
 //					$close = '';
 //					$inside = $p[5];
 //				} else {
-//					# tag
+//					// tag
 //					$element = $p[1];
 //					$attributes = $p[2];
 //					$close = $p[3];
 //					$inside = $p[4];
 //				}
 //
-//				$marker = self::MARKER_PREFIX . "-$element-" . sprintf('%08X', $n++) . self::MARKER_SUFFIX;
-//				$stripped .= $marker;
+//				marker = XomwParser.MARKER_PREFIX . "-$element-" . sprintf('%08X', $n++) . XomwParser.MARKER_SUFFIX;
+//				$stripped .= marker;
 //
 //				if ($close === '/>') {
-//					# Empty element tag, <tag />
+//					// Empty element tag, <tag />
 //					$content = null;
 //					$text = $inside;
 //					$tail = null;
@@ -1080,7 +1080,7 @@ public class XomwParser implements XomwParserIface {
 //					$q = preg_split($end, $inside, 2, PREG_SPLIT_DELIM_CAPTURE);
 //					$content = $q[0];
 //					if (count($q) < 3) {
-//						# No end tag -- let it run out to the end of the text.
+//						// No end tag -- let it run out to the end of the text.
 //						$tail = '';
 //						$text = '';
 //					} else {
@@ -1089,7 +1089,7 @@ public class XomwParser implements XomwParserIface {
 //					}
 //				}
 //
-//				$matches[$marker] = [ $element,
+//				matches[marker] = [ $element,
 //					$content,
 //					Sanitizer::decodeTagAttributes($attributes),
 //					"<$element$attributes$close$content$tail" ];
@@ -1115,12 +1115,14 @@ public class XomwParser implements XomwParserIface {
 	*
 	* @return String
 	*/
-	public byte[] Insert_strip_item(byte[] text) {
+	public byte[] insertStripItem(byte[] text) {
 		byte[] marker = tmp.Add_bry_many(MARKER_PREFIX, STRIP_ITEM).Add_int_variable(this.mMarkerIndex).Add(MARKER_SUFFIX).To_bry_and_clear();
 		this.mMarkerIndex++;
 		this.mStripState.addGeneral(marker, text);
 		return marker;
 	}
+	public String insertStripItem(String text) {return String_.new_u8(insertStripItem(Bry_.new_u8(text)));}
+
 
 	/**
 	* parse the wiki syntax used to render tables
@@ -1134,7 +1136,7 @@ public class XomwParser implements XomwParserIface {
 
 	/**
 	* Helper function for parse() that transforms wiki markup into half-parsed
-	* HTML. Only called for $mOutputType == self::OT_HTML.
+	* HTML. Only called for mOutputType == XomwParser.OT_HTML.
 	*
 	* @private
 	*
@@ -1198,7 +1200,7 @@ public class XomwParser implements XomwParserIface {
 
 		// replaceInternalLinks may sometimes leave behind
 		// absolute URLs, which have to be masked to hide them from replaceExternalLinks			
-		XomwParserBfr_.Replace(pbfr, Bry__marker__noparse, Bry_.Empty); // $text = str_replace(self::MARKER_PREFIX . 'NOPARSE', '', $text);
+		XomwParserBfr_.Replace(pbfr, Bry__marker__noparse, Bry_.Empty); // $text = str_replace(XomwParser.MARKER_PREFIX . 'NOPARSE', '', $text);
 
 		magiclinksWkr.doMagicLinks(pctx, pbfr);
 //			$text = $this->formatHeadings($text, $origText, $isMain);
@@ -1220,12 +1222,12 @@ public class XomwParser implements XomwParserIface {
 
 		// Clean up special characters, only run once, next-to-last before doBlockLevels
 		//	$fixtags = [
-		//		# French spaces, last one Guillemet-left
-		//		# only if there is something before the space
+		//		// French spaces, last one Guillemet-left
+		//		// only if there is something before the space
 		//		'/(.) (?=\\?|:|;|!|%|\\302\\273)/' => '\\1&#160;',
-		//		# french spaces, Guillemet-right
+		//		// french spaces, Guillemet-right
 		//		'/(\\302\\253) /' => '\\1&#160;',
-		//		'/&#160;(!\s*important)/' => ' \\1', # Beware of CSS magic word !important, T13874.
+		//		'/&#160;(!\s*important)/' => ' \\1', // Beware of CSS magic word !important, T13874.
 		//	];
 		//	$text = preg_replace( array_keys( $fixtags ), array_values( $fixtags ), $text );
 		nbspWkr.doNbsp(pctx, pbfr);
@@ -1300,7 +1302,7 @@ public class XomwParser implements XomwParserIface {
 	// public function doMagicLinks($text) {}
 
 	// XO.MW:MOVED
-	// public function magicLinkCallback($m) {}
+	// public function magicLinkCallback(m) {}
 
 //		/**
 //		* Make a free external link, given a user-supplied URL
@@ -1314,39 +1316,39 @@ public class XomwParser implements XomwParserIface {
 //		public function makeFreeExternalLink($url, $numPostProto) {
 //			$trail = '';
 //
-//			# The characters '<' and '>' (which were escaped by
-//			# removeHTMLtags()) should not be included in
-//			# URLs, per RFC 2396.
-//			# Make &nbsp; terminate a URL as well (bug T84937)
-//			$m2 = [];
+//			// The characters '<' and '>' (which were escaped by
+//			// removeHTMLtags()) should not be included in
+//			// URLs, per RFC 2396.
+//			// Make &nbsp; terminate a URL as well (bug T84937)
+//			m2 = [];
 //			if (preg_match(
 //				'/&(lt|gt|nbsp|#x0*(3[CcEe]|[Aa]0)|#0*(60|62|160));/',
 //				$url,
-//				$m2,
+//				m2,
 //				PREG_OFFSET_CAPTURE
 //			)) {
-//				$trail = substr($url, $m2[0][1]) . $trail;
-//				$url = substr($url, 0, $m2[0][1]);
+//				$trail = substr($url, m2[0][1]) . $trail;
+//				$url = substr($url, 0, m2[0][1]);
 //			}
 //
-//			# Move trailing punctuation to $trail
+//			// Move trailing punctuation to $trail
 //			$sep = ',;\.:!?';
-//			# If there is no left bracket, then consider right brackets fair game too
+//			// If there is no left bracket, then consider right brackets fair game too
 //			if (strpos($url, '(') === false) {
 //				$sep .= ')';
 //			}
 //
 //			$urlRev = strrev($url);
 //			$numSepChars = strspn($urlRev, $sep);
-//			# Don't break a trailing HTML entity by moving the ; into $trail
-//			# This is in hot code, so use substr_compare to avoid having to
-//			# create a new String Object for the comparison
+//			// Don't break a trailing HTML entity by moving the ; into $trail
+//			// This is in hot code, so use substr_compare to avoid having to
+//			// create a new String Object for the comparison
 //			if ($numSepChars && substr_compare($url, ";", -$numSepChars, 1) === 0) {
-//				# more optimization: instead of running preg_match with a $
-//				# anchor, which can be slow, do the match on the reversed
-//				# String starting at the desired offset.
-//				# un-reversed regexp is: /&([a-z]+|#x[\da-f]+|#\d+)$/i
-//				if (preg_match('/\G([a-z]+|[\da-f]+x#|\d+#)&/i', $urlRev, $m2, 0, $numSepChars)) {
+//				// more optimization: instead of running preg_match with a $
+//				// anchor, which can be slow, do the match on the reversed
+//				// String starting at the desired offset.
+//				// un-reversed regexp is: /&([a-z]+|#x[\da-f]+|#\d+)$/i
+//				if (preg_match('/\G([a-z]+|[\da-f]+x#|\d+#)&/i', $urlRev, m2, 0, $numSepChars)) {
 //					$numSepChars--;
 //				}
 //			}
@@ -1355,25 +1357,25 @@ public class XomwParser implements XomwParserIface {
 //				$url = substr($url, 0, -$numSepChars);
 //			}
 //
-//			# Verify that we still have a real URL after trail removal, and
-//			# not just lone protocol
+//			// Verify that we still have a real URL after trail removal, and
+//			// not just lone protocol
 //			if (strlen($trail) >= $numPostProto) {
 //				return $url . $trail;
 //			}
 //
 //			$url = Sanitizer::cleanUrl($url);
 //
-//			# Is this an external image?
+//			// Is this an external image?
 //			$text = this.maybeMakeExternalImage($url);
 //			if ($text === false) {
-//				# Not an image, make a link
+//				// Not an image, make a link
 //				$text = Linker::makeExternalLink($url,
 //					this.getConverterLanguage()->markNoConversion($url, true),
 //					true, 'free',
 //					this.getExternalLinkAttribs($url), this.mTitle);
-//				# Register it in the output Object...
-//				# Replace unnecessary URL escape codes with their equivalent characters
-//				$pasteurized = self::normalizeLinkUrl($url);
+//				// Register it in the output Object...
+//				// Replace unnecessary URL escape codes with their equivalent characters
+//				$pasteurized = XomwParser.normalizeLinkUrl($url);
 //				this.mOutput->addExternalLink($pasteurized);
 //			}
 //			return $text . $trail;
@@ -1416,17 +1418,17 @@ public class XomwParser implements XomwParserIface {
 //				$text = $bits[$i++];
 //				$trail = $bits[$i++];
 //
-//				# The characters '<' and '>' (which were escaped by
-//				# removeHTMLtags()) should not be included in
-//				# URLs, per RFC 2396.
-//				$m2 = [];
-//				if (preg_match('/&(lt|gt);/', $url, $m2, PREG_OFFSET_CAPTURE)) {
-//					$text = substr($url, $m2[0][1]) . ' ' . $text;
-//					$url = substr($url, 0, $m2[0][1]);
+//				// The characters '<' and '>' (which were escaped by
+//				// removeHTMLtags()) should not be included in
+//				// URLs, per RFC 2396.
+//				m2 = [];
+//				if (preg_match('/&(lt|gt);/', $url, m2, PREG_OFFSET_CAPTURE)) {
+//					$text = substr($url, m2[0][1]) . ' ' . $text;
+//					$url = substr($url, 0, m2[0][1]);
 //				}
 //
-//				# If the link text is an image URL, replace it with an <img> tag
-//				# This happened by accident in the original parser, but some people used it extensively
+//				// If the link text is an image URL, replace it with an <img> tag
+//				// This happened by accident in the original parser, but some people used it extensively
 //				$img = this.maybeMakeExternalImage($text);
 //				if ($img !== false) {
 //					$text = $img;
@@ -1434,18 +1436,18 @@ public class XomwParser implements XomwParserIface {
 //
 //				$dtrail = '';
 //
-//				# Set linktype for CSS - if URL==text, link is essentially free
+//				// Set linktype for CSS - if URL==text, link is essentially free
 //				$linktype = ($text === $url) ? 'free' : 'text';
 //
-//				# No link text, e.g. [http://domain.tld/some.link]
+//				// No link text, e.g. [http://domain.tld/some.link]
 //				if ($text == '') {
-//					# Autonumber
+//					// Autonumber
 //					$langObj = this.getTargetLanguage();
 //					$text = '[' . $langObj->formatNum(++this.mAutonumber) . ']';
 //					$linktype = 'autonumber';
 //				} else {
-//					# Have link text, e.g. [http://domain.tld/some.link text]s
-//					# Check for trail
+//					// Have link text, e.g. [http://domain.tld/some.link text]s
+//					// Check for trail
 //					list($dtrail, $trail) = Linker::splitTrail($trail);
 //				}
 //
@@ -1453,17 +1455,17 @@ public class XomwParser implements XomwParserIface {
 //
 //				$url = Sanitizer::cleanUrl($url);
 //
-//				# Use the encoded URL
-//				# This means that users can paste URLs directly into the text
-//				# Funny characters like � aren't valid in URLs anyway
-//				# This was changed in August 2004
+//				// Use the encoded URL
+//				// This means that users can paste URLs directly into the text
+//				// Funny characters like � aren't valid in URLs anyway
+//				// This was changed in August 2004
 //				$s .= Linker::makeExternalLink($url, $text, false, $linktype,
 //					this.getExternalLinkAttribs($url), this.mTitle) . $dtrail . $trail;
 //
-//				# Register link in the output Object.
-//				# Replace unnecessary URL escape codes with the referenced character
-//				# This prevents spammers from hiding links from the filters
-//				$pasteurized = self::normalizeLinkUrl($url);
+//				// Register link in the output Object.
+//				// Replace unnecessary URL escape codes with the referenced character
+//				// This prevents spammers from hiding links from the filters
+//				$pasteurized = XomwParser.normalizeLinkUrl($url);
 //				this.mOutput->addExternalLink($pasteurized);
 //			}
 //
@@ -1520,10 +1522,10 @@ public class XomwParser implements XomwParserIface {
 //		* @return String
 //		*/
 //		public static function normalizeLinkUrl($url) {
-//			# First, make sure unsafe characters are encoded
+//			// First, make sure unsafe characters are encoded
 //			$url = preg_replace_callback('/[\x00-\x20"<>\[\\\\\]^`{|}\x7F-\xFF]/',
-//				function ($m) {
-//					return rawurlencode($m[0]);
+//				function (m) {
+//					return rawurlencode(m[0]);
 //				},
 //				$url
 //			);
@@ -1531,40 +1533,40 @@ public class XomwParser implements XomwParserIface {
 //			$ret = '';
 //			$end = strlen($url);
 //
-//			# Fragment part - 'fragment'
+//			// Fragment part - 'fragment'
 //			$start = strpos($url, '#');
 //			if ($start !== false && $start < $end) {
-//				$ret = self::normalizeUrlComponent(
+//				$ret = XomwParser.normalizeUrlComponent(
 //					substr($url, $start, $end - $start), '"#%<>[\]^`{|}') . $ret;
 //				$end = $start;
 //			}
 //
-//			# Query part - 'query' minus &=+;
+//			// Query part - 'query' minus &=+;
 //			$start = strpos($url, '?');
 //			if ($start !== false && $start < $end) {
-//				$ret = self::normalizeUrlComponent(
+//				$ret = XomwParser.normalizeUrlComponent(
 //					substr($url, $start, $end - $start), '"#%<>[\]^`{|}&=+;') . $ret;
 //				$end = $start;
 //			}
 //
-//			# Scheme and path part - 'pchar'
-//			# (we assume no userinfo or encoded colons in the host)
-//			$ret = self::normalizeUrlComponent(
+//			// Scheme and path part - 'pchar'
+//			// (we assume no userinfo or encoded colons in the host)
+//			$ret = XomwParser.normalizeUrlComponent(
 //				substr($url, 0, $end), '"#%<>[\]^`{|}/?') . $ret;
 //
 //			return $ret;
 //		}
 //
 //		private static function normalizeUrlComponent($component, $unsafe) {
-//			$callback = function ($matches) use ($unsafe) {
-//				$char = urldecode($matches[0]);
+//			$callback = function (matches) use ($unsafe) {
+//				$char = urldecode(matches[0]);
 //				$ord = ord($char);
 //				if ($ord > 32 && $ord < 127 && strpos($unsafe, $char) === false) {
-//					# Unescape it
+//					// Unescape it
 //					return $char;
 //				} else {
-//					# Leave it escaped, but use uppercase for a-f
-//					return strtoupper($matches[0]);
+//					// Leave it escaped, but use uppercase for a-f
+//					return strtoupper(matches[0]);
 //				}
 //			};
 //			return preg_replace_callback('/%[0-9A-Fa-f]{2}/', $callback, $component);
@@ -1582,11 +1584,11 @@ public class XomwParser implements XomwParserIface {
 //			$imagesfrom = this.mOptions->getAllowExternalImagesFrom();
 //			$imagesexception = !empty($imagesfrom);
 //			$text = false;
-//			# $imagesfrom could be either a single String or an array of strings, parse out the latter
+//			// $imagesfrom could be either a single String or an array of strings, parse out the latter
 //			if ($imagesexception && is_array($imagesfrom)) {
 //				$imagematch = false;
-//				foreach ($imagesfrom as $match) {
-//					if (strpos($url, $match) === 0) {
+//				foreach ($imagesfrom as match) {
+//					if (strpos($url, match) === 0) {
 //						$imagematch = true;
 //						break;
 //					}
@@ -1600,13 +1602,13 @@ public class XomwParser implements XomwParserIface {
 //			if (this.mOptions->getAllowExternalImages()
 //				|| ($imagesexception && $imagematch)
 //			) {
-//				if (preg_match(self::EXT_IMAGE_REGEX, $url)) {
-//					# Image found
+//				if (preg_match(XomwParser.EXT_IMAGE_REGEX, $url)) {
+//					// Image found
 //					$text = Linker::makeExternalImage($url);
 //				}
 //			}
 //			if (!$text && this.mOptions->getEnableImageWhitelist()
-//				&& preg_match(self::EXT_IMAGE_REGEX, $url)
+//				&& preg_match(XomwParser.EXT_IMAGE_REGEX, $url)
 //			) {
 //				$whitelist = explode(
 //					"\n",
@@ -1614,12 +1616,12 @@ public class XomwParser implements XomwParserIface {
 //				);
 //
 //				foreach ($whitelist as $entry) {
-//					# Sanitize the regex fragment, make it case-insensitive, ignore blank entries/comments
+//					// Sanitize the regex fragment, make it case-insensitive, ignore blank entries/comments
 //					if (strpos($entry, '#') === 0 || $entry === '') {
 //						continue;
 //					}
 //					if (preg_match('/' . str_replace('/', '\\/', $entry) . '/i', $url)) {
-//						# Image matches a whitelist entry
+//						// Image matches a whitelist entry
 //						$text = Linker::makeExternalImage($url);
 //						break;
 //					}
@@ -1674,7 +1676,7 @@ public class XomwParser implements XomwParserIface {
 	public byte[] armorLinks(Bry_bfr trg, byte[] src, int src_bgn, int src_end) {
 		// XO.MW.PORTED
 		// return preg_replace('/\b((?i)' . this.mUrlProtocols . ')/',
-		//	self::MARKER_PREFIX . "NOPARSE$1", $text);
+		//	XomwParser.MARKER_PREFIX . "NOPARSE$1", $text);
 		int cur = src_bgn;
 		int prv = cur;
 		boolean dirty = false;
@@ -1729,7 +1731,7 @@ public class XomwParser implements XomwParserIface {
 //		* @return boolean
 //		*/
 //		public function areSubpagesAllowed() {
-//			# Some namespaces don't allow subpages
+//			// Some namespaces don't allow subpages
 //			return MWNamespace::hasSubpages(this.mTitle->getNamespace());
 //		}
 //
@@ -1907,18 +1909,18 @@ public class XomwParser implements XomwParserIface {
 //				case 'pageid': // requested in T25427
 //					$pageid = this.getTitle()->getArticleID();
 //					if ($pageid == 0) {
-//						# 0 means the page doesn't exist in the database,
-//						# which means the user is previewing a new page.
-//						# The vary-revision flag must be set, because the magic word
-//						# will have a different value once the page is saved.
+//						// 0 means the page doesn't exist in the database,
+//						// which means the user is previewing a new page.
+//						// The vary-revision flag must be set, because the magic word
+//						// will have a different value once the page is saved.
 //						this.mOutput->setFlag('vary-revision');
 //						wfDebug(__METHOD__ . ": {{PAGEID}} used in a new page, setting vary-revision...\n");
 //					}
 //					$value = $pageid ? $pageid : null;
 //					break;
 //				case 'revisionid':
-//					# Let the edit saving system know we should parse the page
-//					# *after* a revision ID has been assigned.
+//					// Let the edit saving system know we should parse the page
+//					// *after* a revision ID has been assigned.
 //					this.mOutput->setFlag('vary-revision-id');
 //					wfDebug(__METHOD__ . ": {{REVISIONID}} used, setting vary-revision-id...\n");
 //					$value = this.mRevisionId;
@@ -1928,50 +1930,50 @@ public class XomwParser implements XomwParserIface {
 //					}
 //					break;
 //				case 'revisionday':
-//					# Let the edit saving system know we should parse the page
-//					# *after* a revision ID has been assigned. This is for null edits.
+//					// Let the edit saving system know we should parse the page
+//					// *after* a revision ID has been assigned. This is for null edits.
 //					this.mOutput->setFlag('vary-revision');
 //					wfDebug(__METHOD__ . ": {{REVISIONDAY}} used, setting vary-revision...\n");
 //					$value = intval(substr(this.getRevisionTimestamp(), 6, 2));
 //					break;
 //				case 'revisionday2':
-//					# Let the edit saving system know we should parse the page
-//					# *after* a revision ID has been assigned. This is for null edits.
+//					// Let the edit saving system know we should parse the page
+//					// *after* a revision ID has been assigned. This is for null edits.
 //					this.mOutput->setFlag('vary-revision');
 //					wfDebug(__METHOD__ . ": {{REVISIONDAY2}} used, setting vary-revision...\n");
 //					$value = substr(this.getRevisionTimestamp(), 6, 2);
 //					break;
 //				case 'revisionmonth':
-//					# Let the edit saving system know we should parse the page
-//					# *after* a revision ID has been assigned. This is for null edits.
+//					// Let the edit saving system know we should parse the page
+//					// *after* a revision ID has been assigned. This is for null edits.
 //					this.mOutput->setFlag('vary-revision');
 //					wfDebug(__METHOD__ . ": {{REVISIONMONTH}} used, setting vary-revision...\n");
 //					$value = substr(this.getRevisionTimestamp(), 4, 2);
 //					break;
 //				case 'revisionmonth1':
-//					# Let the edit saving system know we should parse the page
-//					# *after* a revision ID has been assigned. This is for null edits.
+//					// Let the edit saving system know we should parse the page
+//					// *after* a revision ID has been assigned. This is for null edits.
 //					this.mOutput->setFlag('vary-revision');
 //					wfDebug(__METHOD__ . ": {{REVISIONMONTH1}} used, setting vary-revision...\n");
 //					$value = intval(substr(this.getRevisionTimestamp(), 4, 2));
 //					break;
 //				case 'revisionyear':
-//					# Let the edit saving system know we should parse the page
-//					# *after* a revision ID has been assigned. This is for null edits.
+//					// Let the edit saving system know we should parse the page
+//					// *after* a revision ID has been assigned. This is for null edits.
 //					this.mOutput->setFlag('vary-revision');
 //					wfDebug(__METHOD__ . ": {{REVISIONYEAR}} used, setting vary-revision...\n");
 //					$value = substr(this.getRevisionTimestamp(), 0, 4);
 //					break;
 //				case 'revisiontimestamp':
-//					# Let the edit saving system know we should parse the page
-//					# *after* a revision ID has been assigned. This is for null edits.
+//					// Let the edit saving system know we should parse the page
+//					// *after* a revision ID has been assigned. This is for null edits.
 //					this.mOutput->setFlag('vary-revision');
 //					wfDebug(__METHOD__ . ": {{REVISIONTIMESTAMP}} used, setting vary-revision...\n");
 //					$value = this.getRevisionTimestamp();
 //					break;
 //				case 'revisionuser':
-//					# Let the edit saving system know we should parse the page
-//					# *after* a revision ID has been assigned for null edits.
+//					// Let the edit saving system know we should parse the page
+//					// *after* a revision ID has been assigned for null edits.
 //					this.mOutput->setFlag('vary-user');
 //					wfDebug(__METHOD__ . ": {{REVISIONUSER}} used, setting vary-user...\n");
 //					$value = this.getRevisionUser();
@@ -2015,8 +2017,8 @@ public class XomwParser implements XomwParserIface {
 //					$value = $pageLang->formatNum(MWTimestamp::getInstance($ts)->format('H'), true);
 //					break;
 //				case 'currentweek':
-//					# @bug T6594 PHP5 has it zero padded, PHP4 does not, cast to
-//					# int to remove the padding
+//					// @bug T6594 PHP5 has it zero padded, PHP4 does not, cast to
+//					// int to remove the padding
 //					$value = $pageLang->formatNum((int)MWTimestamp::getInstance($ts)->format('W'));
 //					break;
 //				case 'currentdow':
@@ -2041,8 +2043,8 @@ public class XomwParser implements XomwParserIface {
 //					$value = $pageLang->formatNum(MWTimestamp::getLocalInstance($ts)->format('H'), true);
 //					break;
 //				case 'localweek':
-//					# @bug T6594 PHP5 has it zero padded, PHP4 does not, cast to
-//					# int to remove the padding
+//					// @bug T6594 PHP5 has it zero padded, PHP4 does not, cast to
+//					// int to remove the padding
 //					$value = $pageLang->formatNum((int)MWTimestamp::getLocalInstance($ts)->format('W'));
 //					break;
 //				case 'localdow':
@@ -2137,7 +2139,7 @@ public class XomwParser implements XomwParserIface {
 	*
 	* @param String $text The text to parse
 	* @param int $flags Bitwise combination of:
-	*   - self::PTD_FOR_INCLUSION: Handle "<noinclude>" and "<includeonly>" as if the text is being
+	*   - XomwParser.PTD_FOR_INCLUSION: Handle "<noinclude>" and "<includeonly>" as if the text is being
 	*     included. Default is to assume a direct page view.
 	*
 	* The generated DOM tree must depend only on the input text and the flags.
@@ -2183,10 +2185,10 @@ public class XomwParser implements XomwParserIface {
 	* with the appropriate text. Templates are substituted recursively,
 	* taking care to avoid infinite loops.
 	*
-	* Note that the substitution depends on value of $mOutputType:
-	*  self::OT_WIKI: only {{subst:}} templates
-	*  self::OT_PREPROCESS: templates but not extension tags
-	*  self::OT_HTML: all templates and extension tags
+	* Note that the substitution depends on value of mOutputType:
+	*  XomwParser.OT_WIKI: only {{subst:}} templates
+	*  XomwParser.OT_PREPROCESS: templates but not extension tags
+	*  XomwParser.OT_HTML: all templates and extension tags
 	*
 	* @param String $text The text to transform
 	* @param boolean|PPFrame $frame Object describing the arguments passed to the
@@ -2271,14 +2273,14 @@ public class XomwParser implements XomwParserIface {
 //		*       'expansion-depth-exceeded-warning',
 //		*       'expansion-depth-exceeded-category')
 //		* @param String|int|null $current Current value
-//		* @param String|int|null $max Maximum allowed, when an explicit limit has been
+//		* @param String|int|null max Maximum allowed, when an explicit limit has been
 //		*	 exceeded, provide the values (optional)
 //		*/
-//		public function limitationWarn($limitationType, $current = '', $max = '') {
-//			# does no harm if $current and $max are present but are unnecessary for the message
-//			# Not doing ->inLanguage(this.mOptions->getUserLangObj()), since this is shown
-//			# only during preview, and that would split the parser cache unnecessarily.
-//			$warning = wfMessage("$limitationType-warning")->numParams($current, $max)
+//		public function limitationWarn($limitationType, $current = '', max = '') {
+//			// does no harm if $current and max are present but are unnecessary for the message
+//			// Not doing ->inLanguage(this.mOptions->getUserLangObj()), since this is shown
+//			// only during preview, and that would split the parser cache unnecessarily.
+//			$warning = wfMessage("$limitationType-warning")->numParams($current, max)
 //				->text();
 //			this.mOutput->addWarning($warning);
 //			this.addTrackingCategory("$limitationType-category");
@@ -2296,7 +2298,7 @@ public class XomwParser implements XomwParserIface {
 //		* @throws Exception
 //		* @return String The text of the template
 //		*/
-//		public function braceSubstitution($piece, $frame) {
+	public XophpArray braceSubstitution(XophpArray piece, XomwPPFrame frame) {
 //
 //			// Flags
 //
@@ -2313,42 +2315,42 @@ public class XomwParser implements XomwParserIface {
 //			// $text is a DOM node needing expansion in the current frame
 //			$isLocalObj = false;
 //
-//			# Title Object, where $text came from
+//			// Title Object, where $text came from
 //			$title = false;
 //
-//			# $part1 is the bit before the first |, and must contain only title characters.
-//			# Various prefixes will be stripped from it later.
+//			// $part1 is the bit before the first |, and must contain only title characters.
+//			// Various prefixes will be stripped from it later.
 //			$titleWithSpaces = $frame->expand($piece['title']);
 //			$part1 = trim($titleWithSpaces);
 //			$titleText = false;
 //
-//			# Original title text preserved for various purposes
+//			// Original title text preserved for various purposes
 //			$originalTitle = $part1;
 //
-//			# $args is a list of argument nodes, starting from index 0, not including $part1
-//			# @todo FIXME: If piece['parts'] is null then the call to getLength()
-//			# below won't work b/c this $args isn't an Object
+//			// $args is a list of argument nodes, starting from index 0, not including $part1
+//			// @todo FIXME: If piece['parts'] is null then the call to getLength()
+//			// below won't work b/c this $args isn't an Object
 //			$args = (null == $piece['parts']) ? [] : $piece['parts'];
 //
 //			$profileSection = null; // profile templates
 //
-//			# SUBST
+//			// SUBST
 //			if (!$found) {
 //				$substMatch = this.mSubstWords->matchStartAndRemove($part1);
 //
-//				# Possibilities for substMatch: "subst", "safesubst" or FALSE
-//				# Decide whether to expand template or keep wikitext as-is.
+//				// Possibilities for substMatch: "subst", "safesubst" or FALSE
+//				// Decide whether to expand template or keep wikitext as-is.
 //				if (this.ot['wiki']) {
 //					if ($substMatch === false) {
-//						$literal = true;  # literal when in PST with no prefix
+//						$literal = true;  // literal when in PST with no prefix
 //					} else {
-//						$literal = false; # expand when in PST with subst: or safesubst:
+//						$literal = false; // expand when in PST with subst: or safesubst:
 //					}
 //				} else {
 //					if ($substMatch == 'subst') {
-//						$literal = true;  # literal when not in PST with plain subst:
+//						$literal = true;  // literal when not in PST with plain subst:
 //					} else {
-//						$literal = false; # expand when not in PST with safesubst: or no prefix
+//						$literal = false; // expand when not in PST with safesubst: or no prefix
 //					}
 //				}
 //				if ($literal) {
@@ -2358,7 +2360,7 @@ public class XomwParser implements XomwParserIface {
 //				}
 //			}
 //
-//			# Variables
+//			// Variables
 //			if (!$found && $args->getLength() == 0) {
 //				$id = this.mVariables->matchStartToEnd($part1);
 //				if ($id !== false) {
@@ -2370,26 +2372,26 @@ public class XomwParser implements XomwParserIface {
 //				}
 //			}
 //
-//			# MSG, MSGNW and RAW
+//			// MSG, MSGNW and RAW
 //			if (!$found) {
-//				# Check for MSGNW:
-//				$mwMsgnw = MagicWord::get('msgnw');
-//				if ($mwMsgnw->matchStartAndRemove($part1)) {
+//				// Check for MSGNW:
+//				mwMsgnw = MagicWord::get('msgnw');
+//				if (mwMsgnw->matchStartAndRemove($part1)) {
 //					$nowiki = true;
 //				} else {
-//					# Remove obsolete MSG:
-//					$mwMsg = MagicWord::get('msg');
-//					$mwMsg->matchStartAndRemove($part1);
+//					// Remove obsolete MSG:
+//					mwMsg = MagicWord::get('msg');
+//					mwMsg->matchStartAndRemove($part1);
 //				}
 //
-//				# Check for RAW:
-//				$mwRaw = MagicWord::get('raw');
-//				if ($mwRaw->matchStartAndRemove($part1)) {
+//				// Check for RAW:
+//				mwRaw = MagicWord::get('raw');
+//				if (mwRaw->matchStartAndRemove($part1)) {
 //					$forceRawInterwiki = true;
 //				}
 //			}
 //
-//			# Parser functions
+//			// Parser functions
 //			if (!$found) {
 //				$colonPos = strpos($part1, ':');
 //				if ($colonPos !== false) {
@@ -2405,18 +2407,18 @@ public class XomwParser implements XomwParserIface {
 //						throw $ex;
 //					}
 //
-//					# The interface for parser functions allows for extracting
-//					# flags into the local scope. Extract any forwarded flags
-//					# here.
+//					// The interface for parser functions allows for extracting
+//					// flags into the local scope. Extract any forwarded flags
+//					// here.
 //					extract($result);
 //				}
 //			}
 //
-//			# Finish mangling title and then check for loops.
-//			# Set $title to a Title Object and $titleText to the PDBK
+//			// Finish mangling title and then check for loops.
+//			// Set $title to a Title Object and $titleText to the PDBK
 //			if (!$found) {
 //				$ns = NS_TEMPLATE;
-//				# Split the title into page and subpage
+//				// Split the title into page and subpage
 //				$subpage = '';
 //				$relative = this.maybeDoSubpageLink($part1, $subpage);
 //				if ($part1 !== $relative) {
@@ -2426,11 +2428,11 @@ public class XomwParser implements XomwParserIface {
 //				$title = Title::newFromText($part1, $ns);
 //				if ($title) {
 //					$titleText = $title->getPrefixedText();
-//					# Check for language variants if the template is not found
+//					// Check for language variants if the template is not found
 //					if (this.getConverterLanguage()->hasVariants() && $title->getArticleID() == 0) {
 //						this.getConverterLanguage()->findVariantLink($part1, $title, true);
 //					}
-//					# Do recursion depth check
+//					// Do recursion depth check
 //					$limit = this.mOptions->getMaxTemplateDepth();
 //					if ($frame->depth >= $limit) {
 //						$found = true;
@@ -2442,7 +2444,7 @@ public class XomwParser implements XomwParserIface {
 //				}
 //			}
 //
-//			# Load from database
+//			// Load from database
 //			if (!$found && $title) {
 //				$profileSection = this.mProfiler->scopedProfileIn($title->getPrefixedDBkey());
 //				if (!$title->isExternal()) {
@@ -2490,7 +2492,7 @@ public class XomwParser implements XomwParserIface {
 //							}
 //						}
 //					} elseif (MWNamespace::isNonincludable($title->getNamespace())) {
-//						$found = false; # access denied
+//						$found = false; // access denied
 //						wfDebug(__METHOD__ . ": template inclusion denied for " .
 //							$title->getPrefixedDBkey() . "\n");
 //					} else {
@@ -2501,27 +2503,27 @@ public class XomwParser implements XomwParserIface {
 //						}
 //					}
 //
-//					# If the title is valid but undisplayable, make a link to it
+//					// If the title is valid but undisplayable, make a link to it
 //					if (!$found && (this.ot['html'] || this.ot['pre'])) {
 //						$text = "[[:$titleText]]";
 //						$found = true;
 //					}
 //				} elseif ($title->isTrans()) {
-//					# Interwiki transclusion
+//					// Interwiki transclusion
 //					if (this.ot['html'] && !$forceRawInterwiki) {
 //						$text = this.interwikiTransclude($title, 'render');
 //						$isHTML = true;
 //					} else {
 //						$text = this.interwikiTransclude($title, 'raw');
-//						# Preprocess it like a template
-//						$text = this.preprocessToDom($text, self::PTD_FOR_INCLUSION);
+//						// Preprocess it like a template
+//						$text = this.preprocessToDom($text, XomwParser.PTD_FOR_INCLUSION);
 //						$isChildObj = true;
 //					}
 //					$found = true;
 //				}
 //
-//				# Do infinite loop check
-//				# This has to be done after redirect resolution to avoid infinite loops via redirects
+//				// Do infinite loop check
+//				// This has to be done after redirect resolution to avoid infinite loops via redirects
 //				if (!$frame->loopCheck($title)) {
 //					$found = true;
 //					$text = '<span class="error">'
@@ -2531,8 +2533,8 @@ public class XomwParser implements XomwParserIface {
 //				}
 //			}
 //
-//			# If we haven't found text to substitute by now, we're done
-//			# Recover the source wikitext and return it
+//			// If we haven't found text to substitute by now, we're done
+//			// Recover the source wikitext and return it
 //			if (!$found) {
 //				$text = $frame->virtualBracketedImplode('{{', '|', '}}', $titleWithSpaces, $args);
 //				if ($profileSection) {
@@ -2541,18 +2543,18 @@ public class XomwParser implements XomwParserIface {
 //				return [ 'Object' => $text ];
 //			}
 //
-//			# Expand DOM-style return values in a child frame
+//			// Expand DOM-style return values in a child frame
 //			if ($isChildObj) {
-//				# Clean up argument array
+//				// Clean up argument array
 //				$newFrame = $frame->newChild($args, $title);
 //
 //				if ($nowiki) {
 //					$text = $newFrame->expand($text, PPFrame::RECOVER_ORIG);
 //				} elseif ($titleText !== false && $newFrame->isEmpty()) {
-//					# Expansion is eligible for the empty-frame cache
+//					// Expansion is eligible for the empty-frame cache
 //					$text = $newFrame->cachedExpand($titleText, $text);
 //				} else {
-//					# Uncached expansion
+//					// Uncached expansion
 //					$text = $newFrame->expand($text);
 //				}
 //			}
@@ -2565,30 +2567,30 @@ public class XomwParser implements XomwParserIface {
 //				this.mProfiler->scopedProfileOut($profileSection);
 //			}
 //
-//			# Replace raw HTML by a placeholder
+//			// Replace raw HTML by a placeholder
 //			if ($isHTML) {
 //				$text = this.insertStripItem($text);
 //			} elseif ($nowiki && (this.ot['html'] || this.ot['pre'])) {
-//				# Escape nowiki-style return values
+//				// Escape nowiki-style return values
 //				$text = wfEscapeWikiText($text);
 //			} elseif (is_string($text)
 //				&& !$piece['lineStart']
 //				&& preg_match('/^(?:{\\||:|;|#|\*)/', $text)
 //			) {
-//				# T2529: if the template begins with a table or block-level
-//				# element, it should be treated as beginning a new line.
-//				# This behavior is somewhat controversial.
+//				// T2529: if the template begins with a table or block-level
+//				// element, it should be treated as beginning a new line.
+//				// This behavior is somewhat controversial.
 //				$text = "\n" . $text;
 //			}
 //
 //			if (is_string($text) && !this.incrementIncludeSize('post-expand', strlen($text))) {
-//				# Error, oversize inclusion
+//				// Error, oversize inclusion
 //				if ($titleText !== false) {
-//					# Make a working, properly escaped link if possible (T25588)
+//					// Make a working, properly escaped link if possible (T25588)
 //					$text = "[[:$titleText]]";
 //				} else {
-//					# This will probably not be a working link, but at least it may
-//					# provide some hint of where the problem is
+//					// This will probably not be a working link, but at least it may
+//					// provide some hint of where the problem is
 //					preg_replace('/^:/', '', $originalTitle);
 //					$text = "[[:$originalTitle]]";
 //				}
@@ -2604,7 +2606,8 @@ public class XomwParser implements XomwParserIface {
 //			}
 //
 //			return $ret;
-//		}
+		return null;
+	}
 //
 //		/**
 //		* Call a parser function and return an array with text and flags.
@@ -2628,11 +2631,11 @@ public class XomwParser implements XomwParserIface {
 //		public function callParserFunction($frame, $function, array $args = []) {
 //			global $wgContLang;
 //
-//			# Case sensitive functions
+//			// Case sensitive functions
 //			if (isset(this.mFunctionSynonyms[1][$function])) {
 //				$function = this.mFunctionSynonyms[1][$function];
 //			} else {
-//				# Case insensitive functions
+//				// Case insensitive functions
 //				$function = $wgContLang->lc($function);
 //				if (isset(this.mFunctionSynonyms[0][$function])) {
 //					$function = this.mFunctionSynonyms[0][$function];
@@ -2643,14 +2646,14 @@ public class XomwParser implements XomwParserIface {
 //
 //			list($callback, $flags) = this.mFunctionHooks[$function];
 //
-//			# Workaround for PHP bug 35229 and similar
+//			// Workaround for PHP bug 35229 and similar
 //			if (!is_callable($callback)) {
 //				throw new MWException("Tag hook for $function is not callable\n");
 //			}
 //
 //			$allArgs = [ &$this ];
-//			if ($flags & self::SFH_OBJECT_ARGS) {
-//				# Convert arguments to PPNodes and collect for appending to $allArgs
+//			if ($flags & XomwParser.SFH_OBJECT_ARGS) {
+//				// Convert arguments to PPNodes and collect for appending to $allArgs
 //				$funcArgs = [];
 //				foreach ($args as $k => $v) {
 //					if ($v instanceof PPNode || $k === 0) {
@@ -2660,11 +2663,11 @@ public class XomwParser implements XomwParserIface {
 //					}
 //				}
 //
-//				# Add a frame parameter, and pass the arguments as an array
+//				// Add a frame parameter, and pass the arguments as an array
 //				$allArgs[] = $frame;
 //				$allArgs[] = $funcArgs;
 //			} else {
-//				# Convert arguments to plain text and append to $allArgs
+//				// Convert arguments to plain text and append to $allArgs
 //				foreach ($args as $k => $v) {
 //					if ($v instanceof PPNode) {
 //						$allArgs[] = trim($frame->expand($v));
@@ -2678,9 +2681,9 @@ public class XomwParser implements XomwParserIface {
 //
 //			$result = call_user_func_array($callback, $allArgs);
 //
-//			# The interface for function hooks allows them to return a wikitext
-//			# String or an array containing the String and any flags. This mungs
-//			# things around to match what this method should return.
+//			// The interface for function hooks allows them to return a wikitext
+//			// String or an array containing the String and any flags. This mungs
+//			// things around to match what this method should return.
 //			if (!is_array($result)) {
 //				$result =[
 //					'found' => true,
@@ -2734,7 +2737,7 @@ public class XomwParser implements XomwParserIface {
 //				return [ this.mTplDomCache[$titleText], $title ];
 //			}
 //
-//			# Cache miss, go to the database
+//			// Cache miss, go to the database
 //			list($text, $title) = this.fetchTemplateAndTitle($title);
 //
 //			if ($text === false) {
@@ -2742,7 +2745,7 @@ public class XomwParser implements XomwParserIface {
 //				return [ false, $title ];
 //			}
 //
-//			$dom = this.preprocessToDom($text, self::PTD_FOR_INCLUSION);
+//			$dom = this.preprocessToDom($text, XomwParser.PTD_FOR_INCLUSION);
 //			this.mTplDomCache[$titleText] = $dom;
 //
 //			if (!$title->equals($cacheTitle)) {
@@ -2850,12 +2853,12 @@ public class XomwParser implements XomwParserIface {
 //			$finalTitle = $title;
 //			$deps = [];
 //
-//			# Loop to fetch the article, with up to 1 redirect
+//			// Loop to fetch the article, with up to 1 redirect
 //			// @codingStandardsIgnoreStart Generic.CodeAnalysis.ForLoopWithTestFunctionCall.NotAllowed
 //			for ($i = 0; $i < 2 && is_object($title); $i++) {
 //				// @codingStandardsIgnoreEnd
-//				# Give extensions a chance to select the revision instead
-//				$id = false; # Assume current
+//				// Give extensions a chance to select the revision instead
+//				$id = false; // Assume current
 //				Hooks::run('BeforeParserFetchTemplateAndtitle',
 //					[ $parser, $title, &$skip, &$id ]);
 //
@@ -2868,7 +2871,7 @@ public class XomwParser implements XomwParserIface {
 //					];
 //					break;
 //				}
-//				# Get the revision
+//				// Get the revision
 //				if ($id) {
 //					$rev = Revision::newFromId($id);
 //				} elseif ($parser) {
@@ -2877,7 +2880,7 @@ public class XomwParser implements XomwParserIface {
 //					$rev = Revision::newFromTitle($title);
 //				}
 //				$rev_id = $rev ? $rev->getId() : 0;
-//				# If there is no current revision, there is no page
+//				// If there is no current revision, there is no page
 //				if ($id === false && !$rev) {
 //					$linkCache = LinkCache::singleton();
 //					$linkCache->addBadLinkObj($title);
@@ -2888,7 +2891,7 @@ public class XomwParser implements XomwParserIface {
 //					'page_id' => $title->getArticleID(),
 //					'rev_id' => $rev_id ];
 //				if ($rev && !$title->equals($rev->getTitle())) {
-//					# We fetched a rev from a different title; register it too...
+//					// We fetched a rev from a different title; register it too...
 //					$deps[] = [
 //						'title' => $rev->getTitle(),
 //						'page_id' => $rev->getPage(),
@@ -2908,20 +2911,20 @@ public class XomwParser implements XomwParserIface {
 //					}
 //				} elseif ($title->getNamespace() == NS_MEDIAWIKI) {
 //					global $wgContLang;
-//					$message = wfMessage($wgContLang->lcfirst($title->getText()))->inContentLanguage();
-//					if (!$message->exists()) {
+//					message = wfMessage($wgContLang->lcfirst($title->getText()))->inContentLanguage();
+//					if (!message->exists()) {
 //						$text = false;
 //						break;
 //					}
-//					$content = $message->content();
-//					$text = $message->plain();
+//					$content = message->content();
+//					$text = message->plain();
 //				} else {
 //					break;
 //				}
 //				if (!$content) {
 //					break;
 //				}
-//				# Redirect?
+//				// Redirect?
 //				$finalTitle = $title;
 //				$title = $content->getRedirectTarget();
 //			}
@@ -2954,10 +2957,10 @@ public class XomwParser implements XomwParserIface {
 //
 //			$time = $file ? $file->getTimestamp() : false;
 //			$sha1 = $file ? $file->getSha1() : false;
-//			# Register the file as a dependency...
+//			// Register the file as a dependency...
 //			this.mOutput->addImage($title->getDBkey(), $time, $sha1);
 //			if ($file && !$title->equals($file->getTitle())) {
-//				# Update fetched file title
+//				// Update fetched file title
 //				$title = $file->getTitle();
 //				this.mOutput->addImage($title->getDBkey(), $time, $sha1);
 //			}
@@ -3042,17 +3045,17 @@ public class XomwParser implements XomwParserIface {
 //			]);
 //			return $text;
 //		}
-//
-//		/**
-//		* Triple brace replacement -- used for template arguments
-//		* @private
-//		*
-//		* @param array $piece
-//		* @param PPFrame $frame
-//		*
-//		* @return array
-//		*/
-//		public function argSubstitution($piece, $frame) {
+
+	/**
+	* Triple brace replacement -- used for template arguments
+	* @private
+	*
+	* @param array $piece
+	* @param PPFrame $frame
+	*
+	* @return array
+	*/
+	public XophpArray argSubstitution(XophpArray piece, XomwPPFrame frame) {
 //
 //			$error = false;
 //			$parts = $piece['parts'];
@@ -3066,7 +3069,7 @@ public class XomwParser implements XomwParserIface {
 //					|| (this.ot['wiki'] && $frame->isTemplate())
 //				)
 //			) {
-//				# No match in frame, use the supplied default
+//				// No match in frame, use the supplied default
 //				$Object = $parts->item(0)->getChildren();
 //			}
 //			if (!this.incrementIncludeSize('arg', strlen($text))) {
@@ -3075,7 +3078,7 @@ public class XomwParser implements XomwParserIface {
 //			}
 //
 //			if ($text === false && $Object === false) {
-//				# No match anywhere
+//				// No match anywhere
 //				$Object = $frame->virtualBracketedImplode('{{{', '|', '}}}', $nameWithSpaces, $parts);
 //			}
 //			if ($error !== false) {
@@ -3088,24 +3091,25 @@ public class XomwParser implements XomwParserIface {
 //			}
 //
 //			return $ret;
-//		}
-//
-//		/**
-//		* Return the text to be used for a given extension tag.
-//		* This is the ghost of strip().
-//		*
-//		* @param array $params Associative array of parameters:
-//		*     name       PPNode for the tag name
-//		*     attr       PPNode for unparsed text where tag attributes are thought to be
-//		*     attributes Optional associative array of parsed attributes
-//		*     inner      Contents of extension element
-//		*     noClose    Original text did not have a close tag
-//		* @param PPFrame $frame
-//		*
-//		* @throws MWException
-//		* @return String
-//		*/
-//		public function extensionSubstitution($params, $frame) {
+		return null;
+	}
+
+	/**
+	* Return the text to be used for a given extension tag.
+	* This is the ghost of strip().
+	*
+	* @param array $Associative array of parameters:
+	*     name       PPNode for the tag name
+	*     attr       PPNode for unparsed text where tag attributes are thought to be
+	*     attributes Optional associative array of parsed attributes
+	*     inner      Contents of extension element
+	*     noClose    Original text did not have a close tag
+	* @param PPFrame $frame
+	*
+	* @throws MWException
+	* @return String
+	*/
+	public String extensionSubstitution(XophpArray paramsAry, XomwPPFrame frame) {
 //			static $errorStr = '<span class="error">';
 //			static $errorLen = 20;
 //
@@ -3127,15 +3131,15 @@ public class XomwParser implements XomwParserIface {
 //			// (T149622).
 //			$content = !isset($params['inner']) ? null : $frame->expand($params['inner']);
 //
-//			$marker = self::MARKER_PREFIX . "-$name-"
-//				. sprintf('%08X', this.mMarkerIndex++) . self::MARKER_SUFFIX;
+//			marker = XomwParser.MARKER_PREFIX . "-$name-"
+//				. sprintf('%08X', this.mMarkerIndex++) . XomwParser.MARKER_SUFFIX;
 //
 //			$isFunctionTag = isset(this.mFunctionTagHooks[strtolower($name)]) &&
 //				(this.ot['html'] || this.ot['pre']);
 //			if ($isFunctionTag) {
-//				$markerType = 'none';
+//				markerType = 'none';
 //			} else {
-//				$markerType = 'general';
+//				markerType = 'general';
 //			}
 //			if (this.ot['html'] || $isFunctionTag) {
 //				$name = strtolower($name);
@@ -3145,7 +3149,7 @@ public class XomwParser implements XomwParserIface {
 //				}
 //
 //				if (isset(this.mTagHooks[$name])) {
-//					# Workaround for PHP bug 35229 and similar
+//					// Workaround for PHP bug 35229 and similar
 //					if (!is_callable(this.mTagHooks[$name])) {
 //						throw new MWException("Tag hook for $name is not callable\n");
 //					}
@@ -3164,7 +3168,7 @@ public class XomwParser implements XomwParserIface {
 //				}
 //
 //				if (is_array($output)) {
-//					# Extract flags to local scope (to override $markerType)
+//					// Extract flags to local scope (to override markerType)
 //					$flags = $output;
 //					$output = $flags[0];
 //					unset($flags[0]);
@@ -3192,17 +3196,18 @@ public class XomwParser implements XomwParserIface {
 //				}
 //			}
 //
-//			if ($markerType === 'none') {
+//			if (markerType === 'none') {
 //				return $output;
-//			} elseif ($markerType === 'nowiki') {
-//				this.mStripState->addNoWiki($marker, $output);
-//			} elseif ($markerType === 'general') {
-//				this.mStripState->addGeneral($marker, $output);
+//			} elseif (markerType === 'nowiki') {
+//				this.mStripState->addNoWiki(marker, $output);
+//			} elseif (markerType === 'general') {
+//				this.mStripState->addGeneral(marker, $output);
 //			} else {
 //				throw new MWException(__METHOD__ . ': invalid marker type');
 //			}
-//			return $marker;
-//		}
+//			return marker;
+		return null;
+	}
 //
 //		/**
 //		* Increment an include size counter
@@ -3235,11 +3240,11 @@ public class XomwParser implements XomwParserIface {
 
 //		/**
 //		* @see ParserOutput::addTrackingCategory()
-//		* @param String $msg Message key
+//		* @param String msg Message key
 //		* @return boolean Whether the addition was successful
 //		*/
-//		public function addTrackingCategory($msg) {
-//			return this.mOutput->addTrackingCategory($msg, this.mTitle);
+//		public function addTrackingCategory(msg) {
+//			return this.mOutput->addTrackingCategory(msg, this.mTitle);
 //		}
 //
 //		/**
@@ -3261,56 +3266,56 @@ public class XomwParser implements XomwParserIface {
 //		public function formatHeadings($text, $origText, $isMain = true) {
 //			global $wgMaxTocLevel, $wgExperimentalHtmlIds;
 //
-//			# Inhibit editsection links if requested in the page
+//			// Inhibit editsection links if requested in the page
 //			if (isset(this.mDoubleUnderscores['noeditsection'])) {
-//				$maybeShowEditLink = $showEditLink = false;
+//				maybeShowEditLink = $showEditLink = false;
 //			} else {
-//				$maybeShowEditLink = true; /* Actual presence will depend on ParserOptions option */
+//				maybeShowEditLink = true; /* Actual presence will depend on ParserOptions option */
 //				$showEditLink = this.mOptions->getEditSection();
 //			}
 //			if ($showEditLink) {
 //				this.mOutput->setEditSectionTokens(true);
 //			}
 //
-//			# Get all headlines for numbering them and adding funky stuff like [edit]
-//			# links - this is for later, but we need the number of headlines right now
-//			$matches = [];
+//			// Get all headlines for numbering them and adding funky stuff like [edit]
+//			// links - this is for later, but we need the number of headlines right now
+//			matches = ...;
 //			$numMatches = preg_match_all(
 //				'/<H(?P<level>[1-6])(?P<attrib>.*?>)\s*(?P<header>[\s\S]*?)\s*<\/H[1-6] *>/i',
 //				$text,
-//				$matches
+//				matches
 //			);
 //
-//			# if there are fewer than 4 headlines in the article, do not show TOC
-//			# unless it's been explicitly enabled.
+//			// if there are fewer than 4 headlines in the article, do not show TOC
+//			// unless it's been explicitly enabled.
 //			$enoughToc = this.mShowToc &&
 //				(($numMatches >= 4) || this.mForceTocPosition);
 //
-//			# Allow user to stipulate that a page should have a "new section"
-//			# link added via __NEWSECTIONLINK__
+//			// Allow user to stipulate that a page should have a "new section"
+//			// link added via __NEWSECTIONLINK__
 //			if (isset(this.mDoubleUnderscores['newsectionlink'])) {
 //				this.mOutput->setNewSection(true);
 //			}
 //
-//			# Allow user to remove the "new section"
-//			# link via __NONEWSECTIONLINK__
+//			// Allow user to remove the "new section"
+//			// link via __NONEWSECTIONLINK__
 //			if (isset(this.mDoubleUnderscores['nonewsectionlink'])) {
 //				this.mOutput->hideNewSection(true);
 //			}
 //
-//			# if the String __FORCETOC__ (not case-sensitive) occurs in the HTML,
-//			# override above conditions and always show TOC above first header
+//			// if the String __FORCETOC__ (not case-sensitive) occurs in the HTML,
+//			// override above conditions and always show TOC above first header
 //			if (isset(this.mDoubleUnderscores['forcetoc'])) {
 //				this.mShowToc = true;
 //				$enoughToc = true;
 //			}
 //
-//			# headline counter
+//			// headline counter
 //			$headlineCount = 0;
 //			$numVisible = 0;
 //
-//			# Ugh .. the TOC should have neat indentation levels which can be
-//			# passed to the skin functions. These are determined here
+//			// Ugh .. the TOC should have neat indentation levels which can be
+//			// passed to the skin functions. These are determined here
 //			$toc = '';
 //			$full = '';
 //			$head = [];
@@ -3320,10 +3325,10 @@ public class XomwParser implements XomwParserIface {
 //			$prevlevel = 0;
 //			$toclevel = 0;
 //			$prevtoclevel = 0;
-//			$markerRegex = self::MARKER_PREFIX . "-h-(\d+)-" . self::MARKER_SUFFIX;
+//			markerRegex = XomwParser.MARKER_PREFIX . "-h-(\d+)-" . XomwParser.MARKER_SUFFIX;
 //			$baseTitleText = this.mTitle->getPrefixedDBkey();
 //			$oldType = this.mOutputType;
-//			this.setOutputType(self::OT_WIKI);
+//			this.setOutputType(XomwParser.OT_WIKI);
 //			$frame = this.getPreprocessor()->newFrame();
 //			$root = this.preprocessToDom($origText);
 //			$node = $root->getFirstChild();
@@ -3331,28 +3336,28 @@ public class XomwParser implements XomwParserIface {
 //			$tocraw = [];
 //			$refers = [];
 //
-//			$headlines = $numMatches !== false ? $matches[3] : [];
+//			$headlines = $numMatches !== false ? matches[3] : [];
 //
 //			foreach ($headlines as $headline) {
 //				$isTemplate = false;
 //				$titleText = false;
 //				$sectionIndex = false;
 //				$numbering = '';
-//				$markerMatches = [];
-//				if (preg_match("/^$markerRegex/", $headline, $markerMatches)) {
-//					$serial = $markerMatches[1];
+//				markerMatches = [];
+//				if (preg_match("/^markerRegex/", $headline, markerMatches)) {
+//					$serial = markerMatches[1];
 //					list($titleText, $sectionIndex) = this.mHeadings[$serial];
 //					$isTemplate = ($titleText != $baseTitleText);
-//					$headline = preg_replace("/^$markerRegex\\s*/", "", $headline);
+//					$headline = preg_replace("/^markerRegex\\s*/", "", $headline);
 //				}
 //
 //				if ($toclevel) {
 //					$prevlevel = $level;
 //				}
-//				$level = $matches[1][$headlineCount];
+//				$level = matches[1][$headlineCount];
 //
 //				if ($level > $prevlevel) {
-//					# Increase TOC level
+//					// Increase TOC level
 //					$toclevel++;
 //					$sublevelCount[$toclevel] = 0;
 //					if ($toclevel < $wgMaxTocLevel) {
@@ -3361,15 +3366,15 @@ public class XomwParser implements XomwParserIface {
 //						$numVisible++;
 //					}
 //				} elseif ($level < $prevlevel && $toclevel > 1) {
-//					# Decrease TOC level, find level to jump to
+//					// Decrease TOC level, find level to jump to
 //
 //					for ($i = $toclevel; $i > 0; $i--) {
 //						if ($levelCount[$i] == $level) {
-//							# Found last matching level
+//							// Found last matching level
 //							$toclevel = $i;
 //							break;
 //						} elseif ($levelCount[$i] < $level) {
-//							# Found first matching level below current level
+//							// Found first matching level below current level
 //							$toclevel = $i + 1;
 //							break;
 //						}
@@ -3379,7 +3384,7 @@ public class XomwParser implements XomwParserIface {
 //					}
 //					if ($toclevel < $wgMaxTocLevel) {
 //						if ($prevtoclevel < $wgMaxTocLevel) {
-//							# Unindent only if the previous toc level was shown :p
+//							// Unindent only if the previous toc level was shown :p
 //							$toc .= Linker::tocUnindent($prevtoclevel - $toclevel);
 //							$prevtoclevel = $toclevel;
 //						} else {
@@ -3387,7 +3392,7 @@ public class XomwParser implements XomwParserIface {
 //						}
 //					}
 //				} else {
-//					# No change in level, end TOC line
+//					// No change in level, end TOC line
 //					if ($toclevel < $wgMaxTocLevel) {
 //						$toc .= Linker::tocLineEnd();
 //					}
@@ -3395,7 +3400,7 @@ public class XomwParser implements XomwParserIface {
 //
 //				$levelCount[$toclevel] = $level;
 //
-//				# count number of headlines for each level
+//				// count number of headlines for each level
 //				$sublevelCount[$toclevel]++;
 //				$dot = 0;
 //				for ($i = 1; $i <= $toclevel; $i++) {
@@ -3408,28 +3413,28 @@ public class XomwParser implements XomwParserIface {
 //					}
 //				}
 //
-//				# The safe header is a version of the header text safe to use for links
+//				// The safe header is a version of the header text safe to use for links
 //
-//				# Remove link placeholders by the link text.
-//				#     <!--LINK number-->
-//				# turns into
-//				#     link text with suffix
-//				# Do this before unstrip since link text can contain strip markers
+//				// Remove link placeholders by the link text.
+//				//     <!--LINK number-->
+//				// turns into
+//				//     link text with suffix
+//				// Do this before unstrip since link text can contain strip markers
 //				$safeHeadline = this.replaceLinkHoldersText($headline);
 //
-//				# Avoid insertion of weird stuff like <math> by expanding the relevant sections
+//				// Avoid insertion of weird stuff like <math> by expanding the relevant sections
 //				$safeHeadline = this.mStripState->unstripBoth($safeHeadline);
 //
-//				# Strip out HTML (first regex removes any tag not allowed)
-//				# Allowed tags are:
-//				# * <sup> and <sub> (T10393)
-//				# * <i> (T28375)
-//				# * <b> (r105284)
-//				# * <bdi> (T74884)
-//				# * <span dir="rtl"> and <span dir="ltr"> (T37167)
-//				# * <s> and <strike> (T35715)
-//				# We strip any parameter from accepted tags (second regex), except dir="rtl|ltr" from <span>,
-//				# to allow setting directionality in toc items.
+//				// Strip out HTML (first regex removes any tag not allowed)
+//				// Allowed tags are:
+//				// * <sup> and <sub> (T10393)
+//				// * <i> (T28375)
+//				// * <b> (r105284)
+//				// * <bdi> (T74884)
+//				// * <span dir="rtl"> and <span dir="ltr"> (T37167)
+//				// * <s> and <strike> (T35715)
+//				// We strip any parameter from accepted tags (second regex), except dir="rtl|ltr" from <span>,
+//				// to allow setting directionality in toc items.
 //				$tocline = preg_replace(
 //					[
 //						'#<(?!/?(span|sup|sub|bdi|i|b|s|strike)(?: [^>]*)?>).*?>#',
@@ -3439,36 +3444,36 @@ public class XomwParser implements XomwParserIface {
 //					$safeHeadline
 //				);
 //
-//				# Strip '<span></span>', which is the result from the above if
-//				# <span id="foo"></span> is used to produce an additional anchor
-//				# for a section.
+//				// Strip '<span></span>', which is the result from the above if
+//				// <span id="foo"></span> is used to produce an additional anchor
+//				// for a section.
 //				$tocline = str_replace('<span></span>', '', $tocline);
 //
 //				$tocline = trim($tocline);
 //
-//				# For the anchor, strip out HTML-y stuff period
+//				// For the anchor, strip out HTML-y stuff period
 //				$safeHeadline = preg_replace('/<.*?>/', '', $safeHeadline);
 //				$safeHeadline = Sanitizer::normalizeSectionNameWhitespace($safeHeadline);
 //
-//				# Save headline for section edit hint before it's escaped
+//				// Save headline for section edit hint before it's escaped
 //				$headlineHint = $safeHeadline;
 //
 //				if ($wgExperimentalHtmlIds) {
-//					# For reverse compatibility, provide an id that's
-//					# HTML4-compatible, like we used to.
-//					# It may be worth noting, academically, that it's possible for
-//					# the legacy anchor to conflict with a non-legacy headline
-//					# anchor on the page.  In this case likely the "correct" thing
-//					# would be to either drop the legacy anchors or make sure
-//					# they're numbered first.  However, this would require people
-//					# to type in section names like "abc_.D7.93.D7.90.D7.A4"
-//					# manually, so let's not bother worrying about it.
+//					// For reverse compatibility, provide an id that's
+//					// HTML4-compatible, like we used to.
+//					// It may be worth noting, academically, that it's possible for
+//					// the legacy anchor to conflict with a non-legacy headline
+//					// anchor on the page.  In this case likely the "correct" thing
+//					// would be to either drop the legacy anchors or make sure
+//					// they're numbered first.  However, this would require people
+//					// to type in section names like "abc_.D7.93.D7.90.D7.A4"
+//					// manually, so let's not bother worrying about it.
 //					$legacyHeadline = Sanitizer::escapeId($safeHeadline,
 //						[ 'noninitial', 'legacy' ]);
 //					$safeHeadline = Sanitizer::escapeId($safeHeadline);
 //
 //					if ($legacyHeadline == $safeHeadline) {
-//						# No reason to have both (in fact, we can't)
+//						// No reason to have both (in fact, we can't)
 //						$legacyHeadline = false;
 //					}
 //				} else {
@@ -3477,10 +3482,10 @@ public class XomwParser implements XomwParserIface {
 //						'noninitial');
 //				}
 //
-//				# HTML names must be case-insensitively unique (T12721).
-//				# This does not apply to Unicode characters per
-//				# https://www.w3.org/TR/html5/infrastructure.html#case-sensitivity-and-String-comparison
-//				# @todo FIXME: We may be changing them depending on the current locale.
+//				// HTML names must be case-insensitively unique (T12721).
+//				// This does not apply to Unicode characters per
+//				// https://www.w3.org/TR/html5/infrastructure.html#case-sensitivity-and-String-comparison
+//				// @todo FIXME: We may be changing them depending on the current locale.
 //				$arrayKey = strtolower($safeHeadline);
 //				if ($legacyHeadline === false) {
 //					$legacyArrayKey = false;
@@ -3488,7 +3493,7 @@ public class XomwParser implements XomwParserIface {
 //					$legacyArrayKey = strtolower($legacyHeadline);
 //				}
 //
-//				# Create the anchor for linking from the TOC to the section
+//				// Create the anchor for linking from the TOC to the section
 //				$anchor = $safeHeadline;
 //				$legacyAnchor = $legacyHeadline;
 //				if (isset($refers[$arrayKey])) {
@@ -3510,9 +3515,9 @@ public class XomwParser implements XomwParserIface {
 //					$refers[$legacyArrayKey] = true;
 //				}
 //
-//				# Don't number the heading if it is the only one (looks silly)
-//				if (count($matches[3]) > 1 && this.mOptions->getNumberHeadings()) {
-//					# the two are different if the line contains a link
+//				// Don't number the heading if it is the only one (looks silly)
+//				if (count(matches[3]) > 1 && this.mOptions->getNumberHeadings()) {
+//					// the two are different if the line contains a link
 //					$headline = Html::element(
 //						'span',
 //						[ 'class' => 'mw-headline-number' ],
@@ -3525,8 +3530,8 @@ public class XomwParser implements XomwParserIface {
 //						$numbering, $toclevel, ($isTemplate ? false : $sectionIndex));
 //				}
 //
-//				# Add the section to the section tree
-//				# Find the DOM node for this header
+//				// Add the section to the section tree
+//				// Find the DOM node for this header
 //				$noOffset = ($isTemplate || $sectionIndex === false);
 //				while ($node && !$noOffset) {
 //					if ($node->getName() === 'h') {
@@ -3550,12 +3555,12 @@ public class XomwParser implements XomwParserIface {
 //					'anchor' => $anchor,
 //				];
 //
-//				# give headline the correct <h#> tag
-//				if ($maybeShowEditLink && $sectionIndex !== false) {
+//				// give headline the correct <h#> tag
+//				if (maybeShowEditLink && $sectionIndex !== false) {
 //					// Output edit section links as markers with styles that can be customized by skins
 //					if ($isTemplate) {
-//						# Put a T flag in the section identifier, to indicate to extractSections()
-//						# that sections inside <includeonly> should be counted.
+//						// Put a T flag in the section identifier, to indicate to extractSections()
+//						// that sections inside <includeonly> should be counted.
 //						$editsectionPage = $titleText;
 //						$editsectionSection = "T-$sectionIndex";
 //						$editsectionContent = null;
@@ -3587,7 +3592,7 @@ public class XomwParser implements XomwParserIface {
 //					$editlink = '';
 //				}
 //				$head[$headlineCount] = Linker::makeHeadline($level,
-//					$matches['attrib'][$headlineCount], $anchor, $headline,
+//					matches['attrib'][$headlineCount], $anchor, $headline,
 //					$editlink, $legacyAnchor);
 //
 //				$headlineCount++;
@@ -3595,7 +3600,7 @@ public class XomwParser implements XomwParserIface {
 //
 //			this.setOutputType($oldType);
 //
-//			# Never ever show TOC if no headers
+//			// Never ever show TOC if no headers
 //			if ($numVisible < 1) {
 //				$enoughToc = false;
 //			}
@@ -3606,7 +3611,7 @@ public class XomwParser implements XomwParserIface {
 //				}
 //				$toc = Linker::tocList($toc, this.mOptions->getUserLangObj());
 //				this.mOutput->setTOCHTML($toc);
-//				$toc = self::TOC_START . $toc . self::TOC_END;
+//				$toc = XomwParser.TOC_START . $toc . XomwParser.TOC_END;
 //				this.mOutput->addModules('mediawiki.toc');
 //			}
 //
@@ -3614,7 +3619,7 @@ public class XomwParser implements XomwParserIface {
 //				this.mOutput->setSections($tocraw);
 //			}
 //
-//			# split up and insert constructed headlines
+//			// split up and insert constructed headlines
 //			$blocks = preg_split('/<H[1-6].*?>[\s\S]*?<\/H[1-6]>/i', $text);
 //			$i = 0;
 //
@@ -3673,9 +3678,9 @@ public class XomwParser implements XomwParserIface {
 //			ParserOptions $options, $clearState = true
 //		) {
 //			if ($clearState) {
-//				$magicScopeVariable = this.synchronized();
+//				magicScopeVariable = this.synchronized();
 //			}
-//			this.startParse($title, $options, self::OT_WIKI, $clearState);
+//			this.startParse($title, $options, XomwParser.OT_WIKI, $clearState);
 //			this.setUser($user);
 //
 //			// We still normalize line endings for backwards-compatibility
@@ -3688,7 +3693,7 @@ public class XomwParser implements XomwParserIface {
 //			}
 //			$text = this.mStripState->unstripBoth($text);
 //
-//			this.setUser(null); # Reset
+//			this.setUser(null); // Reset
 //
 //			return $text;
 //		}
@@ -3704,11 +3709,11 @@ public class XomwParser implements XomwParserIface {
 //		private function pstPass2($text, $user) {
 //			global $wgContLang;
 //
-//			# Note: This is the timestamp saved as hardcoded wikitext to
-//			# the database, we use $wgContLang here in order to give
-//			# everyone the same signature and use the default one rather
-//			# than the one selected in each user's preferences.
-//			# (see also T14815)
+//			// Note: This is the timestamp saved as hardcoded wikitext to
+//			// the database, we use $wgContLang here in order to give
+//			// everyone the same signature and use the default one rather
+//			// than the one selected in each user's preferences.
+//			// (see also T14815)
 //			$ts = this.mOptions->getTimestamp();
 //			$timestamp = MWTimestamp::getLocalInstance($ts);
 //			$ts = $timestamp->format('YmdHis');
@@ -3716,14 +3721,14 @@ public class XomwParser implements XomwParserIface {
 //
 //			$d = $wgContLang->timeanddate($ts, false, false) . " ($tzMsg)";
 //
-//			# Variable replacement
-//			# Because mOutputType is OT_WIKI, this will only process {{subst:xxx}} type tags
+//			// Variable replacement
+//			// Because mOutputType is OT_WIKI, this will only process {{subst:xxx}} type tags
 //			$text = this.replaceVariables($text);
 //
-//			# This works almost by chance, as the replaceVariables are done before the getUserSig(),
-//			# which may corrupt this parser instance via its wfMessage()->text() call-
+//			// This works almost by chance, as the replaceVariables are done before the getUserSig(),
+//			// which may corrupt this parser instance via its wfMessage()->text() call-
 //
-//			# Signatures
+//			// Signatures
 //			$sigText = this.getUserSig($user);
 //			$text = strtr($text, [
 //				'~~~~~' => $d,
@@ -3731,9 +3736,9 @@ public class XomwParser implements XomwParserIface {
 //				'~~~' => $sigText
 //			]);
 //
-//			# Context links ("pipe tricks"): [[|name]] and [[name (context)|]]
+//			// Context links ("pipe tricks"): [[|name]] and [[name (context)|]]
 //			$tc = '[' . Title::legalChars() . ']';
-//			$nc = '[ _0-9A-Za-z\x80-\xff-]'; # Namespaces can use non-ascii!
+//			$nc = '[ _0-9A-Za-z\x80-\xff-]'; // Namespaces can use non-ascii!
 //
 //			// [[ns:page (context)|]]
 //			$p1 = "/\[\[(:?$nc+:|:|)($tc+?)(?\\($tc+\\))\\|]]/";
@@ -3744,19 +3749,19 @@ public class XomwParser implements XomwParserIface {
 //			// [[|page]] (reverse pipe trick: add context from page title)
 //			$p2 = "/\[\[\\|($tc+)]]/";
 //
-//			# try $p1 first, to turn "[[A, B (C)|]]" into "[[A, B (C)|A, B]]"
+//			// try $p1 first, to turn "[[A, B (C)|]]" into "[[A, B (C)|A, B]]"
 //			$text = preg_replace($p1, '[[\\1\\2\\3|\\2]]', $text);
 //			$text = preg_replace($p4, '[[\\1\\2\\3|\\2]]', $text);
 //			$text = preg_replace($p3, '[[\\1\\2\\3\\4|\\2]]', $text);
 //
 //			$t = this.mTitle->getText();
-//			$m = [];
-//			if (preg_match("/^($nc+:|)$tc+?(\\($tc+\\))$/", $t, $m)) {
-//				$text = preg_replace($p2, "[[$m[1]\\1$m[2]|\\1]]", $text);
-//			} elseif (preg_match("/^($nc+:|)$tc+?(, $tc+|)$/", $t, $m) && "$m[1]$m[2]" != '') {
-//				$text = preg_replace($p2, "[[$m[1]\\1$m[2]|\\1]]", $text);
+//			m = [];
+//			if (preg_match("/^($nc+:|)$tc+?(\\($tc+\\))$/", $t, m)) {
+//				$text = preg_replace($p2, "[[m[1]\\1m[2]|\\1]]", $text);
+//			} elseif (preg_match("/^($nc+:|)$tc+?(, $tc+|)$/", $t, m) && "m[1]m[2]" != '') {
+//				$text = preg_replace($p2, "[[m[1]\\1m[2]|\\1]]", $text);
 //			} else {
-//				# if there's no context, don't bother duplicating the title
+//				// if there's no context, don't bother duplicating the title
 //				$text = preg_replace($p2, '[[\\1]]', $text);
 //			}
 //
@@ -3782,7 +3787,7 @@ public class XomwParser implements XomwParserIface {
 //
 //			$username = $user->getName();
 //
-//			# If not given, retrieve from the user Object.
+//			// If not given, retrieve from the user Object.
 //			if ($nickname === false) {
 //				$nickname = $user->getOption('nickname');
 //			}
@@ -3797,26 +3802,26 @@ public class XomwParser implements XomwParserIface {
 //				$nickname = $username;
 //				wfDebug(__METHOD__ . ": $username has overlong signature.\n");
 //			} elseif ($fancySig !== false) {
-//				# Sig. might contain markup; validate this
+//				// Sig. might contain markup; validate this
 //				if (this.validateSig($nickname) !== false) {
-//					# Validated; clean up (if needed) and return it
+//					// Validated; clean up (if needed) and return it
 //					return this.cleanSig($nickname, true);
 //				} else {
-//					# Failed to validate; fall back to the default
+//					// Failed to validate; fall back to the default
 //					$nickname = $username;
 //					wfDebug(__METHOD__ . ": $username has bad XML tags in signature.\n");
 //				}
 //			}
 //
-//			# Make sure nickname doesnt get a sig in a sig
-//			$nickname = self::cleanSigInSig($nickname);
+//			// Make sure nickname doesnt get a sig in a sig
+//			$nickname = XomwParser.cleanSigInSig($nickname);
 //
-//			# If we're still here, make it a link to the user page
+//			// If we're still here, make it a link to the user page
 //			$userText = wfEscapeWikiText($username);
 //			$nickText = wfEscapeWikiText($nickname);
-//			$msgName = $user->isAnon() ? 'signature-anon' : 'signature';
+//			msgName = $user->isAnon() ? 'signature-anon' : 'signature';
 //
-//			return wfMessage($msgName, $userText, $nickText)->inContentLanguage()
+//			return wfMessage(msgName, $userText, $nickText)->inContentLanguage()
 //				->title(this.getTitle())->text();
 //		}
 //
@@ -3843,23 +3848,23 @@ public class XomwParser implements XomwParserIface {
 //		public function cleanSig($text, $parsing = false) {
 //			if (!$parsing) {
 //				global $wgTitle;
-//				$magicScopeVariable = this.synchronized();
-//				this.startParse($wgTitle, new ParserOptions, self::OT_PREPROCESS, true);
+//				magicScopeVariable = this.synchronized();
+//				this.startParse($wgTitle, new ParserOptions, XomwParser.OT_PREPROCESS, true);
 //			}
 //
-//			# Option to disable this feature
+//			// Option to disable this feature
 //			if (!this.mOptions->getCleanSignatures()) {
 //				return $text;
 //			}
 //
-//			# @todo FIXME: Regex doesn't respect extension tags or nowiki
-//			#  => Move this logic to braceSubstitution()
+//			// @todo FIXME: Regex doesn't respect extension tags or nowiki
+//			//  => Move this logic to braceSubstitution()
 //			$substWord = MagicWord::get('subst');
 //			$substRegex = '/\{\{(?!(?:' . $substWord->getBaseRegex() . '))/x' . $substWord->getRegexCase();
 //			$substText = '{{' . $substWord->getSynonym(0);
 //
 //			$text = preg_replace($substRegex, $substText, $text);
-//			$text = self::cleanSigInSig($text);
+//			$text = XomwParser.cleanSigInSig($text);
 //			$dom = this.preprocessToDom($text);
 //			$frame = this.getPreprocessor()->newFrame();
 //			$text = $frame->expand($dom);
@@ -3925,7 +3930,7 @@ public class XomwParser implements XomwParserIface {
 //		public function transformMsg($text, $options, $title = null) {
 //			static $executing = false;
 //
-//			# Guard against infinite recursion
+//			// Guard against infinite recursion
 //			if ($executing) {
 //				return $text;
 //			}
@@ -3968,8 +3973,8 @@ public class XomwParser implements XomwParserIface {
 //		*/
 //		public function setHook($tag, $callback) {
 //			$tag = strtolower($tag);
-//			if (preg_match('/[<>\r\n]/', $tag, $m)) {
-//				throw new MWException("Invalid character {$m[0]} in setHook('$tag', ...) call");
+//			if (preg_match('/[<>\r\n]/', $tag, m)) {
+//				throw new MWException("Invalid character {m[0]} in setHook('$tag', ...) call");
 //			}
 //			$oldVal = isset(this.mTagHooks[$tag]) ? this.mTagHooks[$tag] : null;
 //			this.mTagHooks[$tag] = $callback;
@@ -3999,8 +4004,8 @@ public class XomwParser implements XomwParserIface {
 //		*/
 //		public function setTransparentTagHook($tag, $callback) {
 //			$tag = strtolower($tag);
-//			if (preg_match('/[<>\r\n]/', $tag, $m)) {
-//				throw new MWException("Invalid character {$m[0]} in setTransparentHook('$tag', ...) call");
+//			if (preg_match('/[<>\r\n]/', $tag, m)) {
+//				throw new MWException("Invalid character {m[0]} in setTransparentHook('$tag', ...) call");
 //			}
 //			$oldVal = isset(this.mTransparentTagHooks[$tag]) ? this.mTransparentTagHooks[$tag] : null;
 //			this.mTransparentTagHooks[$tag] = $callback;
@@ -4066,25 +4071,25 @@ public class XomwParser implements XomwParserIface {
 //			$oldVal = isset(this.mFunctionHooks[$id]) ? this.mFunctionHooks[$id][0] : null;
 //			this.mFunctionHooks[$id] = [ $callback, $flags ];
 //
-//			# Add to function cache
-//			$mw = MagicWord::get($id);
-//			if (!$mw) {
+//			// Add to function cache
+//			mw = MagicWord::get($id);
+//			if (!mw) {
 //				throw new MWException(__METHOD__ . '() expecting a magic word identifier.');
 //			}
 //
-//			$synonyms = $mw->getSynonyms();
-//			$sensitive = intval($mw->isCaseSensitive());
+//			$synonyms = mw->getSynonyms();
+//			$sensitive = intval(mw->isCaseSensitive());
 //
 //			foreach ($synonyms as $syn) {
-//				# Case
+//				// Case
 //				if (!$sensitive) {
 //					$syn = $wgContLang->lc($syn);
 //				}
-//				# Add leading hash
-//				if (!($flags & self::SFH_NO_HASH)) {
+//				// Add leading hash
+//				if (!($flags & XomwParser.SFH_NO_HASH)) {
 //					$syn = '#' . $syn;
 //				}
-//				# Remove trailing colon
+//				// Remove trailing colon
 //				if (substr($syn, -1, 1) === ':') {
 //					$syn = substr($syn, 0, -1);
 //				}
@@ -4114,8 +4119,8 @@ public class XomwParser implements XomwParserIface {
 //		*/
 //		public function setFunctionTagHook($tag, $callback, $flags) {
 //			$tag = strtolower($tag);
-//			if (preg_match('/[<>\r\n]/', $tag, $m)) {
-//				throw new MWException("Invalid character {$m[0]} in setFunctionTagHook('$tag', ...) call");
+//			if (preg_match('/[<>\r\n]/', $tag, m)) {
+//				throw new MWException("Invalid character {m[0]} in setFunctionTagHook('$tag', ...) call");
 //			}
 //			$old = isset(this.mFunctionTagHooks[$tag]) ?
 //				this.mFunctionTagHooks[$tag] : null;
@@ -4172,13 +4177,13 @@ public class XomwParser implements XomwParserIface {
 //		*/
 //		public function renderImageGallery($text, $params) {
 //
-//			$mode = false;
+//			mode = false;
 //			if (isset($params['mode'])) {
-//				$mode = $params['mode'];
+//				mode = $params['mode'];
 //			}
 //
 //			try {
-//				$ig = ImageGalleryBase::factory($mode);
+//				$ig = ImageGalleryBase::factory(mode);
 //			} catch (Exception $e) {
 //				// If invalid type set, fallback to default.
 //				$ig = ImageGalleryBase::factory(false);
@@ -4217,32 +4222,32 @@ public class XomwParser implements XomwParserIface {
 //
 //			$lines = StringUtils::explode("\n", $text);
 //			foreach ($lines as $line) {
-//				# match lines like these:
-//				# Image:someimage.jpg|This is some image
-//				$matches = [];
-//				preg_match("/^([^|]+)(\\|(.*))?$/", $line, $matches);
-//				# Skip empty lines
-//				if (count($matches) == 0) {
+//				// match lines like these:
+//				// Image:someimage.jpg|This is some image
+//				matches = [];
+//				preg_match("/^([^|]+)(\\|(.*))?$/", $line, matches);
+//				// Skip empty lines
+//				if (count(matches) == 0) {
 //					continue;
 //				}
 //
-//				if (strpos($matches[0], '%') !== false) {
-//					$matches[1] = rawurldecode($matches[1]);
+//				if (strpos(matches[0], '%') !== false) {
+//					matches[1] = rawurldecode(matches[1]);
 //				}
-//				$title = Title::newFromText($matches[1], NS_FILE);
+//				$title = Title::newFromText(matches[1], NS_FILE);
 //				if (is_null($title)) {
-//					# Bogus title. Ignore these so we don't bomb out later.
+//					// Bogus title. Ignore these so we don't bomb out later.
 //					continue;
 //				}
 //
-//				# We need to get what handler the file uses, to figure out parameters.
-//				# Note, a hook can overide the file name, and chose an entirely different
-//				# file (which potentially could be of a different type and have different handler).
+//				// We need to get what handler the file uses, to figure out parameters.
+//				// Note, a hook can overide the file name, and chose an entirely different
+//				// file (which potentially could be of a different type and have different handler).
 //				$options = [];
 //				$descQuery = false;
 //				Hooks::run('BeforeParserFetchFileAndTitle',
 //					[ $this, $title, &$options, &$descQuery ]);
-//				# Don't register it now, as TraditionalImageGallery does that later.
+//				// Don't register it now, as TraditionalImageGallery does that later.
 //				$file = this.fetchFileNoRegister($title, $options);
 //				$handler = $file ? $file->getHandler() : false;
 //
@@ -4257,38 +4262,38 @@ public class XomwParser implements XomwParserIface {
 //					unset($paramMap['img_width']);
 //				}
 //
-//				$mwArray = new MagicWordArray(array_keys($paramMap));
+//				mwArray = new MagicWordArray(array_keys($paramMap));
 //
 //				$label = '';
 //				$alt = '';
 //				$link = '';
 //				$handlerOptions = [];
-//				if (isset($matches[3])) {
+//				if (isset(matches[3])) {
 //					// look for an |alt= definition while trying not to break existing
 //					// captions with multiple pipes (|) in it, until a more sensible grammar
 //					// is defined for images in galleries
 //
 //					// FIXME: Doing recursiveTagParse at this stage, and the trim before
 //					// splitting on '|' is a bit odd, and different from makeImage.
-//					$matches[3] = this.recursiveTagParse(trim($matches[3]));
+//					matches[3] = this.recursiveTagParse(trim(matches[3]));
 //					// Protect LanguageConverter markup
 //					$parameterMatches = StringUtils::delimiterExplode(
-//						'-{', '}-', '|', $matches[3], true /* nested */
+//						'-{', '}-', '|', matches[3], true /* nested */
 //					);
 //
 //					foreach ($parameterMatches as $parameterMatch) {
-//						list($magicName, $match) = $mwArray->matchVariableStartToEnd($parameterMatch);
-//						if ($magicName) {
-//							$paramName = $paramMap[$magicName];
+//						list(magicName, match) = mwArray->matchVariableStartToEnd($parameterMatch);
+//						if (magicName) {
+//							$paramName = $paramMap[magicName];
 //
 //							switch ($paramName) {
 //							case 'gallery-@gplx.Internal protected-alt':
-//								$alt = this.stripAltText($match, false);
+//								$alt = this.stripAltText(match, false);
 //								break;
 //							case 'gallery-@gplx.Internal protected-link':
-//								$linkValue = strip_tags(this.replaceLinkHoldersText($match));
-//								$chars = self::EXT_LINK_URL_CLASS;
-//								$addr = self::EXT_LINK_ADDR;
+//								$linkValue = strip_tags(this.replaceLinkHoldersText(match));
+//								$chars = XomwParser.EXT_LINK_URL_CLASS;
+//								$addr = XomwParser.EXT_LINK_ADDR;
 //								$prots = this.mUrlProtocols;
 //								// check to see if link matches an absolute url, if not then it must be a wiki link.
 //								if (preg_match('/^-{R|(.*)}-$/', $linkValue)) {
@@ -4307,8 +4312,8 @@ public class XomwParser implements XomwParserIface {
 //								break;
 //							default:
 //								// Must be a handler specific parameter.
-//								if ($handler->validateParam($paramName, $match)) {
-//									$handlerOptions[$paramName] = $match;
+//								if ($handler->validateParam($paramName, match)) {
+//									$handlerOptions[$paramName] = match;
 //								} else {
 //									// Guess not, consider it as caption.
 //									wfDebug("$parameterMatch failed parameter validation\n");
@@ -4343,7 +4348,7 @@ public class XomwParser implements XomwParserIface {
 //				$handlerClass = '';
 //			}
 //			if (!isset(this.mImageParams[$handlerClass])) {
-//				# Initialise static lists
+//				// Initialise static lists
 //				static $internalParamNames = [
 //					'horizAlign' => [ 'left', 'right', 'center', 'none' ],
 //					'vertAlign' => [ 'baseline', 'sub', 'super', 'top', 'text-top', 'middle',
@@ -4356,18 +4361,18 @@ public class XomwParser implements XomwParserIface {
 //					$internalParamMap = [];
 //					foreach ($internalParamNames as $type => $names) {
 //						foreach ($names as $name) {
-//							$magicName = str_replace('-', '_', "img_$name");
-//							$internalParamMap[$magicName] = [ $type, $name ];
+//							magicName = str_replace('-', '_', "img_$name");
+//							$internalParamMap[magicName] = [ $type, $name ];
 //						}
 //					}
 //				}
 //
-//				# Add handler params
+//				// Add handler params
 //				$paramMap = $internalParamMap;
 //				if ($handler) {
 //					$handlerParamMap = $handler->getParamMap();
-//					foreach ($handlerParamMap as $magic => $paramName) {
-//						$paramMap[$magic] = [ 'handler', $paramName ];
+//					foreach ($handlerParamMap as magic => $paramName) {
+//						$paramMap[magic] = [ 'handler', $paramName ];
 //					}
 //				}
 //				this.mImageParams[$handlerClass] = $paramMap;
@@ -4385,67 +4390,67 @@ public class XomwParser implements XomwParserIface {
 //		* @return String HTML
 //		*/
 //		public function makeImage($title, $options, $holders = false) {
-//			# Check if the options text is of the form "options|alt text"
-//			# Options are:
-//			#  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
-//			#  * left       no resizing, just left align. label is used for alt= only
-//			#  * right      same, but right aligned
-//			#  * none       same, but not aligned
-//			#  * ___px      scale to ___ pixels width, no aligning. e.g. use in taxobox
-//			#  * center     center the image
-//			#  * frame      Keep original image size, no magnify-button.
-//			#  * framed     Same as "frame"
-//			#  * frameless  like 'thumb' but without a frame. Keeps user preferences for width
-//			#  * upright    reduce width for upright images, rounded to full __0 px
-//			#  * border     draw a 1px border around the image
-//			#  * alt        Text for HTML alt attribute (defaults to empty)
-//			#  * class      Set a class for img node
-//			#  * link       Set the target of the image link. Can be external, interwiki, or local
-//			# vertical-align values (no % or length right now):
-//			#  * baseline
-//			#  * sub
-//			#  * super
-//			#  * top
-//			#  * text-top
-//			#  * middle
-//			#  * bottom
-//			#  * text-bottom
+//			// Check if the options text is of the form "options|alt text"
+//			// Options are:
+//			//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
+//			//  * left       no resizing, just left align. label is used for alt= only
+//			//  * right      same, but right aligned
+//			//  * none       same, but not aligned
+//			//  * ___px      scale to ___ pixels width, no aligning. e.g. use in taxobox
+//			//  * center     center the image
+//			//  * frame      Keep original image size, no magnify-button.
+//			//  * framed     Same as "frame"
+//			//  * frameless  like 'thumb' but without a frame. Keeps user preferences for width
+//			//  * upright    reduce width for upright images, rounded to full __0 px
+//			//  * border     draw a 1px border around the image
+//			//  * alt        Text for HTML alt attribute (defaults to empty)
+//			//  * class      Set a class for img node
+//			//  * link       Set the target of the image link. Can be external, interwiki, or local
+//			// vertical-align values (no % or length right now):
+//			//  * baseline
+//			//  * sub
+//			//  * super
+//			//  * top
+//			//  * text-top
+//			//  * middle
+//			//  * bottom
+//			//  * text-bottom
 //
-//			# Protect LanguageConverter markup when splitting into parts
+//			// Protect LanguageConverter markup when splitting into parts
 //			$parts = StringUtils::delimiterExplode(
 //				'-{', '}-', '|', $options, true /* allow nesting */
 //			);
 //
-//			# Give extensions a chance to select the file revision for us
+//			// Give extensions a chance to select the file revision for us
 //			$options = [];
 //			$descQuery = false;
 //			Hooks::run('BeforeParserFetchFileAndTitle',
 //				[ $this, $title, &$options, &$descQuery ]);
-//			# Fetch and register the file (file title may be different via hooks)
+//			// Fetch and register the file (file title may be different via hooks)
 //			list($file, $title) = this.fetchFileAndTitle($title, $options);
 //
-//			# Get parameter map
+//			// Get parameter map
 //			$handler = $file ? $file->getHandler() : false;
 //
-//			list($paramMap, $mwArray) = this.getImageParams($handler);
+//			list($paramMap, mwArray) = this.getImageParams($handler);
 //
 //			if (!$file) {
 //				this.addTrackingCategory('broken-file-category');
 //			}
 //
-//			# Process the input parameters
+//			// Process the input parameters
 //			$caption = '';
 //			$params = [ 'frame' => [], 'handler' => [],
 //				'horizAlign' => [], 'vertAlign' => [] ];
 //			$seenformat = false;
 //			foreach ($parts as $part) {
 //				$part = trim($part);
-//				list($magicName, $value) = $mwArray->matchVariableStartToEnd($part);
+//				list(magicName, $value) = mwArray->matchVariableStartToEnd($part);
 //				$validated = false;
-//				if (isset($paramMap[$magicName])) {
-//					list($type, $paramName) = $paramMap[$magicName];
+//				if (isset($paramMap[magicName])) {
+//					list($type, $paramName) = $paramMap[magicName];
 //
-//					# Special case; width and height come in one variable together
+//					// Special case; width and height come in one variable together
 //					if ($type === 'handler' && $paramName === 'width') {
 //						$parsedWidthParam = this.parseWidthParam($value);
 //						if (isset($parsedWidthParam['width'])) {
@@ -4462,33 +4467,33 @@ public class XomwParser implements XomwParserIface {
 //								$validated = true;
 //							}
 //						}
-//						# else no validation -- T15436
+//						// else no validation -- T15436
 //					} else {
 //						if ($type === 'handler') {
-//							# Validate handler parameter
+//							// Validate handler parameter
 //							$validated = $handler->validateParam($paramName, $value);
 //						} else {
-//							# Validate @gplx.Internal protected parameters
+//							// Validate @gplx.Internal protected parameters
 //							switch ($paramName) {
 //							case 'manualthumb':
 //							case 'alt':
 //							case 'class':
-//								# @todo FIXME: Possibly check validity here for
-//								# manualthumb? downstream behavior seems odd with
-//								# missing manual thumbs.
+//								// @todo FIXME: Possibly check validity here for
+//								// manualthumb? downstream behavior seems odd with
+//								// missing manual thumbs.
 //								$validated = true;
 //								$value = this.stripAltText($value, $holders);
 //								break;
 //							case 'link':
-//								$chars = self::EXT_LINK_URL_CLASS;
-//								$addr = self::EXT_LINK_ADDR;
+//								$chars = XomwParser.EXT_LINK_URL_CLASS;
+//								$addr = XomwParser.EXT_LINK_ADDR;
 //								$prots = this.mUrlProtocols;
 //								if ($value === '') {
 //									$paramName = 'no-link';
 //									$value = true;
 //									$validated = true;
 //								} elseif (preg_match("/^((?i)$prots)/", $value)) {
-//									if (preg_match("/^((?i)$prots)$addr$chars*$/u", $value, $m)) {
+//									if (preg_match("/^((?i)$prots)$addr$chars*$/u", $value, m)) {
 //										$paramName = 'link-url';
 //										this.mOutput->addExternalLink($value);
 //										if (this.mOptions->getExternalLinkTarget()) {
@@ -4514,7 +4519,7 @@ public class XomwParser implements XomwParserIface {
 //								$seenformat = true;
 //								break;
 //							default:
-//								# Most other things appear to be empty or numeric...
+//								// Most other things appear to be empty or numeric...
 //								$validated = ($value === false || is_numeric(trim($value)));
 //							}
 //						}
@@ -4529,7 +4534,7 @@ public class XomwParser implements XomwParserIface {
 //				}
 //			}
 //
-//			# Process alignment parameters
+//			// Process alignment parameters
 //			if ($params['horizAlign']) {
 //				$params['frame']['align'] = key($params['horizAlign']);
 //			}
@@ -4539,57 +4544,57 @@ public class XomwParser implements XomwParserIface {
 //
 //			$params['frame']['caption'] = $caption;
 //
-//			# Will the image be presented in a frame, with the caption below?
+//			// Will the image be presented in a frame, with the caption below?
 //			$imageIsFramed = isset($params['frame']['frame'])
 //				|| isset($params['frame']['framed'])
 //				|| isset($params['frame']['thumbnail'])
 //				|| isset($params['frame']['manualthumb']);
 //
-//			# In the old days, [[Image:Foo|text...]] would set alt text.  Later it
-//			# came to also set the caption, ordinary text after the image -- which
-//			# makes no sense, because that just repeats the text multiple times in
-//			# screen readers.  It *also* came to set the title attribute.
-//			# Now that we have an alt attribute, we should not set the alt text to
-//			# equal the caption: that's worse than useless, it just repeats the
-//			# text.  This is the framed/thumbnail case.  If there's no caption, we
-//			# use the unnamed parameter for alt text as well, just for the time be-
-//			# ing, if the unnamed param is set and the alt param is not.
-//			# For the future, we need to figure out if we want to tweak this more,
-//			# e.g., introducing a title= parameter for the title; ignoring the un-
-//			# named parameter entirely for images without a caption; adding an ex-
-//			# plicit caption= parameter and preserving the old magic unnamed para-
-//			# meter for BC; ...
-//			if ($imageIsFramed) { # Framed image
+//			// In the old days, [[Image:Foo|text...]] would set alt text.  Later it
+//			// came to also set the caption, ordinary text after the image -- which
+//			// makes no sense, because that just repeats the text multiple times in
+//			// screen readers.  It *also* came to set the title attribute.
+//			// Now that we have an alt attribute, we should not set the alt text to
+//			// equal the caption: that's worse than useless, it just repeats the
+//			// text.  This is the framed/thumbnail case.  If there's no caption, we
+//			// use the unnamed parameter for alt text as well, just for the time be-
+//			// ing, if the unnamed param is set and the alt param is not.
+//			// For the future, we need to figure out if we want to tweak this more,
+//			// e.g., introducing a title= parameter for the title; ignoring the un-
+//			// named parameter entirely for images without a caption; adding an ex-
+//			// plicit caption= parameter and preserving the old magic unnamed para-
+//			// meter for BC; ...
+//			if ($imageIsFramed) { // Framed image
 //				if ($caption === '' && !isset($params['frame']['alt'])) {
-//					# No caption or alt text, add the filename as the alt text so
-//					# that screen readers at least get some description of the image
+//					// No caption or alt text, add the filename as the alt text so
+//					// that screen readers at least get some description of the image
 //					$params['frame']['alt'] = $title->getText();
 //				}
-//				# Do not set $params['frame']['title'] because tooltips don't make sense
-//				# for framed images
-//			} else { # Inline image
+//				// Do not set $params['frame']['title'] because tooltips don't make sense
+//				// for framed images
+//			} else { // Inline image
 //				if (!isset($params['frame']['alt'])) {
-//					# No alt text, use the "caption" for the alt text
+//					// No alt text, use the "caption" for the alt text
 //					if ($caption !== '') {
 //						$params['frame']['alt'] = this.stripAltText($caption, $holders);
 //					} else {
-//						# No caption, fall back to using the filename for the
-//						# alt text
+//						// No caption, fall back to using the filename for the
+//						// alt text
 //						$params['frame']['alt'] = $title->getText();
 //					}
 //				}
-//				# Use the "caption" for the tooltip text
+//				// Use the "caption" for the tooltip text
 //				$params['frame']['title'] = this.stripAltText($caption, $holders);
 //			}
 //
 //			Hooks::run('ParserMakeImageParams', [ $title, $file, &$params, $this ]);
 //
-//			# Linker does the rest
+//			// Linker does the rest
 //			$time = isset($options['time']) ? $options['time'] : false;
 //			$ret = Linker::makeImageLink($this, $title, $file, $params['frame'], $params['handler'],
 //				$time, $descQuery, this.mOptions->getThumbSize());
 //
-//			# Give the handler a chance to modify the parser Object
+//			// Give the handler a chance to modify the parser Object
 //			if ($handler) {
 //				$handler->parserTransformHook($this, $file);
 //			}
@@ -4674,12 +4679,12 @@ public class XomwParser implements XomwParserIface {
 //		* @return String
 //		*/
 //		public function replaceTransparentTags($text) {
-//			$matches = [];
+//			matches = [];
 //			$elements = array_keys(this.mTransparentTagHooks);
-//			$text = self::extractTagsAndParams($elements, $text, $matches);
+//			$text = XomwParser.extractTagsAndParams($elements, $text, matches);
 //			$replacements = [];
 //
-//			foreach ($matches as $marker => $data) {
+//			foreach (matches as marker => $data) {
 //				list($element, $content, $params, $tag) = $data;
 //				$tagName = strtolower($element);
 //				if (isset(this.mTransparentTagHooks[$tagName])) {
@@ -4690,7 +4695,7 @@ public class XomwParser implements XomwParserIface {
 //				} else {
 //					$output = $tag;
 //				}
-//				$replacements[$marker] = $output;
+//				$replacements[marker] = $output;
 //			}
 //			return strtr($text, $replacements);
 //		}
@@ -4713,46 +4718,46 @@ public class XomwParser implements XomwParserIface {
 //		*
 //		* The section number 0 pulls the text before the first heading; other numbers will
 //		* pull the given section along with its lower-level subsections. If the section is
-//		* not found, $mode=get will return $newtext, and $mode=replace will return $text.
+//		* not found, mode=get will return $newtext, and mode=replace will return $text.
 //		*
 //		* Section 0 is always considered to exist, even if it only contains the empty
 //		* String. If $text is the empty String and section 0 is replaced, $newText is
 //		* returned.
 //		*
-//		* @param String $mode One of "get" or "replace"
+//		* @param String mode One of "get" or "replace"
 //		* @param String $newText Replacement text for section data.
 //		* @return String For "get", the extracted section text.
 //		*   for "replace", the whole page with the section replaced.
 //		*/
-//		private function extractSections($text, $sectionId, $mode, $newText = '') {
-//			global $wgTitle; # not generally used but removes an ugly failure mode
+//		private function extractSections($text, $sectionId, mode, $newText = '') {
+//			global $wgTitle; // not generally used but removes an ugly failure mode
 //
-//			$magicScopeVariable = this.synchronized();
-//			this.startParse($wgTitle, new ParserOptions, self::OT_PLAIN, true);
+//			magicScopeVariable = this.synchronized();
+//			this.startParse($wgTitle, new ParserOptions, XomwParser.OT_PLAIN, true);
 //			$outText = '';
 //			$frame = this.getPreprocessor()->newFrame();
 //
-//			# Process section extraction flags
+//			// Process section extraction flags
 //			$flags = 0;
 //			$sectionParts = explode('-', $sectionId);
 //			$sectionIndex = array_pop($sectionParts);
 //			foreach ($sectionParts as $part) {
 //				if ($part === 'T') {
-//					$flags |= self::PTD_FOR_INCLUSION;
+//					$flags |= XomwParser.PTD_FOR_INCLUSION;
 //				}
 //			}
 //
-//			# Check for empty input
+//			// Check for empty input
 //			if (strval($text) === '') {
-//				# Only sections 0 and T-0 exist in an empty document
+//				// Only sections 0 and T-0 exist in an empty document
 //				if ($sectionIndex == 0) {
-//					if ($mode === 'get') {
+//					if (mode === 'get') {
 //						return '';
 //					} else {
 //						return $newText;
 //					}
 //				} else {
-//					if ($mode === 'get') {
+//					if (mode === 'get') {
 //						return $newText;
 //					} else {
 //						return $text;
@@ -4760,16 +4765,16 @@ public class XomwParser implements XomwParserIface {
 //				}
 //			}
 //
-//			# Preprocess the text
+//			// Preprocess the text
 //			$root = this.preprocessToDom($text, $flags);
 //
-//			# <h> nodes indicate section breaks
-//			# They can only occur at the top level, so we can find them by iterating the root's children
+//			// <h> nodes indicate section breaks
+//			// They can only occur at the top level, so we can find them by iterating the root's children
 //			$node = $root->getFirstChild();
 //
-//			# Find the target section
+//			// Find the target section
 //			if ($sectionIndex == 0) {
-//				# Section zero doesn't nest, level=big
+//				// Section zero doesn't nest, level=big
 //				$targetLevel = 1000;
 //			} else {
 //				while ($node) {
@@ -4780,7 +4785,7 @@ public class XomwParser implements XomwParserIface {
 //							break;
 //						}
 //					}
-//					if ($mode === 'replace') {
+//					if (mode === 'replace') {
 //						$outText .= $frame->expand($node, PPFrame::RECOVER_ORIG);
 //					}
 //					$node = $node->getNextSibling();
@@ -4788,15 +4793,15 @@ public class XomwParser implements XomwParserIface {
 //			}
 //
 //			if (!$node) {
-//				# Not found
-//				if ($mode === 'get') {
+//				// Not found
+//				if (mode === 'get') {
 //					return $newText;
 //				} else {
 //					return $text;
 //				}
 //			}
 //
-//			# Find the end of the section, including nested sections
+//			// Find the end of the section, including nested sections
 //			do {
 //				if ($node->getName() === 'h') {
 //					$bits = $node->splitHeading();
@@ -4805,18 +4810,18 @@ public class XomwParser implements XomwParserIface {
 //						break;
 //					}
 //				}
-//				if ($mode === 'get') {
+//				if (mode === 'get') {
 //					$outText .= $frame->expand($node, PPFrame::RECOVER_ORIG);
 //				}
 //				$node = $node->getNextSibling();
 //			} while ($node);
 //
-//			# Write out the remainder (in replace mode only)
-//			if ($mode === 'replace') {
-//				# Output the replacement text
-//				# Add two newlines on -- trailing whitespace in $newText is conventionally
-//				# stripped by the editor, so we need both newlines to restore the paragraph gap
-//				# Only add trailing whitespace if there is newText
+//			// Write out the remainder (in replace mode only)
+//			if (mode === 'replace') {
+//				// Output the replacement text
+//				// Add two newlines on -- trailing whitespace in $newText is conventionally
+//				// stripped by the editor, so we need both newlines to restore the paragraph gap
+//				// Only add trailing whitespace if there is newText
 //				if ($newText != "") {
 //					$outText .= $newText . "\n\n";
 //				}
@@ -4828,7 +4833,7 @@ public class XomwParser implements XomwParserIface {
 //			}
 //
 //			if (is_string($outText)) {
-//				# Re-insert stripped tags
+//				// Re-insert stripped tags
 //				$outText = rtrim(this.mStripState->unstripBoth($outText));
 //			}
 //
@@ -4896,9 +4901,9 @@ public class XomwParser implements XomwParserIface {
 //				this.mOptions->getCurrentRevisionCallback(), this.getTitle(), $this
 //			);
 //
-//			# If the parse is for a new revision, then the callback should have
-//			# already been set to force the Object and should match mRevisionId.
-//			# If not, try to fetch by mRevisionId for sanity.
+//			// If the parse is for a new revision, then the callback should have
+//			// already been set to force the Object and should match mRevisionId.
+//			// If not, try to fetch by mRevisionId for sanity.
 //			if ($rev && $rev->getId() != this.mRevisionId) {
 //				$rev = Revision::newFromId(this.mRevisionId);
 //			}
@@ -4920,11 +4925,11 @@ public class XomwParser implements XomwParserIface {
 //				$revObject = this.getRevisionObject();
 //				$timestamp = $revObject ? $revObject->getTimestamp() : wfTimestampNow();
 //
-//				# The cryptic '' timezone parameter tells to use the site-default
-//				# timezone offset instead of the user settings.
-//				# Since this value will be saved into the parser cache, served
-//				# to other users, and potentially even used inside links and such,
-//				# it needs to be consistent for all visitors.
+//				// The cryptic '' timezone parameter tells to use the site-default
+//				// timezone offset instead of the user settings.
+//				// Since this value will be saved into the parser cache, served
+//				// to other users, and potentially even used inside links and such,
+//				// it needs to be consistent for all visitors.
 //				this.mRevisionTimestamp = $wgContLang->userAdjust($timestamp, '');
 //
 //			}
@@ -4940,8 +4945,8 @@ public class XomwParser implements XomwParserIface {
 //			if (is_null(this.mRevisionUser)) {
 //				$revObject = this.getRevisionObject();
 //
-//				# if this template is subst: the revision id will be blank,
-//				# so just use the current user's name
+//				// if this template is subst: the revision id will be blank,
+//				// so just use the current user's name
 //				if ($revObject) {
 //					this.mRevisionUser = $revObject->getUserText();
 //				} elseif (this.ot['wiki'] || this.mOptions->getIsPreview()) {
@@ -4960,9 +4965,9 @@ public class XomwParser implements XomwParserIface {
 //			if (is_null(this.mRevisionSize)) {
 //				$revObject = this.getRevisionObject();
 //
-//				# if this variable is subst: the revision id will be blank,
-//				# so just use the parser input size, because the own substituation
-//				# will change the size.
+//				// if this variable is subst: the revision id will be blank,
+//				// so just use the parser input size, because the own substituation
+//				// will change the size.
 //				if ($revObject) {
 //					this.mRevisionSize = $revObject->getSize();
 //				} else {
@@ -4973,7 +4978,7 @@ public class XomwParser implements XomwParserIface {
 //		}
 //
 //		/**
-//		* Mutator for $mDefaultSort
+//		* Mutator for mDefaultSort
 //		*
 //		* @param String $sort New value
 //		*/
@@ -4983,7 +4988,7 @@ public class XomwParser implements XomwParserIface {
 //		}
 //
 //		/**
-//		* Accessor for $mDefaultSort
+//		* Accessor for mDefaultSort
 //		* Will use the empty String if none is set.
 //		*
 //		* This value is treated as a prefix, so the
@@ -5001,7 +5006,7 @@ public class XomwParser implements XomwParserIface {
 //		}
 //
 //		/**
-//		* Accessor for $mDefaultSort
+//		* Accessor for mDefaultSort
 //		* Unlike getDefaultSort(), will return false if none is set
 //		*
 //		* @return String|boolean
@@ -5020,7 +5025,7 @@ public class XomwParser implements XomwParserIface {
 //		* @return String
 //		*/
 //		public function guessSectionNameFromWikiText($text) {
-//			# Strip out wikitext links(they break the anchor)
+//			// Strip out wikitext links(they break the anchor)
 //			$text = this.stripSectionName($text);
 //			$text = Sanitizer::normalizeSectionNameWhitespace($text);
 //			return '#' . Sanitizer::escapeId($text, 'noninitial');
@@ -5035,7 +5040,7 @@ public class XomwParser implements XomwParserIface {
 //		* @return String An anchor
 //		*/
 //		public function guessLegacySectionNameFromWikiText($text) {
-//			# Strip out wikitext links(they break the anchor)
+//			// Strip out wikitext links(they break the anchor)
 //			$text = this.stripSectionName($text);
 //			$text = Sanitizer::normalizeSectionNameWhitespace($text);
 //			return '#' . Sanitizer::escapeId($text, [ 'noninitial', 'legacy' ]);
@@ -5056,20 +5061,20 @@ public class XomwParser implements XomwParserIface {
 //		* @return String Filtered text String
 //		*/
 //		public function stripSectionName($text) {
-//			# Strip @gplx.Internal protected link markup
+//			// Strip @gplx.Internal protected link markup
 //			$text = preg_replace('/\[\[:?([^[|]+)\|([^[]+)\]\]/', '$2', $text);
 //			$text = preg_replace('/\[\[:?([^[]+)\|?\]\]/', '$1', $text);
 //
-//			# Strip external link markup
-//			# @todo FIXME: Not tolerant to blank link text
-//			# I.E. [https://www.mediawiki.org] will render as [1] or something depending
-//			# on how many empty links there are on the page - need to figure that out.
+//			// Strip external link markup
+//			// @todo FIXME: Not tolerant to blank link text
+//			// I.E. [https://www.mediawiki.org] will render as [1] or something depending
+//			// on how many empty links there are on the page - need to figure that out.
 //			$text = preg_replace('/\[(?i:' . this.mUrlProtocols . ')([^ ]+?) ([^[]+)\]/', '$2', $text);
 //
-//			# Parse wikitext quotes (italics & bold)
+//			// Parse wikitext quotes (italics & bold)
 //			$text = this.doQuotes($text);
 //
-//			# Strip HTML tags
+//			// Strip HTML tags
 //			$text = StringUtils::delimiterReplace('<', '>', '', $text);
 //			return $text;
 //		}
@@ -5085,9 +5090,9 @@ public class XomwParser implements XomwParserIface {
 //		* @return String
 //		*/
 //		public function testSrvus($text, Title $title, ParserOptions $options,
-//			$outputType = self::OT_HTML
+//			$outputType = XomwParser.OT_HTML
 //		) {
-//			$magicScopeVariable = this.synchronized();
+//			magicScopeVariable = this.synchronized();
 //			this.startParse($title, $options, $outputType, true);
 //
 //			$text = this.replaceVariables($text);
@@ -5113,7 +5118,7 @@ public class XomwParser implements XomwParserIface {
 //		* @return String
 //		*/
 //		public function testPreprocess($text, Title $title, ParserOptions $options) {
-//			return this.testSrvus($text, $title, $options, self::OT_PREPROCESS);
+//			return this.testSrvus($text, $title, $options, XomwParser.OT_PREPROCESS);
 //		}
 //
 //		/**
@@ -5136,20 +5141,20 @@ public class XomwParser implements XomwParserIface {
 //			$i = 0;
 //			$out = '';
 //			while ($i < strlen($s)) {
-//				$markerStart = strpos($s, self::MARKER_PREFIX, $i);
-//				if ($markerStart === false) {
+//				markerStart = strpos($s, XomwParser.MARKER_PREFIX, $i);
+//				if (markerStart === false) {
 //					$out .= call_user_func($callback, substr($s, $i));
 //					break;
 //				} else {
-//					$out .= call_user_func($callback, substr($s, $i, $markerStart - $i));
-//					$markerEnd = strpos($s, self::MARKER_SUFFIX, $markerStart);
-//					if ($markerEnd === false) {
-//						$out .= substr($s, $markerStart);
+//					$out .= call_user_func($callback, substr($s, $i, markerStart - $i));
+//					markerEnd = strpos($s, XomwParser.MARKER_SUFFIX, markerStart);
+//					if (markerEnd === false) {
+//						$out .= substr($s, markerStart);
 //						break;
 //					} else {
-//						$markerEnd += strlen(self::MARKER_SUFFIX);
-//						$out .= substr($s, $markerStart, $markerEnd - $markerStart);
-//						$i = $markerEnd;
+//						markerEnd += strlen(XomwParser.MARKER_SUFFIX);
+//						$out .= substr($s, markerStart, markerEnd - markerStart);
+//						$i = markerEnd;
 //					}
 //				}
 //			}
@@ -5185,7 +5190,7 @@ public class XomwParser implements XomwParserIface {
 //		public function serializeHalfParsedText($text) {
 //			$data = [
 //				'text' => $text,
-//				'version' => self::HALF_PARSED_VERSION,
+//				'version' => XomwParser.HALF_PARSED_VERSION,
 //				'stripState' => this.mStripState->getSubState($text),
 //				'linkHolders' => this.mLinkHolders->getSubArray($text)
 //			];
@@ -5208,18 +5213,18 @@ public class XomwParser implements XomwParserIface {
 //		* @return String
 //		*/
 //		public function unserializeHalfParsedText($data) {
-//			if (!isset($data['version']) || $data['version'] != self::HALF_PARSED_VERSION) {
+//			if (!isset($data['version']) || $data['version'] != XomwParser.HALF_PARSED_VERSION) {
 //				throw new MWException(__METHOD__ . ': invalid version');
 //			}
 //
-//			# First, extract the strip state.
+//			// First, extract the strip state.
 //			$texts = [ $data['text'] ];
 //			$texts = this.mStripState->merge($data['stripState'], $texts);
 //
-//			# Now renumber links
+//			// Now renumber links
 //			$texts = this.mLinkHolders->mergeForeign($data['linkHolders'], $texts);
 //
-//			# Should be good to go.
+//			// Should be good to go.
 //			return $texts[0];
 //		}
 //
@@ -5233,7 +5238,7 @@ public class XomwParser implements XomwParserIface {
 //		* @return boolean
 //		*/
 //		public function isValidHalfParsedText($data) {
-//			return isset($data['version']) && $data['version'] == self::HALF_PARSED_VERSION;
+//			return isset($data['version']) && $data['version'] == XomwParser.HALF_PARSED_VERSION;
 //		}
 //
 //		/**
@@ -5249,12 +5254,12 @@ public class XomwParser implements XomwParserIface {
 //			if ($value === '') {
 //				return $parsedWidthParam;
 //			}
-//			$m = [];
-//			# (T15500) In both cases (width/height and width only),
-//			# permit trailing "px" for backward compatibility.
-//			if (preg_match('/^([0-9]*)x([0-9]*)\s*(?:px)?\s*$/', $value, $m)) {
-//				$width = intval($m[1]);
-//				$height = intval($m[2]);
+//			m = [];
+//			// (T15500) In both cases (width/height and width only),
+//			// permit trailing "px" for backward compatibility.
+//			if (preg_match('/^([0-9]*)x([0-9]*)\s*(?:px)?\s*$/', $value, m)) {
+//				$width = intval(m[1]);
+//				$height = intval(m[2]);
 //				$parsedWidthParam['width'] = $width;
 //				$parsedWidthParam['height'] = $height;
 //			} elseif (preg_match('/^[0-9]*\s*(?:px)?\s*$/', $value)) {
@@ -5298,10 +5303,10 @@ public class XomwParser implements XomwParserIface {
 //		* @since 1.24
 //		*/
 //		public static function stripOuterParagraph($html) {
-//			$m = [];
-//			if (preg_match('/^<p>(.*)\n?<\/p>\n?$/sU', $html, $m)) {
-//				if (strpos($m[1], '</p>') === false) {
-//					$html = $m[1];
+//			m = [];
+//			if (preg_match('/^<p>(.*)\n?<\/p>\n?$/sU', $html, m)) {
+//				if (strpos(m[1], '</p>') === false) {
+//					$html = m[1];
 //				}
 //			}
 //
@@ -5311,7 +5316,7 @@ public class XomwParser implements XomwParserIface {
 //		/**
 //		* Return this parser if it is not doing anything, otherwise
 //		* get a fresh parser. You can use this method by doing
-//		* $myParser = $wgParser->getFreshParser(), or more simply
+//		* myParser = $wgParser->getFreshParser(), or more simply
 //		* $wgParser->getFreshParser()->parse(...);
 //		* if you're unsure if $wgParser is safe to use.
 //		*

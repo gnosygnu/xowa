@@ -235,12 +235,12 @@ class XomwPreprocessor__fxt {
 	public void Test__parse(String src_str, String expd) {
 		List_adp list = List_adp_.New();
 		if (hash_enabled) {
-			XomwPreprocessor_Hash wkr_hash = new XomwPreprocessor_Hash();
+			XomwPreprocessor_Hash wkr_hash = new XomwPreprocessor_Hash(null);
 			wkr_hash.Init_by_wiki("pre");
 			list.Add(wkr_hash);
 		}
 		if (dom_enabled) {
-			XomwPreprocessor_DOM wkr_dom = new XomwPreprocessor_DOM();
+			XomwPreprocessor_DOM wkr_dom = new XomwPreprocessor_DOM(null);
 			wkr_dom.Init_by_wiki("pre");
 			list.Add(wkr_dom);
 		}

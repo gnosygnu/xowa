@@ -99,10 +99,10 @@ public class XomwParserOptions {
 //		*/
 //		private $mExpensiveParserFunctionLimit;
 //
-//		/**
-//		* Remove HTML comments. ONLY APPLIES TO PREPROCESS OPERATIONS
-//		*/
-//		private $mRemoveComments = true;
+	/**
+	* Remove HTML comments. ONLY APPLIES TO PREPROCESS OPERATIONS
+	*/
+	private boolean mRemoveComments = true;
 //
 //		/**
 //		* @var callable Callback for current revision fetching; first argument to call_user_func().
@@ -297,9 +297,9 @@ public class XomwParserOptions {
 //			return this.mExpensiveParserFunctionLimit;
 //		}
 //
-//		public function getRemoveComments() {
-//			return this.mRemoveComments;
-//		}
+	public boolean getRemoveComments() {
+		return this.mRemoveComments;
+	}
 //
 //		/* @since 1.24 */
 //		public function getCurrentRevisionCallback() {

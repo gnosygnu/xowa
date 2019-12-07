@@ -50,11 +50,11 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	public static final int CHILDREN = 1;
 
 	/**
-	* Construct an Object using the data from $store[$index]. The rest of the
+	* Construct an Object using the data from store[index]. The rest of the
 	* store array can be accessed via getNextSibling().
 	*
-	* @param array $store
-	* @param integer $index
+	* @param array store
+	* @param integer index
 	*/
 	public XomwPPNode_Hash_Tree(XophpArray store, int index) {
 		this.store = store;
@@ -75,8 +75,8 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	* Construct an appropriate PPNode_Hash_* Object with a class that depends
 	* on what is at the relevant store index.
 	*
-	* @param array $store
-	* @param integer $index
+	* @param array store
+	* @param integer index
 	* @return PPNode_Hash_Tree|PPNode_Hash_Attr|PPNode_Hash_Text
 	*/
 	public static XomwPPNode factory(XophpArray store, int index) {
@@ -130,16 +130,17 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 		}
 	}
 
-//		/**
-//		* @return PPNode_Hash_Array
-//		*/
-//		public function getChildren() {
-//			$children = [];
-//			foreach (this.rawChildren as $i => $child) {
-//				$children[] = self::factory(this.rawChildren, $i);
+	/**
+	* @return PPNode_Hash_Array
+	*/
+	public XomwPPNode_Hash_Array getChildren() {
+//			children = [];
+//			foreach (this.rawChildren as i => child) {
+//				children[] = self::factory(this.rawChildren, i);
 //			}
-//			return new PPNode_Hash_Array($children);
-//		}
+//			return new PPNode_Hash_Array(children);
+		return null;
+	}
 
 	/**
 	* Get the first child, or false if there is none. Note that this will
@@ -171,27 +172,28 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 //		/**
 //		* Get an array of the children with a given node name
 //		*
-//		* @param String $name
+//		* @param String name
 //		* @return PPNode_Hash_Array
 //		*/
-//		public function getChildrenOfType($name) {
-//			$children = [];
-//			foreach (this.rawChildren as $i => $child) {
-//				if (is_array($child) && $child[self::NAME] === $name) {
-//					$children[] = self::factory(this.rawChildren, $i);
+//		public function getChildrenOfType(name) {
+//			children = [];
+//			foreach (this.rawChildren as i => child) {
+//				if (is_array(child) && child[self::NAME] === name) {
+//					children[] = self::factory(this.rawChildren, i);
 //				}
 //			}
-//			return new PPNode_Hash_Array($children);
+//			return new PPNode_Hash_Array(children);
 //		}
-//
-//		/**
-//		* Get the raw child array. For @gplx.Internal protected use.
-//		* @return array
-//		*/
-//		public function getRawChildren() {
+
+	/**
+	* Get the raw child array. For @gplx.Internal protected use.
+	* @return array
+	*/
+	public XophpArray getRawChildren() {
 //			return this.rawChildren;
-//		}
-//
+		return null;
+	}
+
 //		/**
 //		* @return boolean
 //		*/
@@ -200,10 +202,10 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 //		}
 //
 //		/**
-//		* @param int $i
+//		* @param int i
 //		* @return boolean
 //		*/
-//		public function item($i) {
+//		public function item(i) {
 //			return false;
 //		}
 
@@ -230,31 +232,31 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 //		/**
 //		* Like splitArg() but for a raw child array. For @gplx.Internal protected use only.
 //		*/
-//		public static function splitRawArg(array $children) {
-//			$bits = [];
-//			foreach ($children as $i => $child) {
-//				if (!is_array($child)) {
+//		public static function splitRawArg(array children) {
+//			bits = [];
+//			foreach (children as i => child) {
+//				if (!is_array(child)) {
 //					continue;
 //				}
-//				if ($child[self::NAME] === 'name') {
-//					$bits['name'] = new self($children, $i);
-//					if (isset($child[self::CHILDREN][0][self::NAME])
-//						&& $child[self::CHILDREN][0][self::NAME] === '@index'
+//				if (child[self::NAME] === 'name') {
+//					bits['name'] = new self(children, i);
+//					if (isset(child[self::CHILDREN][0][self::NAME])
+//						&& child[self::CHILDREN][0][self::NAME] === '@index'
 //					) {
-//						$bits['index'] = $child[self::CHILDREN][0][self::CHILDREN][0];
+//						bits['index'] = child[self::CHILDREN][0][self::CHILDREN][0];
 //					}
-//				} elseif ($child[self::NAME] === 'value') {
-//					$bits['value'] = new self($children, $i);
+//				} elseif (child[self::NAME] === 'value') {
+//					bits['value'] = new self(children, i);
 //				}
 //			}
 //
-//			if (!isset($bits['name'])) {
+//			if (!isset(bits['name'])) {
 //				throw new MWException('Invalid brace node passed to ' . __METHOD__);
 //			}
-//			if (!isset($bits['index'])) {
-//				$bits['index'] = "";
+//			if (!isset(bits['index'])) {
+//				bits['index'] = "";
 //			}
-//			return $bits;
+//			return bits;
 //		}
 //
 //		/**
@@ -267,107 +269,115 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 //		public function splitExt() {
 //			return self::splitRawExt(this.rawChildren);
 //		}
-//
-//		/**
-//		* Like splitExt() but for a raw child array. For @gplx.Internal protected use only.
-//		*/
-//		public static function splitRawExt(array $children) {
-//			$bits = [];
-//			foreach ($children as $i => $child) {
-//				if (!is_array($child)) {
-//					continue;
-//				}
-//				switch ($child[self::NAME]) {
-//				case 'name':
-//					$bits['name'] = new self($children, $i);
-//					break;
-//				case 'attr':
-//					$bits['attr'] = new self($children, $i);
-//					break;
-//				case 'inner':
-//					$bits['inner'] = new self($children, $i);
-//					break;
-//				case 'close':
-//					$bits['close'] = new self($children, $i);
-//					break;
-//				}
-//			}
-//			if (!isset($bits['name'])) {
-//				throw new MWException('Invalid ext node passed to ' . __METHOD__);
-//			}
-//			return $bits;
-//		}
-//
-//		/**
-//		* Split an "<h>" node
-//		*
-//		* @throws MWException
-//		* @return array
-//		*/
-//		public function splitHeading() {
-//			if (this.name !== 'h') {
-//				throw new MWException('Invalid h node passed to ' . __METHOD__);
-//			}
-//			return self::splitRawHeading(this.rawChildren);
-//		}
-//
-//		/**
-//		* Like splitHeading() but for a raw child array. For @gplx.Internal protected use only.
-//		*/
-//		public static function splitRawHeading(array $children) {
-//			$bits = [];
-//			foreach ($children as $i => $child) {
-//				if (!is_array($child)) {
-//					continue;
-//				}
-//				if ($child[self::NAME] === '@i') {
-//					$bits['i'] = $child[self::CHILDREN][0];
-//				} elseif ($child[self::NAME] === '@level') {
-//					$bits['level'] = $child[self::CHILDREN][0];
-//				}
-//			}
-//			if (!isset($bits['i'])) {
-//				throw new MWException('Invalid h node passed to ' . __METHOD__);
-//			}
-//			return $bits;
-//		}
-//
-//		/**
-//		* Split a "<template>" or "<tplarg>" node
-//		*
-//		* @throws MWException
-//		* @return array
-//		*/
-//		public function splitTemplate() {
-//			return self::splitRawTemplate(this.rawChildren);
-//		}
-//
-//		/**
-//		* Like splitTemplate() but for a raw child array. For @gplx.Internal protected use only.
-//		*/
-//		public static function splitRawTemplate(array $children) {
-//			$parts = [];
-//			$bits = [ 'lineStart' => '' ];
-//			foreach ($children as $i => $child) {
-//				if (!is_array($child)) {
-//					continue;
-//				}
-//				switch ($child[self::NAME]) {
-//				case 'title':
-//					$bits['title'] = new self($children, $i);
-//					break;
-//				case 'part':
-//					$parts[] = new self($children, $i);
-//					break;
-//				case '@lineStart':
-//					$bits['lineStart'] = '1';
-//					break;
-//				}
-//			}
-//			if (!isset($bits['title'])) {
-//				throw new MWException('Invalid node passed to ' . __METHOD__);
-//			}
-//			$bits['parts'] = new PPNode_Hash_Array($parts);
-//			return $bits;
-//		}
+
+	/**
+	* Like splitExt() but for a raw child array. For @gplx.Internal protected use only.
+	*/
+	public static XophpArray splitRawExt(XophpArray children) {
+		XophpArray bits = XophpArray.New();
+		int len = children.Count();
+		for (int i = 0; i < len; i++) {
+			Object childObj = children.Get_at(i);
+			if (!XophpArray.is_array(childObj)) {
+				continue;
+			}
+			XophpArray child = (XophpArray)childObj;
+			String childName = child.Get_at_str(XomwPPNode_Hash_Tree.NAME);
+			if (String_.Eq(childName, "name")) {
+				bits.Add("name", new XomwPPNode_Hash_Tree(children, i));
+			}
+			else if (String_.Eq(childName, "attr")) {
+				bits.Add("attr", new XomwPPNode_Hash_Tree(children, i));
+			}
+			else if (String_.Eq(childName, "inner")) {
+				bits.Add("inner", new XomwPPNode_Hash_Tree(children, i));
+			}
+			else if (String_.Eq(childName, "close")) {
+				bits.Add("close", new XomwPPNode_Hash_Tree(children, i));
+			}
+		}
+		if (!bits.is_set("name")) {
+			throw new XomwMWException("Invalid ext node passed to " + "splitRawExt");
+		}
+		return bits;
+	}
+
+	/**
+	* Split an "<h>" node
+	*
+	* @throws MWException
+	* @return array
+	*/
+	public XophpArray splitHeading() {
+		if (!String_.Eq(this.name, "h")) {
+			throw new XomwMWException("Invalid h node passed to " + "splitHeading");
+		}
+		return XomwPPNode_Hash_Tree.splitRawHeading(this.rawChildren);
+	}
+
+	/**
+	* Like splitHeading() but for a raw child array. For @gplx.Internal protected use only.
+	*/
+	public static XophpArray splitRawHeading(XophpArray children) {
+		XophpArray bits = XophpArray.New();
+		int len = children.Count();
+		for (int i = 0; i < len; i++) {
+			Object childObj = children.Get_at(i);
+			if (!XophpArray.is_array(childObj)) {
+				continue;
+			}
+			XophpArray child = (XophpArray)childObj;
+			String childName = child.Get_at_str(XomwPPNode_Hash_Tree.NAME);
+			XophpArray childChildren = child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN);
+			if (String_.Eq(childName, "@i")) {
+				bits.Add("i", childChildren.Get_at(0));
+			} else if (String_.Eq(childName, "@level")) {
+				bits.Add("level", childChildren.Get_at(0));
+			}
+		}
+		if (!bits.is_set("i")) {
+			throw new XomwMWException("Invalid h node passed to " + "splitRawHeading");
+		}
+		return bits;
+	}
+
+	/**
+	* Split a "<template>" or "<tplarg>" node
+	*
+	* @throws MWException
+	* @return array
+	*/
+	public XophpArray splitTemplate() {
+		return XomwPPNode_Hash_Tree.splitRawTemplate(this.rawChildren);
+	}
+
+	/**
+	* Like splitTemplate() but for a raw child array. For @gplx.Internal protected use only.
+	*/
+	public static XophpArray splitRawTemplate(XophpArray children) {
+		XophpArray parts = XophpArray.New();
+		XophpArray bits = XophpArray.New().Add("lineStart" , "");
+		int len = children.Count();
+		for (int i = 0; i < len; i++) {
+			Object childObj = children.Get_at(i);
+			if (!XophpArray.is_array(childObj)) {
+				continue;
+			}
+			XophpArray child = (XophpArray)childObj;
+			String childName = child.Get_at_str(XomwPPNode_Hash_Tree.NAME);
+			XophpArray childChildren = child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN);
+			if (String_.Eq(childName, "title")) {
+				bits.Add("title", new XomwPPNode_Hash_Tree(childChildren, i));
+			} else if (String_.Eq(childName, "part")) {
+				parts.Add(new XomwPPNode_Hash_Tree(childChildren, i));
+			} else if (String_.Eq(childName, "@lineStart")) {
+				bits.Add("lineStart", "1");
+			}
+		}
+		if (!bits.is_set("title")) {
+			throw new XomwMWException("Invalid node passed to " + "splitRawTemplate");
+		}
+		bits.Add("parts", new XomwPPNode_Hash_Array(parts));
+		return bits;
+	}
 }

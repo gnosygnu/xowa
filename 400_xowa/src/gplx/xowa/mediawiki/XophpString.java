@@ -20,6 +20,8 @@ public class XophpString {
 	public static int strpos(byte[] src, byte find, int bgn, int end) {
 		return Bry_find_.Find_fwd(src, find, bgn, end);
 	}
+	public static String substr(String src, int bgn, int len) {return String_.new_u8(substr(Bry_.new_u8(src), bgn, len));}
+	public static String substr(String src, int bgn) {return String_.new_u8(substr(Bry_.new_u8(src), bgn, String_.Len(src)));}
 	public static byte[] substr(byte[] src, int bgn) {return substr(src, bgn, src.length);}
 	public static byte[] substr(byte[] src, int bgn, int len) {
 		int src_len = src.length;
@@ -168,5 +170,8 @@ public class XophpString {
 			}
 		}
 		return String_.new_charAry_(chry, 0, chry_len);
+	}
+	public static boolean is_string(Object o) {
+		return String_.as_(o) != null;
 	}
 }
