@@ -39,7 +39,14 @@ public class Xoh_subpages_bldr_tst {
 	@Test  public void Missing_pages() { // PURPOSE: missing pages should not show up in subpages; ISSUE#:626; DATE:2019-12-01
 		fxt.Init__Create_pages("Help:A", "Help:A/B/C"); // NOTE: "Help:A/B" is missing
 		fxt.Test__Parse("Help:A/B/C/D", String_.Concat_lines_nl_skip_last
-		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A\" title=\"Help:A\">Help:A</a>&lrm; | <a href=\"/wiki/Help:A/B/C\" title=\"Help:A/B/C\">C</a>"
+		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A\" title=\"Help:A\">Help:A</a>&lrm; | <a href=\"/wiki/Help:A/B/C\" title=\"Help:A/B/C\">B/C</a>"
+		, "</span>"
+		));
+	}
+	@Test  public void Utf8() { // PURPOSE: do not url-encode non-ascii chars; DATE:2019-12-07
+		fxt.Init__Create_pages("Help:A_é", "Help:A_é/1");
+		fxt.Test__Parse("Help:A_é/1", String_.Concat_lines_nl_skip_last
+		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A_%C3%A9\" title=\"Help:A é\">Help:A é</a>"
 		, "</span>"
 		));
 	}
@@ -47,10 +54,10 @@ public class Xoh_subpages_bldr_tst {
 		fxt.Init__Create_pages("Help:A", "Help:A/b");
 
 		/*
-		For "help:a/b"
+		For "help:a/b/c"
 		* Upper-case to "Help" b/c namespaces are upper-cased
 		* Upper-case to "A" b/c Help ns automatically upper-cases all titles ("a/b" -> "A/b")
-		* Skip "b" b/c path segments are not cased ("A/b" should not be "A/B")
+		* Do not upper-case "b" b/c path segments are not cased ("b" should not be "B")
 		*/
 		fxt.Test__Parse("help:a/b/c", String_.Concat_lines_nl_skip_last
 		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A\" title=\"Help:A\">Help:A</a>&lrm; | <a href=\"/wiki/Help:A/b\" title=\"Help:A/b\">b</a>"

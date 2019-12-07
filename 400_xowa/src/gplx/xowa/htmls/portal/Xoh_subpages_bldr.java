@@ -18,7 +18,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
 public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
-	private final    Bry_bfr html_bfr = Bry_bfr_.Reset(255), path_bfr = Bry_bfr_.Reset(255);
+	private final    Bry_bfr html_bfr = Bry_bfr_.Reset(255), path_bfr = Bry_bfr_.Reset(255), subpage_caption_bfr = Bry_bfr_.Reset(255);
 	private Xowe_wiki wiki;
 	private byte[][] segs;
 	public byte[] Bld(Xowe_wiki wiki, Xoa_ttl ttl) {
@@ -61,13 +61,21 @@ public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 			Xoa_ttl subpage_ttl = wiki.Ttl_parse(subpage_ttl_bry);
 
 			// re-define subpage_ttl_bry to properly-case title elements; EX: "help:a/b" -> "Help:A/b"
-			subpage_ttl_bry = subpage_ttl.Full_txt_w_ttl_case();
+			subpage_ttl_bry = subpage_ttl.Full_txt();
 
-			// if page is missing, skip it; ISSUE#:626; DATE:2019-12-01
+			// add subpage_caption_bfr; needed for cases like "Help:A/B/C/D/E" where "B/C/D" does not exist which should show as "Help:A" | "B/C/D"  not "D" DATE:2019-12-07
+			if (subpage_caption_bfr.Len_gt_0()) subpage_caption_bfr.Add_byte_slash();
+			subpage_caption_bfr.Add(subpage_ttl.Leaf_txt());
+
+			// page is missing; move on to next seg; ISSUE#:626; DATE:2019-12-01
 			if (!wiki.Parser_mgr().Ifexist_mgr().Exists(wiki, subpage_ttl_bry)) continue;
 
-			// get subpage_caption; note that 1st seg is Full_url ("Help:A"), but nth is just leaf ("b", not "Help:A/b")
-			byte[] subpage_caption = (i == 0) ? subpage_ttl.Full_url() : subpage_ttl.Leaf_url();
+			// get subpage_caption
+			byte[] subpage_caption
+				= i == 0
+				? subpage_ttl.Full_txt()        // 1st seg is Full_txt; EX: "Help:A"
+				: subpage_caption_bfr.To_bry(); // nth seg is caption_bfr ("b", not "Help:A/b")
+			subpage_caption_bfr.Clear(); // always clear subpage_caption_bfr; note that 1st seg will add to bfr, but never use it
 
 			// add to subpage trail
 			// NOTE: convert underscore to space; ISSUE#:308 PAGE:en.v:Computer-aided_design/Software DATE:2018-12-23
