@@ -44,7 +44,7 @@ public class Wdata_pf_property_data {
 			byte key_tid = atrs_hash.Get_as_byte_or(src, key_bgn, key_end, Byte_.Max_value_127);
 			switch (key_tid) {
 				case Byte_.Max_value_127:
-					ctx.App().Usr_dlg().Warn_many("", "", "unknown key for property: ~{0} ~{1}", String_.new_u8(ctx.Page().Ttl().Full_txt_w_ttl_case()), String_.new_u8(src, self.Src_bgn(), self.Src_end())); 
+					ctx.App().Usr_dlg().Warn_many("", "", "unknown key for property: ~{0} ~{1}", String_.new_u8(ctx.Page().Ttl().Full_txt()), String_.new_u8(src, self.Src_bgn(), self.Src_end()));
 					continue;
 				case Tid__id:	// same as "not-found", but don't warn; 
 					continue;

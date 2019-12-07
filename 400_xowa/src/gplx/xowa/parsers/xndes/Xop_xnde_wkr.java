@@ -723,7 +723,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						xnde_xtn.Xtn_parse(ctx.Wiki(), ctx, root, src, xnde);
 					}
 					catch (Exception e) {
-						String err_msg = String_.Format("failed to render extension: title={0} excerpt={1} err={2}", ctx.Page().Ttl().Full_txt_w_ttl_case()
+						String err_msg = String_.Format("failed to render extension: title={0} excerpt={1} err={2}", ctx.Page().Ttl().Full_txt()
 							, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn())
 							, Err_.Message_gplx_log(e));
 						if (Env_.Mode_testing()) 

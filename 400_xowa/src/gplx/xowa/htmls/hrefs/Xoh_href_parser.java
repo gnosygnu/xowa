@@ -63,7 +63,7 @@ public class Xoh_href_parser {
 							if (ttl == null)	// invalid ttl; null out page;
 								tmp_page = Bry_.Empty;
 							else
-								tmp_page = ttl.Full_txt_w_ttl_case();
+								tmp_page = ttl.Full_txt();
 						}
 					}
 				}

@@ -37,10 +37,10 @@ public class Xoctg_double_itm implements gplx.core.brys.Bfr_arg {
 			byte[] lnki_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 			byte[] lnki_href = href_wtr.Build_to_bry(wiki, ttl);
 			byte[] lnki_text = ttl.Page_txt();
-			byte[] lnki_ttl = ttl.Full_txt_w_ttl_case();
+			byte[] lnki_ttl = ttl.Full_txt();
 
 			// build title
-//				tmp_bfr.Add(ttl.Full_txt_w_ttl_case());
+//				tmp_bfr.Add(ttl.Full_txt());
 //				tmp_bfr.Add_byte_space().Add_byte(Byte_ascii.Paren_bgn)	.Add_byte(Byte_ascii.Ltr_S).Add_byte_colon().Add_int_variable(itm.Count__subcs());
 //				tmp_bfr.Add_byte_space().Add_byte(Byte_ascii.Comma)		.Add_byte(Byte_ascii.Ltr_P).Add_byte_colon().Add_int_variable(itm.Count__pages());
 //				tmp_bfr.Add_byte_space().Add_byte(Byte_ascii.Comma)		.Add_byte(Byte_ascii.Ltr_F).Add_byte_colon().Add_int_variable(itm.Count__files());

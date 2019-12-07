@@ -97,7 +97,7 @@ class Gallery_parser_fxt {
 			Gallery_itm itm = (Gallery_itm)list.Get_at(i);
 			String[] ary = new String[5];
 			rv[i] = ary;
-			ary[0] = String_.new_u8(itm.Ttl().Full_txt_w_ttl_case());
+			ary[0] = String_.new_u8(itm.Ttl().Full_txt());
 			ary[2] = Xto_str_ary_itm(src, itm.Alt_bgn(), itm.Alt_end());
 			ary[3] = Xto_str_ary_itm(src, itm.Link_bgn(), itm.Link_end());
 			ary[4] = Xto_str_ary_itm(src, itm.Page_bgn(), itm.Page_end());

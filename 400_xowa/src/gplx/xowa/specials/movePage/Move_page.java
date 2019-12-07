@@ -69,8 +69,8 @@ public class Move_page implements Xow_special_page {
 		fmtr_all.Bld_bfr_many(tmp_bfr
 		, msg_mgr.Val_by_key_obj("move-page-legend")
 		, Bry_.Add(Xoh_href_.Bry__wiki, src_ttl.Full_db())
-		, gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(src_ttl.Full_txt_w_ttl_case())
-		, src_ttl.Full_txt_w_ttl_case()
+		, gplx.langs.htmls.Gfh_utl.Escape_html_as_bry(src_ttl.Full_txt())
+		, src_ttl.Full_txt()
 		, msg_mgr.Val_by_key_obj("newtitle")
 		, ns_list_fmtr
 		, args.Trg_ttl()

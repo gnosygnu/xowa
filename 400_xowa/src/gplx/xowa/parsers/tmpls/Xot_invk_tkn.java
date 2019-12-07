@@ -259,9 +259,9 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					rv = true;
 				}	catch (Exception e) {
 					if (Env_.Mode_testing()) 
-						throw Err_.new_exc(e, "xo", "failed to evaluate function", "page", ctx.Page().Ttl().Full_txt_w_ttl_case(), "defn", defn.Name(), "src", String_.new_u8(src, this.Src_bgn(), this.Src_end()));
+						throw Err_.new_exc(e, "xo", "failed to evaluate function", "page", ctx.Page().Ttl().Full_txt(), "defn", defn.Name(), "src", String_.new_u8(src, this.Src_bgn(), this.Src_end()));
 					else {
-						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", ctx.Page().Ttl().Full_txt_w_ttl_case(), defn.Name(), Bry_.Replace_nl_w_tab(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_log(e));
+						wiki.Appe().Usr_dlg().Warn_many("", "", "failed to evaluate function: page=~{0} defn=~{1} src=~{2} err=~{3}", ctx.Page().Ttl().Full_txt(), defn.Name(), Bry_.Replace_nl_w_tab(src, this.Src_bgn(), this.Src_end()), Err_.Message_gplx_log(e));
 						rv = false;
 					}
 				}

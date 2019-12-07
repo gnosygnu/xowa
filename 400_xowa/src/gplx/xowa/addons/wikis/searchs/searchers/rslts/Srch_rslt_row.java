@@ -43,7 +43,7 @@ public class Srch_rslt_row {
 		byte[] rv
 			= display_type == Srch_rslt_row.Display_type__suggest
 			? this.Page_ttl_highlight
-			: Page_ttl.Full_txt_w_ttl_case();
+			: Page_ttl.Full_txt();
 
 		// no redirect; just return it; EX: "Actual page"
 		if (Page_redirect_id == Page_redirect_id_null)

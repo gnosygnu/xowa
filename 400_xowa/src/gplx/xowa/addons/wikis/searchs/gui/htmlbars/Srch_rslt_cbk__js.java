@@ -40,14 +40,14 @@ class Srch_rslt_cbk__js implements Srch_rslt_cbk {
 			if (i >= rslts_len) break;	// rslts_end will overshoot actual rslts_len; check for out of bounds and exit; EX: default suggest will have rslts_end of 25, but "earth time" will retrieve 15 results
 			Srch_rslt_row row = rslts_list.Get_at(i);
 			Highlight(ctx, row);	// always highlight title first; needed for suggest_box to update highlighting when increasing word; EX: Eart -> Earth; "Earth" should be highlighted, not "Eart"
-			js_wtr.Ary_bry(row.Page_ttl.Full_txt_w_ttl_case());
+			js_wtr.Ary_bry(row.Page_ttl.Full_txt());
 			js_wtr.Ary_bry(row.To_display(Srch_rslt_row.Display_type__suggest));
 		}
 		js_wtr.Ary_term();
 		js_wtr.Func_term();
 	}
 	private static void Highlight(Srch_search_ctx ctx, Srch_rslt_row row) {
-		try {row.Page_ttl_highlight = ctx.Highlight_mgr.Highlight(row.Page_ttl.Full_txt_w_ttl_case());}	// NOTE: always highlight row; needed for when search done in url_bar (highlight=n) and then same search reused for search (highlight=y)
+		try {row.Page_ttl_highlight = ctx.Highlight_mgr.Highlight(row.Page_ttl.Full_txt());}	// NOTE: always highlight row; needed for when search done in url_bar (highlight=n) and then same search reused for search (highlight=y)
 		catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "highlight failed; ttl=~{0} err=~{1}", row.Page_ttl_wo_ns, Err_.Message_gplx_log(e));}
 	}
 }

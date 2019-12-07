@@ -128,7 +128,7 @@ public class Xoh_lnki_wtr {
 						.Add_int_variable(lnki_html_id);			// '1234'
 			}
 			if (cfg.Lnki__title()) {
-				byte[] title_bry = lnki_ttl.Full_txt_w_ttl_case();	// NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
+				byte[] title_bry = lnki_ttl.Full_txt();	// NOTE: use Full_txt to (a) replace underscores with spaces; (b) get title casing; EX:[[roman_empire]] -> Roman empire; (c) include ns_name; EX: Help:A -> "title='Help:A'" not "title='A'"; DATE:2015-11-16
 				int title_len = title_bry.length;
 				if (title_len > 0) {
 					bfr	.Add(Gfh_bldr_.Bry__title__nth);			// '" title=\"'

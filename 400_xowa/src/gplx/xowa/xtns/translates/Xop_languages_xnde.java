@@ -118,7 +118,7 @@ class Xop_languages_fmtr implements gplx.core.brys.Bfr_arg {
 			byte[] lang_ttl_bry = lang_is_en ? root_ttl_bry : Bry_.Add_w_dlm(Xoa_ttl.Subpage_spr, root_ttl_bry, lang_key);
 			Xoa_ttl lang_ttl = Xoa_ttl.Parse(wiki, ns_id, lang_ttl_bry);
 			byte[] lang_href = href_wtr.Build_to_bry(wiki, lang_ttl);
-			byte[] lang_title = lang_ttl.Full_txt_w_ttl_case();
+			byte[] lang_title = lang_ttl.Full_txt();
 			Bry_fmtr fmtr = null;
 			if		(Bry_.Eq(lang_key, Xol_lang_itm_.Key_en)) 	fmtr = Xop_languages_xnde.fmtr_itm_english;
 			else if	(Bry_.Eq(lang_key, cur_lang))			fmtr = Xop_languages_xnde.fmtr_itm_selected;

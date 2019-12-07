@@ -94,7 +94,7 @@ public class Xowd_page_itm {
 		return this;
 	}
 	public Xowd_page_itm Ttl_(Xoa_ttl ttl) {
-		ttl_full_db = ttl.Full_txt_w_ttl_case();
+		ttl_full_db = ttl.Full_txt();
 		ttl_page_db = ttl.Page_db();
 		ns = ttl.Ns();
 		ns_id = ns.Id();

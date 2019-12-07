@@ -23,7 +23,7 @@ public class Dpl_xnde implements Xox_xnde {
 	private Dpl_itm itm; private Ordered_hash pages;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {} // NOTE: <dynamicPageList> has no attributes
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-		itm = Dpl_itm.Parse(wiki, ctx, ctx.Page().Ttl().Full_txt_w_ttl_case(), src, xnde);
+		itm = Dpl_itm.Parse(wiki, ctx, ctx.Page().Ttl().Full_txt(), src, xnde);
 		pages = new Dpl_page_finder(itm, wiki).Find();
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
@@ -50,14 +50,14 @@ public class Dpl_xnde implements Xox_xnde {
 			for (int i = itms_bgn; i < itms_len; i++) {
 				Xowd_page_itm page = (Xowd_page_itm)pages.Get_at(i);
 				Xoa_ttl ttl = Xoa_ttl.Parse(wiki, page.Ns_id(), page.Ttl_page_db());
-				byte[] ttl_page_txt = show_ns ? ttl.Full_txt_w_ttl_case() : ttl.Page_txt();
+				byte[] ttl_page_txt = show_ns ? ttl.Full_txt() : ttl.Page_txt();
 				if (ttl_page_txt == null) continue;	// NOTE: apparently DynamicPageList allows null pages; DATE:2013-07-22
 				switch (html_mode.Tid()) {
 					case Dpl_html_data.Tid_list_ul:
 					case Dpl_html_data.Tid_list_ol:
 						bfr.Add(Xoh_consts.Space_2).Add(html_mode.Itm_bgn()).Add(Gfh_bldr_.Bry__a_lhs_w_href);
 						bfr.Add_str_a7("/wiki/").Add(Gfo_url_encoder_.Href.Encode(ttl.Full_db())).Add_byte_quote();	// NOTE: Full_db to encode spaces as underscores; PAGE:en.q:Wikiquote:Speedy_deletions DATE:2016-01-19
-						Gfh_atr_.Add(bfr, Gfh_atr_.Bry__title, Xoh_html_wtr_escaper.Escape(amp_mgr, tmp_bfr, ttl.Full_txt_w_ttl_case()));			// NOTE: Full_txt b/c title always includes ns, even if show_ns is off; PAGE:en.b:Wikibooks:WikiProject DATE:2016-01-20
+						Gfh_atr_.Add(bfr, Gfh_atr_.Bry__title, Xoh_html_wtr_escaper.Escape(amp_mgr, tmp_bfr, ttl.Full_txt()));			// NOTE: Full_txt b/c title always includes ns, even if show_ns is off; PAGE:en.b:Wikibooks:WikiProject DATE:2016-01-20
 						if (itm.No_follow()) bfr.Add(Bry_nofollow);
 						bfr.Add_byte(Byte_ascii.Gt);
 						Xoh_html_wtr_escaper.Escape(amp_mgr, bfr, ttl_page_txt, 0, ttl_page_txt.length, false, false);

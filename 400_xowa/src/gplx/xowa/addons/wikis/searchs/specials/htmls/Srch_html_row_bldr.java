@@ -33,7 +33,7 @@ public class Srch_html_row_bldr implements gplx.core.brys.Bfr_arg {
 	public void Bld_html(Bry_bfr bfr, Srch_rslt_row row) {
 		synchronized (thread_lock) {
 			lnki_bldr.Href_(row.Wiki_bry, row.Page_ttl);
-			lnki_bldr.Title_(row.Page_ttl.Full_txt_w_ttl_case());
+			lnki_bldr.Title_(row.Page_ttl.Full_txt());
 			lnki_bldr.Caption_direct_(row.To_display(Srch_rslt_row.Display_type__special_page));
 			fmtr.Bld_many(bfr, Gfh_utl.Encode_id_as_str(row.Key), row.Page_score, lnki_bldr.Bld_to_bry());
 		}

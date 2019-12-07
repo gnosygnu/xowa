@@ -27,7 +27,7 @@ public class Popup_history_page implements Xow_special_page {
 		for (int i = len - 1; i > -1; --i) {
 			Xow_popup_itm itm = (Xow_popup_itm)hash.Get_at(i);
 			if (Ttl_chk(itm.Page_ttl())) continue;
-			fmtr_main.Bld_bfr_many(bfr, itm.Page_href(), itm.Page_ttl().Full_txt_w_ttl_case());
+			fmtr_main.Bld_bfr_many(bfr, itm.Page_href(), itm.Page_ttl().Full_txt());
 		}
 		page.Db().Text().Text_bry_(bfr.Trim_end(Byte_ascii.Nl).To_bry_and_rls());
 		page.Html_data().Html_restricted_n_();

@@ -74,7 +74,7 @@ public class Xog_tab_itm_read_mgr {
 		String url_str = "", win_str = Win_text_blank;
 		if (url != null && ttl != null) {
 			url_str = url.To_str();
-			win_str = String_.new_u8(Bry_.Add(ttl.Full_txt_w_ttl_case(), Win_text_suffix_page));
+			win_str = String_.new_u8(Bry_.Add(ttl.Full_txt(), Win_text_suffix_page));
 
 			// fmt to url if set
 			Xog_urlfmtr_mgr url_box_fmtr = win.Url_box_fmtr();

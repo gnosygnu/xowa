@@ -35,7 +35,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Raw() {return raw;} private byte[] raw = Bry_.Empty;
 	public byte[] Wik_txt()  {return wik_bgn == -1 ? Bry_.Empty : Bry_.Mid(full_txt, wik_bgn, ns_bgn == -1 ? page_bgn - 1 : ns_bgn - 1);}
 	public Xow_xwiki_itm Wik_itm() {return wik_itm;} private Xow_xwiki_itm wik_itm;
-	public byte[] Full_txt_w_ttl_case() {return Xoa_ttl.Replace_unders(Full_db());}
+	public byte[] Full_txt() {return Xoa_ttl.Replace_unders(Full_db());}
 	public byte[] Full_txt_by_orig() {
 		int bgn = wik_bgn == -1  ? 0 : ns_bgn == -1 ? page_bgn : ns_bgn;
 		int end = full_txt.length;
@@ -67,8 +67,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public int Wik_bgn() {return wik_bgn;}
 	public int Anch_bgn() {return anch_bgn;}	// NOTE: anch_bgn is not correct when page has trailing ws; EX: [[A #b]] should have anch_bgn of 3 (1st char after #), but instead it is 2
 	public byte[] Anch_txt() {return anch_bgn == -1	? Bry_.Empty : Bry_.Mid(full_txt, anch_bgn, full_txt.length);}
-	public byte[] Talk_txt() {return ns.Id_is_talk()		? Full_txt_w_ttl_case() : Bry_.Add(tors_txt, Page_txt());} 
-	public byte[] Subj_txt() {return ns.Id_is_subj()		? Full_txt_w_ttl_case() : Bry_.Add(tors_txt, Page_txt());} 
+	public byte[] Talk_txt() {return ns.Id_is_talk()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());}
+	public byte[] Subj_txt() {return ns.Id_is_subj()		? Full_txt() : Bry_.Add(tors_txt, Page_txt());}
 	public byte[] Full_url() {
 		synchronized (href_encoder) {	// LOCK:static-obj
 			return href_encoder.Encode(full_txt);

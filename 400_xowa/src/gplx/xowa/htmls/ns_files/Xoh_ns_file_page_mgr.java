@@ -73,7 +73,7 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		alt_wtr.Init_by_fmtr(repo_mgr, xfer_itm, html_wtr);
 		Xof_ext orig_ext = xfer_itm.Orig_ext();
-		byte[] alt_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(ttl.Full_txt_w_ttl_case());
+		byte[] alt_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(ttl.Full_txt());
 		byte[] xowa_title = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(ttl.Page_url());
 		if (orig_ext.Id_is_thumbable_img())
 			html_wtr.Html_main_img().Bld_bfr_many(bfr, xfer_itm.Orig_w(), xfer_itm.Orig_h(), xfer_itm.Html_orig_url().To_http_file_bry(), file_size_bry, orig_ext.Mime_type()

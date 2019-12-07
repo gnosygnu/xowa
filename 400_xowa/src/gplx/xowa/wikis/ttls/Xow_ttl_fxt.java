@@ -67,7 +67,7 @@ class Xow_ttl_fxt {
 		if (expd_page_txt != null) Tfds.Eq(expd_page_txt, String_.new_u8(actl.Page_txt()), "Page_txt");
 		if (expd_page_url != null) Tfds.Eq(expd_page_url, String_.new_u8(actl.Page_url()), "Page_url");
 		if (expd_page_db  != null) Tfds.Eq(expd_page_db , String_.new_u8(actl.Page_db()) , "Page_db");
-		if (expd_full_txt != null) Tfds.Eq(expd_full_txt, String_.new_u8(actl.Full_txt_w_ttl_case()), "Full_txt");
+		if (expd_full_txt != null) Tfds.Eq(expd_full_txt, String_.new_u8(actl.Full_txt()), "Full_txt");
 		if (expd_full_url != null) Tfds.Eq(expd_full_url, String_.new_u8(actl.Full_url()), "Full_url");
 		if (expd_leaf_txt != null) Tfds.Eq(expd_leaf_txt, String_.new_u8(actl.Leaf_txt()), "Leaf_txt");
 		if (expd_leaf_url != null) Tfds.Eq(expd_leaf_url, String_.new_u8(actl.Leaf_url()), "Leaf_url");

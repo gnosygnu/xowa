@@ -70,7 +70,7 @@ class Xop_redirect_mgr_fxt {
 		redirect_mgr.Clear();
 		byte[] raw_bry = Bry_.new_u8(raw_str);
 		Xoa_ttl actl_ttl = redirect_mgr.Extract_redirect(raw_bry);
-		byte[] actl_bry = actl_ttl == null ? Bry_.Empty : actl_ttl.Full_txt_w_ttl_case();
+		byte[] actl_bry = actl_ttl == null ? Bry_.Empty : actl_ttl.Full_txt();
 		Tfds.Eq(expd_str, String_.new_u8(actl_bry));
 	}
 	public void Test__redirected_html(String page_str, String expd_str) {

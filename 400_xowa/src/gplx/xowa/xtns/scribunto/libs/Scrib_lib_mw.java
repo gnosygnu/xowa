@@ -334,7 +334,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		if (sub_src == null)
 			return rslt.Init_fail("expandTemplate: template \"" + ttl_str + "\" does not exist");	// NOTE: must return error if template is missing; PAGE:en.w:Flag_of_Greenland DATE:2016-05-02
 
-		Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt_w_ttl_case(), args_ary);	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-09-21
+		Xot_invk_mock sub_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt(), args_ary);	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-09-21
 		Xot_defn_tmpl transclude_tmpl = ctx.Wiki().Parser_mgr().Main().Parse_text_to_defn_obj(ctx, ctx.Tkn_mkr(), ttl.Ns(), ttl.Page_db(), sub_src);
 		Bry_bfr sub_bfr = cur_wiki.Utl__bfr_mkr().Get_k004();
 		transclude_tmpl.Tmpl_evaluate(ctx, sub_frame, sub_bfr);
@@ -371,7 +371,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (ttl == null) throw Err_.new_wo_type("newChild: invalid title", "title", (String)ttl_obj);
 		}
 		Keyval[] args_ary = args.Pull_kv_ary_safe(2);
-		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt_w_ttl_case(), args_ary); // NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14
+		Xot_invk_mock new_frame = Xot_invk_mock.new_(core.Frame_current().Defn_tid(), 0, ttl.Full_txt(), args_ary); // NOTE: use spaces, not unders; REF.MW:$frame->getTitle()->getPrefixedText(); DATE:2014-08-14
 		String new_frame_id = "frame" + Int_.To_str(frame_list_len);
 		frame_list.Add(new_frame_id, new_frame);
 		return rslt.Init_obj(new_frame_id);

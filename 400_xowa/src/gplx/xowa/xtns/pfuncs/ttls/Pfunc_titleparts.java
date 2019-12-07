@@ -25,7 +25,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 		byte[] argx = Eval_argx(ctx, src, caller, self); if (argx == null) return; // no argx; return empty
 		Xoa_ttl argx_as_ttl = Xoa_ttl.Parse(ctx.Wiki(), argx, 0, argx.length); // transform to title in order to upper first, replace _, etc..
 		if (argx_as_ttl == null)	{bfr.Add(argx); return;}	// NOTE: argx_as_ttl will be null if invalid, such as [[a|b]]; PAGE:en.w:owl and {{taxobox/showtaxon|Dinosauria}}
-		else						argx = argx_as_ttl.Full_txt_w_ttl_case();
+		else						argx = argx_as_ttl.Full_txt();
 		// get parts_len
 		byte[] parts_len_ary = Pf_func_.Eval_arg_or_empty(ctx, src, caller, self, args_len, 0);
 		int parts_len = parts_len_ary == Bry_.Empty ? Int_.Min_value : Bry_.To_int_or(parts_len_ary, Int_.Max_value);

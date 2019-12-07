@@ -73,7 +73,7 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 		loop_ends_at_col = true;
 	}
 	@gplx.Virtual public void Bld_html(Bry_bfr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {
-		byte[] itm_full_ttl = Gfh_utl.Escape_html_as_bry(tmp_bfr, ttl.Full_txt_w_ttl_case());// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
+		byte[] itm_full_ttl = Gfh_utl.Escape_html_as_bry(tmp_bfr, ttl.Full_txt());// NOTE: ttl.Full_txt() to get full ns; EX: Template:A instead of just "A"
 		byte[] itm_href = wiki.Html__href_wtr().Build_to_bry(wiki, ttl);
 		byte[] itm_atr_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 		Fmt__exists.Bld_many(bfr, itm_href, itm_atr_cls, itm_full_ttl, itm_full_ttl, gplx.core.encoders.Hex_utl_.Encode_bry(itm.Sortkey_binary()));

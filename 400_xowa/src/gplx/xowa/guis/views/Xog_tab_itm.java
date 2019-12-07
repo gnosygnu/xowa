@@ -100,7 +100,7 @@ public class Xog_tab_itm implements Gfo_invk {
 	}
 	public void Tab_name_() {
 		byte[] tab_name = page.Html_data().Custom_tab_name();				// Custom_tab_name set by Special:Default_tab or variants; DATE:2015-10-05
-		if (tab_name == null) tab_name = page.Ttl().Full_txt_w_ttl_case();	// no custom_tab_name; use ttl's text
+		if (tab_name == null) tab_name = page.Ttl().Full_txt();	// no custom_tab_name; use ttl's text
 		Tab_name_(String_.new_u8(tab_name));
 	}
 	public void Tab_name_(String tab_name) {
@@ -125,7 +125,7 @@ public class Xog_tab_itm implements Gfo_invk {
 		if (url.Page_is_main()) url.Page_bry_(wiki.Props().Main_page());				// NOTE: must go before ttl.Make; DATE:2016-07-31
 		Xoa_ttl ttl = wiki.Ttl_parse(url.Page_bry());
 		if (ttl == null) {usr_dlg.Prog_one("", "", "title is invalid: ~{0}", String_.new_u8(url.Raw())); return;}
-		String new_tab_name = String_.new_u8(ttl.Full_txt_w_ttl_case());
+		String new_tab_name = String_.new_u8(ttl.Full_txt());
 
 		// if clicking on anchor, just scroll; do not load page
 		if (	url.Anch_str() != null							// url has anchor
