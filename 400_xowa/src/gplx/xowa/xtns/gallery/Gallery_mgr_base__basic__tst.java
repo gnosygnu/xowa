@@ -122,6 +122,18 @@ public class Gallery_mgr_base__basic__tst {
 		, "  </script>"
 		));
 	}
+	@Test   public void Packed_hover() {
+		fxt.Test_html_frag("<gallery mode=packed-hover heights=300px>File:A.png|a</gallery>", "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-packed-hover\">");
+		fxt.Test_html_modules_js(String_.Concat_lines_nl_skip_last
+		( ""
+		, "  <link rel=\"stylesheet\" href=\"file:///mem/xowa/bin/any/xowa/html/res/src/mediawiki.page/mediawiki.page.gallery.css\" type='text/css'>"
+		, "  <script type='text/javascript'>"
+		, "    var xowa_global_values = {"
+		, "      'gallery-packed-enabled' : true,"
+		, "    }"
+		, "  </script>"
+		));
+	}
 	@Test   public void Missing() {
 		fxt.Init_files_missing_y_();
 		fxt.Test_html_frag("<gallery>File:A.png|b</gallery>", "<div class=\"thumb\" style=\"height:150px;\">A.png</div>");

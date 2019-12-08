@@ -77,4 +77,5 @@ class Gallery_mgr_packed_overlay extends Gallery_mgr_packed_base {
 	, Wrap_gallery_text_2 = Bry_.new_a7("\n      </div></div>")	// NOTE: 2nd </div> is not part of MW, but needed to close div
 	;
 }
-class Gallery_mgr_packed_hover extends Gallery_mgr_packed_overlay {	}
+class Gallery_mgr_packed_hover extends Gallery_mgr_packed_overlay {		@Override public byte Tid() {return Gallery_mgr_base_.Tid__packed__hover;}
+}
