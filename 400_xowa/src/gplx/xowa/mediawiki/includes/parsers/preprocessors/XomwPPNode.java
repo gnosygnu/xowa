@@ -91,7 +91,7 @@ public abstract class XomwPPNode {
 	*    value         PPNode value
 	* @return array
 	*/
-//		public abstract Hash_adp splitArg();
+	@gplx.Virtual public XophpArray splitArg() {return null;}
 
 	/**
 	* Split an "<ext>" node into an associative array containing name, attr, inner and close

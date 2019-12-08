@@ -41,7 +41,7 @@ public abstract class XomwPPFrame {
 	*
 	* @return PPFrame
 	*/
-	@gplx.Virtual public XomwPPFrame newChild(XophpArray args, XomwTitle title, int indexOffset) {return null;}
+	@gplx.Virtual public XomwPPFrame newChild(Object args, XomwTitle title, int indexOffset) {return null;}
 
 	/**
 	* Expand a document tree node, caching the result on its parent with the given key

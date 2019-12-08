@@ -70,59 +70,67 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 		this.childExpansionCache = XophpArray.New();
 	}
 
-//		/**
-//		* Create a new child frame
-//		* $args is optionally a multi-root PPNode or array containing the template arguments
-//		*
-//		* @param array|boolean|PPNode_Hash_Array $args
-//		* @param Title|boolean $title
-//		* @param int $indexOffset
-//		* @throws MWException
-//		* @return PPTemplateFrame_Hash
-//		*/
-//		public function newChild($args = false, $title = false, $indexOffset = 0) {
-//			$namedArgs = [];
-//			$numberedArgs = [];
-//			if ($title === false) {
-//				$title = this.title;
-//			}
-//			if ($args !== false) {
-//				if ($args instanceof PPNode_Hash_Array) {
-//					$args = $args.value;
-//				} else if (!is_array($args)) {
-//					throw new MWException(__METHOD__ . ': $args must be array or PPNode_Hash_Array');
-//				}
-//				foreach ($args as $arg) {
-//					$bits = $arg.splitArg();
-//					if ($bits['index'] !== '') {
-//						// Numbered parameter
-//						$index = $bits['index'] - $indexOffset;
-//						if (isset($namedArgs[$index]) || isset($numberedArgs[$index])) {
+	/**
+	* Create a new child frame
+	* $args is optionally a multi-root PPNode or array containing the template arguments
+	*
+	* @param array|boolean|PPNode_Hash_Array $args
+	* @param Title|boolean $title
+	* @param int $indexOffset
+	* @throws MWException
+	* @return PPTemplateFrame_Hash
+	*/
+	@Override public XomwPPFrame newChild(Object argsObj, XomwTitle title, int indexOffset) {
+		XophpArray namedArgs = XophpArray.New();
+		XophpArray numberedArgs = XophpArray.New();
+		if (title == XophpObject.False) {
+			title = this.title;
+		}
+		if (argsObj != XophpObject.False) {
+			XophpArray args = null;
+			if (Type_.Eq_by_obj(argsObj, XomwPPNode_Hash_Array.class)) {
+				args = ((XomwPPNode_Hash_Array)argsObj).value;
+			} else if (!XophpArray.is_array(argsObj)) {
+				throw XomwMWException.New_by_method(XomwPPFrame_Hash.class, "newChild", ": args must be array or PPNode_Hash_Array");
+			}
+			else {
+				args = (XophpArray)argsObj;
+			}
+
+			int argsLen = args.Len();
+			for (int i = 0; i < argsLen; i++) {
+				XomwPPNode arg = (XomwPPNode)args.Get_at(i);
+				XophpArray bits = arg.splitArg();
+				if (bits.Has("index")) {
+					// Numbered parameter
+					int index = bits.Get_by_int("index") - indexOffset;
+					if (namedArgs.isset(index) || numberedArgs.isset(index)) {
 //							this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
 //								wfEscapeWikiText(this.title),
-//								wfEscapeWikiText($title),
-//								wfEscapeWikiText($index)).text());
+//								wfEscapeWikiText(title),
+//								wfEscapeWikiText(index)).text());
 //							this.parser.addTrackingCategory('duplicate-args-category');
-//						}
-//						$numberedArgs[$index] = $bits['value'];
-//						unset($namedArgs[$index]);
-//					} else {
-//						// Named parameter
-//						$name = trim(this.expand($bits['name'], PPFrame.STRIP_COMMENTS));
-//						if (isset($namedArgs[$name]) || isset($numberedArgs[$name])) {
+					}
+					numberedArgs.Set(index, bits.Get_by("value"));
+//						XophpArrayUtl.unset_by_idx(namedArgs, index);
+				} else {
+					// Named parameter
+					String name = String_.Trim(this.expand(bits.Get_by("name"), XomwPPFrame.STRIP_COMMENTS));
+					if (namedArgs.isset(name) || numberedArgs.isset(name)) {
 //							this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
 //								wfEscapeWikiText(this.title),
-//								wfEscapeWikiText($title),
-//								wfEscapeWikiText($name)).text());
+//								wfEscapeWikiText(title),
+//								wfEscapeWikiText(name)).text());
 //							this.parser.addTrackingCategory('duplicate-args-category');
-//						}
-//						$namedArgs[$name] = $bits['value'];
-//						unset($numberedArgs[$name]);
-//					}
-//				}
-//			}
-//			return new PPTemplateFrame_Hash(this.preprocessor, $this, $numberedArgs, $namedArgs, $title);
-//		}
+					}
+//						namedArgs.Set(name, bits.Get_by("value"));
+//						XophpArrayUtl.unset(numberedArgs, name);
+				}
+			}
+		}
+//			return new PPTemplateFrame_Hash(this.preprocessor, this, numberedArgs, namedArgs, title);
+		return null;
+	}
 
 	/**
 	* @throws MWException
@@ -252,7 +260,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					);
 				} else {
 					XophpArray ret = this.parser.braceSubstitution(bits, this);
-					if (ret.is_set(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+					if (ret.isset(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
 						newIterator = ret.Get_by(Object_.Cls_val_name);
 					} else {
 						outItm += ret.Get_by_str("text");
@@ -269,7 +277,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					);
 				} else {
 					XophpArray ret = this.parser.argSubstitution(bits, this);
-					if (ret.is_set(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+					if (ret.isset(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
 						newIterator = ret.Get_by("Object");
 					} else {
 						outItm += ret.Get_by_str("text");
@@ -565,7 +573,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @return boolean
 	*/
 	@Override public boolean loopCheck(XomwTitle title) {
-		return !this.loopCheckHash.is_set(title.getPrefixedDBkeyStr());
+		return !this.loopCheckHash.isset(title.getPrefixedDBkeyStr());
 	}
 
 	/**

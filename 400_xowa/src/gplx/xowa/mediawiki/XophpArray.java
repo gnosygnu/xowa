@@ -96,7 +96,8 @@ public class XophpArray implements Bry_bfr_able {
 	public boolean Has(String key) {
 		return hash.Has(key);
 	}
-	public boolean is_set(String key) {return hash.Has(key);}
+	public boolean isset(String key) {return hash.Has(key);}
+	public boolean isset(int idx)    {return idx >= 0 && idx < hash.Count();}
 	public XophpArrayItm[] To_ary() {
 		return (XophpArrayItm[])hash.To_ary(XophpArrayItm.class);
 	}

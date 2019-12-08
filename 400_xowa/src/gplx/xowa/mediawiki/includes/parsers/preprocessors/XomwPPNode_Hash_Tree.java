@@ -296,7 +296,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 				bits.Add("close", new XomwPPNode_Hash_Tree(children, i));
 			}
 		}
-		if (!bits.is_set("name")) {
+		if (!bits.isset("name")) {
 			throw new XomwMWException("Invalid ext node passed to " + "splitRawExt");
 		}
 		return bits;
@@ -335,7 +335,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 				bits.Add("level", childChildren.Get_at(0));
 			}
 		}
-		if (!bits.is_set("i")) {
+		if (!bits.isset("i")) {
 			throw new XomwMWException("Invalid h node passed to " + "splitRawHeading");
 		}
 		return bits;
@@ -374,7 +374,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 				bits.Add("lineStart", "1");
 			}
 		}
-		if (!bits.is_set("title")) {
+		if (!bits.isset("title")) {
 			throw new XomwMWException("Invalid node passed to " + "splitRawTemplate");
 		}
 		bits.Add("parts", new XomwPPNode_Hash_Array(parts));
