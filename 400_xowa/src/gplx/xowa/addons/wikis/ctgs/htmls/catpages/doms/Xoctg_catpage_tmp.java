@@ -20,15 +20,15 @@ public class Xoctg_catpage_tmp {
 		List_adp list = Get_by_tid(itm.Grp_tid());
 		list.Add(itm);
 	}
-	public void Make_by_ctg(Xoctg_catpage_ctg ctg) {	// TEST:
+	public void Make_by_ctg(Xow_wiki wiki, Xoctg_catpage_ctg ctg) {	// TEST:
 		for (byte tid = 0; tid < Xoa_ctg_mgr.Tid___max; ++tid)
-			Make_by_grp(ctg.Grp_by_tid(tid));
+			Make_by_grp(wiki, ctg.Grp_by_tid(tid));
 	}
-	public void Make_by_grp(Xoctg_catpage_grp grp) {
+	public void Make_by_grp(Xow_wiki wiki, Xoctg_catpage_grp grp) {
 		byte tid = grp.Tid();
 		List_adp list = Get_by_tid(tid);
 		if (list.Len() == 0) return;
-		grp.Itms_((Xoctg_catpage_itm[])list.To_ary_and_clear(Xoctg_catpage_itm.class));
+		grp.Itms_(wiki, (Xoctg_catpage_itm[])list.To_ary_and_clear(Xoctg_catpage_itm.class));
 	}
 	private List_adp Get_by_tid(byte tid) {
 		switch (tid) {

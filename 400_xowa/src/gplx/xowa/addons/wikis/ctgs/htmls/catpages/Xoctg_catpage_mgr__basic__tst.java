@@ -26,7 +26,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 		fxt.Init_itms__pages("A1");
 		Xoctg_catpage_itm itm = fxt.Ctg().Grp_by_tid(Xoa_ctg_mgr.Tid__page).Itms__get_at(0);
 		itm.Page_ttl_(Xoa_ttl.Null);
-		itm.Sortkey_handle_make(Bry_bfr_.New(), Bry_.Empty);
+		itm.Sortkey_handle_make(Bry_bfr_.New(), fxt.Wiki(), Bry_.Empty);
 		fxt.Test__html__page(Xoa_ctg_mgr.Tid__page, Byte_ascii.Ltr_A, "\n            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #0 might be talk/user page\">missing page (0)</li>");
 	}
 	@Test   public void Visited_doesnt_work_for_space() {// PURPOSE: xowa-visited not inserted for pages with space
@@ -137,7 +137,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 	}
 	@Test   public void Page_all_cols() {
 		fxt.Init_itms__pages("A1", "A2", "A3", "B1", "C1");
-		fxt.Init__grp_max_(6);
+		fxt.Init__grp_max_(6); // SEE:FOOTNOTE:LT_NOT_LTE DATE:2019-12-14
 		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
 		( ""
 		, "<div id=\"mw-pages\">"
@@ -175,14 +175,14 @@ public class Xoctg_catpage_mgr__basic__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Page__numeric() {	// PURPOSE: check numeric sorting; 0, 9, 10; not 0, 10, 9; DATE:2016-10-09
-		fxt.Init_itms__pages("0", "9", "10");
-		fxt.Init__grp_max_(6);
+	@Test   public void Page__numeric() {	// PURPOSE: check numeric sorting; 0, 2, 3, 10; not 0, 10, 2, 3; DATE:2016-10-09
+		fxt.Init_itms__pages("0", "2", "3", "10");
+		fxt.Init__grp_max_(5); // SEE:FOOTNOTE:LT_NOT_LTE DATE:2019-12-14
 		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
 		( ""
 		, "<div id=\"mw-pages\">"
 		, "  <h2>Pages in category \"Ctg_1\"</h2>"
-		, "  <p>The following 3 pages are in this category, out of 3 total.</p>"
+		, "  <p>The following 4 pages are in this category, out of 4 total.</p>"
 		, "  <div lang=\"en\" dir=\"ltr\" class=\"mw-content-ltr\">"
 		, "    <table style=\"width: 100%;\">"
 		, "      <tr style=\"vertical-align: top;\">"
@@ -190,12 +190,13 @@ public class Xoctg_catpage_mgr__basic__tst {
 		, "          <h3>0-9</h3>"
 		, "          <ul>"
 		, "            <li><a href=\"/wiki/0\" title=\"0\">0</a></li>"
+		, "            <li><a href=\"/wiki/2\" title=\"2\">2</a></li>"
 		, "          </ul>"
 		, "        </td>"
 		, "        <td style=\"width: 33%;\">"
 		, "          <h3>0-9 cont.</h3>"
 		, "          <ul>"
-		, "            <li><a href=\"/wiki/9\" title=\"9\">9</a></li>"
+		, "            <li><a href=\"/wiki/3\" title=\"3\">3</a></li>"
 		, "          </ul>"
 		, "        </td>"
 		, "        <td style=\"width: 33%;\">"
@@ -232,6 +233,39 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
+	@Test   public void Mixed_case_titles() {// PURPOSE: titles in mixed-case should sort under same upper-case letter; ISSUE#:637 DATE:2019-12-14
+		// init main ns to be case-sensitive, so that "A1" and "a2" get sorted into different groups (fr.wikisource)
+		fxt.Wiki().Ns_mgr().Ns_main().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__all);
+
+		// init pages
+		fxt.Init_itms__pages("A1", "a2");
+
+		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
+			( ""
+			, "<div id=\"mw-pages\">"
+			, "  <h2>Pages in category \"Ctg_1\"</h2>"
+			, "  <p>The following 2 pages are in this category, out of 2 total.</p>"
+			, "  <div lang=\"en\" dir=\"ltr\" class=\"mw-content-ltr\">"
+			, "    <table style=\"width: 100%;\">"
+			, "      <tr style=\"vertical-align: top;\">"
+			, "        <td style=\"width: 33%;\">"
+			, "          <h3>A</h3>"
+			, "          <ul>"
+			, "            <li><a href=\"/wiki/A1\" title=\"A1\">A1</a></li>"
+			, "          </ul>"
+			, "        </td>"
+			, "        <td style=\"width: 33%;\">"
+			, "          <h3>A cont.</h3>" // fails if "a" instead of "A. cont"
+			, "          <ul>"
+			, "            <li><a href=\"/wiki/a2\" title=\"a2\">a2</a></li>"
+			, "          </ul>"
+			, "        </td>"
+			, "      </tr>"
+			, "    </table>"
+			, "  </div>"
+			, "</div>"
+			));
+	}
 	@Test   public void Calc_col_len() {
 		fxt.Test__calc_col_len(10, 0, 4);	// for 10 items, col 0 has 4 items
 		fxt.Test__calc_col_len(10, 1, 3);	// for 10 items, col 1 has 3 items
@@ -254,7 +288,7 @@ class Xoctg_catpage_mgr_fxt {
 			ctg_html = wiki.Ctg__catpage_mgr();
 		}
 		ctg = new Xoctg_catpage_ctg(1, Bry_.new_a7("Ctg_1"));
-		grp_max = 3;	// default to 3 paer page
+		grp_max = 3;	// default to 3 per page
 		return this;
 	}	private Xoae_app app; private Xoctg_catpage_mgr ctg_html;
 	public void Test__calc_col_len(int grp_len, int col_idx, int expd) {Tfds.Eq(expd, Xoctg_fmt_itm_base.Calc_col_len(grp_len, col_idx, 3));}
@@ -267,7 +301,9 @@ class Xoctg_catpage_mgr_fxt {
 		byte[] actl = ctg_html.Fmt(Xoa_ctg_mgr.Tid__page).Bld_bwd_fwd(wiki, Xoa_ttl.Parse(wiki, Bry_.new_a7(ctg_str)), ctg.Grp_by_tid(Xoa_ctg_mgr.Tid__page), grp_max);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl));
 	}
-	public Xoctg_catpage_mgr_fxt Init_itms__pages(String... titles) {return Init_itms(Xoa_ctg_mgr.Tid__page, titles);}
+	public Xoctg_catpage_mgr_fxt Init_itms__pages(String... titles) {
+		return Init_itms(Xoa_ctg_mgr.Tid__page, titles);
+	}
 	public Xoctg_catpage_mgr_fxt Init_itms__files(String... titles) {return Init_itms(Xoa_ctg_mgr.Tid__file, titles);}
 	public Xoctg_catpage_mgr_fxt Init_itms__subcs(String... titles) {return Init_itms(Xoa_ctg_mgr.Tid__subc, titles);}
 	private Xoctg_catpage_mgr_fxt Init_itms(byte tid, String[] ttls) {
@@ -281,7 +317,7 @@ class Xoctg_catpage_mgr_fxt {
 			Xoctg_catpage_itm itm = Xoctg_catpage_itm.New_by_ttl(tid, i, ttl);
 			tmp.Add(itm);
 		}
-		tmp.Make_by_grp(grp);
+		tmp.Make_by_grp(wiki, grp);
 		return this;
 	}
 	public void Test__html__page(byte tid, byte grp_char_0, String expd) {

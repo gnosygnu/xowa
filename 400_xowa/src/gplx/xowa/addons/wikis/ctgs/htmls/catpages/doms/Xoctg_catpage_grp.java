@@ -28,7 +28,7 @@ public class Xoctg_catpage_grp {
 	public void Count_all_(int v) {this.count_all = v;}
 	public void Prev_disable_(boolean v) {this.prev_disable = v;}
 	public void Next_sortkey_(byte[] v) {this.next_sortkey = v;}
-	public void Itms_(Xoctg_catpage_itm[] v) {
+	public void Itms_(Xow_wiki wiki, Xoctg_catpage_itm[] v) {
 		this.itms = v;
 		Array_.Sort(itms, new Xoctg_catpage_itm_sorter()); // NOTE: need to reorder for page_until b/c ORDER BY DESC
 
@@ -38,7 +38,7 @@ public class Xoctg_catpage_grp {
 		byte[] prv_sortkey_handle = Bry_.Empty;
 		for (int i = 0; i < itms_len; ++i) {
 			Xoctg_catpage_itm itm = itms[i];
-			prv_sortkey_handle = itm.Sortkey_handle_make(tmp_bfr, prv_sortkey_handle);
+			prv_sortkey_handle = itm.Sortkey_handle_make(tmp_bfr, wiki, prv_sortkey_handle);
 		}
 	}
 

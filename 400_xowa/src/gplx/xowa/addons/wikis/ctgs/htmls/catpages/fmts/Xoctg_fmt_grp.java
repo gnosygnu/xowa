@@ -48,7 +48,7 @@ public class Xoctg_fmt_grp {	// subc|page|file
 		Fmt__ctg.Bld_many(bfr, div_id, msg_label_bry, msg_stats_bry, nav_html, lang.Key_bry(), lang.Dir_ltr_bry(), itms_fmt);
 	}
 	public byte[] Bld_bwd_fwd(Xow_wiki wiki, Xoa_ttl ttl, Xoctg_catpage_grp view_grp, int grp_max) {	// TEST:
-		if (view_grp.Count_all() < grp_max) return Bry_.Empty;	// < 200; never show;
+		if (view_grp.Count_all() < grp_max) return Bry_.Empty;	// NOTE: must be "<", not "<="; FOOTNOTE:LT_NOT_LTE; DATE:2019-12-14
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
 		Html_nav_bry(bfr, wiki, ttl, view_grp, grp_max, Bool_.N);
 		Html_nav_bry(bfr, wiki, ttl, view_grp, grp_max, Bool_.Y);
@@ -105,3 +105,21 @@ public class Xoctg_fmt_grp {	// subc|page|file
 	public static Xoctg_fmt_grp New__page() {return new Xoctg_fmt_grp(Xoa_ctg_mgr.Tid__page, new Xoctg_fmt_itm_page(), Xol_msg_itm_.Id_ctg_page_header, Xol_msg_itm_.Id_ctg_page_count, Xoctg_catpage_url_parser.Bry__arg_page_bgn, Xoctg_catpage_url_parser.Bry__arg_page_end, Bry_.new_a7("mw-pages"));}
 	public static Xoctg_fmt_grp New__file() {return new Xoctg_fmt_grp(Xoa_ctg_mgr.Tid__file, new Xoctg_fmt_itm_file(), Xol_msg_itm_.Id_ctg_file_header, Xol_msg_itm_.Id_ctg_file_count, Xoctg_catpage_url_parser.Bry__arg_file_bgn, Xoctg_catpage_url_parser.Bry__arg_file_end, Bry_.new_a7("mw-category-media"));}
 }
+/*
+== LT_NOT_LTE ==
+DATE:2019-12-14
+
+Must be <, not <=.
+
+* Intuitively, it seems like it should be <=. For example, 200 <= 200
+* However, when there are exactly 200 categories, MediaWiki shows "(previous 200) (next 200)" headers but with no links
+* If changed to <=, then the "(previous 200) (next 200)" disappears. This has no meaningful effect, but might as well imitate MW
+
+Tested with following
+* en.wikipedia.org/wiki/Category:1603_births
+* Also, SQL to find other categories
+<pre>
+  ATTACH 'en.wikipedia.org-core.xowa' AS page_db;
+  SELECT c.cat_id, c.cat_pages, p.page_title FROM cat_core c JOIN page_db.page p ON c.cat_id = p.page_id WHERE c.cat_pages = 200 LIMIT 10;
+</pre>
+*/

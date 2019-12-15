@@ -42,7 +42,7 @@ public class Xoctg_catpage_itm {
 		// sortkey_binary will be blank for v2,v3; use page_ttl; PAGE:fr.w:Article_contenant_un_appel_à_traduction_en_anglais; DATE:2016-10-11
 		if (version != Version__4 && Bry_.Len_eq_0(sortkey_binary)) sortkey_binary = page_ttl.Page_txt();
 	}
-	public byte[] Sortkey_handle_make(Bry_bfr tmp_bfr, byte[] prv_sortkey_handle) {
+	public byte[] Sortkey_handle_make(Bry_bfr tmp_bfr, Xow_wiki wiki, byte[] prv_sortkey_handle) {
 		// page.tbl missing even though in cat_link.tbl; happens for "User:" namespace pages;
 		if (page_ttl == Xoa_ttl.Null) {
 			// sortkey_prefix exists; happens for [[Category:A]] as opposed to [[Category:A|some_sortkey_prefix]]; also, {{DEFAULTSORTKEY:some_sortkey_prefix}}
@@ -67,6 +67,7 @@ public class Xoctg_catpage_itm {
 			}
 			else {
 				byte[] sortkey_normalized = Bry_.Replace(sortkey_prefix, Sortkey_prefix_replace__src, Sortkey_prefix_replace__trg);
+				sortkey_normalized = wiki.Lang().Case_mgr().Case_reuse_1st_upper(sortkey_normalized); // ISSUE#:637
 				tmp_bfr.Add(sortkey_normalized);
 				tmp_bfr.Add_byte_nl().Add(page_ttl.Page_txt());	// "$prefix\n$unprefixed";
 				sortkey_handle = tmp_bfr.To_bry_and_clear();

@@ -55,7 +55,7 @@ class Xoctg_catlink_loader {
 
 		// load ns / ttl for each catlink
 		Xoctg_catpage_grp grp = rv.Grp_by_tid(grp_tid);
-		grp.Itms_((Xoctg_catpage_itm[])catlink_hash.To_ary_and_clear(Xoctg_catpage_itm.class));
+		grp.Itms_(wiki, (Xoctg_catpage_itm[])catlink_hash.To_ary_and_clear(Xoctg_catpage_itm.class));
 
 		// get zth_itm (for "Next 200" / "Previous 200")
 		if (catlink_list_len > limit) {
@@ -138,7 +138,7 @@ class Xoctg_catlink_loader {
 
 		// make sortkey
 		byte[] prv_sortkey = grp.Itms__len() == 0 ? Bry_.Empty : grp.Itms__get_at(grp.Itms__len() - 1).Sortkey_handle();
-		zth_itm.Sortkey_handle_make(Bry_bfr_.New(), prv_sortkey);
+		zth_itm.Sortkey_handle_make(Bry_bfr_.New(), wiki, prv_sortkey);
 	}
 	public static byte[] Build_sortkey_val(Bry_bfr sortkey_val_bfr, byte version, Xoctg_collation_mgr collation_mgr, byte[] url_sortkey) {
 		// find \n and ignore everything after it; needed else "< 'A\nA'" will pull up "A"; NOTE: can't find logic in MediaWiki CategoryViewer.php; DATE:2016-10-11

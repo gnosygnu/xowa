@@ -336,7 +336,7 @@ class Dpl_xnde_fxt {
 			Xoctg_catpage_itm catpage_itm = Xoctg_catpage_itm.New_by_ttl(tid, page.Id(), ttl);
 			tmp.Add(catpage_itm);
 		}
-		tmp.Make_by_ctg(ctg);
+		tmp.Make_by_ctg(fxt.Wiki(), ctg);
 		Xoctg_catpage_mgr catpage_mgr = fxt.Wiki().Ctg__catpage_mgr();
 		catpage_mgr.Cache__add(Bry_.new_u8("Category:" + ctg_ttl), ctg);
 	}
