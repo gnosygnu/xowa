@@ -17,4 +17,6 @@ package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpObject {
 	public static final    Object False = null; // handles code like "if ($var === false)" where var is an Object;
 	public static boolean is_true(Object val) {return val != null;}
+	public static boolean is_null(Object val) {return val == null;}
+	public static Object coalesce(Object val, Object if_null) {return val == null ? if_null : val;}
 }

@@ -63,6 +63,7 @@ public class Char_ {
 			default: return or;
 		}
 	}
+	public static int To_int(char c) {return (int)c;}
 	public static String To_str(char[] ary, int pos, int length) {return new String(ary, pos, length);}
 	public static String To_str(int b) {return To_str((char)b);}
 	public static String To_str(char c) {return String.valueOf(c);}	

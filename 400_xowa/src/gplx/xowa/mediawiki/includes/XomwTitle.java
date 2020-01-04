@@ -309,7 +309,7 @@ public class XomwTitle {
 		byte[] filteredText = text;
 
 		XomwTitle t = new XomwTitle(env);
-		t.mDbkeyform = XophpString.strtr(filteredText, Byte_ascii.Space, Byte_ascii.Underline);
+		t.mDbkeyform = XophpString_.strtr(filteredText, Byte_ascii.Space, Byte_ascii.Underline);
 		t.mDefaultNamespace = defaultNamespace;
 
 		t.secureAndSplit(env);
@@ -1435,7 +1435,7 @@ public class XomwTitle {
 	*/
 	public byte[] getPrefixedDBkey() {
 		byte[] s = this.prefix(this.mDbkeyform);
-		s = XophpString.strtr(s, Byte_ascii.Space, Byte_ascii.Underline);
+		s = XophpString_.strtr(s, Byte_ascii.Space, Byte_ascii.Underline);
 		return s;
 	}
 	public String getPrefixedDBkeyStr() {return String_.new_u8(getPrefixedDBkey());}
@@ -1449,7 +1449,7 @@ public class XomwTitle {
 	public byte[] getPrefixedText() {
 		if (this.mPrefixedText == null) {
 			byte[] s = this.prefix(this.mTextform);
-			s = XophpString.strtr(s, Byte_ascii.Underline, Byte_ascii.Space);
+			s = XophpString_.strtr(s, Byte_ascii.Underline, Byte_ascii.Space);
 			this.mPrefixedText = s;
 		}
 		return this.mPrefixedText;
@@ -3380,7 +3380,7 @@ public class XomwTitle {
 
 		this.mDbkeyform = parts.dbkey;
 		this.mUrlform = XomwGlobalFunctions.wfUrlencode(this.mDbkeyform);
-		this.mTextform = XophpString.strtr(this.mDbkeyform, Byte_ascii.Underline, Byte_ascii.Space);
+		this.mTextform = XophpString_.strtr(this.mDbkeyform, Byte_ascii.Underline, Byte_ascii.Space);
 
 		// We already know that some pages won't be in the database!
 		if (this.isExternal() || this.mNamespace == XomwDefines.NS_SPECIAL) {

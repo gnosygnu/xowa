@@ -19,6 +19,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.
 import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.xowa.xtns.pfuncs.tags.*; import gplx.xowa.xtns.pfuncs.stringutils.*; import gplx.xowa.xtns.pfuncs.pages.*; import gplx.xowa.xtns.pfuncs.wikis.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.wikis.domains.*;
+import gplx.xowa.mediawiki.*;
 public class Pf_func_ {
 	public static final byte Name_dlm = Byte_ascii.Colon;
 	public static boolean Eval_arg_to_kvp(byte[][] rslt, Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, Bry_bfr tmp_bfr, int i) {
@@ -106,6 +107,42 @@ public class Pf_func_ {
 		}
 		return Ary_nonwmf;
 	}
+
+	// convert XO template to MW array; EX: {{name:argx|key1=val1|key2=val2}} comes in as a Xot_invk obj; convert it to an array of [(key1, val1), (key2, val2)]
+	public static XophpArray Convert_xo_tmpl_to_mw_ary(Xop_ctx ctx, Xot_invk caller, Xot_invk tmpl, byte[] src) {
+		// init
+		XophpArray rv = XophpArray.New();
+		Bry_bfr rv_bfr = Bry_bfr_.New();
+		Bry_bfr tmp_bfr = Bry_bfr_.New();
+		int args_len = tmpl.Args_len();
+
+		// loop
+		for (int i = 0; i < args_len; i++) {
+			// clear bfrs
+			rv_bfr.Clear();
+			tmp_bfr.Clear();
+
+			// get arg
+			Arg_nde_tkn arg = tmpl.Args_get_by_idx(i);
+
+			// eval key; NOTE: could be recursive
+			arg.Key_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);
+			rv_bfr.Add_bfr_and_clear(tmp_bfr);
+
+			// add eq
+			if (rv_bfr.Len_gt_0())
+				rv_bfr.Add_byte_eq();
+
+			// eval val; NOTE: could be recursive
+			arg.Val_tkn().Tmpl_evaluate(ctx, src, caller, tmp_bfr);
+			rv_bfr.Add_bfr_and_clear(tmp_bfr);
+
+			// add to rv
+			rv.Add(rv_bfr.To_str_and_clear());
+		}
+		return rv;
+	}
+
 	private static int[] Ary_nonwmf = null;
 	private static final    int[] Ary_wmf = new int[]
 	{ Xol_kwd_grp_.Id_utc_year

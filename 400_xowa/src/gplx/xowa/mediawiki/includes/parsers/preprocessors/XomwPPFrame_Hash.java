@@ -64,7 +64,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 		this.preprocessor = preprocessor;
 		this.parser = preprocessor.Parser();
 		this.title = this.parser.mTitle;
-		this.titleCache = XophpArray.New().Add(XophpObject.is_true(this.title) ? this.title.getPrefixedDBkeyStr() : XophpString_.False);
+		this.titleCache = XophpArray.New().Add(XophpObject.is_true(this.title) ? this.title.getPrefixedDBkeyStr() : XophpString_.Null);
 		this.loopCheckHash = XophpArray.New();
 		this.depth = 0;
 		this.childExpansionCache = XophpArray.New();
@@ -153,7 +153,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @return String
 	*/
 	public String expand(Object root, int flags) {
-		if (XophpString.is_string(root)) {
+		if (XophpString_.is_string(root)) {
 			return (String)root;
 		}
 
@@ -214,12 +214,12 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			}
 
 			Object newIterator = XophpObject.False;
-			String contextName = XophpString_.False;
+			String contextName = XophpString_.Null;
 			XophpArray contextChildren = XophpArray.False;
 
 			if (contextNode == XophpObject.False) {
 				// nothing to do
-			} else if (XophpString.is_string(contextNode)) {
+			} else if (XophpString_.is_string(contextNode)) {
 				outItm += (String)contextNode;
 			} else if (Type_.Eq_by_obj(contextNode, XomwPPNode_Hash_Array.class)) {
 				newIterator = contextNode;
@@ -245,7 +245,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			}
 
 			// Handle node descriptor array or tree Object
-			if (contextName == XophpString_.False) {
+			if (!XophpString_.is_true(contextName)) {
 				// Not a node, already handled above
 			} else if (String_.CharAt(contextName, 0) == '@') {
 				// Attribute: no output
@@ -346,7 +346,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 //						this.parser.mHeadings[] = [titleText, bits['i']];
 //						serial = count(this.parser.mHeadings) - 1;
 					String marker = XomwParser.MARKER_PREFIX + "-h-serial-" + XomwParser.MARKER_SUFFIX;
-					s = XophpString.substr(s, 0, bits.Get_by_int("level")) + marker + XophpString.substr(s, bits.Get_by_int("level"));
+					s = XophpString_.substr(s, 0, bits.Get_by_int("level")) + marker + XophpString_.substr(s, bits.Get_by_int("level"));
 //						this.parser.mStripState.addGeneral(marker, '');
 					outItm += s;
 				} else {
@@ -523,7 +523,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			return this.title.getPrefixedDBkeyStr();
 		} else {
 			// return isset( $this->titleCache[$level] ) ? $this->titleCache[$level] : false;
-			return this.titleCache.Count() > 0 ? ((String)this.titleCache.Get_at(0)) : XophpString_.False;
+			return this.titleCache.Count() > 0 ? ((String)this.titleCache.Get_at(0)) : XophpString_.Null;
 		}
 	}
 
@@ -562,7 +562,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @return boolean Always false in this implementation.
 	*/
 	@Override public String getArgument(String name) {
-		return XophpString_.False;
+		return XophpString_.Null;
 	}
 
 	/**

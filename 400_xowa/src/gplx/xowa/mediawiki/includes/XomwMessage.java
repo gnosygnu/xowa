@@ -838,7 +838,7 @@ public class XomwMessage {
 		}
 
 		// Replace $* with a list of parameters for &uselang=qqx.
-//			if (XophpString.strpos(s, "$*") != false) {
+//			if (XophpString_.strpos(s, "$*") != false) {
 //				String paramlist = "";
 //				if (this.parameters != []) {
 //					paramlist = ": $" . implode(", $", range(1, count(this.parameters)));

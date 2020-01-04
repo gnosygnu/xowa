@@ -28,7 +28,7 @@ public class Wbase_repo_linker {
 
 	public byte[] getPageUrl(byte[] page) {
 		byte[] encodedPage = this.encodePage(page);
-		return Bry_.Add(this.getBaseUrl(), XophpString.str_replace(Format_Arg1, encodedPage, this.articlePath));
+		return Bry_.Add(this.getBaseUrl(), XophpString_.str_replace(Format_Arg1, encodedPage, this.articlePath));
 	}
 
 	private byte[] encodePage(byte[] page) {

@@ -239,7 +239,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 	*/
 	private final    byte[][] tmpPrefixRegex = new byte[2][];
 	public XomwMediaWikiTitleCodecParts splitTitleString(byte[] text, int defaultNamespace) {
-		byte[] dbkey = XophpString.str_replace(Byte_ascii.Space, Byte_ascii.Underline, text);
+		byte[] dbkey = XophpString_.str_replace(Byte_ascii.Space, Byte_ascii.Underline, text);
 
 		// Initialisation
 		XomwMediaWikiTitleCodecParts parts = new XomwMediaWikiTitleCodecParts(dbkey, defaultNamespace);
@@ -339,7 +339,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 					// resets the default namespace
 					if (dbkey != Bry_.Empty && dbkey[0] == Byte_ascii.Colon) {
 						parts.ns = XomwDefines.NS_MAIN;
-						dbkey = XophpString.substr(dbkey, 1);
+						dbkey = XophpString_.substr(dbkey, 1);
 					}
 				}
 				// If there's no recognized interwiki or namespace,
@@ -348,10 +348,10 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 			break;
 		} while (true);
 
-		byte[] fragment = XophpString.strstr(dbkey, Byte_ascii.Hash_bry);
+		byte[] fragment = XophpString_.strstr(dbkey, Byte_ascii.Hash_bry);
 		if (null != fragment) {
-			parts.fragment = XophpString.str_replace(Byte_ascii.Underline, Byte_ascii.Space, XophpString.substr(fragment, 1));
-			dbkey = XophpString.substr(dbkey, 0, XophpString.strlen(dbkey) - XophpString.strlen(fragment));
+			parts.fragment = XophpString_.str_replace(Byte_ascii.Underline, Byte_ascii.Space, XophpString_.substr(fragment, 1));
+			dbkey = XophpString_.substr(dbkey, 0, XophpString_.strlen(dbkey) - XophpString_.strlen(fragment));
 			// remove whitespace again: prevents "Foo_bar_#"
 			// becoming "Foo_bar_"
 			dbkey = Bry_.Replace(dbkey, Byte_ascii.Underline_bry, Bry_.Empty);

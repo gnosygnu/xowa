@@ -35,7 +35,7 @@ public class XomwPPNode_Hash_Attr extends XomwPPNode { 	public String name, valu
 		if (!(String_.CharAt(descriptor_name, 0) ==  '@')) {
 			throw Err_.new_wo_type("XomwPPNode_Hash_Attr.CTOR: invalid name in attribute descriptor");
 		}
-		this.name = String_.new_u8(XophpString.substr(Bry_.new_u8(descriptor_name), 1));
+		this.name = String_.new_u8(XophpString_.substr(Bry_.new_u8(descriptor_name), 1));
 		XophpArray descriptor_children = (XophpArray)descriptor.Get_at(XomwPPNode_Hash_Tree.CHILDREN);
 		Object value_obj = descriptor_children.Get_at(0);
 		this.value = Type_.Eq_by_obj(value_obj, byte[].class) ? String_.new_u8((byte[])value_obj): value_obj.toString();

@@ -46,13 +46,13 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 	@Override protected void preprocessToObj_root() {} // NOTE: deliberately empty;
 
 	@Override protected void preprocessToObj_ignore(byte[] src, int bgn, int end) {
-		accum.Add(XophpArray.New("ignore", XophpArray.New(XophpString.substr(src, bgn, end - bgn))));
+		accum.Add(XophpArray.New("ignore", XophpArray.New(XophpString_.substr(src, bgn, end - bgn))));
 	}
 	@Override protected void preprocessToObj_literal(byte[] src, int bgn, int end) {
-		addLiteral(accum, XophpString.substr(src, bgn, end - bgn));
+		addLiteral(accum, XophpString_.substr(src, bgn, end - bgn));
 	}
 	@Override protected void preprocessToObj_comment(byte[] src, int bgn, int end) {
-		accum.Add(XophpArray.New("comment", XophpArray.New(XophpString.substr(src, bgn, end - bgn))));
+		accum.Add(XophpArray.New("comment", XophpArray.New(XophpString_.substr(src, bgn, end - bgn))));
 	}
 	@Override protected void preprocessToObj_removeLeadingWhitespaceFromEnd(int ws_len) {
 		int endIndex = accum.Len() - 1;
@@ -61,8 +61,8 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 			Object itm_obj = accum.Get_at(endIndex);
 			if (XophpTypeUtl.is_string(itm_obj)) {
 				byte[] itm = Bry_.new_u8((String)itm_obj);
-				if (XophpString.strspn_fwd__space_or_tab(itm, itm.length - ws_len, -1, itm.length) == ws_len) {
-					accum.Set(endIndex, XophpString.substr(itm, 0, -ws_len));
+				if (XophpString_.strspn_fwd__space_or_tab(itm, itm.length - ws_len, -1, itm.length) == ws_len) {
+					accum.Set(endIndex, XophpString_.substr(itm, 0, -ws_len));
 				}
 			}
 		}
@@ -103,7 +103,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 
 	@Override protected Xomw_prepro_accum preprocessToObj_text(XomwPPDStackElement piece, byte[] rule_end, int matching_count) {
 		XophpArray array = (XophpArray)((XomwPPDStackElement)piece).breakSyntax(matching_count);
-		addLiteral(array, XophpString.str_repeat(String_.new_u8(rule_end), matching_count));
+		addLiteral(array, XophpString_.str_repeat(String_.new_u8(rule_end), matching_count));
 		return new Xomw_prepro_accum__hash(array);
 	}
 	@Override protected Xomw_prepro_accum preprocessToObj_xml(XomwPPDStackElement piece, byte[] name_bry, int max_count, int matching_count) {

@@ -44,7 +44,7 @@ public class XomwMediaWikiSite extends XomwSite {	private static final String PA
 	* @return String
 	*/
 	public byte[] toDBKey(byte[] title) {
-		return XophpString.str_replace(Byte_ascii.Space_bry, Byte_ascii.Underline_bry, title);
+		return XophpString_.str_replace(Byte_ascii.Space_bry, Byte_ascii.Underline_bry, title);
 	}
 
 	/**

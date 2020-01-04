@@ -519,7 +519,7 @@ public class XomwHtml {
 			}
 			else {
 				// PORTED.HEADER:atrValEncodings
-				val = XophpString.strtr(val, atrValEncodings, temp.bfr, temp.trv);
+				val = XophpString_.strtr(val, atrValEncodings, temp.bfr, temp.trv);
 				bfr.Add_byte_space().Add(key).Add(ATR_VAL_QUOTE).Add(val).Add_byte_quote();
 			}
 		}

@@ -56,9 +56,13 @@ public class Regx_adp {
 		Regx_group[] ary = Regx_group.Ary_empty;
 		int groups_len = match.groupCount();
 		if (success && groups_len > 0) {
+			// NOTE: by convention, there are n groups, but groups.count is n - 1 and groups[0] is entire match (not 1st group); see TEST: DATE:2019-12-28
+			groups_len++;
 			ary = new Regx_group[groups_len];
-			for (int i = 0; i < groups_len; i++)
-				ary[i] = new Regx_group(true, match.start(i + 1), match.end(i + 1), match.group(i + 1));				
+			for (int i = 0; i < groups_len; i++) {
+				int match_start = match.start(i);
+				ary[i] = new Regx_group(match_start != -1, match_start, match.end(i), match.group(i));
+			}
 		}
 		return new Regx_match(success, match_bgn, match_end, ary);
 	}

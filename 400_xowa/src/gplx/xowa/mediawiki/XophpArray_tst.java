@@ -129,6 +129,7 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 		fxt.Test__Pop(ary, "b");
 		fxt.Test__Pop(ary, "a");
 		fxt.Test__Count(ary, 0);
+		fxt.Test__Pop(ary, null);
 	}
 	@Test   public void Itm_str_concat_end() {
 		XophpArray ary = XophpArray.New();
@@ -138,6 +139,19 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 		fxt.Test__Itm_str_concat_end(ary, "a0", 0, "0");
 		fxt.Test__Itm_str_concat_end(ary, "b1", 1, "1");
 		fxt.Test__Itm_str_concat_end(ary, "c2", 2, "2");
+	}
+	@Test   public void Clone() {
+		XophpArray ary = XophpArray.New();
+		ary.Add(0, "a").Add(1, "b").Add(2, "c");
+
+		fxt.Test__Eq(ary, ary.Clone());
+	}
+	@Test   public void Get_by() {
+		XophpArray ary = XophpArray.New();
+		ary.Add("0", "a").Add("1", "b").Add("2", "c");
+
+		fxt.Test__Get_by(ary, "0", "a");
+		fxt.Test__Get_by(ary, "missing", null);
 	}
 }
 class XophpArray_fxt {
@@ -160,5 +174,11 @@ class XophpArray_fxt {
 		ary.Itm_str_concat_end(idx, v);
 		String actl = ary.Get_at_str(idx);
 		Gftest.Eq__str(expd, actl);
+	}
+	public void Test__Eq(XophpArray lhs, XophpArray rhs) {
+		Gftest.Eq__ary(lhs.To_ary(), rhs.To_ary());
+	}
+	public void Test__Get_by(XophpArray ary, String key, Object expd) {
+		Gftest.Eq__obj_or_null(expd, ary.Get_by(key));
 	}
 }

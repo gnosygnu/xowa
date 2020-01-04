@@ -14,23 +14,28 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.languages; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.xowa.mediawiki.includes.*;
+import gplx.langs.regxs.*;
 import gplx.core.primitives.*;
 import gplx.xowa.langs.*;
+import gplx.xowa.mediawiki.includes.*;
+import gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src.*;
+import gplx.xowa.mediawiki.includes.cache.localisation.*;
+import gplx.xowa.mediawiki.includes.exception.*;
 public class XomwLanguage {
 	public Xol_lang_itm XoLang() {return xoLang;} private Xol_lang_itm xoLang = null;
 	private final    Bry_bfr tmpBfr = Bry_bfr_.New();
 //		/**
 //		* @var LanguageConverter
 //		*/
-//		public $mConverter;
+//		public mConverter;
 //
-//		public $mVariants, $mCode, $mLoaded = false;
-//		public $mMagicExtensions = [], $mMagicHookDone = false;
-//		private $mHtmlCode = null, $mParentLanguage = false;
+	public String mCode;
+//		public mVariants, mCode, mLoaded = false;
+//		public mMagicExtensions = [], mMagicHookDone = false;
+//		private mHtmlCode = null, mParentLanguage = false;
 //
-//		public $dateFormatStrings = [];
-//		public $mExtendedSpecialPageAliases;
+//		public dateFormatStrings = [];
+//		public mExtendedSpecialPageAliases;
 //
 //		/** @var array|null */
 	private XomwNamespacesById namespaceNames;
@@ -42,47 +47,47 @@ public class XomwLanguage {
 //		/**
 //		* ReplacementArray Object caches
 //		*/
-//		public $transformData = [];
+//		public transformData = [];
+
+	/**
+	* @var LocalisationCache
+	*/
+	static public XomwLocalisationCache dataCache; // equivalent to MessagesLangCode.php
+
+//		static public mLangObjCache = [];
 //
-//		/**
-//		* @var LocalisationCache
-//		*/
-//		static public $dataCache; // equivalent to MessagesLangCode.php
-//
-//		static public $mLangObjCache = [];
-//
-//		static public $mWeekdayMsgs = [
+//		static public mWeekdayMsgs = [
 //			'sunday', 'monday', 'tuesday', 'wednesday', 'thursday',
 //			'friday', 'saturday'
 //		];
 //
-//		static public $mWeekdayAbbrevMsgs = [
+//		static public mWeekdayAbbrevMsgs = [
 //			'sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'
 //		];
 //
-//		static public $mMonthMsgs = [
+//		static public mMonthMsgs = [
 //			'january', 'february', 'march', 'april', 'may_long', 'june',
 //			'july', 'august', 'september', 'october', 'november',
 //			'december'
 //		];
-//		static public $mMonthGenMsgs = [
+//		static public mMonthGenMsgs = [
 //			'january-gen', 'february-gen', 'march-gen', 'april-gen', 'may-gen', 'june-gen',
 //			'july-gen', 'august-gen', 'september-gen', 'october-gen', 'november-gen',
 //			'december-gen'
 //		];
-//		static public $mMonthAbbrevMsgs = [
+//		static public mMonthAbbrevMsgs = [
 //			'jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug',
 //			'sep', 'oct', 'nov', 'dec'
 //		];
 //
-//		static public $mIranianCalendarMonthMsgs = [
+//		static public mIranianCalendarMonthMsgs = [
 //			'iranian-calendar-m1', 'iranian-calendar-m2', 'iranian-calendar-m3',
 //			'iranian-calendar-m4', 'iranian-calendar-m5', 'iranian-calendar-m6',
 //			'iranian-calendar-m7', 'iranian-calendar-m8', 'iranian-calendar-m9',
 //			'iranian-calendar-m10', 'iranian-calendar-m11', 'iranian-calendar-m12'
 //		];
 //
-//		static public $mHebrewCalendarMonthMsgs = [
+//		static public mHebrewCalendarMonthMsgs = [
 //			'hebrew-calendar-m1', 'hebrew-calendar-m2', 'hebrew-calendar-m3',
 //			'hebrew-calendar-m4', 'hebrew-calendar-m5', 'hebrew-calendar-m6',
 //			'hebrew-calendar-m7', 'hebrew-calendar-m8', 'hebrew-calendar-m9',
@@ -90,7 +95,7 @@ public class XomwLanguage {
 //			'hebrew-calendar-m6a', 'hebrew-calendar-m6b'
 //		];
 //
-//		static public $mHebrewCalendarMonthGenMsgs = [
+//		static public mHebrewCalendarMonthGenMsgs = [
 //			'hebrew-calendar-m1-gen', 'hebrew-calendar-m2-gen', 'hebrew-calendar-m3-gen',
 //			'hebrew-calendar-m4-gen', 'hebrew-calendar-m5-gen', 'hebrew-calendar-m6-gen',
 //			'hebrew-calendar-m7-gen', 'hebrew-calendar-m8-gen', 'hebrew-calendar-m9-gen',
@@ -98,7 +103,7 @@ public class XomwLanguage {
 //			'hebrew-calendar-m6a-gen', 'hebrew-calendar-m6b-gen'
 //		];
 //
-//		static public $mHijriCalendarMonthMsgs = [
+//		static public mHijriCalendarMonthMsgs = [
 //			'hijri-calendar-m1', 'hijri-calendar-m2', 'hijri-calendar-m3',
 //			'hijri-calendar-m4', 'hijri-calendar-m5', 'hijri-calendar-m6',
 //			'hijri-calendar-m7', 'hijri-calendar-m8', 'hijri-calendar-m9',
@@ -109,7 +114,7 @@ public class XomwLanguage {
 //		* @since 1.20
 //		* @var array
 //		*/
-//		static public $durationIntervals = [
+//		static public durationIntervals = [
 //			'millennia' => 31556952000,
 //			'centuries' => 3155695200,
 //			'decades' => 315569520,
@@ -123,30 +128,30 @@ public class XomwLanguage {
 //
 //		/**
 //		* Cache for language fallbacks.
-//		* @see Language::getFallbacksIncludingSiteLanguage
+//		* @see XomwLanguage.getFallbacksIncludingSiteLanguage
 //		* @since 1.21
 //		* @var array
 //		*/
-//		static private $fallbackLanguageCache = [];
+//		static private fallbackLanguageCache = [];
 //
 //		/**
 //		* Cache for grammar rules data
 //		* @var MapCacheLRU|null
 //		*/
-//		static private $grammarTransformations;
+//		static private grammarTransformations;
 //
 //		/**
 //		* Cache for language names
 //		* @var HashBagOStuff|null
 //		*/
-//		static private $languageNameCache;
+//		static private languageNameCache;
 //
 //		/**
 //		* Unicode directional formatting characters, for embedBidi()
 //		*/
-//		static private $lre = "\xE2\x80\xAA"; // U+202A LEFT-TO-RIGHT EMBEDDING
-//		static private $rle = "\xE2\x80\xAB"; // U+202B RIGHT-TO-LEFT EMBEDDING
-//		static private $pdf = "\xE2\x80\xAC"; // U+202C POP DIRECTIONAL FORMATTING
+//		static private lre = "\xE2\x80\xAA"; // U+202A LEFT-TO-RIGHT EMBEDDING
+//		static private rle = "\xE2\x80\xAB"; // U+202B RIGHT-TO-LEFT EMBEDDING
+//		static private pdf = "\xE2\x80\xAC"; // U+202C POP DIRECTIONAL FORMATTING
 //
 //		/**
 //		* Directionality test regex for embedBidi(). Matches the first strong directionality codepoint:
@@ -161,7 +166,7 @@ public class XomwLanguage {
 //		*/
 //		// @codingStandardsIgnoreStart
 //		// @codeCoverageIgnoreStart
-//		static private $strongDirRegex = '/(?:([\x{41}-\x{5a}\x{61}-\x{7a}\x{aa}\x{b5}\x{ba}\x{c0}-\x{d6}\x{d8}-\x{f6}\x{f8}-\x{2b8}\x{2bb}-\x{2c1}\x{2d0}\x{2d1}\x{2e0}-\x{2e4}\x{2ee}\x{370}-\x{373}\x{376}\x{377}\x{37a}-\x{37d}\x{37f}\x{386}\x{388}
+//		static private strongDirRegex = '/(?:([\x{41}-\x{5a}\x{61}-\x{7a}\x{aa}\x{b5}\x{ba}\x{c0}-\x{d6}\x{d8}-\x{f6}\x{f8}-\x{2b8}\x{2bb}-\x{2c1}\x{2d0}\x{2d1}\x{2e0}-\x{2e4}\x{2ee}\x{370}-\x{373}\x{376}\x{377}\x{37a}-\x{37d}\x{37f}\x{386}\x{388}
 //               -\x{38a}\x{38c}\x{38e}-\x{3a1}\x{3a3}-\x{3f5}\x{3f7}-\x{482}\x{48a}-\x{52f}\x{531}-\x{556}\x{559}-\x{55f}\x{561}-\x{587}\x{589}\x{903}-\x{939}\x{93b}\x{93d}-\x{940}\x{949}-\x{94c}\x{94e}-\x{950}\x{958}-\x{961}\x{964}
 //               -\x{980}\x{982}\x{983}\x{985}-\x{98c}\x{98f}\x{990}\x{993}-\x{9a8}\x{9aa}-\x{9b0}\x{9b2}\x{9b6}-\x{9b9}\x{9bd}-\x{9c0}\x{9c7}\x{9c8}\x{9cb}\x{9cc}\x{9ce}\x{9d7}\x{9dc}\x{9dd}\x{9df}-\x{9e1}\x{9e6}-\x{9f1}\x{9f4}-\x{9fa}\x{a03}\x{a05}
 //               -\x{a0a}\x{a0f}\x{a10}\x{a13}-\x{a28}\x{a2a}-\x{a30}\x{a32}\x{a33}\x{a35}\x{a36}\x{a38}\x{a39}\x{a3e}-\x{a40}\x{a59}-\x{a5c}\x{a5e}\x{a66}-\x{a6f}\x{a72}-\x{a74}\x{a83}\x{a85}-\x{a8d}\x{a8f}-\x{a91}\x{a93}-\x{aa8}\x{aaa}-\x{ab0}\x{ab2}\x{ab3}\x{ab5}
@@ -202,92 +207,92 @@ public class XomwLanguage {
 
 //		/**
 //		* Get a cached or new language Object for a given language code
-//		* @param String $code
+//		* @param String code
 //		* @return Language
 //		*/
-//		static function factory($code) {
-//			global $wgDummyLanguageCodes, $wgLangObjCacheSize;
+//		static function factory(code) {
+//			global wgDummyLanguageCodes, wgLangObjCacheSize;
 //
-//			if (isset($wgDummyLanguageCodes[$code])) {
-//				$code = $wgDummyLanguageCodes[$code];
+//			if (isset(wgDummyLanguageCodes[code])) {
+//				code = wgDummyLanguageCodes[code];
 //			}
 //
 //			// get the language Object to process
-//			$langObj = isset(self::$mLangObjCache[$code])
-//				? self::$mLangObjCache[$code]
-//				: self::newFromCode($code);
+//			langObj = isset(XomwLanguage.mLangObjCache[code])
+//				? XomwLanguage.mLangObjCache[code]
+//				: XomwLanguage.newFromCode(code);
 //
 //			// merge the language Object in to get it up front in the cache
-//			self::$mLangObjCache = array_merge([ $code => $langObj ], self::$mLangObjCache);
+//			XomwLanguage.mLangObjCache = array_merge([ code => langObj ], XomwLanguage.mLangObjCache);
 //			// get rid of the oldest ones in case we have an overflow
-//			self::$mLangObjCache = array_slice(self::$mLangObjCache, 0, $wgLangObjCacheSize, true);
+//			XomwLanguage.mLangObjCache = array_slice(XomwLanguage.mLangObjCache, 0, wgLangObjCacheSize, true);
 //
-//			return $langObj;
+//			return langObj;
 //		}
 //
 //		/**
 //		* Create a language Object for a given language code
-//		* @param String $code
+//		* @param String code
 //		* @throws MWException
 //		* @return Language
 //		*/
-//		protected static function newFromCode($code) {
-//			if (!Language::isValidCode($code)) {
-//				throw new MWException("Invalid language code \"$code\"");
+//		protected static function newFromCode(code) {
+//			if (!XomwLanguage.isValidCode(code)) {
+//				throw new MWException("Invalid language code \"code\"");
 //			}
 //
-//			if (!Language::isValidBuiltInCode($code)) {
+//			if (!XomwLanguage.isValidBuiltInCode(code)) {
 //				// It's not possible to customise this code with class files, so
 //				// just return a Language Object. This is to support uselang= hacks.
-//				$lang = new Language;
-//				$lang->setCode($code);
-//				return $lang;
+//				lang = new Language;
+//				lang.setCode(code);
+//				return lang;
 //			}
 //
 //			// Check if there is a language class for the code
-//			$class = self::classFromCode($code);
-//			if (class_exists($class)) {
-//				$lang = new $class;
-//				return $lang;
+//			class = XomwLanguage.classFromCode(code);
+//			if (class_exists(class)) {
+//				lang = new class;
+//				return lang;
 //			}
 //
 //			// Keep trying the fallback list until we find an existing class
-//			$fallbacks = Language::getFallbacksFor($code);
-//			foreach ($fallbacks as $fallbackCode) {
-//				if (!Language::isValidBuiltInCode($fallbackCode)) {
-//					throw new MWException("Invalid fallback '$fallbackCode' in fallback sequence for '$code'");
+//			fallbacks = XomwLanguage.getFallbacksFor(code);
+//			foreach (fallbacks as fallbackCode) {
+//				if (!XomwLanguage.isValidBuiltInCode(fallbackCode)) {
+//					throw new MWException("Invalid fallback 'fallbackCode' in fallback sequence for 'code'");
 //				}
 //
-//				$class = self::classFromCode($fallbackCode);
-//				if (class_exists($class)) {
-//					$lang = new $class;
-//					$lang->setCode($code);
-//					return $lang;
+//				class = XomwLanguage.classFromCode(fallbackCode);
+//				if (class_exists(class)) {
+//					lang = new class;
+//					lang.setCode(code);
+//					return lang;
 //				}
 //			}
 //
-//			throw new MWException("Invalid fallback sequence for language '$code'");
+//			throw new MWException("Invalid fallback sequence for language 'code'");
 //		}
 //
 //		/**
 //		* Checks whether any localisation is available for that language tag
 //		* in MediaWiki (MessagesXx.php exists).
 //		*
-//		* @param String $code Language tag (in lower case)
+//		* @param String code Language tag (in lower case)
 //		* @return boolean Whether language is supported
 //		* @since 1.21
 //		*/
-//		public static function isSupportedLanguage($code) {
-//			if (!self::isValidBuiltInCode($code)) {
+//		public static function isSupportedLanguage(code) {
+//			if (!XomwLanguage.isValidBuiltInCode(code)) {
 //				return false;
 //			}
 //
-//			if ($code == 'qqq') {
+//			if (code == 'qqq') {
 //				return false;
 //			}
 //
-//			return is_readable(self::getMessagesFileName($code)) ||
-//				is_readable(self::getJsonMessagesFileName($code));
+//			return is_readable(XomwLanguage.getMessagesFileName(code)) ||
+//				is_readable(XomwLanguage.getJsonMessagesFileName(code));
 //		}
 //
 //		/**
@@ -299,26 +304,26 @@ public class XomwLanguage {
 //		* Based on regexes by Mark Davis of the Unicode Consortium:
 //		* http://unicode.org/repos/cldr/trunk/tools/java/org/unicode/cldr/util/data/langtagRegex.txt
 //		*
-//		* @param String $code
-//		* @param boolean $lenient Whether to allow '_' as separator. The default is only '-'.
+//		* @param String code
+//		* @param boolean lenient Whether to allow '_' as separator. The default is only '-'.
 //		*
 //		* @return boolean
 //		* @since 1.21
 //		*/
-//		public static function isWellFormedLanguageTag($code, $lenient = false) {
-//			$alpha = '[a-z]';
-//			$digit = '[0-9]';
-//			$alphanum = '[a-z0-9]';
-//			$x = 'x'; # private use singleton
-//			$singleton = '[a-wy-z]'; # other singleton
-//			$s = $lenient ? '[-_]' : '-';
+//		public static function isWellFormedLanguageTag(code, lenient = false) {
+//			alpha = '[a-z]';
+//			digit = '[0-9]';
+//			alphanum = '[a-z0-9]';
+//			x = 'x'; # private use singleton
+//			singleton = '[a-wy-z]'; # other singleton
+//			s = lenient ? '[-_]' : '-';
 //
-//			$language = "$alpha{2,8}|$alpha{2,3}$s$alpha{3}";
-//			$script = "$alpha{4}"; # ISO 15924
-//			$region = "(?:$alpha{2}|$digit{3})"; # ISO 3166-1 alpha-2 or UN M.49
-//			$variant = "(?:$alphanum{5,8}|$digit$alphanum{3})";
-//			$extension = "$singleton(?:$s$alphanum{2,8})+";
-//			$privateUse = "$x(?:$s$alphanum{1,8})+";
+//			language = "alpha{2,8}|alpha{2,3}salpha{3}";
+//			script = "alpha{4}"; # ISO 15924
+//			region = "(?:alpha{2}|digit{3})"; # ISO 3166-1 alpha-2 or UN M.49
+//			variant = "(?:alphanum{5,8}|digitalphanum{3})";
+//			extension = "singleton(?:salphanum{2,8})+";
+//			privateUse = "x(?:salphanum{1,8})+";
 //
 //			# Define certain grandfathered codes, since otherwise the regex is pretty useless.
 //			# Since these are limited, this is safe even later changes to the registry --
@@ -326,28 +331,28 @@ public class XomwLanguage {
 //			# the results from the capturing groups.
 //			# https://www.iana.org/assignments/language-subtag-registry
 //
-//			$grandfathered = "en{$s}GB{$s}oed"
-//				. "|i{$s}(?:ami|bnn|default|enochian|hak|klingon|lux|mingo|navajo|pwn|tao|tay|tsu)"
-//				. "|no{$s}(?:bok|nyn)"
-//				. "|sgn{$s}(?:BE{$s}(?:fr|nl)|CH{$s}de)"
-//				. "|zh{$s}min{$s}nan";
+//			grandfathered = "en{s}GB{s}oed"
+//				. "|i{s}(?:ami|bnn|default|enochian|hak|klingon|lux|mingo|navajo|pwn|tao|tay|tsu)"
+//				. "|no{s}(?:bok|nyn)"
+//				. "|sgn{s}(?:BE{s}(?:fr|nl)|CH{s}de)"
+//				. "|zh{s}min{s}nan";
 //
-//			$variantList = "$variant(?:$s$variant)*";
-//			$extensionList = "$extension(?:$s$extension)*";
+//			variantList = "variant(?:svariant)*";
+//			extensionList = "extension(?:sextension)*";
 //
-//			$langtag = "(?:($language)"
-//				. "(?:$s$script)?"
-//				. "(?:$s$region)?"
-//				. "(?:$s$variantList)?"
-//				. "(?:$s$extensionList)?"
-//				. "(?:$s$privateUse)?)";
+//			langtag = "(?:(language)"
+//				. "(?:sscript)?"
+//				. "(?:sregion)?"
+//				. "(?:svariantList)?"
+//				. "(?:sextensionList)?"
+//				. "(?:sprivateUse)?)";
 //
 //			# The final breakdown, with capturing groups for each of these components
 //			# The variants, extensions, grandfathered, and private-use may have interior '-'
 //
-//			$root = "^(?:$langtag|$privateUse|$grandfathered)$";
+//			root = "^(?:langtag|privateUse|grandfathered)";
 //
-//			return (boolean)preg_match("/$root/", strtolower($code));
+//			return (boolean)preg_match("/root/", strtolower(code));
 //		}
 //
 //		/**
@@ -355,108 +360,111 @@ public class XomwLanguage {
 //		* not it exists. This includes codes which are used solely for
 //		* customisation via the MediaWiki namespace.
 //		*
-//		* @param String $code
+//		* @param String code
 //		*
 //		* @return boolean
 //		*/
-//		public static function isValidCode($code) {
-//			static $cache = [];
-//			if (!isset($cache[$code])) {
+//		public static function isValidCode(code) {
+//			static cache = [];
+//			if (!isset(cache[code])) {
 //				// People think language codes are html safe, so enforce it.
 //				// Ideally we should only allow a-zA-Z0-9-
 //				// but, .+ and other chars are often used for {{int:}} hacks
 //				// see bugs T39564, T39587, T38938
-//				$cache[$code] =
+//				cache[code] =
 //					// Protect against path traversal
-//					strcspn($code, ":/\\\000&<>'\"") == strlen($code)
-//					&& !preg_match(MediaWikiTitleCodec::getTitleInvalidRegex(), $code);
+//					strcspn(code, ":/\\\000&<>'\"") == strlen(code)
+//					&& !preg_match(MediaWikiTitleCodec::getTitleInvalidRegex(), code);
 //			}
-//			return $cache[$code];
+//			return cache[code];
 //		}
-//
-//		/**
-//		* Returns true if a language code is of a valid form for the purposes of
-//		* @gplx.Internal protected customisation of MediaWiki, via Messages*.php or *.json.
-//		*
-//		* @param String $code
-//		*
-//		* @throws MWException
-//		* @since 1.18
-//		* @return boolean
-//		*/
-//		public static function isValidBuiltInCode($code) {
-//
-//			if (!is_string($code)) {
-//				if (is_object($code)) {
-//					$addmsg = " of class " . get_class($code);
+
+	/**
+	* Returns true if a language code is of a valid form for the purposes of
+	* @gplx.Internal protected customisation of MediaWiki, via Messages*.php or *.json.
+	*
+	* @param String code
+	*
+	* @throws MWException
+	* @since 1.18
+	* @return boolean
+	*/
+	public static boolean isValidBuiltInCode(String code) {
+
+		if (!XophpString_.is_string(code)) {
+//				if (XophpObject.is_object(code)) {
+//					addmsg = " of class " . get_class(code);
 //				} else {
-//					$addmsg = '';
+//					addmsg = "";
 //				}
-//				$type = gettype($code);
-//				throw new MWException(__METHOD__ . " must be passed a String, $type given$addmsg");
-//			}
-//
-//			return (boolean)preg_match('/^[a-z0-9-]{2,}$/', $code);
-//		}
+//				type = gettype(code);
+			String addmsg = "";
+			String type = "";
+			throw XomwMWException.New_by_method(XomwLanguage.class, "isValidBuildInCode", " must be passed a String, " + type + " given " + addmsg);
+		}
+
+		return XophpRegex_.preg_match_bool(Regx_adp_.new_("^[a-z0-9-]{2,}"), code, null, 0, 0);
+	}
 //
 //		/**
 //		* Returns true if a language code is an IETF tag known to MediaWiki.
 //		*
-//		* @param String $tag
+//		* @param String tag
 //		*
 //		* @since 1.21
 //		* @return boolean
 //		*/
-//		public static function isKnownLanguageTag($tag) {
+//		public static function isKnownLanguageTag(tag) {
 //			// Quick escape for invalid input to avoid exceptions down the line
 //			// when code tries to process tags which are not valid at all.
-//			if (!self::isValidBuiltInCode($tag)) {
+//			if (!XomwLanguage.isValidBuiltInCode(tag)) {
 //				return false;
 //			}
 //
-//			if (isset(MediaWiki\Languages\Data\Names::$names[$tag])
-//				|| self::fetchLanguageName($tag, $tag) != ''
+//			if (isset(MediaWiki\Languages\Data\Names::names[tag])
+//				|| XomwLanguage.fetchLanguageName(tag, tag) != ''
 //			) {
 //				return true;
 //			}
 //
 //			return false;
 //		}
-//
-//		/**
-//		* Get the LocalisationCache instance
-//		*
-//		* @return LocalisationCache
-//		*/
-//		public static function getLocalisationCache() {
-//			if (is_null(self::$dataCache)) {
-//				global $wgLocalisationCacheConf;
-//				$class = $wgLocalisationCacheConf['class'];
-//				self::$dataCache = new $class($wgLocalisationCacheConf);
+
+	/**
+	* Get the LocalisationCache instance
+	*
+	* @return LocalisationCache
+	*/
+	public static XomwLocalisationCache getLocalisationCache() {
+//			if (is_null(XomwLanguage.dataCache)) {
+//				global wgLocalisationCacheConf;
+//				class = wgLocalisationCacheConf['class'];
+//				XomwLanguage.dataCache = new class(wgLocalisationCacheConf);
 //			}
-//			return self::$dataCache;
-//		}
+		return XomwLanguage.dataCache;
+	}
 
 //		function __construct() {
-//			this.mConverter = new FakeConverter($this);
+//			this.mConverter = new FakeConverter(this);
 //			// Set the code to the name of the descendant
-//			if (get_class($this) == 'Language') {
+//			if (get_class(this) == 'Language') {
 //				this.mCode = 'en';
 //			} else {
-//				this.mCode = str_replace('_', '-', strtolower(substr(get_class($this), 8)));
+//				this.mCode = str_replace('_', '-', strtolower(substr(get_class(this), 8)));
 //			}
-//			self::getLocalisationCache();
+//			XomwLanguage.getLocalisationCache();
 //		}
 	public XomwLanguage(Xol_lang_itm xoLang) {
 		this.xoLang = xoLang;
+		this.mCode = xoLang.Key_str();
 	}
 
 //		/**
 //		* Reduce memory usage
 //		*/
 //		function __destruct() {
-//			foreach ($this as $name => $value) {
-//				unset(this.$name);
+//			foreach (this as name => value) {
+//				unset(this.name);
 //			}
 //		}
 //
@@ -472,15 +480,15 @@ public class XomwLanguage {
 //		* @since 1.19
 //		*/
 //		public function getFallbackLanguages() {
-//			return self::getFallbacksFor(this.mCode);
+//			return XomwLanguage.getFallbacksFor(this.mCode);
 //		}
 //
 //		/**
-//		* Exports $wgBookstoreListEn
+//		* Exports wgBookstoreListEn
 //		* @return array
 //		*/
 //		public function getBookstoreList() {
-//			return self::$dataCache->getItem(this.mCode, 'bookstoreList');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'bookstoreList');
 //		}
 
 	/**
@@ -491,28 +499,28 @@ public class XomwLanguage {
 	*/
 	public XomwNamespacesById getNamespaces() {
 		if (this.namespaceNames == null) {
-//				global $wgMetaNamespace, $wgMetaNamespaceTalk, $wgExtraNamespaces;
+//				global wgMetaNamespace, wgMetaNamespaceTalk, wgExtraNamespaces;
 //
 			XomwNamespacesById validNamespaces = XomwNamespace.getCanonicalNamespaces();
 //
-//				this.namespaceNames = $wgExtraNamespaces +
-//					self::$dataCache->getItem(this.mCode, 'namespaceNames');
-//				this.namespaceNames += $validNamespaces;
+//				this.namespaceNames = wgExtraNamespaces +
+//					XomwLanguage.dataCache.getItem(this.mCode, 'namespaceNames');
+//				this.namespaceNames += validNamespaces;
 			this.namespaceNames = validNamespaces;
 
-//				this.namespaceNames[NS_PROJECT] = $wgMetaNamespace;
-//				if ($wgMetaNamespaceTalk) {
-//					this.namespaceNames[NS_PROJECT_TALK] = $wgMetaNamespaceTalk;
+//				this.namespaceNames[NS_PROJECT] = wgMetaNamespace;
+//				if (wgMetaNamespaceTalk) {
+//					this.namespaceNames[NS_PROJECT_TALK] = wgMetaNamespaceTalk;
 //				} else {
-//					$talk = this.namespaceNames[NS_PROJECT_TALK];
+//					talk = this.namespaceNames[NS_PROJECT_TALK];
 //					this.namespaceNames[NS_PROJECT_TALK] =
-//						this.fixVariableInNamespace($talk);
+//						this.fixVariableInNamespace(talk);
 //				}
 //
 //				# Sometimes a language will be localised but not actually exist on this wiki.
-//				foreach (this.namespaceNames as $key => $text) {
-//					if (!isset($validNamespaces[$key])) {
-//						unset(this.namespaceNames[$key]);
+//				foreach (this.namespaceNames as key => text) {
+//					if (!isset(validNamespaces[key])) {
+//						unset(this.namespaceNames[key]);
 //					}
 //				}
 //
@@ -528,10 +536,10 @@ public class XomwLanguage {
 
 //		/**
 //		* Arbitrarily set all of the namespace names at once. Mainly used for testing
-//		* @param array $namespaces Array of namespaces (id => name)
+//		* @param array namespaces Array of namespaces (id => name)
 //		*/
-//		public function setNamespaces(array $namespaces) {
-//			this.namespaceNames = $namespaces;
+//		public function setNamespaces(array namespaces) {
+//			this.namespaceNames = namespaces;
 //			this.mNamespaceIds = null;
 //		}
 //
@@ -551,22 +559,22 @@ public class XomwLanguage {
 //		* @return array
 //		*/
 //		public function getFormattedNamespaces() {
-//			$ns = this.getNamespaces();
-//			foreach ($ns as $k => $v) {
-//				$ns[$k] = strtr($v, '_', ' ');
+//			ns = this.getNamespaces();
+//			foreach (ns as k => v) {
+//				ns[k] = strtr(v, '_', ' ');
 //			}
-//			return $ns;
+//			return ns;
 //		}
 
 	/**
 	* Get a namespace value by key
 	*
 	* <code>
-	* $mw_ns = $wgContLang->getNsText(NS_MEDIAWIKI);
-	* echo $mw_ns; // prints 'MediaWiki'
+	* mw_ns = wgContLang.getNsText(NS_MEDIAWIKI);
+	* echo mw_ns; // prints 'MediaWiki'
 	* </code>
 	*
-	* @param int $index The array key of the namespace to return
+	* @param int index The array key of the namespace to return
 	* @return String|boolean String if the namespace value exists, otherwise false
 	*/
 	public byte[] getNsText(int index) {
@@ -580,54 +588,54 @@ public class XomwLanguage {
 //		* producing output.
 //		*
 //		* <code>
-//		* $mw_ns = $wgContLang->getFormattedNsText(NS_MEDIAWIKI_TALK);
-//		* echo $mw_ns; // prints 'MediaWiki talk'
+//		* mw_ns = wgContLang.getFormattedNsText(NS_MEDIAWIKI_TALK);
+//		* echo mw_ns; // prints 'MediaWiki talk'
 //		* </code>
 //		*
-//		* @param int $index The array key of the namespace to return
+//		* @param int index The array key of the namespace to return
 //		* @return String Namespace name without underscores (empty String if namespace does not exist)
 //		*/
-//		public function getFormattedNsText($index) {
-//			$ns = this.getNsText($index);
-//			return strtr($ns, '_', ' ');
+//		public function getFormattedNsText(index) {
+//			ns = this.getNsText(index);
+//			return strtr(ns, '_', ' ');
 //		}
 //
 //		/**
 //		* Returns gender-dependent namespace alias if available.
-//		* See https://www.mediawiki.org/wiki/Manual:$wgExtraGenderNamespaces
-//		* @param int $index Namespace index
-//		* @param String $gender Gender key (male, female...)
+//		* See https://www.mediawiki.org/wiki/Manual:wgExtraGenderNamespaces
+//		* @param int index Namespace index
+//		* @param String gender Gender key (male, female...)
 //		* @return String
 //		* @since 1.18
 //		*/
-//		public function getGenderNsText($index, $gender) {
-//			global $wgExtraGenderNamespaces;
+//		public function getGenderNsText(index, gender) {
+//			global wgExtraGenderNamespaces;
 //
-//			$ns = $wgExtraGenderNamespaces +
-//				(array)self::$dataCache->getItem(this.mCode, 'namespaceGenderAliases');
+//			ns = wgExtraGenderNamespaces +
+//				(array)XomwLanguage.dataCache.getItem(this.mCode, 'namespaceGenderAliases');
 //
-//			return isset($ns[$index][$gender]) ? $ns[$index][$gender] : this.getNsText($index);
+//			return isset(ns[index][gender]) ? ns[index][gender] : this.getNsText(index);
 //		}
 //
 //		/**
 //		* Whether this language uses gender-dependent namespace aliases.
-//		* See https://www.mediawiki.org/wiki/Manual:$wgExtraGenderNamespaces
+//		* See https://www.mediawiki.org/wiki/Manual:wgExtraGenderNamespaces
 //		* @return boolean
 //		* @since 1.18
 //		*/
 //		public function needsGenderDistinction() {
-//			global $wgExtraGenderNamespaces, $wgExtraNamespaces;
-//			if (count($wgExtraGenderNamespaces) > 0) {
-//				// $wgExtraGenderNamespaces overrides everything
+//			global wgExtraGenderNamespaces, wgExtraNamespaces;
+//			if (count(wgExtraGenderNamespaces) > 0) {
+//				// wgExtraGenderNamespaces overrides everything
 //				return true;
-//			} elseif (isset($wgExtraNamespaces[NS_USER]) && isset($wgExtraNamespaces[NS_USER_TALK])) {
+//			} elseif (isset(wgExtraNamespaces[NS_USER]) && isset(wgExtraNamespaces[NS_USER_TALK])) {
 //				/// @todo There may be other gender namespace than NS_USER & NS_USER_TALK in the future
-//				// $wgExtraNamespaces overrides any gender aliases specified in i18n files
+//				// wgExtraNamespaces overrides any gender aliases specified in i18n files
 //				return false;
 //			} else {
 //				// Check what is in i18n files
-//				$aliases = self::$dataCache->getItem(this.mCode, 'namespaceGenderAliases');
-//				return count($aliases) > 0;
+//				aliases = XomwLanguage.dataCache.getItem(this.mCode, 'namespaceGenderAliases');
+//				return count(aliases) > 0;
 //			}
 //		}
 //
@@ -636,13 +644,13 @@ public class XomwLanguage {
 //		* Only matches namespace names for the current language, not the
 //		* canonical ones defined in Namespace.php.
 //		*
-//		* @param String $text
-//		* @return int|boolean An integer if $text is a valid value otherwise false
+//		* @param String text
+//		* @return int|boolean An integer if text is a valid value otherwise false
 //		*/
-//		function getLocalNsIndex($text) {
-//			$lctext = this.lc($text);
-//			$ids = this.getNamespaceIds();
-//			return isset($ids[$lctext]) ? $ids[$lctext] : false;
+//		function getLocalNsIndex(text) {
+//			lctext = this.lc(text);
+//			ids = this.getNamespaceIds();
+//			return isset(ids[lctext]) ? ids[lctext] : false;
 //		}
 
 	/**
@@ -652,40 +660,40 @@ public class XomwLanguage {
 		if (this.namespaceAliases == null) {
 			// XO.MW: MW uses two sets: "aliases" + "convertedNames" and then combines them; XO just uses one
 			this.namespaceAliases = new XomwNamespacesByName();
-//				$aliases = self::$dataCache->getItem(this.mCode, 'namespaceAliases');
-//				if (!$aliases) {
-//					$aliases = [];
+//				aliases = XomwLanguage.dataCache.getItem(this.mCode, 'namespaceAliases');
+//				if (!aliases) {
+//					aliases = [];
 //				} else {
-//					foreach ($aliases as $name => $index) {
-//						if ($index == NS_PROJECT_TALK) {
-//							unset($aliases[$name]);
-//							$name = this.fixVariableInNamespace($name);
-//							$aliases[$name] = $index;
+//					foreach (aliases as name => index) {
+//						if (index == NS_PROJECT_TALK) {
+//							unset(aliases[name]);
+//							name = this.fixVariableInNamespace(name);
+//							aliases[name] = index;
 //						}
 //					}
 //				}
 //
-//				global $wgExtraGenderNamespaces;
-//				$genders = $wgExtraGenderNamespaces +
-//					(array)self::$dataCache->getItem(this.mCode, 'namespaceGenderAliases');
-//				foreach ($genders as $index => $forms) {
-//					foreach ($forms as $alias) {
-//						$aliases[$alias] = $index;
+//				global wgExtraGenderNamespaces;
+//				genders = wgExtraGenderNamespaces +
+//					(array)XomwLanguage.dataCache.getItem(this.mCode, 'namespaceGenderAliases');
+//				foreach (genders as index => forms) {
+//					foreach (forms as alias) {
+//						aliases[alias] = index;
 //					}
 //				}
 
 			// Also add converted namespace names as aliases, to avoid confusion.
-//				$convertedNames = [];
-//				foreach (this.getVariants() as $variant) {
-//					if ($variant == this.mCode) {
+//				convertedNames = [];
+//				foreach (this.getVariants() as variant) {
+//					if (variant == this.mCode) {
 //						continue;
 //					}
-//					foreach (this.getNamespaces() as $ns => $_) {
-//						$convertedNames[this.getConverter()->convertNamespace($ns, $variant)] = $ns;
+//					foreach (this.getNamespaces() as ns => _) {
+//						convertedNames[this.getConverter().convertNamespace(ns, variant)] = ns;
 //					}
 //				}
 //
-//				this.namespaceAliases = $aliases + $convertedNames;
+//				this.namespaceAliases = aliases + convertedNames;
 		}
 
 		return this.namespaceAliases;
@@ -727,8 +735,8 @@ public class XomwLanguage {
 	* Get a namespace key by value, case insensitive.  Canonical namespace
 	* @Override names custom ones defined for the current language.
 	*
-	* @param String $text
-	* @return int|boolean An integer if $text is a valid value otherwise false
+	* @param String text
+	* @return int|boolean An integer if text is a valid value otherwise false
 	*/
 	public int getNsIndex(byte[] text) {
 		byte[] lctext = this.lc(text);
@@ -743,21 +751,21 @@ public class XomwLanguage {
 //		/**
 //		* short names for language variants used for language conversion links.
 //		*
-//		* @param String $code
-//		* @param boolean $usemsg Use the "variantname-xyz" message if it exists
+//		* @param String code
+//		* @param boolean usemsg Use the "variantname-xyz" message if it exists
 //		* @return String
 //		*/
-//		public function getVariantname($code, $usemsg = true) {
-//			$msg = "variantname-$code";
-//			if ($usemsg && wfMessage($msg)->exists()) {
-//				return this.getMessageFromDB($msg);
+//		public function getVariantname(code, usemsg = true) {
+//			msg = "variantname-code";
+//			if (usemsg && wfMessage(msg).exists()) {
+//				return this.getMessageFromDB(msg);
 //			}
-//			$name = self::fetchLanguageName($code);
-//			if ($name) {
-//				return $name; # if it's defined as a language name, show that
+//			name = XomwLanguage.fetchLanguageName(code);
+//			if (name) {
+//				return name; # if it's defined as a language name, show that
 //			} else {
 //				# otherwise, output the language code
-//				return $code;
+//				return code;
 //			}
 //		}
 //
@@ -765,26 +773,26 @@ public class XomwLanguage {
 //		* @return array
 //		*/
 //		public function getDatePreferences() {
-//			return self::$dataCache->getItem(this.mCode, 'datePreferences');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'datePreferences');
 //		}
 //
 //		/**
 //		* @return array
 //		*/
 //		function getDateFormats() {
-//			return self::$dataCache->getItem(this.mCode, 'dateFormats');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'dateFormats');
 //		}
 //
 //		/**
 //		* @return array|String
 //		*/
 //		public function getDefaultDateFormat() {
-//			$df = self::$dataCache->getItem(this.mCode, 'defaultDateFormat');
-//			if ($df == 'dmy or mdy') {
-//				global $wgAmericanDates;
-//				return $wgAmericanDates ? 'mdy' : 'dmy';
+//			df = XomwLanguage.dataCache.getItem(this.mCode, 'defaultDateFormat');
+//			if (df == 'dmy or mdy') {
+//				global wgAmericanDates;
+//				return wgAmericanDates ? 'mdy' : 'dmy';
 //			} else {
-//				return $df;
+//				return df;
 //			}
 //		}
 //
@@ -792,15 +800,15 @@ public class XomwLanguage {
 //		* @return array
 //		*/
 //		public function getDatePreferenceMigrationMap() {
-//			return self::$dataCache->getItem(this.mCode, 'datePreferenceMigrationMap');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'datePreferenceMigrationMap');
 //		}
 //
 //		/**
-//		* @param String $image
+//		* @param String image
 //		* @return array|null
 //		*/
-//		function getImageFile($image) {
-//			return self::$dataCache->getSubitem(this.mCode, 'imageFiles', $image);
+//		function getImageFile(image) {
+//			return XomwLanguage.dataCache.getSubitem(this.mCode, 'imageFiles', image);
 //		}
 //
 //		/**
@@ -808,258 +816,258 @@ public class XomwLanguage {
 //		* @since 1.24
 //		*/
 //		public function getImageFiles() {
-//			return self::$dataCache->getItem(this.mCode, 'imageFiles');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'imageFiles');
 //		}
 //
 //		/**
 //		* @return array
 //		*/
 //		public function getExtraUserToggles() {
-//			return (array)self::$dataCache->getItem(this.mCode, 'extraUserToggles');
+//			return (array)XomwLanguage.dataCache.getItem(this.mCode, 'extraUserToggles');
 //		}
 //
 //		/**
-//		* @param String $tog
+//		* @param String tog
 //		* @return String
 //		*/
-//		function getUserToggle($tog) {
-//			return this.getMessageFromDB("tog-$tog");
+//		function getUserToggle(tog) {
+//			return this.getMessageFromDB("tog-tog");
 //		}
 //
 //		/**
 //		* Get an array of language names, indexed by code.
-//		* @param null|String $inLanguage Code of language in which to return the names
+//		* @param null|String inLanguage Code of language in which to return the names
 //		*		Use null for autonyms (native names)
-//		* @param String $include One of:
+//		* @param String include One of:
 //		*		'all' all available languages
 //		*		'mw' only if the language is defined in MediaWiki or wgExtraLanguageNames (default)
 //		*		'mwfile' only if the language is in 'mw' *and* has a message file
 //		* @return array Language code => language name
 //		* @since 1.20
 //		*/
-//		public static function fetchLanguageNames($inLanguage = null, $include = 'mw') {
-//			$cacheKey = $inLanguage == null ? 'null' : $inLanguage;
-//			$cacheKey .= ":$include";
-//			if (self::$languageNameCache == null) {
-//				self::$languageNameCache = new HashBagOStuff([ 'maxKeys' => 20 ]);
+//		public static function fetchLanguageNames(inLanguage = null, include = 'mw') {
+//			cacheKey = inLanguage == null ? 'null' : inLanguage;
+//			cacheKey .= ":include";
+//			if (XomwLanguage.languageNameCache == null) {
+//				XomwLanguage.languageNameCache = new HashBagOStuff([ 'maxKeys' => 20 ]);
 //			}
 //
-//			$ret = self::$languageNameCache->get($cacheKey);
-//			if (!$ret) {
-//				$ret = self::fetchLanguageNamesUncached($inLanguage, $include);
-//				self::$languageNameCache->set($cacheKey, $ret);
+//			ret = XomwLanguage.languageNameCache.get(cacheKey);
+//			if (!ret) {
+//				ret = XomwLanguage.fetchLanguageNamesUncached(inLanguage, include);
+//				XomwLanguage.languageNameCache.set(cacheKey, ret);
 //			}
-//			return $ret;
+//			return ret;
 //		}
 //
 //		/**
 //		* Uncached helper for fetchLanguageNames
-//		* @param null|String $inLanguage Code of language in which to return the names
+//		* @param null|String inLanguage Code of language in which to return the names
 //		*		Use null for autonyms (native names)
-//		* @param String $include One of:
+//		* @param String include One of:
 //		*		'all' all available languages
 //		*		'mw' only if the language is defined in MediaWiki or wgExtraLanguageNames (default)
 //		*		'mwfile' only if the language is in 'mw' *and* has a message file
 //		* @return array Language code => language name
 //		*/
-//		private static function fetchLanguageNamesUncached($inLanguage = null, $include = 'mw') {
-//			global $wgExtraLanguageNames;
+//		private static function fetchLanguageNamesUncached(inLanguage = null, include = 'mw') {
+//			global wgExtraLanguageNames;
 //
 //			// If passed an invalid language code to use, fallback to en
-//			if ($inLanguage != null && !Language::isValidCode($inLanguage)) {
-//				$inLanguage = 'en';
+//			if (inLanguage != null && !XomwLanguage.isValidCode(inLanguage)) {
+//				inLanguage = 'en';
 //			}
 //
-//			$names = [];
+//			names = [];
 //
-//			if ($inLanguage) {
-//				# TODO: also include when $inLanguage is null, when this code is more efficient
-//				Hooks::run('LanguageGetTranslatedLanguageNames', [ &$names, $inLanguage ]);
+//			if (inLanguage) {
+//				# TODO: also include when inLanguage is null, when this code is more efficient
+//				Hooks::run('LanguageGetTranslatedLanguageNames', [ &names, inLanguage ]);
 //			}
 //
-//			$mwNames = $wgExtraLanguageNames + MediaWiki\Languages\Data\Names::$names;
-//			foreach ($mwNames as $mwCode => $mwName) {
+//			mwNames = wgExtraLanguageNames + MediaWiki\Languages\Data\Names::names;
+//			foreach (mwNames as mwCode => mwName) {
 //				# - Prefer own MediaWiki native name when not using the hook
 //				# - For other names just add if not added through the hook
-//				if ($mwCode == $inLanguage || !isset($names[$mwCode])) {
-//					$names[$mwCode] = $mwName;
+//				if (mwCode == inLanguage || !isset(names[mwCode])) {
+//					names[mwCode] = mwName;
 //				}
 //			}
 //
-//			if ($include == 'all') {
-//				ksort($names);
-//				return $names;
+//			if (include == 'all') {
+//				ksort(names);
+//				return names;
 //			}
 //
-//			$returnMw = [];
-//			$coreCodes = array_keys($mwNames);
-//			foreach ($coreCodes as $coreCode) {
-//				$returnMw[$coreCode] = $names[$coreCode];
+//			returnMw = [];
+//			coreCodes = array_keys(mwNames);
+//			foreach (coreCodes as coreCode) {
+//				returnMw[coreCode] = names[coreCode];
 //			}
 //
-//			if ($include == 'mwfile') {
-//				$namesMwFile = [];
+//			if (include == 'mwfile') {
+//				namesMwFile = [];
 //				# We do this using a foreach over the codes instead of a directory
 //				# loop so that messages files in extensions will work correctly.
-//				foreach ($returnMw as $code => $value) {
-//					if (is_readable(self::getMessagesFileName($code))
-//						|| is_readable(self::getJsonMessagesFileName($code))
+//				foreach (returnMw as code => value) {
+//					if (is_readable(XomwLanguage.getMessagesFileName(code))
+//						|| is_readable(XomwLanguage.getJsonMessagesFileName(code))
 //					) {
-//						$namesMwFile[$code] = $names[$code];
+//						namesMwFile[code] = names[code];
 //					}
 //				}
 //
-//				ksort($namesMwFile);
-//				return $namesMwFile;
+//				ksort(namesMwFile);
+//				return namesMwFile;
 //			}
 //
-//			ksort($returnMw);
+//			ksort(returnMw);
 //			# 'mw' option; default if it's not one of the other two options (all/mwfile)
-//			return $returnMw;
+//			return returnMw;
 //		}
 //
 //		/**
-//		* @param String $code The code of the language for which to get the name
-//		* @param null|String $inLanguage Code of language in which to return the name (null for autonyms)
-//		* @param String $include 'all', 'mw' or 'mwfile'; see fetchLanguageNames()
+//		* @param String code The code of the language for which to get the name
+//		* @param null|String inLanguage Code of language in which to return the name (null for autonyms)
+//		* @param String include 'all', 'mw' or 'mwfile'; see fetchLanguageNames()
 //		* @return String Language name or empty
 //		* @since 1.20
 //		*/
-//		public static function fetchLanguageName($code, $inLanguage = null, $include = 'all') {
-//			$code = strtolower($code);
-//			$array = self::fetchLanguageNames($inLanguage, $include);
-//			return !array_key_exists($code, $array) ? '' : $array[$code];
+//		public static function fetchLanguageName(code, inLanguage = null, include = 'all') {
+//			code = strtolower(code);
+//			array = XomwLanguage.fetchLanguageNames(inLanguage, include);
+//			return !array_key_exists(code, array) ? '' : array[code];
 //		}
 //
 //		/**
 //		* Get a message from the MediaWiki namespace.
 //		*
-//		* @param String $msg Message name
+//		* @param String msg Message name
 //		* @return String
 //		*/
-//		public function getMessageFromDB($msg) {
-//			return this.msg($msg)->text();
+//		public function getMessageFromDB(msg) {
+//			return this.msg(msg).text();
 //		}
 //
 //		/**
 //		* Get message Object in this language. Only for use inside this class.
 //		*
-//		* @param String $msg Message name
+//		* @param String msg Message name
 //		* @return Message
 //		*/
-//		protected function msg($msg) {
-//			return wfMessage($msg)->inLanguage($this);
+//		protected function msg(msg) {
+//			return wfMessage(msg).inLanguage(this);
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		public function getMonthName($key) {
-//			return this.getMessageFromDB(self::$mMonthMsgs[$key - 1]);
+//		public function getMonthName(key) {
+//			return this.getMessageFromDB(XomwLanguage.mMonthMsgs[key - 1]);
 //		}
 //
 //		/**
 //		* @return array
 //		*/
 //		public function getMonthNamesArray() {
-//			$monthNames = [ '' ];
-//			for ($i = 1; $i < 13; $i++) {
-//				$monthNames[] = this.getMonthName($i);
+//			monthNames = [ '' ];
+//			for (i = 1; i < 13; i++) {
+//				monthNames[] = this.getMonthName(i);
 //			}
-//			return $monthNames;
+//			return monthNames;
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		public function getMonthNameGen($key) {
-//			return this.getMessageFromDB(self::$mMonthGenMsgs[$key - 1]);
+//		public function getMonthNameGen(key) {
+//			return this.getMessageFromDB(XomwLanguage.mMonthGenMsgs[key - 1]);
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		public function getMonthAbbreviation($key) {
-//			return this.getMessageFromDB(self::$mMonthAbbrevMsgs[$key - 1]);
+//		public function getMonthAbbreviation(key) {
+//			return this.getMessageFromDB(XomwLanguage.mMonthAbbrevMsgs[key - 1]);
 //		}
 //
 //		/**
 //		* @return array
 //		*/
 //		public function getMonthAbbreviationsArray() {
-//			$monthNames = [ '' ];
-//			for ($i = 1; $i < 13; $i++) {
-//				$monthNames[] = this.getMonthAbbreviation($i);
+//			monthNames = [ '' ];
+//			for (i = 1; i < 13; i++) {
+//				monthNames[] = this.getMonthAbbreviation(i);
 //			}
-//			return $monthNames;
+//			return monthNames;
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		public function getWeekdayName($key) {
-//			return this.getMessageFromDB(self::$mWeekdayMsgs[$key - 1]);
+//		public function getWeekdayName(key) {
+//			return this.getMessageFromDB(XomwLanguage.mWeekdayMsgs[key - 1]);
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		function getWeekdayAbbreviation($key) {
-//			return this.getMessageFromDB(self::$mWeekdayAbbrevMsgs[$key - 1]);
+//		function getWeekdayAbbreviation(key) {
+//			return this.getMessageFromDB(XomwLanguage.mWeekdayAbbrevMsgs[key - 1]);
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		function getIranianCalendarMonthName($key) {
-//			return this.getMessageFromDB(self::$mIranianCalendarMonthMsgs[$key - 1]);
+//		function getIranianCalendarMonthName(key) {
+//			return this.getMessageFromDB(XomwLanguage.mIranianCalendarMonthMsgs[key - 1]);
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		function getHebrewCalendarMonthName($key) {
-//			return this.getMessageFromDB(self::$mHebrewCalendarMonthMsgs[$key - 1]);
+//		function getHebrewCalendarMonthName(key) {
+//			return this.getMessageFromDB(XomwLanguage.mHebrewCalendarMonthMsgs[key - 1]);
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		function getHebrewCalendarMonthNameGen($key) {
-//			return this.getMessageFromDB(self::$mHebrewCalendarMonthGenMsgs[$key - 1]);
+//		function getHebrewCalendarMonthNameGen(key) {
+//			return this.getMessageFromDB(XomwLanguage.mHebrewCalendarMonthGenMsgs[key - 1]);
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		function getHijriCalendarMonthName($key) {
-//			return this.getMessageFromDB(self::$mHijriCalendarMonthMsgs[$key - 1]);
+//		function getHijriCalendarMonthName(key) {
+//			return this.getMessageFromDB(XomwLanguage.mHijriCalendarMonthMsgs[key - 1]);
 //		}
 //
 //		/**
-//		* Pass through result from $dateTimeObj->format()
-//		* @param DateTime|boolean|null &$dateTimeObj
-//		* @param String $ts
-//		* @param DateTimeZone|boolean|null $zone
-//		* @param String $code
+//		* Pass through result from dateTimeObj.format()
+//		* @param DateTime|boolean|null &dateTimeObj
+//		* @param String ts
+//		* @param DateTimeZone|boolean|null zone
+//		* @param String code
 //		* @return String
 //		*/
-//		private static function dateTimeObjFormat(&$dateTimeObj, $ts, $zone, $code) {
-//			if (!$dateTimeObj) {
-//				$dateTimeObj = DateTime::createFromFormat(
-//					'YmdHis', $ts, $zone ?: new DateTimeZone('UTC')
+//		private static function dateTimeObjFormat(&dateTimeObj, ts, zone, code) {
+//			if (!dateTimeObj) {
+//				dateTimeObj = DateTime::createFromFormat(
+//					'YmdHis', ts, zone ?: new DateTimeZone('UTC')
 //				);
 //			}
-//			return $dateTimeObj->format($code);
+//			return dateTimeObj.format(code);
 //		}
 //
 //		/**
@@ -1117,491 +1125,491 @@ public class XomwLanguage {
 //		*
 //		* Input timestamp is assumed to be pre-normalized to the desired local
 //		* time zone, if any. Note that the format characters crUeIOPTZ will assume
-//		* $ts is UTC if $zone is not given.
+//		* ts is UTC if zone is not given.
 //		*
-//		* @param String $format
-//		* @param String $ts 14-character timestamp
+//		* @param String format
+//		* @param String ts 14-character timestamp
 //		*      YYYYMMDDHHMMSS
 //		*      01234567890123
-//		* @param DateTimeZone $zone Timezone of $ts
-//		* @param[out] int $ttl The amount of time (in seconds) the output may be cached for.
-//		* Only makes sense if $ts is the current time.
+//		* @param DateTimeZone zone Timezone of ts
+//		* @param[out] int ttl The amount of time (in seconds) the output may be cached for.
+//		* Only makes sense if ts is the current time.
 //		* @todo handling of "o" format character for Iranian, Hebrew, Hijri & Thai?
 //		*
 //		* @throws MWException
 //		* @return String
 //		*/
-//		public function sprintfDate($format, $ts, DateTimeZone $zone = null, &$ttl = 'unused') {
-//			$s = '';
-//			$raw = false;
-//			$roman = false;
-//			$hebrewNum = false;
-//			$dateTimeObj = false;
-//			$rawToggle = false;
-//			$iranian = false;
-//			$hebrew = false;
-//			$hijri = false;
-//			$thai = false;
-//			$minguo = false;
-//			$tenno = false;
+//		public function sprintfDate(format, ts, DateTimeZone zone = null, &ttl = 'unused') {
+//			s = '';
+//			raw = false;
+//			roman = false;
+//			hebrewNum = false;
+//			dateTimeObj = false;
+//			rawToggle = false;
+//			iranian = false;
+//			hebrew = false;
+//			hijri = false;
+//			thai = false;
+//			minguo = false;
+//			tenno = false;
 //
-//			$usedSecond = false;
-//			$usedMinute = false;
-//			$usedHour = false;
-//			$usedAMPM = false;
-//			$usedDay = false;
-//			$usedWeek = false;
-//			$usedMonth = false;
-//			$usedYear = false;
-//			$usedISOYear = false;
-//			$usedIsLeapYear = false;
+//			usedSecond = false;
+//			usedMinute = false;
+//			usedHour = false;
+//			usedAMPM = false;
+//			usedDay = false;
+//			usedWeek = false;
+//			usedMonth = false;
+//			usedYear = false;
+//			usedISOYear = false;
+//			usedIsLeapYear = false;
 //
-//			$usedHebrewMonth = false;
-//			$usedIranianMonth = false;
-//			$usedHijriMonth = false;
-//			$usedHebrewYear = false;
-//			$usedIranianYear = false;
-//			$usedHijriYear = false;
-//			$usedTennoYear = false;
+//			usedHebrewMonth = false;
+//			usedIranianMonth = false;
+//			usedHijriMonth = false;
+//			usedHebrewYear = false;
+//			usedIranianYear = false;
+//			usedHijriYear = false;
+//			usedTennoYear = false;
 //
-//			if (strlen($ts) != 14) {
-//				throw new MWException(__METHOD__ . ": The timestamp $ts should have 14 characters");
+//			if (strlen(ts) != 14) {
+//				throw new MWException(__METHOD__ . ": The timestamp ts should have 14 characters");
 //			}
 //
-//			if (!ctype_digit($ts)) {
-//				throw new MWException(__METHOD__ . ": The timestamp $ts should be a number");
+//			if (!ctype_digit(ts)) {
+//				throw new MWException(__METHOD__ . ": The timestamp ts should be a number");
 //			}
 //
-//			$formatLength = strlen($format);
-//			for ($p = 0; $p < $formatLength; $p++) {
-//				$num = false;
-//				$code = $format[$p];
-//				if ($code == 'x' && $p < $formatLength - 1) {
-//					$code .= $format[++$p];
+//			formatLength = strlen(format);
+//			for (p = 0; p < formatLength; p++) {
+//				num = false;
+//				code = format[p];
+//				if (code == 'x' && p < formatLength - 1) {
+//					code .= format[++p];
 //				}
 //
-//				if (($code == 'xi'
-//						|| $code == 'xj'
-//						|| $code == 'xk'
-//						|| $code == 'xm'
-//						|| $code == 'xo'
-//						|| $code == 'xt')
-//					&& $p < $formatLength - 1) {
-//					$code .= $format[++$p];
+//				if ((code == 'xi'
+//						|| code == 'xj'
+//						|| code == 'xk'
+//						|| code == 'xm'
+//						|| code == 'xo'
+//						|| code == 'xt')
+//					&& p < formatLength - 1) {
+//					code .= format[++p];
 //				}
 //
-//				switch ($code) {
+//				switch (code) {
 //					case 'xx':
-//						$s .= 'x';
+//						s .= 'x';
 //						break;
 //					case 'xn':
-//						$raw = true;
+//						raw = true;
 //						break;
 //					case 'xN':
-//						$rawToggle = !$rawToggle;
+//						rawToggle = !rawToggle;
 //						break;
 //					case 'xr':
-//						$roman = true;
+//						roman = true;
 //						break;
 //					case 'xh':
-//						$hebrewNum = true;
+//						hebrewNum = true;
 //						break;
 //					case 'xg':
-//						$usedMonth = true;
-//						$s .= this.getMonthNameGen(substr($ts, 4, 2));
+//						usedMonth = true;
+//						s .= this.getMonthNameGen(substr(ts, 4, 2));
 //						break;
 //					case 'xjx':
-//						$usedHebrewMonth = true;
-//						if (!$hebrew) {
-//							$hebrew = self::tsToHebrew($ts);
+//						usedHebrewMonth = true;
+//						if (!hebrew) {
+//							hebrew = XomwLanguage.tsToHebrew(ts);
 //						}
-//						$s .= this.getHebrewCalendarMonthNameGen($hebrew[1]);
+//						s .= this.getHebrewCalendarMonthNameGen(hebrew[1]);
 //						break;
 //					case 'd':
-//						$usedDay = true;
-//						$num = substr($ts, 6, 2);
+//						usedDay = true;
+//						num = substr(ts, 6, 2);
 //						break;
 //					case 'D':
-//						$usedDay = true;
-//						$s .= this.getWeekdayAbbreviation(
-//							Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 'w') + 1
+//						usedDay = true;
+//						s .= this.getWeekdayAbbreviation(
+//							XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 'w') + 1
 //						);
 //						break;
 //					case 'j':
-//						$usedDay = true;
-//						$num = intval(substr($ts, 6, 2));
+//						usedDay = true;
+//						num = intval(substr(ts, 6, 2));
 //						break;
 //					case 'xij':
-//						$usedDay = true;
-//						if (!$iranian) {
-//							$iranian = self::tsToIranian($ts);
+//						usedDay = true;
+//						if (!iranian) {
+//							iranian = XomwLanguage.tsToIranian(ts);
 //						}
-//						$num = $iranian[2];
+//						num = iranian[2];
 //						break;
 //					case 'xmj':
-//						$usedDay = true;
-//						if (!$hijri) {
-//							$hijri = self::tsToHijri($ts);
+//						usedDay = true;
+//						if (!hijri) {
+//							hijri = XomwLanguage.tsToHijri(ts);
 //						}
-//						$num = $hijri[2];
+//						num = hijri[2];
 //						break;
 //					case 'xjj':
-//						$usedDay = true;
-//						if (!$hebrew) {
-//							$hebrew = self::tsToHebrew($ts);
+//						usedDay = true;
+//						if (!hebrew) {
+//							hebrew = XomwLanguage.tsToHebrew(ts);
 //						}
-//						$num = $hebrew[2];
+//						num = hebrew[2];
 //						break;
 //					case 'l':
-//						$usedDay = true;
-//						$s .= this.getWeekdayName(
-//							Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 'w') + 1
+//						usedDay = true;
+//						s .= this.getWeekdayName(
+//							XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 'w') + 1
 //						);
 //						break;
 //					case 'F':
-//						$usedMonth = true;
-//						$s .= this.getMonthName(substr($ts, 4, 2));
+//						usedMonth = true;
+//						s .= this.getMonthName(substr(ts, 4, 2));
 //						break;
 //					case 'xiF':
-//						$usedIranianMonth = true;
-//						if (!$iranian) {
-//							$iranian = self::tsToIranian($ts);
+//						usedIranianMonth = true;
+//						if (!iranian) {
+//							iranian = XomwLanguage.tsToIranian(ts);
 //						}
-//						$s .= this.getIranianCalendarMonthName($iranian[1]);
+//						s .= this.getIranianCalendarMonthName(iranian[1]);
 //						break;
 //					case 'xmF':
-//						$usedHijriMonth = true;
-//						if (!$hijri) {
-//							$hijri = self::tsToHijri($ts);
+//						usedHijriMonth = true;
+//						if (!hijri) {
+//							hijri = XomwLanguage.tsToHijri(ts);
 //						}
-//						$s .= this.getHijriCalendarMonthName($hijri[1]);
+//						s .= this.getHijriCalendarMonthName(hijri[1]);
 //						break;
 //					case 'xjF':
-//						$usedHebrewMonth = true;
-//						if (!$hebrew) {
-//							$hebrew = self::tsToHebrew($ts);
+//						usedHebrewMonth = true;
+//						if (!hebrew) {
+//							hebrew = XomwLanguage.tsToHebrew(ts);
 //						}
-//						$s .= this.getHebrewCalendarMonthName($hebrew[1]);
+//						s .= this.getHebrewCalendarMonthName(hebrew[1]);
 //						break;
 //					case 'm':
-//						$usedMonth = true;
-//						$num = substr($ts, 4, 2);
+//						usedMonth = true;
+//						num = substr(ts, 4, 2);
 //						break;
 //					case 'M':
-//						$usedMonth = true;
-//						$s .= this.getMonthAbbreviation(substr($ts, 4, 2));
+//						usedMonth = true;
+//						s .= this.getMonthAbbreviation(substr(ts, 4, 2));
 //						break;
 //					case 'n':
-//						$usedMonth = true;
-//						$num = intval(substr($ts, 4, 2));
+//						usedMonth = true;
+//						num = intval(substr(ts, 4, 2));
 //						break;
 //					case 'xin':
-//						$usedIranianMonth = true;
-//						if (!$iranian) {
-//							$iranian = self::tsToIranian($ts);
+//						usedIranianMonth = true;
+//						if (!iranian) {
+//							iranian = XomwLanguage.tsToIranian(ts);
 //						}
-//						$num = $iranian[1];
+//						num = iranian[1];
 //						break;
 //					case 'xmn':
-//						$usedHijriMonth = true;
-//						if (!$hijri) {
-//							$hijri = self::tsToHijri($ts);
+//						usedHijriMonth = true;
+//						if (!hijri) {
+//							hijri = XomwLanguage.tsToHijri(ts);
 //						}
-//						$num = $hijri[1];
+//						num = hijri[1];
 //						break;
 //					case 'xjn':
-//						$usedHebrewMonth = true;
-//						if (!$hebrew) {
-//							$hebrew = self::tsToHebrew($ts);
+//						usedHebrewMonth = true;
+//						if (!hebrew) {
+//							hebrew = XomwLanguage.tsToHebrew(ts);
 //						}
-//						$num = $hebrew[1];
+//						num = hebrew[1];
 //						break;
 //					case 'xjt':
-//						$usedHebrewMonth = true;
-//						if (!$hebrew) {
-//							$hebrew = self::tsToHebrew($ts);
+//						usedHebrewMonth = true;
+//						if (!hebrew) {
+//							hebrew = XomwLanguage.tsToHebrew(ts);
 //						}
-//						$num = $hebrew[3];
+//						num = hebrew[3];
 //						break;
 //					case 'Y':
-//						$usedYear = true;
-//						$num = substr($ts, 0, 4);
+//						usedYear = true;
+//						num = substr(ts, 0, 4);
 //						break;
 //					case 'xiY':
-//						$usedIranianYear = true;
-//						if (!$iranian) {
-//							$iranian = self::tsToIranian($ts);
+//						usedIranianYear = true;
+//						if (!iranian) {
+//							iranian = XomwLanguage.tsToIranian(ts);
 //						}
-//						$num = $iranian[0];
+//						num = iranian[0];
 //						break;
 //					case 'xmY':
-//						$usedHijriYear = true;
-//						if (!$hijri) {
-//							$hijri = self::tsToHijri($ts);
+//						usedHijriYear = true;
+//						if (!hijri) {
+//							hijri = XomwLanguage.tsToHijri(ts);
 //						}
-//						$num = $hijri[0];
+//						num = hijri[0];
 //						break;
 //					case 'xjY':
-//						$usedHebrewYear = true;
-//						if (!$hebrew) {
-//							$hebrew = self::tsToHebrew($ts);
+//						usedHebrewYear = true;
+//						if (!hebrew) {
+//							hebrew = XomwLanguage.tsToHebrew(ts);
 //						}
-//						$num = $hebrew[0];
+//						num = hebrew[0];
 //						break;
 //					case 'xkY':
-//						$usedYear = true;
-//						if (!$thai) {
-//							$thai = self::tsToYear($ts, 'thai');
+//						usedYear = true;
+//						if (!thai) {
+//							thai = XomwLanguage.tsToYear(ts, 'thai');
 //						}
-//						$num = $thai[0];
+//						num = thai[0];
 //						break;
 //					case 'xoY':
-//						$usedYear = true;
-//						if (!$minguo) {
-//							$minguo = self::tsToYear($ts, 'minguo');
+//						usedYear = true;
+//						if (!minguo) {
+//							minguo = XomwLanguage.tsToYear(ts, 'minguo');
 //						}
-//						$num = $minguo[0];
+//						num = minguo[0];
 //						break;
 //					case 'xtY':
-//						$usedTennoYear = true;
-//						if (!$tenno) {
-//							$tenno = self::tsToYear($ts, 'tenno');
+//						usedTennoYear = true;
+//						if (!tenno) {
+//							tenno = XomwLanguage.tsToYear(ts, 'tenno');
 //						}
-//						$num = $tenno[0];
+//						num = tenno[0];
 //						break;
 //					case 'y':
-//						$usedYear = true;
-//						$num = substr($ts, 2, 2);
+//						usedYear = true;
+//						num = substr(ts, 2, 2);
 //						break;
 //					case 'xiy':
-//						$usedIranianYear = true;
-//						if (!$iranian) {
-//							$iranian = self::tsToIranian($ts);
+//						usedIranianYear = true;
+//						if (!iranian) {
+//							iranian = XomwLanguage.tsToIranian(ts);
 //						}
-//						$num = substr($iranian[0], -2);
+//						num = substr(iranian[0], -2);
 //						break;
 //					case 'xit':
-//						$usedIranianYear = true;
-//						if (!$iranian) {
-//							$iranian = self::tsToIranian($ts);
+//						usedIranianYear = true;
+//						if (!iranian) {
+//							iranian = XomwLanguage.tsToIranian(ts);
 //						}
-//						$num = self::$IRANIAN_DAYS[$iranian[1] - 1];
+//						num = XomwLanguage.IRANIAN_DAYS[iranian[1] - 1];
 //						break;
 //					case 'xiz':
-//						$usedIranianYear = true;
-//						if (!$iranian) {
-//							$iranian = self::tsToIranian($ts);
+//						usedIranianYear = true;
+//						if (!iranian) {
+//							iranian = XomwLanguage.tsToIranian(ts);
 //						}
-//						$num = $iranian[3];
+//						num = iranian[3];
 //						break;
 //					case 'a':
-//						$usedAMPM = true;
-//						$s .= intval(substr($ts, 8, 2)) < 12 ? 'am' : 'pm';
+//						usedAMPM = true;
+//						s .= intval(substr(ts, 8, 2)) < 12 ? 'am' : 'pm';
 //						break;
 //					case 'A':
-//						$usedAMPM = true;
-//						$s .= intval(substr($ts, 8, 2)) < 12 ? 'AM' : 'PM';
+//						usedAMPM = true;
+//						s .= intval(substr(ts, 8, 2)) < 12 ? 'AM' : 'PM';
 //						break;
 //					case 'g':
-//						$usedHour = true;
-//						$h = substr($ts, 8, 2);
-//						$num = $h % 12 ? $h % 12 : 12;
+//						usedHour = true;
+//						h = substr(ts, 8, 2);
+//						num = h % 12 ? h % 12 : 12;
 //						break;
 //					case 'G':
-//						$usedHour = true;
-//						$num = intval(substr($ts, 8, 2));
+//						usedHour = true;
+//						num = intval(substr(ts, 8, 2));
 //						break;
 //					case 'h':
-//						$usedHour = true;
-//						$h = substr($ts, 8, 2);
-//						$num = sprintf('%02d', $h % 12 ? $h % 12 : 12);
+//						usedHour = true;
+//						h = substr(ts, 8, 2);
+//						num = sprintf('%02d', h % 12 ? h % 12 : 12);
 //						break;
 //					case 'H':
-//						$usedHour = true;
-//						$num = substr($ts, 8, 2);
+//						usedHour = true;
+//						num = substr(ts, 8, 2);
 //						break;
 //					case 'i':
-//						$usedMinute = true;
-//						$num = substr($ts, 10, 2);
+//						usedMinute = true;
+//						num = substr(ts, 10, 2);
 //						break;
 //					case 's':
-//						$usedSecond = true;
-//						$num = substr($ts, 12, 2);
+//						usedSecond = true;
+//						num = substr(ts, 12, 2);
 //						break;
 //					case 'c':
 //					case 'r':
-//						$usedSecond = true;
+//						usedSecond = true;
 //						// fall through
 //					case 'e':
 //					case 'O':
 //					case 'P':
 //					case 'T':
-//						$s .= Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, $code);
+//						s .= XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, code);
 //						break;
 //					case 'w':
 //					case 'N':
 //					case 'z':
-//						$usedDay = true;
-//						$num = Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, $code);
+//						usedDay = true;
+//						num = XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, code);
 //						break;
 //					case 'W':
-//						$usedWeek = true;
-//						$num = Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, $code);
+//						usedWeek = true;
+//						num = XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, code);
 //						break;
 //					case 't':
-//						$usedMonth = true;
-//						$num = Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, $code);
+//						usedMonth = true;
+//						num = XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, code);
 //						break;
 //					case 'L':
-//						$usedIsLeapYear = true;
-//						$num = Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, $code);
+//						usedIsLeapYear = true;
+//						num = XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, code);
 //						break;
 //					case 'o':
-//						$usedISOYear = true;
-//						$num = Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, $code);
+//						usedISOYear = true;
+//						num = XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, code);
 //						break;
 //					case 'U':
-//						$usedSecond = true;
+//						usedSecond = true;
 //						// fall through
 //					case 'I':
 //					case 'Z':
-//						$num = Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, $code);
+//						num = XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, code);
 //						break;
 //					case '\\':
 //						# Backslash escaping
-//						if ($p < $formatLength - 1) {
-//							$s .= $format[++$p];
+//						if (p < formatLength - 1) {
+//							s .= format[++p];
 //						} else {
-//							$s .= '\\';
+//							s .= '\\';
 //						}
 //						break;
 //					case '"':
 //						# Quoted literal
-//						if ($p < $formatLength - 1) {
-//							$endQuote = strpos($format, '"', $p + 1);
-//							if ($endQuote == false) {
+//						if (p < formatLength - 1) {
+//							endQuote = strpos(format, '"', p + 1);
+//							if (endQuote == false) {
 //								# No terminating quote, assume literal "
-//								$s .= '"';
+//								s .= '"';
 //							} else {
-//								$s .= substr($format, $p + 1, $endQuote - $p - 1);
-//								$p = $endQuote;
+//								s .= substr(format, p + 1, endQuote - p - 1);
+//								p = endQuote;
 //							}
 //						} else {
 //							# Quote at end of String, assume literal "
-//							$s .= '"';
+//							s .= '"';
 //						}
 //						break;
 //					default:
-//						$s .= $format[$p];
+//						s .= format[p];
 //				}
-//				if ($num != false) {
-//					if ($rawToggle || $raw) {
-//						$s .= $num;
-//						$raw = false;
-//					} elseif ($roman) {
-//						$s .= Language::romanNumeral($num);
-//						$roman = false;
-//					} elseif ($hebrewNum) {
-//						$s .= self::hebrewNumeral($num);
-//						$hebrewNum = false;
+//				if (num != false) {
+//					if (rawToggle || raw) {
+//						s .= num;
+//						raw = false;
+//					} elseif (roman) {
+//						s .= XomwLanguage.romanNumeral(num);
+//						roman = false;
+//					} elseif (hebrewNum) {
+//						s .= XomwLanguage.hebrewNumeral(num);
+//						hebrewNum = false;
 //					} else {
-//						$s .= this.formatNum($num, true);
+//						s .= this.formatNum(num, true);
 //					}
 //				}
 //			}
 //
-//			if ($ttl == 'unused') {
+//			if (ttl == 'unused') {
 //				// No need to calculate the TTL, the caller wont use it anyway.
-//			} elseif ($usedSecond) {
-//				$ttl = 1;
-//			} elseif ($usedMinute) {
-//				$ttl = 60 - substr($ts, 12, 2);
-//			} elseif ($usedHour) {
-//				$ttl = 3600 - substr($ts, 10, 2) * 60 - substr($ts, 12, 2);
-//			} elseif ($usedAMPM) {
-//				$ttl = 43200 - (substr($ts, 8, 2) % 12) * 3600 -
-//					substr($ts, 10, 2) * 60 - substr($ts, 12, 2);
+//			} elseif (usedSecond) {
+//				ttl = 1;
+//			} elseif (usedMinute) {
+//				ttl = 60 - substr(ts, 12, 2);
+//			} elseif (usedHour) {
+//				ttl = 3600 - substr(ts, 10, 2) * 60 - substr(ts, 12, 2);
+//			} elseif (usedAMPM) {
+//				ttl = 43200 - (substr(ts, 8, 2) % 12) * 3600 -
+//					substr(ts, 10, 2) * 60 - substr(ts, 12, 2);
 //			} elseif (
-//				$usedDay ||
-//				$usedHebrewMonth ||
-//				$usedIranianMonth ||
-//				$usedHijriMonth ||
-//				$usedHebrewYear ||
-//				$usedIranianYear ||
-//				$usedHijriYear ||
-//				$usedTennoYear
+//				usedDay ||
+//				usedHebrewMonth ||
+//				usedIranianMonth ||
+//				usedHijriMonth ||
+//				usedHebrewYear ||
+//				usedIranianYear ||
+//				usedHijriYear ||
+//				usedTennoYear
 //			) {
 //				// @todo Someone who understands the non-Gregorian calendars
 //				// should write proper logic for them so that they don't need purged every day.
-//				$ttl = 86400 - substr($ts, 8, 2) * 3600 -
-//					substr($ts, 10, 2) * 60 - substr($ts, 12, 2);
+//				ttl = 86400 - substr(ts, 8, 2) * 3600 -
+//					substr(ts, 10, 2) * 60 - substr(ts, 12, 2);
 //			} else {
-//				$possibleTtls = [];
-//				$timeRemainingInDay = 86400 - substr($ts, 8, 2) * 3600 -
-//					substr($ts, 10, 2) * 60 - substr($ts, 12, 2);
-//				if ($usedWeek) {
-//					$possibleTtls[] =
-//						(7 - Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 'N')) * 86400 +
-//						$timeRemainingInDay;
-//				} elseif ($usedISOYear) {
+//				possibleTtls = [];
+//				timeRemainingInDay = 86400 - substr(ts, 8, 2) * 3600 -
+//					substr(ts, 10, 2) * 60 - substr(ts, 12, 2);
+//				if (usedWeek) {
+//					possibleTtls[] =
+//						(7 - XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 'N')) * 86400 +
+//						timeRemainingInDay;
+//				} elseif (usedISOYear) {
 //					// December 28th falls on the last ISO week of the year, every year.
 //					// The last ISO week of a year can be 52 or 53.
-//					$lastWeekOfISOYear = DateTime::createFromFormat(
+//					lastWeekOfISOYear = DateTime::createFromFormat(
 //						'Ymd',
-//						substr($ts, 0, 4) . '1228',
-//						$zone ?: new DateTimeZone('UTC')
-//					)->format('W');
-//					$currentISOWeek = Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 'W');
-//					$weeksRemaining = $lastWeekOfISOYear - $currentISOWeek;
-//					$timeRemainingInWeek =
-//						(7 - Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 'N')) * 86400
-//						+ $timeRemainingInDay;
-//					$possibleTtls[] = $weeksRemaining * 604800 + $timeRemainingInWeek;
+//						substr(ts, 0, 4) . '1228',
+//						zone ?: new DateTimeZone('UTC')
+//					).format('W');
+//					currentISOWeek = XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 'W');
+//					weeksRemaining = lastWeekOfISOYear - currentISOWeek;
+//					timeRemainingInWeek =
+//						(7 - XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 'N')) * 86400
+//						+ timeRemainingInDay;
+//					possibleTtls[] = weeksRemaining * 604800 + timeRemainingInWeek;
 //				}
 //
-//				if ($usedMonth) {
-//					$possibleTtls[] =
-//						(Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 't') -
-//							substr($ts, 6, 2)) * 86400
-//						+ $timeRemainingInDay;
-//				} elseif ($usedYear) {
-//					$possibleTtls[] =
-//						(Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 'L') + 364 -
-//							Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 'z')) * 86400
-//						+ $timeRemainingInDay;
-//				} elseif ($usedIsLeapYear) {
-//					$year = substr($ts, 0, 4);
-//					$timeRemainingInYear =
-//						(Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 'L') + 364 -
-//							Language::dateTimeObjFormat($dateTimeObj, $ts, $zone, 'z')) * 86400
-//						+ $timeRemainingInDay;
-//					$mod = $year % 4;
-//					if ($mod || (!($year % 100) && $year % 400)) {
+//				if (usedMonth) {
+//					possibleTtls[] =
+//						(XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 't') -
+//							substr(ts, 6, 2)) * 86400
+//						+ timeRemainingInDay;
+//				} elseif (usedYear) {
+//					possibleTtls[] =
+//						(XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 'L') + 364 -
+//							XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 'z')) * 86400
+//						+ timeRemainingInDay;
+//				} elseif (usedIsLeapYear) {
+//					year = substr(ts, 0, 4);
+//					timeRemainingInYear =
+//						(XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 'L') + 364 -
+//							XomwLanguage.dateTimeObjFormat(dateTimeObj, ts, zone, 'z')) * 86400
+//						+ timeRemainingInDay;
+//					mod = year % 4;
+//					if (mod || (!(year % 100) && year % 400)) {
 //						// this isn't a leap year. see when the next one starts
-//						$nextCandidate = $year - $mod + 4;
-//						if ($nextCandidate % 100 || !($nextCandidate % 400)) {
-//							$possibleTtls[] = ($nextCandidate - $year - 1) * 365 * 86400 +
-//								$timeRemainingInYear;
+//						nextCandidate = year - mod + 4;
+//						if (nextCandidate % 100 || !(nextCandidate % 400)) {
+//							possibleTtls[] = (nextCandidate - year - 1) * 365 * 86400 +
+//								timeRemainingInYear;
 //						} else {
-//							$possibleTtls[] = ($nextCandidate - $year + 3) * 365 * 86400 +
-//								$timeRemainingInYear;
+//							possibleTtls[] = (nextCandidate - year + 3) * 365 * 86400 +
+//								timeRemainingInYear;
 //						}
 //					} else {
 //						// this is a leap year, so the next year isn't
-//						$possibleTtls[] = $timeRemainingInYear;
+//						possibleTtls[] = timeRemainingInYear;
 //					}
 //				}
 //
-//				if ($possibleTtls) {
-//					$ttl = min($possibleTtls);
+//				if (possibleTtls) {
+//					ttl = min(possibleTtls);
 //				}
 //			}
 //
-//			return $s;
+//			return s;
 //		}
 //
-//		private static $GREG_DAYS = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
-//		private static $IRANIAN_DAYS = [ 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29 ];
+//		private static GREG_DAYS = [ 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ];
+//		private static IRANIAN_DAYS = [ 31, 31, 31, 31, 31, 31, 30, 30, 30, 30, 30, 29 ];
 //
 //		/**
 //		* Algorithm by Roozbeh Pournader and Mohammad Toossi to convert
@@ -1611,57 +1619,57 @@ public class XomwLanguage {
 //		*
 //		* Link: http://www.farsiweb.info/jalali/jalali.c
 //		*
-//		* @param String $ts
+//		* @param String ts
 //		*
 //		* @return int[]
 //		*/
-//		private static function tsToIranian($ts) {
-//			$gy = substr($ts, 0, 4) -1600;
-//			$gm = substr($ts, 4, 2) -1;
-//			$gd = substr($ts, 6, 2) -1;
+//		private static function tsToIranian(ts) {
+//			gy = substr(ts, 0, 4) -1600;
+//			gm = substr(ts, 4, 2) -1;
+//			gd = substr(ts, 6, 2) -1;
 //
 //			# Days passed from the beginning (including leap years)
-//			$gDayNo = 365 * $gy
-//				+ floor(($gy + 3) / 4)
-//				- floor(($gy + 99) / 100)
-//				+ floor(($gy + 399) / 400);
+//			gDayNo = 365 * gy
+//				+ floor((gy + 3) / 4)
+//				- floor((gy + 99) / 100)
+//				+ floor((gy + 399) / 400);
 //
 //			// Add days of the past months of this year
-//			for ($i = 0; $i < $gm; $i++) {
-//				$gDayNo += self::$GREG_DAYS[$i];
+//			for (i = 0; i < gm; i++) {
+//				gDayNo += XomwLanguage.GREG_DAYS[i];
 //			}
 //
 //			// Leap years
-//			if ($gm > 1 && (($gy % 4 == 0 && $gy % 100 != 0 || ($gy % 400 == 0)))) {
-//				$gDayNo++;
+//			if (gm > 1 && ((gy % 4 == 0 && gy % 100 != 0 || (gy % 400 == 0)))) {
+//				gDayNo++;
 //			}
 //
 //			// Days passed in current month
-//			$gDayNo += (int)$gd;
+//			gDayNo += (int)gd;
 //
-//			$jDayNo = $gDayNo - 79;
+//			jDayNo = gDayNo - 79;
 //
-//			$jNp = floor($jDayNo / 12053);
-//			$jDayNo %= 12053;
+//			jNp = floor(jDayNo / 12053);
+//			jDayNo %= 12053;
 //
-//			$jy = 979 + 33 * $jNp + 4 * floor($jDayNo / 1461);
-//			$jDayNo %= 1461;
+//			jy = 979 + 33 * jNp + 4 * floor(jDayNo / 1461);
+//			jDayNo %= 1461;
 //
-//			if ($jDayNo >= 366) {
-//				$jy += floor(($jDayNo - 1) / 365);
-//				$jDayNo = floor(($jDayNo - 1) % 365);
+//			if (jDayNo >= 366) {
+//				jy += floor((jDayNo - 1) / 365);
+//				jDayNo = floor((jDayNo - 1) % 365);
 //			}
 //
-//			$jz = $jDayNo;
+//			jz = jDayNo;
 //
-//			for ($i = 0; $i < 11 && $jDayNo >= self::$IRANIAN_DAYS[$i]; $i++) {
-//				$jDayNo -= self::$IRANIAN_DAYS[$i];
+//			for (i = 0; i < 11 && jDayNo >= XomwLanguage.IRANIAN_DAYS[i]; i++) {
+//				jDayNo -= XomwLanguage.IRANIAN_DAYS[i];
 //			}
 //
-//			$jm = $i + 1;
-//			$jd = $jDayNo + 1;
+//			jm = i + 1;
+//			jd = jDayNo + 1;
 //
-//			return [ $jy, $jm, $jd, $jz ];
+//			return [ jy, jm, jd, jz ];
 //		}
 //
 //		/**
@@ -1671,45 +1679,45 @@ public class XomwLanguage {
 //		*
 //		* @see https://phpnuke.org/modules.php?name=News&file=article&sid=8234&mode=thread&order=0&thold=0
 //		*
-//		* @param String $ts
+//		* @param String ts
 //		*
 //		* @return int[]
 //		*/
-//		private static function tsToHijri($ts) {
-//			$year = substr($ts, 0, 4);
-//			$month = substr($ts, 4, 2);
-//			$day = substr($ts, 6, 2);
+//		private static function tsToHijri(ts) {
+//			year = substr(ts, 0, 4);
+//			month = substr(ts, 4, 2);
+//			day = substr(ts, 6, 2);
 //
-//			$zyr = $year;
-//			$zd = $day;
-//			$zm = $month;
-//			$zy = $zyr;
+//			zyr = year;
+//			zd = day;
+//			zm = month;
+//			zy = zyr;
 //
 //			if (
-//				($zy > 1582) || (($zy == 1582) && ($zm > 10)) ||
-//				(($zy == 1582) && ($zm == 10) && ($zd > 14))
+//				(zy > 1582) || ((zy == 1582) && (zm > 10)) ||
+//				((zy == 1582) && (zm == 10) && (zd > 14))
 //			) {
-//				$zjd = (int)((1461 * ($zy + 4800 + (int)(($zm - 14) / 12))) / 4) +
-//						(int)((367 * ($zm - 2 - 12 * ((int)(($zm - 14) / 12)))) / 12) -
-//						(int)((3 * (int)((($zy + 4900 + (int)(($zm - 14) / 12)) / 100))) / 4) +
-//						$zd - 32075;
+//				zjd = (int)((1461 * (zy + 4800 + (int)((zm - 14) / 12))) / 4) +
+//						(int)((367 * (zm - 2 - 12 * ((int)((zm - 14) / 12)))) / 12) -
+//						(int)((3 * (int)(((zy + 4900 + (int)((zm - 14) / 12)) / 100))) / 4) +
+//						zd - 32075;
 //			} else {
-//				$zjd = 367 * $zy - (int)((7 * ($zy + 5001 + (int)(($zm - 9) / 7))) / 4) +
-//									(int)((275 * $zm) / 9) + $zd + 1729777;
+//				zjd = 367 * zy - (int)((7 * (zy + 5001 + (int)((zm - 9) / 7))) / 4) +
+//									(int)((275 * zm) / 9) + zd + 1729777;
 //			}
 //
-//			$zl = $zjd -1948440 + 10632;
-//			$zn = (int)(($zl - 1) / 10631);
-//			$zl = $zl - 10631 * $zn + 354;
-//			$zj = ((int)((10985 - $zl) / 5316)) * ((int)((50 * $zl) / 17719)) +
-//				((int)($zl / 5670)) * ((int)((43 * $zl) / 15238));
-//			$zl = $zl - ((int)((30 - $zj) / 15)) * ((int)((17719 * $zj) / 50)) -
-//				((int)($zj / 16)) * ((int)((15238 * $zj) / 43)) + 29;
-//			$zm = (int)((24 * $zl) / 709);
-//			$zd = $zl - (int)((709 * $zm) / 24);
-//			$zy = 30 * $zn + $zj - 30;
+//			zl = zjd -1948440 + 10632;
+//			zn = (int)((zl - 1) / 10631);
+//			zl = zl - 10631 * zn + 354;
+//			zj = ((int)((10985 - zl) / 5316)) * ((int)((50 * zl) / 17719)) +
+//				((int)(zl / 5670)) * ((int)((43 * zl) / 15238));
+//			zl = zl - ((int)((30 - zj) / 15)) * ((int)((17719 * zj) / 50)) -
+//				((int)(zj / 16)) * ((int)((15238 * zj) / 43)) + 29;
+//			zm = (int)((24 * zl) / 709);
+//			zd = zl - (int)((709 * zm) / 24);
+//			zy = 30 * zn + zj - 30;
 //
-//			return [ $zy, $zm, $zd ];
+//			return [ zy, zm, zd ];
 //		}
 //
 //		/**
@@ -1723,140 +1731,140 @@ public class XomwLanguage {
 //		* The months are counted from Tishrei = 1. In a leap year, Adar I is 13
 //		* and Adar II is 14. In a non-leap year, Adar is 6.
 //		*
-//		* @param String $ts
+//		* @param String ts
 //		*
 //		* @return int[]
 //		*/
-//		private static function tsToHebrew($ts) {
+//		private static function tsToHebrew(ts) {
 //			# Parse date
-//			$year = substr($ts, 0, 4);
-//			$month = substr($ts, 4, 2);
-//			$day = substr($ts, 6, 2);
+//			year = substr(ts, 0, 4);
+//			month = substr(ts, 4, 2);
+//			day = substr(ts, 6, 2);
 //
 //			# Calculate Hebrew year
-//			$hebrewYear = $year + 3760;
+//			hebrewYear = year + 3760;
 //
 //			# Month number when September = 1, August = 12
-//			$month += 4;
-//			if ($month > 12) {
+//			month += 4;
+//			if (month > 12) {
 //				# Next year
-//				$month -= 12;
-//				$year++;
-//				$hebrewYear++;
+//				month -= 12;
+//				year++;
+//				hebrewYear++;
 //			}
 //
 //			# Calculate day of year from 1 September
-//			$dayOfYear = $day;
-//			for ($i = 1; $i < $month; $i++) {
-//				if ($i == 6) {
+//			dayOfYear = day;
+//			for (i = 1; i < month; i++) {
+//				if (i == 6) {
 //					# February
-//					$dayOfYear += 28;
+//					dayOfYear += 28;
 //					# Check if the year is leap
-//					if ($year % 400 == 0 || ($year % 4 == 0 && $year % 100 > 0)) {
-//						$dayOfYear++;
+//					if (year % 400 == 0 || (year % 4 == 0 && year % 100 > 0)) {
+//						dayOfYear++;
 //					}
-//				} elseif ($i == 8 || $i == 10 || $i == 1 || $i == 3) {
-//					$dayOfYear += 30;
+//				} elseif (i == 8 || i == 10 || i == 1 || i == 3) {
+//					dayOfYear += 30;
 //				} else {
-//					$dayOfYear += 31;
+//					dayOfYear += 31;
 //				}
 //			}
 //
 //			# Calculate the start of the Hebrew year
-//			$start = self::hebrewYearStart($hebrewYear);
+//			start = XomwLanguage.hebrewYearStart(hebrewYear);
 //
 //			# Calculate next year's start
-//			if ($dayOfYear <= $start) {
+//			if (dayOfYear <= start) {
 //				# Day is before the start of the year - it is the previous year
 //				# Next year's start
-//				$nextStart = $start;
+//				nextStart = start;
 //				# Previous year
-//				$year--;
-//				$hebrewYear--;
+//				year--;
+//				hebrewYear--;
 //				# Add days since previous year's 1 September
-//				$dayOfYear += 365;
-//				if (($year % 400 == 0) || ($year % 100 != 0 && $year % 4 == 0)) {
+//				dayOfYear += 365;
+//				if ((year % 400 == 0) || (year % 100 != 0 && year % 4 == 0)) {
 //					# Leap year
-//					$dayOfYear++;
+//					dayOfYear++;
 //				}
 //				# Start of the new (previous) year
-//				$start = self::hebrewYearStart($hebrewYear);
+//				start = XomwLanguage.hebrewYearStart(hebrewYear);
 //			} else {
 //				# Next year's start
-//				$nextStart = self::hebrewYearStart($hebrewYear + 1);
+//				nextStart = XomwLanguage.hebrewYearStart(hebrewYear + 1);
 //			}
 //
 //			# Calculate Hebrew day of year
-//			$hebrewDayOfYear = $dayOfYear - $start;
+//			hebrewDayOfYear = dayOfYear - start;
 //
 //			# Difference between year's days
-//			$diff = $nextStart - $start;
+//			diff = nextStart - start;
 //			# Add 12 (or 13 for leap years) days to ignore the difference between
 //			# Hebrew and Gregorian year (353 at least vs. 365/6) - now the
 //			# difference is only about the year type
-//			if (($year % 400 == 0) || ($year % 100 != 0 && $year % 4 == 0)) {
-//				$diff += 13;
+//			if ((year % 400 == 0) || (year % 100 != 0 && year % 4 == 0)) {
+//				diff += 13;
 //			} else {
-//				$diff += 12;
+//				diff += 12;
 //			}
 //
 //			# Check the year pattern, and is leap year
 //			# 0 means an incomplete year, 1 means a regular year, 2 means a complete year
 //			# This is mod 30, to work on both leap years (which add 30 days of Adar I)
 //			# and non-leap years
-//			$yearPattern = $diff % 30;
+//			yearPattern = diff % 30;
 //			# Check if leap year
-//			$isLeap = $diff >= 30;
+//			isLeap = diff >= 30;
 //
 //			# Calculate day in the month from number of day in the Hebrew year
 //			# Don't check Adar - if the day is not in Adar, we will stop before;
 //			# if it is in Adar, we will use it to check if it is Adar I or Adar II
-//			$hebrewDay = $hebrewDayOfYear;
-//			$hebrewMonth = 1;
-//			$days = 0;
-//			while ($hebrewMonth <= 12) {
+//			hebrewDay = hebrewDayOfYear;
+//			hebrewMonth = 1;
+//			days = 0;
+//			while (hebrewMonth <= 12) {
 //				# Calculate days in this month
-//				if ($isLeap && $hebrewMonth == 6) {
+//				if (isLeap && hebrewMonth == 6) {
 //					# Adar in a leap year
-//					if ($isLeap) {
+//					if (isLeap) {
 //						# Leap year - has Adar I, with 30 days, and Adar II, with 29 days
-//						$days = 30;
-//						if ($hebrewDay <= $days) {
+//						days = 30;
+//						if (hebrewDay <= days) {
 //							# Day in Adar I
-//							$hebrewMonth = 13;
+//							hebrewMonth = 13;
 //						} else {
 //							# Subtract the days of Adar I
-//							$hebrewDay -= $days;
+//							hebrewDay -= days;
 //							# Try Adar II
-//							$days = 29;
-//							if ($hebrewDay <= $days) {
+//							days = 29;
+//							if (hebrewDay <= days) {
 //								# Day in Adar II
-//								$hebrewMonth = 14;
+//								hebrewMonth = 14;
 //							}
 //						}
 //					}
-//				} elseif ($hebrewMonth == 2 && $yearPattern == 2) {
+//				} elseif (hebrewMonth == 2 && yearPattern == 2) {
 //					# Cheshvan in a complete year (otherwise as the rule below)
-//					$days = 30;
-//				} elseif ($hebrewMonth == 3 && $yearPattern == 0) {
+//					days = 30;
+//				} elseif (hebrewMonth == 3 && yearPattern == 0) {
 //					# Kislev in an incomplete year (otherwise as the rule below)
-//					$days = 29;
+//					days = 29;
 //				} else {
 //					# Odd months have 30 days, even have 29
-//					$days = 30 - ($hebrewMonth - 1) % 2;
+//					days = 30 - (hebrewMonth - 1) % 2;
 //				}
-//				if ($hebrewDay <= $days) {
+//				if (hebrewDay <= days) {
 //					# In the current month
 //					break;
 //				} else {
 //					# Subtract the days of the current month
-//					$hebrewDay -= $days;
+//					hebrewDay -= days;
 //					# Try in the next month
-//					$hebrewMonth++;
+//					hebrewMonth++;
 //				}
 //			}
 //
-//			return [ $hebrewYear, $hebrewMonth, $hebrewDay, $days ];
+//			return [ hebrewYear, hebrewMonth, hebrewDay, days ];
 //		}
 //
 //		/**
@@ -1864,34 +1872,34 @@ public class XomwLanguage {
 //		* Based on Carl Friedrich Gauss algorithm for finding Easter date.
 //		* Used for Hebrew date.
 //		*
-//		* @param int $year
+//		* @param int year
 //		*
 //		* @return String
 //		*/
-//		private static function hebrewYearStart($year) {
-//			$a = intval((12 * ($year - 1) + 17) % 19);
-//			$b = intval(($year - 1) % 4);
-//			$m = 32.044093161144 + 1.5542417966212 * $a + $b / 4.0 - 0.0031777940220923 * ($year - 1);
-//			if ($m < 0) {
-//				$m--;
+//		private static function hebrewYearStart(year) {
+//			a = intval((12 * (year - 1) + 17) % 19);
+//			b = intval((year - 1) % 4);
+//			m = 32.044093161144 + 1.5542417966212 * a + b / 4.0 - 0.0031777940220923 * (year - 1);
+//			if (m < 0) {
+//				m--;
 //			}
-//			$Mar = intval($m);
-//			if ($m < 0) {
-//				$m++;
+//			Mar = intval(m);
+//			if (m < 0) {
+//				m++;
 //			}
-//			$m -= $Mar;
+//			m -= Mar;
 //
-//			$c = intval(($Mar + 3 * ($year - 1) + 5 * $b + 5) % 7);
-//			if ($c == 0 && $a > 11 && $m >= 0.89772376543210) {
-//				$Mar++;
-//			} elseif ($c == 1 && $a > 6 && $m >= 0.63287037037037) {
-//				$Mar += 2;
-//			} elseif ($c == 2 || $c == 4 || $c == 6) {
-//				$Mar++;
+//			c = intval((Mar + 3 * (year - 1) + 5 * b + 5) % 7);
+//			if (c == 0 && a > 11 && m >= 0.89772376543210) {
+//				Mar++;
+//			} elseif (c == 1 && a > 6 && m >= 0.63287037037037) {
+//				Mar += 2;
+//			} elseif (c == 2 || c == 4 || c == 6) {
+//				Mar++;
 //			}
 //
-//			$Mar += intval(($year - 3761) / 100) - intval(($year - 3761) / 400) - 24;
-//			return $Mar;
+//			Mar += intval((year - 3761) / 100) - intval((year - 3761) / 400) - 24;
+//			return Mar;
 //		}
 //
 //		/**
@@ -1902,81 +1910,81 @@ public class XomwLanguage {
 //		*       https://en.wikipedia.org/wiki/Minguo_calendar
 //		*       https://en.wikipedia.org/wiki/Japanese_era_name
 //		*
-//		* @param String $ts 14-character timestamp
-//		* @param String $cName Calender name
+//		* @param String ts 14-character timestamp
+//		* @param String cName Calender name
 //		* @return array Converted year, month, day
 //		*/
-//		private static function tsToYear($ts, $cName) {
-//			$gy = substr($ts, 0, 4);
-//			$gm = substr($ts, 4, 2);
-//			$gd = substr($ts, 6, 2);
+//		private static function tsToYear(ts, cName) {
+//			gy = substr(ts, 0, 4);
+//			gm = substr(ts, 4, 2);
+//			gd = substr(ts, 6, 2);
 //
-//			if (!strcmp($cName, 'thai')) {
+//			if (!strcmp(cName, 'thai')) {
 //				# Thai solar dates
 //				# Add 543 years to the Gregorian calendar
 //				# Months and days are identical
-//				$gy_offset = $gy + 543;
-//			} elseif ((!strcmp($cName, 'minguo')) || !strcmp($cName, 'juche')) {
+//				gy_offset = gy + 543;
+//			} elseif ((!strcmp(cName, 'minguo')) || !strcmp(cName, 'juche')) {
 //				# Minguo dates
 //				# Deduct 1911 years from the Gregorian calendar
 //				# Months and days are identical
-//				$gy_offset = $gy - 1911;
-//			} elseif (!strcmp($cName, 'tenno')) {
-//				# Nengō dates up to Meiji period
+//				gy_offset = gy - 1911;
+//			} elseif (!strcmp(cName, 'tenno')) {
+//				# Nengo dates up to Meiji period
 //				# Deduct years from the Gregorian calendar
 //				# depending on the nengo periods
 //				# Months and days are identical
-//				if (($gy < 1912)
-//					|| (($gy == 1912) && ($gm < 7))
-//					|| (($gy == 1912) && ($gm == 7) && ($gd < 31))
+//				if ((gy < 1912)
+//					|| ((gy == 1912) && (gm < 7))
+//					|| ((gy == 1912) && (gm == 7) && (gd < 31))
 //				) {
 //					# Meiji period
-//					$gy_gannen = $gy - 1868 + 1;
-//					$gy_offset = $gy_gannen;
-//					if ($gy_gannen == 1) {
-//						$gy_offset = '元';
+//					gy_gannen = gy - 1868 + 1;
+//					gy_offset = gy_gannen;
+//					if (gy_gannen == 1) {
+//						gy_offset = '?';
 //					}
-//					$gy_offset = '明治' . $gy_offset;
+//					gy_offset = '??' . gy_offset;
 //				} elseif (
-//					(($gy == 1912) && ($gm == 7) && ($gd == 31)) ||
-//					(($gy == 1912) && ($gm >= 8)) ||
-//					(($gy > 1912) && ($gy < 1926)) ||
-//					(($gy == 1926) && ($gm < 12)) ||
-//					(($gy == 1926) && ($gm == 12) && ($gd < 26))
+//					((gy == 1912) && (gm == 7) && (gd == 31)) ||
+//					((gy == 1912) && (gm >= 8)) ||
+//					((gy > 1912) && (gy < 1926)) ||
+//					((gy == 1926) && (gm < 12)) ||
+//					((gy == 1926) && (gm == 12) && (gd < 26))
 //				) {
-//					# Taishō period
-//					$gy_gannen = $gy - 1912 + 1;
-//					$gy_offset = $gy_gannen;
-//					if ($gy_gannen == 1) {
-//						$gy_offset = '元';
+//					# Taisho period
+//					gy_gannen = gy - 1912 + 1;
+//					gy_offset = gy_gannen;
+//					if (gy_gannen == 1) {
+//						gy_offset = '?';
 //					}
-//					$gy_offset = '大正' . $gy_offset;
+//					gy_offset = '??' . gy_offset;
 //				} elseif (
-//					(($gy == 1926) && ($gm == 12) && ($gd >= 26)) ||
-//					(($gy > 1926) && ($gy < 1989)) ||
-//					(($gy == 1989) && ($gm == 1) && ($gd < 8))
+//					((gy == 1926) && (gm == 12) && (gd >= 26)) ||
+//					((gy > 1926) && (gy < 1989)) ||
+//					((gy == 1989) && (gm == 1) && (gd < 8))
 //				) {
-//					# Shōwa period
-//					$gy_gannen = $gy - 1926 + 1;
-//					$gy_offset = $gy_gannen;
-//					if ($gy_gannen == 1) {
-//						$gy_offset = '元';
+//					# Showa period
+//					gy_gannen = gy - 1926 + 1;
+//					gy_offset = gy_gannen;
+//					if (gy_gannen == 1) {
+//						gy_offset = '?';
 //					}
-//					$gy_offset = '昭和' . $gy_offset;
+//					gy_offset = '??' . gy_offset;
 //				} else {
 //					# Heisei period
-//					$gy_gannen = $gy - 1989 + 1;
-//					$gy_offset = $gy_gannen;
-//					if ($gy_gannen == 1) {
-//						$gy_offset = '元';
+//					gy_gannen = gy - 1989 + 1;
+//					gy_offset = gy_gannen;
+//					if (gy_gannen == 1) {
+//						gy_offset = '?';
 //					}
-//					$gy_offset = '平成' . $gy_offset;
+//					gy_offset = '??' . gy_offset;
 //				}
 //			} else {
-//				$gy_offset = $gy;
+//				gy_offset = gy;
 //			}
 //
-//			return [ $gy_offset, $gm, $gd ];
+//			return [ gy_offset, gm, gd ];
 //		}
 //
 //		/**
@@ -1989,14 +1997,14 @@ public class XomwLanguage {
 //		* TODO: Does not handle BIDI control characters inside the text.
 //		* TODO: Does not handle unallocated characters.
 //		*
-//		* @param String $text Text to test
+//		* @param String text Text to test
 //		* @return null|String Directionality ('ltr' or 'rtl') or null
 //		*/
-//		private static function strongDirFromContent($text = '') {
-//			if (!preg_match(self::$strongDirRegex, $text, $matches)) {
+//		private static function strongDirFromContent(text = '') {
+//			if (!preg_match(XomwLanguage.strongDirRegex, text, matches)) {
 //				return null;
 //			}
-//			if ($matches[1] == '') {
+//			if (matches[1] == '') {
 //				return 'rtl';
 //			}
 //			return 'ltr';
@@ -2005,12 +2013,12 @@ public class XomwLanguage {
 //		/**
 //		* Roman number formatting up to 10000
 //		*
-//		* @param int $num
+//		* @param int num
 //		*
 //		* @return String
 //		*/
-//		static function romanNumeral($num) {
-//			static $table = [
+//		static function romanNumeral(num) {
+//			static table = [
 //				[ '', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X' ],
 //				[ '', 'X', 'XX', 'XXX', 'XL', 'L', 'LX', 'LXX', 'LXXX', 'XC', 'C' ],
 //				[ '', 'C', 'CC', 'CCC', 'CD', 'D', 'DC', 'DCC', 'DCCC', 'CM', 'M' ],
@@ -2018,176 +2026,176 @@ public class XomwLanguage {
 //					'MMMMMMMM', 'MMMMMMMMM', 'MMMMMMMMMM' ]
 //			];
 //
-//			$num = intval($num);
-//			if ($num > 10000 || $num <= 0) {
-//				return $num;
+//			num = intval(num);
+//			if (num > 10000 || num <= 0) {
+//				return num;
 //			}
 //
-//			$s = '';
-//			for ($pow10 = 1000, $i = 3; $i >= 0; $pow10 /= 10, $i--) {
-//				if ($num >= $pow10) {
-//					$s .= $table[$i][(int)floor($num / $pow10)];
+//			s = '';
+//			for (pow10 = 1000, i = 3; i >= 0; pow10 /= 10, i--) {
+//				if (num >= pow10) {
+//					s .= table[i][(int)floor(num / pow10)];
 //				}
-//				$num = $num % $pow10;
+//				num = num % pow10;
 //			}
-//			return $s;
+//			return s;
 //		}
 //
 //		/**
 //		* Hebrew Gematria number formatting up to 9999
 //		*
-//		* @param int $num
+//		* @param int num
 //		*
 //		* @return String
 //		*/
-//		static function hebrewNumeral($num) {
-//			static $table = [
-//				[ '', 'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י' ],
-//				[ '', 'י', 'כ', 'ל', 'מ', 'נ', 'ס', 'ע', 'פ', 'צ', 'ק' ],
+//		static function hebrewNumeral(num) {
+//			static table = [
+//				[ '', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?' ],
+//				[ '', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?' ],
 //				[ '',
-//					[ 'ק' ],
-//					[ 'ר' ],
-//					[ 'ש' ],
-//					[ 'ת' ],
-//					[ 'ת', 'ק' ],
-//					[ 'ת', 'ר' ],
-//					[ 'ת', 'ש' ],
-//					[ 'ת', 'ת' ],
-//					[ 'ת', 'ת', 'ק' ],
-//					[ 'ת', 'ת', 'ר' ],
+//					[ '?' ],
+//					[ '?' ],
+//					[ '?' ],
+//					[ '?' ],
+//					[ '?', '?' ],
+//					[ '?', '?' ],
+//					[ '?', '?' ],
+//					[ '?', '?' ],
+//					[ '?', '?', '?' ],
+//					[ '?', '?', '?' ],
 //				],
-//				[ '', 'א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ז', 'ח', 'ט', 'י' ]
+//				[ '', '?', '?', '?', '?', '?', '?', '?', '?', '?', '?' ]
 //			];
 //
-//			$num = intval($num);
-//			if ($num > 9999 || $num <= 0) {
-//				return $num;
+//			num = intval(num);
+//			if (num > 9999 || num <= 0) {
+//				return num;
 //			}
 //
 //			// Round thousands have special notations
-//			if ($num == 1000) {
-//				return "א' אלף";
-//			} elseif ($num % 1000 == 0) {
-//				return $table[0][$num / 1000] . "' אלפים";
+//			if (num == 1000) {
+//				return "?' ???";
+//			} elseif (num % 1000 == 0) {
+//				return table[0][num / 1000] . "' ?????";
 //			}
 //
-//			$letters = [];
+//			letters = [];
 //
-//			for ($pow10 = 1000, $i = 3; $i >= 0; $pow10 /= 10, $i--) {
-//				if ($num >= $pow10) {
-//					if ($num == 15 || $num == 16) {
-//						$letters[] = $table[0][9];
-//						$letters[] = $table[0][$num - 9];
-//						$num = 0;
+//			for (pow10 = 1000, i = 3; i >= 0; pow10 /= 10, i--) {
+//				if (num >= pow10) {
+//					if (num == 15 || num == 16) {
+//						letters[] = table[0][9];
+//						letters[] = table[0][num - 9];
+//						num = 0;
 //					} else {
-//						$letters = array_merge(
-//							$letters,
-//							(array)$table[$i][intval($num / $pow10)]
+//						letters = array_merge(
+//							letters,
+//							(array)table[i][intval(num / pow10)]
 //						);
 //
-//						if ($pow10 == 1000) {
-//							$letters[] = "'";
+//						if (pow10 == 1000) {
+//							letters[] = "'";
 //						}
 //					}
 //				}
 //
-//				$num = $num % $pow10;
+//				num = num % pow10;
 //			}
 //
-//			$preTransformLength = count($letters);
-//			if ($preTransformLength == 1) {
+//			preTransformLength = count(letters);
+//			if (preTransformLength == 1) {
 //				// Add geresh (single quote) to one-letter numbers
-//				$letters[] = "'";
+//				letters[] = "'";
 //			} else {
-//				$lastIndex = $preTransformLength - 1;
-//				$letters[$lastIndex] = str_replace(
-//					[ 'כ', 'מ', 'נ', 'פ', 'צ' ],
-//					[ 'ך', 'ם', 'ן', 'ף', 'ץ' ],
-//					$letters[$lastIndex]
+//				lastIndex = preTransformLength - 1;
+//				letters[lastIndex] = str_replace(
+//					[ '?', '?', '?', '?', '?' ],
+//					[ '?', '?', '?', '?', '?' ],
+//					letters[lastIndex]
 //				);
 //
 //				// Add gershayim (double quote) to multiple-letter numbers,
 //				// but exclude numbers with only one letter after the thousands
 //				// (1001-1009, 1020, 1030, 2001-2009, etc.)
-//				if ($letters[1] == "'" && $preTransformLength == 3) {
-//					$letters[] = "'";
+//				if (letters[1] == "'" && preTransformLength == 3) {
+//					letters[] = "'";
 //				} else {
-//					array_splice($letters, -1, 0, '"');
+//					array_splice(letters, -1, 0, '"');
 //				}
 //			}
 //
-//			return implode($letters);
+//			return implode(letters);
 //		}
 //
 //		/**
 //		* Used by date() and time() to adjust the time output.
 //		*
-//		* @param String $ts The time in date('YmdHis') format
-//		* @param mixed $tz Adjust the time by this amount (default false, mean we
+//		* @param String ts The time in date('YmdHis') format
+//		* @param mixed tz Adjust the time by this amount (default false, mean we
 //		*   get user timecorrection setting)
 //		* @return int
 //		*/
-//		public function userAdjust($ts, $tz = false) {
-//			global $wgUser, $wgLocalTZoffset;
+//		public function userAdjust(ts, tz = false) {
+//			global wgUser, wgLocalTZoffset;
 //
-//			if ($tz == false) {
-//				$tz = $wgUser->getOption('timecorrection');
+//			if (tz == false) {
+//				tz = wgUser.getOption('timecorrection');
 //			}
 //
-//			$data = explode('|', $tz, 3);
+//			data = explode('|', tz, 3);
 //
-//			if ($data[0] == 'ZoneInfo') {
+//			if (data[0] == 'ZoneInfo') {
 //				try {
-//					$userTZ = new DateTimeZone($data[2]);
-//					$date = new DateTime($ts, new DateTimeZone('UTC'));
-//					$date->setTimezone($userTZ);
-//					return $date->format('YmdHis');
-//				} catch (Exception $e) {
+//					userTZ = new DateTimeZone(data[2]);
+//					date = new DateTime(ts, new DateTimeZone('UTC'));
+//					date.setTimezone(userTZ);
+//					return date.format('YmdHis');
+//				} catch (Exception e) {
 //					// Unrecognized timezone, default to 'Offset' with the stored offset.
-//					$data[0] = 'Offset';
+//					data[0] = 'Offset';
 //				}
 //			}
 //
-//			if ($data[0] == 'System' || $tz == '') {
+//			if (data[0] == 'System' || tz == '') {
 //				# Global offset in minutes.
-//				$minDiff = $wgLocalTZoffset;
-//			} elseif ($data[0] == 'Offset') {
-//				$minDiff = intval($data[1]);
+//				minDiff = wgLocalTZoffset;
+//			} elseif (data[0] == 'Offset') {
+//				minDiff = intval(data[1]);
 //			} else {
-//				$data = explode(':', $tz);
-//				if (count($data) == 2) {
-//					$data[0] = intval($data[0]);
-//					$data[1] = intval($data[1]);
-//					$minDiff = abs($data[0]) * 60 + $data[1];
-//					if ($data[0] < 0) {
-//						$minDiff = -$minDiff;
+//				data = explode(':', tz);
+//				if (count(data) == 2) {
+//					data[0] = intval(data[0]);
+//					data[1] = intval(data[1]);
+//					minDiff = abs(data[0]) * 60 + data[1];
+//					if (data[0] < 0) {
+//						minDiff = -minDiff;
 //					}
 //				} else {
-//					$minDiff = intval($data[0]) * 60;
+//					minDiff = intval(data[0]) * 60;
 //				}
 //			}
 //
 //			# No difference ? Return time unchanged
-//			if (0 == $minDiff) {
-//				return $ts;
+//			if (0 == minDiff) {
+//				return ts;
 //			}
 //
 //			MediaWiki\suppressWarnings(); // E_STRICT system time bitching
 //			# Generate an adjusted date; take advantage of the fact that mktime
-//			# will normalize out-of-range values so we don't have to split $minDiff
+//			# will normalize out-of-range values so we don't have to split minDiff
 //			# into hours and minutes.
-//			$t = mktime((
-//				(int)substr($ts, 8, 2)), # Hours
-//				(int)substr($ts, 10, 2) + $minDiff, # Minutes
-//				(int)substr($ts, 12, 2), # Seconds
-//				(int)substr($ts, 4, 2), # Month
-//				(int)substr($ts, 6, 2), # Day
-//				(int)substr($ts, 0, 4)); # Year
+//			t = mktime((
+//				(int)substr(ts, 8, 2)), # Hours
+//				(int)substr(ts, 10, 2) + minDiff, # Minutes
+//				(int)substr(ts, 12, 2), # Seconds
+//				(int)substr(ts, 4, 2), # Month
+//				(int)substr(ts, 6, 2), # Day
+//				(int)substr(ts, 0, 4)); # Year
 //
-//			$date = date('YmdHis', $t);
+//			date = date('YmdHis', t);
 //			MediaWiki\restoreWarnings();
 //
-//			return $date;
+//			return date;
 //		}
 //
 //		/**
@@ -2196,128 +2204,128 @@ public class XomwLanguage {
 //		* all children.
 //		*
 //		*<code>
-//		* function timeanddate([...], $format = true) {
-//		* 	$datePreference = this.dateFormat($format);
+//		* function timeanddate([...], format = true) {
+//		* 	datePreference = this.dateFormat(format);
 //		* [...]
 //		* }
 //		*</code>
 //		*
-//		* @param int|String|boolean $usePrefs If true, the user's preference is used
+//		* @param int|String|boolean usePrefs If true, the user's preference is used
 //		*   if false, the site/language default is used
 //		*   if int/String, assumed to be a format.
 //		* @return String
 //		*/
-//		function dateFormat($usePrefs = true) {
-//			global $wgUser;
+//		function dateFormat(usePrefs = true) {
+//			global wgUser;
 //
-//			if (is_bool($usePrefs)) {
-//				if ($usePrefs) {
-//					$datePreference = $wgUser->getDatePreference();
+//			if (is_bool(usePrefs)) {
+//				if (usePrefs) {
+//					datePreference = wgUser.getDatePreference();
 //				} else {
-//					$datePreference = (String)User::getDefaultOption('date');
+//					datePreference = (String)User::getDefaultOption('date');
 //				}
 //			} else {
-//				$datePreference = (String)$usePrefs;
+//				datePreference = (String)usePrefs;
 //			}
 //
 //			// return int
-//			if ($datePreference == '') {
+//			if (datePreference == '') {
 //				return 'default';
 //			}
 //
-//			return $datePreference;
+//			return datePreference;
 //		}
 //
 //		/**
 //		* Get a format String for a given type and preference
-//		* @param String $type May be 'date', 'time', 'both', or 'pretty'.
-//		* @param String $pref The format name as it appears in Messages*.php under
-//		*  $datePreferences.
+//		* @param String type May be 'date', 'time', 'both', or 'pretty'.
+//		* @param String pref The format name as it appears in Messages*.php under
+//		*  datePreferences.
 //		*
 //		* @since 1.22 New type 'pretty' that provides a more readable timestamp format
 //		*
 //		* @return String
 //		*/
-//		function getDateFormatString($type, $pref) {
-//			$wasDefault = false;
-//			if ($pref == 'default') {
-//				$wasDefault = true;
-//				$pref = this.getDefaultDateFormat();
+//		function getDateFormatString(type, pref) {
+//			wasDefault = false;
+//			if (pref == 'default') {
+//				wasDefault = true;
+//				pref = this.getDefaultDateFormat();
 //			}
 //
-//			if (!isset(this.dateFormatStrings[$type][$pref])) {
-//				$df = self::$dataCache->getSubitem(this.mCode, 'dateFormats', "$pref $type");
+//			if (!isset(this.dateFormatStrings[type][pref])) {
+//				df = XomwLanguage.dataCache.getSubitem(this.mCode, 'dateFormats', "pref type");
 //
-//				if ($type == 'pretty' && $df == null) {
-//					$df = this.getDateFormatString('date', $pref);
+//				if (type == 'pretty' && df == null) {
+//					df = this.getDateFormatString('date', pref);
 //				}
 //
-//				if (!$wasDefault && $df == null) {
-//					$pref = this.getDefaultDateFormat();
-//					$df = self::$dataCache->getSubitem(this.mCode, 'dateFormats', "$pref $type");
+//				if (!wasDefault && df == null) {
+//					pref = this.getDefaultDateFormat();
+//					df = XomwLanguage.dataCache.getSubitem(this.mCode, 'dateFormats', "pref type");
 //				}
 //
-//				this.dateFormatStrings[$type][$pref] = $df;
+//				this.dateFormatStrings[type][pref] = df;
 //			}
-//			return this.dateFormatStrings[$type][$pref];
+//			return this.dateFormatStrings[type][pref];
 //		}
 //
 //		/**
-//		* @param String $ts The time format which needs to be turned into a
-//		*   date('YmdHis') format with wfTimestamp(TS_MW,$ts)
-//		* @param boolean $adj Whether to adjust the time output according to the
-//		*   user configured offset ($timecorrection)
-//		* @param mixed $format True to use user's date format preference
-//		* @param String|boolean $timecorrection The time offset as returned by
+//		* @param String ts The time format which needs to be turned into a
+//		*   date('YmdHis') format with wfTimestamp(TS_MW,ts)
+//		* @param boolean adj Whether to adjust the time output according to the
+//		*   user configured offset (timecorrection)
+//		* @param mixed format True to use user's date format preference
+//		* @param String|boolean timecorrection The time offset as returned by
 //		*   validateTimeZone() in Special:Preferences
 //		* @return String
 //		*/
-//		public function date($ts, $adj = false, $format = true, $timecorrection = false) {
-//			$ts = wfTimestamp(TS_MW, $ts);
-//			if ($adj) {
-//				$ts = this.userAdjust($ts, $timecorrection);
+//		public function date(ts, adj = false, format = true, timecorrection = false) {
+//			ts = wfTimestamp(TS_MW, ts);
+//			if (adj) {
+//				ts = this.userAdjust(ts, timecorrection);
 //			}
-//			$df = this.getDateFormatString('date', this.dateFormat($format));
-//			return this.sprintfDate($df, $ts);
+//			df = this.getDateFormatString('date', this.dateFormat(format));
+//			return this.sprintfDate(df, ts);
 //		}
 //
 //		/**
-//		* @param String $ts The time format which needs to be turned into a
-//		*   date('YmdHis') format with wfTimestamp(TS_MW,$ts)
-//		* @param boolean $adj Whether to adjust the time output according to the
-//		*   user configured offset ($timecorrection)
-//		* @param mixed $format True to use user's date format preference
-//		* @param String|boolean $timecorrection The time offset as returned by
+//		* @param String ts The time format which needs to be turned into a
+//		*   date('YmdHis') format with wfTimestamp(TS_MW,ts)
+//		* @param boolean adj Whether to adjust the time output according to the
+//		*   user configured offset (timecorrection)
+//		* @param mixed format True to use user's date format preference
+//		* @param String|boolean timecorrection The time offset as returned by
 //		*   validateTimeZone() in Special:Preferences
 //		* @return String
 //		*/
-//		public function time($ts, $adj = false, $format = true, $timecorrection = false) {
-//			$ts = wfTimestamp(TS_MW, $ts);
-//			if ($adj) {
-//				$ts = this.userAdjust($ts, $timecorrection);
+//		public function time(ts, adj = false, format = true, timecorrection = false) {
+//			ts = wfTimestamp(TS_MW, ts);
+//			if (adj) {
+//				ts = this.userAdjust(ts, timecorrection);
 //			}
-//			$df = this.getDateFormatString('time', this.dateFormat($format));
-//			return this.sprintfDate($df, $ts);
+//			df = this.getDateFormatString('time', this.dateFormat(format));
+//			return this.sprintfDate(df, ts);
 //		}
 //
 //		/**
-//		* @param String $ts The time format which needs to be turned into a
-//		*   date('YmdHis') format with wfTimestamp(TS_MW,$ts)
-//		* @param boolean $adj Whether to adjust the time output according to the
-//		*   user configured offset ($timecorrection)
-//		* @param mixed $format What format to return, if it's false output the
+//		* @param String ts The time format which needs to be turned into a
+//		*   date('YmdHis') format with wfTimestamp(TS_MW,ts)
+//		* @param boolean adj Whether to adjust the time output according to the
+//		*   user configured offset (timecorrection)
+//		* @param mixed format What format to return, if it's false output the
 //		*   default one (default true)
-//		* @param String|boolean $timecorrection The time offset as returned by
+//		* @param String|boolean timecorrection The time offset as returned by
 //		*   validateTimeZone() in Special:Preferences
 //		* @return String
 //		*/
-//		public function timeanddate($ts, $adj = false, $format = true, $timecorrection = false) {
-//			$ts = wfTimestamp(TS_MW, $ts);
-//			if ($adj) {
-//				$ts = this.userAdjust($ts, $timecorrection);
+//		public function timeanddate(ts, adj = false, format = true, timecorrection = false) {
+//			ts = wfTimestamp(TS_MW, ts);
+//			if (adj) {
+//				ts = this.userAdjust(ts, timecorrection);
 //			}
-//			$df = this.getDateFormatString('both', this.dateFormat($format));
-//			return this.sprintfDate($df, $ts);
+//			df = this.getDateFormatString('both', this.dateFormat(format));
+//			return this.sprintfDate(df, ts);
 //		}
 //
 //		/**
@@ -2325,24 +2333,24 @@ public class XomwLanguage {
 //		*
 //		* @since 1.20
 //		*
-//		* @param int $seconds The amount of seconds.
-//		* @param array $chosenIntervals The intervals to enable.
+//		* @param int seconds The amount of seconds.
+//		* @param array chosenIntervals The intervals to enable.
 //		*
 //		* @return String
 //		*/
-//		public function formatDuration($seconds, array $chosenIntervals = []) {
-//			$intervals = this.getDurationIntervals($seconds, $chosenIntervals);
+//		public function formatDuration(seconds, array chosenIntervals = []) {
+//			intervals = this.getDurationIntervals(seconds, chosenIntervals);
 //
-//			$segments = [];
+//			segments = [];
 //
-//			foreach ($intervals as $intervalName => $intervalValue) {
+//			foreach (intervals as intervalName => intervalValue) {
 //				// Messages: duration-seconds, duration-minutes, duration-hours, duration-days, duration-weeks,
 //				// duration-years, duration-decades, duration-centuries, duration-millennia
-//				$message = wfMessage('duration-' . $intervalName)->numParams($intervalValue);
-//				$segments[] = $message->inLanguage($this)->escaped();
+//				message = wfMessage('duration-' . intervalName).numParams(intervalValue);
+//				segments[] = message.inLanguage(this).escaped();
 //			}
 //
-//			return this.listToText($segments);
+//			return this.listToText(segments);
 //		}
 //
 //		/**
@@ -2351,14 +2359,14 @@ public class XomwLanguage {
 //		*
 //		* @since 1.20
 //		*
-//		* @param int $seconds The amount of seconds.
-//		* @param array $chosenIntervals The intervals to enable.
+//		* @param int seconds The amount of seconds.
+//		* @param array chosenIntervals The intervals to enable.
 //		*
 //		* @return array
 //		*/
-//		public function getDurationIntervals($seconds, array $chosenIntervals = []) {
-//			if (empty($chosenIntervals)) {
-//				$chosenIntervals = [
+//		public function getDurationIntervals(seconds, array chosenIntervals = []) {
+//			if (empty(chosenIntervals)) {
+//				chosenIntervals = [
 //					'millennia',
 //					'centuries',
 //					'decades',
@@ -2370,32 +2378,32 @@ public class XomwLanguage {
 //				];
 //			}
 //
-//			$intervals = array_intersect_key(self::$durationIntervals, array_flip($chosenIntervals));
-//			$sortedNames = array_keys($intervals);
-//			$smallestInterval = array_pop($sortedNames);
+//			intervals = array_intersect_key(XomwLanguage.durationIntervals, array_flip(chosenIntervals));
+//			sortedNames = array_keys(intervals);
+//			smallestInterval = array_pop(sortedNames);
 //
-//			$segments = [];
+//			segments = [];
 //
-//			foreach ($intervals as $name => $length) {
-//				$value = floor($seconds / $length);
+//			foreach (intervals as name => length) {
+//				value = floor(seconds / length);
 //
-//				if ($value > 0 || ($name == $smallestInterval && empty($segments))) {
-//					$seconds -= $value * $length;
-//					$segments[$name] = $value;
+//				if (value > 0 || (name == smallestInterval && empty(segments))) {
+//					seconds -= value * length;
+//					segments[name] = value;
 //				}
 //			}
 //
-//			return $segments;
+//			return segments;
 //		}
 //
 //		/**
 //		* Internal helper function for userDate(), userTime() and userTimeAndDate()
 //		*
-//		* @param String $type Can be 'date', 'time' or 'both'
-//		* @param String $ts The time format which needs to be turned into a
-//		*   date('YmdHis') format with wfTimestamp(TS_MW,$ts)
-//		* @param User $user User Object used to get preferences for timezone and format
-//		* @param array $options Array, can contain the following keys:
+//		* @param String type Can be 'date', 'time' or 'both'
+//		* @param String ts The time format which needs to be turned into a
+//		*   date('YmdHis') format with wfTimestamp(TS_MW,ts)
+//		* @param User user User Object used to get preferences for timezone and format
+//		* @param array options Array, can contain the following keys:
 //		*   - 'timecorrection': time correction, can have the following values:
 //		*     - true: use user's preference
 //		*     - false: don't use time correction
@@ -2407,34 +2415,34 @@ public class XomwLanguage {
 //		* @since 1.19
 //		* @return String
 //		*/
-//		private function internalUserTimeAndDate($type, $ts, User $user, array $options) {
-//			$ts = wfTimestamp(TS_MW, $ts);
-//			$options += [ 'timecorrection' => true, 'format' => true ];
-//			if ($options['timecorrection'] != false) {
-//				if ($options['timecorrection'] == true) {
-//					$offset = $user->getOption('timecorrection');
+//		private function internalUserTimeAndDate(type, ts, User user, array options) {
+//			ts = wfTimestamp(TS_MW, ts);
+//			options += [ 'timecorrection' => true, 'format' => true ];
+//			if (options['timecorrection'] != false) {
+//				if (options['timecorrection'] == true) {
+//					offset = user.getOption('timecorrection');
 //				} else {
-//					$offset = $options['timecorrection'];
+//					offset = options['timecorrection'];
 //				}
-//				$ts = this.userAdjust($ts, $offset);
+//				ts = this.userAdjust(ts, offset);
 //			}
-//			if ($options['format'] == true) {
-//				$format = $user->getDatePreference();
+//			if (options['format'] == true) {
+//				format = user.getDatePreference();
 //			} else {
-//				$format = $options['format'];
+//				format = options['format'];
 //			}
-//			$df = this.getDateFormatString($type, this.dateFormat($format));
-//			return this.sprintfDate($df, $ts);
+//			df = this.getDateFormatString(type, this.dateFormat(format));
+//			return this.sprintfDate(df, ts);
 //		}
 //
 //		/**
 //		* Get the formatted date for the given timestamp and formatted for
 //		* the given user.
 //		*
-//		* @param mixed $ts Mixed: the time format which needs to be turned into a
-//		*   date('YmdHis') format with wfTimestamp(TS_MW,$ts)
-//		* @param User $user User Object used to get preferences for timezone and format
-//		* @param array $options Array, can contain the following keys:
+//		* @param mixed ts Mixed: the time format which needs to be turned into a
+//		*   date('YmdHis') format with wfTimestamp(TS_MW,ts)
+//		* @param User user User Object used to get preferences for timezone and format
+//		* @param array options Array, can contain the following keys:
 //		*   - 'timecorrection': time correction, can have the following values:
 //		*     - true: use user's preference
 //		*     - false: don't use time correction
@@ -2446,18 +2454,18 @@ public class XomwLanguage {
 //		* @since 1.19
 //		* @return String
 //		*/
-//		public function userDate($ts, User $user, array $options = []) {
-//			return this.internalUserTimeAndDate('date', $ts, $user, $options);
+//		public function userDate(ts, User user, array options = []) {
+//			return this.internalUserTimeAndDate('date', ts, user, options);
 //		}
 //
 //		/**
 //		* Get the formatted time for the given timestamp and formatted for
 //		* the given user.
 //		*
-//		* @param mixed $ts The time format which needs to be turned into a
-//		*   date('YmdHis') format with wfTimestamp(TS_MW,$ts)
-//		* @param User $user User Object used to get preferences for timezone and format
-//		* @param array $options Array, can contain the following keys:
+//		* @param mixed ts The time format which needs to be turned into a
+//		*   date('YmdHis') format with wfTimestamp(TS_MW,ts)
+//		* @param User user User Object used to get preferences for timezone and format
+//		* @param array options Array, can contain the following keys:
 //		*   - 'timecorrection': time correction, can have the following values:
 //		*     - true: use user's preference
 //		*     - false: don't use time correction
@@ -2469,18 +2477,18 @@ public class XomwLanguage {
 //		* @since 1.19
 //		* @return String
 //		*/
-//		public function userTime($ts, User $user, array $options = []) {
-//			return this.internalUserTimeAndDate('time', $ts, $user, $options);
+//		public function userTime(ts, User user, array options = []) {
+//			return this.internalUserTimeAndDate('time', ts, user, options);
 //		}
 //
 //		/**
 //		* Get the formatted date and time for the given timestamp and formatted for
 //		* the given user.
 //		*
-//		* @param mixed $ts The time format which needs to be turned into a
-//		*   date('YmdHis') format with wfTimestamp(TS_MW,$ts)
-//		* @param User $user User Object used to get preferences for timezone and format
-//		* @param array $options Array, can contain the following keys:
+//		* @param mixed ts The time format which needs to be turned into a
+//		*   date('YmdHis') format with wfTimestamp(TS_MW,ts)
+//		* @param User user User Object used to get preferences for timezone and format
+//		* @param array options Array, can contain the following keys:
 //		*   - 'timecorrection': time correction, can have the following values:
 //		*     - true: use user's preference
 //		*     - false: don't use time correction
@@ -2492,8 +2500,8 @@ public class XomwLanguage {
 //		* @since 1.19
 //		* @return String
 //		*/
-//		public function userTimeAndDate($ts, User $user, array $options = []) {
-//			return this.internalUserTimeAndDate('both', $ts, $user, $options);
+//		public function userTimeAndDate(ts, User user, array options = []) {
+//			return this.internalUserTimeAndDate('both', ts, user, options);
 //		}
 //
 //		/**
@@ -2505,232 +2513,232 @@ public class XomwLanguage {
 //		*
 //		* @since 1.26 (Prior to 1.26 method existed but was not meant to be used directly)
 //		*
-//		* @param MWTimestamp $time
-//		* @param MWTimestamp|null $relativeTo The super timestamp to compare to (defaults to now)
-//		* @param User|null $user User the timestamp is being generated for
+//		* @param MWTimestamp time
+//		* @param MWTimestamp|null relativeTo The super timestamp to compare to (defaults to now)
+//		* @param User|null user User the timestamp is being generated for
 //		*  (or null to use main context's user)
 //		* @return String Formatted timestamp
 //		*/
 //		public function getHumanTimestamp(
-//			MWTimestamp $time, MWTimestamp $relativeTo = null, User $user = null
+//			MWTimestamp time, MWTimestamp relativeTo = null, User user = null
 //		) {
-//			if ($relativeTo == null) {
-//				$relativeTo = new MWTimestamp();
+//			if (relativeTo == null) {
+//				relativeTo = new MWTimestamp();
 //			}
-//			if ($user == null) {
-//				$user = RequestContext::getMain()->getUser();
+//			if (user == null) {
+//				user = RequestContext::getMain().getUser();
 //			}
 //
 //			// Adjust for the user's timezone.
-//			$offsetThis = $time->offsetForUser($user);
-//			$offsetRel = $relativeTo->offsetForUser($user);
+//			offsetThis = time.offsetForUser(user);
+//			offsetRel = relativeTo.offsetForUser(user);
 //
-//			$ts = '';
-//			if (Hooks::run('GetHumanTimestamp', [ &$ts, $time, $relativeTo, $user, $this ])) {
-//				$ts = this.getHumanTimestampInternal($time, $relativeTo, $user);
+//			ts = '';
+//			if (Hooks::run('GetHumanTimestamp', [ &ts, time, relativeTo, user, this ])) {
+//				ts = this.getHumanTimestampInternal(time, relativeTo, user);
 //			}
 //
 //			// Reset the timezone on the objects.
-//			$time->timestamp->sub($offsetThis);
-//			$relativeTo->timestamp->sub($offsetRel);
+//			time.timestamp.sub(offsetThis);
+//			relativeTo.timestamp.sub(offsetRel);
 //
-//			return $ts;
+//			return ts;
 //		}
 //
 //		/**
 //		* Convert an MWTimestamp into a pretty human-readable timestamp using
 //		* the given user preferences and relative super time.
 //		*
-//		* @see Language::getHumanTimestamp
-//		* @param MWTimestamp $ts Timestamp to prettify
-//		* @param MWTimestamp $relativeTo Base timestamp
-//		* @param User $user User preferences to use
+//		* @see XomwLanguage.getHumanTimestamp
+//		* @param MWTimestamp ts Timestamp to prettify
+//		* @param MWTimestamp relativeTo Base timestamp
+//		* @param User user User preferences to use
 //		* @return String Human timestamp
 //		* @since 1.26
 //		*/
 //		private function getHumanTimestampInternal(
-//			MWTimestamp $ts, MWTimestamp $relativeTo, User $user
+//			MWTimestamp ts, MWTimestamp relativeTo, User user
 //		) {
-//			$diff = $ts->diff($relativeTo);
-//			$diffDay = (boolean)((int)$ts->timestamp->format('w') -
-//				(int)$relativeTo->timestamp->format('w'));
-//			$days = $diff->days ?: (int)$diffDay;
-//			if ($diff->invert || $days > 5
-//				&& $ts->timestamp->format('Y') != $relativeTo->timestamp->format('Y')
+//			diff = ts.diff(relativeTo);
+//			diffDay = (boolean)((int)ts.timestamp.format('w') -
+//				(int)relativeTo.timestamp.format('w'));
+//			days = diff.days ?: (int)diffDay;
+//			if (diff.invert || days > 5
+//				&& ts.timestamp.format('Y') != relativeTo.timestamp.format('Y')
 //			) {
 //				// Timestamps are in different years: use full timestamp
 //				// Also do full timestamp for future dates
 //				/**
 //				* @todo FIXME: Add better handling of future timestamps.
 //				*/
-//				$format = this.getDateFormatString('both', $user->getDatePreference() ?: 'default');
-//				$ts = this.sprintfDate($format, $ts->getTimestamp(TS_MW));
-//			} elseif ($days > 5) {
+//				format = this.getDateFormatString('both', user.getDatePreference() ?: 'default');
+//				ts = this.sprintfDate(format, ts.getTimestamp(TS_MW));
+//			} elseif (days > 5) {
 //				// Timestamps are in same year,  but more than 5 days ago: show day and month only.
-//				$format = this.getDateFormatString('pretty', $user->getDatePreference() ?: 'default');
-//				$ts = this.sprintfDate($format, $ts->getTimestamp(TS_MW));
-//			} elseif ($days > 1) {
+//				format = this.getDateFormatString('pretty', user.getDatePreference() ?: 'default');
+//				ts = this.sprintfDate(format, ts.getTimestamp(TS_MW));
+//			} elseif (days > 1) {
 //				// Timestamp within the past week: show the day of the week and time
-//				$format = this.getDateFormatString('time', $user->getDatePreference() ?: 'default');
-//				$weekday = self::$mWeekdayMsgs[$ts->timestamp->format('w')];
+//				format = this.getDateFormatString('time', user.getDatePreference() ?: 'default');
+//				weekday = XomwLanguage.mWeekdayMsgs[ts.timestamp.format('w')];
 //				// Messages:
 //				// sunday-at, monday-at, tuesday-at, wednesday-at, thursday-at, friday-at, saturday-at
-//				$ts = wfMessage("$weekday-at")
-//					->inLanguage($this)
-//					->params(this.sprintfDate($format, $ts->getTimestamp(TS_MW)))
-//					->text();
-//			} elseif ($days == 1) {
+//				ts = wfMessage("weekday-at")
+//					.inLanguage(this)
+//					.params(this.sprintfDate(format, ts.getTimestamp(TS_MW)))
+//					.text();
+//			} elseif (days == 1) {
 //				// Timestamp was yesterday: say 'yesterday' and the time.
-//				$format = this.getDateFormatString('time', $user->getDatePreference() ?: 'default');
-//				$ts = wfMessage('yesterday-at')
-//					->inLanguage($this)
-//					->params(this.sprintfDate($format, $ts->getTimestamp(TS_MW)))
-//					->text();
-//			} elseif ($diff->h > 1 || $diff->h == 1 && $diff->i > 30) {
+//				format = this.getDateFormatString('time', user.getDatePreference() ?: 'default');
+//				ts = wfMessage('yesterday-at')
+//					.inLanguage(this)
+//					.params(this.sprintfDate(format, ts.getTimestamp(TS_MW)))
+//					.text();
+//			} elseif (diff.h > 1 || diff.h == 1 && diff.i > 30) {
 //				// Timestamp was today, but more than 90 minutes ago: say 'today' and the time.
-//				$format = this.getDateFormatString('time', $user->getDatePreference() ?: 'default');
-//				$ts = wfMessage('today-at')
-//					->inLanguage($this)
-//					->params(this.sprintfDate($format, $ts->getTimestamp(TS_MW)))
-//					->text();
+//				format = this.getDateFormatString('time', user.getDatePreference() ?: 'default');
+//				ts = wfMessage('today-at')
+//					.inLanguage(this)
+//					.params(this.sprintfDate(format, ts.getTimestamp(TS_MW)))
+//					.text();
 //
 //			// From here on in, the timestamp was soon enough ago so that we can simply say
 //			// XX units ago, e.g., "2 hours ago" or "5 minutes ago"
-//			} elseif ($diff->h == 1) {
+//			} elseif (diff.h == 1) {
 //				// Less than 90 minutes, but more than an hour ago.
-//				$ts = wfMessage('hours-ago')->inLanguage($this)->numParams(1)->text();
-//			} elseif ($diff->i >= 1) {
+//				ts = wfMessage('hours-ago').inLanguage(this).numParams(1).text();
+//			} elseif (diff.i >= 1) {
 //				// A few minutes ago.
-//				$ts = wfMessage('minutes-ago')->inLanguage($this)->numParams($diff->i)->text();
-//			} elseif ($diff->s >= 30) {
+//				ts = wfMessage('minutes-ago').inLanguage(this).numParams(diff.i).text();
+//			} elseif (diff.s >= 30) {
 //				// Less than a minute, but more than 30 sec ago.
-//				$ts = wfMessage('seconds-ago')->inLanguage($this)->numParams($diff->s)->text();
+//				ts = wfMessage('seconds-ago').inLanguage(this).numParams(diff.s).text();
 //			} else {
 //				// Less than 30 seconds ago.
-//				$ts = wfMessage('just-now')->text();
+//				ts = wfMessage('just-now').text();
 //			}
 //
-//			return $ts;
+//			return ts;
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String|null
 //		*/
-//		public function getMessage($key) {
-//			return self::$dataCache->getSubitem(this.mCode, 'messages', $key);
+//		public function getMessage(key) {
+//			return XomwLanguage.dataCache.getSubitem(this.mCode, 'messages', key);
 //		}
 //
 //		/**
 //		* @return array
 //		*/
 //		function getAllMessages() {
-//			return self::$dataCache->getItem(this.mCode, 'messages');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'messages');
 //		}
 //
 //		/**
-//		* @param String $in
-//		* @param String $out
-//		* @param String $String
+//		* @param String in
+//		* @param String out
+//		* @param String String
 //		* @return String
 //		*/
-//		public function iconv($in, $out, $String) {
+//		public function iconv(in, out, String) {
 //			# Even with //IGNORE iconv can whine about illegal characters in
 //			# *input* String. We just ignore those too.
 //			# REF: https://bugs.php.net/bug.php?id=37166
 //			# REF: https://phabricator.wikimedia.org/T18885
 //			MediaWiki\suppressWarnings();
-//			$text = iconv($in, $out . '//IGNORE', $String);
+//			text = iconv(in, out . '//IGNORE', String);
 //			MediaWiki\restoreWarnings();
-//			return $text;
+//			return text;
 //		}
 //
 //		// callback functions for ucwords(), ucwordbreaks()
 //
 //		/**
-//		* @param array $matches
+//		* @param array matches
 //		* @return mixed|String
 //		*/
-//		function ucwordbreaksCallbackAscii($matches) {
-//			return this.ucfirst($matches[1]);
+//		function ucwordbreaksCallbackAscii(matches) {
+//			return this.ucfirst(matches[1]);
 //		}
 //
 //		/**
-//		* @param array $matches
+//		* @param array matches
 //		* @return String
 //		*/
-//		function ucwordbreaksCallbackMB($matches) {
-//			return mb_strtoupper($matches[0]);
+//		function ucwordbreaksCallbackMB(matches) {
+//			return mb_strtoupper(matches[0]);
 //		}
 //
 //		/**
-//		* @param array $matches
+//		* @param array matches
 //		* @return String
 //		*/
-//		function ucwordsCallbackMB($matches) {
-//			return mb_strtoupper($matches[0]);
+//		function ucwordsCallbackMB(matches) {
+//			return mb_strtoupper(matches[0]);
 //		}
 //
 //		/**
 //		* Make a String's first character uppercase
 //		*
-//		* @param String $str
+//		* @param String str
 //		*
 //		* @return String
 //		*/
-//		public function ucfirst($str) {
-//			$o = ord($str);
-//			if ($o < 96) { // if already uppercase...
-//				return $str;
-//			} elseif ($o < 128) {
-//				return ucfirst($str); // use PHP's ucfirst()
+//		public function ucfirst(str) {
+//			o = ord(str);
+//			if (o < 96) { // if already uppercase...
+//				return str;
+//			} elseif (o < 128) {
+//				return ucfirst(str); // use PHP's ucfirst()
 //			} else {
 //				// fall back to more complex logic in case of multibyte strings
-//				return this.uc($str, true);
+//				return this.uc(str, true);
 //			}
 //		}
 //
 //		/**
 //		* Convert a String to uppercase
 //		*
-//		* @param String $str
-//		* @param boolean $first
+//		* @param String str
+//		* @param boolean first
 //		*
 //		* @return String
 //		*/
-//		public function uc($str, $first = false) {
-//			if ($first) {
-//				if (this.isMultibyte($str)) {
-//					return mb_strtoupper(mb_substr($str, 0, 1)) . mb_substr($str, 1);
+//		public function uc(str, first = false) {
+//			if (first) {
+//				if (this.isMultibyte(str)) {
+//					return mb_strtoupper(mb_substr(str, 0, 1)) . mb_substr(str, 1);
 //				} else {
-//					return ucfirst($str);
+//					return ucfirst(str);
 //				}
 //			} else {
-//				return this.isMultibyte($str) ? mb_strtoupper($str) : strtoupper($str);
+//				return this.isMultibyte(str) ? mb_strtoupper(str) : strtoupper(str);
 //			}
 //		}
 //
 //		/**
-//		* @param String $str
+//		* @param String str
 //		* @return mixed|String
 //		*/
-//		function lcfirst($str) {
-//			$o = ord($str);
-//			if (!$o) {
-//				return strval($str);
-//			} elseif ($o >= 128) {
-//				return this.lc($str, true);
-//			} elseif ($o > 96) {
-//				return $str;
+//		function lcfirst(str) {
+//			o = ord(str);
+//			if (!o) {
+//				return strval(str);
+//			} elseif (o >= 128) {
+//				return this.lc(str, true);
+//			} elseif (o > 96) {
+//				return str;
 //			} else {
-//				$str[0] = strtolower($str[0]);
-//				return $str;
+//				str[0] = strtolower(str[0]);
+//				return str;
 //			}
 //		}
 
 	/**
-	* @param String $str
-	* @param boolean $first
+	* @param String str
+	* @param boolean first
 	* @return mixed|String
 	*/
 	public byte[] lc(byte[] str) {return lc(str, false);}
@@ -2752,106 +2760,106 @@ public class XomwLanguage {
 	}
 
 //		/**
-//		* @param String $str
+//		* @param String str
 //		* @return boolean
 //		*/
-//		function isMultibyte($str) {
-//			return strlen($str) != mb_strlen($str);
+//		function isMultibyte(str) {
+//			return strlen(str) != mb_strlen(str);
 //		}
 //
 //		/**
-//		* @param String $str
+//		* @param String str
 //		* @return mixed|String
 //		*/
-//		function ucwords($str) {
-//			if (this.isMultibyte($str)) {
-//				$str = this.lc($str);
+//		function ucwords(str) {
+//			if (this.isMultibyte(str)) {
+//				str = this.lc(str);
 //
 //				// regexp to find first letter in each word (i.e. after each space)
-//				$replaceRegexp = "/^([a-z]|[\\xc0-\\xff][\\x80-\\xbf]*)| ([a-z]|[\\xc0-\\xff][\\x80-\\xbf]*)/";
+//				replaceRegexp = "/^([a-z]|[\\xc0-\\xff][\\x80-\\xbf]*)| ([a-z]|[\\xc0-\\xff][\\x80-\\xbf]*)/";
 //
 //				// function to use to capitalize a single char
 //				return preg_replace_callback(
-//					$replaceRegexp,
-//					[ $this, 'ucwordsCallbackMB' ],
-//					$str
+//					replaceRegexp,
+//					[ this, 'ucwordsCallbackMB' ],
+//					str
 //				);
 //			} else {
-//				return ucwords(strtolower($str));
+//				return ucwords(strtolower(str));
 //			}
 //		}
 //
 //		/**
 //		* capitalize words at word breaks
 //		*
-//		* @param String $str
+//		* @param String str
 //		* @return mixed
 //		*/
-//		function ucwordbreaks($str) {
-//			if (this.isMultibyte($str)) {
-//				$str = this.lc($str);
+//		function ucwordbreaks(str) {
+//			if (this.isMultibyte(str)) {
+//				str = this.lc(str);
 //
 //				// since \b doesn't work for UTF-8, we explicitely define word break chars
-//				$breaks = "[ \-\(\)\}\{\.,\?!]";
+//				breaks = "[ \-\(\)\}\{\.,\?!]";
 //
 //				// find first letter after word break
-//				$replaceRegexp = "/^([a-z]|[\\xc0-\\xff][\\x80-\\xbf]*)|" .
-//					"$breaks([a-z]|[\\xc0-\\xff][\\x80-\\xbf]*)/";
+//				replaceRegexp = "/^([a-z]|[\\xc0-\\xff][\\x80-\\xbf]*)|" .
+//					"breaks([a-z]|[\\xc0-\\xff][\\x80-\\xbf]*)/";
 //
 //				return preg_replace_callback(
-//					$replaceRegexp,
-//					[ $this, 'ucwordbreaksCallbackMB' ],
-//					$str
+//					replaceRegexp,
+//					[ this, 'ucwordbreaksCallbackMB' ],
+//					str
 //				);
 //			} else {
 //				return preg_replace_callback(
 //					'/\b([\w\x80-\xff]+)\b/',
-//					[ $this, 'ucwordbreaksCallbackAscii' ],
-//					$str
+//					[ this, 'ucwordbreaksCallbackAscii' ],
+//					str
 //				);
 //			}
 //		}
 //
 //		/**
-//		* Return a case-folded representation of $s
+//		* Return a case-folded representation of s
 //		*
-//		* This is a representation such that caseFold($s1)==caseFold($s2) if $s1
-//		* and $s2 are the same except for the case of their characters. It is not
+//		* This is a representation such that caseFold(s1)==caseFold(s2) if s1
+//		* and s2 are the same except for the case of their characters. It is not
 //		* necessary for the value returned to make sense when displayed.
 //		*
 //		* Do *not* perform any other normalisation in this function. If a caller
 //		* uses this function when it should be using a more general normalisation
 //		* function, then fix the caller.
 //		*
-//		* @param String $s
+//		* @param String s
 //		*
 //		* @return String
 //		*/
-//		function caseFold($s) {
-//			return this.uc($s);
+//		function caseFold(s) {
+//			return this.uc(s);
 //		}
 //
 //		/**
-//		* @param String $s
+//		* @param String s
 //		* @return String
 //		* @throws MWException
 //		*/
-//		function checkTitleEncoding($s) {
-//			if (is_array($s)) {
+//		function checkTitleEncoding(s) {
+//			if (is_array(s)) {
 //				throw new MWException('Given array to checkTitleEncoding.');
 //			}
-//			if (StringUtils::isUtf8($s)) {
-//				return $s;
+//			if (StringUtils::isUtf8(s)) {
+//				return s;
 //			}
 //
-//			return this.iconv(this.fallback8bitEncoding(), 'utf-8', $s);
+//			return this.iconv(this.fallback8bitEncoding(), 'utf-8', s);
 //		}
 //
 //		/**
 //		* @return array
 //		*/
 //		function fallback8bitEncoding() {
-//			return self::$dataCache->getItem(this.mCode, 'fallback8bitEncoding');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'fallback8bitEncoding');
 //		}
 //
 //		/**
@@ -2870,117 +2878,117 @@ public class XomwLanguage {
 //		* Some languages such as Chinese require word segmentation,
 //		* Specify such segmentation when overridden in derived class.
 //		*
-//		* @param String $String
+//		* @param String String
 //		* @return String
 //		*/
-//		function segmentByWord($String) {
-//			return $String;
+//		function segmentByWord(String) {
+//			return String;
 //		}
 //
 //		/**
 //		* Some languages have special punctuation need to be normalized.
 //		* Make such changes here.
 //		*
-//		* @param String $String
+//		* @param String String
 //		* @return String
 //		*/
-//		function normalizeForSearch($String) {
-//			return self::convertDoubleWidth($String);
+//		function normalizeForSearch(String) {
+//			return XomwLanguage.convertDoubleWidth(String);
 //		}
 //
 //		/**
 //		* convert double-width roman characters to single-width.
 //		* range: ff00-ff5f ~= 0020-007f
 //		*
-//		* @param String $String
+//		* @param String String
 //		*
 //		* @return String
 //		*/
-//		protected static function convertDoubleWidth($String) {
-//			static $full = null;
-//			static $half = null;
+//		protected static function convertDoubleWidth(String) {
+//			static full = null;
+//			static half = null;
 //
-//			if ($full == null) {
-//				$fullWidth = "０１２３４５６７８９ＡＢＣＤＥＦＧＨＩＪＫＬＭＮＯＰＱＲＳＴＵＶＷＸＹＺａｂｃｄｅｆｇｈｉｊｋｌｍｎｏｐｑｒｓｔｕｖｗｘｙｚ";
-//				$halfWidth = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-//				$full = str_split($fullWidth, 3);
-//				$half = str_split($halfWidth);
+//			if (full == null) {
+//				fullWidth = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+//				halfWidth = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+//				full = str_split(fullWidth, 3);
+//				half = str_split(halfWidth);
 //			}
 //
-//			$String = str_replace($full, $half, $String);
-//			return $String;
+//			String = str_replace(full, half, String);
+//			return String;
 //		}
 //
 //		/**
-//		* @param String $String
-//		* @param String $pattern
+//		* @param String String
+//		* @param String pattern
 //		* @return String
 //		*/
-//		protected static function insertSpace($String, $pattern) {
-//			$String = preg_replace($pattern, " $1 ", $String);
-//			$String = preg_replace('/ +/', ' ', $String);
-//			return $String;
+//		protected static function insertSpace(String, pattern) {
+//			String = preg_replace(pattern, " 1 ", String);
+//			String = preg_replace('/ +/', ' ', String);
+//			return String;
 //		}
 //
 //		/**
-//		* @param array $termsArray
+//		* @param array termsArray
 //		* @return array
 //		*/
-//		function convertForSearchResult($termsArray) {
+//		function convertForSearchResult(termsArray) {
 //			# some languages, e.g. Chinese, need to do a conversion
 //			# in order for search results to be displayed correctly
-//			return $termsArray;
+//			return termsArray;
 //		}
 //
 //		/**
 //		* Get the first character of a String.
 //		*
-//		* @param String $s
+//		* @param String s
 //		* @return String
 //		*/
-//		function firstChar($s) {
-//			$matches = [];
+//		function firstChar(s) {
+//			matches = [];
 //			preg_match(
 //				'/^([\x00-\x7f]|[\xc0-\xdf][\x80-\xbf]|' .
 //					'[\xe0-\xef][\x80-\xbf]{2}|[\xf0-\xf7][\x80-\xbf]{3})/',
-//				$s,
-//				$matches
+//				s,
+//				matches
 //			);
 //
-//			if (isset($matches[1])) {
-//				if (strlen($matches[1]) != 3) {
-//					return $matches[1];
+//			if (isset(matches[1])) {
+//				if (strlen(matches[1]) != 3) {
+//					return matches[1];
 //				}
 //
 //				// Break down Hangul syllables to grab the first jamo
-//				$code = UtfNormal\Utils::utf8ToCodepoint($matches[1]);
-//				if ($code < 0xac00 || 0xd7a4 <= $code) {
-//					return $matches[1];
-//				} elseif ($code < 0xb098) {
+//				code = UtfNormal\Utils::utf8ToCodepoint(matches[1]);
+//				if (code < 0xac00 || 0xd7a4 <= code) {
+//					return matches[1];
+//				} elseif (code < 0xb098) {
 //					return "\xe3\x84\xb1";
-//				} elseif ($code < 0xb2e4) {
+//				} elseif (code < 0xb2e4) {
 //					return "\xe3\x84\xb4";
-//				} elseif ($code < 0xb77c) {
+//				} elseif (code < 0xb77c) {
 //					return "\xe3\x84\xb7";
-//				} elseif ($code < 0xb9c8) {
+//				} elseif (code < 0xb9c8) {
 //					return "\xe3\x84\xb9";
-//				} elseif ($code < 0xbc14) {
+//				} elseif (code < 0xbc14) {
 //					return "\xe3\x85\x81";
-//				} elseif ($code < 0xc0ac) {
+//				} elseif (code < 0xc0ac) {
 //					return "\xe3\x85\x82";
-//				} elseif ($code < 0xc544) {
+//				} elseif (code < 0xc544) {
 //					return "\xe3\x85\x85";
-//				} elseif ($code < 0xc790) {
+//				} elseif (code < 0xc790) {
 //					return "\xe3\x85\x87";
-//				} elseif ($code < 0xcc28) {
+//				} elseif (code < 0xcc28) {
 //					return "\xe3\x85\x88";
-//				} elseif ($code < 0xce74) {
+//				} elseif (code < 0xce74) {
 //					return "\xe3\x85\x8a";
-//				} elseif ($code < 0xd0c0) {
+//				} elseif (code < 0xd0c0) {
 //					return "\xe3\x85\x8b";
-//				} elseif ($code < 0xd30c) {
+//				} elseif (code < 0xd30c) {
 //					return "\xe3\x85\x8c";
-//				} elseif ($code < 0xd558) {
+//				} elseif (code < 0xd558) {
 //					return "\xe3\x85\x8d";
 //				} else {
 //					return "\xe3\x85\x8e";
@@ -2998,21 +3006,21 @@ public class XomwLanguage {
 //		}
 //
 //		/**
-//		* @param String $s
+//		* @param String s
 //		* @return String
 //		* @deprecated No-op since 1.28
 //		*/
-//		function recodeForEdit($s) {
-//			return $s;
+//		function recodeForEdit(s) {
+//			return s;
 //		}
 //
 //		/**
-//		* @param String $s
+//		* @param String s
 //		* @return String
 //		* @deprecated No-op since 1.28
 //		*/
-//		function recodeInput($s) {
-//			return $s;
+//		function recodeInput(s) {
+//			return s;
 //		}
 //
 //		/**
@@ -3022,44 +3030,44 @@ public class XomwLanguage {
 //		*
 //		* This is language-specific for performance reasons only.
 //		*
-//		* @param String $s
+//		* @param String s
 //		*
 //		* @return String
 //		*/
-//		function normalize($s) {
-//			global $wgAllUnicodeFixes;
-//			$s = UtfNormal\Validator::cleanUp($s);
-//			if ($wgAllUnicodeFixes) {
-//				$s = this.transformUsingPairFile('normalize-ar.ser', $s);
-//				$s = this.transformUsingPairFile('normalize-ml.ser', $s);
+//		function normalize(s) {
+//			global wgAllUnicodeFixes;
+//			s = UtfNormal\Validator::cleanUp(s);
+//			if (wgAllUnicodeFixes) {
+//				s = this.transformUsingPairFile('normalize-ar.ser', s);
+//				s = this.transformUsingPairFile('normalize-ml.ser', s);
 //			}
 //
-//			return $s;
+//			return s;
 //		}
 //
 //		/**
 //		* Transform a String using serialized data stored in the given file (which
-//		* must be in the serialized subdirectory of $IP). The file contains pairs
+//		* must be in the serialized subdirectory of IP). The file contains pairs
 //		* mapping source characters to destination characters.
 //		*
 //		* The data is cached in process memory. This will go faster if you have the
 //		* FastStringSearch extension.
 //		*
-//		* @param String $file
-//		* @param String $String
+//		* @param String file
+//		* @param String String
 //		*
 //		* @throws MWException
 //		* @return String
 //		*/
-//		function transformUsingPairFile($file, $String) {
-//			if (!isset(this.transformData[$file])) {
-//				$data = wfGetPrecompiledData($file);
-//				if ($data == false) {
-//					throw new MWException(__METHOD__ . ": The transformation file $file is missing");
+//		function transformUsingPairFile(file, String) {
+//			if (!isset(this.transformData[file])) {
+//				data = wfGetPrecompiledData(file);
+//				if (data == false) {
+//					throw new MWException(__METHOD__ . ": The transformation file file is missing");
 //				}
-//				this.transformData[$file] = new ReplacementArray($data);
+//				this.transformData[file] = new ReplacementArray(data);
 //			}
-//			return this.transformData[$file]->replace($String);
+//			return this.transformData[file].replace(String);
 //		}
 //
 //		/**
@@ -3068,7 +3076,7 @@ public class XomwLanguage {
 //		* @return boolean
 //		*/
 //		function isRTL() {
-//			return self::$dataCache->getItem(this.mCode, 'rtl');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'rtl');
 //		}
 //
 //		/**
@@ -3110,12 +3118,12 @@ public class XomwLanguage {
 //		* because it makes the output HTML source code more readable. When
 //		* the output is plain text or can be escaped, getDirMark() should be used.
 //		*
-//		* @param boolean $opposite Get the direction mark opposite to your language
+//		* @param boolean opposite Get the direction mark opposite to your language
 //		* @return String
 //		* @since 1.20
 //		*/
-//		function getDirMarkEntity($opposite = false) {
-//			if ($opposite) {
+//		function getDirMarkEntity(opposite = false) {
+//			if (opposite) {
 //				return this.isRTL() ? '&lrm;' : '&rlm;';
 //			}
 //			return this.isRTL() ? '&rlm;' : '&lrm;';
@@ -3128,46 +3136,46 @@ public class XomwLanguage {
 //		* when the output is plain text or can be escaped. When the output is
 //		* HTML, use getDirMarkEntity() instead.
 //		*
-//		* @param boolean $opposite Get the direction mark opposite to your language
+//		* @param boolean opposite Get the direction mark opposite to your language
 //		* @return String
 //		*/
-//		function getDirMark($opposite = false) {
-//			$lrm = "\xE2\x80\x8E"; # LEFT-TO-RIGHT MARK, commonly abbreviated LRM
-//			$rlm = "\xE2\x80\x8F"; # RIGHT-TO-LEFT MARK, commonly abbreviated RLM
-//			if ($opposite) {
-//				return this.isRTL() ? $lrm : $rlm;
+//		function getDirMark(opposite = false) {
+//			lrm = "\xE2\x80\x8E"; # LEFT-TO-RIGHT MARK, commonly abbreviated LRM
+//			rlm = "\xE2\x80\x8F"; # RIGHT-TO-LEFT MARK, commonly abbreviated RLM
+//			if (opposite) {
+//				return this.isRTL() ? lrm : rlm;
 //			}
-//			return this.isRTL() ? $rlm : $lrm;
+//			return this.isRTL() ? rlm : lrm;
 //		}
 //
 //		/**
 //		* @return array
 //		*/
 //		function capitalizeAllNouns() {
-//			return self::$dataCache->getItem(this.mCode, 'capitalizeAllNouns');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'capitalizeAllNouns');
 //		}
 //
 //		/**
 //		* An arrow, depending on the language direction.
 //		*
-//		* @param String $direction The direction of the arrow: forwards (default),
+//		* @param String direction The direction of the arrow: forwards (default),
 //		*   backwards, left, right, up, down.
 //		* @return String
 //		*/
-//		function getArrow($direction = 'forwards') {
-//			switch ($direction) {
+//		function getArrow(direction = 'forwards') {
+//			switch (direction) {
 //			case 'forwards':
-//				return this.isRTL() ? '←' : '→';
+//				return this.isRTL() ? '?' : '?';
 //			case 'backwards':
-//				return this.isRTL() ? '→' : '←';
+//				return this.isRTL() ? '?' : '?';
 //			case 'left':
-//				return '←';
+//				return '?';
 //			case 'right':
-//				return '→';
+//				return '?';
 //			case 'up':
-//				return '↑';
+//				return '?';
 //			case 'down':
-//				return '↓';
+//				return '?';
 //			}
 //		}
 //
@@ -3177,7 +3185,7 @@ public class XomwLanguage {
 //		* @return boolean
 //		*/
 //		function linkPrefixExtension() {
-//			return self::$dataCache->getItem(this.mCode, 'linkPrefixExtension');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'linkPrefixExtension');
 //		}
 //
 //		/**
@@ -3185,7 +3193,7 @@ public class XomwLanguage {
 //		* @return array
 //		*/
 //		function getMagicWords() {
-//			return self::$dataCache->getItem(this.mCode, 'magicWords');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'magicWords');
 //		}
 //
 //		/**
@@ -3202,40 +3210,40 @@ public class XomwLanguage {
 //		/**
 //		* Fill a MagicWord Object with data from here
 //		*
-//		* @param MagicWord $mw
+//		* @param MagicWord mw
 //		*/
-//		function getMagic($mw) {
+//		function getMagic(mw) {
 //			// Saves a function call
 //			if (!this.mMagicHookDone) {
 //				this.doMagicHook();
 //			}
 //
-//			if (isset(this.mMagicExtensions[$mw->mId])) {
-//				$rawEntry = this.mMagicExtensions[$mw->mId];
+//			if (isset(this.mMagicExtensions[mw.mId])) {
+//				rawEntry = this.mMagicExtensions[mw.mId];
 //			} else {
-//				$rawEntry = self::$dataCache->getSubitem(
-//					this.mCode, 'magicWords', $mw->mId);
+//				rawEntry = XomwLanguage.dataCache.getSubitem(
+//					this.mCode, 'magicWords', mw.mId);
 //			}
 //
-//			if (!is_array($rawEntry)) {
-//				wfWarn("\"$rawEntry\" is not a valid magic word for \"$mw->mId\"");
+//			if (!is_array(rawEntry)) {
+//				wfWarn("\"rawEntry\" is not a valid magic word for \"mw.mId\"");
 //			} else {
-//				$mw->mCaseSensitive = $rawEntry[0];
-//				$mw->mSynonyms = array_slice($rawEntry, 1);
+//				mw.mCaseSensitive = rawEntry[0];
+//				mw.mSynonyms = array_slice(rawEntry, 1);
 //			}
 //		}
 //
 //		/**
 //		* Add magic words to the extension array
 //		*
-//		* @param array $newWords
+//		* @param array newWords
 //		*/
-//		function addMagicWordsByLang($newWords) {
-//			$fallbackChain = this.getFallbackLanguages();
-//			$fallbackChain = array_reverse($fallbackChain);
-//			foreach ($fallbackChain as $code) {
-//				if (isset($newWords[$code])) {
-//					this.mMagicExtensions = $newWords[$code] + this.mMagicExtensions;
+//		function addMagicWordsByLang(newWords) {
+//			fallbackChain = this.getFallbackLanguages();
+//			fallbackChain = array_reverse(fallbackChain);
+//			foreach (fallbackChain as code) {
+//				if (isset(newWords[code])) {
+//					this.mMagicExtensions = newWords[code] + this.mMagicExtensions;
 //				}
 //			}
 //		}
@@ -3250,7 +3258,7 @@ public class XomwLanguage {
 //			if (is_null(this.mExtendedSpecialPageAliases)) {
 //				// Initialise array
 //				this.mExtendedSpecialPageAliases =
-//					self::$dataCache->getItem(this.mCode, 'specialPageAliases');
+//					XomwLanguage.dataCache.getItem(this.mCode, 'specialPageAliases');
 //				Hooks::run('LanguageGetSpecialPageAliases',
 //					[ &this.mExtendedSpecialPageAliases, this.getCode() ]);
 //			}
@@ -3261,33 +3269,33 @@ public class XomwLanguage {
 //		/**
 //		* Italic is unsuitable for some languages
 //		*
-//		* @param String $text The text to be emphasized.
+//		* @param String text The text to be emphasized.
 //		* @return String
 //		*/
-//		function emphasize($text) {
-//			return "<em>$text</em>";
+//		function emphasize(text) {
+//			return "<em>text</em>";
 //		}
 
 	/**
 	* Normally we output all numbers in plain en_US style, that is
 	* 293,291.235 for twohundredninetythreethousand-twohundredninetyone
 	* point twohundredthirtyfive. However this is not suitable for all
-	* languages, some such as Bengali (bn) want ২,৯৩,২৯১.২৩৫ and others such as
+	* languages, some such as Bengali (bn) want ?,??,???.??? and others such as
 	* Icelandic just want to use commas instead of dots, and dots instead
 	* of commas like "293.291,235".
 	*
 	* An example of this function being called:
 	* <code>
-	* wfMessage('message')->numParams($num)->text()
+	* wfMessage('message').numParams(num).text()
 	* </code>
 	*
-	* See $separatorTransformTable on MessageIs.php for
+	* See separatorTransformTable on MessageIs.php for
 	* the , => . and . => , implementation.
 	*
 	* @todo check if it's viable to use localeconv() for the decimal separator thing.
-	* @param int|float $number The String to be formatted, should be an integer
+	* @param int|float number The String to be formatted, should be an integer
 	*   or a floating point number.
-	* @param boolean $nocommafy Set to true for special numbers like dates
+	* @param boolean nocommafy Set to true for special numbers like dates
 	* @return String
 	*/
 	// DFLT:nocommafy=false
@@ -3316,42 +3324,42 @@ public class XomwLanguage {
 //		/**
 //		* Front-end for non-commafied formatNum
 //		*
-//		* @param int|float $number The String to be formatted, should be an integer
+//		* @param int|float number The String to be formatted, should be an integer
 //		*        or a floating point number.
 //		* @since 1.21
 //		* @return String
 //		*/
-//		public function formatNumNoSeparators($number) {
-//			return this.formatNum($number, true);
+//		public function formatNumNoSeparators(number) {
+//			return this.formatNum(number, true);
 //		}
 //
 //		/**
-//		* @param String $number
+//		* @param String number
 //		* @return String
 //		*/
-//		public function parseFormattedNumber($number) {
-//			$s = this.digitTransformTable();
-//			if ($s) {
+//		public function parseFormattedNumber(number) {
+//			s = this.digitTransformTable();
+//			if (s) {
 //				// eliminate empty array values such as ''. (bug 64347)
-//				$s = array_filter($s);
-//				$number = strtr($number, array_flip($s));
+//				s = array_filter(s);
+//				number = strtr(number, array_flip(s));
 //			}
 //
-//			$s = this.separatorTransformTable();
-//			if ($s) {
+//			s = this.separatorTransformTable();
+//			if (s) {
 //				// eliminate empty array values such as ''. (bug 64347)
-//				$s = array_filter($s);
-//				$number = strtr($number, array_flip($s));
+//				s = array_filter(s);
+//				number = strtr(number, array_flip(s));
 //			}
 //
-//			$number = strtr($number, [ ',' => '' ]);
-//			return $number;
+//			number = strtr(number, [ ',' => '' ]);
+//			return number;
 //		}
 
 	/**
 	* Adds commas to a given number
 	* @since 1.19
-	* @param mixed $number
+	* @param mixed number
 	* @return String
 	*/
 	private static byte[] DIGIT_GROUPING_PATTERN_MILLION = Bry_.new_a7("###,###,###");
@@ -3398,7 +3406,7 @@ public class XomwLanguage {
 
 		if (digitGroupingPattern == null || Bry_.Eq(digitGroupingPattern, DIGIT_GROUPING_PATTERN_MILLION)) {
 			// default grouping is at thousands,  use the same for ###,###,### pattern too.
-			// return strrev((String)preg_replace('/(\d{3})(?=\d)(?!\d*\.)/', '$1,', strrev(number)));
+			// return strrev((String)preg_replace('/(\d{3})(?=\d)(?!\d*\.)/', '1,', strrev(number)));
 			if (negative)
 				tmp_commafy.Add_byte(Byte_ascii.Dash);
 
@@ -3408,7 +3416,7 @@ public class XomwLanguage {
 				&& integerLen > 0)      // ignore numbers with no integer portion; EX: ".123"
 				seg_0 = 3;				// set seg_0 to 3
 
-			// print digits before 1st comma; EX: 12345 -> "12"
+			// print digits before 1st comma; EX: 12345 . "12"
 			if (seg_0 > 0) {
 				tmp_commafy.Add_mid(number, integerBgn, integerBgn + seg_0);
 				integerBgn = integerBgn + seg_0;
@@ -3449,7 +3457,7 @@ public class XomwLanguage {
 			int digitGroupingPatternLen = digitGroupingPattern.length;
 			tmp_matches.Clear();
 
-			// parse digitGroupingPattern for groups of "#"; EX: "##,###" -> 0,2; 3,6
+			// parse digitGroupingPattern for groups of "#"; EX: "##,###" . 0,2; 3,6
 			Int_2_ref match = null;
 			boolean matchContinued = false;
 			for (int i = 0; i < digitGroupingPatternLen; i++) {
@@ -3513,14 +3521,14 @@ public class XomwLanguage {
 //		* @return array
 //		*/
 //		function digitTransformTable() {
-//			return self::$dataCache->getItem(this.mCode, 'digitTransformTable');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'digitTransformTable');
 //		}
 
 	/**
 	* @return array
 	*/
 	//	private byte[][] separatorTransformTable() {
-	//		return self::$dataCache->getItem(this.mCode, 'separatorTransformTable');
+	//		return XomwLanguage.dataCache.getItem(this.mCode, 'separatorTransformTable');
 	//	}
 
 //		/**
@@ -3529,67 +3537,67 @@ public class XomwLanguage {
 //		* The last two strings are chained with an "and".
 //		* NOTE: This function will only work with standard numeric array keys (0, 1, 2…)
 //		*
-//		* @param String[] $l
+//		* @param String[] l
 //		* @return String
 //		*/
-//		function listToText(array $l) {
-//			$m = count($l) - 1;
-//			if ($m < 0) {
+//		function listToText(array l) {
+//			m = count(l) - 1;
+//			if (m < 0) {
 //				return '';
 //			}
-//			if ($m > 0) {
-//				$and = this.msg('and')->escaped();
-//				$space = this.msg('word-separator')->escaped();
-//				if ($m > 1) {
-//					$comma = this.msg('comma-separator')->escaped();
+//			if (m > 0) {
+//				and = this.msg('and').escaped();
+//				space = this.msg('word-separator').escaped();
+//				if (m > 1) {
+//					comma = this.msg('comma-separator').escaped();
 //				}
 //			}
-//			$s = $l[$m];
-//			for ($i = $m - 1; $i >= 0; $i--) {
-//				if ($i == $m - 1) {
-//					$s = $l[$i] . $and . $space . $s;
+//			s = l[m];
+//			for (i = m - 1; i >= 0; i--) {
+//				if (i == m - 1) {
+//					s = l[i] . and . space . s;
 //				} else {
-//					$s = $l[$i] . $comma . $s;
+//					s = l[i] . comma . s;
 //				}
 //			}
-//			return $s;
+//			return s;
 //		}
 //
 //		/**
 //		* Take a list of strings and build a locale-friendly comma-separated
 //		* list, using the local comma-separator message.
-//		* @param String[] $list Array of strings to put in a comma list
+//		* @param String[] list Array of strings to put in a comma list
 //		* @return String
 //		*/
-//		function commaList(array $list) {
+//		function commaList(array list) {
 //			return implode(
-//				wfMessage('comma-separator')->inLanguage($this)->escaped(),
-//				$list
+//				wfMessage('comma-separator').inLanguage(this).escaped(),
+//				list
 //			);
 //		}
 //
 //		/**
 //		* Take a list of strings and build a locale-friendly semicolon-separated
 //		* list, using the local semicolon-separator message.
-//		* @param String[] $list Array of strings to put in a semicolon list
+//		* @param String[] list Array of strings to put in a semicolon list
 //		* @return String
 //		*/
-//		function semicolonList(array $list) {
+//		function semicolonList(array list) {
 //			return implode(
-//				wfMessage('semicolon-separator')->inLanguage($this)->escaped(),
-//				$list
+//				wfMessage('semicolon-separator').inLanguage(this).escaped(),
+//				list
 //			);
 //		}
 //
 //		/**
 //		* Same as commaList, but separate it with the pipe instead.
-//		* @param String[] $list Array of strings to put in a pipe list
+//		* @param String[] list Array of strings to put in a pipe list
 //		* @return String
 //		*/
-//		function pipeList(array $list) {
+//		function pipeList(array list) {
 //			return implode(
-//				wfMessage('pipe-separator')->inLanguage($this)->escaped(),
-//				$list
+//				wfMessage('pipe-separator').inLanguage(this).escaped(),
+//				list
 //			);
 //		}
 //
@@ -3601,54 +3609,54 @@ public class XomwLanguage {
 //		* multi-byte character sets mean we need to ensure that only whole characters
 //		* are included, otherwise broken characters can be passed to the user
 //		*
-//		* If $length is negative, the String will be truncated from the beginning
+//		* If length is negative, the String will be truncated from the beginning
 //		*
-//		* @param String $String String to truncate
-//		* @param int $length Maximum length (including ellipses)
-//		* @param String $ellipsis String to append to the truncated text
-//		* @param boolean $adjustLength Subtract length of ellipsis from $length.
-//		*	$adjustLength was introduced in 1.18, before that behaved as if false.
+//		* @param String String String to truncate
+//		* @param int length Maximum length (including ellipses)
+//		* @param String ellipsis String to append to the truncated text
+//		* @param boolean adjustLength Subtract length of ellipsis from length.
+//		*	adjustLength was introduced in 1.18, before that behaved as if false.
 //		* @return String
 //		*/
-//		function truncate($String, $length, $ellipsis = '...', $adjustLength = true) {
+//		function truncate(String, length, ellipsis = '...', adjustLength = true) {
 //			# Use the localized ellipsis character
-//			if ($ellipsis == '...') {
-//				$ellipsis = wfMessage('ellipsis')->inLanguage($this)->escaped();
+//			if (ellipsis == '...') {
+//				ellipsis = wfMessage('ellipsis').inLanguage(this).escaped();
 //			}
 //			# Check if there is no need to truncate
-//			if ($length == 0) {
-//				return $ellipsis; // convention
-//			} elseif (strlen($String) <= abs($length)) {
-//				return $String; // no need to truncate
+//			if (length == 0) {
+//				return ellipsis; // convention
+//			} elseif (strlen(String) <= abs(length)) {
+//				return String; // no need to truncate
 //			}
-//			$stringOriginal = $String;
-//			# If ellipsis length is >= $length then we can't apply $adjustLength
-//			if ($adjustLength && strlen($ellipsis) >= abs($length)) {
-//				$String = $ellipsis; // this can be slightly unexpected
+//			stringOriginal = String;
+//			# If ellipsis length is >= length then we can't apply adjustLength
+//			if (adjustLength && strlen(ellipsis) >= abs(length)) {
+//				String = ellipsis; // this can be slightly unexpected
 //			# Otherwise, truncate and add ellipsis...
 //			} else {
-//				$eLength = $adjustLength ? strlen($ellipsis) : 0;
-//				if ($length > 0) {
-//					$length -= $eLength;
-//					$String = substr($String, 0, $length); // xyz...
-//					$String = this.removeBadCharLast($String);
-//					$String = rtrim($String);
-//					$String = $String . $ellipsis;
+//				eLength = adjustLength ? strlen(ellipsis) : 0;
+//				if (length > 0) {
+//					length -= eLength;
+//					String = substr(String, 0, length); // xyz...
+//					String = this.removeBadCharLast(String);
+//					String = rtrim(String);
+//					String = String . ellipsis;
 //				} else {
-//					$length += $eLength;
-//					$String = substr($String, $length); // ...xyz
-//					$String = this.removeBadCharFirst($String);
-//					$String = ltrim($String);
-//					$String = $ellipsis . $String;
+//					length += eLength;
+//					String = substr(String, length); // ...xyz
+//					String = this.removeBadCharFirst(String);
+//					String = ltrim(String);
+//					String = ellipsis . String;
 //				}
 //			}
 //			# Do not truncate if the ellipsis makes the String longer/equal (bug 22181).
-//			# This check is *not* redundant if $adjustLength, due to the single case where
-//			# LEN($ellipsis) > ABS($limit arg); $stringOriginal could be shorter than $String.
-//			if (strlen($String) < strlen($stringOriginal)) {
-//				return $String;
+//			# This check is *not* redundant if adjustLength, due to the single case where
+//			# LEN(ellipsis) > ABS(limit arg); stringOriginal could be shorter than String.
+//			if (strlen(String) < strlen(stringOriginal)) {
+//				return String;
 //			} else {
-//				return $stringOriginal;
+//				return stringOriginal;
 //			}
 //		}
 //
@@ -3656,44 +3664,44 @@ public class XomwLanguage {
 //		* Remove bytes that represent an incomplete Unicode character
 //		* at the end of String (e.g. bytes of the char are missing)
 //		*
-//		* @param String $String
+//		* @param String String
 //		* @return String
 //		*/
-//		protected function removeBadCharLast($String) {
-//			if ($String != '') {
-//				$char = ord($String[strlen($String) - 1]);
-//				$m = [];
-//				if ($char >= 0xc0) {
+//		protected function removeBadCharLast(String) {
+//			if (String != '') {
+//				char = ord(String[strlen(String) - 1]);
+//				m = [];
+//				if (char >= 0xc0) {
 //					# We got the first byte only of a multibyte char; remove it.
-//					$String = substr($String, 0, -1);
-//				} elseif ($char >= 0x80 &&
+//					String = substr(String, 0, -1);
+//				} elseif (char >= 0x80 &&
 //					// Use the /s modifier (PCRE_DOTALL) so (.*) also matches newlines
 //					preg_match('/^(.*)(?:[\xe0-\xef][\x80-\xbf]|' .
-//						'[\xf0-\xf7][\x80-\xbf]{1,2})$/s', $String, $m)
+//						'[\xf0-\xf7][\x80-\xbf]{1,2})/s', String, m)
 //				) {
 //					# We chopped in the middle of a character; remove it
-//					$String = $m[1];
+//					String = m[1];
 //				}
 //			}
-//			return $String;
+//			return String;
 //		}
 //
 //		/**
 //		* Remove bytes that represent an incomplete Unicode character
 //		* at the start of String (e.g. bytes of the char are missing)
 //		*
-//		* @param String $String
+//		* @param String String
 //		* @return String
 //		*/
-//		protected function removeBadCharFirst($String) {
-//			if ($String != '') {
-//				$char = ord($String[0]);
-//				if ($char >= 0x80 && $char < 0xc0) {
+//		protected function removeBadCharFirst(String) {
+//			if (String != '') {
+//				char = ord(String[0]);
+//				if (char >= 0x80 && char < 0xc0) {
 //					# We chopped in the middle of a character; remove the whole thing
-//					$String = preg_replace('/^[\x80-\xbf]+/', '', $String);
+//					String = preg_replace('/^[\x80-\xbf]+/', '', String);
 //				}
 //			}
-//			return $String;
+//			return String;
 //		}
 //
 //		/**
@@ -3704,165 +3712,165 @@ public class XomwLanguage {
 //		* tags like <span> and <a>, were the tags are self-contained (valid HTML).
 //		* Also, this will not detect things like "display:none" CSS.
 //		*
-//		* Note: since 1.18 you do not need to leave extra room in $length for ellipses.
+//		* Note: since 1.18 you do not need to leave extra room in length for ellipses.
 //		*
-//		* @param String $text HTML String to truncate
-//		* @param int $length (zero/positive) Maximum length (including ellipses)
-//		* @param String $ellipsis String to append to the truncated text
+//		* @param String text HTML String to truncate
+//		* @param int length (zero/positive) Maximum length (including ellipses)
+//		* @param String ellipsis String to append to the truncated text
 //		* @return String
 //		*/
-//		function truncateHtml($text, $length, $ellipsis = '...') {
+//		function truncateHtml(text, length, ellipsis = '...') {
 //			# Use the localized ellipsis character
-//			if ($ellipsis == '...') {
-//				$ellipsis = wfMessage('ellipsis')->inLanguage($this)->escaped();
+//			if (ellipsis == '...') {
+//				ellipsis = wfMessage('ellipsis').inLanguage(this).escaped();
 //			}
 //			# Check if there is clearly no need to truncate
-//			if ($length <= 0) {
-//				return $ellipsis; // no text shown, nothing to format (convention)
-//			} elseif (strlen($text) <= $length) {
-//				return $text; // String short enough even *with* HTML (short-circuit)
+//			if (length <= 0) {
+//				return ellipsis; // no text shown, nothing to format (convention)
+//			} elseif (strlen(text) <= length) {
+//				return text; // String short enough even *with* HTML (short-circuit)
 //			}
 //
-//			$dispLen = 0; // innerHTML legth so far
-//			$testingEllipsis = false; // checking if ellipses will make String longer/equal?
-//			$tagType = 0; // 0-open, 1-close
-//			$bracketState = 0; // 1-tag start, 2-tag name, 0-neither
-//			$entityState = 0; // 0-not entity, 1-entity
-//			$tag = $ret = ''; // accumulated tag name, accumulated result String
-//			$openTags = []; // open tag stack
-//			$maybeState = null; // possible truncation state
+//			dispLen = 0; // innerHTML legth so far
+//			testingEllipsis = false; // checking if ellipses will make String longer/equal?
+//			tagType = 0; // 0-open, 1-close
+//			bracketState = 0; // 1-tag start, 2-tag name, 0-neither
+//			entityState = 0; // 0-not entity, 1-entity
+//			tag = ret = ''; // accumulated tag name, accumulated result String
+//			openTags = []; // open tag stack
+//			maybeState = null; // possible truncation state
 //
-//			$textLen = strlen($text);
-//			$neLength = max(0, $length - strlen($ellipsis)); // non-ellipsis len if truncated
-//			for ($pos = 0; true; ++$pos) {
+//			textLen = strlen(text);
+//			neLength = max(0, length - strlen(ellipsis)); // non-ellipsis len if truncated
+//			for (pos = 0; true; ++pos) {
 //				# Consider truncation once the display length has reached the maximim.
-//				# We check if $dispLen > 0 to grab tags for the $neLength = 0 case.
+//				# We check if dispLen > 0 to grab tags for the neLength = 0 case.
 //				# Check that we're not in the middle of a bracket/entity...
-//				if ($dispLen && $dispLen >= $neLength && $bracketState == 0 && !$entityState) {
-//					if (!$testingEllipsis) {
-//						$testingEllipsis = true;
+//				if (dispLen && dispLen >= neLength && bracketState == 0 && !entityState) {
+//					if (!testingEllipsis) {
+//						testingEllipsis = true;
 //						# Save where we are; we will truncate here unless there turn out to
 //						# be so few remaining characters that truncation is not necessary.
-//						if (!$maybeState) { // already saved? ($neLength = 0 case)
-//							$maybeState = [ $ret, $openTags ]; // save state
+//						if (!maybeState) { // already saved? (neLength = 0 case)
+//							maybeState = [ ret, openTags ]; // save state
 //						}
-//					} elseif ($dispLen > $length && $dispLen > strlen($ellipsis)) {
+//					} elseif (dispLen > length && dispLen > strlen(ellipsis)) {
 //						# String in fact does need truncation, the truncation point was OK.
-//						list($ret, $openTags) = $maybeState; // reload state
-//						$ret = this.removeBadCharLast($ret); // multi-byte char fix
-//						$ret .= $ellipsis; // add ellipsis
+//						list(ret, openTags) = maybeState; // reload state
+//						ret = this.removeBadCharLast(ret); // multi-byte char fix
+//						ret .= ellipsis; // add ellipsis
 //						break;
 //					}
 //				}
-//				if ($pos >= $textLen) {
+//				if (pos >= textLen) {
 //					break; // extra iteration just for above checks
 //				}
 //
 //				# Read the next char...
-//				$ch = $text[$pos];
-//				$lastCh = $pos ? $text[$pos - 1] : '';
-//				$ret .= $ch; // add to result String
-//				if ($ch == '<') {
-//					this.truncate_endBracket($tag, $tagType, $lastCh, $openTags); // for bad HTML
-//					$entityState = 0; // for bad HTML
-//					$bracketState = 1; // tag started (checking for backslash)
-//				} elseif ($ch == '>') {
-//					this.truncate_endBracket($tag, $tagType, $lastCh, $openTags);
-//					$entityState = 0; // for bad HTML
-//					$bracketState = 0; // out of brackets
-//				} elseif ($bracketState == 1) {
-//					if ($ch == '/') {
-//						$tagType = 1; // close tag (e.g. "</span>")
+//				ch = text[pos];
+//				lastCh = pos ? text[pos - 1] : '';
+//				ret .= ch; // add to result String
+//				if (ch == '<') {
+//					this.truncate_endBracket(tag, tagType, lastCh, openTags); // for bad HTML
+//					entityState = 0; // for bad HTML
+//					bracketState = 1; // tag started (checking for backslash)
+//				} elseif (ch == '>') {
+//					this.truncate_endBracket(tag, tagType, lastCh, openTags);
+//					entityState = 0; // for bad HTML
+//					bracketState = 0; // out of brackets
+//				} elseif (bracketState == 1) {
+//					if (ch == '/') {
+//						tagType = 1; // close tag (e.g. "</span>")
 //					} else {
-//						$tagType = 0; // open tag (e.g. "<span>")
-//						$tag .= $ch;
+//						tagType = 0; // open tag (e.g. "<span>")
+//						tag .= ch;
 //					}
-//					$bracketState = 2; // building tag name
-//				} elseif ($bracketState == 2) {
-//					if ($ch != ' ') {
-//						$tag .= $ch;
+//					bracketState = 2; // building tag name
+//				} elseif (bracketState == 2) {
+//					if (ch != ' ') {
+//						tag .= ch;
 //					} else {
 //						// Name found (e.g. "<a href=..."), add on tag attributes...
-//						$pos += this.truncate_skip($ret, $text, "<>", $pos + 1);
+//						pos += this.truncate_skip(ret, text, "<>", pos + 1);
 //					}
-//				} elseif ($bracketState == 0) {
-//					if ($entityState) {
-//						if ($ch == ';') {
-//							$entityState = 0;
-//							$dispLen++; // entity is one displayed char
+//				} elseif (bracketState == 0) {
+//					if (entityState) {
+//						if (ch == ';') {
+//							entityState = 0;
+//							dispLen++; // entity is one displayed char
 //						}
 //					} else {
-//						if ($neLength == 0 && !$maybeState) {
-//							// Save state without $ch. We want to *hit* the first
+//						if (neLength == 0 && !maybeState) {
+//							// Save state without ch. We want to *hit* the first
 //							// display char (to get tags) but not *use* it if truncating.
-//							$maybeState = [ substr($ret, 0, -1), $openTags ];
+//							maybeState = [ substr(ret, 0, -1), openTags ];
 //						}
-//						if ($ch == '&') {
-//							$entityState = 1; // entity found, (e.g. "&#160;")
+//						if (ch == '&') {
+//							entityState = 1; // entity found, (e.g. "&#160;")
 //						} else {
-//							$dispLen++; // this char is displayed
-//							// Add the next $max display text chars after this in one swoop...
-//							$max = ($testingEllipsis ? $length : $neLength) - $dispLen;
-//							$skipped = this.truncate_skip($ret, $text, "<>&", $pos + 1, $max);
-//							$dispLen += $skipped;
-//							$pos += $skipped;
+//							dispLen++; // this char is displayed
+//							// Add the next max display text chars after this in one swoop...
+//							max = (testingEllipsis ? length : neLength) - dispLen;
+//							skipped = this.truncate_skip(ret, text, "<>&", pos + 1, max);
+//							dispLen += skipped;
+//							pos += skipped;
 //						}
 //					}
 //				}
 //			}
 //			// Close the last tag if left unclosed by bad HTML
-//			this.truncate_endBracket($tag, $text[$textLen - 1], $tagType, $openTags);
-//			while (count($openTags) > 0) {
-//				$ret .= '</' . array_pop($openTags) . '>'; // close open tags
+//			this.truncate_endBracket(tag, text[textLen - 1], tagType, openTags);
+//			while (count(openTags) > 0) {
+//				ret .= '</' . array_pop(openTags) . '>'; // close open tags
 //			}
-//			return $ret;
+//			return ret;
 //		}
 //
 //		/**
 //		* truncateHtml() helper function
-//		* like strcspn() but adds the skipped chars to $ret
+//		* like strcspn() but adds the skipped chars to ret
 //		*
-//		* @param String $ret
-//		* @param String $text
-//		* @param String $search
-//		* @param int $start
-//		* @param null|int $len
+//		* @param String ret
+//		* @param String text
+//		* @param String search
+//		* @param int start
+//		* @param null|int len
 //		* @return int
 //		*/
-//		private function truncate_skip(&$ret, $text, $search, $start, $len = null) {
-//			if ($len == null) {
-//				$len = -1; // -1 means "no limit" for strcspn
-//			} elseif ($len < 0) {
-//				$len = 0; // sanity
+//		private function truncate_skip(&ret, text, search, start, len = null) {
+//			if (len == null) {
+//				len = -1; // -1 means "no limit" for strcspn
+//			} elseif (len < 0) {
+//				len = 0; // sanity
 //			}
-//			$skipCount = 0;
-//			if ($start < strlen($text)) {
-//				$skipCount = strcspn($text, $search, $start, $len);
-//				$ret .= substr($text, $start, $skipCount);
+//			skipCount = 0;
+//			if (start < strlen(text)) {
+//				skipCount = strcspn(text, search, start, len);
+//				ret .= substr(text, start, skipCount);
 //			}
-//			return $skipCount;
+//			return skipCount;
 //		}
 //
 //		/**
 //		* truncateHtml() helper function
-//		* (a) push or pop $tag from $openTags as needed
-//		* (b) clear $tag value
-//		* @param String &$tag Current HTML tag name we are looking at
-//		* @param int $tagType (0-open tag, 1-close tag)
-//		* @param String $lastCh Character before the '>' that ended this tag
-//		* @param array &$openTags Open tag stack (not accounting for $tag)
+//		* (a) push or pop tag from openTags as needed
+//		* (b) clear tag value
+//		* @param String &tag Current HTML tag name we are looking at
+//		* @param int tagType (0-open tag, 1-close tag)
+//		* @param String lastCh Character before the '>' that ended this tag
+//		* @param array &openTags Open tag stack (not accounting for tag)
 //		*/
-//		private function truncate_endBracket(&$tag, $tagType, $lastCh, &$openTags) {
-//			$tag = ltrim($tag);
-//			if ($tag != '') {
-//				if ($tagType == 0 && $lastCh != '/') {
-//					$openTags[] = $tag; // tag opened (didn't close itself)
-//				} elseif ($tagType == 1) {
-//					if ($openTags && $tag == $openTags[count($openTags) - 1]) {
-//						array_pop($openTags); // tag closed
+//		private function truncate_endBracket(&tag, tagType, lastCh, &openTags) {
+//			tag = ltrim(tag);
+//			if (tag != '') {
+//				if (tagType == 0 && lastCh != '/') {
+//					openTags[] = tag; // tag opened (didn't close itself)
+//				} elseif (tagType == 1) {
+//					if (openTags && tag == openTags[count(openTags) - 1]) {
+//						array_pop(openTags); // tag closed
 //					}
 //				}
-//				$tag = '';
+//				tag = '';
 //			}
 //		}
 //
@@ -3870,54 +3878,54 @@ public class XomwLanguage {
 //		* Grammatical transformations, needed for inflected languages
 //		* Invoked by putting {{grammar:case|word}} in a message
 //		*
-//		* @param String $word
-//		* @param String $case
+//		* @param String word
+//		* @param String case
 //		* @return String
 //		*/
-//		function convertGrammar($word, $case) {
-//			global $wgGrammarForms;
-//			if (isset($wgGrammarForms[this.getCode()][$case][$word])) {
-//				return $wgGrammarForms[this.getCode()][$case][$word];
+//		function convertGrammar(word, case) {
+//			global wgGrammarForms;
+//			if (isset(wgGrammarForms[this.getCode()][case][word])) {
+//				return wgGrammarForms[this.getCode()][case][word];
 //			}
 //
-//			$grammarTransformations = this.getGrammarTransformations();
+//			grammarTransformations = this.getGrammarTransformations();
 //
-//			if (isset($grammarTransformations[$case])) {
-//				$forms = $grammarTransformations[$case];
+//			if (isset(grammarTransformations[case])) {
+//				forms = grammarTransformations[case];
 //
 //				// Some names of grammar rules are aliases for other rules.
 //				// In such cases the value is a String rather than Object,
 //				// so load the actual rules.
-//				if (is_string($forms)) {
-//					$forms = $grammarTransformations[$forms];
+//				if (is_string(forms)) {
+//					forms = grammarTransformations[forms];
 //				}
 //
-//				foreach (array_values($forms) as $rule) {
-//					$form = $rule[0];
+//				foreach (array_values(forms) as rule) {
+//					form = rule[0];
 //
-//					if ($form == '@metadata') {
+//					if (form == '@metadata') {
 //						continue;
 //					}
 //
-//					$replacement = $rule[1];
+//					replacement = rule[1];
 //
-//					$regex = '/' . addcslashes($form, '/') . '/u';
-//					$patternMatches = preg_match($regex, $word);
+//					regex = '/' . addcslashes(form, '/') . '/u';
+//					patternMatches = preg_match(regex, word);
 //
-//					if ($patternMatches == false) {
+//					if (patternMatches == false) {
 //						wfLogWarning(
 //							'An error occurred while processing grammar. ' .
-//							"Word: '$word'. Regex: /$form/."
+//							"Word: 'word'. Regex: /form/."
 //						);
-//					} elseif ($patternMatches == 1) {
-//						$word = preg_replace($regex, $replacement, $word);
+//					} elseif (patternMatches == 1) {
+//						word = preg_replace(regex, replacement, word);
 //
 //						break;
 //					}
 //				}
 //			}
 //
-//			return $word;
+//			return word;
 //		}
 //
 //		/**
@@ -3926,11 +3934,11 @@ public class XomwLanguage {
 //		* @since 1.20
 //		*/
 //		function getGrammarForms() {
-//			global $wgGrammarForms;
-//			if (isset($wgGrammarForms[this.getCode()])
-//				&& is_array($wgGrammarForms[this.getCode()])
+//			global wgGrammarForms;
+//			if (isset(wgGrammarForms[this.getCode()])
+//				&& is_array(wgGrammarForms[this.getCode()])
 //			) {
-//				return $wgGrammarForms[this.getCode()];
+//				return wgGrammarForms[this.getCode()];
 //			}
 //
 //			return [];
@@ -3946,33 +3954,33 @@ public class XomwLanguage {
 //		* @since 1.28
 //		*/
 //		public function getGrammarTransformations() {
-//			$languageCode = this.getCode();
+//			languageCode = this.getCode();
 //
-//			if (self::$grammarTransformations == null) {
-//				self::$grammarTransformations = new MapCacheLRU(10);
+//			if (XomwLanguage.grammarTransformations == null) {
+//				XomwLanguage.grammarTransformations = new MapCacheLRU(10);
 //			}
 //
-//			if (self::$grammarTransformations->has($languageCode)) {
-//				return self::$grammarTransformations->get($languageCode);
+//			if (XomwLanguage.grammarTransformations.has(languageCode)) {
+//				return XomwLanguage.grammarTransformations.get(languageCode);
 //			}
 //
-//			$data = [];
+//			data = [];
 //
-//			$grammarDataFile = __DIR__ . "/data/grammarTransformations/$languageCode.json";
-//			if (is_readable($grammarDataFile)) {
-//				$data = FormatJson::decode(
-//					file_get_contents($grammarDataFile),
+//			grammarDataFile = __DIR__ . "/data/grammarTransformations/languageCode.json";
+//			if (is_readable(grammarDataFile)) {
+//				data = FormatJson::decode(
+//					file_get_contents(grammarDataFile),
 //					true
 //				);
 //
-//				if ($data == null) {
-//					throw new MWException("Invalid grammar data for \"$languageCode\".");
+//				if (data == null) {
+//					throw new MWException("Invalid grammar data for \"languageCode\".");
 //				}
 //
-//				self::$grammarTransformations->set($languageCode, $data);
+//				XomwLanguage.grammarTransformations.set(languageCode, data);
 //			}
 //
-//			return $data;
+//			return data;
 //		}
 //
 //		/**
@@ -3989,96 +3997,104 @@ public class XomwLanguage {
 //		* If fewer than three forms are given, the default is to use the first (masculine) form.
 //		* These details can be overridden in subclasses.
 //		*
-//		* @param String $gender
-//		* @param array $forms
+//		* @param String gender
+//		* @param array forms
 //		*
 //		* @return String
 //		*/
-//		function gender($gender, $forms) {
-//			if (!count($forms)) {
+//		function gender(gender, forms) {
+//			if (!count(forms)) {
 //				return '';
 //			}
-//			$forms = this.preConvertPlural($forms, 2);
-//			if ($gender == 'male') {
-//				return $forms[0];
+//			forms = this.preConvertPlural(forms, 2);
+//			if (gender == 'male') {
+//				return forms[0];
 //			}
-//			if ($gender == 'female') {
-//				return $forms[1];
+//			if (gender == 'female') {
+//				return forms[1];
 //			}
-//			return isset($forms[2]) ? $forms[2] : $forms[0];
+//			return isset(forms[2]) ? forms[2] : forms[0];
 //		}
-//
-//		/**
-//		* Plural form transformations, needed for some languages.
-//		* For example, there are 3 form of plural in Russian and Polish,
-//		* depending on "count mod 10". See [[w:Plural]]
-//		* For English it is pretty simple.
-//		*
-//		* Invoked by putting {{plural:count|wordform1|wordform2}}
-//		* or {{plural:count|wordform1|wordform2|wordform3}}
-//		*
-//		* Example: {{plural:{{NUMBEROFARTICLES}}|article|articles}}
-//		*
-//		* @param int $count Non-localized number
-//		* @param array $forms Different plural forms
-//		* @return String Correct form of plural for $count in this language
-//		*/
-//		function convertPlural($count, $forms) {
-//			// Handle explicit n=pluralform cases
-//			$forms = this.handleExplicitPluralForms($count, $forms);
-//			if (is_string($forms)) {
-//				return $forms;
-//			}
-//			if (!count($forms)) {
-//				return '';
-//			}
-//
-//			$pluralForm = this.getPluralRuleIndexNumber($count);
-//			$pluralForm = min($pluralForm, count($forms) - 1);
-//			return $forms[$pluralForm];
-//		}
-//
-//		/**
-//		* Handles explicit plural forms for Language::convertPlural()
-//		*
-//		* In {{PLURAL:$1|0=nothing|one|many}}, 0=nothing will be returned if $1 equals zero.
-//		* If an explicitly defined plural form matches the $count, then
-//		* String value returned, otherwise array returned for further consideration
-//		* by CLDR rules or overridden convertPlural().
-//		*
-//		* @since 1.23
-//		*
-//		* @param int $count Non-localized number
-//		* @param array $forms Different plural forms
-//		*
-//		* @return array|String
-//		*/
-//		protected function handleExplicitPluralForms($count, array $forms) {
-//			foreach ($forms as $index => $form) {
-//				if (preg_match('/\d+=/i', $form)) {
-//					$pos = strpos($form, '=');
-//					if (substr($form, 0, $pos) == (String)$count) {
-//						return substr($form, $pos + 1);
-//					}
-//					unset($forms[$index]);
-//				}
-//			}
-//			return array_values($forms);
-//		}
-//
+
+	/**
+	* Plural form transformations, needed for some languages.
+	* For example, there are 3 form of plural in Russian and Polish,
+	* depending on "count mod 10". See [[w:Plural]]
+	* For English it is pretty simple.
+	*
+	* Invoked by putting {{plural:count|wordform1|wordform2}}
+	* or {{plural:count|wordform1|wordform2|wordform3}}
+	*
+	* Example: {{plural:{{NUMBEROFARTICLES}}|article|articles}}
+	*
+	* @param int count Non-localized number
+	* @param array forms Different plural forms
+	* @return String Correct form of plural for count in this language
+	*/
+	public String convertPlural(String count, XophpArray forms) {
+		// Handle explicit n=pluralform cases
+		Object formsObject = this.handleExplicitPluralForms(count, forms);
+		if (XophpString_.is_string(formsObject)) {
+			return (String)formsObject;
+		}
+		forms = (XophpArray)formsObject;
+		if (!forms.Count_bool()) {
+			return "";
+		}
+
+		int pluralForm = this.getPluralRuleIndexNumber(count);
+		pluralForm = XophpMath.min(pluralForm, forms.Count() - 1);
+		return forms.Get_at_str(pluralForm);
+	}
+
+	/**
+	* Handles explicit plural forms for XomwLanguage.convertPlural()
+	*
+	* In {{PLURAL:1|0=nothing|one|many}}, 0=nothing will be returned if 1 equals zero.
+	* If an explicitly defined plural form matches the count, then
+	* String value returned, otherwise array returned for further consideration
+	* by CLDR rules or overridden convertPlural().
+	*
+	* @since 1.23
+	*
+	* @param int count Non-localized number
+	* @param array forms Different plural forms
+	*
+	* @return array|String
+	*/
+	public Object handleExplicitPluralForms(String count, XophpArray forms) {
+		XophpArray mutable = forms.Clone();
+		int len = forms.Len();
+		for (int i = 0; i < len; i++) {
+			XophpArrayItm formItem = forms.Get_at_itm(i);
+			String index = formItem.Key();
+			String form = (String)formItem.Val();
+			if (XophpRegex_.preg_match_bool(handleExplicitPluralForms_digits, XophpRegex_.MODIFIER_i, form)) {
+				int pos = XophpString_.strpos(form, "=");
+				if (String_.Eq(XophpString_.substr(form, 0, pos), count)) {
+					return XophpString_.substr(form, pos + 1);
+				}
+				mutable.Unset(index);
+			}
+		}
+
+		return XophpArrayUtl.array_values(mutable);
+	}
+	private static final    Regx_adp handleExplicitPluralForms_digits = Regx_adp_.new_("\\d+=");
+
 //		/**
 //		* Checks that convertPlural was given an array and pads it to requested
 //		* amount of forms by copying the last one.
 //		*
-//		* @param array $forms Array of forms given to convertPlural
-//		* @param int $count How many forms should there be at least
+//		* @param array forms Array of forms given to convertPlural
+//		* @param int count How many forms should there be at least
 //		* @return array Padded array of forms or an exception if not an array
 //		*/
-//		protected function preConvertPlural(/* Array */ $forms, $count) {
-//			while (count($forms) < $count) {
-//				$forms[] = $forms[count($forms) - 1];
+//		protected function preConvertPlural(/* Array */ forms, count) {
+//			while (count(forms) < count) {
+//				forms[] = forms[count(forms) - 1];
 //			}
-//			return $forms;
+//			return forms;
 //		}
 //
 //		/**
@@ -4094,21 +4110,21 @@ public class XomwLanguage {
 //		* there is no embedding equivalent of U+2068 FSI (isolation with heuristic
 //		* direction inference). The latter is cleaner but still not widely supported.
 //		*
-//		* @param String $text Text to wrap
+//		* @param String text Text to wrap
 //		* @return String Text, wrapped in LRE...PDF or RLE...PDF or nothing
 //		*/
-//		public function embedBidi($text = '') {
-//			$dir = Language::strongDirFromContent($text);
-//			if ($dir == 'ltr') {
+//		public function embedBidi(text = '') {
+//			dir = XomwLanguage.strongDirFromContent(text);
+//			if (dir == 'ltr') {
 //				// Wrap in LEFT-TO-RIGHT EMBEDDING ... POP DIRECTIONAL FORMATTING
-//				return self::$lre . $text . self::$pdf;
+//				return XomwLanguage.lre . text . XomwLanguage.pdf;
 //			}
-//			if ($dir == 'rtl') {
+//			if (dir == 'rtl') {
 //				// Wrap in RIGHT-TO-LEFT EMBEDDING ... POP DIRECTIONAL FORMATTING
-//				return self::$rle . $text . self::$pdf;
+//				return XomwLanguage.rle . text . XomwLanguage.pdf;
 //			}
 //			// No strong directionality: do not wrap
-//			return $text;
+//			return text;
 //		}
 //
 //		/**
@@ -4118,44 +4134,44 @@ public class XomwLanguage {
 //		* on old expiry lengths recorded in log entries. You'd need to provide the start date to
 //		* match up with it.
 //		*
-//		* @param String $str The validated block duration in English
-//		* @param User $user User Object to use timezone from or null for $wgUser
-//		* @param int $now Current timestamp, for formatting relative block durations
+//		* @param String str The validated block duration in English
+//		* @param User user User Object to use timezone from or null for wgUser
+//		* @param int now Current timestamp, for formatting relative block durations
 //		* @return String Somehow translated block duration
 //		* @see LanguageFi.php for example implementation
 //		*/
-//		function translateBlockExpiry($str, User $user = null, $now = 0) {
-//			$duration = SpecialBlock::getSuggestedDurations($this);
-//			foreach ($duration as $show => $value) {
-//				if (strcmp($str, $value) == 0) {
-//					return htmlspecialchars(trim($show));
+//		function translateBlockExpiry(str, User user = null, now = 0) {
+//			duration = SpecialBlock::getSuggestedDurations(this);
+//			foreach (duration as show => value) {
+//				if (strcmp(str, value) == 0) {
+//					return htmlspecialchars(trim(show));
 //				}
 //			}
 //
-//			if (wfIsInfinity($str)) {
-//				foreach ($duration as $show => $value) {
-//					if (wfIsInfinity($value)) {
-//						return htmlspecialchars(trim($show));
+//			if (wfIsInfinity(str)) {
+//				foreach (duration as show => value) {
+//					if (wfIsInfinity(value)) {
+//						return htmlspecialchars(trim(show));
 //					}
 //				}
 //			}
 //
 //			// If all else fails, return a standard duration or timestamp description.
-//			$time = strtotime($str, $now);
-//			if ($time == false) { // Unknown format. Return it as-is in case.
-//				return $str;
-//			} elseif ($time != strtotime($str, $now + 1)) { // It's a relative timestamp.
+//			time = strtotime(str, now);
+//			if (time == false) { // Unknown format. Return it as-is in case.
+//				return str;
+//			} elseif (time != strtotime(str, now + 1)) { // It's a relative timestamp.
 //				// The result differs based on current time, so it's a duration length.
-//				return this.formatDuration($time);
+//				return this.formatDuration(time);
 //			} else { // It's an absolute timestamp.
-//				if ($time == 0) {
+//				if (time == 0) {
 //					// wfTimestamp() handles 0 as current time instead of epoch.
-//					$time = '19700101000000';
+//					time = '19700101000000';
 //				}
-//				if ($user) {
-//					return this.userTimeAndDate($time, $user);
+//				if (user) {
+//					return this.userTimeAndDate(time, user);
 //				}
-//				return this.timeanddate($time);
+//				return this.timeanddate(time);
 //			}
 //		}
 //
@@ -4163,21 +4179,21 @@ public class XomwLanguage {
 //		* languages like Chinese need to be segmented in order for the diff
 //		* to be of any use
 //		*
-//		* @param String $text
+//		* @param String text
 //		* @return String
 //		*/
-//		public function segmentForDiff($text) {
-//			return $text;
+//		public function segmentForDiff(text) {
+//			return text;
 //		}
 //
 //		/**
 //		* and unsegment to show the result
 //		*
-//		* @param String $text
+//		* @param String text
 //		* @return String
 //		*/
-//		public function unsegmentForDiff($text) {
-//			return $text;
+//		public function unsegmentForDiff(text) {
+//			return text;
 //		}
 //
 //		/**
@@ -4193,41 +4209,41 @@ public class XomwLanguage {
 //		/**
 //		* convert text to all supported variants
 //		*
-//		* @param String $text
+//		* @param String text
 //		* @return array
 //		*/
-//		public function autoConvertToAllVariants($text) {
-//			return this.mConverter->autoConvertToAllVariants($text);
+//		public function autoConvertToAllVariants(text) {
+//			return this.mConverter.autoConvertToAllVariants(text);
 //		}
 //
 //		/**
 //		* convert text to different variants of a language.
 //		*
-//		* @param String $text
+//		* @param String text
 //		* @return String
 //		*/
-//		public function convert($text) {
-//			return this.mConverter->convert($text);
+//		public function convert(text) {
+//			return this.mConverter.convert(text);
 //		}
 //
 //		/**
 //		* Convert a Title Object to a String in the preferred variant
 //		*
-//		* @param Title $title
+//		* @param Title title
 //		* @return String
 //		*/
-//		public function convertTitle($title) {
-//			return this.mConverter->convertTitle($title);
+//		public function convertTitle(title) {
+//			return this.mConverter.convertTitle(title);
 //		}
 //
 //		/**
 //		* Convert a namespace index to a String in the preferred variant
 //		*
-//		* @param int $ns
+//		* @param int ns
 //		* @return String
 //		*/
-//		public function convertNamespace($ns) {
-//			return this.mConverter->convertNamespace($ns);
+//		public function convertNamespace(ns) {
+//			return this.mConverter.convertNamespace(ns);
 //		}
 //
 //		/**
@@ -4243,30 +4259,30 @@ public class XomwLanguage {
 //		* Check if the language has the specific variant
 //		*
 //		* @since 1.19
-//		* @param String $variant
+//		* @param String variant
 //		* @return boolean
 //		*/
-//		public function hasVariant($variant) {
-//			return (boolean)this.mConverter->validateVariant($variant);
+//		public function hasVariant(variant) {
+//			return (boolean)this.mConverter.validateVariant(variant);
 //		}
 //
 //		/**
 //		* Perform output conversion on a String, and encode for safe HTML output.
-//		* @param String $text Text to be converted
-//		* @param boolean $isTitle Whether this conversion is for the article title
+//		* @param String text Text to be converted
+//		* @param boolean isTitle Whether this conversion is for the article title
 //		* @return String
 //		* @todo this should get integrated somewhere sane
 //		*/
-//		public function convertHtml($text, $isTitle = false) {
-//			return htmlspecialchars(this.convert($text, $isTitle));
+//		public function convertHtml(text, isTitle = false) {
+//			return htmlspecialchars(this.convert(text, isTitle));
 //		}
 //
 //		/**
-//		* @param String $key
+//		* @param String key
 //		* @return String
 //		*/
-//		public function convertCategoryKey($key) {
-//			return this.mConverter->convertCategoryKey($key);
+//		public function convertCategoryKey(key) {
+//			return this.mConverter.convertCategoryKey(key);
 //		}
 //
 //		/**
@@ -4276,28 +4292,28 @@ public class XomwLanguage {
 //		* @return array An array of language codes
 //		*/
 //		public function getVariants() {
-//			return this.mConverter->getVariants();
+//			return this.mConverter.getVariants();
 //		}
 //
 //		/**
 //		* @return String
 //		*/
 //		public function getPreferredVariant() {
-//			return this.mConverter->getPreferredVariant();
+//			return this.mConverter.getPreferredVariant();
 //		}
 //
 //		/**
 //		* @return String
 //		*/
 //		public function getDefaultVariant() {
-//			return this.mConverter->getDefaultVariant();
+//			return this.mConverter.getDefaultVariant();
 //		}
 //
 //		/**
 //		* @return String
 //		*/
 //		public function getURLVariant() {
-//			return this.mConverter->getURLVariant();
+//			return this.mConverter.getURLVariant();
 //		}
 //
 //		/**
@@ -4307,13 +4323,13 @@ public class XomwLanguage {
 //		* tries to find it. See e.g. LanguageZh.php
 //		* The input parameters may be modified upon return
 //		*
-//		* @param String &$link The name of the link
-//		* @param Title &$nt The title Object of the link
-//		* @param boolean $ignoreOtherCond To disable other conditions when
+//		* @param String &link The name of the link
+//		* @param Title &nt The title Object of the link
+//		* @param boolean ignoreOtherCond To disable other conditions when
 //		*   we need to transclude a template or update a category's link
 //		*/
-//		public function findVariantLink(&$link, &$nt, $ignoreOtherCond = false) {
-//			this.mConverter->findVariantLink($link, $nt, $ignoreOtherCond);
+//		public function findVariantLink(&link, &nt, ignoreOtherCond = false) {
+//			this.mConverter.findVariantLink(link, nt, ignoreOtherCond);
 //		}
 //
 //		/**
@@ -4323,7 +4339,7 @@ public class XomwLanguage {
 //		* @return String
 //		*/
 //		function getExtraHashOptions() {
-//			return this.mConverter->getExtraHashOptions();
+//			return this.mConverter.getExtraHashOptions();
 //		}
 //
 //		/**
@@ -4334,17 +4350,17 @@ public class XomwLanguage {
 //		* @return String
 //		*/
 //		public function getParsedTitle() {
-//			return this.mConverter->getParsedTitle();
+//			return this.mConverter.getParsedTitle();
 //		}
 //
 //		/**
 //		* Refresh the cache of conversion tables when
 //		* MediaWiki:Conversiontable* is updated.
 //		*
-//		* @param Title $title The Title of the page being updated
+//		* @param Title title The Title of the page being updated
 //		*/
-//		public function updateConversionTable(Title $title) {
-//			this.mConverter->updateConversionTable($title);
+//		public function updateConversionTable(Title title) {
+//			this.mConverter.updateConversionTable(title);
 //		}
 //
 //		/**
@@ -4355,16 +4371,16 @@ public class XomwLanguage {
 //		* This function is called "markNoConversion" for historical
 //		* reasons.
 //		*
-//		* @param String $text Text to be used for external link
-//		* @param boolean $noParse Wrap it without confirming it's a real URL first
+//		* @param String text Text to be used for external link
+//		* @param boolean noParse Wrap it without confirming it's a real URL first
 //		* @return String The tagged text
 //		*/
-//		public function markNoConversion($text, $noParse = false) {
+//		public function markNoConversion(text, noParse = false) {
 //			// Excluding protocal-relative URLs may avoid many false positives.
-//			if ($noParse || preg_match('/^(?:' . wfUrlProtocolsWithoutProtRel() . ')/', $text)) {
-//				return this.mConverter->markNoConversion($text);
+//			if (noParse || preg_match('/^(?:' . wfUrlProtocolsWithoutProtRel() . ')/', text)) {
+//				return this.mConverter.markNoConversion(text);
 //			} else {
-//				return $text;
+//				return text;
 //			}
 //		}
 //
@@ -4375,7 +4391,7 @@ public class XomwLanguage {
 //		* @return String
 //		*/
 //		public function linkTrail() {
-//			return self::$dataCache->getItem(this.mCode, 'linkTrail');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'linkTrail');
 //		}
 //
 //		/**
@@ -4385,7 +4401,7 @@ public class XomwLanguage {
 //		* @return String
 //		*/
 //		public function linkPrefixCharset() {
-//			return self::$dataCache->getItem(this.mCode, 'linkPrefixCharset');
+//			return XomwLanguage.dataCache.getItem(this.mCode, 'linkPrefixCharset');
 //		}
 //
 //		/**
@@ -4400,30 +4416,30 @@ public class XomwLanguage {
 //				return this.mParentLanguage;
 //			}
 //
-//			$code = explode('-', this.getCode())[0];
-//			if (!in_array($code, LanguageConverter::$languagesWithVariants)) {
+//			code = explode('-', this.getCode())[0];
+//			if (!in_array(code, LanguageConverter::languagesWithVariants)) {
 //				this.mParentLanguage = null;
 //				return null;
 //			}
-//			$lang = Language::factory($code);
-//			if (!$lang->hasVariant(this.getCode())) {
+//			lang = XomwLanguage.factory(code);
+//			if (!lang.hasVariant(this.getCode())) {
 //				this.mParentLanguage = null;
 //				return null;
 //			}
 //
-//			this.mParentLanguage = $lang;
-//			return $lang;
+//			this.mParentLanguage = lang;
+//			return lang;
 //		}
 //
 //		/**
 //		* Compare with an other language Object
 //		*
 //		* @since 1.28
-//		* @param Language $lang
+//		* @param Language lang
 //		* @return boolean
 //		*/
-//		public function equals(Language $lang) {
-//			return $lang->getCode() == this.mCode;
+//		public function equals(Language lang) {
+//			return lang.getCode() == this.mCode;
 //		}
 //
 //		/**
@@ -4456,10 +4472,10 @@ public class XomwLanguage {
 //		}
 //
 //		/**
-//		* @param String $code
+//		* @param String code
 //		*/
-//		public function setCode($code) {
-//			this.mCode = $code;
+//		public function setCode(code) {
+//			this.mCode = code;
 //			// Ensure we don't leave incorrect cached data lying around
 //			this.mHtmlCode = null;
 //			this.mParentLanguage = false;
@@ -4467,135 +4483,139 @@ public class XomwLanguage {
 //
 //		/**
 //		* Get the language code from a file name. Inverse of getFileName()
-//		* @param String $filename $prefix . $languageCode . $suffix
-//		* @param String $prefix Prefix before the language code
-//		* @param String $suffix Suffix after the language code
-//		* @return String Language code, or false if $prefix or $suffix isn't found
+//		* @param String filename prefix . languageCode . suffix
+//		* @param String prefix Prefix before the language code
+//		* @param String suffix Suffix after the language code
+//		* @return String Language code, or false if prefix or suffix isn't found
 //		*/
-//		public static function getCodeFromFileName($filename, $prefix = 'Language', $suffix = '.php') {
-//			$m = null;
-//			preg_match('/' . preg_quote($prefix, '/') . '([A-Z][a-z_]+)' .
-//				preg_quote($suffix, '/') . '/', $filename, $m);
-//			if (!count($m)) {
+//		public static function getCodeFromFileName(filename, prefix = 'Language', suffix = '.php') {
+//			m = null;
+//			preg_match('/' . preg_quote(prefix, '/') . '([A-Z][a-z_]+)' .
+//				preg_quote(suffix, '/') . '/', filename, m);
+//			if (!count(m)) {
 //				return false;
 //			}
-//			return str_replace('_', '-', strtolower($m[1]));
+//			return str_replace('_', '-', strtolower(m[1]));
 //		}
 //
 //		/**
-//		* @param String $code
+//		* @param String code
 //		* @return String Name of the language class
 //		*/
-//		public static function classFromCode($code) {
-//			if ($code == 'en') {
+//		public static function classFromCode(code) {
+//			if (code == 'en') {
 //				return 'Language';
 //			} else {
-//				return 'Language' . str_replace('-', '_', ucfirst($code));
+//				return 'Language' . str_replace('-', '_', ucfirst(code));
 //			}
 //		}
 //
 //		/**
 //		* Get the name of a file for a certain language code
-//		* @param String $prefix Prepend this to the filename
-//		* @param String $code Language code
-//		* @param String $suffix Append this to the filename
+//		* @param String prefix Prepend this to the filename
+//		* @param String code Language code
+//		* @param String suffix Append this to the filename
 //		* @throws MWException
-//		* @return String $prefix . $mangledCode . $suffix
+//		* @return String prefix . mangledCode . suffix
 //		*/
-//		public static function getFileName($prefix = 'Language', $code, $suffix = '.php') {
-//			if (!self::isValidBuiltInCode($code)) {
-//				throw new MWException("Invalid language code \"$code\"");
+//		public static function getFileName(prefix = 'Language', code, suffix = '.php') {
+//			if (!XomwLanguage.isValidBuiltInCode(code)) {
+//				throw new MWException("Invalid language code \"code\"");
 //			}
 //
-//			return $prefix . str_replace('-', '_', ucfirst($code)) . $suffix;
+//			return prefix . str_replace('-', '_', ucfirst(code)) . suffix;
 //		}
 //
 //		/**
-//		* @param String $code
+//		* @param String code
 //		* @return String
 //		*/
-//		public static function getMessagesFileName($code) {
-//			global $IP;
-//			$file = self::getFileName("$IP/languages/messages/Messages", $code, '.php');
-//			Hooks::run('Language::getMessagesFileName', [ $code, &$file ]);
-//			return $file;
+//		public static function getMessagesFileName(code) {
+//			global IP;
+//			file = XomwLanguage.getFileName("IP/languages/messages/Messages", code, '.php');
+//			Hooks::run('XomwLanguage.getMessagesFileName', [ code, &file ]);
+//			return file;
 //		}
 //
 //		/**
-//		* @param String $code
+//		* @param String code
 //		* @return String
 //		* @throws MWException
 //		* @since 1.23
 //		*/
-//		public static function getJsonMessagesFileName($code) {
-//			global $IP;
+//		public static function getJsonMessagesFileName(code) {
+//			global IP;
 //
-//			if (!self::isValidBuiltInCode($code)) {
-//				throw new MWException("Invalid language code \"$code\"");
+//			if (!XomwLanguage.isValidBuiltInCode(code)) {
+//				throw new MWException("Invalid language code \"code\"");
 //			}
 //
-//			return "$IP/languages/i18n/$code.json";
+//			return "IP/languages/i18n/code.json";
 //		}
-//
-//		/**
-//		* Get the first fallback for a given language.
-//		*
-//		* @param String $code
-//		*
-//		* @return boolean|String
-//		*/
-//		public static function getFallbackFor($code) {
-//			$fallbacks = self::getFallbacksFor($code);
-//			if ($fallbacks) {
-//				return $fallbacks[0];
-//			}
-//			return false;
-//		}
-//
-//		/**
-//		* Get the ordered list of fallback languages.
-//		*
-//		* @since 1.19
-//		* @param String $code Language code
-//		* @return array Non-empty array, ending in "en"
-//		*/
-//		public static function getFallbacksFor($code) {
-//			if ($code == 'en' || !Language::isValidBuiltInCode($code)) {
-//				return [];
-//			}
-//			// For unknown languages, fallbackSequence returns an empty array,
-//			// hardcode fallback to 'en' in that case.
-//			return self::getLocalisationCache()->getItem($code, 'fallbackSequence') ?: [ 'en' ];
-//		}
-//
+
+	/**
+	* Get the first fallback for a given language.
+	*
+	* @param String code
+	*
+	* @return boolean|String
+	*/
+	public static String getFallbackFor(String code) {
+		XophpArray fallbacks = XomwLanguage.getFallbacksFor(code);
+		if (XophpObject.is_true(fallbacks)) {
+			return fallbacks.Get_at_str(0);
+		}
+		return null;
+	}
+
+	/**
+	* Get the ordered list of fallback languages.
+	*
+	* @since 1.19
+	* @param String code Language code
+	* @return array Non-empty array, ending in "en"
+	*/
+	public static XophpArray getFallbacksFor(String code) {
+		if (code == "en" || !XomwLanguage.isValidBuiltInCode(code)) {
+			return XophpArray.New();
+		}
+		if (XomwLanguage.getLocalisationCache() == null) {
+			return null;
+		}
+		// For unknown languages, fallbackSequence returns an empty array,
+		// hardcode fallback to 'en' in that case.
+		Object rv = XomwLanguage.getLocalisationCache().getItem(code, "fallbackSequence");
+		return rv == null ? XophpArray.New().Add("en") : (XophpArray)rv;
+	}
+
 //		/**
 //		* Get the ordered list of fallback languages, ending with the fallback
 //		* language chain for the site language.
 //		*
 //		* @since 1.22
-//		* @param String $code Language code
+//		* @param String code Language code
 //		* @return array Array(fallbacks, site fallbacks)
 //		*/
-//		public static function getFallbacksIncludingSiteLanguage($code) {
-//			global $wgLanguageCode;
+//		public static function getFallbacksIncludingSiteLanguage(code) {
+//			global wgLanguageCode;
 //
 //			// Usually, we will only store a tiny number of fallback chains, so we
 //			// keep them in static memory.
-//			$cacheKey = "{$code}-{$wgLanguageCode}";
+//			cacheKey = "{code}-{wgLanguageCode}";
 //
-//			if (!array_key_exists($cacheKey, self::$fallbackLanguageCache)) {
-//				$fallbacks = self::getFallbacksFor($code);
+//			if (!array_key_exists(cacheKey, XomwLanguage.fallbackLanguageCache)) {
+//				fallbacks = XomwLanguage.getFallbacksFor(code);
 //
 //				// Append the site's fallback chain, including the site language itself
-//				$siteFallbacks = self::getFallbacksFor($wgLanguageCode);
-//				array_unshift($siteFallbacks, $wgLanguageCode);
+//				siteFallbacks = XomwLanguage.getFallbacksFor(wgLanguageCode);
+//				array_unshift(siteFallbacks, wgLanguageCode);
 //
 //				// Eliminate any languages already included in the chain
-//				$siteFallbacks = array_diff($siteFallbacks, $fallbacks);
+//				siteFallbacks = array_diff(siteFallbacks, fallbacks);
 //
-//				self::$fallbackLanguageCache[$cacheKey] = [ $fallbacks, $siteFallbacks ];
+//				XomwLanguage.fallbackLanguageCache[cacheKey] = [ fallbacks, siteFallbacks ];
 //			}
-//			return self::$fallbackLanguageCache[$cacheKey];
+//			return XomwLanguage.fallbackLanguageCache[cacheKey];
 //		}
 //
 //		/**
@@ -4603,194 +4623,194 @@ public class XomwLanguage {
 //		* WARNING: this may take a long time. If you just need all message *keys*
 //		* but need the *contents* of only a few messages, consider using getMessageKeysFor().
 //		*
-//		* @param String $code
+//		* @param String code
 //		*
 //		* @return array
 //		*/
-//		public static function getMessagesFor($code) {
-//			return self::getLocalisationCache()->getItem($code, 'messages');
+//		public static function getMessagesFor(code) {
+//			return XomwLanguage.getLocalisationCache().getItem(code, 'messages');
 //		}
 //
 //		/**
 //		* Get a message for a given language
 //		*
-//		* @param String $key
-//		* @param String $code
+//		* @param String key
+//		* @param String code
 //		*
 //		* @return String
 //		*/
-//		public static function getMessageFor($key, $code) {
-//			return self::getLocalisationCache()->getSubitem($code, 'messages', $key);
+//		public static function getMessageFor(key, code) {
+//			return XomwLanguage.getLocalisationCache().getSubitem(code, 'messages', key);
 //		}
 //
 //		/**
 //		* Get all message keys for a given language. This is a faster alternative to
-//		* array_keys(Language::getMessagesFor($code))
+//		* array_keys(XomwLanguage.getMessagesFor(code))
 //		*
 //		* @since 1.19
-//		* @param String $code Language code
+//		* @param String code Language code
 //		* @return array Array of message keys (strings)
 //		*/
-//		public static function getMessageKeysFor($code) {
-//			return self::getLocalisationCache()->getSubitemList($code, 'messages');
+//		public static function getMessageKeysFor(code) {
+//			return XomwLanguage.getLocalisationCache().getSubitemList(code, 'messages');
 //		}
 //
 //		/**
-//		* @param String $talk
+//		* @param String talk
 //		* @return mixed
 //		*/
-//		function fixVariableInNamespace($talk) {
-//			if (strpos($talk, '$1') == false) {
-//				return $talk;
+//		function fixVariableInNamespace(talk) {
+//			if (strpos(talk, '1') == false) {
+//				return talk;
 //			}
 //
-//			global $wgMetaNamespace;
-//			$talk = str_replace('$1', $wgMetaNamespace, $talk);
+//			global wgMetaNamespace;
+//			talk = str_replace('1', wgMetaNamespace, talk);
 //
 //			# Allow grammar transformations
 //			# Allowing full message-style parsing would make simple requests
 //			# such as action=raw much more expensive than they need to be.
 //			# This will hopefully cover most cases.
-//			$talk = preg_replace_callback('/{{grammar:(.*?)\|(.*?)}}/i',
-//				[ &$this, 'replaceGrammarInNamespace' ], $talk);
-//			return str_replace(' ', '_', $talk);
+//			talk = preg_replace_callback('/{{grammar:(.*?)\|(.*?)}}/i',
+//				[ &this, 'replaceGrammarInNamespace' ], talk);
+//			return str_replace(' ', '_', talk);
 //		}
 //
 //		/**
-//		* @param String $m
+//		* @param String m
 //		* @return String
 //		*/
-//		function replaceGrammarInNamespace($m) {
-//			return this.convertGrammar(trim($m[2]), trim($m[1]));
+//		function replaceGrammarInNamespace(m) {
+//			return this.convertGrammar(trim(m[2]), trim(m[1]));
 //		}
 //
 //		/**
 //		* Decode an expiry (block, protection, etc) which has come from the DB
 //		*
-//		* @param String $expiry Database expiry String
-//		* @param boolean|int $format True to process using language functions, or TS_ constant
+//		* @param String expiry Database expiry String
+//		* @param boolean|int format True to process using language functions, or TS_ constant
 //		*     to return the expiry in a given timestamp
-//		* @param String $infinity If $format is not true, use this String for infinite expiry
+//		* @param String infinity If format is not true, use this String for infinite expiry
 //		* @return String
 //		* @since 1.18
 //		*/
-//		public function formatExpiry($expiry, $format = true, $infinity = 'infinity') {
-//			static $dbInfinity;
-//			if ($dbInfinity == null) {
-//				$dbInfinity = wfGetDB(DB_SLAVE)->getInfinity();
+//		public function formatExpiry(expiry, format = true, infinity = 'infinity') {
+//			static dbInfinity;
+//			if (dbInfinity == null) {
+//				dbInfinity = wfGetDB(DB_SLAVE).getInfinity();
 //			}
 //
-//			if ($expiry == '' || $expiry == 'infinity' || $expiry == $dbInfinity) {
-//				return $format == true
+//			if (expiry == '' || expiry == 'infinity' || expiry == dbInfinity) {
+//				return format == true
 //					? this.getMessageFromDB('infiniteblock')
-//					: $infinity;
+//					: infinity;
 //			} else {
-//				return $format == true
-//					? this.timeanddate($expiry, /* User preference timezone */ true)
-//					: wfTimestamp($format, $expiry);
+//				return format == true
+//					? this.timeanddate(expiry, /* User preference timezone */ true)
+//					: wfTimestamp(format, expiry);
 //			}
 //		}
 //
 //		/**
 //		* Formats a time given in seconds into a String representation of that time.
 //		*
-//		* @param int|float $seconds
-//		* @param array $format An optional argument that formats the returned String in different ways:
-//		*   If $format['avoid'] == 'avoidseconds': don't show seconds if $seconds >= 1 hour,
-//		*   If $format['avoid'] == 'avoidminutes': don't show seconds/minutes if $seconds > 48 hours,
-//		*   If $format['noabbrevs'] is true: use 'seconds' and friends instead of 'seconds-abbrev'
+//		* @param int|float seconds
+//		* @param array format An optional argument that formats the returned String in different ways:
+//		*   If format['avoid'] == 'avoidseconds': don't show seconds if seconds >= 1 hour,
+//		*   If format['avoid'] == 'avoidminutes': don't show seconds/minutes if seconds > 48 hours,
+//		*   If format['noabbrevs'] is true: use 'seconds' and friends instead of 'seconds-abbrev'
 //		*     and friends.
-//		* @note For backwards compatibility, $format may also be one of the strings 'avoidseconds'
+//		* @note For backwards compatibility, format may also be one of the strings 'avoidseconds'
 //		*     or 'avoidminutes'.
 //		* @return String
 //		*/
-//		function formatTimePeriod($seconds, $format = []) {
-//			if (!is_array($format)) {
-//				$format = [ 'avoid' => $format ]; // For backwards compatibility
+//		function formatTimePeriod(seconds, format = []) {
+//			if (!is_array(format)) {
+//				format = [ 'avoid' => format ]; // For backwards compatibility
 //			}
-//			if (!isset($format['avoid'])) {
-//				$format['avoid'] = false;
+//			if (!isset(format['avoid'])) {
+//				format['avoid'] = false;
 //			}
-//			if (!isset($format['noabbrevs'])) {
-//				$format['noabbrevs'] = false;
+//			if (!isset(format['noabbrevs'])) {
+//				format['noabbrevs'] = false;
 //			}
-//			$secondsMsg = wfMessage(
-//				$format['noabbrevs'] ? 'seconds' : 'seconds-abbrev')->inLanguage($this);
-//			$minutesMsg = wfMessage(
-//				$format['noabbrevs'] ? 'minutes' : 'minutes-abbrev')->inLanguage($this);
-//			$hoursMsg = wfMessage(
-//				$format['noabbrevs'] ? 'hours' : 'hours-abbrev')->inLanguage($this);
-//			$daysMsg = wfMessage(
-//				$format['noabbrevs'] ? 'days' : 'days-abbrev')->inLanguage($this);
+//			secondsMsg = wfMessage(
+//				format['noabbrevs'] ? 'seconds' : 'seconds-abbrev').inLanguage(this);
+//			minutesMsg = wfMessage(
+//				format['noabbrevs'] ? 'minutes' : 'minutes-abbrev').inLanguage(this);
+//			hoursMsg = wfMessage(
+//				format['noabbrevs'] ? 'hours' : 'hours-abbrev').inLanguage(this);
+//			daysMsg = wfMessage(
+//				format['noabbrevs'] ? 'days' : 'days-abbrev').inLanguage(this);
 //
-//			if (round($seconds * 10) < 100) {
-//				$s = this.formatNum(sprintf("%.1f", round($seconds * 10) / 10));
-//				$s = $secondsMsg->params($s)->text();
-//			} elseif (round($seconds) < 60) {
-//				$s = this.formatNum(round($seconds));
-//				$s = $secondsMsg->params($s)->text();
-//			} elseif (round($seconds) < 3600) {
-//				$minutes = floor($seconds / 60);
-//				$secondsPart = round(fmod($seconds, 60));
-//				if ($secondsPart == 60) {
-//					$secondsPart = 0;
-//					$minutes++;
+//			if (round(seconds * 10) < 100) {
+//				s = this.formatNum(sprintf("%.1f", round(seconds * 10) / 10));
+//				s = secondsMsg.params(s).text();
+//			} elseif (round(seconds) < 60) {
+//				s = this.formatNum(round(seconds));
+//				s = secondsMsg.params(s).text();
+//			} elseif (round(seconds) < 3600) {
+//				minutes = floor(seconds / 60);
+//				secondsPart = round(fmod(seconds, 60));
+//				if (secondsPart == 60) {
+//					secondsPart = 0;
+//					minutes++;
 //				}
-//				$s = $minutesMsg->params(this.formatNum($minutes))->text();
-//				$s .= ' ';
-//				$s .= $secondsMsg->params(this.formatNum($secondsPart))->text();
-//			} elseif (round($seconds) <= 2 * 86400) {
-//				$hours = floor($seconds / 3600);
-//				$minutes = floor(($seconds - $hours * 3600) / 60);
-//				$secondsPart = round($seconds - $hours * 3600 - $minutes * 60);
-//				if ($secondsPart == 60) {
-//					$secondsPart = 0;
-//					$minutes++;
+//				s = minutesMsg.params(this.formatNum(minutes)).text();
+//				s .= ' ';
+//				s .= secondsMsg.params(this.formatNum(secondsPart)).text();
+//			} elseif (round(seconds) <= 2 * 86400) {
+//				hours = floor(seconds / 3600);
+//				minutes = floor((seconds - hours * 3600) / 60);
+//				secondsPart = round(seconds - hours * 3600 - minutes * 60);
+//				if (secondsPart == 60) {
+//					secondsPart = 0;
+//					minutes++;
 //				}
-//				if ($minutes == 60) {
-//					$minutes = 0;
-//					$hours++;
+//				if (minutes == 60) {
+//					minutes = 0;
+//					hours++;
 //				}
-//				$s = $hoursMsg->params(this.formatNum($hours))->text();
-//				$s .= ' ';
-//				$s .= $minutesMsg->params(this.formatNum($minutes))->text();
-//				if (!in_array($format['avoid'], [ 'avoidseconds', 'avoidminutes' ])) {
-//					$s .= ' ' . $secondsMsg->params(this.formatNum($secondsPart))->text();
+//				s = hoursMsg.params(this.formatNum(hours)).text();
+//				s .= ' ';
+//				s .= minutesMsg.params(this.formatNum(minutes)).text();
+//				if (!in_array(format['avoid'], [ 'avoidseconds', 'avoidminutes' ])) {
+//					s .= ' ' . secondsMsg.params(this.formatNum(secondsPart)).text();
 //				}
 //			} else {
-//				$days = floor($seconds / 86400);
-//				if ($format['avoid'] == 'avoidminutes') {
-//					$hours = round(($seconds - $days * 86400) / 3600);
-//					if ($hours == 24) {
-//						$hours = 0;
-//						$days++;
+//				days = floor(seconds / 86400);
+//				if (format['avoid'] == 'avoidminutes') {
+//					hours = round((seconds - days * 86400) / 3600);
+//					if (hours == 24) {
+//						hours = 0;
+//						days++;
 //					}
-//					$s = $daysMsg->params(this.formatNum($days))->text();
-//					$s .= ' ';
-//					$s .= $hoursMsg->params(this.formatNum($hours))->text();
-//				} elseif ($format['avoid'] == 'avoidseconds') {
-//					$hours = floor(($seconds - $days * 86400) / 3600);
-//					$minutes = round(($seconds - $days * 86400 - $hours * 3600) / 60);
-//					if ($minutes == 60) {
-//						$minutes = 0;
-//						$hours++;
+//					s = daysMsg.params(this.formatNum(days)).text();
+//					s .= ' ';
+//					s .= hoursMsg.params(this.formatNum(hours)).text();
+//				} elseif (format['avoid'] == 'avoidseconds') {
+//					hours = floor((seconds - days * 86400) / 3600);
+//					minutes = round((seconds - days * 86400 - hours * 3600) / 60);
+//					if (minutes == 60) {
+//						minutes = 0;
+//						hours++;
 //					}
-//					if ($hours == 24) {
-//						$hours = 0;
-//						$days++;
+//					if (hours == 24) {
+//						hours = 0;
+//						days++;
 //					}
-//					$s = $daysMsg->params(this.formatNum($days))->text();
-//					$s .= ' ';
-//					$s .= $hoursMsg->params(this.formatNum($hours))->text();
-//					$s .= ' ';
-//					$s .= $minutesMsg->params(this.formatNum($minutes))->text();
+//					s = daysMsg.params(this.formatNum(days)).text();
+//					s .= ' ';
+//					s .= hoursMsg.params(this.formatNum(hours)).text();
+//					s .= ' ';
+//					s .= minutesMsg.params(this.formatNum(minutes)).text();
 //				} else {
-//					$s = $daysMsg->params(this.formatNum($days))->text();
-//					$s .= ' ';
-//					$s .= this.formatTimePeriod($seconds - $days * 86400, $format);
+//					s = daysMsg.params(this.formatNum(days)).text();
+//					s .= ' ';
+//					s .= this.formatTimePeriod(seconds - days * 86400, format);
 //				}
 //			}
-//			return $s;
+//			return s;
 //		}
 //
 //		/**
@@ -4801,45 +4821,45 @@ public class XomwLanguage {
 //		* This use super 1000. For super 1024 use formatSize(), for another super
 //		* see formatComputingNumbers().
 //		*
-//		* @param int $bps
+//		* @param int bps
 //		* @return String
 //		*/
-//		function formatBitrate($bps) {
-//			return this.formatComputingNumbers($bps, 1000, "bitrate-$1bits");
+//		function formatBitrate(bps) {
+//			return this.formatComputingNumbers(bps, 1000, "bitrate-1bits");
 //		}
 //
 //		/**
-//		* @param int $size Size of the unit
-//		* @param int $boundary Size boundary (1000, or 1024 in most cases)
-//		* @param String $messageKey Message key to be uesd
+//		* @param int size Size of the unit
+//		* @param int boundary Size boundary (1000, or 1024 in most cases)
+//		* @param String messageKey Message key to be uesd
 //		* @return String
 //		*/
-//		function formatComputingNumbers($size, $boundary, $messageKey) {
-//			if ($size <= 0) {
-//				return str_replace('$1', this.formatNum($size),
-//					this.getMessageFromDB(str_replace('$1', '', $messageKey))
+//		function formatComputingNumbers(size, boundary, messageKey) {
+//			if (size <= 0) {
+//				return str_replace('1', this.formatNum(size),
+//					this.getMessageFromDB(str_replace('1', '', messageKey))
 //				);
 //			}
-//			$sizes = [ '', 'kilo', 'mega', 'giga', 'tera', 'peta', 'exa', 'zeta', 'yotta' ];
-//			$index = 0;
+//			sizes = [ '', 'kilo', 'mega', 'giga', 'tera', 'peta', 'exa', 'zeta', 'yotta' ];
+//			index = 0;
 //
-//			$maxIndex = count($sizes) - 1;
-//			while ($size >= $boundary && $index < $maxIndex) {
-//				$index++;
-//				$size /= $boundary;
+//			maxIndex = count(sizes) - 1;
+//			while (size >= boundary && index < maxIndex) {
+//				index++;
+//				size /= boundary;
 //			}
 //
 //			// For small sizes no decimal places necessary
-//			$round = 0;
-//			if ($index > 1) {
+//			round = 0;
+//			if (index > 1) {
 //				// For MB and bigger two decimal places are smarter
-//				$round = 2;
+//				round = 2;
 //			}
-//			$msg = str_replace('$1', $sizes[$index], $messageKey);
+//			msg = str_replace('1', sizes[index], messageKey);
 //
-//			$size = round($size, $round);
-//			$text = this.getMessageFromDB($msg);
-//			return str_replace('$1', this.formatNum($size), $text);
+//			size = round(size, round);
+//			text = this.getMessageFromDB(msg);
+//			return str_replace('1', this.formatNum(size), text);
 //		}
 //
 //		/**
@@ -4849,100 +4869,100 @@ public class XomwLanguage {
 //		* This method use super 1024. For super 1000 use formatBitrate(), for
 //		* another super see formatComputingNumbers()
 //		*
-//		* @param int $size Size to format
+//		* @param int size Size to format
 //		* @return String Plain text (not HTML)
 //		*/
-//		function formatSize($size) {
-//			return this.formatComputingNumbers($size, 1024, "size-$1bytes");
+//		function formatSize(size) {
+//			return this.formatComputingNumbers(size, 1024, "size-1bytes");
 //		}
 //
 //		/**
 //		* Make a list item, used by various special pages
 //		*
-//		* @param String $page Page link
-//		* @param String $details HTML safe text between brackets
-//		* @param boolean $oppositedm Add the direction mark opposite to your
+//		* @param String page Page link
+//		* @param String details HTML safe text between brackets
+//		* @param boolean oppositedm Add the direction mark opposite to your
 //		*   language, to display text properly
 //		* @return HTML escaped String
 //		*/
-//		function specialList($page, $details, $oppositedm = true) {
-//			if (!$details) {
-//				return $page;
+//		function specialList(page, details, oppositedm = true) {
+//			if (!details) {
+//				return page;
 //			}
 //
-//			$dirmark = ($oppositedm ? this.getDirMark(true) : '') . this.getDirMark();
+//			dirmark = (oppositedm ? this.getDirMark(true) : '') . this.getDirMark();
 //			return
-//				$page .
-//				$dirmark .
-//				this.msg('word-separator')->escaped() .
-//				this.msg('parentheses')->rawParams($details)->escaped();
+//				page .
+//				dirmark .
+//				this.msg('word-separator').escaped() .
+//				this.msg('parentheses').rawParams(details).escaped();
 //		}
 //
 //		/**
 //		* Generate (prev x| next x) (20|50|100...) type links for paging
 //		*
-//		* @param Title $title Title Object to link
-//		* @param int $offset
-//		* @param int $limit
-//		* @param array $query Optional URL query parameter String
-//		* @param boolean $atend Optional param for specified if this is the last page
+//		* @param Title title Title Object to link
+//		* @param int offset
+//		* @param int limit
+//		* @param array query Optional URL query parameter String
+//		* @param boolean atend Optional param for specified if this is the last page
 //		* @return String
 //		*/
-//		public function viewPrevNext(Title $title, $offset, $limit,
-//			array $query = [], $atend = false
+//		public function viewPrevNext(Title title, offset, limit,
+//			array query = [], atend = false
 //		) {
 //			// @todo FIXME: Why on earth this needs one message for the text and another one for tooltip?
 //
 //			# Make 'previous' link
-//			$prev = wfMessage('prevn')->inLanguage($this)->title($title)->numParams($limit)->text();
-//			if ($offset > 0) {
-//				$plink = this.numLink($title, max($offset - $limit, 0), $limit,
-//					$query, $prev, 'prevn-title', 'mw-prevlink');
+//			prev = wfMessage('prevn').inLanguage(this).title(title).numParams(limit).text();
+//			if (offset > 0) {
+//				plink = this.numLink(title, max(offset - limit, 0), limit,
+//					query, prev, 'prevn-title', 'mw-prevlink');
 //			} else {
-//				$plink = htmlspecialchars($prev);
+//				plink = htmlspecialchars(prev);
 //			}
 //
 //			# Make 'next' link
-//			$next = wfMessage('nextn')->inLanguage($this)->title($title)->numParams($limit)->text();
-//			if ($atend) {
-//				$nlink = htmlspecialchars($next);
+//			next = wfMessage('nextn').inLanguage(this).title(title).numParams(limit).text();
+//			if (atend) {
+//				nlink = htmlspecialchars(next);
 //			} else {
-//				$nlink = this.numLink($title, $offset + $limit, $limit,
-//					$query, $next, 'nextn-title', 'mw-nextlink');
+//				nlink = this.numLink(title, offset + limit, limit,
+//					query, next, 'nextn-title', 'mw-nextlink');
 //			}
 //
 //			# Make links to set number of items per page
-//			$numLinks = [];
-//			foreach ([ 20, 50, 100, 250, 500 ] as $num) {
-//				$numLinks[] = this.numLink($title, $offset, $num,
-//					$query, this.formatNum($num), 'shown-title', 'mw-numlink');
+//			numLinks = [];
+//			foreach ([ 20, 50, 100, 250, 500 ] as num) {
+//				numLinks[] = this.numLink(title, offset, num,
+//					query, this.formatNum(num), 'shown-title', 'mw-numlink');
 //			}
 //
-//			return wfMessage('viewprevnext')->inLanguage($this)->title($title
-//				)->rawParams($plink, $nlink, this.pipeList($numLinks))->escaped();
+//			return wfMessage('viewprevnext').inLanguage(this).title(title
+//				).rawParams(plink, nlink, this.pipeList(numLinks)).escaped();
 //		}
 //
 //		/**
 //		* Helper function for viewPrevNext() that generates links
 //		*
-//		* @param Title $title Title Object to link
-//		* @param int $offset
-//		* @param int $limit
-//		* @param array $query Extra query parameters
-//		* @param String $link Text to use for the link; will be escaped
-//		* @param String $tooltipMsg Name of the message to use as tooltip
-//		* @param String $class Value of the "class" attribute of the link
+//		* @param Title title Title Object to link
+//		* @param int offset
+//		* @param int limit
+//		* @param array query Extra query parameters
+//		* @param String link Text to use for the link; will be escaped
+//		* @param String tooltipMsg Name of the message to use as tooltip
+//		* @param String class Value of the "class" attribute of the link
 //		* @return String HTML fragment
 //		*/
-//		private function numLink(Title $title, $offset, $limit, array $query, $link,
-//			$tooltipMsg, $class
+//		private function numLink(Title title, offset, limit, array query, link,
+//			tooltipMsg, class
 //		) {
-//			$query = [ 'limit' => $limit, 'offset' => $offset ] + $query;
-//			$tooltip = wfMessage($tooltipMsg)->inLanguage($this)->title($title)
-//				->numParams($limit)->text();
+//			query = [ 'limit' => limit, 'offset' => offset ] + query;
+//			tooltip = wfMessage(tooltipMsg).inLanguage(this).title(title)
+//				.numParams(limit).text();
 //
-//			return Html::element('a', [ 'href' => $title->getLocalURL($query),
-//				'title' => $tooltip, 'class' => $class ], $link);
+//			return Html::element('a', [ 'href' => title.getLocalURL(query),
+//				'title' => tooltip, 'class' => class ], link);
 //		}
 //
 //		/**
@@ -4951,45 +4971,51 @@ public class XomwLanguage {
 //		* @return String
 //		*/
 //		public function getConvRuleTitle() {
-//			return this.mConverter->getConvRuleTitle();
+//			return this.mConverter.getConvRuleTitle();
 //		}
-//
-//		/**
-//		* Get the compiled plural rules for the language
-//		* @since 1.20
-//		* @return array Associative array with plural form, and plural rule as key-value pairs
-//		*/
-//		public function getCompiledPluralRules() {
-//			$pluralRules = self::$dataCache->getItem(strtolower(this.mCode), 'compiledPluralRules');
-//			$fallbacks = Language::getFallbacksFor(this.mCode);
-//			if (!$pluralRules) {
-//				foreach ($fallbacks as $fallbackCode) {
-//					$pluralRules = self::$dataCache->getItem(strtolower($fallbackCode), 'compiledPluralRules');
-//					if ($pluralRules) {
-//						break;
-//					}
-//				}
-//			}
-//			return $pluralRules;
-//		}
-//
+
+	public static XomwLocalisationCacheForXowa dataCacheXowa = new XomwLocalisationCacheForXowa();
+	private final    static XophpArray getCompiledPluralRulesEmpty = XophpArray.New();
+	// MW.SRC:1.33
+	/**
+	* Get the compiled plural rules for the language
+	* @since 1.20
+	* @return array Associative array with plural form, and plural rule as key-value pairs
+	*/
+	public XophpArray getCompiledPluralRules() {
+		XophpArray pluralRules = (XophpArray)XomwLanguage.dataCacheXowa.getItem_ary(XophpString_.strtolower(this.mCode), "compiledPluralRules");
+		if (pluralRules == null) return getCompiledPluralRulesEmpty;
+		XophpArray fallbacks = XomwLanguage.getFallbacksFor(this.mCode);
+		if (!XophpObject.is_true(pluralRules)) {
+			int fallbacks_len = fallbacks.Len();
+			for (int i = 0; i < fallbacks_len; i++) {
+				String fallbackCode = fallbacks.Get_at_str(i);
+				pluralRules = XomwLanguage.dataCacheXowa.getItem_ary(XophpString_.strtolower(fallbackCode), "compiledPluralRules");
+				if (XophpObject.is_true(pluralRules)) {
+					break;
+				}
+			}
+		}
+		return pluralRules;
+	}
+
 //		/**
 //		* Get the plural rules for the language
 //		* @since 1.20
 //		* @return array Associative array with plural form number and plural rule as key-value pairs
 //		*/
 //		public function getPluralRules() {
-//			$pluralRules = self::$dataCache->getItem(strtolower(this.mCode), 'pluralRules');
-//			$fallbacks = Language::getFallbacksFor(this.mCode);
-//			if (!$pluralRules) {
-//				foreach ($fallbacks as $fallbackCode) {
-//					$pluralRules = self::$dataCache->getItem(strtolower($fallbackCode), 'pluralRules');
-//					if ($pluralRules) {
+//			pluralRules = XomwLanguage.dataCache.getItem(strtolower(this.mCode), "pluralRules");
+//			fallbacks = XomwLanguage.getFallbacksFor(this.mCode);
+//			if (!pluralRules) {
+//				foreach (fallbacks as fallbackCode) {
+//					pluralRules = XomwLanguage.dataCache.getItem(strtolower(fallbackCode), "pluralRules");
+//					if (pluralRules) {
 //						break;
 //					}
 //				}
 //			}
-//			return $pluralRules;
+//			return pluralRules;
 //		}
 //
 //		/**
@@ -4998,45 +5024,41 @@ public class XomwLanguage {
 //		* @return array Associative array with plural form number and plural rule type as key-value pairs
 //		*/
 //		public function getPluralRuleTypes() {
-//			$pluralRuleTypes = self::$dataCache->getItem(strtolower(this.mCode), 'pluralRuleTypes');
-//			$fallbacks = Language::getFallbacksFor(this.mCode);
-//			if (!$pluralRuleTypes) {
-//				foreach ($fallbacks as $fallbackCode) {
-//					$pluralRuleTypes = self::$dataCache->getItem(strtolower($fallbackCode), 'pluralRuleTypes');
-//					if ($pluralRuleTypes) {
+//			pluralRuleTypes = XomwLanguage.dataCache.getItem(strtolower(this.mCode), "pluralRuleTypes");
+//			fallbacks = XomwLanguage.getFallbacksFor(this.mCode);
+//			if (!pluralRuleTypes) {
+//				foreach (fallbacks as fallbackCode) {
+//					pluralRuleTypes = XomwLanguage.dataCache.getItem(strtolower(fallbackCode), "pluralRuleTypes");
+//					if (pluralRuleTypes) {
 //						break;
 //					}
 //				}
 //			}
-//			return $pluralRuleTypes;
+//			return pluralRuleTypes;
 //		}
 //
 //		/**
 //		* Find the index number of the plural rule appropriate for the given number
-//		* @param int $number
+//		* @param int number
 //		* @return int The index number of the plural rule
 //		*/
-//		public function getPluralRuleIndexNumber($number) {
-//			$pluralRules = this.getCompiledPluralRules();
-//			$form = Evaluator::evaluateCompiled($number, $pluralRules);
-//			return $form;
-//		}
-//
+	public int getPluralRuleIndexNumber(String number) {
+		XophpArray pluralRules = this.getCompiledPluralRules();
+		int form = XomwEvaluator.evaluateCompiled(number, pluralRules);
+		return form;
+	}
+
 //		/**
 //		* Find the plural rule type appropriate for the given number
 //		* For example, if the language is set to Arabic, getPluralType(5) should
-//		* return 'few'.
+//		* return "few".
 //		* @since 1.22
-//		* @param int $number
+//		* @param int number
 //		* @return String The name of the plural rule type, e.g. one, two, few, many
 //		*/
-//		public function getPluralRuleType($number) {
-//			$index = this.getPluralRuleIndexNumber($number);
-//			$pluralRuleTypes = this.getPluralRuleTypes();
-//			if (isset($pluralRuleTypes[$index])) {
-//				return $pluralRuleTypes[$index];
-//			} else {
-//				return 'other';
-//			}
+//		public function getPluralRuleType(number) {
+//			index = this.getPluralRuleIndexNumber(number);
+//			pluralRuleTypes = this.getPluralRuleTypes();
+//			return pluralRuleTypes[index] ?? "other";
 //		}
 }

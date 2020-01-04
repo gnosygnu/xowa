@@ -371,7 +371,7 @@ public class XomwSite {
 		}
 
 		if (pageName != null) {
-			url = String_.new_u8(XophpString.str_replace(Bry_.new_a7("$1"), XophpEncode.rawurlencode(Bry_.new_u8(pageName)), Bry_.new_u8(url)));
+			url = String_.new_u8(XophpString_.str_replace(Bry_.new_a7("$1"), XophpEncode.rawurlencode(Bry_.new_u8(pageName)), Bry_.new_u8(url)));
 		}
 
 		return url;

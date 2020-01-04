@@ -57,7 +57,7 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 	@Override protected void preprocessToObj_removeLeadingWhitespaceFromEnd(int ws_len) {
 		int accum_dom_len = accum_dom.Len();
 		if (	ws_len > 0
-			&&	XophpString.strspn_fwd__space_or_tab(accum_dom.Bfr_bry(), accum_dom_len - ws_len, -1, accum_dom_len) == ws_len) {
+			&&	XophpString_.strspn_fwd__space_or_tab(accum_dom.Bfr_bry(), accum_dom_len - ws_len, -1, accum_dom_len) == ws_len) {
 			accum_dom.Del_at_end(ws_len);
 		}
 	}

@@ -293,9 +293,9 @@ public class XomwFile {
 	*/
 	private byte[] getExtension() {
 		if (!XophpUtility.isset(this.extension)) {
-			int n = XophpString.strpos(this.getName(), Byte_ascii.Dot);
+			int n = XophpString_.strpos(this.getName(), Byte_ascii.Dot);
 			this.extension = normalizeExtension(
-				n != Bry_find_.Not_found ? XophpString.substr(this.getName(), n + 1) : Bry_.Empty);
+				n != Bry_find_.Not_found ? XophpString_.substr(this.getName(), n + 1) : Bry_.Empty);
 		}
 
 		return this.extension;

@@ -19,6 +19,7 @@ import gplx.gfui.draws.*;
 import gplx.xowa.langs.cases.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.grammars.*; import gplx.xowa.langs.genders.*; import gplx.xowa.langs.plurals.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.durations.*; import gplx.xowa.langs.lnki_trails.*; import gplx.xowa.langs.funcs.*; import gplx.xowa.langs.specials.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.commas.*;
 import gplx.xowa.apps.gfs.*; import gplx.xowa.apps.fsys.*; import gplx.core.intls.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.xtns.lst.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.guis.langs.*;
+import gplx.xowa.mediawiki.languages.*;
 public class Xol_lang_itm implements Gfo_invk {
 	private boolean loaded = false;
 	private final    Object thread_lock = new Object();
@@ -26,6 +27,7 @@ public class Xol_lang_itm implements Gfo_invk {
 		this.lang_mgr = lang_mgr; this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry);
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(key_bry); if (lang_itm == null) throw Err_.new_wo_type("unknown lang_key", "key", String_.new_u8(key_bry));
 		this.lang_id = lang_itm.Id();	
+		this.mw_lang = new XomwLanguage(this);
 		this.func_regy = new Xol_func_regy(lang_mgr, this);
 		this.ns_names = new Xol_ns_grp(this); this.ns_aliases = new Xol_ns_grp(this);
 		this.kwd_mgr = new Xol_kwd_mgr(this);
@@ -40,6 +42,7 @@ public class Xol_lang_itm implements Gfo_invk {
 		this.duration_mgr = new Xol_duration_mgr(this);
 		if (lang_id != Xol_lang_stub_.Id_en) fallback_bry_ary = Fallback_bry_ary__en;	// NOTE: do not set fallback_ary for en to en, else recursive loop
 	}
+	public XomwLanguage         Mw_lang() {return mw_lang;} private final    XomwLanguage mw_lang;
 	public Xoa_lang_mgr			Lang_mgr() {return lang_mgr;} private final    Xoa_lang_mgr lang_mgr; 
 	public byte[]				Key_bry() {return key_bry;} private final    byte[] key_bry;
 	public String				Key_str() {return key_str;} private final    String key_str;

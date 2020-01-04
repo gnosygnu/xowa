@@ -20,6 +20,7 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 public class Decimal_adp implements CompareAble {
 	public int compareTo(Object obj) {Decimal_adp comp = (Decimal_adp)obj; return under.compareTo(comp.under);}
+	public Decimal_adp Floor()						{return Decimal_adp_.int_(this.To_int());}
 		protected Decimal_adp(BigDecimal v) {this.under = v;} private final BigDecimal under;
 	protected Decimal_adp(int v) {this.under = new BigDecimal(v);}
 	public Object Under() 								{return under;}

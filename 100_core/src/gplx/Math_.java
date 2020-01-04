@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 public class Math_ {
 	public static double	Pow(double val, double exponent) {return java.lang.Math.pow(val, exponent);}
+	public static int       Pow_int(int val, int exponent) {return (int)java.lang.Math.pow(val, exponent);}
 	public static double	Pi = java.lang.Math.PI; 
 	public static double	E = java.lang.Math.E; 
 	public static int		Ceil_as_int(double v) {return (int)Ceil(v);}

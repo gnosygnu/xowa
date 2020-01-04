@@ -49,7 +49,9 @@ public class Regx_adp__tst implements TfdsEqListItmStr {
 		tst_Matches("b", "a b c b a b b", matches_(2, 6, 10, 12));	// BUGFIX: multiple entries did not work b/c of += instead of +
 	}
 	@Test  public void Groups() {
-		tst_Groups("abc def ghi dz", "(d\\p{L}+)", "def", "dz");
+		tst_Groups("abc def ghi dz", "(d\\p{L}+)", "def", "def", "dz", "dz");
+		tst_Groups("abc def", "(de)(g?)", "de", "de", ""); // NOTE: (g?) doesn't capture anything, but still add a group for it; DATE:2019-12-28
+		tst_Groups("-123.456", "^-?(([0-9]+)(?:\\.([0-9]+))?)", "-123.456", "123.456", "123", "456"); // NOTE: -123.456 captured even though it's not part of a group; DATE:2019-12-28
 	}
 	Regx_match[] matches_(int... bgnAry) {
 		int aryLen = Array_.Len(bgnAry);

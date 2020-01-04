@@ -111,7 +111,7 @@ public class XomwInterwiki {
 	public byte[] getURL(byte[] title) {
 		byte[] url = this.mURL;
 		if (title != null) {
-			url = XophpString.str_replace(ARG_1, XomwGlobalFunctions.wfUrlencode(title), url);
+			url = XophpString_.str_replace(ARG_1, XomwGlobalFunctions.wfUrlencode(title), url);
 		}
 
 		return url;

@@ -38,6 +38,7 @@ public interface String_bldr {
 	String_bldr Add(int i);
 	String_bldr Add_obj(Object o);
 	String_bldr Add_mid(char[] ary, int bgn, int count);
+	String_bldr Add_mid(String str, int bgn, int count);
 	String_bldr Add_at(int idx, String s);
 	String_bldr Del(int bgn, int len);
 }
@@ -83,6 +84,7 @@ abstract class String_bldr_base implements String_bldr {
 	public abstract String_bldr Add(char c);
 	public abstract String_bldr Add(int i);
 	public abstract String_bldr Add_mid(char[] ary, int bgn, int count);
+	public abstract String_bldr Add_mid(String str, int bgn, int count);
 	public abstract String_bldr Add_obj(Object o);
 	public abstract String_bldr Del(int bgn, int len);
 }
@@ -96,6 +98,7 @@ class String_bldr_thread_single extends String_bldr_base {
 	@Override public String_bldr Add(char c) {sb.append(c); return this;}						
 	@Override public String_bldr Add(int i) {sb.append(i); return this;}							
 	@Override public String_bldr Add_mid(char[] ary, int bgn, int count) {sb.append(ary, bgn, count); return this;}
+	@Override public String_bldr Add_mid(String str, int bgn, int count) {sb.append(str, bgn, count); return this;}
 	@Override public String_bldr Add_obj(Object o) {sb.append(o); return this;}					
 	@Override public String_bldr Del(int bgn, int len) {sb.delete(bgn, len); return this;}		
 }
@@ -109,6 +112,7 @@ class String_bldr_thread_multiple extends String_bldr_base {
 	@Override public String_bldr Add(char c) {sb.append(c); return this;}						
 	@Override public String_bldr Add(int i) {sb.append(i); return this;}							
 	@Override public String_bldr Add_mid(char[] ary, int bgn, int count) {sb.append(ary, bgn, count); return this;}
+	@Override public String_bldr Add_mid(String str, int bgn, int count) {sb.append(str, bgn, count); return this;}
 	@Override public String_bldr Add_obj(Object o) {sb.append(o); return this;}					
 	@Override public String_bldr Del(int bgn, int len) {sb.delete(bgn, len); return this;}		
 }

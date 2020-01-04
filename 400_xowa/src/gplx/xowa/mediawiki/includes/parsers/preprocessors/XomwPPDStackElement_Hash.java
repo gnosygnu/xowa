@@ -39,7 +39,7 @@ public class XomwPPDStackElement_Hash extends XomwPPDStackElement { 	public Xomw
 			if (openingCount == -1) {
 				openingCount = this.count;
 			}
-			accum = XophpArray.New(XophpString.str_repeat(this.open, openingCount));
+			accum = XophpArray.New(XophpString_.str_repeat(this.open, openingCount));
 			int lastIndex = 0;
 			boolean first = true;
 			int parts_len = parts.Len();

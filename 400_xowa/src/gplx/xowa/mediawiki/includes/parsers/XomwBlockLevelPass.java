@@ -278,8 +278,8 @@ public class XomwBlockLevelPass {
 			// If not in a <pre> element, scan for and figure out what prefixes are there.
 			if (!this.inPre) {
 				// Multiple prefixes may abut each other for nested lists.
-				prefixLen = XophpString.strspn_fwd__ary(src, block_chars_ary, lineBgn, lineEnd, lineEnd); // strspn($oLine, '*#:;');
-				prefix = XophpString.substr(src, lineBgn, prefixLen);
+				prefixLen = XophpString_.strspn_fwd__ary(src, block_chars_ary, lineBgn, lineEnd, lineEnd); // strspn($oLine, '*#:;');
+				prefix = XophpString_.substr(src, lineBgn, prefixLen);
 
 				// eh?
 				// ; and : are both from definition-lists, so they're equivalent
@@ -302,7 +302,7 @@ public class XomwBlockLevelPass {
 			int commonPrefixLen = -1;
 			if (prefixLen > 0 && Bry_.Eq(lastPrefix, prefix2)) {
 				// Same as the last item, so no need to deal with nesting or opening stuff
-				bfr.Add(this.nextItem(XophpString.substr_byte(prefix, -1)));
+				bfr.Add(this.nextItem(XophpString_.substr_byte(prefix, -1)));
 				pendingPTag = PARA_STACK_NONE;
 
 				if (prefixLen > 0 && prefix[prefixLen - 1] == Byte_ascii.Semic) {
@@ -342,7 +342,7 @@ public class XomwBlockLevelPass {
 					bfr.Add_byte_nl();
 				}
 				while (prefixLen > commonPrefixLen) {
-					byte c = XophpString.substr_byte(prefix, commonPrefixLen, 1);
+					byte c = XophpString_.substr_byte(prefix, commonPrefixLen, 1);
 					bfr.Add(this.openList(c));
 
 					if (c == Byte_ascii.Semic) {
@@ -396,7 +396,7 @@ public class XomwBlockLevelPass {
 					inBlockElem = !closeMatch;
 				}
 				else if (!inBlockElem && !this.inPre) {
-					if (XophpString.substr_byte(t, 0) == Byte_ascii.Space
+					if (XophpString_.substr_byte(t, 0) == Byte_ascii.Space
 						&& (this.lastSection == LAST_SECTION_PRE || Bry_.Trim(t) != Bry_.Empty)
 						&& !inBlockquote
 					) {
@@ -481,18 +481,18 @@ public class XomwBlockLevelPass {
 	*/
 	private int findColonNoLinks(byte[] str, byte[] before, byte[] after) {
 		int len = str.length;
-		int colonPos = XophpString.strpos(str, Byte_ascii.Colon, 0, len);
+		int colonPos = XophpString_.strpos(str, Byte_ascii.Colon, 0, len);
 		if (colonPos == Bry_find_.Not_found) {
 			// Nothing to find!
 			return Bry_find_.Not_found;
 		}
 
-		int ltPos = XophpString.strpos(str, Byte_ascii.Angle_bgn, 0, len);
+		int ltPos = XophpString_.strpos(str, Byte_ascii.Angle_bgn, 0, len);
 		if (ltPos == Bry_find_.Not_found || ltPos > colonPos) {
 			// Easy; no tag nesting to worry about
 			// XOMW: MW passes before / after by reference; XO: changes member and depends on callers to update
-			find_colon_no_links__before = XophpString.substr(str, 0, colonPos);
-			find_colon_no_links__after = XophpString.substr(str, colonPos + 1);
+			find_colon_no_links__before = XophpString_.substr(str, 0, colonPos);
+			find_colon_no_links__after = XophpString_.substr(str, colonPos + 1);
 			return colonPos;
 		}
 
@@ -512,25 +512,25 @@ public class XomwBlockLevelPass {
 						case Byte_ascii.Colon:
 							if (level == 0) {
 								// We found it!
-								find_colon_no_links__before = XophpString.substr(str, 0, i);
-								find_colon_no_links__after = XophpString.substr(str, i + 1);
+								find_colon_no_links__before = XophpString_.substr(str, 0, i);
+								find_colon_no_links__after = XophpString_.substr(str, i + 1);
 								return i;
 							}
 							// Embedded in a tag; don't break it.
 							break;
 						default:
 							// Skip ahead looking for something interesting
-							colonPos = XophpString.strpos(str, Byte_ascii.Colon, i, len);
+							colonPos = XophpString_.strpos(str, Byte_ascii.Colon, i, len);
 							if (colonPos == Bry_find_.Not_found) {
 								// Nothing else interesting
 								return Bry_find_.Not_found;
 							}
-							ltPos = XophpString.strpos(str, Byte_ascii.Angle_bgn, i, len);
+							ltPos = XophpString_.strpos(str, Byte_ascii.Angle_bgn, i, len);
 							if (level == 0) {
 								if (ltPos == Bry_find_.Not_found || colonPos < ltPos) {
 									// We found it!
-									find_colon_no_links__before = XophpString.substr(str, 0, colonPos);
-									find_colon_no_links__after = XophpString.substr(str, colonPos + 1);
+									find_colon_no_links__before = XophpString_.substr(str, 0, colonPos);
+									find_colon_no_links__after = XophpString_.substr(str, colonPos + 1);
 									return i;
 								}
 							}

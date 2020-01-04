@@ -25,7 +25,7 @@ public class XophpArrayUtl {
 		return rv;
 	}
 	public static boolean isset(XophpArray ary, int idx) {
-		return ary.Get_at(idx) == null;
+		return ary.Get_at(idx) != null;
 	}
 	public static String[] array_keys_str(Ordered_hash array) {
 		int len = array.Len();
@@ -147,6 +147,16 @@ public class XophpArrayUtl {
 		int end = offset + length;
 		for (int i = offset; i< end; i++) {
 			rv.Add(array.Get_at(i));
+		}
+		return rv;
+	}
+
+	// REF.PHP: https://www.php.net/manual/en/function.array-values.php
+	public static XophpArray array_values(XophpArray array) {
+		XophpArray rv = new XophpArray();
+		int len = array.Len();
+		for (int i = 0; i < len; i++) {
+			rv.Add(i, array.Get_at(i));
 		}
 		return rv;
 	}

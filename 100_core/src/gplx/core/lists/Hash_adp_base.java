@@ -20,6 +20,11 @@ public abstract class Hash_adp_base implements Hash_adp {
 	public Object Get_by_or_fail(Object key) {return Get_by_or_fail_base(key);}
 	public void Add(Object key, Object val) {Add_base(key, val);}
 	public Hash_adp Add_and_more(Object key, Object val) {Add_base(key, val); return this;}
+	public Hash_adp Add_many_as_key_and_val(Object... ary) {
+		for (Object itm : ary)
+			Add_base(itm, itm);
+		return this;
+	}
 	public void Add_as_key_and_val(Object val) {Add_base(val, val);}
 	public void Add_if_dupe_use_nth(Object key, Object val) {
 		Object existing = Fetch_base(key); if (existing != null) Del(key);	// overwrite if exists

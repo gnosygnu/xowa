@@ -37,6 +37,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		this.mode = mode;
 		Io_url.Http_file_str_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 		fsys_mgr = new Xoa_fsys_mgr(bin_dir_name, root_dir, wiki_dir, file_dir, css_dir, root_dir);
+		gplx.xowa.mediawiki.includes.cache.localisation.XomwLocalisationCacheForXowa.Init_ip(fsys_mgr.Bin_any_dir().GenSubDir("mediawiki"));
 		log_wtr = usr_dlg.Log_wkr();
 		api_root = new Xoapi_root(this);
 

@@ -215,6 +215,13 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 		, del
 		);
 	}
+	@Test  public void array_values() {
+		XophpArray orig = fxt.Make().Add("size", "XL").Add("color", "gold");
+		fxt.Test__eq
+			( fxt.Make().Add(0, "XL").Add(1, "gold")
+			, XophpArrayUtl.array_values(orig)
+			);
+	}
 }
 class XophpArrayUtl_fxt {
 	public XophpArray Make() {return new XophpArray();}

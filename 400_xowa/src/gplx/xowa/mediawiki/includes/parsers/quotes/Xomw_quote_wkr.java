@@ -110,8 +110,8 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 			for (int i = 1; i < arr_len; i += 2) {
 				if (arr[i].length == 3) {
 					byte[] prv = arr[i - 1];
-					byte prv__last_char = XophpString.substr_byte(prv, -1);
-					byte prv__last_minus_1_char = XophpString.substr_byte(prv, -2, 1);
+					byte prv__last_char = XophpString_.substr_byte(prv, -1);
+					byte prv__last_minus_1_char = XophpString_.substr_byte(prv, -2, 1);
 					if (prv__last_char == Byte_ascii.Space) {              // NOTE: prv ends in space; EX: "''prv '''"
 						if (prv_ends_w_space == -1) {
 							prv_ends_w_space = i;

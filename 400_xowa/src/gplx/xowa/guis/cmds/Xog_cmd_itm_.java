@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.guis.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 public class Xog_cmd_itm_ {
 	private static final    Ordered_hash regy = Ordered_hash_.New();	// NOTE: must be defined at top
-	public static final    String 
+	public static final    String
 	  Key_app_exit												= new_dflt_(Xog_ctg_itm_.Tid_app			, "xowa.app.exit")
 
 	, Key_nav_go_bwd											= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.go_bwd")

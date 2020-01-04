@@ -106,7 +106,7 @@ public class XomwPPDStackElement {
 			if (openingCount == -1) {
 				openingCount = this.count;
 			}
-			bfr.Add_str(XophpString.str_repeat(this.open, openingCount));
+			bfr.Add_str(XophpString_.str_repeat(this.open, openingCount));
 			boolean first = true;
 			int parts_len = parts.Len();
 			for (int i = 0; i < parts_len; i++) {

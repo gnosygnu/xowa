@@ -431,11 +431,11 @@ public abstract class XomwPreprocessor {
 					}
 					else {
 						// Search backwards for leading whitespace
-						int ws_bgn = i > 0 ? i - XophpString.strspn_bwd__space_or_tab(src, i, -1) : 0;
+						int ws_bgn = i > 0 ? i - XophpString_.strspn_bwd__space_or_tab(src, i, -1) : 0;
 
 						// Search forwards for trailing whitespace
 						// $wsEnd will be the position of the last space (or the '>' if there's none)
-						int ws_end = end_pos + 2 + XophpString.strspn_fwd__space_or_tab(src, end_pos + 3, -1, src_len);
+						int ws_end = end_pos + 2 + XophpString_.strspn_fwd__space_or_tab(src, end_pos + 3, -1, src_len);
 
 						// Keep looking forward as long as we're finding more
 						// comments.
@@ -446,7 +446,7 @@ public abstract class XomwPreprocessor {
 							if (cur_char_pos == Bry_find_.Not_found) {
 								break;
 							}
-							cur_char_pos = cur_char_pos + 2 + XophpString.strspn_fwd__space_or_tab(src, cur_char_pos + 3, -1, src_len);
+							cur_char_pos = cur_char_pos + 2 + XophpString_.strspn_fwd__space_or_tab(src, cur_char_pos + 3, -1, src_len);
 							comments_list.Add(new int[] {ws_end + 1, cur_char_pos});
 							ws_end = cur_char_pos;
 						}
@@ -609,7 +609,7 @@ public abstract class XomwPreprocessor {
 					i++;
 				}
 
-				int count = XophpString.strspn_fwd__byte(src, Byte_ascii.Eq, i, 6, src_len);
+				int count = XophpString_.strspn_fwd__byte(src, Byte_ascii.Eq, i, 6, src_len);
 				if (count == 1 && findEquals) {	// EX: "{{a|\n=b=\n"
 					// DWIM: This looks kind of like a name/value separator.
 					// Let's let the equals handler have it and break the
@@ -619,7 +619,7 @@ public abstract class XomwPreprocessor {
 				}
 				else if (count > 0) {
 					XomwPPDStackElement piece = Factory__stack_element(Factory__part(), String_.Nl, String_.Nl, count, i, false);
-					piece.addPart(XophpString.str_repeat("=", count));
+					piece.addPart(XophpString_.str_repeat("=", count));
 					stack.push(piece);
 					accum = this.Accum__set(stack.getAccum());
 					XomwPPDStackElementFlags flags = stack.getFlags();
@@ -638,7 +638,7 @@ public abstract class XomwPreprocessor {
 				// Search back through the input to see if it has a proper close.
 				// Do this using the reversed String since the other solutions
 				// (end anchor, etc.) are inefficient.
-				int ws_len = XophpString.strspn_bwd__space_or_tab(src, src_len - i, -1);
+				int ws_len = XophpString_.strspn_bwd__space_or_tab(src, src_len - i, -1);
 				int search_bgn = i - ws_len;
 
 				if (part.commentEnd != -1 && search_bgn -1 == part.commentEnd) {
@@ -646,10 +646,10 @@ public abstract class XomwPreprocessor {
 					// Search for equals signs before the comment
 					search_bgn = part.visualEnd;
 					search_bgn = Bry_find_.Find_bwd__while_space_or_tab(src, search_bgn, 0);
-					search_bgn -= XophpString.strspn_bwd__space_or_tab(src, search_bgn, -1);
+					search_bgn -= XophpString_.strspn_bwd__space_or_tab(src, search_bgn, -1);
 				}
 				int count = piece.count;
-				int eq_len = XophpString.strspn_bwd__byte(src, Byte_ascii.Eq, search_bgn, -1);
+				int eq_len = XophpString_.strspn_bwd__byte(src, Byte_ascii.Eq, search_bgn, -1);
 
 				Xomw_prepro_accum element = null;
 				if (eq_len > 0) {
@@ -702,7 +702,7 @@ public abstract class XomwPreprocessor {
 			}
 			else if (found == Found__open) {
 				// count opening brace characters
-				int count = XophpString.strspn_fwd__byte(src, cur_char[0], i, -1, src_len);	// NOTE: don't know how MediaWiki will handle "-{"
+				int count = XophpString_.strspn_fwd__byte(src, cur_char[0], i, -1, src_len);	// NOTE: don't know how MediaWiki will handle "-{"
 
 				// we need to add to stack only if opening brace count is enough for one of the rules
 				if (count >= rule.min) {
@@ -726,7 +726,7 @@ public abstract class XomwPreprocessor {
 				XomwPPDStackElement piece = stack.top;
 				// lets check if there are enough characters for closing brace
 				int max_count = piece.count;
-				int count = XophpString.strspn_fwd__byte(src, cur_char[0], i, max_count, src_len);
+				int count = XophpString_.strspn_fwd__byte(src, cur_char[0], i, max_count, src_len);
 
 				// check for maximum matching characters (if there are 5 closing characters, we will probably need only 3 - depending on the rules)
 				rule = Get_rule(piece.open);
@@ -785,7 +785,7 @@ public abstract class XomwPreprocessor {
 						this.accum = this.Accum__set(stack.getAccum());
 					}
 					else {
-						this.preprocessToObj_literal(Bry_.new_u8(XophpString.str_repeat(piece.open, piece.count)));
+						this.preprocessToObj_literal(Bry_.new_u8(XophpString_.str_repeat(piece.open, piece.count)));
 					}
 				}
 
