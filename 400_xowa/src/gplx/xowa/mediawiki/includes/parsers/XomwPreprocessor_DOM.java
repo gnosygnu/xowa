@@ -118,7 +118,7 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 		tmp_bfr.Add_str_a7("<title>").Add(title).Add_str_a7("</title>");
 
 		int arg_idx = 1;
-		int parts_len = parts.Len();
+		int parts_len = parts.count();
 		for (int j = 0; j < parts_len; j++) {
 			XomwPPDPart_DOM part = (XomwPPDPart_DOM)parts.Get_at(j);
 			if (part.eqpos != -1) {
@@ -144,7 +144,7 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 	}
 	@Override protected Object preprocessToObj_term(XomwPPDStack stack) {
 		Bry_bfr root_accum = Bry_bfr_.New().Add_str_u8(((Xomw_prepro_accum__dom)stack.Get_root_accum()).To_str());
-		int stack_len = stack.stack.Len();
+		int stack_len = stack.stack.count();
 		for (int j = 0; j < stack_len; j++) {
 			// XomwPPDStackElement_Hash piece = (XomwPPDStackElement_Hash)stack.stack.Get_at(j);
 			// root_accum.Add((XophpArray)piece.breakSyntax(tmp_bfr));

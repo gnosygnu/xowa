@@ -56,7 +56,7 @@ public class XophpString__tst {
 	}
 	@Test   public void Strpos() {
 		fxt.Test__strpos("abc", "b", 0, 1);
-		fxt.Test__strpos("abc", "z", 0, XophpInt_.False);
+		fxt.Test__strpos("abc", "z", 0, XophpString_.strpos_NULL);
 		fxt.Test__strpos("aba", "a", 1, 2);
 		fxt.Test__strpos("aba", "a", -2, 2);
 	}

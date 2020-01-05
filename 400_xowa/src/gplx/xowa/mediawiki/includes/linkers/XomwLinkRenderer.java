@@ -305,7 +305,7 @@ public class XomwLinkRenderer {
 		}
 		target = this.normalizeTarget(target);
 
-		if (!XophpUtility.isset(query.action) && target.getNamespace() != XomwDefines.NS_SPECIAL) {
+		if (!XophpObject_.isset(query.action) && target.getNamespace() != XomwDefines.NS_SPECIAL) {
 			query.action = Bry__action__edit;
 			query.redlink = 1;
 		}

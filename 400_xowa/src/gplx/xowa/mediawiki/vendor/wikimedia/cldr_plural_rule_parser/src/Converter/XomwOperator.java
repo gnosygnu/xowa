@@ -97,8 +97,8 @@ public class XomwOperator extends XomwFragment { 	/** @var String The name */
 		String rightType = XomwOperator.typeSpecMap.Get_by_str(String_.CharAt(typeSpec, 1));
 		String resultType = XomwOperator.typeSpecMap.Get_by_str(String_.CharAt(typeSpec, 2));
 
-		int start = XophpMath.min_many(this.pos, left.pos, right.pos);
-		int end = XophpMath.max_many(this.end, left.end, right.end);
+		int start = XophpMath_.min_many(this.pos, left.pos, right.pos);
+		int end = XophpMath_.max_many(this.end, left.end, right.end);
 		int length = end - start;
 
 		XomwExpression newExpr = new XomwExpression(this.parser, resultType,

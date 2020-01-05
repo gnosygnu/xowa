@@ -14,7 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-public class XophpUtility {
+public class XophpObject_ {
+	public static final    Object False = null; // handles code like "if ($var === false)" where var is an Object;
+	public static boolean is_true(Object val) {return val != null;}
+	public static boolean is_null(Object val) {return val == null;}
+
 	// REF.PHP:http://php.net/manual/en/function.empty.php
 	public static boolean empty(String v)     {return v == null || String_.Len_eq_0(v);}
 	public static boolean empty(byte[] v)     {return v == null || v.length == 0;}
@@ -76,4 +80,5 @@ public class XophpUtility {
 	public static final int NULL_INT = Int_.Max_value;
 	public static final double NULL_DOUBLE = Double_.MinValue;
 	public static final    byte[] NULL_BRY = null;
+	public static Object coalesce(Object val, Object if_null) {return val == null ? if_null : val;}
 }

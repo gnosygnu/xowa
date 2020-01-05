@@ -50,7 +50,7 @@ class XomwRange {
 	*/
 	public boolean isNumberIn(Decimal_adp number) {return isNumberIn(number, true);}
 	public boolean isNumberIn(Decimal_adp number, boolean integerConstraint) {
-		int parts_len = parts.Len();
+		int parts_len = parts.count();
 		for (int i = 0; i < parts_len; i++) {
 			Object part_obj = this.parts.Get_at(i);
 			if (XophpArray.is_array(part_obj)) {
@@ -91,7 +91,7 @@ class XomwRange {
 	*/
 	public void add(Object otherObj) {
 		if (Type_.Eq_by_obj(otherObj, XomwRange.class)) {
-			this.parts = XophpArrayUtl.array_merge(this.parts, ((XomwRange)otherObj).parts);
+			this.parts = XophpArray_.array_merge(this.parts, ((XomwRange)otherObj).parts);
 		} else {
 			this.parts.Add(otherObj);
 		}
@@ -105,7 +105,7 @@ class XomwRange {
 	*/
 	@Override public String toString() {
 		String s = "Range(";
-		int parts_len = this.parts.Len();
+		int parts_len = this.parts.count();
 		for (int i = 0; i < parts_len; i++) {
 			Object part_obj = this.parts.Get_at(i);
 			if (i > 0) {

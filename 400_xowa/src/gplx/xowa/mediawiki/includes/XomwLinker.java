@@ -341,16 +341,16 @@ public class XomwLinker {
 
 		// Clean up parameters
 		int page = handlerParams.page;
-		if (!XophpUtility.isset(frameParams.align)) {
+		if (!XophpObject_.isset(frameParams.align)) {
 			frameParams.align = Bry_.Empty;
 		}
-		if (!XophpUtility.isset(frameParams.alt)) {
+		if (!XophpObject_.isset(frameParams.alt)) {
 			frameParams.alt = Bry_.Empty;
 		}
-		if (!XophpUtility.isset(frameParams.title)) {
+		if (!XophpObject_.isset(frameParams.title)) {
 			frameParams.title = Bry_.Empty;
 		}
-		if (!XophpUtility.isset(frameParams.cls)) {
+		if (!XophpObject_.isset(frameParams.cls)) {
 			frameParams.cls = Bry_.Empty;
 		}
 
@@ -361,8 +361,8 @@ public class XomwLinker {
 			postfix = Gfh_tag_.Div_rhs;
 			frameParams.align = Align__frame__none;
 		}
-		if (file != null && !XophpUtility.isset(handlerParams.width)) {
-			if (XophpUtility.isset(handlerParams.height) && file.isVectorized()) {
+		if (file != null && !XophpObject_.isset(handlerParams.width)) {
+			if (XophpObject_.isset(handlerParams.height) && file.isVectorized()) {
 				// If its a vector image, and user only specifies height
 				// we don't want it to be limited by its "normal" width.
 				handlerParams.width = env.Global__wgSVGMaxSize;
@@ -371,13 +371,13 @@ public class XomwLinker {
 				handlerParams.width = file.getWidth(page);
 			}
 
-			if (   XophpUtility.isset(frameParams.thumbnail)
-				|| XophpUtility.isset(frameParams.manualthumb)
-				|| XophpUtility.isset(frameParams.framed)
-				|| XophpUtility.isset(frameParams.frameless)
-				|| !XophpUtility.istrue(handlerParams.width)
+			if (   XophpObject_.isset(frameParams.thumbnail)
+				|| XophpObject_.isset(frameParams.manualthumb)
+				|| XophpObject_.isset(frameParams.framed)
+				|| XophpObject_.isset(frameParams.frameless)
+				|| !XophpObject_.istrue(handlerParams.width)
 			) {
-				if (widthOption == XophpUtility.NULL_INT) {	// XO.MW: MW does extra validation that widthOption is in array; ("!isset( $wgThumbLimits[$widthOption] )")
+				if (widthOption == XophpObject_.NULL_INT) {	// XO.MW: MW does extra validation that widthOption is in array; ("!isset( $wgThumbLimits[$widthOption] )")
 					widthOption = env.User__default__thumbsize;
 				}
 
@@ -389,13 +389,13 @@ public class XomwLinker {
 				// For caching health: If width scaled down due to upright
 				// parameter, round to full __0 pixel to avoid the creation of a
 				// lot of odd thumbs.
-				int prefWidth = XophpUtility.isset(frameParams.upright) ?
-					(int)XophpMath.round(widthOption * frameParams.upright, -1) :
+				int prefWidth = XophpObject_.isset(frameParams.upright) ?
+					(int)XophpMath_.round(widthOption * frameParams.upright, -1) :
 					widthOption;
 
 				// Use width which is smaller: real image width or user preference width
 				// Unless image is scalable vector.
-				if (handlerParams.height == XophpUtility.NULL_INT && handlerParams.width <= 0 ||
+				if (handlerParams.height == XophpObject_.NULL_INT && handlerParams.width <= 0 ||
 						prefWidth < handlerParams.width || file.isVectorized()) {
 					handlerParams.width = prefWidth;
 				}
@@ -424,13 +424,13 @@ public class XomwLinker {
 			// For "frameless" option: do not present an image bigger than the
 			// source (for bitmap-style images). This is the same behavior as the
 			// "thumb" option does it already.
-			if (XophpUtility.istrue(srcWidth) && !file.mustRender() && handlerParams.width > srcWidth) {
+			if (XophpObject_.istrue(srcWidth) && !file.mustRender() && handlerParams.width > srcWidth) {
 				handlerParams.width = srcWidth;
 			}
 		}
 
 		XomwMediaTransformOutput thumb = null;
-		if (file != null && XophpUtility.isset(handlerParams.width)) {
+		if (file != null && XophpObject_.isset(handlerParams.width)) {
 			// Create a resized image, without the additional thumbnail features
 			thumb = file.transform(handlerParams);
 		}
@@ -481,9 +481,9 @@ public class XomwLinker {
 	// @return array
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
 	private static void getImageLinkMTOParams(Xomw_params_mto rv, Xomw_params_frame frameParams, byte[] query, XomwParserIface parser) {
-		if (XophpUtility.isset(frameParams.link_url) && frameParams.link_url != Bry_.Empty) {
+		if (XophpObject_.isset(frameParams.link_url) && frameParams.link_url != Bry_.Empty) {
 			rv.custom_url_link = frameParams.link_url;
-			if (XophpUtility.isset(frameParams.link_target)) {
+			if (XophpObject_.isset(frameParams.link_target)) {
 				rv.custom_target_link = frameParams.link_target;
 			}
 			if (parser != null) {
@@ -494,10 +494,10 @@ public class XomwLinker {
 //					}
 			}
 		}
-		else if (XophpUtility.isset(frameParams.link_title) && frameParams.link_title != Bry_.Empty) {
+		else if (XophpObject_.isset(frameParams.link_title) && frameParams.link_title != Bry_.Empty) {
 //				rv.custom_title_link = Title::newFromLinkTarget(Normalize_speecial_page(frameParams.link_title));
 		}
-		else if (!XophpUtility.empty(frameParams.no_link)) {
+		else if (!XophpObject_.empty(frameParams.no_link)) {
 			// No link
 		}
 		else {
@@ -538,22 +538,22 @@ public class XomwLinker {
 		boolean exists = file != null && file.exists();
 
 		int page = handlerParams.page;
-		if (!XophpUtility.isset(frameParams.align)) {
+		if (!XophpObject_.isset(frameParams.align)) {
 			frameParams.align = Align__frame__right;
 		}
-		if (!XophpUtility.isset(frameParams.alt)) {
+		if (!XophpObject_.isset(frameParams.alt)) {
 			frameParams.alt = Bry_.Empty;
 		}
-		if (!XophpUtility.isset(frameParams.title)) {
+		if (!XophpObject_.isset(frameParams.title)) {
 			frameParams.title = Bry_.Empty;
 		}
-		if (!XophpUtility.isset(frameParams.caption)) {
+		if (!XophpObject_.isset(frameParams.caption)) {
 			frameParams.caption = Bry_.Empty;
 		}
 
-		if (XophpUtility.empty(handlerParams.width)) {
+		if (XophpObject_.empty(handlerParams.width)) {
 			// Reduce width for upright images when parameter 'upright' is used
-			handlerParams.width = XophpUtility.isset(frameParams.upright) ? 130 : 180;
+			handlerParams.width = XophpObject_.isset(frameParams.upright) ? 130 : 180;
 		}
 		XomwMediaTransformOutput thumb = null;
 		boolean noscale = false;
@@ -564,7 +564,7 @@ public class XomwLinker {
 			outerWidth = handlerParams.width + 2;
 		}
 		else {
-			if (XophpUtility.isset(frameParams.manualthumb)) {
+			if (XophpObject_.isset(frameParams.manualthumb)) {
 				// Use manually specified thumbnail
 //					$manual_title = Title::makeTitleSafe(NS_FILE, frameParams['manualthumb']);
 //					if ($manual_title) {
@@ -577,7 +577,7 @@ public class XomwLinker {
 //						}
 //					}
 			}
-			else if (XophpUtility.isset(frameParams.framed)) {
+			else if (XophpObject_.isset(frameParams.framed)) {
 				// Use image dimensions, don't scale
 //					thumb = $file->getUnscaledThumb(handlerParams);
 				thumb = new XomwThumbnailImage(file, file.getUrl(), file.getUrl(), file.getWidth(), file.getHeight());
@@ -587,7 +587,7 @@ public class XomwLinker {
 				// Do not present an image bigger than the source, for bitmap-style images
 				// This is a hack to maintain compatibility with arbitrary pre-1.10 behavior
 				int srcWidth = file.getWidth(page);
-				if (XophpUtility.istrue(srcWidth) && !file.mustRender() && handlerParams.width > srcWidth) {
+				if (XophpObject_.istrue(srcWidth) && !file.mustRender() && handlerParams.width > srcWidth) {
 					handlerParams.width = srcWidth;
 				}
 				thumb = file.transform(handlerParams);
@@ -610,9 +610,9 @@ public class XomwLinker {
 //				$url = wfAppendQuery($url, [ 'page' => $page ]);
 //			}
 		if (manualthumb
-			&& !XophpUtility.isset(frameParams.link_title)
-			&& !XophpUtility.isset(frameParams.link_url)
-			&& !XophpUtility.isset(frameParams.no_link)
+			&& !XophpObject_.isset(frameParams.link_title)
+			&& !XophpObject_.isset(frameParams.link_url)
+			&& !XophpObject_.isset(frameParams.no_link)
 		) {
 			frameParams.link_url = url;
 		}
@@ -642,7 +642,7 @@ public class XomwLinker {
 			
 			getImageLinkMTOParams(prms, frameParams, query, null);
 			thumb.toHtml(bfr, tmp, prms);
-			if (XophpUtility.isset(frameParams.framed)) {
+			if (XophpObject_.isset(frameParams.framed)) {
 				zoom_icon = Bry_.Empty;
 			}
 			else {

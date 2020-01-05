@@ -28,6 +28,6 @@ public class Xomw_params_scalar {
 	public byte[] dstUrl;
 	public byte[] interlace;
 	public Xomw_params_scalar() {
-		physicalWidth = physicalHeight = clientWidth = clientHeight = srcWidth = srcHeight = XophpUtility.NULL_INT;
+		physicalWidth = physicalHeight = clientWidth = clientHeight = srcWidth = srcHeight = XophpObject_.NULL_INT;
 	}
 }

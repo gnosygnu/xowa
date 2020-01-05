@@ -285,13 +285,13 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 			if (XomwRegexTitlePrefix.preg_match(m, dbkey)) {
 				byte[] p = m[0];
 				int ns = this.language.getNsIndex(p);
-				if (ns != XophpUtility.NULL_INT) {
+				if (ns != XophpObject_.NULL_INT) {
 					// Ordinary namespace
 					dbkey = m[1];
 					parts.ns = ns;
 					// For Talk:X pages, check if X has a "namespace" prefix
 					if (ns == XomwDefines.NS_TALK && XomwRegexTitlePrefix.preg_match(m, dbkey)) {
-						if (this.language.getNsIndex(m[0]) != XophpUtility.NULL_INT) {
+						if (this.language.getNsIndex(m[0]) != XophpObject_.NULL_INT) {
 							// Disallow Talk:File:x type titles...
 							throw new XomwMalformedTitleException("title-invalid-talk-namespace", text);
 						}

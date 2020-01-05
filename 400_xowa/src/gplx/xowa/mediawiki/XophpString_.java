@@ -34,6 +34,7 @@ public class XophpString_ {
 	public static int strpos(byte[] src, byte find, int bgn, int end) {
 		return Bry_find_.Find_fwd(src, find, bgn, end);
 	}
+	public static int strpos_NULL = -1;
 
 	// REF.PHP: https://www.php.net/manual/en/function.substr.php
 	public static String substr(String src, int bgn, int len) {return String_.new_u8(substr(Bry_.new_u8(src), bgn, len));}
@@ -108,7 +109,6 @@ public class XophpString_ {
 			if (Utf16_.Len_by_char(subject_char) == 2) {
 				i++;
 				char lo_char = String_.CharAt(subject, i);
-				// TODO: change Char_.To_int_or to Char_.To_digit
 				int surrogate_char = Utf16_.Surrogate_merge(Char_.To_int(subject_char), Char_.To_int(lo_char));
 				mask_key = String_.new_u8(Utf16_.Encode_int_to_bry(surrogate_char));
 			}

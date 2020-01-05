@@ -26,6 +26,6 @@ public class XophpType {
 		return type_id == Type_ids_.Id__array;
 	}
 	public static XophpType New(Object o) {
-		return new XophpType(XophpTypeUtl.To_type_id(o));
+		return new XophpType(XophpType_.To_type_id(o));
 	}
 }

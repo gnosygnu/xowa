@@ -42,7 +42,7 @@ public class XomwEvaluator {
 		XophpArray rv = XophpArray.New();
 		// We can't use array_map() for this because it generates a warning if
 		// there is an exception.
-		int rules_len = rules.Len();
+		int rules_len = rules.count();
 		for (int i = 0; i < rules_len; i++) {
 			String rule = rules.Get_at_str(i);
 			rule = XomwConverter.convert(rule);
@@ -69,7 +69,7 @@ public class XomwEvaluator {
 		XophpArray m = XophpArray.New();
 		if (!XophpRegex_.preg_match_bool(gplx.langs.regxs.Regx_adp_.new_("^-?(([0-9]+)(?:\\.([0-9]+))?)"), number_str, m, 0, 0)) {
 			XomwLog_.wfDebug_by_method("evaluateCompiled", ": invalid number input, returning \"other\"\n");
-			return rules.Count();
+			return rules.count();
 		}
 
 		XophpArray operandSymbols = null;			
@@ -98,7 +98,7 @@ public class XomwEvaluator {
 
 		// The compiled form is RPN, with tokens strictly delimited by
 		// spaces, so this is a simple RPN evaluator.
-		int rules_len = rules.Len();
+		int rules_len = rules.count();
 		for (int i = 0; i < rules_len; i++) {
 			String rule = rules.Get_at_str(i);
 			XophpArray stack = XophpArray.New();
@@ -125,7 +125,7 @@ public class XomwEvaluator {
 		}
 		// None of the provided rules match. The number belongs to category
 		// "other", which comes last.
-		return rules.Count();
+		return rules.count();
 	}
 
 	/**
@@ -171,10 +171,10 @@ public class XomwEvaluator {
 		}
 		else if (String_.Eq(token, "mod")) {
 			if (left.Tid() == XomwStackItem.Tid__number) {
-				return XomwStackItem.New__number(XophpMath.fmod_decimal(left.As_num(), right.As_num()));
+				return XomwStackItem.New__number(XophpMath_.fmod_decimal(left.As_num(), right.As_num()));
 			}
 
-			return XomwStackItem.New__number(XophpMath.fmod_decimal(left.As_num(), right.As_num()));
+			return XomwStackItem.New__number(XophpMath_.fmod_decimal(left.As_num(), right.As_num()));
 		}
 		else if (String_.Eq(token, ",")) {
 			XomwRange range = null;

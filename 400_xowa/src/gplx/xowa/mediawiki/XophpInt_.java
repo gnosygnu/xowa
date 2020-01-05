@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpInt_ {
-	public static final int False = -1; // handles code like "if ($var === false)" where var is an Object;
+	public static boolean is_true(int val) {return val != -1;} // handles code like "if ($var === false)" where var is an Object;
 	public static String strval(int number) {
 		return Int_.To_str(number);
 	}

@@ -196,7 +196,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		if (num != null) {	// MW: if num present, check options table for noCommafy arg;
 			Keyval[] kv_ary = args.Cast_kv_ary_or_null(2);
 			if (kv_ary != null) {
-				skip_commafy = !XophpUtility.empty_obj(Keyval_.Ary_get_by_key_or_null(kv_ary, "noCommafy"));
+				skip_commafy = !XophpObject_.empty_obj(Keyval_.Ary_get_by_key_or_null(kv_ary, "noCommafy"));
 			}
 		}
 		byte[] rv = lang.Num_mgr().Format_num(num, skip_commafy);

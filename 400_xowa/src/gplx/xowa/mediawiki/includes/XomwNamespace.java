@@ -500,5 +500,5 @@ public class XomwNamespace {
 //
 //			return $usableLevels;
 //		}
-	public static final int NULL_NS_ID = XophpUtility.NULL_INT;
+	public static final int NULL_NS_ID = XophpObject_.NULL_INT;
 }

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.core.brys.*;
 import gplx.core.primitives.*;
-public class XophpPreg {
+public class XophpPreg_ {
 	public static byte[][] split(Int_list list, byte[] src, int src_bgn, int src_end, byte[] dlm, boolean extend) {
 		// find delimiters
 		int dlm_len = dlm.length;

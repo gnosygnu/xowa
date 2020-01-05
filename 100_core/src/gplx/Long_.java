@@ -40,7 +40,7 @@ public class Long_ {
 			if (raw == null || rawLen == 0) return or;
 			long rv = 0, factor = 1; int tmp = 0;
 			for (int i = rawLen; i > 0; i--) {
-				tmp = Char_.To_int_or(String_.CharAt(raw, i - 1), Int_.Min_value);
+				tmp = Char_.To_digit_or(String_.CharAt(raw, i - 1), Int_.Min_value);
 				if (tmp == Int_.Min_value) return or;
 				rv += (tmp * factor);
 				factor *= 10;

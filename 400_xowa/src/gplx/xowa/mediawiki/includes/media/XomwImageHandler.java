@@ -28,7 +28,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 	* @return boolean
 	*/
 	@Override public boolean canRender(XomwFile file) {
-		return (XophpUtility.istrue(file.getWidth()) && XophpUtility.istrue(file.getHeight()));
+		return (XophpObject_.istrue(file.getWidth()) && XophpObject_.istrue(file.getHeight()));
 	}
 
 	@Override public Xomw_param_map getParamMap() {
@@ -52,10 +52,10 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 
 	@Override public byte[] makeParamString(Xomw_params_handler handlerParams) {
 		int width = 0;
-		if (XophpUtility.isset(handlerParams.physicalWidth)) {
+		if (XophpObject_.isset(handlerParams.physicalWidth)) {
 			width = handlerParams.physicalWidth;
 		}
-		else if (XophpUtility.isset(handlerParams.width)) {
+		else if (XophpObject_.isset(handlerParams.width)) {
 			width = handlerParams.width;
 		}
 		else {
@@ -76,7 +76,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 //				pos = Bry_find_.Find_fwd_while_num(src, 1, len);          // skip numeric
 //				if (Bry_.Match(src, pos, len, Xomw_lnki_wkr.Bry__px)) {   // matches "px"
 //					Xomw_params_handler rv = new Xomw_params_handler();
-//					rv.width = Bry_.To_int_or(src, 0, pos, XophpUtility.NULL_INT);
+//					rv.width = Bry_.To_int_or(src, 0, pos, XophpObject_.NULL_INT);
 //					return rv;
 //				}
 //			}
@@ -95,11 +95,11 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 	@Override public boolean normaliseParams(XomwFile image, Xomw_params_handler handlerParams) {
 		byte[] mimeType = image.getMimeType();
 
-		if (!XophpUtility.isset(handlerParams.width)) {
+		if (!XophpObject_.isset(handlerParams.width)) {
 			return false;
 		}
 
-		if (!XophpUtility.isset(handlerParams.page)) {
+		if (!XophpObject_.isset(handlerParams.page)) {
 			handlerParams.page = 1;
 		}
 		else {
@@ -116,7 +116,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 		int srcWidth = image.getWidth(handlerParams.page);
 		int srcHeight = image.getHeight(handlerParams.page);
 
-		if (XophpUtility.isset(handlerParams.height) && handlerParams.height != -1) {
+		if (XophpObject_.isset(handlerParams.height) && handlerParams.height != -1) {
 			// Height & width were both set
 			if (handlerParams.width * srcHeight > handlerParams.height * srcWidth) {
 				// Height is the relative smaller dimension, so scale width accordingly
@@ -130,11 +130,11 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 				handlerParams.physicalWidth = handlerParams.width;
 			} else {
 				// Height was crap, unset it so that it will be calculated later
-				handlerParams.height = XophpUtility.NULL_INT;
+				handlerParams.height = XophpObject_.NULL_INT;
 			}
 		}
 
-		if (!XophpUtility.isset(handlerParams.physicalWidth)) {
+		if (!XophpObject_.isset(handlerParams.physicalWidth)) {
 			// Passed all validations, so set the physicalWidth
 			handlerParams.physicalWidth = handlerParams.width;
 		}
@@ -146,7 +146,7 @@ public abstract class XomwImageHandler extends XomwMediaHandler {	private final 
 			handlerParams.physicalWidth);
 
 		// Set the height if it was not validated in the if block higher up
-		if (!XophpUtility.isset(handlerParams.height) || handlerParams.height == -1) {
+		if (!XophpObject_.isset(handlerParams.height) || handlerParams.height == -1) {
 			handlerParams.height = handlerParams.physicalHeight;
 		}
 

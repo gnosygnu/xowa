@@ -53,7 +53,7 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 		return found ? tmp.To_bry_and_clear() : src;
 	}
 	private boolean Do_quotes(Bry_bfr bfr, boolean all_quotes_mode, byte[] src, int line_bgn, int line_end) {
-		byte[][] arr = XophpPreg.split(apos_pos_ary, src, line_bgn, line_end, Wtxt__apos, Bool_.Y);	// PORTED.REGX: arr = preg_split("/(''+)/", text, -1, PREG_SPLIT_DELIM_CAPTURE);
+		byte[][] arr = XophpPreg_.split(apos_pos_ary, src, line_bgn, line_end, Wtxt__apos, Bool_.Y);	// PORTED.REGX: arr = preg_split("/(''+)/", text, -1, PREG_SPLIT_DELIM_CAPTURE);
 		if (arr == null) {
 			if (all_quotes_mode) {
 				bfr.Add_mid(src, line_bgn, line_end).Add_byte_nl();

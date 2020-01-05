@@ -75,7 +75,7 @@ public class XophpRegex_ {
 	  PREG_OFFSET_CAPTURE = 256
 	, PREG_UNMATCHED_AS_NULL = 0
 	, PREG_NO_FLAG = Int_.Min_value
-	, PREG_ERR = XophpInt_.False
+	, PREG_ERR = -1
 	;
 
 	public static final int NOT_FOUND = 0, FOUND = 1;

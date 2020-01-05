@@ -85,7 +85,7 @@ public abstract class XomwGenericArrayObject extends XomwArrayObject {	/**
 	* @param mixed $value
 	*/
 	public void append(Object val) {
-		this.setElement(XophpUtility.NULL_INT, val);
+		this.setElement(XophpObject_.NULL_INT, val);
 	}
 
 	/**
@@ -139,7 +139,7 @@ public abstract class XomwGenericArrayObject extends XomwArrayObject {	/**
 			);
 		}
 
-		if (XophpUtility.is_null(index)) {
+		if (XophpObject_.is_null(index)) {
 			index = this.getNewOffset();
 		}
 

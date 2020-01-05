@@ -42,23 +42,23 @@ public class XomwPPDStackElement_Hash extends XomwPPDStackElement { 	public Xomw
 			accum = XophpArray.New(XophpString_.str_repeat(this.open, openingCount));
 			int lastIndex = 0;
 			boolean first = true;
-			int parts_len = parts.Len();
+			int parts_len = parts.count();
 			for (int i = 0; i < parts_len; i++) {
 				XomwPPDPart_Hash part = Get_at_hash(i);
 				if (first) {
 					first = false;
 				}
-				else if (XophpTypeUtl.is_string(accum.Get_at_str(lastIndex))) {
+				else if (XophpType_.is_string(accum.Get_at_str(lastIndex))) {
 					accum.Set(lastIndex, accum.Get_at_str(lastIndex) + "|");
 				} else {
 					accum.Set(++lastIndex, "|");
 				}
 				
 				XophpArray part_out = ((Xomw_prepro_accum__hash)part.Accum()).Ary();
-				int part_out_len = part_out.Len();
+				int part_out_len = part_out.count();
 				for (int j = 0; j < part_out_len; j++) {
 					Object node = part_out.Get_at(j);
-					if (XophpTypeUtl.is_string(node) && XophpTypeUtl.is_string(accum.Get_at(lastIndex))) {
+					if (XophpType_.is_string(node) && XophpType_.is_string(accum.Get_at(lastIndex))) {
 						accum.Set(lastIndex, accum.Get_at_str(lastIndex) + (String)node);
 					} else {
 						accum.Set(++lastIndex, node);

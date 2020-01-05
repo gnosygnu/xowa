@@ -264,7 +264,7 @@ public class XomwSite {
 			return null;
 		}
 
-		return XophpUrl.parse_url(path, XophpUrl.PHP_URL_HOST);
+		return XophpUrl_.parse_url(path, XophpUrl_.PHP_URL_HOST);
 	}
 
 
@@ -283,7 +283,7 @@ public class XomwSite {
 			return "";
 		}
 
-		String protocol = XophpUrl.parse_url(path, XophpUrl.PHP_URL_SCHEME);
+		String protocol = XophpUrl_.parse_url(path, XophpUrl_.PHP_URL_SCHEME);
 
 		// Malformed URL
 		if (protocol == null) {
@@ -371,7 +371,7 @@ public class XomwSite {
 		}
 
 		if (pageName != null) {
-			url = String_.new_u8(XophpString_.str_replace(Bry_.new_a7("$1"), XophpEncode.rawurlencode(Bry_.new_u8(pageName)), Bry_.new_u8(url)));
+			url = String_.new_u8(XophpString_.str_replace(Bry_.new_a7("$1"), XophpEncode_.rawurlencode(Bry_.new_u8(pageName)), Bry_.new_u8(url)));
 		}
 
 		return url;

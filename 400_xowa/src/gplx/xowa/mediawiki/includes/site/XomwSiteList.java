@@ -103,14 +103,14 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 			*/
 			XomwSite site = (XomwSite)this.offsetGet(index);
 
-			XophpArrayUtl.unset(this.byGlobalId, site.getGlobalId());
-			XophpArrayUtl.unset(this.byInternalId, site.getInternalId());
+			XophpArray_.unset(this.byGlobalId, site.getGlobalId());
+			XophpArray_.unset(this.byInternalId, site.getInternalId());
 
 			Ordered_hash ids = site.getNavigationIds();
 			int len = ids.Len();
 			for (int i = 0; i < len; i++) {
 				int navId = Int_.Cast(ids.Get_at(i));
-				XophpArrayUtl.unset(this.byNavigationId, navId);
+				XophpArray_.unset(this.byNavigationId, navId);
 			}
 		}
 
@@ -126,7 +126,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @return array
 	*/
 	public String[] getGlobalIdentifiers() {
-		return XophpArrayUtl.array_keys_str(this.byGlobalId);
+		return XophpArray_.array_keys_str(this.byGlobalId);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @return boolean
 	*/
 	public boolean hasSite(String globalSiteId) {
-		return XophpArrayUtl.array_key_exists(globalSiteId, this.byGlobalId);
+		return XophpArray_.array_key_exists(globalSiteId, this.byGlobalId);
 	}
 
 	/**
@@ -174,7 +174,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @return boolean
 	*/
 	@Override public boolean isEmpty() {
-		return XophpArrayUtl.array_is_empty(this.byGlobalId);
+		return XophpArray_.array_is_empty(this.byGlobalId);
 	}
 
 	/**
@@ -185,7 +185,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @return boolean
 	*/
 	public boolean hasInternalId(int id) {
-		return XophpArrayUtl.array_key_exists(id, this.byInternalId);
+		return XophpArray_.array_key_exists(id, this.byInternalId);
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @return boolean
 	*/
 	public boolean hasNavigationId(String id) {
-		return XophpArrayUtl.array_key_exists(id, this.byNavigationId);
+		return XophpArray_.array_key_exists(id, this.byNavigationId);
 	}
 
 	/**

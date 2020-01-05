@@ -25,6 +25,6 @@ public class XophpMath__tst {
 }
 class XophpMath__fxt {
 	public void Test__fmod(double lhs, double rhs, double expd) {
-		Gftest.Eq__double(expd, XophpMath.fmod(lhs, rhs));
+		Gftest.Eq__double(expd, XophpMath_.fmod(lhs, rhs));
 	}
 }

@@ -63,7 +63,7 @@ public class XomwPPDStackElement {
 	}
 
 	public Xomw_prepro_accum getAccum() {
-		return (Xomw_prepro_accum)Get_at(this.parts.Count() - 1).Accum();
+		return (Xomw_prepro_accum)Get_at(this.parts.count() - 1).Accum();
 	}
 
 	public void addPart(String s) {
@@ -74,18 +74,18 @@ public class XomwPPDStackElement {
 	}
 
 	public XomwPPDPart getCurrentPart() {
-		return (XomwPPDPart)Get_at(this.parts.Count() - 1);
+		return (XomwPPDPart)Get_at(this.parts.count() - 1);
 	}
 
 	/**
 	* @return array
 	*/
 	public XomwPPDStackElementFlags getFlags() {
-		int partCount = this.parts.Count();
+		int partCount = this.parts.count();
 		boolean findPipe = String_.EqNot(this.open, "\n") && String_.EqNot(this.open, "[");
 		return new XomwPPDStackElementFlags
 			( findPipe
-			, findPipe && partCount > 1 && !XophpUtility.isset(Get_at(partCount - 1).eqpos)
+			, findPipe && partCount > 1 && !XophpObject_.isset(Get_at(partCount - 1).eqpos)
 			, String_.Eq(this.open, "\n")
 			);
 	}
@@ -108,7 +108,7 @@ public class XomwPPDStackElement {
 			}
 			bfr.Add_str(XophpString_.str_repeat(this.open, openingCount));
 			boolean first = true;
-			int parts_len = parts.Len();
+			int parts_len = parts.count();
 			for (int i = 0; i < parts_len; i++) {
 				XomwPPDPart_DOM part = (XomwPPDPart_DOM)Get_at(i);
 				if (first) {

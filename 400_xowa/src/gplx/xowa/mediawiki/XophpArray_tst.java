@@ -112,8 +112,8 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 		ary.Add(0, "a").Add(1, "b");
 
 		// delete all
-		ary.Unset(0);
-		ary.Unset(1);
+		ary.unset(0);
+		ary.unset(1);
 		fxt.Test__array(ary);
 
 		// add new and assert idx is 2
@@ -156,7 +156,7 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 }
 class XophpArray_fxt {
 	public void Test__Count(XophpArray ary, int expd) {
-		Gftest.Eq__int(expd, ary.Count());
+		Gftest.Eq__int(expd, ary.count());
 	}
 	public void Test__array(XophpArray ary, XophpArrayItm... expd) {
 		XophpArrayItm[] actl = ary.To_ary();
@@ -167,7 +167,7 @@ class XophpArray_fxt {
 		Gftest.Eq__ary(expd, actl);
 	}
 	public void Test__Pop(XophpArray ary, String expd) {
-		String actl = (String)ary.Pop();
+		String actl = (String)ary.pop();
 		Gftest.Eq__str(expd, actl);
 	}
 	public void Test__Itm_str_concat_end(XophpArray ary, String expd, int idx, String v) {

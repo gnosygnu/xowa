@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-public class XophpTypeUtl {
+public class XophpType_ {
 	public static int To_type_id(Object o) {
 		int type_id = Type_ids_.To_id_by_obj(o);
 		switch (type_id) {

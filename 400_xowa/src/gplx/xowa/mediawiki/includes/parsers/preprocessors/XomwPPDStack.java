@@ -43,7 +43,7 @@ public class XomwPPDStack {
 	* @return int
 	*/
 	public int count() {
-		return this.stack.Count();
+		return this.stack.count();
 	}
 
 	public Xomw_prepro_accum getAccum() {
@@ -65,17 +65,17 @@ public class XomwPPDStack {
 //				$class = this.elementClass;
 //				this.stack[] = new $class($data);
 //			}
-		this.top = (XomwPPDStackElement)this.stack.Get_at(this.stack.Count() - 1);
+		this.top = (XomwPPDStackElement)this.stack.Get_at(this.stack.count() - 1);
 		this.accum = this.top.getAccum();
 	}
 
 	public XomwPPDStackElement pop() {
-		if (this.stack.Count() == 0) {
+		if (this.stack.count() == 0) {
 			throw XomwMWException.New_by_method(XomwPPDStack.class, "pop", "no elements remaining");
 		}
-		XomwPPDStackElement temp = (XomwPPDStackElement)XophpArrayUtl.pop_obj(this.stack);
-		if (this.stack.Count()> 0) {
-			this.top = (XomwPPDStackElement)this.stack.Get_at(this.stack.Count() - 1);
+		XomwPPDStackElement temp = (XomwPPDStackElement)this.stack.pop();
+		if (this.stack.count()> 0) {
+			this.top = (XomwPPDStackElement)this.stack.Get_at(this.stack.count() - 1);
 			this.accum = this.top.getAccum();
 		} else {
 			this.top = null;
@@ -93,7 +93,7 @@ public class XomwPPDStack {
 	* @return array
 	*/
 	public XomwPPDStackElementFlags getFlags() {
-		if (this.stack.Count() == 0) {
+		if (this.stack.count() == 0) {
 			return XomwPPDStackElementFlags.Empty;
 		}
 		else {

@@ -22,7 +22,7 @@ public class Xomw_params_handler {
 	public int physicalHeight;
 	public Xomw_params_handler Clear() {
 		width = height = page
-		= physicalWidth = physicalHeight = XophpUtility.NULL_INT;
+		= physicalWidth = physicalHeight = XophpObject_.NULL_INT;
 		return this;
 	}
 	public void Copy_to(Xomw_params_handler src) {

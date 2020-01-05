@@ -19,7 +19,7 @@ public class XomwNamespacesByName {
 	public int Len() {return hash.Len();}
 	public int GetAsIdOrNullInt(byte[] name) {
 		XomwNamespaceItem item = (XomwNamespaceItem)hash.Get_by(name);
-		return item == null ? XophpUtility.NULL_INT : item.id;
+		return item == null ? XophpObject_.NULL_INT : item.id;
 	}
 	public XomwNamespaceItem GetAtOrNull(int idx) {
 		return (XomwNamespaceItem)hash.Get_at(idx);

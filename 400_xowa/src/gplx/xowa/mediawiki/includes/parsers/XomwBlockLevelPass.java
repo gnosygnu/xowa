@@ -369,8 +369,8 @@ public class XomwBlockLevelPass {
 				int tLen = t.length;
 
 				// XO.MW.PORTED.BGN:
-				boolean openMatch = XophpPreg.match(openMatchTrie, trv, t, 0, tLen) != null;
-				boolean closeMatch = XophpPreg.match(closeMatchTrie, trv, t, 0, tLen) != null;
+				boolean openMatch = XophpPreg_.match(openMatchTrie, trv, t, 0, tLen) != null;
+				boolean closeMatch = XophpPreg_.match(closeMatchTrie, trv, t, 0, tLen) != null;
 				// XO.MW.PORTED.END
 				if (openMatch || closeMatch) {
 					pendingPTag = PARA_STACK_NONE;
@@ -382,7 +382,7 @@ public class XomwBlockLevelPass {
 					int bqOffset = 0;
 					// PORTED:preg_match('/<(\\/?)blockquote[\s>]/i', t, $bqMatch, PREG_OFFSET_CAPTURE, $bqOffset)
 					while (true) {
-						Object o = XophpPreg.match(blockquoteTrie, trv, t, bqOffset, tLen);
+						Object o = XophpPreg_.match(blockquoteTrie, trv, t, bqOffset, tLen);
 						if (o == null) { // no more blockquotes found; exit
 							break;
 						}

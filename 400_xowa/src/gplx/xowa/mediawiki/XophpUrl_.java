@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import gplx.core.net.*;
-public class XophpUrl {
+public class XophpUrl_ {
 	public static final int 
 	  PHP_URL_SCHEME = 0
 	, PHP_URL_HOST = 3

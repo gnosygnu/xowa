@@ -166,9 +166,9 @@ public class XomwConverter {
 
 		// Make sure the result is sane. The first case is possible for an empty
 		// String input, the second should be unreachable.
-		if (!this.operands.Count_bool()) {
+		if (!this.operands.count_bool()) {
 			this.error("condition expected");
-		} else if (this.operands.Count() > 1) {
+		} else if (this.operands.count() > 1) {
 			this.error("missing operator or too many operands");
 		}
 
@@ -293,7 +293,7 @@ public class XomwConverter {
 	* @param Operator op
 	*/
 	protected void doOperation(XomwOperator op, Object ignore) { // NOTE: MW passes 2 args, but method only has 1
-		if (this.operands.Count() < 2) {
+		if (this.operands.count() < 2) {
 			op.error("missing operand");
 		}
 		XomwExpression right = (XomwExpression)this.operands.pop();

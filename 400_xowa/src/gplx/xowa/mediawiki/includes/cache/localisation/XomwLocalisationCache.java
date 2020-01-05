@@ -590,10 +590,10 @@ public class XomwLocalisationCache {
 	* @return array|null
 	*/
 	public XophpArray getPluralRules(String code) {
-		if (XophpObject.is_null(this.pluralRules)) {
+		if (XophpObject_.is_null(this.pluralRules)) {
 			this.loadPluralFiles();
 		}
-		return (XophpArray)XophpObject.coalesce(this.pluralRules.Get_by_ary(code), null);
+		return (XophpArray)XophpObject_.coalesce(this.pluralRules.Get_by_ary(code), null);
 	}
 //
 //		/**

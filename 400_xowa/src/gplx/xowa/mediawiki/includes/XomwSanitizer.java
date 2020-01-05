@@ -1233,7 +1233,7 @@ public class XomwSanitizer {
 		//		' ',
 		//		$text);
 		normalizeWhitespaceBry.Init(text, 0, text.length);
-		XophpPreg.replace(normalizeWhitespaceBry, tmp_bfr_2, normalizeWhitespaceTrie, trv, Byte_ascii.Space_bry);
+		XophpPreg_.replace(normalizeWhitespaceBry, tmp_bfr_2, normalizeWhitespaceTrie, trv, Byte_ascii.Space_bry);
 		return normalizeWhitespaceBry.src;
 	}
 
@@ -1722,7 +1722,7 @@ public class XomwSanitizer {
 			// https://tools.ietf.org/html/rfc3454#section-3.1
 			// Strip them before further processing so blacklists and such work.
 			// XO.MW.MOVED: see invalid_idn_trie
-			XophpPreg.replace(tmp_host.Init(url, regex_find_domain.host_bgn, regex_find_domain.host_end), tmp_bfr, invalid_idn_trie, trv, Bry_.Empty);
+			XophpPreg_.replace(tmp_host.Init(url, regex_find_domain.host_bgn, regex_find_domain.host_end), tmp_bfr, invalid_idn_trie, trv, Bry_.Empty);
 			
 			// IPv6 host names are bracketed with [].  Url-decode these.
 			// if (substr_compare("//%5B", $host, 0, 5) === 0 &&

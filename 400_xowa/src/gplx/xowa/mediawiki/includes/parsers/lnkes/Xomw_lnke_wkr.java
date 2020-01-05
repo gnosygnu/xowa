@@ -164,7 +164,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// The characters '<' and '>' (which were escaped by
 			// removeHTMLtags()) should not be included in
 			// URLs, per RFC 2396.
-			if (XophpPreg.match(angle_entities_trie, trv, src, url_bgn, url_end) != null) {
+			if (XophpPreg_.match(angle_entities_trie, trv, src, url_bgn, url_end) != null) {
 				int angle_bgn = trv.Match_bgn;
 				text_bgn = angle_bgn;
 				url_end = angle_bgn;

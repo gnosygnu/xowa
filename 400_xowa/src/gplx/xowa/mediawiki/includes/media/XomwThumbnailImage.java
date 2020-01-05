@@ -135,71 +135,71 @@ public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final
 		attribs.Add_many(Gfh_atr_.Bry__alt, alt);
 		attribs.Add_many(Gfh_atr_.Bry__src, url);
 		boolean link_attribs_is_null = false;
-		if (!XophpUtility.empty(options.custom_url_link)) {
+		if (!XophpObject_.empty(options.custom_url_link)) {
 			link_attribs.Clear();
 			link_attribs.Add_many(Gfh_atr_.Bry__href, options.custom_url_link);
-			if (!XophpUtility.empty(options.title)) {
+			if (!XophpObject_.empty(options.title)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__title, options.title);
 			}
-			if (XophpUtility.empty(options.custom_target_link)) {
+			if (XophpObject_.empty(options.custom_target_link)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__target, options.custom_target_link);
 			}
-			else if (XophpUtility.empty(options.parser_extlink_target)) {
+			else if (XophpObject_.empty(options.parser_extlink_target)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__target, options.parser_extlink_target);
 			}
-			if (XophpUtility.empty(options.parser_extlink_rel)) {
+			if (XophpObject_.empty(options.parser_extlink_rel)) {
 				link_attribs.Add_many(Gfh_atr_.Bry__rel, options.parser_extlink_rel);
 			}
 		}
-		else if (!XophpUtility.empty(options.custom_title_link)) {
+		else if (!XophpObject_.empty(options.custom_title_link)) {
 //				byte[] title = options.custom_title_link;
 //				link_attribs.Clear();
 //				link_attribs.Add_many(Gfh_atr_.Bry__href, title.Get_link_url());
 //				byte[] options_title = options.title;
-//				link_attribs.Add_many(Gfh_atr_.Bry__title, XophpUtility.empty(options_title) ? title.Get_full_text() : options_title);
+//				link_attribs.Add_many(Gfh_atr_.Bry__title, XophpObject_.empty(options_title) ? title.Get_full_text() : options_title);
 		}
-		else if (!XophpUtility.empty(options.desc_link)) {
+		else if (!XophpObject_.empty(options.desc_link)) {
 //				link_attribs = this.getDescLinkAttribs(
 //					empty(options['title']) ? null : options['title'],
 //					$query
 //				);
 			link_attribs.Clear();
 			this.getDescLinkAttribs(link_attribs, 
-				XophpUtility.empty(options.title) ? null : options.title,
+				XophpObject_.empty(options.title) ? null : options.title,
 				null);
 		}
-		else if (!XophpUtility.empty(options.file_link)) {
+		else if (!XophpObject_.empty(options.file_link)) {
 //				link_attribs.Clear();
 //				link_attribs.Add_many(Gfh_atr_.Bry__href, file.Get_url());
 		}
 		else {
 			link_attribs_is_null = true;
-			if (!XophpUtility.empty(options.title)) {
+			if (!XophpObject_.empty(options.title)) {
 				attribs.Add_many(Gfh_atr_.Bry__title, options.title);
 			}
 		}
 
-		if (XophpUtility.empty(options.no_dimensions)) {
+		if (XophpObject_.empty(options.no_dimensions)) {
 			attribs.Add_many(Gfh_atr_.Bry__width, Int_.To_bry(width));
 			attribs.Add_many(Gfh_atr_.Bry__height, Int_.To_bry(height));
 		}
-		if (!XophpUtility.empty(options.valign)) {
+		if (!XophpObject_.empty(options.valign)) {
 			attribs.Add_many(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
 		}
-		if (!XophpUtility.empty(options.img_cls)) {
+		if (!XophpObject_.empty(options.img_cls)) {
 			attribs.Add_many(Gfh_atr_.Bry__class, options.img_cls);
 		}
-		if (XophpUtility.isset(options.override_height)) {
+		if (XophpObject_.isset(options.override_height)) {
 			attribs.Add_many(Gfh_atr_.Bry__class, options.override_height);
 		}
-		if (XophpUtility.isset(options.override_width)) {
+		if (XophpObject_.isset(options.override_width)) {
 			attribs.Add_many(Gfh_atr_.Bry__width, options.override_height);
 		}
 
 		// Additional densities for responsive images, if specified.
 		// If any of these urls is the same as src url, it'll be excluded.
 //			$responsiveUrls = array_diff(this.responsiveUrls, [ this.url ]);
-//			if (!XophpUtility.empty($responsiveUrls)) {
+//			if (!XophpObject_.empty($responsiveUrls)) {
 //				$attribs['srcset'] = Html::srcSet($responsiveUrls);
 //			}
 

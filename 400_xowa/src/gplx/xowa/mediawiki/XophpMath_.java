@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-public class XophpMath {
+public class XophpMath_ {
 	public static double round(double v, int places) {
 		if (places < 0) {	// -1 means round to 10; -2 means round to 100; etc..
 			int factor = (int)Math_.Pow(10, places * -1);
@@ -48,14 +48,4 @@ public class XophpMath {
 	public static double fmod(double lhs, double rhs) {
 		return (double)lhs % (double)rhs;
 	}
-
-/*
-
-fmod
-
-$x = 5.7;
-$y = 1.3;
-$r = fmod($x, $y);
-// $r equals 0.5, because 4 * 1.3 + 0.5 = 5.7
-*/
 }

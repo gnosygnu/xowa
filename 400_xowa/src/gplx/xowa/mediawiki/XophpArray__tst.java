@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*;
-public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.array-merge.php
-	private final    XophpArrayUtl_fxt fxt = new XophpArrayUtl_fxt();
+public class XophpArray__tst { // REF:https://www.php.net/manual/en/function.array-merge.php
+	private final    XophpArray__fxt fxt = new XophpArray__fxt();
 	@Test  public void array_merge__basic() {
 		XophpArray ary1 = fxt.Make().Add("key1", "val1").Add("a");
 		XophpArray ary2 = fxt.Make().Add("key2", "val2").Add("b");
@@ -61,7 +61,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__bgn_is_positive() {
 		XophpArray src = fxt.Make().Add_many("a", "b", "c", "d");
-		XophpArray del = XophpArrayUtl.array_splice(src, 1);
+		XophpArray del = XophpArray_.array_splice(src, 1);
 		fxt.Test__eq
 		( fxt.Make().Add_many("a")
 		, src
@@ -73,7 +73,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__bgn_is_positive_large() {
 		XophpArray src = fxt.Make().Add_many("a", "b", "c", "d");
-		XophpArray del = XophpArrayUtl.array_splice(src, 99);
+		XophpArray del = XophpArray_.array_splice(src, 99);
 		fxt.Test__eq
 		( fxt.Make().Add_many("a", "b", "c", "d")
 		, src
@@ -85,7 +85,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__bgn_is_negative() {
 		XophpArray src = fxt.Make().Add_many("a", "b", "c", "d");
-		XophpArray del = XophpArrayUtl.array_splice(src, -3);
+		XophpArray del = XophpArray_.array_splice(src, -3);
 		fxt.Test__eq
 		( fxt.Make().Add_many("a")
 		, src
@@ -97,7 +97,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__bgn_is_negative_large() {
 		XophpArray src = fxt.Make().Add_many("a", "b", "c", "d");
-		XophpArray del = XophpArrayUtl.array_splice(src, -99);
+		XophpArray del = XophpArray_.array_splice(src, -99);
 		fxt.Test__eq
 		( fxt.Make()
 		, src
@@ -109,7 +109,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__len_is_positive() {
 		XophpArray src = fxt.Make().Add_many("a", "b", "c", "d");
-		XophpArray del = XophpArrayUtl.array_splice(src, 1, 2);
+		XophpArray del = XophpArray_.array_splice(src, 1, 2);
 		fxt.Test__eq
 		( fxt.Make().Add_many("a", "d")
 		, src
@@ -121,7 +121,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__len_is_positive_large() {
 		XophpArray src = fxt.Make().Add_many("a", "b", "c", "d");
-		XophpArray del = XophpArrayUtl.array_splice(src, 1, 99);
+		XophpArray del = XophpArray_.array_splice(src, 1, 99);
 		fxt.Test__eq
 		( fxt.Make().Add_many("a")
 		, src
@@ -133,7 +133,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__len_is_negative() {
 		XophpArray src = fxt.Make().Add_many("a", "b", "c", "d");
-		XophpArray del = XophpArrayUtl.array_splice(src, 1, -2);
+		XophpArray del = XophpArray_.array_splice(src, 1, -2);
 		fxt.Test__eq
 		( fxt.Make().Add_many("a", "c", "d")
 		, src
@@ -145,7 +145,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__len_is_negative_large() {
 		XophpArray src = fxt.Make().Add_many("a", "b", "c", "d");
-		XophpArray del = XophpArrayUtl.array_splice(src, 1, -99);
+		XophpArray del = XophpArray_.array_splice(src, 1, -99);
 		fxt.Test__eq
 		( fxt.Make().Add_many("a", "b", "c", "d")
 		, src
@@ -157,7 +157,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__repl() {
 		XophpArray src = fxt.Make().Add(0, "a").Add(1, "b").Add(2, "c").Add(3, "d");
-		XophpArray del = XophpArrayUtl.array_splice(src, 1, 2, fxt.Make().Add(0, "x"));
+		XophpArray del = XophpArray_.array_splice(src, 1, 2, fxt.Make().Add(0, "x"));
 		fxt.Test__eq
 		( fxt.Make().Add(0, "a").Add(1, "x").Add(2, "d")
 		, src
@@ -169,7 +169,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__example_1a() {
 		XophpArray src = fxt.Make().Add_many("red", "green", "blue", "yellow");
-		XophpArray del = XophpArrayUtl.array_splice(src, 2);
+		XophpArray del = XophpArray_.array_splice(src, 2);
 		fxt.Test__eq
 		( fxt.Make().Add_many("red", "green")
 		, src
@@ -181,7 +181,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__example_1b() {
 		XophpArray src = fxt.Make().Add_many("red", "green", "blue", "yellow");
-		XophpArray del = XophpArrayUtl.array_splice(src, 1, -1);
+		XophpArray del = XophpArray_.array_splice(src, 1, -1);
 		fxt.Test__eq
 		( fxt.Make().Add_many("red", "yellow")
 		, src
@@ -193,7 +193,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__example_1c() {
 		XophpArray src = fxt.Make().Add_many("red", "green", "blue", "yellow");
-		XophpArray del = XophpArrayUtl.array_splice(src, 1, 4, XophpArray.New("orange"));
+		XophpArray del = XophpArray_.array_splice(src, 1, 4, XophpArray.New("orange"));
 		fxt.Test__eq
 		( fxt.Make().Add_many("red", "orange")
 		, src
@@ -205,7 +205,7 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 	}
 	@Test  public void array_splice__example_1d() {
 		XophpArray src = fxt.Make().Add_many("red", "green", "blue", "yellow");
-		XophpArray del = XophpArrayUtl.array_splice(src, -1, 1, XophpArray.New("black", "maroon"));
+		XophpArray del = XophpArray_.array_splice(src, -1, 1, XophpArray.New("black", "maroon"));
 		fxt.Test__eq
 		( fxt.Make().Add_many("red", "green", "blue", "black", "maroon")
 		, src
@@ -215,18 +215,18 @@ public class XophpArrayUtl_tst { // REF:https://www.php.net/manual/en/function.a
 		, del
 		);
 	}
-	@Test  public void array_values() {
+	@Test  public void values() {
 		XophpArray orig = fxt.Make().Add("size", "XL").Add("color", "gold");
 		fxt.Test__eq
 			( fxt.Make().Add(0, "XL").Add(1, "gold")
-			, XophpArrayUtl.array_values(orig)
+			, orig.values()
 			);
 	}
 }
-class XophpArrayUtl_fxt {
+class XophpArray__fxt {
 	public XophpArray Make() {return new XophpArray();}
 	public void Test__array_merge(XophpArray expd, XophpArray... vals) {
-		XophpArray actl = XophpArrayUtl.array_merge(vals);
+		XophpArray actl = XophpArray_.array_merge(vals);
 		Gftest.Eq__str(expd.To_str(), actl.To_str());
 	}
 	public void Test__eq(XophpArray expd, XophpArray actl) {

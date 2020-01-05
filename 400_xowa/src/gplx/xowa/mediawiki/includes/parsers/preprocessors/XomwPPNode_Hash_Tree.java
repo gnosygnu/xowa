@@ -63,7 +63,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 		XophpArray list = this.store.Get_at_ary(index);
 		this.name = list.Get_at_str(0);
 		Object rawChildrenObj = list.Get_at(1);
-		if (XophpTypeUtl.To_type_id(rawChildrenObj) == Type_ids_.Id__array) {
+		if (XophpType_.To_type_id(rawChildrenObj) == Type_ids_.Id__array) {
 			this.rawChildren = (XophpArray)rawChildrenObj;
 		}
 		else {
@@ -81,7 +81,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	*/
 	public static XomwPPNode factory(XophpArray store, int index) {
 		Object descriptor = store.Get_at(index);
-		if (!XophpUtility.isset_obj(descriptor)) {
+		if (!XophpObject_.isset_obj(descriptor)) {
 			return null;
 		}
 
@@ -150,7 +150,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	* @return PPNode_Hash_Tree|PPNode_Hash_Attr|PPNode_Hash_Text|boolean
 	*/
 	@Override public XomwPPNode getFirstChild() {
-		if (XophpArrayUtl.isset(this.rawChildren, 0)) {
+		if (this.rawChildren.isset(0)) {
 			return null;
 		}
 		else {
@@ -275,7 +275,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	*/
 	public static XophpArray splitRawExt(XophpArray children) {
 		XophpArray bits = XophpArray.New();
-		int len = children.Count();
+		int len = children.count();
 		for (int i = 0; i < len; i++) {
 			Object childObj = children.Get_at(i);
 			if (!XophpArray.is_array(childObj)) {
@@ -320,7 +320,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	*/
 	public static XophpArray splitRawHeading(XophpArray children) {
 		XophpArray bits = XophpArray.New();
-		int len = children.Count();
+		int len = children.count();
 		for (int i = 0; i < len; i++) {
 			Object childObj = children.Get_at(i);
 			if (!XophpArray.is_array(childObj)) {
@@ -357,7 +357,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	public static XophpArray splitRawTemplate(XophpArray children) {
 		XophpArray parts = XophpArray.New();
 		XophpArray bits = XophpArray.New().Add("lineStart" , "");
-		int len = children.Count();
+		int len = children.count();
 		for (int i = 0; i < len; i++) {
 			Object childObj = children.Get_at(i);
 			if (!XophpArray.is_array(childObj)) {

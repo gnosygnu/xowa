@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*;
-public class XophpUtility_tst {
-	private final    XophpUtility_fxt fxt = new XophpUtility_fxt();
+public class XophpObject__tst {
+	private final    XophpObject__fxt fxt = new XophpObject__fxt();
 	@Test  public void Empty_obj() {
 		fxt.Test_empty_obj_y("");            // "" (an empty String)
 		fxt.Test_empty_obj_y(0);             // 0 (0 as an integer)
@@ -35,10 +35,10 @@ public class XophpUtility_tst {
 		fxt.Test_empty_obj_n(new int[1]);
 	}
 }
-class XophpUtility_fxt {
+class XophpObject__fxt {
 	public void Test_empty_obj_n(Object o) {Test_empty_obj(Bool_.N, o);}
 	public void Test_empty_obj_y(Object o) {Test_empty_obj(Bool_.Y, o);}
 	public void Test_empty_obj(boolean expd, Object o) {
-		Gftest.Eq__bool(expd, XophpUtility.empty_obj(o), Object_.Xto_str_strict_or_empty(o));
+		Gftest.Eq__bool(expd, XophpObject_.empty_obj(o), Object_.Xto_str_strict_or_empty(o));
 	}
 }

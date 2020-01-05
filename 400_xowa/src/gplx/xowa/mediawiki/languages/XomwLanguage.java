@@ -392,7 +392,7 @@ public class XomwLanguage {
 	public static boolean isValidBuiltInCode(String code) {
 
 		if (!XophpString_.is_string(code)) {
-//				if (XophpObject.is_object(code)) {
+//				if (XophpObject_.is_object(code)) {
 //					addmsg = " of class " . get_class(code);
 //				} else {
 //					addmsg = "";
@@ -4038,12 +4038,12 @@ public class XomwLanguage {
 			return (String)formsObject;
 		}
 		forms = (XophpArray)formsObject;
-		if (!forms.Count_bool()) {
+		if (!forms.count_bool()) {
 			return "";
 		}
 
 		int pluralForm = this.getPluralRuleIndexNumber(count);
-		pluralForm = XophpMath.min(pluralForm, forms.Count() - 1);
+		pluralForm = XophpMath_.min(pluralForm, forms.count() - 1);
 		return forms.Get_at_str(pluralForm);
 	}
 
@@ -4064,7 +4064,7 @@ public class XomwLanguage {
 	*/
 	public Object handleExplicitPluralForms(String count, XophpArray forms) {
 		XophpArray mutable = forms.Clone();
-		int len = forms.Len();
+		int len = forms.count();
 		for (int i = 0; i < len; i++) {
 			XophpArrayItm formItem = forms.Get_at_itm(i);
 			String index = formItem.Key();
@@ -4074,11 +4074,11 @@ public class XomwLanguage {
 				if (String_.Eq(XophpString_.substr(form, 0, pos), count)) {
 					return XophpString_.substr(form, pos + 1);
 				}
-				mutable.Unset(index);
+				mutable.unset(index);
 			}
 		}
 
-		return XophpArrayUtl.array_values(mutable);
+		return mutable.values();
 	}
 	private static final    Regx_adp handleExplicitPluralForms_digits = Regx_adp_.new_("\\d+=");
 
@@ -4562,7 +4562,7 @@ public class XomwLanguage {
 	*/
 	public static String getFallbackFor(String code) {
 		XophpArray fallbacks = XomwLanguage.getFallbacksFor(code);
-		if (XophpObject.is_true(fallbacks)) {
+		if (XophpObject_.is_true(fallbacks)) {
 			return fallbacks.Get_at_str(0);
 		}
 		return null;
@@ -4986,12 +4986,12 @@ public class XomwLanguage {
 		XophpArray pluralRules = (XophpArray)XomwLanguage.dataCacheXowa.getItem_ary(XophpString_.strtolower(this.mCode), "compiledPluralRules");
 		if (pluralRules == null) return getCompiledPluralRulesEmpty;
 		XophpArray fallbacks = XomwLanguage.getFallbacksFor(this.mCode);
-		if (!XophpObject.is_true(pluralRules)) {
-			int fallbacks_len = fallbacks.Len();
+		if (!XophpObject_.is_true(pluralRules)) {
+			int fallbacks_len = fallbacks.count();
 			for (int i = 0; i < fallbacks_len; i++) {
 				String fallbackCode = fallbacks.Get_at_str(i);
 				pluralRules = XomwLanguage.dataCacheXowa.getItem_ary(XophpString_.strtolower(fallbackCode), "compiledPluralRules");
-				if (XophpObject.is_true(pluralRules)) {
+				if (XophpObject_.is_true(pluralRules)) {
 					break;
 				}
 			}

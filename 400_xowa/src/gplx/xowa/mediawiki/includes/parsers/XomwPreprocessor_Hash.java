@@ -55,11 +55,11 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		accum.Add(XophpArray.New("comment", XophpArray.New(XophpString_.substr(src, bgn, end - bgn))));
 	}
 	@Override protected void preprocessToObj_removeLeadingWhitespaceFromEnd(int ws_len) {
-		int endIndex = accum.Len() - 1;
+		int endIndex = accum.count() - 1;
 		if (	ws_len > 0
 			&&	endIndex >= 0) {
 			Object itm_obj = accum.Get_at(endIndex);
-			if (XophpTypeUtl.is_string(itm_obj)) {
+			if (XophpType_.is_string(itm_obj)) {
 				byte[] itm = Bry_.new_u8((String)itm_obj);
 				if (XophpString_.strspn_fwd__space_or_tab(itm, itm.length - ws_len, -1, itm.length) == ws_len) {
 					accum.Set(endIndex, XophpString_.substr(itm, 0, -ws_len));
@@ -86,7 +86,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		rv.Ary().Add
 		(   XophpArray.New
 			(   "h",
-				XophpArrayUtl.array_merge
+				XophpArray_.array_merge
 				(	XophpArray.New
 					( XophpArray.New("@level", XophpArray.New(count))
 					, XophpArray.New("@i"    , XophpArray.New(heading_index))
@@ -98,7 +98,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		return rv;
 	}
 	@Override protected void preprocessToObj_heading_end(Xomw_prepro_accum element) {
-		XophpArrayUtl.array_splice(accum, accum.Len(), 0, ((Xomw_prepro_accum__hash)element).Ary());
+		XophpArray_.array_splice(accum, accum.count(), 0, ((Xomw_prepro_accum__hash)element).Ary());
 	}
 
 	@Override protected Xomw_prepro_accum preprocessToObj_text(XomwPPDStackElement piece, byte[] rule_end, int matching_count) {
@@ -122,14 +122,14 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		children.Add(titleNode);
 
 		int argIndex = 1;
-		int parts_len = parts.Len();
+		int parts_len = parts.count();
 		for (int j = 0; j < parts_len; j++) {
 			XomwPPDPart_Hash part = (XomwPPDPart_Hash)parts.Get_at(j);
 			XophpArray part_out = (XophpArray)part.Accum_hash().Ary();
 			if (part.eqpos != -1) {
 				Object equalsNode = part_out.Get_at(part.eqpos);
-				XophpArray nameNode  = XophpArray.New("name" , XophpArrayUtl.array_slice(part_out, 0, part.eqpos));
-				XophpArray valueNode = XophpArray.New("value", XophpArrayUtl.array_slice(part_out, part.eqpos + 1));
+				XophpArray nameNode  = XophpArray.New("name" , XophpArray_.array_slice(part_out, 0, part.eqpos));
+				XophpArray valueNode = XophpArray.New("value", XophpArray_.array_slice(part_out, part.eqpos + 1));
 				XophpArray partNode  = XophpArray.New("part" , XophpArray.New(nameNode, equalsNode, valueNode));
 				children.Add(partNode);
 			}
@@ -144,19 +144,19 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		return new Xomw_prepro_accum__hash(element);
 	}
 	@Override protected void preprocessToObj_add_element(Xomw_prepro_accum element) {
-		XophpArrayUtl.array_splice(accum, accum.Len(), 0, ((Xomw_prepro_accum__hash)element).Ary());
+		XophpArray_.array_splice(accum, accum.count(), 0, ((Xomw_prepro_accum__hash)element).Ary());
 	}
 	@Override protected void preprocessToObj_equals(XomwPPDStack stack) {
 		accum.Add(XophpArray.New("equals", XophpArray.New("=")));
-		stack.getCurrentPart().eqpos = accum.Len() - 1;
+		stack.getCurrentPart().eqpos = accum.count() - 1;
 	}
 	@Override protected Object preprocessToObj_term(XomwPPDStack stack) {
 		Xomw_prepro_accum__hash stack_accum = (Xomw_prepro_accum__hash)stack.getAccum();
 		XophpArray stack_ary = stack_accum.Ary();
-		int len = stack_ary.Len();
+		int len = stack_ary.count();
 		for (int i = 0; i < len; i++) {
 //				XomwPPDPart_Hash piece = (XomwPPDPart_Hash)(stack_ary.Get_at(i).Val());
-//				XophpArrayUtl.array_splice(stack_ary, stack_ary.Len(), 0, piece.breakSyntax());
+//				XophpArray_.array_splice(stack_ary, stack_ary.Len(), 0, piece.breakSyntax());
 		}
 		//	for ( $stack->stack as $piece ) {
 		//		array_splice( $stack->rootAccum, count( $stack->rootAccum ), 0, $piece->breakSyntax() );
@@ -184,9 +184,9 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 
 	private static void addLiteral(XophpArray accum, byte[] text) {addLiteral(accum, String_.new_u8(text));}
 	private static void addLiteral(XophpArray accum, String text) {
-		int n = accum.Len();
+		int n = accum.count();
 		Object itm = accum.Get_at(n - 1);
-		if (n > 0 && XophpTypeUtl.is_string(itm)) {
+		if (n > 0 && XophpType_.is_string(itm)) {
 			accum.Set(n - 1, ((String)itm) + text);
 		}
 		else {

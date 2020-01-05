@@ -124,7 +124,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		else {
 			header = Toc_bry;
 		}
-		if (header != null && XophpBool.is_true(header)) {// check if header is true; ignore values like header=0; ISSUE#:622; DATE:2019-11-28
+		if (header != null && XophpBool_.is_true(header)) {// check if header is true; ignore values like header=0; ISSUE#:622; DATE:2019-11-28
 			rv = Bld_wikitext_for_header(full_bfr, index_page, rv);
 		}
 		return rv;

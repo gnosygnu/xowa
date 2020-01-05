@@ -15,13 +15,44 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.*;
+// NOTE: Object-representation of PHP Array; REF.PHP: https://www.php.net/manual/en/language.types.array.php
+// Will also will have static functions but "array_" will be stripped; REF.PHP: https://www.php.net/manual/en/ref.array.php
 public class XophpArray implements Bry_bfr_able {
 	private final    Ordered_hash hash = Ordered_hash_.New();
 	private int nxt_idx;
-	public int Len() {return hash.Len();}
-	// TODO: lowercase count
-	public int Count() {return hash.Len();}
-	public boolean Count_bool() {return hash.Len() > 0;}
+	public int count() {return hash.Len();}
+	public boolean count_bool() {return hash.Len() > 0;}
+	public boolean isset(String key) {return hash.Has(key);}
+	public boolean isset(int idx)    {return idx >= 0 && idx < hash.Count();}
+	public boolean in_array(String v) {return Has(v);}
+	public static boolean is_array(Object val) {
+		return Type_.Eq_by_obj(val, XophpArray.class);
+	}
+	public Object end() {
+		int len = hash.Len();
+		return len == 0 ? null : ((XophpArrayItm)hash.Get_at(len - 1)).Val();
+	}
+	public void unset(int key) {unset(Int_.To_str(key));}
+	public void unset(String key) {
+		hash.Del(key);
+	}
+	public Object pop() {// "array_pop"
+		int pos = this.count() - 1;
+		if (pos < 0) return null;
+		XophpArrayItm itm = (XophpArrayItm)hash.Get_at(pos);
+		this.Del_at(pos);
+		return itm.Val();
+	}
+	// REF.PHP: https://www.php.net/manual/en/function.array-values.php
+	public XophpArray values() {
+		XophpArray rv = new XophpArray();
+		int len = this.count();
+		for (int i = 0; i < len; i++) {
+			rv.Add(i, this.Get_at(i));
+		}
+		return rv;
+	}
+
 	public void Clear() {
 		hash.Clear();
 		nxt_idx = 0;
@@ -106,18 +137,10 @@ public class XophpArray implements Bry_bfr_able {
 	public void Set(String key, Object val) {
 		this.Set(XophpArrayItm.New_str(key, val));
 	}
-	// TODO: lowercase unset
-	public void Unset(int key) {Unset(Int_.To_str(key));}
-	public void Unset(String key) {
-		hash.Del(key);
-	}
-	public boolean in_array(String v) {return Has(v);}
 	public boolean Has_obj(Object key) {return Has(Object_.Xto_str_strict_or_null(key));}
 	public boolean Has(String key) {
 		return hash.Has(key);
 	}
-	public boolean isset(String key) {return hash.Has(key);}
-	public boolean isset(int idx)    {return idx >= 0 && idx < hash.Count();}
 	public XophpArrayItm[] To_ary() {
 		return (XophpArrayItm[])hash.To_ary(XophpArrayItm.class);
 	}
@@ -142,15 +165,6 @@ public class XophpArray implements Bry_bfr_able {
 			cur.Val_(itm.Val());
 		}
 	}
-	public Object pop() {return Pop();}
-	// TODO: remove uppercase Pop
-	public Object Pop() {
-		int pos = this.Count() - 1;
-		if (pos < 0) return null;
-		XophpArrayItm itm = (XophpArrayItm)hash.Get_at(pos);
-		this.Del_at(pos);
-		return itm.Val();
-	}
 	public void Itm_str_concat_end(int idx, String v) {
 		String itm = (String)this.Get_at(idx);
 		itm += v;
@@ -170,13 +184,6 @@ public class XophpArray implements Bry_bfr_able {
 		for (Object val : vals)
 			rv.Add(val);
 		return rv;
-	}
-	public static boolean is_array(Object val) {
-		return Type_.Eq_by_obj(val, XophpArray.class);
-	}
-	public Object end() {
-		int len = hash.Len();
-		return len == 0 ? null : ((XophpArrayItm)hash.Get_at(len - 1)).Val();
 	}
 	public static final    XophpArray False = null; // handles code like "if ($var === false)" where var is an Object;
 }

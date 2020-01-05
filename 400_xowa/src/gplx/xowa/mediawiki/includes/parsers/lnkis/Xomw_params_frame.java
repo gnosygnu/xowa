@@ -44,12 +44,12 @@ public class Xomw_params_frame {
 	}
 	public Xomw_params_frame Clear() {
 		desc_link = false;
-		upright = XophpUtility.NULL_DOUBLE;
+		upright = XophpObject_.NULL_DOUBLE;
 		align = valign = caption = frame = framed = frameless
 		= thumbnail = manualthumb = alt = title = cls = img_cls
 		= link_title = link_url = link_target = no_link 
 		= custom_url_link = custom_target_link = desc_query
-		= XophpUtility.NULL_BRY;
+		= XophpObject_.NULL_BRY;
 		return this;
 	}
 	public void Copy_to(Xomw_params_frame src) {
