@@ -45,8 +45,8 @@ public class Gallery_mgr_packed_base extends Gallery_mgr_base {
 		Get_thumb_size_static(lnki, ext, itm_default_w, itm_default_h);
 	}
 	@Override public void Adjust_image_parameters(Xof_file_itm xfer_itm) {
-		int w = (int)(xfer_itm.Html_w() / Scale_factor);
-		int h = (int)(xfer_itm.Html_h() / Scale_factor);
+		int w = (int)Math_.Ceil(xfer_itm.Html_w() / Scale_factor);
+		int h = (int)Math_.Ceil(xfer_itm.Html_h() / Scale_factor);
 		xfer_itm.Html_size_(w, h);
 	}
 	public static final double Scale_factor = 1.5d;	// We artificially have 1.5 the resolution neccessary so that we can scale it up by that much on the client side, without worrying about requesting a new image.
