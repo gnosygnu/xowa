@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*; import gplx.xowa.files.downloads.*;
+import org.junit.*; import gplx.core.tests.*; import gplx.xowa.files.downloads.*;
 public class Xoa_css_img_downloader_tst {		
 	@Before public void init() {fxt.Clear();} private Xoa_css_img_downloader_fxt fxt = new Xoa_css_img_downloader_fxt();
 	@Test  public void Basic() {
@@ -163,6 +163,31 @@ public class Xoa_css_img_downloader_tst {
 		)
 		);
 	}
+	@Test  public void Comment() {	// PURPOSE: comments should be ignored ISSUE#:652; DATE:2014-09-06
+		fxt.Downloader().Stylesheet_prefix_(Bry_.new_a7("mem"));	// stylesheet prefix prefix defaults to ""; set to "mem", else test will try to retrieve "//url" which will fail
+		Io_mgr.Instance.SaveFilStr("mem/www/b_c.css", "imported_css");
+
+		// basic
+		fxt.Test__Convert_to_local_urls
+		( "x /* @import url(\"mem/www/b c.css\") screen; */ z"
+		, "x /* @import url(\"mem/www/b c.css\") screen; */ z"
+		, String_.Ary_empty
+		);
+
+		// dangling
+		fxt.Test__Convert_to_local_urls
+		( "x /* @import url(\"mem/www/b c.css\") screen; z"
+		, "x /* @import url(\"mem/www/b c.css\") screen; z"
+		, String_.Ary_empty
+		);
+
+		// skip comments
+		fxt.Test__Convert_to_local_urls
+		( "x /* skip */ /* @import url(\"mem/www/b c.css\") screen; */ z"
+		, "x /* skip */ /* @import url(\"mem/www/b c.css\") screen; */ z"
+		, String_.Ary_empty
+		);
+	}
 }
 class Xoa_css_img_downloader_fxt {
 	public Xoa_css_img_downloader Downloader() {return downloader;} private Xoa_css_img_downloader downloader;
@@ -184,5 +209,12 @@ class Xoa_css_img_downloader_fxt {
 	public void Test_import_url(String raw, String expd) {
 		byte[] actl = Xoa_css_img_downloader.Import_url_build(Bry_.new_a7("http:"), Bry_.new_a7("//en.wikipedia.org"), Bry_.new_u8(raw));
 		Tfds.Eq(expd, String_.new_u8(actl));
+	}
+	public void Test__Convert_to_local_urls(String raw, String expd, String[] expd_imgs) {
+		List_adp actl_imgs = List_adp_.New();
+		byte[] actl = downloader.Convert_to_local_urls(Bry_.new_a7("mem/en.wikipedia.org"), Bry_.new_u8(raw), actl_imgs);
+		Gftest.Eq__str(expd, actl);
+
+		Gftest.Eq__ary(expd_imgs, actl_imgs.To_str_ary());
 	}
 }

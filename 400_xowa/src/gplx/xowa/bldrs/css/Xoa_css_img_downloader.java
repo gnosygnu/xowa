@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.files.downloads.*; import gplx.core.envs.*;
+import gplx.core.envs.*; import gplx.core.btries.*; import gplx.core.primitives.*;
+import gplx.xowa.files.downloads.*;
 public class Xoa_css_img_downloader {
 	private byte[] wiki_domain;
 	public Xoa_css_img_downloader Ctor(Gfo_usr_dlg usr_dlg, Xof_download_wkr download_wkr, byte[] stylesheet_prefix) {
@@ -34,14 +35,67 @@ public class Xoa_css_img_downloader {
 	}
 	public byte[] Convert_to_local_urls(byte[] rel_url_prefix, byte[] src, List_adp list) {
 		try {
+			// init vars
 			int src_len = src.length;
-			int prv_pos = 0;
 			Bry_bfr bfr = Bry_bfr_.New_w_size(src_len);
 			Hash_adp img_hash = Hash_adp_bry.cs();
-			while (true) {
-				int url_pos = Bry_find_.Find_fwd(src, Bry_url, prv_pos);
-				if (url_pos == Bry_find_.Not_found) {bfr.Add_mid(src, prv_pos, src_len); break;}	// no more "url("; exit;
-				int bgn_pos = url_pos + Bry_url_len;	// set bgn_pos after "url("
+			Btrie_rv trv = new Btrie_rv();
+
+			int prv_pos = 0;
+
+			// loop over src and convert each "url(...)"
+			boolean loop = true;
+			while (loop) {
+				int url_pos = -1;
+
+				// search forward for "url(" while skipping comments
+				int cur_pos = prv_pos;
+				while (loop && url_pos == -1) { // NOTE: that loop = false when EOS
+					// EOS; exit
+					if (cur_pos == src_len) {
+						loop = false;
+						break;
+					}
+
+					// match against trie
+					Object match_obj = convert_trie.Match_at_w_b0(trv, src[cur_pos], src, cur_pos, src_len);
+					if (match_obj == null) { // no match; increment by one and continue
+						cur_pos++;
+						continue;
+					}
+
+					// match found
+					Byte_obj_val match = (Byte_obj_val)match_obj;
+					switch (match.Val()) {
+						case CONVERT_TID__COMMENT: // handle comment
+							// search for "*/"
+							int comment_end = Bry_find_.Find_fwd(src, Bry_comment_end, cur_pos);
+
+							// "*/" not found; exit;
+							if (comment_end == Bry_find_.Not_found) {
+								loop = false;
+								break;
+							}
+
+							// otherwise, set cur_pos after comment_end and keep searching
+							cur_pos = comment_end + Bry_comment_end.length;
+							break;
+						case CONVERT_TID__URL:
+							// set url_pos which will break loop
+							url_pos = cur_pos;
+							break;
+					}
+				}
+
+				// EOS reached; stop
+				if (!loop) {
+					bfr.Add_mid(src, prv_pos, src_len);
+					break;
+				}
+
+				// "url(" found
+				// identify end byte: ' " )
+				int bgn_pos = url_pos + Bry_url_len; // set bgn_pos after "url("
 				byte bgn_byte = src[bgn_pos];
 				byte end_byte = Byte_ascii.Null;
 				boolean quoted = true;
@@ -55,6 +109,8 @@ public class Xoa_css_img_downloader {
 						quoted = false;
 						break;
 				}
+
+				// find end_pos
 				int end_pos = Bry_find_.Find_fwd(src, end_byte, bgn_pos, src_len);
 				if (end_pos == Bry_find_.Not_found) {	// unclosed "url("; exit since nothing else will be found
 					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.end_missing", "could not find end_sequence for 'url(': bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8__by_len(src, prv_pos, prv_pos + 25));
@@ -66,12 +122,15 @@ public class Xoa_css_img_downloader {
 				bgn_pos = Bry_find_.Find_fwd_while_space_or_tab(src, bgn_pos, end_pos);
 				end_pos = Bry_find_.Find_bwd__skip_ws(src, end_pos, bgn_pos);
 
-				if (end_pos - bgn_pos == 0) {		// empty; "url()"; ignore
+				// empty; "url()"; ignore
+				if (end_pos - bgn_pos == 0) {
 					usr_dlg.Warn_many(GRP_KEY, "parse.invalid_url.empty", "'url(' is empty: bgn='~{0}' end='~{1}'", prv_pos, String_.new_u8__by_len(src, prv_pos, prv_pos + 25));
 					bfr.Add_mid(src, prv_pos, bgn_pos);
 					prv_pos = bgn_pos;
 					continue;
 				}
+
+				// parse img
 				byte[] img_raw = Bry_.Mid(src, bgn_pos, end_pos); int img_raw_len = img_raw.length;
 				if (Bry_.Has_at_bgn(img_raw, Bry_data_image, 0, img_raw_len)) {	// base64
 					bfr.Add_mid(src, prv_pos, end_pos);							// nothing to download; just add entire String
@@ -93,6 +152,8 @@ public class Xoa_css_img_downloader {
 					list.Add(String_.new_u8(img_cleaned));
 				}
 				img_cleaned = Replace_invalid_chars(Bry_.Copy(img_cleaned));	// NOTE: must call ByteAry.Copy else img_cleaned will change *inside* hash
+
+				// add to bfr
 				bfr.Add_mid(src, prv_pos, bgn_pos);
 				if (!quoted) bfr.Add_byte(Byte_ascii.Quote);
 				bfr.Add(img_cleaned);
@@ -187,8 +248,9 @@ public class Xoa_css_img_downloader {
 	, Bry_http = Bry_.new_a7("http://"), Bry_fwd_slashes = Bry_.new_a7("//"), Bry_import = Bry_.new_a7("@import ")
 	, Bry_http_protocol = Bry_.new_a7("http")
 	;
-	public static final    byte[] 
-		  Bry_comment_bgn = Bry_.new_a7("/*XOWA:"), Bry_comment_end = Bry_.new_a7("*/");
+	public static final    byte[] Bry_comment_bgn = Bry_.new_a7("/*XOWA:"), Bry_comment_end = Bry_.new_a7("*/");
 	private static final    int Bry_url_len = Bry_url.length, Bry_import_len = Bry_import.length;
-	static final String GRP_KEY = "xowa.wikis.init.css";
+	private static final byte CONVERT_TID__URL = 1, CONVERT_TID__COMMENT = 2;
+	private static final    Btrie_slim_mgr convert_trie = Btrie_slim_mgr.cs().Add_str_byte("url(", CONVERT_TID__URL).Add_str_byte("/*", CONVERT_TID__COMMENT);
+	private static final String GRP_KEY = "xowa.wikis.init.css";
 }
