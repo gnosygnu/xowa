@@ -19,6 +19,7 @@ public class Pxd_date_bldr {
 	public Pxd_date_bldr(int year, int month, int day, int hour, int minute, int second, int frac) {
 		this.seg_ary = new int[] {year, month, day, hour, minute, second, frac};
 	}
+	public int Seg_get(int idx) {return seg_ary[idx];}
 
 	// most workers will just set individual segments
 	public void Seg_set(int idx, int val) {

@@ -66,11 +66,13 @@ public class DateAdp_ implements Gfo_invk {
 	public static DateAdp dateTime_obj_(Object v) {return new DateAdp((GregorianCalendar)v);}
 	public static final    DateAdp_ Gfs = new DateAdp_();
 
-	public static int DaysInMonth(DateAdp date) {			
-		int rv = DaysInMonth_ary[date.Month() - Int_.Base1];
-		if (rv == 28 && IsLeapYear(date.Year())) rv = 29;
+	public static int DaysInMonth(DateAdp date) {return DaysInMonth(date.Month(), date.Year());}
+	public static int DaysInMonth(int month, int year) {
+		int rv = DaysInMonth_ary[month - Int_.Base1];
+		if (rv == 28 && IsLeapYear(year)) rv = 29;
 		return rv;
-	}	static int [] DaysInMonth_ary = {31,28,31,30,31,30,31,31,30,31,30,31};
+	}
+	private static int [] DaysInMonth_ary = {31,28,31,30,31,30,31,31,30,31,30,31};
 	public static boolean IsLeapYear(int year) {
 		if		(year % 4   != 0)	return false;
 		else if (year % 400 == 0)	return true;

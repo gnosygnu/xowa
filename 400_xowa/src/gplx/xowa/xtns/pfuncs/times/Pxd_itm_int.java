@@ -66,6 +66,13 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 			}
 			else {
 				if (seg_idx == -1) return false; // PAGE:New_York_City EX: March 14, 2,013; DATE:2016-07-06
+				if (seg_idx == DateAdp_.SegIdx_month) {
+					// NOTE: if day > month, set it to month's max; ISSUE#:644; DATE:2020-01-12
+					int day = bldr.Seg_get(DateAdp_.SegIdx_day);
+					int daysinmonth = DateAdp_.DaysInMonth(val, bldr.Seg_get(DateAdp_.SegIdx_year));
+					if (day > daysinmonth)
+						bldr.Seg_set(DateAdp_.SegIdx_day, daysinmonth);
+				}
 				bldr.Seg_set(seg_idx, val);
 			}
 		}
