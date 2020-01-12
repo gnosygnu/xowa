@@ -25,7 +25,11 @@ public class Xopg_lnki_list {
 	public boolean			Disabled() {return disabled;} private boolean disabled; public Xopg_lnki_list Disabled_(boolean v) {this.disabled = v; return this;} 
 	public int				Len() {return list.Len();}
 	public Xopg_lnki_itm	Get_at(int i) {return (Xopg_lnki_itm)list.Get_at(i);}
-	public void Add_direct(Xopg_lnki_itm lnki) {list.Add(lnki);}	// add lnki directly to list without changing html_uid; needed for hdumps which call "Fill_page" to transfer from Xoh_page to Xoae_page
+
+	public void Add_direct(Xopg_lnki_itm lnki) {
+		list.Add(lnki); // add lnki directly to list without changing html_uid; needed for hdumps which call "Fill_page" to transfer from Xoh_page to Xoae_page
+		lnki_idx = lnki.Html_uid(); // handle dupe html_uid by resetting lnki_idx counter; ISSUE#:643; DATE:2020-01-12
+	}
 	public void	Add(Xopg_lnki_itm lnki) {
 		if (disabled) return;
 		Xoa_ttl ttl = lnki.Ttl(); if (ttl == null) return;		// ttl is null for invalid links
