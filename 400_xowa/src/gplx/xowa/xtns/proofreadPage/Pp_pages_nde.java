@@ -36,23 +36,25 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private Xoae_app app; private Xowe_wiki wiki; private Xop_ctx ctx; private Gfo_usr_dlg usr_dlg;
 	private byte[] src; private Xop_xnde_tkn xnde_tkn;
 	private Xoa_ttl cur_page_ttl;
+
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
 		if (xatr_id_obj == null) return;
 		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
+		byte[] val_bry = xatr.Val_as_bry();
 		switch (xatr_id.Val()) {
-			case Xatr_index_ttl:	index_ttl_bry	= xatr.Val_as_bry(); break;
-			case Xatr_bgn_page:		bgn_page_bry	= xatr.Val_as_bry(); break;
-			case Xatr_end_page:		end_page_bry	= xatr.Val_as_bry(); break;
-			case Xatr_bgn_sect:		bgn_sect_bry	= xatr.Val_as_bry(); break;
-			case Xatr_end_sect:		end_sect_bry	= xatr.Val_as_bry(); break;
-			case Xatr_include:		include			= xatr.Val_as_bry(); break;
-			case Xatr_exclude:		exclude			= xatr.Val_as_bry(); break;
-			case Xatr_step:			step_bry		= xatr.Val_as_bry(); break;
-			case Xatr_onlysection:	onlysection		= xatr.Val_as_bry(); break;
-			case Xatr_header:		header			= xatr.Val_as_bry(); break;
-			case Xatr_toc_cur:		toc_cur			= xatr.Val_as_bry(); break;
-			case Xatr_toc_prv:		toc_prv			= xatr.Val_as_bry(); break;
-			case Xatr_toc_nxt:		toc_nxt			= xatr.Val_as_bry(); break;
+			case Xatr_index_ttl:	index_ttl_bry	= val_bry; break;
+			case Xatr_bgn_page:		bgn_page_bry	= val_bry; break;
+			case Xatr_end_page:		end_page_bry	= val_bry; break;
+			case Xatr_bgn_sect:		if (Bry_.Len_gt_0(val_bry)) bgn_sect_bry = val_bry; break; // ignore empty-String; EX:fromsection=""; ISSUE#:650 DATE:2020-01-11
+			case Xatr_end_sect:		if (Bry_.Len_gt_0(val_bry)) end_sect_bry = val_bry; break; // ignore empty-String; EX:tosection=""; ISSUE#:650 DATE:2020-01-11
+			case Xatr_include:		include			= val_bry; break;
+			case Xatr_exclude:		exclude			= val_bry; break;
+			case Xatr_step:			step_bry		= val_bry; break;
+			case Xatr_onlysection:	onlysection		= val_bry; break;
+			case Xatr_header:		header			= val_bry; break;
+			case Xatr_toc_cur:		toc_cur			= val_bry; break;
+			case Xatr_toc_prv:		toc_prv			= val_bry; break;
+			case Xatr_toc_nxt:		toc_nxt			= val_bry; break;
 		}			
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {

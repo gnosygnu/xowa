@@ -67,6 +67,20 @@ public class Pp_pages_nde_basic_tst {
 		,	"</p>"
 		));
 	}
+	@Test  public void Section__null() {// PURPOSE:if fromsection / tosection is null, assume all; ISSUE#:650 DATE:2020-01-11
+		fxt.Init_page_create("Page:A/1", "a<section begin='sect_0'/>b<section end='sect_0'/>c");
+		fxt.Test_parse_page_wiki_str("<pages index='A' from=1 to=1 />", String_.Concat_lines_nl
+		(	"<p>abc&#32;"
+		,	"</p>"
+		));
+	}
+	@Test  public void Section__empty() {// PURPOSE:if fromsection / tosection is empty, assume all; ISSUE#:650 DATE:2020-01-11
+		fxt.Init_page_create("Page:A/1", "a<section begin='sect_0'/>b<section end='sect_0'/>c");
+		fxt.Test_parse_page_wiki_str("<pages index='A' from=1 to=1 fromsection='' tosection=''/>", String_.Concat_lines_nl
+		(	"<p>abc&#32;"
+		,	"</p>"
+		));
+	}
 	@Test  public void Noinclude() {
 		fxt.Init_page_create("Page:A/1", "<noinclude>a</noinclude>{|\n|b\n|}");
 		fxt.Init_page_create("Page:A/2", "<noinclude>c</noinclude>''d''");
