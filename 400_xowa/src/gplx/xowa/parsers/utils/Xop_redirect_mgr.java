@@ -78,25 +78,38 @@ public class Xop_redirect_mgr {
 			if (!redirect_itm.By_wikitext()) continue;	// ignore Special:Redirects else Special:Random will always show "redirected from"; DATE:2016-07-05
 			dirty = true;
 			if (i != 0) redirect_bfr.Add(Bry_redirect_dlm);
-			byte[] ttl_unders = redirect_itm.Ttl().Full_db();
-			byte[] ttl_spaces = Xoa_ttl.Replace_unders(ttl_unders);
+			byte[] display_ttl = Xoa_ttl.Replace_unders(redirect_itm.Ttl().Full_db());
 			redirect_bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href)	// '<a href="'
 				.Add(Xoh_href_.Bry__wiki)					// '/wiki/'
-				.Add(ttl_unders)							// 'PageA'
+				.Add(redirect_itm.Ttl().Full_db_href())     // 'PageA'
 				.Add(Bry_redirect_arg)						// ?redirect=no
+				.Add(Gfh_bldr_.Bry__cls__nth)               // '" class="'
+				.Add_str_a7("mw-redirect")                  // mw-redirect // NOTE:MW does this differently, but for now, manually add; REF.MW:https://github.com/wikimedia/mediawiki/blob/82311f8c2c79bc469cae14e17546fd79d3541b76/includes/linker/LinkRenderer.php#L479
 				.Add(Gfh_bldr_.Bry__title__nth)				// '" title="'
-				.Add(ttl_spaces)							// 'PageA'
+				.Add(display_ttl)							// 'PageA'
 				.Add(Gfh_bldr_.Bry__lhs_end_head_w_quote)	// '">'
-				.Add(ttl_spaces)							// 'PageA'
+				.Add(display_ttl)							// 'PageA'
 				.Add(Gfh_bldr_.Bry__a_rhs);					// </a>
 		}
 		if (!dirty) return Bry_.Empty; // ignore Special:Redirects else Special:Random will always show "redirected from"; DATE:2016-07-05
-		Xol_msg_itm msg_itm = wiki.Lang().Msg_mgr().Itm_by_id_or_null(Xol_msg_itm_.Id_redirectedfrom);
+
+		// build redirectedfrom span; NOTE: same implementation as MW; ISSUE#:642; DATE:2020-01-14; REF.MW:https://github.com/wikimedia/mediawiki/blob/master/includes/page/Article.php#L1115-L1117
 		Bry_bfr fmt_bfr = wiki.Utl__bfr_mkr().Get_b512();
-		app.Tmp_fmtr().Fmt_(msg_itm.Val()).Bld_bfr_one(fmt_bfr, redirect_bfr);
-		redirect_bfr.Clear().Mkr_rls(); fmt_bfr.Mkr_rls();
+		fmt_bfr.Add_str_a7("<span class=\"mw-redirectedfrom\">");
+		byte[] redirectedfrom_val = wiki.Msg_mgr().Val_by_key_args(Key_redirectedfrom, redirect_bfr.To_bry());
+		fmt_bfr.Add(redirectedfrom_val);
+		fmt_bfr.Add_str_a7("</span>");
+
+		// release bfrs
+		redirect_bfr.Clear().Mkr_rls();
+		fmt_bfr.Mkr_rls();
 		return fmt_bfr.To_bry_and_clear();
-	}	private static byte[] Bry_redirect_dlm = Bry_.new_a7(" <--- "), Bry_redirect_arg = Bry_.new_a7("?redirect=no");		
+	}
+	private static byte[]
+	  Bry_redirect_dlm = Bry_.new_a7(" <--- ")
+	, Bry_redirect_arg = Bry_.new_a7("?redirect=no")
+	, Key_redirectedfrom = Bry_.new_a7("redirectedfrom")
+	;
 }
 class Xop_redirect_mgr_ {
 	public static int Get_kwd_end_or_end(byte[] src, int bgn, int end) {	// get end of kwd

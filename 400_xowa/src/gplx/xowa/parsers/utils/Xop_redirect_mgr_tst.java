@@ -44,8 +44,12 @@ public class Xop_redirect_mgr_tst {
 	@Test  public void Parse_1st_link_only() {	// PURPOSE: do not take pipe from 2nd lnki; PAGE:en.w:Template:pp-semi; DATE:2015-11-14
 		fxt.Test_redirect("#REDIRECT [[Template:A]][[Category:B|b]]", "Template:A");
 	}
-	@Test  public void Redirected_html() {	// PURPOSE: "Redirected from" message was using "_" instead of " "; PAGE:en.w:Summer_Solstice; DATE:2015-12-29
-		fxt.Test__redirected_html("A_B", "(Redirected from <a href=\"/wiki/A_B?redirect=no\" title=\"A B\">A B</a>)");
+	@Test  public void Redirected_html() {
+		// PURPOSE: "Redirected from" message was using "_" instead of " "; PAGE:en.w:Summer_Solstice; DATE:2015-12-29
+		fxt.Test__redirected_html("A_B", "<span class=\"mw-redirectedfrom\">(Redirected from <a href=\"/wiki/A_B?redirect=no\" class=\"mw-redirect\" title=\"A B\">A B</a>)</span>");
+
+		// PURPOSE: Title should be href_encoding; %5E instead of ^
+		fxt.Test__redirected_html("^", "<span class=\"mw-redirectedfrom\">(Redirected from <a href=\"/wiki/%5E?redirect=no\" class=\"mw-redirect\" title=\"^\">^</a>)</span>");
 	}
 }
 class Xop_redirect_mgr_fxt {

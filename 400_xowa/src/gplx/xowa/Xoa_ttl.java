@@ -99,6 +99,11 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 			return url_encoder.Encode(this.Talk_txt());
 		}
 	}
+	public byte[] Full_db_href() { // NOTE: returns Full_db but encodes for href; EX:Help:A_^ -> Help:A_%5E
+		synchronized (href_encoder) { // LOCK:static-obj
+			return href_encoder.Encode(this.Full_db());
+		}
+	}
 	public byte[] Subj_url() {
 		synchronized (url_encoder) {	// LOCK:static-obj
 			return url_encoder.Encode(this.Subj_txt());
