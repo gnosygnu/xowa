@@ -73,7 +73,7 @@ class Pxd_itm_meridian extends Pxd_itm_base implements Pxd_itm_prototype {
 					}
 				}
 
-				// hour found
+				// get hour
 				Pxd_itm_int hour_itm = (Pxd_itm_int)itm;
 				int hour = hour_itm.Val();
 
@@ -93,7 +93,7 @@ class Pxd_itm_meridian extends Pxd_itm_base implements Pxd_itm_prototype {
 						}
 					}
 
-					// if no colon, eval int now else int will get eval'd as year; EX: "12 AM"
+					// if no colon, eval int now else int will get eval'd as year; EX: "12 AM" will be interpreted as "12" year
 					if (!colon_found)
 						return Pxd_eval_seg.Eval_as_h(state, hour_itm);
 					else {

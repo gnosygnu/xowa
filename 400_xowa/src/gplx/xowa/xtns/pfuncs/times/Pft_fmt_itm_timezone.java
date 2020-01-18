@@ -32,7 +32,7 @@ class Pft_fmt_itm_timezone_offset_4 implements Pft_fmt_itm {
 			bfr.Add_byte(Byte_ascii.Plus);
 		}
 
-		// calc mins / hours
+		// calc total mins
 		int tz_mins = tz_secs / 60;
 
 		// add bfr
