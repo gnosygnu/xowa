@@ -81,12 +81,14 @@ class Pft_fmt_itm_dayOfYear implements Pft_fmt_itm {
 class Pft_fmt_itm_am_pm implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_AmPm;}
 	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
-		boolean am = date.Hour() < 13;
+		boolean am = date.Hour() < 12;
 		byte[] val = null;
-		if		( am &&  lower) val = Ary_am_lower;
-		else if ( am && !lower) val = Ary_am_upper;
-		else if (!am &&  lower) val = Ary_pm_lower;
-		else if (!am && !lower) val = Ary_pm_upper;
+		if (am) {
+			val = lower ? Ary_am_lower : Ary_am_upper;
+		}
+		else {
+			val = lower ? Ary_pm_lower : Ary_pm_upper;
+		}
 		bfr.Add(val);
 	}	private static final    byte[] Ary_am_upper = Bry_.new_a7("AM"), Ary_pm_upper = Bry_.new_a7("PM"), Ary_am_lower = Bry_.new_a7("am"), Ary_pm_lower = Bry_.new_a7("pm");
 	public Pft_fmt_itm_am_pm(boolean lower) {this.lower = lower;} private boolean lower;

@@ -222,6 +222,8 @@ class Pxd_parser_ {
 		Init_relative();
 		trie.Add_obj(Pxd_itm_unixtime.Name_const, new Pxd_itm_unixtime(-1, -1));
 		trie.Add_obj(Pxd_itm_iso8601_t.Name_const, new Pxd_itm_iso8601_t(-1, -1));
+		Init_meridian(Bool_.N, "am", "a.m", "am.", "a.m.");
+		Init_meridian(Bool_.Y, "pm", "p.m", "pm.", "p.m.");
 	}
 	private static void Init_reg_months(String[] names) {
 		for (int i = 0; i < names.length; i++)
@@ -254,6 +256,11 @@ class Pxd_parser_ {
 		trie.Add_obj("last", Pxd_itm_unit_relative.Prev);
 		trie.Add_obj("previous", Pxd_itm_unit_relative.Prev);
 		trie.Add_obj("this", Pxd_itm_unit_relative.This);
+	}
+	private static void Init_meridian(boolean is_pm, String... ary) {
+		Pxd_itm_meridian meridian = new Pxd_itm_meridian(-1, is_pm);
+		for (String itm : ary)
+			trie.Add_obj(itm, meridian);
 	}
 }
 /*

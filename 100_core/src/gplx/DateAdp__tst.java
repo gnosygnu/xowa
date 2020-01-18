@@ -60,6 +60,9 @@ public class DateAdp__tst {
 	@Test  public void XtoUtc() {
 		fxt.Test__to_utc("2012-01-01 00:00", "2012-01-01 05:00");	//4=Wed
 	}
+	@Test  public void Timezone_id() {
+		fxt.Test__timezone_id("2015-12-26T10:03:53Z", "UTC");
+	}
 }
 class DateAdp__fxt {
 	public void Test__parse_gplx(String raw, String expd) {
@@ -82,5 +85,8 @@ class DateAdp__fxt {
 	}
 	public void Test__to_utc(String raw, String expd) {
 		Tfds.Eq(expd, DateAdp_.parse_gplx(raw).XtoUtc().XtoStr_fmt_yyyy_MM_dd_HH_mm());
+	}
+	public void Test__timezone_id(String raw, String expd) {
+		Gftest.Eq__str(expd, DateAdp_.parse_gplx(raw).XtoUtc().Timezone_id());
 	}
 }

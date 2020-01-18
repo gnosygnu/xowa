@@ -107,4 +107,65 @@ public class Pft_func_time__basic__tst {
 	@Test   public void Iso8601_T()				{fxt.Test_parse_tmpl_str("{{#time:Y-m-d h:i:s A|T1:23}}"					, "2012-01-02 01:23:00 AM");}	// handle "T" flag; PAGE:pl.w:StarCraft_II:_Wings_of_Liberty
 	@Test   public void Iso8601_T_ws()			{fxt.Test_parse_tmpl_str("{{#time:Y-m-d h:i:s A|T 1:23}}"					, "2012-01-02 01:23:00 AM");}	// handle "T" flag and ws
 	@Test   public void Iso8601_T_fail()		{fxt.Test_parse_tmpl_str("{{#time:Y-m-d h:i:s A|T2012-01-02}}"				, "<strong class=\"error\">Invalid hour: T</strong>");}	// handle "T" flag and ws
+
+	@Test   public void Timezone_id() {// hard-coded to return "UTC"; DATE:2020-01-18
+		fxt.Test_parse_tmpl_str("{{#time:e|2012-01-02 03:04:05}}", "UTC");
+	}
+	@Test   public void Timezone_abrv() { // hard-coded to return "UTC"; DATE:2020-01-18
+		fxt.Test_parse_tmpl_str("{{#time:T|2012-01-02 03:04:05}}", "UTC");
+	}
+	@Test   public void Timezone_offset_4() { // hard-coded to return "+0000"; DATE:2020-01-18
+		fxt.Test_parse_tmpl_str("{{#time:O|2012-01-02 03:04:05}}", "+0000");
+	}
+	@Test   public void Timezone_offset_4_colon() { // hard-coded to return "+00:00"; DATE:2020-01-18
+		fxt.Test_parse_tmpl_str("{{#time:O|2012-01-02 03:04:05}}", "+0000");
+	}
+	@Test   public void Timezone_offset_4__vals() {
+		Pft_func_time__fxt func_fxt = new Pft_func_time__fxt(fxt);
+		func_fxt.Test__parse_w_offset_mins(  60, "{{#time:O|2012-01-02 03:04:05}}", "+0100");
+		func_fxt.Test__parse_w_offset_mins(-300, "{{#time:O|2012-01-02 03:04:05}}", "-0500");
+		func_fxt.Test__parse_w_offset_mins( 330, "{{#time:O|2012-01-02 03:04:05}}", "+0530");
+	}
+	@Test   public void Meridian__AM__bugfix() {
+		fxt.Test_parse_tmpl_str("{{#time:A|2012-01-02 12:00:00}}", "PM");
+	}
+	@Test   public void Meridian__AM() {
+		fxt.Test_parse_tmpl_str("{{#time:A|12:00 AM}}", "AM");
+		fxt.Test_parse_tmpl_str("{{#time:A|12:00 a.m}}", "AM");
+		fxt.Test_parse_tmpl_str("{{#time:A|12:00 am.}}", "AM");
+		fxt.Test_parse_tmpl_str("{{#time:A|12:00 a.m.}}", "AM");
+	}
+	@Test   public void Meridian__PM() {
+		fxt.Test_parse_tmpl_str("{{#time:A|2:00 PM}}", "PM");
+		fxt.Test_parse_tmpl_str("{{#time:A|2:00 p.m}}", "PM");
+		fxt.Test_parse_tmpl_str("{{#time:A|2:00 pm.}}", "PM");
+		fxt.Test_parse_tmpl_str("{{#time:A|2:00 p.m.}}", "PM");
+	}
+	@Test   public void Meridian__basic() {
+		fxt.Test_parse_tmpl_str("{{#time:h:i:s A|1PM}}"            , "01:00:00 PM");
+		fxt.Test_parse_tmpl_str("{{#time:h:i:s A|1  PM}}"          , "01:00:00 PM");
+		fxt.Test_parse_tmpl_str("{{#time:h:i:s A|1:02 PM}}"        , "01:02:00 PM");
+		fxt.Test_parse_tmpl_str("{{#time:h:i:s A|1:02:03 PM}}"     , "01:02:03 PM");
+	}
+	@Test   public void Meridian__errors() {
+		fxt.Test_parse_tmpl_str("{{#time:h|PM}}"            , "<strong class=\"error\">Invalid time. Nothing found before meridian</strong>");
+		fxt.Test_parse_tmpl_str("{{#time:h|monday PM}}"     , "<strong class=\"error\">Invalid time. Text found before meridian</strong>");
+		fxt.Test_parse_tmpl_str("{{#time:h|0 AM}}"          , "<strong class=\"error\">Invalid time. Invalid digit for meridian: 0</strong>");
+		fxt.Test_parse_tmpl_str("{{#time:h|13 AM}}"         , "<strong class=\"error\">Invalid time. Invalid digit for meridian: 13</strong>");
+		fxt.Test_parse_tmpl_str("{{#time:h|1 :00 AM}}"      , "<strong class=\"error\">Invalid time. Text found before 1st colon</strong>");
+		fxt.Test_parse_tmpl_str("{{#time:h|1 :00:00 AM}}"   , "<strong class=\"error\">Invalid time. Text found before 2nd colon</strong>");
+	}
+}
+class Pft_func_time__fxt {
+	private final    Xop_fxt fxt;
+	public Pft_func_time__fxt(Xop_fxt fxt) {this.fxt = fxt;}
+	public void Test__parse_w_offset_mins(int offset, String raw, String expd) {
+		try {
+			DateAdp.Timezone_offset_test = offset * 60;
+			fxt.Test_parse_tmpl_str(raw, expd);
+		}
+		finally {
+			DateAdp.Timezone_offset_test = Int_.Min_value;
+		}
+	}
 }

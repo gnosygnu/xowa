@@ -85,6 +85,9 @@ public class DateAdp implements CompareAble, Gfo_invk {
 				: Timezone_offset_test
 				;
 	}
+	public String Timezone_id() {
+		return "UTC"; // under.getTimeZone().getID(); // NOTE: timezone is always UTC, unless over-ridden by tests
+	}
 	public DateAdp XtoUtc() {
 		java.util.Date date = under.getTime();
 		java.util.TimeZone tz = under.getTimeZone();
@@ -109,6 +112,7 @@ public class DateAdp implements CompareAble, Gfo_invk {
 		long dst_adj = dst ? 3600000 : 0;
 		return (under.getTimeInMillis() + offsetFromUTC + dst_adj) / 1000;
 	}
+
 	public int WeekOfYear() {return under.get(Calendar.WEEK_OF_YEAR);}
 	public int Frac() {return under.get(Calendar.MILLISECOND);}
 	public DateAdp Add_frac(int val) {return CloneAndAdd(Calendar.MILLISECOND, val);}

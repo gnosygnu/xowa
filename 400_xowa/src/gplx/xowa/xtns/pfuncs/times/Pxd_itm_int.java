@@ -40,7 +40,7 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 	public int Val() {return val;} public Pxd_itm_int Val_(int v) {val = v; return this;} private int val;
 	public boolean Val_is_adj() {return val_is_adj;} public void Val_is_adj_(boolean v) {val_is_adj = v;} private boolean val_is_adj;
 	public int Xto_int_or(int or) {return val;}
-	public int Digits() {return digits;} private int digits;
+	public int Digits() {return digits;} private int digits; // NOTE: digits exists primarily for year evaluation; EX: 11 vs 2011
 	@Override public boolean Time_ini(Pxd_date_bldr bldr) {
 		int seg_idx = this.Seg_idx();
 		if (seg_idx == Pxd_itm_base.Seg_idx_skip) return true;
