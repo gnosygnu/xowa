@@ -137,4 +137,32 @@ public class Pp_pages_nde_basic_tst {
 		Tfds.Eq(1, fxt.Page().Html_data().Indicators().Count());		// only 1 indicator, not 2
 		Tfds.Eq(true, fxt.Page().Html_data().Indicators().Has("a"));	// indicator should be from wikitext, not <page>
 	}
+	// FUTURE: handle null from / to; will probably require emulating MW; REF.MW: https://github.com/wikimedia/mediawiki-extensions-ProofreadPage/blob/master/includes/Parser/PagequalityTagParser.php
+	//@Test  public void Fromto__null() {// PURPOSE:if from / to is null, assume all; ISSUE#:657 DATE:2020-01-19
+	//	fxt.Init_page_create("Page:A/1", "A");
+	//	fxt.Init_page_create("Page:A/2", "B");
+	//	fxt.Init_page_create("Page:A/3", "C");
+	//	fxt.Test_parse_page_wiki_str("<pages index='A'/>", String_.Concat_lines_nl
+	//	(	"<p>&#32;A&#32;B&#32;C&#32;"
+	//	,	"</p>"
+	//	));
+	//}
+	@Test  public void Fromto__empty() {// PURPOSE:if from / to is null, assume all; ISSUE#:657 DATE:2020-01-19
+		fxt.Init_page_create("Page:A/1", "A");
+		fxt.Init_page_create("Page:A/2", "B");
+		fxt.Init_page_create("Page:A/3", "C");
+		fxt.Test_parse_page_wiki_str("<pages index='A' from='' to='' />", String_.Concat_lines_nl
+		(	"<p>&#32;A&#32;B&#32;C&#32;"
+		,	"</p>"
+		));
+	}
+	@Test  public void Fromto__empty__include() {// PURPOSE:if from / to is null, assume all; ISSUE#:657 DATE:2020-01-19
+		fxt.Init_page_create("Page:A/1", "A");
+		fxt.Init_page_create("Page:A/2", "B");
+		fxt.Init_page_create("Page:A/3", "C");
+		fxt.Test_parse_page_wiki_str("<pages index='A' from='' to='' include=2/>", String_.Concat_lines_nl
+		(	"<p>B&#32;"
+		,	"</p>"
+		));
+	}
 }

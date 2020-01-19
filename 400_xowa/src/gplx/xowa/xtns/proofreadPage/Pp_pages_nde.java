@@ -43,8 +43,8 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		byte[] val_bry = xatr.Val_as_bry();
 		switch (xatr_id.Val()) {
 			case Xatr_index_ttl:	index_ttl_bry	= val_bry; break;
-			case Xatr_bgn_page:		bgn_page_bry	= val_bry; break;
-			case Xatr_end_page:		end_page_bry	= val_bry; break;
+			case Xatr_bgn_page:		bgn_page_bry = val_bry; break;
+			case Xatr_end_page:		end_page_bry = val_bry; break;
 			case Xatr_bgn_sect:		if (Bry_.Len_gt_0(val_bry)) bgn_sect_bry = val_bry; break; // ignore empty-String; EX:fromsection=""; ISSUE#:650 DATE:2020-01-11
 			case Xatr_end_sect:		if (Bry_.Len_gt_0(val_bry)) end_sect_bry = val_bry; break; // ignore empty-String; EX:tosection=""; ISSUE#:650 DATE:2020-01-11
 			case Xatr_include:		include			= val_bry; break;
@@ -58,13 +58,15 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		}			
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
-//			if (!wiki.Xtn_mgr().Xtn_proofread().Enabled()) return;
+		// TOMBSTONE: do not disable Enabled check; needs smarter way of checking for xtn enable / disable
+		// if (!wiki.Xtn_mgr().Xtn_proofread().Enabled()) return;
 		if (!Init_vars(wiki, ctx, src, xnde)) return;
+
+		if (wiki.Parser_mgr().Lst__recursing()) return;	// moved from Pp_index_parser; DATE:2014-05-21s
 
 		// set recursing flag
 		Xoae_page page = ctx.Page();
 		Bry_bfr full_bfr = wiki.Utl__bfr_mkr().Get_m001();
-		if (wiki.Parser_mgr().Lst__recursing()) return;	// moved from Pp_index_parser; DATE:2014-05-21s
 		try {
 			wiki.Parser_mgr().Lst__recursing_(true);
 			Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
@@ -229,7 +231,13 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		return list;
 	}
 	private List_adp Get_ttls_from_xnde_args__rng(Gfo_number_parser num_parser, List_adp list) {
-		if (Bry_.Len_eq_0(bgn_page_bry) && Bry_.Len_eq_0(end_page_bry)) return list;	// from and to are blank; exit early
+		// exit if "from" and "to" are blank but include is specified; ISSUE#:657 DATE:2020-01-19
+		if (   Bry_.Len_eq_0(bgn_page_bry)
+			&& Bry_.Len_eq_0(end_page_bry)
+			&& Bry_.Len_gt_0(include)
+			)
+			return list;
+
 		bgn_page_int = 0;	// NOTE: default to 0 (1st page)
 		if (Bry_.Len_gt_0(bgn_page_bry)) {
 			num_parser.Parse(bgn_page_bry);
