@@ -36,9 +36,14 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private Xoae_app app; private Xowe_wiki wiki; private Xop_ctx ctx; private Gfo_usr_dlg usr_dlg;
 	private byte[] src; private Xop_xnde_tkn xnde_tkn;
 	private Xoa_ttl cur_page_ttl;
+	private List_adp unknown_xatrs = List_adp_.New();
 
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
-		if (xatr_id_obj == null) return;
+		// cache unknown xatrs for header usage; ISSUE#:635; DATE:2020-01-19
+		if (xatr_id_obj == null) {
+			unknown_xatrs.Add(new Pp_index_arg(xatr.Key_bry(), xatr.Val_as_bry()));
+			return;
+		}
 		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
 		byte[] val_bry = xatr.Val_as_bry();
 		switch (xatr_id.Val()) {
@@ -196,7 +201,13 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			full_bfr.Add(Bry_page_bgn).Add_int_variable(bgn_page_int);	// |from=1"
 		if (end_page_int != -1)
 			full_bfr.Add(Bry_page_end).Add_int_variable(end_page_int);	// |to=3"
-		List_adp invk_args  = index_page.Invk_args();
+		Add_args(full_bfr, index_page.Invk_args());
+		Add_args(full_bfr, unknown_xatrs);
+		full_bfr.Add(gplx.xowa.parsers.tmpls.Xop_curly_end_lxr.Hook);
+		full_bfr.Add(rv);
+		return full_bfr.To_bry_and_clear();
+	}
+	private void Add_args(Bry_bfr full_bfr, List_adp invk_args) {
 		int invk_args_len = invk_args.Count();
 		for (int i = 0; i < invk_args_len; i++) {
 			Pp_index_arg arg = (Pp_index_arg)invk_args.Get_at(i);
@@ -207,9 +218,6 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				.Add(arg.Val())
 				;
 		}
-		full_bfr.Add(gplx.xowa.parsers.tmpls.Xop_curly_end_lxr.Hook);
-		full_bfr.Add(rv);
-		return full_bfr.To_bry_and_clear();
 	}
 	private Xoa_ttl[] Get_ttls_from_xnde_args(Gfo_number_parser num_parser) {
 		if (!Chk_step()) return Ttls_null;

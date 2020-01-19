@@ -159,4 +159,26 @@ public class Pp_pages_nde_hdr_tst {
 		,	"</p>"
 		));
 	}
+	@Test  public void Unknown_args() { // PURPOSE:unknown args should be captured; ISSUE#:635; DATE:2020-01-19
+		Io_mgr.Instance.InitEngine_mem(); // NOTE: Init_page_update doesn't actually update, so for now, just reset file_system
+		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", String_.Concat
+		( "{{#if:{{{value|}}}|value={{{value}}};|value=nil;}}"
+		, "{{#if:{{{current|}}}|current={{{current}}};|}}"
+		, "{{#if:{{{prev|}}}|prev={{{prev}}};|}}"
+		, "{{#if:{{{next|}}}|next={{{next}}};|}}"
+		, "{{#if:{{{from|}}}|from={{{from}}};|}}"
+		, "{{#if:{{{to|}}}|to={{{to}}};|}}"
+		, "{{#if:{{{custom|}}}|custom={{{custom}}};|}}"
+		, "{{Template1|arg1={{{arg1|missing1}}}}}"
+		, "\n\n"
+		));
+		fxt.Init_page_create("Template:Template1", "{{{arg1|missing}}}-xyz");
+		fxt.Test__parse__tmpl_to_html("<pages index=\"A\" from=1 to=1 header=1 arg1=abc/>", String_.Concat_lines_nl
+		(	"<p>value=1;from=1;to=1;abc-xyz" // fails if "abc-xyz" is missing
+		,	"</p>"
+		,	""
+		,	"<p>&#32;"
+		,	"</p>"
+		));
+	}
 }
