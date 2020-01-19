@@ -165,4 +165,14 @@ public class Pp_pages_nde_basic_tst {
 		,	"</p>"
 		));
 	}
+	@Test  public void Ignore_invalid_to() { // ISSUE#:656 DATE:2020-01-19
+		fxt.Init_page_create("Page:A/1", "A");
+		fxt.Init_page_create("Page:A/2", "B");
+		fxt.Init_page_create("Page:A/3", "C");
+		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to 3 />", String_.Concat_lines_nl
+		(	"<p>A&#32;B&#32;C&#32;" // fails if &lt;pages index=&quot;A&quot; from=1 to 3 /&gt;
+		,	"</p>"
+		,	""
+		));
+	}
 }

@@ -44,6 +44,11 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			unknown_xatrs.Add(new Pp_index_arg(xatr.Key_bry(), xatr.Val_as_bry()));
 			return;
 		}
+
+		// skip valid xatrs with invalid values; EX: <pages index=\"A\" from=1 to 2 />; ISSUE#:656 DATE:2020-01-19
+		if (xatr.Val_bgn() == -1)
+			return;
+
 		Byte_obj_val xatr_id = (Byte_obj_val)xatr_id_obj;
 		byte[] val_bry = xatr.Val_as_bry();
 		switch (xatr_id.Val()) {
