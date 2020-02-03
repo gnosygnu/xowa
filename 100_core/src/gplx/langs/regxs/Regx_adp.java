@@ -17,7 +17,10 @@ package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class Regx_adp {
-	@gplx.Internal protected Regx_adp(String regx) {Pattern_(regx);}
+	public Regx_adp(String regx, int flags) {
+		this.flags = flags;
+		Pattern_(regx);
+	}
 	public String Pattern() {return pattern;} public Regx_adp Pattern_(String val) {pattern = val; Under_sync(); return this;} private String pattern;
 	public boolean Pattern_is_invalid() {return pattern_is_invalid;} private boolean pattern_is_invalid = false;
 	public Exception Pattern_is_invalid_exception() {return pattern_is_invalid_exception;} private Exception pattern_is_invalid_exception = null;
@@ -38,14 +41,15 @@ public class Regx_adp {
 		}
 		return (Regx_match[])rv.To_ary(Regx_match.class);
 	}
-		private Pattern under;
+		private int flags = FLAG__DOTALL | FLAG__UNICODE_CHARACTER_CLASS;// JRE.7:UNICODE_CHARACTER_CLASS; added during %w fix for en.w:A#; DATE:2015-06-10
+	private Pattern under;
 	public Pattern Under() {return under;}
 	private void Under_sync() {
-		try {under = Pattern.compile(pattern, Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);}	// JRE.7:UNICODE_CHARACTER_CLASS; added during %w fix for en.w:A#; DATE:2015-06-10 
+		try {under = Pattern.compile(pattern, flags);}
 		catch (Exception e) {	// NOTE: if invalid, then default to empty pattern (which should return nothing); EX:d:〆る generates [^]; DATE:2013-10-20
 			pattern_is_invalid = true;
 			pattern_is_invalid_exception = e;
-			under = Pattern.compile("", Pattern.DOTALL | Pattern.UNICODE_CHARACTER_CLASS);
+			under = Pattern.compile("", flags);
 		}
 	}
 	public Regx_match Match(String input, int bgn) {
@@ -67,4 +71,18 @@ public class Regx_adp {
 		return new Regx_match(success, match_bgn, match_end, ary);
 	}
 	public String ReplaceAll(String input, String replace) {return under.matcher(input).replaceAll(replace);}
+	// https://docs.oracle.com/javase/7/docs/api/java/util/regex/Pattern.html
+	public static final int
+	  FLAG__NONE                    = 0
+	, FLAG__UNIX_LINES              = Pattern.UNIX_LINES
+	, FLAG__CASE_INSENSITIVE        = Pattern.CASE_INSENSITIVE
+	, FLAG__COMMENTS                = Pattern.COMMENTS
+	, FLAG__MULTILINE               = Pattern.MULTILINE
+	, FLAG__LITERAL                 = Pattern.LITERAL
+	, FLAG__DOTALL                  = Pattern.DOTALL
+	, FLAG__UNICODE_CASE            = Pattern.UNICODE_CASE
+	, FLAG__CANON_EQ                = Pattern.CANON_EQ
+	, FLAG__UNICODE_CHARACTER_CLASS = Pattern.UNICODE_CHARACTER_CLASS
+	;
+	public static final    int FLAG__DEFAULT = FLAG__DOTALL | FLAG__UNICODE_CHARACTER_CLASS;// JRE.7:UNICODE_CHARACTER_CLASS; added during %w fix for en.w:A#; DATE:2015-06-10
 	}

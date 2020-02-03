@@ -142,4 +142,26 @@ public class XophpArray_ {
 				return true;
 		return false;
 	}
+
+	// REF.PHP:https://www.php.net/manual/en/function.array-map.php
+	public static XophpArray array_map(XophpCallbackOwner callback_owner, String method, XophpArray array) {
+		XophpArray rv = XophpArray.New();
+		int len = array.count();
+		for (int i = 0; i < len; i++) {
+			String itm = array.Get_at_str(i);
+			rv.Add((String)callback_owner.Callback(method, itm));
+		}
+		return rv;
+	}
+
+	// REF.PHP:https://www.php.net/manual/en/function.array-flip.php
+	public static XophpArray array_flip(XophpArray array) {
+		XophpArray rv = XophpArray.New();
+		int len = array.count();
+		for (int i = 0; i < len; i++) {
+			XophpArrayItm itm = array.Get_at_itm(i);
+			rv.Set(Object_.Xto_str_strict_or_null(itm.Val()), itm.Key());
+		}
+		return rv;
+	}
 }

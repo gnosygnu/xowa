@@ -61,8 +61,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 		return rslt.Init_obj(core.Wiki().Lang().Key_bry());
 	}
 	public boolean FormatStatements(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		throw Err_.new_unimplemented();
-//			return FormatPropertyValues(args, rslt); // NOTE: implementation should be like Visit_entity but return [[A]] instead of <a href='A'>
+		return FormatPropertyValues(args, rslt); // NOTE: implementation should be like Visit_entity but return [[A]] instead of <a href='A'>
 	}
 	public boolean FormatPropertyValues(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// get qid / pid

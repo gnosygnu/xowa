@@ -80,7 +80,7 @@ class GfmlLxr_group implements GfmlLxr {
 	public GfmlTkn MakeTkn(CharStream stream, int hookLength) {
 		while (stream.AtMid()) {
 			if (!ignoreOutput)
-				sb.Add_mid(stream.Ary(), stream.Pos(), hookLength);
+				sb.Add_mid_len(stream.Ary(), stream.Pos(), hookLength);
 			stream.MoveNextBy(hookLength);
 
 			String found = String_.cast(trie.FindMatch(stream));

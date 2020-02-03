@@ -33,6 +33,9 @@ public class Bitmask_ {
 		}
 		return rv;
 	}
+	public static int Set_or_add(int val, int flag) {
+		return val == 0 ? flag : val | flag;
+	}
 	public static boolean		Has_byte(byte val, byte find)	{return find == (val & find);}
 	public static byte		Add_byte(byte flag, byte itm)	{return (byte)(flag | itm);}
 }

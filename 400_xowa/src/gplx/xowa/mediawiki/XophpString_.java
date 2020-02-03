@@ -18,7 +18,7 @@ import gplx.core.btries.*;
 import gplx.core.intls.*;
 import gplx.objects.strings.unicodes.*;
 import gplx.core.primitives.*;
-public class XophpString_ {
+public class XophpString_ implements XophpCallbackOwner {
 	public static final    String Null = null;
 	public static boolean is_true(String s) {return s != null;} // handles code like "if ($var)" where var is an Object;
 
@@ -358,6 +358,11 @@ public class XophpString_ {
 	public static boolean is_string(Object o) {
 		return String_.as_(o) != null;
 	}
+
+	// REF.PHP: https://www.php.net/manual/en/function.strtoupper.php
+	public static String strtoupper(String s) {
+		return String_.Upper(s);
+	}
 	public static String strtolower(String s) {
 		return String_.Lower(s);
 	}
@@ -462,4 +467,14 @@ public class XophpString_ {
 				return b >= 128 && b <= 255;
 		}
 	}
+	public Object Callback(String method, Object... args) {
+		if (String_.Eq(method, "strtoupper")) {
+			String val = (String)args[0];
+			return strtoupper(val);
+		}
+		else {
+			throw Err_.new_unhandled_default(method);
+		}
+	}
+	public static final    XophpCallbackOwner Callback_owner = new XophpString_();
 }

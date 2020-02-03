@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import gplx.langs.regxs.*;
+import gplx.core.strings.*; import gplx.core.primitives.*; import gplx.core.bits.*;
 public class XophpRegex_ {
 	public static boolean preg_match_bool(Regx_adp pattern, int modifier, String subject) {return preg_match_bool(pattern, modifier, subject, null, 0, 0);}
 	public static boolean preg_match_bool(Regx_adp pattern, String subject, XophpArray matches, int flags, int offset) {return preg_match(pattern, MODIFIER_NONE, subject, matches, flags, offset) == FOUND;}
@@ -70,17 +71,160 @@ public class XophpRegex_ {
 			}
 		}
 	}
+	// REF.PHP:https://www.php.net/manual/en/function.preg-match-all.php
+	// $flags = PREG_PATTERN_ORDER
+	public static int preg_match_all(Regx_adp pattern, String subject, XophpArray matches, int flags) {return preg_match_all(pattern, subject, matches, flags, 0);}
+	public static int preg_match_all(Regx_adp pattern, String subject, XophpArray matches, int flags, int offset) {
+		// decompose flags to bools
+		// boolean unmatched_as_null = Bitmask_.Has_int(flags, PREG_OFFSET_CAPTURE);
+		boolean offset_capture = Bitmask_.Has_int(flags, PREG_OFFSET_CAPTURE);
+		boolean pattern_order = Bitmask_.Has_int(flags, PREG_PATTERN_ORDER);
+		boolean set_order = Bitmask_.Has_int(flags, PREG_SET_ORDER);
+
+		if (pattern_order && set_order) { // PHP.TEST:echo(preg_match_all("|a|U", "a", $out, PREG_SET_ORDER | PREG_PATTERN_ORDER));
+			matches.Clear();
+			return 0;
+		}
+//			else if (!pattern_order && !set_order) { // occurs when passing just PREG_OFFSET_CAPTURE
+//				set_order = true;
+//			}
+
+		// ARRAY
+		XophpArray array_0 = null;
+		XophpArray array_1 = null;
+		boolean match_is_full = true;
+		if (pattern_order) {
+			array_0 = XophpArray.New();
+			array_1 = XophpArray.New();
+			matches.Add(array_0);
+			matches.Add(array_1);
+		}
+		int len = String_.Len(subject);
+		int count = 0;
+		while (offset < len) {
+			Regx_match match = pattern.Match(subject, offset);
+			if (!match.Rslt())
+				break;
+
+			Regx_group[] groups = match.Groups();
+			int groups_len = groups.length;
+			XophpArray array = null;
+			if (set_order) {
+				array = XophpArray.New();
+				matches.Add(array);
+			}
+			for (int i = 0; i < groups_len; i++) {
+				Regx_group group = groups[i];
+				if (pattern_order) {
+					array = match_is_full ? array_0 : array_1;
+					match_is_full = !match_is_full;
+				}
+				if (offset_capture) {
+					matches.Add(XophpArray.New(group.Val(), group.Bgn()));
+				}
+				else {
+					array.Add(group.Val());
+				}
+			}
+
+			offset = match.Find_end();
+			count++;
+		}
+		return count;
+	}
+
+	// REF.PHP:https://www.php.net/manual/en/function.preg-replace.php
+	public static final int preg_replace_limit_none = -1;
+	public static String preg_replace(Regx_adp pattern, String replacement, String subject) {return preg_replace(pattern, replacement, subject, -1, null);}
+	public static String preg_replace(Regx_adp pattern, String replacement, String subject, int limit, Int_obj_ref count_rslt) {
+		// if no limit specified, default to max
+		if (limit == preg_replace_limit_none) limit = Int_.Max_value;
+
+		// init vars for loop
+		int pos = 0;
+		int count = 0;
+		String_bldr sb = null;
+
+		// exec match
+		for (int i = 0; i < limit; i++) {
+			// find next
+			Regx_match match = pattern.Match(subject, pos);
+
+			// found nothing; stop
+			if (!match.Rslt()) {
+				if (count == 0)
+					return subject; // optimized case if no matches
+				else
+					break;
+			}
+
+			// found something
+			if (sb == null) {sb = String_bldr_.new_();} // lazy-make sb
+
+			// add everything up to match
+			sb.Add_mid(subject, pos, match.Find_bgn());
+
+			// add repl
+			sb.Add(replacement);
+
+			// update counters
+			pos = match.Find_end();
+			count++;
+		}
+
+		// add rest of String
+		sb.Add_mid(subject, pos, String_.Len(subject));
+
+		// update count_rslt if set
+		if (count_rslt != null) count_rslt.Val_(count);
+
+		// return
+		return sb.To_str_and_clear();
+	}
 	// REF.PHP:https://www.php.net/manual/en/pcre.constants.php
+	// REF.PHP:https://github.com/php/php-src/blob/master/ext/pcre/php_pcre.c
 	public static final int
-	  PREG_OFFSET_CAPTURE = 256
-	, PREG_UNMATCHED_AS_NULL = 0
-	, PREG_NO_FLAG = Int_.Min_value
-	, PREG_ERR = -1
+	  PREG_NO_FLAG              = Int_.Min_value
+	, PREG_ERR                  = -1
+
+	, PREG_PATTERN_ORDER        = 1
+	, PREG_SET_ORDER            = 2
+	, PREG_OFFSET_CAPTURE       = 1<<8
+	, PREG_UNMATCHED_AS_NULL    = 1<<9
+
+//		, PREG_SPLIT_NO_EMPTY       = 1<<0
+//		, PREG_SPLIT_DELIM_CAPTURE  = 1<<1
+//		, PREG_SPLIT_OFFSET_CAPTURE = 1<<2
+
+//		, PREG_REPLACE_EVAL         = 1<<0
+//
+//		, PREG_GREP_INVERT          = 1<<0
+//
+//		, PREG_JIT                  = 1<<3
 	;
+
+	public static Regx_adp Pattern(String pattern) {return new Regx_adp(pattern, Regx_adp.FLAG__NONE);}
+	public static Regx_adp Pattern(String pattern, int modifier) {
+		int flags = Regx_adp.FLAG__NONE;
+		if (Bitmask_.Has_int(modifier, MODIFIER_i))
+			flags = Bitmask_.Set_or_add(flags, Regx_adp.FLAG__CASE_INSENSITIVE);
+		if (Bitmask_.Has_int(modifier, MODIFIER_m))
+			flags = Bitmask_.Set_or_add(flags, Regx_adp.FLAG__MULTILINE);
+		if (Bitmask_.Has_int(modifier, MODIFIER_s))
+			flags = Bitmask_.Set_or_add(flags, Regx_adp.FLAG__DOTALL);
+		if (Bitmask_.Has_int(modifier, MODIFIER_x))
+			flags = Bitmask_.Set_or_add(flags, Regx_adp.FLAG__COMMENTS);
+		if (Bitmask_.Has_int(modifier, MODIFIER_U)) {
+			pattern = String_.Replace(pattern, ".*", ".*?");
+		}
+		return new Regx_adp(pattern, flags);
+	}
 
 	public static final int NOT_FOUND = 0, FOUND = 1;
 
 	// REF.PHP:https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php
+	// Some modifiers can be set using "(?LETTER)"; EX: "(?J)"; REF.PHP:https://www.php.net/manual/en/regexp.reference.@gplx.Internal protected-options.php
+	// https://stackoverflow.com/questions/5767627/how-to-add-features-missing-from-the-java-regex-implementation/5771326#5771326
 	public static final    int
 	  MODIFIER_NONE = 0
 	, MODIFIER_i    = Math_.Pow_int(2,  0) // PCRE_CASELESS: If this modifier is set, letters in the pattern match both upper and lower case letters.

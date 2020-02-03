@@ -17,10 +17,10 @@ package gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scrib
 import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.stores.*;
 import gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.config.*;
 public class WikibaseLanguageIndependentLuaBindings {
-	private final    EntityRetrievingTermLookup termLookup;
+	private final    XomwEntityRetrievingTermLookup termLookup;
 	private final    WikibaseClientDefault settings;
 	public WikibaseLanguageIndependentLuaBindings(Wbase_doc_mgr entity_mgr, byte[] wiki_abrv_wm) {
-		this.termLookup = new EntityRetrievingTermLookup(entity_mgr);
+		this.termLookup = new XomwEntityRetrievingTermLookup(entity_mgr);
 		this.settings = WikibaseClientDefault.New(wiki_abrv_wm);
 	}
 	public byte[] getLabelByLanguage_or_null(byte[] prefixedEntityId, byte[] languageCode) {

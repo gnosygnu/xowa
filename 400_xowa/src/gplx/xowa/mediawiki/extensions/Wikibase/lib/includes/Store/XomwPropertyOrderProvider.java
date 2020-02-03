@@ -14,16 +14,23 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.Wikibase.*; import gplx.xowa.mediawiki.extensions.Wikibase.lib.*; import gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
-import gplx.xowa.xtns.wbases.*;
-public class EntityRetrievingTermLookup {
-	private final    Wbase_doc_mgr entity_mgr;
-	public EntityRetrievingTermLookup(Wbase_doc_mgr entity_mgr) {
-		this.entity_mgr = entity_mgr;
-	}
+// REF.WBASE:2020-01-19
+/**
+* Interface that contains method for the PropertyOrderProvider
+*
+* @license GPL-2.0-or-later
+* @author Lucie-Aim�e Kaffee
+*/
+public interface XomwPropertyOrderProvider {
 
-	public byte[] getLabel_or_null(byte[] entityId, byte[] languageCode) {
-		Wdata_doc entity = entity_mgr.Get_by_xid_or_null(entityId);
-		return entity.Get_label_bry_or_null(languageCode);
-	}
+	/**
+	* Get order of properties in the form [ $propertyIdSerialization => $ordinalNumber ]
+	*
+	* @return null|int[] An associative array mapping property ID strings to ordinal numbers.
+	* 	The order of properties is represented by the ordinal numbers associated with them.
+	* 	The array is not guaranteed to be sorted.
+	* 	Null if no information exists.
+	* @throws PropertyOrderProviderException
+	*/
+	XophpArray getPropertyOrder();
 }

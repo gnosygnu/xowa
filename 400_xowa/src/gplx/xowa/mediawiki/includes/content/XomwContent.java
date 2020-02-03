@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.includes.parsers.*;
+// MW.SRC:1.33.1
 /**
 * A content Object represents page content, e.g. the text to show on a page.
 * Content objects have no knowledge about how they relate to wiki pages.

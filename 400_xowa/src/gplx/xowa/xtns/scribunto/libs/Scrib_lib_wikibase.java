@@ -18,6 +18,8 @@ import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto.*;
+import gplx.xowa.mediawiki.*;
+import gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store.*;
 // REF.MW:https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php
 public class Scrib_lib_wikibase implements Scrib_lib {
 	private final    Scrib_core core;
@@ -29,6 +31,57 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public String Key() {return "mw.wikibase";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
 	public Scrib_proc_mgr Procs() {return procs;} private final    Scrib_proc_mgr procs = new Scrib_proc_mgr();
+
+//		/**
+//		* @var WikibaseLanguageIndependentLuaBindings|null
+//		*/
+//		private $languageIndependentLuaBindings = null;
+//
+//		/**
+//		* @var WikibaseLanguageDependentLuaBindings|null
+//		*/
+//		private $languageDependentLuaBindings = null;
+//
+//		/**
+//		* @var EntityAccessor|null
+//		*/
+//		private $entityAccessor = null;
+//
+//		/**
+//		* @var SnakSerializationRenderer[]
+//		*/
+//		private $snakSerializationRenderers = [];
+//
+//		/**
+//		* @var LanguageFallbackChain|null
+//		*/
+//		private $fallbackChain = null;
+//
+//		/**
+//		* @var ParserOutputUsageAccumulator|null
+//		*/
+//		private $usageAccumulator = null;
+//
+//		/**
+//		* @var PropertyIdResolver|null
+//		*/
+//		private $propertyIdResolver = null;
+
+	/**
+	* @var PropertyOrderProvider|null
+	*/
+//		private XomwPropertyOrderProvider propertyOrderProvider = null;
+
+//		/**
+//		* @var EntityIdParser|null
+//		*/
+//		private $entityIdParser = null;
+//
+//		/**
+//		* @var RepoLinker|null
+//		*/
+//		private $repoLinker = null;
+
 	public Scrib_lib Init() {
 		procs.Init_by_lib(this, Proc_names); 
 		this.wdata_mgr = core.App().Wiki_mgr().Wdata_mgr();
@@ -184,7 +237,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	}
 	public boolean GetEntityUrl(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] entityId = args.Pull_bry(0);
-		byte[] entity_url = Wbase_client.getDefaultInstance().RepoLinker().getEntityUrl(entityId);
+		byte[] entity_url = WikibaseClient.getDefaultInstance().RepoLinker().getEntityUrl(entityId);
 		return rslt.Init_obj(entity_url);
 	}
 	public boolean GetEntityStatements(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -277,8 +330,44 @@ public function formatValues( $snaksSerialization ) {
 	public boolean GetPropertyOrder(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		throw Err_.new_("wbase", "getPropertyOrder not implemented", "url", core.Page().Url().To_str());
 	}
+
+	// TEST:
+	// * 0 propertyIds
+	// * same membership, but unsorted
+	// * more in lhs
+	// * more in rhs
 	public boolean OrderProperties(Scrib_proc_args args, Scrib_proc_rslt rslt) {
-		throw Err_.new_("wbase", "orderProperties not implemented", "url", core.Page().Url().To_str());
+		Keyval[] propertyIds = args.Pull_kv_ary_safe(0);
+
+//			if (propertyIds.length == 0) {
+//				return rslt.Init_obj(propertyIds);
+//			}
+//
+//			XophpArray orderedPropertiesPart = XophpArray.New();
+//			XophpArray unorderedProperties = XophpArray.New();
+//
+//			// item is [{P1,1}]
+//			XophpArray propertyOrder = this.getPropertyOrderProvider().getPropertyOrder();
+//			foreach (Keyval propertyIdKv in propertyIds) {
+//				// item is [{0,P1}]
+//				String propertyId = propertyIdKv.Val_to_str_or_empty();
+//				if (propertyOrder.isset(propertyId)) {
+//					int propertyOrderSort = propertyOrder.Get_by_int(propertyId);
+//					orderedPropertiesPart.Set(propertyOrderSort, propertyId);
+//				} else {
+//					unorderedProperties.Add(propertyId);
+//				}
+//			}
+//			ksort( orderedPropertiesPart );
+//			orderedProperties = XophpArray_.array_merge(orderedPropertiesPart, unorderedProperties);
+
+		// Lua tables start at 1
+//			XophpArray orderedPropertiesResult = XophpArray_.array_combine(
+//					range(1, count(orderedProperties)), XophpArray_.array_values(orderedProperties)
+//			);
+//			return rslt.Init_obj(orderedPropertiesResult.To_kv_ary());
+		return rslt.Init_obj(propertyIds);
+//			throw Err_.new_("wbase", "orderProperties not implemented", "url", core.Page().Url().To_str());
 	}
 	public boolean GetLabel(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
 		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetLabel", true); 
@@ -359,6 +448,17 @@ public function formatValues( $snaksSerialization ) {
 		if (wdoc == null && logMissing) Wdata_wiki_mgr.Log_missing_qid(core.Ctx(), type, xid_bry);
 		return wdoc;
 	}
+
+	/**
+	* @return PropertyOrderProvider
+	*/
+//		private XomwPropertyOrderProvider getPropertyOrderProvider() {
+//			if (!XophpObject_.is_true(this.propertyOrderProvider)) {
+//				WikibaseClient wikibaseClient = WikibaseClient.getDefaultInstance();
+//				this.propertyOrderProvider = wikibaseClient.getPropertyOrderProvider();
+//			}
+//			return this.propertyOrderProvider;
+//		}
 }
 /*
 FOOTNOTE:GetEntityModuleName

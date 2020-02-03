@@ -222,6 +222,27 @@ public class XophpArray__tst { // REF:https://www.php.net/manual/en/function.arr
 			, orig.values()
 			);
 	}
+	@Test  public void array_map() {
+		XophpArray orig = fxt.Make().Add_many("a", "b", "c");
+		fxt.Test__eq
+			( fxt.Make().Add_many("A", "B", "C")
+			, XophpArray_.array_map(XophpString_.Callback_owner, "strtoupper", orig)
+			);
+	}
+	@Test  public void array_flip__basic() {
+		XophpArray orig = fxt.Make().Add_many("oranges", "apples", "pears");
+		fxt.Test__eq
+			( fxt.Make().Add("oranges", 0).Add("apples", 1).Add("pears", 2)
+			, XophpArray_.array_flip(orig)
+			);
+	}
+	@Test  public void array_flip__collision() {
+		XophpArray orig = fxt.Make().Add("a", 1).Add("b", 1).Add("c", 2);
+		fxt.Test__eq
+			( fxt.Make().Add("1", "b").Add("2", "c")
+			, XophpArray_.array_flip(orig)
+			);
+	}
 }
 class XophpArray__fxt {
 	public XophpArray Make() {return new XophpArray();}

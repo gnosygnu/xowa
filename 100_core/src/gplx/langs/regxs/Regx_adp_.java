@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
 public class Regx_adp_ {
-	public static Regx_adp new_(String pattern) {return new Regx_adp(pattern);}
+	public static Regx_adp new_(String pattern) {return new Regx_adp(pattern, Regx_adp.FLAG__DEFAULT);}
 	public static List_adp Find_all(String src, String pat) {
 		int src_len = String_.Len(src);
 		Regx_adp regx = Regx_adp_.new_(pat);
@@ -34,7 +34,7 @@ public class Regx_adp_ {
 		return regx.ReplaceAll(raw, replace);
 	}
 	public static boolean Match(String input, String pattern) {
-		Regx_adp rv = new Regx_adp(pattern);
+		Regx_adp rv = new Regx_adp(pattern, Regx_adp.FLAG__DEFAULT);
 		return rv.Match(input, 0).Rslt();
 	}
 }
