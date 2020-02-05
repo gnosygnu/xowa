@@ -34,7 +34,7 @@ class Xob_catlink_mgr {
 	public void On_cmd_row(int page_id, byte[] ctg_ttl, byte[] sortkey_orig, byte[] timestamp_bry, byte[] sortkey_prefix, byte[] collation_bry, byte[] type_bry) {
 		// convert strings to numbers
 		String timestamp_str = String_.new_u8(timestamp_bry);
-		long timestamp = String_.Len_eq_0(timestamp_str) ? 0 : DateAdp_.parse_fmt(timestamp_str, "YYYY-MM-dd HH:mm:ss").Timestamp_unix();
+		long timestamp = Parse_timestamp(timestamp_str);
 		byte collation_id = collation_enum.To_tid_or_fail(collation_bry);
 		byte type_id = type_enum.To_tid_or_fail(type_bry);
 
@@ -53,6 +53,9 @@ class Xob_catlink_mgr {
 			Gfo_usr_dlg_.Instance.Prog_many("", "", "parsing categorylinks sql: ~{0}", Int_.To_str_fmt(rows, "#,##0"));
 			tmp_conn.Txn_sav();
 		}
+	}
+	public static long Parse_timestamp(String val) {
+		return String_.Len_eq_0(val) ? 0 : DateAdp_.parse_fmt(val, "yyyy-MM-dd HH:mm:ss").Timestamp_unix();
 	}
 	public void On_cmd_end() {
 		tmp_link_tbl.Insert_end();
