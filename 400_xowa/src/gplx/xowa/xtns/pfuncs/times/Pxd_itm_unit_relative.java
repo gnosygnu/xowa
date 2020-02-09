@@ -24,6 +24,7 @@ class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype { 
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unit_relative;}
 	@Override public int Eval_idx() {return 5;}
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_unit_relative(adj, ary_idx);}
+	public int Adj() {return adj;}
 	@Override public boolean Eval(Pxd_parser state) {
 		// find next token: EX: year, month, Sunday, Monday, etc.
 		Pxd_itm itm = Pxd_itm_.Find_fwd__non_ws(state.Tkns(), this.Ary_idx() + 1);

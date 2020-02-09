@@ -151,5 +151,12 @@ public class DateAdp implements CompareAble, Gfo_invk {
 		this.under = new GregorianCalendar(year, month - Month_base0adj, day, hour, minute, second);
 		under.set(Calendar.MILLISECOND, frac);
 	}
+	public void SetTzOffset(int offset) {
+		java.util.Date date = under.getTime();
+		long msFromEpochGmt = date.getTime();
+		Calendar cal = Calendar.getInstance();
+		cal.setTimeInMillis(msFromEpochGmt - offset*1000);
+		under = cal;
+	}
 	public static final int Month_base0adj = 1;
 	}

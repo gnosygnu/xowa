@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.ctgs.bldrs; import gplx.*; import gplx.xowa.*; im
 import org.junit.*; import gplx.core.tests.*;
 public class Xob_catlink_mgr__tst {
 	private final    Xob_catlink_mgr__fxt fxt = new Xob_catlink_mgr__fxt();
-	@Test   public void Parse_timestamp() {
+	@Test   public void Parse_timestamp() {// fix bad parsing b/c of "YYYY" instead of "yyyy"; ISSUE#:664; DATE:2020-02-05
 		fxt.Test__Parse_timestamp("2016-02-01 18:34:08", 1454351648); // fails if 1451241248
 	}
 }

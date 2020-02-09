@@ -26,6 +26,7 @@ class Pxd_itm_month_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	}
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_month_name;}
 	@Override public int Eval_idx() {return 20;}
+	public int Seg_val() {return seg_val;}
 	public Pxd_itm MakeNew(int ary_idx) {
 		Pxd_itm_month_name rv = new Pxd_itm_month_name(ary_idx, name, this.Seg_idx(), seg_val);
 		return rv;
@@ -165,6 +166,7 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 	} 
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unit;}
 	@Override public int Eval_idx() {return 10;}
+	public int Seg_multiple() {return seg_multiple;}
 	public byte[] Name() {return name;} private final    byte[] name;
 	public Pxd_itm MakeNew(int ary_idx) {
 		return new Pxd_itm_unit(ary_idx, name, this.Seg_idx(), seg_val);

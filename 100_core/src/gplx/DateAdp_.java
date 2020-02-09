@@ -116,9 +116,23 @@ public class DateAdp_ implements Gfo_invk {
 		c.setTimeInMillis(v);
 		return new DateAdp(c);
 	}
-		public static final int SegIdx_year = 0, SegIdx_month = 1, SegIdx_day = 2, SegIdx_hour = 3, SegIdx_minute = 4, SegIdx_second = 5, SegIdx_frac = 6, SegIdx_dayOfWeek = 7, SegIdx_weekOfYear = 8, SegIdx_dayOfYear = 9, SegIdx__max = 10;
+		public static final int
+	  SegIdx_year = 0, SegIdx_month = 1, SegIdx_day = 2, SegIdx_hour = 3, SegIdx_minute = 4, SegIdx_second = 5
+	, SegIdx_frac = 6, SegIdx_dayOfWeek = 7, SegIdx_weekOfYear = 8, SegIdx_dayOfYear = 9, SegIdx_tz = 10, SegIdx__max = 11;
 	public static String Xto_str_fmt_or(DateAdp v, String fmt, String or) {
 		return v == null ? or : v.XtoStr_fmt(fmt);
+	}
+	public static DateAdp FirstDayofYear(int year) {
+		return new DateAdp(year, 1, 1, 0, 0, 0, 0);
+	}
+	public static DateAdp DateByDayofYear(int year, int day) {
+		return new DateAdp(year, 1, day, 0, 0, 0, 0);
+	}
+	public static DateAdp DateByBits(int y, int m, int d, int h, int i, int s, int us, int tz_ofs, byte[] tz_abbr) {
+		DateAdp dte = new DateAdp(y, m, d, h, i, s, us/1000);
+				if (tz_ofs != 0)
+					dte.SetTzOffset(tz_ofs);
+				return dte;
 	}
 	public static final String 
 	  Fmt_iso8561_date_time = "yyyy-MM-dd HH:mm:ss"

@@ -27,6 +27,7 @@ class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_dow_name;}
 	@Override public int Eval_idx() {return 20;}
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_dow_name(ary_idx, dow_name, dow_idx);}
+	public int Dow_idx() {return dow_idx;}
 	public void Relative_adj_(int v) {	// handled by relative_word; EX: "next tuesday"
 		this.relative_adj = v;
 	}
