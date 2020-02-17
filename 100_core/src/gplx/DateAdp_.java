@@ -116,6 +116,11 @@ public class DateAdp_ implements Gfo_invk {
 		c.setTimeInMillis(v);
 		return new DateAdp(c);
 	}
+	public static DateAdp New_w_tz(int y, int m, int d, int h, int i, int s, int us, String tz_id) {
+		TimeZone tz = String_.Eq(tz_id, "UTC") ? TIME_ZONE__UTC : TimeZone.getTimeZone(tz_id);
+		return new DateAdp(y, m, d, h, i, s, us/1000, tz);
+	}
+	private static TimeZone TIME_ZONE__UTC = TimeZone.getTimeZone("UTC");
 		public static final int
 	  SegIdx_year = 0, SegIdx_month = 1, SegIdx_day = 2, SegIdx_hour = 3, SegIdx_minute = 4, SegIdx_second = 5
 	, SegIdx_frac = 6, SegIdx_dayOfWeek = 7, SegIdx_weekOfYear = 8, SegIdx_dayOfYear = 9, SegIdx_tz = 10, SegIdx__max = 11;

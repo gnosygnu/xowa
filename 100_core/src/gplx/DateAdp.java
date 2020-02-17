@@ -151,6 +151,11 @@ public class DateAdp implements CompareAble, Gfo_invk {
 		this.under = new GregorianCalendar(year, month - Month_base0adj, day, hour, minute, second);
 		under.set(Calendar.MILLISECOND, frac);
 	}
+	protected DateAdp(int year, int month, int day, int hour, int minute, int second, int frac, TimeZone timeZone) {
+		this.under = new GregorianCalendar(timeZone);
+		under.set(year, month - Month_base0adj, day, hour, minute, second);
+		under.set(Calendar.MILLISECOND, frac);
+	}
 	public void SetTzOffset(int offset) {
 		java.util.Date date = under.getTime();
 		long msFromEpochGmt = date.getTime();

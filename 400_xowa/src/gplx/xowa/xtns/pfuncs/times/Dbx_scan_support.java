@@ -557,8 +557,8 @@ public class Dbx_scan_support {
 	
 			retval = -1 * timelib_parse_tz_cor(s);
 		} else {
-			int found = 0;
-			int offset = 0;
+//			int found = 0;
+//			int offset = 0;
 			//char *tz_abbr;
 	
 			t.is_localtime = true;

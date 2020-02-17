@@ -325,7 +325,7 @@ public class Dbx_strtotime {
 					break;
 				case 18: //line 1719 "parse_date.re"
 				{
-					int tz_not_found;
+//					int tz_not_found;
 //		DEBUG_OUTPUT("tzcorrection | tz");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -974,7 +974,7 @@ public class Dbx_strtotime {
 					break;
 				case 209: //line 1224 "parse_date.re"
 				{
-					int tz_not_found;
+//					int tz_not_found;
 //		DEBUG_OUTPUT("timeshort24 | timelong24 | iso8601long");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -1014,7 +1014,7 @@ public class Dbx_strtotime {
 					break;
 				case 214: //line 1316 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("americanshort | american");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -1111,7 +1111,7 @@ public class Dbx_strtotime {
 					break;
 				case 241: //line 1386 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("datefull");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -1397,7 +1397,7 @@ public class Dbx_strtotime {
 					break;
 				case 310: //line 1455 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("datetextual | datenoyear");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -2196,7 +2196,7 @@ public class Dbx_strtotime {
 					break;
 				case 545: //line 1372 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("gnudateshort");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -2309,7 +2309,7 @@ public class Dbx_strtotime {
 					break;
 				case 577: //line 1441 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("datenodayrev");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -2612,7 +2612,7 @@ public class Dbx_strtotime {
 					++s.cursor;
 //line 1427 "parse_date.re"
 					 {
-						int length = 0;
+//						int length = 0;
 //		DEBUG_OUTPUT("datenoday");
 						s.cur = s.cursor;
 						s.ptr = s.tok;
@@ -2752,7 +2752,7 @@ public class Dbx_strtotime {
 					break;
 				case 711: //line 1413 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("pointed date YY");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -2808,7 +2808,7 @@ public class Dbx_strtotime {
 					break;
 				case 724: //line 1358 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("gnudateshorter");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -2890,7 +2890,7 @@ public class Dbx_strtotime {
 					break;
 				case 747: //line 1296 "parse_date.re"
 				{
-					int tz_not_found;
+//					int tz_not_found;
 //		DEBUG_OUTPUT("iso8601nocolon");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -3118,7 +3118,7 @@ public class Dbx_strtotime {
 					break;
 				case 814: //line 1757 "parse_date.re"
 				{
-					int tz_not_found;
+//					int tz_not_found;
 //		DEBUG_OUTPUT("dateshortwithtimeshort | dateshortwithtimelong | dateshortwithtimelongtz");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -3366,7 +3366,7 @@ public class Dbx_strtotime {
 					break;
 				case 886: //line 1519 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("pgydotd");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -3551,7 +3551,7 @@ public class Dbx_strtotime {
 				case 935: //line 1692 "parse_date.re"
 				{
 					int i;
-					int behavior = 0;
+//					int behavior = 0;
 //		DEBUG_OUTPUT("relativetext");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -3696,7 +3696,7 @@ public class Dbx_strtotime {
 					break;
 				case 973: //line 1344 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("iso8601date2");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -3882,7 +3882,7 @@ public class Dbx_strtotime {
 					break;
 				case 1017: //line 1571 "parse_date.re"
 				{
-					int length = 0;
+//					int length = 0;
 //		DEBUG_OUTPUT("pgtextshort");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -4102,7 +4102,7 @@ public class Dbx_strtotime {
 					++s.cursor;
 //line 1585 "parse_date.re"
 					 {
-						int length = 0;
+//						int length = 0;
 //		DEBUG_OUTPUT("pgtextreverse");
 						s.cur = s.cursor;
 						s.ptr = s.tok;
@@ -4251,7 +4251,7 @@ public class Dbx_strtotime {
 				case 1108: //line 1668 "parse_date.re"
 				{
 					int i;
-					int behavior = 0;
+//					int behavior = 0;
 //		DEBUG_OUTPUT("relativetextweek");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -4543,7 +4543,7 @@ public class Dbx_strtotime {
 //line 1165 "parse_date.re"
 					 {
 						int i;
-						int behavior = 0;
+//						int behavior = 0;
 //		DEBUG_OUTPUT("weekdayof");
 						s.cur = s.cursor;
 						s.ptr = s.tok;
@@ -4738,7 +4738,7 @@ public class Dbx_strtotime {
 					break;
 				case 1228: //line 1493 "parse_date.re"
 				{
-					int tz_not_found;
+//					int tz_not_found;
 //		DEBUG_OUTPUT("xmlrpc | xmlrpcnocolon | soap | wddx | exif");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
@@ -4859,7 +4859,7 @@ public class Dbx_strtotime {
 					break;
 				case 1258: //line 1599 "parse_date.re"
 				{
-					int tz_not_found;
+//					int tz_not_found;
 //		DEBUG_OUTPUT("clf");
 					s.cur = s.cursor;
 					s.ptr = s.tok;
