@@ -90,7 +90,7 @@ class Dbx_strtotime_fxt {
 //	private String fmt, tz;
 //	public Dbx_strtotime_fxt() {
 //		Btrie_slim_mgr trie = Pxd_parser_.Trie();
-//        Dbx_scan_support.Init(trie);		
+//        Dbx_scan_support.Init(trie);
 //	}
 //	public Dbx_strtotime_fxt Init__format() {return Init__format("yyyy-MM-dd'T'HH:mm:ssZ", "CET");}
 //	public Dbx_strtotime_fxt Init__format(String fmt) {return Init__format(fmt, "UTC");}
@@ -104,7 +104,7 @@ class Dbx_strtotime_fxt {
 //	public void Test__date(String raw, String expd) {
 //		DateAdp date = Dbx_scan_support.Parse(Bry_.new_u8(raw));
 //		Gftest.Eq__str(expd, date.XtoStr_fmt_iso_8561());
-//	}	
+//	}
 //	public void Test__strtotime__ary(String[] raw, String[] expd) {
 //		int len = raw.length;
 //		String[] actl = new String[len];

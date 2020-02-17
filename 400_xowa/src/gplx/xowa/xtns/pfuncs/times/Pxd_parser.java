@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.btries.*; import gplx.core.log_msgs.*;
+import gplx.xowa.parsers.*;
 class Pxd_parser {
 	private final    Btrie_rv trv = new Btrie_rv();
 	private byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
@@ -25,6 +26,10 @@ class Pxd_parser {
 	public int Colon_count;
 	public int[] Seg_idxs() {return seg_idxs;} private int[] seg_idxs = new int[DateAdp_.SegIdx__max];	// temp ary for storing current state
 	public byte[] Src() {return src;}
+//		public Pxd_parser(Xop_ctx ctx) {
+//			this.trie = Pxd_parser_.Trie(ctx);
+//			Dbx_scan_support.Init(trie);
+//		}
 	public boolean Seg_idxs_chk(int... ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++)
