@@ -382,12 +382,20 @@ public function formatValues( $snaksSerialization ) {
 		byte[] label = core.Wiki().Xtn_mgr().Xtn_wikibase().Lua_bindings().getLabelByLanguage_or_null(prefixedEntityId, languageCode);
 		return label == null ? rslt.Init_str_empty() : rslt.Init_obj(label);
 	}
-	public boolean GetSiteLinkPageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {			
+	public boolean GetSiteLinkPageName(Scrib_proc_args args, Scrib_proc_rslt rslt) {
+		// get wdoc from args; EX: "q2"
 		Wdata_doc wdoc = Get_wdoc_or_null(args, core, "GetSiteLinkPageName", true);  // NOTE: prop should be of form "P123"; do not add "P"; PAGE:no.w:Anne_Enger; DATE:2015-10-27
 		if (wdoc == null) return rslt.Init_ary_empty();
 
-		Xow_domain_itm domain_itm = core.Wiki().Domain_itm();
-		Wdata_sitelink_itm itm = wdoc.Get_slink_itm_or_null(domain_itm.Abrv_wm());
+		// get wiki from args (EX: "enwiki"), or default to current wiki; ISSUE#:665; PAGE:commons.wikimedia.org/wiki/Category:Paddy_Ashdown; DATE:2020-02-19
+		byte[] wiki_bry = args.Cast_bry_or_null(1);
+		if (wiki_bry == null) {
+			Xow_domain_itm domain_itm = core.Wiki().Domain_itm();
+			wiki_bry = domain_itm.Abrv_wm();
+		}
+
+		// get sitelink for wiki from wdoc
+		Wdata_sitelink_itm itm = wdoc.Get_slink_itm_or_null(wiki_bry);
 		return itm == null ? rslt.Init_ary_empty() : rslt.Init_many_objs(itm.Name(), itm.Lang());
 	}
 	public boolean GetDescription(Scrib_proc_args args, Scrib_proc_rslt rslt) {

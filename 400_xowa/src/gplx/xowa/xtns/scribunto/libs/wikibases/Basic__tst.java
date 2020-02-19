@@ -201,6 +201,18 @@ public class Basic__tst {
 	@Test  public void GetEntityModuleName() {
 		fxt.Test_scrib_proc_obj(lib, Scrib_lib_wikibase.Invk_getEntityModuleName, Object_.Ary("Q123"), "mw.wikibase.entity");
 	}
+	@Test  public void GetSiteLinkPageName() {
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2").Add_sitelink("enwiki", "Test_page").Xto_wdoc());
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getSiteLinkPageName, Object_.Ary("q2"), "Test_page");
+	}
+	@Test  public void GetSiteLinkPageName_wiki() {// ISSUE#:665; PAGE:commons.wikimedia.org/wiki/Category:Paddy_Ashdown; DATE:2020-02-19
+		wdata_fxt.Init_xwikis_add("frwiki");
+		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2")
+			.Add_sitelink("enwiki", "q2_enwiki")
+			.Add_sitelink("frwiki", "q2_frwiki")
+			.Xto_wdoc());
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_wikibase.Invk_getSiteLinkPageName, Object_.Ary("q2", "frwiki"), "q2_frwiki"); // fails if q2_enwiki
+	}
 }
 class Wbase_snak_utl_ {
 	public static Keyval[] Get_snaks_ary(Wdata_wiki_mgr_fxt wdata_fxt, Wbase_claim_base... ary) {
