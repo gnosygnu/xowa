@@ -62,6 +62,7 @@ public class Wdata_prop_val_visitor_ {
 		}
 
 		if (snak_tid == Wbase_claim_value_type_.Tid__novalue) return; // ISSUE#:481; DATE:2019-06-02
+		// if (snak_tid == Wbase_claim_value_type_.Tid__somevalue) return; // is also blank DATE:2019-08-14
 		if (datavalue_ary == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "datavalue is empty even though not novalue; page_url=~{0} pid=~{1}", page_url, pid);
 			return;

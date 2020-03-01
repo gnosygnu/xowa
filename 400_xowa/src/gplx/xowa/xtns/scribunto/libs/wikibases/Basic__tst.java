@@ -138,7 +138,11 @@ public class Basic__tst {
 //			));
 //		}
 	@Test  public void RenderSnaks() {
-		Keyval[] args = Wbase_snak_utl_.Get_snaks_ary(wdata_fxt, wdata_fxt.Make_claim_monolingual(3, "en", "P3_en"), wdata_fxt.Make_claim_monolingual(3, "de", "P3_de"));
+		Keyval[] args = Wbase_snak_utl_.Get_snaks_as_ary(wdata_fxt, wdata_fxt.Make_claim_monolingual(3, "en", "P3_en"), wdata_fxt.Make_claim_monolingual(3, "de", "P3_de"));
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnaks, args, "P3_en, P3_de");
+	}
+	@Test  public void RenderSnaks_pid() { // PURPOSE: handle RenderSnaks like {"P10":[{"property":"P20"}]}; ISSUE#:666; DATE:2020-03-01
+		Keyval[] args = Wbase_snak_utl_.Get_snaks_as_nde(wdata_fxt, "P123", wdata_fxt.Make_claim_monolingual(3, "en", "P3_en"), wdata_fxt.Make_claim_monolingual(3, "de", "P3_de"));
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnaks, args, "P3_en, P3_de");
 	}
 	@Test  public void RenderSnak__entity() {
@@ -178,8 +182,12 @@ public class Basic__tst {
 		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, new Wbase_claim_string(3, Wbase_claim_value_type_.Tid__somevalue, null));
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "");
 	}
+	@Test  public void RenderSnak__data_value_is_null1() {
+		Keyval[] args = Wbase_snak_utl_.Get_snak(wdata_fxt, new Wbase_claim_string(3, Wbase_claim_value_type_.Tid__somevalue, null));
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_renderSnak, args, "");
+	}
 	@Test  public void FormatValues() {
-		Keyval[] args = Wbase_snak_utl_.Get_snaks_ary(wdata_fxt, wdata_fxt.Make_claim_monolingual(3, "en", "P3_en"), wdata_fxt.Make_claim_monolingual(3, "de", "P3_de"));
+		Keyval[] args = Wbase_snak_utl_.Get_snaks_as_ary(wdata_fxt, wdata_fxt.Make_claim_monolingual(3, "en", "P3_en"), wdata_fxt.Make_claim_monolingual(3, "de", "P3_de"));
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_wikibase.Invk_formatValues, args, "P3_en, P3_de");
 	}
 	@Test  public void FormatValue__str() {
@@ -215,9 +223,26 @@ public class Basic__tst {
 	}
 }
 class Wbase_snak_utl_ {
-	public static Keyval[] Get_snaks_ary(Wdata_wiki_mgr_fxt wdata_fxt, Wbase_claim_base... ary) {
+	public static Keyval[] Get_snaks_as_ary(Wdata_wiki_mgr_fxt wdata_fxt, Wbase_claim_base... ary) {
+		Keyval[] rv = Get_snaks_ary(wdata_fxt, ary);
+		return To_scrib_args(rv); // EX: ["1":["1":{"property":"P1"},"2":{"property":"P2"}]]
+	}
+	public static Keyval[] Get_snaks_as_nde(Wdata_wiki_mgr_fxt wdata_fxt, String pid, Wbase_claim_base... ary) {
+		Keyval[] rv = Get_snaks_ary(wdata_fxt, ary);
+		Keyval kv = Keyval_.new_(pid, rv); // EX: "P1":[{"property":"P2"}]
+		return To_scrib_args(Keyval_.Ary(kv)); // EX:["1":[{"P1":[{"property":"P11"}]]} // FOOTNOTE:references.snaks
+	}
+	private static Keyval[] To_scrib_args(Object arg) {
+		Keyval[] rv = new Keyval[1];
+		rv[0] = Keyval_.int_(0 + Scrib_core.Base_1, arg);
+		return rv;
+	}
+	private static Keyval[] Get_snaks_ary(Wdata_wiki_mgr_fxt wdata_fxt, Wbase_claim_base... ary) {
+		// use wdoc_bldr to create claims
 		Wdata_doc wdoc = wdata_fxt.Wdoc_bldr("q2").Add_claims(ary).Xto_wdoc();
-		return Keyval_.Ary(Keyval_.int_(1, Get_snaks(wdata_fxt, wdoc)));
+
+		// extract snaks from claims;
+		return Get_snaks(wdata_fxt, wdoc);
 	}
 	public static Keyval[] Get_snak(Wdata_wiki_mgr_fxt wdata_fxt, Wbase_claim_base itm) {
 		Wdata_doc wdoc = wdata_fxt.Wdoc_bldr("q2").Add_claims(itm).Xto_wdoc();
@@ -244,3 +269,82 @@ class Wbase_snak_utl_ {
 		return rv;
 	}
 }
+/*
+==FOOTNOTE:references.snaks==
+Explaining this snippet:
+
+<pre>
+return To_scrib_args(Keyval_.Ary(kv)); // EX:["1":[{"P1":[{"property":"P11"}]]}
+</pre>
+
+* This occurs as a result of https://ja.wikipedia.org/wiki/Sed_(コンピュータ)
+* It has an Infobox which will eventually call this https://ja.wikipedia.org/wiki/Module:WikidataIB
+
+<pre>
+local sourced = function(claim)
+	if claim.references then
+		for kr, vr in pairs(claim.references) do
+			local ref = mw.wikibase.renderSnaks(vr.snaks)
+			if not ref:find("Wikipedia") then
+				return true
+			end
+		end
+	end
+end
+<pre>
+
+Checking then with https:/www.wikidata.org/wiki/Property:P3966
+<pre>
+, "references":
+    [
+    { "hash":"fa278ebfc458360e5aed63d5058cca83c46134f1"
+    , "snaks":
+        { "P143":
+        [
+            { "snaktype":"value"
+            , "property":"P143"
+            , "hash":"e4f6d9441d0600513c4533c672b5ab472dc73694"
+            , "datavalue":
+            { "value":
+                { "entity-type":"item"
+                , "numeric-id":328
+                , "id":"Q328"
+                }
+            , "type":"wikibase-entityid"
+            }
+            }
+        ]
+        }
+    , "snaks-order":
+        [ "P143"
+        ]
+    }
+    ]
+}
+</pre>
+
+That means claims.references.snaks is this
+<pre>
+        { "P143":
+        [
+            { "snaktype":"value"
+            , "property":"P143"
+            , "hash":"e4f6d9441d0600513c4533c672b5ab472dc73694"
+            , "datavalue":
+            { "value":
+                { "entity-type":"item"
+                , "numeric-id":328
+                , "id":"Q328"
+                }
+            , "type":"wikibase-entityid"
+            }
+            }
+        ]
+        }
+</pre>
+
+Now, going back to "To_scrib_args(Keyval_.Ary(kv))"
+* "kv" represents "P1":[{"property":"P11"}
+* "kv" gets wrapped in Keyval_.Ary b/c SnakDeserialization will deserialize into key/val pairs; '{"P1":[{"property":"P11"}]}' '["P1":[["property":"P11"]]]'
+* "To_scrib_args()"  will put the entire thing as '["1":...]'
+*/
