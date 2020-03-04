@@ -36,7 +36,7 @@ public class Xoctg_double_grp implements Bfr_arg {
 			Fmt__normal.Bld_many(bfr, lbl_ctg_help, lbl_ctg_text, itms);
 		}
 		else {
-			byte[] lbl_hidden = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_ctg_tbl_hidden, count);
+			byte[] lbl_hidden = wiki.Msg_mgr().Val_by_id_args(Xol_msg_itm_.Id_hidden_categories, count); // use "hidden-categories" instead of "hidden-category-category" ISSUE#:674 DATE:2020-03-04
 			Fmt__hidden.Bld_many(bfr, lbl_hidden, itms);
 		}
 	}

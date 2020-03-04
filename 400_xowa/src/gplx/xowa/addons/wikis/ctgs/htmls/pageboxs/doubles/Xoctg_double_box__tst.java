@@ -31,7 +31,7 @@ public class Xoctg_double_box__tst {
 		,	      "</li>"
 		,	    "</ul>"
 		,	  "</div>"
-		,	  "<div id=\"mw-hidden-catlinks\" class=\"mw-hidden-catlinks mw-hidden-cats-user-shown\">Hidden categories:"
+		,	  "<div id=\"mw-hidden-catlinks\" class=\"mw-hidden-catlinks mw-hidden-cats-user-shown\">Hidden category:"
 		,	    "<ul>"
 		,	      "<li>"
 		,	        "<a href=\"/wiki/Category:A\" title=\"Category:A\">A</a>"

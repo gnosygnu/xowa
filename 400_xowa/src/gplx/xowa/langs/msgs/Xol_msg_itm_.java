@@ -252,8 +252,9 @@ public static final int
 , Id_xowa_wikidata_links_special = 231
 , Id_xowa_window_allpages_box_tooltip = 232
 , Id_xowa_window_allpages_btn_tooltip = 233
+, Id_hidden_categories = 234
 ;
-	public static final int Id__max = 234;
+	public static final int Id__max = 235;
 	public static Xol_msg_itm new_(int id, String key, String val) {return new_(id, Bry_.new_u8(key), Bry_.new_u8(val));}
 	public static Xol_msg_itm new_(int id, byte[] key, byte[] val) {
 		Xol_msg_itm rv = new Xol_msg_itm(id, key);
@@ -512,6 +513,7 @@ case Xol_msg_itm_.Id_xowa_wikidata_deprecated: return new_(Xol_msg_itm_.Id_xowa_
 case Xol_msg_itm_.Id_xowa_wikidata_normal: return new_(Xol_msg_itm_.Id_xowa_wikidata_normal, "xowa-wikidata-normal", "normal");
 case Xol_msg_itm_.Id_xowa_wikidata_preferred: return new_(Xol_msg_itm_.Id_xowa_wikidata_preferred, "xowa-wikidata-preferred", "preferred");
 case Xol_msg_itm_.Id_xowa_wikidata_links_special: return new_(Xol_msg_itm_.Id_xowa_wikidata_links_special, "xowa-wikidata-links-special", "Links (special wikis)");
+case Xol_msg_itm_.Id_hidden_categories: return new_(Xol_msg_itm_.Id_ctg_tbl_hidden, "hidden-categories", "{{PLURAL:~{0}\u007CHidden category\u007CHidden categories}}");
 			default: throw Err_.new_unhandled(id);
 		}
 	}
