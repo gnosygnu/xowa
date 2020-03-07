@@ -20,18 +20,11 @@ import gplx.langs.htmls.*;
 class Cite_mgr { // REF.MW:/extensions/Cite/includes/Cite.php
 	private final    Xowe_wiki wiki;
 	private final    Hash_adp_bry messages_by_group = Hash_adp_bry.cs();
-	private Cite_xtn_data xtn_data;
-	private Cite_link_label_mgr link_label_mgr;
+	private final    Cite_link_label_mgr link_label_mgr = new Cite_link_label_mgr(); // used to be a global reference; ISSUE#:495 DATE:2020-03-07
 	public Cite_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 	}
 	public byte[] getLinkLabel(int offset, byte[] group) {
-		// get xtn_data; NOTE: should go in Init_by_wiki, but Init_by_wiki doesn't get called by tests
-		if (xtn_data == null) {
-			this.xtn_data = Cite_xtn_data.Get_or_make(wiki.Parser_mgr().Data_store());
-			this.link_label_mgr = xtn_data.Link_labels();
-		}
-
 		// get message; use cache to avoid multiple concantenations; EX: "cite_link_label_group-" + "lower-roman";
 		byte[] message = (byte[])messages_by_group.Get_by_bry(group);
 		if (message == null) {
@@ -57,6 +50,7 @@ class Cite_mgr { // REF.MW:/extensions/Cite/includes/Cite.php
 			: rv;
 	}
 	private Cite_link_label_grp genLinkLabels(byte[] group, byte[] message) {
+		// linkLabels are generally "a", "b", "c", etc.
 		Xol_msg_itm msg = wiki.Msg_mgr().Find_or_null(message);
 		byte[][] text = msg == null
 			? Bry_.Ary_empty
