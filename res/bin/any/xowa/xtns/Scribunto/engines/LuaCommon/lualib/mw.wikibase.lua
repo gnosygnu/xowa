@@ -71,12 +71,15 @@ local entityCache = initCache( 15 )
 -- 50 slot cache for statements
 local statementCache = initCache( 50 )
 
+-- xowa:bgn
+-- NOTE: moved from inside wikibase.setupInterface; ISSUE#:638; DATE:2020-03-07
+-- Caching variable for the entity id string belonging to the current page (nil if page is not linked to an entity)
+local pageEntityId = false
+-- xowa:end
+
 function wikibase.setupInterface()
 	local php = mw_interface
 	mw_interface = nil
-
-	-- Caching variable for the entity id string belonging to the current page (nil if page is not linked to an entity)
-	local pageEntityId = false
 
 	-- Get the entity id of the connected item, if id is nil. Cached.
 	local function getIdOfConnectedItemIfNil( id )
@@ -473,6 +476,9 @@ function wikibase.notify_page_changed()
   -- reset cache everytime page changes
   entityCache = initCache( 15 )
   statementCache = initCache( 50 )
+
+  -- reset pageEntityId on every page; ISSUE#:638; PAGE:en.s:Author:Victor_Hugo, en.s:Author:Charles_Dickens DATE:2020-03-07
+  pageEntityId = false
 end
 -- xowa:end
 
