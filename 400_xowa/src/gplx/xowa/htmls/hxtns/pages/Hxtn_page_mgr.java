@@ -93,7 +93,11 @@ public class Hxtn_page_mgr {
 		int len = list.Len();
 		for (int i = 0; i < len; i++) {
 			Hxtn_page_itm itm = (Hxtn_page_itm)list.Get_at(i);
-			Hxtn_page_wkr wkr = (Hxtn_page_wkr)wkrs.Get_by_or_fail(itm.Wkr_id());
+			Hxtn_page_wkr wkr = (Hxtn_page_wkr)wkrs.Get_by_or_null(itm.Wkr_id());
+			if (wkr == null) { // ignore unknown wkrs so other devs can add new xtns; ISSUE#:634 QD
+				Gfo_usr_dlg_.Instance.Warn_many("", "", "hxtn.unknown wkr: page_id=~{0} wkr_id=~{1}", itm.Page_id(), itm.Wkr_id());
+				continue;
+			}
 			wkr.Load_by_page(hpg, ttl, itm.Data_id());
 		}
 	}
