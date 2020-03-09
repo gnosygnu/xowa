@@ -81,8 +81,8 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Id__rp			= 59
 	, Id__rt			= 60
 	, Id__form			= 61
+	, Id__mark			= 62
 	;
-//		private static final int Id__ary_max = 60;
 	public static final    byte[]
 	  Bry__a			= Bry_.new_a7("a")
 	, Bry__ul			= Bry_.new_a7("ul")
@@ -167,6 +167,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	.Add_str_int("rp"			, Id__rp)
 	.Add_str_int("rt"			, Id__rt)
 	.Add_str_int("form"			, Id__form)
+	.Add_str_int("mark"			, Id__mark)
 	;
 	public static String To_str(int tid) {
 		switch (tid) {
@@ -235,6 +236,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 			case Id__rp:			return "rp";
 			case Id__rt:			return "rt";
 			case Id__form:			return "form";
+			case Id__mark:			return "mark";
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}

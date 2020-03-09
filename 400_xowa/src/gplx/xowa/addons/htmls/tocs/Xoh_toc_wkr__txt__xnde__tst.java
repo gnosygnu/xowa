@@ -23,6 +23,7 @@ public class Xoh_toc_wkr__txt__xnde__tst {
 	@Test   public void Sup()			{fxt.Test__both("<sup>a</sup>"							, "a", "<sup>a</sup>");}
 	@Test   public void Sub()			{fxt.Test__both("<sub>a</sub>"							, "a", "<sub>a</sub>");}
 	@Test   public void Bdi()			{fxt.Test__both("<bdi>a</bdi>"							, "a", "<bdi>a</bdi>");}
+	@Test   public void Mark()			{fxt.Test__both("<mark>a</mark>"						, "a", "<mark>a</mark>");}
 	@Test   public void Span()			{fxt.Test__both("<span>a</span>"						, "a", "a");}
 	@Test   public void Span__id()		{fxt.Test__both("<span id='1'>a</span>"					, "a", "a");}
 	@Test   public void Span__dir()		{fxt.Test__both("<span dir=\"ltr\">a</span>"			, "a", "<span dir=\"ltr\">a</span>");}
@@ -31,6 +32,7 @@ public class Xoh_toc_wkr__txt__xnde__tst {
 	@Test   public void A()				{fxt.Test__both("<a href=\"/wiki/A\">b</a>"				, "b");}
 	@Test   public void A__nest()		{fxt.Test__both("<a href=\"/wiki/A\">b<i>c</i>d</a>"	, "bcd", "b<i>c</i>d");}
 	@Test   public void Br()			{fxt.Test__both("a<br/>b"								, "ab");}
+	@Test   public void Br__ws()        {fxt.Test__both2("a<br/ >b", "ab");}
 	@Test   public void Br__dangling()	{fxt.Test__both("a<br>b"								, "ab");}
 	@Test   public void Wbr__dangling()	{fxt.Test__both("a<wbr>b"								, "ab");}
 	@Test   public void H2()			{fxt.Test__both("a<h2>b</h2>c"							, "abc");}	// NOTE: not a valid test; MW actually generates "ab" b/c of tidy; see corresponding edit test; DATE:2016-06-28
@@ -38,6 +40,9 @@ public class Xoh_toc_wkr__txt__xnde__tst {
 	@Test   public void Table()			{fxt.Test__text("a<table><tr><td>b</td></tr></table>c"	, "abc");}
 	@Test   public void Unknown__i()	{fxt.Test__both("a<unknown>b<i>c</i>d</unknown>e"		, "abcde", "a<unknown>b<i>c</i>d</unknown>e");}	// NOTE: technically, anch should be href_encoded a<unknown>b<i>c</i>d</unknown>e b/c <unknown> is not a valid tag; compare with known tags like <li> / <table> which are just stripped
 	@Test   public void Unknown__a()	{fxt.Test__both("a<unknown>b<a>c</a>d</unknown>e"		, "abcde", "a<unknown>bcd</unknown>e");}
+//		@Test   public void Br_w_space() {
+//			fxt.Test__remove_comment("1<!--2-->3<!--4->5", "13");
+//		}
 	@Test   public void Fail() {
 		String html = "<i><a href='b'>c</i></a>";
 		fxt.Init__tidy(html, "<i><a href='b'>c</a></i>");

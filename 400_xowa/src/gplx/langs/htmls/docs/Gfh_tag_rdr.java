@@ -25,6 +25,7 @@ public class Gfh_tag_rdr {
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_end() {return src_end;} private int src_end;
 	public Bry_err_wkr Err_wkr() {return err_wkr;} private final    Bry_err_wkr err_wkr = new Bry_err_wkr();
+	public Gfh_tag_rdr Skip_ws_after_slash_y_() {skip_ws_after_slash_y = true; return this;} private boolean skip_ws_after_slash_y;
 	public Gfh_tag_rdr Reg(String tag_name, int tag_id) {name_hash.Add_str_int(tag_name, tag_id); return this;}
 	public Gfh_tag_rdr Init(byte[] ctx_name, byte[] src, int src_bgn, int src_end) {
 		this.src = src; this.pos = src_bgn; this.src_end = src_end;
@@ -205,6 +206,9 @@ public class Gfh_tag_rdr {
 				case Byte_ascii.Slash:														// EX: "<a/>"
 					name_end = name_pos;
 					tag_end = name_pos + 1; if (tag_end == src_end) return Tag__eos(tag_bgn);// EX: "<a/EOS"
+					if (skip_ws_after_slash_y) {// skip ws after slash; EX:"<br />"; ISSUE#:542: DATE:2020-03-09
+						tag_end = Bry_find_.Find_fwd_while_ws(src, tag_end, src_end);
+					}
 					if (src[tag_end] == Byte_ascii.Angle_end) {
 						atrs_end = name_end;
 						inline = true;
@@ -267,6 +271,9 @@ public class Gfh_tag_rdr {
 				case Byte_ascii.Slash:														// EX: "<a/>"
 					name_end = name_pos;
 					tag_end = name_pos + 1; if (tag_end == src_end) return Tag__eos(tag_bgn);// EX: "<a/EOS"
+					if (skip_ws_after_slash_y) {// skip ws after slash; EX:"<br />"; ISSUE#:542: DATE:2020-03-09
+						tag_end = Bry_find_.Find_fwd_while_ws(src, tag_end, src_end);
+					}
 					if (src[tag_end] == Byte_ascii.Angle_end) {
 						atrs_end = name_end;
 						inline = true;

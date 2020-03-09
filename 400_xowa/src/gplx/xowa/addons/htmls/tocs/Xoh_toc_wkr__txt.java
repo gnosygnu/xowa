@@ -17,7 +17,7 @@ package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import g
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 import gplx.xowa.parsers.amps.*; import gplx.core.primitives.*;
 class Xoh_toc_wkr__txt {
-	private final    Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html();
+	private final    Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html().Skip_ws_after_slash_y_();
 	private final    Bry_bfr anch_bfr = Bry_bfr_.New(), text_bfr = Bry_bfr_.New();
 	private final    Gfo_url_encoder anch_encoder = Gfo_url_encoder_.New__html_id().Make();
 	private final    Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
@@ -105,6 +105,7 @@ class Xoh_toc_wkr__txt {
 				case Gfh_tag_.Id__i:
 				case Gfh_tag_.Id__b:
 				case Gfh_tag_.Id__bdi:
+				case Gfh_tag_.Id__mark:// include mark; ISSUE#:542: DATE:2020-03-09
 					print_tag = true;
 					break;
 				case Gfh_tag_.Id__span:		// print span only if it has a dir attribute

@@ -67,6 +67,9 @@ class Xoh_toc_wkr__txt__fxt {
 		if (expd_anch != null)	Gftest.Eq__str(expd_anch, itm.Anch(), "anch");
 		if (expd_text != null)	Gftest.Eq__str(expd_text, itm.Text(), "text");
 	}
+	public void Test__both2(String html, String expd) {
+		Test__both(html, expd, expd);
+	}
 	public void Test__remove_comment(String html, String expd) {
 		byte[] html_bry = Bry_.new_u8(html);
 		Gftest.Eq__str(expd, Gfh_utl.Del_comments(tmp, html_bry, 0, html_bry.length));
