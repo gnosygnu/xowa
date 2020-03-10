@@ -17,6 +17,8 @@ package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
+import gplx.langs.htmls.encoders.*;
+import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 	private final    Bry_bfr html_bfr = Bry_bfr_.Reset(255), path_bfr = Bry_bfr_.Reset(255), subpage_caption_bfr = Bry_bfr_.Reset(255);
 	private Xowe_wiki wiki;
@@ -77,11 +79,14 @@ public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 				: subpage_caption_bfr.To_bry(); // nth seg is caption_bfr ("b", not "Help:A/b")
 			subpage_caption_bfr.Clear(); // always clear subpage_caption_bfr; note that 1st seg will add to bfr, but never use it
 
+			// escape " as &quot; PAGE:en.s:A_Critical_Examination_of_Dr_G._Birkbeck_Hills_"Johnsonian"_Editions/The_Preface_and_Dedication; ISSUE#:627; DATE:2020-03-10
+			byte[] subpage_ttl_escaped = Xoh_html_wtr_escaper.Escape(wiki.Appe().Parser_amp_mgr(), subpage_caption_bfr, subpage_ttl_bry);
+
 			// add to subpage trail
 			// NOTE: convert underscore to space; ISSUE#:308 PAGE:en.v:Computer-aided_design/Software DATE:2018-12-23
 			fmtr_itm.Bld_bfr(bfr, delimiter
 				, Bry_.Add(Xoh_href_.Bry__wiki, subpage_ttl.Full_url()) // EX: /wiki/Help:A
-				, Xoa_ttl.Replace_unders(subpage_ttl_bry)
+				, Xoa_ttl.Replace_unders(subpage_ttl_escaped)
 				, Xoa_ttl.Replace_unders(subpage_caption));
 		}
 		path_bfr.Clear();

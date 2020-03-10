@@ -32,6 +32,13 @@ public class Xoh_subpages_bldr_tst {
 		, "</span>"
 		));
 	}
+	@Test  public void Underscore_quote() { // PURPOSE: escape " as &quot; PAGE:en.s:A_Critical_Examination_of_Dr_G._Birkbeck_Hills_"Johnsonian"_Editions/The_Preface_and_Dedication; ISSUE#:627; DATE:2020-03-10
+		fxt.Init__Create_pages("Help:A", "Help:A/\"B\"");
+		fxt.Test__Parse("Help:A/\"B\"/C", String_.Concat_lines_nl_skip_last
+		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A\" title=\"Help:A\">Help:A</a>&lrm; | <a href=\"/wiki/Help:A/%22B%22\" title=\"Help:A/&quot;B&quot;\">\"B\"</a>"
+		, "</span>"
+		));
+	}
 	@Test  public void Skip_page_ns() {
 		fxt.Init__Page_ns();
 		fxt.Test__Parse("Page:A/B/C", "");
