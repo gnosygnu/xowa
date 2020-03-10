@@ -81,7 +81,7 @@ public class Xop_redirect_mgr {
 			byte[] display_ttl = Xoa_ttl.Replace_unders(redirect_itm.Ttl().Full_db());
 			redirect_bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href)	// '<a href="'
 				.Add(Xoh_href_.Bry__wiki)					// '/wiki/'
-				.Add(redirect_itm.Ttl().Full_db_href())     // 'PageA'
+				.Add(redirect_itm.Ttl().Full_db_url())      // 'PageA'
 				.Add(Bry_redirect_arg)						// ?redirect=no
 				.Add(Gfh_bldr_.Bry__cls__nth)               // '" class="'
 				.Add_str_a7("mw-redirect")                  // mw-redirect // NOTE:MW does this differently, but for now, manually add; REF.MW:https://github.com/wikimedia/mediawiki/blob/82311f8c2c79bc469cae14e17546fd79d3541b76/includes/linker/LinkRenderer.php#L479
