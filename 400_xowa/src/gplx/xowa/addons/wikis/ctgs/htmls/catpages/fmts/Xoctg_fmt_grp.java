@@ -45,14 +45,11 @@ public class Xoctg_fmt_grp {	// subc|page|file
 		byte[] nav_html = this.Bld_bwd_fwd(wiki, ctg_ttl, dom_grp, grp_max);
 
 		// according to mediawiki/includes/CategoryViewer.php cutoff default is 6
-		byte[] startdiv, enddiv;
-		if (count > 6) {
-			startdiv = Bry_.new_a7("<div class=\"mw-category\">");
-			enddiv = Bry_.new_a7("</div>");
-		} else {
-			startdiv = Bry_.Empty;
-			enddiv = Bry_.Empty;
-		}
+		byte[] startdiv = Bry_.Empty, enddiv = Bry_.Empty;
+//			if (count > 6) {
+//				startdiv = Bry_.new_a7("<div class=\"mw-category\">");
+//				enddiv = Bry_.new_a7("</div>");
+//			}
 		// init grp; write
 		itms_fmt.Init_from_grp(wiki, dom_grp, ltr_extractor);
 		Fmt__ctg.Bld_many(bfr, div_id, msg_label_bry, msg_stats_bry, nav_html, lang.Key_bry(), lang.Dir_ltr_bry(), startdiv, itms_fmt, enddiv);
