@@ -243,6 +243,13 @@ public class XophpArray__tst { // REF:https://www.php.net/manual/en/function.arr
 			, XophpArray_.array_flip(orig)
 			);
 	}
+	@Test  public void implode() {
+		XophpArray orig = fxt.Make().Add_many("a", "b", "c");
+		Gftest.Eq__str
+			( "a b c"
+			, XophpArray_.implode(" ", orig)
+			);
+	}
 }
 class XophpArray__fxt {
 	public XophpArray Make() {return new XophpArray();}

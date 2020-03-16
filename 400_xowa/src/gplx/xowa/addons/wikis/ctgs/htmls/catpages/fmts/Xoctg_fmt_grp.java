@@ -20,32 +20,42 @@ import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addon
 public class Xoctg_fmt_grp {	// subc|page|file
 	private final    byte tid;
 	private final    byte[] div_id, url_arg_bgn, url_arg_end;
-	private final    int msg_label_id, msg_stats_id;
+	private final    byte[] msg_label_key, msg_stats_key;
 	private final    Xoctg_fmt_ltr itms_fmt;
-	Xoctg_fmt_grp(byte tid, Xoctg_fmt_itm_base itm_fmt, int msg_label_id, int msg_stats_id, byte[] url_arg_bgn, byte[] url_arg_end, byte[] div_id) {
+	Xoctg_fmt_grp(byte tid, Xoctg_fmt_itm_base itm_fmt, byte[] msg_label_key, byte[] msg_stats_key, byte[] url_arg_bgn, byte[] url_arg_end, byte[] div_id) {
 		this.tid = tid;
 		this.itm_fmt = itm_fmt;
 		this.itms_fmt = new Xoctg_fmt_ltr(itm_fmt);
-		this.msg_label_id = msg_label_id; this.msg_stats_id = msg_stats_id;
+		this.msg_label_key = msg_label_key; this.msg_stats_key = msg_stats_key;
 		this.url_arg_bgn = url_arg_bgn; this.url_arg_end = url_arg_end; this.div_id = div_id;
 	}
 	public Xoctg_fmt_itm_base Itm_fmt() {return itm_fmt;} private final    Xoctg_fmt_itm_base itm_fmt;
 	public void Write_catpage_grp(Bry_bfr bfr, Xow_wiki wiki, Xol_lang_itm lang, Uca_ltr_extractor ltr_extractor, Xoctg_catpage_ctg dom_ctg, int grp_max) {	// TEST:
 		Xoctg_catpage_grp dom_grp = dom_ctg.Grp_by_tid(tid);
-		if (dom_grp.Count_all() == 0) return;	// no items in grp; EX: 0 items in File
+		int count = dom_grp.Count_all();
+		if (count == 0) return;	// no items in grp; EX: 0 items in File
 
 		// get msgs
 		Xow_msg_mgr msg_mgr = wiki.Msg_mgr();
-		byte[] msg_label_bry = msg_mgr.Val_by_id_args(msg_label_id, dom_ctg.Name());
-		byte[] msg_stats_bry = msg_mgr.Val_by_id_args(msg_stats_id, dom_grp.Itms__len(), dom_grp.Count_all());
+		byte[] msg_label_bry = msg_mgr.Val_by_key_args(msg_label_key, dom_ctg.Name());
+		byte[] msg_stats_bry = msg_mgr.Val_by_key_args(msg_stats_key, dom_grp.Itms__len(), lang.Num_mgr().Format_num(count));
 
 		// get nav html; next / previous 200
 		Xoa_ttl ctg_ttl = wiki.Ttl_parse(Xow_ns_.Tid__category, dom_ctg.Name());
 		byte[] nav_html = this.Bld_bwd_fwd(wiki, ctg_ttl, dom_grp, grp_max);
 
+		// according to mediawiki/includes/CategoryViewer.php cutoff default is 6
+		byte[] startdiv, enddiv;
+		if (count > 6) {
+			startdiv = Bry_.new_a7("<div class=\"mw-category\">");
+			enddiv = Bry_.new_a7("</div>");
+		} else {
+			startdiv = Bry_.Empty;
+			enddiv = Bry_.Empty;
+		}
 		// init grp; write
 		itms_fmt.Init_from_grp(wiki, dom_grp, ltr_extractor);
-		Fmt__ctg.Bld_many(bfr, div_id, msg_label_bry, msg_stats_bry, nav_html, lang.Key_bry(), lang.Dir_ltr_bry(), itms_fmt);
+		Fmt__ctg.Bld_many(bfr, div_id, msg_label_bry, msg_stats_bry, nav_html, lang.Key_bry(), lang.Dir_ltr_bry(), startdiv, itms_fmt, enddiv);
 	}
 	public byte[] Bld_bwd_fwd(Xow_wiki wiki, Xoa_ttl ttl, Xoctg_catpage_grp view_grp, int grp_max) {	// TEST:
 		if (view_grp.Count_all() < grp_max) return Bry_.Empty;	// NOTE: must be "<", not "<="; FOOTNOTE:LT_NOT_LTE; DATE:2019-12-14
@@ -94,16 +104,27 @@ public class Xoctg_fmt_grp {	// subc|page|file
 	, "  <h2>~{msg_label_bry}</h2>"
 	, "  <p>~{msg_stats_bry}</p>~{nav_html}"
 	, "  <div lang=\"~{lang_key}\" dir=\"~{lang_ltr}\" class=\"mw-content-~{lang_ltr}\">"
-	, "    <table style=\"width: 100%;\">"
+	, "    ~{startdiv}<table style=\"width: 100%;\">"
 	, "      <tr style=\"vertical-align: top;\">~{grps}"
 	, "      </tr>"
-	, "    </table>"
+	, "    </table>~{enddiv}"
 	, "  </div>~{nav_html}"
 	, "</div>"
 	);
-	public static Xoctg_fmt_grp New__subc() {return new Xoctg_fmt_grp(Xoa_ctg_mgr.Tid__subc, new Xoctg_fmt_itm_subc(), Xol_msg_itm_.Id_ctg_subc_header, Xol_msg_itm_.Id_ctg_subc_count, Xoctg_catpage_url_parser.Bry__arg_subc_bgn, Xoctg_catpage_url_parser.Bry__arg_subc_end, Bry_.new_a7("mw-subcategories"));}
-	public static Xoctg_fmt_grp New__page() {return new Xoctg_fmt_grp(Xoa_ctg_mgr.Tid__page, new Xoctg_fmt_itm_page(), Xol_msg_itm_.Id_ctg_page_header, Xol_msg_itm_.Id_ctg_page_count, Xoctg_catpage_url_parser.Bry__arg_page_bgn, Xoctg_catpage_url_parser.Bry__arg_page_end, Bry_.new_a7("mw-pages"));}
-	public static Xoctg_fmt_grp New__file() {return new Xoctg_fmt_grp(Xoa_ctg_mgr.Tid__file, new Xoctg_fmt_itm_file(), Xol_msg_itm_.Id_ctg_file_header, Xol_msg_itm_.Id_ctg_file_count, Xoctg_catpage_url_parser.Bry__arg_file_bgn, Xoctg_catpage_url_parser.Bry__arg_file_end, Bry_.new_a7("mw-category-media"));}
+	public static Xoctg_fmt_grp New__subc() {return new Xoctg_fmt_grp(Xoa_ctg_mgr.Tid__subc, new Xoctg_fmt_itm_subc(), Ctg_subc_header, Ctg_subc_count, Xoctg_catpage_url_parser.Bry__arg_subc_bgn, Xoctg_catpage_url_parser.Bry__arg_subc_end, Mw_subcategories);}
+	public static Xoctg_fmt_grp New__page() {return new Xoctg_fmt_grp(Xoa_ctg_mgr.Tid__page, new Xoctg_fmt_itm_page(), Ctg_page_header, Ctg_page_count, Xoctg_catpage_url_parser.Bry__arg_page_bgn, Xoctg_catpage_url_parser.Bry__arg_page_end, Mw_pages);}
+	public static Xoctg_fmt_grp New__file() {return new Xoctg_fmt_grp(Xoa_ctg_mgr.Tid__file, new Xoctg_fmt_itm_file(), Ctg_file_header, Ctg_file_count, Xoctg_catpage_url_parser.Bry__arg_file_bgn, Xoctg_catpage_url_parser.Bry__arg_file_end, Mw_category_media);}
+	private static byte[]
+	  Ctg_subc_header = Bry_.new_a7("subcategories")
+	, Ctg_subc_count = Bry_.new_a7("category-subcat-count")
+	, Mw_subcategories = Bry_.new_a7("mw-subcategories")
+	, Ctg_page_header = Bry_.new_a7("category_header")
+	, Ctg_page_count = Bry_.new_a7("category-article-count")
+	, Mw_pages = Bry_.new_a7("mw-pages")
+	, Ctg_file_header = Bry_.new_a7("category-media-header")
+	, Ctg_file_count = Bry_.new_a7("category-file-count")
+	, Mw_category_media = Bry_.new_a7("mw-category-media")
+	;
 }
 /*
 == LT_NOT_LTE ==

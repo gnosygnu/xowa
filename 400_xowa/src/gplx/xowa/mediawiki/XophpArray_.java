@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+import gplx.core.strings.*;
 public class XophpArray_ {
 	public static XophpArray array_merge(XophpArray... vals) {
 		XophpArray rv = new XophpArray();
@@ -163,5 +164,16 @@ public class XophpArray_ {
 			rv.Set(Object_.Xto_str_strict_or_null(itm.Val()), itm.Key());
 		}
 		return rv;
+	}
+
+	// REF.PHP:https://www.php.net/manual/en/function.implode.php
+	public static String implode(String glue, XophpArray pieces) {
+		String_bldr sb = String_bldr_.new_();
+		int len = pieces.count();
+		for (int i = 0; i < len; i++) {
+			if (i != 0) sb.Add(glue);
+			sb.Add(pieces.Get_at_str(i));
+		}
+		return sb.To_str_and_clear();
 	}
 }
