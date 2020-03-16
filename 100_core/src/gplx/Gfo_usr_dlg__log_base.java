@@ -87,7 +87,9 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 		catch (Exception e) {Err_.Noop(e);}			// java.lang.StringBuilder can throw exceptions in some situations when called on a different thread; ignore errors
 	}	private String_bldr sb = String_bldr_.new_thread();	// NOTE: use java.lang.StringBuffer to try to avoid random exceptions when called on a different thread
 	private String Bld_msg(String s) {
-		return sb.Add(Datetime_now.Get_force().XtoUtc().XtoStr_fmt_yyyyMMdd_HHmmss_fff()).Add(" ").Add(s).Add_char_nl().To_str_and_clear();
+		synchronized (thread_lock) { // THREAD:synchronized neded b/c multiple threads can still mutate the same sb; ISSUE#:646; DATE:2020-03-16
+			return sb.Add(Datetime_now.Get_force().XtoUtc().XtoStr_fmt_yyyyMMdd_HHmmss_fff()).Add(" ").Add(s).Add_char_nl().To_str_and_clear();
+		}
 	}
 	private void Log_msg(Io_url url, String txt) {
 		synchronized (thread_lock) { // THREAD:synchronized neded b/c queued_list can be accessible by multiple threads; ISSUE#:646; DATE:2020-01-09
