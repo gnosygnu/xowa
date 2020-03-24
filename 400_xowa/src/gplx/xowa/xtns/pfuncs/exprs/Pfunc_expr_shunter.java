@@ -95,6 +95,7 @@ public class Pfunc_expr_shunter {
 							}
 							if (num == null) return Null_rslt;
 						}
+						num = num.Round_to_default_precision(); // PURPOSE: number should be set to precision of 14; PAGE:de.wikipedia.org/wiki/Nationalpark_Mu_Ko_Ang_Thong ISSUE#:683 DATE:2020-03-24
 						val_stack.Push(num);
 						mode_expr = false;
 						break;

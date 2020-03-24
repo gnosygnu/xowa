@@ -80,6 +80,9 @@ public class Decimal_adp implements CompareAble {
 		} 
 		return new Decimal_adp(new_val);
 	}
+	public Decimal_adp Round_to_default_precision() {
+		return new Decimal_adp(under.round(Decimal_adp_.Gplx_rounding_context));
+	}
 	public boolean Comp_gte(Decimal_adp v) 				{return under.doubleValue() >= v.under.doubleValue();}
 	public boolean Comp_gte(int v) 						{return under.doubleValue() >= v;}
 	public boolean Comp_lte(Decimal_adp v) 				{return under.doubleValue() <= v.under.doubleValue();}

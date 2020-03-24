@@ -23,7 +23,9 @@ class Func_tkn_ln extends Func_tkn_base {
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {
 		Decimal_adp val = val_stack.Pop();
 		if (val.Comp_lte(0)) {shunter.Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_invalid_argument_ln); return false;}		
-		val_stack.Push(Decimal_adp_.double_(Math_.Log(val.To_double())));
+		val = Decimal_adp_.double_(Math_.Log(val.To_double()));
+		val = val.Round_to_default_precision();// NOTE: needed for test; may need to apply to other ops; DATE:2020-03-24
+		val_stack.Push(val);
 		return true;
 	}
 }

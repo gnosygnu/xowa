@@ -112,4 +112,7 @@ public class Pfunc_expr_tst {
 	@Test  public void Exc_unrecognized_word_ornot()			{fxt.Test_parse_tmpl_str_test("{{#expr:0ornot0}}"			, "{{test}}"	, "<strong class=\"error\">Expression error: Unrecognised word \"ornot\"</strong>");}	// PURPOSE: handle nan; EX: w:Help:Calculation
 	@Test  public void Exc_unrecognized_word_notnot()			{fxt.Test_parse_tmpl_str_test("{{#expr:notnot0}}"			, "{{test}}"	, "<strong class=\"error\">Expression error: Unrecognised word \"notnot\"</strong>");}	// PURPOSE: handle nan; EX: w:Help:Calculation
 	@Test  public void Exc_unrecognized_word_sinln()			{fxt.Test_parse_tmpl_str_test("{{#expr:sinln1.1}}"			, "{{test}}"	, "<strong class=\"error\">Expression error: Unrecognised word \"sinln\"</strong>");}	// PURPOSE: handle nan; EX: w:Help:Calculation
+	@Test  public void Num_precision() {// PURPOSE: number should be set to precision of 14; PAGE:de.wikipedia.org/wiki/Nationalpark_Mu_Ko_Ang_Thong ISSUE#:683 DATE:2020-03-24
+		fxt.Test__parse__tmpl_to_html("{{#expr:15.064329981401556}}", "15.064329981402"); // fails if 15.06432998140155
+	}
 }
