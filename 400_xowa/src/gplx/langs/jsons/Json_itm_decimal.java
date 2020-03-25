@@ -24,8 +24,11 @@ public class Json_itm_decimal extends Json_itm_base {
 		return data_bry;
 	}
 	public Decimal_adp Data_as_decimal() {
-		if (data == null)
-			data = Decimal_adp_.parse(String_.new_a7(this.Data_bry()));
+		if (data == null) {
+			String s = String_.new_a7(this.Data_bry());
+			s = String_.Replace(s, "e", "E"); // exponent can be either "e" or "E" in JSON, but Java decimal parse only takes "E"; ISSUE#:565; DATE:2020-03-25
+			data = Decimal_adp_.parse(s);
+		}
 		return data;
 	}
 	@Override public void Print_as_json(Bry_bfr bfr, int depth) {bfr.Add_mid(doc.Src(), this.Src_bgn(), this.Src_end());}

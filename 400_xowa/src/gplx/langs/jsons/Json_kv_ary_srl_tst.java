@@ -20,6 +20,7 @@ public class Json_kv_ary_srl_tst {
 	@Test   public void Null()					{fxt.Test_parse("{'k0':null}"					, fxt.ary_(fxt.kv_str_("k0", null)));}
 	@Test   public void Bool_n()				{fxt.Test_parse("{'k0':false}"					, fxt.ary_(fxt.kv_bool_("k0", false)));}
 	@Test   public void Num()					{fxt.Test_parse("{'k0':123}"					, fxt.ary_(fxt.kv_int_("k0", 123)));}
+	@Test   public void Num_exp()               {fxt.Test_parse("{'k0':1.23e2}"					, fxt.ary_(fxt.kv_int_("k0", 123)));} // exponent can be either "e" or "E" in JSON, but Java decimal parse only takes "E"; ISSUE#:565; DATE:2020-03-25
 	@Test   public void Str()					{fxt.Test_parse("{'k0':'v0'}"					, fxt.ary_(fxt.kv_str_("k0", "v0")));}
 	@Test   public void Num_dec()				{fxt.Test_parse("{'k0':1.23}"					, fxt.ary_(fxt.kv_dec_("k0", Decimal_adp_.parse("1.23"))));}
 	@Test   public void Ary_int()				{fxt.Test_parse("{'k0':[1,2,3]}"				, fxt.ary_(fxt.kv_obj_("k0", fxt.ary_(fxt.kv_int_("1", 1), fxt.kv_int_("2", 2), fxt.kv_int_("3", 3)))));}

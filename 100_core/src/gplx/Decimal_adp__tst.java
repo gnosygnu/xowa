@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import org.junit.*;
 public class Decimal_adp__tst {
-	private final Decimal_adp__fxt fxt = new Decimal_adp__fxt();
+	private final    Decimal_adp__fxt fxt = new Decimal_adp__fxt();
 	@Test  public void divide_() {
 		fxt.Test_divide(1, 1000, "0.001");
 		fxt.Test_divide(1, 3, "0.33333333333333");	
@@ -37,6 +37,7 @@ public class Decimal_adp__tst {
 		fxt.Test_parse("1", "1");
 		fxt.Test_parse("1.2", "1.2");
 		fxt.Test_parse("0.1", "0.1");
+		fxt.Test_parse("1.2E1", "12");
 	}
 	@Test  public void Truncate_decimal() {
 		fxt.Test_truncate_decimal("1", "1");
