@@ -107,12 +107,16 @@ public class Xow_portal_mgr implements Gfo_invk {
 
 	public byte[] Div_personal_bry(boolean from_hdump) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
+		Xoh_href_wtr href_wtr = wiki.Html__href_wtr();
 		byte[] wiki_user_name = wiki.User().Name();
+		byte[] user_href = href_wtr.Build_to_bry(wiki, Bry_.Add(wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user).Name_db_w_colon(), wiki_user_name));
+		byte[] talk_href = href_wtr.Build_to_bry(wiki, Bry_.Add(wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user_talk).Name_db_w_colon(), wiki_user_name));
+
 		byte[] rv = Init_fmtr(tmp_bfr, wiki.Eval_mgr(), div_personal_fmtr
-			, Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user).Name_db_w_colon(), wiki_user_name)
+			, user_href
 			, wiki_user_name
 			, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Tid__user)
-			, Bry_.Add(Xoh_href_.Bry__wiki, wiki.Ns_mgr().Ids_get_or_null(Xow_ns_.Tid__user_talk).Name_db_w_colon(), wiki_user_name)
+			, talk_href
 			, Ns_cls_by_id(wiki.Ns_mgr(), Xow_ns_.Tid__user_talk)
 			, indicators_pagesource_enabled
 				? (from_hdump ? indicators_pagesource_html : indicators_pagesource_wtxt)
@@ -136,9 +140,10 @@ public class Xow_portal_mgr implements Gfo_invk {
 		}
 
 		// NOTE: need to escape args href for Search page b/c user can enter in quotes and apos; EX:localhost:8080/en.wikipedia.org/wiki/Special:XowaSearch?search=title:(%2Breturn%20%2B"abc") ; DATE:2017-07-16
+		Xoh_href_wtr href_wtr = wiki.Html__href_wtr();
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
-		byte[] subj_href = Xoh_html_wtr_escaper.Escape(Xop_amp_mgr.Instance, tmp_bfr, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Subj_url()));
-		byte[] talk_href = Xoh_html_wtr_escaper.Escape(Xop_amp_mgr.Instance, tmp_bfr, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Talk_url()));
+		byte[] subj_href = href_wtr.Build_to_bry(wiki, ttl.Subj_txt());
+		byte[] talk_href = href_wtr.Build_to_bry(wiki, ttl.Talk_txt());
 
 		div_ns_fmtr.Bld_bfr_many(tmp_bfr, subj_href, subj_cls, talk_href, talk_cls, vnt_menu);
 		return tmp_bfr.To_bry_and_rls();
@@ -152,7 +157,13 @@ public class Xow_portal_mgr implements Gfo_invk {
 		return ns == null || ns.Exists() ? Bry_.Empty : missing_ns_cls;			
 	}
 	public byte[] Div_view_bry(Bry_bfr_mkr bfr_mkr, byte output_tid, byte[] search_text, Xoa_ttl ttl) {
+		// generate url-encoded ttls for view / edit / html; ISSUE#:572 PAGE:en.w:.07%; DATE:2020-03-28
 		Bry_bfr tmp_bfr = bfr_mkr.Get_k004();
+		Xoh_href_wtr href_wtr = wiki.Html__href_wtr();
+		byte[] view_ttl = href_wtr.Build_to_bry(tmp_bfr, wiki, ttl);
+		byte[] edit_ttl = href_wtr.Build_to_bry_w_qargs(tmp_bfr, wiki, ttl, Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__edit);
+		byte[] html_ttl = href_wtr.Build_to_bry_w_qargs(tmp_bfr, wiki, ttl, Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__html);
+
 		byte[] read_cls = Bry_.Empty, edit_cls = Bry_.Empty, html_cls = Bry_.Empty;
 		switch (output_tid) {
 			case Xopg_view_mode_.Tid__read: read_cls = Cls_selected_y; break;
@@ -160,12 +171,10 @@ public class Xow_portal_mgr implements Gfo_invk {
 			case Xopg_view_mode_.Tid__html: html_cls = Cls_selected_y; break;
 		}
 
-		// build url_fragment with action query argument; EX: "/wiki/Page_name?action="
-		byte[] url_frag_w_action_qarg = Bry_.Add(Xoh_href_.Bry__wiki, ttl.Full_db(), Byte_ascii.Question_bry, Xoa_url_.Qarg__action, Byte_ascii.Eq_bry);
 		div_view_fmtr.Bld_bfr_many(tmp_bfr, read_cls, edit_cls, html_cls, search_text
-			, Bry_.Add(Xoh_href_.Bry__wiki, ttl.Full_db())
-			, Bry_.Add(url_frag_w_action_qarg, Xoa_url_.Qarg__action__edit)
-			, Bry_.Add(url_frag_w_action_qarg, Xoa_url_.Qarg__action__html)
+			, view_ttl
+			, edit_ttl
+			, html_ttl
 			, wiki.Props().Site_name()
 			);
 
@@ -198,6 +207,9 @@ public class Xow_portal_mgr implements Gfo_invk {
 	, div_wikis_fmtr = Bry_fmtr.new_("", "toggle_btn", "toggle_hdr")
 	;
 	public Bry_fmtr Div_logo_fmtr() {return div_logo_fmtr;} // TEST:
+	public Bry_fmtr Div_view_fmtr() {return div_view_fmtr;} // TEST:
+	public Bry_fmtr Div_ns_fmtr() {return div_ns_fmtr;} // TEST:
+	public Bry_fmtr Div_personal_fmtr() {return div_personal_fmtr;} // TEST:
 	private byte[] Reverse_li(byte[] bry) {
 		return lang_is_rtl ? Xoh_rtl_utl.Reverse_li(bry) : bry;
 	}

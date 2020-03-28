@@ -20,9 +20,29 @@ import gplx.xowa.wikis.xwikis.*;
 public class Xoh_href_wtr {	// TS:do not move to app-level
 	private final    Gfo_url_encoder encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
 	private final    Bry_bfr encoder_bfr = Bry_bfr_.Reset(255), tmp_bfr = Bry_bfr_.Reset(255);
+	public byte[] Build_to_bry(Xow_wiki wiki, byte[] ttl_bry) {
+		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
+		Build_to_bfr(tmp_bfr, wiki.App(), Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
+		return tmp_bfr.To_bry_and_clear();
+	}
 	public byte[] Build_to_bry(Xow_wiki wiki, Xoa_ttl ttl) {
 		Build_to_bfr(tmp_bfr, wiki.App(), Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);
 		return tmp_bfr.To_bry_and_clear();
+	}
+	public byte[] Build_to_bry(Bry_bfr tmp, Xow_wiki wiki, Xoa_ttl ttl) {
+		this.Build_to_bfr(tmp, wiki.App(), wiki.Domain_bry(), ttl);
+		return tmp.To_bry_and_clear();
+	}
+	public byte[] Build_to_bry_w_qargs(Bry_bfr tmp, Xow_wiki wiki, Xoa_ttl ttl, byte[]... qargs_ary) {
+		this.Build_to_bfr(tmp, wiki.App(), wiki.Domain_bry(), ttl);
+		int qargs_len = qargs_ary.length / 2;
+		for (int i = 0; i < qargs_len; i++) {
+			tmp.Add_byte(i == 0 ? Byte_ascii.Question : Byte_ascii.Eq);
+			tmp.Add(qargs_ary[i]);
+			tmp.Add_byte(Byte_ascii.Eq);
+			tmp.Add(qargs_ary[i + 1]);
+		}
+		return tmp.To_bry_and_clear();
 	}
 	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, byte[] domain_bry, Xoa_ttl ttl) {Build_to_bfr(bfr, app, Xoh_wtr_ctx.Basic, domain_bry, ttl);}
 	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, Xoh_wtr_ctx hctx, byte[] domain_bry, Xoa_ttl ttl) { // given ttl, write href; EX: A -> '/wiki/A' 
