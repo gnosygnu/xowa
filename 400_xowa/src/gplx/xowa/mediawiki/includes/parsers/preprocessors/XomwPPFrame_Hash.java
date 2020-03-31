@@ -54,7 +54,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	/**
 	* @var array
 	*/
-	protected XophpArray childExpansionCache;
+	public XophpArray childExpansionCache;
 
 	/**
 	* Construct a new preprocessor frame.
@@ -64,7 +64,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 		this.preprocessor = preprocessor;
 		this.parser = preprocessor.Parser();
 		this.title = this.parser.mTitle;
-		this.titleCache = XophpArray.New().Add(XophpObject_.is_true(this.title) ? this.title.getPrefixedDBkeyStr() : XophpString_.Null);
+		this.titleCache = XophpArray.New().Add(XophpObject_.is_true(this.title) ? this.title.getPrefixedDBkeyStr() : XophpString_.False);
 		this.loopCheckHash = XophpArray.New();
 		this.depth = 0;
 		this.childExpansionCache = XophpArray.New();
@@ -214,7 +214,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			}
 
 			Object newIterator = XophpObject_.False;
-			String contextName = XophpString_.Null;
+			String contextName = XophpString_.False;
 			XophpArray contextChildren = XophpArray.False;
 
 			if (!XophpObject_.is_true(contextNode)) {
@@ -523,7 +523,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			return this.title.getPrefixedDBkeyStr();
 		} else {
 			// return isset( $this->titleCache[$level] ) ? $this->titleCache[$level] : false;
-			return this.titleCache.count() > 0 ? ((String)this.titleCache.Get_at(0)) : XophpString_.Null;
+			return this.titleCache.count() > 0 ? ((String)this.titleCache.Get_at(0)) : XophpString_.False;
 		}
 	}
 
@@ -562,7 +562,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @return boolean Always false in this implementation.
 	*/
 	@Override public String getArgument(String name) {
-		return XophpString_.Null;
+		return XophpString_.False;
 	}
 
 	/**

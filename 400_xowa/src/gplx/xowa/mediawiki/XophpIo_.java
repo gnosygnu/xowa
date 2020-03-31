@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpIo_ {
 	public static String file_get_contents(String path) {
 		String rv = Io_mgr.Instance.LoadFilStr(path);
-		return String_.Eq(rv, String_.Empty) ? XophpString_.Null : rv;
+		return String_.Eq(rv, String_.Empty) ? XophpString_.False : rv;
 	}
 	public static boolean file_exists(String path) {
 		return Io_mgr.Instance.ExistsFil(Io_url_.new_fil_(path));

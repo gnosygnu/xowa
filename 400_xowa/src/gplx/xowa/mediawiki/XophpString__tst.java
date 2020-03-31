@@ -94,6 +94,48 @@ public class XophpString__tst {
 		// REF.MW:https://www.php.net/manual/en/function.trim.php
 		fxt.Test__rtrim("\u00A0µ déjà\u00A0", "\u00A0", "\u00A0µ déj�");// NOTE: technically should be "...j\xC3", but String_.new_u8 ignores invalid bytes
 	}
+    @Test  public void ltrim() {
+		// pad is 0, 1 char
+		fxt.Test__ltrim("0010", "", "0010"); // empty pad returns String
+		fxt.Test__ltrim("010", "0", "10"); // basic test; trim 1;
+		fxt.Test__ltrim("0010", "0", "10"); // basic test; trim 2;
+		fxt.Test__ltrim("10", "0", "10"); // nothing to trim
+
+		// pad is 2+char
+		fxt.Test__ltrim("10ab10", "01", "ab10"); // basic test
+		fxt.Test__ltrim("10ab10", "34", "10ab10"); // nothing to trim
+		fxt.Test__ltrim("10ab10", "010", "ab10"); // don't fail if repeated chars
+
+		// pad has ..
+		fxt.Test__ltrim("23ab23", "0..4", "ab23"); // basic test
+		fxt.Test__ltrim(".23ab23", "0.4", "23ab23"); // single dot is not range
+
+		// PHP samples
+		fxt.Test__ltrim("\t\tThese are a few words :) ...  ", " \t.", "These are a few words :) ...  ");
+		fxt.Test__ltrim("Hello World", "Hdle", "o World");
+		fxt.Test__ltrim("\u0009Example String\n", "\u0000..\u001F", "Example String\n");
+	}
+    @Test  public void trim() {
+		// pad is 0, 1 char
+		fxt.Test__trim("0010", "", "0010"); // empty pad returns String
+		fxt.Test__trim("010", "0", "1"); // basic test; trim 1;
+		fxt.Test__trim("00100", "0", "1"); // basic test; trim 2;
+		fxt.Test__trim("10", "0", "1"); // nothing to trim
+
+		// pad is 2+char
+		fxt.Test__trim("10ab10", "01", "ab"); // basic test
+		fxt.Test__trim("10ab10", "34", "10ab10"); // nothing to trim
+		fxt.Test__trim("10ab10", "010", "ab"); // don't fail if repeated chars
+
+		// pad has ..
+		fxt.Test__trim("23ab23", "0..4", "ab"); // basic test
+		fxt.Test__trim(".23ab23.", "0.4", "23ab23"); // single dot is not range
+
+		// PHP samples
+		fxt.Test__trim("\t\tThese are a few words :) ...  ", " \t.", "These are a few words :)");
+		fxt.Test__trim("Hello World", "Hdle", "o Wor");
+		fxt.Test__trim("\u0009Example String\n", "\u0000..\u001F", "Example String");
+	}
 	@Test  public void ord() {
 		fxt.Test__ord("a", 97); // 1 char
 		fxt.Test__ord("abc", 97); // 2+ chars takes first
@@ -167,6 +209,12 @@ class XophpString__fxt {
 			return;
 		}
 		Gftest.Fail("expected failure, but got none: " + character_mask);
+	}
+	public void Test__ltrim(String str, String character_mask, String expd) {
+		Gftest.Eq__str(expd, XophpString_.ltrim(str, character_mask));
+	}
+	public void Test__trim(String str, String character_mask, String expd) {
+		Gftest.Eq__str(expd, XophpString_.trim(str, character_mask));
 	}
 	public void Test__ord(String str, int expd) {
 		Gftest.Eq__int(expd, XophpString_.ord(str));
