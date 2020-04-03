@@ -133,13 +133,14 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	/**
 	* @return PPNode_Hash_Array
 	*/
-	public XomwPPNode_Hash_Array getChildren() {
-//			children = [];
-//			foreach (this.rawChildren as i => child) {
-//				children[] = self::factory(this.rawChildren, i);
-//			}
-//			return new PPNode_Hash_Array(children);
-		return null;
+	@Override public XomwPPNode_Hash_Array getChildren() {
+		XophpArray children = XophpArray.New();
+		int rawChildrenLen = rawChildren.Len();
+		for (int i = 0; i < rawChildrenLen; i++) {
+			XophpArrayItm itm = rawChildren.Get_at_itm(i);
+			children.Add(XomwPPNode_Hash_Tree.factory(this.rawChildren, itm.Key_as_int()));
+		}
+		return new XomwPPNode_Hash_Array(children);
 	}
 
 	/**
@@ -169,45 +170,47 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 		return factory(this.store, this.index + 1);
 	}
 
-//		/**
-//		* Get an array of the children with a given node name
-//		*
-//		* @param String name
-//		* @return PPNode_Hash_Array
-//		*/
-//		public function getChildrenOfType(name) {
-//			children = [];
-//			foreach (this.rawChildren as i => child) {
-//				if (is_array(child) && child[self::NAME] === name) {
-//					children[] = self::factory(this.rawChildren, i);
-//				}
-//			}
-//			return new PPNode_Hash_Array(children);
-//		}
+	/**
+	* Get an array of the children with a given node name
+	*
+	* @param String name
+	* @return PPNode_Hash_Array
+	*/
+	@Override public XomwPPNode_Hash_Array getChildrenOfType(String name) {
+		XophpArray children = XophpArray.New();
+		int rawChildren_len = this.rawChildren.Len();
+		for (int idx = 0; idx < rawChildren_len; idx++) {
+			XophpArrayItm itm = this.rawChildren.Get_at_itm(idx);
+			Object child = itm.Val();
+			if (XophpType_.is_array(child) && String_.Eq(((XophpArray)child).Get_at_str(XomwPPNode_Hash_Tree.NAME), name)) {
+				children.Add(XomwPPNode_Hash_Tree.factory(this.rawChildren, itm.Key_as_int()));
+			}
+		}
+		return new XomwPPNode_Hash_Array(children);
+	}
 
 	/**
 	* Get the raw child array. For @gplx.Internal protected use.
 	* @return array
 	*/
 	public XophpArray getRawChildren() {
-//			return this.rawChildren;
-		return null;
+		return this.rawChildren;
 	}
 
-//		/**
-//		* @return boolean
-//		*/
-//		public function getLength() {
-//			return false;
-//		}
-//
-//		/**
-//		* @param int i
-//		* @return boolean
-//		*/
-//		public function item(i) {
-//			return false;
-//		}
+	/**
+	* @return boolean
+	*/
+	@Override public int getLength() {
+		return XophpInt_.False;
+	}
+
+	/**
+	* @param int i
+	* @return boolean
+	*/
+	@Override public XomwPPNode item(int i) {
+		return null;
+	}
 
 	/**
 	* @return String
@@ -216,59 +219,65 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 		return this.name;
 	}
 
-//		/**
-//		* Split a "<part>" node into an associative array containing:
-//		*  - name          PPNode name
-//		*  - index         String index
-//		*  - value         PPNode value
-//		*
-//		* @throws MWException
-//		* @return array
-//		*/
-//		public function splitArg() {
-//			return self::splitRawArg(this.rawChildren);
-//		}
-//
-//		/**
-//		* Like splitArg() but for a raw child array. For @gplx.Internal protected use only.
-//		*/
-//		public static function splitRawArg(array children) {
-//			bits = [];
-//			foreach (children as i => child) {
-//				if (!is_array(child)) {
-//					continue;
-//				}
-//				if (child[self::NAME] === 'name') {
-//					bits['name'] = new self(children, i);
-//					if (isset(child[self::CHILDREN][0][self::NAME])
-//						&& child[self::CHILDREN][0][self::NAME] === '@index'
-//					) {
-//						bits['index'] = child[self::CHILDREN][0][self::CHILDREN][0];
-//					}
-//				} elseif (child[self::NAME] === 'value') {
-//					bits['value'] = new self(children, i);
-//				}
-//			}
-//
-//			if (!isset(bits['name'])) {
-//				throw new MWException('Invalid brace node passed to ' . __METHOD__);
-//			}
-//			if (!isset(bits['index'])) {
-//				bits['index'] = "";
-//			}
-//			return bits;
-//		}
-//
-//		/**
-//		* Split an "<ext>" node into an associative array containing name, attr, inner and close
-//		* All values in the resulting array are PPNodes. Inner and close are optional.
-//		*
-//		* @throws MWException
-//		* @return array
-//		*/
-//		public function splitExt() {
-//			return self::splitRawExt(this.rawChildren);
-//		}
+	/**
+	* Split a "<part>" node into an associative array containing:
+	*  - name          PPNode name
+	*  - index         String index
+	*  - value         PPNode value
+	*
+	* @throws MWException
+	* @return array
+	*/
+	@Override public XophpArray splitArg() {
+		return XomwPPNode_Hash_Tree.splitRawArg(this.rawChildren);
+	}
+
+	/**
+	* Like splitArg() but for a raw child array. For @gplx.Internal protected use only.
+	*/
+	public static XophpArray splitRawArg(XophpArray children) {
+		XophpArray bits = XophpArray.New();
+		int childrenLen = children.Len();
+		for (int j = 0; j < childrenLen; j++) {
+			XophpArrayItm itm = children.Get_at_itm(j);
+			Object childObj = itm.Val();
+			if (!XophpType_.is_array(childObj)) {
+				continue;
+			}
+			XophpArray child = (XophpArray)childObj;
+			int i = itm.Key_as_int();
+			if (String_.Eq(child.Get_at_str(XomwPPNode_Hash_Tree.NAME), "name")) {
+				bits.Set("name", new XomwPPNode_Hash_Tree(children, i));
+				if (XophpObject_.isset_obj(child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN).Get_at_ary(0).Get_at(XomwPPNode_Hash_Tree.NAME))
+					&& String_.Eq(child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN).Get_at_ary(0).Get_at_str(XomwPPNode_Hash_Tree.NAME), "@index")
+				) {
+					bits.Set("index", child.Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN).Get_at_ary(0).Get_at_ary(XomwPPNode_Hash_Tree.CHILDREN).Get_at(0));
+				}
+			}
+			else if (String_.Eq(child.Get_at_str(XomwPPNode_Hash_Tree.NAME), "value")) {
+				bits.Set("value", new XomwPPNode_Hash_Tree(children, i));
+			}
+		}
+
+		if (!XophpObject_.isset_obj(bits.Get_by("name"))) {
+			throw XomwMWException.New_by_method(XomwPPNode_Hash_Tree.class, "splitRawArg", "Invalid brace node passed to " + "splitRawArg");
+		}
+		if (!XophpObject_.isset_obj(bits.Get_by("index"))) {
+			bits.Set("index", "");
+		}
+		return bits;
+	}
+
+	/**
+	* Split an "<ext>" node into an associative array containing name, attr, inner and close
+	* All values in the resulting array are PPNodes. Inner and close are optional.
+	*
+	* @throws MWException
+	* @return array
+	*/
+	@Override public XophpArray splitExt() {
+		return XomwPPNode_Hash_Tree.splitRawExt(this.rawChildren);
+	}
 
 	/**
 	* Like splitExt() but for a raw child array. For @gplx.Internal protected use only.
@@ -308,7 +317,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	* @throws MWException
 	* @return array
 	*/
-	public XophpArray splitHeading() {
+	@Override public XophpArray splitHeading() {
 		if (!String_.Eq(this.name, "h")) {
 			throw new XomwMWException("Invalid h node passed to " + "splitHeading");
 		}

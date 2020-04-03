@@ -16,12 +16,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.*;
 public class XophpArrayItm implements Bry_bfr_able {
-	XophpArrayItm(boolean key_is_int, String key, Object val) {
+	XophpArrayItm(boolean key_is_int, int key_as_int, String key, Object val) {
 		this.key_is_int = key_is_int;
+		this.key_as_int = key_as_int;
 		this.key = key;
 		this.val = val;
 	}
 	public boolean Key_is_int() {return key_is_int;} private final    boolean key_is_int;
+	public int Key_as_int() {return key_as_int;} private final    int key_as_int;
 	public String Key() {return key;} private final    String key;
 	public Object Val() {return val;} public void Val_(Object v) {this.val = v;} private Object val;
 
@@ -38,6 +40,6 @@ public class XophpArrayItm implements Bry_bfr_able {
 		}
 	}
 
-	public static XophpArrayItm New_int(int key, Object val)    {return new XophpArrayItm(Bool_.Y, Int_.To_str(key), val);}
-	public static XophpArrayItm New_str(String key, Object val) {return new XophpArrayItm(Bool_.N, key             , val);}
+	public static XophpArrayItm New_int(int key, Object val)    {return new XophpArrayItm(Bool_.Y, key, Int_.To_str(key), val);}
+	public static XophpArrayItm New_str(String key, Object val) {return new XophpArrayItm(Bool_.N,  -1, key             , val);}
 }

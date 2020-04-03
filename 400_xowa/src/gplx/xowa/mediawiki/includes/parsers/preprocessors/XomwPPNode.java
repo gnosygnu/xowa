@@ -34,7 +34,7 @@ public abstract class XomwPPNode {
 	* Returns false if this is not a tree node.
 	* @return PPNode
 	*/
-//		public abstract XomwPPNode[] getChildren();
+	public abstract XomwPPNode_Hash_Array getChildren();
 
 	/**
 	* Get the first child of a tree node. False if there isn't one.
@@ -55,19 +55,19 @@ public abstract class XomwPPNode {
 	* @param String $type
 	* @return boolean|PPNode
 	*/
-//		public abstract XomwPPNode getChildrenOfType(String type);
+	public abstract XomwPPNode_Hash_Array getChildrenOfType(String type);
 
 	/**
 	* Returns the length of the array, or false if this is not an array-type node
 	*/
-//		public abstract int getLength();
+	public abstract int getLength();
 
 	/**
 	* Returns an item of an array-type node
 	* @param int $i
 	* @return boolean|PPNode
 	*/
-//		public abstract XomwPPNode item(int i);
+	public abstract XomwPPNode item(int i);
 
 	/**
 	* Get the name of this node. The following names are defined here:
@@ -91,20 +91,20 @@ public abstract class XomwPPNode {
 	*    value         PPNode value
 	* @return array
 	*/
-	@gplx.Virtual public XophpArray splitArg() {return null;}
+	public abstract XophpArray splitArg();
 
 	/**
 	* Split an "<ext>" node into an associative array containing name, attr, inner and close
 	* All values in the resulting array are PPNodes. Inner and close are optional.
 	* @return array
 	*/
-//		public abstract Hash_adp splitExt();
+	public abstract XophpArray splitExt();
 
 	/**
 	* Split an "<h>" node
 	* @return array
 	*/
-//		public abstract Hash_adp splitHeading();
+	public abstract XophpArray splitHeading();
 
 	public abstract String toString();
 }

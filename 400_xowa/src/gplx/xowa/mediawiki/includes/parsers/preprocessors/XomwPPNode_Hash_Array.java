@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+import gplx.xowa.mediawiki.includes.exception.*;
 // MW.FILE:Preprocessor_Hash
 /**
 * @ingroup Parser
@@ -25,18 +26,16 @@ public class XomwPPNode_Hash_Array extends XomwPPNode { 	public XophpArray value
 	}
 
 	@Override public String toString() {
-//			return var_export( $this, true );
-		return null;
+		// return var_export($this, true);
+		return value.To_str();
 	}
 
-	public int getLength() {
-		return -1;
-//			return count( this.value );
+	@Override public int getLength() {
+		return XophpArray_.count(this.value);
 	}
 
-	public Object item(int i) {
-		return null;
-//			return this.value[$i];
+	@Override public XomwPPNode item(int i) {
+		return (XomwPPNode)this.value.Get_at(i);
 	}
 
 	@Override public String getName() {
@@ -47,27 +46,27 @@ public class XomwPPNode_Hash_Array extends XomwPPNode { 	public XophpArray value
 		return null;
 	}
 
-//		public function getChildren() {
-//			return false;
-//		}
+	@Override public XomwPPNode_Hash_Array getChildren() {
+		return null;
+	}
 
 	@Override public XomwPPNode getFirstChild() {
 		return null;
 	}
 
-//		public function getChildrenOfType( $name ) {
-//			return false;
-//		}
-//
-//		public function splitArg() {
-//			throw new MWException( __METHOD__ . ': not supported' );
-//		}
-//
-//		public function splitExt() {
-//			throw new MWException( __METHOD__ . ': not supported' );
-//		}
-//
-//		public function splitHeading() {
-//			throw new MWException( __METHOD__ . ': not supported' );
-//		}
+	@Override public XomwPPNode_Hash_Array getChildrenOfType(String name) {
+		return null;
+	}
+
+	@Override public XophpArray splitArg() {
+		throw XomwMWException.New_by_method_obj(this, "splitArg", ": not supported");
+	}
+
+	@Override public XophpArray splitExt() {
+		throw XomwMWException.New_by_method_obj(this, "splitExt", ": not supported");
+	}
+
+	@Override public XophpArray splitHeading() {
+		throw XomwMWException.New_by_method_obj(this, "splitHeading", ": not supported");
+	}
 }

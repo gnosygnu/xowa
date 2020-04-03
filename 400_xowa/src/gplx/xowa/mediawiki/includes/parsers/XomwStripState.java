@@ -65,6 +65,7 @@ public class XomwStripState {
 		this.addItem(TYPE_NOWIKI, marker, val);
 	}
 
+	public void addGeneral(String marker, String val) {this.addGeneral(Bry_.new_u8(marker), Bry_.new_u8(val));}
 	/**
 	* @param String $marker
 	* @param String $value

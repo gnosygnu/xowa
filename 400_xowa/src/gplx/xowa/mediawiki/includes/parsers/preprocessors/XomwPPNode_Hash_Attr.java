@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+import gplx.xowa.mediawiki.includes.exception.*;
 // MW.FILE:Preprocessor_Hash
 /**
 * @ingroup Parser
@@ -55,35 +56,35 @@ public class XomwPPNode_Hash_Attr extends XomwPPNode { 	public String name, valu
 		return XomwPPNode_Hash_Tree.factory(this.store, this.index + 1);
 	}
 
-//		public function getChildren() {
-//			return false;
-//		}
-//
+	@Override public XomwPPNode_Hash_Array getChildren() {
+		return null;
+	}
+
 	@Override public XomwPPNode getFirstChild() {
 		return null;
 	}
 
-//		public function getChildrenOfType($name) {
-//			return false;
-//		}
-//
-//		public function getLength() {
-//			return false;
-//		}
-//
-//		public function item($i) {
-//			return false;
-//		}
-//
-//		public function splitArg() {
-//			throw new MWException(__METHOD__ . ': not supported');
-//		}
-//
-//		public function splitExt() {
-//			throw new MWException(__METHOD__ . ': not supported');
-//		}
-//
-//		public function splitHeading() {
-//			throw new MWException(__METHOD__ . ': not supported');
-//		}
+	@Override public XomwPPNode_Hash_Array getChildrenOfType(String name) {
+		return null;
+	}
+
+	@Override public int getLength() {
+		return XophpInt_.False;
+	}
+
+	@Override public XomwPPNode item(int i) {
+		return null;
+	}
+
+	@Override public XophpArray splitArg() {
+		throw XomwMWException.New_by_method_obj(this, "splitArg", ": not supported");
+	}
+
+	@Override public XophpArray splitExt() {
+		throw XomwMWException.New_by_method_obj(this, "splitExt", ": not supported");
+	}
+
+	@Override public XophpArray splitHeading() {
+		throw XomwMWException.New_by_method_obj(this, "splitHeading", ": not supported");
+	}
 }

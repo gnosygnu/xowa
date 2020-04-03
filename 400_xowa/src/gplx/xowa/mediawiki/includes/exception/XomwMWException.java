@@ -21,4 +21,7 @@ public class XomwMWException extends Err {
 	public static Err New_by_method(Class<?> type, String method, String msg) {
 		return Err_.new_wo_type(Type_.Name(type) + "." + method + ":" + msg);
 	}
+	public static Err New_by_method_obj(Object obj, String method, String msg) {
+		return Err_.new_wo_type(Type_.Name_by_obj(obj) + "." + method + msg);
+	}
 }

@@ -20,6 +20,7 @@ import gplx.core.brys.*;
 public class XophpArray implements Bry_bfr_able {
 	private final    Ordered_hash hash = Ordered_hash_.New();
 	private int nxt_idx;
+	public int Len() {return hash.Len();}
 	public int count() {return hash.Len();}
 	public boolean count_bool() {return hash.Len() > 0;}
 	public boolean isset(String key) {return hash.Has(key);}

@@ -203,4 +203,8 @@ public class XophpArray_ {
 		}
 		return sb.To_str_and_clear();
 	}
+
+	public static int count(XophpArray array) {
+		return array.count();
+	}
 }

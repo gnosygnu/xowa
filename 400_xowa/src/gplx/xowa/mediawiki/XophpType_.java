@@ -45,4 +45,10 @@ public class XophpType_ {
 	public static boolean is_string(Object o) {
 		return To_type_id(o) == Type_ids_.Id__str;
 	}
+	public static boolean is_array(Object o) {
+		return Type_.Eq_by_obj(o, XophpArray.class);
+	}
+	public static boolean instance_of(Object o, Class<?> t) {
+		return Type_.Eq_by_obj(o, t);
+	}
 }

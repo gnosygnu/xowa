@@ -192,7 +192,7 @@ public class XomwParser implements XomwParserIface {
 	private int mLinkID;
 	public int mIncludeSizes, mPPNodeCount, mGeneratedPPNodeCount, mHighestExpansionDepth;
 //		public mDefaultSort;
-//		public mTplRedirCache, mTplDomCache, mHeadings, mDoubleUnderscores;
+	public XophpArray mTplRedirCache = null, mTplDomCache = null, mHeadings = null, mDoubleUnderscores = null;
 //		public mExpensiveFunctionCount; // number of expensive parser function calls
 //		public mShowToc, mForceTocPosition;
 //
@@ -441,7 +441,7 @@ public class XomwParser implements XomwParserIface {
 //			this.mGeneratedPPNodeCount = 0;
 //			this.mHighestExpansionDepth = 0;
 //			this.mDefaultSort = false;
-//			this.mHeadings = [];
+		this.mHeadings = XophpArray.New();
 //			this.mDoubleUnderscores = [];
 //			this.mExpensiveFunctionCount = 0;
 //
