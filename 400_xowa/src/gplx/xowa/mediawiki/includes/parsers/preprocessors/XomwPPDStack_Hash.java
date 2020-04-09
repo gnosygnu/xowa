@@ -14,29 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-// MW.FILE:Preprocessor_DOM
-/**
-* @ingroup Parser
-*/
-public abstract class XomwPPDPart {
-	/**
-	* @var String Output accumulator String
-	*/
-	public String output;
+// MW.SRC:1.33
+public class XomwPPDStack_Hash {
 
-	// REF.MW:https://manual.phpdoc.org/HTMLSmartyConverter/PHP/phpDocumentor/tutorial_tags.property.pkg.html
-	// Optional member variables:
-	//   eqpos        Position of equals sign in output accumulator
-	//   commentEnd   Past-the-end input pointer for the last comment encountered
-	//   visualEnd    Past-the-end input pointer for the end of the accumulator minus comments
-	public int eqpos;
-	public int commentEnd;
-	public int visualEnd;
-
-	public XomwPPDPart(String output) {
-		this.output = output;
-	}
-	public abstract Xomw_prepro_accum Accum();
-
-	public abstract XomwPPDPart Make_new(String val);
 }

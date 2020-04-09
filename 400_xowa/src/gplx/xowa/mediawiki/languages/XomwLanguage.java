@@ -4585,7 +4585,7 @@ public class XomwLanguage {
 		// For unknown languages, fallbackSequence returns an empty array,
 		// hardcode fallback to 'en' in that case.
 		Object rv = XomwLanguage.getLocalisationCache().getItem(code, "fallbackSequence");
-		return rv == null ? XophpArray.New().Add("en") : (XophpArray)rv;
+		return rv == null ? XophpArray.New("en") : (XophpArray)rv;
 	}
 
 //		/**

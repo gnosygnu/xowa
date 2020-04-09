@@ -358,7 +358,7 @@ public abstract class ContentHandler {
 	/**
 	* @var String[]
 	*/
-	protected String[] mSupportedFormats;
+	protected XophpArray mSupportedFormats;
 
 	/**
 	* Constructor, initializing the ContentHandler instance with its model ID
@@ -369,7 +369,7 @@ public abstract class ContentHandler {
 	* @param String[] $formats List for supported serialization formats
 	*    (typically as MIME types)
 	*/
-	@gplx.Virtual public void __construct(String modelId, String... formats) {
+	@gplx.Virtual public void __construct(String modelId, XophpArray formats) {
 		this.mModelID = modelId;
 		this.mSupportedFormats = formats;
 	}
@@ -495,7 +495,7 @@ public abstract class ContentHandler {
 	*
 	* @return String[] List of serialization formats as MIME type like strings
 	*/
-	public String[] getSupportedFormats() {
+	public XophpArray getSupportedFormats() {
 		return this.mSupportedFormats;
 	}
 

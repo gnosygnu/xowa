@@ -13,15 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-public class XophpInt_ {
-	public static final    int False = 0; // REF.PHP:https://www.php.net/manual/en/language.types.boolean.php
-	public static boolean is_true(int val) {return val != 0;} // handles code like "if ($var)" where var is an Object;
-	public static boolean is_false(int val) {return val < 0;} // handles XophpInt_.False as well as strpos.notFound (-1)
-	public static String strval(int number) {
-		return Int_.To_str(number);
-	}
-	public static int intval(String val) {
-		return Int_.Parse_or(val, 0);
+package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+import org.junit.*;
+public class XomwParser_internalParse_tst {
+//		private final    XomwParser_fxt fxt = new XomwParser_fxt();
+	@Test  public void Basic() {
+//			fxt.Test__internalParse(String_.Concat_lines_nl_skip_last
+//			( "{{A}}"
+//			), String_.Concat_lines_nl_skip_last
+//			( ""
+//			));
 	}
 }

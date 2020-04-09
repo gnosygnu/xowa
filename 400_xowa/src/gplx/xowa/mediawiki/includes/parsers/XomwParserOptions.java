@@ -89,11 +89,11 @@ public class XomwParserOptions {
 	*/
 	private int mMaxPPExpandDepth;
 
-//		/**
-//		* Maximum recursion depth for templates within templates
-//		*/
-//		private $mMaxTemplateDepth;
-//
+	/**
+	* Maximum recursion depth for templates within templates
+	*/
+	private int mMaxTemplateDepth;
+
 //		/**
 //		* Maximum number of calls per parse to expensive parser functions
 //		*/
@@ -288,10 +288,10 @@ public class XomwParserOptions {
 		return this.mMaxPPExpandDepth;
 	}
 
-//		public function getMaxTemplateDepth() {
-//			return this.mMaxTemplateDepth;
-//		}
-//
+	public int getMaxTemplateDepth() {
+		return this.mMaxTemplateDepth;
+	}
+
 //		/* @since 1.20 */
 //		public function getExpensiveParserFunctionLimit() {
 //			return this.mExpensiveParserFunctionLimit;
@@ -706,7 +706,7 @@ public class XomwParserOptions {
 		this.mMaxPPNodeCount = XomwDefaultSettings.wgMaxPPNodeCount;
 //			this.mMaxGeneratedPPNodeCount = $wgMaxGeneratedPPNodeCount;
 		this.mMaxPPExpandDepth = XomwDefaultSettings.wgMaxPPExpandDepth;
-//			this.mMaxTemplateDepth = $wgMaxTemplateDepth;
+		this.mMaxTemplateDepth = XomwDefaultSettings.wgMaxTemplateDepth;
 //			this.mExpensiveParserFunctionLimit = $wgExpensiveParserFunctionLimit;
 //			this.mCleanSignatures = $wgCleanSignatures;
 //			this.mExternalLinkTarget = $wgExternalLinkTarget;

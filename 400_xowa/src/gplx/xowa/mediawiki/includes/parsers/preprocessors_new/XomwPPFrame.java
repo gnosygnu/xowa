@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 // MW.FILE:Preprocessor
 /**
 * @ingroup Parser
@@ -45,7 +45,6 @@ public abstract class XomwPPFrame {
 	*
 	* @return PPFrame
 	*/
-	public XomwPPFrame newChild(Object args, XomwTitle title) {return newChild(args, title, 0);}
 	@gplx.Virtual public XomwPPFrame newChild(Object args, XomwTitle title, int indexOffset) {return null;}
 
 	/**
@@ -55,7 +54,6 @@ public abstract class XomwPPFrame {
 	* @param int $flags
 	* @return String
 	*/
-	public String cachedExpand(String key, XomwPPNode root) {return cachedExpand(key, root, 0);}
 	@gplx.Virtual public String cachedExpand(String key, XomwPPNode root, int flags) {return null;}
 
 	/**

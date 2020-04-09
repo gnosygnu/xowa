@@ -14,13 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-public class TextContentHandler extends ContentHandler {	// @codingStandardsIgnoreStart bug 57585
-	public void __construct() {this.__construct(XomwDefines.CONTENT_MODEL_TEXT, XomwDefines.CONTENT_FORMAT_TEXT);}
-	@Override public void __construct(String modelId, String... formats) {
+public class TextContentHandler extends ContentHandler {	public void __construct() {this.__construct(XomwDefines.CONTENT_MODEL_TEXT, XophpArray.New(XomwDefines.CONTENT_FORMAT_TEXT));}
+	@Override public void __construct(String modelId, XophpArray formats) {
 		super.__construct(modelId, formats);
 	}
-	// @codingStandardsIgnoreEnd
-//
+
 //		/**
 //		* Returns the content's text as-is.
 //		*

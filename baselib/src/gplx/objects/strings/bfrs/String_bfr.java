@@ -17,6 +17,7 @@ package gplx.objects.strings.bfrs; import gplx.*; import gplx.objects.*; import 
 import java.lang.*;
 import gplx.objects.primitives.*;
 import gplx.objects.errs.*;
+import gplx.objects.strings.unicodes.*;
 public class String_bfr {
 	private java.lang.StringBuilder sb = new java.lang.StringBuilder();
 	public boolean Has_none() {return this.Len() == 0;}
@@ -30,6 +31,16 @@ public class String_bfr {
 		this.Ensure_capacity(this.Len() + repeat);
 		for (int i = 0; i < repeat; i++)
 			Add_char(c);
+		return this;
+	}
+	public String_bfr Add_char_by_code(int code) {
+		if (code >= Ustring_.Surrogate_cp_bgn && code <= Ustring_.Surrogate_cp_end) {
+			sb.append((char)((code - 0x10000) / 0x400 + 0xD800));
+			sb.append((char)((code - 0x10000) % 0x400 + 0xDC00));
+		}
+		else {
+			sb.append((char)code);
+		}
 		return this;
 	}
 	public String_bfr Add_int_pad_bgn(char pad_char, int str_len, int val) {

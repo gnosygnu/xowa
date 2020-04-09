@@ -36,7 +36,7 @@ class XomwRange {
 		if (end == null) {
 			this.parts.Add(start);
 		} else {
-			this.parts.Add(XophpArray.New().Add(start).Add(end));
+			this.parts.Add(XophpArray.New(start, end));
 		}
 	}
 

@@ -13,16 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-// MW.FILE:Preprocessor_DOM
-/**
-* @ingroup Parser
-*/
+package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+// MW.SRC:1.33
 public abstract class XomwPPDPart {
 	/**
 	* @var String Output accumulator String
 	*/
-	public String output;
+	public XophpArray output;
 
 	// REF.MW:https://manual.phpdoc.org/HTMLSmartyConverter/PHP/phpDocumentor/tutorial_tags.property.pkg.html
 	// Optional member variables:
@@ -33,10 +30,10 @@ public abstract class XomwPPDPart {
 	public int commentEnd;
 	public int visualEnd;
 
-	public XomwPPDPart(String output) {
+	public void ctor_XomwPPDPart(XophpArray output) {
 		this.output = output;
 	}
-	public abstract Xomw_prepro_accum Accum();
 
-	public abstract XomwPPDPart Make_new(String val);
+	public XomwPPDPart New() {return New("");}
+	public abstract XomwPPDPart New(String val);
 }

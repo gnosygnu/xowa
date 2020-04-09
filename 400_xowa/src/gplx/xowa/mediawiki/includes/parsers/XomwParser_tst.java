@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 public class XomwParser_tst {
 	private final    XomwParser_fxt fxt = new XomwParser_fxt();
 	@Test  public void Basic() {
@@ -74,5 +75,9 @@ class XomwParser_fxt {
 		parser.internalParse(pbfr, pctx, src_bry);
 		parser.internalParseHalfParsed(pbfr, pctx, true, true);
 		Tfds.Eq_str_lines(expd, pbfr.Rslt().To_str_and_clear(), src_str);
+	}
+	public void Test__internalParse(String src_str, String expd) {
+		String actl = parser.internalParse(src_str, false, new XomwPPFrame_Hash(new XomwPreprocessor_Hash(parser)));
+		Tfds.Eq_str_lines(expd, actl, src_str);
 	}
 }

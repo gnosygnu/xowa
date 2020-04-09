@@ -25,7 +25,7 @@ class JCContentHandler extends TextContentHandler {	/**
 	* @param String $modelId
 	*/
 	public void __construct(String modelId, JCSingleton singleton) {
-		super.__construct(modelId, XomwDefines.CONTENT_FORMAT_JSON, CONTENT_FORMAT_JSON_PRETTY);
+		super.__construct(modelId, XophpArray.New(XomwDefines.CONTENT_FORMAT_JSON, CONTENT_FORMAT_JSON_PRETTY));
 		this.singleton = singleton;
 	}
 

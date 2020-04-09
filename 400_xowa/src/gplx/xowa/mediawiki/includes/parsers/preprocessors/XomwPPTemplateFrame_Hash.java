@@ -19,7 +19,7 @@ package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; impor
 // * @ingroup Parser
 // */
 class XomwPPTemplateFrame_Hash extends XomwPPFrame_Hash { 	public XophpArray numberedArgs, namedArgs;
-	public XomwPPFrame_Hash parent;
+	@gplx.New public XomwPPFrame_Hash parent;
 	public XophpArray numberedExpansionCache, namedExpansionCache;
 
 	/**

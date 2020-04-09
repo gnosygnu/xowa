@@ -18,9 +18,13 @@ import gplx.core.btries.*;
 import gplx.core.intls.*;
 import gplx.objects.strings.unicodes.*;
 import gplx.core.primitives.*;
+import gplx.objects.strings.bfrs.*;
 public class XophpString_ implements XophpCallbackOwner {
 	public static final    String False = null;
-	public static boolean is_true(String s) {return s != null;} // handles code like "if ($var)" where var is an Object;
+	public static boolean is_true (String s) {return s != null;} // handles code like "if ($var)" where var is an Object;
+	public static boolean is_false(String s) {return s == null;}
+	public static boolean eq(String lhs, String rhs)     {return  String_.Eq(lhs, rhs);}
+	public static boolean eq_not(String lhs, String rhs) {return !String_.Eq(lhs, rhs);}
 
 	// REF.PHP: https://www.php.net/manual/en/function.strpos.php
 	public static int strpos(String haystack, String needle) {return strpos(haystack, needle, 0);}
@@ -80,16 +84,36 @@ public class XophpString_ implements XophpCallbackOwner {
 		}
 		return rv;
 	}
-	public static int strspn(String subject, Hash_adp mask, int start) {return strspn(subject, mask, start, Int_.Null);}
+	public static int strspn(String subject, Hash_adp mask, int start) {return strspn(subject, mask, start, Int_.Zero);}
 	public static int strspn(String subject, Hash_adp mask, int start, int length) {
 		int subject_len = String_.Len(subject);
-
-		// get subject_end
+		start = strspn__start(start, subject_len);
+		int subject_end = strspn__subject_end(start, length, subject_len);
+		return strspn__rslt(Bool_.Y, subject, mask, start, subject_end);
+	}
+	// REF.PHP:https://www.php.net/manual/en/function.strcspn.php
+	public static int strcspn(String subject, Hash_adp mask)                        {return strcspn(subject, mask, Int_.Zero, Int_.Zero);}
+	public static int strcspn(String subject, Hash_adp mask, int start)             {return strcspn(subject, mask,     start, Int_.Zero);}
+	public static int strcspn(String subject, Hash_adp mask, int start, int length) {
+		int subject_len = String_.Len(subject);
+		start = strspn__start(start, subject_len);
+		int subject_end = strspn__subject_end(start, length, subject_len);
+		return strspn__rslt(Bool_.N, subject, mask, start, subject_end);
+	}
+	private static int strspn__start(int start, int subject_len) {
+		if (start < 0) { // adjust start if -1
+			start = subject_len + start;
+			if (start < 0)
+				start = 0;
+		}
+		return start;
+	}
+	private static int strspn__subject_end(int start, int length, int subject_len) {
 		int subject_end = 0;
-		if (length == Int_.Null) {
+		if (length == Int_.Zero) {
 			subject_end = subject_len;
 		}
-		else if (length < 0) {
+		else if (length < Int_.Zero) {
 			subject_end = subject_len + length; // If length is given and is negative, then subject will be examined from the starting position up to length characters from the end of subject.
 			if (subject_end < start)
 				subject_end = start;
@@ -99,9 +123,11 @@ public class XophpString_ implements XophpCallbackOwner {
 			if (subject_end > subject_len)
 				subject_end = subject_len;
 		}
-
+		return subject_end;
+	}
+	private static int strspn__rslt(boolean is_strspn, String subject, Hash_adp mask, int start, int subject_end) {
 		// loop subject until encountering character not in mask
-		int rv = 0;
+		int strspn_rv = 0;
 		int i = start;
 		while (i < subject_end) {
 			char subject_char = String_.CharAt(subject, i);
@@ -117,14 +143,21 @@ public class XophpString_ implements XophpCallbackOwner {
 			}
 
 			if (mask.Has(mask_key)) {
-				rv++;
+				if (is_strspn) {
+					strspn_rv++;
+				}
+				else {
+					break;
+				}
 			}
 			else {
-				break;
+				if (is_strspn) {
+					break;
+				}
 			}
 			i++;
 		}
-		return rv;
+		return is_strspn ? strspn_rv : i - start;
 	}
 	public static int strspn_fwd__ary(byte[] src, boolean[] find, int bgn, int max, int src_len) {
 		if (max == -1) max = src_len;
@@ -389,17 +422,15 @@ public class XophpString_ implements XophpCallbackOwner {
 			rv[rv_idx] = trim_pos;
 		}
 	}
-	public static String str_repeat(String val, int count) {
-		int val_len = String_.Len(val);
-		int chry_len = val_len * count;
-		char[] chry = new char[chry_len];
-		for (int i = 0; i < count; i++) {
-			for (int j = 0; j < val_len; j++) {
-				chry[(i * val_len) + j] = String_.CharAt(val, j);
-			}
+	// REF.PHP: https://www.php.net/manual/en/function.str-repeat.php
+	public static String str_repeat(String input, int multiplier) {
+		String_bfr sb = new String_bfr();
+		for (int i = 0; i < multiplier; i++) {
+			sb.Add(input);
 		}
-		return String_.new_charAry_(chry, 0, chry_len);
+		return sb.To_str_and_clear();
 	}
+
 	public static boolean is_string(Object o) {
 		return String_.as_(o) != null;
 	}
@@ -512,6 +543,26 @@ public class XophpString_ implements XophpCallbackOwner {
 				return b >= 128 && b <= 255;
 		}
 	}
+
+	// REF.PHP: https://www.php.net/manual/en/function.strrev.php
+	public static String strrev(String src) {
+		String_bfr sb = new String_bfr();
+		Ustring usrc = Ustring_.New_codepoints(src);
+		int usrc_len = usrc.Len_in_data();
+		for (int i = usrc_len - 1; i > -1; i--) {
+			int c = usrc.Get_data(i);
+			sb.Add_char_by_code(c);
+		}
+		return sb.To_str_and_clear();
+	}
+
+	public static String Char_as_str(String s, int idx) {
+		return Char_.To_str(String_.CharAt(s, idx));
+	}
+	public static boolean Char_eq(String s, int idx, String comp) {
+		return String_.Eq(Char_as_str(s, idx), comp);
+	}
+
 	public Object Callback(String method, Object... args) {
 		if (String_.Eq(method, "strtoupper")) {
 			String val = (String)args[0];

@@ -28,6 +28,7 @@ public class Int_ {
 	, Null          = Int_.Min_value
 	, Base1         = 1 // for super 1 lists / arrays; EX: PHP; [a, b, c]; [1] => a
 	, Offset_1      = 1 // common symbol for + 1 after current pos; EX: String_.Mid(lhs + Offset_1, rhs)
+	, Zero          = 0
 	;
 
 	public static int Cast(Object obj) {

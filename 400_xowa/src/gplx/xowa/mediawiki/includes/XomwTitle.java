@@ -252,7 +252,8 @@ public class XomwTitle {
 	* @throws InvalidArgumentException
 	* @return Title|null Title or null on an error.
 	*/
-	public static XomwTitle newFromText(XomwEnv env, byte[] text) {return newFromText(env, text, XomwDefines.NS_MAIN);}
+	public static XomwTitle newFromText(XomwEnv env, byte[] text)                       {return newFromText(env, text, XomwDefines.NS_MAIN);}
+	public static XomwTitle newFromText(XomwEnv env, String text, int defaultNamespace) {return newFromText(env, Bry_.new_u8(text));}
 	private static XomwTitle newFromText(XomwEnv env, byte[] text, int defaultNamespace) {
 		// DWIM: Integers can be passed in here when page titles are used as array keys.
 		// XO.MW.SKIP:STRONGCAST
@@ -1454,6 +1455,7 @@ public class XomwTitle {
 		}
 		return this.mPrefixedText;
 	}
+	public String getPrefixedTextStr() {return String_.new_u8(getPrefixedText());}
 
 //		/**
 //		* Return a String representation of this title

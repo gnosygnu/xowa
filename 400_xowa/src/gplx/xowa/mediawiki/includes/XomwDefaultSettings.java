@@ -3036,7 +3036,7 @@ public class XomwDefaultSettings {
 //		/**
 //		* Whether to enable language variant conversion.
 //		*/
-//		$wgDisableLangConversion = false;
+	public static boolean wgDisableLangConversion = false;
 //
 //		/**
 //		* Whether to enable language variant conversion for links.
@@ -4146,19 +4146,19 @@ public class XomwDefaultSettings {
 //		* When the limit is exceeded, an exception is thrown.
 //		*/
 //		$wgMaxGeneratedPPNodeCount = 1000000;
-//
-//		/**
-//		* Maximum recursion depth for templates within templates.
-//		* The current parser adds two levels to the PHP call stack for each template,
-//		* and xdebug limits the call stack to 100 by default. So this should hopefully
-//		* stop the parser before it hits the xdebug limit.
-//		*/
-//		$wgMaxTemplateDepth = 40;
+
+	/**
+	* Maximum recursion depth for templates within templates.
+	* The current parser adds two levels to the PHP call stack for each template,
+	* and xdebug limits the call stack to 100 by default. So this should hopefully
+	* stop the parser before it hits the xdebug limit.
+	*/
+	public static final int wgMaxTemplateDepth = 40;
 
 	/**
 	* @see $wgMaxTemplateDepth
 	*/
-	public static int wgMaxPPExpandDepth = 40;
+	public static final int wgMaxPPExpandDepth = 40;
 
 //		/**
 //		* URL schemes that should be recognized as valid by wfParseUrl().

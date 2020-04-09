@@ -121,7 +121,7 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final    Bry_bfr 
 		int parts_len = parts.count();
 		for (int j = 0; j < parts_len; j++) {
 			XomwPPDPart_DOM part = (XomwPPDPart_DOM)parts.Get_at(j);
-			if (part.eqpos != -1) {
+			if (part.eqpos != 0) {
 				byte[] part_bfr_bry = part.To_bry();
 				tmp_bfr.Add_str_a7("<part><name>").Add_mid(part_bfr_bry, 0, part.eqpos);
 				tmp_bfr.Add_str_a7("</name>=<value>").Add_mid(part_bfr_bry, part.eqpos + 1, part.Len());

@@ -49,6 +49,6 @@ public class XophpType_ {
 		return Type_.Eq_by_obj(o, XophpArray.class);
 	}
 	public static boolean instance_of(Object o, Class<?> t) {
-		return Type_.Eq_by_obj(o, t);
+		return Type_.Eq_by_obj(o, t) || Type_.Is_assignable_from_by_obj(o, t);
 	}
 }

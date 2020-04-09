@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpBool_ {
+	public static final boolean Null = false;
 	public static boolean is_true(byte[] val) {return val != null && is_true(String_.new_u8(val));}
 	public static boolean is_true(String val) {
 		// REF: https://www.php.net/manual/en/language.types.boolean.php#language.types.boolean.casting

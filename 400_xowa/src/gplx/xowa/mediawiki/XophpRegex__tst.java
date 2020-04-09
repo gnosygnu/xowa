@@ -51,6 +51,10 @@ public class XophpRegex__tst {
 			.Add("baz")
 		);
 	}
+	@Test   public void preg_quote() {
+		Gftest.Eq__str("abc", XophpRegex_.preg_quote("abc", "/"));
+		Gftest.Eq__str("\\.\\\\\\+\\*\\?\\[\\^\\]\\$\\(\\)\\{\\}\\=\\!\\<\\>\\|\\:\\-\\#", XophpRegex_.preg_quote(".\\+*?[^]$(){}=!<>|:-#", "/"));
+	}
 }
 class XophpRegex__fxt {
 	private String_bldr print_php = null;//String_bldr_.new_();

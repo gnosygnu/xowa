@@ -60,12 +60,6 @@ public class XophpString__tst {
 		fxt.Test__strpos("aba", "a", 1, 2);
 		fxt.Test__strpos("aba", "a", -2, 2);
 	}
-	@Test  public void strspn() {
-		fxt.Test__strspn("42 is the answer to the 128th question", fxt.Init__strspn_hash("1234567890"), 0, Int_.Min_value, 2);
-		fxt.Test__strspn("foo", fxt.Init__strspn_hash("o"), 0, Int_.Min_value, 0);
-		fxt.Test__strspn("foo", fxt.Init__strspn_hash("o"), 1, 2, 2);
-		fxt.Test__strspn("foo", fxt.Init__strspn_hash("o"), 1, 1, 1);
-	}
     @Test  public void rtrim() {
 		// pad is 0, 1 char
 		fxt.Test__rtrim("0100", "", "0100"); // empty pad returns String
@@ -151,6 +145,36 @@ public class XophpString__tst {
 		fxt.Test__Fmt("a$0b", "a$0b", "z"); // invalid identifier
 		fxt.Test__Fmt("a0", "a$xyz0b", "0"); // long identifier
 	}
+	@Test  public void strrev() {
+		fxt.Test__strrev("", "");
+		fxt.Test__strrev("Hello world!", "!dlrow olleH");
+		fxt.Test__strrev("☆❤world", "dlrow❤☆");
+		fxt.Test__strrev("a¢€𤭢b", "b𤭢€¢a");
+	}
+	@Test  public void str_repeat() {
+		fxt.Test__str_repeat("-=", 10, "-=-=-=-=-=-=-=-=-=-=");
+	}
+	@Test  public void strspn() {
+		fxt.Test__strspn(1, "<-", "abc", "abc", -1);
+
+		// PHP samples
+		fxt.Test__strspn(2, "<-", "42 is the answer to the 128th question", "1234567890");
+		fxt.Test__strspn(0, "<-", "foo", "o");
+		fxt.Test__strspn(2, "<-", "foo", "o", 1, 2);
+		fxt.Test__strspn(1, "<-", "foo", "o", 1, 1);
+	}
+	@Test  public void strcspn() {
+		fxt.Test__strcspn(3, "abc", "x", 0);
+		fxt.Test__strcspn(3, "abc", "x", -5);
+
+		// PHP samples
+		fxt.Test__strcspn(0, "abcd", "apple");
+		fxt.Test__strcspn(0, "abcd", "banana");
+		fxt.Test__strcspn(2, "hello", "l");
+		fxt.Test__strcspn(2, "hello", "world");
+		fxt.Test__strcspn(5, "abcdhelloabcd", "abcd", -9);
+		fxt.Test__strcspn(4, "abcdhelloabcd", "abcd", -9, -5);
+	}
 }
 class XophpString__fxt {
 	public void Test_strspn_fwd__byte(String src_str, byte find, int bgn, int max, int expd) {
@@ -191,8 +215,10 @@ class XophpString__fxt {
 		Gftest.Eq__int(expd, XophpString_.strpos(haystack, needle, offset));
 	}
 	public Hash_adp Init__strspn_hash(String mask) {return XophpString_.strspn_hash(mask);}
-	public void Test__strspn(String subject, Hash_adp mask, int start, int length, int expd) {
-		int actl = XophpString_.strspn(subject, mask, start, length);
+	public void Test__strspn(int expd, String ignore, String subject, String mask)            {Test__strspn(expd, ignore, subject, mask, Int_.Zero, Int_.Zero);}
+	public void Test__strspn(int expd, String ignore, String subject, String mask, int start) {Test__strspn(expd, ignore, subject, mask,     start, Int_.Zero);}
+	public void Test__strspn(int expd, String ignore, String subject, String mask, int start, int length) {
+		int actl = XophpString_.strspn(subject, XophpString_.strspn_hash(mask), start, length);
 		Gftest.Eq__int(expd, actl);
 	}
 	public void Test__rtrim(String str, String character_mask, String expd) {
@@ -221,5 +247,16 @@ class XophpString__fxt {
 	}
 	public void Test__Fmt(String expd, String fmt, Object... args) {
 		Gftest.Eq__str(expd, XophpString_.Fmt(fmt, args));
+	}
+	public void Test__strrev(String src, String expd) {
+		Gftest.Eq__str(expd, XophpString_.strrev(src));
+	}
+	public void Test__str_repeat(String input, int multiplier, String expd) {
+		Gftest.Eq__str(expd, XophpString_.str_repeat(input, multiplier));
+	}
+	public void Test__strcspn(int expd, String subject, String mask)            {Test__strcspn(expd, subject, mask, Int_.Zero, Int_.Zero);}
+	public void Test__strcspn(int expd, String subject, String mask, int start) {Test__strcspn(expd, subject, mask,     start, Int_.Zero);}
+	public void Test__strcspn(int expd, String subject, String mask, int start, int length) {
+		Gftest.Eq__int(expd, XophpString_.strcspn(subject, XophpString_.strspn_hash(mask), start, length));
 	}
 }

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 // MW.FILE:Preprocessor_Hash
 /**
 * @ingroup Parser
@@ -25,7 +25,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	* nodes are two-element arrays ("descriptors") rather than PPNode_Hash_*
 	* objects.
 	*/
-	private final    XophpArray rawChildren;
+	private XophpArray rawChildren;
 
 	/**
 	* The store array for the siblings of this node, including this node itself.
@@ -67,7 +67,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 			this.rawChildren = (XophpArray)rawChildrenObj;
 		}
 		else {
-			this.rawChildren = ((Xomw_prepro_accum__hash)rawChildrenObj).Ary();
+//				this.rawChildren = ((Xomw_prepro_accum__hash)rawChildrenObj).Ary();
 		}
 	}
 
@@ -151,7 +151,7 @@ public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String na
 	* @return PPNode_Hash_Tree|PPNode_Hash_Attr|PPNode_Hash_Text|boolean
 	*/
 	@Override public XomwPPNode getFirstChild() {
-		if (this.rawChildren.isset(0)) {
+		if (!XophpArray_.isset(this.rawChildren, 0)) {
 			return null;
 		}
 		else {

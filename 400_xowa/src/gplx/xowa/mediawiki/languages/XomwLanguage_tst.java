@@ -114,8 +114,8 @@ public class XomwLanguage_tst {
 		fxt.Test_commafy("-1234567890"    , "-1,23,45,67,890");
 	}
 	@Test   public void handleExplicitPluralForms() {
-		fxt.Test__handleExplicitPluralForms__string("1", XophpArray.New().Add("1=one"), "one");
-		fxt.Test__handleExplicitPluralForms__array("1", XophpArray.New().Add("no_match"), XophpArray.New().Add(0, "no_match"));
+		fxt.Test__handleExplicitPluralForms__string("1", XophpArray.New("1=one"), "one");
+		fxt.Test__handleExplicitPluralForms__array("1", XophpArray.New("no_match"), XophpArray.New().Add(0, "no_match"));
 	}
 	@Test   public void getPluralRuleIndexNumber() {
 		fxt.Init__pluralRulesXml

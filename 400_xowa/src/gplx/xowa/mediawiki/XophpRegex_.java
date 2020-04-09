@@ -17,8 +17,25 @@ package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import gplx.langs.regxs.*;
 import gplx.core.strings.*; import gplx.core.primitives.*; import gplx.core.bits.*;
 public class XophpRegex_ {
+	// REF.PHP: https://www.php.net/manual/en/function.preg-quote.php
+	// The special regular expression characters are:
+	private static final    Hash_adp preg_quote_hash = Hash_adp_.New().Add_many_as_key_and_val
+		('.', '\\', '+', '*', '?', '[', '^', ']', '$', '(', ')', '{', '}', '=', '!', '<', '>', '|', ':', '-', '#');
+	public static String preg_quote(String str, String delimiter) {// NOTE: "String delimiter" not used b/c Java / XO does not allow symbolic quotes; EX: "/abc/i"
+		String_bldr sb = String_bldr_.new_();
+		int len = String_.Len(str);
+		for (int i = 0; i < len; i++) {
+			char c = String_.CharAt(str, i);
+			if (preg_quote_hash.Has(c)) {
+				sb.Add("\\");
+			}
+			sb.Add(c);
+		}
+		return sb.To_str_and_clear();
+	}
 	public static boolean preg_match_bool(Regx_adp pattern, int modifier, String subject) {return preg_match_bool(pattern, modifier, subject, null, 0, 0);}
 	public static boolean preg_match_bool(Regx_adp pattern, String subject, XophpArray matches, int flags, int offset) {return preg_match(pattern, MODIFIER_NONE, subject, matches, flags, offset) == FOUND;}
+	public static boolean preg_match_bool(String pattern, int modifier, String subject, XophpArray matches, int flags, int offset) {return preg_match(Regx_adp_.new_(pattern), modifier, subject, matches, flags, offset) == FOUND;}
 	public static boolean preg_match_bool(Regx_adp pattern, int modifier, String subject, XophpArray matches, int flags, int offset) {return preg_match(pattern, modifier, subject, matches, flags, offset) == FOUND;}
 	public static int preg_match(Regx_adp pattern, String subject) {return preg_match(pattern, MODIFIER_NONE, subject, null, 0, 0);}
 	public static int preg_match(Regx_adp pattern, int modifier, String subject) {return preg_match(pattern, modifier, subject, null, 0, 0);}
@@ -61,8 +78,8 @@ public class XophpRegex_ {
 	private static void preg_match_fill(String subject, XophpArray matches, int flags, Regx_match match, String match_str, Regx_group[] grps, int grps_len) {
 		for (int i = 0; i < grps_len; i++) {
 			Regx_group grp = grps[i];
-			if (!grp.Rslt()) continue; // ignore non matches in group; EX: "1" and "^-?(([0-9]+)(?:\\.([0-9]+))?)" returns a match=false for group(2)
-			String grp_match = grp.Val();
+			// TOMBSTONE: if (!grp.Rslt()) continue; // ignore non matches in group; EX: "1" and "^-?(([0-9]+)(?:\\.([0-9]+))?)" returns a match=false for group(2)
+			String grp_match = grp.Rslt() ? grp.Val() : "";
 			if (flags == PREG_OFFSET_CAPTURE) {
 				matches.Add(XophpArray.New(grp_match, grp.Bgn()));
 			}

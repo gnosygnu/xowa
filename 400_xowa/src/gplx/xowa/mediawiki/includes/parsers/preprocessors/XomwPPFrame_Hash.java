@@ -20,7 +20,7 @@ import gplx.core.bits.*;
 * An expansion frame, used as a context to expand the result of preprocessToObj()
 * @ingroup Parser
 */
-class XomwPPFrame_Hash extends XomwPPFrame { 	/**
+public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @var Parser
 	*/
 	public XomwParser parser;
@@ -46,7 +46,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* Recursion depth of this frame, top = 0
 	* Note that this is NOT the same as expansion depth in expand()
 	*/
-	public int depth;
+	@gplx.New public int depth;
 
 	private boolean volatile_bool;
 	private int ttl;
@@ -64,7 +64,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 		this.preprocessor = preprocessor;
 		this.parser = preprocessor.Parser();
 		this.title = this.parser.mTitle;
-		this.titleCache = XophpArray.New().Add(XophpObject_.is_true(this.title) ? this.title.getPrefixedDBkeyStr() : XophpString_.False);
+		this.titleCache = XophpArray.New(XophpObject_.is_true(this.title) ? this.title.getPrefixedDBkeyStr() : XophpString_.False);
 		this.loopCheckHash = XophpArray.New();
 		this.depth = 0;
 		this.childExpansionCache = XophpArray.New();
@@ -105,11 +105,11 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					// Numbered parameter
 					int index = bits.Get_by_int("index") - indexOffset;
 					if (namedArgs.isset(index) || numberedArgs.isset(index)) {
-//							this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
-//								wfEscapeWikiText(this.title),
-//								wfEscapeWikiText(title),
-//								wfEscapeWikiText(index)).text());
-//							this.parser.addTrackingCategory('duplicate-args-category');
+					//	this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
+					//		wfEscapeWikiText(this.title),
+					//		wfEscapeWikiText(title),
+					//		wfEscapeWikiText(index)).text());
+					//	this.parser.addTrackingCategory('duplicate-args-category');
 					}
 					numberedArgs.Set(index, bits.Get_by("value"));
 					namedArgs.unset(index);
@@ -117,11 +117,11 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					// Named parameter
 					String name = String_.Trim(this.expand(bits.Get_by("name"), XomwPPFrame.STRIP_COMMENTS));
 					if (namedArgs.isset(name) || numberedArgs.isset(name)) {
-//							this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
-//								wfEscapeWikiText(this.title),
-//								wfEscapeWikiText(title),
-//								wfEscapeWikiText(name)).text());
-//							this.parser.addTrackingCategory('duplicate-args-category');
+					//	this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
+					//		wfEscapeWikiText(this.title),
+					//		wfEscapeWikiText(title),
+					//		wfEscapeWikiText(name)).text());
+					//	this.parser.addTrackingCategory('duplicate-args-category');
 					}
 					namedArgs.Set(name, bits.Get_by("value"));
 					numberedArgs.unset(name);
@@ -151,23 +151,23 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @param int $flags
 	* @return String
 	*/
-	public String expand(Object root, int flags) {
+	@Override public String expand(Object root, int flags) {
 		if (XophpString_.is_string(root)) {
 			return (String)root;
 		}
 
 		if (++this.parser.mPPNodeCount > this.parser.mOptions.getMaxPPNodeCount()) {
-//				this.parser.limitationWarn('node-count-exceeded',
-//						this.parser.mPPNodeCount,
-//						this.parser.mOptions.getMaxPPNodeCount()
-//				);
+			//	this.parser.limitationWarn('node-count-exceeded',
+			//			this.parser.mPPNodeCount,
+			//			this.parser.mOptions.getMaxPPNodeCount()
+			//	);
 			return "<span class=\"error\">Node-count limit exceeded</span>";
 		}
 		if (expansionDepth > this.parser.mOptions.getMaxPPExpandDepth()) {
-//				this.parser.limitationWarn('expansion-depth-exceeded',
-//						expansionDepth,
-//						this.parser.mOptions.getMaxPPExpandDepth()
-//				);
+			//	this.parser.limitationWarn('expansion-depth-exceeded',
+			//			expansionDepth,
+			//			this.parser.mOptions.getMaxPPExpandDepth()
+			//	);
 			return "<span class=\"error\">Expansion depth limit exceeded</span>";
 		}
 		++expansionDepth;
@@ -396,7 +396,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 				root = (XophpArray)((XomwPPNode_Hash_Array)root_obj).value;
 			}
 			if (!XophpType_.is_array(root_obj)) {
-				root = XophpArray.New().Add(root_obj);
+				root = XophpArray.New(root_obj);
 			}
 			int root_len = root.Len();
 			for (int j = 0; j < root_len; j++) {
@@ -428,7 +428,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 				root = ((XomwPPNode_Hash_Array)rootObj).value;
 			}
 			if (!XophpArray.is_array(rootObj)) {
-				root = XophpArray.New().Add(root);
+				root = XophpArray.New(root);
 			}
 			int rootLen = root.count();
 			for (int i = 0; i < rootLen; i++) {
@@ -462,7 +462,7 @@ class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 				root = ((XomwPPNode_Hash_Array)rootObj).value;
 			}
 			if (!XophpArray.is_array(rootObj)) {
-				root = XophpArray.New().Add(root);
+				root = XophpArray.New(root);
 			}
 			int rootLen = root.count();
 			for (int i = 0; i < rootLen; i++) {

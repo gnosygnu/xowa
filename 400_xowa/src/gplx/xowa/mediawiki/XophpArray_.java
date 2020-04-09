@@ -152,6 +152,11 @@ public class XophpArray_ {
 	public static boolean array_is_empty(Ordered_hash array) {
 		return array.Len() == 0;
 	}
+
+	public static boolean array_key_exists(String key, XophpArray array) {return array.Has(key);}
+	public static boolean array_key_exists(int key, XophpArray array)    {return array.Has(Int_.To_str(key));}
+
+	public static void unset(XophpArray array, int i) {array.unset(i);}
 	public static void unset(Ordered_hash array, Object key) {
 		array.Del(key);
 	}
@@ -163,12 +168,6 @@ public class XophpArray_ {
 		for (int i = idx + 1; i < ary_len; i++)
 			rv[i - 1] = ary[i];
 		return rv;
-	}
-	public static boolean in_array(String needle, String[] haystack) {
-		for (String hay : haystack)
-			if (String_.Eq(hay, needle))
-				return true;
-		return false;
 	}
 
 	// REF.PHP:https://www.php.net/manual/en/function.array-map.php
@@ -204,7 +203,47 @@ public class XophpArray_ {
 		return sb.To_str_and_clear();
 	}
 
-	public static int count(XophpArray array) {
-		return array.count();
+	public static int count(XophpArray array) {return array.count();}
+	public static boolean count_bool(XophpArray array) {return array.count_bool();}
+	public static Object array_pop(XophpArray array) {return array.pop();}
+	public static boolean isset(XophpArray array, int key) {return XophpObject_.isset_obj(array.Get_at(key));}
+	public static boolean isset(XophpArray array, String key) {return XophpObject_.isset_obj(array.Get_by(key));}
+	public static boolean is_array(XophpArray array) {return array != null;}
+
+	// REF.PHP: https://www.php.net/manual/en/function.in-array.php
+	public static boolean in_array(Object needle, XophpArray haystack) {return in_array(needle, haystack, false);}
+	public static boolean in_array(Object needle, XophpArray haystack, boolean strict) {
+		// if strict, cache needleType
+		Class<?> needleType = null;
+		if (strict && needle != null) {
+			needleType = Type_.Type_by_obj(needle);
+		}
+
+		// loop haystack to find match
+		int haystack_len = haystack.Len();
+		for (int i = 0; i < haystack_len; i++) {
+			Object val = haystack.Get_at(i);
+
+			// if strict, compare types
+			if (strict) {
+				if      (needle != null && val == null) {
+					return false;
+				}
+				else if (needle == null && val != null) {
+					return false;
+				}
+				else if (needle != null && val != null) {
+					if (!Type_.Eq_by_obj(val, needleType)) {
+						return false;
+					}
+				}
+			}
+
+			// compare objects
+			if (Object_.Eq(needle, val)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

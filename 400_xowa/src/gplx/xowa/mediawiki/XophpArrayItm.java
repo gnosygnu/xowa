@@ -39,6 +39,36 @@ public class XophpArrayItm implements Bry_bfr_able {
 			bfr.Add_obj(val).Add_byte_space();
 		}
 	}
+	@Override public boolean equals(Object obj) {
+		if (obj == null) return false;
+		XophpArrayItm comp = (XophpArrayItm)obj;
+
+		// compare key
+		if (key_is_int) {
+			if (this.key_as_int != comp.key_as_int)
+				return false;
+		}
+		else {
+			if (!String_.Eq(this.key, comp.key))
+				return false;
+		}
+
+		// compare val
+		if      (this.val == null && comp.val != null)
+			return false;
+		else if (this.val != null && comp.val == null)
+			return false;
+		else if (this.val == null && comp.val == null)
+			return true;
+		else
+			return Object_.Eq(this.val, comp.val);
+	}
+	@Override public int hashCode() {
+		int rv = 0;
+		rv = (31 * rv) + (key_is_int ? key_as_int : key.hashCode());
+		rv = (31 * rv) + val.hashCode();
+		return rv;
+	}
 
 	public static XophpArrayItm New_int(int key, Object val)    {return new XophpArrayItm(Bool_.Y, key, Int_.To_str(key), val);}
 	public static XophpArrayItm New_str(String key, Object val) {return new XophpArrayItm(Bool_.N,  -1, key             , val);}

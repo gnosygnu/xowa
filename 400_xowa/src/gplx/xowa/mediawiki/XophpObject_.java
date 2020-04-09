@@ -17,6 +17,7 @@ package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpObject_ {
 	public static final    Object False = null; // handles code like "if ($var === false)" where var is an Object;
 	public static boolean is_true(Object val) {return val != null;}
+	public static boolean is_false(Object val) {return val == null;}
 	public static boolean is_null(Object val) {return val == null;}
 
 	// REF.PHP:http://php.net/manual/en/function.empty.php

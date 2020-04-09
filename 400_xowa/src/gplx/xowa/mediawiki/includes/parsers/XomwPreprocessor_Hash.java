@@ -126,7 +126,7 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 		for (int j = 0; j < parts_len; j++) {
 			XomwPPDPart_Hash part = (XomwPPDPart_Hash)parts.Get_at(j);
 			XophpArray part_out = (XophpArray)part.Accum_hash().Ary();
-			if (part.eqpos != -1) {
+			if (part.eqpos != 0) {
 				Object equalsNode = part_out.Get_at(part.eqpos);
 				XophpArray nameNode  = XophpArray.New("name" , XophpArray_.array_slice(part_out, 0, part.eqpos));
 				XophpArray valueNode = XophpArray.New("value", XophpArray_.array_slice(part_out, part.eqpos + 1));

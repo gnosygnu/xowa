@@ -33,6 +33,7 @@ public class XophpArray implements Bry_bfr_able {
 		int len = hash.Len();
 		return len == 0 ? null : ((XophpArrayItm)hash.Get_at(len - 1)).Val();
 	}
+	public boolean Eq_to_new() {return hash.Count() == 0;}// same as "array === []"
 	public void unset(int key) {unset(Int_.To_str(key));}
 	public void unset(String key) {
 		hash.Del(key);
@@ -103,9 +104,17 @@ public class XophpArray implements Bry_bfr_able {
 		}
 		return this;
 	}
+	public void Concat_str(int i, String s) {
+		this.Set(i, this.Get_at_str(i) + s);
+	}
+	public XophpArray Get_at_ary_or_null(int i) {
+		Object rv = Get_at(i);
+		return Type_.Eq_by_obj(rv, XophpArray.class) ? (XophpArray)rv : null;
+	}
 	public XophpArray Get_at_ary(int i) {return (XophpArray)Get_at(i);}
-	public String Get_at_str(int i) {return (String)Get_at(i);}
+	public boolean Get_at_bool(int i) {return Bool_.Cast(Get_at(i));}
 	public int Get_at_int(int i) {return Int_.Cast(Get_at(i));}
+	public String Get_at_str(int i) {return (String)Get_at(i);}
 	public Object Get_at(int i) {
 		if (i < 0 || i >= hash.Len()) return null;
 		XophpArrayItm itm = (XophpArrayItm)hash.Get_at(i);
@@ -123,10 +132,15 @@ public class XophpArray implements Bry_bfr_able {
 	}
 	public Object Get_by_obj(Object key) {return Get_by(Object_.Xto_str_strict_or_null(key));}
 	public Object Get_by(int key) {return Get_by(Int_.To_str(key));}
+	public boolean Get_by_bool_or(String key, boolean or) {Object rv = this.Get_by(key); return rv == null ? or : Bool_.Cast(rv);}
 	public boolean Get_by_bool(String key) {return Bool_.Cast(this.Get_by(key));}
+	public int Get_by_int_or(String key, int or) {Object rv = this.Get_by(key); return rv == null ? or : Int_.Cast(rv);}
 	public int Get_by_int(String key) {return Int_.Cast(this.Get_by(key));}
+	public XophpArray Get_by_ary_or(String key, XophpArray or) {Object rv = this.Get_by(key); return rv == null ? or : (XophpArray)rv;}
 	public XophpArray Get_by_ary(String key) {return (XophpArray)this.Get_by(key);}
 	public String Get_by_str(char key) {return (String)this.Get_by(Char_.To_str(key));}
+	public String Get_by_str(int key) {return (String)this.Get_by(Int_.To_str(key));}
+	public String Get_by_str_or(String key, String or) {Object rv = this.Get_by(key); return rv == null ? or : (String)rv;}
 	public String Get_by_str(String key) {return (String)this.Get_by(key);}
 	public Object Get_by(String key) {
 		XophpArrayItm itm = (XophpArrayItm)hash.Get_by(key);
@@ -180,6 +194,35 @@ public class XophpArray implements Bry_bfr_able {
 		}
 		return rv;
 	}
+	@Override public boolean equals(Object obj) {
+		if (obj == null) return false;
+		if (!Type_.Eq_by_obj(obj, XophpArray.class)) return false;
+		XophpArray comp = (XophpArray)obj;
+
+		// compare lens
+		int this_len = this.Len();
+		int comp_len = comp.Len();
+		if (this_len != comp_len) return false;
+
+		// loop items
+		for (int i = 0; i < this_len; i++) {
+			XophpArrayItm this_itm = this.Get_at_itm(i);
+			XophpArrayItm comp_itm = comp.Get_at_itm(i);
+			if (!Object_.Eq(this_itm, comp_itm))
+				return false;
+		}
+		return true;
+	}
+	@Override public int hashCode() {
+		int rv = 0;
+		int len = this.Len();
+		for (int i = 0; i < len; i++) {
+			XophpArrayItm itm = this.Get_at_itm(i);
+			rv = (31 * rv) + itm.hashCode();
+		}
+		return rv;
+	}
+
 	public static XophpArray New(Object... vals) {
 		XophpArray rv = new XophpArray();
 		for (Object val : vals)

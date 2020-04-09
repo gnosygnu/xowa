@@ -143,7 +143,7 @@ public class XomwParser implements XomwParserIface {
 //		public mFunctionHooks = [];
 //		public mFunctionSynonyms = [ 0 => [], 1 => [] ];
 //		public mFunctionTagHooks = [];
-//		public mStripList = [];
+	public XophpArray mStripList = XophpArray.New();
 //		public mDefaultStripList = [];
 //		public mVarCache = [];
 //		public mImageParams = [];
@@ -295,7 +295,7 @@ public class XomwParser implements XomwParserIface {
 //				XomwParser.EXT_LINK_ADDR .
 //				XomwParser.EXT_LINK_URL_CLASS . '*)\p{Zs}*([^\]\\x00-\\x08\\x0a-\\x1F]*?)\]/Su';
 
-		this.mPreprocessorClass = XomwPreprocessor_DOM.Instance;
+		this.mPreprocessorClass = XomwPreprocessor_Hash.Instance;
 		//	if (isset($conf['preprocessorClass'])) {
 		//		this.mPreprocessorClass = $conf['preprocessorClass'];
 		//	} elseif (defined('HPHP_VERSION')) {
@@ -1096,15 +1096,15 @@ public class XomwParser implements XomwParserIface {
 //			}
 //			return $stripped;
 //		}
-//
-//		/**
-//		* Get a list of strippable XML-like elements
-//		*
-//		* @return array
-//		*/
-//		public function getStripList() {
-//			return this.mStripList;
-//		}
+
+	/**
+	* Get a list of strippable XML-like elements
+	*
+	* @return array
+	*/
+	public XophpArray getStripList() {
+		return this.mStripList;
+	}
 
 	/**
 	* Add an item to the strip state
@@ -1147,8 +1147,8 @@ public class XomwParser implements XomwParserIface {
 	* @return String
 	*/
 	// isMain=tru
-	public void internalParse(XomwParserBfr pbfr, XomwParserCtx pctx, byte[] text) {internalParse(pbfr, pctx, text, true, false);}
-	public void internalParse(XomwParserBfr pbfr, XomwParserCtx pctx, byte[] text, boolean isMain, boolean frame) {
+	public void internalParse(XomwParserBfr pbfr, XomwParserCtx pctx, byte[] text) {internalParse(pbfr, pctx, text, true, null);}
+	public void internalParse(XomwParserBfr pbfr, XomwParserCtx pctx, byte[] text, boolean isMain, XomwPPFrame frame) {
 		pbfr.Init(text);
 //			$origText = text;
 
@@ -1206,6 +1206,69 @@ public class XomwParser implements XomwParserIface {
 //			$text = $this->formatHeadings($text, $origText, $isMain);
 	}
 
+	public String internalParse(String text, boolean isMain, XomwPPFrame frame) { // isMain=true; frame=false;
+		// String origText = text;
+
+		// Avoid PHP 7.1 warning from passing this by reference
+		// XomwParser parser = this;
+
+		// Hook to suspend the parser in this state
+//			if (!Hooks::run("ParserBeforeInternalParse", [ &parser, &text, &this.mStripState ])) {
+//				return text;
+//			}
+
+		// if frame is provided, then use frame for replacing any variables
+		int flag = 0;
+		if (XophpObject_.is_true(frame)) {
+			// use frame depth to infer how include/noinclude tags should be handled
+			// depth=0 means this is the top-level document; otherwise it's an included document
+			if (!XophpInt_.is_true(frame.depth)) {
+				flag = 0;
+			} else {
+				flag = XomwParser.PTD_FOR_INCLUSION;
+			}
+			XomwPPNode dom = this.preprocessToDom(text, flag);
+			text = frame.expand(dom);
+		} else {
+			// if frame is not provided, then use old-style replaceVariables
+//				text = this.replaceVariables(text);
+		}
+
+//			Hooks::run("InternalParseBeforeSanitize", [ &parser, &text, &this.mStripState ]);
+//			text = Sanitizer::removeHTMLtags(
+//				text,
+//				[ this, "attributeStripCallback" ],
+//				false,
+//				array_keys(this.mTransparentTagHooks),
+//				[],
+//				[ this, "addTrackingCategory" ]
+//			);
+//			Hooks::run("InternalParseBeforeLinks", [ &parser, &text, &this.mStripState ]);
+
+		// Tables need to come after variable replacement for things to work
+		// properly; putting them before other transformations should keep
+		// exciting things like link expansions from showing up in surprising
+		// places.
+//			text = this.doTableStuff(text);
+//
+//			text = preg_replace("/(^|\n)-----* /", "\\1<hr />", text);
+//
+//			text = this.doDoubleUnderscore(text);
+//
+//			text = this.doHeadings(text);
+//			text = this.replaceInternalLinks(text);
+//			text = this.doAllQuotes(text);
+//			text = this.replaceExternalLinks(text);
+//
+//			// replaceInternalLinks may sometimes leave behind
+//			// absolute URLs, which have to be masked to hide them from replaceExternalLinks
+//			text = str_replace(self::MARKER_PREFIX . "NOPARSE", "", text);
+//
+//			text = this.doMagicLinks(text);
+//			text = this.formatHeadings(text, origText, isMain);
+
+		return text;
+	}
 	/**
 	* Helper function for parse() that transforms half-parsed HTML into fully
 	* parsed HTML.
@@ -2286,329 +2349,356 @@ public class XomwParser implements XomwParserIface {
 //			this.addTrackingCategory("$limitationType-category");
 //		}
 //
-//		/**
-//		* Return the text of a template, after recursively
-//		* replacing any variables or templates within the template.
-//		*
-//		* @param array $piece The parts of the template
-//		*   $piece['title']: the title, i.e. the part before the |
-//		*   $piece['parts']: the parameter array
-//		*   $piece['lineStart']: whether the brace was at the start of a line
-//		* @param PPFrame $frame The current frame, contains template arguments
-//		* @throws Exception
-//		* @return String The text of the template
-//		*/
+	// MW.SRC:1.33.1
+	/**
+	* Return the text of a template, after recursively
+	* replacing any variables or templates within the template.
+	*
+	* @param array $piece The parts of the template
+	*   $piece['title']: the title, i.e. the part before the |
+	*   $piece['parts']: the parameter array
+	*   $piece['lineStart']: whether the brace was at the start of a line
+	* @param PPFrame $frame The current frame, contains template arguments
+	* @throws Exception
+	* @return String The text of the template
+	*/
 	public XophpArray braceSubstitution(XophpArray piece, XomwPPFrame frame) {
-//
-//			// Flags
-//
-//			// $text has been filled
-//			$found = false;
-//			// wiki markup in $text should be escaped
-//			$nowiki = false;
-//			// $text is HTML, armour it against wikitext transformation
-//			$isHTML = false;
-//			// Force interwiki transclusion to be done in raw mode not rendered
-//			$forceRawInterwiki = false;
-//			// $text is a DOM node needing expansion in a child frame
-//			$isChildObj = false;
-//			// $text is a DOM node needing expansion in the current frame
-//			$isLocalObj = false;
-//
-//			// Title Object, where $text came from
-//			$title = false;
-//
-//			// $part1 is the bit before the first |, and must contain only title characters.
-//			// Various prefixes will be stripped from it later.
-//			$titleWithSpaces = $frame->expand($piece['title']);
-//			$part1 = trim($titleWithSpaces);
-//			$titleText = false;
-//
-//			// Original title text preserved for various purposes
-//			$originalTitle = $part1;
-//
-//			// $args is a list of argument nodes, starting from index 0, not including $part1
-//			// @todo FIXME: If piece['parts'] is null then the call to getLength()
-//			// below won't work b/c this $args isn't an Object
-//			$args = (null == $piece['parts']) ? [] : $piece['parts'];
-//
-//			$profileSection = null; // profile templates
-//
-//			// SUBST
-//			if (!$found) {
-//				$substMatch = this.mSubstWords->matchStartAndRemove($part1);
+		// Flags
+
+		// text has been filled
+		boolean found = false;
+		// wiki markup in text should be escaped
+		boolean nowiki = false;
+		// text is HTML, armour it against wikitext transformation
+		boolean isHTML = false;
+		// Force interwiki transclusion to be done in raw mode not rendered
+		boolean forceRawInterwiki = false;
+		// text is a DOM node needing expansion in a child frame
+		boolean isChildObj = false;
+		// text is a DOM node needing expansion in the current frame
+		boolean isLocalObj = false;
+
+		// Title Object, where text came from
+		XomwTitle title = null;
+
+		// part1 is the bit before the first |, and must contain only title characters.
+		// Various prefixes will be stripped from it later.
+		String titleWithSpaces = frame.expand(piece.Get_by("title"));
+		String part1 = XophpString_.trim(titleWithSpaces);
+		String titleText = XophpString_.False;
+
+		// Original title text preserved for various purposes
+		String originalTitle = part1;
+
+		// args is a list of argument nodes, starting from index 0, not including part1
+		// @todo FIXME: If piece["parts"] is null then the call to getLength()
+		// below won"t work b/c this args isn"t an Object
+		XomwPPNode args = (piece.Get_by("parts") == null) ? new XomwPPNode_Hash_Array(XophpArray.New()) : (XomwPPNode_Hash_Array)piece.Get_by("parts");
+
+//			boolean profileSection = XophpBool_.Null; // profile templates
+
+		String text = null;
+		// SUBST
+		if (!found) {
+//				substMatch = this.mSubstWords.matchStartAndRemove(part1);
 //
 //				// Possibilities for substMatch: "subst", "safesubst" or FALSE
 //				// Decide whether to expand template or keep wikitext as-is.
-//				if (this.ot['wiki']) {
-//					if ($substMatch === false) {
-//						$literal = true;  // literal when in PST with no prefix
+//				if (this.ot["wiki"]) {
+//					if (substMatch === false) {
+//						literal = true;  # literal when in PST with no prefix
 //					} else {
-//						$literal = false; // expand when in PST with subst: or safesubst:
+//						literal = false; # expand when in PST with subst: or safesubst:
 //					}
 //				} else {
-//					if ($substMatch == 'subst') {
-//						$literal = true;  // literal when not in PST with plain subst:
+//					if (substMatch == "subst") {
+//						literal = true;  # literal when not in PST with plain subst:
 //					} else {
-//						$literal = false; // expand when not in PST with safesubst: or no prefix
+//						literal = false; # expand when not in PST with safesubst: or no prefix
 //					}
 //				}
-//				if ($literal) {
-//					$text = $frame->virtualBracketedImplode('{{', '|', '}}', $titleWithSpaces, $args);
-//					$isLocalObj = true;
-//					$found = true;
+//				if (literal) {
+//					text = frame.virtualBracketedImplode("{{", "|", "}}", titleWithSpaces, args);
+//					isLocalObj = true;
+//					found = true;
 //				}
-//			}
-//
+		}
+
 //			// Variables
-//			if (!$found && $args->getLength() == 0) {
-//				$id = this.mVariables->matchStartToEnd($part1);
-//				if ($id !== false) {
-//					$text = this.getVariableValue($id, $frame);
-//					if (MagicWord::getCacheTTL($id) > -1) {
-//						this.mOutput->updateCacheExpiry(MagicWord::getCacheTTL($id));
+//			if (!found && args.getLength() == 0) {
+//				id = this.mVariables.matchStartToEnd(part1);
+//				if (id !== false) {
+//					text = this.getVariableValue(id, frame);
+//					if (this.magicWordFactory.getCacheTTL(id) > -1) {
+//						this.mOutput.updateCacheExpiry(
+//							this.magicWordFactory.getCacheTTL(id));
 //					}
-//					$found = true;
+//					found = true;
 //				}
 //			}
 //
 //			// MSG, MSGNW and RAW
-//			if (!$found) {
+//			if (!found) {
 //				// Check for MSGNW:
-//				mwMsgnw = MagicWord::get('msgnw');
-//				if (mwMsgnw->matchStartAndRemove($part1)) {
-//					$nowiki = true;
+//				mwMsgnw = this.magicWordFactory.get("msgnw");
+//				if (mwMsgnw.matchStartAndRemove(part1)) {
+//					nowiki = true;
 //				} else {
 //					// Remove obsolete MSG:
-//					mwMsg = MagicWord::get('msg');
-//					mwMsg->matchStartAndRemove($part1);
+//					mwMsg = this.magicWordFactory.get("msg");
+//					mwMsg.matchStartAndRemove(part1);
 //				}
 //
 //				// Check for RAW:
-//				mwRaw = MagicWord::get('raw');
-//				if (mwRaw->matchStartAndRemove($part1)) {
-//					$forceRawInterwiki = true;
+//				mwRaw = this.magicWordFactory.get("raw");
+//				if (mwRaw.matchStartAndRemove(part1)) {
+//					forceRawInterwiki = true;
 //				}
 //			}
-//
-//			// Parser functions
-//			if (!$found) {
-//				$colonPos = strpos($part1, ':');
-//				if ($colonPos !== false) {
-//					$func = substr($part1, 0, $colonPos);
-//					$funcArgs = [ trim(substr($part1, $colonPos + 1)) ];
-//					$argsLength = $args->getLength();
-//					for ($i = 0; $i < $argsLength; $i++) {
-//						$funcArgs[] = $args->item($i);
+
+		// Parser functions
+		if (!found) {
+			int colonPos = XophpString_.strpos(part1, ":");
+			if (!XophpInt_.is_false(colonPos)) {
+//					String func = XophpString_.substr(part1, 0, colonPos);
+				XophpArray funcArgs = XophpArray.New(XophpString_.trim(XophpString_.substr(part1, colonPos + 1)));
+				int argsLength = args.getLength();
+				for (int i = 0; i < argsLength; i++) {
+					funcArgs.Add(args.item(i));
+				}
+
+				XophpArray result = XophpArray.New();
+//					result = this.callParserFunction(frame, func, funcArgs);
+
+				// Extract any forwarded flags
+				if (XophpArray_.isset(result, "title")) {
+					title = (XomwTitle)result.Get_by("title");
+				}
+				if (XophpArray_.isset(result, "found")) {
+					found = result.Get_by_bool("found");
+				}
+				if (XophpArray_.array_key_exists("text", result)) {
+					// a String or null
+					text = result.Get_by_str("text");
+				}
+				if (XophpArray_.isset(result, "nowiki")) {
+					nowiki = result.Get_by_bool("nowiki");
+				}
+				if (XophpArray_.isset(result, "isHTML")) {
+					isHTML = result.Get_by_bool("isHTML");
+				}
+				if (XophpArray_.isset(result, "forceRawInterwiki")) {
+					forceRawInterwiki = result.Get_by_bool("forceRawInterwiki");
+				}
+				if (XophpArray_.isset(result, "isChildObj")) {
+					isChildObj = result.Get_by_bool("isChildObj");
+				}
+				if (XophpArray_.isset(result, "isLocalObj")) {
+					isLocalObj = result.Get_by_bool("isLocalObj");
+				}
+			}
+		}
+
+		// Finish mangling title and then check for loops.
+		// Set title to a Title Object and titleText to the PDBK
+		if (!found) {
+			int ns = XomwDefines.NS_TEMPLATE;
+			// Split the title into page and subpage
+//				String subpage = "";
+//				String relative = this.maybeDoSubpageLink(part1, subpage);
+			String relative = "";
+
+			if (!String_.Eq(part1, relative)) {
+				part1 = relative;
+				ns = this.mTitle.getNamespace();
+			}
+			title = XomwTitle.newFromText(env, part1, ns);
+			if (XophpObject_.is_true(title)) {
+				titleText = title.getPrefixedTextStr();
+				// Check for language variants if the template is not found
+//					if (this.getTargetLanguage().hasVariants() && title.getArticleID() == 0) {
+//						this.getTargetLanguage().findVariantLink(part1, title, true);
 //					}
-//					try {
-//						$result = this.callParserFunction($frame, $func, $funcArgs);
-//					} catch (Exception $ex) {
-//						throw $ex;
-//					}
-//
-//					// The interface for parser functions allows for extracting
-//					// flags into the local scope. Extract any forwarded flags
-//					// here.
-//					extract($result);
-//				}
-//			}
-//
-//			// Finish mangling title and then check for loops.
-//			// Set $title to a Title Object and $titleText to the PDBK
-//			if (!$found) {
-//				$ns = NS_TEMPLATE;
-//				// Split the title into page and subpage
-//				$subpage = '';
-//				$relative = this.maybeDoSubpageLink($part1, $subpage);
-//				if ($part1 !== $relative) {
-//					$part1 = $relative;
-//					$ns = this.mTitle->getNamespace();
-//				}
-//				$title = Title::newFromText($part1, $ns);
-//				if ($title) {
-//					$titleText = $title->getPrefixedText();
-//					// Check for language variants if the template is not found
-//					if (this.getConverterLanguage()->hasVariants() && $title->getArticleID() == 0) {
-//						this.getConverterLanguage()->findVariantLink($part1, $title, true);
-//					}
-//					// Do recursion depth check
-//					$limit = this.mOptions->getMaxTemplateDepth();
-//					if ($frame->depth >= $limit) {
-//						$found = true;
-//						$text = '<span class="error">'
-//							. wfMessage('parser-template-recursion-depth-warning')
-//								->numParams($limit)->inContentLanguage()->text()
-//							. '</span>';
-//					}
-//				}
-//			}
-//
-//			// Load from database
-//			if (!$found && $title) {
-//				$profileSection = this.mProfiler->scopedProfileIn($title->getPrefixedDBkey());
-//				if (!$title->isExternal()) {
-//					if ($title->isSpecialPage()
-//						&& this.mOptions->getAllowSpecialInclusion()
-//						&& this.ot['html']
+				// Do recursion depth check
+				int limit = this.mOptions.getMaxTemplateDepth();
+				if (frame.depth >= limit) {
+					found = true;
+//						text = "<span class=\"error\">"
+//							+ wfMessage("parser-template-recursion-depth-warning")
+//								.numParams(limit).inContentLanguage().text()
+//							+ "</span>";
+				}
+			}
+		}
+
+		// Load from database
+		if (!found && XophpObject_.is_true(title)) {
+//				profileSection = this.mProfiler.scopedProfileIn(title.getPrefixedDBkey());
+//				if (!title.isExternal()) {
+//					if (title.isSpecialPage()
+//						&& this.mOptions.getAllowSpecialInclusion()
+//						&& this.ot["html"]
 //					) {
-//						$specialPage = SpecialPageFactory::getPage($title->getDBkey());
+//						specialPage = this.specialPageFactory.getPage(title.getDBkey());
 //						// Pass the template arguments as URL parameters.
 //						// "uselang" will have no effect since the Language Object
 //						// is forced to the one defined in ParserOptions.
-//						$pageArgs = [];
-//						$argsLength = $args->getLength();
-//						for ($i = 0; $i < $argsLength; $i++) {
-//							$bits = $args->item($i)->splitArg();
-//							if (strval($bits['index']) === '') {
-//								$name = trim($frame->expand($bits['name'], PPFrame::STRIP_COMMENTS));
-//								$value = trim($frame->expand($bits['value']));
-//								$pageArgs[$name] = $value;
+//						pageArgs = [];
+//						argsLength = args.getLength();
+//						for (i = 0; i < argsLength; i++) {
+//							bits = args.item(i).splitArg();
+//							if (strval(bits["index"]) === "") {
+//								name = trim(frame.expand(bits["name"], PPFrame::STRIP_COMMENTS));
+//								value = trim(frame.expand(bits["value"]));
+//								pageArgs[name] = value;
 //							}
 //						}
 //
 //						// Create a new context to execute the special page
-//						$context = new RequestContext;
-//						$context->setTitle($title);
-//						$context->setRequest(new FauxRequest($pageArgs));
-//						if ($specialPage && $specialPage->maxIncludeCacheTime() === 0) {
-//							$context->setUser(this.getUser());
+//						context = new RequestContext;
+//						context.setTitle(title);
+//						context.setRequest(new FauxRequest(pageArgs));
+//						if (specialPage && specialPage.maxIncludeCacheTime() === 0) {
+//							context.setUser(this.getUser());
 //						} else {
 //							// If this page is cached, then we better not be per user.
-//							$context->setUser(User::newFromName('127.0.0.1', false));
+//							context.setUser(User::newFromName("127.0.0.1", false));
 //						}
-//						$context->setLanguage(this.mOptions->getUserLangObj());
-//						$ret = SpecialPageFactory::capturePath(
-//							$title, $context, this.getLinkRenderer());
-//						if ($ret) {
-//							$text = $context->getOutput()->getHTML();
-//							this.mOutput->addOutputPageMetadata($context->getOutput());
-//							$found = true;
-//							$isHTML = true;
-//							if ($specialPage && $specialPage->maxIncludeCacheTime() !== false) {
-//								this.mOutput->updateRuntimeAdaptiveExpiry(
-//									$specialPage->maxIncludeCacheTime()
+//						context.setLanguage(this.mOptions.getUserLangObj());
+//						ret = this.specialPageFactory.capturePath(title, context, this.getLinkRenderer());
+//						if (ret) {
+//							text = context.getOutput().getHTML();
+//							this.mOutput.addOutputPageMetadata(context.getOutput());
+//							found = true;
+//							isHTML = true;
+//							if (specialPage && specialPage.maxIncludeCacheTime() !== false) {
+//								this.mOutput.updateRuntimeAdaptiveExpiry(
+//									specialPage.maxIncludeCacheTime()
 //								);
 //							}
 //						}
-//					} elseif (MWNamespace::isNonincludable($title->getNamespace())) {
-//						$found = false; // access denied
+//					} elseif (MWNamespace::isNonincludable(title.getNamespace())) {
+//						found = false; # access denied
 //						wfDebug(__METHOD__ . ": template inclusion denied for " .
-//							$title->getPrefixedDBkey() . "\n");
+//							title.getPrefixedDBkey() . "\n");
 //					} else {
-//						list($text, $title) = this.getTemplateDom($title);
-//						if ($text !== false) {
-//							$found = true;
-//							$isChildObj = true;
+//						list(text, title) = this.getTemplateDom(title);
+//						if (text !== false) {
+//							found = true;
+//							isChildObj = true;
 //						}
 //					}
 //
 //					// If the title is valid but undisplayable, make a link to it
-//					if (!$found && (this.ot['html'] || this.ot['pre'])) {
-//						$text = "[[:$titleText]]";
-//						$found = true;
+//					if (!found && (this.ot["html"] || this.ot["pre"])) {
+//						text = "[[:titleText]]";
+//						found = true;
 //					}
-//				} elseif ($title->isTrans()) {
+//				} elseif (title.isTrans()) {
 //					// Interwiki transclusion
-//					if (this.ot['html'] && !$forceRawInterwiki) {
-//						$text = this.interwikiTransclude($title, 'render');
-//						$isHTML = true;
+//					if (this.ot["html"] && !forceRawInterwiki) {
+//						text = this.interwikiTransclude(title, "render");
+//						isHTML = true;
 //					} else {
-//						$text = this.interwikiTransclude($title, 'raw');
+//						text = this.interwikiTransclude(title, "raw");
 //						// Preprocess it like a template
-//						$text = this.preprocessToDom($text, XomwParser.PTD_FOR_INCLUSION);
-//						$isChildObj = true;
+//						text = this.preprocessToDom(text, self::PTD_FOR_INCLUSION);
+//						isChildObj = true;
 //					}
-//					$found = true;
+//					found = true;
 //				}
-//
-//				// Do infinite loop check
-//				// This has to be done after redirect resolution to avoid infinite loops via redirects
-//				if (!$frame->loopCheck($title)) {
-//					$found = true;
-//					$text = '<span class="error">'
-//						. wfMessage('parser-template-loop-warning', $titleText)->inContentLanguage()->text()
-//						. '</span>';
-//					wfDebug(__METHOD__ . ": template loop broken at '$titleText'\n");
+
+			// Do infinite loop check
+			// This has to be done after redirect resolution to avoid infinite loops via redirects
+			if (!frame.loopCheck(title)) {
+				found = true;
+//					text = "<span class=\"error\">"
+//						+ wfMessage("parser-template-loop-warning", titleText).inContentLanguage().text()
+//						+ "</span>";
+//					this.addTrackingCategory("template-loop-category");
+//					this.mOutput.addWarning(wfMessage("template-loop-warning",
+//						wfEscapeWikiText(titleText)).text());
+//					wfDebug(__METHOD__ . ": template loop broken at "titleText"\n");
+			}
+		}
+
+		// If we haven"t found text to substitute by now, we"re done
+		// Recover the source wikitext and return it
+//			if (!found) {
+//				text = frame.virtualBracketedImplode("{{", "|", "}}", titleWithSpaces, args);
+//				if (profileSection) {
+//					this.mProfiler.scopedProfileOut(profileSection);
 //				}
+//				return ["Object", text];
 //			}
-//
-//			// If we haven't found text to substitute by now, we're done
-//			// Recover the source wikitext and return it
-//			if (!$found) {
-//				$text = $frame->virtualBracketedImplode('{{', '|', '}}', $titleWithSpaces, $args);
-//				if ($profileSection) {
-//					this.mProfiler->scopedProfileOut($profileSection);
-//				}
-//				return [ 'Object' => $text ];
-//			}
-//
+
+//			XomwPPFrame newFrame = null;
 //			// Expand DOM-style return values in a child frame
-//			if ($isChildObj) {
+//			if (isChildObj) {
 //				// Clean up argument array
-//				$newFrame = $frame->newChild($args, $title);
+//				newFrame = frame.newChild(args, title);
 //
-//				if ($nowiki) {
-//					$text = $newFrame->expand($text, PPFrame::RECOVER_ORIG);
-//				} elseif ($titleText !== false && $newFrame->isEmpty()) {
+//				if (nowiki) {
+//					text = newFrame.expand(text, XomwPPFrame.RECOVER_ORIG);
+//				} else if (!XophpString_.is_false(titleText) && newFrame.isEmpty()) {
 //					// Expansion is eligible for the empty-frame cache
-//					$text = $newFrame->cachedExpand($titleText, $text);
+//					text = newFrame.cachedExpand(titleText, text);
 //				} else {
 //					// Uncached expansion
-//					$text = $newFrame->expand($text);
+//					text = newFrame.expand(text);
 //				}
 //			}
-//			if ($isLocalObj && $nowiki) {
-//				$text = $frame->expand($text, PPFrame::RECOVER_ORIG);
-//				$isLocalObj = false;
+//			if (isLocalObj && nowiki) {
+//				text = frame.expand(text, PPFrame::RECOVER_ORIG);
+//				isLocalObj = false;
 //			}
 //
-//			if ($profileSection) {
-//				this.mProfiler->scopedProfileOut($profileSection);
+//			if (profileSection) {
+//				this.mProfiler.scopedProfileOut(profileSection);
 //			}
 //
 //			// Replace raw HTML by a placeholder
-//			if ($isHTML) {
-//				$text = this.insertStripItem($text);
-//			} elseif ($nowiki && (this.ot['html'] || this.ot['pre'])) {
+//			if (isHTML) {
+//				text = this.insertStripItem(text);
+//			} elseif (nowiki && (this.ot["html"] || this.ot["pre"])) {
 //				// Escape nowiki-style return values
-//				$text = wfEscapeWikiText($text);
-//			} elseif (is_string($text)
-//				&& !$piece['lineStart']
-//				&& preg_match('/^(?:{\\||:|;|#|\*)/', $text)
+//				text = wfEscapeWikiText(text);
+//			} elseif (is_string(text)
+//				&& !piece["lineStart"]
+//				&& preg_match("/^(?:{\\||:|;|#|\*)/", text)
 //			) {
 //				// T2529: if the template begins with a table or block-level
 //				// element, it should be treated as beginning a new line.
 //				// This behavior is somewhat controversial.
-//				$text = "\n" . $text;
+//				text = "\n" . text;
 //			}
 //
-//			if (is_string($text) && !this.incrementIncludeSize('post-expand', strlen($text))) {
+//			if (is_string(text) && !this.incrementIncludeSize("post-expand", strlen(text))) {
 //				// Error, oversize inclusion
-//				if ($titleText !== false) {
+//				if (titleText !== false) {
 //					// Make a working, properly escaped link if possible (T25588)
-//					$text = "[[:$titleText]]";
+//					text = "[[:titleText]]";
 //				} else {
 //					// This will probably not be a working link, but at least it may
 //					// provide some hint of where the problem is
-//					preg_replace('/^:/', '', $originalTitle);
-//					$text = "[[:$originalTitle]]";
+//					preg_replace("/^:/", "", originalTitle);
+//					text = "[[:originalTitle]]";
 //				}
-//				$text .= this.insertStripItem('<!-- WARNING: template omitted, '
-//					. 'post-expand include size too large -->');
-//				this.limitationWarn('post-expand-template-inclusion');
+//				text .= this.insertStripItem("<!-- WARNING: template omitted, "
+//					. "post-expand include size too large -.");
+//				this.limitationWarn("post-expand-template-inclusion");
 //			}
-//
-//			if ($isLocalObj) {
-//				$ret = [ 'Object' => $text ];
-//			} else {
-//				$ret = [ 'text' => $text ];
-//			}
-//
-//			return $ret;
-		return null;
+
+		XophpArray ret;
+		if (isLocalObj) {
+			ret = XophpArray.New("Object", text);
+		} else {
+			ret = XophpArray.New("text", text);
+		}
+Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText, originalTitle);
+		return ret;
 	}
-//
+
 //		/**
 //		* Call a parser function and return an array with text and flags.
 //		*
