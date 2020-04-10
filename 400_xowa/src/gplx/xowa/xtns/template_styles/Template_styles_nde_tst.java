@@ -59,7 +59,7 @@ public class Template_styles_nde_tst {
 		)
 		, ""
 		, fxt.Make__style(0, css_red)
-		+ fxt.Make__style(1, css_blue)			
+		+ fxt.Make__style(1, css_blue)
 		);
 	}
 	@Test  public void Dedupe() { // PURPOSE: multiple calls to same page should output link; DATE:2018-12-30
@@ -72,7 +72,7 @@ public class Template_styles_nde_tst {
 		)
 		, ""
 		, String_.Concat_lines_nl
-		(   fxt.Make__style(0, css))
+		( fxt.Make__style(0, css))
 		);
 	}
 	@Test  public void Tag() { // PURPOSE: {{#tag}}
@@ -131,7 +131,7 @@ class Template_styles_nde_fxt {
 		return ".style0{color:" + color + ";}";
 	}
 	public String Make__style(int id, String css) {
-		return "\n/*TemplateStyles:r" + id + "*/\n" + css;
+		return "\n/*TemplateStyles:r" + id + "*/\n.mw-parser-output " + css; // .mw-parser-output needs to be added to all TemplateStyles CSS, else TS ids called "portal" will affect sidebar; ISSUE#:426; PAGE:en.w:Poland DATE:2020-04-10
 	}
 	public void Test__parse(String src, String expd_html, String expd_head) {
 		parser_fxt.Test__parse__tmpl_to_html(src, expd_html);

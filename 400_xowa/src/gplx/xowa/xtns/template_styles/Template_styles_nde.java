@@ -105,7 +105,7 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public static final byte Xatr__src = 0;
 	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_str_byte("src", Xatr__src);
 	private static final    Bry_fmt
-	  html_head  = Bry_fmt.Auto("\n/*TemplateStyles:r~{id}*/\n~{css}")
+	  html_head  = Bry_fmt.Auto("\n/*TemplateStyles:r~{id}*/\n.mw-parser-output ~{css}") // .mw-parser-output needs to be added to all TemplateStyles CSS, else TS ids called "portal" will affect sidebar; ISSUE#:426; PAGE:en.w:Poland DATE:2020-04-10
 	, html_error = Bry_fmt.Auto("<strong class=\"error\">~{msg}</strong>")
 	;
 }
