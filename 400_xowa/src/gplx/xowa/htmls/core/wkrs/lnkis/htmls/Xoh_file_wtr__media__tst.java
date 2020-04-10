@@ -19,8 +19,7 @@ public class Xoh_file_wtr__media__tst {
 	@Before public void init() {fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Page_only() { // if no caption, then use page name; DATE:2017-05-20
 		fxt.Test_parse_page_wiki_str("[[Media:A.png]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" xowa_title=\"A.png\">Media:A.png"
-		, "</a>"
+		( "<a href=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" xowa_title=\"A.png\">Media:A.png</a>"
 		));
 	}
 	@Test  public void Nested_caption() { // PAGE:en.w:Beethoven;
@@ -29,8 +28,7 @@ public class Xoh_file_wtr__media__tst {
 		, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
 		, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"
 		, "    <div class=\"thumbcaption\">"
-		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>b <a href=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" xowa_title=\"A.ogg\">media_caption"
-		, "</a> c"
+		,       "<div class=\"magnify\"><a href=\"/wiki/File:A.png\" class=\"internal\" title=\"Enlarge\"></a></div>b <a href=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" xowa_title=\"A.ogg\">media_caption</a> c"
 		, "    </div>"
 		, "  </div>"
 		, "</div>"
@@ -39,21 +37,18 @@ public class Xoh_file_wtr__media__tst {
 	}
 	@Test  public void Caption() {
 		fxt.Test_parse_page_wiki_str("[[Media:A.png|b]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" xowa_title=\"A.png\">b"
-		, "</a>"
+		( "<a href=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" xowa_title=\"A.png\">b</a>"
 		));
 	}
 	@Test  public void Literal() {
 		fxt.Test_parse_page_wiki_str("[[:Media:A.ogg|b]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" xowa_title=\"A.ogg\">b"
-		, "</a>"
+		( "<a href=\"file:///mem/wiki/repo/trg/orig/4/2/A.ogg\" xowa_title=\"A.ogg\">b</a>"
 		));
 	}
 	@Test  public void Literal_w_missing() {
 		fxt.Wiki().Html_mgr().Img_suppress_missing_src_(true);	// simulate missing file; DATE:2014-01-30
 		fxt.Test_parse_page_wiki_str("[[Media:A.pdf|b]]", String_.Concat_lines_nl_skip_last
-		( "<a href=\"file:///mem/wiki/repo/trg/orig/e/f/A.pdf\" xowa_title=\"A.pdf\">b"
-		, "</a>"
+		( "<a href=\"file:///mem/wiki/repo/trg/orig/e/f/A.pdf\" xowa_title=\"A.pdf\">b</a>"
 		));
 		Tfds.Eq(0, fxt.Page().File_queue().Count());			// make sure media does not add to queue
 		fxt.Wiki().Html_mgr().Img_suppress_missing_src_(false);

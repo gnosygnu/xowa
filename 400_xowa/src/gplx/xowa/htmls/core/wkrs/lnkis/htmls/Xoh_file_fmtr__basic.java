@@ -27,7 +27,7 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 		if (mode_is_hdump) a_href = Bry_.Empty;
 		fmtr_full_media.Bld_many(bfr, a_href, a_title, a_html);
 	}
-	private final    Bry_fmt fmtr_full_media = Bry_fmt.Auto("<a href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\">~{html}\n</a>");
+	private final    Bry_fmt fmtr_full_media = Bry_fmt.Auto("<a href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\">~{html}</a>"); // changed from '~{html}\n</a>' due to extra whitespace; ISSUE#:703; PAGE:en.w:Poland; DATE:2020-04-10
 
 	@gplx.Virtual public void Add_full_img(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
 	, byte[] a_href, boolean a_href_is_file, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
