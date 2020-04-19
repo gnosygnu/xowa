@@ -1,20 +1,10 @@
-/*
-XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+package gplx.xowa.xtns.template_styles;
 
-XOWA is licensed under the terms of the General Public License (GPL) Version 3,
-or alternatively under the terms of the Apache License Version 2.0.
-
-You may use XOWA according to either of these licenses as is most appropriate
-for your project on a case-by-case basis.
-
-The terms of each license can be found in the source code repository:
-
-GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
-Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
-*/
-package gplx.xowa.xtns.template_styles; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.tests.*;
+import gplx.String_;
+import gplx.core.tests.Gftest;
+import gplx.xowa.Xop_fxt;
+import org.junit.Before;
+import org.junit.Test;
 public class Template_styles_nde_tst {
 	private final    Template_styles_nde_fxt fxt = new Template_styles_nde_fxt();
 	@Before public void init() {
@@ -128,7 +118,7 @@ class Template_styles_nde_fxt {
 		parser_fxt.Init_page_create(page, text);
 	}
 	public String Make__css_color(String color) {
-		return ".style0{color:" + color + ";}";
+		return ".style0{color:" + color + "}";
 	}
 	public String Make__style(int id, String css) {
 		return "\n/*TemplateStyles:r" + id + "*/\n.mw-parser-output " + css; // .mw-parser-output needs to be added to all TemplateStyles CSS, else TS ids called "portal" will affect sidebar; ISSUE#:426; PAGE:en.w:Poland DATE:2020-04-10
