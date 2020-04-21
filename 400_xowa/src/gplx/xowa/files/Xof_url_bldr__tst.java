@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -25,6 +25,8 @@ public class Xof_url_bldr__tst {
 	@Test 	public void Bmp() 			{fxt.Root_("http://test/").Md5_("70").Ttl_("A.bmp").W_(220).Expd_src_("http://test/thumb/7/70/A.bmp/220px-A.bmp.png").Test();}
 	@Test 	public void Pdf() 			{fxt.Root_("http://test/").Md5_("ef").Ttl_("A.pdf").W_(220).Expd_src_("http://test/thumb/e/ef/A.pdf/page1-220px-A.pdf.jpg").Test();}
 	@Test 	public void Pdf__page_2() 	{fxt.Root_("http://test/").Md5_("ef").Ttl_("A.pdf").W_(220).Expd_src_("http://test/thumb/e/ef/A.pdf/page2-220px-A.pdf.jpg").Page_(2).Test();}
+	@Test 	public void Stl() 			{fxt.Root_("http://test/").Md5_("62").Ttl_("A.stl").W_(220).Expd_src_("http://test/thumb/6/62/A.stl/220px-A.stl.png").Test();}
+	@Test 	public void Webp() 			{fxt.Root_("http://test/").Md5_("d9").Ttl_("A.webp").W_(220).Expd_src_("http://test/thumb/d/d9/A.webp/220px-A.webp.png").Test();}
 	@Test 	public void Long() {
 		String filename = String_.Repeat("A", 200) + ".png";
 		fxt.Root_("http://test/").Md5_("14").Ttl_(filename).W_(220)

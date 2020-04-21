@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -173,23 +173,21 @@ public class Xof_url_bldr {
 			tmp_bfr.Add(Bry_thumnbail_w_dot);
 			tmp_bfr.Add(ext.Ext());
 		}
-		else
-			tmp_bfr.Add(encoder_src_http.Encode(ttl));										// add ttl again;			EX: "A.png"
-		switch (file_ext_id) {
-			case Xof_ext_.Id_svg:
-			case Xof_ext_.Id_bmp:
-			case Xof_ext_.Id_xcf:
-				tmp_bfr.Add_byte(Byte_ascii.Dot).Add(Xof_ext_.Bry_png);						// add .png;				EX: "A.svg" -> "A.svg.png"		NOTE: MediaWiki always adds as lowercase
-				break;
-			case Xof_ext_.Id_pdf:
-			case Xof_ext_.Id_tif:															// add .jpg					EX: "A.tif" -> "A.tif.jpg"		NOTE: MediaWiki always adds as lowercase
-			case Xof_ext_.Id_tiff:
-			case Xof_ext_.Id_ogg:
-			case Xof_ext_.Id_ogv:						
-			case Xof_ext_.Id_djvu:
-			case Xof_ext_.Id_webm:
-				tmp_bfr.Add_byte(Byte_ascii.Dot).Add(Xof_ext_.Bry_jpg);
-				break;
+		else {
+			tmp_bfr.Add(encoder_src_http.Encode(ttl));                                        // add ttl again;			EX: "A.png"
+		}
+		// add ".png" / ".jpg" suffix if file is image; NOTE: don't add if already .png or .jpg
+		if  (  file_ext_id != Xof_ext_.Id_png
+			&& file_ext_id != Xof_ext_.Id_jpg) {
+			int file_view_id = Xof_ext_.Id_view(file_ext_id);
+			switch (file_view_id) {
+				case Xof_ext_.Id_png:
+					tmp_bfr.Add_byte(Byte_ascii.Dot).Add(Xof_ext_.Bry_png);                   // add .png;			EX: "A.svg" -> "A.svg.png"		NOTE: MediaWiki always adds as lowercase
+					break;
+				case Xof_ext_.Id_jpg:                                                         // add .jpg			EX: "A.tif" -> "A.tif.jpg"		NOTE: MediaWiki always adds as lowercase
+					tmp_bfr.Add_byte(Byte_ascii.Dot).Add(Xof_ext_.Bry_jpg);
+					break;
+			}
 		}
 		return this;
 	}
@@ -225,5 +223,4 @@ public class Xof_url_bldr {
 		rv.time_dlm = Byte_ascii.Dash;
 		return rv;
 	}
-	public static final int Md5_dir_depth_2 = 2;
 }

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -48,6 +48,8 @@ public class Xof_mime_minor_ {
 		mime_hash_itm_(rv, Mime_xcf				, Xof_ext_.Id_xcf);
 		mime_hash_itm_(rv, Xof_ext_.Bry_wav		, Xof_ext_.Id_wav);
 		mime_hash_itm_(rv, Xof_ext_.Bry_opus	, Xof_ext_.Id_opus);
+		mime_hash_itm_(rv, Xof_ext_.Bry_stl     , Xof_ext_.Id_stl);
+		mime_hash_itm_(rv, Xof_ext_.Bry_webp    , Xof_ext_.Id_webp);
 		return rv;
 	}
 	private static void mime_hash_itm_(Hash_adp hash, byte[] key, int val) {hash.Add(key, new Int_obj_val(val));}

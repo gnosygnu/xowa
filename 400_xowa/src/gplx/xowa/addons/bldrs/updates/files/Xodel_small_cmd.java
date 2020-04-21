@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -43,6 +43,8 @@ class Xobldr__fsdb_db__delete_small_files_ {
 		Ext_max_(rv, 1000, Xof_ext_.Id_ogv);
 		Ext_max_(rv,  400, Xof_ext_.Id_pdf);
 		Ext_max_(rv,  700, Xof_ext_.Id_djvu);
+		Ext_max_(rv,  500, Xof_ext_.Id_stl);
+		Ext_max_(rv,  500, Xof_ext_.Id_webp);
 		return rv;
 	}
 	private static void Ext_max_(int[] ary, int max, int... exts) {for (int ext : exts) ary[ext] = max;}
