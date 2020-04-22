@@ -1,3 +1,18 @@
+/*
+XOWA: the XOWA Offline Wiki Application
+Copyright (C) 2012-2020 gnosygnu@gmail.com
+
+XOWA is licensed under the terms of the General Public License (GPL) Version 3,
+or alternatively under the terms of the Apache License Version 2.0.
+
+You may use XOWA according to either of these licenses as is most appropriate
+for your project on a case-by-case basis.
+
+The terms of each license can be found in the source code repository:
+
+GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
+Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
+*/
 package gplx.xowa.htmls.minifys;
 
 import gplx.core.bits.Bitmask_;
@@ -275,11 +290,10 @@ public class XoCssMin {
 
 		if (isModeXowa) {
 			// add the '.mw-parser-output ' selector
-			// XO: commented out; handled in TemplateStyles to improve performance
-			// css = JsString_.replace(css, patterns, "\\}([^@}].{2})", "}.mw-parser-output $1");
-			// css = JsString_.replace(css, patterns, "(@media[^\\{]*\\{)", "$1.mw-parser-output ");
-			// if (css.charAt(0) != '@')
-			//     css = ".mw-parser-output " + css;
+			css = JsString_.replace(css, patterns, "\\}([^@}].{2})", "}.mw-parser-output $1");
+			css = JsString_.replace(css, patterns, "(@media[^\\{]*\\{)", "$1.mw-parser-output ");
+			if (css.charAt(0) != '@')
+				css = ".mw-parser-output " + css;
 
 			// change some url(...) entries
 			css = css.replace("//upload.wikimedia.org", "//www.xowa.org/xowa/fsys/bin/any/xowa/upload.wikimedia.org");
