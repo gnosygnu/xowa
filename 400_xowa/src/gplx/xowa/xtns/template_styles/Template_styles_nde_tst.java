@@ -121,6 +121,15 @@ public class Template_styles_nde_tst {
 		, ""
 		);
 	}
+	@Test  public void Wrapper() {
+		String css = fxt.Make__css_color("red");
+		fxt.Init__page("Template:Test.css", css);
+		fxt.Test__parse
+		( "<templatestyles src='Test.css' wrapper='.wrapper_class' />"
+		, ""
+		, fxt.Make__style(0, ".wrapper_class", css)
+		);
+	}
 }
 class Template_styles_nde_fxt {
 	private final    Xop_fxt parser_fxt = new Xop_fxt();
@@ -135,8 +144,10 @@ class Template_styles_nde_fxt {
 	public String Make__css_color(String color) {
 		return ".style0{color:" + color + "}";
 	}
-	public String Make__style(int id, String css) {
-		return "\n/*TemplateStyles:r" + id + "*/\n.mw-parser-output " + css; // .mw-parser-output needs to be added to all TemplateStyles CSS, else TS ids called "portal" will affect sidebar; ISSUE#:426; PAGE:en.w:Poland DATE:2020-04-10
+	public String Make__style(int id, String css) {return Make__style(id, null, css);}
+	public String Make__style(int id, String wrapper, String css) {
+		wrapper = wrapper == null ? "" : wrapper + " ";
+		return "\n/*TemplateStyles:r" + id + "*/\n" + wrapper + ".mw-parser-output " + css; // .mw-parser-output needs to be added to all TemplateStyles CSS, else TS ids called "portal" will affect sidebar; ISSUE#:426; PAGE:en.w:Poland DATE:2020-04-10
 	}
 	public void Test__parse(String src, String expd_html, String expd_head) {
 		parser_fxt.Test__parse__tmpl_to_html(src, expd_html);

@@ -40,6 +40,7 @@ import gplx.xowa.xtns.Xox_xnde;
 import gplx.xowa.xtns.Xox_xnde_;
 public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	private byte[] css_ttl_bry;
+	private byte[] wrapper;
 	private byte[] css_src;
 	private boolean css_ignore;
 	private int css_page_id;
@@ -48,6 +49,9 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, byte xatr_id) {
 		switch (xatr_id) {
 			case Xatr__src:			css_ttl_bry = xatr.Val_as_bry(); break;
+			case Xatr__wrapper:
+				wrapper = Bry_.Add(xatr.Val_as_bry(), Byte_ascii.Space); // add trailing space for html_head.format
+				break;
 		}
 	}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
@@ -100,7 +104,7 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		if (!css_ignore) {
 			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 			try {
-				html_head.Bld_many(tmp_bfr, css_page_id, Bry_.new_u8(cssMin.cssmin(String_.new_u8(css_src), -1)) );
+				html_head.Bld_many(tmp_bfr, css_page_id, wrapper, Bry_.new_u8(cssMin.cssmin(String_.new_u8(css_src), -1)) );
 				Xoh_head_itm__css_dynamic css_dynamic = ctx.Page().Html_data().Head_mgr().Itm__css_dynamic();
 				css_dynamic.Enabled_y_();
 				css_dynamic.Add(tmp_bfr.To_bry_and_clear());
@@ -120,10 +124,13 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		return html_error.Bld_many_to_str_auto_bfr(msg);
 	}
 
-	public static final byte Xatr__src = 0;
-	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_str_byte("src", Xatr__src);
+	public static final byte Xatr__src = 0, Xatr__wrapper = 1;
+	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+		.Add_str_byte("src", Xatr__src)
+		.Add_str_byte("wrapper", Xatr__wrapper)
+	;
 	private static final    Bry_fmt
-	  html_head  = Bry_fmt.Auto("\n/*TemplateStyles:r~{id}*/\n~{css}")
+	  html_head  = Bry_fmt.Auto("\n/*TemplateStyles:r~{id}*/\n~{wrapper}~{css}")
 	, html_error = Bry_fmt.Auto("<strong class=\"error\">~{msg}</strong>")
 	;
 }
