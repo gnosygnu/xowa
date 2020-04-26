@@ -29,7 +29,7 @@ public class XomwWikiFilePage extends XomwWikiPage { //		/** @var File */
 //		/** @var array */
 //		protected $mDupes = null;
 
-	public XomwWikiFilePage(XomwTitle title) {super(title);
+	public XomwWikiFilePage(XomwTitleOld title) {super(title);
 //			$this->mDupes = null;
 //			$this->mRepo = null;
 	}

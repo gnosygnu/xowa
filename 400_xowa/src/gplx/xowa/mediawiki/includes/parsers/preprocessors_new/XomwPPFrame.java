@@ -45,7 +45,7 @@ public abstract class XomwPPFrame {
 	*
 	* @return PPFrame
 	*/
-	@gplx.Virtual public XomwPPFrame newChild(Object args, XomwTitle title, int indexOffset) {return null;}
+	@gplx.Virtual public XomwPPFrame newChild(Object args, XomwTitleOld title, int indexOffset) {return null;}
 
 	/**
 	* Expand a document tree node, caching the result on its parent with the given key
@@ -139,7 +139,7 @@ public abstract class XomwPPFrame {
 	* @param Title $title
 	* @return boolean
 	*/
-	@gplx.Virtual public boolean loopCheck(XomwTitle title) {return false;}
+	@gplx.Virtual public boolean loopCheck(XomwTitleOld title) {return false;}
 
 	/**
 	* Return true if the frame is a template frame
@@ -201,5 +201,5 @@ public abstract class XomwPPFrame {
 	*
 	* @return Title
 	*/
-	@gplx.Virtual public XomwTitle getTitle() {return null;}
+	@gplx.Virtual public XomwTitleOld getTitle() {return null;}
 }

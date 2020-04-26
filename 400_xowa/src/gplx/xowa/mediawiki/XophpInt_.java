@@ -24,4 +24,7 @@ public class XophpInt_ {
 	public static int intval(String val) {
 		return Int_.Parse_or(val, 0);
 	}
+	public static int cast(Object val) {
+		return Int_.Cast(val);
+	}
 }

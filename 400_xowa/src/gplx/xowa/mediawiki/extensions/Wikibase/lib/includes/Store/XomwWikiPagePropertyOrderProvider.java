@@ -27,12 +27,12 @@ class XomwWikiPagePropertyOrderProvider extends XomwWikiTextPropertyOrderProvide
 	/**
 	* @var Title
 	*/
-	private XomwTitle pageTitle;
+	private XomwTitleOld pageTitle;
 
 	/**
 	* @param Title pageTitle page name the ordered property list is on
 	*/
-	public XomwWikiPagePropertyOrderProvider(XomwTitle pageTitle) {
+	public XomwWikiPagePropertyOrderProvider(XomwTitleOld pageTitle) {
 		this.pageTitle = pageTitle;
 	}
 

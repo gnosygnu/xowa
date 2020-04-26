@@ -42,7 +42,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final    XomwStripState strip_state;
 	private XomwEnv env;
 	private Xow_wiki wiki;
-	private XomwTitle mPageTitle;
+	private XomwTitleOld mPageTitle;
 //		private final    XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
 	private final    Bry_bfr tmp;
 	private final    XomwParserIface parser;
@@ -69,7 +69,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.env = env;
 		this.wiki = wiki;
 		if (title_chars_for_lnki == null) {
-			title_chars_for_lnki = (boolean[])Array_.Clone(XomwTitle.Title_chars_valid());
+			title_chars_for_lnki = (boolean[])Array_.Clone(XomwTitleOld.Title_chars_valid());
 			// the % is needed to support urlencoded titles as well
 			title_chars_for_lnki[Byte_ascii.Hash] = true;
 			title_chars_for_lnki[Byte_ascii.Percent] = true;
@@ -155,7 +155,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// PORTED.BGN: if (preg_match($e1, $line, $m)) && else if (preg_match($e1_img, $line, $m))
 			// NOTE: both e1 and e1_img are effectively the same; e1_img allows nested "[["; EX: "[[A|b[[c]]d]]" will stop at "[[A|b"
 			int ttl_bgn = cur;
-			int ttl_end = XomwTitle.Find_fwd_while_title(src, cur, src_end, title_chars_for_lnki);
+			int ttl_end = XomwTitleOld.Find_fwd_while_title(src, cur, src_end, title_chars_for_lnki);
 			cur = ttl_end;
 			int capt_bgn = -1, capt_end = -1;
 			int nxt_lnki = -1;
@@ -253,7 +253,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				link = Bry_.Mid(link, 1);
 			}
 			// $nt = is_string( $unstrip ) ? Title::newFromText( $unstrip ) : null;
-			XomwTitle nt = XomwTitle.newFromText(env, link);
+			XomwTitleOld nt = XomwTitleOld.newFromText(env, link);
 
 			// Make subpage if necessary
 //				boolean useSubpages = nt.Ns().Subpages_enabled();
@@ -261,7 +261,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 //					Maybe_do_subpage_link(normalize_subpage_link, orig_link, text);
 //					link = normalize_subpage_link.link;
 //					text = normalize_subpage_link.text;
-//					nt = XomwTitle.newFromText(link);
+//					nt = XomwTitleOld.newFromText(link);
 //				}
 			// IGNORE: handled in rewrite above
 			// else {
@@ -270,7 +270,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 			byte[] unstrip = strip_state.unstripNoWiki(link);
 			if (!Bry_.Eq(unstrip, link))
-				nt = XomwTitle.newFromText(env, unstrip);
+				nt = XomwTitleOld.newFromText(env, unstrip);
 			if (nt == null) {
 				bfr.Add_mid(src, prv, lnki_bgn + 2);	// $s .= $prefix . '[[' . $line;
 				prv = cur = lnki_bgn + 2;					
@@ -443,7 +443,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 		}
 	}
-	public void makeImage(XomwEnv env, XomwParserCtx pctx, Bry_bfr bfr, XomwTitle title, byte[] options_at_link, XomwLinkHolderArray holders) {
+	public void makeImage(XomwEnv env, XomwParserCtx pctx, Bry_bfr bfr, XomwTitleOld title, byte[] options_at_link, XomwLinkHolderArray holders) {
 		// Check if the options text is of the form "options|alt text"
 		// Options are:
 		//  * thumbnail  make a thumbnail with enlarge-icon and caption, alignment depends on lang
@@ -758,7 +758,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	* @param array $options Array of options to RepoGroup::findFile
 	* @return array ( File or false, Title of file )
 	*/
-	public XomwFile fetchFileAndTitle(XomwTitle title, Hash_adp options) {
+	public XomwFile fetchFileAndTitle(XomwTitleOld title, Hash_adp options) {
 		XomwFile file = fetchFileNoRegister(title, options);
 
 		//$time = $file ? $file->getTimestamp() : false;
@@ -782,7 +782,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	* @param array $options Array of options to RepoGroup::findFile
 	* @return File|boolean
 	*/
-	private XomwFile fetchFileNoRegister(XomwTitle title, Hash_adp options) {
+	private XomwFile fetchFileNoRegister(XomwTitleOld title, Hash_adp options) {
 		XomwFile file = null;
 //			if ( isset( $options['broken'] ) ) {
 //				file = false; // broken thumbnail forced by hook
@@ -799,7 +799,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	public void replaceLinkHolders(XomwParserBfr pbfr) {
 		holders.replace(pbfr);
 	}
-	public void Make_known_link_holder(Bry_bfr bfr, XomwTitle nt, byte[] text, byte[] trail, byte[] prefix) {
+	public void Make_known_link_holder(Bry_bfr bfr, XomwTitleOld nt, byte[] text, byte[] trail, byte[] prefix) {
 		byte[][] split_trail = linker.splitTrail(trail);
 		byte[] inside = split_trail[0];
 		trail = split_trail[1];

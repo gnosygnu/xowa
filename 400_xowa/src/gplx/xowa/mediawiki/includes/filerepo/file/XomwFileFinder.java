@@ -15,5 +15,5 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.filerepo.file; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.filerepo.*;
 public interface XomwFileFinder {
-	XomwFile Find_file(XomwTitle ttl);
+	XomwFile Find_file(XomwTitleOld ttl);
 }

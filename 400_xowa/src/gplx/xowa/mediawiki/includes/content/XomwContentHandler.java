@@ -224,7 +224,7 @@ public abstract class XomwContentHandler {
 	*
 	* @return ContentHandler
 	*/
-//		public static XomwContentHandler getForTitle(XomwTitle title) {
+//		public static XomwContentHandler getForTitle(XomwTitleOld title) {
 //			int modelId = title.getContentModel();
 //
 //			return ContentHandler.getForModelID(modelId);

@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.dao.*;
+import gplx.xowa.mediawiki.includes.libs.rdbms.database.XomwIDatabase;
+import gplx.xowa.mediawiki.includes.linkers.XomwLinkTarget;
 // MW.SRC:1.33.1
 /**
 * @+deprecated since 1.31, use RevisionRecord, RevisionStore, and BlobStore instead.
@@ -42,10 +44,10 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		/**
 //		* @return RevisionStore
 //		*/
-//		protected static function getRevisionStore( $wiki = false ) {
-//			if ( $wiki ) {
+//		protected static function getRevisionStore($wiki = false) {
+//			if ($wiki) {
 //				return MediaWikiServices::getInstance()->getRevisionStoreFactory()
-//					->getRevisionStore( $wiki );
+//					->getRevisionStore($wiki);
 //			} else {
 //				return MediaWikiServices::getInstance()->getRevisionStore();
 //			}
@@ -70,57 +72,61 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*
 //		* @return SqlBlobStore
 //		*/
-//		protected static function getBlobStore( $wiki = false ) {
+//		protected static function getBlobStore($wiki = false) {
 //			$store = MediaWikiServices::getInstance()
 //				->getBlobStoreFactory()
-//				->newSqlBlobStore( $wiki );
+//				->newSqlBlobStore($wiki);
 //
-//			if ( !$store instanceof SqlBlobStore ) {
+//			if (!$store instanceof SqlBlobStore) {
 //				throw new RuntimeException(
 //					'The backwards compatibility code in Revision currently requires the BlobStore '
-//					. 'service to be an SqlBlobStore instance, but it is a ' . get_class( $store )
+//					. 'service to be an SqlBlobStore instance, but it is a ' . get_class($store)
 //				);
 //			}
 //
 //			return $store;
 //		}
 //
-//		/**
-//		* Load a page revision from a given revision ID number.
-//		* Returns null if no such revision can be found.
-//		*
-//		* $flags include:
-//		*      Revision::READ_LATEST  : Select the data from the master
-//		*      Revision::READ_LOCKING : Select & synchronized the data from the master
-//		*
-//		* @param int $id
-//		* @param int $flags (optional)
-//		* @return Revision|null
-//		*/
-//		public static function newFromId( $id, $flags = 0 ) {
-//			$rec = self::getRevisionLookup()->getRevisionById( $id, $flags );
-//			return $rec ? new Revision( $rec, $flags ) : null;
-//		}
-//
-//		/**
-//		* Load either the current, or a specified, revision
-//		* that's attached to a given link target. If not attached
-//		* to that link target, will return null.
-//		*
-//		* $flags include:
-//		*      Revision::READ_LATEST  : Select the data from the master
-//		*      Revision::READ_LOCKING : Select & synchronized the data from the master
-//		*
-//		* @param LinkTarget $linkTarget
-//		* @param int $id (optional)
-//		* @param int $flags Bitfield (optional)
-//		* @return Revision|null
-//		*/
-//		public static function newFromTitle( LinkTarget $linkTarget, $id = 0, $flags = 0 ) {
-//			$rec = self::getRevisionLookup()->getRevisionByTitle( $linkTarget, $id, $flags );
-//			return $rec ? new Revision( $rec, $flags ) : null;
-//		}
-//
+		/**
+		* Load a page revision from a given revision ID number.
+		* Returns null if no such revision can be found.
+		*
+		* $flags include:
+		*      Revision::READ_LATEST  : Select the data from the master
+		*      Revision::READ_LOCKING : Select & synchronized the data from the master
+		*
+		* @param int $id
+		* @param int $flags (optional)
+		* @return Revision|null
+		*/
+		public static XomwRevision newFromId(int id) {return newFromId(id, 0);}
+		public static XomwRevision newFromId(int id, int flags) {
+//			$rec = self::getRevisionLookup()->getRevisionById($id, $flags);
+//			return $rec ? new Revision($rec, $flags) : null;
+			return null;
+		}
+
+		/**
+		* Load either the current, or a specified, revision
+		* that's attached to a given link target. If not attached
+		* to that link target, will return null.
+		*
+		* $flags include:
+		*      Revision::READ_LATEST  : Select the data from the master
+		*      Revision::READ_LOCKING : Select & synchronized the data from the master
+		*
+		* @param LinkTarget $linkTarget
+		* @param int $id (optional)
+		* @param int $flags Bitfield (optional)
+		* @return Revision|null
+		*/
+		public static XomwRevision newFromTitle(XomwLinkTarget linkTarget) {return newFromTitle(linkTarget, 0, 0);}
+		public static XomwRevision newFromTitle(XomwLinkTarget linkTarget, int id, int flags) {
+//			$rec = self::getRevisionLookup()->getRevisionByTitle($linkTarget, $id, $flags);
+//			return $rec ? new Revision($rec, $flags) : null;
+			return null;
+		}
+
 //		/**
 //		* Load either the current, or a specified, revision
 //		* that's attached to a given page ID.
@@ -135,9 +141,9 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param int $flags Bitfield (optional)
 //		* @return Revision|null
 //		*/
-//		public static function newFromPageId( $pageId, $revId = 0, $flags = 0 ) {
-//			$rec = self::getRevisionLookup()->getRevisionByPageId( $pageId, $revId, $flags );
-//			return $rec ? new Revision( $rec, $flags ) : null;
+//		public static function newFromPageId($pageId, $revId = 0, $flags = 0) {
+//			$rec = self::getRevisionLookup()->getRevisionByPageId($pageId, $revId, $flags);
+//			return $rec ? new Revision($rec, $flags) : null;
 //		}
 //
 //		/**
@@ -150,16 +156,16 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @throws MWException
 //		* @return Revision
 //		*/
-//		public static function newFromArchiveRow( $row, $overrides = [] ) {
+//		public static function newFromArchiveRow($row, $overrides = []) {
 //			/**
 //			* MCR Migration: https://phabricator.wikimedia.org/T183564
 //			* This method used to overwrite attributes, then passed to Revision::__construct
 //			* RevisionStore::newRevisionFromArchiveRow instead overrides row field names
 //			* So do a conversion here.
 //			*/
-//			if ( array_key_exists( 'page', $overrides ) ) {
+//			if (array_key_exists('page', $overrides)) {
 //				$overrides['page_id'] = $overrides['page'];
-//				unset( $overrides['page'] );
+//				unset($overrides['page']);
 //			}
 //
 //			/**
@@ -168,16 +174,16 @@ public class XomwRevision implements XomwIDBAccessObject {
 //			* to fetch a title in order pass it into the Revision Object.
 //			*/
 //			$title = null;
-//			if ( isset( $overrides['title'] ) ) {
-//				if ( !( $overrides['title'] instanceof Title ) ) {
-//					throw new MWException( 'title field override must contain a Title Object.' );
+//			if (isset($overrides['title'])) {
+//				if (!($overrides['title'] instanceof Title)) {
+//					throw new MWException('title field override must contain a Title Object.');
 //				}
 //
 //				$title = $overrides['title'];
 //			}
-//			if ( $title !== null ) {
-//				if ( isset( $row->ar_namespace ) && isset( $row->ar_title ) ) {
-//					$title = Title::makeTitle( $row->ar_namespace, $row->ar_title );
+//			if ($title !== null) {
+//				if (isset($row->ar_namespace) && isset($row->ar_title)) {
+//					$title = Title::makeTitle($row->ar_namespace, $row->ar_title);
 //				} else {
 //					throw new InvalidArgumentException(
 //						'A Title or ar_namespace and ar_title must be given'
@@ -185,8 +191,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //				}
 //			}
 //
-//			$rec = self::getRevisionFactory()->newRevisionFromArchiveRow( $row, 0, $title, $overrides );
-//			return new Revision( $rec, self::READ_NORMAL, $title );
+//			$rec = self::getRevisionFactory()->newRevisionFromArchiveRow($row, 0, $title, $overrides);
+//			return new Revision($rec, self::READ_NORMAL, $title);
 //		}
 //
 //		/**
@@ -201,14 +207,14 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param Object|array $row
 //		* @return Revision
 //		*/
-//		public static function newFromRow( $row ) {
-//			if ( is_array( $row ) ) {
-//				$rec = self::getRevisionFactory()->newMutableRevisionFromArray( $row );
+//		public static function newFromRow($row) {
+//			if (is_array($row)) {
+//				$rec = self::getRevisionFactory()->newMutableRevisionFromArray($row);
 //			} else {
-//				$rec = self::getRevisionFactory()->newRevisionFromRow( $row );
+//				$rec = self::getRevisionFactory()->newRevisionFromRow($row);
 //			}
 //
-//			return new Revision( $rec );
+//			return new Revision($rec);
 //		}
 //
 //		/**
@@ -221,10 +227,10 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param int $id
 //		* @return Revision|null
 //		*/
-//		public static function loadFromId( $db, $id ) {
-//			wfDeprecated( __METHOD__, '1.31' ); // no known callers
-//			$rec = self::getRevisionStore()->loadRevisionFromId( $db, $id );
-//			return $rec ? new Revision( $rec ) : null;
+//		public static function loadFromId($db, $id) {
+//			wfDeprecated(__METHOD__, '1.31'); // no known callers
+//			$rec = self::getRevisionStore()->loadRevisionFromId($db, $id);
+//			return $rec ? new Revision($rec) : null;
 //		}
 //
 //		/**
@@ -239,9 +245,9 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param int $id
 //		* @return Revision|null
 //		*/
-//		public static function loadFromPageId( $db, $pageid, $id = 0 ) {
-//			$rec = self::getRevisionStore()->loadRevisionFromPageId( $db, $pageid, $id );
-//			return $rec ? new Revision( $rec ) : null;
+//		public static function loadFromPageId($db, $pageid, $id = 0) {
+//			$rec = self::getRevisionStore()->loadRevisionFromPageId($db, $pageid, $id);
+//			return $rec ? new Revision($rec) : null;
 //		}
 //
 //		/**
@@ -256,9 +262,9 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param int $id
 //		* @return Revision|null
 //		*/
-//		public static function loadFromTitle( $db, $title, $id = 0 ) {
-//			$rec = self::getRevisionStore()->loadRevisionFromTitle( $db, $title, $id );
-//			return $rec ? new Revision( $rec ) : null;
+//		public static function loadFromTitle($db, $title, $id = 0) {
+//			$rec = self::getRevisionStore()->loadRevisionFromTitle($db, $title, $id);
+//			return $rec ? new Revision($rec) : null;
 //		}
 //
 //		/**
@@ -274,23 +280,23 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param String $timestamp
 //		* @return Revision|null
 //		*/
-//		public static function loadFromTimestamp( $db, $title, $timestamp ) {
-//			$rec = self::getRevisionStore()->loadRevisionFromTimestamp( $db, $title, $timestamp );
-//			return $rec ? new Revision( $rec ) : null;
+//		public static function loadFromTimestamp($db, $title, $timestamp) {
+//			$rec = self::getRevisionStore()->loadRevisionFromTimestamp($db, $title, $timestamp);
+//			return $rec ? new Revision($rec) : null;
 //		}
 //
 //		/**
 //		* Return the value of a select() JOIN conds array for the user table.
 //		* This will get user table rows for logged-in users.
 //		* @since 1.19
-//		* @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'user' ] ) instead.
+//		* @deprecated since 1.31, use RevisionStore::getQueryInfo([ 'user' ]) instead.
 //		* @return array
 //		*/
 //		public static function userJoinCond() {
 //			global $wgActorTableSchemaMigrationStage;
 //
-//			wfDeprecated( __METHOD__, '1.31' );
-//			if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW ) {
+//			wfDeprecated(__METHOD__, '1.31');
+//			if ($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW) {
 //				// If code is using this instead of self::getQueryInfo(), there's
 //				// no way the join it's trying to do can work once the old fields
 //				// aren't being used anymore.
@@ -307,11 +313,11 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* Return the value of a select() page conds array for the page table.
 //		* This will assure that the revision(s) are not orphaned from live pages.
 //		* @since 1.19
-//		* @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'page' ] ) instead.
+//		* @deprecated since 1.31, use RevisionStore::getQueryInfo([ 'page' ]) instead.
 //		* @return array
 //		*/
 //		public static function pageJoinCond() {
-//			wfDeprecated( __METHOD__, '1.31' );
+//			wfDeprecated(__METHOD__, '1.31');
 //			return [ 'JOIN', [ 'page_id = rev_page' ] ];
 //		}
 //
@@ -325,7 +331,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //			global $wgContentHandlerUseDB, $wgActorTableSchemaMigrationStage;
 //			global $wgMultiContentRevisionSchemaMigrationStage;
 //
-//			if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW ) {
+//			if ($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW) {
 //				// If code is using this instead of self::getQueryInfo(), there's a
 //				// decent chance it's going to try to directly access
 //				// $row->rev_user or $row->rev_user_text and we can't give it
@@ -336,7 +342,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //				);
 //			}
 //
-//			if ( !( $wgMultiContentRevisionSchemaMigrationStage & SCHEMA_COMPAT_WRITE_OLD ) ) {
+//			if (!($wgMultiContentRevisionSchemaMigrationStage & SCHEMA_COMPAT_WRITE_OLD)) {
 //				// If code is using this instead of self::getQueryInfo(), there's a
 //				// decent chance it's going to try to directly access
 //				// $row->rev_text_id or $row->rev_content_model and we can't give it
@@ -348,7 +354,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //				);
 //			}
 //
-//			wfDeprecated( __METHOD__, '1.31' );
+//			wfDeprecated(__METHOD__, '1.31');
 //
 //			$fields = [
 //				'rev_id',
@@ -365,9 +371,9 @@ public class XomwRevision implements XomwIDBAccessObject {
 //				'rev_sha1',
 //			];
 //
-//			$fields += CommentStore::getStore()->getFields( 'rev_comment' );
+//			$fields += CommentStore::getStore()->getFields('rev_comment');
 //
-//			if ( $wgContentHandlerUseDB ) {
+//			if ($wgContentHandlerUseDB) {
 //				$fields[] = 'rev_content_format';
 //				$fields[] = 'rev_content_model';
 //			}
@@ -385,7 +391,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //			global $wgContentHandlerUseDB, $wgActorTableSchemaMigrationStage;
 //			global $wgMultiContentRevisionSchemaMigrationStage;
 //
-//			if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW ) {
+//			if ($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW) {
 //				// If code is using this instead of self::getQueryInfo(), there's a
 //				// decent chance it's going to try to directly access
 //				// $row->ar_user or $row->ar_user_text and we can't give it
@@ -396,7 +402,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //				);
 //			}
 //
-//			if ( !( $wgMultiContentRevisionSchemaMigrationStage & SCHEMA_COMPAT_WRITE_OLD ) ) {
+//			if (!($wgMultiContentRevisionSchemaMigrationStage & SCHEMA_COMPAT_WRITE_OLD)) {
 //				// If code is using this instead of self::getQueryInfo(), there's a
 //				// decent chance it's going to try to directly access
 //				// $row->ar_text_id or $row->ar_content_model and we can't give it
@@ -408,7 +414,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //				);
 //			}
 //
-//			wfDeprecated( __METHOD__, '1.31' );
+//			wfDeprecated(__METHOD__, '1.31');
 //
 //			$fields = [
 //				'ar_id',
@@ -426,9 +432,9 @@ public class XomwRevision implements XomwIDBAccessObject {
 //				'ar_sha1',
 //			];
 //
-//			$fields += CommentStore::getStore()->getFields( 'ar_comment' );
+//			$fields += CommentStore::getStore()->getFields('ar_comment');
 //
-//			if ( $wgContentHandlerUseDB ) {
+//			if ($wgContentHandlerUseDB) {
 //				$fields[] = 'ar_content_format';
 //				$fields[] = 'ar_content_model';
 //			}
@@ -438,11 +444,11 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		/**
 //		* Return the list of text fields that should be selected to read the
 //		* revision text
-//		* @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'text' ] ) instead.
+//		* @deprecated since 1.31, use RevisionStore::getQueryInfo([ 'text' ]) instead.
 //		* @return array
 //		*/
 //		public static function selectTextFields() {
-//			wfDeprecated( __METHOD__, '1.31' );
+//			wfDeprecated(__METHOD__, '1.31');
 //			return [
 //				'old_text',
 //				'old_flags'
@@ -451,11 +457,11 @@ public class XomwRevision implements XomwIDBAccessObject {
 //
 //		/**
 //		* Return the list of page fields that should be selected from page table
-//		* @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'page' ] ) instead.
+//		* @deprecated since 1.31, use RevisionStore::getQueryInfo([ 'page' ]) instead.
 //		* @return array
 //		*/
 //		public static function selectPageFields() {
-//			wfDeprecated( __METHOD__, '1.31' );
+//			wfDeprecated(__METHOD__, '1.31');
 //			return [
 //				'page_namespace',
 //				'page_title',
@@ -468,11 +474,11 @@ public class XomwRevision implements XomwIDBAccessObject {
 //
 //		/**
 //		* Return the list of user fields that should be selected from user table
-//		* @deprecated since 1.31, use RevisionStore::getQueryInfo( [ 'user' ] ) instead.
+//		* @deprecated since 1.31, use RevisionStore::getQueryInfo([ 'user' ]) instead.
 //		* @return array
 //		*/
 //		public static function selectUserFields() {
-//			wfDeprecated( __METHOD__, '1.31' );
+//			wfDeprecated(__METHOD__, '1.31');
 //			return [ 'user_name' ];
 //		}
 //
@@ -490,8 +496,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*   - fields: (String[]) to include in the `$vars` to `IDatabase->select()`
 //		*   - joins: (array) to include in the `$join_conds` to `IDatabase->select()`
 //		*/
-//		public static function getQueryInfo( $options = [] ) {
-//			return self::getRevisionStore()->getQueryInfo( $options );
+//		public static function getQueryInfo($options = []) {
+//			return self::getRevisionStore()->getQueryInfo($options);
 //		}
 //
 //		/**
@@ -517,8 +523,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param array $revIds
 //		* @return array
 //		*/
-//		public static function getParentLengths( $db, array $revIds ) {
-//			return self::getRevisionStore()->listRevisionSizes( $db, $revIds );
+//		public static function getParentLengths($db, array $revIds) {
+//			return self::getRevisionStore()->listRevisionSizes($db, $revIds);
 //		}
 //
 //		/**
@@ -528,28 +534,28 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*
 //		* @private
 //		*/
-//		function __construct( $row, $queryFlags = 0, Title $title = null ) {
+//		function __construct($row, $queryFlags = 0, Title $title = null) {
 //			global $wgUser;
 //
-//			if ( $row instanceof RevisionRecord ) {
+//			if ($row instanceof RevisionRecord) {
 //				$this->mRecord = $row;
-//			} elseif ( is_array( $row ) ) {
+//			} elseif (is_array($row)) {
 //				// If no user is specified, fall back to using the global user Object, to stay
 //				// compatible with pre-1.31 behavior.
-//				if ( !isset( $row['user'] ) && !isset( $row['user_text'] ) ) {
+//				if (!isset($row['user']) && !isset($row['user_text'])) {
 //					$row['user'] = $wgUser;
 //				}
 //
 //				$this->mRecord = self::getRevisionFactory()->newMutableRevisionFromArray(
 //					$row,
 //					$queryFlags,
-//					$this->ensureTitle( $row, $queryFlags, $title )
+//					$this->ensureTitle($row, $queryFlags, $title)
 //				);
-//			} elseif ( is_object( $row ) ) {
+//			} elseif (is_object($row)) {
 //				$this->mRecord = self::getRevisionFactory()->newRevisionFromRow(
 //					$row,
 //					$queryFlags,
-//					$this->ensureTitle( $row, $queryFlags, $title )
+//					$this->ensureTitle($row, $queryFlags, $title)
 //				);
 //			} else {
 //				throw new InvalidArgumentException(
@@ -557,7 +563,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //				);
 //			}
 //
-//			Assert::postcondition( $this->mRecord !== null, 'Failed to construct a RevisionRecord' );
+//			Assert::postcondition($this->mRecord !== null, 'Failed to construct a RevisionRecord');
 //		}
 //
 //		/**
@@ -570,15 +576,15 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*
 //		* @return Title $title if not null, or a Title constructed from information in $row.
 //		*/
-//		private function ensureTitle( $row, $queryFlags, $title = null ) {
-//			if ( $title ) {
+//		private function ensureTitle($row, $queryFlags, $title = null) {
+//			if ($title) {
 //				return $title;
 //			}
 //
-//			if ( is_array( $row ) ) {
-//				if ( isset( $row['title'] ) ) {
-//					if ( !( $row['title'] instanceof Title ) ) {
-//						throw new MWException( 'title field must contain a Title Object.' );
+//			if (is_array($row)) {
+//				if (isset($row['title'])) {
+//					if (!($row['title'] instanceof Title)) {
+//						throw new MWException('title field must contain a Title Object.');
 //					}
 //
 //					return $row['title'];
@@ -592,14 +598,14 @@ public class XomwRevision implements XomwIDBAccessObject {
 //			}
 //
 //			try {
-//				$title = self::getRevisionStore()->getTitle( $pageId, $revId, $queryFlags );
-//			} catch ( RevisionAccessException $ex ) {
+//				$title = self::getRevisionStore()->getTitle($pageId, $revId, $queryFlags);
+//			} catch (RevisionAccessException $ex) {
 //				// construct a dummy title!
-//				wfLogWarning( __METHOD__ . ': ' . $ex->getMessage() );
+//				wfLogWarning(__METHOD__ . ': ' . $ex->getMessage());
 //
 //				// NOTE: this Title will only be used inside RevisionRecord
-//				$title = Title::makeTitleSafe( NS_SPECIAL, "Badtitle/ID=$pageId" );
-//				$title->resetArticleID( $pageId );
+//				$title = Title::makeTitleSafe(NS_SPECIAL, "Badtitle/ID=$pageId");
+//				$title->resetArticleID($pageId);
 //			}
 //
 //			return $title;
@@ -611,15 +617,16 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		public function getRevisionRecord() {
 //			return $this->mRecord;
 //		}
-//
-//		/**
-//		* Get revision ID
-//		*
-//		* @return int|null
-//		*/
-//		public function getId() {
+
+		/**
+		* Get revision ID
+		*
+		* @return int|null
+		*/
+		public int getId() {
 //			return $this->mRecord->getId();
-//		}
+			return -1;
+		}
 //
 //		/**
 //		* Set the revision ID
@@ -633,11 +640,11 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param int|String $id
 //		* @throws MWException
 //		*/
-//		public function setId( $id ) {
-//			if ( $this->mRecord instanceof MutableRevisionRecord ) {
-//				$this->mRecord->setId( intval( $id ) );
+//		public function setId($id) {
+//			if ($this->mRecord instanceof MutableRevisionRecord) {
+//				$this->mRecord->setId(intval($id));
 //			} else {
-//				throw new MWException( __METHOD__ . ' is not supported on this instance' );
+//				throw new MWException(__METHOD__ . ' is not supported on this instance');
 //			}
 //		}
 //
@@ -655,12 +662,12 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param String $name User name
 //		* @throws MWException
 //		*/
-//		public function setUserIdAndName( $id, $name ) {
-//			if ( $this->mRecord instanceof MutableRevisionRecord ) {
-//				$user = User::newFromAnyId( intval( $id ), $name, null );
-//				$this->mRecord->setUser( $user );
+//		public function setUserIdAndName($id, $name) {
+//			if ($this->mRecord instanceof MutableRevisionRecord) {
+//				$user = User::newFromAnyId(intval($id), $name, null);
+//				$this->mRecord->setUser($user);
 //			} else {
-//				throw new MWException( __METHOD__ . ' is not supported on this instance' );
+//				throw new MWException(__METHOD__ . ' is not supported on this instance');
 //			}
 //		}
 //
@@ -668,7 +675,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @return SlotRecord
 //		*/
 //		private function getMainSlotRaw() {
-//			return $this->mRecord->getSlot( SlotRecord::MAIN, RevisionRecord::RAW );
+//			return $this->mRecord->getSlot(SlotRecord::MAIN, RevisionRecord::RAW);
 //		}
 //
 //		/**
@@ -686,7 +693,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		public function getTextId() {
 //			$slot = $this->getMainSlotRaw();
 //			return $slot->hasAddress()
-//				? self::getBlobStore()->getTextIdFromAddress( $slot->getAddress() )
+//				? self::getBlobStore()->getTextIdFromAddress($slot->getAddress())
 //				: null;
 //		}
 //
@@ -708,7 +715,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		public function getSize() {
 //			try {
 //				return $this->mRecord->getSize();
-//			} catch ( RevisionAccessException $ex ) {
+//			} catch (RevisionAccessException $ex) {
 //				return null;
 //			}
 //		}
@@ -721,7 +728,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		public function getSha1() {
 //			try {
 //				return $this->mRecord->getSha1();
-//			} catch ( RevisionAccessException $ex ) {
+//			} catch (RevisionAccessException $ex) {
 //				return null;
 //			}
 //		}
@@ -736,7 +743,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*/
 //		public function getTitle() {
 //			$linkTarget = $this->mRecord->getPageAsLinkTarget();
-//			return Title::newFromLinkTarget( $linkTarget );
+//			return Title::newFromLinkTarget($linkTarget);
 //		}
 //
 //		/**
@@ -746,8 +753,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*
 //		* @param Title $title
 //		*/
-//		public function setTitle( $title ) {
-//			if ( !$title->equals( $this->getTitle() ) ) {
+//		public function setTitle($title) {
+//			if (!$title->equals($this->getTitle())) {
 //				throw new InvalidArgumentException(
 //					$title->getPrefixedText()
 //						. ' is not the same as '
@@ -778,14 +785,14 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*   to the $audience parameter
 //		* @return int
 //		*/
-//		public function getUser( $audience = self::FOR_PUBLIC, User $user = null ) {
+//		public function getUser($audience = self::FOR_PUBLIC, User $user = null) {
 //			global $wgUser;
 //
-//			if ( $audience === self::FOR_THIS_USER && !$user ) {
+//			if ($audience === self::FOR_THIS_USER && !$user) {
 //				$user = $wgUser;
 //			}
 //
-//			$user = $this->mRecord->getUser( $audience, $user );
+//			$user = $this->mRecord->getUser($audience, $user);
 //			return $user ? $user->getId() : 0;
 //		}
 //
@@ -802,14 +809,14 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*   to the $audience parameter
 //		* @return String
 //		*/
-//		public function getUserText( $audience = self::FOR_PUBLIC, User $user = null ) {
+//		public function getUserText($audience = self::FOR_PUBLIC, User $user = null) {
 //			global $wgUser;
 //
-//			if ( $audience === self::FOR_THIS_USER && !$user ) {
+//			if ($audience === self::FOR_THIS_USER && !$user) {
 //				$user = $wgUser;
 //			}
 //
-//			$user = $this->mRecord->getUser( $audience, $user );
+//			$user = $this->mRecord->getUser($audience, $user);
 //			return $user ? $user->getName() : '';
 //		}
 //
@@ -824,14 +831,14 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @return String|null Returns null if the specified audience does not have access to the
 //		*  comment.
 //		*/
-//		function getComment( $audience = self::FOR_PUBLIC, User $user = null ) {
+//		function getComment($audience = self::FOR_PUBLIC, User $user = null) {
 //			global $wgUser;
 //
-//			if ( $audience === self::FOR_THIS_USER && !$user ) {
+//			if ($audience === self::FOR_THIS_USER && !$user) {
 //				$user = $wgUser;
 //			}
 //
-//			$comment = $this->mRecord->getComment( $audience, $user );
+//			$comment = $this->mRecord->getComment($audience, $user);
 //			return $comment === null ? null : $comment->text;
 //		}
 //
@@ -846,7 +853,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @return int Rcid of the unpatrolled row, zero if there isn't one
 //		*/
 //		public function isUnpatrolled() {
-//			return self::getRevisionStore()->getRcIdIfUnpatrolled( $this->mRecord );
+//			return self::getRevisionStore()->getRcIdIfUnpatrolled($this->mRecord);
 //		}
 //
 //		/**
@@ -858,8 +865,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @since 1.22
 //		* @return RecentChange|null
 //		*/
-//		public function getRecentChange( $flags = 0 ) {
-//			return self::getRevisionStore()->getRecentChange( $this->mRecord, $flags );
+//		public function getRecentChange($flags = 0) {
+//			return self::getRevisionStore()->getRecentChange($this->mRecord, $flags);
 //		}
 //
 //		/**
@@ -867,8 +874,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*
 //		* @return boolean
 //		*/
-//		public function isDeleted( $field ) {
-//			return $this->mRecord->isDeleted( $field );
+//		public function isDeleted($field) {
+//			return $this->mRecord->isDeleted($field);
 //		}
 //
 //		/**
@@ -894,17 +901,17 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @since 1.21
 //		* @return Content|null
 //		*/
-//		public function getContent( $audience = self::FOR_PUBLIC, User $user = null ) {
+//		public function getContent($audience = self::FOR_PUBLIC, User $user = null) {
 //			global $wgUser;
 //
-//			if ( $audience === self::FOR_THIS_USER && !$user ) {
+//			if ($audience === self::FOR_THIS_USER && !$user) {
 //				$user = $wgUser;
 //			}
 //
 //			try {
-//				return $this->mRecord->getContent( SlotRecord::MAIN, $audience, $user );
+//				return $this->mRecord->getContent(SlotRecord::MAIN, $audience, $user);
 //			}
-//			catch ( RevisionAccessException $e ) {
+//			catch (RevisionAccessException $e) {
 //				return null;
 //			}
 //		}
@@ -952,7 +959,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		public function getContentFormat() {
 //			$format = $this->getMainSlotRaw()->getFormat();
 //
-//			if ( $format === null ) {
+//			if ($format === null) {
 //				// if no format was stored along with the blob, fall back to default format
 //				$format = $this->getContentHandler()->getDefaultFormat();
 //			}
@@ -967,7 +974,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @return ContentHandler
 //		*/
 //		public function getContentHandler() {
-//			return ContentHandler::getForModelID( $this->getContentModel() );
+//			return ContentHandler::getForModelID($this->getContentModel());
 //		}
 //
 //		/**
@@ -981,7 +988,7 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @return boolean
 //		*/
 //		public function isCurrent() {
-//			return ( $this->mRecord instanceof RevisionStoreRecord ) && $this->mRecord->isCurrent();
+//			return ($this->mRecord instanceof RevisionStoreRecord) && $this->mRecord->isCurrent();
 //		}
 //
 //		/**
@@ -991,8 +998,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*/
 //		public function getPrevious() {
 //			$title = $this->getTitle();
-//			$rec = self::getRevisionLookup()->getPreviousRevision( $this->mRecord, $title );
-//			return $rec ? new Revision( $rec, self::READ_NORMAL, $title ) : null;
+//			$rec = self::getRevisionLookup()->getPreviousRevision($this->mRecord, $title);
+//			return $rec ? new Revision($rec, self::READ_NORMAL, $title) : null;
 //		}
 //
 //		/**
@@ -1002,8 +1009,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*/
 //		public function getNext() {
 //			$title = $this->getTitle();
-//			$rec = self::getRevisionLookup()->getNextRevision( $this->mRecord, $title );
-//			return $rec ? new Revision( $rec, self::READ_NORMAL, $title ) : null;
+//			$rec = self::getRevisionLookup()->getNextRevision($this->mRecord, $title);
+//			return $rec ? new Revision($rec, self::READ_NORMAL, $title) : null;
 //		}
 //
 //		/**
@@ -1027,18 +1034,18 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*   identifier as understood by the LoadBalancer class.
 //		* @return String|false Text the text requested or false on failure
 //		*/
-//		public static function getRevisionText( $row, $prefix = 'old_', $wiki = false ) {
+//		public static function getRevisionText($row, $prefix = 'old_', $wiki = false) {
 //			global $wgMultiContentRevisionSchemaMigrationStage;
 //
-//			if ( !$row ) {
+//			if (!$row) {
 //				return false;
 //			}
 //
 //			$textField = $prefix . 'text';
 //			$flagsField = $prefix . 'flags';
 //
-//			if ( isset( $row->$textField ) ) {
-//				if ( !( $wgMultiContentRevisionSchemaMigrationStage & SCHEMA_COMPAT_WRITE_OLD ) ) {
+//			if (isset($row->$textField)) {
+//				if (!($wgMultiContentRevisionSchemaMigrationStage & SCHEMA_COMPAT_WRITE_OLD)) {
 //					// The text field was read, but it's no longer being populated!
 //					// We could gloss over this by using the text when it's there and loading
 //					// if when it's not, but it seems preferable to complain loudly about a
@@ -1054,38 +1061,38 @@ public class XomwRevision implements XomwIDBAccessObject {
 //			} else {
 //				// Missing text field, we are probably looking at the MCR-enabled DB schema.
 //
-//				if ( !( $wgMultiContentRevisionSchemaMigrationStage & SCHEMA_COMPAT_WRITE_OLD ) ) {
+//				if (!($wgMultiContentRevisionSchemaMigrationStage & SCHEMA_COMPAT_WRITE_OLD)) {
 //					// This method should no longer be used with the new schema. Ideally, we
 //					// would already trigger a deprecation warning when SCHEMA_COMPAT_READ_NEW is set.
-//					wfDeprecated( __METHOD__ . ' (MCR without SCHEMA_COMPAT_WRITE_OLD)', '1.32' );
+//					wfDeprecated(__METHOD__ . ' (MCR without SCHEMA_COMPAT_WRITE_OLD)', '1.32');
 //				}
 //
-//				$store = self::getRevisionStore( $wiki );
+//				$store = self::getRevisionStore($wiki);
 //				$rev = $prefix === 'ar_'
-//					? $store->newRevisionFromArchiveRow( $row )
-//					: $store->newRevisionFromRow( $row );
+//					? $store->newRevisionFromArchiveRow($row)
+//					: $store->newRevisionFromRow($row);
 //
-//				$content = $rev->getContent( SlotRecord::MAIN );
+//				$content = $rev->getContent(SlotRecord::MAIN);
 //				return $content ? $content->serialize() : false;
 //			}
 //
-//			if ( isset( $row->$flagsField ) ) {
-//				$flags = explode( ',', $row->$flagsField );
+//			if (isset($row->$flagsField)) {
+//				$flags = explode(',', $row->$flagsField);
 //			} else {
 //				$flags = [];
 //			}
 //
-//			$cacheKey = isset( $row->old_id )
-//				? SqlBlobStore::makeAddressFromTextId( $row->old_id )
+//			$cacheKey = isset($row->old_id)
+//				? SqlBlobStore::makeAddressFromTextId($row->old_id)
 //				: null;
 //
-//			$revisionText = self::getBlobStore( $wiki )->expandBlob( $text, $flags, $cacheKey );
+//			$revisionText = self::getBlobStore($wiki)->expandBlob($text, $flags, $cacheKey);
 //
-//			if ( $revisionText === false ) {
-//				if ( isset( $row->old_id ) ) {
-//					wfLogWarning( __METHOD__ . ": Bad data in text row {$row->old_id}! " );
+//			if ($revisionText === false) {
+//				if (isset($row->old_id)) {
+//					wfLogWarning(__METHOD__ . ": Bad data in text row {$row->old_id}! ");
 //				} else {
-//					wfLogWarning( __METHOD__ . ": Bad data in text row! " );
+//					wfLogWarning(__METHOD__ . ": Bad data in text row! ");
 //				}
 //				return false;
 //			}
@@ -1103,8 +1110,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param mixed &$text Reference to a text
 //		* @return String
 //		*/
-//		public static function compressRevisionText( &$text ) {
-//			return self::getBlobStore()->compressData( $text );
+//		public static function compressRevisionText(&$text) {
+//			return self::getBlobStore()->compressData($text);
 //		}
 //
 //		/**
@@ -1114,13 +1121,13 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param array $flags Compression flags
 //		* @return String|boolean Decompressed text, or false on failure
 //		*/
-//		public static function decompressRevisionText( $text, $flags ) {
-//			if ( $text === false ) {
+//		public static function decompressRevisionText($text, $flags) {
+//			if ($text === false) {
 //				// Text failed to be fetched; nothing to do
 //				return false;
 //			}
 //
-//			return self::getBlobStore()->decompressData( $text, $flags );
+//			return self::getBlobStore()->decompressData($text, $flags);
 //		}
 //
 //		/**
@@ -1131,24 +1138,24 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @throws MWException
 //		* @return int The revision ID
 //		*/
-//		public function insertOn( $dbw ) {
+//		public function insertOn($dbw) {
 //			global $wgUser;
 //
 //			// Note that $this->mRecord->getId() will typically return null here, but not always,
 //			// e.g. not when restoring a revision.
 //
-//			if ( $this->mRecord->getUser( RevisionRecord::RAW ) === null ) {
-//				if ( $this->mRecord instanceof MutableRevisionRecord ) {
-//					$this->mRecord->setUser( $wgUser );
+//			if ($this->mRecord->getUser(RevisionRecord::RAW) === null) {
+//				if ($this->mRecord instanceof MutableRevisionRecord) {
+//					$this->mRecord->setUser($wgUser);
 //				} else {
-//					throw new MWException( 'Cannot insert revision with no associated user.' );
+//					throw new MWException('Cannot insert revision with no associated user.');
 //				}
 //			}
 //
-//			$rec = self::getRevisionStore()->insertRevisionOn( $this->mRecord, $dbw );
+//			$rec = self::getRevisionStore()->insertRevisionOn($this->mRecord, $dbw);
 //
 //			$this->mRecord = $rec;
-//			Assert::postcondition( $this->mRecord !== null, 'Failed to acquire a RevisionRecord' );
+//			Assert::postcondition($this->mRecord !== null, 'Failed to acquire a RevisionRecord');
 //
 //			return $rec->getId();
 //		}
@@ -1158,8 +1165,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param String $text
 //		* @return String
 //		*/
-//		public static function base36Sha1( $text ) {
-//			return SlotRecord::base36Sha1( $text );
+//		public static function base36Sha1($text) {
+//			return SlotRecord::base36Sha1($text);
 //		}
 //
 //		/**
@@ -1177,22 +1184,22 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param User|null $user User Object to use or null for $wgUser
 //		* @return Revision|null Revision or null on error
 //		*/
-//		public static function newNullRevision( $dbw, $pageId, $summary, $minor, $user = null ) {
+//		public static function newNullRevision($dbw, $pageId, $summary, $minor, $user = null) {
 //			global $wgUser;
-//			if ( !$user ) {
+//			if (!$user) {
 //				$user = $wgUser;
 //			}
 //
-//			$comment = CommentStoreComment::newUnsavedComment( $summary, null );
+//			$comment = CommentStoreComment::newUnsavedComment($summary, null);
 //
-//			$title = Title::newFromID( $pageId, Title::GAID_FOR_UPDATE );
-//			if ( $title === null ) {
+//			$title = Title::newFromID($pageId, Title::GAID_FOR_UPDATE);
+//			if ($title === null) {
 //				return null;
 //			}
 //
-//			$rec = self::getRevisionStore()->newNullRevision( $dbw, $title, $comment, $minor, $user );
+//			$rec = self::getRevisionStore()->newNullRevision($dbw, $title, $comment, $minor, $user);
 //
-//			return $rec ? new Revision( $rec ) : null;
+//			return $rec ? new Revision($rec) : null;
 //		}
 //
 //		/**
@@ -1205,8 +1212,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param User|null $user User Object to check, or null to use $wgUser
 //		* @return boolean
 //		*/
-//		public function userCan( $field, User $user = null ) {
-//			return self::userCanBitfield( $this->getVisibility(), $field, $user );
+//		public function userCan($field, User $user = null) {
+//			return self::userCanBitfield($this->getVisibility(), $field, $user);
 //		}
 //
 //		/**
@@ -1223,16 +1230,16 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*                          instead of just plain userrights
 //		* @return boolean
 //		*/
-//		public static function userCanBitfield( $bitfield, $field, User $user = null,
+//		public static function userCanBitfield($bitfield, $field, User $user = null,
 //			Title $title = null
 //		) {
 //			global $wgUser;
 //
-//			if ( !$user ) {
+//			if (!$user) {
 //				$user = $wgUser;
 //			}
 //
-//			return RevisionRecord::userCanBitfield( $bitfield, $field, $user, $title );
+//			return RevisionRecord::userCanBitfield($bitfield, $field, $user, $title);
 //		}
 //
 //		/**
@@ -1243,8 +1250,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param int $flags
 //		* @return String|boolean False if not found
 //		*/
-//		static function getTimestampFromId( $title, $id, $flags = 0 ) {
-//			return self::getRevisionStore()->getTimestampFromId( $title, $id, $flags );
+//		static function getTimestampFromId($title, $id, $flags = 0) {
+//			return self::getRevisionStore()->getTimestampFromId($title, $id, $flags);
 //		}
 //
 //		/**
@@ -1254,8 +1261,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param int $id Page id
 //		* @return int
 //		*/
-//		static function countByPageId( $db, $id ) {
-//			return self::getRevisionStore()->countRevisionsByPageId( $db, $id );
+//		static function countByPageId($db, $id) {
+//			return self::getRevisionStore()->countRevisionsByPageId($db, $id);
 //		}
 //
 //		/**
@@ -1265,8 +1272,8 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		* @param Title $title
 //		* @return int
 //		*/
-//		static function countByTitle( $db, $title ) {
-//			return self::getRevisionStore()->countRevisionsByTitle( $db, $title );
+//		static function countByTitle($db, $title) {
+//			return self::getRevisionStore()->countRevisionsByTitle($db, $title);
 //		}
 //
 //		/**
@@ -1285,37 +1292,38 @@ public class XomwRevision implements XomwIDBAccessObject {
 //		*
 //		* @return boolean True if the given user was the only one to edit since the given timestamp
 //		*/
-//		public static function userWasLastToEdit( $db, $pageId, $userId, $since ) {
-//			if ( is_int( $db ) ) {
-//				$db = wfGetDB( $db );
+//		public static function userWasLastToEdit($db, $pageId, $userId, $since) {
+//			if (is_int($db)) {
+//				$db = wfGetDB($db);
 //			}
 //
-//			return self::getRevisionStore()->userWasLastToEdit( $db, $pageId, $userId, $since );
+//			return self::getRevisionStore()->userWasLastToEdit($db, $pageId, $userId, $since);
 //		}
-//
-//		/**
-//		* Load a revision based on a known page ID and current revision ID from the DB
-//		*
-//		* This method allows for the use of caching, though accessing anything that normally
-//		* requires permission checks (aside from the text) will trigger a small DB lookup.
-//		* The title will also be loaded if $pageIdOrTitle is an integer ID.
-//		*
-//		* @param IDatabase $db ignored!
-//		* @param int|Title $pageIdOrTitle Page ID or Title Object
-//		* @param int $revId Known current revision of this page. Determined automatically if not given.
-//		* @return Revision|boolean Returns false if missing
-//		* @since 1.28
-//		*/
-//		public static function newKnownCurrent( IDatabase $db, $pageIdOrTitle, $revId = 0 ) {
-//			$title = $pageIdOrTitle instanceof Title
-//				? $pageIdOrTitle
-//				: Title::newFromID( $pageIdOrTitle );
-//
-//			if ( !$title ) {
-//				return false;
-//			}
-//
-//			$record = self::getRevisionLookup()->getKnownCurrentRevision( $title, $revId );
-//			return $record ? new Revision( $record ) : false;
-//		}
+
+		/**
+		* Load a revision based on a known page ID and current revision ID from the DB
+		*
+		* This method allows for the use of caching, though accessing anything that normally
+		* requires permission checks (aside from the text) will trigger a small DB lookup.
+		* The title will also be loaded if $pageIdOrTitle is an integer ID.
+		*
+		* @param IDatabase $db ignored!
+		* @param int|Title $pageIdOrTitle Page ID or Title Object
+		* @param int $revId Known current revision of this page. Determined automatically if not given.
+		* @return Revision|boolean Returns false if missing
+		* @since 1.28
+		*/
+		public static XomwRevision newKnownCurrent(XomwIDatabase $db, Object pageIdOrTitle, int revId) { //  $revId = 0
+            XomwTitleOld title = XophpType_.instance_of(pageIdOrTitle, XomwTitleOld.class)
+				? (XomwTitleOld)pageIdOrTitle
+				: XomwTitleOld.newFromID(XophpInt_.cast(pageIdOrTitle));
+
+			if (!XophpObject_.is_true(title)) {
+				return null;
+			}
+
+//			$record = self::getRevisionLookup()->getKnownCurrentRevision($title, $revId);
+//			return $record ? new Revision($record) : false;
+            return null;
+		}
 }

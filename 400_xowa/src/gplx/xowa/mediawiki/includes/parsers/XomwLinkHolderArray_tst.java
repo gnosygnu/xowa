@@ -34,7 +34,7 @@ class XomwLinkHolderArray_fxt {
 		this.holders = new XomwLinkHolderArray(parser);
 	}
 	public void Init__add(String ttl, String capt) {
-		holders.Test__add(XomwTitle.newFromText(env, Bry_.new_u8(ttl)), Bry_.new_u8(capt));
+		holders.Test__add(XomwTitleOld.newFromText(env, Bry_.new_u8(ttl)), Bry_.new_u8(capt));
 	}
 	public void Test__replace(String src, String expd) {
 		if (apos) expd = gplx.langs.htmls.Gfh_utl.Replace_apos(expd);

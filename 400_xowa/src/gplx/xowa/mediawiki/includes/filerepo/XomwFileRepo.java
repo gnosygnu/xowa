@@ -617,7 +617,7 @@ public class XomwFileRepo {
 	* @param Title title
 	* @return String
 	*/
-	public byte[] getNameFromTitle(XomwTitle title) {
+	public byte[] getNameFromTitle(XomwTitleOld title) {
 //			global wgContLang;
 //			if (this.initialCapital != XomwNamespace::isCapitalized(NS_FILE)) {
 //				name = title.getUserCaseDBKey();

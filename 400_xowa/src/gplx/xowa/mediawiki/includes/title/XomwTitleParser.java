@@ -36,5 +36,5 @@ public interface XomwTitleParser {
 	* @throws MalformedTitleException If the text is not a valid representation of a page title.
 	* @return TitleValue
 	*/
-	XomwTitle parseTitle(byte[] text, int defaultNamespace);
+	XomwTitleOld parseTitle(byte[] text, int defaultNamespace);
 }

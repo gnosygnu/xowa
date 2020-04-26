@@ -96,7 +96,7 @@ class Xomw_lnki_wkr__fxt {
 
 		// ctx
 		pctx = new XomwParserCtx();
-		pctx.Init_by_page(XomwTitle.newFromText(env, Bry_.new_a7("Page_1")));
+		pctx.Init_by_page(XomwTitleOld.newFromText(env, Bry_.new_a7("Page_1")));
 	}
 	public void Clear() {
 		wkr.Clear_state();

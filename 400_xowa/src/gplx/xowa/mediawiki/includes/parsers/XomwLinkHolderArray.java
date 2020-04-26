@@ -227,7 +227,7 @@ public class XomwLinkHolderArray {
 	* @param String $prefix [optional]
 	* @return String
 	*/
-	public void makeHolder(Bry_bfr bfr, XomwTitle nt, byte[] text, byte[][] query, byte[] trail, byte[] prefix) {
+	public void makeHolder(Bry_bfr bfr, XomwTitleOld nt, byte[] text, byte[][] query, byte[] trail, byte[] prefix) {
 		if (nt == null) {
 			// Fail gracefully
 			bfr.Add_str_a7("<!-- ERROR -->").Add(prefix).Add(text).Add(trail);
@@ -739,7 +739,7 @@ public class XomwLinkHolderArray {
 //				$this->doVariants( $colours );
 //			}
 //		}
-	public void Test__add(XomwTitle ttl, byte[] capt) {
+	public void Test__add(XomwTitleOld ttl, byte[] capt) {
 		int key = parent.nextLinkID();
 		XomwLinkHolderItem item = new XomwLinkHolderItem(ttl, capt, Bry_.Ary_empty);
 		internals.Add(key, item);
@@ -767,12 +767,12 @@ class XomwLinkHolderList {
 	public XomwLinkHolderItem Get_by(int key) {return ary[key];}
 }
 class XomwLinkHolderItem {
-	public XomwLinkHolderItem(XomwTitle title, byte[] text, byte[][] query) {
+	public XomwLinkHolderItem(XomwTitleOld title, byte[] text, byte[][] query) {
 		this.title = title;
 		this.text = text;
 		this.query = query;
 	}
-	public XomwTitle Title() {return title;} private final    XomwTitle title;
+	public XomwTitleOld Title() {return title;} private final    XomwTitleOld title;
 	public byte[] Text()      {return text;} private final    byte[] text;
 	public byte[] Pdbk()      {return title.getPrefixedDBkey();}
 	public byte[][] Query()   {return query;} private final    byte[][] query;

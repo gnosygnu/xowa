@@ -224,7 +224,7 @@ public class XomwMessage {
 	/**
 	* @var Title Title Object to use as context.
 	*/
-	private XomwTitle title = null;
+	private XomwTitleOld title = null;
 
 	/**
 	* @var Content Content Object representing the message.

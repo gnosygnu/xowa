@@ -71,7 +71,7 @@ class Xomw_magiclinks_wkr__fxt {
 	public Xomw_magiclinks_wkr__fxt() {
 		Xomw_regex_space regex_space = new Xomw_regex_space();
 		XomwParser parser = new XomwParser(XomwEnv_fxt.NewTest());
-		pctx.Init_by_page(XomwTitle.newFromText(parser.Env(), Bry_.new_a7("Page_1")));
+		pctx.Init_by_page(XomwTitleOld.newFromText(parser.Env(), Bry_.new_a7("Page_1")));
 		this.wkr = new Xomw_magiclinks_wkr(parser, parser.Sanitizer(), parser.Linker(), new Xomw_regex_boundary(regex_space), new Xomw_regex_url(regex_space));
 		wkr.Init_by_wiki();
 	}

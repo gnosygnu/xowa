@@ -269,7 +269,7 @@ public interface XomwContent {
 	* @return ParserOutput
 	*/
 	// generateHtml = true
-	XomwParserOutput getParserOutput(XomwTitle title, int revId,
+	XomwParserOutput getParserOutput(XomwTitleOld title, int revId,
 		XomwParserOptions options, boolean generateHtml);
 
 	// TODO: make RenderOutput and RenderOptions super classes
@@ -307,7 +307,7 @@ public interface XomwContent {
 	* @since 1.21
 	*/
 	// DFLT: recursive = true
-	Object getSecondaryDataUpdates(XomwTitle title, XomwContent old,
+	Object getSecondaryDataUpdates(XomwTitleOld title, XomwContent old,
 		boolean recursive, XomwParserOutput parserOutput);
 
 	/**
@@ -320,7 +320,7 @@ public interface XomwContent {
 	*
 	* @return Title[]|null List of Titles, with the destination last.
 	*/
-	XomwTitle[] getRedirectChain();
+	XomwTitleOld[] getRedirectChain();
 
 	/**
 	* Construct the redirect destination from this content and return a Title,
@@ -332,7 +332,7 @@ public interface XomwContent {
 	*
 	* @return Title|null The corresponding Title.
 	*/
-	XomwTitle getRedirectTarget();
+	XomwTitleOld getRedirectTarget();
 
 	/**
 	* Construct the redirect destination from this content and return the
@@ -349,7 +349,7 @@ public interface XomwContent {
 	*
 	* @return Title|null
 	*/
-	XomwTitle getUltimateRedirectTarget();
+	XomwTitleOld getUltimateRedirectTarget();
 
 	/**
 	* Returns whether this Content represents a redirect.
@@ -372,7 +372,7 @@ public interface XomwContent {
 	* @return Content A new Content Object with the updated redirect (or $this
 	*   if this Content Object isn't a redirect)
 	*/
-	XomwContent updateRedirect(XomwTitle target);
+	XomwContent updateRedirect(XomwTitleOld target);
 
 	/**
 	* Returns the section with the given ID.
@@ -416,7 +416,7 @@ public interface XomwContent {
 	*
 	* @return Content
 	*/
-	XomwContent preSaveTransform(XomwTitle title, Object user, XomwParserOptions parserOptions );
+	XomwContent preSaveTransform(XomwTitleOld title, Object user, XomwParserOptions parserOptions );
 
 	/**
 	* Returns a new WikitextContent Object with the given section heading
@@ -443,7 +443,7 @@ public interface XomwContent {
 	*
 	* @return Content
 	*/
-	XomwContent preloadTransform(XomwTitle title, XomwParserOptions parserOptions, Object[] ary);
+	XomwContent preloadTransform(XomwTitleOld title, XomwParserOptions parserOptions, Object[] ary);
 
 	/**
 	* Prepare Content for saving. Called before Content is saved by WikiPage::doEditContent() and in

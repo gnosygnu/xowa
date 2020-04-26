@@ -31,7 +31,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //		 */
 //		// parent = false, numberedArgs = [], namedArgs = []; titl = false
 //		public XomwPPTemplateFrame_Hash(XomwPreprocessor preprocessor, XomwPPFrame_Hash parent, XophpArray numberedArgs,
-//			XophpArray namedArgs, XomwTitle title
+//			XophpArray namedArgs, XomwTitleOld title
 //		) : super(preprocessor) {
 //			this.parent = parent;
 //			this.numberedArgs = numberedArgs;

@@ -31,7 +31,7 @@ public class XomwWikiPage implements XomwPage, XomwIDBAccessObject {
 	/**
 	* @var Title
 	*/
-	public XomwTitle mTitle = null;
+	public XomwTitleOld mTitle = null;
 
 	/**
 	* @var boolean
@@ -98,7 +98,7 @@ public class XomwWikiPage implements XomwPage, XomwIDBAccessObject {
 	* Constructor and clear the article
 	* @param Title title Reference to a Title Object.
 	*/
-	public XomwWikiPage(XomwTitle title) {
+	public XomwWikiPage(XomwTitleOld title) {
 		this.mTitle = title;
 	}
 
@@ -118,7 +118,7 @@ public class XomwWikiPage implements XomwPage, XomwIDBAccessObject {
 	* @throws MWException
 	* @return WikiPage|WikiCategoryPage|WikiFilePage
 	*/
-	public static XomwWikiPage factory(XomwTitle title) {
+	public static XomwWikiPage factory(XomwTitleOld title) {
 		int ns = title.getNamespace();
 
 		if (ns == XomwDefines.NS_MEDIA) {

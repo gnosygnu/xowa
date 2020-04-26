@@ -124,7 +124,7 @@ public class XomwLinker {
 	//     'https': Force a full URL with https:// as the scheme.
 	//     'stubThreshold' => (int): Stub threshold to use when determining link classes.
 	// @return String HTML <a> attribute
-	public void Link(Bry_bfr bfr, XomwTitle target, byte[] html, Xomw_atr_mgr custom_attribs, Xomw_qry_mgr query, Xomw_opt_mgr options) {
+	public void Link(Bry_bfr bfr, XomwTitleOld target, byte[] html, Xomw_atr_mgr custom_attribs, Xomw_qry_mgr query, Xomw_opt_mgr options) {
 		// XO.MW.UNSUPPORTED:MW has different renderers -- presumably for forcing "https:" and others; XO only has one
 		//if (options != null) {
 		//	// Custom options, create new LinkRenderer
@@ -190,7 +190,7 @@ public class XomwLinker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void makeSelfLinkObj(Bry_bfr bfr, XomwTitle nt, byte[] html, byte[] query, byte[] trail, byte[] prefix) {
+	public void makeSelfLinkObj(Bry_bfr bfr, XomwTitleOld nt, byte[] html, byte[] query, byte[] trail, byte[] prefix) {
 		// MW.HOOK:SelfLinkBegin
 		if (html == Bry_.Empty) {
 			html = tmp.Add_bry_escape_html(nt.getPrefixedText()).To_bry_and_clear();
@@ -236,7 +236,7 @@ public class XomwLinker {
 //		* @param LinkTarget $target
 //		* @return LinkTarget
 //		*/
-	public static XomwTitle normaliseSpecialPage(XomwTitle target) {
+	public static XomwTitleOld normaliseSpecialPage(XomwTitleOld target) {
 //			if (target.Ns().Id_is_special() && !target.Is_external()) {
 //				list($name, $subpage) = SpecialPageFactory::resolveAlias($target->getDBkey());
 //				if (!$name) {
@@ -331,7 +331,7 @@ public class XomwLinker {
 	// @since 1.20
 	// @return String HTML for an image, with links, wrappers, etc.
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void makeImageLink(Bry_bfr bfr, XomwEnv env, XomwParserCtx pctx, XomwParserIface parser, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
+	public void makeImageLink(Bry_bfr bfr, XomwEnv env, XomwParserCtx pctx, XomwParserIface parser, XomwTitleOld title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query, int widthOption) {
 		// XO.MW.HOOK:ImageBeforeProduceHTML
 
 		if (file != null && !file.allowInlineDisplay()) {
@@ -534,7 +534,7 @@ public class XomwLinker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	private void makeThumbLink2(Bry_bfr bfr, XomwEnv env, XomwParserCtx pctx, XomwTitle title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
+	private void makeThumbLink2(Bry_bfr bfr, XomwEnv env, XomwParserCtx pctx, XomwTitleOld title, XomwFile file, Xomw_params_frame frameParams, Xomw_params_handler handlerParams, Object time, byte[] query) {
 		boolean exists = file != null && file.exists();
 
 		int page = handlerParams.page;
@@ -1367,7 +1367,7 @@ public class XomwLinker {
 	* @return String
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-02-08
-	public void normalizeSubpageLink(XomwLinker_NormalizeSubpageLink rv, XomwTitle context_title, byte[] target, byte[] text) {
+	public void normalizeSubpageLink(XomwLinker_NormalizeSubpageLink rv, XomwTitleOld context_title, byte[] target, byte[] text) {
 		// Valid link forms:
 		// Foobar -- normal
 		// :Foobar -- override special treatment of prefix (images, language links)

@@ -136,7 +136,7 @@ public class XomwLinkRenderer {
 	* @return String
 	*/
 	public void makeLink(Bry_bfr bfr,
-		XomwTitle target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
+		XomwTitleOld target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
 //			$title = Title::newFromLinkTarget($target);	// does db lookup?
 		if (target.isKnown()) {
 			this.makeKnownLink(bfr, target, text, extraAttribs, query);
@@ -238,7 +238,7 @@ public class XomwLinkRenderer {
 	* @return String
 	*/
 	public void makePreloadedLink(Bry_bfr bfr,
-		XomwTitle target, byte[] text, byte[] classes, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
+		XomwTitleOld target, byte[] text, byte[] classes, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
 		// XO.MW.HOOK: this.runBeginHook --> 'HtmlPageLinkRendererBegin', 'LinkBegin'
 
 		target = this.normalizeTarget(target);
@@ -269,7 +269,7 @@ public class XomwLinkRenderer {
 	* @return String
 	*/
 	public void makeKnownLink(Bry_bfr bfr,
-		XomwTitle target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
+		XomwTitleOld target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
 		byte[] classes = Bry_.Empty;
 		if (target.isExternal()) {
 			classes = Bry__classes__extiw;
@@ -295,7 +295,7 @@ public class XomwLinkRenderer {
 	* @return String
 	*/
 	public void makeBrokenLink(Bry_bfr bfr,
-		XomwTitle target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
+		XomwTitleOld target, byte[] text, Xomw_atr_mgr extraAttribs, Xomw_qry_mgr query) {
 		// XO.MW.HOOK: Run legacy hook
 
 		// We don't want to include fragments for broken links, because they
@@ -341,7 +341,7 @@ public class XomwLinkRenderer {
 	* @param boolean $isKnown
 	* @return null|String
 	*/
-	private void buildAElement(Bry_bfr bfr, XomwTitle target, byte[] text, Xomw_atr_mgr attribs, boolean isKnown) {
+	private void buildAElement(Bry_bfr bfr, XomwTitleOld target, byte[] text, Xomw_atr_mgr attribs, boolean isKnown) {
 		// XO.MW.HOOK:HtmlPageLinkRendererEnd
 
 		byte[] htmlBry = text;
@@ -357,7 +357,7 @@ public class XomwLinkRenderer {
 	* @return String non-escaped text
 	*/
 	// XO.MW:SYNC:1.29; DATE:2017-01-31
-	private byte[] getLinkText(XomwTitle target) {
+	private byte[] getLinkText(XomwTitleOld target) {
 		byte[] prefixed_text = target.getPrefixedText();
 		// If the target is just a fragment, with no title, we return the fragment
 		// text.  Otherwise, we return the title text itself.
@@ -367,7 +367,7 @@ public class XomwLinkRenderer {
 		return prefixed_text;
 	}
 
-	private byte[] getLinkUrl(XomwTitle target, Xomw_qry_mgr query) {
+	private byte[] getLinkUrl(XomwTitleOld target, Xomw_qry_mgr query) {
 		// TODO: Use a LinkTargetResolver service instead of Title
 //			$title = Title::newFromLinkTarget($target);
 //			if (this.forceArticlePath) {
@@ -392,7 +392,7 @@ public class XomwLinkRenderer {
 	* @param LinkTarget $target
 	* @return LinkTarget
 	*/
-	private XomwTitle normalizeTarget(XomwTitle target) {
+	private XomwTitleOld normalizeTarget(XomwTitleOld target) {
 		return XomwLinker.normaliseSpecialPage(target);
 	}
 
@@ -448,7 +448,7 @@ public class XomwLinkRenderer {
 	* @param LinkTarget $target
 	* @return String CSS class
 	*/
-	public byte[] getLinkClasses(XomwTitle target) {
+	public byte[] getLinkClasses(XomwTitleOld target) {
 		// Make sure the target is in the cache
 //			$id = this.linkCache->addLinkObj($target);
 //			if ($id == 0) {

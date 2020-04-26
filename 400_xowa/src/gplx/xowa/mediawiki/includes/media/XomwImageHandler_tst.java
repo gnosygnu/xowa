@@ -46,7 +46,7 @@ class XomwImageHandler_fxt {
 		return rv;
 	}
 	public void Init__file(String title, int w, int h) {
-		this.file = new XomwLocalFile(env, XomwTitle.newFromText(env, Bry_.new_u8(title)), repo, w, h, XomwMediaHandlerFactory.Mime__image__png);
+		this.file = new XomwLocalFile(env, XomwTitleOld.newFromText(env, Bry_.new_u8(title)), repo, w, h, XomwMediaHandlerFactory.Mime__image__png);
 	}
 	public void Test__normaliseParams(Xomw_params_handler prms, Xomw_params_handler expd) {
 		// exec

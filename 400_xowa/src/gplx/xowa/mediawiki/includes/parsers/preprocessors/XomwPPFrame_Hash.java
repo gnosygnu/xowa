@@ -33,7 +33,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	/**
 	* @var Title
 	*/
-	public XomwTitle title;
+	public XomwTitleOld title;
 	public XophpArray titleCache;
 
 	/**
@@ -80,7 +80,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @throws MWException
 	* @return PPTemplateFrame_Hash
 	*/
-	@Override public XomwPPFrame newChild(Object argsObj, XomwTitle title, int indexOffset) {
+	@Override public XomwPPFrame newChild(Object argsObj, XomwTitleOld title, int indexOffset) {
 		XophpArray namedArgs = XophpArray.New();
 		XophpArray numberedArgs = XophpArray.New();
 		if (!XophpObject_.is_true(title)) {
@@ -576,7 +576,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	*
 	* @return boolean
 	*/
-	@Override public boolean loopCheck(XomwTitle title) {
+	@Override public boolean loopCheck(XomwTitleOld title) {
 		return !this.loopCheckHash.isset(title.getPrefixedDBkeyStr());
 	}
 
@@ -594,7 +594,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	*
 	* @return Title
 	*/
-	@Override public XomwTitle getTitle() {
+	@Override public XomwTitleOld getTitle() {
 		return this.title;
 	}
 

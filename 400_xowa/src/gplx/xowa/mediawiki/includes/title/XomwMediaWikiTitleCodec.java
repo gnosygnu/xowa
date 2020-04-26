@@ -314,7 +314,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 							if (Bry_.Len_eq_0(dbkey)) {
 								// Empty self-links should point to the Main Page, to ensure
 								// compatibility with cross-wiki transclusions and the like.
-								XomwTitle mainPage = XomwTitle.newMainPage(mws.env);
+								XomwTitleOld mainPage = XomwTitleOld.newMainPage(mws.env);
 								XomwMediaWikiTitleCodecParts rv = new XomwMediaWikiTitleCodecParts(mainPage.getDBkey(), mainPage.getNamespace());
 								rv.interwiki = mainPage.getInterwiki();
 								rv.local_interwiki = true;

@@ -69,7 +69,7 @@ public class XomwFile {
 	public XomwFileRepo repo;
 
 	/** @var Title|String|boolean */
-	private XomwTitle title;
+	private XomwTitleOld title;
 
 //		/** @var String Text of last error */
 //		protected lastError;
@@ -265,7 +265,7 @@ public class XomwFile {
 //			return strcmp(a.getName(), b.getName());
 //		}
 
-	public XomwFile(XomwEnv env, XomwTitle title, XomwFileRepo repo) {
+	public XomwFile(XomwEnv env, XomwTitleOld title, XomwFileRepo repo) {
 		this.env = env;
 		this.title = title;
 // change title.getDBKey to normalizeTitle
@@ -306,7 +306,7 @@ public class XomwFile {
 	*
 	* @return Title
 	*/
-	public XomwTitle getTitle() {
+	public XomwTitleOld getTitle() {
 		return this.title;
 	}
 
