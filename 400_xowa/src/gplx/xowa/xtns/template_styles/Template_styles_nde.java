@@ -27,7 +27,6 @@ import gplx.xowa.htmls.heads.Xoh_head_itm__css_dynamic;
 import gplx.xowa.htmls.hxtns.blobs.Hxtn_blob_tbl;
 import gplx.xowa.htmls.hxtns.pages.Hxtn_page_mgr;
 import gplx.xowa.htmls.hxtns.wikis.Hxtn_wiki_itm;
-import gplx.xowa.htmls.minifys.XoCssMin;
 import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.Xop_root_tkn;
 import gplx.xowa.parsers.htmls.Mwh_atr_itm;
@@ -40,17 +39,17 @@ import gplx.xowa.xtns.Xox_xnde;
 import gplx.xowa.xtns.Xox_xnde_;
 public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	private byte[] css_ttl_bry;
-	private byte[] wrapper;
 	private byte[] css_src;
 	private boolean css_ignore;
 	private int css_page_id;
 	private Xoa_ttl css_ttl;
-	private static XoCssMin cssMin = new XoCssMin();
+	private String prepend = ".mw-parser-output";
+
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, byte xatr_id) {
 		switch (xatr_id) {
 			case Xatr__src:			css_ttl_bry = xatr.Val_as_bry(); break;
 			case Xatr__wrapper:
-				wrapper = Bry_.Add(xatr.Val_as_bry(), Byte_ascii.Space); // add trailing space for html_head.format
+				prepend = prepend + " " + xatr.Val_as_str();
 				break;
 		}
 	}
@@ -104,7 +103,12 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		if (!css_ignore) {
 			Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
 			try {
-				html_head.Bld_many(tmp_bfr, css_page_id, wrapper, Bry_.new_u8(cssMin.cssmin(String_.new_u8(css_src), -1)) );
+				css_src = new XoCssTransformer(String_.new_u8(css_src))
+					.Minify()
+					.Prepend(prepend)
+					.Url("upload.wikimedia.org", "www.xowa.org/xowa/fsys/bin/any/xowa/upload.wikimedia.org")
+					.ToBry();
+				html_head.Bld_many(tmp_bfr, css_page_id, css_src);
 				Xoh_head_itm__css_dynamic css_dynamic = ctx.Page().Html_data().Head_mgr().Itm__css_dynamic();
 				css_dynamic.Enabled_y_();
 				css_dynamic.Add(tmp_bfr.To_bry_and_clear());
@@ -130,7 +134,7 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		.Add_str_byte("wrapper", Xatr__wrapper)
 	;
 	private static final    Bry_fmt
-	  html_head  = Bry_fmt.Auto("\n/*TemplateStyles:r~{id}*/\n~{wrapper}~{css}")
+	  html_head  = Bry_fmt.Auto("\n/*TemplateStyles:r~{id}*/\n~{css}")
 	, html_error = Bry_fmt.Auto("<strong class=\"error\">~{msg}</strong>")
 	;
 }

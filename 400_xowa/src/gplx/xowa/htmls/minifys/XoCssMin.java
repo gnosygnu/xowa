@@ -35,14 +35,12 @@ public class XoCssMin {
 	public static final int
 	      MODE_NODEJS = 1
 		, MODE_YCSS_MIN = 2
-		, MODE_XOWA = 4
-		, MODE_ALL = MODE_NODEJS | MODE_YCSS_MIN | MODE_XOWA
+		, MODE_ALL = MODE_NODEJS | MODE_YCSS_MIN
 		;
 	public void DataCollectorMgr_(GfoDataCollectorMgr v) {this.dataCollectorMgr = v;} private GfoDataCollectorMgr dataCollectorMgr;
 	public String cssmin(String css, int linebreakpos) {return cssmin(css, linebreakpos, MODE_ALL);}
 	public String cssmin(String css, int linebreakpos, int mode) {
 		boolean isModeYcssMin = Bitmask_.Has_int(mode, MODE_YCSS_MIN);
-		boolean isModeXowa = Bitmask_.Has_int(mode, MODE_XOWA);
 
 		int startIndex = 0,
 			endIndex = 0,
@@ -287,17 +285,6 @@ public class XoCssMin {
 
 		// Trim the final string (for any leading or trailing white spaces)
 		css = JsString_.replace(css, patterns, "^\\s+|\\s+$", "");
-
-		if (isModeXowa) {
-			// add the '.mw-parser-output ' selector
-			css = JsString_.replace(css, patterns, "\\}([^@}].{2})", "}.mw-parser-output $1");
-			css = JsString_.replace(css, patterns, "(@media[^\\{]*\\{)", "$1.mw-parser-output ");
-			if (css.charAt(0) != '@')
-				css = ".mw-parser-output " + css;
-
-			// change some url(...) entries
-			css = css.replace("//upload.wikimedia.org", "//www.xowa.org/xowa/fsys/bin/any/xowa/upload.wikimedia.org");
-		}
 
 		return css;
 	}
