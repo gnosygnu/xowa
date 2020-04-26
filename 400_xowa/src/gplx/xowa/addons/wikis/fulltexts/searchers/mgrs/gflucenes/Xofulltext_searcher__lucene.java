@@ -13,15 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*;
-import gplx.gflucene.*;
-import gplx.gflucene.core.*;
-import gplx.gflucene.indexers.*;
-import gplx.gflucene.searchers.*;
-import gplx.gflucene.highlighters.*;
-import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
-import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes;
+
+import gplx.Gfo_usr_dlg_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.gflucene.core.Gflucene_analyzer_data;
+import gplx.gflucene.core.Gflucene_doc_data;
+import gplx.gflucene.core.Gflucene_index_data;
+import gplx.gflucene.searchers.Gflucene_searcher_mgr;
+import gplx.gflucene.searchers.Gflucene_searcher_qry;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.wikis.fulltexts.Xosearch_fulltext_addon;
+import gplx.xowa.addons.wikis.fulltexts.searchers.caches.Xofulltext_cache_qry;
+import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.Xofulltext_args_qry;
+import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.Xofulltext_args_wiki;
+import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.Xofulltext_searcher;
+import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.Xofulltext_searcher_page;
+import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.Xofulltext_searcher_ui;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
 public class Xofulltext_searcher__lucene implements Xofulltext_searcher {
 	private final    Gflucene_searcher_mgr searcher = new Gflucene_searcher_mgr();
 	public boolean Type_is_lucene() {return true;}
