@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-import gplx.xowa.mediawiki.includes.exception.*;
-import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.content;
+
+import gplx.Err_;
+import gplx.xowa.mediawiki.includes.XomwMagicWord;
+import gplx.xowa.mediawiki.includes.XomwTitleOld;
+import gplx.xowa.mediawiki.includes.exception.XomwMWException;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserOptions;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserOutput;
 /**
 * A content Object represents page content, e.g. the text to show on a page.
 * Content objects have no knowledge about how they relate to Wiki pages.
@@ -530,7 +535,7 @@ public abstract class XomwAbstractContent implements XomwContent {
 //		}
 	public abstract byte[] getTextForSearchIndex();
 
-	public abstract byte[] getWikitextForTransclusion();
+	public abstract String getWikitextForTransclusion();
 
 	public abstract byte[] getTextForSummary(int maxLength);
 

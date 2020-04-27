@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
 import gplx.core.net.*;
+import gplx.xowa.mediawiki.includes.content.XomwContent;
 import gplx.xowa.mediawiki.includes.xohtml.*;
 import gplx.xowa.mediawiki.includes.linkers.*;
 import gplx.xowa.mediawiki.includes.parsers.tables.*;
@@ -4505,10 +4506,10 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 	 *
 	 * @return array
 	 */
-	public static XophpArray statelessFetchTemplate(XomwTitleOld title, XomwParser parser) { // $parser = false
+	public static XophpArray statelessFetchTemplate(XomwTitle title, XomwParser parser) { // $parser = false
 		String text = XophpString_.False;
 		boolean skip = false;
-		XomwTitleOld finalTitle = title;
+		XomwTitle finalTitle = title;
 		XophpArray deps = XophpArray.New();
 
 		// Loop to fetch the article, with up to 1 redirect
@@ -4547,26 +4548,27 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 				.Add("title", title)
 				.Add("page_id", title.getArticleID())
 				.Add("rev_id", rev_id));
-//			if (rev && !title.equals(rev.getTitle())) {
+			if (XophpObject_.is_true(rev) && !title.equals(rev.getTitle())) {
 				// We fetched a rev from a different title; register it too...
-//				deps.Add(XophpArray.New()
-//					.Add("title", rev.getTitle())
-//					.Add("page_id", rev.getPage())
-//					.Add("rev_id", rev_id));
-//			}
+				deps.Add(XophpArray.New()
+					.Add("title", rev.getTitle())
+					.Add("page_id", rev.getPage())
+					.Add("rev_id", rev_id));
+			}
 
+			XomwContent content;
 			if (XophpObject_.is_true(rev)) {
-//				content = rev.getContent();
-//				text = content ? content.getWikitextForTransclusion() : null;
-//
+				content = rev.getContent();
+				text = XophpObject_.is_true(content) ? content.getWikitextForTransclusion() : null;
+
 //				Hooks::run('ParserFetchTemplate',
 //					[ parser, title, rev, &text, &deps ]);
-//
-//				if (text === false || text === null) {
-//					text = false;
-//					break;
-//				}
-			} else if (title.getNamespace() == NS_MEDIAWIKI) {
+
+				if (XophpString_.is_false(text) || XophpString_.is_null(text)) {
+					text = XophpString_.False;
+					break;
+				}
+			} else if (title.getNamespace() == XomwDefines.NS_MEDIAWIKI) {
 //				message = wfMessage(MediaWikiServices::getInstance().getContentLanguage().
 //				lcfirst(title.getText())).inContentLanguage();
 //				if (!message.exists()) {

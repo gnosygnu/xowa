@@ -25,7 +25,7 @@ import gplx.xowa.mediawiki.includes.title.*;
 * @note Consider using a TitleValue Object instead. TitleValue is more lightweight
 *       and does not rely on global state or the database.
 */
-public class XomwTitleOld implements XomwLinkTarget {
+public class XomwTitleOld { // implements XomwLinkTarget
 //		/** @var HashBagOStuff */
 //		static private $titleCache = null;
 //

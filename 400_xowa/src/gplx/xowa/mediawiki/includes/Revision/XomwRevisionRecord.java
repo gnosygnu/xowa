@@ -14,7 +14,7 @@ import gplx.xowa.mediawiki.includes.XomwTitleOld;
  * @since 1.31
  * @since 1.32 Renamed from MediaWiki\Storage\RevisionRecord
  */
-abstract class XomwRevisionRecord {
+public abstract class XomwRevisionRecord {
 
     // RevisionRecord deletion constants
 	public static final int DELETED_TEXT = 1;
@@ -232,20 +232,20 @@ abstract class XomwRevisionRecord {
 //    public function getInheritedSlots() {
 //        return new RevisionSlots( this.mSlots->getInheritedSlots() );
 //    }
-//
-//    /**
-//     * Get revision ID. Depending on the concrete subclass, this may return null if
-//     * the revision ID is not known (e.g. because the revision does not yet exist
-//     * in the database).
-//     *
-//     * MCR migration note: this replaces Revision::getId
-//     *
-//     * @return int|null
-//     */
-//    public function getId() {
-//        return this.mId;
-//    }
-//
+
+    /**
+     * Get revision ID. Depending on the concrete subclass, this may return null if
+     * the revision ID is not known (e.g. because the revision does not yet exist
+     * in the database).
+     *
+     * MCR migration note: this replaces Revision::getId
+     *
+     * @return int|null
+     */
+    public int getId() {
+        return this.mId;
+    }
+
 //    /**
 //     * Get parent revision ID (the original previous page revision).
 //     * If there is no parent revision, this returns 0.

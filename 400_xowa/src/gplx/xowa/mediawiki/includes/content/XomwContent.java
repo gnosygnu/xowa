@@ -52,7 +52,7 @@ public interface XomwContent {
 	* @todo Used in WikiPage and MessageCache to get message text. Not so
 	*  nice. What should we use instead?!
 	*/
-	byte[] getWikitextForTransclusion();
+	String getWikitextForTransclusion();
 
 	/**
 	* Returns a textual representation of the content suitable for use in edit
