@@ -4560,16 +4560,15 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 			if (XophpObject_.is_true(rev)) {
 				content = rev.getContent();
 				text = XophpObject_.is_true(content) ? content.getWikitextForTransclusion() : null;
-
+				
 //				Hooks::run('ParserFetchTemplate',
 //					[ parser, title, rev, &text, &deps ]);
-
 				if (XophpString_.is_false(text) || XophpString_.is_null(text)) {
 					text = XophpString_.False;
 					break;
 				}
 			} else if (title.getNamespace() == XomwDefines.NS_MEDIAWIKI) {
-//				message = wfMessage(MediaWikiServices::getInstance().getContentLanguage().
+//				message = XomwGlobalFunctions.wfMessage(MediaWikiServices.getInstance().getContentLanguage().
 //				lcfirst(title.getText())).inContentLanguage();
 //				if (!message.exists()) {
 //					text = false;

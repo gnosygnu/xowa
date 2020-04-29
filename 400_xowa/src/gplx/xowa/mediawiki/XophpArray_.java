@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki; import gplx.*;
 import gplx.core.strings.*;
 public class XophpArray_ {
 	// REF.PHP:https://www.php.net/manual/en/function.array-merge.php
@@ -156,6 +156,7 @@ public class XophpArray_ {
 	public static boolean array_key_exists(String key, XophpArray array) {return array.Has(key);}
 	public static boolean array_key_exists(int key, XophpArray array)    {return array.Has(Int_.To_str(key));}
 
+	public static void unset(XophpArray array, String s) {array.unset(s);}
 	public static void unset(XophpArray array, int i) {array.unset(i);}
 	public static void unset(Ordered_hash array, Object key) {
 		array.Del(key);
@@ -171,7 +172,7 @@ public class XophpArray_ {
 	}
 
 	// REF.PHP:https://www.php.net/manual/en/function.array-map.php
-	public static XophpArray array_map(XophpCallbackOwner callback_owner, String method, XophpArray array) {
+	public static XophpArray array_map(XophpCallableOwner callback_owner, String method, XophpArray array) {
 		XophpArray rv = XophpArray.New();
 		int len = array.count();
 		for (int i = 0; i < len; i++) {
@@ -208,7 +209,7 @@ public class XophpArray_ {
 	public static Object array_pop(XophpArray array) {return array.pop();}
 	public static boolean isset(XophpArray array, int key) {return XophpObject_.isset_obj(array.Get_at(key));}
 	public static boolean isset(XophpArray array, String key) {return XophpObject_.isset_obj(array.Get_by(key));}
-	public static boolean is_array(XophpArray array) {return array != null;}
+	public static boolean is_array(Object array) {return array != null;}
 
 	// REF.PHP: https://www.php.net/manual/en/function.in-array.php
 	public static boolean in_array(Object needle, XophpArray haystack) {return in_array(needle, haystack, false);}
