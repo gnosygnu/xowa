@@ -37,18 +37,22 @@ public class Xoh_page_wtr_wkr_ {
 		byte[] redirect_msg = Xop_redirect_mgr.Bld_redirect_msg(app, wiki, page.Redirect_trail());
 		return Bry_.Add(subpages, page_content_sub, redirect_msg);
 	}
-	public static byte[] BuildPagenameForTab(Bry_bfr tmp, Xow_msg_mgr msgMgr, Xoa_ttl ttl, byte[] mainPageTtl) {
+	public static byte[] BuildPagenameForTab(Bry_bfr tmp, boolean isHttpServer, Xow_msg_mgr msgMgr, Xoa_ttl ttl, byte[] mainPageTtl) {
 		byte[] pagename = BuildPagename(tmp, ttl);
 
-		// default to sitewide pagetitle; ISSUE#:715; DATE:2020-05-01
-		byte[] msgKey = Bry_.new_a7("pagetitle"); // $1 – Travel guide at {{SITENAME}}
+		if (isHttpServer) {
+			// default to sitewide pagetitle; ISSUE#:715; DATE:2020-05-01
+			byte[] msgKey = Bry_.new_a7("pagetitle"); // $1 – Travel guide at {{SITENAME}}
 
-		// if MAIN_PAGE, use the pageTitle for MAIN_PAGE; may not need Replace_unders depending on whether "mainPageTtl" is "MAIN PAGE"
-		if (Bry_.Eq(Xoa_ttl.Replace_unders(ttl.Raw()), Xoa_ttl.Replace_unders(mainPageTtl)))
-			msgKey = Bry_.new_a7("pagetitle-view-mainpage"); // {{SITENAME}} – The free worldwide travel guide that you can edit
+			// if MAIN_PAGE, use the pageTitle for MAIN_PAGE; may not need Replace_unders depending on whether "mainPageTtl" is "MAIN PAGE"
+			if (Bry_.Eq(Xoa_ttl.Replace_unders(ttl.Raw()), Xoa_ttl.Replace_unders(mainPageTtl)))
+				msgKey = Bry_.new_a7("pagetitle-view-mainpage"); // {{SITENAME}} – The free worldwide travel guide that you can edit
 
-		// do the actual swap
-		return msgMgr.Val_by_key_args(msgKey, pagename);
+			return msgMgr.Val_by_key_args(msgKey, pagename);
+		}
+		else {
+			return pagename;
+		}
 	}
 	public static byte[] BuildPagenameForH1(Bry_bfr tmp, Xoa_ttl ttl, byte[] displayTtl) {
 		// display_ttl explicitly set; use it

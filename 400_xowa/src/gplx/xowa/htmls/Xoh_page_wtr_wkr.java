@@ -126,7 +126,7 @@ public class Xoh_page_wtr_wkr {
 		}
 
 		// get pagename for (a) SWT tab name or (b) HTTP_server's <head><title>
-		byte[] pagename_for_tab = Xoh_page_wtr_wkr_.BuildPagenameForTab(tmp_bfr, wiki.Msg_mgr(), page_ttl, wiki.Props().Main_page()); // NOTE: page_name does not show display_title (<i>). always pass in null
+		byte[] pagename_for_tab = Xoh_page_wtr_wkr_.BuildPagenameForTab(tmp_bfr, app.Mode().Tid_is_http(), wiki.Msg_mgr(), page_ttl, wiki.Props().Main_page()); // NOTE: page_name does not show display_title (<i>). always pass in null
 		page.Html_data().Custom_tab_name_(pagename_for_tab); // set tab_name to page_name; note that if null, gui code will ignore and use Ttl.Page_txt; PAGE: zh.w:釣魚臺列嶼主權問題 DATE:2015-10-05
 
 		// get pagename for <h1 id="firstHeading" class="firstHeading"></h1>
