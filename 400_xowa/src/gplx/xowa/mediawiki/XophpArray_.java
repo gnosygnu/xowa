@@ -247,4 +247,29 @@ public class XophpArray_ {
 		}
 		return false;
 	}
+
+	// REF.PHP: https://www.php.net/manual/en/function.array-shift.php
+	// Returns the shifted value, or NULL if array is empty or is not an array.
+	public static Object array_shift(XophpArray array) {
+		if (array == null) {
+			return null;
+		}
+		int len = array.Len();
+		if (len == 0) {
+			return null;
+		}
+		XophpArrayItm[] itms = array.To_ary();
+		array.Clear();
+		int idx = 0;
+		for (int i = 1; i < len; i++) {
+			XophpArrayItm itm = itms[i];
+			if (itm.Key_is_int()) {
+				array.Add(idx++, itm.Val());
+			}
+			else {
+				array.Add(itm.Key(), itm.Val());
+			}
+		}
+		return itms[0].Val();
+	}
 }

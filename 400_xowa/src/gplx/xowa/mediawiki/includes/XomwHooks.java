@@ -19,9 +19,8 @@ package gplx.xowa.mediawiki.includes;
 import gplx.xowa.mediawiki.*;
 /*
 TODO:
-* $wgHooks
-* array_shift
-* Closure?
+* class XophpClosure: https://www.php.net/manual/en/class.closure.php
+* array_filter: https://www.php.net/manual/en/function.array-filter.php
 */
 
 /**
@@ -78,9 +77,7 @@ public class XomwHooks {
      * @return bool True if the hook has a function registered to it
      */
     public static boolean isRegistered(String name) {
-//        global $wgHooks;
-//        return !XophpArray_.empty($wgHooks[$name]) || !XophpArray_.empty(handlers[$name]);
-        return false;
+        return !XophpObject_.empty_obj(XomwDefaultSettings.wgHooks.Get_by(name)) || !XophpObject_.empty_obj(handlers.Get_by(name));
     }
 
     /**
@@ -93,17 +90,14 @@ public class XomwHooks {
      * @return array
      */
     public static XophpArray getHandlers(String name) {
-//        global $wgHooks;
-
         if (!isRegistered(name)) {
             return XophpArray.New();
-//        } else if (!XophpArray_.isset(handlers, name)) {
-//            return $wgHooks[name];
-//        } else if (!isset($wgHooks[name])) {
-//            return handlers[name];
+        } else if (!XophpArray_.isset(handlers, name)) {
+            return XomwDefaultSettings.wgHooks.Get_by_ary(name);
+        } else if (!XophpArray_.isset(XomwDefaultSettings.wgHooks, name)) {
+            return handlers.Get_by_ary(name);
         } else {
-//            return XophpArray_.array_merge(handlers.Get_by_ary(name), $wgHooks[name]);
-            return XophpArray_.array_merge(handlers.Get_by_ary(name));
+            return XophpArray_.array_merge(handlers.Get_by_ary(name), XomwDefaultSettings.wgHooks.Get_by_ary(name));
         }
     }
 
