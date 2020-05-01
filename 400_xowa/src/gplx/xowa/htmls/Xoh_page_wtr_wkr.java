@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,16 +13,38 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.langs.htmls.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; 
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.wbases.*;
-import gplx.xowa.xtns.pagebanners.*;
-import gplx.xowa.apps.gfs.*; import gplx.xowa.htmls.portal.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
-import gplx.xowa.htmls.core.*;
-import gplx.xowa.xtns.pfuncs.times.*;
+package gplx.xowa.htmls;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.langs.htmls.Gfh_utl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_itm;
+import gplx.xowa.apps.gfs.Gfs_php_converter;
+import gplx.xowa.htmls.core.Xow_hdump_mode;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr_escaper;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.portal.Xoh_page_body_cls;
+import gplx.xowa.htmls.portal.Xow_portal_mgr;
+import gplx.xowa.langs.vnts.Xol_vnt_mgr;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.wikis.Xow_page_tid;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
+import gplx.xowa.wikis.pages.skins.Xopg_xtn_skin_fmtr_arg;
+import gplx.xowa.wikis.pages.skins.Xopg_xtn_skin_itm_tid;
+import gplx.xowa.xtns.pfuncs.times.Pft_func_formatdate;
+import gplx.xowa.xtns.wbases.Wdata_xwiki_link_wtr;
 public class Xoh_page_wtr_wkr {
 	private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
 	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); 
@@ -102,15 +124,21 @@ public class Xoh_page_wtr_wkr {
 				converted_title = vnt_mgr.Convert_lang().Auto_convert(vnt_mgr.Cur_itm(), page_ttl.Page_txt());
 			page_ttl = Xoa_ttl.Parse(wiki, page_ttl.Ns().Id(), converted_title);
 		}
-		byte[] page_name = Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, null);		// NOTE: page_name does not show display_title (<i>). always pass in null
-		byte[] page_display_title = Xoh_page_wtr_wkr_.Bld_page_name(tmp_bfr, page_ttl, page.Html_data().Display_ttl());
-		page.Html_data().Custom_tab_name_(page_name);	// set tab_name to page_name; note that if null, gui code will ignore and use Ttl.Page_txt; PAGE: zh.w:釣魚臺列嶼主權問題 DATE:2015-10-05
+
+		// get pagename for (a) SWT tab name or (b) HTTP_server's <head><title>
+		byte[] pagename_for_tab = Xoh_page_wtr_wkr_.BuildPagenameForTab(tmp_bfr, wiki.Msg_mgr(), page_ttl, wiki.Props().Main_page()); // NOTE: page_name does not show display_title (<i>). always pass in null
+		page.Html_data().Custom_tab_name_(pagename_for_tab); // set tab_name to page_name; note that if null, gui code will ignore and use Ttl.Page_txt; PAGE: zh.w:釣魚臺列嶼主權問題 DATE:2015-10-05
+
+		// get pagename for <h1 id="firstHeading" class="firstHeading"></h1>
+		byte[] pagename_for_h1 = Xoh_page_wtr_wkr_.BuildPagenameForH1(tmp_bfr, page_ttl, page.Html_data().Display_ttl());
+
+		// main build
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr().Init_assert();
 		boolean nightmode_enabled = app.Gui_mgr().Nightmode_mgr().Enabled();
 		fmtr.Bld_bfr_many(bfr
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
 		, page.Db().Page().Id(), page.Ttl().Full_db()
-		, page_name, page.Html_data().Page_heading().Init(wiki, html_gen_tid == Xopg_view_mode_.Tid__read, page.Html_data(), page.Ttl().Full_db(), page_display_title)
+		, pagename_for_tab, page.Html_data().Page_heading().Init(wiki, html_gen_tid == Xopg_view_mode_.Tid__read, page.Html_data(), page.Ttl().Full_db(), pagename_for_h1)
 		, modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry()
 		, mgr.Css_night_bry(nightmode_enabled)

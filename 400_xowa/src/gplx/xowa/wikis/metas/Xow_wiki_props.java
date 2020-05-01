@@ -30,7 +30,7 @@ public class Xow_wiki_props {
 
 	// XO props
 	public byte              Protocol_tid()       {return protocol_tid;}       private final    byte protocol_tid = gplx.core.net.Gfo_protocol_itm.Tid_https;	// NOTE: default protocol to https; handles external links like [//a.org]; may need to be changed for wikia or other non-WMF wikis; DATE:2015-07-27
-	public byte[]            Main_page()          {return main_page;}          private byte[] main_page = Xoa_page_.Main_page_bry; // HACK: default to Main_Page b/c some code tries to do Xoa_ttl.Parse() which will not work with ""; DATE:2014-02-16
+	public byte[]            Main_page()          {return main_page;}          private byte[] main_page = Xoa_page_.Main_page_bry; // HACK: default to Main_Page b/c some code tries to do Xoa_ttl.Parse() which will not work with ""; DATE:2014-02-16; QUESTION:is this always "Main_Page" or "Main Page"; See Xoh_page_wtr_wkr_; DATE:2020-05-01
 	public byte[]            Bldr_version()       {return bldr_version;}       private byte[] bldr_version = Bry_.Empty;
 	public int               Css_version()        {return css_version;}        private int css_version = 1;
 	public byte[]            Siteinfo_misc()      {return siteinfo_misc;}      private byte[] siteinfo_misc = Bry_.Empty;

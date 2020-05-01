@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.pages.htmls.*;
+// TODO: move pagename_for_h1 here; also test; WHEN: next major change; NOTE: may go away for XOMW
 public class Xopg_page_heading implements Bfr_arg {
 	private Xowe_wiki wiki;
 	private Xopg_html_data html_data;
