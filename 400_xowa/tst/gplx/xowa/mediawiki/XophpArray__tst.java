@@ -16,6 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki;
 
 import gplx.Bool_;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.String_;
 import gplx.core.tests.Gftest;
 import org.junit.Test;
 
@@ -263,7 +266,7 @@ public class XophpArray__tst {
 			);
 	}
 	@Test public void in_array() {
-		// PHP samples
+		// PHP examples
 		XophpArray array;
 		// Example #1
 		array = XophpArray.New("Mac", "NT", "Irix", "Linux");
@@ -322,7 +325,7 @@ public class XophpArray__tst {
 		Gftest.Eq__bool_y(shifted == null);
 		Gftest.Eq__bool_y(array == null);
 
-		// PHP samples
+		// PHP examples
 		// Example #1
 		array = XophpArray.New("orange", "banana", "apple", "strawberry");
 		shifted = (String)XophpArray_.array_shift(array);
@@ -333,10 +336,62 @@ public class XophpArray__tst {
 		, array
 		);
 	}
+	@Test public void array_filter() {
+		// PHP examples
+		// Example #1 array_filter() example
+		XophpArrayTestCallbackOwner callbackOwner = new XophpArrayTestCallbackOwner();
+		XophpArray array;
+		array = XophpArray.New().Add("a", 1).Add("b", 2).Add("c", 3).Add("d", 4).Add("e", 5);
+		fxt.Test__eq
+		( XophpArray.New().Add("a", 1).Add("c", 3).Add("e", 5)
+		, XophpArray_.array_filter(array, callbackOwner.NewCallback("array_filter_odd"))
+		);
+
+		array = XophpArray.New(6, 7, 8, 9, 10, 11, 12);
+		fxt.Test__eq
+		( XophpArray.New().Add(0, 6).Add(2, 8).Add(4, 10).Add(6, 12)
+		, XophpArray_.array_filter(array, callbackOwner.NewCallback( "array_filter_even"))
+		);
+
+		// Example #2 array_filter() without callback
+		array = XophpArray.New().Add(0, "foo").Add(1, false).Add(2, -1).Add(3, null).Add(4, "").Add(5, "0").Add(6, 0);
+		fxt.Test__eq
+		( XophpArray.New().Add(0, "foo").Add(2, -1)
+		, XophpArray_.array_filter(array)
+		);
+
+		// Example #3 array_filter() with flag
+		array = XophpArray.New().Add("a", 1).Add("b", 2).Add("c", 3).Add("d", 4);
+		fxt.Test__eq
+		( XophpArray.New().Add("b", 2)
+		, XophpArray_.array_filter(array, callbackOwner.NewCallback("array_filter_key"), XophpArray_.ARRAY_FILTER_USE_KEY)
+		);
+		fxt.Test__eq
+		( XophpArray.New().Add("b", 2).Add("d", 4)
+		, XophpArray_.array_filter(array, callbackOwner.NewCallback("array_filter_both"), XophpArray_.ARRAY_FILTER_USE_BOTH)
+		);
+	}
 }
 class XophpArray__fxt {
 	public XophpArray Make() {return new XophpArray();}
 	public void Test__eq(XophpArray expd, XophpArray actl) {
 		Gftest.Eq__str(expd.To_str(), actl.To_str());
+	}
+}
+class XophpArrayTestCallbackOwner implements XophpCallbackOwner {
+	public XophpCallback NewCallback(String method) {return new XophpCallback(this, method);}
+	public Object Call(String method, Object... args) {
+		switch (method) {
+			case "array_filter_even":
+				return Int_.Cast(args[0]) % 2 == 0;
+			case "array_filter_odd":
+				return Int_.Cast(args[0]) % 2 == 1;
+			case "array_filter_key":
+				return String_.cast(args[0]).equals("b");
+			case "array_filter_both":
+				return String_.cast(args[0]).equals("b") || Int_.Cast(args[1]) == 4;
+			default:
+				throw Err_.new_unhandled_default(method);
+		}
 	}
 }

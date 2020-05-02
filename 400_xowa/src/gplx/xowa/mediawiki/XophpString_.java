@@ -19,7 +19,7 @@ import gplx.core.intls.*;
 import gplx.objects.strings.unicodes.*;
 import gplx.core.primitives.*;
 import gplx.objects.strings.bfrs.*;
-public class XophpString_ implements XophpCallableOwner {
+public class XophpString_ implements XophpCallbackOwner {
 	public static final    String False = null;
 	public static boolean is_true (String s) {return s != null;} // handles code like "if ($var)" where var is an Object;
 	public static boolean is_false(String s) {return s == null;}
@@ -564,7 +564,7 @@ public class XophpString_ implements XophpCallableOwner {
 		return String_.Eq(Char_as_str(s, idx), comp);
 	}
 
-	public Object Callback(String method, Object... args) {
+	public Object Call(String method, Object... args) {
 		if (String_.Eq(method, "strtoupper")) {
 			String val = (String)args[0];
 			return strtoupper(val);
@@ -573,5 +573,5 @@ public class XophpString_ implements XophpCallableOwner {
 			throw Err_.new_unhandled_default(method);
 		}
 	}
-	public static final XophpCallableOwner Callback_owner = new XophpString_();
+	public static final XophpCallbackOwner Callback_owner = new XophpString_();
 }

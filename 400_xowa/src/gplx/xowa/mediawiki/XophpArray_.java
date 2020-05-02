@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*;
+package gplx.xowa.mediawiki;
+
+import gplx.*;
 import gplx.core.strings.*;
 public class XophpArray_ {
 	// REF.PHP:https://www.php.net/manual/en/function.array-merge.php
@@ -172,12 +174,12 @@ public class XophpArray_ {
 	}
 
 	// REF.PHP:https://www.php.net/manual/en/function.array-map.php
-	public static XophpArray array_map(XophpCallableOwner callback_owner, String method, XophpArray array) {
+	public static XophpArray array_map(XophpCallbackOwner callback_owner, String method, XophpArray array) {
 		XophpArray rv = XophpArray.New();
 		int len = array.count();
 		for (int i = 0; i < len; i++) {
 			String itm = array.Get_at_str(i);
-			rv.Add((String)callback_owner.Callback(method, itm));
+			rv.Add((String)callback_owner.Call(method, itm));
 		}
 		return rv;
 	}
@@ -272,4 +274,39 @@ public class XophpArray_ {
 		}
 		return itms[0].Val();
 	}
+
+	// REF.PHP: https://www.php.net/manual/en/function.array-filter.php
+	public static final int ARRAY_FILTER_USE_BOTH = 1, ARRAY_FILTER_USE_KEY = 2, ARRAY_FILTER_USE_VAL = 0; // XO:USE_VAL is not PHP
+	public static XophpArray array_filter(XophpArray array) {return array_filter(array, XophpArrayFilterNullCallback.Instance, 0);}
+	public static XophpArray array_filter(XophpArray array, XophpCallback callback) {return array_filter(array, callback, 0);}
+	public static XophpArray array_filter(XophpArray array, XophpCallback callback, int flag) {
+		XophpArray rv = new XophpArray();
+		int len = array.count();
+		for (int i = 0; i < len; i++) {
+			XophpArrayItm itm = array.Get_at_itm(i);
+			boolean filter = false;
+			switch (flag) {
+				case ARRAY_FILTER_USE_VAL:
+					filter = Bool_.Cast(callback.Call(itm.Val()));
+					break;
+				case ARRAY_FILTER_USE_KEY:
+					filter = Bool_.Cast(callback.Call(itm.Key()));
+					break;
+				case ARRAY_FILTER_USE_BOTH:
+					filter = Bool_.Cast(callback.Call(itm.Key(), itm.Val()));
+					break;
+			}
+			if (filter)
+				rv.Add(itm.Key(), itm.Val());
+		}
+		return rv;
+	}
+}
+class XophpArrayFilterNullCallback implements XophpCallbackOwner {
+	public Object Call(String method, Object... args) {
+		if (args.length != 1) throw new XophpRuntimeException("ArrayFilterNullCallback requires 1 arg");
+		Object arg = args[0];
+		return !XophpObject_.empty_obj(arg);
+	}
+	public static XophpCallback Instance = new XophpCallback(new XophpArrayFilterNullCallback(), "");
 }

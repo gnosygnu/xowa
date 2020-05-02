@@ -14,6 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
-public interface XophpCallableOwner {
-	Object Callback(String method, Object... args);
+public interface XophpCallbackOwner {
+	Object Call(String method, Object... args);
 }
