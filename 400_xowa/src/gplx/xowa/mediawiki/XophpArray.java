@@ -136,6 +136,17 @@ public class XophpArray implements Bry_bfr_able {
 	public boolean Get_by_bool(String key) {return Bool_.Cast(this.Get_by(key));}
 	public int Get_by_int_or(String key, int or) {Object rv = this.Get_by(key); return rv == null ? or : Int_.Cast(rv);}
 	public int Get_by_int(String key) {return Int_.Cast(this.Get_by(key));}
+	public XophpArray Xet_by_ary(String key) {
+		XophpArrayItm itm = (XophpArrayItm)hash.Get_by(key);
+		if (itm == null) {
+			XophpArray val = new XophpArray();
+			this.Set(key, val);
+			return val;
+		}
+		else {
+			return (XophpArray)itm.Val();
+		}
+	}
 	public XophpArray Get_by_ary_or(String key, XophpArray or) {Object rv = this.Get_by(key); return rv == null ? or : (XophpArray)rv;}
 	public XophpArray Get_by_ary(String key) {return (XophpArray)this.Get_by(key);}
 	public String Get_by_str(char key) {return (String)this.Get_by(Char_.To_str(key));}

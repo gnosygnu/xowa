@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki;
-public interface XophpCallbackOwner {
-	Object Call(String method, Object... args);
+package gplx.xowa.mediawiki.includes.exception;
 
-	default XophpCallback NewCallback(String method) {return new XophpCallback(this, method);}
+import gplx.Err;
+import gplx.String_;
+
+public class XomwUnexpectedValueException extends Err {
+	public XomwUnexpectedValueException(String fmt, Object... args) {
+		super(true, "", "", String_.Format(fmt, args));
+	}
 }

@@ -15,9 +15,19 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
 
+import gplx.String_;
 import gplx.core.primitives.String_obj_ref;
-import gplx.xowa.mediawiki.*;
+import gplx.core.tests.GfoTestMethod;
+import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.XophpArray_;
+import gplx.xowa.mediawiki.XophpCallback;
+import gplx.xowa.mediawiki.XophpCallbackOwner;
+import gplx.xowa.mediawiki.XophpFatalError;
+import gplx.xowa.mediawiki.XophpObject_;
+import gplx.xowa.mediawiki.XophpString_;
+import gplx.xowa.mediawiki.XophpType_;
 import gplx.xowa.mediawiki.includes.exception.XomwMWException;
+import gplx.xowa.mediawiki.includes.exception.XomwUnexpectedValueException;
 
 // MW.SRC:1.33.1
 /**
@@ -43,7 +53,7 @@ public class XomwHooks {
      * @since 1.18
      */
     public static void register(String name, XophpCallback callback) {
-        handlers.Get_by_ary(name).Add(callback);
+        handlers.Xet_by_ary(name).Add(callback);
     }
 
     /**
@@ -153,21 +163,21 @@ public class XomwHooks {
             if (fname != null) fname.Val_(XophpType_.get_class(object).getName() + "::" + method);
             callback = new XophpCallback(object, method);
         } else if (XophpString_.is_string(hook.Get_at(0))) {
-            throw new XomwMWException("XOMW does not support string callbacks! Should not have been passed here!; event=" + event + "; fname=" + XophpArray_.array_shift(hook) + "\n");
+            throw new XomwMWException("XOMW does not support string callbacks! Should not have been passed here!; event={0}; fname={1}\n", event,  XophpArray_.array_shift(hook));
         } else {
-            throw new XomwMWException("Unknown datatype in hooks for " + event + "\n");
+            throw new XomwMWException("Unknown datatype in hooks for {0}\n", event);
         }
 
         // XOMW:skip as callback already strongly-typed above
         // Run autoloader (workaround for call_user_func_array bug)
         // and throw error if not callable.
         // if (!is_callable($callback)) {
-        //    throw new MWException('Invalid callback ' . $fname . ' in hooks for ' . $event . "\n");
+        //    throw new XomwMWException('Invalid callback ' . $fname . ' in hooks for ' . $event . "\n");
         // }
 
         // mark hook as deprecated, if deprecation version is specified
         if (deprecatedVersion != null) {
-//            wfDeprecated("$event hook (used in $fname)", deprecatedVersion);
+            XomwGlobalFunctions.wfDeprecated(String_.Format( "{0} hook (used in {1})", event, fname), deprecatedVersion);
         }
 
         // Call the hook.
@@ -221,25 +231,34 @@ public class XomwHooks {
         return true;
     }
 
-//    /**
-//     * Call hook functions defined in Hooks::register and $wgHooks.
-//     *
-//     * @param string $event Event name
-//     * @param array $args Array of parameters passed to hook functions
-//     * @param string|null $deprecatedVersion [optional] Mark hook as deprecated with version number
-//     * @return bool Always true
-//     * @throws MWException If a callback is invalid, unknown
-//     * @throws UnexpectedValueException If a callback returns an abort value.
-//     * @since 1.30
-//     */
-//    public static function runWithoutAbort($event, array $args = [], $deprecatedVersion = null) {
-//        foreach (getHandlers($event) as hook) {
-//            $fname = null;
-//            retval = callHook($event, hook, $args, $deprecatedVersion, $fname);
-//            if (retval !== null && retval !== true) {
-//                throw new UnexpectedValueException("Invalid return from $fname for unabortable $event.");
-//            }
-//        }
-//        return true;
-//    }
+    /**
+     * Call hook functions defined in Hooks::register and $wgHooks.
+     *
+     * @param string $event Event name
+     * @param array $args Array of parameters passed to hook functions
+     * @param string|null $deprecatedVersion [optional] Mark hook as deprecated with version number
+     * @return bool Always true
+     * @throws MWException If a callback is invalid, unknown
+     * @throws UnexpectedValueException If a callback returns an abort value.
+     * @since 1.30
+     */
+    public static boolean runWithoutAbort(String event) {return runWithoutAbort(event, XophpArray.New(), null);}
+    public static boolean runWithoutAbort(String event, XophpArray args, String deprecatedVersion) {
+        XophpArray handlers = getHandlers(event);
+        int len = handlers.count();
+        for (int i = 0; i < len; i++) {
+            Object hookObj = handlers.Get_at(i);
+            String_obj_ref fname = String_obj_ref.empty_();
+            String retval = callHook(event, hookObj, args, deprecatedVersion, fname);
+            if (!XophpString_.is_null(retval) && !XophpString_.is_true(retval)) {
+                throw new XomwUnexpectedValueException("Invalid return from {0} for unabortable {1}.", fname, event);
+            }
+        }
+        return true;
+    }
+
+    @GfoTestMethod
+    public static void clearAll() {
+        handlers.Clear();
+    }
 }

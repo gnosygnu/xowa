@@ -211,7 +211,7 @@ public class XophpArray_ {
 	public static Object array_pop(XophpArray array) {return array.pop();}
 	public static boolean isset(XophpArray array, int key) {return XophpObject_.isset_obj(array.Get_at(key));}
 	public static boolean isset(XophpArray array, String key) {return XophpObject_.isset_obj(array.Get_by(key));}
-	public static boolean is_array(Object array) {return array != null;}
+	public static boolean is_array(Object array) {return XophpType_.instance_of(array, XophpArray.class);}
 
 	// REF.PHP: https://www.php.net/manual/en/function.in-array.php
 	public static boolean in_array(Object needle, XophpArray haystack) {return in_array(needle, haystack, false);}

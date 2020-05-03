@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -112,6 +112,7 @@ public class Gftest {
 		bfr.Add(Bry__line_end);
 		throw Err_.new_wo_type(bfr.To_str_and_clear());
 	}
+	public static void Eq__bool_n(boolean actl)			{Eq__bool(Bool_.N, actl, null);}
 	public static void Eq__bool_y(boolean actl)			{Eq__bool(Bool_.Y, actl, null);}
 	public static void Eq__bool_y(boolean actl, String msg_fmt, Object... msg_args)	{Eq__bool(Bool_.Y, actl, msg_fmt, msg_args);}
 	public static void Eq__bool(boolean expd, boolean actl)	{Eq__bool(expd, actl, null);}
