@@ -15,7 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
 
+import gplx.Gfo_log_;
 import gplx.xowa.mediawiki.XomwEnv;
+import gplx.xowa.mediawiki.XophpString_;
 
 // MW.SRC:1.33.1
 // XO.NOTE:MW lists functions individually; XO aggregates under XomwGlobalFunctions class
@@ -1052,23 +1054,27 @@ public class XomwGlobalFunctions {
 //		$logger = LoggerFactory::getInstance('wfLogDBError');
 //		$logger.error(trim($text), $context);
 //	}
-//
-//	/**
-//	 * Throws a warning that $function is deprecated
-//	 *
-//	 * @param string $function Function that is deprecated.
-//	 * @param string|bool $version Version of MediaWiki that the function
-//	 *    was deprecated in (Added in 1.19).
-//	 * @param string|bool $component Component to which the function belongs.
-//	 *    If false, it is assumed the function is in MediaWiki core (Added in 1.19).
-//	 * @param int $callerOffset How far up the call stack is the original
-//	 *    caller. 2 = function that called the function that called
-//	 *    wfDeprecated (Added in 1.20).
-//	 */
-//	function wfDeprecated($function, $version = false, $component = false, $callerOffset = 2) {
-//		MWDebug::deprecated($function, $version, $component, $callerOffset + 1);
-//	}
-//
+
+	/**
+	 * Throws a warning that $function is deprecated
+	 *
+	 * @param string $function Function that is deprecated.
+	 * @param string|bool $version Version of MediaWiki that the function
+	 *    was deprecated in (Added in 1.19).
+	 * @param string|bool $component Component to which the function belongs.
+	 *    If false, it is assumed the function is in MediaWiki core (Added in 1.19).
+	 * @param int $callerOffset How far up the call stack is the original
+	 *    caller. 2 = function that called the function that called
+	 *    wfDeprecated (Added in 1.20).
+	 */
+	public static void wfDeprecated(String function) {wfDeprecated(function, XophpString_.False, XophpString_.False, 2);}
+	public static void wfDeprecated(String function, String version) {wfDeprecated(function, version, XophpString_.False, 2);}
+	public static void wfDeprecated(String function, String version, String component, int callerOffset) {
+		// MWDebug::deprecated($function, $version, $component, $callerOffset + 1);
+		String deprecatedIn = version == null ? "" : " deprecated in " + version;
+		Gfo_log_.Instance.Warn(function + deprecatedIn);
+	}
+
 //	/**
 //	 * Send a warning either to the debug log or in a PHP error depending on
 //	 * $wgDevelopmentWarnings. To log warnings in production, use wfLogWarning() instead.
