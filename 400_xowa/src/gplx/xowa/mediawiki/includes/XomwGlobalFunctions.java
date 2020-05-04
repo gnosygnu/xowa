@@ -17,6 +17,7 @@ package gplx.xowa.mediawiki.includes;
 
 import gplx.Gfo_log_;
 import gplx.xowa.mediawiki.XomwEnv;
+import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpString_;
 
 // MW.SRC:1.33.1
@@ -1283,7 +1284,7 @@ public class XomwGlobalFunctions {
 	 *
 	 * @see Message::__construct
 	 */
-	public static XomwMessage wfMessage(XomwEnv env, String key, String... params) {
+	public static XomwMessageOld wfMessageOld(XomwEnv env, String key, String... params) {
 //		$message = new Message($key);
 //
 //		// We call Message::params() to reduce code duplication
@@ -1292,7 +1293,17 @@ public class XomwGlobalFunctions {
 //		}
 //
 //		return $message;
-		return env.Message_mgr().Get_by_str(key);
+		return env.Message_mgr().Old_get_by_str(key);
+	}
+	public static XomwMessage wfMessage(XomwEnv env, String key, String... params) {
+		XomwMessage message = new XomwMessage(key);
+
+		// We call Message::params() to reduce code duplication
+		if (XophpObject_.is_true(params)) {
+//			message.params(...$params);
+		}
+
+		return message;
 	}
 
 //	/**

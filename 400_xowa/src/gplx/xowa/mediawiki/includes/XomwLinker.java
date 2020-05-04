@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+package gplx.xowa.mediawiki.includes; import gplx.*;
+import gplx.xowa.mediawiki.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.linkers.*; import gplx.xowa.mediawiki.includes.parsers.*;
@@ -650,7 +651,7 @@ public class XomwLinker {
 					, tmp_attribs.Clear()
 					.Add(Gfh_atr_.Bry__href , url)
 					.Add(Gfh_atr_.Bry__class, Class__internal)
-					.Add(Gfh_atr_.Bry__title, XomwGlobalFunctions.wfMessage(env, "thumbnail-more").text())
+					.Add(Gfh_atr_.Bry__title, XomwGlobalFunctions.wfMessageOld(env, "thumbnail-more").text())
 					, Bry_.Empty);
 				byte[] zoom_anch = tmp.To_bry_and_clear();
 				XomwHtml.rawElement(tmp, htmlTemp, Gfh_tag_.Bry__div, tmp_attribs.Clear().Add(Gfh_atr_.Bry__class, Class__magnify), zoom_anch);

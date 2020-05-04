@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
+import gplx.core.primitives.Bool_obj_ref;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.core.primitives.String_obj_ref;
+import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
 import gplx.core.net.*;
 import gplx.xowa.mediawiki.includes.content.XomwContent;
@@ -4507,20 +4511,20 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 	 * @return array
 	 */
 	public static XophpArray statelessFetchTemplate(XomwTitle title, XomwParser parser) { // $parser = false
-		String text = XophpString_.False;
-		boolean skip = false;
+		String_obj_ref text = String_obj_ref.new_(XophpString_.False);
+		Bool_obj_ref skip = Bool_obj_ref.n_();
 		XomwTitle finalTitle = title;
 		XophpArray deps = XophpArray.New();
 
 		// Loop to fetch the article, with up to 1 redirect
 		for (int i = 0; i < 2 && XophpObject_.is_object(title); i++) {
 			// Give extensions a chance to select the revision instead
-			int id = XophpInt_.False; // Assume current
-//			Hooks::run('BeforeParserFetchTemplateAndtitle',
-//				[ parser, title, &skip, &id ]);
+			Int_obj_ref id = Int_obj_ref.New(XophpInt_.False); // Assume current
+			XomwHooks.run("BeforeParserFetchTemplateAndtitle",
+				XophpArray.New(parser, title, skip, id));
 
-			if (skip) {
-				text = XophpString_.False;
+			if (skip.Val()) {
+				text = text.Val_(XophpString_.False);
 				deps.Add(XophpArray.New()
 					.Add("title", title)
 					.Add("page_id", title.getArticleID())
@@ -4530,8 +4534,8 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 			}
 			// Get the revision
 			XomwRevision rev = null;
-			if (XophpInt_.is_true(id)) {
-				rev = XomwRevision.newFromId(id);
+			if (XophpInt_.is_true(id.Val())) {
+				rev = XomwRevision.newFromId(id.Val());
 			} else if (XophpObject_.is_true(parser)) {
 //				rev = parser.fetchCurrentRevisionOfTitle(title);
 			} else {
@@ -4539,7 +4543,7 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 			}
 			int rev_id = XophpObject_.is_true(rev) ? rev.getId() : 0;
 			// If there is no current revision, there is no page
-			if (XophpInt_.is_false(id) && !XophpObject_.is_true(rev)) {
+			if (XophpInt_.is_false(id.Val()) && !XophpObject_.is_true(rev)) {
 //				linkCache = MediaWikiServices::getInstance().getLinkCache();
 //				linkCache.addBadLinkObj(title);
 			}
@@ -4559,12 +4563,12 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 			XomwContent content;
 			if (XophpObject_.is_true(rev)) {
 				content = rev.getContent();
-				text = XophpObject_.is_true(content) ? content.getWikitextForTransclusion() : null;
+				text = text.Val_(XophpObject_.is_true(content) ? content.getWikitextForTransclusion() : null);
 				
-//				Hooks::run('ParserFetchTemplate',
-//					[ parser, title, rev, &text, &deps ]);
-				if (XophpString_.is_false(text) || XophpString_.is_null(text)) {
-					text = XophpString_.False;
+				XomwHooks.run("ParserFetchTemplate",
+					XophpArray.New(parser, title, rev, text, deps)); // NOTE: was &deps
+				if (XophpString_.is_false(text.Val()) || XophpString_.is_null(text.Val())) {
+					text = text.Val_(XophpString_.False);
 					break;
 				}
 			} else if (title.getNamespace() == XomwDefines.NS_MEDIAWIKI) {

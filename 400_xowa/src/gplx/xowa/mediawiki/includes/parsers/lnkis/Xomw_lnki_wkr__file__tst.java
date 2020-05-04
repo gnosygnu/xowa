@@ -91,7 +91,7 @@ class Xomw_lnki_wkr__fxt {
 		env.File_finder_(file_finder);
 		env.Magic_word_mgr().Add(Bry_.new_u8("img_thumbnail"), Bool_.Y, Bry_.Ary("thumb"));
 		env.Magic_word_mgr().Add(Bry_.new_u8("img_width"), Bool_.Y, Bry_.Ary("$1px"));
-		env.Message_mgr().Add("thumbnail-more", "enlarge", env.Language());
+		env.Message_mgr().Old_add("thumbnail-more", "enlarge", env.Language());
 		parser.Init_by_wiki(wiki);
 
 		// ctx

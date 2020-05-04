@@ -196,6 +196,7 @@ public class XophpArray implements Bry_bfr_able {
 		itm += v;
 		this.Set(idx, itm);
 	}
+
 	public XophpArray Clone() {
 		XophpArray rv = new XophpArray();
 		int len = hash.Len();
@@ -240,5 +241,23 @@ public class XophpArray implements Bry_bfr_able {
 			rv.Add(val);
 		return rv;
 	}
+
+	// REF.PHP:https://www.php.net/manual/en/function.reset.php
+	private int internalPointerIndex = 0;
+	private Object internalPointerAdd(int v) {
+		internalPointerIndex += v;
+		return internalPointerGetOrNull();
+	}
+	private Object internalPointerReset() {
+		internalPointerIndex = 0;
+		return internalPointerGetOrNull();
+	}
+	private Object internalPointerGetOrNull() {return hash.Len() == 0 ? null : this.Get_at(internalPointerIndex);}
+	public static Object reset(XophpArray array)   {return array.internalPointerReset();}
+	public static Object current(XophpArray array) {return array.internalPointerGetOrNull();}
+	public static Object next(XophpArray array) {
+		return array.internalPointerAdd(1);
+	}
+
 	public static final    XophpArray False = null; // handles code like "if ($var === false)" where var is an Object;
 }

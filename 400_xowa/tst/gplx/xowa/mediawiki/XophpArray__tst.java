@@ -371,6 +371,24 @@ public class XophpArray__tst {
 		, XophpArray_.array_filter(array, callbackOwner.NewCallback("array_filter_both"), XophpArray_.ARRAY_FILTER_USE_BOTH)
 		);
 	}
+	@Test public void reset() {
+		// PHP examples
+		// Example #1 reset() example
+		XophpArray array;
+		array = XophpArray.New("step one", "step two", "step three", "step four");
+
+		// by default, the pointer is on the first element
+		Gftest.Eq__str("step one", (String)XophpArray.current(array));
+
+		// skip two steps
+		XophpArray.next(array);
+		XophpArray.next(array);
+		Gftest.Eq__str("step three", (String)XophpArray.current(array));
+
+		// reset pointer, start again on step one
+		XophpArray.reset(array);
+		Gftest.Eq__str("step one", (String)XophpArray.current(array));
+	}
 }
 class XophpArray__fxt {
 	public XophpArray Make() {return new XophpArray();}

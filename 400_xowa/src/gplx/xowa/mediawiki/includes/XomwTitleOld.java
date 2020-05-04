@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*;
 import gplx.xowa.mediawiki.*;
-import gplx.xowa.mediawiki.includes.linkers.XomwLinkTarget;
 import gplx.xowa.mediawiki.includes.title.*;
 /**
 * Represents a title within MediaWiki.
@@ -558,7 +557,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	* @return Title The new Object
 	*/
 	public static XomwTitleOld newMainPage(XomwEnv env) {
-		XomwTitleOld title = XomwTitleOld.newFromText(env, XomwGlobalFunctions.wfMessage(env, "mainpage").inContentLanguage().text());
+		XomwTitleOld title = XomwTitleOld.newFromText(env, XomwGlobalFunctions.wfMessageOld(env, "mainpage").inContentLanguage().text());
 		// Don't give fatal errors if the message is broken
 		if (title == null) {
 			title = XomwTitleOld.newFromText(env, Bry_.new_a7("Main Page"));

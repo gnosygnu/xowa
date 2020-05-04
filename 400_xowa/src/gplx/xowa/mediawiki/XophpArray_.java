@@ -129,6 +129,16 @@ public class XophpArray_ {
 		return rv;
 	}
 
+	public static XophpArray array_values(XophpArray array) {
+		XophpArray rv = XophpArray.New();
+		int len = array.count();
+		for (int i = 0; i < len; i++) {
+			XophpArrayItm itm = array.Get_at_itm(i);
+			rv.Add(itm.Val());
+		}
+		return rv;
+	}
+
 	// DEPRECATE:use XophpArray
 	public static boolean popBoolOrN(List_adp list)           {return Bool_.Cast(List_adp_.Pop_or(list, false));}
 	public static byte[] popBryOrNull(List_adp list)       {return (byte[])List_adp_.Pop_or(list, null);}
@@ -151,7 +161,10 @@ public class XophpArray_ {
 	public static boolean array_key_exists(int key, Ordered_hash array)    {return array.Has(key);}
 	public static boolean array_key_exists(String key, Ordered_hash array) {return array.Has(key);}
 	public static boolean array_key_exists(byte[] key, Ordered_hash array) {return array.Has(key);}
-	public static boolean array_is_empty(Ordered_hash array) {
+	public static boolean empty(Ordered_hash array) {
+		return array.Len() == 0;
+	}
+	public static boolean empty(XophpArray array) {
 		return array.Len() == 0;
 	}
 
