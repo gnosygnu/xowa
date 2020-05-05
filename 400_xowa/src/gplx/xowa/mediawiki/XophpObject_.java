@@ -89,4 +89,11 @@ public class XophpObject_ {
     public static boolean is_object(Object o) {
     	return o != null;
     }
+
+	// REF.PHP:https://www.php.net/manual/en/language.operators.comparison.php#language.operators.comparison.ternary
+	// equivalent to ?:
+    public static Object Elvis(Object o, Object or) {return is_true(o) ? o : or;}
+
+    // equivalent to ??
+	public static Object Coalesce(Object o, Object or) {return isset_obj(o) ? o : or;}
 }

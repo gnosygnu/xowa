@@ -283,7 +283,7 @@ class XomwMessage { // implements MessageSpecifier, Serializable
 		this.parameters = XophpArray_.array_values(params);
 		// User language is only resolved in getLanguage(). This helps preserve the
 		// semantic intent of "user language" across serialize() and unserialize().
-		this.language = XophpObject_.is_true(language) ? language : null;
+		this.language = (XomwLanguage)XophpObject_.Elvis(language, null);
 	}
 
 //	/**
@@ -391,18 +391,19 @@ class XomwMessage { // implements MessageSpecifier, Serializable
 //		wfDeprecated(__METHOD__, '1.29');
 //		return this.format;
 //	}
-//
-//	/**
-//	 * Returns the Language of the Message.
-//	 *
-//	 * @since 1.23
-//	 *
-//	 * @return Language
-//	 */
-//	public function getLanguage() {
-//		// Defaults to false which means current user language
-//		return this.language ?: RequestContext::getMain().getLanguage();
-//	}
+
+	/**
+	 * Returns the Language of the Message.
+	 *
+	 * @since 1.23
+	 *
+	 * @return Language
+	 */
+	public XomwLanguage getLanguage() {
+		// Defaults to false which means current user language
+//		return XophpObject_.Elvis(this.language, XomwRequestContext.getMain().getLanguage());
+		return null;
+	}
 //
 //	/**
 //	 * Factory function that is just wrapper for the real constructor. It is
@@ -852,19 +853,20 @@ class XomwMessage { // implements MessageSpecifier, Serializable
 //
 //		return this.content;
 //	}
-//
-//	/**
-//	 * Returns the message parsed from wikitext to HTML.
-//	 *
-//	 * @since 1.17
-//	 *
-//	 * @param string|null $format One of the FORMAT_* constants. Null means use whatever was used
-//	 *   the last time (this is for B/C and should be avoided).
-//	 *
-//	 * @return string HTML
-//	 * @suppress SecurityCheck-DoubleEscaped phan false positive
-//	 */
-//	public function toString($format = null) {
+
+	/**
+	 * Returns the message parsed from wikitext to HTML.
+	 *
+	 * @since 1.17
+	 *
+	 * @param string|null $format One of the FORMAT_* constants. Null means use whatever was used
+	 *   the last time (this is for B/C and should be avoided).
+	 *
+	 * @return string HTML
+	 * @suppress SecurityCheck-DoubleEscaped phan false positive
+	 */
+	public String toString() {return toString(null);}
+	public String toString(String format) {
 //		if ($format === null) {
 //			$ex = new LogicException(__METHOD__ . ' using implicit format: ' . this.format);
 //			\MediaWiki\Logger\LoggerFactory::getInstance('message-format').warning(
@@ -913,7 +915,8 @@ class XomwMessage { // implements MessageSpecifier, Serializable
 //			$string = this.replaceParameters($string, 'after', $format);
 //
 //		return $string;
-//	}
+		return null;
+	}
 //
 //	/**
 //	 * Magic method implementation of the above (for PHP >= 5.2.0), so we can do, eg:
@@ -1302,34 +1305,36 @@ class XomwMessage { // implements MessageSpecifier, Serializable
 //			this.title
 //		);
 //	}
-//
-//	/**
-//	 * Wrapper for what ever method we use to get message contents.
-//	 *
-//	 * @since 1.17
-//	 *
-//	 * @return string
-//	 * @throws MWException If message key array is empty.
-//	 */
-//	protected function fetchMessage() {
-//		if (this.message === null) {
-//			$cache = MessageCache::singleton();
-//
-//			foreach (this.keysToTry as $key) {
-//				$message = $cache.get($key, this.useDatabase, this.getLanguage());
-//				if ($message !== false && $message !== '') {
-//					break;
-//				}
-//			}
-//
-//			// NOTE: The constructor makes sure keysToTry isn't empty,
-//			//       so we know that $key and $message are initialized.
-//			this.key = $key;
-//			this.message = $message;
-//		}
-//		return this.message;
-//	}
-//
+
+	/**
+	 * Wrapper for what ever method we use to get message contents.
+	 *
+	 * @since 1.17
+	 *
+	 * @return string
+	 * @throws MWException If message key array is empty.
+	 */
+	protected String fetchMessage() {
+		if (XophpObject_.is_null(this.message)) {
+//			cache = MessageCache::singleton();
+
+			int len = keysToTry.Len();
+			for (int i = 0; i < len; i++) {
+				String key = keysToTry.Get_at_str(i);
+//				message = cache.get(key, this.useDatabase, this.getLanguage());
+				if (!XophpObject_.is_false(message) && XophpString_.eq_not(message, "")) {
+					break;
+				}
+			}
+
+			// NOTE: The constructor makes sure keysToTry isn't empty,
+			//       so we know that $key and $message are initialized.
+			this.key = key;
+			this.message = message;
+		}
+		return this.message;
+	}
+
 //	/**
 //	 * Formats a message parameter wrapped with 'plaintext'. Ensures that
 //	 * the entire string is displayed unchanged when displayed in the output

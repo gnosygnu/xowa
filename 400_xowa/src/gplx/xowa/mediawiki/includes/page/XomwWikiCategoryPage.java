@@ -18,7 +18,7 @@ package gplx.xowa.mediawiki.includes.page; import gplx.*; import gplx.xowa.*; im
 /**
 * Special handling for category pages
 */
-public class XomwWikiCategoryPage extends XomwWikiPage { 	public XomwWikiCategoryPage(XomwTitleOld title) {super(title);
+public class XomwWikiCategoryPage extends XomwWikiPage { 	public XomwWikiCategoryPage(XomwTitle title) {super(title);
 	}
 //
 //		/**

@@ -19,7 +19,6 @@ package gplx.xowa.mediawiki.includes;
 import gplx.xowa.mediawiki.XomwEnv;
 import gplx.xowa.mediawiki.includes.interwiki.XomwInterwikiLookup;
 import gplx.xowa.mediawiki.includes.title.XomwMediaWikiTitleCodec;
-import gplx.xowa.mediawiki.includes.title.XomwTitleFormatter;
 import gplx.xowa.mediawiki.languages.XomwLanguage;
 
 /**
