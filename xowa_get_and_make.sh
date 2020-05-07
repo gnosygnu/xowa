@@ -16,14 +16,14 @@
 # *** (Mac OS X) java -Xmx256m -d64 -XstartOnFirstThread -jar xowa_dev.jar
 
 # == ENVIRONMENT VARIABLES ==
-JAVA_JDK_VERSION=1.7
+JAVA_JDK_VERSION=1.8
 # PLAT_NAME must be one of the following: windows_64,linux_64,macosx_64
 PLAT_NAME=windows_64
 # ROOT_DIR should be created beforehand, and should be in "/" format
 ROOT_DIR=c:/xowa_dev
 # these directories MUST be changed to wherever they exist on your system
 ANT_BINARY=/cygdrive/c/dev/apache_ant/bin/ant
-export JAVA_HOME=/cygdrive/c/dev/java/jdk_1_7_x64
+export JAVA_HOME=/cygdrive/c/dev/java/jdk_1_8_x64
 
 # == REMOVE PREVIOUS ARTIFACTS ==
 rm -rf ./master
@@ -49,6 +49,7 @@ mv src/res/* .
 chmod -R 755 ./bin/$PLAT_NAME/xulrunner
 
 # remove test files
+find ./src -type f -name '*Test.java' -delete
 find ./src -type f -name '*_tst.java' -delete
 find ./src -type f -name '*_fxt.java' -delete
 find ./src -type f -name '*_mok.java' -delete
