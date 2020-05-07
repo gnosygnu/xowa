@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,22 +13,39 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+
+import gplx.Bool_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Char_;
+import gplx.Int_;
+import gplx.Object_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.Type_;
 import gplx.core.brys.*;
-// NOTE: Object-representation of PHP Array; REF.PHP: https://www.php.net/manual/en/language.types.array.php
+
+import java.util.Iterator;
+import java.util.function.Consumer;
+
+// REF.PHP: https://www.php.net/manual/en/language.types.array.php
 // Will also will have static functions but "array_" will be stripped; REF.PHP: https://www.php.net/manual/en/ref.array.php
-public class XophpArray implements Bry_bfr_able {
-	private final    Ordered_hash hash = Ordered_hash_.New();
-	private int nxt_idx;
+public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
+	private final Ordered_hash hash = Ordered_hash_.New();
+	private int newMemberIdx;
+
+	public void Clear() {
+		hash.Clear();
+		newMemberIdx = 0;
+		internalPointerIndex = 0;
+	}
 	public int Len() {return hash.Len();}
 	public int count() {return hash.Len();}
 	public boolean count_bool() {return hash.Len() > 0;}
 	public boolean isset(String key) {return hash.Has(key);}
 	public boolean isset(int idx)    {return idx >= 0 && idx < hash.Count();}
 	public boolean in_array(String v) {return Has(v);}
-	public static boolean is_array(Object val) {
-		return Type_.Eq_by_obj(val, XophpArray.class);
-	}
 	public Object end() {
 		int len = hash.Len();
 		return len == 0 ? null : ((XophpArrayItm)hash.Get_at(len - 1)).Val();
@@ -54,30 +71,25 @@ public class XophpArray implements Bry_bfr_able {
 		}
 		return rv;
 	}
-
-	public void Clear() {
-		hash.Clear();
-		nxt_idx = 0;
-	}
 	public XophpArray Add(Object val) {
-		int key = nxt_idx++;
+		int key = newMemberIdx++;
 		Set(XophpArrayItm.New_int(key, val));
 		return this;
 	}
 	public XophpArray Add(int key, Object val) {
-		nxt_idx = key + 1;
+		newMemberIdx = key + 1;
 		Set(XophpArrayItm.New_int(key, val));
 		return this;
 	}
 	public XophpArray Add(double key, Object val) {
 		int key_as_int = (int)key;
-		nxt_idx = key_as_int + 1;
+		newMemberIdx = key_as_int + 1;
 		Set(XophpArrayItm.New_int(key_as_int, val));
 		return this;
 	}
 	public XophpArray Add(boolean key, Object val) {
 		int key_as_int = key ? 1 : 0;
-		nxt_idx = key_as_int + 1;
+		newMemberIdx = key_as_int + 1;
 		Set(XophpArrayItm.New_int(key_as_int, val));
 		return this;
 	}
@@ -88,7 +100,7 @@ public class XophpArray implements Bry_bfr_able {
 		}
 		else {
 			Set(XophpArrayItm.New_int(key_as_int, val));
-			nxt_idx = key_as_int + 1;
+			newMemberIdx = key_as_int + 1;
 		}
 		return this;
 	}
@@ -235,11 +247,32 @@ public class XophpArray implements Bry_bfr_able {
 		return rv;
 	}
 
-	public static XophpArray New(Object... vals) {
-		XophpArray rv = new XophpArray();
-		for (Object val : vals)
-			rv.Add(val);
-		return rv;
+	@Override
+	public Iterator iterator() {
+		return new XophpArrayIterator(hash);
+	}
+	class XophpArrayIterator implements Iterator<T> {
+		private final Ordered_hash hash;
+		private int curIdx;
+		private int len;
+		public XophpArrayIterator(Ordered_hash hash) {
+			this.hash = hash;
+			this.len = hash.Len();
+		}
+		@Override
+		public boolean hasNext() {
+			return curIdx < len;
+		}
+
+		@Override
+		public T next() {
+			return (T) hash.Get_at(curIdx++);
+		}
+
+		@Override
+		public void remove() {
+			throw new XophpRuntimeException("remove not supported");
+		}
 	}
 
 	// REF.PHP:https://www.php.net/manual/en/function.reset.php
@@ -259,5 +292,14 @@ public class XophpArray implements Bry_bfr_able {
 		return array.internalPointerAdd(1);
 	}
 
-	public static final    XophpArray False = null; // handles code like "if ($var === false)" where var is an Object;
+	public static boolean is_array(Object val) {
+		return Type_.Eq_by_obj(val, XophpArray.class);
+	}
+	public static final XophpArray False = null; // handles code like "if ($var === false)" where var is an Object;
+	public static XophpArray New(Object... vals) {
+		XophpArray rv = new XophpArray();
+		for (Object val : vals)
+			rv.Add(val);
+		return rv;
+	}
 }

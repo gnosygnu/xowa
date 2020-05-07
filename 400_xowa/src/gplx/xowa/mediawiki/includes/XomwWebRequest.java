@@ -16,6 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes;
 
 // MW.SRC:1.33.1
+
+import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.XophpArray_;
+import gplx.xowa.mediawiki.XophpObject_;
+import gplx.xowa.mediawiki.XophpString_;
+
 /**
  * The WebRequest class encapsulates getting at data passed in the
  * URL or via a POSTed form stripping illegal input characters and
@@ -24,65 +30,67 @@ package gplx.xowa.mediawiki.includes;
  * @ingroup HTTP
  */
 public class XomwWebRequest {
-//    protected $data, $headers = [];
-//
-//    /**
-//     * Flag to make WebRequest::getHeader return an array of values.
-//     * @since 1.26
-//     */
-//	const GETHEADER_LIST = 1;
-//
-//    /**
-//     * The unique request ID.
-//     * @var string
-//     */
-//    private static $reqId;
-//
-//    /**
-//     * Lazy-init response object
-//     * @var WebResponse
-//     */
-//    private $response;
-//
-//    /**
-//     * Cached client IP address
-//     * @var string
-//     */
-//    private $ip;
-//
-//    /**
-//     * The timestamp of the start of the request, with microsecond precision.
-//     * @var float
-//     */
-//    protected $requestTime;
-//
-//    /**
-//     * Cached URL protocol
-//     * @var string
-//     */
-//    protected $protocol;
-//
+    protected XophpArray data, headers = XophpArray.New();
+
+    /**
+     * Flag to make WebRequest::getHeader return an array of values.
+     * @since 1.26
+     */
+	public static final int GETHEADER_LIST = 1;
+
+    /**
+     * The unique request ID.
+     * @var string
+     */
+    private static String reqId;
+
+    /**
+     * Lazy-init response object
+     * @var WebResponse
+     */
+//    private XomwWebResponse response;
+
+    /**
+     * Cached client IP address
+     * @var string
+     */
+    private String ip;
+
+    /**
+     * The timestamp of the start of the request, with microsecond precision.
+     * @var float
+     */
+    protected float requestTime;
+
+    /**
+     * Cached URL protocol
+     * @var string
+     */
+    protected String protocol;
+
 //    /**
 //     * @var SessionId|null Session ID to use for this
 //     *  request. We can't save the session directly due to reference cycles not
 //     *  working too well (slow GC in Zend and never collected in HHVM).
 //     */
 //    protected $sessionId = null;
-//
-//    /** @var bool Whether this HTTP request is "safe" (even if it is an HTTP post) */
-//    protected $markedAsSafe = false;
-//
-//    /**
-//     * @codeCoverageIgnore
-//     */
-//    public function __construct() {
-//        $this->requestTime = $_SERVER['REQUEST_TIME_FLOAT'];
-//
-//        // POST overrides GET data
-//        // We don't use $_REQUEST here to avoid interference from cookies...
-//        $this->data = $_POST + $_GET;
-//    }
-//
+
+    /** @var bool Whether this HTTP request is "safe" (even if it is an HTTP post) */
+    protected boolean markedAsSafe = false;
+
+    private XophpArray _POST = XophpArray.New(); // XOMW:PHP_GLOBAL
+    private XophpArray _GET = XophpArray.New(); // XOMW:PHP_GLOBAL
+    /**
+     * @codeCoverageIgnore
+     */
+    public XomwWebRequest() {
+//        this.requestTime = $_SERVER['REQUEST_TIME_FLOAT'];
+
+        // POST overrides GET data
+        // We don't use $_REQUEST here to avoid interference from cookies...
+        this.data = XophpArray_.array_merge(_POST, _GET);
+    }
+
 //    /**
 //     * Extract relevant query arguments from the http request uri's path
 //     * to be merged with the normal php provided query arguments.
@@ -98,26 +106,26 @@ public class XomwWebRequest {
 //     *
 //     * @return array Any query arguments found in path matches.
 //     */
-//    public static function getPathInfo( $want = 'all' ) {
+//    public static function getPathInfo($want = 'all') {
 //        global $wgUsePathInfo;
 //        // PATH_INFO is mangled due to https://bugs.php.net/bug.php?id=31892
 //        // And also by Apache 2.x, double slashes are converted to single slashes.
 //        // So we will use REQUEST_URI if possible.
 //        $matches = [];
-//        if ( !empty( $_SERVER['REQUEST_URI'] ) ) {
+//        if (!empty($_SERVER['REQUEST_URI'])) {
 //            // Slurp out the path portion to examine...
 //            $url = $_SERVER['REQUEST_URI'];
-//            if ( !preg_match( '!^https?://!', $url ) ) {
+//            if (!preg_match('!^https?://!', $url)) {
 //                $url = 'http://unused' . $url;
 //            }
 //            Wikimedia\suppressWarnings();
-//            $a = parse_url( $url );
+//            $a = parse_url($url);
 //            Wikimedia\restoreWarnings();
-//            if ( $a ) {
+//            if ($a) {
 //                $path = $a['path'] ?? '';
 //
 //                global $wgScript;
-//                if ( $path == $wgScript && $want !== 'all' ) {
+//                if ($path == $wgScript && $want !== 'all') {
 //                    // Script inside a rewrite path?
 //                    // Abort to keep from breaking...
 //                    return $matches;
@@ -126,50 +134,50 @@ public class XomwWebRequest {
 //                $router = new PathRouter;
 //
 //                // Raw PATH_INFO style
-//                $router->add( "$wgScript/$1" );
+//                $router.add("$wgScript/$1");
 //
-//                if ( isset( $_SERVER['SCRIPT_NAME'] )
-//                    && preg_match( '/\.php/', $_SERVER['SCRIPT_NAME'] )
-//                ) {
+//                if (isset($_SERVER['SCRIPT_NAME'])
+//                    && preg_match('/\.php/', $_SERVER['SCRIPT_NAME'])
+//               ) {
 //					# Check for SCRIPT_NAME, we handle index.php explicitly
 //					# But we do have some other .php files such as img_auth.php
 //					# Don't let root article paths clober the parsing for them
-//                    $router->add( $_SERVER['SCRIPT_NAME'] . "/$1" );
+//                    $router.add($_SERVER['SCRIPT_NAME'] . "/$1");
 //                }
 //
 //                global $wgArticlePath;
-//                if ( $wgArticlePath ) {
-//                    $router->add( $wgArticlePath );
+//                if ($wgArticlePath) {
+//                    $router.add($wgArticlePath);
 //                }
 //
 //                global $wgActionPaths;
-//                if ( $wgActionPaths ) {
-//                    $router->add( $wgActionPaths, [ 'action' => '$key' ] );
+//                if ($wgActionPaths) {
+//                    $router.add($wgActionPaths, [ 'action' => '$key' ]);
 //                }
 //
 //                global $wgVariantArticlePath;
-//                if ( $wgVariantArticlePath ) {
-//                    $router->add( $wgVariantArticlePath,
+//                if ($wgVariantArticlePath) {
+//                    $router.add($wgVariantArticlePath,
 //                        [ 'variant' => '$2' ],
-//						[ '$2' => MediaWikiServices::getInstance()->getContentLanguage()->
+//						[ '$2' => MediaWikiServices::getInstance().getContentLanguage().
 //                    getVariants() ]
 //					);
 //                }
 //
-//                Hooks::run( 'WebRequestPathInfoRouter', [ $router ] );
+//                Hooks::run('WebRequestPathInfoRouter', [ $router ]);
 //
-//                $matches = $router->parse( $path );
+//                $matches = $router.parse($path);
 //            }
-//        } elseif ( $wgUsePathInfo ) {
-//            if ( isset( $_SERVER['ORIG_PATH_INFO'] ) && $_SERVER['ORIG_PATH_INFO'] != '' ) {
+//        } elseif ($wgUsePathInfo) {
+//            if (isset($_SERVER['ORIG_PATH_INFO']) && $_SERVER['ORIG_PATH_INFO'] != '') {
 //                // Mangled PATH_INFO
 //                // https://bugs.php.net/bug.php?id=31892
 //                // Also reported when ini_get('cgi.fix_pathinfo')==false
-//                $matches['title'] = substr( $_SERVER['ORIG_PATH_INFO'], 1 );
+//                $matches['title'] = substr($_SERVER['ORIG_PATH_INFO'], 1);
 //
-//            } elseif ( isset( $_SERVER['PATH_INFO'] ) && $_SERVER['PATH_INFO'] != '' ) {
+//            } elseif (isset($_SERVER['PATH_INFO']) && $_SERVER['PATH_INFO'] != '') {
 //                // Regular old PATH_INFO yay
-//                $matches['title'] = substr( $_SERVER['PATH_INFO'], 1 );
+//                $matches['title'] = substr($_SERVER['PATH_INFO'], 1);
 //            }
 //        }
 //
@@ -191,25 +199,25 @@ public class XomwWebRequest {
 //        $varNames = [ 'HTTP_HOST', 'SERVER_NAME', 'HOSTNAME', 'SERVER_ADDR' ];
 //        $host = 'localhost';
 //        $port = $stdPort;
-//        foreach ( $varNames as $varName ) {
-//            if ( !isset( $_SERVER[$varName] ) ) {
+//        foreach ($varNames as $varName) {
+//            if (!isset($_SERVER[$varName])) {
 //                continue;
 //            }
 //
-//            $parts = IP::splitHostAndPort( $_SERVER[$varName] );
-//            if ( !$parts ) {
+//            $parts = IP::splitHostAndPort($_SERVER[$varName]);
+//            if (!$parts) {
 //                // Invalid, do not use
 //                continue;
 //            }
 //
 //            $host = $parts[0];
-//            if ( $wgAssumeProxiesUseDefaultProtocolPorts && isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) ) {
+//            if ($wgAssumeProxiesUseDefaultProtocolPorts && isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
 //                // T72021: Assume that upstream proxy is running on the default
 //                // port based on the protocol. We have no reliable way to determine
 //                // the actual port in use upstream.
 //                $port = $stdPort;
-//            } elseif ( $parts[1] === false ) {
-//                if ( isset( $_SERVER['SERVER_PORT'] ) ) {
+//            } elseif ($parts[1] === false) {
+//                if (isset($_SERVER['SERVER_PORT'])) {
 //                    $port = $_SERVER['SERVER_PORT'];
 //                } // else leave it as $stdPort
 //            } else {
@@ -218,7 +226,7 @@ public class XomwWebRequest {
 //            break;
 //        }
 //
-//        return $proto . '://' . IP::combineHostAndPort( $host, $port, $stdPort );
+//        return $proto . '://' . IP::combineHostAndPort($host, $port, $stdPort);
 //    }
 //
 //    /**
@@ -229,9 +237,9 @@ public class XomwWebRequest {
 //     * @return string
 //     */
 //    public static function detectProtocol() {
-//        if ( ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' ) ||
-//            ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) &&
-//                $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https' ) ) {
+//        if ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ||
+//            (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+//                $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')) {
 //            return 'https';
 //        } else {
 //            return 'http';
@@ -246,7 +254,7 @@ public class XomwWebRequest {
 //     * @since 1.25
 //     */
 //    public function getElapsedTime() {
-//        return microtime( true ) - $this->requestTime;
+//        return microtime(true) - this.requestTime;
 //    }
 //
 //    /**
@@ -260,8 +268,8 @@ public class XomwWebRequest {
 //    public static function getRequestId() {
 //        // This method is called from various error handlers and should be kept simple.
 //
-//        if ( !self::$reqId ) {
-//            self::$reqId = $_SERVER['UNIQUE_ID'] ?? wfRandomString( 24 );
+//        if (!self::$reqId) {
+//            self::$reqId = $_SERVER['UNIQUE_ID'] ?? wfRandomString(24);
 //        }
 //
 //        return self::$reqId;
@@ -274,7 +282,7 @@ public class XomwWebRequest {
 //     * @param string $id
 //     * @since 1.27
 //     */
-//    public static function overrideRequestId( $id ) {
+//    public static function overrideRequestId($id) {
 //        self::$reqId = $id;
 //    }
 //
@@ -283,10 +291,10 @@ public class XomwWebRequest {
 //     * @return string
 //     */
 //    public function getProtocol() {
-//        if ( $this->protocol === null ) {
-//            $this->protocol = self::detectProtocol();
+//        if (this.protocol === null) {
+//            this.protocol = self::detectProtocol();
 //        }
-//        return $this->protocol;
+//        return this.protocol;
 //    }
 //
 //    /**
@@ -298,13 +306,13 @@ public class XomwWebRequest {
 //     */
 //    public function interpolateTitle() {
 //        // T18019: title interpolation on API queries is useless and sometimes harmful
-//        if ( defined( 'MW_API' ) ) {
+//        if (defined('MW_API')) {
 //            return;
 //        }
 //
-//        $matches = self::getPathInfo( 'title' );
-//        foreach ( $matches as $key => $val ) {
-//            $this->data[$key] = $_GET[$key] = $_REQUEST[$key] = $val;
+//        $matches = self::getPathInfo('title');
+//        foreach ($matches as $key => $val) {
+//            this.data[$key] = $_GET[$key] = $_REQUEST[$key] = $val;
 //        }
 //    }
 //
@@ -318,16 +326,16 @@ public class XomwWebRequest {
 //     *    passed on as the value of this URL parameter
 //     * @return array Array of URL variables to interpolate; empty if no match
 //     */
-//    static function extractTitle( $path, $bases, $key = false ) {
-//        foreach ( (array)$bases as $keyValue => $base ) {
+//    static function extractTitle($path, $bases, $key = false) {
+//        foreach ((array)$bases as $keyValue => $base) {
 //            // Find the part after $wgArticlePath
-//            $base = str_replace( '$1', '', $base );
-//            $baseLen = strlen( $base );
-//            if ( substr( $path, 0, $baseLen ) == $base ) {
-//                $raw = substr( $path, $baseLen );
-//                if ( $raw !== '' ) {
-//                    $matches = [ 'title' => rawurldecode( $raw ) ];
-//                    if ( $key ) {
+//            $base = str_replace('$1', '', $base);
+//            $baseLen = strlen($base);
+//            if (substr($path, 0, $baseLen) == $base) {
+//                $raw = substr($path, $baseLen);
+//                if ($raw !== '') {
+//                    $matches = [ 'title' => rawurldecode($raw) ];
+//                    if ($key) {
 //                        $matches[$key] = $keyValue;
 //                    }
 //                    return $matches;
@@ -344,45 +352,45 @@ public class XomwWebRequest {
 //     * @return array|string Cleaned-up version of the given
 //     * @private
 //     */
-//    public function normalizeUnicode( $data ) {
-//        if ( is_array( $data ) ) {
-//            foreach ( $data as $key => $val ) {
-//                $data[$key] = $this->normalizeUnicode( $val );
+//    public function normalizeUnicode($data) {
+//        if (is_array($data)) {
+//            foreach ($data as $key => $val) {
+//                $data[$key] = this.normalizeUnicode($val);
 //            }
 //        } else {
-//            $contLang = MediaWikiServices::getInstance()->getContentLanguage();
-//            $data = $contLang ? $contLang->normalize( $data ) :
-//                UtfNormal\Validator::cleanUp( $data );
+//            $contLang = MediaWikiServices::getInstance().getContentLanguage();
+//            $data = $contLang ? $contLang.normalize($data) :
+//                UtfNormal\Validator::cleanUp($data);
 //        }
 //        return $data;
 //    }
-//
-//    /**
-//     * Fetch a value from the given array or return $default if it's not set.
-//     *
-//     * @param array $arr
-//     * @param string $name
-//     * @param mixed $default
-//     * @return mixed
-//     */
-//    private function getGPCVal( $arr, $name, $default ) {
-//		# PHP is so nice to not touch input data, except sometimes:
-//		# https://secure.php.net/variables.external#language.variables.external.dot-in-names
-//		# Work around PHP *feature* to avoid *bugs* elsewhere.
-//            $name = strtr( $name, '.', '_' );
-//        if ( isset( $arr[$name] ) ) {
-//            $data = $arr[$name];
-//            if ( isset( $_GET[$name] ) && is_string( $data ) ) {
-//				# Check for alternate/legacy character encoding.
-//                $contLang = MediaWikiServices::getInstance()->getContentLanguage();
-//                $data = $contLang->checkTitleEncoding( $data );
-//            }
-//            $data = $this->normalizeUnicode( $data );
-//            return $data;
-//        } else {
-//            return $default;
-//        }
-//    }
+
+    /**
+     * Fetch a value from the given array or return $default if it's not set.
+     *
+     * @param array $arr
+     * @param string $name
+     * @param mixed $default
+     * @return mixed
+     */
+    private Object getGPCVal(XophpArray arr, String name, Object defaultVal) {
+		// PHP is so nice to not touch input data, except sometimes:
+		// https://secure.php.net/variables.external#language.variables.external.dot-in-names
+		// Work around PHP *feature* to avoid *bugs* elsewhere.
+        name = XophpString_.strtr(name, ".", "_");
+        if (XophpArray_.isset(arr, name)) {
+            Object data = arr.Get_by(name);
+            if (XophpArray_.isset(_GET, name) && XophpString_.is_string(data)) {
+				// Check for alternate/legacy character encoding.
+//                $contLang = MediaWikiServices::getInstance().getContentLanguage();
+//                $data = $contLang.checkTitleEncoding($data);
+            }
+//            $data = this.normalizeUnicode($data);
+            return data;
+        } else {
+            return defaultVal;
+        }
+    }
 //
 //    /**
 //     * Fetch a scalar from the input without normalization, or return $default
@@ -396,42 +404,43 @@ public class XomwWebRequest {
 //     * @param string|null $default
 //     * @return string|null
 //     */
-//    public function getRawVal( $name, $default = null ) {
-//        $name = strtr( $name, '.', '_' ); // See comment in self::getGPCVal()
-//        if ( isset( $this->data[$name] ) && !is_array( $this->data[$name] ) ) {
-//            $val = $this->data[$name];
+//    public function getRawVal($name, $default = null) {
+//        $name = strtr($name, '.', '_'); // See comment in self::getGPCVal()
+//        if (isset(this.data[$name]) && !is_array(this.data[$name])) {
+//            $val = this.data[$name];
 //        } else {
 //            $val = $default;
 //        }
-//        if ( is_null( $val ) ) {
+//        if (is_null($val)) {
 //            return $val;
 //        } else {
 //            return (string)$val;
 //        }
 //    }
-//
-//    /**
-//     * Fetch a scalar from the input or return $default if it's not set.
-//     * Returns a string. Arrays are discarded. Useful for
-//     * non-freeform text inputs (e.g. predefined internal text keys
-//     * selected by a drop-down menu). For freeform input, see getText().
-//     *
-//     * @param string $name
-//     * @param string|null $default Optional default (or null)
-//     * @return string|null
-//     */
-//    public function getVal( $name, $default = null ) {
-//        $val = $this->getGPCVal( $this->data, $name, $default );
-//        if ( is_array( $val ) ) {
-//            $val = $default;
-//        }
-//        if ( is_null( $val ) ) {
-//            return $val;
-//        } else {
-//            return (string)$val;
-//        }
-//    }
-//
+
+    /**
+     * Fetch a scalar from the input or return $default if it's not set.
+     * Returns a string. Arrays are discarded. Useful for
+     * non-freeform text inputs (e.g. predefined internal text keys
+     * selected by a drop-down menu). For freeform input, see getText().
+     *
+     * @param string $name
+     * @param string|null $default Optional default (or null)
+     * @return string|null
+     */
+    public String getVal(String name) {return getVal(name, null);}
+    public String getVal(String name, String defaultVal) {
+        Object val = this.getGPCVal(this.data, name, defaultVal);
+        if (XophpArray.is_array(val)) {
+            val = defaultVal;
+        }
+        if (XophpObject_.is_null(val)) {
+            return null;
+        } else {
+            return (String)val;
+        }
+    }
+
 //    /**
 //     * Set an arbitrary value into our get/post data.
 //     *
@@ -439,9 +448,9 @@ public class XomwWebRequest {
 //     * @param mixed $value Value to set
 //     * @return mixed Old value if one was present, null otherwise
 //     */
-//    public function setVal( $key, $value ) {
-//        $ret = $this->data[$key] ?? null;
-//        $this->data[$key] = $value;
+//    public function setVal($key, $value) {
+//        $ret = this.data[$key] ?? null;
+//        this.data[$key] = $value;
 //        return $ret;
 //    }
 //
@@ -451,12 +460,12 @@ public class XomwWebRequest {
 //     * @param string $key Key name to use
 //     * @return mixed Old value if one was present, null otherwise
 //     */
-//    public function unsetVal( $key ) {
-//        if ( !isset( $this->data[$key] ) ) {
+//    public function unsetVal($key) {
+//        if (!isset(this.data[$key])) {
 //            $ret = null;
 //        } else {
-//            $ret = $this->data[$key];
-//            unset( $this->data[$key] );
+//            $ret = this.data[$key];
+//            unset(this.data[$key]);
 //        }
 //        return $ret;
 //    }
@@ -470,9 +479,9 @@ public class XomwWebRequest {
 //     * @param array|null $default Optional default (or null)
 //     * @return array|null
 //     */
-//    public function getArray( $name, $default = null ) {
-//        $val = $this->getGPCVal( $this->data, $name, $default );
-//        if ( is_null( $val ) ) {
+//    public function getArray($name, $default = null) {
+//        $val = this.getGPCVal(this.data, $name, $default);
+//        if (is_null($val)) {
 //            return null;
 //        } else {
 //            return (array)$val;
@@ -489,10 +498,10 @@ public class XomwWebRequest {
 //     * @param array|null $default Option default (or null)
 //     * @return array Array of ints
 //     */
-//    public function getIntArray( $name, $default = null ) {
-//        $val = $this->getArray( $name, $default );
-//        if ( is_array( $val ) ) {
-//            $val = array_map( 'intval', $val );
+//    public function getIntArray($name, $default = null) {
+//        $val = this.getArray($name, $default);
+//        if (is_array($val)) {
+//            $val = array_map('intval', $val);
 //        }
 //        return $val;
 //    }
@@ -506,8 +515,8 @@ public class XomwWebRequest {
 //     * @param int $default
 //     * @return int
 //     */
-//    public function getInt( $name, $default = 0 ) {
-//        return intval( $this->getRawVal( $name, $default ) );
+//    public function getInt($name, $default = 0) {
+//        return intval(this.getRawVal($name, $default));
 //    }
 //
 //    /**
@@ -518,10 +527,10 @@ public class XomwWebRequest {
 //     * @param string $name
 //     * @return int|null
 //     */
-//    public function getIntOrNull( $name ) {
-//        $val = $this->getRawVal( $name );
-//        return is_numeric( $val )
-//            ? intval( $val )
+//    public function getIntOrNull($name) {
+//        $val = this.getRawVal($name);
+//        return is_numeric($val)
+//            ? intval($val)
 //            : null;
 //    }
 //
@@ -535,8 +544,8 @@ public class XomwWebRequest {
 //     * @param float $default
 //     * @return float
 //     */
-//    public function getFloat( $name, $default = 0.0 ) {
-//        return floatval( $this->getRawVal( $name, $default ) );
+//    public function getFloat($name, $default = 0.0) {
+//        return floatval(this.getRawVal($name, $default));
 //    }
 //
 //    /**
@@ -548,8 +557,8 @@ public class XomwWebRequest {
 //     * @param bool $default
 //     * @return bool
 //     */
-//    public function getBool( $name, $default = false ) {
-//        return (bool)$this->getRawVal( $name, $default );
+//    public function getBool($name, $default = false) {
+//        return (bool)this.getRawVal($name, $default);
 //    }
 //
 //    /**
@@ -561,9 +570,9 @@ public class XomwWebRequest {
 //     * @param bool $default
 //     * @return bool
 //     */
-//    public function getFuzzyBool( $name, $default = false ) {
-//        return $this->getBool( $name, $default )
-//            && strcasecmp( $this->getRawVal( $name ), 'false' ) !== 0;
+//    public function getFuzzyBool($name, $default = false) {
+//        return this.getBool($name, $default)
+//            && strcasecmp(this.getRawVal($name), 'false') !== 0;
 //    }
 //
 //    /**
@@ -574,10 +583,10 @@ public class XomwWebRequest {
 //     * @param string $name
 //     * @return bool
 //     */
-//    public function getCheck( $name ) {
+//    public function getCheck($name) {
 //		# Checkboxes and buttons are only present when clicked
 //		# Presence connotes truth, absence false
-//        return $this->getRawVal( $name, null ) !== null;
+//        return this.getRawVal($name, null) !== null;
 //    }
 //
 //    /**
@@ -590,9 +599,9 @@ public class XomwWebRequest {
 //     * @param string $default Optional
 //     * @return string
 //     */
-//    public function getText( $name, $default = '' ) {
-//        $val = $this->getVal( $name, $default );
-//        return str_replace( "\r\n", "\n", $val );
+//    public function getText($name, $default = '') {
+//        $val = this.getVal($name, $default);
+//        return str_replace("\r\n", "\n", $val);
 //    }
 //
 //    /**
@@ -604,14 +613,14 @@ public class XomwWebRequest {
 //     */
 //    public function getValues() {
 //        $names = func_get_args();
-//        if ( count( $names ) == 0 ) {
-//            $names = array_keys( $this->data );
+//        if (count($names) == 0) {
+//            $names = array_keys(this.data);
 //        }
 //
 //        $retVal = [];
-//        foreach ( $names as $name ) {
-//            $value = $this->getGPCVal( $this->data, $name, null );
-//            if ( !is_null( $value ) ) {
+//        foreach ($names as $name) {
+//            $value = this.getGPCVal(this.data, $name, null);
+//            if (!is_null($value)) {
 //                $retVal[$name] = $value;
 //            }
 //        }
@@ -624,8 +633,8 @@ public class XomwWebRequest {
 //     * @param array $exclude
 //     * @return array
 //     */
-//    public function getValueNames( $exclude = [] ) {
-//        return array_diff( array_keys( $this->getValues() ), $exclude );
+//    public function getValueNames($exclude = []) {
+//        return array_diff(array_keys(this.getValues()), $exclude);
 //    }
 //
 //    /**
@@ -669,10 +678,10 @@ public class XomwWebRequest {
 //     * @return string
 //     */
 //    public function getRawPostString() {
-//        if ( !$this->wasPosted() ) {
+//        if (!this.wasPosted()) {
 //            return '';
 //        }
-//        return $this->getRawInput();
+//        return this.getRawInput();
 //    }
 //
 //    /**
@@ -684,8 +693,8 @@ public class XomwWebRequest {
 //     */
 //    public function getRawInput() {
 //        static $input = null;
-//        if ( $input === null ) {
-//            $input = file_get_contents( 'php://input' );
+//        if ($input === null) {
+//            $input = file_get_contents('php://input');
 //        }
 //        return $input;
 //    }
@@ -709,7 +718,7 @@ public class XomwWebRequest {
 //     * @return bool
 //     */
 //    public function wasPosted() {
-//        return $this->getMethod() == 'POST';
+//        return this.getMethod() == 'POST';
 //    }
 //
 //    /**
@@ -723,15 +732,15 @@ public class XomwWebRequest {
 //     * @return Session
 //     */
 //    public function getSession() {
-//        if ( $this->sessionId !== null ) {
-//            $session = SessionManager::singleton()->getSessionById( (string)$this->sessionId, true, $this );
-//            if ( $session ) {
+//        if (this.sessionId !== null) {
+//            $session = SessionManager::singleton().getSessionById((string)this.sessionId, true, this);
+//            if ($session) {
 //                return $session;
 //            }
 //        }
 //
-//        $session = SessionManager::singleton()->getSessionForRequest( $this );
-//        $this->sessionId = $session->getSessionId();
+//        $session = SessionManager::singleton().getSessionForRequest(this);
+//        this.sessionId = $session.getSessionId();
 //        return $session;
 //    }
 //
@@ -741,8 +750,8 @@ public class XomwWebRequest {
 //     * @private For use by MediaWiki\Session classes only
 //     * @param SessionId $sessionId
 //     */
-//    public function setSessionId( SessionId $sessionId ) {
-//        $this->sessionId = $sessionId;
+//    public function setSessionId(SessionId $sessionId) {
+//        this.sessionId = $sessionId;
 //    }
 //
 //    /**
@@ -752,7 +761,7 @@ public class XomwWebRequest {
 //     * @return SessionId|null
 //     */
 //    public function getSessionId() {
-//        return $this->sessionId;
+//        return this.sessionId;
 //    }
 //
 //    /**
@@ -763,12 +772,12 @@ public class XomwWebRequest {
 //     * @param mixed|null $default What to return if the value isn't found
 //     * @return mixed Cookie value or $default if the cookie not set
 //     */
-//    public function getCookie( $key, $prefix = null, $default = null ) {
-//        if ( $prefix === null ) {
+//    public function getCookie($key, $prefix = null, $default = null) {
+//        if ($prefix === null) {
 //            global $wgCookiePrefix;
 //            $prefix = $wgCookiePrefix;
 //        }
-//        return $this->getGPCVal( $_COOKIE, $prefix . $key, $default );
+//        return this.getGPCVal($_COOKIE, $prefix . $key, $default);
 //    }
 //
 //    /**
@@ -781,39 +790,39 @@ public class XomwWebRequest {
 //    public static function getGlobalRequestURL() {
 //        // This method is called on fatal errors; it should not depend on anything complex.
 //
-//        if ( isset( $_SERVER['REQUEST_URI'] ) && strlen( $_SERVER['REQUEST_URI'] ) ) {
+//        if (isset($_SERVER['REQUEST_URI']) && strlen($_SERVER['REQUEST_URI'])) {
 //            $base = $_SERVER['REQUEST_URI'];
-//        } elseif ( isset( $_SERVER['HTTP_X_ORIGINAL_URL'] )
-//            && strlen( $_SERVER['HTTP_X_ORIGINAL_URL'] )
-//        ) {
+//        } elseif (isset($_SERVER['HTTP_X_ORIGINAL_URL'])
+//            && strlen($_SERVER['HTTP_X_ORIGINAL_URL'])
+//       ) {
 //            // Probably IIS; doesn't set REQUEST_URI
 //            $base = $_SERVER['HTTP_X_ORIGINAL_URL'];
-//        } elseif ( isset( $_SERVER['SCRIPT_NAME'] ) ) {
+//        } elseif (isset($_SERVER['SCRIPT_NAME'])) {
 //            $base = $_SERVER['SCRIPT_NAME'];
-//            if ( isset( $_SERVER['QUERY_STRING'] ) && $_SERVER['QUERY_STRING'] != '' ) {
+//            if (isset($_SERVER['QUERY_STRING']) && $_SERVER['QUERY_STRING'] != '') {
 //                $base .= '?' . $_SERVER['QUERY_STRING'];
 //            }
 //        } else {
 //            // This shouldn't happen!
-//            throw new MWException( "Web server doesn't provide either " .
+//            throw new MWException("Web server doesn't provide either " .
 //                "REQUEST_URI, HTTP_X_ORIGINAL_URL or SCRIPT_NAME. Report details " .
-//                "of your web server configuration to https://phabricator.wikimedia.org/" );
+//                "of your web server configuration to https://phabricator.wikimedia.org/");
 //        }
 //        // User-agents should not send a fragment with the URI, but
 //        // if they do, and the web server passes it on to us, we
 //        // need to strip it or we get false-positive redirect loops
 //        // or weird output URLs
-//        $hash = strpos( $base, '#' );
-//        if ( $hash !== false ) {
-//            $base = substr( $base, 0, $hash );
+//        $hash = strpos($base, '#');
+//        if ($hash !== false) {
+//            $base = substr($base, 0, $hash);
 //        }
 //
-//        if ( $base[0] == '/' ) {
+//        if ($base[0] == '/') {
 //            // More than one slash will look like it is protocol relative
-//            return preg_replace( '!^/+!', '/', $base );
+//            return preg_replace('!^/+!', '/', $base);
 //        } else {
 //            // We may get paths with a host prepended; strip it.
-//            return preg_replace( '!^[^:]+://[^/]+/+!', '/', $base );
+//            return preg_replace('!^[^:]+://[^/]+/+!', '/', $base);
 //        }
 //    }
 //
@@ -839,7 +848,7 @@ public class XomwWebRequest {
 //     * @return string
 //     */
 //    public function getFullRequestURL() {
-//        return wfGetServerUrl( PROTO_CURRENT ) . $this->getRequestURL();
+//        return wfGetServerUrl(PROTO_CURRENT) . this.getRequestURL();
 //    }
 //
 //    /**
@@ -847,8 +856,8 @@ public class XomwWebRequest {
 //     * @param string $value
 //     * @return string
 //     */
-//    public function appendQueryValue( $key, $value ) {
-//        return $this->appendQueryArray( [ $key => $value ] );
+//    public function appendQueryValue($key, $value) {
+//        return this.appendQueryArray([ $key => $value ]);
 //    }
 //
 //    /**
@@ -857,12 +866,12 @@ public class XomwWebRequest {
 //     * @param array $array Array of values to replace/add to query
 //     * @return string
 //     */
-//    public function appendQueryArray( $array ) {
-//        $newquery = $this->getQueryValues();
-//        unset( $newquery['title'] );
-//        $newquery = array_merge( $newquery, $array );
+//    public function appendQueryArray($array) {
+//        $newquery = this.getQueryValues();
+//        unset($newquery['title']);
+//        $newquery = array_merge($newquery, $array);
 //
-//        return wfArrayToCgi( $newquery );
+//        return wfArrayToCgi($newquery);
 //    }
 //
 //    /**
@@ -874,25 +883,25 @@ public class XomwWebRequest {
 //     * @param string $optionname To specify an option other than rclimit to pull from.
 //     * @return int[] First element is limit, second is offset
 //     */
-//    public function getLimitOffset( $deflimit = 50, $optionname = 'rclimit' ) {
+//    public function getLimitOffset($deflimit = 50, $optionname = 'rclimit') {
 //        global $wgUser;
 //
-//        $limit = $this->getInt( 'limit', 0 );
-//        if ( $limit < 0 ) {
+//        $limit = this.getInt('limit', 0);
+//        if ($limit < 0) {
 //            $limit = 0;
 //        }
-//        if ( ( $limit == 0 ) && ( $optionname != '' ) ) {
-//            $limit = $wgUser->getIntOption( $optionname );
+//        if (($limit == 0) && ($optionname != '')) {
+//            $limit = $wgUser.getIntOption($optionname);
 //        }
-//        if ( $limit <= 0 ) {
+//        if ($limit <= 0) {
 //            $limit = $deflimit;
 //        }
-//        if ( $limit > 5000 ) {
+//        if ($limit > 5000) {
 //            $limit = 5000; # We have *some* limits...
 //        }
 //
-//        $offset = $this->getInt( 'offset', 0 );
-//        if ( $offset < 0 ) {
+//        $offset = this.getInt('offset', 0);
+//        if ($offset < 0) {
 //            $offset = 0;
 //        }
 //
@@ -905,9 +914,9 @@ public class XomwWebRequest {
 //     * @param string $key
 //     * @return string|null String or null if no such file.
 //     */
-//    public function getFileTempname( $key ) {
-//        $file = new WebRequestUpload( $this, $key );
-//        return $file->getTempName();
+//    public function getFileTempname($key) {
+//        $file = new WebRequestUpload(this, $key);
+//        return $file.getTempName();
 //    }
 //
 //    /**
@@ -916,9 +925,9 @@ public class XomwWebRequest {
 //     * @param string $key
 //     * @return int
 //     */
-//    public function getUploadError( $key ) {
-//        $file = new WebRequestUpload( $this, $key );
-//        return $file->getError();
+//    public function getUploadError($key) {
+//        $file = new WebRequestUpload(this, $key);
+//        return $file.getError();
 //    }
 //
 //    /**
@@ -932,9 +941,9 @@ public class XomwWebRequest {
 //     * @param string $key
 //     * @return string|null String or null if no such file.
 //     */
-//    public function getFileName( $key ) {
-//        $file = new WebRequestUpload( $this, $key );
-//        return $file->getName();
+//    public function getFileName($key) {
+//        $file = new WebRequestUpload(this, $key);
+//        return $file.getName();
 //    }
 //
 //    /**
@@ -943,8 +952,8 @@ public class XomwWebRequest {
 //     * @param string $key
 //     * @return WebRequestUpload
 //     */
-//    public function getUpload( $key ) {
-//        return new WebRequestUpload( $this, $key );
+//    public function getUpload($key) {
+//        return new WebRequestUpload(this, $key);
 //    }
 //
 //    /**
@@ -955,33 +964,33 @@ public class XomwWebRequest {
 //     */
 //    public function response() {
 //        /* Lazy initialization of response object for this request */
-//        if ( !is_object( $this->response ) ) {
-//            $class = ( $this instanceof FauxRequest ) ? FauxResponse::class : WebResponse::class;
-//            $this->response = new $class();
+//        if (!is_object(this.response)) {
+//            $class = (this instanceof FauxRequest) ? FauxResponse::class : WebResponse::class;
+//            this.response = new $class();
 //        }
-//        return $this->response;
+//        return this.response;
 //    }
 //
 //    /**
 //     * Initialise the header list
 //     */
 //    protected function initHeaders() {
-//        if ( count( $this->headers ) ) {
+//        if (count(this.headers)) {
 //            return;
 //        }
 //
-//        $apacheHeaders = function_exists( 'apache_request_headers' ) ? apache_request_headers() : false;
-//        if ( $apacheHeaders ) {
-//            foreach ( $apacheHeaders as $tempName => $tempValue ) {
-//                $this->headers[strtoupper( $tempName )] = $tempValue;
+//        $apacheHeaders = function_exists('apache_request_headers') ? apache_request_headers() : false;
+//        if ($apacheHeaders) {
+//            foreach ($apacheHeaders as $tempName => $tempValue) {
+//                this.headers[strtoupper($tempName)] = $tempValue;
 //            }
 //        } else {
-//            foreach ( $_SERVER as $name => $value ) {
-//                if ( substr( $name, 0, 5 ) === 'HTTP_' ) {
-//                    $name = str_replace( '_', '-', substr( $name, 5 ) );
-//                    $this->headers[$name] = $value;
-//                } elseif ( $name === 'CONTENT_LENGTH' ) {
-//                    $this->headers['CONTENT-LENGTH'] = $value;
+//            foreach ($_SERVER as $name => $value) {
+//                if (substr($name, 0, 5) === 'HTTP_') {
+//                    $name = str_replace('_', '-', substr($name, 5));
+//                    this.headers[$name] = $value;
+//                } elseif ($name === 'CONTENT_LENGTH') {
+//                    this.headers['CONTENT-LENGTH'] = $value;
 //                }
 //            }
 //        }
@@ -993,8 +1002,8 @@ public class XomwWebRequest {
 //     * @return array Mapping header name to its value
 //     */
 //    public function getAllHeaders() {
-//        $this->initHeaders();
-//        return $this->headers;
+//        this.initHeaders();
+//        return this.headers;
 //    }
 //
 //    /**
@@ -1009,15 +1018,15 @@ public class XomwWebRequest {
 //     *  header value(s) as either a string (the default) or an array, if
 //     *  WebRequest::GETHEADER_LIST flag was set.
 //     */
-//    public function getHeader( $name, $flags = 0 ) {
-//        $this->initHeaders();
-//        $name = strtoupper( $name );
-//        if ( !isset( $this->headers[$name] ) ) {
+//    public function getHeader($name, $flags = 0) {
+//        this.initHeaders();
+//        $name = strtoupper($name);
+//        if (!isset(this.headers[$name])) {
 //            return false;
 //        }
-//        $value = $this->headers[$name];
-//        if ( $flags & self::GETHEADER_LIST ) {
-//            $value = array_map( 'trim', explode( ',', $value ) );
+//        $value = this.headers[$name];
+//        if ($flags & self::GETHEADER_LIST) {
+//            $value = array_map('trim', explode(',', $value));
 //        }
 //        return $value;
 //    }
@@ -1025,23 +1034,23 @@ public class XomwWebRequest {
 //    /**
 //     * Get data from the session
 //     *
-//     * @note Prefer $this->getSession() instead if making multiple calls.
+//     * @note Prefer this.getSession() instead if making multiple calls.
 //     * @param string $key Name of key in the session
 //     * @return mixed
 //     */
-//    public function getSessionData( $key ) {
-//        return $this->getSession()->get( $key );
+//    public function getSessionData($key) {
+//        return this.getSession().get($key);
 //    }
 //
 //    /**
 //     * Set session data
 //     *
-//     * @note Prefer $this->getSession() instead if making multiple calls.
+//     * @note Prefer this.getSession() instead if making multiple calls.
 //     * @param string $key Name of key in the session
 //     * @param mixed $data
 //     */
-//    public function setSessionData( $key, $data ) {
-//        $this->getSession()->set( $key, $data );
+//    public function setSessionData($key, $data) {
+//        this.getSession().set($key, $data);
 //    }
 //
 //    /**
@@ -1054,19 +1063,19 @@ public class XomwWebRequest {
 //     * @throws HttpError
 //     * @return bool
 //     */
-//    public function checkUrlExtension( $extWhitelist = [] ) {
+//    public function checkUrlExtension($extWhitelist = []) {
 //        $extWhitelist[] = 'php';
-//        if ( IEUrlExtension::areServerVarsBad( $_SERVER, $extWhitelist ) ) {
-//            if ( !$this->wasPosted() ) {
+//        if (IEUrlExtension::areServerVarsBad($_SERVER, $extWhitelist)) {
+//            if (!this.wasPosted()) {
 //                $newUrl = IEUrlExtension::fixUrlForIE6(
-//                    $this->getFullRequestURL(), $extWhitelist );
-//                if ( $newUrl !== false ) {
-//                    $this->doSecurityRedirect( $newUrl );
+//                    this.getFullRequestURL(), $extWhitelist);
+//                if ($newUrl !== false) {
+//                    this.doSecurityRedirect($newUrl);
 //                    return false;
 //                }
 //            }
-//            throw new HttpError( 403,
-//                'Invalid file extension found in the path info or query string.' );
+//            throw new HttpError(403,
+//                'Invalid file extension found in the path info or query string.');
 //        }
 //        return true;
 //    }
@@ -1078,10 +1087,10 @@ public class XomwWebRequest {
 //     * @param string $url
 //     * @return bool
 //     */
-//    protected function doSecurityRedirect( $url ) {
-//        header( 'Location: ' . $url );
-//        header( 'Content-Type: text/html' );
-//        $encUrl = htmlspecialchars( $url );
+//    protected function doSecurityRedirect($url) {
+//        header('Location: ' . $url);
+//        header('Content-Type: text/html');
+//        $encUrl = htmlspecialchars($url);
 //        echo <<<HTML
 //            <!DOCTYPE html>
 //<html>
@@ -1108,7 +1117,7 @@ public class XomwWebRequest {
 //    /**
 //     * Parse the Accept-Language header sent by the client into an array
 //     *
-//     * @return array Array( languageCode => q-value ) sorted by q-value in
+//     * @return array Array(languageCode => q-value) sorted by q-value in
 //     *   descending order then appearing time in the header in ascending order.
 //     * May contain the "language" '*', which applies to languages other than those explicitly listed.
 //     * This is aligned with rfc2616 section 14.4
@@ -1117,13 +1126,13 @@ public class XomwWebRequest {
 //    public function getAcceptLang() {
 //        // Modified version of code found at
 //        // http://www.thefutureoftheweb.com/blog/use-accept-language-header
-//        $acceptLang = $this->getHeader( 'Accept-Language' );
-//        if ( !$acceptLang ) {
+//        $acceptLang = this.getHeader('Accept-Language');
+//        if (!$acceptLang) {
 //            return [];
 //        }
 //
 //        // Return the language codes in lower case
-//        $acceptLang = strtolower( $acceptLang );
+//        $acceptLang = strtolower($acceptLang);
 //
 //        // Break up string into pieces (languages and q factors)
 //        $lang_parse = null;
@@ -1131,30 +1140,30 @@ public class XomwWebRequest {
 //            '/([a-z]{1,8}(-[a-z]{1,8})*|\*)\s*(;\s*q\s*=\s*(1(\.0{0,3})?|0(\.[0-9]{0,3})?)?)?/',
 //            $acceptLang,
 //            $lang_parse
-//        );
+//       );
 //
-//        if ( !count( $lang_parse[1] ) ) {
+//        if (!count($lang_parse[1])) {
 //            return [];
 //        }
 //
 //        $langcodes = $lang_parse[1];
 //        $qvalues = $lang_parse[4];
-//        $indices = range( 0, count( $lang_parse[1] ) - 1 );
+//        $indices = range(0, count($lang_parse[1]) - 1);
 //
 //        // Set default q factor to 1
-//        foreach ( $indices as $index ) {
-//            if ( $qvalues[$index] === '' ) {
+//        foreach ($indices as $index) {
+//            if ($qvalues[$index] === '') {
 //                $qvalues[$index] = 1;
-//            } elseif ( $qvalues[$index] == 0 ) {
-//                unset( $langcodes[$index], $qvalues[$index], $indices[$index] );
+//            } elseif ($qvalues[$index] == 0) {
+//                unset($langcodes[$index], $qvalues[$index], $indices[$index]);
 //            }
 //        }
 //
 //        // Sort list. First by $qvalues, then by order. Reorder $langcodes the same way
-//        array_multisort( $qvalues, SORT_DESC, SORT_NUMERIC, $indices, $langcodes );
+//        array_multisort($qvalues, SORT_DESC, SORT_NUMERIC, $indices, $langcodes);
 //
 //        // Create a list like "en" => 0.8
-//        $langs = array_combine( $langcodes, $qvalues );
+//        $langs = array_combine($langcodes, $qvalues);
 //
 //        return $langs;
 //    }
@@ -1168,18 +1177,18 @@ public class XomwWebRequest {
 //     * @return string
 //     */
 //    protected function getRawIP() {
-//        if ( !isset( $_SERVER['REMOTE_ADDR'] ) ) {
+//        if (!isset($_SERVER['REMOTE_ADDR'])) {
 //            return null;
 //        }
 //
-//        if ( is_array( $_SERVER['REMOTE_ADDR'] ) || strpos( $_SERVER['REMOTE_ADDR'], ',' ) !== false ) {
-//            throw new MWException( __METHOD__
-//                . " : Could not determine the remote IP address due to multiple values." );
+//        if (is_array($_SERVER['REMOTE_ADDR']) || strpos($_SERVER['REMOTE_ADDR'], ',') !== false) {
+//            throw new MWException(__METHOD__
+//                . " : Could not determine the remote IP address due to multiple values.");
 //        } else {
 //            $ipchain = $_SERVER['REMOTE_ADDR'];
 //        }
 //
-//        return IP::canonicalize( $ipchain );
+//        return IP::canonicalize($ipchain);
 //    }
 //
 //    /**
@@ -1195,48 +1204,48 @@ public class XomwWebRequest {
 //        global $wgUsePrivateIPs;
 //
 //		# Return cached result
-//        if ( $this->ip !== null ) {
-//            return $this->ip;
+//        if (this.ip !== null) {
+//            return this.ip;
 //        }
 //
 //		# collect the originating ips
-//        $ip = $this->getRawIP();
-//        if ( !$ip ) {
-//            throw new MWException( 'Unable to determine IP.' );
+//        $ip = this.getRawIP();
+//        if (!$ip) {
+//            throw new MWException('Unable to determine IP.');
 //        }
 //
 //		# Append XFF
-//        $forwardedFor = $this->getHeader( 'X-Forwarded-For' );
-//        if ( $forwardedFor !== false ) {
-//            $proxyLookup = MediaWikiServices::getInstance()->getProxyLookup();
-//            $isConfigured = $proxyLookup->isConfiguredProxy( $ip );
-//            $ipchain = array_map( 'trim', explode( ',', $forwardedFor ) );
-//            $ipchain = array_reverse( $ipchain );
-//            array_unshift( $ipchain, $ip );
+//        $forwardedFor = this.getHeader('X-Forwarded-For');
+//        if ($forwardedFor !== false) {
+//            $proxyLookup = MediaWikiServices::getInstance().getProxyLookup();
+//            $isConfigured = $proxyLookup.isConfiguredProxy($ip);
+//            $ipchain = array_map('trim', explode(',', $forwardedFor));
+//            $ipchain = array_reverse($ipchain);
+//            array_unshift($ipchain, $ip);
 //
 //			# Step through XFF list and find the last address in the list which is a
 //			# trusted server. Set $ip to the IP address given by that trusted server,
 //			# unless the address is not sensible (e.g. private). However, prefer private
 //			# IP addresses over proxy servers controlled by this site (more sensible).
 //			# Note that some XFF values might be "unknown" with Squid/Varnish.
-//                foreach ( $ipchain as $i => $curIP ) {
-//                $curIP = IP::sanitizeIP( IP::canonicalize( $curIP ) );
-//                if ( !$curIP || !isset( $ipchain[$i + 1] ) || $ipchain[$i + 1] === 'unknown'
-//                    || !$proxyLookup->isTrustedProxy( $curIP )
-//                ) {
+//                foreach ($ipchain as $i => $curIP) {
+//                $curIP = IP::sanitizeIP(IP::canonicalize($curIP));
+//                if (!$curIP || !isset($ipchain[$i + 1]) || $ipchain[$i + 1] === 'unknown'
+//                    || !$proxyLookup.isTrustedProxy($curIP)
+//               ) {
 //                    break; // IP is not valid/trusted or does not point to anything
 //                }
 //                if (
-//                    IP::isPublic( $ipchain[$i + 1] ) ||
+//                    IP::isPublic($ipchain[$i + 1]) ||
 //                    $wgUsePrivateIPs ||
-//                    $proxyLookup->isConfiguredProxy( $curIP ) // T50919; treat IP as sane
+//                    $proxyLookup.isConfiguredProxy($curIP) // T50919; treat IP as sane
 //				) {
 //                    // Follow the next IP according to the proxy
-//                    $nextIP = IP::canonicalize( $ipchain[$i + 1] );
-//                    if ( !$nextIP && $isConfigured ) {
+//                    $nextIP = IP::canonicalize($ipchain[$i + 1]);
+//                    if (!$nextIP && $isConfigured) {
 //                        // We have not yet made it past CDN/proxy servers of this site,
 //                        // so either they are misconfigured or there is some IP spoofing.
-//                        throw new MWException( "Invalid IP given in XFF '$forwardedFor'." );
+//                        throw new MWException("Invalid IP given in XFF '$forwardedFor'.");
 //                    }
 //                    $ip = $nextIP;
 //                    // keep traversing the chain
@@ -1247,14 +1256,14 @@ public class XomwWebRequest {
 //        }
 //
 //		# Allow extensions to improve our guess
-//        Hooks::run( 'GetIP', [ &$ip ] );
+//        Hooks::run('GetIP', [ &$ip ]);
 //
-//        if ( !$ip ) {
-//            throw new MWException( "Unable to determine IP." );
+//        if (!$ip) {
+//            throw new MWException("Unable to determine IP.");
 //        }
 //
-//        wfDebug( "IP: $ip\n" );
-//        $this->ip = $ip;
+//        wfDebug("IP: $ip\n");
+//        this.ip = $ip;
 //        return $ip;
 //    }
 //
@@ -1263,8 +1272,8 @@ public class XomwWebRequest {
 //     * @return void
 //     * @since 1.21
 //     */
-//    public function setIP( $ip ) {
-//        $this->ip = $ip;
+//    public function setIP($ip) {
+//        this.ip = $ip;
 //    }
 //
 //    /**
@@ -1280,11 +1289,11 @@ public class XomwWebRequest {
 //     * @since 1.28
 //     */
 //    public function hasSafeMethod() {
-//        if ( !isset( $_SERVER['REQUEST_METHOD'] ) ) {
+//        if (!isset($_SERVER['REQUEST_METHOD'])) {
 //            return false; // CLI mode
 //        }
 //
-//        return in_array( $_SERVER['REQUEST_METHOD'], [ 'GET', 'HEAD', 'OPTIONS', 'TRACE' ] );
+//        return in_array($_SERVER['REQUEST_METHOD'], [ 'GET', 'HEAD', 'OPTIONS', 'TRACE' ]);
 //    }
 //
 //    /**
@@ -1306,11 +1315,11 @@ public class XomwWebRequest {
 //     * @since 1.28
 //     */
 //    public function isSafeRequest() {
-//        if ( $this->markedAsSafe && $this->wasPosted() ) {
+//        if (this.markedAsSafe && this.wasPosted()) {
 //            return true; // marked as a "safe" POST
 //        }
 //
-//        return $this->hasSafeMethod();
+//        return this.hasSafeMethod();
 //    }
 //
 //    /**
@@ -1324,6 +1333,6 @@ public class XomwWebRequest {
 //     * @since 1.28
 //     */
 //    public function markAsSafeRequest() {
-//        $this->markedAsSafe = true;
+//        this.markedAsSafe = true;
 //    }
 }

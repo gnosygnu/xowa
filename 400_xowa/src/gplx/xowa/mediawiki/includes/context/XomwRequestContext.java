@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.context;
 
 import gplx.xowa.mediawiki.XophpObject_;
+import gplx.xowa.mediawiki.XophpString_;
 import gplx.xowa.mediawiki.includes.XomwOutputPage;
 import gplx.xowa.mediawiki.includes.XomwTitle;
 import gplx.xowa.mediawiki.includes.XomwWebRequest;
@@ -105,22 +106,23 @@ public class XomwRequestContext { // implements IContextSource, MutableContext
 //        this.request = $request;
 //    }
 
-//    /**
-//     * @return WebRequest
-//     */
-//    public XomwWebRequest getRequest() {
-//        if (this.request === null) {
-//            global $wgCommandLineMode;
-//            // create the WebRequest object on the fly
-//            if ($wgCommandLineMode) {
-//                this.request = new FauxRequest([]);
-//            } else {
-//                this.request = new WebRequest();
-//            }
-//        }
-//
-//        return this.request;
-//    }
+    /**
+     * @return WebRequest
+     */
+    public XomwWebRequest getRequest() {
+        if (XophpObject_.is_null(this.request)) {
+            // XOMW:skip
+            // global $wgCommandLineMode;
+            // // create the WebRequest object on the fly
+            // if ($wgCommandLineMode) {
+            //    this.request = new FauxRequest([]);
+            // } else {
+                this.request = new XomwWebRequest();
+            // }
+        }
+
+        return this.request;
+    }
 
 //    /**
 //     * @deprecated since 1.27 use a StatsdDataFactory from MediaWikiServices (preferably injected)
@@ -264,7 +266,7 @@ public class XomwRequestContext { // implements IContextSource, MutableContext
      */
     public XomwUser getUser() {
         if (XophpObject_.is_null(this.user)) {
-//            this.user = XomwUser.newFromSession(this.getRequest());
+            this.user = XomwUser.newFromSession(this.getRequest());
         }
 
         return this.user;
@@ -327,18 +329,18 @@ public class XomwRequestContext { // implements IContextSource, MutableContext
             this.recursion = true;
 
             try {
-//                $request = this.getRequest();
-//                $user = this.getUser();
-//
-//                $code = $request.getVal('uselang', 'user');
-//                if ($code === 'user') {
-//                    $code = $user.getOption('language');
-//                }
+                request = this.getRequest();
+                user = this.getUser();
+                
+                String code = request.getVal("uselang", "user");
+                if (XophpString_.eq(code, "user")) {
+//                    code = user.getOption("language");
+                }
 //                $code = self::sanitizeLangCode($code);
 //
 //                XomwHooks.run("UserGetLanguageObject", XophpArray.New(user, &$code, this));
 //
-//                if ($code === this.getConfig().get('LanguageCode')) {
+//                if ($code === this.getConfig().get("LanguageCode")) {
 //                    this.lang = MediaWikiServices::getInstance().getContentLanguage();
 //                } else {
 //                    $obj = Language::factory($code);

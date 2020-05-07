@@ -16,6 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.user;
 
 // MW.SRC:1.33.1
+
+import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.XophpArray_;
+import gplx.xowa.mediawiki.includes.XomwWebRequest;
+import gplx.xowa.mediawiki.includes.dao.XomwIDBAccessObject;
+
 /**
  * The User object encapsulates all of the user-specific settings (user_id,
  * name, rights, email address, options, last login time). Client
@@ -26,263 +32,263 @@ package gplx.xowa.mediawiki.includes.user;
  * for rendering normal pages are set in the cookie to minimize use
  * of the database.
  */
-public class XomwUser { // implements IDBAccessObject, UserIdentity
-//    /**
-//     * @const int Number of characters in user_token field.
-//     */
-//	const TOKEN_LENGTH = 32;
-//
-//    /**
-//     * @const string An invalid value for user_token
-//     */
-//	const INVALID_TOKEN = '*** INVALID ***';
-//
-//    /**
-//     * @const int Serialized record version.
-//     */
-//	const VERSION = 13;
-//
-//    /**
-//     * Exclude user options that are set to their default value.
-//     * @since 1.25
-//     */
-//	const GETOPTIONS_EXCLUDE_DEFAULTS = 1;
-//
-//    /**
-//     * @since 1.27
-//     */
-//	const CHECK_USER_RIGHTS = true;
-//
-//    /**
-//     * @since 1.27
-//     */
-//	const IGNORE_USER_RIGHTS = false;
-//
-//    /**
-//     * Array of Strings List of member variables which are saved to the
-//     * shared cache (memcached). Any operation which changes the
-//     * corresponding database fields must call a cache-clearing function.
-//     * @showinitializer
-//     */
-//    protected static $mCacheVars = [
-//        // user table
-//        'mId',
-//        'mName',
-//        'mRealName',
-//        'mEmail',
-//        'mTouched',
-//        'mToken',
-//        'mEmailAuthenticated',
-//        'mEmailToken',
-//        'mEmailTokenExpires',
-//        'mRegistration',
-//        'mEditCount',
-//        // user_groups table
-//        'mGroupMemberships',
-//        // user_properties table
-//        'mOptionOverrides',
-//        // actor table
-//        'mActorId',
-//        ];
-//
-//    /**
-//     * Array of Strings Core rights.
-//     * Each of these should have a corresponding message of the form
-//     * "right-$right".
-//     * @showinitializer
-//     */
-//    protected static $mCoreRights = [
-//        'apihighlimits',
-//        'applychangetags',
-//        'autoconfirmed',
-//        'autocreateaccount',
-//        'autopatrol',
-//        'bigdelete',
-//        'block',
-//        'blockemail',
-//        'bot',
-//        'browsearchive',
-//        'changetags',
-//        'createaccount',
-//        'createpage',
-//        'createtalk',
-//        'delete',
-//        'deletechangetags',
-//        'deletedhistory',
-//        'deletedtext',
-//        'deletelogentry',
-//        'deleterevision',
-//        'edit',
-//        'editcontentmodel',
-//        'editinterface',
-//        'editprotected',
-//        'editmyoptions',
-//        'editmyprivateinfo',
-//        'editmyusercss',
-//        'editmyuserjson',
-//        'editmyuserjs',
-//        'editmywatchlist',
-//        'editsemiprotected',
-//        'editsitecss',
-//        'editsitejson',
-//        'editsitejs',
-//        'editusercss',
-//        'edituserjson',
-//        'edituserjs',
-//        'hideuser',
-//        'import',
-//        'importupload',
-//        'ipblock-exempt',
-//        'managechangetags',
-//        'markbotedits',
-//        'mergehistory',
-//        'minoredit',
-//        'move',
-//        'movefile',
-//        'move-categorypages',
-//        'move-rootuserpages',
-//        'move-subpages',
-//        'nominornewtalk',
-//        'noratelimit',
-//        'override-export-depth',
-//        'pagelang',
-//        'patrol',
-//        'patrolmarks',
-//        'protect',
-//        'purge',
-//        'read',
-//        'reupload',
-//        'reupload-own',
-//        'reupload-shared',
-//        'rollback',
-//        'sendemail',
-//        'siteadmin',
-//        'suppressionlog',
-//        'suppressredirect',
-//        'suppressrevision',
-//        'unblockself',
-//        'undelete',
-//        'unwatchedpages',
-//        'upload',
-//        'upload_by_url',
-//        'userrights',
-//        'userrights-interwiki',
-//        'viewmyprivateinfo',
-//        'viewmywatchlist',
-//        'viewsuppressed',
-//        'writeapi',
-//        ];
-//
-//    /**
-//     * String Cached results of getAllRights()
-//     */
-//    protected static $mAllRights = false;
-//
-//    /** Cache variables */
-//    // @{
-//    /** @var int */
-//    public $mId;
-//    /** @var string */
-//    public $mName;
-//    /** @var int|null */
-//    protected $mActorId;
-//    /** @var string */
-//    public $mRealName;
-//
-//    /** @var string */
-//    public $mEmail;
-//    /** @var string TS_MW timestamp from the DB */
-//    public $mTouched;
-//    /** @var string TS_MW timestamp from cache */
-//    protected $mQuickTouched;
-//    /** @var string */
-//    protected $mToken;
-//    /** @var string */
-//    public $mEmailAuthenticated;
-//    /** @var string */
-//    protected $mEmailToken;
-//    /** @var string */
-//    protected $mEmailTokenExpires;
-//    /** @var string */
-//    protected $mRegistration;
-//    /** @var int */
-//    protected $mEditCount;
-//    /** @var UserGroupMembership[] Associative array of (group name => UserGroupMembership object) */
+public class XomwUser implements XomwIDBAccessObject { //, UserIdentity
+    /**
+     * @private static final int int Number of characters in user_token field.
+     */
+	private static final int TOKEN_LENGTH = 32;
+
+    /**
+     * @private static final int string An invalid value for user_token
+     */
+	private static final String INVALID_TOKEN = "*** INVALID ***";
+
+    /**
+     * @private static final int int Serialized record version.
+     */
+	private static final int VERSION = 13;
+
+    /**
+     * Exclude user options that are set to their default value.
+     * @since 1.25
+     */
+	private static final int GETOPTIONS_EXCLUDE_DEFAULTS = 1;
+
+    /**
+     * @since 1.27
+     */
+	private static final boolean CHECK_USER_RIGHTS = true;
+
+    /**
+     * @since 1.27
+     */
+	private static final boolean IGNORE_USER_RIGHTS = false;
+
+    /**
+     * Array of Strings List of member variables which are saved to the
+     * shared cache (memcached). Any operation which changes the
+     * corresponding database fields must call a cache-clearing function.
+     * @showinitializer
+     */
+    protected static XophpArray mCacheVars = XophpArray.New(
+        // user table
+        "mId",
+        "mName",
+        "mRealName",
+        "mEmail",
+        "mTouched",
+        "mToken",
+        "mEmailAuthenticated",
+        "mEmailToken",
+        "mEmailTokenExpires",
+        "mRegistration",
+        "mEditCount",
+        // user_groups table
+        "mGroupMemberships",
+        // user_properties table
+        "mOptionOverrides",
+        // actor table
+        "mActorId"
+    );
+
+    /**
+     * Array of Strings Core rights.
+     * Each of these should have a corresponding message of the form
+     * "right-$right".
+     * @showinitializer
+     */
+    protected static XophpArray mCoreRights = XophpArray.New(
+        "apihighlimits",
+        "applychangetags",
+        "autoconfirmed",
+        "autocreateaccount",
+        "autopatrol",
+        "bigdelete",
+        "block",
+        "blockemail",
+        "bot",
+        "browsearchive",
+        "changetags",
+        "createaccount",
+        "createpage",
+        "createtalk",
+        "delete",
+        "deletechangetags",
+        "deletedhistory",
+        "deletedtext",
+        "deletelogentry",
+        "deleterevision",
+        "edit",
+        "editcontentmodel",
+        "editinterface",
+        "editprotected",
+        "editmyoptions",
+        "editmyprivateinfo",
+        "editmyusercss",
+        "editmyuserjson",
+        "editmyuserjs",
+        "editmywatchlist",
+        "editsemiprotected",
+        "editsitecss",
+        "editsitejson",
+        "editsitejs",
+        "editusercss",
+        "edituserjson",
+        "edituserjs",
+        "hideuser",
+        "import",
+        "importupload",
+        "ipblock-exempt",
+        "managechangetags",
+        "markbotedits",
+        "mergehistory",
+        "minoredit",
+        "move",
+        "movefile",
+        "move-categorypages",
+        "move-rootuserpages",
+        "move-subpages",
+        "nominornewtalk",
+        "noratelimit",
+        "override-export-depth",
+        "pagelang",
+        "patrol",
+        "patrolmarks",
+        "protect",
+        "purge",
+        "read",
+        "reupload",
+        "reupload-own",
+        "reupload-shared",
+        "rollback",
+        "sendemail",
+        "siteadmin",
+        "suppressionlog",
+        "suppressredirect",
+        "suppressrevision",
+        "unblockself",
+        "undelete",
+        "unwatchedpages",
+        "upload",
+        "upload_by_url",
+        "userrights",
+        "userrights-interwiki",
+        "viewmyprivateinfo",
+        "viewmywatchlist",
+        "viewsuppressed",
+        "writeapi"
+        );
+
+    /**
+     * String Cached results of getAllRights()
+     */
+    protected static boolean mAllRights = false;
+
+    /** Cache variables */
+    // @{
+    /** @var int */
+    public int mId;
+    /** @var string */
+    public String mName;
+    /** @var int|null */
+    protected int mActorId;
+    /** @var string */
+    public String mRealName;
+
+    /** @var string */
+    public String mEmail;
+    /** @var string TS_MW timestamp from the DB */
+    public String mTouched;
+    /** @var string TS_MW timestamp from cache */
+    protected String mQuickTouched;
+    /** @var string */
+    protected String mToken;
+    /** @var string */
+    public String mEmailAuthenticated;
+    /** @var string */
+    protected String mEmailToken;
+    /** @var string */
+    protected String mEmailTokenExpires;
+    /** @var string */
+    protected String mRegistration;
+    /** @var int */
+    protected int mEditCount;
+    /** @var UserGroupMembership[] Associative array of (group name => UserGroupMembership object) */
 //    protected $mGroupMemberships;
-//    /** @var array */
-//    protected $mOptionOverrides;
-//    // @}
-//
-//    /**
-//     * Bool Whether the cache variables have been loaded.
-//     */
-//    // @{
-//    public $mOptionsLoaded;
-//
-//    /**
-//     * Array with already loaded items or true if all items have been loaded.
-//     */
-//    protected $mLoadedItems = [];
-//    // @}
-//
-//    /**
-//     * String Initialization data source if mLoadedItems!==true. May be one of:
-//     *  - 'defaults'   anonymous user initialised from class defaults
-//     *  - 'name'       initialise from mName
-//     *  - 'id'         initialise from mId
-//     *  - 'actor'      initialise from mActorId
-//     *  - 'session'    log in from session if possible
-//     *
-//     * Use the User::newFrom*() family of functions to set this.
-//     */
-//    public $mFrom;
-//
-//    /**
-//     * Lazy-initialized variables, invalidated with clearInstanceCache
-//     */
+    /** @var array */
+    protected XophpArray mOptionOverrides;
+    // @}
+
+    /**
+     * Bool Whether the cache variables have been loaded.
+     */
+    // @{
+    public boolean mOptionsLoaded;
+
+    /**
+     * Array with already loaded items or true if all items have been loaded.
+     */
+    protected XophpArray mLoadedItems = XophpArray.New();
+    // @}
+
+    /**
+     * String Initialization data source if mLoadedItems!==true. May be one of:
+     *  - 'defaults'   anonymous user initialised from class defaults
+     *  - 'name'       initialise from mName
+     *  - 'id'         initialise from mId
+     *  - 'actor'      initialise from mActorId
+     *  - 'session'    log in from session if possible
+     *
+     * Use the User::newFrom*() family of functions to set this.
+     */
+    public String mFrom;
+
+    /**
+     * Lazy-initialized variables, invalidated with clearInstanceCache
+     */
 //    protected $mNewtalk;
-//    /** @var string */
-//    protected $mDatePreference;
-//    /** @var string */
-//    public $mBlockedby;
-//    /** @var string */
-//    protected $mHash;
-//    /** @var array */
-//    public $mRights;
-//    /** @var string */
-//    protected $mBlockreason;
-//    /** @var array */
-//    protected $mEffectiveGroups;
-//    /** @var array */
-//    protected $mImplicitGroups;
-//    /** @var array */
-//    protected $mFormerGroups;
-//    /** @var Block */
+    /** @var string */
+    protected String mDatePreference;
+    /** @var string */
+    public String mBlockedby;
+    /** @var string */
+    protected String mHash;
+    /** @var array */
+    public XophpArray mRights;
+    /** @var string */
+    protected String mBlockreason;
+    /** @var array */
+    protected XophpArray mEffectiveGroups;
+    /** @var array */
+    protected XophpArray mImplicitGroups;
+    /** @var array */
+    protected XophpArray mFormerGroups;
+    /** @var Block */
 //    protected $mGlobalBlock;
-//    /** @var bool */
-//    protected $mLocked;
-//    /** @var bool */
-//    public $mHideName;
-//    /** @var array */
-//    public $mOptions;
-//
-//    /** @var WebRequest */
-//    private $mRequest;
-//
-//    /** @var Block */
+    /** @var bool */
+    protected boolean mLocked;
+    /** @var bool */
+    public boolean mHideName;
+    /** @var array */
+    public XophpArray mOptions;
+
+    /** @var WebRequest */
+    private XomwWebRequest mRequest;
+
+    /** @var Block */
 //    public $mBlock;
-//
-//    /** @var bool */
-//    protected $mAllowUsertalk;
-//
-//    /** @var Block */
+
+    /** @var bool */
+    protected boolean mAllowUsertalk;
+
+    /** @var Block */
 //    private $mBlockedFromCreateAccount = false;
-//
-//    /** @var int User::READ_* constant bitfield used to load data */
-//    protected $queryFlagsUsed = self::READ_NORMAL;
-//
-//    public static $idCacheByName = [];
-//
+
+    /** @var int User::READ_* constant bitfield used to load data */
+    protected int queryFlagsUsed = READ_NORMAL;
+
+    public static XophpArray idCacheByName = XophpArray.New();
+
 //    /**
 //     * Lightweight constructor for an anonymous user.
 //     * Use the User::newFrom* factory functions for other kinds of users.
@@ -295,14 +301,14 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @see newFromRow()
 //     */
 //    public function __construct() {
-//        $this->clearInstanceCache( 'defaults' );
+//        this.clearInstanceCache('defaults');
 //    }
 //
 //    /**
 //     * @return string
 //     */
 //    public function __toString() {
-//        return (string)$this->getName();
+//        return (string)this.getName();
 //    }
 //
 //    /**
@@ -313,7 +319,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * system has been fully initialized. If the object is unsafe, you should
 //     * use an anonymous user:
 //     * \code
-//     * $user = $wgUser->isSafeToLoad() ? $wgUser : new User;
+//     * $user = $wgUser.isSafeToLoad() ? $wgUser : new User;
 //     * \endcode
 //     *
 //     * @since 1.27
@@ -327,8 +333,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        // * mLoadedItems === true (already loaded)
 //        // * mFrom !== 'session' (sessions not involved at all)
 //
-//        return ( !defined( 'MW_NO_SESSION' ) && $wgFullyInitialised ) ||
-//            $this->mLoadedItems === true || $this->mFrom !== 'session';
+//        return (!defined('MW_NO_SESSION') && $wgFullyInitialised) ||
+//            this.mLoadedItems === true || this.mFrom !== 'session';
 //    }
 //
 //    /**
@@ -336,98 +342,98 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @param int $flags User::READ_* constant bitfield
 //     */
-//    public function load( $flags = self::READ_NORMAL ) {
+//    public function load($flags = self::READ_NORMAL) {
 //        global $wgFullyInitialised;
 //
-//        if ( $this->mLoadedItems === true ) {
+//        if (this.mLoadedItems === true) {
 //            return;
 //        }
 //
 //        // Set it now to avoid infinite recursion in accessors
-//        $oldLoadedItems = $this->mLoadedItems;
-//        $this->mLoadedItems = true;
-//        $this->queryFlagsUsed = $flags;
+//        $oldLoadedItems = this.mLoadedItems;
+//        this.mLoadedItems = true;
+//        this.queryFlagsUsed = $flags;
 //
 //        // If this is called too early, things are likely to break.
-//        if ( !$wgFullyInitialised && $this->mFrom === 'session' ) {
-//			\MediaWiki\Logger\LoggerFactory::getInstance( 'session' )
-//				->warning( 'User::loadFromSession called before the end of Setup.php', [
-//                'exception' => new Exception( 'User::loadFromSession called before the end of Setup.php' ),
-//				] );
-//            $this->loadDefaults();
-//            $this->mLoadedItems = $oldLoadedItems;
+//        if (!$wgFullyInitialised && this.mFrom === 'session') {
+//			\MediaWiki\Logger\LoggerFactory::getInstance('session')
+//				.warning('User::loadFromSession called before the end of Setup.php', [
+//                'exception' => new Exception('User::loadFromSession called before the end of Setup.php'),
+//				]);
+//            this.loadDefaults();
+//            this.mLoadedItems = $oldLoadedItems;
 //            return;
 //        }
 //
-//        switch ( $this->mFrom ) {
+//        switch (this.mFrom) {
 //            case 'defaults':
-//                $this->loadDefaults();
+//                this.loadDefaults();
 //                break;
 //            case 'name':
 //                // Make sure this thread sees its own changes
-//                $lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-//                if ( $lb->hasOrMadeRecentMasterChanges() ) {
+//                $lb = MediaWikiServices::getInstance().getDBLoadBalancer();
+//                if ($lb.hasOrMadeRecentMasterChanges()) {
 //                    $flags |= self::READ_LATEST;
-//                    $this->queryFlagsUsed = $flags;
+//                    this.queryFlagsUsed = $flags;
 //                }
 //
-//                $this->mId = self::idFromName( $this->mName, $flags );
-//                if ( !$this->mId ) {
+//                this.mId = self::idFromName(this.mName, $flags);
+//                if (!this.mId) {
 //                    // Nonexistent user placeholder object
-//                    $this->loadDefaults( $this->mName );
+//                    this.loadDefaults(this.mName);
 //                } else {
-//                    $this->loadFromId( $flags );
+//                    this.loadFromId($flags);
 //                }
 //                break;
 //            case 'id':
 //                // Make sure this thread sees its own changes, if the ID isn't 0
-//                if ( $this->mId != 0 ) {
-//                    $lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-//                    if ( $lb->hasOrMadeRecentMasterChanges() ) {
+//                if (this.mId != 0) {
+//                    $lb = MediaWikiServices::getInstance().getDBLoadBalancer();
+//                    if ($lb.hasOrMadeRecentMasterChanges()) {
 //                        $flags |= self::READ_LATEST;
-//                        $this->queryFlagsUsed = $flags;
+//                        this.queryFlagsUsed = $flags;
 //                    }
 //                }
 //
-//                $this->loadFromId( $flags );
+//                this.loadFromId($flags);
 //                break;
 //            case 'actor':
 //                // Make sure this thread sees its own changes
-//                $lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-//                if ( $lb->hasOrMadeRecentMasterChanges() ) {
+//                $lb = MediaWikiServices::getInstance().getDBLoadBalancer();
+//                if ($lb.hasOrMadeRecentMasterChanges()) {
 //                    $flags |= self::READ_LATEST;
-//                    $this->queryFlagsUsed = $flags;
+//                    this.queryFlagsUsed = $flags;
 //                }
 //
-//                list( $index, $options ) = DBAccessObjectUtils::getDBOptions( $flags );
-//                $row = wfGetDB( $index )->selectRow(
+//                list($index, $options) = DBAccessObjectUtils::getDBOptions($flags);
+//                $row = wfGetDB($index).selectRow(
 //                'actor',
 //                [ 'actor_user', 'actor_name' ],
-//					[ 'actor_id' => $this->mActorId ],
+//					[ 'actor_id' => this.mActorId ],
 //                __METHOD__,
 //                    $options
 //				);
 //
-//                if ( !$row ) {
+//                if (!$row) {
 //                    // Ugh.
-//                    $this->loadDefaults();
-//                } elseif ( $row->actor_user ) {
-//                $this->mId = $row->actor_user;
-//                $this->loadFromId( $flags );
+//                    this.loadDefaults();
+//                } elseif ($row.actor_user) {
+//                this.mId = $row.actor_user;
+//                this.loadFromId($flags);
 //            } else {
-//                $this->loadDefaults( $row->actor_name );
+//                this.loadDefaults($row.actor_name);
 //            }
 //            break;
 //            case 'session':
-//                if ( !$this->loadFromSession() ) {
+//                if (!this.loadFromSession()) {
 //                    // Loading from session failed. Load defaults.
-//                    $this->loadDefaults();
+//                    this.loadDefaults();
 //                }
-//                Hooks::run( 'UserLoadAfterLoadFromSession', [ $this ] );
+//                Hooks::run('UserLoadAfterLoadFromSession', [ $this ]);
 //                break;
 //            default:
 //                throw new UnexpectedValueException(
-//                    "Unrecognised value for User->mFrom: \"{$this->mFrom}\"" );
+//                    "Unrecognised value for User.mFrom: \"{this.mFrom}\"");
 //        }
 //    }
 //
@@ -436,27 +442,27 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int $flags User::READ_* constant bitfield
 //     * @return bool False if the ID does not exist, true otherwise
 //     */
-//    public function loadFromId( $flags = self::READ_NORMAL ) {
-//        if ( $this->mId == 0 ) {
+//    public function loadFromId($flags = self::READ_NORMAL) {
+//        if (this.mId == 0) {
 //            // Anonymous users are not in the database (don't need cache)
-//            $this->loadDefaults();
+//            this.loadDefaults();
 //            return false;
 //        }
 //
 //        // Try cache (unless this needs data from the master DB).
 //        // NOTE: if this thread called saveSettings(), the cache was cleared.
-//        $latest = DBAccessObjectUtils::hasFlags( $flags, self::READ_LATEST );
-//        if ( $latest ) {
-//            if ( !$this->loadFromDatabase( $flags ) ) {
+//        $latest = DBAccessObjectUtils::hasFlags($flags, self::READ_LATEST);
+//        if ($latest) {
+//            if (!this.loadFromDatabase($flags)) {
 //                // Can't load from ID
 //                return false;
 //            }
 //        } else {
-//            $this->loadFromCache();
+//            this.loadFromCache();
 //        }
 //
-//        $this->mLoadedItems = true;
-//        $this->queryFlagsUsed = $flags;
+//        this.mLoadedItems = true;
+//        this.queryFlagsUsed = $flags;
 //
 //        return true;
 //    }
@@ -466,10 +472,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $wikiId
 //     * @param int $userId
 //     */
-//    public static function purge( $wikiId, $userId ) {
-//        $cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-//        $key = $cache->makeGlobalKey( 'user', 'id', $wikiId, $userId );
-//        $cache->delete( $key );
+//    public static function purge($wikiId, $userId) {
+//        $cache = MediaWikiServices::getInstance().getMainWANObjectCache();
+//        $key = $cache.makeGlobalKey('user', 'id', $wikiId, $userId);
+//        $cache.delete($key);
 //    }
 //
 //    /**
@@ -477,10 +483,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param WANObjectCache $cache
 //     * @return string
 //     */
-//    protected function getCacheKey( WANObjectCache $cache ) {
-//        $lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+//    protected function getCacheKey(WANObjectCache $cache) {
+//        $lbFactory = MediaWikiServices::getInstance().getDBLoadBalancerFactory();
 //
-//        return $cache->makeGlobalKey( 'user', 'id', $lbFactory->getLocalDomainID(), $this->mId );
+//        return $cache.makeGlobalKey('user', 'id', $lbFactory.getLocalDomainID(), this.mId);
 //    }
 //
 //    /**
@@ -488,10 +494,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string[]
 //     * @since 1.28
 //     */
-//    public function getMutableCacheKeys( WANObjectCache $cache ) {
-//        $id = $this->getId();
+//    public function getMutableCacheKeys(WANObjectCache $cache) {
+//        $id = this.getId();
 //
-//        return $id ? [ $this->getCacheKey( $cache ) ] : [];
+//        return $id ? [ this.getCacheKey($cache) ] : [];
 //    }
 //
 //    /**
@@ -501,31 +507,31 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @since 1.25
 //     */
 //    protected function loadFromCache() {
-//        $cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-//        $data = $cache->getWithSetCallback(
-//            $this->getCacheKey( $cache ),
+//        $cache = MediaWikiServices::getInstance().getMainWANObjectCache();
+//        $data = $cache.getWithSetCallback(
+//            this.getCacheKey($cache),
 //            $cache::TTL_HOUR,
-//            function ( $oldValue, &$ttl, array &$setOpts ) use ( $cache ) {
-//            $setOpts += Database::getCacheSetOptions( wfGetDB( DB_REPLICA ) );
-//            wfDebug( "User: cache miss for user {$this->mId}\n" );
+//            function ($oldValue, &$ttl, array &$setOpts) use ($cache) {
+//            $setOpts += Database::getCacheSetOptions(wfGetDB(DB_REPLICA));
+//            wfDebug("User: cache miss for user {this.mId}\n");
 //
-//            $this->loadFromDatabase( self::READ_NORMAL );
-//            $this->loadGroups();
-//            $this->loadOptions();
+//            this.loadFromDatabase(self::READ_NORMAL);
+//            this.loadGroups();
+//            this.loadOptions();
 //
 //            $data = [];
-//            foreach ( self::$mCacheVars as $name ) {
-//                $data[$name] = $this->$name;
+//            foreach (self::$mCacheVars as $name) {
+//                $data[$name] = this.$name;
 //            }
 //
-//            $ttl = $cache->adaptiveTTL( wfTimestamp( TS_UNIX, $this->mTouched ), $ttl );
+//            $ttl = $cache.adaptiveTTL(wfTimestamp(TS_UNIX, this.mTouched), $ttl);
 //
 //            // if a user group membership is about to expire, the cache needs to
 //            // expire at that time (T163691)
-//            foreach ( $this->mGroupMemberships as $ugm ) {
-//                if ( $ugm->getExpiry() ) {
-//                    $secondsUntilExpiry = wfTimestamp( TS_UNIX, $ugm->getExpiry() ) - time();
-//                    if ( $secondsUntilExpiry > 0 && $secondsUntilExpiry < $ttl ) {
+//            foreach (this.mGroupMemberships as $ugm) {
+//                if ($ugm.getExpiry()) {
+//                    $secondsUntilExpiry = wfTimestamp(TS_UNIX, $ugm.getExpiry()) - time();
+//                    if ($secondsUntilExpiry > 0 && $secondsUntilExpiry < $ttl) {
 //                        $ttl = $secondsUntilExpiry;
 //                    }
 //                }
@@ -537,8 +543,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //		);
 //
 //        // Restore from cache
-//        foreach ( self::$mCacheVars as $name ) {
-//            $this->$name = $data[$name];
+//        foreach (self::$mCacheVars as $name) {
+//            this.$name = $data[$name];
 //        }
 //
 //        return true;
@@ -563,20 +569,20 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *  username is not present in the database, the result will be a user object
 //     *  with a name, zero user ID and default settings.
 //     */
-//    public static function newFromName( $name, $validate = 'valid' ) {
-//        if ( $validate === true ) {
+//    public static function newFromName($name, $validate = 'valid') {
+//        if ($validate === true) {
 //            $validate = 'valid';
 //        }
-//        $name = self::getCanonicalName( $name, $validate );
-//        if ( $name === false ) {
+//        $name = self::getCanonicalName($name, $validate);
+//        if ($name === false) {
 //            return false;
 //        }
 //
 //        // Create unloaded user object
 //        $u = new User;
-//        $u->mName = $name;
-//        $u->mFrom = 'name';
-//        $u->setItemLoaded( 'name' );
+//        $u.mName = $name;
+//        $u.mFrom = 'name';
+//        $u.setItemLoaded('name');
 //
 //        return $u;
 //    }
@@ -587,11 +593,11 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int $id Valid user ID
 //     * @return User The corresponding User object
 //     */
-//    public static function newFromId( $id ) {
+//    public static function newFromId($id) {
 //        $u = new User;
-//        $u->mId = $id;
-//        $u->mFrom = 'id';
-//        $u->setItemLoaded( 'id' );
+//        $u.mId = $id;
+//        $u.mFrom = 'id';
+//        $u.setItemLoaded('id');
 //        return $u;
 //    }
 //
@@ -602,12 +608,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int $id Valid actor ID
 //     * @return User The corresponding User object
 //     */
-//    public static function newFromActorId( $id ) {
+//    public static function newFromActorId($id) {
 //        global $wgActorTableSchemaMigrationStage;
 //
 //        // Technically we shouldn't allow this without SCHEMA_COMPAT_READ_NEW,
 //        // but it does little harm and might be needed for write callers loading a User.
-//        if ( !( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_NEW ) ) {
+//        if (!($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_NEW)) {
 //            throw new BadMethodCallException(
 //                'Cannot use ' . __METHOD__
 //                    . ' when $wgActorTableSchemaMigrationStage lacks SCHEMA_COMPAT_NEW'
@@ -615,9 +621,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        }
 //
 //        $u = new User;
-//        $u->mActorId = $id;
-//        $u->mFrom = 'actor';
-//        $u->setItemLoaded( 'actor' );
+//        $u.mActorId = $id;
+//        $u.mFrom = 'actor';
+//        $u.setItemLoaded('actor');
 //        return $u;
 //    }
 //
@@ -630,15 +636,15 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @return User
 //     */
-//    public static function newFromIdentity( UserIdentity $identity ) {
-//        if ( $identity instanceof User ) {
+//    public static function newFromIdentity(UserIdentity $identity) {
+//        if ($identity instanceof User) {
 //            return $identity;
 //        }
 //
 //        return self::newFromAnyId(
-//            $identity->getId() === 0 ? null : $identity->getId(),
-//            $identity->getName() === '' ? null : $identity->getName(),
-//            $identity->getActorId() === 0 ? null : $identity->getActorId()
+//            $identity.getId() === 0 ? null : $identity.getId(),
+//            $identity.getName() === '' ? null : $identity.getName(),
+//            $identity.getActorId() === 0 ? null : $identity.getActorId()
 //		);
 //    }
 //
@@ -654,40 +660,40 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int|null $actorId Actor ID, if known
 //     * @return User
 //     */
-//    public static function newFromAnyId( $userId, $userName, $actorId ) {
+//    public static function newFromAnyId($userId, $userName, $actorId) {
 //        global $wgActorTableSchemaMigrationStage;
 //
 //        $user = new User;
-//        $user->mFrom = 'defaults';
+//        $user.mFrom = 'defaults';
 //
 //        // Technically we shouldn't allow this without SCHEMA_COMPAT_READ_NEW,
 //        // but it does little harm and might be needed for write callers loading a User.
-//        if ( ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_NEW ) && $actorId !== null ) {
-//            $user->mActorId = (int)$actorId;
-//            if ( $user->mActorId !== 0 ) {
-//                $user->mFrom = 'actor';
+//        if (($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_NEW) && $actorId !== null) {
+//            $user.mActorId = (int)$actorId;
+//            if ($user.mActorId !== 0) {
+//                $user.mFrom = 'actor';
 //            }
-//            $user->setItemLoaded( 'actor' );
+//            $user.setItemLoaded('actor');
 //        }
 //
-//        if ( $userName !== null && $userName !== '' ) {
-//            $user->mName = $userName;
-//            $user->mFrom = 'name';
-//            $user->setItemLoaded( 'name' );
+//        if ($userName !== null && $userName !== '') {
+//            $user.mName = $userName;
+//            $user.mFrom = 'name';
+//            $user.setItemLoaded('name');
 //        }
 //
-//        if ( $userId !== null ) {
-//            $user->mId = (int)$userId;
-//            if ( $user->mId !== 0 ) {
-//                $user->mFrom = 'id';
+//        if ($userId !== null) {
+//            $user.mId = (int)$userId;
+//            if ($user.mId !== 0) {
+//                $user.mFrom = 'id';
 //            }
-//            $user->setItemLoaded( 'id' );
+//            $user.setItemLoaded('id');
 //        }
 //
-//        if ( $user->mFrom === 'defaults' ) {
+//        if ($user.mFrom === 'defaults') {
 //            throw new InvalidArgumentException(
 //                'Cannot create a user with no name, no ID, and no actor ID'
-//            );
+//           );
 //        }
 //
 //        return $user;
@@ -704,37 +710,38 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int $flags User::READ_* bitfield
 //     * @return User|null
 //     */
-//    public static function newFromConfirmationCode( $code, $flags = 0 ) {
-//        $db = ( $flags & self::READ_LATEST ) == self::READ_LATEST
-//            ? wfGetDB( DB_MASTER )
-//            : wfGetDB( DB_REPLICA );
+//    public static function newFromConfirmationCode($code, $flags = 0) {
+//        $db = ($flags & self::READ_LATEST) == self::READ_LATEST
+//            ? wfGetDB(DB_MASTER)
+//            : wfGetDB(DB_REPLICA);
 //
-//        $id = $db->selectField(
+//        $id = $db.selectField(
 //            'user',
 //            'user_id',
 //            [
-//            'user_email_token' => md5( $code ),
-//            'user_email_token_expires > ' . $db->addQuotes( $db->timestamp() ),
+//            'user_email_token' => md5($code),
+//            'user_email_token_expires > ' . $db.addQuotes($db.timestamp()),
 //			]
 //		);
 //
-//        return $id ? self::newFromId( $id ) : null;
+//        return $id ? self::newFromId($id) : null;
 //    }
-//
-//    /**
-//     * Create a new user object using data from session. If the login
-//     * credentials are invalid, the result is an anonymous user.
-//     *
-//     * @param WebRequest|null $request Object to use; $wgRequest will be used if omitted.
-//     * @return User
-//     */
-//    public static function newFromSession( WebRequest $request = null ) {
-//        $user = new User;
-//        $user->mFrom = 'session';
-//        $user->mRequest = $request;
-//        return $user;
-//    }
-//
+
+    /**
+     * Create a new user object using data from session. If the login
+     * credentials are invalid, the result is an anonymous user.
+     *
+     * @param WebRequest|null $request Object to use; $wgRequest will be used if omitted.
+     * @return User
+     */
+    public static XomwUser newFromSession() {return newFromSession(null);}
+    public static XomwUser newFromSession(XomwWebRequest request) {
+        XomwUser user = new XomwUser();
+        user.mFrom = "session";
+        user.mRequest = request;
+        return user;
+    }
+
 //    /**
 //     * Create a new user object from a user row.
 //     * The row should have the following fields from the user table in it:
@@ -750,9 +757,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *  (see User::loadFromRow for valid keys)
 //     * @return User
 //     */
-//    public static function newFromRow( $row, $data = null ) {
+//    public static function newFromRow($row, $data = null) {
 //        $user = new User;
-//        $user->loadFromRow( $row, $data );
+//        $user.loadFromRow($row, $data);
 //        return $user;
 //    }
 //
@@ -775,7 +782,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *   temporary password and to disassociate the account from the existing
 //     *   human.
 //     * - The token is set to a magic invalid value, to kill existing sessions
-//     *   and to prevent $this->setToken() calls from resetting the token to a
+//     *   and to prevent this.setToken() calls from resetting the token to a
 //     *   valid value.
 //     * - SessionManager is instructed to prevent new sessions for the user, to
 //     *   do things like deauthorizing OAuth consumers.
@@ -791,21 +798,21 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return User|null
 //     * @since 1.27
 //     */
-//    public static function newSystemUser( $name, $options = [] ) {
+//    public static function newSystemUser($name, $options = []) {
 //        $options += [
 //        'validate' => 'valid',
 //            'create' => true,
 //            'steal' => false,
 //		];
 //
-//        $name = self::getCanonicalName( $name, $options['validate'] );
-//        if ( $name === false ) {
+//        $name = self::getCanonicalName($name, $options['validate']);
+//        if ($name === false) {
 //            return null;
 //        }
 //
-//        $dbr = wfGetDB( DB_REPLICA );
+//        $dbr = wfGetDB(DB_REPLICA);
 //        $userQuery = self::getQueryInfo();
-//        $row = $dbr->selectRow(
+//        $row = $dbr.selectRow(
 //            $userQuery['tables'],
 //            $userQuery['fields'],
 //            [ 'user_name' => $name ],
@@ -813,10 +820,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //			[],
 //        $userQuery['joins']
 //		);
-//        if ( !$row ) {
+//        if (!$row) {
 //            // Try the master database...
-//            $dbw = wfGetDB( DB_MASTER );
-//            $row = $dbw->selectRow(
+//            $dbw = wfGetDB(DB_MASTER);
+//            $row = $dbw.selectRow(
 //                $userQuery['tables'],
 //                $userQuery['fields'],
 //                [ 'user_name' => $name ],
@@ -826,31 +833,31 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //			);
 //        }
 //
-//        if ( !$row ) {
+//        if (!$row) {
 //            // No user. Create it?
 //            return $options['create']
-//                ? self::createNew( $name, [ 'token' => self::INVALID_TOKEN ] )
+//                ? self::createNew($name, [ 'token' => self::INVALID_TOKEN ])
 //				: null;
 //        }
 //
-//        $user = self::newFromRow( $row );
+//        $user = self::newFromRow($row);
 //
 //        // A user is considered to exist as a non-system user if it can
 //        // authenticate, or has an email set, or has a non-invalid token.
-//        if ( $user->mEmail || $user->mToken !== self::INVALID_TOKEN ||
-//            AuthManager::singleton()->userCanAuthenticate( $name )
+//        if ($user.mEmail || $user.mToken !== self::INVALID_TOKEN ||
+//            AuthManager::singleton().userCanAuthenticate($name)
 //		) {
 //            // User exists. Steal it?
-//            if ( !$options['steal'] ) {
+//            if (!$options['steal']) {
 //                return null;
 //            }
 //
-//            AuthManager::singleton()->revokeAccessForUser( $name );
+//            AuthManager::singleton().revokeAccessForUser($name);
 //
-//            $user->invalidateEmail();
-//            $user->mToken = self::INVALID_TOKEN;
-//            $user->saveSettings();
-//            SessionManager::singleton()->preventSessionsForUser( $user->getName() );
+//            $user.invalidateEmail();
+//            $user.mToken = self::INVALID_TOKEN;
+//            $user.saveSettings();
+//            SessionManager::singleton().preventSessionsForUser($user.getName());
 //        }
 //
 //        return $user;
@@ -863,8 +870,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int $id User ID
 //     * @return string|bool The corresponding username
 //     */
-//    public static function whoIs( $id ) {
-//        return UserCache::singleton()->getProp( $id, 'name' );
+//    public static function whoIs($id) {
+//        return UserCache::singleton().getProp($id, 'name');
 //    }
 //
 //    /**
@@ -873,8 +880,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int $id User ID
 //     * @return string|bool The corresponding user's real name
 //     */
-//    public static function whoIsReal( $id ) {
-//        return UserCache::singleton()->getProp( $id, 'real_name' );
+//    public static function whoIsReal($id) {
+//        return UserCache::singleton().getProp($id, 'real_name');
 //    }
 //
 //    /**
@@ -883,39 +890,39 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int $flags User::READ_* constant bitfield
 //     * @return int|null The corresponding user's ID, or null if user is nonexistent
 //     */
-//    public static function idFromName( $name, $flags = self::READ_NORMAL ) {
+//    public static function idFromName($name, $flags = self::READ_NORMAL) {
 //        // Don't explode on self::$idCacheByName[$name] if $name is not a string but e.g. a User object
 //        $name = (string)$name;
-//        $nt = Title::makeTitleSafe( NS_USER, $name );
-//        if ( is_null( $nt ) ) {
+//        $nt = Title::makeTitleSafe(NS_USER, $name);
+//        if (is_null($nt)) {
 //            // Illegal name
 //            return null;
 //        }
 //
-//        if ( !( $flags & self::READ_LATEST ) && array_key_exists( $name, self::$idCacheByName ) ) {
+//        if (!($flags & self::READ_LATEST) && array_key_exists($name, self::$idCacheByName)) {
 //            return self::$idCacheByName[$name];
 //        }
 //
-//        list( $index, $options ) = DBAccessObjectUtils::getDBOptions( $flags );
-//        $db = wfGetDB( $index );
+//        list($index, $options) = DBAccessObjectUtils::getDBOptions($flags);
+//        $db = wfGetDB($index);
 //
-//        $s = $db->selectRow(
+//        $s = $db.selectRow(
 //            'user',
 //            [ 'user_id' ],
-//			[ 'user_name' => $nt->getText() ],
+//			[ 'user_name' => $nt.getText() ],
 //        __METHOD__,
 //            $options
 //		);
 //
-//        if ( $s === false ) {
+//        if ($s === false) {
 //            $result = null;
 //        } else {
-//            $result = (int)$s->user_id;
+//            $result = (int)$s.user_id;
 //        }
 //
 //        self::$idCacheByName[$name] = $result;
 //
-//        if ( count( self::$idCacheByName ) > 1000 ) {
+//        if (count(self::$idCacheByName) > 1000) {
 //            self::$idCacheByName = [];
 //        }
 //
@@ -945,9 +952,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $name Name to match
 //     * @return bool
 //     */
-//    public static function isIP( $name ) {
-//        return preg_match( '/^\d{1,3}\.\d{1,3}\.\d{1,3}\.(?:xxx|\d{1,3})$/', $name )
-//            || IP::isIPv6( $name );
+//    public static function isIP($name) {
+//        return preg_match('/^\d{1,3}\.\d{1,3}\.\d{1,3}\.(?:xxx|\d{1,3})$/', $name)
+//            || IP::isIPv6($name);
 //    }
 //
 //    /**
@@ -957,7 +964,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function isIPRange() {
-//        return IP::isValidRange( $this->mName );
+//        return IP::isValidRange(this.mName);
 //    }
 //
 //    /**
@@ -971,24 +978,24 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $name Name to match
 //     * @return bool
 //     */
-//    public static function isValidUserName( $name ) {
+//    public static function isValidUserName($name) {
 //        global $wgMaxNameChars;
 //
-//        if ( $name == ''
-//            || self::isIP( $name )
-//            || strpos( $name, '/' ) !== false
-//            || strlen( $name ) > $wgMaxNameChars
-//            || $name != MediaWikiServices::getInstance()->getContentLanguage()->ucfirst( $name )
+//        if ($name == ''
+//            || self::isIP($name)
+//            || strpos($name, '/') !== false
+//            || strlen($name) > $wgMaxNameChars
+//            || $name != MediaWikiServices::getInstance().getContentLanguage().ucfirst($name)
 //		) {
 //            return false;
 //        }
 //
 //        // Ensure that the name can't be misresolved as a different title,
 //        // such as with extra namespace keys at the start.
-//        $parsed = Title::newFromText( $name );
-//        if ( is_null( $parsed )
-//            || $parsed->getNamespace()
-//            || strcmp( $name, $parsed->getPrefixedText() ) ) {
+//        $parsed = Title::newFromText($name);
+//        if (is_null($parsed)
+//            || $parsed.getNamespace()
+//            || strcmp($name, $parsed.getPrefixedText())) {
 //            return false;
 //        }
 //
@@ -1002,7 +1009,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        '\x{3000}' . # ideographic space
 //        '\x{e000}-\x{f8ff}' . # private use
 //        ']/u';
-//        if ( preg_match( $unicodeBlacklist, $name ) ) {
+//        if (preg_match($unicodeBlacklist, $name)) {
 //            return false;
 //        }
 //
@@ -1020,25 +1027,25 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $name Name to match
 //     * @return bool
 //     */
-//    public static function isUsableName( $name ) {
+//    public static function isUsableName($name) {
 //        global $wgReservedUsernames;
 //        // Must be a valid username, obviously ;)
-//        if ( !self::isValidUserName( $name ) ) {
+//        if (!self::isValidUserName($name)) {
 //            return false;
 //        }
 //
 //        static $reservedUsernames = false;
-//        if ( !$reservedUsernames ) {
+//        if (!$reservedUsernames) {
 //            $reservedUsernames = $wgReservedUsernames;
-//            Hooks::run( 'UserGetReservedNames', [ &$reservedUsernames ] );
+//            Hooks::run('UserGetReservedNames', [ &$reservedUsernames ]);
 //        }
 //
 //        // Certain names may be reserved for batch processes.
-//        foreach ( $reservedUsernames as $reserved ) {
-//            if ( substr( $reserved, 0, 4 ) == 'msg:' ) {
-//                $reserved = wfMessage( substr( $reserved, 4 ) )->inContentLanguage()->plain();
+//        foreach ($reservedUsernames as $reserved) {
+//            if (substr($reserved, 0, 4) == 'msg:') {
+//                $reserved = wfMessage(substr($reserved, 4)).inContentLanguage().plain();
 //            }
-//            if ( $reserved == $name ) {
+//            if ($reserved == $name) {
 //                return false;
 //            }
 //        }
@@ -1055,21 +1062,21 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int|null $after ID the user to start after
 //     * @return UserArrayFromResult
 //     */
-//    public static function findUsersByGroup( $groups, $limit = 5000, $after = null ) {
-//        if ( $groups === [] ) {
-//            return UserArrayFromResult::newFromIDs( [] );
+//    public static function findUsersByGroup($groups, $limit = 5000, $after = null) {
+//        if ($groups === []) {
+//            return UserArrayFromResult::newFromIDs([]);
 //        }
 //
-//        $groups = array_unique( (array)$groups );
-//        $limit = min( 5000, $limit );
+//        $groups = array_unique((array)$groups);
+//        $limit = min(5000, $limit);
 //
 //        $conds = [ 'ug_group' => $groups ];
-//        if ( $after !== null ) {
+//        if ($after !== null) {
 //            $conds[] = 'ug_user > ' . (int)$after;
 //        }
 //
-//        $dbr = wfGetDB( DB_REPLICA );
-//        $ids = $dbr->selectFieldValues(
+//        $dbr = wfGetDB(DB_REPLICA);
+//        $ids = $dbr.selectFieldValues(
 //            'user_groups',
 //            'ug_user',
 //            $conds,
@@ -1080,7 +1087,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //            'LIMIT' => $limit,
 //			]
 //		) ?: [];
-//        return UserArray::newFromIDs( $ids );
+//        return UserArray::newFromIDs($ids);
 //    }
 //
 //    /**
@@ -1095,28 +1102,28 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $name String to match
 //     * @return bool
 //     */
-//    public static function isCreatableName( $name ) {
+//    public static function isCreatableName($name) {
 //        global $wgInvalidUsernameCharacters;
 //
 //        // Ensure that the username isn't longer than 235 bytes, so that
 //        // (at least for the builtin skins) user javascript and css files
 //        // will work. (T25080)
-//        if ( strlen( $name ) > 235 ) {
-//            wfDebugLog( 'username', __METHOD__ .
-//                ": '$name' invalid due to length" );
+//        if (strlen($name) > 235) {
+//            wfDebugLog('username', __METHOD__ .
+//                ": '$name' invalid due to length");
 //            return false;
 //        }
 //
 //        // Preg yells if you try to give it an empty string
-//        if ( $wgInvalidUsernameCharacters !== '' &&
-//            preg_match( '/[' . preg_quote( $wgInvalidUsernameCharacters, '/' ) . ']/', $name )
+//        if ($wgInvalidUsernameCharacters !== '' &&
+//            preg_match('/[' . preg_quote($wgInvalidUsernameCharacters, '/') . ']/', $name)
 //		) {
-//            wfDebugLog( 'username', __METHOD__ .
-//                ": '$name' invalid due to wgInvalidUsernameCharacters" );
+//            wfDebugLog('username', __METHOD__ .
+//                ": '$name' invalid due to wgInvalidUsernameCharacters");
 //            return false;
 //        }
 //
-//        return self::isUsableName( $name );
+//        return self::isUsableName($name);
 //    }
 //
 //    /**
@@ -1125,9 +1132,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $password Desired password
 //     * @return bool
 //     */
-//    public function isValidPassword( $password ) {
+//    public function isValidPassword($password) {
 //        // simple boolean wrapper for checkPasswordValidity
-//        return $this->checkPasswordValidity( $password )->isGood();
+//        return this.checkPasswordValidity($password).isGood();
 //    }
 //
 //    /**
@@ -1137,22 +1144,22 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool|string|array True on success, string or array of error message on failure
 //     * @deprecated since 1.33, use checkPasswordValidity
 //     */
-//    public function getPasswordValidity( $password ) {
-//        wfDeprecated( __METHOD__, '1.33' );
+//    public function getPasswordValidity($password) {
+//        wfDeprecated(__METHOD__, '1.33');
 //
-//        $result = $this->checkPasswordValidity( $password );
-//        if ( $result->isGood() ) {
+//        $result = this.checkPasswordValidity($password);
+//        if ($result.isGood()) {
 //            return true;
 //        }
 //
 //        $messages = [];
-//        foreach ( $result->getErrorsByType( 'error' ) as $error ) {
+//        foreach ($result.getErrorsByType('error') as $error) {
 //            $messages[] = $error['message'];
 //        }
-//        foreach ( $result->getErrorsByType( 'warning' ) as $warning ) {
+//        foreach ($result.getErrorsByType('warning') as $warning) {
 //            $messages[] = $warning['message'];
 //        }
-//        if ( count( $messages ) === 1 ) {
+//        if (count($messages) === 1) {
 //            return $messages[0];
 //        }
 //
@@ -1180,32 +1187,32 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return Status
 //     * @since 1.23
 //     */
-//    public function checkPasswordValidity( $password ) {
+//    public function checkPasswordValidity($password) {
 //        global $wgPasswordPolicy;
 //
 //        $upp = new UserPasswordPolicy(
 //            $wgPasswordPolicy['policies'],
 //            $wgPasswordPolicy['checks']
-//        );
+//       );
 //
-//        $status = Status::newGood( [] );
+//        $status = Status::newGood([]);
 //        $result = false; // init $result to false for the internal checks
 //
-//        if ( !Hooks::run( 'isValidPassword', [ $password, &$result, $this ] ) ) {
-//            $status->error( $result );
+//        if (!Hooks::run('isValidPassword', [ $password, &$result, $this ])) {
+//            $status.error($result);
 //            return $status;
 //        }
 //
-//        if ( $result === false ) {
-//            $status->merge( $upp->checkUserPassword( $this, $password ), true );
+//        if ($result === false) {
+//            $status.merge($upp.checkUserPassword($this, $password), true);
 //            return $status;
 //        }
 //
-//        if ( $result === true ) {
+//        if ($result === true) {
 //            return $status;
 //        }
 //
-//        $status->error( $result );
+//        $status.error($result);
 //        return $status; // the isValidPassword hook set a string $result and returned true
 //    }
 //
@@ -1222,49 +1229,49 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @throws InvalidArgumentException
 //     * @return bool|string
 //     */
-//    public static function getCanonicalName( $name, $validate = 'valid' ) {
+//    public static function getCanonicalName($name, $validate = 'valid') {
 //        // Force usernames to capital
-//        $name = MediaWikiServices::getInstance()->getContentLanguage()->ucfirst( $name );
+//        $name = MediaWikiServices::getInstance().getContentLanguage().ucfirst($name);
 //
 //		# Reject names containing '#'; these will be cleaned up
 //		# with title normalisation, but then it's too late to
 //		# check elsewhere
-//        if ( strpos( $name, '#' ) !== false ) {
+//        if (strpos($name, '#') !== false) {
 //            return false;
 //        }
 //
 //        // Clean up name according to title rules,
 //        // but only when validation is requested (T14654)
-//        $t = ( $validate !== false ) ?
-//            Title::newFromText( $name, NS_USER ) : Title::makeTitle( NS_USER, $name );
+//        $t = ($validate !== false) ?
+//            Title::newFromText($name, NS_USER) : Title::makeTitle(NS_USER, $name);
 //        // Check for invalid titles
-//        if ( is_null( $t ) || $t->getNamespace() !== NS_USER || $t->isExternal() ) {
+//        if (is_null($t) || $t.getNamespace() !== NS_USER || $t.isExternal()) {
 //            return false;
 //        }
 //
-//        $name = $t->getText();
+//        $name = $t.getText();
 //
-//        switch ( $validate ) {
+//        switch ($validate) {
 //            case false:
 //                break;
 //            case 'valid':
-//                if ( !self::isValidUserName( $name ) ) {
+//                if (!self::isValidUserName($name)) {
 //                $name = false;
 //            }
 //            break;
 //            case 'usable':
-//                if ( !self::isUsableName( $name ) ) {
+//                if (!self::isUsableName($name)) {
 //                $name = false;
 //            }
 //            break;
 //            case 'creatable':
-//                if ( !self::isCreatableName( $name ) ) {
+//                if (!self::isCreatableName($name)) {
 //                $name = false;
 //            }
 //            break;
 //            default:
 //                throw new InvalidArgumentException(
-//                    'Invalid parameter value for $validate in ' . __METHOD__ );
+//                    'Invalid parameter value for $validate in ' . __METHOD__);
 //        }
 //        return $name;
 //    }
@@ -1277,7 +1284,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public static function randomPassword() {
 //        global $wgMinimalPasswordLength;
-//        return PasswordFactory::generateRandomPasswordString( $wgMinimalPasswordLength );
+//        return PasswordFactory::generateRandomPasswordString($wgMinimalPasswordLength);
 //    }
 //
 //    /**
@@ -1288,31 +1295,31 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @param string|bool $name
 //     */
-//    public function loadDefaults( $name = false ) {
-//        $this->mId = 0;
-//        $this->mName = $name;
-//        $this->mActorId = null;
-//        $this->mRealName = '';
-//        $this->mEmail = '';
-//        $this->mOptionOverrides = null;
-//        $this->mOptionsLoaded = false;
+//    public function loadDefaults($name = false) {
+//        this.mId = 0;
+//        this.mName = $name;
+//        this.mActorId = null;
+//        this.mRealName = '';
+//        this.mEmail = '';
+//        this.mOptionOverrides = null;
+//        this.mOptionsLoaded = false;
 //
-//        $loggedOut = $this->mRequest && !defined( 'MW_NO_SESSION' )
-//            ? $this->mRequest->getSession()->getLoggedOutTimestamp() : 0;
-//        if ( $loggedOut !== 0 ) {
-//            $this->mTouched = wfTimestamp( TS_MW, $loggedOut );
+//        $loggedOut = this.mRequest && !defined('MW_NO_SESSION')
+//            ? this.mRequest.getSession().getLoggedOutTimestamp() : 0;
+//        if ($loggedOut !== 0) {
+//            this.mTouched = wfTimestamp(TS_MW, $loggedOut);
 //        } else {
-//            $this->mTouched = '1'; # Allow any pages to be cached
+//            this.mTouched = '1'; # Allow any pages to be cached
 //        }
 //
-//        $this->mToken = null; // Don't run cryptographic functions till we need a token
-//        $this->mEmailAuthenticated = null;
-//        $this->mEmailToken = '';
-//        $this->mEmailTokenExpires = null;
-//        $this->mRegistration = wfTimestamp( TS_MW );
-//        $this->mGroupMemberships = [];
+//        this.mToken = null; // Don't run cryptographic functions till we need a token
+//        this.mEmailAuthenticated = null;
+//        this.mEmailToken = '';
+//        this.mEmailTokenExpires = null;
+//        this.mRegistration = wfTimestamp(TS_MW);
+//        this.mGroupMemberships = [];
 //
-//        Hooks::run( 'UserLoadDefaults', [ $this, $name ] );
+//        Hooks::run('UserLoadDefaults', [ $this, $name ]);
 //    }
 //
 //    /**
@@ -1327,9 +1334,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *   for optimisation)
 //     * @return bool
 //     */
-//    public function isItemLoaded( $item, $all = 'all' ) {
-//        return ( $this->mLoadedItems === true && $all === 'all' ) ||
-//            ( isset( $this->mLoadedItems[$item] ) && $this->mLoadedItems[$item] === true );
+//    public function isItemLoaded($item, $all = 'all') {
+//        return (this.mLoadedItems === true && $all === 'all') ||
+//            (isset(this.mLoadedItems[$item]) && this.mLoadedItems[$item] === true);
 //    }
 //
 //    /**
@@ -1337,9 +1344,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @param string $item
 //     */
-//    protected function setItemLoaded( $item ) {
-//        if ( is_array( $this->mLoadedItems ) ) {
-//            $this->mLoadedItems[$item] = true;
+//    protected function setItemLoaded($item) {
+//        if (is_array(this.mLoadedItems)) {
+//            this.mLoadedItems[$item] = true;
 //        }
 //    }
 //
@@ -1351,28 +1358,28 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    private function loadFromSession() {
 //        // Deprecated hook
 //        $result = null;
-//        Hooks::run( 'UserLoadFromSession', [ $this, &$result ], '1.27' );
-//        if ( $result !== null ) {
+//        Hooks::run('UserLoadFromSession', [ $this, &$result ], '1.27');
+//        if ($result !== null) {
 //            return $result;
 //        }
 //
 //        // MediaWiki\Session\Session already did the necessary authentication of the user
 //        // returned here, so just use it if applicable.
-//        $session = $this->getRequest()->getSession();
-//        $user = $session->getUser();
-//        if ( $user->isLoggedIn() ) {
-//            $this->loadFromUserObject( $user );
-//            if ( $user->isBlocked() ) {
+//        $session = this.getRequest().getSession();
+//        $user = $session.getUser();
+//        if ($user.isLoggedIn()) {
+//            this.loadFromUserObject($user);
+//            if ($user.isBlocked()) {
 //                // If this user is autoblocked, set a cookie to track the Block. This has to be done on
 //                // every session load, because an autoblocked editor might not edit again from the same
 //                // IP address after being blocked.
-//                $this->trackBlockWithCookie();
+//                this.trackBlockWithCookie();
 //            }
 //
 //            // Other code expects these to be set in the session, so set them.
-//            $session->set( 'wsUserID', $this->getId() );
-//            $session->set( 'wsUserName', $this->getName() );
-//            $session->set( 'wsToken', $this->getToken() );
+//            $session.set('wsUserID', this.getId());
+//            $session.set('wsUserName', this.getName());
+//            $session.set('wsToken', this.getToken());
 //
 //            return true;
 //        }
@@ -1384,59 +1391,59 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * Set the 'BlockID' cookie depending on block type and user authentication status.
 //     */
 //    public function trackBlockWithCookie() {
-//        $block = $this->getBlock();
+//        $block = this.getBlock();
 //
-//        if ( $block && $this->getRequest()->getCookie( 'BlockID' ) === null
-//            && $block->shouldTrackWithCookie( $this->isAnon() )
+//        if ($block && this.getRequest().getCookie('BlockID') === null
+//            && $block.shouldTrackWithCookie(this.isAnon())
 //		) {
-//            $block->setCookie( $this->getRequest()->response() );
+//            $block.setCookie(this.getRequest().response());
 //        }
 //    }
 //
 //    /**
 //     * Load user and user_group data from the database.
-//     * $this->mId must be set, this is how the user is identified.
+//     * this.mId must be set, this is how the user is identified.
 //     *
 //     * @param int $flags User::READ_* constant bitfield
 //     * @return bool True if the user exists, false if the user is anonymous
 //     */
-//    public function loadFromDatabase( $flags = self::READ_LATEST ) {
+//    public function loadFromDatabase($flags = self::READ_LATEST) {
 //        // Paranoia
-//        $this->mId = intval( $this->mId );
+//        this.mId = intval(this.mId);
 //
-//        if ( !$this->mId ) {
+//        if (!this.mId) {
 //            // Anonymous users are not in the database
-//            $this->loadDefaults();
+//            this.loadDefaults();
 //            return false;
 //        }
 //
-//        list( $index, $options ) = DBAccessObjectUtils::getDBOptions( $flags );
-//        $db = wfGetDB( $index );
+//        list($index, $options) = DBAccessObjectUtils::getDBOptions($flags);
+//        $db = wfGetDB($index);
 //
 //        $userQuery = self::getQueryInfo();
-//        $s = $db->selectRow(
+//        $s = $db.selectRow(
 //            $userQuery['tables'],
 //            $userQuery['fields'],
-//            [ 'user_id' => $this->mId ],
+//            [ 'user_id' => this.mId ],
 //        __METHOD__,
 //            $options,
 //            $userQuery['joins']
 //		);
 //
-//        $this->queryFlagsUsed = $flags;
-//        Hooks::run( 'UserLoadFromDatabase', [ $this, &$s ] );
+//        this.queryFlagsUsed = $flags;
+//        Hooks::run('UserLoadFromDatabase', [ $this, &$s ]);
 //
-//        if ( $s !== false ) {
+//        if ($s !== false) {
 //            // Initialise user table data
-//            $this->loadFromRow( $s );
-//            $this->mGroupMemberships = null; // deferred
-//            $this->getEditCount(); // revalidation for nulls
+//            this.loadFromRow($s);
+//            this.mGroupMemberships = null; // deferred
+//            this.getEditCount(); // revalidation for nulls
 //            return true;
 //        }
 //
 //        // Invalid user_id
-//        $this->mId = 0;
-//        $this->loadDefaults();
+//        this.mId = 0;
+//        this.loadDefaults();
 //
 //        return false;
 //    }
@@ -1453,115 +1460,115 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *                strings is ignored.
 //     *  user_properties   Array with properties out of the user_properties table
 //     */
-//    protected function loadFromRow( $row, $data = null ) {
+//    protected function loadFromRow($row, $data = null) {
 //        global $wgActorTableSchemaMigrationStage;
 //
-//        if ( !is_object( $row ) ) {
-//            throw new InvalidArgumentException( '$row must be an object' );
+//        if (!is_object($row)) {
+//            throw new InvalidArgumentException('$row must be an object');
 //        }
 //
 //        $all = true;
 //
-//        $this->mGroupMemberships = null; // deferred
+//        this.mGroupMemberships = null; // deferred
 //
 //        // Technically we shouldn't allow this without SCHEMA_COMPAT_READ_NEW,
 //        // but it does little harm and might be needed for write callers loading a User.
-//        if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_NEW ) {
-//            if ( isset( $row->actor_id ) ) {
-//                $this->mActorId = (int)$row->actor_id;
-//                if ( $this->mActorId !== 0 ) {
-//                    $this->mFrom = 'actor';
+//        if ($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_NEW) {
+//            if (isset($row.actor_id)) {
+//                this.mActorId = (int)$row.actor_id;
+//                if (this.mActorId !== 0) {
+//                    this.mFrom = 'actor';
 //                }
-//                $this->setItemLoaded( 'actor' );
+//                this.setItemLoaded('actor');
 //            } else {
 //                $all = false;
 //            }
 //        }
 //
-//        if ( isset( $row->user_name ) && $row->user_name !== '' ) {
-//            $this->mName = $row->user_name;
-//            $this->mFrom = 'name';
-//            $this->setItemLoaded( 'name' );
+//        if (isset($row.user_name) && $row.user_name !== '') {
+//            this.mName = $row.user_name;
+//            this.mFrom = 'name';
+//            this.setItemLoaded('name');
 //        } else {
 //            $all = false;
 //        }
 //
-//        if ( isset( $row->user_real_name ) ) {
-//            $this->mRealName = $row->user_real_name;
-//            $this->setItemLoaded( 'realname' );
+//        if (isset($row.user_real_name)) {
+//            this.mRealName = $row.user_real_name;
+//            this.setItemLoaded('realname');
 //        } else {
 //            $all = false;
 //        }
 //
-//        if ( isset( $row->user_id ) ) {
-//            $this->mId = intval( $row->user_id );
-//            if ( $this->mId !== 0 ) {
-//                $this->mFrom = 'id';
+//        if (isset($row.user_id)) {
+//            this.mId = intval($row.user_id);
+//            if (this.mId !== 0) {
+//                this.mFrom = 'id';
 //            }
-//            $this->setItemLoaded( 'id' );
+//            this.setItemLoaded('id');
 //        } else {
 //            $all = false;
 //        }
 //
-//        if ( isset( $row->user_id ) && isset( $row->user_name ) && $row->user_name !== '' ) {
-//            self::$idCacheByName[$row->user_name] = $row->user_id;
+//        if (isset($row.user_id) && isset($row.user_name) && $row.user_name !== '') {
+//            self::$idCacheByName[$row.user_name] = $row.user_id;
 //        }
 //
-//        if ( isset( $row->user_editcount ) ) {
-//            $this->mEditCount = $row->user_editcount;
+//        if (isset($row.user_editcount)) {
+//            this.mEditCount = $row.user_editcount;
 //        } else {
 //            $all = false;
 //        }
 //
-//        if ( isset( $row->user_touched ) ) {
-//            $this->mTouched = wfTimestamp( TS_MW, $row->user_touched );
+//        if (isset($row.user_touched)) {
+//            this.mTouched = wfTimestamp(TS_MW, $row.user_touched);
 //        } else {
 //            $all = false;
 //        }
 //
-//        if ( isset( $row->user_token ) ) {
+//        if (isset($row.user_token)) {
 //            // The definition for the column is binary(32), so trim the NULs
 //            // that appends. The previous definition was char(32), so trim
 //            // spaces too.
-//            $this->mToken = rtrim( $row->user_token, " \0" );
-//            if ( $this->mToken === '' ) {
-//                $this->mToken = null;
+//            this.mToken = rtrim($row.user_token, " \0");
+//            if (this.mToken === '') {
+//                this.mToken = null;
 //            }
 //        } else {
 //            $all = false;
 //        }
 //
-//        if ( isset( $row->user_email ) ) {
-//            $this->mEmail = $row->user_email;
-//            $this->mEmailAuthenticated = wfTimestampOrNull( TS_MW, $row->user_email_authenticated );
-//            $this->mEmailToken = $row->user_email_token;
-//            $this->mEmailTokenExpires = wfTimestampOrNull( TS_MW, $row->user_email_token_expires );
-//            $this->mRegistration = wfTimestampOrNull( TS_MW, $row->user_registration );
+//        if (isset($row.user_email)) {
+//            this.mEmail = $row.user_email;
+//            this.mEmailAuthenticated = wfTimestampOrNull(TS_MW, $row.user_email_authenticated);
+//            this.mEmailToken = $row.user_email_token;
+//            this.mEmailTokenExpires = wfTimestampOrNull(TS_MW, $row.user_email_token_expires);
+//            this.mRegistration = wfTimestampOrNull(TS_MW, $row.user_registration);
 //        } else {
 //            $all = false;
 //        }
 //
-//        if ( $all ) {
-//            $this->mLoadedItems = true;
+//        if ($all) {
+//            this.mLoadedItems = true;
 //        }
 //
-//        if ( is_array( $data ) ) {
-//            if ( isset( $data['user_groups'] ) && is_array( $data['user_groups'] ) ) {
-//                if ( $data['user_groups'] === [] ) {
-//                    $this->mGroupMemberships = [];
+//        if (is_array($data)) {
+//            if (isset($data['user_groups']) && is_array($data['user_groups'])) {
+//                if ($data['user_groups'] === []) {
+//                    this.mGroupMemberships = [];
 //                } else {
-//                    $firstGroup = reset( $data['user_groups'] );
-//                    if ( is_array( $firstGroup ) || is_object( $firstGroup ) ) {
-//                        $this->mGroupMemberships = [];
-//                        foreach ( $data['user_groups'] as $row ) {
-//                            $ugm = UserGroupMembership::newFromRow( (object)$row );
-//                            $this->mGroupMemberships[$ugm->getGroup()] = $ugm;
+//                    $firstGroup = reset($data['user_groups']);
+//                    if (is_array($firstGroup) || is_object($firstGroup)) {
+//                        this.mGroupMemberships = [];
+//                        foreach ($data['user_groups'] as $row) {
+//                            $ugm = UserGroupMembership::newFromRow((object)$row);
+//                            this.mGroupMemberships[$ugm.getGroup()] = $ugm;
 //                        }
 //                    }
 //                }
 //            }
-//            if ( isset( $data['user_properties'] ) && is_array( $data['user_properties'] ) ) {
-//                $this->loadOptions( $data['user_properties'] );
+//            if (isset($data['user_properties']) && is_array($data['user_properties'])) {
+//                this.loadOptions($data['user_properties']);
 //            }
 //        }
 //    }
@@ -1571,10 +1578,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @param User $user
 //     */
-//    protected function loadFromUserObject( $user ) {
-//        $user->load();
-//        foreach ( self::$mCacheVars as $var ) {
-//            $this->$var = $user->$var;
+//    protected function loadFromUserObject($user) {
+//        $user.load();
+//        foreach (self::$mCacheVars as $var) {
+//            this.$var = $user.$var;
 //        }
 //    }
 //
@@ -1582,12 +1589,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * Load the groups from the database if they aren't already loaded.
 //     */
 //    private function loadGroups() {
-//        if ( is_null( $this->mGroupMemberships ) ) {
-//            $db = ( $this->queryFlagsUsed & self::READ_LATEST )
-//                ? wfGetDB( DB_MASTER )
-//                : wfGetDB( DB_REPLICA );
-//            $this->mGroupMemberships = UserGroupMembership::getMembershipsForUser(
-//                $this->mId, $db );
+//        if (is_null(this.mGroupMemberships)) {
+//            $db = (this.queryFlagsUsed & self::READ_LATEST)
+//                ? wfGetDB(DB_MASTER)
+//                : wfGetDB(DB_REPLICA);
+//            this.mGroupMemberships = UserGroupMembership::getMembershipsForUser(
+//                this.mId, $db);
 //        }
 //    }
 //
@@ -1605,43 +1612,43 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @see $wgAutopromoteOnce
 //     */
-//    public function addAutopromoteOnceGroups( $event ) {
+//    public function addAutopromoteOnceGroups($event) {
 //        global $wgAutopromoteOnceLogInRC;
 //
-//        if ( wfReadOnly() || !$this->getId() ) {
+//        if (wfReadOnly() || !this.getId()) {
 //            return [];
 //        }
 //
-//        $toPromote = Autopromote::getAutopromoteOnceGroups( $this, $event );
-//        if ( $toPromote === [] ) {
+//        $toPromote = Autopromote::getAutopromoteOnceGroups($this, $event);
+//        if ($toPromote === []) {
 //            return [];
 //        }
 //
-//        if ( !$this->checkAndSetTouched() ) {
+//        if (!this.checkAndSetTouched()) {
 //            return []; // raced out (bug T48834)
 //        }
 //
-//        $oldGroups = $this->getGroups(); // previous groups
-//        $oldUGMs = $this->getGroupMemberships();
-//        foreach ( $toPromote as $group ) {
-//            $this->addGroup( $group );
+//        $oldGroups = this.getGroups(); // previous groups
+//        $oldUGMs = this.getGroupMemberships();
+//        foreach ($toPromote as $group) {
+//            this.addGroup($group);
 //        }
-//        $newGroups = array_merge( $oldGroups, $toPromote ); // all groups
-//        $newUGMs = $this->getGroupMemberships();
+//        $newGroups = array_merge($oldGroups, $toPromote); // all groups
+//        $newUGMs = this.getGroupMemberships();
 //
 //        // update groups in external authentication database
-//        Hooks::run( 'UserGroupsChanged', [ $this, $toPromote, [], false, false, $oldUGMs, $newUGMs ] );
+//        Hooks::run('UserGroupsChanged', [ $this, $toPromote, [], false, false, $oldUGMs, $newUGMs ]);
 //
-//        $logEntry = new ManualLogEntry( 'rights', 'autopromote' );
-//        $logEntry->setPerformer( $this );
-//        $logEntry->setTarget( $this->getUserPage() );
-//        $logEntry->setParameters( [
+//        $logEntry = new ManualLogEntry('rights', 'autopromote');
+//        $logEntry.setPerformer($this);
+//        $logEntry.setTarget(this.getUserPage());
+//        $logEntry.setParameters([
 //            '4::oldgroups' => $oldGroups,
 //            '5::newgroups' => $newGroups,
-//		] );
-//        $logid = $logEntry->insert();
-//        if ( $wgAutopromoteOnceLogInRC ) {
-//            $logEntry->publish( $logid );
+//		]);
+//        $logid = $logEntry.insert();
+//        if ($wgAutopromoteOnceLogInRC) {
+//            $logEntry.publish($logid);
 //        }
 //
 //        return $toPromote;
@@ -1650,16 +1657,16 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    /**
 //     * Builds update conditions. Additional conditions may be added to $conditions to
 //     * protected against race conditions using a compare-and-set (CAS) mechanism
-//     * based on comparing $this->mTouched with the user_touched field.
+//     * based on comparing this.mTouched with the user_touched field.
 //     *
 //     * @param IDatabase $db
 //     * @param array $conditions WHERE conditions for use with Database::update
 //     * @return array WHERE conditions for use with Database::update
 //     */
-//    protected function makeUpdateConditions( IDatabase $db, array $conditions ) {
-//        if ( $this->mTouched ) {
+//    protected function makeUpdateConditions(IDatabase $db, array $conditions) {
+//        if (this.mTouched) {
 //            // CAS check: only update if the row wasn't changed sicne it was loaded.
-//            $conditions['user_touched'] = $db->timestamp( $this->mTouched );
+//            $conditions['user_touched'] = $db.timestamp(this.mTouched);
 //        }
 //
 //        return $conditions;
@@ -1675,31 +1682,31 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @since 1.26
 //     */
 //    protected function checkAndSetTouched() {
-//        $this->load();
+//        this.load();
 //
-//        if ( !$this->mId ) {
+//        if (!this.mId) {
 //            return false; // anon
 //        }
 //
 //        // Get a new user_touched that is higher than the old one
-//        $newTouched = $this->newTouchedTimestamp();
+//        $newTouched = this.newTouchedTimestamp();
 //
-//        $dbw = wfGetDB( DB_MASTER );
-//        $dbw->update( 'user',
-//            [ 'user_touched' => $dbw->timestamp( $newTouched ) ],
-//        $this->makeUpdateConditions( $dbw, [
-//            'user_id' => $this->mId,
-//			] ),
+//        $dbw = wfGetDB(DB_MASTER);
+//        $dbw.update('user',
+//            [ 'user_touched' => $dbw.timestamp($newTouched) ],
+//        this.makeUpdateConditions($dbw, [
+//            'user_id' => this.mId,
+//			]),
 //        __METHOD__
 //		);
-//        $success = ( $dbw->affectedRows() > 0 );
+//        $success = ($dbw.affectedRows() > 0);
 //
-//        if ( $success ) {
-//            $this->mTouched = $newTouched;
-//            $this->clearSharedCache();
+//        if ($success) {
+//            this.mTouched = $newTouched;
+//            this.clearSharedCache();
 //        } else {
 //            // Clears on failure too since that is desired if the cache is stale
-//            $this->clearSharedCache( 'refresh' );
+//            this.clearSharedCache('refresh');
 //        }
 //
 //        return $success;
@@ -1712,22 +1719,22 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param bool|string $reloadFrom Reload user and user_groups table data from a
 //     *   given source. May be "name", "id", "actor", "defaults", "session", or false for no reload.
 //     */
-//    public function clearInstanceCache( $reloadFrom = false ) {
-//        $this->mNewtalk = -1;
-//        $this->mDatePreference = null;
-//        $this->mBlockedby = -1; # Unset
-//        $this->mHash = false;
-//        $this->mRights = null;
-//        $this->mEffectiveGroups = null;
-//        $this->mImplicitGroups = null;
-//        $this->mGroupMemberships = null;
-//        $this->mOptions = null;
-//        $this->mOptionsLoaded = false;
-//        $this->mEditCount = null;
+//    public function clearInstanceCache($reloadFrom = false) {
+//        this.mNewtalk = -1;
+//        this.mDatePreference = null;
+//        this.mBlockedby = -1; # Unset
+//        this.mHash = false;
+//        this.mRights = null;
+//        this.mEffectiveGroups = null;
+//        this.mImplicitGroups = null;
+//        this.mGroupMemberships = null;
+//        this.mOptions = null;
+//        this.mOptionsLoaded = false;
+//        this.mEditCount = null;
 //
-//        if ( $reloadFrom ) {
-//            $this->mLoadedItems = [];
-//            $this->mFrom = $reloadFrom;
+//        if ($reloadFrom) {
+//            this.mLoadedItems = [];
+//            this.mFrom = $reloadFrom;
 //        }
 //    }
 //
@@ -1743,22 +1750,21 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * regularly changes wiki configuration.
 //     */
 //    public static function resetGetDefaultOptionsForTestsOnly() {
-//        Assert::invariant( defined( 'MW_PHPUNIT_TEST' ), 'Unit tests only' );
+//        Assert::invariant(defined('MW_PHPUNIT_TEST'), 'Unit tests only');
 //        self::$defOpt = null;
 //        self::$defOptLang = null;
 //    }
-//
-//    /**
-//     * Combine the language default options with any site-specific options
-//     * and add the default language variants.
-//     *
-//     * @return array Array of String options
-//     */
-//    public static function getDefaultOptions() {
-//        global $wgNamespacesToBeSearchedDefault, $wgDefaultUserOptions, $wgDefaultSkin;
-//
-//        $contLang = MediaWikiServices::getInstance()->getContentLanguage();
-//        if ( self::$defOpt !== null && self::$defOptLang === $contLang->getCode() ) {
+
+    /**
+     * Combine the language default options with any site-specific options
+     * and add the default language variants.
+     *
+     * @return array Array of String options
+     */
+    // global $wgNamespacesToBeSearchedDefault, $wgDefaultUserOptions, $wgDefaultSkin;
+    public static XophpArray getDefaultOptions() {
+//        $contLang = MediaWikiServices::getInstance().getContentLanguage();
+//        if (self::$defOpt !== null && self::$defOptLang === $contLang.getCode()) {
 //            // The content language does not change (and should not change) mid-request, but the
 //            // unit tests change it anyway, and expect this method to return values relevant to the
 //            // current content language.
@@ -1767,10 +1773,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //
 //        self::$defOpt = $wgDefaultUserOptions;
 //        // Default language setting
-//        self::$defOptLang = $contLang->getCode();
+//        self::$defOptLang = $contLang.getCode();
 //        self::$defOpt['language'] = self::$defOptLang;
-//        foreach ( LanguageConverter::$languagesWithVariants as $langCode ) {
-//            if ( $langCode === $contLang->getCode() ) {
+//        foreach (LanguageConverter::$languagesWithVariants as $langCode) {
+//            if ($langCode === $contLang.getCode()) {
 //                self::$defOpt['variant'] = $langCode;
 //            } else {
 //                self::$defOpt["variant-$langCode"] = $langCode;
@@ -1780,23 +1786,24 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        // NOTE: don't use SearchEngineConfig::getSearchableNamespaces here,
 //        // since extensions may change the set of searchable namespaces depending
 //        // on user groups/permissions.
-//        foreach ( $wgNamespacesToBeSearchedDefault as $nsnum => $val ) {
+//        foreach ($wgNamespacesToBeSearchedDefault as $nsnum => $val) {
 //            self::$defOpt['searchNs' . $nsnum] = (bool)$val;
 //        }
-//        self::$defOpt['skin'] = Skin::normalizeKey( $wgDefaultSkin );
+//        self::$defOpt['skin'] = Skin::normalizeKey($wgDefaultSkin);
 //
-//        Hooks::run( 'UserGetDefaultOptions', [ &self::$defOpt ] );
+//        Hooks::run('UserGetDefaultOptions', [ &self::$defOpt ]);
 //
 //        return self::$defOpt;
-//    }
-//
+        return null;
+    }
+
 //    /**
 //     * Get a given default option value.
 //     *
 //     * @param string $opt Name of option to retrieve
 //     * @return string Default option value
 //     */
-//    public static function getDefaultOption( $opt ) {
+//    public static function getDefaultOption($opt) {
 //        $defOpts = self::getDefaultOptions();
 //        return $defOpts[$opt] ?? null;
 //    }
@@ -1807,115 +1814,115 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *   To improve performance, non-critical checks are done against replica DBs.
 //     *   Check when actually saving should be done against master.
 //     */
-//    private function getBlockedStatus( $fromReplica = true ) {
+//    private function getBlockedStatus($fromReplica = true) {
 //        global $wgProxyWhitelist, $wgApplyIpBlocksToXff, $wgSoftBlockRanges;
 //
-//        if ( $this->mBlockedby != -1 ) {
+//        if (this.mBlockedby != -1) {
 //            return;
 //        }
 //
-//        wfDebug( __METHOD__ . ": checking...\n" );
+//        wfDebug(__METHOD__ . ": checking...\n");
 //
 //        // Initialize data...
-//        // Otherwise something ends up stomping on $this->mBlockedby when
+//        // Otherwise something ends up stomping on this.mBlockedby when
 //        // things get lazy-loaded later, causing false positive block hits
 //        // due to -1 !== 0. Probably session-related... Nothing should be
 //        // overwriting mBlockedby, surely?
-//        $this->load();
+//        this.load();
 //
 //		# We only need to worry about passing the IP address to the Block generator if the
 //		# user is not immune to autoblocks/hardblocks, and they are the current user so we
 //		# know which IP address they're actually coming from
 //        $ip = null;
-//        $sessionUser = RequestContext::getMain()->getUser();
+//        $sessionUser = RequestContext::getMain().getUser();
 //        // the session user is set up towards the end of Setup.php. Until then,
 //        // assume it's a logged-out user.
-//        $globalUserName = $sessionUser->isSafeToLoad()
-//            ? $sessionUser->getName()
-//            : IP::sanitizeIP( $sessionUser->getRequest()->getIP() );
-//        if ( $this->getName() === $globalUserName && !$this->isAllowed( 'ipblock-exempt' ) ) {
-//            $ip = $this->getRequest()->getIP();
+//        $globalUserName = $sessionUser.isSafeToLoad()
+//            ? $sessionUser.getName()
+//            : IP::sanitizeIP($sessionUser.getRequest().getIP());
+//        if (this.getName() === $globalUserName && !this.isAllowed('ipblock-exempt')) {
+//            $ip = this.getRequest().getIP();
 //        }
 //
 //        // User/IP blocking
-//        $block = Block::newFromTarget( $this, $ip, !$fromReplica );
+//        $block = Block::newFromTarget($this, $ip, !$fromReplica);
 //
 //        // Cookie blocking
-//        if ( !$block instanceof Block ) {
-//            $block = $this->getBlockFromCookieValue( $this->getRequest()->getCookie( 'BlockID' ) );
+//        if (!$block instanceof Block) {
+//            $block = this.getBlockFromCookieValue(this.getRequest().getCookie('BlockID'));
 //        }
 //
 //        // Proxy blocking
-//        if ( !$block instanceof Block && $ip !== null && !in_array( $ip, $wgProxyWhitelist ) ) {
+//        if (!$block instanceof Block && $ip !== null && !in_array($ip, $wgProxyWhitelist)) {
 //            // Local list
-//            if ( self::isLocallyBlockedProxy( $ip ) ) {
-//                $block = new Block( [
-//                    'byText' => wfMessage( 'proxyblocker' )->text(),
-//                    'reason' => wfMessage( 'proxyblockreason' )->plain(),
+//            if (self::isLocallyBlockedProxy($ip)) {
+//                $block = new Block([
+//                    'byText' => wfMessage('proxyblocker').text(),
+//                    'reason' => wfMessage('proxyblockreason').plain(),
 //                    'address' => $ip,
 //                    'systemBlock' => 'proxy',
-//				] );
-//            } elseif ( $this->isAnon() && $this->isDnsBlacklisted( $ip ) ) {
-//                $block = new Block( [
-//                    'byText' => wfMessage( 'sorbs' )->text(),
-//                    'reason' => wfMessage( 'sorbsreason' )->plain(),
+//				]);
+//            } elseif (this.isAnon() && this.isDnsBlacklisted($ip)) {
+//                $block = new Block([
+//                    'byText' => wfMessage('sorbs').text(),
+//                    'reason' => wfMessage('sorbsreason').plain(),
 //                    'address' => $ip,
 //                    'systemBlock' => 'dnsbl',
-//				] );
+//				]);
 //            }
 //        }
 //
 //        // (T25343) Apply IP blocks to the contents of XFF headers, if enabled
-//        if ( !$block instanceof Block
+//        if (!$block instanceof Block
 //            && $wgApplyIpBlocksToXff
 //            && $ip !== null
-//            && !in_array( $ip, $wgProxyWhitelist )
-//        ) {
-//            $xff = $this->getRequest()->getHeader( 'X-Forwarded-For' );
-//            $xff = array_map( 'trim', explode( ',', $xff ) );
-//            $xff = array_diff( $xff, [ $ip ] );
-//            $xffblocks = Block::getBlocksForIPList( $xff, $this->isAnon(), !$fromReplica );
-//            $block = Block::chooseBlock( $xffblocks, $xff );
-//            if ( $block instanceof Block ) {
+//            && !in_array($ip, $wgProxyWhitelist)
+//       ) {
+//            $xff = this.getRequest().getHeader('X-Forwarded-For');
+//            $xff = array_map('trim', explode(',', $xff));
+//            $xff = array_diff($xff, [ $ip ]);
+//            $xffblocks = Block::getBlocksForIPList($xff, this.isAnon(), !$fromReplica);
+//            $block = Block::chooseBlock($xffblocks, $xff);
+//            if ($block instanceof Block) {
 //				# Mangle the reason to alert the user that the block
 //				# originated from matching the X-Forwarded-For header.
-//                    $block->setReason( wfMessage( 'xffblockreason', $block->getReason() )->plain() );
+//                    $block.setReason(wfMessage('xffblockreason', $block.getReason()).plain());
 //            }
 //        }
 //
-//        if ( !$block instanceof Block
+//        if (!$block instanceof Block
 //            && $ip !== null
-//            && $this->isAnon()
-//            && IP::isInRanges( $ip, $wgSoftBlockRanges )
+//            && this.isAnon()
+//            && IP::isInRanges($ip, $wgSoftBlockRanges)
 //		) {
-//            $block = new Block( [
+//            $block = new Block([
 //                'address' => $ip,
 //                'byText' => 'MediaWiki default',
-//                'reason' => wfMessage( 'softblockrangesreason', $ip )->plain(),
+//                'reason' => wfMessage('softblockrangesreason', $ip).plain(),
 //                'anonOnly' => true,
 //                'systemBlock' => 'wgSoftBlockRanges',
-//			] );
+//			]);
 //        }
 //
-//        if ( $block instanceof Block ) {
-//            wfDebug( __METHOD__ . ": Found block.\n" );
-//            $this->mBlock = $block;
-//            $this->mBlockedby = $block->getByName();
-//            $this->mBlockreason = $block->getReason();
-//            $this->mHideName = $block->getHideName();
-//            $this->mAllowUsertalk = $block->isUsertalkEditAllowed();
+//        if ($block instanceof Block) {
+//            wfDebug(__METHOD__ . ": Found block.\n");
+//            this.mBlock = $block;
+//            this.mBlockedby = $block.getByName();
+//            this.mBlockreason = $block.getReason();
+//            this.mHideName = $block.getHideName();
+//            this.mAllowUsertalk = $block.isUsertalkEditAllowed();
 //        } else {
-//            $this->mBlock = null;
-//            $this->mBlockedby = '';
-//            $this->mBlockreason = '';
-//            $this->mHideName = 0;
-//            $this->mAllowUsertalk = false;
+//            this.mBlock = null;
+//            this.mBlockedby = '';
+//            this.mBlockreason = '';
+//            this.mHideName = 0;
+//            this.mAllowUsertalk = false;
 //        }
 //
 //        // Avoid PHP 7.1 warning of passing $this by reference
 //        $thisUser = $this;
 //        // Extensions
-//        Hooks::run( 'GetBlockedStatus', [ &$thisUser ] );
+//        Hooks::run('GetBlockedStatus', [ &$thisUser ]);
 //    }
 //
 //    /**
@@ -1923,45 +1930,45 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string|null $blockCookieVal The cookie value to check.
 //     * @return Block|bool The Block object, or false if none could be loaded.
 //     */
-//    protected function getBlockFromCookieValue( $blockCookieVal ) {
+//    protected function getBlockFromCookieValue($blockCookieVal) {
 //        // Make sure there's something to check. The cookie value must start with a number.
-//        if ( strlen( $blockCookieVal ) < 1 || !is_numeric( substr( $blockCookieVal, 0, 1 ) ) ) {
+//        if (strlen($blockCookieVal) < 1 || !is_numeric(substr($blockCookieVal, 0, 1))) {
 //            return false;
 //        }
 //        // Load the Block from the ID in the cookie.
-//        $blockCookieId = Block::getIdFromCookieValue( $blockCookieVal );
-//        if ( $blockCookieId !== null ) {
+//        $blockCookieId = Block::getIdFromCookieValue($blockCookieVal);
+//        if ($blockCookieId !== null) {
 //            // An ID was found in the cookie.
-//            $tmpBlock = Block::newFromID( $blockCookieId );
-//            if ( $tmpBlock instanceof Block ) {
-//                $config = RequestContext::getMain()->getConfig();
+//            $tmpBlock = Block::newFromID($blockCookieId);
+//            if ($tmpBlock instanceof Block) {
+//                $config = RequestContext::getMain().getConfig();
 //
-//                switch ( $tmpBlock->getType() ) {
+//                switch ($tmpBlock.getType()) {
 //                    case Block::TYPE_USER:
-//                        $blockIsValid = !$tmpBlock->isExpired() && $tmpBlock->isAutoblocking();
-//                        $useBlockCookie = ( $config->get( 'CookieSetOnAutoblock' ) === true );
+//                        $blockIsValid = !$tmpBlock.isExpired() && $tmpBlock.isAutoblocking();
+//                        $useBlockCookie = ($config.get('CookieSetOnAutoblock') === true);
 //                        break;
 //                    case Block::TYPE_IP:
 //                    case Block::TYPE_RANGE:
 //                        // If block is type IP or IP range, load only if user is not logged in (T152462)
-//                        $blockIsValid = !$tmpBlock->isExpired() && !$this->isLoggedIn();
-//                        $useBlockCookie = ( $config->get( 'CookieSetOnIpBlock' ) === true );
+//                        $blockIsValid = !$tmpBlock.isExpired() && !this.isLoggedIn();
+//                        $useBlockCookie = ($config.get('CookieSetOnIpBlock') === true);
 //                        break;
 //                    default:
 //                        $blockIsValid = false;
 //                        $useBlockCookie = false;
 //                }
 //
-//                if ( $blockIsValid && $useBlockCookie ) {
+//                if ($blockIsValid && $useBlockCookie) {
 //                    // Use the block.
 //                    return $tmpBlock;
 //                }
 //
 //                // If the block is not valid, remove the cookie.
-//                Block::clearCookie( $this->getRequest()->response() );
+//                Block::clearCookie(this.getRequest().response());
 //            } else {
 //                // If the block doesn't exist, remove the cookie.
-//                Block::clearCookie( $this->getRequest()->response() );
+//                Block::clearCookie(this.getRequest().response());
 //            }
 //        }
 //        return false;
@@ -1974,16 +1981,16 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param bool $checkWhitelist Whether to check the whitelist first
 //     * @return bool True if blacklisted.
 //     */
-//    public function isDnsBlacklisted( $ip, $checkWhitelist = false ) {
+//    public function isDnsBlacklisted($ip, $checkWhitelist = false) {
 //        global $wgEnableDnsBlacklist, $wgDnsBlacklistUrls, $wgProxyWhitelist;
 //
-//        if ( !$wgEnableDnsBlacklist ||
-//            ( $checkWhitelist && in_array( $ip, $wgProxyWhitelist ) )
-//        ) {
+//        if (!$wgEnableDnsBlacklist ||
+//            ($checkWhitelist && in_array($ip, $wgProxyWhitelist))
+//       ) {
 //            return false;
 //        }
 //
-//        return $this->inDnsBlacklist( $ip, $wgDnsBlacklistUrls );
+//        return this.inDnsBlacklist($ip, $wgDnsBlacklistUrls);
 //    }
 //
 //    /**
@@ -1993,19 +2000,19 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string|array $bases Array of Strings: URL of the DNS blacklist
 //     * @return bool True if blacklisted.
 //     */
-//    public function inDnsBlacklist( $ip, $bases ) {
+//    public function inDnsBlacklist($ip, $bases) {
 //        $found = false;
 //        // @todo FIXME: IPv6 ???  (https://bugs.php.net/bug.php?id=33170)
-//        if ( IP::isIPv4( $ip ) ) {
+//        if (IP::isIPv4($ip)) {
 //            // Reverse IP, T23255
-//            $ipReversed = implode( '.', array_reverse( explode( '.', $ip ) ) );
+//            $ipReversed = implode('.', array_reverse(explode('.', $ip)));
 //
-//            foreach ( (array)$bases as $base ) {
+//            foreach ((array)$bases as $base) {
 //                // Make hostname
 //                // If we have an access key, use that too (ProjectHoneypot, etc.)
 //                $basename = $base;
-//                if ( is_array( $base ) ) {
-//                    if ( count( $base ) >= 2 ) {
+//                if (is_array($base)) {
+//                    if (count($base) >= 2) {
 //                        // Access key is 1, base URL is 0
 //                        $host = "{$base[1]}.$ipReversed.{$base[0]}";
 //                    } else {
@@ -2017,15 +2024,15 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //                }
 //
 //                // Send query
-//                $ipList = gethostbynamel( $host );
+//                $ipList = gethostbynamel($host);
 //
-//                if ( $ipList ) {
-//                    wfDebugLog( 'dnsblacklist', "Hostname $host is {$ipList[0]}, it's a proxy says $basename!" );
+//                if ($ipList) {
+//                    wfDebugLog('dnsblacklist', "Hostname $host is {$ipList[0]}, it's a proxy says $basename!");
 //                    $found = true;
 //                    break;
 //                }
 //
-//                wfDebugLog( 'dnsblacklist', "Requested $host, not found in $basename." );
+//                wfDebugLog('dnsblacklist', "Requested $host, not found in $basename.");
 //            }
 //        }
 //
@@ -2039,29 +2046,29 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @return bool
 //     */
-//    public static function isLocallyBlockedProxy( $ip ) {
+//    public static function isLocallyBlockedProxy($ip) {
 //        global $wgProxyList;
 //
-//        if ( !$wgProxyList ) {
+//        if (!$wgProxyList) {
 //            return false;
 //        }
 //
-//        if ( !is_array( $wgProxyList ) ) {
+//        if (!is_array($wgProxyList)) {
 //            // Load values from the specified file
-//            $wgProxyList = array_map( 'trim', file( $wgProxyList ) );
+//            $wgProxyList = array_map('trim', file($wgProxyList));
 //        }
 //
 //        $resultProxyList = [];
 //        $deprecatedIPEntries = [];
 //
 //        // backward compatibility: move all ip addresses in keys to values
-//        foreach ( $wgProxyList as $key => $value ) {
-//            $keyIsIP = IP::isIPAddress( $key );
-//            $valueIsIP = IP::isIPAddress( $value );
-//            if ( $keyIsIP && !$valueIsIP ) {
+//        foreach ($wgProxyList as $key => $value) {
+//            $keyIsIP = IP::isIPAddress($key);
+//            $valueIsIP = IP::isIPAddress($value);
+//            if ($keyIsIP && !$valueIsIP) {
 //                $deprecatedIPEntries[] = $key;
 //                $resultProxyList[] = $key;
-//            } elseif ( $keyIsIP && $valueIsIP ) {
+//            } elseif ($keyIsIP && $valueIsIP) {
 //                $deprecatedIPEntries[] = $key;
 //                $resultProxyList[] = $key;
 //                $resultProxyList[] = $value;
@@ -2070,14 +2077,14 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //            }
 //        }
 //
-//        if ( $deprecatedIPEntries ) {
+//        if ($deprecatedIPEntries) {
 //            wfDeprecated(
 //                'IP addresses in the keys of $wgProxyList (found the following IP addresses in keys: ' .
-//                    implode( ', ', $deprecatedIPEntries ) . ', please move them to values)', '1.30' );
+//                    implode(', ', $deprecatedIPEntries) . ', please move them to values)', '1.30');
 //        }
 //
-//        $proxyListIPSet = new IPSet( $resultProxyList );
-//        return $proxyListIPSet->match( $ip );
+//        $proxyListIPSet = new IPSet($resultProxyList);
+//        return $proxyListIPSet.match($ip);
 //    }
 //
 //    /**
@@ -2087,13 +2094,13 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function isPingLimitable() {
 //        global $wgRateLimitsExcludedIPs;
-//        if ( IP::isInRanges( $this->getRequest()->getIP(), $wgRateLimitsExcludedIPs ) ) {
+//        if (IP::isInRanges(this.getRequest().getIP(), $wgRateLimitsExcludedIPs)) {
 //            // No other good way currently to disable rate limits
 //            // for specific IPs. :P
 //            // But this is a crappy hack and should die.
 //            return false;
 //        }
-//        return !$this->isAllowed( 'noratelimit' );
+//        return !this.isAllowed('noratelimit');
 //    }
 //
 //    /**
@@ -2110,17 +2117,17 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int $incrBy Positive amount to increment counter by [defaults to 1]
 //     * @return bool True if a rate limiter was tripped
 //     */
-//    public function pingLimiter( $action = 'edit', $incrBy = 1 ) {
+//    public function pingLimiter($action = 'edit', $incrBy = 1) {
 //        // Avoid PHP 7.1 warning of passing $this by reference
 //        $user = $this;
 //        // Call the 'PingLimiter' hook
 //        $result = false;
-//        if ( !Hooks::run( 'PingLimiter', [ &$user, $action, &$result, $incrBy ] ) ) {
+//        if (!Hooks::run('PingLimiter', [ &$user, $action, &$result, $incrBy ])) {
 //            return $result;
 //        }
 //
 //        global $wgRateLimits;
-//        if ( !isset( $wgRateLimits[$action] ) ) {
+//        if (!isset($wgRateLimits[$action])) {
 //            return false;
 //        }
 //
@@ -2130,38 +2137,38 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //		);
 //
 //        // Some groups shouldn't trigger the ping limiter, ever
-//        if ( $limits['&can-bypass'] && !$this->isPingLimitable() ) {
+//        if ($limits['&can-bypass'] && !this.isPingLimitable()) {
 //            return false;
 //        }
 //
 //        $keys = [];
-//        $id = $this->getId();
+//        $id = this.getId();
 //        $userLimit = false;
-//        $isNewbie = $this->isNewbie();
+//        $isNewbie = this.isNewbie();
 //        $cache = ObjectCache::getLocalClusterInstance();
 //
-//        if ( $id == 0 ) {
+//        if ($id == 0) {
 //            // limits for anons
-//            if ( isset( $limits['anon'] ) ) {
-//                $keys[$cache->makeKey( 'limiter', $action, 'anon' )] = $limits['anon'];
+//            if (isset($limits['anon'])) {
+//                $keys[$cache.makeKey('limiter', $action, 'anon')] = $limits['anon'];
 //            }
-//        } elseif ( isset( $limits['user'] ) ) {
+//        } elseif (isset($limits['user'])) {
 //            // limits for logged-in users
 //            $userLimit = $limits['user'];
 //        }
 //
 //        // limits for anons and for newbie logged-in users
-//        if ( $isNewbie ) {
+//        if ($isNewbie) {
 //            // ip-based limits
-//            if ( isset( $limits['ip'] ) ) {
-//                $ip = $this->getRequest()->getIP();
+//            if (isset($limits['ip'])) {
+//                $ip = this.getRequest().getIP();
 //                $keys["mediawiki:limiter:$action:ip:$ip"] = $limits['ip'];
 //            }
 //            // subnet-based limits
-//            if ( isset( $limits['subnet'] ) ) {
-//                $ip = $this->getRequest()->getIP();
-//                $subnet = IP::getSubnet( $ip );
-//                if ( $subnet !== false ) {
+//            if (isset($limits['subnet'])) {
+//                $ip = this.getRequest().getIP();
+//                $subnet = IP::getSubnet($ip);
+//                if ($subnet !== false) {
 //                    $keys["mediawiki:limiter:$action:subnet:$subnet"] = $limits['subnet'];
 //                }
 //            }
@@ -2169,80 +2176,80 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //
 //        // Check for group-specific permissions
 //        // If more than one group applies, use the group with the highest limit ratio (max/period)
-//        foreach ( $this->getGroups() as $group ) {
-//            if ( isset( $limits[$group] ) ) {
-//                if ( $userLimit === false
+//        foreach (this.getGroups() as $group) {
+//            if (isset($limits[$group])) {
+//                if ($userLimit === false
 //                    || $limits[$group][0] / $limits[$group][1] > $userLimit[0] / $userLimit[1]
-//                ) {
+//               ) {
 //                    $userLimit = $limits[$group];
 //                }
 //            }
 //        }
 //
 //        // limits for newbie logged-in users (override all the normal user limits)
-//        if ( $id !== 0 && $isNewbie && isset( $limits['newbie'] ) ) {
+//        if ($id !== 0 && $isNewbie && isset($limits['newbie'])) {
 //            $userLimit = $limits['newbie'];
 //        }
 //
 //        // Set the user limit key
-//        if ( $userLimit !== false ) {
+//        if ($userLimit !== false) {
 //            // phan is confused because &can-bypass's value is a bool, so it assumes
 //            // that $userLimit is also a bool here.
 //            // @phan-suppress-next-line PhanTypeInvalidExpressionArrayDestructuring
-//            list( $max, $period ) = $userLimit;
-//            wfDebug( __METHOD__ . ": effective user limit: $max in {$period}s\n" );
-//            $keys[$cache->makeKey( 'limiter', $action, 'user', $id )] = $userLimit;
+//            list($max, $period) = $userLimit;
+//            wfDebug(__METHOD__ . ": effective user limit: $max in {$period}s\n");
+//            $keys[$cache.makeKey('limiter', $action, 'user', $id)] = $userLimit;
 //        }
 //
 //        // ip-based limits for all ping-limitable users
-//        if ( isset( $limits['ip-all'] ) ) {
-//            $ip = $this->getRequest()->getIP();
+//        if (isset($limits['ip-all'])) {
+//            $ip = this.getRequest().getIP();
 //            // ignore if user limit is more permissive
-//            if ( $isNewbie || $userLimit === false
-//                || $limits['ip-all'][0] / $limits['ip-all'][1] > $userLimit[0] / $userLimit[1] ) {
+//            if ($isNewbie || $userLimit === false
+//                || $limits['ip-all'][0] / $limits['ip-all'][1] > $userLimit[0] / $userLimit[1]) {
 //                $keys["mediawiki:limiter:$action:ip-all:$ip"] = $limits['ip-all'];
 //            }
 //        }
 //
 //        // subnet-based limits for all ping-limitable users
-//        if ( isset( $limits['subnet-all'] ) ) {
-//            $ip = $this->getRequest()->getIP();
-//            $subnet = IP::getSubnet( $ip );
-//            if ( $subnet !== false ) {
+//        if (isset($limits['subnet-all'])) {
+//            $ip = this.getRequest().getIP();
+//            $subnet = IP::getSubnet($ip);
+//            if ($subnet !== false) {
 //                // ignore if user limit is more permissive
-//                if ( $isNewbie || $userLimit === false
+//                if ($isNewbie || $userLimit === false
 //                    || $limits['ip-all'][0] / $limits['ip-all'][1]
-//                    > $userLimit[0] / $userLimit[1] ) {
+//                    > $userLimit[0] / $userLimit[1]) {
 //                    $keys["mediawiki:limiter:$action:subnet-all:$subnet"] = $limits['subnet-all'];
 //                }
 //            }
 //        }
 //
 //        $triggered = false;
-//        foreach ( $keys as $key => $limit ) {
+//        foreach ($keys as $key => $limit) {
 //            // phan is confused because &can-bypass's value is a bool, so it assumes
 //            // that $userLimit is also a bool here.
 //            // @phan-suppress-next-line PhanTypeInvalidExpressionArrayDestructuring
-//            list( $max, $period ) = $limit;
+//            list($max, $period) = $limit;
 //            $summary = "(limit $max in {$period}s)";
-//            $count = $cache->get( $key );
+//            $count = $cache.get($key);
 //            // Already pinged?
-//            if ( $count ) {
-//                if ( $count >= $max ) {
-//                    wfDebugLog( 'ratelimit', "User '{$this->getName()}' " .
-//                        "(IP {$this->getRequest()->getIP()}) tripped $key at $count $summary" );
+//            if ($count) {
+//                if ($count >= $max) {
+//                    wfDebugLog('ratelimit', "User '{this.getName()}' " .
+//                        "(IP {this.getRequest().getIP()}) tripped $key at $count $summary");
 //                    $triggered = true;
 //                } else {
-//                    wfDebug( __METHOD__ . ": ok. $key at $count $summary\n" );
+//                    wfDebug(__METHOD__ . ": ok. $key at $count $summary\n");
 //                }
 //            } else {
-//                wfDebug( __METHOD__ . ": adding record for $key $summary\n" );
-//                if ( $incrBy > 0 ) {
-//                    $cache->add( $key, 0, intval( $period ) ); // first ping
+//                wfDebug(__METHOD__ . ": adding record for $key $summary\n");
+//                if ($incrBy > 0) {
+//                    $cache.add($key, 0, intval($period)); // first ping
 //                }
 //            }
-//            if ( $incrBy > 0 ) {
-//                $cache->incr( $key, $incrBy );
+//            if ($incrBy > 0) {
+//                $cache.incr($key, $incrBy);
 //            }
 //        }
 //
@@ -2256,9 +2263,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *   the master. Hacked from false due to horrible probs on site.
 //     * @return bool True if blocked, false otherwise
 //     */
-//    public function isBlocked( $fromReplica = true ) {
-//        return $this->getBlock( $fromReplica ) instanceof Block &&
-//            $this->getBlock()->appliesToRight( 'edit' );
+//    public function isBlocked($fromReplica = true) {
+//        return this.getBlock($fromReplica) instanceof Block &&
+//            this.getBlock().appliesToRight('edit');
 //    }
 //
 //    /**
@@ -2267,9 +2274,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param bool $fromReplica Whether to check the replica DB instead of the master
 //     * @return Block|null
 //     */
-//    public function getBlock( $fromReplica = true ) {
-//        $this->getBlockedStatus( $fromReplica );
-//        return $this->mBlock instanceof Block ? $this->mBlock : null;
+//    public function getBlock($fromReplica = true) {
+//        this.getBlockedStatus($fromReplica);
+//        return this.mBlock instanceof Block ? this.mBlock : null;
 //    }
 //
 //    /**
@@ -2281,12 +2288,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @throws MWException
 //     *
 //     * @deprecated since 1.33,
-//     * use MediaWikiServices::getInstance()->getPermissionManager()->isBlockedFrom(..)
+//     * use MediaWikiServices::getInstance().getPermissionManager().isBlockedFrom(..)
 //     *
 //     */
-//    public function isBlockedFrom( $title, $fromReplica = false ) {
-//        return MediaWikiServices::getInstance()->getPermissionManager()
-//			->isBlockedFrom( $this, $title, $fromReplica );
+//    public function isBlockedFrom($title, $fromReplica = false) {
+//        return MediaWikiServices::getInstance().getPermissionManager()
+//			.isBlockedFrom($this, $title, $fromReplica);
 //    }
 //
 //    /**
@@ -2294,8 +2301,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string Name of blocker
 //     */
 //    public function blockedBy() {
-//        $this->getBlockedStatus();
-//        return $this->mBlockedby;
+//        this.getBlockedStatus();
+//        return this.mBlockedby;
 //    }
 //
 //    /**
@@ -2303,8 +2310,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string Blocking reason
 //     */
 //    public function blockedFor() {
-//        $this->getBlockedStatus();
-//        return $this->mBlockreason;
+//        this.getBlockedStatus();
+//        return this.mBlockreason;
 //    }
 //
 //    /**
@@ -2312,8 +2319,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return int Block ID
 //     */
 //    public function getBlockId() {
-//        $this->getBlockedStatus();
-//        return ( $this->mBlock ? $this->mBlock->getId() : false );
+//        this.getBlockedStatus();
+//        return (this.mBlock ? this.mBlock.getId() : false);
 //    }
 //
 //    /**
@@ -2324,8 +2331,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $ip IP address, uses current client if none given
 //     * @return bool True if blocked, false otherwise
 //     */
-//    public function isBlockedGlobally( $ip = '' ) {
-//        return $this->getGlobalBlock( $ip ) instanceof Block;
+//    public function isBlockedGlobally($ip = '') {
+//        return this.getGlobalBlock($ip) instanceof Block;
 //    }
 //
 //    /**
@@ -2338,32 +2345,32 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @throws FatalError
 //     * @throws MWException
 //     */
-//    public function getGlobalBlock( $ip = '' ) {
-//        if ( $this->mGlobalBlock !== null ) {
-//            return $this->mGlobalBlock ?: null;
+//    public function getGlobalBlock($ip = '') {
+//        if (this.mGlobalBlock !== null) {
+//            return this.mGlobalBlock ?: null;
 //        }
 //        // User is already an IP?
-//        if ( IP::isIPAddress( $this->getName() ) ) {
-//            $ip = $this->getName();
-//        } elseif ( !$ip ) {
-//            $ip = $this->getRequest()->getIP();
+//        if (IP::isIPAddress(this.getName())) {
+//            $ip = this.getName();
+//        } elseif (!$ip) {
+//            $ip = this.getRequest().getIP();
 //        }
 //        // Avoid PHP 7.1 warning of passing $this by reference
 //        $user = $this;
 //        $blocked = false;
 //        $block = null;
-//        Hooks::run( 'UserIsBlockedGlobally', [ &$user, $ip, &$blocked, &$block ] );
+//        Hooks::run('UserIsBlockedGlobally', [ &$user, $ip, &$blocked, &$block ]);
 //
-//        if ( $blocked && $block === null ) {
+//        if ($blocked && $block === null) {
 //            // back-compat: UserIsBlockedGlobally didn't have $block param first
-//            $block = new Block( [
+//            $block = new Block([
 //                'address' => $ip,
 //                'systemBlock' => 'global-block'
-//			] );
+//			]);
 //        }
 //
-//        $this->mGlobalBlock = $blocked ? $block : false;
-//        return $this->mGlobalBlock ?: null;
+//        this.mGlobalBlock = $blocked ? $block : false;
+//        return this.mGlobalBlock ?: null;
 //    }
 //
 //    /**
@@ -2372,13 +2379,13 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool True if locked, false otherwise
 //     */
 //    public function isLocked() {
-//        if ( $this->mLocked !== null ) {
-//            return $this->mLocked;
+//        if (this.mLocked !== null) {
+//            return this.mLocked;
 //        }
 //        // Reset for hook
-//        $this->mLocked = false;
-//        Hooks::run( 'UserIsLocked', [ $this, &$this->mLocked ] );
-//        return $this->mLocked;
+//        this.mLocked = false;
+//        Hooks::run('UserIsLocked', [ $this, &this.mLocked ]);
+//        return this.mLocked;
 //    }
 //
 //    /**
@@ -2387,16 +2394,16 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool True if hidden, false otherwise
 //     */
 //    public function isHidden() {
-//        if ( $this->mHideName !== null ) {
-//            return (bool)$this->mHideName;
+//        if (this.mHideName !== null) {
+//            return (bool)this.mHideName;
 //        }
-//        $this->getBlockedStatus();
-//        if ( !$this->mHideName ) {
+//        this.getBlockedStatus();
+//        if (!this.mHideName) {
 //            // Reset for hook
-//            $this->mHideName = false;
-//            Hooks::run( 'UserIsHidden', [ $this, &$this->mHideName ] );
+//            this.mHideName = false;
+//            Hooks::run('UserIsHidden', [ $this, &this.mHideName ]);
 //        }
-//        return (bool)$this->mHideName;
+//        return (bool)this.mHideName;
 //    }
 //
 //    /**
@@ -2404,26 +2411,26 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return int The user's ID; 0 if the user is anonymous or nonexistent
 //     */
 //    public function getId() {
-//        if ( $this->mId === null && $this->mName !== null && self::isIP( $this->mName ) ) {
+//        if (this.mId === null && this.mName !== null && self::isIP(this.mName)) {
 //            // Special case, we know the user is anonymous
 //            return 0;
 //        }
 //
-//        if ( !$this->isItemLoaded( 'id' ) ) {
+//        if (!this.isItemLoaded('id')) {
 //            // Don't load if this was initialized from an ID
-//            $this->load();
+//            this.load();
 //        }
 //
-//        return (int)$this->mId;
+//        return (int)this.mId;
 //    }
 //
 //    /**
 //     * Set the user and reload all fields according to a given ID
 //     * @param int $v User ID to reload
 //     */
-//    public function setId( $v ) {
-//        $this->mId = $v;
-//        $this->clearInstanceCache( 'id' );
+//    public function setId($v) {
+//        this.mId = $v;
+//        this.clearInstanceCache('id');
 //    }
 //
 //    /**
@@ -2431,18 +2438,18 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string User's name or IP address
 //     */
 //    public function getName() {
-//        if ( $this->isItemLoaded( 'name', 'only' ) ) {
+//        if (this.isItemLoaded('name', 'only')) {
 //            // Special case optimisation
-//            return $this->mName;
+//            return this.mName;
 //        }
 //
-//        $this->load();
-//        if ( $this->mName === false ) {
+//        this.load();
+//        if (this.mName === false) {
 //            // Clean up IPs
-//            $this->mName = IP::sanitizeIP( $this->getRequest()->getIP() );
+//            this.mName = IP::sanitizeIP(this.getRequest().getIP());
 //        }
 //
-//        return $this->mName;
+//        return this.mName;
 //    }
 //
 //    /**
@@ -2458,9 +2465,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * does not exist.
 //     * @param string $str New user name to set
 //     */
-//    public function setName( $str ) {
-//        $this->load();
-//        $this->mName = $str;
+//    public function setName($str) {
+//        this.load();
+//        this.mName = $str;
 //    }
 //
 //    /**
@@ -2469,67 +2476,67 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param IDatabase|null $dbw Assign a new actor ID, using this DB handle, if none exists
 //     * @return int The actor's ID, or 0 if no actor ID exists and $dbw was null
 //     */
-//    public function getActorId( IDatabase $dbw = null ) {
+//    public function getActorId(IDatabase $dbw = null) {
 //        global $wgActorTableSchemaMigrationStage;
 //
 //        // Technically we should always return 0 without SCHEMA_COMPAT_READ_NEW,
 //        // but it does little harm and might be needed for write callers loading a User.
-//        if ( !( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_WRITE_NEW ) ) {
+//        if (!($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_WRITE_NEW)) {
 //            return 0;
 //        }
 //
-//        if ( !$this->isItemLoaded( 'actor' ) ) {
-//            $this->load();
+//        if (!this.isItemLoaded('actor')) {
+//            this.load();
 //        }
 //
-//        // Currently $this->mActorId might be null if $this was loaded from a
+//        // Currently this.mActorId might be null if $this was loaded from a
 //        // cache entry that was written when $wgActorTableSchemaMigrationStage
 //        // was SCHEMA_COMPAT_OLD. Once that is no longer a possibility (i.e. when
 //        // User::VERSION is incremented after $wgActorTableSchemaMigrationStage
 //        // has been removed), that condition may be removed.
-//        if ( $this->mActorId === null || !$this->mActorId && $dbw ) {
+//        if (this.mActorId === null || !this.mActorId && $dbw) {
 //            $q = [
-//            'actor_user' => $this->getId() ?: null,
-//                'actor_name' => (string)$this->getName(),
+//            'actor_user' => this.getId() ?: null,
+//                'actor_name' => (string)this.getName(),
 //			];
-//            if ( $dbw ) {
-//                if ( $q['actor_user'] === null && self::isUsableName( $q['actor_name'] ) ) {
+//            if ($dbw) {
+//                if ($q['actor_user'] === null && self::isUsableName($q['actor_name'])) {
 //                    throw new CannotCreateActorException(
 //                        'Cannot create an actor for a usable name that is not an existing user'
-//                    );
+//                   );
 //                }
-//                if ( $q['actor_name'] === '' ) {
-//                    throw new CannotCreateActorException( 'Cannot create an actor for a user with no name' );
+//                if ($q['actor_name'] === '') {
+//                    throw new CannotCreateActorException('Cannot create an actor for a user with no name');
 //                }
-//                $dbw->insert( 'actor', $q, __METHOD__, [ 'IGNORE' ] );
-//                if ( $dbw->affectedRows() ) {
-//                    $this->mActorId = (int)$dbw->insertId();
+//                $dbw.insert('actor', $q, __METHOD__, [ 'IGNORE' ]);
+//                if ($dbw.affectedRows()) {
+//                    this.mActorId = (int)$dbw.insertId();
 //                } else {
 //                    // Outdated cache?
 //                    // Use LOCK IN SHARE MODE to bypass any MySQL REPEATABLE-READ snapshot.
-//                    $this->mActorId = (int)$dbw->selectField(
+//                    this.mActorId = (int)$dbw.selectField(
 //                        'actor',
 //                        'actor_id',
 //                        $q,
 //                        __METHOD__,
 //                        [ 'LOCK IN SHARE MODE' ]
 //					);
-//                    if ( !$this->mActorId ) {
+//                    if (!this.mActorId) {
 //                        throw new CannotCreateActorException(
-//                            "Cannot create actor ID for user_id={$this->getId()} user_name={$this->getName()}"
-//                        );
+//                            "Cannot create actor ID for user_id={this.getId()} user_name={this.getName()}"
+//                       );
 //                    }
 //                }
-//                $this->invalidateCache();
+//                this.invalidateCache();
 //            } else {
-//                list( $index, $options ) = DBAccessObjectUtils::getDBOptions( $this->queryFlagsUsed );
-//                $db = wfGetDB( $index );
-//                $this->mActorId = (int)$db->selectField( 'actor', 'actor_id', $q, __METHOD__, $options );
+//                list($index, $options) = DBAccessObjectUtils::getDBOptions(this.queryFlagsUsed);
+//                $db = wfGetDB($index);
+//                this.mActorId = (int)$db.selectField('actor', 'actor_id', $q, __METHOD__, $options);
 //            }
-//            $this->setItemLoaded( 'actor' );
+//            this.setItemLoaded('actor');
 //        }
 //
-//        return (int)$this->mActorId;
+//        return (int)this.mActorId;
 //    }
 //
 //    /**
@@ -2537,7 +2544,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string Username escaped by underscores.
 //     */
 //    public function getTitleKey() {
-//        return str_replace( ' ', '_', $this->getName() );
+//        return str_replace(' ', '_', this.getName());
 //    }
 //
 //    /**
@@ -2545,28 +2552,28 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool True if the user has new messages
 //     */
 //    public function getNewtalk() {
-//        $this->load();
+//        this.load();
 //
 //        // Load the newtalk status if it is unloaded (mNewtalk=-1)
-//        if ( $this->mNewtalk === -1 ) {
-//            $this->mNewtalk = false; # reset talk page status
+//        if (this.mNewtalk === -1) {
+//            this.mNewtalk = false; # reset talk page status
 //
 //            // Check memcached separately for anons, who have no
 //            // entire User object stored in there.
-//            if ( !$this->mId ) {
+//            if (!this.mId) {
 //                global $wgDisableAnonTalk;
-//                if ( $wgDisableAnonTalk ) {
+//                if ($wgDisableAnonTalk) {
 //                    // Anon newtalk disabled by configuration.
-//                    $this->mNewtalk = false;
+//                    this.mNewtalk = false;
 //                } else {
-//                    $this->mNewtalk = $this->checkNewtalk( 'user_ip', $this->getName() );
+//                    this.mNewtalk = this.checkNewtalk('user_ip', this.getName());
 //                }
 //            } else {
-//                $this->mNewtalk = $this->checkNewtalk( 'user_id', $this->mId );
+//                this.mNewtalk = this.checkNewtalk('user_id', this.mId);
 //            }
 //        }
 //
-//        return (bool)$this->mNewtalk;
+//        return (bool)this.mNewtalk;
 //    }
 //
 //    /**
@@ -2586,25 +2593,25 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        // Avoid PHP 7.1 warning of passing $this by reference
 //        $user = $this;
 //        $talks = [];
-//        if ( !Hooks::run( 'UserRetrieveNewTalks', [ &$user, &$talks ] ) ) {
+//        if (!Hooks::run('UserRetrieveNewTalks', [ &$user, &$talks ])) {
 //            return $talks;
 //        }
 //
-//        if ( !$this->getNewtalk() ) {
+//        if (!this.getNewtalk()) {
 //            return [];
 //        }
-//        $utp = $this->getTalkPage();
-//        $dbr = wfGetDB( DB_REPLICA );
+//        $utp = this.getTalkPage();
+//        $dbr = wfGetDB(DB_REPLICA);
 //        // Get the "last viewed rev" timestamp from the oldest message notification
-//        $timestamp = $dbr->selectField( 'user_newtalk',
+//        $timestamp = $dbr.selectField('user_newtalk',
 //            'MIN(user_last_timestamp)',
-//            $this->isAnon() ? [ 'user_ip' => $this->getName() ] : [ 'user_id' => $this->getId() ],
-//        __METHOD__ );
-//        $rev = $timestamp ? Revision::loadFromTimestamp( $dbr, $utp, $timestamp ) : null;
+//            this.isAnon() ? [ 'user_ip' => this.getName() ] : [ 'user_id' => this.getId() ],
+//        __METHOD__);
+//        $rev = $timestamp ? Revision::loadFromTimestamp($dbr, $utp, $timestamp) : null;
 //        return [
 //			[
-//        'wiki' => WikiMap::getWikiIdFromDbDomain( WikiMap::getCurrentWikiDbDomain() ),
-//        'link' => $utp->getLocalURL(),
+//        'wiki' => WikiMap::getWikiIdFromDbDomain(WikiMap::getCurrentWikiDbDomain()),
+//        'link' => $utp.getLocalURL(),
 //            'rev' => $rev
 //			]
 //		];
@@ -2617,18 +2624,18 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function getNewMessageRevisionId() {
 //        $newMessageRevisionId = null;
-//        $newMessageLinks = $this->getNewMessageLinks();
+//        $newMessageLinks = this.getNewMessageLinks();
 //
 //        // Note: getNewMessageLinks() never returns more than a single link
 //        // and it is always for the same wiki, but we double-check here in
 //        // case that changes some time in the future.
-//        if ( $newMessageLinks && count( $newMessageLinks ) === 1
-//            && WikiMap::isCurrentWikiId( $newMessageLinks[0]['wiki'] )
+//        if ($newMessageLinks && count($newMessageLinks) === 1
+//            && WikiMap::isCurrentWikiId($newMessageLinks[0]['wiki'])
 //            && $newMessageLinks[0]['rev']
 //		) {
 //            /** @var Revision $newMessageRevision */
 //            $newMessageRevision = $newMessageLinks[0]['rev'];
-//            $newMessageRevisionId = $newMessageRevision->getId();
+//            $newMessageRevisionId = $newMessageRevision.getId();
 //        }
 //
 //        return $newMessageRevisionId;
@@ -2642,10 +2649,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string|int $id User's IP address for anonymous users, User ID otherwise
 //     * @return bool True if the user has new messages
 //     */
-//    protected function checkNewtalk( $field, $id ) {
-//        $dbr = wfGetDB( DB_REPLICA );
+//    protected function checkNewtalk($field, $id) {
+//        $dbr = wfGetDB(DB_REPLICA);
 //
-//        $ok = $dbr->selectField( 'user_newtalk', $field, [ $field => $id ], __METHOD__ );
+//        $ok = $dbr.selectField('user_newtalk', $field, [ $field => $id ], __METHOD__);
 //
 //        return $ok !== false;
 //    }
@@ -2657,22 +2664,22 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param Revision|null $curRev New, as yet unseen revision of the user talk page. Ignored if null.
 //     * @return bool True if successful, false otherwise
 //     */
-//    protected function updateNewtalk( $field, $id, $curRev = null ) {
+//    protected function updateNewtalk($field, $id, $curRev = null) {
 //        // Get timestamp of the talk page revision prior to the current one
-//        $prevRev = $curRev ? $curRev->getPrevious() : false;
-//        $ts = $prevRev ? $prevRev->getTimestamp() : null;
+//        $prevRev = $curRev ? $curRev.getPrevious() : false;
+//        $ts = $prevRev ? $prevRev.getTimestamp() : null;
 //        // Mark the user as having new messages since this revision
-//        $dbw = wfGetDB( DB_MASTER );
-//        $dbw->insert( 'user_newtalk',
-//            [ $field => $id, 'user_last_timestamp' => $dbw->timestampOrNull( $ts ) ],
+//        $dbw = wfGetDB(DB_MASTER);
+//        $dbw.insert('user_newtalk',
+//            [ $field => $id, 'user_last_timestamp' => $dbw.timestampOrNull($ts) ],
 //        __METHOD__,
-//            'IGNORE' );
-//        if ( $dbw->affectedRows() ) {
-//            wfDebug( __METHOD__ . ": set on ($field, $id)\n" );
+//            'IGNORE');
+//        if ($dbw.affectedRows()) {
+//            wfDebug(__METHOD__ . ": set on ($field, $id)\n");
 //            return true;
 //        }
 //
-//        wfDebug( __METHOD__ . " already set ($field, $id)\n" );
+//        wfDebug(__METHOD__ . " already set ($field, $id)\n");
 //        return false;
 //    }
 //
@@ -2682,17 +2689,17 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string|int $id User's IP address for anonymous users, User ID otherwise
 //     * @return bool True if successful, false otherwise
 //     */
-//    protected function deleteNewtalk( $field, $id ) {
-//        $dbw = wfGetDB( DB_MASTER );
-//        $dbw->delete( 'user_newtalk',
+//    protected function deleteNewtalk($field, $id) {
+//        $dbw = wfGetDB(DB_MASTER);
+//        $dbw.delete('user_newtalk',
 //            [ $field => $id ],
-//        __METHOD__ );
-//        if ( $dbw->affectedRows() ) {
-//            wfDebug( __METHOD__ . ": killed on ($field, $id)\n" );
+//        __METHOD__);
+//        if ($dbw.affectedRows()) {
+//            wfDebug(__METHOD__ . ": killed on ($field, $id)\n");
 //            return true;
 //        }
 //
-//        wfDebug( __METHOD__ . ": already gone ($field, $id)\n" );
+//        wfDebug(__METHOD__ . ": already gone ($field, $id)\n");
 //        return false;
 //    }
 //
@@ -2702,30 +2709,30 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param Revision|null $curRev New, as yet unseen revision of the user talk
 //     *   page. Ignored if null or !$val.
 //     */
-//    public function setNewtalk( $val, $curRev = null ) {
-//        if ( wfReadOnly() ) {
+//    public function setNewtalk($val, $curRev = null) {
+//        if (wfReadOnly()) {
 //            return;
 //        }
 //
-//        $this->load();
-//        $this->mNewtalk = $val;
+//        this.load();
+//        this.mNewtalk = $val;
 //
-//        if ( $this->isAnon() ) {
+//        if (this.isAnon()) {
 //            $field = 'user_ip';
-//            $id = $this->getName();
+//            $id = this.getName();
 //        } else {
 //            $field = 'user_id';
-//            $id = $this->getId();
+//            $id = this.getId();
 //        }
 //
-//        if ( $val ) {
-//            $changed = $this->updateNewtalk( $field, $id, $curRev );
+//        if ($val) {
+//            $changed = this.updateNewtalk($field, $id, $curRev);
 //        } else {
-//            $changed = $this->deleteNewtalk( $field, $id );
+//            $changed = this.deleteNewtalk($field, $id);
 //        }
 //
-//        if ( $changed ) {
-//            $this->invalidateCache();
+//        if ($changed) {
+//            this.invalidateCache();
 //        }
 //    }
 //
@@ -2737,11 +2744,11 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    private function newTouchedTimestamp() {
 //        $time = time();
-//        if ( $this->mTouched ) {
-//            $time = max( $time, wfTimestamp( TS_UNIX, $this->mTouched ) + 1 );
+//        if (this.mTouched) {
+//            $time = max($time, wfTimestamp(TS_UNIX, this.mTouched) + 1);
 //        }
 //
-//        return wfTimestamp( TS_MW, $time );
+//        return wfTimestamp(TS_MW, $time);
 //    }
 //
 //    /**
@@ -2754,26 +2761,26 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @param string $mode Use 'refresh' to clear now; otherwise before DB commit
 //     */
-//    public function clearSharedCache( $mode = 'changed' ) {
-//        if ( !$this->getId() ) {
+//    public function clearSharedCache($mode = 'changed') {
+//        if (!this.getId()) {
 //            return;
 //        }
 //
-//        $cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-//        $key = $this->getCacheKey( $cache );
-//        if ( $mode === 'refresh' ) {
-//            $cache->delete( $key, 1 );
+//        $cache = MediaWikiServices::getInstance().getMainWANObjectCache();
+//        $key = this.getCacheKey($cache);
+//        if ($mode === 'refresh') {
+//            $cache.delete($key, 1);
 //        } else {
-//            $lb = MediaWikiServices::getInstance()->getDBLoadBalancer();
-//            if ( $lb->hasOrMadeRecentMasterChanges() ) {
-//                $lb->getConnection( DB_MASTER )->onTransactionPreCommitOrIdle(
-//                    function () use ( $cache, $key ) {
-//                    $cache->delete( $key );
+//            $lb = MediaWikiServices::getInstance().getDBLoadBalancer();
+//            if ($lb.hasOrMadeRecentMasterChanges()) {
+//                $lb.getConnection(DB_MASTER).onTransactionPreCommitOrIdle(
+//                    function () use ($cache, $key) {
+//                    $cache.delete($key);
 //                },
 //                __METHOD__
 //				);
 //            } else {
-//                $cache->delete( $key );
+//                $cache.delete($key);
 //            }
 //        }
 //    }
@@ -2784,8 +2791,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * Calls touch() and removes account data from memcached
 //     */
 //    public function invalidateCache() {
-//        $this->touch();
-//        $this->clearSharedCache();
+//        this.touch();
+//        this.clearSharedCache();
 //    }
 //
 //    /**
@@ -2801,12 +2808,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @since 1.25
 //     */
 //    public function touch() {
-//        $id = $this->getId();
-//        if ( $id ) {
-//            $cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-//            $key = $cache->makeKey( 'user-quicktouched', 'id', $id );
-//            $cache->touchCheckKey( $key );
-//            $this->mQuickTouched = null;
+//        $id = this.getId();
+//        if ($id) {
+//            $cache = MediaWikiServices::getInstance().getMainWANObjectCache();
+//            $key = $cache.makeKey('user-quicktouched', 'id', $id);
+//            $cache.touchCheckKey($key);
+//            this.mQuickTouched = null;
 //        }
 //    }
 //
@@ -2815,8 +2822,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $timestamp A timestamp in TS_MW format
 //     * @return bool
 //     */
-//    public function validateCache( $timestamp ) {
-//        return ( $timestamp >= $this->getTouched() );
+//    public function validateCache($timestamp) {
+//        return ($timestamp >= this.getTouched());
 //    }
 //
 //    /**
@@ -2828,20 +2835,20 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string TS_MW Timestamp
 //     */
 //    public function getTouched() {
-//        $this->load();
+//        this.load();
 //
-//        if ( $this->mId ) {
-//            if ( $this->mQuickTouched === null ) {
-//                $cache = MediaWikiServices::getInstance()->getMainWANObjectCache();
-//                $key = $cache->makeKey( 'user-quicktouched', 'id', $this->mId );
+//        if (this.mId) {
+//            if (this.mQuickTouched === null) {
+//                $cache = MediaWikiServices::getInstance().getMainWANObjectCache();
+//                $key = $cache.makeKey('user-quicktouched', 'id', this.mId);
 //
-//                $this->mQuickTouched = wfTimestamp( TS_MW, $cache->getCheckKeyTime( $key ) );
+//                this.mQuickTouched = wfTimestamp(TS_MW, $cache.getCheckKeyTime($key));
 //            }
 //
-//            return max( $this->mTouched, $this->mQuickTouched );
+//            return max(this.mTouched, this.mQuickTouched);
 //        }
 //
-//        return $this->mTouched;
+//        return this.mTouched;
 //    }
 //
 //    /**
@@ -2850,9 +2857,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @since 1.26
 //     */
 //    public function getDBTouched() {
-//        $this->load();
+//        this.load();
 //
-//        return $this->mTouched;
+//        return this.mTouched;
 //    }
 //
 //    /**
@@ -2871,9 +2878,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @throws PasswordError On failure
 //     * @return bool
 //     */
-//    public function setPassword( $str ) {
-//        wfDeprecated( __METHOD__, '1.27' );
-//        return $this->setPasswordInternal( $str );
+//    public function setPassword($str) {
+//        wfDeprecated(__METHOD__, '1.27');
+//        return this.setPasswordInternal($str);
 //    }
 //
 //    /**
@@ -2884,9 +2891,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *  password hash meaning that the user will not be able to log in
 //     *  through the web interface.
 //     */
-//    public function setInternalPassword( $str ) {
-//        wfDeprecated( __METHOD__, '1.27' );
-//        $this->setPasswordInternal( $str );
+//    public function setInternalPassword($str) {
+//        wfDeprecated(__METHOD__, '1.27');
+//        this.setPasswordInternal($str);
 //    }
 //
 //    /**
@@ -2897,28 +2904,28 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *  through the web interface.
 //     * @return bool Success
 //     */
-//    private function setPasswordInternal( $str ) {
+//    private function setPasswordInternal($str) {
 //        $manager = AuthManager::singleton();
 //
 //        // If the user doesn't exist yet, fail
-//        if ( !$manager->userExists( $this->getName() ) ) {
-//            throw new LogicException( 'Cannot set a password for a user that is not in the database.' );
+//        if (!$manager.userExists(this.getName())) {
+//            throw new LogicException('Cannot set a password for a user that is not in the database.');
 //        }
 //
-//        $status = $this->changeAuthenticationData( [
-//            'username' => $this->getName(),
+//        $status = this.changeAuthenticationData([
+//            'username' => this.getName(),
 //            'password' => $str,
 //            'retype' => $str,
-//		] );
-//        if ( !$status->isGood() ) {
-//			\MediaWiki\Logger\LoggerFactory::getInstance( 'authentication' )
-//				->info( __METHOD__ . ': Password change rejected: '
-//                . $status->getWikiText( null, null, 'en' ) );
+//		]);
+//        if (!$status.isGood()) {
+//			\MediaWiki\Logger\LoggerFactory::getInstance('authentication')
+//				.info(__METHOD__ . ': Password change rejected: '
+//                . $status.getWikiText(null, null, 'en'));
 //            return false;
 //        }
 //
-//        $this->setOption( 'watchlisttoken', false );
-//        SessionManager::singleton()->invalidateSessionsForUser( $this );
+//        this.setOption('watchlisttoken', false);
+//        SessionManager::singleton().invalidateSessionsForUser($this);
 //
 //        return true;
 //    }
@@ -2935,22 +2942,22 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return Status
 //     * @since 1.27
 //     */
-//    public function changeAuthenticationData( array $data ) {
+//    public function changeAuthenticationData(array $data) {
 //        $manager = AuthManager::singleton();
-//        $reqs = $manager->getAuthenticationRequests( AuthManager::ACTION_CHANGE, $this );
-//        $reqs = AuthenticationRequest::loadRequestsFromSubmission( $reqs, $data );
+//        $reqs = $manager.getAuthenticationRequests(AuthManager::ACTION_CHANGE, $this);
+//        $reqs = AuthenticationRequest::loadRequestsFromSubmission($reqs, $data);
 //
-//        $status = Status::newGood( 'ignored' );
-//        foreach ( $reqs as $req ) {
-//            $status->merge( $manager->allowsAuthenticationDataChange( $req ), true );
+//        $status = Status::newGood('ignored');
+//        foreach ($reqs as $req) {
+//            $status.merge($manager.allowsAuthenticationDataChange($req), true);
 //        }
-//        if ( $status->getValue() === 'ignored' ) {
-//            $status->warning( 'authenticationdatachange-ignored' );
+//        if ($status.getValue() === 'ignored') {
+//            $status.warning('authenticationdatachange-ignored');
 //        }
 //
-//        if ( $status->isGood() ) {
-//            foreach ( $reqs as $req ) {
-//                $manager->changeAuthenticationData( $req );
+//        if ($status.isGood()) {
+//            foreach ($reqs as $req) {
+//                $manager.changeAuthenticationData($req);
 //            }
 //        }
 //        return $status;
@@ -2962,41 +2969,41 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *   user doesn't have one (default=true for backwards compatibility).
 //     * @return string|null Token
 //     */
-//    public function getToken( $forceCreation = true ) {
+//    public function getToken($forceCreation = true) {
 //        global $wgAuthenticationTokenVersion;
 //
-//        $this->load();
-//        if ( !$this->mToken && $forceCreation ) {
-//            $this->setToken();
+//        this.load();
+//        if (!this.mToken && $forceCreation) {
+//            this.setToken();
 //        }
 //
-//        if ( !$this->mToken ) {
+//        if (!this.mToken) {
 //            // The user doesn't have a token, return null to indicate that.
 //            return null;
 //        }
 //
-//        if ( $this->mToken === self::INVALID_TOKEN ) {
+//        if (this.mToken === self::INVALID_TOKEN) {
 //            // We return a random value here so existing token checks are very
 //            // likely to fail.
-//            return MWCryptRand::generateHex( self::TOKEN_LENGTH );
+//            return MWCryptRand::generateHex(self::TOKEN_LENGTH);
 //        }
 //
-//        if ( $wgAuthenticationTokenVersion === null ) {
+//        if ($wgAuthenticationTokenVersion === null) {
 //            // $wgAuthenticationTokenVersion not in use, so return the raw secret
-//            return $this->mToken;
+//            return this.mToken;
 //        }
 //
 //        // $wgAuthenticationTokenVersion in use, so hmac it.
-//        $ret = MWCryptHash::hmac( $wgAuthenticationTokenVersion, $this->mToken, false );
+//        $ret = MWCryptHash::hmac($wgAuthenticationTokenVersion, this.mToken, false);
 //
 //        // The raw hash can be overly long. Shorten it up.
-//        $len = max( 32, self::TOKEN_LENGTH );
-//        if ( strlen( $ret ) < $len ) {
+//        $len = max(32, self::TOKEN_LENGTH);
+//        if (strlen($ret) < $len) {
 //            // Should never happen, even md5 is 128 bits
-//            throw new \UnexpectedValueException( 'Hmac returned less than 128 bits' );
+//            throw new \UnexpectedValueException('Hmac returned less than 128 bits');
 //        }
 //
-//        return substr( $ret, -$len );
+//        return substr($ret, -$len);
 //    }
 //
 //    /**
@@ -3005,15 +3012,15 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @param string|bool $token If specified, set the token to this value
 //     */
-//    public function setToken( $token = false ) {
-//        $this->load();
-//        if ( $this->mToken === self::INVALID_TOKEN ) {
-//			\MediaWiki\Logger\LoggerFactory::getInstance( 'session' )
-//				->debug( __METHOD__ . ": Ignoring attempt to set token for system user \"$this\"" );
-//        } elseif ( !$token ) {
-//            $this->mToken = MWCryptRand::generateHex( self::TOKEN_LENGTH );
+//    public function setToken($token = false) {
+//        this.load();
+//        if (this.mToken === self::INVALID_TOKEN) {
+//			\MediaWiki\Logger\LoggerFactory::getInstance('session')
+//				.debug(__METHOD__ . ": Ignoring attempt to set token for system user \"$this\"");
+//        } elseif (!$token) {
+//            this.mToken = MWCryptRand::generateHex(self::TOKEN_LENGTH);
 //        } else {
-//            $this->mToken = $token;
+//            this.mToken = $token;
 //        }
 //    }
 //
@@ -3025,8 +3032,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *  password hash meaning that the user will not be able to use it
 //     * @param bool $throttle If true, reset the throttle timestamp to the present
 //     */
-//    public function setNewpassword( $str, $throttle = true ) {
-//        throw new BadMethodCallException( __METHOD__ . ' has been removed in 1.27' );
+//    public function setNewpassword($str, $throttle = true) {
+//        throw new BadMethodCallException(__METHOD__ . ' has been removed in 1.27');
 //    }
 //
 //    /**
@@ -3034,9 +3041,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string User's email address
 //     */
 //    public function getEmail() {
-//        $this->load();
-//        Hooks::run( 'UserGetEmail', [ $this, &$this->mEmail ] );
-//        return $this->mEmail;
+//        this.load();
+//        Hooks::run('UserGetEmail', [ $this, &this.mEmail ]);
+//        return this.mEmail;
 //    }
 //
 //    /**
@@ -3044,23 +3051,23 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string TS_MW timestamp
 //     */
 //    public function getEmailAuthenticationTimestamp() {
-//        $this->load();
-//        Hooks::run( 'UserGetEmailAuthenticationTimestamp', [ $this, &$this->mEmailAuthenticated ] );
-//        return $this->mEmailAuthenticated;
+//        this.load();
+//        Hooks::run('UserGetEmailAuthenticationTimestamp', [ $this, &this.mEmailAuthenticated ]);
+//        return this.mEmailAuthenticated;
 //    }
 //
 //    /**
 //     * Set the user's e-mail address
 //     * @param string $str New e-mail address
 //     */
-//    public function setEmail( $str ) {
-//        $this->load();
-//        if ( $str == $this->mEmail ) {
+//    public function setEmail($str) {
+//        this.load();
+//        if ($str == this.mEmail) {
 //            return;
 //        }
-//        $this->invalidateEmail();
-//        $this->mEmail = $str;
-//        Hooks::run( 'UserSetEmail', [ $this, &$this->mEmail ] );
+//        this.invalidateEmail();
+//        this.mEmail = $str;
+//        Hooks::run('UserSetEmail', [ $this, &this.mEmail ]);
 //    }
 //
 //    /**
@@ -3070,50 +3077,50 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $str New e-mail address
 //     * @return Status
 //     */
-//    public function setEmailWithConfirmation( $str ) {
+//    public function setEmailWithConfirmation($str) {
 //        global $wgEnableEmail, $wgEmailAuthentication;
 //
-//        if ( !$wgEnableEmail ) {
-//            return Status::newFatal( 'emaildisabled' );
+//        if (!$wgEnableEmail) {
+//            return Status::newFatal('emaildisabled');
 //        }
 //
-//        $oldaddr = $this->getEmail();
-//        if ( $str === $oldaddr ) {
-//            return Status::newGood( true );
+//        $oldaddr = this.getEmail();
+//        if ($str === $oldaddr) {
+//            return Status::newGood(true);
 //        }
 //
 //        $type = $oldaddr != '' ? 'changed' : 'set';
 //        $notificationResult = null;
 //
-//        if ( $wgEmailAuthentication && $type === 'changed' ) {
+//        if ($wgEmailAuthentication && $type === 'changed') {
 //            // Send the user an email notifying the user of the change in registered
 //            // email address on their previous email address
 //            $change = $str != '' ? 'changed' : 'removed';
-//            $notificationResult = $this->sendMail(
-//                wfMessage( 'notificationemail_subject_' . $change )->text(),
-//                wfMessage( 'notificationemail_body_' . $change,
-//                    $this->getRequest()->getIP(),
-//                $this->getName(),
-//                $str )->text()
+//            $notificationResult = this.sendMail(
+//                wfMessage('notificationemail_subject_' . $change).text(),
+//                wfMessage('notificationemail_body_' . $change,
+//                    this.getRequest().getIP(),
+//                this.getName(),
+//                $str).text()
 //			);
 //        }
 //
-//        $this->setEmail( $str );
+//        this.setEmail($str);
 //
-//        if ( $str !== '' && $wgEmailAuthentication ) {
+//        if ($str !== '' && $wgEmailAuthentication) {
 //            // Send a confirmation request to the new address if needed
-//            $result = $this->sendConfirmationMail( $type );
+//            $result = this.sendConfirmationMail($type);
 //
-//            if ( $notificationResult !== null ) {
-//                $result->merge( $notificationResult );
+//            if ($notificationResult !== null) {
+//                $result.merge($notificationResult);
 //            }
 //
-//            if ( $result->isGood() ) {
+//            if ($result.isGood()) {
 //                // Say to the caller that a confirmation and notification mail has been sent
-//                $result->value = 'eauth';
+//                $result.value = 'eauth';
 //            }
 //        } else {
-//            $result = Status::newGood( true );
+//            $result = Status::newGood(true);
 //        }
 //
 //        return $result;
@@ -3124,52 +3131,53 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string User's real name
 //     */
 //    public function getRealName() {
-//        if ( !$this->isItemLoaded( 'realname' ) ) {
-//            $this->load();
+//        if (!this.isItemLoaded('realname')) {
+//            this.load();
 //        }
 //
-//        return $this->mRealName;
+//        return this.mRealName;
 //    }
 //
 //    /**
 //     * Set the user's real name
 //     * @param string $str New real name
 //     */
-//    public function setRealName( $str ) {
-//        $this->load();
-//        $this->mRealName = $str;
+//    public function setRealName($str) {
+//        this.load();
+//        this.mRealName = $str;
 //    }
-//
-//    /**
-//     * Get the user's current setting for a given option.
-//     *
-//     * @param string $oname The option to check
-//     * @param string|array|null $defaultOverride A default value returned if the option does not exist
-//     * @param bool $ignoreHidden Whether to ignore the effects of $wgHiddenPrefs
-//     * @return string|array|int|null User's current value for the option
-//     * @see getBoolOption()
-//     * @see getIntOption()
-//     */
-//    public function getOption( $oname, $defaultOverride = null, $ignoreHidden = false ) {
-//        global $wgHiddenPrefs;
-//        $this->loadOptions();
-//
-//		# We want 'disabled' preferences to always behave as the default value for
-//		# users, even if they have set the option explicitly in their settings (ie they
-//            # set it, and then it was disabled removing their ability to change it).  But
-//		# we don't want to erase the preferences in the database in case the preference
-//		# is re-enabled again.  So don't touch $mOptions, just override the returned value
-//        if ( !$ignoreHidden && in_array( $oname, $wgHiddenPrefs ) ) {
-//            return self::getDefaultOption( $oname );
-//        }
-//
-//        if ( array_key_exists( $oname, $this->mOptions ) ) {
-//            return $this->mOptions[$oname];
-//        }
-//
-//        return $defaultOverride;
-//    }
-//
+
+    /**
+     * Get the user's current setting for a given option.
+     *
+     * @param string $oname The option to check
+     * @param string|array|null $defaultOverride A default value returned if the option does not exist
+     * @param bool $ignoreHidden Whether to ignore the effects of $wgHiddenPrefs
+     * @return string|array|int|null User's current value for the option
+     * @see getBoolOption()
+     * @see getIntOption()
+     */
+    private static XophpArray wgHiddenPrefs = XophpArray.New(); // global $wgHiddenPrefs;
+    public Object getOption(String oname) {return getOption(oname, null, false);}
+    public Object getOption(String oname, Object defaultOverride, boolean ignoreHidden) {
+//        this.loadOptions();
+
+		// We want 'disabled' preferences to always behave as the default value for
+		// users, even if they have set the option explicitly in their settings (ie they
+        // set it, and then it was disabled removing their ability to change it).  But
+		// we don't want to erase the preferences in the database in case the preference
+		// is re-enabled again.  So don't touch $mOptions, just override the returned value
+        if (!ignoreHidden && XophpArray_.in_array(oname, wgHiddenPrefs)) {
+//            return getDefaultOption(oname);
+        }
+
+        if (XophpArray_.array_key_exists(oname, this.mOptions)) {
+            return this.mOptions.Get_by(oname);
+        }
+
+        return defaultOverride;
+    }
+
 //    /**
 //     * Get all user's options
 //     *
@@ -3178,25 +3186,25 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *                                      to the default value. (Since 1.25)
 //     * @return array
 //     */
-//    public function getOptions( $flags = 0 ) {
+//    public function getOptions($flags = 0) {
 //        global $wgHiddenPrefs;
-//        $this->loadOptions();
-//        $options = $this->mOptions;
+//        this.loadOptions();
+//        $options = this.mOptions;
 //
 //		# We want 'disabled' preferences to always behave as the default value for
 //		# users, even if they have set the option explicitly in their settings (ie they
 //            # set it, and then it was disabled removing their ability to change it).  But
 //		# we don't want to erase the preferences in the database in case the preference
 //		# is re-enabled again.  So don't touch $mOptions, just override the returned value
-//        foreach ( $wgHiddenPrefs as $pref ) {
-//            $default = self::getDefaultOption( $pref );
-//            if ( $default !== null ) {
+//        foreach ($wgHiddenPrefs as $pref) {
+//            $default = self::getDefaultOption($pref);
+//            if ($default !== null) {
 //                $options[$pref] = $default;
 //            }
 //        }
 //
-//        if ( $flags & self::GETOPTIONS_EXCLUDE_DEFAULTS ) {
-//            $options = array_diff_assoc( $options, self::getDefaultOptions() );
+//        if ($flags & self::GETOPTIONS_EXCLUDE_DEFAULTS) {
+//            $options = array_diff_assoc($options, self::getDefaultOptions());
 //        }
 //
 //        return $options;
@@ -3209,8 +3217,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool User's current value for the option
 //     * @see getOption()
 //     */
-//    public function getBoolOption( $oname ) {
-//        return (bool)$this->getOption( $oname );
+//    public function getBoolOption($oname) {
+//        return (bool)this.getOption($oname);
 //    }
 //
 //    /**
@@ -3221,12 +3229,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return int User's current value for the option
 //     * @see getOption()
 //     */
-//    public function getIntOption( $oname, $defaultOverride = 0 ) {
-//        $val = $this->getOption( $oname );
-//        if ( $val == '' ) {
+//    public function getIntOption($oname, $defaultOverride = 0) {
+//        $val = this.getOption($oname);
+//        if ($val == '') {
 //            $val = $defaultOverride;
 //        }
-//        return intval( $val );
+//        return intval($val);
 //    }
 //
 //    /**
@@ -3237,15 +3245,15 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $oname The option to set
 //     * @param mixed $val New value to set
 //     */
-//    public function setOption( $oname, $val ) {
-//        $this->loadOptions();
+//    public function setOption($oname, $val) {
+//        this.loadOptions();
 //
 //        // Explicitly NULL values should refer to defaults
-//        if ( is_null( $val ) ) {
-//            $val = self::getDefaultOption( $oname );
+//        if (is_null($val)) {
+//            $val = self::getDefaultOption($oname);
 //        }
 //
-//        $this->mOptions[$oname] = $val;
+//        this.mOptions[$oname] = $val;
 //    }
 //
 //    /**
@@ -3258,20 +3266,20 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @see getOption()
 //     * @deprecated since 1.26 Applications should use the OAuth extension
 //     */
-//    public function getTokenFromOption( $oname ) {
+//    public function getTokenFromOption($oname) {
 //        global $wgHiddenPrefs;
 //
-//        $id = $this->getId();
-//        if ( !$id || in_array( $oname, $wgHiddenPrefs ) ) {
+//        $id = this.getId();
+//        if (!$id || in_array($oname, $wgHiddenPrefs)) {
 //            return false;
 //        }
 //
-//        $token = $this->getOption( $oname );
-//        if ( !$token ) {
+//        $token = this.getOption($oname);
+//        if (!$token) {
 //            // Default to a value based on the user token to avoid space
 //            // wasted on storing tokens for all users. When this option
 //            // is set manually by the user, only then is it stored.
-//            $token = hash_hmac( 'sha1', "$oname:$id", $this->getToken() );
+//            $token = hash_hmac('sha1', "$oname:$id", this.getToken());
 //        }
 //
 //        return $token;
@@ -3286,14 +3294,14 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @see getTokenFromOption()
 //     * @see setOption()
 //     */
-//    public function resetTokenFromOption( $oname ) {
+//    public function resetTokenFromOption($oname) {
 //        global $wgHiddenPrefs;
-//        if ( in_array( $oname, $wgHiddenPrefs ) ) {
+//        if (in_array($oname, $wgHiddenPrefs)) {
 //            return false;
 //        }
 //
-//        $token = MWCryptRand::generateHex( 40 );
-//        $this->setOption( $oname, $token );
+//        $token = MWCryptRand::generateHex(40);
+//        this.setOption($oname, $token);
 //        return $token;
 //    }
 //
@@ -3340,71 +3348,71 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @see User::listOptionKinds
 //     * @param IContextSource $context
 //     * @param array|null $options Assoc. array with options keys to check as keys.
-//     *   Defaults to $this->mOptions.
+//     *   Defaults to this.mOptions.
 //     * @return array The key => kind mapping data
 //     */
-//    public function getOptionKinds( IContextSource $context, $options = null ) {
-//        $this->loadOptions();
-//        if ( $options === null ) {
-//            $options = $this->mOptions;
+//    public function getOptionKinds(IContextSource $context, $options = null) {
+//        this.loadOptions();
+//        if ($options === null) {
+//            $options = this.mOptions;
 //        }
 //
-//        $preferencesFactory = MediaWikiServices::getInstance()->getPreferencesFactory();
-//        $prefs = $preferencesFactory->getFormDescriptor( $this, $context );
+//        $preferencesFactory = MediaWikiServices::getInstance().getPreferencesFactory();
+//        $prefs = $preferencesFactory.getFormDescriptor($this, $context);
 //        $mapping = [];
 //
 //        // Pull out the "special" options, so they don't get converted as
 //        // multiselect or checkmatrix.
-//        $specialOptions = array_fill_keys( $preferencesFactory->getSaveBlacklist(), true );
-//        foreach ( $specialOptions as $name => $value ) {
-//            unset( $prefs[$name] );
+//        $specialOptions = array_fill_keys($preferencesFactory.getSaveBlacklist(), true);
+//        foreach ($specialOptions as $name => $value) {
+//            unset($prefs[$name]);
 //        }
 //
 //        // Multiselect and checkmatrix options are stored in the database with
 //        // one key per option, each having a boolean value. Extract those keys.
 //        $multiselectOptions = [];
-//        foreach ( $prefs as $name => $info ) {
-//            if ( ( isset( $info['type'] ) && $info['type'] == 'multiselect' ) ||
-//                ( isset( $info['class'] ) && $info['class'] == HTMLMultiSelectField::class ) ) {
-//                $opts = HTMLFormField::flattenOptions( $info['options'] );
+//        foreach ($prefs as $name => $info) {
+//            if ((isset($info['type']) && $info['type'] == 'multiselect') ||
+//                (isset($info['class']) && $info['class'] == HTMLMultiSelectField::class)) {
+//                $opts = HTMLFormField::flattenOptions($info['options']);
 //                $prefix = $info['prefix'] ?? $name;
 //
-//                foreach ( $opts as $value ) {
+//                foreach ($opts as $value) {
 //                    $multiselectOptions["$prefix$value"] = true;
 //                }
 //
-//                unset( $prefs[$name] );
+//                unset($prefs[$name]);
 //            }
 //        }
 //        $checkmatrixOptions = [];
-//        foreach ( $prefs as $name => $info ) {
-//            if ( ( isset( $info['type'] ) && $info['type'] == 'checkmatrix' ) ||
-//                ( isset( $info['class'] ) && $info['class'] == HTMLCheckMatrix::class ) ) {
-//                $columns = HTMLFormField::flattenOptions( $info['columns'] );
-//                $rows = HTMLFormField::flattenOptions( $info['rows'] );
+//        foreach ($prefs as $name => $info) {
+//            if ((isset($info['type']) && $info['type'] == 'checkmatrix') ||
+//                (isset($info['class']) && $info['class'] == HTMLCheckMatrix::class)) {
+//                $columns = HTMLFormField::flattenOptions($info['columns']);
+//                $rows = HTMLFormField::flattenOptions($info['rows']);
 //                $prefix = $info['prefix'] ?? $name;
 //
-//                foreach ( $columns as $column ) {
-//                    foreach ( $rows as $row ) {
+//                foreach ($columns as $column) {
+//                    foreach ($rows as $row) {
 //                        $checkmatrixOptions["$prefix$column-$row"] = true;
 //                    }
 //                }
 //
-//                unset( $prefs[$name] );
+//                unset($prefs[$name]);
 //            }
 //        }
 //
 //        // $value is ignored
-//        foreach ( $options as $key => $value ) {
-//            if ( isset( $prefs[$key] ) ) {
+//        foreach ($options as $key => $value) {
+//            if (isset($prefs[$key])) {
 //                $mapping[$key] = 'registered';
-//            } elseif ( isset( $multiselectOptions[$key] ) ) {
+//            } elseif (isset($multiselectOptions[$key])) {
 //                $mapping[$key] = 'registered-multiselect';
-//            } elseif ( isset( $checkmatrixOptions[$key] ) ) {
+//            } elseif (isset($checkmatrixOptions[$key])) {
 //                $mapping[$key] = 'registered-checkmatrix';
-//            } elseif ( isset( $specialOptions[$key] ) ) {
+//            } elseif (isset($specialOptions[$key])) {
 //                $mapping[$key] = 'special';
-//            } elseif ( substr( $key, 0, 7 ) === 'userjs-' ) {
+//            } elseif (substr($key, 0, 7) === 'userjs-') {
 //                $mapping[$key] = 'userjs';
 //            } else {
 //                $mapping[$key] = 'unused';
@@ -3422,7 +3430,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * and 'all', which forces a reset of *all* preferences and overrides everything else.
 //     *
 //     * @param array|string $resetKinds Which kinds of preferences to reset. Defaults to
-//     *  array( 'registered', 'registered-multiselect', 'registered-checkmatrix', 'unused' )
+//     *  array('registered', 'registered-multiselect', 'registered-checkmatrix', 'unused')
 //     *  for backwards-compatibility.
 //     * @param IContextSource|null $context Context source used when $resetKinds
 //     *  does not contain 'all', passed to getOptionKinds().
@@ -3431,30 +3439,30 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    public function resetOptions(
 //        $resetKinds = [ 'registered', 'registered-multiselect', 'registered-checkmatrix', 'unused' ],
 //        IContextSource $context = null
-//    ) {
-//        $this->load();
+//   ) {
+//        this.load();
 //        $defaultOptions = self::getDefaultOptions();
 //
-//        if ( !is_array( $resetKinds ) ) {
+//        if (!is_array($resetKinds)) {
 //            $resetKinds = [ $resetKinds ];
 //        }
 //
-//        if ( in_array( 'all', $resetKinds ) ) {
+//        if (in_array('all', $resetKinds)) {
 //            $newOptions = $defaultOptions;
 //        } else {
-//            if ( $context === null ) {
+//            if ($context === null) {
 //                $context = RequestContext::getMain();
 //            }
 //
-//            $optionKinds = $this->getOptionKinds( $context );
-//            $resetKinds = array_intersect( $resetKinds, self::listOptionKinds() );
+//            $optionKinds = this.getOptionKinds($context);
+//            $resetKinds = array_intersect($resetKinds, self::listOptionKinds());
 //            $newOptions = [];
 //
 //            // Use default values for the options that should be deleted, and
 //            // copy old values for the ones that shouldn't.
-//            foreach ( $this->mOptions as $key => $value ) {
-//                if ( in_array( $optionKinds[$key], $resetKinds ) ) {
-//                    if ( array_key_exists( $key, $defaultOptions ) ) {
+//            foreach (this.mOptions as $key => $value) {
+//                if (in_array($optionKinds[$key], $resetKinds)) {
+//                    if (array_key_exists($key, $defaultOptions)) {
 //                        $newOptions[$key] = $defaultOptions[$key];
 //                    }
 //                } else {
@@ -3463,10 +3471,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //            }
 //        }
 //
-//        Hooks::run( 'UserResetAllOptions', [ $this, &$newOptions, $this->mOptions, $resetKinds ] );
+//        Hooks::run('UserResetAllOptions', [ $this, &$newOptions, this.mOptions, $resetKinds ]);
 //
-//        $this->mOptions = $newOptions;
-//        $this->mOptionsLoaded = true;
+//        this.mOptions = $newOptions;
+//        this.mOptionsLoaded = true;
 //    }
 //
 //    /**
@@ -3475,16 +3483,16 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function getDatePreference() {
 //        // Important migration for old data rows
-//        if ( is_null( $this->mDatePreference ) ) {
+//        if (is_null(this.mDatePreference)) {
 //            global $wgLang;
-//            $value = $this->getOption( 'date' );
-//            $map = $wgLang->getDatePreferenceMigrationMap();
-//            if ( isset( $map[$value] ) ) {
+//            $value = this.getOption('date');
+//            $map = $wgLang.getDatePreferenceMigrationMap();
+//            if (isset($map[$value])) {
 //                $value = $map[$value];
 //            }
-//            $this->mDatePreference = $value;
+//            this.mDatePreference = $value;
 //        }
-//        return $this->mDatePreference;
+//        return this.mDatePreference;
 //    }
 //
 //    /**
@@ -3495,14 +3503,14 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function requiresHTTPS() {
 //        global $wgSecureLogin;
-//        if ( !$wgSecureLogin ) {
+//        if (!$wgSecureLogin) {
 //            return false;
 //        }
 //
-//        $https = $this->getBoolOption( 'prefershttps' );
-//        Hooks::run( 'UserRequiresHTTPS', [ $this, &$https ] );
-//        if ( $https ) {
-//            $https = wfCanIPUseHTTPS( $this->getRequest()->getIP() );
+//        $https = this.getBoolOption('prefershttps');
+//        Hooks::run('UserRequiresHTTPS', [ $this, &$https ]);
+//        if ($https) {
+//            $https = wfCanIPUseHTTPS(this.getRequest().getIP());
 //        }
 //
 //        return $https;
@@ -3515,8 +3523,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function getStubThreshold() {
 //        global $wgMaxArticleSize; # Maximum article size, in Kb
-//            $threshold = $this->getIntOption( 'stubthreshold' );
-//        if ( $threshold > $wgMaxArticleSize * 1024 ) {
+//            $threshold = this.getIntOption('stubthreshold');
+//        if ($threshold > $wgMaxArticleSize * 1024) {
 //            // If they have set an impossible value, disable the preference
 //            // so we can use the parser cache again.
 //            $threshold = 0;
@@ -3529,40 +3537,40 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string[] permission names
 //     */
 //    public function getRights() {
-//        if ( is_null( $this->mRights ) ) {
-//            $this->mRights = self::getGroupPermissions( $this->getEffectiveGroups() );
-//            Hooks::run( 'UserGetRights', [ $this, &$this->mRights ] );
+//        if (is_null(this.mRights)) {
+//            this.mRights = self::getGroupPermissions(this.getEffectiveGroups());
+//            Hooks::run('UserGetRights', [ $this, &this.mRights ]);
 //
 //            // Deny any rights denied by the user's session, unless this
 //            // endpoint has no sessions.
-//            if ( !defined( 'MW_NO_SESSION' ) ) {
-//                $allowedRights = $this->getRequest()->getSession()->getAllowedUserRights();
-//                if ( $allowedRights !== null ) {
-//                    $this->mRights = array_intersect( $this->mRights, $allowedRights );
+//            if (!defined('MW_NO_SESSION')) {
+//                $allowedRights = this.getRequest().getSession().getAllowedUserRights();
+//                if ($allowedRights !== null) {
+//                    this.mRights = array_intersect(this.mRights, $allowedRights);
 //                }
 //            }
 //
-//            Hooks::run( 'UserGetRightsRemove', [ $this, &$this->mRights ] );
+//            Hooks::run('UserGetRightsRemove', [ $this, &this.mRights ]);
 //            // Force reindexation of rights when a hook has unset one of them
-//            $this->mRights = array_values( array_unique( $this->mRights ) );
+//            this.mRights = array_values(array_unique(this.mRights));
 //
 //            // If block disables login, we should also remove any
 //            // extra rights blocked users might have, in case the
 //            // blocked user has a pre-existing session (T129738).
 //            // This is checked here for cases where people only call
-//            // $user->isAllowed(). It is also checked in Title::checkUserBlock()
+//            // $user.isAllowed(). It is also checked in Title::checkUserBlock()
 //            // to give a better error message in the common case.
-//            $config = RequestContext::getMain()->getConfig();
+//            $config = RequestContext::getMain().getConfig();
 //            if (
-//                $this->isLoggedIn() &&
-//                    $config->get( 'BlockDisablesLogin' ) &&
-//                        $this->isBlocked()
-//            ) {
+//                this.isLoggedIn() &&
+//                    $config.get('BlockDisablesLogin') &&
+//                        this.isBlocked()
+//           ) {
 //                $anon = new User;
-//                $this->mRights = array_intersect( $this->mRights, $anon->getRights() );
+//                this.mRights = array_intersect(this.mRights, $anon.getRights());
 //            }
 //        }
-//        return $this->mRights;
+//        return this.mRights;
 //    }
 //
 //    /**
@@ -3572,9 +3580,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string[] Array of internal group names (sorted since 1.33)
 //     */
 //    public function getGroups() {
-//        $this->load();
-//        $this->loadGroups();
-//        return array_keys( $this->mGroupMemberships );
+//        this.load();
+//        this.loadGroups();
+//        return array_keys(this.mGroupMemberships);
 //    }
 //
 //    /**
@@ -3585,9 +3593,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @since 1.29
 //     */
 //    public function getGroupMemberships() {
-//        $this->load();
-//        $this->loadGroups();
-//        return $this->mGroupMemberships;
+//        this.load();
+//        this.loadGroups();
+//        return this.mGroupMemberships;
 //    }
 //
 //    /**
@@ -3597,20 +3605,20 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param bool $recache Whether to avoid the cache
 //     * @return array Array of String internal group names
 //     */
-//    public function getEffectiveGroups( $recache = false ) {
-//        if ( $recache || is_null( $this->mEffectiveGroups ) ) {
-//            $this->mEffectiveGroups = array_unique( array_merge(
-//                $this->getGroups(), // explicit groups
-//                $this->getAutomaticGroups( $recache ) // implicit groups
-//            ) );
+//    public function getEffectiveGroups($recache = false) {
+//        if ($recache || is_null(this.mEffectiveGroups)) {
+//            this.mEffectiveGroups = array_unique(array_merge(
+//                this.getGroups(), // explicit groups
+//                this.getAutomaticGroups($recache) // implicit groups
+//           ));
 //            // Avoid PHP 7.1 warning of passing $this by reference
 //            $user = $this;
 //            // Hook for additional groups
-//            Hooks::run( 'UserEffectiveGroups', [ &$user, &$this->mEffectiveGroups ] );
+//            Hooks::run('UserEffectiveGroups', [ &$user, &this.mEffectiveGroups ]);
 //            // Force reindexation of groups when a hook has unset one of them
-//            $this->mEffectiveGroups = array_values( array_unique( $this->mEffectiveGroups ) );
+//            this.mEffectiveGroups = array_values(array_unique(this.mEffectiveGroups));
 //        }
-//        return $this->mEffectiveGroups;
+//        return this.mEffectiveGroups;
 //    }
 //
 //    /**
@@ -3620,24 +3628,24 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param bool $recache Whether to avoid the cache
 //     * @return array Array of String internal group names
 //     */
-//    public function getAutomaticGroups( $recache = false ) {
-//        if ( $recache || is_null( $this->mImplicitGroups ) ) {
-//            $this->mImplicitGroups = [ '*' ];
-//            if ( $this->getId() ) {
-//                $this->mImplicitGroups[] = 'user';
+//    public function getAutomaticGroups($recache = false) {
+//        if ($recache || is_null(this.mImplicitGroups)) {
+//            this.mImplicitGroups = [ '*' ];
+//            if (this.getId()) {
+//                this.mImplicitGroups[] = 'user';
 //
-//                $this->mImplicitGroups = array_unique( array_merge(
-//                    $this->mImplicitGroups,
-//                    Autopromote::getAutopromoteGroups( $this )
-//				) );
+//                this.mImplicitGroups = array_unique(array_merge(
+//                    this.mImplicitGroups,
+//                    Autopromote::getAutopromoteGroups($this)
+//				));
 //            }
-//            if ( $recache ) {
+//            if ($recache) {
 //                // Assure data consistency with rights/groups,
 //                // as getEffectiveGroups() depends on this function
-//                $this->mEffectiveGroups = null;
+//                this.mEffectiveGroups = null;
 //            }
 //        }
-//        return $this->mImplicitGroups;
+//        return this.mImplicitGroups;
 //    }
 //
 //    /**
@@ -3650,23 +3658,23 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return array Names of the groups the user has belonged to.
 //     */
 //    public function getFormerGroups() {
-//        $this->load();
+//        this.load();
 //
-//        if ( is_null( $this->mFormerGroups ) ) {
-//            $db = ( $this->queryFlagsUsed & self::READ_LATEST )
-//                ? wfGetDB( DB_MASTER )
-//                : wfGetDB( DB_REPLICA );
-//            $res = $db->select( 'user_former_groups',
+//        if (is_null(this.mFormerGroups)) {
+//            $db = (this.queryFlagsUsed & self::READ_LATEST)
+//                ? wfGetDB(DB_MASTER)
+//                : wfGetDB(DB_REPLICA);
+//            $res = $db.select('user_former_groups',
 //                [ 'ufg_group' ],
-//				[ 'ufg_user' => $this->mId ],
-//            __METHOD__ );
-//            $this->mFormerGroups = [];
-//            foreach ( $res as $row ) {
-//                $this->mFormerGroups[] = $row->ufg_group;
+//				[ 'ufg_user' => this.mId ],
+//            __METHOD__);
+//            this.mFormerGroups = [];
+//            foreach ($res as $row) {
+//                this.mFormerGroups[] = $row.ufg_group;
 //            }
 //        }
 //
-//        return $this->mFormerGroups;
+//        return this.mFormerGroups;
 //    }
 //
 //    /**
@@ -3674,27 +3682,27 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return int|null Null for anonymous users
 //     */
 //    public function getEditCount() {
-//        if ( !$this->getId() ) {
+//        if (!this.getId()) {
 //            return null;
 //        }
 //
-//        if ( $this->mEditCount === null ) {
+//        if (this.mEditCount === null) {
 //            /* Populate the count, if it has not been populated yet */
-//            $dbr = wfGetDB( DB_REPLICA );
+//            $dbr = wfGetDB(DB_REPLICA);
 //            // check if the user_editcount field has been initialized
-//            $count = $dbr->selectField(
+//            $count = $dbr.selectField(
 //                'user', 'user_editcount',
-//                [ 'user_id' => $this->mId ],
+//                [ 'user_id' => this.mId ],
 //            __METHOD__
 //			);
 //
-//            if ( $count === null ) {
+//            if ($count === null) {
 //                // it has not been initialized. do so.
-//                $count = $this->initEditCountInternal();
+//                $count = this.initEditCountInternal();
 //            }
-//            $this->mEditCount = $count;
+//            this.mEditCount = $count;
 //        }
-//        return (int)$this->mEditCount;
+//        return (int)this.mEditCount;
 //    }
 //
 //    /**
@@ -3708,32 +3716,32 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *   wfTimestamp(), or null if the group assignment should not expire
 //     * @return bool
 //     */
-//    public function addGroup( $group, $expiry = null ) {
-//        $this->load();
-//        $this->loadGroups();
+//    public function addGroup($group, $expiry = null) {
+//        this.load();
+//        this.loadGroups();
 //
-//        if ( $expiry ) {
-//            $expiry = wfTimestamp( TS_MW, $expiry );
+//        if ($expiry) {
+//            $expiry = wfTimestamp(TS_MW, $expiry);
 //        }
 //
-//        if ( !Hooks::run( 'UserAddGroup', [ $this, &$group, &$expiry ] ) ) {
+//        if (!Hooks::run('UserAddGroup', [ $this, &$group, &$expiry ])) {
 //            return false;
 //        }
 //
 //        // create the new UserGroupMembership and put it in the DB
-//        $ugm = new UserGroupMembership( $this->mId, $group, $expiry );
-//        if ( !$ugm->insert( true ) ) {
+//        $ugm = new UserGroupMembership(this.mId, $group, $expiry);
+//        if (!$ugm.insert(true)) {
 //            return false;
 //        }
 //
-//        $this->mGroupMemberships[$group] = $ugm;
+//        this.mGroupMemberships[$group] = $ugm;
 //
 //        // Refresh the groups caches, and clear the rights cache so it will be
-//        // refreshed on the next call to $this->getRights().
-//        $this->getEffectiveGroups( true );
-//        $this->mRights = null;
+//        // refreshed on the next call to this.getRights().
+//        this.getEffectiveGroups(true);
+//        this.mRights = null;
 //
-//        $this->invalidateCache();
+//        this.invalidateCache();
 //
 //        return true;
 //    }
@@ -3744,28 +3752,28 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $group Name of the group to remove
 //     * @return bool
 //     */
-//    public function removeGroup( $group ) {
-//        $this->load();
+//    public function removeGroup($group) {
+//        this.load();
 //
-//        if ( !Hooks::run( 'UserRemoveGroup', [ $this, &$group ] ) ) {
+//        if (!Hooks::run('UserRemoveGroup', [ $this, &$group ])) {
 //            return false;
 //        }
 //
-//        $ugm = UserGroupMembership::getMembership( $this->mId, $group );
+//        $ugm = UserGroupMembership::getMembership(this.mId, $group);
 //        // delete the membership entry
-//        if ( !$ugm || !$ugm->delete() ) {
+//        if (!$ugm || !$ugm.delete()) {
 //            return false;
 //        }
 //
-//        $this->loadGroups();
-//        unset( $this->mGroupMemberships[$group] );
+//        this.loadGroups();
+//        unset(this.mGroupMemberships[$group]);
 //
 //        // Refresh the groups caches, and clear the rights cache so it will be
-//        // refreshed on the next call to $this->getRights().
-//        $this->getEffectiveGroups( true );
-//        $this->mRights = null;
+//        // refreshed on the next call to this.getRights().
+//        this.getEffectiveGroups(true);
+//        this.mRights = null;
 //
-//        $this->invalidateCache();
+//        this.invalidateCache();
 //
 //        return true;
 //    }
@@ -3775,7 +3783,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function isLoggedIn() {
-//        return $this->getId() != 0;
+//        return this.getId() != 0;
 //    }
 //
 //    /**
@@ -3783,7 +3791,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function isAnon() {
-//        return !$this->isLoggedIn();
+//        return !this.isLoggedIn();
 //    }
 //
 //    /**
@@ -3791,12 +3799,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @since 1.28
 //     */
 //    public function isBot() {
-//        if ( in_array( 'bot', $this->getGroups() ) && $this->isAllowed( 'bot' ) ) {
+//        if (in_array('bot', this.getGroups()) && this.isAllowed('bot')) {
 //            return true;
 //        }
 //
 //        $isBot = false;
-//        Hooks::run( "UserIsBot", [ $this, &$isBot ] );
+//        Hooks::run("UserIsBot", [ $this, &$isBot ]);
 //
 //        return $isBot;
 //    }
@@ -3809,8 +3817,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function isAllowedAny() {
 //        $permissions = func_get_args();
-//        foreach ( $permissions as $permission ) {
-//            if ( $this->isAllowed( $permission ) ) {
+//        foreach ($permissions as $permission) {
+//            if (this.isAllowed($permission)) {
 //                return true;
 //            }
 //        }
@@ -3824,8 +3832,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function isAllowedAll() {
 //        $permissions = func_get_args();
-//        foreach ( $permissions as $permission ) {
-//            if ( !$this->isAllowed( $permission ) ) {
+//        foreach ($permissions as $permission) {
+//            if (!this.isAllowed($permission)) {
 //                return false;
 //            }
 //        }
@@ -3837,13 +3845,13 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $action
 //     * @return bool
 //     */
-//    public function isAllowed( $action = '' ) {
-//        if ( $action === '' ) {
+//    public function isAllowed($action = '') {
+//        if ($action === '') {
 //            return true; // In the spirit of DWIM
 //        }
 //        // Use strict parameter to avoid matching numeric 0 accidentally inserted
 //        // by misconfiguration: 0 == 'foo'
-//        return in_array( $action, $this->getRights(), true );
+//        return in_array($action, this.getRights(), true);
 //    }
 //
 //    /**
@@ -3852,7 +3860,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function useRCPatrol() {
 //        global $wgUseRCPatrol;
-//        return $wgUseRCPatrol && $this->isAllowedAny( 'patrol', 'patrolmarks' );
+//        return $wgUseRCPatrol && this.isAllowedAny('patrol', 'patrolmarks');
 //    }
 //
 //    /**
@@ -3862,9 +3870,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    public function useNPPatrol() {
 //        global $wgUseRCPatrol, $wgUseNPPatrol;
 //        return (
-//            ( $wgUseRCPatrol || $wgUseNPPatrol )
-//                && ( $this->isAllowedAny( 'patrol', 'patrolmarks' ) )
-//        );
+//            ($wgUseRCPatrol || $wgUseNPPatrol)
+//                && (this.isAllowedAny('patrol', 'patrolmarks'))
+//       );
 //    }
 //
 //    /**
@@ -3874,9 +3882,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    public function useFilePatrol() {
 //        global $wgUseRCPatrol, $wgUseFilePatrol;
 //        return (
-//            ( $wgUseRCPatrol || $wgUseFilePatrol )
-//                && ( $this->isAllowedAny( 'patrol', 'patrolmarks' ) )
-//        );
+//            ($wgUseRCPatrol || $wgUseFilePatrol)
+//                && (this.isAllowedAny('patrol', 'patrolmarks'))
+//       );
 //    }
 //
 //    /**
@@ -3885,8 +3893,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return WebRequest
 //     */
 //    public function getRequest() {
-//        if ( $this->mRequest ) {
-//            return $this->mRequest;
+//        if (this.mRequest) {
+//            return this.mRequest;
 //        }
 //
 //        global $wgRequest;
@@ -3901,9 +3909,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *     Pass User::CHECK_USER_RIGHTS or User::IGNORE_USER_RIGHTS.
 //     * @return bool
 //     */
-//    public function isWatched( $title, $checkRights = self::CHECK_USER_RIGHTS ) {
-//        if ( $title->isWatchable() && ( !$checkRights || $this->isAllowed( 'viewmywatchlist' ) ) ) {
-//            return MediaWikiServices::getInstance()->getWatchedItemStore()->isWatched( $this, $title );
+//    public function isWatched($title, $checkRights = self::CHECK_USER_RIGHTS) {
+//        if ($title.isWatchable() && (!$checkRights || this.isAllowed('viewmywatchlist'))) {
+//            return MediaWikiServices::getInstance().getWatchedItemStore().isWatched($this, $title);
 //        }
 //        return false;
 //    }
@@ -3915,14 +3923,14 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param bool $checkRights Whether to check 'viewmywatchlist'/'editmywatchlist' rights.
 //     *     Pass User::CHECK_USER_RIGHTS or User::IGNORE_USER_RIGHTS.
 //     */
-//    public function addWatch( $title, $checkRights = self::CHECK_USER_RIGHTS ) {
-//        if ( !$checkRights || $this->isAllowed( 'editmywatchlist' ) ) {
-//            MediaWikiServices::getInstance()->getWatchedItemStore()->addWatchBatchForUser(
+//    public function addWatch($title, $checkRights = self::CHECK_USER_RIGHTS) {
+//        if (!$checkRights || this.isAllowed('editmywatchlist')) {
+//            MediaWikiServices::getInstance().getWatchedItemStore().addWatchBatchForUser(
 //                $this,
-//                [ $title->getSubjectPage(), $title->getTalkPage() ]
+//                [ $title.getSubjectPage(), $title.getTalkPage() ]
 //			);
 //        }
-//        $this->invalidateCache();
+//        this.invalidateCache();
 //    }
 //
 //    /**
@@ -3932,13 +3940,13 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param bool $checkRights Whether to check 'viewmywatchlist'/'editmywatchlist' rights.
 //     *     Pass User::CHECK_USER_RIGHTS or User::IGNORE_USER_RIGHTS.
 //     */
-//    public function removeWatch( $title, $checkRights = self::CHECK_USER_RIGHTS ) {
-//        if ( !$checkRights || $this->isAllowed( 'editmywatchlist' ) ) {
-//            $store = MediaWikiServices::getInstance()->getWatchedItemStore();
-//            $store->removeWatch( $this, $title->getSubjectPage() );
-//            $store->removeWatch( $this, $title->getTalkPage() );
+//    public function removeWatch($title, $checkRights = self::CHECK_USER_RIGHTS) {
+//        if (!$checkRights || this.isAllowed('editmywatchlist')) {
+//            $store = MediaWikiServices::getInstance().getWatchedItemStore();
+//            $store.removeWatch($this, $title.getSubjectPage());
+//            $store.removeWatch($this, $title.getTalkPage());
 //        }
-//        $this->invalidateCache();
+//        this.invalidateCache();
 //    }
 //
 //    /**
@@ -3949,51 +3957,51 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param Title &$title Title of the article to look at
 //     * @param int $oldid The revision id being viewed. If not given or 0, latest revision is assumed.
 //     */
-//    public function clearNotification( &$title, $oldid = 0 ) {
+//    public function clearNotification(&$title, $oldid = 0) {
 //        global $wgUseEnotif, $wgShowUpdatedMarker;
 //
 //        // Do nothing if the database is locked to writes
-//        if ( wfReadOnly() ) {
+//        if (wfReadOnly()) {
 //            return;
 //        }
 //
 //        // Do nothing if not allowed to edit the watchlist
-//        if ( !$this->isAllowed( 'editmywatchlist' ) ) {
+//        if (!this.isAllowed('editmywatchlist')) {
 //            return;
 //        }
 //
 //        // If we're working on user's talk page, we should update the talk page message indicator
-//        if ( $title->getNamespace() == NS_USER_TALK && $title->getText() == $this->getName() ) {
+//        if ($title.getNamespace() == NS_USER_TALK && $title.getText() == this.getName()) {
 //            // Avoid PHP 7.1 warning of passing $this by reference
 //            $user = $this;
-//            if ( !Hooks::run( 'UserClearNewTalkNotification', [ &$user, $oldid ] ) ) {
+//            if (!Hooks::run('UserClearNewTalkNotification', [ &$user, $oldid ])) {
 //                return;
 //            }
 //
 //            // Try to update the DB post-send and only if needed...
-//            DeferredUpdates::addCallableUpdate( function () use ( $title, $oldid ) {
-//                if ( !$this->getNewtalk() ) {
+//            DeferredUpdates::addCallableUpdate(function () use ($title, $oldid) {
+//                if (!this.getNewtalk()) {
 //                    return; // no notifications to clear
 //                }
 //
 //                // Delete the last notifications (they stack up)
-//                $this->setNewtalk( false );
+//                this.setNewtalk(false);
 //
 //                // If there is a new, unseen, revision, use its timestamp
 //                $nextid = $oldid
-//                    ? $title->getNextRevisionID( $oldid, Title::GAID_FOR_UPDATE )
+//                    ? $title.getNextRevisionID($oldid, Title::GAID_FOR_UPDATE)
 //                    : null;
-//                if ( $nextid ) {
-//                    $this->setNewtalk( true, Revision::newFromId( $nextid ) );
+//                if ($nextid) {
+//                    this.setNewtalk(true, Revision::newFromId($nextid));
 //                }
-//            } );
+//            });
 //        }
 //
-//        if ( !$wgUseEnotif && !$wgShowUpdatedMarker ) {
+//        if (!$wgUseEnotif && !$wgShowUpdatedMarker) {
 //            return;
 //        }
 //
-//        if ( $this->isAnon() ) {
+//        if (this.isAnon()) {
 //            // Nothing else to do...
 //            return;
 //        }
@@ -4003,12 +4011,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        // and when it does have to be executed, it can be on a replica DB
 //        // If this is the user's newtalk page, we always update the timestamp
 //        $force = '';
-//        if ( $title->getNamespace() == NS_USER_TALK && $title->getText() == $this->getName() ) {
+//        if ($title.getNamespace() == NS_USER_TALK && $title.getText() == this.getName()) {
 //            $force = 'force';
 //        }
 //
-//        MediaWikiServices::getInstance()->getWatchedItemStore()
-//			->resetNotificationTimestamp( $this, $title, $force, $oldid );
+//        MediaWikiServices::getInstance().getWatchedItemStore()
+//			.resetNotificationTimestamp($this, $title, $force, $oldid);
 //    }
 //
 //    /**
@@ -4020,22 +4028,22 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    public function clearAllNotifications() {
 //        global $wgUseEnotif, $wgShowUpdatedMarker;
 //        // Do nothing if not allowed to edit the watchlist
-//        if ( wfReadOnly() || !$this->isAllowed( 'editmywatchlist' ) ) {
+//        if (wfReadOnly() || !this.isAllowed('editmywatchlist')) {
 //            return;
 //        }
 //
-//        if ( !$wgUseEnotif && !$wgShowUpdatedMarker ) {
-//            $this->setNewtalk( false );
+//        if (!$wgUseEnotif && !$wgShowUpdatedMarker) {
+//            this.setNewtalk(false);
 //            return;
 //        }
 //
-//        $id = $this->getId();
-//        if ( !$id ) {
+//        $id = this.getId();
+//        if (!$id) {
 //            return;
 //        }
 //
-//        $watchedItemStore = MediaWikiServices::getInstance()->getWatchedItemStore();
-//        $watchedItemStore->resetAllNotificationTimestampsForUser( $this );
+//        $watchedItemStore = MediaWikiServices::getInstance().getWatchedItemStore();
+//        $watchedItemStore.resetAllNotificationTimestampsForUser($this);
 //
 //        // We also need to clear here the "you have new message" notification for the own
 //        // user_talk page; it's cleared one page view later in WikiPage::doViewUpdates().
@@ -4052,24 +4060,24 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //            $wgLearnerMemberSince,
 //            $wgExperiencedUserMemberSince;
 //
-//        if ( $this->isAnon() ) {
+//        if (this.isAnon()) {
 //            return false;
 //        }
 //
-//        $editCount = $this->getEditCount();
-//        $registration = $this->getRegistration();
+//        $editCount = this.getEditCount();
+//        $registration = this.getRegistration();
 //        $now = time();
-//        $learnerRegistration = wfTimestamp( TS_MW, $now - $wgLearnerMemberSince * 86400 );
-//        $experiencedRegistration = wfTimestamp( TS_MW, $now - $wgExperiencedUserMemberSince * 86400 );
+//        $learnerRegistration = wfTimestamp(TS_MW, $now - $wgLearnerMemberSince * 86400);
+//        $experiencedRegistration = wfTimestamp(TS_MW, $now - $wgExperiencedUserMemberSince * 86400);
 //
-//        if ( $editCount < $wgLearnerEdits ||
-//            $registration > $learnerRegistration ) {
+//        if ($editCount < $wgLearnerEdits ||
+//            $registration > $learnerRegistration) {
 //            return 'newcomer';
 //        }
 //
-//        if ( $editCount > $wgExperiencedUserEdits &&
+//        if ($editCount > $wgExperiencedUserEdits &&
 //            $registration <= $experiencedRegistration
-//        ) {
+//       ) {
 //            return 'experienced';
 //        }
 //
@@ -4084,37 +4092,37 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param bool|null $secure Whether to force secure/insecure cookies or use default
 //     * @param bool $rememberMe Whether to add a Token cookie for elongated sessions
 //     */
-//    public function setCookies( $request = null, $secure = null, $rememberMe = false ) {
-//        $this->load();
-//        if ( $this->mId == 0 ) {
+//    public function setCookies($request = null, $secure = null, $rememberMe = false) {
+//        this.load();
+//        if (this.mId == 0) {
 //            return;
 //        }
 //
-//        $session = $this->getRequest()->getSession();
-//        if ( $request && $session->getRequest() !== $request ) {
-//            $session = $session->sessionWithRequest( $request );
+//        $session = this.getRequest().getSession();
+//        if ($request && $session.getRequest() !== $request) {
+//            $session = $session.sessionWithRequest($request);
 //        }
-//        $delay = $session->delaySave();
+//        $delay = $session.delaySave();
 //
-//        if ( !$session->getUser()->equals( $this ) ) {
-//            if ( !$session->canSetUser() ) {
-//				\MediaWiki\Logger\LoggerFactory::getInstance( 'session' )
-//					->warning( __METHOD__ .
-//                    ": Cannot save user \"$this\" to a user \"{$session->getUser()}\"'s immutable session"
-//                );
+//        if (!$session.getUser().equals($this)) {
+//            if (!$session.canSetUser()) {
+//				\MediaWiki\Logger\LoggerFactory::getInstance('session')
+//					.warning(__METHOD__ .
+//                    ": Cannot save user \"$this\" to a user \"{$session.getUser()}\"'s immutable session"
+//               );
 //                return;
 //            }
-//            $session->setUser( $this );
+//            $session.setUser($this);
 //        }
 //
-//        $session->setRememberUser( $rememberMe );
-//        if ( $secure !== null ) {
-//            $session->setForceHTTPS( $secure );
+//        $session.setRememberUser($rememberMe);
+//        if ($secure !== null) {
+//            $session.setForceHTTPS($secure);
 //        }
 //
-//        $session->persist();
+//        $session.persist();
 //
-//        ScopedCallback::consume( $delay );
+//        ScopedCallback::consume($delay);
 //    }
 //
 //    /**
@@ -4123,8 +4131,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    public function logout() {
 //        // Avoid PHP 7.1 warning of passing $this by reference
 //        $user = $this;
-//        if ( Hooks::run( 'UserLogout', [ &$user ] ) ) {
-//            $this->doLogout();
+//        if (Hooks::run('UserLogout', [ &$user ])) {
+//            this.doLogout();
 //        }
 //    }
 //
@@ -4133,35 +4141,35 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @see logout()
 //     */
 //    public function doLogout() {
-//        $session = $this->getRequest()->getSession();
-//        if ( !$session->canSetUser() ) {
-//			\MediaWiki\Logger\LoggerFactory::getInstance( 'session' )
-//				->warning( __METHOD__ . ": Cannot log out of an immutable session" );
+//        $session = this.getRequest().getSession();
+//        if (!$session.canSetUser()) {
+//			\MediaWiki\Logger\LoggerFactory::getInstance('session')
+//				.warning(__METHOD__ . ": Cannot log out of an immutable session");
 //            $error = 'immutable';
-//        } elseif ( !$session->getUser()->equals( $this ) ) {
-//			\MediaWiki\Logger\LoggerFactory::getInstance( 'session' )
-//				->warning( __METHOD__ .
-//                ": Cannot log user \"$this\" out of a user \"{$session->getUser()}\"'s session"
-//            );
+//        } elseif (!$session.getUser().equals($this)) {
+//			\MediaWiki\Logger\LoggerFactory::getInstance('session')
+//				.warning(__METHOD__ .
+//                ": Cannot log user \"$this\" out of a user \"{$session.getUser()}\"'s session"
+//           );
 //            // But we still may as well make this user object anon
-//            $this->clearInstanceCache( 'defaults' );
+//            this.clearInstanceCache('defaults');
 //            $error = 'wronguser';
 //        } else {
-//            $this->clearInstanceCache( 'defaults' );
-//            $delay = $session->delaySave();
-//            $session->unpersist(); // Clear cookies (T127436)
-//            $session->setLoggedOutTimestamp( time() );
-//            $session->setUser( new User );
-//            $session->set( 'wsUserID', 0 ); // Other code expects this
-//            $session->resetAllTokens();
-//            ScopedCallback::consume( $delay );
+//            this.clearInstanceCache('defaults');
+//            $delay = $session.delaySave();
+//            $session.unpersist(); // Clear cookies (T127436)
+//            $session.setLoggedOutTimestamp(time());
+//            $session.setUser(new User);
+//            $session.set('wsUserID', 0); // Other code expects this
+//            $session.resetAllTokens();
+//            ScopedCallback::consume($delay);
 //            $error = false;
 //        }
-//		\MediaWiki\Logger\LoggerFactory::getInstance( 'authevents' )->info( 'Logout', [
+//		\MediaWiki\Logger\LoggerFactory::getInstance('authevents').info('Logout', [
 //            'event' => 'logout',
 //            'successful' => $error === false,
 //            'status' => $error ?: 'success',
-//		] );
+//		]);
 //    }
 //
 //    /**
@@ -4169,75 +4177,75 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @todo Only rarely do all these fields need to be set!
 //     */
 //    public function saveSettings() {
-//        if ( wfReadOnly() ) {
+//        if (wfReadOnly()) {
 //            // @TODO: caller should deal with this instead!
 //            // This should really just be an exception.
-//            MWExceptionHandler::logException( new DBExpectedError(
+//            MWExceptionHandler::logException(new DBExpectedError(
 //                null,
-//                "Could not update user with ID '{$this->mId}'; DB is read-only."
-//            ) );
+//                "Could not update user with ID '{this.mId}'; DB is read-only."
+//           ));
 //            return;
 //        }
 //
-//        $this->load();
-//        if ( $this->mId == 0 ) {
+//        this.load();
+//        if (this.mId == 0) {
 //            return; // anon
 //        }
 //
 //        // Get a new user_touched that is higher than the old one.
 //        // This will be used for a CAS check as a last-resort safety
 //        // check against race conditions and replica DB lag.
-//        $newTouched = $this->newTouchedTimestamp();
+//        $newTouched = this.newTouchedTimestamp();
 //
-//        $dbw = wfGetDB( DB_MASTER );
-//        $dbw->doAtomicSection( __METHOD__, function ( $dbw, $fname ) use ( $newTouched ) {
+//        $dbw = wfGetDB(DB_MASTER);
+//        $dbw.doAtomicSection(__METHOD__, function ($dbw, $fname) use ($newTouched) {
 //            global $wgActorTableSchemaMigrationStage;
 //
-//            $dbw->update( 'user',
+//            $dbw.update('user',
 //                [ /* SET */
-//                'user_name' => $this->mName,
-//                'user_real_name' => $this->mRealName,
-//                'user_email' => $this->mEmail,
-//                'user_email_authenticated' => $dbw->timestampOrNull( $this->mEmailAuthenticated ),
-//                'user_touched' => $dbw->timestamp( $newTouched ),
-//                'user_token' => strval( $this->mToken ),
-//                'user_email_token' => $this->mEmailToken,
-//                'user_email_token_expires' => $dbw->timestampOrNull( $this->mEmailTokenExpires ),
-//				], $this->makeUpdateConditions( $dbw, [ /* WHERE */
-//                'user_id' => $this->mId,
-//				] ), $fname
+//                'user_name' => this.mName,
+//                'user_real_name' => this.mRealName,
+//                'user_email' => this.mEmail,
+//                'user_email_authenticated' => $dbw.timestampOrNull(this.mEmailAuthenticated),
+//                'user_touched' => $dbw.timestamp($newTouched),
+//                'user_token' => strval(this.mToken),
+//                'user_email_token' => this.mEmailToken,
+//                'user_email_token_expires' => $dbw.timestampOrNull(this.mEmailTokenExpires),
+//				], this.makeUpdateConditions($dbw, [ /* WHERE */
+//                'user_id' => this.mId,
+//				]), $fname
 //			);
 //
-//            if ( !$dbw->affectedRows() ) {
+//            if (!$dbw.affectedRows()) {
 //                // Maybe the problem was a missed cache update; clear it to be safe
-//                $this->clearSharedCache( 'refresh' );
+//                this.clearSharedCache('refresh');
 //                // User was changed in the meantime or loaded with stale data
-//                $from = ( $this->queryFlagsUsed & self::READ_LATEST ) ? 'master' : 'replica';
-//                LoggerFactory::getInstance( 'preferences' )->warning(
+//                $from = (this.queryFlagsUsed & self::READ_LATEST) ? 'master' : 'replica';
+//                LoggerFactory::getInstance('preferences').warning(
 //                    "CAS update failed on user_touched for user ID '{user_id}' ({db_flag} read)",
-//                    [ 'user_id' => $this->mId, 'db_flag' => $from ]
+//                    [ 'user_id' => this.mId, 'db_flag' => $from ]
 //				);
-//                throw new MWException( "CAS update failed on user_touched. " .
+//                throw new MWException("CAS update failed on user_touched. " .
 //                    "The version of the user to be saved is older than the current version."
-//                );
+//               );
 //            }
 //
-//            if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_WRITE_NEW ) {
-//                $dbw->update(
+//            if ($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_WRITE_NEW) {
+//                $dbw.update(
 //                    'actor',
-//                    [ 'actor_name' => $this->mName ],
-//					[ 'actor_user' => $this->mId ],
+//                    [ 'actor_name' => this.mName ],
+//					[ 'actor_user' => this.mId ],
 //                $fname
 //				);
 //            }
-//        } );
+//        });
 //
-//        $this->mTouched = $newTouched;
-//        $this->saveOptions();
+//        this.mTouched = $newTouched;
+//        this.saveOptions();
 //
-//        Hooks::run( 'UserSaveSettings', [ $this ] );
-//        $this->clearSharedCache();
-//        $this->getUserPage()->purgeSquid();
+//        Hooks::run('UserSaveSettings', [ $this ]);
+//        this.clearSharedCache();
+//        this.getUserPage().purgeSquid();
 //    }
 //
 //    /**
@@ -4246,22 +4254,22 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int $flags Bitfield of User:READ_* constants; useful for existence checks
 //     * @return int
 //     */
-//    public function idForName( $flags = 0 ) {
-//        $s = trim( $this->getName() );
-//        if ( $s === '' ) {
+//    public function idForName($flags = 0) {
+//        $s = trim(this.getName());
+//        if ($s === '') {
 //            return 0;
 //        }
 //
-//        $db = ( ( $flags & self::READ_LATEST ) == self::READ_LATEST )
-//            ? wfGetDB( DB_MASTER )
-//            : wfGetDB( DB_REPLICA );
+//        $db = (($flags & self::READ_LATEST) == self::READ_LATEST)
+//            ? wfGetDB(DB_MASTER)
+//            : wfGetDB(DB_REPLICA);
 //
-//        $options = ( ( $flags & self::READ_LOCKING ) == self::READ_LOCKING )
+//        $options = (($flags & self::READ_LOCKING) == self::READ_LOCKING)
 //            ? [ 'LOCK IN SHARE MODE' ]
 //			: [];
 //
-//        $id = $db->selectField( 'user',
-//            'user_id', [ 'user_name' => $s ], __METHOD__, $options );
+//        $id = $db.selectField('user',
+//            'user_id', [ 'user_name' => $s ], __METHOD__, $options);
 //
 //        return (int)$id;
 //    }
@@ -4281,54 +4289,54 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @return User|null User object, or null if the username already exists.
 //     */
-//    public static function createNew( $name, $params = [] ) {
-//        foreach ( [ 'password', 'newpassword', 'newpass_time', 'password_expires' ] as $field ) {
-//            if ( isset( $params[$field] ) ) {
-//                wfDeprecated( __METHOD__ . " with param '$field'", '1.27' );
-//                unset( $params[$field] );
+//    public static function createNew($name, $params = []) {
+//        foreach ([ 'password', 'newpassword', 'newpass_time', 'password_expires' ] as $field) {
+//            if (isset($params[$field])) {
+//                wfDeprecated(__METHOD__ . " with param '$field'", '1.27');
+//                unset($params[$field]);
 //            }
 //        }
 //
 //        $user = new User;
-//        $user->load();
-//        $user->setToken(); // init token
-//        if ( isset( $params['options'] ) ) {
-//            $user->mOptions = $params['options'] + (array)$user->mOptions;
-//            unset( $params['options'] );
+//        $user.load();
+//        $user.setToken(); // init token
+//        if (isset($params['options'])) {
+//            $user.mOptions = $params['options'] + (array)$user.mOptions;
+//            unset($params['options']);
 //        }
-//        $dbw = wfGetDB( DB_MASTER );
+//        $dbw = wfGetDB(DB_MASTER);
 //
-//        $noPass = PasswordFactory::newInvalidPassword()->toString();
+//        $noPass = PasswordFactory::newInvalidPassword().toString();
 //
 //        $fields = [
 //        'user_name' => $name,
 //            'user_password' => $noPass,
 //            'user_newpassword' => $noPass,
-//            'user_email' => $user->mEmail,
-//            'user_email_authenticated' => $dbw->timestampOrNull( $user->mEmailAuthenticated ),
-//            'user_real_name' => $user->mRealName,
-//            'user_token' => strval( $user->mToken ),
-//            'user_registration' => $dbw->timestamp( $user->mRegistration ),
+//            'user_email' => $user.mEmail,
+//            'user_email_authenticated' => $dbw.timestampOrNull($user.mEmailAuthenticated),
+//            'user_real_name' => $user.mRealName,
+//            'user_token' => strval($user.mToken),
+//            'user_registration' => $dbw.timestamp($user.mRegistration),
 //            'user_editcount' => 0,
-//            'user_touched' => $dbw->timestamp( $user->newTouchedTimestamp() ),
+//            'user_touched' => $dbw.timestamp($user.newTouchedTimestamp()),
 //		];
-//        foreach ( $params as $name => $value ) {
+//        foreach ($params as $name => $value) {
 //            $fields["user_$name"] = $value;
 //        }
 //
-//        return $dbw->doAtomicSection( __METHOD__, function ( $dbw, $fname ) use ( $fields ) {
-//            $dbw->insert( 'user', $fields, $fname, [ 'IGNORE' ] );
-//            if ( $dbw->affectedRows() ) {
-//                $newUser = self::newFromId( $dbw->insertId() );
-//                $newUser->mName = $fields['user_name'];
-//                $newUser->updateActorId( $dbw );
+//        return $dbw.doAtomicSection(__METHOD__, function ($dbw, $fname) use ($fields) {
+//            $dbw.insert('user', $fields, $fname, [ 'IGNORE' ]);
+//            if ($dbw.affectedRows()) {
+//                $newUser = self::newFromId($dbw.insertId());
+//                $newUser.mName = $fields['user_name'];
+//                $newUser.updateActorId($dbw);
 //                // Load the user from master to avoid replica lag
-//                $newUser->load( self::READ_LATEST );
+//                $newUser.load(self::READ_LATEST);
 //            } else {
 //                $newUser = null;
 //            }
 //            return $newUser;
-//        } );
+//        });
 //    }
 //
 //    /**
@@ -4340,9 +4348,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * if the user already existed. Many extension callers use this function
 //     * in code along the lines of:
 //     *
-//     *   $user = User::newFromName( $name );
-//     *   if ( !$user->isLoggedIn() ) {
-//     *       $user->addToDatabase();
+//     *   $user = User::newFromName($name);
+//     *   if (!$user.isLoggedIn()) {
+//     *       $user.addToDatabase();
 //     *   }
 //     *   // do something with $user...
 //     *
@@ -4358,68 +4366,68 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return Status
 //     */
 //    public function addToDatabase() {
-//        $this->load();
-//        if ( !$this->mToken ) {
-//            $this->setToken(); // init token
+//        this.load();
+//        if (!this.mToken) {
+//            this.setToken(); // init token
 //        }
 //
-//        if ( !is_string( $this->mName ) ) {
-//            throw new RuntimeException( "User name field is not set." );
+//        if (!is_string(this.mName)) {
+//            throw new RuntimeException("User name field is not set.");
 //        }
 //
-//        $this->mTouched = $this->newTouchedTimestamp();
+//        this.mTouched = this.newTouchedTimestamp();
 //
-//        $dbw = wfGetDB( DB_MASTER );
-//        $status = $dbw->doAtomicSection( __METHOD__, function ( $dbw, $fname ) {
-//            $noPass = PasswordFactory::newInvalidPassword()->toString();
-//            $dbw->insert( 'user',
+//        $dbw = wfGetDB(DB_MASTER);
+//        $status = $dbw.doAtomicSection(__METHOD__, function ($dbw, $fname) {
+//            $noPass = PasswordFactory::newInvalidPassword().toString();
+//            $dbw.insert('user',
 //                [
-//                'user_name' => $this->mName,
+//                'user_name' => this.mName,
 //                'user_password' => $noPass,
 //                'user_newpassword' => $noPass,
-//                'user_email' => $this->mEmail,
-//                'user_email_authenticated' => $dbw->timestampOrNull( $this->mEmailAuthenticated ),
-//                'user_real_name' => $this->mRealName,
-//                'user_token' => strval( $this->mToken ),
-//                'user_registration' => $dbw->timestamp( $this->mRegistration ),
+//                'user_email' => this.mEmail,
+//                'user_email_authenticated' => $dbw.timestampOrNull(this.mEmailAuthenticated),
+//                'user_real_name' => this.mRealName,
+//                'user_token' => strval(this.mToken),
+//                'user_registration' => $dbw.timestamp(this.mRegistration),
 //                'user_editcount' => 0,
-//                'user_touched' => $dbw->timestamp( $this->mTouched ),
+//                'user_touched' => $dbw.timestamp(this.mTouched),
 //				], $fname,
 //				[ 'IGNORE' ]
 //			);
-//            if ( !$dbw->affectedRows() ) {
+//            if (!$dbw.affectedRows()) {
 //                // Use locking reads to bypass any REPEATABLE-READ snapshot.
-//                $this->mId = $dbw->selectField(
+//                this.mId = $dbw.selectField(
 //                    'user',
 //                    'user_id',
-//                    [ 'user_name' => $this->mName ],
+//                    [ 'user_name' => this.mName ],
 //                $fname,
 //					[ 'LOCK IN SHARE MODE' ]
 //				);
 //                $loaded = false;
-//                if ( $this->mId && $this->loadFromDatabase( self::READ_LOCKING ) ) {
+//                if (this.mId && this.loadFromDatabase(self::READ_LOCKING)) {
 //                    $loaded = true;
 //                }
-//                if ( !$loaded ) {
-//                    throw new MWException( $fname . ": hit a key conflict attempting " .
-//                        "to insert user '{$this->mName}' row, but it was not present in select!" );
+//                if (!$loaded) {
+//                    throw new MWException($fname . ": hit a key conflict attempting " .
+//                        "to insert user '{this.mName}' row, but it was not present in select!");
 //                }
-//                return Status::newFatal( 'userexists' );
+//                return Status::newFatal('userexists');
 //            }
-//            $this->mId = $dbw->insertId();
-//            self::$idCacheByName[$this->mName] = $this->mId;
-//            $this->updateActorId( $dbw );
+//            this.mId = $dbw.insertId();
+//            self::$idCacheByName[this.mName] = this.mId;
+//            this.updateActorId($dbw);
 //
 //            return Status::newGood();
-//        } );
-//        if ( !$status->isGood() ) {
+//        });
+//        if (!$status.isGood()) {
 //            return $status;
 //        }
 //
 //        // Clear instance cache other than user table data and actor, which is already accurate
-//        $this->clearInstanceCache();
+//        this.clearInstanceCache();
 //
-//        $this->saveOptions();
+//        this.saveOptions();
 //        return Status::newGood();
 //    }
 //
@@ -4427,16 +4435,16 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * Update the actor ID after an insert
 //     * @param IDatabase $dbw Writable database handle
 //     */
-//    private function updateActorId( IDatabase $dbw ) {
+//    private function updateActorId(IDatabase $dbw) {
 //        global $wgActorTableSchemaMigrationStage;
 //
-//        if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_WRITE_NEW ) {
-//            $dbw->insert(
+//        if ($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_WRITE_NEW) {
+//            $dbw.insert(
 //                'actor',
-//                [ 'actor_user' => $this->mId, 'actor_name' => $this->mName ],
+//                [ 'actor_user' => this.mId, 'actor_name' => this.mName ],
 //            __METHOD__
 //			);
-//            $this->mActorId = (int)$dbw->insertId();
+//            this.mActorId = (int)$dbw.insertId();
 //        }
 //    }
 //
@@ -4446,8 +4454,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool A block was spread
 //     */
 //    public function spreadAnyEditBlock() {
-//        if ( $this->isLoggedIn() && $this->isBlocked() ) {
-//            return $this->spreadBlock();
+//        if (this.isLoggedIn() && this.isBlocked()) {
+//            return this.spreadBlock();
 //        }
 //
 //        return false;
@@ -4459,18 +4467,18 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool A block was spread
 //     */
 //    protected function spreadBlock() {
-//        wfDebug( __METHOD__ . "()\n" );
-//        $this->load();
-//        if ( $this->mId == 0 ) {
+//        wfDebug(__METHOD__ . "()\n");
+//        this.load();
+//        if (this.mId == 0) {
 //            return false;
 //        }
 //
-//        $userblock = Block::newFromTarget( $this->getName() );
-//        if ( !$userblock ) {
+//        $userblock = Block::newFromTarget(this.getName());
+//        if (!$userblock) {
 //            return false;
 //        }
 //
-//        return (bool)$userblock->doAutoblock( $this->getRequest()->getIP() );
+//        return (bool)$userblock.doAutoblock(this.getRequest().getIP());
 //    }
 //
 //    /**
@@ -4478,20 +4486,20 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool|Block
 //     */
 //    public function isBlockedFromCreateAccount() {
-//        $this->getBlockedStatus();
-//        if ( $this->mBlock && $this->mBlock->appliesToRight( 'createaccount' ) ) {
-//            return $this->mBlock;
+//        this.getBlockedStatus();
+//        if (this.mBlock && this.mBlock.appliesToRight('createaccount')) {
+//            return this.mBlock;
 //        }
 //
 //		# T15611: if the IP address the user is trying to create an account from is
 //		# blocked with createaccount disabled, prevent new account creation there even
 //		# when the user is logged in
-//        if ( $this->mBlockedFromCreateAccount === false && !$this->isAllowed( 'ipblock-exempt' ) ) {
-//            $this->mBlockedFromCreateAccount = Block::newFromTarget( null, $this->getRequest()->getIP() );
+//        if (this.mBlockedFromCreateAccount === false && !this.isAllowed('ipblock-exempt')) {
+//            this.mBlockedFromCreateAccount = Block::newFromTarget(null, this.getRequest().getIP());
 //        }
-//        return $this->mBlockedFromCreateAccount instanceof Block
-//            && $this->mBlockedFromCreateAccount->appliesToRight( 'createaccount' )
-//            ? $this->mBlockedFromCreateAccount
+//        return this.mBlockedFromCreateAccount instanceof Block
+//            && this.mBlockedFromCreateAccount.appliesToRight('createaccount')
+//            ? this.mBlockedFromCreateAccount
 //            : false;
 //    }
 //
@@ -4500,8 +4508,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function isBlockedFromEmailuser() {
-//        $this->getBlockedStatus();
-//        return $this->mBlock && $this->mBlock->appliesToRight( 'sendemail' );
+//        this.getBlockedStatus();
+//        return this.mBlock && this.mBlock.appliesToRight('sendemail');
 //    }
 //
 //    /**
@@ -4511,8 +4519,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function isBlockedFromUpload() {
-//        $this->getBlockedStatus();
-//        return $this->mBlock && $this->mBlock->appliesToRight( 'upload' );
+//        this.getBlockedStatus();
+//        return this.mBlock && this.mBlock.appliesToRight('upload');
 //    }
 //
 //    /**
@@ -4520,7 +4528,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function isAllowedToCreateAccount() {
-//        return $this->isAllowed( 'createaccount' ) && !$this->isBlockedFromCreateAccount();
+//        return this.isAllowed('createaccount') && !this.isBlockedFromCreateAccount();
 //    }
 //
 //    /**
@@ -4529,7 +4537,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return Title User's personal page title
 //     */
 //    public function getUserPage() {
-//        return Title::makeTitle( NS_USER, $this->getName() );
+//        return Title::makeTitle(NS_USER, this.getName());
 //    }
 //
 //    /**
@@ -4538,8 +4546,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return Title User's talk page title
 //     */
 //    public function getTalkPage() {
-//        $title = $this->getUserPage();
-//        return $title->getTalkPage();
+//        $title = this.getUserPage();
+//        return $title.getTalkPage();
 //    }
 //
 //    /**
@@ -4548,7 +4556,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function isNewbie() {
-//        return !$this->isAllowed( 'autoconfirmed' );
+//        return !this.isAllowed('autoconfirmed');
 //    }
 //
 //    /**
@@ -4557,30 +4565,30 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $password User password
 //     * @return bool True if the given password is correct, otherwise False
 //     */
-//    public function checkPassword( $password ) {
-//        wfDeprecated( __METHOD__, '1.27' );
+//    public function checkPassword($password) {
+//        wfDeprecated(__METHOD__, '1.27');
 //
 //        $manager = AuthManager::singleton();
 //        $reqs = AuthenticationRequest::loadRequestsFromSubmission(
-//            $manager->getAuthenticationRequests( AuthManager::ACTION_LOGIN ),
+//            $manager.getAuthenticationRequests(AuthManager::ACTION_LOGIN),
 //			[
-//        'username' => $this->getName(),
+//        'username' => this.getName(),
 //            'password' => $password,
 //			]
 //		);
-//        $res = AuthManager::singleton()->beginAuthentication( $reqs, 'null:' );
-//        switch ( $res->status ) {
+//        $res = AuthManager::singleton().beginAuthentication($reqs, 'null:');
+//        switch ($res.status) {
 //            case AuthenticationResponse::PASS:
 //                return true;
 //            case AuthenticationResponse::FAIL:
 //                // Hope it's not a PreAuthenticationProvider that failed...
-//				\MediaWiki\Logger\LoggerFactory::getInstance( 'authentication' )
-//					->info( __METHOD__ . ': Authentication failed: ' . $res->message->plain() );
+//				\MediaWiki\Logger\LoggerFactory::getInstance('authentication')
+//					.info(__METHOD__ . ': Authentication failed: ' . $res.message.plain());
 //                return false;
 //            default:
 //                throw new BadMethodCallException(
 //                    'AuthManager returned a response unsupported by ' . __METHOD__
-//                );
+//               );
 //        }
 //    }
 //
@@ -4592,10 +4600,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $plaintext
 //     * @return bool True if matches, false otherwise
 //     */
-//    public function checkTemporaryPassword( $plaintext ) {
-//        wfDeprecated( __METHOD__, '1.27' );
+//    public function checkTemporaryPassword($plaintext) {
+//        wfDeprecated(__METHOD__, '1.27');
 //        // Can't check the temporary password individually.
-//        return $this->checkPassword( $plaintext );
+//        return this.checkPassword($plaintext);
 //    }
 //
 //    /**
@@ -4609,15 +4617,15 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param WebRequest|null $request WebRequest object to use or null to use $wgRequest
 //     * @return MediaWiki\Session\Token The new edit token
 //     */
-//    public function getEditTokenObject( $salt = '', $request = null ) {
-//        if ( $this->isAnon() ) {
+//    public function getEditTokenObject($salt = '', $request = null) {
+//        if (this.isAnon()) {
 //            return new LoggedOutEditToken();
 //        }
 //
-//        if ( !$request ) {
-//            $request = $this->getRequest();
+//        if (!$request) {
+//            $request = this.getRequest();
 //        }
-//        return $request->getSession()->getToken( $salt );
+//        return $request.getSession().getToken($salt);
 //    }
 //
 //    /**
@@ -4633,8 +4641,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param WebRequest|null $request WebRequest object to use or null to use $wgRequest
 //     * @return string The new edit token
 //     */
-//    public function getEditToken( $salt = '', $request = null ) {
-//        return $this->getEditTokenObject( $salt, $request )->toString();
+//    public function getEditToken($salt = '', $request = null) {
+//        return this.getEditTokenObject($salt, $request).toString();
 //    }
 //
 //    /**
@@ -4649,8 +4657,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int|null $maxage Fail tokens older than this, in seconds
 //     * @return bool Whether the token matches
 //     */
-//    public function matchEditToken( $val, $salt = '', $request = null, $maxage = null ) {
-//        return $this->getEditTokenObject( $salt, $request )->match( $val, $maxage );
+//    public function matchEditToken($val, $salt = '', $request = null, $maxage = null) {
+//        return this.getEditTokenObject($salt, $request).match($val, $maxage);
 //    }
 //
 //    /**
@@ -4663,9 +4671,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param int|null $maxage Fail tokens older than this, in seconds
 //     * @return bool Whether the token matches
 //     */
-//    public function matchEditTokenNoSuffix( $val, $salt = '', $request = null, $maxage = null ) {
-//        $val = substr( $val, 0, strspn( $val, '0123456789abcdef' ) ) . Token::SUFFIX;
-//        return $this->matchEditToken( $val, $salt, $request, $maxage );
+//    public function matchEditTokenNoSuffix($val, $salt = '', $request = null, $maxage = null) {
+//        $val = substr($val, 0, strspn($val, '0123456789abcdef')) . Token::SUFFIX;
+//        return this.matchEditToken($val, $salt, $request, $maxage);
 //    }
 //
 //    /**
@@ -4675,18 +4683,18 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $type Message to send, either "created", "changed" or "set"
 //     * @return Status
 //     */
-//    public function sendConfirmationMail( $type = 'created' ) {
+//    public function sendConfirmationMail($type = 'created') {
 //        global $wgLang;
 //        $expiration = null; // gets passed-by-ref and defined in next line.
-//        $token = $this->confirmationToken( $expiration );
-//        $url = $this->confirmationTokenUrl( $token );
-//        $invalidateURL = $this->invalidationTokenUrl( $token );
-//        $this->saveSettings();
+//        $token = this.confirmationToken($expiration);
+//        $url = this.confirmationTokenUrl($token);
+//        $invalidateURL = this.invalidationTokenUrl($token);
+//        this.saveSettings();
 //
-//        if ( $type == 'created' || $type === false ) {
+//        if ($type == 'created' || $type === false) {
 //            $message = 'confirmemail_body';
 //            $type = 'created';
-//        } elseif ( $type === true ) {
+//        } elseif ($type === true) {
 //            $message = 'confirmemail_body_changed';
 //            $type = 'changed';
 //        } else {
@@ -4695,28 +4703,28 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        }
 //
 //        $mail = [
-//        'subject' => wfMessage( 'confirmemail_subject' )->text(),
-//            'body' => wfMessage( $message,
-//            $this->getRequest()->getIP(),
-//            $this->getName(),
+//        'subject' => wfMessage('confirmemail_subject').text(),
+//            'body' => wfMessage($message,
+//            this.getRequest().getIP(),
+//            this.getName(),
 //            $url,
-//            $wgLang->userTimeAndDate( $expiration, $this ),
+//            $wgLang.userTimeAndDate($expiration, $this),
 //            $invalidateURL,
-//            $wgLang->userDate( $expiration, $this ),
-//            $wgLang->userTime( $expiration, $this ) )->text(),
+//            $wgLang.userDate($expiration, $this),
+//            $wgLang.userTime($expiration, $this)).text(),
 //            'from' => null,
 //            'replyTo' => null,
 //		];
 //        $info = [
 //        'type' => $type,
-//            'ip' => $this->getRequest()->getIP(),
+//            'ip' => this.getRequest().getIP(),
 //            'confirmURL' => $url,
 //            'invalidateURL' => $invalidateURL,
 //            'expiration' => $expiration
 //		];
 //
-//        Hooks::run( 'UserSendConfirmationMail', [ $this, &$mail, $info ] );
-//        return $this->sendMail( $mail['subject'], $mail['body'], $mail['from'], $mail['replyTo'] );
+//        Hooks::run('UserSendConfirmationMail', [ $this, &$mail, $info ]);
+//        return this.sendMail($mail['subject'], $mail['body'], $mail['from'], $mail['replyTo']);
 //    }
 //
 //    /**
@@ -4730,20 +4738,20 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param MailAddress|null $replyto Reply-To address
 //     * @return Status
 //     */
-//    public function sendMail( $subject, $body, $from = null, $replyto = null ) {
+//    public function sendMail($subject, $body, $from = null, $replyto = null) {
 //        global $wgPasswordSender;
 //
-//        if ( $from instanceof User ) {
-//            $sender = MailAddress::newFromUser( $from );
+//        if ($from instanceof User) {
+//            $sender = MailAddress::newFromUser($from);
 //        } else {
-//            $sender = new MailAddress( $wgPasswordSender,
-//                wfMessage( 'emailsender' )->inContentLanguage()->text() );
+//            $sender = new MailAddress($wgPasswordSender,
+//                wfMessage('emailsender').inContentLanguage().text());
 //        }
-//        $to = MailAddress::newFromUser( $this );
+//        $to = MailAddress::newFromUser($this);
 //
-//        return UserMailer::send( $to, $sender, $subject, $body, [
+//        return UserMailer::send($to, $sender, $subject, $body, [
 //        'replyTo' => $replyto,
-//		] );
+//		]);
 //    }
 //
 //    /**
@@ -4756,16 +4764,16 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string &$expiration Accepts the expiration time
 //     * @return string New token
 //     */
-//    protected function confirmationToken( &$expiration ) {
+//    protected function confirmationToken(&$expiration) {
 //        global $wgUserEmailConfirmationTokenExpiry;
 //        $now = time();
 //        $expires = $now + $wgUserEmailConfirmationTokenExpiry;
-//        $expiration = wfTimestamp( TS_MW, $expires );
-//        $this->load();
-//        $token = MWCryptRand::generateHex( 32 );
-//        $hash = md5( $token );
-//        $this->mEmailToken = $hash;
-//        $this->mEmailTokenExpires = $expiration;
+//        $expiration = wfTimestamp(TS_MW, $expires);
+//        this.load();
+//        $token = MWCryptRand::generateHex(32);
+//        $hash = md5($token);
+//        this.mEmailToken = $hash;
+//        this.mEmailTokenExpires = $expiration;
 //        return $token;
 //    }
 //
@@ -4774,8 +4782,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $token Accepts the email confirmation token
 //     * @return string New token URL
 //     */
-//    protected function confirmationTokenUrl( $token ) {
-//        return $this->getTokenUrl( 'ConfirmEmail', $token );
+//    protected function confirmationTokenUrl($token) {
+//        return this.getTokenUrl('ConfirmEmail', $token);
 //    }
 //
 //    /**
@@ -4783,8 +4791,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $token Accepts the email confirmation token
 //     * @return string New token URL
 //     */
-//    protected function invalidationTokenUrl( $token ) {
-//        return $this->getTokenUrl( 'InvalidateEmail', $token );
+//    protected function invalidationTokenUrl($token) {
+//        return this.getTokenUrl('InvalidateEmail', $token);
 //    }
 //
 //    /**
@@ -4801,10 +4809,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $token
 //     * @return string Formatted URL
 //     */
-//    protected function getTokenUrl( $page, $token ) {
+//    protected function getTokenUrl($page, $token) {
 //        // Hack to bypass localization of 'Special:'
-//        $title = Title::makeTitle( NS_MAIN, "Special:$page/$token" );
-//        return $title->getCanonicalURL();
+//        $title = Title::makeTitle(NS_MAIN, "Special:$page/$token");
+//        return $title.getCanonicalURL();
 //    }
 //
 //    /**
@@ -4817,9 +4825,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    public function confirmEmail() {
 //        // Check if it's already confirmed, so we don't touch the database
 //        // and fire the ConfirmEmailComplete hook on redundant confirmations.
-//        if ( !$this->isEmailConfirmed() ) {
-//            $this->setEmailAuthenticationTimestamp( wfTimestampNow() );
-//            Hooks::run( 'ConfirmEmailComplete', [ $this ] );
+//        if (!this.isEmailConfirmed()) {
+//            this.setEmailAuthenticationTimestamp(wfTimestampNow());
+//            Hooks::run('ConfirmEmailComplete', [ $this ]);
 //        }
 //        return true;
 //    }
@@ -4832,12 +4840,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool Returns true
 //     */
 //    public function invalidateEmail() {
-//        $this->load();
-//        $this->mEmailToken = null;
-//        $this->mEmailTokenExpires = null;
-//        $this->setEmailAuthenticationTimestamp( null );
-//        $this->mEmail = '';
-//        Hooks::run( 'InvalidateEmailComplete', [ $this ] );
+//        this.load();
+//        this.mEmailToken = null;
+//        this.mEmailTokenExpires = null;
+//        this.setEmailAuthenticationTimestamp(null);
+//        this.mEmail = '';
+//        Hooks::run('InvalidateEmailComplete', [ $this ]);
 //        return true;
 //    }
 //
@@ -4845,10 +4853,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * Set the e-mail authentication timestamp.
 //     * @param string $timestamp TS_MW timestamp
 //     */
-//    public function setEmailAuthenticationTimestamp( $timestamp ) {
-//        $this->load();
-//        $this->mEmailAuthenticated = $timestamp;
-//        Hooks::run( 'UserSetEmailAuthenticationTimestamp', [ $this, &$this->mEmailAuthenticated ] );
+//    public function setEmailAuthenticationTimestamp($timestamp) {
+//        this.load();
+//        this.mEmailAuthenticated = $timestamp;
+//        Hooks::run('UserSetEmailAuthenticationTimestamp', [ $this, &this.mEmailAuthenticated ]);
 //    }
 //
 //    /**
@@ -4858,13 +4866,13 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function canSendEmail() {
 //        global $wgEnableEmail, $wgEnableUserEmail;
-//        if ( !$wgEnableEmail || !$wgEnableUserEmail || !$this->isAllowed( 'sendemail' ) ) {
+//        if (!$wgEnableEmail || !$wgEnableUserEmail || !this.isAllowed('sendemail')) {
 //            return false;
 //        }
-//        $canSend = $this->isEmailConfirmed();
+//        $canSend = this.isEmailConfirmed();
 //        // Avoid PHP 7.1 warning of passing $this by reference
 //        $user = $this;
-//        Hooks::run( 'UserCanSendEmail', [ &$user, &$canSend ] );
+//        Hooks::run('UserCanSendEmail', [ &$user, &$canSend ]);
 //        return $canSend;
 //    }
 //
@@ -4874,7 +4882,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function canReceiveEmail() {
-//        return $this->isEmailConfirmed() && !$this->getOption( 'disablemail' );
+//        return this.isEmailConfirmed() && !this.getOption('disablemail');
 //    }
 //
 //    /**
@@ -4889,18 +4897,18 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public function isEmailConfirmed() {
 //        global $wgEmailAuthentication;
-//        $this->load();
+//        this.load();
 //        // Avoid PHP 7.1 warning of passing $this by reference
 //        $user = $this;
 //        $confirmed = true;
-//        if ( Hooks::run( 'EmailConfirmed', [ &$user, &$confirmed ] ) ) {
-//            if ( $this->isAnon() ) {
+//        if (Hooks::run('EmailConfirmed', [ &$user, &$confirmed ])) {
+//            if (this.isAnon()) {
 //                return false;
 //            }
-//            if ( !Sanitizer::validateEmail( $this->mEmail ) ) {
+//            if (!Sanitizer::validateEmail(this.mEmail)) {
 //                return false;
 //            }
-//            if ( $wgEmailAuthentication && !$this->getEmailAuthenticationTimestamp() ) {
+//            if ($wgEmailAuthentication && !this.getEmailAuthenticationTimestamp()) {
 //                return false;
 //            }
 //            return true;
@@ -4916,9 +4924,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    public function isEmailConfirmationPending() {
 //        global $wgEmailAuthentication;
 //        return $wgEmailAuthentication &&
-//            !$this->isEmailConfirmed() &&
-//                $this->mEmailToken &&
-//                    $this->mEmailTokenExpires > wfTimestamp();
+//            !this.isEmailConfirmed() &&
+//                this.mEmailToken &&
+//                    this.mEmailTokenExpires > wfTimestamp();
 //    }
 //
 //    /**
@@ -4929,11 +4937,11 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *  but information is not in database.
 //     */
 //    public function getRegistration() {
-//        if ( $this->isAnon() ) {
+//        if (this.isAnon()) {
 //            return false;
 //        }
-//        $this->load();
-//        return $this->mRegistration;
+//        this.load();
+//        return this.mRegistration;
 //    }
 //
 //    /**
@@ -4943,7 +4951,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *  non-existent/anonymous user accounts.
 //     */
 //    public function getFirstEditTimestamp() {
-//        return $this->getEditTimestamp( true );
+//        return this.getEditTimestamp(true);
 //    }
 //
 //    /**
@@ -4954,7 +4962,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *  non-existent/anonymous user accounts.
 //     */
 //    public function getLatestEditTimestamp() {
-//        return $this->getEditTimestamp( false );
+//        return this.getEditTimestamp(false);
 //    }
 //
 //    /**
@@ -4964,16 +4972,16 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string|bool Timestamp of first or latest edit, or false for
 //     *  non-existent/anonymous user accounts.
 //     */
-//    private function getEditTimestamp( $first ) {
-//        if ( $this->getId() == 0 ) {
+//    private function getEditTimestamp($first) {
+//        if (this.getId() == 0) {
 //            return false; // anons
 //        }
-//        $dbr = wfGetDB( DB_REPLICA );
-//        $actorWhere = ActorMigration::newMigration()->getWhere( $dbr, 'rev_user', $this );
-//        $tsField = isset( $actorWhere['tables']['temp_rev_user'] )
+//        $dbr = wfGetDB(DB_REPLICA);
+//        $actorWhere = ActorMigration::newMigration().getWhere($dbr, 'rev_user', $this);
+//        $tsField = isset($actorWhere['tables']['temp_rev_user'])
 //            ? 'revactor_timestamp' : 'rev_timestamp';
 //        $sortOrder = $first ? 'ASC' : 'DESC';
-//        $time = $dbr->selectField(
+//        $time = $dbr.selectField(
 //            [ 'revision' ] + $actorWhere['tables'],
 //            $tsField,
 //			[ $actorWhere['conds'] ],
@@ -4981,10 +4989,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //			[ 'ORDER BY' => "$tsField $sortOrder" ],
 //        $actorWhere['joins']
 //		);
-//        if ( !$time ) {
+//        if (!$time) {
 //            return false; // no edits
 //        }
-//        return wfTimestamp( TS_MW, $time );
+//        return wfTimestamp(TS_MW, $time);
 //    }
 //
 //    /**
@@ -4993,25 +5001,25 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param array $groups Array of Strings List of internal group names
 //     * @return array Array of Strings List of permission key names for given groups combined
 //     */
-//    public static function getGroupPermissions( $groups ) {
+//    public static function getGroupPermissions($groups) {
 //        global $wgGroupPermissions, $wgRevokePermissions;
 //        $rights = [];
 //        // grant every granted permission first
-//        foreach ( $groups as $group ) {
-//            if ( isset( $wgGroupPermissions[$group] ) ) {
-//                $rights = array_merge( $rights,
+//        foreach ($groups as $group) {
+//            if (isset($wgGroupPermissions[$group])) {
+//                $rights = array_merge($rights,
 //                    // array_filter removes empty items
-//                    array_keys( array_filter( $wgGroupPermissions[$group] ) ) );
+//                    array_keys(array_filter($wgGroupPermissions[$group])));
 //            }
 //        }
 //        // now revoke the revoked permissions
-//        foreach ( $groups as $group ) {
-//            if ( isset( $wgRevokePermissions[$group] ) ) {
-//                $rights = array_diff( $rights,
-//                    array_keys( array_filter( $wgRevokePermissions[$group] ) ) );
+//        foreach ($groups as $group) {
+//            if (isset($wgRevokePermissions[$group])) {
+//                $rights = array_diff($rights,
+//                    array_keys(array_filter($wgRevokePermissions[$group])));
 //            }
 //        }
-//        return array_unique( $rights );
+//        return array_unique($rights);
 //    }
 //
 //    /**
@@ -5020,11 +5028,11 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $role Role to check
 //     * @return array Array of Strings List of internal group names with the given permission
 //     */
-//    public static function getGroupsWithPermission( $role ) {
+//    public static function getGroupsWithPermission($role) {
 //        global $wgGroupPermissions;
 //        $allowedGroups = [];
-//        foreach ( array_keys( $wgGroupPermissions ) as $group ) {
-//            if ( self::groupHasPermission( $group, $role ) ) {
+//        foreach (array_keys($wgGroupPermissions) as $group) {
+//            if (self::groupHasPermission($group, $role)) {
 //                $allowedGroups[] = $group;
 //            }
 //        }
@@ -5043,10 +5051,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $role Role to check
 //     * @return bool
 //     */
-//    public static function groupHasPermission( $group, $role ) {
+//    public static function groupHasPermission($group, $role) {
 //        global $wgGroupPermissions, $wgRevokePermissions;
-//        return isset( $wgGroupPermissions[$group][$role] ) && $wgGroupPermissions[$group][$role]
-//            && !( isset( $wgRevokePermissions[$group][$role] ) && $wgRevokePermissions[$group][$role] );
+//        return isset($wgGroupPermissions[$group][$role]) && $wgGroupPermissions[$group][$role]
+//            && !(isset($wgRevokePermissions[$group][$role]) && $wgRevokePermissions[$group][$role]);
 //    }
 //
 //    /**
@@ -5063,24 +5071,24 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $right Right to check
 //     * @return bool
 //     */
-//    public static function isEveryoneAllowed( $right ) {
+//    public static function isEveryoneAllowed($right) {
 //        global $wgGroupPermissions, $wgRevokePermissions;
 //        static $cache = [];
 //
 //        // Use the cached results, except in unit tests which rely on
 //        // being able change the permission mid-request
-//        if ( isset( $cache[$right] ) && !defined( 'MW_PHPUNIT_TEST' ) ) {
+//        if (isset($cache[$right]) && !defined('MW_PHPUNIT_TEST')) {
 //            return $cache[$right];
 //        }
 //
-//        if ( !isset( $wgGroupPermissions['*'][$right] ) || !$wgGroupPermissions['*'][$right] ) {
+//        if (!isset($wgGroupPermissions['*'][$right]) || !$wgGroupPermissions['*'][$right]) {
 //            $cache[$right] = false;
 //            return false;
 //        }
 //
 //        // If it's revoked anywhere, then everyone doesn't have it
-//        foreach ( $wgRevokePermissions as $rights ) {
-//            if ( isset( $rights[$right] ) && $rights[$right] ) {
+//        foreach ($wgRevokePermissions as $rights) {
+//            if (isset($rights[$right]) && $rights[$right]) {
 //                $cache[$right] = false;
 //                return false;
 //            }
@@ -5088,16 +5096,16 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //
 //        // Remove any rights that aren't allowed to the global-session user,
 //        // unless there are no sessions for this endpoint.
-//        if ( !defined( 'MW_NO_SESSION' ) ) {
-//            $allowedRights = SessionManager::getGlobalSession()->getAllowedUserRights();
-//            if ( $allowedRights !== null && !in_array( $right, $allowedRights, true ) ) {
+//        if (!defined('MW_NO_SESSION')) {
+//            $allowedRights = SessionManager::getGlobalSession().getAllowedUserRights();
+//            if ($allowedRights !== null && !in_array($right, $allowedRights, true)) {
 //                $cache[$right] = false;
 //                return false;
 //            }
 //        }
 //
 //        // Allow extensions to say false
-//        if ( !Hooks::run( 'UserIsEveryoneAllowed', [ $right ] ) ) {
+//        if (!Hooks::run('UserIsEveryoneAllowed', [ $right ])) {
 //            $cache[$right] = false;
 //            return false;
 //        }
@@ -5114,10 +5122,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     */
 //    public static function getAllGroups() {
 //        global $wgGroupPermissions, $wgRevokePermissions;
-//        return array_values( array_diff(
-//            array_merge( array_keys( $wgGroupPermissions ), array_keys( $wgRevokePermissions ) ),
+//        return array_values(array_diff(
+//            array_merge(array_keys($wgGroupPermissions), array_keys($wgRevokePermissions)),
 //            self::getImplicitGroups()
-//		) );
+//		));
 //    }
 //
 //    /**
@@ -5125,14 +5133,14 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return string[] Array of permission names
 //     */
 //    public static function getAllRights() {
-//        if ( self::$mAllRights === false ) {
+//        if (self::$mAllRights === false) {
 //            global $wgAvailableRights;
-//            if ( count( $wgAvailableRights ) ) {
-//                self::$mAllRights = array_unique( array_merge( self::$mCoreRights, $wgAvailableRights ) );
+//            if (count($wgAvailableRights)) {
+//                self::$mAllRights = array_unique(array_merge(self::$mCoreRights, $wgAvailableRights));
 //            } else {
 //                self::$mAllRights = self::$mCoreRights;
 //            }
-//            Hooks::run( 'UserGetAllRights', [ &self::$mAllRights ] );
+//            Hooks::run('UserGetAllRights', [ &self::$mAllRights ]);
 //        }
 //        return self::$mAllRights;
 //    }
@@ -5155,9 +5163,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $group Internal group name
 //     * @return Title|bool Title of the page if it exists, false otherwise
 //     */
-//    public static function getGroupPage( $group ) {
-//        wfDeprecated( __METHOD__, '1.29' );
-//        return UserGroupMembership::getGroupPage( $group );
+//    public static function getGroupPage($group) {
+//        wfDeprecated(__METHOD__, '1.29');
+//        return UserGroupMembership::getGroupPage($group);
 //    }
 //
 //    /**
@@ -5170,19 +5178,19 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $text The text of the link
 //     * @return string HTML link to the group
 //     */
-//    public static function makeGroupLinkHTML( $group, $text = '' ) {
-//        wfDeprecated( __METHOD__, '1.29' );
+//    public static function makeGroupLinkHTML($group, $text = '') {
+//        wfDeprecated(__METHOD__, '1.29');
 //
-//        if ( $text == '' ) {
-//            $text = UserGroupMembership::getGroupName( $group );
+//        if ($text == '') {
+//            $text = UserGroupMembership::getGroupName($group);
 //        }
-//        $title = UserGroupMembership::getGroupPage( $group );
-//        if ( $title ) {
+//        $title = UserGroupMembership::getGroupPage($group);
+//        if ($title) {
 //            return MediaWikiServices::getInstance()
-//                ->getLinkRenderer()->makeLink( $title, $text );
+//                .getLinkRenderer().makeLink($title, $text);
 //        }
 //
-//        return htmlspecialchars( $text );
+//        return htmlspecialchars($text);
 //    }
 //
 //    /**
@@ -5195,15 +5203,15 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $text The text of the link
 //     * @return string Wikilink to the group
 //     */
-//    public static function makeGroupLinkWiki( $group, $text = '' ) {
-//        wfDeprecated( __METHOD__, '1.29' );
+//    public static function makeGroupLinkWiki($group, $text = '') {
+//        wfDeprecated(__METHOD__, '1.29');
 //
-//        if ( $text == '' ) {
-//            $text = UserGroupMembership::getGroupName( $group );
+//        if ($text == '') {
+//            $text = UserGroupMembership::getGroupName($group);
 //        }
-//        $title = UserGroupMembership::getGroupPage( $group );
-//        if ( $title ) {
-//            $page = $title->getFullText();
+//        $title = UserGroupMembership::getGroupPage($group);
+//        if ($title) {
+//            $page = $title.getFullText();
 //            return "[[$page|$text]]";
 //        }
 //
@@ -5214,12 +5222,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * Returns an array of the groups that a particular group can add/remove.
 //     *
 //     * @param string $group The group to check for whether it can add/remove
-//     * @return array Array( 'add' => array( addablegroups ),
-//     *     'remove' => array( removablegroups ),
-//     *     'add-self' => array( addablegroups to self),
-//     *     'remove-self' => array( removable groups from self) )
+//     * @return array Array('add' => array(addablegroups),
+//     *     'remove' => array(removablegroups),
+//     *     'add-self' => array(addablegroups to self),
+//     *     'remove-self' => array(removable groups from self))
 //     */
-//    public static function changeableByGroup( $group ) {
+//    public static function changeableByGroup($group) {
 //        global $wgAddGroups, $wgRemoveGroups, $wgGroupsAddToSelf, $wgGroupsRemoveFromSelf;
 //
 //        $groups = [
@@ -5229,56 +5237,56 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        'remove-self' => []
 //		];
 //
-//        if ( empty( $wgAddGroups[$group] ) ) {
+//        if (empty($wgAddGroups[$group])) {
 //            // Don't add anything to $groups
-//        } elseif ( $wgAddGroups[$group] === true ) {
+//        } elseif ($wgAddGroups[$group] === true) {
 //            // You get everything
 //            $groups['add'] = self::getAllGroups();
-//        } elseif ( is_array( $wgAddGroups[$group] ) ) {
+//        } elseif (is_array($wgAddGroups[$group])) {
 //            $groups['add'] = $wgAddGroups[$group];
 //        }
 //
 //        // Same thing for remove
-//        if ( empty( $wgRemoveGroups[$group] ) ) {
+//        if (empty($wgRemoveGroups[$group])) {
 //            // Do nothing
-//        } elseif ( $wgRemoveGroups[$group] === true ) {
+//        } elseif ($wgRemoveGroups[$group] === true) {
 //            $groups['remove'] = self::getAllGroups();
-//        } elseif ( is_array( $wgRemoveGroups[$group] ) ) {
+//        } elseif (is_array($wgRemoveGroups[$group])) {
 //            $groups['remove'] = $wgRemoveGroups[$group];
 //        }
 //
 //        // Re-map numeric keys of AddToSelf/RemoveFromSelf to the 'user' key for backwards compatibility
-//        if ( empty( $wgGroupsAddToSelf['user'] ) || $wgGroupsAddToSelf['user'] !== true ) {
-//            foreach ( $wgGroupsAddToSelf as $key => $value ) {
-//                if ( is_int( $key ) ) {
+//        if (empty($wgGroupsAddToSelf['user']) || $wgGroupsAddToSelf['user'] !== true) {
+//            foreach ($wgGroupsAddToSelf as $key => $value) {
+//                if (is_int($key)) {
 //                    $wgGroupsAddToSelf['user'][] = $value;
 //                }
 //            }
 //        }
 //
-//        if ( empty( $wgGroupsRemoveFromSelf['user'] ) || $wgGroupsRemoveFromSelf['user'] !== true ) {
-//            foreach ( $wgGroupsRemoveFromSelf as $key => $value ) {
-//                if ( is_int( $key ) ) {
+//        if (empty($wgGroupsRemoveFromSelf['user']) || $wgGroupsRemoveFromSelf['user'] !== true) {
+//            foreach ($wgGroupsRemoveFromSelf as $key => $value) {
+//                if (is_int($key)) {
 //                    $wgGroupsRemoveFromSelf['user'][] = $value;
 //                }
 //            }
 //        }
 //
 //        // Now figure out what groups the user can add to him/herself
-//        if ( empty( $wgGroupsAddToSelf[$group] ) ) {
+//        if (empty($wgGroupsAddToSelf[$group])) {
 //            // Do nothing
-//        } elseif ( $wgGroupsAddToSelf[$group] === true ) {
+//        } elseif ($wgGroupsAddToSelf[$group] === true) {
 //            // No idea WHY this would be used, but it's there
 //            $groups['add-self'] = self::getAllGroups();
-//        } elseif ( is_array( $wgGroupsAddToSelf[$group] ) ) {
+//        } elseif (is_array($wgGroupsAddToSelf[$group])) {
 //            $groups['add-self'] = $wgGroupsAddToSelf[$group];
 //        }
 //
-//        if ( empty( $wgGroupsRemoveFromSelf[$group] ) ) {
+//        if (empty($wgGroupsRemoveFromSelf[$group])) {
 //            // Do nothing
-//        } elseif ( $wgGroupsRemoveFromSelf[$group] === true ) {
+//        } elseif ($wgGroupsRemoveFromSelf[$group] === true) {
 //            $groups['remove-self'] = self::getAllGroups();
-//        } elseif ( is_array( $wgGroupsRemoveFromSelf[$group] ) ) {
+//        } elseif (is_array($wgGroupsRemoveFromSelf[$group])) {
 //            $groups['remove-self'] = $wgGroupsRemoveFromSelf[$group];
 //        }
 //
@@ -5287,18 +5295,18 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //
 //    /**
 //     * Returns an array of groups that this user can add and remove
-//     * @return array Array( 'add' => array( addablegroups ),
-//     *  'remove' => array( removablegroups ),
-//     *  'add-self' => array( addablegroups to self),
-//     *  'remove-self' => array( removable groups from self) )
+//     * @return array Array('add' => array(addablegroups),
+//     *  'remove' => array(removablegroups),
+//     *  'add-self' => array(addablegroups to self),
+//     *  'remove-self' => array(removable groups from self))
 //     */
 //    public function changeableGroups() {
-//        if ( $this->isAllowed( 'userrights' ) ) {
+//        if (this.isAllowed('userrights')) {
 //            // This group gives the right to modify everything (reverse-
 //            // compatibility with old "userrights lets you change
 //            // everything")
 //            // Using array_merge to make the groups reindexed
-//            $all = array_merge( self::getAllGroups() );
+//            $all = array_merge(self::getAllGroups());
 //            return [
 //            'add' => $all,
 //                'remove' => $all,
@@ -5314,16 +5322,16 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        'add-self' => [],
 //        'remove-self' => []
 //		];
-//        $addergroups = $this->getEffectiveGroups();
+//        $addergroups = this.getEffectiveGroups();
 //
-//        foreach ( $addergroups as $addergroup ) {
+//        foreach ($addergroups as $addergroup) {
 //            $groups = array_merge_recursive(
-//                $groups, $this->changeableByGroup( $addergroup )
-//            );
-//            $groups['add'] = array_unique( $groups['add'] );
-//            $groups['remove'] = array_unique( $groups['remove'] );
-//            $groups['add-self'] = array_unique( $groups['add-self'] );
-//            $groups['remove-self'] = array_unique( $groups['remove-self'] );
+//                $groups, this.changeableByGroup($addergroup)
+//           );
+//            $groups['add'] = array_unique($groups['add']);
+//            $groups['remove'] = array_unique($groups['remove']);
+//            $groups['add-self'] = array_unique($groups['add-self']);
+//            $groups['remove-self'] = array_unique($groups['remove-self']);
 //        }
 //        return $groups;
 //    }
@@ -5332,12 +5340,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * Schedule a deferred update to update the user's edit count
 //     */
 //    public function incEditCount() {
-//        if ( $this->isAnon() ) {
+//        if (this.isAnon()) {
 //            return; // sanity
 //        }
 //
 //        DeferredUpdates::addUpdate(
-//            new UserEditCountUpdate( $this, 1 ),
+//            new UserEditCountUpdate($this, 1),
 //            DeferredUpdates::POSTSEND
 //		);
 //    }
@@ -5347,8 +5355,8 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @param int $count
 //     */
-//    public function setEditCountInternal( $count ) {
-//        $this->mEditCount = $count;
+//    public function setEditCountInternal($count) {
+//        this.mEditCount = $count;
 //    }
 //
 //    /**
@@ -5361,9 +5369,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //    public function initEditCountInternal() {
 //        // Pull from a replica DB to be less cruel to servers
 //        // Accuracy isn't the point anyway here
-//        $dbr = wfGetDB( DB_REPLICA );
-//        $actorWhere = ActorMigration::newMigration()->getWhere( $dbr, 'rev_user', $this );
-//        $count = (int)$dbr->selectField(
+//        $dbr = wfGetDB(DB_REPLICA);
+//        $actorWhere = ActorMigration::newMigration().getWhere($dbr, 'rev_user', $this);
+//        $count = (int)$dbr.selectField(
 //            [ 'revision' ] + $actorWhere['tables'],
 //            'COUNT(*)',
 //			[ $actorWhere['conds'] ],
@@ -5372,12 +5380,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //        $actorWhere['joins']
 //		);
 //
-//        $dbw = wfGetDB( DB_MASTER );
-//        $dbw->update(
+//        $dbw = wfGetDB(DB_MASTER);
+//        $dbw.update(
 //            'user',
 //            [ 'user_editcount' => $count ],
 //			[
-//        'user_id' => $this->getId(),
+//        'user_id' => this.getId(),
 //            'user_editcount IS NULL OR user_editcount < ' . (int)$count
 //			],
 //        __METHOD__
@@ -5393,10 +5401,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $right Right to query
 //     * @return string Localized description of the right
 //     */
-//    public static function getRightDescription( $right ) {
+//    public static function getRightDescription($right) {
 //        $key = "right-$right";
-//        $msg = wfMessage( $key );
-//        return $msg->isDisabled() ? $right : $msg->text();
+//        $msg = wfMessage($key);
+//        return $msg.isDisabled() ? $right : $msg.text();
 //    }
 //
 //    /**
@@ -5406,10 +5414,10 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $grant Grant to query
 //     * @return string Localized name of the grant
 //     */
-//    public static function getGrantName( $grant ) {
+//    public static function getGrantName($grant) {
 //        $key = "grant-$grant";
-//        $msg = wfMessage( $key );
-//        return $msg->isDisabled() ? $grant : $msg->text();
+//        $msg = wfMessage($key);
+//        return $msg.isDisabled() ? $grant : $msg.text();
 //    }
 //
 //    /**
@@ -5432,7 +5440,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $reason User supplied reason
 //     * @return bool true
 //     */
-//    public function addNewUserLogEntry( $action = false, $reason = '' ) {
+//    public function addNewUserLogEntry($action = false, $reason = '') {
 //        return true; // disabled
 //    }
 //
@@ -5445,7 +5453,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function addNewUserLogEntryAutoCreate() {
-//        $this->addNewUserLogEntry( 'autocreate' );
+//        this.addNewUserLogEntry('autocreate');
 //
 //        return true;
 //    }
@@ -5455,76 +5463,76 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     *
 //     * @param array|null $data Rows for the current user out of the user_properties table
 //     */
-//    protected function loadOptions( $data = null ) {
-//        $this->load();
+//    protected function loadOptions($data = null) {
+//        this.load();
 //
-//        if ( $this->mOptionsLoaded ) {
+//        if (this.mOptionsLoaded) {
 //            return;
 //        }
 //
-//        $this->mOptions = self::getDefaultOptions();
+//        this.mOptions = self::getDefaultOptions();
 //
-//        if ( !$this->getId() ) {
+//        if (!this.getId()) {
 //            // For unlogged-in users, load language/variant options from request.
 //            // There's no need to do it for logged-in users: they can set preferences,
-//            // and handling of page content is done by $pageLang->getPreferredVariant() and such,
+//            // and handling of page content is done by $pageLang.getPreferredVariant() and such,
 //            // so don't override user's choice (especially when the user chooses site default).
-//            $variant = MediaWikiServices::getInstance()->getContentLanguage()->getDefaultVariant();
-//            $this->mOptions['variant'] = $variant;
-//            $this->mOptions['language'] = $variant;
-//            $this->mOptionsLoaded = true;
+//            $variant = MediaWikiServices::getInstance().getContentLanguage().getDefaultVariant();
+//            this.mOptions['variant'] = $variant;
+//            this.mOptions['language'] = $variant;
+//            this.mOptionsLoaded = true;
 //            return;
 //        }
 //
 //        // Maybe load from the object
-//        if ( !is_null( $this->mOptionOverrides ) ) {
-//            wfDebug( "User: loading options for user " . $this->getId() . " from override cache.\n" );
-//            foreach ( $this->mOptionOverrides as $key => $value ) {
-//                $this->mOptions[$key] = $value;
+//        if (!is_null(this.mOptionOverrides)) {
+//            wfDebug("User: loading options for user " . this.getId() . " from override cache.\n");
+//            foreach (this.mOptionOverrides as $key => $value) {
+//                this.mOptions[$key] = $value;
 //            }
 //        } else {
-//            if ( !is_array( $data ) ) {
-//                wfDebug( "User: loading options for user " . $this->getId() . " from database.\n" );
+//            if (!is_array($data)) {
+//                wfDebug("User: loading options for user " . this.getId() . " from database.\n");
 //                // Load from database
-//                $dbr = ( $this->queryFlagsUsed & self::READ_LATEST )
-//                    ? wfGetDB( DB_MASTER )
-//                    : wfGetDB( DB_REPLICA );
+//                $dbr = (this.queryFlagsUsed & self::READ_LATEST)
+//                    ? wfGetDB(DB_MASTER)
+//                    : wfGetDB(DB_REPLICA);
 //
-//                $res = $dbr->select(
+//                $res = $dbr.select(
 //                    'user_properties',
 //                    [ 'up_property', 'up_value' ],
-//					[ 'up_user' => $this->getId() ],
+//					[ 'up_user' => this.getId() ],
 //                __METHOD__
 //				);
 //
-//                $this->mOptionOverrides = [];
+//                this.mOptionOverrides = [];
 //                $data = [];
-//                foreach ( $res as $row ) {
+//                foreach ($res as $row) {
 //                    // Convert '0' to 0. PHP's boolean conversion considers them both
 //                    // false, but e.g. JavaScript considers the former as true.
 //                    // @todo: T54542 Somehow determine the desired type (string/int/bool)
 //                    //  and convert all values here.
-//                    if ( $row->up_value === '0' ) {
-//                        $row->up_value = 0;
+//                    if ($row.up_value === '0') {
+//                        $row.up_value = 0;
 //                    }
-//                    $data[$row->up_property] = $row->up_value;
+//                    $data[$row.up_property] = $row.up_value;
 //                }
 //            }
 //
-//            foreach ( $data as $property => $value ) {
-//                $this->mOptionOverrides[$property] = $value;
-//                $this->mOptions[$property] = $value;
+//            foreach ($data as $property => $value) {
+//                this.mOptionOverrides[$property] = $value;
+//                this.mOptions[$property] = $value;
 //            }
 //        }
 //
 //        // Replace deprecated language codes
-//        $this->mOptions['language'] = LanguageCode::replaceDeprecatedCodes(
-//            $this->mOptions['language']
-//        );
+//        this.mOptions['language'] = LanguageCode::replaceDeprecatedCodes(
+//            this.mOptions['language']
+//       );
 //
-//        $this->mOptionsLoaded = true;
+//        this.mOptionsLoaded = true;
 //
-//        Hooks::run( 'UserLoadOptions', [ $this, &$this->mOptions ] );
+//        Hooks::run('UserLoadOptions', [ $this, &this.mOptions ]);
 //    }
 //
 //    /**
@@ -5533,26 +5541,26 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * Usually used via saveSettings().
 //     */
 //    protected function saveOptions() {
-//        $this->loadOptions();
+//        this.loadOptions();
 //
 //        // Not using getOptions(), to keep hidden preferences in database
-//        $saveOptions = $this->mOptions;
+//        $saveOptions = this.mOptions;
 //
 //        // Allow hooks to abort, for instance to save to a global profile.
 //        // Reset options to default state before saving.
-//        if ( !Hooks::run( 'UserSaveOptions', [ $this, &$saveOptions ] ) ) {
+//        if (!Hooks::run('UserSaveOptions', [ $this, &$saveOptions ])) {
 //            return;
 //        }
 //
-//        $userId = $this->getId();
+//        $userId = this.getId();
 //
 //        $insert_rows = []; // all the new preference rows
-//        foreach ( $saveOptions as $key => $value ) {
+//        foreach ($saveOptions as $key => $value) {
 //            // Don't bother storing default values
-//            $defaultOption = self::getDefaultOption( $key );
-//            if ( ( $defaultOption === null && $value !== false && $value !== null )
+//            $defaultOption = self::getDefaultOption($key);
+//            if (($defaultOption === null && $value !== false && $value !== null)
 //                || $value != $defaultOption
-//            ) {
+//           ) {
 //                $insert_rows[] = [
 //                'up_user' => $userId,
 //                    'up_property' => $key,
@@ -5561,23 +5569,23 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //            }
 //        }
 //
-//        $dbw = wfGetDB( DB_MASTER );
+//        $dbw = wfGetDB(DB_MASTER);
 //
-//        $res = $dbw->select( 'user_properties',
-//            [ 'up_property', 'up_value' ], [ 'up_user' => $userId ], __METHOD__ );
+//        $res = $dbw.select('user_properties',
+//            [ 'up_property', 'up_value' ], [ 'up_user' => $userId ], __METHOD__);
 //
 //        // Find prior rows that need to be removed or updated. These rows will
 //        // all be deleted (the latter so that INSERT IGNORE applies the new values).
 //        $keysDelete = [];
-//        foreach ( $res as $row ) {
-//            if ( !isset( $saveOptions[$row->up_property] )
-//                || strcmp( $saveOptions[$row->up_property], $row->up_value ) != 0
-//            ) {
-//                $keysDelete[] = $row->up_property;
+//        foreach ($res as $row) {
+//            if (!isset($saveOptions[$row.up_property])
+//                || strcmp($saveOptions[$row.up_property], $row.up_value) != 0
+//           ) {
+//                $keysDelete[] = $row.up_property;
 //            }
 //        }
 //
-//        if ( count( $keysDelete ) ) {
+//        if (count($keysDelete)) {
 //            // Do the DELETE by PRIMARY KEY for prior rows.
 //            // In the past a very large portion of calls to this function are for setting
 //            // 'rememberpassword' for new accounts (a preference that has since been removed).
@@ -5585,11 +5593,11 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //            // caused gap locks on [max user ID,+infinity) which caused high contention since
 //            // updates would pile up on each other as they are for higher (newer) user IDs.
 //            // It might not be necessary these days, but it shouldn't hurt either.
-//            $dbw->delete( 'user_properties',
-//                [ 'up_user' => $userId, 'up_property' => $keysDelete ], __METHOD__ );
+//            $dbw.delete('user_properties',
+//                [ 'up_user' => $userId, 'up_property' => $keysDelete ], __METHOD__);
 //        }
 //        // Insert the new preference rows
-//        $dbw->insert( 'user_properties', $insert_rows, __METHOD__, [ 'IGNORE' ] );
+//        $dbw.insert('user_properties', $insert_rows, __METHOD__, [ 'IGNORE' ]);
 //    }
 //
 //    /**
@@ -5599,7 +5607,7 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return array
 //     */
 //    public static function selectFields() {
-//        wfDeprecated( __METHOD__, '1.31' );
+//        wfDeprecated(__METHOD__, '1.31');
 //        return [
 //        'user_id',
 //            'user_name',
@@ -5620,9 +5628,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * a new user object.
 //     * @since 1.31
 //     * @return array With three keys:
-//     *   - tables: (string[]) to include in the `$table` to `IDatabase->select()`
-//     *   - fields: (string[]) to include in the `$vars` to `IDatabase->select()`
-//     *   - joins: (array) to include in the `$join_conds` to `IDatabase->select()`
+//     *   - tables: (string[]) to include in the `$table` to `IDatabase.select()`
+//     *   - fields: (string[]) to include in the `$vars` to `IDatabase.select()`
+//     *   - joins: (array) to include in the `$join_conds` to `IDatabase.select()`
 //     */
 //    public static function getQueryInfo() {
 //        global $wgActorTableSchemaMigrationStage;
@@ -5647,11 +5655,11 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //
 //        // Technically we shouldn't allow this without SCHEMA_COMPAT_READ_NEW,
 //        // but it does little harm and might be needed for write callers loading a User.
-//        if ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_NEW ) {
+//        if ($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_NEW) {
 //            $ret['tables']['user_actor'] = 'actor';
 //            $ret['fields'][] = 'user_actor.actor_id';
 //            $ret['joins']['user_actor'] = [
-//            ( $wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW ) ? 'JOIN' : 'LEFT JOIN',
+//            ($wgActorTableSchemaMigrationStage & SCHEMA_COMPAT_READ_NEW) ? 'JOIN' : 'LEFT JOIN',
 //				[ 'user_actor.actor_user = user_id' ]
 //			];
 //        }
@@ -5666,19 +5674,19 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param string $permission User right required
 //     * @return Status
 //     */
-//    static function newFatalPermissionDeniedStatus( $permission ) {
+//    static function newFatalPermissionDeniedStatus($permission) {
 //        global $wgLang;
 //
 //        $groups = [];
-//        foreach ( self::getGroupsWithPermission( $permission ) as $group ) {
-//            $groups[] = UserGroupMembership::getLink( $group, RequestContext::getMain(), 'wiki' );
+//        foreach (self::getGroupsWithPermission($permission) as $group) {
+//            $groups[] = UserGroupMembership::getLink($group, RequestContext::getMain(), 'wiki');
 //        }
 //
-//        if ( $groups ) {
-//            return Status::newFatal( 'badaccess-groups', $wgLang->commaList( $groups ), count( $groups ) );
+//        if ($groups) {
+//            return Status::newFatal('badaccess-groups', $wgLang.commaList($groups), count($groups));
 //        }
 //
-//        return Status::newFatal( 'badaccess-group0' );
+//        return Status::newFatal('badaccess-group0');
 //    }
 //
 //    /**
@@ -5691,12 +5699,12 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @since 1.27
 //     */
 //    public function getInstanceForUpdate() {
-//        if ( !$this->getId() ) {
+//        if (!this.getId()) {
 //            return null; // anon
 //        }
 //
-//        $user = self::newFromId( $this->getId() );
-//        if ( !$user->loadFromId( self::READ_EXCLUSIVE ) ) {
+//        $user = self::newFromId(this.getId());
+//        if (!$user.loadFromId(self::READ_EXCLUSIVE)) {
 //            return null;
 //        }
 //
@@ -5710,9 +5718,9 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @param UserIdentity $user
 //     * @return bool
 //     */
-//    public function equals( UserIdentity $user ) {
+//    public function equals(UserIdentity $user) {
 //        // XXX it's not clear whether central ID providers are supposed to obey this
-//        return $this->getName() === $user->getName();
+//        return this.getName() === $user.getName();
 //    }
 //
 //    /**
@@ -5721,6 +5729,6 @@ public class XomwUser { // implements IDBAccessObject, UserIdentity
 //     * @return bool
 //     */
 //    public function isAllowUsertalk() {
-//        return $this->mAllowUsertalk;
+//        return this.mAllowUsertalk;
 //    }
 }

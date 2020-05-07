@@ -14,13 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes;
-// MW.SRC:1.33.1
 
 import gplx.xowa.mediawiki.XomwEnv;
 import gplx.xowa.mediawiki.includes.interwiki.XomwInterwikiLookup;
 import gplx.xowa.mediawiki.includes.title.XomwMediaWikiTitleCodec;
 import gplx.xowa.mediawiki.languages.XomwLanguage;
 
+// MW.SRC:1.33.1
 /**
  * MediaWikiServices is the service locator for the application scope of MediaWiki.
  * Its implemented as a simple configurable DI container.

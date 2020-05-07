@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.Wikibase.*; import gplx.xowa.mediawiki.extensions.Wikibase.lib.*; import gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.*;
+package gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store;
+
+import gplx.xowa.mediawiki.XophpRuntimeException;
+
 // REF.WBASE:2020-01-19
-class XomwPropertyOrderProviderException extends XophpRuntimeException {	public XomwPropertyOrderProviderException(String msg) {super(msg);
+class XomwPropertyOrderProviderException extends XophpRuntimeException {
+	public XomwPropertyOrderProviderException(String message) {
+		super(message);
 	}
 }

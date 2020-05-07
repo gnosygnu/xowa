@@ -119,7 +119,7 @@ public class XophpArray_ {
 		return rv;
 	}
 
-	public static XophpArray array_keys(XophpArray array) {
+	public static XophpArray<String> array_keys(XophpArray array) {
 		XophpArray rv = XophpArray.New();
 		int len = array.count();
 		for (int i = 0; i < len; i++) {

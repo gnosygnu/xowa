@@ -22,7 +22,7 @@ import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpArray_;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpCallbackOwner;
-import gplx.xowa.mediawiki.XophpFatalError;
+import gplx.xowa.mediawiki.XophpFatalException;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpString_;
 import gplx.xowa.mediawiki.XophpType_;
@@ -221,7 +221,7 @@ public class XomwHooks {
             // Process the return value.
             if (XophpString_.is_string(retval)) {
                 // String returned means error.
-                throw new XophpFatalError((String)retval);
+                throw new XophpFatalException((String)retval);
             } else if (XophpObject_.is_false(retval)) {
                 // False was returned. Stop processing, but no error.
                 return false;

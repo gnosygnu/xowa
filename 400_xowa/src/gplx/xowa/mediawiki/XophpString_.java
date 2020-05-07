@@ -268,6 +268,9 @@ public class XophpString_ implements XophpCallbackOwner {
 	public static byte[] strtr(byte[] src, byte find, byte repl) {
 		return Bry_.Replace(src, 0, src.length, find, repl);
 	}
+	public static String strtr(String src, String find, String repl) {
+		return String_.Replace(src, find, repl);
+	}
 	public static byte[] str_replace(byte find, byte repl, byte[] src) {
 		return Bry_.Replace(src, 0, src.length, find, repl);
 	}
@@ -322,10 +325,10 @@ public class XophpString_ implements XophpCallbackOwner {
 						byte nxt_byte = pad_bry[i + 1];
 						if (nxt_byte == Byte_ascii.Dot) {
 							if (i == 0) {
-								throw new XophpError(".. found but at start of String; src=" + pad_str);
+								throw new XophpException(".. found but at start of String; src=" + pad_str);
 							}
 							else if (i == pad_len - 2) {
-								throw new XophpError(".. found but at end of String; src=" + pad_str);
+								throw new XophpException(".. found but at end of String; src=" + pad_str);
 							}
 							else {
 								nxt_byte = pad_bry[i + 2];
@@ -339,7 +342,7 @@ public class XophpString_ implements XophpCallbackOwner {
 									continue;
 								}
 								else {
-									throw new XophpError(".. found but next byte must be greater than previous byte; src=" + pad_str);
+									throw new XophpException(".. found but next byte must be greater than previous byte; src=" + pad_str);
 								}
 							}
 						}
