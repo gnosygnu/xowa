@@ -71,7 +71,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		}
 		return rv;
 	}
-	public XophpArray Add(Object val) {
+	public XophpArray Add(T val) {
 		int key = newMemberIdx++;
 		Set(XophpArrayItm.New_int(key, val));
 		return this;
@@ -110,8 +110,8 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		}
 		return this;
 	}
-	public XophpArray Add_many(Object... val) {
-		for (Object itm : val) {
+	public XophpArray Add_many(T... val) {
+		for (T itm : val) {
 			Add(itm);
 		}
 		return this;
@@ -165,9 +165,9 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	public String Get_by_str(int key) {return (String)this.Get_by(Int_.To_str(key));}
 	public String Get_by_str_or(String key, String or) {Object rv = this.Get_by(key); return rv == null ? or : (String)rv;}
 	public String Get_by_str(String key) {return (String)this.Get_by(key);}
-	public Object Get_by(String key) {
+	public T Get_by(String key) {
 		XophpArrayItm itm = (XophpArrayItm)hash.Get_by(key);
-		return itm == null ? null : itm.Val();
+		return itm == null ? null : (T)itm.Val();
 	}
 	public void Set(int key, Object val) {
 		this.Set(XophpArrayItm.New_int(key, val));

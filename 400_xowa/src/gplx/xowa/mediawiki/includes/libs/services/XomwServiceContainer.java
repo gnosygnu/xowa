@@ -15,15 +15,18 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.libs.services;
 
-
-// MW.SRC:1.33.1
-
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpArray_;
-import gplx.xowa.mediawiki.XophpCallbackOwner;
+import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpType_;
-
+/*
+XOTODO:
+* array_diff: https://www.php.net/manual/en/function.array-diff.php
+* array_diff_key: https://www.php.net/manual/en/function.array-diff-key
+* XomwAssert: /vendor/wikimedia/Assert/src
+*/
+// MW.SRC:1.33.1
 /**
  * ServiceContainer provides a generic service to manage named services using
  * lazy instantiation based on instantiator callback functions.
@@ -49,12 +52,12 @@ public class XomwServiceContainer implements XomwDestructibleService {
     /**
      * @var callable[]
      */
-    private XophpArray<XophpCallbackOwner> serviceInstantiators = new XophpArray();
+    private XophpArray<XophpCallback> serviceInstantiators = new XophpArray();
 
     /**
      * @var callable[][]
      */
-    private XophpArray<XophpCallbackOwner[]> serviceManipulators = new XophpArray();
+    private XophpArray<XophpArray<XophpCallback>> serviceManipulators = new XophpArray();
 
     /**
      * @var bool[] disabled status, per service name
@@ -106,76 +109,77 @@ public class XomwServiceContainer implements XomwDestructibleService {
         this.destroyed = true;
     }
 
-//    /**
-//     * @param array $wiringFiles A list of PHP files to load wiring information from.
-//     * Each file is loaded using PHP's include mechanism. Each file is expected to
-//     * return an associative array that maps service names to instantiator functions.
-//     */
-//    public function loadWiringFiles(array $wiringFiles) {
+    /**
+     * @param array $wiringFiles A list of PHP files to load wiring information from.
+     * Each file is loaded using PHP's include mechanism. Each file is expected to
+     * return an associative array that maps service names to instantiator functions.
+     */
+    public void loadWiringFiles(XophpArray wiringFiles) {
 //        foreach ($wiringFiles as $file) {
 //            // the wiring file is required to return an array of instantiators.
 //            $wiring = require $file;
 //
-//            Assert::postcondition(
-//                is_array($wiring),
-//                "Wiring file $file is expected to return an array!"
-//			);
+//            // Assert::postcondition(
+//            //    is_array($wiring),
+//            //    "Wiring file $file is expected to return an array!"
+//            // );
 //
 //            this.applyWiring($wiring);
 //        }
-//    }
+    }
 
-//    /**
-//     * Registers multiple services (aka a "wiring").
-//     *
-//     * @param array $serviceInstantiators An associative array mapping service names to
-//     *        instantiator functions.
-//     */
-//    public function applyWiring(array $serviceInstantiators) {
-//        Assert::parameterElementType('callable', $serviceInstantiators, '$serviceInstantiators');
-//
+    /**
+     * Registers multiple services (aka a "wiring").
+     *
+     * @param array $serviceInstantiators An associative array mapping service names to
+     *        instantiator functions.
+     */
+    public void applyWiring(XophpArray $serviceInstantiators) {
+        // Assert::parameterElementType('callable', $serviceInstantiators, '$serviceInstantiators');
+
 //        foreach ($serviceInstantiators as $name => $instantiator) {
 //            this.defineService($name, $instantiator);
 //        }
-//    }
+    }
 
-//    /**
-//     * Imports all wiring defined in $container. Wiring defined in $container
-//     * will override any wiring already defined locally. However, already
-//     * existing service instances will be preserved.
-//     *
-//     * @since 1.28
-//     *
-//     * @param ServiceContainer $container
-//     * @param string[] $skip A list of service names to skip during import
-//     */
-//    public function importWiring(ServiceContainer $container, $skip = []) {
-//        $newInstantiators = array_diff_key(
-//            $container.serviceInstantiators,
-//            array_flip($skip)
-//       );
+    /**
+     * Imports all wiring defined in $container. Wiring defined in $container
+     * will override any wiring already defined locally. However, already
+     * existing service instances will be preserved.
+     *
+     * @since 1.28
+     *
+     * @param ServiceContainer $container
+     * @param string[] $skip A list of service names to skip during import
+     */
+    public void importWiring(XomwServiceContainer container) {this.importWiring(container, new XophpArray<>());}
+    public void importWiring(XomwServiceContainer container, XophpArray<String> skip) {
+//        XophpArray<String> newInstantiators = XophpArray_.array_diff_key(
+//            container.serviceInstantiators,
+//            XophpArray_.array_flip(skip)
+//        );
 //
-//        this.serviceInstantiators = array_merge(
+//        this.serviceInstantiators = XophpArray_.array_merge(
 //            this.serviceInstantiators,
-//            $newInstantiators
-//       );
+//            newInstantiators
+//        );
 //
-//        $newManipulators = array_diff(
-//            array_keys($container.serviceManipulators),
-//            $skip
-//       );
+//        XophpArray<String> newManipulators = XophpArray_.array_diff(
+//            XophpArray_.array_keys(container.serviceManipulators),
+//            skip
+//        );
 //
-//        foreach ($newManipulators as $name) {
-//            if (isset(this.serviceManipulators[$name])) {
-//                this.serviceManipulators[$name] = array_merge(
-//                    this.serviceManipulators[$name],
-//                    $container.serviceManipulators[$name]
-//               );
+//        for (String name : newManipulators) {
+//            if (XophpArray_.isset(this.serviceManipulators, name)) {
+//                this.serviceManipulators.Set(name, XophpArray_.array_merge(
+//                    this.serviceManipulators.Get_by(name),
+//                    container.serviceManipulators.Get_by(name)
+//               ));
 //            } else {
-//                this.serviceManipulators[$name] = $container.serviceManipulators[$name];
+//                this.serviceManipulators.Set(name, container.serviceManipulators.Get_by(name));
 //            }
 //        }
-//    }
+    }
 
     /**
      * Returns true if a service is defined for $name, that is, if a call to getService($name)
@@ -219,103 +223,103 @@ public class XomwServiceContainer implements XomwDestructibleService {
         return XophpArray_.array_keys(this.serviceInstantiators);
     }
 
-//    /**
-//     * Define a new service. The service must not be known already.
-//     *
-//     * @see getService().
-//     * @see redefineService().
-//     *
-//     * @param string $name The name of the service to register, for use with getService().
-//     * @param callable $instantiator Callback that returns a service instance.
-//     *        Will be called with this ServiceContainer instance as the only parameter.
-//     *        Any extra instantiation parameters provided to the constructor will be
-//     *        passed as subsequent parameters when invoking the instantiator.
-//     *
-//     * @throws RuntimeException if there is already a service registered as $name.
-//     */
-//    public function defineService($name, callable $instantiator) {
-//        Assert::parameterType('string', $name, '$name');
-//
-//        if (this.hasService($name)) {
-//            throw new ServiceAlreadyDefinedException($name);
-//        }
-//
-//        this.serviceInstantiators[$name] = $instantiator;
-//    }
+    /**
+     * Define a new service. The service must not be known already.
+     *
+     * @see getService().
+     * @see redefineService().
+     *
+     * @param string $name The name of the service to register, for use with getService().
+     * @param callable $instantiator Callback that returns a service instance.
+     *        Will be called with this ServiceContainer instance as the only parameter.
+     *        Any extra instantiation parameters provided to the constructor will be
+     *        passed as subsequent parameters when invoking the instantiator.
+     *
+     * @throws RuntimeException if there is already a service registered as $name.
+     */
+    public void defineService(String name, XophpCallback instantiator) {
+        // Assert::parameterType('string', $name, '$name');
 
-//    /**
-//     * Replace an already defined service.
-//     *
-//     * @see defineService().
-//     *
-//     * @note This will fail if the service was already instantiated. If the service was previously
-//     * disabled, it will be re-enabled by this call. Any manipulators registered for the service
-//     * will remain in place.
-//     *
-//     * @param string $name The name of the service to register.
-//     * @param callable $instantiator Callback function that returns a service instance.
-//     *        Will be called with this ServiceContainer instance as the only parameter.
-//     *        The instantiator must return a service compatible with the originally defined service.
-//     *        Any extra instantiation parameters provided to the constructor will be
-//     *        passed as subsequent parameters when invoking the instantiator.
-//     *
-//     * @throws NoSuchServiceException if $name is not a known service.
-//     * @throws CannotReplaceActiveServiceException if the service was already instantiated.
-//     */
-//    public function redefineService($name, callable $instantiator) {
-//        Assert::parameterType('string', $name, '$name');
-//
-//        if (!this.hasService($name)) {
-//            throw new NoSuchServiceException($name);
-//        }
-//
-//        if (isset(this.services[$name])) {
-//            throw new CannotReplaceActiveServiceException($name);
-//        }
-//
-//        this.serviceInstantiators[$name] = $instantiator;
-//        unset(this.disabled[$name]);
-//    }
-//
-//    /**
-//     * Add a service manipulator callback for the given service.
-//     * This method may be used by extensions that need to wrap, replace, or re-configure a
-//     * service. It would typically be called from a MediaWikiServices hook handler.
-//     *
-//     * The manipulator callback is called just after the service is instantiated.
-//     * It can call methods on the service to change configuration, or wrap or otherwise
-//     * replace it.
-//     *
-//     * @see defineService().
-//     * @see redefineService().
-//     *
-//     * @note This will fail if the service was already instantiated.
-//     *
-//     * @since 1.32
-//     *
-//     * @param string $name The name of the service to manipulate.
-//     * @param callable $manipulator Callback function that manipulates, wraps or replaces a
-//     * service instance. The callback receives the new service instance and this
-//     * ServiceContainer as parameters, as well as any extra instantiation parameters specified
-//     * when constructing this ServiceContainer. If the callback returns a value, that
-//     * value replaces the original service instance.
-//     *
-//     * @throws NoSuchServiceException if $name is not a known service.
-//     * @throws CannotReplaceActiveServiceException if the service was already instantiated.
-//     */
-//    public function addServiceManipulator($name, callable $manipulator) {
-//        Assert::parameterType('string', $name, '$name');
-//
-//        if (!this.hasService($name)) {
-//            throw new NoSuchServiceException($name);
-//        }
-//
-//        if (isset(this.services[$name])) {
-//            throw new CannotReplaceActiveServiceException($name);
-//        }
-//
-//        this.serviceManipulators[$name][] = $manipulator;
-//    }
+        if (this.hasService(name)) {
+            throw new XomwServiceAlreadyDefinedException(name);
+        }
+
+        this.serviceInstantiators.Set(name, instantiator);
+    }
+
+    /**
+     * Replace an already defined service.
+     *
+     * @see defineService().
+     *
+     * @note This will fail if the service was already instantiated. If the service was previously
+     * disabled, it will be re-enabled by this call. Any manipulators registered for the service
+     * will remain in place.
+     *
+     * @param string $name The name of the service to register.
+     * @param callable $instantiator Callback function that returns a service instance.
+     *        Will be called with this ServiceContainer instance as the only parameter.
+     *        The instantiator must return a service compatible with the originally defined service.
+     *        Any extra instantiation parameters provided to the constructor will be
+     *        passed as subsequent parameters when invoking the instantiator.
+     *
+     * @throws NoSuchServiceException if $name is not a known service.
+     * @throws CannotReplaceActiveServiceException if the service was already instantiated.
+     */
+    public void redefineService(String name, XophpCallback instantiator) {
+        // Assert::parameterType('string', $name, '$name');
+        
+        if (!this.hasService(name)) {
+            throw new XomwNoSuchServiceException(name);
+        }
+
+        if (XophpArray_.isset(this.services, name)) {
+            throw new XomwCannotReplaceActiveServiceException(name);
+        }
+
+        this.serviceInstantiators.Set(name, instantiator);
+        XophpArray_.unset(this.disabled, name);
+    }
+
+    /**
+     * Add a service manipulator callback for the given service.
+     * This method may be used by extensions that need to wrap, replace, or re-configure a
+     * service. It would typically be called from a MediaWikiServices hook handler.
+     *
+     * The manipulator callback is called just after the service is instantiated.
+     * It can call methods on the service to change configuration, or wrap or otherwise
+     * replace it.
+     *
+     * @see defineService().
+     * @see redefineService().
+     *
+     * @note This will fail if the service was already instantiated.
+     *
+     * @since 1.32
+     *
+     * @param string $name The name of the service to manipulate.
+     * @param callable $manipulator Callback function that manipulates, wraps or replaces a
+     * service instance. The callback receives the new service instance and this
+     * ServiceContainer as parameters, as well as any extra instantiation parameters specified
+     * when constructing this ServiceContainer. If the callback returns a value, that
+     * value replaces the original service instance.
+     *
+     * @throws NoSuchServiceException if $name is not a known service.
+     * @throws CannotReplaceActiveServiceException if the service was already instantiated.
+     */
+    public void addServiceManipulator(String name, XophpCallback manipulator) {
+        // Assert::parameterType('string', $name, '$name');
+
+        if (!this.hasService(name)) {
+            throw new XomwNoSuchServiceException(name);
+        }
+
+        if (XophpArray_.isset(this.services, name)) {
+            throw new XomwCannotReplaceActiveServiceException(name);
+        }
+
+        this.serviceManipulators.Xet_by_ary(name).Add(manipulator);
+    }
 
     /**
      * Disables a service.
@@ -401,11 +405,11 @@ public class XomwServiceContainer implements XomwDestructibleService {
      */
     public Object getService(String name) {
         if (this.destroyed) {
-//            throw new XomwContainerDisabledException();
+            throw new XomwContainerDisabledException();
         }
 
         if (XophpArray_.isset(this.disabled, name)) {
-//            throw new XomwServiceDisabledException($name);
+            throw new XomwServiceDisabledException(name);
         }
 
         if (!XophpArray_.isset(this.services, name)) {
@@ -422,35 +426,36 @@ public class XomwServiceContainer implements XomwDestructibleService {
      * @return object
      */
     private Object createService(String name) {
-//        if (isset(this.serviceInstantiators[$name])) {
-//            $service = (this.serviceInstantiators[$name])(
-//                this,
-//				...this.extraInstantiationParams
-//			);
-//
-//            if (isset(this.serviceManipulators[$name])) {
-//                foreach (this.serviceManipulators[$name] as $callback) {
-//                    $ret = call_user_func_array(
-//                        $callback,
-//                        array_merge([ $service, this ], this.extraInstantiationParams)
-//					);
-//
-//                    // If the manipulator callback returns an object, that object replaces
-//                    // the original service instance. This allows the manipulator to wrap
-//                    // or fully replace the service.
-//                    if ($ret !== null) {
-//                        $service = $ret;
-//                    }
-//                }
-//            }
-//
-//            // NOTE: when adding more wiring logic here, make sure importWiring() is kept in sync!
-//        } else {
-//            throw new NoSuchServiceException($name);
-//        }
-//
-//        return $service;
-        return null;
+        Object service;
+        if (XophpArray_.isset(this.serviceInstantiators, name)) {
+            service = (this.serviceInstantiators.Get_by(name)).Call(
+                this,
+                this.extraInstantiationParams
+			);
+
+            if (XophpArray_.isset(this.serviceManipulators, name)) {
+                Object ret;
+                for (XophpCallback callback : this.serviceManipulators.Get_by(name)) {
+                    ret = XophpCallback.call_user_func_array(
+                        callback,
+                        XophpArray_.array_merge(XophpArray.New(service, this), this.extraInstantiationParams)
+					);
+
+                    // If the manipulator callback returns an object, that object replaces
+                    // the original service instance. This allows the manipulator to wrap
+                    // or fully replace the service.
+                    if (ret != null) {
+                        service = ret;
+                    }
+                }
+            }
+
+            // NOTE: when adding more wiring logic here, make sure importWiring() is kept in sync!
+        } else {
+            throw new XomwNoSuchServiceException(name);
+        }
+
+        return service;
     }
 
     /**
