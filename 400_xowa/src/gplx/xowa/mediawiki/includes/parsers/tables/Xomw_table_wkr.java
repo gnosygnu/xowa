@@ -48,13 +48,13 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 
 		// Closing open td, tr && table
 		while (td_history.Len() > 0) {
-			if (XophpArray_.popBoolOrN(td_history)) {
+			if (XophpArray.popBoolOrN(td_history)) {
 				bfr.Add_str_a7("</td>\n");
 			}
-			if (XophpArray_.popBoolOrN(tr_history)) {
+			if (XophpArray.popBoolOrN(tr_history)) {
 				bfr.Add_str_a7("</tr>\n");
 			}
-			if (!XophpArray_.popBoolOrN(has_opened_tr)) {
+			if (!XophpArray.popBoolOrN(has_opened_tr)) {
 				bfr.Add_str_a7("<tr><td></td></tr>\n");
 			}
 			bfr.Add_str_a7("</table>\n");
@@ -123,20 +123,20 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 		else if (Bry_.Eq(first_2, Wtxt__tb__end)) {
 			// We are ending a table
 			line = tmp.Add_str_a7("</table>").Add_mid(line, 2, line.length).To_bry_and_clear();
-			byte[] last_tag = XophpArray_.popBryOrNull(last_tag_history);
+			byte[] last_tag = XophpArray.popBryOrNull(last_tag_history);
 
-			if (!XophpArray_.popBoolOrN(has_opened_tr)) {
+			if (!XophpArray.popBoolOrN(has_opened_tr)) {
 				line = tmp.Add_str_a7("<tr><td></td></tr>").Add(line).To_bry_and_clear();
 			}
 
-			if (XophpArray_.popBoolOrN(tr_history)) {
+			if (XophpArray.popBoolOrN(tr_history)) {
 				line = tmp.Add_str_a7("</tr>").Add(line).To_bry_and_clear();
 			}
 
-			if (XophpArray_.popBoolOrN(td_history)) {
+			if (XophpArray.popBoolOrN(td_history)) {
 				line = tmp.Add_str_a7("</").Add(last_tag).Add_byte(Byte_ascii.Angle_end).Add(line).To_bry_and_clear();
 			}
-			XophpArray_.popBryOrNull(tr_attributes);
+			XophpArray.popBryOrNull(tr_attributes);
 			// PORTED:$outLine = $line . str_repeat( '</dd></dl>', $indent_level );
 			tmp.Add(line);
 			for (int j = 0; j < indent_level; j++)
@@ -152,19 +152,19 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 			sanitizer.fixTagAttributes(tmp, Name__tr, atrs);
 			atrs = tmp.To_bry_and_clear();
 
-			XophpArray_.popBryOrNull(tr_attributes);
+			XophpArray.popBryOrNull(tr_attributes);
 			tr_attributes.Add(atrs);
 
 			line = Bry_.Empty;
-			byte[] last_tag = XophpArray_.popBryOrNull(last_tag_history);
-			XophpArray_.popBoolOrN(has_opened_tr);
+			byte[] last_tag = XophpArray.popBryOrNull(last_tag_history);
+			XophpArray.popBoolOrN(has_opened_tr);
 			has_opened_tr.Add(true);
 
-			if (XophpArray_.popBoolOrN(tr_history)) {
+			if (XophpArray.popBoolOrN(tr_history)) {
 				line = Html__tr__end;
 			}
 
-			if (XophpArray_.popBoolOrN(td_history)) {
+			if (XophpArray.popBoolOrN(td_history)) {
 				line = tmp.Add_str_a7("</").Add(last_tag).Add_byte(Byte_ascii.Gt).Add(line).To_bry_and_clear();
 			}
 
@@ -205,19 +205,19 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 				byte[] cell = cells[j];
 				previous = Bry_.Empty;
 				if (first_char != Byte_ascii.Plus) {
-					byte[] tr_after = XophpArray_.popBryOrNull(tr_attributes);
-					if (!XophpArray_.popBoolOrN(tr_history)) {
+					byte[] tr_after = XophpArray.popBryOrNull(tr_attributes);
+					if (!XophpArray.popBoolOrN(tr_history)) {
 						previous = tmp.Add_str_a7("<tr").Add(tr_after).Add_str_a7(">\n").To_bry_and_clear();
 					}
 					tr_history.Add(true);
 					tr_attributes.Add(Bry_.Empty);
-					XophpArray_.popBoolOrN(has_opened_tr);
+					XophpArray.popBoolOrN(has_opened_tr);
 					has_opened_tr.Add(true);
 				}
 
-				byte[] last_tag = XophpArray_.popBryOrNull(last_tag_history);
+				byte[] last_tag = XophpArray.popBryOrNull(last_tag_history);
 
-				if (XophpArray_.popBoolOrN(td_history)) {
+				if (XophpArray.popBoolOrN(td_history)) {
 					previous = tmp.Add_str_a7("</").Add(last_tag).Add_str_a7(">\n").Add(previous).To_bry_and_clear();
 				}
 

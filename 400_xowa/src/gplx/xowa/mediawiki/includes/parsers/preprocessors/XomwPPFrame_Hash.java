@@ -97,14 +97,14 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 				args = (XophpArray)argsObj;
 			}
 
-			int argsLen = args.count();
+			int argsLen = args.Len();
 			for (int i = 0; i < argsLen; i++) {
 				XomwPPNode arg = (XomwPPNode)args.Get_at(i);
 				XophpArray bits = arg.splitArg();
 				if (bits.Has("index")) {
 					// Numbered parameter
 					int index = bits.Get_by_int("index") - indexOffset;
-					if (namedArgs.isset(index) || numberedArgs.isset(index)) {
+					if (XophpArray.isset(namedArgs, index) || XophpArray.isset(numberedArgs, index)) {
 					//	this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
 					//		wfEscapeWikiText(this.title),
 					//		wfEscapeWikiText(title),
@@ -112,11 +112,11 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					//	this.parser.addTrackingCategory('duplicate-args-category');
 					}
 					numberedArgs.Set(index, bits.Get_by("value"));
-					namedArgs.unset(index);
+					XophpArray.unset(namedArgs, index);
 				} else {
 					// Named parameter
 					String name = String_.Trim(this.expand(bits.Get_by("name"), XomwPPFrame.STRIP_COMMENTS));
-					if (namedArgs.isset(name) || numberedArgs.isset(name)) {
+					if (XophpArray.isset(namedArgs, name) || XophpArray.isset(numberedArgs, name)) {
 					//	this.parser.getOutput().addWarning(wfMessage('duplicate-args-warning',
 					//		wfEscapeWikiText(this.title),
 					//		wfEscapeWikiText(title),
@@ -124,7 +124,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					//	this.parser.addTrackingCategory('duplicate-args-category');
 					}
 					namedArgs.Set(name, bits.Get_by("value"));
-					numberedArgs.unset(name);
+					XophpArray.unset(numberedArgs, name);
 				}
 			}
 		}
@@ -179,15 +179,15 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 		XophpArray iteratorStack = XophpArray.New(XophpObject_.False, root);
 		XophpArray indexStack = XophpArray.New(0, 0);
 
-		while (iteratorStack.count() > 1) {
-			int level = outStack.count() - 1;
+		while (XophpArray.count(iteratorStack) > 1) {
+			int level = XophpArray.count(outStack) - 1;
 			Object iteratorNode = iteratorStack.Get_at(level);
 			String outItm = outStack.Get_at_str(level);
 			int index = indexStack.Get_at_int(level);
 			Object contextNode;
 			if (XophpArray.is_array(iteratorNode)) {
 				XophpArray iteratorNodeArray = (XophpArray)iteratorNode;
-				if (index >= iteratorNodeArray.count()) {
+				if (index >= XophpArray.count(iteratorNodeArray)) {
 					// All done with this iterator
 					iteratorStack.Set(level, XophpObject_.False);
 					contextNode = XophpObject_.False;
@@ -233,7 +233,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			} else if (XophpArray.is_array(contextNode)) {
 				XophpArray contextNodeArray = (XophpArray)contextNode;
 				// Node descriptor array
-				if (contextNodeArray.count() != 2) {
+				if (XophpArray.count(contextNodeArray) != 2) {
 					throw XomwMWException.New_by_method(XomwPPFrame_Hash.class, "expand", 
 						": found an array where a node descriptor should be");
 				}
@@ -259,7 +259,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					);
 				} else {
 					XophpArray ret = this.parser.braceSubstitution(bits, this);
-					if (ret.isset(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+					if (XophpArray.isset(ret, Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
 						newIterator = ret.Get_by(Object_.Cls_val_name);
 					} else {
 						outItm += ret.Get_by_str("text");
@@ -276,7 +276,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					);
 				} else {
 					XophpArray ret = this.parser.argSubstitution(bits, this);
-					if (ret.isset(Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
+					if (XophpArray.isset(ret, Object_.Cls_val_name)) {// NOTE: using Cls_val_name b/c of transpilation and Object . Object
 						newIterator = ret.Get_by("Object");
 					} else {
 						outItm += ret.Get_by_str("text");
@@ -343,7 +343,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 					XophpArray bits = XomwPPNode_Hash_Tree.splitRawHeading(contextChildren);
 					String titleText = this.title.getPrefixedDBkeyStr();
 					this.parser.mHeadings.Add(titleText, bits.Get_by("i"));
-					int serial = XophpArray_.count(this.parser.mHeadings) - 1;
+					int serial = XophpArray.count(this.parser.mHeadings) - 1;
 					String marker = XomwParser.MARKER_PREFIX + "-h-" + Int_.To_str(serial) + "-" + XomwParser.MARKER_SUFFIX;
 					s = XophpString_.substr(s, 0, bits.Get_by_int("level")) + marker + XophpString_.substr(s, bits.Get_by_int("level"));
 					this.parser.mStripState.addGeneral(marker, "");
@@ -366,9 +366,9 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 				// With tail recursion
 				while (!XophpObject_.is_true(iteratorStack.Get_at(level)) && level > 0) {
 					outStack.Itm_str_concat_end(level - 1, outItm);
-					outStack.pop();
-					iteratorStack.pop();
-					indexStack.pop();
+					XophpArray.array_pop(outStack);
+					XophpArray.array_pop(iteratorStack);
+					XophpArray.array_pop(indexStack);
 					level--;
 				}
 			}
@@ -384,7 +384,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @return String
 	*/
 	public String implodeWithFlags(String sep, int flags, XophpArray args) {
-		// args = XophpArray_.array_slice(func_get_args(), 2);
+		// args = XophpArray.array_slice(func_get_args(), 2);
 
 		boolean first = true;
 		String s = "";
@@ -430,7 +430,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			if (!XophpArray.is_array(rootObj)) {
 				root = XophpArray.New(root);
 			}
-			int rootLen = root.count();
+			int rootLen = root.Len();
 			for (int i = 0; i < rootLen; i++) {
 				Object node = root.Get_at(i);
 				if (first) {
@@ -464,7 +464,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			if (!XophpArray.is_array(rootObj)) {
 				root = XophpArray.New(root);
 			}
-			int rootLen = root.count();
+			int rootLen = root.Len();
 			for (int i = 0; i < rootLen; i++) {
 				Object node = root.Get_at(i);
 				if (first) {
@@ -499,7 +499,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			if (!XophpArray.is_array(rootObj)) {
 				root = XophpArray.New((String)rootObj);
 			}
-			int root_len = root.count();
+			int root_len = root.Len();
 			for (int i = 0; i < root_len; i++) {
 				String node = root.Get_at_str(i);
 				if (first) {
@@ -527,7 +527,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 			return this.title.getPrefixedDBkeyStr();
 		} else {
 			// return isset( $this->titleCache[$level] ) ? $this->titleCache[$level] : false;
-			return this.titleCache.count() > 0 ? ((String)this.titleCache.Get_at(0)) : XophpString_.False;
+			return XophpArray.count(this.titleCache) > 0 ? ((String)this.titleCache.Get_at(0)) : XophpString_.False;
 		}
 	}
 
@@ -577,7 +577,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { 	/**
 	* @return boolean
 	*/
 	@Override public boolean loopCheck(XomwTitleOld title) {
-		return !this.loopCheckHash.isset(title.getPrefixedDBkeyStr());
+		return !XophpArray.isset(this.loopCheckHash, title.getPrefixedDBkeyStr());
 	}
 
 	/**

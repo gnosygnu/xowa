@@ -51,7 +51,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //		public override String toString() {
 //			String s = "tplframe{";
 //			boolean first = true;
-//			XophpArray args = XophpArray_.array_add(this.numberedArgs, this.namedArgs);
+//			XophpArray args = XophpArray.array_add(this.numberedArgs, this.namedArgs);
 //			int args_len = args.count();
 //			for (int i = 0; i < args_len; i++) {
 //				XophpArrayItm itm = args.Get_at_itm(i);
@@ -99,9 +99,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //		 */
 //		public override XophpArray getArguments() {
 //			XophpArray arguments = XophpArray.New();
-//			XophpArray merged = XophpArray_.array_merge(
-//					XophpArray_.array_keys(this.numberedArgs),
-//					XophpArray_.array_keys(this.namedArgs));
+//			XophpArray merged = XophpArray.array_merge(
+//					XophpArray.array_keys(this.numberedArgs),
+//					XophpArray.array_keys(this.namedArgs));
 //			int merged_len = merged.count();
 //			for (int i = 0; i < merged_len; i++) {
 //				String key = merged.Get_at_str(i);
@@ -115,7 +115,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //		 */
 //		public override XophpArray getNumberedArguments() {
 //			XophpArray arguments = XophpArray.New();
-//			XophpArray temp = XophpArray_.array_keys(this.numberedArgs);
+//			XophpArray temp = XophpArray.array_keys(this.numberedArgs);
 //			int temp_len = temp.count();
 //			for (int i = 0; i < temp_len; i++) {
 //				String key = temp.Get_at_str(i);
@@ -129,7 +129,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //		 */
 //		public override XophpArray getNamedArguments() {
 //			XophpArray arguments = XophpArray.New();
-//			XophpArray temp = XophpArray_.array_keys(this.namedArgs);
+//			XophpArray temp = XophpArray.array_keys(this.namedArgs);
 //			int temp_len = temp.count();
 //			for (int i = 0; i < temp_len; i++) {
 //				String key = temp.Get_at_str(i);

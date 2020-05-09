@@ -19,7 +19,7 @@ import gplx.String_;
 import gplx.core.primitives.String_obj_ref;
 import gplx.core.tests.GfoTestMethod;
 import gplx.xowa.mediawiki.XophpArray;
-import gplx.xowa.mediawiki.XophpArray_;
+import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpCallbackOwner;
 import gplx.xowa.mediawiki.XophpFatalException;
@@ -71,7 +71,7 @@ public class XomwHooks {
         //    throw new MWException('Cannot reset hooks in operation.');
         // }
 
-        XophpArray_.unset(handlers, name);
+        XophpArray.unset(handlers, name);
     }
 
     /**
@@ -99,12 +99,12 @@ public class XomwHooks {
     public static XophpArray getHandlers(String name) {
         if (!isRegistered(name)) {
             return XophpArray.New();
-        } else if (!XophpArray_.isset(handlers, name)) {
+        } else if (!XophpArray.isset(handlers, name)) {
             return XomwDefaultSettings.wgHooks.Get_by_ary(name);
-        } else if (!XophpArray_.isset(XomwDefaultSettings.wgHooks, name)) {
+        } else if (!XophpArray.isset(XomwDefaultSettings.wgHooks, name)) {
             return handlers.Get_by_ary(name);
         } else {
-            return XophpArray_.array_merge(handlers.Get_by_ary(name), XomwDefaultSettings.wgHooks.Get_by_ary(name));
+            return XophpArray.array_merge(handlers.Get_by_ary(name), XomwDefaultSettings.wgHooks.Get_by_ary(name));
         }
     }
 
@@ -123,7 +123,7 @@ public class XomwHooks {
    ) {
         XophpArray hook;
         // Turn non-array values into an array. (Can't use casting because of objects.)
-        if (!XophpArray_.is_array(hookObj)) {
+        if (!XophpArray.is_array(hookObj)) {
             hook = XophpArray.New(hookObj);
         }
         else { // XO: cast it to XophpArray
@@ -135,11 +135,11 @@ public class XomwHooks {
             return null;
         }
 
-        if (XophpArray_.is_array(hook.Get_at(0))) {
+        if (XophpArray.is_array(hook.Get_at(0))) {
             // First element is an array, meaning the developer intended
             // the first element to be a callback. Merge it in so that
             // processing can be uniform.
-            hook = XophpArray_.array_merge(hook.Get_at_ary(0), XophpArray_.array_slice(hook, 1));
+            hook = XophpArray.array_merge(hook.Get_at_ary(0), XophpArray.array_slice(hook, 1));
         }
 
         /**
@@ -150,10 +150,10 @@ public class XomwHooks {
         XophpCallback callback = null;
         if (XophpType_.instance_of(hook.Get_at(0), XophpCallback.class)) { // XophpClosure
             if (fname != null) fname.Val_("hook-" + event + "-closure");
-            callback = (XophpCallback) XophpArray_.array_shift(hook);
+            callback = (XophpCallback) XophpArray.array_shift(hook);
         } else if (XophpObject_.is_object(hook.Get_at_str(0))) {
-            XophpCallbackOwner object = (XophpCallbackOwner)XophpArray_.array_shift(hook);
-            String method = (String)XophpArray_.array_shift(hook);
+            XophpCallbackOwner object = (XophpCallbackOwner)XophpArray.array_shift(hook);
+            String method = (String)XophpArray.array_shift(hook);
 
             // If no method was specified, default to on$event.
             if (XophpObject_.is_null(method)) {
@@ -163,7 +163,7 @@ public class XomwHooks {
             if (fname != null) fname.Val_(XophpType_.get_class(object).getName() + "::" + method);
             callback = new XophpCallback(object, method);
         } else if (XophpString_.is_string(hook.Get_at(0))) {
-            throw new XomwMWException("XOMW does not support string callbacks! Should not have been passed here!; event={0}; fname={1}\n", event,  XophpArray_.array_shift(hook));
+            throw new XomwMWException("XOMW does not support string callbacks! Should not have been passed here!; event={0}; fname={1}\n", event,  XophpArray.array_shift(hook));
         } else {
             throw new XomwMWException("Unknown datatype in hooks for {0}\n", event);
         }
@@ -181,7 +181,7 @@ public class XomwHooks {
         }
 
         // Call the hook.
-        XophpArray hook_args = XophpArray_.array_merge(hook, args);
+        XophpArray hook_args = XophpArray.array_merge(hook, args);
         return (String) XophpCallback.call_user_func_array(callback, hook_args);
     }
     /**
@@ -211,7 +211,7 @@ public class XomwHooks {
     public static boolean run(String event, XophpArray args) {return run(event, args, null);}
     public static boolean run(String event, XophpArray args, String deprecatedVersion) {
         XophpArray handlers = getHandlers(event);
-        for (int i = 0; i < handlers.count(); i++) {
+        for (int i = 0; i < handlers.Len(); i++) {
             XophpCallback hook = (XophpCallback)handlers.Get_at(i);
             Object retval = callHook(event, hook, args, deprecatedVersion);
             if (retval == null) {
@@ -245,7 +245,7 @@ public class XomwHooks {
     public static boolean runWithoutAbort(String event) {return runWithoutAbort(event, XophpArray.New(), null);}
     public static boolean runWithoutAbort(String event, XophpArray args, String deprecatedVersion) {
         XophpArray handlers = getHandlers(event);
-        int len = handlers.count();
+        int len = handlers.Len();
         for (int i = 0; i < len; i++) {
             Object hookObj = handlers.Get_at(i);
             String_obj_ref fname = String_obj_ref.empty_();

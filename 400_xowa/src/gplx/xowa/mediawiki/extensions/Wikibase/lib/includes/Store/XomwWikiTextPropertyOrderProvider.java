@@ -38,7 +38,7 @@ abstract class XomwWikiTextPropertyOrderProvider implements XomwPropertyOrderPro
 		}
 		XophpArray parsedList = this.parseList(pageContent);
 
-		return XophpArray_.array_flip(parsedList);
+		return XophpArray.array_flip(parsedList);
 	}
 
 	/**
@@ -65,7 +65,7 @@ abstract class XomwWikiTextPropertyOrderProvider implements XomwPropertyOrderPro
 			XophpRegex_.PREG_PATTERN_ORDER
 		);
 
-		XophpArray orderedProperties = XophpArray_.array_map(XophpString_.Callback_owner, "strtoupper", (XophpArray)orderedPropertiesMatches.Get_at_ary(1));
+		XophpArray orderedProperties = XophpArray.array_map(XophpString_.Callback_owner, "strtoupper", (XophpArray)orderedPropertiesMatches.Get_at_ary(1));
 
 		return orderedProperties;
 	}

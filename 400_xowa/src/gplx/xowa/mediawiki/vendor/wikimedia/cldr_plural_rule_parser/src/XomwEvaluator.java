@@ -42,7 +42,7 @@ public class XomwEvaluator {
 		XophpArray rv = XophpArray.New();
 		// We can't use array_map() for this because it generates a warning if
 		// there is an exception.
-		int rules_len = rules.count();
+		int rules_len = rules.Len();
 		for (int i = 0; i < rules_len; i++) {
 			String rule = rules.Get_at_str(i);
 			rule = XomwConverter.convert(rule);
@@ -69,11 +69,11 @@ public class XomwEvaluator {
 		XophpArray m = XophpArray.New();
 		if (!XophpRegex_.preg_match_bool(gplx.langs.regxs.Regx_adp_.new_("^-?(([0-9]+)(?:\\.([0-9]+))?)"), number_str, m, 0, 0)) {
 			XomwLog_.wfDebug_by_method("evaluateCompiled", ": invalid number input, returning \"other\"\n");
-			return rules.count();
+			return XophpArray.count(rules);
 		}
 
 		XophpArray operandSymbols = null;			
-		if (!m.isset(3)) {
+		if (!XophpArray.isset(m, 3)) {
 			operandSymbols = XophpArray.New()
 				.Add("n", Decimal_adp_.int_(XophpInt_.intval(m.Get_at_str(1))))
 				.Add("i", Decimal_adp_.int_(XophpInt_.intval(m.Get_at_str(1))))
@@ -98,7 +98,7 @@ public class XomwEvaluator {
 
 		// The compiled form is RPN, with tokens strictly delimited by
 		// spaces, so this is a simple RPN evaluator.
-		int rules_len = rules.count();
+		int rules_len = rules.Len();
 		for (int i = 0; i < rules_len; i++) {
 			String rule = rules.Get_at_str(i);
 			XophpArray stack = XophpArray.New();
@@ -108,13 +108,13 @@ public class XomwEvaluator {
 			String[] tokens = XophpString_.explode(" ", rule);
 			for (String token : tokens) {
 				int ord = XophpString_.ord(token);
-				if (operandSymbols.isset(token)) {
+				if (XophpArray.isset(operandSymbols, token)) {
 					stack.Add(XomwStackItem.New__number((Decimal_adp)operandSymbols.Get_by(token)));
 				} else if (ord >= zero && ord <= nine) {
 					stack.Add(XomwStackItem.New__number(Decimal_adp_.int_(XophpInt_.intval(token))));
 				} else {
-					XomwStackItem right = (XomwStackItem)stack.pop();
-					XomwStackItem left = (XomwStackItem)stack.pop();
+					XomwStackItem right = (XomwStackItem)XophpArray.array_pop(stack);
+					XomwStackItem left = (XomwStackItem)XophpArray.array_pop(stack);
 					XomwStackItem result = XomwEvaluator.doOperation(token, left, right);
 					stack.Add(result);
 				}
@@ -125,7 +125,7 @@ public class XomwEvaluator {
 		}
 		// None of the provided rules match. The number belongs to category
 		// "other", which comes last.
-		return rules.count();
+		return XophpArray.count(rules);
 	}
 
 	/**

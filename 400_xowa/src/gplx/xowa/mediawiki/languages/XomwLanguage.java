@@ -4038,12 +4038,12 @@ public class XomwLanguage {
 			return (String)formsObject;
 		}
 		forms = (XophpArray)formsObject;
-		if (!forms.count_bool()) {
+		if (!XophpArray.count_bool(forms)) {
 			return "";
 		}
 
 		int pluralForm = this.getPluralRuleIndexNumber(count);
-		pluralForm = XophpMath_.min(pluralForm, forms.count() - 1);
+		pluralForm = XophpMath_.min(pluralForm, XophpArray.count(forms) - 1);
 		return forms.Get_at_str(pluralForm);
 	}
 
@@ -4064,7 +4064,7 @@ public class XomwLanguage {
 	*/
 	public Object handleExplicitPluralForms(String count, XophpArray forms) {
 		XophpArray mutable = forms.Clone();
-		int len = forms.count();
+		int len = forms.Len();
 		for (int i = 0; i < len; i++) {
 			XophpArrayItm formItem = forms.Get_at_itm(i);
 			String index = formItem.Key();
@@ -4074,11 +4074,11 @@ public class XomwLanguage {
 				if (String_.Eq(XophpString_.substr(form, 0, pos), count)) {
 					return XophpString_.substr(form, pos + 1);
 				}
-				mutable.unset(index);
+				XophpArray.unset(mutable, index);
 			}
 		}
 
-		return mutable.values();
+		return XophpArray.array_values(mutable);
 	}
 	private static final    Regx_adp handleExplicitPluralForms_digits = Regx_adp_.new_("\\d+=");
 
@@ -4987,7 +4987,7 @@ public class XomwLanguage {
 		if (pluralRules == null) return getCompiledPluralRulesEmpty;
 		XophpArray fallbacks = XomwLanguage.getFallbacksFor(this.mCode);
 		if (!XophpObject_.is_true(pluralRules)) {
-			int fallbacks_len = fallbacks.count();
+			int fallbacks_len = fallbacks.Len();
 			for (int i = 0; i < fallbacks_len; i++) {
 				String fallbackCode = fallbacks.Get_at_str(i);
 				pluralRules = XomwLanguage.dataCacheXowa.getItem_ary(XophpString_.strtolower(fallbackCode), "compiledPluralRules");

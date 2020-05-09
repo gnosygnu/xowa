@@ -18,7 +18,7 @@ package gplx.xowa.mediawiki.includes;
 // MW.SRC:1.33.1
 
 import gplx.xowa.mediawiki.XophpArray;
-import gplx.xowa.mediawiki.XophpArray_;
+import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpString_;
 
@@ -88,7 +88,7 @@ public class XomwWebRequest {
 
         // POST overrides GET data
         // We don't use $_REQUEST here to avoid interference from cookies...
-        this.data = XophpArray_.array_merge(_POST, _GET);
+        this.data = XophpArray.array_merge(_POST, _GET);
     }
 
 //    /**
@@ -378,9 +378,9 @@ public class XomwWebRequest {
 		// https://secure.php.net/variables.external#language.variables.external.dot-in-names
 		// Work around PHP *feature* to avoid *bugs* elsewhere.
         name = XophpString_.strtr(name, ".", "_");
-        if (XophpArray_.isset(arr, name)) {
+        if (XophpArray.isset(arr, name)) {
             Object data = arr.Get_by(name);
-            if (XophpArray_.isset(_GET, name) && XophpString_.is_string(data)) {
+            if (XophpArray.isset(_GET, name) && XophpString_.is_string(data)) {
 				// Check for alternate/legacy character encoding.
 //                $contLang = MediaWikiServices::getInstance().getContentLanguage();
 //                $data = $contLang.checkTitleEncoding($data);

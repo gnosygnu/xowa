@@ -51,8 +51,8 @@ class XomwPPTemplateFrame_Hash extends XomwPPFrame_Hash { 	public XophpArray num
 	@Override public String toString() {
 		String s = "tplframe{";
 		boolean first = true;
-		XophpArray args = XophpArray_.array_add(this.numberedArgs, this.namedArgs);
-		int args_len = args.count();
+		XophpArray args = XophpArray.array_add(this.numberedArgs, this.namedArgs);
+		int args_len = args.Len();
 		for (int i = 0; i < args_len; i++) {
 			XophpArrayItm itm = args.Get_at_itm(i);
 			if (first) {
@@ -91,7 +91,7 @@ class XomwPPTemplateFrame_Hash extends XomwPPFrame_Hash { 	public XophpArray num
 	 * @return boolean
 	 */
 	@Override public boolean isEmpty() {
-		return !this.numberedArgs.count_bool() && !this.namedArgs.count_bool();
+		return !XophpArray.count_bool(this.numberedArgs) && !XophpArray.count_bool(this.namedArgs);
 	}
 
 	/**
@@ -99,10 +99,10 @@ class XomwPPTemplateFrame_Hash extends XomwPPFrame_Hash { 	public XophpArray num
 	 */
 	@Override public XophpArray getArguments() {
 		XophpArray arguments = XophpArray.New();
-		XophpArray merged = XophpArray_.array_merge(
-				XophpArray_.array_keys(this.numberedArgs),
-				XophpArray_.array_keys(this.namedArgs));
-		int merged_len = merged.count();
+		XophpArray merged = XophpArray.array_merge(
+				XophpArray.array_keys(this.numberedArgs),
+				XophpArray.array_keys(this.namedArgs));
+		int merged_len = merged.Len();
 		for (int i = 0; i < merged_len; i++) {
 			String key = merged.Get_at_str(i);
 			arguments.Set(key, this.getArgument(key));
@@ -115,8 +115,8 @@ class XomwPPTemplateFrame_Hash extends XomwPPFrame_Hash { 	public XophpArray num
 	 */
 	@Override public XophpArray getNumberedArguments() {
 		XophpArray arguments = XophpArray.New();
-		XophpArray temp = XophpArray_.array_keys(this.numberedArgs);
-		int temp_len = temp.count();
+		XophpArray temp = XophpArray.array_keys(this.numberedArgs);
+		int temp_len = temp.Len();
 		for (int i = 0; i < temp_len; i++) {
 			String key = temp.Get_at_str(i);
 			arguments.Set(key, this.getArgument(key));
@@ -129,8 +129,8 @@ class XomwPPTemplateFrame_Hash extends XomwPPFrame_Hash { 	public XophpArray num
 	 */
 	@Override public XophpArray getNamedArguments() {
 		XophpArray arguments = XophpArray.New();
-		XophpArray temp = XophpArray_.array_keys(this.namedArgs);
-		int temp_len = temp.count();
+		XophpArray temp = XophpArray.array_keys(this.namedArgs);
+		int temp_len = temp.Len();
 		for (int i = 0; i < temp_len; i++) {
 			String key = temp.Get_at_str(i);
 			arguments.Set(key, this.getArgument(key));

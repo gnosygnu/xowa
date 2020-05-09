@@ -2,7 +2,6 @@ package gplx.xowa.mediawiki.includes;
 
 import gplx.core.tests.Gftest;
 import gplx.xowa.mediawiki.XophpArray;
-import gplx.xowa.mediawiki.XophpArray__tst;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpCallbackOwner;
 import org.junit.Before;
@@ -75,7 +74,7 @@ class XomwHooksTestCallbackOwner implements XophpCallbackOwner {
     public String Result() {return result;} private String result = "";
     @Override
     public Object Call(String method, Object... args) {
-        result += method + ":" + (args == null ? -1 : ((XophpArray)args[0]).count()) + ";";
+        result += method + ":" + (args == null ? -1 : ((XophpArray)args[0]).Len()) + ";";
         return null; // NOTE: XomwHooks throws error if non-null
     }
 }

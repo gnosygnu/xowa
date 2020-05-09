@@ -77,7 +77,7 @@ public class XomwOperator extends XomwFragment { 	/** @var String The name */
 	* @param int length
 	*/
 	public XomwOperator(XomwConverter parser, String name, int pos, int length) {super(parser, pos, length);
-		if (XomwOperator.aliasMap.isset(name)) {
+		if (XophpArray.isset(XomwOperator.aliasMap, name)) {
 			name = XomwOperator.aliasMap.Get_by_str(name);
 		}
 		this.name = name;

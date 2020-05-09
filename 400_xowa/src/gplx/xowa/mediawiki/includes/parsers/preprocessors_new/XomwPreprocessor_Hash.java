@@ -13,12 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 // MW.SRC:1.33
-import gplx.core.bits.*;
 import gplx.langs.regxs.*;
-import gplx.xowa.mediawiki.includes.exception.*;
-import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
+
 /**
 * Differences from DOM schema:
 *   * attribute nodes are children
@@ -145,7 +144,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 			ignoredElements = XophpArray.New("includeonly");
 			xmlishElements.Add("includeonly");
 		}
-		String xmlishRegex = XophpArray_.implode("|", XophpArray_.array_merge(xmlishElements, ignoredTags));
+		String xmlishRegex = XophpArray.implode("|", XophpArray.array_merge(xmlishElements, ignoredTags));
 
 		// Use "A" modifier (anchored) instead of "^", because ^ doesn"t work with an offset
 		Regx_adp elementsRegex = XophpRegex_.Pattern("(" + xmlishRegex + ")(?:\\s|\\/>|>)|(!--)", XophpRegex_.MODIFIER_i | XophpRegex_.MODIFIER_A);
@@ -302,7 +301,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					continue;
 				}
 				// Handle comments
-				if (XophpArray_.isset(matches, 2) && String_.Eq(matches.Get_at_str(2), "!--")) {
+				if (XophpArray.isset(matches, 2) && String_.Eq(matches.Get_at_str(2), "!--")) {
 					// To avoid leaving blank lines, when a sequence of
 					// space-separated comments is both preceded and followed by
 					// a newline (ignoring spaces), then
@@ -345,7 +344,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 						) {
 							// Remove leading whitespace from the end of the accumulator
 							int wsLength = i - wsStart;
-							int endIndex = XophpArray_.count(accum) - 1;
+							int endIndex = XophpArray.count(accum) - 1;
 
 							// Sanity check
 							if (wsLength > 0
@@ -360,11 +359,11 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 							int commentsLen = comments.Len();
 							for (int commentsIdx = 0; commentsIdx < commentsLen; commentsIdx++) {
 								XophpArrayItm itm = comments.Get_at_itm(commentsIdx);
-								int j = itm.Key_as_int();
+								int j = itm.KeyAsInt();
 								XophpArray com = (XophpArray)itm.Val();
 								startPos = com.Get_at_int(0);
 								endPos = com.Get_at_int(1) + 1;
-								if (j == (XophpArray_.count(comments) - 1)) {
+								if (j == (XophpArray.count(comments) - 1)) {
 									break;
 								}
 								inner = XophpString_.substr(text, startPos, endPos - startPos);
@@ -409,7 +408,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 				}
 
 				// Handle ignored tags
-				if (XophpArray_.in_array(lowerName, ignoredTags)) {
+				if (XophpArray.in_array(lowerName, ignoredTags)) {
 					accum.Add(XophpArray.New("ignore", XophpArray.New(XophpString_.substr(text, i, tagEndPos - i + 1))));
 					i = tagEndPos + 1;
 					continue;
@@ -436,7 +435,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 						close = matches.Get_at_ary(0).Get_at_str(0);
 					} else {
 						// No end tag
-						if (XophpArray_.in_array(name, xmlishAllowMissingEndTag)) {
+						if (XophpArray.in_array(name, xmlishAllowMissingEndTag)) {
 							// Let it run out to the end of the text.
 							inner = XophpString_.substr(text, tagEndPos + 1);
 							i = lengthText;
@@ -453,7 +452,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					}
 				}
 				// <includeonly> and <noinclude> just become <ignore> tags
-				if (XophpArray_.in_array(lowerName, ignoredElements)) {
+				if (XophpArray.in_array(lowerName, ignoredElements)) {
 					accum.Add(XophpArray.New("ignore", XophpArray.New(XophpString_.substr(text, tagStartPos, i - tagStartPos))));
 					continue;
 				}
@@ -503,13 +502,13 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					stack.push(piece);
 					accum = stack.getAccum(); // =&
 					XophpArray stackFlags = stack.getFlags();
-					if (XophpArray_.isset(stackFlags, "findEquals")) {
+					if (XophpArray.isset(stackFlags, "findEquals")) {
 						findEquals = stackFlags.Get_by_bool("findEquals");
 					}
-					if (XophpArray_.isset(stackFlags, "findPipe")) {
+					if (XophpArray.isset(stackFlags, "findPipe")) {
 						findPipe = stackFlags.Get_by_bool("findPipe");
 					}
-					if (XophpArray_.isset(stackFlags, "inHeading")) {
+					if (XophpArray.isset(stackFlags, "inHeading")) {
 						inHeading = stackFlags.Get_by_bool("inHeading");
 					}
 					i += count;
@@ -553,7 +552,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					if (count > 0) {
 						// Normal match, output <h>
 						element = XophpArray.New(XophpArray.New("possible-h",
-							XophpArray_.array_merge(
+							XophpArray.array_merge(
 								XophpArray.New(
 									XophpArray.New("@level", XophpArray.New(count)),
 									XophpArray.New("@i", XophpArray.New(headingIndex++))
@@ -573,18 +572,18 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 				stack.pop();
 				accum = stack.getAccum(); // =&
 				XophpArray stackFlags = stack.getFlags();
-				if (XophpArray_.isset(stackFlags, "findEquals")) {
+				if (XophpArray.isset(stackFlags, "findEquals")) {
 					findEquals = stackFlags.Get_by_bool("findEquals");
 				}
-				if (XophpArray_.isset(stackFlags, "findPipe")) {
+				if (XophpArray.isset(stackFlags, "findPipe")) {
 					findPipe = stackFlags.Get_by_bool("findPipe");
 				}
-				if (XophpArray_.isset(stackFlags, "inHeading")) {
+				if (XophpArray.isset(stackFlags, "inHeading")) {
 					inHeading = stackFlags.Get_by_bool("inHeading");
 				}
 
 				// Append the result to the enclosing accumulator
-				XophpArray_.array_splice(accum, XophpArray_.count(accum), 0, element);
+				XophpArray.array_splice(accum, XophpArray.count(accum), 0, element);
 
 				// Note that we do NOT increment the input pointer.
 				// This is because the closing linebreak could be the opening linebreak of
@@ -625,13 +624,13 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					stack.push(piece);
 					accum = stack.getAccum(); // =&
 					XophpArray stackFlags = stack.getFlags();
-					if (XophpArray_.isset(stackFlags, "findEquals")) {
+					if (XophpArray.isset(stackFlags, "findEquals")) {
 						findEquals = stackFlags.Get_by_bool("findEquals");
 					}
-					if (XophpArray_.isset(stackFlags, "findPipe")) {
+					if (XophpArray.isset(stackFlags, "findPipe")) {
 						findPipe = stackFlags.Get_by_bool("findPipe");
 					}
-					if (XophpArray_.isset(stackFlags, "inHeading")) {
+					if (XophpArray.isset(stackFlags, "inHeading")) {
 						inHeading = stackFlags.Get_by_bool("inHeading");
 					}
 				} else {
@@ -663,7 +662,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					// Skip any gaps in the callback array to find the true largest match
 					// Need to use array_key_exists not isset because the callback can be null
 					matchingCount = count;
-					while (matchingCount > 0 && !XophpArray_.array_key_exists(matchingCount, rule.Get_by_ary("names"))) {
+					while (matchingCount > 0 && !XophpArray.array_key_exists(matchingCount, rule.Get_by_ary("names"))) {
 						--matchingCount;
 					}
 				}
@@ -688,7 +687,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 					// Create XML element
 					XophpArray parts = piece.parts;
 					XophpArray titleAccum = ((XomwPPDPart)parts.Get_at(0)).output;
-					XophpArray_.unset(parts, 0);
+					XophpArray.unset(parts, 0);
 
 					XophpArray children = XophpArray.New();
 
@@ -707,8 +706,8 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 						XomwPPDPart_Hash part = (XomwPPDPart_Hash)parts.Get_at(j);
 						if (XophpInt_.is_true(part.eqpos)) { // XO.NOTE: MW says isset(part.commentEnd) b/c commentEnd can be null due to magic property
 							Object equalsNode = part.output.Get_at(part.eqpos);
-							XophpArray nameNode = XophpArray.New("name", XophpArray_.array_slice(part.output, 0, part.eqpos));
-							XophpArray valueNode = XophpArray.New("value", XophpArray_.array_slice(part.output, part.eqpos + 1));
+							XophpArray nameNode = XophpArray.New("name", XophpArray.array_slice(part.output, 0, part.eqpos));
+							XophpArray valueNode = XophpArray.New("value", XophpArray.array_slice(part.output, part.eqpos + 1));
 							XophpArray partNode = XophpArray.New("part", XophpArray.New(nameNode, equalsNode, valueNode));
 							children.Add(partNode);
 						} else {
@@ -757,18 +756,18 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 				}
 
 				XophpArray stackFlags = stack.getFlags();
-				if (XophpArray_.isset(stackFlags, "findEquals")) {
+				if (XophpArray.isset(stackFlags, "findEquals")) {
 					findEquals = stackFlags.Get_by_bool("findEquals");
 				}
-				if (XophpArray_.isset(stackFlags, "findPipe")) {
+				if (XophpArray.isset(stackFlags, "findPipe")) {
 					findPipe = stackFlags.Get_by_bool("findPipe");
 				}
-				if (XophpArray_.isset(stackFlags, "inHeading")) {
+				if (XophpArray.isset(stackFlags, "inHeading")) {
 					inHeading = stackFlags.Get_by_bool("inHeading");
 				}
 
 				// Add XML element to the enclosing accumulator
-				XophpArray_.array_splice(accum, XophpArray_.count(accum), 0, element);
+				XophpArray.array_splice(accum, XophpArray.count(accum), 0, element);
 			} else if (String_.Eq(found, "pipe")) {
 				findEquals = true; // shortcut for getFlags()
 				stack.addPart();
@@ -777,7 +776,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 			} else if (String_.Eq(found, "equals")) {
 				findEquals = false; // shortcut for getFlags()
 				accum.Add(XophpArray.New("equals", XophpArray.New("=")));
-				stack.getCurrentPart().eqpos = XophpArray_.count(accum) - 1;
+				stack.getCurrentPart().eqpos = XophpArray.count(accum) - 1;
 				++i;
 			}
 		}
@@ -787,7 +786,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 		int tempStackLen = tempStack.Len();
 		for (int j = 0; j < tempStackLen; j++) {
 			XomwPPDStackElement_Hash piece = (XomwPPDStackElement_Hash)tempStack.Get_at(j);
-			XophpArray_.array_splice(stack.rootAccum, XophpArray_.count(stack.rootAccum), 0, piece.breakSyntax());
+			XophpArray.array_splice(stack.rootAccum, XophpArray.count(stack.rootAccum), 0, piece.breakSyntax());
 		}
 
 		// Enable top-level headings
@@ -795,7 +794,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 		int rootAccumLen = rootAccum.Len();
 		for (int j = 0; j < rootAccumLen; j++) {
 			XophpArray node = rootAccum.Get_at_ary_or_null(j); // stack.rootAccum as &node
-			if (XophpArray_.is_array(node) && String_.Eq(node.Get_at_str(XomwPPNode_Hash_Tree.NAME), "possible-h")) {
+			if (XophpArray.is_array(node) && String_.Eq(node.Get_at_str(XomwPPNode_Hash_Tree.NAME), "possible-h")) {
 				node.Set(XomwPPNode_Hash_Tree.NAME, "h");
 			}
 		}
@@ -813,7 +812,7 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 	}
 
 	private static void addLiteral(XophpArray accum, String text) {
-		int n = XophpArray_.count(accum);
+		int n = XophpArray.count(accum);
 		if (XophpInt_.is_true(n) && XophpType_.is_string(accum.Get_at(n - 1))) {
 			accum.Concat_str(n - 1, text);
 		} else {

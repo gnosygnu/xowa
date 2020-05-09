@@ -48,7 +48,7 @@ public class XomwPPDStack {
 	* @return int
 	*/
 	public int count() {
-		return XophpArray_.count(this.stack);
+		return XophpArray.count(this.stack);
 	}
 
 	public XophpArray getAccum() { // &getAccum
@@ -73,18 +73,18 @@ public class XomwPPDStack {
 			XophpArray array = (XophpArray)data;
 			this.stack.Add(elementClass.New(partClass, array.Get_by_str("open"), array.Get_by_str("close"), array.Get_by_ary_or("parts", null), array.Get_by_int_or("count", 0), array.Get_by_bool_or("lineStart", false), array.Get_by_int_or("startPos", 0)));
 		}
-		this.top = (XomwPPDStackElement)this.stack.Get_at(XophpArray_.count(this.stack) - 1);
+		this.top = (XomwPPDStackElement)this.stack.Get_at(XophpArray.count(this.stack) - 1);
 		this.accum = this.top.getAccum(); //=&
 	}
 
 	public XomwPPDStackElement pop() {
-		if (this.stack.Eq_to_new()) {
+		if (XophpArray.Eq_to_new(this.stack)) {
 			throw XomwMWException.New_by_method_obj(this, "pop", ": no elements remaining");
 		}
-		XomwPPDStackElement temp = (XomwPPDStackElement)XophpArray_.array_pop(this.stack);
+		XomwPPDStackElement temp = (XomwPPDStackElement)XophpArray.array_pop(this.stack);
 
-		if (XophpArray_.count_bool(this.stack)) {
-			this.top = (XomwPPDStackElement)this.stack.Get_at(XophpArray_.count(this.stack) - 1);
+		if (XophpArray.count_bool(this.stack)) {
+			this.top = (XomwPPDStackElement)this.stack.Get_at(XophpArray.count(this.stack) - 1);
 			this.accum = this.top.getAccum(); // =&
 		} else {
 			this.top = null;
@@ -103,7 +103,7 @@ public class XomwPPDStack {
 	* @return array
 	*/
 	public XophpArray getFlags() {
-		if (this.stack.Eq_to_new()) {
+		if (XophpArray.Eq_to_new(this.stack)) {
 			return XophpArray.New()
 				.Add("findEquals", false)
 				.Add("findPipe", false)

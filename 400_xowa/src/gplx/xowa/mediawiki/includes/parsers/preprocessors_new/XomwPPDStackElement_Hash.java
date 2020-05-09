@@ -29,7 +29,7 @@ class XomwPPDStackElement_Hash extends XomwPPDStackElement {
 	public XophpArray breakSyntax(int openingCount) {
 		XophpArray accum;
 		if (String_.Eq(this.open, "\n")) {
-			accum = XophpArray_.array_merge(XophpArray.New(this.savedPrefix), XophpArray.New(((XomwPPDPart)this.parts.Get_at(0)).output));
+			accum = XophpArray.array_merge(XophpArray.New(this.savedPrefix), XophpArray.New(((XomwPPDPart)this.parts.Get_at(0)).output));
 		} else {
 			if (XophpInt_.is_false(openingCount)) {
 				openingCount = this.count;

@@ -359,11 +359,11 @@ public function formatValues( $snaksSerialization ) {
 //				}
 //			}
 //			ksort( orderedPropertiesPart );
-//			orderedProperties = XophpArray_.array_merge(orderedPropertiesPart, unorderedProperties);
+//			orderedProperties = XophpArray.array_merge(orderedPropertiesPart, unorderedProperties);
 
 		// Lua tables start at 1
-//			XophpArray orderedPropertiesResult = XophpArray_.array_combine(
-//					range(1, count(orderedProperties)), XophpArray_.array_values(orderedProperties)
+//			XophpArray orderedPropertiesResult = XophpArray.array_combine(
+//					range(1, count(orderedProperties)), XophpArray.array_values(orderedProperties)
 //			);
 //			return rslt.Init_obj(orderedPropertiesResult.To_kv_ary());
 		return rslt.Init_obj(propertyIds);

@@ -70,7 +70,7 @@ public abstract class XomwPPDStackElement {
 	}
 
 	public XophpArray getAccum() {
-		return (XophpArray)((XomwPPDPart)(this.parts.Get_at(XophpArray_.count(this.parts) - 1))).output;
+		return (XophpArray)((XomwPPDPart)(this.parts.Get_at(XophpArray.count(this.parts) - 1))).output;
 	}
 
 	public void addPart(String s) { // s = ""
@@ -82,14 +82,14 @@ public abstract class XomwPPDStackElement {
 	* @return PPDPart
 	*/
 	public XomwPPDPart getCurrentPart() {
-		return (XomwPPDPart)this.parts.Get_at(XophpArray_.count(this.parts) - 1);
+		return (XomwPPDPart)this.parts.Get_at(XophpArray.count(this.parts) - 1);
 	}
 
 	/**
 	* @return array
 	*/
 	public XophpArray getFlags() {
-		int partCount = XophpArray_.count(this.parts);
+		int partCount = XophpArray.count(this.parts);
 		boolean findPipe = !String_.Eq(this.open, "\n") && !String_.Eq(this.open, "[");
 		return XophpArray.New()
 			.Add("findPipe", findPipe)

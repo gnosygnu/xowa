@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,18 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-import gplx.core.brys.*;
+package gplx.xowa.mediawiki;
+
+import gplx.Bool_;
+import gplx.Bry_bfr;
+import gplx.Int_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Type_;
+import gplx.core.brys.Bry_bfr_able;
+
 public class XophpArrayItm implements Bry_bfr_able {
-	XophpArrayItm(boolean key_is_int, int key_as_int, String key, Object val) {
-		this.key_is_int = key_is_int;
-		this.key_as_int = key_as_int;
+	XophpArrayItm(boolean keyIsInt, int keyAsInt, String key, Object val) {
+		this.keyIsInt = keyIsInt;
+		this.keyAsInt = keyAsInt;
 		this.key = key;
 		this.val = val;
 	}
-	public boolean Key_is_int() {return key_is_int;} private final    boolean key_is_int;
-	public int Key_as_int() {return key_as_int;} private final    int key_as_int;
-	public String Key() {return key;} private final    String key;
+	public boolean KeyIsInt() {return keyIsInt;} private final boolean keyIsInt;
+	public int KeyAsInt() {return keyAsInt;} private final int keyAsInt;
+	public String Key() {return key;} private final String key;
 	public Object Val() {return val;} public void Val_(Object v) {this.val = v;} private Object val;
 
 	public void To_bfr(Bry_bfr bfr) {
@@ -44,8 +52,8 @@ public class XophpArrayItm implements Bry_bfr_able {
 		XophpArrayItm comp = (XophpArrayItm)obj;
 
 		// compare key
-		if (key_is_int) {
-			if (this.key_as_int != comp.key_as_int)
+		if (keyIsInt) {
+			if (this.keyAsInt != comp.keyAsInt)
 				return false;
 		}
 		else {
@@ -65,11 +73,12 @@ public class XophpArrayItm implements Bry_bfr_able {
 	}
 	@Override public int hashCode() {
 		int rv = 0;
-		rv = (31 * rv) + (key_is_int ? key_as_int : key.hashCode());
+		rv = (31 * rv) + (keyIsInt ? keyAsInt : key.hashCode());
 		rv = (31 * rv) + val.hashCode();
 		return rv;
 	}
 
-	public static XophpArrayItm New_int(int key, Object val)    {return new XophpArrayItm(Bool_.Y, key, Int_.To_str(key), val);}
-	public static XophpArrayItm New_str(String key, Object val) {return new XophpArrayItm(Bool_.N,  -1, key             , val);}
+	private static final int NULL_KEY_INT = -1;
+	public static XophpArrayItm NewInt(int key, Object val)    {return new XophpArrayItm(Bool_.Y, key, Int_.To_str(key), val);}
+	public static XophpArrayItm NewStr(String key, Object val) {return new XophpArrayItm(Bool_.N, NULL_KEY_INT, key, val);}
 }

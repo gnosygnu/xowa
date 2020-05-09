@@ -343,7 +343,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { //		/**
 //						XophpArray bits = XomwPPNode_Hash_Tree.splitRawHeading(contextChildren);
 //						String titleText = this.title.getPrefixedDBkeyStr();
 //						this.parser.mHeadings.Add(titleText, bits.Get_by("i"));
-//						int serial = XophpArray_.count(this.parser.mHeadings) - 1;
+//						int serial = XophpArray.count(this.parser.mHeadings) - 1;
 //						String marker = XomwParser.MARKER_PREFIX + "-h-" + Int_.To_str(serial) + "-" + XomwParser.MARKER_SUFFIX;
 //						s = XophpString_.substr(s, 0, bits.Get_by_int("level")) + marker + XophpString_.substr(s, bits.Get_by_int("level"));
 //						this.parser.mStripState.addGeneral(marker, "");
@@ -384,7 +384,7 @@ public class XomwPPFrame_Hash extends XomwPPFrame { //		/**
 //		* @return String
 //		*/
 //		public String implodeWithFlags(String sep, int flags, XophpArray args) {
-//			// args = XophpArray_.array_slice(func_get_args(), 2);
+//			// args = XophpArray.array_slice(func_get_args(), 2);
 //
 //			boolean first = true;
 //			String s = "";

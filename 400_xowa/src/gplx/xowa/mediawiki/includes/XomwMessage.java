@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes;
 
 import gplx.String_;
 import gplx.xowa.mediawiki.XophpArray;
-import gplx.xowa.mediawiki.XophpArray_;
+import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpInvalidArgumentException;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpString_;
@@ -266,7 +266,7 @@ class XomwMessage { // implements MessageSpecifier, Serializable
 		if (XophpString_.is_string(key)) {
 			this.keysToTry = XophpArray.New(key);
 		}
-		else if (XophpArray_.is_array(key)) {
+		else if (XophpArray.is_array(key)) {
 			this.keysToTry = (XophpArray)key;
 		}
 		else {
@@ -274,13 +274,13 @@ class XomwMessage { // implements MessageSpecifier, Serializable
 		}
 		// XOMW.TYPE.END
 
-		if (XophpArray_.empty(this.keysToTry)) {
+		if (XophpArray.empty(this.keysToTry)) {
 			throw new XophpInvalidArgumentException("{0} must not be an empty list", key);
 		}
 
 		this.key = (String)XophpArray.reset(this.keysToTry);
 
-		this.parameters = XophpArray_.array_values(params);
+		this.parameters = XophpArray.array_values(params);
 		// User language is only resolved in getLanguage(). This helps preserve the
 		// semantic intent of "user language" across serialize() and unserialize().
 		this.language = (XomwLanguage)XophpObject_.Elvis(language, null);

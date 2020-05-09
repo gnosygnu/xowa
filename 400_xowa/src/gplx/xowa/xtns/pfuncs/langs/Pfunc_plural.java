@@ -39,8 +39,8 @@ public class Pfunc_plural extends Pf_func_base {
 		// no match for explicit key; take results (which has removed all explicit keys) and get plural rule index; EX: {{plural:1|2=two|3=three|one|many}} -> {{plural:?|one|many}}
 		XophpArray resultArray = (XophpArray)result;
 		int idx = ctx.Lang().Mw_lang().getPluralRuleIndexNumber(number_str);
-		if (idx >= resultArray.count()) // bound-check; EX: {{plural:2|wiki}} -> idx = 1 -> idx = 0
-			idx = resultArray.count() - 1;
+		if (idx >= XophpArray.count(resultArray)) // bound-check; EX: {{plural:2|wiki}} -> idx = 1 -> idx = 0
+			idx = XophpArray.count(resultArray) - 1;
 		bfr.Add_str_u8(resultArray.Get_at_str(idx));
 	}
 }

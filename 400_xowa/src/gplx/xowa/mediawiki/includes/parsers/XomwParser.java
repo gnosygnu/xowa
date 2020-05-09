@@ -4051,29 +4051,29 @@ public class XomwParser implements XomwParserIface {
 //					result = this.callParserFunction(frame, func, funcArgs);
 
 				// Extract any forwarded flags
-				if (XophpArray_.isset(result, "title")) {
+				if (XophpArray.isset(result, "title")) {
 					title = (XomwTitleOld)result.Get_by("title");
 				}
-				if (XophpArray_.isset(result, "found")) {
+				if (XophpArray.isset(result, "found")) {
 					found = result.Get_by_bool("found");
 				}
-				if (XophpArray_.array_key_exists("text", result)) {
+				if (XophpArray.array_key_exists("text", result)) {
 					// a String or null
 					text = result.Get_by_str("text");
 				}
-				if (XophpArray_.isset(result, "nowiki")) {
+				if (XophpArray.isset(result, "nowiki")) {
 					nowiki = result.Get_by_bool("nowiki");
 				}
-				if (XophpArray_.isset(result, "isHTML")) {
+				if (XophpArray.isset(result, "isHTML")) {
 					isHTML = result.Get_by_bool("isHTML");
 				}
-				if (XophpArray_.isset(result, "forceRawInterwiki")) {
+				if (XophpArray.isset(result, "forceRawInterwiki")) {
 					forceRawInterwiki = result.Get_by_bool("forceRawInterwiki");
 				}
-				if (XophpArray_.isset(result, "isChildObj")) {
+				if (XophpArray.isset(result, "isChildObj")) {
 					isChildObj = result.Get_by_bool("isChildObj");
 				}
-				if (XophpArray_.isset(result, "isLocalObj")) {
+				if (XophpArray.isset(result, "isLocalObj")) {
 					isLocalObj = result.Get_by_bool("isLocalObj");
 				}
 			}

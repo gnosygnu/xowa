@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.libs.services;
 
 import gplx.xowa.mediawiki.XophpArray;
-import gplx.xowa.mediawiki.XophpArray_;
+import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpType_;
@@ -154,24 +154,24 @@ public class XomwServiceContainer implements XomwDestructibleService {
      */
     public void importWiring(XomwServiceContainer container) {this.importWiring(container, new XophpArray<>());}
     public void importWiring(XomwServiceContainer container, XophpArray<String> skip) {
-//        XophpArray<String> newInstantiators = XophpArray_.array_diff_key(
+//        XophpArray<String> newInstantiators = XophpArray.array_diff_key(
 //            container.serviceInstantiators,
-//            XophpArray_.array_flip(skip)
+//            XophpArray.array_flip(skip)
 //        );
 //
-//        this.serviceInstantiators = XophpArray_.array_merge(
+//        this.serviceInstantiators = XophpArray.array_merge(
 //            this.serviceInstantiators,
 //            newInstantiators
 //        );
 //
-//        XophpArray<String> newManipulators = XophpArray_.array_diff(
-//            XophpArray_.array_keys(container.serviceManipulators),
+//        XophpArray<String> newManipulators = XophpArray.array_diff(
+//            XophpArray.array_keys(container.serviceManipulators),
 //            skip
 //        );
 //
 //        for (String name : newManipulators) {
-//            if (XophpArray_.isset(this.serviceManipulators, name)) {
-//                this.serviceManipulators.Set(name, XophpArray_.array_merge(
+//            if (XophpArray.isset(this.serviceManipulators, name)) {
+//                this.serviceManipulators.Set(name, XophpArray.array_merge(
 //                    this.serviceManipulators.Get_by(name),
 //                    container.serviceManipulators.Get_by(name)
 //               ));
@@ -190,7 +190,7 @@ public class XomwServiceContainer implements XomwDestructibleService {
      * @return bool
      */
     public boolean hasService(String name) {
-        return XophpArray_.isset(this.serviceInstantiators, name);
+        return XophpArray.isset(this.serviceInstantiators, name);
     }
 
     /**
@@ -220,7 +220,7 @@ public class XomwServiceContainer implements XomwDestructibleService {
      * @return string[]
      */
     public XophpArray<String> getServiceNames() {
-        return XophpArray_.array_keys(this.serviceInstantiators);
+        return XophpArray.array_keys(this.serviceInstantiators);
     }
 
     /**
@@ -273,12 +273,12 @@ public class XomwServiceContainer implements XomwDestructibleService {
             throw new XomwNoSuchServiceException(name);
         }
 
-        if (XophpArray_.isset(this.services, name)) {
+        if (XophpArray.isset(this.services, name)) {
             throw new XomwCannotReplaceActiveServiceException(name);
         }
 
         this.serviceInstantiators.Set(name, instantiator);
-        XophpArray_.unset(this.disabled, name);
+        XophpArray.unset(this.disabled, name);
     }
 
     /**
@@ -314,7 +314,7 @@ public class XomwServiceContainer implements XomwDestructibleService {
             throw new XomwNoSuchServiceException(name);
         }
 
-        if (XophpArray_.isset(this.services, name)) {
+        if (XophpArray.isset(this.services, name)) {
             throw new XomwCannotReplaceActiveServiceException(name);
         }
 
@@ -379,8 +379,8 @@ public class XomwServiceContainer implements XomwDestructibleService {
             ((XomwDestructibleService)instance).destroy();
         }
 
-        XophpArray_.unset(this.services, name);
-        XophpArray_.unset(this.disabled, name);
+        XophpArray.unset(this.services, name);
+        XophpArray.unset(this.disabled, name);
     }
 
     /**
@@ -408,11 +408,11 @@ public class XomwServiceContainer implements XomwDestructibleService {
             throw new XomwContainerDisabledException();
         }
 
-        if (XophpArray_.isset(this.disabled, name)) {
+        if (XophpArray.isset(this.disabled, name)) {
             throw new XomwServiceDisabledException(name);
         }
 
-        if (!XophpArray_.isset(this.services, name)) {
+        if (!XophpArray.isset(this.services, name)) {
             this.services.Set(name, this.createService(name));
         }
 
@@ -427,18 +427,18 @@ public class XomwServiceContainer implements XomwDestructibleService {
      */
     private Object createService(String name) {
         Object service;
-        if (XophpArray_.isset(this.serviceInstantiators, name)) {
+        if (XophpArray.isset(this.serviceInstantiators, name)) {
             service = (this.serviceInstantiators.Get_by(name)).Call(
                 this,
                 this.extraInstantiationParams
 			);
 
-            if (XophpArray_.isset(this.serviceManipulators, name)) {
+            if (XophpArray.isset(this.serviceManipulators, name)) {
                 Object ret;
                 for (XophpCallback callback : this.serviceManipulators.Get_by(name)) {
                     ret = XophpCallback.call_user_func_array(
                         callback,
-                        XophpArray_.array_merge(XophpArray.New(service, this), this.extraInstantiationParams)
+                        XophpArray.array_merge(XophpArray.New(service, this), this.extraInstantiationParams)
 					);
 
                     // If the manipulator callback returns an object, that object replaces
@@ -464,6 +464,6 @@ public class XomwServiceContainer implements XomwDestructibleService {
      * @since 1.28
      */
     public boolean isServiceDisabled(String name) {
-        return XophpArray_.isset(this.disabled, name);
+        return XophpArray.isset(this.disabled, name);
     }
 }

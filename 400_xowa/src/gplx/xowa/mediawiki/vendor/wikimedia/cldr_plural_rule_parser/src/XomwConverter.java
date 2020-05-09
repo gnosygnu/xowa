@@ -148,11 +148,11 @@ public class XomwConverter {
 					token.error("unexpected operator");
 				}
 				// Resolve higher precedence levels
-				XomwOperator lastOp = (XomwOperator)this.operators.end();
+				XomwOperator lastOp = (XomwOperator)XophpArray.end(this.operators);
 				while (lastOp != null && Int_.Cast(XomwConverter.precedence.Get_by(((XomwOperator)token).name)) <= Int_.Cast(XomwConverter.precedence.Get_by(((XomwOperator)lastOp).name))) {
 					this.doOperation(lastOp, this.operands);
-					this.operators.pop();
-					lastOp = (XomwOperator)this.operators.end();
+					XophpArray.array_pop(this.operators);
+					lastOp = (XomwOperator)XophpArray.end(this.operators);
 				}
 				this.operators.Add(token);
 			}
@@ -160,15 +160,15 @@ public class XomwConverter {
 
 		// Finish off the stack
 		XomwOperator op = null;
-		while (null != (op = (XomwOperator)this.operators.pop())) {
+		while (null != (op = (XomwOperator)XophpArray.array_pop(this.operators))) {
 			this.doOperation(op, this.operands);
 		}
 
 		// Make sure the result is sane. The first case is possible for an empty
 		// String input, the second should be unreachable.
-		if (!this.operands.count_bool()) {
+		if (!XophpArray.count_bool(this.operands)) {
 			this.error("condition expected");
-		} else if (this.operands.count() > 1) {
+		} else if (XophpArray.count(this.operands) > 1) {
 			this.error("missing operator or too many operands");
 		}
 
@@ -248,7 +248,7 @@ public class XomwConverter {
 		// Two-word operators like "is not" take precedence over single-word operators like "is"
 		if (String_.Eq(word2, "")) {
 			String bothWords = word1 + "-" + word2;
-			if (XomwConverter.precedence.isset(bothWords)) {
+			if (XophpArray.isset(XomwConverter.precedence, bothWords)) {
 				XomwFragment token = this.newOperator(bothWords, this.pos, nextTokenPos - this.pos);
 				this.pos = nextTokenPos;
 
@@ -257,7 +257,7 @@ public class XomwConverter {
 		}
 
 		// Single-word operators
-		if (XomwConverter.precedence.isset(word1)) {
+		if (XophpArray.isset(XomwConverter.precedence, word1)) {
 			XomwFragment token = this.newOperator(word1, this.pos, XophpString_.strlen(word1));
 			this.pos += XophpString_.strlen(word1);
 
@@ -293,11 +293,11 @@ public class XomwConverter {
 	* @param Operator op
 	*/
 	protected void doOperation(XomwOperator op, Object ignore) { // NOTE: MW passes 2 args, but method only has 1
-		if (this.operands.count() < 2) {
+		if (XophpArray.count(this.operands) < 2) {
 			op.error("missing operand");
 		}
-		XomwExpression right = (XomwExpression)this.operands.pop();
-		XomwExpression left = (XomwExpression)this.operands.pop();
+		XomwExpression right = (XomwExpression)XophpArray.array_pop(this.operands);
+		XomwExpression left = (XomwExpression)XophpArray.array_pop(this.operands);
 		XomwExpression result = op.operate(left, right);
 		this.operands.Add(result);
 	}

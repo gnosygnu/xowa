@@ -181,9 +181,9 @@ public class JCValue {
 		else if (value_tid == Value_tid__ary && (fld_type == Type_ids_.Id__str || fld_type == Type_ids_.Id__int)) {
 			tmp = value_as_ary.Get_by_obj(fld);
 			if (fld_type == Type_ids_.Id__str)
-				value_as_ary.unset((String)fld);
+				XophpArray.unset(value_as_ary, (String)fld);
 			else
-				value_as_ary.unset(Int_.Cast(fld));
+				XophpArray.unset(value_as_ary, Int_.Cast(fld));
 			value.Del(fld);
 		}
 		else {

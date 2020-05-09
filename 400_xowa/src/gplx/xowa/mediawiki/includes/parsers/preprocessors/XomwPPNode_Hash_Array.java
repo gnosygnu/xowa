@@ -31,7 +31,7 @@ public class XomwPPNode_Hash_Array extends XomwPPNode { 	public XophpArray value
 	}
 
 	@Override public int getLength() {
-		return XophpArray_.count(this.value);
+		return XophpArray.count(this.value);
 	}
 
 	@Override public XomwPPNode item(int i) {

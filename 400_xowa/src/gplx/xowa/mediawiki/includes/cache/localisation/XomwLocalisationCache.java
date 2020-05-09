@@ -250,11 +250,11 @@ public class XomwLocalisationCache {
 	* @return mixed
 	*/
 	public Object getItem(String code, String key) {
-		if (!this.loadedItems.Get_by_ary(code).isset(key)) {
+		if (!XophpArray.isset(this.loadedItems.Get_by_ary(code), key)) {
 //				this.loadItem(code, key);
 		}
 
-		if (String_.Eq(key, "fallback") && this.shallowFallbacks.isset(code)) {
+		if (String_.Eq(key, "fallback") && XophpArray.isset(this.shallowFallbacks, code)) {
 			return this.shallowFallbacks.Get_by(code);
 		}
 

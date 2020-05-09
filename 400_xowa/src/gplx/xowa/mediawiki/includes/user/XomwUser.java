@@ -18,7 +18,7 @@ package gplx.xowa.mediawiki.includes.user;
 // MW.SRC:1.33.1
 
 import gplx.xowa.mediawiki.XophpArray;
-import gplx.xowa.mediawiki.XophpArray_;
+import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.includes.XomwWebRequest;
 import gplx.xowa.mediawiki.includes.dao.XomwIDBAccessObject;
 
@@ -3167,11 +3167,11 @@ public class XomwUser implements XomwIDBAccessObject { //, UserIdentity
         // set it, and then it was disabled removing their ability to change it).  But
 		// we don't want to erase the preferences in the database in case the preference
 		// is re-enabled again.  So don't touch $mOptions, just override the returned value
-        if (!ignoreHidden && XophpArray_.in_array(oname, wgHiddenPrefs)) {
+        if (!ignoreHidden && XophpArray.in_array(oname, wgHiddenPrefs)) {
 //            return getDefaultOption(oname);
         }
 
-        if (XophpArray_.array_key_exists(oname, this.mOptions)) {
+        if (XophpArray.array_key_exists(oname, this.mOptions)) {
             return this.mOptions.Get_by(oname);
         }
 

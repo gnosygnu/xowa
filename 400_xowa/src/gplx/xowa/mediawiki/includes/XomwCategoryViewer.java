@@ -560,18 +560,18 @@ public class XomwCategoryViewer {// extends ContextSource
 
 		// Kind of like array_flip() here, but we keep duplicates in an
 		// array instead of dropping them.
-		int columns_len = columns.count();
+		int columns_len = XophpArray.count(columns);
 		for (int i = 0; i < columns_len; i++) {
 			XophpArrayItm itm = columns.Get_at_itm(i);
 			String article = itm.Key();
 			String charVal = (String)itm.Val();
-			if (!colContents.isset((String)colContents.Get_by(charVal))) {
+			if (!XophpArray.isset(colContents, (String)colContents.Get_by(charVal))) {
 				colContents.Set(charVal, XophpArray.New());
 			}
 			colContents.Set(charVal, article); // colContents[char][] = article;
 		}
 
-		int colContentsLen = colContents.count();
+		int colContentsLen = colContents.Len();
 		for (int i = 0; i < colContentsLen; i++) {
 			XophpArrayItm itm = columns.Get_at_itm(i);
 			String charVal = itm.Key();
@@ -583,7 +583,7 @@ public class XomwCategoryViewer {// extends ContextSource
 			ret += "</h3>\n";
 
 			ret += "<ul><li>";
-			ret += XophpArray_.implode("</li>\n<li>", articlesItm);
+			ret += XophpArray.implode("</li>\n<li>", articlesItm);
 			ret += "</li></ul></div>";
 
 		}

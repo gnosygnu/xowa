@@ -42,7 +42,7 @@ public class XomwPPDStackElement_Hash extends XomwPPDStackElement { 	public Xomw
 			accum = XophpArray.New(XophpString_.str_repeat(this.open, openingCount));
 			int lastIndex = 0;
 			boolean first = true;
-			int parts_len = parts.count();
+			int parts_len = parts.Len();
 			for (int i = 0; i < parts_len; i++) {
 				XomwPPDPart_Hash part = Get_at_hash(i);
 				if (first) {
@@ -55,7 +55,7 @@ public class XomwPPDStackElement_Hash extends XomwPPDStackElement { 	public Xomw
 				}
 				
 				XophpArray part_out = ((Xomw_prepro_accum__hash)part.Accum()).Ary();
-				int part_out_len = part_out.count();
+				int part_out_len = part_out.Len();
 				for (int j = 0; j < part_out_len; j++) {
 					Object node = part_out.Get_at(j);
 					if (XophpType_.is_string(node) && XophpType_.is_string(accum.Get_at(lastIndex))) {

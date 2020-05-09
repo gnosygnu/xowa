@@ -13,18 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki;
+
 import org.junit.*; import gplx.core.tests.*;
-public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.array.php
-	private final    XophpArray_fxt fxt = new XophpArray_fxt();
+public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.types.array.php
+	private final XophpArrayfxt fxt = new XophpArrayfxt();
 	@Test  public void array__kvs() {
 		// $array = array("foo" => "bar", "bar" => "foo",);
 		fxt.Test__array
 			( XophpArray.New()
 			.   Add("foo", "bar")
 			.   Add("bar", "foo")				
-			, XophpArrayItm.New_str("foo", "bar")
-			, XophpArrayItm.New_str("bar", "foo")
+			, XophpArrayItm.NewStr("foo", "bar")
+			, XophpArrayItm.NewStr("bar", "foo")
 			);
 	}
 	@Test  public void array__casting() {
@@ -35,7 +36,7 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 			.   Add("1" , "b")
 			.   Add(1.5 , "c")
 			.   Add(true, "d")				
-			, XophpArrayItm.New_int(1, "d"));
+			, XophpArrayItm.NewInt(1, "d"));
 	}
 	@Test  public void array__mixed() {
 		// $array = array("foo" => "bar", "bar" => "foo", 100 => -100, -100 => 100);
@@ -45,10 +46,10 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 			.   Add("bar", "foo")
 			.   Add(100, -100)
 			.   Add(-100, 100)
-			, XophpArrayItm.New_str("foo", "bar")
-			, XophpArrayItm.New_str("bar", "foo")
-			, XophpArrayItm.New_int(100, -100)
-			, XophpArrayItm.New_int(-100, 100)
+			, XophpArrayItm.NewStr("foo", "bar")
+			, XophpArrayItm.NewStr("bar", "foo")
+			, XophpArrayItm.NewInt(100, -100)
+			, XophpArrayItm.NewInt(-100, 100)
 			);
 	}
 	@Test  public void array__objs() {
@@ -59,10 +60,10 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 			.   Add("bar")
 			.   Add("hello")
 			.   Add("world")
-			, XophpArrayItm.New_int(0, "foo")
-			, XophpArrayItm.New_int(1, "bar")
-			, XophpArrayItm.New_int(2, "hello")
-			, XophpArrayItm.New_int(3, "world")
+			, XophpArrayItm.NewInt(0, "foo")
+			, XophpArrayItm.NewInt(1, "bar")
+			, XophpArrayItm.NewInt(2, "hello")
+			, XophpArrayItm.NewInt(3, "world")
 			);
 	}
 	@Test  public void array__unkeyed() {
@@ -73,10 +74,10 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 			.   Add("b")
 			.   Add(6, "c")
 			.   Add("d")
-			, XophpArrayItm.New_int(0, "a")
-			, XophpArrayItm.New_int(1, "b")
-			, XophpArrayItm.New_int(6, "c")
-			, XophpArrayItm.New_int(7, "d")
+			, XophpArrayItm.NewInt(0, "a")
+			, XophpArrayItm.NewInt(1, "b")
+			, XophpArrayItm.NewInt(6, "c")
+			, XophpArrayItm.NewInt(7, "d")
 			);
 	}
 	@Test  public void array__multidimensional() {
@@ -99,9 +100,9 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 		.        Add("dimensional", XophpArray.New()
 		.            Add("array", "foo")
 		))
-		, XophpArrayItm.New_str("foo", "bar")
-		, XophpArrayItm.New_int(42, "24")
-		, XophpArrayItm.New_str("multi", XophpArray.New()
+		, XophpArrayItm.NewStr("foo", "bar")
+		, XophpArrayItm.NewInt(42, "24")
+		, XophpArrayItm.NewStr("multi", XophpArray.New()
 		.       Add("dimensional", XophpArray.New()
 		.            Add("array", "foo")
 		))
@@ -112,13 +113,13 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 		ary.Add(0, "a").Add(1, "b");
 
 		// delete all
-		ary.unset(0);
-		ary.unset(1);
+		XophpArray.unset(ary, 0);
+		XophpArray.unset(ary, 1);
 		fxt.Test__array(ary);
 
 		// add new and assert idx is 2
 		ary.Add("c");
-		fxt.Test__array(ary, XophpArrayItm.New_int(2, "c"));
+		fxt.Test__array(ary, XophpArrayItm.NewInt(2, "c"));
 	}
 	@Test  public void Pop() {
 		XophpArray ary = XophpArray.New();
@@ -154,9 +155,9 @@ public class XophpArray_tst { // REF: http://php.net/manual/en/language.types.ar
 		fxt.Test__Get_by(ary, "missing", null);
 	}
 }
-class XophpArray_fxt {
+class XophpArrayfxt {
 	public void Test__Count(XophpArray ary, int expd) {
-		Gftest.Eq__int(expd, ary.count());
+		Gftest.Eq__int(expd, ary.Len());
 	}
 	public void Test__array(XophpArray ary, XophpArrayItm... expd) {
 		XophpArrayItm[] actl = ary.To_ary();
@@ -167,7 +168,7 @@ class XophpArray_fxt {
 		Gftest.Eq__ary(expd, actl);
 	}
 	public void Test__Pop(XophpArray ary, String expd) {
-		String actl = (String)ary.pop();
+		String actl = (String)XophpArray.array_pop(ary);
 		Gftest.Eq__str(expd, actl);
 	}
 	public void Test__Itm_str_concat_end(XophpArray ary, String expd, int idx, String v) {
