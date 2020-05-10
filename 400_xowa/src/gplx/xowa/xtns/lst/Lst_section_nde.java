@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
-import gplx.xowa.langs.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
+package gplx.xowa.xtns.lst;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.Hash_adp_bry;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_stub_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm_owner1;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.xtns.Xox_xnde;
+import gplx.xowa.xtns.Xox_xnde_;
+
 public class Lst_section_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public byte[] Section_name() {return section_name;} private byte[] section_name;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {
@@ -24,7 +43,40 @@ public class Lst_section_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		byte xatr_id = ((Byte_obj_val)xatr_id_obj).Val();
 		switch (xatr_id) {
 			case Xatr_name: case Xatr_bgn: case Xatr_end:
-				section_name = xatr.Val_as_bry(); name_tid = xatr_id; break;
+				name_tid = xatr_id;
+
+				int valBgn = xatr.Val_bgn();
+				byte b = src[valBgn - 1];
+				// previous byte is a quote
+				if (b == '"' || b == '\'') {
+					// then use standard xoHtmlParser
+					section_name = xatr.Val_as_bry();
+				}
+				// previous byte is not a quote (= or whitespace)
+				else {
+					// NOTE: parse attribs with whitespace; EX: `bgn=a b`; ISSUE#:720; DATE:2020-05-09
+					// MW has different logic specific to LST: REF.MW:https://github.com/wikimedia/mediawiki-extensions-LabeledSectionTransclusion/blob/master/includes/LabeledSectionTransclusion.php#L128-L144
+					int srcLen = src.length;
+					int valPos = valBgn;
+					int valEnd = -1;
+					while (valPos < srcLen) {
+						b = src[valPos];
+						switch (b) {
+							case '/': // majority occurrence; EX: <section begin=a b />
+							case '>': // should not happen, but just in case; EX: <section begin=a b ></section>
+								valEnd = valPos;
+								valPos = srcLen;
+								break;
+							case '=':// may not happen, but this is what regex allows; EX: <section begin=a b someOtherAttribute=c d></section>
+								valEnd = Bry_find_.Find_bwd_ws(src, valPos, valBgn);
+								valPos = srcLen;
+								break;
+						}
+						valPos++;
+					}
+					section_name = Bry_.Trim(Bry_.Mid(src, valBgn, valEnd));
+				}
+				break;
 		}
 	}
 	public Xop_xnde_tkn Xnde() {return xnde;} private Xop_xnde_tkn xnde;
