@@ -30,10 +30,14 @@ import gplx.core.brys.Bry_bfr_able;
 import gplx.core.strings.String_bldr;
 import gplx.core.strings.String_bldr_;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
-// REF.PHP: https://www.php.net/manual/en/language.types.array.php
-// also has static functions; REF.PHP: https://www.php.net/manual/en/ref.array.php
+// REF.PHP:https://www.php.net/manual/en/language.types.array.php
+// also has static functions; REF.PHP:https://www.php.net/manual/en/ref.array.php
 public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	private int newMemberIdx;
@@ -138,6 +142,9 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		XophpArrayItm itm = (XophpArrayItm)hash.Get_by(key);
 		return itm == null ? null : (T)itm.Val();
 	}
+	public XophpArrayItm Get_by_itm(String key) {
+		return (XophpArrayItm)hash.Get_by(key);
+	}
 	public void Set(int key, Object val) {
 		this.Set(XophpArrayItm.NewInt(key, val));
 	}
@@ -159,6 +166,9 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		if (itm != null) {
 			hash.Del(itm.Key());
 		}
+	}
+	public void Del_by(String key) {
+		hash.Del(key);
 	}
 	public XophpArrayItm[] To_ary() {
 		return (XophpArrayItm[])hash.To_ary(XophpArrayItm.class);
@@ -309,7 +319,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		return len == 0 ? null : ((XophpArrayItm)array.hash.Get_at(len - 1)).Val();
 	}
 
-	// REF.PHP: https://www.php.net/manual/en/function.array-values.php
+	// REF.PHP:https://www.php.net/manual/en/function.array-values.php
 	public static XophpArray array_values(XophpArray array) {
 		XophpArray rv = new XophpArray();
 		int len = array.Len();
@@ -482,7 +492,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		return sb.To_str_and_clear();
 	}
 
-	// REF.PHP: https://www.php.net/manual/en/function.in-array.php
+	// REF.PHP:https://www.php.net/manual/en/function.in-array.php
 	public static boolean in_array(Object needle, XophpArray haystack) {return in_array(needle, haystack, false);}
 	public static boolean in_array(Object needle, XophpArray haystack, boolean strict) {
 		// if strict, cache needleType
@@ -519,7 +529,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		return false;
 	}
 
-	// REF.PHP: https://www.php.net/manual/en/function.array-shift.php
+	// REF.PHP:https://www.php.net/manual/en/function.array-shift.php
 	// Returns the shifted value, or NULL if array is empty or is not an array.
 	public static Object array_shift(XophpArray array) {
 		if (array == null) {
@@ -544,7 +554,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 		return itms[0].Val();
 	}
 
-	// REF.PHP: https://www.php.net/manual/en/function.array-filter.php
+	// REF.PHP:https://www.php.net/manual/en/function.array-filter.php
 	public static final int ARRAY_FILTER_USE_BOTH = 1, ARRAY_FILTER_USE_KEY = 2, ARRAY_FILTER_USE_VAL = 0; // XO:USE_VAL is not PHP
 	public static XophpArray array_filter(XophpArray array) {return array_filter(array, NULL_CALLBACK, 0);}
 	public static XophpArray array_filter(XophpArray array, XophpCallback callback) {return array_filter(array, callback, 0);}
@@ -576,6 +586,72 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 			if (args.length != 1) throw new XophpRuntimeException("ArrayFilterNullCallback requires 1 arg");
 			Object arg = args[0];
 			return !XophpObject_.empty_obj(arg);
+		}
+	}
+	// REF.PHP:https://www.php.net/manual/en/function.array-diff.php
+	public static XophpArray array_diff(XophpArray array1, XophpArray array2, XophpArray... arrays) {
+		// remove elements
+		Map<String, List<String>> valMap = array_diff__build_val_map(array1);
+		int array1_len = array1.Len();
+		array_diff__remove_common_vals(valMap, array1, array2);
+		for (XophpArray array : arrays) {
+			// update map, if array contents changed
+			if (array1_len != array1.Len()) {
+				valMap = array_diff__build_val_map(array1);
+				array1_len = array1.Len();
+			}
+			array_diff__remove_common_vals(valMap, array1, array);
+		}
+		return array1;
+	}
+	private static Map<String, List<String>> array_diff__build_val_map(XophpArray array) {
+		Map<String, List<String>> map = new HashMap<>();
+		int len = array.Len();
+		for (int i = 0; i < len; i++) {
+			XophpArrayItm itm = array.Get_at_itm(i);
+
+			// get val as String
+			String valStr = XophpObject_.ToStr(itm.Val());
+			List<String> keyList = map.get(valStr);
+			if (keyList == null) {
+				keyList = new ArrayList<>();
+				map.put(valStr, keyList);
+			}
+			keyList.add(itm.Key());
+		}
+		return map;
+	}
+	private static void array_diff__remove_common_vals(Map<String, List<String>> lhsValMap, XophpArray lhs, XophpArray rhs) {
+		int rhsLen = rhs.Len();
+		for (int i = 0; i < rhsLen; i++) {
+			XophpArrayItm rhsItm = rhs.Get_at_itm(i);
+			String rhsVal = XophpObject_.ToStr(rhsItm.Val());
+			List<String> lhsKeyList = lhsValMap.get(rhsVal);
+			if (lhsKeyList != null) {
+				for (String lhsKey : lhsKeyList) {
+					lhs.Del_by(lhsKey);
+				}
+			}
+		}
+	}
+	
+	// REF.PHP:https://www.php.net/manual/en/function.array-diff-key
+	public static XophpArray array_diff_key(XophpArray array1, XophpArray array2, XophpArray... arrays) {
+		// remove elements
+		array_diff_key__remove_common_key(array1, array2);
+		for (XophpArray array : arrays) {
+			array_diff_key__remove_common_key(array1, array);
+		}
+		return array1;
+	}
+	private static void array_diff_key__remove_common_key(XophpArray lhs, XophpArray rhs) {
+		int rhsLen = rhs.Len();
+		for (int i = 0; i < rhsLen; i++) {
+			XophpArrayItm rhsItm = rhs.Get_at_itm(i);
+			String rhsKey = rhsItm.Key();
+			if (lhs.Has(rhsKey)) {
+				lhs.Del_by(rhsKey);
+			}
 		}
 	}
 }

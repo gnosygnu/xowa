@@ -389,6 +389,60 @@ public class XophpArrayStaticTest {
 		XophpArray.reset(array);
 		Gftest.Eq__str("step one", (String)XophpArray.current(array));
 	}
+	@Test public void array_diff() {
+		// test To_str
+		XophpArray<String> array1 = new XophpArray().Add("a", "0");
+		XophpArray<Integer> arrayInt = new XophpArray().Add("a", 0);
+
+		fxt.Test__eq
+		( new XophpArray<String>()
+		, XophpArray.array_diff(array1, arrayInt)
+		);
+
+		// test many
+		XophpArray<String> array2, array3, array4;
+		array1 = new XophpArray().Add_many("a", "b", "c", "d");
+		array2 = new XophpArray().Add_many("a");
+		array3 = new XophpArray().Add_many("c");
+		array4 = new XophpArray().Add_many("d");
+
+		fxt.Test__eq
+		( new XophpArray<String>().Add(1, "b")
+		, XophpArray.array_diff(array1, array2, array3, array4)
+		);
+
+		// PHP examples
+		// Example #1 array_diff() example
+		array1 = new XophpArray().Add("a", "green").Add_many("red", "blue", "red");
+		array2 = new XophpArray().Add("b", "green").Add_many("yellow", "red");
+
+		fxt.Test__eq
+		( new XophpArray<String>().Add(1, "blue")
+		, XophpArray.array_diff(array1, array2)
+		);
+	}
+	@Test public void array_diff_key() {
+		// PHP examples
+		// Example #1 array_diff_key() example
+		XophpArray<Integer> array1, array2;
+		array1 = new XophpArray<>().Add("blue", 1).Add("red", 2).Add("green", 3).Add("purple", 4);
+		array2 = new XophpArray<>().Add("green", 5).Add("yellow", 7).Add("cyan", 8);
+
+		fxt.Test__eq
+		( new XophpArray<String>().Add("blue", 1).Add("red", 2).Add("purple", 4)
+		, XophpArray.array_diff_key(array1, array2)
+		);
+
+		XophpArray<Integer> array3;
+		array1 = new XophpArray<>().Add("blue", 1).Add("red", 2).Add("green", 3).Add("purple", 4);
+		array2 = new XophpArray<>().Add("green", 5).Add("yellow", 7).Add("cyan", 8);
+		array3 = new XophpArray<>().Add("blue", 6).Add("yellow", 7).Add("mauve", 8);
+
+		fxt.Test__eq
+		( new XophpArray<String>().Add("red", 2).Add("purple", 4)
+		, XophpArray.array_diff_key(array1, array2, array3)
+		);
+	}
 }
 class XophpArray_fxt {
 	public XophpArray Make() {return new XophpArray();}

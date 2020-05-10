@@ -23,8 +23,8 @@ import gplx.String_;
 import gplx.Type_;
 import gplx.core.brys.Bry_bfr_able;
 
-public class XophpArrayItm implements Bry_bfr_able {
-	XophpArrayItm(boolean keyIsInt, int keyAsInt, String key, Object val) {
+public class XophpArrayItm<T> implements Bry_bfr_able {
+	XophpArrayItm(boolean keyIsInt, int keyAsInt, String key, T val) {
 		this.keyIsInt = keyIsInt;
 		this.keyAsInt = keyAsInt;
 		this.key = key;
@@ -33,7 +33,7 @@ public class XophpArrayItm implements Bry_bfr_able {
 	public boolean KeyIsInt() {return keyIsInt;} private final boolean keyIsInt;
 	public int KeyAsInt() {return keyAsInt;} private final int keyAsInt;
 	public String Key() {return key;} private final String key;
-	public Object Val() {return val;} public void Val_(Object v) {this.val = v;} private Object val;
+	public T Val() {return val;} public void Val_(T v) {this.val = v;} private T val;
 
 	public void To_bfr(Bry_bfr bfr) {
 		bfr.Add_str_u8(key).Add_byte_eq();

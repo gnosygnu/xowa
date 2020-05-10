@@ -96,4 +96,9 @@ public class XophpObject_ {
 
     // equivalent to ??
 	public static Object Coalesce(Object o, Object or) {return isset_obj(o) ? o : or;}
+
+	// equivalent to (string)o; see https://www.php.net/manual/en/function.array-diff.php
+	public static String ToStr(Object o) {
+		return o.toString();
+	}
 }

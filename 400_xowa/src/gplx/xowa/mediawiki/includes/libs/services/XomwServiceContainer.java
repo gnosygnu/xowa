@@ -16,14 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.libs.services;
 
 import gplx.xowa.mediawiki.XophpArray;
-import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpType_;
 /*
 XOTODO:
-* array_diff: https://www.php.net/manual/en/function.array-diff.php
-* array_diff_key: https://www.php.net/manual/en/function.array-diff-key
 * XomwAssert: /vendor/wikimedia/Assert/src
 */
 // MW.SRC:1.33.1
