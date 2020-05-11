@@ -13,13 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki;
 
-import gplx.Err;
+package gplx.xowa.mediawiki.vendor.wikimedia.Assert.src;
+
 import gplx.String_;
+import gplx.xowa.mediawiki.XophpLogicException;
 
-public class XophpInvalidArgumentException extends Err {
-    public XophpInvalidArgumentException(String fmt, Object... args) {
-        super(true, "", "", String_.Format(fmt, args));
-    }
+// MW.SRC:1.33.1
+/**
+ * Exception indicating that a postcondition assertion failed.
+ * This generally means an error in the internal logic of a function, or a serious problem
+ * in the runtime environment.
+ *
+ * @license MIT
+ * @author Daniel Kinzler
+ * @copyright Wikimedia Deutschland e.V.
+ */
+public class XomwPostconditionException extends XophpLogicException implements XomwAssertionException {
+    public XomwPostconditionException(String fmt, Object... args) {super(String_.Format(fmt, args));}
 }

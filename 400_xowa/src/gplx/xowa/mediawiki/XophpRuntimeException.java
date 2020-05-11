@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
 public class XophpRuntimeException extends XophpException {
+	public XophpRuntimeException() {}
 	public XophpRuntimeException(String message) {super(message);}
  	public XophpRuntimeException(String message, int code, XophpException previous) {
  		super(message, code, previous);

@@ -53,4 +53,5 @@ public class XophpType_ {
 	}
 
 	public static Class<?> get_class(Object o) {return o.getClass();}
+	public static String To_str(Class c) {return c.getCanonicalName();}
 }

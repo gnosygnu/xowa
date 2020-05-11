@@ -13,15 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki;
 
-import gplx.Err;
+package gplx.xowa.mediawiki.vendor.wikimedia.Assert.src;
 
-// REF.PHP:https://www.php.net/manual/en/class.exception.php
-public class XophpException extends Err {
-	public XophpException() {this("", 0, null);}
-	public XophpException(String message) {this(message, 0, null);}
-	public XophpException(String message, int code, XophpException previous) {
-		super(true, "", "", message);
-	}
+// MW.SRC:1.33.1
+/**
+ * Marker interface for exceptions thrown by Assert. Since the exceptions thrown by Assert
+ * use different standard exceptions as base classes, the marker interface is needed to be
+ * able to catch them all at once.
+ *
+ * @license MIT
+ * @author Daniel Kinzler
+ * @copyright Wikimedia Deutschland e.V.
+ */
+public interface XomwAssertionException {
+
 }

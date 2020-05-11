@@ -19,10 +19,7 @@ import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpType_;
-/*
-XOTODO:
-* XomwAssert: /vendor/wikimedia/Assert/src
-*/
+
 // MW.SRC:1.33.1
 /**
  * ServiceContainer provides a generic service to manage named services using
@@ -132,7 +129,7 @@ public class XomwServiceContainer implements XomwDestructibleService {
      *        instantiator functions.
      */
     public void applyWiring(XophpArray $serviceInstantiators) {
-        // Assert::parameterElementType('callable', $serviceInstantiators, '$serviceInstantiators');
+        // XomwAssert.parameterElementType(XophpCallback.class, $serviceInstantiators, "serviceInstantiators");
 
 //        foreach ($serviceInstantiators as $name => $instantiator) {
 //            this.defineService($name, $instantiator);
