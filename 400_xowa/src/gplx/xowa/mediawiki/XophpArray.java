@@ -247,12 +247,43 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 
 		@Override
 		public T next() {
-			return (T) hash.Get_at(curIdx++);
+			return (T) ((XophpArrayItm)hash.Get_at(curIdx++)).Val();
 		}
 
 		@Override
 		public void remove() {
 			throw new XophpRuntimeException("remove not supported");
+		}
+	}
+	public Iterable<XophpArrayItm<T>> IterateItms() {
+		return new XophpArrayItmIterable(hash);
+	}
+	class XophpArrayItmIterable implements Iterable<XophpArrayItm<T>>, Iterator<XophpArrayItm<T>> {
+		private final Ordered_hash hash;
+		private int curIdx;
+		private int len;
+		public XophpArrayItmIterable(Ordered_hash hash) {
+			this.hash = hash;
+			this.len = hash.Len();
+		}
+		@Override
+		public boolean hasNext() {
+			return curIdx < len;
+		}
+
+		@Override
+		public XophpArrayItm<T> next() {
+			return (XophpArrayItm<T>) hash.Get_at(curIdx++);
+		}
+
+		@Override
+		public void remove() {
+			throw new XophpRuntimeException("remove not supported");
+		}
+
+		@Override
+		public Iterator<XophpArrayItm<T>> iterator() {
+			return this;
 		}
 	}
 
@@ -286,9 +317,9 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	// * STATIC *
 	// **********
 	public static final XophpArray False = null; // handles code like "if ($var === false)" where var is an Object;
-	public static XophpArray New(Object... vals) {
+	public static <S> XophpArray<S> New(S... vals) {
 		XophpArray rv = new XophpArray();
-		for (Object val : vals)
+		for (S val : vals)
 			rv.Add(val);
 		return rv;
 	}

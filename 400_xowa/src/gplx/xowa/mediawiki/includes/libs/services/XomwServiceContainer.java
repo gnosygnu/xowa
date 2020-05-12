@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.libs.services;
 
 import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.XophpArrayItm;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpObject_;
 import gplx.xowa.mediawiki.XophpType_;
@@ -108,18 +109,19 @@ public class XomwServiceContainer implements XomwDestructibleService {
      * Each file is loaded using PHP's include mechanism. Each file is expected to
      * return an associative array that maps service names to instantiator functions.
      */
-    public void loadWiringFiles(XophpArray wiringFiles) {
-//        foreach ($wiringFiles as $file) {
-//            // the wiring file is required to return an array of instantiators.
-//            $wiring = require $file;
-//
-//            // Assert::postcondition(
-//            //    is_array($wiring),
-//            //    "Wiring file $file is expected to return an array!"
-//            // );
-//
-//            this.applyWiring($wiring);
-//        }
+    public void loadWiringFiles(XophpArray<XophpArray<XophpCallback>> wiringFiles) {
+        for (XophpArray<XophpCallback> file : wiringFiles) {
+            // the wiring file is required to return an array of instantiators.
+            // $wiring = require $file;
+            XophpArray<XophpCallback> wiring = file;
+
+            // Assert::postcondition(
+            //    is_array($wiring),
+            //    "Wiring file $file is expected to return an array!"
+            // );
+
+            this.applyWiring(wiring);
+        }
     }
 
     /**
@@ -128,12 +130,13 @@ public class XomwServiceContainer implements XomwDestructibleService {
      * @param array $serviceInstantiators An associative array mapping service names to
      *        instantiator functions.
      */
-    public void applyWiring(XophpArray $serviceInstantiators) {
+    public void applyWiring(XophpArray<XophpCallback> serviceInstantiators) {
         // XomwAssert.parameterElementType(XophpCallback.class, $serviceInstantiators, "serviceInstantiators");
-
-//        foreach ($serviceInstantiators as $name => $instantiator) {
-//            this.defineService($name, $instantiator);
-//        }
+        for (XophpArrayItm<XophpCallback> itm : serviceInstantiators.IterateItms()) {
+            String name = itm.Key();
+            XophpCallback instantiator = itm.Val();
+            this.defineService(name, instantiator);
+        }
     }
 
     /**
@@ -148,31 +151,31 @@ public class XomwServiceContainer implements XomwDestructibleService {
      */
     public void importWiring(XomwServiceContainer container) {this.importWiring(container, new XophpArray<>());}
     public void importWiring(XomwServiceContainer container, XophpArray<String> skip) {
-//        XophpArray<String> newInstantiators = XophpArray.array_diff_key(
-//            container.serviceInstantiators,
-//            XophpArray.array_flip(skip)
-//        );
-//
-//        this.serviceInstantiators = XophpArray.array_merge(
-//            this.serviceInstantiators,
-//            newInstantiators
-//        );
-//
-//        XophpArray<String> newManipulators = XophpArray.array_diff(
-//            XophpArray.array_keys(container.serviceManipulators),
-//            skip
-//        );
-//
-//        for (String name : newManipulators) {
-//            if (XophpArray.isset(this.serviceManipulators, name)) {
-//                this.serviceManipulators.Set(name, XophpArray.array_merge(
-//                    this.serviceManipulators.Get_by(name),
-//                    container.serviceManipulators.Get_by(name)
-//               ));
-//            } else {
-//                this.serviceManipulators.Set(name, container.serviceManipulators.Get_by(name));
-//            }
-//        }
+        XophpArray<String> newInstantiators = XophpArray.array_diff_key(
+            container.serviceInstantiators,
+            XophpArray.array_flip(skip)
+        );
+
+        this.serviceInstantiators = XophpArray.array_merge(
+            this.serviceInstantiators,
+            newInstantiators
+        );
+
+        XophpArray<String> newManipulators = XophpArray.array_diff(
+            XophpArray.array_keys(container.serviceManipulators),
+            skip
+        );
+
+        for (String name : newManipulators) {
+            if (XophpArray.isset(this.serviceManipulators, name)) {
+                this.serviceManipulators.Set(name, XophpArray.array_merge(
+                    this.serviceManipulators.Get_by(name),
+                    container.serviceManipulators.Get_by(name)
+               ));
+            } else {
+                this.serviceManipulators.Set(name, container.serviceManipulators.Get_by(name));
+            }
+        }
     }
 
     /**
