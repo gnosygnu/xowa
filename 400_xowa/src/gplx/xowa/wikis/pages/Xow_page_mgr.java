@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -180,12 +180,12 @@ public class Xow_page_mgr implements Gfo_invk {
 		page.Redirect_trail().Itms__add__article(trg_url, trg_ttl, null);
 		wiki.Data_mgr().Load_from_db(page, trg_ttl.Ns(), trg_ttl, trg_url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
 	}
-	public void Redirect2(Xowe_wiki wiki2, Xoae_page page, byte[] page_bry) {
-		Xoa_ttl trg_ttl = Xoa_ttl.Parse(wiki2, page_bry);
-		Xoa_url trg_url = Xoa_url.New(wiki2.Domain_bry(), page_bry);
-		page.Ttl_(trg_ttl).Url_(trg_url);
-		page.Redirect_trail().Itms__add__article(trg_url, trg_ttl, null);
-		wiki2.Data_mgr().Load_from_db(page, trg_ttl.Ns(), trg_ttl, trg_url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no));
+	public void RedirectWithoutLoading(Xoae_page page, byte[] ttl_bry) {
+		// ISSUE#:719:redirect should not call .Load_from_db else redirect info will get lost; EX:"Redirected from trg_ttl" instead of "Redirected from src_ttl"; PAGE:en.s; DATE:2020-05-13
+		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
+		Xoa_url url = Xoa_url.New(wiki.Domain_bry(), ttl.Full_db());
+		page.Ttl_(ttl).Url_(url);
+		page.Redirect_trail().Itms__add__article(url, ttl, null);
 	}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

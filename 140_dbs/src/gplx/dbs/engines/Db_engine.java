@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,14 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
-import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.bats.*;
+package gplx.dbs.engines;
+
+import gplx.Gfo_usr_dlg;
+import gplx.Io_url;
+import gplx.core.stores.DataRdr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_info;
+import gplx.dbs.Db_qry;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Dbmeta_fld_itm;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.dbs.conn_props.Db_conn_props_mgr;
+import gplx.dbs.metas.Dbmeta_tbl_mgr;
+import gplx.dbs.qrys.bats.Db_batch_mgr;
+import gplx.dbs.sqls.Sql_qry_wtr;
+import gplx.dbs.wkrs.SqlWkrMgr;
+
 public interface Db_engine {
 	String				Tid();
 	Db_conn_info		Conn_info();
 	Db_conn_props_mgr	Props();
 	Db_batch_mgr		Batch_mgr();
 	Sql_qry_wtr			Sql_wtr();
+	void                CtorConn(SqlWkrMgr wkrMgr);
 	Db_engine			New_clone(Db_conn_info conn_info);
 	void				Conn_open();
 	void				Conn_term();

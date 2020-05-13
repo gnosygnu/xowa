@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,19 +13,49 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
-import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.engines.*; import gplx.dbs.qrys.*; import gplx.dbs.sys.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.bats.*;
+package gplx.dbs;
+
+import gplx.Bool_;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.Gfo_log_;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Rls_able;
+import gplx.String_;
+import gplx.core.stores.DataRdr;
+import gplx.core.stores.DataRdr_;
+import gplx.dbs.conn_props.Db_conn_props_mgr;
+import gplx.dbs.engines.Db_engine;
+import gplx.dbs.metas.Dbmeta_idx_fld;
+import gplx.dbs.metas.Dbmeta_tbl_mgr;
+import gplx.dbs.qrys.Db_qry__select_in_tbl;
+import gplx.dbs.qrys.Db_qry_delete;
+import gplx.dbs.qrys.Db_qry_insert;
+import gplx.dbs.qrys.Db_qry_sql;
+import gplx.dbs.qrys.Db_qry_update;
+import gplx.dbs.qrys.bats.Db_batch_mgr;
+import gplx.dbs.sys.Db_sys_mgr;
+import gplx.dbs.wkrs.SqlWkrMgr;
+
 public class Db_conn {
 	private final    List_adp rls_list = List_adp_.New();
 	public Db_conn(Db_engine engine) {
 		this.engine = engine;
 		this.sys_mgr = new Db_sys_mgr(this);
+		this.wkrMgr = new SqlWkrMgr(this);
+		engine.CtorConn(wkrMgr);
 	}
 	public Db_conn_info			Conn_info()				{return engine.Conn_info();}
 	public Db_conn_props_mgr	Props()					{return engine.Props();}
 	public Db_batch_mgr			Batch_mgr()				{return engine.Batch_mgr();}
-	public Db_engine			Engine()				{return engine;} private final    Db_engine engine;
-	public Db_sys_mgr			Sys_mgr()				{return sys_mgr;} private final    Db_sys_mgr sys_mgr;	// autonum and other functions
+	public Db_engine			Engine()				{return engine;} private final Db_engine engine;
+	public Db_sys_mgr			Sys_mgr()				{return sys_mgr;} private final Db_sys_mgr sys_mgr;	// autonum and other functions
+	public SqlWkrMgr            WkrMgr()                {return wkrMgr;} private final SqlWkrMgr wkrMgr;
 	public boolean				Eq(Db_conn comp)		{return String_.Eq(engine.Conn_info().Db_api(), comp.Conn_info().Db_api());}
 	public void					Txn_bgn(String name)	{engine.Txn_bgn(name);}
 	public void					Txn_end()				{engine.Txn_end();}

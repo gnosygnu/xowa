@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.bats.*;
+import gplx.dbs.wkrs.SqlWkrMgr;
+
 public class Mem_engine implements Db_engine {
 	private final    Hash_adp tbl_hash = Hash_adp_.New();
 	Mem_engine(Db_conn_info conn_info) {
@@ -27,6 +29,7 @@ public class Mem_engine implements Db_engine {
 	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
 	public Mem_exec_select		Qry_runner() {return qry_runner;} private Mem_exec_select qry_runner;
 	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.New__basic();
+	@Override public void       CtorConn(SqlWkrMgr wkrMgr) {}
 	public Db_engine			New_clone(Db_conn_info conn_info) {return new Mem_engine(conn_info);}
 	public Db_stmt				Stmt_by_qry(Db_qry qry) {return new Mem_stmt(this, qry);}
 	public Mem_tbl				Tbls__get(String name)	{return (Mem_tbl)tbl_hash.Get_by(name);}

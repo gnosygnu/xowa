@@ -28,6 +28,7 @@ public class Db_crt_ {
 	public static Criteria_fld New_between		(String key, Comparable lo, Comparable hi)	{return Criteria_fld.new_(key, Criteria_.between_(lo, hi));}
 	public static Criteria_fld New_in			(String key, Object... vals)				{return Criteria_fld.new_(key, Criteria_.in_(vals));}
 	public static Criteria_fld New_like			(String key, String pattern)					{return Criteria_fld.new_(key, Criteria_.like_(pattern));}
+	public static Criteria_fld New_like_not     (String key, String pattern)                    {return Criteria_fld.new_(key, Criteria_.Not(Criteria_.like_(pattern)));}
 
 	public static Criteria eq_many_(String... ary) {
 		Criteria rv = null;

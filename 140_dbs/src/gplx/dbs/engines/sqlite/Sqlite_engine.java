@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -21,6 +21,8 @@ import gplx.core.consoles.Console_adp_;
 import gplx.core.consoles.Console_adp__sys;
 import gplx.core.ios.IoItmFil;
 
+import gplx.dbs.wkrs.SqlWkrMgr;
+import gplx.dbs.wkrs.randoms.SqliteRandomWkr;
 import org.sqlite.SQLiteConnection;
 public class Sqlite_engine extends Db_engine_sql_base {
 	private final    Sqlite_txn_mgr txn_mgr; private final    Sqlite_schema_mgr schema_mgr;
@@ -30,6 +32,10 @@ public class Sqlite_engine extends Db_engine_sql_base {
 	}
 	@Override public String Tid() {return Sqlite_conn_info.Key_const;}
 	@Override public gplx.dbs.sqls.Sql_qry_wtr Sql_wtr() {return Sql_qry_wtr_.New__sqlite();}
+	public void CtorConn(SqlWkrMgr wkrMgr) {
+		wkrMgr.Set(new SqliteRandomWkr());
+	}
+
 	@Override public Db_engine New_clone(Db_conn_info connectInfo) {
 		Sqlite_engine rv = new Sqlite_engine();
 		rv.Ctor(connectInfo);
@@ -89,7 +95,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 		catch (SQLException e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to set busy timeout; err=~{0}", Err_.Message_gplx_log(e));}
 		return rv;
 	}
-		public static final    Sqlite_engine Instance = new Sqlite_engine();
+	public static final    Sqlite_engine Instance = new Sqlite_engine();
 }
 class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(String k)		{try {return (byte)Int_.Cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "k", k, "type", Byte_.Cls_val_name);}} 
 		@Override public boolean Read_bool_by_byte(String k) {

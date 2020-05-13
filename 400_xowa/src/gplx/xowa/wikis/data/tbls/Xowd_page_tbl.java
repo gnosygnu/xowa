@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -254,7 +254,7 @@ public class Xowd_page_tbl implements Db_tbl {
 	private Db_rdr Load_ttls_starting_with_rdr(int ns_id, byte[] ttl_frag, boolean include_redirects, int max_results, int min_page_len, int browse_len, boolean fwd, boolean search_suggest) {
 		String ttl_frag_str = String_.new_u8(ttl_frag);
 		Criteria crt_ttl = fwd ? Db_crt_.New_mte(fld_title, ttl_frag_str) : Db_crt_.New_lt(fld_title, ttl_frag_str);
-		Criteria crt = Criteria_.And_many(Db_crt_.New_eq(fld_ns, ns_id), crt_ttl, Db_crt_.New_mte(fld_len, min_page_len));
+		Criteria crt = Criteria_.And_many(Db_crt_.New_eq(fld_ns, ns_id), crt_ttl, Db_crt_.New_mte(fld_len, (Integer)min_page_len));
 		if (!include_redirects)
 			crt = Criteria_.And(crt, Db_crt_.New_eq(fld_is_redirect, Byte_.Zero));
 		String[] cols = search_suggest 
@@ -409,4 +409,5 @@ public class Xowd_page_tbl implements Db_tbl {
 	public static final String TBL_NAME = "page", FLD__page_cat_db_id = "page_cat_db_id";
 	public static Xowd_page_tbl Get_by_key(Db_tbl_owner owner) {return (Xowd_page_tbl)owner.Tbls__get_by_key(TBL_NAME);}
 	public static final int INVALID_PAGE_ID = -1;
+	public static final int REDIRECT_IS_NULL = -1;
 }

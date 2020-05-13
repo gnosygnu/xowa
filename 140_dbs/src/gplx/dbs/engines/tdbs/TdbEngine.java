@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.dbs.qrys.bats.*;
+import gplx.dbs.wkrs.SqlWkrMgr;
+
 public class TdbEngine implements Db_engine {
 	public String Tid() {return Tdb_conn_info.Tid_const;}
 	public Db_conn_info			Conn_info() {return conn_info;} private Db_conn_info conn_info;
@@ -22,6 +24,7 @@ public class TdbEngine implements Db_engine {
 	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
 	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.New__basic();
 	public TdbDatabase Db() {return db;} TdbDatabase db;
+	@Override public void CtorConn(SqlWkrMgr wkrMgr) {}
 	public void Conn_open() {
 		Tdb_conn_info tdb_url = (Tdb_conn_info)conn_info;
 		String url_str = tdb_url.Server();
