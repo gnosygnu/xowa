@@ -16,13 +16,41 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes;
 
 import gplx.Err_;
+import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpCallbackOwner;
-import gplx.xowa.mediawiki.includes.config.XomwConfig;
 import gplx.xowa.mediawiki.languages.XomwLanguage;
 
 // MW.SRC:1.33.1
 public class XomwServiceWiring implements XophpCallbackOwner {
+    // XO:infrastructure to register the multiple wiring methods
+    interface XomwServiceWiringMethod {
+        String Key();
+        Object Call(XomwMediaWikiServices mediaWikiServices);
+    }
+    private final XophpArray<XomwServiceWiringMethod> methods = new XophpArray<>();
+    public XomwServiceWiring() {
+        InitMethod(new InterwikiLookup());
+    }
+    private void InitMethod(XomwServiceWiringMethod method) {
+        methods.Add(method.Key(), method);
+    }
+    public XophpArray<XophpCallback> GetCallbacks() {
+        XophpArray<XophpCallback> rv = new XophpArray<>();
+        for (XomwServiceWiringMethod method : methods) {
+            rv.Add(this.NewCallback(method.Key()));
+        }
+        return rv;
+    }
+    @Override public Object Call(String methodName, Object... args) {
+        XomwMediaWikiServices services = (XomwMediaWikiServices)args[0];
+        XomwServiceWiringMethod method = methods.Get_by(methodName);
+        if (method == null) {
+            throw Err_.new_unhandled_default(methodName);
+        }
+        return method.Call(services);
+    };
+
 //return [
 //    "ActorMigration" => function (MediaWikiServices services) : ActorMigration {
 //        return new ActorMigration(
@@ -75,9 +103,12 @@ public class XomwServiceWiring implements XophpCallbackOwner {
 //        return new ConfiguredReadOnlyMode(services.getMainConfig());
 //    },
 
-    private XomwLanguage newContentLanguage(XomwMediaWikiServices services) {
+    class ContentLanguage implements XomwServiceWiringMethod {
+        @Override public String Key() {return "ContentLanguage";}
+        @Override public Object Call(XomwMediaWikiServices services) {
 //        return XomwLanguage.factory(services.getMainConfig().get("LanguageCode"));
         return null;
+        }
     }
 //
 //        "CryptHKDF" => function (MediaWikiServices services) : CryptHKDF {
@@ -151,8 +182,9 @@ public class XomwServiceWiring implements XophpCallbackOwner {
 //        return new \MediaWiki\Http\HttpRequestFactory();
 //    },
 
-
-    private Object newInterwikiLoopup(XomwMediaWikiServices services) {
+    class InterwikiLookup implements XomwServiceWiringMethod {
+        @Override public String Key() {return "InterwikiLookup";}
+        @Override public Object Call(XomwMediaWikiServices services) {
 //        XomwConfig config = services.getMainConfig();
 //        return new ClassicInterwikiLookup(
 //            services.getContentLanguage(),
@@ -162,21 +194,9 @@ public class XomwServiceWiring implements XophpCallbackOwner {
 //            config.get("InterwikiScopes"),
 //            config.get("InterwikiFallbackSite")
 //       );
-        return null;
-    }
-
-    @Override
-    public Object Call(String method, Object... args) {
-        XomwMediaWikiServices services = (XomwMediaWikiServices)args[0];
-        switch (method) {
-            case "InterwikiLookup":
-                return newInterwikiLoopup(services);
-            case "ContentLanguage":
-                return newContentLanguage(services);
-            default:
-                throw Err_.new_unhandled_default(method);
+            return null;
         }
-    };
+    }
 
 //        "LinkCache" => function (MediaWikiServices services) : LinkCache {
 //        return new LinkCache(

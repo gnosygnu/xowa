@@ -18,10 +18,17 @@ package gplx.xowa.mediawiki.includes;
 import gplx.Hash_adp;
 import gplx.Hash_adp_;
 import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.XophpCallback;
 
 // MW.SRC:1.33.1
 // XO.NOTE:MW has these as individual global variables
 public class XomwDefaultSettings {
+	// XO:infrastructure for globals
+	public static XomwDefaultSettings Instance = new XomwDefaultSettings();
+	public XomwDefaultSettings() {
+		// NOTE: all "wg..." variables must be registered here!
+		XomwGlobals.Instance.Add("wgServiceWiringFiles", wgServiceWiringFiles);
+	}
 //	/**
 //	 * Default values for MediaWiki configuration settings.
 //	 *
@@ -7516,21 +7523,21 @@ public class XomwDefaultSettings {
 	 */
 	public static XophpArray wgHooks = XophpArray.New();
 //
-///**
-// * List of service wiring files to be loaded by the default instance of MediaWikiServices.
-// * Each file listed here is expected to return an associative array mapping service names
-// * to instantiator functions. Extensions may add wiring files to define their own services.
-// * However, this cannot be used to replace existing services - use the MediaWikiServices
-// * hook for that.
-// *
-// * @see MediaWikiServices
-// * @see ServiceContainer::loadWiringFiles() for details on loading service instantiator functions.
-// * @see docs/injection.txt for an overview of dependency injection in MediaWiki.
-// */
-//	$wgServiceWiringFiles = [
-//	__DIR__ . '/ServiceWiring.php'
-//	];
-//
+/**
+ * List of service wiring files to be loaded by the default instance of MediaWikiServices.
+ * Each file listed here is expected to return an associative array mapping service names
+ * to instantiator functions. Extensions may add wiring files to define their own services.
+ * However, this cannot be used to replace existing services - use the MediaWikiServices
+ * hook for that.
+ *
+ * @see MediaWikiServices
+ * @see ServiceContainer::loadWiringFiles() for details on loading service instantiator functions.
+ * @see docs/injection.txt for an overview of dependency injection in MediaWiki.
+ */
+ 	public XophpArray<XophpArray<XophpCallback>> wgServiceWiringFiles = XophpArray.New(
+ 		new XomwServiceWiring().GetCallbacks()
+	);
+
 ///**
 // * Maps jobs to their handlers; extensions
 // * can add to this to provide custom jobs.

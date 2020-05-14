@@ -16,7 +16,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes;
 
 import gplx.xowa.mediawiki.XomwEnv;
+import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.XophpCallback;
+import gplx.xowa.mediawiki.XophpString_;
+import gplx.xowa.mediawiki.includes.config.XomwConfig;
+import gplx.xowa.mediawiki.includes.config.XomwGlobalVarConfig;
 import gplx.xowa.mediawiki.includes.interwiki.XomwInterwikiLookup;
+import gplx.xowa.mediawiki.includes.libs.services.XomwServiceContainer;
 import gplx.xowa.mediawiki.includes.title.XomwMediaWikiTitleCodec;
 import gplx.xowa.mediawiki.languages.XomwLanguage;
 
@@ -25,8 +31,8 @@ import gplx.xowa.mediawiki.languages.XomwLanguage;
  * MediaWikiServices is the service locator for the application scope of MediaWiki.
  * Its implemented as a simple configurable DI container.
  * MediaWikiServices acts as a top level factory/registry for top level services, and builds
- * the network of service objects that defines MediaWiki's application logic.
- * It acts as an entry point to MediaWiki's dependency injection mechanism.
+ * the network of service objects that defines MediaWiki"s application logic.
+ * It acts as an entry point to MediaWiki"s dependency injection mechanism.
  *
  * Services are defined in the "wiring" array passed to the constructor,
  * or by calling defineService().
@@ -34,10 +40,10 @@ import gplx.xowa.mediawiki.languages.XomwLanguage;
  * @see docs/injection.txt for an overview of using dependency injection in the
  *      MediaWiki code base.
  */
-public class XomwMediaWikiServices { // extends ServiceContainer
+public class XomwMediaWikiServices extends XomwServiceContainer {
 	// XO.MW.SKIP:remove global getInstance(). See XomwEnv
-	private final XomwMediaWikiTitleCodec titleParser;
-	private final XomwInterwikiLookup interwikiLookup;
+	private XomwMediaWikiTitleCodec titleParser;
+	private XomwInterwikiLookup interwikiLookup;
 
 	public XomwEnv env;
 	public XomwMediaWikiServices(XomwEnv env, XomwInterwikiLookup interwikiLookup, XomwLanguage language, byte[][] localInterwikis) {
@@ -46,37 +52,37 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 		this.titleParser = new XomwMediaWikiTitleCodec(this, language, localInterwikis);
 	}
 
-//	/**
-//	 * @var MediaWikiServices|null
-//	 */
-//	private static $instance = null;
-//
-//	/**
-//	 * Returns the global default instance of the top level service locator.
-//	 *
-//	 * @since 1.27
-//	 *
-//	 * The default instance is initialized using the service instantiator functions
-//	 * defined in ServiceWiring.php.
-//	 *
-//	 * @note This should only be called by static functions! The instance returned here
-//	 * should not be passed around! Objects that need access to a service should have
-//	 * that service injected into the constructor, never a service locator!
-//	 *
-//	 * @return MediaWikiServices
-//	 */
-//	public static function getInstance() {
-//		if ( self::$instance === null ) {
-//			// NOTE: constructing GlobalVarConfig here is not particularly pretty,
-//			// but some information from the global scope has to be injected here,
-//			// even if it's just a file name or database credentials to load
-//			// configuration from.
-//			$bootstrapConfig = new GlobalVarConfig();
-//			self::$instance = self::newInstance( $bootstrapConfig, 'load' );
-//		}
-//
-//		return self::$instance;
-//	}
+	/**
+	 * @var MediaWikiServices|null
+	 */
+	private static XomwMediaWikiServices instance = null;
+
+	/**
+	 * Returns the global default instance of the top level service locator.
+	 *
+	 * @since 1.27
+	 *
+	 * The default instance is initialized using the service instantiator functions
+	 * defined in ServiceWiring.php.
+	 *
+	 * @note This should only be called by static functions! The instance returned here
+	 * should not be passed around! Objects that need access to a service should have
+	 * that service injected into the constructor, never a service locator!
+	 *
+	 * @return MediaWikiServices
+	 */
+	public static XomwMediaWikiServices getInstance() {
+		if (instance == null) {
+			// NOTE: constructing GlobalVarConfig here is not particularly pretty,
+			// but some information from the global scope has to be injected here,
+			// even if it"s just a file name or database credentials to load
+			// configuration from.
+			XomwGlobalVarConfig bootstrapConfig = new XomwGlobalVarConfig();
+			instance = newInstance(bootstrapConfig, "load");
+		}
+
+		return instance;
+	}
 //
 //	/**
 //	 * Replaces the global MediaWikiServices instance.
@@ -87,19 +93,19 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 *
 //	 * @throws MWException if called outside of PHPUnit tests.
 //	 *
-//	 * @param MediaWikiServices $services The new MediaWikiServices object.
+//	 * @param MediaWikiServices services The new MediaWikiServices object.
 //	 *
 //	 * @return MediaWikiServices The old MediaWikiServices object, so it can be restored later.
 //	 */
-//	public static function forceGlobalInstance( MediaWikiServices $services ) {
-//		if ( !defined( 'MW_PHPUNIT_TEST' ) ) {
-//			throw new MWException( __METHOD__ . ' must not be used outside unit tests.' );
+//	public static function forceGlobalInstance(MediaWikiServices services) {
+//		if (!defined("MW_PHPUNIT_TEST")) {
+//			throw new MWException(__METHOD__ . " must not be used outside unit tests.");
 //		}
 //
-//		$old = self::getInstance();
-//		self::$instance = $services;
+//		old = getInstance();
+//		instance = services;
 //
-//		return $old;
+//		return old;
 //	}
 //
 //	/**
@@ -127,102 +133,103 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @see resetGlobalInstance()
 //	 * @see resetBetweenTest()
 //	 *
-//	 * @param Config|null $bootstrapConfig The Config object to be registered as the
-//	 *        'BootstrapConfig' service. This has to contain at least the information
-//	 *        needed to set up the 'ConfigFactory' service. If not given, the bootstrap
+//	 * @param Config|null bootstrapConfig The Config object to be registered as the
+//	 *        "BootstrapConfig" service. This has to contain at least the information
+//	 *        needed to set up the "ConfigFactory" service. If not given, the bootstrap
 //	 *        config of the old instance of MediaWikiServices will be re-used. If there
 //	 *        was no previous instance, a new GlobalVarConfig object will be used to
 //	 *        bootstrap the services.
 //	 *
-//	 * @param string $quick Set this to "quick" to allow expensive resources to be re-used.
+//	 * @param string quick Set this to "quick" to allow expensive resources to be re-used.
 //	 * See SalvageableService for details.
 //	 *
 //	 * @throws MWException If called after MW_SERVICE_BOOTSTRAP_COMPLETE has been defined in
 //	 *         Setup.php (unless MW_PHPUNIT_TEST or MEDIAWIKI_INSTALL or RUN_MAINTENANCE_IF_MAIN
 //	 *          is defined).
 //	 */
-//	public static function resetGlobalInstance( Config $bootstrapConfig = null, $quick = '' ) {
-//		if ( self::$instance === null ) {
+//	public static function resetGlobalInstance(Config bootstrapConfig = null, quick = "") {
+//		if (instance === null) {
 //			// no global instance yet, nothing to reset
 //			return;
 //		}
 //
-//		self::failIfResetNotAllowed( __METHOD__ );
+//		failIfResetNotAllowed(__METHOD__);
 //
-//		if ( $bootstrapConfig === null ) {
-//			$bootstrapConfig = self::$instance->getBootstrapConfig();
+//		if (bootstrapConfig === null) {
+//			bootstrapConfig = instance.getBootstrapConfig();
 //		}
 //
-//		$oldInstance = self::$instance;
+//		oldInstance = instance;
 //
-//		self::$instance = self::newInstance( $bootstrapConfig, 'load' );
-//		self::$instance->importWiring( $oldInstance, [ 'BootstrapConfig' ] );
+//		instance = newInstance(bootstrapConfig, "load");
+//		instance.importWiring(oldInstance, [ "BootstrapConfig" ]);
 //
-//		if ( $quick === 'quick' ) {
-//			self::$instance->salvage( $oldInstance );
+//		if (quick === "quick") {
+//			instance.salvage(oldInstance);
 //		} else {
-//			$oldInstance->destroy();
+//			oldInstance.destroy();
 //		}
 //	}
 //
 //	/**
-//	 * Salvages the state of any salvageable service instances in $other.
+//	 * Salvages the state of any salvageable service instances in other.
 //	 *
-//	 * @note $other will have been destroyed when salvage() returns.
+//	 * @note other will have been destroyed when salvage() returns.
 //	 *
-//	 * @param MediaWikiServices $other
+//	 * @param MediaWikiServices other
 //	 */
-//	private function salvage( self $other ) {
-//		foreach ( this.getServiceNames() as $name ) {
+//	private function salvage(self other) {
+//		foreach (this.getServiceNames() as name) {
 //			// The service could be new in the new instance and not registered in the
 //			// other instance (e.g. an extension that was loaded after the instantiation of
 //			// the other instance. Skip this service in this case. See T143974
 //			try {
-//				$oldService = $other->peekService( $name );
-//			} catch ( NoSuchServiceException $e ) {
+//				oldService = other.peekService(name);
+//			} catch (NoSuchServiceException e) {
 //				continue;
 //			}
 //
-//			if ( $oldService instanceof SalvageableService ) {
-//				/** @var SalvageableService $newService */
-//				$newService = this.getService( $name );
-//				$newService->salvage( $oldService );
+//			if (oldService instanceof SalvageableService) {
+//				/** @var SalvageableService newService */
+//				newService = this.getService(name);
+//				newService.salvage(oldService);
 //			}
 //		}
 //
-//		$other->destroy();
+//		other.destroy();
 //	}
-//
-//	/**
-//	 * Creates a new MediaWikiServices instance and initializes it according to the
-//	 * given $bootstrapConfig. In particular, all wiring files defined in the
-//	 * ServiceWiringFiles setting are loaded, and the MediaWikiServices hook is called.
-//	 *
-//	 * @param Config|null $bootstrapConfig The Config object to be registered as the
-//	 *        'BootstrapConfig' service.
-//	 *
-//	 * @param string $loadWiring set this to 'load' to load the wiring files specified
-//	 *        in the 'ServiceWiringFiles' setting in $bootstrapConfig.
-//	 *
-//	 * @return MediaWikiServices
-//	 * @throws MWException
-//	 * @throws \FatalError
-//	 */
-//	private static function newInstance( Config $bootstrapConfig, $loadWiring = '' ) {
-//		$instance = new self( $bootstrapConfig );
-//
-//		// Load the default wiring from the specified files.
-//		if ( $loadWiring === 'load' ) {
-//			$wiringFiles = $bootstrapConfig->get( 'ServiceWiringFiles' );
-//			$instance->loadWiringFiles( $wiringFiles );
-//		}
-//
-//		// Provide a traditional hook point to allow extensions to configure services.
-//		Hooks::run( 'MediaWikiServices', [ $instance ] );
-//
-//		return $instance;
-//	}
-//
+
+	/**
+	 * Creates a new MediaWikiServices instance and initializes it according to the
+	 * given bootstrapConfig. In particular, all wiring files defined in the
+	 * ServiceWiringFiles setting are loaded, and the MediaWikiServices hook is called.
+	 *
+	 * @param Config|null bootstrapConfig The Config object to be registered as the
+	 *        "BootstrapConfig" service.
+	 *
+	 * @param string loadWiring set this to "load" to load the wiring files specified
+	 *        in the "ServiceWiringFiles" setting in bootstrapConfig.
+	 *
+	 * @return MediaWikiServices
+	 * @throws MWException
+	 * @throws \FatalError
+	 */
+	private static XomwMediaWikiServices newInstance(XomwConfig bootstrapConfig) {return newInstance(bootstrapConfig, "");}
+	private static XomwMediaWikiServices newInstance(XomwConfig bootstrapConfig, String loadWiring) {
+		instance = new XomwMediaWikiServices(bootstrapConfig);
+
+		// Load the default wiring from the specified files.
+		if (XophpString_.eq(loadWiring, "load")) {
+			XophpArray<XophpArray<XophpCallback>> wiringFiles = (XophpArray<XophpArray<XophpCallback>>)bootstrapConfig.get("ServiceWiringFiles");
+			instance.loadWiringFiles(wiringFiles);
+		}
+
+		// Provide a traditional hook point to allow extensions to configure services.
+		XomwHooks.run("MediaWikiServices", XophpArray.New(instance));
+
+		return instance;
+	}
+
 //	/**
 //	 * Disables all storage layer services. After calling this, any attempt to access the
 //	 * storage layer will result in an error. Use resetGlobalInstance() to restore normal
@@ -240,11 +247,11 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 */
 //	public static function disableStorageBackend() {
 //		// TODO: also disable some Caches, JobQueues, etc
-//		$destroy = [ 'DBLoadBalancer', 'DBLoadBalancerFactory' ];
-//		$services = self::getInstance();
+//		destroy = [ "DBLoadBalancer", "DBLoadBalancerFactory" ];
+//		services = getInstance();
 //
-//		foreach ( $destroy as $name ) {
-//			$services->disableService( $name );
+//		foreach (destroy as name) {
+//			services.disableService(name);
 //		}
 //
 //		ObjectCache::clear();
@@ -252,7 +259,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //
 //	/**
 //	 * Resets any services that may have become stale after a child process
-//	 * returns from after pcntl_fork(). It's also safe, but generally unnecessary,
+//	 * returns from after pcntl_fork(). It"s also safe, but generally unnecessary,
 //	 * to call this method from the parent process.
 //	 *
 //	 * @since 1.28
@@ -263,13 +270,13 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @see disableStorageBackend()
 //	 */
 //	public static function resetChildProcessServices() {
-//		// NOTE: for now, just reset everything. Since we don't know the interdependencies
-//		// between services, we can't do this more selectively at this time.
-//		self::resetGlobalInstance();
+//		// NOTE: for now, just reset everything. Since we don"t know the interdependencies
+//		// between services, we can"t do this more selectively at this time.
+//		resetGlobalInstance();
 //
 //		// Child, reseed because there is no bug in PHP:
 //		// https://bugs.php.net/bug.php?id=42465
-//		mt_srand( getmypid() );
+//		mt_srand(getmypid());
 //	}
 //
 //	/**
@@ -286,19 +293,19 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * should not be needed. It is provided to allow tests that pollute global service
 //	 * instances to clean up.
 //	 *
-//	 * @param string $name
-//	 * @param bool $destroy Whether the service instance should be destroyed if it exists.
+//	 * @param string name
+//	 * @param bool destroy Whether the service instance should be destroyed if it exists.
 //	 *        When set to false, any existing service instance will effectively be detached
 //	 *        from the container.
 //	 *
 //	 * @throws MWException if called outside of PHPUnit tests.
 //	 */
-//	public function resetServiceForTesting( $name, $destroy = true ) {
-//		if ( !defined( 'MW_PHPUNIT_TEST' ) && !defined( 'MW_PARSER_TEST' ) ) {
-//			throw new MWException( 'resetServiceForTesting() must not be used outside unit tests.' );
+//	public function resetServiceForTesting(name, destroy = true) {
+//		if (!defined("MW_PHPUNIT_TEST") && !defined("MW_PARSER_TEST")) {
+//			throw new MWException("resetServiceForTesting() must not be used outside unit tests.");
 //		}
 //
-//		this.resetService( $name, $destroy );
+//		this.resetService(name, destroy);
 //	}
 //
 //	/**
@@ -310,7 +317,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 *
 //	 * This method will throw an exception if:
 //	 *
-//	 * - self::$resetInProgress is false (to allow all services to be reset together
+//	 * - resetInProgress is false (to allow all services to be reset together
 //	 *   via resetGlobalInstance)
 //	 * - and MEDIAWIKI_INSTALL is not defined (to allow services to be reset during installation)
 //	 * - and MW_PHPUNIT_TEST is not defined (to allow services to be reset during testing)
@@ -320,7 +327,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * defined here in the MediaWikiServices services class to have a central place
 //	 * for managing service bootstrapping and resetting.
 //	 *
-//	 * @param string $method the name of the caller method, as given by __METHOD__.
+//	 * @param string method the name of the caller method, as given by __METHOD__.
 //	 *
 //	 * @throws MWException if called outside bootstrap mode.
 //	 *
@@ -328,30 +335,30 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @see forceGlobalInstance()
 //	 * @see disableStorageBackend()
 //	 */
-//	public static function failIfResetNotAllowed( $method ) {
-//		if ( !defined( 'MW_PHPUNIT_TEST' )
-//			&& !defined( 'MW_PARSER_TEST' )
-//			&& !defined( 'MEDIAWIKI_INSTALL' )
-//			&& !defined( 'RUN_MAINTENANCE_IF_MAIN' )
-//			&& defined( 'MW_SERVICE_BOOTSTRAP_COMPLETE' )
+//	public static function failIfResetNotAllowed(method) {
+//		if (!defined("MW_PHPUNIT_TEST")
+//			&& !defined("MW_PARSER_TEST")
+//			&& !defined("MEDIAWIKI_INSTALL")
+//			&& !defined("RUN_MAINTENANCE_IF_MAIN")
+//			&& defined("MW_SERVICE_BOOTSTRAP_COMPLETE")
 //		) {
-//			throw new MWException( $method . ' may only be called during bootstrapping and unit tests!' );
+//			throw new MWException(method . " may only be called during bootstrapping and unit tests!");
 //		}
 //	}
 //
-//	/**
-//	 * @param Config $config The Config object to be registered as the 'BootstrapConfig' service.
-//	 *        This has to contain at least the information needed to set up the 'ConfigFactory'
-//	 *        service.
-//	 */
-//	public function __construct( Config $config ) {
-//		parent::__construct();
-//
+	/**
+	 * @param Config config The Config object to be registered as the "BootstrapConfig" service.
+	 *        This has to contain at least the information needed to set up the "ConfigFactory"
+	 *        service.
+	 */
+	public XomwMediaWikiServices(XomwConfig config) {
+		super();
+
 //		// Register the given Config object as the bootstrap config service.
-//		this.defineService( 'BootstrapConfig', function () use ( $config ) {
-//			return $config;
-//		} );
-//	}
+//		this.defineService("BootstrapConfig", function () use (config) {
+//			return config;
+//		});
+	}
 //
 //	// CONVENIENCE GETTERS ////////////////////////////////////////////////////
 //
@@ -360,7 +367,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return ActorMigration
 //	 */
 //	public function getActorMigration() {
-//		return this.getService( 'ActorMigration' );
+//		return this.getService("ActorMigration");
 //	}
 //
 //	/**
@@ -368,7 +375,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return BlobStore
 //	 */
 //	public function getBlobStore() {
-//		return this.getService( '_SqlBlobStore' );
+//		return this.getService("_SqlBlobStore");
 //	}
 //
 //	/**
@@ -376,7 +383,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return BlobStoreFactory
 //	 */
 //	public function getBlobStoreFactory() {
-//		return this.getService( 'BlobStoreFactory' );
+//		return this.getService("BlobStoreFactory");
 //	}
 //
 //	/**
@@ -384,7 +391,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return BlockRestrictionStore
 //	 */
 //	public function getBlockRestrictionStore() : BlockRestrictionStore {
-//		return this.getService( 'BlockRestrictionStore' );
+//		return this.getService("BlockRestrictionStore");
 //	}
 //
 //	/**
@@ -401,7 +408,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return Config
 //	 */
 //	public function getBootstrapConfig() {
-//		return this.getService( 'BootstrapConfig' );
+//		return this.getService("BootstrapConfig");
 //	}
 //
 //	/**
@@ -409,7 +416,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return NameTableStore
 //	 */
 //	public function getChangeTagDefStore() {
-//		return this.getService( 'NameTableStoreFactory' )->getChangeTagDef();
+//		return this.getService("NameTableStoreFactory").getChangeTagDef();
 //	}
 //
 //	/**
@@ -417,7 +424,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return CommentStore
 //	 */
 //	public function getCommentStore() {
-//		return this.getService( 'CommentStore' );
+//		return this.getService("CommentStore");
 //	}
 //
 //	/**
@@ -425,7 +432,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return ConfigFactory
 //	 */
 //	public function getConfigFactory() {
-//		return this.getService( 'ConfigFactory' );
+//		return this.getService("ConfigFactory");
 //	}
 //
 //	/**
@@ -433,7 +440,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return ConfigRepository
 //	 */
 //	public function getConfigRepository() {
-//		return this.getService( 'ConfigRepository' );
+//		return this.getService("ConfigRepository");
 //	}
 //
 //	/**
@@ -441,7 +448,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \ConfiguredReadOnlyMode
 //	 */
 //	public function getConfiguredReadOnlyMode() {
-//		return this.getService( 'ConfiguredReadOnlyMode' );
+//		return this.getService("ConfiguredReadOnlyMode");
 //	}
 //
 //	/**
@@ -449,7 +456,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \Language
 //	 */
 //	public function getContentLanguage() {
-//		return this.getService( 'ContentLanguage' );
+//		return this.getService("ContentLanguage");
 //	}
 //
 //	/**
@@ -457,7 +464,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return NameTableStore
 //	 */
 //	public function getContentModelStore() {
-//		return this.getService( 'NameTableStoreFactory' )->getContentModels();
+//		return this.getService("NameTableStoreFactory").getContentModels();
 //	}
 //
 //	/**
@@ -465,7 +472,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return CryptHKDF
 //	 */
 //	public function getCryptHKDF() {
-//		return this.getService( 'CryptHKDF' );
+//		return this.getService("CryptHKDF");
 //	}
 //
 //	/**
@@ -474,8 +481,8 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return CryptRand
 //	 */
 //	public function getCryptRand() {
-//		wfDeprecated( __METHOD__, '1.32' );
-//		return this.getService( 'CryptRand' );
+//		wfDeprecated(__METHOD__, "1.32");
+//		return this.getService("CryptRand");
 //	}
 //
 //	/**
@@ -483,7 +490,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return LoadBalancer The main DB load balancer for the local wiki.
 //	 */
 //	public function getDBLoadBalancer() {
-//		return this.getService( 'DBLoadBalancer' );
+//		return this.getService("DBLoadBalancer");
 //	}
 //
 //	/**
@@ -491,7 +498,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return LBFactory
 //	 */
 //	public function getDBLoadBalancerFactory() {
-//		return this.getService( 'DBLoadBalancerFactory' );
+//		return this.getService("DBLoadBalancerFactory");
 //	}
 //
 //	/**
@@ -499,7 +506,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return EventRelayerGroup
 //	 */
 //	public function getEventRelayerGroup() {
-//		return this.getService( 'EventRelayerGroup' );
+//		return this.getService("EventRelayerGroup");
 //	}
 //
 //	/**
@@ -507,7 +514,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \ExternalStoreFactory
 //	 */
 //	public function getExternalStoreFactory() {
-//		return this.getService( 'ExternalStoreFactory' );
+//		return this.getService("ExternalStoreFactory");
 //	}
 //
 //	/**
@@ -515,7 +522,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return GenderCache
 //	 */
 //	public function getGenderCache() {
-//		return this.getService( 'GenderCache' );
+//		return this.getService("GenderCache");
 //	}
 //
 //	/**
@@ -523,7 +530,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return HttpRequestFactory
 //	 */
 //	public function getHttpRequestFactory() {
-//		return this.getService( 'HttpRequestFactory' );
+//		return this.getService("HttpRequestFactory");
 //	}
 
 	/**
@@ -531,7 +538,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 	 * @return InterwikiLookup
 	 */
 	public XomwInterwikiLookup getInterwikiLookup() {
-//		return this.getService( 'InterwikiLookup' );
+//		return this.getService("InterwikiLookup");
 		return interwikiLookup;
 	}
 
@@ -540,7 +547,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return LinkCache
 //	 */
 //	public function getLinkCache() {
-//		return this.getService( 'LinkCache' );
+//		return this.getService("LinkCache");
 //	}
 //
 //	/**
@@ -551,7 +558,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return LinkRenderer
 //	 */
 //	public function getLinkRenderer() {
-//		return this.getService( 'LinkRenderer' );
+//		return this.getService("LinkRenderer");
 //	}
 //
 //	/**
@@ -559,7 +566,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return LinkRendererFactory
 //	 */
 //	public function getLinkRendererFactory() {
-//		return this.getService( 'LinkRendererFactory' );
+//		return this.getService("LinkRendererFactory");
 //	}
 //
 //	/**
@@ -567,7 +574,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \BagOStuff
 //	 */
 //	public function getLocalServerObjectCache() {
-//		return this.getService( 'LocalServerObjectCache' );
+//		return this.getService("LocalServerObjectCache");
 //	}
 //
 //	/**
@@ -575,7 +582,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return MagicWordFactory
 //	 */
 //	public function getMagicWordFactory() {
-//		return this.getService( 'MagicWordFactory' );
+//		return this.getService("MagicWordFactory");
 //	}
 //
 //	/**
@@ -586,7 +593,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return Config
 //	 */
 //	public function getMainConfig() {
-//		return this.getService( 'MainConfig' );
+//		return this.getService("MainConfig");
 //	}
 //
 //	/**
@@ -594,7 +601,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \BagOStuff
 //	 */
 //	public function getMainObjectStash() {
-//		return this.getService( 'MainObjectStash' );
+//		return this.getService("MainObjectStash");
 //	}
 //
 //	/**
@@ -602,7 +609,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \WANObjectCache
 //	 */
 //	public function getMainWANObjectCache() {
-//		return this.getService( 'MainWANObjectCache' );
+//		return this.getService("MainWANObjectCache");
 //	}
 //
 //	/**
@@ -610,7 +617,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return MediaHandlerFactory
 //	 */
 //	public function getMediaHandlerFactory() {
-//		return this.getService( 'MediaHandlerFactory' );
+//		return this.getService("MediaHandlerFactory");
 //	}
 //
 //	/**
@@ -618,7 +625,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return MimeAnalyzer
 //	 */
 //	public function getMimeAnalyzer() {
-//		return this.getService( 'MimeAnalyzer' );
+//		return this.getService("MimeAnalyzer");
 //	}
 //
 //	/**
@@ -626,14 +633,14 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return NameTableStoreFactory
 //	 */
 //	public function getNameTableStoreFactory() {
-//		return this.getService( 'NameTableStoreFactory' );
+//		return this.getService("NameTableStoreFactory");
 //	}
 //
 //	/**
 //	 * @return OldRevisionImporter
 //	 */
 //	public function getOldRevisionImporter() {
-//		return this.getService( 'OldRevisionImporter' );
+//		return this.getService("OldRevisionImporter");
 //	}
 //
 //	/**
@@ -641,7 +648,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return Parser
 //	 */
 //	public function getParser() {
-//		return this.getService( 'Parser' );
+//		return this.getService("Parser");
 //	}
 //
 //	/**
@@ -649,7 +656,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return ParserCache
 //	 */
 //	public function getParserCache() {
-//		return this.getService( 'ParserCache' );
+//		return this.getService("ParserCache");
 //	}
 //
 //	/**
@@ -657,7 +664,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return ParserFactory
 //	 */
 //	public function getParserFactory() {
-//		return this.getService( 'ParserFactory' );
+//		return this.getService("ParserFactory");
 //	}
 //
 //	/**
@@ -665,7 +672,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return PasswordFactory
 //	 */
 //	public function getPasswordFactory() {
-//		return this.getService( 'PasswordFactory' );
+//		return this.getService("PasswordFactory");
 //	}
 //
 //	/**
@@ -673,7 +680,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return StatsdDataFactoryInterface
 //	 */
 //	public function getPerDbNameStatsdDataFactory() {
-//		return this.getService( 'PerDbNameStatsdDataFactory' );
+//		return this.getService("PerDbNameStatsdDataFactory");
 //	}
 //
 //	/**
@@ -681,7 +688,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return PermissionManager
 //	 */
 //	public function getPermissionManager() {
-//		return this.getService( 'PermissionManager' );
+//		return this.getService("PermissionManager");
 //	}
 //
 //	/**
@@ -689,7 +696,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return PreferencesFactory
 //	 */
 //	public function getPreferencesFactory() {
-//		return this.getService( 'PreferencesFactory' );
+//		return this.getService("PreferencesFactory");
 //	}
 //
 //	/**
@@ -697,7 +704,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return ProxyLookup
 //	 */
 //	public function getProxyLookup() {
-//		return this.getService( 'ProxyLookup' );
+//		return this.getService("ProxyLookup");
 //	}
 //
 //	/**
@@ -705,7 +712,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \ReadOnlyMode
 //	 */
 //	public function getReadOnlyMode() {
-//		return this.getService( 'ReadOnlyMode' );
+//		return this.getService("ReadOnlyMode");
 //	}
 //
 //	/**
@@ -713,7 +720,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return ResourceLoader
 //	 */
 //	public function getResourceLoader() {
-//		return this.getService( 'ResourceLoader' );
+//		return this.getService("ResourceLoader");
 //	}
 //
 //	/**
@@ -721,7 +728,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return RevisionFactory
 //	 */
 //	public function getRevisionFactory() {
-//		return this.getService( 'RevisionFactory' );
+//		return this.getService("RevisionFactory");
 //	}
 //
 //	/**
@@ -729,7 +736,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return RevisionLookup
 //	 */
 //	public function getRevisionLookup() {
-//		return this.getService( 'RevisionLookup' );
+//		return this.getService("RevisionLookup");
 //	}
 //
 //	/**
@@ -737,7 +744,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return RevisionRenderer
 //	 */
 //	public function getRevisionRenderer() {
-//		return this.getService( 'RevisionRenderer' );
+//		return this.getService("RevisionRenderer");
 //	}
 //
 //	/**
@@ -745,7 +752,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return RevisionStore
 //	 */
 //	public function getRevisionStore() {
-//		return this.getService( 'RevisionStore' );
+//		return this.getService("RevisionStore");
 //	}
 //
 //	/**
@@ -753,7 +760,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return RevisionStoreFactory
 //	 */
 //	public function getRevisionStoreFactory() {
-//		return this.getService( 'RevisionStoreFactory' );
+//		return this.getService("RevisionStoreFactory");
 //	}
 //
 //	/**
@@ -762,7 +769,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 */
 //	public function newSearchEngine() {
 //		// New engine object every time, since they keep state
-//		return this.getService( 'SearchEngineFactory' )->create();
+//		return this.getService("SearchEngineFactory").create();
 //	}
 //
 //	/**
@@ -770,7 +777,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return SearchEngineConfig
 //	 */
 //	public function getSearchEngineConfig() {
-//		return this.getService( 'SearchEngineConfig' );
+//		return this.getService("SearchEngineConfig");
 //	}
 //
 //	/**
@@ -778,7 +785,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return SearchEngineFactory
 //	 */
 //	public function getSearchEngineFactory() {
-//		return this.getService( 'SearchEngineFactory' );
+//		return this.getService("SearchEngineFactory");
 //	}
 //
 //	/**
@@ -786,7 +793,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return CommandFactory
 //	 */
 //	public function getShellCommandFactory() {
-//		return this.getService( 'ShellCommandFactory' );
+//		return this.getService("ShellCommandFactory");
 //	}
 //
 //	/**
@@ -794,7 +801,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return SiteLookup
 //	 */
 //	public function getSiteLookup() {
-//		return this.getService( 'SiteLookup' );
+//		return this.getService("SiteLookup");
 //	}
 //
 //	/**
@@ -802,7 +809,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return SiteStore
 //	 */
 //	public function getSiteStore() {
-//		return this.getService( 'SiteStore' );
+//		return this.getService("SiteStore");
 //	}
 //
 //	/**
@@ -810,7 +817,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return SkinFactory
 //	 */
 //	public function getSkinFactory() {
-//		return this.getService( 'SkinFactory' );
+//		return this.getService("SkinFactory");
 //	}
 //
 //	/**
@@ -818,7 +825,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return SlotRoleRegistry
 //	 */
 //	public function getSlotRoleRegistry() {
-//		return this.getService( 'SlotRoleRegistry' );
+//		return this.getService("SlotRoleRegistry");
 //	}
 //
 //	/**
@@ -826,7 +833,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return NameTableStore
 //	 */
 //	public function getSlotRoleStore() {
-//		return this.getService( 'NameTableStoreFactory' )->getSlotRoles();
+//		return this.getService("NameTableStoreFactory").getSlotRoles();
 //	}
 //
 //	/**
@@ -834,7 +841,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return SpecialPageFactory
 //	 */
 //	public function getSpecialPageFactory() : SpecialPageFactory {
-//		return this.getService( 'SpecialPageFactory' );
+//		return this.getService("SpecialPageFactory");
 //	}
 //
 //	/**
@@ -842,7 +849,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return IBufferingStatsdDataFactory
 //	 */
 //	public function getStatsdDataFactory() {
-//		return this.getService( 'StatsdDataFactory' );
+//		return this.getService("StatsdDataFactory");
 //	}
 
 	/**
@@ -850,7 +857,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 	 * @return TitleFormatter
 	 */
 //	public XomwTitleFormatter getTitleFormatter() {
-//		return this.getService( 'TitleFormatter' );
+//		return this.getService("TitleFormatter");
 	public XomwMediaWikiTitleCodec getTitleFormatter() {
 		return titleParser;
 	}
@@ -860,7 +867,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 	 * @return TitleParser
 	 */
 //	public XomwTitleParser getTitleParser() {
-//		return this.getService( 'TitleParser' );
+//		return this.getService("TitleParser");
 	public XomwMediaWikiTitleCodec getTitleParser() {
 		return titleParser;
 	}
@@ -870,7 +877,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return UploadRevisionImporter
 //	 */
 //	public function getUploadRevisionImporter() {
-//		return this.getService( 'UploadRevisionImporter' );
+//		return this.getService("UploadRevisionImporter");
 //	}
 //
 //	/**
@@ -878,7 +885,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return VirtualRESTServiceClient
 //	 */
 //	public function getVirtualRESTServiceClient() {
-//		return this.getService( 'VirtualRESTServiceClient' );
+//		return this.getService("VirtualRESTServiceClient");
 //	}
 //
 //	/**
@@ -886,7 +893,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return WatchedItemQueryService
 //	 */
 //	public function getWatchedItemQueryService() {
-//		return this.getService( 'WatchedItemQueryService' );
+//		return this.getService("WatchedItemQueryService");
 //	}
 //
 //	/**
@@ -894,7 +901,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return WatchedItemStoreInterface
 //	 */
 //	public function getWatchedItemStore() {
-//		return this.getService( 'WatchedItemStore' );
+//		return this.getService("WatchedItemStore");
 //	}
 //
 //	/**
@@ -902,7 +909,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \OldRevisionImporter
 //	 */
 //	public function getWikiRevisionOldRevisionImporter() {
-//		return this.getService( 'OldRevisionImporter' );
+//		return this.getService("OldRevisionImporter");
 //	}
 //
 //	/**
@@ -910,7 +917,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \OldRevisionImporter
 //	 */
 //	public function getWikiRevisionOldRevisionImporterNoUpdates() {
-//		return this.getService( 'WikiRevisionOldRevisionImporterNoUpdates' );
+//		return this.getService("WikiRevisionOldRevisionImporterNoUpdates");
 //	}
 //
 //	/**
@@ -918,7 +925,7 @@ public class XomwMediaWikiServices { // extends ServiceContainer
 //	 * @return \UploadRevisionImporter
 //	 */
 //	public function getWikiRevisionUploadImporter() {
-//		return this.getService( 'UploadRevisionImporter' );
+//		return this.getService("UploadRevisionImporter");
 //	}
 
 }

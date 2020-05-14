@@ -1,0 +1,68 @@
+change XophpCallbackOwner from Object... to Object
+add XomwHookMsg / XomwHookWkr
+convert Database classes: https://github.com/wikimedia/mediawiki/tree/master/includes/libs/rdbms/database
+convert Loadbalances classes
+
+## XomwHookMsg / XomwHookWkr:
+strongly-typed hook b/c run can pass variables by reference and contract should be enforced
+
+// cur
+ObjectWrapperRef pageWrapper = new ObjectWrapperRef();
+if (!XomwHooks.run("WikiPageFactory", XophpArray.New(title, pageWrapper))) {
+    return (XomwWikiPage)pageWrapper.Val();
+}
+else {
+    page = (XomwWikiPage)pageWrapper.Val();
+}
+
+// new XO way
+WikiPageFactoryHookMsg msg = new WikiPageFactoryHookMsg(title);
+if (!XomwHooks.run(msg) {
+    return msg.Page();
+}
+else {
+    page = msg.Page();
+}
+
+interface XomwHookMsg {
+    String Key();
+    XophpArray Array();
+    String Deprecation();
+}
+class WikiPageFactoryHookMsg implements XomwHookMsg {
+    String Key() {return WikiPageFactoryHookWkr.KEY;}
+    public XophpArray Array();
+    String Deprecation();
+
+    public WikiPageFactoryHookMsg(XomwTitle title) {
+    }
+    public XomwTitle Title();
+    public XomwPage Page();
+}
+
+interface XomwHookMsg extends CallbackOwner {
+    String Key();
+}
+class WikiPageFactoryHookWkr implements XomwHookWkr {
+    public WikiPageFactoryHookData() {}
+    String Key() {return "WikiPageFactory";}
+
+    public Object Call(Object arg) {
+        XomwPageFactoryHookMsg msg = (XomwPageFactoryHookMsg)arg;
+        // do stuff
+        msg.Page = "value";
+        return true;
+    }
+}
+
+public static boolean run(XomwHookMsg msg) {
+    return run(msg.Key(), msg.Array(), msg.Deprecation());
+}
+public static void register(XomwHookWkr wkr) {
+    handlers.Xet_by_ary(wkr.Name()).Add(wkr);
+}
+
+// new WM way
+interface WikiPageFactoryHook {
+    bool onWikiPageFactory(title, page)
+}

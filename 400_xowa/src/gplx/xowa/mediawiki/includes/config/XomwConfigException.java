@@ -15,29 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.config;
 
+import gplx.xowa.mediawiki.XophpException;
+
 // MW.SRC:1.33.1
 /**
- * Interface for configuration instances
+ * Accesses configuration settings from GLOBALS
  *
  * @since 1.23
  */
-public interface XomwConfig {
-
-    /**
-     * Get a configuration variable such as "Sitename" or "UploadMaintenance."
-     *
-     * @param string $name Name of configuration option
-     * @return mixed Value configured
-     * @throws ConfigException
-     */
-    public Object get(String name);
-
-    /**
-     * Check whether a configuration option is set for the given name
-     *
-     * @param string $name Name of configuration option
-     * @return bool
-     * @since 1.24
-     */
-    public boolean has(String name);
+public class XomwConfigException extends XophpException {
+    public XomwConfigException(String message) {super(message, 0, null);}
 }
