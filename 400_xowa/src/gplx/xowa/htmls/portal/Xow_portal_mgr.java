@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,16 +13,43 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.brys.fmts.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.guis.*; import gplx.xowa.addons.htmls.sidebars.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.domains.*; 
-import gplx.xowa.htmls.core.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.apps.apis.xowa.html.*;
-import gplx.xowa.langs.vnts.*; import gplx.xowa.htmls.portal.vnts.*;
-import gplx.xowa.parsers.amps.*;
+package gplx.xowa.htmls.portal;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.core.brys.Bfr_arg;
+import gplx.core.brys.Bry_bfr_mkr;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.brys.fmtrs.Bry_fmtr_eval_mgr;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.xowa.Xoa_page;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url_;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.htmls.sidebars.Xoh_sidebar_mgr;
+import gplx.xowa.apps.apis.xowa.html.Xoapi_toggle_itm;
+import gplx.xowa.htmls.hrefs.Xoh_href_;
+import gplx.xowa.htmls.hrefs.Xoh_href_wtr;
+import gplx.xowa.htmls.portal.vnts.Vnt_mnu_grp_fmtr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.msgs.Xow_msg_mgr;
+import gplx.xowa.langs.vnts.Xol_vnt_mgr;
+import gplx.xowa.wikis.domains.Xow_domain_tid;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
 public class Xow_portal_mgr implements Gfo_invk {
 	private Xowe_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
 	private final    Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
@@ -210,13 +237,10 @@ public class Xow_portal_mgr implements Gfo_invk {
 	public Bry_fmtr Div_view_fmtr() {return div_view_fmtr;} // TEST:
 	public Bry_fmtr Div_ns_fmtr() {return div_ns_fmtr;} // TEST:
 	public Bry_fmtr Div_personal_fmtr() {return div_personal_fmtr;} // TEST:
-	private byte[] Reverse_li(byte[] bry) {
-		return lang_is_rtl ? Xoh_rtl_utl.Reverse_li(bry) : bry;
-	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_div_personal_))					div_personal_fmtr.Fmt_(m.ReadBry("v"));
-		else if	(ctx.Match(k, Invk_div_ns_))						div_ns_fmtr.Fmt_(Reverse_li(m.ReadBry("v")));
-		else if	(ctx.Match(k, Invk_div_view_))						div_view_fmtr.Fmt_(Reverse_li(m.ReadBry("v")));
+		else if	(ctx.Match(k, Invk_div_ns_))						div_ns_fmtr.Fmt_(m.ReadBry("v"));
+		else if	(ctx.Match(k, Invk_div_view_))						div_view_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_div_logo_))						div_logo_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_div_home_))						div_home_fmtr.Fmt_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_div_sync_))						div_sync_fmtr.Fmt_(m.ReadBry("v"));
