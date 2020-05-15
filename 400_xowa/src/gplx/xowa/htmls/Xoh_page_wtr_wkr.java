@@ -138,7 +138,8 @@ public class Xoh_page_wtr_wkr {
 		fmtr.Bld_bfr_many(bfr
 		, root_dir_bry, Xoa_app_.Version, Xoa_app_.Build_date, app.Tcp_server().Running_str()
 		, page.Db().Page().Id(), page.Ttl().Full_db()
-		, pagename_for_tab, page.Html_data().Page_heading().Init(wiki, html_gen_tid == Xopg_view_mode_.Tid__read, page.Html_data(), page.Ttl().Full_db(), pagename_for_h1)
+		, pagename_for_tab
+		, page.Html_data().Page_heading().Init(wiki, html_gen_tid == Xopg_view_mode_.Tid__read, page.Html_data(), page.Ttl().Full_db(), pagename_for_h1, page.Lang().Key_bry())
 		, modified_on_msg
 		, mgr.Css_common_bry(), mgr.Css_wiki_bry()
 		, mgr.Css_night_bry(nightmode_enabled)
