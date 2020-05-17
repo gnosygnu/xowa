@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,12 +13,36 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.core.ios.*;
-import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.htmls.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
+package gplx.xowa.htmls.core;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.GfsCtx;
+import gplx.Hash_adp_bry;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.core.ios.Io_stream_zip_mgr;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.htmls.Xoh_img_mgr;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_mgr;
+import gplx.xowa.htmls.core.makes.Xoh_make_mgr;
+import gplx.xowa.htmls.heads.Xoh_head_mgr;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.pages.Xopg_module_mgr;
+import gplx.xowa.wikis.pages.htmls.Xopg_html_data;
+import gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list;
+import gplx.xowa.wikis.pages.skins.Xopg_xtn_skin_itm_stub;
+
 public class Xow_hdump_mgr__load implements Gfo_invk {
 	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
 	private final    Xoh_page tmp_hpg; private final    Bry_bfr tmp_bfr; private final    Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
@@ -37,9 +61,9 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		wiki.Hxtn_mgr().Init_by_wiki(wiki, Bool_.N);
 		make_mgr.Init_by_wiki(wiki);
 	}
-	public void Load_by_xowe(Xoae_page wpg) {
+	public void Load_by_xowe(Xoae_page wpg, boolean load_ctg) {
 		tmp_hpg.Ctor_by_hview(wpg.Wiki(), wpg.Url(), wpg.Ttl(), wpg.Db().Page().Id());
-		Load_by_xowh(tmp_hpg, wpg.Ttl(), Bool_.Y);
+		Load_by_xowh(tmp_hpg, wpg.Ttl(), load_ctg);
 		wpg.Db().Html().Html_bry_(tmp_hpg.Db().Html().Html_bry());
 		wpg.Root_(new gplx.xowa.parsers.Xop_root_tkn());	// HACK: set root, else load page will fail
 		Fill_page(wpg, tmp_hpg);
@@ -65,12 +89,9 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 
 			// write ctgs
 			if (load_ctg) {
-				Xoctg_pagebox_itm[] pagebox_itms = wiki.Ctg__pagebox_wtr().Get_catlinks_by_page(wiki, hpg);
-				if (pagebox_itms.length > 0) {
-					tmp_bfr.Add(src);					
-					wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, wiki, hpg, pagebox_itms);
-					src = tmp_bfr.To_bry_and_clear();
-				}
+				tmp_bfr.Add(src);
+				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, hpg);
+				src = tmp_bfr.To_bry_and_clear();
 			}
 
 			hpg.Db().Html().Html_bry_(src);

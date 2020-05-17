@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,20 +13,37 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.net.qargs.*;
-import gplx.xowa.guis.views.*;
-import gplx.xowa.addons.wikis.pages.syncs.core.*;
-import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.wikis.pages;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.core.net.qargs.Gfo_qarg_itm;
+import gplx.core.net.qargs.Gfo_qarg_mgr;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoa_url_;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.Xowe_wiki_;
+import gplx.xowa.addons.wikis.pages.syncs.core.Xosync_read_mgr;
+import gplx.xowa.guis.views.Xog_tab_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+
 public class Xowe_page_mgr {
-	private final    Xowe_wiki wiki;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Gfo_qarg_mgr tmp_qarg_mgr = new Gfo_qarg_mgr();
+	private final Xowe_wiki wiki;
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Gfo_qarg_mgr tmp_qarg_mgr = new Gfo_qarg_mgr();
 	public Xowe_page_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
-	public Xosync_read_mgr Sync_mgr() {return read_mgr;} private final    Xosync_read_mgr read_mgr = new Xosync_read_mgr();
+	public Xosync_read_mgr Sync_mgr() {return read_mgr;} private final Xosync_read_mgr read_mgr = new Xosync_read_mgr();
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		read_mgr.Init_by_wiki(wiki);
 	}
+
 	public Xoae_page Load_page(Xoa_url url, Xoa_ttl ttl, Xog_tab_itm tab) {	// NOTE: called by GUI and HTTP_SERVER; not called by MASS_PARSE
 		Xoa_app_.Usr_dlg().Log_many("", "", "page.load: url=~{0}", url.To_str());			
 		Wait_for_popups(wiki.App());
@@ -75,9 +92,10 @@ public class Xowe_page_mgr {
 		// load from html_db
 		boolean from_html_db = page.Db().Page().Html_db_id() != -1;
 		boolean read_from_html_db_preferred = wiki.Html__hdump_mgr().Load_mgr().Read_preferred();
+		boolean isCategoryPage = ttl.Ns().Id_is_ctg();
 		if (from_html_db) {
 			if (read_from_html_db_preferred) {
-				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page);
+				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page, !isCategoryPage); // NOTE: if loading for html_db, do not build page_box; will be built below; ISSUE#:722; DATE:2020-05-17
 				int html_len = Bry_.Len(page.Db().Html().Html_bry());
 				from_html_db = html_len > 0;	// NOTE: archive.org has some wtxt_dbs which included page|html_db_id without actual html_dbs; DATE:2016-06-22
 				Gfo_usr_dlg_.Instance.Log_many("", "", "page_load: loaded html; page=~{0} html_len=~{1}", ttl.Full_db(), html_len);
@@ -95,7 +113,7 @@ public class Xowe_page_mgr {
 				&&	!ttl.Ns().Id_is_special()								// skip special
 				&&	!read_from_html_db_preferred							// read preferred not marked
 				) {
-				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page);
+				wiki.Html__hdump_mgr().Load_mgr().Load_by_xowe(page, true);
 				from_html_db = Bry_.Len_gt_0(page.Db().Html().Html_bry());	
 			}
 			else {
@@ -105,12 +123,15 @@ public class Xowe_page_mgr {
 		page.Html_data().Hdump_exists_(from_html_db);
 
 		// if [[Category]], generate catlinks (subc; page; file)
-		if (ttl.Ns().Id_is_ctg()) {
+		if (isCategoryPage) {
 			wiki.Ctg__catpage_mgr().Write_catpage(tmp_bfr, page);
-			if (from_html_db)
+			if (from_html_db) {
+				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, page);
 				page.Db().Html().Html_bry_(Bry_.Add(page.Db().Html().Html_bry(), tmp_bfr.To_bry_and_clear()));
-			else
+			}
+			else {
 				page.Html_data().Catpage_data_(tmp_bfr.To_bry_and_clear());
+			}
 		}
 
 		return page;

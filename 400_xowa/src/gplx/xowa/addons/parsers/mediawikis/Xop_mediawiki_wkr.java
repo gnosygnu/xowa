@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,13 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
-import gplx.xowa.wikis.*; import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.wikis.caches.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
+package gplx.xowa.addons.parsers.mediawikis;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.String_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_itm;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xow_parser_mgr;
+import gplx.xowa.wikis.Xow_page_tid;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
+
 public class Xop_mediawiki_wkr {
-	private final    Xowe_wiki wiki;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xowe_wiki wiki;
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xop_mediawiki_wkr(Xowe_wiki wiki, Xop_mediawiki_loader loader) {
 		this.wiki = wiki;
 		if (loader != null)
@@ -59,7 +71,7 @@ public class Xop_mediawiki_wkr {
 				for (int i = 0; i < ctgs_len; i++) {
 					pagebox_itms[i] = new Xoctg_pagebox_itm(wpg.Wtxt().Ctgs__get_at(i));
 				}
-				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, wiki, wpg, pagebox_itms);
+				wiki.Ctg__pagebox_wtr().Write_pagebox(tmp_bfr, wpg, pagebox_itms);
 			}
 
 			orig_bry = tmp_bfr.To_bry_and_clear();

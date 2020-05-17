@@ -255,8 +255,7 @@ public class Xoh_page_wtr_wkr {
 			&&	!hctx.Mode_is_hdump()				// do not dump categories during hdump; DATE:2016-10-12
 			) {
 			if (app.Mode().Tid_is_gui()) app.Usr_dlg().Prog_many("", "", "loading categories: count=~{0}", ctgs_len);
-			Xoctg_pagebox_itm[] pagebox_itms = wiki.Ctg__pagebox_wtr().Get_catlinks_by_page(wiki, page);
-			wiki.Ctg__pagebox_wtr().Write_pagebox(bfr, wiki, page, pagebox_itms);
+			wiki.Ctg__pagebox_wtr().Write_pagebox(bfr, page);
 		}
 
 		// translate if variants are enabled
