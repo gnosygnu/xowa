@@ -150,7 +150,7 @@ public class Scrib_lib_ustring__gsub__tst {
 		String regx = "()([1d])([2e])([3f])"; // "()" is anypos, which inserts find_pos to results
 		Mock_proc__verify_args proc = new Mock_proc__verify_args(0
 			, new Object[]{"B", 2, "d", "2", "f"}		// NOTE: changed from 1 to 2 b/c of base-1 issues;ISSUE#:726; DATE:2020-05-17;
-			, new Object[]{"Y", 4, "1", "e", "3"});     // NOTE: changed from 4 to 5 b/c of base-1 issues;ISSUE#:726; DATE:2020-05-17;
+			, new Object[]{"Y", 5, "1", "e", "3"});     // NOTE: changed from 4 to 5 b/c of base-1 issues;ISSUE#:726; DATE:2020-05-17;
 		fxt.Init__cbk(proc);
 		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), "aBYz;2");
 	}
