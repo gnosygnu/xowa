@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,16 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.langs.regxs.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;	
+package gplx.xowa.xtns.scribunto.libs;
+
+import gplx.Array_;
+import gplx.Bool_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.tests.Gftest;
+import gplx.langs.regxs.Regx_adp_;
+import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.engines.mocks.Mock_proc_stub;
+import gplx.xowa.xtns.scribunto.engines.mocks.Mock_scrib_fxt;
+import org.junit.Before;
+import org.junit.Test;
 public class Scrib_lib_ustring__gsub__tst {
-	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
+	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
 		fxt.Clear();
 		lib = fxt.Core().Lib_ustring().Init();
 	}
-	@Test  public void Replace__basic() {
+	@Test public void Replace__basic() {
 		Exec_gsub("abcd", "[a]"			, -1, "A"		, "Abcd;1");
 		Exec_gsub("aaaa", "[a]"			, 2, "A"		, "AAaa;2");
 		Exec_gsub("a"	, "(a)"			, 1, "%%%1"		, "%a;1");
@@ -31,38 +49,38 @@ public class Scrib_lib_ustring__gsub__tst {
 		// TOMBSTONE: tested with local MW and {{#invoke:Test|test16|a|[^]|b}} -> Lua error: Missing close-bracket for character set beginning at pattern character 1.; DATE:2018-07-02
 		// Exec_gsub("a"	, "[^]"			, 1, "b"		, "a;0");		// invalid regx should not fail; should return self; DATE:2013-10-20
 	}
-	@Test  public void Find__int() {// PURPOSE: gsub with integer arg should not fail; DATE:2013-11-06
+	@Test public void Find__int() {// PURPOSE: gsub with integer arg should not fail; DATE:2013-11-06
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(1, "[1]", "2", 1), "2;1"); // NOTE: text is integer (lua / php are type-less)
 	}
-	@Test  public void Replace__none() {// PURPOSE: gsub with no replace argument should not fail; EX:d:'orse; DATE:2013-10-14
+	@Test public void Replace__none() {// PURPOSE: gsub with no replace argument should not fail; EX:d:'orse; DATE:2013-10-14
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_ustring.Invk_gsub, Object_.Ary("text", "regx")						, "text");	// NOTE: repl, limit deliberately omitted
 	}
-	@Test  public void Replace__int() {	// PURPOSE: do not fail if integer is passed in for @replace; PAGE:en.d:λύω DATE:2014-09-02
+	@Test public void Replace__int() {	// PURPOSE: do not fail if integer is passed in for @replace; PAGE:en.d:λύω DATE:2014-09-02
 		Exec_gsub("abcd", 1	 , -1, 1		, "abcd;0");
 	}
-	@Test  public void Replace__double() {	// PURPOSE: do not fail if double is passed in for @replace; PAGE:de.v:Wikivoyage:Wikidata/Test_Modul:Wikidata2 DATE:2016-04-21
+	@Test public void Replace__double() {	// PURPOSE: do not fail if double is passed in for @replace; PAGE:de.v:Wikivoyage:Wikidata/Test_Modul:Wikidata2 DATE:2016-04-21
 		Exec_gsub("abcd", 1	 , -1, 1.23d	, "abcd;0");
 	}
-	@Test  public void Replace__anypos() {	// PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
+	@Test public void Replace__anypos() {	// PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
 		Exec_gsub("'''a'''b", "()'''(.-'*)'''", 1, "z", "zb;1");
 	}
-	@Test  public void Replace__balanced_and_grouping() {	// PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
+	@Test public void Replace__balanced_and_grouping() {	// PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
 		Exec_gsub("[[b]]", "%[(%b[])%]"			, -1, "z"		, "z;1"); // NOTE: not "[z]"
 	}
-	@Test  public void Replace__initial() {	// PURPOSE:whitespace being replaced during gsub replacement; DATE:2019-04-21
+	@Test public void Replace__initial() {	// PURPOSE:whitespace being replaced during gsub replacement; DATE:2019-04-21
 		Exec_gsub("a b c", "^%s*", -1, "x", "xa b c;1"); // fails if xabxc
 	}
-	@Test  public void Replace__digit__superscript() {// PURPOSE: ¹ is not a \d; PAGE:en.w:Vilnius ISSUE#:617; DATE:2019-11-24;
+	@Test public void Replace__digit__superscript() {// PURPOSE: ¹ is not a \d; PAGE:en.w:Vilnius ISSUE#:617; DATE:2019-11-24;
 		Exec_gsub("1796¹", "([%d]+).*", 1, "%1", "1796;1");
 	}
-	@Test  public void Replace__table() {
+	@Test public void Replace__table() {
 		Exec_gsub("abcd", "[ac]"		, -1, Scrib_kv_utl_.flat_many_("a", "A", "c", "C")	, "AbCd;2");
 		Exec_gsub("abc" , "[ab]"		, -1, Scrib_kv_utl_.flat_many_("a", "A")			, "Abc;2");	// PURPOSE: match not in regex should still print itself; in this case [c] is not in tbl regex; DATE:2014-03-31
 	}
-	@Test  public void Replace__table__match() {// PURPOSE: replace using group, not found term; EX:"b" not "%b%" PAGE:en.w:Bannered_routes_of_U.S._Route_60; DATE:2014-08-15
+	@Test public void Replace__table__match() {// PURPOSE: replace using group, not found term; EX:"b" not "%b%" PAGE:en.w:Bannered_routes_of_U.S._Route_60; DATE:2014-08-15
 		Exec_gsub("a%b%c", "%%(%w+)%%"	, -1, Scrib_kv_utl_.flat_many_("b", "B")			, "aBc;1");
 	}
-	@Test  public void Replace__proc__recursive() {	// PURPOSE:handle recursive gsub calls; PAGE:en.d:כלב; DATE:2016-01-22
+	@Test public void Replace__proc__recursive() {	// PURPOSE:handle recursive gsub calls; PAGE:en.d:כלב; DATE:2016-01-22
 		Bry_bfr bfr = Bry_bfr_.New();
 		Mock_proc__recursive proc_lvl2 = new Mock_proc__recursive(fxt, lib, bfr, 2, null);
 		Mock_proc__recursive proc_lvl1 = new Mock_proc__recursive(fxt, lib, bfr, 1, proc_lvl2);
@@ -71,48 +89,48 @@ public class Scrib_lib_ustring__gsub__tst {
 		Exec_gsub("ab", ".", -1, proc_root.To_scrib_lua_proc(), "ab;2");	// fails if "ab;4"
 		Tfds.Eq_str("0;1;2;0;1;2;", bfr.To_str_and_clear());				// fails if "0;1;1;1"
 	}
-	@Test  public void Replace__proc__number() {	// PURPOSE:handle replace-as-number in gproc; PAGE:en.d:seven; DATE:2016-04-27
+	@Test public void Replace__proc__number() {	// PURPOSE:handle replace-as-number in gproc; PAGE:en.d:seven; DATE:2016-04-27
 		Mock_proc__number proc = new Mock_proc__number(0);
 		fxt.Init__cbk(proc);
 		Exec_gsub("ab", ".", -1, proc.To_scrib_lua_proc(), "12;2");	// fails if "ab;4"
 	}
-	@Test  public void Replace__proc__empty__once() {	// PURPOSE:if a proc returns null, do not replace anything; PAGE:en.d:tracer; DATE:2017-04-22
+	@Test public void Replace__proc__empty__once() {	// PURPOSE:if a proc returns null, do not replace anything; PAGE:en.d:tracer; DATE:2017-04-22
 		Mock_proc__empty proc = new Mock_proc__empty(0, "z", "Z");
 		fxt.Init__cbk(proc);
 		Exec_gsub("ab", ".", -1, proc.To_scrib_lua_proc(), "ab;2");	// fails if ";2" whic means each letter (".") replaced with null
 	}
-	@Test  public void Replace__proc__empty__many() {	// PURPOSE:replace all matches, not just first; PAGE:en.d:שלום; DATE:2017-04-24
+	@Test public void Replace__proc__empty__many() {	// PURPOSE:replace all matches, not just first; PAGE:en.d:שלום; DATE:2017-04-24
 		Mock_proc__empty proc = new Mock_proc__empty(0, "a", "A");
 		fxt.Init__cbk(proc);
 		Exec_gsub("aba", ".", -1, proc.To_scrib_lua_proc(), "AbA;3");	// fails if "Aba;3" whic means each that A was only matched once
 	}
-	@Test  public void Regx__int() {	// PURPOSE: do not fail if integer is passed in for @regx; PAGE:en.d:λύω DATE:2014-09-02
+	@Test public void Regx__int() {	// PURPOSE: do not fail if integer is passed in for @regx; PAGE:en.d:λύω DATE:2014-09-02
 		Exec_gsub("abcd", 1	 , -1, "A"		, "abcd;0");
 	}
-	@Test  public void Regx__dash() {	// PURPOSE: "-" at end of regx should be literal; EX:[A-]; PAGE:en.d:frei DATE:2016-01-23
+	@Test public void Regx__dash() {	// PURPOSE: "-" at end of regx should be literal; EX:[A-]; PAGE:en.d:frei DATE:2016-01-23
 		Exec_gsub("abc", "[a-]", -1, "d", "dbc;1");
 	}
-	@Test   public void Regx__word_class() {		// PURPOSE: handle %w in extended regex; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
+	@Test public void Regx__word_class() {		// PURPOSE: handle %w in extended regex; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
 		Exec_gsub("(a b)", "[^%w%p%s]", -1, "x", "(a b);0");	// was returning "(x x)" b/c ^%w was incorrectly matching "a" and "b"
 	}
-	@Test  public void Regx__balanced_group() {	// PURPOSE: handle balanced group regex; EX:"%b()"; NOTE:test will fail if run in 1.6 environment; DATE:2013-12-20
+	@Test public void Regx__balanced_group() {	// PURPOSE: handle balanced group regex; EX:"%b()"; NOTE:test will fail if run in 1.6 environment; DATE:2013-12-20
 		Exec_gsub("(a)", "%b()", 1, "c", "c;1");
 	}
-	@Test  public void Regx__capture() {
+	@Test public void Regx__capture() {
 		Exec_gsub("aa"			, "(a)%1"				, 1, "%0z", "aaz;1");	// capture; handle %0; PAGE:en.w:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 		Exec_gsub("aa"			, "(a)%1"				, 1, "%1z", "az;1");	// capture; handle %1+; PAGE:en.w:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 		Exec_gsub("a\"b'c\"d"	, "([\"'])(.-)%1"		, 1, "%1z", "a\"zd;1");	// capture; http://www.lua.org/pil/20.3.html; {{#invoke:test|gsub_string|a"b'c"d|(["'])(.-)%1|%1z}}
 	}
-	@Test  public void Regx__capture_wo_group() {
+	@Test public void Regx__capture_wo_group() {
 		Exec_gsub("Ab", "%u", 1, "<%0>", "<A>b;1");
 		Exec_gsub("Ab", "%u", 1, "<%1>", "<A>b;1"); // NOTE: %1 should be same as %0 if no matches; ISSUE#:393; DATE:2019-03-20
 		Exec_gsub_fail("Ab", "%u", 1, "<%2>", "invalid capture index %2 in replacement String");
 	}
-	@Test  public void Regx__frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; DATE:2015-07-21
+	@Test public void Regx__frontier_pattern() {	// PURPOSE: handle frontier pattern; EX:"%f[%a]"; DATE:2015-07-21
 		Exec_gsub("a b c", "%f[%W]", 5, "()", "a() b() c();3");
 		Exec_gsub("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", Int_.Max_value, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
 	}
-	@Test  public void Regx__frontier_pattern_utl() {// PURPOSE: standalone test for \0 logic in frontier pattern; note that verified against PHP: echo(preg_match( "/[\w]/us", "\0" )); DATE:2015-07-21
+	@Test public void Regx__frontier_pattern_utl() {// PURPOSE: standalone test for \0 logic in frontier pattern; note that verified against PHP: echo(preg_match( "/[\w]/us", "\0" )); DATE:2015-07-21
 		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "a"));		// \0 not matched by a
 		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "0"));		// \0 not matched by numeric 0
 		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "[\\w]"));	// \0 not matched by word_char
@@ -120,21 +138,23 @@ public class Scrib_lib_ustring__gsub__tst {
 		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\x]"));	// \0 matched by any_char
 		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\X]"));	// \0 matched by !any_char
 	}
-	@Test   public void Luacbk__basic() {
+	@Test public void Luacbk__basic() {
 		String text = "ad2f1e3z";
 		String regx = "([1d])([2e])([3f])";
 		Mock_proc__verify_args proc = new Mock_proc__verify_args(0, new Object[]{"B", "d", "2", "f"}, new Object[]{"Y", "1", "e", "3"});
 		fxt.Init__cbk(proc);
 		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), "aBYz;2");
 	}
-	@Test   public void Luacbk__anypos() {
+	@Test public void Luacbk__anypos() {
 		String text = "ad2f1e3z";
 		String regx = "()([1d])([2e])([3f])"; // "()" is anypos, which inserts find_pos to results
-		Mock_proc__verify_args proc = new Mock_proc__verify_args(0, new Object[]{"B", 1, "d", "2", "f"}, new Object[]{"Y", 4, "1", "e", "3"});
+		Mock_proc__verify_args proc = new Mock_proc__verify_args(0
+			, new Object[]{"B", 2, "d", "2", "f"}		// NOTE: changed from 1 to 2 b/c of base-1 issues;ISSUE#:726; DATE:2020-05-17;
+			, new Object[]{"Y", 4, "1", "e", "3"});     // NOTE: changed from 4 to 5 b/c of base-1 issues;ISSUE#:726; DATE:2020-05-17;
 		fxt.Init__cbk(proc);
 		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), "aBYz;2");
 	}
-	@Test   public void Luacbk__balanced() { // PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
+	@Test public void Luacbk__balanced() { // PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
 		String text = "}a{{b}}c{{d}}";
 		String regx = "%b{}"; // "()" is anypos, which inserts find_pos to results
 		Mock_proc__verify_args proc = new Mock_proc__verify_args(0, new Object[]{"x", "{{b}}"}, new Object[]{"y", "{{d}}"});

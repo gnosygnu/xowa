@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,19 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs.patterns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
-import gplx.objects.strings.unicodes.*;
-import gplx.langs.regxs.*;
-import gplx.objects.strings.unicodes.*;
-import org.luaj.vm2.lib.StringLib;
-import org.luaj.vm2.Buffer;
-import org.luaj.vm2.LuaValue;
+package gplx.xowa.xtns.scribunto.libs.patterns;
+
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.String_;
+import gplx.langs.regxs.Regx_group;
+import gplx.langs.regxs.Regx_match;
+import gplx.objects.strings.unicodes.Ustring;
+import gplx.objects.strings.unicodes.Ustring_;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_ustring_gsub_mgr;
+import gplx.xowa.xtns.scribunto.libs.Scrib_regx_converter;
 import org.luaj.vm2.lib.Match_state;
-import org.luaj.vm2.lib.Str_find_mgr;
 import org.luaj.vm2.lib.Str_find_mgr__xowa;
-class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {			public Scrib_pattern_matcher__xowa(byte[] page_url) {}
+
+class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
+	public Scrib_pattern_matcher__xowa(byte[] page_url) {}
+
 	@Override public Regx_match Match_one(Ustring src_ucs, String pat_str, int bgn_as_codes, boolean replace) {
-				regx_converter.patternToRegex(pat_str, Scrib_regx_converter.Anchor_pow, true);
+		regx_converter.patternToRegex(pat_str, Scrib_regx_converter.Anchor_pow, true);
 		Str_find_mgr__xowa mgr = new Str_find_mgr__xowa(src_ucs, Ustring_.New_codepoints(pat_str), bgn_as_codes, false, false);
 		mgr.Process(false);
 		
@@ -40,9 +46,10 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {			public Scrib
 		
 		Regx_group[] groups = Make_groups(src_ucs, mgr.Captures_ary());
 		return new Regx_match(found, find_bgn, find_end, groups);
-			}
+	}
+
 	@Override public String Gsub(Scrib_lib_ustring_gsub_mgr gsub_mgr, Ustring src_ucs, String pat_str, int bgn_as_codes) {
-				// get src vars
+		// get src vars
 		String src_str = src_ucs.Src();
 		int src_len = src_ucs.Len_in_data();
 		if (src_len == 0) {
@@ -103,8 +110,9 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {			public Scrib
 
 		tmp_bfr.Add_str_u8(src_ucs.Substring(src_pos, src_len));
 		return tmp_bfr.To_str_and_clear();
-			}
-		private Regx_group[] Make_groups(Ustring src_ucs, int[] captures) {
+	}
+
+	private Regx_group[] Make_groups(Ustring src_ucs, int[] captures) {
 		if (captures == null) {
 			return Regx_group.Ary_empty;
 		}
@@ -114,10 +122,15 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {			public Scrib
 		for (int i = 0; i < captures_len; i += 2) {
 			int capture_bgn = captures[i];
 			int capture_end = captures[i + 1];
+			// ISSUE#:726; DATE:2020-05-17;
+			// NOTE: capture values are base-0 and are added by any pattern captures, including:
+			// * standard captures EX: `a(bc)d` for `abcd` will have 1, 3
+			// * empty captures EX: `()bc` for `abcd` will have 1, 2
+			// Note that empty captures will be normalized to base-1 in Scrib_lib_ustring_gsub_mgr inside the any_pos code
 			capture_bgn = src_ucs.Map_data_to_char(capture_bgn);
 			capture_end = src_ucs.Map_data_to_char(capture_end);
 			groups[i / 2] = new Regx_group(true, capture_bgn, capture_end, String_.Mid(src_ucs.Src(), capture_bgn, capture_end));
 		}
 		return groups;
 	}
-	}
+}

@@ -178,7 +178,7 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 
 						// anypos will create @offset arg; everything else creates a @match arg based on grp
 						Object val = any_pos && i < capt_ary_len && Bool_.Cast(capt_ary[i].Val())
-								? (Object)grp.Bgn()
+								? (Object)(grp.Bgn() + List_adp_.Base1) // NOTE: must normalize to base-1 b/c lua callbacks expect base-1 arguments, not base-0; ISSUE#:726; DATE:2020-05-17;
 								: (Object)String_.Mid(src_str, grp.Bgn(), grp.End());
 						luacbk_args[i] = Keyval_.int_(i + Scrib_core.Base_1, val);
 					}
