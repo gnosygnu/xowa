@@ -23,6 +23,11 @@ public class Base64Converter {
             toInt[ALPHABET[i]]= i;
         }
     }
+    public static char GetIndexChar(int i) {return ALPHABET[i];}
+    public static int GetIndexInt(char c) {
+    	if (toInt == null) Init();
+    	return toInt[c];
+    }
 	public static String EncodeString(String orig) {return Encode(Bry_.new_u8(orig));}
 	public static String Encode(byte[] buf){
 		if (toInt == null) Init();

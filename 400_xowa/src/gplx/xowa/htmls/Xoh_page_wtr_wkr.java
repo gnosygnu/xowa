@@ -33,6 +33,8 @@ import gplx.xowa.apps.gfs.Gfs_php_converter;
 import gplx.xowa.htmls.core.Xow_hdump_mode;
 import gplx.xowa.htmls.core.htmls.Xoh_html_wtr_escaper;
 import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.hxtns.blobs.Hxtn_blob_tbl;
+import gplx.xowa.htmls.hxtns.pages.Hxtn_page_mgr;
 import gplx.xowa.htmls.portal.Xoh_page_body_cls;
 import gplx.xowa.htmls.portal.Xow_portal_mgr;
 import gplx.xowa.langs.vnts.Xol_vnt_mgr;
@@ -166,6 +168,12 @@ public class Xoh_page_wtr_wkr {
 		if (wpg.Html_data().Xtn_pgbnr() != null) {
 			ctx.Wiki().Xtn_mgr().Xtn_pgbnr().Write_html(wpg, ctx, hctx).Bfr_arg__add(bfr);	// if pgbnr exists, write to top of html
 		}
+
+		int page_id = wpg.Db().Page().Id();
+		Hxtn_page_mgr html_data_mgr = wpg.Wikie().Hxtn_mgr();
+
+		wpg.Html_data().Indicators().HxtnSave(wpg.Wikie(), html_data_mgr, wpg, page_id);
+
 		this.Write_body(bfr, ctx, hctx, wpg);
 	}
 	public void Write_body(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoae_page page) {

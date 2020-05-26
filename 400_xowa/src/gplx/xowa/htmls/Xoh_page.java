@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,12 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.wikis.pages.redirects.*;
-import gplx.xowa.files.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.sections.*; import gplx.xowa.addons.htmls.tocs.*;
-import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.hdumps.*; import gplx.xowa.wikis.pages.htmls.*; import gplx.xowa.wikis.pages.wtxts.*;
+package gplx.xowa.htmls;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Guid_adp;
+import gplx.Guid_adp_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.xowa.Xoa_page;
+import gplx.xowa.Xoa_page_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.htmls.heads.Xoh_head_mgr;
+import gplx.xowa.htmls.sections.Xoh_section_mgr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.wikis.pages.Xoa_page__commons_mgr;
+import gplx.xowa.wikis.pages.Xopg_module_mgr;
+import gplx.xowa.wikis.pages.dbs.Xopg_db_data;
+import gplx.xowa.wikis.pages.hdumps.Xopg_hdump_data;
+import gplx.xowa.wikis.pages.htmls.Xopg_html_data;
+import gplx.xowa.wikis.pages.redirects.Xopg_redirect_mgr;
+import gplx.xowa.wikis.pages.wtxts.Xopg_wtxt_data;
+
 public class Xoh_page implements Xoa_page {
 	// core
 	public Xow_wiki					Wiki()				{return wiki;}				private Xow_wiki wiki;
@@ -49,6 +69,7 @@ public class Xoh_page implements Xoa_page {
 	public Xoh_section_mgr			Section_mgr()		{return section_mgr;} private final    Xoh_section_mgr section_mgr = new Xoh_section_mgr();
 	public Xoh_img_mgr				Img_mgr()			{return img_mgr;} private Xoh_img_mgr img_mgr = new Xoh_img_mgr();
 	public Xopg_module_mgr			Head_mgr()			{return head_mgr;} private Xopg_module_mgr head_mgr = new Xopg_module_mgr();
+	public Hash_adp                 Props()             {return props;} private final Hash_adp props = Hash_adp_.New();
 
 	// util
 	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
@@ -95,6 +116,7 @@ public class Xoh_page implements Xoa_page {
 		display_ttl = content_sub = sidebar_div = Bry_.Empty;
 		head_mgr.Clear(); commons_mgr.Clear();
 		section_mgr.Clear(); img_mgr.Clear();
+		props.Clear();
 	}
 	public static Xoh_page New_missing() {
 		Xoh_page rv = new Xoh_page();

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.hxtns.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.hxtns.*;
-import gplx.dbs.*;
-import gplx.core.lists.*; import gplx.core.lists.hashs.*;
-import gplx.xowa.htmls.hxtns.pages.*; import gplx.xowa.htmls.hxtns.blobs.*; import gplx.xowa.htmls.hxtns.wkrs.*; import gplx.xowa.htmls.hxtns.wikis.*;
-import gplx.xowa.wikis.*;
+package gplx.xowa.htmls.hxtns.pages;
+
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Hash_adp_bry;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.core.lists.hashs.Hash_adp__int;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.hxtns.blobs.Hxtn_blob_tbl;
+import gplx.xowa.htmls.hxtns.wikis.Hxtn_wiki_mgr;
+import gplx.xowa.htmls.hxtns.wkrs.Hxtn_wkr_mgr;
 public class Hxtn_page_mgr {
 	private Hxtn_page_tbl page_tbl;
 	private Hxtn_blob_tbl blob_tbl;
@@ -102,5 +115,8 @@ public class Hxtn_page_mgr {
 		}
 	}
 	private static Io_url Make_url(Xow_wiki wiki, String file_name) {return wiki.Fsys_mgr().Root_dir().GenSubFil(wiki.Domain_str() + file_name);}
-	public static final int Id__template_styles = 0;
+	public static final int
+		  Id__template_styles     = 0
+		, Id__indicators          = 2
+		;
 }
