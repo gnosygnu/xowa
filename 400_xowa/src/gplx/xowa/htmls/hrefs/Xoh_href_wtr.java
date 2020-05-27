@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.wikis.xwikis.*;
+package gplx.xowa.htmls.hrefs;
+
+import gplx.Bool_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
+
 public class Xoh_href_wtr {	// TS:do not move to app-level
 	private final    Gfo_url_encoder encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
 	private final    Bry_bfr encoder_bfr = Bry_bfr_.Reset(255), tmp_bfr = Bry_bfr_.Reset(255);
@@ -46,7 +58,6 @@ public class Xoh_href_wtr {	// TS:do not move to app-level
 	}
 	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, byte[] domain_bry, Xoa_ttl ttl) {Build_to_bfr(bfr, app, Xoh_wtr_ctx.Basic, domain_bry, ttl);}
 	public void Build_to_bfr(Bry_bfr bfr, Xoa_app app, Xoh_wtr_ctx hctx, byte[] domain_bry, Xoa_ttl ttl) { // given ttl, write href; EX: A -> '/wiki/A' 
-		int hctx_mode = hctx.Mode();
 		byte[] page = ttl.Full_txt_raw();
 		Xow_xwiki_itm xwiki = ttl.Wik_itm();
 		if (xwiki == null)																		// not an xwiki; EX: [[wikt:Word]]
@@ -57,29 +68,24 @@ public class Xoh_href_wtr {	// TS:do not move to app-level
 		}
 		if (xwiki == null) {																	// not an xwiki
 			if (ttl.Anch_bgn() != 1) {															// not an anchor-only;	EX: "#A"
-				switch (hctx_mode) {
-					case Xoh_wtr_ctx.Mode_popup: {												// popup parser always writes as "/site/"
-						bfr.Add(Xoh_href_.Bry__site);											// add "/site/";	EX: /site/
-						bfr.Add(domain_bry);													// add xwiki;		EX: en_dict	 
-						bfr.Add(Xoh_href_.Bry__wiki);											// add "/wiki/";	EX: /wiki/
-						break;
-					}
-					case Xoh_wtr_ctx.Mode_file_dump: {
-						bfr.Add(hctx.Anch__href__bgn());                                        // add "/wiki/";    EX: /wiki/Page; can be "/home/wiki/Page" for Html__dump_to_fsys
-						break;
-					}
-					default: {
-						bfr.Add(Xoh_href_.Bry__wiki);											// add "/wiki/";	EX: /wiki/Page
-						break;
-					}
+				if (hctx.Mode_is_popup()) {                                                     // popup parser always writes as "/site/"
+					bfr.Add(Xoh_href_.Bry__site);                                               // add "/site/";    EX: /site/
+					bfr.Add(domain_bry);													    // add xwiki;       EX: en_dict
+					bfr.Add(Xoh_href_.Bry__wiki);											    // add "/wiki/";    EX: /wiki/
+				}
+				else if (hctx.Mode_is_file_dump()) {
+					bfr.Add(hctx.Anch__href__bgn());                                            // add "/wiki/";    EX: /wiki/Page; can be "/home/wiki/Page" for Html__dump_to_fsys
+				}
+				else {
+					bfr.Add(Xoh_href_.Bry__wiki);                                               // add "/wiki/";    EX: /wiki/Page
 				}
 			}
 			else {}																				// anchor: noop
 		}
 		else {																					// xwiki
 			if (	app.Xwiki_mgr__missing(xwiki.Domain_bry())									// xwiki is not offline; use http:
-				||	hctx_mode == Xoh_wtr_ctx.Mode_hdump											// hdump should never dump as "/site/"
-				||	hctx_mode == Xoh_wtr_ctx.Mode_file_dump										// filedump should never dump as "/site/"
+				||	hctx.Mode_is_hdump()                                                        // hdump should never dump as "/site/"
+				||	hctx.Mode_is_file_dump()                                                    // filedump should never dump as "/site/"
 				) {
 				Bry_fmtr url_fmtr = xwiki.Url_fmtr();
 				if (url_fmtr == null) {

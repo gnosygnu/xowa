@@ -28,12 +28,10 @@ import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
-import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_itm;
 import gplx.xowa.apps.gfs.Gfs_php_converter;
 import gplx.xowa.htmls.core.Xow_hdump_mode;
 import gplx.xowa.htmls.core.htmls.Xoh_html_wtr_escaper;
 import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
-import gplx.xowa.htmls.hxtns.blobs.Hxtn_blob_tbl;
 import gplx.xowa.htmls.hxtns.pages.Hxtn_page_mgr;
 import gplx.xowa.htmls.portal.Xoh_page_body_cls;
 import gplx.xowa.htmls.portal.Xow_portal_mgr;
@@ -172,7 +170,9 @@ public class Xoh_page_wtr_wkr {
 		int page_id = wpg.Db().Page().Id();
 		Hxtn_page_mgr html_data_mgr = wpg.Wikie().Hxtn_mgr();
 
-		wpg.Html_data().Indicators().HxtnSave(wpg.Wikie(), html_data_mgr, wpg, page_id);
+		if (!hctx.Mode_is_embeddable()) {
+			wpg.Html_data().Indicators().HxtnSave(wpg.Wikie(), html_data_mgr, wpg, page_id);
+		}
 
 		this.Write_body(bfr, ctx, hctx, wpg);
 	}
