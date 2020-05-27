@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
-import gplx.core.log_msgs.*;
-import gplx.xowa.guis.views.boots.*; import gplx.xowa.apps.boots.*; 
+package gplx.xowa;
+
+import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg__gui_;
+import gplx.Gfo_usr_dlg__log_base;
+import gplx.Gfo_usr_dlg_base;
+import gplx.core.log_msgs.Gfo_msg_grp;
+import gplx.core.log_msgs.Gfo_msg_grp_;
+import gplx.xowa.apps.boots.Xoa_boot_mgr;
+import gplx.xowa.apps.boots.Xoa_cmd_arg_mgr;
+import gplx.xowa.guis.views.boots.Xog_error_win; 
+
 public class Xoa_app_ {
 	public static void Run(String... args) {
 		Xoa_cmd_arg_mgr arg_mgr = Xoa_cmd_arg_mgr.new_();
@@ -29,13 +39,13 @@ public class Xoa_app_ {
 				throw e;
 		}
 	}
-	public static final String		Name			= "xowa";
-	public static final int		Version_id		= 552;
-	public static final String		Version			= "4.6.6.2005";
-	public static String	Build_date		= "2012-12-30 00:00:00";
-	public static String	Build_date_fmt	= "yyyy-MM-dd HH:mm:ss";
-	public static String	Op_sys_str;
-	public static String	User_agent		= "";
+	public static final String  Name            = "xowa";
+	public static final int     Version_id      = 553;
+	public static final String  Version         = "4.6.7.2005";
+	public static final String  Build_date_fmt  = "yyyy-MM-dd HH:mm:ss";
+	public static String        Build_date      = "2012-12-30 00:00:00";
+	public static String        User_agent      = "";
+	public static String        Op_sys_str;
 
 	public static Gfo_usr_dlg		Usr_dlg()			{return usr_dlg;}			public static void Usr_dlg_(Gfo_usr_dlg v) {usr_dlg = v;} private static Gfo_usr_dlg usr_dlg;
 	public static Gfo_usr_dlg		New__usr_dlg__console() {
