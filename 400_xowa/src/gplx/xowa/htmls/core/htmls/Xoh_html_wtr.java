@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,13 +13,55 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.core.btries.*;
-import gplx.langs.htmls.*; import gplx.xowa.langs.kwds.*; import gplx.langs.htmls.entitys.*;
-import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.*;
-import gplx.xowa.wikis.domains.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.uniqs.*;
-import gplx.xowa.xtns.*; import gplx.xowa.xtns.cites.*; import gplx.xowa.parsers.hdrs.*;
+package gplx.xowa.htmls.core.htmls;
+
+import gplx.Bool_;
+import gplx.Bry_bfr;
+import gplx.Byte_ascii;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.langs.htmls.entitys.Gfh_entity_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.Xow_html_mgr;
+import gplx.xowa.htmls.core.wkrs.hdrs.Xoh_hdr_html;
+import gplx.xowa.htmls.core.wkrs.lnkes.Xoh_lnke_html;
+import gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_lnki_wtr;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_grp;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.amps.Xop_amp_tkn_ent;
+import gplx.xowa.parsers.amps.Xop_amp_tkn_num;
+import gplx.xowa.parsers.apos.Xop_apos_tkn;
+import gplx.xowa.parsers.apos.Xop_apos_tkn_;
+import gplx.xowa.parsers.hdrs.Xop_hdr_tkn;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm_;
+import gplx.xowa.parsers.lists.Xop_list_tkn;
+import gplx.xowa.parsers.lists.Xop_list_tkn_;
+import gplx.xowa.parsers.lnkes.Xop_lnke_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.miscs.Xop_bry_tkn;
+import gplx.xowa.parsers.miscs.Xop_hr_tkn;
+import gplx.xowa.parsers.miscs.Xop_under_tkn;
+import gplx.xowa.parsers.paras.Xop_nl_tkn;
+import gplx.xowa.parsers.tblws.Xop_tblw_tkn;
+import gplx.xowa.parsers.tblws.Xop_tblw_wkr;
+import gplx.xowa.parsers.uniqs.Xop_uniq_tkn;
+import gplx.xowa.parsers.xndes.Xop_xatr_whitelist_mgr;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.xtns.Xox_mgr_base;
+import gplx.xowa.xtns.Xox_xnde;
+import gplx.xowa.xtns.cites.Ref_html_wtr;
+
 public class Xoh_html_wtr {
 	private final    Xoae_app app; private final    Xowe_wiki wiki; private final    Xow_html_mgr html_mgr; private final    Xop_xatr_whitelist_mgr whitelist_mgr;
 	private Xoae_page page;
@@ -287,6 +329,14 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid__ruby: case Xop_xnde_tag_.Tid__rt: case Xop_xnde_tag_.Tid__rb: case Xop_xnde_tag_.Tid__rp: 
 			case Xop_xnde_tag_.Tid__time: case Xop_xnde_tag_.Tid__bdi: case Xop_xnde_tag_.Tid__data: case Xop_xnde_tag_.Tid__mark: case Xop_xnde_tag_.Tid__wbr: case Xop_xnde_tag_.Tid__bdo:	// HTML 5: write literally and let browser handle them
 			case Xop_xnde_tag_.Tid__q:
+			// added new tags below; ISSUE#:636 DATE:2020-03-08; FIX:NPE;ISSUE#:730; DATE:2020-05-27
+			case Xop_xnde_tag_.Tid__audio:
+			case Xop_xnde_tag_.Tid__video:
+			case Xop_xnde_tag_.Tid__track:
+			case Xop_xnde_tag_.Tid__rtc:
+			case Xop_xnde_tag_.Tid__figure:
+			case Xop_xnde_tag_.Tid__figure_inline:
+			case Xop_xnde_tag_.Tid__figcaption:
 				Write_xnde(bfr, ctx, hctx, xnde, tag, tag_id, src);
 				break;
 			case Xop_xnde_tag_.Tid__pre: {
@@ -362,15 +412,6 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid__mapframe:
 			case Xop_xnde_tag_.Tid__maplink:
 			case Xop_xnde_tag_.Tid__template_styles:
-
-			// added new tags below; ISSUE#:636 DATE:2020-03-08
-			case Xop_xnde_tag_.Tid__audio:
-			case Xop_xnde_tag_.Tid__video:
-			case Xop_xnde_tag_.Tid__track:
-			case Xop_xnde_tag_.Tid__rtc:
-			case Xop_xnde_tag_.Tid__figure:
-			case Xop_xnde_tag_.Tid__figure_inline:
-			case Xop_xnde_tag_.Tid__figcaption:
 				Xox_xnde xtn = xnde.Xnde_xtn();
 				xtn.Xtn_write(bfr, app, ctx, this, hctx, page, xnde, src);
 				break;

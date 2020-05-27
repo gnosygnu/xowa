@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import org.junit.*;
+package gplx.xowa.htmls.core.htmls;
+
+import gplx.String_;
+import gplx.xowa.Xop_fxt;
+import org.junit.After;
+import org.junit.Test;
+
 public class Xoh_html_wtr_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_(); fxt.Reset();}
@@ -323,6 +328,21 @@ public class Xoh_html_wtr_tst {
 	}
 	@Test  public void Amp_ncr_should_not_be_rendered_as_bytes() {	// PURPOSE: &#160; should be rendered as &#160; not as literal bytes {192,160}; DATE:2013-12-09
 		fxt.Test_parse_page_wiki_str("a&#160;b", "a&#160;b");
+	}
+	@Test public void Rtc() {// PURPOSE:make sure <rtc> prints itself; ISSUE#:730; DATE:2020-05-27
+		// REF.MOZILLA:https://developer.mozilla.org/en-US/docs/Web/HTML/Element/rtc
+		fxt.Test_parse_page_wiki_str
+		( String_.Concat_lines_nl_skip_last
+			( "<rtc xml:lang=\"en\" style=\"ruby-position: over;\">"
+			, "  <rp>(</rp><rt>Malaysia</rt><rp>)</rp>"
+			, "</rtc>"
+			)
+		, (String_.Concat_lines_nl_skip_last
+			( "<rtc style=\"ruby-position: over;\">"
+			, "  <rp>(</rp><rt>Malaysia</rt><rp>)</rp>"
+			, "</rtc>"
+			)
+		));
 	}
 
 	//		@Test  public void Fix_PositionAbsolute_stripped() {
