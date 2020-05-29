@@ -154,6 +154,16 @@ public class Scrib_lib_ustring__gsub__tst {
 		fxt.Init__cbk(proc);
 		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), "aBYz;2");
 	}
+	@Test public void Luacbk__frontier__eos() { // PURPOSE:frontier pattern should not match end of string; ISSUE#:732; DATE:2020-05-28
+		String text = "a";
+		String regx = "([a])(%f[%s])";
+		String expd = "a;0"; // fails if "b;0"
+		Mock_proc__verify_args proc = new Mock_proc__verify_args(0
+			//, new Object[]{"b", "a", ""} // NOTE: used to require these parameters
+		);
+		fxt.Init__cbk(proc);
+		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), expd);
+	}
 	@Test public void Luacbk__balanced() { // PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
 		String text = "}a{{b}}c{{d}}";
 		String regx = "%b{}"; // "()" is anypos, which inserts find_pos to results
