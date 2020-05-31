@@ -61,6 +61,10 @@ public class Scrib_lib_ustring__gsub__tst {
 	@Test public void Replace__double() {	// PURPOSE: do not fail if double is passed in for @replace; PAGE:de.v:Wikivoyage:Wikidata/Test_Modul:Wikidata2 DATE:2016-04-21
 		Exec_gsub("abcd", 1	 , -1, 1.23d	, "abcd;0");
 	}
+	@Test public void Replace__utf8() {	// PURPOSE:do not cut off utf8-strings PAGE:en.d:𠮟 DATE:2020-05-31
+		String regx = "^[\t]*(.-)[\t]*$"; // from mwtext.trim
+		Exec_gsub("𠮟a", regx, -1, "%1", "𠮟a;1"); // fails with "𠮟;1"
+	}
 	@Test public void Replace__anypos() {	// PURPOSE:LUAJ_PATTERN_REPLACEMENT; DATE:2019-04-16
 		Exec_gsub("'''a'''b", "()'''(.-'*)'''", 1, "z", "zb;1");
 	}
@@ -168,6 +172,17 @@ public class Scrib_lib_ustring__gsub__tst {
 		Mock_proc__verify_args proc = new Mock_proc__verify_args(0
 			//, new Object[]{"b", "a", ""} // NOTE: used to require these parameters
 		);
+		fxt.Init__cbk(proc);
+		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), expd);
+	}
+	@Test public void Luacbk__anypos__utf8() { // PURPOSE:handle UTF-8 chars with anypos match ISSUE#:726; DATE:2020-05-29
+		String text = "𤭢 a";
+		String regx = "()[𤭢a]()";
+		String expd = "B C;2";
+		Mock_proc__verify_args proc = new Mock_proc__verify_args(0
+			, new Object[]{"B", 1, 2} // fails if 3 instead of 2
+			, new Object[]{"C", 3, 4}
+			);
 		fxt.Init__cbk(proc);
 		Exec_gsub(text, regx, -1, proc.To_scrib_lua_proc(), expd);
 	}

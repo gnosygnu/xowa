@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.langs.regxs.*;
-import gplx.objects.strings.unicodes.*;
-import gplx.xowa.xtns.scribunto.libs.patterns.*;
-import gplx.xowa.xtns.scribunto.procs.*;
+package gplx.xowa.xtns.scribunto.libs;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Byte_ascii;
+import gplx.Char_;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.List_adp_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Type_;
+import gplx.langs.regxs.Regx_group;
+import gplx.langs.regxs.Regx_match;
+import gplx.objects.strings.unicodes.Ustring_;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
+import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
+import gplx.xowa.xtns.scribunto.libs.patterns.Scrib_pattern_matcher;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
+
 public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 	private final    Scrib_core core;
 	private String src_str;
@@ -108,7 +131,7 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 										// NOTE: > 0 means get from groups if it exists; REF.MW:elseif (isset($m["m$x"])) return $m["m$x"]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 										else if (idx - 1 < match.Groups().length) {	// retrieve numbered capture; TODO_OLD: support more than 9 captures
 											Regx_group grp = match.Groups()[idx - 1];
-											tmp_bfr.Add_str_u8(String_.Mid(src_str, grp.Bgn(), grp.End()));	// NOTE: grp.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
+											tmp_bfr.Add_str_u8(grp.Val());	// NOTE: changed from String_.Mid(src_str, grp.Bgn(), grp.End()); DATE:2020-05-31
 										}
 										// NOTE: 1 per MW "Match undocumented Lua String.gsub behavior"; PAGE:en.d:Wiktionary:Scripts ISSUE#:393; DATE:2019-03-20
 										else if (idx == 1) {
@@ -136,18 +159,15 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 				}
 				break;
 			case Repl_tid_table: {
-				int match_bgn = -1, match_end = -1;
 				Regx_group[] grps = match.Groups();
+				String find_str = null;
 				if (grps.length == 0) {
-					match_bgn = match.Find_bgn();
-					match_end = match.Find_end();
+					find_str = String_.Mid(src_str, match.Find_bgn(), match.Find_end());	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
 				}
 				else {	// group exists, take first one (logic matches Scribunto); PAGE:en.w:Bannered_routes_of_U.S._Route_60; DATE:2014-08-15
 					Regx_group grp = grps[0];
-					match_bgn = grp.Bgn();
-					match_end = grp.End();
+					find_str = grp.Val();
 				}
-				String find_str = String_.Mid(src_str, match_bgn, match_end);	// NOTE: rslt.Bgn() / .End() is for String pos (bry pos will fail for utf8 strings)
 				Object actl_repl_obj = repl_hash.Get_by(find_str);
 				if (actl_repl_obj == null)			// match found, but no replacement specified; EX:"abc", "[ab]", "a:A"; "b" in regex but not in tbl; EX:d:DVD; DATE:2014-03-31
 					tmp_bfr.Add_str_u8(find_str);
@@ -176,10 +196,17 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 					for (int i = 0; i < grps_len; i++) {
 						Regx_group grp = grps[i];
 
-						// anypos will create @offset arg; everything else creates a @match arg based on grp
-						Object val = any_pos && i < capt_ary_len && Bool_.Cast(capt_ary[i].Val())
-								? (Object)(grp.Bgn() + List_adp_.Base1) // NOTE: must normalize to base-1 b/c lua callbacks expect base-1 arguments, not base-0; ISSUE#:726; DATE:2020-05-17;
-								: (Object)String_.Mid(src_str, grp.Bgn(), grp.End());
+						// anypos will create @offset arg; everything else creates a @match arg based on grp; FOOTNOTE:CAPTURES
+						boolean anyposExists = any_pos && i < capt_ary_len && Bool_.Cast(capt_ary[i].Val());
+						Object val = null;
+						if (anyposExists) {
+							// emptyCapture ("anypos" or `()`) must pass integer position; must normalize to base-1 b/c lua callbacks expect base-1 arguments, not base-0; ISSUE#:726; DATE:2020-05-17;
+							val = (Object)(grp.Bgn() + List_adp_.Base1);
+						}
+						else {
+							// standardCapture must pass string match
+							val = grp.Val();
+						}
 						luacbk_args[i] = Keyval_.int_(i + Scrib_core.Base_1, val);
 					}
 				}
@@ -203,3 +230,30 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 	private static final byte Repl_tid_null = 0, Repl_tid_string = 1, Repl_tid_table = 2, Repl_tid_luacbk = 3;
 	public static final    Scrib_lib_ustring_gsub_mgr[] Ary_empty = new Scrib_lib_ustring_gsub_mgr[0];
 }
+/*
+== FOOTNOTE:CAPTURES [ISSUE#:726; DATE:2020-05-17] ==
+There are two types of captures:
+* '''basicCaptures''': EX: given `abcd`, `a(bc)d` captureValues will be 1, 3 b/c `(bc)` captures the start / end of the match
+* '''emptyCaptures''': EX: given `abcd`, `()bcd`  captureValues will be 1, 2 b/c `()`   captures the position of the match
+
+The above captureValues are base0 b/c Str_find_mgr__xowa uses base0
+* Keep in mind that XOWA is base0 b/c it works directly with byte arrays and need base0 to index into these 0-based arrays
+
+In contrast, Lua is base1. However, this base1-ness is not exposed anywhere, except in gsubs's FunctionCallback.
+Even then, it is only exposed for emptyCaptures, not basicCaptures due to how Lua passes parameters
+
+For example, consider this code:
+```
+function p.test_726_anypos()
+    mw.ustring.gsub("abcd", "a(bc)d", function(arg1)
+        mw.log('basic', arg1); -- arg1 is the matched string or "bc"
+    end)
+
+    mw.ustring.gsub("abcd", "()bcd", function(arg1)
+        mw.log('empty', arg1); -- arg1 is the position of the empty capture or "2"
+    end)
+end
+```
+
+SEE:FOOTNOTE:REGX_GROUP
+*/

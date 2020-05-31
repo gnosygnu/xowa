@@ -122,15 +122,35 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 		for (int i = 0; i < captures_len; i += 2) {
 			int capture_bgn = captures[i];
 			int capture_end = captures[i + 1];
-			// ISSUE#:726; DATE:2020-05-17;
-			// NOTE: capture values are base-0 and are added by any pattern captures, including:
-			// * standard captures EX: `a(bc)d` for `abcd` will have 1, 3
-			// * empty captures EX: `()bc` for `abcd` will have 1, 2
-			// Note that empty captures will be normalized to base-1 in Scrib_lib_ustring_gsub_mgr inside the any_pos code
-			capture_bgn = src_ucs.Map_data_to_char(capture_bgn);
-			capture_end = src_ucs.Map_data_to_char(capture_end);
-			groups[i / 2] = new Regx_group(true, capture_bgn, capture_end, String_.Mid(src_ucs.Src(), capture_bgn, capture_end));
+			// FOOTNOTE:REGX_GROUP
+			int bgn_in_chars = src_ucs.Map_data_to_char(capture_bgn);
+			int end_in_chars = src_ucs.Map_data_to_char(capture_end);
+ 			String val = String_.Mid(src_ucs.Src(), bgn_in_chars, end_in_chars);
+			groups[i / 2] = new Regx_group(true, capture_bgn, capture_end, val);
 		}
 		return groups;
 	}
 }
+
+/*
+== FOOTNOTE:REGX_GROUP [ISSUE#:726; DATE:2020-05-17] ==
+The XOWA Regx_group is a quasi-adapter for java.util.regex.Matcher and its group-related methods.
+
+Consider a Regx_group with varName `grp` and a Matcher with varName `match`
+* `grp.Bgn()` <- `match.start()`
+* `grp.End()` <- `match.end()`
+* `grp.Val()` <- `match.group(i)`
+
+Note that all callers of `grp` would be expecting REGEX convention (not LUA pattern convention). As such:
+* '''base0''': `grp.Bgn()` and `grp.End()` must be base0 not base1 (REGEX is base0)
+** Fortunately, Str_find_mgr__xowa uses base0, so there is no need to convert from base1 to base0
+** However, Scrib_lib_ustring_gsub_mgr will convert base0 to base1 in the gsub FunctionCallback code '''IF''' anypos is present in the pattern
+* '''charIndexes''': `grp.Bgn()` and `grp.End()` should represent charIndexes, not byteIndexes (REGEX is chars)
+** Str_find_mgr__xowa uses codepointIndexes b/c of Ustring_ucs
+** In theory, should convert to charIndexes b/c REGEX uses charIndexes. However:
+*** Regx_group.Bgn() is only used by anypos for LuaCallbacks
+*** anypos needs codepointIndexes
+*** so, be lazy, and don't bother double converting to charIndex only to convert back to codepointIndex
+
+SEE:FOOTNOTE:CAPTURES
+*/
