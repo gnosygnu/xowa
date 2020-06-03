@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.objects.strings.unicodes; import gplx.*; import gplx.objects.*; import gplx.objects.strings.*;
-import gplx.objects.errs.*;
-import gplx.objects.brys.*;
-import gplx.objects.strings.char_sources.*;
+package gplx.objects.strings.unicodes;
+
+import gplx.objects.errs.Err_;
+import gplx.objects.strings.String_;
+import gplx.objects.strings.char_sources.Char_source;
 
 public interface Ustring extends Char_source {
 	int Len_in_chars();
@@ -28,10 +29,18 @@ class Ustring_single implements Ustring { // 1 char == 1 codepoint
 		this.src = src;
 		this.src_len = src_len;
 	}
-	public String Src() {return src;} private final    String src;
-	public int Len_in_chars() {return src_len;} private final    int src_len;
+	public String Src() {return src;} private final String src;
+	public int Len_in_chars() {return src_len;} private final int src_len;
 	public int Len_in_data() {return src_len;}
-	public String Substring(int bgn, int end) {return src.substring(bgn, end);} 
+	public String Substring(int bgn, int end) {return src.substring(bgn, end);}
+	public byte[] SubstringAsBry(int bgn, int end) {
+		String rv = src.substring(bgn, end);
+		try {
+			return rv.getBytes("UTF-8");
+		} catch (Exception e) {
+			throw new RuntimeException("failed to get bytes; src=" + src);
+		}
+	}
 	public int Index_of(Char_source find, int bgn) {return src.indexOf(find.Src(), bgn);} 
 	public boolean Eq(int lhs_bgn, Char_source rhs, int rhs_bgn, int rhs_end) {
 		if (src_len < lhs_bgn + rhs_end || rhs.Len_in_data() < rhs_bgn + rhs_end)
@@ -46,7 +55,7 @@ class Ustring_single implements Ustring { // 1 char == 1 codepoint
 	public int Map_char_to_data(int i) {if (i < 0 || i > src_len) throw Err_.New_fmt("invalid idx; idx={0} src={1}", i, src); return i;}
 }
 class Ustring_codepoints implements Ustring {
-	private final    int[] codes;
+	private final int[] codes;
 	public Ustring_codepoints(String src, int chars_len, int codes_len) {
 		// set members
 		this.src = src;
@@ -69,7 +78,7 @@ class Ustring_codepoints implements Ustring {
 			}
 		}
 	}
-	public String Src() {return src;} private final    String src;
+	public String Src() {return src;} private final String src;
 	public String Substring(int bgn, int end) {
 		int len = 0;
 		for (int i = bgn; i < end; i++) {
@@ -89,6 +98,14 @@ class Ustring_codepoints implements Ustring {
 			}
 		}
 		return new String(rv);
+	}
+	public byte[] SubstringAsBry(int bgn, int end) {
+		String rv = src.substring(bgn, end);
+		try {
+			return rv.getBytes("UTF-8");
+		} catch (Exception e) {
+			throw new RuntimeException("failed to get bytes; src=" + src);
+		}
 	}
 	public int Index_of(Char_source find, int bgn) {
 		int find_len = find.Len_in_data();
@@ -119,8 +136,8 @@ class Ustring_codepoints implements Ustring {
 				return false;
 		return true;
 	}
-	public int Len_in_chars() {return chars_len;} private final    int chars_len;
-	public int Len_in_data() {return codes_len;} private final    int codes_len;
+	public int Len_in_chars() {return chars_len;} private final int chars_len;
+	public int Len_in_data() {return codes_len;} private final int codes_len;
 	public int Get_data(int i) {return codes[i];}
 	public int Map_data_to_char(int code_pos) {
 		if (code_pos == codes_len) return chars_len; // if char_pos is chars_len, return codes_len; allows "int end = u.Map_char_to_data(str_len)"
