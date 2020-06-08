@@ -1,6 +1,7 @@
 package gplx.langs.javascripts;
 
 import gplx.Err_;
+import gplx.String_;
 import gplx.langs.javascripts.util.regex.JsPattern_;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -8,6 +9,30 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class JsString_ {
+	public static boolean charAtEq(String s, int i, char m) {
+		int len = s.length();
+		if (i < 0 || i >= len) {
+			return false;
+		} else {
+			return s.charAt(i) == m;
+		}
+	}
+	public static boolean charAtEqNot(String s, int i, char m) {
+		int len = s.length();
+		if (i < 0 || i >= len) {
+			return false;
+		} else {
+			return s.charAt(i) != m;
+		}
+	}
+	public static String charAt(String s, int i) {
+		int len = s.length();
+		if (i < 0 || i >= len) {
+			return String_.Empty;
+		} else {
+			return Character.toString(s.charAt(i));
+		}
+	}
 	public static String slice(String str, int beginIndex) {
 		return slice(str, beginIndex, str.length());
 	}
