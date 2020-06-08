@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.scribunto; import gplx.*;
+import gplx.core.threads.Thread_adp;
+import gplx.core.threads.Thread_adp_;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*;
@@ -57,8 +60,23 @@ public class Scrib_invoke_func extends Pf_func_base {
 		else
 			mod_raw = mod.Text_bry();
 		if (!core.Enabled()) {bfr.Add_mid(src, self.Src_bgn(), self.Src_end()); return;}
+
 		try {
-			core.Invoke(wiki, ctx, src, caller, self, bfr, mod_name, mod_raw, fnc_name);
+//			core.Invoke(wiki, ctx, src, caller, self, bfr, mod_name, mod_raw, fnc_name);
+//			if (invoke_wkr != null)
+//				invoke_wkr.Eval_end(ctx.Page(), mod_name, fnc_name, log_time_bgn);
+
+			int timeoutInMs = 5000;
+			long timeBgn = System_.Ticks();
+
+			InvokeInvoker invoker = new InvokeInvoker(core, wiki, ctx, src, caller, self, bfr, mod_name, mod_raw, fnc_name);
+			Thread_adp thread = Thread_adp_.Start_by_key("scribunto", invoker, "default");
+			while (thread.Thread__is_alive()) {
+				if (System_.Ticks__elapsed_in_frac(timeBgn) > timeoutInMs) {
+					thread.Thread__interrupt();
+					throw Err_.new_wo_type(String_.Format("scribunto timeout: page={0} mod={1} func={2} time={3}", ctx.Page_url_str(), mod_name, fnc_name, timeoutInMs));
+				}
+			}
 			if (invoke_wkr != null)
 				invoke_wkr.Eval_end(ctx.Page(), mod_name, fnc_name, log_time_bgn);
 		}
@@ -88,4 +106,34 @@ public class Scrib_invoke_func extends Pf_func_base {
 	}
 	private static final    Bry_fmtr error_fmtr = Bry_fmtr.new_("<strong class=\"error\"><span class=\"scribunto-error\" id=\"mw-scribunto-error-0\">~{0}: ~{1}</span></strong>");	// NOTE: must be "error" not 'error'; iferror checks for quote not apos; DATE:2015-09-17
 	public static final String Err_mod_missing = "No such module";
+
+	class InvokeInvoker implements Gfo_invk {
+		private final Scrib_core core;
+		private final Xowe_wiki wiki;
+		private final Xop_ctx ctx;
+		private final byte[] src;
+		private final Xot_invk caller;
+		private final Xot_invk self;
+		private final Bry_bfr bfr;
+		private final byte[] mod_name;
+		private final byte[] mod_raw;
+		private final byte[] fnc_name;
+
+		public InvokeInvoker(Scrib_core core, Xowe_wiki wiki, Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bfr, byte[] mod_name, byte[] mod_raw, byte[] fnc_name) {
+			this.core = core;
+			this.wiki = wiki;
+			this.ctx = ctx;
+			this.src = src;
+			this.caller = caller;
+			this.self = self;
+			this.bfr = bfr;
+			this.mod_name = mod_name;
+			this.mod_raw = mod_raw;
+			this.fnc_name = fnc_name;
+		}
+		public Object Invk(GfsCtx gctx, int ikey, String k, GfoMsg m) {
+			core.Invoke(wiki, ctx, src, caller, self, bfr, mod_name, mod_raw, fnc_name);
+			return null;
+		}
+	}
 }

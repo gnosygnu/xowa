@@ -61,11 +61,11 @@ public class Xow_page_cache {
 		}
 	}
 	public void Free_mem(boolean clear_permanent_itms) {
-		synchronized (thread_lock) {	// LOCK:app-level; DATE:2016-07-06
+//		synchronized (thread_lock) {	// LOCK:app-level; DATE:2016-07-06
 			if (clear_permanent_itms) {
 				cache.Clear_all();
 			}
-		}
+//		}
 	}
 	private Xow_page_cache_itm Load_page(Xoa_ttl ttl) {
 		// vars
