@@ -61,6 +61,16 @@ public class XoCssMinTest {
             )
         );
     }
+    @Test public void commentsEmpty() {// PURPOSE:handle empty comments; ISSUE#:741 DATE:2020-06-08
+        tstr.Test("collectComments.empty"
+            , "a /**/ b"
+            , "a b" // NOTE: `\s` instead of `\s\s` b/c of "Normalize all whitespace strings to single spaces"
+            , new TestAssert.Grp("collectComments"
+                , new TestAssert.ListEq("comments", "")
+                , new TestAssert.StringEq("css", "a /*___YUICSSMIN_PRESERVE_CANDIDATE_COMMENT_0___*/ b")
+            )
+        );
+    }
     @Test public void rgb() {
         tstr.Test("rgb.basic"  ,"rgb (128,128,128)", "#808080");
         tstr.Test("rgb.casing" ,"RgB (128,128,128)", "#808080");
