@@ -12,9 +12,33 @@ public class XoCssTransformerTest {
     }
 
     @Test
-    public void Prepend() {
-        tstr.Test_Prepend("cls.1.1"  ,"x {}"     , ".a"      , ".a x {}");
-        tstr.Test_Prepend("cls.n.1"  ,"x {}y {}", ".a"      , ".a x {} .a y {}");
+    public void PrependBasic() {
+        tstr.Test_Prepend("x {}", "a", "a x {}");
+    }
+
+    @Test
+    public void PrependManyClasses() {
+        tstr.Test_Prepend("x,y,z {}", "a", "a x,a y,a z {}");
+    }
+
+    @Test
+    public void PrependManyNodes() {
+        tstr.Test_Prepend("x {} y {} z {}", "a", "a x {}a y {}a z {}");
+    }
+
+    @Test
+    public void PrependEmpty() {
+        tstr.Test_Prepend("x {}{}", "a", "a x {}{}");
+    }
+
+    @Test
+    public void PrependMediaAtBos() {
+        tstr.Test_Prepend("@media {} x {}", "a", "@media {}a x {}");
+    }
+
+    @Test
+    public void PrependMediaAtMid() {
+        tstr.Test_Prepend("x {} @media {} y {}", "a", "a x {} @media {}a y {}");
     }
 
     @Test
@@ -30,10 +54,10 @@ class XoCssTranformerTstr {
         String actl = transformer.Url(src, trg).ToStr();
         Gftest.Eq__str(expd, actl, note);
     }
-    public void Test_Prepend(String note, String css, String prepend, String expd) {
+    public void Test_Prepend(String css, String selector, String expd) {
         XoCssTransformer transformer = new XoCssTransformer(css);
-        String actl = transformer.Prepend(prepend).ToStr();
-        Gftest.Eq__str(expd, actl, note);
+        String actl = transformer.Prepend(selector).ToStr();
+        Gftest.Eq__str(expd, actl);
     }
     public void Test_Minify(String note, String css, String expd) {
         XoCssTransformer transformer = new XoCssTransformer(css);
