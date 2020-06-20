@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,12 +13,45 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.envs.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.xtns.scribunto.libs.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.xtns.scribunto.procs.*;
+package gplx.xowa.xtns.scribunto;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Err_;
+import gplx.Hash_adp_bry;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.envs.Env_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.xtns.scribunto.engines.Scrib_engine;
+import gplx.xowa.xtns.scribunto.engines.Scrib_engine_type;
+import gplx.xowa.xtns.scribunto.cfgs.ScribCfgResolver;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_hash;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_html;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_language;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_message;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_mw;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_site;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_text;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_title;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_uri;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_ustring;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_wikibase;
+import gplx.xowa.xtns.scribunto.libs.Scrib_lib_wikibase_entity;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+
 public class Scrib_core {
 	private Hash_adp_bry mods = Hash_adp_bry.cs();
 	private int expensive_function_count;

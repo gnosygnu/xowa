@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
-import gplx.dbs.*;
-import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*;
-import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
-import gplx.xowa.addons.apps.cfgs.mgrs.*; import gplx.xowa.addons.apps.cfgs.mgrs.dflts.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.services;
+
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_sql_;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app;
+import gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_usr;
+import gplx.xowa.addons.apps.cfgs.dbs.tbls.Xocfg_grp_row;
+import gplx.xowa.addons.apps.cfgs.mgrs.dflts.Xocfg_dflt_mgr;
+import gplx.xowa.addons.apps.cfgs.mgrs.types.Xocfg_type_mgr;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_grp;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_itm;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_nav_itm;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_nav_mgr;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_nde;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_nde_hash;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_root;
+import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xogui_nde_iter;
+
 public class Xocfg_edit_loader {
 	private final    Xocfg_db_app db_app;
 	private final    Xocfg_db_usr db_usr;

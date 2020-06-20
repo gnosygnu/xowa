@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
-import gplx.core.primitives.*;
+package gplx.langs.jsons;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Byte_ascii;
+import gplx.Char_;
+import gplx.Err;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.core.primitives.Gfo_number_parser;
+
 public class Json_parser {
 	private byte[] src; private int src_len, pos; private final    Gfo_number_parser num_parser = new Gfo_number_parser();
 	public Json_factory Factory() {return factory;} private final    Json_factory factory = new Json_factory();
@@ -181,4 +191,8 @@ public class Json_parser {
 		return Err_.new_wo_type(msg);
 	}
 	private static final    byte[] Bry_bool_rue = Bry_.new_a7("rue"), Bry_bool_alse = Bry_.new_a7("alse"), Bry_null_ull = Bry_.new_a7("ull");
+	public static Json_doc ParseToJdoc(String src) {
+		Json_parser parser = new Json_parser();
+		return parser.Parse(src);
+	}
 }

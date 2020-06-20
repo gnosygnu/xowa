@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
-import gplx.langs.mustaches.*;
-import gplx.core.gfobjs.*; import gplx.langs.jsons.*;
-import gplx.xowa.addons.apps.cfgs.mgrs.types.*; import gplx.xowa.addons.apps.cfgs.enums.*;
-import gplx.langs.htmls.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.String_;
+import gplx.core.gfobjs.Gfobj_nde;
+import gplx.langs.htmls.Gfh_utl;
+import gplx.langs.mustaches.Mustache_bfr;
+import gplx.langs.mustaches.Mustache_doc_itm;
+import gplx.langs.mustaches.Mustache_doc_itm_;
+import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
+import gplx.xowa.addons.apps.cfgs.enums.Xoitm_type_enum;
+import gplx.xowa.addons.apps.cfgs.mgrs.types.Xocfg_type_mgr;
+
 public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	private boolean edited;
 	private String type, html_atrs, html_cls, lang, name, ctx, date;
@@ -36,7 +46,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	public int		Sort()		{return sort;}	private final    int sort;
 	public void Load_by_meta(Bry_bfr tmp_bfr, String type, String dflt_str, String html_atrs, String html_cls) {
 		this.type = type;
-		this.dflt = Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(dflt_str), Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);
+		this.dflt = Escape(tmp_bfr, type, dflt_str);
 		this.html_atrs = html_atrs;
 		this.html_cls = html_cls;
 	}
@@ -47,7 +57,7 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	}
 	public void Load_by_data(Bry_bfr tmp_bfr, String ctx, String val_str, String date) {
 		this.ctx = ctx;
-		this.val = Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(val_str), Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);
+		this.val = Escape(tmp_bfr, type, val_str);
 		this.date = date;
 		this.edited = true;
 		if (	String_.Has(html_cls, "read"+"only")
@@ -97,5 +107,15 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 	public Mustache_doc_itm[] Mustache__subs(String k) {
 		if	(String_.Eq(k, "edited"))		return Mustache_doc_itm_.Ary__bool(edited);
 		return Mustache_doc_itm_.Ary__empty;
+	}
+	private static byte[] Escape(Bry_bfr tmp_bfr, String type, String val_str) {
+		// NOTE: do not escape quotes for memo because it uses <textarea> which can use quotes;
+		// contrast with <input> which uses quotes for `value` property;
+		// EX: <input value="a&quot;b"> vs <textarea>a"b</textarea>
+		boolean escapeQuotes = Xoitm_type_enum.To_uid(type) == Xoitm_type_enum.Tid__memo
+			? Bool_.N
+			: Bool_.Y;
+
+		return Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(val_str), Bool_.N, Bool_.N, Bool_.N, escapeQuotes, Bool_.N);
 	}
 }

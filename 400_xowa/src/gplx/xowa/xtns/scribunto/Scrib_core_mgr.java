@@ -16,9 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.parsers.*;
+import gplx.xowa.xtns.scribunto.cfgs.ScribCfgResolver;
+
 public class Scrib_core_mgr {
 	public Scrib_core Core() {return core;} private Scrib_core core;
 	public void Terminate_when_page_changes_y_() {terminate_when_page_changes = true;}	private boolean terminate_when_page_changes;
+	public ScribCfgResolver CfgResolver() {return cfgResolver;} public void CfgResolverSet(ScribCfgResolver v) {this.cfgResolver = v;} private ScribCfgResolver cfgResolver;
 	public Scrib_core Core_init(Xop_ctx ctx) {
 		core = new Scrib_core(ctx.App(), ctx);
 		terminate_when_page_changes = false;

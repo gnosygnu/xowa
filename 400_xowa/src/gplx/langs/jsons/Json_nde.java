@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
+package gplx.langs.jsons;
+
+import gplx.Array_;
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Byte_ascii;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Err_;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.Long_;
+import gplx.String_;
+
 public class Json_nde extends Json_itm_base implements Json_grp {		
 	private Json_itm[] subs = Json_itm_.Ary_empty; private int subs_len = 0, subs_max = 0;
 	private Hash_adp_bry subs_hash;
@@ -25,6 +39,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	@Override public byte[] Data_bry() {return null;}
 	public int Len() {return subs_len;}
 	public Json_itm Get_at(int i) {return subs[i];}
+	public Json_itm Get_as_itm_or_null(String key) {return Get_as_itm_or_null(Bry_.new_u8(key));}
 	public Json_itm Get_as_itm_or_null(byte[] key) {if (subs_hash == null) subs_hash = subs_hash_init(); return (Json_itm)subs_hash.Get_by_bry(key);}
 	public Json_ary Get_as_ary(int idx)		{return Json_ary.cast(Get_at(idx));}
 	public Json_nde Get_as_nde(String key)	{return Json_nde.cast(Get_as_itm_or_null(Bry_.new_u8(key)));}
@@ -33,6 +48,13 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	public Json_ary Get_as_ary(byte[] key) {
 		Json_itm rv = Get_as_itm_or_null(key); if (rv == null) throw Err_.new_("json", "key missing", "key", key);
 		return Json_ary.cast(rv);
+	}
+	public Json_ary Get_as_ary_or_null(String key)	{return Get_as_ary_or_null(Bry_.new_u8(key));}
+	public Json_ary Get_as_ary_or_null(byte[] key) {
+		Json_itm rv = Get_as_itm_or_null(key);
+		return rv == null
+			? null
+			: Json_ary.cast(rv);
 	}
 	public byte[] Get_as_bry(String key) {
 		byte[] rv = Get_as_bry_or(Bry_.new_u8(key), null); if (rv == null) throw Err_.new_("json", "key missing", "key", key);

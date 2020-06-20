@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.caches.*;
+package gplx.xowa.wikis.caches;
+
+import gplx.Bool_;
+import gplx.Decimal_adp_;
+import gplx.Io_mgr;
+import gplx.String_;
+import gplx.core.caches.Lru_cache;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+
 public class Xow_page_cache {
 	private final    Object thread_lock = new Object(); // NOTE: thread-safety needed for xomp since one page-cache is shared across all wkrs
 	private final    Xowe_wiki wiki;
@@ -61,11 +70,11 @@ public class Xow_page_cache {
 		}
 	}
 	public void Free_mem(boolean clear_permanent_itms) {
-//		synchronized (thread_lock) {	// LOCK:app-level; DATE:2016-07-06
+		synchronized (thread_lock) {	// LOCK:app-level; DATE:2016-07-06
 			if (clear_permanent_itms) {
 				cache.Clear_all();
 			}
-//		}
+		}
 	}
 	private Xow_page_cache_itm Load_page(Xoa_ttl ttl) {
 		// vars
