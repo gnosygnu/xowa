@@ -80,7 +80,8 @@ public class Xoh_page_wtr_wkr {
 					Write_page_by_tid(ctx, hctx, page_mode, rv, mgr.Page_html_fmtr(), Gfh_utl.Escape_html_as_bry(html_bry));
 				}
 				else {
-					hctx = Xoh_wtr_ctx.Basic;
+					// NOTE: if HTTP, generate hdump html b/c of async image download; HTTP will later call make_mgr to substitute out <xoimg>; ISSUE#:686; DATE:2020-06-27
+					hctx = app.Mode().Tid_is_http() ? Xoh_wtr_ctx.HttpServer : Xoh_wtr_ctx.Basic;
 					Write_body(page_bfr, ctx, hctx, page);
 					Write_page_by_tid(ctx, hctx, view_mode, rv, fmtr, page_bfr.To_bry_and_rls());
 					scripting_mgr.Write(rv, wiki, page);
@@ -170,7 +171,7 @@ public class Xoh_page_wtr_wkr {
 		int page_id = wpg.Db().Page().Id();
 		Hxtn_page_mgr html_data_mgr = wpg.Wikie().Hxtn_mgr();
 
-		if (!hctx.Mode_is_embeddable()) {
+		if (!hctx.Mode_is_hdump_wo_db()) {
 			wpg.Html_data().Indicators().HxtnSave(wpg.Wikie(), html_data_mgr, wpg, page_id);
 		}
 

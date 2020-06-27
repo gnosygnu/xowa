@@ -29,9 +29,9 @@ public class Xoh_wtr_ctx {
 	public byte[] Anch__href__bgn()               {return anch__href__bgn;}   private final byte[] anch__href__bgn;
 	public byte[] Anch__href__end()               {return anch__href__end;}   private final byte[] anch__href__end;
 	public int Hzip_tid()                         {return hzip_tid;}          private final int hzip_tid;
-	public boolean Mode_is_hdump()                {return mode == TID_HDUMP || mode == TID_EMBEDDABLE;}
-	public boolean Mode_is_file_dump()            {return mode == TID_HDUMP || mode == TID_EMBEDDABLE;}
-	public boolean Mode_is_embeddable()           {return mode == TID_EMBEDDABLE;}
+	public boolean Mode_is_hdump()                {return mode == TID_HDUMP || mode == TID_EMBEDDABLE || mode == TID_HTTP_SERVER;}
+	public boolean Mode_is_file_dump()            {return mode == TID_HDUMP || mode == TID_EMBEDDABLE || mode == TID_HTTP_SERVER;}
+	public boolean Mode_is_hdump_wo_db()          {return mode == TID_EMBEDDABLE || mode == TID_HTTP_SERVER;}
 	public boolean Mode_is_alt()                  {return mode == TID_ALT;}
 	public boolean Mode_is_display_title()        {return mode == TID_DISPLAY_TITLE;}
 	public boolean Mode_is_popup()                {return mode == TID_POPUP;}
@@ -44,6 +44,7 @@ public class Xoh_wtr_ctx {
 	, TID_HDUMP = 4
 	, TID_FILE_DUMP = 5
 	, TID_EMBEDDABLE = 6
+	, TID_HTTP_SERVER = 7
 	;
 
 	public static final Xoh_wtr_ctx
@@ -53,6 +54,7 @@ public class Xoh_wtr_ctx {
 	, Display_title  = new Xoh_wtr_ctx(TID_DISPLAY_TITLE, Xoh_hzip_dict_.Hdb__htxt, Xoh_href_.Bry__wiki, null)
 	, Popup          = new Xoh_wtr_ctx(TID_POPUP, Xoh_hzip_dict_.Hdb__htxt, Xoh_href_.Bry__wiki, null)
 	, Embeddable     = new Xoh_wtr_ctx(TID_EMBEDDABLE, Xoh_hzip_dict_.Hdb__htxt, Xoh_href_.Bry__wiki, null)
+	, HttpServer     = new Xoh_wtr_ctx(TID_HTTP_SERVER, Xoh_hzip_dict_.Hdb__htxt, Xoh_href_.Bry__wiki, null)
 	;
 
 	public static Xoh_wtr_ctx File_dump(byte[] anch__href__bgn, byte[] anch__href__end) {
