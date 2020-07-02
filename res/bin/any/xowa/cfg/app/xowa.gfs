@@ -149,7 +149,8 @@ app.wikis.get('~{wiki_key}').html.portal {
   div_ns =
 <:["
   <div id="left-navigation">
-    <div id="p-namespaces" class="vectorTabs">
+    <!--NOTE: fix vertical tabs; ISSUE#:754 DATE:2020-07-02-->
+    <div id="p-namespaces" class="vector-menu vector-menu-tabs vectorTabs">
       <h3>~{<>msgs.get('namespaces');<>}</h3>
       <ul>
         <li  id="ca-nstab-main" class="~{portal_ns_subj_cls}"><span><a href="~{portal_ns_subj_href}" id="ca-nstab-main-href" class="xowa-hover-off"~{<>msgs.get_html_accesskey_and_title('ca-nstab-main');<>}>~{<>msgs.get('nstab-main');<>}</a></span></li>
@@ -162,24 +163,25 @@ app.wikis.get('~{wiki_key}').html.portal {
   div_view =
 <:["
   <div id="right-navigation">
-    <div id="p-views" class="vectorTabs">
+    <!--NOTE: fix vertical tabs; ISSUE#:754 DATE:2020-07-02-->
+    <div id="p-views" class="vector-menu vector-menu-tabs vectorTabs">
       <h3>~{<>msgs.get('views');<>}</h3>
       <ul>
         <li id="ca-view"    class="~{portal_view_read_cls}"><span><a href="~{portal_view_read_href}" class="xowa-hover-off">~{<>msgs.get('vector-view-view');<>}</a></span></li>
         <li id="ca-edit"    class="~{portal_view_edit_cls}"><span><a href="~{portal_view_edit_href}" class="xowa-hover-off"~{<>msgs.get_html_accesskey_and_title('ca-edit');<>}>~{<>msgs.get('vector-view-edit');<>}</a></span></li>
         <li id="ca-history" class="~{portal_view_html_cls}"><span><a href="~{portal_view_html_href}" class="xowa-hover-off"~{<>msgs.get_html_accesskey_and_title('xowa-portal-view_html');<>}>~{<>msgs.get('xowa-portal-view_html');<>}</a></span></li>
-        <li id="p-search" role="search">
-          <form id="searchform" action="/wiki/~{<>app.gui.win_opts.search_url;<>}">
-            <div id="simpleSearch">
-              <input type="search" name="search" placeholder="~{<>msgs.get('searchbutton');<>} ~{sitename}" id="searchInput"~{<>msgs.get_html_accesskey_and_title('search');<>} value="~{search_text}" autocomplete="off">
-              <input type="hidden" name="fulltext" value="y">
-              <input type="submit"~{<>msgs.get_html_accesskey_and_title('search');<>} id="mw-searchButton" class="searchButton mw-fallbackSearchButton" />
-              <input type="submit" name="go" value="~{<>msgs.get('go');<>}" title="~{<>msgs.get('tooltip-search-go');<>}" id="searchButton" class="searchButton" />	
-            </div>
-          </form>
-        </li>
       </ul>
     </div>
+    <div id="p-search" role="search">
+      <form id="searchform" action="/wiki/~{<>app.gui.win_opts.search_url;<>}">
+        <div id="simpleSearch">
+          <input type="search" name="search" placeholder="~{<>msgs.get('searchbutton');<>} ~{sitename}" id="searchInput"~{<>msgs.get_html_accesskey_and_title('search');<>} value="~{search_text}" autocomplete="off">
+          <input type="hidden" name="fulltext" value="y">
+          <input type="submit"~{<>msgs.get_html_accesskey_and_title('search');<>} id="mw-searchButton" class="searchButton mw-fallbackSearchButton" />
+          <input type="submit" name="go" value="~{<>msgs.get('go');<>}" title="~{<>msgs.get('tooltip-search-go');<>}" id="searchButton" class="searchButton" />	
+        </div>
+      </form>
+    </li>
   </div>
 "]:>
 ;

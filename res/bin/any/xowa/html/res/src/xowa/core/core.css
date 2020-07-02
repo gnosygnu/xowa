@@ -67,7 +67,10 @@ div#simpleSearch input {
   position: absolute;
   margin: 0;
   border: 0;
-  background-color: transparent;
+  /*NOTE: fix transparent search box; ISSUE#:754 DATE:2020-07-02*/
+  /*(used to work) background-color: transparent;*/
+  background-color: white
+  border-width:1px;border-style:solid;border-color:rgb(162, 169, 177);
 }
 div#simpleSearch #searchButton,
 div#simpleSearch #mw-searchButton {
