@@ -65,9 +65,11 @@ public class Scrib_invoke_func extends Pf_func_base {
 		if (!core.Enabled()) {bfr.Add_mid(src, self.Src_bgn(), self.Src_end()); return;}
 
 		try {
-			 if (String_.Eq(String_.new_u8(mod_name), "Authority control")) {
-				Tfds.Write(String_.new_u8(ctx.Page().Ttl().Page_db()), String_.new_u8(mod_name), String_.new_u8(fnc_name));
-			 }
+			// DBG: test code; ISSUE#:737
+			// if (String_.Eq(String_.new_u8(mod_name), "Authority control")) {
+			//	Tfds.Write(String_.new_u8(ctx.Page().Ttl().Page_db()), String_.new_u8(mod_name), String_.new_u8(fnc_name));
+			// }
+
 			// check if configured for threaded execution
 			boolean exec = true;
 			ScribCfgResolver resolver = wiki.Parser_mgr().Scrib().CfgResolver();

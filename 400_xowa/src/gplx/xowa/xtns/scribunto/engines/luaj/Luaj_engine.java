@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.xowa.xtns.scribunto.procs.*;
-import org.luaj.vm2.*; import org.luaj.vm2.lib.*; import org.luaj.vm2.lib.jse.*;
-import gplx.xowa.xtns.scribunto.engines.process.*;
+package gplx.xowa.xtns.scribunto.engines.luaj;
+
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.String_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
+import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
+import gplx.xowa.xtns.scribunto.Scrib_xtn_mgr;
+import gplx.xowa.xtns.scribunto.engines.Scrib_engine;
+import gplx.xowa.xtns.scribunto.engines.Scrib_server;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
+import org.luaj.vm2.LuaInteger;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
+
 public class Luaj_engine implements Scrib_engine {
 	private final Luaj_server_func_recv func_recv;
 	private final Luaj_server_func_dbg func_dbg;
@@ -38,6 +54,14 @@ public class Luaj_engine implements Scrib_engine {
 		msg.set("text", LuaValue.valueOf(text));
 		msg.set("chunkName", LuaValue.valueOf(name));
 		LuaTable rsp = server.Dispatch(msg);
+
+		// check for error such as mistyping `dbg('a)`; ISSUE#:759 DATE:2020-07-15
+		String op = Luaj_value_.Get_val_as_str(rsp, "op");
+		if (String_.Eq(op, "error")) {
+		  String err = Luaj_value_.Get_val_as_str(rsp, "value");
+		  throw Scrib_xtn_mgr.err_(err);
+		}
+
 		LuaTable values_tbl = Luaj_value_.Get_val_as_lua_table(rsp, "values");
 		LuaInteger proc_id = (LuaInteger)values_tbl.rawget(1);
 		return new Scrib_lua_proc(name, proc_id.v);
