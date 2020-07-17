@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,14 +13,49 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.threads.*; import gplx.core.envs.*;
-import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.guis.history.*; import gplx.xowa.guis.bnds.*;
-import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
-import gplx.xowa.langs.vnts.*;
-import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.lnkis.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.skins.*;
+package gplx.xowa.guis.views;
+
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.String_;
+import gplx.core.envs.Env_;
+import gplx.core.threads.Gfo_thread_wkr;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.controls.elems.GfuiElemKeys;
+import gplx.gfui.controls.standards.Gfui_html;
+import gplx.gfui.controls.standards.Gfui_tab_itm;
+import gplx.gfui.controls.standards.Gfui_tab_itm_data;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptCfg_;
+import gplx.gfui.ipts.IptEventType_;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.ipts.IptMouseBtn_;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_page;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoa_url_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_file_wkr;
+import gplx.xowa.files.Xog_redlink_thread;
+import gplx.xowa.guis.Xoa_gui_mgr;
+import gplx.xowa.guis.bnds.Xog_bnd_box_;
+import gplx.xowa.guis.history.Xog_history_mgr;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
+
 public class Xog_tab_itm implements Gfo_invk {
 	private Xog_win_itm win;
 	public Xog_tab_itm(Xog_tab_mgr tab_mgr, Gfui_tab_itm_data tab_data, Xowe_wiki wiki, Xoae_page page) {
@@ -59,21 +94,32 @@ public class Xog_tab_itm implements Gfo_invk {
 		}
 	}
 	public void Switch_mem(Xog_tab_itm comp) {
-		html_itm.Switch_mem(comp.html_itm);					// switch html_itm.owner_tab reference only
-		Xog_html_itm temp_html_itm = html_itm;				// switch .html_itm, since the underlying CTabFolder has reparented the control
+		// switch html_itm.owner_tab reference only
+		html_itm.Switch_mem(comp.html_itm);
+
+		// switch .html_itm, since the underlying CTabFolder has reparented the control
+		Xog_html_itm temp_html_itm = html_itm;
 		this.html_itm = comp.html_itm;
 		comp.html_itm = temp_html_itm;
 
-		Xoae_page temp_page = page;							// switch .page, since its underlying html_box has changed and .page must reflect html_box
+		// switch .page, since its underlying html_box has changed and .page must reflect html_box
+		Xoae_page temp_page = page;
 		this.page = comp.page;
 		comp.page = temp_page;
 		page.Tab_data().Tab_(this); comp.Page().Tab_data().Tab_(comp);
 
-		byte temp_view_mode = view_mode;					// switch .view_mode to match .page
+		// switch .wiki also; ISSUE#:761; DATE:2020-07-17
+		Xowe_wiki temp_wiki = wiki;
+		this.wiki = comp.wiki;
+		comp.wiki = temp_wiki;
+
+		// switch .view_mode to match .page
+		byte temp_view_mode = view_mode;
 		this.view_mode = comp.view_mode;
 		comp.view_mode = temp_view_mode;
 
-		Xog_history_mgr temp_history_mgr = history_mgr;		// switch .history_mgr along with .page
+		// switch .history_mgr along with .page
+		Xog_history_mgr temp_history_mgr = history_mgr;
 		this.history_mgr = comp.history_mgr;
 		comp.history_mgr = temp_history_mgr;
 	}
