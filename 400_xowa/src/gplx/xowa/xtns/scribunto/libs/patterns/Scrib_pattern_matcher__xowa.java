@@ -52,9 +52,8 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 		// get src vars
 		String src_str = src_ucs.Src();
 		int src_len = src_ucs.Len_in_data();
-		if (src_len == 0) {
-			return src_str;
-		}
+		// TOMBSTONE:do not return early if String.empty; allows `string.gsub('', '$', 'a')` ISSUE#:731; DATE:2020-07-20
+		// if (src_len == 0) return src_str;
 		int src_max = src_len + 1;
 		
 		// get pat vars

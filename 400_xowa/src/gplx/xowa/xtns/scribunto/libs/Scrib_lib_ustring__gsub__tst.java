@@ -49,6 +49,12 @@ public class Scrib_lib_ustring__gsub__tst {
 		// TOMBSTONE: tested with local MW and {{#invoke:Test|test16|a|[^]|b}} -> Lua error: Missing close-bracket for character set beginning at pattern character 1.; DATE:2018-07-02
 		// Exec_gsub("a"	, "[^]"			, 1, "b"		, "a;0");		// invalid regx should not fail; should return self; DATE:2013-10-20
 	}
+	@Test public void ReplaceEmptyWithPattern() {
+		Exec_gsub("", "a", -1, "A", ";0");
+	}
+	@Test public void ReplaceEmptyWithFlag() {
+		Exec_gsub("", "$", -1, "A", "A;1");
+	}
 	@Test public void Find__int() {// PURPOSE: gsub with integer arg should not fail; DATE:2013-11-06
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_gsub, Scrib_kv_utl_.base1_many_(1, "[1]", "2", 1), "2;1"); // NOTE: text is integer (lua / php are type-less)
 	}
