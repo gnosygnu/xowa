@@ -200,13 +200,13 @@ app.wikis.get('~{wiki_key}').html.portal {
     <div class="body">
       <ul>
         <li><a href="/site/home/wiki/Main_Page" class='xowa-hover-off'>~{<>app.user.msgs.get('mainpage-description');<>}</a></li>
-        <li><a href="/site/home/wiki/About" class='xowa-hover-off'>~{<>app.user.msgs.get('xowa-portal-about');<>}</a></li>
-        <li><a href="/site/home/wiki/Contents" class='xowa-hover-off'>~{<>app.user.msgs.get('help');<>}</a></li>
+        <li><a href="/site/home/wiki/Help/About" class='xowa-hover-off'>~{<>app.user.msgs.get('xowa-portal-about');<>}</a></li>
+        <li><a href="/site/home/wiki/Help/Contents" class='xowa-hover-off'>~{<>app.user.msgs.get('help');<>}</a></li>
         <li><a href="/site/home/wiki/Special:XowaPageHistory" class='xowa-hover-off'~{<>app.user.msgs.get_html_accesskey_and_title('xowa-portal-page_history');<>}>~{<>app.user.msgs.get('xowa-portal-page_history');<>}</a></li>
         <li>~{<>app.user.msgs.get('xowa-portal-bookmarks');<>}</li>
         <li style='margin-left:5px;'><a href="/site/home/wiki/Special:XowaBookmarks" class='xowa-hover-off'~{<>app.user.msgs.get_html_accesskey_and_title('xowa-portal-bookmarks-show');<>}>~{<>app.user.msgs.get('xowa-portal-bookmarks-show');<>}</a></li>
         <li style='margin-left:5px;'><a href="javascript:xowa.cmds.send('gfs', 'app.api.usr.bookmarks.add;');" class='xowa-hover-off'~{<>app.user.msgs.get_html_accesskey_and_title('xowa-portal-bookmarks-add');<>}>~{<>app.user.msgs.get('xowa-portal-bookmarks-add');<>}</a></li>
-        <li><a href="/site/home/wiki/Options" class='xowa-hover-off'~{<>app.user.msgs.get_html_accesskey_and_title('xowa-portal-options');<>}>~{<>app.user.msgs.get('xowa-portal-options');<>}</a></li>
+        <li><a href="/site/home/wiki/Special:XowaCfg" class='xowa-hover-off'~{<>app.user.msgs.get_html_accesskey_and_title('xowa-portal-options');<>}>~{<>app.user.msgs.get('xowa-portal-options');<>}</a></li>
       </ul>
     </div>
   </div>
