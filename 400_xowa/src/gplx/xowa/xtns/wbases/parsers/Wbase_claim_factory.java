@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,36 +13,58 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.wbases.parsers;
+
+import gplx.Byte_;
+import gplx.Err_;
+import gplx.langs.jsons.Json_itm;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_nde;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_entity_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_string;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time_;
+
 public class Wbase_claim_factory {
 	public Wbase_claim_base Parse(byte[] qid, int pid, byte snak_tid, Json_nde nde, byte value_tid, Json_itm value_itm) {
 		switch (value_tid) {
 			case Wbase_claim_type_.Tid__string:				return new Wbase_claim_string(pid, snak_tid, value_itm.Data_bry());
-			case Wbase_claim_type_.Tid__entity:				return Parse_datavalue_entity				(qid, pid, snak_tid, Json_nde.cast(value_itm));
-			case Wbase_claim_type_.Tid__time:				return Parse_datavalue_time					(qid, pid, snak_tid, Json_nde.cast(value_itm));
-			case Wbase_claim_type_.Tid__quantity:			return Parse_datavalue_quantity				(qid, pid, snak_tid, Json_nde.cast(value_itm));
-			case Wbase_claim_type_.Tid__globecoordinate:	return Parse_datavalue_globecoordinate		(qid, pid, snak_tid, Json_nde.cast(value_itm));
-			case Wbase_claim_type_.Tid__monolingualtext:	return Parse_datavalue_monolingualtext		(qid, pid, snak_tid, Json_nde.cast(value_itm));
+			case Wbase_claim_type_.Tid__entity:				return Parse_datavalue_entity               (qid, pid, snak_tid, Json_nde.cast(value_itm));
+			case Wbase_claim_type_.Tid__time:				return Parse_datavalue_time                 (qid, pid, snak_tid, Json_nde.cast(value_itm));
+			case Wbase_claim_type_.Tid__quantity:			return Parse_datavalue_quantity             (qid, pid, snak_tid, Json_nde.cast(value_itm));
+			case Wbase_claim_type_.Tid__globecoordinate:	return Parse_datavalue_globecoordinate      (qid, pid, snak_tid, Json_nde.cast(value_itm));
+			case Wbase_claim_type_.Tid__monolingualtext:	return Parse_datavalue_monolingualtext      (qid, pid, snak_tid, Json_nde.cast(value_itm));
 			default:										throw Err_.new_unhandled_default(value_tid);
 		}
 	}
 	private Wbase_claim_entity Parse_datavalue_entity(byte[] qid, int pid, byte snak_tid, Json_nde nde) {
 		int len = nde.Len();
-		byte entity_tid = Byte_.Max_value_127;
-		byte[] entity_id_bry = null;
+		byte entityType = Byte_.Max_value_127;
+		byte[] numericId = null;
+		byte[] id = null;
 		for (int i = 0; i < len; ++i) {
 			Json_kv sub = Json_kv.cast(nde.Get_at(i));
 			byte tid = Wbase_claim_entity_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
+			byte[] subValBry = sub.Val().Data_bry();
 			switch (tid) {
-				case Wbase_claim_entity_.Tid__entity_type:		entity_tid = Wbase_claim_entity_type_.Reg.Get_tid_or_fail(sub.Val().Data_bry()); break;
-				case Wbase_claim_entity_.Tid__numeric_id:		entity_id_bry = sub.Val().Data_bry(); break;
-				case Wbase_claim_entity_.Tid__id:				break;	// ignore
+				case Wbase_claim_entity_.Tid__entity_type:      entityType = Wbase_claim_entity_type_.Reg.Get_tid_or_fail(subValBry); break;
+				case Wbase_claim_entity_.Tid__numeric_id:       numericId = subValBry; break;
+				case Wbase_claim_entity_.Tid__id:               id = subValBry; break;	// needed for sense and form
 			}
 		}
-		if (entity_id_bry == null) throw Err_.new_wo_type("pid is invalid entity", "pid", pid);
-		return new Wbase_claim_entity(pid, snak_tid, entity_tid, entity_id_bry);
+		// TOMBSTONE:senses and forms do not have "numeric-id"; EX:wd:Lexeme:L2 and p6072 has a value of `{"entity-type":"form", "id":"L2-F3"}`; DATE:2020-07-27
+		// if (numericId == null) throw Err_.new_wo_type("pid is invalid entity", "pid", pid);
+		return new Wbase_claim_entity(pid, snak_tid, entityType, numericId, id);
 	}
 	private Wbase_claim_monolingualtext Parse_datavalue_monolingualtext(byte[] qid, int pid, byte snak_tid, Json_nde nde) {
 		int len = nde.Len();

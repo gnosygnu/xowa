@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,21 +13,50 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.stores.*;
+package gplx.xowa.xtns.scribunto.libs;
+
+import gplx.Bry_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.String_;
+import gplx.xowa.xtns.wbases.Wdata_doc;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp_list;
+import gplx.xowa.xtns.wbases.claims.Wbase_references_grp;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_entity_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_rank_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_enum_itm;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.core.Wdata_alias_itm;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_claim;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_claim_v1;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_langtext;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_sitelink;
+import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
+import gplx.xowa.xtns.wbases.parsers.Wdata_doc_parser_v2;
+import gplx.xowa.xtns.wbases.stores.Wbase_prop_mgr;
+
 public class Scrib_lib_wikibase_srl {
 	public static Keyval[] Srl(Wbase_prop_mgr prop_mgr, Wdata_doc wdoc, boolean header_enabled, boolean legacy_style, byte[] page_url) {// REF.MW:/Wikibase/lib/includes/serializers/EntitySerializer.php!getSerialized; http://www.mediawiki.org/wiki/Extension:Wikibase_Client/Lua
 		int base_adj = legacy_style ? 0 : 1;
 		List_adp rv = List_adp_.New();
 		if (header_enabled) {
 			byte[] qid = wdoc.Qid();
-			boolean doc_is_qid = Bry_.Has_at_bgn(qid, Byte_ascii.Ltr_q) || Bry_.Has_at_bgn(qid, Byte_ascii.Ltr_Q);
+			Wbase_enum_itm entity_itm = Wbase_claim_entity_type_.ToTid(qid);
 			rv.Add(Keyval_.new_("id", qid));
-			rv.Add(Keyval_.new_("type", doc_is_qid ? Wbase_claim_entity_type_.Itm__item.Key_str() : Wbase_claim_entity_type_.Itm__property.Key_str()));	// type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
+			rv.Add(Keyval_.new_("type", entity_itm.Key_str()));	// type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
 			rv.Add(Keyval_.new_("schemaVersion", base_adj + 1));	// NOTE: needed by mw.wikibase.lua
 
 			// for Property pages, add a "datatype" property PAGE:ru.w:Маргарян,_Андраник_Наапетович; wd:Property:P18; DATE:2017-03-27
-			if (!doc_is_qid) {
+			if (entity_itm == Wbase_claim_entity_type_.Itm__property) {
 				String pid_name = String_.new_u8(Bry_.Mid(qid, Wdata_wiki_mgr.Ns_property_name_bry.length + 1));// +1 for ":" in "Property:"
 				rv.Add(Keyval_.new_("datatype", prop_mgr.Get_or_null(pid_name, page_url)));
 			}
@@ -153,7 +182,7 @@ public class Scrib_lib_wikibase_srl {
 				Wbase_claim_base itm = grp.Get_at(j);
 				pid_list.Add(Keyval_.int_(j + base_adj, Srl_claims_prop_itm_core(prop_mgr, visitor, itm_pid, itm, page_url)));	// NOTE: was originally "+ 1"; changed to base_adj; PAGE:ru.w:Tor ru.w:Кактусовые DATE:2014-10-25
 			}
-			rv.Add(Keyval_.new_(itm_pid, (Keyval[])pid_list.To_ary_and_clear(Keyval.class)));
+			rv.Add(Keyval_.new_(itm_pid, pid_list.To_ary_and_clear(Keyval.class)));
 		}
 		return (Keyval[])rv.To_ary_and_clear(Keyval.class);
 	}

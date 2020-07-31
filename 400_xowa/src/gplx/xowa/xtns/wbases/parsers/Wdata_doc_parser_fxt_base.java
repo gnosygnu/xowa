@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,43 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.wbases.parsers;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Object_;
+import gplx.Ordered_hash;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.langs.jsons.Json_ary;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_parser;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp_list;
+import gplx.xowa.xtns.wbases.claims.Wbase_references_grp;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_entity_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_string;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_value;
+import gplx.xowa.xtns.wbases.core.Wdata_alias_itm;
+import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
+
 abstract class Wdata_doc_parser_fxt_base {
 	protected Wdata_doc_parser wdoc_parser;
 	private final    Json_parser json_parser = new Json_parser();
@@ -26,34 +61,37 @@ abstract class Wdata_doc_parser_fxt_base {
 	public Wdata_sitelink_itm Make_sitelink(String site, String name, String... badges) {return new Wdata_sitelink_itm(Bry_.new_u8(site), Bry_.new_u8(name), Bry_.Ary(badges));}
 	public Wdata_langtext_itm Make_langval(String lang, String text) {return new Wdata_langtext_itm(Bry_.new_u8(lang), Bry_.new_u8(text));}
 	public Wdata_alias_itm Make_alias(String lang, String... vals) {return new Wdata_alias_itm(Bry_.new_u8(lang), Bry_.Ary(vals));}
-	public Wbase_claim_base Make_claim_string			(int pid, String val) {return new Wbase_claim_string(pid, Wbase_claim_value_type_.Tid__value, Bry_.new_u8(val));}
-	public Wbase_claim_base Make_claim_entity_qid		(int pid, int eid) {return new Wbase_claim_entity(pid, Wbase_claim_value_type_.Tid__value, Wbase_claim_entity_type_.Tid__item, Int_.To_bry(eid));}
-	public Wbase_claim_base Make_claim_entity_pid		(int pid, int eid) {return new Wbase_claim_entity(pid, Wbase_claim_value_type_.Tid__value, Wbase_claim_entity_type_.Tid__property, Int_.To_bry(eid));}
-	public Wbase_claim_base Make_claim_monolingualtext	(int pid, String lang, String text) {return new Wbase_claim_monolingualtext(pid, Wbase_claim_value_type_.Tid__value, Bry_.new_u8(lang), Bry_.new_u8(text));}
-	public Wbase_claim_base Make_claim_globecoordinate	(int pid, String lat, String lng, String prc) {return new Wbase_claim_globecoordinate(pid, Wbase_claim_value_type_.Tid__value, Bry_.new_u8(lat), Bry_.new_u8(lng), Object_.Bry__null, Bry_.new_u8(prc), Bry_.new_a7("http://www.wikidata.org/entity/Q2"));}
-	public Wbase_claim_base Make_claim_quantity			(int pid, int val, int unit, int ubound, int lbound) {return new Wbase_claim_quantity(pid, Wbase_claim_value_type_.Tid__value, Bry_.new_u8(Int_.To_str(val)), Bry_.new_u8(Int_.To_str(unit)), Bry_.new_u8(Int_.To_str(ubound)), Bry_.new_u8(Int_.To_str(lbound)));}
-	public Wbase_claim_base Make_claim_time				(int pid, String val) {return new Wbase_claim_time(pid, Wbase_claim_value_type_.Tid__value, Wbase_claim_time_.To_bry(tmp_time_bfr, val), Wbase_claim_time_.Dflt__timezone.Val_bry(), Wbase_claim_time_.Dflt__before.Val_bry(), Wbase_claim_time_.Dflt__after.Val_bry(), Wbase_claim_time_.Dflt__precision.Val_bry(), Wbase_claim_time_.Dflt__calendarmodel.Val_bry());}
-	public Wbase_claim_base Make_claim_novalue			(int pid) {return new Wbase_claim_value(pid, Wbase_claim_type_.Tid__unknown, Wbase_claim_value_type_.Tid__novalue);}
+	public Wbase_claim_base Make_claim_string           (int pid, String val) {return new Wbase_claim_string(pid, Wbase_claim_value_type_.Tid__value, Bry_.new_u8(val));}
+	public Wbase_claim_base Make_claim_entity_qid       (int pid, int eid) {return new Wbase_claim_entity(pid, Wbase_claim_value_type_.Tid__value, Wbase_claim_entity_type_.Tid__item, Int_.To_bry(eid));}
+	public Wbase_claim_base Make_claim_entity_pid       (int pid, int eid) {return new Wbase_claim_entity(pid, Wbase_claim_value_type_.Tid__value, Wbase_claim_entity_type_.Tid__property, Int_.To_bry(eid));}
+	public Wbase_claim_base Make_claim_entity_lid       (int pid, int eid) {return new Wbase_claim_entity(pid, Wbase_claim_value_type_.Tid__value, Wbase_claim_entity_type_.Tid__lexeme, Int_.To_bry(eid));}
+	public Wbase_claim_base Make_claim_entity_fid       (int pid, String id) {return new Wbase_claim_entity(pid, Wbase_claim_value_type_.Tid__value, Wbase_claim_entity_type_.Tid__form, null, Bry_.new_u8(id));}
+	public Wbase_claim_base Make_claim_entity_sid       (int pid, String id) {return new Wbase_claim_entity(pid, Wbase_claim_value_type_.Tid__value, Wbase_claim_entity_type_.Tid__sense, null, Bry_.new_u8(id));}
+	public Wbase_claim_base Make_claim_monolingualtext  (int pid, String lang, String text) {return new Wbase_claim_monolingualtext(pid, Wbase_claim_value_type_.Tid__value, Bry_.new_u8(lang), Bry_.new_u8(text));}
+	public Wbase_claim_base Make_claim_globecoordinate  (int pid, String lat, String lng, String prc) {return new Wbase_claim_globecoordinate(pid, Wbase_claim_value_type_.Tid__value, Bry_.new_u8(lat), Bry_.new_u8(lng), Object_.Bry__null, Bry_.new_u8(prc), Bry_.new_a7("http://www.wikidata.org/entity/Q2"));}
+	public Wbase_claim_base Make_claim_quantity         (int pid, int val, int unit, int ubound, int lbound) {return new Wbase_claim_quantity(pid, Wbase_claim_value_type_.Tid__value, Bry_.new_u8(Int_.To_str(val)), Bry_.new_u8(Int_.To_str(unit)), Bry_.new_u8(Int_.To_str(ubound)), Bry_.new_u8(Int_.To_str(lbound)));}
+	public Wbase_claim_base Make_claim_time             (int pid, String val) {return new Wbase_claim_time(pid, Wbase_claim_value_type_.Tid__value, Wbase_claim_time_.To_bry(tmp_time_bfr, val), Wbase_claim_time_.Dflt__timezone.Val_bry(), Wbase_claim_time_.Dflt__before.Val_bry(), Wbase_claim_time_.Dflt__after.Val_bry(), Wbase_claim_time_.Dflt__precision.Val_bry(), Wbase_claim_time_.Dflt__calendarmodel.Val_bry());}
+	public Wbase_claim_base Make_claim_novalue          (int pid) {return new Wbase_claim_value(pid, Wbase_claim_type_.Tid__unknown, Wbase_claim_value_type_.Tid__novalue);}
 
 	public void Test_entity(String raw, String expd)		{Tfds.Eq(expd, String_.new_u8(wdoc_parser.Parse_qid(json_parser.Parse_by_apos(raw))));}
 	public void Test_sitelinks(String raw, Wdata_sitelink_itm... expd) {
 		Ordered_hash actl_hash = wdoc_parser.Parse_sitelinks(Q1_bry, json_parser.Parse_by_apos(raw));
-		Tfds.Eq_ary_str((Wdata_sitelink_itm[])actl_hash.To_ary(Wdata_sitelink_itm.class), expd);
+		Tfds.Eq_ary_str(actl_hash.To_ary(Wdata_sitelink_itm.class), expd);
 	}
 	public void Test_labels(String raw, Wdata_langtext_itm... expd)		{Test_langvals(raw, Bool_.Y, expd);}
 	public void Test_descriptions(String raw, Wdata_langtext_itm... expd)	{Test_langvals(raw, Bool_.N, expd);}
 	private void Test_langvals(String raw, boolean labels_or_descriptions, Wdata_langtext_itm... expd) {
 		Ordered_hash actl_hash = wdoc_parser.Parse_langvals(Q1_bry, json_parser.Parse_by_apos(raw), labels_or_descriptions);
-		Tfds.Eq_ary_str((Wdata_langtext_itm[])actl_hash.To_ary(Wdata_langtext_itm.class), expd);
+		Tfds.Eq_ary_str(actl_hash.To_ary(Wdata_langtext_itm.class), expd);
 	}
 	public void Test_aliases(String raw, Wdata_alias_itm... expd) {
 		Ordered_hash actl_hash = wdoc_parser.Parse_aliases(Q1_bry, json_parser.Parse_by_apos(raw));
-		Tfds.Eq_ary_str((Wdata_alias_itm[])actl_hash.To_ary(Wdata_alias_itm.class), expd);
+		Tfds.Eq_ary_str(actl_hash.To_ary(Wdata_alias_itm.class), expd);
 	}
 	public void Test_claims(String raw, Wbase_claim_base... expd) {
 		Ordered_hash actl_hash = wdoc_parser.Parse_claims(Q1_bry, json_parser.Parse_by_apos(raw));
 		List_adp actl_list = Wbase_claim_grp.Xto_list(actl_hash);
-		Tfds.Eq_ary_str((Wbase_claim_base[])actl_list.To_ary(Wbase_claim_base.class), expd);
+		Tfds.Eq_ary_str(actl_list.To_ary(Wbase_claim_base.class), expd);
 	}
 	public void Test_claims_data(String raw, Wbase_claim_base expd) {
 		Json_doc jdoc = json_parser.Parse_by_apos(raw);

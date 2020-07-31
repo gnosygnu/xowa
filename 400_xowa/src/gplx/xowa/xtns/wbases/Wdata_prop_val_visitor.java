@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,41 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.hwtrs.*; import gplx.xowa.xtns.wbases.claims.itms.times.*;
+package gplx.xowa.xtns.wbases;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.Decimal_adp;
+import gplx.Decimal_adp_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Math_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_itm_;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_visitor;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_string;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_value;
+import gplx.xowa.xtns.wbases.claims.itms.times.Wbase_date;
+import gplx.xowa.xtns.wbases.claims.itms.times.Wbase_date_;
+import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
+import gplx.xowa.xtns.wbases.hwtrs.Wdata_hwtr_mgr;
+import gplx.xowa.xtns.wbases.hwtrs.Wdata_hwtr_msgs;
+import gplx.xowa.xtns.wbases.hwtrs.Wdata_lbl_itm;
+import gplx.xowa.xtns.wbases.hwtrs.Wdata_lbl_mgr;
+
 public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.UNSAFE; callers must do synchronized
 	private Wdata_wiki_mgr wdata_mgr; private Xoae_app app; private Bry_bfr bfr;
 	private Xol_lang_itm lang;

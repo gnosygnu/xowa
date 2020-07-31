@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import org.junit.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.core.*;
+package gplx.xowa.xtns.wbases.parsers;
+
+import gplx.String_;
+import org.junit.Before;
+import org.junit.Test;
+
 public class Wdata_doc_parser_v2__claims__tst {
 	@Before public void init() {fxt.Init();} private Wdata_doc_parser_v2_fxt fxt = new Wdata_doc_parser_v2_fxt();
 	@Test   public void Full__string() {
@@ -187,5 +190,41 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_string(1, "a^2+b^2=c^2")
 		);
 	}
-	// www.wikidata.org/wiki/Q11518
+	@Test public void ValueLexeme() {// EX:wd:L2 P46028; DATE:2020-07-28
+		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
+		( "{ 'value':"
+  		, "  { 'entity-type':'lexeme'"
+		, "  , 'numeric-id':'123'"
+		, "  , 'id':'L123'"
+		, "  }"
+        , ", 'type':'wikibase-entityid'"
+		, "}"
+		)
+		, fxt.Make_claim_entity_lid(1, 123)
+		);
+	}
+	@Test public void ValueForm() {// EX:wd:L2 L2-F3; DATE:2020-07-28
+		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
+		( "{ 'value':"
+  		, "  { 'entity-type':'form'"
+		, "  , 'id':'L2-F3'"
+		, "  }"
+        , ", 'type':'wikibase-entityid'"
+		, "}"
+		)
+		, fxt.Make_claim_entity_fid(1, "L2-F3")
+		);
+	}
+	@Test public void ValueSense() {// EX:wd:L2 L2-S1; DATE:2020-07-28
+		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
+		( "{ 'value':"
+  		, "  { 'entity-type':'sense'"
+		, "  , 'id':'L2-S1'"
+		, "  }"
+        , ", 'type':'wikibase-entityid'"
+		, "}"
+		)
+		, fxt.Make_claim_entity_sid(1, "L2-S1")
+		);
+	}
 }

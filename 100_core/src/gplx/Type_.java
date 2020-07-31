@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+
 public class Type_ {//RF:2017-10-08
 	public static Class<?> Type_by_obj(Object o) {return o.getClass();}
 	public static Class<?> Type_by_primitive(Object o) {
@@ -42,7 +43,12 @@ public class Type_ {//RF:2017-10-08
 
 	public static String Name_by_obj(Object obj) {return obj == null ? String_.Null_mark : Name(Type_by_obj(obj));}
 	public static String Name(Class<?> type) {
-		return type.getName(); 
+		return type.getName();
+	}
+
+	public static String SimpleName_by_obj(Object obj) {return obj == null ? String_.Null_mark : SimpleName(Type_by_obj(obj));}
+	public static String SimpleName(Class<?> type) {
+		return type.getSimpleName();
 	}
 
 	public static boolean Is_array(Class<?> t) {
