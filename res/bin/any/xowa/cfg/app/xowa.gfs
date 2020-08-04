@@ -270,7 +270,8 @@ app.wikis.get('~{wiki_key}').html.article {
   <div id='xowa_err_div' class='xowa_err' style='display:none; color:red; white-space:pre; display:block; unicode-bidi:embed;'></div>~{page_heading}  
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
-    <div id="contentSub" class="visible">~{page_content_sub}</div>~{page_jumpto}
+    <div id="contentSub" class="visible">
+    <div id="contentSub2"></div>~{page_content_sub}</div>~{page_jumpto}
     <div id="mw-content-text" lang="~{page_lang}" dir="~{page_lang_ltr}" class="mw-content-~{page_lang_ltr} mw-parser-output">~{page_data}
       <div class="visualClear">
 ~{page_langs}
