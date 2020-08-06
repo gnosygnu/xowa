@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.hxtns.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.hxtns.*;
-import gplx.dbs.*;
+package gplx.xowa.htmls.hxtns.pages;
+
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Rls_able;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_rdr_;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.Dbmeta_fld_list;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+
 public class Hxtn_page_tbl implements Rls_able {
 	private static final String tbl_name = "hxtn_page"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private final    String fld_page_id, fld_wkr_id, fld_data_id;		
@@ -50,6 +62,19 @@ public class Hxtn_page_tbl implements Rls_able {
 			.Val_int(fld_wkr_id     , wkr_id)
 			.Val_int(fld_data_id    , data_id)
 		.Exec_insert();
+	}
+	public boolean Exists(int page_id, int wkr_id, int data_id) {
+		Db_rdr rdr = Db_rdr_.Empty;
+		try {
+			rdr = conn.Stmt_select(tbl_name, flds, fld_page_id, fld_wkr_id, fld_data_id)
+				.Crt_int(fld_page_id, page_id)
+				.Crt_int(fld_wkr_id, wkr_id)
+				.Crt_int(fld_data_id, data_id)
+				.Exec_select__rls_auto();
+			return rdr.Move_next();
+		} finally {
+			rdr.Rls();
+		}
 	}
 	public List_adp Select_by_page(int page_id) {
 		List_adp rv = List_adp_.New();

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.gfui.controls.standards.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.guis.views;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Datetime_now;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.String_;
+import gplx.gfui.controls.standards.Gfui_html;
+import gplx.xowa.Xoa_page_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.Xoh_page_wtr_wkr;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.tmpls.Xot_defn_trace_dbg;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
+
 public class Xog_tab_itm_edit_mgr {
 	public static void Save(Xog_tab_itm tab, boolean quick_save) {
 		if (tab.View_mode() != Xopg_view_mode_.Tid__edit) return;	// exit if not edit; handles ctrl+s being pressed in read/html modes
@@ -58,8 +76,13 @@ public class Xog_tab_itm_edit_mgr {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to update categories; err=~{0}", Err_.Message_gplx_log(e));
 			}
 
-			// TODO: save html copy
-			//wiki.Db_mgr().Hdump_mgr().Save(page);
+			// reload html_db_id b/c it gets cleared in Xopg_db_page; ISSUE#:699; DATE:2020-08-06
+			Xowd_page_itm rv = new Xowd_page_itm();
+			wiki.Data__core_mgr().Tbl__page().Select_by_ttl(rv, page.Ttl().Ns(), page.Ttl().Page_db());
+			page.Db().Page().Html_db_id_(rv.Html_db_id());
+
+			// save html
+			wiki.Html__hdump_mgr().Save_mgr().Save(page, true);
 
 			// parse page and show it
 			page.Html_data().Edit_preview_(Bry_.Empty);

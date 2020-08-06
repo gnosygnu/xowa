@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.hxtns.blobs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.hxtns.*;
-import gplx.dbs.*;
-import gplx.core.ios.*;
+package gplx.xowa.htmls.hxtns.blobs;
+
+import gplx.Bry_bfr;
+import gplx.Hash_adp_bry;
+import gplx.Rls_able;
+import gplx.String_;
+import gplx.core.ios.Io_stream_zip_mgr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_rdr_;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.Dbmeta_fld_list;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+
 public class Hxtn_blob_tbl implements Rls_able {
 	private static final String tbl_name = "hxtn_blob"; private static final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private static final    String
@@ -55,6 +68,19 @@ public class Hxtn_blob_tbl implements Rls_able {
 			.Val_byte(fld_zip_tid   , zip_tid_default)
 			.Val_bry(fld_blob_data  , blob_data)
 		.Exec_insert();
+	}
+	public boolean Exists(int blob_tid, int wiki_id, int blob_id) {
+		Db_rdr rdr = Db_rdr_.Empty;
+		try {
+			rdr = conn.Stmt_select(tbl_name, flds, fld_blob_tid, fld_wiki_id, fld_blob_id)
+				.Crt_int(fld_blob_tid, blob_tid)
+				.Crt_int(fld_wiki_id, wiki_id)
+				.Crt_int(fld_blob_id, blob_id)
+				.Exec_select__rls_auto();
+			return rdr.Move_next();
+		} finally {
+			rdr.Rls();
+		}
 	}
 	public void Select_to_regy(Bry_bfr temp_bfr, Hash_adp_bry blob_data_hash) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, String_.Ary(fld_wiki_id, fld_blob_id, fld_blob_tid))

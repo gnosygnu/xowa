@@ -31,13 +31,14 @@ import gplx.xowa.htmls.Xoh_page;
 import gplx.xowa.htmls.hxtns.blobs.Hxtn_blob_tbl;
 import gplx.xowa.htmls.hxtns.wikis.Hxtn_wiki_mgr;
 import gplx.xowa.htmls.hxtns.wkrs.Hxtn_wkr_mgr;
+
 public class Hxtn_page_mgr {
 	private Hxtn_page_tbl page_tbl;
 	private Hxtn_blob_tbl blob_tbl;
-	private Hash_adp_bry blob_hash;
-	private final    Hash_adp__int wkrs = new Hash_adp__int();
+	private Hash_adp_bry blob_hash = Hash_adp_bry.cs();
+	private final Hash_adp__int wkrs = new Hash_adp__int();
 	private boolean dbs_missing = true;
-	private Bry_bfr temp_bfr;
+	private Bry_bfr temp_bfr = Bry_bfr_.New();
 	public Hxtn_page_tbl Page_tbl() {return page_tbl;}
 	public Hxtn_blob_tbl Blob_tbl() {return blob_tbl;}
 
@@ -45,8 +46,6 @@ public class Hxtn_page_mgr {
 		// init tbls and other members
 		this.page_tbl = new Hxtn_page_tbl(wkr_db_conn);
 		this.blob_tbl = new Hxtn_blob_tbl(wkr_db_conn, zip_tid);
-		this.blob_hash = Hash_adp_bry.cs();
-		this.temp_bfr = Bry_bfr_.New();
 
 		// if tbl exists, xomp_resume has run; load known blobs to prevent dupes
 		if (wkr_db_conn.Meta_tbl_exists(page_tbl.Tbl_name())) {
@@ -88,13 +87,16 @@ public class Hxtn_page_mgr {
 		blob_tbl.Stmt_end();
 	}
 	public void Page_tbl__insert(int page_id, int wkr_id, int data_id) {
-		page_tbl.Insert_exec(page_id, wkr_id, data_id);
+		if (!page_tbl.Exists(page_id, wkr_id, data_id))
+			page_tbl.Insert_exec(page_id, wkr_id, data_id);
 	}
 	public void Blob_tbl__insert(int blob_tid, int wiki_id, int blob_id, byte[] blob_text) {
 		byte[] key = Hxtn_blob_tbl.Make_key(temp_bfr, blob_tid, wiki_id, blob_id);
 		if (!blob_hash.Has(key)) {// multiple pages can refer to same template; only insert if not seen
 			blob_hash.Add_as_key_and_val(key);
-			blob_tbl.Insert_exec(blob_tid, wiki_id, blob_id, blob_text);
+			if (!blob_tbl.Exists(blob_tid, wiki_id, blob_id)) {
+				blob_tbl.Insert_exec(blob_tid, wiki_id, blob_id, blob_text);
+			}
 		}
 	}
 	public void Reg_wkr(Hxtn_page_wkr wkr) {

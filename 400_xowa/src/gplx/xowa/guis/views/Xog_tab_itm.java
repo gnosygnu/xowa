@@ -55,6 +55,7 @@ import gplx.xowa.guis.Xoa_gui_mgr;
 import gplx.xowa.guis.bnds.Xog_bnd_box_;
 import gplx.xowa.guis.history.Xog_history_mgr;
 import gplx.xowa.wikis.pages.Xopg_view_mode_;
+import gplx.xowa.wikis.pages.dbs.Xopg_db_page;
 
 public class Xog_tab_itm implements Gfo_invk {
 	private Xog_win_itm win;
@@ -248,7 +249,7 @@ public class Xog_tab_itm implements Gfo_invk {
 //					Xof_fsdb_mgr fsdb_mgr = wiki.File_mgr().Fsdb_mgr();
 //					async_wkr = new Xof_file_wkr(wiki.File__orig_mgr(), fsdb_mgr.Bin_mgr(), fsdb_mgr.Mnt_mgr(), app.Usere().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, page.Hdump_mgr().Imgs());
 				async_wkr = new Load_files_wkr(this);
-				if (wiki.Html__hdump_enabled() && page.Db().Page().Html_db_id() == -1) {
+				if (wiki.Html__hdump_enabled() && page.Db().Page().Html_db_id() == Xopg_db_page.HTML_DB_ID_NULL) {
 					wiki.Html__hdump_mgr().Save_mgr().Save(page);
 				}
 			}

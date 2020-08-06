@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.dbs.qrys.*;
-import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.dbs;
+
+import gplx.DateAdp;
+import gplx.Datetime_now;
+import gplx.String_;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Dbmeta_fld_itm;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.Xowd_cfg_key_;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_text_tbl;
+
 public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 	private final    Xodb_mgr_sql db_mgr;
 	public Xodb_save_mgr_sql(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr;} 
@@ -67,9 +81,10 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		db_mgr.Load_mgr().Load_by_id(db_page, page_id);
 		Xowd_text_tbl text_tbl = db_mgr.Core_data_mgr().Dbs__get_by_id_or_fail(db_page.Text_db_id()).Tbl__text();
 		text_tbl.Update(page_id, text_raw);
-//			int html_db_id = db_page.Html_db_id();
-//			if (html_db_id != -1)
-//				db_mgr.Core_data_mgr().Tbl__page().Update__html_db_id(page_id, -1);	// zap html_db_id so that next load will repopulate it
+
+		// TOMBSTONE: do not set html_db_id to -1; editing wtxt will now save html; ISSUE#:699; DATE:2020-08-06
+		// if (db_page.Html_db_id() != -1)
+		//     db_mgr.Core_data_mgr().Tbl__page().Update__html_db_id(page_id, -1); // zap html_db_id so that next load will repopulate it
 	}
 	public void Data_rename(Xoae_page page, int trg_ns, byte[] trg_ttl) {
 		db_mgr.Core_data_mgr().Tbl__page().Update__ns__ttl(page.Db().Page().Id(), trg_ns, trg_ttl);

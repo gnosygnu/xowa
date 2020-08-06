@@ -33,6 +33,7 @@ import gplx.xowa.Xowe_wiki_;
 import gplx.xowa.addons.wikis.pages.syncs.core.Xosync_read_mgr;
 import gplx.xowa.guis.views.Xog_tab_itm;
 import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.pages.dbs.Xopg_db_page;
 
 public class Xowe_page_mgr {
 	private final Xowe_wiki wiki;
@@ -90,7 +91,7 @@ public class Xowe_page_mgr {
 		}
 
 		// load from html_db
-		boolean from_html_db = page.Db().Page().Html_db_id() != -1;
+		boolean from_html_db = page.Db().Page().Html_db_id() != Xopg_db_page.HTML_DB_ID_NULL;
 		boolean read_from_html_db_preferred = wiki.Html__hdump_mgr().Load_mgr().Read_preferred();
 		boolean isCategoryPage = ttl.Ns().Id_is_ctg();
 		if (from_html_db) {

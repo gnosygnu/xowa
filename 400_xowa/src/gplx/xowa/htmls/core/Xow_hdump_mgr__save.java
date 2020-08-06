@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.dbs.*;
-import gplx.core.ios.*; import gplx.core.primitives.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.addons.wikis.pages.syncs.core.parsers.*;
+package gplx.xowa.htmls.core;
+
+import gplx.core.ios.Io_stream_zip_mgr;
+import gplx.core.primitives.Bool_obj_ref;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.dbs.Xowd_html_tbl;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_mgr;
+import gplx.xowa.htmls.core.wkrs.Xoh_hzip_bfr;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
+import gplx.xowa.wikis.pages.dbs.Xopg_db_page;
+
 public class Xow_hdump_mgr__save {
 	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
 	private final    Xoh_page tmp_hpg; private final    Xoh_hzip_bfr tmp_bfr = Xoh_hzip_bfr.New_txt(32); private Bool_obj_ref html_db_is_new = Bool_obj_ref.n_();		
@@ -28,11 +42,12 @@ public class Xow_hdump_mgr__save {
 		this.dflt_zip_tid = dflt_zip_tid; this.dflt_hzip_tid = dflt_hzip_tid; tmp_bfr.Mode_is_b256_(mode_is_b256);
 	}
 	public byte[] Src_as_hzip() {return src_as_hzip;} private byte[] src_as_hzip;
-	public int Save(Xoae_page page) {
+	public int Save(Xoae_page page) {return Save(page, false);}
+	public int Save(Xoae_page page, boolean isEdit) {
 		synchronized (tmp_hpg) {
 			Bld_hdump(page);
 			tmp_hpg.Ctor_by_hdiff(tmp_bfr, page, page.Wikie().Msg_mgr().Val_by_id(gplx.xowa.langs.msgs.Xol_msg_itm_.Id_toc));
-			Xow_db_file html_db = Get_html_db(wiki, page, html_db_is_new.Val_n_());
+			Xow_db_file html_db = Get_html_db(wiki, page, html_db_is_new.Val_n_(), isEdit);
 			return Save(page, tmp_hpg, html_db.Tbl__html(), html_db_is_new.Val(), true);
 		}
 	}
@@ -66,14 +81,31 @@ public class Xow_hdump_mgr__save {
 			src = zip_mgr.Zip((byte)zip_tid, src);
 		return src;
 	}
-	private static Xow_db_file Get_html_db(Xow_wiki wiki, Xoae_page page, Bool_obj_ref html_db_is_new) {
+	private static Xow_db_file Get_html_db(Xow_wiki wiki, Xoae_page page, Bool_obj_ref html_db_is_new, boolean isEdit) {
 		Xow_db_file rv = Xow_db_file.Null;
 		Xow_db_mgr core_data_mgr = wiki.Data__core_mgr();
 		int html_db_id = page.Db().Page().Html_db_id();
-		if (html_db_id == -1) {
+		if (html_db_id == Xopg_db_page.HTML_DB_ID_NULL) {
 			html_db_is_new.Val_y_();
-			rv = core_data_mgr.Db__html();
-			if (rv == null) rv = core_data_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__html_data);
+
+			// get htmlDbTid; NOTE: probably do not need Tid__html_data b/c xomp_wkr and sync_mgr should be building the databases; ISSUE#:699; DATE:2020-08-06
+			byte htmlDbTid = isEdit ? Xow_db_file_.Tid__html_user : Xow_db_file_.Tid__html_data;
+
+			// get htmlDb
+			if (isEdit) {
+				rv = core_data_mgr.Dbs__get_by_tid_or_null(htmlDbTid);
+			}
+			else {
+				rv = core_data_mgr.Db__html();
+			}
+
+			// make htmlDb if not available
+			if (rv == null) {
+				rv = core_data_mgr.Dbs__make_by_tid(htmlDbTid);
+				Xowd_html_tbl html_tbl = new Xowd_html_tbl(rv.Conn());
+				html_tbl.Create_tbl();
+			}
+
 			html_db_id = rv.Id();
 			page.Db().Page().Html_db_id_(html_db_id);
 			core_data_mgr.Tbl__page().Update__html_db_id(page.Db().Page().Id(), html_db_id);
