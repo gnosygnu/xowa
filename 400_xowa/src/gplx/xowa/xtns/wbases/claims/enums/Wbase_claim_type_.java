@@ -17,6 +17,7 @@ package gplx.xowa.xtns.wbases.claims.enums;
 
 import gplx.Bry_;
 
+// NOTE: these map to "datatype", not "entity-type"; specifically `"datatype":"wikibase-lexeme"` vs `"entity-type":"lexeme"`
 public class Wbase_claim_type_ {
 	public static final byte	// SERIALIZED:wbase_prop|datatype; REF:https://www.wikidata.org/wiki/Help:Data_type
 	  Tid__unknown              =  0
@@ -56,10 +57,11 @@ public class Wbase_claim_type_ {
 	, Itm__math                 = New(Tid__math                  , "math")              // EX:wd:Property:P2534
 	, Itm__geo_shape            = New(Tid__geo_shape             , "geo-shape")         // EX:wd:Property:P3896
 	, Itm__tabular_data         = New(Tid__tabular_data          , "tabular-data")      // EX:wd:Property:P4179
-	, Itm__lexeme               = New(Tid__lexeme                , "lexeme")            // EX:wd:Lexeme:L2
-	, Itm__form                 = New(Tid__form                  , "form")              // EX:wd:Lexeme:L2 P5830
-	, Itm__sense                = New(Tid__sense                 , "sense")             // EX:wd:Lexeme:L2 P6072
+	, Itm__lexeme               = New(Tid__lexeme                , "wikibase-lexeme")   // EX:wd:Property:P5188
+	, Itm__form                 = New(Tid__form                  , "wikibase-form")     // EX:wd:Property:P5972
+	, Itm__sense                = New(Tid__sense                 , "wikibase-sense")    // EX:wd:Property:P5193
 	;
+
 	private static Wbase_enum_itm New(byte tid, String key)						{return New(tid, key, key);}
 	private static Wbase_enum_itm New(byte tid, String key, String scrib)		{return Reg.Add(new Wbase_claim_type(tid, key, scrib));}
 	public static String Get_scrib_or_unknown(byte tid)	{return ((Wbase_claim_type)Reg.Get_itm_or(tid, Itm__unknown)).Key_for_scrib();}

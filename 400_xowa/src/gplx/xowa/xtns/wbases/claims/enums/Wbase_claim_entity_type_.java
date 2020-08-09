@@ -34,9 +34,9 @@ public class Wbase_claim_entity_type_ {
 	public static final Wbase_enum_itm
 	  Itm__item        = Reg.Add(Tid__item        , "item")
 	, Itm__property    = Reg.Add(Tid__property	  , "property")
-	, Itm__lexeme      = Reg.Add(Tid__lexeme      , "lexeme")
-	, Itm__sense       = Reg.Add(Tid__sense       , "sense")
-	, Itm__form        = Reg.Add(Tid__form        , "form")
+	, Itm__lexeme      = Reg.Add(Tid__lexeme      , "lexeme")             // EX:wd:Lexeme:L2
+	, Itm__sense       = Reg.Add(Tid__sense       , "sense")              // EX:wd:Lexeme:L2 P5830
+	, Itm__form        = Reg.Add(Tid__form        , "form")               // EX:wd:Lexeme:L2 P6072
 	;
 
 	public static Wbase_enum_itm ToTid(byte[] id) {
