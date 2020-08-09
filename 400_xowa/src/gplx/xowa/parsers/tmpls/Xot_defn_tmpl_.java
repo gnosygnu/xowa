@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,18 +13,42 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.parsers.tmpls;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.cases.Xol_case_cvt;
+import gplx.xowa.langs.cases.Xol_case_mgr;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.wikis.nss.Xow_ns_;
+
 public class Xot_defn_tmpl_ {
-	public static Xot_invk CopyNew(Xop_ctx ctx, Xot_defn_tmpl orig_defn, Xot_invk orig, Xot_invk caller, byte[] src, int frame_ns, byte[] frame_ttl) {	// SEE:NOTE_1
+	public static Xot_invk CopyNew(Xop_ctx ctx, Xot_defn_tmpl orig_defn, Xot_invk orig, Xot_invk caller, byte[] src, int frame_ns, byte[] frame_ttl) {    // SEE:NOTE_1
 		Xop_tkn_mkr tkn_mkr = ctx.Tkn_mkr();
 		byte[] orig_src = orig_defn.Data_raw();
 		Xowe_wiki wiki = ctx.Wiki();
 		Xot_invk_temp rv = Xot_invk_temp.New(orig.Defn_tid(), ctx.Page().Ttl().Page_txt(), orig.Name_tkn(), orig_src, caller.Src_bgn(), caller.Src_end());
-		frame_ttl = wiki.Lang().Case_mgr().Case_reuse_1st_upper(frame_ttl);	// NOTE: always uppercase 1st; EX:{{navbox -> "Template:Navbox"; PAGE:en.w:Achilles DATE:2014-06-21
+
+		// DATE:2014-06-21: always uppercase 1st; EX:{{navbox -> "Template:Navbox"; PAGE:en.w:Achilles
+		// DATE:2020-08-09: ISSUE#:784; uppercase non-ascii chars; NOTE: do not reuse byte array, else will cause Xot_defn_trace tests to fail
+		frame_ttl = Xol_case_cvt.Upper_1st(frame_ttl, 0, frame_ttl.length, Bool_.N);
+
+		// DATE:2014-08-14: always use spaces
 		frame_ttl = Xoa_ttl.Replace_unders(frame_ttl);
-		if (frame_ns == Xow_ns_.Tid__template)
-			frame_ttl = Bry_.Add(wiki.Ns_mgr().Ns_template().Name_db_w_colon(), Xoa_ttl.Replace_unders(frame_ttl)); // NOTE: always prepend "Template:" to frame_ttl; DATE:2014-06-13; always use spaces; DATE:2014-08-14; must be local language; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
+
+		// DATE:2014-06-13: always prepend "Template:" to frame_ttl
+		// DATE:2016-11-23: must be local language; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов
+		// DATE:2020-08-09: ISSUE#:784; apply to all non-main namespaces; PAGE:en.w:Wikipedia:Wikipedia_Signpost/2015-07-15/Op-ed
+		if (frame_ns != Xow_ns_.Tid__main) {
+			byte[] nsBry = wiki.Ns_mgr().Ids_get_or_null(frame_ns).Name_db_w_colon();
+			frame_ttl = Bry_.Add(nsBry, frame_ttl);
+		}
+
 		rv.Frame_ttl_(frame_ttl);
 		int orig_args_len = orig.Args_len();
 		boolean tmpl_args_parsing_orig = ctx.Tmpl_args_parsing();
