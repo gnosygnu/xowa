@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
-import gplx.xowa.xtns.cldrs.*;
+package gplx.xowa.xtns.scribunto.libs;
+
+import gplx.Bry_;
+import gplx.DateAdp_;
+import gplx.Datetime_now;
+import gplx.Gfo_invk_;
+import gplx.Io_mgr;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.langs.jsons.Json_doc;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.msgs.Xol_msg_mgr;
+import gplx.xowa.xtns.cldrs.Cldr_name_loader_fxt;
+import gplx.xowa.xtns.scribunto.Scrib_invoke_func_fxt;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import org.junit.Before;
+import org.junit.Test;
+
 public class Scrib_lib_language_tst {
 	@Before public void init() {
 		fxt.Clear_for_lib();
@@ -98,6 +114,7 @@ public class Scrib_lib_language_tst {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", Keyval_.Ary(Keyval_.new_("noCommafy", true)))		, "1234");		// noCommafy.y
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", Keyval_.Ary(Keyval_.new_("noCommafy", false)))	, "1,234");		// noCommafy.n
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", "1234", Keyval_.Ary(Keyval_.new_("noCommafy", "y")))		, "1234");		// noCommafy."y"; ISSUE#:372 DATE:2019-03-02
+		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatNum, Object_.Ary("en", 768d / 10000000d)		, "7.68E-5");	// ensure "e-05" -> "E-5" ISSUE#:697; DATE:2020-08-12
 	}
 	@Test  public void FormatDate() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_language.Invk_formatDate, Object_.Ary("en", "Y-m-d", "2013-03-17", false), "2013-03-17");

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+
 public class Double_ {
 	public static final String Cls_val_name = "double";
 	public static final    Class<?> Cls_ref_type = Double.class; 
@@ -42,7 +43,9 @@ public class Double_ {
 		int v_as_int = (int)v;			
 		return v == v_as_int
 			? Int_.To_str(v_as_int)		// convert to int, and call print String to eliminate any trailing decimal places
-			: Float_.To_str((float)v);	// calling ((float)v).toString is better at removing trailing 0s than String.format("%g", v). note that .net .toString() handles it better; EX:2449.600000000000d; DATE:2014-07-29
+			// DATE:2014-07-29; calling ((float)v).toString is better at removing trailing 0s than String.format("%g", v). note that .net .toString() handles it better; EX:2449.600000000000d
+			// DATE:2020-08-12; calling ToStrByPrintF b/c better at removing trailing 0s; ISSUE#:697;
+			: gplx.objects.primitives.Double_.ToStrByPrintF(v);
 	}
 	public static int Compare(double lhs, double rhs) {
 		if		(lhs == rhs) 	return CompareAble_.Same;
