@@ -16,7 +16,7 @@
         <javac includeantruntime="false" target="${jdk}" source="${jdk}" sourcepath="" 
 		  srcdir   ="${root_dir}/src/100_core"
 		  destdir  ="${root_dir}/src/100_core/bin"
-		  classpath="${root_dir}/src/lib/junit.jar:${root_dir}/bin/any/java/apache/commons-compress-1.18.jar:${root_dir}/bin/any/java/xz/xz-1.5.jar:${root_dir}/bin/any/java/vnu/Saxon-HE-9.9.1-2.jar">
+		  classpath="${root_dir}/src/lib/junit.jar:${root_dir}/bin/any/java/apache/commons-compress-1.18.jar:${root_dir}/bin/any/java/xz/xz-1.5.jar:${root_dir}/bin/any/java/vnu/Saxon-HE-9.9.1-2.jar:${root_dir}/src/baselib/bin">
           <include name="**/*.java"/>
         </javac>
     </target>
