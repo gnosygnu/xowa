@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pagebanners; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.brys.*; import gplx.langs.mustaches.*; import gplx.xowa.parsers.*;
-import gplx.xowa.langs.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.nss.*;
-import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.xtns.pagebanners;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Int_ary_;
+import gplx.Io_mgr;
+import gplx.core.brys.Bfr_arg;
+import gplx.langs.mustaches.Mustache_tkn_itm;
+import gplx.langs.mustaches.Mustache_tkn_parser;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.langs.Xol_lang_stub_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.xtns.Xox_mgr;
+import gplx.xowa.xtns.Xox_mgr_base;
+
 public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final    byte[] Xtn_key_static = Bry_.new_a7("pagebanner");
 	@Override public Xox_mgr Xtn_clone_new() {return new Pgbnr_xtn_mgr();}
@@ -26,15 +42,17 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		// load config; TODO_OLD: load by file
 		boolean enabled = false, enable_heading_override = true, enable_default_banner = false;
-		int[] ns_ary = Int_ary_.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user);
+		int[] ns_ary = Int_ary_.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__main); // default list; overriden by home/ wikivoyage below
 		int[] standard_sizes = new int[] {640, 1280, 2560};
 		int dflt_img_wdata_prop = 948; byte[] dflt_img_title = Bry_.new_a7("Pagebanner_default.jpg");	// www.wikidata.org/wiki/Property:P948
 		switch (wiki.Domain_tid()) {
 			case Xow_domain_tid_.Tid__home:
-				enabled = true;
 				ns_ary = Int_ary_.New(Xow_ns_.Tid__main);
+				enabled = true;
 				break;
 			case Xow_domain_tid_.Tid__wikivoyage:
+				// 2020-08-16|#748:include project for en.v; PAGE:en.v:Wikivoyage:Past_events/World_Cup_2010
+				ns_ary = Int_ary_.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__main, Xow_ns_.Tid__project);
 				switch (wiki.Lang().Lang_id()) {
 					case Xol_lang_stub_.Id_en:
 					case Xol_lang_stub_.Id_fr:
