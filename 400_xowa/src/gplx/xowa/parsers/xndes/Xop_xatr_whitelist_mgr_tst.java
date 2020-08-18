@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,25 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.parsers.htmls.*;
+package gplx.xowa.parsers.xndes;
+
+import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import org.junit.Before;
+import org.junit.Test;
+
 public class Xop_xatr_whitelist_mgr_tst {
-	private final    Xop_xatr_whitelist_fxt fxt = new Xop_xatr_whitelist_fxt();
+	private final Xop_xatr_whitelist_fxt fxt = new Xop_xatr_whitelist_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
-		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "style"			, true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "xstyle"			, false);
-		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "stylex"			, false);
-		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "styl"			, false);
-		fxt.Whitelist(Xop_xnde_tag_.Tid__img		, "alt"				, true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid__img		, "span"			, false);
-		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "data-sort-type"	, true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid__data	, "value"			, true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid__data	, "valuex"			, false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "style"          , true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "xstyle"         , false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "stylex"         , false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "styl"           , false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__img   , "alt"            , true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__img   , "span"           , false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "data-sort-type" , true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__data  , "value"          , true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__data  , "valuex"         , false);
 	}
 	@Test  public void Role() {
-		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "role"			, "presentation", true);
-		fxt.Whitelist(Xop_xnde_tag_.Tid__div		, "role"			, "other", false);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "role"           , "presentation", true);
+		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "role"           , "other", true);
 	}
 	@Test  public void Scrub() {
 		fxt.Scrub_style_fail("expression");

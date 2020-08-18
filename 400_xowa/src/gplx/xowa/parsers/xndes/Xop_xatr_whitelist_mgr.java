@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.parsers.htmls.*;
+package gplx.xowa.parsers.xndes;
+
+import gplx.Bry_;
+import gplx.Byte_ascii;
+import gplx.Hash_adp_bry;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm_;
+
 public class Xop_xatr_whitelist_mgr {
-	private final    Hash_adp_bry grp_hash = Hash_adp_bry.cs();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Hash_adp_bry grp_hash = Hash_adp_bry.cs();
+	private final Btrie_rv trv = new Btrie_rv();
 	public boolean Chk(int tag_id, Mwh_atr_itm xatr) {
 		byte[] src = xatr.Src();
 		byte[] key_bry = xatr.Key_bry();
@@ -47,7 +58,9 @@ public class Xop_xatr_whitelist_mgr {
 				xatr.Val_bry_(gplx.xowa.parsers.amps.Xop_amp_mgr.Instance.Decode_as_bry(xatr.Val_as_bry()));	// NOTE: must decode style values; "&#amp;#000000" -> "#000000"; see MW:checkCss; PAGE:en.w:Boron DATE:2015-07-29
 				break;
 			case Mwh_atr_itm_.Key_tid__role:
-				if (!Bry_.Eq(Val_role_presentation, xatr.Val_as_bry())) return false; // MW: For now we only support role="presentation"; DATE:2014-04-05
+				// 2020-08-17|ISSUE#:785|TOMBSTONE: originally put in for vertical whitespace issues in en.w:Supreme_Court_of_the_United_States, but could not reproduce
+				//	if (!Bry_.Eq(Val_role_presentation, xatr.Val_as_bry()))
+				//		return false; // MW: For now we only support role="presentation"; DATE:2014-04-05
 				break;
 		}
 		return rv;
@@ -397,7 +410,6 @@ public class Xop_xatr_whitelist_mgr {
 	.Add_str_byte("image-set"	, Style_image_set)
 	.Add_str_byte("/*"			, Style_comment)
 	;
-	private static final    byte[] Val_role_presentation = Bry_.new_a7("presentation");
 }
 class Xop_xatr_whitelist_itm {
 	public Xop_xatr_whitelist_itm(byte[] key, byte key_tid, boolean exact) {this.key = key; this.key_tid = key_tid; this.exact = exact;}

@@ -51,7 +51,7 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 				enabled = true;
 				break;
 			case Xow_domain_tid_.Tid__wikivoyage:
-				// 2020-08-16|#748:include project for en.v; PAGE:en.v:Wikivoyage:Past_events/World_Cup_2010
+				// 2020-08-16|ISSUE#:748|include project for en.v; PAGE:en.v:Wikivoyage:Past_events/World_Cup_2010
 				ns_ary = Int_ary_.New(Xow_ns_.Tid__main, Xow_ns_.Tid__user, Xow_ns_.Tid__main, Xow_ns_.Tid__project);
 				switch (wiki.Lang().Lang_id()) {
 					case Xol_lang_stub_.Id_en:
