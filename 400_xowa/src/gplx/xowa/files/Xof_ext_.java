@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*;
-public class Xof_ext_ {		
+package gplx.xowa.files;
+
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.Err_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_bry;
+import gplx.core.primitives.Int_obj_val;
+
+public class Xof_ext_ {
 	public static final int Id_unknown = 0	// SERIALIZED; ids are saved to fsdb;
 	, Id_png = 1, Id_jpg = 2, Id_jpeg = 3, Id_gif = 4, Id_tif = 5, Id_tiff = 6
 	, Id_svg = 7, Id_djvu = 8, Id_pdf = 9
@@ -118,9 +126,14 @@ public class Xof_ext_ {
 	}
 	public static boolean Orig_file_is_img(int v) {	// identifies if orig_file can be used for <img src>; EX: png is valid, but svg, ogv, pdf is not
 		switch (v) {
-			case Id_png: case Id_jpg: case Id_jpeg:
-			case Id_gif: case Id_tif: case Id_tiff:				return true;
-			default:											return false;
+			case Id_png:
+			case Id_jpg: case Id_jpeg:
+			case Id_gif:
+				return true;
+			// 2020-08-25|ISSUE#:788|tif files cannot be rendered natively by Firefox / Chrome
+			case Id_tif: case Id_tiff:
+			default:
+				return false;
 		}
 	}
 	public static boolean Id_supports_page(int v) {	// identifies if tid supports page in lnki; EX: [[File:A.pdf|page=1]]; REF: https://en.wikipedia.org/wiki/Wikipedia:Picture_tutorial; DATE:2014-01-18
