@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,7 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+
 import org.junit.*;
+
 public class Decimal_adp__tst {
 	private final    Decimal_adp__fxt fxt = new Decimal_adp__fxt();
 	@Test  public void divide_() {
@@ -38,6 +40,7 @@ public class Decimal_adp__tst {
 		fxt.Test_parse("1.2", "1.2");
 		fxt.Test_parse("0.1", "0.1");
 		fxt.Test_parse("1.2E1", "12");
+		fxt.Test_parse("1.2e1", "12"); // 2020-08-27|ISSUE#:565|Parse 'e' as 'E'; PAGE:en.w:Huntington_Plaza
 	}
 	@Test  public void Truncate_decimal() {
 		fxt.Test_truncate_decimal("1", "1");
