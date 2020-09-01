@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.scribunto;
+
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+
 public class Scrib_err_filter_mgr implements Gfo_invk {
-	private final    Ordered_hash hash_by_mod = Ordered_hash_.New();
+	private final Object thread_lock = new Object();
+	private final Ordered_hash hash_by_mod = Ordered_hash_.New();
 	public void Clear() {hash_by_mod.Clear();}
-	public boolean Count_eq_0() {return hash_by_mod.Count() == 0;}
+	public boolean Empty() {return empty;} private boolean empty = true;
 	public boolean Match(String mod, String fnc, String err) {
 		List_adp itms = Get_itms_or_null(mod, fnc); if (itms == null) return false;
 		int itms_len = itms.Count();
@@ -33,9 +47,12 @@ public class Scrib_err_filter_mgr implements Gfo_invk {
 		return match;
 	}
 	public void Add(int count_expd, String mod, String fnc, String err, String comment) {
-		List_adp itms = Get_itms_or_null(mod, fnc);
-		if (itms == null) itms = New_itms(mod, fnc);
-		itms.Add(new Scrib_err_filter_itm(count_expd, mod, fnc, err, comment));
+		synchronized (thread_lock) {
+			empty = false;
+			List_adp itms = Get_itms_or_null(mod, fnc);
+			if (itms == null) itms = New_itms(mod, fnc);
+			itms.Add(new Scrib_err_filter_itm(count_expd, mod, fnc, err, comment));
+		}
 	}
 	public String Print() {
 		Bry_bfr bfr = Bry_bfr_.New_w_size(8);
@@ -79,14 +96,17 @@ public class Scrib_err_filter_mgr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_add = "add";
+
+	// 2020-09-01: singleton b/c xomp instantiates multiple wikis; previous implementation was `((Scrib_xtn_mgr)(wiki.Xtn_mgr().Get_or_fail(Scrib_xtn_mgr.XTN_KEY))).Invoke_wkr();` which doesn't multi-thread
+	public static final Scrib_err_filter_mgr INSTANCE = new Scrib_err_filter_mgr();
 }
 class Scrib_err_filter_itm {
 	public Scrib_err_filter_itm(int count_expd, String mod, String fnc, String err, String comment) {this.count_expd = count_expd; this.mod = mod; this.err = err; this.fnc = fnc; this.comment = comment;}
-	public String Mod() {return mod;} private final    String mod;
-	public String Fnc() {return fnc;} private final    String fnc;
-	public String Err() {return err;} private final    String err;
-	public String Comment() {return comment;} private final    String comment;
-	public int Count_expd() {return count_expd;} private final    int count_expd;
+	public String Mod() {return mod;} private final String mod;
+	public String Fnc() {return fnc;} private final String fnc;
+	public String Err() {return err;} private final String err;
+	public String Comment() {return comment;} private final String comment;
+	public int Count_expd() {return count_expd;} private final int count_expd;
 	public int Count_actl() {return count_actl;} private int count_actl;
 	public void Count_actl_add_1() {++count_actl;}
 }

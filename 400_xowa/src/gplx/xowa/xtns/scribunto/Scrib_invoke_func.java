@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,17 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*;
+package gplx.xowa.xtns.scribunto;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Err;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.GfsCtx;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.envs.System_;
 import gplx.core.threads.Thread_adp;
 import gplx.core.threads.Thread_adp_;
-import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
-import gplx.langs.htmls.*;
-import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.htmls.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.langs.msgs.Xow_msg_mgr;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.logs.Xop_log_invoke_wkr;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.xtns.pfuncs.Pf_func;
+import gplx.xowa.xtns.pfuncs.Pf_func_;
+import gplx.xowa.xtns.pfuncs.Pf_func_base;
 import gplx.xowa.xtns.scribunto.cfgs.ScribCfg;
 import gplx.xowa.xtns.scribunto.cfgs.ScribCfgResolver;
 
@@ -106,9 +122,8 @@ public class Scrib_invoke_func extends Pf_func_base {
 		catch (Throwable e) {
 			Err err = Err_.Cast_or_make(e);
 			Error(bfr, wiki.Msg_mgr(), err);
-			Scrib_err_filter_mgr err_filter_mgr = invoke_wkr == null ? null : invoke_wkr.Err_filter_mgr();
-			if (	err_filter_mgr == null																				// no err_filter_mgr defined;
-				||	err_filter_mgr.Count_eq_0()																			// err_filter_mgr exists, but no definitions
+			Scrib_err_filter_mgr err_filter_mgr = Scrib_err_filter_mgr.INSTANCE;
+			if (	err_filter_mgr.Empty() // err_filter_mgr exists, but no definitions
 				||	!err_filter_mgr.Match(String_.new_u8(mod_name), String_.new_u8(fnc_name), err.To_str__msg_only()))	// NOTE: must be To_str__msg_only; err_filter_mgr has defintion and it doesn't match current; print warn; DATE:2015-07-24
 				ctx.App().Usr_dlg().Warn_many("", "", "invoke failed: ~{0} ~{1} ~{2}", ctx.Page().Ttl().Raw(), Bry_.Replace_nl_w_tab(src, self.Src_bgn(), self.Src_end()), err.To_str__log());
 			wiki.Parser_mgr().Scrib().Terminate_when_page_changes_y_();	// NOTE: terminate core when page changes; not terminating now, else page with many errors will be very slow due to multiple remakes of core; PAGE:th.d:all; DATE:2014-10-03
