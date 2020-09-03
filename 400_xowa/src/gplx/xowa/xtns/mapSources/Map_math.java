@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.mapSources; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.xtns.mapSources;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.Math_;
+import gplx.String_;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+
 class Map_math {// REF.MW:MapSources_math.php
 	private int word_idx_nsew;
 	private double[] rv = new double[4];
@@ -74,7 +87,7 @@ class Map_math {// REF.MW:MapSources_math.php
 		double angle = Math_.Abs_double(dec);
 		double deg = Math_.Floor(angle);
 		double min = (angle - deg) * 60;
-		double sec = prec > 0
+		double sec = prec > 4 // 2020-09-03|ISSUE#:792|precision check should be > 4 not > 0;PAGE:en.w:Huntington_Plaza
 			? Math_.Round((min - Math_.Floor(min)) * 60, prec - 4)
 			: Math_.Round((min - Math_.Floor(min)) * 60, 0)
 			;
