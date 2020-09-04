@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.caches.*;
-import gplx.xowa.wikis.xwikis.sitelinks.*;
+package gplx.xowa.wikis.caches;
+
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Hash_adp_bry;
+import gplx.Io_mgr;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.caches.Gfo_cache_mgr;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.xwikis.sitelinks.Xoa_sitelink_itm;
+import gplx.xowa.wikis.xwikis.sitelinks.Xoa_sitelink_itm_mgr;
+
 public class Xow_cache_mgr {
 	private final    Xowe_wiki wiki;
 	public Xow_cache_mgr(Xowe_wiki wiki) {
@@ -24,7 +37,6 @@ public class Xow_cache_mgr {
 		this.defn_cache = new Xow_defn_cache(wiki.Lang());
 		this.ifexist_cache = new Xow_ifexist_cache(wiki, page_cache);
 	}
-	public Hash_adp				Tmpl_result_cache() {return tmpl_result_cache;} private final    Hash_adp tmpl_result_cache = Hash_adp_bry.cs();
 	public Xow_defn_cache		Defn_cache()		{return defn_cache;}		private final    Xow_defn_cache defn_cache;
 	public Hash_adp_bry			Lst_cache()			{return lst_cache;}			private final    Hash_adp_bry lst_cache = Hash_adp_bry.cs(); 
 	public Hash_adp				Misc_cache()		{return misc_cache;}		private final    Hash_adp misc_cache = Hash_adp_.New();
@@ -73,7 +85,6 @@ public class Xow_cache_mgr {
 				break;
 		}
 		wiki.Ctg__catpage_mgr().Free_mem_all();
-		tmpl_result_cache.Clear();
 		defn_cache.Free_mem_all();
 		lst_cache.Clear();
 		misc_cache.Clear();

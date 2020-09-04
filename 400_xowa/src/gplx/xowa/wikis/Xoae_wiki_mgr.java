@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,35 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.langs.*; import gplx.xowa.xtns.wbases.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.langs.names.*;
-import gplx.xowa.addons.wikis.directorys.dbs.*;
+package gplx.xowa.wikis;
+
+import gplx.Bry_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_db_mgr;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_wiki_itm;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_itm_;
+import gplx.xowa.langs.Xol_lang_stub_;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.metas.Xow_script_mgr;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.wikis.nss.Xow_ns_mgr_;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
+
 public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	private final    Xoae_app app;
 	private final    List_adp list = List_adp_.New(); private final    Hash_adp_bry hash = Hash_adp_bry.ci_a7();	// ASCII:url_domain; EX:en.wikipedia.org
@@ -107,7 +132,6 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 //				wiki.Defn_cache().ReduceCache();
 			if (clear_ctx) wiki.Parser_mgr().Ctx().Clear_all();	// NOTE: clear_ctx will reset toc and refs
 			wiki.Cache_mgr().Page_cache().Free_mem(true);
-			wiki.Cache_mgr().Tmpl_result_cache().Clear();
 		}
 	}
 	public void Rls() {

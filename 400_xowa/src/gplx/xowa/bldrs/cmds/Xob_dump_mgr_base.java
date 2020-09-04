@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,14 +13,49 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.envs.*;
-import gplx.dbs.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.bldrs.files.utls.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.bldrs.cmds;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Datetime_now;
+import gplx.Decimal_adp;
+import gplx.Decimal_adp_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Math_;
+import gplx.String_;
+import gplx.core.envs.System_;
+import gplx.dbs.Db_conn;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.Xowe_wiki_;
+import gplx.xowa.addons.bldrs.files.utls.Xobu_poll_mgr;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.bldrs.wkrs.Xob_itm_basic_base;
+import gplx.xowa.files.origs.Xof_orig_wkr_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_parser;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.tmpls.Xot_defn_tmpl;
+import gplx.xowa.wikis.caches.Xow_defn_cache;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+
 public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xob_cmd, Gfo_invk {
 	private Xob_dump_src_id page_src;
 	private Xow_db_mgr db_fsys_mgr; protected Xop_parser parser; protected Xop_ctx ctx; protected Xop_root_tkn root;
@@ -151,8 +186,6 @@ public abstract class Xob_dump_mgr_base extends Xob_itm_basic_base implements Xo
 			if (page_src != null)	// some pages have no text; ignore them else null ref; PAGE: it.d:miercuri DATE:2015-12-05
 				Exec_pg_itm_hook(ns_ord, ns, page, page_src);
 			ctx.Wiki().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
-			if (ctx.Wiki().Cache_mgr().Tmpl_result_cache().Count() > 50000) 
-				ctx.Wiki().Cache_mgr().Tmpl_result_cache().Clear();
 			++exec_count;
 			rate_mgr.Increment();
 			if ((exec_count % poll_interval) == 0)

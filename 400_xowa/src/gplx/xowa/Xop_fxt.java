@@ -58,7 +58,6 @@ public class Xop_fxt {
 		wiki.Html_mgr().Img_suppress_missing_src_(false);
 		wiki.Xtn_mgr().Init_by_wiki(wiki);
 		Page_ttl_(Ttl_str);
-		Xot_invk_tkn.Cache_enabled = false;// always disable cache for tests; can cause strange behavior when running entire suite and lnki_temp test turns on;
 	}
 	private Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock();
 	public Xoae_app App() {return app;} private Xoae_app app;

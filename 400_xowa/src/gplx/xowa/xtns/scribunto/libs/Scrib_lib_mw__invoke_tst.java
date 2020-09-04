@@ -1,20 +1,18 @@
-/*
-XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+package gplx.xowa.xtns.scribunto.libs;
 
-XOWA is licensed under the terms of the General Public License (GPL) Version 3,
-or alternatively under the terms of the Apache License Version 2.0.
+import gplx.Err_;
+import gplx.Keyval_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_invoke_func;
+import gplx.xowa.xtns.scribunto.Scrib_invoke_func_fxt;
+import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import org.junit.Before;
+import org.junit.Test;
 
-You may use XOWA according to either of these licenses as is most appropriate
-for your project on a case-by-case basis.
-
-The terms of each license can be found in the source code repository:
-
-GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
-Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
-*/
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*;
 public class Scrib_lib_mw__invoke_tst {
 	@Before public void init() {
 		fxt.Clear_for_invoke();
@@ -127,7 +125,6 @@ public class Scrib_lib_mw__invoke_tst {
 		fxt.Init_cbk(fxt.Core().Lib_mw(), Scrib_lib_mw.Invk_preprocess);
 	}
 	private void Exec_preprocess(String frame, String arg_idx, String expd) {
-		fxt.Parser_fxt().Wiki().Cache_mgr().Tmpl_result_cache().Clear();
 		fxt.Init_lua_module();
 		fxt.Init_lua_rcvd_preprocess(frame, "{{#ifeq:" + arg_idx + "|{{{1}}}|{{{2}}}|{{{3}}}}}");
 		fxt.Test_invoke(expd);

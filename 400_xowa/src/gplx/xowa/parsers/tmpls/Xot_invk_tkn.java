@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,41 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.envs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.funcs.*;
-import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.pfuncs.ttls.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.wikis.data.tbls.*;		
+package gplx.xowa.parsers.tmpls;
+
+import gplx.Array_;
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Hash_adp_bry;
+import gplx.String_;
+import gplx.core.envs.Env_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.funcs.Xol_func_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_grp;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.langs.kwds.Xol_kwd_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_mgr;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_itm_base;
+import gplx.xowa.wikis.caches.Xow_page_cache_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.nss.Xow_ns_mgr_name_itm;
+import gplx.xowa.wikis.pages.Xopg_tmpl_prepend_mgr;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs;
+
 public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	public Xot_invk_tkn(int bgn, int end) {this.Tkn_ini_pos(false, bgn, end);}
 	@Override public byte Tkn_tid() {return typeId;} private byte typeId = Xop_tkn_itm_.Tid_tmpl_invk;
@@ -275,32 +305,14 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 
 				Bry_bfr rslt_bfr = wiki.Utl__bfr_mkr().Get_k004();
 				try {
-					Xot_invk_tkn_.Bld_key(invk_tmpl, name_ary, rslt_bfr);
-					byte[] rslt_key = rslt_bfr.To_bry_and_clear();
-					Object o = wiki.Cache_mgr().Tmpl_result_cache().Get_by(rslt_key);
 					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(bfr);
-					if (o != null) {
-						byte[] rslt = (byte[])o;
-						prepend_mgr.End(ctx, bfr, rslt, rslt.length, Bool_.Y);
-						bfr.Add(rslt);
+					rv = defn_tmpl.Tmpl_evaluate(Xop_ctx.New__sub(wiki, ctx, ctx.Page()), invk_tmpl, rslt_bfr); // create new ctx so __NOTOC__ only applies to template, not page; PAGE:de.w:13._Jahrhundert DATE:2017-06-17
+					prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
+					if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
+						byte[] tmp_src = rslt_bfr.To_bry_and_clear();
+						rslt_bfr.Add(wiki.Parser_mgr().Main().Expand_tmpl(tmp_src));	// this could be cleaner / more optimized
 					}
-					else {
-						rv = defn_tmpl.Tmpl_evaluate(Xop_ctx.New__sub(wiki, ctx, ctx.Page()), invk_tmpl, rslt_bfr); // create new ctx so __NOTOC__ only applies to template, not page; PAGE:de.w:13._Jahrhundert DATE:2017-06-17
-						prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
-						if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
-							byte[] tmp_src = rslt_bfr.To_bry_and_clear();
-							rslt_bfr.Add(wiki.Parser_mgr().Main().Expand_tmpl(tmp_src));	// this could be cleaner / more optimized
-						}
-						if (Cache_enabled) {
-							byte[] rslt_val = rslt_bfr.To_bry_and_clear();
-							bfr.Add(rslt_val);
-							Hash_adp cache = wiki.Cache_mgr().Tmpl_result_cache();
-							cache.Del(rslt_key);
-							cache.Add(rslt_key, rslt_val);
-						}
-						else
-							bfr.Add_bfr_and_clear(rslt_bfr);
-					}
+					bfr.Add_bfr_and_clear(rslt_bfr);
 					trace.Trace_end(trg_bgn, bfr);
 				} finally {rslt_bfr.Mkr_rls();}
 				break;
@@ -430,8 +442,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		Xol_kwd_itm[] itms = grp.Itms();
 		return itms.length == 0 ? Bry_.Empty : itms[0].Val();
 	}
-	private static final    Hash_adp_bry ignore_hash = Hash_adp_bry.ci_a7().Add_str_obj("Citation needed{{subst", "").Add_str_obj("Clarify{{subst", "");	// ignore SafeSubst templates
-	public static boolean Cache_enabled = false;
+	private static final Hash_adp_bry ignore_hash = Hash_adp_bry.ci_a7().Add_str_obj("Citation needed{{subst", "").Add_str_obj("Clarify{{subst", "");	// ignore SafeSubst templates
 }
 /*
 NOTE_1: if (finder.Colon_pos() != -1) colon_pos = finder.Func().Name().length;

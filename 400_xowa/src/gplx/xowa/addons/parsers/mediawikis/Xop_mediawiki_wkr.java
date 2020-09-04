@@ -38,7 +38,6 @@ public class Xop_mediawiki_wkr {
 			wiki.Cache_mgr().Load_wkr_(new Xow_page_cache_wkr__embeddable(wiki, loader));
 	}
 	public void Free_memory() {
-		wiki.Cache_mgr().Tmpl_result_cache().Clear();
 		wiki.Cache_mgr().Free_mem__page();
 		wiki.Parser_mgr().Scrib().Core_term();
 		wiki.Appe().Wiki_mgr().Wdata_mgr().Clear();

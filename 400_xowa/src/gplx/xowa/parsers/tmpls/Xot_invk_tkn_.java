@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.langs.kwds.*;
-import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.caches.*;
+package gplx.xowa.parsers.tmpls;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_ascii;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.wikis.caches.Xow_page_cache_itm;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.xtns.pfuncs.Pf_func_base;
+
 public class Xot_invk_tkn_ {
 	public static void Eval_func(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk invk, Bry_bfr bfr, Xot_defn defn, byte[] argx_ary) {
 		Pf_func_base defn_func = (Pf_func_base)defn;
@@ -33,20 +46,6 @@ public class Xot_invk_tkn_ {
 		else
 			ctx.Page().Tmpl_prepend_mgr().End(ctx, bfr, bfr_func.Bfr(), bfr_func.Len(), Bool_.N);
 		bfr.Add_bfr_and_clear(bfr_func);
-	}
-	public static void Bld_key(Xot_invk invk, byte[] name_ary, Bry_bfr bfr) {
-		bfr.Clear();
-		bfr.Add(name_ary);
-		int args_len = invk.Args_len();
-		for (int i = 0; i < args_len; i++) {
-			Arg_nde_tkn nde = invk.Args_get_by_idx(i);
-			bfr.Add_byte(Byte_ascii.Pipe);
-			if (nde.KeyTkn_exists()) {
-				bfr.Add(nde.Key_tkn().Dat_ary());
-				bfr.Add_byte(Byte_ascii.Eq);
-			}
-			bfr.Add(nde.Val_tkn().Dat_ary());
-		}
 	}
 	public static Xot_defn_tmpl Load_defn(Xowe_wiki wiki, Xop_ctx ctx, Xot_invk_tkn invk_tkn, Xoa_ttl ttl, byte[] name_ary) {	// recursive loading of templates
 		Xow_page_cache_itm tmpl_page_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(ttl);

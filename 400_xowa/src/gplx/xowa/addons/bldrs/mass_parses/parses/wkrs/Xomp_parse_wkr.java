@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,40 +13,69 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
-import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
-import gplx.xowa.files.origs.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.htmls.hxtns.pages.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.wikis.pages.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*;
-import gplx.xowa.addons.bldrs.mass_parses.parses.mgrs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.pools.*;
-import gplx.xowa.addons.wikis.fulltexts.indexers.bldrs.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.wkrs;
+
+import gplx.Bry_bfr;
+import gplx.Byte_ascii;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg_;
+import gplx.GfsCtx;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.mass_parses.dbs.Xomp_mgr_db;
+import gplx.xowa.addons.bldrs.mass_parses.dbs.Xomp_stat_tbl;
+import gplx.xowa.addons.bldrs.mass_parses.dbs.Xomp_wkr_db;
+import gplx.xowa.addons.bldrs.mass_parses.dbs.Xomp_wkr_tbl;
+import gplx.xowa.addons.bldrs.mass_parses.parses.mgrs.Xomp_parse_mgr;
+import gplx.xowa.addons.bldrs.mass_parses.parses.mgrs.Xomp_parse_mgr_cfg;
+import gplx.xowa.addons.bldrs.mass_parses.parses.mgrs.Xomp_prog_mgr;
+import gplx.xowa.addons.bldrs.mass_parses.parses.pools.Xomp_page_itm;
+import gplx.xowa.addons.bldrs.mass_parses.parses.pools.Xomp_page_pool;
+import gplx.xowa.addons.bldrs.mass_parses.parses.utls.Xomp_lnki_temp_wkr;
+import gplx.xowa.addons.bldrs.mass_parses.parses.utls.Xomp_ns_ord_mgr;
+import gplx.xowa.addons.wikis.fulltexts.indexers.bldrs.Xofulltext_indexer_wkr;
+import gplx.xowa.files.origs.Xof_orig_wkr;
+import gplx.xowa.htmls.core.bldrs.Xob_hdump_bldr;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import gplx.xowa.htmls.hxtns.pages.Hxtn_page_mgr;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xow_parser_mgr;
+import gplx.xowa.parsers.logs.Xop_log_wkr_factory;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
+
 public class Xomp_parse_wkr implements Gfo_invk {
 	// mgr vars
-	private final    Xomp_parse_mgr mgr;
-	private final    Xomp_mgr_db mgr_db;
-	private final    Xomp_prog_mgr prog_mgr;
-	private final    Xomp_page_pool page_pool;
-	private final    Xof_orig_wkr file_orig_wkr;
-	private final    Xomp_ns_ord_mgr ns_ord_mgr;
+	private final Xomp_parse_mgr mgr;
+	private final Xomp_mgr_db mgr_db;
+	private final Xomp_prog_mgr prog_mgr;
+	private final Xomp_page_pool page_pool;
+	private final Xof_orig_wkr file_orig_wkr;
+	private final Xomp_ns_ord_mgr ns_ord_mgr;
 
 	// cfg vars
-	private final    Xomp_parse_mgr_cfg cfg;
+	private final Xomp_parse_mgr_cfg cfg;
 	private int cleanup_interval, commit_interval;
 	private boolean log_file_lnkis;
 
 	// wkr vars
-	private final    Xowe_wiki wiki;
-	private final    Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr();
-	private final    int uid;
+	private final Xowe_wiki wiki;
+	private final Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr();
+	private final int uid;
 	private Xomp_wkr_db wkr_db;
 	private Xomp_stat_tbl stat_tbl;
 	private Hxtn_page_mgr hxtn_mgr;
 
 	// indexer vars
-	private final    Xofulltext_indexer_wkr indexer;
+	private final Xofulltext_indexer_wkr indexer;
 
-	private final    List_adp list = List_adp_.New(); private int list_idx = 0, list_len = 0;		
+	private final List_adp list = List_adp_.New(); private int list_idx = 0, list_len = 0;		
 	private int done_count; private long done_time;
 	public Xomp_parse_wkr(Xomp_parse_mgr mgr, Xomp_parse_mgr_cfg cfg
 		, Xomp_mgr_db mgr_db, Xomp_page_pool page_pool
@@ -163,8 +192,6 @@ public class Xomp_parse_wkr implements Gfo_invk {
 
 				// cleanup
 				// ctx.App().Utl__bfr_mkr().Clear_fail_check();	// make sure all bfrs are released
-				if (wiki.Cache_mgr().Tmpl_result_cache().Count() > 50000) 
-					wiki.Cache_mgr().Tmpl_result_cache().Clear();
 				if (done_count % cleanup_interval == 0) {
 					wiki.Cache_mgr().Free_mem__page();
 					wiki.Parser_mgr().Scrib().Core_term();
