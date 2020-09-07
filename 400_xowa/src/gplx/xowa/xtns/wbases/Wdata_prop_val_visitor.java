@@ -23,15 +23,16 @@ import gplx.Bry_find_;
 import gplx.Byte_ascii;
 import gplx.Decimal_adp;
 import gplx.Decimal_adp_;
+import gplx.Double_;
 import gplx.Err_;
 import gplx.Gfo_usr_dlg_;
 import gplx.Math_;
-import gplx.Object_;
 import gplx.String_;
 import gplx.core.brys.fmtrs.Bry_fmtr;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.langs.Xol_lang_itm;
 import gplx.xowa.langs.Xol_lang_itm_;
+import gplx.xowa.xtns.mapSources.Map_dd2dms_func;
 import gplx.xowa.xtns.wbases.claims.Wbase_claim_visitor;
 import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
 import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
@@ -182,21 +183,45 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 	}
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(Bool_.N, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), msgs, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());}
 	public static void Write_geo(boolean wikidata_page, Bry_bfr bfr, Wdata_lbl_mgr lbl_mgr, Wdata_hwtr_msgs msgs, byte[] lat, byte[] lng, byte[] alt, byte[] prc, byte[] glb) {
-		// get precision
-		int precision_int = -1;
-		if (Bry_.Eq(prc, Object_.Bry__null) || Bry_.Eq(prc, Byte_ascii.Num_0_bry))	// "null" or "0" should be 1; PAGE:ru.w:Лысково_(Калужская_область) DATE:2016-11-24
-			precision_int = 1;
-		else {
-			Decimal_adp precision_frac = Decimal_adp_.parse(String_.new_a7(prc));
-			precision_int = Math_.Log10(Decimal_adp_.One.Divide(precision_frac).To_int());		// convert precision to log10 integer; EX: .00027777 -> 3600 -> 3
+		// 2020-09-06|ISSUE#:792|rewrite based on https://en.wikipedia.org/w/index.php?title=Module:Wd&action=edit; REF.MW: https://github.com/DataValues/Geo/blob/master/src/Formatters/LatLongFormatter.php
+		// normalize precision
+		double precision = Double_.parse_or(String_.new_a7(prc), Double_.NaN);
+		if (Double_.IsNaN(precision) || precision <= 0) { // "null" or "0" should be 1; PAGE:ru.w:Лысково_(Калужская_область) DATE:2016-11-24
+			precision = PRECISION_1_OVER_3600;
 		}
 
-		// build String
-		gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, Bool_.N, lat, precision_int);
-		bfr.Add_byte_comma().Add_byte_space();
-		gplx.xowa.xtns.mapSources.Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, Bool_.Y, lng, precision_int);
+		double latitude = Double_.parse_or(String_.new_a7(lat), Double_.NaN);
+		double longitude = Double_.parse_or(String_.new_a7(lng), Double_.NaN);
+		latitude = Math_.Floor(latitude / precision + 0.5) * precision;
+		longitude = Math_.Floor(longitude / precision + 0.5) * precision;
 
-		// write globe if any
+		if (precision >= 1 - (PRECISION_1_OVER_60) && precision < 1) {
+			precision = 1;
+		}
+		else if (precision >= (PRECISION_1_OVER_60) - (PRECISION_1_OVER_3600) && precision < PRECISION_1_OVER_60) {
+			precision = PRECISION_1_OVER_60;
+		}
+
+		int unitsPerDegree = 1;
+		if (precision >= 1) {
+			unitsPerDegree = 1;
+		}
+		else if (precision >= PRECISION_1_OVER_60) {
+			unitsPerDegree = 60;
+		}
+		else {
+			unitsPerDegree = 3600;
+		}
+
+		int numDigits = (int)Math_.Ceil(-Math.log10(((double)(unitsPerDegree) * precision)));
+		numDigits += 4; // +4 b/c Map_dd2dms_func.Deg_to_dms needs 4 places to evaluate MS while fracs are evaulated as numDigits
+
+		// write lat / lng
+		Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, Bool_.N, Bry_.new_a7(Double_.To_str(latitude)), numDigits);
+		bfr.Add_byte_comma().Add_byte_space();
+		Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, Bool_.Y, Bry_.new_a7(Double_.To_str(longitude)), numDigits);
+
+		// write globe
 		if (wikidata_page) {
 			byte[] glb_ttl = Wdata_lbl_itm.Extract_ttl(glb);
 			if (glb_ttl != null) {
@@ -207,7 +232,11 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 			}
 		}
 	}
+	private static final double
+	    PRECISION_1_OVER_3600 = 1d / 3600d
+	  , PRECISION_1_OVER_60 = 1d / 60d
+	;
 
-	private static final    byte[] Wikidata_url = Bry_.new_a7("http://www.wikidata.org/entity/");
+	private static final byte[] Wikidata_url = Bry_.new_a7("http://www.wikidata.org/entity/");
 	public void Visit_system(Wbase_claim_value itm) {}
 }
