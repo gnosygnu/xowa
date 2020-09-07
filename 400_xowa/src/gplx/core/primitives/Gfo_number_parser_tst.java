@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
-import org.junit.*;
-public class Gfo_number_parser_tst {		
-	@Before public void init() {fxt.Clear();} private final    Gfo_number_parser_fxt fxt = new Gfo_number_parser_fxt();
-	@Test  public void Integer() {
+package gplx.core.primitives;
+
+import gplx.Bry_;
+import gplx.Decimal_adp;
+import gplx.Decimal_adp_;
+import gplx.Tfds;
+import org.junit.Before;
+import org.junit.Test;
+
+public class Gfo_number_parser_tst {
+	@Before public void init() {fxt.Clear();} private final Gfo_number_parser_fxt fxt = new Gfo_number_parser_fxt();
+	@Test public void Integer() {
 		fxt.Test_int("1", 1);
 		fxt.Test_int("1234", 1234);
 		fxt.Test_int("1234567890", 1234567890);
@@ -25,25 +32,26 @@ public class Gfo_number_parser_tst {
 		fxt.Test_int("+1", 1);
 		fxt.Test_int("00001", 1);
 	}
-	@Test  public void Long() {
+	@Test public void Long() {
 		fxt.Test_long("9876543210", 9876543210L);
 	}
-	@Test  public void Decimal() {
+	@Test public void Decimal() {
 		fxt.Test_dec("1.23", Decimal_adp_.parse("1.23"));
 		fxt.Test_dec("1.023", Decimal_adp_.parse("1.023"));
 		fxt.Test_dec("-1.23", Decimal_adp_.parse("-1.23"));
 	}
-	@Test  public void Double_long() {
+	@Test public void Double_long() {
 		fxt.Test_dec(".42190046219457", Decimal_adp_.parse(".42190046219457"));
 	}
-	@Test  public void Exponent() {
+	@Test public void Exponent() {
 		fxt.Test_int("1E2", 100);
 		fxt.Test_dec("1.234E2", Decimal_adp_.parse("123.4"));
 		fxt.Test_dec("1.234E-2", Decimal_adp_.parse(".01234"));
 		fxt.Test_dec("123.4E-2", Decimal_adp_.parse("1.234"));
 		fxt.Test_dec("+6.0E-3", Decimal_adp_.parse(".006"));
+		fxt.Test_err("e24", true); // 2020-09-07|ISSUE#:795|scientific notation requires coefficient
 	}
-	@Test  public void Err() {
+	@Test public void Err() {
 		fxt.Test_err("+", true);
 		fxt.Test_err("-", true);
 		fxt.Test_err("a", true);
@@ -52,14 +60,14 @@ public class Gfo_number_parser_tst {
 		fxt.Test_err("1,,1", true);
 		fxt.Test_err("1", false);
 	}
-	@Test  public void Hex() {
+	@Test public void Hex() {
 		fxt.Test_hex("0x1"	, 1);
 		fxt.Test_hex("0xF"	, 15);
 		fxt.Test_hex("0x20"	, 32);
 		fxt.Test_hex("x20"	, 0, false);
 		fxt.Test_hex("d"	, 0, false);	// PURPOSE: d was being converted to 13; no.w:Hovedbanen; DATE:2014-04-13
 	}
-	@Test  public void Ignore() {
+	@Test public void Ignore() {
 		fxt.Init_ignore("\n\t");
 		fxt.Test_int("1"	, 1);
 		fxt.Test_int("1\n"	, 1);
@@ -69,7 +77,7 @@ public class Gfo_number_parser_tst {
 	}
 }
 class Gfo_number_parser_fxt {
-	private final    Gfo_number_parser parser = new Gfo_number_parser();
+	private final Gfo_number_parser parser = new Gfo_number_parser();
 	public void Clear() {parser.Clear();}
 	public void Init_ignore(String chars) {parser.Ignore_chars_(Bry_.new_a7(chars));}
 	public void Test_int(String raw, int expd) {

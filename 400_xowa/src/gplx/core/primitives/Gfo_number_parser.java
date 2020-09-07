@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,17 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives;
+
+import gplx.Byte_ascii;
+import gplx.Decimal_adp;
+import gplx.Decimal_adp_;
+import gplx.Int_;
+import gplx.Math_;
+
 public class Gfo_number_parser {
-	public int				Rv_as_int() {return (int)num_val;} private long num_val = 0;
-	public long				Rv_as_long() {return num_val;}
-	public Decimal_adp		Rv_as_dec() {return dec_val == null ? Decimal_adp_.long_(num_val) : dec_val;} private Decimal_adp dec_val = null;
-	public boolean				Is_int()	{return dec_val == null && (num_val >= Int_.Min_value && num_val <= Int_.Max_value);}
-	public boolean				Has_err()	{return has_err;} private boolean has_err;
-	public boolean				Has_frac()	{return has_frac;} private boolean has_frac;
-	public boolean				Hex_enabled() {return hex_enabled;} public Gfo_number_parser Hex_enabled_(boolean v) {hex_enabled = v; return this;} private boolean hex_enabled;
-	public Gfo_number_parser	Ignore_chars_(byte[] v) {this.ignore_chars = v; return this;} private byte[] ignore_chars;
-	public Gfo_number_parser	Ignore_space_at_end_y_() {this.ignore_space_at_end = true; return this;} private boolean ignore_space_at_end;
+	public int                  Rv_as_int() {return (int)num_val;} private long num_val = 0;
+	public long                 Rv_as_long() {return num_val;}
+	public Decimal_adp          Rv_as_dec() {return dec_val == null ? Decimal_adp_.long_(num_val) : dec_val;} private Decimal_adp dec_val = null;
+	public boolean              Is_int() {return dec_val == null && (num_val >= Int_.Min_value && num_val <= Int_.Max_value);}
+	public boolean              Has_err() {return has_err;} private boolean has_err;
+	public boolean              Has_frac() {return has_frac;} private boolean has_frac;
+	public boolean              Hex_enabled() {return hex_enabled;} public Gfo_number_parser Hex_enabled_(boolean v) {hex_enabled = v; return this;} private boolean hex_enabled;
+	public Gfo_number_parser    Ignore_chars_(byte[] v) {this.ignore_chars = v; return this;} private byte[] ignore_chars;
+	public Gfo_number_parser    Ignore_space_at_end_y_() {this.ignore_space_at_end = true; return this;} private boolean ignore_space_at_end;
 	public void	Clear() {
 		ignore_chars = null;
 	}
@@ -112,6 +119,7 @@ public class Gfo_number_parser {
 						has_exp = true;
 						has_neg = false;
 						has_plus = false;	// allow +1E+2
+						has_num = false; // 2020-09-07|ISSUE#:795|scientific notation requires coefficient; set has_num to false which will fail below if no coefficient
 					}
 					break;
 				case Byte_ascii.Ltr_A:
