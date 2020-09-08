@@ -460,8 +460,8 @@ app.bldr.cmds {
     commit_interval = 1000; progress_interval = 200; select_interval = 10000;
     ns_ids = '0|4|14';
     
-    // specify whether original wiki databases are v1 (.sqlite3) or v2 (.xowa)
-    src_bin_mgr__fsdb_version = 'v1';
+    // DEPRECATED: specify whether original wiki databases are v1 (.sqlite3) or v2 (.xowa)
+    // src_bin_mgr__fsdb_version = 'v1';
     
     // always redownload certain files
     src_bin_mgr__fsdb_skip_wkrs = 'page_gt_1|small_size';

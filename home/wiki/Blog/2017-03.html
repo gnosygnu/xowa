@@ -25,7 +25,7 @@
       </p>
       <ul>
         <li>
-          <a href="/wiki/Blog/2019-07" id="xolnki_2" title="Blog/2019-07" class="xowa-visited">2019-07</a>
+          <a href="/wiki/Blog/2019-07" id="xolnki_2" title="Blog/2019-07">2019-07</a>
         </li>
         <li>
           <a href="/wiki/Blog/2019-03" id="xolnki_3" title="Blog/2019-03">2019-03</a>
@@ -160,7 +160,7 @@
       </li>
     </ul>
     <h3>
-      <span class="mw-headline" id="(PC_/_Android)_Add_full-text_search_capability_for_all_wikis._See:_App/Full-text_search_and_App/Full-text_search/Lucene/Search_indexes/Getting">(PC / Android) Add full-text search capability for all wikis. See: <a href="/wiki/App/Full-text_search" id="xolnki_12" title="App/Full-text search" class="xowa-visited">App/Full-text_search</a> and <a href="/wiki/App/Full-text_search/Lucene/Search_indexes/Getting" id="xolnki_13" title="App/Full-text search/Lucene/Search indexes/Getting">App/Full-text_search/Lucene/Search_indexes/Getting</a></span>
+      <span class="mw-headline" id="(PC_/_Android)_Add_full-text_search_capability_for_all_wikis._See:_App/Full-text_search_and_App/Full-text_search/Lucene/Search_indexes/Getting">(PC / Android) Add full-text search capability for all wikis. See: <a href="/wiki/App/Full-text_search" id="xolnki_12" title="App/Full-text search">App/Full-text_search</a> and <a href="/wiki/App/Full-text_search/Lucene/Search_indexes/Getting" id="xolnki_13" title="App/Full-text search/Lucene/Search indexes/Getting">App/Full-text_search/Lucene/Search_indexes/Getting</a></span>
     </h3>
     <p>
       XOWA finally supports full-text search. This was a complicated change involving a new Special page (<a href="/wiki/Special:XowaSearch" id="xolnki_14" title="Special:XowaSearch">Special:XowaSearch</a>) and a new Java library (Lucene). There will be more changes in future releases, but the current version should work well enough for PCs as well as Android devices.
@@ -172,7 +172,7 @@
       You can also build your own full-text search indexes for existing Download Central wikis. To try it, see <a href="/wiki/App/Full-text_search/Lucene/Search_indexes/Building" id="xolnki_16" title="App/Full-text search/Lucene/Search indexes/Building">App/Full-text_search/Lucene/Search_indexes/Building</a>
     </p>
     <p>
-      For more details see <a href="/wiki/App/Full-text_search" id="xolnki_17" title="App/Full-text search" class="xowa-visited">App/Full-text_search</a>
+      For more details see <a href="/wiki/App/Full-text_search" id="xolnki_17" title="App/Full-text search">App/Full-text_search</a>
     </p>
     <h3>
       <span class="mw-headline" id="(PC)_Redesign_full-text_search_Special_Page._See:_Special:XowaSearch">(PC) Redesign full-text search Special Page. See: <a href="/wiki/Special:XowaSearch" id="xolnki_18" title="Special:XowaSearch">Special:XowaSearch</a></span>
@@ -231,7 +231,7 @@
         Custom url formats are now available. This was in response to Ope30 and a way to customize the displayed url. For more info, see<a href="/wiki/Special:XowaCfg%3Fgrp%3Dxowa.gui.url_bar" id="xolnki_20" title="Special:XowaCfg?grp=xowa.gui.url bar">Special:XowaCfg?grp=xowa.gui.url bar</a>
       </li>
       <li>
-        View HTML can now show the actual HTML in the browser. Previously XOWA would show the generated HTML as shown for the Read tab. However, this wouldn't work for Special pages due to javascript changes to the DOM. Now, the actual HTML in the SWT browser is available by changing the option at <a href="/wiki/Special:XowaCfg%3Fgrp%3Dxowa.wiki.hdumps" id="xolnki_21" title="Special:XowaCfg?grp=xowa.wiki.hdumps" class="xowa-visited">Special:XowaCfg?grp=xowa.wiki.hdumps</a>
+        View HTML can now show the actual HTML in the browser. Previously XOWA would show the generated HTML as shown for the Read tab. However, this wouldn't work for Special pages due to javascript changes to the DOM. Now, the actual HTML in the SWT browser is available by changing the option at <a href="/wiki/Special:XowaCfg%3Fgrp%3Dxowa.wiki.hdumps" id="xolnki_21" title="Special:XowaCfg?grp=xowa.wiki.hdumps">Special:XowaCfg?grp=xowa.wiki.hdumps</a>
       </li>
       <li>
         Options link for Special:XowaCfg pages. XowaCfg pages allow direct linking to certain groups by using <code>?grp=code</code>. If you want the direct link to a specific option page, you can now right-click on the "options link" and copy it
@@ -371,7 +371,7 @@
       <span class="mw-headline" id="No_more_current_directory_for_logs">No more current directory for logs</span>
     </h4>
     <p>
-      XOWA stores its logs at C:\xowa\user\anonymous\app\tmp\log. XOWA used to store the current directory in a folder called <code>current</code>. Unfortunately, this caused problems on Linux systems when two or more different-permissioned users were running XOWA.
+      XOWA stores its logs at C:\xowa_release\user\anonymous\app\tmp\log. XOWA used to store the current directory in a folder called <code>current</code>. Unfortunately, this caused problems on Linux systems when two or more different-permissioned users were running XOWA.
     </p>
     <p>
       This version replaces the current directory with a timestamp directory which should now reduce the likelihood of errors.

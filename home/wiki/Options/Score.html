@@ -180,13 +180,13 @@ ImageMagick must be set up in order for Score to work correctly.
     <div id='xowa.addon.score.apps.lilypond__name' class='xocfg_itm_name'>Lilypond</div>
 
     <!-- BTN:undo -->
-    <div id='xowa.addon.score.apps.lilypond__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete'>
+    <div id='xowa.addon.score.apps.lilypond__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
       <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.lilypond")' title="reset to &quot;~{<>bin_plat_dir<>}lilypond\usr\bin\lilypond.exe|&quot;-dsafe=#t&quot; -dbackend=ps --png --header=texidoc -dmidi-extension=midi &quot;~{file}&quot;&quot;">&nbsp;</span>
     </div>
     
     <!-- TEXT:val -->
     <div class='xocfg_itm_data'>
-<input  class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.lilypond-exe" data-xocfg-key="xowa.addon.score.apps.lilypond" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="C:\000\100_bin\300_doc\300_aud\200_edit\100_lilypond\usr\bin\lilypond.exe"></input>
+<input  class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.lilypond-exe" data-xocfg-key="xowa.addon.score.apps.lilypond" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{<>bin_plat_dir<>}lilypond\usr\bin\lilypond.exe"></input>
 <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.lilypond-exe", "Please select a file.");'>&nbsp;</span><br/>
 <input  class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.lilypond-arg" data-xocfg-key="xowa.addon.score.apps.lilypond" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="&quot;-dsafe=#t&quot; -dbackend=ps --png --header=texidoc -dmidi-extension=midi &quot;~{file}&quot;">
 </div>
@@ -213,13 +213,13 @@ ImageMagick must be set up in order for Score to work correctly.
     <div id='xowa.addon.score.apps.abc2ly__name' class='xocfg_itm_name'>Python</div>
 
     <!-- BTN:undo -->
-    <div id='xowa.addon.score.apps.abc2ly__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete'>
+    <div id='xowa.addon.score.apps.abc2ly__undo' data-xocfg-type='io.cmd' class='xocfg_itm_delete xocfg_itm_hide'>
       <span class='xoimg_btn_x16 xoimg_list_undo' onclick='return xo.cfg_edit.delete__send("xowa.addon.score.apps.abc2ly")' title="reset to &quot;~{<>bin_plat_dir<>}lilypond\usr\bin\python.exe|abc2ly.py -s &quot;--output=~{target}&quot; &quot;~{source}&quot;&quot;">&nbsp;</span>
     </div>
     
     <!-- TEXT:val -->
     <div class='xocfg_itm_data'>
-<input  class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.abc2ly-exe" data-xocfg-key="xowa.addon.score.apps.abc2ly" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="C:\000\100_bin\300_doc\300_aud\200_edit\100_lilypond\usr\bin\python.exe"></input>
+<input  class="xocfg_data__io_cmd__exe__txt" id="xowa.addon.score.apps.abc2ly-exe" data-xocfg-key="xowa.addon.score.apps.abc2ly" data-xocfg-type="io.cmd-exe" accesskey="d" type="text" value="~{<>bin_plat_dir<>}lilypond\usr\bin\python.exe"></input>
 <span class="xoimg_btn_x16 xoimg_app_configure" onclick='xo.cfg_edit.io_cmd__select("file", "xowa.addon.score.apps.abc2ly-exe", "Please select a file.");'>&nbsp;</span><br/>
 <input  class="xocfg_data__io_cmd__arg__txt" id="xowa.addon.score.apps.abc2ly-arg" data-xocfg-key="xowa.addon.score.apps.abc2ly" data-xocfg-type="io.cmd-arg" accesskey="d" type="text" value="abc2ly.py -s &quot;--output=~{target}&quot; &quot;~{source}&quot;">
 </div>
