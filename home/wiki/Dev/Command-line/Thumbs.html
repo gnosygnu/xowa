@@ -431,6 +431,9 @@ app.bldr.cmds {
       // num_pages_in_pool = 32000; 
       // mgr_url = '\\server_machine_name\xowa\wiki\en.wikipedia.org\tmp\xomp\'; 
       // wkr_machine_name = 'worker_machine_1'
+
+      // uncomment the next line to resume parsing. See === Resuming === below
+      // resume_enabled = 'y';
     }
   }
 
@@ -525,6 +528,9 @@ app.bldr.run;
       </li>
       <li>
         Uncomment the line for 'wiki.mass_parse.resume'
+      </li>
+      <li>
+        Uncomment the line for 'resume_enabled = 'y';'
       </li>
       <li>
         Run the command-line again
