@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.swts;
+
+import gplx.Bool_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_ascii;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_itm;
+import gplx.Gfo_evt_mgr;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_evt_mgr_owner;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Keyval_hash;
+import gplx.Long_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Type_;
+import gplx.UsrDlg_;
 import gplx.core.envs.System_;
-import gplx.core.primitives.*;
-import gplx.core.threads.Thread_adp_;
 import gplx.gfui.controls.elems.GfuiElem;
 import gplx.gfui.controls.gxws.GxwCbkHost;
 import gplx.gfui.controls.gxws.GxwCore_base;
@@ -24,27 +45,32 @@ import gplx.gfui.controls.gxws.GxwElem;
 import gplx.gfui.controls.gxws.Gxw_html;
 import gplx.gfui.controls.gxws.Gxw_html_load_tid_;
 import gplx.gfui.controls.standards.Gfui_html;
-import gplx.gfui.controls.standards.Gfui_tab_mgr;
-import gplx.gfui.draws.ColorAdp;
-import gplx.gfui.draws.ColorAdp_;
-import gplx.gfui.ipts.*;
+import gplx.gfui.ipts.IptEvtDataMouse;
+import gplx.gfui.ipts.IptMouseBtn;
+import gplx.gfui.ipts.IptMouseBtn_;
+import gplx.gfui.ipts.IptMouseWheel_;
 import gplx.gfui.kits.core.Swt_kit;
-
-import java.security.acl.Owner;
-import gplx.*;
-
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.browser.*;
-import org.eclipse.swt.events.*;
-import org.eclipse.swt.graphics.*;
-import org.eclipse.swt.widgets.*;
-import java.security.acl.Owner;
-
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.browser.*;
-import org.eclipse.swt.events.*;
-import org.eclipse.swt.graphics.*;
-import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.BrowserFunction;
+import org.eclipse.swt.browser.LocationEvent;
+import org.eclipse.swt.browser.LocationListener;
+import org.eclipse.swt.browser.ProgressEvent;
+import org.eclipse.swt.browser.ProgressListener;
+import org.eclipse.swt.browser.StatusTextEvent;
+import org.eclipse.swt.browser.StatusTextListener;
+import org.eclipse.swt.browser.TitleEvent;
+import org.eclipse.swt.browser.TitleListener;
+import org.eclipse.swt.events.FocusEvent;
+import org.eclipse.swt.events.FocusListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.events.TraverseEvent;
+import org.eclipse.swt.events.TraverseListener;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 
 public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_mgr_owner {
 	private Swt_html_lnr_location lnr_location; private Swt_html_lnr_status lnr_status;
@@ -158,7 +184,13 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	  Browser_tid_none 		= SWT.NONE
 	, Browser_tid_mozilla 	= SWT.MOZILLA
 	, Browser_tid_webkit	= SWT.WEBKIT
-	;	
+	;
+	private static final String URL_ABOUT_PREFIX = "about:";
+	public static String StripAboutFromUrl(String url) {
+		return String_.Has_at_bgn(url, URL_ABOUT_PREFIX)
+			? String_.Mid(url, URL_ABOUT_PREFIX.length())
+			: url;
+	}
 }
 class Swt_core_cmds_html extends Swt_core__basic {
 	public Swt_core_cmds_html(Swt_html html_box, Control control) {super(control);}
@@ -207,6 +239,7 @@ class Swt_html_lnr_status implements StatusTextListener {
 	@Override public void changed(StatusTextEvent ev) {
 		if (html_box.Kit().Kit_mode__term()) return;	// shutting down raises status changed events; ignore, else SWT exception thrown; DATE:2014-05-29 
 		String ev_text = ev.text;
+		ev_text = Swt_html.StripAboutFromUrl(ev_text); // 2020-09-19|ISSUE#:799|strip "about:/" from url due to SWT 4.16
 		String load_by_url_path = html_box.Load_by_url_path();
 		if (load_by_url_path != null) ev_text = String_.Replace(ev_text, load_by_url_path, "");	// remove "C:/xowa/tab_1.html"
 //		if (String_.Has(ev_text, "Loading [MathJax]")) return;	// suppress MathJax messages; // NOTE: disabled for 2.1 (which no longer outputs messages to status); DATE:2013-05-03
@@ -228,16 +261,29 @@ class Swt_html_lnr_location implements LocationListener {
 	@Override public void changing(LocationEvent arg) 	{Pub_evt(arg, Gfui_html.Evt_location_changing);}
 	private void Pub_evt(LocationEvent arg, String evt) {		
 		String location = arg.location;
-		if (String_.Eq(location, "about:blank")) return;	// location changing event fires once when page is loaded; ignore
-		if (	html_box.Browser_tid() == Swt_html.Browser_tid_webkit	// webkit prefixes "about:blank" to anchors; causes TOC to fail when clicking on links; EX:about:blank#TOC1; DATE:2015-06-09
+
+		// location_changing fires once when page is loaded; ignore
+		if (String_.Eq(location, "about:blank")) {
+			return;
+		}
+
+		// webkit prefixes "about:blank" to anchors; causes TOC to fail when clicking on links; EX:about:blank#TOC1; DATE:2015-06-09
+		if (html_box.Browser_tid() == Swt_html.Browser_tid_webkit
 			&&	String_.Has_at_bgn(location, "about:blank")) {
 			location = String_.Mid(location, 11);	// 11 = "about:blank".length 
 		}
-		if (	html_box.Html_doc_html_load_tid() == Gxw_html_load_tid_.Tid_url	// navigating to file://page.html will fire location event; ignore if url mode
+
+		// 2020-09-19|ISSUE#:799|strip "about:/" from url due to SWT 4.16
+		location = Swt_html.StripAboutFromUrl(location);
+
+		// navigating to file://page.html will fire location event; ignore if url mode
+		if (html_box.Html_doc_html_load_tid() == Gxw_html_load_tid_.Tid_url
 			&& 	String_.Has_at_bgn(location, "file:")
 			&& 	String_.Has_at_end(location, ".html")
-			)
+			) {
 			return;
+		}
+
 		try {
 			Gfo_evt_mgr_.Pub_obj(host, evt, "v", location);
 			arg.doit = false; // cancel navigation event, else there will be an error when trying to go to invalid location
