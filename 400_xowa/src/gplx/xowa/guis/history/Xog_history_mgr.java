@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,7 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.history;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Byte_ascii;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoa_url_;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+
 public class Xog_history_mgr {
 	private final    Ordered_hash hash = Ordered_hash_.New_bry(); private final    Xog_history_stack stack = new Xog_history_stack();
 	public int Count() {return hash.Count();}
@@ -30,7 +42,12 @@ public class Xog_history_mgr {
 		return rv;
 	}
 	public void Add(Xoae_page page) {
-		Xog_history_itm new_itm = Xog_history_mgr.new_(page);
+		this.Add(page, Xog_history_mgr.new_(page));
+	}
+	public void Add(Xoae_page page, Xoa_url url) {
+		this.Add(page, Xog_history_mgr.new_(url, page.Html_data().Bmk_pos()));
+	}
+	private void Add(Xoae_page page, Xog_history_itm new_itm) {
 		stack.Add(new_itm);
 		byte[] page_key = Build_page_key(page);
 		if (!hash.Has(page_key))
@@ -69,6 +86,15 @@ public class Xog_history_mgr {
 		byte[] qarg = pg.Url().Qargs_mgr().To_bry();
 		boolean redirect_force = pg.Url().Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no);
 		String bmk_pos = pg.Html_data().Bmk_pos();
+		if (bmk_pos == null) bmk_pos = Xog_history_itm.Html_doc_pos_toc;	// never allow null doc_pos; set to top
+		return new Xog_history_itm(wiki, page, anch, qarg, redirect_force, bmk_pos);
+	}
+	public static Xog_history_itm new_(Xoa_url url, String bmk_pos) {
+		byte[] wiki = url.Wiki_bry();
+		byte[] page = url.Page_bry();
+		byte[] anch = url.Anch_bry();
+		byte[] qarg = url.Qargs_mgr().To_bry();
+		boolean redirect_force = url.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no);
 		if (bmk_pos == null) bmk_pos = Xog_history_itm.Html_doc_pos_toc;	// never allow null doc_pos; set to top
 		return new Xog_history_itm(wiki, page, anch, qarg, redirect_force, bmk_pos);
 	}

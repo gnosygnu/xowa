@@ -185,11 +185,24 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	, Browser_tid_mozilla 	= SWT.MOZILLA
 	, Browser_tid_webkit	= SWT.WEBKIT
 	;
-	private static final String URL_ABOUT_PREFIX = "about:";
-	public static String StripAboutFromUrl(String url) {
-		return String_.Has_at_bgn(url, URL_ABOUT_PREFIX)
-			? String_.Mid(url, URL_ABOUT_PREFIX.length())
-			: url;
+
+	private static final String URL_PREFIX_ABOUT = "about:";
+	private static final String URL_PREFIX_BLANK = "blank";
+	public static String NormalizeSwtUrl(String url) {
+		String rv = url;
+
+		// 2020-09-19|ISSUE#:799|strip "about:" from url due to SWT 4.16
+		rv = String_.Has_at_bgn(rv, URL_PREFIX_ABOUT)
+			? String_.Mid(rv, URL_PREFIX_ABOUT.length())
+			: rv;
+
+		// 2015-06-09|webkit prefixes "about:blank" to anchors; causes TOC to fail when clicking on links; EX:about:blank#TOC1
+		// 2020-09-22|removed webkit check due to SWT 4.16; `html_box.Browser_tid() == Swt_html.Browser_tid_webkit`
+		// still strip "blank"; note that SWT 4.16 changes anchors from "file:///#anchor" to "en.w/wiki/page/#anchor"
+		rv = String_.Has_at_bgn(rv, URL_PREFIX_BLANK)
+			? String_.Mid(rv, URL_PREFIX_BLANK.length())
+			: rv;
+		return rv;
 	}
 }
 class Swt_core_cmds_html extends Swt_core__basic {
@@ -238,8 +251,10 @@ class Swt_html_lnr_status implements StatusTextListener {
 	public void Host_set(Gfo_evt_itm host) {this.host = host;} Gfo_evt_itm host;
 	@Override public void changed(StatusTextEvent ev) {
 		if (html_box.Kit().Kit_mode__term()) return;	// shutting down raises status changed events; ignore, else SWT exception thrown; DATE:2014-05-29 
-		String ev_text = ev.text;
-		ev_text = Swt_html.StripAboutFromUrl(ev_text); // 2020-09-19|ISSUE#:799|strip "about:/" from url due to SWT 4.16
+
+		// 2020-09-22|ISSUE#:799|normalize URL due to SWT 4.16
+		String ev_text = Swt_html.NormalizeSwtUrl(ev.text);
+
 		String load_by_url_path = html_box.Load_by_url_path();
 		if (load_by_url_path != null) ev_text = String_.Replace(ev_text, load_by_url_path, "");	// remove "C:/xowa/tab_1.html"
 //		if (String_.Has(ev_text, "Loading [MathJax]")) return;	// suppress MathJax messages; // NOTE: disabled for 2.1 (which no longer outputs messages to status); DATE:2013-05-03
@@ -259,24 +274,16 @@ class Swt_html_lnr_location implements LocationListener {
 	public void Host_set(Gfo_evt_itm host) {this.host = host;} private Gfo_evt_itm host;
 	@Override public void changed(LocationEvent arg) 	{Pub_evt(arg, Gfui_html.Evt_location_changed);}
 	@Override public void changing(LocationEvent arg) 	{Pub_evt(arg, Gfui_html.Evt_location_changing);}
-	private void Pub_evt(LocationEvent arg, String evt) {		
-		String location = arg.location;
+	private void Pub_evt(LocationEvent arg, String evt) {
+		// 2020-09-22|ISSUE#:799|normalize URL due to SWT 4.16
+		String location = Swt_html.NormalizeSwtUrl(arg.location);
 
-		// location_changing fires once when page is loaded; ignore
-		if (String_.Eq(location, "about:blank")) {
+		// location_changing fires once when page is loaded -> ignore
+		if (String_.Eq(location, String_.Empty)) {
 			return;
 		}
 
-		// webkit prefixes "about:blank" to anchors; causes TOC to fail when clicking on links; EX:about:blank#TOC1; DATE:2015-06-09
-		if (html_box.Browser_tid() == Swt_html.Browser_tid_webkit
-			&&	String_.Has_at_bgn(location, "about:blank")) {
-			location = String_.Mid(location, 11);	// 11 = "about:blank".length 
-		}
-
-		// 2020-09-19|ISSUE#:799|strip "about:/" from url due to SWT 4.16
-		location = Swt_html.StripAboutFromUrl(location);
-
-		// navigating to file://page.html will fire location event; ignore if url mode
+		// navigating to file://page.html will fire location event; ignore if url mode (loading pages from file)
 		if (html_box.Html_doc_html_load_tid() == Gxw_html_load_tid_.Tid_url
 			&& 	String_.Has_at_bgn(location, "file:")
 			&& 	String_.Has_at_end(location, ".html")

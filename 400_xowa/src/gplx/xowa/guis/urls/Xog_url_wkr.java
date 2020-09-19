@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,12 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.core.envs.*;
-import gplx.gfui.controls.standards.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
-import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.doms.*;
-import gplx.xowa.guis.views.*;
+package gplx.xowa.guis.urls;
+
+import gplx.Bry_;
+import gplx.Err_;
+import gplx.String_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoa_url_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.guis.views.Xog_js_procs;
+import gplx.xowa.guis.views.Xog_win_itm;
+
 public class Xog_url_wkr {
 	private final    Xoa_url tmp_url = Xoa_url.blank();
 	private Xoae_app app; private Xog_win_itm win; private Xowe_wiki wiki; private Xoae_page page;
@@ -56,7 +64,18 @@ public class Xog_url_wkr {
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_anchor(Xog_win_itm win) {	// EX: #anchor
-		win.Active_html_itm().Scroll_page_by_id_gui(tmp_url.Anch_str());	// NOTE: was originally directly; changed to call on thread; DATE:2014-05-03
+		// 2014-05-03|was originally called directly; changed to call on thread
+		win.Active_html_itm().Scroll_page_by_id_gui(tmp_url.Anch_str());
+
+		// 2020-09-22|ISSUE#:799|SWT 4.16 changes anchors from "file:///#anchor" to "en.w/wiki/page/#anchor"
+		if (app.Mode().Tid_is_gui()) {
+			// manually update url box
+			win.Gui_mgr().Browser_win().Url_box().Text_(tmp_url.To_str());
+
+			// manually register url; note that tmp_url needs to be passed b/c page.Url() doesn't have #anchor info
+			win.Tab_mgr().Active_tab().History_mgr().Add(page, tmp_url);
+		}
+
 		return Rslt_handled;
 	}
 	private Xoa_url Exec_url_file(Xoae_app app, Xowe_wiki cur_wiki, Xoae_page page, Xog_win_itm win, byte[] href_bry) {	// EX: file:///xowa/A.png
