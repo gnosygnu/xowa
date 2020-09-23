@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,15 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
+package gplx.xowa.xtns.scribunto.libs;
+
+import gplx.Keyval_;
+import gplx.String_;
+import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.engines.mocks.Mock_scrib_fxt;
+import org.junit.Before;
+import org.junit.Test;
+
 public class Scrib_lib_ustring__match__tst {
-	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
+	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
 		fxt.Clear();
 		lib = fxt.Core().Lib_ustring().Init();
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		Exec_match("abcd"	, "bc"				, 1, "bc");							// basic
 		Exec_match("abcd"	, "x"				, 1, String_.Null_mark);			// empty
 		Exec_match("abcd"	, "a"				, 2, String_.Null_mark);			// bgn
@@ -35,29 +43,34 @@ public class Scrib_lib_ustring__match__tst {
 		Exec_match(1		, "a"				, 1, String_.Null_mark);			// Module can pass raw ints; PAGE:en.w:Budget_of_the_European_Union; DATE:2015-01-22
 		Exec_match(""		, "a?"				, 1, "");							// no results with ? should return "" not nil; PAGE:en.d:民; DATE:2015-01-30
 	}
-	@Test  public void Args_out_of_order() {
+	@Test public void Args_out_of_order() {
 		fxt.Test__proc__kvps__empty(lib, Scrib_lib_ustring.Invk_match, Keyval_.Ary(Keyval_.int_(2, "[a]")));
 	}
-	@Test  public void Balanced__trailing_whitespace() {	// PURPOSE: match trailing whitespace; PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
+	@Test public void Balanced__trailing_whitespace() {	// PURPOSE: match trailing whitespace; PAGE:en.w:Portal:Constructed_languages/Intro DATE:2018-07-02
 		Exec_match("[[a]]  b", "%b[]%s*", 1, "[[a]]  ");
 	}
-	@Test  public void Balanced__numbered_1() {	// PURPOSE: handle mix of balanced and regular capture; PAGE:en.w:Bahamas
+	@Test public void Balanced__numbered_1() {	// PURPOSE: handle mix of balanced and regular capture; PAGE:en.w:Bahamas
 		Exec_match("[[5]]X99Y", "%b[]X(%d)%1Y", 1, "9");
 	}
-	@Test  public void Balanced__numbered_2() {
+	@Test public void Balanced__numbered_2() {
 		Exec_match("A88B[[5]]X99Y", "A(%d)%1B%b[]X(%d)%2Y", 1, "8;9");
 	}
-	@Test   public void Unicode_alpha() {// ISSUE#:502; DATE:2019-07-01
+	@Test  public void Unicode_alpha() {// ISSUE#:502; DATE:2019-07-01
 		Exec_match("ä"	, "%a", 1, "ä");
 	}
+	@Test public void Number() {// 2019-20-01|ISSUE#:802|passing integer should return NULL, not throw error
+		Exec_match_obj("A"	, 0, 0, String_.Null_mark);
+	}
 
-
-//		@Test  public void Match_viwiktionary() {
+//		@Test public void Match_viwiktionary() {
 //			fxt.Init_cbk(Scrib_core.Key_mw_interface, fxt.Core().Lib_ustring(), Scrib_lib_ustring.Invk_match);
 //			Exec_match("tr"	, "()(r)", 1, ";");						// should return all matches
 //			Exec_match("tr"	, "^([b]*).-([c]*)$", 1, ";");						// should return all matches
 //		}
 	private void Exec_match(Object text, String regx, int bgn, String expd) {
+		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_match, Scrib_kv_utl_.base1_many_(text, regx, bgn), expd);
+	}
+	private void Exec_match_obj(Object text, Object regx, int bgn, String expd) {
 		fxt.Test__proc__kvps__flat(lib, Scrib_lib_ustring.Invk_match, Scrib_kv_utl_.base1_many_(text, regx, bgn), expd);
 	}
 }

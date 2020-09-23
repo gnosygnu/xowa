@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,12 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.objects.strings.unicodes.*;
-import gplx.core.intls.*; import gplx.langs.regxs.*;
-import gplx.xowa.parsers.*;
-import gplx.xowa.xtns.scribunto.procs.*;
-import gplx.xowa.xtns.scribunto.libs.patterns.*;
+package gplx.xowa.xtns.scribunto.libs;
+
+import gplx.Bool_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_url;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.langs.regxs.Regx_adp;
+import gplx.langs.regxs.Regx_adp_;
+import gplx.langs.regxs.Regx_group;
+import gplx.langs.regxs.Regx_match;
+import gplx.objects.strings.unicodes.Ustring;
+import gplx.objects.strings.unicodes.Ustring_;
+import gplx.xowa.Xoa_page_;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.libs.patterns.Scrib_pattern_matcher;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
+
 public class Scrib_lib_ustring implements Scrib_lib {
 	public Scrib_lib_ustring(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public String Key() {return "mw.ustring";}
@@ -48,7 +69,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	}
 	private static final int Proc_find = 0, Proc_match = 1, Proc_gmatch_init = 2, Proc_gmatch_callback = 3, Proc_gsub = 4;
 	public static final String Invk_find = "find", Invk_match = "match", Invk_gmatch_init = "gmatch_init", Invk_gmatch_callback = "gmatch_callback", Invk_gsub = "gsub";
-	private static final    String[] Proc_names = String_.Ary(Invk_find, Invk_match, Invk_gmatch_init, Invk_gmatch_callback, Invk_gsub);
+	private static final String[] Proc_names = String_.Ary(Invk_find, Invk_match, Invk_gmatch_init, Invk_gmatch_callback, Invk_gsub);
 	public boolean Find(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// get args
 		String text_str	       = args.Xstr_str_or_null(0);
@@ -113,7 +134,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 	public boolean Match(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// get args
 		String text_str        = args.Xstr_str_or_null(0); // Module can pass raw ints; PAGE:en.w:Budget_of_the_European_Union; DATE:2015-01-22
-		String find_str        = args.Cast_str_or_null(1);
+		// 2019-20-01|ISSUE#:802|passing integer should return NULL, not throw error
+		String find_str        = args.Xstr_str_or_null(1);
 		int bgn_as_codes_base1 = args.Cast_int_or(2, 1);
 
 		// validate / adjust
