@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.scribunto.libs;
+
+import gplx.Bry_;
+import gplx.Decimal_adp;
+import gplx.Decimal_adp_;
+import gplx.Double_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_visitor;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_string;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_value;
+
 public class Scrib_lib_wikibase_srl_visitor implements Wbase_claim_visitor {
 	public Keyval[] Rv() {return rv;} Keyval[] rv;
 	public void Visit_str(Wbase_claim_string itm) {
@@ -79,16 +103,43 @@ public class Scrib_lib_wikibase_srl_visitor implements Wbase_claim_visitor {
 		rv[0] = Keyval_.new_(Scrib_lib_wikibase_srl.Key_type, Wbase_claim_type_.Itm__globecoordinate.Key_str());
 		rv[1] = Keyval_.new_(Scrib_lib_wikibase_srl.Key_value, Globecoordinate_value(itm));
 	}
-	private static Keyval[] Globecoordinate_value(Wbase_claim_globecoordinate itm) {			
+	private static Keyval[] Globecoordinate_value(Wbase_claim_globecoordinate itm) {
 		Keyval[] rv = new Keyval[5];
 		rv[0] = Keyval_.new_(Wbase_claim_globecoordinate_.Itm__latitude.Key_str()			, Double_.parse(String_.new_a7(itm.Lat())));
 		rv[1] = Keyval_.new_(Wbase_claim_globecoordinate_.Itm__longitude.Key_str()			, Double_.parse(String_.new_a7(itm.Lng())));
 		rv[2] = Keyval_.new_(Wbase_claim_globecoordinate_.Itm__altitude.Key_str()			, String_.new_u8(itm.Alt()));
 		rv[3] = Keyval_.new_(Wbase_claim_globecoordinate_.Itm__globe.Key_str()				, String_.new_u8(itm.Glb()));
-		rv[4] = Keyval_.new_(Wbase_claim_globecoordinate_.Itm__precision.Key_str()			, itm.Prc_as_num().To_double());
+		rv[4] = Keyval_.new_(Wbase_claim_globecoordinate_.Itm__precision.Key_str()			, CalcPrecision(itm.Prc(), itm.Lng()).To_double());
 		return rv;
 	}
 	public void Visit_system(Wbase_claim_value itm) {
 		rv = Keyval_.Ary_empty;
+	}
+	public static Decimal_adp CalcPrecision(byte[] prc, byte[] lng) {
+		Decimal_adp rv;
+
+		// precision is "null"
+		if (Bry_.Eq(prc, Object_.Bry__null)) {
+			// 2020-09-25|ISSUE#:792|use longitude to determine precision (contributed by desb42@)
+			int lngLen = lng.length;
+			int power = 0;
+			// calc power by finding decimal point
+			for (int i = 0; i < lngLen; i++) {
+				byte b = lng[i];
+				if (b == '.') {
+					power = lngLen - (i + 1); // +1 to set after "."
+					if (power > 8) { // ensure power is 8 or less
+						power = 8;
+					}
+					break;
+				}
+			}
+
+			rv = Decimal_adp_.float_((float)Math.pow(10, -power));
+		}
+		else {
+			rv = Decimal_adp_.parse(String_.new_a7(prc));
+		}
+		return rv;
 	}
 }
