@@ -31,7 +31,7 @@ class Mustache_tkn_def {
 	, Grp_end		= Byte_ascii.Slash			// {{/section}}
 	, Inverted		= Byte_ascii.Pow			// {{^inverted}}
 	, Comment		= Byte_ascii.Bang			// {{!comment}}
-	, Partial		= Byte_ascii.Angle_bgn		// {{>partial}}
+	, Partial		= Byte_ascii.Angle_end		// {{>partial}}
 	, Delimiter_bgn	= Byte_ascii.Eq				// {{=<% %>=}}
 	, Delimiter_end	= Byte_ascii.Curly_end		// {{=<% %>=}}
 	;

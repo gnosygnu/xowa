@@ -81,7 +81,7 @@ class Pgbnr_func_fxt {
 		fxt.Init__orig(wiki_is_commons, orig_ttl, orig_w, orig_h);
 	}
 	public void Test__parse(boolean hdump, String raw, String expd) {
-		fxt.Exec_parse_page_all_as_str(raw);
+		String test = fxt.Exec_parse_page_all_as_str(raw);
 		Xoh_wtr_ctx hctx = hdump ? Xoh_wtr_ctx.Hdump : Xoh_wtr_ctx.Basic;
 		Bfr_arg arg = fxt.Wiki().Xtn_mgr().Xtn_pgbnr().Write_html(fxt.Page(), fxt.Ctx(), hctx);
 		Bry_bfr bfr = Bry_bfr_.New();

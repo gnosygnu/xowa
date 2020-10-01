@@ -1,0 +1,69 @@
+{{!
+	string|null html-site-notice the contents of a banner defined in MediaWiki:Sitenotice.
+		Also used by CentralNotice to inject banners into Vector.
+	Indicator[] array-indicators wiki-defined badges such as "good article",
+		"featured article". An empty array if none are defined.
+	string page-langcode the content language of the article. Assumed to be escaped HTML.
+	string html-title
+	bool page-isarticle
+	string msg-tagline
+	string html-subtitle
+	string html-undelete-link
+	string html-newtalk
+	string msg-vector-jumptonavigation
+	string msg-vector-jumptosearch
+	string html-body-content
+	string html-categories
+	string html-after-content
+	string msg-navigation-heading heading for entire navigation that is
+		usually hidden to screen readers
+	MenuDefinition data-personal-menu
+	MenuDefinition data-namespace-tabs
+	MenuDefinition data-variants
+	MenuDefinition data-page-actions
+	MenuDefinition data-page-actions-more
+	object data-search-box. See SearchBox.mustache for documentation.
+	object data-sidebar. See Sidebar.mustache for documentation.
+	object data-footer for footer template partial. see Footer.mustache for documentation.
+}}
+<div id="mw-page-base" class="noprint"></div>
+<div id="mw-head-base" class="noprint"></div>
+<div id="content" class="mw-body" role="main">
+	<a id="top"></a>
+	<div id="siteNotice" class="mw-body-content">{{{html-site-notice}}}</div>
+	{{>Indicators}}
+	<h1 id="firstHeading" class="firstHeading" lang="{{page-langcode}}">{{{html-title}}}</h1>
+	<div id="bodyContent" class="mw-body-content">
+		{{#page-isarticle}}<div id="siteSub" class="noprint">{{msg-tagline}}</div>{{/page-isarticle}}
+		<div id="contentSub"{{{html-user-language-attributes}}}>{{{html-subtitle}}}</div>
+		<div id="contentSub2">{{{html-undelete-link}}}</div>
+		{{{html-newtalk}}}
+		{{!
+			Keep this empty `div` for compatibility with gadgets and user scripts
+			using this place to insert extra elements before.
+		}}
+		<div id="jump-to-nav"></div>
+		<a class="mw-jump-link" href="#mw-head">{{msg-vector-jumptonavigation}}</a>
+		<a class="mw-jump-link" href="#searchInput">{{msg-vector-jumptosearch}}</a>
+		{{{html-body-content}}}
+		{{{html-categories}}}
+	</div>
+</div>
+{{{html-after-content}}}
+<div id="mw-navigation">
+	<h2>{{msg-navigation-heading}}</h2>
+	<div id="mw-head">
+		{{#data-personal-menu}}{{>Menu}}{{/data-personal-menu}}
+		<div id="left-navigation">
+			{{#data-namespace-tabs}}{{>Menu}}{{/data-namespace-tabs}}
+			{{#data-variants}}{{>Menu}}{{/data-variants}}
+		</div>
+		<div id="right-navigation">
+			{{#data-page-actions}}{{>Menu}}{{/data-page-actions}}
+			{{#data-page-actions-more}}{{>Menu}}{{/data-page-actions-more}}
+			{{#data-search-box}}{{>SearchBox}}{{/data-search-box}}
+		</div>
+	</div>
+	{{#data-sidebar}}{{>legacy/Sidebar}}{{/data-sidebar}}
+</div>
+{{#data-footer}}{{>Footer}}{{/data-footer}}

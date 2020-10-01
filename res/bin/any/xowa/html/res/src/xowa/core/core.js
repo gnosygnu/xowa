@@ -104,6 +104,18 @@ if (!window.xowa) {
               },
               remove: function () {},
               fire: function () {}
+            } : name === 'wikipage.collapsibleContent' ? {
+              add: function (f) {
+              	//fc = f;
+              	f(mw.collapsibleContent);
+//                     f(window.jQuery ? $collapsible.find( '> .mw-collapsible-content' ) : null);
+              },
+              remove: function () {},
+              fire: function (t) {
+              	// different order!!!! wrong order HACK
+              	mw.collapsibleContent = t;
+              	//fc(t);
+              	}
             } : {
               add: function () {},
               remove: function () {},

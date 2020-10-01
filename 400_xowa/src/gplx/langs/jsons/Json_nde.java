@@ -119,7 +119,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	public Json_itm Get_itm(byte[] key) {
 		for (int i = 0; i < subs_len; i++) {
 			Json_itm itm = subs[i];
-			if (itm.Tid() == Json_itm_.Tid__kv) {
+			if (itm != null && itm.Tid() == Json_itm_.Tid__kv) {
 				Json_kv itm_as_kv = (Json_kv)itm;
 				if (Bry_.Eq(key, itm_as_kv.Key().Data_bry()))
 					return itm;

@@ -140,10 +140,15 @@ app.wikis.get('~{wiki_key}') {
 app.wikis.get('~{wiki_key}').html.portal {
   div_personal =
 <:["
-  <div id="p-personal" class="">
-    <h3>~{<>msgs.get('personaltools');<>}</h3>
+<nav id="p-personal" class="vector-menu" aria-labelledby="p-personal-label" role="navigation" 
+	 >
+	<h3 id="p-personal-label">
+		<span>~{<>app.user.msgs.get('personaltools');<>}</span>
+	</h3>
+	<div class="body vector-menu-content">
     ~{portal_indicators_pagesource}
-  </div>
+	</div>
+</nav>
 "]:>
 ;
   div_ns =
@@ -228,13 +233,16 @@ app.wikis.get('~{wiki_key}').html.portal {
 ;
   div_wikis =
 <:["
-  <div id="xowa-portal-wikis" class="portal">    
-    <h3>~{toggle_btn}</h3>
-    <div class="body">
+<nav id="xowa-portal-wikis" class="vector-menu vector-menu-portal portal" aria-labelledby="xowa-portal-wikis" role="navigation"
+	 >
+	<h3 id="p-wiki">
+		<span>~{toggle_btn}</span>
+	</h3>
+    <div class="body vector-menu-content">
       <ul~{toggle_hdr}>~{<>app.gui.html.portal.wikis.itms_as_html;<>}
       </ul>
     </div>
-  </div>
+</nav>
 "]:>
 ;
 }
@@ -472,9 +480,14 @@ app.wikis.scripts.set
 app.wikis.get('~{wiki_key}').html.portal
 .div_personal_(
 <:["
-  <div id="p-personal" class="">
-    <h3>~{<>app.user.msgs.get('personaltools');<>}</h3>
-  </div>
+<nav id="p-personal" class="vector-menu" aria-labelledby="p-personal-label" role="navigation" 
+	 >
+	<h3 id="p-personal-label">
+		<span>~{<>app.user.msgs.get('personaltools');<>}</span>
+	</h3>
+	<div class="body vector-menu-content">
+	</div>
+</nav>
 "]:>
 )
 ;

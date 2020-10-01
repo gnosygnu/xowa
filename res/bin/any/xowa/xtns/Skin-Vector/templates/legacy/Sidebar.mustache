@@ -1,0 +1,13 @@
+{{!
+	See @typedef SidebarData
+	string html-logo-attributes for site logo. Must be used inside tag e.g. `class="logo" lang="en-gb"`
+}}
+
+<div id="mw-panel">
+	<div id="p-logo" role="banner">
+		<a {{{html-logo-attributes}}}></a>
+	</div>
+	{{#data-portals-first}}{{>Menu}}{{/data-portals-first}}
+	{{#array-portals-rest}}{{>Menu}}{{/array-portals-rest}}
+	{{#data-portals-languages}}{{>Menu}}{{/data-portals-languages}}
+</div>

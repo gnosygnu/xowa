@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2017 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,41 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls;
-
-import gplx.Array_;
-import gplx.Bool_;
-import gplx.Bry_;
-import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Bry_find_;
-import gplx.Byte_ascii;
-import gplx.Err_;
-import gplx.Gfo_usr_dlg_;
-import gplx.Hash_adp_bry;
-import gplx.String_;
-import gplx.core.envs.Env_;
-import gplx.xowa.Xoa_ttl;
-import gplx.xowa.Xoae_page;
-import gplx.xowa.Xowe_wiki;
-import gplx.xowa.langs.Xol_lang_itm;
-import gplx.xowa.langs.funcs.Xol_func_itm;
-import gplx.xowa.langs.kwds.Xol_kwd_grp;
-import gplx.xowa.langs.kwds.Xol_kwd_grp_;
-import gplx.xowa.langs.kwds.Xol_kwd_itm;
-import gplx.xowa.langs.kwds.Xol_kwd_mgr;
-import gplx.xowa.parsers.Xop_ctx;
-import gplx.xowa.parsers.Xop_tkn_itm;
-import gplx.xowa.parsers.Xop_tkn_itm_;
-import gplx.xowa.parsers.Xop_tkn_itm_base;
-import gplx.xowa.wikis.caches.Xow_page_cache_itm;
-import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
-import gplx.xowa.wikis.nss.Xow_ns;
-import gplx.xowa.wikis.nss.Xow_ns_;
-import gplx.xowa.wikis.nss.Xow_ns_mgr_name_itm;
-import gplx.xowa.wikis.pages.Xopg_tmpl_prepend_mgr;
-import gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs;
-
+package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+import gplx.core.envs.*;
+import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.funcs.*;
+import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.wikis.data.tbls.*;		
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
 public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 	public Xot_invk_tkn(int bgn, int end) {this.Tkn_ini_pos(false, bgn, end);}
 	@Override public byte Tkn_tid() {return typeId;} private byte typeId = Xop_tkn_itm_.Tid_tmpl_invk;
@@ -95,6 +66,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		boolean subst_found = false;
 		boolean name_had_subst = false;
 		boolean template_prefix_found = false;
+//		byte tmpl_case_match = wiki.Ns_mgr().Ns_template().Case_match();
 
 		// tmpl_name does not exist in db; may be dynamic, subst, transclusion, etc..
 		if (defn == Xot_defn_.Null) {
@@ -285,6 +257,29 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				break;
 			case Xot_defn_.Tid_func:
 				try {
+/*                                    System.out.println(String_.new_a7(caller.Frame_ttl()));
+                                    if (true) {//(caller.Frame_ttl().length == 22 && caller.Frame_ttl()[21] == 't') {
+                                        int alen = caller.Args_len();
+                                        String s = "";
+                                        for (int i = 0; i < alen; i++) {
+                                            Arg_nde_tkn atkn = caller.Args_get_by_idx(i);
+                                            if (atkn.KeyTkn_exists()) {
+                                                Arg_itm_tkn argtkn = atkn.Key_tkn();
+                                                s += String_.new_a7(argtkn.Dat_ary()) + ":";
+                                            }
+                                            else
+                                                s += String.valueOf(i);
+                                            s += String_.new_a7(atkn.Val_tkn().Dat_ary()) + "\n";
+                                        }
+                                        System.out.println(s);
+                                    	int  a=1;
+                                    }
+*/
+if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
+    return true;
+    //int a=1;
+}
+//System.out.println(String_.new_u8(caller.Frame_ttl()));
 					Xot_invk_tkn_.Eval_func(ctx, src, caller, this, bfr, defn, argx_ary);
 					rv = true;
 				}	catch (Exception e) {
@@ -306,11 +301,13 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				Bry_bfr rslt_bfr = wiki.Utl__bfr_mkr().Get_k004();
 				try {
 					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(bfr);
-					rv = defn_tmpl.Tmpl_evaluate(Xop_ctx.New__sub(wiki, ctx, ctx.Page()), invk_tmpl, rslt_bfr); // create new ctx so __NOTOC__ only applies to template, not page; PAGE:de.w:13._Jahrhundert DATE:2017-06-17
+					//rv = defn_tmpl.Tmpl_evaluate(Xop_ctx.New__sub(wiki, ctx, ctx.Page()), invk_tmpl, rslt_bfr); // create new ctx so __NOTOC__ only applies to template, not page; PAGE:de.w:13._Jahrhundert DATE:2017-06-17
+					rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, rslt_bfr);
 					prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
 					if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
 						byte[] tmp_src = rslt_bfr.To_bry_and_clear();
-						rslt_bfr.Add(wiki.Parser_mgr().Main().Expand_tmpl(tmp_src));	// this could be cleaner / more optimized
+						if (tmp_src.length != 0)
+							rslt_bfr.Add(wiki.Parser_mgr().Main().Expand_tmpl(tmp_src));	// this could be cleaner / more optimized
 					}
 					bfr.Add_bfr_and_clear(rslt_bfr);
 					trace.Trace_end(trg_bgn, bfr);
@@ -341,7 +338,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		Xoa_ttl page_ttl = Xoa_ttl.Parse(wiki, name_ary); if (page_ttl == null) return false;	// ttl not valid; EX: {{:[[abc]]}}
 		byte[] transclude_src = null;
 		if (page_ttl.Ns().Id_is_tmpl()) {							// ttl is template; check tmpl_regy first before going to data_mgr
-			Xot_defn_tmpl tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Defn_cache().Get_by_key(page_ttl.Page_db());
+			Xot_defn_tmpl tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Defn_cache().Get_by_key(page_ttl.Page_db(), wiki.Ns_mgr().Ns_template().Case_match());
 			if (tmpl != null) transclude_src = tmpl.Data_raw();
 		}
 		if (transclude_src == null && ctx.Tmpl_load_enabled()) {	// ttl is template not in cache, or some other ns; do load
@@ -378,7 +375,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		Xot_defn_tmpl transclude_tmpl = null;
 		switch (page_ttl.Ns().Id()) {
 			case Xow_ns_.Tid__template:	// ttl is template not in cache, or some other ns; do load
-				Xot_defn_tmpl tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Defn_cache().Get_by_key(page_ttl.Page_db());
+				Xot_defn_tmpl tmpl = (Xot_defn_tmpl)wiki.Cache_mgr().Defn_cache().Get_by_key(page_ttl.Page_db(), wiki.Ns_mgr().Ns_template().Case_match());
 				if (tmpl != null) {
 					if (tmpl.Root() == null) tmpl.Parse_tmpl(ctx);
 					transclude_tmpl = tmpl;
@@ -389,6 +386,12 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				return true;
 		}
 		if (transclude_tmpl == null && ctx.Tmpl_load_enabled()) {	// ttl is template not in cache, or some other ns; do load
+//                    if (page_ttl.Ns().Id() == wiki.Ns_mgr().Ns_page_id())
+//                        System.out.println("Transclude " + page_ttl.Full_db_as_str());
+
+//		if (wiki.Domain_tid() == Xow_domain_tid_.Tid__wikisource && page_ttl.Ns().Id() == wiki.Ns_mgr().Ns_page_id())
+//			ctx.Page().Html_data().Quality_tots().Check_quality(page_ttl, wiki);
+
 			Xow_page_cache_itm cache_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(page_ttl);
 			if (	cache_itm != null) {
 				if (!Bry_.Eq(cache_itm.Ttl().Full_db(), ctx.Page().Ttl().Full_db())) {	// make sure that transcluded item is not same as page_ttl; DATE:2014-01-10
@@ -442,7 +445,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		Xol_kwd_itm[] itms = grp.Itms();
 		return itms.length == 0 ? Bry_.Empty : itms[0].Val();
 	}
-	private static final Hash_adp_bry ignore_hash = Hash_adp_bry.ci_a7().Add_str_obj("Citation needed{{subst", "").Add_str_obj("Clarify{{subst", "");	// ignore SafeSubst templates
+	private static final    Hash_adp_bry ignore_hash = Hash_adp_bry.ci_a7().Add_str_obj("Citation needed{{subst", "").Add_str_obj("Clarify{{subst", "");	// ignore SafeSubst templates
 }
 /*
 NOTE_1: if (finder.Colon_pos() != -1) colon_pos = finder.Func().Name().length;

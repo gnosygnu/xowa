@@ -103,7 +103,21 @@ class Mustache_tkn_inverted extends Mustache_tkn_base {	// EX: {{^section}}missi
 	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {Mustache_tkn_section.Render_static(Bool_.Y, this, bfr, ctx);}
 }
 class Mustache_tkn_partial extends Mustache_tkn_base {	// EX: {{>a}} -> abc (deferred eval)
-	public Mustache_tkn_partial(byte[] key) {super(Mustache_tkn_itm_.Tid__partial, key);}
+	private Mustache_tkn_itm template_root;
+	public Mustache_tkn_partial(byte[] key, Io_url dir) {
+		super(Mustache_tkn_itm_.Tid__partial, key);
+		int key_len = key.length;
+		int i;
+		for (i = 0; i < key_len; i++) {
+			if (key[i] != ' ')
+				break;
+		}
+		Mustache_tkn_parser parser = new Mustache_tkn_parser(dir);
+		template_root = parser.Parse(String_.new_a7(Bry_.Mid(key, i, key_len)));
+	}
+	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {
+		template_root.Render(bfr, ctx);
+	}
 }
 class Mustache_tkn_delimiter extends Mustache_tkn_base {// EX: {{=<% %>=}} -> <% variable %>
 	public Mustache_tkn_delimiter(byte[] key) {super(Mustache_tkn_itm_.Tid__delimiter, key);}

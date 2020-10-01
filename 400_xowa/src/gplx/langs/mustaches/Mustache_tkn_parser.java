@@ -16,7 +16,18 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
 public class Mustache_tkn_parser {
 	private byte[] src; private int src_end;
+	private Io_url template_root;
 	private final    Mustache_tkn_def tkn_def = new Mustache_tkn_def();
+	public Mustache_tkn_parser() {
+	}
+	public Mustache_tkn_parser(Io_url template_root) {
+		this.template_root = template_root;
+	}
+	public Mustache_tkn_itm Parse(String template) { return Parse(template, Bry_.Empty); }
+	public Mustache_tkn_itm Parse(String template, byte[] default_text) {
+		byte[] template_data = Io_mgr.Instance.LoadFilBryOr(template_root.GenSubFil_nest(template + ".mustache"), default_text);
+		return Parse(template_data, 0, template_data.length);
+	}
 	public Mustache_tkn_itm Parse(byte[] src) {return Parse(src, 0, src.length);}
 	public Mustache_tkn_itm Parse(byte[] src, int src_bgn, int src_end) {
 		this.src = src; this.src_end = src_end;
@@ -80,7 +91,7 @@ public class Mustache_tkn_parser {
 			default:								throw Err_.new_unhandled(tkn_data.tid);
 			case Mustache_tkn_def.Variable:			tkn = new Mustache_tkn_variable(val_bry);	break;
 			case Mustache_tkn_def.Comment:			tkn = new Mustache_tkn_comment();			break;
-			case Mustache_tkn_def.Partial:			tkn = new Mustache_tkn_partial(val_bry);	break;
+			case Mustache_tkn_def.Partial:			tkn = new Mustache_tkn_partial(val_bry, template_root);	break;
 			case Mustache_tkn_def.Delimiter_bgn:	tkn = new Mustache_tkn_delimiter(val_bry);	break;	// TODO_OLD: implement delimiter; EX: {{=<% %>=}}
 			case Mustache_tkn_def.Escape_bgn:		tkn = new Mustache_tkn_escape(val_bry);		break;
 			case Mustache_tkn_def.Section:			tkn = new Mustache_tkn_section(val_bry);	break;

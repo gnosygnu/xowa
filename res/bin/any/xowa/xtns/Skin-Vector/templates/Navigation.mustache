@@ -1,0 +1,16 @@
+<div id="mw-navigation">
+	<h2>{{msg-navigation-heading}}</h2>
+	<div id="mw-head">
+		{{#data-personal-menu}}{{>Menu}}{{/data-personal-menu}}
+		<div id="left-navigation">
+			{{#data-namespace-tabs}}{{>Menu}}{{/data-namespace-tabs}}
+			{{#data-variants}}{{>Menu}}{{/data-variants}}
+		</div>
+		<div id="right-navigation">
+			{{#data-page-actions}}{{>Menu}}{{/data-page-actions}}
+			{{#data-page-actions-more}}{{>Menu}}{{/data-page-actions-more}}
+			{{#data-search-box}}{{>SearchBox}}{{/data-search-box}}
+		</div>
+	</div>
+	{{#data-sidebar}}{{>legacy/Sidebar}}{{/data-sidebar}}
+</div>

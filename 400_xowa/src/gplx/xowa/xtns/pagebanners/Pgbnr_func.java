@@ -167,6 +167,7 @@ public class Pgbnr_func extends Pf_func_base {
 		}
 		itm.Init_from_html(max_width, banner_file, banner_url, srcset, cfg.enable_heading_override, toc_html, isPanorama);
 
+//		Mustache_render_ctx mctx = new Mustache_render_ctx().Init(itm.Mustache__json());
 		Mustache_render_ctx mctx = new Mustache_render_ctx().Init(itm);
 		Mustache_bfr mbfr = Mustache_bfr.New_bfr(tmp_bfr);
 		wiki.Xtn_mgr().Xtn_pgbnr().Template_root().Render(mbfr, mctx);

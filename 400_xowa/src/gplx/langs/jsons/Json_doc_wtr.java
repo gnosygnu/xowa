@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
-import gplx.objects.strings.unicodes.*;
-import gplx.core.encoders.*;
+package gplx.langs.jsons;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_ascii;
+import gplx.Double_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.core.encoders.Hex_utl_;
+import gplx.objects.strings.unicodes.Ustring;
+import gplx.objects.strings.unicodes.Ustring_;
+
 public class Json_doc_wtr {
 	private int indent = -2;
 	private Bry_bfr bfr = Bry_bfr_.Reset(255);
@@ -96,6 +107,7 @@ public class Json_doc_wtr {
 		bfr.Add_byte_nl();
 		return this;
 	}
+	public Json_doc_wtr Kv(boolean comma, String key, byte[] val) {return Kv(comma, Bry_.new_u8(key), val);}
 	public Json_doc_wtr Kv(boolean comma, byte[] key, byte[] val) {
 		Key_internal(comma, key);
 		Str(val);
@@ -108,12 +120,15 @@ public class Json_doc_wtr {
 		bfr.Add_byte_nl();
 		return this;
 	}
+	public Json_doc_wtr Kv(boolean comma, String key, int v) {return Kv(comma, Bry_.new_u8(key), v);}
 	public Json_doc_wtr Kv(boolean comma, byte[] key, int v) {
 		Key_internal(comma, key);
 		Int(v);
 		bfr.Add_byte_nl();
 		return this;
 	}
+	public Json_doc_wtr Kv(boolean comma, String key, double v) {return Kv(comma, Bry_.new_u8(key), Bry_.new_u8(Double_.To_str(v)));}
+	public Json_doc_wtr Kv(boolean comma, String key, boolean v) {return Kv(comma, Bry_.new_u8(key), v ? Bool_.Y_bry : Bool_.N_bry);}
 	public Json_doc_wtr Key(boolean comma, String key) {return Key(comma, Bry_.new_u8(key));}
 	public Json_doc_wtr Key(boolean comma, byte[] key) {
 		Key_internal(comma, key);
@@ -148,5 +163,5 @@ public class Json_doc_wtr {
 	}
 	public byte[] Bld() {return bfr.To_bry_and_clear();}
 	public String Bld_as_str() {return bfr.To_str_and_clear();}
-	private static final    byte[] Escaped__quote = Bry_.new_a7("\\\"");
+	private static final byte[] Escaped__quote = Bry_.new_a7("\\\"");
 }

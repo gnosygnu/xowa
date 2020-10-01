@@ -24,7 +24,12 @@ public class Xow_defn_cache {				// stores compiled Xot_defn
 	private final    Gfo_cache_mgr cache = new Gfo_cache_mgr().Max_size_(64 * 1024 * 1024).Reduce_by_(32 * 1024 * 1024);
 	public Xow_defn_cache(Xol_lang_itm lang) {this.lang = lang;}
 	public Xot_defn Get_by_key(byte[] name) {return (Xot_defn)cache.Get_by_key(name);}
-	public void Free_mem_all()	{cache.Clear();}
+	public Xot_defn Get_by_key(byte[] name, byte case_match) {
+		if (case_match == Xow_ns_case_.Tid__1st)
+			name = lang.Case_mgr().Case_build_1st_upper(upper_1st_bfr, name, 0, name.length);
+		return (Xot_defn)cache.Get_by_key(name);
+    }
+    public void Free_mem_all()	{cache.Clear();}
 	public void Add(Xot_defn defn, byte case_match) {
 		byte[] name = defn.Name();
 		cache.Add_replace(name, defn, defn.Cache_size());
