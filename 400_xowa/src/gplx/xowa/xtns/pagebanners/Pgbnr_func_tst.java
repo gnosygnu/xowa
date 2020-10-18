@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pagebanners; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.brys.*; import gplx.xowa.wikis.pages.skins.*;
-import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.xtns.pagebanners;
+
+import gplx.Bool_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.brys.Bfr_arg;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import org.junit.Before;
+import org.junit.Test;
+
 public class Pgbnr_func_tst {
-	private final    Pgbnr_func_fxt fxt = new Pgbnr_func_fxt();
+	private final Pgbnr_func_fxt fxt = new Pgbnr_func_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
 		fxt.Init__orig(true, "A.png", 500, 200); // 500 > 200 * 2 for pageBanner;

@@ -52,8 +52,8 @@ import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
 
 abstract class Wdata_doc_parser_fxt_base {
 	protected Wdata_doc_parser wdoc_parser;
-	private final    Json_parser json_parser = new Json_parser();
-	private final    Bry_bfr tmp_time_bfr = Bry_bfr_.New();
+	private final Json_parser json_parser = new Json_parser();
+	private final Bry_bfr tmp_time_bfr = Bry_bfr_.New();
 	public void Init() {
 		if (wdoc_parser == null) wdoc_parser = Make_parser();
 	}
@@ -100,13 +100,13 @@ abstract class Wdata_doc_parser_fxt_base {
 	}
 	public void Test_qualifiers(String raw, Wbase_claim_base... expd_itms) {
 		Json_doc jdoc = json_parser.Parse_by_apos(raw);
-		Json_nde qualifiers_nde = Json_nde.cast(Json_kv.cast(jdoc.Root_nde().Get_at(0)).Val());
+		Json_nde qualifiers_nde = Json_nde.Cast(Json_kv.Cast(jdoc.Root_nde().Get_at(0)).Val());
 		Wbase_claim_grp_list actl = wdoc_parser.Parse_qualifiers(Q1_bry, qualifiers_nde);
 		Tfds.Eq_ary_str(expd_itms, To_ary(actl));
 	}
 	public void Test_references(String raw, int[] expd_order, Wbase_claim_base... expd_itms) {
 		Json_doc jdoc = json_parser.Parse_by_apos(raw);
-		Json_ary owner = Json_ary.cast_or_null(Json_kv.cast(jdoc.Root_nde().Get_at(0)).Val());
+		Json_ary owner = Json_ary.cast_or_null(Json_kv.Cast(jdoc.Root_nde().Get_at(0)).Val());
 		Wbase_references_grp[] actl = wdoc_parser.Parse_references(Q1_bry, owner);
 		Wbase_references_grp actl_grp = actl[0];
 		Tfds.Eq_ary(expd_order, actl_grp.Snaks_order());
@@ -114,7 +114,7 @@ abstract class Wdata_doc_parser_fxt_base {
 	}
 	public void Test_pid_order(String raw, int... expd) {
 		Json_doc jdoc = json_parser.Parse_by_apos(raw);
-		Json_ary nde = Json_ary.cast_or_null(Json_kv.cast(jdoc.Root_nde().Get_at(0)).Val());
+		Json_ary nde = Json_ary.cast_or_null(Json_kv.Cast(jdoc.Root_nde().Get_at(0)).Val());
 		int[] actl = wdoc_parser.Parse_pid_order(Q1_bry, nde);
 		Tfds.Eq_ary(expd, actl);
 	}
@@ -131,7 +131,7 @@ abstract class Wdata_doc_parser_fxt_base {
 		}
 		return (Wbase_claim_base[])rv.To_ary_and_clear(Wbase_claim_base.class);
 	}
-	private static final    byte[] Q1_bry = Bry_.new_a7("Q1");
+	private static final byte[] Q1_bry = Bry_.new_a7("Q1");
 }
 class Wdata_doc_parser_v2_fxt extends Wdata_doc_parser_fxt_base {
 	@Override public Wdata_doc_parser Make_parser() {return new Wdata_doc_parser_v2();}

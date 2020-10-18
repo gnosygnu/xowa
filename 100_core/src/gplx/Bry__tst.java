@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,51 +14,55 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import org.junit.*; import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.tests.*;
+
+import gplx.core.primitives.Int_obj_ref;
+import gplx.core.tests.Gftest;
+import org.junit.Test;
+
 public class Bry__tst {
-	private final    Bry__fxt fxt = new Bry__fxt();
-	@Test  public void new_ascii_() {
+	private final Bry__fxt fxt = new Bry__fxt();
+	@Test public void new_ascii_() {
 		fxt.Test_new_a7("a"		, Bry_.New_by_ints(97));				// one
 		fxt.Test_new_a7("abc"	, Bry_.New_by_ints(97, 98, 99));		// many
 		fxt.Test_new_a7(""		, Bry_.Empty);						// none
 		fxt.Test_new_a7("¢€𤭢"	, Bry_.New_by_ints(63, 63, 63, 63));	// non-ascii -> ?
 	}
-	@Test  public void new_u8() {
+	@Test public void new_u8() {
 		fxt.Test_new_u8("a"		, Bry_.New_by_ints(97));						// one
 		fxt.Test_new_u8("abc"	, Bry_.New_by_ints(97, 98, 99));				// many
 		fxt.Test_new_u8("¢"		, Bry_.New_by_ints(194, 162));					// bry_len=2; cent
 		fxt.Test_new_u8("€"		, Bry_.New_by_ints(226, 130, 172));				// bry_len=3; euro
 		fxt.Test_new_u8("𤭢"	, Bry_.New_by_ints(240, 164, 173, 162));		// bry_len=4; example from en.w:UTF-8
 	}
-	@Test   public void Add__bry_plus_byte() {
+	@Test public void Add__bry_plus_byte() {
 		fxt.Test_add("a"		, Byte_ascii.Pipe		, "a|");			// basic
 		fxt.Test_add(""			, Byte_ascii.Pipe		, "|");				// empty String
 	}
-	@Test   public void Add__byte_plus_bry() {
+	@Test public void Add__byte_plus_bry() {
 		fxt.Test_add(Byte_ascii.Pipe	, "a"			, "|a");			// basic
 		fxt.Test_add(Byte_ascii.Pipe	, ""			, "|");				// empty String
 	}
-	@Test   public void Add_w_dlm() {
+	@Test public void Add_w_dlm() {
 		fxt.Test_add_w_dlm(Byte_ascii.Pipe, String_.Ary("a", "b", "c")	, "a|b|c");					// basic
 		fxt.Test_add_w_dlm(Byte_ascii.Pipe, String_.Ary("a")				, "a");					// one item
 		fxt.Test_add_w_dlm(Byte_ascii.Pipe, String_.Ary("a", null, "c")	, "a||c");					// null
 	}
-	@Test   public void Add_w_dlm_bry() {
+	@Test public void Add_w_dlm_bry() {
 		fxt.Test_add_w_dlm("<>", String_.Ary("a","b","c"), "a<>b<>c");
 	}
-	@Test  public void MidByPos() {
+	@Test public void MidByPos() {
 		tst_MidByPos("abcba", 0, 1, "a");
 		tst_MidByPos("abcba", 0, 2, "ab");
 		tst_MidByPos("abcba", 1, 4, "bcb");
 	}	void tst_MidByPos(String src, int bgn, int end, String expd) {Tfds.Eq(expd, String_.new_u8(Bry_.Mid(Bry_.new_u8(src), bgn, end)));}
-	@Test  public void Replace_one() {
+	@Test public void Replace_one() {
 		tst_ReplaceOne("a"		, "b"	, "c"	, "a");
 		tst_ReplaceOne("b"		, "b"	, "c"	, "c");
 		tst_ReplaceOne("bb"		, "b"	, "c"	, "cb");
 		tst_ReplaceOne("abcd"	, "bc"	, ""	, "ad");
 		tst_ReplaceOne("abcd"	, "b"	, "ee"	, "aeecd");
 	}	void tst_ReplaceOne(String src, String find, String repl, String expd) {Tfds.Eq(expd, String_.new_u8(Bry_.Replace_one(Bry_.new_u8(src), Bry_.new_u8(find), Bry_.new_u8(repl))));}
-	@Test  public void XtoStrBytesByInt() {
+	@Test public void XtoStrBytesByInt() {
 		tst_XtoStrBytesByInt(0, 0);
 		tst_XtoStrBytesByInt(9, 9);
 		tst_XtoStrBytesByInt(10, 1, 0);
@@ -74,7 +78,7 @@ public class Bry__tst {
 		}
 		Tfds.Eq_ary(expd, Bry_.To_a7_bry(val, Int_.DigitCount(val)));
 	}
-	@Test  public void Has_at_end() {
+	@Test public void Has_at_end() {
 		tst_HasAtEnd("a|bcd|e", "d"	, 2, 5, true);		// y_basic
 		tst_HasAtEnd("a|bcd|e", "bcd"	, 2, 5, true);		// y_many
 		tst_HasAtEnd("a|bcd|e", "|bcd"	, 2, 5, false);		// n_long
@@ -85,13 +89,13 @@ public class Bry__tst {
 	}
 	void tst_HasAtEnd(String src, String find, int bgn, int end, boolean expd) {Tfds.Eq(expd, Bry_.Has_at_end(Bry_.new_u8(src), Bry_.new_u8(find), bgn, end));}
 	void tst_HasAtEnd(String src, String find, boolean expd) {Tfds.Eq(expd, Bry_.Has_at_end(Bry_.new_u8(src), Bry_.new_u8(find)));}
-	@Test  public void Has_at_bgn() {
+	@Test public void Has_at_bgn() {
 		tst_HasAtBgn("y_basic"	, "a|bcd|e", "b"	, 2, 5, true);
 		tst_HasAtBgn("y_many"	, "a|bcd|e", "bcd"	, 2, 5, true);
 		tst_HasAtBgn("n_long"	, "a|bcd|e", "bcde"	, 2, 5, false);
 		tst_HasAtBgn("n_pos"	, "a|bcd|e", "|bc"	, 2, 5, false);
 	}	void tst_HasAtBgn(String tst, String src, String find, int bgn, int end, boolean expd) {Tfds.Eq(expd, Bry_.Has_at_bgn(Bry_.new_u8(src), Bry_.new_u8(find), bgn, end), tst);}
-	@Test  public void Match() {
+	@Test public void Match() {
 		tst_Match("abc", 0, "abc", true);
 		tst_Match("abc", 2,  "c", true);
 		tst_Match("abc", 0, "cde", false);
@@ -102,7 +106,7 @@ public class Bry__tst {
 		tst_Match(""  , 0, "", true);
 		tst_Match("ab", 0, "a", false);	// FIX: "ab" should not match "a" b/c .length is different
 	}	void tst_Match(String src, int srcPos, String find, boolean expd) {Tfds.Eq(expd, Bry_.Match(Bry_.new_u8(src), srcPos, Bry_.new_u8(find)));}
-	@Test  public void ReadCsvStr() {
+	@Test public void ReadCsvStr() {
 		tst_ReadCsvStr("a|"	   , "a");
 		tst_ReadCsvStr("|a|", 1 , "a");
 		Int_obj_ref bgn = Int_obj_ref.New_zero(); tst_ReadCsvStr("a|b|c|", bgn, "a"); tst_ReadCsvStr("a|b|c|", bgn, "b"); tst_ReadCsvStr("a|b|c|", bgn, "c");
@@ -119,13 +123,13 @@ public class Bry__tst {
 		tst_ReadCsvStr_err("'a|");
 		tst_ReadCsvStr_err("'a'");
 	}
-	@Test  public void XtoIntBy4Bytes() {	// test len=1, 2, 3, 4
+	@Test public void XtoIntBy4Bytes() {	// test len=1, 2, 3, 4
 		tst_XtoIntBy4Bytes(32, (byte)32);			// space
 		tst_XtoIntBy4Bytes(8707, (byte)34, (byte)3);	// &exist;
 		tst_XtoIntBy4Bytes(6382179, Byte_ascii.Ltr_a, Byte_ascii.Ltr_b, Byte_ascii.Ltr_c);
 		tst_XtoIntBy4Bytes(1633837924, Byte_ascii.Ltr_a, Byte_ascii.Ltr_b, Byte_ascii.Ltr_c, Byte_ascii.Ltr_d);
 	}
-	@Test  public void XtoInt() {
+	@Test public void XtoInt() {
 		tst_XtoInt("1", 1);
 		tst_XtoInt("123", 123);
 		tst_XtoInt("a", Int_.Min_value, Int_.Min_value);
@@ -157,18 +161,18 @@ public class Bry__tst {
 		catch (Exception e) {Err_.Noop(e); return;}
 		Tfds.Fail_expdError();
 	}
-	@Test  public void ReadCsvDte() {
+	@Test public void ReadCsvDte() {
 		tst_ReadCsvDte("20110801 221435.987");
 	}	void tst_ReadCsvDte(String raw) {Tfds.Eq_date(DateAdp_.parse_fmt(raw, Bry_.Fmt_csvDte), Bry_.ReadCsvDte(Bry_.new_u8(raw + "|"), Int_obj_ref.New_zero(), (byte)'|'));}
-	@Test  public void ReadCsvInt() {
+	@Test public void ReadCsvInt() {
 		tst_ReadCsvInt("1234567890");
 	}	void tst_ReadCsvInt(String raw) {Tfds.Eq(Int_.Parse(raw), Bry_.ReadCsvInt(Bry_.new_u8(raw + "|"), Int_obj_ref.New_zero(), (byte)'|'));}
-	@Test  public void Trim() {
+	@Test public void Trim() {
 		Trim_tst("a b c", 1, 4, "b");
 		Trim_tst("a  c", 1, 3, "");
 		Trim_tst("  ", 0, 2, "");
 	}	void Trim_tst(String raw, int bgn, int end, String expd) {Tfds.Eq(expd, String_.new_u8(Bry_.Trim(Bry_.new_u8(raw), bgn, end)));}
-	@Test  public void Xto_int_lax() {
+	@Test public void Xto_int_lax() {
 		tst_Xto_int_lax("12a", 12);
 		tst_Xto_int_lax("1", 1);
 		tst_Xto_int_lax("123", 123);
@@ -176,14 +180,14 @@ public class Bry__tst {
 		tst_Xto_int_lax("-1", -1);
 	}
 	private void tst_Xto_int_lax(String val, int expd)				{Tfds.Eq(expd, Bry_.To_int_or__lax(Bry_.new_u8(val), 0, String_.Len(val), 0));}
-	@Test  public void To_int_or__trim_ws() {
+	@Test public void To_int_or__trim_ws() {
 		tst_Xto_int_trim("123 "	, 123);
 		tst_Xto_int_trim(" 123"	, 123);
 		tst_Xto_int_trim(" 123 "	, 123);
 		tst_Xto_int_trim(" 1 3 "	, -1);
 	}
 	private void tst_Xto_int_trim(String val, int expd)			{Tfds.Eq(expd, Bry_.To_int_or__trim_ws(Bry_.new_u8(val), 0, String_.Len(val), -1));}
-	@Test  public void Compare() {
+	@Test public void Compare() {
 		tst_Compare("abcde", 0, 1, "abcde", 0, 1, CompareAble_.Same);
 		tst_Compare("abcde", 0, 1, "abcde", 1, 2, CompareAble_.Less);
 		tst_Compare("abcde", 1, 2, "abcde", 0, 1, CompareAble_.More);
@@ -191,7 +195,7 @@ public class Bry__tst {
 		tst_Compare("abcde", 0, 2, "abcde", 0, 1, CompareAble_.More);
 		tst_Compare("abcde", 2, 3, "abçde", 2, 3, CompareAble_.Less);
 	}	void tst_Compare(String lhs, int lhs_bgn, int lhs_end, String rhs, int rhs_bgn, int rhs_end, int expd) {Tfds.Eq(expd, Bry_.Compare(Bry_.new_u8(lhs), lhs_bgn, lhs_end, Bry_.new_u8(rhs), rhs_bgn, rhs_end));}
-	@Test  public void Increment_last() {
+	@Test public void Increment_last() {
 		tst_IncrementLast(ary_(0), ary_(1));
 		tst_IncrementLast(ary_(0, 255), ary_(1, 0));
 		tst_IncrementLast(ary_(104, 111, 112, 101), ary_(104, 111, 112, 102));
@@ -203,12 +207,12 @@ public class Bry__tst {
 		return rv;
 	}
 	void tst_IncrementLast(byte[] ary, byte[] expd) {Tfds.Eq_ary(expd, Bry_.Increment_last(Bry_.Copy(ary)));}
-	@Test   public void Replace_between() {
+	@Test public void Replace_between() {
 		tst_Replace_between("a[0]b"					, "[", "]", "0", "a0b");
 		tst_Replace_between("a[0]b[1]c"				, "[", "]", "0", "a0b0c");
 		tst_Replace_between("a[0b"					, "[", "]", "0", "a[0b");
 	}	public void tst_Replace_between(String src, String bgn, String end, String repl, String expd) {Tfds.Eq(expd, String_.new_a7(Bry_.Replace_between(Bry_.new_a7(src), Bry_.new_a7(bgn), Bry_.new_a7(end), Bry_.new_a7(repl))));}
-	@Test    public void Replace() {
+	@Test public void Replace() {
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		tst_Replace(tmp_bfr, "a0b"					,    "0", "00", "a00b");		// 1 -> 1
 		tst_Replace(tmp_bfr, "a0b0c"				,    "0", "00", "a00b00c");		// 1 -> 2
@@ -221,7 +225,7 @@ public class Bry__tst {
 	public void tst_Replace(Bry_bfr tmp_bfr, String src, String bgn, String repl, String expd) {
 		Tfds.Eq(expd, String_.new_a7(Bry_.Replace(tmp_bfr, Bry_.new_a7(src), Bry_.new_a7(bgn), Bry_.new_a7(repl))));
 	}
-	@Test  public void Split_bry() {
+	@Test public void Split_bry() {
 		Split_bry_tst("a|b|c|"		, "|"	, String_.Ary("a", "b", "c"));
 		Split_bry_tst("a|"			, "|"	, String_.Ary("a"));
 	}
@@ -229,7 +233,7 @@ public class Bry__tst {
 		String[] actl = String_.Ary(Bry_split_.Split(Bry_.new_a7(src), Bry_.new_a7(dlm)));
 		Tfds.Eq_ary_str(expd, actl);
 	}
-	@Test   public void Split_lines() {
+	@Test public void Split_lines() {
 		Tst_split_lines("a\nb"		, "a", "b");					// basic
 		Tst_split_lines("a\nb\n"	, "a", "b");					// do not create empty trailing lines
 		Tst_split_lines("a\r\nb"	, "a", "b");					// crlf
@@ -245,7 +249,7 @@ public class Bry__tst {
 			rv[i] = String_.new_u8(lines[i]);
 		return rv;
 	}
-	@Test   public void Match_bwd_any() {
+	@Test public void Match_bwd_any() {
 		Tst_match_bwd_any("abc", 2, 0, "c", true);
 		Tst_match_bwd_any("abc", 2, 0, "b", false);
 		Tst_match_bwd_any("abc", 2, 0, "bc", true);
@@ -256,37 +260,47 @@ public class Bry__tst {
 	void Tst_match_bwd_any(String src, int src_end, int src_bgn, String find, boolean expd) {
 		Tfds.Eq(expd, Bry_.Match_bwd_any(Bry_.new_a7(src), src_end, src_bgn, Bry_.new_a7(find)));
 	}
-	@Test   public void Trim_end() {
+	@Test public void Trim_bgn() {
+		fxt.Test_trim_bgn(" a"		, Byte_ascii.Space, "a");	// trim.one
+		fxt.Test_trim_bgn("   a"	, Byte_ascii.Space, "a");	// trim.many
+		fxt.Test_trim_bgn("a"		, Byte_ascii.Space, "a");	// trim.none
+		fxt.Test_trim_bgn(""		, Byte_ascii.Space, "");	// empty
+	}
+	@Test public void Trim_end() {
 		fxt.Test_trim_end("a "		, Byte_ascii.Space, "a");	// trim.one
 		fxt.Test_trim_end("a   "	, Byte_ascii.Space, "a");	// trim.many
 		fxt.Test_trim_end("a"		, Byte_ascii.Space, "a");	// trim.none
 		fxt.Test_trim_end(""		, Byte_ascii.Space, "");	// empty
 	}
-	@Test   public void Mid_w_trim() {
+	@Test public void Mid_w_trim() {
 		fxt.Test_Mid_w_trim("abc", "abc");								// no ws
 		fxt.Test_Mid_w_trim(" a b c ", "a b c");						// ws at bgn and end
 		fxt.Test_Mid_w_trim("\r\n\t a\r\n\t b \r\n\t ", "a\r\n\t b");	// space at bgn and end
 		fxt.Test_Mid_w_trim("", "");									// handle 0 bytes
 		fxt.Test_Mid_w_trim("   ", "");									// handle all ws
 	}
-	@Test   public void New_u8_nl_apos() {
+	@Test public void New_u8_nl_apos() {
 		fxt.Test__new_u8_nl_apos(String_.Ary("a"), "a");
 		fxt.Test__new_u8_nl_apos(String_.Ary("a", "b"), "a\nb");
 		fxt.Test__new_u8_nl_apos(String_.Ary("a", "b'c", "d"), "a\nb\"c\nd");
 	}
-	@Test   public void Repeat_bry() {
+	@Test public void Repeat_bry() {
 		fxt.Test__repeat_bry("abc"  , 3, "abcabcabc");
 	}
-	@Test   public void Xcase__build__all() {
+	@Test public void Xcase__build__all() {
 		fxt.Test__xcase__build__all(Bool_.N, "abc", "abc");
 		fxt.Test__xcase__build__all(Bool_.N, "aBc", "abc");
 	}
 }
 class Bry__fxt {
-	private final    Bry_bfr tmp = Bry_bfr_.New();
+	private final Bry_bfr tmp = Bry_bfr_.New();
 	public void Test_trim_end(String raw, byte trim, String expd) {
 		byte[] raw_bry = Bry_.new_a7(raw);
 		Tfds.Eq(expd, String_.new_u8(Bry_.Trim_end(raw_bry, trim, raw_bry.length)));
+	}
+	public void Test_trim_bgn(String raw, byte trim, String expd) {
+		byte[] raw_bry = Bry_.new_a7(raw);
+		Tfds.Eq(expd, String_.new_u8(Bry_.Trim_bgn(raw_bry, trim, 0)));
 	}
 	public void Test_new_u8(String raw, byte[] expd)			{Tfds.Eq_ary(expd, Bry_.new_u8(raw));}
 	public void Test_new_a7(String raw, byte[] expd)			{Tfds.Eq_ary(expd, Bry_.new_a7(raw));}

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,14 +13,55 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*; import gplx.langs.jsons.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.pfuncs.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
+package gplx.xowa.xtns.wbases;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_ascii;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.primitives.Gfo_number_parser;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.langs.jsons.Json_doc;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.domains.Xow_abrv_wm_;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp_list;
+import gplx.xowa.xtns.wbases.claims.Wbase_references_grp;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_entity_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_string;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_value;
+import gplx.xowa.xtns.wbases.core.Wbase_pid;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
+import gplx.xowa.xtns.wbases.pfuncs.Wbase_statement_mgr_;
+import gplx.xowa.xtns.wbases.pfuncs.Wdata_external_lang_links_data;
+import gplx.xowa.xtns.wbases.stores.Wbase_prop_mgr_loader_;
+import gplx.xowa.xtns.wbases.stores.Wbase_qid_mgr;
+
 public class Wdata_wiki_mgr_fxt {
 	private Xoae_app app; private Xowe_wiki wiki; private Wdata_doc_bldr wdoc_bldr;
-	private final    Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();
-	private final    Bry_bfr tmp_time_bfr = Bry_bfr_.New();
+	private final Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();
+	private final Bry_bfr tmp_time_bfr = Bry_bfr_.New();
 	public Xowe_wiki Wiki() {return parser_fxt.Wiki();}
 	public Wdata_wiki_mgr_fxt Init() {return Init(new Xop_fxt(), true);}
 	public Wdata_wiki_mgr_fxt Init(Xop_fxt parser_fxt, boolean reset) {
@@ -181,7 +222,7 @@ public class Wdata_wiki_mgr_fxt {
 	}
 	public void Test_write_json_as_html(String raw_str, String expd) {
 		byte[] raw_bry = Bry_.new_a7(raw_str);
-		raw_bry = gplx.langs.jsons.Json_parser_tst.Replace_apos(raw_bry);
+		raw_bry = Bry_.new_u8(Json_doc.Make_str_by_apos(raw_str));
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Wdata_wiki_mgr.Write_json_as_html(wdata_mgr.Jdoc_parser(), bfr, raw_bry);
 		Tfds.Eq(expd, bfr.To_str_and_rls());

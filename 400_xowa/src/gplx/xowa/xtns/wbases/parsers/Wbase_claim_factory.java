@@ -39,11 +39,11 @@ public class Wbase_claim_factory {
 	public Wbase_claim_base Parse(byte[] qid, int pid, byte snak_tid, Json_nde nde, byte value_tid, Json_itm value_itm) {
 		switch (value_tid) {
 			case Wbase_claim_type_.Tid__string:				return new Wbase_claim_string(pid, snak_tid, value_itm.Data_bry());
-			case Wbase_claim_type_.Tid__entity:				return Parse_datavalue_entity               (qid, pid, snak_tid, Json_nde.cast(value_itm));
-			case Wbase_claim_type_.Tid__time:				return Parse_datavalue_time                 (qid, pid, snak_tid, Json_nde.cast(value_itm));
-			case Wbase_claim_type_.Tid__quantity:			return Parse_datavalue_quantity             (qid, pid, snak_tid, Json_nde.cast(value_itm));
-			case Wbase_claim_type_.Tid__globecoordinate:	return Parse_datavalue_globecoordinate      (qid, pid, snak_tid, Json_nde.cast(value_itm));
-			case Wbase_claim_type_.Tid__monolingualtext:	return Parse_datavalue_monolingualtext      (qid, pid, snak_tid, Json_nde.cast(value_itm));
+			case Wbase_claim_type_.Tid__entity:				return Parse_datavalue_entity               (qid, pid, snak_tid, Json_nde.Cast(value_itm));
+			case Wbase_claim_type_.Tid__time:				return Parse_datavalue_time                 (qid, pid, snak_tid, Json_nde.Cast(value_itm));
+			case Wbase_claim_type_.Tid__quantity:			return Parse_datavalue_quantity             (qid, pid, snak_tid, Json_nde.Cast(value_itm));
+			case Wbase_claim_type_.Tid__globecoordinate:	return Parse_datavalue_globecoordinate      (qid, pid, snak_tid, Json_nde.Cast(value_itm));
+			case Wbase_claim_type_.Tid__monolingualtext:	return Parse_datavalue_monolingualtext      (qid, pid, snak_tid, Json_nde.Cast(value_itm));
 			default:										throw Err_.new_unhandled_default(value_tid);
 		}
 	}
@@ -53,7 +53,7 @@ public class Wbase_claim_factory {
 		byte[] numericId = null;
 		byte[] id = null;
 		for (int i = 0; i < len; ++i) {
-			Json_kv sub = Json_kv.cast(nde.Get_at(i));
+			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
 			byte tid = Wbase_claim_entity_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			byte[] subValBry = sub.Val().Data_bry();
 			switch (tid) {
@@ -70,7 +70,7 @@ public class Wbase_claim_factory {
 		int len = nde.Len();
 		byte[] lang = null, text = null;
 		for (int i = 0; i < len; ++i) {
-			Json_kv sub = Json_kv.cast(nde.Get_at(i));
+			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
 			byte tid = Wbase_claim_monolingualtext_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
@@ -85,7 +85,7 @@ public class Wbase_claim_factory {
 		int len = nde.Len();
 		byte[] lat = null, lng = null, alt = null, prc = null, glb = null;
 		for (int i = 0; i < len; ++i) {
-			Json_kv sub = Json_kv.cast(nde.Get_at(i));
+			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
 			byte tid = Wbase_claim_globecoordinate_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
@@ -103,7 +103,7 @@ public class Wbase_claim_factory {
 		int len = nde.Len();
 		byte[] amount = null, unit = null, ubound = null, lbound = null;
 		for (int i = 0; i < len; ++i) {
-			Json_kv sub = Json_kv.cast(nde.Get_at(i));
+			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
 			byte tid = Wbase_claim_quantity_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {
@@ -120,7 +120,7 @@ public class Wbase_claim_factory {
 		int len = nde.Len();
 		byte[] time = null, timezone = null, before = null, after = null, precision = null, calendarmodel = null;
 		for (int i = 0; i < len; ++i) {
-			Json_kv sub = Json_kv.cast(nde.Get_at(i));
+			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
 			byte tid = Wbase_claim_time_.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			byte[] sub_val_bry = sub.Val().Data_bry();
 			switch (tid) {

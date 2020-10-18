@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
-import gplx.core.primitives.*;
+package gplx.langs.jsons;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.String_;
+import gplx.core.primitives.Gfo_number_parser;
+
 public class Json_doc {
-	private final    byte[][] tmp_qry_bry = new byte[1][];
+	private final byte[][] tmp_qry_bry = new byte[1][];
 	public void Ctor(byte[] src, Json_grp new_root) {
 		this.src = src;
 		this.root_grp = new_root;
@@ -30,9 +37,9 @@ public class Json_doc {
 	public Json_grp Root_grp() {return root_grp;} private Json_grp root_grp;
 	public Json_nde Root_nde() {return root_nde;} private Json_nde root_nde;
 	public Json_ary Root_ary() {return root_ary;} private Json_ary root_ary;
-	public Bry_bfr Bfr() {return bfr;} private final    Bry_bfr bfr = Bry_bfr_.New();
-	public Gfo_number_parser Utl_num_parser() {return utl_num_parser;} private final    Gfo_number_parser utl_num_parser = new Gfo_number_parser();
-	public byte[] Tmp_u8_bry() {return tmp_u8_bry;} private final    byte[] tmp_u8_bry = new byte[6];	// tmp bry[] for decoding sequences like \u0008
+	public Bry_bfr Bfr() {return bfr;} private final Bry_bfr bfr = Bry_bfr_.New();
+	public Gfo_number_parser Utl_num_parser() {return utl_num_parser;} private final Gfo_number_parser utl_num_parser = new Gfo_number_parser();
+	public byte[] Tmp_u8_bry() {return tmp_u8_bry;} private final byte[] tmp_u8_bry = new byte[6];	// tmp bry[] for decoding sequences like \u0008
 	public byte[] Get_val_as_bry_or(byte[]   qry_bry, byte[] or) {tmp_qry_bry[0] = qry_bry; return Get_val_as_bry_or(tmp_qry_bry, or);}
 	public byte[] Get_val_as_bry_or(byte[][] qry_bry, byte[] or) {
 		Json_itm nde = Find_nde(root_nde, qry_bry, qry_bry.length - 1, 0);
@@ -66,10 +73,10 @@ public class Json_doc {
 		byte[] path = paths[paths_idx];
 		int subs_len = owner.Len();
 		for (int i = 0; i < subs_len; i++) {
-			Json_kv itm = Json_kv.cast(owner.Get_at(i)); if (itm == null) continue;	// ignore simple props, arrays, ndes
+			Json_kv itm = Json_kv.Cast(owner.Get_at(i)); if (itm == null) continue;	// ignore simple props, arrays, ndes
 			if (!itm.Key_eq(path)) continue;
 			if (paths_idx == paths_last) return itm.Val();
-			Json_nde sub_nde = Json_nde.cast(itm.Val()); if (sub_nde == null) return null;	// match, but has not a nde; exit
+			Json_nde sub_nde = Json_nde.Cast(itm.Val()); if (sub_nde == null) return null;	// match, but has not a nde; exit
 			return Find_nde(sub_nde, paths, paths_last, paths_idx + 1);
 		}
 		return null;

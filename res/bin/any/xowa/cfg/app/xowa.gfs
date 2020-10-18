@@ -140,10 +140,14 @@ app.wikis.get('~{wiki_key}') {
 app.wikis.get('~{wiki_key}').html.portal {
   div_personal =
 <:["
-  <div id="p-personal" class="">
-    <h3>~{<>msgs.get('personaltools');<>}</h3>
+<nav id="p-personal" class="vector-menu" aria-labelledby="p-personal-label" role="navigation">
+	<h3 id="p-personal-label">
+		<span>~{<>app.user.msgs.get('personaltools');<>}</span>
+	</h3>
+	<div class="body vector-menu-content">
     ~{portal_indicators_pagesource}
-  </div>
+	</div>
+</nav>
 "]:>
 ;
   div_ns =
@@ -178,7 +182,7 @@ app.wikis.get('~{wiki_key}').html.portal {
           <input type="search" name="search" placeholder="~{<>msgs.get('searchbutton');<>} ~{sitename}" id="searchInput"~{<>msgs.get_html_accesskey_and_title('search');<>} value="~{search_text}" autocomplete="off">
           <input type="hidden" name="fulltext" value="y">
           <input type="submit"~{<>msgs.get_html_accesskey_and_title('search');<>} id="mw-searchButton" class="searchButton mw-fallbackSearchButton" />
-          <input type="submit" name="go" value="~{<>msgs.get('go');<>}" title="~{<>msgs.get('tooltip-search-go');<>}" id="searchButton" class="searchButton" />	
+          <input type="submit" name="go" value="~{<>msgs.get('go');<>}" title="~{<>msgs.get('tooltip-search-go');<>}" id="searchButton" class="searchButton" />
         </div>
       </form>
     </li>
@@ -195,8 +199,10 @@ app.wikis.get('~{wiki_key}').html.portal {
 ;
   div_home =
 <:["
-  <div class="portal" id='xowa-portal-home'>
-    <h3>XOWA</h3>
+  <nav id="xowa-portal-home" class="vector-menu vector-menu-portal portal" aria-labelledby="xowa-portal-home" role="navigation">
+    <h3>
+        <span>XOWA</span>
+    </h3>
     <div class="body">
       <ul>
         <li><a href="/site/home/wiki/Main_Page" class='xowa-hover-off'>~{<>app.user.msgs.get('mainpage-description');<>}</a></li>
@@ -209,32 +215,36 @@ app.wikis.get('~{wiki_key}').html.portal {
         <li><a href="/site/home/wiki/Special:XowaCfg" class='xowa-hover-off'~{<>app.user.msgs.get_html_accesskey_and_title('xowa-portal-options');<>}>~{<>app.user.msgs.get('xowa-portal-options');<>}</a></li>
       </ul>
     </div>
-  </div>
+  </nav>
 "]:>
 ;
   div_sync =
 <:["
-  <div id="xowa-portal-sync" class="portal">    
-    <h3>~{<>app.user.msgs.get('xowa-portal-sync');<>}</h3>
+  <nav id="xowa-portal-sync" class="vector-menu vector-menu-portal portal" aria-labelledby="xowa-portal-sync" role="navigation">
+    <h3>
+        <span>~{<>app.user.msgs.get('xowa-portal-sync');<>}</span>
+    </h3>
     <div class="body">
       <ul>
         <li><a href="/wiki/Special:XowaSyncHtml?page=~{page_url}" class='xowa-hover-off'~{<>app.user.msgs.get_html_accesskey_and_title('xowa-portal-sync_html');<>}>~{<>app.user.msgs.get('xowa-portal-sync_html');<>}</a></li>
       </ul>
     </div>
-  </div>
+  </nav>
 <!--
 -->
 "]:>
 ;
   div_wikis =
 <:["
-  <div id="xowa-portal-wikis" class="portal">    
-    <h3>~{toggle_btn}</h3>
-    <div class="body">
+<nav id="xowa-portal-wikis" class="vector-menu vector-menu-portal portal" aria-labelledby="xowa-portal-wikis" role="navigation">
+	<h3 id="p-wiki">
+		<span>~{toggle_btn}</span>
+	</h3>
+    <div class="body vector-menu-content">
       <ul~{toggle_hdr}>~{<>app.gui.html.portal.wikis.itms_as_html;<>}
       </ul>
     </div>
-  </div>
+</nav>
 "]:>
 ;
 }
@@ -254,12 +264,12 @@ app.wikis.get('~{wiki_key}').html.article {
   <link rel="stylesheet" href="~{app_root_dir}bin/any/xowa/html/res/src/xowa/find/xowa_find_html.css" type="text/css">
   <script src="~{app_root_dir}bin/any/xowa/html/res/src/xowa/find/xowa_find_html.js" type='text/javascript'></script>
   <style type="text/css">
-    div#simpleSearch #searchButton,    
+    div#simpleSearch #searchButton,
     div#simpleSearch #mw-searchButton {
       ~{<>lang.x_axis_end;<>}: 0;
       direction: ~{<>lang.dir_str;<>};
       z-index:initial;  /* reset z-index, else will show in front of popup; DATE:2015-07-31 */
-    }    
+    }
     .new {!important; color:green;}
   </style>
 </head>
@@ -267,7 +277,7 @@ app.wikis.get('~{wiki_key}').html.article {
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">~{page_indicators}~{page_pgbnr}
-  <div id='xowa_err_div' class='xowa_err' style='display:none; color:red; white-space:pre; display:block; unicode-bidi:embed;'></div>~{page_heading}  
+  <div id='xowa_err_div' class='xowa_err' style='display:none; color:red; white-space:pre; display:block; unicode-bidi:embed;'></div>~{page_heading}
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub" class="visible">
@@ -321,7 +331,7 @@ app.wikis.get('~{wiki_key}').html.article {
   ~{html_css_night_tag}<!--XOWA.SCRIPT.HEAD.TOP-->~{xowa_head}<!--XOWA.SCRIPT.HEAD.BOT-->
   <script src="~{app_root_dir}bin/any/xowa/html/res/src/xowa/edit-toolbar/edit-toolbar.js" type='text/javascript'></script>
   <style type="text/css">
-    div#simpleSearch #searchButton,    
+    div#simpleSearch #searchButton,
     div#simpleSearch #mw-searchButton {
       ~{<>lang.x_axis_end;<>}: 0;
       direction: ~{<>lang.dir_str;<>};
@@ -347,7 +357,7 @@ app.wikis.get('~{wiki_key}').html.article {
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">~{page_indicators}~{page_pgbnr}
-  <div id='xowa_err_div' class='xowa_err'></div>~{page_heading}  
+  <div id='xowa_err_div' class='xowa_err'></div>~{page_heading}
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub" class="visible">~{page_content_sub}</div>
@@ -362,7 +372,7 @@ app.wikis.get('~{wiki_key}').html.article {
           <a href="/wiki/Special:XowaPageDelete?delete=~{page_ttl_full}" onclick="return confirm('Please confirm you wish to delete this page.')" class="xowa_anchor_button" style="width:100px;max-width:1024px;">Delete page</a>
           <a href="/wiki/~{page_ttl_full}" class="xowa_anchor_button" style="width:100px;max-width:1024px;">~{<>msgs.get('cancel');<>}</a>
           </a>
-        </div>      
+        </div>
       </form>
     </div>
   </div>
@@ -407,7 +417,7 @@ app.wikis.get('~{wiki_key}').html.article {
   <link rel="stylesheet" href="~{html_css_wiki_path}" type="text/css">
   ~{html_css_night_tag}<!--XOWA.SCRIPT.HEAD.TOP-->~{xowa_head}<!--XOWA.SCRIPT.HEAD.BOT-->
   <style type="text/css">
-    div#simpleSearch #searchButton,    
+    div#simpleSearch #searchButton,
     div#simpleSearch #mw-searchButton {
       ~{<>lang.x_axis_end;<>}: 0;
       direction: ~{<>lang.dir_str;<>};
@@ -472,9 +482,13 @@ app.wikis.scripts.set
 app.wikis.get('~{wiki_key}').html.portal
 .div_personal_(
 <:["
-  <div id="p-personal" class="">
-    <h3>~{<>app.user.msgs.get('personaltools');<>}</h3>
-  </div>
+<nav id="p-personal" class="vector-menu" aria-labelledby="p-personal-label" role="navigation">
+	<h3 id="p-personal-label">
+		<span>~{<>app.user.msgs.get('personaltools');<>}</span>
+	</h3>
+	<div class="body vector-menu-content">
+	</div>
+</nav>
 "]:>
 )
 ;

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,12 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.xowa.addons.htmls.sidebars.*;
+package gplx.xowa.langs.msgs;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Byte_ascii;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.htmls.sidebars.Xoh_sidebar_itm;
+import gplx.xowa.langs.Xol_lang_itm;
+
 public class Xow_msg_mgr implements Gfo_invk {
-	private final    Xow_wiki wiki; private Xol_lang_itm lang; private final    Xol_msg_mgr msg_mgr;
-	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
+	private final Xow_wiki wiki;
+	private final Xol_msg_mgr msg_mgr;
+	private Xol_lang_itm lang;
+	private final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
 	public Xow_msg_mgr(Xow_wiki wiki, Xol_lang_itm lang) {
 		this.wiki = wiki;
 		this.lang = lang;
@@ -74,6 +87,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 		if (itm.Has_tmpl_txt()) rv = wiki.Wtxt__expand_tmpl(rv);
 		return rv;
 	}
+	public byte[] Val_html_accesskey_and_title(String id) {return Val_html_accesskey_and_title(Bry_.new_u8(id));}
 	public byte[] Val_html_accesskey_and_title(byte[] id) {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
 		byte[] rv = Val_html_accesskey_and_title(id, bfr, null);
@@ -104,7 +118,7 @@ public class Xow_msg_mgr implements Gfo_invk {
 			itm.Init_by_title_and_accesskey(tooltip_val, accesskey_val, rv);
 			return null;
 		}
-	}	private static final    byte[] CONST_prefix_tooltip = Bry_.new_a7("tooltip-"), CONST_prefix_accesskey = Bry_.new_a7("accesskey-"), CONST_atr_title = Bry_.new_a7(" title=\""), CONST_atr_accesskey = Bry_.new_a7(" accesskey=\"");
+	}	private static final byte[] CONST_prefix_tooltip = Bry_.new_a7("tooltip-"), CONST_prefix_accesskey = Bry_.new_a7("accesskey-"), CONST_atr_title = Bry_.new_a7(" title=\""), CONST_atr_accesskey = Bry_.new_a7(" accesskey=\"");
 	public Xol_msg_itm Set(String key_str, String val_str) { // TEST
 		Xol_msg_itm msg_itm = this.Get_or_make(Bry_.new_u8(key_str));
 		msg_itm.Atrs_set(Bry_.new_u8(val_str), false, false);

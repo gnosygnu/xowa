@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
-import gplx.langs.jsons.*;
+package gplx.core.gfobjs;
+
+import gplx.Err_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.langs.jsons.Json_ary;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_itm;
+import gplx.langs.jsons.Json_itm_;
+import gplx.langs.jsons.Json_itm_bool;
+import gplx.langs.jsons.Json_itm_decimal;
+import gplx.langs.jsons.Json_itm_int;
+import gplx.langs.jsons.Json_itm_long;
+import gplx.langs.jsons.Json_itm_str;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_parser;
+
 public class Gfobj_rdr__json {
-	private final    Json_parser parser = new Json_parser();
+	private final Json_parser parser = new Json_parser();
 	public Gfobj_grp Load(Io_url url) {
 		byte[] src = Io_mgr.Instance.LoadFilBryOrNull(url); if (src == null) return null;
 		return this.Parse(src);
@@ -56,7 +72,7 @@ public class Gfobj_rdr__json {
 				case Json_itm_.Tid__nde:
 					Gfobj_nde sub_gnde = Gfobj_nde.New();
 					gnde.Add_nde(key_str, sub_gnde);
-					Parse_nde(Json_nde.cast(val), sub_gnde);
+					Parse_nde(Json_nde.Cast(val), sub_gnde);
 					break;
 				default:						throw Err_.new_unhandled_default(val_tid);
 			}
@@ -77,7 +93,7 @@ public class Gfobj_rdr__json {
 				}
 				case Json_itm_.Tid__nde: {
 					Gfobj_nde sub_ary = Gfobj_nde.New();
-					Parse_nde(Json_nde.cast(jsub), sub_ary);
+					Parse_nde(Json_nde.Cast(jsub), sub_ary);
 					ary[i] = sub_ary;
 					break;
 				}

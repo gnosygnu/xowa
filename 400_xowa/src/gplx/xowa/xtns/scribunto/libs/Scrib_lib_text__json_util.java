@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.langs.jsons.*;
+package gplx.xowa.xtns.scribunto.libs;
+
+import gplx.Array_;
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.CompareAble_;
+import gplx.Double_;
+import gplx.Float_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.List_adp_;
+import gplx.Long_;
+import gplx.Object_;
+import gplx.Type_;
+import gplx.Type_ids_;
+import gplx.langs.jsons.Json_ary;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_itm;
+import gplx.langs.jsons.Json_itm_;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_parser;
+import gplx.langs.jsons.Json_wtr;
+
 public class Scrib_lib_text__json_util {
-	private final    Json_wtr wtr = new Json_wtr();
+	private final Json_wtr wtr = new Json_wtr();
 	public void Reindex_arrays(Scrib_lib_text__reindex_data rv, Keyval[] kv_ary, boolean is_encoding) {
 		int next = 0;
 		if (is_encoding) {
@@ -104,7 +127,7 @@ public class Scrib_lib_text__json_util {
 		int itm_tid = itm.Tid();
 		switch (itm_tid) {
 			case Json_itm_.Tid__ary:	return Decode_ary_sub(Json_ary.cast(itm));
-			case Json_itm_.Tid__nde:	return Decode_nde(Json_nde.cast(itm));
+			case Json_itm_.Tid__nde:	return Decode_nde(Json_nde.Cast(itm));
 			default:					return itm.Data();
 		}
 	}
@@ -231,7 +254,7 @@ class KeyVal__sorter__key_is_numeric implements gplx.core.lists.ComparerAble {
 		Keyval rhs_itm = (Keyval)rhsObj;
 		int lhs_int = Int_.Parse_or(lhs_itm.Key(), Int_.Min_value);
 		int rhs_int = Int_.Parse_or(rhs_itm.Key(), Int_.Min_value);
-		return CompareAble_.Compare(lhs_int, rhs_int);
+		return CompareAble_.Compare((Integer)lhs_int, (Integer)rhs_int);
 	}
-	public static final    KeyVal__sorter__key_is_numeric Instance = new KeyVal__sorter__key_is_numeric(); KeyVal__sorter__key_is_numeric() {}
+	public static final KeyVal__sorter__key_is_numeric Instance = new KeyVal__sorter__key_is_numeric(); KeyVal__sorter__key_is_numeric() {}
 }

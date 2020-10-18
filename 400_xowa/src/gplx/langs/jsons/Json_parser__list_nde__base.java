@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
-import gplx.core.primitives.*;
+package gplx.langs.jsons;
+
+import gplx.Keyval_;
+import gplx.Ordered_hash;
+import gplx.String_;
+import gplx.core.primitives.Int_obj_val;
+
 public class Json_parser__list_nde__base extends Json_parser__itm__base {
 	public void Parse_grp(String context, Json_grp grp) {
 		this.context = context;
@@ -22,11 +27,11 @@ public class Json_parser__list_nde__base extends Json_parser__itm__base {
 		for (int i = 0; i < len; ++i) {
 			Json_nde sub = null;
 			if (grp.Tid() == Json_itm_.Tid__nde) {
-				Json_kv kv = Json_nde.cast(grp).Get_at_as_kv(i);
+				Json_kv kv = Json_nde.Cast(grp).Get_at_as_kv(i);
 				sub = kv.Val_as_nde();
 			}
 			else {
-				sub = Json_nde.cast(grp.Get_at(i));
+				sub = Json_nde.Cast(grp.Get_at(i));
 			}
 			Parse_nde(context, sub);
 		}

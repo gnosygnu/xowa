@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,17 +13,40 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.core.primitives.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.wbases.parsers;
+
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.Err_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.langs.jsons.Json_ary;
+import gplx.langs.jsons.Json_itm;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_nde;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp_list;
+import gplx.xowa.xtns.wbases.claims.Wbase_references_grp;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_rank_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_value;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_claim;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_datavalue;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_mainsnak;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_reference;
+
 class Wdata_claims_parser_v2 {
-	private final    Wbase_claim_factory factory = new Wbase_claim_factory();
+	private final Wbase_claim_factory factory = new Wbase_claim_factory();
 	public void Make_claim_itms(byte[] qid, List_adp claim_itms_list, byte[] src, Json_kv claim_grp) {
 		Json_ary claim_itms_ary = Json_ary.cast_or_null(claim_grp.Val());
 		int claim_itms_len = claim_itms_ary.Len();
 		int pid = Parse_pid(claim_grp.Key().Data_bry());
 		for (int i = 0; i < claim_itms_len; ++i) {
-			Json_nde claim_itm_nde = Json_nde.cast(claim_itms_ary.Get_at(i));
+			Json_nde claim_itm_nde = Json_nde.Cast(claim_itms_ary.Get_at(i));
 			Wbase_claim_base itm = Parse_claim_itm(qid, claim_itm_nde, pid);
 			if (itm != null)	// HACK: itm can be null if value is "somevalue"; DATE:2014-09-20
 				claim_itms_list.Add(itm);
@@ -34,13 +57,13 @@ class Wdata_claims_parser_v2 {
 		byte rank_tid = Wbase_claim_rank_.Tid__unknown;
 		Wbase_claim_base claim_itm = null; Wbase_claim_grp_list qualifiers = null; int[] qualifiers_order = null; Wbase_references_grp[] snaks_grp = null;
 		for (int i = 0; i < len; ++i) {
-			Json_kv sub = Json_kv.cast(nde.Get_at(i));
+			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
 			byte tid = Wdata_dict_claim.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
-				case Wdata_dict_claim.Tid__mainsnak:			claim_itm = Parse_mainsnak(qid, Json_nde.cast(sub.Val()), pid); break;
+				case Wdata_dict_claim.Tid__mainsnak:			claim_itm = Parse_mainsnak(qid, Json_nde.Cast(sub.Val()), pid); break;
 				case Wdata_dict_claim.Tid__rank:				rank_tid = Wbase_claim_rank_.Reg.Get_tid_or(sub.Val().Data_bry(), Wbase_claim_rank_.Tid__unknown); break;
 				case Wdata_dict_claim.Tid__references:			snaks_grp = Parse_references(qid, Json_ary.cast_or_null(sub.Val())); break;
-				case Wdata_dict_claim.Tid__qualifiers:			qualifiers = Parse_qualifiers(qid, Json_nde.cast(sub.Val())); break;
+				case Wdata_dict_claim.Tid__qualifiers:			qualifiers = Parse_qualifiers(qid, Json_nde.Cast(sub.Val())); break;
 				case Wdata_dict_claim.Tid__qualifiers_order:	qualifiers_order = Parse_pid_order(Json_ary.cast_or_null(sub.Val())); break;
 				case Wdata_dict_claim.Tid__type:				break;		// ignore: "statement"
 				case Wdata_dict_claim.Tid__id:					break;		// ignore: "Q2$F909BD1C-D34D-423F-9ED2-3493663321AF"
@@ -58,7 +81,7 @@ class Wdata_claims_parser_v2 {
 		int len = owner.Len();
 		Wbase_references_grp[] rv = new Wbase_references_grp[len];
 		for (int i = 0; i < len; ++i) {
-			Json_nde grp_nde = Json_nde.cast(owner.Get_at(i));
+			Json_nde grp_nde = Json_nde.Cast(owner.Get_at(i));
 			rv[i] = Parse_references_grp(qid, grp_nde);
 		}
 		return rv;
@@ -69,11 +92,11 @@ class Wdata_claims_parser_v2 {
 		int[] snaks_order = null;
 		int len = owner.Len();
 		for (int i = 0; i < len; ++i) {
-			Json_kv sub = Json_kv.cast(owner.Get_at(i));
+			Json_kv sub = Json_kv.Cast(owner.Get_at(i));
 			byte tid = Wdata_dict_reference.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
 				case Wdata_dict_reference.Tid__hash:            hash = sub.Val_as_bry(); break;
-				case Wdata_dict_reference.Tid__snaks:			snaks = Parse_qualifiers(qid, Json_nde.cast(sub.Val())); break;
+				case Wdata_dict_reference.Tid__snaks:			snaks = Parse_qualifiers(qid, Json_nde.Cast(sub.Val())); break;
 				case Wdata_dict_reference.Tid__snaks_order:		snaks_order = Parse_pid_order(Json_ary.cast_or_null(sub.Val())); break;
 			}
 		}
@@ -84,7 +107,7 @@ class Wdata_claims_parser_v2 {
 		if (qualifiers_nde == null) return rv;	// NOTE:sometimes references can have 0 snaks; return back an empty Wbase_claim_grp_list, not null; PAGE:Птичкин,_Евгений_Николаевич; DATE:2015-02-16
 		int len = qualifiers_nde.Len();
 		for (int i = 0; i < len; ++i) {
-			Json_kv qualifier_kv = Json_kv.cast(qualifiers_nde.Get_at(i));
+			Json_kv qualifier_kv = Json_kv.Cast(qualifiers_nde.Get_at(i));
 			int pid = Parse_pid(qualifier_kv.Key().Data_bry());
 			Wbase_claim_grp claims_grp = Parse_props_grp(qid, pid, Json_ary.cast_or_null(qualifier_kv.Val()));
 			rv.Add(claims_grp);
@@ -104,7 +127,7 @@ class Wdata_claims_parser_v2 {
 		List_adp list = List_adp_.New();
 		int len = props_ary.Len();
 		for (int i = 0; i < len; ++i) {
-			Json_nde qualifier_nde = Json_nde.cast(props_ary.Get_at(i));
+			Json_nde qualifier_nde = Json_nde.Cast(props_ary.Get_at(i));
 			Wbase_claim_base qualifier_itm = Parse_mainsnak(qid, qualifier_nde, pid);
 			list.Add(qualifier_itm);
 		}
@@ -114,11 +137,11 @@ class Wdata_claims_parser_v2 {
 		int len = nde.Len();
 		byte snak_tid = Byte_.Max_value_127;
 		for (int i = 0; i < len; ++i) {
-			Json_kv sub = Json_kv.cast(nde.Get_at(i));
+			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
 			byte tid = Wdata_dict_mainsnak.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
 				case Wdata_dict_mainsnak.Tid__snaktype:		snak_tid = Wbase_claim_value_type_.Reg.Get_tid_or_fail(sub.Val().Data_bry()); break;
-				case Wdata_dict_mainsnak.Tid__datavalue:	return Parse_datavalue(qid, pid, snak_tid, Json_nde.cast(sub.Val()));
+				case Wdata_dict_mainsnak.Tid__datavalue:	return Parse_datavalue(qid, pid, snak_tid, Json_nde.Cast(sub.Val()));
 				case Wdata_dict_mainsnak.Tid__datatype:		break;		// ignore: has values like "wikibase-property"; EX: www.wikidata.org/wiki/Property:P397; DATE:2015-06-12
 				case Wdata_dict_mainsnak.Tid__property:		break;		// ignore: pid already available above
 				case Wdata_dict_mainsnak.Tid__hash:			break;		// ignore: "84487fc3f93b4f74ab1cc5a47d78f596f0b49390"
@@ -130,7 +153,7 @@ class Wdata_claims_parser_v2 {
 		int len = nde.Len();
 		Json_itm value_itm = null; byte value_tid = Wbase_claim_type_.Tid__unknown;
 		for (int i = 0; i < len; ++i) {
-			Json_kv sub = Json_kv.cast(nde.Get_at(i));
+			Json_kv sub = Json_kv.Cast(nde.Get_at(i));
 			byte tid = Wdata_dict_datavalue.Reg.Get_tid_or_max_and_log(qid, sub.Key().Data_bry()); if (tid == Byte_.Max_value_127) continue;
 			switch (tid) {
 				case Wdata_dict_datavalue.Tid__type:		value_tid = Wbase_claim_type_.Get_tid_or_unknown(sub.Val().Data_bry()); break;

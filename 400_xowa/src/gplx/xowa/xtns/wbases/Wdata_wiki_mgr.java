@@ -63,11 +63,11 @@ import gplx.xowa.xtns.wbases.stores.Wbase_prop_mgr_loader_;
 import gplx.xowa.xtns.wbases.stores.Wbase_qid_mgr;
 
 public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
-	private final    Xoae_app app;
-	private final    Wdata_prop_val_visitor prop_val_visitor;
-	private final    Wdata_doc_parser wdoc_parser_v1 = new Wdata_doc_parser_v1(), wdoc_parser_v2 = new Wdata_doc_parser_v2();
-	private final    Object thread_lock = new Object();		
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
+	private final Xoae_app app;
+	private final Wdata_prop_val_visitor prop_val_visitor;
+	private final Wdata_doc_parser wdoc_parser_v1 = new Wdata_doc_parser_v1(), wdoc_parser_v2 = new Wdata_doc_parser_v2();
+	private final Object thread_lock = new Object();		
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	public Wdata_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		this.evt_mgr = new Gfo_evt_mgr(this);
@@ -78,11 +78,11 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		this.prop_val_visitor = new Wdata_prop_val_visitor(app, this);
 		this.Enabled_(true);
 	}
-	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private final    Gfo_evt_mgr evt_mgr;
-	public final    Wbase_qid_mgr		Qid_mgr;
-	public final    Wbase_pid_mgr		Pid_mgr;
-	public final    Wbase_doc_mgr		Doc_mgr;
-	public Wbase_prop_mgr				Prop_mgr() {return prop_mgr;} private final    Wbase_prop_mgr prop_mgr;
+	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private final Gfo_evt_mgr evt_mgr;
+	public final Wbase_qid_mgr		Qid_mgr;
+	public final Wbase_pid_mgr		Pid_mgr;
+	public final Wbase_doc_mgr		Doc_mgr;
+	public Wbase_prop_mgr				Prop_mgr() {return prop_mgr;} private final Wbase_prop_mgr prop_mgr;
 	public boolean Enabled() {return enabled;} private boolean enabled;
 	public void Enabled_(boolean v) {
 		this.enabled = v;
@@ -109,7 +109,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Json_parser Jdoc_parser() {return jdoc_parser;} private Json_parser jdoc_parser = new Json_parser();
 	public void Init_by_app() {}
 	public Wdata_doc_parser Wdoc_parser(Json_doc jdoc) {
-		Json_kv itm_0 = Json_kv.cast(jdoc.Root_nde().Get_at(0));										// get 1st node
+		Json_kv itm_0 = Json_kv.Cast(jdoc.Root_nde().Get_at(0));										// get 1st node
 		return Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_type) 
 			|| Bry_.Eq(itm_0.Key().Data_bry(), Wdata_doc_parser_v2.Bry_id) 
 			? wdoc_parser_v2 : wdoc_parser_v1;	// if "type", must be v2
@@ -224,7 +224,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	public static final String Ns_lexeme_name = "Lexeme";
 	public static final byte[] Ns_lexeme_name_bry = Bry_.new_a7(Ns_lexeme_name);
 
-	public static final    byte[] Html_json_id = Bry_.new_a7("xowa-wikidata-json");
+	public static final byte[] Html_json_id = Bry_.new_a7("xowa-wikidata-json");
 	public static boolean Wiki_page_is_json(int wiki_tid, int ns_id) {
 		switch (wiki_tid) {
 			case Xow_domain_tid_.Tid__wikidata:

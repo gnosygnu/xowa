@@ -22,18 +22,26 @@ import gplx.Bry_bfr;
 import gplx.Byte_ascii;
 import gplx.DateAdp;
 import gplx.DateAdp_;
+import gplx.Decimal_adp_;
 import gplx.Err_;
 import gplx.Hash_adp_bry;
 import gplx.Int_;
 import gplx.Long_;
 import gplx.String_;
 
-public class Json_nde extends Json_itm_base implements Json_grp {		
-	private Json_itm[] subs = Json_itm_.Ary_empty; private int subs_len = 0, subs_max = 0;
+public class Json_nde extends Json_itm_base implements Json_grp {
+	private final int src_bgn;
+	private int src_end;
+	private Json_itm[] subs = Json_itm_.Ary_empty;
+	private int subs_len = 0, subs_max = 0;
 	private Hash_adp_bry subs_hash;
-	public Json_nde(Json_doc jdoc, int src_bgn) {this.jdoc = jdoc; this.Ctor(src_bgn, -1);}
+
+	private Json_nde(Json_doc jdoc, int src_bgn) {
+		this.jdoc = jdoc;
+		this.src_bgn = src_bgn;
+	}
 	@Override public byte Tid() {return Json_itm_.Tid__nde;}
-	public Json_doc Doc() {return jdoc;} private final    Json_doc jdoc;
+	public Json_doc Doc() {return jdoc;} private final Json_doc jdoc;
 	public void Src_end_(int v) {this.src_end = v;}
 	@Override public Object Data() {return null;}
 	@Override public byte[] Data_bry() {return null;}
@@ -42,8 +50,8 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	public Json_itm Get_as_itm_or_null(String key) {return Get_as_itm_or_null(Bry_.new_u8(key));}
 	public Json_itm Get_as_itm_or_null(byte[] key) {if (subs_hash == null) subs_hash = subs_hash_init(); return (Json_itm)subs_hash.Get_by_bry(key);}
 	public Json_ary Get_as_ary(int idx)		{return Json_ary.cast(Get_at(idx));}
-	public Json_nde Get_as_nde(String key)	{return Json_nde.cast(Get_as_itm_or_null(Bry_.new_u8(key)));}
-	public Json_nde Get_as_nde(int idx)		{return Json_nde.cast(Get_at(idx));}
+	public Json_nde Get_as_nde(String key)	{return Json_nde.Cast(Get_as_itm_or_null(Bry_.new_u8(key)));}
+	public Json_nde Get_as_nde(int idx)		{return Json_nde.Cast(Get_at(idx));}
 	public Json_ary Get_as_ary(String key)	{return Get_as_ary(Bry_.new_u8(key));}
 	public Json_ary Get_as_ary(byte[] key) {
 		Json_itm rv = Get_as_itm_or_null(key); if (rv == null) throw Err_.new_("json", "key missing", "key", key);
@@ -105,21 +113,25 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	public boolean Has(byte[] key) {return Get_bry(key, null) != null;}
 	public Json_kv Get_at_as_kv(int i) {
 		Json_itm rv_itm = Get_at(i);
-		Json_kv rv = Json_kv.cast(rv_itm); if (rv == null) throw Err_.new_("json", "sub is not kv", "i", i, "src", Bry_.Mid(jdoc.Src(), this.Src_bgn(), src_end));
+		Json_kv rv = Json_kv.Cast(rv_itm);
+		if (rv == null) {
+			byte[] snip = jdoc == null ? Bry_.new_a7("no source") : Bry_.Mid(jdoc.Src(), src_bgn, src_end);
+			throw Err_.new_("json", "sub is not kv", "i", i, "src", snip);
+		}
 		return rv;
 	}
 
-	public Json_kv Get_kv(byte[] key) {return Json_kv.cast(Get_itm(key));}
+	public Json_kv Get_kv(byte[] key) {return Json_kv.Cast(Get_itm(key));}
 	public Json_nde Get(String key) {return Get(Bry_.new_u8(key));}
 	public Json_nde Get(byte[] key) {
-		Json_kv kv = Json_kv.cast(this.Get_itm(key)); if (kv == null) throw Err_.new_("json", "kv not found", "key", key);
-		Json_nde rv = Json_nde.cast(kv.Val()); if (rv == null) throw Err_.new_("json", "nde not found", "key", key);
+		Json_kv kv = Json_kv.Cast(this.Get_itm(key)); if (kv == null) throw Err_.new_("json", "kv not found", "key", key);
+		Json_nde rv = Json_nde.Cast(kv.Val()); if (rv == null) throw Err_.new_("json", "nde not found", "key", key);
 		return rv;
 	}
 	public Json_itm Get_itm(byte[] key) {
 		for (int i = 0; i < subs_len; i++) {
 			Json_itm itm = subs[i];
-			if (itm.Tid() == Json_itm_.Tid__kv) {
+			if (itm != null && itm.Tid() == Json_itm_.Tid__kv) {
 				Json_kv itm_as_kv = (Json_kv)itm;
 				if (Bry_.Eq(key, itm_as_kv.Key().Data_bry()))
 					return itm;
@@ -143,6 +155,17 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 		Json_kv kv = (Json_kv)kv_obj;
 		Json_itm val = kv.Val();
 		return (val == null) ? or : val.Data_bry();
+	}
+	public void AddKvBool(String key, boolean val)  {AddKv(key, Json_itm_bool.Get(val));}
+	public void AddKvInt(String key, int val)       {AddKv(key, Json_itm_int.NewByVal(val));}
+	public void AddKvDouble(String key, double val) {AddKv(key, Json_itm_decimal.NewByVal(Decimal_adp_.double_(val)));}
+	public void AddKvStr(String key, byte[] val)    {AddKv(key, Json_itm_str.NewByVal(String_.new_u8(val)));}
+	public void AddKvStr(String key, String val)    {AddKv(key, Json_itm_str.NewByVal(val));}
+	public void AddKvNde(String key, Json_nde val)  {AddKv(key, val);}
+	public void AddKvAry(String key, Json_ary val)  {AddKv(key, val);}
+	private void AddKv(String key, Json_itm val) {
+		Json_kv rv = new Json_kv(Json_itm_str.NewByVal(key), val);
+		Add(rv);
 	}
 	public Json_nde Add_many(Json_itm... ary) {
 		int len = ary.length;
@@ -187,5 +210,8 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 		}
 		return rv;
 	}
-	public static Json_nde cast(Json_itm v) {return v == null || v.Tid() != Json_itm_.Tid__nde ? null : (Json_nde)v;}
+
+	public static Json_nde NewByDoc(Json_doc doc, int src_bgn) {return new Json_nde(doc, src_bgn);}
+	public static Json_nde NewByVal() {return new Json_nde(null, -1);}
+	public static Json_nde Cast(Json_itm v) {return v == null || v.Tid() != Json_itm_.Tid__nde ? null : (Json_nde)v;}
 }

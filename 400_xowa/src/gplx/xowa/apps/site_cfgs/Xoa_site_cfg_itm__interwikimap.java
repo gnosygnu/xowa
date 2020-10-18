@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,16 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.site_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.core.net.*; import gplx.langs.jsons.*; import gplx.xowa.apps.gfs.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
+package gplx.xowa.apps.site_cfgs;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_split_;
+import gplx.Byte_ascii;
+import gplx.Err_;
+import gplx.String_;
+import gplx.core.net.Gfo_url_parser;
+import gplx.langs.jsons.Json_itm;
+import gplx.langs.jsons.Json_nde;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.apps.gfs.Gfs_php_converter;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_mgr;
+
 class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
-	public Xoa_site_cfg_itm__interwikimap() {this.Ctor(Xoa_site_cfg_loader__inet.Qarg__interwikimap);}
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Gfo_url_parser url_parser = new Gfo_url_parser();
+	public Xoa_site_cfg_itm__interwikimap() {
+		this.Ctor(Xoa_site_cfg_loader__inet.Qarg__interwikimap);
+	}
 	@Override public void Parse_json_ary_itm(Bry_bfr bfr, Xow_wiki wiki, int i, Json_itm itm) {
-		Json_nde nde = Json_nde.cast(itm);
+		Json_nde nde = Json_nde.Cast(itm);
 		if (i != 0) bfr.Add_byte_nl();
 		byte[] iw_key = nde.Get_bry_or_null("prefix");	if (iw_key == null) throw Err_.new_("site_meta", "invalid interwiki", "key", iw_key);
 		byte[] iw_url = nde.Get_bry_or_null("url");		if (iw_url == null) throw Err_.new_("site_meta", "invalid interwiki", "url", iw_key);
@@ -77,7 +93,7 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 		if	(Bry_.Eq(wiki.Domain_bry(), Xow_domain_itm_.Bry__simplewiki))	
 			xwiki_mgr.Add_by_csv(Csv__enwiki);
 	}
-	private static final    byte[] 
+	private static final byte[] 
 	  Csv__manual = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( "1|commons;c|commons.wikimedia.org|Commons"
 	, "1|m;metawikipedia|meta.wikipedia.org"
@@ -118,9 +134,8 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 	))
 	, Csv__enwiki = Bry_.new_a7("2|w|wikipedia")
 	;
-	private static final    byte[]
+	private static final byte[]
 	  Arg0_xo = Bry_.new_a7("~{0}")
 	, Arg0_wm = Bry_.new_a7("$1")
 	;
 }
-

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,14 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import java.lang.*;
-import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.ios.*;
-import gplx.langs.htmls.entitys.*;
+
+import gplx.core.primitives.Int_obj_ref;
+import gplx.langs.htmls.entitys.Gfh_entity_;
+
 public class Bry_ {
 	public static final String Cls_val_name = "byte[]";
-	public static final    byte[] Empty = new byte[0];
-	public static final    byte[][] Ary_empty = new byte[0][];
-	public static final    Class<?> Cls_ref_type = byte[].class;
+	public static final byte[] Empty = new byte[0];
+	public static final byte[][] Ary_empty = new byte[0][];
+	public static final Class<?> Cls_ref_type = byte[].class;
 	public static byte[] cast(Object val) {return (byte[])val;}
 	public static byte[] New_by_byte(byte b) {return new byte[] {b};}
 	public static byte[] New_by_ints(int... ary) {
@@ -474,6 +475,19 @@ public class Bry_ {
 		}
 		else
 			return Bry_.Mid(src, txt_bgn, txt_end);
+	}
+	public static byte[] Trim_bgn(byte[] v, byte trim, int bgn) {
+		boolean trimmed = false;
+		int len = v.length;
+		int pos = bgn;
+		for (; pos < len; pos++) {
+			if (v[pos] == trim) {
+				trimmed = true;
+			}
+			else
+				break;
+		}
+		return trimmed ? Bry_.Mid(v, pos, len) : v;
 	}
 	public static byte[] Trim_end(byte[] v, byte trim, int end) {
 		boolean trimmed = false;

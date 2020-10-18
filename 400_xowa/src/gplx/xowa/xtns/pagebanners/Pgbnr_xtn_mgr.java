@@ -18,7 +18,6 @@ package gplx.xowa.xtns.pagebanners;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Int_ary_;
-import gplx.Io_mgr;
 import gplx.core.brys.Bfr_arg;
 import gplx.langs.mustaches.Mustache_tkn_itm;
 import gplx.langs.mustaches.Mustache_tkn_parser;
@@ -86,9 +85,11 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 
 		if (!enabled) return;
 		// load template file;
-		byte[] template_data = Io_mgr.Instance.LoadFilBryOr(wiki.Appe().Fsys_mgr().Bin_any_dir().GenSubDir_nest("xowa", "xtns", "WikidataPageBanner", "templates", "banner.mustache"), Template_dflt);
-		Mustache_tkn_parser parser = new Mustache_tkn_parser();
-		template_root = parser.Parse(template_data, 0, template_data.length);
+		//byte[] template_data = Io_mgr.Instance.LoadFilBryOr(wiki.Appe().Fsys_mgr().Bin_any_dir().GenSubDir_nest("xowa", "xtns", "WikidataPageBanner", "templates", "banner.mustache"), Template_dflt);
+		//Mustache_tkn_parser parser = new Mustache_tkn_parser();
+		//template_root = parser.Parse(template_data, 0, template_data.length);
+		Mustache_tkn_parser parser = new Mustache_tkn_parser(wiki.Appe().Fsys_mgr().Bin_any_dir().GenSubDir_nest("xowa", "xtns", "WikidataPageBanner", "templates"));
+		template_root = parser.Parse("banner", Template_dflt);
 	}
 	public Bfr_arg Write_html(Xoae_page wpg, Xop_ctx pctx, Xoh_wtr_ctx hctx) {
 		this.wpg = wpg; this.pctx = pctx; this.hctx = hctx;

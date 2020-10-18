@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,11 +13,43 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pagebanners; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.btries.*; import gplx.langs.mustaches.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
-import gplx.xowa.files.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.langs.htmls.encoders.*;
+package gplx.xowa.xtns.pagebanners;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.Double_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Hash_adp_bry;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.langs.mustaches.JsonMustacheNde;
+import gplx.langs.mustaches.Mustache_bfr;
+import gplx.langs.mustaches.Mustache_render_ctx;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
+import gplx.xowa.parsers.tmpls.Xop_func_arg_itm;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.parsers.utils.Xop_sanitizer;
+import gplx.xowa.xtns.pfuncs.Pf_func;
+import gplx.xowa.xtns.pfuncs.Pf_func_base;
+
 // REF.MW:https://github.com/wikimedia/mediawiki-extensions-WikidataPageBanner/blob/master/includes/WikidataPageBannerFunctions.php
 // TODO.DATE:2019-11-11: calculate enableToc and hasPosition;
 public class Pgbnr_func extends Pf_func_base {
@@ -51,10 +83,10 @@ public class Pgbnr_func extends Pf_func_base {
 				bottomtoc = true;
 			if (tid == Arg__toc			&& Bry_.Eq(val, Bry__yes))						// REF.MW:addToc
 				toc = Bry_.Empty;						// note that "" will be overwritten later by actual toc html
-			if (	tid == -1							// note that "icon-*" won't have a tid 
+			if (	tid == -1							// note that "icon-*" won't have a tid
 				&&	Bry_.Has_at_bgn(key, Bry__icon)		// if (substr($key, 0, 5) === 'icon-')
 				&&	Bry_.Len(key)	> 5					// if ( !isset( $iconname) )
-				&&	Bry_.Len_gt_0(val)					// if ( !isset( $$value ) ) 
+				&&	Bry_.Len_gt_0(val)					// if ( !isset( $$value ) )
 				) {										// REF.MW:addIcons
 				tid = Arg__icon;
 				if (icons_list == null) icons_list = List_adp_.New();
@@ -68,6 +100,7 @@ public class Pgbnr_func extends Pf_func_base {
 					icon_title = icon_ttl.Page_txt();
 				}
 				icons_list.Add(new Pgbnr_icon(tmp_bfr, icon_name, icon_title, icon_href));
+//				itm.Add_new_icon(tmp_bfr, icon_name, icon_title, icon_href);
 			}
 			if (tid == Arg__origin) {					// REF.MW:addFocus
 				double tmp_data_pos_x = Double_.NaN, tmp_data_pos_y = Double_.NaN;
@@ -167,7 +200,8 @@ public class Pgbnr_func extends Pf_func_base {
 		}
 		itm.Init_from_html(max_width, banner_file, banner_url, srcset, cfg.enable_heading_override, toc_html, isPanorama);
 
-		Mustache_render_ctx mctx = new Mustache_render_ctx().Init(itm);
+		Mustache_render_ctx mctx = new Mustache_render_ctx().Init(new JsonMustacheNde(itm.Mustache__json()));
+		// Mustache_render_ctx mctx = new Mustache_render_ctx().Init(itm);
 		Mustache_bfr mbfr = Mustache_bfr.New_bfr(tmp_bfr);
 		wiki.Xtn_mgr().Xtn_pgbnr().Template_root().Render(mbfr, mctx);
 		return mbfr.To_bry_and_clear();
