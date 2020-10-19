@@ -318,7 +318,7 @@
       <span class="mw-headline" id="Wikidata.js_replacement_(2014-09-28_21:30_Sun)">Wikidata.js replacement (2014-09-28 21:30 Sun)</span>
     </h2>
     <p>
-      First, as background, the Wikidata.js file was developed by <a href="/site/de.wikipedia.org/wiki/Benutzer:Schnark">Schnark</a> as a way to view Wikidata pages within XOWA. You can see a screenshot <a href="http://xowa.sourceforge.net/wiki/file_screenshot_wikidata.png" rel="nofollow" class="external text">here</a>. As with all of Schnark's contributions, it was a well-developed piece of code that has performed its task perfectly for over a year and a half.
+      First, as background, the Wikidata.js file was developed by <a href="https://de.wikipedia.org/wiki/Benutzer:Schnark" rel="nofollow" class="external text">Schnark</a> as a way to view Wikidata pages within XOWA. You can see a screenshot <a href="http://xowa.sourceforge.net/wiki/file_screenshot_wikidata.png" rel="nofollow" class="external text">here</a>. As with all of Schnark's contributions, it was a well-developed piece of code that has performed its task perfectly for over a year and a half.
     </p>
     <p>
       Unfortunately, the latest changes to the <a href="https://dumps.wikimedia.org/wikidatawiki/20140912/" rel="nofollow" class="external text">Wikidata scheme</a> don't work with Wikidata.js. The Wikibase team introduced a new JSON schema that is different than the old model. The structure is basically the same, but the json paths are different.
@@ -383,7 +383,7 @@
       <span class="mw-headline" id="Release:_v1.9.2_(2014-09-07_21:45_Sun)">Release: v1.9.2 (2014-09-07 21:45 Sun)</span>
     </h2>
     <p>
-      The v1.9.2 release has several minor changes for English Wiktionary and Wikisource. Some were quite time-consuming, including <a href="/site/en.wiktionary.org/wiki/Module_talk:yue-pron">one Luaj issue with .pairs()</a>. I also decided to hold off on more HTML dump work, because I want to see how they perform in Android before I commit to the HTML dump format. Towards that end, I started working on the Android version this week, though so far most of the work is quite experimental.
+      The v1.9.2 release has several minor changes for English Wiktionary and Wikisource. Some were quite time-consuming, including <a href="https://en.wiktionary.org/wiki/Module_talk:yue-pron" rel="nofollow" class="external text">one Luaj issue with .pairs()</a>. I also decided to hold off on more HTML dump work, because I want to see how they perform in Android before I commit to the HTML dump format. Towards that end, I started working on the Android version this week, though so far most of the work is quite experimental.
     </p>
     <p>
       v1.9.3 will involve more Android work along with HTML dumps. For wikis, I'm going to do Hungarian (rebuild) and Esperanto (new).
@@ -436,7 +436,7 @@
       The v1.8.2 update is larger than usual. I had to regenerate the language files because MediaWiki v1.24 added "!" as a magic word and German Wikipedia dropped Template:!. Since this was a low-level change, it forced a rebuild of all the language files. I also took the opportunity to move the language files from <code>/xowa/user/anonymous/lang/xowa/</code> to <code>/xowa/bin/any/xowa/cfg/lang/core/</code>. I also did the same for <code>/xowa/user/anonymous/wiki/#cfg/</code> to <code>/xowa/bin/any/xowa/cfg/wiki/core/</code>
     </p>
     <p>
-      In addition, I also worked on a number of performance enhancements for pages with heavy Scribunto usage. The worst is <a href="/site/en.wiktionary.org/wiki/water">https://en.wiktionary.org/wiki/water</a> . On XOWA this used to take 1.5 GB of memory and 50 seconds. Now it takes 200 MB of memory and 35 seconds. This is still bloated, but keep in mind the offical site takes about 20-25 seconds<sup id="cite_ref-water_0-0" class="reference"><a href="#cite_note-water-0">[1]</a></sup>. Also, this heavy Scribunto usage only affects a small number of pages (and mostly on en.wiktionary). I'll try to add some more incremental improvements over the next few releases, but ultimately this may have to be resolved by offline HTML dumps.
+      In addition, I also worked on a number of performance enhancements for pages with heavy Scribunto usage. The worst is <a href="https://en.wiktionary.org/wiki/water" rel="nofollow" class="external free">https://en.wiktionary.org/wiki/water</a> . On XOWA this used to take 1.5 GB of memory and 50 seconds. Now it takes 200 MB of memory and 35 seconds. This is still bloated, but keep in mind the offical site takes about 20-25 seconds<sup id="cite_ref-water_0-0" class="reference"><a href="#cite_note-water-0">[1]</a></sup>. Also, this heavy Scribunto usage only affects a small number of pages (and mostly on en.wiktionary). I'll try to add some more incremental improvements over the next few releases, but ultimately this may have to be resolved by offline HTML dumps.
     </p>
     <p>
       Finally, I'm trying to upload the German wikis now, but the upload speed is horrendous and at 33 GB, it'll take several days. I had the same problem last Sunday, though this time it's much worse. If this doesn't resolve by tomorrow, I'll contact archive.org for help, but in the meantime, German wikis will be late.
@@ -450,7 +450,7 @@
         <span class="mw-cite-backlink"><a href="#cite_ref-water_0-0">^</a></span> <span class="reference-text">If you want to reproduce this, try the following:</span>
         <ul>
           <li>
-            <span class="reference-text">Go to <a href="/site/en.wiktionary.org/wiki/water">https://en.wiktionary.org/wiki/water</a></span>
+            <span class="reference-text">Go to <a href="https://en.wiktionary.org/wiki/water" rel="nofollow" class="external free">https://en.wiktionary.org/wiki/water</a></span>
           </li>
           <li>
             <span class="reference-text">Click Edit</span>
@@ -647,7 +647,7 @@
       <span class="mw-headline" id="Release:_v1.6.3_(2014-06-15_21:53_Sun)">Release: v1.6.3 (2014-06-15 21:53 Sun)</span>
     </h2>
     <p>
-      v1.6.2 was mostly about infrastructure changes. I changed tidy to parse only page content, while cleaning up most of the HTML &lt;head&gt; generation. Both these items took longer than expected. I did manage to add options to handle auto-collapse / auto expand, and included a few javascript refinements thanks to <a href="/site/de.wikipedia.org/wiki/Benutzer:Schnark">Schnark</a>.
+      v1.6.2 was mostly about infrastructure changes. I changed tidy to parse only page content, while cleaning up most of the HTML &lt;head&gt; generation. Both these items took longer than expected. I did manage to add options to handle auto-collapse / auto expand, and included a few javascript refinements thanks to <a href="https://de.wikipedia.org/wiki/Benutzer:Schnark" rel="nofollow" class="external text">Schnark</a>.
     </p>
     <p>
       v1.6.3 will shift focus a bit. The <a href="http://dumps.wikimedia.org/enwiki/20140614/" rel="nofollow" class="external text">enwiki dump</a> finally started, and I'm going to try to change the update process to delete unused files. Enwiki is approximately 86.4 GB and has a turnover of 1 - 2 GB per month. If the unused images are deleted, I'm hoping to get back into the 70s, if not lower. I'm also going to explore an automated update option for these image databases. As most of my attention will be on enwiki this week, I'm going to skip generating wikis for other languages. Finally, I'm going to experiment with <a href="https://www.mediawiki.org/wiki/Extension:Hovercards" rel="nofollow" class="external text">Hovercards</a> in XOWA. If I'm lucky, I may be able to get something in for a v1.6.* release. Otherwise, it'll have to wait for XOWA HTML dumps.

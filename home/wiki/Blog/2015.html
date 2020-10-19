@@ -851,7 +851,7 @@
         Redirects would not work if they had an argument. For example, #REDIRECT [[Target_page|link=collapsed]]
       </li>
       <li>
-        Clicking on "Redirected from" links at the top of the page would not work. For example, try <a href="/site/en.wikipedia.org/wiki/UK">https://en.wikipedia.org/wiki/UK</a> and click on "Redirected from UK"
+        Clicking on "Redirected from" links at the top of the page would not work. For example, try <a href="https://en.wikipedia.org/wiki/UK" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/UK</a> and click on "Redirected from UK"
       </li>
     </ul>
     <h3>
@@ -1026,7 +1026,7 @@
       <span class="mw-headline" id="Fix_for_broken_references_in_2015-10_English_Wikipedia_dump">Fix for broken references in 2015-10 English Wikipedia dump</span>
     </h3>
     <p>
-      XOWA was showing broken references on 2.6 millions pages for the 2015-10 English Wikipedia dump. This was due to some recent changes in <a href="/site/en.wikipedia.org/wiki/Module:Citation/CS1">Module:Citation/CS1</a>. Specifically, the number of local variables in the citation0 function was greater than the default 200 limit for Luaj.
+      XOWA was showing broken references on 2.6 millions pages for the 2015-10 English Wikipedia dump. This was due to some recent changes in <a href="https://en.wikipedia.org/wiki/Module:Citation/CS1" rel="nofollow" class="external text">Module:Citation/CS1</a>. Specifically, the number of local variables in the citation0 function was greater than the default 200 limit for Luaj.
     </p>
     <p>
       I recompiled a new version of luaj_xowa.jar to fix this issue.
@@ -1519,7 +1519,7 @@
       The old version of the Bookmarks page was a simple feature. It basically added bookmarks to the bottom of a wiki page. Unfortunately, it was part of the "home" wiki and used the old text database format. I needed to convert the home wiki for Android, but couldn't do it without breaking Bookmarks.
     </p>
     <p>
-      As a result, v2.7.3 now has a new Bookmarks page. These entries get saved in the user database (D:\xowa\xowa.user.anonymous.sqlite3) . In addition, it supports HTTP Server mode. For more info, see <a href="/wiki/App/Bookmarks" id="xolnki_13" title="App/Bookmarks">App/Bookmarks</a>
+      As a result, v2.7.3 now has a new Bookmarks page. These entries get saved in the user database (C:\xowa_release\xowa.user.anonymous.sqlite3) . In addition, it supports HTTP Server mode. For more info, see <a href="/wiki/App/Bookmarks" id="xolnki_13" title="App/Bookmarks">App/Bookmarks</a>
     </p>
     <p>
       I didn't have time to add folder support for this release. I'm planning to add in the future, but it may wait until I can clear more Android tasks out of the way. If you want this feature, please create an issue at <a href="https://github.com/gnosygnu/xowa/issues" rel="nofollow" class="external text">github</a> .
@@ -1667,7 +1667,7 @@
         Close XOWA
       </li>
       <li>
-        Delete this folder: D:\xowa\user\anonymous\wiki\simple.wikipedia.org
+        Delete this folder: C:\xowa_release\user\anonymous\wiki\simple.wikipedia.org
       </li>
       <li>
         Restart XOWA and visit <code>simple.wikipedia.org/wiki/Main_Page</code>

@@ -2,7 +2,7 @@
 <html dir="ltr">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>Change log/v4.6.0.1903 - XOWA</title>
+  <title>Change log/2019 - XOWA</title>
   <link rel="shortcut icon" href="https://gnosygnu.github.io/xowa/xowa_logo.png" />
   <link rel="stylesheet" href="https://gnosygnu.github.io/xowa/xowa_common.css" type="text/css">
   
@@ -11,17 +11,764 @@
 <div id="mw-page-base" class="noprint"></div>
 <div id="mw-head-base" class="noprint"></div>
 <div id="content" class="mw-body">
-  <h1 id="firstHeading" class="firstHeading"><span>Change log/v4.6.0.1903</span></h1>
+  <h1 id="firstHeading" class="firstHeading"><span>Change log/2019</span></h1>
   <div id="bodyContent" class="mw-body-content">
     <div id="siteSub">From XOWA: the free, open-source, offline wiki application</div>
     <div id="contentSub"></div>
     <div id="mw-content-text" lang="en" dir="ltr" class="mw-content-ltr">
     
+    <div id="toc" class="toc">
+      <div id="toctitle" class="toctitle">
+        <h2>
+          Contents
+        </h2>
+      </div>
+      <ul>
+        <li class="toclevel-1 tocsection-1">
+          <a href="#v4.6.3.1908_(2019-08-04)"><span class="tocnumber">1</span> <span class="toctext">v4.6.3.1908 (2019-08-04)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-2">
+              <a href="#PC"><span class="tocnumber">1.1</span> <span class="toctext">PC</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-3">
+          <a href="#v4.6.2.1907_(2019-07-24)"><span class="tocnumber">2</span> <span class="toctext">v4.6.2.1907 (2019-07-24)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-4">
+              <a href="#Wiki"><span class="tocnumber">2.1</span> <span class="toctext">Wiki</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-5">
+              <a href="#PC_2"><span class="tocnumber">2.2</span> <span class="toctext">PC</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-6">
+          <a href="#v4.6.1.1903_(2019-03-26)"><span class="tocnumber">3</span> <span class="toctext">v4.6.1.1903 (2019-03-26)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-7">
+              <a href="#PC_3"><span class="tocnumber">3.1</span> <span class="toctext">PC</span></a>
+            </li>
+          </ul>
+        </li>
+        <li class="toclevel-1 tocsection-8">
+          <a href="#v4.6.0.1903_(2019-03-23)"><span class="tocnumber">4</span> <span class="toctext">v4.6.0.1903 (2019-03-23)</span></a> 
+          <ul>
+            <li class="toclevel-2 tocsection-9">
+              <a href="#Wiki_2"><span class="tocnumber">4.1</span> <span class="toctext">Wiki</span></a>
+            </li>
+            <li class="toclevel-2 tocsection-10">
+              <a href="#PC_4"><span class="tocnumber">4.2</span> <span class="toctext">PC</span></a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <h2>
+      <span class="mw-headline" id="v4.6.3.1908_(2019-08-04)">v4.6.3.1908 (2019-08-04)</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="PC">PC</span>
+    </h3>
+    <p>
+      <b>major</b>
+    </p>
+    <ul>
+      <li>
+        HTTP Server: Fix links and images not working for 2019-05 enwiki HTML databases. {detected by ctd}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Resolved by: Swap out /wiki/ and fix broken /fsys/.
+      </dd>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/524" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/524</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        HTTP Server: Fix XowaSearch not working. {detected by ktry}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Resolved by: Append url_args to page.
+      </dd>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/489" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/489</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        HTTP Server: Add search-suggest.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/489" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/489</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix Script error 'Module:convert:328 attempt to compare nil with number'. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Resolved by: Use m_offset when doing string.substring.
+      </dd>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/520" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/520</a>
+      </dd>
+    </dl>
+    <p>
+      <b>trivial</b>
+    </p>
+    <ul>
+      <li>
+        Make: Update wiki domains for 2019-06 Wikidata.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        Issue: <a href="https://github.com/gnosygnu/xowa/issues/528" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/528</a>
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="v4.6.2.1907_(2019-07-24)">v4.6.2.1907 (2019-07-24)</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="Wiki">Wiki</span>
+    </h3>
+    <ul>
+      <li>
+        Package: Publish 2019-05 English Wikipedia.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="/wiki/Wiki_setup/English_wikis" id="xolnki_2" title="Wiki setup/English wikis">Wiki_setup/English_wikis</a>
+      </dd>
+    </dl>
+    <h3>
+      <span class="mw-headline" id="PC_2">PC</span>
+    </h3>
+    <p>
+      <b>major</b>
+    </p>
+    <ul>
+      <li>
+        Category: Fix Category not working for en.w. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Replace UNION with sequential loading from each catlink db.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/268" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/268</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix infinite loop on some en.w pages when finding on ucs-2 chars. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Adjust index position correctly for ucs-2 strings.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: {{WP7a|got|Gothic}}.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/List_of_Wikipedias" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/List_of_Wikipedias</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/506" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/506</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Luaj: Fix infinite loop on some en.w pages when matching Unicode Alphabetic chars. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Support PCRE character definitions for Luaj Regex.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/502" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/502</a>
+      </dd>
+    </dl>
+    <p>
+      <b>significant</b>
+    </p>
+    <ul>
+      <li>
+        Parser.Tidy: Add vnu as additional tidy engine. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/417" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/417</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Xtns.TemplateStyles: Cache TemplateStyles for HTML databases.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/482" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/482</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Use Luaj for pattern-matching (instead of Java Regex).
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/413" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/413</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Wikibase: Add qualifiers-order to GetEntityStatements. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/374" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/374</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Parser.Wikibase: Fix 'qid not found' errors in session.txt. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Retrieve by label if pid is not present; also, return pid, not label.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/354" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/354</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Css: Show external-link icon and other css effects. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Add 'mw-parser-output' to main div.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Earth" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Earth</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/274" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/274</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Sqlite: Allow faster wiki loading for read-only devices. {requested by ZebraFromPluto}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Add option for read-only detection.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: home/wiki/Special:XowaCfg?grp=xowa.app.dbs
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/509" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/509</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Xtn.Popups: Disable popups by default for en.wiktionary.org. {suggested by ZebraFromPluto}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: home/wiki/Special:XowaCfg?grp=xowa.addon.popups
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/511" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/511</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        HTTP Server: Fix links not working in left nav bar. {detected by anonymous}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Parse links with trailing slash.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/459" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/459</a>
+      </dd>
+    </dl>
+    <p>
+      <b>minor</b>
+    </p>
+    <ul>
+      <li>
+        Xtn.Translate: Fix 'callParserFunction: function was not found: function=#translation' on many commons pages. {assisted by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Add #translation function with no implementation.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: {{#translation}}.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/445" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/445</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Parser.Wikibase: Fix 'Module:ResolveEntityId:31 attempt to index ?' on several dozen en.w biology pages.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Return null instead of empty string if invalid title passed to getEntityId.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Nicoletella" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Nicoletella</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/415" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/415</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Parser.TemplateStyles: Fix NullPointerException on a few dozen en.w Portal pages.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Check if title is null.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Portal:Switzerland" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Portal:Switzerland</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/416" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/416</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        ParserFunctions: Fix "Expression error: Missing operand for =" on some en.w pages. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Increase precedence of "E" over "ln" and other operations.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: {{#expr:ln2E+3}}.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/397" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/397</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix '@libraryUtil.lua:13 bad argument #1 to gmatch (string expected, got nil)' on a few en.w pages.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Set frame title for pages when invoking Scribunto code.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wiki/Wikipedia:Categories_for_discussion" rel="nofollow" class="external free">https://en.wikipedia.org/wiki/Wikipedia:Categories_for_discussion</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/476" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/476</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix 'invoke failed: ... {{#invoke:Navbar|navbar}}' on some en.w pages. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Add frame_ttl to all Xot_invk_tkn.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wik/2003_Tippeligaen" rel="nofollow" class="external free">https://en.wikipedia.org/wik/2003_Tippeligaen</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/503" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/503</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix 'https%3A%2F%2F' showing up in reference links on some en.w pages. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Synchronize mw.uri.lua file with changes for uri.encode(s, 'WIKI').
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikipedia.org/wik/Christmas" rel="nofollow" class="external free">https://en.wikipedia.org/wik/Christmas</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/504" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/504</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Luaj: Fix invalid url-encoding for non-ASCII characters like 'æ'. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Substring by bytes, not string, to handle malformed strings.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/504" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/504</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix query args showing up on en.w Template pages. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Encode key / val in GetUrl.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/465" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/465</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix 'NullPointerException in Module:Wikidata:622' on some de.w pages. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Ignore snak if novalue.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/481" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/481</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix 'Module:Exception:2 attempt to index ? (a nil value)' on some en.u pages. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikiversity.org/wiki/Web_Science/Part2:_Emerging_Web_Properties/Hearding_Behavior/Summary,_Further_readings,_Homework" rel="nofollow" class="external free">https://en.wikiversity.org/wiki/Web_Science/Part2:_Emerging_Web_Properties/Hearding_Behavior/Summary,_Further_readings,_Homework</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/475" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/475</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Xtn.Cldr: Fix 'Module:wikipedia:49 The Wikimedia language code goh is not valid' on some en.d pages. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Check CldrNames for IsKnownLanguageTag.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/388" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/388</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Fix 'Template:Template:Page' does not exist. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Apply namespace argument only if in main namespace.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: =mw.title.new("Template:Test", 'File').
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/473" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/473</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        HttpServer: Navigate to an error page for invalid titles like "Earth]". {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/480" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/480</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Parser.Comment: Fix run-on paragraph if comment is added between blank linkes. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Terminate comment if new-line found.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://en.wikisource.org/wiki/Three_Villages/2_Shirley" rel="nofollow" class="external free">https://en.wikisource.org/wiki/Three_Villages/2_Shirley</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/437" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/437</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Xtn.SyntaxHighlight: Highlight lines if 'highlight' is passed but 'line' is not. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: &lt;syntaxhighlight lang="text" highlight="4-7"&gt;.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://commons.wikimedia.org/wiki/Template:TemplateBox/doc/example-value" rel="nofollow" class="external free">https://commons.wikimedia.org/wiki/Template:TemplateBox/doc/example-value</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/498" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/498</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Scribunto: Format date correctly for years with less than 4 digits (EX: +0065 -&gt; 65 x&gt; 2065). {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: "+0065-12-01" -&gt; "65-12-01" x&gt; "2065-12-01".
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/500" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/500</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Language: Escape left-to-right / right-to-left marks in names.json ('\xE2\x80\x8E' to '\u200E'). {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/501" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/501</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Parser: Remove unnecessary html from anchor.encode. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Parse html in internal link captions.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: [[File:A.png|<span>b</span>]]
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/460" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/460</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Parser: Handle UTF-8 characters in attribute keys / values. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/457" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/457</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Json: Parse surrogate-pairs correctly in unicode-escaped strings. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: \ud83c\udf0.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/487" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/487</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Parser: Change encoding of html id to encode fewer characters.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/462" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/462</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        User.Logs: Delete log folders if logs are disabled. {requested by ZebraFromPluto}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/510" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/510</a>
+      </dd>
+    </dl>
+    <p>
+      <b>trivial</b>
+    </p>
+    <ul>
+      <li>
+        Html: Change self-link pages from &lt;b&gt; to &lt;a class='mw-selflink selflink'&gt;. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/478" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/478</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Css: Change css jump-to class from 'mw-navigation' to 'mw-head'. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Links</span>: <a href="https://phabricator.wikimedia.org/source/Vector/browse/master/includes/templates/index.mustache$20" rel="nofollow" class="external free">https://phabricator.wikimedia.org/source/Vector/browse/master/includes/templates/index.mustache$20</a>
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/394" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/394</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Json: Skip forward by 5 characters, not 4 for unicode sequences. {contributed by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Example</span>: \u0022.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/486" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/486</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Parser: Do not parse '&amp;#x;' as byte 0. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/494" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/494</a>
+      </dd>
+    </dl>
+    <p>
+      <br>
+      <b>dev</b>
+    </p>
+    <ul>
+      <li>
+        Mass_parse: Add xomp_stats to track time per page (and other attributes). {suggested by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/456" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/456</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Mass_parse: Change page_cache to LRU cache.
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/483" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/483</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Dev: Create Maven artifact. {contributed by t}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/427" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/427</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Dev: Rename test files to use '_tst' and '_fxt' convention. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/512" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/512</a>
+      </dd>
+    </dl>
+    <ul>
+      <li>
+        Mass_parse: Fix mass_parse failing due to 'counts do not match; same key is either added twice, or delete failed'. {detected by desb42}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Use page_cache hashCode, not wiki hashCode.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/514" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/514</a>
+      </dd>
+    </dl>
+    <h2>
+      <span class="mw-headline" id="v4.6.1.1903_(2019-03-26)">v4.6.1.1903 (2019-03-26)</span>
+    </h2>
+    <h3>
+      <span class="mw-headline" id="PC_3">PC</span>
+    </h3>
+    <p>
+      <b>major</b>
+    </p>
+    <ul>
+      <li>
+        Htxt: Fix old html databases not loading pages. {detected by Ope30}
+      </li>
+    </ul>
+    <dl>
+      <dd>
+        <span style='font-variant:small-caps'>Resolved by</span>: Extract img.src data.
+      </dd>
+      <dd>
+        <span style='font-variant:small-caps'>Issue</span>: <a href="https://github.com/gnosygnu/xowa/issues/404" rel="nofollow" class="external free">https://github.com/gnosygnu/xowa/issues/404</a>
+      </dd>
+    </dl>
     <h2>
       <span class="mw-headline" id="v4.6.0.1903_(2019-03-23)">v4.6.0.1903 (2019-03-23)</span>
     </h2>
     <h3>
-      <span class="mw-headline" id="Wiki">Wiki</span>
+      <span class="mw-headline" id="Wiki_2">Wiki</span>
     </h3>
     <ul>
       <li>
@@ -30,11 +777,11 @@
     </ul>
     <dl>
       <dd>
-        <span style='font-variant:small-caps'>Links</span>: <a href="/wiki/Wiki_setup/German_wikis" id="xolnki_2" title="Wiki setup/German wikis">Wiki_setup/German_wikis</a>
+        <span style='font-variant:small-caps'>Links</span>: <a href="/wiki/Wiki_setup/German_wikis" id="xolnki_3" title="Wiki setup/German wikis">Wiki_setup/German_wikis</a>
       </dd>
     </dl>
     <h3>
-      <span class="mw-headline" id="PC">PC</span>
+      <span class="mw-headline" id="PC_4">PC</span>
     </h3>
     <p>
       <b>major</b>

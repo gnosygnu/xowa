@@ -25,13 +25,13 @@
         The referenced Wikidata pages are: 
         <ul>
           <li>
-            Earth: <a href="/site/www.wikidata.org/wiki/Q2">http://www.wikidata.org/wiki/Q2</a>
+            Earth: <a href="http://www.wikidata.org/wiki/Q2" rel="nofollow" class="external free">http://www.wikidata.org/wiki/Q2</a>
           </li>
           <li>
-            George Washington: <a href="/site/www.wikidata.org/wiki/Q23">http://www.wikidata.org/wiki/Q23</a>
+            George Washington: <a href="http://www.wikidata.org/wiki/Q23" rel="nofollow" class="external free">http://www.wikidata.org/wiki/Q23</a>
           </li>
           <li>
-            South Pole: <a href="/site/www.wikidata.org/wiki/Q933">http://www.wikidata.org/wiki/Q933</a>
+            South Pole: <a href="http://www.wikidata.org/wiki/Q933" rel="nofollow" class="external free">http://www.wikidata.org/wiki/Q933</a>
           </li>
         </ul>
       </li>
@@ -56,7 +56,13 @@
       </tr>
       <tr>
         <td>
-          <span style='color: green;'>pass</span>
+          <span style='color: red;'>fail:<br>
+          '</span>
+<pre>
+<span style='color: red;'>'<br>
+'Earth symbol.svg
+ '</span>
+</pre>
         </td>
         <td>
           property is string
@@ -65,41 +71,6 @@
           {{#property:p367|q=q2}}
         </td>
         <td>
-          Earth symbol.svg 
-          <p>
-            <br>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span style='color: green;'>pass</span>
-        </td>
-        <td>
-          property is entity
-        </td>
-        <td>
-          {{#property:p398|q=q2}}
-        </td>
-        <td>
-          Moon 
-          <p>
-            <br>
-          </p>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <span style='color: green;'>pass</span>
-        </td>
-        <td>
-          property is time
-        </td>
-        <td>
-          {{#property:p570|q=q23}}
-        </td>
-        <td>
-          14 Dec 1799 
           <p>
             <br>
           </p>
@@ -108,7 +79,51 @@
       <tr>
         <td>
           <span style='color: red;'>fail:<br>
-          '90°0'0"S, 0°0'0"E</span>
+          '</span>
+<pre>
+<span style='color: red;'>'<br>
+'Moon
+ '</span>
+</pre>
+        </td>
+        <td>
+          property is entity
+        </td>
+        <td>
+          {{#property:p398|q=q2}}
+        </td>
+        <td>
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: red;'>fail:<br>
+          '</span>
+<pre>
+<span style='color: red;'>'<br>
+'14 Dec 1799
+ '</span>
+</pre>
+        </td>
+        <td>
+          property is time
+        </td>
+        <td>
+          {{#property:p570|q=q23}}
+        </td>
+        <td>
+          <p>
+            <br>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <span style='color: red;'>fail:<br>
+          '</span>
 <pre>
 <span style='color: red;'>'<br>
 '90°S, 0°E
@@ -122,7 +137,6 @@
           {{#property:p625|q=q933}}
         </td>
         <td>
-          90°0'0"S, 0°0'0"E 
           <p>
             <br>
           </p>
@@ -130,7 +144,13 @@
       </tr>
       <tr>
         <td>
-          <span style='color: green;'>pass</span>
+          <span style='color: red;'>fail:<br>
+          '</span>
+<pre>
+<span style='color: red;'>'<br>
+'The Earth seen from Apollo 17.jpg
+ '</span>
+</pre>
         </td>
         <td>
           argument is of
@@ -139,7 +159,6 @@
           {{#property:p18|of=Earth}}
         </td>
         <td>
-          The Earth seen from Apollo 17.jpg 
           <p>
             <br>
           </p>
@@ -147,7 +166,13 @@
       </tr>
       <tr>
         <td>
-          <span style='color: green;'>pass</span>
+          <span style='color: red;'>fail:<br>
+          '{{#property:image|q=q2}}</span>
+<pre>
+<span style='color: red;'>'<br>
+'The Earth seen from Apollo 17.jpg
+ '</span>
+</pre>
         </td>
         <td>
           identifier is name
@@ -156,7 +181,7 @@
           {{#property:image|q=q2}}
         </td>
         <td>
-          The Earth seen from Apollo 17.jpg 
+          q=q2}} 
           <p>
             <br>
           </p>
@@ -164,7 +189,13 @@
       </tr>
       <tr>
         <td>
-          <span style='color: green;'>pass</span>
+          <span style='color: red;'>fail:<br>
+          '{{#property:image|of=Earth}}</span>
+<pre>
+<span style='color: red;'>'<br>
+'The Earth seen from Apollo 17.jpg
+ '</span>
+</pre>
         </td>
         <td>
           identifier is name; argument is of
@@ -173,7 +204,7 @@
           {{#property:image|of=Earth}}
         </td>
         <td>
-          The Earth seen from Apollo 17.jpg 
+          of=Earth}} 
           <p>
             <br>
           </p>
