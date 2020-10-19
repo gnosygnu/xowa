@@ -6575,6 +6575,7 @@ wikibase-sitelinks-wikivoyage|Wikivoyage
 wikibase-sitelinks-wiktionary|Wiktionary
 ']:>
 ).lang
+/*
 .time_formats
   .load_text(
 <:['
@@ -6604,4 +6605,5 @@ monthonly|xnY-xnm
 pretty|xnm-xnd
 ']:>
 )
+*/
 ;
