@@ -431,9 +431,6 @@ app.bldr.cmds {
       // num_pages_in_pool = 32000; 
       // mgr_url = '\\server_machine_name\xowa\wiki\en.wikipedia.org\tmp\xomp\'; 
       // wkr_machine_name = 'worker_machine_1'
-
-      // uncomment the next line to resume parsing. See === Resuming === below
-      // resume_enabled = 'y';
     }
   }
 
@@ -463,8 +460,8 @@ app.bldr.cmds {
     commit_interval = 1000; progress_interval = 200; select_interval = 10000;
     ns_ids = '0|4|14';
     
-    // DEPRECATED: specify whether original wiki databases are v1 (.sqlite3) or v2 (.xowa)
-    // src_bin_mgr__fsdb_version = 'v1';
+    // specify whether original wiki databases are v1 (.sqlite3) or v2 (.xowa)
+    src_bin_mgr__fsdb_version = 'v1';
     
     // always redownload certain files
     src_bin_mgr__fsdb_skip_wkrs = 'page_gt_1|small_size';
@@ -528,9 +525,6 @@ app.bldr.run;
       </li>
       <li>
         Uncomment the line for 'wiki.mass_parse.resume'
-      </li>
-      <li>
-        Uncomment the line for 'resume_enabled = 'y';'
       </li>
       <li>
         Run the command-line again

@@ -65,10 +65,10 @@
     </p>
     <ul>
       <li>
-        A <a href="https://en.wikipedia.org/wiki/PageRank" rel="nofollow" class="external text">PageRank</a> score is calculated for a page. This score is <a href="https://en.wikipedia.org/wiki/Feature_scaling" rel="nofollow" class="external text">scaled</a> from 0 to 1,000,000
+        A <a href="/site/en.wikipedia.org/wiki/PageRank">PageRank</a> score is calculated for a page. This score is <a href="/site/en.wikipedia.org/wiki/Feature_scaling">scaled</a> from 0 to 1,000,000
       </li>
       <li>
-        A page-length score is then calculated for the page. This score is <a href="https://en.wikipedia.org/wiki/Percentile_rank" rel="nofollow" class="external text">ranked</a> from 0 to 1,000,000
+        A page-length score is then calculated for the page. This score is <a href="/site/en.wikipedia.org/wiki/Percentile_rank">ranked</a> from 0 to 1,000,000
       </li>
       <li>
         The PageRank score is then multiplied by a ratio if it has a low page-length score
@@ -90,7 +90,7 @@
       <span class="mw-headline" id="Scaling">Scaling</span>
     </h3>
     <p>
-      A simplified definition of scaling is converting a number from one range to another range based on proportion. For a more thorough definition, see <a href="https://en.wikipedia.org/wiki/Feature_scaling" rel="nofollow" class="external text">the Wikipedia page on feature scaling</a>
+      A simplified definition of scaling is converting a number from one range to another range based on proportion. For a more thorough definition, see <a href="/site/en.wikipedia.org/wiki/Feature_scaling">the Wikipedia page on feature scaling</a>
     </p>
     <p>
       For example, let's say you have a score of 100 in a range of 0 to 400 and want to scale it to 0 to 1000. The following steps would be involved:
@@ -123,7 +123,7 @@ newScore = \frac{oldScore - \text{min}(oldRange)} {\text{max}(oldRange)-\text{mi
       <span class="mw-headline" id="Ranking">Ranking</span>
     </h3>
     <p>
-      A simplified definition of ranking is assigning a number based on its order in a population of numbers. For those familiar with a school setting, this is "grading on a curve". For a more thorough definition, see <a href="https://en.wikipedia.org/wiki/Percentile_rank" rel="nofollow" class="external text">the Wikipedia page on percentile ranks</a>
+      A simplified definition of ranking is assigning a number based on its order in a population of numbers. For those familiar with a school setting, this is "grading on a curve". For a more thorough definition, see <a href="/site/en.wikipedia.org/wiki/Percentile_rank">the Wikipedia page on percentile ranks</a>
     </p>
     <p>
       For example, let's say you have the following:
@@ -219,7 +219,7 @@ newScore = \frac{oldScore - \text{min}(oldRange)} {\text{max}(oldRange)-\text{mi
       <span class="mw-headline" id="PageRank">PageRank</span>
     </h3>
     <p>
-      The basis of XOWA's page score is <a href="https://en.wikipedia.org/wiki/PageRank" rel="nofollow" class="external text">PageRank</a>.
+      The basis of XOWA's page score is <a href="/site/en.wikipedia.org/wiki/PageRank">PageRank</a>.
     </p>
     <p>
       In brief, PageRank will give high scores to pages which are:
@@ -233,7 +233,7 @@ newScore = \frac{oldScore - \text{min}(oldRange)} {\text{max}(oldRange)-\text{mi
       </li>
     </ol>
     <p>
-      Note that #2 is recursive (a page will have a high score only if it is linked to by many pages). For more info, a good starting point is <a href="https://en.wikipedia.org/wiki/PageRank" rel="nofollow" class="external text">the Wikipedia page on PageRank</a>.
+      Note that #2 is recursive (a page will have a high score only if it is linked to by many pages). For more info, a good starting point is <a href="/site/en.wikipedia.org/wiki/PageRank">the Wikipedia page on PageRank</a>.
     </p>
     <p>
       After XOWA calculates the PageRank, XOWA then scales this score in a range of 0 to 1,000,000
