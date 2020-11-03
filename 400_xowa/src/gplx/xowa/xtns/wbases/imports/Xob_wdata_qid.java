@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,24 +13,43 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.wikis.data.*; import gplx.dbs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.dbs.*; import gplx.xowa.xtns.wbases.parsers.*;
+package gplx.xowa.xtns.wbases.imports;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Gfo_invk;
+import gplx.Ordered_hash;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_parser;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.wkrs.Xob_itm_dump_base;
+import gplx.xowa.bldrs.wkrs.Xob_page_wkr;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
+import gplx.xowa.xtns.wbases.dbs.Wbase_qid_tbl;
+import gplx.xowa.xtns.wbases.parsers.Wdata_doc_parser;
+
 public class Xob_wdata_qid extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
 	private Db_conn conn;
 	private Wbase_qid_tbl tbl;
-	private final    Object thread_lock = new Object();
-	private Json_parser parser; private Xob_wbase_ns_parser ns_parser; private final    Xob_wbase_ns_parser_rslt ns_parser_rslt = new Xob_wbase_ns_parser_rslt();
+	private final Object thread_lock = new Object();
+	private final Json_parser parser = new Json_parser();
+	private Xob_wbase_ns_parser ns_parser; private final Xob_wbase_ns_parser_rslt ns_parser_rslt = new Xob_wbase_ns_parser_rslt();
 	public Xob_wdata_qid(Db_conn conn) {
 		this.conn = conn;
 	}
 	public String Page_wkr__key() {return gplx.xowa.bldrs.Xob_cmd_keys.Key_wbase_qid;}
 	public Xob_wdata_qid Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); return this;}
 	public void Page_wkr__bgn() {
-		this.parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.ns_parser = new Xob_wbase_ns_parser(bldr.App().Fsys_mgr().Cfg_site_meta_fil());
 		this.Qid__bgn();
 	}

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,16 +13,41 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.imports.json; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.imports.*;
-import gplx.core.ios.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.sqls.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;	
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.parsers.*;
+package gplx.xowa.xtns.wbases.imports.json;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Byte_ascii;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Datetime_now;
+import gplx.Gfo_usr_dlg;
+import gplx.core.ios.Io_stream_zip_mgr;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_parser;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.Xowe_wiki_;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_ns_to_db_mgr;
+import gplx.xowa.bldrs.Xobldr_cfg;
+import gplx.xowa.bldrs.cmds.Xob_ns_file_itm;
+import gplx.xowa.bldrs.cmds.texts.sqls.Xob_ns_to_db_wkr__text;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.Xowd_cfg_key_;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
+import gplx.xowa.xtns.wbases.imports.Xob_wdata_pid;
+import gplx.xowa.xtns.wbases.imports.Xob_wdata_qid;
+
 class Xowb_json_dump_db {
-	private final    Xoae_app app; private final    Gfo_usr_dlg usr_dlg; private final    Xowe_wiki wiki; private final    Xob_bldr bldr;
-	private final    Json_parser json_parser;
-	private final    Xob_wdata_pid pid_cmd; private final    Xob_wdata_qid qid_cmd;
+	private final Xoae_app app; private final Gfo_usr_dlg usr_dlg; private final Xowe_wiki wiki; private final Xob_bldr bldr;
+	private final Json_parser json_parser = new Json_parser();
+	private final Xob_wdata_pid pid_cmd; private final Xob_wdata_qid qid_cmd;
 	private Xow_ns_mgr ns_mgr; private Xow_db_mgr db_mgr; 
 	private Xowd_page_tbl page_tbl; private Xob_ns_to_db_mgr ns_to_db_mgr; 
 	private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
@@ -30,7 +55,6 @@ class Xowb_json_dump_db {
 	private int page_id = 0, page_count_main = 0;
 	public Xowb_json_dump_db(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.app = bldr.App(); this.usr_dlg = app.Usr_dlg(); this.wiki = wiki; this.bldr = bldr;
-		this.json_parser = bldr.App().Wiki_mgr().Wdata_mgr().Jdoc_parser();
 		this.ns_mgr = wiki.Ns_mgr();
 		this.pid_cmd = new Xob_wdata_pid(wiki.Data__core_mgr().Db__wbase().Conn());
 		this.qid_cmd = new Xob_wdata_qid(wiki.Data__core_mgr().Db__wbase().Conn());
@@ -98,5 +122,5 @@ class Xowb_json_dump_db {
 		db_core.Tbl__ns().Insert(ns_mgr);														// save ns
 		db_mgr.Tbl__cfg().Insert_str(Xowd_cfg_key_.Grp__wiki_init, Xowd_cfg_key_.Key__init__modified_latest, page_modified_on.XtoStr_fmt(DateAdp_.Fmt_iso8561_date_time));
 	}
-	private static final    byte[] Bry__id_key = Bry_.new_a7("id");
+	private static final byte[] Bry__id_key = Bry_.new_a7("id");
 }

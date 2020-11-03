@@ -106,7 +106,6 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 		}
 		return wdata_wiki;
 	}	private Xowe_wiki wdata_wiki;
-	public Json_parser Jdoc_parser() {return jdoc_parser;} private Json_parser jdoc_parser = new Json_parser();
 	public void Init_by_app() {}
 	public Wdata_doc_parser Wdoc_parser(Json_doc jdoc) {
 		Json_kv itm_0 = Json_kv.Cast(jdoc.Root_nde().Get_at(0));										// get 1st node

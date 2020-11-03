@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,18 +13,56 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.engines.sqlite.*; import gplx.xowa.bldrs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.bldrs.wkrs.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.bldrs.cmds.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.wbases.imports;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Byte_ascii;
+import gplx.Gfo_usr_dlg;
+import gplx.Int_ary_;
+import gplx.Ordered_hash;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_idx_itm;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.dbs.engines.sqlite.Sqlite_engine_;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_grp;
+import gplx.langs.jsons.Json_itm;
+import gplx.langs.jsons.Json_itm_;
+import gplx.langs.jsons.Json_kv;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_parser;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_cmd_keys;
+import gplx.xowa.bldrs.Xob_db_file;
+import gplx.xowa.bldrs.cmds.Xob_dump_mgr_base;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.langs.Xol_lang_itm_;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.xtns.wbases.Wdata_doc;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_visitor;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_string;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_value;
+
 public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	private Wdata_tbl_mgr tbl_mgr = new Wdata_tbl_mgr();
-	private Wdata_wiki_mgr wdata_mgr; private Json_parser json_parser;
+	private Wdata_wiki_mgr wdata_mgr;
 	private byte[] lang_key = Xol_lang_itm_.Key_en;
+	private final Json_parser json_parser = new Json_parser();
 	public Xob_wdata_db_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_wbase_db;}
 	@Override public byte Init_redirect() {return Bool_.N_byte;}	// json will never be found in a redirect
@@ -41,7 +79,6 @@ public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	}
 	@Override protected void Cmd_bgn_end() {
 		wdata_mgr = bldr.App().Wiki_mgr().Wdata_mgr();
-		json_parser = wdata_mgr.Jdoc_parser();
 		tbl_mgr.Conn().Txn_bgn("bldr__wdata_db");
 	}
 	@Override public void Exec_pg_itm_hook(int ns_ord, Xow_ns ns, Xowd_page_itm page, byte[] page_src) {

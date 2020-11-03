@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,18 +13,35 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.stores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.core.logs.*; import gplx.core.primitives.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.wikis.pages.*;
-import gplx.xowa.xtns.wbases.core.*;
+package gplx.xowa.xtns.wbases.stores;
+
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.logs.Gfo_log_wtr;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_parser;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.xtns.wbases.Wdata_doc;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
+import gplx.xowa.xtns.wbases.core.Wbase_pid;
+
 public class Wbase_doc_mgr {
-	private final    Wdata_wiki_mgr wbase_mgr;
-	private final    Wbase_qid_mgr qid_mgr;
+	private final Wdata_wiki_mgr wbase_mgr;
+	private final Wbase_qid_mgr qid_mgr;
 	private Wbase_doc_cache doc_cache;
-	private final    Object thread_lock = new Object();
-	private final    Ordered_hash wbase_db_hash = Ordered_hash_.New_bry();
-	private final    Gfo_log_wtr wbase_db_log;
+	private final Object thread_lock = new Object();
+	private final Ordered_hash wbase_db_hash = Ordered_hash_.New_bry();
+	private final Gfo_log_wtr wbase_db_log;
+	private final Json_parser jsonParser = new Json_parser();
 	public Wbase_doc_mgr(Wdata_wiki_mgr wbase_mgr, Wbase_qid_mgr qid_mgr) {
 		this.wbase_mgr = wbase_mgr;
 		this.qid_mgr = qid_mgr;
@@ -110,7 +127,7 @@ public class Wbase_doc_mgr {
 				if (!page.Db().Page().Exists()) break;
 
 				// parse jdoc
-				Json_doc jdoc = wbase_mgr.Jdoc_parser().Parse(page.Db().Text().Text_bry());
+				Json_doc jdoc = jsonParser.Parse(page.Db().Text().Text_bry());
 				if (jdoc == null) {
 					Gfo_usr_dlg_.Instance.Warn_many("", "", "invalid jdoc for ttl: orig=~{0} cur=~{1}", ttl_bry, cur_ttl_bry);
 					break;
@@ -136,7 +153,7 @@ public class Wbase_doc_mgr {
 		wbase_db_itm.Update(gplx.core.envs.System_.Ticks__elapsed_in_frac(time_bgn));
 		return rv;
 	}
-	private static final    byte[] Bry__redirect = Bry_.new_a7("redirect");
+	private static final byte[] Bry__redirect = Bry_.new_a7("redirect");
 
 	public void Add(byte[] full_db, Wdata_doc page) {	// TEST:
 		synchronized (thread_lock) {	// LOCK:app-level
@@ -149,7 +166,7 @@ class Wbase_db_log_itm {
 	public Wbase_db_log_itm(byte[] ttl) {
 		this.ttl = ttl;
 	}
-	public byte[] Ttl() {return ttl;} private final    byte[] ttl;
+	public byte[] Ttl() {return ttl;} private final byte[] ttl;
 	public int Count() {return count;} private int count;
 	public int Elapsed() {return elapsed;} private int elapsed;
 	public void Update(int elapsed_diff) {

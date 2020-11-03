@@ -29,6 +29,7 @@ import gplx.Tfds;
 import gplx.core.primitives.Gfo_number_parser;
 import gplx.core.primitives.Int_obj_ref;
 import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_parser;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
@@ -62,6 +63,7 @@ public class Wdata_wiki_mgr_fxt {
 	private Xoae_app app; private Xowe_wiki wiki; private Wdata_doc_bldr wdoc_bldr;
 	private final Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();
 	private final Bry_bfr tmp_time_bfr = Bry_bfr_.New();
+	private final Json_parser jsonParser = new Json_parser();
 	public Xowe_wiki Wiki() {return parser_fxt.Wiki();}
 	public Wdata_wiki_mgr_fxt Init() {return Init(new Xop_fxt(), true);}
 	public Wdata_wiki_mgr_fxt Init(Xop_fxt parser_fxt, boolean reset) {
@@ -224,7 +226,7 @@ public class Wdata_wiki_mgr_fxt {
 		byte[] raw_bry = Bry_.new_a7(raw_str);
 		raw_bry = Bry_.new_u8(Json_doc.Make_str_by_apos(raw_str));
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		Wdata_wiki_mgr.Write_json_as_html(wdata_mgr.Jdoc_parser(), bfr, raw_bry);
+		Wdata_wiki_mgr.Write_json_as_html(jsonParser, bfr, raw_bry);
 		Tfds.Eq(expd, bfr.To_str_and_rls());
 	}
 	public static String New_json(String entity_id, String grp_key, String[] grp_vals) {
