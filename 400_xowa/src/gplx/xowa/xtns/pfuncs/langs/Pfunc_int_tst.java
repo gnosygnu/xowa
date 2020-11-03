@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,68 +13,80 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+package gplx.xowa.xtns.pfuncs.langs;
+
+import gplx.Bry_;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.msgs.Xol_msg_itm;
+import org.junit.Before;
+import org.junit.Test;
+
 public class Pfunc_int_tst {
 	@Before public void init() {fxt.Reset();} private Pf_msg_mgr_fxt fxt = new Pf_msg_mgr_fxt();
-	@Test  public void Basic()					{fxt.Test_parse_en("{{int:january}}"								, "January");}
-	@Test  public void Upper()					{fxt.Test_parse_en("{{int:JANUARY}}"								, "January");}
-	@Test  public void Unknown()				{fxt.Test_parse_en("{{int:unknown_msg}}"							, "<unknown_msg>");}
-	@Test  public void Fmt()					{fxt.Test_parse_en("{{int:pfunc_expr_unrecognised_word|1a}}"		, "Expression error: Unrecognised word \"1a\"");}
-	@Test  public void Tmpl_txt() {
+	@Test public void Basic()      {fxt.Test_parse_en("{{int:january}}"                             , "January");}
+	@Test public void Upper()      {fxt.Test_parse_en("{{int:JANUARY}}"                             , "January");}
+	@Test public void Unknown()    {fxt.Test_parse_en("{{int:unknown_msg}}"                         , "<unknown_msg>");}
+	@Test public void Fmt()        {fxt.Test_parse_en("{{int:pfunc_expr_unrecognised_word|1a}}"     , "Expression error: Unrecognised word \"1a\"");}
+	@Test public void Tmpl_txt() {
 		fxt.Init_msg_gfs("tst_msg", "{{#expr:1}}", false, true);
 		fxt.Test_parse_en("{{int:tst_msg}}", "1");
 	}
-	@Test  public void Tmpl_html_entity() {	// PURPOSE: check that &nbsp; is swapped out correctly for (194,160); PAGE:fr.s:Main_Page DATE:2014-08-17
+	@Test public void Tmpl_html_entity() {	// PURPOSE: check that &nbsp; is swapped out correctly for (194,160); PAGE:fr.s:Main_Page DATE:2014-08-17
 		fxt.Init_msg_gfs("tst_msg", "A&nbsp;B", false, true);
 		fxt.Test_parse_en("{{int:tst_msg}}", "A B");	// NOTE: &nbsp;
 	}
-	@Test  public void Lang_current_defaults_to_en() {	// PURPOSE: specifying same language as current returns same; ie: int:january/en -> int:january
+	@Test public void Lang_current_defaults_to_en() {	// PURPOSE: specifying same language as current returns same; ie: int:january/en -> int:january
 		fxt.Test_parse_en("{{int:january/en}}", "January");
 	}
-	@Test  public void Lang_specified_by_page() {
+	@Test public void Lang_specified_by_page() {
 		fxt.Test_parse_lang("fr", "{{int:Lang}}", "fr");	// NOTE: "Lang" msg is added by Xol_lang_itm; message_mgr.Itm_by_key_or_new(Bry_.new_a7("Lang")).Atrs_set(key_bry, false, false);
 	}
-	@Test  public void Lang_missing_msg_return_en() {	// PURPOSE: if key does not exist in non-english language, use English; EX: la.w:Fasciculus:HannibalFrescoCapitolinec1510.jpg; DATE:2013-09-10
+	@Test public void Lang_missing_msg_return_en() {	// PURPOSE: if key does not exist in non-english language, use English; EX: la.w:Fasciculus:HannibalFrescoCapitolinec1510.jpg; DATE:2013-09-10
 		fxt.Init_msg_gfs("en_only_key", "en_only_val", false, false);
 		fxt.Test_parse_lang("fr", "{{int:en_only_key}}", "en_only_val");
 	}
-	@Test  public void Err_fmt_failed() {	// PURPOSE: if no args passed to msg, return "$1", not "~{0}"
+	@Test public void Err_fmt_failed() {	// PURPOSE: if no args passed to msg, return "$1", not "~{0}"
 		fxt.Init_msg_gfs("tst_msg", "a~{0}b", true, false);
 		fxt.Test_parse_en("{{int:tst_msg}}"							, "a$1b");
 	}
-	@Test  public void Mediawiki_overrides_gfs() {
+	@Test public void Mediawiki_overrides_gfs() {
 		fxt.Init_msg_gfs("mw_overrides", "gfs", false, false);
 		fxt.Init_msg_db("mw_overrides", "mw");
 		fxt.Test_parse_en("{{int:mw_overrides}}", "mw");
 	}
-	@Test  public void Convert_php() {
+	@Test public void Convert_php() {
 		fxt.Init_msg_db("convert_php", "a\\\\b\\$c$1e");
 		fxt.Test_parse_en("{{int:convert_php|d}}", "a\\b$cde");
 	}
-	@Test  public void Convert_php_tilde() {	// PURPOSE: tildes should be escaped, else will fail inside ByteAryBfrFmtr; DATE:2013-11-11
+	@Test public void Convert_php_tilde() {	// PURPOSE: tildes should be escaped, else will fail inside ByteAryBfrFmtr; DATE:2013-11-11
 		fxt.Init_msg_db("convert_php_tilde", "$1~u");
 		fxt.Test_parse_en("{{int:convert_php_tilde|a}}", "a~u");
 	}
-	@Test  public void Unknown_val_returns_en() {	// PURPOSE: if no "january" in "fr.gfs" and no "january/fr" in mw, use january in "en.gfs"; EX:none
+	@Test public void Unknown_val_returns_en() {	// PURPOSE: if no "january" in "fr.gfs" and no "january/fr" in mw, use january in "en.gfs"; EX:none
 		fxt.Test_parse_lang("fr", "{{int:january/fr}}", "January");
 	}
-	@Test  public void Unknown_lang_returns_en() {	// PURPOSE: unknown lang default to english; EX:none; DATE:2014-05-09
+	@Test public void Unknown_lang_returns_en() {	// PURPOSE: unknown lang default to english; EX:none; DATE:2014-05-09
 		fxt.Test_parse_en("{{int:january/unknown}}", "January");
 	}
-	@Test  public void Transclude_mw_do_not_strip_lang() {	// PURPOSE: if /lang matches wiki.lang, do not strip it, else stack overflow; EX:pl.d:Wikislownik:Bar/Archiwum_6; newarticletext/pl; DATE:2014-05-13
+	@Test public void Transclude_mw_do_not_strip_lang() {	// PURPOSE: if /lang matches wiki.lang, do not strip it, else stack overflow; EX:pl.d:Wikislownik:Bar/Archiwum_6; newarticletext/pl; DATE:2014-05-13
 		fxt.Init_msg_db("january/en", "January_en");
 		fxt.Test_parse_en("{{MediaWiki:january/en}}", "January_en");
 	}
-	@Test  public void Transclude_gfs() {	// PURPOSE: transclusion of {{MediaWiki}} pages should call {{int}} instead; EX:zh.w:Main_Page; DATE:2014-05-09
+	@Test public void Transclude_gfs() {	// PURPOSE: transclusion of {{MediaWiki}} pages should call {{int}} instead; EX:zh.w:Main_Page; DATE:2014-05-09
 		fxt.Test_parse_en("{{MediaWiki:january/en}}", "January");	// NOTE: no page exists called "MediaWiki:january/en", but returns "{{int:january/en}}" value
 	}
-	@Test  public void Create_msg_in_wiki_not_lang() {	// PURPOSE: if two wikis share same language and msg is missing from one, do not mark it missing in the other; EX: home/wiki/Main_Page and en.w:Main_Page; DATE:2014-05-13
+	@Test public void Create_msg_in_wiki_not_lang() {	// PURPOSE: if two wikis share same language and msg is missing from one, do not mark it missing in the other; EX: home/wiki/Main_Page and en.w:Main_Page; DATE:2014-05-13
 		Xowe_wiki enwiktionary = fxt.Make_wiki("en.wiktionary.org");
 		fxt.Init_msg_db(enwiktionary, "wiki_only_msg", "enwiktionary_msg");
 		fxt.Init_msg_gfs("wiki_only_msg", "en_gfs_msg", false, false);
 		fxt.Test_parse_en("{{int:wiki_only_msg}}", "en_gfs_msg");
 		fxt.Test_parse_wiki(enwiktionary, "{{int:wiki_only_msg}}", "enwiktionary_msg");
+	}
+	@Test public void KeyHasSpace() {// 2020-11-02|ISSUE#:817|handle keys with spaces
+		fxt.Init_msg_gfs("tst_msg", "{{#expr:1}}", false, true);
+		fxt.Test_parse_en("{{int:tst msg}}", "1");
 	}
 }
 class Pf_msg_mgr_fxt {
@@ -109,4 +121,3 @@ class Pf_msg_mgr_fxt {
 		fxt.Page().Lang_(en_lang);	// NOTE: must reset back to en_lang, else rest of tests will look up under fr
 	}
 }
-

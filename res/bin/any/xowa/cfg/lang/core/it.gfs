@@ -4869,6 +4869,7 @@ apihelp-wbsetdescription-param-language|Lingua della descrizione
 apihelp-wbsetdescription-param-value|Il valore da impostare per la descrizione
 apihelp-wbsetlabel-param-language|Lingua dell'etichetta
 apihelp-wbsetlabel-param-value|Il valore dell'etichetta
+history_short|Cronologia
 ']:>
 ).lang
 ;
