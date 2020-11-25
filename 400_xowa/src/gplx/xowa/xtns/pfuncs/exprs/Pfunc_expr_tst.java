@@ -115,4 +115,10 @@ public class Pfunc_expr_tst {
 	@Test  public void Num_precision() {// PURPOSE: number should be set to precision of 14; PAGE:de.wikipedia.org/wiki/Nationalpark_Mu_Ko_Ang_Thong ISSUE#:683 DATE:2020-03-24
 		fxt.Test__parse__tmpl_to_html("{{#expr:15.064329981401556}}", "15.064329981402"); // fails if 15.06432998140155
 	}
+	@Test  public void Const_e_suffix_should_fail() { // 2020-11-25|ISSUE#:819|Do not interpret 'e0' as 'e'; EX: e0 x> 2.71828
+		fxt.Test_parse_page_tmpl_str("{{#expr:e0}}", "<strong class=\"error\">Expression error: Unexpected number</strong>");
+	}
+	@Test  public void Const_pi_suffix_should_fail() { // 2020-11-25|ISSUE#:819|Do not interpret 'pi0' as 'pi'; EX: e0 x> 3.141529
+		fxt.Test_parse_page_tmpl_str("{{#expr:pi0}}", "<strong class=\"error\">Expression error: Unexpected number</strong>");
+	}
 }

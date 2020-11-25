@@ -113,6 +113,7 @@ public class Pfunc_expr_shunter {
 						if (cur_prc.Func_is_const()) {		// func is "pi" or "e"; DATE:2014-03-01
 							if (mode_expr) {				// number expected; just call Calc (which will place value on stack)
 								cur_prc.Calc(ctx, this, val_stack);
+								mode_expr = false;          // 2020-11-25|ISSUE#:819|Set mode_expr to false which forces next term to be operator not number. EX: `pi0` -> fails
 								break;
 							}
 							else							// operator expected; fail b/c pi / e is not an operator;
@@ -121,6 +122,9 @@ public class Pfunc_expr_shunter {
 						if (mode_expr) {	// NOTE: all the GetAlts have higher precedence; "break;" need to skip evaluation below else will fail for --1
 							Func_tkn alt_prc = cur_prc.GetAlt();
 							prc_stack.Push(alt_prc);
+							if (alt_prc == Func_tkn_e_const.Instance) {
+								mode_expr = false;          // 2020-11-25|ISSUE#:819|Set mode_expr to false which forces next term to be operator not number. EX: `e0` -> fails
+							}
 							break;
 						}
 						prv_prc = prc_stack.Get_at_last();
