@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,15 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.core.envs.*;
+package gplx.xowa.htmls.core.htmls.tidy;
+
+import gplx.core.envs.Op_sys;
+import org.junit.Before;
+import org.junit.Test;
+import org.w3c.tidy.Tidy;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import org.w3c.tidy.Tidy;
-import org.junit.*; 
+
 public class Xoh_tidy_wkr_jtidy_tst {
-	@Before public void init() {fxt.Clear();} private Jtidy_fxt fxt = new Jtidy_fxt();
-	@Test   public void Image_full() {
+	private Jtidy_fxt fxt = new Jtidy_fxt();
+	@Before public void init() {fxt.Clear();}
+	@Test public void Image_full() {
 		String nl = Op_sys.Cur().Tid_is_wnt() ? "\r\n" : "\n";	// NOTE: JTidy uses different line-endings based on OS; DATE:2015-05-11
 		fxt.Test_tidy("<a href='http://𐎍𐎁_𐎜'>𐎍𐎁_𐎜</a>", "<a href='http://%F0%90%8E%8D%F0%90%8E%81_%F0%90%8E%9C'>&eth;&#144;&#142;&#141;&eth;&#144;&#142;&#129;_&eth;&#144;&#142;&#156;</a>" + nl);
 	}

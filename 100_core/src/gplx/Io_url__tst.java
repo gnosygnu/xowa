@@ -24,7 +24,9 @@ public class Io_url__tst {
 class Io_url__fxt {
 	public void Clear() {Io_mgr.Instance.InitEngine_mem();}
 	public void Test__New__http_or_null(boolean os_is_wnt, String raw, String expd) {
+		int curTid = Op_sys.Cur().Tid();
 		Op_sys.Cur_(os_is_wnt ? Op_sys.Tid_wnt : Op_sys.Tid_lnx);
 		Gftest.Eq__obj_or_null(expd, Io_url_.New__http_or_null(raw));
+		Op_sys.Cur_(curTid);
 	}
 }
