@@ -27,7 +27,9 @@ import org.junit.Test;
 public class Scrib_lib_wikibase_srl_visitor_tst {
 	private final Scrib_lib_wikibase_srl_visitor_fxt fxt = new Scrib_lib_wikibase_srl_visitor_fxt();
 	@Test public void Geo_null_precision() {
-		fxt.TestGeoPrecision(0, "null"); // 2020-09-03|ISSUE#:792|null precision should default to 0 not 1;PAGE:wd:Q168751
+		// 2020-09-03|ISSUE#:792|null precision should default to 0 not 1;PAGE:wd:Q168751
+		// 2020-12-14|ISSUE#:792|NOTE: current test is contrary to commit?
+		fxt.TestGeoPrecision(1, "null");
 	}
 	@Test public void CalcPrecision() {
 		// 2020-09-25|ISSUE#:792|use longitude to determine precision (contributed by desb42@)
@@ -41,7 +43,10 @@ public class Scrib_lib_wikibase_srl_visitor_tst {
 		fxt.TestCalcPrecision("1.0E-8", "null", "-76.62027777777777");
 
 		// precision is null -> precision is 1
+		// 2020-12-14|ISSUE#:792|NOTE: current test is contrary to commit?
 		fxt.TestCalcPrecision("1.0E0", "null", "12");
+
+		// TODO: {{wikidata|property|raw|page=Duke University|coord}} still fails as `36/0/4.00000/N/78/56/20.00000/W`
 	}
 }
 class Scrib_lib_wikibase_srl_visitor_fxt {
