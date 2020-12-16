@@ -185,25 +185,6 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	, Browser_tid_mozilla 	= SWT.MOZILLA
 	, Browser_tid_webkit	= SWT.WEBKIT
 	;
-
-	private static final String URL_PREFIX_ABOUT = "about:";
-	private static final String URL_PREFIX_BLANK = "blank";
-	public static String NormalizeSwtUrl(String url) {
-		String rv = url;
-
-		// 2020-09-19|ISSUE#:799|strip "about:" from url due to SWT 4.16
-		rv = String_.Has_at_bgn(rv, URL_PREFIX_ABOUT)
-			? String_.Mid(rv, URL_PREFIX_ABOUT.length())
-			: rv;
-
-		// 2015-06-09|webkit prefixes "about:blank" to anchors; causes TOC to fail when clicking on links; EX:about:blank#TOC1
-		// 2020-09-22|removed webkit check due to SWT 4.16; `html_box.Browser_tid() == Swt_html.Browser_tid_webkit`
-		// still strip "blank"; note that SWT 4.16 changes anchors from "file:///#anchor" to "en.w/wiki/page/#anchor"
-		rv = String_.Has_at_bgn(rv, URL_PREFIX_BLANK)
-			? String_.Mid(rv, URL_PREFIX_BLANK.length())
-			: rv;
-		return rv;
-	}
 }
 class Swt_core_cmds_html extends Swt_core__basic {
 	public Swt_core_cmds_html(Swt_html html_box, Control control) {super(control);}
@@ -253,7 +234,7 @@ class Swt_html_lnr_status implements StatusTextListener {
 		if (html_box.Kit().Kit_mode__term()) return;	// shutting down raises status changed events; ignore, else SWT exception thrown; DATE:2014-05-29 
 
 		// 2020-09-22|ISSUE#:799|normalize URL due to SWT 4.16
-		String ev_text = Swt_html.NormalizeSwtUrl(ev.text);
+		String ev_text = Swt_html_utl.NormalizeSwtUrl(ev.text);
 
 		String load_by_url_path = html_box.Load_by_url_path();
 		if (load_by_url_path != null) ev_text = String_.Replace(ev_text, load_by_url_path, "");	// remove "C:/xowa/tab_1.html"
@@ -276,7 +257,7 @@ class Swt_html_lnr_location implements LocationListener {
 	@Override public void changing(LocationEvent arg) 	{Pub_evt(arg, Gfui_html.Evt_location_changing);}
 	private void Pub_evt(LocationEvent arg, String evt) {
 		// 2020-09-22|ISSUE#:799|normalize URL due to SWT 4.16
-		String location = Swt_html.NormalizeSwtUrl(arg.location);
+		String location = Swt_html_utl.NormalizeSwtUrl(arg.location);
 
 		// location_changing fires once when page is loaded -> ignore
 		if (String_.Eq(location, String_.Empty)) {
@@ -344,7 +325,7 @@ class Swt_html_lnr_wheel implements MouseWheelListener {
 //	public Swt_open_window_listener(Swt_html html_box) {this.html_box = html_box;}
 //	@Override public void open(WindowEvent arg0) {
 //		Tfds.Write();
-//	}	
+//	}
 //}
 /*
 NOTE_1:browser scrollbar and click
@@ -362,5 +343,5 @@ so, assume:
 
 two issues still occur with the workaround
 1) even if the scrollbar is not present, any click on the right-hand edge of the screen will be ignored
-2) click -> hold -> move mouse over to left -> release; the mouse up should be absorbed, but it is not due to position of release   
+2) click -> hold -> move mouse over to left -> release; the mouse up should be absorbed, but it is not due to position of release
 */

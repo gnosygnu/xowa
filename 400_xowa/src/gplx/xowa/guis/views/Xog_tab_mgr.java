@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2020 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,36 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.draws.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.tabs.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.apps.apis.xowa.gui.browsers.*; import gplx.xowa.specials.*;
-import gplx.xowa.apps.urls.*;
+package gplx.xowa.guis.views;
+
+import gplx.Bool_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_itm;
+import gplx.Gfo_evt_mgr;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.gfui.controls.gxws.Gxw_html_load_tid_;
+import gplx.gfui.controls.standards.Gfui_tab_itm;
+import gplx.gfui.controls.standards.Gfui_tab_itm_data;
+import gplx.gfui.controls.standards.Gfui_tab_mgr;
+import gplx.gfui.controls.tabs.TabBox_;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.gfui.kits.swts.Swt_html_utl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.hrefs.Xoh_href_;
+import gplx.xowa.specials.Xow_special_meta_;
+
 public class Xog_tab_mgr implements Gfo_evt_itm {
 	private Ordered_hash tab_regy = Ordered_hash_.New(); private int tab_uid = 0;
 	private boolean btns__hide_if_one; private int btns__height;
@@ -195,7 +221,16 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	public void Tabs_new_link(boolean focus, String link) {	// handle empty link
 		if (String_.Len_eq_0(link)) {
 			if (this.Active_tab_is_null()) return;
-			link = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode_str(active_tab.Html_itm().Html_selected_get_active_or_selection());	// NOTE: must decode else url-encoded special pages don't work; EX:home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.html.css; DATE:2017-01-02
+			link = active_tab.Html_itm().Html_selected_get_active_or_selection();
+			// 2020-12-16|ISSUE#:823|Open in new tab creates links like `about:/wiki/PAGE_NAME` or `about:/site/WIKI_NAME/wiki/PAGE_NAME`
+			link = Swt_html_utl.NormalizeSwtUrl(link);
+			if (link.startsWith(Xoh_href_.Str__site)) {
+				link = link.substring(Xoh_href_.Str__site.length());
+			}
+			else if (link.startsWith(Xoh_href_.Str__wiki)) {
+				link = active_tab.Wiki().Domain_str() + link;
+			}
+			link = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode_str(link);	// NOTE: must decode else url-encoded special pages don't work; EX:home/wiki/Special:XowaCfg%3Fgrp%3Dxowa.html.css; DATE:2017-01-02
 		}
 		if (String_.Len_eq_0(link)) {win.App().Usr_dlg().Prog_many("", "", "no link or text selected"); return;}
 		Tabs_new_link(link, focus);
