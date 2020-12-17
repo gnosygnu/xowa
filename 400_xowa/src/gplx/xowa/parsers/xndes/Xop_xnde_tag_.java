@@ -21,8 +21,8 @@ import gplx.xowa.langs.Xol_lang_stub_;
 public class Xop_xnde_tag_ {
 	public static final int Bgn_mode__normal = 0, Bgn_mode__inline = 1;
 	public static final int End_mode__normal = 0, End_mode__inline = 1, End_mode__escape = 2; // escape is for hr which does not support </hr>
-	public static final    byte[] Bry__onlyinclude = Bry_.new_a7("onlyinclude");
-	public static final    byte[] Bry__end_tag_bgn = Bry_.new_a7("</");
+	public static final byte[] Bry__onlyinclude = Bry_.new_a7("<onlyinclude"); // 2020-12-17|ISSUE#:825|Match for `<` + `onlyinclude` to fix false match; NOTE: is only used in one place
+	public static final byte[] Bry__end_tag_bgn = Bry_.new_a7("</");
 	public static final int
   Tid__null = -1
 , Tid__b = 0
@@ -158,13 +158,13 @@ public class Xop_xnde_tag_ {
 , Tid__figcaption = 130
 	;
 	public static final int Tid__len = 131;
-	public static final    Xop_xnde_tag[] Ary = new Xop_xnde_tag[Tid__len];
+	public static final Xop_xnde_tag[] Ary = new Xop_xnde_tag[Tid__len];
 	private static Xop_xnde_tag New(int id, String name) {
 		Xop_xnde_tag rv = new Xop_xnde_tag(id, name);
 		Ary[id] = rv;
 		return rv;
 	}
-	public static final    Xop_xnde_tag
+	public static final Xop_xnde_tag
   Tag__b = New(Tid__b, "b").No_inline_()
 , Tag__strong = New(Tid__strong, "strong").No_inline_()
 , Tag__i = New(Tid__i, "i").No_inline_()
