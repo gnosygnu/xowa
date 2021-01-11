@@ -77,11 +77,12 @@ if (!window.xowa) {
     script.setAttribute('src', file);
     document.getElementsByTagName('head')[0].appendChild(script);
   };
-
+  
   xowa.js.jquery.init_callback = function() {
     jQuery.cookie = xowa.cookie;
     jQuery.ready(); //fire the ready event
   };
+  
   xowa.js.jquery.init = function(document) {
     if (xowa.js.jquery.init_done) return;
     xowa.js.load_lib(xowa.root_dir + 'bin/any/xowa/html/res/lib/jquery/jquery-1.11.3.min.js', xowa.js.jquery.init_callback);
@@ -570,6 +571,43 @@ if (!window.xowa) {
     sel.removeAllRanges();
     sel.addRange(rng);
   }
+
+  // 2021-01-11|ISSUE#:829|Fix SWT not encoding non-ASCII characters in image name
+  xowa.js.doc.fixSwtImgEncoding = function() {
+    // only run for GUI mode
+    if (!xowa_global_values.mode_is_gui) return;
+    
+    // encodes each character in a string in hex notation (%0F)
+    function urlEncode(input) {
+      var output = [];
+      for (var n = 0; n < input.length; n++) {
+        var hex = Number(input.charCodeAt(n)).toString(16);
+        output.push('%' + hex);
+      }
+      return output.join('');
+    }
+
+    // get all images
+    var imgs = document.images;
+    for (var i = 0; i < imgs.length; i++) {
+      // get img src
+      var img = imgs[i];
+      var imgSrc = img.src;
+      
+      // encode each char in img.src using hex-notation; note that this is necessary for encoding bad SWT encodings like such as in `File:Bevölkerungspyramide_Georgien_2016.png`
+      // * real chr: `ö`
+      // * fail SWT: `Ã¶`
+      // * pass hex: `%c3%b6`
+      var encodedSrc = urlEncode(imgSrc);
+      
+      // now decode hex-notation back to regular chars; the JS function will properly decode `%c3%b6` as `ö`
+      var decodedSrc = decodeURIComponent(encodedSrc);
+      if (imgSrc != decodedSrc) {
+        img.src = decodedSrc;
+      }
+    }
+  }
+
   window.navigate_to = function(href) { // XOWA: expose publicly for alertify
     window.location = href;
   };

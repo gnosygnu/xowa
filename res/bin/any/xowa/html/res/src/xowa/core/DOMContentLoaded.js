@@ -68,6 +68,9 @@ function init () {
     if (needReference) {
       xowa.js.load_lib(xowa.root_dir + 'bin/any/xowa/html/res/src/gadgets/reference-tooltips/jquery.reference-tooltips.js', initReferenceTooltips);
     }
+    
+    // 2021-01-11|ISSUE#:829|Fix SWT not encoding non-ASCII characters in image name
+    xowa.js.doc.fixSwtImgEncoding();
 }
 init();
 }, false);
