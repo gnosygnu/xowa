@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -269,6 +269,12 @@ class Swt_html_lnr_location implements LocationListener {
 			&& 	String_.Has_at_bgn(location, "file:")
 			&& 	String_.Has_at_end(location, ".html")
 			) {
+			return;
+		}
+
+		if (String_.Has_at_bgn(location, "javascript:")) {
+			html_box.Html_js_eval_script(location);
+			arg.doit = false;
 			return;
 		}
 
