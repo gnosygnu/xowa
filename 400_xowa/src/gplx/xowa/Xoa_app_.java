@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -40,8 +40,8 @@ public class Xoa_app_ {
 		}
 	}
 	public static final String  Name            = "xowa";
-	public static final int     Version_id      = 559;
-	public static final String  Version         = "4.6.14.2012";
+	public static final int     Version_id      = 560;
+	public static final String  Version         = "4.6.15.2101";
 	public static final String  Build_date_fmt  = "yyyy-MM-dd HH:mm:ss";
 	public static String        Build_date      = "2012-12-30 00:00:00";
 	public static String        User_agent      = "";
