@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-class Pft_fmt_itm_hijiri {
+package gplx.xowa.xtns.pfuncs.times;
+
+import gplx.Bry_;
+import gplx.DateAdp;
+import gplx.List_adp_;
+import gplx.xowa.Xowe_wiki;
+
+class Pft_fmt_itm_hijri {
 	public static int[] Calc_date(DateAdp date) {
 		int[] rv = new int[3];	// MEM:cache
 		Calc_date(rv, date.Year(), date.Month(), date.Day());
@@ -58,10 +64,10 @@ class Pft_fmt_itm_hijiri {
 		return wiki.Msg_mgr().Val_by_key_obj(msg_key);
 	}
 	private static final    byte[][] Month_names = new byte[][] 
-	{ Bry_.new_a7("hijiri-calendar-m1"), Bry_.new_a7("hijiri-calendar-m2"), Bry_.new_a7("hijiri-calendar-m3")
-	, Bry_.new_a7("hijiri-calendar-m4"), Bry_.new_a7("hijiri-calendar-m5"), Bry_.new_a7("hijiri-calendar-m6")
-	, Bry_.new_a7("hijiri-calendar-m7"), Bry_.new_a7("hijiri-calendar-m8"), Bry_.new_a7("hijiri-calendar-m9")
-	, Bry_.new_a7("hijiri-calendar-m10"), Bry_.new_a7("hijiri-calendar-m11"), Bry_.new_a7("hijiri-calendar-m12")
+	{ Bry_.new_a7("hijri-calendar-m1"), Bry_.new_a7("hijri-calendar-m2"), Bry_.new_a7("hijri-calendar-m3")
+	, Bry_.new_a7("hijri-calendar-m4"), Bry_.new_a7("hijri-calendar-m5"), Bry_.new_a7("hijri-calendar-m6")
+	, Bry_.new_a7("hijri-calendar-m7"), Bry_.new_a7("hijri-calendar-m8"), Bry_.new_a7("hijri-calendar-m9")
+	, Bry_.new_a7("hijri-calendar-m10"), Bry_.new_a7("hijri-calendar-m11"), Bry_.new_a7("hijri-calendar-m12")
 	};
 	public static final    int
 	  Rslt__year			= 0

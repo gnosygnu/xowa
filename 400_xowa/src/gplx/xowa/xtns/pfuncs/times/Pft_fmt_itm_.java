@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.btries.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.parsers.*;
+package gplx.xowa.xtns.pfuncs.times;
+
+import gplx.Bool_;
+import gplx.Byte_;
+import gplx.Byte_ascii;
+import gplx.DateAdp_;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.String_;
+import gplx.core.btries.Btrie_fast_mgr;
+import gplx.core.btries.Btrie_rv;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.parsers.Xop_ctx;
+
 public class Pft_fmt_itm_ {
 	public static final int
 	  Tid_seg_int						=  1
@@ -48,10 +58,10 @@ public class Pft_fmt_itm_ {
 	, Tid_iranian_month_idx				= 27
 	, Tid_iranian_day_idx				= 28
 	, Tid_iranian_month_name			= 29
-	, Tid_hijiri_year_idx				= 30
-	, Tid_hijiri_month_idx				= 31
-	, Tid_hijiri_day_idx				= 32
-	, Tid_hijiri_month_name				= 33
+	, Tid_hijri_year_idx				= 30
+	, Tid_hijri_month_idx				= 31
+	, Tid_hijri_day_idx                 = 32
+	, Tid_hijri_month_name				= 33
 	, Tid_timezone_id_full              = 35
 	, Tid_timezone_id_abrv              = 36
 	, Tid_timezone_offset_4             = 37
@@ -107,10 +117,10 @@ public class Pft_fmt_itm_ {
 	, Iranian_month_idx			= new Pft_fmt_itm_iranian_month_idx()
 	, Iranian_day_idx			= new Pft_fmt_itm_iranian_day_idx()
 	, Iranian_month_name		= new Pft_fmt_itm_iranian_month_name()
-	, Hijiri_year_idx			= new Pft_fmt_itm_hijiri_year_idx()
-	, Hijiri_month_idx			= new Pft_fmt_itm_hijiri_month_idx()
-	, Hijiri_day_idx			= new Pft_fmt_itm_hijiri_day_idx()
-	, Hijiri_month_name			= new Pft_fmt_itm_hijiri_month_name()
+	, hijri_year_idx			= new Pft_fmt_itm_hijri_year_idx()
+	, hijri_month_idx			= new Pft_fmt_itm_hijri_month_idx()
+	, hijri_day_idx             = new Pft_fmt_itm_hijri_day_idx()
+	, hijri_month_name			= new Pft_fmt_itm_hijri_month_name()
 	, Timezone_id_full          = new Pft_fmt_itm_timezone_id(Bool_.N)
 	, Timezone_id_abrv          = new Pft_fmt_itm_timezone_id(Bool_.Y)
 	, Timezone_offset_4         = new Pft_fmt_itm_timezone_offset_4(Bool_.N)
@@ -125,7 +135,7 @@ public class Pft_fmt_itm_ {
 	.Add(Byte_ascii.Ltr_m		, Pft_fmt_itm_.Month_int_len2)			// 01
 	.Add(Byte_ascii.Ltr_M		, Pft_fmt_itm_.Month_abrv)				// Jan
 	.Add(Byte_ascii.Ltr_F		, Pft_fmt_itm_.Month_name)				// January
-	.Add("xg"					, Pft_fmt_itm_.Month_gen)				// January
+	.Add("xg"                   , Pft_fmt_itm_.Month_gen)				// January
 	.Add(Byte_ascii.Ltr_W		, Pft_fmt_itm_.WeekOfYear_int_len2)		// 01
 	.Add(Byte_ascii.Ltr_j		, Pft_fmt_itm_.Day_int)					// 1
 	.Add(Byte_ascii.Ltr_d		, Pft_fmt_itm_.Day_int_len2)			// 01
@@ -167,10 +177,10 @@ public class Pft_fmt_itm_ {
 	.Add("xiF"					, Pft_fmt_itm_.Iranian_month_name)
 	.Add("xin"					, Pft_fmt_itm_.Iranian_month_idx)
 	.Add("xiY"					, Pft_fmt_itm_.Iranian_year_idx)
-	.Add("xmj"					, Pft_fmt_itm_.Hijiri_day_idx)
-	.Add("xmF"					, Pft_fmt_itm_.Hijiri_month_name)
-	.Add("xmn"					, Pft_fmt_itm_.Hijiri_month_idx)
-	.Add("xmY"					, Pft_fmt_itm_.Hijiri_year_idx)
+	.Add("xmj"					, Pft_fmt_itm_.hijri_day_idx)
+	.Add("xmF"					, Pft_fmt_itm_.hijri_month_name)
+	.Add("xmn"					, Pft_fmt_itm_.hijri_month_idx)
+	.Add("xmY"					, Pft_fmt_itm_.hijri_year_idx)
 	// TODO_OLD: space; "
 	;
 
