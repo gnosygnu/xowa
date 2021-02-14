@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -75,6 +75,10 @@ public class Decimal_adp_ {
 	        if (raw.contains("e")) {
 	        	raw = raw.replace("e", "E");
 	        }
+	        // 2021-02-13|ISSUE#:838|Parse '.' as '0.'; PAGE:en.w:2019_FIVB_Volleyball_Women%27s_Challenger_Cup#Pool_A
+			if (raw.startsWith(".")) {
+				raw = "0" + raw;
+			}
 	        BigDecimal bd = (BigDecimal)nf.parse(raw);
 			return new Decimal_adp(bd);
 		} catch (ParseException e) {
@@ -84,4 +88,4 @@ public class Decimal_adp_ {
 	public static Decimal_adp pow_10_(int v) {return new Decimal_adp(new BigDecimal(1).scaleByPowerOfTen(v));}
 	public static final MathContext RoundDownContext = new MathContext(0, RoundingMode.DOWN);
 	public static final MathContext Gplx_rounding_context = new MathContext(14, RoundingMode.HALF_UP);	// changed from 28 to 14; DATE:2015-07-31
-	}
+}

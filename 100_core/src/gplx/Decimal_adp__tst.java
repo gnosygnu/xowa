@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -18,52 +18,55 @@ package gplx;
 import org.junit.*;
 
 public class Decimal_adp__tst {
-	private final    Decimal_adp__fxt fxt = new Decimal_adp__fxt();
-	@Test  public void divide_() {
+	private final Decimal_adp__fxt fxt = new Decimal_adp__fxt();
+	@Test public void divide_() {
 		fxt.Test_divide(1, 1000, "0.001");
 		fxt.Test_divide(1, 3, "0.33333333333333");	
 		fxt.Test_divide(1, 7, "0.14285714285714");	
 	}
-	@Test  public void base1000_() {
+	@Test public void base1000_() {
 		fxt.Test_base_1000(1000, "1");
 		fxt.Test_base_1000(1234, "1.234");
 		fxt.Test_base_1000(123, "0.123");
 	}
-	@Test  public void parts_() {
+	@Test public void parts_() {
 		fxt.Test_parts(1, 0, "1");
 		fxt.Test_parts(1, 2, "1.2");
 		fxt.Test_parts(1, 23, "1.23");
 		fxt.Test_parts(123, 4567, "123.4567");
 	}
-	@Test  public void parse() {
+	@Test public void parse() {
 		fxt.Test_parse("1", "1");
 		fxt.Test_parse("1.2", "1.2");
 		fxt.Test_parse("0.1", "0.1");
 		fxt.Test_parse("1.2E1", "12");
 		fxt.Test_parse("1.2e1", "12"); // 2020-08-27|ISSUE#:565|Parse 'e' as 'E'; PAGE:en.w:Huntington_Plaza
 	}
-	@Test  public void Truncate_decimal() {
+	@Test public void parse_dot() {
+		fxt.Test_parse(".", "0"); // 2021-02-13|ISSUE#:838|Parse '.' as '0.'; PAGE:en.w:2019_FIVB_Volleyball_Women%27s_Challenger_Cup#Pool_A
+	}
+	@Test public void Truncate_decimal() {
 		fxt.Test_truncate_decimal("1", "1");
 		fxt.Test_truncate_decimal("1.1", "1");
 		fxt.Test_truncate_decimal("1.9", "1");
 	}
-	@Test  public void Fraction1000() {
+	@Test public void Fraction1000() {
 		fxt.Test_frac_1000(1, 1000, 1);			// 0.001
 		fxt.Test_frac_1000(1, 3, 333);			// 0.33333333
 		fxt.Test_frac_1000(1234, 1000, 234);		// 1.234
 		fxt.Test_frac_1000(12345, 10000, 234);	// 1.2345
 	}
-	@Test  public void Lt() {
+	@Test public void Lt() {
 		fxt.Test_comp_lt(1,123, 2, true);
 		fxt.Test_comp_lt(1,99999999, 2, true);
 	}
-	@Test  public void To_str_fmt() {
+	@Test public void To_str_fmt() {
 		fxt.Test_to_str_fmt(1, 2, "0.0", "0.5");
 		fxt.Test_to_str_fmt(1, 3, "0.0", "0.3");
 		fxt.Test_to_str_fmt(10000, 7, "0,000.000", "1,428.571");
 		fxt.Test_to_str_fmt(1, 2, "00.00", "00.50");
 	}
-	@Test  public void Round() {
+	@Test public void Round() {
 		fxt.Test_round("123.456",  3, "123.456");
 		fxt.Test_round("123.456",  2, "123.46");
 		fxt.Test_round("123.456",  1, "123.5");
