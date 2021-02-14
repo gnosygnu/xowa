@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -79,8 +79,8 @@ public class Scrib_lib_wikibase_srl_visitor implements Wbase_claim_visitor {
 		Keyval[] rv = new Keyval[4];
 		rv[0] = Keyval_.new_(Wbase_claim_quantity_.Itm__amount.Key_str()			, itm.Amount_as_num().To_str());	// NOTE: must be num b/c Module code will directly do math calc on it; EX: "99" not "+99"; PAGE:eo.w:Mud�; DATE:2015-11-08
 		rv[1] = Keyval_.new_(Wbase_claim_quantity_.Itm__unit.Key_str()				, String_.new_u8(itm.Unit()));
-		rv[2] = Keyval_.new_(Wbase_claim_quantity_.Itm__upperbound.Key_str()		, itm.Ubound_as_num().To_str());
-		rv[3] = Keyval_.new_(Wbase_claim_quantity_.Itm__lowerbound.Key_str()		, itm.Lbound_as_num().To_str());
+		rv[2] = Keyval_.new_(Wbase_claim_quantity_.Itm__upperbound.Key_str()		, itm.Ubound_as_num() == null ? null : itm.Ubound_as_num().To_str());
+		rv[3] = Keyval_.new_(Wbase_claim_quantity_.Itm__lowerbound.Key_str()		, itm.Lbound_as_num() == null ? null : itm.Lbound_as_num().To_str());
 		return rv;
 	}
 	public void Visit_time(Wbase_claim_time itm) {

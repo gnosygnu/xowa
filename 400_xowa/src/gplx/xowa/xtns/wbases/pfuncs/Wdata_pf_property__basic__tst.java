@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -89,9 +89,11 @@ public class Wdata_pf_property__basic__tst {
 
 		fxt.Test_parse("{{#property:p1}}", "1,234±2");
 	}
-	@Test public void Quantity__plus_minus__n() {	// PURPOSE:do not output ± if lbound == val == ubound; PAGE:en.w:Tintinan DATE:2015-08-02
+	// 2021-02-14|ISSUE#:839|Only print value without ± if lo and hi are null; PAGE:en.w:2019_FIVB_Volleyball_Women%27s_Challenger_Cup#Pool_A
+	// TOMBSTONE:2015-08-02|do not output ± if lbound == val == ubound; PAGE:en.w:Tintinan
+	@Test public void Quantity__plus_minus__n() {
 		fxt.Init__docs__add(fxt.Wdoc("Q1")				
-			.Add_claims(fxt.Make_claim_quantity(1, "+1234", "1", "+1234", "+1234"))
+			.Add_claims(fxt.Make_claim_quantity(1, "+1234", "1", null, null))
 			.Add_sitelink("enwiki", "Test_page")
 			);
 
@@ -107,7 +109,7 @@ public class Wdata_pf_property__basic__tst {
 	}
 	@Test public void Quantity__long() {	// PURPOSE: must cast to long for large numbers; EX:{{#property:P1082}} PAGE:en.w:Earth; DATE:2015-08-02
 		fxt.Init__docs__add(fxt.Wdoc("Q1")				
-			.Add_claims(fxt.Make_claim_quantity(1, "+4321000000", "1", "4321000000", "4321000000"))
+			.Add_claims(fxt.Make_claim_quantity(1, "+4321000000", "1", null, null))
 			.Add_sitelink("enwiki", "Test_page")
 			);
 

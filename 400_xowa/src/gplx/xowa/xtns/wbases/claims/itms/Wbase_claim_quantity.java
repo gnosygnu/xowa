@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims.itms; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*;
-import gplx.xowa.xtns.wbases.claims.enums.*;
+package gplx.xowa.xtns.wbases.claims.itms;
+
+import gplx.Bry_;
+import gplx.Byte_ascii;
+import gplx.Decimal_adp;
+import gplx.Decimal_adp_;
+import gplx.Gfo_usr_dlg_;
+import gplx.String_;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_visitor;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
+
 public class Wbase_claim_quantity extends Wbase_claim_base {
 	public Wbase_claim_quantity(int pid, byte snak_tid, byte[] amount, byte[] unit, byte[] ubound, byte[] lbound) {super(pid, snak_tid);
 		this.amount = amount; this.unit = unit; this.ubound = ubound; this.lbound = lbound;
@@ -38,18 +48,12 @@ public class Wbase_claim_quantity extends Wbase_claim_base {
 	public Decimal_adp Ubound_as_num() {
 		if (ubound_as_num == null) {
 			ubound_as_num = To_decimal_or_null("upper", ubound);
-			if (ubound_as_num == null) {
-				ubound_as_num = amount_as_num;
-			}
 		}
 		return ubound_as_num;
 	}	private Decimal_adp ubound_as_num;
 	public Decimal_adp Lbound_as_num() {
 		if (lbound_as_num == null) {
 			lbound_as_num = To_decimal_or_null("lower", lbound);
-			if (lbound_as_num == null) {
-				lbound_as_num = amount_as_num;
-			}
 		}
 		return lbound_as_num;
 	}	private Decimal_adp lbound_as_num;

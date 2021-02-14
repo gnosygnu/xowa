@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -116,8 +116,9 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 		Decimal_adp lo = Decimal__parse_or(lo_bry, val);
 		Decimal_adp hi = Decimal__parse_or(hi_bry, val);
 
-		// fmt val
-		if (lo.Eq(hi) && hi.Eq(val))// lo, hi, val are same; print val only;
+		// 2021-02-14|ISSUE#:839|Only print value without ± if lo and hi are null; PAGE:en.w:2019_FIVB_Volleyball_Women%27s_Challenger_Cup#Pool_A;
+		// TOMBSTONE: if (lo.Eq(hi) && hi.Eq(val))
+		if (lo_bry == null && hi_bry == null)
 			bfr.Add(lang.Num_mgr().Format_num_by_decimal(val));			// amount; EX: 1,234
 		else {
 			Wdata_hwtr_msgs msgs = wdata_mgr.Hwtr_mgr().Msgs();
