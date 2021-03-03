@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,13 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.core.threads.*; import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.htmls.js.*;
-import gplx.xowa.guis.views.*;
-import gplx.xowa.parsers.*;
-import gplx.xowa.htmls.modules.popups.*;
+package gplx.xowa.htmls.js;
+
+import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_split_;
+import gplx.Byte_ascii;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.core.threads.Thread_adp_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.guis.views.Xog_html_itm;
+import gplx.xowa.htmls.modules.popups.Xow_popup_mgr;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.xtns.pfuncs.ifs.Pfunc_ifexist;
+
 public class Xoh_js_cbk implements Gfo_invk {
 	private Xoae_app app;
 	private Xog_html_itm html_itm;
@@ -125,9 +146,14 @@ public class Xoh_js_cbk implements Gfo_invk {
 	}		
 	private String Get_search_suggestions(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
-		byte[] search_str = Bry_.new_u8((String)m.ReadValAt(0));
+		String search_str = (String)m.ReadValAt(0);
+		// 2021-03-02|ISSUE#:841|Pressing backspace on empty search box will generate a null
+		if (search_str == null) {
+			return "";
+		}
+		byte[] search_bry = Bry_.new_u8(search_str);
 		byte[] cbk_func = Bry_.new_u8((String)m.ReadValAt(1));
-		app.Addon_mgr().Itms__search__htmlbar().Search_by_swt(wiki, search_str, cbk_func);
+		app.Addon_mgr().Itms__search__htmlbar().Search_by_swt(wiki, search_bry, cbk_func);
 		return "";
 	}
 	private String[] Wikidata_get_label(GfoMsg m) {
