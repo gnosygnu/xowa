@@ -21,8 +21,8 @@ public class Xofulltext_searcher_line {
 		this.found_idx = found_idx;
 		this.excerpt = excerpt;
 	}
-	public byte[] Wiki_domain() {return wiki_domain;} private final    byte[] wiki_domain;
-	public int Page_id() {return page_id;} private final    int page_id;
-	public int Found_idx() {return found_idx;} private final    int found_idx;
-	public byte[] Excerpt() {return excerpt;} private final    byte[] excerpt;
+	public byte[] Wiki_domain() {return wiki_domain;} private final byte[] wiki_domain;
+	public int Page_id() {return page_id;} private final int page_id;
+	public int Found_idx() {return found_idx;} private final int found_idx;
+	public byte[] Excerpt() {return excerpt;} private final byte[] excerpt;
 }

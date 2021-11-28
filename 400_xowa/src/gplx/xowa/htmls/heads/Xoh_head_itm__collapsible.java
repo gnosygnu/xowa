@@ -23,7 +23,7 @@ public class Xoh_head_itm__collapsible extends Xoh_head_itm__base {
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_collapse);
 		wtr.Write_js_global_ini_atr_msg(wiki			, Key_expand);
 	}
-	private static final    byte[]
+	private static final byte[]
 	  Key_enabled				= Bry_.new_a7("collapsible-enabled")
 	, Key_collapsed				= Bry_.new_a7("collapsible-collapsed")
 	, Key_collapse				= Bry_.new_a7("collapsible-collapse")

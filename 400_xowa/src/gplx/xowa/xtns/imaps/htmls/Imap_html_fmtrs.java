@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.imaps.*;
 import gplx.core.brys.fmtrs.*;
 public class Imap_html_fmtrs {
-	public static final    Bry_fmtr
+	public static final Bry_fmtr
 	  All = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div id=\"imap_div_~{imap_id}\" class=\"noresize\"~{desc_style}>~{map}~{img}"
 	, "    </div>"

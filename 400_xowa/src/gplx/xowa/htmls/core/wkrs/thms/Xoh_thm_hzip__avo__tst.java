@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_thm_hzip__avo__tst {
-	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
+	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void setup() {fxt.Clear();}
 	@Test  public void Video() {
 		fxt.Test__bicode("~&%test_caption~|E9eA.ogv~%A.ogv~~", Gfh_utl.Replace_apos(String_.Concat_lines_nl_skip_last

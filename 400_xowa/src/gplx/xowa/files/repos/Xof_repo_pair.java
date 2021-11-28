@@ -20,8 +20,8 @@ public class Xof_repo_pair implements Gfo_invk {
 	}
 	public byte				Id()			{return id;} private byte id;
 	public byte[]			Wiki_domain()	{return wiki_domain;} private byte[] wiki_domain;
-	public Xof_repo_itm		Src()			{return src;} private final    Xof_repo_itm src;
-	public Xof_repo_itm		Trg()			{return trg;} private final    Xof_repo_itm trg;
+	public Xof_repo_itm		Src()			{return src;} private final Xof_repo_itm src;
+	public Xof_repo_itm		Trg()			{return trg;} private final Xof_repo_itm trg;
 	public void Wiki_domain_(byte[] v) {wiki_domain = v;}
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

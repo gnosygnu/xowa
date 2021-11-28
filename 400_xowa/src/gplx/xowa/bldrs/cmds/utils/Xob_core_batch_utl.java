@@ -18,8 +18,8 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.bldrs.wms.dumps.*;
 public class Xob_core_batch_utl implements Gfo_invk {
-	private final    Xob_bldr bldr;
-	private final    Bry_fmtr fmtr = Bry_fmtr.keys_("bz2_fil", "wiki_key");
+	private final Xob_bldr bldr;
+	private final Bry_fmtr fmtr = Bry_fmtr.keys_("bz2_fil", "wiki_key");
 	public Xob_core_batch_utl(Xob_bldr bldr, byte[] raw) {this.bldr = bldr; fmtr.Fmt_(raw);}
 	private void Run() {
 		Io_url[] bz2_fils = Io_mgr.Instance.QueryDir_fils(bldr.App().Fsys_mgr().Wiki_dir().GenSubDir_nest(Dir_dump, "todo"));

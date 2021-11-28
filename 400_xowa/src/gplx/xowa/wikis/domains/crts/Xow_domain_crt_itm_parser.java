@@ -78,12 +78,12 @@ class Xow_domain_crt_itm_parser {
 		else
 			return new Xow_domain_crt_itm__wiki(raw);	// EX: en.wikipedia.org
 	}
-	private static final    Hash_adp_bry itm_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry itm_hash = Hash_adp_bry.cs()
 	.Add_str_obj("<self>"		, Xow_domain_crt_itm__self.Instance)
 	.Add_str_obj("<same_type>"	, Xow_domain_crt_itm__same_type.Instance)
 	.Add_str_obj("<same_lang>"	, Xow_domain_crt_itm__same_lang.Instance)
 	.Add_str_obj("<any>"		, Xow_domain_crt_itm__any_wiki.Instance)
 	;
-	private static final    byte[] Wild_lang = Bry_.new_a7("*."), Wild_type = Bry_.new_a7(".*");
-        public static final    Xow_domain_crt_itm_parser Instance = new Xow_domain_crt_itm_parser(); Xow_domain_crt_itm_parser() {}
+	private static final byte[] Wild_lang = Bry_.new_a7("*."), Wild_type = Bry_.new_a7(".*");
+        public static final Xow_domain_crt_itm_parser Instance = new Xow_domain_crt_itm_parser(); Xow_domain_crt_itm_parser() {}
 }

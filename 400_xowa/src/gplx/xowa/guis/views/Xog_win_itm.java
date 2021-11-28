@@ -60,8 +60,8 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	public Xog_html_itm		Active_html_itm()	{return tab_mgr.Active_tab().Html_itm();}
 	public Gfui_html		Active_html_box()	{return tab_mgr.Active_tab().Html_itm().Html_box();}
 	public Gfo_usr_dlg		Usr_dlg() {return app.Usr_dlg();}
-	public Xog_urlfmtr_mgr  Url_box_fmtr() {return url_box_fmtr;} private final    Xog_urlfmtr_mgr url_box_fmtr = new Xog_urlfmtr_mgr();
-	public Xog_win_itm_cfg	Cfg() {return cfg;} private final    Xog_win_itm_cfg cfg = new Xog_win_itm_cfg();
+	public Xog_urlfmtr_mgr  Url_box_fmtr() {return url_box_fmtr;} private final Xog_urlfmtr_mgr url_box_fmtr = new Xog_urlfmtr_mgr();
+	public Xog_win_itm_cfg	Cfg() {return cfg;} private final Xog_win_itm_cfg cfg = new Xog_win_itm_cfg();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_link_click))								Win__link_click();
 		else if	(ctx.Match(k, Invk_link_print))								Xog_win_itm__prog_href_mgr.Print(this);
@@ -399,10 +399,10 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	}
 }
 class Xog_url_box__selection_changed implements Gfo_evt_itm {
-	private final    GfuiComboBox url_box;
-	private final    Xoae_app app;
+	private final GfuiComboBox url_box;
+	private final Xoae_app app;
 	public Xog_url_box__selection_changed(Xoae_app app, GfuiComboBox url_box) {this.app = app; this.url_box = url_box; this.ev_mgr = new Gfo_evt_mgr(this);}
-	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
+	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private final Gfo_evt_mgr ev_mgr;
 	private void On_selection_changed() {
 		String text = url_box.Text();
 		text = Xog_win_itm.Remove_redirect_if_exists(text);

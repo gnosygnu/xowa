@@ -21,8 +21,8 @@ public class Xowdir_wiki_itm {
 		this.url = url;
 		this.json = json;
 	}
-	public int Id() {return id;} private final    int id;
-	public String Domain() {return domain;} private final    String domain;
-	public Io_url Url() {return url;} private final    Io_url url;
-	public Xowdir_wiki_json Json() {return json;} private final    Xowdir_wiki_json json;
+	public int Id() {return id;} private final int id;
+	public String Domain() {return domain;} private final String domain;
+	public Io_url Url() {return url;} private final Io_url url;
+	public Xowdir_wiki_json Json() {return json;} private final Xowdir_wiki_json json;
 }

@@ -18,11 +18,11 @@ import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*;
 class Xohz_atr_itm__style implements Xohz_atr_itm {	// EX: style='width:20em;'
 	private int flag_idx;
-	private final    Ordered_hash zatr_hash;
-	private final    Gfh_style_wkr__ary style_wkr = new Gfh_style_wkr__ary();
+	private final Ordered_hash zatr_hash;
+	private final Gfh_style_wkr__ary style_wkr = new Gfh_style_wkr__ary();
 	public Xohz_atr_itm__style(int uid, byte[] key, Ordered_hash zatr_hash) {this.uid = uid; this.key = key; this.zatr_hash = zatr_hash;}
-	public int Uid() {return uid;} private final    int uid;
-	public byte[] Key() {return key;} private final    byte[] key;
+	public int Uid() {return uid;} private final int uid;
+	public byte[] Key() {return key;} private final byte[] key;
 	public void Ini_flag(int flag_idx, List_adp flag_bldr_list) {
 		this.flag_idx = flag_idx;
 		flag_bldr_list.Add(1);

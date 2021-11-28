@@ -45,8 +45,8 @@ import gplx.xowa.wikis.pages.skins.Xopg_xtn_skin_itm_stub;
 import gplx.xowa.xtns.indicators.Indicator_hxtn_page_wkr;
 
 public class Xow_hdump_mgr__load implements Gfo_invk {
-	private final    Xow_wiki wiki; private final    Xoh_hzip_mgr hzip_mgr; private final    Io_stream_zip_mgr zip_mgr;
-	private final    Xoh_page tmp_hpg; private final    Bry_bfr tmp_bfr; private final    Xowd_page_itm tmp_dbpg = new Xowd_page_itm();		
+	private final Xow_wiki wiki; private final Xoh_hzip_mgr hzip_mgr; private final Io_stream_zip_mgr zip_mgr;
+	private final Xoh_page tmp_hpg; private final Bry_bfr tmp_bfr; private final Xowd_page_itm tmp_dbpg = new Xowd_page_itm();
 	private Xow_override_mgr override_mgr__html, override_mgr__page;
 	public Xow_hdump_mgr__load(Xow_wiki wiki, Xoh_hzip_mgr hzip_mgr, Io_stream_zip_mgr zip_mgr, Xoh_page tmp_hpg, Bry_bfr tmp_bfr) {
 		this.wiki = wiki; this.hzip_mgr = hzip_mgr; this.zip_mgr = zip_mgr; this.tmp_hpg = tmp_hpg; this.tmp_bfr = tmp_bfr;
@@ -54,7 +54,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 	}
 	public boolean			Read_preferred()		{return read_preferred;}	private boolean read_preferred = true;
 	public Xow_hdump_mode	Html_mode()				{return html_mode;}			private Xow_hdump_mode html_mode = Xow_hdump_mode.Shown;
-	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final    Xoh_make_mgr make_mgr;
+	public Xoh_make_mgr Make_mgr() {return make_mgr;} private final Xoh_make_mgr make_mgr;
 	public void Init_by_wiki(Xow_wiki wiki) {
 		gplx.xowa.addons.apps.cfgs.Xocfg_mgr cfg_mgr = wiki.App().Cfg();
 		Xow_hdump_mode.Cfg__reg_type(cfg_mgr.Type_mgr());
@@ -197,8 +197,8 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 	}
 }
 class Xow_override_mgr {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
-	private final    Io_url root_dir;
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Io_url root_dir;
 	private boolean init = true;
 	public Xow_override_mgr(Io_url root_dir) {this.root_dir = root_dir;} 
 	public void Clear() {hash.Clear();}

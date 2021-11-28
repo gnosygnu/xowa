@@ -18,8 +18,8 @@ import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_lnki_text_fmtr {	// formats alt or caption
-	private final    Bry_bfr_mkr bfr_mkr; private final    Xoh_html_wtr html_wtr;		
-	private final    Bry_bfr fmt_bfr = Bry_bfr_.Reset(32);
+	private final Bry_bfr_mkr bfr_mkr; private final Xoh_html_wtr html_wtr;
+	private final Bry_bfr fmt_bfr = Bry_bfr_.Reset(32);
 	public Xoh_lnki_text_fmtr(Bry_bfr_mkr bfr_mkr, Xoh_html_wtr html_wtr) {
 		this.bfr_mkr = bfr_mkr; this.html_wtr = html_wtr;
 	}
@@ -39,5 +39,5 @@ public class Xoh_lnki_text_fmtr {	// formats alt or caption
 			? rv
 			: fmt.Bld_many_to_bry(fmt_bfr, rv);
 	}
-	public static final    Bry_fmt Null__fmt = null;
+	public static final Bry_fmt Null__fmt = null;
 }

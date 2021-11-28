@@ -26,7 +26,7 @@ class Volume_prep_itm implements Bry_bfr_able {
 	public int Max_file_count = -1;
 	public long Max_file_size = -1;
 	public boolean Skip_audio = true;
-	public static final    Volume_prep_itm[] Ary_empty = new Volume_prep_itm[0];
+	public static final Volume_prep_itm[] Ary_empty = new Volume_prep_itm[0];
 	public void To_bfr(Bry_bfr bfr) {
 		bfr.Add(Page_ttl);
 	}

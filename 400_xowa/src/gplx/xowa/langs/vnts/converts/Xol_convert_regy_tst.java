@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.drds.*;
 public class Xol_convert_regy_tst {
-	private final    Xol_convert_regy_fxt fxt = new Xol_convert_regy_fxt();
+	private final Xol_convert_regy_fxt fxt = new Xol_convert_regy_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test public void Basic() {
 		// fxt.Parser_fxt().Init_page_create("Template:Test_x1", "val");
@@ -45,7 +45,7 @@ class Xol_convert_regy_fxt {
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xop_fxt Parser_fxt() {return parser_fxt;} private Xop_fxt parser_fxt;
-	public Xowd_data_tstr Data_mgr() {return data_mgr;} private final    Xowd_data_tstr data_mgr = new Xowd_data_tstr();
+	public Xowd_data_tstr Data_mgr() {return data_mgr;} private final Xowd_data_tstr data_mgr = new Xowd_data_tstr();
 	public void Clear() {
 		app = Xoa_app_fxt.Make__app__edit();
 		Xol_lang_itm lang = app.Lang_mgr().Get_by_or_new(Bry_.new_a7("zh"));

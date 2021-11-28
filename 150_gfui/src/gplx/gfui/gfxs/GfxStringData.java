@@ -111,5 +111,5 @@ public class GfxStringData {
 				rv.Font_(FontAdp.new_("Arial", 8, FontStyleAdp_.Plain));	// needed for TextBox, since its Paint is not overriden, and .Font property must be set
 				return rv;
 	}	GfxStringData() {}
-	public static final    GfxStringData Null = null;
+	public static final GfxStringData Null = null;
 }

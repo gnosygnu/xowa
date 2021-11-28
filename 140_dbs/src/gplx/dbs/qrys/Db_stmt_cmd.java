@@ -42,7 +42,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt_cmd(Db_engine engine, Db_qry qry) {Ctor_stmt(engine, qry);}
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {
 		this.engine = engine;
-		sql = qry.Tid() == Db_qry_.Tid_select_in_tbl ? ((Db_qry__select_in_tbl)qry).To_sql__exec(engine.Sql_wtr()) : engine.Sql_wtr().To_sql_str(qry, true);
+		sql = qry.Tid() == Db_qry_.Tid_select_in_tbl ? ((Db_qry__select_in_tbl)qry).To_sql__exec(engine.Sql_wtr()) : engine.Sql_wtr().ToSqlStr(qry, true);
 		Reset_stmt();
 	}
 	public Db_stmt Reset_stmt() {

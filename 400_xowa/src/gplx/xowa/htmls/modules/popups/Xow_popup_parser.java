@@ -25,7 +25,7 @@ public class Xow_popup_parser {
 	private Xop_ctx tmpl_ctx; private Xop_root_tkn tmpl_root, wtxt_root; private Xot_compile_data tmpl_props = new Xot_compile_data();		
 	private Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Popup;
 	private Xow_popup_anchor_finder hdr_finder = new Xow_popup_anchor_finder();
-	private final    Bry_bfr hdr_html_bfr = Bry_bfr_.New();
+	private final Bry_bfr hdr_html_bfr = Bry_bfr_.New();
 	public Xow_popup_cfg Cfg() {return cfg;} private Xow_popup_cfg cfg = new Xow_popup_cfg();
 	public Xow_popup_wrdx_mkr Wrdx_mkr() {return wrdx_mkr;} private Xow_popup_wrdx_mkr wrdx_mkr = new Xow_popup_wrdx_mkr();
 	public Xow_popup_html_mkr Html_mkr() {return html_mkr;} private Xow_popup_html_mkr html_mkr = new Xow_popup_html_mkr();

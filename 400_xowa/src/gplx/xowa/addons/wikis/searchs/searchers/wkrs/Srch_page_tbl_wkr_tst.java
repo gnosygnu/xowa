@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 import org.junit.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
 public class Srch_page_tbl_wkr_tst {
-	private final    Srch_page_tbl_wkr_fxt fxt = new Srch_page_tbl_wkr_fxt();
+	private final Srch_page_tbl_wkr_fxt fxt = new Srch_page_tbl_wkr_fxt();
 	@Test  public void Word__one()				{fxt.Test__to_bry_or_null("a"					, "a");}
 	@Test  public void Word__many()			{fxt.Test__to_bry_or_null("a b c"				, "a b c");}
 	@Test  public void Wild__end()				{fxt.Test__to_bry_or_null("a*"					, "a");}
@@ -30,8 +30,8 @@ public class Srch_page_tbl_wkr_tst {
 	@Test  public void Parens()				{fxt.Test__to_bry_or_null("(a)"					, null);}
 }
 class Srch_page_tbl_wkr_fxt {
-	private final    Srch_crt_parser crt_parser;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Srch_crt_parser crt_parser;
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Srch_page_tbl_wkr_fxt() {
 		crt_parser = new Srch_crt_parser(Srch_crt_scanner_syms.Dflt);
 		Srch_text_parser text_parser = new Srch_text_parser();

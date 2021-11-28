@@ -18,11 +18,11 @@ import gplx.dbs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.bldrs.updates.files.*;
 public class Xobc_cmd__fsdb_delete extends Xobc_cmd__base {
-	private final    Io_url deletion_db_url;
+	private final Io_url deletion_db_url;
 	public Xobc_cmd__fsdb_delete(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_idx, Io_url deletion_db_url) {super(task_mgr, task_id, step_id, cmd_idx);
 		this.deletion_db_url = deletion_db_url;
 	}
-	@Override public String Cmd_type() {return CMD_TYPE;} public static final    String CMD_TYPE = "xowa.fsdb.delete";
+	@Override public String Cmd_type() {return CMD_TYPE;} public static final String CMD_TYPE = "xowa.fsdb.delete";
 	@Override public String Cmd_name() {return "deleting old files";}
 	@Override public boolean Cmd_suspendable() {return true;}
 	@Override protected void Cmd_exec_hook(Xobc_cmd_ctx ctx) {

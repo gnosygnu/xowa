@@ -17,7 +17,7 @@ package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 import gplx.xowa.langs.cases.*;
 public class Xop_lnki_wkr__pre_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test public void Previous_pre() {	// PURPOSE: if pre is already in effect, end it; EX: en.b:Knowing_Knoppix/Other_applications
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
@@ -88,7 +88,7 @@ public class Xop_lnki_wkr__pre_tst {
 		, ""
 		));
 	}
-	private static final    String Html_A_png = String_.Concat_lines_nl_skip_last
+	private static final String Html_A_png = String_.Concat_lines_nl_skip_last
 	( "<div class=\"thumb tright\">"
 	, "  <div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:220px;\">"
 	, "    <a href=\"/wiki/File:A.png\" class=\"image\" xowa_title=\"A.png\"><img id=\"xoimg_0\" alt=\"\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/220px.png\" width=\"0\" height=\"0\" /></a>"

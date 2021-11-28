@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import org.junit.*;
 public class Xow_url_parser__qarg__tst {
-	private final    Xow_url_parser_fxt fxt = new Xow_url_parser_fxt();
+	private final Xow_url_parser_fxt fxt = new Xow_url_parser_fxt();
 	@Test public void Redirect() {
 		fxt.Exec__parse("A?redirect=no").Test__wiki("en.wikipedia.org").Test__page("A").Test__qargs("?redirect=no");
 	}

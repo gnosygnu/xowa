@@ -28,17 +28,17 @@ import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 */
 public class XomwLinker {
 //		private XomwEnv env;
-	private final    Bry_bfr tmp = Bry_bfr_.New(), tmp_2 = Bry_bfr_.New();
-	private final    Linker_rel_splitter splitter = new Linker_rel_splitter();
+	private final Bry_bfr tmp = Bry_bfr_.New(), tmp_2 = Bry_bfr_.New();
+	private final Linker_rel_splitter splitter = new Linker_rel_splitter();
 	private byte[] wg_title = null;
-	private final    Btrie_rv trv = new Btrie_rv();
-	private final    byte[][] split_trail_rv = new byte[2][];
+	private final Btrie_rv trv = new Btrie_rv();
+	private final byte[][] split_trail_rv = new byte[2][];
 	private Btrie_slim_mgr split_trail_trie;
-	private final    Xomw_atr_mgr tmp_attribs = new Xomw_atr_mgr();
-	private final    XomwHtmlTemp htmlTemp = new XomwHtmlTemp();
+	private final Xomw_atr_mgr tmp_attribs = new Xomw_atr_mgr();
+	private final XomwHtmlTemp htmlTemp = new XomwHtmlTemp();
 
-	private static final    byte[] Atr__class = Bry_.new_a7("class"), Atr__rel = Bry_.new_a7("rel"), Atr__href = Bry_.new_a7("href"), Rel__nofollow = Bry_.new_a7("nofollow");
-	public static final    byte[] 
+	private static final byte[] Atr__class = Bry_.new_a7("class"), Atr__rel = Bry_.new_a7("rel"), Atr__href = Bry_.new_a7("href"), Rel__nofollow = Bry_.new_a7("nofollow");
+	public static final byte[]
 	  Align__frame__center = Bry_.new_a7("center")
 	, Align__frame__none = Bry_.new_a7("none")
 	, Align__frame__right = Bry_.new_a7("right")
@@ -48,7 +48,7 @@ public class XomwLinker {
 	, Img_class__thumbborder = Bry_.new_a7("thumbborder")
 	, Img_class__thumbimage = Bry_.new_a7("thumbimage")
 	;
-	private final    XomwLinkRenderer link_renderer;
+	private final XomwLinkRenderer link_renderer;
 	public XomwLinker(XomwLinkRenderer link_renderer) {
 		this.link_renderer = link_renderer;
 	}
@@ -2203,11 +2203,11 @@ public class XomwLinker {
 //				'title' => $tooltip
 //			] );
 //		}
-	private static final    byte[] Bry__dot2 = Bry_.new_a7("../");
+	private static final byte[] Bry__dot2 = Bry_.new_a7("../");
 }
 class Linker_rel_splitter implements gplx.core.brys.Bry_split_wkr {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public int Split(byte[] src, int itm_bgn, int itm_end) {	// $combined = array_unique(array_merge($newRels, $oldRels));
 		byte[] val = (byte[])hash.Get_by_mid(src, itm_bgn, itm_end);
 		if (val == null) {

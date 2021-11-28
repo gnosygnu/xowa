@@ -19,7 +19,7 @@ import gplx.xowa.langs.*;
 import gplx.xowa.mediawiki.includes.cache.localisation.*;
 public class XomwLanguage_fxt {
 	private XomwLanguage lang;
-	private final    Xoae_app app;
+	private final Xoae_app app;
 	public XomwLanguage_fxt() {
 		this.app = Xoa_app_fxt.Make__app__edit();
 		this.Init__lang("en");

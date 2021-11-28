@@ -24,7 +24,7 @@ import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
 import gplx.xowa.specials.mgrs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
 import gplx.xowa.wikis.pages.*;
 public class Xow_special_mgr {
-	private final    Hash_adp_bry hash;
+	private final Hash_adp_bry hash;
 	private Xoa_app app;
 	public Xow_special_mgr(Xowe_wiki wiki, Xol_lang_itm lang) {
 		this.app = wiki.App();
@@ -32,22 +32,22 @@ public class Xow_special_mgr {
 		page_allpages = new Xows_page_allpages(wiki);
 		Evt_lang_changed(wiki.Lang());
 	}
-	public Xows_page_allpages			Page_allpages() {return page_allpages;} private final    Xows_page_allpages page_allpages;
-	public Srch_special_page			Page_search() {return page_search;} private final    Srch_special_page page_search = new Srch_special_page();
-	public Xou_history_html				Page_history() {return page_history;} private final    Xou_history_html page_history = new Xou_history_html();
-	public Xoud_history_special			Page_history2() {return page_history2;} private final    Xoud_history_special page_history2 = new Xoud_history_special();
-	public Nearby_mgr					Page_nearby() {return page_nearby;} private final    Nearby_mgr page_nearby = new Nearby_mgr();
-	public Xop_mylanguage_page			Page_mylanguage() {return page_mylanguage;} private final    Xop_mylanguage_page page_mylanguage = new Xop_mylanguage_page();
-	public Wdata_itemByTitle_page		Page_itemByTitle() {return page_itemByTitle;} private final    Wdata_itemByTitle_page page_itemByTitle = new Wdata_itemByTitle_page();
-	public Xow_special_page				Page_entityPage() {return page_entityPage;} private final    Xow_special_page page_entityPage = Wbase_entityPage.Prototype;
-	public Xop_statistics_page			Page_statistics() {return page_statistics;} private final    Xop_statistics_page page_statistics = new Xop_statistics_page();
-	public Move_page					Page_movePage() {return page_movePage;} private final    Move_page page_movePage = new Move_page();
-	public System_data_page				Page_system_data() {return page_system_data;} private final    System_data_page page_system_data = new System_data_page();
-	public Default_tab_page				Page_default_tab() {return page_default_tab;} private final    Default_tab_page page_default_tab = new Default_tab_page();
-	public Popup_history_page			Page_popup_history() {return page_popup_history;} private final    Popup_history_page page_popup_history = new Popup_history_page();
-	public Xows_bmk_page				Page_bmk() {return page_bmk;} private final    Xows_bmk_page page_bmk = new Xows_bmk_page();
-	public Xows_diag_page				Page_diag() {return page_diag;} private final    Xows_diag_page page_diag = new Xows_diag_page();
-	public Xoerror_special				Page_error() {return page_error;} private final    Xoerror_special page_error = new Xoerror_special();
+	public Xows_page_allpages			Page_allpages() {return page_allpages;} private final Xows_page_allpages page_allpages;
+	public Srch_special_page			Page_search() {return page_search;} private final Srch_special_page page_search = new Srch_special_page();
+	public Xou_history_html				Page_history() {return page_history;} private final Xou_history_html page_history = new Xou_history_html();
+	public Xoud_history_special			Page_history2() {return page_history2;} private final Xoud_history_special page_history2 = new Xoud_history_special();
+	public Nearby_mgr					Page_nearby() {return page_nearby;} private final Nearby_mgr page_nearby = new Nearby_mgr();
+	public Xop_mylanguage_page			Page_mylanguage() {return page_mylanguage;} private final Xop_mylanguage_page page_mylanguage = new Xop_mylanguage_page();
+	public Wdata_itemByTitle_page		Page_itemByTitle() {return page_itemByTitle;} private final Wdata_itemByTitle_page page_itemByTitle = new Wdata_itemByTitle_page();
+	public Xow_special_page				Page_entityPage() {return page_entityPage;} private final Xow_special_page page_entityPage = Wbase_entityPage.Prototype;
+	public Xop_statistics_page			Page_statistics() {return page_statistics;} private final Xop_statistics_page page_statistics = new Xop_statistics_page();
+	public Move_page					Page_movePage() {return page_movePage;} private final Move_page page_movePage = new Move_page();
+	public System_data_page				Page_system_data() {return page_system_data;} private final System_data_page page_system_data = new System_data_page();
+	public Default_tab_page				Page_default_tab() {return page_default_tab;} private final Default_tab_page page_default_tab = new Default_tab_page();
+	public Popup_history_page			Page_popup_history() {return page_popup_history;} private final Popup_history_page page_popup_history = new Popup_history_page();
+	public Xows_bmk_page				Page_bmk() {return page_bmk;} private final Xows_bmk_page page_bmk = new Xows_bmk_page();
+	public Xows_diag_page				Page_diag() {return page_diag;} private final Xows_diag_page page_diag = new Xows_diag_page();
+	public Xoerror_special				Page_error() {return page_error;} private final Xoerror_special page_error = new Xoerror_special();
 	public void Evt_lang_changed(Xol_lang_itm lang) {
 		// add special pages by old manual method; DEPRECATED
 		hash.Clear();

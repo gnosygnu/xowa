@@ -225,8 +225,8 @@ class Hiero_html_mgr {
 	public static final int Image_margin = 1;
 	public static final int Cartouche_width = 2;
 	public static final int Max_height = 44;
-	private static final    byte[] Bry_cls_mirrored = Bry_.new_a7("class=\"mw-mirrored\" ");
-	private static final    byte[]
+	private static final byte[] Bry_cls_mirrored = Bry_.new_a7("class=\"mw-mirrored\" ");
+	private static final byte[]
 	  Tkn_lt		= new byte[] {Byte_ascii.Lt}
 	, Tkn_gt		= new byte[] {Byte_ascii.Gt}
 	, Tkn_dot		= new byte[] {Byte_ascii.Dot}

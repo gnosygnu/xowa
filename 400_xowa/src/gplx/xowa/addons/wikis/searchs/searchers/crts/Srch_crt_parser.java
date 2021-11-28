@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
 public class Srch_crt_parser {
-	private final    Srch_crt_scanner scanner;
-	private final    Srch_crt_visitor__words		words_visitor = new Srch_crt_visitor__words();
-	private final    Srch_crt_visitor__print		print_visitor = new Srch_crt_visitor__print();
-	private final    byte wildcard_byte;
+	private final Srch_crt_scanner scanner;
+	private final Srch_crt_visitor__words		words_visitor = new Srch_crt_visitor__words();
+	private final Srch_crt_visitor__print		print_visitor = new Srch_crt_visitor__print();
+	private final byte wildcard_byte;
 	private int uid_next;
 	public Srch_crt_parser(Srch_crt_scanner_syms trie_bldr) {
 		this.wildcard_byte = trie_bldr.Wild();
@@ -90,8 +90,8 @@ class Srch_crt_parser_frame {
 	}
 	private int join_tid = Srch_crt_tkn.Tid__null;
 	private boolean notted = false;
-	private final    List_adp subs = List_adp_.New();
-	private final    Srch_crt_parser parser;
+	private final List_adp subs = List_adp_.New();
+	private final Srch_crt_parser parser;
 	public int Next_uid() {return parser.Next_uid();}
 	public void Notted_y_() {
 		if (notted)				// already notted; disable; EX: "--a"

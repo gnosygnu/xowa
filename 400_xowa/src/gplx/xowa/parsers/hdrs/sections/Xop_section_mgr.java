@@ -19,9 +19,9 @@ import gplx.xowa.mediawiki.includes.parsers.headingsOld.*; import gplx.xowa.pars
 public class Xop_section_mgr implements Gfo_invk {
 	private Xoae_app app; private Xowe_wiki wiki;
 	private Xow_tidy_mgr_interface tidy_mgr;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private byte[] bry__edit_text;
-	private final    Bry_fmt fmt__edit_hint = Bry_fmt.New("")
+	private final Bry_fmt fmt__edit_hint = Bry_fmt.New("")
 	, fmt__section_editable = Bry_fmt.Auto_nl_apos
 	( "<span class='mw-editsection'><span class='mw-editsection-bracket'>[</span><a href='/wiki/~{page_ttl}?action=edit&section_key=~{section_key}' title='~{edit_hint}' class='xowa-hover-off'>~{edit_text}</a><span class='mw-editsection-bracket'>]</span></span>"
 	)
@@ -81,8 +81,8 @@ public class Xop_section_mgr implements Gfo_invk {
 		return this;
 	}
 
-	public static final    byte[] Bry__meta = Bry_.new_a7("<!--xo_meta|section_edit|");
-	public static final    int Len__meta = Bry__meta.length;
-	private static final    byte[] Qarg__section_key = Bry_.new_u8("section_key");
+	public static final byte[] Bry__meta = Bry_.new_a7("<!--xo_meta|section_edit|");
+	public static final int Len__meta = Bry__meta.length;
+	private static final byte[] Qarg__section_key = Bry_.new_u8("section_key");
 	private static final String Cfg__section_editing__enabled = "xowa.wiki.edit.section.enabled";
 }

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.wikis.ttls.*;
 public class Gallery_xnde_tst {
-	private final    Xop_fxt fxt = new Xop_fxt(); String raw_src;
+	private final Xop_fxt fxt = new Xop_fxt(); String raw_src;
 	@Before public void init() {fxt.Reset(); fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());}
 	@Test  public void Lnki_no_caption() {
 		fxt.Test_parse_page_wiki("<gallery>File:A.png</gallery>"

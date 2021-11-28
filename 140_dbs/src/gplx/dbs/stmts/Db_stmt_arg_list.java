@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.stmts; import gplx.*; import gplx.dbs.*;
 public class Db_stmt_arg_list {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	public void Clear() {list.Clear();}
 	public int Len() {return list.Len();}
 	public Db_stmt_arg Get_at(int i) {return (Db_stmt_arg)list.Get_at(i);}

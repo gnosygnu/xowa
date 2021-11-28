@@ -17,13 +17,13 @@ package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; impor
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
 class Xoh_gly_grp_wtr implements Bfr_arg {
-	private final    Bfr_arg_clearable[] arg_ary;
-	private final    Bfr_arg__hatr_id ul_id = Bfr_arg__hatr_id.New_id("xogly_ul_");
-	private final    Bfr_arg__hatr__style ul_style = new Bfr_arg__hatr__style(Gfh_atr_.Bry__style);
-	private final    Bfr_arg__hatr__xogly ul_xogly = new Bfr_arg__hatr__xogly();
-	private final    Bfr_arg__elem__capt li_capt = new Bfr_arg__elem__capt();
+	private final Bfr_arg_clearable[] arg_ary;
+	private final Bfr_arg__hatr_id ul_id = Bfr_arg__hatr_id.New_id("xogly_ul_");
+	private final Bfr_arg__hatr__style ul_style = new Bfr_arg__hatr__style(Gfh_atr_.Bry__style);
+	private final Bfr_arg__hatr__xogly ul_xogly = new Bfr_arg__hatr__xogly();
+	private final Bfr_arg__elem__capt li_capt = new Bfr_arg__elem__capt();
 	private byte[] ul_cls, xtra_cls, xtra_atr_bry, ul_nl;
-	private final    Xoh_gly_itm_list_wtr itm_list_wtr = new Xoh_gly_itm_list_wtr();
+	private final Xoh_gly_itm_list_wtr itm_list_wtr = new Xoh_gly_itm_list_wtr();
 	public Xoh_gly_grp_wtr() {
 		arg_ary = new Bfr_arg_clearable[] {ul_id, ul_xogly, li_capt};
 	}
@@ -53,7 +53,7 @@ class Xoh_gly_grp_wtr implements Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		fmtr.Bld_bfr_many(bfr, ul_id, ul_xogly, ul_cls, xtra_cls, ul_style, xtra_atr_bry, li_capt, itm_list_wtr, ul_nl);
 	}
-	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<ul~{id}~{xogly} class=\"gallery mw-gallery-~{cls}~{xtra_cls}\"~{style}~{xtra_atr}>~{capt}~{itms}~{ul_nl}</ul>"
 	), "id", "xogly", "cls", "xtra_cls", "style", "xtra_atr", "capt", "itms", "ul_nl");
 }

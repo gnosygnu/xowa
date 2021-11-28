@@ -26,5 +26,5 @@ public class Xop_list_tkn extends Xop_tkn_itm_base {
 	public static Xop_list_tkn bgn_(int bgn, int end, byte list_itmTyp, int symLen) {return new Xop_list_tkn(bgn, end, Bool_.Y_byte, list_itmTyp);}
 	public static Xop_list_tkn end_(int pos, byte list_itmTyp) {return new Xop_list_tkn(pos, pos, Bool_.N_byte, list_itmTyp);}
 	public Xop_list_tkn(int bgn, int end, byte bgnEndType, byte list_itmTyp) {this.Tkn_ini_pos(false, bgn, end); this.list_bgn = bgnEndType; this.list_itmTyp = list_itmTyp;}		
-	public static final    Xop_list_tkn Null = new Xop_list_tkn(); Xop_list_tkn() {}
+	public static final Xop_list_tkn Null = new Xop_list_tkn(); Xop_list_tkn() {}
 }

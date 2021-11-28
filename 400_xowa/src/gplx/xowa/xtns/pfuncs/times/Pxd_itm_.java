@@ -95,8 +95,8 @@ interface Pxd_itm_prototype {
 	Pxd_itm MakeNew(int ary_idx);
 }
 class Pft_func_time_log {
-	private static final    Gfo_msg_grp owner = Gfo_msg_grp_.new_(Xoa_app_.Nde, "time_parser");
-	public static final    Gfo_msg_itm
+	private static final Gfo_msg_grp owner = Gfo_msg_grp_.new_(Xoa_app_.Nde, "time_parser");
+	public static final Gfo_msg_itm
 		  Invalid_day					= Gfo_msg_itm_.new_warn_(owner, "Invalid day: ~{0}")
 		, Invalid_month					= Gfo_msg_itm_.new_warn_(owner, "Invalid month: ~{0}")
 		, Invalid_year					= Gfo_msg_itm_.new_warn_(owner, "Invalid year: ~{0}")

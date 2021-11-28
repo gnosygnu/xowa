@@ -17,10 +17,10 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.data.*;
 public class Xowd_xowa_db_tbl implements Db_tbl {
-	public static final    String Fld_id = "db_id", Fld_type = "db_type", Fld_url = "db_url";
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_id, fld_type, fld_url, fld_ns_ids, fld_part_id, fld_guid; private boolean schema_is_1;
-	private final    Db_conn conn; private final    Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
+	public static final String Fld_id = "db_id", Fld_type = "db_type", Fld_url = "db_url";
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_id, fld_type, fld_url, fld_ns_ids, fld_part_id, fld_guid; private boolean schema_is_1;
+	private final Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
 	public Xowd_xowa_db_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn; this.schema_is_1 = schema_is_1;
 		this.tbl_name = TBL_NAME;
@@ -37,7 +37,7 @@ public class Xowd_xowa_db_tbl implements Db_tbl {
 		}
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_id);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name; public static final String TBL_NAME = "xowa_db";
+	public String Tbl_name() {return tbl_name;} private final String tbl_name; public static final String TBL_NAME = "xowa_db";
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public Xow_db_file[] Select_all(Xowd_core_db_props props, Io_url wiki_root_dir) {
 		List_adp list = List_adp_.New();
@@ -94,5 +94,5 @@ class Xow_db_file_sorter__id implements gplx.core.lists.ComparerAble {
 		Xow_db_file rhs = (Xow_db_file)rhsObj;
 		return Int_.Compare(lhs.Id(), rhs.Id());
 	}
-	public static final    Xow_db_file_sorter__id Instance = new Xow_db_file_sorter__id(); Xow_db_file_sorter__id() {}
+	public static final Xow_db_file_sorter__id Instance = new Xow_db_file_sorter__id(); Xow_db_file_sorter__id() {}
 }

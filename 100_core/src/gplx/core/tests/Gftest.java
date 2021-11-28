@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.brys.*;
 public class Gftest {
-	private static final    Bry_bfr bfr = Bry_bfr_.New();
+	private static final Bry_bfr bfr = Bry_bfr_.New();
 	public static void Fail(String msg_fmt, Object... msg_args) {
 		throw Err_.new_wo_type(String_.Format(msg_fmt, msg_args));
 	}
@@ -204,7 +204,7 @@ public class Gftest {
 		return rv;
 	}
 	private static final String Str__null = "<<NULL>>";
-	private static final    byte[] Bry__item__eq_n = Bry_.new_a7("!= ") // Bry__item__eq_y = Bry_.new_a7("== "), 
+	private static final byte[] Bry__item__eq_n = Bry_.new_a7("!= ") // Bry__item__eq_y = Bry_.new_a7("== "),
 	, Bry__null = Bry_.new_a7(Str__null)
 	, Bry__line_bgn = Bry_.new_a7("\n************************************************************************************************\n")
 	, Bry__line_mid = Bry_.new_a7("\n------------------------------------------------------------------------------------------------\n")
@@ -215,11 +215,11 @@ public class Gftest {
 package ns;
 import org.junit.*; import gplx.core.tests.*;
 public class Cls1_tst {
-	private final    Cls1_fxt fxt = new Cls1_fxt();
+	private final Cls1_fxt fxt = new Cls1_fxt();
 	@Test 	public void Basic() {}
 }
 class Cls1_fxt {
-	private final    Cls1 mgr = new Cls1();
+	private final Cls1 mgr = new Cls1();
 	public Cls1_fxt Test() {return this;}
 }
 */

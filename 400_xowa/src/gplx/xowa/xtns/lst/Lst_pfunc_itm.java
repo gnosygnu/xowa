@@ -20,9 +20,9 @@ public class Lst_pfunc_itm {
 	public Lst_pfunc_itm(byte[] itm_src, Lst_section_nde_mgr sec_mgr, Xopg_toc_mgr toc_mgr) {
 		this.itm_src = itm_src; this.sec_mgr = sec_mgr; this.toc_mgr = toc_mgr;
 	}
-	public byte[]				Itm_src()	{return itm_src;} private final    byte[] itm_src;
-	public Lst_section_nde_mgr	Sec_mgr()	{return sec_mgr;} private final    Lst_section_nde_mgr sec_mgr;
-	public Xopg_toc_mgr			Toc_mgr()	{return toc_mgr;} private final    Xopg_toc_mgr toc_mgr;
+	public byte[]				Itm_src()	{return itm_src;} private final byte[] itm_src;
+	public Lst_section_nde_mgr	Sec_mgr()	{return sec_mgr;} private final Lst_section_nde_mgr sec_mgr;
+	public Xopg_toc_mgr			Toc_mgr()	{return toc_mgr;} private final Xopg_toc_mgr toc_mgr;
 
 	public static Lst_pfunc_itm New_sect_or_null(Xop_ctx ctx, byte[] ttl_bry) {
 		// init wiki, ttl
@@ -115,5 +115,5 @@ public class Lst_pfunc_itm {
 			rv.Add(src.Get_at(i));
 		return rv;
 	}
-	public static final    byte[] Null_arg = null;
+	public static final byte[] Null_arg = null;
 }

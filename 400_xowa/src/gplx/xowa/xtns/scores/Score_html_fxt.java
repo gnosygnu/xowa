@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.tests.*;
 class Score_html_fxt {
-	private final    Xoh_make_fxt make_fxt = new Xoh_make_fxt();
-	private final    Xop_fxt parser_fxt = new Xop_fxt();
+	private final Xoh_make_fxt make_fxt = new Xoh_make_fxt();
+	private final Xop_fxt parser_fxt = new Xop_fxt();
 	private boolean hdump = false;
 	public void Clear() {
 		parser_fxt.Reset();

@@ -58,6 +58,6 @@ public class Xobldr__redirect__create extends Xob_dump_mgr_base {
 
 	public static final String BLDR_CMD_KEY = "wiki.redirect";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__redirect__create(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__redirect__create(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__redirect__create(bldr, wiki);}
 }

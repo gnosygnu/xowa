@@ -43,7 +43,7 @@ public class Xol_lang_itm_ {
 				return Char_tid_misc;
 		}
 	}
-	public static final    byte[] Key_en = Bry_.new_a7("en");
+	public static final byte[] Key_en = Bry_.new_a7("en");
 	public static Xol_lang_itm Lang_en_make(Xoa_lang_mgr lang_mgr) {
 		Xol_lang_itm rv = Xol_lang_itm.New(lang_mgr, Xol_lang_itm_.Key_en);
 		Xol_lang_itm_.Lang_init(rv);

@@ -17,8 +17,8 @@ package gplx.dbs; import gplx.*;
 import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*;
 public class Db_attach_mgr {
 	private Db_conn main_conn; private Io_url main_conn_url;
-	private final    Ordered_hash links_hash = Ordered_hash_.New();
-	private final    List_adp attach_list = List_adp_.New();
+	private final Ordered_hash links_hash = Ordered_hash_.New();
+	private final List_adp attach_list = List_adp_.New();
 	public Db_attach_mgr() {}
 	public Db_attach_mgr(Db_conn main_conn, Db_attach_itm... links_ary) {
 		this.Conn_main_(main_conn);
@@ -96,7 +96,7 @@ public class Db_attach_mgr {
 	}
 	public Db_stmt Test__make_stmt_and_attach(Db_qry qry, gplx.dbs.sqls.itms.Sql_from_clause from_itm) {	// NOTE: tries to do attach via DOM not SQL 
 		attach_list.Clear();
-		Sql_qry_wtr sql_wtr = main_conn.Engine().Sql_wtr();
+		SqlQryWtr sql_wtr = main_conn.Engine().Sql_wtr();
 		List_adp from_tbls = from_itm.Tbls;
 		int from_tbls_len = from_tbls.Count();
 		for (int i = 0; i < from_tbls_len; ++i) {
@@ -109,7 +109,7 @@ public class Db_attach_mgr {
 			else
 				attach_list.Add(attach_itm);
 		}
-		attached_sql = sql_wtr.To_sql_str(qry, true);
+		attached_sql = sql_wtr.ToSqlStr(qry, true);
 		this.Attach();
 		for (int i = 0; i < from_tbls_len; ++i) {	// reverse blanking from above
 			Sql_tbl_itm from_tbl = (Sql_tbl_itm)from_tbls.Get_at(i);

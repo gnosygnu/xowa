@@ -19,7 +19,7 @@ import gplx.objects.errs.*;
 import gplx.objects.strings.bfrs.*;
 import gplx.objects.arrays.*; import gplx.objects.primitives.*;
 public class String_ {
-	public static final    Class<?> Cls_ref_type = String.class;
+	public static final Class<?> Cls_ref_type = String.class;
 	public static final String Cls_val_name = "str" + "ing";
 	public static final int Find_none = -1, Pos_neg1 = -1;
 	public static final String Empty = "", Null_mark = "<<NULL>>", Tab = "\t", Lf = "\n", CrLf = "\r\n";

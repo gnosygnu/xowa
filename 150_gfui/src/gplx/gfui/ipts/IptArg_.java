@@ -20,8 +20,8 @@ import gplx.Ordered_hash;
 import gplx.Ordered_hash_;
 import gplx.String_;
 public class IptArg_ {
-	public static final    IptArg[] Ary_empty = new IptArg[0];
-	public static final    IptArg Null = null;
+	public static final IptArg[] Ary_empty = new IptArg[0];
+	public static final IptArg Null = null;
 	public static final String Wildcard_key = "wildcard";
 	public static IptArg Wildcard = new IptKey(Int_.Max_value, Wildcard_key);
 	public static boolean Is_null_or_none(IptArg arg) {return arg == Null || arg == IptKey_.None;}
@@ -118,5 +118,5 @@ class IptMacro {
 	}
 	Ordered_hash regy;
 	static Err parse_err(String raw, String loc) {return Err_.new_("gfui", "could not parse IptArg", "raw", raw, "loc", loc).Trace_ignore_add_1_();}
-	public static final    IptMacro Instance = new IptMacro(); IptMacro() {}
+	public static final IptMacro Instance = new IptMacro(); IptMacro() {}
 }

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.maints.sql_execs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.maints.*; import gplx.xowa.addons.apps.maints.sql_execs.*;
 import gplx.langs.mustaches.*;
 public class Xosql_exec_doc implements Mustache_doc_itm {
-	private final    String domain, db, sql;
+	private final String domain, db, sql;
 	public Xosql_exec_doc(String domain, String db, String sql) {
 		this.domain = domain;
 		this.db = db;
@@ -33,5 +33,5 @@ public class Xosql_exec_doc implements Mustache_doc_itm {
 		return Mustache_doc_itm_.Ary__empty;
 	}
 
-	public static final    Xosql_exec_doc[] Ary_empty = new Xosql_exec_doc[0];
+	public static final Xosql_exec_doc[] Ary_empty = new Xosql_exec_doc[0];
 }

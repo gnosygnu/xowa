@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui; import gplx.*;
 public class SizeAdpF_ {
-	public static final    SizeAdpF Null = new_(Int_.Min_value, Int_.Min_value);
-	public static final    SizeAdpF Zero = new_(0, 0);
-	public static final    SizeAdpF Parser = new SizeAdpF(0, 0);
+	public static final SizeAdpF Null = new_(Int_.Min_value, Int_.Min_value);
+	public static final SizeAdpF Zero = new_(0, 0);
+	public static final SizeAdpF Parser = new SizeAdpF(0, 0);
 	public static SizeAdpF as_(Object obj) {return obj instanceof SizeAdpF ? (SizeAdpF)obj : null;}
 	public static SizeAdpF new_(float width, float height) {return new SizeAdpF(width, height);}
 	public static SizeAdpF coerce_(Object obj) {SizeAdpF rv = as_(obj); return rv == null ? parse((String)obj) : rv;}

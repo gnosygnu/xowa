@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui; import gplx.*;
 public class PointAdp implements To_str_able {
-	public int X() {return x;} final    int x;
-	public int Y() {return y;} final    int y;
+	public int X() {return x;} final int x;
+	public int Y() {return y;} final int y;
 	public		PointAdp Op_add(PointAdp val) {return new PointAdp(x + val.x, y + val.y);}
 	public		PointAdp Op_add(int xv, int yv) {return new PointAdp(x + xv, y + yv);}
 	public 		PointAdp Op_add(int i) {return new PointAdp(x + i, y + i);}

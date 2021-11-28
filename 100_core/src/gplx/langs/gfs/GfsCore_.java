@@ -24,7 +24,7 @@ import gplx.String_;
 import gplx.Type_;
 import gplx.UsrDlg_;
 public class GfsCore_ {
-	public static final    String Arg_primitive = "v";
+	public static final String Arg_primitive = "v";
 	public static Object Exec(GfsCtx ctx, Gfo_invk owner_invk, GfoMsg owner_msg, Object owner_primitive, int depth) {
 		if (owner_msg.Args_count() == 0 && owner_msg.Subs_count() == 0 && String_.Eq(owner_msg.Key(), "")) {UsrDlg_.Instance.Warn("empty msg"); return Gfo_invk_.Rv_unhandled;}
 		if (owner_primitive != null) owner_msg.Parse_(false).Add(GfsCore_.Arg_primitive, owner_primitive);
@@ -87,7 +87,7 @@ public class GfsCore_ {
 //			}
 //			else return Gfo_invk_.Rv_unhandled;
 //			return this;
-//		}	public static final    String Invk_Add = "Add", Invk_Del = "Del", Invk_Load = "Load";
+//		}	public static final String Invk_Add = "Add", Invk_Del = "Del", Invk_Load = "Load";
 //		GfsCore core; GfsRegy regy;
 //        public static GfsRegyMgr new_(GfsCore core, GfsRegy regy) {
 //			GfsRegyMgr rv = new GfsRegyMgr();

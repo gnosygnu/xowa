@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 public class Srch_db_upgrade {
-	private final    Xow_wiki wiki;
+	private final Xow_wiki wiki;
 	public Srch_db_upgrade(Xow_wiki wiki, Srch_db_mgr search_db_mgr) {
 		this.wiki = wiki;
 	}

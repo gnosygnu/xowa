@@ -65,7 +65,7 @@ public class Synh_xtn_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		Synh_xtn_nde_.Make(bfr, app, src, xnde.Tag_open_end(), xnde.Tag_close_bgn(), lang, enclose, style, line_enabled, start, highlight_idxs);
 	}
 	private static final byte Xatr_enclose = 1, Xatr_lang = 2, Xatr_style = 3, Xatr_line = 4, Xatr_start = 5, Xatr_highlight = 6, Xatr_inline = 7;
-	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("enclose"		, Xatr_enclose)
 	.Add_str_byte("inline"		, Xatr_inline)
 	.Add_str_byte("lang"		, Xatr_lang)

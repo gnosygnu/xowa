@@ -57,7 +57,7 @@ class Xosql_tbl_parser {
 		if (rv == Int_.Max_value__31) throw Err_.new_wo_type("could not find 'PRIMARY KEY', 'UNIQUE KEY', or 'KEY' in SQL", "raw", Bry_.Mid(raw, bgn, end));
 		return Bry_.Mid(raw, bgn, rv);
 	}
-	private final    byte[] 
+	private final byte[]
 	  Tkn__create_table	= Bry_.new_a7("CREATE TABLE")
 	, Tkn__ukey			= Bry_.new_a7("\n  UNIQUE KEY")
 	, Tkn__pkey			= Bry_.new_a7("\n  PRIMARY KEY")

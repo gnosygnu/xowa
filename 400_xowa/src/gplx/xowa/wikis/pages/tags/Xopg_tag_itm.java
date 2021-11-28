@@ -23,12 +23,12 @@ public class Xopg_tag_itm {
 		this.body = body;
 		this.atrs = atrs;
 	}
-	public final    String Source = "xowa";
-	public byte			Tid()		{return tid;}		private final    byte tid;
-	public byte[]		Node()		{return node;}		private final    byte[] node;
-	public byte[]		Href()		{return href;}		private final    byte[] href;
-	public byte[]		Body()		{return body;}		private final    byte[] body;
-	public Keyval[]		Atrs()		{return atrs;}		private final    Keyval[] atrs;
+	public final String Source = "xowa";
+	public byte			Tid()		{return tid;}		private final byte tid;
+	public byte[]		Node()		{return node;}		private final byte[] node;
+	public byte[]		Href()		{return href;}		private final byte[] href;
+	public byte[]		Body()		{return body;}		private final byte[] body;
+	public Keyval[]		Atrs()		{return atrs;}		private final Keyval[] atrs;
 	public void To_html(Bry_bfr bfr) {
 		bfr.Add_byte(Byte_ascii.Angle_bgn);
 		bfr.Add(node);
@@ -61,7 +61,7 @@ public class Xopg_tag_itm {
 	}
 
 	public static final byte Tid__css_file = 0, Tid__css_code = 1, Tid__js_file = 2, Tid__js_code = 3, Tid__htm_frag = 4; 
-	private static final    Keyval 
+	private static final Keyval
 	  Tag__type_css = Keyval_.new_("type", "text/css"), Tag__type_js = Keyval_.new_("type", "text/javascript"), Tag__type_html = Keyval_.new_("type", "text/html")
 	, Tag__rel_stylesheet = Keyval_.new_("rel", "stylesheet");
 	public static Xopg_tag_itm New_css_file(Io_url href_url) {

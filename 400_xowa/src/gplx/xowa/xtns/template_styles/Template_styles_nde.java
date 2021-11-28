@@ -129,11 +129,11 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	}
 
 	public static final byte Xatr__src = 0, Xatr__wrapper = 1;
-	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 		.Add_str_byte("src", Xatr__src)
 		.Add_str_byte("wrapper", Xatr__wrapper)
 	;
-	private static final    Bry_fmt
+	private static final Bry_fmt
 	  html_head  = Bry_fmt.Auto("\n/*TemplateStyles:r~{id}*/\n~{css}")
 	, html_error = Bry_fmt.Auto("<strong class=\"error\">~{msg}</strong>")
 	;
@@ -141,5 +141,5 @@ public class Template_styles_nde implements Xox_xnde, Mwh_atr_itm_owner2 {
 class Template_styles_kv_itm implements gplx.xowa.apps.kvs.Xoa_kv_itm {
 	public String Kv__key() {return "TemplateStyles";}
 	public Object Kv__val_make() {return new Hash_adp__int();}
-        public static final    Template_styles_kv_itm Instance = new Template_styles_kv_itm(); Template_styles_kv_itm() {}
+        public static final Template_styles_kv_itm Instance = new Template_styles_kv_itm(); Template_styles_kv_itm() {}
 }

@@ -17,7 +17,7 @@ package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.jsons.*; import gplx.xowa.htmls.*; import gplx.xowa.apps.apis.xowa.html.*;
 class Wdata_fmtr__json implements gplx.core.brys.Bfr_arg {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private Xoapi_toggle_itm toggle_itm; private Wdata_toc_data toc_data; private Json_doc jdoc;
 	public void Init_by_ctor(Wdata_toc_data toc_data, Xoapi_toggle_mgr toggle_mgr) {
 		this.toc_data = toc_data.Itms_len_enable_n_();
@@ -36,7 +36,7 @@ class Wdata_fmtr__json implements gplx.core.brys.Bfr_arg {
 		jdoc.Root_nde().Print_as_json(tmp_bfr, 0);
 		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), tmp_bfr.To_bry_and_clear());
 	}
-	private final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <h2 class='wb-section-heading' id='~{hdr_href}'>~{hdr_text}~{toggle_btn}</h2>"
 	, "  <div class='visualClear'></div>"

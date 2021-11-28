@@ -95,7 +95,7 @@ public class Btrie_slim_itm {
 		}
 		if (found) --ary_len;
 	}
-	public static final    Btrie_slim_itm[] Ary_empty = new Btrie_slim_itm[0]; int ary_len = 0, ary_max = 0;
+	public static final Btrie_slim_itm[] Ary_empty = new Btrie_slim_itm[0]; int ary_len = 0, ary_max = 0;
 }
 class ByteHashItm_sorter {// quicksort
 	Btrie_slim_itm[] ary; int ary_len;
@@ -126,5 +126,5 @@ class ByteHashItm_sorter {// quicksort
 		if (lo < j) Sort_recurse(lo, j);
 		if (i < hi) Sort_recurse(i, hi);
 	}
-	public static final    ByteHashItm_sorter Instance = new ByteHashItm_sorter(); ByteHashItm_sorter() {}
+	public static final ByteHashItm_sorter Instance = new ByteHashItm_sorter(); ByteHashItm_sorter() {}
 }

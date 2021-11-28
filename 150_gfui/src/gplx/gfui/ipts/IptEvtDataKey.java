@@ -20,7 +20,7 @@ public class IptEvtDataKey {
 
 	public static IptEvtDataKey as_(Object obj) {return obj instanceof IptEvtDataKey ? (IptEvtDataKey)obj : null;}
 	public static IptEvtDataKey cast(Object obj) {try {return (IptEvtDataKey)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptEvtDataKey.class, obj);}}
-	public static final    IptEvtDataKey Null = new_(IptKey_.None);
+	public static final IptEvtDataKey Null = new_(IptKey_.None);
 	public static IptEvtDataKey test_(IptKey keyArg) {return new_(keyArg);}
 	public static IptEvtDataKey int_(int val) {
 		IptKey keyArg = IptKey_.api_(val);

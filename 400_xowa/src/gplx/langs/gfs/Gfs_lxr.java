@@ -43,7 +43,7 @@ class Gfs_lxr_whitespace implements Gfs_lxr {
 		}
 		return rv;
 	}
-	public static final    Gfs_lxr_whitespace Instance = new Gfs_lxr_whitespace(); Gfs_lxr_whitespace() {}
+	public static final Gfs_lxr_whitespace Instance = new Gfs_lxr_whitespace(); Gfs_lxr_whitespace() {}
 }
 class Gfs_lxr_comment_flat implements Gfs_lxr {
 	public Gfs_lxr_comment_flat(byte[] bgn_bry, byte[] end_bry) {
@@ -87,7 +87,7 @@ class Gfs_lxr_identifier implements Gfs_lxr {
 		if (rv == Gfs_lxr_.Rv_eos) ctx.Process_eos();	// eos
 		return rv;
 	}
-	public static final    Gfs_lxr_identifier Instance = new Gfs_lxr_identifier(); Gfs_lxr_identifier() {}
+	public static final Gfs_lxr_identifier Instance = new Gfs_lxr_identifier(); Gfs_lxr_identifier() {}
 }
 class Gfs_lxr_semic implements Gfs_lxr {
 	public int Lxr_tid() {return Gfs_lxr_.Tid_semic;}
@@ -101,7 +101,7 @@ class Gfs_lxr_semic implements Gfs_lxr {
 		}
 		return end;
 	}
-	public static final    Gfs_lxr_semic Instance = new Gfs_lxr_semic(); Gfs_lxr_semic() {}
+	public static final Gfs_lxr_semic Instance = new Gfs_lxr_semic(); Gfs_lxr_semic() {}
 }
 class Gfs_lxr_dot implements Gfs_lxr {
 	public int Lxr_tid() {return Gfs_lxr_.Tid_dot;}
@@ -113,7 +113,7 @@ class Gfs_lxr_dot implements Gfs_lxr {
 		}
 		return end;
 	}
-	public static final    Gfs_lxr_dot Instance = new Gfs_lxr_dot(); Gfs_lxr_dot() {}
+	public static final Gfs_lxr_dot Instance = new Gfs_lxr_dot(); Gfs_lxr_dot() {}
 }
 class Gfs_lxr_paren_bgn implements Gfs_lxr {
 	public int Lxr_tid() {return Gfs_lxr_.Tid_paren_bgn;}
@@ -124,7 +124,7 @@ class Gfs_lxr_paren_bgn implements Gfs_lxr {
 		}
 		return end;
 	}
-	public static final    Gfs_lxr_paren_bgn Instance = new Gfs_lxr_paren_bgn(); Gfs_lxr_paren_bgn() {}
+	public static final Gfs_lxr_paren_bgn Instance = new Gfs_lxr_paren_bgn(); Gfs_lxr_paren_bgn() {}
 }
 class Gfs_lxr_paren_end implements Gfs_lxr {
 	public int Lxr_tid() {return Gfs_lxr_.Tid_paren_end;}
@@ -137,7 +137,7 @@ class Gfs_lxr_paren_end implements Gfs_lxr {
 		}
 		return end;
 	}
-	public static final    Gfs_lxr_paren_end Instance = new Gfs_lxr_paren_end(); Gfs_lxr_paren_end() {}
+	public static final Gfs_lxr_paren_end Instance = new Gfs_lxr_paren_end(); Gfs_lxr_paren_end() {}
 }
 class Gfs_lxr_quote implements Gfs_lxr {
 	public Gfs_lxr_quote(byte[] bgn_bry, byte[] end_bry) {
@@ -182,7 +182,7 @@ class Gfs_lxr_curly_bgn implements Gfs_lxr {
 		}
 		return end;
 	}
-	public static final    Gfs_lxr_curly_bgn Instance = new Gfs_lxr_curly_bgn(); Gfs_lxr_curly_bgn() {}
+	public static final Gfs_lxr_curly_bgn Instance = new Gfs_lxr_curly_bgn(); Gfs_lxr_curly_bgn() {}
 }
 class Gfs_lxr_curly_end implements Gfs_lxr {
 	public int Lxr_tid() {return Gfs_lxr_.Tid_curly_end;}
@@ -190,7 +190,7 @@ class Gfs_lxr_curly_end implements Gfs_lxr {
 		ctx.Stack_pop(bgn);
 		return end;
 	}
-	public static final    Gfs_lxr_curly_end Instance = new Gfs_lxr_curly_end(); Gfs_lxr_curly_end() {}
+	public static final Gfs_lxr_curly_end Instance = new Gfs_lxr_curly_end(); Gfs_lxr_curly_end() {}
 }
 class Gfs_lxr_equal implements Gfs_lxr {
 	public int Lxr_tid() {return Gfs_lxr_.Tid_eq;}
@@ -198,7 +198,7 @@ class Gfs_lxr_equal implements Gfs_lxr {
 		ctx.Make_nde(bgn, end).Op_tid_(Gfs_nde.Op_tid_assign);
 		return end;
 	}
-	public static final    Gfs_lxr_equal Instance = new Gfs_lxr_equal(); Gfs_lxr_equal() {}
+	public static final Gfs_lxr_equal Instance = new Gfs_lxr_equal(); Gfs_lxr_equal() {}
 }
 class Gfs_lxr_comma implements Gfs_lxr {
 	public int Lxr_tid() {return Gfs_lxr_.Tid_comma;}
@@ -208,5 +208,5 @@ class Gfs_lxr_comma implements Gfs_lxr {
 		}
 		return end;
 	}
-	public static final    Gfs_lxr_comma Instance = new Gfs_lxr_comma(); Gfs_lxr_comma() {}
+	public static final Gfs_lxr_comma Instance = new Gfs_lxr_comma(); Gfs_lxr_comma() {}
 }

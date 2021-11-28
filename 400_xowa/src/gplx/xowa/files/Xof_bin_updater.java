@@ -17,7 +17,7 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.fsdb.data.*; import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*;
 public class Xof_bin_updater {
-	private final    Fsd_thm_itm tmp_thm_itm = Fsd_thm_itm.new_(); 
+	private final Fsd_thm_itm tmp_thm_itm = Fsd_thm_itm.new_();
 	public int Save_bin(Fsm_mnt_itm mnt, Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, Xof_fsdb_itm fsdb, Io_stream_rdr rdr, long rdr_len) {
 		int db_uid = -1;
 		int orig_ext_id = fsdb.Orig_ext().Id();

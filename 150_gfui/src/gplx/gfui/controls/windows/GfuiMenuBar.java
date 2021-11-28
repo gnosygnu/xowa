@@ -108,7 +108,7 @@ public class GfuiMenuBar implements Gfo_invk {
 		}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String Invk_visible_toggle = "MenuBar_toggle"
+	}	public static final String Invk_visible_toggle = "MenuBar_toggle"
 			, Invk_Visible_ = "Visible_", Invk_SeparatorText_ = "SeparatorText_", Invk_MnemonicPrefix_ = "MnemonicPrefix_"
 			, Invk_RegTop = "RegTop", Invk_RegCmd = "RegCmd", Invk_RegSpr = "RegSpr"
 			;
@@ -144,7 +144,7 @@ public class GfuiMenuBar implements Gfo_invk {
 		win.SubItms_add(SubItms_key, this);
 	}
 	Hash_adp itms = Hash_adp_.New(); GfuiWin win;
-	public static final    String SubItms_key = "menuBar";
+	public static final String SubItms_key = "menuBar";
 	public static GfuiMenuBar new_(GfuiWin win) {
 		GfuiMenuBar rv = new GfuiMenuBar();
 		rv.Init(win);
@@ -256,9 +256,9 @@ class GfuiMenuBarItmType {
 		catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("GfuiMenuBarItmType", raw);}
 	}
 	static Hash_adp regy = Hash_adp_.New();
-	public static final    GfuiMenuBarItmType Root = new GfuiMenuBarItmType(1, "root");
-	public static final    GfuiMenuBarItmType Top = new GfuiMenuBarItmType(2, "top");
-	public static final    GfuiMenuBarItmType Mnu = new GfuiMenuBarItmType(3, "mnu");
-	public static final    GfuiMenuBarItmType Cmd = new GfuiMenuBarItmType(4, "cmd");
-	public static final    GfuiMenuBarItmType Spr = new GfuiMenuBarItmType(5, "spr");
+	public static final GfuiMenuBarItmType Root = new GfuiMenuBarItmType(1, "root");
+	public static final GfuiMenuBarItmType Top = new GfuiMenuBarItmType(2, "top");
+	public static final GfuiMenuBarItmType Mnu = new GfuiMenuBarItmType(3, "mnu");
+	public static final GfuiMenuBarItmType Cmd = new GfuiMenuBarItmType(4, "cmd");
+	public static final GfuiMenuBarItmType Spr = new GfuiMenuBarItmType(5, "spr");
 }

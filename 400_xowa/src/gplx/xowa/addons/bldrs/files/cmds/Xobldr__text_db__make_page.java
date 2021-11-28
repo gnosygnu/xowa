@@ -39,6 +39,6 @@ public class Xobldr__text_db__make_page extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "wiki.page_dump.make";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__text_db__make_page(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__text_db__make_page(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__text_db__make_page(bldr, wiki);}
 }

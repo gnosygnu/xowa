@@ -18,7 +18,7 @@ import gplx.objects.errs.*;
 import gplx.objects.strings.*;
 public class Int_ {
 	public static final String Cls_val_name = "int";
-	public static final    Class<?> Cls_ref_type = Integer.class; 
+	public static final Class<?> Cls_ref_type = Integer.class;
 
 	public static final int
 	  Min_value     = Integer.MIN_VALUE	

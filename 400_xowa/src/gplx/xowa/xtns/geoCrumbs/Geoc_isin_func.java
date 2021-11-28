@@ -29,5 +29,5 @@ public class Geoc_isin_func extends Pf_func_base {
 		wiki.Parser_mgr().Main().Parse_text_to_html(tmp_bfr, ctx, ctx.Page(), false, lnki_ttl);
 		ctx.Page().Html_data().Content_sub_(tmp_bfr.To_bry_and_rls());
 	}
-	public static final    Geoc_isin_func Instance = new Geoc_isin_func();
+	public static final Geoc_isin_func Instance = new Geoc_isin_func();
 }

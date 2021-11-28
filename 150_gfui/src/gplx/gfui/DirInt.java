@@ -27,7 +27,7 @@ public class DirInt {
 	}
 	public boolean BoundFail(int i, int bound) {return this == Bwd ? i < bound : i > bound;}
 	DirInt(int v) {this.val = v;}
-	public static final    DirInt
+	public static final DirInt
 		  Fwd = new DirInt(1)
 		, Bwd = new DirInt(-1);
 }

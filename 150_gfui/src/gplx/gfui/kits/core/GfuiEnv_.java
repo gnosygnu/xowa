@@ -95,8 +95,8 @@ public class GfuiEnv_ {
 			return system_font;
 		} catch (Exception e) {return FontAdp.new_("Arial", 8, FontStyleAdp_.Plain);}
 			}
-	public static final    String Quit_commit_evt = "quit_commit_evt", Quit_notify_evt = "quit_notify_evt";
-	public static final    String Err_GfuiException = "gplx.dbs.GfuiException"; // TODO_OLD: used in JAVA. move
+	public static final String Quit_commit_evt = "quit_commit_evt", Quit_notify_evt = "quit_notify_evt";
+	public static final String Err_GfuiException = "gplx.dbs.GfuiException"; // TODO_OLD: used in JAVA. move
 }
 class GfuiInterruptLnr implements UsrMsgWkr {
 	public void ExecUsrMsg(int type, UsrMsg umsg) {GfuiEnv_.ShowMsg(umsg.To_str());}

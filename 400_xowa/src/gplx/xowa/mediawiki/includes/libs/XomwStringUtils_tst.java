@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*; import gplx.core.tests.*;
 public class XomwStringUtils_tst {
-	private final    XomwStringUtils_fxt fxt = new XomwStringUtils_fxt();
+	private final XomwStringUtils_fxt fxt = new XomwStringUtils_fxt();
 	@Test public void Delimiter_explode() {
 		// basic
 		fxt.Test_delimiter_explode("a|b|c"                             , "a", "b", "c");

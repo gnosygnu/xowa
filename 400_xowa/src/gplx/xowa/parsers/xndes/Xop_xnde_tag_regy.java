@@ -17,7 +17,7 @@ package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.btries.*;
 public class Xop_xnde_tag_regy {
 	private boolean init_needed = true;
-	private final    Btrie_slim_mgr // NOTE:ci.utf8; he.s and <section> alias DATE:2014-07-18
+	private final Btrie_slim_mgr // NOTE:ci.utf8; he.s and <section> alias DATE:2014-07-18
 	  trie_tmpl      = Btrie_slim_mgr.ci_u8()
 	, trie_wtxt_main = Btrie_slim_mgr.ci_u8()
 	, trie_wtxt_tmpl = Btrie_slim_mgr.ci_u8()

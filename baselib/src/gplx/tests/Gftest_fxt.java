@@ -20,7 +20,7 @@ import gplx.objects.primitives.*; import gplx.objects.brys.*;
 import gplx.objects.strings.*; import gplx.objects.strings.bfrs.*;
 import gplx.objects.arrays.*; import gplx.objects.types.*;
 public class Gftest_fxt {
-	private static final    String_bfr bfr = new String_bfr();
+	private static final String_bfr bfr = new String_bfr();
 	public static void Eq__ary(Object[] expd, Object[] actl, String msg_fmt, Object... msg_args)      {Eq__array(Type_ids_.Id__obj, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(boolean[] expd, boolean[] actl, String msg_fmt, Object... msg_args)			{Eq__array(Type_ids_.Id__bool, expd, actl, msg_fmt, msg_args);}
 	public static void Eq__ary(int[] expd, int[] actl)                                                      {Eq__array(Type_ids_.Id__int, expd, actl, "");}

@@ -56,5 +56,5 @@ class GfmlVarCtx_ {
 		}
 		return rv;
 	}
-	public static final    String DefaultKey = "gfml.varKeys.default";
+	public static final String DefaultKey = "gfml.varKeys.default";
 }

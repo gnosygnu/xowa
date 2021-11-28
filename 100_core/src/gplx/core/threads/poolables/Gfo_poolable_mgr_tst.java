@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.threads.poolables; import gplx.*; import gplx.core.*; import gplx.core.threads.*;
 import org.junit.*;
 public class Gfo_poolable_mgr_tst {
-	private final    Gfo_poolable_mgr_tstr tstr = new Gfo_poolable_mgr_tstr();
+	private final Gfo_poolable_mgr_tstr tstr = new Gfo_poolable_mgr_tstr();
 	@Before public void init() {tstr.Clear();}
 	@Test public void Get__one() {
 		tstr.Test__get(0);
@@ -59,7 +59,7 @@ public class Gfo_poolable_mgr_tst {
 	}
 }
 class Gfo_poolable_mgr_tstr {
-	private final    Gfo_poolable_mgr mgr = new Gfo_poolable_mgr(new Sample_poolable_itm(null, -1, Object_.Ary_empty), Object_.Ary("make"), 2, 8);
+	private final Gfo_poolable_mgr mgr = new Gfo_poolable_mgr(new Sample_poolable_itm(null, -1, Object_.Ary_empty), Object_.Ary("make"), 2, 8);
 	public void Clear() {mgr.Clear_fast();}
 	public void Test__get(int expd_idx) {
 		Sample_poolable_itm actl_itm = (Sample_poolable_itm)mgr.Get_fast();
@@ -74,8 +74,8 @@ class Gfo_poolable_mgr_tstr {
 class Sample_poolable_itm implements Gfo_poolable_itm {
 	private Gfo_poolable_mgr pool_mgr;
 	public Sample_poolable_itm(Gfo_poolable_mgr pool_mgr, int pool_idx, Object[] make_args) {this.pool_mgr = pool_mgr; this.pool_idx = pool_idx; this.pool__make_args = make_args;}
-	public int				Pool__idx() {return pool_idx;} private final    int pool_idx;
-	public Object[]			Pool__make_args() {return pool__make_args;} private final    Object[] pool__make_args;
+	public int				Pool__idx() {return pool_idx;} private final int pool_idx;
+	public Object[]			Pool__make_args() {return pool__make_args;} private final Object[] pool__make_args;
 	public void				Pool__rls() {pool_mgr.Rls_safe(pool_idx);}
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {return new Sample_poolable_itm(pool_mgr, idx, args);}
 }

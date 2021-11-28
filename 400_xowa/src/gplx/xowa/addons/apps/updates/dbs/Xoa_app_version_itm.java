@@ -24,13 +24,13 @@ public class Xoa_app_version_itm {
 		this.summary = summary;
 		this.details = details;
 	}
-	public int Id() {return id;} private final    int id;
-	public String Name() {return name;} private final    String name;
-	public String Date() {return date;} private final    String date;
-	public int Priority() {return priority;} private final    int priority;
-	public String Url() {return url;} private final    String url;
-	public String Summary() {return summary;} private final    String summary;
-	public String Details() {return details;} private final    String details;
+	public int Id() {return id;} private final int id;
+	public String Name() {return name;} private final String name;
+	public String Date() {return date;} private final String date;
+	public int Priority() {return priority;} private final int priority;
+	public String Url() {return url;} private final String url;
+	public String Summary() {return summary;} private final String summary;
+	public String Details() {return details;} private final String details;
 	public String Package_url() {
 		String folder = url;
 		if (String_.Len_eq_0(folder)) 

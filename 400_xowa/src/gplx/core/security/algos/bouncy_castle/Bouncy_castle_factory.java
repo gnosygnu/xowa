@@ -26,5 +26,5 @@ public class Bouncy_castle_factory implements Hash_algo_factory {
 	, Key__ripemd128 = "ripemd128", Key__ripemd160 = "ripemd160", Key__ripemd256 = "ripemd256", Key__ripemd320 = "ripemd320"
 	, Key__whirlpool = "whirlpool"
 	;
-	public static final    Bouncy_castle_factory Instance = new Bouncy_castle_factory(); Bouncy_castle_factory() {}
+	public static final Bouncy_castle_factory Instance = new Bouncy_castle_factory(); Bouncy_castle_factory() {}
 }

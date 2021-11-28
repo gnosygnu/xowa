@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.searchers.rslts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.core.lists.hashs.*;
 public class Srch_rslt_list {
-	private final    Ordered_hash key_hash = Ordered_hash_.New_bry();
-	private final    Hash_adp__int id_hash = new Hash_adp__int();
+	private final Ordered_hash key_hash = Ordered_hash_.New_bry();
+	private final Hash_adp__int id_hash = new Hash_adp__int();
 	public int				Score_bgn = gplx.dbs.percentiles.Percentile_rng.Score_null;
 	public int				Score_len = gplx.dbs.percentiles.Percentile_rng.Score_null;
 	public boolean			Rslts_are_first;
@@ -57,5 +57,5 @@ class Srch_rslt_row_sorter implements gplx.core.lists.ComparerAble {
 		if (rv != CompareAble_.Same) return rv;
 		return Bry_.Compare(lhs.Page_ttl.Page_txt(), rhs.Page_ttl.Page_txt());
 	}
-	public static final    Srch_rslt_row_sorter Score_dsc = new Srch_rslt_row_sorter();
+	public static final Srch_rslt_row_sorter Score_dsc = new Srch_rslt_row_sorter();
 }

@@ -21,8 +21,8 @@ public class Xobc_host_regy_itm {
 		this.host_data_dir = host_data_dir;
 		this.host_update_dir = host_update_dir;
 	}
-	public int		Host_id()			{return host_id;} private final    int host_id;
-	public String	Host_domain()		{return host_domain;} private final    String host_domain;
-	public String	Host_data_dir()		{return host_data_dir;} private final    String host_data_dir;
-	public String	Host_update_dir()	{return host_update_dir;} private final    String host_update_dir;
+	public int		Host_id()			{return host_id;} private final int host_id;
+	public String	Host_domain()		{return host_domain;} private final String host_domain;
+	public String	Host_data_dir()		{return host_data_dir;} private final String host_data_dir;
+	public String	Host_update_dir()	{return host_update_dir;} private final String host_update_dir;
 }

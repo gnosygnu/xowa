@@ -35,12 +35,12 @@ public class Xowdir_item_bridge implements Bridge_cmd_itm {
 	}
 
 	private static final byte Proc__save = 0, Proc__delete = 1, Proc__reindex_search = 2;
-	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("save"						, Proc__save)
 	.Add_str_byte("delete"						, Proc__delete)
 	.Add_str_byte("reindex_search"				, Proc__reindex_search)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("wiki.directory.item");
-        public static final    Xowdir_item_bridge Prototype = new Xowdir_item_bridge(); Xowdir_item_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("wiki.directory.item");
+        public static final Xowdir_item_bridge Prototype = new Xowdir_item_bridge(); Xowdir_item_bridge() {}
 }

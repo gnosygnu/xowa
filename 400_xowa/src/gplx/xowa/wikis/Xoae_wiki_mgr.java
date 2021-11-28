@@ -43,17 +43,17 @@ import gplx.xowa.wikis.nss.Xow_ns_mgr_;
 import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
 
 public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
-	private final    Xoae_app app;
-	private final    List_adp list = List_adp_.New(); private final    Hash_adp_bry hash = Hash_adp_bry.ci_a7();	// ASCII:url_domain; EX:en.wikipedia.org
+	private final Xoae_app app;
+	private final List_adp list = List_adp_.New(); private final Hash_adp_bry hash = Hash_adp_bry.ci_a7();	// ASCII:url_domain; EX:en.wikipedia.org
 	private Xowdir_db_mgr db_mgr;
 	public Xoae_wiki_mgr(Xoae_app app) {
 		this.app = app;
 		this.wiki_regy = new Xoa_wiki_regy(app);
 		this.wdata_mgr = new Wdata_wiki_mgr(app);
 	}
-	public Xoa_wiki_regy Wiki_regy() {return wiki_regy;} private final    Xoa_wiki_regy wiki_regy;
-	public Xow_script_mgr Scripts() {return scripts;} private final    Xow_script_mgr scripts = new Xow_script_mgr();
-	public Wdata_wiki_mgr Wdata_mgr() {return wdata_mgr;} private final    Wdata_wiki_mgr wdata_mgr;
+	public Xoa_wiki_regy Wiki_regy() {return wiki_regy;} private final Xoa_wiki_regy wiki_regy;
+	public Xow_script_mgr Scripts() {return scripts;} private final Xow_script_mgr scripts = new Xow_script_mgr();
+	public Wdata_wiki_mgr Wdata_mgr() {return wdata_mgr;} private final Wdata_wiki_mgr wdata_mgr;
 	public Xowe_wiki Wiki_commons() {
 		synchronized (this) {	// LOCK:app-level; DATE:2016-07-06
 			Xowe_wiki rv = (Xowe_wiki)this.Get_by_or_null(Xow_domain_itm_.Bry__commons);
@@ -150,5 +150,5 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 		else if	(ctx.Match(k, Xoa_wiki_mgr_.Invk__import_by_url))	return this.Import_by_url(m.ReadIoUrl("v"));
 		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_get = "get", Invk_scripts = "scripts", Invk_wdata = "wdata";
-	private static final    String Invk_len = "len", Invk_get_at = "get_at";
+	private static final String Invk_len = "len", Invk_get_at = "get_at";
 }

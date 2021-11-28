@@ -26,22 +26,22 @@ class Hiero_html_wtr {
 	public byte[] Td_height(int height) {
 		return temp_bfr.Add(Option_bgn_bry).Add_int_variable(height).Add(Option_end_bry).To_bry_and_clear();
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Option_bgn_bry = Bry_.new_a7("height: ")
 	, Option_end_bry = Bry_.new_a7("px;")
 	;
 	public void Td(Bry_bfr bfr, byte[] glyph) {
 		bfr.Add(Td_bgn_bry).Add(glyph).Add(Td_end_bry);
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Td_bgn_bry = Bry_.new_a7("\n          <td>")
 	, Td_end_bry = Bry_.new_a7("\n          </td>")
 	;
 	public void Cartouche_bgn(Bry_bfr bfr) {
 		bfr.Add(Cartouche_bgn_lhs_bry).Add_int_variable((Hiero_html_mgr.Cartouche_width * Hiero_html_mgr.scale) / 100).Add(Cartouche_bgn_rhs_bry);
 	}
-	private static final    String Tbl_bgn_str = "<table class=\"mw-hiero-table\">";
-	private static final    byte[] 
+	private static final String Tbl_bgn_str = "<table class=\"mw-hiero-table\">";
+	private static final byte[]
 	  Cartouche_bgn_lhs_bry = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( ""
 	, "          <td>"
@@ -61,7 +61,7 @@ class Hiero_html_wtr {
 	public void Cartouche_end(Bry_bfr bfr) {
 		bfr.Add(Cartouche_end_lhs_bry).Add_int_variable((Hiero_html_mgr.Cartouche_width * Hiero_html_mgr.scale) / 100).Add(Cartouche_end_rhs_bry);
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Cartouche_end_lhs_bry = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( ""
 	, "                    </tr>"
@@ -97,7 +97,7 @@ class Hiero_html_wtr {
 	public void Tbl_inner(Bry_bfr html_bfr, Bry_bfr text_bfr) {
 		html_bfr.Add(Tbl_inner_bgn).Add_bfr_and_clear(text_bfr).Add(Tbl_inner_end); //	$html .= self::TABLE_START . "<tr>\n" . $tableContentHtml . '</tr></table>';
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Tbl_inner_bgn = Bry_.new_u8(String_.Concat_lines_nl_skip_last
 	( "      <table class=\"mw-hiero-table\">"
 	, "        <tr>"
@@ -113,7 +113,7 @@ class Hiero_html_wtr {
 		bfr.Add_bfr_and_clear(html_bfr);
 		bfr.Add(Outer_tbl_end);
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Outer_tbl_bgn = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( "<table class='mw-hiero-table mw-hiero-outer' dir='ltr'>"
 	, "  <tr>"
@@ -144,7 +144,7 @@ class Hiero_html_wtr {
 		}
 		return glyph_img_fmtr.Bld_bry_many(temp_bfr, img_cls, Hiero_html_mgr.Image_margin, td_height, img_src_dir, img_src_name, img_title, glyph, img_hdump_atr);
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Tbl_eol_bry = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( ""
 	, "        </tr>"
@@ -158,18 +158,18 @@ class Hiero_html_wtr {
 		return void_fmtr.Bld_bry_many(temp_bfr, width);
 	}
 
-	private static final    Bry_fmtr glyph_img_fmtr = Bry_fmtr.new_(String_.Concat
+	private static final Bry_fmtr glyph_img_fmtr = Bry_fmtr.new_(String_.Concat
 	( "\n            "
 	, "<img ~{img_cls}style='margin: ~{img_margin}px; ~{option}'"
 	, " src='~{hiero_img_dir}hiero_~{img_code}.png' title='~{img_title}' alt='~{glyph}' ~{data-xowa-hdump}/>"
 	), "img_cls", "img_margin", "option", "hiero_img_dir", "img_code", "img_title", "glyph", "data-xowa-hdump");
-	private static final    Bry_fmtr cartouche_img_fmtr = Bry_fmtr.new_(String_.Concat
+	private static final Bry_fmtr cartouche_img_fmtr = Bry_fmtr.new_(String_.Concat
 	( "\n            "
 	, "<img src='~{hiero_img_dir}hiero_~{img_code}.png'"
 	, " height='~{height}' title='~{title}'"
 	, " alt='~{title}' ~{data_xowa_hdump}/>"
 	), "hiero_img_dir", "img_code", "height", "title", "data_xowa_hdump");
-	private static final    Bry_fmtr void_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final Bry_fmtr void_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "            <table class=\"mw-hiero-table\" style=\"width: ~{width}px;\">"
 	, "              <tr>"

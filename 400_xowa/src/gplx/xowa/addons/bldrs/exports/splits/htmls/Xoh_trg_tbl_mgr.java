@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.splits.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xoh_trg_tbl_mgr {
-	private final    Xow_db_mgr db_mgr;
+	private final Xow_db_mgr db_mgr;
 	public Xoh_trg_tbl_mgr(Xowe_wiki wiki) {
 		this.db_mgr = wiki.Data__core_mgr();
 	}

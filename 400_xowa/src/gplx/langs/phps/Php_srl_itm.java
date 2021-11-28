@@ -23,10 +23,10 @@ interface Php_srl_itm {
 	void Clear();
 }
 class Php_srl_itm_ {
-	public static final    Php_srl_itm[] Ary_empty = new Php_srl_itm[0];
+	public static final Php_srl_itm[] Ary_empty = new Php_srl_itm[0];
 	public static final byte  Tid_unknown = 0, Tid_nil = 1, Tid_bool = 2, Tid_int = 3, Tid_double = 4, Tid_string = 5, Tid_array = 6, Tid_function = 7;
-	public static final    byte[][] Names = Bry_.Ary("unknown", "nil", "boolean", "int", "double", "string", "array", "function");
-	public static final    Object Val_nil = null, Val_table = null;
+	public static final byte[][] Names = Bry_.Ary("unknown", "nil", "boolean", "int", "double", "string", "array", "function");
+	public static final Object Val_nil = null, Val_table = null;
 }
 abstract class Php_srl_itm_base implements Php_srl_itm {
 	public abstract byte Tid();
@@ -113,7 +113,7 @@ class Php_srl_itm_ary extends Php_srl_itm_base {
 		Php_srl_wtr.Indent(bfr, depth);
 		bfr.Add_byte(Byte_ascii.Curly_end).Add_byte_nl();
 	}
-	private static final    byte[] CONST_ary_bgn = Bry_.new_a7("]{\n");
+	private static final byte[] CONST_ary_bgn = Bry_.new_a7("]{\n");
 	Php_srl_itm_kv[] subs = Php_srl_itm_kv.Ary_empty;
 }
 class Php_srl_itm_kv {
@@ -128,7 +128,7 @@ class Php_srl_itm_kv {
 		key.Xto_bfr(bfr, depth);
 		val.Xto_bfr(bfr, depth);
 	}
-	public static final    Php_srl_itm_kv[] Ary_empty = new Php_srl_itm_kv[0];
+	public static final Php_srl_itm_kv[] Ary_empty = new Php_srl_itm_kv[0];
 }
 class Php_srl_wtr {
 	public static void Indent(Bry_bfr bfr, int depth) {

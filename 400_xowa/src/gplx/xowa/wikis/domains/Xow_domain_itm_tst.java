@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xow_domain_itm_tst {
-	private final    Xow_domain_fxt fxt = new Xow_domain_fxt();
+	private final Xow_domain_fxt fxt = new Xow_domain_fxt();
 	@Test public void Parse_en_wikipedia() 			{fxt.Test_parse("en.wikipedia.org"				, "en"				, "en"	, Xow_domain_tid_.Tid__wikipedia);}
 	@Test public void Parse_fr_wikipedia() 			{fxt.Test_parse("fr.wikipedia.org"				, "fr"				, "fr"	, Xow_domain_tid_.Tid__wikipedia);}
 	@Test public void Parse_en_wiktionary() 			{fxt.Test_parse("en.wiktionary.org"				, "en"				, "en"	, Xow_domain_tid_.Tid__wiktionary);}

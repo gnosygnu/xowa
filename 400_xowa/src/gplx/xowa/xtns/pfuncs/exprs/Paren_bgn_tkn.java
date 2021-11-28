@@ -19,7 +19,7 @@ class Paren_bgn_tkn implements Expr_tkn, Func_tkn {
 	public int Tid() {return Expr_tkn_.Tid_paren_lhs;}
 	public boolean Func_is_const() {return false;}
 	public byte[] Val_ary() {return val_ary;} private byte[] val_ary = Bry_.new_u8(val_str);
-	public String Val_str() {return val_str;} static final    String val_str = "(";
+	public String Val_str() {return val_str;} static final String val_str = "(";
 	public int ArgCount() {return 0;}
 	public int Precedence() {return -1;}
 	public Func_tkn GetAlt() {return this;}

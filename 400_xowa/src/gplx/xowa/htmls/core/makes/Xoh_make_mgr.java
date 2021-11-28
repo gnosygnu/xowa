@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.xowa.htmls.core.wkrs.*;
 public class Xoh_make_mgr {
-	private final    Xoh_hzip_bfr bfr = Xoh_hzip_bfr.New_txt(255);
-	private final    Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
-	private final    Xoh_hdoc_parser make_parser;
+	private final Xoh_hzip_bfr bfr = Xoh_hzip_bfr.New_txt(255);
+	private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
+	private final Xoh_hdoc_parser make_parser;
 	Xoh_make_mgr(Xoh_hdoc_wkr hdoc_wkr) {
 		this.make_parser = new Xoh_hdoc_parser(hdoc_wkr);
 	}

@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.files.cksums.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.addons.bldrs.files.cksums.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.addons.wikis.ctgs.*; 
 public class Xocksum_cksum_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__fil_id, fld__thm_id, fld__bin_db_id, fld__bin_len, fld__cksum_tid, fld__cksum_count, fld__cksum_val, fld__cksum_date;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld__fil_id, fld__thm_id, fld__bin_db_id, fld__bin_len, fld__cksum_tid, fld__cksum_count, fld__cksum_val, fld__cksum_date;
 	private Db_stmt stmt__update;
 	public Xocksum_cksum_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -32,8 +32,8 @@ public class Xocksum_cksum_tbl implements Db_tbl {
 		this.fld__cksum_date	= flds.Add_str("cksum_date", 16);
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name; 
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Create_idx() {
 		conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "fil_id__thm_id", fld__fil_id, fld__thm_id));

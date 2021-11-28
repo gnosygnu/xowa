@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xomw_regex_parser__tst {
-	private final    Xomw_regex_parser__fxt fxt = new Xomw_regex_parser__fxt();
+	private final Xomw_regex_parser__fxt fxt = new Xomw_regex_parser__fxt();
 	@Test  public void Ary__space() {
 		fxt.Test__parse_ary(String_.Ary("\\s"), String_.Ary(" "));
 	}
@@ -28,7 +28,7 @@ public class Xomw_regex_parser__tst {
 	}
 }
 class Xomw_regex_parser__fxt {
-	private final    Xomw_regex_parser parser = new Xomw_regex_parser();
+	private final Xomw_regex_parser parser = new Xomw_regex_parser();
 	public void Test__parse_ary(String[] ary, String[] expd) {
 		parser.Add_ary(ary);
 		Gftest.Eq__ary(expd, String_.Ary(parser.Rslt()));

@@ -36,11 +36,11 @@ class Dbui_val_fmtr__edit implements gplx.core.brys.Bfr_arg, Dbui_val_fmtr {
 			default: throw Err_.new_unimplemented();
 		}
 	}
-	private static final    Bry_fmtr input_fmtr_str = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final Bry_fmtr input_fmtr_str = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "    <input class='dbui_cell xo_resizable_col' dbui_col='~{col_key}' style='border:1px solid black; width:~{width}px' value='~{value}' onkeyup='Dbui__edit__keyup(event, \"~{row_id}\");'/>"
 	), "col_key", "width", "value", "row_id");
-	private static final    Bry_fmtr textarea_fmtr_str = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final Bry_fmtr textarea_fmtr_str = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "    <textarea class='dbui_cell' dbui_col='~{col_key}' style='border:1px solid black; width:~{width}px; height:18px;' onkeyup='Dbui__edit__keyup(event, \"~{row_id}\");'>~{value}</textarea>"
 	), "col_key", "width", "value", "row_id");

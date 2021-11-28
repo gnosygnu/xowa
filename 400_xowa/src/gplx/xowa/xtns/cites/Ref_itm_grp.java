@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Ref_itm_grp {
-	private final    List_adp lsts = List_adp_.New();
+	private final List_adp lsts = List_adp_.New();
 	private int lst_idx;
 	public Ref_itm_grp(byte[] grp_name) {this.grp_name = grp_name;}
 	public byte[] Grp_name() {return grp_name;} private byte[] grp_name;

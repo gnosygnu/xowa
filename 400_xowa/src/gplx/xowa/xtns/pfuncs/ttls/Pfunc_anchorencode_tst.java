@@ -17,7 +17,7 @@ package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*;
 import gplx.core.consoles.*;
 public class Pfunc_anchorencode_tst {
-	private final    Pfunc_anchorenchode_fxt fxt = new Pfunc_anchorenchode_fxt(Bool_.N);
+	private final Pfunc_anchorenchode_fxt fxt = new Pfunc_anchorenchode_fxt(Bool_.N);
 	@Before public void init() {fxt.Reset();}
 	@Test public void Text_apos() {
 		fxt.Test("{{anchorencode:a 'b c}}", "a_'b_c");
@@ -67,8 +67,8 @@ public class Pfunc_anchorencode_tst {
 	}
 }
 class Pfunc_anchorenchode_fxt {
-	private final    Xop_fxt fxt = new Xop_fxt();
-	private final    boolean dbg;
+	private final Xop_fxt fxt = new Xop_fxt();
+	private final boolean dbg;
 	public Pfunc_anchorenchode_fxt(boolean dbg) {
 		this.dbg = dbg;
 	}

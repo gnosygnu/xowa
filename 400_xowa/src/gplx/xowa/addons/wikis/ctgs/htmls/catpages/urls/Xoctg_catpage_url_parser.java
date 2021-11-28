@@ -78,13 +78,13 @@ public class Xoctg_catpage_url_parser {
 	, Tid__file_bgn = 4, Tid__file_end = 5
 	, Tid__page_bgn = 6, Tid__page_end = 7
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Bry__arg_each_bgn		= Bry_.new_a7("from")			, Bry__arg_each_end 	= Bry_.new_a7("until")
 	, Bry__arg_subc_bgn 	= Bry_.new_a7("subcatfrom")		, Bry__arg_subc_end		= Bry_.new_a7("subcatuntil")
 	, Bry__arg_page_bgn 	= Bry_.new_a7("pagefrom")		, Bry__arg_page_end 	= Bry_.new_a7("pageuntil")
 	, Bry__arg_file_bgn 	= Bry_.new_a7("filefrom")		, Bry__arg_file_end		= Bry_.new_a7("fileuntil")
 	;
-	private static final    Hash_adp_bry Key_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry Key_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Bry__arg_each_bgn	, Tid__each_bgn)	.Add_bry_byte(Bry__arg_each_end	, Tid__each_end)
 	.Add_bry_byte(Bry__arg_subc_bgn	, Tid__subc_bgn)	.Add_bry_byte(Bry__arg_subc_end , Tid__subc_end)
 	.Add_bry_byte(Bry__arg_page_bgn	, Tid__page_bgn)	.Add_bry_byte(Bry__arg_page_end	, Tid__page_end)

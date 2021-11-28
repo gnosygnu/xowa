@@ -18,9 +18,9 @@ import gplx.core.btries.*; import gplx.core.primitives.*;
 public class XomwMagicWordArray {
 	private Btrie_slim_mgr fwd_trie;
 	private Btrie_bwd_mgr  bwd_trie;
-	private final    Btrie_rv trv = new Btrie_rv();
-//		private final    XomwMagicWordMgr magic_word_mgr;
-	public final    byte[][] names;
+	private final Btrie_rv trv = new Btrie_rv();
+//		private final XomwMagicWordMgr magic_word_mgr;
+	public final byte[][] names;
 
 //		/** @var array */
 //		private hash;

@@ -38,5 +38,5 @@ class Xol_plural__default implements Xol_plural {
 			default:	return count == 1 ? forms[0] : forms[1]; // TODO_OLD: incorporate plurals.xml logic
 		}
 	}
-	public static final    Xol_plural__default Instance = new Xol_plural__default(); Xol_plural__default() {}
+	public static final Xol_plural__default Instance = new Xol_plural__default(); Xol_plural__default() {}
 }

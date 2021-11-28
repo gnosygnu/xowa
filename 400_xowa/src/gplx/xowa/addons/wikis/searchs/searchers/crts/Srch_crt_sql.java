@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*;
+import gplx.dbs.sqls.SqlQryWtrUtl;
 import gplx.langs.regxs.*;
 public class Srch_crt_sql {
 	public Srch_crt_sql(int tid, String eq, String rng_bgn, String rng_end, String like, Gfo_pattern pattern) {
@@ -24,12 +25,12 @@ public class Srch_crt_sql {
 		this.Like = like;
 		this.Pattern = pattern;
 	}
-	public final    int				Tid;
-	public final    String			Eq;
-	public final    String			Rng_bgn;
-	public final    String			Rng_end;
-	public final    String			Like;
-	public final    Gfo_pattern		Pattern;	// NOTE: only supports LIKE; GLOB requires regex
+	public final int				Tid;
+	public final String			Eq;
+	public final String			Rng_bgn;
+	public final String			Rng_end;
+	public final String			Like;
+	public final Gfo_pattern		Pattern;	// NOTE: only supports LIKE; GLOB requires regex
 	public int						Eq_id;
 
 	public static final int
@@ -61,7 +62,7 @@ public class Srch_crt_sql {
 				rng_end = String_.new_u8(gplx.core.intls.Utf8_.Increment_char_at_last_pos(rng_tmp));
 				break;
 			case Srch_crt_sql.Tid__like:
-				like = String_.new_u8(Bry_.Replace(raw, wildcard_byte, gplx.dbs.sqls.Sql_qry_wtr_.Like_wildcard));
+				like = String_.new_u8(Bry_.Replace(raw, wildcard_byte, SqlQryWtrUtl.Like_wildcard));
 				byte like_escape_byte = gplx.xowa.addons.wikis.searchs.searchers.wkrs.Srch_link_wkr_sql.Like_escape_byte;
 				Bry_bfr tmp_bfr = Bry_bfr_.Get();
 				try {pattern_raw = Bry_.Resolve_escape(tmp_bfr, like_escape_byte, raw, 0, raw.length);}

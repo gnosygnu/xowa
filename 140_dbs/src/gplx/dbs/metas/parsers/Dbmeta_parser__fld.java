@@ -17,7 +17,7 @@ package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.db
 import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.dbs.engines.sqlite.*;
 public class Dbmeta_parser__fld {
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	public Dbmeta_fld_itm Parse_fld(Sql_bry_rdr rdr) {	// starts after "(" or ","; EX: "(fld1 int", ", fld2 int"; ends at ")"
 		byte[] name = rdr.Read_sql_identifier();
 		Dbmeta_fld_tid type = this.Parse_type(rdr);
@@ -68,7 +68,7 @@ public class Dbmeta_parser__fld {
 		}
 		return new Dbmeta_fld_tid(type_itm.Tid_ansi(), type_itm.Tid_sqlite(), type_itm.Word(), len_1, len_2);
 	}
-	private static final    Btrie_slim_mgr fld_trie = fld_trie_init
+	private static final Btrie_slim_mgr fld_trie = fld_trie_init
 	( Dbmeta_fld_wkr__nullable_null.Instance
 	, Dbmeta_fld_wkr__nullable_not.Instance
 	, Dbmeta_fld_wkr__autonumber.Instance
@@ -81,7 +81,7 @@ public class Dbmeta_parser__fld {
 			wkr.Reg(rv);
 		return rv;
 	}
-	private static final    Btrie_slim_mgr type_trie = type_trie_init();
+	private static final Btrie_slim_mgr type_trie = type_trie_init();
 	private static Btrie_slim_mgr type_trie_init() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
 		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__byte		, Sqlite_tid.Tid_int		, 0, "tinyint", "int2");
@@ -106,10 +106,10 @@ class Dbmeta_parser__fld_itm {
 		this.tid_ansi = tid_ansi; this.tid_sqlite = tid_sqlite;
 		this.word = word; this.paren_itms_count = paren_itms_count;
 	}
-	public int Tid_ansi() {return tid_ansi;} private final    int tid_ansi;
-	public int Tid_sqlite() {return tid_sqlite;} private final    int tid_sqlite;
-	public byte[] Word() {return word;} private final    byte[] word;
-	public int Paren_itms_count() {return paren_itms_count;} private final    int paren_itms_count;
+	public int Tid_ansi() {return tid_ansi;} private final int tid_ansi;
+	public int Tid_sqlite() {return tid_sqlite;} private final int tid_sqlite;
+	public byte[] Word() {return word;} private final byte[] word;
+	public int Paren_itms_count() {return paren_itms_count;} private final int paren_itms_count;
 	public static void reg_many(Btrie_slim_mgr trie, int tid_ansi, int tid_sqlite, int paren_itms_count, String... names_str) {
 		int len = names_str.length;
 		for (int i = 0; i < len; ++i) {

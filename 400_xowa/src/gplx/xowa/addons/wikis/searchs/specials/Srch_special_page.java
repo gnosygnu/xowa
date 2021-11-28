@@ -81,7 +81,7 @@ public class Srch_special_page implements Xow_special_page {
 	}
 	public static final byte Match_tid_all = 0, Match_tid_bgn = 1;
 	public static final byte Version_null = 0, Version_1 = 1, Version_2 = 2;
-	private static final    byte[] Qarg__fulltext = Bry_.new_a7("fulltext"), Qarg__fulltext__y = Bry_.new_a7("y");
+	private static final byte[] Qarg__fulltext = Bry_.new_a7("fulltext"), Qarg__fulltext__y = Bry_.new_a7("y");
 	private static Xow_domain_itm[] Get_by_crt(gplx.xowa.wikis.xwikis.Xow_xwiki_mgr xwiki_mgr, Xow_domain_itm cur, gplx.xowa.wikis.domains.crts.Xow_domain_crt_itm crt) {
 		List_adp rv = List_adp_.New();
 		int len = xwiki_mgr.Len();

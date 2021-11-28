@@ -18,10 +18,10 @@ import gplx.core.brys.*; import gplx.core.brys.fmts.*;
 import gplx.dbs.*; import gplx.dbs.metas.*; import gplx.dbs.diffs.*; import gplx.dbs.diffs.builds.*; import gplx.dbs.diffs.itms.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 class Xob_diff_build_wkr {		
-	private final    Gfdb_diff_bldr dif_bldr = new Gfdb_diff_bldr();
-	private final    Xowe_wiki wiki;
+	private final Gfdb_diff_bldr dif_bldr = new Gfdb_diff_bldr();
+	private final Xowe_wiki wiki;
 	private Db_conn old_conn, new_conn, dif_conn;
-	private final    Xowd_tbl_mapr tbl_mapr;
+	private final Xowd_tbl_mapr tbl_mapr;
 	public Xob_diff_build_wkr(Xob_bldr bldr, Xowe_wiki wiki, String old_url, String new_url, String dif_url, int commit_interval, Xowd_tbl_mapr tbl_mapr) {
 		this.wiki = wiki;
 		wiki.Init_by_wiki();

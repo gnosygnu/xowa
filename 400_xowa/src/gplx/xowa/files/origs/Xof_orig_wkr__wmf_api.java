@@ -17,8 +17,8 @@ package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.apps.wms.apis.*; import gplx.xowa.files.downloads.*;
 import gplx.xowa.apps.wms.apis.origs.*;
 public class Xof_orig_wkr__wmf_api implements Xof_orig_wkr {
-	private final    Xoapi_orig_base orig_api; private final    Xof_download_wkr download_wkr; private final    Xow_repo_mgr repo_mgr; private final    byte[] wiki_domain;
-	private final    Xoapi_orig_rslts api_rv = new Xoapi_orig_rslts();		
+	private final Xoapi_orig_base orig_api; private final Xof_download_wkr download_wkr; private final Xow_repo_mgr repo_mgr; private final byte[] wiki_domain;
+	private final Xoapi_orig_rslts api_rv = new Xoapi_orig_rslts();
 	public Xof_orig_wkr__wmf_api(Xoapi_orig_base orig_api, Xof_download_wkr download_wkr, Xow_repo_mgr repo_mgr, byte[] wiki_domain) {
 		this.orig_api = orig_api; this.download_wkr = download_wkr; this.repo_mgr = repo_mgr; this.wiki_domain = wiki_domain;
 	}

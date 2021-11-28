@@ -37,7 +37,7 @@ class Sql_select_fld_sum extends Sql_select_fld_func {			public Sql_select_fld_s
 		return Int_.Cast(groupByVal) + Int_.Cast(curVal);
 	}
 }
-class Sql_select_fld_minMax extends Sql_select_fld_func {		private final    int compareType;
+class Sql_select_fld_minMax extends Sql_select_fld_func {		private final int compareType;
 	public Sql_select_fld_minMax(int compareType, String tbl, String fld, String alias) {super(tbl, fld, alias);
 		this.compareType = compareType;
 	}

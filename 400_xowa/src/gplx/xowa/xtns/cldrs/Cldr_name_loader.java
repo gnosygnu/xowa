@@ -16,11 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.jsons.*;
 public class Cldr_name_loader {
-	private final    Json_parser parser = new Json_parser();
-	private final    Io_url cldr_dir;
-	private final    Hash_adp files_hash = Hash_adp_.New();
+	private final Json_parser parser = new Json_parser();
+	private final Io_url cldr_dir;
+	private final Hash_adp files_hash = Hash_adp_.New();
 	private Hash_adp urls_hash;
-	private static final    String Token_cldr_names = "CldrNames", Token_json_ext = ".json";
+	private static final String Token_cldr_names = "CldrNames", Token_json_ext = ".json";
 
 	public Cldr_name_loader(Io_url cldr_dir) {
 		this.cldr_dir = cldr_dir;

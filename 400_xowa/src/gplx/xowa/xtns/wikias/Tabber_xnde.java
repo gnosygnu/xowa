@@ -19,7 +19,7 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.p
 public class Tabber_xnde implements Xox_xnde {
 	private byte[] id;
 	private Tabber_tab_itm[] tab_itms_ary;
-	private static final    Hash_algo md5_hash = Hash_algo_.New__md5();
+	private static final Hash_algo md5_hash = Hash_algo_.New__md5();
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, Object xatr_id_obj) {}
 	public void Xtn_parse(Xowe_wiki wiki, Xop_ctx ctx, Xop_root_tkn root, byte[] src, Xop_xnde_tkn xnde) {
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_bgn);
@@ -58,5 +58,5 @@ public class Tabber_xnde implements Xox_xnde {
 	}
 
 	public static byte[] Id_test;
-	private static final    byte[] Spr__tab_itms = Bry_.new_a7("|-|");
+	private static final byte[] Spr__tab_itms = Bry_.new_a7("|-|");
 }

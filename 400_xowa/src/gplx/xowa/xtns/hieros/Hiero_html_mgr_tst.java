@@ -17,7 +17,7 @@ package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*;
 public class Hiero_html_mgr_tst {
 	private Hiero_html_mgr_fxt fxt;
-	private final    Hiero_html_fxt html_fxt = new Hiero_html_fxt();
+	private final Hiero_html_fxt html_fxt = new Hiero_html_fxt();
 	@Before public void init() {
 		fxt = html_fxt.Hiero_fxt();
 		fxt.Reset();

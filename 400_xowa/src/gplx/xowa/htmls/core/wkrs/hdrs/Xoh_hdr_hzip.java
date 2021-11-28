@@ -49,7 +49,7 @@ public class Xoh_hdr_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		Xoh_hdr_data data = (Xoh_hdr_data)data_itm;
 		data.Init_by_decode(hdr_level, anch_is_diff, anch_bgn, anch_end, capt_bgn, capt_end, capt_rhs_bgn, capt_rhs_end);
 	}
-	private final    Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_ (1, 1, 3);
+	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_ (1, 1, 3);
 	private static final int // SERIALIZED
 	  Flag__capt_rhs_exists	=  0
 	, Flag__anch_is_diff		=  1

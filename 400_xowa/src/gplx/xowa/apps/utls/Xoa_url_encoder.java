@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 public class Xoa_url_encoder {	// NOTE: redundant with Gfo_url_encoder, but is simpler; DATE:2016-09-15
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public byte[] Encode(byte[] src) {
 		int src_len = src.length;
 		boolean dirty = false;
@@ -47,7 +47,7 @@ public class Xoa_url_encoder {	// NOTE: redundant with Gfo_url_encoder, but is s
 		}
 		return dirty ? bfr.To_bry_and_clear() : src;
 	}
-	private static final    byte[] Bry__amp = Bry_.new_a7("%26"), Bry__eq = Bry_.new_a7("%3D")
+	private static final byte[] Bry__amp = Bry_.new_a7("%26"), Bry__eq = Bry_.new_a7("%3D")
 	, Bry__plus = Bry_.new_a7("%2B"), Bry__apos = Bry_.new_a7("%27")
 	, Bry__underline = new byte[] {Byte_ascii.Underline}
 	;

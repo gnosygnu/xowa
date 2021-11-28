@@ -111,7 +111,7 @@ class Pp_index_page {
 		return (Xoa_ttl[])rv.To_ary(Xoa_ttl.class);
 	}
 	private static Xoa_ttl new_ttl_(Xowe_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.Parse(wiki, ns_page_id, bry);}
-	public static final    Pp_index_page Null = new Pp_index_page();
+	public static final Pp_index_page Null = new Pp_index_page();
 }
 class Pp_index_arg {
 	public Pp_index_arg(byte[] key, byte[] val) {this.key = key; this.val = val;}

@@ -66,12 +66,12 @@ public class Xomw_hr_wkr {// THREAD.UNSAFE: caching for repeated calls
 		cur = Bry_find_.Find_fwd_while(src, cur, src_end, Byte_ascii.Dash);	// gobble up trailing "-"; the "*" in "-----*" from the regex above
 		return cur;
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Bry__wtxt__hr__mid = Bry_.new_a7("\n-----")
 	, Bry__wtxt__hr__bos = Bry_.new_a7("-----")
 	, Bry__html__hr      = Bry_.new_a7("<hr />")
 	;
-	private static final    int 
+	private static final int
 	  Len__wtxt__hr__mid = Bry__wtxt__hr__mid.length
 	, Len__wtxt__hr__bos = Bry__wtxt__hr__bos.length
 	;

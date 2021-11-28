@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa; import gplx.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xoae_page__tst {
-	private final    Xoae_page__fxt fxt = new Xoae_page__fxt();
+	private final Xoae_page__fxt fxt = new Xoae_page__fxt();
 	@Test public void Ttl() {
 		fxt.Init__page("Abc");
 		fxt.Exec__ttl("Заглавная_страница");

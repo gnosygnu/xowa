@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import gplx.core.lists.*;
 public class List_adp_ {
-	public static final    List_adp Noop = new List_adp_noop();
+	public static final List_adp Noop = new List_adp_noop();
 	public static List_adp New()					{return new List_adp_obj();}
 	public static List_adp New_w_size(int v)		{return new List_adp_obj(v);}
 	public static List_adp New_by_many(Object... ary) {
@@ -49,5 +49,5 @@ public class List_adp_ {
 		list.Del_at(last_idx);
 		return rv;
 	}
-	public static final    int Not_found = -1, Base1 = 1;
+	public static final int Not_found = -1, Base1 = 1;
 }

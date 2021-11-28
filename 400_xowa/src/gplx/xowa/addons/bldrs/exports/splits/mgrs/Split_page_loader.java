@@ -17,8 +17,8 @@ package gplx.xowa.addons.bldrs.exports.splits.mgrs; import gplx.*; import gplx.x
 import gplx.dbs.*; import gplx.dbs.metas.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Split_page_loader {
-	private final    int rows_to_read;
-	private final    Xowd_page_tbl tbl; private final    Db_stmt stmt;
+	private final int rows_to_read;
+	private final Xowd_page_tbl tbl; private final Db_stmt stmt;
 	private int score_max = Int_.Max_value;
 	public Split_page_loader(Xow_wiki wiki, int rows_to_read) {
 		this.rows_to_read = rows_to_read;

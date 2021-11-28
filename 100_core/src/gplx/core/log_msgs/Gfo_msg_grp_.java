@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.log_msgs; import gplx.*; import gplx.core.*;
 public class Gfo_msg_grp_ {
-	public static final    Gfo_msg_grp Root_gplx = new Gfo_msg_grp(null, Gfo_msg_grp_.Uid_next(), Bry_.new_a7("gplx"));
-	public static final    Gfo_msg_grp Root = new Gfo_msg_grp(null, Gfo_msg_grp_.Uid_next(), Bry_.Empty);
+	public static final Gfo_msg_grp Root_gplx = new Gfo_msg_grp(null, Gfo_msg_grp_.Uid_next(), Bry_.new_a7("gplx"));
+	public static final Gfo_msg_grp Root = new Gfo_msg_grp(null, Gfo_msg_grp_.Uid_next(), Bry_.Empty);
 	public static Gfo_msg_grp prj_(String key)						{return new Gfo_msg_grp(Root	, Gfo_msg_grp_.Uid_next(), Bry_.new_a7(key));}
 	public static Gfo_msg_grp new_(Gfo_msg_grp owner, String key)	{return new Gfo_msg_grp(owner	, Gfo_msg_grp_.Uid_next(), Bry_.new_a7(key));}
 	public static int Uid_next() {return uid_next++;} static int uid_next = 0;

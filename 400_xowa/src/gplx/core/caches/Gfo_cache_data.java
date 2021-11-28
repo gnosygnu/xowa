@@ -22,7 +22,7 @@ class Gfo_cache_data implements gplx.CompareAble, Rls_able {
 		this.size = size;
 		this.count = 1;
 	}
-	public byte[]		Key()			{return key;} private final    byte[] key;
+	public byte[]		Key()			{return key;} private final byte[] key;
 	public Rls_able		Val()			{return val;} private Rls_able val;
 	public int			Size()			{return size;} private int size;
 

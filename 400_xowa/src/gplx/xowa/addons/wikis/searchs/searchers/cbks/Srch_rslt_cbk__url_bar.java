@@ -18,8 +18,8 @@ import gplx.gfui.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 import gplx.xowa.apps.apis.xowa.addons.searchs.*;
 public class Srch_rslt_cbk__url_bar implements Srch_rslt_cbk, Gfo_invk {
-	private final    Xoae_app app;
-	private final    GfuiComboBox url_bar;
+	private final Xoae_app app;
+	private final GfuiComboBox url_bar;
 	private String[] cbo_ary;
 	private boolean rslts_finished;
 	private int rslts_in_this_pass;

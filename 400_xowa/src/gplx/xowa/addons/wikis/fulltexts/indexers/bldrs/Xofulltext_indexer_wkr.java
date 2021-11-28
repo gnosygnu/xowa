@@ -18,8 +18,8 @@ import gplx.gflucene.core.*;
 import gplx.gflucene.indexers.*;
 import gplx.xowa.addons.wikis.fulltexts.core.*;
 public class Xofulltext_indexer_wkr {
-	private final    Gflucene_indexer_mgr index_wtr = new Gflucene_indexer_mgr();
-	private final    Xofulltext_extractor extractor = new Xofulltext_extractor();
+	private final Gflucene_indexer_mgr index_wtr = new Gflucene_indexer_mgr();
+	private final Xofulltext_extractor extractor = new Xofulltext_extractor();
 	public void Init(Xow_wiki wiki, String idx_opt) {
 		// delete existing dir
 		Io_url index_dir = Xosearch_fulltext_addon.Get_index_dir(wiki);

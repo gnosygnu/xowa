@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Json_doc_wtr_tst {
-	private final    Json_doc_wtr_fxt fxt = new Json_doc_wtr_fxt();
+	private final Json_doc_wtr_fxt fxt = new Json_doc_wtr_fxt();
 	@Test public void Basic() {
 		fxt.Test__Bld_as_str
 		( fxt.Exec__Kv_simple("k1", "v\"1")

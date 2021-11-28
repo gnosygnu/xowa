@@ -26,8 +26,8 @@ public class Xoapi_usr implements Gfo_invk {
 		bookmarks.Init_by_kit(app);
 		history.Init_by_kit(app);
 	}
-	public Xoapi_bookmarks	Bookmarks() {return bookmarks;} private final    Xoapi_bookmarks bookmarks = new Xoapi_bookmarks();
-	public Xoapi_history	History()	{return history;}	private final    Xoapi_history history = new Xoapi_history();
+	public Xoapi_bookmarks	Bookmarks() {return bookmarks;} private final Xoapi_bookmarks bookmarks = new Xoapi_bookmarks();
+	public Xoapi_history	History()	{return history;}	private final Xoapi_history history = new Xoapi_history();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_bookmarks)) 							return bookmarks;
 		else if	(ctx.Match(k, Invk_history)) 							return history;

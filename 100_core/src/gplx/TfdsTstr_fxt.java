@@ -93,5 +93,5 @@ class TfdsTstrItm {
 		return compareResult == 1 ? "==" : "!=";
 	}
         public static TfdsTstrItm new_() {return new TfdsTstrItm();} TfdsTstrItm() {}
-	public static final    int CompareResult_none = 0, CompareResult_eq = 1, CompareResult_eqn = 2;
+	public static final int CompareResult_none = 0, CompareResult_eq = 1, CompareResult_eqn = 2;
 }

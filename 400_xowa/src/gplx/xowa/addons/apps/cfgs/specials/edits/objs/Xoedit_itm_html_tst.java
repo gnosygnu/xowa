@@ -17,7 +17,7 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gp
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm_html_tst {
-	private final    Xoedit_itm_html_fxt fxt = new Xoedit_itm_html_fxt();
+	private final Xoedit_itm_html_fxt fxt = new Xoedit_itm_html_fxt();
 	@Test  public void Build_html__memo() {
 		fxt.Type_("memo").Key_("key1").Name_("name1").Html_cls_("html_cls1").Html_atrs_("key1=val1");
 
@@ -35,8 +35,8 @@ public class Xoedit_itm_html_tst {
 	}
 }
 class Xoedit_itm_html_fxt {
-	private final    Xocfg_type_mgr type_mgr = new Xocfg_type_mgr();
-	private final    Bry_bfr bry = Bry_bfr_.New();
+	private final Xocfg_type_mgr type_mgr = new Xocfg_type_mgr();
+	private final Bry_bfr bry = Bry_bfr_.New();
 	
 	public Xoedit_itm_html_fxt Type_(String v) {this.type = v; return this;} private String type;
 	public Xoedit_itm_html_fxt Key_(String v) {this.key = v; return this;} private String key;

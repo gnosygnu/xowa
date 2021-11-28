@@ -25,7 +25,7 @@ public class Imap_part_ {
 	, Tid_shape_circle	= 6
 	, Tid_shape_poly	= 7
 	;
-	public static final    byte[] 
+	public static final byte[] 
 	  Key_dflt				= Bry_.new_a7("default")
 	, Key_shape_rect		= Bry_.new_a7("rect")
 	, Key_shape_circle		= Bry_.new_a7("circle")

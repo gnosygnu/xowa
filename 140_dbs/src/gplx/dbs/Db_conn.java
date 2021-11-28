@@ -43,7 +43,7 @@ import gplx.dbs.sys.Db_sys_mgr;
 import gplx.dbs.wkrs.SqlWkrMgr;
 
 public class Db_conn {
-	private final    List_adp rls_list = List_adp_.New();
+	private final List_adp rls_list = List_adp_.New();
 	public Db_conn(Db_engine engine) {
 		this.engine = engine;
 		this.sys_mgr = new Db_sys_mgr(this);

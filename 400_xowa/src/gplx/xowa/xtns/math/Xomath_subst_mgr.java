@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*;
 class Xomath_subst_mgr {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private final    Bry_bfr tmp = Bry_bfr_.New();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final Bry_bfr tmp = Bry_bfr_.New();
 	private boolean init = false;
 	public byte[] Subst(byte[] src) {
 		if (!init) Init();
@@ -178,9 +178,9 @@ class Xomath_subst_itm {
 	public Xomath_subst_itm(byte[] src, byte[] trg, boolean dollar_sign, boolean whole_word) {
 		this.src = src; src_len = src.length; this.trg = trg; this.dollar_sign = dollar_sign; this.whole_word = whole_word;
 	}
-	public int Src_len() {return src_len;} private final    int src_len;
-	public byte[] Src() {return src;} private final    byte[] src;
-	public byte[] Trg() {return trg;} private final    byte[] trg;
-	public boolean Dollar_sign() {return dollar_sign;} private final    boolean dollar_sign;
-	public boolean Whole_word() {return whole_word;} private final    boolean whole_word;
+	public int Src_len() {return src_len;} private final int src_len;
+	public byte[] Src() {return src;} private final byte[] src;
+	public byte[] Trg() {return trg;} private final byte[] trg;
+	public boolean Dollar_sign() {return dollar_sign;} private final boolean dollar_sign;
+	public boolean Whole_word() {return whole_word;} private final boolean whole_word;
 }

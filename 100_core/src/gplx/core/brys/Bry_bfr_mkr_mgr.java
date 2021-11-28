@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.brys; import gplx.*; import gplx.core.*;
 public class Bry_bfr_mkr_mgr {
-	private final    Object thread_lock = new Object();
-	private final    byte mgr_id; private final    int reset;
+	private final Object thread_lock = new Object();
+	private final byte mgr_id; private final int reset;
 	private Bry_bfr[] used = Bry_bfr_.Ary_empty; private int used_len = 0, used_max = 0;
 	private int[] free; private int free_len;
 	public Bry_bfr_mkr_mgr(byte mgr_id, int reset) {// NOTE: random IndexOutOfBounds errors in Get around free[--free_len] with free_len being -1; put member variable initialization within thread_lock to try to avoid; DATE:2014-09-21

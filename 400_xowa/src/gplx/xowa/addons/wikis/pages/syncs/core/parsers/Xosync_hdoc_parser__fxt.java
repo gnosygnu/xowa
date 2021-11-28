@@ -18,8 +18,8 @@ import gplx.core.tests.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 public class Xosync_hdoc_parser__fxt {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Xoh_page hpg = new Xoh_page();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xoh_page hpg = new Xoh_page();
 	private Xowe_wiki wiki;
 	public void Init(boolean print_errors) {
 		if (print_errors)

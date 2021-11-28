@@ -20,8 +20,8 @@ package gplx.xowa.mediawiki.includes.parsers.preprocessors_new; import gplx.*; i
 */
 import gplx.xowa.mediawiki.includes.exception.*;
 public class XomwPPNode_Hash_Text extends XomwPPNode {	public String value;
-	private final    XophpArray store;
-	private final    int index;
+	private final XophpArray store;
+	private final int index;
 
 	/**
 	* Construct an Object using the data from $store[$index]. The rest of the

@@ -70,7 +70,7 @@ abstract class XomwWikiTextPropertyOrderProvider implements XomwPropertyOrderPro
 		return orderedProperties;
 	}
 
-	private static final    Regx_adp
+	private static final Regx_adp
 	  parseList_replace_regx = XophpRegex_.Pattern
 	  (  "<!--.*?-->", XophpRegex_.MODIFIER_s)
 	, parseList_match_regx = XophpRegex_.Pattern

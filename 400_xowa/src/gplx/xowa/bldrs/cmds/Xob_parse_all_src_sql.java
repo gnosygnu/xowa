@@ -73,7 +73,7 @@ class Xob_dump_src_id {
 			default:			throw Err_.new_unhandled(redirect);
 		}
 	}
-	private static final    String Sql_select_clause = String_.Concat_lines_nl
+	private static final String Sql_select_clause = String_.Concat_lines_nl
 	( "SELECT  p.page_id"
 	, ",       p.page_title"
 	, ",       t.text_data"

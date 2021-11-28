@@ -19,8 +19,8 @@ import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*;
 public class Pfunc_filepath_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
-	private final    Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock(); 
+	private final Xop_fxt fxt = new Xop_fxt();
+	private final Xofw_wiki_wkr_mock mock_wkr = new Xofw_wiki_wkr_mock();
 	private Xowe_wiki en_wiki, commons_wiki;
 	@Before public void init() {
 		fxt.Reset();

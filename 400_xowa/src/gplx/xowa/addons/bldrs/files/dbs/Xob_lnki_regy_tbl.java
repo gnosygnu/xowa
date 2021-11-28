@@ -23,14 +23,14 @@ public class Xob_lnki_regy_tbl {
 		if (wiki_ns_for_file_is_case_match_all)
 			Sqlite_engine_.Idx_create(usr_dlg, p, "lnki_regy_commons", Idx_ttl_commons);
 	}
-	public static final    String Tbl_name = "lnki_regy"
+	public static final String Tbl_name = "lnki_regy"
 	, Fld_lnki_id = "lnki_id", Fld_lnki_tier_id = "lnki_tier_id", Fld_lnki_page_id = "lnki_page_id", Fld_lnki_page_ns = "lnki_page_ns"
 	, Fld_lnki_ttl = "lnki_ttl", Fld_lnki_commons_ttl = "lnki_commons_ttl"
 	, Fld_lnki_ext = "lnki_ext", Fld_lnki_type = "lnki_type", Fld_lnki_src_tid = "lnki_src_tid"
 	, Fld_lnki_w = "lnki_w", Fld_lnki_h = "lnki_h", Fld_lnki_upright = "lnki_upright", Fld_lnki_time = "lnki_time", Fld_lnki_page = "lnki_page"
 	, Fld_lnki_count = "lnki_count"
 	;
-	private static final    String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = String_.Concat_lines_nl
 	(	"CREATE TABLE IF NOT EXISTS lnki_regy"
 	,	"( lnki_id                 integer             NOT NULL			    PRIMARY KEY"
 	,	", lnki_tier_id            integer             NOT NULL"
@@ -49,7 +49,7 @@ public class Xob_lnki_regy_tbl {
 	,	", lnki_count              integer             NOT NULL"
 	,	");"
 	);
-	public static final    String Sql_create_data = String_.Concat_lines_nl
+	public static final String Sql_create_data = String_.Concat_lines_nl
 	(	"INSERT INTO lnki_regy (lnki_id, lnki_tier_id, lnki_page_id, lnki_ttl, lnki_commons_ttl, lnki_ext, lnki_type, lnki_src_tid, lnki_w, lnki_h, lnki_upright, lnki_time, lnki_page, lnki_count)"
 	,	"SELECT  Min(lnki_id)"
 	,	",       Min(lnki_tier_id)"
@@ -106,7 +106,7 @@ public class Xob_lnki_regy_tbl {
 	,	"WHERE   lnki_commons_flag = 1"
 	,	";"
 	);
-	private static final    Db_idx_itm 
+	private static final Db_idx_itm
 	  Idx_ttl			= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS lnki_regy__ttl ON lnki_regy (lnki_ttl, lnki_ext, lnki_id, lnki_page_id);")
 	, Idx_ttl_commons   = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS lnki_regy__ttl ON lnki_regy (lnki_commons_ttl, lnki_ext, lnki_id, lnki_page_id);")
 	;

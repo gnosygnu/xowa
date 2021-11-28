@@ -27,9 +27,9 @@ public class Xob_bldr implements Gfo_invk {
 		this.import_marker = new Xob_import_marker();
 		this.wiki_cfg_bldr = new Xob_wiki_cfg_bldr(this);
 	}
-	public Xoae_app				App() {return app;} private final    Xoae_app app;
-	public Xob_cmd_regy			Cmd_regy() {return cmd_regy;} private final    Xob_cmd_regy cmd_regy = new Xob_cmd_regy();
-	public Xob_cmd_mgr			Cmd_mgr() {return cmd_mgr;} private final    Xob_cmd_mgr cmd_mgr;
+	public Xoae_app				App() {return app;} private final Xoae_app app;
+	public Xob_cmd_regy			Cmd_regy() {return cmd_regy;} private final Xob_cmd_regy cmd_regy = new Xob_cmd_regy();
+	public Xob_cmd_mgr			Cmd_mgr() {return cmd_mgr;} private final Xob_cmd_mgr cmd_mgr;
 	public Gfo_usr_dlg			Usr_dlg() {return app.Usr_dlg();}
 	public int					Sort_mem_len() {return sort_mem_len;} public Xob_bldr Sort_mem_len_(int v) {sort_mem_len = v; return this;} private int sort_mem_len = 16 * Io_mgr.Len_mb;
 	public int					Dump_fil_len() {return dump_fil_len;} public Xob_bldr Dump_fil_len_(int v) {dump_fil_len = v; return this;} private int dump_fil_len =  1 * Io_mgr.Len_mb;

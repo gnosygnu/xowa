@@ -18,7 +18,7 @@ import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*; import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 public class Split_ctx {		
 	private int trg_idx = -1;
-	private final    Split_wkr[] wkrs;		
+	private final Split_wkr[] wkrs;
 	private boolean trg_make = true;
 	private long trg_max = 32 * Io_mgr.Len_mb;		
 	public Split_ctx(Split_cfg cfg, Xow_wiki wiki, Split_wkr[] wkrs, Split_ns_itm[] ns_itms, Db_conn wkr_conn) {
@@ -29,16 +29,16 @@ public class Split_ctx {
 		this.html_size_calc = new Split_db_size_calc(cfg.Html().Db_max(), cfg.Html().Db_idx());
 		this.file_size_calc = new Split_db_size_calc(cfg.File().Db_max(), cfg.File().Db_idx());
 	}
-	public Split_cfg			Cfg() {return cfg;} private final    Split_cfg cfg;
-	public Xow_wiki				Wiki() {return wiki;} private final    Xow_wiki wiki;
-	public Split_ns_itm[]		Ns_itms() {return ns_itms;} private final    Split_ns_itm[] ns_itms;
-	public Db_conn				Wkr_conn() {return wkr_conn;} private final    Db_conn wkr_conn;
+	public Split_cfg			Cfg() {return cfg;} private final Split_cfg cfg;
+	public Xow_wiki				Wiki() {return wiki;} private final Xow_wiki wiki;
+	public Split_ns_itm[]		Ns_itms() {return ns_itms;} private final Split_ns_itm[] ns_itms;
+	public Db_conn				Wkr_conn() {return wkr_conn;} private final Db_conn wkr_conn;
 	public Db_conn				Trg_conn() {return trg_conn;} private Db_conn trg_conn;
 	public int					Trg_ns() {return trg_ns;} private int trg_ns; public void Trg_ns_(int v) {this.trg_ns = v;}
-	public Split_page_mgr		Page_mgr() {return page_mgr;} private final    Split_page_mgr page_mgr = new Split_page_mgr();
-	public Split_rslt_mgr		Rslt_mgr() {return rslt_mgr;} private final    Split_rslt_mgr rslt_mgr;
-	public Split_db_size_calc	Html_size_calc() {return html_size_calc;} private final    Split_db_size_calc html_size_calc;
-	public Split_db_size_calc	File_size_calc() {return file_size_calc;} private final    Split_db_size_calc file_size_calc;
+	public Split_page_mgr		Page_mgr() {return page_mgr;} private final Split_page_mgr page_mgr = new Split_page_mgr();
+	public Split_rslt_mgr		Rslt_mgr() {return rslt_mgr;} private final Split_rslt_mgr rslt_mgr;
+	public Split_db_size_calc	Html_size_calc() {return html_size_calc;} private final Split_db_size_calc html_size_calc;
+	public Split_db_size_calc	File_size_calc() {return file_size_calc;} private final Split_db_size_calc file_size_calc;
 
 	public void Trg_db__completed() {trg_make = true;}
 	public void Trg_db__assert(int ns_id) {

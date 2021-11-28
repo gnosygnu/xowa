@@ -40,8 +40,8 @@ public class Articles_func extends Pf_func_base {
 			xtn_itm.Add(new Articles_itm(ttl, text));
 		}
 	}
-	public static final    Articles_func Instance = new Articles_func(); Articles_func() {}
-	private static final    byte[] Const_dlm = new byte[] {Byte_ascii.Amp, Byte_ascii.Amp};
+	public static final Articles_func Instance = new Articles_func(); Articles_func() {}
+	private static final byte[] Const_dlm = new byte[] {Byte_ascii.Amp, Byte_ascii.Amp};
 }
 class Articles_itm {
 	public Articles_itm(byte[] ttl, byte[] text) {
@@ -62,21 +62,21 @@ class Articles_itm_fmtr implements gplx.core.brys.Bfr_arg {
 			fmtr.Bld_bfr(bfr, ttl.Full_db(), itm.Text());
 		}
 	}
-	private static final    Bry_fmtr fmtr = Bry_fmtr.new_("\n      <li class=\"interwiki-relart\"><a href=\"/wiki/~{ttl}\">~{text}</a></li>",  "ttl", "text");
-	public static final    Articles_itm_fmtr Instance = new Articles_itm_fmtr(); Articles_itm_fmtr() {}
+	private static final Bry_fmtr fmtr = Bry_fmtr.new_("\n      <li class=\"interwiki-relart\"><a href=\"/wiki/~{ttl}\">~{text}</a></li>",  "ttl", "text");
+	public static final Articles_itm_fmtr Instance = new Articles_itm_fmtr(); Articles_itm_fmtr() {}
 }
 class Articles_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private List_adp itms = List_adp_.New();
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key() {return KEY;} public static final    byte[] KEY = Bry_.new_a7("RelatedArticles");
+	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_a7("RelatedArticles");
 	public void Add(Articles_itm itm) {itms.Add(itm);}
 	public void Write(Bry_bfr bfr, Xoae_page page) {
 		Xowe_wiki wiki = page.Wikie();
 		itms_fmtr.Init(wiki, itms);
 		html_fmtr.Bld_bfr_many(bfr, wiki.Msg_mgr().Val_by_key_obj("relatedarticles-title"), itms_fmtr);
 	}
-	private static final    Articles_itm_fmtr itms_fmtr = Articles_itm_fmtr.Instance;
-	private static final    Bry_fmtr html_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final Articles_itm_fmtr itms_fmtr = Articles_itm_fmtr.Instance;
+	private static final Bry_fmtr html_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	(  "<div class=\"portal\" role=\"navigation\" id=\"p-relatedarticles\">"
 	, "  <h3>~{h3}</h3>"
 	, "  <div class=\"body\">"

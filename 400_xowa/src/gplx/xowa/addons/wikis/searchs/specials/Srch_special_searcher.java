@@ -17,9 +17,9 @@ package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.specials.htmls.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_special_searcher {
-	private final    Xoae_wiki_mgr wiki_mgr;
-	private final    Ordered_hash cancel_hash = Ordered_hash_.New_bry();
-	private final    Srch_html_page_bldr html_page_bldr = new Srch_html_page_bldr();
+	private final Xoae_wiki_mgr wiki_mgr;
+	private final Ordered_hash cancel_hash = Ordered_hash_.New_bry();
+	private final Srch_html_page_bldr html_page_bldr = new Srch_html_page_bldr();
 	public Srch_special_searcher(Xoae_wiki_mgr wiki_mgr) {this.wiki_mgr = wiki_mgr;}
 	public void Search(Xow_wiki search_wiki, Xoae_page page, boolean search_is_async, Xow_domain_itm[] domains_ary, Srch_search_qry qry) {
 		Bry_bfr tmp_bfr = Bry_bfr_.New();

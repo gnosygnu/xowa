@@ -208,5 +208,5 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 			ctx.App().Usr_dlg().Warn_many("", "", "fatal error in lnki: page=~{0} src=~{1} err=~{2}", String_.new_u8(ctx.Page().Ttl().Full_db()), String_.new_u8(src, lnki.Src_bgn(), lnki.Src_end()), Err_.Message_gplx_full(e));
 			return false;
 		}
-	}	private static final    byte[] Const_pipe = Bry_.new_a7("|");
+	}	private static final byte[] Const_pipe = Bry_.new_a7("|");
 }

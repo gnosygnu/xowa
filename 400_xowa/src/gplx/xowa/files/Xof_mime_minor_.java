@@ -21,11 +21,11 @@ public class Xof_mime_minor_ {
 		int id = id_obj == null ? Xof_ext_.Id_unknown : id_obj.Val();
 		return Xof_ext_.new_by_id_(id);
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Mime_svg = Bry_.new_a7("svg+xml"), Mime_djvu = Bry_.new_a7("vnd.djvu"), Mime_midi = Bry_.new_a7("midi")
 	, Mime_xcf = Bry_.new_a7("x-xcf"), Mime_flac = Bry_.new_a7("x-flac")
 	, Mime_bmp = Bry_.new_a7("x-bmp"), Mime_bmp_2 = Bry_.new_a7("x-ms-bmp");
-	private static final    Hash_adp mime_hash = mime_hash_();
+	private static final Hash_adp mime_hash = mime_hash_();
 	private static Hash_adp mime_hash_() {
 		Hash_adp rv = Hash_adp_bry.cs();
 		mime_hash_itm_(rv, Xof_ext_.Bry_png		, Xof_ext_.Id_png);

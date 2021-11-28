@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_ttl_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
 	@Test  public void Ttl_page_txt()			{fxt.Page_ttl_("a b"); fxt.Test_parse_tmpl_str_test("{{PAGENAME}}"								, "{{test}}", "A b");}
 	@Test  public void Ttl_page_txt_empty()	{fxt.Page_ttl_("a b"); fxt.Test_parse_tmpl_str_test("{{PAGENAME:}}"								, "{{test}}", "");}

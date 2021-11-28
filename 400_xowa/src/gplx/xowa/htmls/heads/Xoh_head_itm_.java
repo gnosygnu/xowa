@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 public class Xoh_head_itm_ {
-	public static final    byte[]	// SRL: navframe, toc, title_rewrite are in wiki.cfg
+	public static final byte[]	// SRL: navframe, toc, title_rewrite are in wiki.cfg
 	  Key__collapsible		= Bry_.new_a7("collapsible")
 	, Key__css				= Bry_.new_a7("css")
 	, Key__gallery			= Bry_.new_a7("gallery")

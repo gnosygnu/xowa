@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.wikis.ttls.*;
 public class Xop_subst_tst {
-	private final    Xop_fxt fxt = new Xop_fxt(); 
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {
 		fxt.Reset();
 		fxt.Init_defn_clear();

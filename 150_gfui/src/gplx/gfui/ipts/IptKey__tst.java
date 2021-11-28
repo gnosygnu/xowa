@@ -17,7 +17,7 @@ package gplx.gfui.ipts;
 import gplx.Tfds;
 import org.junit.Test;
 public class IptKey__tst {
-	private final    IptKey__fxt fxt = new IptKey__fxt();
+	private final IptKey__fxt fxt = new IptKey__fxt();
 	@Test public void To_str() {
 		fxt.Test_to_str(196608, "mod.cs");
 	}

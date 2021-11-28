@@ -34,5 +34,5 @@ public class GfoFactory_gfui {
 	public static void Btn_QuitWin2(GfuiElem owner, GfoMsg quitMsg) {
 		GfuiBtn_.msg_("quitWin", owner, quitMsg).Text_("X").TipText_("quit win").Width_(20);
 	}
-	public static final    GfoFactory_gfui Instance = new GfoFactory_gfui(); GfoFactory_gfui() {}
+	public static final GfoFactory_gfui Instance = new GfoFactory_gfui(); GfoFactory_gfui() {}
 }

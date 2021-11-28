@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*; import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*;
 public class Xoh_js_cbk_wdata_labels_tst {
-	@Before public void init() {fxt.Init();} private final    Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
+	@Before public void init() {fxt.Init();} private final Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test  public void Basic() {
 		fxt.Init__docs__add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Xto_wdoc());
 		fxt.Init__docs__add(fxt.Wdoc_bldr("q2").Add_label("en", "en_q2").Xto_wdoc());

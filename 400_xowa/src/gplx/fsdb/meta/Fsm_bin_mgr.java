@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.dbs.*;
 public class Fsm_bin_mgr {
-	private final    Fsdb_db_mgr core_mgr; private final    int mnt_id; private final    Fsm_bin_tbl tbl;
-	private final    Ordered_hash db_hash = Ordered_hash_.New();
+	private final Fsdb_db_mgr core_mgr; private final int mnt_id; private final Fsm_bin_tbl tbl;
+	private final Ordered_hash db_hash = Ordered_hash_.New();
 	private Fsm_bin_fil nth_db;
 	public Fsm_bin_mgr(Fsdb_db_mgr core_mgr, Db_conn conn, int mnt_id) {
 		this.core_mgr = core_mgr; this.mnt_id = mnt_id; 

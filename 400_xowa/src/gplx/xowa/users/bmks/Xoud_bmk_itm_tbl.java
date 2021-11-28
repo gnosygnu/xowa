@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xoud_bmk_itm_tbl implements Rls_able {
-	private final    String tbl_name = "bmk_itm"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_id, fld_owner, fld_sort, fld_name, fld_wiki, fld_url, fld_comment;
+	private final String tbl_name = "bmk_itm"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_id, fld_owner, fld_sort, fld_name, fld_wiki, fld_url, fld_comment;
 	private Db_stmt stmt_update_sort;
 	public Xoud_bmk_itm_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -30,7 +30,7 @@ public class Xoud_bmk_itm_tbl implements Rls_able {
 		fld_comment					= flds.Add_str("itm_comment"	, 4096);
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public String Tbl_name() {return tbl_name;}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
 	public void Insert(int owner, int sort, byte[] name, byte[] wiki, byte[] url, byte[] comment) {

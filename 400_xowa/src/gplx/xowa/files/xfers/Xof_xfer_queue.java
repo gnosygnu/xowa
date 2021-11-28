@@ -19,7 +19,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.
 import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_xfer_queue {
-	private final    List_adp xfer_list = List_adp_.New(); private final    Ordered_hash dirty_meta_mgrs = Ordered_hash_.New_bry();
+	private final List_adp xfer_list = List_adp_.New(); private final Ordered_hash dirty_meta_mgrs = Ordered_hash_.New_bry();
 	public Int_obj_ref Html_uid() {return html_uid;} private Int_obj_ref html_uid = Int_obj_ref.New_neg1();
 	public int Count() {return xfer_list.Count();}
 	public void Clear() {

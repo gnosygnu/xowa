@@ -21,7 +21,7 @@ public class Xoh_head_itm__page_cfg extends Xoh_head_itm__base {
 	@Override public void Write_css_text(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
 		wtr.Write_css_style_itm(Css_alt_text_display_none);
 	}
-	private static final    byte[] Css_alt_text_display_none = Bry_.new_u8(String_.Concat_lines_nl
+	private static final byte[] Css_alt_text_display_none = Bry_.new_u8(String_.Concat_lines_nl
 	( ".xowa_alt_text {"
 	, "  display:none;"
 	, "}"

@@ -30,5 +30,5 @@ public class XomwPPDPart_Hash extends XomwPPDPart {
 
 	@Override public XomwPPDPart New(String val) {return new XomwPPDPart_Hash(val);}
 
-	public static final    XomwPPDPart_Hash Instance = new XomwPPDPart_Hash("");
+	public static final XomwPPDPart_Hash Instance = new XomwPPDPart_Hash("");
 }

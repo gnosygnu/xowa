@@ -123,5 +123,5 @@ public class Xosync_hdoc_parser {
 		}
 		bfr.Add(Byte_ascii.Angle_end_bry);
 	}
-	private static final    byte[] Bry__span__edit_section = Bry_.new_a7("mw-editsection");
+	private static final byte[] Bry__span__edit_section = Bry_.new_a7("mw-editsection");
 }

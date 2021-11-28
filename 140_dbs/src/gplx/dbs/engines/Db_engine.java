@@ -29,7 +29,7 @@ import gplx.dbs.Dbmeta_tbl_itm;
 import gplx.dbs.conn_props.Db_conn_props_mgr;
 import gplx.dbs.metas.Dbmeta_tbl_mgr;
 import gplx.dbs.qrys.bats.Db_batch_mgr;
-import gplx.dbs.sqls.Sql_qry_wtr;
+import gplx.dbs.sqls.SqlQryWtr;
 import gplx.dbs.wkrs.SqlWkrMgr;
 
 public interface Db_engine {
@@ -37,7 +37,7 @@ public interface Db_engine {
 	Db_conn_info		Conn_info();
 	Db_conn_props_mgr	Props();
 	Db_batch_mgr		Batch_mgr();
-	Sql_qry_wtr			Sql_wtr();
+	SqlQryWtr Sql_wtr();
 	void                CtorConn(SqlWkrMgr wkrMgr);
 	Db_engine			New_clone(Db_conn_info conn_info);
 	void				Conn_open();

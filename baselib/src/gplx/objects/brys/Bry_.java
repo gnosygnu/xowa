@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.objects.brys; import gplx.*; import gplx.objects.*;
 import gplx.objects.errs.*;
 public class Bry_ {
-	public static final    Class<?> Cls_ref_type = byte[].class;
-	public static final    byte[] Empty = new byte[0];
+	public static final Class<?> Cls_ref_type = byte[].class;
+	public static final byte[] Empty = new byte[0];
 
 	public static boolean Eq(byte[] lhs, byte[] rhs) {return Eq(lhs, 0, lhs == null ? 0 : lhs.length, rhs);}
 	public static boolean Eq(byte[] lhs, int lhs_bgn, int lhs_end, byte[] rhs) {

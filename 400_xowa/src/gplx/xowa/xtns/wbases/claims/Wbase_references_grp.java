@@ -20,7 +20,7 @@ public class Wbase_references_grp {
 		this.snaks = snaks;
 		this.snaks_order = snaks_order;
 	}
-	public byte[] Hash() {return hash;} private final    byte[] hash;
-	public Wbase_claim_grp_list Snaks() {return snaks;} private final    Wbase_claim_grp_list snaks;
-	public int[] Snaks_order() {return snaks_order;} private final    int[] snaks_order;
+	public byte[] Hash() {return hash;} private final byte[] hash;
+	public Wbase_claim_grp_list Snaks() {return snaks;} private final Wbase_claim_grp_list snaks;
+	public int[] Snaks_order() {return snaks_order;} private final int[] snaks_order;
 }

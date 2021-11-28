@@ -30,7 +30,7 @@ import javax.imageio.ImageIO;
 public class ImageAdp_ {
 	public static ImageAdp as_(Object obj) {return obj instanceof ImageAdp ? (ImageAdp)obj : null;}
 	public static ImageAdp cast(Object obj) {try {return (ImageAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ImageAdp.class, obj);}}
-	public static final    ImageAdp Null = new_(10, 10);
+	public static final ImageAdp Null = new_(10, 10);
 	public static ImageAdp new_(int width, int height) {
 		//		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);	// JAVA: must be TYPE_INT_RGB or else ImageIO.write("bmp") will fail
 		BufferedImage img = getCompatibleImage(width, height);

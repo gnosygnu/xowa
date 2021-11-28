@@ -17,11 +17,11 @@ package gplx.xowa.htmls.hxtns.wkrs; import gplx.*; import gplx.xowa.*; import gp
 import gplx.dbs.*;
 import gplx.core.lists.hashs.*;
 public class Hxtn_wkr_tbl implements Rls_able {
-	private static final String tbl_name = "hxtn_wkr"; private static final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private static final    String
+	private static final String tbl_name = "hxtn_wkr"; private static final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final String
 	  fld_wkr_id = flds.Add_int_pkey("wkr_id"), fld_wkr_key = flds.Add_str("wkr_key", 255)
 	;		
-	private final    Db_conn conn;
+	private final Db_conn conn;
 	public Hxtn_wkr_tbl(Db_conn conn) {
 		this.conn = conn;
 		conn.Rls_reg(this);

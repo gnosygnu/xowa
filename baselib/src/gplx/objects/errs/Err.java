@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.objects.errs; import gplx.*; import gplx.objects.*;
 public class Err extends RuntimeException {
-	private final    String msg;
+	private final String msg;
 	public Err(String msg) {this.msg = msg;}
 	@Override public String getMessage() {return msg;}
 }

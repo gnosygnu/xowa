@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.infos; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.wikis.domains.*;
 public class Xobc_info_html__tst {
-	private final    Xobc_info_html__fxt fxt = new Xobc_info_html__fxt();
+	private final Xobc_info_html__fxt fxt = new Xobc_info_html__fxt();
 	@Test 	public void Torrent__en_w()		{fxt.Test__torrent_link("en.wikipedia.org"		, "https://archive.org/download/Xowa_enwiki_latest_archive.torrent");}
 	@Test 	public void Torrent__fr_d()		{fxt.Test__torrent_link("fr.wiktionary.org"		, "https://archive.org/download/Xowa_frwiki_latest_archive.torrent");}
 }

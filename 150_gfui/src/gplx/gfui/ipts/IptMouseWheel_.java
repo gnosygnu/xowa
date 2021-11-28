@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
 public class IptMouseWheel_ {
-	public static final    IptMouseWheel
+	public static final IptMouseWheel
 		  None	= new IptMouseWheel("wheel.none")
 		, Up	= new IptMouseWheel("wheel.up")
 		, Down	= new IptMouseWheel("wheel.down");

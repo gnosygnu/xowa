@@ -19,7 +19,7 @@ import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.cent
 import gplx.xowa.addons.bldrs.exports.packs.files.*; import gplx.xowa.addons.bldrs.centrals.tasks.*;
 import gplx.xowa.parsers.*;
 class Xop_wiki_setup_mgr {
-	private final    Mustache_tkn_parser parser = new Mustache_tkn_parser();
+	private final Mustache_tkn_parser parser = new Mustache_tkn_parser();
 	private Xobc_data_db data_db;
 	public Xop_root_tkn Write(Xoae_app app, Xowe_wiki wiki, Xop_ctx ctx, Xoae_page wpg, byte[] language, byte[][] wiki_domains) {
 		Io_url mustache_url = app.Fsys_mgr().Bin_addon_dir().GenSubFil_nest("bldr", "wiki_setup", "wiki_setup_main.mustache.html");

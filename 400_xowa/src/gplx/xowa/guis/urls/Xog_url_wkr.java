@@ -28,7 +28,7 @@ import gplx.xowa.guis.views.Xog_js_procs;
 import gplx.xowa.guis.views.Xog_win_itm;
 
 public class Xog_url_wkr {
-	private final    Xoa_url tmp_url = Xoa_url.blank();
+	private final Xoa_url tmp_url = Xoa_url.blank();
 	private Xoae_app app; private Xog_win_itm win; private Xowe_wiki wiki; private Xoae_page page;
 	public Xoa_url Parse(Xog_win_itm win, String href_str) {
 		if (href_str == null) return tmp_url;	// text is not link; return;

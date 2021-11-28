@@ -38,7 +38,7 @@ public class Xoerror_special implements Xow_special_page {
 
 		page.Db().Text().Text_bry_(fmt.Bld_many_to_bry(Bry_bfr_.New(), title, msg));
 	}
-	private static final    Bry_fmt fmt = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
+	private static final Bry_fmt fmt = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
 	( "<h2>~{title}</h2>"
 	, "<p>~{msg}"
 	, "</p>"

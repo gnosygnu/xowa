@@ -23,7 +23,7 @@ import java.net.*;
 import javax.swing.*;
 import javax.swing.border.Border;
 public class Xoa_manifest_view extends JFrame implements Gfo_invk {
-	private final    Xoa_manifest_wkr wkr;
+	private final Xoa_manifest_wkr wkr;
 	private String run_xowa_cmd;
 	public Xoa_manifest_view(Io_url manifest_url, Io_url update_root) {
 				super("XOWA Application Update");
@@ -94,7 +94,7 @@ public class Xoa_manifest_view extends JFrame implements Gfo_invk {
 		if		(ctx.Match(k, Invk__run_xowa)) Run_xowa();
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	private static final    String Invk__run_xowa = "run_xowa";
+	}	private static final String Invk__run_xowa = "run_xowa";
 
 	public static void Run(Io_url manifest_url, Io_url update_root) {
 		new Xoa_manifest_view(manifest_url, update_root);

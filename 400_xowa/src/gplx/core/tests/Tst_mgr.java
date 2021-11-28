@@ -105,7 +105,7 @@ public class Tst_mgr {
 		return sb.To_str_and_clear();
 	}
 	int Max(int max, String s) {int len = String_.Len(s); return len > max ? len : max;}
-	public static final    Tst_chkr Null_chkr = new Tst_chkr_null();
+	public static final Tst_chkr Null_chkr = new Tst_chkr_null();
 }
 class Tst_itm {
 	public boolean Pass() {return pass;} private boolean pass;

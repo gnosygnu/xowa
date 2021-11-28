@@ -28,7 +28,7 @@ public class Xow_page_cache_itm implements Xowd_text_bry_owner {
 	public byte[] Wtxt__redirect_or_direct() {
 		return wtxt__redirect == null ? wtxt__direct : wtxt__redirect;
 	}
-	public boolean   Cache_permanently() {return cache_permanently;} private final    boolean cache_permanently;
+	public boolean   Cache_permanently() {return cache_permanently;} private final boolean cache_permanently;
 	public long Cache_len() {return cache_len;}
 
 	// used by xomp; Scrib_ttl
@@ -47,6 +47,6 @@ public class Xow_page_cache_itm implements Xowd_text_bry_owner {
 		this.wtxt__redirect = wtxt__direct;
 	}
 
-	public static final    Xow_page_cache_itm Null = null;
-	public static final    Xow_page_cache_itm Missing = new Xow_page_cache_itm(false, -1, null, null, null);
+	public static final Xow_page_cache_itm Null = null;
+	public static final Xow_page_cache_itm Missing = new Xow_page_cache_itm(false, -1, null, null, null);
 }

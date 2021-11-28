@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.dbs.*;
 class Site_statistic_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_site_abrv, fld_pages, fld_articles, fld_edits, fld_images, fld_users, fld_activeusers, fld_admins, fld_jobs, fld_queued_massmessages;
-	private final    Db_conn conn;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_site_abrv, fld_pages, fld_articles, fld_edits, fld_images, fld_users, fld_activeusers, fld_admins, fld_jobs, fld_queued_massmessages;
+	private final Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
 	public Site_statistic_tbl(Db_conn conn) {
 		this.conn = conn;

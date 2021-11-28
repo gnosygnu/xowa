@@ -286,7 +286,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 		file_exists = true;
 		return true;
 	}
-	private static final    Xof_url_bldr dflt_url_bldr = new Xof_url_bldr();	// NOTE: only used by v1
+	private static final Xof_url_bldr dflt_url_bldr = new Xof_url_bldr();	// NOTE: only used by v1
 }
 /*
 NOTE_1:Lnki_thumbable

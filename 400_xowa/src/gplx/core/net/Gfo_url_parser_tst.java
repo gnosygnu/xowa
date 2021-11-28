@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.net; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Gfo_url_parser_tst {
-	private final    Gfo_url_parser_fxt tstr = new Gfo_url_parser_fxt();
+	private final Gfo_url_parser_fxt tstr = new Gfo_url_parser_fxt();
 	@Test public void Protocol__relative() {
 		tstr.Exec__parse("//en.wikipedia.org").Test__protocol_tid(Gfo_protocol_itm.Tid_relative_1).Test__protocol_bry("//").Test__site("en.wikipedia.org");
 	}

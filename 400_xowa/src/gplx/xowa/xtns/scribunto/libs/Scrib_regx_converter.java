@@ -19,7 +19,7 @@ import gplx.core.intls.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.regxs.*;
 public class Scrib_regx_converter {// THREAD.UNSAFE:MULTIPLE_RETURN_VALUES
-	private final    Scrib_regx_grp_mgr grp_mgr = new Scrib_regx_grp_mgr();
+	private final Scrib_regx_grp_mgr grp_mgr = new Scrib_regx_grp_mgr();
 
 	public String Regx() {return regx;} private String regx;
 	public Keyval[] Capt_ary() {return grp_mgr.Capt__to_ary();}
@@ -285,16 +285,16 @@ public class Scrib_regx_converter {// THREAD.UNSAFE:MULTIPLE_RETURN_VALUES
 				return false;
 		}
 	}
-	private static final    byte[] Bry_pow_escaped = Bry_.new_a7("\\^")
+	private static final byte[] Bry_pow_escaped = Bry_.new_a7("\\^")
 	, Bry_dollar_literal = Bry_.new_a7("$"), Bry_dollar_escaped = Bry_.new_a7("\\$")
 	, Bry_bf0_seg_0 = Bry_.new_a7("{"), Bry_bf0_seg_1 = Bry_.new_a7("}[^"), Bry_bf0_seg_2 = Bry_.new_a7("]*")
 	, Bry_bf2_seg_0 = Bry_.new_a7("\\")//, Bry_bf2_seg_1 = Bry_.new_a7("")
 	, Bry_star_question = Bry_.new_a7("*?")	// was *?
 	;
-	public static final    byte[] Anchor_null = null, Anchor_G = Bry_.new_a7("\\G"), Anchor_pow = Bry_.new_a7("^");
+	public static final byte[] Anchor_null = null, Anchor_G = Bry_.new_a7("\\G"), Anchor_pow = Bry_.new_a7("^");
 }
 class Lua_cls_matcher {
-        public static final    Lua_cls_matcher Instance = new Lua_cls_matcher();
+        public static final Lua_cls_matcher Instance = new Lua_cls_matcher();
 	Lua_cls_matcher() {
 		String regx_w = "\\w"; // JRE.7: \w not support in JRE.6; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
 		String regx_W = "\\W"; // JRE.7: \w not support in JRE.6; PAGE:en.w:A♯_(musical_note) DATE:2015-06-10
@@ -326,8 +326,8 @@ class Lua_cls_matcher {
 		Init_itm(Bool_.N, "X", "\\x00-\\x2f\\x3a-\\x40\\x47-\\x60\\x67-\\x{ff0f}\\x{ff1a}-\\x{ff20}\\x{ff27}-\\x{ff40}\\x{ff47}-\\x{10ffff}");
 		Init_itm(Bool_.N, "Z", "\\x01-\\x{10ffff}");
 	}
-	public Lua_cls_to_regx_map Percent() {return percent_map;} private final    Lua_cls_to_regx_map percent_map = new Lua_cls_to_regx_map();
-	public Lua_cls_to_regx_map Brack() {return brack_map;} private final    Lua_cls_to_regx_map brack_map = new Lua_cls_to_regx_map();
+	public Lua_cls_to_regx_map Percent() {return percent_map;} private final Lua_cls_to_regx_map percent_map = new Lua_cls_to_regx_map();
+	public Lua_cls_to_regx_map Brack() {return brack_map;} private final Lua_cls_to_regx_map brack_map = new Lua_cls_to_regx_map();
 
 	private void Init_itm(boolean add_to_percent_hash, String lua, String php) {
 		int lua_len = String_.Len(lua);
@@ -346,8 +346,8 @@ class Lua_cls_matcher {
 	}
 }
 class Lua_cls_to_regx_map {
-	private static final    int MAX = Byte_ascii.Max_7_bit;
-	private final    byte[][] map = new byte[MAX][];
+	private static final int MAX = Byte_ascii.Max_7_bit;
+	private final byte[][] map = new byte[MAX][];
 	public byte[] Get_or_null(int code) {
 		return code < MAX ? map[code] : null;
 	}

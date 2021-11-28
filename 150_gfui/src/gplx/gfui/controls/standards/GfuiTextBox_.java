@@ -18,8 +18,8 @@ import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui
 public class GfuiTextBox_ {
 	public static GfuiTextBox as_(Object obj) {return obj instanceof GfuiTextBox ? (GfuiTextBox)obj : null;}
 	public static GfuiTextBox cast(Object obj) {try {return (GfuiTextBox)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiTextBox.class, obj);}}
-	public static final    String NewLine = "\n";	
-	public static final    String Ctor_Memo = "TextBox_Memo";
+	public static final String NewLine = "\n";
+	public static final String Ctor_Memo = "TextBox_Memo";
 
 	public static GfuiTextBox new_() {
 		GfuiTextBox rv = new GfuiTextBox();

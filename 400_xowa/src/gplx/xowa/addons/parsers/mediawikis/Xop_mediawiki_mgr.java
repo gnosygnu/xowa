@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
 public class Xop_mediawiki_mgr {
-	private final    Xoae_app app;
+	private final Xoae_app app;
 	private boolean mode_is_prod;
 	public Xop_mediawiki_mgr(String root_str, boolean mode_is_prod) {
 		Gfo_usr_dlg usr_dlg = Xoa_app_.New__usr_dlg__console();

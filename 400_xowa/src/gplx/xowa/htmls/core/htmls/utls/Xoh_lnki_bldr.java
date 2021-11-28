@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.htmls.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*;
 public class Xoh_lnki_bldr {
-	private final    Xoa_app app; private final    Xoh_href_wtr href_wtr; private final    byte[] img_root_dir;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final Xoa_app app; private final Xoh_href_wtr href_wtr; private final byte[] img_root_dir;
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private byte[] href, title, id, caption;
 	private byte[] img_rel_path; private int img_w, img_h; private boolean img_pos_is_left;
 	public Xoh_lnki_bldr(Xoa_app app, Xoh_href_wtr href_wtr) {

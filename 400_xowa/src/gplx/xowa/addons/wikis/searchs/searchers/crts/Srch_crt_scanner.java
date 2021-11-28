@@ -17,9 +17,9 @@ package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gpl
 import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.addons.wikis.searchs.parsers.*;
 class Srch_crt_scanner {
-	private final    List_adp tkns = List_adp_.New(); private byte[] src; private int src_len, pos, txt_bgn;
-	private final    Srch_crt_scanner_syms trie_bldr; private final    Btrie_slim_mgr trie; private final    Btrie_rv trv = new Btrie_rv();
-	private final    Bry_bfr word_bfr = Bry_bfr_.New(); private boolean word_is_dirty;		
+	private final List_adp tkns = List_adp_.New(); private byte[] src; private int src_len, pos, txt_bgn;
+	private final Srch_crt_scanner_syms trie_bldr; private final Btrie_slim_mgr trie; private final Btrie_rv trv = new Btrie_rv();
+	private final Bry_bfr word_bfr = Bry_bfr_.New(); private boolean word_is_dirty;
 	public Srch_crt_scanner(Srch_crt_scanner_syms trie_bldr) {
 		this.trie_bldr = trie_bldr;
 		this.trie = trie_bldr.Trie();

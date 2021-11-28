@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.progs; import gplx.*; import gplx.core.*;
 public class Gfo_prog_ui_ {
-	public static final    Gfo_prog_ui Noop = new Gfo_prog_ui__noop(), Always = new Gfo_prog_ui__always();
+	public static final Gfo_prog_ui Noop = new Gfo_prog_ui__noop(), Always = new Gfo_prog_ui__always();
 	public static final byte 
 	  Status__init			=  1
 	, Status__working		=  2

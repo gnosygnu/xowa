@@ -20,7 +20,7 @@ public class Xoa_ctg_mgr {
 	public static final byte Tid__subc = 0, Tid__file = 1, Tid__page = 2, Tid___max = 3;	// SERIALIZED; cat_link.cl_type_id
 	public static final byte Hidden_n = Byte_.Zero, Hidden_y = (byte)1;
 	public static final String Html__cls__str = "CategoryTreeLabel CategoryTreeLabelNs14 CategoryTreeLabelCategory";
-	public static final    byte[] Html__cls__bry = Bry_.new_a7(Html__cls__str);
+	public static final byte[] Html__cls__bry = Bry_.new_a7(Html__cls__str);
 
 	public static byte To_tid_by_ns(int ns) {
 		switch (ns) {

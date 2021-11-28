@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import gplx.dbs.*;
 public class Srch_link_tbl {
-	public final    String fld_word_id, fld_page_id, fld_link_score;
-	public final    Db_conn conn;
+	public final String fld_word_id, fld_page_id, fld_link_score;
+	public final Db_conn conn;
 	public Srch_link_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "search_link";
@@ -25,8 +25,8 @@ public class Srch_link_tbl {
 		fld_page_id			= flds.Add_int("page_id");
 		fld_link_score		= flds.Add_int_dflt(Fld_link_score, 0);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
-	public Dbmeta_fld_list Flds() {return flds;} private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
+	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public int Id;
 	public void Create_tbl()				{conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Create_idx__page_id()		{}	// TODO_OLD: conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "page_id", fld_page_id));}
@@ -49,6 +49,6 @@ public class Srch_link_tbl {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.search_link: update done");
 	}
 
-	public static final    Srch_link_tbl[] Ary_empty = new Srch_link_tbl[0];
+	public static final Srch_link_tbl[] Ary_empty = new Srch_link_tbl[0];
 	public static final String Fld_link_score = "link_score";
 }

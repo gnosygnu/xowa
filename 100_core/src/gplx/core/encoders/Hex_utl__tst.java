@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.encoders; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Hex_utl__tst {
-	private final    Hex_utl__fxt fxt = new Hex_utl__fxt();
+	private final Hex_utl__fxt fxt = new Hex_utl__fxt();
 	@Test public void To_int() {
 		fxt.Test__to_int("0"		, 0);
 		fxt.Test__to_int("F"		, 15);
@@ -73,7 +73,7 @@ class Hex_utl__fxt {
 		String actl = Hex_utl_.To_str(val, pad);
 		Tfds.Eq(expd, actl);
 	}
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public void Test__write_bfr(boolean lcase, int val, String expd) {
 		Hex_utl_.Write_bfr(bfr, lcase, val);
 		Gftest.Eq__str(expd, bfr.To_str_and_clear());

@@ -29,14 +29,14 @@ class Wbase_doc_cache__null implements Wbase_doc_cache {
 	public void Term() {}
 }
 class Wbase_doc_cache__hash implements Wbase_doc_cache {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public void Add(byte[] qid, Wdata_doc doc) {hash.Add(qid, doc);}
 	public Wdata_doc Get_or_null(byte[] qid) {return (Wdata_doc)hash.Get_by_bry(qid);}
 	public void Clear() {hash.Clear();}
 	public void Term() {hash.Clear();}
 }
 class Wbase_doc_cache__mru implements Wbase_doc_cache {
-	private final    Mru_cache_mgr cache;
+	private final Mru_cache_mgr cache;
 	public Wbase_doc_cache__mru(long cache_max, long compress_size, long used_weight) {
 		this.cache = Mru_cache_mgr.New_by_mb_secs(Gfo_log_wtr.New_dflt("wbase", "cache_mru_{0}.csv"), cache_max, compress_size, used_weight);
 	}

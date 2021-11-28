@@ -17,7 +17,7 @@ package gplx.xowa.xtns.wbases.stores; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*; import gplx.core.tests.*;
 import gplx.langs.jsons.*; import gplx.xowa.wikis.pages.*;
 public class Wbase_doc_mgr__tst {
-	@Before public void init() {fxt.Init();} private final    Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
+	@Before public void init() {fxt.Init();} private final Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test public void Redirect() {
 		// create 2 pages; Q1 redirects to Q2
 		Wdata_wiki_mgr wbase_mgr = fxt.App().Wiki_mgr().Wdata_mgr();

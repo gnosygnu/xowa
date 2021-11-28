@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 class Pxd_itm_ordinal extends Pxd_itm_base implements Pxd_itm_prototype {
-	private final    int ord_idx;
+	private final int ord_idx;
 	public int Ord_val() { return ord_idx; }
-	private final    byte[] ord_name;
+	private final byte[] ord_name;
 	public Pxd_itm_ordinal(int ary_idx, byte[] ord_name, int ord_idx) {
 		this.ord_name = ord_name; 
 		this.ord_idx = ord_idx;
@@ -32,7 +32,7 @@ class Pxd_itm_ordinal extends Pxd_itm_base implements Pxd_itm_prototype {
 	}
 }
 class Pxd_itm_weekdays extends Pxd_itm_base implements Pxd_itm_prototype {
-	private final    byte[] ord_name;
+	private final byte[] ord_name;
 	public Pxd_itm_weekdays(int ary_idx, byte[] ord_name) {
 		this.ord_name = ord_name; 
 		this.Ctor(ary_idx); 

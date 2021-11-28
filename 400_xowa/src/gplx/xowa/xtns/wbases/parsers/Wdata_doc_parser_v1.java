@@ -218,9 +218,9 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		return kv.Val().Data_bry();
 	}
 	private void Warn(String fmt, Object... args) {usr_dlg.Warn_many("", "", fmt, args);}
-	public static final    Ordered_hash Empty_ordered_hash_bry = Ordered_hash_.New_bry(), Empty_ordered_hash_generic = Ordered_hash_.New();
+	public static final Ordered_hash Empty_ordered_hash_bry = Ordered_hash_.New_bry(), Empty_ordered_hash_generic = Ordered_hash_.New();
 	private static final byte Prop_tid_m = 0, Prop_tid_q = 1, Prop_tid_g = 2, Prop_tid_rank = 3, Prop_tid_refs = 4;
-	private static final    Hash_adp_bry Prop_key_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry Prop_key_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_m		, Prop_tid_m)
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_q		, Prop_tid_q)
 	.Add_bry_byte(Wdata_dict_claim_v1.Bry_g		, Prop_tid_g)
@@ -250,7 +250,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	, Str_description							= "description"
 	, Str_name									= "name"
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Bry_entity								= Bry_.new_a7(Str_entity)
 	, Bry_id									= Bry_.new_a7(Str_id)
 	, Bry_links									= Bry_.new_a7(Str_links)

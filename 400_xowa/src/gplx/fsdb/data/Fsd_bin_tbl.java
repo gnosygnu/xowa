@@ -19,9 +19,9 @@ import gplx.dbs.*;
 import gplx.core.ios.streams.*;
 
 public class Fsd_bin_tbl implements Rls_able {
-	public final    String fld__owner_id, fld__owner_tid, fld__part_id, fld__data_url, fld__data;
+	public final String fld__owner_id, fld__owner_tid, fld__part_id, fld__data_url, fld__data;
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_select, stmt_select_itm; private Bry_bfr tmp_bfr;
-	private final    Bool_obj_ref saved_in_parts = Bool_obj_ref.n_();
+	private final Bool_obj_ref saved_in_parts = Bool_obj_ref.n_();
 	public Fsd_bin_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		fld__owner_id		= flds.Add_int_pkey	("bin_owner_id");
@@ -31,8 +31,8 @@ public class Fsd_bin_tbl implements Rls_able {
 		fld__data			= flds.Add_bry		("bin_data");	// mediumblob
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name = "fsdb_bin";
-	public Dbmeta_fld_list Flds() {return flds;} private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public String Tbl_name() {return tbl_name;} private final String tbl_name = "fsdb_bin";
+	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 		stmt_select = Db_stmt_.Rls(stmt_select);

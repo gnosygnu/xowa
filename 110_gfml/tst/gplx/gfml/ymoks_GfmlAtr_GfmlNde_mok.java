@@ -31,7 +31,7 @@ class GfmlAtr_mok implements GfmlItm_mok {
 		sb.Add_kv("key=", key).Add_kv("val=", val);
 		return sb.To_str();
 	}
-        public static final    GfmlAtr_mok Null = new GfmlAtr_mok().Key_(String_.Null_mark).Val_(String_.Null_mark);
+        public static final GfmlAtr_mok Null = new GfmlAtr_mok().Key_(String_.Null_mark).Val_(String_.Null_mark);
 	public static GfmlAtr_mok as_(Object obj) {return obj instanceof GfmlAtr_mok ? (GfmlAtr_mok)obj : null;}
         public static GfmlAtr_mok new_(String key, String val) {
 		GfmlAtr_mok rv = new GfmlAtr_mok();
@@ -89,8 +89,8 @@ class GfmlNde_mok implements GfmlItm_mok {
 		return rv;
 	}
 	public static GfmlNde_mok as_(Object obj) {return obj instanceof GfmlNde_mok ? (GfmlNde_mok)obj : null;}
-        public static final    GfmlNde_mok Null = new GfmlNde_mok().Hnd_(String_.Null_mark).Typ_(String_.Null_mark);
-        public static final    GfmlNde_mok ErrAtr = new GfmlNde_mok().Hnd_("<<ErrAtr>>").Typ_("<<ErrAtr>>");
+        public static final GfmlNde_mok Null = new GfmlNde_mok().Hnd_(String_.Null_mark).Typ_(String_.Null_mark);
+        public static final GfmlNde_mok ErrAtr = new GfmlNde_mok().Hnd_("<<ErrAtr>>").Typ_("<<ErrAtr>>");
         public static GfmlNde_mok new_() {return new GfmlNde_mok();} GfmlNde_mok() {}
         public static GfmlNde_mok gfmlNde_(GfmlNde nde) {return InitNde(nde);}
 	static GfmlNde_mok InitNde(GfmlNde nde) {

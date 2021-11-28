@@ -296,7 +296,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	, Invk_tabs_new_link__at_dflt__focus_y = "tabs_new_link__at_dflt__focus_y"
     , Invk_tabs_close_cur		= "tabs_close_cur"
 	;
-	private static final    String 
+	private static final String
 	  Cfg__place_on_top						= "xowa.gui.tabs.place_on_top"
 	, Cfg__height							= "xowa.gui.tabs.height"
 	, Cfg__hide_if_one						= "xowa.gui.tabs.hide_if_one"

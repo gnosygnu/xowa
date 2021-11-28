@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import org.junit.*; import gplx.core.encoders.*;
 public class Xoh_hzip_int__tst {
-	private final    Xoh_hzip_int__fxt fxt = new Xoh_hzip_int__fxt();
+	private final Xoh_hzip_int__fxt fxt = new Xoh_hzip_int__fxt();
 	@Test  public void Reqd__1() {
 		fxt.Test__encode(1,          0,       "!");
 		fxt.Test__encode(1,         84,       "u");
@@ -35,8 +35,8 @@ public class Xoh_hzip_int__tst {
 	}
 }
 class Xoh_hzip_int__fxt {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    gplx.core.primitives.Int_obj_ref count_ref = gplx.core.primitives.Int_obj_ref.New_neg1();
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final gplx.core.primitives.Int_obj_ref count_ref = gplx.core.primitives.Int_obj_ref.New_neg1();
 	public void Test__encode(int reqd, int val, String expd) {
 		Gfo_hzip_int_.Encode(reqd, bfr, val);
 		byte[] actl = bfr.To_bry_and_clear();

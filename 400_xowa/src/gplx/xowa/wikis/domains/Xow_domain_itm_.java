@@ -17,7 +17,7 @@ package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.primitives.*;
 import gplx.xowa.langs.*;
 public class Xow_domain_itm_ {
-	public static final    Xow_domain_itm[] Ary_empty = new Xow_domain_itm[0];
+	public static final Xow_domain_itm[] Ary_empty = new Xow_domain_itm[0];
 	public static Xow_domain_itm parse(byte[] raw) {
 		/*
 		~{type}.org				EX: wikimediafoundation
@@ -141,7 +141,7 @@ public class Xow_domain_itm_ {
 			return String_.In(domain.Domain_str(), "species.wikimedia.org", "www.wikidata.org", "commons.wikimedia.org");
 		return false;
 	}
-	public static final    String Lang_key__all = "*", Type_key__all = "*";
+	public static final String Lang_key__all = "*", Type_key__all = "*";
 
 	private static Xow_domain_itm new_other(byte[] raw) {return Xow_domain_itm.new_(raw, Xow_domain_tid_.Tid__other, Xol_lang_stub_.Key__unknown);}
 	private static byte[] Get_lang_code_for_mw_messages_file(byte[] v) {
@@ -152,12 +152,12 @@ public class Xow_domain_itm_ {
 		Object o = alt_domain__subdomain_by_lang.Get_by_bry(lang);
 		return o == null ? lang : (byte[])o;
 	}
-	private static final    Hash_adp_bry alt_domain__lang_by_subdomain = Hash_adp_bry.ci_a7()	// ASCII:lang_code
+	private static final Hash_adp_bry alt_domain__lang_by_subdomain = Hash_adp_bry.ci_a7()	// ASCII:lang_code
 	.Add_str_obj("simple"			, Bry_.new_a7("en"))
 	.Add_str_obj("zh-classical"		, Bry_.new_a7("lzh"))
 	.Add_str_obj("no"				, Bry_.new_a7("nb"))
 	;
-	private static final    Hash_adp_bry alt_domain__subdomain_by_lang = Hash_adp_bry.ci_a7()	// ASCII:lang_code
+	private static final Hash_adp_bry alt_domain__subdomain_by_lang = Hash_adp_bry.ci_a7()	// ASCII:lang_code
 	.Add_str_obj("lzh"				, Bry_.new_a7("zh-classical"))
 	.Add_str_obj("nb"				, Bry_.new_a7("no"))
 	;
@@ -174,7 +174,7 @@ public class Xow_domain_itm_ {
 	, Str__wmforg								= "foundation.wikimedia.org"
 	, Str__home									= "home"
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Bry__enwiki								= Bry_.new_a7(Str__enwiki)
 	, Bry__species								= Bry_.new_a7(Str__species)
 	, Bry__commons								= Bry_.new_a7(Str__commons)
@@ -188,5 +188,5 @@ public class Xow_domain_itm_ {
 	, Bry__home									= Bry_.new_a7(Str__home)
 	, Bry__simplewiki							= Bry_.new_a7("simple.wikipedia.org")
 	;
-	public static final    byte[] Seg__org = Bry_.new_a7("org"), Seg__www = Bry_.new_a7("www");
+	public static final byte[] Seg__org = Bry_.new_a7("org"), Seg__www = Bry_.new_a7("www");
 }

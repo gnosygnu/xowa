@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_msg_mgr implements Gfo_invk {
-	private final    Gfo_invk owner; private final    boolean owner_is_lang;
+	private final Gfo_invk owner; private final boolean owner_is_lang;
 	public Xol_msg_mgr(Gfo_invk owner, boolean owner_is_lang) {
 		this.owner = owner; this.owner_is_lang = owner_is_lang;
 		this.Clear();

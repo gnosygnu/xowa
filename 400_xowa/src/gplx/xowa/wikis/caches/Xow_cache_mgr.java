@@ -30,16 +30,16 @@ import gplx.xowa.wikis.xwikis.sitelinks.Xoa_sitelink_itm;
 import gplx.xowa.wikis.xwikis.sitelinks.Xoa_sitelink_itm_mgr;
 
 public class Xow_cache_mgr {
-	private final    Xowe_wiki wiki;
+	private final Xowe_wiki wiki;
 	public Xow_cache_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.page_cache = new Xow_page_cache(wiki);
 		this.defn_cache = new Xow_defn_cache(wiki.Lang());
 		this.ifexist_cache = new Xow_ifexist_cache(wiki, page_cache);
 	}
-	public Xow_defn_cache		Defn_cache()		{return defn_cache;}		private final    Xow_defn_cache defn_cache;
-	public Hash_adp_bry			Lst_cache()			{return lst_cache;}			private final    Hash_adp_bry lst_cache = Hash_adp_bry.cs(); 
-	public Hash_adp				Misc_cache()		{return misc_cache;}		private final    Hash_adp misc_cache = Hash_adp_.New();
+	public Xow_defn_cache		Defn_cache()		{return defn_cache;}		private final Xow_defn_cache defn_cache;
+	public Hash_adp_bry			Lst_cache()			{return lst_cache;}			private final Hash_adp_bry lst_cache = Hash_adp_bry.cs();
+	public Hash_adp				Misc_cache()		{return misc_cache;}		private final Hash_adp misc_cache = Hash_adp_.New();
 	public Xow_page_cache		Page_cache()		{return page_cache;}		private Xow_page_cache page_cache;
 	public Gfo_cache_mgr		Commons_cache()		{return commons_cache;}		private Gfo_cache_mgr commons_cache = new Gfo_cache_mgr().Max_size_(64 * Io_mgr.Len_mb).Reduce_by_(32 * Io_mgr.Len_mb);
 	public Xow_ifexist_cache	Ifexist_cache()		{return ifexist_cache;}		private Xow_ifexist_cache ifexist_cache;

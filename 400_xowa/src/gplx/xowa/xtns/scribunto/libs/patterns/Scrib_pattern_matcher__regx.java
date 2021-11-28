@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto.libs.patterns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
 import gplx.objects.strings.unicodes.*;
 import gplx.langs.regxs.*;
-class Scrib_pattern_matcher__regx extends Scrib_pattern_matcher { 	private final    byte[] page_url;
+class Scrib_pattern_matcher__regx extends Scrib_pattern_matcher { 	private final byte[] page_url;
 	public Scrib_pattern_matcher__regx(byte[] page_url) {
 		this.page_url = page_url;
 	}

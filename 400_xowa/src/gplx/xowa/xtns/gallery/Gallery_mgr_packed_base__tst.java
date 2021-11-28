@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.files.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Gallery_mgr_packed_base__tst {
-	private final    Gallery_mgr_packed_base__fxt fxt = new Gallery_mgr_packed_base__fxt();
+	private final Gallery_mgr_packed_base__fxt fxt = new Gallery_mgr_packed_base__fxt();
 	@Test public void Get_thumb_size_static() {
 		fxt.Test__Get_thumb_size_static(Xof_ext_.Id_png, 300, 200, fxt.Make__lnki(4650, 450));
 	}

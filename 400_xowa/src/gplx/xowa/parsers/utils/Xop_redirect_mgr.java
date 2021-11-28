@@ -18,7 +18,7 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.pages.redirects.*;
 public class Xop_redirect_mgr {
-	private final    Xowe_wiki wiki; private final    Gfo_url_encoder url_decoder; private Hash_adp_bry redirect_hash;
+	private final Xowe_wiki wiki; private final Gfo_url_encoder url_decoder; private Hash_adp_bry redirect_hash;
 	public Xop_redirect_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.url_decoder = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url_ttl;}	// NOTE: must be Url_ttl, not Url; PAGE:en.w:Template:Positionskarte+ -> Template:Location_map+, not Template:Location_map DATE:2014-08-21
 	public void Clear() {redirect_hash = null;}	// TEST:
 	public boolean Is_redirect(byte[] text, int text_len) {return this.Extract_redirect(text, text_len) != null;}
@@ -55,11 +55,11 @@ public class Xop_redirect_mgr {
 		redirect_bry = url_decoder.Decode(redirect_bry);	// NOTE: url-decode links; PAGE: en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
 		return Xoa_ttl.Parse(wiki, redirect_bry);
 	}
-	public static final    Xoa_ttl Extract_redirect_is_null = null;
+	public static final Xoa_ttl Extract_redirect_is_null = null;
 	public static final int Redirect_max_allowed = 4;
-	public static final    Xoa_ttl	Redirect_null_ttl = null;
-	public static final    byte[]	Redirect_null_bry = Bry_.Empty;
-	private static final    byte[] Redirect_bry = Bry_.new_a7("#REDIRECT ");
+	public static final Xoa_ttl	Redirect_null_ttl = null;
+	public static final byte[]	Redirect_null_bry = Bry_.Empty;
+	private static final byte[] Redirect_bry = Bry_.new_a7("#REDIRECT ");
 	public static byte[] Make_redirect_text(byte[] redirect_to_ttl) {
 		return Bry_.Add
 			(	Redirect_bry				// "#REDIRECT "

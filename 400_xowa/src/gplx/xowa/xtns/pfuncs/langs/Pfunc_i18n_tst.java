@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.xowa.langs.*;
 public class Pfunc_i18n_tst {
-	private final    Pfunc_i18n_fxt fxt = new Pfunc_i18n_fxt();
+	private final Pfunc_i18n_fxt fxt = new Pfunc_i18n_fxt();
 	@Test public void Casing()	{
 		fxt.Init__func("de", "fullurl", false, "VOLLSTÄNDIGE_URL");
 		fxt.Init__lang("de");

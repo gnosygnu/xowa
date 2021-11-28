@@ -38,7 +38,7 @@ public class Pfunc_displaytitle_tst {
 	}
 }
 class Pfunc_displaytitle_fxt {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	public void Reset() {
 		fxt.Reset();
 		fxt.Page_ttl_("A b");

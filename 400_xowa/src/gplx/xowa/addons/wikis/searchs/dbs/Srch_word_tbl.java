@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import gplx.dbs.*;
 public class Srch_word_tbl implements Rls_able {
-	public final    String tbl_name;
-	public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	public final    String fld_id, fld_text, fld_link_count, fld_link_count_score, fld_link_score_min, fld_link_score_max;
-	public final    Db_conn conn; private Db_stmt stmt_insert, stmt_select_by;
+	public final String tbl_name;
+	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final String fld_id, fld_text, fld_link_count, fld_link_count_score, fld_link_score_min, fld_link_score_max;
+	public final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by;
 	public Srch_word_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= TABLE_NAME;

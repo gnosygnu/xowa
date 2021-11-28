@@ -23,6 +23,6 @@ public class RandomAdp_ implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_Next))	return RandomAdp_.new_().Next(m.ReadInt("max"));
 		else								return Gfo_invk_.Rv_unhandled;
-	}	static final    String Invk_Next = "Next";
-        public static final    RandomAdp_ Gfs = new RandomAdp_();
+	}	static final String Invk_Next = "Next";
+        public static final RandomAdp_ Gfs = new RandomAdp_();
 }

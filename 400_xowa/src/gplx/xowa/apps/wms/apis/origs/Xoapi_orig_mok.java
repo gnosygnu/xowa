@@ -30,5 +30,5 @@ public class Xoapi_orig_mok extends Xoapi_orig_base {
 		rv.Init_all(repo_wiki_key, orig_page, orig_w, orig_h);
 		return true;
 	}
-	public static final    Xoapi_orig_mok Instance = new Xoapi_orig_mok(); Xoapi_orig_mok() {}
+	public static final Xoapi_orig_mok Instance = new Xoapi_orig_mok(); Xoapi_orig_mok() {}
 }

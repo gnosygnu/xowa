@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.xowa.wikis.ttls.*;
 public class Pfunc_pagelanguage__tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Basic() {
 		fxt.Test__parse__tmpl_to_html("{{PAGELANGUAGE}}", "en");
 	}

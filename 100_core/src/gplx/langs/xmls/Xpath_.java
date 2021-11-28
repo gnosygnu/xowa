@@ -54,7 +54,7 @@ public class Xpath_ {
 				TraverseSubs(sub, parts, depth + 1, results, args);
 		}
 	}
-	public static final    String InnetTextKey = "&innerText";
+	public static final String InnetTextKey = "&innerText";
 	public static Keyval_hash ExtractKeyVals(String xml, Int_obj_ref posRef, String nodeName) {
 		int pos = posRef.Val();
 		Err xmlErr = Err_.new_wo_type("error parsing xml", "xml", xml, "pos", pos);

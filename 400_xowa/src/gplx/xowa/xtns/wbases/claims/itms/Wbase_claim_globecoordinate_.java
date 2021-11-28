@@ -23,8 +23,8 @@ public class Wbase_claim_globecoordinate_ {
 	, Tid__precision							= 3
 	, Tid__globe								= 4
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.val.globecoordinate", 5);
-	public static final    Wbase_enum_itm
+	public static final Wbase_enum_hash Reg = new Wbase_enum_hash("claim.val.globecoordinate", 5);
+	public static final Wbase_enum_itm
 	  Itm__latitude					= Reg.Add(Tid__latitude			, "latitude")
 	, Itm__longitude				= Reg.Add(Tid__longitude		, "longitude")
 	, Itm__altitude					= Reg.Add(Tid__altitude			, "altitude")

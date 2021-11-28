@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Mwh_atr_parser_tst {
-	private final    Mwh_atr_parser_fxt fxt = new Mwh_atr_parser_fxt();
+	private final Mwh_atr_parser_fxt fxt = new Mwh_atr_parser_fxt();
 	@Test  public void Pair__quote__double() 			{fxt.Test_parse("a=\"b\""			, fxt.Make_pair("a"		, "b"));}
 	@Test  public void Pair__quote__single()			{fxt.Test_parse("a='b'"				, fxt.Make_pair("a"		, "b"));}
 	@Test  public void Pair__quote__none()				{fxt.Test_parse("a=b"				, fxt.Make_pair("a"		, "b"));}

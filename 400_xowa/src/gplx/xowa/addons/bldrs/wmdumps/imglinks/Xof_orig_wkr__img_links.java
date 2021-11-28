@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	private Db_conn imglnk_conn;
 	public Xof_orig_wkr__img_links(Xowe_wiki wiki) {
 		this.wiki = wiki;
@@ -34,7 +34,7 @@ public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
 	public void			Db_txn_save() {}
 	public void			Db_rls() {}
 
-	public Xowe_wiki	Wiki() {return wiki;} private final    Xowe_wiki wiki;
+	public Xowe_wiki	Wiki() {return wiki;} private final Xowe_wiki wiki;
 	public Imglnk_reg_tbl Tbl__imglnk_reg() {
 		if (tbl__imglnk_reg == null)
 			this.tbl__imglnk_reg = new Imglnk_reg_tbl(imglnk_conn);
@@ -70,5 +70,5 @@ public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
 			return rv;
 		}
 	}
-	private static final    Xof_orig_itm Missing = new Xof_orig_itm(Byte_.Max_value_127, Bry_.Empty, -1, -1, -1, Bry_.Empty);
+	private static final Xof_orig_itm Missing = new Xof_orig_itm(Byte_.Max_value_127, Bry_.Empty, -1, -1, -1, Bry_.Empty);
 }

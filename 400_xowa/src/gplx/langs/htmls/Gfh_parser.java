@@ -157,7 +157,7 @@ public class Gfh_parser {
 		}
 		return Scan_invalid;
 	}
-	private static final    byte Scan_invalid = 0, Scan_valid = 1, Scan_stop = 2;
-	public static final    byte[] Wildcard = null;
-	public static final    String Wildcard_str = null;
+	private static final byte Scan_invalid = 0, Scan_valid = 1, Scan_stop = 2;
+	public static final byte[] Wildcard = null;
+	public static final String Wildcard_str = null;
 }

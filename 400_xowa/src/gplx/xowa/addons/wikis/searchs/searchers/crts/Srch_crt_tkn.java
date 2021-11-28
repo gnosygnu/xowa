@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 public class Srch_crt_tkn {
 	public Srch_crt_tkn(byte tid, byte[] val) {this.Tid = tid; this.Val = val;}
-	public final    byte	Tid;
-	public final    byte[]	Val;
+	public final byte	Tid;
+	public final byte[]	Val;
 	public static final byte 
 	  Tid__escape		=  0
 	, Tid__space		=  1
@@ -32,5 +32,5 @@ public class Srch_crt_tkn {
 	, Tid__eos			= 10
 	, Tid__null			= 11
 	;
-	public static final    Srch_crt_tkn[] Ary_empty = new Srch_crt_tkn[0];
+	public static final Srch_crt_tkn[] Ary_empty = new Srch_crt_tkn[0];
 }

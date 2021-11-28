@@ -21,14 +21,14 @@ public class Xoh_sidebar_itm {
 		this.text = text_val;
 		this.href = href;
 	}
-	public boolean					Tid_is_itm() {return tid_is_itm;} private final    boolean tid_is_itm;
-	public byte[]				Id() {return id;} private final    byte[] id;
-	public byte[]				Text() {return text;} private final    byte[] text;
-	public byte[]				Href() {return href;} private final    byte[] href;
+	public boolean					Tid_is_itm() {return tid_is_itm;} private final boolean tid_is_itm;
+	public byte[]				Id() {return id;} private final byte[] id;
+	public byte[]				Text() {return text;} private final byte[] text;
+	public byte[]				Href() {return href;} private final byte[] href;
 	public byte[]				Title() {return title;} private byte[] title;
 	public byte[]				Accesskey() {return accesskey;} private byte[] accesskey;
 	public byte[]				Atr_accesskey_and_title() {return atr_accesskey_and_title;} private byte[] atr_accesskey_and_title;
-	public int					Subs__len() {return subs.Count();} private final    List_adp subs = List_adp_.New();
+	public int					Subs__len() {return subs.Count();} private final List_adp subs = List_adp_.New();
 	public Xoh_sidebar_itm		Subs__get_at(int i) {return (Xoh_sidebar_itm)subs.Get_at(i);}
 	public Xoh_sidebar_itm		Subs__add(Xoh_sidebar_itm... ary) {
 		int len = ary.length;
@@ -43,5 +43,5 @@ public class Xoh_sidebar_itm {
 		this.atr_accesskey_and_title = atr_accesskey_and_title;
 	}
 
-	private static final    byte[] CONST_id_prefix = Bry_.new_a7("n-");
+	private static final byte[] CONST_id_prefix = Bry_.new_a7("n-");
 }

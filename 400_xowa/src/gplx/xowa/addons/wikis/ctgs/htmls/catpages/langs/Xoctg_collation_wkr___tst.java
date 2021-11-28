@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xoctg_collation_wkr___tst {
-	private final    Xoctg_collation_wkr___fxt fxt = new Xoctg_collation_wkr___fxt();
+	private final Xoctg_collation_wkr___fxt fxt = new Xoctg_collation_wkr___fxt();
 	@Test  public void Uppercase()							{fxt.Test__make("uppercase"	, "uppercase");}
 	@Test  public void Identity()							{fxt.Test__make("identity"	, "identity");}
 	@Test  public void Unknown()							{fxt.Test__make("unknown"	, "uppercase");}

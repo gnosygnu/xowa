@@ -19,7 +19,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
-	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
 	private boolean fail_throws_err;
 	private byte[] src_bry;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
@@ -137,7 +137,7 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 		rdr.Fail_throws_err_(v);
 	}
 
-	private static final    byte[] Bry__file = Bry_.new_a7("/file/"), Bry__math = Bry_.new_a7("/math/"), Bry__orig = Bry_.new_a7("orig/"), Bry__thumb = Bry_.new_a7("thumb/");
+	private static final byte[] Bry__file = Bry_.new_a7("/file/"), Bry__math = Bry_.new_a7("/math/"), Bry__orig = Bry_.new_a7("orig/"), Bry__thumb = Bry_.new_a7("thumb/");
 	private static final byte Tid__orig = 1, Tid__thumb = 2;
-	private static final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs().Add_bry_byte(Bry__orig, Tid__orig).Add_bry_byte(Bry__thumb, Tid__thumb);
+	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.cs().Add_bry_byte(Bry__orig, Tid__orig).Add_bry_byte(Bry__thumb, Tid__thumb);
 }

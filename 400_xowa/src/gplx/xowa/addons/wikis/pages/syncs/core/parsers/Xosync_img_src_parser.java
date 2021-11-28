@@ -19,11 +19,11 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files
 import gplx.langs.htmls.*;	 import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xosync_img_src_parser {
-	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
-	private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    byte[] wiki_abrv_commons;
-	private final    Xoh_img_src_data img_src_parser = new Xoh_img_src_data();
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
+	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final byte[] wiki_abrv_commons;
+	private final Xoh_img_src_data img_src_parser = new Xoh_img_src_data();
 
 	private Xow_domain_itm wiki_domain;
 	private List_adp imgs;
@@ -221,19 +221,19 @@ public class Xosync_img_src_parser {
 	}
 
 	public static final byte Path__unknown = 0, Path__file_wm = 1, Path__math = 2, Path__file_xo = 3;
-	private final    Btrie_slim_mgr path_trie = Btrie_slim_mgr.cs()
+	private final Btrie_slim_mgr path_trie = Btrie_slim_mgr.cs()
 	.Add_str_byte("//upload.wikimedia.org/", Path__file_wm)
 	.Add_str_byte("https://wikimedia.org/api/rest_v1/media/math/render/svg/", Path__math)
 	.Add_str_byte("file:///", Path__file_xo)
 	;
 
-	public static final    byte[] Bry__xowa_file = Bry_.new_a7("xowa:/file/"), Bry__xowa_math = Bry_.new_a7("xowa:/math/");
+	public static final byte[] Bry__xowa_file = Bry_.new_a7("xowa:/file/"), Bry__xowa_math = Bry_.new_a7("xowa:/math/");
 	public static Btrie_slim_mgr Src_xo_trie = Btrie_slim_mgr.cs()
 	.Add_bry_byte(Bry__xowa_file, Path__file_wm)
 	.Add_bry_byte(Bry__xowa_math, Path__math)
 	;
 
-	private static final    byte[] 
+	private static final byte[]
 	  Bry__repo_remote = Bry_.new_a7("wikipedia/commons/")
 	, Bry__thumb = Bry_.new_a7("thumb/")
 	, Bry__px = Bry_.new_a7("px")

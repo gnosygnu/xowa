@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sqls.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 public class Sql_order_clause {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	private Sql_order_fld[] ary;
 	public void Flds__add(Sql_order_fld fld) {list.Add(fld);}
 	public Sql_order_fld[] Flds() {

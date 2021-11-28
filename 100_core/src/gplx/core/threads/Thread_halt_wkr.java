@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
 class Thread_halt_wkr implements Gfo_invk {
-	private final    Thread_adp_mgr mgr;
-	private final    Thread_adp thread; private final    String thread_key;  private final    Thread_halt_cbk cbk;
-	private final    long bgn_time;
-	private final    int sleep_time, quit_time;
+	private final Thread_adp_mgr mgr;
+	private final Thread_adp thread; private final String thread_key;  private final Thread_halt_cbk cbk;
+	private final long bgn_time;
+	private final int sleep_time, quit_time;
 	public Thread_halt_wkr(Thread_adp_mgr mgr, Thread_halt_itm itm, Thread_halt_cbk cbk, int sleep_time, int quit_time) {
 		this.mgr = mgr; this.thread = itm.Thread; this.thread_key = itm.Key; this.cbk = cbk;
 		this.sleep_time = sleep_time; this.quit_time = quit_time;

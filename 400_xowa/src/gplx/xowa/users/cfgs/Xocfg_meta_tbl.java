@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.users.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*;
 public class Xocfg_meta_tbl implements Rls_able {
-	private final    String tbl_name; public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_key, fld_type, fld_dflt, fld_version;
-	private final    Db_conn conn;
+	private final String tbl_name; public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_key, fld_type, fld_dflt, fld_version;
+	private final Db_conn conn;
 	public Xocfg_meta_tbl(Db_conn conn) {
 		this.conn = conn;
 		tbl_name			= Tbl_name;

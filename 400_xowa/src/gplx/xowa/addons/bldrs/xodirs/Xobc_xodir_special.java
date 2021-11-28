@@ -32,12 +32,12 @@ public class Xobc_xodir_special implements Xow_special_page {
 		
 		new Xobc_xodir_html().Bld_page_by_mustache(wiki.App(), page, this);
 	}
-	private static final    byte[] Bry__path = Bry_.new_a7("path");
+	private static final byte[] Bry__path = Bry_.new_a7("path");
 
 	Xobc_xodir_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
-	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
+	public Xow_special_meta Special__meta()		{return special__meta;} private final Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
-	public static final    Xow_special_page Prototype = new Xobc_xodir_special(Xow_special_meta.New_xo("XowaRootDir", "XOWA Folder Selection"));
+	public static final Xow_special_page Prototype = new Xobc_xodir_special(Xow_special_meta.New_xo("XowaRootDir", "XOWA Folder Selection"));
 
 	public static Gfo_invk On_path_selected = Gfo_invk_.Noop;
 }

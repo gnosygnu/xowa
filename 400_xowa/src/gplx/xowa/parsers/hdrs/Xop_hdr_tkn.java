@@ -35,5 +35,5 @@ public class Xop_hdr_tkn extends Xop_tkn_itm_base {
 		this.section_editable_idx = section_editable_idx;
 	}
 
-	public static final    Xop_hdr_tkn[] Ary_empty = new Xop_hdr_tkn[0];
+	public static final Xop_hdr_tkn[] Ary_empty = new Xop_hdr_tkn[0];
 }

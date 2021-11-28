@@ -26,8 +26,8 @@ public class XomwBlockLevelPass {
 	private int lastSection = LAST_SECTION_NONE;
 	private boolean linestart;
 //		private $text;
-	private final    Bry_bfr tmp = Bry_bfr_.New();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Bry_bfr tmp = Bry_bfr_.New();
+	private final Btrie_rv trv = new Btrie_rv();
 	private byte[] find_colon_no_links__before, find_colon_no_links__after;
 
 	// State constants for the definition list colon extraction

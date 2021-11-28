@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
 public class Xomw_regex_space {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Xomw_regex_space() {
 		byte[] space = Bry_.New_by_ints(32);
 		ws = new byte[][]

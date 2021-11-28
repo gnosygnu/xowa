@@ -117,5 +117,5 @@ class Bry_comparer_fld_last implements gplx.core.lists.ComparerAble {
 		int rhs_bgn = Bry_find_.Find_bwd(rhs, Byte_ascii.Pipe); if (rhs_bgn == Bry_find_.Not_found) rhs_bgn = -1;
 		return Bry_.Compare(lhs, lhs_bgn + 1, lhs.length, rhs, rhs_bgn + 1, rhs.length);
 	}
-	public static final    Bry_comparer_fld_last Instance = new Bry_comparer_fld_last(); 
+	public static final Bry_comparer_fld_last Instance = new Bry_comparer_fld_last();
 }

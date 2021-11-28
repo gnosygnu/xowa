@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.searchs.gui.htmlbars; import gplx.*; import gplx.
 import gplx.core.js.*;
 import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 class Srch_rslt_cbk__js implements Srch_rslt_cbk {
-	protected final    Js_wtr js_wtr = new Js_wtr();
+	protected final Js_wtr js_wtr = new Js_wtr();
 	private byte[] cbk_func, search_raw;
 	public Srch_rslt_cbk__js(byte[] cbk_func, byte[] search_raw) {
 		this.cbk_func = cbk_func;
@@ -51,7 +51,7 @@ class Srch_rslt_cbk__js implements Srch_rslt_cbk {
 		catch (Exception e) {Xoa_app_.Usr_dlg().Warn_many("", "", "highlight failed; ttl=~{0} err=~{1}", row.Page_ttl_wo_ns, Err_.Message_gplx_log(e));}
 	}
 }
-class Srch_rslt_cbk__swt extends Srch_rslt_cbk__js implements Gfo_invk { 	private final    Xoae_app app;
+class Srch_rslt_cbk__swt extends Srch_rslt_cbk__js implements Gfo_invk { 	private final Xoae_app app;
 	public Srch_rslt_cbk__swt(Xoae_app app, byte[] cbk_func, byte[] search_raw) {super(cbk_func, search_raw);
 		this.app = app;
 	}

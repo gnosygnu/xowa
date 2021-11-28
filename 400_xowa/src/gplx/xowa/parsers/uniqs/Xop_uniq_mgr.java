@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.uniqs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
-	private final    Btrie_slim_mgr general_trie = Btrie_slim_mgr.cs(); private final    Btrie_rv trv = new Btrie_rv();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
+	private final Btrie_slim_mgr general_trie = Btrie_slim_mgr.cs(); private final Btrie_rv trv = new Btrie_rv();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	private int nxt_idx = -1;
 	public void Clear() {
 		nxt_idx = -1;
@@ -107,7 +107,7 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		return rv;
 	}
 
-	public static final    byte[] 
+	public static final byte[]
 	  Bry__uniq__bgn		= Bry_.new_a7("\u007f'\"`UNIQ-")
 	, Bry__uniq__bgn_w_dash	= Bry_.Add(Bry__uniq__bgn, Byte_ascii.Dash_bry)
 	, Bry__uniq__add__end	= Bry_.new_a7("-QINU`\"'\u007f")

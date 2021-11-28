@@ -25,7 +25,7 @@ import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.io.UnsupportedEncodingException;
 public class IoStream_ {
-	public static final    IoStream Null = new IoStream_null();
+	public static final IoStream Null = new IoStream_null();
 	public static IoStream				mem_txt_(Io_url url, String v)	{return IoStream_mem.rdr_txt_(url, v);}
 	public static IoStream				ary_(byte[] v)					{return IoStream_mem.rdr_ary_(Io_url_.Empty, v);}
 	public static final byte Mode_rdr = 0, Mode_wtr_create = 1, Mode_wtr_append = 2, Mode_wtr_update = 3;

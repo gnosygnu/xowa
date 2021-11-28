@@ -53,7 +53,7 @@ public class Xow_import_special implements Xow_special_page {
 	}
 
 	Xow_import_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
-	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
+	public Xow_special_meta Special__meta()		{return special__meta;} private final Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
-	public static final    Xow_special_page Prototype = new Xow_import_special(Xow_special_meta.New_xo("XowaWikiImport", "Import wiki", "XowaFileBrowser"));
+	public static final Xow_special_page Prototype = new Xow_import_special(Xow_special_meta.New_xo("XowaWikiImport", "Import wiki", "XowaFileBrowser"));
 }

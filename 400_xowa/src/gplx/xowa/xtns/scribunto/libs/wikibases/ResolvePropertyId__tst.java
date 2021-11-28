@@ -17,7 +17,7 @@ package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*; import gplx.xowa
 import org.junit.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public class ResolvePropertyId__tst {
-	private final    ResolvePropertyId__fxt fxt = new ResolvePropertyId__fxt();
+	private final ResolvePropertyId__fxt fxt = new ResolvePropertyId__fxt();
 	@Before public void init() {
 		fxt.Init();
 	}
@@ -35,8 +35,8 @@ public class ResolvePropertyId__tst {
 	}
 }
 class ResolvePropertyId__fxt {
-	private final    Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt();
-	private final    Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt();
+	private final Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt();
+	private final Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt();
 	private Scrib_lib lib;
 	public void Init() {
 		fxt.Clear_for_lib("de.wikipedia.org", "de");

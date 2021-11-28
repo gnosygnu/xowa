@@ -19,7 +19,7 @@ import gplx.core.strings.String_bldr;
 import gplx.core.strings.String_bldr_;
 public class String_ {
 	// -------- BASELIB_COPY --------
-	public static final    Class<?> Cls_ref_type = String.class;
+	public static final Class<?> Cls_ref_type = String.class;
 	public static final String Cls_val_name = "str" + "ing";
 	public static final int Find_none = -1, Pos_neg1 = -1;
 	public static final String Empty = "", Null_mark = "<<NULL>>", Tab = "\t", Lf = "\n", CrLf = "\r\n", Nl = "\n";
@@ -415,7 +415,7 @@ public class String_ {
 			sb.Add(s).Add(";");
 		return sb.To_str();
 	}
-	public static final    String[] Ary_empty = new String[0];
+	public static final String[] Ary_empty = new String[0];
 	public static String[] Split(String raw, char dlm) {return Split(raw, dlm, false);}
 	public static String[] Split(String raw, char dlm, boolean addEmptyIfDlmIsLast) {
 		List_adp list = List_adp_.New(); String_bldr sb = String_bldr_.new_();

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.security.algos.gplx_crypto; import gplx.*; import gplx.core.*; import gplx.core.security.*; import gplx.core.security.algos.*;
 import org.junit.*; import gplx.core.consoles.*; import gplx.core.ios.*; /*IoStream*/
 public class Hash_algo__tth_192__tst {	// REF: http://open-content.net/specs/draft-jchapweske-thex-02.html; DC++ 0.698
-	private final    Hash_algo__fxt fxt = new Hash_algo__fxt(Hash_algo_.New__tth_192());
+	private final Hash_algo__fxt fxt = new Hash_algo__fxt(Hash_algo_.New__tth_192());
 	@Test public void Empty()				{fxt.Test__hash("LWPNACQDBZRYXW3VHJVCJ64QBZNGHOHHHZWCLNQ", "");}
 	@Test public void Null__1()			{fxt.Test__hash("VK54ZIEEVTWNAUI5D5RDFIL37LX2IQNSTAXFKSA", "\0");}
 	@Test public void ab()					{fxt.Test__hash("XQXRSGMB3PSN2VGZYJMNJG6SOOQ3JIGQHD2I6PQ", "ab");}

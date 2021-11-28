@@ -18,9 +18,9 @@ import gplx.core.envs.*;
 import gplx.langs.htmls.*;
 public class Xow_tidy_mgr implements Gfo_invk, Xow_tidy_mgr_interface {
 	private Xoae_app app;
-	private final    Xoh_tidy_wkr_tidy	wkr__tidy = new Xoh_tidy_wkr_tidy();	// NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
-	private final    Xoh_tidy_wkr_jtidy wkr__jtidy = new Xoh_tidy_wkr_jtidy();
-	private final    Xoh_tidy_wkr__vnu  wkr__vnu = new Xoh_tidy_wkr__vnu();
+	private final Xoh_tidy_wkr_tidy	wkr__tidy = new Xoh_tidy_wkr_tidy();	// NOTE: app-level; not thread-safe; needed b/c of Options and exe/args DATE:2016-07-12
+	private final Xoh_tidy_wkr_jtidy wkr__jtidy = new Xoh_tidy_wkr_jtidy();
+	private final Xoh_tidy_wkr__vnu  wkr__vnu = new Xoh_tidy_wkr__vnu();
 	private Xoh_tidy_wkr wkr = Xoh_tidy_wkr_.Wkr_null; // TEST: set default wkr to null
 	private boolean enabled = true;
 	public void Init_by_wiki(Xowe_wiki wiki) {
@@ -62,7 +62,7 @@ public class Xow_tidy_mgr implements Gfo_invk, Xow_tidy_mgr_interface {
 		bfr.Delete_rng_to_end(find);
 		return true;
 	}		
-	private static final    byte[]	// MW:includes/parser/Tidy.php|getWrapped
+	private static final byte[]	// MW:includes/parser/Tidy.php|getWrapped
 	  Wrap_bgn = Bry_.new_a7
 	( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 	+ "<html>"

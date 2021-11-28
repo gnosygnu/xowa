@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.apps.fsys.*;
 public class Xol_convert_regy implements Gfo_invk {	// registry of convert_grp; EX: zh-hans;zh-hant;
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();		
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xol_convert_grp Get_or_null(byte[] key) {return (Xol_convert_grp)hash.Get_by(key);}
 	public Xol_convert_grp Get_or_make(byte[] key) {
 		Xol_convert_grp rv = (Xol_convert_grp)hash.Get_by(key);

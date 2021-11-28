@@ -175,7 +175,7 @@ public class XomwSetup {
 	* and "File_talk".  The old names "Image" and "Image_talk" are
 	* retained as aliases for backwards compatibility.
 	*/
-	public static final    XomwNamespacesByName wgNamespaceAliases = new XomwNamespacesByName()
+	public static final XomwNamespacesByName wgNamespaceAliases = new XomwNamespacesByName()
 		.Add("Image", XomwDefines.NS_FILE)
 		.Add("Image_talk", XomwDefines.NS_FILE_TALK)
 		;

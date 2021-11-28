@@ -79,7 +79,7 @@ public class Xosrv_server implements Gfo_invk {
 			trace.Val_("json_write: " + Object_.Xto_str_strict_or_null_mark(rv_obj));
 			return json_wtr.Write_root(Bry_xowa_js_result, rv_obj).Bld_as_str();
 		} catch (Exception e) {throw Err_.new_exc(e, "http", "exec_js error", "trace", trace, "msg", msg_text);}
-	}	private Xosrv_xowa_exec_parser xowa_exec_parser = new Xosrv_xowa_exec_parser(); private Json_doc_srl json_wtr = new Json_doc_srl(); private static final    byte[] Bry_xowa_js_result = Bry_.new_a7("xowa_js_result");
+	}	private Xosrv_xowa_exec_parser xowa_exec_parser = new Xosrv_xowa_exec_parser(); private Json_doc_srl json_wtr = new Json_doc_srl(); private static final byte[] Bry_xowa_js_result = Bry_.new_a7("xowa_js_result");
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_rdr_port))				return rdr_port;
 		else if	(ctx.Match(k, Invk_rdr_port_))				rdr_port = m.ReadInt("v");
@@ -93,7 +93,7 @@ public class Xosrv_server implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	public static final    String Invk_stop = "stop", Invk_rdr_port = "rdr_port", Invk_rdr_port_ = "rdr_port_", Invk_wtr_port = "wtr_port", Invk_wtr_port_ = "wtr_port_", Invk_wtr_host = "wtr_host", Invk_wtr_host_ = "wtr_host_"
+	public static final String Invk_stop = "stop", Invk_rdr_port = "rdr_port", Invk_rdr_port_ = "rdr_port_", Invk_wtr_port = "wtr_port", Invk_wtr_port_ = "wtr_port_", Invk_wtr_host = "wtr_host", Invk_wtr_host_ = "wtr_host_"
 	, Invk_shutdown_interval = "shutdown_interval", Invk_shutdown_interval_ = "shutdown_interval_";
 }
 class Xosrv_xowa_exec_parser {

@@ -29,5 +29,5 @@ public class Jre_hash_factory implements Hash_algo_factory {
 	public static String
 	  Key__md5 = "md5", Key__sha1 = "sha1", Key__sha2_256 = "sha-256"
 	;
-	public static final    Jre_hash_factory Instance = new Jre_hash_factory(); Jre_hash_factory() {}
+	public static final Jre_hash_factory Instance = new Jre_hash_factory(); Jre_hash_factory() {}
 }

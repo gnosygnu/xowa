@@ -38,7 +38,7 @@ public abstract class Sql_select_fld {
 	// tdb related functions
 	public ClassXtn Val_type() {return val_type;} public void Val_type_(ClassXtn val) {val_type = val;} private ClassXtn val_type = ObjectClassXtn.Instance;
 	public abstract Object GroupBy_eval(Object groupByVal, Object curVal, ClassXtn type);
-	@gplx.Virtual public void GroupBy_type(ClassXtn type) {this.Val_type_(type);}
+	public void GroupBy_type(ClassXtn type) {this.Val_type_(type);}
 }
 class Sql_select_fld_wild extends Sql_select_fld {		Sql_select_fld_wild() {super(Sql_select_fld.Tbl__null, Fld__wildcard, Fld__wildcard);}
 	@Override public String To_fld_sql() {return Fld__wildcard;}

@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.parses.locks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 public class Xomp_lock_mgr__db implements Xomp_lock_mgr {
-	private final    Db_conn conn;
-	private final    Xomp_lock_tbl lock_tbl;
-	private final    Xomp_lock_req_tbl req_tbl;
-	private final    int wait_time;
+	private final Db_conn conn;
+	private final Xomp_lock_tbl lock_tbl;
+	private final Xomp_lock_req_tbl req_tbl;
+	private final int wait_time;
 	public Xomp_lock_mgr__db(Db_conn conn, int wait_time) {
 		this.conn = conn;
 		this.lock_tbl = new Xomp_lock_tbl(conn);

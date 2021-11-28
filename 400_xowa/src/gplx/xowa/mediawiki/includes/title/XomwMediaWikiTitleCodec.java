@@ -237,7 +237,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 	* @return array A map with the fields 'interwiki', 'fragment', 'namespace',
 	*         'user_case_dbkey', and 'dbkey'.
 	*/
-	private final    byte[][] tmpPrefixRegex = new byte[2][];
+	private final byte[][] tmpPrefixRegex = new byte[2][];
 	public XomwMediaWikiTitleCodecParts splitTitleString(byte[] text, int defaultNamespace) {
 		byte[] dbkey = XophpString_.str_replace(Byte_ascii.Space, Byte_ascii.Underline, text);
 

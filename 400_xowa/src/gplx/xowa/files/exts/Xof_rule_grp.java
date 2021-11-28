@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files.exts; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*;
 public class Xof_rule_grp implements Gfo_invk {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Xof_rule_grp(Xof_rule_mgr owner, byte[] key) {this.owner = owner; this.key = key;}
-	public Xof_rule_mgr Owner() {return owner;} private final    Xof_rule_mgr owner;
-	public byte[] Key() {return key;} private final    byte[] key;
+	public Xof_rule_mgr Owner() {return owner;} private final Xof_rule_mgr owner;
+	public byte[] Key() {return key;} private final byte[] key;
 	public Xof_rule_itm Get_or_null(byte[] ext_bry) {return (Xof_rule_itm)hash.Get_by_bry(ext_bry);}
 	public Xof_rule_itm Get_or_new(byte[] ext_bry) {
 		Xof_rule_itm rv = Get_or_null(ext_bry);

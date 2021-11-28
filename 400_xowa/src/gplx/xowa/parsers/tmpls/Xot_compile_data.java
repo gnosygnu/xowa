@@ -19,5 +19,5 @@ public class Xot_compile_data {
 	public boolean Arg_nde_has_key() {return arg_nde_has_key;}  private boolean arg_nde_has_key;
 	public Xot_compile_data Arg_nde_has_key_(boolean v) {arg_nde_has_key = v; return this;}
 
-	public static final    Xot_compile_data Noop = new Xot_compile_data();
+	public static final Xot_compile_data Noop = new Xot_compile_data();
 }

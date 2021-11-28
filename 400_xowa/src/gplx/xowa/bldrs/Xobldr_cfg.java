@@ -57,5 +57,5 @@ public class Xobldr_cfg {
 		}
 		return new Xowd_core_db_props(2, layout_text, layout_html, layout_file, Zip_mode__text(app), Zip_mode__html(app), hzip_enabled, hzip_mode_is_b256);
 	}
-	public static final    byte[] Ns_file_map__each = Bry_.new_a7("<each>");
+	public static final byte[] Ns_file_map__each = Bry_.new_a7("<each>");
 }

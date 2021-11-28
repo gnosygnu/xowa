@@ -35,14 +35,14 @@ public class Xoh_hdoc_ctx {
 	public boolean					Xwiki_mgr__missing(byte[] domain){return app.Xwiki_mgr__missing(domain);}
 	public Xou_cache_finder			Cache_mgr()			{return cache_mgr;} private Xou_cache_finder cache_mgr = Xou_cache_finder_.Noop; 
 	public byte[]					Cache__wiki_abrv(boolean repo_is_commons) {return repo_is_commons ? abrv__commons : abrv__wiki;}
-	public Xof_url_bldr				File__url_bldr()	{return file__url_bldr;} private final    Xof_url_bldr file__url_bldr = Xof_url_bldr.new_v2();
+	public Xof_url_bldr				File__url_bldr()	{return file__url_bldr;} private final Xof_url_bldr file__url_bldr = Xof_url_bldr.new_v2();
 	public Xoa_page					Page()				{return page;} private Xoa_page page;
 	public byte[]					Page__url()			{return page__url;} private byte[] page__url;
-	public Xoh_pool_mgr__hzip		Pool_mgr__hzip()	{return pool_mgr__hzip;} private final    Xoh_pool_mgr__hzip pool_mgr__hzip = new Xoh_pool_mgr__hzip();
-	public Xoh_pool_mgr__data		Pool_mgr__data()	{return pool_mgr__data;} private final    Xoh_pool_mgr__data pool_mgr__data = new Xoh_pool_mgr__data();
-	public Xoh_pool_mgr__wtr		Pool_mgr__wtr()		{return pool_mgr__wtr;} private final    Xoh_pool_mgr__wtr pool_mgr__wtr = new Xoh_pool_mgr__wtr();
-	public Xohz_tag_regy			Hzip__xnde__regy()	{return hzip__xnde__regy;} private final    Xohz_tag_regy hzip__xnde__regy = Xohz_tag_regy_.New_dflt();
-	public Xoh_xnde_dict_reg		Hzip__xnde__dict()	{return hzip__xnde__dict;} private final    Xoh_xnde_dict_reg hzip__xnde__dict = new Xoh_xnde_dict_reg();
+	public Xoh_pool_mgr__hzip		Pool_mgr__hzip()	{return pool_mgr__hzip;} private final Xoh_pool_mgr__hzip pool_mgr__hzip = new Xoh_pool_mgr__hzip();
+	public Xoh_pool_mgr__data		Pool_mgr__data()	{return pool_mgr__data;} private final Xoh_pool_mgr__data pool_mgr__data = new Xoh_pool_mgr__data();
+	public Xoh_pool_mgr__wtr		Pool_mgr__wtr()		{return pool_mgr__wtr;} private final Xoh_pool_mgr__wtr pool_mgr__wtr = new Xoh_pool_mgr__wtr();
+	public Xohz_tag_regy			Hzip__xnde__regy()	{return hzip__xnde__regy;} private final Xohz_tag_regy hzip__xnde__regy = Xohz_tag_regy_.New_dflt();
+	public Xoh_xnde_dict_reg		Hzip__xnde__dict()	{return hzip__xnde__dict;} private final Xoh_xnde_dict_reg hzip__xnde__dict = new Xoh_xnde_dict_reg();
 	public int						Uid__gly__nxt()		{return ++uid__gly;} private int uid__gly;
 	public boolean						Mode_is_diff()		{return mode_is_diff;} private boolean mode_is_diff;		public void Mode_is_diff_(boolean v) {mode_is_diff = v;}
 	public void Init_by_app(Xoa_app app) {
@@ -91,5 +91,5 @@ public class Xoh_hdoc_ctx {
 
 	public void Test__cache__mgr_(Xou_cache_finder v) {this.cache_mgr = v;}
 	public static final int Invalid = -1;
-	private static final    byte[] Fsys__res__drd = Bry_.new_a7("file:///android_asset/xowa/");
+	private static final byte[] Fsys__res__drd = Bry_.new_a7("file:///android_asset/xowa/");
 }

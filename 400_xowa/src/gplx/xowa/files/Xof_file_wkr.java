@@ -18,10 +18,10 @@ import gplx.core.threads.*; import gplx.core.ios.*; import gplx.core.ios.streams
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.guis.cbks.js.*;
 public class Xof_file_wkr implements Gfo_thread_wkr {
-	private final    Xof_orig_mgr orig_mgr; private final    Xof_bin_mgr bin_mgr; private final    Fsm_mnt_mgr mnt_mgr; private final    Xou_cache_mgr cache_mgr;
-	private final    Gfo_usr_dlg usr_dlg; private final    Xow_repo_mgr repo_mgr; private final    Xog_js_wkr js_wkr;
-	private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final    Xof_img_size img_size = new Xof_img_size(); 	
-	private final    Xoa_page hpg; private final    List_adp imgs;
+	private final Xof_orig_mgr orig_mgr; private final Xof_bin_mgr bin_mgr; private final Fsm_mnt_mgr mnt_mgr; private final Xou_cache_mgr cache_mgr;
+	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xog_js_wkr js_wkr;
+	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final Xof_img_size img_size = new Xof_img_size();
+	private final Xoa_page hpg; private final List_adp imgs;
 	public Xof_file_wkr(Xof_orig_mgr orig_mgr, Xof_bin_mgr bin_mgr, Fsm_mnt_mgr mnt_mgr, Xou_cache_mgr cache_mgr, Xow_repo_mgr repo_mgr, Xog_js_wkr js_wkr, Xoa_page hpg, List_adp imgs) {
 		this.orig_mgr = orig_mgr; this.bin_mgr = bin_mgr; this.mnt_mgr = mnt_mgr; this.cache_mgr = cache_mgr;
 		this.usr_dlg = Gfo_usr_dlg_.Instance; this.repo_mgr = repo_mgr; this.js_wkr = js_wkr;			

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_wiki_stats_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before	public void setup()						{fxt.Reset();}
 	@Test public void SiteName()					{fxt.Test_parse_tmpl_str_test("{{SITENAME}}"			, "{{test}}", "Wikipedia");}
 	@Test public void ServerName()					{fxt.Test_parse_tmpl_str_test("{{SERVERNAME}}"			, "{{test}}", "en.wikipedia.org");}

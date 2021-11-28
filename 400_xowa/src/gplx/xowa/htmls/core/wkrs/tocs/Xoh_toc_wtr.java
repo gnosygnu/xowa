@@ -34,7 +34,7 @@ public class Xoh_toc_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_toc_wtr rv = new Xoh_toc_wtr(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
 
-	public static final    byte[] 
+	public static final byte[]
 	  Atr__class__toc				= Bry_.new_a7("xo-toc")
 	, Atr__data__toc__mode			= Bry_.new_a7("data-toc-mode")
 	;

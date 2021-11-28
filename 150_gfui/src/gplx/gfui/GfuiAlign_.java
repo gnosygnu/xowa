@@ -18,18 +18,18 @@ import gplx.core.interfaces.*;
 public class GfuiAlign_ implements ParseAble {
 	public static GfuiAlign as_(Object obj) {return obj instanceof GfuiAlign ? (GfuiAlign)obj : null;}
 	public static GfuiAlign cast(Object obj) {try {return (GfuiAlign)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfuiAlign.class, obj);}}
-	public static final    GfuiAlign 
+	public static final GfuiAlign
 		  Null	= new_(0, "nil")
 		, Lo	= new_(1, "lo")
 		, Mid	= new_(2, "mid")
 		, Hi	= new_(3, "hi");
-	public static final    GfuiAlign 
+	public static final GfuiAlign
 		  Top	= Lo
 		, Bot	= Hi
 		, Left	= Lo
 		, Right	= Hi;
 	static GfuiAlign new_(int v, String s) {return new GfuiAlign(v, s);}
-	public static final    GfuiAlign_ Parser = new GfuiAlign_();
+	public static final GfuiAlign_ Parser = new GfuiAlign_();
 	public Object ParseAsObj(String raw) {return parse(raw);}
 	public static GfuiAlign val_(int v) {
 		if		(v == Lo.Val())		return Lo;

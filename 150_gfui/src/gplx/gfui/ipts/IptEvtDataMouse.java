@@ -21,7 +21,7 @@ public class IptEvtDataMouse {
 
 	public static IptEvtDataMouse as_(Object obj) {return obj instanceof IptEvtDataMouse ? (IptEvtDataMouse)obj : null;}
 	public static IptEvtDataMouse cast(Object obj) {try {return (IptEvtDataMouse)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, IptEvtDataMouse.class, obj);}}
-	public static final    IptEvtDataMouse Null = IptEvtDataMouse.new_(IptMouseBtn_.None, IptMouseWheel_.None, 0, 0);
+	public static final IptEvtDataMouse Null = IptEvtDataMouse.new_(IptMouseBtn_.None, IptMouseWheel_.None, 0, 0);
 	public static IptEvtDataMouse new_(IptMouseBtn button, IptMouseWheel wheel, int x, int y) {
 		IptEvtDataMouse rv = new IptEvtDataMouse();
 		rv.button = button;

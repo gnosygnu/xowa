@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.htmls.css.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.htmls.*; import gplx.xowa.addons.wikis.htmls.css.*;
 import gplx.dbs.*;
 public class Xowd_css_core_tbl implements Rls_able {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_id, fld_key, fld_updated_on;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_id, fld_key, fld_updated_on;
 	public Xowd_css_core_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.fld_id				= flds.Add_int_pkey_autonum("css_id");
@@ -25,8 +25,8 @@ public class Xowd_css_core_tbl implements Rls_able {
 		this.fld_updated_on		= flds.Add_str("css_updated_on", 20);
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name = "css_core";
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name = "css_core";
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_key)));}
 	public void Rls() {}
 	public int Insert(String key, DateAdp updated_on) {

@@ -21,9 +21,9 @@ public class Xog_error_data {
 		this.err_details = err_details;
 		this.err_msg = err_msg;
 	}
-	public String Full_msg() {return full_msg;} private final    String full_msg;
-	public String Err_details() {return err_details;} private final    String err_details;
-	public String Err_msg() {return err_msg;} private final    String err_msg;
+	public String Full_msg() {return full_msg;} private final String full_msg;
+	public String Err_details() {return err_details;} private final String err_details;
+	public String Err_msg() {return err_msg;} private final String err_msg;
 	public static Xog_error_data new_(String err_msg, String err_trace) {
 		String err_details = String_.Concat_lines_nl_skip_last
 		( "OS: "		+ Op_sys.Cur().Os_name()

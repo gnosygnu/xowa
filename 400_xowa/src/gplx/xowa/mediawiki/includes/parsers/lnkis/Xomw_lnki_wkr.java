@@ -34,24 +34,24 @@ import gplx.xowa.parsers.uniqs.*;
 	* P1: link_prefix; EX: b[[A]]; [not enabled on enwiki]
 */
 public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
-	private final    XomwLinkHolderArray holders;
-	private final    XomwLinker linker;
-	private final    XomwLinkRenderer link_renderer;
-	// private final    Btrie_slim_mgr protocols_trie;
-	private final    Xomw_quote_wkr quote_wkr;
-	private final    XomwStripState strip_state;
+	private final XomwLinkHolderArray holders;
+	private final XomwLinker linker;
+	private final XomwLinkRenderer link_renderer;
+	// private final Btrie_slim_mgr protocols_trie;
+	private final Xomw_quote_wkr quote_wkr;
+	private final XomwStripState strip_state;
 	private XomwEnv env;
 	private Xow_wiki wiki;
 	private XomwTitleOld mPageTitle;
-//		private final    XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
-	private final    Bry_bfr tmp;
-	private final    XomwParserIface parser;
-	private final    Xomw_atr_mgr extra_atrs = new Xomw_atr_mgr();
-	private final    Xomw_qry_mgr query = new Xomw_qry_mgr();
-	private final    Btrie_rv trv = new Btrie_rv();
-	private final    List_adp tmp_list = List_adp_.New();
-	private final    Hash_adp mImageParams = Hash_adp_bry.cs();
-	private final    Hash_adp mImageParamsMagicArray = Hash_adp_bry.cs();
+//		private final XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
+	private final Bry_bfr tmp;
+	private final XomwParserIface parser;
+	private final Xomw_atr_mgr extra_atrs = new Xomw_atr_mgr();
+	private final Xomw_qry_mgr query = new Xomw_qry_mgr();
+	private final Btrie_rv trv = new Btrie_rv();
+	private final List_adp tmp_list = List_adp_.New();
+	private final Hash_adp mImageParams = Hash_adp_bry.cs();
+	private final Hash_adp mImageParamsMagicArray = Hash_adp_bry.cs();
 	public Xomw_lnki_wkr(XomwParserIface parser, XomwLinkHolderArray holders, XomwLinkRenderer link_renderer, Btrie_slim_mgr protocols_trie
 		, XomwLinker linker, Xomw_quote_wkr quote_wkr, Bry_bfr tmp, XomwStripState strip_state
 		) {
@@ -749,7 +749,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		img_size[0] = Bry_.To_int_or(src, w_bgn, w_end, 0);
 		img_size[1] = Bry_.To_int_or(src, h_bgn, h_end, 0);
 	}
-	public static final    byte[] Bry__px = Bry_.new_a7("px");
+	public static final byte[] Bry__px = Bry_.new_a7("px");
 
 	/**
 	* Fetch a file and its title and register a reference to it.
@@ -821,7 +821,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 	}
 
 	private static boolean[] title_chars_for_lnki;
-	private static final    byte[] Bry__wtxt__lnki__bgn = Bry_.new_a7("[["), Bry__wtxt__lnki__end = Bry_.new_a7("]]");
+	private static final byte[] Bry__wtxt__lnki__bgn = Bry_.new_a7("[["), Bry__wtxt__lnki__end = Bry_.new_a7("]]");
 
 	// $e1 = "/^([{$tc}]+)(?:\\|(.+?))?]](.*)\$/sD";
 	// 

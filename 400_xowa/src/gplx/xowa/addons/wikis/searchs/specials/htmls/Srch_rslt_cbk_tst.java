@@ -29,7 +29,7 @@ public class Srch_rslt_cbk_tst {
 	}
 }
 class Srch_rslt_cbk_fxt {
-	private Srch_html_row_bldr html_row; private static final    byte[] Bry_enwiki = Bry_.new_a7("w");
+	private Srch_html_row_bldr html_row; private static final byte[] Bry_enwiki = Bry_.new_a7("w");
 	private Srch_html_row_wkr async;
 	private Xog_js_wkr__log js_wkr = new Xog_js_wkr__log();
 	private Xowe_wiki wiki;

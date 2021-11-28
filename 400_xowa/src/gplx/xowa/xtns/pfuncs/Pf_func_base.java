@@ -66,5 +66,5 @@ public abstract class Pf_func_base implements Pf_func {
 		}
 		return argx_dat;
 	}
-	public static final    byte[] Eval_arg_or_null_is_null = null, Eval_arg_or_null_is_empty = Bry_.Empty;
+	public static final byte[] Eval_arg_or_null_is_null = null, Eval_arg_or_null_is_empty = Bry_.Empty;
 }

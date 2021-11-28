@@ -73,7 +73,7 @@ public class Xob_redirect_tbl {
 	private static final String 
 	  Fld_src_id = "src_id", Fld_src_ttl = "src_ttl", Fld_trg_id = "trg_id", Fld_trg_ns = "trg_ns", Fld_trg_ttl = "trg_ttl", Fld_trg_anchor = "trg_anchor"
 	, Fld_trg_is_redirect = "trg_is_redirect", Fld_redirect_count = "redirect_count";
-	private static final    String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = String_.Concat_lines_nl
 	( "CREATE TABLE IF NOT EXISTS redirect"
 	, "( src_id            integer             NOT NULL       PRIMARY KEY"
 	, ", src_ttl           varchar(255)        NOT NULL"
@@ -85,15 +85,15 @@ public class Xob_redirect_tbl {
 	, ", redirect_count    integer             NOT NULL"
 	, ");"
 	);
-	private static final    Db_idx_itm
+	private static final Db_idx_itm
 	  Idx_trg_ttl = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS redirect__trg_ttl ON redirect (trg_ttl);")
 	, Idx_trg_id  = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS redirect__trg_id  ON redirect (trg_id);")
 	, Idx_trg_src = Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS redirect__trg_src ON redirect (src_id, trg_id);")
 	;
-//		public static final    String
+//		public static final String
 //		  Sql_ddl__page_redirect_id		= "ALTER TABLE page ADD COLUMN page_redirect_id integer NOT NULL DEFAULT '-1'"
 //		;
-	private static final    String
+	private static final String
 	  Sql_get_page_data = String_.Concat_lines_nl			// get data from page table for initial redirect dump 
 	( "REPLACE INTO redirect "
 	, "SELECT  t.src_id"

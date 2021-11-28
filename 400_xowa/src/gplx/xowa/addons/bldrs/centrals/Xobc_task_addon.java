@@ -35,5 +35,5 @@ public class Xobc_task_addon implements Xoax_addon_itm, Xoax_addon_itm__special,
 		};
 	}
 
-	public String Addon__key() {return ADDON__KEY;} public static final    String ADDON__KEY = "xowa.imports.downloads";
+	public String Addon__key() {return ADDON__KEY;} public static final String ADDON__KEY = "xowa.imports.downloads";
 }

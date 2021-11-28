@@ -18,7 +18,7 @@ import gplx.xowa.guis.views.*;
 public class Xopg_tab_data {
 	public Xog_tab_itm	Tab()				{return tab;}			public void Tab_(Xog_tab_itm v) {this.tab = v;} private Xog_tab_itm tab;
 	public boolean			Cancel_show()		{return cancel_show;}	public void Cancel_show_y_()	{this.cancel_show = true;} private boolean cancel_show;	// used for Special:Search
-	public Xog_tab_close_mgr Close_mgr() {return close_mgr;} private final    Xog_tab_close_mgr close_mgr = new Xog_tab_close_mgr();
+	public Xog_tab_close_mgr Close_mgr() {return close_mgr;} private final Xog_tab_close_mgr close_mgr = new Xog_tab_close_mgr();
 	public boolean      Gui_loaded()        {return gui_loaded;} private boolean gui_loaded; public void Gui_loaded_y_() {gui_loaded = true;}
 	public void Clear() {
 		this.cancel_show = false;

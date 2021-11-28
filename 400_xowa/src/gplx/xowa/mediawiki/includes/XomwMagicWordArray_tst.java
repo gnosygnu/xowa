@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import org.junit.*; import gplx.core.tests.*;
 public class XomwMagicWordArray_tst {
-	private final    XomwMagicWordArray_fxt fxt = new XomwMagicWordArray_fxt();
+	private final XomwMagicWordArray_fxt fxt = new XomwMagicWordArray_fxt();
 	@Test public void Nil() {
 		fxt.Init__word(Bool_.Y, "img_nil", "nil");
 		fxt.Init__ary("img_nil");
@@ -45,7 +45,7 @@ public class XomwMagicWordArray_tst {
 	}
 }
 class XomwMagicWordArray_fxt {
-	private final    XomwMagicWordMgr magic_word_mgr = new XomwMagicWordMgr();
+	private final XomwMagicWordMgr magic_word_mgr = new XomwMagicWordMgr();
 	private XomwMagicWordArray magic_word_ary;
 	public void Init__word(boolean cs, String word, String... synonyms) {
 		magic_word_mgr.Add(Bry_.new_u8(word), cs, Bry_.Ary(synonyms));

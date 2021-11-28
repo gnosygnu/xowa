@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.dbs.*;
 public class Site_core_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_site_abrv, fld_site_domain, fld_json_completed, fld_json_date, fld_json_text;
-	private final    Db_conn conn;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_site_abrv, fld_site_domain, fld_json_completed, fld_json_date, fld_json_text;
+	private final Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
 	public Site_core_tbl(Db_conn conn) {
 		this.conn = conn;

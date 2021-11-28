@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_para_wkr_pre_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void teardown() {fxt.Init_para_n_();}
 	@Test public void Pre_ignore_bos() {			// PURPOSE: ignore pre at bgn; DATE:2013-07-09
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl

@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*; import gplx.xowa.*
 import gplx.core.gfobjs.*;
 import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.steps.*;
 public class Xobc_task_itm implements gplx.CompareAble {
-	private final    int task_sort;
+	private final int task_sort;
 	public Xobc_task_itm(int task_id, int task_seqn, int step_count, String task_key, String task_name) {
 		this.task_id = task_id;
 		this.task_seqn = task_seqn;
@@ -26,10 +26,10 @@ public class Xobc_task_itm implements gplx.CompareAble {
 		this.task_name = task_name;
 		this.task_sort = task_seqn;	// set task_sort to task_seqn; note that task_sort needs to be memorialized b/c "work" changes task_seqn to add-order
 	}
-	public int				Task_id()		{return task_id;} private final    int task_id;
-	public String			Task_key()		{return task_key;} private final    String task_key;
-	public String			Task_name()		{return task_name;} private final    String task_name;
-	public int				Step_count()	{return step_count;} private final    int step_count;
+	public int				Task_id()		{return task_id;} private final int task_id;
+	public String			Task_key()		{return task_key;} private final String task_key;
+	public String			Task_name()		{return task_name;} private final String task_name;
+	public int				Step_count()	{return step_count;} private final int step_count;
 	public int				Task_seqn()		{return task_seqn;} private int task_seqn;
 	public byte				Task_status()	{return task_status;} private byte task_status;
 	public Xobc_step_itm	Step()			{return step;} public void Step_(Xobc_step_itm v) {this.step = v;} private Xobc_step_itm step;

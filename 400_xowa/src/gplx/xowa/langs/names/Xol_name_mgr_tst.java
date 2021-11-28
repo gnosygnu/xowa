@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.core.tests.*;
 import gplx.xowa.xtns.cldrs.*;
 public class Xol_name_mgr_tst {
-	private final    Xol_name_mgr_fxt fxt = new Xol_name_mgr_fxt();
+	private final Xol_name_mgr_fxt fxt = new Xol_name_mgr_fxt();
 
 	@Test  public void Cldr_only() {
 		fxt.Test__fetchLanguageNamesUncached

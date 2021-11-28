@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.mass_parses.parses.locks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
 public class Xomp_lock_mgr__fsys implements Xomp_lock_mgr {
-	private final    Io_url root_dir, uid_fil, active_fil;
-	private final    int wait_time;
+	private final Io_url root_dir, uid_fil, active_fil;
+	private final int wait_time;
 	private Io_url stop_fil;
 	public Xomp_lock_mgr__fsys(int wait_time, Io_url root_dir) {
 		this.wait_time = wait_time;

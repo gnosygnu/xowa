@@ -17,9 +17,9 @@ package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*;
 import gplx.xowa.wikis.data.*;
 public class Wbase_pid_tbl implements Rls_able {
-	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_src_lang, fld_src_ttl, fld_trg_ttl;
-	private final    Db_conn conn; private Db_stmt stmt_select, stmt_insert;
+	private final String tbl_name; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_src_lang, fld_src_ttl, fld_trg_ttl;
+	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;
 	Wbase_pid_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		String fld_prefix = "";

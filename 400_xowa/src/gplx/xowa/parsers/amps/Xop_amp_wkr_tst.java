@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_amp_wkr_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Convert_to_named()		{fxt.Test_parse_page_wiki_str("&amp;"		, "&amp;");}	// note that &amp; is printed, not &
 	@Test public void Convert_to_named_amp()	{fxt.Test_parse_page_wiki_str("&"			, "&amp;");}	// PURPOSE: html_wtr was not handling & only
 	@Test public void Convert_to_numeric()		{fxt.Test_parse_page_wiki_str("&aacute;"	, "&#225;");}	// testing that &#225; is outputted, not á

@@ -17,7 +17,7 @@ package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.btries.*; import gplx.core.log_msgs.*;
 import gplx.xowa.parsers.*;
 class Pxd_parser {
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	private byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
 	public Pxd_itm[] Tkns() {return tkns;} Pxd_itm[] tkns;
 	public int Tkns_len() {return tkns_len;} private int tkns_len;
@@ -184,15 +184,15 @@ class Pxd_parser_ {
 		}
 		return trie;
 	}	private static Btrie_slim_mgr trie;
-	private static final       String[] Names_month_full		= {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
-	private static final       String[] Names_month_abrv		= {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
-	private static final       String[] Names_month_roman		= {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
-	private static final       String[] Names_day_suffix		= {"st", "nd", "rd", "th"};
-	private static final       String[] Names_day_full			= {"sunday", "monday", "tuesday", "wednesday" , "thursday", "friday", "saturday"};
-	private static final       String[] Names_day_abrv			= {"sun", "mon", "tue", "wed" , "thu", "fri", "sat"};
+	private static final    String[] Names_month_full		= {"january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"};
+	private static final    String[] Names_month_abrv		= {"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
+	private static final    String[] Names_month_roman		= {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII"};
+	private static final    String[] Names_day_suffix		= {"st", "nd", "rd", "th"};
+	private static final    String[] Names_day_full			= {"sunday", "monday", "tuesday", "wednesday" , "thursday", "friday", "saturday"};
+	private static final    String[] Names_day_abrv			= {"sun", "mon", "tue", "wed" , "thu", "fri", "sat"};
 	//TODO_OLD:
-	//private static final       String[] Names_day_text		= {"weekday", "weekdays"};
-	//private static final       String[] Names_ordinal_num		= {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"};
+	//private static final    String[] Names_day_text		= {"weekday", "weekdays"};
+	//private static final    String[] Names_ordinal_num		= {"first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth", "eleventh", "twelfth"};
 	
 	private static void Init_unit(int seg_idx, String... name_ary) {Init_unit(seg_idx, 1, name_ary);}
 	private static void Init_unit(int seg_idx, int seg_val, String... name_ary) {
@@ -202,7 +202,7 @@ class Pxd_parser_ {
 			trie.Add_obj(name_bry, new Pxd_itm_unit(-1, name_bry, seg_idx, seg_val));
 		}
 	}
-	public static final    byte[] 
+	public static final byte[]
 	  Unit_name_month		= Bry_.new_a7("month")
 	, Unit_name_day			= Bry_.new_a7("day")
 	, Unit_name_hour		= Bry_.new_a7("hour")

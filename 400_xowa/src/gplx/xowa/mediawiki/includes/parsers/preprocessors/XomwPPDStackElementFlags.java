@@ -20,9 +20,9 @@ public class XomwPPDStackElementFlags {
 		this.findEquals = findEquals;
 		this.inHeading = inHeading;
 	}
-	public final    boolean findPipe;
-	public final    boolean findEquals;
-	public final    boolean inHeading;
+	public final boolean findPipe;
+	public final boolean findEquals;
+	public final boolean inHeading;
 
-	public static final    XomwPPDStackElementFlags Empty = new XomwPPDStackElementFlags(false, false, false);
+	public static final XomwPPDStackElementFlags Empty = new XomwPPDStackElementFlags(false, false, false);
 }

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xot_invk_wkr__raw_msg__tst {
-	@Before		public void init() {fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before		public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@After	public void term() {fxt.Init_defn_clear();}
 	@Test public void Raw() { // PURPOSE: {{raw:A}} is same as {{A}}; EX.WIKT:android; {{raw:ja/script}}
 		fxt.Init_defn_clear();

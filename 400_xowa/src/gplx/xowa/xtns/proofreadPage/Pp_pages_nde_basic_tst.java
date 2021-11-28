@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.xowa.apps.cfgs.*;
 public class Pp_pages_nde_basic_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void Init() {
 		Io_mgr.Instance.InitEngine_mem();
 		fxt.Wiki().Xtn_mgr().Xtn_proofread().Enabled_y_();

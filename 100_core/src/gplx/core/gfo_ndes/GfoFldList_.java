@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.gfo_ndes; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*; import gplx.core.type_xtns.*;
 public class GfoFldList_ {
-	public static final    GfoFldList Null = new GfoFldList_null();
+	public static final GfoFldList Null = new GfoFldList_null();
 	public static GfoFldList new_() {return new GfoFldList_base();}
 	public static GfoFldList str_(String... names) {
 		GfoFldList rv = new GfoFldList_base();

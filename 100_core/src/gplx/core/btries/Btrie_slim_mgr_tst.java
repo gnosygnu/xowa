@@ -95,7 +95,7 @@ public class Btrie_slim_mgr_tst {
 	}
 }
 class Btrie_slim_mgr_fxt {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Btrie_slim_mgr_fxt Init__add(String key, String val) {
 		trie.Add_str_str(key, val);
 		return this;

@@ -17,7 +17,7 @@ package gplx.xowa.apps.apis.xowa.addons; import gplx.*; import gplx.xowa.*; impo
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 import gplx.xowa.apps.apis.xowa.addons.searchs.*;
 public class Xoapi_addon_search implements Gfo_invk {
-	@gplx.Internal protected Xoapi_search_box		Search_box()	{return search_box;}	private final    Xoapi_search_box search_box = new Xoapi_search_box();
+	@gplx.Internal protected Xoapi_search_box		Search_box()	{return search_box;}	private final Xoapi_search_box search_box = new Xoapi_search_box();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk__search_box)) 					return search_box;
 		else	return Gfo_invk_.Rv_unhandled;

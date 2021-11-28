@@ -83,7 +83,7 @@ public class Process_engine implements Scrib_engine {
 				return Keyval_.Ary_empty;
 			}
 		}
-	}	private static final    byte[] Dispatch_hdr = Bry_.new_a7("0000000000000000");	// itm_len + itm_chk in 8-len HexDec
+	}	private static final byte[] Dispatch_hdr = Bry_.new_a7("0000000000000000");	// itm_len + itm_chk in 8-len HexDec
 	private void Dispatch_bld_send(Bry_bfr bfr, Object[] ary) {
 		int len = ary.length; if (len % 2 != 0) throw Err_.new_wo_type("arguments must be factor of 2", "len", len);
 		bfr.Add(Dispatch_hdr);

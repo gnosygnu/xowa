@@ -17,10 +17,10 @@ package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.xtns.wbases.core.*;
 public class Wbase_qid_tbl implements Rls_able {
-	private final    Object thread_lock = new Object();
-	private final    String tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_src_wiki, fld_src_ns, fld_src_ttl, fld_trg_ttl;
-	private final    Db_conn conn; private Db_stmt stmt_select, stmt_insert;
+	private final Object thread_lock = new Object();
+	private final String tbl_name; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_src_wiki, fld_src_ns, fld_src_ttl, fld_trg_ttl;
+	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;
 	private boolean src_ttl_has_spaces;
 	Wbase_qid_tbl(Db_conn conn, boolean schema_is_1, boolean src_ttl_has_spaces) {
 		this.conn = conn; 

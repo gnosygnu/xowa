@@ -20,7 +20,7 @@ import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.
 import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
 import gplx.xowa.htmls.core.wkrs.addons.timelines.*; import gplx.xowa.htmls.core.wkrs.addons.gallerys.*; import gplx.xowa.htmls.core.wkrs.addons.medias.*;
 public class Xoh_pool_mgr__hzip {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private Gfo_poolable_mgr mkr__escape, mkr__xnde, mkr__lnke, mkr__lnki, mkr__hdr, mkr__img, mkr__thm, mkr__gly, mkr__img_bare, mkr__gallery, mkr__timeline, mkr__toc, mkr__media;
 	public Xoh_escape_hzip		Mw__escape()		{return (Xoh_escape_hzip)		mkr__escape.Get_fast();}
 	public Xoh_xnde_hzip		Mw__xnde()			{return (Xoh_xnde_hzip)			mkr__xnde.Get_fast();}
@@ -70,5 +70,5 @@ public class Xoh_pool_mgr__hzip {
 	, Hook__html	= 2
 	, Hook__mw		= 27
 	;
-	public static final    byte[] Hooks_ary = new byte[] {Hook__core, Hook__html, Hook__mw};
+	public static final byte[] Hooks_ary = new byte[] {Hook__core, Hook__html, Hook__mw};
 }

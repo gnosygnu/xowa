@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_lnki_html__hdump__tst {
-	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
+	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Same()		{fxt.Test__html("[[A]]"				, "<a href='/wiki/A' title='A'>A</a>");}
 	@Test  public void Diff()		{fxt.Test__html("[[A|b]]"			, "<a href='/wiki/A' title='A'>b</a>");}

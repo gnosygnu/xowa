@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.site; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.dbs.*;
 public class XomwXowaSiteLookup implements XomwSiteLookup {
-	private final    XomwSiteList sites = new XomwSiteList();
+	private final XomwSiteList sites = new XomwSiteList();
 	public XomwSite getSite(byte[] globalId) {
 		return (XomwSite)sites.getSite(String_.new_u8(globalId));
 	}

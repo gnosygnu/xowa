@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
 import gplx.dbs.*;
 public class Xomp_lock_req_tbl implements Db_tbl {
-	private final    String fld_machine_name, fld_req_time;
-	private final    Db_conn conn;
+	private final String fld_machine_name, fld_req_time;
+	private final Db_conn conn;
 	public Xomp_lock_req_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "xomp_lock_req";
@@ -25,8 +25,8 @@ public class Xomp_lock_req_tbl implements Db_tbl {
 		this.fld_req_time		= flds.Add_str("req_time", 32);				// EX: 20160801 010203
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
-	public Dbmeta_fld_list Flds() {return flds;} private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
+	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "req_time", fld_req_time)

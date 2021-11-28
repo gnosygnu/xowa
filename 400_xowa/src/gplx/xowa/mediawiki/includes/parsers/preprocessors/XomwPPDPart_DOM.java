@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 // MW.FILE:NONE
-public class XomwPPDPart_DOM extends XomwPPDPart {	private final    Bry_bfr bfr;
-	private final    Xomw_prepro_accum__dom accum = new Xomw_prepro_accum__dom("");
+public class XomwPPDPart_DOM extends XomwPPDPart {	private final Bry_bfr bfr;
+	private final Xomw_prepro_accum__dom accum = new Xomw_prepro_accum__dom("");
 	public XomwPPDPart_DOM(String output) {super(output);
 		bfr = accum.Bfr();
 		if (output != String_.Empty) {

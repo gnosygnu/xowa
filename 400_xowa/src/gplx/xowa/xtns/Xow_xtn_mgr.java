@@ -101,7 +101,7 @@ public class Xow_xtn_mgr implements Gfo_invk {
 		}
 	}
 	private static final byte Tid_cite = 0, Tid_sites = 1, Tid_insider = 2, Tid_imap = 3, Tid_proofread = 4, Tid_wikibase = 5, Tid_indicator = 6, Tid_pgbnr = 7;
-	private static final    Btrie_slim_mgr xtn_tid_trie = Btrie_slim_mgr.cs()
+	private static final Btrie_slim_mgr xtn_tid_trie = Btrie_slim_mgr.cs()
 	.Add_bry_byte(Cite_xtn_mgr.XTN_KEY				, Tid_cite)
 	.Add_bry_byte(Sites_xtn_mgr.XTN_KEY				, Tid_sites)
 	.Add_bry_byte(Insider_xtn_mgr.XTN_KEY			, Tid_insider)

@@ -78,13 +78,13 @@ public class XomwConverter {
 	/**
 	* A character list defining whitespace, for use in strspn() etc.
 	*/
-	private static final    Hash_adp WHITESPACE_CLASS = XophpString_.strspn_hash(" \t\r\n");
+	private static final Hash_adp WHITESPACE_CLASS = XophpString_.strspn_hash(" \t\r\n");
 
 	/**
 	* Same for digits. Note that the grammar given in UTS #35 doesn't allow
 	* negative numbers or decimal separators.
 	*/
-	private static final    Hash_adp NUMBER_CLASS = XophpString_.strspn_hash("0123456789");
+	private static final Hash_adp NUMBER_CLASS = XophpString_.strspn_hash("0123456789");
 
 	/**
 	* A character list of symbolic operands.
@@ -94,7 +94,7 @@ public class XomwConverter {
 	/**
 	* An anchored regular expression which matches a word at the current offset.
 	*/
-	private static final    Regx_adp WORD_REGEX = Regx_adp_.new_("[a-zA-Z@]+");
+	private static final Regx_adp WORD_REGEX = Regx_adp_.new_("[a-zA-Z@]+");
 
 	/**
 	* Convert a rule to RPN. This is the only public entry point.

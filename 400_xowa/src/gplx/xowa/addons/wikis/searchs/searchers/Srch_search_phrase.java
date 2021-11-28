@@ -23,10 +23,10 @@ public class Srch_search_phrase {
 		this.Wildcard = wildcard;
 		this.Syms = syms;
 	}
-	public final    boolean   Wildcard;
-	public final    byte[] Orig;			// EX: "Earth"
-	public final    byte[] Compiled;		// EX: "earth*"
-	public final    Srch_crt_scanner_syms Syms;
+	public final boolean   Wildcard;
+	public final byte[] Orig;			// EX: "Earth"
+	public final byte[] Compiled;		// EX: "earth*"
+	public final Srch_crt_scanner_syms Syms;
 
 	public static Srch_search_phrase New(gplx.xowa.langs.cases.Xol_case_mgr case_mgr, Srch_crt_scanner_syms syms, boolean auto_wildcard, byte[] orig) {
 		int orig_len = orig.length;

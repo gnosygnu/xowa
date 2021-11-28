@@ -54,5 +54,5 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public byte[] Xtn_html()		{throw Err_.new_unimplemented_w_msg("xowa_html_cmd.xtn_html should not be called");}
 
 	private static final byte Xatr__pos = 1, Xatr__type = 2;
-	private static final    Hash_adp_bry xatr_hash = Hash_adp_bry.ci_a7().Add_str_byte("pos", Xatr__pos).Add_str_byte("type", Xatr__type);
+	private static final Hash_adp_bry xatr_hash = Hash_adp_bry.ci_a7().Add_str_byte("pos", Xatr__pos).Add_str_byte("type", Xatr__type);
 }

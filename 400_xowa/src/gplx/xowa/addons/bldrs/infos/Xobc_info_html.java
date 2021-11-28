@@ -18,8 +18,8 @@ import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wik
 import gplx.xowa.addons.bldrs.centrals.*; import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
 import gplx.xowa.wikis.domains.*; import gplx.core.ios.*;
 class Xobc_info_html extends Xow_special_wtr__base {
-	private final    Xobc_task_mgr task_mgr;
-	private final    int task_id;
+	private final Xobc_task_mgr task_mgr;
+	private final int task_id;
 	public Xobc_info_html(Xobc_task_mgr task_mgr, int task_id) {this.task_mgr = task_mgr; this.task_id = task_id;}
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "bldr", "info");}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xobc_info.mustache.html");}

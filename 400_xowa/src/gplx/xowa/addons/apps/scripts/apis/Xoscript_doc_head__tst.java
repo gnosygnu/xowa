@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xoscript_doc_head__tst {
-	private final    Xoscript_doc_head__fxt fxt = new Xoscript_doc_head__fxt();
+	private final Xoscript_doc_head__fxt fxt = new Xoscript_doc_head__fxt();
 	@Before public void init() {
 		fxt.Init__sect("head");
 		fxt.Exec__reg_marker("<!--top-->", "top", Xoscript_doc_head.Pos__default);
@@ -46,7 +46,7 @@ public class Xoscript_doc_head__tst {
 	}
 }
 class Xoscript_doc_head__fxt {
-	private final    Xoscript_page spg;
+	private final Xoscript_page spg;
 	private Xoscript_doc_sect_base sect;
 	public Xoscript_doc_head__fxt() {
 		Bry_bfr rv = Bry_bfr_.New();

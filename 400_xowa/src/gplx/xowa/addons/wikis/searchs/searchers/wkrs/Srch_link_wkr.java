@@ -18,14 +18,14 @@ import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.dbs.percentiles.*;
 import gplx.xowa.langs.cases.*; import gplx.xowa.addons.wikis.searchs.parsers.*;	
 public class Srch_link_wkr extends Percentile_select_base {
-	private final    Srch_link_wkr_sql sql_mkr = new Srch_link_wkr_sql();
-	private final    Db_attach_mgr attach_mgr = new Db_attach_mgr();
-	private final    Srch_rslt_list tmp_rslts = new Srch_rslt_list();
+	private final Srch_link_wkr_sql sql_mkr = new Srch_link_wkr_sql();
+	private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
+	private final Srch_rslt_list tmp_rslts = new Srch_rslt_list();
 	private Srch_rslt_list rslts_list; private Srch_rslt_cbk rslt_cbk; private Srch_search_ctx ctx;
 	private Xowd_page_tbl page_tbl;
 	private Db_stmt stmt;
 	private int rslts_bgn, rslts_end;
-	private Srch_rslt_row cur_row; private final    Xowd_page_itm tmp_page_itm = new Xowd_page_itm();
+	private Srch_rslt_row cur_row; private final Xowd_page_itm tmp_page_itm = new Xowd_page_itm();
 	private int link_tbl_idx, link_tbl_nth; private boolean link_loop_done;
 	private Srch_crt_itm sql_root;
 	public void Search(Srch_rslt_list rslts_list, Srch_rslt_cbk rslt_cbk, Srch_search_ctx ctx) {

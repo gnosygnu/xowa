@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.caches; import gplx.*; import gplx.core.*;
 public class Lru_cache {
-	private final    Hash_adp map = Hash_adp_.New();
+	private final Hash_adp map = Hash_adp_.New();
 	private Lru_node head, tail;
 	private long cur, min, max, evicts;
 	public Lru_cache(boolean auto_reg, String key, long min, long max) {
@@ -24,7 +24,7 @@ public class Lru_cache {
 		this.max = max;
 		if (auto_reg) Lru_cache_root.Instance.Add(this);
 	}
-	public String Key() {return key;} private final    String key;
+	public String Key() {return key;} private final String key;
 	public long Evicts() {return evicts;}
 	public long Cur() {return cur;}
 	public void Min_max_(long min, long max) {
@@ -132,9 +132,9 @@ public class Lru_cache {
 	}
 }
 class Lru_node {
-	private final    Object key;
+	private final Object key;
 	private Object val;
-	private final    long size;
+	private final long size;
 	private Lru_node prv;
 	private Lru_node nxt;
 

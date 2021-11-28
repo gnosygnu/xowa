@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.envs.*;
+package gplx.core.ios; import gplx.Byte_ascii;
+import gplx.Char_;
+import gplx.String_;
+import gplx.core.envs.Op_sys;
 public interface IoUrlInfo {
 	String Key();
 	byte DirSpr_byte();
@@ -33,7 +35,7 @@ public interface IoUrlInfo {
 	String XtoRootName(String raw, int rawLen);
 }
 class IoUrlInfo_nil implements IoUrlInfo {
-	public String Key() {return KeyConst;} public static final    String KeyConst = String_.Null_mark;
+	public String Key() {return KeyConst;} public static final String KeyConst = String_.Null_mark;
 	public String EngineKey() {return "<<INVALID>>";}
 	public String DirSpr() {return "<<INVALID>>";}
 	public byte DirSpr_byte() {return Byte_ascii.Slash;}
@@ -48,11 +50,11 @@ class IoUrlInfo_nil implements IoUrlInfo {
 	public String NameOnly(String raw) {return "";}
 	public String Ext(String raw) {return "";}
 	public String XtoRootName(String raw, int rawLen) {return "";}
-	public static final    IoUrlInfo_nil Instance = new IoUrlInfo_nil(); IoUrlInfo_nil() {}
+	public static final IoUrlInfo_nil Instance = new IoUrlInfo_nil(); IoUrlInfo_nil() {}
 }
 abstract class IoUrlInfo_base implements IoUrlInfo {
-	@gplx.Internal protected static final    int DirSprLen = 1;
-	@gplx.Internal protected static final    String NullString = "", ExtSeparator = ".";
+	@gplx.Internal protected static final int DirSprLen = 1;
+	@gplx.Internal protected static final String NullString = "", ExtSeparator = ".";
 	public abstract String Key();
 	public abstract byte DirSpr_byte();
 	public abstract String DirSpr();
@@ -61,7 +63,7 @@ abstract class IoUrlInfo_base implements IoUrlInfo {
 	public abstract String EngineKey();
 	public boolean IsDir(String raw) {return String_.Has_at_end(raw, DirSpr());}
 	public abstract String XtoRootName(String raw, int rawLen);
-	@gplx.Virtual public String Xto_api(String raw) {
+	public String Xto_api(String raw) {
 		return IsDir(raw)
 			? String_.DelEnd(raw, IoUrlInfo_base.DirSprLen)	// if Dir, remove trailing DirSpr, since most api will not expect it (ex: .Delete will malfunction)
 			: raw;
@@ -72,7 +74,7 @@ abstract class IoUrlInfo_base implements IoUrlInfo {
 		if (ownerDirSprPos <= OwnerDirPos_hasNoOwner) return IoUrlInfo_base.NullString;	// no ownerDir found; return Null; only (a) NullUrls (b) RootUrls ("C:\") (c) relative ("fil.txt")
 		return String_.MidByLen(raw, 0, ownerDirSprPos + 1);	// +1 to include backslash
 	}
-	@gplx.Virtual public String OwnerRoot(String raw) {
+	public String OwnerRoot(String raw) {
 		String temp = raw, rv = raw;
 		while (true) {
 			temp = OwnerDir(temp);
@@ -116,7 +118,7 @@ abstract class IoUrlInfo_base implements IoUrlInfo {
 			return String_.FindBwd(raw, this.DirSpr(), rawLen - 1 - posAdj); // -1 to adjust for LastIdx
 		}
 	}
-	static final    int
+	static final int
 		  OwnerDirPos_hasNoOwner		= -1	// List_adp_.Not_found
 		, OwnerDirPos_isNull			= -2
 		, OwnerDirPos_isRoot			= -3;
@@ -133,12 +135,12 @@ class IoUrlInfo_wnt extends IoUrlInfo_base {
 			? Char_.To_str(String_.CharAt(raw, 0))
 			: null;
 	}
-	public static final    IoUrlInfo_wnt Instance = new IoUrlInfo_wnt(); IoUrlInfo_wnt() {}
+	public static final IoUrlInfo_wnt Instance = new IoUrlInfo_wnt(); IoUrlInfo_wnt() {}
 }
 class IoUrlInfo_lnx extends IoUrlInfo_base {
 	@Override public String Key()			{return "lnx";}
 	@Override public String EngineKey()		{return IoEngine_.SysKey;}
-	@Override public String DirSpr()			{return DirSprStr;} static final    String DirSprStr = Op_sys.Lnx.Fsys_dir_spr_str();
+	@Override public String DirSpr()			{return DirSprStr;} static final String DirSprStr = Op_sys.Lnx.Fsys_dir_spr_str();
 	@Override public byte DirSpr_byte()		{return Byte_ascii.Slash;}
 	@Override public boolean CaseSensitive()	{return Op_sys.Lnx.Fsys_case_match();}
 	@Override public boolean Match(String raw)	{return String_.Has_at_bgn(raw, DirSprStr);}	// anything that starts with /
@@ -153,7 +155,7 @@ class IoUrlInfo_lnx extends IoUrlInfo_base {
 			? DirSprStr
 			: super.Xto_api(raw);					// NOTE: super.Xto_api will strip off last /
 	}
-	public static final    IoUrlInfo_lnx Instance = new IoUrlInfo_lnx(); IoUrlInfo_lnx() {}
+	public static final IoUrlInfo_lnx Instance = new IoUrlInfo_lnx(); IoUrlInfo_lnx() {}
 }
 class IoUrlInfo_rel extends IoUrlInfo_base {
 	@Override public String Key()			{return "rel";}
@@ -234,8 +236,8 @@ class IoUrlInfo_alias extends IoUrlInfo_base {
 		rv.EngineKey_set(engineKey);
 		return rv;
 	}
-	public static final    IoUrlInfo_alias KEYS = new IoUrlInfo_alias();
-	public final    String
+	public static final IoUrlInfo_alias KEYS = new IoUrlInfo_alias();
+	public final String
 		  Data_EngineKey			= "engineKey"
 		, Data_SrcDir				= "srcDir"
 		, Data_TrgDir				= "trgDir"

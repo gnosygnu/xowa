@@ -33,7 +33,7 @@ import gplx.xowa.xtns.Xox_mgr;
 import gplx.xowa.xtns.Xox_mgr_base;
 
 public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
-	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final    byte[] Xtn_key_static = Bry_.new_a7("pagebanner");
+	@Override public byte[] Xtn_key() {return Xtn_key_static;} public static final byte[] Xtn_key_static = Bry_.new_a7("pagebanner");
 	@Override public Xox_mgr Xtn_clone_new() {return new Pgbnr_xtn_mgr();}
 	public Pgbnr_cfg Cfg() {return cfg;} private Pgbnr_cfg cfg;
 	public Mustache_tkn_itm Template_root() {return template_root;} private Mustache_tkn_itm template_root;
@@ -100,8 +100,8 @@ public class Pgbnr_xtn_mgr extends Xox_mgr_base implements Bfr_arg {
 		Pgbnr_func.Add_banner(bfr, wpg, pctx, hctx, itm);
 	}
 
-	public static final    byte[] Bry__cls__wpb_banner_image = Bry_.new_a7("wpb-banner-image");
-	private static final    byte[] Template_dflt = Bry_.New_u8_nl_apos
+	public static final byte[] Bry__cls__wpb_banner_image = Bry_.new_a7("wpb-banner-image");
+	private static final byte[] Template_dflt = Bry_.New_u8_nl_apos
 	( "<div class='ext-wpb-pagebanner pre-content'>"
 	, " <div class=\"{{#isPanorama}}wpb-banner-image-panorama {{/isPanorama}}wpb-topbanner{{extraClass}}\">"
 	, "		{{#isHeadingOverrideEnabled}}<h1 class='wpb-name'>{{title}}</h1>{{/isHeadingOverrideEnabled}}"

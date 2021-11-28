@@ -19,7 +19,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_rel2abs extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
-	private static final    byte[] Ary_dot_slash = Bry_.new_a7("./"), Ary_dot_dot = Bry_.new_a7(".."), Ary_dot_dot_slash = Bry_.new_a7("../");
+	private static final byte[] Ary_dot_slash = Bry_.new_a7("./"), Ary_dot_dot = Bry_.new_a7(".."), Ary_dot_dot_slash = Bry_.new_a7("../");
 	private static void qry_bgns_with_init() {
 		qry_bgns_with = Btrie_fast_mgr.cs();
 		qry_bgns_with.Add(Byte_ascii.Slash, Int_obj_ref.New(Id_slash));
@@ -57,7 +57,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		}
 		return rv;
 	}
-	private static final    Int_obj_ref ignore_rel2abs_tid = Int_obj_ref.New_zero();	// TS:return value not used
+	private static final Int_obj_ref ignore_rel2abs_tid = Int_obj_ref.New_zero();	// TS:return value not used
 	public static byte[] Rel2abs(Bry_bfr tmp_bfr, int[] seg_ary, byte[] qry, byte[] src) {return Rel2abs(tmp_bfr, seg_ary, qry, src, ignore_rel2abs_tid);}
 	public static byte[] Rel2abs(Bry_bfr tmp_bfr, int[] seg_ary, byte[] qry, byte[] src, Int_obj_ref rel2abs_tid) {
 		if (qry_bgns_with == null) qry_bgns_with_init();

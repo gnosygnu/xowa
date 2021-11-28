@@ -22,7 +22,7 @@ import gplx.xowa.htmls.*; import gplx.xowa.files.*; import gplx.xowa.wikis.domai
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
 import gplx.xowa.wikis.nss.*;
 class Graph_json_save_mgr {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs().Add_bry_byte(Bry__xowa_root, Tid__text);
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs().Add_bry_byte(Bry__xowa_root, Tid__text);
 	public Graph_json_save_mgr(Xoa_fsys_mgr fsys_mgr) {
 		trie.Add_bry_byte(fsys_mgr.Root_dir().To_http_file_bry(), Tid__root);
 	}
@@ -125,7 +125,7 @@ class Graph_json_save_mgr {
 	}
 	public void Test_lnr_(Gfo_test_lnr_base v) {this.test_lnr = v;} private Gfo_test_lnr_base test_lnr;
 	public static final byte Tid__root = 0, Tid__text = 1;
-	public static final    byte[]
+	public static final byte[]
 	  Bry__wikirawupload = Bry_.new_a7("\"wikirawupload:")
 	, Bry__xowa_root = Bry_.new_a7("{XOWA_ROOT}")
 	;

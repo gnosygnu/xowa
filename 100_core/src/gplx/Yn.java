@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import gplx.core.stores.*;
 public class Yn {
-	public static final    String Y = "y", N = "n";
+	public static final String Y = "y", N = "n";
 	public static boolean parse_by_char_or(String v, boolean or) {
 		if		(String_.Eq(v, Y))	return true;
 		else if	(String_.Eq(v, N))	return false;

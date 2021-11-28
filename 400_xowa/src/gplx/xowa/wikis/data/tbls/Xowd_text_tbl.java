@@ -16,11 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xowd_text_tbl implements Db_tbl {
-	private final    Object thread_lock = new Object();
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_page_id, fld_text_data;
-	private final    Db_conn conn; private Db_stmt stmt_select, stmt_insert;
-	private final    Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr(); private final    byte zip_tid;
+	private final Object thread_lock = new Object();
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_page_id, fld_text_data;
+	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;
+	private final Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr(); private final byte zip_tid;
 	public String Fld_text_data() {return fld_text_data;}
 	public Xowd_text_tbl(Db_conn conn, boolean schema_is_1, byte zip_tid) {
 		this.conn = conn; this.zip_tid = zip_tid;
@@ -30,7 +30,7 @@ public class Xowd_text_tbl implements Db_tbl {
 		fld_text_data		= flds.Add_bry(fld_text_data_name);
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name = TBL_NAME; 
+	public String Tbl_name() {return tbl_name;} private final String tbl_name = TBL_NAME;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("schema__text__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}

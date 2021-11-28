@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*
 import org.junit.*; import gplx.xowa.files.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_file_wtr__hdump__tst {
-	private final    Xoh_file_wtr__hdump__fxt fxt = new Xoh_file_wtr__hdump__fxt();
+	private final Xoh_file_wtr__hdump__fxt fxt = new Xoh_file_wtr__hdump__fxt();
 
 	@Test  public void Plain() {
 		fxt.Init__hctx__hzip__none();
@@ -30,8 +30,8 @@ public class Xoh_file_wtr__hdump__tst {
 	}
 }
 class Xoh_file_wtr__hdump__fxt {
-	private final    Xop_fxt fxt = new Xop_fxt();
-	private final    Xof_file_fxt file_fxt;
+	private final Xop_fxt fxt = new Xop_fxt();
+	private final Xof_file_fxt file_fxt;
 	public Xoh_file_wtr__hdump__fxt() {
 		fxt.Reset();
 

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_thm_html_tst {
-	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
+	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Test  public void Image() {
 		fxt.Test__html("[[File:A.png|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"

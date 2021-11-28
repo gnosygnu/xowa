@@ -41,10 +41,10 @@ import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xoedit_root;
 import gplx.xowa.addons.apps.cfgs.specials.edits.objs.Xogui_nde_iter;
 
 public class Xocfg_edit_loader {
-	private final    Xocfg_db_app db_app;
-	private final    Xocfg_db_usr db_usr;
-	private final    Xocfg_type_mgr type_mgr;
-	private final    Xocfg_dflt_mgr dflt_mgr;
+	private final Xocfg_db_app db_app;
+	private final Xocfg_db_usr db_usr;
+	private final Xocfg_type_mgr type_mgr;
+	private final Xocfg_dflt_mgr dflt_mgr;
 	public Xocfg_edit_loader(Xocfg_db_app db_app, Xocfg_db_usr db_usr, Xocfg_type_mgr type_mgr, Xocfg_dflt_mgr dflt_mgr) {
 		this.db_app = db_app;
 		this.db_usr = db_usr;

@@ -21,6 +21,6 @@ public interface Merge2_trg_itm {
 }
 class Merge2_trg_itm__wiki implements Merge2_trg_itm {
 	public Merge2_trg_itm__wiki(int idx, Db_conn conn) {this.idx = idx; this.conn = conn;}
-	public int			Idx()	{return idx;}	private final    int idx;
-	public Db_conn		Conn()	{return conn;}	private final    Db_conn conn;
+	public int			Idx()	{return idx;}	private final int idx;
+	public Db_conn		Conn()	{return conn;}	private final Db_conn conn;
 }

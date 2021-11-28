@@ -120,5 +120,5 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 	public Gfo_fld_rdr Ctor_sql()  {return (Gfo_fld_rdr)super.Ctor_sql_base();}
 	public static Gfo_fld_rdr xowa_()	{return new Gfo_fld_rdr().Ctor_xdat();}
 	public static Gfo_fld_rdr sql_()	{return new Gfo_fld_rdr().Ctor_sql();}
-	private static final    byte[] Bry_nil = Bry_.new_a7("\\0");
+	private static final byte[] Bry_nil = Bry_.new_a7("\\0");
 }

@@ -52,8 +52,8 @@ public class Xob_pageprop_cmd extends Xob_sql_dump_base implements Xosql_dump_cb
 
 	public static final String BLDR_CMD_KEY = "wiki.page_props";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}
-	public static final    Xob_cmd Prototype = new Xob_pageprop_cmd(null, null);
+	public static final Xob_cmd Prototype = new Xob_pageprop_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xob_pageprop_cmd(bldr, wiki);}
 
-	private static final    byte[] Key_hiddencat = Bry_.new_a7("hiddencat");
+	private static final byte[] Key_hiddencat = Bry_.new_a7("hiddencat");
 }

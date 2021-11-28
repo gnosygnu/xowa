@@ -65,7 +65,7 @@ class Gfdb_diff_cmd__idx__fld implements Gfo_srl_itm {
 		rdr.Itm_end();
 	}
 
-        public static final    Gfdb_diff_cmd__idx__fld Instance = new Gfdb_diff_cmd__idx__fld();
+        public static final Gfdb_diff_cmd__idx__fld Instance = new Gfdb_diff_cmd__idx__fld();
 }
 //	class Gfdb_diff_cmd__tbl__fld : Gfo_srl_itm {
 //		public Gfdb_diff_cmd__tbl__fld(Dbmeta_fld_itm cur) {this.cur = cur;}
@@ -111,5 +111,5 @@ class Gfdb_diff_cmd__idx__fld implements Gfo_srl_itm {
 ////			Dbmeta_fld_tid tid = tbl.Flds().Get_by(name).Type();
 //		}
 //
-//        public static final    Gfdb_diff_cmd__tbl__fld Instance = new Gfdb_diff_cmd__tbl__fld();
+//        public static final Gfdb_diff_cmd__tbl__fld Instance = new Gfdb_diff_cmd__tbl__fld();
 //	}

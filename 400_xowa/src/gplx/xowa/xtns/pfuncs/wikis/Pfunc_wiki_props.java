@@ -36,5 +36,5 @@ public class Pfunc_wiki_props extends Pf_func_base {
 		}
 	}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_wiki_props(id).Name_(name);}
-	public static final    Pfunc_wiki_props Instance = new Pfunc_wiki_props(-1);
+	public static final Pfunc_wiki_props Instance = new Pfunc_wiki_props(-1);
 }

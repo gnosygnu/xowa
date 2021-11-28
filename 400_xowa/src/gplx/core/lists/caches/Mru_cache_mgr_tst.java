@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.lists.caches; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Mru_cache_mgr_tst {
-	private final    Mru_cache_mgr_fxt fxt = new Mru_cache_mgr_fxt();
+	private final Mru_cache_mgr_fxt fxt = new Mru_cache_mgr_fxt();
 	@Before public void init() {
 		fxt.Init__New_cache_mgr(3, 3, 2);
 	}
@@ -50,7 +50,7 @@ public class Mru_cache_mgr_tst {
 	}
 }
 class Mru_cache_mgr_fxt {
-	private final    Mru_cache_time_mgr__mock time_mgr = new Mru_cache_time_mgr__mock();
+	private final Mru_cache_time_mgr__mock time_mgr = new Mru_cache_time_mgr__mock();
 	private Mru_cache_mgr cache_mgr;
 	public void Init__New_cache_mgr(long cache_max, long used_weight, long compress_size) {
 		cache_mgr = Mru_cache_mgr.New_test(time_mgr, null, cache_max, used_weight, compress_size);

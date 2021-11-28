@@ -19,10 +19,10 @@ public class Rndm_rng_itm {
 		this.mgr_idx = mgr_idx; this.rng_idx = rng_idx;
 		this.seq_bgn = seq_bgn; this.seq_end = seq_end;
 	}
-	public int Mgr_idx() {return mgr_idx;} private final    int mgr_idx;
-	public int Rng_idx() {return rng_idx;} private final    int rng_idx;
-	public int Seq_bgn() {return seq_bgn;} private final    int seq_bgn;
-	public int Seq_end() {return seq_end;} private final    int seq_end;
+	public int Mgr_idx() {return mgr_idx;} private final int mgr_idx;
+	public int Rng_idx() {return rng_idx;} private final int rng_idx;
+	public int Seq_bgn() {return seq_bgn;} private final int seq_bgn;
+	public int Seq_end() {return seq_end;} private final int seq_end;
 
 	public static Rndm_rng_itm Noop() {return new Rndm_rng_itm(-1, -1, 0, 0);}
 }

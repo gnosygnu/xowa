@@ -17,14 +17,14 @@ package gplx;
 import gplx.core.strings.*; import gplx.core.ios.*; /*IoUrlInfo*/ import gplx.core.envs.*; import gplx.langs.htmls.*; import gplx.core.interfaces.*;
 public class Io_url implements CompareAble, ParseAble, Gfo_invk {	//_20101005 URL:doc/Io_url.txt
 	public IoUrlInfo Info() {return info;} IoUrlInfo info;
-	public String Raw() {return raw;} final    String raw;
+	public String Raw() {return raw;} final String raw;
 	public byte[] RawBry() {return Bry_.new_u8(raw);}
 	public String To_http_file_str() {return String_.Len_eq_0(raw) ? String_.Empty : String_.Concat	(Http_file_str, Http_file_str_encoder.Encode_str(raw));}
 	public byte[] To_http_file_bry() {return String_.Len_eq_0(raw) ? Bry_.Empty		: Bry_.Add		(Http_file_bry, Http_file_str_encoder.Encode_bry(raw));}
 	public static Url_encoder_interface Http_file_str_encoder = Url_encoder_interface_same.Instance;
-	public static final    String Http_file_str = "file:///";
-	public static final    int Http_file_len = String_.Len(Http_file_str);
-	public static final    byte[] Http_file_bry = Bry_.new_a7(Http_file_str);
+	public static final String Http_file_str = "file:///";
+	public static final int Http_file_len = String_.Len(Http_file_str);
+	public static final byte[] Http_file_bry = Bry_.new_a7(Http_file_str);
 	public boolean Type_dir() {return info.IsDir(raw);} public boolean Type_fil() {return !info.IsDir(raw);}
 	public Io_url OwnerDir() {return Io_url_.new_inf_(info.OwnerDir(raw), info);}
 	public Io_url OwnerRoot() {return Io_url_.new_inf_(info.OwnerRoot(raw), info);}

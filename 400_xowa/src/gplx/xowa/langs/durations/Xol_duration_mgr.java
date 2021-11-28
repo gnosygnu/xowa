@@ -19,8 +19,8 @@ import gplx.xowa.parsers.*;
 import gplx.xowa.langs.msgs.*;
 public class Xol_duration_mgr {
 	private Xol_msg_itm[] interval_msgs = null;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
-	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
 	public Xol_duration_mgr(Xol_lang_itm lang) {this.lang = lang;} private Xol_lang_itm lang;
 	public Xol_interval_itm[] Get_duration_intervals(long seconds, Xol_duration_itm[] intervals) {
 		if (intervals == null) intervals = Xol_duration_itm_.Ary_default;
@@ -65,7 +65,7 @@ public class Xol_duration_mgr {
 			byte[] msg_key = Bry_.Add(Bry_duration, itm.Name_bry());
 			interval_msgs[i] = msg_mgr.Itm_by_key_or_new(msg_key);
 		}
-	}	private static final    byte[] Bry_duration = Bry_.new_a7("duration-");
+	}	private static final byte[] Bry_duration = Bry_.new_a7("duration-");
 	private void List_to_str_init() {
 		Xol_msg_mgr msg_mgr = lang.Msg_mgr();
 		Msg_and = msg_mgr.Val_by_str_or_empty("and");

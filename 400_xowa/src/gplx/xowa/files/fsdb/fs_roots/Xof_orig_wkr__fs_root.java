@@ -17,7 +17,7 @@ package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import
 import gplx.dbs.*;
 import gplx.xowa.files.origs.*;
 class Xof_orig_wkr__fs_root implements Xof_orig_wkr {
-	private final    Fs_root_wkr wkr;
+	private final Fs_root_wkr wkr;
 	public Xof_orig_wkr__fs_root(Fs_root_wkr wkr) {this.wkr = wkr;}
 	public byte				Tid() {return Xof_orig_wkr_.Tid_fs_root;}
 	public void				Find_by_list(Ordered_hash rv, List_adp itms) {Xof_orig_wkr_.Find_by_list(this, rv, itms);}

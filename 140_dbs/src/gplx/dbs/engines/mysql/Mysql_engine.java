@@ -21,15 +21,15 @@ import gplx.dbs.Db_conn_info;
 import gplx.dbs.engines.Db_engine;
 import gplx.dbs.engines.Db_engine_sql_base;
 import gplx.dbs.metas.Dbmeta_tbl_mgr;
-import gplx.dbs.sqls.Sql_qry_wtr;
-import gplx.dbs.sqls.Sql_qry_wtr_;
+import gplx.dbs.sqls.SqlQryWtr;
+import gplx.dbs.sqls.SqlQryWtrUtl;
 import gplx.dbs.wkrs.SqlWkrMgr;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 public class Mysql_engine extends Db_engine_sql_base {
 	@Override public String Tid() {return Mysql_conn_info.Tid_const;}
-	@Override public Sql_qry_wtr	Sql_wtr() {return Sql_qry_wtr_.New__mysql();}
+	@Override public SqlQryWtr Sql_wtr() {return SqlQryWtrUtl.NewMysql();}
 	@Override public void CtorConn(SqlWkrMgr wkrMgr) {}
 	@Override protected String Txn_bgn_str() {return "START TRANSACTION;";}
 	@Override protected String Txn_end_str() {return "COMMIT;";}
@@ -45,7 +45,7 @@ public class Mysql_engine extends Db_engine_sql_base {
 		Connection rv = Conn_make_by_url("jdbc:mysql://localhost/" + conn_info_as_mysql.Database() + "?characterEncoding=UTF8&useSSL=false", conn_info_as_mysql.Uid(), conn_info_as_mysql.Pwd());
 		return rv;
 	}
-		public static final    Mysql_engine Instance = new Mysql_engine(); Mysql_engine() {}
+		public static final Mysql_engine Instance = new Mysql_engine(); Mysql_engine() {}
 }
 class Mysql_rdr extends Db_data_rdr {
 		//PATCH:MYSQL:byte actually returned as int by Jdbc ResultSet (or MYSQL impmentation); convert to byte 

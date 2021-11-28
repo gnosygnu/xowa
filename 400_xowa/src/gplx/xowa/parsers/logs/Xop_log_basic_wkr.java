@@ -57,10 +57,10 @@ public class Xop_log_basic_wkr implements Gfo_invk {
 	  Invk_save_page_ttl_ = "save_page_ttl_", Invk_save_log_time_ = "save_log_time_"
 	, Invk_save_args_len_ = "save_args_len_", Invk_save_args_str_ = "save_args_str_", Invk_save_src_str_ = "save_src_str_"
 	;
-	public static final    Xop_log_basic_wkr Null = null;
+	public static final Xop_log_basic_wkr Null = null;
 	public static final int Null_page_id = -1, Null_log_bgn = -1, Null_log_time = -1, Null_args_len = -1, Null_src_len = -1;
 	public static final String Null_page_ttl = "", Null_args_str = "", Null_src_str = "";
-	public static final    byte[] Null_log_msg = null;
+	public static final byte[] Null_log_msg = null;
 	public static final int
 	  Tid_gallery		= 1
 	, Tid_imageMap		= 2

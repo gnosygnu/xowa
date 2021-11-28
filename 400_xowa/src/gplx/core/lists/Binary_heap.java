@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.lists; import gplx.*; import gplx.core.*;
 public class Binary_heap {
-	private final    ComparerAble comparer;
+	private final ComparerAble comparer;
 	private boolean is_max;
 	private Object[] heap;
 	private int size;

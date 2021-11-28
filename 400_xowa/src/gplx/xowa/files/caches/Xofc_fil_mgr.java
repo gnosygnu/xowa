@@ -19,7 +19,7 @@ import gplx.dbs.*; import gplx.fsdb.*; import gplx.xowa.wikis.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 class Xofc_fil_mgr {
 	private Xof_cache_mgr cache_mgr;		
-	private final    Xofc_fil_tbl tbl = new Xofc_fil_tbl(); private final    Ordered_hash hash = Ordered_hash_.New_bry(); private final    Bry_bfr key_bldr = Bry_bfr_.Reset(255);
+	private final Xofc_fil_tbl tbl = new Xofc_fil_tbl(); private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Bry_bfr key_bldr = Bry_bfr_.Reset(255);
 	public Xofc_fil_mgr(Xof_cache_mgr v) {this.cache_mgr = v;}
 	public void Conn_(Db_conn v, boolean created, boolean schema_is_1) {tbl.Conn_(v, created, schema_is_1);}
 	public void Save_all() {

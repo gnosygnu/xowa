@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpEnv {		
-	public XophpClassBldrs ClassBldrs() {return classBldrs;} private final    XophpClassBldrs classBldrs = new XophpClassBldrs();
-	public Ordered_hash Singletons() {return singletons;} private final    Ordered_hash singletons = Ordered_hash_.New();
+	public XophpClassBldrs ClassBldrs() {return classBldrs;} private final XophpClassBldrs classBldrs = new XophpClassBldrs();
+	public Ordered_hash Singletons() {return singletons;} private final Ordered_hash singletons = Ordered_hash_.New();
 
-	public static final    XophpEnv Instance = new XophpEnv();
+	public static final XophpEnv Instance = new XophpEnv();
 }

@@ -30,8 +30,8 @@ public class Xodel_page_special implements Xow_special_page {
 	}
 
 	public static final String SPECIAL_KEY = "XowaPageDelete";
-	public static final    byte[] Display_ttl = Bry_.new_a7("Delete Page");
+	public static final byte[] Display_ttl = Bry_.new_a7("Delete Page");
 	public Xow_special_meta Special__meta() {return new Xow_special_meta(Xow_special_meta_.Src__mw, SPECIAL_KEY);}
-	public static final    Xow_special_page Prototype = new Xodel_page_special();
+	public static final Xow_special_page Prototype = new Xodel_page_special();
 	public Xow_special_page Special__clone() {return this;}
 }

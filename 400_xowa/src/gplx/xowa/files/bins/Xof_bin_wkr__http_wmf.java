@@ -19,9 +19,9 @@ import gplx.xowa.apps.*;
 import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xof_bin_wkr__http_wmf implements Xof_bin_wkr {
-	private final    Xow_repo_mgr repo_mgr; private final    IoEngine_xrg_downloadFil download_wkr; 
-	private final    Io_download_mgr download_mgr;
-	private final    Xof_url_bldr url_bldr = new Xof_url_bldr();
+	private final Xow_repo_mgr repo_mgr; private final IoEngine_xrg_downloadFil download_wkr;
+	private final Io_download_mgr download_mgr;
+	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
 	public Xof_bin_wkr__http_wmf(Xow_repo_mgr repo_mgr, Io_download_mgr download_mgr, IoEngine_xrg_downloadFil download_wkr) {
 		this.repo_mgr = repo_mgr; this.download_mgr = download_mgr; this.download_wkr = download_wkr;
 	}

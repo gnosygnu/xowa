@@ -185,9 +185,9 @@ public class Gallery_mgr_wtr {
 		}
 		bfr.Add_byte(Byte_ascii.Gt);
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  itm_li_end_bry	= Bry_.new_a7		  ( "\n    </div>"
 											  + "\n  </li>")
 	, itm_divs_end_bry	= Bry_.new_a7		  ( "\n        </div>\n      </div>");
-	public static final    byte[] Bry__data_xogly = Bry_.new_a7 ("data-xogly");
+	public static final byte[] Bry__data_xogly = Bry_.new_a7 ("data-xogly");
 }

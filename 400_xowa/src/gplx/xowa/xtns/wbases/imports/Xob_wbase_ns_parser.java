@@ -19,8 +19,8 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.bldrs.wms.sites.*;
 class Xob_wbase_ns_parser {
-	private final    Hash_adp_bry ns_mgr_hash = Hash_adp_bry.cs();
-	private final    Site_core_db core_db;
+	private final Hash_adp_bry ns_mgr_hash = Hash_adp_bry.cs();
+	private final Site_core_db core_db;
 	public Xob_wbase_ns_parser(Io_url url) {
 		this.core_db = new Site_core_db(url);
 	}

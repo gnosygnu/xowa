@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.progs.rates; import gplx.*; import gplx.core.*; import gplx.core.progs.*;
 public class Gfo_rate_mgr {
-	private final    Hash_adp hash = Hash_adp_.New();
-	private final    int dflt_size;
+	private final Hash_adp hash = Hash_adp_.New();
+	private final int dflt_size;
 	public Gfo_rate_mgr(int dflt_size) {this.dflt_size = dflt_size;}
 	public void Clear() {hash.Clear();}
 	public int Len() {return hash.Count();}

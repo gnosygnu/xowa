@@ -18,7 +18,7 @@ import gplx.core.btries.*;
 public class Xop_tab_tkn extends Xop_tkn_itm_base {
 	public Xop_tab_tkn(int bgn, int end) {this.Tkn_ini_pos(false, bgn, end);}
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tab;}
-	public static final    byte[] Bry_tab_ent = Bry_.new_a7("&#09;");
+	public static final byte[] Bry_tab_ent = Bry_.new_a7("&#09;");
 }
 /*
 NOTE_1:tabs

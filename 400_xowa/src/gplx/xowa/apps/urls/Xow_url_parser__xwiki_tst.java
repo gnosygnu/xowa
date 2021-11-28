@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xow_url_parser__xwiki_tst {
-	private final    Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
+	private final Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
 	@Test public void Commons() {	// PURPOSE: "C" was being picked up as an xwiki to commons; PAGE:no.b:C/Variabler; DATE:2014-10-14
 		tstr.Prep_add_xwiki_to_user("c", "commons.wikimedia.org");		// add alias of "c"
 		tstr.Exec__parse("C/D").Test__tid(Xoa_url_.Tid_page).Test__wiki("en.wikipedia.org").Test__page("C/D");	// should use current wiki (enwiki), not xwiki to commons; also, page should be "C/D", not "D"

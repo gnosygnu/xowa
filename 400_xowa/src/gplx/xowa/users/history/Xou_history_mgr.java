@@ -16,11 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.htmls.hrefs.*; 
 public class Xou_history_mgr implements Gfo_invk {
-	private final    Xou_history_html html_mgr = new Xou_history_html(); private Xou_history_sorter sorter = new Xou_history_sorter().Sort_fld_(Xou_history_itm.Fld_view_end).Ascending_(false);
-	private final    Io_url history_fil;
+	private final Xou_history_html html_mgr = new Xou_history_html(); private Xou_history_sorter sorter = new Xou_history_sorter().Sort_fld_(Xou_history_itm.Fld_view_end).Ascending_(false);
+	private final Io_url history_fil;
 	private Ordered_hash itms = Ordered_hash_.New_bry();
 	private boolean load_chk = false;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private boolean log_all = false;
 	public Xou_history_mgr(Io_url history_fil) {
 		this.history_fil = history_fil;
@@ -131,8 +131,8 @@ public class Xou_history_mgr implements Gfo_invk {
 		return this;
 	}
 	public static final String Invk_html_grp = "html_grp", Invk_html_grp_ = "html_grp_", Invk_html_itm = "html_itm", Invk_html_itm_ = "html_itm_", Invk_current_itms_max_ = "current_itms_max_", Invk_current_itms_reset_ = "current_itms_reset_";
-	public static final    byte[] Ttl_name = Bry_.new_a7("XowaPageHistory");
-	public static final    byte[] Ttl_full = Bry_.new_a7("Special:XowaPageHistory");
+	public static final byte[] Ttl_name = Bry_.new_a7("XowaPageHistory");
+	public static final byte[] Ttl_full = Bry_.new_a7("Special:XowaPageHistory");
 	private static final String Cfg__enabled = "xowa.app.page_history.enabled", Cfg__log_all = "xowa.app.page_history.log_all";
 }	
 class Xou_history_itm_srl {

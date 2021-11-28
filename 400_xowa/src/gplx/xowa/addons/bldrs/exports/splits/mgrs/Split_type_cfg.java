@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.splits.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
 public class Split_type_cfg implements Gfo_invk {
 	public Split_type_cfg(String key, int db_idx) {this.key = key; this.db_idx = db_idx;}
-	public String			Key() {return key;} private final    String key;	// NOTE: used for layout
+	public String			Key() {return key;} private final String key;	// NOTE: used for layout
 	public int				Db_idx() {return db_idx;} private int db_idx = 1000;
 	public long				Db_max() {return db_max;} private long db_max = 1500 * Io_mgr.Len_mb;
 	public String			Layout() {return layout;} private String layout;

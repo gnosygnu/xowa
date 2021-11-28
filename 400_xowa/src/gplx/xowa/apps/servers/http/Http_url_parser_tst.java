@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.pages.*;
 public class Http_url_parser_tst {
-	private final    Http_url_parser_fxt fxt = new Http_url_parser_fxt();
+	private final Http_url_parser_fxt fxt = new Http_url_parser_fxt();
 	@Test public void Parse() {
 		// wiki-only
 		fxt.Test__parse("/en.wikipedia.org", fxt.Make().Wiki_("en.wikipedia.org"));

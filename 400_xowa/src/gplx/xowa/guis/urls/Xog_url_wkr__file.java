@@ -18,11 +18,11 @@ import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files
 import gplx.xowa.htmls.doms.*;
 import gplx.xowa.parsers.lnkis.*;
 class Xog_url_wkr__file {
-	private final    Xoae_app app;
-	private final    Xowe_wiki page_wiki;
-	private final    Xoae_page page;
-	private final    Xof_img_size img_size = new Xof_img_size();
-	private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
+	private final Xoae_app app;
+	private final Xowe_wiki page_wiki;
+	private final Xoae_page page;
+	private final Xof_img_size img_size = new Xof_img_size();
+	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public Xog_url_wkr__file(Xoae_app app, Xowe_wiki page_wiki, Xoae_page page) {
 		this.app = app;
 		this.page_wiki = page_wiki;

@@ -27,8 +27,8 @@ public class Wbase_entityPage implements Xow_special_page {
 		wikie.Data_mgr().Redirect((Xoae_page)page, pageId);
 	}
 	Wbase_entityPage(Xow_special_meta special__meta) {this.special__meta = special__meta;}
-	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
+	public Xow_special_meta Special__meta()		{return special__meta;} private final Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
 	public static final String SPECIAL_KEY = "EntityPage";
-	public static final    Xow_special_page Prototype = new Wbase_entityPage(Xow_special_meta.New_xo(SPECIAL_KEY, "Entity Page"));
+	public static final Xow_special_page Prototype = new Wbase_entityPage(Xow_special_meta.New_xo(SPECIAL_KEY, "Entity Page"));
 }

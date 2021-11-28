@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.xml; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.langs.xmls.*;
 public class XophpDOMNode {
-	private final    XmlNde xnde;
+	private final XmlNde xnde;
 	public String nodeValue = null;
 	public XophpDOMNode(XmlNde xnde) {
 		this.xnde = xnde;

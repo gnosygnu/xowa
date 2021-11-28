@@ -118,7 +118,7 @@ public class Gfo_url_encoder_ {
 			.Init__same__many(Byte_ascii.Tilde)
 			.Init__diff__one(Byte_ascii.Space, Byte_ascii.Plus);
 	}
-	public static final    Gfo_url_encoder
+	public static final Gfo_url_encoder
 	  Id				= Gfo_url_encoder_.New__html_id().Make()
 	, Href				= Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make()
 	, Href_wo_anchor	= Gfo_url_encoder_.New__html_href_mw(Bool_.N).Make()

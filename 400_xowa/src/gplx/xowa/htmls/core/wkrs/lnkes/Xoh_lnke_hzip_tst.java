@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnke_hzip_tst {
-	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
+	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Test  public void Free() {
 		fxt.Test__bicode("~#!http://a.org~", Xoh_lnke_html__hdump__tst.Html__free);
 	}

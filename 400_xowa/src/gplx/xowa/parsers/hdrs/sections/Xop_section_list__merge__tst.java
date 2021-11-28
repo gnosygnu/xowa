@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_section_list__merge__tst {
-	private final    Xop_section_list__fxt fxt = new Xop_section_list__fxt();
+	private final Xop_section_list__fxt fxt = new Xop_section_list__fxt();
 	@Test  public void Basic() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="

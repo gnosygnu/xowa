@@ -18,7 +18,7 @@ public class Gfh_entity_ {
 	public static final String 
 	  Nl_str = "&#10;"
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Lt_bry = Bry_.new_a7("&lt;"), Gt_bry = Bry_.new_a7("&gt;")
 	, Amp_bry = Bry_.new_a7("&amp;"), Quote_bry = Bry_.new_a7("&quot;")
 	, Apos_num_bry = Bry_.new_a7("&#39;")

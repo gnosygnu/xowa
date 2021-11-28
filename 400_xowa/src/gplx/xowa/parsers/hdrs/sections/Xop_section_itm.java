@@ -22,9 +22,9 @@ class Xop_section_itm {
 		this.src_bgn = src_bgn;
 		this.src_end = src_end;
 	}
-	public int Idx() {return idx;} private final    int idx;
-	public int Num() {return num;} private final    int num;
-	public byte[] Key() {return key;} private final    byte[] key;
-	public int Src_bgn() {return src_bgn;} private final    int src_bgn;
-	public int Src_end() {return src_end;} private final    int src_end;
+	public int Idx() {return idx;} private final int idx;
+	public int Num() {return num;} private final int num;
+	public byte[] Key() {return key;} private final byte[] key;
+	public int Src_bgn() {return src_bgn;} private final int src_bgn;
+	public int Src_end() {return src_end;} private final int src_end;
 }

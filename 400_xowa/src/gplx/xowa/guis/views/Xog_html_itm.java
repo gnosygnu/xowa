@@ -20,8 +20,8 @@ import gplx.xowa.guis.menus.*; import gplx.xowa.guis.menus.dom.*; import gplx.xo
 import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.htmls.*;
 public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page_html_source {
-	private Xoae_app app; private final    Object thread_lock = new Object();
-	private final    String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
+	private Xoae_app app; private final Object thread_lock = new Object();
+	private final String_obj_ref scroll_top = String_obj_ref.null_(), node_path = String_obj_ref.null_();
 	protected Xog_html_itm() {}	// TEST: for prefs_mgr
 	public Xog_html_itm(Xog_tab_itm owner_tab) {
 		this.owner_tab = owner_tab;

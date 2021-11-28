@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*;
 import gplx.xowa.specials.*;
 public class Xow_import_addon implements Xoax_addon_itm, Xoax_addon_itm__special {
-	private final    Ordered_hash cbks = Ordered_hash_.New();
+	private final Ordered_hash cbks = Ordered_hash_.New();
 	public Xow_special_page[] Special_pages() {
 		return new Xow_special_page[]
 		{ Xow_import_special.Prototype

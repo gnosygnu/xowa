@@ -19,7 +19,7 @@ public class Xoapi_xtns implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {
 		wikibase.Init_by_app(app);
 	}
-	public Xoapi_wikibase		Wikibase()		{return wikibase;}  private final    Xoapi_wikibase  wikibase = new Xoapi_wikibase();
+	public Xoapi_wikibase		Wikibase()		{return wikibase;}  private final Xoapi_wikibase  wikibase = new Xoapi_wikibase();
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_wikibase))	 			return wikibase;
 		else	return Gfo_invk_.Rv_unhandled;

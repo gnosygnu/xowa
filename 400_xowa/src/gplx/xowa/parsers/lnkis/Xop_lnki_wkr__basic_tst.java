@@ -19,7 +19,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; import gplx.xowa.langs
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.paras.*; import gplx.xowa.wikis.ttls.*;
 public class Xop_lnki_wkr__basic_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Basic() {
 		fxt.Test_parse_page_wiki("[[a]]", fxt.tkn_lnki_().Trg_tkn_(fxt.tkn_arg_val_txt_(2, 3)));
 	}

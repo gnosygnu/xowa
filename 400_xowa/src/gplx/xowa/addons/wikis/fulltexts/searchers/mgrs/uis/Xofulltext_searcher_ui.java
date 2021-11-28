@@ -17,9 +17,9 @@ package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis; import gplx.*; impo
 import gplx.xowa.guis.cbks.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
 public class Xofulltext_searcher_ui {
-	private final    Xog_cbk_mgr cbk_mgr;
-	private final    Xog_cbk_trg cbk_trg;
-	private final    Xofulltext_cache_mgr cache_mgr;
+	private final Xog_cbk_mgr cbk_mgr;
+	private final Xog_cbk_trg cbk_trg;
+	private final Xofulltext_cache_mgr cache_mgr;
 	public Xofulltext_searcher_ui(Xofulltext_cache_mgr cache_mgr, Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg) {
 		this.cache_mgr = cache_mgr;
 		this.cbk_mgr = cbk_mgr;

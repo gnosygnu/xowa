@@ -76,6 +76,6 @@ public class Wdata_lang_sorter implements Gfo_evt_itm, gplx.core.lists.ComparerA
 }
 class Wdata_lang_sorter_itm {
 	public Wdata_lang_sorter_itm(int sort, byte[] lang) {this.sort = sort; this.lang = lang;}
-	public int Sort() {return sort;} private final     int sort;
-	public byte[] Lang() {return lang;} private final    byte[] lang;
+	public int Sort() {return sort;} private final  int sort;
+	public byte[] Lang() {return lang;} private final byte[] lang;
 }

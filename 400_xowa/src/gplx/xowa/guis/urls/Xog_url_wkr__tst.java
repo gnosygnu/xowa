@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.guis.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xog_url_wkr__tst {
-	private final    Xog_url_wkr__fxt fxt = new Xog_url_wkr__fxt();
+	private final Xog_url_wkr__fxt fxt = new Xog_url_wkr__fxt();
 	@Test  public void Basic() {
 		fxt.Exec__parse("/wiki/A?k1=B%26C");
 		fxt.Test__raw("/wiki/A?k1=B%26C");
@@ -28,8 +28,8 @@ public class Xog_url_wkr__tst {
 	}		
 }
 class Xog_url_wkr__fxt {
-	private final    Xowe_wiki wiki;
-	private final    Xog_url_wkr wkr = new Xog_url_wkr();
+	private final Xowe_wiki wiki;
+	private final Xog_url_wkr wkr = new Xog_url_wkr();
 	private Xoa_url url;
 	public Xog_url_wkr__fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();

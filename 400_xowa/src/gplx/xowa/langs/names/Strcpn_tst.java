@@ -17,7 +17,7 @@ package gplx.xowa.langs.names; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*;
 import gplx.core.tests.*;
 public class Strcpn_tst {
-	private final    Strcpn_fxt fxt = new Strcpn_fxt();
+	private final Strcpn_fxt fxt = new Strcpn_fxt();
 
 	@Test  public void Single() {
 		fxt.Test__exec(0, "a"			, "a__");

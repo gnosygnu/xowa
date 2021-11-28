@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pft_func_date_rev_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before	public void setup()						{fxt.Reset(); fxt.Page().Db().Page().Modified_on_(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));}
 	@After public void teardown()				{}
 	@Test  public void Rev_year()					{fxt.Test_parse_tmpl_str_test("{{REVISIONYEAR}}"		, "{{test}}", "2012");}

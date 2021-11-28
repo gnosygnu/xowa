@@ -30,16 +30,16 @@ public abstract class XomwMediaTransformOutput {
 //		public $responsiveUrls = [];
 
 	/** @var File */
-	private final    XomwFile file;
+	private final XomwFile file;
 
 	/** @var int Image width */
-	protected final    int width;
+	protected final int width;
 
 	/** @var int Image height */
-	protected final    int height;
+	protected final int height;
 
 	/** @var String URL path to the thumb */
-	protected final    byte[] url;
+	protected final byte[] url;
 
 //		/** @var boolean|String */
 //		protected $page;
@@ -274,5 +274,5 @@ public abstract class XomwMediaTransformOutput {
 			bfr.Add(contents);
 		}
 	}
-	private static final    byte[] Bry__class__image = Bry_.new_a7("image");
+	private static final byte[] Bry__class__image = Bry_.new_a7("image");
 }

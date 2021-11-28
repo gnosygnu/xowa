@@ -23,7 +23,7 @@ class Reindex_html_dbs_cmd {
 	private Xoh_src_tbl_mgr src_tbl_mgr;
 	private Xoh_trg_tbl_mgr trg_tbl_mgr;
 	private String tbl_page, fld_page_id, fld_page_ns, fld_page_len, fld_page_score, fld_page_html_db_id;
-	private final    String Idx_name = "page__repack";
+	private final String Idx_name = "page__repack";
 	public void Exec(Xowe_wiki wiki, long trg_db_size_max) {
 		// init
 		wiki.Init_assert();

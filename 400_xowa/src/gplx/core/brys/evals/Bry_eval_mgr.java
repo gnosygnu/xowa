@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.brys.evals; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 public class Bry_eval_mgr {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
-	private final    byte sym_escape, sym_key_end, sym_grp_bgn, sym_grp_end;
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final byte sym_escape, sym_key_end, sym_grp_bgn, sym_grp_end;
 	public Bry_eval_mgr(byte sym_escape, byte sym_key_end, byte sym_grp_bgn, byte sym_grp_end) {
 		this.sym_escape = sym_escape;
 		this.sym_key_end = sym_key_end;
@@ -101,6 +101,6 @@ class Bry_eval_rslt {
 	public Bry_eval_rslt(byte[] bry, int pos) {
 		this.bry = bry; this.pos = pos;
 	}
-	public byte[] Bry() {return bry;} private final    byte[] bry;
-	public int Pos() {return pos;} private final    int pos;
+	public byte[] Bry() {return bry;} private final byte[] bry;
+	public int Pos() {return pos;} private final int pos;
 }

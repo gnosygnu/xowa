@@ -17,9 +17,9 @@ package gplx.xowa.addons.wikis.searchs.parsers; import gplx.*; import gplx.xowa.
 import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
 public class Srch_text_parser {
 	private Btrie_slim_mgr parser_trie = Btrie_slim_mgr.cs(); public Btrie_slim_mgr word_end_trie = Btrie_slim_mgr.cs(); private Btrie_slim_mgr word_bgn_trie = Btrie_slim_mgr.cs();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	private Xol_case_mgr case_mgr;
-	public final    Bry_bfr Tmp_bfr = Bry_bfr_.New_w_size(32);
+	public final Bry_bfr Tmp_bfr = Bry_bfr_.New_w_size(32);
 	private byte[] src; private int end;
 	private Srch_sym_parser__split parser__ws; private Srch_sym_parser__dash parser__dash;
 	public Srch_word_hash word_hash = new Srch_word_hash();

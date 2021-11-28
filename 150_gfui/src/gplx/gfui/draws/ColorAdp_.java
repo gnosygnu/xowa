@@ -19,7 +19,7 @@ public class ColorAdp_ implements ParseAble {
 	public static ColorAdp as_(Object obj) {return obj instanceof ColorAdp ? (ColorAdp)obj : null;}
 	public static ColorAdp cast(Object obj) {try {return (ColorAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ColorAdp.class, obj);}}
 	public static ColorAdp new_(int a, int r, int g, int b) {return ColorAdp.new_((int)a, (int)r, (int)g, (int)b);}
-	public static final    ColorAdp_ Parser = new ColorAdp_();
+	public static final ColorAdp_ Parser = new ColorAdp_();
 	public Object ParseAsObj(String raw) {return ColorAdp_.parse(raw);}
 	public static ColorAdp parseOr_(String raw, ColorAdp or) {
 		ColorAdp rv = parse_internal_(raw); if (rv == null) return or;
@@ -93,7 +93,7 @@ public class ColorAdp_ implements ParseAble {
 		return ColorAdp.new_(a, r, g, b);
 	}
 	public static ColorAdp read_(Object o) {String s = String_.as_(o); return s != null ? ColorAdp_.parse(s) : ColorAdp_.cast(o);}
-	public static final    ColorAdp 
+	public static final ColorAdp
 		  Null			= new_(  0,   0,   0,   0)
 		, Black			= new_(255,   0,   0,   0)
 		, White			= new_(255, 255, 255, 255)

@@ -32,7 +32,7 @@ public class IptBnd_txt_cmd implements InjectAble, Gfo_invk, Gfo_evt_itm {
 		}
 		else	return Gfo_invk_.Rv_unhandled;
 		return Gfo_invk_.Rv_handled;
-	}	static final    String TxtBox_exec = "TxtBox_exec";
+	}	static final String TxtBox_exec = "TxtBox_exec";
 	GfuiTextBox txtBox; Gfo_invk src; Gfo_evt_itm fwd; String setCmd, setEvt; ClassXtn cls;		
 	public static IptBnd_txt_cmd new_(Gfo_evt_itm fwd, String setCmd, String setEvt, ClassXtn cls) {
 		IptBnd_txt_cmd rv = new IptBnd_txt_cmd();

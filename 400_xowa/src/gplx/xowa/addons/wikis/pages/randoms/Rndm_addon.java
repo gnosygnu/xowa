@@ -20,7 +20,7 @@ import gplx.xowa.addons.wikis.pages.randoms.mgrs.*;
 public class Rndm_addon implements Xoax_addon_itm, Xoax_addon_itm__bldr, Xoax_addon_itm__special {
 	public Rndm_addon() {this.mgr = null;}	// prototype
 	public Rndm_addon(Xow_wiki wiki) {this.mgr = new Rndm_mgr(wiki);}
-	public Rndm_mgr Mgr() {return mgr;} private final    Rndm_mgr mgr;
+	public Rndm_mgr Mgr() {return mgr;} private final Rndm_mgr mgr;
 	public Xob_cmd[] Bldr_cmds() {
 		return new Xob_cmd[] 
 		{ Rndm_bldr_cmd.Prototype

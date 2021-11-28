@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
 public class Dbmeta_fld_mgr {
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public int				Len()					{return hash.Count();}
 	public void				Clear()					{hash.Clear();}
 	public void				Add(Dbmeta_fld_itm itm)	{hash.Add(itm.Name(), itm);}

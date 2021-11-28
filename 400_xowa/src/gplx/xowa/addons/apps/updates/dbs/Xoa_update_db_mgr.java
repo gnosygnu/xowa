@@ -22,7 +22,7 @@ public class Xoa_update_db_mgr {
 		this.tbl__app_version = new Xoa_app_version_tbl(conn);
 		conn.Meta_tbl_assert(tbl__app_version);
 	}
-	public Io_url Url() {return url;} private final    Io_url url;
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
-	public Xoa_app_version_tbl Tbl__app_version() {return tbl__app_version;} private final    Xoa_app_version_tbl tbl__app_version;
+	public Io_url Url() {return url;} private final Io_url url;
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public Xoa_app_version_tbl Tbl__app_version() {return tbl__app_version;} private final Xoa_app_version_tbl tbl__app_version;
 }

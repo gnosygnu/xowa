@@ -20,7 +20,7 @@ public class Wbase_claim_string extends Wbase_claim_base {
 		this.val_bry = val_bry;
 	}
 	@Override public byte	Val_tid() {return Wbase_claim_type_.Tid__string;}
-	public byte[]			Val_bry() {return val_bry;} private final    byte[] val_bry;
+	public byte[]			Val_bry() {return val_bry;} private final byte[] val_bry;
 
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_str(this);}
 	@Override public String toString() {// TEST:

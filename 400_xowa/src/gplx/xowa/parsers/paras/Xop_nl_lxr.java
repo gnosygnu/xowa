@@ -112,5 +112,5 @@ public class Xop_nl_lxr implements Xop_lxr {
 		}
 		return Bry_find_.Not_found;
 	}
-	public static final    Xop_nl_lxr Instance = new Xop_nl_lxr(); Xop_nl_lxr() {}
+	public static final Xop_nl_lxr Instance = new Xop_nl_lxr(); Xop_nl_lxr() {}
 }

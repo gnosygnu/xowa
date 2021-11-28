@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 public class XomwMagicWordSynonym {
-	public final    byte[] magic_name;
-	public final    boolean case_match;
-	public final    byte[] text;
-	public final    byte[] text_wo_arg1;
-	public final    byte arg1_tid;
+	public final byte[] magic_name;
+	public final boolean case_match;
+	public final byte[] text;
+	public final byte[] text_wo_arg1;
+	public final byte arg1_tid;
 	public XomwMagicWordSynonym(byte[] magic_name, boolean case_match, byte[] text) {
 		this.magic_name = magic_name;
 		this.case_match = case_match;

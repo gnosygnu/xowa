@@ -18,8 +18,8 @@ import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Srch_page_tbl_wkr {
-	private final    Xowd_page_itm tmp_page_row = new Xowd_page_itm();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xowd_page_itm tmp_page_row = new Xowd_page_itm();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public void Search(Srch_search_ctx ctx, Srch_rslt_cbk cbk) {
 		byte[] search_raw = To_bry_or_null(tmp_bfr, ctx.Scanner_syms.Wild(), ctx.Crt_mgr);	// build up search String but handle escapes "\+" -> "+"
 		if (search_raw == null) return;	// search-term has not or symbols; EX: "earth -history"; "(earth & history)"

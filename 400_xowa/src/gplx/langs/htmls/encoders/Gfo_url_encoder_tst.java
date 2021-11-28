@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import org.junit.*;
 public class Gfo_url_encoder_tst {
-	private final    Gfo_url_encoder_fxt fxt = new Gfo_url_encoder_fxt();
+	private final Gfo_url_encoder_fxt fxt = new Gfo_url_encoder_fxt();
 	@Test public void Id__nums() 			{fxt.Encoder_id().Test__bicode("0123456789");}
 	@Test public void Id__ltrs_lower() 	{fxt.Encoder_id().Test__bicode("abcdefghijklmnopqrstuvwxyz");}
 	@Test public void Id__ltrs_upper() 	{fxt.Encoder_id().Test__bicode("ABCDEFGHIJKLMNOPQRSTUVWXYZ");}

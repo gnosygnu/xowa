@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.filerepo.*; import gplx.xowa.mediawiki.includes.filerepo.file.*;
 import gplx.xowa.mediawiki.includes.media.*;
 public class Xomw_lnki_wkr__file__tst {
-	private final    Xomw_lnki_wkr__fxt fxt = new Xomw_lnki_wkr__fxt();
+	private final Xomw_lnki_wkr__fxt fxt = new Xomw_lnki_wkr__fxt();
 	@Before public void init() {
 		fxt.Clear();
 		fxt.Init__file("File:A.png", 300, 200);
@@ -71,12 +71,12 @@ public class Xomw_lnki_wkr__file__tst {
 	}
 }
 class Xomw_lnki_wkr__fxt {
-	private final    Xomw_lnki_wkr wkr;
-	private final    XomwParserCtx pctx;
-	private final    XomwParserBfr pbfr = new XomwParserBfr();
-	private final    XomwEnv env;
-	private final    XomwFileFinderMock file_finder;
-	private final    XomwFileRepo repo = new XomwFileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
+	private final Xomw_lnki_wkr wkr;
+	private final XomwParserCtx pctx;
+	private final XomwParserBfr pbfr = new XomwParserBfr();
+	private final XomwEnv env;
+	private final XomwFileFinderMock file_finder;
+	private final XomwFileRepo repo = new XomwFileRepo(Bry_.new_a7("/orig"), Bry_.new_a7("/thumb"));
 	private boolean apos = true;
 	public Xomw_lnki_wkr__fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();

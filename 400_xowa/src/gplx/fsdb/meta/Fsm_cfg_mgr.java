@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*;
 public class Fsm_cfg_mgr {		
-	private final    Db_cfg_tbl tbl; private final    Hash_adp grp_hash = Hash_adp_.New();
+	private final Db_cfg_tbl tbl; private final Hash_adp grp_hash = Hash_adp_.New();
 	public Fsm_cfg_mgr(Fsdb_db_mgr db_conn_mgr, Db_conn conn) {
 		this.tbl = new Db_cfg_tbl(conn, db_conn_mgr.File__cfg_tbl_name());
 	}

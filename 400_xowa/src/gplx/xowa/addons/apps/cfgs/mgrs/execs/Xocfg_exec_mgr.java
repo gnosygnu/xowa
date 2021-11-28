@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.mgrs.execs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 public class Xocfg_exec_mgr {
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public void Add(Gfo_invk invk, String... cmds) {
 		for (String cmd : cmds) {
 			hash.Add(cmd, invk);

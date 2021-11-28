@@ -18,13 +18,13 @@ import gplx.core.primitives.*;
 import gplx.langs.phps.*;
 import gplx.langs.jsons.*;
 class Cldr_name_converter {
-	private final    Php_parser parser = new Php_parser();
-	private final    Php_evaluator eval = new Php_evaluator(new gplx.core.log_msgs.Gfo_msg_log("test"));
-	private final    Php_text_itm_parser text_itm_parser = new Php_text_itm_parser().Quote_is_single_(true);
-	private final    Json_doc_wtr doc_wtr = new Json_doc_wtr();
-	private final    List_adp tmp_list = List_adp_.New();
-	private final    Byte_obj_ref tmp_result = Byte_obj_ref.zero_();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Php_parser parser = new Php_parser();
+	private final Php_evaluator eval = new Php_evaluator(new gplx.core.log_msgs.Gfo_msg_log("test"));
+	private final Php_text_itm_parser text_itm_parser = new Php_text_itm_parser().Quote_is_single_(true);
+	private final Json_doc_wtr doc_wtr = new Json_doc_wtr();
+	private final List_adp tmp_list = List_adp_.New();
+	private final Byte_obj_ref tmp_result = Byte_obj_ref.zero_();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public void Convert(Io_url src, Io_url trg) {
 		Cldr_name_file[] fils = Parse_dir(src);
 		for (Cldr_name_file fil : fils) {

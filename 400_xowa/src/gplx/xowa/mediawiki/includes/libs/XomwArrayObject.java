@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.libs; import gplx.*; import gplx.xowa.*; im
 // bare-bones implementation of PHP ArrayObject
 // REF:http://php.net/manual/en/class.arrayobject.php
 public abstract class XomwArrayObject {
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public boolean offsetExists(Object key) {
 		return hash.Has(key);
 	}

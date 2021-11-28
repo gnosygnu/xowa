@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.indexers.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Xofulltext_indexer_cmd extends Xob_cmd__base {
-	private final    Xofulltext_indexer_args args = new Xofulltext_indexer_args();
+	private final Xofulltext_indexer_args args = new Xofulltext_indexer_args();
 	public Xofulltext_indexer_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_run() {
 		wiki.Init_assert();
@@ -28,6 +28,6 @@ public class Xofulltext_indexer_cmd extends Xob_cmd__base {
 	}
 
 	@Override public String Cmd_key() {return "search.index";}
-	public static final    Xob_cmd Prototype = new Xofulltext_indexer_cmd(null, null);
+	public static final Xob_cmd Prototype = new Xofulltext_indexer_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xofulltext_indexer_cmd(bldr, wiki);}
 }

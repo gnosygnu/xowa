@@ -121,8 +121,8 @@ class Xoh_hdoc_wkr__http_server implements Xoh_hdoc_wkr {
 		// add everything after href
 		bfr.Add_mid(src, href_end, itm_end);
 	}
-	public static final    byte[] Path_lnxusr_xowa_file = Bry_.new_a7("file:////home/lnxusr/xowa/file/");
-	private static final    byte[] Bry__site = Bry_.new_a7("/site");
+	public static final byte[] Path_lnxusr_xowa_file = Bry_.new_a7("file:////home/lnxusr/xowa/file/");
+	private static final byte[] Bry__site = Bry_.new_a7("/site");
 	private static final byte
 	  Tid__wiki      = 1
 	, Tid__xcmd      = 2
@@ -130,7 +130,7 @@ class Xoh_hdoc_wkr__http_server implements Xoh_hdoc_wkr {
 	, Tid__fsys      = 4
 	, Tid__fsys_bug  = 5
 	;
-	private static final    Btrie_slim_mgr href_trie = Btrie_slim_mgr.ci_u8()
+	private static final Btrie_slim_mgr href_trie = Btrie_slim_mgr.ci_u8()
 		.Add_bry_byte(Xoh_href_.Bry__wiki        , Tid__wiki)
 		.Add_bry_byte(Gfo_protocol_itm.Bry_xcmd  , Tid__xcmd)
 		.Add_bry_byte(Bry__site                  , Tid__site)

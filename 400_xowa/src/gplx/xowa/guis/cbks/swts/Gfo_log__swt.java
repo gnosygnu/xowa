@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.cbks.swts; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.cbks.*;
 import gplx.core.logs.*; import gplx.core.gfobjs.*; import gplx.xowa.guis.cbks.*;
-public class Gfo_log__swt extends Gfo_log__file {		private final    Xog_cbk_mgr cbk_mgr;
+public class Gfo_log__swt extends Gfo_log__file {		private final Xog_cbk_mgr cbk_mgr;
 	public Gfo_log__swt(Xog_cbk_mgr cbk_mgr, Io_url url, Gfo_log_itm_wtr fmtr) {super(url, fmtr);this.cbk_mgr = cbk_mgr;}
 	@Override public void Exec(byte type, long time, long elapsed, String msg, Object[] args) {
 		if (type == Gfo_log_itm.Type__prog) return;

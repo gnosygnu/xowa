@@ -18,9 +18,9 @@ import gplx.core.consoles.*; import gplx.core.ios.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.xmls.*; 
 public class Xob_page_wkr_cmd implements Xob_cmd {
-	private final    Xob_bldr bldr; private final    Xowe_wiki wiki;
+	private final Xob_bldr bldr; private final Xowe_wiki wiki;
 	public Xob_page_wkr_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki;}
-	public String Cmd_key() {return KEY;} public static final    String KEY = "dump_mgr";
+	public String Cmd_key() {return KEY;} public static final String KEY = "dump_mgr";
 	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public void Cmd_run() {
 		Xob_page_wkr[] wkr_ary = (Xob_page_wkr[])wkrs.To_ary(Xob_page_wkr.class); int wkr_ary_len = wkr_ary.length;

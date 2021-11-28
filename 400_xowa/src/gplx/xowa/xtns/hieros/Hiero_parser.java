@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.btries.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 class Hiero_parser {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final Btrie_rv trv = new Btrie_rv();
 	private List_adp blocks = List_adp_.New();
 	private Hiero_block cur_block;
 	private Bry_bfr cur_tkn = Bry_bfr_.Reset(16);

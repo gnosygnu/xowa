@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 import org.junit.*; import gplx.xowa.addons.wikis.searchs.parsers.*;
 public class Srch_crt_scanner_tst {
-	private final    Srch_crt_scanner_fxt fxt = new Srch_crt_scanner_fxt();
+	private final Srch_crt_scanner_fxt fxt = new Srch_crt_scanner_fxt();
 	@Test  public void Word() 						{fxt.Test__scan("abc"				, "abc");}
 	@Test  public void Word__many() 				{fxt.Test__scan("abc d ef"			, "abc", "d", "ef");}
 	@Test  public void Word__symbol() 				{fxt.Test__scan("a; b"				, "a;", "b");}
@@ -46,7 +46,7 @@ public class Srch_crt_scanner_tst {
 	@Test  public void Complicated() 				{fxt.Test__scan("(a + \"b\") , -c", "(", "a", "+", "b", ")", ",", "-", "c");}
 }
 class Srch_crt_scanner_fxt {
-	private final    Srch_crt_scanner scanner;
+	private final Srch_crt_scanner scanner;
 	public Srch_crt_scanner_fxt() {
 		this.scanner = new Srch_crt_scanner(Srch_crt_scanner_syms.Dflt);
 		Srch_text_parser text_parser = new Srch_text_parser();

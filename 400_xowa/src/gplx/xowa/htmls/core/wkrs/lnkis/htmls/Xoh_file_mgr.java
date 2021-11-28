@@ -21,12 +21,12 @@ import gplx.xowa.parsers.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_file_mgr {
-	private final    Xowe_wiki wiki;
-	private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
+	private final Xowe_wiki wiki;
+	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public Xoh_file_mgr(Xowe_wiki wiki, Xow_html_mgr html_mgr, Xoh_html_wtr html_wtr) {
 		this.wiki = wiki; this.file_wtr = new Xoh_file_wtr__basic(wiki, html_mgr, html_wtr);
 	}
-	public Xoh_file_wtr__basic File_wtr() {return file_wtr;} private final    Xoh_file_wtr__basic file_wtr;
+	public Xoh_file_wtr__basic File_wtr() {return file_wtr;} private final Xoh_file_wtr__basic file_wtr;
 	public Xow_find_file_mgr Find_file_mgr() {return find_file_mgr;} public void Find_file_mgr_(Xow_find_file_mgr v) {this.find_file_mgr = v;} private Xow_find_file_mgr find_file_mgr;
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		file_wtr.Init_by_wiki(wiki);

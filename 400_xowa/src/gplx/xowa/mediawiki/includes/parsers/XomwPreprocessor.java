@@ -152,12 +152,12 @@ public abstract class XomwPreprocessor {
 	*/
 	public abstract XomwPPNode preprocessToObj(String text, int flags);
 
-	private final    List_adp comments_list = List_adp_.New();
-	private final    Btrie_slim_mgr elements_trie__y = Btrie_slim_mgr.ci_a7(), elements_trie__n = Btrie_slim_mgr.ci_a7();
-	private final    Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs().Add_many_str("includeonly", "noinclude", "onlyinclude");
-	private final    Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
-	private final    XomwPPDStack stack;
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final List_adp comments_list = List_adp_.New();
+	private final Btrie_slim_mgr elements_trie__y = Btrie_slim_mgr.ci_a7(), elements_trie__n = Btrie_slim_mgr.ci_a7();
+	private final Hash_adp_bry xmlish_allow_missing_end_tag = Hash_adp_bry.cs().Add_many_str("includeonly", "noinclude", "onlyinclude");
+	private final Hash_adp_bry no_more_closing_tag = Hash_adp_bry.cs();
+	private final XomwPPDStack stack;
+	private final Btrie_rv trv = new Btrie_rv();
 	private Xomw_prepro_accum accum = null;
 
 	public XomwPreprocessor() {
@@ -830,24 +830,24 @@ public abstract class XomwPreprocessor {
 	, Found__close = 5
 	, Found__open = 6
 	;
-	private static final    Xomw_prepro_rule 
+	private static final Xomw_prepro_rule
 	  rule_curly = new Xomw_prepro_rule(Bry_.new_a7("{"), Bry_.new_a7("}")  , 2, 3, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__tmpl, Xomw_prepro_rule.Name__targ})
 	, rule_brack = new Xomw_prepro_rule(Bry_.new_a7("["), Bry_.new_a7("]")  , 2, 2, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__null})
 	, rule_langv = new Xomw_prepro_rule(Bry_.new_a7("-{"), Bry_.new_a7("}-"), 1, 1, new int[] {Xomw_prepro_rule.Name__invalid, Xomw_prepro_rule.Name__null})
 	;
-	private static final    byte[] 
+	private static final byte[]
 	  Bry__only_include_bgn = Bry_.new_a7("<onlyinclude>")
 	, Bry__only_include_end = Bry_.new_a7("</onlyinclude>")
 	, Bry__comment_bgn  = Bry_.new_a7("<!--")
 	, Bry__comment_end  = Bry_.new_a7("-->")
 	, Bry__end_lhs      = Bry_.new_a7("</")
 	;
-	private static final    int Len__only_include_end = Bry__only_include_end.length;
-	private static final    Btrie_slim_mgr cur_char_trie = Cur_char_trie__new();
-	private static final    Ordered_hash
+	private static final int Len__only_include_end = Bry__only_include_end.length;
+	private static final Btrie_slim_mgr cur_char_trie = Cur_char_trie__new();
+	private static final Ordered_hash
 	  ignored_tags_y     = Ordered_hash_.New_bry().Add_many_str("includeonly", "/includeonly")
 	, ignored_tags_n     = Ordered_hash_.New_bry().Add_many_str("noinclude", "/noinclude", "onlyinclude", "/onlyinclude");
-	private static final    Hash_adp_bry 
+	private static final Hash_adp_bry
 	  ignored_elements__y   = Hash_adp_bry.cs().Add_many_str("noinclude")
 	, ignored_elements__n = Hash_adp_bry.cs().Add_many_str("includeonly");
 	private static Btrie_slim_mgr Cur_char_trie__new() {

@@ -17,10 +17,10 @@ package gplx.xowa.addons.wikis.imports; import gplx.*; import gplx.xowa.*; impor
 import gplx.core.ios.*;
 import gplx.langs.mustaches.*;
 class Xow_import_doc implements Mustache_doc_itm {
-	private final    boolean is_dir, is_core_xowa;
-	private final    byte[] owner_dir_enc, path, name, date, size, color;
-	private final    byte[] dir_cmd;
-	private final    Xow_import_doc[] subs;
+	private final boolean is_dir, is_core_xowa;
+	private final byte[] owner_dir_enc, path, name, date, size, color;
+	private final byte[] dir_cmd;
+	private final Xow_import_doc[] subs;
 	public Xow_import_doc(boolean is_dir, boolean is_core_xowa, int color, byte[] owner_dir, byte[] path, byte[] name, byte[] date, byte[] size, byte[] dir_cmd, Xow_import_doc[] subs) {
 		this.is_dir = is_dir; this.is_core_xowa = is_core_xowa;
 		this.color = color % 2 == 0 ? Byte_ascii.Num_0_bry : Byte_ascii.Num_1_bry;
@@ -49,7 +49,7 @@ class Xow_import_doc implements Mustache_doc_itm {
 		else if	(String_.Eq(key, "subs"))			return subs;
 		return Mustache_doc_itm_.Ary__empty;
 	}
-	public static final    Xow_import_doc[] Ary_empty = new Xow_import_doc[0];
+	public static final Xow_import_doc[] Ary_empty = new Xow_import_doc[0];
 	public static Xow_import_doc New(IoItmDir owner_dir, byte[] dir_cmd) {
 		List_adp sub_list = List_adp_.New();
 		New_subs(owner_dir.Url(), sub_list, owner_dir.SubDirs(), dir_cmd);

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.primitives; import gplx.*; import gplx.core.*;
 public class Hash_adp__primitive {
-	private final    Hash_adp hash = Hash_adp_.New();
+	private final Hash_adp hash = Hash_adp_.New();
 	public byte Get_by_str_or_max(String key) {
 		Byte_obj_val rv = (Byte_obj_val)hash.Get_by(key);
 		return rv == null ? Byte_.Max_value_127 : rv.Val();

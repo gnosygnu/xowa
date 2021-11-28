@@ -31,8 +31,8 @@ public class IptCfgRegy implements Gfo_invk {
 			return GetOrNew(key);
 		}
 		return this;
-	}	public static final    String Invk_Get = "Get", Invk_get = "get";
+	}	public static final String Invk_Get = "Get", Invk_get = "get";
 	Ordered_hash hash = Ordered_hash_.New();
-	public static final    IptCfgRegy Instance = new IptCfgRegy();
+	public static final IptCfgRegy Instance = new IptCfgRegy();
 	public IptCfgRegy() {}
 }

@@ -21,13 +21,13 @@ import gplx.xowa.mediawiki.includes.xohtml.*;
 	* P2: $this->getConverterLanguage()->markNoConversion( $text );
 */
 public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
-	private final    Bry_bfr tmp;
-	private Btrie_slim_mgr protocol_trie; private final    Btrie_rv trv = new Btrie_rv();
+	private final Bry_bfr tmp;
+	private Btrie_slim_mgr protocol_trie; private final Btrie_rv trv = new Btrie_rv();
 	private int autonumber;
-	private final    XomwParserIface parser;
-	private final    XomwLinker linker;
-	private final    XomwSanitizer sanitizer;
-	private final    Xomw_atr_mgr attribs = new Xomw_atr_mgr();
+	private final XomwParserIface parser;
+	private final XomwLinker linker;
+	private final XomwSanitizer sanitizer;
+	private final Xomw_atr_mgr attribs = new Xomw_atr_mgr();
 	private Xomw_regex_url regex_url;
 	private Xomw_regex_space regex_space;
 	public Xomw_lnke_wkr(XomwParserIface parser, Bry_bfr tmp, XomwLinker linker, XomwSanitizer sanitizer) {

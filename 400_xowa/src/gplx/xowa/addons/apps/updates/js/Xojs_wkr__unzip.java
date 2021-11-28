@@ -21,8 +21,8 @@ public class Xojs_wkr__unzip extends Xojs_wkr__base {
 		this.src = src; this.trg = trg;
 		this.Prog_data_end_(prog_data_end);
 	}
-	public Io_url Src() {return src;} private final    Io_url src;
-	public Io_url Trg() {return trg;} private final    Io_url trg;
+	public Io_url Src() {return src;} private final Io_url src;
+	public Io_url Trg() {return trg;} private final Io_url trg;
 	@Override protected void Exec_run() {
 		Io_zip_decompress_cmd decompress = Io_zip_decompress_cmd_.Proto.Make_new();
 		List_adp unzip_urls = List_adp_.New();

@@ -29,5 +29,5 @@ public class Xowmf_wiki_dump_dirs_parser {
 		}
 		return (String[])rv.To_ary_and_clear(String.class);
 	}
-	private static final    byte[] Tkn_href = Bry_.new_a7(" href=\""), Tkn_owner = Bry_.new_a7("..");
+	private static final byte[] Tkn_href = Bry_.new_a7(" href=\""), Tkn_owner = Bry_.new_a7("..");
 }

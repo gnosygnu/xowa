@@ -19,7 +19,7 @@ public class Xodb_wiki_mgr {
 	public Xodb_wiki_mgr(String domain) {
 		this.domain = domain;
 	}
-	public String Domain() {return domain;} private final    String domain;
+	public String Domain() {return domain;} private final String domain;
 	public Xodb_wiki_db Dbs__get_core() {return dbs__core;} private Xodb_wiki_db dbs__core;
 	public void Dbs__add(Xodb_wiki_db file) {
 		if (file.Tid() == Xodb_wiki_db_tid.Tid__core)

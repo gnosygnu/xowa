@@ -30,10 +30,10 @@ public class Wbase_claim_quantity extends Wbase_claim_base {
 		this.amount = amount; this.unit = unit; this.ubound = ubound; this.lbound = lbound;
 	}
 	@Override public byte	Val_tid()	{return Wbase_claim_type_.Tid__quantity;}
-	public byte[]			Amount()	{return amount;} private final    byte[] amount;
-	public byte[]			Ubound()	{return ubound;} private final    byte[] ubound;
-	public byte[]			Lbound()	{return lbound;} private final    byte[] lbound;
-	public byte[]			Unit()		{return unit;} private final    byte[] unit;
+	public byte[]			Amount()	{return amount;} private final byte[] amount;
+	public byte[]			Ubound()	{return ubound;} private final byte[] ubound;
+	public byte[]			Lbound()	{return lbound;} private final byte[] lbound;
+	public byte[]			Unit()		{return unit;} private final byte[] unit;
 
 	public Decimal_adp Amount_as_num() {
 		if (amount_as_num == null) {
@@ -63,7 +63,7 @@ public class Wbase_claim_quantity extends Wbase_claim_base {
 		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), String_.new_u8(amount), String_.new_u8(unit), String_.new_u8(ubound), String_.new_u8(lbound));
 	}
 
-	public static final    byte[] Unit_1 = Bry_.new_a7("1");
+	public static final byte[] Unit_1 = Bry_.new_a7("1");
 	private static Decimal_adp To_decimal_or_null(String name, byte[] bry) {
 		if (bry == null) return null;
 		int len = bry.length;

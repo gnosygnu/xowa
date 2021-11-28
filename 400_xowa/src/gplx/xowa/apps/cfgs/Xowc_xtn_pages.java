@@ -70,10 +70,10 @@ public class Xowc_xtn_pages implements Gfo_invk {
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_ns_names_ = "ns_names_";
-	public static final    byte[] Xtn_key = Bry_.new_a7("pages");
+	public static final byte[] Xtn_key = Bry_.new_a7("pages");
 	public static final int Ns_index_id_default = 102, Ns_page_id_default = 104;
 
-	private static final    byte[]
+	private static final byte[]
 	  Default_ns_page_name			= Bry_.new_a7("Page")
 	, Default_ns_page_talk_name		= Bry_.new_a7("Page_talk")
 	, Default_ns_index_name			= Bry_.new_a7("Index")

@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.centrals.dbs.datas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*; import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*;
 import gplx.dbs.*;
 public class Xobc_import_step_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_step_id, fld_host_id, fld_wiki_abrv, fld_wiki_date, fld_import_name, fld_import_type, fld_import_zip, fld_import_md5, fld_import_size_zip, fld_import_size_raw, fld_prog_size_end, fld_prog_count_end;
-	public final    Db_conn conn; private Db_stmt insert_stmt;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_step_id, fld_host_id, fld_wiki_abrv, fld_wiki_date, fld_import_name, fld_import_type, fld_import_zip, fld_import_md5, fld_import_size_zip, fld_import_size_raw, fld_prog_size_end, fld_prog_count_end;
+	public final Db_conn conn; private Db_stmt insert_stmt;
 	public Xobc_import_step_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "import_step";
@@ -36,7 +36,7 @@ public class Xobc_import_step_tbl implements Db_tbl {
 		this.fld_prog_count_end 	= flds.Add_long("prog_count_end");
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public Xobc_import_step_itm Select_one(int step_id) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_step_id).Crt_int(fld_step_id, step_id).Exec_select__rls_auto();

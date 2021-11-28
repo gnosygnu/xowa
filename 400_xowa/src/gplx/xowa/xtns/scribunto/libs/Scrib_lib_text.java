@@ -18,10 +18,10 @@ import gplx.core.bits.*; import gplx.core.btries.*;
 import gplx.xowa.langs.msgs.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_text implements Scrib_lib {
-	private final    Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
-	private final    Scrib_lib_text__nowiki_util nowiki_util = new Scrib_lib_text__nowiki_util();
-	private final    Scrib_core core;
-	private final    Btrie_slim_mgr trie;
+	private final Scrib_lib_text__json_util json_util = new Scrib_lib_text__json_util();
+	private final Scrib_lib_text__nowiki_util nowiki_util = new Scrib_lib_text__nowiki_util();
+	private final Scrib_core core;
+	private final Btrie_slim_mgr trie;
 	public Scrib_lib_text(Scrib_core core) {
 		this.core = core;
 		this.trie = nowiki_util.Make_trie(gplx.xowa.parsers.xndes.Xop_xnde_tag_.Tag__nowiki.Name_bry());
@@ -36,7 +36,7 @@ public class Scrib_lib_text implements Scrib_lib {
 		notify_wiki_changed_fnc = mod.Fncs_get_by_key("notify_wiki_changed");
 		return mod;
 	}	private Scrib_lua_proc notify_wiki_changed_fnc;
-	public Scrib_proc_mgr Procs() {return procs;} private final    Scrib_proc_mgr procs = new Scrib_proc_mgr();
+	public Scrib_proc_mgr Procs() {return procs;} private final Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_unstrip:							return Unstrip(args, rslt);
@@ -52,7 +52,7 @@ public class Scrib_lib_text implements Scrib_lib {
 	private static final int Proc_unstrip = 0, Proc_unstripNoWiki = 1, Proc_killMarkers = 2, Proc_getEntityTable = 3, Proc_init_text_for_wiki = 4, Proc_jsonEncode = 5, Proc_jsonDecode = 6;
 	public static final String Invk_unstrip = "unstrip", Invk_unstripNoWiki = "unstripNoWiki", Invk_killMarkers = "killMarkers", Invk_getEntityTable = "getEntityTable"
 	, Invk_init_text_for_wiki = "init_text_for_wiki", Invk_jsonEncode = "jsonEncode", Invk_jsonDecode = "jsonDecode";
-	private static final    String[] Proc_names = String_.Ary(Invk_unstrip, Invk_unstripNoWiki, Invk_killMarkers, Invk_getEntityTable, Invk_init_text_for_wiki, Invk_jsonEncode, Invk_jsonDecode);
+	private static final String[] Proc_names = String_.Ary(Invk_unstrip, Invk_unstripNoWiki, Invk_killMarkers, Invk_getEntityTable, Invk_init_text_for_wiki, Invk_jsonEncode, Invk_jsonDecode);
 	public boolean Unstrip(Scrib_proc_args args, Scrib_proc_rslt rslt)			{return rslt.Init_obj(args.Pull_str(0));}	// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20
 	public boolean UnstripNoWiki(Scrib_proc_args args, Scrib_proc_rslt rslt)	{
 		// NOTE: XOWA does not use MediaWiki strip markers; just return original; DATE:2015-01-20

@@ -20,10 +20,10 @@ import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Xofulltext_finder_mgr {
 	private Btrie_slim_mgr hook_trie;
 	private Xofulltext_word_node tree_root;
-	private final    Srch_crt_parser parser = new Srch_crt_parser(Srch_crt_scanner_syms.Dflt);
-	private final    Btrie_rv trv = new Btrie_rv();
-	private final    Xofulltext_word_lang lang = new Xofulltext_word_lang();
-	private final    Xofulltext_word_bounds word_bounds = new Xofulltext_word_bounds();
+	private final Srch_crt_parser parser = new Srch_crt_parser(Srch_crt_scanner_syms.Dflt);
+	private final Btrie_rv trv = new Btrie_rv();
+	private final Xofulltext_word_lang lang = new Xofulltext_word_lang();
+	private final Xofulltext_word_bounds word_bounds = new Xofulltext_word_bounds();
 
 	public byte[] Query() {return query;} private byte[] query;
 	public void Init(byte[] query, boolean case_match, boolean auto_wildcard_bgn, boolean auto_wildcard_end, byte wildchar_byte, byte not_byte) {

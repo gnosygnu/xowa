@@ -209,8 +209,8 @@ public class Scrib_lib_ustring__gsub__tst {
 		throw Err_.new_wo_type("expected failure");
 	}
 }
-class Mock_proc__recursive extends Mock_proc_stub {	private final    Mock_scrib_fxt fxt; private final    Scrib_lib lib; private final    Mock_proc__recursive inner;
-	private final    Bry_bfr bfr;
+class Mock_proc__recursive extends Mock_proc_stub {	private final Mock_scrib_fxt fxt; private final Scrib_lib lib; private final Mock_proc__recursive inner;
+	private final Bry_bfr bfr;
 	public Mock_proc__recursive(Mock_scrib_fxt fxt, Scrib_lib lib, Bry_bfr bfr, int id, Mock_proc__recursive inner) {super(id, "recur");
 		this.fxt = fxt; this.lib = lib; this.inner = inner;
 		this.bfr = bfr;
@@ -229,7 +229,7 @@ class Mock_proc__number extends Mock_proc_stub {	private int counter = 0;
 		return args;
 	}
 }
-class Mock_proc__empty extends Mock_proc_stub {	private final    String find, repl;
+class Mock_proc__empty extends Mock_proc_stub {	private final String find, repl;
 	public Mock_proc__empty(int id, String find, String repl) {super(id, "number");
 		this.find = find;
 		this.repl = repl;
@@ -239,7 +239,7 @@ class Mock_proc__empty extends Mock_proc_stub {	private final    String find, re
 		return String_.Eq(text, find) ? Keyval_.Ary(Keyval_.new_("0", repl)) : Keyval_.Ary_empty;
 	}
 }
-class Mock_proc__verify_args extends Mock_proc_stub {	private final    Object[][] expd_ary;
+class Mock_proc__verify_args extends Mock_proc_stub {	private final Object[][] expd_ary;
 	private int expd_idx = -1;
 	public Mock_proc__verify_args(int id, Object[]... expd_ary) {super(id, "number");
 		this.expd_ary = expd_ary;

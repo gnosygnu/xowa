@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.centrals; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
 import gplx.langs.mustaches.*;
 class Xobc_task_doc implements Mustache_doc_itm {
-	private final    boolean app_is_drd;
-	private final    String link_help;
+	private final boolean app_is_drd;
+	private final String link_help;
 	public Xobc_task_doc(boolean app_is_drd, String link_help) {
 		this.app_is_drd = app_is_drd; this.link_help = link_help;
 	}

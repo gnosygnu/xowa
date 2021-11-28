@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Php_parser_tst {		
-	@Before public void init() {fxt.Clear();} private final    Php_parser_fxt fxt = new Php_parser_fxt();
+	@Before public void init() {fxt.Clear();} private final Php_parser_fxt fxt = new Php_parser_fxt();
 	@Test public void Text()				{fxt.tst_tkns("text", fxt.tkn_txt(0, 4));		}
 	@Test public void Declaration_pass()	{fxt.tst_tkns("<?php", fxt.tkn_declaration());}
 	@Test public void Declaration_fail()	{fxt.tst_tkns("<?phpx", fxt.tkn_txt(0, 6));}

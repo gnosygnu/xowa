@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Lst_pfunc_lsth_tst {
-	private final    Lst_pfunc_lst_fxt fxt = new Lst_pfunc_lst_fxt();
-	private final    String src_str_dflt = String_.Concat_lines_nl_skip_last
+	private final Lst_pfunc_lst_fxt fxt = new Lst_pfunc_lst_fxt();
+	private final String src_str_dflt = String_.Concat_lines_nl_skip_last
 	( "txt_0"
 	, "== hdr_1 =="
 	, "txt_1"

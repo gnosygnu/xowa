@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.security.algos.jre; import gplx.*; import gplx.core.*; import gplx.core.security.*; import gplx.core.security.algos.*;
 import org.junit.*;
 public class Jre_hash_algo__md5__tst {	// REF: https://www.cosic.esat.kuleuven.be/nessie/testvectors/hash/md5/Md5-128.unverified.test-vectors
-	private final    Hash_algo__fxt fxt = new Hash_algo__fxt(Hash_algo_.New__md5());
+	private final Hash_algo__fxt fxt = new Hash_algo__fxt(Hash_algo_.New__md5());
 	@Test public void Empty()				{fxt.Test__hash("d41d8cd98f00b204e9800998ecf8427e", "");}
 	@Test public void a()					{fxt.Test__hash("0cc175b9c0f1b6a831c399e269772661", "a");}
 	@Test public void abc()				{fxt.Test__hash("900150983cd24fb0d6963f7d28e17f72", "abc");}

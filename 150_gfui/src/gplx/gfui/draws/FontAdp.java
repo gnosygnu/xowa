@@ -52,7 +52,7 @@ public class FontAdp implements Gfo_invk {
 	}	static final String Invk_name_ = "name_", Invk_size_ = "size_", Invk_style_ = "style_";
 	@Override public String toString() {return String_bldr_.new_().Add_kv("name", name).Add_kv_obj("size", size).Add_kv_obj("style", style).To_str();}
 
-	public static final    FontAdp NullPtr = null;
+	public static final FontAdp NullPtr = null;
 	public static FontAdp as_(Object obj) {return obj instanceof FontAdp ? (FontAdp)obj : null;}
 	public static FontAdp cast(Object obj) {try {return (FontAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, FontAdp.class, obj);}}
 	public static FontAdp new_(String name, float size, FontStyleAdp style) {

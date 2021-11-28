@@ -134,12 +134,12 @@ class Http_url_parser {
 	, Tid__popup_id = 2
 	, Tid__popup_mode = 3
 	;
-	private static final    byte[]
+	private static final byte[]
 	  Qarg__action__popup = Bry_.new_a7("popup")
 	, Qarg__popup_id      = Bry_.new_a7("popup_id")
 	, Qarg__popup_mode    = Bry_.new_a7("popup_mode")
 	;
-	private static final    Hash_adp_bry qarg_keys = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry qarg_keys = Hash_adp_bry.ci_a7()
 		.Add_bry_int(Xoa_url_.Qarg__action, Tid__action)
 		.Add_bry_int(Qarg__popup_id       , Tid__popup_id)
 		.Add_bry_int(Qarg__popup_mode     , Tid__popup_mode)

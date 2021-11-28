@@ -19,8 +19,8 @@ import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.p
 import gplx.xowa.files.*; import gplx.xowa.addons.bldrs.files.cmds.*; import gplx.xowa.addons.bldrs.files.dbs.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.domains.*;
 public class Xomp_lnki_temp_wkr implements Xop_file_logger {
-	private final    Xob_lnki_temp_tbl tbl;
-	private final    Xowe_wiki commons_wiki;
+	private final Xob_lnki_temp_tbl tbl;
+	private final Xowe_wiki commons_wiki;
 	private boolean ns_file_is_case_match_all = true;
 	public Xomp_lnki_temp_wkr(Xowe_wiki wiki, Db_conn wkr_conn) {
 		this.tbl = new Xob_lnki_temp_tbl(wkr_conn); wkr_conn.Meta_tbl_assert(tbl);

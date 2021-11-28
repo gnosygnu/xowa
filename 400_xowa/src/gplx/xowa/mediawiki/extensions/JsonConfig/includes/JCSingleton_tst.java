@@ -19,7 +19,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //	using gplx.xowa.mediawiki;
 //	using gplx.xowa.xtns.jsonConfigs.scribunto;
 //	public class JCSingleton_tst {
-//		private final    JCSingleton_fxt fxt = new JCSingleton_fxt();
+//		private final JCSingleton_fxt fxt = new JCSingleton_fxt();
 //		@Test  public void Get() {
 //			fxt.Init__store("en.wikipedia.org", "Page1"
 //			, Json_doc.Make_str_by_apos
@@ -47,8 +47,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //		}
 //	}
 //	class JCSingleton_fxt {
-//		private final    JCSingleton singleton;
-//		private final    Xomw_page_fetcher__mock store = new Xomw_page_fetcher__mock();
+//		private final JCSingleton singleton;
+//		private final Xomw_page_fetcher__mock store = new Xomw_page_fetcher__mock();
 //		public JCSingleton_fxt() {
 //			Jscfg_xtn_mgr xtn_mgr = new Jscfg_xtn_mgr();
 //			xtn_mgr.Init_xtn();

@@ -35,8 +35,8 @@ public class Sync_html_special implements Xow_special_page {
 	}
 
 	public static final String SPECIAL_KEY = "XowaSyncHtml";	// NOTE: needs to match lang.gfs
-	public static final    byte[] Display_ttl = Bry_.new_a7("Sync HTML");
+	public static final byte[] Display_ttl = Bry_.new_a7("Sync HTML");
 	public Xow_special_meta Special__meta() {return new Xow_special_meta(Xow_special_meta_.Src__mw, SPECIAL_KEY);}
-	public static final    Xow_special_page Prototype = new Sync_html_special();
+	public static final Xow_special_page Prototype = new Sync_html_special();
 	public Xow_special_page Special__clone() {return this;}
 }

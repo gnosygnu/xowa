@@ -42,7 +42,7 @@ public class Xobldr__fsdb_db__create_orig extends Xob_cmd__base {
 		conn.Exec_sql_plog_txn("orig_wkr.inserting orig direct"		, String_.Format(Sql_create_orig_direct, tbl_name, fld_status));
 		conn.Exec_sql_plog_txn("orig_wkr.inserting orig redirect"	, String_.Format(Sql_create_orig_redirect, tbl_name, fld_status));
 	}
-	private static final    String 
+	private static final String
 	  Sql_delete_wiki_orig = "DELETE FROM {0};"
 	, Sql_create_xfer_direct = String_.Concat_lines_nl
 	( "INSERT INTO {0} "
@@ -115,6 +115,6 @@ public class Xobldr__fsdb_db__create_orig extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "file.orig_reg";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__fsdb_db__create_orig(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__fsdb_db__create_orig(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__fsdb_db__create_orig(bldr, wiki);}
 }

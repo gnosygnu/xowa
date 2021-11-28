@@ -20,8 +20,8 @@ public class Xopg_redirect_itm {
 		this.ttl = ttl;
 		this.wikitext = wikitext;
 	}
-	public Xoa_url		Url()				{return url;} private final    Xoa_url url;					// EX: "en.wikipedia.org/wiki/A"
-	public Xoa_ttl		Ttl()				{return ttl;} private final    Xoa_ttl ttl;					// EX: "A"
-	public byte[]		Wikitext()			{return wikitext;} private final    byte[] wikitext;		// EX: "#REDIRECT [[A]]"
+	public Xoa_url		Url()				{return url;} private final Xoa_url url;					// EX: "en.wikipedia.org/wiki/A"
+	public Xoa_ttl		Ttl()				{return ttl;} private final Xoa_ttl ttl;					// EX: "A"
+	public byte[]		Wikitext()			{return wikitext;} private final byte[] wikitext;		// EX: "#REDIRECT [[A]]"
 	public boolean			By_wikitext()		{return wikitext != null;}									// true if by "#REDIRECT [[A]]"; false if by Special:Random, Special:Search, etc.; 
 }

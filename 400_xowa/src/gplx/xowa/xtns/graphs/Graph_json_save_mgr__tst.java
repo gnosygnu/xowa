@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.files.*; import gplx.xowa.parsers.*;
 import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
 public class Graph_json_save_mgr__tst {
-	private final    Graph_json_save_mgr__fxt fxt = new Graph_json_save_mgr__fxt();
+	private final Graph_json_save_mgr__fxt fxt = new Graph_json_save_mgr__fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test public void Xowa_file() {
 		fxt.Test__parse("a-{XOWA_ROOT}-z", "a-{XOWA_ROOT}{XOWA_ROOT}-z");
@@ -44,10 +44,10 @@ public class Graph_json_save_mgr__tst {
 	}
 }
 class Graph_json_save_mgr__fxt {
-	private final    Xop_fxt fxt = new Xop_fxt();
-	private final    Graph_json_save_mgr json_parser;
-	private final    Gfo_test_lnr_base json_parser_lnr = Gfo_test_lnr_base.New__keys("is_commons", "is_orig", "ttl");
-	private final    Gfo_test_err_mgr err_mgr = new Gfo_test_err_mgr();
+	private final Xop_fxt fxt = new Xop_fxt();
+	private final Graph_json_save_mgr json_parser;
+	private final Gfo_test_lnr_base json_parser_lnr = Gfo_test_lnr_base.New__keys("is_commons", "is_orig", "ttl");
+	private final Gfo_test_err_mgr err_mgr = new Gfo_test_err_mgr();
 	public Graph_json_save_mgr__fxt() {
 		json_parser = new Graph_json_save_mgr(fxt.App().Fsys_mgr());
 		json_parser.Test_lnr_(json_parser_lnr);
@@ -91,8 +91,8 @@ class Graph_json_save_mgr__fxt {
 	}
 }
 class Graph_save_mgr_itm_cbk implements Gfo_test_lnr_itm_cbk {
-	private final    Xop_fxt fxt;
-	private final    Xop_file_logger__mok file_logger;
+	private final Xop_fxt fxt;
+	private final Xop_file_logger__mok file_logger;
 	public Graph_save_mgr_itm_cbk(Xop_fxt fxt, Xop_file_logger__mok file_logger) {
 		this.fxt = fxt;
 		this.file_logger = file_logger;

@@ -21,7 +21,7 @@ public interface Select_in_cbk {
 	void Read_data(Db_rdr rdr);
 }
 class Select_in_wkr {
-	private final    byte[] sql_bgn;
+	private final byte[] sql_bgn;
 	public Select_in_wkr(byte[] sql_bgn) {this.sql_bgn = sql_bgn;}
 	public int Make_sql_or_null(Bry_bfr bfr, Select_in_cbk cbk, int bgn) {			
 		// read 50 at a time

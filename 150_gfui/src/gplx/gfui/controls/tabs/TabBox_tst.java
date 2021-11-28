@@ -117,7 +117,7 @@ class TabBoxFxt implements Gfo_invk {
 		if		(ctx.Match(k, OrderChangedReceived_cmd))	OrderChangedReceived(m);
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String OrderChangedReceived_cmd = "OrderChangedReceived";
+	}	public static final String OrderChangedReceived_cmd = "OrderChangedReceived";
 	TabBox tabBox;
 	public static TabBoxFxt new_() {
 		TabBoxFxt rv = new TabBoxFxt();

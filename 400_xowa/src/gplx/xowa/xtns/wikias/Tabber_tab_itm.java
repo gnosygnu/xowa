@@ -21,9 +21,9 @@ class Tabber_tab_itm {
 		this.Name = name;
 		this.Text = text;
 	}
-	public final    boolean Active;
-	public final    byte[] Name;
-	public final    byte[] Text;
+	public final boolean Active;
+	public final byte[] Name;
+	public final byte[] Text;
 	public static void Write(Bry_bfr bfr, byte[] id, Tabber_tab_itm[] ary) {
 		bfr.Add_str_a7("<div id=\"tabber-");
 		bfr.Add(id);

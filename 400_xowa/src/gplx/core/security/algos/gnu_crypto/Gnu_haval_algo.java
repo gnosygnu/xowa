@@ -17,7 +17,7 @@ package gplx.core.security.algos.gnu_crypto; import gplx.*; import gplx.core.*; 
 import gnu.crypto.hash.Haval;
 import gnu.crypto.hash.Tiger;
 public class Gnu_haval_algo implements Hash_algo {
-	private final    Gnu_haval_factory factory;
+	private final Gnu_haval_factory factory;
 	private final Haval haval;
 	public Gnu_haval_algo(Gnu_haval_factory factory, String key) {
 		this.factory = factory;

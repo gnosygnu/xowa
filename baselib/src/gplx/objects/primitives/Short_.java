@@ -16,5 +16,5 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.objects.primitives; import gplx.*; import gplx.objects.*;
 public class Short_ {
 	public static final String Cls_val_name = "short";
-	public static final    Class<?> Cls_ref_type = Short.class; 
+	public static final Class<?> Cls_ref_type = Short.class;
 }

@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 public class Wkr_stats_tbl implements Rls_able {
-	private final    String tbl_name;
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_wkr_id, fld_wkr_count, fld_wkr_size;
-	public final    Db_conn conn;
+	private final String tbl_name;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_wkr_id, fld_wkr_count, fld_wkr_size;
+	public final Db_conn conn;
 	public Wkr_stats_tbl(Db_conn conn) {
 		this.conn = conn; conn.Rls_reg(this);
 		this.tbl_name				= "wkr_stats";

@@ -21,7 +21,7 @@ import gplx.xowa.addons.bldrs.wmdumps.imglinks.*;
 import gplx.xowa.addons.wikis.fulltexts.indexers.bldrs.*;
 public class Xomp_parse_mgr {
 	private Gfo_countdown_latch latch;
-	public Xomp_parse_mgr_cfg Cfg() {return cfg;} private final    Xomp_parse_mgr_cfg cfg = new Xomp_parse_mgr_cfg();		
+	public Xomp_parse_mgr_cfg Cfg() {return cfg;} private final Xomp_parse_mgr_cfg cfg = new Xomp_parse_mgr_cfg();
 	public void Wkrs_done_add_1() {latch.Countdown();}
 	public void Run(Xowe_wiki wiki) {
 		// init db

@@ -19,8 +19,8 @@ import gplx.xowa.htmls.bridges.*;
 import gplx.xowa.wikis.caches.*;
 import gplx.xowa.guis.cbks.*;
 public class Xoa_util_svc {
-	private final    Xoa_app app;
-	private final    Xog_cbk_mgr cbk_mgr;
+	private final Xoa_app app;
+	private final Xog_cbk_mgr cbk_mgr;
 	public Xoa_util_svc(Xoa_app app) {
 		this.app = app;
 		this.cbk_mgr = app.Gui__cbk_mgr();

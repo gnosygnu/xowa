@@ -17,7 +17,7 @@ package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*; import gplx.xowa.
 import gplx.dbs.*;
 import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*; import gplx.xowa.addons.apps.cfgs.enums.*;
 public class Xocfg_cache_mgr {
-	private final    Hash_adp grps = Hash_adp_.New();
+	private final Hash_adp grps = Hash_adp_.New();
 	public Xocfg_cache_mgr() {
 		this.db_app = new Xocfg_db_app(Db_conn_.Noop);
 		this.db_usr = new Xocfg_db_usr(db_app, Db_conn_.Noop);

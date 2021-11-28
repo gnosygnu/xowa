@@ -17,7 +17,7 @@ package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.langs.jsons.*;
 public class Gfobj_rdr__json_tst {
-	private final    Gfobj_wtr__json_fxt fxt = new Gfobj_wtr__json_fxt();
+	private final Gfobj_wtr__json_fxt fxt = new Gfobj_wtr__json_fxt();
 	@Test 	public void Type() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{ 'k1':true"

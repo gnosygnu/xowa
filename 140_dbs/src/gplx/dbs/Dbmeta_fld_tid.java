@@ -19,11 +19,11 @@ public class Dbmeta_fld_tid {
 	public Dbmeta_fld_tid(int tid_ansi, int tid_sqlite, byte[] name, int len_1, int len_2) {
 		this.tid_ansi = tid_ansi; this.tid_sqlite = tid_sqlite; this.name = name; this.len_1 = len_1; this.len_2 = len_2;
 	}
-	public int Tid_ansi()	{return tid_ansi;} private final    int tid_ansi;
-	public int Tid_sqlite() {return tid_sqlite;} private final    int tid_sqlite;
-	public byte[] Name()	{return name;} private final    byte[] name;
-	public int Len_1()		{return len_1;} private final    int len_1;
-	public int Len_2()		{return len_2;} private final    int len_2;
+	public int Tid_ansi()	{return tid_ansi;} private final int tid_ansi;
+	public int Tid_sqlite() {return tid_sqlite;} private final int tid_sqlite;
+	public byte[] Name()	{return name;} private final byte[] name;
+	public int Len_1()		{return len_1;} private final int len_1;
+	public int Len_2()		{return len_2;} private final int len_2;
 	public boolean Eq(Dbmeta_fld_tid comp) {
 		return	tid_ansi == comp.tid_ansi
 			&&	tid_sqlite == comp.tid_sqlite
@@ -33,7 +33,7 @@ public class Dbmeta_fld_tid {
 	}
 
 	public static final int Tid__bool = 0, Tid__byte = 1, Tid__short = 2, Tid__int = 3, Tid__long = 4, Tid__float = 5, Tid__double = 6, Tid__str = 7, Tid__text = 8, Tid__bry = 9, Tid__decimal = 10, Tid__date = 11;
-	public static final    Dbmeta_fld_tid 
+	public static final Dbmeta_fld_tid
 	  Itm__byte			= new Dbmeta_fld_tid(Dbmeta_fld_tid.Tid__byte		, Sqlite_tid.Tid_int		, Bry_.new_a7("tinyint")	, -1, -1)
 	, Itm__short		= new Dbmeta_fld_tid(Dbmeta_fld_tid.Tid__short		, Sqlite_tid.Tid_int		, Bry_.new_a7("smallint")	, -1, -1)
 	, Itm__int			= new Dbmeta_fld_tid(Dbmeta_fld_tid.Tid__int		, Sqlite_tid.Tid_int		, Bry_.new_a7("integer")	, -1, -1)

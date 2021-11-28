@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.cmds.diffs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_diff_build_cmd implements Xob_cmd {
-	private final    Xob_bldr bldr; private final    Xowe_wiki wiki;
+	private final Xob_bldr bldr; private final Xowe_wiki wiki;
 	private String prev_url, curr_url, diff_url; private int commit_interval;
 	private int[] db_ids = Int_ary_.Empty; private String bld_name = "all";
 	public Xob_diff_build_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki;}

@@ -20,7 +20,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; 
 	private Xoh_head_itm__base[] itms; private int itms_len;
 	private Xoh_head_wtr wtr = new Xoh_head_wtr();
-	private final    Xoh_head_wkr
+	private final Xoh_head_wkr
 	  list__css_include			= new Xoh_head_wkr()
 	, list__css_text			= new Xoh_head_wkr()
 	, list__js_include			= new Xoh_head_wkr()
@@ -35,28 +35,28 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		, itm__dbui, itm__pgbnr, itm__tabber, itm__page_cfg, itm__css_dynamic
 		);
 	}
-	public Xoh_head_itm__css					Itm__css() {return itm__css;} private final    Xoh_head_itm__css itm__css = new Xoh_head_itm__css();
-	public Xoh_head_itm__globals				Itm__globals() {return itm__globals;} private final    Xoh_head_itm__globals itm__globals = new Xoh_head_itm__globals();
-	public Xoh_head_itm__xo_elem				Itm__xo_elem() {return itm__xo_elem;} private final    Xoh_head_itm__xo_elem itm__xo_elem = new Xoh_head_itm__xo_elem();
-	public Xoh_head_itm__server					Itm__server() {return itm__server;} private final    Xoh_head_itm__server itm__server = new Xoh_head_itm__server();
-	public Xoh_head_itm__popups					Itm__popups() {return itm__popups;} private final    Xoh_head_itm__popups itm__popups = new Xoh_head_itm__popups();
-	public Xoh_head_itm__toc					Itm__toc() {return itm__toc;} private final    Xoh_head_itm__toc itm__toc = new Xoh_head_itm__toc();
-	public Xoh_head_itm__collapsible			Itm__collapsible() {return itm__collapsible;} private final    Xoh_head_itm__collapsible itm__collapsible = new Xoh_head_itm__collapsible();
-	public Xoh_head_itm__navframe				Itm__navframe() {return itm__navframe;} private final    Xoh_head_itm__navframe itm__navframe = new Xoh_head_itm__navframe();
-	public Xoh_head_itm__top_icon				Itm__top_icon() {return itm__top_icon;} private final    Xoh_head_itm__top_icon itm__top_icon = new Xoh_head_itm__top_icon();
-	public Xoh_head_itm__gallery				Itm__gallery() {return itm__gallery;} private final    Xoh_head_itm__gallery itm__gallery = new Xoh_head_itm__gallery();
-	public Xoh_head_itm__gallery_styles			Itm__gallery_styles() {return itm__gallery_styles;} private final    Xoh_head_itm__gallery_styles itm__gallery_styles = new Xoh_head_itm__gallery_styles();
-	public Xoh_head_itm__title_rewrite			Itm__title_rewrite() {return itm__title_rewrite;} private final    Xoh_head_itm__title_rewrite itm__title_rewrite = new Xoh_head_itm__title_rewrite();
-	public Xoh_head_itm__mathjax				Itm__mathjax() {return itm__mathjax;} private final    Xoh_head_itm__mathjax itm__mathjax = new Xoh_head_itm__mathjax();
-	public Xoh_head_itm__hiero					Itm__hiero() {return itm__hiero;} private final    Xoh_head_itm__hiero itm__hiero = new Xoh_head_itm__hiero();
-	public Xoh_head_itm__graph					Itm__graph() {return itm__graph;} private final    Xoh_head_itm__graph itm__graph = new Xoh_head_itm__graph();
-	public Xoh_head_itm__timeline				Itm__timeline() {return itm__timeline;} private final    Xoh_head_itm__timeline itm__timeline = new Xoh_head_itm__timeline();
-	public Xoh_head_itm__search_suggest			Itm__search_suggest() {return itm__search_suggest;} private final    Xoh_head_itm__search_suggest itm__search_suggest = new Xoh_head_itm__search_suggest();
-	public Xoh_head_itm__dbui					Itm__dbui() {return itm__dbui;} private final    Xoh_head_itm__dbui itm__dbui = new Xoh_head_itm__dbui();
-	public Xoh_head_itm__pgbnr					Itm__pgbnr() {return itm__pgbnr;} private final    Xoh_head_itm__pgbnr itm__pgbnr = new Xoh_head_itm__pgbnr();
-	public Xoh_head_itm__tabber					Itm__tabber() {return itm__tabber;} private final    Xoh_head_itm__tabber itm__tabber = new Xoh_head_itm__tabber();
-	public Xoh_head_itm__page_cfg				Itm__page_cfg() {return itm__page_cfg;} private final    Xoh_head_itm__page_cfg itm__page_cfg = new Xoh_head_itm__page_cfg();
-	public Xoh_head_itm__css_dynamic            Itm__css_dynamic() {return itm__css_dynamic;} private final    Xoh_head_itm__css_dynamic itm__css_dynamic = new Xoh_head_itm__css_dynamic();
+	public Xoh_head_itm__css					Itm__css() {return itm__css;} private final Xoh_head_itm__css itm__css = new Xoh_head_itm__css();
+	public Xoh_head_itm__globals				Itm__globals() {return itm__globals;} private final Xoh_head_itm__globals itm__globals = new Xoh_head_itm__globals();
+	public Xoh_head_itm__xo_elem				Itm__xo_elem() {return itm__xo_elem;} private final Xoh_head_itm__xo_elem itm__xo_elem = new Xoh_head_itm__xo_elem();
+	public Xoh_head_itm__server					Itm__server() {return itm__server;} private final Xoh_head_itm__server itm__server = new Xoh_head_itm__server();
+	public Xoh_head_itm__popups					Itm__popups() {return itm__popups;} private final Xoh_head_itm__popups itm__popups = new Xoh_head_itm__popups();
+	public Xoh_head_itm__toc					Itm__toc() {return itm__toc;} private final Xoh_head_itm__toc itm__toc = new Xoh_head_itm__toc();
+	public Xoh_head_itm__collapsible			Itm__collapsible() {return itm__collapsible;} private final Xoh_head_itm__collapsible itm__collapsible = new Xoh_head_itm__collapsible();
+	public Xoh_head_itm__navframe				Itm__navframe() {return itm__navframe;} private final Xoh_head_itm__navframe itm__navframe = new Xoh_head_itm__navframe();
+	public Xoh_head_itm__top_icon				Itm__top_icon() {return itm__top_icon;} private final Xoh_head_itm__top_icon itm__top_icon = new Xoh_head_itm__top_icon();
+	public Xoh_head_itm__gallery				Itm__gallery() {return itm__gallery;} private final Xoh_head_itm__gallery itm__gallery = new Xoh_head_itm__gallery();
+	public Xoh_head_itm__gallery_styles			Itm__gallery_styles() {return itm__gallery_styles;} private final Xoh_head_itm__gallery_styles itm__gallery_styles = new Xoh_head_itm__gallery_styles();
+	public Xoh_head_itm__title_rewrite			Itm__title_rewrite() {return itm__title_rewrite;} private final Xoh_head_itm__title_rewrite itm__title_rewrite = new Xoh_head_itm__title_rewrite();
+	public Xoh_head_itm__mathjax				Itm__mathjax() {return itm__mathjax;} private final Xoh_head_itm__mathjax itm__mathjax = new Xoh_head_itm__mathjax();
+	public Xoh_head_itm__hiero					Itm__hiero() {return itm__hiero;} private final Xoh_head_itm__hiero itm__hiero = new Xoh_head_itm__hiero();
+	public Xoh_head_itm__graph					Itm__graph() {return itm__graph;} private final Xoh_head_itm__graph itm__graph = new Xoh_head_itm__graph();
+	public Xoh_head_itm__timeline				Itm__timeline() {return itm__timeline;} private final Xoh_head_itm__timeline itm__timeline = new Xoh_head_itm__timeline();
+	public Xoh_head_itm__search_suggest			Itm__search_suggest() {return itm__search_suggest;} private final Xoh_head_itm__search_suggest itm__search_suggest = new Xoh_head_itm__search_suggest();
+	public Xoh_head_itm__dbui					Itm__dbui() {return itm__dbui;} private final Xoh_head_itm__dbui itm__dbui = new Xoh_head_itm__dbui();
+	public Xoh_head_itm__pgbnr					Itm__pgbnr() {return itm__pgbnr;} private final Xoh_head_itm__pgbnr itm__pgbnr = new Xoh_head_itm__pgbnr();
+	public Xoh_head_itm__tabber					Itm__tabber() {return itm__tabber;} private final Xoh_head_itm__tabber itm__tabber = new Xoh_head_itm__tabber();
+	public Xoh_head_itm__page_cfg				Itm__page_cfg() {return itm__page_cfg;} private final Xoh_head_itm__page_cfg itm__page_cfg = new Xoh_head_itm__page_cfg();
+	public Xoh_head_itm__css_dynamic            Itm__css_dynamic() {return itm__css_dynamic;} private final Xoh_head_itm__css_dynamic itm__css_dynamic = new Xoh_head_itm__css_dynamic();
 	public Xoh_head_mgr Init(Xoae_app app, Xowe_wiki wiki, Xoae_page page) {
 		this.app = app; this.wiki = wiki; this.page = page;
 		return this;
@@ -145,7 +145,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 		wtr.Indent_del();
 		wtr.Term();
 	}
-	private static final    byte[]
+	private static final byte[]
 	  Js__window_onload__bgn = Bry_.new_a7("window.onload = function() {")
 	, Js__window_onload__end = Bry_.new_a7("};")
 	;
@@ -178,7 +178,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 	}
 }
 class Xoh_head_wkr {
-	private final    List_adp list = List_adp_.New_w_size(Xoh_head_itm__base.Idx__max);
+	private final List_adp list = List_adp_.New_w_size(Xoh_head_itm__base.Idx__max);
 	public int Len() {return list.Count();}
 	public void Clear() {list.Clear();}
 	public void Add(Xoh_head_itm__base itm) {list.Add(itm);}

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Http_server_page__tst {
-	private final    Http_server_page__fxt fxt = new Http_server_page__fxt();
+	private final Http_server_page__fxt fxt = new Http_server_page__fxt();
 	@Test  public void Xwiki() {
 		fxt.Init__xwiki("en.wikipedia.org", "it", "it.wikipedia.org");
 		fxt.Test__make_url(false, "en.wikipedia.org", "it:Roma", "");
@@ -24,8 +24,8 @@ public class Http_server_page__tst {
 	}
 }
 class Http_server_page__fxt {
-	private final    Xop_fxt fxt;
-	private final    Http_server_page page;
+	private final Xop_fxt fxt;
+	private final Http_server_page page;
 	public Http_server_page__fxt() {
 		this.fxt = new Xop_fxt();
 		this.page = new Http_server_page(fxt.App());

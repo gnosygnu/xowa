@@ -17,7 +17,7 @@ package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.core.btries.*;
 public class Xop_parser_tst {
-	private final    Xop_parser_fxt fxt = new Xop_parser_fxt();
+	private final Xop_parser_fxt fxt = new Xop_parser_fxt();
 	@Test public void Parse_to_src_end() {// if empty array, return 0, else IndexError; PAGE:commons.wikimedia.org/wiki/File:England_in_the_UK_and_Europe.svg; ISSUE#:668; DATE:2020-02-17
 		fxt.Test__Parse_to_src_end("", 0, Bool_.Y, 0);
 	}

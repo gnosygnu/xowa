@@ -21,11 +21,11 @@ public class Xopage_html_data {
 		this.body = body;
 	}
 	public byte[] Display_ttl()			{return display_ttl;} private byte[] display_ttl;
-	public byte[] Body()				{return body;} private final    byte[] body;
+	public byte[] Body()				{return body;} private final byte[] body;
 	public boolean			Cbk_enabled()	{return cbk_enabled;} private boolean cbk_enabled; public void Cbk_enabled_y_() {this.cbk_enabled = true;}
 	public boolean			Js_enabled()    {return js_enabled;} private boolean js_enabled; public void Js_enabled_y_() {this.js_enabled = true;}
-	public Xopg_tag_mgr Head_tags()		{return head_tags;} private final    Xopg_tag_mgr head_tags = new Xopg_tag_mgr(Bool_.Y);
-	public Xopg_tag_mgr Tail_tags()		{return tail_tags;} private final    Xopg_tag_mgr tail_tags = new Xopg_tag_mgr(Bool_.N);
+	public Xopg_tag_mgr Head_tags()		{return head_tags;} private final Xopg_tag_mgr head_tags = new Xopg_tag_mgr(Bool_.Y);
+	public Xopg_tag_mgr Tail_tags()		{return tail_tags;} private final Xopg_tag_mgr tail_tags = new Xopg_tag_mgr(Bool_.N);
 
 	public void Apply(Xoa_page page) {
 		Xopg_tag_wtr_.Add__tab_uid	(head_tags, page.Page_guid());

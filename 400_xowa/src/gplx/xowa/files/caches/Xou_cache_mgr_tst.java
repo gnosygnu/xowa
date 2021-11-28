@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import org.junit.*; import gplx.dbs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 public class Xou_cache_mgr_tst {
-	@Before public void init() {fxt.Clear();} private final    Xou_cache_mgr_fxt fxt = new Xou_cache_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final Xou_cache_mgr_fxt fxt = new Xou_cache_mgr_fxt();
 	@Test  public void Update() {
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		fxt.Exec_update(itm_1);

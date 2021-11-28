@@ -34,9 +34,9 @@ import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.pages.*;
 import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
 public class Http_server_mgr implements Gfo_invk {
-	private final    Object thread_lock = new Object();
-	private final    Gfo_usr_dlg usr_dlg;
-	private final    Http_server_socket wkr;
+	private final Object thread_lock = new Object();
+	private final Gfo_usr_dlg usr_dlg;
+	private final Http_server_socket wkr;
 	private byte retrieve_mode = File_retrieve_mode.Mode_wait;
 	private boolean running = true;
 	public Http_server_mgr(Xoae_app app) {
@@ -45,10 +45,10 @@ public class Http_server_mgr implements Gfo_invk {
 		this.usr_dlg = app.Usr_dlg();
 		this.request_parser = new Http_request_parser(server_wtr, false);
 	}
-	public Xoae_app App() {return app;} private final    Xoae_app app;
-	public Http_server_wtr Server_wtr() {return server_wtr;} private final    Http_server_wtr server_wtr = Http_server_wtr_.New__console();
-	public Http_request_parser Request_parser() {return request_parser;} private final    Http_request_parser request_parser;
-	public Gfo_url_encoder Encoder() {return encoder;} private final    Gfo_url_encoder encoder = Gfo_url_encoder_.New__http_url().Make();
+	public Xoae_app App() {return app;} private final Xoae_app app;
+	public Http_server_wtr Server_wtr() {return server_wtr;} private final Http_server_wtr server_wtr = Http_server_wtr_.New__console();
+	public Http_request_parser Request_parser() {return request_parser;} private final Http_request_parser request_parser;
+	public Gfo_url_encoder Encoder() {return encoder;} private final Gfo_url_encoder encoder = Gfo_url_encoder_.New__http_url().Make();
 	public int Port() {return port;} 
 	public Http_server_mgr Port_(int v, boolean caller_is_cfg) {
 		if (	caller_is_cfg
@@ -59,8 +59,8 @@ public class Http_server_mgr implements Gfo_invk {
 		port = v; 
 		return this;
 	} private int port = Port__default;
-	public Http_server_wkr_pool Wkr_pool() {return wkr_pool;} private final    Http_server_wkr_pool wkr_pool = new Http_server_wkr_pool();
-	public Int_pool Uid_pool() {return uid_pool;} private final    Int_pool uid_pool = new Int_pool();
+	public Http_server_wkr_pool Wkr_pool() {return wkr_pool;} private final Http_server_wkr_pool wkr_pool = new Http_server_wkr_pool();
+	public Int_pool Uid_pool() {return uid_pool;} private final Int_pool uid_pool = new Int_pool();
 	public byte[] Home() {return home;} public void Home_(byte[] v) {home = Bry_.Add(Byte_ascii.Slash_bry, v);} private byte[] home = Bry_.new_a7("/home/wiki/Main_Page");
 	private void Running_(boolean val) {
 		if (val) {

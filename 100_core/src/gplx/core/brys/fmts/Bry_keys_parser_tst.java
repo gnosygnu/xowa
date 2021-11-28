@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.brys.fmts; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 import org.junit.*;
 public class Bry_keys_parser_tst {
-	private final    Bry_keys_parser_fxt fxt = new Bry_keys_parser_fxt();
+	private final Bry_keys_parser_fxt fxt = new Bry_keys_parser_fxt();
 	@Test public void None()			{fxt.Test("a");}
 	@Test public void One()			{fxt.Test("~{a}"				, "a");}
 	@Test public void Many()			{fxt.Test("~{a}b~{c}d~{e}"		, "a", "c", "e");}

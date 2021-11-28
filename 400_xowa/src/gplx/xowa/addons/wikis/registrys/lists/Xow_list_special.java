@@ -32,11 +32,11 @@ public class Xow_list_special implements Xow_special_page {
 
 	static class Enm_cmd {//#*nested
 		public static final int Tid__add = 0;
-		public static final    Gfo_qarg_enum_itm Itm = new Gfo_qarg_enum_itm("cmd").Add("add", Tid__add);
+		public static final Gfo_qarg_enum_itm Itm = new Gfo_qarg_enum_itm("cmd").Add("add", Tid__add);
 	}
 
 	Xow_list_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
-	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
+	public Xow_special_meta Special__meta()		{return special__meta;} private final Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
-	public static final    Xow_special_page Prototype = new Xow_list_special(Xow_special_meta.New_xo("XowaWikiList", "Wikis", "XowaWikis"));
+	public static final Xow_special_page Prototype = new Xow_list_special(Xow_special_meta.New_xo("XowaWikiList", "Wikis", "XowaWikis"));
 }

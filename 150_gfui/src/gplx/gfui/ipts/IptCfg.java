@@ -79,10 +79,10 @@ class IptCfg_base implements IptCfg {
 			Set(bndKey, gplx.gfml.GfmlDataNde.XtoMsgNoRoot(cmd), IptArg_.parse_ary_(iptStr));
 		}
 		return this;
-	}	public static final    String Invk_Add = "Add", Invk_set = "set";
+	}	public static final String Invk_Add = "Add", Invk_set = "set";
 	public IptCfg_base(String cfgKey) {this.cfgKey = cfgKey;}
 	Ordered_hash hash = Ordered_hash_.New();
-	public Object NewByKey(Object o) {return new IptCfg_base((String)o);} @gplx.Internal protected static final    IptCfg HashProto = new IptCfg_base(); @gplx.Internal protected IptCfg_base() {}
+	public Object NewByKey(Object o) {return new IptCfg_base((String)o);} @gplx.Internal protected static final IptCfg HashProto = new IptCfg_base(); @gplx.Internal protected IptCfg_base() {}
 }
 class IptCfgPtr {
 	public String CfgKey() {return cfgKey;} private String cfgKey;

@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
 public class Xopg_tag_mgr {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	public Xopg_tag_mgr(boolean pos_is_head) {this.pos_is_head = pos_is_head;}
-	public boolean Pos_is_head() {return pos_is_head;} private final    boolean pos_is_head;
+	public boolean Pos_is_head() {return pos_is_head;} private final boolean pos_is_head;
 	public int Len() {return list.Len();}
 	public void Clear() {list.Clear();}
 	public Xopg_tag_itm Get_at(int i) {return (Xopg_tag_itm)list.Get_at(i);}

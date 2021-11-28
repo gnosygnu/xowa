@@ -142,7 +142,7 @@ public class Xow_abrv_wm_ {
 			default:								throw Err_.new_unhandled(tid);
 		}
 	}
-	private static final    Btrie_bwd_mgr bry_trie = Init_trie();
+	private static final Btrie_bwd_mgr bry_trie = Init_trie();
 	private static Hash_adp int_hash;
 	private static Btrie_bwd_mgr Init_trie() {
 		int_hash = Hash_adp_.New();
@@ -182,7 +182,7 @@ class Xow_abrv_wm_override {
 		Object o = lang_hash.Get_by_bry(domain_bry);
 		return o == null ? null : (byte[])o;
 	}
-	private static final    Hash_adp_bry itm_hash = itm_hash__make();
+	private static final Hash_adp_bry itm_hash = itm_hash__make();
 	private static Hash_adp_bry lang_hash;
 	private static Hash_adp_bry itm_hash__make() {
 		Hash_adp_bry rv = Hash_adp_bry.cs();

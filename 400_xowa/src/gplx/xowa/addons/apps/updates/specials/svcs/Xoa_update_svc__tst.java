@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.updates.specials.svcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*; import gplx.xowa.addons.apps.updates.specials.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.envs.*;
 public class Xoa_update_svc__tst {
-	private final    Xoa_update_svc__fxt fxt = new Xoa_update_svc__fxt();
+	private final Xoa_update_svc__fxt fxt = new Xoa_update_svc__fxt();
 	@Test 	public void Restart_cmd() {
 		Io_url jar_fil = Io_url_.new_dir_("/home/gnosygnu/xowa/xowa.jar");
 		fxt.Test__restart_cmd("manual"	, jar_fil, Op_sys.Tid_lnx, Op_sys.Bitness_64, "manual");

@@ -17,7 +17,7 @@ package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.pages.*;
 public class Xoh_page_wtr_mgr implements Gfo_invk {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255), html_bfr = Bry_bfr_.Reset(Io_mgr.Len_mb);
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255), html_bfr = Bry_bfr_.Reset(Io_mgr.Len_mb);
 	private Xoh_page_wtr_wkr edit_wtr, html_wtr, read_wtr;
 	public Xoh_page_wtr_mgr(boolean html_capable) {
 		this.html_capable = html_capable;
@@ -86,7 +86,7 @@ public class Xoh_page_wtr_mgr implements Gfo_invk {
 	,	"  </a>"
 	),	"src_full_db");
 	public static final String Invk_page_read_ = "page_read_", Invk_page_edit_ = "page_edit_", Invk_page_html_ = "page_html_", Invk_xowa_div_edit_rename_ = "xowa_div_edit_rename_";
-	private static final    String[] Fmtr_keys = new String[] 
+	private static final String[] Fmtr_keys = new String[]
 	{ "app_root_dir", "app_version", "app_build_date", "xowa_mode_is_server"
 	, "page_id", "page_ttl_full", "page_name", "page_heading", "page_modified_on_msg"
 	, "html_css_common_path", "html_css_wiki_path", "html_css_night_tag", "xowa_head"

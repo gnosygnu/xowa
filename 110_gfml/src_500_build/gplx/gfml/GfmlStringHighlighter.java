@@ -97,5 +97,5 @@ class GfmlStringHighlighterMarker {
 	public int Pos() {return pos;} public GfmlStringHighlighterMarker Pos_(int v) {pos = v; return this;} int pos;
 	public char Sym() {return sym;} public GfmlStringHighlighterMarker Sym_(char v) {sym = v; return this;} char sym;
 	public String Msg() {return msg;} public GfmlStringHighlighterMarker Msg_(String v) {msg = v; return this;} private String msg;
-	public static final    GfmlStringHighlighterMarker Null = new GfmlStringHighlighterMarker().Pos_(-1);
+	public static final GfmlStringHighlighterMarker Null = new GfmlStringHighlighterMarker().Pos_(-1);
 }

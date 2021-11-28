@@ -236,6 +236,6 @@ public class Scrib_lib_wikibase_srl {
 			}
 	}
 	public static final String Key_type = "type", Key_value = "value";
-	private static final    Keyval[] Datavalue_somevalue = Keyval_.Ary_empty;	// changed to not return value-node; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 // new Keyval[] {Keyval_.new_(Key_type, ""), Keyval_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07
-	private static final    Keyval[] Datavalue_novalue = Keyval_.Ary_empty;
+	private static final Keyval[] Datavalue_somevalue = Keyval_.Ary_empty;	// changed to not return value-node; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 // new Keyval[] {Keyval_.new_(Key_type, ""), Keyval_.new_(Key_value, "")};	// NOTE: must return ""; null fails; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07
+	private static final Keyval[] Datavalue_novalue = Keyval_.Ary_empty;
 }

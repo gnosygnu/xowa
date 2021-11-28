@@ -36,7 +36,7 @@ public class Xosearch_fulltext_addon implements Xoax_addon_itm, Xoax_addon_itm__
 		, gplx.xowa.addons.wikis.fulltexts.indexers.svcs.Xofulltext_indexer_bridge.Prototype
 		};
 	}
-	public Xofulltext_cache_mgr Cache_mgr() {return cache_mgr;} private final    Xofulltext_cache_mgr cache_mgr = new Xofulltext_cache_mgr();
+	public Xofulltext_cache_mgr Cache_mgr() {return cache_mgr;} private final Xofulltext_cache_mgr cache_mgr = new Xofulltext_cache_mgr();
 	public static Xosearch_fulltext_addon Get_by_app(Xoa_app app) {
 		return (Xosearch_fulltext_addon)app.Addon_mgr().Itms__get_or_null(ADDON__KEY);
 	}

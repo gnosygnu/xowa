@@ -26,13 +26,13 @@ public class Xowm_revn_data {
 		this.revn_time = revn_time;
 		this.revn_text = revn_text;
 	}
-	public byte[] Wiki_domain() {return wiki_domain;} private final    byte[] wiki_domain;
+	public byte[] Wiki_domain() {return wiki_domain;} private final byte[] wiki_domain;
 
-	public int Page_id() {return page_id;} private final    int page_id;
-	public int Page_ns() {return page_ns;} private final    int page_ns;
-	public byte[] Page_ttl() {return page_ttl;} private final    byte[] page_ttl;
+	public int Page_id() {return page_id;} private final int page_id;
+	public int Page_ns() {return page_ns;} private final int page_ns;
+	public byte[] Page_ttl() {return page_ttl;} private final byte[] page_ttl;
 
-	public int Revn_id() {return revn_id;} private final    int revn_id;
-	public DateAdp Revn_time() {return revn_time;} private final    DateAdp revn_time;
-	public byte[] Revn_text() {return revn_text;} private final    byte[] revn_text;
+	public int Revn_id() {return revn_id;} private final int revn_id;
+	public DateAdp Revn_time() {return revn_time;} private final DateAdp revn_time;
+	public byte[] Revn_text() {return revn_text;} private final byte[] revn_text;
 }

@@ -22,9 +22,9 @@ class Dumpdiff_page_itm {
 		this.cur_db_id = cur_db_id;
 		this.prv_db_id = prv_db_id;
 	}
-	public int Page_id() {return page_id;} private final    int page_id;
-	public int Ns_id() {return ns_id;} private final    int ns_id;
-	public byte[] Ttl_bry() {return ttl_bry;} private final    byte[] ttl_bry;
-	public int Cur_db_id() {return cur_db_id;} private final    int cur_db_id;
-	public int Prv_db_id() {return prv_db_id;} private final    int prv_db_id;
+	public int Page_id() {return page_id;} private final int page_id;
+	public int Ns_id() {return ns_id;} private final int ns_id;
+	public byte[] Ttl_bry() {return ttl_bry;} private final byte[] ttl_bry;
+	public int Cur_db_id() {return cur_db_id;} private final int cur_db_id;
+	public int Prv_db_id() {return prv_db_id;} private final int prv_db_id;
 }

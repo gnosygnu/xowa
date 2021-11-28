@@ -31,5 +31,5 @@ public class Regx_group {
 		this.end = end;
 		this.val = val;
 	}
-	public static final    Regx_group[] Ary_empty = new Regx_group[0];
+	public static final Regx_group[] Ary_empty = new Regx_group[0];
 }

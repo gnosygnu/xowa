@@ -18,15 +18,15 @@ import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.
 import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.xowa.wikis.ttls.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
 public class Xoh_hzip_mgr implements Xoh_hzip_wkr {
-	private final    Xoh_hdoc_wkr hdoc_wkr = new Xoh_hdoc_wkr__hzip();
-	private final    Xoh_hdoc_parser hdoc_parser;
-	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Xoh_hzip_dict_.Escape);
-	private final    Xoh_page_bfr bfr_mgr = new Xoh_page_bfr();
+	private final Xoh_hdoc_wkr hdoc_wkr = new Xoh_hdoc_wkr__hzip();
+	private final Xoh_hdoc_parser hdoc_parser;
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Xoh_hzip_dict_.Escape);
+	private final Xoh_page_bfr bfr_mgr = new Xoh_page_bfr();
 	public Xoh_hzip_mgr() {this.hdoc_parser = new Xoh_hdoc_parser(hdoc_wkr);}
 	public int Tid() {return Xoh_hzip_dict_.Tid__lnke;}
 	public String Key() {return "root";}
 	public byte[] Hook() {return hook;} private byte[] hook;
-	public Xoh_hdoc_ctx Hctx() {return hctx;} private final    Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
+	public Xoh_hdoc_ctx Hctx() {return hctx;} private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
 	public void Init_by_app(Xoa_app app) {hctx.Init_by_app(app);}
 	public byte[] Encode_as_bry(Xoh_hzip_bfr bfr, Xow_wiki wiki, Xoh_page hpg, byte[] src) {Encode(bfr, wiki, hpg, src); return bfr.To_bry_and_clear();}
 	public Gfo_poolable_itm	Encode1(Xoh_hzip_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, boolean wkr_is_root, byte[] src, Object data_obj) {throw Err_.new_unimplemented();}

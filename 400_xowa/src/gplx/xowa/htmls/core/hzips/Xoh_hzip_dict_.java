@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Xoh_hzip_dict_ {
-	public static final    byte Escape = Byte_.By_int(27);				// SERIALIZED: 27=escape byte
-	public static final    byte[] Escape_bry = Bry_.New_by_ints(27);	// SERIALIZED
+	public static final byte Escape = Byte_.By_int(27);				// SERIALIZED: 27=escape byte
+	public static final byte[] Escape_bry = Bry_.New_by_ints(27);	// SERIALIZED
 	public static final int
 	  Tid__timeline			= -10
 	, Tid__gallery			= -11
@@ -36,7 +36,7 @@ public class Xoh_hzip_dict_ {
 	, Tid__media			= 12
 	, Tid__form             = 13
 	;
-	public static final    String
+	public static final String
 	  Key__timeline				= "timeline"
 	, Key__gallery				= "gallery"
 	, Key__escape				= "escape"

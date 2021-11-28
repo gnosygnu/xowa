@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
 public class Xoscript_doc {
-	private final    Bry_bfr bfr;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_bfr bfr;
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xoscript_doc(Bry_bfr bfr, Xoscript_page page_var) {
 		this.bfr = bfr;
 		this.page_var = page_var;
@@ -27,9 +27,9 @@ public class Xoscript_doc {
 		head_var.reg_marker("<!--XOWA.SCRIPT.HEAD.BOT-->", "bot", Xoscript_doc_sect_base.Pos__default);
 		tail_var.reg_marker("<!--XOWA.SCRIPT.TAIL.TOP-->", "top", Xoscript_doc_sect_base.Pos__default);
 	}
-	public Xoscript_page page() {return page_var;} private final    Xoscript_page page_var;
-	public Xoscript_doc_head head() {return head_var;} private final    Xoscript_doc_head head_var;
-	public Xoscript_doc_tail tail() {return tail_var;} private final    Xoscript_doc_tail tail_var;
+	public Xoscript_page page() {return page_var;} private final Xoscript_page page_var;
+	public Xoscript_doc_head head() {return head_var;} private final Xoscript_doc_head head_var;
+	public Xoscript_doc_tail tail() {return tail_var;} private final Xoscript_doc_tail tail_var;
 	public String html() {
 		if (html_var == null) {
 			html_var = bfr.To_str();

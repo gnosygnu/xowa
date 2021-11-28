@@ -21,8 +21,8 @@ public class Imap_part_shape implements Imap_part, Imap_link_owner {
 		this.shape_tid = shape_tid;
 		this.shape_pts = shape_pts;
 	}
-	public byte				Part_tid() {return shape_tid;} private final    byte shape_tid;
-	public Double_obj_val[] Shape_pts() {return shape_pts;} private final    Double_obj_val[] shape_pts;
+	public byte				Part_tid() {return shape_tid;} private final byte shape_tid;
+	public Double_obj_val[] Shape_pts() {return shape_pts;} private final Double_obj_val[] shape_pts;
 	public int				Link_tid() {return link_tid;} private int link_tid;
 	public Xop_tkn_itm		Link_tkn() {return link_tkn;} private Xop_tkn_itm link_tkn; public void	Link_tid_(int tid, Xop_tkn_itm tkn) {link_tid = tid; link_tkn = tkn;} 
 	public byte[]			Link_href() {return link_href;} private byte[] link_href;	public void Link_href_(byte[] v) {this.link_href = v;}

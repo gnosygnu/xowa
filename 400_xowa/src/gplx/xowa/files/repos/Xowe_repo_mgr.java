@@ -20,7 +20,7 @@ import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 	private Xofw_file_finder_rslt tmp_rslt = new Xofw_file_finder_rslt();
-	private Xowe_wiki wiki; private final    List_adp repos = List_adp_.New();
+	private Xowe_wiki wiki; private final List_adp repos = List_adp_.New();
 	public Xowe_repo_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		Xoae_app app = wiki.Appe();

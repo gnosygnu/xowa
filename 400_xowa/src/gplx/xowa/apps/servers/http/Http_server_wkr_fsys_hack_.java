@@ -16,11 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import gplx.core.btries.*;
 class Http_server_wkr_fsys_hack_ {
-	private static final    byte[]
+	private static final byte[]
 	  Bry__file_lhs = Bry_.new_a7("file:///")
 	, Bry__file_fsys = Bry_.new_a7("/fsys")
 	;
-	private static final    Btrie_slim_mgr xowa_path_segment_trie = Btrie_slim_mgr.ci_a7()
+	private static final Btrie_slim_mgr xowa_path_segment_trie = Btrie_slim_mgr.ci_a7()
 		.Add_many_str
 		( "/file/"              // most files     EX: file:////home/lnxusr/xowa/file/en.wikipedia.org/7/0/A.png
 		, "/user/anonymous/"    // wiki css;      EX: url(file:///c:/xowa/user/anonymous/wiki/www.wikidata.org/html/logo.png)

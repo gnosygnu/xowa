@@ -23,7 +23,7 @@ public class Dbmeta_idx_fld {
 			&&	Sort_tid == comp.Sort_tid;
 	}
 
-	public static final    Dbmeta_idx_fld[] Ary_empty = new Dbmeta_idx_fld[0];
+	public static final Dbmeta_idx_fld[] Ary_empty = new Dbmeta_idx_fld[0];
 	public static final int Sort_tid__none = 0, Sort_tid__asc = 1, Sort_tid__desc = 2;
 	public static boolean Ary_eq(Dbmeta_idx_fld[] lhs_ary, Dbmeta_idx_fld[] rhs_ary) {
 		int lhs_len = lhs_ary.length, rhs_len = rhs_ary.length;

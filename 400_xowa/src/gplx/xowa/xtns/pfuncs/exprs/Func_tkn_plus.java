@@ -26,5 +26,5 @@ class Func_tkn_plus extends Func_tkn_base {
 		val_stack.Push(lhs.Add(rhs));
 		return true;
 	}
-	public static final    Func_tkn_plus Instance = new Func_tkn_plus(); Func_tkn_plus() {}
+	public static final Func_tkn_plus Instance = new Func_tkn_plus(); Func_tkn_plus() {}
 }

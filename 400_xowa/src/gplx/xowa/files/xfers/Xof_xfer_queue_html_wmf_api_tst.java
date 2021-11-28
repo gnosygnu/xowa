@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import org.junit.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_queue_html_wmf_api_tst {
-	private final    Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
+	private final Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
 	@Before public void init()		{
 		gplx.core.ios.IoEngine_system.Web_access_enabled = true;	// NOTE: must set to true, else Wmf_api calls below will always return false
 		fxt.Clear(true); fxt.Src_commons_repo().Wmf_api_(true); fxt.Src_en_wiki_repo().Wmf_api_(true);

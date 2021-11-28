@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.controls.elems; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
 public class GfuiElemKeys {
-	public static final    String
+	public static final String
 	  ActionExec_cmd		= "actionExec"
 	, Focus_cmd				= "focus"
 	, Redraw_cmd			= "redraw"
@@ -24,7 +24,7 @@ public class GfuiElemKeys {
 	, IptRcvd_evt			= "IptRcvd_evt"
 	, Evt_menu_detected		= "menu_detected"
 	;
-	@gplx.Internal protected static final    String
+	@gplx.Internal protected static final String
 	  Key_set				= "Key_"
 	, TipText				= "TipText"
 	, TipText_				= "TipText_"

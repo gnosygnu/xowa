@@ -17,9 +17,9 @@ package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.dbs.*; import gplx.fsdb.data.*;
 public class Fsm_mnt_itm {
 	public Fsm_mnt_itm(int id, String name, String url_rel) {this.id = id; this.name = name; this.url_rel = url_rel;}
-	public int				Id() {return id;} private final    int id;
-	public String			Name() {return name;} private final    String name;
-	public String			Url_rel() {return url_rel;} private final    String url_rel;
+	public int				Id() {return id;} private final int id;
+	public String			Name() {return name;} private final String name;
+	public String			Url_rel() {return url_rel;} private final String url_rel;
 	public Fsm_atr_mgr		Atr_mgr() {return atr_mgr;} private Fsm_atr_mgr atr_mgr;
 	public Fsm_bin_mgr		Bin_mgr() {return bin_mgr;} private Fsm_bin_mgr bin_mgr;
 	public Fsm_cfg_mgr		Cfg_mgr() {return cfg_mgr;} private Fsm_cfg_mgr cfg_mgr;

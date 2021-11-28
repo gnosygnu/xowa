@@ -19,10 +19,10 @@ public class Xocfg_mgr implements Gfo_invk {
 	public Xocfg_mgr() {
 		this.dflt_mgr = new Xocfg_dflt_mgr(cache_mgr);
 	}
-	public Xocfg_cache_mgr Cache_mgr() {return cache_mgr;} private final    Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
-	public Xocfg_type_mgr Type_mgr() {return type_mgr;} private final    Xocfg_type_mgr type_mgr = new Xocfg_type_mgr();
-	public Xocfg_dflt_mgr Dflt_mgr() {return dflt_mgr;} private final    Xocfg_dflt_mgr dflt_mgr;
-	public Xocfg_exec_mgr Exec_mgr() {return exec_mgr;} private final    Xocfg_exec_mgr exec_mgr = new Xocfg_exec_mgr();
+	public Xocfg_cache_mgr Cache_mgr() {return cache_mgr;} private final Xocfg_cache_mgr cache_mgr = new Xocfg_cache_mgr();
+	public Xocfg_type_mgr Type_mgr() {return type_mgr;} private final Xocfg_type_mgr type_mgr = new Xocfg_type_mgr();
+	public Xocfg_dflt_mgr Dflt_mgr() {return dflt_mgr;} private final Xocfg_dflt_mgr dflt_mgr;
+	public Xocfg_exec_mgr Exec_mgr() {return exec_mgr;} private final Xocfg_exec_mgr exec_mgr = new Xocfg_exec_mgr();
 	public void Init_by_app(Xoa_app app) {
 		cache_mgr.Init_by_app
 		( gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app.New_conn(app)

@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 public class Xog_cmd_itm_ {
-	private static final    Ordered_hash regy = Ordered_hash_.New();	// NOTE: must be defined at top
-	public static final    String
+	private static final Ordered_hash regy = Ordered_hash_.New();	// NOTE: must be defined at top
+	public static final String
 	  Key_app_exit												= new_dflt_(Xog_ctg_itm_.Tid_app			, "xowa.app.exit")
 
 	, Key_nav_go_bwd											= new_dflt_(Xog_ctg_itm_.Tid_nav			, "xowa.nav.go_bwd")
@@ -172,7 +172,7 @@ public class Xog_cmd_itm_ {
 	public static Xog_cmd_itm Regy_get_at(int i) {return (Xog_cmd_itm)regy.Get_at(i);}
 	public static Xog_cmd_itm Regy_get_or_null(String key) {return (Xog_cmd_itm)regy.Get_by(key);}
 	public static void Regy_add(Xog_cmd_itm itm) {regy.Add(itm.Key(), itm);}
-	public static final    byte[]
+	public static final byte[]
 	  Msg_pre_api		= Bry_.new_a7("api-")
 	, Msg_pre_ctg		= Bry_.new_a7("api.ctg-")
 	, Msg_suf_name		= Bry_.new_a7("-name")

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_tkn_print_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Text()			{tst_Print("a ''b'' c [[d]] e");}
 	@Test public void Prm()			{tst_Print("{{{1}}}");}
 	@Test public void Prm_dflt()		{tst_Print("{{{1|a}}}");}

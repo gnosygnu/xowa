@@ -17,8 +17,8 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.pages; import gplx.*; import g
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.addons.apps.cfgs.specials.edits.services.*; import gplx.xowa.addons.apps.cfgs.specials.edits.objs.*;
 class Xocfg_edit_html extends Xow_special_wtr__base {
-	private final    Xocfg_edit_loader loader;
-	private final    String grp, ctx, lang;
+	private final Xocfg_edit_loader loader;
+	private final String grp, ctx, lang;
 	public Xocfg_edit_html(Xocfg_edit_loader loader, String grp, String ctx, String lang) {
 		this.loader = loader;
 		this.grp = grp;

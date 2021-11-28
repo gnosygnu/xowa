@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.ns_files; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*; import gplx.xowa.files.*;
 public class Xoh_ns_file_page_mgr_tst {
-	private final    Xoh_ns_file_page_mgr_fxt fxt = new Xoh_ns_file_page_mgr_fxt();
+	private final Xoh_ns_file_page_mgr_fxt fxt = new Xoh_ns_file_page_mgr_fxt();
 	@Before public void init() {fxt.Reset();}
 	@Test public void Image() {
 		fxt.Ttl_str_("Test.png").Html_src_("mem/file/cur.png").Html_orig_src_("mem/file/orig.png").Html_w_(300).Html_h_(200).Html_file_size_(100)
@@ -76,9 +76,9 @@ public class Xoh_ns_file_page_mgr_tst {
 	}
 }
 class Xoh_ns_file_page_mgr_fxt {
-	private final    Xoh_ns_file_page_mgr wkr = new Xoh_ns_file_page_mgr();
+	private final Xoh_ns_file_page_mgr wkr = new Xoh_ns_file_page_mgr();
 	private Xoae_app app; private Xowe_wiki wiki; private Xoh_file_page_wtr opt;
-	private final    Xof_file_itm file = new Xof_fsdb_itm(); private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Xof_file_itm file = new Xof_fsdb_itm(); private final Bry_bfr bfr = Bry_bfr_.New();
 	public Xoh_ns_file_page_mgr_fxt Ttl_str_(String v) {this.ttl_str = v; return this;} private String ttl_str;
 	public Xoh_ns_file_page_mgr_fxt Html_src_(String v) {this.html_src = v; return this;} private String html_src;
 	public Xoh_ns_file_page_mgr_fxt Html_orig_src_(String v) {this.html_orig_src = v; return this;} private String html_orig_src;
@@ -101,7 +101,7 @@ class Xoh_ns_file_page_mgr_fxt {
 		wkr.Bld_html(wiki, bfr, file, ttl, opt, Bry_.To_a7_bry(html_file_size, 0));	// TEST: must pass in elem_val b/c test only uses 2nd Bld_html while app uses 1st
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}
-	public static final    String Hdr = String_.Concat_lines_nl_skip_last("<br/>");
+	public static final String Hdr = String_.Concat_lines_nl_skip_last("<br/>");
 //		(	"<ul id=\"filetoc\">"
 //		,	"  <li>"
 //		,	"    <a href=\"#file\">"

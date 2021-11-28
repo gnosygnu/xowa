@@ -17,8 +17,8 @@ package gplx.xowa.mediawiki.includes.parsers.doubleunders; import gplx.*; import
 import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 public class Xomw_doubleunder_wkr {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_u8();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_u8();
+	private final Btrie_rv trv = new Btrie_rv();
 	private Xomw_doubleunder_data data;
 	public void Init_by_wiki(Xomw_doubleunder_data data, Xol_lang_itm lang) {
 		this.data = data;

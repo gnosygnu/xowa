@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Fsm_bin_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_uid, fld_url, fld_bin_len, fld_bin_max;
-	private final    Db_conn conn; private int mnt_id;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_uid, fld_url, fld_bin_len, fld_bin_max;
+	private final Db_conn conn; private int mnt_id;
 	public Fsm_bin_tbl(Db_conn conn, boolean schema_is_1, int mnt_id) {
 		this.conn = conn; this.mnt_id = mnt_id;
 		String fld_prefix = "";
@@ -35,7 +35,7 @@ public class Fsm_bin_tbl implements Db_tbl {
 			fld_bin_max = Dbmeta_fld_itm.Key_null;
 		}
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name; 
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(int id, String url_rel) {
 		conn.Stmt_insert(tbl_name, flds).Crt_int(fld_uid, id).Val_str(fld_url, url_rel).Val_long(fld_bin_len, 0).Val_long(fld_bin_max, 0).Exec_insert();

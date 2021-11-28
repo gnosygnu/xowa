@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
 import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Wdata_pf_property__parse__tst {
-	@Before public void init() {fxt.Init();} private final    Wdata_pf_property_data_fxt fxt = new Wdata_pf_property_data_fxt();
+	@Before public void init() {fxt.Init();} private final Wdata_pf_property_data_fxt fxt = new Wdata_pf_property_data_fxt();
 	@Test public void Q()				{fxt.Init().Run__parse("{{#property:p1|q=q2}}").Chk_q("q2");}
 	@Test public void Of()				{fxt.Init().Run__parse("{{#property:p1|of=Earth}}").Chk_of("Earth");}
 	@Test public void From()			{fxt.Init().Run__parse("{{#property:p1|from=p2}}").Chk_from("p2");}

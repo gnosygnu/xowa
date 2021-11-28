@@ -18,8 +18,8 @@ import gplx.dbs.*;
 import gplx.fsdb.meta.*; import gplx.fsdb.data.*;
 import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 class Split_meta_wkr__bin extends Split_meta_wkr_base {
-	private final    Fsm_bin_mgr bin_mgr;
-	private final    Split_rslt_wkr__bin rslt_wkr = new Split_rslt_wkr__bin();
+	private final Fsm_bin_mgr bin_mgr;
+	private final Split_rslt_wkr__bin rslt_wkr = new Split_rslt_wkr__bin();
 	private Fsd_bin_tbl tbl; private Db_stmt stmt;
 	public Split_meta_wkr__bin(Split_ctx ctx, Fsm_bin_mgr bin_mgr) {
 		this.bin_mgr = bin_mgr;

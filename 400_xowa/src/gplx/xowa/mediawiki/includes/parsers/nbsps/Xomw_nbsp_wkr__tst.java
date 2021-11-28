@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers.nbsps; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import org.junit.*;
 public class Xomw_nbsp_wkr__tst {
-	private final    Xomw_nbsp_wkr__fxt fxt = new Xomw_nbsp_wkr__fxt();
+	private final Xomw_nbsp_wkr__fxt fxt = new Xomw_nbsp_wkr__fxt();
 	@Test  public void Noop()                             {fxt.Test__parse("abc"                         , "abc");}
 	@Test  public void Space_lhs__colon()                 {fxt.Test__parse("a :b c"                      , "a&#160;:b c");}
 	@Test  public void Space_lhs__laquo()                 {fxt.Test__parse("a »b c"                      , "a&#160;»b c");}
@@ -24,9 +24,9 @@ public class Xomw_nbsp_wkr__tst {
 	@Test  public void Important()                        {fxt.Test__parse("a &#160;! important b"       , "a  ! important b");}
 }
 class Xomw_nbsp_wkr__fxt {
-	private final    Xomw_nbsp_wkr wkr = new Xomw_nbsp_wkr();
-	private final    XomwParserCtx pctx = new XomwParserCtx();
-	private final    XomwParserBfr pbfr = new XomwParserBfr();
+	private final Xomw_nbsp_wkr wkr = new Xomw_nbsp_wkr();
+	private final XomwParserCtx pctx = new XomwParserCtx();
+	private final XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

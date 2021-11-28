@@ -17,9 +17,9 @@ package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.tests.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.tests.*;
 class Graph_html_fxt {
-	private final    Xoh_make_fxt make_fxt = new Xoh_make_fxt();
-	private final    Xop_fxt parser_fxt;
-	private final    List_adp expd_lnr_list = List_adp_.New();
+	private final Xoh_make_fxt make_fxt = new Xoh_make_fxt();
+	private final Xop_fxt parser_fxt;
+	private final List_adp expd_lnr_list = List_adp_.New();
 	private String hdump_atr;
 	public Graph_html_fxt() {
 		parser_fxt = make_fxt.Parser_fxt(); // NOTE: do not create multiple parser_fxts b/c of wiki registration issues;

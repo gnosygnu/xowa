@@ -197,9 +197,9 @@ public class Xoh_lnki_wtr {
 	}
 	public static byte[] Lnki_cls_visited(gplx.xowa.users.history.Xou_history_mgr history_mgr, byte[] wiki_key, byte[] page_ttl) {
 		return history_mgr.Has(wiki_key, page_ttl) ? Lnki_cls_visited_bry : Bry_.Empty;
-	}	private static final    byte[] Lnki_cls_visited_bry = Bry_.new_a7(" class=\"xowa-visited\"");
-	private static final    byte[] Bry_xowa_visited = Bry_.new_a7("\" class=\"xowa-visited"); 
-	private static final    byte[] Bry__selflink = Bry_.new_a7("mw-selflink selflink");
+	}	private static final byte[] Lnki_cls_visited_bry = Bry_.new_a7(" class=\"xowa-visited\"");
+	private static final byte[] Bry_xowa_visited = Bry_.new_a7("\" class=\"xowa-visited");
+	private static final byte[] Bry__selflink = Bry_.new_a7("mw-selflink selflink");
 	public static final int Lnki_id_ignore = 0, Lnki_id_min = 1;
 }
 interface Xop_lnki_caption_wtr {

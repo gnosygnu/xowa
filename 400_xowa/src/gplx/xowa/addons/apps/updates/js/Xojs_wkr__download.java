@@ -23,9 +23,9 @@ public class Xojs_wkr__download extends Xojs_wkr__base {
 		this.trg = trg;
 		this.Prog_data_end_(src_len);
 	}
-	public String Src() {return src;} private final    String src;
-	public Io_url Trg() {return trg;} private final    Io_url trg;
-	public long Src_len() {return src_len;} private final    long src_len;
+	public String Src() {return src;} private final String src;
+	public Io_url Trg() {return trg;} private final Io_url trg;
+	public long Src_len() {return src_len;} private final long src_len;
 	@Override protected void Exec_run() {
 		Http_download_wkr wkr = Http_download_wkr_.Proto.Make_new();
 		if (wkr.Exec(this, src, trg, src_len) != gplx.core.progs.Gfo_prog_ui_.Status__done)

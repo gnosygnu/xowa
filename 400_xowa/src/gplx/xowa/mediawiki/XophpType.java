@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpType {
-	private final    int type_id;
+	private final int type_id;
 	public XophpType(int type_id) {
 		this.type_id = type_id;
 	}

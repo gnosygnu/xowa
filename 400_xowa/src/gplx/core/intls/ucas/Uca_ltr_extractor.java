@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.intls.ucas; import gplx.*; import gplx.core.*; import gplx.core.intls.*;
 public class Uca_ltr_extractor {
-	private final    boolean numeric;
-	private final    byte[] numeric_heading;
-	private final    Hash_adp_bry numeric_hash;
+	private final boolean numeric;
+	private final byte[] numeric_heading;
+	private final Hash_adp_bry numeric_hash;
 	public Uca_ltr_extractor(boolean numeric) {
 		this.numeric = numeric;
 		if (numeric) {

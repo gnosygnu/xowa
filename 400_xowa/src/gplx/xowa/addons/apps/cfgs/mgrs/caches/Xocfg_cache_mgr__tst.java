@@ -17,7 +17,7 @@ package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*; import gplx.xowa.
 import org.junit.*; import gplx.core.tests.*; import gplx.dbs.*;
 import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.specials.maints.services.*;
 public class Xocfg_cache_mgr__tst {
-	private final    Xocfg_cache_mgr__fxt fxt = new Xocfg_cache_mgr__fxt();
+	private final Xocfg_cache_mgr__fxt fxt = new Xocfg_cache_mgr__fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Get__wiki() {
 		fxt.Init__db_add("en.w", "key_1", "val_1");

@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.exports.splits.metas; import gplx.*; import gplx.
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 public abstract class Split_meta_wkr_base {
-	private final    Db_attach_mgr attach_mgr = new Db_attach_mgr();
+	private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
 	public void Load(Db_conn wkr_conn, Split_page_mgr page_mgr, int ns_id, int score_bgn, int score_end) {
 		attach_mgr.Conn_main_(wkr_conn);
 		String sql_fmt = Load_sql(attach_mgr, ns_id, score_bgn, score_end);

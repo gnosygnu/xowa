@@ -138,7 +138,7 @@ public class XomwEvaluator {
 	* @return mixed The operation result
 	*/
 	// XO: left / right can be boolean, Decimal, Range
-	private static final    XophpArray doOperationTokens = XophpArray.New().Add_as_key_and_val_many("in", "not-in", "within", "not-within");
+	private static final XophpArray doOperationTokens = XophpArray.New().Add_as_key_and_val_many("in", "not-in", "within", "not-within");
 	private static XomwStackItem doOperation(String token, XomwStackItem left, XomwStackItem right) {
 		if (doOperationTokens.Has(token)) {
 			if (right.Tid() != XomwStackItem.Tid__range) {
@@ -202,19 +202,19 @@ class XomwStackItem {
 		this.val__number = val__number;
 		this.val__range = val__range;
 	}
-	public int Tid() {return tid;} private final    int tid;
+	public int Tid() {return tid;} private final int tid;
 	public boolean As_bool() {
 		if (tid != Tid__bool) Fail_bc_wrong_type(Tid__bool);
 		return val__bool;
-	} private final    boolean val__bool;
+	} private final boolean val__bool;
 	public Decimal_adp As_num() {
 		if (tid != Tid__number) Fail_bc_wrong_type(Tid__number);
 		return val__number;
-	} private final    Decimal_adp val__number;
+	} private final Decimal_adp val__number;
 	public XomwRange As_range() {
 		if (tid != Tid__range) Fail_bc_wrong_type(Tid__range);
 		return val__range;
-	} private final    XomwRange val__range;
+	} private final XomwRange val__range;
 	public Object As_obj() {
 		switch (tid) {
 			case Tid__bool: return val__bool;

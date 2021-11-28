@@ -18,8 +18,8 @@ import gplx.dbs.*;
 import gplx.xowa.files.origs.*;
 import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 class Split_meta_wkr__org extends Split_meta_wkr_base {
-	private final    Split_rslt_wkr__org rslt_wkr = new Split_rslt_wkr__org();
-	private final    Db_conn atr_conn;
+	private final Split_rslt_wkr__org rslt_wkr = new Split_rslt_wkr__org();
+	private final Db_conn atr_conn;
 	private Xof_orig_tbl tbl; private Db_stmt stmt;
 	public Split_meta_wkr__org(Split_ctx ctx, Db_conn atr_conn) {
 		this.atr_conn = atr_conn;

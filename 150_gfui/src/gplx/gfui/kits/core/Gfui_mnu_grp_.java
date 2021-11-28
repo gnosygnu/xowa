@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
 import gplx.gfui.imgs.*;
 public class Gfui_mnu_grp_ {
-	public static final    Gfui_mnu_grp Noop = new Gfui_mnu_grp_noop();
+	public static final Gfui_mnu_grp Noop = new Gfui_mnu_grp_noop();
 }
 class Gfui_mnu_grp_noop implements Gfui_mnu_grp {
 	public String Uid() {return "";}

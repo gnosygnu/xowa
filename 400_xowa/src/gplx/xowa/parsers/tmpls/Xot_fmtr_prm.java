@@ -35,7 +35,7 @@ public class Xot_fmtr_prm implements Xot_fmtr {
 		}
 		else					// invk mode
 			self.Tmpl_evaluate(ctx, src, caller, trg);
-	}	private static final    byte[] Bry_bgn = new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn}, Bry_end = new byte[] {Byte_ascii.Curly_end, Byte_ascii.Curly_end, Byte_ascii.Curly_end};
+	}	private static final byte[] Bry_bgn = new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn}, Bry_end = new byte[] {Byte_ascii.Curly_end, Byte_ascii.Curly_end, Byte_ascii.Curly_end};
 	public void Reg_tmpl(Xop_ctx ctx, byte[] src, Xop_tkn_itm name_tkn, int args_len, Arg_nde_tkn[] args) {
 		trg.Add(Xop_curly_bgn_lxr.Hook);
 		++depth;
@@ -63,5 +63,5 @@ public class Xot_fmtr_prm implements Xot_fmtr {
 	}
 	public void Print(Bry_bfr bb) {bb.Add_bfr_and_preserve(trg); trg.Clear(); depth = 0;}
 	Bry_bfr trg = Bry_bfr_.New(); int depth = 0;
-	public static final    Xot_fmtr_prm Instance = new Xot_fmtr_prm();
+	public static final Xot_fmtr_prm Instance = new Xot_fmtr_prm();
 }

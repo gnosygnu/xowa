@@ -25,13 +25,13 @@ import java.util.Locale;
 
 public class Decimal_adp_ {
 	public static final String Cls_val_name = "decimal";
-	public static final    Class<?> Cls_ref_type = Decimal_adp.class;
+	public static final Class<?> Cls_ref_type = Decimal_adp.class;
 	public static Decimal_adp as_(Object obj) {return obj instanceof Decimal_adp ? (Decimal_adp)obj : null;}
-	public static final    Decimal_adp Zero = new Decimal_adp(0);
-	public static final    Decimal_adp One = new Decimal_adp(1);
-	public static final    Decimal_adp Neg1 = new Decimal_adp(-1);
-	public static final    Decimal_adp Const_e = Decimal_adp_.double_(Math_.E);
-	public static final    Decimal_adp Const_pi = Decimal_adp_.double_(Math_.Pi);
+	public static final Decimal_adp Zero = new Decimal_adp(0);
+	public static final Decimal_adp One = new Decimal_adp(1);
+	public static final Decimal_adp Neg1 = new Decimal_adp(-1);
+	public static final Decimal_adp Const_e = Decimal_adp_.double_(Math_.E);
+	public static final Decimal_adp Const_pi = Decimal_adp_.double_(Math_.Pi);
 	public static Decimal_adp base1000_(long v) {return divide_(v, 1000);}
 	public static Decimal_adp parts_1000_(long num, int frc) {return divide_((num * (1000)) + frc, 1000);}
 	public static Decimal_adp parts_(long num, int frc) {

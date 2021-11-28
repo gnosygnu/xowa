@@ -63,7 +63,7 @@ public class Process_adp implements Gfo_invk, Rls_able {
 	public int Thread_timeout() {return thread_timeout;} public Process_adp Thread_timeout_seconds_(int v) {thread_timeout = v * 1000; return this;} int thread_timeout = 0;
 	public int Thread_interval() {return thread_interval;} public Process_adp Thread_interval_(int v) {thread_interval = v; return this;} int thread_interval = 20;
 	public String Thread_kill_name() {return thread_kill_name;} public Process_adp Thread_kill_name_(String v) {thread_kill_name = v; return this;} private String thread_kill_name = "";
-	public Io_url Tmp_dir() {return tmp_dir;} @gplx.Virtual public Process_adp Tmp_dir_(Io_url v) {tmp_dir = v; return this;} Io_url tmp_dir;
+	public Io_url Tmp_dir() {return tmp_dir;} public Process_adp Tmp_dir_(Io_url v) {tmp_dir = v; return this;} Io_url tmp_dir;
 	private Process_adp WhenBgn_run() {return Invk_cmds(whenBgnList);} List_adp whenBgnList = List_adp_.New();
 	public Process_adp WhenEnd_add(Gfo_invk_cmd cmd) {whenEndList.Add(cmd); return this;}
 	public Process_adp WhenEnd_del(Gfo_invk_cmd cmd) {whenEndList.Del(cmd); return this;}
@@ -111,7 +111,7 @@ public class Process_adp implements Gfo_invk, Rls_able {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	static final    String Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_args = "args", Invk_args_ = "args_", Invk_cmd_args_ = "cmd_args_", Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_mode_ = "mode_", Invk_timeout_ = "timeout_", Invk_tmp_dir_ = "tmp_dir_", Invk_owner = "owner";
+	static final String Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_args = "args", Invk_args_ = "args_", Invk_cmd_args_ = "cmd_args_", Invk_enabled = "enabled", Invk_enabled_ = "enabled_", Invk_mode_ = "mode_", Invk_timeout_ = "timeout_", Invk_tmp_dir_ = "tmp_dir_", Invk_owner = "owner";
 	Bry_fmtr_eval_mgr cmd_url_eval;
 	public static Process_adp ini_(Gfo_invk owner, Gfo_usr_dlg usr_dlg, Process_adp process, Bry_fmtr_eval_mgr cmd_url_eval, byte run_mode, int timeout, String cmd_url_fmt, String args_fmt, String... args_keys) {
 		process.Run_mode_(run_mode).Thread_timeout_seconds_(timeout);
@@ -294,7 +294,7 @@ public class Process_adp implements Gfo_invk, Rls_able {
 		process.Process_run_and_end();
 		return;
 	}
-		public static final    List_adp Test_runs = List_adp_.New();
+		public static final List_adp Test_runs = List_adp_.New();
 	private Process_adp Test_runs_add() {Test_runs.Add(exe_url.Raw() + " " + args_str); exit_code = Exit_pass; return this;}
 	public static int run_wait_arg_(Io_url url, String arg) {
 		Process_adp process = new Process_adp();

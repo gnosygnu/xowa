@@ -19,9 +19,9 @@ public class Io_itm_atr_req {
 		this.ignore_errors = ignore_errors;
 		this.check_read_only = check_read_only;
 	}
-	public boolean Check_read_only() {return check_read_only;} private final    boolean check_read_only;
+	public boolean Check_read_only() {return check_read_only;} private final boolean check_read_only;
 	public boolean Is_read_only() {return is_read_only;} public void Is_read_only_(boolean v) {this.is_read_only = v;} private boolean is_read_only;
-	public boolean Ignore_errors() {return ignore_errors;} private final    boolean ignore_errors;
+	public boolean Ignore_errors() {return ignore_errors;} private final boolean ignore_errors;
 	public String To_str() {
 		Keyval[] ary = new Keyval[2];
 		ary[0] = Keyval_.new_("check_read_only", check_read_only);

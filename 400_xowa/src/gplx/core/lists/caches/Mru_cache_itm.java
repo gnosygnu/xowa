@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.lists.caches; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
 class Mru_cache_itm {
-	private final    long time_bgn;
+	private final long time_bgn;
 	private long time_dirty;
 	private long used_dirty = -1;
 	public Mru_cache_itm(Object key, Object val, long size, long time) {
@@ -24,8 +24,8 @@ class Mru_cache_itm {
 		this.size = size;
 		this.time_bgn = this.time_cur = time;
 	}
-	public Object Key() {return key;} private final    Object key;
-	public Object Val() {return val;} private final    Object val;
+	public Object Key() {return key;} private final Object key;
+	public Object Val() {return val;} private final Object val;
 	public long Size() {return size;} private long size;
 	public long Time_cur() {return time_cur;} private long time_cur;
 	public long Time_dif() {return time_cur - time_bgn;}

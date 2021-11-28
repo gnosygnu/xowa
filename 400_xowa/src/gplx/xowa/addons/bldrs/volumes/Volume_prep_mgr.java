@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.volumes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
 class Volume_prep_mgr {
-	private final    Volume_page_loader loader;
-	private final    Volume_page_itm tmp_page = new Volume_page_itm();
-	private final    List_adp list = List_adp_.New();
+	private final Volume_page_loader loader;
+	private final Volume_page_itm tmp_page = new Volume_page_itm();
+	private final List_adp list = List_adp_.New();
 	public Volume_prep_mgr(Volume_page_loader loader) {this.loader = loader;}
 	public Volume_make_itm[] Calc_makes(Volume_prep_itm[] ary) {
 		Volume_prep_ctx ctx = new Volume_prep_ctx();

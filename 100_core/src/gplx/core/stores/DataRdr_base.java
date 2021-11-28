@@ -26,7 +26,7 @@ public abstract class DataRdr_base implements SrlMgr {
 	public abstract int FieldCount();
 	public abstract String KeyAt(int i);
 	public abstract Object ReadAt(int i);
-	@gplx.Virtual public Keyval KeyValAt(int idx)	{return Keyval_.new_(this.KeyAt(idx), ReadAt(idx));}
+	public Keyval KeyValAt(int idx)	{return Keyval_.new_(this.KeyAt(idx), ReadAt(idx));}
 	public String ReadStr(String key) {
 		Object val = Read(key);
 		try {return (String)val;} 
@@ -43,7 +43,7 @@ public abstract class DataRdr_base implements SrlMgr {
 		try {return Bry_.new_u8((String)val);}
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, byte[].class, key, val, or); return or;}
 	}
-	@gplx.Virtual public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {
+	public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {
 		list.Clear();
 		DataRdr subRdr = this.Subs_byName_moveFirst(key); // collection node
 		subRdr = subRdr.Subs();
@@ -53,7 +53,7 @@ public abstract class DataRdr_base implements SrlMgr {
 			list.Add(itm);
 		}
 	}
-	@gplx.Virtual public Object StoreRoot(SrlObj root, String key) {
+	public Object StoreRoot(SrlObj root, String key) {
 		SrlObj clone = root.SrlObj_New(null);
 		clone.SrlObj_Srl(this);
 		return clone;
@@ -75,12 +75,12 @@ public abstract class DataRdr_base implements SrlMgr {
 		try {return (parse) ? Long_.parse(String_.as_(val)) : Long_.cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, long.class, key, val, or); return or;}
 	}
-	@gplx.Virtual public boolean ReadBool(String key) {
+	public boolean ReadBool(String key) {
 		Object val = Read(key);
 		try {return (parse) ? Bool_.Cast(BoolClassXtn.Instance.ParseOrNull(String_.as_(val))) : Bool_.Cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(boolean.class, key, val, exc);}
 	}
-	@gplx.Virtual public boolean ReadBoolOr(String key, boolean or) {
+	public boolean ReadBoolOr(String key, boolean or) {
 		Object val = Read(key); if (val == null) return or;
 		try {return (parse) ? Bool_.Parse(String_.as_(val)) : Bool_.Cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, boolean.class, key, val, or); return or;}
@@ -110,27 +110,27 @@ public abstract class DataRdr_base implements SrlMgr {
 		try {return (parse) ? Double_.parse(String_.as_(val)) : Double_.cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, double.class, key, val, or); return or;}
 	}
-	@gplx.Virtual public byte ReadByte(String key) {
+	public byte ReadByte(String key) {
 		Object val = Read(key);
 		try {return (parse) ? Byte_.Parse(String_.as_(val)) : Byte_.Cast(val);} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(byte.class, key, val, exc);}
 	}
-	@gplx.Virtual public byte ReadByteOr(String key, byte or) {
+	public byte ReadByteOr(String key, byte or) {
 		Object val = Read(key); if (val == null) return or;
 		try {return (parse) ? Byte_.Parse(String_.as_(val)) : Byte_.Cast(val);} 
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, byte.class, key, val, or); return or;}
 	}
-	@gplx.Virtual public DateAdp ReadDate(String key) {
+	public DateAdp ReadDate(String key) {
 		Object val = Read(key);
 		try {return (parse) ? DateAdp_.parse_gplx(String_.as_(val)) : (DateAdp)val;} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(DateAdp.class, key, val, exc);}
 	}
-	@gplx.Virtual public DateAdp ReadDateOr(String key, DateAdp or) {
+	public DateAdp ReadDateOr(String key, DateAdp or) {
 		Object val = Read(key); if (val == null) return or;
 		try {return (parse) ? DateAdp_.parse_gplx(String_.as_(val)) : (DateAdp)val;} 
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(DateAdp.class, key, val, exc);}
 	}
-	@gplx.Virtual public Decimal_adp ReadDecimal(String key) {
+	public Decimal_adp ReadDecimal(String key) {
 		Object val = Read(key);
 		try {
 			if (parse) return Decimal_adp_.parse(String_.as_(val));
@@ -141,7 +141,7 @@ public abstract class DataRdr_base implements SrlMgr {
 		}
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(Decimal_adp.class, key, val, exc);}
 	}
-	@gplx.Virtual public Decimal_adp ReadDecimalOr(String key, Decimal_adp or) {
+	public Decimal_adp ReadDecimalOr(String key, Decimal_adp or) {
 		Object val = Read(key); if (val == null) return or;
 		try {
 			if (parse) return Decimal_adp_.parse(String_.as_(val));

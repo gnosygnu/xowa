@@ -32,7 +32,7 @@ class DsvHeaderItm {
 	public Object Val() {return val;} Object val;
 	@gplx.Internal protected DsvHeaderItm(int id, Object val) {this.id = id; this.val = val;}
 
-	public static final    int
+	public static final int
 		  Id_Comment	= 1
 		, Id_TableName	= 2
 		, Id_BlankLine	= 3

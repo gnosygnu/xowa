@@ -29,11 +29,11 @@ class Tag_html_wkr_noop implements Tag_html_wkr {
 	public void Tag__process_body(byte[] body) {}
 	public byte[] Tag__build(Xowe_wiki wiki, Xop_ctx ctx) {return Bry_.Empty;}
 	public void Tag__rls() {}
-        public static final    Tag_html_wkr_noop Instance = new Tag_html_wkr_noop(); Tag_html_wkr_noop() {}
+        public static final Tag_html_wkr_noop Instance = new Tag_html_wkr_noop(); Tag_html_wkr_noop() {}
 }
 class Tag_html_wkr_basic implements Tag_html_wkr {
-	private final    boolean atrs_encode;
-	private final    Bry_bfr tmp_bfr;
+	private final boolean atrs_encode;
+	private final Bry_bfr tmp_bfr;
 	private byte[] tag_name;
 	public Tag_html_wkr_basic(Bry_bfr tmp_bfr, boolean atrs_encode) {
 		this.tmp_bfr = tmp_bfr;

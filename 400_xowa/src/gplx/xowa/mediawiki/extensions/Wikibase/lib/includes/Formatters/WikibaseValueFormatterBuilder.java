@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Formatters; import 
 import gplx.xowa.xtns.wbases.claims.enums.*;
 import gplx.xowa.mediawiki.extensions.Wikibase.DataValues.Interfaces.ValueFormatters.*;
 public class WikibaseValueFormatterBuilder {
-	private final    SnakFormat snakFormat = new SnakFormat();
+	private final SnakFormat snakFormat = new SnakFormat();
 
 	/**
 	* @param String $format The desired target format, see SnakFormatter::FORMAT_XXX

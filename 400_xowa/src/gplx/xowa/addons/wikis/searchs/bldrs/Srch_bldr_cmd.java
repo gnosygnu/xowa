@@ -28,5 +28,5 @@ public class Srch_bldr_cmd extends Xob_cmd__base implements Xob_cmd {
 		else if	(ctx.Match(k, Invk_progress_interval_))		progress_interval = m.ReadInt("v");
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	private static final    String Invk_progress_interval_ = "progress_interval_", Invk_commit_interval_ = "commit_interval_";
+	}	private static final String Invk_progress_interval_ = "progress_interval_", Invk_commit_interval_ = "commit_interval_";
 }

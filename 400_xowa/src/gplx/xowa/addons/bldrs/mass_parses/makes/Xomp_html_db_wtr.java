@@ -17,8 +17,8 @@ package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xow
 import gplx.dbs.*; import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.bldrs.cmds.*;
 class Xomp_html_db_wtr {
-	private final    long len_max;
-	private final    Xowe_wiki wiki; private final    Xow_db_mgr db_mgr;
+	private final long len_max;
+	private final Xowe_wiki wiki; private final Xow_db_mgr db_mgr;
 	private long len_cur;
 	private int prv_ns_id = -1;
 	private Xow_db_file html_db; private Xowd_html_tbl html_tbl;

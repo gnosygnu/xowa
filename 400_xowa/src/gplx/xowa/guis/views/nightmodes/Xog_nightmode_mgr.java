@@ -126,7 +126,7 @@ public class Xog_nightmode_mgr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	public static final    String
+	public static final String
 	  Cfg__enabled     = "xowa.gui.nightmode.enabled"
 	, Cfg__night_back  = "xowa.gui.nightmode.nightcolors.backcolor"
 	, Cfg__night_fore  = "xowa.gui.nightmode.nightcolors.forecolor"

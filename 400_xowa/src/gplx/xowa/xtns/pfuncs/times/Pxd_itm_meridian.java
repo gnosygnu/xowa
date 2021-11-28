@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.brys.*;
 class Pxd_itm_meridian extends Pxd_itm_base implements Pxd_itm_prototype {
-	private final    boolean pm;
+	private final boolean pm;
 	public Pxd_itm_meridian(int ary_idx, boolean pm) {this.Ctor(ary_idx); this.pm = pm;}
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_meridian;} 
 	@Override public int Eval_idx() {return 19;}

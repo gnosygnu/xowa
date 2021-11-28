@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class References_nde_basic_tst {	
-	@Before public void init() {fxt.Clear_ref_mgr();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Clear_ref_mgr();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test public void Basic() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last

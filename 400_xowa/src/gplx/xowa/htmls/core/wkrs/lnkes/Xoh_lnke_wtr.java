@@ -18,9 +18,9 @@ import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.brys.fm
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnke_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
-	private final    Bfr_arg__bry anch_href = Bfr_arg__bry.New_empty(), anch_cls = Bfr_arg__bry.New_empty(), anch_content = Bfr_arg__bry.New_empty();
-	private final    Bfr_arg__hatr_bry anch_title = new Bfr_arg__hatr_bry(Gfh_atr_.Bry__title);
-	private final    Xoh_lnke_wtr_arg__autonum autonum_arg = new Xoh_lnke_wtr_arg__autonum();
+	private final Bfr_arg__bry anch_href = Bfr_arg__bry.New_empty(), anch_cls = Bfr_arg__bry.New_empty(), anch_content = Bfr_arg__bry.New_empty();
+	private final Bfr_arg__hatr_bry anch_title = new Bfr_arg__hatr_bry(Gfh_atr_.Bry__title);
+	private final Xoh_lnke_wtr_arg__autonum autonum_arg = new Xoh_lnke_wtr_arg__autonum();
 	public boolean Init_by_decode(Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_data_itm data_itm) {
 		Bfr_arg_.Clear(anch_href, anch_cls, anch_content, anch_title);
 		Xoh_lnke_data data = (Xoh_lnke_data)data_itm;
@@ -37,7 +37,7 @@ public class Xoh_lnke_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_lnke_wtr rv = new Xoh_lnke_wtr(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
-	private static final    Bry_fmtr fmtr = Bry_fmtr.new_
+	private static final Bry_fmtr fmtr = Bry_fmtr.new_
 	( "<a href=\"~{href}\" rel=\"nofollow\" class=\"external ~{cls}\"~{title}>~{content}</a>"
 	, "href", "cls", "content", "title");
 }

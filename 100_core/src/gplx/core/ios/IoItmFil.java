@@ -16,12 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 import gplx.langs.gfs.*;
 public class IoItmFil extends IoItm_base {
-	@Override public int TypeId() {return IoItmFil.Type_Fil;} @Override public boolean Type_dir() {return false;} @Override public boolean Type_fil() {return true;} public static final    int Type_Fil = 2;
+	@Override public int TypeId() {return IoItmFil.Type_Fil;} @Override public boolean Type_dir() {return false;} @Override public boolean Type_fil() {return true;} public static final int Type_Fil = 2;
 	public boolean Exists() {return size != Size_invalid;}	// NOTE: questionable logic, but preserved for historical reasons; requires that length be set to -1 if !.exists
 	public DateAdp ModifiedTime() {return modifiedTime;}
 	public IoItmFil ModifiedTime_(DateAdp val) {modifiedTime = val; return this;} DateAdp modifiedTime;
 	public IoItmFil ModifiedTime_(String val) {return ModifiedTime_(DateAdp_.parse_gplx(val));}
-	@gplx.Virtual public long Size() {return size;} public IoItmFil Size_(long val) {size = val; return this;} private long size;
+	public long Size() {return size;} public IoItmFil Size_(long val) {size = val; return this;} private long size;
 	public IoItmAttrib Attrib() {return attrib;} public IoItmFil Attrib_(IoItmAttrib val) {attrib = val; return this;} IoItmAttrib attrib = IoItmAttrib.normal_();
 	public boolean ReadOnly() {return attrib.ReadOnly();} public IoItmFil ReadOnly_(boolean val) {attrib.ReadOnly_(val); return this;} 
 	@gplx.New public IoItmFil XtnProps_set(String key, Object val) {return (IoItmFil)super.XtnProps_set(key, val);}

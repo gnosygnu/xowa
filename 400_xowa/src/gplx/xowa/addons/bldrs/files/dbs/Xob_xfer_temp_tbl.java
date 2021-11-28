@@ -48,7 +48,7 @@ public class Xob_xfer_temp_tbl {
 		.Val_int(count)
 		.Exec_insert();
 	}
-	public static final    String Tbl_name = "xfer_temp"		
+	public static final String Tbl_name = "xfer_temp"
 	, Fld_lnki_id = "lnki_id", Fld_lnki_tier_id = "lnki_tier_id", Fld_lnki_page_id = "lnki_page_id", Fld_lnki_ttl = "lnki_ttl", Fld_lnki_ext = "lnki_ext", Fld_lnki_type = "lnki_type"
 	, Fld_lnki_w = "lnki_w", Fld_lnki_h = "lnki_h", Fld_lnki_upright = "lnki_upright", Fld_lnki_time = "lnki_time", Fld_lnki_page = "lnki_page", Fld_lnki_count = "lnki_count"
 	, Fld_orig_repo = "orig_repo", Fld_orig_page_id = "orig_page_id", Fld_orig_redirect_src = "orig_redirect_src", Fld_orig_media_type = "orig_media_type"
@@ -56,7 +56,7 @@ public class Xob_xfer_temp_tbl {
 	, Fld_file_w = "file_w", Fld_file_h = "file_h", Fld_file_is_orig = "file_is_orig"
 	, Fld_html_w = "html_w", Fld_html_h = "html_h"
 	;
-	private static final    String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = String_.Concat_lines_nl
 	(	"CREATE TABLE IF NOT EXISTS xfer_temp"
 	,	"( lnki_id             integer             NOT NULL			    PRIMARY KEY"
 	,	", lnki_tier_id        integer             NOT NULL"

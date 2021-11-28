@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*;
 public class Xow_abrv_xo__tst {
-	@Before public void init() {fxt.Clear();} private final    Xow_abrv_xo__fxt fxt = new Xow_abrv_xo__fxt();
+	@Before public void init() {fxt.Clear();} private final Xow_abrv_xo__fxt fxt = new Xow_abrv_xo__fxt();
 	@Test public void Basic() {
 		fxt.Test("en.wikipedia.org"			, "en.w");			// multi.enwiki
 		fxt.Test("fr.wiktionary.org"		, "fr.d");			// multi.frwiktionary

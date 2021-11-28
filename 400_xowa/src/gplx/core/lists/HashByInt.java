@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.lists; import gplx.*; import gplx.core.*;
 import gplx.core.primitives.*;
 public class HashByInt {
-	private final    Ordered_hash hash = Ordered_hash_.New();
-	private final    Int_obj_ref tmp_key = Int_obj_ref.New_neg1();
+	private final Ordered_hash hash = Ordered_hash_.New();
+	private final Int_obj_ref tmp_key = Int_obj_ref.New_neg1();
 	public void Clear() {
 		hash.Clear();
 	}
@@ -58,8 +58,8 @@ public class HashByInt {
 	}
 }
 class HashByIntItem {
-	public final    int key;
-	public final    Object val;
+	public final int key;
+	public final Object val;
 	public HashByIntItem(int key, Object val) {
 		this.key = key;
 		this.val = val;

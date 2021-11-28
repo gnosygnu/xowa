@@ -42,5 +42,5 @@ public class Xosrv_socket_rdr implements Gfo_invk {
 		if		(ctx.Match(k, Invk_start))	this.Start();
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String Invk_start = "start";
+	}	public static final String Invk_start = "start";
 }

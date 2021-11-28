@@ -17,7 +17,7 @@ package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 public class Xoa_app_mode {
 	Xoa_app_mode(int tid) {this.tid = tid;}
-	public int Tid() {return tid;} private final    int tid;
+	public int Tid() {return tid;} private final int tid;
 	public boolean Tid_is_gui()		{return tid == Tid_gui;}
 	public boolean Tid_is_tcp()		{return tid == Tid_tcp;}
 	public boolean Tid_is_cmd()		{return tid == Tid_cmd;}
@@ -40,9 +40,9 @@ public class Xoa_app_mode {
 		}
 	}
 	private static final int Tid_cmd = 1, Tid_gui = 2, Tid_tcp = 3, Tid_http = 4, Tid_file = 5;
-	private static final    byte[] Key_cmd = Bry_.new_a7("cmd"), Key_gui = Bry_.new_a7("gui"), Key_tcp = Bry_.new_a7("server"), Key_http = Bry_.new_a7("http_server"), Key_file = Bry_.new_a7("file");
-	public static final    Xoa_app_mode Itm_cmd = new Xoa_app_mode(Tid_cmd), Itm_gui = new Xoa_app_mode(Tid_gui), Itm_tcp = new Xoa_app_mode(Tid_tcp), Itm_http = new Xoa_app_mode(Tid_http), Itm_file = new Xoa_app_mode(Tid_file);
-	private static final    Hash_adp_bry type_hash = Hash_adp_bry.cs()
+	private static final byte[] Key_cmd = Bry_.new_a7("cmd"), Key_gui = Bry_.new_a7("gui"), Key_tcp = Bry_.new_a7("server"), Key_http = Bry_.new_a7("http_server"), Key_file = Bry_.new_a7("file");
+	public static final Xoa_app_mode Itm_cmd = new Xoa_app_mode(Tid_cmd), Itm_gui = new Xoa_app_mode(Tid_gui), Itm_tcp = new Xoa_app_mode(Tid_tcp), Itm_http = new Xoa_app_mode(Tid_http), Itm_file = new Xoa_app_mode(Tid_file);
+	private static final Hash_adp_bry type_hash = Hash_adp_bry.cs()
 	.Add_bry_int(Key_cmd	, Tid_cmd)
 	.Add_bry_int(Key_gui	, Tid_gui)
 	.Add_bry_int(Key_http	, Tid_http)

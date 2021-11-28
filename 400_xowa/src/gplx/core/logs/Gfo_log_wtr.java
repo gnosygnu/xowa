@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.logs; import gplx.*; import gplx.core.*;
 public class Gfo_log_wtr {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    int bfr_max;
-	private final    int fil_max;
-	private final    Io_url fil_dir;
-	private final    String fil_fmt;
-	private final    int fil_idx_places;
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final int bfr_max;
+	private final int fil_max;
+	private final Io_url fil_dir;
+	private final String fil_fmt;
+	private final int fil_idx_places;
 	private Io_url fil_url;
 	private int fil_idx = -1, fil_len;
 	public Gfo_log_wtr(int bfr_max, int fil_max, Io_url fil_dir, String fil_fmt, int fil_idx_places) {

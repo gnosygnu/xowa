@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.controls.elems; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
 public class GfuiElem_ {
-	public static final    String 
+	public static final String
 		  InitKey_focusAble = "focusAble"
 		, InitKey_ownerWin = "ownerForm";
 	public static GfuiElem as_(Object obj) {return obj instanceof GfuiElem ? (GfuiElem)obj : null;}

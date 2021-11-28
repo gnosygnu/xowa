@@ -54,9 +54,9 @@ public class Xob_xml_page_bldr {
 		bfr.Add(Indent_2).Add(Xob_xml_parser_.Bry_page_end).Add_byte_nl();
 		return this;
 	}
-	private static final    byte[] Nde_inline = Bry_.new_a7(" />"), Indent_2 = Bry_.Repeat_space(2), Indent_4 = Bry_.Repeat_space(4), Indent_6 = Bry_.Repeat_space(6), Indent_8 = Bry_.Repeat_space(8);
-	private static final    int Revision_id = 1234, Contributor_id = 9876;
-	private static final    byte[] Contributor_username = Bry_.new_a7("contributor_username"), Revision_comment = Bry_.new_a7("revision_comment");
+	private static final byte[] Nde_inline = Bry_.new_a7(" />"), Indent_2 = Bry_.Repeat_space(2), Indent_4 = Bry_.Repeat_space(4), Indent_6 = Bry_.Repeat_space(6), Indent_8 = Bry_.Repeat_space(8);
+	private static final int Revision_id = 1234, Contributor_id = 9876;
+	private static final byte[] Contributor_username = Bry_.new_a7("contributor_username"), Revision_comment = Bry_.new_a7("revision_comment");
 }
 /*
   <page>

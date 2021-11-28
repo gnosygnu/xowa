@@ -16,6 +16,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.core.btries.*;
 public class XomwHtmlTemp {
-	public final    Bry_bfr bfr = Bry_bfr_.New();
-	public final    Btrie_rv trv = new Btrie_rv();
+	public final Bry_bfr bfr = Bry_bfr_.New();
+	public final Btrie_rv trv = new Btrie_rv();
 }

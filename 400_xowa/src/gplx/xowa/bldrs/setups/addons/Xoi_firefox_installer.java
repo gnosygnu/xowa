@@ -58,5 +58,5 @@ public class Xoi_firefox_installer implements Gfo_invk {
 		if		(ctx.Match(k, Invk_install)) 		Install_via_process();
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	private static final    String Invk_install = "install";
+	}	private static final String Invk_install = "install";
 }

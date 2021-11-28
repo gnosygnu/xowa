@@ -16,13 +16,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.lists.caches; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
 import gplx.core.logs.*;
 public class Mru_cache_mgr {
-	private final    Mru_cache_time_mgr time_mgr;
-	private final    Gfo_log_wtr log_wtr;
-	private final    Hash_adp key_hash = Hash_adp_.New();
-	private final    Sorted_hash val_hash;
-	private final    Bry_bfr log_bfr = Bry_bfr_.New_w_size(255);
-	private final    Mru_cache_itm_comparer comparer;
-	private final    Ordered_hash dirty = Ordered_hash_.New();
+	private final Mru_cache_time_mgr time_mgr;
+	private final Gfo_log_wtr log_wtr;
+	private final Hash_adp key_hash = Hash_adp_.New();
+	private final Sorted_hash val_hash;
+	private final Bry_bfr log_bfr = Bry_bfr_.New_w_size(255);
+	private final Mru_cache_itm_comparer comparer;
+	private final Ordered_hash dirty = Ordered_hash_.New();
 	private long cache_max, cache_size, compress_size;
 	Mru_cache_mgr(Mru_cache_time_mgr time_mgr, Gfo_log_wtr log_wtr, long cache_max, long compress_size, long used_weight) {
 		this.time_mgr = time_mgr;

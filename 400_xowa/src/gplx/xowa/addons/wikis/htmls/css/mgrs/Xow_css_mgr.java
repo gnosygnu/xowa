@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.htmls.css.mgrs; import gplx.*; import gplx.xowa.*
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.htmls.css.dbs.*;
 public class Xow_css_mgr {
-	private final    Xow_wiki wiki;
+	private final Xow_wiki wiki;
 	private boolean db_css_exists;
 	private Xowd_css_core_tbl css_core_tbl; private Xowd_css_file_tbl css_file_tbl;
 	public Xow_css_mgr(Xow_wiki wiki) {this.wiki = wiki;}

@@ -19,7 +19,7 @@ import gplx.langs.htmls.encoders.*; import gplx.langs.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wbases.core.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*;
 class Wdata_fmtr__slink_grp implements gplx.core.brys.Bfr_arg {
-	private final    Wdata_fmtr__slink_tbl fmtr_tbl = new Wdata_fmtr__slink_tbl(); private boolean is_empty;
+	private final Wdata_fmtr__slink_tbl fmtr_tbl = new Wdata_fmtr__slink_tbl(); private boolean is_empty;
 	public void Init_by_ctor(Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, Wdata_lbl_mgr lbl_regy, Gfo_url_encoder href_encoder, Wdata_fmtr__toc_div fmtr_toc, Xow_xwiki_mgr xwiki_mgr) {
 		fmtr_tbl.Init_by_ctor(lang_sorter, toggle_mgr, lbl_regy, href_encoder, fmtr_toc, xwiki_mgr);
 	}
@@ -32,7 +32,7 @@ class Wdata_fmtr__slink_grp implements gplx.core.brys.Bfr_arg {
 		if (is_empty) return;
 		fmtr.Bld_bfr_many(bfr, fmtr_tbl);
 	}
-	private final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <div class='wikibase-sitelinkgrouplistview'>"
 	, "    <div class='wb-listview'>~{grps}"
@@ -42,8 +42,8 @@ class Wdata_fmtr__slink_grp implements gplx.core.brys.Bfr_arg {
 	);
 }
 class Wdata_fmtr__slink_tbl implements gplx.core.brys.Bfr_arg {
-	private final    Wdata_fmtr__slink_row fmtr_row = new Wdata_fmtr__slink_row();
-	private final    Wdata_slink_grp[] grps = new Wdata_slink_grp[Wdata_slink_grp.Idx__len];
+	private final Wdata_fmtr__slink_row fmtr_row = new Wdata_fmtr__slink_row();
+	private final Wdata_slink_grp[] grps = new Wdata_slink_grp[Wdata_slink_grp.Idx__len];
 	private Wdata_lang_sorter lang_sorter; private Wdata_hwtr_msgs msgs;
 	public void Init_by_ctor(Wdata_lang_sorter lang_sorter, Xoapi_toggle_mgr toggle_mgr, Wdata_lbl_mgr lbl_regy, Gfo_url_encoder href_encoder, Wdata_fmtr__toc_div fmtr_toc, Xow_xwiki_mgr xwiki_mgr) {
 		this.lang_sorter = lang_sorter;
@@ -83,7 +83,7 @@ class Wdata_fmtr__slink_tbl implements gplx.core.brys.Bfr_arg {
 			fmtr.Bld_bfr_many(bfr, grp.Toc_data().Href(), grp.Toc_data().Text(), msgs.Langtext_col_lang_name(), msgs.Langtext_col_lang_code(), msgs.Slink_col_hdr_text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_row);
 		}
 	}
-	private final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "      <div class='wikibase-sitelinkgroupview' data-wb-sitelinks-group='wikipedia'>"
 	, "        <div class='wikibase-sitelinkgroupview-heading-container'>"
@@ -98,7 +98,7 @@ class Wdata_fmtr__slink_tbl implements gplx.core.brys.Bfr_arg {
 	);
 }
 class Wdata_fmtr__slink_row implements gplx.core.brys.Bfr_arg {
-	private final    Wdata_fmtr__slink_badges fmtr_badges = new Wdata_fmtr__slink_badges(); private Xow_xwiki_mgr xwiki_mgr;
+	private final Wdata_fmtr__slink_badges fmtr_badges = new Wdata_fmtr__slink_badges(); private Xow_xwiki_mgr xwiki_mgr;
 	private Gfo_url_encoder href_encoder; private Ordered_hash list; 
 	public void Init_by_ctor(Wdata_lbl_mgr lbl_regy, Gfo_url_encoder href_encoder, Xow_xwiki_mgr xwiki_mgr) {
 		this.href_encoder = href_encoder; this.xwiki_mgr = xwiki_mgr;
@@ -121,8 +121,8 @@ class Wdata_fmtr__slink_row implements gplx.core.brys.Bfr_arg {
 			fmtr_row.Bld_bfr_many(bfr, lang_name, lang_key, wmf_key, href_site, domain_bry, href_encoder.Encode(page_name), Gfh_utl.Escape_html_as_bry(itm.Name()), fmtr_badges);
 		}
 	}
-	private static final    byte[] Href_site_xowa = Bry_.new_a7("/site/"), Href_site_http = Bry_.new_a7("https://");
-	private final    Bry_fmtr fmtr_row = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final byte[] Href_site_xowa = Bry_.new_a7("/site/"), Href_site_http = Bry_.new_a7("https://");
+	private final Bry_fmtr fmtr_row = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "            <li class='wikibase-sitelinkview'>"																// wikibase-sitelinkview-~{wmf_key} data-wb-siteid='~{wmf_key}'
 	, "              <span class='wikibase-sitelinkview-siteid-container'>"
@@ -157,7 +157,7 @@ class Wdata_fmtr__slink_badges implements gplx.core.brys.Bfr_arg {
 			fmtr_row.Bld_bfr_many(bfr, ttl, cls, name);
 		}
 	}
-	private final    Bry_fmtr fmtr_row = Bry_fmtr.new_
+	private final Bry_fmtr fmtr_row = Bry_fmtr.new_
 	( "\n                  <span class='wb-badge wb-badge-~{ttl} wb-badge-~{cls}' title='~{name}'></span>"
 	, "ttl", "cls", "name"
 	);

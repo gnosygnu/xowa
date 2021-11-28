@@ -39,7 +39,7 @@ public class Pfunc_scrib_lib implements Scrib_lib {
 	}
 	private static final int Proc_expr = 0;
 	public static final String Invk_expr = "expr";
-	private static final    String[] Proc_names = String_.Ary(Invk_expr);
+	private static final String[] Proc_names = String_.Ary(Invk_expr);
 	public boolean Expr(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] expr_bry = args.Xstr_bry_or_null(0);	// NOTE: some modules will pass in an int; PAGE:en.w:531_BC DATE:2016-04-29
 		Bry_bfr tmp_bfr = core.Wiki().Utl__bfr_mkr().Get_b128();

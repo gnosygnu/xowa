@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 public class Keyval_hash {
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public int			Count()				{return hash.Count();}
 	public int			Len()				{return hash.Count();}
 	public Keyval_hash	Clear()				{hash.Clear(); return this;}

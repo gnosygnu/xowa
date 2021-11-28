@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.brys.*;
 class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype { // handle "next", "prev", "this"; EX: "next year"
-	private final    int adj;
+	private final int adj;
 	public Pxd_itm_unit_relative(int adj, int ary_idx) {
 		this.adj = adj;
 		Ctor(ary_idx);
@@ -55,7 +55,7 @@ class Pxd_itm_unit_relative extends Pxd_itm_base implements Pxd_itm_prototype { 
 		// noop; date-logic handled by respective unit, month, dow classes; EX: "next month" -> "next" does no date logic; "month" does;
 		return true;
 	}
-	public static final    Pxd_itm_unit_relative
+	public static final Pxd_itm_unit_relative
 	  Next		= new Pxd_itm_unit_relative( 1, 0)
 	, Prev		= new Pxd_itm_unit_relative(-1, 0)
 	, This		= new Pxd_itm_unit_relative( 0, 0)

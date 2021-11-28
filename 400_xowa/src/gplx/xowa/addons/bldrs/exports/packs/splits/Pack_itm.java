@@ -21,8 +21,8 @@ class Pack_itm {
 		this.zip_url = zip_url;
 		this.raw_urls = raw_urls;
 	}
-	public int			Idx()		{return idx;}		private final    int idx;
-	public int			Type()		{return type;}		private final    int type;
-	public Io_url[]		Raw_urls()	{return raw_urls;}	private final    Io_url[] raw_urls;
-	public Io_url		Zip_url()	{return zip_url;}	private final    Io_url zip_url;
+	public int			Idx()		{return idx;}		private final int idx;
+	public int			Type()		{return type;}		private final int type;
+	public Io_url[]		Raw_urls()	{return raw_urls;}	private final Io_url[] raw_urls;
+	public Io_url		Zip_url()	{return zip_url;}	private final Io_url zip_url;
 }

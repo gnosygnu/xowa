@@ -240,8 +240,8 @@ public class Pgbnr_func extends Pf_func_base {
 		Xof_file_itm file_itm = ctx.Wiki().Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, ctx.Page(), lnki);
 		return file_itm;
 	}
-	private static final    byte[] Bry__yes = Bry_.new_a7("yes"), Bry__icon = Bry_.new_a7("icon-"), Bry__icon_href_dflt = Bry_.new_a7("#"), Bry__origin_x__left = Bry_.new_a7("wpb-left"), Bry__origin_x__right = Bry_.new_a7("wpb-right");
+	private static final byte[] Bry__yes = Bry_.new_a7("yes"), Bry__icon = Bry_.new_a7("icon-"), Bry__icon_href_dflt = Bry_.new_a7("#"), Bry__origin_x__left = Bry_.new_a7("wpb-left"), Bry__origin_x__right = Bry_.new_a7("wpb-right");
 	private static final int Arg__pgname = 0, Arg__tooltip = 1, Arg__bottomtoc = 2, Arg__toc = 3, Arg__icon = 4, Arg__origin = 5;
-	private static final    Hash_adp_bry arg_hash = Hash_adp_bry.cs().Add_str_int("pgname", Arg__pgname)
+	private static final Hash_adp_bry arg_hash = Hash_adp_bry.cs().Add_str_int("pgname", Arg__pgname)
 		.Add_str_int("tooltip", Arg__tooltip).Add_str_int("bottomtoc", Arg__bottomtoc).Add_str_int("toc", Arg__toc).Add_str_int("origin", Arg__origin);
 }

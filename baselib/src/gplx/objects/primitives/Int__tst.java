@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.objects.primitives; import gplx.*; import gplx.objects.*;
 import org.junit.*; import gplx.tests.*;
 public class Int__tst {
-	private final    Int__fxt fxt = new Int__fxt();
+	private final Int__fxt fxt = new Int__fxt();
 	@Test public void Parse_or() {
 		fxt.Test__Parse_or("123", 123);            // basic			
 		fxt.Test__Parse_or_min_value(null);        // null			

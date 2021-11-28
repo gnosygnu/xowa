@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
 import gplx.langs.mustaches.*;
-class Xoa_update_itm__root extends Xoa_update_itm__leaf { 	private final    String current_version, current_date, check_date;
-	private final    boolean web_access_enabled;
+class Xoa_update_itm__root extends Xoa_update_itm__leaf { 	private final String current_version, current_date, check_date;
+	private final boolean web_access_enabled;
 	private Xoa_update_itm__leaf[] itms = Xoa_update_itm__leaf.Ary__empty;
 	public Xoa_update_itm__root
 		( String current_version, String current_date, String check_date, boolean web_access_enabled

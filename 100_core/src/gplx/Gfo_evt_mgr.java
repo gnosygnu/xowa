@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import gplx.core.lists.*;
 public class Gfo_evt_mgr {
-	private final    Gfo_evt_mgr_owner sender; private Ordered_hash subsRegy, pubsRegy;
+	private final Gfo_evt_mgr_owner sender; private Ordered_hash subsRegy, pubsRegy;
 	public Gfo_evt_mgr(Gfo_evt_mgr_owner sender) {this.sender = sender;}
 	@gplx.Internal protected void AddSub(Gfo_evt_mgr_owner pub, String pubEvt, Gfo_evt_itm sub, String subPrc) {
 		GfoEvLnk lnk = new GfoEvLnk(pub, pubEvt, sub, subPrc);

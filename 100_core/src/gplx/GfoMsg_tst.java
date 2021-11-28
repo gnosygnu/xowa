@@ -44,6 +44,6 @@ public class GfoMsg_tst {
 				if (ctx.Deny()) return this;
 			}
 			return this;
-		}	public static final    String Invk_Cmd0 = "Cmd0";
+		}	public static final String Invk_Cmd0 = "Cmd0";
 	}
 }

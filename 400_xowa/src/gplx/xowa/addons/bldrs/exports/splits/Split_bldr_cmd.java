@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.exports.splits; import gplx.*; import gplx.xowa.*
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*;
 public class Split_bldr_cmd extends Xob_cmd__base {
-	private final    Split_cfg cfg = new Split_cfg();
+	private final Split_cfg cfg = new Split_cfg();
 	public Split_bldr_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
 	@Override public void Cmd_run() {
 		wiki.Init_assert();
@@ -31,6 +31,6 @@ public class Split_bldr_cmd extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "bldr.export.split";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Split_bldr_cmd(null, null);
+	public static final Xob_cmd Prototype = new Split_bldr_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Split_bldr_cmd(bldr, wiki);}
 }

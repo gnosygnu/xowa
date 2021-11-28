@@ -19,8 +19,8 @@ import gplx.xowa.guis.history.*;
 import gplx.xowa.apps.*; import gplx.xowa.wikis.*;
 import gplx.xowa.htmls.*;
 class Xogv_page_load_wkr implements Gfo_thread_wkr, Gfo_invk {
-	private final    Xoav_wiki_mgr wiki_mgr; private final    Gfo_url_parser url_parser;
-	private final    Xogv_tab_base tab; private final    Xog_history_itm old_itm, new_itm;
+	private final Xoav_wiki_mgr wiki_mgr; private final Gfo_url_parser url_parser;
+	private final Xogv_tab_base tab; private final Xog_history_itm old_itm, new_itm;
 	public Xogv_page_load_wkr(Xoav_wiki_mgr wiki_mgr, Gfo_url_parser url_parser, Xogv_tab_base tab, Xog_history_itm old_itm, Xog_history_itm new_itm) {
 		this.wiki_mgr = wiki_mgr; this.url_parser = url_parser; this.tab = tab; this.old_itm = old_itm; this.new_itm = new_itm;
 	}

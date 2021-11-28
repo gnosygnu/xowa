@@ -16,13 +16,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
 import gplx.core.btries.*; import gplx.core.log_msgs.*;
 public class Php_parser {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci:PHP tkns are ASCII
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci:PHP tkns are ASCII
+	private final Btrie_rv trv = new Btrie_rv();
 	private Php_lxr[] lxrs; private int lxrs_len;
 	private int txt_bgn; private Php_tkn_txt txt_tkn;
-	private final    Php_tkn_factory tkn_factory = new Php_tkn_factory();
-	private final    Php_ctx ctx = new Php_ctx();
-	private final    Php_parser_interrupt[] parser_interrupts = new Php_parser_interrupt[256]; 
+	private final Php_tkn_factory tkn_factory = new Php_tkn_factory();
+	private final Php_ctx ctx = new Php_ctx();
+	private final Php_parser_interrupt[] parser_interrupts = new Php_parser_interrupt[256];
 	private int src_len; private Php_tkn_wkr tkn_wkr;
 	public Php_parser() {
 		List_adp list = List_adp_.New();
@@ -118,5 +118,5 @@ public class Php_parser {
 		return end;
 	}
 	public static final int NotFound = -1;
-	public static final    Gfo_msg_grp Log_nde = Gfo_msg_grp_.new_(Gfo_msg_grp_.Root_gplx, "php_parser");
+	public static final Gfo_msg_grp Log_nde = Gfo_msg_grp_.new_(Gfo_msg_grp_.Root_gplx, "php_parser");
 }

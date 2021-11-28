@@ -30,7 +30,7 @@ public class Scrib_lib_hash implements Scrib_lib {
 		mod = core.RegisterInterface(this, script_dir.GenSubFil("mw.hash.lua"));
 		return mod;
 	}
-	public Scrib_proc_mgr Procs() {return procs;} private final    Scrib_proc_mgr procs = new Scrib_proc_mgr();
+	public Scrib_proc_mgr Procs() {return procs;} private final Scrib_proc_mgr procs = new Scrib_proc_mgr();
 	public boolean Procs_exec(int key, Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		switch (key) {
 			case Proc_listAlgorithms:                return ListAlgorithms(args, rslt);
@@ -40,7 +40,7 @@ public class Scrib_lib_hash implements Scrib_lib {
 	}
 	private static final int Proc_listAlgorithms = 0, Proc_hashValue = 1;
 	public static final String Invk_listAlgorithms = "listAlgorithms", Invk_hashValue = "hashValue";
-	private static final    String[] Proc_names = String_.Ary(Invk_listAlgorithms, Invk_hashValue);
+	private static final String[] Proc_names = String_.Ary(Invk_listAlgorithms, Invk_hashValue);
 	public boolean ListAlgorithms(Scrib_proc_args args, Scrib_proc_rslt rslt) {// NOTE:listAlgorithms
 		return rslt.Init_many_kvs(algo_keys);
 	}
@@ -60,8 +60,8 @@ public class Scrib_lib_hash implements Scrib_lib {
 		}
 		return rslt.Init_obj(String_.new_u8(Hash_algo_utl.Calc_hash_as_bry(algo, val)));
 	}
-	private static final    Hash_algo_factory__composite algo_factory = Hash_algo_factory__php_.New();
-	private static final    Keyval[] algo_keys = Make_algo_keys(algo_factory);
+	private static final Hash_algo_factory__composite algo_factory = Hash_algo_factory__php_.New();
+	private static final Keyval[] algo_keys = Make_algo_keys(algo_factory);
 	private static Keyval[] Make_algo_keys(Hash_algo_factory__composite factory) {
 		String[] keys = factory.Algo_keys();
 		int len = keys.length;

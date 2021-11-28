@@ -23,5 +23,5 @@ public class Assessment_func extends Pf_func_base {
 	@Override public Pf_func New(int id, byte[] name) {return new Assessment_func().Name_(name);}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 	}
-	public static final    Assessment_func Instance = new Assessment_func(); Assessment_func() {}
+	public static final Assessment_func Instance = new Assessment_func(); Assessment_func() {}
 }

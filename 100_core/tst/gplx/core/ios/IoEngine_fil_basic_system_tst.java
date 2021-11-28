@@ -27,7 +27,7 @@ public class IoEngine_fil_basic_system_tst extends IoEngine_fil_basic_base_tst {
 		fx.tst_ExistsPaths(true, fil);
 		fx.tst_ExistsPaths(true, fil.OwnerDir().GenSubFil("FIL.txt"));
 	}
-	@Test @gplx.Virtual public void RecycleFil() {
+	@Test public void RecycleFil() {
 		fx.run_SaveFilText(fil, "text");
 		fx.tst_ExistsPaths(true, fil);
 

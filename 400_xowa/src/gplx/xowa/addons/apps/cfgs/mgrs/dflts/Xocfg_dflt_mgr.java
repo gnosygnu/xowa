@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.cfgs.mgrs.dflts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 import gplx.xowa.addons.apps.cfgs.mgrs.caches.*;
 public class Xocfg_dflt_mgr {
-	private final    Xocfg_cache_mgr cache_mgr;
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Xocfg_cache_mgr cache_mgr;
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public Xocfg_dflt_mgr(Xocfg_cache_mgr cache_mgr) {
 		this.cache_mgr = cache_mgr;
 	}
@@ -45,7 +45,7 @@ public class Xocfg_dflt_mgr {
 	}
 }
 class Xocfg_dflt_itm__static implements Gfo_invk {
-	private final    String val;
+	private final String val;
 	public Xocfg_dflt_itm__static(String val) {
 		this.val = val;
 	}

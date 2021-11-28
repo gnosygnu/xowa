@@ -37,7 +37,7 @@ class Db_batch__journal_wal__conn_bgn implements Db_batch_itm {
 		engine.Exec_as_obj(Sqlite_pragma.New__synchronous__normal());
 		engine.Exec_as_obj(Sqlite_pragma.New__wal_autocheckpoint(0));
 	}
-        public static final    Db_batch__journal_wal__conn_bgn Instance = new Db_batch__journal_wal__conn_bgn(); Db_batch__journal_wal__conn_bgn() {}
+        public static final Db_batch__journal_wal__conn_bgn Instance = new Db_batch__journal_wal__conn_bgn(); Db_batch__journal_wal__conn_bgn() {}
 }
 class Db_batch__journal_wal__conn_end implements Db_batch_itm {
 	public String Key() {return KEY;} public static final String KEY = "journal_wal.conn_end";
@@ -48,7 +48,7 @@ class Db_batch__journal_wal__conn_end implements Db_batch_itm {
 		engine.Exec_as_obj(Sqlite_pragma.New__synchronous__full());
 		engine.Props().Del(Sqlite_pragma.Const__journal_mode);
 	}
-        public static final    Db_batch__journal_wal__conn_end Instance = new Db_batch__journal_wal__conn_end(); Db_batch__journal_wal__conn_end() {}
+        public static final Db_batch__journal_wal__conn_end Instance = new Db_batch__journal_wal__conn_end(); Db_batch__journal_wal__conn_end() {}
 }
 class Db_batch__journal_wal__txn_end implements Db_batch_itm {
 	public String Key() {return KEY;} public static final String KEY = "journal_wal.txn_end";
@@ -56,5 +56,5 @@ class Db_batch__journal_wal__txn_end implements Db_batch_itm {
 		if (!engine.Props().Match(Sqlite_pragma.Const__journal_mode, Sqlite_pragma.Const__journal_mode__wal)) return;	// if in off mode, don't enable wal
 		engine.Exec_as_obj(Sqlite_pragma.New__wal_checkpoint__truncate());
 	}
-        public static final    Db_batch__journal_wal__txn_end Instance = new Db_batch__journal_wal__txn_end(); Db_batch__journal_wal__txn_end() {}
+        public static final Db_batch__journal_wal__txn_end Instance = new Db_batch__journal_wal__txn_end(); Db_batch__journal_wal__txn_end() {}
 }

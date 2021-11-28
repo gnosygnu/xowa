@@ -18,11 +18,11 @@ import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.htmls.*;
 class Hdump_html_loader {
-	private final    Xowe_wiki wiki;
+	private final Xowe_wiki wiki;
 	private Io_stream_zip_mgr stream_zip_mgr = new Io_stream_zip_mgr();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Xoh_page tmp_hpg = new Xoh_page();
-	private final    Xoa_url tmp_url; private final    Xoa_ttl tmp_ttl;
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xoh_page tmp_hpg = new Xoh_page();
+	private final Xoa_url tmp_url; private final Xoa_ttl tmp_ttl;
 
 	public Hdump_html_loader(Xowe_wiki wiki) {
 		this.wiki = wiki;

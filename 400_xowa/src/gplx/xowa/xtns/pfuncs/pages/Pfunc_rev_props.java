@@ -18,7 +18,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_rev_props extends Pf_func_base {
 	public Pfunc_rev_props(int id) {this.id = id;}
-	@Override public int Id() {return id;} private final    int id;
+	@Override public int Id() {return id;} private final int id;
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_rev_props(id).Name_(name);}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {
 		byte[] argx = Eval_argx(ctx, src, caller, self);
@@ -50,5 +50,5 @@ public class Pfunc_rev_props extends Pf_func_base {
 			default: throw Err_.new_unhandled(id);
 		}
 	}
-	public static final    Pfunc_rev_props Instance = new Pfunc_rev_props(-1);
+	public static final Pfunc_rev_props Instance = new Pfunc_rev_props(-1);
 }

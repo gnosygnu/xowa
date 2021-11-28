@@ -17,9 +17,9 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
 public class Xowd_site_ns_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_id, fld_name, fld_case, fld_count, fld_is_alias;		
-	private final    Db_conn conn;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_id, fld_name, fld_case, fld_count, fld_is_alias;
+	private final Db_conn conn;
 	public Xowd_site_ns_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		this.tbl_name = schema_is_1 ? "xowa_ns" : "site_ns";
@@ -29,7 +29,7 @@ public class Xowd_site_ns_tbl implements Db_tbl {
 		fld_is_alias		= flds.Add_bool		("ns_is_alias");
 		fld_count			= flds.Add_int		("ns_count");
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(Xow_ns_mgr ns_mgr) {
 		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);

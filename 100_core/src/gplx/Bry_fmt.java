@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import gplx.core.brys.*; import gplx.core.brys.fmts.*;	
 public class Bry_fmt {
-	private final    Object thread_lock = new Object();
+	private final Object thread_lock = new Object();
 	private byte[] src;
 	private Bry_fmt_itm[] itms; private int itms_len;
 	private Bfr_fmt_arg[] args = Bfr_fmt_arg.Ary_empty;

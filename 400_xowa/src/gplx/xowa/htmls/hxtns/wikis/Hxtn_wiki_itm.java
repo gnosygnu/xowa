@@ -19,8 +19,8 @@ public class Hxtn_wiki_itm {
 		this.tid = tid;
 		this.domain = domain;
 	}
-	public int Tid() {return tid;} private final    int tid;
-	public String Domain() {return domain;} private final    String domain;
+	public int Tid() {return tid;} private final int tid;
+	public String Domain() {return domain;} private final String domain;
 
 	public static final int Tid__self = 0, Tid__commons = 1, Tid__wikidata = 2, Tid__next_id = 32;
 }

@@ -86,7 +86,7 @@ public class Pft_func_date_int extends Pf_func_base {
 		}
 	}
 	public static final int Date_tid_utc = 0, Date_tid_lcl = 1, Date_tid_rev = 2;
-	public static final    Pft_func_date_int
+	public static final Pft_func_date_int
 	  Utc = new Pft_func_date_int(-1, Date_tid_utc)
 	, Lcl = new Pft_func_date_int(-1, Date_tid_lcl)
 	, Rev = new Pft_func_date_int(-1, Date_tid_rev);

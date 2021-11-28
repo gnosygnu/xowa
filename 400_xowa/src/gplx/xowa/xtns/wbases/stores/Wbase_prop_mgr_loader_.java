@@ -23,7 +23,7 @@ public class Wbase_prop_mgr_loader_ {
 	}
 }
 class Wbase_prop_mgr_loader__mock implements Wbase_prop_mgr_loader {
-	private final    Keyval[] pairs;
+	private final Keyval[] pairs;
 	public Wbase_prop_mgr_loader__mock(Keyval[] pairs) {
 		this.pairs = pairs;
 	}
@@ -35,7 +35,7 @@ class Wbase_prop_mgr_loader__mock implements Wbase_prop_mgr_loader {
 	}
 }
 class Wbase_prop_mgr_loader__db implements Wbase_prop_mgr_loader {
-	private final    Wdata_wiki_mgr wbase_mgr;
+	private final Wdata_wiki_mgr wbase_mgr;
 	public Wbase_prop_mgr_loader__db(Wdata_wiki_mgr wbase_mgr) {
 		this.wbase_mgr = wbase_mgr;
 	}

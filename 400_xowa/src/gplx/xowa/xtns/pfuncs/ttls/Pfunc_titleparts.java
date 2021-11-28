@@ -71,7 +71,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 			if (end_pos < bgn_pos) return Bry_.Empty;
 			return Bry_.Mid(src, bgn_pos, end_pos);
 		}
-	}	private static final    int[] dlms_ary = new Int_ary_bldr(255).Set(0, -1).Xto_int_ary();	// set pos0 to -1; makes +1 logic easier
+	}	private static final int[] dlms_ary = new Int_ary_bldr(255).Set(0, -1).Xto_int_ary();	// set pos0 to -1; makes +1 logic easier
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_titleparts;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_titleparts().Name_(name);}
 }

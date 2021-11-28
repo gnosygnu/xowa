@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.volumes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Volume_prep_rdr_tst {
-	private final    Volume_prep_rdr_fxt fxt = new Volume_prep_rdr_fxt();
+	private final Volume_prep_rdr_fxt fxt = new Volume_prep_rdr_fxt();
 	@Test 	public void Parse() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last("A", "", "B")
 			, fxt.Make__itm("A")
@@ -25,7 +25,7 @@ public class Volume_prep_rdr_tst {
 	}
 }
 class Volume_prep_rdr_fxt {
-	private final    Volume_prep_rdr rdr = new Volume_prep_rdr();
+	private final Volume_prep_rdr rdr = new Volume_prep_rdr();
 	public Volume_prep_rdr_fxt Test__parse(String raw, Volume_prep_itm... expd) {
 		Gftest.Eq__ary(expd, rdr.Parse(Bry_.new_u8(raw)));
 		return this;

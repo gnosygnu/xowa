@@ -17,7 +17,7 @@ package gplx.xowa.parsers.logs.stats; import gplx.*; import gplx.xowa.*; import 
 public class Xop_log_stat {
 	public boolean Enabled() {return enabled;} private boolean enabled;
 	public int Wkr_uid() {return wkr_uid;} private int wkr_uid = -1;
-	public Xop_log_time_count Scrib() {return scrib;} private final    Xop_log_time_count scrib = new Xop_log_time_count();
+	public Xop_log_time_count Scrib() {return scrib;} private final Xop_log_time_count scrib = new Xop_log_time_count();
 	public long Tidy_time;
 	public int Image_count;
 	public int Audio_count;

@@ -19,8 +19,8 @@ public class Cksum_list {
 	public Cksum_list(byte type, Cksum_itm[] itms, long itms_size) {
 		this.Type = type; this.Itms = itms; this.Itms_size = itms_size;
 	}
-	public final    byte Type;
-	public final    Cksum_itm[] Itms;
+	public final byte Type;
+	public final Cksum_itm[] Itms;
 	public long Itms_size;
 	public Io_url[] Itms_ary() {
 		int len = Itms.length;

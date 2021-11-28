@@ -17,9 +17,9 @@ package gplx.xowa.addons.bldrs.centrals.dbs.datas; import gplx.*; import gplx.xo
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.tasks.*;
 public class Xobc_task_regy_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_task_id, fld_task_seqn, fld_step_count, fld_task_key, fld_task_name;
-	private final    Db_conn conn; private Db_stmt insert_stmt;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_task_id, fld_task_seqn, fld_step_count, fld_task_key, fld_task_name;
+	private final Db_conn conn; private Db_stmt insert_stmt;
 	public Xobc_task_regy_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "task_regy";
@@ -30,7 +30,7 @@ public class Xobc_task_regy_tbl implements Db_tbl {
 		this.fld_task_name			= flds.Add_str("task_name", 255);
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name; 
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
 		conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "task_seqn", fld_task_seqn));

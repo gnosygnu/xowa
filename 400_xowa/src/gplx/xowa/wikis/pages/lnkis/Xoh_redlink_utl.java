@@ -15,6 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
 public class Xoh_redlink_utl {
-	public static final    byte[] Cls_bry = Bry_.new_a7("class='new'");
-	public static final    String New_str = "new";
+	public static final byte[] Cls_bry = Bry_.new_a7("class='new'");
+	public static final String New_str = "new";
 }

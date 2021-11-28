@@ -18,12 +18,12 @@ import gplx.core.consoles.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xof_repo_itm implements Gfo_invk {
-	private final    Xoa_fsys_mgr app_fsys; private final    Xof_rule_mgr ext_rule_mgr;
+	private final Xoa_fsys_mgr app_fsys; private final Xof_rule_mgr ext_rule_mgr;
 	public Xof_repo_itm(byte[] key, Xoa_fsys_mgr app_fsys, Xof_rule_mgr ext_rule_mgr, byte[] wiki_domain) {
 		this.key = key; this.app_fsys = app_fsys; this.ext_rule_mgr = ext_rule_mgr;
 		Wiki_domain_(wiki_domain);
 	}
-	public byte[]			Key()				{return key;}			private final    byte[] key;			// EX: "src_http_commons"
+	public byte[]			Key()				{return key;}			private final byte[] key;			// EX: "src_http_commons"
 	public byte				Tid()				{return tid;}			private byte tid;						// EX: Xof_repo_tid_.Tid__remote
 	public byte[]			Wiki_domain()		{return wiki_domain;}	private byte[] wiki_domain;				// EX: "commons.wikimedia.org"
 	public byte[]			Wiki_abrv_xo()		{return wiki_abrv_xo;}	private byte[] wiki_abrv_xo;			// EX: "c"

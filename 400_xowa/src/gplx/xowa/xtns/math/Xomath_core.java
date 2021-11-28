@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.logs.*;
 public class Xomath_core implements Gfo_invk {
-	private final    Xomath_html_wtr html_wtr = new Xomath_html_wtr();
+	private final Xomath_html_wtr html_wtr = new Xomath_html_wtr();
 	private Xop_log_basic_wkr log_wkr;
 	public boolean   Enabled()				{return enabled;}				private boolean enabled = true;
 	public boolean   Renderer_is_mathjax()	{return renderer_is_mathjax;}	private boolean renderer_is_mathjax = true;

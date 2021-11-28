@@ -75,5 +75,5 @@ public class Xof_fsdb_itm_fxt {
 		rv.Init_at_orig(orig_repo_id, orig_repo_name, orig_ttl, orig_ext, orig_w, orig_h, orig_redirect);
 		return rv;
 	}
-	private final    static byte[] Abrv__en_w = Bry_.new_a7("en.w");
+	private final static byte[] Abrv__en_w = Bry_.new_a7("en.w");
 }

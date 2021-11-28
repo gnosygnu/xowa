@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto.procs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import org.junit.*; import gplx.core.tests.*; 
 public class Scrib_proc_args__tst {
-	private final    Scrib_proc_args__fxt fxt = new Scrib_proc_args__fxt();
+	private final Scrib_proc_args__fxt fxt = new Scrib_proc_args__fxt();
 	@Test  public void Pull_kv_ary__basic() {	// PURPOSE.assert:
 		fxt.Init(Keyval_.int_(1, Keyval_.Ary(Keyval_.int_(1, "a"), Keyval_.int_(2, "b"), Keyval_.int_(3, "c"))));
 		fxt.Test__pull_kv_ary(0, Keyval_.int_(1, "a"), Keyval_.int_(2, "b"), Keyval_.int_(3, "c"));

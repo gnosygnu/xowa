@@ -34,7 +34,7 @@ public class Blacklist_scrib_lib implements Scrib_lib {
 	}
 	private static final int Proc_test = 0;
 	public static final String Invk_test = "test";
-	private static final    String[] Proc_names = String_.Ary(Invk_test);
+	private static final String[] Proc_names = String_.Ary(Invk_test);
 	public boolean Test(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		return rslt.Init_null();	// assume all titles are blacklisted; note that this info is not available;
 	}

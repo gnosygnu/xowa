@@ -20,8 +20,8 @@ public class Xocfg_cache_itm {
 		this.key = key;
 		this.val = val;
 	}
-	public String Ctx() {return ctx;} private final    String ctx;
-	public String Key() {return key;} private final    String key;
+	public String Ctx() {return ctx;} private final String ctx;
+	public String Key() {return key;} private final String key;
 	public String Val() {return val;} private String val;
 	public void Val_(String val) {this.val = val;}
 }

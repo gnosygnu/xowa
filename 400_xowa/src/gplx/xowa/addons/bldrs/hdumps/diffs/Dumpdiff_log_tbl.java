@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.hdumps.diffs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.hdumps.*;
 import gplx.dbs.*;
 class Dumpdiff_log_tbl implements Db_tbl {		
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__page_id, fld__cur_snip, fld__prv_snip;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld__page_id, fld__cur_snip, fld__prv_snip;
 	private Db_stmt stmt__insert;
 	public Dumpdiff_log_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -27,8 +27,8 @@ class Dumpdiff_log_tbl implements Db_tbl {
 		this.fld__prv_snip = flds.Add_str("prv_snip", 1024);
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name = "diff_log";
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name = "diff_log";
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public void Create_tbl() {
 		conn.Meta_tbl_remake(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld__page_id, fld__page_id)));
 	}

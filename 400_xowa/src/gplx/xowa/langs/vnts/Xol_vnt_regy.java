@@ -17,9 +17,9 @@ package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.btries.*; import gplx.core.bits.*;
 import gplx.xowa.parsers.vnts.*;
 public class Xol_vnt_regy {
-	private final    Hash_adp_bry hash = Hash_adp_bry.ci_a7(); private int hash_len;
-	private final    List_adp list = List_adp_.New();
-	public Btrie_slim_mgr	Trie()				{return trie;} private final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();
+	private final Hash_adp_bry hash = Hash_adp_bry.ci_a7(); private int hash_len;
+	private final List_adp list = List_adp_.New();
+	public Btrie_slim_mgr	Trie()				{return trie;} private final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();
 	public int				Len()				{return hash.Count();}
 	public boolean				Has(byte[] k)		{return hash.Has(k);}
 	public Xol_vnt_itm		Get_at(int i)		{return (Xol_vnt_itm)list.Get_at(i);}

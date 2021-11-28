@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.objects.strings; import gplx.*; import gplx.objects.*;
 import org.junit.*; import gplx.tests.*;
 public class String__tst {
-	private final    String__fxt fxt = new String__fxt();
+	private final String__fxt fxt = new String__fxt();
 	@Test public void Len() {
 		fxt.Test__Len(""   , 0);
 		fxt.Test__Len("abc", 3);

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 public class Xop_log_wkr_factory {
-	private final    Db_conn conn; private Xop_log_basic_tbl log_tbl;
+	private final Db_conn conn; private Xop_log_basic_tbl log_tbl;
 	public Xop_log_wkr_factory(Db_conn conn) {this.conn = conn;}
 	public Xop_log_invoke_wkr	Make__invoke()		{return new Xop_log_invoke_wkr(conn);}
 	public Xop_log_property_wkr Make__property()	{return new Xop_log_property_wkr(conn);}

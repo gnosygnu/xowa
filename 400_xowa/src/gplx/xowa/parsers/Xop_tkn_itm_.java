@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 public class Xop_tkn_itm_ {
-	public static final    Xop_tkn_itm[] Ary_empty = new Xop_tkn_itm[0];
+	public static final Xop_tkn_itm[] Ary_empty = new Xop_tkn_itm[0];
 	public static final byte
   Tid_null = 0
 , Tid_root = 1
@@ -71,7 +71,7 @@ public class Xop_tkn_itm_ {
 , Tid_escape = 51
 , Tid_uniq = 52
 ;
-public static final    String[] Tid__names
+public static final String[] Tid__names
 = new String[]
 { "null"
 , "root"

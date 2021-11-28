@@ -19,8 +19,8 @@ import gplx.xowa.files.downloads.*;
 public abstract class Xowm_revision_base {
 }
 class Xowm_revision_wmf extends Xowm_revision_base {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    Json_parser json_parser = new Json_parser();
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final Json_parser json_parser = new Json_parser();
 	public Xowm_revn_data Get_revn_or_null(Xof_download_wkr download_wkr, Xow_wiki wiki, Xoa_ttl page_ttl) {
 		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) return null;
 		// create a ctx Object
@@ -64,7 +64,7 @@ class Xowm_revision_wmf extends Xowm_revision_base {
 		byte[] revn_text = revn_nde.Get_as_bry("*");
 		return new Xowm_revn_data(wiki_domain, page_id, page_ns, page_ttl, revn_id, revn_time, revn_text);
 	}
-	private final    byte[] Path__query = Bry_.new_a7("query"), Path__pages = Bry_.new_a7("pages");
+	private final byte[] Path__query = Bry_.new_a7("query"), Path__pages = Bry_.new_a7("pages");
 }
 /*
 {

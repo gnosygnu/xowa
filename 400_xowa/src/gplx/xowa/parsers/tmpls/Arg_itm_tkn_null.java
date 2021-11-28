@@ -24,5 +24,5 @@ public class Arg_itm_tkn_null extends Xop_tkn_null implements Arg_itm_tkn {	publ
 	public Arg_itm_tkn Subs_add_ary(Xop_tkn_itm... ary) {return this;}
 	public boolean Dat_ary_had_subst() {return false;} public void Dat_ary_had_subst_y_() {}
 	public byte Itm_static() {return Bool_.__byte;} public Arg_itm_tkn Itm_static_(boolean v) {return this;}
-	public static final    Arg_itm_tkn_null Null_arg_itm = new Arg_itm_tkn_null(); Arg_itm_tkn_null() {}
+	public static final Arg_itm_tkn_null Null_arg_itm = new Arg_itm_tkn_null(); Arg_itm_tkn_null() {}
 }

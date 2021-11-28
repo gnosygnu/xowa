@@ -30,5 +30,5 @@ public class FontAdpCache {
 	public static int XtoOsDpi(float v) {return Math.round((v * 72) / screenResolutionInDpi);} // WORKAROUND/JAVA: Java needs 72 dpi screen resolution; wnt uses 96 or 120 dpi
 	public static int XtoJavaDpi(float v) {return Math.round((v * screenResolutionInDpi) / 72);}
 	static int screenResolutionInDpi = -1;
-		public static final    FontAdpCache Instance = new FontAdpCache(); FontAdpCache() {}
+		public static final FontAdpCache Instance = new FontAdpCache(); FontAdpCache() {}
 }

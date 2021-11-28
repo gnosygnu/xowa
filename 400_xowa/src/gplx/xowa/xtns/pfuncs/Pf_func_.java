@@ -144,7 +144,7 @@ public class Pf_func_ {
 	}
 
 	private static int[] Ary_nonwmf = null;
-	private static final    int[] Ary_wmf = new int[]
+	private static final int[] Ary_wmf = new int[]
 	{ Xol_kwd_grp_.Id_utc_year
 	, Xol_kwd_grp_.Id_utc_month_int_len2
 	, Xol_kwd_grp_.Id_utc_month_int
@@ -494,6 +494,6 @@ class Pf_func_bang extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_bang;}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {bfr.Add_byte_pipe();}
 	@Override public Pf_func New(int id, byte[] name) {return this;}
-	public static final    Pf_func_bang Instance = new Pf_func_bang();
+	public static final Pf_func_bang Instance = new Pf_func_bang();
 	Pf_func_bang() {this.Name_(Byte_ascii.Bang_bry);}
 }

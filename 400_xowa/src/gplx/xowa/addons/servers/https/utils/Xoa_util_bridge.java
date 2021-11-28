@@ -32,10 +32,10 @@ public class Xoa_util_bridge implements Bridge_cmd_itm {
 	}
 
 	private static final byte Proc__page_get = 0;
-	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("page_get"					, Proc__page_get)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("xowa.app.util.misc");
-        public static final    Xoa_util_bridge Prototype = new Xoa_util_bridge(); Xoa_util_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("xowa.app.util.misc");
+        public static final Xoa_util_bridge Prototype = new Xoa_util_bridge(); Xoa_util_bridge() {}
 }

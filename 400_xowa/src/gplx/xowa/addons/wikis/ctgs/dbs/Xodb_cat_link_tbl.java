@@ -18,8 +18,8 @@ import gplx.dbs.*;
 import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xodb_cat_link_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__from, fld__to_id, fld__type_id, fld__timestamp_unix, fld__sortkey, fld__sortkey_prefix;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld__from, fld__to_id, fld__type_id, fld__timestamp_unix, fld__sortkey, fld__sortkey_prefix;
 	private Db_stmt stmt_insert;
 	public Xodb_cat_link_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -32,8 +32,8 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 		this.fld__sortkey_prefix	= flds.Add_str	(FLD__cl_sortkey_prefix, 255);  // page_title; needed for sorting under letter on catpage
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name; 
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Create_idx__catbox()	{conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "catbox", fld__from));}
 	public void Create_idx__catpage()	{conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "catpage", fld__to_id, fld__type_id, fld__sortkey));}

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.singles; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 import gplx.core.brys.*; import gplx.core.brys.fmts.*;
 class Xoctg_single_itm implements Bfr_arg {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private Xow_wiki wiki;
 	private Xoctg_pagebox_itm[] itms;
 	public void Init_by_wiki(Xow_wiki wiki) {this.wiki = wiki;}
@@ -30,7 +30,7 @@ class Xoctg_single_itm implements Bfr_arg {
 			Fmt__itm.Bld_many(bfr, tmp_bfr.To_bry_and_clear(), ctg_page_txt, ctg_page_txt);
 		}
 	}
-	private static final    Bry_fmt Fmt__itm = Bry_fmt.Auto_nl_skip_last
+	private static final Bry_fmt Fmt__itm = Bry_fmt.Auto_nl_skip_last
 	( ""
 	,       "<li>"
 	,         "<a href=\"~{itm_href}\" class=\"internal\" title=\"~{itm_title}\">~{itm_text}</a>"	

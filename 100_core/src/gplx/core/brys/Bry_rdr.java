@@ -24,8 +24,8 @@ import gplx.String_;
 import gplx.core.btries.Btrie_rv;
 import gplx.core.btries.Btrie_slim_mgr;
 public class Bry_rdr {
-	private final    gplx.core.primitives.Int_obj_ref pos_ref = gplx.core.primitives.Int_obj_ref.New_neg1();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final gplx.core.primitives.Int_obj_ref pos_ref = gplx.core.primitives.Int_obj_ref.New_neg1();
+	private final Btrie_rv trv = new Btrie_rv();
 	public byte[] Src() {return src;} protected byte[] src;
 	public int Src_end() {return src_end;} protected int src_end; 
 	public int Pos() {return pos;} protected int pos;

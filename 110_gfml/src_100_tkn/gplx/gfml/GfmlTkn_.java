@@ -42,7 +42,7 @@ class GfmlTkn_base implements GfmlTkn {
 	public String Val() {return val;} private String val;
 	public GfmlBldrCmd Cmd_of_Tkn() {return cmd;} GfmlBldrCmd cmd;
 	public GfmlTkn[] SubTkns() {return GfmlTknAry_.Empty;}
-	@gplx.Virtual public GfmlTkn MakeNew(String rawNew, String valNew) {return new GfmlTkn_base().ctor_GfmlTkn_base(tknType, rawNew, valNew, cmd);}
+	public GfmlTkn MakeNew(String rawNew, String valNew) {return new GfmlTkn_base().ctor_GfmlTkn_base(tknType, rawNew, valNew, cmd);}
 	@gplx.Internal protected GfmlTkn_base ctor_GfmlTkn_base(String tknType, String raw, String val, GfmlBldrCmd cmd) {this.tknType = tknType; this.raw = raw; this.val = val; this.cmd = cmd; return this;}
 }
 class GfmlTkn_valConst extends GfmlTkn_base {

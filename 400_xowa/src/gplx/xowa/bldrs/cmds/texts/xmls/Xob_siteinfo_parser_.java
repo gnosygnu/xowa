@@ -75,5 +75,5 @@ public class Xob_siteinfo_parser_ {
 		}
 		ns_mgr.Init_w_defaults();
 	}
-	private static final    byte[] Bry_siteinfo_bgn = Bry_.new_a7("<siteinfo>"), Bry_siteinfo_end = Bry_.new_a7("</siteinfo>");
+	private static final byte[] Bry_siteinfo_bgn = Bry_.new_a7("<siteinfo>"), Bry_siteinfo_end = Bry_.new_a7("</siteinfo>");
 }

@@ -21,5 +21,5 @@ public class Translation_func extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {}	// NOOP: could not find implementation; ISSUE#:445 DATE:2019-05-26
 	@Override public int Id() {return Xol_kwd_grp_.Id_translation;}
 	@Override public Pf_func New(int id, byte[] name) {return new Translation_func().Name_(name);}
-	public static final    Translation_func Instance = new Translation_func(); Translation_func() {}
+	public static final Translation_func Instance = new Translation_func(); Translation_func() {}
 }

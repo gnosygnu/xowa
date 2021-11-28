@@ -18,7 +18,7 @@ import gplx.core.ios.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wik
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_parse_dump_templates_cmd extends Xob_itm_dump_base implements Xob_page_wkr, Gfo_invk {
 	public Xob_parse_dump_templates_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
-	public String Page_wkr__key() {return KEY;} public static final    String KEY = "parse.dump_templates";
+	public String Page_wkr__key() {return KEY;} public static final String KEY = "parse.dump_templates";
 	public static final int FixedLen_page = 1 + 5 + 1 + 5 + 1 + 1 + 1;	// \tid|date|title|text\n
 	public void Page_wkr__bgn() {
 		Init_dump(KEY);

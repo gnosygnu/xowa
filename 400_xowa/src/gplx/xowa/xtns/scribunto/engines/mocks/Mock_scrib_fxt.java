@@ -17,8 +17,8 @@ package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*; import gplx.xowa.
 import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Mock_scrib_fxt {		 
-	private final    Mock_engine engine = new Mock_engine();
-	private final    Mock_server server = new Mock_server();		
+	private final Mock_engine engine = new Mock_engine();
+	private final Mock_server server = new Mock_server();
 	private int mock_mod_id_next = 10;
 	public Scrib_core Core() {return core;} private Scrib_core core;
 	public Mock_engine Engine() {return engine;}

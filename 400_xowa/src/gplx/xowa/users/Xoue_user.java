@@ -28,12 +28,12 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		this.user_db_mgr = new Xou_db_mgr(app);
 		this.history_mgr = new Xou_history_mgr(fsys_mgr.App_data_history_fil());
 	}
-	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
+	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final Gfo_evt_mgr ev_mgr;
 	public String					Key() {return key;} private String key;
-	public Xou_db_mgr				User_db_mgr()  {return user_db_mgr;} private final    Xou_db_mgr user_db_mgr;
+	public Xou_db_mgr				User_db_mgr()  {return user_db_mgr;} private final Xou_db_mgr user_db_mgr;
 	public Xow_wiki					Wikii() {return this.Wiki();}
 	public int						Gender() {return Xol_gender_.Tid_unknown;}
-	public Xoae_app					Appe() {return app;} private final    Xoae_app app;
+	public Xoae_app					Appe() {return app;} private final Xoae_app app;
 	public Xol_lang_itm Lang() {
 		if (lang == null)
 			lang = app.Lang_mgr().Get_by_or_load(app.Sys_cfg().Lang());

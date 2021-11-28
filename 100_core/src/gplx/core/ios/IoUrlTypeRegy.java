@@ -41,9 +41,9 @@ public class IoUrlTypeRegy implements Gfo_invk {
 		}
 		else return Gfo_invk_.Rv_unhandled;
 //			return this;
-	}	public static final    String Invk_Get = "Get";
+	}	public static final String Invk_Get = "Get";
 	Ordered_hash hash = Ordered_hash_.New();
-        public static final    IoUrlTypeRegy Instance = new IoUrlTypeRegy(); IoUrlTypeRegy() {}
+        public static final IoUrlTypeRegy Instance = new IoUrlTypeRegy(); IoUrlTypeRegy() {}
 }
 class IoUrlTypeGrp implements Gfo_invk {
 	public String[] AsAry() {
@@ -78,5 +78,5 @@ class IoUrlTypeGrp implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_Clear)) {if (ctx.Deny()) return this; list.Clear();}
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String Invk_AddMany = "Add_many", Invk_Clear = "Clear", Invk_Print = "Print";
+	}	public static final String Invk_AddMany = "Add_many", Invk_Clear = "Clear", Invk_Print = "Print";
 }

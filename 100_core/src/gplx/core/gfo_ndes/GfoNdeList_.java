@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.gfo_ndes; import gplx.*; import gplx.core.*;
 import gplx.core.lists.*; /*ComparerAble*/
 public class GfoNdeList_ {
-	public static final    GfoNdeList Null = new GfoNdeList_null();
+	public static final GfoNdeList Null = new GfoNdeList_null();
 	public static GfoNdeList new_() {return new GfoNdeList_base();}
 }
 class GfoNdeList_base implements GfoNdeList {

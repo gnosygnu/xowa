@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.primitives; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Int_ary_parser_tst {
-	private final    Int_ary_parser_fxt fxt = new Int_ary_parser_fxt();
+	private final Int_ary_parser_fxt fxt = new Int_ary_parser_fxt();
 	@Test public void Many()		{fxt.Test__Parse_ary("1,2,3,4,5"		, 0, 9, Int_ary_.New(1, 2, 3, 4, 5));}
 	@Test public void One()		{fxt.Test__Parse_ary("1"				, 0, 1, Int_ary_.New(1));}
 	@Test public void None()		{fxt.Test__Parse_ary(""					, 0, 0, Int_ary_.New());}

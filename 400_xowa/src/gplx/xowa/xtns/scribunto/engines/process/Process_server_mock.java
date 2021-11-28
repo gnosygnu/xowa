@@ -88,5 +88,5 @@ class Process_server_mock_rcvd_val implements Process_server_mock_rcvd {
 		}
 	}
 
-	private static final    byte[] Bry_rv_bgn = Bry_.new_a7("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;s:"), Bry_rv_mid = Bry_.new_a7(":\""), Bry_rv_end = Bry_.new_a7("\";}}");
+	private static final byte[] Bry_rv_bgn = Bry_.new_a7("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;s:"), Bry_rv_mid = Bry_.new_a7(":\""), Bry_rv_end = Bry_.new_a7("\";}}");
 }

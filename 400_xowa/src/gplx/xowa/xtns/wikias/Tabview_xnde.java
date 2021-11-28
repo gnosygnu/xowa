@@ -71,7 +71,7 @@ public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 
 	private int global_id = 0;
 	public static final byte Xatr__id = 0;
-	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_str_byte("id", Xatr__id);
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_str_byte("id", Xatr__id);
 	private static byte[] Keep_alphanum(byte[] src) {
 		if (src == null) return null;
 		int src_len = src.length; if (src_len == 0) return src;
@@ -100,11 +100,11 @@ class Tabview_tab_itm {
 		this.Page_ttl_bry = page_ttl_bry;
 		this.Page_body = page_body;
 	}
-	public final    boolean Active;
-	public final    boolean Cache;
-	public final    byte[] Tab_name;
-	public final    byte[] Page_ttl_bry;
-	public final    byte[] Page_body;
+	public final boolean Active;
+	public final boolean Cache;
+	public final byte[] Tab_name;
+	public final byte[] Page_ttl_bry;
+	public final byte[] Page_body;
 
 	public static Tabview_tab_itm Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] src) {
 		byte[][] args_ary = Bry_split_.Split(src, Byte_ascii.Pipe);

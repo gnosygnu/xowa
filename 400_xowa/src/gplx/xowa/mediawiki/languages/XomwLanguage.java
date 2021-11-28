@@ -23,7 +23,7 @@ import gplx.xowa.mediawiki.includes.cache.localisation.*;
 import gplx.xowa.mediawiki.includes.exception.*;
 public class XomwLanguage {
 	public Xol_lang_itm XoLang() {return xoLang;} private Xol_lang_itm xoLang = null;
-	private final    Bry_bfr tmpBfr = Bry_bfr_.New();
+	private final Bry_bfr tmpBfr = Bry_bfr_.New();
 //		/**
 //		* @var LanguageConverter
 //		*/
@@ -41,8 +41,8 @@ public class XomwLanguage {
 	private XomwNamespacesById namespaceNames;
 	private XomwNamespacesByName mNamespaceIds, namespaceAliases;
 	private byte[] digitGroupingPattern = null;
-	private final    List_adp tmp_matches = List_adp_.New();
-	private final    Bry_bfr tmp_commafy = Bry_bfr_.New();
+	private final List_adp tmp_matches = List_adp_.New();
+	private final Bry_bfr tmp_commafy = Bry_bfr_.New();
 
 //		/**
 //		* ReplacementArray Object caches
@@ -4080,7 +4080,7 @@ public class XomwLanguage {
 
 		return XophpArray.array_values(mutable);
 	}
-	private static final    Regx_adp handleExplicitPluralForms_digits = Regx_adp_.new_("\\d+=");
+	private static final Regx_adp handleExplicitPluralForms_digits = Regx_adp_.new_("\\d+=");
 
 //		/**
 //		* Checks that convertPlural was given an array and pads it to requested
@@ -4975,7 +4975,7 @@ public class XomwLanguage {
 //		}
 
 	public static XomwLocalisationCacheForXowa dataCacheXowa = new XomwLocalisationCacheForXowa();
-	private final    static XophpArray getCompiledPluralRulesEmpty = XophpArray.New();
+	private final static XophpArray getCompiledPluralRulesEmpty = XophpArray.New();
 	// MW.SRC:1.33
 	/**
 	* Get the compiled plural rules for the language

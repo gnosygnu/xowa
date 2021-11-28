@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.apis.xowa.addons.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.addons.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xopg_match_mgr__tst {
-	private final    Xopg_match_mgr__fxt fxt = new Xopg_match_mgr__fxt();
+	private final Xopg_match_mgr__fxt fxt = new Xopg_match_mgr__fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test public void Specific() {
 		fxt.Init__set("en.w:A");
@@ -46,7 +46,7 @@ public class Xopg_match_mgr__tst {
 	}
 }
 class Xopg_match_mgr__fxt {
-	private final    Xopg_match_mgr match_mgr = new Xopg_match_mgr();
+	private final Xopg_match_mgr match_mgr = new Xopg_match_mgr();
 	private Xowe_wiki wiki;
 	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();

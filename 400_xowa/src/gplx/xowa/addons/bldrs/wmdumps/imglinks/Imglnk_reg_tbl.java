@@ -17,9 +17,9 @@ package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 public class Imglnk_reg_tbl implements Db_tbl {
-	private final    String tbl_name = "imglnk_reg"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__img_src, fld__img_trg, fld__img_repo;
-	private final    Db_conn conn;
+	private final String tbl_name = "imglnk_reg"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld__img_src, fld__img_trg, fld__img_repo;
+	private final Db_conn conn;
 	public Imglnk_reg_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld__img_src = flds.Add_str("img_src", 255);

@@ -26,7 +26,7 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 	private Xoae_app app; private Xowe_wiki wiki; private Js_wtr js_wtr = new Js_wtr();
 	private int show_init_word_count, show_more_word_count;
 	private Xoa_url tmp_url = Xoa_url.blank();
-	private static final    Object thread_lock = new Object();
+	private static final Object thread_lock = new Object();
 	public Xow_popup_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki; this.app = wiki.Appe();
 		ev_mgr = new Gfo_evt_mgr(this);
@@ -194,10 +194,10 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final    String 
+	private static final String
 	  Cbk_update_popup_html = "window.xowa.popups.UpdatePopupHtml"
 	;
-	private static final    byte[]
+	private static final byte[]
 	  Mode_show_more	= Bry_.new_a7("more")
 	, Mode_show_all		= Bry_.new_a7("all")
 	;

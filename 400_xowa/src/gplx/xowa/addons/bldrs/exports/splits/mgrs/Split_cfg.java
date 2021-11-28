@@ -19,9 +19,9 @@ public class Split_cfg implements Gfo_invk {
 	public long				Trg_max() {return trg_max;} private long trg_max = 32 * Io_mgr.Len_mb;
 	public Split_ns_itm[]	Ns_itms() {return ns_itms;} private Split_ns_itm[] ns_itms;
 	public int				Loader_rows() {return loader_rows;} private int loader_rows = 10000;
-	public Split_type_cfg	Text() {return text;} private final    Split_type_cfg text = new Split_type_cfg("text", 1000);
-	public Split_type_cfg	Html() {return html;} private final    Split_type_cfg html = new Split_type_cfg("html", 2000);
-	public Split_type_cfg	File() {return file;} private final    Split_type_cfg file = new Split_type_cfg("file", 3000);
+	public Split_type_cfg	Text() {return text;} private final Split_type_cfg text = new Split_type_cfg("text", 1000);
+	public Split_type_cfg	Html() {return html;} private final Split_type_cfg html = new Split_type_cfg("html", 2000);
+	public Split_type_cfg	File() {return file;} private final Split_type_cfg file = new Split_type_cfg("file", 3000);
 	public void Ns_itms_(int[] ary) {
 		List_adp list = List_adp_.New();
 		int len = ary.length;

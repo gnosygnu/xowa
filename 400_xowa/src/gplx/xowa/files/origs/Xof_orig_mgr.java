@@ -19,7 +19,7 @@ import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.
 import gplx.xowa.apps.wms.apis.*; import gplx.xowa.apps.wms.apis.origs.*;
 public class Xof_orig_mgr {
 	private Xof_orig_wkr[] wkrs; private int wkrs_len;
-	private Xof_url_bldr url_bldr; private Xow_repo_mgr repo_mgr; private final    Xof_img_size img_size = new Xof_img_size();
+	private Xof_url_bldr url_bldr; private Xow_repo_mgr repo_mgr; private final Xof_img_size img_size = new Xof_img_size();
 	public Xof_orig_mgr() {this.Wkrs__clear();}
 	public void Init_by_wiki(Xow_wiki wiki, Xof_fsdb_mode fsdb_mode, Xof_orig_tbl[] orig_tbls, Xof_url_bldr url_bldr) {
 		this.repo_mgr = wiki.File__repo_mgr(); this.url_bldr = url_bldr;

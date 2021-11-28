@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.core.flds.*;
 public class Xof_meta_mgr implements Gfo_invk {
-	private Object[] root = new Object[16]; private final    Ordered_hash dirty_fils = Ordered_hash_.New_bry();
-	private final    Gfo_fld_rdr rdr = Gfo_fld_rdr.xowa_(); private final    Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();
+	private Object[] root = new Object[16]; private final Ordered_hash dirty_fils = Ordered_hash_.New_bry();
+	private final Gfo_fld_rdr rdr = Gfo_fld_rdr.xowa_(); private final Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();
 	public Xof_meta_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.root_dir = wiki.Appe().Fsys_mgr().File_dir().GenSubDir_nest("#meta", wiki.Domain_str());}
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Io_url Root_dir() {return root_dir;} Io_url root_dir;

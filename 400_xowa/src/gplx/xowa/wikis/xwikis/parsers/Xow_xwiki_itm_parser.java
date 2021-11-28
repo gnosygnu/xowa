@@ -21,8 +21,8 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.bldrs.*;
 public class Xow_xwiki_itm_parser extends Dsv_wkr_base {
 	private Xow_domain_itm owner_domain_itm;
 	private int cur_tid = -1; private byte[] cur_fld1, cur_fld2, cur_fld3;
-	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
-	public Ordered_hash Xwiki_list() {return xwiki_list;} private final    Ordered_hash xwiki_list = Ordered_hash_.New();
+	private final Gfo_url_parser url_parser = new Gfo_url_parser();
+	public Ordered_hash Xwiki_list() {return xwiki_list;} private final Ordered_hash xwiki_list = Ordered_hash_.New();
 	@Override public Dsv_fld_parser[] Fld_parsers() {return new Dsv_fld_parser[] {Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser, Dsv_fld_parser_.Bry_parser};}
 	@Override public boolean Write_bry(Dsv_tbl_parser parser, int fld_idx, byte[] src, int bgn, int end) {
 		switch (fld_idx) {

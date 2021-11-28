@@ -43,9 +43,9 @@ public class IoUrlInfoRegy implements Gfo_invk {
 			IoUrlInfoRegy.Instance.Reg(alias);
 		}
 		return this;
-	}	public static final    String Invk_Add = "Add";
+	}	public static final String Invk_Add = "Add";
 	Ordered_hash hash = Ordered_hash_.New();
-        public static final    IoUrlInfoRegy Instance = new IoUrlInfoRegy();
+        public static final IoUrlInfoRegy Instance = new IoUrlInfoRegy();
 	IoUrlInfoRegy() {
 		this.Reset();
 	}

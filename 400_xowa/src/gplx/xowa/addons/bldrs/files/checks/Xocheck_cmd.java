@@ -23,6 +23,6 @@ public class Xocheck_cmd extends Xob_cmd__base { // checks fsdb; needed for en.w
 	}
 
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}  private static final String BLDR_CMD_KEY = "fsdb.check";
-	public static final    Xob_cmd Prototype = new Xocheck_cmd(null, null);
+	public static final Xob_cmd Prototype = new Xocheck_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xocheck_cmd(bldr, wiki);}
 }

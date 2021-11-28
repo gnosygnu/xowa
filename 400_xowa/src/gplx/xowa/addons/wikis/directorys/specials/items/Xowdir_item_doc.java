@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.directorys.specials.items; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*;
 import gplx.langs.mustaches.*; import gplx.xowa.addons.wikis.directorys.dbs.*;
 public class Xowdir_item_doc implements Mustache_doc_itm {
-	private final    boolean mode_is_new;
-	private final    int id;
-	private final    String domain, name, dir, main_page;
+	private final boolean mode_is_new;
+	private final int id;
+	private final String domain, name, dir, main_page;
 	public Xowdir_item_doc(int id, String domain, String name, String dir, String main_page) {
 		this.mode_is_new = id == -1;
 		this.id = id;
@@ -41,7 +41,7 @@ public class Xowdir_item_doc implements Mustache_doc_itm {
 		return Mustache_doc_itm_.Ary__empty;
 	}
 
-	public static final    Xowdir_item_doc[] Ary_empty = new Xowdir_item_doc[0];
+	public static final Xowdir_item_doc[] Ary_empty = new Xowdir_item_doc[0];
 	public static Xowdir_item_doc New(Xowdir_wiki_itm itm) {
 		return new Xowdir_item_doc(itm.Id(), itm.Domain(), itm.Json().Name(), itm.Url().OwnerDir().Xto_api(), itm.Json().Main_page());
 	}

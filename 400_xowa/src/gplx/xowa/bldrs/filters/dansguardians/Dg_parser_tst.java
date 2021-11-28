@@ -37,8 +37,8 @@ public class Dg_parser_tst {
 //		}
 }
 class Dg_parser_fxt {
-	private final    Dg_parser parser = new Dg_parser(); private final    Bry_bfr bfr = Bry_bfr_.Reset(32);
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(16);
+	private final Dg_parser parser = new Dg_parser(); private final Bry_bfr bfr = Bry_bfr_.Reset(32);
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(16);
 	public void Init() {}
 	public Dg_rule Make_line(int score, String... words) {return new Dg_rule(-1, -1, -1, Dg_rule.Tid_rule, null, score, Dg_word.Ary_new_by_str_ary(words));}
 	public void Test_parse_line(String str, Dg_rule expd) {

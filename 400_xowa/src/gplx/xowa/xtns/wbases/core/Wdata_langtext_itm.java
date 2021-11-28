@@ -17,8 +17,8 @@ package gplx.xowa.xtns.wbases.core; import gplx.*; import gplx.xowa.*; import gp
 import gplx.langs.jsons.*;
 public class Wdata_langtext_itm implements Wdata_lang_sortable {
 	public Wdata_langtext_itm(byte[] lang, byte[] text) {this.lang = lang; this.text = text;}  
-	public byte[] Lang() {return lang;} private final    byte[] lang;
-	public byte[] Text() {return text;} private final    byte[] text;
+	public byte[] Lang() {return lang;} private final byte[] lang;
+	public byte[] Text() {return text;} private final byte[] text;
 	public byte[] Lang_code() {return lang;}
 	public int Lang_sort() {return lang_sort;} public void Lang_sort_(int v) {lang_sort = v;} private int lang_sort = Wdata_lang_sorter.Sort_null;
 	@Override public String toString() {// TEST:

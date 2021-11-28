@@ -19,7 +19,7 @@ import gplx.xowa.wikis.domains.*; import gplx.xowa.specials.*;
 import gplx.xowa.apps.urls.*;
 public class Wdata_itemByTitle_page implements Xow_special_page {
 	private Gfo_qarg_mgr_old arg_hash = new Gfo_qarg_mgr_old();
-	private static final    byte[] Arg_site = Bry_.new_a7("site"), Arg_page = Bry_.new_a7("page");
+	private static final byte[] Arg_site = Bry_.new_a7("site"), Arg_page = Bry_.new_a7("page");
 	public Bry_fmtr Html_fmtr() {return html_fmtr;}
 	private Wdata_itemByTitle_cfg cfg;
 	public Xow_special_meta Special__meta() {return Xow_special_meta_.Itm__item_by_title;}

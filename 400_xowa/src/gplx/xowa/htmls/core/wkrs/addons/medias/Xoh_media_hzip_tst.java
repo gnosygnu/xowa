@@ -17,7 +17,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //	import org.junit.*; using gplx.core.tests;
 //	using gplx.langs.htmls; using gplx.xowa.htmls.core.makes.tests;
 //	public class Xoh_media_hzip_tst {
-//		private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
+//		private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 //		@Test  public void Video__full__ogv__width_y() {	// EX: [[File:A.ogv|320px|bcd|alt=efg]]; DATE:2016-08-05
 //			fxt.Test__bicode	// NOTE: caption not rendered; may need to reconsider;
 //			( "*!!aA.ogv~)$bA.ogv~efg~", String_.Concat_lines_nl_skip_last

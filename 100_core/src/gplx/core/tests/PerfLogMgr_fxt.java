@@ -43,7 +43,7 @@ public class PerfLogMgr_fxt {
 		entries.Clear();
 	}
 	List_adp entries = List_adp_.New(); PerfLogTmr tmr = PerfLogTmr.new_(); Io_url url = Io_url_.Empty;
-	public static final    PerfLogMgr_fxt Instance = new PerfLogMgr_fxt(); PerfLogMgr_fxt() {}
+	public static final PerfLogMgr_fxt Instance = new PerfLogMgr_fxt(); PerfLogMgr_fxt() {}
 	class PerfLogItm {
 		public String To_str() {
 			String secondsStr = Time_span_.To_str(milliseconds, Time_span_.Fmt_Default);

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 import org.junit.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
 public class Srch_crt_parser_tst {
-	private final    Srch_crt_parser_fxt fxt = new Srch_crt_parser_fxt();
+	private final Srch_crt_parser_fxt fxt = new Srch_crt_parser_fxt();
 	@Test  public void Word__one()				{fxt.Test__parse("a"					, "a");}
 	@Test  public void And__one()				{fxt.Test__parse("a + b"				, "(a AND b)");}
 	@Test  public void And__many()				{fxt.Test__parse("a + b + c"			, "(a AND b AND c)");}
@@ -51,8 +51,8 @@ public class Srch_crt_parser_tst {
 	@Test  public void Escape__escaped()		{fxt.Test__parse("\\\\*"				, "\\*");}			// '\\' -> '\*'
 }
 class Srch_crt_parser_fxt {
-	private final    Srch_crt_parser crt_parser;
-	private final    Srch_crt_visitor__print visitor__to_str = new Srch_crt_visitor__print();
+	private final Srch_crt_parser crt_parser;
+	private final Srch_crt_visitor__print visitor__to_str = new Srch_crt_visitor__print();
 	public Srch_crt_parser_fxt() {
 		crt_parser = new Srch_crt_parser(Srch_crt_scanner_syms.Dflt);
 		Srch_text_parser text_parser = new Srch_text_parser();

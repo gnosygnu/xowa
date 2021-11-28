@@ -86,5 +86,5 @@ public class Xog_url_macro_mgr {
 		return this;
 	}
 	private static final String Invk_lang_default = "lang_default", Invk_lang_default_ = "lang_default_", Invk_types = "types", Invk_custom = "custom";
-	public static final    byte[] Unhandled = null;
+	public static final byte[] Unhandled = null;
 }

@@ -40,7 +40,7 @@ public abstract class IoItm_base implements Gfo_invk, CompareAble {
 	}
 	public int compareTo(Object comp) {return url.compareTo(((IoItm_base)comp).url);}	// NOTE: needed for comic importer (sort done on IoItmHash which contains IoItm_base)
 //		public Object Data_get(String name)				{return Gfo_invk_.Invk_by_key(this, name);}
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, IoItm_base_.Prop_Type))	return this.TypeId();
 		else if	(ctx.Match(k, IoItm_base_.Prop_Path))	return this.Url();
 		else if	(ctx.Match(k, IoItm_base_.Prop_Title))	return this.Url().NameOnly();	// needed for gfio script criteria;

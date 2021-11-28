@@ -17,7 +17,7 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
 public class Xof_file_fxt {
-	private final    Xowe_wiki wiki;
+	private final Xowe_wiki wiki;
 	Xof_file_fxt(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		Io_mgr.Instance.InitEngine_mem();

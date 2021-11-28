@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
+import gplx.dbs.sqls.SqlQryWtrUtl;
 import org.junit.*;
 import gplx.core.criterias.*;
 public class Db_qry_dml_tst {
@@ -38,5 +39,5 @@ public class Db_qry_dml_tst {
 		qry.Where_(Criteria_.And(Db_crt_.New_eq("id", 0), Db_crt_.New_mt("startTime", DateAdp_.parse_gplx("2005-01-01"))));
 		tst_XtoSql(qry, "UPDATE tbl0 SET id=1, name='me', startTime='2007-12-23 00:00:00.000' WHERE (id = 0 AND startTime > '2005-01-01 00:00:00.000')");
 	}		
-	void tst_XtoSql(Db_qry qry, String expd) {Tfds.Eq(expd, qry.To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr_.New__basic()));}
+	void tst_XtoSql(Db_qry qry, String expd) {Tfds.Eq(expd, qry.To_sql__exec(SqlQryWtrUtl.NewBasic()));}
 }

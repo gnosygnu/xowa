@@ -21,10 +21,10 @@ public class Xobc_task_key {
 		this.wiki_date = wiki_date;
 		this.task_type = task_type;
 	}
-	public String Wiki_domain() {return wiki_domain;} private final    String wiki_domain;
-	public String Wiki_date() {return wiki_date;} private final    String wiki_date;
+	public String Wiki_domain() {return wiki_domain;} private final String wiki_domain;
+	public String Wiki_date() {return wiki_date;} private final String wiki_date;
 	public String Wiki_date_ui() {return String_.Replace(wiki_date, ".", "-");}
-	public String Task_type() {return task_type;} private final    String task_type;
+	public String Task_type() {return task_type;} private final String task_type;
 	public String Task_type_ui() {
 		if		(String_.Eq(task_type, "html"))		return "Articles";
 		else if	(String_.Eq(task_type, "file"))		return "Images";

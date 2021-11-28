@@ -17,9 +17,9 @@ package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.dbs.*; import gplx.dbs.utls.*;
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Xowb_prop_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__wbp_pid, fld__wbp_datatype;
-	private final    Db_conn conn;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld__wbp_pid, fld__wbp_datatype;
+	private final Db_conn conn;
 	private Db_stmt stmt_insert;
 	public Xowb_prop_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -28,7 +28,7 @@ public class Xowb_prop_tbl implements Db_tbl {
 		this.fld__wbp_datatype		= flds.Add_int("wbp_datatype");				// EX: 12=commonsMedia; SEE:Wbase_claim_type_
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("wbase_prop__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}

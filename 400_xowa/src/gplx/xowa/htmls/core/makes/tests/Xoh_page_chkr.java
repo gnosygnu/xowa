@@ -17,9 +17,9 @@ package gplx.xowa.htmls.core.makes.tests; import gplx.*; import gplx.xowa.*; imp
 import gplx.xowa.htmls.sections.*;
 import gplx.xowa.files.*;
 public class Xoh_page_chkr {
-	private final    Xoh_section_mgr expd_section_mgr = new Xoh_section_mgr();
-	private final    Xoh_img_mgr expd_img_mgr = new Xoh_img_mgr();
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Xoh_section_mgr expd_section_mgr = new Xoh_section_mgr();
+	private final Xoh_img_mgr expd_img_mgr = new Xoh_img_mgr();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public void Clear() {
 		expd_img_mgr.Clear();
 	}

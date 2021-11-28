@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
 import gplx.dbs.*;
 public class Merge2_copy_utl {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    String tbl_name, fld_pkey, fld_blob;
-	private final    boolean tbl_has_blob;
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final String tbl_name, fld_pkey, fld_blob;
+	private final boolean tbl_has_blob;
 	private Db_conn conn;
 	public Merge2_copy_utl(String tbl_name, String fld_pkey, String fld_blob, boolean tbl_has_blob) {
 		this.tbl_name = tbl_name;

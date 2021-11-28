@@ -19,17 +19,17 @@ import gplx.xowa.mediawiki.includes.xohtml.*;
 import gplx.langs.regxs.*;
 // TODO.XO: this->getConverterLanguage()->markNoConversion($url, true),
 public class Xomw_magiclinks_wkr {
-	private final    Btrie_slim_mgr regex_trie = Btrie_slim_mgr.ci_a7(); // NOTE: must be ci to handle protocols; EX: "https:" and "HTTPS:"
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_slim_mgr regex_trie = Btrie_slim_mgr.ci_a7(); // NOTE: must be ci to handle protocols; EX: "https:" and "HTTPS:"
+	private final Btrie_rv trv = new Btrie_rv();
 	private static byte[] Tag__anch__rhs;
 	private boolean[] url_separators;
 	private static Xomw_regex_link_interrupt regex_link_interrupt;
-	private final    XomwParserIface parser;
-	private final    Xomw_regex_boundary regex_boundary;
-	private final    Xomw_regex_url regex_url;
-	private final    XomwSanitizer sanitizer;
-	private final    XomwLinker linker;
-	private final    Xomw_atr_mgr atrs = new Xomw_atr_mgr();
+	private final XomwParserIface parser;
+	private final Xomw_regex_boundary regex_boundary;
+	private final Xomw_regex_url regex_url;
+	private final XomwSanitizer sanitizer;
+	private final XomwLinker linker;
+	private final Xomw_atr_mgr atrs = new Xomw_atr_mgr();
 	private byte[] page_title;
 
 	private static final byte Regex__anch = 1, Regex__elem = 2, Regex__free = 3;
@@ -332,8 +332,8 @@ class Xomw_regex_html_entity {
 class Xomw_regex_link_interrupt {
 	private static final byte Bgn__ent__lt = 0, Bgn__ent__gt = 1, Bgn__ent__nbsp = 2, Bgn__hex = 3, Bgn__dec = 4;
 	private static final byte End__hex__lt = 0, End__hex__gt = 1, End__hex__nbsp = 2, End__dec__lt = 3, End__dec__gt = 4, End__dec__nbsp = 5;
-	private final    Btrie_slim_mgr bgn_trie = Btrie_slim_mgr.cs();
-	private final    Btrie_slim_mgr end_trie = Btrie_slim_mgr.ci_a7();
+	private final Btrie_slim_mgr bgn_trie = Btrie_slim_mgr.cs();
+	private final Btrie_slim_mgr end_trie = Btrie_slim_mgr.ci_a7();
 	public Xomw_regex_link_interrupt() {
 		// MW.REGEX: &(lt|gt|nbsp|#x0*(3[CcEe]|[Aa]0)|#0*(60|62|160));
 		bgn_trie.Add_str_byte("&lt;", Bgn__ent__lt);

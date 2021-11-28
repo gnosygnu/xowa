@@ -19,8 +19,8 @@ import gplx.xowa.wikis.dbs.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
 class Dpl_page_finder {
-	private final    Dpl_itm itm;
-	private final    Xowe_wiki wiki;
+	private final Dpl_itm itm;
+	private final Xowe_wiki wiki;
 
 	public Dpl_page_finder(Dpl_itm itm, Xowe_wiki wiki) {
 		this.itm = itm;

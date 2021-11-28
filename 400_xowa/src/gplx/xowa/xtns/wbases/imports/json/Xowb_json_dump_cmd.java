@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.imports.json; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.imports.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Xowb_json_dump_cmd extends Xob_cmd__base {
-	private final    Xowb_json_dump_parser json_dump_parser;
+	private final Xowb_json_dump_parser json_dump_parser;
 	private Io_url src_fil;
 	public Xowb_json_dump_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);
 		this.json_dump_parser = new Xowb_json_dump_parser(bldr, wiki);
@@ -33,6 +33,6 @@ public class Xowb_json_dump_cmd extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "wbase.json_dump";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}
-	public static final    Xob_cmd Prototype = new Xowb_json_dump_cmd(null, null);
+	public static final Xob_cmd Prototype = new Xowb_json_dump_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xowb_json_dump_cmd(bldr, wiki);}
 }

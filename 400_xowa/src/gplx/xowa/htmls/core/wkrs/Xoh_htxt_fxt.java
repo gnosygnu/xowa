@@ -19,10 +19,10 @@ import gplx.xowa.files.caches.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.wikis.pages.lnkis.*;
 public class Xoh_htxt_fxt {
-	private final    Xowe_wiki wiki;
-	private final    Xop_fxt parser_fxt = new Xop_fxt();
-	private final    Xoh_page hpg = new Xoh_page();
-	private final    Xoh_make_mgr make_mgr = Xoh_make_mgr.New_make();
+	private final Xowe_wiki wiki;
+	private final Xop_fxt parser_fxt = new Xop_fxt();
+	private final Xoh_page hpg = new Xoh_page();
+	private final Xoh_make_mgr make_mgr = Xoh_make_mgr.New_make();
 	public Xoh_htxt_fxt() {
 		this.wiki = parser_fxt.Wiki();
 		Xoa_app_fxt.repo2_(parser_fxt.App(), wiki);	// needed else will be old "mem/wiki/repo/trg/thumb/" instead of standard "mem/file/en.wikipedia.org/thumb/"

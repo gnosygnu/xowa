@@ -21,7 +21,7 @@ public class Sites_xtn_mgr extends Xox_mgr_base {
 		regy_mgr = new Sites_regy_mgr(this);
 	}
 	@Override public boolean Enabled_default() {return false;}
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final    byte[] XTN_KEY = Bry_.new_a7("RelatedSites");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("RelatedSites");
 	@Override public Xox_mgr Xtn_clone_new() {return new Sites_xtn_mgr();}
 	@Override public void Xtn_init_by_wiki(Xowe_wiki wiki) {
 		this.wiki = wiki;

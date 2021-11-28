@@ -17,7 +17,7 @@ package gplx.core.net; import gplx.*; import gplx.core.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import java.io.*;
 class Http_client_wtr__stream implements Http_client_wtr {	
-	private final    byte[] tmp_stream_bry = new byte[1024];
+	private final byte[] tmp_stream_bry = new byte[1024];
 		private DataOutputStream stream;
 		public void Stream_(Object o) {
 				this.stream = new DataOutputStream((OutputStream)o);

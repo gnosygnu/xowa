@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.core.consoles.*;
 import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_ustring__find__tst {
-	private final    Scrib_lib_ustring__find__fxt fxt = new Scrib_lib_ustring__find__fxt();
+	private final Scrib_lib_ustring__find__fxt fxt = new Scrib_lib_ustring__find__fxt();
 	@Test public void Plain() {
 		fxt.Test__find("aabaab"        , "b"    ,  2, Bool_.Y, "3;3"); // bytes=1
 		fxt.Test__find("¢¢b¢¢b"        , "b"    ,  2, Bool_.Y, "3;3"); // bytes=2
@@ -73,7 +73,7 @@ public class Scrib_lib_ustring__find__tst {
 }
 class Scrib_lib_ustring__find__fxt {
 	private boolean dbg = false;
-	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt();
+	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt();
 	private Scrib_lib lib;
 	public Scrib_lib_ustring__find__fxt() {
 		fxt.Clear();

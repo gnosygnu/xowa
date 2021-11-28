@@ -17,7 +17,7 @@ package gplx.objects.primitives; import gplx.*; import gplx.objects.*;
 import gplx.objects.errs.*;
 public class Long_ {
 	public static final String Cls_val_name = "long";
-	public static final    Class<?> Cls_ref_type = Long.class; 
+	public static final Class<?> Cls_ref_type = Long.class;
 	public static long Cast(Object o) {
 		try {
 			return (Long)o; 

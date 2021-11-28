@@ -50,5 +50,5 @@ public class Pfunc_pagelanguage extends Pf_func_base {
 //				default: throw Err_.new_unhandled(id);
 //			}
 	}
-	public static final    Pfunc_pagelanguage Instance = new Pfunc_pagelanguage();
+	public static final Pfunc_pagelanguage Instance = new Pfunc_pagelanguage();
 }

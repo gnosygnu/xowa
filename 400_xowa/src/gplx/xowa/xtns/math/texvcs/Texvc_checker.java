@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*;
 import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.xtns.math.texvcs.funcs.*;
 public class Texvc_checker {
-	private final    List_adp func_stack = List_adp_.New();
+	private final List_adp func_stack = List_adp_.New();
 	private Texvc_root root; private int root_idx, root_len;
 	private boolean fail;
 	public void Check(byte[] src, Texvc_root root) {

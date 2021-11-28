@@ -17,9 +17,9 @@ package gplx.xowa.htmls.core.wkrs.xndes.tags; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.xndes.atrs.*;
 public class Xohz_tag_regy {
-	private final    Ordered_hash keys = Ordered_hash_.New_bry();
-	private final    Hash_adp uids = Hash_adp_.New(); private final    Byte_obj_ref uids_ref = Byte_obj_ref.zero_();
-	public Xohz_atr_regy Atr_regy() {return atr_regy;} private final    Xohz_atr_regy atr_regy = new Xohz_atr_regy();
+	private final Ordered_hash keys = Ordered_hash_.New_bry();
+	private final Hash_adp uids = Hash_adp_.New(); private final Byte_obj_ref uids_ref = Byte_obj_ref.zero_();
+	public Xohz_atr_regy Atr_regy() {return atr_regy;} private final Xohz_atr_regy atr_regy = new Xohz_atr_regy();
 	public Xohz_tag Get_by_key(byte[] key)	{return (Xohz_tag)keys.Get_by(key);}
 	public Xohz_tag Get_by_uid(byte uid)	{return (Xohz_tag)uids.Get_by(uids_ref.Val_(uid));}
 	public Xohz_tag_regy Add(int uid, byte[] key, int flag_len, byte[] atr_key) {

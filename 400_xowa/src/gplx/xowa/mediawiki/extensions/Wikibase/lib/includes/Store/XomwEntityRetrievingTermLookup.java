@@ -19,7 +19,7 @@ import gplx.xowa.xtns.wbases.Wdata_doc;
 import gplx.xowa.xtns.wbases.stores.Wbase_doc_mgr;
 
 public class XomwEntityRetrievingTermLookup {
-	private final    Wbase_doc_mgr entity_mgr;
+	private final Wbase_doc_mgr entity_mgr;
 	public XomwEntityRetrievingTermLookup(Wbase_doc_mgr entity_mgr) {
 		this.entity_mgr = entity_mgr;
 	}

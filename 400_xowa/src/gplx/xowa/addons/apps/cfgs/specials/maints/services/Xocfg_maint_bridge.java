@@ -32,10 +32,10 @@ public class Xocfg_maint_bridge implements Bridge_cmd_itm {
 	}
 
 	private static final byte Proc__upsert = 0;
-	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("upsert"						, Proc__upsert)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("xo.cfg_maint");
-        public static final    Xocfg_maint_bridge Prototype = new Xocfg_maint_bridge(); Xocfg_maint_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("xo.cfg_maint");
+        public static final Xocfg_maint_bridge Prototype = new Xocfg_maint_bridge(); Xocfg_maint_bridge() {}
 }

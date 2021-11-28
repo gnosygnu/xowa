@@ -154,6 +154,6 @@ public class Xosql_dump_parser {
 	}
 	public Xosql_dump_parser Src_rdr_bfr_len_(int v) {src_rdr_bfr_len = v; return this;}	// TEST:
 
-	private static final    byte[] Bry_insert_into = Bry_.new_a7("INSERT INTO "), Bry_values = Bry_.new_a7(" VALUES (");
+	private static final byte[] Bry_insert_into = Bry_.new_a7("INSERT INTO "), Bry_values = Bry_.new_a7(" VALUES (");
 	private static final byte Mode__sql_bgn = 0, Mode__row_bgn = 1, Mode__row_end = 2, Mode__fld = 3, Mode__quote = 4, Mode__escape = 5;
 }

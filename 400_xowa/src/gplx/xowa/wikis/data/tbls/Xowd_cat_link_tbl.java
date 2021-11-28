@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.addons.wikis.ctgs.*; 
 public class Xowd_cat_link_tbl implements Db_tbl {		
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_from, fld_to_id, fld_sortkey, fld_timestamp, fld_type_id;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_from, fld_to_id, fld_sortkey, fld_timestamp, fld_type_id;
 	private Db_stmt stmt_insert, stmt_select_in;
 	public Xowd_cat_link_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
@@ -29,8 +29,8 @@ public class Xowd_cat_link_tbl implements Db_tbl {
 		fld_timestamp		= flds.Add_str	("cl_timestamp", 14);
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name; 
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Create_idx() {
 		conn.Meta_idx_create(Xoa_app_.Usr_dlg()

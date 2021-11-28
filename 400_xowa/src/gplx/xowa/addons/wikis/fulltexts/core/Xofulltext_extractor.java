@@ -17,15 +17,15 @@ package gplx.xowa.addons.wikis.fulltexts.core; import gplx.*; import gplx.xowa.*
 import gplx.core.btries.*;
 import gplx.xowa.parsers.htmls.*;
 public class Xofulltext_extractor implements Mwh_doc_wkr {
-	private final    Mwh_doc_parser doc_parser = new Mwh_doc_parser();
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    Btrie_slim_mgr punct_trie = Btrie_slim_mgr.cs();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Mwh_doc_parser doc_parser = new Mwh_doc_parser();
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final Btrie_slim_mgr punct_trie = Btrie_slim_mgr.cs();
+	private final Btrie_rv trv = new Btrie_rv();
 	public Xofulltext_extractor() {
 		punct_trie.Add_many_str(Xofulltext_punct_.Punct_bgn_ary);
 		punct_trie.Add_many_str("/", ")", "]", ">", "�");
 	}
-	public Hash_adp_bry    Nde_regy() {return nde_regy;} private final    Hash_adp_bry nde_regy = Mwh_doc_wkr_.Nde_regy__mw();
+	public Hash_adp_bry    Nde_regy() {return nde_regy;} private final Hash_adp_bry nde_regy = Mwh_doc_wkr_.Nde_regy__mw();
 	public void            On_nde_head_bgn (Mwh_doc_parser mgr, byte[] src, int nde_tid, int key_bgn, int key_end) {}
 	public void            On_nde_head_end (Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end, boolean inline) {}
 	public void            On_nde_tail_end (Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {}

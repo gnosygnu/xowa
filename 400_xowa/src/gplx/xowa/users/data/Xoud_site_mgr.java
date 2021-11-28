@@ -17,7 +17,7 @@ package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.dbs.*; import gplx.xowa.users.data.*;
 public class Xoud_site_mgr {
 	private Xoud_site_tbl tbl;
-	private final    Xoud_id_mgr id_mgr;
+	private final Xoud_id_mgr id_mgr;
 	public Xoud_site_mgr(Xoud_id_mgr id_mgr) {this.id_mgr = id_mgr;}
 	public void Conn_(Db_conn conn, boolean created) {
 		tbl = new Xoud_site_tbl(conn);

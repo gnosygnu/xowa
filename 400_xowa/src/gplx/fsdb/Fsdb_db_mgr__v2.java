@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.fsdb; import gplx.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.origs.*; import gplx.xowa.wikis.data.*;
 public class Fsdb_db_mgr__v2 implements Fsdb_db_mgr {
-	private final    Xow_db_layout layout; private final    Io_url wiki_dir;
-	private final    Fsdb_db_file file_main_core, file_user_core;
-	private final    Xof_orig_tbl[] orig_tbl_ary;
+	private final Xow_db_layout layout; private final Io_url wiki_dir;
+	private final Fsdb_db_file file_main_core, file_user_core;
+	private final Xof_orig_tbl[] orig_tbl_ary;
 	public Fsdb_db_mgr__v2(Xow_db_layout layout, Io_url wiki_dir, Fsdb_db_file file_main_core, Fsdb_db_file file_user_core) {
 		this.layout = layout; this.wiki_dir = wiki_dir;
 		this.file_main_core = file_main_core; this.file_user_core = file_user_core;

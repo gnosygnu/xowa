@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.btries.*; import gplx.core.intls.*;
 public class Xol_case_mgr implements Gfo_invk, Gfo_case_mgr {
-	private final    Btrie_fast_mgr upper_trie = Btrie_fast_mgr.cs(), lower_trie = Btrie_fast_mgr.cs(); private Xol_case_itm[] itms;
+	private final Btrie_fast_mgr upper_trie = Btrie_fast_mgr.cs(), lower_trie = Btrie_fast_mgr.cs(); private Xol_case_itm[] itms;
 	public Xol_case_mgr(byte tid) {this.tid = tid;}
 	public byte Tid() {return tid;} private byte tid;
 	public Gfo_case_itm Get_or_null(byte bgn_byte, byte[] src, int bgn, int end) {

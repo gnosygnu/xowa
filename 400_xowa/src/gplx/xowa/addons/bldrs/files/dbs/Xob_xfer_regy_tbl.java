@@ -18,7 +18,7 @@ import gplx.core.stores.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 import gplx.xowa.bldrs.*;
 public class Xob_xfer_regy_tbl {
-	public static final    String Tbl_name = "xfer_regy"
+	public static final String Tbl_name = "xfer_regy"
 	, Fld_lnki_id = "lnki_id", Fld_lnki_tier_id = "lnki_tier_id", Fld_lnki_page_id = "lnki_page_id", Fld_lnki_ttl = "lnki_ttl", Fld_lnki_ext = "lnki_ext"
 	, Fld_lnki_time = "lnki_time", Fld_lnki_page = "lnki_page", Fld_lnki_count = "lnki_count"
 	, Fld_orig_repo = "orig_repo", Fld_orig_page_id = "orig_page_id", Fld_orig_redirect_src = "orig_redirect_src", Fld_orig_media_type = "orig_media_type"
@@ -43,7 +43,7 @@ public class Xob_xfer_regy_tbl {
 	}
 	public static Db_stmt Select_by_page_id_stmt(Db_conn p) {return p.Stmt_sql(Sql_select_clause);}
 	public static DataRdr Select_by_page_id(Db_stmt stmt, int page_id, int limit) {return stmt.Val_int(page_id).Val_int(limit).Exec_select();}
-	private static final    String
+	private static final String
 	  Sql_select_clause = String_.Concat_lines_nl
 		( "SELECT   *"
 		, "FROM     xfer_regy"
@@ -75,7 +75,7 @@ public class Xob_xfer_regy_tbl {
 		rdr.Rls();
 		return rv;
 	}
-	private static final    String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = String_.Concat_lines_nl
 	(	"CREATE TABLE IF NOT EXISTS xfer_regy"
 	,	"( lnki_id             integer             NOT NULL			    PRIMARY KEY"
 	,	", lnki_tier_id        integer             NOT NULL"
@@ -97,7 +97,7 @@ public class Xob_xfer_regy_tbl {
 	,	", xfer_status         integer             NOT NULL"
 	,	");"
 	);
-	private static final    String Sql_create_data_orig = String_.Concat_lines_nl
+	private static final String Sql_create_data_orig = String_.Concat_lines_nl
 	( "INSERT INTO xfer_regy "
 	, "( lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	, ", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"
@@ -111,7 +111,7 @@ public class Xob_xfer_regy_tbl {
 	, "WHERE   file_is_orig = 1"
 	, "GROUP BY orig_repo, lnki_ttl, lnki_ext, orig_media_type, file_is_orig, orig_w, orig_h, lnki_time, lnki_page"
 	);
-	private static final    String Sql_create_data_thumb = String_.Concat_lines_nl
+	private static final String Sql_create_data_thumb = String_.Concat_lines_nl
 	( "INSERT INTO xfer_regy "
 	, "( lnki_id, lnki_tier_id, lnki_page_id, orig_page_id, orig_repo, lnki_ttl, orig_redirect_src, lnki_ext, orig_media_type"
 	, ", file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page, lnki_count"
@@ -125,7 +125,7 @@ public class Xob_xfer_regy_tbl {
 	, "WHERE   file_is_orig = 0"
 	, "GROUP BY orig_repo, lnki_ttl, lnki_ext, orig_media_type, file_is_orig, orig_w, orig_h, file_w, file_h, lnki_time, lnki_page"
 	);
-	private static final    Db_idx_itm
+	private static final Db_idx_itm
 //		  Idx_select		= Db_idx_itm.sql_("CREATE        INDEX IF NOT EXISTS xfer_regy__select        ON xfer_regy (xfer_status, orig_repo, lnki_ttl, file_w);")
 	  Idx_lnki_page_id	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS xfer_regy__lnki_page_id  ON xfer_regy (xfer_status, lnki_tier_id, lnki_page_id, lnki_id, orig_repo, file_is_orig, lnki_ttl, lnki_ext, lnki_time, lnki_page, file_w, file_h);")
 	, Idx_lnki_ttl		= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS xfer_regy__lnki_ttl ON xfer_regy (lnki_ttl);")	// needed for troubleshooting

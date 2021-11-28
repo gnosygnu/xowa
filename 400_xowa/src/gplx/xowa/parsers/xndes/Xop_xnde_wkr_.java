@@ -65,7 +65,7 @@ class Xop_xnde_wkr_ {
 		return Bry_find_.Not_found;
 	}
 	private static final int Find_xtn_end__tid__bgn = 0, Find_xtn_end__tid__end = 1;//, Find_xtn_end__tid__xtag = 2;
-	private static final    Int_obj_val 
+	private static final Int_obj_val
 	  Find_xtn_end__key__bgn  = new Int_obj_val(Find_xtn_end__tid__bgn)
 	, Find_xtn_end__key__end  = new Int_obj_val(Find_xtn_end__tid__end)
 	;

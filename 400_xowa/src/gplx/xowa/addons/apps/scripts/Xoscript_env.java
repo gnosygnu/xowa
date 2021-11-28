@@ -17,12 +17,12 @@ package gplx.xowa.addons.apps.scripts; import gplx.*; import gplx.xowa.*; import
 import gplx.core.envs.*;
 import gplx.core.scripts.*;
 public class Xoscript_env {
-	private final    Gfo_script_engine engine;
+	private final Gfo_script_engine engine;
 	public Xoscript_env(Gfo_script_engine engine, Io_url root_dir) {
 		this.root_dir = root_dir;
 		this.engine = engine;
 	}
-	public Io_url Root_dir() {return root_dir;} private final    Io_url root_dir;
+	public Io_url Root_dir() {return root_dir;} private final Io_url root_dir;
 	public void load_script(String file) {
 		engine.Load_script(Io_url_.new_fil_(Xoscript_env.Resolve_file(Bool_.N, root_dir, file)));
 	}

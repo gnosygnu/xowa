@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gpl
 import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 class Srch_link_wkr_ {
-	private static final    Srch_word_count_wkr word_count_wkr = new Srch_word_count_wkr();
+	private static final Srch_word_count_wkr word_count_wkr = new Srch_word_count_wkr();
 	public static Srch_crt_itm Find_sql_root(Srch_search_ctx ctx) {
 		Srch_crt_mgr crt_mgr = ctx.Crt_mgr;
 		// lookup word_ids; needed for one, mixed, and ands
@@ -135,5 +135,5 @@ class Srch_word_row_sorter__link_count implements gplx.core.lists.ComparerAble {
 		Srch_word_row rhs = (Srch_word_row)rhsObj;
 		return -Int_.Compare(lhs.Link_count, rhs.Link_count);
 	}
-        public static final    Srch_word_row_sorter__link_count Desc = new Srch_word_row_sorter__link_count(); Srch_word_row_sorter__link_count() {}
+        public static final Srch_word_row_sorter__link_count Desc = new Srch_word_row_sorter__link_count(); Srch_word_row_sorter__link_count() {}
 }

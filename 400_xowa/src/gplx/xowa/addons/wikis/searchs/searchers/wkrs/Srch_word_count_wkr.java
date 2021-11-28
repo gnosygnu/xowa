@@ -20,7 +20,7 @@ class Srch_word_count_wkr extends Percentile_select_base {
 	private Srch_word_tbl word_tbl; private Srch_db_cfg db_cfg;
 	private Srch_crt_itm sub;
 	private int total_link_count, rows_read; private boolean score_too_low;
-	private final    Db_stmt_mgr stmt_mgr = new Db_stmt_mgr(); private Db_stmt stmt;
+	private final Db_stmt_mgr stmt_mgr = new Db_stmt_mgr(); private Db_stmt stmt;
 	public int Get_top_10(Srch_search_ctx ctx, Srch_word_tbl word_tbl, Srch_crt_itm sub) {
 		super.cxl = ctx.Cxl;
 		this.db_cfg = ctx.Addon.Db_mgr().Cfg();

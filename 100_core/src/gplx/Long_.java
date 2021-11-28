@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 public class Long_ {
 	public static final String Cls_val_name = "long";
-	public static final    Class<?> Cls_ref_type = Long.class; 
+	public static final Class<?> Cls_ref_type = Long.class;
 	public static final int Log10Ary_len = 21;
 	public static long[] Log10Ary = new long[] 
   			{ 1, 10, 100, 1000, 10000

@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store; import gplx.
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
 public class XomwWikiTextPropertyOrderProvider_tst {
-	private final    XomwWikiTextPropertyOrderProvider_fxt fxt = new XomwWikiTextPropertyOrderProvider_fxt();
+	private final XomwWikiTextPropertyOrderProvider_fxt fxt = new XomwWikiTextPropertyOrderProvider_fxt();
 	@Test  public void Basic()	{
 		fxt.Test__getPropertyOrder(String_.Concat_lines_nl
 			( "* [[Property:P1]]"
@@ -55,7 +55,7 @@ class XomwWikiTextPropertyOrderProvider_fxt {
 		Gftest.Eq__str(expd.To_str(), actl.To_str());
 	}
 }
-class MockXomwWikiTextPropertyOrderProvider extends XomwWikiTextPropertyOrderProvider {	private final    String text;
+class MockXomwWikiTextPropertyOrderProvider extends XomwWikiTextPropertyOrderProvider {	private final String text;
 	public MockXomwWikiTextPropertyOrderProvider(String text) {this.text = text;}
 	@Override protected String getPropertyOrderWikitext() {
 		return text;

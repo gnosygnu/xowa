@@ -63,13 +63,13 @@ class Pft_fmt_itm_hijri {
 		byte[] msg_key = Month_names[m];
 		return wiki.Msg_mgr().Val_by_key_obj(msg_key);
 	}
-	private static final    byte[][] Month_names = new byte[][] 
+	private static final byte[][] Month_names = new byte[][]
 	{ Bry_.new_a7("hijri-calendar-m1"), Bry_.new_a7("hijri-calendar-m2"), Bry_.new_a7("hijri-calendar-m3")
 	, Bry_.new_a7("hijri-calendar-m4"), Bry_.new_a7("hijri-calendar-m5"), Bry_.new_a7("hijri-calendar-m6")
 	, Bry_.new_a7("hijri-calendar-m7"), Bry_.new_a7("hijri-calendar-m8"), Bry_.new_a7("hijri-calendar-m9")
 	, Bry_.new_a7("hijri-calendar-m10"), Bry_.new_a7("hijri-calendar-m11"), Bry_.new_a7("hijri-calendar-m12")
 	};
-	public static final    int
+	public static final int
 	  Rslt__year			= 0
 	, Rslt__month			= 1
 	, Rslt__day				= 2

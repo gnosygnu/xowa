@@ -26,13 +26,13 @@ public class Xomp_mgr_db {
 		// this.lock_mgr = new Xomp_lock_mgr__db(conn, 5000);
 		this.lock_mgr = new Xomp_lock_mgr__fsys(5000, this.Dir());
 	}
-	public Db_conn			Conn() {return conn;} private final    Db_conn conn;
-	public Io_url			Url() {return url;}  private final    Io_url url;
+	public Db_conn			Conn() {return conn;} private final Db_conn conn;
+	public Io_url			Url() {return url;}  private final Io_url url;
 	public Io_url			Dir() {return url.OwnerDir();}
-	public Xomp_page_tbl	Tbl__page() {return page_tbl;} private final    Xomp_page_tbl page_tbl;
-	public Xomp_wkr_tbl		Tbl__wkr() {return wkr_tbl;} private final    Xomp_wkr_tbl wkr_tbl;
-	public Db_cfg_tbl		Tbl__cfg() {return cfg_tbl;} private final    Db_cfg_tbl cfg_tbl;
-	public Xomp_lock_mgr	Lock_mgr() {return lock_mgr;} private final    Xomp_lock_mgr lock_mgr;
+	public Xomp_page_tbl	Tbl__page() {return page_tbl;} private final Xomp_page_tbl page_tbl;
+	public Xomp_wkr_tbl		Tbl__wkr() {return wkr_tbl;} private final Xomp_wkr_tbl wkr_tbl;
+	public Db_cfg_tbl		Tbl__cfg() {return cfg_tbl;} private final Db_cfg_tbl cfg_tbl;
+	public Xomp_lock_mgr	Lock_mgr() {return lock_mgr;} private final Xomp_lock_mgr lock_mgr;
 
 	public void Remake() {
 		conn.Meta_tbl_remake_many(page_tbl, wkr_tbl, cfg_tbl);

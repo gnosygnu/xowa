@@ -21,8 +21,8 @@ class Xocfg_cache_sub {
 		this.evt = evt;
 		this.sub = sub;
 	}
-	public String Ctx() {return ctx;} private final    String ctx;
-	public String Key() {return key;} private final    String key;
-	public String Evt() {return evt;} private final    String evt;
-	public Gfo_invk Sub() {return sub;} private final    Gfo_invk sub;
+	public String Ctx() {return ctx;} private final String ctx;
+	public String Key() {return key;} private final String key;
+	public String Evt() {return evt;} private final String evt;
+	public Gfo_invk Sub() {return sub;} private final Gfo_invk sub;
 }

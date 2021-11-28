@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.uniqs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_uniq_mgr__tst {
-	private final    Xop_uniq_mgr__fxt fxt = new Xop_uniq_mgr__fxt();
+	private final Xop_uniq_mgr__fxt fxt = new Xop_uniq_mgr__fxt();
 	@Before public void init() {fxt.Init();}
 	@Test public void Test__random_bry() {
 		fxt.Init_random_int_ary(Int_ary_.New(240563374, 22728940, 1451248133));
@@ -58,7 +58,7 @@ public class Xop_uniq_mgr__tst {
 	}
 }
 class Xop_uniq_mgr__fxt {
-	private final    Xop_uniq_mgr mgr = new Xop_uniq_mgr();
+	private final Xop_uniq_mgr mgr = new Xop_uniq_mgr();
 	public Xop_uniq_mgr__fxt Init_random_int_ary(int... v) {mgr.Random_int_ary_(v); return this;}
 	public void Init() {mgr.Clear();}
 	public void Test__uniq_bry_new(String expd) {

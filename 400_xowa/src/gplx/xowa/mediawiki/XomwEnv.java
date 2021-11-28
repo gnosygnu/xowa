@@ -36,12 +36,12 @@ public class XomwEnv {
 		this.mediaWikiServices = new XomwMediaWikiServices(this, interwikiLookup, language, localInterwikis);
 	}
 
-	public XomwLanguage Language() {return language;} private final    XomwLanguage language;
-	public XomwMagicWordMgr Magic_word_mgr() {return magic_word_mgr;} private final    XomwMagicWordMgr magic_word_mgr = new XomwMagicWordMgr();
-	public XomwMessageMgr Message_mgr() {return message_mgr;} private final    XomwMessageMgr message_mgr = new XomwMessageMgr();
+	public XomwLanguage Language() {return language;} private final XomwLanguage language;
+	public XomwMagicWordMgr Magic_word_mgr() {return magic_word_mgr;} private final XomwMagicWordMgr magic_word_mgr = new XomwMagicWordMgr();
+	public XomwMessageMgr Message_mgr() {return message_mgr;} private final XomwMessageMgr message_mgr = new XomwMessageMgr();
 	public XomwFileFinder File_finder() {return file_finder;} private XomwFileFinder file_finder = new XomwFileFinderNoop();
-	public XomwMediaHandlerFactory MediaHandlerFactory() {return mediaHandlerFactory;} private final    XomwMediaHandlerFactory mediaHandlerFactory = new XomwMediaHandlerFactory();
-	public XomwMediaWikiServices MediaWikiServices() {return mediaWikiServices;} private final    XomwMediaWikiServices mediaWikiServices;
+	public XomwMediaHandlerFactory MediaHandlerFactory() {return mediaHandlerFactory;} private final XomwMediaHandlerFactory mediaHandlerFactory = new XomwMediaHandlerFactory();
+	public XomwMediaWikiServices MediaWikiServices() {return mediaWikiServices;} private final XomwMediaWikiServices mediaWikiServices;
 
 	public XomwEnv File_finder_(XomwFileFinder v) {file_finder = v; return this;} 
 

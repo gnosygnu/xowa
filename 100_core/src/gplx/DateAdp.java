@@ -29,7 +29,7 @@ public class DateAdp implements CompareAble, Gfo_invk {
 			return this.Add_day(days);
 		}
 		else										return Gfo_invk_.Rv_unhandled;			
-	}	public static final    String Invk_XtoStr_fmt = "XtoStr_fmt", Invk_AddDays = "Add_day";
+	}	public static final String Invk_XtoStr_fmt = "XtoStr_fmt", Invk_AddDays = "Add_day";
 	public int Segment(int segmentIdx) {
 		switch (segmentIdx) {
 			case DateAdp_.SegIdx_year:			return this.Year();

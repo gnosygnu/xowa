@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import gplx.core.strings.*;
 public class Keyval_ {
-	public static final    Keyval[] Ary_empty = new Keyval[0];
+	public static final Keyval[] Ary_empty = new Keyval[0];
 	public static Keyval[] Ary(Keyval... ary) {return ary;}
 	public static Keyval[] Ary_cast_(Object o) {
 		try {return (Keyval[])o;}

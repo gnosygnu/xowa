@@ -235,7 +235,7 @@ public class Bry_bfr_tst {
 	}
 }
 class ByteAryBfr_fxt {
-	private final    Bry_bfr bfr = Bry_bfr_.Reset(16);
+	private final Bry_bfr bfr = Bry_bfr_.Reset(16);
 	public Bry_bfr Bfr() {return bfr;}
 	public void Clear() {
 		bfr.ClearAndReset();

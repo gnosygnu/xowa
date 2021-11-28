@@ -36,14 +36,14 @@ public class Xoapi_root implements Gfo_invk {
 		html_api.Init_by_app(app);
 		usr_api.Init_by_app(app);
 	}
-	public Xoapi_addon		Addon()		{return addon_api;} private final    Xoapi_addon addon_api = new Xoapi_addon();
-	public Xoapi_app		App()		{return app_api;} private final    Xoapi_app app_api = new Xoapi_app();
-	public Xoapi_nav		Nav()		{return nav_api;} private final    Xoapi_nav nav_api = new Xoapi_nav();
-	public Xoapi_gui		Gui()		{return gui_api;} private final    Xoapi_gui gui_api = new Xoapi_gui();
-	public Xoapi_html		Html()		{return html_api;} private final    Xoapi_html html_api = new Xoapi_html();
-	public Xoapi_bldr		Bldr()		{return bldr_api;} private final    Xoapi_bldr bldr_api = new Xoapi_bldr();
-	public Xoapi_usr		Usr()		{return usr_api;} private final    Xoapi_usr usr_api = new Xoapi_usr();
-	public Xoapi_xtns		Xtns()		{return xtns_api;} private final    Xoapi_xtns xtns_api = new Xoapi_xtns();
+	public Xoapi_addon		Addon()		{return addon_api;} private final Xoapi_addon addon_api = new Xoapi_addon();
+	public Xoapi_app		App()		{return app_api;} private final Xoapi_app app_api = new Xoapi_app();
+	public Xoapi_nav		Nav()		{return nav_api;} private final Xoapi_nav nav_api = new Xoapi_nav();
+	public Xoapi_gui		Gui()		{return gui_api;} private final Xoapi_gui gui_api = new Xoapi_gui();
+	public Xoapi_html		Html()		{return html_api;} private final Xoapi_html html_api = new Xoapi_html();
+	public Xoapi_bldr		Bldr()		{return bldr_api;} private final Xoapi_bldr bldr_api = new Xoapi_bldr();
+	public Xoapi_usr		Usr()		{return usr_api;} private final Xoapi_usr usr_api = new Xoapi_usr();
+	public Xoapi_xtns		Xtns()		{return xtns_api;} private final Xoapi_xtns xtns_api = new Xoapi_xtns();
 	public String			Test_str() {return test_str;} public void Test_str_(String v) {test_str = v;} private String test_str;	// TEST
 	private void Exec(String key) {
 		Xog_cmd_itm cmd_itm = app.Gui_mgr().Cmd_mgr().Get_or_null(key);

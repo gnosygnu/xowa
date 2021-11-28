@@ -21,7 +21,7 @@ import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.ttls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.xtns.gallery.*;
 public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
-	private final    Xoh_gly_grp_wtr grp_wtr = new Xoh_gly_grp_wtr();
+	private final Xoh_gly_grp_wtr grp_wtr = new Xoh_gly_grp_wtr();
 	public int Tid() {return Xoh_hzip_dict_.Tid__gly;}
 	public String Key() {return Xoh_hzip_dict_.Key__gly;}
 	public byte[] Hook() {return hook;} private byte[] hook;
@@ -119,7 +119,7 @@ public class Xoh_gly_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_gly_hzip rv = new Xoh_gly_hzip(); rv.pool_mgr = mgr; rv.pool_idx = idx; rv.hook = (byte[])args[0]; return rv;}
-	private final    Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_(1,    1, 1, 1, 1,    1, 1, 1, 3);
+	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_(1,    1, 1, 1, 1,    1, 1, 1, 3);
 	private static final int // SERIALIZED
 	  Flag__xnde__w				=  0
 	, Flag__xnde__h				=  1

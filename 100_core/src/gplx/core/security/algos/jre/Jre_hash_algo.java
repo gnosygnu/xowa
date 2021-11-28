@@ -23,7 +23,7 @@ public class Jre_hash_algo implements Hash_algo {
 		this.key = key;
 		this.md = factory.New_algo_under(key);
 	}
-	public String Key() {return key;} private final    String key;
+	public String Key() {return key;} private final String key;
 	public Hash_algo Clone_hash_algo() {return new Jre_hash_algo(factory, key);}
 	public void Update_digest(byte[] bry, int bgn, int end) {md.update(bry, bgn, end - bgn);}
 	public byte[] To_hash_bry() {

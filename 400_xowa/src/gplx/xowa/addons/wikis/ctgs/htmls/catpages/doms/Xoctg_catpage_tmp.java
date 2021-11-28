@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
 public class Xoctg_catpage_tmp {
-	private final    List_adp subc_list = List_adp_.New(), page_list = List_adp_.New(), file_list = List_adp_.New();
+	private final List_adp subc_list = List_adp_.New(), page_list = List_adp_.New(), file_list = List_adp_.New();
 	public void Add(Xoctg_catpage_itm itm) {
 		List_adp list = Get_by_tid(itm.Grp_tid());
 		list.Add(itm);

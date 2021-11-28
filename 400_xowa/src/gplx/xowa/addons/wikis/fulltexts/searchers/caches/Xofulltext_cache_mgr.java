@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.fulltexts.searchers.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*;
 import gplx.core.primitives.*;
 public class Xofulltext_cache_mgr {
-	private final    Ordered_hash qry_hash = Ordered_hash_.New();
-	private final    Hash_adp_bry id_hash = Hash_adp_bry.cs();
+	private final Ordered_hash qry_hash = Ordered_hash_.New();
+	private final Hash_adp_bry id_hash = Hash_adp_bry.cs();
 	public int Next_qry_id() {return next_qry_id++;} private int next_qry_id;
 	public void Clear() {
 		qry_hash.Clear();

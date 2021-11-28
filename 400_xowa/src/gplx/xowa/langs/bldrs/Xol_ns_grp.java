@@ -31,7 +31,7 @@ public class Xol_ns_grp implements Gfo_invk {
 			new_ary[i + old_ary_len] = add_ary[i];
 		this.ary = new_ary;
 	}
-	private static final    Xow_ns[] Ary_empty = new Xow_ns[0];
+	private static final Xow_ns[] Ary_empty = new Xow_ns[0];
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_lang))					return lang;
 		else if	(ctx.Match(k, Invk_load_text))				Exec_load_text(m.ReadBry("v"));

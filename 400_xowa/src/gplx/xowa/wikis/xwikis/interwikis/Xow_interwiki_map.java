@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.xwikis.interwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
 public class Xow_interwiki_map {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public int Len() {return hash.Len();}
 	public Xow_interwiki_itm Get_at(int i) {return (Xow_interwiki_itm)hash.Get_at(i);}
 	public void Add(byte[] key, byte[] domain, byte[] url) {

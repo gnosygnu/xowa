@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Xol_num_fmtr_base implements Gfo_invk {
-	private final    Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs(); private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs(); private final Btrie_rv trv = new Btrie_rv();
 	private Xol_num_grp[] grp_ary = Xol_num_grp.Ary_empty; int grp_ary_len;
 	private Gfo_num_fmt_wkr[] cache; int cache_len = 16;
 	private Bry_bfr tmp = Bry_bfr_.New();
@@ -139,8 +139,8 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 	}
 	public static final String Invk_dec_dlm_ = "dec_dlm_", Invk_clear = "clear", Invk_grps_add = "grps_add";
 	private static final byte Raw_tid_dec = 0, Raw_tid_grp = 1;
-	private static final    byte[] Dec_dlm_default = new byte[] {Byte_ascii.Dot};
-	public static final    byte[] Grp_dlm_default = new byte[] {Byte_ascii.Comma};
+	private static final byte[] Dec_dlm_default = new byte[] {Byte_ascii.Dot};
+	public static final byte[] Grp_dlm_default = new byte[] {Byte_ascii.Comma};
 	public static final byte Tid_format = 0, Tid_raw = 1, Tid_nosep = 2;
 }
 class Gfo_num_fmt_wkr {

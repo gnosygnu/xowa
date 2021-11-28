@@ -92,10 +92,10 @@ public class IptEventMgr implements Gfo_invk {
 	}
 	static boolean keyHandled = false; static IptEvtDataKey keyStateCur = IptEvtDataKey.Null; static IptEvtDataMouse mouseStateCur = IptEvtDataMouse.Null;
 	static TimerAdp mousePressTimer; static GfuiElem senderCur;
-	public static final    IptEventMgr EventSink2 = new IptEventMgr(); IptEventMgr() {}
+	public static final IptEventMgr EventSink2 = new IptEventMgr(); IptEventMgr() {}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Tmr_cmd))		MousePressTick();
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String Tmr_cmd = "Tmr";
+	}	public static final String Tmr_cmd = "Tmr";
 }

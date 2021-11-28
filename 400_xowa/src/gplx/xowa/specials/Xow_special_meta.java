@@ -22,12 +22,12 @@ public class Xow_special_meta {
 		this.ttl_str = String_.new_u8(ttl_bry);
 		this.aliases = Bry_.Ary(aliases);
 	}
-	public int Src()				{return src;} private final    int src;					// either MW or XOWA
-	public String Key_str()			{return key_str;} private final    String key_str;		// EX: AllPages
-	public byte[] Key_bry()			{return key_bry;} private final    byte[] key_bry;
-	public String Ttl_str()			{return ttl_str;} private final    String ttl_str;		// EX: Special:AllPages
-	public byte[] Ttl_bry()			{return ttl_bry;} private final    byte[] ttl_bry;
-	public byte[][] Aliases()		{return aliases;} private final    byte[][] aliases;	// EX: Special:RandomPage has Special:Random as alias
+	public int Src()				{return src;} private final int src;					// either MW or XOWA
+	public String Key_str()			{return key_str;} private final String key_str;		// EX: AllPages
+	public byte[] Key_bry()			{return key_bry;} private final byte[] key_bry;
+	public String Ttl_str()			{return ttl_str;} private final String ttl_str;		// EX: Special:AllPages
+	public byte[] Ttl_bry()			{return ttl_bry;} private final byte[] ttl_bry;
+	public byte[][] Aliases()		{return aliases;} private final byte[][] aliases;	// EX: Special:RandomPage has Special:Random as alias
 	public byte[] Display_ttl()		{return display_ttl;} private byte[] display_ttl; public Xow_special_meta Display_ttl_(String v) {display_ttl = Bry_.new_u8(v); return this;} 
 	public String Url__home() {
 		return String_.Concat(gplx.xowa.wikis.domains.Xow_domain_itm_.Str__home, gplx.xowa.htmls.hrefs.Xoh_href_.Str__wiki, ttl_str);

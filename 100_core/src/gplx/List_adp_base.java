@@ -64,12 +64,12 @@ public abstract class List_adp_base implements List_adp, Gfo_invk {
 			if (Object_.Eq(list[i], o)) return i;
 		return List_adp_.Not_found;
 	}
-	@gplx.Virtual public void Clear() {
+	public void Clear() {
 		for (int i = 0; i < count; i++)
 			list[i] = null;
 		count = 0;
 	}
-	@gplx.Virtual public void Del_at(int index) {if (index >= count || index < 0) throw Err_.new_missing_idx(index, count);
+	public void Del_at(int index) {if (index >= count || index < 0) throw Err_.new_missing_idx(index, count);
 		Collapse(index);
 		count--;
 	}
@@ -102,7 +102,7 @@ public abstract class List_adp_base implements List_adp, Gfo_invk {
 			list[rhs] = temp;
 		}
 	}
-	@gplx.Virtual public void Shuffle() {// REF: Fisher-Yates shuffle
+	public void Shuffle() {// REF: Fisher-Yates shuffle
 		RandomAdp random = RandomAdp_.new_();
 		for (int i = count; i > 1; i--) {
 			int rndIdx = random.Next(i);

@@ -17,11 +17,11 @@ package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*
 import gplx.dbs.*;
 class Dg_log_mgr {
 	private Db_conn conn;
-	private final    Dg_file_tbl		tbl_file = new Dg_file_tbl();
-	private final    Dg_rule_tbl		tbl_rule = new Dg_rule_tbl();
-	private final    Dg_page_score_tbl	tbl_page_score = new Dg_page_score_tbl();
-	private final    Dg_page_rule_tbl	tbl_page_rule = new Dg_page_rule_tbl();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(16);
+	private final Dg_file_tbl		tbl_file = new Dg_file_tbl();
+	private final Dg_rule_tbl		tbl_rule = new Dg_rule_tbl();
+	private final Dg_page_score_tbl	tbl_page_score = new Dg_page_score_tbl();
+	private final Dg_page_rule_tbl	tbl_page_rule = new Dg_page_rule_tbl();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(16);
 	public void Init(Io_url db_url) {
 		Db_conn_bldr_data conn_data = Db_conn_bldr.Instance.Get_or_new(db_url);
 		conn = conn_data.Conn(); boolean created = conn_data.Created();
@@ -41,7 +41,7 @@ class Dg_log_mgr {
 	public void Rls()		{conn.Txn_end();}
 }
 class Dg_file_tbl {
-	private String tbl_name = "dg_file"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "dg_file"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private String fld_file_id, fld_file_path, fld_rule_count;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
@@ -67,7 +67,7 @@ class Dg_file_tbl {
 	}
 }
 class Dg_rule_tbl implements Rls_able {
-	private String tbl_name = "dg_rule"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "dg_rule"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private String fld_file_id, fld_rule_id, fld_rule_idx, fld_rule_score, fld_rule_text;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
@@ -100,7 +100,7 @@ class Dg_rule_tbl implements Rls_able {
 	}
 }
 class Dg_page_score_tbl implements Rls_able {
-	private String tbl_name = "dg_page_score"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "dg_page_score"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private String fld_log_tid, fld_page_id, fld_page_ns, fld_page_ttl, fld_page_len, fld_page_score, fld_page_rule_count, fld_clude_type;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
@@ -140,7 +140,7 @@ class Dg_page_score_tbl implements Rls_able {
 	}
 }
 class Dg_page_rule_tbl implements Rls_able {
-	private String tbl_name = "dg_page_rule"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "dg_page_rule"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private String fld_log_tid, fld_page_id, fld_rule_id, fld_rule_score_total;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {

@@ -17,7 +17,7 @@ package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
 import gplx.core.bits.*; import gplx.core.primitives.*;
 public class IptEventType_ {
 	static EnmMgr enmMgr = EnmMgr.new_().BitRngEnd_(128);
-	public static final    IptEventType 
+	public static final IptEventType
 		  None			= new_(   0, "none")
 		, KeyDown		= new_(   1, "keyDown")
 		, KeyUp			= new_(   2, "keyUp")

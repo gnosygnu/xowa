@@ -97,7 +97,7 @@ public class Xob_xdat_file {
 		if (insert) bfr.Add(new_itm);
 		itm_0_bgn = (ary_len * Len_idx_itm) + Len_itm_dlm;
 		src = bfr.To_bry_and_clear(); 
-	}	private static final    byte Dlm_hdr_fld = Byte_ascii.Pipe, Dlm_row = Byte_ascii.Nl;		
+	}	private static final byte Dlm_hdr_fld = Byte_ascii.Pipe, Dlm_row = Byte_ascii.Nl;
 	public void Save(Io_url url) {
 		Bry_bfr bfr = Bry_bfr_.New();
 		Srl_save_bry(bfr);

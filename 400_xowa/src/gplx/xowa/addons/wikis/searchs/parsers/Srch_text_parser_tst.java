@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import org.junit.*; import gplx.xowa.langs.cases.*;
 public class Srch_text_parser_tst {
-	private final    Srch_text_parser_fxt fxt = new Srch_text_parser_fxt();
+	private final Srch_text_parser_fxt fxt = new Srch_text_parser_fxt();
 	@Before public void init() {fxt.Init();}
 	@Test  public void Word__one()						{fxt.Clear().Test__split("abcd"				, "abcd");}
 	@Test  public void Word__many()					{fxt.Clear().Test__split("abc d ef"			, "abc", "d", "ef");}
@@ -100,8 +100,8 @@ public class Srch_text_parser_tst {
 	@Test  public void Word_bgn__tilde()				{fxt.Clear().Test__split("~a~"				, "a");}							// EX: "Phantom ~Requiem for the Phantom~"
 }
 class Srch_text_parser_fxt {
-	private final    Srch_text_parser word_parser = new Srch_text_parser();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
+	private final Srch_text_parser word_parser = new Srch_text_parser();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	private Xol_case_mgr case_mgr;
 	public void Init() {
 		case_mgr = Xol_case_mgr_.A7();

@@ -19,11 +19,11 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
 public class Xoctg_catpage_mgr implements Gfo_invk {
-	private final    Xow_wiki wiki;
-	private final    Hash_adp_bry cache = Hash_adp_bry.cs();
-	private final    Xoctg_catpage_loader loader = new Xoctg_catpage_loader();
-	private final    Xoctg_fmt_grp fmt_subcs = Xoctg_fmt_grp.New__subc(), fmt_pages = Xoctg_fmt_grp.New__page(), fmt_files = Xoctg_fmt_grp.New__file();
-	private final    Uca_ltr_extractor ltr_extractor = new Uca_ltr_extractor(true);
+	private final Xow_wiki wiki;
+	private final Hash_adp_bry cache = Hash_adp_bry.cs();
+	private final Xoctg_catpage_loader loader = new Xoctg_catpage_loader();
+	private final Xoctg_fmt_grp fmt_subcs = Xoctg_fmt_grp.New__subc(), fmt_pages = Xoctg_fmt_grp.New__page(), fmt_files = Xoctg_fmt_grp.New__file();
+	private final Uca_ltr_extractor ltr_extractor = new Uca_ltr_extractor(true);
 	private String missing_cls = Str__missing_cls__red;
 	public int Grp_max() {return grp_max;} private int grp_max = Grp_max_dflt;
 	public Xoctg_catpage_mgr(Xow_wiki wiki) {
@@ -98,9 +98,9 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 	}	private static final String Invk__collation_ = "collation_";
 
 	public static int Grp_max_dflt = 200;
-	private static final    Object thread_lock = new Object();
+	private static final Object thread_lock = new Object();
 
 	private static final String Cfg__missing_class = "xowa.addon.category.catpage.missing_class";
 	private static final String Str__missing_cls__normal = "normal", Str__missing_cls__hide = "hide", Str__missing_cls__red = "red_link";
-	private static final    byte[] Css__missing_cls__normal = Bry_.new_a7(".xowa-missing-category-entry {}"), Css__missing_cls__hide = Bry_.new_a7(".xowa-missing-category-entry {display: none;}"), Css__missing_cls__red = Bry_.new_a7(".xowa-missing-category-entry {color: red;}");
+	private static final byte[] Css__missing_cls__normal = Bry_.new_a7(".xowa-missing-category-entry {}"), Css__missing_cls__hide = Bry_.new_a7(".xowa-missing-category-entry {display: none;}"), Css__missing_cls__red = Bry_.new_a7(".xowa-missing-category-entry {color: red;}");
 }

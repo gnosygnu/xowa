@@ -19,6 +19,6 @@ class Xodel_prune_itm {
 		this.Item_id = item_id;
 		this.Item_is_orig = item_is_orig;
 	}
-	public final    int Item_id;
-	public final    boolean Item_is_orig;
+	public final int Item_id;
+	public final boolean Item_is_orig;
 }

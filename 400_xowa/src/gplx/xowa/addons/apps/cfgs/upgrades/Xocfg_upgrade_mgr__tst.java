@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.cfgs.upgrades; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xocfg_upgrade_mgr__tst {
-	private final    Xocfg_upgrade_mgr__fxt fxt = new Xocfg_upgrade_mgr__fxt();
+	private final Xocfg_upgrade_mgr__fxt fxt = new Xocfg_upgrade_mgr__fxt();
 	@Test  public void Parse__one() {
 		fxt.Test__parse("app.cfgs.get('k_1', 'app').val = 'v_1';\n", Keyval_.new_("k_1", "v_1"));
 	}

@@ -19,7 +19,7 @@ import gplx.core.strings.*; import gplx.core.primitives.*; import gplx.core.bits
 public class XophpRegex_ {
 	// REF.PHP: https://www.php.net/manual/en/function.preg-quote.php
 	// The special regular expression characters are:
-	private static final    Hash_adp preg_quote_hash = Hash_adp_.New().Add_many_as_key_and_val
+	private static final Hash_adp preg_quote_hash = Hash_adp_.New().Add_many_as_key_and_val
 		('.', '\\', '+', '*', '?', '[', '^', ']', '$', '(', ')', '{', '}', '=', '!', '<', '>', '|', ':', '-', '#');
 	public static String preg_quote(String str, String delimiter) {// NOTE: "String delimiter" not used b/c Java / XO does not allow symbolic quotes; EX: "/abc/i"
 		String_bldr sb = String_bldr_.new_();
@@ -242,7 +242,7 @@ public class XophpRegex_ {
 	// REF.PHP:https://www.php.net/manual/en/reference.pcre.pattern.modifiers.php
 	// Some modifiers can be set using "(?LETTER)"; EX: "(?J)"; REF.PHP:https://www.php.net/manual/en/regexp.reference.@gplx.Internal protected-options.php
 	// https://stackoverflow.com/questions/5767627/how-to-add-features-missing-from-the-java-regex-implementation/5771326#5771326
-	public static final    int
+	public static final int
 	  MODIFIER_NONE = 0
 	, MODIFIER_i    = Math_.Pow_int(2,  0) // PCRE_CASELESS: If this modifier is set, letters in the pattern match both upper and lower case letters.
 	, MODIFIER_m    = Math_.Pow_int(2,  1) // PCRE_MULTILINE: By default, PCRE treats the subject String as consisting of a single "line" of characters (even if it actually contains several newlines). The "start of line" metacharacter (^) matches only at the start of the String, while the "end of line" metacharacter ($) matches only at the end of the String, or before a terminating newline (unless D modifier is set). This is the same as Perl. When this modifier is set, the "start of line" and "end of line" constructs match immediately following or immediately before any newline in the subject String, respectively, as well as at the very start and end. This is equivalent to Perl's /m modifier. If there are no "\n" characters in a subject String, or no occurrences of ^ or $ in a pattern, setting this modifier has no effect.

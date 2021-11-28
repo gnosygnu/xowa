@@ -18,8 +18,8 @@ import gplx.langs.jsons.*;
 import gplx.xowa.files.downloads.*;
 import gplx.xowa.apps.wms.apis.*;
 public class Xowm_parse_wmf {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    Json_parser json_parser = new Json_parser();
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final Json_parser json_parser = new Json_parser();
 	public Xowm_parse_data Get_parse_or_null(Xof_download_wkr download_wkr, Xow_wiki wiki, Xoa_ttl page_ttl) {
 		if (!gplx.core.ios.IoEngine_system.Web_access_enabled) return null;
 		byte[] wiki_domain = wiki.Domain_bry();

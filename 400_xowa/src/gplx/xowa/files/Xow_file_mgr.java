@@ -27,7 +27,7 @@ public class Xow_file_mgr implements Gfo_invk {
 		wkr_mgr = new Xof_wkr_mgr(this);
 	}
 	public Fsdb_db_mgr		Db_core() {return db_core;} private Fsdb_db_mgr db_core;
-	public Xof_orig_mgr		Orig_mgr() {return orig_mgr;} private final    Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
+	public Xof_orig_mgr		Orig_mgr() {return orig_mgr;} private final Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
 	public Xof_fsdb_mode	Fsdb_mode() {
 		if (fsdb_mode == null) {
 			Version();

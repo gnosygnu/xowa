@@ -35,21 +35,21 @@ public abstract class Hash_adp_base implements Hash_adp {
 		Add(key, val);
 		return true;
 	}
-	@gplx.Virtual public void Del(Object key) {Del_base(key);}
+	public void Del(Object key) {Del_base(key);}
 	protected Object Get_by_or_fail_base(Object key) {
 		if (key == null) throw Err_.new_wo_type("key cannot be null");
 		if (!Has_base(key)) throw Err_.new_wo_type("key not found", "key", key);
 		return Fetch_base(key);
 	}
 
-	// private final    java.util.HashMap<Object, Object> hash = new java.util.HashMap<Object, Object>();			
-	private final    java.util.Hashtable hash = new java.util.Hashtable();			
-	@gplx.Virtual public int Len() {return hash.size();}														
-	@gplx.Virtual public int Count() {return hash.size();}														
-	@gplx.Virtual public void Clear() {hash.clear();}															
-	@gplx.Virtual protected void Add_base(Object key, Object val) {hash.put(key, val);}						
-	@gplx.Virtual protected void Del_base(Object key) {hash.remove(key);}										
-	@gplx.Virtual protected boolean Has_base(Object key) {return hash.containsKey(key);}							
-	@gplx.Virtual protected Object Fetch_base(Object key) {return hash.get(key);}									
-	@gplx.Virtual public java.util.Iterator iterator() {return hash.values().iterator();}	
+	// private final java.util.HashMap<Object, Object> hash = new java.util.HashMap<Object, Object>();
+	private final java.util.Hashtable hash = new java.util.Hashtable();
+	public int Len() {return hash.size();}
+	public int Count() {return hash.size();}
+	public void Clear() {hash.clear();}
+	protected void Add_base(Object key, Object val) {hash.put(key, val);}
+	protected void Del_base(Object key) {hash.remove(key);}
+	protected boolean Has_base(Object key) {return hash.containsKey(key);}
+	protected Object Fetch_base(Object key) {return hash.get(key);}
+	public java.util.Iterator iterator() {return hash.values().iterator();}
 }

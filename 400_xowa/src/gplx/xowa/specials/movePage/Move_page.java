@@ -136,7 +136,7 @@ class Move_trg_ns_list_fmtr implements gplx.core.brys.Bfr_arg {
 			fmtr.Bld_bfr_many(bfr, ns.Id(), bry_selected, ns.Name_combo());
 		}
 	}
-	private static final    byte[] Bry_selected = Bry_.new_a7(" selected=''");
+	private static final byte[] Bry_selected = Bry_.new_a7(" selected=''");
 	private Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	(	""
 	,	"  <option value='~{ns_id}' ~{ns_selected}>~{ns_name}</option>"
@@ -174,7 +174,7 @@ class Move_url_args {
 		create_redirect = false;
 	}
 	private static final byte Key_submitted = 1, Key_src_ttl = 2, Key_trg_ns = 3, Key_trg_ttl = 4, Key_create_redirect = 5;
-	private static final    Hash_adp_bry arg_keys = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry arg_keys = Hash_adp_bry.ci_a7()
 	.Add_str_byte("wpMove"			, Key_submitted)
 	.Add_str_byte("wpOldTitle"		, Key_src_ttl)
 	.Add_str_byte("wpNewTitleNs"	, Key_trg_ns)

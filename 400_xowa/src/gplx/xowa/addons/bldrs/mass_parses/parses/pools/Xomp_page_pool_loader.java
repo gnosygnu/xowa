@@ -17,10 +17,10 @@ package gplx.xowa.addons.bldrs.mass_parses.parses.pools; import gplx.*; import g
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.wkrs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*; import gplx.xowa.addons.bldrs.mass_parses.parses.locks.*;
 public class Xomp_page_pool_loader {
-	private final    Xow_wiki wiki;
-	private final    int num_pages_per_load;
-	private final    Db_attach_mgr attach_mgr;
-	private final    boolean show_msg__fetched_pool;
+	private final Xow_wiki wiki;
+	private final int num_pages_per_load;
+	private final Db_attach_mgr attach_mgr;
+	private final boolean show_msg__fetched_pool;
 	public Xomp_page_pool_loader(Xow_wiki wiki, Db_conn make_conn, int num_pages_per_load, boolean show_msg__fetched_pool) {
 		this.wiki = wiki;
 		this.make_conn = make_conn;
@@ -28,7 +28,7 @@ public class Xomp_page_pool_loader {
 		this.num_pages_per_load  = num_pages_per_load;
 		this.show_msg__fetched_pool = show_msg__fetched_pool;
 	}
-	public Db_conn Conn() {return make_conn;} private final    Db_conn make_conn;
+	public Db_conn Conn() {return make_conn;} private final Db_conn make_conn;
 	public int Get_pending_count() {
 		Db_rdr rdr = make_conn.Stmt_sql("SELECT Count(*) AS Count_of FROM xomp_page mp WHERE mp.page_status = 0").Exec_select__rls_auto();
 		try {

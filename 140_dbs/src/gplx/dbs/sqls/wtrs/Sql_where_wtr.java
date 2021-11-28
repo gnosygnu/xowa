@@ -13,11 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
-import gplx.core.criterias.*; import gplx.dbs.sqls.itms.*; 
+package gplx.dbs.sqls.wtrs; import gplx.Bry_bfr;
+import gplx.Byte_ascii;
+import gplx.CompareAble_;
+import gplx.Err_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Type_ids_;
+import gplx.core.criterias.Criteria;
+import gplx.core.criterias.Criteria_;
+import gplx.core.criterias.Criteria_between;
+import gplx.core.criterias.Criteria_bool_base;
+import gplx.core.criterias.Criteria_comp;
+import gplx.core.criterias.Criteria_eq;
+import gplx.core.criterias.Criteria_fld;
+import gplx.core.criterias.Criteria_in;
+import gplx.core.criterias.Criteria_ioMatch;
+import gplx.core.criterias.Criteria_like;
+import gplx.dbs.sqls.itms.Db_obj_ary_crt;
+import gplx.dbs.sqls.itms.Db_obj_ary_fld;
+import gplx.dbs.sqls.itms.Sql_where_clause;
 public class Sql_where_wtr {
-	private final    Sql_core_wtr qry_wtr;
-	private final    Sql_val_wtr val_wtr;
+	private final Sql_core_wtr qry_wtr;
+	private final Sql_val_wtr val_wtr;
 	public Sql_where_wtr(Sql_core_wtr qry_wtr, Sql_val_wtr val_wtr) {this.qry_wtr = qry_wtr; this.val_wtr = val_wtr;}
 	public void Bld_where(Bry_bfr bfr, Sql_wtr_ctx ctx, Sql_where_clause where_itm) {
 		if (where_itm == Sql_where_clause.Where__null) return;

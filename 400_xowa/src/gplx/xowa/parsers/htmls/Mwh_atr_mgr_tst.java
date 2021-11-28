@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Mwh_atr_mgr_tst {
-	private final    Mwh_atr_mgr_fxt fxt = new Mwh_atr_mgr_fxt();
+	private final Mwh_atr_mgr_fxt fxt = new Mwh_atr_mgr_fxt();
 	@Test public void Atr_utl_make() {
 		// key="val"
 		fxt.Test_atr_utl_make(Mwh_atr_itm_.Qte_tid__qute, Mwh_atr_itm_.Mask__valid__y, Mwh_atr_itm_.Mask__repeated__n, Mwh_atr_itm_.Mask__key_exists__y, Mwh_atr_itm_.Mask__val_made__n, 42);

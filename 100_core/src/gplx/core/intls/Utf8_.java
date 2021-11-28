@@ -136,7 +136,7 @@ public class Utf8_ {
 	private static boolean Codepoint_valid(int v) {
 				return Character.isDefined(v);
 			}
-	public static final    int 
+	public static final int
 	  Codepoint_max = 0x10FFFF //see http://unicode.org/glossary/
 	, Codepoint_surrogate_bgn = 0xD800
 	, Codepoint_surrogate_end = 0xDFFF

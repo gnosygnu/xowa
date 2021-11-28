@@ -21,8 +21,8 @@ public class Xocfg_val_row {
 		this.val = val;
 		this.date = date;
 	}
-	public String Key() {return key;} private final    String key;
-	public String Ctx() {return ctx;} private final    String ctx;
-	public String Val() {return val;} private final    String val;
-	public String Date() {return date;} private final    String date;
+	public String Key() {return key;} private final String key;
+	public String Ctx() {return ctx;} private final String ctx;
+	public String Val() {return val;} private final String val;
+	public String Date() {return date;} private final String date;
 }

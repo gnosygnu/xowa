@@ -41,7 +41,7 @@ public class GfuiLbl_ {
 		rv.Border().All_(PenAdp_.black_());
 		return rv;
 	}
-	public static final    String Text_Null = null;
+	public static final String Text_Null = null;
 	@gplx.Internal protected static GfuiLbl new_() {
 		GfuiLbl rv = new GfuiLbl();
 		rv.ctor_GfuiBox_base(GfuiElem_.init_focusAble_false_());

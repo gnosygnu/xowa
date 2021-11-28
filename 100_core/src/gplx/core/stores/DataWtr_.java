@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 import gplx.core.gfo_ndes.*;
 public class DataWtr_ {
-	public static final    DataWtr Null = new DataWtr_null();
+	public static final DataWtr Null = new DataWtr_null();
 }
 class DataWtr_null implements DataWtr {
 	public boolean Type_rdr() {return false;}

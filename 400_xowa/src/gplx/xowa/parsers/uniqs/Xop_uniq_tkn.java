@@ -22,5 +22,5 @@ public class Xop_uniq_tkn extends Xop_tkn_itm_base {
 		this.key = key;
 	}
 	@Override public byte Tkn_tid()			{return Xop_tkn_itm_.Tid_uniq;}
-	public byte[] Key()                     {return key;} private final    byte[] key;
+	public byte[] Key()                     {return key;} private final byte[] key;
 }

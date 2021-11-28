@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 class Pxd_itm_tz_abbr extends Pxd_itm_base implements Pxd_itm_prototype {
-	private final    int tz_idx;
-	private final    byte[] tz_abbr;
-	private final    int tz_offset;
+	private final int tz_idx;
+	private final byte[] tz_abbr;
+	private final int tz_offset;
 	public int Tz_offset() { return tz_offset; }
 	public byte[] Tz_abbr() { return tz_abbr; }
 	public Pxd_itm_tz_abbr(int ary_idx, byte[] tz_abbr, int tz_idx, int offset) {

@@ -17,7 +17,7 @@ package gplx.core.security.files; import gplx.*; import gplx.core.*; import gplx
 import org.junit.*; import gplx.core.tests.*;
 import gplx.core.security.algos.*;
 public class Cksum_list_tst {
-	private final    Cksum_list_fxt fxt = new Cksum_list_fxt();
+	private final Cksum_list_fxt fxt = new Cksum_list_fxt();
 	@Test 	public void Basic() {
 		fxt.Init__file("a.txt").Init__file("ab.txt");
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
@@ -30,7 +30,7 @@ public class Cksum_list_tst {
 	}
 }
 class Cksum_list_fxt {
-	private final    Io_url dir = Io_url_.mem_dir_("mem/dir/");
+	private final Io_url dir = Io_url_.mem_dir_("mem/dir/");
 	public Cksum_list_fxt() {
 		Io_mgr.Instance.InitEngine_mem();
 	}

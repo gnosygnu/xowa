@@ -40,10 +40,10 @@ public class JCSingleton {
 	* @var MapCacheLRU[] contains a cache of recently requested content objects
 	*   as namespace => MapCacheLRU
 	*/
-	private final    Ordered_hash mapCacheLru = Ordered_hash_.New();
+	private final Ordered_hash mapCacheLru = Ordered_hash_.New();
 
 	public Xomw_page_fetcher Store() {return store;} public void Store_(Xomw_page_fetcher v) {this.store = v;} private Xomw_page_fetcher store;
-	public XophpArray ConfigModels() {return configModels;} private final    XophpArray configModels = new XophpArray();
+	public XophpArray ConfigModels() {return configModels;} private final XophpArray configModels = new XophpArray();
 //		/**
 //		* @var TitleParser cached invariant title parser
 //		*/

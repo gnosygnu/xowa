@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Http_server_wkr_fsys_hack__tst {
-	private final    Http_server_wkr_fsys_hack__fxt fxt = new Http_server_wkr_fsys_hack__fxt();
+	private final Http_server_wkr_fsys_hack__fxt fxt = new Http_server_wkr_fsys_hack__fxt();
 	@Test  public void File_bgn_missing() { // "file:" missing
 		fxt.Test__Replace_fsys_hack("src='file////home/lnxusr/xowa/file/'");
 	}

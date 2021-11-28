@@ -71,7 +71,7 @@ class Gallery_mgr_packed_overlay extends Gallery_mgr_packed_base {
 			.Add(Wrap_gallery_text_2)
 			;
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Wrap_gallery_text_0 = Bry_.new_a7("\n      <div class=\"gallerytextwrapper\" style=\"width: ")
 	, Wrap_gallery_text_1 = Bry_.new_a7("px\"><div class=\"gallerytext\">\n") // NOTE: The newline after <div class="gallerytext"> is needed to accommodate htmltidy
 	, Wrap_gallery_text_2 = Bry_.new_a7("\n      </div></div>")	// NOTE: 2nd </div> is not part of MW, but needed to close div

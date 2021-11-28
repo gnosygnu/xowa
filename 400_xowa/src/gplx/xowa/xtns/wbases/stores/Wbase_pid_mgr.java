@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.stores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.xtns.wbases.core.*;
 public class Wbase_pid_mgr {	// EX: "en|road_map" -> 15 ("Property:P15")
-	private final    Wdata_wiki_mgr wbase_mgr;
-	private final    Hash_adp_bry cache = Hash_adp_bry.cs();
+	private final Wdata_wiki_mgr wbase_mgr;
+	private final Hash_adp_bry cache = Hash_adp_bry.cs();
 	public Wbase_pid_mgr(Wdata_wiki_mgr wbase_mgr) {this.wbase_mgr = wbase_mgr;}
 	public void Enabled_(boolean v) {this.enabled = v;} private boolean enabled;
 	public void Clear() {

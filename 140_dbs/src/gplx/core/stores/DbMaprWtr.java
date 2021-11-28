@@ -87,7 +87,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 		rv.conn = Db_conn_pool.Instance.Get_or_new(url);
 		return rv;
 	}	DbMaprWtr() {}
-	public static final    String Key_Mgr = "DbMapr.mgr";
+	public static final String Key_Mgr = "DbMapr.mgr";
 }
 class DbMaprWtrUtl {
 	public static void PurgeObjTree(SrlObj root, DbMaprMgr mgr, Db_conn conn) {

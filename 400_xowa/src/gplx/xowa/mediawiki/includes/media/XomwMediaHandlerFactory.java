@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; i
 // XO.MW:MW has registry and instance cache; XO only has instance
 // XO.MW:SYNC:1.29; DATE:2017-02-05
 public class XomwMediaHandlerFactory {
-	private final    Hash_adp_bry handlers = Hash_adp_bry.cs();
+	private final Hash_adp_bry handlers = Hash_adp_bry.cs();
 
 	// XO.MW:SYNC:1.29; DATE:2017-02-05
 	public XomwMediaHandlerFactory() {

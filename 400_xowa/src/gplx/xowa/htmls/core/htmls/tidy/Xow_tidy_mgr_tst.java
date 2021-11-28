@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
 import org.junit.*;
 public class Xow_tidy_mgr_tst {
-	@Before public void init() {fxt.Clear();} private final    Xoh_tidy_mgr_fxt fxt = new Xoh_tidy_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final Xoh_tidy_mgr_fxt fxt = new Xoh_tidy_mgr_fxt();
 	@Test  public void Wrap() {
 		fxt.Test__wrap("<b>a</b>"
 		, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
@@ -70,7 +70,7 @@ public class Xow_tidy_mgr_tst {
 	}
 }
 class Xoh_tidy_mgr_fxt {
-	private final    Bry_bfr bfr = Bry_bfr_.Reset(255);
+	private final Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public void Clear() {
 		bfr.Clear();
 	}

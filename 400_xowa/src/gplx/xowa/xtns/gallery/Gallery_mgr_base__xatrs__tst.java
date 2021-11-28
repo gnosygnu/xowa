@@ -17,7 +17,7 @@ package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*;
 import gplx.xowa.htmls.*;
 public class Gallery_mgr_base__xatrs__tst {		
-	@Before public void init() {fxt.Reset();} private final    Gallery_mgr_base_fxt fxt = new Gallery_mgr_base_fxt();
+	@Before public void init() {fxt.Reset();} private final Gallery_mgr_base_fxt fxt = new Gallery_mgr_base_fxt();
 	@Test public void Atr_misc() {// PURPOSE: add other atrs to end of ul
 		fxt.Test_html_frag
 		( "<gallery id=a>File:A.png</gallery>"

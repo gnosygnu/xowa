@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gflucene.core; import gplx.*; import gplx.gflucene.*;
 import gplx.gflucene.analyzers.*;
 public class Gflucene_index_data {
-	public final    Gflucene_analyzer_data analyzer_data;
-	public final    String index_dir;
+	public final Gflucene_analyzer_data analyzer_data;
+	public final String index_dir;
 
-	public final    float max_merged_segments = 1500; // "limits" maximum file size
+	public final float max_merged_segments = 1500; // "limits" maximum file size
 	public Gflucene_index_data(Gflucene_analyzer_data analyzer_data, String index_dir) {
 		this.analyzer_data = analyzer_data;
 		this.index_dir = index_dir;

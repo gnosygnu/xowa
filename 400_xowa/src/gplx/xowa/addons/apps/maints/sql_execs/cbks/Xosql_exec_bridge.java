@@ -32,10 +32,10 @@ public class Xosql_exec_bridge implements Bridge_cmd_itm {
 	}
 
 	private static final byte Proc__exec = 0;
-	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("exec"						, Proc__exec)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("xowa.app.maint.sql_exec");
-        public static final    Xosql_exec_bridge Prototype = new Xosql_exec_bridge(); Xosql_exec_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("xowa.app.maint.sql_exec");
+        public static final Xosql_exec_bridge Prototype = new Xosql_exec_bridge(); Xosql_exec_bridge() {}
 }

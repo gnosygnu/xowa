@@ -15,5 +15,5 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
 public class Xoitm_lang_tid {
-	public static final    String Lang__dflt = "en";
+	public static final String Lang__dflt = "en";
 }

@@ -82,7 +82,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	, Invk_getFrameTitle = "getFrameTitle", Invk_setTTL = "setTTL"
 	, Invk_parentFrameExists = "parentFrameExists"
 	;
-	private static final    String[] Proc_names = String_.Ary
+	private static final String[] Proc_names = String_.Ary
 	( Invk_loadPackage, Invk_loadPHPLibrary
 	, Invk_frameExists, Invk_newChildFrame
 	, Invk_getExpandedArgument, Invk_getAllExpandedArguments
@@ -412,5 +412,5 @@ class Scrib_lib_mw_callParserFunction_sorter implements gplx.core.lists.Comparer
 		else															// both are strings
 			return String_.Compare(String_.cast(lhs_key), String_.cast(rhs_key));
 	}
-	public static final    Scrib_lib_mw_callParserFunction_sorter Instance = new Scrib_lib_mw_callParserFunction_sorter(); Scrib_lib_mw_callParserFunction_sorter() {}
+	public static final Scrib_lib_mw_callParserFunction_sorter Instance = new Scrib_lib_mw_callParserFunction_sorter(); Scrib_lib_mw_callParserFunction_sorter() {}
 }

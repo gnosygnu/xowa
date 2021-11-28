@@ -20,10 +20,10 @@ public class Xol_vnt_mgr implements Gfo_invk {
 		this.lang = lang;
 		this.convert_lang = new Vnt_convert_lang(convert_mgr, regy);
 	}
-	public Xol_lang_itm				Lang() {return lang;} private final    Xol_lang_itm lang;
-	public Xol_convert_mgr			Convert_mgr() {return convert_mgr;} private final    Xol_convert_mgr convert_mgr = new Xol_convert_mgr();
-	public Vnt_convert_lang			Convert_lang() {return convert_lang;} private final    Vnt_convert_lang convert_lang;
-	public Xol_vnt_regy				Regy() {return regy;} private final    Xol_vnt_regy regy = new Xol_vnt_regy();	// EX:zh;zh-hans;zh-hant;zh-cn;zh-hk;zh-mo;zh-sg;zh-tw
+	public Xol_lang_itm				Lang() {return lang;} private final Xol_lang_itm lang;
+	public Xol_convert_mgr			Convert_mgr() {return convert_mgr;} private final Xol_convert_mgr convert_mgr = new Xol_convert_mgr();
+	public Vnt_convert_lang			Convert_lang() {return convert_lang;} private final Vnt_convert_lang convert_lang;
+	public Xol_vnt_regy				Regy() {return regy;} private final Xol_vnt_regy regy = new Xol_vnt_regy();	// EX:zh;zh-hans;zh-hant;zh-cn;zh-hk;zh-mo;zh-sg;zh-tw
 	public Xol_vnt_itm				Cur_itm() {return cur_itm;} private Xol_vnt_itm cur_itm;						// EX:zh-cn
 	public boolean						Enabled() {return enabled;} private boolean enabled = false;
 	public String					Html__lnki_style() {return html__lnki_style;} private String html__lnki_style = "";	// style for showing vnt lnkis in different colors
@@ -67,5 +67,5 @@ public class Xol_vnt_mgr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_get = "get", Invk_init_end = "init_end", Invk_cur_vnt_ = "cur_vnt_", Invk_vnt_grp_ = "vnt_grp_", Invk_html_style_ = "html_style_";
-	private static final    byte[] Msg_variantname = Bry_.new_a7("variantname-");
+	private static final byte[] Msg_variantname = Bry_.new_a7("variantname-");
 }

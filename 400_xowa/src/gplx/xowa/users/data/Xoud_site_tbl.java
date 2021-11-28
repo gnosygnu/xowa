@@ -17,9 +17,9 @@ package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.dbs.*;
 public class Xoud_site_tbl implements Rls_able {
 	public static final String Tbl_name = "user_site";
-	private final    String tbl_name = Tbl_name; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_site_id, fld_site_priority, fld_site_domain, fld_site_name, fld_site_path, fld_site_xtn, fld_site_date;
-	private final    Db_conn conn;
+	private final String tbl_name = Tbl_name; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_site_id, fld_site_priority, fld_site_domain, fld_site_name, fld_site_path, fld_site_xtn, fld_site_date;
+	private final Db_conn conn;
 	public Xoud_site_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_site_id				= flds.Add_int_pkey("site_id");

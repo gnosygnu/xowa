@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.criterias; import gplx.*; import gplx.core.*;
 import gplx.core.texts.*; /*RegxPatn_cls_like*/
 public class Criteria_ {
-	public static final    Criteria All		= new Criteria_const(true);
-	public static final    Criteria None	= new Criteria_const(false);
+	public static final Criteria All		= new Criteria_const(true);
+	public static final Criteria None	= new Criteria_const(false);
 	public static Criteria Not(Criteria arg) {return new Criteria_not(arg);}
 	public static Criteria And(Criteria lhs, Criteria rhs) {return new Criteria_and(lhs, rhs);}
 	public static Criteria And_many(Criteria... ary) {

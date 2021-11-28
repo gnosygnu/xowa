@@ -21,11 +21,11 @@ public class Srch_crt_itm {
 		this.Raw = raw;
 		this.Sql_data = raw_data;
 	}
-	public final    int					Idx;		// itm index; EX: "a b" -> a:0 b:1
-	public final    int					Tid;
-	public final    byte[]				Raw;
-	public final    Srch_crt_itm[]		Subs;
-	public final    Srch_crt_sql		Sql_data;
+	public final int					Idx;		// itm index; EX: "a b" -> a:0 b:1
+	public final int					Tid;
+	public final byte[]				Raw;
+	public final Srch_crt_itm[]		Subs;
+	public final Srch_crt_sql		Sql_data;
 	public void Accept_visitor(Srch_crt_visitor visitor) {visitor.Visit(this);}
 
 	public static final int 
@@ -37,7 +37,7 @@ public class Srch_crt_itm {
 	, Tid__invalid		= 5		// EX: 'A OR'; incomplete or otherwise invalid
 	;
 	public static Srch_crt_itm[] Ary_empty = new Srch_crt_itm[0];
-	public static final    Srch_crt_itm Invalid = new Srch_crt_itm(-1, Srch_crt_itm.Tid__invalid, Srch_crt_itm.Ary_empty, null, null);
+	public static final Srch_crt_itm Invalid = new Srch_crt_itm(-1, Srch_crt_itm.Tid__invalid, Srch_crt_itm.Ary_empty, null, null);
 	public static Srch_crt_itm New_join(int tid, int idx, Srch_crt_itm... ary) {return new Srch_crt_itm(idx, tid, ary, null, Srch_crt_sql.New_or_null(null, Byte_ascii.Null));}
 	public static Srch_crt_itm New_word(byte wildcard_byte, Srch_crt_tkn tkn, int idx, byte[] src) {
 		int tid = tkn.Tid == Srch_crt_tkn.Tid__word_w_quote ? Srch_crt_itm.Tid__word_quote : Srch_crt_itm.Tid__word;

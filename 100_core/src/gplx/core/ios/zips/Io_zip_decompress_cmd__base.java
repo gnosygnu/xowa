@@ -22,7 +22,7 @@ public abstract class Io_zip_decompress_cmd__base implements Io_zip_decompress_c
 	private long checkpoint_interval = 32 * Io_mgr.Len_mb, checkpoint_nxt = 0;
 	public String Fail_msg() {return fail_msg;} private String fail_msg;
 	public abstract Io_zip_decompress_cmd Make_new();
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public long Prog_data_cur() {return resume_file;}
 	public byte Exec(gplx.core.progs.Gfo_prog_ui prog_ui, Io_url src_fil, Io_url trg_dir, List_adp trg_fils) {
 		this.Checkpoint__load_by_src_fil(src_fil);

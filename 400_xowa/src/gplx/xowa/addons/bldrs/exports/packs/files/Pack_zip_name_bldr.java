@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.packs.*;
 public class Pack_zip_name_bldr {	// en.wikipedia.org-file-ns.000-db.001.xowa -> Xowa_enwiki_2016-05_file_ns.000_db.001.zip
-	private final    Io_url pack_dir;
-	private final    byte[] wiki_domain, zip_name_prefix;
+	private final Io_url pack_dir;
+	private final byte[] wiki_domain, zip_name_prefix;
 
 	public Pack_zip_name_bldr(Io_url pack_dir, String wiki_domain_str, String wiki_abrv, String wiki_date, String custom_name) {
 		this.pack_dir = pack_dir;

@@ -148,6 +148,6 @@ public class Xobldr_missing_origs_cmd extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "file.orig_regy.find_missing";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr_missing_origs_cmd(null, null);
+	public static final Xob_cmd Prototype = new Xobldr_missing_origs_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr_missing_origs_cmd(bldr, wiki);}
 }

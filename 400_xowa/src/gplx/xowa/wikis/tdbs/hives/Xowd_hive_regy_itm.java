@@ -47,5 +47,5 @@ public class Xowd_hive_regy_itm {// csv file with the format of "idx|bgn|end|cou
 			.Add_int_variable(count).Add_byte_nl();
 	} 
 	public static Xowd_hive_regy_itm tmp_()	{return new Xowd_hive_regy_itm();}
-	public static final    Xowd_hive_regy_itm[] Ary_empty = new Xowd_hive_regy_itm[0]; 
+	public static final Xowd_hive_regy_itm[] Ary_empty = new Xowd_hive_regy_itm[0];
 }

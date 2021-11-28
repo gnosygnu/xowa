@@ -31,5 +31,5 @@ public class Jre_checksum_factory implements Hash_algo_factory {
 	public static String 
 	  Key__adler32 = "adler32", Key__crc32 = "crc32"
 	;
-        public static final    Jre_checksum_factory Instance = new Jre_checksum_factory(); Jre_checksum_factory() {}
+        public static final Jre_checksum_factory Instance = new Jre_checksum_factory(); Jre_checksum_factory() {}
 }

@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum;
 	public XomwPreprocessor_Hash(XomwParser parser) {this.parser = parser;}
-	@Override public XomwParser Parser() {return parser;} private final    XomwParser parser;
+	@Override public XomwParser Parser() {return parser;} private final XomwParser parser;
 
 	@Override public XomwPPFrame newFrame() {
 		return null;
@@ -195,5 +195,5 @@ class XomwPreprocessor_Hash extends XomwPreprocessor { 	private XophpArray accum
 	}
 
 	@Override public XomwPreprocessor Make_new(XomwParser parser) {return new XomwPreprocessor_Hash(parser);}
-	public static final    XomwPreprocessor Instance = new XomwPreprocessor_Hash(null);
+	public static final XomwPreprocessor Instance = new XomwPreprocessor_Hash(null);
 }

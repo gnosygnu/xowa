@@ -16,15 +16,15 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 public class Bool_ {//RF:2017-10-08
 	public static final String Cls_val_name = "bool";
-	public static final    Class<?> Cls_ref_type = Boolean.class; 
+	public static final Class<?> Cls_ref_type = Boolean.class;
 
 	public static final boolean		N		= false	, Y			= true;
 	public static final byte		N_byte	= 0		, Y_byte	= 1		, __byte = 127;
 	public static final int		N_int	= 0		, Y_int		= 1		, __int  =  -1;
-	public static final    byte[] N_bry = new byte[] {Byte_ascii.Ltr_n}, Y_bry = new byte[] {Byte_ascii.Ltr_y};
+	public static final byte[] N_bry = new byte[] {Byte_ascii.Ltr_n}, Y_bry = new byte[] {Byte_ascii.Ltr_y};
 
 	public static final String		True_str = "true", False_str = "false";
-	public static final    byte[] True_bry = Bry_.new_a7(True_str), False_bry = Bry_.new_a7(False_str);
+	public static final byte[] True_bry = Bry_.new_a7(True_str), False_bry = Bry_.new_a7(False_str);
 
 	public static boolean		By_int(int v)			{return v == Y_int;}
 	public static int		To_int(boolean v)			{return v ? Y_int		: N_int;}

@@ -28,14 +28,14 @@ class Site_interwikimap_itm implements To_str_able {
 		this.Url = url;
 		this.Protorel = protorel;
 	}
-	public final    byte[]		Prefix;
-	public final    boolean		Local;
-	public final    boolean		Extralanglink;
-	public final    byte[]		Linktext;
-	public final    byte[]		Sitename;
-	public final    byte[]		Language;
-	public final    boolean		Localinterwiki;
-	public final    byte[]		Url;
-	public final    boolean		Protorel;
+	public final byte[]		Prefix;
+	public final boolean		Local;
+	public final boolean		Extralanglink;
+	public final byte[]		Linktext;
+	public final byte[]		Sitename;
+	public final byte[]		Language;
+	public final boolean		Localinterwiki;
+	public final byte[]		Url;
+	public final boolean		Protorel;
 	public String To_str() {return String_.Concat_with_obj("|", Prefix, Local, Extralanglink, Linktext, Sitename, Language, Localinterwiki, Url, Protorel);}
 }

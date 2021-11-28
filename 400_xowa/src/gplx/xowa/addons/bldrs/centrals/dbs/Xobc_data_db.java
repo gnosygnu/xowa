@@ -29,15 +29,15 @@ public class Xobc_data_db {
 		this.tbl__lang_regy = new Xobc_lang_regy_tbl(conn);
 		conn.Meta_tbl_assert(tbl__task_regy, tbl__step_regy, tbl__step_map, tbl__import_step, tbl__host_regy, tbl__version_regy, tbl__lang_regy);
 	}
-	public Db_conn					Conn() {return conn;} private final    Db_conn conn;
-	public Io_url					Url() {return url;} private final    Io_url url;
-	public Xobc_task_regy_tbl		Tbl__task_regy()	{return tbl__task_regy;}		private final    Xobc_task_regy_tbl tbl__task_regy;
-	public Xobc_step_regy_tbl		Tbl__step_regy()	{return tbl__step_regy;}		private final    Xobc_step_regy_tbl tbl__step_regy;
-	public Xobc_step_map_tbl		Tbl__step_map()		{return tbl__step_map;}			private final    Xobc_step_map_tbl tbl__step_map;
-	public Xobc_import_step_tbl		Tbl__import_step()	{return tbl__import_step;}		private final    Xobc_import_step_tbl tbl__import_step;
-	public Xobc_host_regy_tbl 		Tbl__host_regy()	{return tbl__host_regy;}		private final    Xobc_host_regy_tbl tbl__host_regy;
-	public Xobc_version_regy_tbl 	Tbl__version_regy()	{return tbl__version_regy;}		private final    Xobc_version_regy_tbl tbl__version_regy;
-	public Xobc_lang_regy_tbl 		Tbl__lang_regy()	{return tbl__lang_regy;}		private final    Xobc_lang_regy_tbl tbl__lang_regy;
+	public Db_conn					Conn() {return conn;} private final Db_conn conn;
+	public Io_url					Url() {return url;} private final Io_url url;
+	public Xobc_task_regy_tbl		Tbl__task_regy()	{return tbl__task_regy;}		private final Xobc_task_regy_tbl tbl__task_regy;
+	public Xobc_step_regy_tbl		Tbl__step_regy()	{return tbl__step_regy;}		private final Xobc_step_regy_tbl tbl__step_regy;
+	public Xobc_step_map_tbl		Tbl__step_map()		{return tbl__step_map;}			private final Xobc_step_map_tbl tbl__step_map;
+	public Xobc_import_step_tbl		Tbl__import_step()	{return tbl__import_step;}		private final Xobc_import_step_tbl tbl__import_step;
+	public Xobc_host_regy_tbl 		Tbl__host_regy()	{return tbl__host_regy;}		private final Xobc_host_regy_tbl tbl__host_regy;
+	public Xobc_version_regy_tbl 	Tbl__version_regy()	{return tbl__version_regy;}		private final Xobc_version_regy_tbl tbl__version_regy;
+	public Xobc_lang_regy_tbl 		Tbl__lang_regy()	{return tbl__lang_regy;}		private final Xobc_lang_regy_tbl tbl__lang_regy;
 
 	public void Delete_by_import(byte[] wiki_abrv, String wiki_date) {
 		// get all step ids from import_regy

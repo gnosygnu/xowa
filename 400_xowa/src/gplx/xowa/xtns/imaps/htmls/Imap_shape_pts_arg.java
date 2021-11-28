@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.imaps.*;
 import gplx.core.primitives.*;
 public class Imap_shape_pts_arg implements gplx.core.brys.Bfr_arg {
-	private final    double scale; private Double_obj_val[] pts;
+	private final double scale; private Double_obj_val[] pts;
 	public Imap_shape_pts_arg(double scale) {
 		this.scale = scale;
 	}

@@ -16,14 +16,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.parses.pools; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
 import gplx.dbs.*; import gplx.core.threads.utils.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*;
 public class Xomp_load_wkr implements Gfo_invk {
-	private final    Object thread_lock = new Object();
-	private final    Xow_wiki wiki;
-	private final    Db_conn mgr_conn;
-	private final    Db_attach_mgr attach_mgr;
-	private final    Gfo_blocking_queue queue;
-	private final    int num_wkrs;
+	private final Object thread_lock = new Object();
+	private final Xow_wiki wiki;
+	private final Db_conn mgr_conn;
+	private final Db_attach_mgr attach_mgr;
+	private final Gfo_blocking_queue queue;
+	private final int num_wkrs;
 
-	private final    Bry_bfr prog_bfr = Bry_bfr_.New();
+	private final Bry_bfr prog_bfr = Bry_bfr_.New();
 	private int pages_done, pages_total;
 	private long time_bgn, time_prv, time_done;
 	public Xomp_load_wkr(Xow_wiki wiki, Db_conn mgr_conn, int num_pages_in_pool, int num_wkrs) {

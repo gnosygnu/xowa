@@ -22,7 +22,7 @@ public class Xoctg_double_grp implements Bfr_arg {
 	private Xow_wiki wiki;
 	private byte[] lbl_ctg_help;
 	public boolean Type_is_normal() {return type_is_normal;} private boolean type_is_normal;
-	public Xoctg_double_itm Itms() {return itms;} private final    Xoctg_double_itm itms = new Xoctg_double_itm();
+	public Xoctg_double_itm Itms() {return itms;} private final Xoctg_double_itm itms = new Xoctg_double_itm();
 	public void Init_by_wiki(Xow_wiki wiki, Xou_history_mgr history_mgr, boolean type_is_normal) {
 		this.type_is_normal = type_is_normal;
 		this.wiki = wiki;
@@ -41,11 +41,11 @@ public class Xoctg_double_grp implements Bfr_arg {
 		}
 	}
 
-	private static final    byte[]
+	private static final byte[]
 	  Key_pagecategorieslink = Bry_.new_a7("pagecategorieslink")
 	, Key_pagecategories     = Bry_.new_a7("pagecategories")
 	;
-	private static final    Bry_fmt 
+	private static final Bry_fmt
 	  Fmt__normal = Bry_fmt.Auto_nl_skip_last
 	( "" 
 	, "<div id=\"mw-normal-catlinks\" class=\"mw-normal-catlinks\">"

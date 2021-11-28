@@ -102,7 +102,7 @@ class Xoh_sidebar_parser {	// TS:
 
 	private static byte[] Ignore_wiki_ess = Bry_.new_a7("es.wikisource.org"), Ignore_item_ess_random = Bry_.new_u8("special:Random/Página djvu");
 	private static final byte Ignore__search = 1, Ignore__toolbox = 2, Ignore__toolbox_end = 3, Ignore__languages = 4;
-	private static final    Btrie_slim_mgr ignore_trie = Btrie_slim_mgr.ci_a7()
+	private static final Btrie_slim_mgr ignore_trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_byte("SEARCH"		, Ignore__search)
 	.Add_str_byte("TOOLBOX"		, Ignore__toolbox)
 	.Add_str_byte("TOOLBOXEND"	, Ignore__toolbox_end)

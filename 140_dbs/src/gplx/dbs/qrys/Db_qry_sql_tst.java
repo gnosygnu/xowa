@@ -40,7 +40,7 @@ public class Db_qry_sql_tst {
 	}
 }
 class Db_qry_sql_fxt {
-	private final    Sql_qry_wtr qry_wtr = Sql_qry_wtr_.New__sqlite();
+	private final SqlQryWtr qry_wtr = SqlQryWtrUtl.NewSqlite();
 	public void Clear() {}
 	public void Test_qry(Db_qry qry, Object[] vals, String expd) {Tfds.Eq(expd, Db_qry_sql.Gen_sql(qry_wtr, qry, vals));}
 }

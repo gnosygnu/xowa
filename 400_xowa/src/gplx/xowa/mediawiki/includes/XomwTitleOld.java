@@ -157,7 +157,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 //		private $mIsBigDeletion = null;
 //		// @}
 
-	private final    XomwEnv env;
+	private final XomwEnv env;
 	/**
 	* B/C kludge: provide a TitleParser for use by Title.
 	* Ideally, Title would have no methods that need this.
@@ -4843,7 +4843,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	//		this.mUrlform = wfUrlencode(this.mDbkeyform);
 	//		this.mTextform = strtr(this.mDbkeyform, '_', ' ');
 	//	}
-	private static final    byte[] Bry__wgArticlePath__wiki = Bry_.new_a7("/wiki/");
+	private static final byte[] Bry__wgArticlePath__wiki = Bry_.new_a7("/wiki/");
 
 	// REF.MW: DefaultSettings.php
 	// Allowed title characters -- regex character class

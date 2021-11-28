@@ -18,10 +18,10 @@ import gplx.core.btries.*;
 import gplx.core.intls.*;
 import gplx.xowa.addons.wikis.fulltexts.core.*;
 public class Xofulltext_word_lang {
-	private final    Btrie_slim_mgr ws_bgn = Btrie_slim_mgr.cs().Add_many_str(Xofulltext_punct_.Ws_bgn_ary);
-	private final    Btrie_slim_mgr ws_end;
-	private final    Btrie_slim_mgr punct_bgn = Btrie_slim_mgr.cs().Add_many_str(Xofulltext_punct_.Punct_bgn_ary);
-	private final    Btrie_slim_mgr punct_end;
+	private final Btrie_slim_mgr ws_bgn = Btrie_slim_mgr.cs().Add_many_str(Xofulltext_punct_.Ws_bgn_ary);
+	private final Btrie_slim_mgr ws_end;
+	private final Btrie_slim_mgr punct_bgn = Btrie_slim_mgr.cs().Add_many_str(Xofulltext_punct_.Punct_bgn_ary);
+	private final Btrie_slim_mgr punct_end;
 	public Xofulltext_word_lang() {
 		this.ws_end = ws_bgn;
 		this.punct_end = punct_bgn;

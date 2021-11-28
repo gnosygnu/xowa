@@ -22,6 +22,6 @@ public class Xomp_resume_cmd extends Xob_cmd__base {
 	}
 
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}  private static final String BLDR_CMD_KEY = "wiki.mass_parse.resume";
-	public static final    Xob_cmd Prototype = new Xomp_resume_cmd(null, null);
+	public static final Xob_cmd Prototype = new Xomp_resume_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xomp_resume_cmd(bldr, wiki);}
 }

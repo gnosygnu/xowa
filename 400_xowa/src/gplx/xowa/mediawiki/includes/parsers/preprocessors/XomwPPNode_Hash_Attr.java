@@ -20,8 +20,8 @@ import gplx.xowa.mediawiki.includes.exception.*;
 * @ingroup Parser
 */
 public class XomwPPNode_Hash_Attr extends XomwPPNode { 	public String name, value;
-	private final    XophpArray store;
-	private final    int index;
+	private final XophpArray store;
+	private final int index;
 
 	/**
 	* Construct an Object using the data from $store[$index]. The rest of the

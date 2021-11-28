@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.pages.redirects; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.specials.*;
 public class Xopg_redirect_mgr {
-	private final    List_adp itms = List_adp_.New();
+	private final List_adp itms = List_adp_.New();
 	public int					Itms__len()							{return itms.Len();}
 	public byte[]				Itms__get_wtxt_at_0th_or_null()		{return itms.Len() == 0 ? null : this.Itms__get_at(0).Wikitext();}
 	public Xopg_redirect_itm	Itms__get_at_0th_or_null()			{return itms.Len() == 0 ? null : (Xopg_redirect_itm)itms.Get_at(0);}

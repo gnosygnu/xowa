@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import org.junit.*;
 public class Xoh_file_wtr__media__tst {		
-	@Before public void init() {fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Page_only() { // if no caption, then use page name; DATE:2017-05-20
 		fxt.Test_parse_page_wiki_str("[[Media:A.png]]", String_.Concat_lines_nl_skip_last
 		( "<a href=\"file:///mem/wiki/repo/trg/orig/7/0/A.png\" xowa_title=\"A.png\">Media:A.png</a>"

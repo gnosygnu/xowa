@@ -55,5 +55,5 @@ public class GfmlItmKeys {
 	GfmlAtr FetchAtr(String key) {return GfmlAtr.as_(hash.Get_by(key));}
 	List_adp list = List_adp_.New(); Hash_adp hash = Hash_adp_.New(); 
 	public static GfmlItmKeys new_() {return new GfmlItmKeys();} GfmlItmKeys() {}
-	@gplx.Internal protected static final    String NullKey = "";
+	@gplx.Internal protected static final String NullKey = "";
 }

@@ -172,27 +172,27 @@ class Pft_fmt_itm_hebrew_ {
 		byte[] msg_key = name_ary[hebrew_month];
 		return wiki.Msg_mgr().Val_by_key_obj(msg_key);
 	}
-	private static final    byte[][] Month_name_full_ary = new byte[][] 
+	private static final byte[][] Month_name_full_ary = new byte[][]
 	{ Bry_.new_a7("hebrew-calendar-m1"), Bry_.new_a7("hebrew-calendar-m2"), Bry_.new_a7("hebrew-calendar-m3")
 	, Bry_.new_a7("hebrew-calendar-m4"), Bry_.new_a7("hebrew-calendar-m5"), Bry_.new_a7("hebrew-calendar-m6")
 	, Bry_.new_a7("hebrew-calendar-m7"), Bry_.new_a7("hebrew-calendar-m8"), Bry_.new_a7("hebrew-calendar-m9")
 	, Bry_.new_a7("hebrew-calendar-m10"), Bry_.new_a7("hebrew-calendar-m11"), Bry_.new_a7("hebrew-calendar-m12")
 	, Bry_.new_a7("hebrew-calendar-m6a"), Bry_.new_a7("hebrew-calendar-m6b")
 	};
-	private static final    byte[][] Month_name_gen_ary = new byte[][] 
+	private static final byte[][] Month_name_gen_ary = new byte[][]
 	{ Bry_.new_a7("hebrew-calendar-m1-gen"), Bry_.new_a7("hebrew-calendar-m2-gen"), Bry_.new_a7("hebrew-calendar-m3-gen")
 	, Bry_.new_a7("hebrew-calendar-m4-gen"), Bry_.new_a7("hebrew-calendar-m5-gen"), Bry_.new_a7("hebrew-calendar-m6-gen")
 	, Bry_.new_a7("hebrew-calendar-m7-gen"), Bry_.new_a7("hebrew-calendar-m8-gen"), Bry_.new_a7("hebrew-calendar-m9-gen")
 	, Bry_.new_a7("hebrew-calendar-m10-gen"), Bry_.new_a7("hebrew-calendar-m11-gen"), Bry_.new_a7("hebrew-calendar-m12-gen")
 	, Bry_.new_a7("hebrew-calendar-m6a-gen"), Bry_.new_a7("hebrew-calendar-m6b-gen")
 	};
-	public static final    int
+	public static final int
 	  Rslt_year_num				= 0
 	, Rslt_month_num			= 1
 	, Rslt_day_num				= 2
 	, Rslt_month_days_count		= 3
 	;
-	private static final    byte[][][] Numeral_tbls = new byte[][][]
+	private static final byte[][][] Numeral_tbls = new byte[][][]
 	{ new byte[][] {Bry_.Empty, Bry_.new_u8("א"), Bry_.new_u8("ב"), Bry_.new_u8("ג"), Bry_.new_u8("ד"), Bry_.new_u8("ה")	, Bry_.new_u8("ו")	, Bry_.new_u8("ז")	, Bry_.new_u8("ח")	, Bry_.new_u8("ט")	, Bry_.new_u8("י")}
 	, new byte[][] {Bry_.Empty, Bry_.new_u8("י"), Bry_.new_u8("כ"), Bry_.new_u8("ל"), Bry_.new_u8("מ"), Bry_.new_u8("נ")	, Bry_.new_u8("ס")	, Bry_.new_u8("ע")	, Bry_.new_u8("פ")	, Bry_.new_u8("צ")	, Bry_.new_u8("ק")}
 	, new byte[][] {Bry_.Empty, Bry_.new_u8("ק"), Bry_.new_u8("ר"), Bry_.new_u8("ש"), Bry_.new_u8("ת"), Bry_.new_u8("תק")	, Bry_.new_u8("תר")	, Bry_.new_u8("תש")	, Bry_.new_u8("תת")	, Bry_.new_u8("תתק"), Bry_.new_u8("תתר")}
@@ -234,7 +234,7 @@ class Pft_fmt_itm_hebrew_ {
 		}
 		return rv;
 	}
-	private static final    gplx.core.btries.Btrie_slim_mgr end_trie = gplx.core.btries.Btrie_slim_mgr.cs()
+	private static final gplx.core.btries.Btrie_slim_mgr end_trie = gplx.core.btries.Btrie_slim_mgr.cs()
 	.Add_str_str("כ", "ך")
 	.Add_str_str("מ", "ם")
 	.Add_str_str("נ", "ן")

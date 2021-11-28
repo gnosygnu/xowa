@@ -20,7 +20,7 @@ public class Xodb_wiki_data {
 		this.domain = domain;
 		this.core_url = core_url;
 	}
-	public String Domain() {return domain;} private final    String domain;
-	public Io_url Core_url() {return core_url;} private final    Io_url core_url;
+	public String Domain() {return domain;} private final String domain;
+	public Io_url Core_url() {return core_url;} private final Io_url core_url;
 	public byte Text_zip_tid() {return text_zip_tid;} private byte text_zip_tid = Io_stream_tid_.Tid__raw;
 }

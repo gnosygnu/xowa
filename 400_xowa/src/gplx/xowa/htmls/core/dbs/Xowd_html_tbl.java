@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.dbs.*; import gplx.core.brys.*;
 public class Xowd_html_tbl implements Db_tbl {
-	private final    String fld_page_id, fld_head_flag, fld_body_flag, fld_display_ttl, fld_content_sub, fld_sidebar_div, fld_body;
+	private final String fld_page_id, fld_head_flag, fld_body_flag, fld_display_ttl, fld_content_sub, fld_sidebar_div, fld_body;
 	private Db_stmt stmt_select, stmt_insert, stmt_update;
-	private final    Int_flag_bldr body_flag_bldr = Make_body_flag_bldr();
+	private final Int_flag_bldr body_flag_bldr = Make_body_flag_bldr();
 	public Xowd_html_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.fld_page_id			= flds.Add_int_pkey("page_id");
@@ -30,9 +30,9 @@ public class Xowd_html_tbl implements Db_tbl {
 		this.fld_body				= flds.Add_bry("body");
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name = "html";
-	public Dbmeta_fld_list Flds() {return flds;} private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name = "html";
+	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 
 	public void Insert_bgn() {conn.Txn_bgn("html__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}

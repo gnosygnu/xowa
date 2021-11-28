@@ -41,7 +41,7 @@ public class Db_cmd_backup implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_BkpFilNameFmt_))		bkpFilNameFmt = GfoMsgUtl.SetStr(ctx, m, bkpFilNameFmt);
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String
+	}	public static final String
 			  Invk_ExeUrl = "ExeUrl", Invk_BkpDir = "BkpDir", Invk_Usr = "Usr", Invk_Pwd = "Pwd", Invk_DteFmt = "DteFmt", Invk_BkpFilNameFmt = "BkpFilNameFmt"
 			, Invk_ExeUrl_ = "ExeUrl_", Invk_BkpDir_ = "BkpDir_", Invk_Usr_ = "Usr_", Invk_Pwd_ = "Pwd_", Invk_DteFmt_ = "DteFmt_", Invk_BkpFilNameFmt_ = "BkpFilNameFmt_"
 			;

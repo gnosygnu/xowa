@@ -24,7 +24,7 @@ AND     page_id <  ?
 state = -1|100000
 */
 public class Sql_runner {
-	private final    Db_stmt_arg_list list = new Db_stmt_arg_list();
+	private final Db_stmt_arg_list list = new Db_stmt_arg_list();
 	public Db_conn Conn() {return conn;} public void Conn_(Db_conn v) {conn = v;} private Db_conn conn;
 	public boolean Quiet() {return quiet;} public void Quiet_(boolean v) {quiet = v;} private boolean quiet;
 	public String Sql_fmt() {return sql_fmt;} public void Sql_fmt_(String v) {sql_fmt = v;} private String sql_fmt;

@@ -20,10 +20,10 @@ import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa
 import gplx.xowa.parsers.*;
 import gplx.xowa.xtns.imaps.itms.*;
 public class Imap_img_arg implements gplx.core.brys.Bfr_arg {
-	private final    Xoh_wtr_ctx hctx; private final    Imap_map map; private final    Imap_xtn_mgr xtn_mgr;
-	private final    int img_elem_id, img_w, img_h;
-	private final    byte[] img_alt, img_src, img_cls, img_href, lnki_ttl;
-	private final    Int_2_ref margin_calc = new Int_2_ref();
+	private final Xoh_wtr_ctx hctx; private final Imap_map map; private final Imap_xtn_mgr xtn_mgr;
+	private final int img_elem_id, img_w, img_h;
+	private final byte[] img_alt, img_src, img_cls, img_href, lnki_ttl;
+	private final Int_2_ref margin_calc = new Int_2_ref();
 	public Imap_img_arg(Xoh_wtr_ctx hctx, Imap_xtn_mgr xtn_mgr, Imap_map map
 		, int img_elem_id, byte[] img_alt, byte[] img_src, int img_w, int img_h, byte[] img_cls, byte[] img_href, byte[] lnki_ttl) {
 		this.hctx = hctx; this.map = map; this.xtn_mgr = xtn_mgr;

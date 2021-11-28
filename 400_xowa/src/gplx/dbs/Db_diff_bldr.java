@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs; import gplx.*;
 import gplx.dbs.metas.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.wtrs.*;
 class Db_diff_bldr {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    Sql_schema_wtr sql_bldr = new Sql_schema_wtr();
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final Sql_schema_wtr sql_bldr = new Sql_schema_wtr();
 	public Db_diff_bldr() {sql_bldr.Bfr_(bfr);}
 	public String Compare_db(String src_str, String trg_str) {
 //			Io_url src_url = Io_url_.new_fil_(src_str);

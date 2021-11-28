@@ -474,7 +474,7 @@ public class Xop_fxt {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		return new Xop_fxt(app, Xoa_app_fxt.Make__wiki__edit__nonwmf(app, "nethackwiki"));
 	}
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	public String Exec__parse_to_hdump(String src_str) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		Xop_root_tkn root = Exec_parse_page_all_as_root(src_bry);

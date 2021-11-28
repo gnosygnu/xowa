@@ -43,8 +43,8 @@ public class Pgbnr_icon implements Mustache_doc_itm {
 		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {return Mustache_doc_itm_.Ary__empty;}
-	public static final    Pgbnr_icon[] Ary_empty = new Pgbnr_icon[0];
-	public static final    Bry_fmt fmt = Bry_fmt.New
+	public static final Pgbnr_icon[] Ary_empty = new Pgbnr_icon[0];
+	public static final Bry_fmt fmt = Bry_fmt.New
 	( Bry_.New_u8_nl_apos("<span aria-disabled='false' title='~{title}' class='oo-ui-widget oo-ui-widget-enabled oo-ui-iconElement-icon oo-ui-icon-~{name} oo-ui-iconElement oo-ui-iconWidget'></span>")
 	, "name", "title"
 	);

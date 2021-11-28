@@ -30,12 +30,12 @@ import gplx.core.progs.rates.Gfo_rate_list;
 import gplx.xowa.guis.cbks.Xog_cbk_mgr;
 import gplx.xowa.guis.cbks.Xog_cbk_trg;
 public class Xojs_wkr__base implements Gfo_prog_ui, Gfo_invk {
-	private final    Gfo_invk_cmd done_cbk;
-	private final    Gfo_invk_cmd fail_cbk;
-	private final    Gfo_rate_list rate_list = new Gfo_rate_list(32);
-	private final    long notify_delay = 1000; 
-	private final    double delta_threshold = .25d;	// allow variance of up to 25% before updating rate
-	private final    String js_cbk, task_type;
+	private final Gfo_invk_cmd done_cbk;
+	private final Gfo_invk_cmd fail_cbk;
+	private final Gfo_rate_list rate_list = new Gfo_rate_list(32);
+	private final long notify_delay = 1000;
+	private final double delta_threshold = .25d;	// allow variance of up to 25% before updating rate
+	private final String js_cbk, task_type;
 	private long time_prv;
 	private double rate_cur;
 	public Xojs_wkr__base(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk, Gfo_invk_cmd fail_cbk, String task_type) {
@@ -64,8 +64,8 @@ public class Xojs_wkr__base implements Gfo_prog_ui, Gfo_invk {
 		gplx.core.threads.Thread_adp_.Start_by_key(thread_name + ".download", this, Invk__exec);
 	}
 
-	public Xog_cbk_mgr Cbk_mgr() {return cbk_mgr;} private final    Xog_cbk_mgr cbk_mgr;
-	public Xog_cbk_trg Cbk_trg() {return cbk_trg;} private final    Xog_cbk_trg cbk_trg;
+	public Xog_cbk_mgr Cbk_mgr() {return cbk_mgr;} private final Xog_cbk_mgr cbk_mgr;
+	public Xog_cbk_trg Cbk_trg() {return cbk_trg;} private final Xog_cbk_trg cbk_trg;
 
 	public boolean			Canceled()				{return canceled;} private boolean canceled;
 	public void			Cancel()				{this.canceled = true;}

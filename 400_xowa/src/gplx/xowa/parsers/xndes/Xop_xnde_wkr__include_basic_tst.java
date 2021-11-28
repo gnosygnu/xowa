@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xop_xnde_wkr__include_basic_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()							{fxt.Reset();}
 	@Test public void Tmpl_includeonly()				{fxt.Test_parse_tmpl_str_test("a<includeonly>b</includeonly>c"						, "{{test}}", "abc");}
 	@Test public void Tmpl_noinclude()					{fxt.Test_parse_tmpl_str_test("a<noinclude>b</noinclude>c"							, "{{test}}", "ac");}

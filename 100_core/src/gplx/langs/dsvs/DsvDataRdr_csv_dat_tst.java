@@ -210,5 +210,5 @@ class DsvDataRdr_fxt {
 		return this;
 	}
 	public static DsvDataRdr_fxt new_() {return new DsvDataRdr_fxt();}
-	static final    int TblIdx0 = 0;
+	static final int TblIdx0 = 0;
 }

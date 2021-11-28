@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.pages.randoms.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.randoms.*;
 import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Rndm_qry_tbl implements Rls_able {
-	private final    String tbl_name = "rndm_qry"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_qry_idx, fld_rng_end, fld_qry_key, fld_qry_data, fld_qry_name;
-	private final    Db_conn conn;
+	private final String tbl_name = "rndm_qry"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_qry_idx, fld_rng_end, fld_qry_key, fld_qry_data, fld_qry_name;
+	private final Db_conn conn;
 	public Rndm_qry_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_qry_idx		= flds.Add_int_pkey("qry_idx");		// EX: 0

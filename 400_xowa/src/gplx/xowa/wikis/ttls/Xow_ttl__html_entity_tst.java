@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xow_ttl__html_entity_tst {
-	private final    Xow_ttl_fxt fxt = new Xow_ttl_fxt();
+	private final Xow_ttl_fxt fxt = new Xow_ttl_fxt();
 	@Before public void init() {fxt.Reset();}
 	@Test  public void Eacute()		{fxt.Init_ttl("&eacute;").Expd_page_txt("é").Test();}	//É
 	@Test  public void Amp_at_end()	{fxt.Init_ttl("Bisc &").Expd_page_txt("Bisc &").Test();}

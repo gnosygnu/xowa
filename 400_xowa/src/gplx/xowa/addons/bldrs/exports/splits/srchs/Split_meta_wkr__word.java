@@ -20,7 +20,7 @@ import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.d
 class Split_meta_wkr__word extends Split_meta_wkr_base {
 	private Srch_word_tbl tbl;
 	private Db_stmt stmt;
-	private final    Split_rslt_wkr__word rslt_wkr = new Split_rslt_wkr__word();
+	private final Split_rslt_wkr__word rslt_wkr = new Split_rslt_wkr__word();
 	public Split_meta_wkr__word(Split_ctx ctx) {
 		ctx.Rslt_mgr().Reg_wkr(rslt_wkr);
 	}

@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import gplx.dbs.*;
 public class Srch_temp_tbl {
-	public final    String tbl_name = "search_temp"; 
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_word_id, fld_page_id, fld_word_text;
-	public final    Db_conn conn; private Db_stmt stmt_insert;		
+	public final String tbl_name = "search_temp";
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_word_id, fld_page_id, fld_word_text;
+	public final Db_conn conn; private Db_stmt stmt_insert;
 	public Srch_temp_tbl(Db_conn conn) {
 		this.conn = conn;
 		flds.Add_int_pkey_autonum("word_uid");

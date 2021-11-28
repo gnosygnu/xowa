@@ -17,7 +17,7 @@ package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gp
 import gplx.xowa.apps.fsys.*;
 import gplx.xowa.htmls.hdumps.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.*;
 public class Imap_desc_hdump_wkr implements Xoh_hdump_wkr {
-	private final    byte[] desc_icon_url;
+	private final byte[] desc_icon_url;
 	public Imap_desc_hdump_wkr(Xoa_fsys_mgr fsys_mgr) {
 		this.desc_icon_url = Imap_xtn_mgr.Desc_icon_url(fsys_mgr);
 	}

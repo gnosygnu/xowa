@@ -17,7 +17,7 @@ package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.core.strings.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.wikis.nss.*; import gplx.langs.htmls.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
 public class Dpl_xnde_tst {
-	private final    Dpl_xnde_fxt fxt = new Dpl_xnde_fxt();
+	private final Dpl_xnde_fxt fxt = new Dpl_xnde_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Ctg() {
 		fxt.Init__create_ctg("Ctg_0", "B", "A");
@@ -291,8 +291,8 @@ class Dpl_page_mok {
 	public static Dpl_page_mok new_(int id, String ttl) {return new Dpl_page_mok(id, ttl);}
 }
 class Dpl_xnde_fxt {	
-	private final    Xop_fxt fxt = new Xop_fxt();
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Xop_fxt fxt = new Xop_fxt();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	private String exec__raw;
 	private int next_id;
 	public void Clear() {

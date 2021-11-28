@@ -59,7 +59,7 @@ public class Scrib_lib_title implements Scrib_lib {
 	, Invk_protectionLevels = "protectionLevels", Invk_cascadingProtection = "cascadingProtection"
 	, Invk_redirectTarget = "redirectTarget"
 	;
-	private static final    String[] Proc_names = String_.Ary(Invk_newTitle, Invk_makeTitle, Invk_getExpensiveData, Invk_getUrl, Invk_getContent, Invk_getFileInfo, Invk_getCurrentTitle, Invk_protectionLevels, Invk_cascadingProtection, Invk_redirectTarget);
+	private static final String[] Proc_names = String_.Ary(Invk_newTitle, Invk_makeTitle, Invk_getExpensiveData, Invk_getUrl, Invk_getContent, Invk_getFileInfo, Invk_getCurrentTitle, Invk_protectionLevels, Invk_cascadingProtection, Invk_redirectTarget);
 	public boolean NewTitle(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		// validate args
 		if (args.Len() == 0) return rslt.Init_obj(null);	// invalid title, return null; EX:{{#invoke:Message box|fmbox}} DATE:2015-03-04
@@ -108,12 +108,12 @@ public class Scrib_lib_title implements Scrib_lib {
 		Pfunc_urlfunc.UrlString(core.Ctx(), url_func_tid, false, ttl_bry, bfr, qry_bry);
 		return rslt.Init_obj(bfr.To_str_and_rls());
 	}
-	private static final    Hash_adp_bry url_func_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry url_func_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("fullUrl", Pfunc_urlfunc.Tid_full)
 	.Add_str_byte("localUrl", Pfunc_urlfunc.Tid_local)
 	.Add_str_byte("canonicalUrl", Pfunc_urlfunc.Tid_canonical);
-	// private static final    byte[] Proto_relative = Bry_.new_a7("relative");
-	// private static final    Hash_adp_bry proto_hash = Hash_adp_bry.ci_a7().Add_str_obj("http", Bry_.new_a7("http://")).Add_str_obj("https", Bry_.new_a7("https://")).Add_str_obj("relative", Bry_.new_a7("//")).Add_str_obj("canonical", Bry_.new_a7("1"));
+	// private static final byte[] Proto_relative = Bry_.new_a7("relative");
+	// private static final Hash_adp_bry proto_hash = Hash_adp_bry.ci_a7().Add_str_obj("http", Bry_.new_a7("http://")).Add_str_obj("https", Bry_.new_a7("https://")).Add_str_obj("relative", Bry_.new_a7("//")).Add_str_obj("canonical", Bry_.new_a7("1"));
 	private byte[] Parse_ns(Xowe_wiki wiki, Object ns_obj) {
 		if (Type_.Eq_by_obj(ns_obj, String.class))
 			return Bry_.new_u8(String_.cast(ns_obj));
@@ -182,7 +182,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			, Keyval_.new_("pages"		, null)	// TODO_OLD: get pages info
 			);
 		return rslt.Init_obj(rv);
-	}	private static final    Keyval[] GetFileInfo_absent = Keyval_.Ary(Keyval_.new_("exists", false), Keyval_.new_("width", 0), Keyval_.new_("height", 0));	// NOTE: must supply non-null values for w / h, else Modules will fail with nil errors; PAGE:pl.w:Andrespol DATE:2016-08-01
+	}	private static final Keyval[] GetFileInfo_absent = Keyval_.Ary(Keyval_.new_("exists", false), Keyval_.new_("width", 0), Keyval_.new_("height", 0));	// NOTE: must supply non-null values for w / h, else Modules will fail with nil errors; PAGE:pl.w:Andrespol DATE:2016-08-01
 	public boolean GetContent(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		byte[] rv = GetContentInternal(core, core.Wiki(), ttl_bry);
@@ -209,7 +209,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		}
 		return rv;
 	}
-	private static final    Keyval[] protectionLevels_dflt = Keyval_.Ary(Keyval_.new_("move", Keyval_.int_(1, "sysop")), Keyval_.new_("edit", Keyval_.int_(1, "sysop")));	// protectionLevels are stored in different table which is currently not mirrored; per en.w:Module:Effective_protection_level; DATE:2014-04-09; 2016-09-07
+	private static final Keyval[] protectionLevels_dflt = Keyval_.Ary(Keyval_.new_("move", Keyval_.int_(1, "sysop")), Keyval_.new_("edit", Keyval_.int_(1, "sysop")));	// protectionLevels are stored in different table which is currently not mirrored; per en.w:Module:Effective_protection_level; DATE:2014-04-09; 2016-09-07
 	public boolean CascadingProtection(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Pull_bry(0);
 		Xowe_wiki wiki = core.Wiki();
@@ -224,7 +224,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		wiki.Data_mgr().Load_from_db(page, ttl.Ns(), ttl, false);
 		return page.Redirect_trail().Itms__len() == 0 ? rslt.Init_obj(null) : rslt.Init_obj(GetInexpensiveTitleData(page.Ttl()));
 	}
-	public static final    Keyval[] CascadingProtection_rv = Keyval_.Ary(Keyval_.new_("sources", Keyval_.Ary_empty), Keyval_.new_("restrictions", Keyval_.Ary_empty));	// changed sources from "false" to "{}"; DATE:2016-09-09
+	public static final Keyval[] CascadingProtection_rv = Keyval_.Ary(Keyval_.new_("sources", Keyval_.Ary_empty), Keyval_.new_("restrictions", Keyval_.Ary_empty));	// changed sources from "false" to "{}"; DATE:2016-09-09
 	private Keyval[] GetInexpensiveTitleData(Xoa_ttl ttl) {
 		Xow_ns ns = ttl.Ns();
 		boolean ns_file_or_media = ns.Id_is_file_or_media(), ns_special = ns.Id_is_special();

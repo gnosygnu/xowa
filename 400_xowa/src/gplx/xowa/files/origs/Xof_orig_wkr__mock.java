@@ -18,7 +18,7 @@ import gplx.core.flds.*;
 import gplx.dbs.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_orig_wkr__mock implements Xof_orig_wkr {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public byte				Tid() {return Xof_orig_wkr_.Tid_mock;}
 	public void				Find_by_list(Ordered_hash rv, List_adp itms) {Xof_orig_wkr_.Find_by_list(this, rv, itms);}
 	public Xof_orig_itm		Find_as_itm(byte[] ttl, int list_idx, int list_len) {

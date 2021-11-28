@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_hdr_html_tst {
-	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
+	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Test  public void Basic() {
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
 		( "z"

@@ -20,7 +20,7 @@ public class Xoa_update_special implements Xow_special_page {
 		new Xoa_update_html().Bld_page_by_mustache(wiki.App(), page, this);
 	}
 	Xoa_update_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
-	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
+	public Xow_special_meta Special__meta()		{return special__meta;} private final Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
-	public static final    Xow_special_page Prototype = new Xoa_update_special(Xow_special_meta.New_xo("XowaAppUpdate", "App Update"));
+	public static final Xow_special_page Prototype = new Xoa_update_special(Xow_special_meta.New_xo("XowaAppUpdate", "App Update"));
 }

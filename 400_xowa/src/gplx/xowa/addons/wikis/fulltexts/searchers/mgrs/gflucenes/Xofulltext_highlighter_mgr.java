@@ -22,16 +22,16 @@ import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 import gplx.xowa.addons.wikis.fulltexts.core.*;
 class Xofulltext_highlighter_mgr implements Gfo_invk {
-	private final    Xofulltext_searcher_ui ui;
-	private final    Xow_wiki wiki;
-	private final    Xofulltext_args_qry searcher_args;
-	private final    Xofulltext_args_wiki wiki_args;
-	private final    Gflucene_analyzer_data analyzer_data;
-	private final    Gflucene_searcher_qry searcher_data;
-	private final    Gflucene_highlighter_mgr highlighter_mgr = new Gflucene_highlighter_mgr();
-	private final    Xoh_page hpg = new Xoh_page();
-	private final    Ordered_hash list;
-	private final    Xofulltext_extractor extractor = new Xofulltext_extractor();
+	private final Xofulltext_searcher_ui ui;
+	private final Xow_wiki wiki;
+	private final Xofulltext_args_qry searcher_args;
+	private final Xofulltext_args_wiki wiki_args;
+	private final Gflucene_analyzer_data analyzer_data;
+	private final Gflucene_searcher_qry searcher_data;
+	private final Gflucene_highlighter_mgr highlighter_mgr = new Gflucene_highlighter_mgr();
+	private final Xoh_page hpg = new Xoh_page();
+	private final Ordered_hash list;
+	private final Xofulltext_extractor extractor = new Xofulltext_extractor();
 	public Xofulltext_highlighter_mgr(Xofulltext_searcher_ui ui, Xow_wiki wiki, Xofulltext_args_qry searcher_args, Xofulltext_args_wiki wiki_args, Gflucene_analyzer_data analyzer_data, Gflucene_searcher_qry searcher_data, Ordered_hash list) {
 		this.ui = ui;
 		this.wiki = wiki;

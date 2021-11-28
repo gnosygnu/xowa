@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.net; import gplx.*; import gplx.core.*;
 import gplx.core.net.qargs.*;
 class Gfo_url_parser_fxt {
-	private final    Gfo_url_parser parser = new Gfo_url_parser();
+	private final Gfo_url_parser parser = new Gfo_url_parser();
 	private Gfo_url actl;
 	public Gfo_url_parser_fxt Test__protocol_tid(byte v) 		{Tfds.Eq_byte(v, actl.Protocol_tid(), "protocol_tid"); return this;}
 	public Gfo_url_parser_fxt Test__protocol_bry(String v) 		{Tfds.Eq_str(v, actl.Protocol_bry(), "protocol_bry"); return this;}
@@ -38,7 +38,7 @@ class Gfo_url_parser_fxt {
 		parser.Parse_site_fast(site_data, raw_bry, 0, raw_bry.length);
 		String actl = String_.new_u8(raw_bry, site_data.Site_bgn(), site_data.Site_end());
 		Tfds.Eq(expd, actl);
-	}	private final    Gfo_url_site_data site_data = new Gfo_url_site_data();
+	}	private final Gfo_url_site_data site_data = new Gfo_url_site_data();
 	private static String Qargs__To_str(Gfo_qarg_itm[] ary) {
 		int len = ary.length;
 		Bry_bfr bfr = Bry_bfr_.New();

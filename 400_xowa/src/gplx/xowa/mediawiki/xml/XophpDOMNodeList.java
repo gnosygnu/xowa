@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.xml; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import gplx.langs.xmls.*;
 public class XophpDOMNodeList {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	public XophpDOMNodeList(XmlNdeList nde_list) {
 		int len = nde_list.Count();
 		for (int i = 0; i < len; i++) {

@@ -50,7 +50,7 @@ public class GfuiMoveElemBtn extends GfuiBtn { 	@Override public GxwElem UnderEl
 	}
 	public void TargetElem_set(GfuiElem v) {moveBinding.TargetElem_set(v);}
 
-	final    GfuiMoveElemBnd moveBinding = GfuiMoveElemBnd.new_();
+	final GfuiMoveElemBnd moveBinding = GfuiMoveElemBnd.new_();
 	public static GfuiMoveElemBtn new_() {
 		GfuiMoveElemBtn rv = new GfuiMoveElemBtn();
 		rv.ctor_GfuiBox_base(GfuiElem_.init_focusAble_true_());

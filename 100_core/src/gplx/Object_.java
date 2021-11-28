@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 public class Object_ {
 	public static final String Cls_val_name = "Object";
-	public static final    Object[] Ary_empty = new Object[0];
+	public static final Object[] Ary_empty = new Object[0];
 	public static Object[] Ary(Object... ary) {return ary;}
 	public static Object[] Ary_add(Object[] lhs, Object[] rhs) {
 		int lhs_len = lhs.length, rhs_len = rhs.length;
@@ -63,6 +63,6 @@ public class Object_ {
 		else if	(Type_.Eq(c, Double_.Cls_ref_type))		return Double_.To_str_loose(Double_.cast(v));
 		else												return v.toString();	
 	}
-	public static final    Object Null = null;
-	public static final    byte[] Bry__null = Bry_.new_a7("null");
+	public static final Object Null = null;
+	public static final byte[] Bry__null = Bry_.new_a7("null");
 }

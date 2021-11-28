@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.data.site_stats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.wikis.nss.*;
 public class Xowd_site_stats_mgr implements Gfo_invk {	// REF.MW:https://www.mediawiki.org/wiki/Manual:Site_stats_table
-	private final    Xow_wiki wiki;
+	private final Xow_wiki wiki;
 	public Xowd_site_stats_mgr(Xow_wiki wiki) {this.wiki = wiki;}
 	public long		Num_pages()		{return num_pages;}				private long num_pages;		// ss_total_pages; pages in entire wiki: 16,299,475
 	public long		Num_articles()	{return num_articles;}			private long num_articles;	// ss_good_articles; pages in main ns w/o redirect: 5,072,469

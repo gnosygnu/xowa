@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.caches; import gplx.*; import gplx.core.*;
 public class Gfo_cache_mgr {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
-	private final    List_adp tmp_delete = List_adp_.New();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
+	private final List_adp tmp_delete = List_adp_.New();
 	public int Cur_size()	{return cur_size;}	private int cur_size;
 	public int Max_size()	{return max_size;}	public Gfo_cache_mgr Max_size_(int v)	{max_size = v; return this;} private int max_size;
 	public int Reduce_by()	{return reduce_by;} public Gfo_cache_mgr Reduce_by_(int v)	{reduce_by = v; return this;} private int reduce_by;

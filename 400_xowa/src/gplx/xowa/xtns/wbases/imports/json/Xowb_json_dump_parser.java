@@ -18,7 +18,7 @@ import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.data.tbls.*;
 class Xowb_json_dump_parser {
-	private final    Xob_bldr bldr; private final    Xowe_wiki wiki;
+	private final Xob_bldr bldr; private final Xowe_wiki wiki;
 	public Xowb_json_dump_parser(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.bldr = bldr; this.wiki = wiki;
 	}

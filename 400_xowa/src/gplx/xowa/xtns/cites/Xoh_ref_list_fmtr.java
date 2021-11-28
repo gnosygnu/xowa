@@ -17,7 +17,7 @@ package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.brys.args.*;
 class Xoh_ref_list_fmtr implements gplx.core.brys.Bfr_arg {
 	private Xowe_wiki wiki; private Ref_html_wtr_cfg cfg; private Ref_nde itm;
-	private final    Bfr_arg__bry_fmtr fmtr = Bfr_arg_.New_bry_fmtr__null();
+	private final Bfr_arg__bry_fmtr fmtr = Bfr_arg_.New_bry_fmtr__null();
 	public void Init(Xowe_wiki wiki, Ref_html_wtr_cfg cfg, Ref_nde itm) {
 		this.wiki = wiki; this.cfg = cfg; this.itm = itm;
 	}

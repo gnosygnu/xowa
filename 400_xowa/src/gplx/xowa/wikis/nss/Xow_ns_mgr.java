@@ -22,7 +22,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	private Hash_adp_bry name_hash;							// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
 	private Hash_adp_bry tmpl_hash;							// hash for retrieval by name; PERF for templates
 	private Ordered_hash aliases = Ordered_hash_.New();		// hash to store aliases; used to populate name_hash;
-	private final    Int_obj_ref id_hash_ref = Int_obj_ref.New_zero();
+	private final Int_obj_ref id_hash_ref = Int_obj_ref.New_zero();
 	public Xow_ns_mgr(Xol_case_mgr case_mgr) {
 		name_hash = Hash_adp_bry.ci_u8(case_mgr);
 		tmpl_hash = Hash_adp_bry.ci_u8(case_mgr);
@@ -58,7 +58,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	private Xow_ns		Ids_get_or_empty(int id) {
 		Xow_ns rv = Ids_get_or_null(id);
 		return rv == null ? Ns__empty : rv;
-	}	private static final    Xow_ns Ns__empty = new Xow_ns(Int_.Max_value, Byte_.Zero, Bry_.Empty, false);
+	}	private static final Xow_ns Ns__empty = new Xow_ns(Int_.Max_value, Byte_.Zero, Bry_.Empty, false);
 	public Xow_ns		Names_get_or_null(byte[] name_bry) {return this.Names_get_or_null(name_bry, 0, name_bry.length);}
 	public Xow_ns		Names_get_or_null(byte[] src, int bgn, int end) {
 		Object rv = name_hash.Get_by_mid(src, bgn, end);
@@ -127,7 +127,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 		Xow_ns project_ns = ords[ns.Ord_subj_id()];
 		if (project_ns == null) return;	// should warn or throw error; for now just exit
 		ns.Name_bry_(Bry_.Replace(ns_name, Project_talk_fmt_arg, project_ns.Name_db()));
-	}	private static final    byte[] Project_talk_fmt_arg = Bry_.new_a7("$1");
+	}	private static final byte[] Project_talk_fmt_arg = Bry_.new_a7("$1");
 	private void Rebuild_hashes__add(Hash_adp_bry hash, Xow_ns ns, byte[] key) {
 		Xow_ns_mgr_name_itm ns_itm = new Xow_ns_mgr_name_itm(ns, key);
 		hash.Add_if_dupe_use_nth(key, ns_itm);

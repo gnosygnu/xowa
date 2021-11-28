@@ -19,7 +19,7 @@ interface Volume_page_loader {
 	boolean Load(Volume_page_itm rv, byte[] ttl);
 }
 class Volume_page_loader__wiki implements Volume_page_loader {
-	private final    Xowe_wiki wiki;
+	private final Xowe_wiki wiki;
 	public Volume_page_loader__wiki(Xowe_wiki wiki) {this.wiki = wiki;}
 	public boolean Load(Volume_page_itm rv, byte[] ttl) {
 		Xoa_ttl page_ttl = wiki.Ttl_parse(ttl); if (page_ttl == null) return false;
@@ -56,6 +56,6 @@ class Volume_page_itm {
 	}
 	public Xoa_ttl Page_ttl() {return page_ttl;} private Xoa_ttl page_ttl;
 	public Xoa_url Page_url() {return page_url;} private Xoa_url page_url;
-	public List_adp Link_list() {return link_list;} private final    List_adp link_list = List_adp_.New();
-	public List_adp File_list() {return file_list;} private final    List_adp file_list = List_adp_.New();
+	public List_adp Link_list() {return link_list;} private final List_adp link_list = List_adp_.New();
+	public List_adp File_list() {return file_list;} private final List_adp file_list = List_adp_.New();
 }

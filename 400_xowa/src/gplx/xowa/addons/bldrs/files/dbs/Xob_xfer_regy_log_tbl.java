@@ -26,7 +26,7 @@ public class Xob_xfer_regy_log_tbl {
 		.Val_str(wkr_msg)
 		.Exec_insert();
 	}
-	private static final    String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = String_.Concat_lines_nl
 	(	"CREATE TABLE IF NOT EXISTS xfer_regy_log"
 	,	"( lnki_id             integer             NOT NULL"
 	,	", xfer_status         tinyint             NOT NULL"	// 0=todo; 1=fail; 2=pass; 3=done
@@ -34,7 +34,7 @@ public class Xob_xfer_regy_log_tbl {
 	,	", xfer_bin_msg        varchar(255)        NOT NULL"
 	,	");"
 	);
-	public static final    String Tbl_name = "xfer_regy_log"
+	public static final String Tbl_name = "xfer_regy_log"
 	, Fld_lnki_id = "lnki_id", Fld_xfer_status = "xfer_status", Fld_xfer_bin_tid = "xfer_bin_tid", Fld_xfer_bin_msg = "xfer_bin_msg"
 	;
 }

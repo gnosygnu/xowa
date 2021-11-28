@@ -17,7 +17,7 @@ package gplx.xowa.wikis.pages.lnkis; import gplx.*; import gplx.xowa.*; import g
 import gplx.core.strings.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.parsers.lnkis.*;
 public class Xopg_lnki_list {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	private int lnki_idx;
 	public Xopg_lnki_list() {
 		this.Clear();

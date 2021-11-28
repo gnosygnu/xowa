@@ -24,8 +24,8 @@ public class Wdata_dict_mainsnak {
 	, Tid__type									= 4
 	, Tid__datatype								= 5
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("core.mainsnak", 6);
-	public static final    Wbase_enum_itm
+	public static final Wbase_enum_hash Reg = new Wbase_enum_hash("core.mainsnak", 6);
+	public static final Wbase_enum_itm
 	  Itm__snaktype								= Reg.Add(Tid__snaktype	, "snaktype")
 	, Itm__property								= Reg.Add(Tid__property	, "property")
 	, Itm__hash									= Reg.Add(Tid__hash		, "hash")

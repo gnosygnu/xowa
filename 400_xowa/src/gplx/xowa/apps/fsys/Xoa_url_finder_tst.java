@@ -17,7 +17,7 @@ package gplx.xowa.apps.fsys; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.users.*;
 public class Xoa_url_finder_tst {
-	private final    Xoa_url_finder_fxt fxt = new Xoa_url_finder_fxt();
+	private final Xoa_url_finder_fxt fxt = new Xoa_url_finder_fxt();
 	@Test public void Find_by_css_or_null() {
 		// init
 		String wiki = "en.wikipedia.org";
@@ -46,7 +46,7 @@ public class Xoa_url_finder_tst {
 	}
 }
 class Xoa_url_finder_fxt {
-	private final    Xoa_url_finder finder;
+	private final Xoa_url_finder finder;
 	public Xoa_url_finder_fxt() {
 		Io_url root_dir = Io_url_.mem_dir_("mem/xowa/");
 		Xoa_fsys_mgr app_fsys_mgr = Xoa_fsys_mgr.New_by_plat("lnx", root_dir);

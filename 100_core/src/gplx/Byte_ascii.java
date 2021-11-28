@@ -95,8 +95,8 @@ public class Byte_ascii {
 			? (byte)(b + 32)
 			: b;
 	}
-	public static final    byte[] Space_len2 = new byte[] {Space, Space}, Space_len4 = new byte[] {Space, Space, Space, Space};
-	public static final    byte[]
+	public static final byte[] Space_len2 = new byte[] {Space, Space}, Space_len4 = new byte[] {Space, Space, Space, Space};
+	public static final byte[]
 	  Tab_bry				= new byte[] {Byte_ascii.Tab}
 	, Nl_bry				= new byte[] {Byte_ascii.Nl}
 	, Space_bry				= new byte[] {Byte_ascii.Space}

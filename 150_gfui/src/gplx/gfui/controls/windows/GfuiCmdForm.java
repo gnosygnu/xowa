@@ -45,7 +45,7 @@ public class GfuiCmdForm implements Gfo_invk, InjectAble {
 	}
 
 	GfuiWin cmdForm;
-	static final    String DoStuff = "doStuff", HideMe_cmd = "HideMe";
+	static final String DoStuff = "doStuff", HideMe_cmd = "HideMe";
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, DoStuff))					ActivateMe((GfuiElem)ctx.MsgSrc());
 		else if	(ctx.Match(k, HideMe_cmd))				((GfuiWin)ctx.MsgSrc()).Hide();

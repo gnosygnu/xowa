@@ -88,10 +88,10 @@ public class Xop_comm_lxr implements Xop_lxr {
 		ctx.Subs_add(root, tkn_mkr.NewLine(nl_rhs - 1, nl_rhs, Xop_nl_tkn.Tid_char, 1).Ignore_y_()); // add tkn for nl_rhs, but mark as ignore; needed for multiple comment nls; EX: "<!-- -->\n<!-- -->\n;"; DATE:2014-02-24
 		return nl_rhs;
 	}
-	public static final    byte[] Bgn_ary = new byte[] {60, 33, 45, 45}, /*<!--*/ End_ary = new byte[] {45, 45, 62}; /*-->*/
-	private static final    int End_len = End_ary.length;
-	public static final    Xop_comm_lxr Instance = new Xop_comm_lxr(); Xop_comm_lxr() {}
-	private static final    String Xowa_skip_text_str = "XOWA_SKIP";
-	private static final    byte[] Xowa_skip_text_bry = Bry_.new_a7(Xowa_skip_text_str);
-	public static final    byte[] Xowa_skip_comment_bry = Bry_.new_a7("<!--" + Xowa_skip_text_str + "-->");
+	public static final byte[] Bgn_ary = new byte[] {60, 33, 45, 45}, /*<!--*/ End_ary = new byte[] {45, 45, 62}; /*-->*/
+	private static final int End_len = End_ary.length;
+	public static final Xop_comm_lxr Instance = new Xop_comm_lxr(); Xop_comm_lxr() {}
+	private static final String Xowa_skip_text_str = "XOWA_SKIP";
+	private static final byte[] Xowa_skip_text_bry = Bry_.new_a7(Xowa_skip_text_str);
+	public static final byte[] Xowa_skip_comment_bry = Bry_.new_a7("<!--" + Xowa_skip_text_str + "-->");
 }

@@ -17,7 +17,7 @@ package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.
 public class Xol_num_mgr implements Gfo_invk {
 	private boolean digits_translate;
 	protected Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
-	private static final    byte[] Comma_bry = Bry_.new_a7(",");
+	private static final byte[] Comma_bry = Bry_.new_a7(",");
 	public Xol_num_grp_fmtr Num_grp_fmtr() {return num_grp_fmtr;} private Xol_num_grp_fmtr num_grp_fmtr = new Xol_num_grp_fmtr();
 	public Xol_transform_mgr Separators_mgr() {return separators_mgr;} private Xol_transform_mgr separators_mgr = new Xol_transform_mgr();
 	public Xol_transform_mgr Digits_mgr() {return digits_mgr;} private Xol_transform_mgr digits_mgr = new Xol_transform_mgr();		
@@ -66,7 +66,7 @@ public class Xol_num_mgr implements Gfo_invk {
 	}
 	public static final String Invk_clear = "clear", Invk_separators = "separators"
 	, Invk_digits = "digits", Invk_digit_grouping_pattern = "digit_grouping_pattern", Invk_digit_grouping_pattern_ = "digit_grouping_pattern_";
-	public static final    byte[]
+	public static final byte[]
 	  Separators_key__grp = new byte[]{Byte_ascii.Comma}
 	, Separators_key__dec = new byte[]{Byte_ascii.Dot}
 	;

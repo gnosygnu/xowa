@@ -26,15 +26,15 @@ public class Xoh_anch_cls_ {
 	  Str__image			= "image"
 //		, Str__xowa_media_play	= "xowa_media_play"
 	;
-	public static final    byte[] 
+	public static final byte[]
 	  Bry__image			= Bry_.new_a7(Str__image)
 //		, Bry__xowa_media_play	= Bry_.new_a7(Str__xowa_media_play)
 	;
-	private static final    byte[]
+	private static final byte[]
 	  Html__image			= Bry_.Add(Gfh_bldr_.Bry__cls__nth, Bry__image)
 //		, Html__xowa_media_play	= Bry_.Add(Gfh_bldr_.Bry__cls__nth, Bry__xowa_media_play)
 	;
-	public static final    Btrie_slim_mgr Trie = Btrie_slim_mgr.cs()
+	public static final Btrie_slim_mgr Trie = Btrie_slim_mgr.cs()
 	.Add_bry_byte(Bry__image			, Tid__image)
 //		.Add_bry_byte(Bry__xowa_media_play	, Tid__xowa_media_play)
 	;

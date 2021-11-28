@@ -17,9 +17,9 @@ package gplx.xowa.guis.cbks.swts; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.core.gfobjs.*;
 import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
 public class Xog_cbk_wkr__swt implements Xog_cbk_wkr {
-	private final    Xoa_gui_mgr gui_mgr;
-	private final    Xog_browser_func browser_func;
-	private final    Gfobj_wtr__json__browser json_wtr = new Gfobj_wtr__json__browser();
+	private final Xoa_gui_mgr gui_mgr;
+	private final Xog_browser_func browser_func;
+	private final Gfobj_wtr__json__browser json_wtr = new Gfobj_wtr__json__browser();
 	public Xog_cbk_wkr__swt(Xoa_gui_mgr gui_mgr) {
 		this.gui_mgr = gui_mgr;
 		this.browser_func = new Xog_browser_func();

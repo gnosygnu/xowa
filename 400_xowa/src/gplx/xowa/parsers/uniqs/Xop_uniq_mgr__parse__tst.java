@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.uniqs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_uniq_mgr__parse__tst {
-	private final    Xop_fxt fxt = Xop_fxt.New_app_html();
+	private final Xop_fxt fxt = Xop_fxt.New_app_html();
 	@Before public void init() {fxt.Reset();}
 	@Test public void Ref_becomes_UNIQ() {
 		String wikitext = "<ref>b</ref>";

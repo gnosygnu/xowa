@@ -34,7 +34,7 @@ import gplx.dbs.metas.Dbmeta_tbl_mgr;
 import gplx.dbs.qrys.Db_qry_sql;
 import gplx.dbs.qrys.Db_stmt_cmd;
 import gplx.dbs.qrys.bats.Db_batch_mgr;
-import gplx.dbs.sqls.Sql_qry_wtr;
+import gplx.dbs.sqls.SqlQryWtr;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -45,9 +45,9 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	@gplx.Internal protected void Ctor(Db_conn_info conn_info) {this.conn_info = conn_info;}
 	public abstract String		Tid();
 	public Db_conn_info			Conn_info() {return conn_info;} protected Db_conn_info conn_info;
-	public Db_conn_props_mgr	Props() {return props;} private final    Db_conn_props_mgr props = new Db_conn_props_mgr();
-	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
-	public abstract Sql_qry_wtr	Sql_wtr();
+	public Db_conn_props_mgr	Props() {return props;} private final Db_conn_props_mgr props = new Db_conn_props_mgr();
+	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final Db_batch_mgr batch_mgr = new Db_batch_mgr();
+	public abstract SqlQryWtr Sql_wtr();
 	public abstract				Db_engine New_clone(Db_conn_info conn_info);
 	public Db_rdr				Exec_as_rdr__rls_manual(Object rdr_obj, String sql)				{return New_rdr(null, rdr_obj, sql);}
 	public Db_rdr				Exec_as_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql)	{return New_rdr(stmt, rdr_obj, sql);}
@@ -64,7 +64,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	}
 	public Object		Exec_as_obj(Db_qry qry) {
 		if (qry.Tid() == Db_qry_.Tid_flush) return null;	// ignore flush (delete-db) statements
-		String sql = this.Sql_wtr().To_sql_str(qry, false); // DBG: Tfds.Write(sql);
+		String sql = this.Sql_wtr().ToSqlStr(qry, false); // DBG: Tfds.Write(sql);
 		return qry.Exec_is_rdr() ? (Object)this.Exec_as_rdr(sql) : this.Exec_as_int(sql);
 	}
 	protected int Exec_as_int(String sql) {

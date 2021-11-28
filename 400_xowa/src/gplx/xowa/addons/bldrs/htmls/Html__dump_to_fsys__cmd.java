@@ -81,6 +81,6 @@ public class Html__dump_to_fsys__cmd extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "html.dump_to_file";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Html__dump_to_fsys__cmd(null, null);
+	public static final Xob_cmd Prototype = new Html__dump_to_fsys__cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Html__dump_to_fsys__cmd(bldr, wiki);}
 }

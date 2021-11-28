@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
 import gplx.xowa.htmls.core.hzips.*;
-public class Xoh_hzip_bfr extends Bry_bfr { 	private final    Xoh_hzip_int hzint = new Xoh_hzip_int();
-	private final    byte stop_byte;
+public class Xoh_hzip_bfr extends Bry_bfr { 	private final Xoh_hzip_int hzint = new Xoh_hzip_int();
+	private final byte stop_byte;
 	public Xoh_hzip_bfr(int bfr_max, boolean mode_is_b256, byte stop_byte) {
 		this.Init(bfr_max);
 		this.stop_byte = stop_byte;

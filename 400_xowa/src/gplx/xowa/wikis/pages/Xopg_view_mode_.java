@@ -19,7 +19,7 @@ public class Xopg_view_mode_ {
 	  Tid__read = 0
 	, Tid__edit = 1
 	, Tid__html = 2;
-	public static final    byte[]
+	public static final byte[]
 	  Bry__read = Bry_.new_a7("read")
 	, Bry__edit = Bry_.new_a7("edit")
 	, Bry__html = Bry_.new_a7("html");

@@ -20,10 +20,10 @@ class Xolog_doc implements Mustache_doc_itm {
 		this.log_file = log_file; this.log_name = log_name;
 		this.log_data = log_data; this.log_files = log_files;
 	}
-	public String Log_file() {return log_file;} private final    String log_file;	// EX: 20160613_165025
-	public String Log_name() {return log_name;} private final    String log_name;	// EX: 2016-06-13 16:50:25
-	public byte[] Log_data() {return log_data;} private final    byte[] log_data;
-	public Xolog_doc_file[] Log_files() {return log_files;} private final    Xolog_doc_file[] log_files;
+	public String Log_file() {return log_file;} private final String log_file;	// EX: 20160613_165025
+	public String Log_name() {return log_name;} private final String log_name;	// EX: 2016-06-13 16:50:25
+	public byte[] Log_data() {return log_data;} private final byte[] log_data;
+	public Xolog_doc_file[] Log_files() {return log_files;} private final Xolog_doc_file[] log_files;
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "log_name"))		bfr.Add_str_u8(log_name);
 		else if	(String_.Eq(key, "log_file"))		bfr.Add_str_u8(log_file);
@@ -73,8 +73,8 @@ class Xolog_doc_file implements Mustache_doc_itm {
 	public Xolog_doc_file(String file, String name) {
 		this.file = file; this.name = name;
 	}
-	public String File() {return file;} private final    String file;
-	public String Name() {return name;} private final    String name;
+	public String File() {return file;} private final String file;
+	public String Name() {return name;} private final String name;
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "file"))			bfr.Add_str_u8(file);
 		else if	(String_.Eq(key, "name"))			bfr.Add_str_u8(name);

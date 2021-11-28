@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import org.junit.*; import gplx.langs.jsons.*; import gplx.xowa.wikis.nss.*;
 public class Site_json_parser_tst {
-	private final    Site_json_parser_fxt fxt = new Site_json_parser_fxt();
+	private final Site_json_parser_fxt fxt = new Site_json_parser_fxt();
 	@Before public void init() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();}
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
 	@Test public void General() {
@@ -379,8 +379,8 @@ public class Site_json_parser_tst {
 //		}
 }
 class Site_json_parser_fxt {
-	private final    Json_parser json_parser = new Json_parser();
-	private final    Site_json_parser site_meta_parser;
+	private final Json_parser json_parser = new Json_parser();
+	private final Site_json_parser site_meta_parser;
 	private Site_meta_itm site_meta;
 	public Site_json_parser_fxt() {
 		this.site_meta_parser = new Site_json_parser(json_parser);

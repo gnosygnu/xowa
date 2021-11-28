@@ -45,5 +45,5 @@ public class Xof_meta_thumb {
 		}
 		state_new = false;
 	}
-	public static final    Xof_meta_thumb[] Ary_empty = new Xof_meta_thumb[0];
+	public static final Xof_meta_thumb[] Ary_empty = new Xof_meta_thumb[0];
 }

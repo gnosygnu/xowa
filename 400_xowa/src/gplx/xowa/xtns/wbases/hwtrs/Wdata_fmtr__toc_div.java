@@ -18,7 +18,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.pages.wtxts.*;
 class Wdata_fmtr__toc_div implements gplx.core.brys.Bfr_arg {
-	private final    List_adp itms = List_adp_.New(); private final     Wdata_fmtr__toc_itm fmtr_itm = new Wdata_fmtr__toc_itm();
+	private final List_adp itms = List_adp_.New(); private final  Wdata_fmtr__toc_itm fmtr_itm = new Wdata_fmtr__toc_itm();
 	private byte[] tbl_hdr; 
 	public void Init_by_lang(Wdata_hwtr_msgs msgs)	{this.tbl_hdr = msgs.Toc_tbl_hdr();}
 	public void Init_by_wdoc(Wdata_doc wdoc)		{itms.Clear();}
@@ -29,7 +29,7 @@ class Wdata_fmtr__toc_div implements gplx.core.brys.Bfr_arg {
 		fmtr_itm.Init_by_itm((Wdata_toc_data[])itms.To_ary_and_clear(Wdata_toc_data.class));
 		fmtr.Bld_bfr_many(bfr, tbl_hdr, fmtr_itm);
 	}
-	private final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <div id='toc' class='toc wb-toc'>"
 	, "    <div id='toctitle' class='toctitle'>"
@@ -50,7 +50,7 @@ class Wdata_fmtr__toc_itm implements gplx.core.brys.Bfr_arg {
 			fmtr.Bld_bfr_many(bfr, i + List_adp_.Base1, itm.Href(), itm.Text());
 		}
 	}
-	private final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "      <li class='toclevel-1 tocsection-~{idx}'>"
 	, "        <a href='#~{href}'>"

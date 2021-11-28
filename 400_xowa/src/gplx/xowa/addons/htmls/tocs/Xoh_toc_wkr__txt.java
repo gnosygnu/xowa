@@ -17,11 +17,11 @@ package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import g
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 import gplx.xowa.parsers.amps.*; import gplx.core.primitives.*;
 class Xoh_toc_wkr__txt {
-	private final    Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html().Skip_ws_after_slash_y_();
-	private final    Bry_bfr anch_bfr = Bry_bfr_.New(), text_bfr = Bry_bfr_.New();
-	private final    Gfo_url_encoder anch_encoder = Gfo_url_encoder_.New__html_id().Make();
-	private final    Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
-	private final    Hash_adp anch_hash = Hash_adp_bry.ci_u8(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
+	private final Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html().Skip_ws_after_slash_y_();
+	private final Bry_bfr anch_bfr = Bry_bfr_.New(), text_bfr = Bry_bfr_.New();
+	private final Gfo_url_encoder anch_encoder = Gfo_url_encoder_.New__html_id().Make();
+	private final Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
+	private final Hash_adp anch_hash = Hash_adp_bry.ci_u8(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
 	private Xow_tidy_mgr_interface tidy_mgr;
 	private byte[] page_url_bry;
 	public void Clear() {
@@ -171,5 +171,5 @@ class Xoh_toc_wkr__txt {
 		return true;
 	}
 
-	private static final    byte[] Trim__id = Bry_.mask_(256, Byte_ascii.Underline_bry), Trim__anch = Bry_.mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr);
+	private static final byte[] Trim__id = Bry_.mask_(256, Byte_ascii.Underline_bry), Trim__anch = Bry_.mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr);
 }

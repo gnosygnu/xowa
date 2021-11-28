@@ -34,7 +34,7 @@ public class Srch_crt_scanner_syms {
 	public byte Paren_bgn() {return paren_bgn;} private byte paren_bgn;
 	public byte Paren_end() {return paren_end;} private byte paren_end;
 	public byte Wild() {return wild;} private byte wild;
-	public Btrie_slim_mgr Trie() {return trie;} private final    Btrie_slim_mgr trie;
+	public Btrie_slim_mgr Trie() {return trie;} private final Btrie_slim_mgr trie;
 	public byte[] To_bry() {
 		Bry_bfr bfr = Bry_bfr_.New();
 		To_bry__add(bfr, "wild"			, wild);
@@ -96,7 +96,7 @@ public class Srch_crt_scanner_syms {
 		, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Star
 		);
 	}
-	public static final    Srch_crt_scanner_syms Dflt = New__dflt();
+	public static final Srch_crt_scanner_syms Dflt = New__dflt();
 	private static byte Parse__val(byte[] line, int val_bgn, int line_len) {
 		if (line_len - val_bgn == 1) return line[val_bgn];
 		if (	line_len - val_bgn == 2

@@ -18,7 +18,7 @@ import gplx.dbs.*;
 import gplx.xowa.htmls.*;
 import gplx.xowa.htmls.hxtns.pages.*; import gplx.xowa.htmls.hxtns.blobs.*; import gplx.xowa.htmls.hxtns.wikis.*;
 public class Hxtn_page_wkr__template_styles implements Hxtn_page_wkr {
-	private final    Hxtn_blob_tbl page_text_tbl;
+	private final Hxtn_blob_tbl page_text_tbl;
 	public int Id() {return Hxtn_page_mgr.Id__template_styles;}
 	public String Key() {return "xowa.xtns.template_styles";}
 	public Hxtn_page_wkr__template_styles(Hxtn_blob_tbl page_text_tbl) {

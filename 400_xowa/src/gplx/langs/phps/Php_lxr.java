@@ -22,7 +22,7 @@ interface Php_lxr {
 	int Lxr_make(Php_ctx ctx, int bgn, int cur);
 }
 class Php_lxr_ {
-	public static final    byte Tid_declaration = 1, Tid_ws = 2, Tid_comment = 3, Tid_var = 4, Tid_sym = 5, Tid_keyword = 6, Tid_num = 7, Tid_quote = 8;
+	public static final byte Tid_declaration = 1, Tid_ws = 2, Tid_comment = 3, Tid_var = 4, Tid_sym = 5, Tid_keyword = 6, Tid_num = 7, Tid_quote = 8;
 }
 abstract class Php_lxr_base implements Php_lxr {
 	protected byte[] src; protected int src_len; protected Php_tkn_wkr tkn_wkr; protected Php_tkn_factory tkn_factory;
@@ -57,7 +57,7 @@ class Php_lxr_declaration extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Declaration(bgn, cur));
 		return cur;		
 	}
-	private static final    byte[] Bry_declaration = Bry_.new_a7("<?php");
+	private static final byte[] Bry_declaration = Bry_.new_a7("<?php");
 }
 class Php_lxr_ws extends Php_lxr_base {
 	public Php_lxr_ws(byte ws_tid) {
@@ -93,7 +93,7 @@ class Php_lxr_ws extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Ws(bgn, cur, ws_tid));
 		return cur;
 	}
-	public static final    byte[] Bry_ws_space = Bry_.new_a7(" "), Bry_ws_nl = Bry_.new_a7("\n"), Bry_ws_tab = Bry_.new_a7("\t"), Bry_ws_cr = Bry_.new_a7("\r");
+	public static final byte[] Bry_ws_space = Bry_.new_a7(" "), Bry_ws_nl = Bry_.new_a7("\n"), Bry_ws_tab = Bry_.new_a7("\t"), Bry_ws_cr = Bry_.new_a7("\r");
 }
 class Php_lxr_comment extends Php_lxr_base {
 	public Php_lxr_comment(byte comment_tid) {
@@ -124,8 +124,8 @@ class Php_lxr_comment extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Comment(bgn, cur, comment_tid));
 		return cur;
 	}
-	public static final    Gfo_msg_itm Dangling_comment = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "dangling_comment", "dangling_comment");
-	public static final    byte[] Bry_bgn_mult = Bry_.new_a7("/*"), Bry_bgn_slash = Bry_.new_a7("//"), Bry_bgn_hash = Bry_.new_a7("#")
+	public static final Gfo_msg_itm Dangling_comment = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "dangling_comment", "dangling_comment");
+	public static final byte[] Bry_bgn_mult = Bry_.new_a7("/*"), Bry_bgn_slash = Bry_.new_a7("//"), Bry_bgn_hash = Bry_.new_a7("#")
 		, Bry_end_mult = Bry_.new_a7("*/"), Bry_end_nl = Bry_.new_a7("\n");
 }
 class Php_lxr_var extends Php_lxr_base {
@@ -163,7 +163,7 @@ class Php_lxr_var extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Var(bgn, cur));
 		return cur;		
 	}
-	private static final    byte[] Bry_var = Bry_.new_a7("$");
+	private static final byte[] Bry_var = Bry_.new_a7("$");
 }
 class Php_lxr_sym extends Php_lxr_base {
 	public Php_lxr_sym(String hook_str, byte tkn_tid) {this.hook = Bry_.new_a7(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;
@@ -225,8 +225,8 @@ class Php_lxr_quote extends Php_lxr_base {
 		tkn_wkr.Process(tkn_factory.Quote(bgn, cur, quote_tid));
 		return cur;
 	}
-	public static final    Gfo_msg_itm Dangling_quote = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "dangling_quote", "dangling_quote");
-	public static final    byte[] Quote_bry_single = Bry_.new_a7("'"), Quote_bry_double = Bry_.new_a7("\"");
+	public static final Gfo_msg_itm Dangling_quote = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "dangling_quote", "dangling_quote");
+	public static final byte[] Quote_bry_single = Bry_.new_a7("'"), Quote_bry_double = Bry_.new_a7("\"");
 }
 class Php_lxr_keyword extends Php_lxr_base {
 	public Php_lxr_keyword(String hook_str, byte tkn_tid) {this.hook = Bry_.new_a7(hook_str); this.tkn_tid = tkn_tid;} private byte[] hook; byte tkn_tid;

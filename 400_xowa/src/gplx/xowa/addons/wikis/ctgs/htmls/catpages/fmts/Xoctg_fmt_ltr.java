@@ -18,7 +18,7 @@ import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.core.intls.ucas.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;	
 public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C cont."
-	private final    Xoctg_fmt_itm_base itm_fmt;
+	private final Xoctg_fmt_itm_base itm_fmt;
 	private Xoctg_catpage_grp grp;
 	private byte[] msg__list_continues;
 	private Uca_ltr_extractor ltr_extractor;
@@ -72,7 +72,7 @@ public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C c
 				Fmt__col_end.Bld_many(bfr);
 		}
 	}
-	private static final    Bry_fmt
+	private static final Bry_fmt
 	 Fmt__tbl = Bry_fmt.Auto_nl_skip_last
 	( ""
 	, "          <h3>~{ltr_head}</h3>"	// EX: "A", "A cont."

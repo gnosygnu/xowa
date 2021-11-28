@@ -25,7 +25,7 @@ public class Gallery_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public int					Itm_w_actl()				{return itm_w_actl;} private int itm_w_actl = Null;
 	public int					Itm_h_actl()				{return itm_h_actl;} private int itm_h_actl = Null;
 	public int					Itms_per_row()				{return itms_per_row;} private int itms_per_row = Null;
-	public int					Itms_len()					{return itms.Count();} private final    List_adp itms = List_adp_.New();
+	public int					Itms_len()					{return itms.Count();} private final List_adp itms = List_adp_.New();
 	public Gallery_itm			Itms_get_at(int i)			{return (Gallery_itm)itms.Get_at(i);}
 	public byte[]				Atr_style()					{return atr_style;} private byte[] atr_style = Bry_.Empty;
 	public byte[]				Atr_cls()					{return atr_cls;} private byte[] atr_cls = Bry_.Empty;

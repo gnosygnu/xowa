@@ -17,7 +17,7 @@ package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 import gplx.xowa.langs.cases.*;
 public class Xop_lnki_wkr__link__basic__tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Link() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|12x10px|link=File:B.png|c]]", String_.Concat_lines_nl_skip_last

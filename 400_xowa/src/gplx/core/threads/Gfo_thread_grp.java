@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.threads; import gplx.*; import gplx.core.*;
 public class Gfo_thread_grp implements Gfo_invk {
-	private final    Object thread_lock = new Object();
-	private final    List_adp list = List_adp_.New();
+	private final Object thread_lock = new Object();
+	private final List_adp list = List_adp_.New();
 	private int active_cur;
 	public Gfo_thread_grp(String key) {this.key = key;}
-	public String Key() {return key;} private final    String key;
+	public String Key() {return key;} private final String key;
 	public boolean Autorun() {return autorun;} public Gfo_thread_grp Autorun_(boolean v) {autorun = v; return this;} private boolean autorun = true;
 	public int Active_max() {return active_max;} public Gfo_thread_grp Active_max_(int v) {active_max = v; return this;} private int active_max = 1;
 	public void Add(Gfo_thread_itm... ary) {

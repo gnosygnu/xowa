@@ -38,7 +38,7 @@ public class Xoh_pgbnr_data implements Xoh_data_itm {// NOTE: some galleries fai
 		this.src_end = pgbnr_lhs.Src_end();
 		return true;
 	}
-//		public static final    byte[] Hook_bry = Bry_.new_a7(" class=\"pgbnr mw-pgbnr");
+//		public static final byte[] Hook_bry = Bry_.new_a7(" class=\"pgbnr mw-pgbnr");
 
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_pgbnr_data rv = new Xoh_pgbnr_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}

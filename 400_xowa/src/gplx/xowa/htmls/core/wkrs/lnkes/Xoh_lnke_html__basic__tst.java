@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*;
 public class Xoh_lnke_html__basic__tst {
-	@After public void term() {fxt.Init_para_n_(); fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
+	@After public void term() {fxt.Init_para_n_(); fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Auto__one()		{fxt.Test_parse_page_wiki_str("[https://a]"					, "<a href=\"https://a\" rel=\"nofollow\" class=\"external autonumber\">[1]</a>");}
 	@Test public void Auto__many()		{fxt.Test_parse_page_wiki_str("[https://a] [https://b]"		, "<a href=\"https://a\" rel=\"nofollow\" class=\"external autonumber\">[1]</a> <a href=\"https://b\" rel=\"nofollow\" class=\"external autonumber\">[2]</a>");}
 	@Test public void Text__basic()	{fxt.Test_parse_page_wiki_str("[https://a b]"				, "<a href=\"https://a\" rel=\"nofollow\" class=\"external text\">b</a>");}

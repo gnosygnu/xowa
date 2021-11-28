@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*; import gplx.xowa.wikis.ttls.*;
 public class Pfunc_rev_props_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before	public void setup()						{fxt.Reset(); fxt.Page().Db().Protection().User_(Bry_.new_a7("user")).Protection_level_(Bry_.new_a7("normal"));}
 	@Test public void Revision_id()				{fxt.Page().Db().Page().Id_(1); fxt.Test_parse_tmpl_str_test("{{REVISIONID}}"		, "{{test}}", "1");}
 	@Test public void Page_id()					{fxt.Page().Db().Page().Id_(1); fxt.Test_parse_tmpl_str_test("{{PAGEID}}"			, "{{test}}", "1");}

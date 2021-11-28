@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*;
 class Vnt_convert_lang_fxt {
-	private final    Vnt_convert_lang converter_lang;
-	private final    Xol_convert_mgr convert_mgr = new Xol_convert_mgr();
-	private final    Xol_vnt_regy vnt_regy = Xol_vnt_regy_fxt.new_chinese();
+	private final Vnt_convert_lang converter_lang;
+	private final Xol_convert_mgr convert_mgr = new Xol_convert_mgr();
+	private final Xol_vnt_regy vnt_regy = Xol_vnt_regy_fxt.new_chinese();
 	private Xol_vnt_itm vnt_itm;
 	public Vnt_convert_lang_fxt() {
 		converter_lang = new Vnt_convert_lang(convert_mgr, vnt_regy);

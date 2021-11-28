@@ -20,11 +20,11 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.files.*; 	
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 public class Xoh_file_wtr__basic implements Gfo_invk {
-	private final    Xowe_wiki wiki; private final    Xow_html_mgr html_mgr; private final    Xoh_html_wtr html_wtr;
-	private final    Xoh_file_fmtr__basic fmtr__basic = new Xoh_file_fmtr__basic(), fmtr__hdump = new Xoh_file_fmtr__hdump();
-	private final    Xoh_lnki_text_fmtr alt_fmtr, caption_fmtr;
-	private final    Xop_link_parser tmp_link_parser = new Xop_link_parser(); private Xoa_url tmp_url = Xoa_url.blank();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
+	private final Xowe_wiki wiki; private final Xow_html_mgr html_mgr; private final Xoh_html_wtr html_wtr;
+	private final Xoh_file_fmtr__basic fmtr__basic = new Xoh_file_fmtr__basic(), fmtr__hdump = new Xoh_file_fmtr__hdump();
+	private final Xoh_lnki_text_fmtr alt_fmtr, caption_fmtr;
+	private final Xop_link_parser tmp_link_parser = new Xop_link_parser(); private Xoa_url tmp_url = Xoa_url.blank();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
 	private Xoae_page page; private byte[] msg_file_enlarge;
 	private Xoh_file_fmtr__basic html_fmtr;		
 	private boolean alt_in_caption = true, alt_defaults_to_caption = true;
@@ -288,7 +288,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 	, Cfg__alt_show_in_html				= "xowa.html.alt.show_in_html"
 	;
 
-	private static final    byte[]
+	private static final byte[]
 	  Div_center_bgn			= Bry_.new_a7("<div class=\"center\">")
 	, Div_float_none			= Bry_.new_a7("<div class=\"floatnone\">")
 	, Div_float_left			= Bry_.new_a7("<div class=\"floatleft\">")

@@ -27,5 +27,5 @@ public class Categorytree_func extends Pf_func_base {
 		Xoa_ttl ctg_ttl = wiki.Ttl_parse(gplx.xowa.wikis.nss.Xow_ns_.Tid__category, argx); if (ctg_ttl == null) return;	// ignore bad titles; EX: {{#categorytree:<>}}
 		gplx.xowa.parsers.lnkis.Xop_lnki_wkr_.Write_lnki(bfr, ctg_ttl, true);
 	}
-	public static final    Categorytree_func Instance = new Categorytree_func(); Categorytree_func() {}
+	public static final Categorytree_func Instance = new Categorytree_func(); Categorytree_func() {}
 }

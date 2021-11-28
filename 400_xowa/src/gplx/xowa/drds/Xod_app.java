@@ -22,10 +22,10 @@ import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.xowa.langs.cases.*;
 public class Xod_app {
-	private final    Xoav_app app;
-	private final    Xod_page_mgr page_mgr = new Xod_page_mgr();
-	private final    Xod_file_mgr file_mgr = new Xod_file_mgr();
-	private final    Srch_ns_mgr ns_mgr = new Srch_ns_mgr();
+	private final Xoav_app app;
+	private final Xod_page_mgr page_mgr = new Xod_page_mgr();
+	private final Xod_file_mgr file_mgr = new Xod_file_mgr();
+	private final Srch_ns_mgr ns_mgr = new Srch_ns_mgr();
 	public Xod_app(Xoav_app app) {
 		this.app = app;
 		ns_mgr.Add_main_if_empty();

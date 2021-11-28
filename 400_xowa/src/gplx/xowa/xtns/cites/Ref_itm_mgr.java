@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 public class Ref_itm_mgr {
-	private final    Hash_adp_bry grps = Hash_adp_bry.cs();	// CASE_MATCH:changed from ci; DATE:2014-07-07
-	private final    Ref_itm_grp grp_default = new Ref_itm_grp(Bry_.Empty);
+	private final Hash_adp_bry grps = Hash_adp_bry.cs();	// CASE_MATCH:changed from ci; DATE:2014-07-07
+	private final Ref_itm_grp grp_default = new Ref_itm_grp(Bry_.Empty);
 	private int uid_last;		
 	public boolean References__recursing() {return references__recursing;} public void References__recursing_(boolean v) {references__recursing = v;} private boolean references__recursing;
 	public Ref_itm_lst Lst_get(byte[] grp_name, int lst_idx) {

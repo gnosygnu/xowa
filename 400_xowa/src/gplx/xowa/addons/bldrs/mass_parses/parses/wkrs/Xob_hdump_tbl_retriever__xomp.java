@@ -17,8 +17,8 @@ package gplx.xowa.addons.bldrs.mass_parses.parses.wkrs; import gplx.*; import gp
 import gplx.dbs.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.htmls.core.dbs.*;
 class Xob_hdump_tbl_retriever__xomp implements Xob_hdump_tbl_retriever {
-	private final    Db_conn conn;
-	private final    Xowd_html_tbl tbl;
+	private final Db_conn conn;
+	private final Xowd_html_tbl tbl;
 	public Xob_hdump_tbl_retriever__xomp(Xowd_html_tbl tbl) {
 		this.tbl = tbl;
 		this.conn = tbl.Conn();

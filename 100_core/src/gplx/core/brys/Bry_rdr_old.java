@@ -104,7 +104,7 @@ public class Bry_rdr_old {
 		byte[] double_bry = Read_bry_to(to_char);
 		return Double_.parse(String_.new_a7(double_bry));	// double will never have utf8
 	}
-	@gplx.Virtual public Bry_rdr_old Skip_ws() {
+	public Bry_rdr_old Skip_ws() {
 		while (pos < src_len) {
 			switch (src[pos]) {
 				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:

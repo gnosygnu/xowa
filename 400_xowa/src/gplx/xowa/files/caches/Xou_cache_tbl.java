@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*;
 public class Xou_cache_tbl implements Rls_able {
-	private String tbl_name = "file_cache"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "file_cache"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private String
 	  fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w
 	, fld_orig_repo, fld_orig_ttl, fld_orig_ext, fld_orig_w, fld_orig_h
@@ -26,8 +26,8 @@ public class Xou_cache_tbl implements Rls_able {
 	;
 	public String Tbl_name() {return tbl_name;}
 	public String Fld_orig_ttl() {return fld_orig_ttl;}
-	private final    Db_conn conn; private final    Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_stmt;
-	private final    Bry_bfr lnki_key_bfr = Bry_bfr_.Reset(255);
+	private final Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_stmt;
+	private final Bry_bfr lnki_key_bfr = Bry_bfr_.Reset(255);
 	public Db_conn Conn() {return conn;}
 	public Xou_cache_tbl(Db_conn conn) {
 		this.conn = conn;

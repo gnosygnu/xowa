@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.registrys.infos; import gplx.*; import gplx.xowa.
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.users.data.*; 
 class Xow_info_html extends Xow_special_wtr__base {
-	private final    byte[] wiki_domain;
+	private final byte[] wiki_domain;
 	public Xow_info_html(byte[] wiki_domain) {this.wiki_domain = wiki_domain;}
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "wiki", "registry", "info");}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xow_info.mustache.html");}

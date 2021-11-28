@@ -52,7 +52,7 @@ import gplx.xowa.xtns.wbases.hwtrs.Wdata_lbl_mgr;
 public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.UNSAFE; callers must do synchronized
 	private Wdata_wiki_mgr wdata_mgr; private Xoae_app app; private Bry_bfr bfr;
 	private Xol_lang_itm lang;
-	private final    Bry_bfr tmp_time_bfr = Bry_bfr_.Reset(255); private final    Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
+	private final Bry_bfr tmp_time_bfr = Bry_bfr_.Reset(255); private final Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_();
 	private Wdata_hwtr_msgs msgs;
 	private boolean mode_is_statements;
 	public Wdata_prop_val_visitor(Xoae_app app, Wdata_wiki_mgr wdata_mgr) {

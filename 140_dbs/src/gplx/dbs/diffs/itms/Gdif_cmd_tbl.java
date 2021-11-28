@@ -17,8 +17,8 @@ package gplx.dbs.diffs.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.d
 public class Gdif_cmd_tbl implements Rls_able {
 	private String tbl_name = "gdif_cmd";
 	private String fld_grp_id, fld_cmd_id, fld_tid, fld_data;
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    Db_conn conn; private Db_stmt stmt_insert;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final Db_conn conn; private Db_stmt stmt_insert;
 	public Gdif_cmd_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_grp_id = flds.Add_int("grp_id"); fld_cmd_id = flds.Add_int("cmd_id"); fld_tid = flds.Add_int("tid"); fld_data = flds.Add_text("data");

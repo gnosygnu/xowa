@@ -17,7 +17,7 @@ package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*;
 import gplx.xowa.mediawiki.languages.*;
 public class Pfunc_plural_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {
 		fxt.Reset();
 		XomwLanguage_fxt lang_fxt = new XomwLanguage_fxt();

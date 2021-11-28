@@ -20,19 +20,19 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.files.*;
 public class Xow_url_parser {
-	private final    Object thread_lock = new Object();
-	private final    Gfo_url_encoder encoder;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
-	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
-	private final    Gfo_url_encoder gfs_encoder = Gfo_url_encoder_.New__gfs().Make();
-	private final    Xoa_app app; private final    Xow_wiki wiki; private final    byte[] domain_bry;
+	private final Object thread_lock = new Object();
+	private final Gfo_url_encoder encoder;
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final Gfo_url_parser url_parser = new Gfo_url_parser();
+	private final Gfo_url_encoder gfs_encoder = Gfo_url_encoder_.New__gfs().Make();
+	private final Xoa_app app; private final Xow_wiki wiki; private final byte[] domain_bry;
 	private byte tmp_protocol_tid;
 	private int tmp_tid;
 	private byte[] tmp_raw, tmp_orig, tmp_wiki, tmp_page, tmp_anch, tmp_protocol_bry; private Gfo_qarg_itm[] tmp_qargs;
 	private byte[][] tmp_segs; private int tmp_segs_len;
 	private boolean tmp_protocol_is_relative, tmp_page_is_main, tmp_wiki_is_missing;
 	private byte[] tmp_vnt;
-	private final    Xol_vnt_mgr vnt_mgr;
+	private final Xol_vnt_mgr vnt_mgr;
 	public Xow_url_parser(Xow_wiki wiki) {
 		this.app = wiki.App();
 		this.wiki = wiki; this.domain_bry = wiki.Domain_bry();
@@ -308,13 +308,13 @@ public class Xow_url_parser {
 		if (v[pos + 2] != Byte_ascii.Dot) return v;
 		return Bry_.Add(Bry_.Mid(v, 0, pos), Bry_.Mid(v, pos + 2));	// skip ".m"
 	}
-	private static final    byte[] Qarg__title = Bry_.new_a7("title");
-	private static final    byte[]
+	private static final byte[] Qarg__title = Bry_.new_a7("title");
+	private static final byte[]
 	  Bry_upload_wikimedia_org = Bry_.new_a7("upload.wikimedia.org")
 	, Bry_file = Bry_.new_a7("File:")	// NOTE: File does not need i18n; is a canonical namespace 
 	, Bry_wiki = Bry_.new_a7("wiki")
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Bry_dot_org = Bry_.new_a7(".org")
 	;
 }

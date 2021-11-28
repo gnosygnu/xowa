@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.fulltexts.indexers.svcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.indexers.*;
 import gplx.xowa.guis.cbks.*;
 public class Xofulltext_indexer_ui {
-	private final    Xog_cbk_mgr cbk_mgr;
-	private final    Xog_cbk_trg cbk_trg;
+	private final Xog_cbk_mgr cbk_mgr;
+	private final Xog_cbk_trg cbk_trg;
 	public Xofulltext_indexer_ui(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg) {
 		this.cbk_mgr = cbk_mgr;
 		this.cbk_trg = cbk_trg;

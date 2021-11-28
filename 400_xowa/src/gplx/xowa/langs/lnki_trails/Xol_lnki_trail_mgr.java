@@ -18,7 +18,7 @@ import gplx.core.btries.*;
 public class Xol_lnki_trail_mgr implements Gfo_invk {
 	public void Clear() {trie.Clear();}
 	public int Count() {return trie.Count();}
-	public Btrie_slim_mgr Trie() {return trie;} private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	public Btrie_slim_mgr Trie() {return trie;} private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public void Add(byte[] v) {trie.Add_obj(v, v);}
 	public void Del(byte[] v) {trie.Del(v);}
 	private void Add(String... ary) {

@@ -72,8 +72,8 @@ public class Xop_languages_xnde implements Xox_xnde {
 		fmtr_mgr_itms.Init(langs, ctx.Wiki(), root_ttl, ctx.Page().Lang().Key_bry());
 		fmtr_all.Bld_bfr_many(bfr, "Other languages", fmtr_mgr_itms);
 	}
-	private static final    Xop_languages_fmtr fmtr_mgr_itms = new Xop_languages_fmtr();
-	public static final    Bry_fmtr fmtr_all = Bry_fmtr.new_(String_.Concat_lines_nl
+	private static final Xop_languages_fmtr fmtr_mgr_itms = new Xop_languages_fmtr();
+	public static final Bry_fmtr fmtr_all = Bry_fmtr.new_(String_.Concat_lines_nl
 	(	"<table>"
 	,	"  <tbody>"
 	,	"    <tr valign=\"top\">"

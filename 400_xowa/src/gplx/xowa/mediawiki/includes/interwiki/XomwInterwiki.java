@@ -178,5 +178,5 @@ public class XomwInterwiki {
 //
 //			return !msg.exists() ? '' : msg.text();
 //		}
-	private static final    byte[] ARG_1 = Bry_.new_a7("$1");
+	private static final byte[] ARG_1 = Bry_.new_a7("$1");
 }

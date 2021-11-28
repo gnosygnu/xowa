@@ -19,20 +19,20 @@ import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*; import g
 import gplx.xowa.parsers.lnkis.*; import gplx.xowa.xtns.gallery.*;
 import gplx.xowa.files.*; import gplx.xowa.guis.cbks.js.*;
 public class Xoh_gly_itm_wtr implements Bfr_arg, Js_img_wkr {
-	private final    Bfr_arg_clearable[] arg_ary;
-	private final    Bfr_arg__hatr_id 
+	private final Bfr_arg_clearable[] arg_ary;
+	private final Bfr_arg__hatr_id
 	  li_id		= Bfr_arg__hatr_id.New_id("xogly_li_")
 	, img_id	= Bfr_arg__hatr_id.New_id(gplx.xowa.htmls.Xoh_img_mgr.Bry__html_uid)
 	, div_1_id	= Bfr_arg__hatr_id.New_id("xowa_gallery_div1_")
 	, div_2_id	= Bfr_arg__hatr_id.New_id("xowa_gallery_div2_")
 	, div_3_id	= Bfr_arg__hatr_id.New_id("xowa_gallery_div3_");
-	private final    Bfr_arg__itm_caption itm_caption_fmtr = new Bfr_arg__itm_caption();
+	private final Bfr_arg__itm_caption itm_caption_fmtr = new Bfr_arg__itm_caption();
 	private byte mode;
 	private int xnde_w_orig, xnde_h_orig, xnde_per_row, div_1_w, div_2_w, div_3_margin, li_idx, li_nth;
 	public Xoh_gly_itm_wtr() {
 		arg_ary = new Bfr_arg_clearable[] {li_id, div_1_id, div_2_id, div_3_id, img_id};
 	}
-	public Xoh_img_wtr Img_wtr() {return img_wtr;} private final    Xoh_img_wtr img_wtr = new Xoh_img_wtr();
+	public Xoh_img_wtr Img_wtr() {return img_wtr;} private final Xoh_img_wtr img_wtr = new Xoh_img_wtr();
 	public void Init(boolean mode_is_diff, byte mode, int xnde_w, int xnde_h, int xnde_per_row, int img_id, int li_idx, int li_nth, int div_1_w, int div_2_w, int div_3_margin, byte capt_tid, byte[] itm_caption) {
 		this.Clear();
 		this.mode = mode; this.xnde_w_orig = xnde_w; this.xnde_h_orig = xnde_h; this.xnde_per_row = xnde_per_row;
@@ -100,8 +100,8 @@ public class Xoh_gly_itm_wtr implements Bfr_arg, Js_img_wkr {
 		}
 	}
 
-	public static final    Xoh_gly_itm_wtr[] Ary_empty = new Xoh_gly_itm_wtr[0];
-	private static final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	public static final Xoh_gly_itm_wtr[] Ary_empty = new Xoh_gly_itm_wtr[0];
+	private static final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "<li~{li_id} class=\"gallerybox\" style=\"width:~{div_1_w}px;\">"
 	,   "<div~{div_1_id} style=\"width:~{div_1_w}px;\">"

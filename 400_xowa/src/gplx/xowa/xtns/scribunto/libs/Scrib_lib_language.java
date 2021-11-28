@@ -73,7 +73,7 @@ public class Scrib_lib_language implements Scrib_lib {
 	, Invk_formatNum = "formatNum", Invk_formatDate = "formatDate", Invk_formatDuration = "formatDuration", Invk_getDurationIntervals = "getDurationIntervals", Invk_parseFormattedNumber = "parseFormattedNumber"
 	, Invk_convertPlural = "convertPlural", Invk_convertGrammar = "convertGrammar", Invk_gender = "gender", Invk_isRTL = "isRTL"
 	;
-	private static final    String[] Proc_names = String_.Ary
+	private static final String[] Proc_names = String_.Ary
 	( Invk_getContLangCode, Invk_isSupportedLanguage, Invk_isKnownLanguageTag
 	, Invk_isValidCode, Invk_isValidBuiltInCode, Invk_fetchLanguageName, Invk_fetchLanguageNames, Invk_getFallbacksFor
 	, Invk_lcfirst, Invk_ucfirst, Invk_lc, Invk_uc, Invk_caseFold

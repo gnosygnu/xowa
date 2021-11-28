@@ -28,7 +28,7 @@ class StackAdp_base implements StackAdp {
 		// NOTE: dotnet traverses last to first; java: first to last 
 		return list;
 	}
-	final    java.util.Stack stack = new java.util.Stack();
+	final java.util.Stack stack = new java.util.Stack();
 	public StackAdp_base() {}
 	public int Count() {return stack.size();}
 	public void Clear() {stack.clear();}

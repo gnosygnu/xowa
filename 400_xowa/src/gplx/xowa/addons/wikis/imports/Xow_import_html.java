@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.imports; import gplx.*; import gplx.xowa.*; impor
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.core.ios.*; 
 class Xow_import_html extends Xow_special_wtr__base {
-	private final    Io_url owner_url; private final    byte[] mode;
+	private final Io_url owner_url; private final byte[] mode;
 	public Xow_import_html(Io_url owner_url, byte[] mode) {
 		this.owner_url = owner_url;
 		this.mode = mode;

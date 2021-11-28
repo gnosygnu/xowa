@@ -23,7 +23,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 public class IconAdp {
-	public Icon UnderIcon() {return icon;} private final    Icon icon;
+	public Icon UnderIcon() {return icon;} private final Icon icon;
 	public Image XtoImage() {return ((ImageIcon)icon).getImage();}		
 	public Io_url Url() {return url;} private Io_url url = Io_url_.Empty;
 	IconAdp(Icon icon) {this.icon = icon;}

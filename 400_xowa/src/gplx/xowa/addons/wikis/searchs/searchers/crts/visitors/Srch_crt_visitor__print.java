@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.searchers.crts.visitors; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Srch_crt_visitor__print implements Srch_crt_visitor {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public byte[] Print(Srch_crt_itm root) {
 		Visit(root);
 		return bfr.To_bry_and_clear();

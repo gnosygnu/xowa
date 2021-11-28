@@ -17,8 +17,8 @@ package gplx.xowa.addons.wikis.ctgs; import gplx.*; import gplx.xowa.*; import g
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.ctgs.dbs.*;
 public class Xoax_ctg_addon implements Xoax_addon_itm {	// TODO_OLD:mem_mgr
-	private final    Xow_wiki wiki;
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Xow_wiki wiki;
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Xoax_ctg_addon(Xow_wiki wiki) {this.wiki = wiki;}
 	public Xoctg_ctg_itm Itms__get_or_null(byte[] key) {return (Xoctg_ctg_itm)hash.Get_by_bry(key);}
 	public Xoctg_ctg_itm Itms__load(byte[] key) {

@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.primitives.*;	import gplx.dbs.qrys.*; import gplx.dbs.utls.*; import gplx.dbs.engines.*; import gplx.dbs.engines.sqlite.*;
+package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*;
+import gplx.dbs.sqls.SqlQryWtr;
 public class Sqlite_pragma implements Db_qry {
-	private final    String sql;
+	private final String sql;
 	public Sqlite_pragma(boolean parens, String key, String val) {
 		String fmt = parens ? "PRAGMA {0}({1});" : "PRAGMA {0} = {1};";
 		this.sql = String_.Format(fmt, key, val);
@@ -24,7 +24,7 @@ public class Sqlite_pragma implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_pragma;}
 	public boolean			Exec_is_rdr() {return false;}
 	public String		Base_table() {return "";}
-	public String		To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr wtr) {return sql;}
+	public String		To_sql__exec(SqlQryWtr wtr) {return sql;}
 
 	public static final String Const__journal_mode = "journal_mode", Const__journal_mode__wal = "wal", Const__journal_mode__off = "off";
 	public static Sqlite_pragma New__journal__delete()					{return new Sqlite_pragma(Bool_.N, Const__journal_mode	, "delete");}		// default

@@ -80,7 +80,7 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 		else if	(ctx.Match(k, Invk_show_issues_))		show_issues = m.ReadYn("v");
 		else	return super.Invk(ctx, ikey, k, m);
 		return this;
-	}	private static final    String Invk_src_fil_ = "src_fil_", Invk_show_issues_ = "show_issues_";
+	}	private static final String Invk_src_fil_ = "src_fil_", Invk_show_issues_ = "show_issues_";
 	public static int Calc_ext_id(Gfo_usr_dlg usr_dlg, byte[] file, byte[] media_type, byte[] minor_mime, int w, int h) {
 		Xof_ext file_ext = Xof_ext_.new_by_ttl_(file);			int file_ext_id = file_ext.Id();
 		Xof_ext mime_ext = Xof_mime_minor_.ext_(minor_mime);	int mime_ext_id = mime_ext.Id();
@@ -122,6 +122,6 @@ public class Xobldr__image__create extends Xob_itm_dump_base implements Xob_cmd,
 
 	public static final String BLDR_CMD_KEY = "wiki.image";
 	public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__image__create(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__image__create(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__image__create(bldr, wiki);}
 }

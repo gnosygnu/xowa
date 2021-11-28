@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pfunc_if_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()				{fxt.Reset();}
 	@Test public void If_y()				{fxt.Test_parse_tmpl_str_test("{{#if:1|a|b}}"								, "{{test}}"		, "a");}
 	@Test public void If_n()				{fxt.Test_parse_tmpl_str_test("{{#if:|a|b}}"								, "{{test}}"		, "b");}

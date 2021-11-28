@@ -17,7 +17,7 @@ package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.hdrs.*;
 public class Xowe_hdr_bldr__tst {
-	@Before public void init() {fxt.Clear();} private final    Xowe_hdr_bldr_fxt fxt = new Xowe_hdr_bldr_fxt();
+	@Before public void init() {fxt.Clear();} private final Xowe_hdr_bldr_fxt fxt = new Xowe_hdr_bldr_fxt();
 	@Test  public void Basic() {
 		fxt.Test_html_toc(String_.Concat_lines_nl_skip_last
 		( "==a=="

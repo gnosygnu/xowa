@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_mediawiki_wkr__tst {
-	private final    Xop_mediawiki_wkr__fxt fxt = new Xop_mediawiki_wkr__fxt();
+	private final Xop_mediawiki_wkr__fxt fxt = new Xop_mediawiki_wkr__fxt();
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
 	@Test 	public void Basic()	{
 		fxt.Init__wkr("en.wikipedia.org", null);
@@ -34,7 +34,7 @@ public class Xop_mediawiki_wkr__tst {
 	}
 }
 class Xop_mediawiki_wkr__fxt {
-	private final    Xop_mediawiki_mgr mgr = new Xop_mediawiki_mgr("mem/xowa/wiki/en.wikipedia.org/", false);
+	private final Xop_mediawiki_mgr mgr = new Xop_mediawiki_mgr("mem/xowa/wiki/en.wikipedia.org/", false);
 	private Xop_mediawiki_wkr wkr;
 	public Xop_mediawiki_wkr__fxt() {
 		gplx.dbs.Db_conn_bldr.Instance.Reg_default_mem();

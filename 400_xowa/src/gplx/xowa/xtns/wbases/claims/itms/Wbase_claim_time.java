@@ -21,11 +21,11 @@ public class Wbase_claim_time extends Wbase_claim_base {
 		this.time = time; this.before = before; this.after = after; this.precision = precision; this.calendar = calendar;
 	}
 	@Override public byte	Val_tid() {return Wbase_claim_type_.Tid__time;}
-	public byte[]			Time() {return time;} private final    byte[] time;
-	public byte[]			Before() {return before;} private final    byte[] before;
-	public byte[]			After() {return after;} private final    byte[] after;
-	public byte[]			Precision() {return precision;} private final    byte[] precision;
-	public byte[]			Calendar() {return calendar;} private final    byte[] calendar;
+	public byte[]			Time() {return time;} private final byte[] time;
+	public byte[]			Before() {return before;} private final byte[] before;
+	public byte[]			After() {return after;} private final byte[] after;
+	public byte[]			Precision() {return precision;} private final byte[] precision;
+	public byte[]			Calendar() {return calendar;} private final byte[] calendar;
 	public byte[]			Calendar_ttl() {return calendar_ttl;} private byte[] calendar_ttl;
 	public boolean			Calendar_is_julian() {return Bry_.Eq(calendar, Calendar_julian);}
 
@@ -86,5 +86,5 @@ public class Wbase_claim_time extends Wbase_claim_base {
 	@Override public String toString() {// TEST:
 		return String_.Concat_with_str("|", Wbase_claim_value_type_.Reg.Get_str_or_fail(this.Snak_tid()), Wbase_claim_type_.Reg.Get_str_or_fail(this.Val_tid()), String_.new_u8(time), String_.new_u8(before), String_.new_u8(after), String_.new_u8(precision), String_.new_u8(calendar));
 	}
-	public static final    byte[] Calendar_julian = Bry_.new_a7("http://www.wikidata.org/entity/Q1985786");
+	public static final byte[] Calendar_julian = Bry_.new_a7("http://www.wikidata.org/entity/Q1985786");
 }

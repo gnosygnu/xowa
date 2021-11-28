@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.utls.*;
 public class Merge2_wkr__heap_lot extends Merge2_wkr__heap_base {
-	private final    Merge2_copy_wkr__lot copy_wkr;
-	private final    Merge2_trg_mgr trg_mgr__heap;
+	private final Merge2_copy_wkr__lot copy_wkr;
+	private final Merge2_trg_mgr trg_mgr__heap;
 	public Merge2_wkr__heap_lot(Split_tbl tbl) {super(tbl);
 		this.copy_wkr = new Merge2_copy_wkr__lot(tbl);
 		this.trg_mgr__heap = new Merge2_trg_mgr__heap(this.Heap_mgr());

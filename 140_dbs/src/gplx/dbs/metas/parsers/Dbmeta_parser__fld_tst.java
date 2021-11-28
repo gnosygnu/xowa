@@ -38,8 +38,8 @@ public class Dbmeta_parser__fld_tst {
 	}
 }
 class Dbmeta_parser__fld_fxt {
-	private final    Dbmeta_parser__fld fld_parser = new Dbmeta_parser__fld();
-	private final    Sql_bry_rdr rdr = new Sql_bry_rdr();
+	private final Dbmeta_parser__fld fld_parser = new Dbmeta_parser__fld();
+	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	public void Clear() {}
 	public Dbmeta_fld_tid Make_type(int tid_ansi) {return new Dbmeta_fld_tid(tid_ansi, -1, null, Int_.Min_value, Int_.Min_value);}
 	public Dbmeta_fld_tid Make_type(int tid_ansi, int len_1) {return new Dbmeta_fld_tid(tid_ansi, -1, null, len_1, Int_.Min_value);}

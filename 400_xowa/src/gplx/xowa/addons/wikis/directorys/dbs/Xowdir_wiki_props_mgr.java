@@ -24,7 +24,7 @@ public interface Xowdir_wiki_props_mgr {
 	Xowdir_wiki_props Verify(boolean mode_is_import, String domain, Io_url core_db_url);
 }
 abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
-	private final    Gfo_usr_dlg usr_dlg;
+	private final Gfo_usr_dlg usr_dlg;
 	public Xowdir_wiki_props_mgr__base(Gfo_usr_dlg usr_dlg) {
 		this.usr_dlg = usr_dlg;
 	}
@@ -74,8 +74,8 @@ abstract class Xowdir_wiki_props_mgr__base implements Xowdir_wiki_props_mgr {
 	}
 }
 class Xowdir_wiki_props_mgr__mock extends Xowdir_wiki_props_mgr__base {
-	private final    Hash_adp wiki_cfg_hash = Hash_adp_.New();
-	private final    Hash_adp user_reg_hash = Hash_adp_.New();
+	private final Hash_adp wiki_cfg_hash = Hash_adp_.New();
+	private final Hash_adp user_reg_hash = Hash_adp_.New();
 	public Xowdir_wiki_props_mgr__mock() {super(Gfo_usr_dlg_.Noop);}
 	@Override public void                Wiki_cfg__upsert(String key, String val) {
 		if (val != null)

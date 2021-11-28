@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Score_html_tst {
-	private final    Score_html_fxt fxt = new Score_html_fxt();
+	private final Score_html_fxt fxt = new Score_html_fxt();
 	@Before public void init() {
 		fxt.Clear();
 	}

@@ -20,7 +20,7 @@ import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.
 import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
 import gplx.xowa.htmls.core.wkrs.addons.timelines.*; import gplx.xowa.htmls.core.wkrs.addons.gallerys.*;
 public class Xoh_pool_mgr__wtr {
-	private final    Gfo_poolable_mgr pool__hdr, pool__lnke, pool__img, pool__img_bare, pool__toc, pool__timeline, pool__gallery;
+	private final Gfo_poolable_mgr pool__hdr, pool__lnke, pool__img, pool__img_bare, pool__toc, pool__timeline, pool__gallery;
 	public Xoh_pool_mgr__wtr() {
 		pool__hdr			= New_pool(new Xoh_hdr_wtr());
 		pool__lnke			= New_pool(new Xoh_lnke_wtr());

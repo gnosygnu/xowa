@@ -84,5 +84,5 @@ public class Regx_adp {
 	, FLAG__CANON_EQ                = Pattern.CANON_EQ
 	, FLAG__UNICODE_CHARACTER_CLASS = Pattern.UNICODE_CHARACTER_CLASS
 	;
-	public static final    int FLAG__DEFAULT = FLAG__DOTALL | FLAG__UNICODE_CHARACTER_CLASS;// JRE.7:UNICODE_CHARACTER_CLASS; added during %w fix for en.w:A#; DATE:2015-06-10
+	public static final int FLAG__DEFAULT = FLAG__DOTALL | FLAG__UNICODE_CHARACTER_CLASS;// JRE.7:UNICODE_CHARACTER_CLASS; added during %w fix for en.w:A#; DATE:2015-06-10
 	}

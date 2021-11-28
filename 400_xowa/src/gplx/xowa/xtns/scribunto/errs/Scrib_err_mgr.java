@@ -17,7 +17,7 @@ package gplx.xowa.xtns.scribunto.errs; import gplx.*; import gplx.xowa.*; import
 class Scrib_err_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private int key_id = 0;
-	private static final    byte[] Key_prefix = Bry_.new_a7("scrib_err_");
+	private static final byte[] Key_prefix = Bry_.new_a7("scrib_err_");
 	private Scrib_err_cmd Set(byte[] key) {
 		if (key == null) Bry_.Add(Key_prefix, Bry_.new_by_int(key_id++));
 		Scrib_err_cmd rv = new Scrib_err_cmd(key);

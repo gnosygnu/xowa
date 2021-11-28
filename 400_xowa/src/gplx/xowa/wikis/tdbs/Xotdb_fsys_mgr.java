@@ -18,19 +18,19 @@ import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.tdbs.utils.*;
 public class Xotdb_fsys_mgr {
-	private final    Io_url root_dir; private final    Xow_ns_mgr ns_mgr;
+	private final Io_url root_dir; private final Xow_ns_mgr ns_mgr;
 	public Xotdb_fsys_mgr(Io_url root_dir, Xow_ns_mgr ns_mgr) {
 		this.root_dir = root_dir; this.ns_mgr = ns_mgr;
 		this.tmp_dir		= root_dir.GenSubDir("tmp");			
 		this.ns_dir			= root_dir.GenSubDir(Xotdb_dir_info_.Name_ns);
 		this.site_dir		= root_dir.GenSubDir(Xotdb_dir_info_.Name_site);
 	}
-	public Io_url Tmp_dir()				{return tmp_dir;}	private final    Io_url tmp_dir;		
-	public Io_url Ns_dir()				{return ns_dir;}	private final    Io_url ns_dir;
-	public Io_url Site_dir()			{return site_dir;}	private final    Io_url site_dir;
+	public Io_url Tmp_dir()				{return tmp_dir;}	private final Io_url tmp_dir;
+	public Io_url Ns_dir()				{return ns_dir;}	private final Io_url ns_dir;
+	public Io_url Site_dir()			{return site_dir;}	private final Io_url site_dir;
 	public Io_url Cfg_wiki_core_fil()	{return root_dir.GenSubFil_nest(Const_url_cfg, "wiki_core.gfs");}
 	public Io_url Cfg_wiki_stats_fil()	{return root_dir.GenSubFil_nest(Const_url_cfg, "wiki_stats.gfs");}
-	public Xotdb_dir_info[] Tdb_dir_regy()	{return dir_regy;} private final    Xotdb_dir_info[] dir_regy = Xotdb_dir_info_.regy_();
+	public Xotdb_dir_info[] Tdb_dir_regy()	{return dir_regy;} private final Xotdb_dir_info[] dir_regy = Xotdb_dir_info_.regy_();
 	public Io_url Url_ns_dir(String ns_num, byte tid)	{return ns_dir.GenSubDir_nest(ns_num, Xotdb_dir_info_.Tid_name(tid));}
 	public Io_url Url_ns_reg(String ns_num, byte tid)	{return ns_dir.GenSubFil_nest(ns_num, Xotdb_dir_info_.Tid_name(tid), Xotdb_dir_info_.Name_reg_fil);}
 	public Io_url Url_ns_fil(byte tid, int ns_id, int fil_idx) {

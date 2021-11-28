@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.js; import gplx.*; import gplx.core.*;
 public class Js_wtr {
-	private final    Bry_bfr bfr = Bry_bfr_.Reset(32);
+	private final Bry_bfr bfr = Bry_bfr_.Reset(32);
 	private int arg_idx = 0, ary_idx = 0;
 	public byte Quote_char() {return quote_char;} public Js_wtr Quote_char_(byte v) {quote_char = v; return this;} private byte quote_char = Byte_ascii.Quote;
 	public void Clear()							{bfr.Clear();}
@@ -102,5 +102,5 @@ public class Js_wtr {
 		}
 		bfr.Add_byte(quote_char);
 	}
-	private static final    byte[] Keyword_return = Bry_.new_a7("return ");
+	private static final byte[] Keyword_return = Bry_.new_a7("return ");
 }

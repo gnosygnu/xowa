@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.xwikis.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm_bldr_tst {
-	@Before public void init() {fxt.Clear();} 	private final    Xow_xwiki_itm_bldr_fxt fxt = new Xow_xwiki_itm_bldr_fxt();
+	@Before public void init() {fxt.Clear();} 	private final Xow_xwiki_itm_bldr_fxt fxt = new Xow_xwiki_itm_bldr_fxt();
 	@Test  public void Commons()				{fxt.Test_bld("commons.wikimedia.org/wiki/$1"	, "commons.wikimedia.org"	, "commons.wikimedia.org/wiki/~{0}"		, Xow_domain_tid_.Tid__commons		, Xol_lang_stub_.Id__unknown);}
 	@Test  public void Wiktionary()			{fxt.Test_bld("fr.wiktionary.org/wiki/$1"		, "fr.wiktionary.org"		, "fr.wiktionary.org/wiki/~{0}"			, Xow_domain_tid_.Tid__wiktionary	, Xol_lang_stub_.Id_fr);}
 	@Test  public void Lang()					{fxt.Test_bld("fr.wikipedia.org/wiki/$1"		, "fr.wikipedia.org"		, "fr.wikipedia.org/wiki/~{0}"			, Xow_domain_tid_.Tid__wikipedia	, Xol_lang_stub_.Id_fr);}

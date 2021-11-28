@@ -141,6 +141,6 @@ class SortAlgo_quick {// quicksort
 		if (lo < j) Sort_recurse(lo, j);
 		if (i < hi) Sort_recurse(i, hi);
 	}
-	public static final    SortAlgo_quick Instance = new SortAlgo_quick(); SortAlgo_quick() {}
+	public static final SortAlgo_quick Instance = new SortAlgo_quick(); SortAlgo_quick() {}
 }
 

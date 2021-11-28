@@ -21,7 +21,7 @@ import org.junit.After;
 import org.junit.Test;
 
 public class Xoh_html_wtr_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_(); fxt.Reset();}
 	@Test public void Hr_basic()					{fxt.Test_parse_page_wiki_str("----"				, "<hr/>");}
 	@Test public void Hr_extended()				{fxt.Test_parse_page_wiki_str("--------"			, "<hr/>");}

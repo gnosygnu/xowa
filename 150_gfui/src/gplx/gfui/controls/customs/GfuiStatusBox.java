@@ -64,7 +64,7 @@ public class GfuiStatusBox extends GfuiTextBox implements UsrMsgWkr { 	public Gf
 		else if	(ctx.Match(k, Invk_WriteText))			WriteText(m.ReadStr("v"));
 		else return super.Invk(ctx, ikey, k, m);
 		return this;
-	}	static final    String Invk_HideWindow = "HideWindow", Invk_WriteText = "WriteText", Invk_Text_empty = "Text_empty";
+	}	static final String Invk_HideWindow = "HideWindow", Invk_WriteText = "WriteText", Invk_Text_empty = "Text_empty";
 	TimerAdp timer;
 	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);

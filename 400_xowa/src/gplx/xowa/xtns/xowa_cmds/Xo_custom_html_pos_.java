@@ -17,7 +17,7 @@ package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.langs.htmls.*;
 class Xo_custom_html_pos_ {
 	public static final byte Tid__head_end = 1, Tid__tail = 2;
-	private static final    Hash_adp_bry hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("head_end", Tid__head_end)
 	.Add_str_byte("tail", Tid__tail)
 	;
@@ -29,7 +29,7 @@ class Xo_custom_html_pos_ {
 }
 class Xo_custom_html_type_ {
 	public static final byte Tid__css_code = 1, Tid__js_code = 2;
-	private static final    Hash_adp_bry hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Gfh_tag_.Bry__style	, Tid__css_code)
 	.Add_bry_byte(Gfh_tag_.Bry__script	, Tid__js_code)
 	;

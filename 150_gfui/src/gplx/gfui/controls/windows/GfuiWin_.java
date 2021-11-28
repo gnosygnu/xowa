@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
 import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
 public class GfuiWin_ {
-	public static final    String 
+	public static final String
 		  InitKey_winType			= "winType"
 		, InitKey_winType_toaster	= "toaster"
 		, InitKey_winType_app		= "app"

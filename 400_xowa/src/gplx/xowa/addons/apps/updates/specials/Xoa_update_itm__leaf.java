@@ -17,8 +17,8 @@ package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.
 import gplx.langs.mustaches.*;
 import gplx.xowa.addons.apps.updates.dbs.*;
 class Xoa_update_itm__leaf implements Mustache_doc_itm {
-	private final    String version, date, summary, details, package_url;
-	private final    int priority;
+	private final String version, date, summary, details, package_url;
+	private final int priority;
 	public Xoa_update_itm__leaf(String version, String date, int priority, String summary, String details, String package_url) {
 		this.version = version;
 		this.date = date;
@@ -41,5 +41,5 @@ class Xoa_update_itm__leaf implements Mustache_doc_itm {
 		return Mustache_doc_itm_.Ary__empty;
 	}
 	
-	protected static final    Xoa_update_itm__leaf[] Ary__empty = new Xoa_update_itm__leaf[0];
+	protected static final Xoa_update_itm__leaf[] Ary__empty = new Xoa_update_itm__leaf[0];
 }

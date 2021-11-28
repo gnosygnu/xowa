@@ -44,7 +44,7 @@ public class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, Gfo_invk, Gfo_evt_itm 
 		CheckForHotKey(IptEventData.ctx_(ctx, m));
 		//boolean handled = CheckForHotKey(IptEventData.cast(msg.Val())); msg.Fwd_set(!handled); // TOMBSTONE: somehow cause alt-F4 to continue processing and dispose form
 		return this;
-	}	@gplx.Internal protected static final    String CheckForHotKey_cmd = "CheckForHotKey_cmd";
+	}	@gplx.Internal protected static final String CheckForHotKey_cmd = "CheckForHotKey_cmd";
 
 	public static GfuiWinKeyCmdMgr new_() {return new GfuiWinKeyCmdMgr();} GfuiWinKeyCmdMgr() {}
 	public static int ExtractPosFromText(String raw) {

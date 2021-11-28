@@ -54,7 +54,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		Xox_mgr_base.Xtn_write_escape(app, bfr, code);
 		bfr.Add(Xoh_consts.Pre_end);
 	}
-	private static final    Hash_algo sha1_hash = Hash_algo_.New__sha1();
+	private static final Hash_algo sha1_hash = Hash_algo_.New__sha1();
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		Xowe_wiki wiki = ctx.Wiki(); Xoae_page page = ctx.Page();
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
@@ -189,7 +189,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		return Bry_.Mid(rslt, bgn_pos, end_pos);
 	}
 	public static final byte Xatr_id_lang_is_abc = 0, Xatr_id_code_is_raw = 1, Xatr_id_output_midi = 2, Xatr_id_output_ogg = 3, Xatr_id_file_midi = 4, Xatr_id_file_ogg = 5;
-	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("lang", Xatr_id_lang_is_abc)
 	.Add_str_byte("raw", Xatr_id_code_is_raw)
 	.Add_str_byte("midi", Xatr_id_output_midi)
@@ -197,7 +197,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 	.Add_str_byte("over"+"ride_midi", Xatr_id_file_midi)
 	.Add_str_byte("over"+"ride_ogg", Xatr_id_file_ogg)
 	;
-	private static final    byte[] 
+	private static final byte[]
 	  Lang_abc = Bry_.new_a7("ABC")
 	, Abc_tagline_bgn = Bry_.new_a7("tagline ="), Abc_tagline_end = new byte[] {Byte_ascii.Nl}, Abc_tagline_repl = Bry_.new_a7("tagline = \"\"\n")
 	, Version_unknown = Bry_.new_a7("unknown"), Version_find_bgn = Bry_.new_a7("GNU LilyPond")

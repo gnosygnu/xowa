@@ -20,9 +20,9 @@ import gplx.xowa.files.repos.*;
 import gplx.xowa.files.downloads.*;
 import gplx.xowa.apps.wms.apis.origs.*;
 public class Xowmf_imageinfo_api {
-	private final    Xof_download_wkr download_wkr;
-	private final    Ordered_hash temp_hash = Ordered_hash_.New();
-	public static final    byte[] FILE_NS_PREFIX = Bry_.new_a7("File:");
+	private final Xof_download_wkr download_wkr;
+	private final Ordered_hash temp_hash = Ordered_hash_.New();
+	public static final byte[] FILE_NS_PREFIX = Bry_.new_a7("File:");
 	public Xowmf_imageinfo_api(Xof_download_wkr download_wkr) {
 		this.download_wkr = download_wkr;
 	}

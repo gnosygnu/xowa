@@ -32,7 +32,7 @@ public class Fsd_thm_tbl_tst {
 	}
 }
 class Fsd_thm_tbl_fxt {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	public void Clear() {list.Clear();}
 	public Fsd_thm_itm Make(int w) {
 		double time = gplx.xowa.files.Xof_lnki_time.Null;

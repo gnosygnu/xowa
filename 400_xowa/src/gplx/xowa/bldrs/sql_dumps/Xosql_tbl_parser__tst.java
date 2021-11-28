@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.sql_dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xosql_tbl_parser__tst {
-	private final    Xosql_tbl_parser__fxt fxt = new Xosql_tbl_parser__fxt();
+	private final Xosql_tbl_parser__fxt fxt = new Xosql_tbl_parser__fxt();
 	@Test public void Unique_key() {
 		fxt.Exec__parse(String_.Concat_lines_nl
 		( "ignore"
@@ -70,7 +70,7 @@ public class Xosql_tbl_parser__tst {
 	}
 }
 class Xosql_tbl_parser__fxt {
-	private final    Xosql_tbl_parser parser = new Xosql_tbl_parser();
+	private final Xosql_tbl_parser parser = new Xosql_tbl_parser();
 	private Ordered_hash tbl_flds;
 	public void Exec__parse(String v) {this.tbl_flds = parser.Parse(Bry_.new_a7(v));}
 	public void Test__count(int expd) {Gftest.Eq__int(expd, tbl_flds.Len());}

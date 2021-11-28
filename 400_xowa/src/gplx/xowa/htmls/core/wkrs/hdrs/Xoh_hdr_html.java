@@ -19,8 +19,8 @@ import gplx.langs.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.addons.htmls.tocs.*;
 public class Xoh_hdr_html {
-	private final    Bry_bfr hdr_text_bfr = Bry_bfr_.New();
-	private final    Xoh_toc_itm invalid_toc_itm = new Xoh_toc_itm().Set__txt(Bry_.Empty, Bry_.Empty);
+	private final Bry_bfr hdr_text_bfr = Bry_bfr_.New();
+	private final Xoh_toc_itm invalid_toc_itm = new Xoh_toc_itm().Set__txt(Bry_.Empty, Bry_.Empty);
 
 	public void Write_html(Bry_bfr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src, Xop_hdr_tkn hdr) {
 		// init
@@ -75,7 +75,7 @@ public class Xoh_hdr_html {
 		}
 	}
 
-	private static final    byte[] Bry__hdr_lhs_bgn = Bry_.new_a7("<h"), Bry__hdr_rhs_bgn = Bry_.new_a7("</h"), Bry__hdr_rhs_end = Bry_.new_a7(">\n")
+	private static final byte[] Bry__hdr_lhs_bgn = Bry_.new_a7("<h"), Bry__hdr_rhs_bgn = Bry_.new_a7("</h"), Bry__hdr_rhs_end = Bry_.new_a7(">\n")
 	, Bry__span_lhs_bgn = Bry_.new_a7("<span class=\"mw-headline\" id=\""), Bry__span_lhs_end = Bry_.new_a7("\">")
 	;
 	public static byte[] Bld_hdr_html(Bry_bfr rv, Xoh_html_wtr wtr, Xoa_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_hdr_tkn hdr) {

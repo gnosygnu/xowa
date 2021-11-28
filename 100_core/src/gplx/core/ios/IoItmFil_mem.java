@@ -33,5 +33,5 @@ class IoItmFil_mem extends IoItmFil {		public static IoItmFil_mem as_(Object obj
 		rv.stream = IoStream_mem.rdr_txt_(filPath, text);
 		return rv;
 	}
-	public static final    IoItmFil_mem Null = new_(Io_url_.Empty, -1, DateAdp_.MinValue, "");	// NOTE: size must be -1 for .Exists to be false; DATE:2015-05-16
+	public static final IoItmFil_mem Null = new_(Io_url_.Empty, -1, DateAdp_.MinValue, "");	// NOTE: size must be -1 for .Exists to be false; DATE:2015-05-16
 }

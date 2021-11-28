@@ -63,7 +63,7 @@ import gplx.xowa.xtns.Xox_xnde;
 import gplx.xowa.xtns.cites.Ref_html_wtr;
 
 public class Xoh_html_wtr {
-	private final    Xoae_app app; private final    Xowe_wiki wiki; private final    Xow_html_mgr html_mgr; private final    Xop_xatr_whitelist_mgr whitelist_mgr;
+	private final Xoae_app app; private final Xowe_wiki wiki; private final Xow_html_mgr html_mgr; private final Xop_xatr_whitelist_mgr whitelist_mgr;
 	private Xoae_page page;
 	private int indent_level;
 	private int stack_counter;
@@ -73,11 +73,11 @@ public class Xoh_html_wtr {
 		this.lnki_wtr = new Xoh_lnki_wtr(this, wiki, html_mgr, cfg);
 		this.ref_wtr = new Ref_html_wtr(wiki);
 	}
-	public Xoh_html_wtr_cfg		Cfg() {return cfg;} private final    Xoh_html_wtr_cfg cfg = new Xoh_html_wtr_cfg();
-	public Xoh_lnke_html		Wkr__lnke() {return wkr__lnke;} private final    Xoh_lnke_html wkr__lnke = new Xoh_lnke_html();
-	public Xoh_hdr_html			Wkr__hdr()	{return wkr__hdr;}	private final    Xoh_hdr_html wkr__hdr = new Xoh_hdr_html();
-	public Xoh_lnki_wtr			Lnki_wtr() {return lnki_wtr;} private final    Xoh_lnki_wtr lnki_wtr;
-	public Ref_html_wtr			Ref_wtr() {return ref_wtr;} private final    Ref_html_wtr ref_wtr;
+	public Xoh_html_wtr_cfg		Cfg() {return cfg;} private final Xoh_html_wtr_cfg cfg = new Xoh_html_wtr_cfg();
+	public Xoh_lnke_html		Wkr__lnke() {return wkr__lnke;} private final Xoh_lnke_html wkr__lnke = new Xoh_lnke_html();
+	public Xoh_hdr_html			Wkr__hdr()	{return wkr__hdr;}	private final Xoh_hdr_html wkr__hdr = new Xoh_hdr_html();
+	public Xoh_lnki_wtr			Lnki_wtr() {return lnki_wtr;} private final Xoh_lnki_wtr lnki_wtr;
+	public Ref_html_wtr			Ref_wtr() {return ref_wtr;} private final Ref_html_wtr ref_wtr;
 
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		cfg.Toc__show_(Bool_.Y).Lnki__title_(true).Lnki__visited_y_().Lnki__id_(Bool_.Y);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false

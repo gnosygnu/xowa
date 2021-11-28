@@ -20,9 +20,9 @@ public class Gflucene_idx_opt {
 		this.key = key;
 		this.name = name;
 	}
-	public int Uid() {return uid;} private final    int uid;
-	public String Key() {return key;} private final    String key;
-	public String Name() {return name;} private final    String name;
+	public int Uid() {return uid;} private final int uid;
+	public String Key() {return key;} private final String key;
+	public String Name() {return name;} private final String name;
 
 	public static final int 
 	  Uid_docs = 0 // basic inverted word index; number of words is always 1 per doc
@@ -31,8 +31,8 @@ public class Gflucene_idx_opt {
 	, Uid_docs_and_freqs_and_positions_and_offsets = 3 // offsets needed for highlighter
 	;
 
-	private static final    Hash_adp parse_hash = Hash_adp_.New();
-	public static final    Gflucene_idx_opt
+	private static final Hash_adp parse_hash = Hash_adp_.New();
+	public static final Gflucene_idx_opt
 	  Docs = New(Uid_docs, "d", "Documents")
 	, Docs_and_freqs = New(Uid_docs_and_freqs, "df", "Documents / Frequencies")
 	, Docs_and_freqs_and_positions = New(Uid_docs_and_freqs_and_positions, "dfp", "Documents / Frequencies / Positions")

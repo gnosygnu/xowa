@@ -17,7 +17,7 @@ package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.htmls.core.wkrs.tocs.*;
 public class Xoh_page_bfr {
 	private byte toc_mode;
-	private Bry_bfr head_bfr; private final    Bry_bfr body_bfr = Bry_bfr_.New();
+	private Bry_bfr head_bfr; private final Bry_bfr body_bfr = Bry_bfr_.New();
 	public void Init(Bry_bfr head_bfr) {
 		this.toc_mode = Xoh_toc_data.Toc_mode__none;
 		this.head_bfr = head_bfr;

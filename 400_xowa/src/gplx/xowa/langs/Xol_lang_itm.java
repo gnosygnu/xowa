@@ -22,7 +22,7 @@ import gplx.xowa.guis.langs.*;
 import gplx.xowa.mediawiki.languages.*;
 public class Xol_lang_itm implements Gfo_invk {
 	private boolean loaded = false;
-	private final    Object thread_lock = new Object();
+	private final Object thread_lock = new Object();
 	public Xol_lang_itm(Xoa_lang_mgr lang_mgr, byte[] key_bry) {
 		this.lang_mgr = lang_mgr; this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry);
 		Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(key_bry); if (lang_itm == null) throw Err_.new_wo_type("unknown lang_key", "key", String_.new_u8(key_bry));
@@ -42,22 +42,22 @@ public class Xol_lang_itm implements Gfo_invk {
 		this.duration_mgr = new Xol_duration_mgr(this);
 		if (lang_id != Xol_lang_stub_.Id_en) fallback_bry_ary = Fallback_bry_ary__en;	// NOTE: do not set fallback_ary for en to en, else recursive loop
 	}
-	public XomwLanguage         Mw_lang() {return mw_lang;} private final    XomwLanguage mw_lang;
-	public Xoa_lang_mgr			Lang_mgr() {return lang_mgr;} private final    Xoa_lang_mgr lang_mgr; 
-	public byte[]				Key_bry() {return key_bry;} private final    byte[] key_bry;
-	public String				Key_str() {return key_str;} private final    String key_str;
-	public int					Lang_id() {return lang_id;} private final    int lang_id;
-	public Xol_ns_grp			Ns_names() {return ns_names;} private final    Xol_ns_grp ns_names;
-	public Xol_ns_grp			Ns_aliases() {return ns_aliases;} private final    Xol_ns_grp ns_aliases;
-	public Xol_kwd_mgr			Kwd_mgr() {return kwd_mgr;} private final    Xol_kwd_mgr kwd_mgr;
+	public XomwLanguage         Mw_lang() {return mw_lang;} private final XomwLanguage mw_lang;
+	public Xoa_lang_mgr			Lang_mgr() {return lang_mgr;} private final Xoa_lang_mgr lang_mgr;
+	public byte[]				Key_bry() {return key_bry;} private final byte[] key_bry;
+	public String				Key_str() {return key_str;} private final String key_str;
+	public int					Lang_id() {return lang_id;} private final int lang_id;
+	public Xol_ns_grp			Ns_names() {return ns_names;} private final Xol_ns_grp ns_names;
+	public Xol_ns_grp			Ns_aliases() {return ns_aliases;} private final Xol_ns_grp ns_aliases;
+	public Xol_kwd_mgr			Kwd_mgr() {return kwd_mgr;} private final Xol_kwd_mgr kwd_mgr;
 	public boolean					Kwd_mgr__strx() {return kwd_mgr__strx;} public Xol_lang_itm Kwd_mgr__strx_(boolean v) {kwd_mgr__strx = v; return this;} private boolean kwd_mgr__strx;
-	public Xol_msg_mgr			Msg_mgr() {return msg_mgr;} private final    Xol_msg_mgr msg_mgr;
-	public Xol_specials_mgr		Specials_mgr() {return specials_mgr;} private final    Xol_specials_mgr specials_mgr;
+	public Xol_msg_mgr			Msg_mgr() {return msg_mgr;} private final Xol_msg_mgr msg_mgr;
+	public Xol_specials_mgr		Specials_mgr() {return specials_mgr;} private final Xol_specials_mgr specials_mgr;
 	public Xol_case_mgr			Case_mgr() {return case_mgr;} private Xol_case_mgr case_mgr;
 	public void					Case_mgr_u8_() {case_mgr = Xol_case_mgr_.U8();}		// TEST:
 	public Xol_lang_itm			Case_mgr_(Xol_case_mgr v) {this.case_mgr = v; return this;}		// TEST:
-	public Xol_comma_wkr		Comma_wkr() {return comma_wkr;} private final    Xol_comma_wkr comma_wkr = new Xol_comma_wkr__add();
-	public Xol_font_info		Gui_font() {return gui_font;} private final    Xol_font_info gui_font = new Xol_font_info(null, 0, FontStyleAdp_.Plain);
+	public Xol_comma_wkr		Comma_wkr() {return comma_wkr;} private final Xol_comma_wkr comma_wkr = new Xol_comma_wkr__add();
+	public Xol_font_info		Gui_font() {return gui_font;} private final Xol_font_info gui_font = new Xol_font_info(null, 0, FontStyleAdp_.Plain);
 	public byte[]				Fallback_bry() {return fallback_bry;}
 	public Xol_lang_itm			Fallback_bry_(byte[] v) {
 		fallback_bry = v;
@@ -78,22 +78,22 @@ public class Xol_lang_itm implements Gfo_invk {
 		return this;
 	}	private byte[] fallback_bry;
 	public byte[][]				Fallback_bry_ary() {return fallback_bry_ary;} private byte[][] fallback_bry_ary = Bry_.Ary_empty;
-	public Ordered_hash			Fallback_hash() {return fallback_hash;} private final    Ordered_hash fallback_hash = Ordered_hash_.New();
+	public Ordered_hash			Fallback_hash() {return fallback_hash;} private final Ordered_hash fallback_hash = Ordered_hash_.New();
 	public boolean					Dir_ltr() {return dir_ltr;} private boolean dir_ltr = true;
 	public void					Dir_ltr_(boolean v) {
 		dir_ltr = v;
 		img_thumb_halign_default = dir_ltr ? Xop_lnki_align_h_.Right : Xop_lnki_align_h_.Left;
 	}
 	public byte[]				Dir_ltr_bry() {return dir_ltr ? Dir_bry_ltr : Dir_bry_rtl;}
-	public Xol_num_mgr			Num_mgr() {return num_mgr;} private final    Xol_num_mgr num_mgr;
-	public Xol_vnt_mgr			Vnt_mgr() {return vnt_mgr;} private final    Xol_vnt_mgr vnt_mgr;
-	public Xol_grammar			Grammar() {return grammar;} private final    Xol_grammar grammar;
-	public Xol_gender			Gender() {return gender;} private final    Xol_gender gender;
-	public Xol_plural			Plural() {return plural;} private final    Xol_plural plural;
-	public Xol_duration_mgr		Duration_mgr() {return duration_mgr;} private final    Xol_duration_mgr duration_mgr;
-	public Xol_lnki_trail_mgr	Lnki_trail_mgr() {return lnki_trail_mgr;} private final    Xol_lnki_trail_mgr lnki_trail_mgr = new Xol_lnki_trail_mgr();
+	public Xol_num_mgr			Num_mgr() {return num_mgr;} private final Xol_num_mgr num_mgr;
+	public Xol_vnt_mgr			Vnt_mgr() {return vnt_mgr;} private final Xol_vnt_mgr vnt_mgr;
+	public Xol_grammar			Grammar() {return grammar;} private final Xol_grammar grammar;
+	public Xol_gender			Gender() {return gender;} private final Xol_gender gender;
+	public Xol_plural			Plural() {return plural;} private final Xol_plural plural;
+	public Xol_duration_mgr		Duration_mgr() {return duration_mgr;} private final Xol_duration_mgr duration_mgr;
+	public Xol_lnki_trail_mgr	Lnki_trail_mgr() {return lnki_trail_mgr;} private final Xol_lnki_trail_mgr lnki_trail_mgr = new Xol_lnki_trail_mgr();
 	public Xop_lnki_arg_parser	Lnki_arg_parser() {return lnki_arg_parser;} private Xop_lnki_arg_parser lnki_arg_parser = new Xop_lnki_arg_parser(); 
-	public Xol_func_regy		Func_regy() {return func_regy;} private final    Xol_func_regy func_regy;
+	public Xol_func_regy		Func_regy() {return func_regy;} private final Xol_func_regy func_regy;
 	public int					Img_thumb_halign_default() {return img_thumb_halign_default;} private int img_thumb_halign_default = Xop_lnki_align_h_.Right;
 	public Hash_adp_bry			Xatrs_section() {if (xatrs_section == null) xatrs_section = Lst_section_nde.new_xatrs_(this); return xatrs_section;} private Hash_adp_bry xatrs_section;
 	public void Evt_lang_changed() {
@@ -131,7 +131,7 @@ public class Xol_lang_itm implements Gfo_invk {
 	, Invk_x_axis_end = "x_axis_end"
 	;
 
-	private static final    Hash_adp_bry fallback_dupes_regy = Hash_adp_bry.cs(); // to prevent cyclical loops during loading
+	private static final Hash_adp_bry fallback_dupes_regy = Hash_adp_bry.cs(); // to prevent cyclical loops during loading
 	public Xol_lang_itm Init_by_load() {
 		synchronized (thread_lock) { // Scribunto can create langs outside of wiki_lang; EX:dewiki and multiple scripts call isRTL for fr; ISSUE#:330; DATE:2019-02-09
 			if (!loaded) {
@@ -160,7 +160,7 @@ public class Xol_lang_itm implements Gfo_invk {
 		gfs_mgr.Run_url_for(this, Xol_lang_itm_.xo_lang_fil_(app_fsys_mgr, String_.new_a7(v)));
 		gfs_mgr.Run_url_for(gfs_mgr.Root_invk(), Xol_convert_regy.Bld_url(app_fsys_mgr, key_str));
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Dir_bry_ltr = Bry_.new_a7("ltr"), Dir_bry_rtl = Bry_.new_a7("rtl")
 	, X_axis_end_right = Bry_.new_a7("right"), X_axis_end_left = Bry_.new_a7("left")
 	;
@@ -186,7 +186,7 @@ public class Xol_lang_itm implements Gfo_invk {
 		}
 		return rv;
 	}
-	private static final    byte[][] Fallback_bry_ary__en = new byte[][] {Xol_lang_itm_.Key_en};
+	private static final byte[][] Fallback_bry_ary__en = new byte[][] {Xol_lang_itm_.Key_en};
 	public static Xol_lang_itm New(Xoa_lang_mgr lang_mgr, byte[] key_bry) {
 		return new Xol_lang_itm(lang_mgr, key_bry);
 	}

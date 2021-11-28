@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.pages.randoms.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.randoms.*;
 import gplx.dbs.*; import gplx.xowa.addons.wikis.pages.randoms.dbs.*;
 public class Rndm_bldr_wkr {
-	private final    Rndm_qry_tbl qry_tbl; private final    Rndm_rng_tbl rng_tbl; private final    Rndm_seq_tbl seq_tbl;
+	private final Rndm_qry_tbl qry_tbl; private final Rndm_rng_tbl rng_tbl; private final Rndm_seq_tbl seq_tbl;
 	private Rndm_qry_itm qry_itm;
 	private Db_stmt rng_stmt, seq_stmt;
 	private int rng_seq_bgn, seq_in_rng;
@@ -26,7 +26,7 @@ public class Rndm_bldr_wkr {
 		this.qry_tbl = qry_tbl; this.rng_tbl = rng_tbl; this.seq_tbl = seq_tbl;
 		qry_idx_max = qry_tbl.Select_qry_max();
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public int Qry_idx() {return qry_idx;} private int qry_idx; 
 	public int Rng_idx() {return rng_idx;} private int rng_idx;
 	public int Seq_in_qry() {return seq_in_qry;} private int seq_in_qry;

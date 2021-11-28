@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.pages.redirects; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.specials.*;
 public class Xopg_redirect_mgr__tst {
-	@Before public void init() {fxt.Clear();} private final    Xopg_redirect_mgr__fxt fxt = new Xopg_redirect_mgr__fxt();
+	@Before public void init() {fxt.Clear();} private final Xopg_redirect_mgr__fxt fxt = new Xopg_redirect_mgr__fxt();
 	@Test public void Basic() {
 		fxt.Test__Itms__add__special(fxt.Make_meta("XowaTest"), Keyval_.Ary_empty, fxt.Make__itm("en.wikipedia.org/wiki/Special:XowaTest", "Special:XowaTest", null));
 	}
@@ -29,7 +29,7 @@ public class Xopg_redirect_mgr__tst {
 }
 class Xopg_redirect_mgr__fxt {
 	private Xow_wiki wiki;
-	private final    Xopg_redirect_mgr mgr = new Xopg_redirect_mgr();
+	private final Xopg_redirect_mgr mgr = new Xopg_redirect_mgr();
 	public void Clear() {
 		mgr.Clear();
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();

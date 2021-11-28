@@ -17,9 +17,9 @@ package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; impo
 import gplx.xowa.mediawiki.includes.parsers.headingsOld.*;
 import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 class Xop_section_list implements Xomw_heading_cbk {
-	private final    Xomw_heading_wkr hdr_wkr = new Xomw_heading_wkr();
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
-	private final    Xoh_toc_mgr toc_mgr = new Xoh_toc_mgr();
+	private final Xomw_heading_wkr hdr_wkr = new Xomw_heading_wkr();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Xoh_toc_mgr toc_mgr = new Xoh_toc_mgr();
 	private byte[] src;
 	private Xowe_wiki wiki;
 

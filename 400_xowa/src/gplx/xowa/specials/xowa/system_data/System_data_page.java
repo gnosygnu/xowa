@@ -51,9 +51,9 @@ public class System_data_page implements Xow_special_page {
 			default:						return null;
 		}
 	}
-	private static final    byte[] Arg_type = Bry_.new_a7("type");
+	private static final byte[] Arg_type = Bry_.new_a7("type");
 	private static final byte Type_log_session = 1, Type_cfg_app = 2, Type_cfg_lang = 3, Type_usr_history = 6;
-	private static final    Hash_adp_bry type_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry type_hash = Hash_adp_bry.cs()
 	.Add_str_byte("log_session"		, Type_log_session)
 	.Add_str_byte("cfg_app"			, Type_cfg_app)
 	.Add_str_byte("cfg_lang"		, Type_cfg_lang)

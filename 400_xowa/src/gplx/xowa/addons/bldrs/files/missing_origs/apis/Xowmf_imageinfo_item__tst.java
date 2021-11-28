@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.addons.bldrs.files.missing_origs.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xowmf_imageinfo_item__tst {
-	private final    Xowmf_imageinfo_item__fxt fxt = new Xowmf_imageinfo_item__fxt();
+	private final Xowmf_imageinfo_item__fxt fxt = new Xowmf_imageinfo_item__fxt();
 
 	@Test  public void Normalize_ttl() {
 		fxt.Test__Normalize_ttl("File:A b.png", "A_b.png");

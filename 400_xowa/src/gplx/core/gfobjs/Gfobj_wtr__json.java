@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
 import gplx.langs.jsons.*;
 public class Gfobj_wtr__json {
-	private final    Json_wtr wtr = new Json_wtr();
+	private final Json_wtr wtr = new Json_wtr();
 	public Gfobj_wtr__json Opt_ws_(boolean v) {wtr.Opt_ws_(v); return this;}
 	public Gfobj_wtr__json Opt_backslash_2x_(boolean v) {wtr.Opt_backslash_2x_(v); return this;}
 	public Bry_bfr Bfr() {return wtr.Bfr();}

@@ -68,7 +68,7 @@ public class Pft_fmt_itm_ {
 	, Tid_timezone_offset_4_colon       = 38
 	;
 
-	public static final    Pft_fmt_itm 
+	public static final Pft_fmt_itm
 	  Year_len4					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_year			, 4, Bool_.Y)
 	, Year_len2					= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_year			, 2, Bool_.Y)
 	, Month_int_len2			= new Pft_fmt_itm_seg_int(DateAdp_.SegIdx_month			, 2, Bool_.Y)
@@ -126,7 +126,7 @@ public class Pft_fmt_itm_ {
 	, Timezone_offset_4         = new Pft_fmt_itm_timezone_offset_4(Bool_.N)
 	, Timezone_offset_4_colon   = new Pft_fmt_itm_timezone_offset_4(Bool_.Y)
 	;
-	public static final    Btrie_fast_mgr Regy = Btrie_fast_mgr.cs()
+	public static final Btrie_fast_mgr Regy = Btrie_fast_mgr.cs()
 	.Add(Byte_ascii.Ltr_Y		, Pft_fmt_itm_.Year_len4)				// 2012
 	.Add(Byte_ascii.Ltr_y		, Pft_fmt_itm_.Year_len2)				// 12
 	.Add(Byte_ascii.Ltr_L		, Pft_fmt_itm_.Year_isLeap)				// 1,0

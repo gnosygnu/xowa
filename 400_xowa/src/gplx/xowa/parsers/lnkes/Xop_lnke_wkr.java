@@ -29,8 +29,8 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		bgn_tkn.Src_end_(bgn_tkn.Lnke_href_end()); // NOTE: endPos is lnke_end, not cur_pos or src_len; EX: "[irc://a b", lnk ends at a, not b; NOTE: still bgns at [
 		ctx.Msg_log().Add_itm_none(Xop_lnke_log.Dangling, src, tkn.Src_bgn(), cur_pos);
 	}
-	public static final    String Str_xowa_protocol = "xowa-cmd:";
-	public static final    byte[] Bry_xowa_protocol = Bry_.new_a7(Str_xowa_protocol);
+	public static final String Str_xowa_protocol = "xowa-cmd:";
+	public static final byte[] Bry_xowa_protocol = Bry_.new_a7(Str_xowa_protocol);
 	public int MakeTkn_bgn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos, byte[] protocol, byte proto_tid, byte lnke_type) {
 		boolean lnke_type_brack = (lnke_type == Xop_lnke_tkn.Lnke_typ_brack);
 		if (	!lnke_type_brack										// lnke doesn't have "["; EX: "ttl:"
@@ -306,7 +306,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		ctx.Subs_add(root, tkn);
 		tkn.Subs_add(tkn_mkr.Txt(txt_bgn, txt_end));
 		return end_pos;
-	}	private static final    byte[] Bry_quote = new byte[] {Byte_ascii.Quote};
+	}	private static final byte[] Bry_quote = new byte[] {Byte_ascii.Quote};
 }
 /*
 NOTE_1

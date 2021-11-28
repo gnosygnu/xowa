@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa; import gplx.*;
 public class Xoa_manifest_list {
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public int Len() {return hash.Len();}
 	public Xoa_manifest_item Get_at(int i) {return (Xoa_manifest_item)hash.Get_at(i);}
 	public void Del_at(int i) {

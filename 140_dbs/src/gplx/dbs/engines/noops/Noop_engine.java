@@ -20,9 +20,9 @@ import gplx.dbs.wkrs.SqlWkrMgr;
 public class Noop_engine implements Db_engine {
 	public String				Tid() {return Noop_conn_info.Tid_const;}
 	public Db_conn_info			Conn_info() {return Db_conn_info_.Null;}
-	public Db_conn_props_mgr	Props() {return props;} private final    Db_conn_props_mgr props = new Db_conn_props_mgr();
-	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
-	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.New__basic();
+	public Db_conn_props_mgr	Props() {return props;} private final Db_conn_props_mgr props = new Db_conn_props_mgr();
+	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final Db_batch_mgr batch_mgr = new Db_batch_mgr();
+	public SqlQryWtr Sql_wtr() {return sql_wtr;} private final SqlQryWtr sql_wtr = SqlQryWtrUtl.NewBasic();
 	@Override public void       CtorConn(SqlWkrMgr wkrMgr) {}
 	public void					Conn_open() {}
 	public void					Conn_term() {}
@@ -48,6 +48,6 @@ public class Noop_engine implements Db_engine {
 	public boolean					Meta_tbl_exists(String tbl)						{return false;}
 	public boolean					Meta_fld_exists(String tbl, String fld)			{return false;}
 	public boolean					Meta_idx_exists(String idx)						{return false;}
-	public Dbmeta_tbl_mgr		Meta_mgr()										{return meta_tbl_mgr;} private final    Dbmeta_tbl_mgr meta_tbl_mgr = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
-        public static final    Noop_engine Instance = new Noop_engine(); Noop_engine() {}
+	public Dbmeta_tbl_mgr		Meta_mgr()										{return meta_tbl_mgr;} private final Dbmeta_tbl_mgr meta_tbl_mgr = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
+        public static final Noop_engine Instance = new Noop_engine(); Noop_engine() {}
 }

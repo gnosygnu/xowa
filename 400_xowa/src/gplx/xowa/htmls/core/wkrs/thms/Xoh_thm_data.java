@@ -23,8 +23,8 @@ public class Xoh_thm_data implements Gfh_style_wkr {
 	public boolean Rng_valid() {return rng_valid;} private boolean rng_valid;
 	public byte Div_0_align() {return div_0_align;} private byte div_0_align;
 	public int Div_1_width() {return div_1_width;} private int div_1_width;
-	public Xoh_img_data Img_data() {return img_data;} private final    Xoh_img_data img_data = new Xoh_img_data();
-	public Xoh_thm_caption_data Capt_data() {return capt_data;} private final    Xoh_thm_caption_data capt_data = new Xoh_thm_caption_data();
+	public Xoh_img_data Img_data() {return img_data;} private final Xoh_img_data img_data = new Xoh_img_data();
+	public Xoh_thm_caption_data Capt_data() {return capt_data;} private final Xoh_thm_caption_data capt_data = new Xoh_thm_caption_data();
 	public void Clear() {
 		rng_valid = false;
 		capt_data.Clear();
@@ -67,7 +67,7 @@ public class Xoh_thm_data implements Gfh_style_wkr {
 			this.div_1_width = -1;
 		return true;
 	} 
-	public static final    byte[] 
+	public static final byte[]
 	  Atr__class__thumb				= Bry_.new_a7("thumb")
 	, Atr__class__thumbinner		= Bry_.new_a7("thumbinner")
 	, Atr__id__xowa_media_div		= Bry_.new_a7("xowa_media_div")

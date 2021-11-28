@@ -16,13 +16,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfui.draws; import gplx.*; import gplx.gfui.*;
 import gplx.core.primitives.*; import gplx.core.interfaces.*;
 public class FontStyleAdp_ implements ParseAble {
-	public static final    FontStyleAdp 
+	public static final FontStyleAdp
 		  Plain			= new FontStyleAdp(0)
 		, Bold			= new FontStyleAdp(1)
 		, Italic		= new FontStyleAdp(2)
 		, BoldItalic	= new FontStyleAdp(3)
 		;
-	public static final    FontStyleAdp_ Parser = new FontStyleAdp_();
+	public static final FontStyleAdp_ Parser = new FontStyleAdp_();
 	public Object ParseAsObj(String raw) {return FontStyleAdp_.parse(raw);}
 
 	public static FontStyleAdp cast(Object obj) {try {return (FontStyleAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, FontStyleAdp.class, obj);}}

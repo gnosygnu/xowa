@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 class Mwh_doc_mgr {
-	private final    int data_max_orig;				
+	private final int data_max_orig;
 	public Mwh_doc_mgr(int max) {
 		this.data_max_orig = max * Idx__mult;
 		this.Max_(max);

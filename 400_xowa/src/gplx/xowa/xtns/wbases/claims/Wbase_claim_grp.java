@@ -18,7 +18,7 @@ import gplx.core.primitives.*;
 import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 public class Wbase_claim_grp {
 	public Wbase_claim_grp(Int_obj_ref id_ref, Wbase_claim_base[] itms) {this.id_ref = id_ref; this.itms = itms;}
-	public Int_obj_ref Id_ref() {return id_ref;} private final    Int_obj_ref id_ref;
+	public Int_obj_ref Id_ref() {return id_ref;} private final Int_obj_ref id_ref;
 	public int Id() {return id_ref.Val();}
 	public String Id_str() {if (id_str == null) id_str = "P" + Int_.To_str(id_ref.Val()); return id_str;} private String id_str;
 	public int Len() {return itms.length;} private Wbase_claim_base[] itms;
@@ -51,7 +51,7 @@ public class Wbase_claim_grp {
 		}
 		return tmp_snak_list.Count() == 0 ? Empty_array : (Wbase_claim_base[])tmp_snak_list.To_ary_and_clear(Wbase_claim_base.class);
 	}
-	private static final    Wbase_claim_base[] Empty_array = new Wbase_claim_base[0];
+	private static final Wbase_claim_base[] Empty_array = new Wbase_claim_base[0];
 
 	public static List_adp Xto_list(Ordered_hash hash) {
 		int len = hash.Count();

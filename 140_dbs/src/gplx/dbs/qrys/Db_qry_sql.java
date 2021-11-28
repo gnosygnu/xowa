@@ -19,7 +19,7 @@ public class Db_qry_sql implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_sql;}
 	public boolean			Exec_is_rdr() {return isReader;} private boolean isReader;
 	public String		Base_table() {throw Err_.new_unimplemented();}
-	public String		To_sql__exec(Sql_qry_wtr wtr) {return sql;} private String sql;		
+	public String		To_sql__exec(SqlQryWtr wtr) {return sql;} private String sql;
 	public int Exec_qry(Db_conn conn) {return conn.Exec_qry(this);}
 	public static Db_qry_sql dml_(String sql) {return sql_(sql);}
 	public static Db_qry_sql ddl_(String sql) {return sql_(sql);}
@@ -36,8 +36,8 @@ public class Db_qry_sql implements Db_qry {
 	}
 	public static Db_qry_sql as_(Object obj) {return obj instanceof Db_qry_sql ? (Db_qry_sql)obj : null;}
 	public static Db_qry_sql cast(Object obj) {try {return (Db_qry_sql)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, Db_qry_sql.class, obj);}}
-	public static String Gen_sql(Sql_qry_wtr qry_wtr, Db_qry qry, Object... args) {
-		byte[] src = Bry_.new_u8(qry_wtr.To_sql_str(qry, true));
+	public static String Gen_sql(SqlQryWtr qry_wtr, Db_qry qry, Object... args) {
+		byte[] src = Bry_.new_u8(qry_wtr.ToSqlStr(qry, true));
 		int src_len = src.length;
 		int args_idx = 0, args_len = args.length, pos = 0;
 		Bry_bfr bfr = Bry_bfr_.New_w_size(src_len);
@@ -76,5 +76,5 @@ public class Db_qry_sql implements Db_qry {
 			val_bry = Bry_.Replace(val_bry, Byte_ascii.Apos_bry, Bry_escape_apos);
 			bfr.Add_byte_apos().Add(val_bry).Add_byte_apos();
 		}
-	}	private static final    byte[] Bry_null = Bry_.new_u8("NULL"), Bry_escape_apos = Bry_.new_a7("''");
+	}	private static final byte[] Bry_null = Bry_.new_u8("NULL"), Bry_escape_apos = Bry_.new_a7("''");
 }

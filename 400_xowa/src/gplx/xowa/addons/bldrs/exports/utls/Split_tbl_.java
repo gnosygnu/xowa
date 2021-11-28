@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
 import gplx.dbs.*;
 public class Split_tbl_ {
-	public static final    Split_tbl
+	public static final Split_tbl
 	  Page			= new Split_tbl__page()
 	, Html			= new Split_tbl__html()
 	, Srch_word		= new Split_tbl__srch_word()

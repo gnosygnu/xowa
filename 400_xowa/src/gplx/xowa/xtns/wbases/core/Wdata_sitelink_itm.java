@@ -18,9 +18,9 @@ import gplx.langs.jsons.*;
 import gplx.xowa.wikis.domains.*;
 public class Wdata_sitelink_itm implements Wdata_lang_sortable {
 	public Wdata_sitelink_itm(byte[] site, byte[] name, byte[][] badges) {this.site = site; this.name = name; this.badges = badges;} 
-	public byte[] Site() {return site;} private final    byte[] site;
-	public byte[] Name() {return name;} private final    byte[] name;
-	public byte[][] Badges() {return badges;} private final    byte[][] badges;
+	public byte[] Site() {return site;} private final byte[] site;
+	public byte[] Name() {return name;} private final byte[] name;
+	public byte[][] Badges() {return badges;} private final byte[][] badges;
 	public byte[] Lang() {return lang;} public void Lang_(byte[] v) {lang = v;} private byte[] lang = Bry_.Empty;
 	public byte[] Lang_code() {return lang;}
 	public int Lang_sort() {return lang_sort;} public void Lang_sort_(int v) {lang_sort = v;} private int lang_sort = Wdata_lang_sorter.Sort_null;

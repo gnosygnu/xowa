@@ -67,19 +67,19 @@ public class Xob_orig_regy_tbl {
 		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_mark_changed);	// lnki_regy: update lnki_commons_flag
 		p.Exec_sql(Xob_lnki_regy_tbl.Sql_cs_update_ttls);	// lnki_regy: update cs
 	}
-	public static final    String Tbl_name = "orig_regy"
+	public static final String Tbl_name = "orig_regy"
 	, Fld_lnki_id = "lnki_id", Fld_lnki_ttl = "lnki_ttl", Fld_lnki_ext = "lnki_ext", Fld_lnki_count = "lnki_count"
 	, Fld_orig_repo = "orig_repo", Fld_orig_page_id = "orig_page_id"
 	, Fld_orig_redirect_id = "orig_redirect_id", Fld_orig_redirect_ttl = "orig_redirect_ttl", Fld_orig_file_id = "orig_file_id", Fld_orig_file_ttl = "orig_file_ttl"
 	, Fld_orig_size = "orig_size", Fld_orig_w = "orig_w", Fld_orig_h = "orig_h", Fld_orig_bits = "orig_bits"
 	, Fld_orig_media_type = "orig_media_type", Fld_orig_minor_mime = "orig_minor_mime", Fld_orig_file_ext = "orig_file_ext", Fld_orig_timestamp = "orig_timestamp"
 	;
-	private static final    Db_idx_itm
+	private static final Db_idx_itm
 	  Idx_ttl_local     	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__ttl_local  ON orig_regy (lnki_ttl);")
 	, Idx_ttl_remote     	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__ttl_remote ON orig_regy (lnki_commons_ttl, lnki_ttl);")
 	, Idx_xfer_temp			= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS orig_regy__xfer_temp  ON orig_regy (lnki_ttl, orig_file_ttl, orig_repo, orig_timestamp);")
 	;
-	private static final    String
+	private static final String
 		Tbl_sql = String_.Concat_lines_nl
 	(	"CREATE TABLE IF NOT EXISTS orig_regy"
 	,	"( lnki_id                     integer             NOT NULL			PRIMARY KEY"	// NOTE: must be PRIMARY KEY, else later REPLACE INTO will create dupe rows

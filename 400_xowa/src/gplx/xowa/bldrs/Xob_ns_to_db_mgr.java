@@ -17,8 +17,8 @@ package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.cmds.*;
 public class Xob_ns_to_db_mgr {
-	private final    Xob_ns_to_db_wkr wkr; private final    Xow_db_mgr db_mgr; private final    long db_max; private boolean one_file_conn_init = true;
-	private final    Ordered_hash db_list = Ordered_hash_.New();
+	private final Xob_ns_to_db_wkr wkr; private final Xow_db_mgr db_mgr; private final long db_max; private boolean one_file_conn_init = true;
+	private final Ordered_hash db_list = Ordered_hash_.New();
 	public Xob_ns_to_db_mgr(Xob_ns_to_db_wkr wkr, Xow_db_mgr db_mgr, long db_max) {
 		this.wkr = wkr; this.db_mgr = db_mgr; this.db_max = db_max;
 	}

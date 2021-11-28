@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.files.repos.*;
 public class Xou_cache_finder_ {
-	public static final    Xou_cache_finder Noop = new Xou_cache_finder_noop();
+	public static final Xou_cache_finder Noop = new Xou_cache_finder_noop();
 	public static Xou_cache_finder_mem New_mem() {return new Xou_cache_finder_mem();}
 	public static Xou_cache_finder New_db(Xou_cache_mgr cache_mgr) {return new Xou_cache_finder_db(cache_mgr);}
 }
@@ -29,8 +29,8 @@ class Xou_cache_finder_noop implements Xou_cache_finder {
 	public void Add(Xof_fsdb_itm fsdb_itm) {}
 }
 class Xou_cache_finder_db implements Xou_cache_finder {
-	private final    Xou_cache_mgr cache_mgr;
-	private final    Xof_img_size img_size = new Xof_img_size(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
+	private final Xou_cache_mgr cache_mgr;
+	private final Xof_img_size img_size = new Xof_img_size(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public Xou_cache_finder_db(Xou_cache_mgr cache_mgr) {this.cache_mgr = cache_mgr;}
 	public boolean Find(Xow_wiki wiki, byte[] page_url, Xof_fsdb_itm cur) {
 		Xou_cache_itm cache_itm = cache_mgr.Get_or_null(cur); 

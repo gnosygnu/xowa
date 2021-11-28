@@ -33,12 +33,12 @@ public class Xocfg_edit_bridge implements Bridge_cmd_itm {
 	}
 
 	private static final byte Proc__update = 0, Proc__delete = 1, Proc__select = 2;
-	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("update"						, Proc__update)
 	.Add_str_byte("delete"						, Proc__delete)
 	.Add_str_byte("select"						, Proc__select)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("xo.cfg_edit");
-        public static final    Xocfg_edit_bridge Prototype = new Xocfg_edit_bridge(); Xocfg_edit_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("xo.cfg_edit");
+        public static final Xocfg_edit_bridge Prototype = new Xocfg_edit_bridge(); Xocfg_edit_bridge() {}
 }

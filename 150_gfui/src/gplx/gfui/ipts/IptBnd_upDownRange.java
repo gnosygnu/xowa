@@ -37,7 +37,7 @@ public class IptBnd_upDownRange implements InjectAble, Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, evt))			WhenEvt(ctx, m);
 		else	return Gfo_invk_.Rv_unhandled;
 		return Gfo_invk_.Rv_handled;
-	}	static final    String Invk_TxtBox_dec = "txtBox_dec", Invk_TxtBox_inc = "txtBox_inc", Invk_TxtBox_exec = "txtBox_exec";
+	}	static final String Invk_TxtBox_dec = "txtBox_dec", Invk_TxtBox_inc = "txtBox_inc", Invk_TxtBox_exec = "txtBox_exec";
 	public int Adj() {return adj;} public IptBnd_upDownRange Adj_(int v) {adj = v; return this;} int adj;
 	void WhenEvt(GfsCtx ctx, GfoMsg m) {
 		curVal = m.ReadInt(arg) + adj;

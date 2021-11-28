@@ -25,26 +25,26 @@ public abstract class IoEngine_dir_deep_base_tst {
 	}	protected IoEngine engine; protected Io_url fil, root; @gplx.Internal protected IoEngineFxt fx; 
 	protected abstract IoEngine engine_();
 	protected abstract void setup_hook();
-	@Test @gplx.Virtual public void SearchDir() {
+	@Test public void SearchDir() {
 		Io_url[] expd = paths_(src_dir0a, src_fil0a, src_dir0a_dir0a, src_dir0a_fil0a);
 		Io_url[] actl = IoEngine_xrg_queryDir.new_(src).Recur_().DirInclude_().ExecAsUrlAry();
 		Tfds.Eq_ary(expd, actl);
 	}
-	@Test @gplx.Virtual public void MoveDirDeep() {
+	@Test public void MoveDirDeep() {
 		fx.tst_ExistsPaths(true, srcTree); fx.tst_ExistsPaths(false, trgTree);
 
 		engine.MoveDirDeep(IoEngine_xrg_xferDir.move_(src, trg).Recur_());
 		fx.tst_ExistsPaths(false, srcTree);
 		fx.tst_ExistsPaths(true, trgTree);
 	}
-	@Test @gplx.Virtual public void CopyDir() {
+	@Test public void CopyDir() {
 		fx.tst_ExistsPaths(true, srcTree); fx.tst_ExistsPaths(false, trgTree);
 
 		engine.CopyDir(src, trg);
 		fx.tst_ExistsPaths(true, srcTree);
 		fx.tst_ExistsPaths(true, trgTree);
 	}
-	@Test @gplx.Virtual public void DeleteDir() {
+	@Test public void DeleteDir() {
 		fx.tst_ExistsPaths(true, srcTree);
 
 		engine.DeleteDirDeep(IoEngine_xrg_deleteDir.new_(src).Recur_());

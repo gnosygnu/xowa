@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*;
 public class Xoa_repo_mgr implements Gfo_invk {
-	private final    Xoa_fsys_mgr app_fsys; private final    Xof_rule_mgr ext_rule_mgr;
+	private final Xoa_fsys_mgr app_fsys; private final Xof_rule_mgr ext_rule_mgr;
 	public Xoa_repo_mgr(Xoa_fsys_mgr app_fsys, Xof_rule_mgr ext_rule_mgr) {this.app_fsys = app_fsys; this.ext_rule_mgr = ext_rule_mgr;}
 	public int Count() {return hash.Count();}
 	public Xof_repo_itm Get_at(int i)		{return (Xof_repo_itm)hash.Get_at(i);}

@@ -22,11 +22,11 @@ public class Xobc_task_regy_itm {
 		this.name = name;
 		this.step_count = step_count;
 	}
-	public int Id() {return id;} private final    int id;
-	public int Seqn() {return seqn;} private final    int seqn;
-	public byte[] Key() {return key;} private final    byte[] key;
-	public byte[] Name() {return name;} private final    byte[] name;
-	public int Step_count() {return step_count;} private final    int step_count;
+	public int Id() {return id;} private final int id;
+	public int Seqn() {return seqn;} private final int seqn;
+	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Name() {return name;} private final byte[] name;
+	public int Step_count() {return step_count;} private final int step_count;
 
 	public static final String Type__text = "text", Type__html = "html", Type__file = "file";
 	public static final int Seqn__obsolete = 999999;

@@ -17,16 +17,16 @@ package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.linkers.*;
 public class XomwLinkHolderArray_tst {
-	private final    XomwLinkHolderArray_fxt fxt = new XomwLinkHolderArray_fxt();
+	private final XomwLinkHolderArray_fxt fxt = new XomwLinkHolderArray_fxt();
 	@Test  public void Replace__basic() {
 		fxt.Init__add("A", "a");
 		fxt.Test__replace("a <!--LINK 0--> b", "a <a href='/wiki/A' title='A'>a</a> b");
 	}
 }
 class XomwLinkHolderArray_fxt {
-	private final    XomwEnv env;
-	private final    XomwLinkHolderArray holders;
-	private final    XomwParserBfr pbfr = new XomwParserBfr();
+	private final XomwEnv env;
+	private final XomwLinkHolderArray holders;
+	private final XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public XomwLinkHolderArray_fxt() {
 		XomwParser parser = new XomwParser(XomwEnv_fxt.NewTest());

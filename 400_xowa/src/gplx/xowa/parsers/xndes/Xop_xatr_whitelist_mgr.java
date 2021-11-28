@@ -400,7 +400,7 @@ public class Xop_xatr_whitelist_mgr {
 		return Byte_ascii.Null; 
 	}
 	static final byte Style_expression = 0, Style_filter = 1, Style_accelerator = 2, Style_url = 3, Style_urls = 4, Style_comment = 5, Style_image = 6, Style_image_set = 7;
-	private static final    Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:Javascript
+	private static final Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:Javascript
 	.Add_str_byte("expression"	, Style_expression)
 	.Add_str_byte("filter"		, Style_filter)
 	.Add_str_byte("accelerator"	, Style_accelerator)

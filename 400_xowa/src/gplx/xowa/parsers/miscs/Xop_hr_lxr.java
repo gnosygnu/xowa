@@ -18,7 +18,7 @@ import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.xndes.*;
 public class Xop_hr_lxr implements Xop_lxr {
 	public int Lxr_tid() {return Xop_lxr_.Tid_hr;}
-	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr parse_trie) {parse_trie.Add(Hook_ary, this);} static final    byte[] Hook_ary = new byte[] {Byte_ascii.Nl, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash};
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr parse_trie) {parse_trie.Add(Hook_ary, this);} static final byte[] Hook_ary = new byte[] {Byte_ascii.Nl, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash, Byte_ascii.Dash};
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
@@ -40,5 +40,5 @@ public class Xop_hr_lxr implements Xop_lxr {
 		return cur_pos;
 	}	private static final byte Hook_byt = Byte_ascii.Dash;
 	public static final int Hr_len = 4;
-	public static final    Xop_hr_lxr Instance = new Xop_hr_lxr(); Xop_hr_lxr() {}
+	public static final Xop_hr_lxr Instance = new Xop_hr_lxr(); Xop_hr_lxr() {}
 }

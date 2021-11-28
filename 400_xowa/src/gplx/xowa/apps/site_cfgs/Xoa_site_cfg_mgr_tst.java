@@ -20,7 +20,7 @@ import gplx.dbs.cfgs.*;
 import gplx.langs.jsons.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.*; import gplx.xowa.bldrs.wms.*;
 public class Xoa_site_cfg_mgr_tst {
-	private final    Xoa_site_cfg_mgr_fxt fxt = new Xoa_site_cfg_mgr_fxt();
+	private final Xoa_site_cfg_mgr_fxt fxt = new Xoa_site_cfg_mgr_fxt();
 	@Before		public void init() {fxt.Init();}
 	@After  public void term() {fxt.Term();}
 	@Test public void Extensiontags__cfg() {
@@ -60,11 +60,11 @@ public class Xoa_site_cfg_mgr_tst {
 //		}
 }
 class Xoa_site_cfg_mgr_fxt {
-	private final    Xoae_app app; private final    Xowe_wiki wiki;
-	private final    Xoa_site_cfg_mgr site_cfg_mgr;
-	private final    Db_cfg_tbl cfg_tbl;
-	private final    Json_printer printer = new Json_printer();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xoae_app app; private final Xowe_wiki wiki;
+	private final Xoa_site_cfg_mgr site_cfg_mgr;
+	private final Db_cfg_tbl cfg_tbl;
+	private final Json_printer printer = new Json_printer();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xoa_site_cfg_mgr_fxt() {
 		// Xoa_app_.Usr_dlg_(Xoa_app_.New__usr_dlg__console());
 		gplx.core.ios.IoEngine_system.Web_access_enabled = true;	// HACK: must manually enable web_access else above tests will fail due to some other test disabling singleton; DATE:2016-12-15

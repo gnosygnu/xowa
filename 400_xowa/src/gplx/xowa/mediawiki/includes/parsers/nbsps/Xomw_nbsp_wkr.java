@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers.nbsps; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*;
 public class Xomw_nbsp_wkr {
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	public void doNbsp(XomwParserCtx pctx, XomwParserBfr pbfr) {
 		// PORTED:
 		// Clean up special characters, only run once, next-to-last before doBlockLevels
@@ -118,7 +118,7 @@ public class Xomw_nbsp_wkr {
 		Xomw_nbsp_itm itm = new Xomw_nbsp_itm(tid, key_bry, val_bry);
 		trie.Add_obj(key_bry, itm);
 	}
-	private static final    byte[] Bry__nbsp = Bry_.new_a7("&#160;"), Bry__important = Bry_.new_a7("important"), Bry__important__repl = Bry_.new_a7(" !");
+	private static final byte[] Bry__nbsp = Bry_.new_a7("&#160;"), Bry__important = Bry_.new_a7("important"), Bry__important__repl = Bry_.new_a7(" !");
 }
 class Xomw_nbsp_itm {
 	public Xomw_nbsp_itm(byte tid, byte[] key, byte[] val) {
@@ -126,7 +126,7 @@ class Xomw_nbsp_itm {
 		this.key = key;
 		this.val = val;
 	}
-	public byte Tid() {return tid;} private final    byte tid;
-	public byte[] Key() {return key;} private final    byte[] key;
-	public byte[] Val() {return val;} private final    byte[] val;
+	public byte Tid() {return tid;} private final byte tid;
+	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Val() {return val;} private final byte[] val;
 }

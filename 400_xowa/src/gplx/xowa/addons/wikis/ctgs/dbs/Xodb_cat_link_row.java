@@ -23,10 +23,10 @@ public class Xodb_cat_link_row {
 		this.sortkey = sortkey;
 		this.sortkey_prefix = sortkey_prefix;
 	}
-	public int Page_id() {return page_id;} private final    int page_id;
-	public int Cat_id() {return cat_id;} private final    int cat_id;
-	public byte Type_id() {return type_id;} private final    byte type_id;
-	public long Timestamp_unix() {return timestamp_unix;} private final    long timestamp_unix;
-	public byte[] Sortkey() {return sortkey;} private final    byte[] sortkey;
-	public byte[] Sortkey_prefix() {return sortkey_prefix;} private final    byte[] sortkey_prefix;
+	public int Page_id() {return page_id;} private final int page_id;
+	public int Cat_id() {return cat_id;} private final int cat_id;
+	public byte Type_id() {return type_id;} private final byte type_id;
+	public long Timestamp_unix() {return timestamp_unix;} private final long timestamp_unix;
+	public byte[] Sortkey() {return sortkey;} private final byte[] sortkey;
+	public byte[] Sortkey_prefix() {return sortkey_prefix;} private final byte[] sortkey_prefix;
 }

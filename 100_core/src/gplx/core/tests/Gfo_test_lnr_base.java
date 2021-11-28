@@ -17,8 +17,8 @@ package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*;
 public class Gfo_test_lnr_base {
 	private String[] keys;
-	public List_adp Expd() {return expd_list;} private final    List_adp expd_list = List_adp_.New();
-	public List_adp Actl() {return actl_list;} private final    List_adp actl_list = List_adp_.New();
+	public List_adp Expd() {return expd_list;} private final List_adp expd_list = List_adp_.New();
+	public List_adp Actl() {return actl_list;} private final List_adp actl_list = List_adp_.New();
 	public void Clear() {
 		expd_list.Clear();
 		actl_list.Clear();

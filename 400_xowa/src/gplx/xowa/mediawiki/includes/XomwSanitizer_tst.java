@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*; import gplx.xowa.mediawiki.includes.xohtml.*;
 public class XomwSanitizer_tst {
-	private final    XomwSanitizer_fxt fxt = new XomwSanitizer_fxt();
+	private final XomwSanitizer_fxt fxt = new XomwSanitizer_fxt();
 	@Test  public void Normalize__text()                  {fxt.Test__normalize_char_references("abc"                      , "abc");}
 	@Test  public void Normalize__dec()                   {fxt.Test__normalize_char_references("&#08;"                    , "&amp;#08;");}
 	@Test  public void Normalize__dec__invalid()          {fxt.Test__normalize_char_references("&#09;"                    , "&#9;");}
@@ -130,8 +130,8 @@ public class XomwSanitizer_tst {
 	}
 }
 class XomwSanitizer_fxt {
-	private final    XomwSanitizer sanitizer = new XomwSanitizer();
-	private final    Bry_bfr tmp = Bry_bfr_.New();
+	private final XomwSanitizer sanitizer = new XomwSanitizer();
+	private final Bry_bfr tmp = Bry_bfr_.New();
 	public void Test__normalize_char_references(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		sanitizer.normalizeCharReferences(tmp, Bool_.Y, src_bry, 0, src_bry.length);

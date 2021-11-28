@@ -18,15 +18,15 @@ import gplx.core.primitives.*;
 import gplx.xowa.parsers.xndes.*;	// for brys: <nowiki>, <noinclude>, <includeonly>, <onlyinclude>
 public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATTRIBS_REGEX
 	private static final byte Area__invalid = 0, Area__atr_limbo = 1, Area__key = 2, Area__eql_limbo = 3, Area__val_limbo = 4, Area__val_quote = 5, Area__val_naked = 6;
-	private final    Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_a7();		// ASCII:xnde_atrs
-	private final    Mwh_atr_mgr atr_mgr = new Mwh_atr_mgr(16);
-	private final    Bry_bfr key_bfr = Bry_bfr_.New(), val_bfr = Bry_bfr_.New();
+	private final Hash_adp_bry repeated_atrs_hash = Hash_adp_bry.ci_a7();		// ASCII:xnde_atrs
+	private final Mwh_atr_mgr atr_mgr = new Mwh_atr_mgr(16);
+	private final Bry_bfr key_bfr = Bry_bfr_.New(), val_bfr = Bry_bfr_.New();
 	private byte area = Area__atr_limbo;
 	private int atr_bgn = -1, key_bgn = -1, key_end = -1, eql_pos = -1, val_bgn = -1, val_end = -1;
 	private byte qte_byte = Byte_ascii.Null;
 	private boolean key_bfr_on = false, val_bfr_on = false, ws_is_before_val = false, qte_closed = false;
 	private int nde_uid, nde_tid;
-	public Bry_obj_ref Bry_obj() {return bry_ref;} private final    Bry_obj_ref bry_ref = Bry_obj_ref.New_empty();
+	public Bry_obj_ref Bry_obj() {return bry_ref;} private final Bry_obj_ref bry_ref = Bry_obj_ref.New_empty();
 	public int Nde_end_tid() {return nde_end_tid;} private int nde_end_tid;
 	public int Parse(Mwh_atr_wkr wkr, int nde_uid, int nde_tid, byte[] src, int src_bgn, int src_end) {
 		this.nde_uid = nde_uid; this.nde_tid = nde_tid;
@@ -486,7 +486,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 		}
 		return Bry_find_.Not_found;
 	}
-	private static final    Hash_adp_bry xnde_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry xnde_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_bry(Xop_xnde_tag_.Tag__nowiki.Name_bry())
 	.Add_bry_bry(Xop_xnde_tag_.Tag__noinclude.Name_bry())
 	.Add_bry_bry(Xop_xnde_tag_.Tag__includeonly.Name_bry())

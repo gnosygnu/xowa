@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.servers.https; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.servers.*;
 import gplx.core.envs.*;
 public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
-	private final    List_adp msgs = List_adp_.New();
+	private final List_adp msgs = List_adp_.New();
 	private String prv_guid;
 	private long prv_start;
 	private long prv_timeout;
@@ -74,8 +74,8 @@ public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_it
 		return String_.Concat_lines_nl(rv);
 	}
 
-	public byte[] Key() {return BRIDGE_KEY;} private static final    byte[] BRIDGE_KEY = Bry_.new_a7("long_poll");
-        public static final    Http_long_poll_cmd Instance = new Http_long_poll_cmd(); Http_long_poll_cmd() {}
+	public byte[] Key() {return BRIDGE_KEY;} private static final byte[] BRIDGE_KEY = Bry_.new_a7("long_poll");
+        public static final Http_long_poll_cmd Instance = new Http_long_poll_cmd(); Http_long_poll_cmd() {}
 
 	private static final int 
 	  Sleep_interval	= 100

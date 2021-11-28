@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.imaps.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Imap_html__hview__tst {
-	private final    Imap_html__fxt fxt = new Imap_html__fxt();
+	private final Imap_html__fxt fxt = new Imap_html__fxt();
 	@Test public void Basic() {
 		String wtxt = fxt.Basic__wtxt();
 		fxt.Test__hview(wtxt, fxt.Hdump_n_().Basic__html(Bool_.Y));

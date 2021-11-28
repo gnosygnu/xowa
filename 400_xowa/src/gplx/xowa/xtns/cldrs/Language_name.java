@@ -20,14 +20,14 @@ public class Language_name implements gplx.core.brys.Bry_bfr_able {
 		this.name = name;
 		this.note = note;
 	}
-	public byte[] Code() {return code;} private final    byte[] code;
-	public byte[] Name() {return name;} private final    byte[] name;
-	public byte[] Note() {return note;} private final    byte[] note;
+	public byte[] Code() {return code;} private final byte[] code;
+	public byte[] Name() {return name;} private final byte[] name;
+	public byte[] Note() {return note;} private final byte[] note;
 	public void To_bfr(Bry_bfr bfr) {
 		bfr.Add(code).Add_byte_pipe();
 		bfr.Add(name).Add_byte_pipe();
 		bfr.Add(note);
 	}
 
-	public static final    Language_name[] Ary_empty = new Language_name[0];
+	public static final Language_name[] Ary_empty = new Language_name[0];
 }

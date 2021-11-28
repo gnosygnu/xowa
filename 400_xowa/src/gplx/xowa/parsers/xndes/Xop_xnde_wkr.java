@@ -31,7 +31,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (closing_tkn_tid == Xop_tkn_itm_.Tid_lnki_end) Xop_xnde_wkr_.AutoClose_handle_dangling_nde_in_caption(root, tkn);	// PAGE:sr.w:Сићевачка_клисура; DATE:2014-07-03
 		ctx.Msg_log().Add_itm_none(Xop_xnde_log.Dangling_xnde, src, xnde.Src_bgn(), xnde.Name_end());	// NOTE: xnde.Src_bgn to start at <; xnde.Name_end b/c xnde.Src_end is -1
 	}
-	private static final    Btrie_rv trv = new Btrie_rv();
+	private static final Btrie_rv trv = new Btrie_rv();
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (bgn_pos == Xop_parser_.Doc_bgn_bos) bgn_pos = 0;			// do not allow -1 pos
 		if (cur_pos == src_len) return ctx.Lxr_make_txt_(src_len);		// "<" is EOS; don't raise error;
@@ -744,7 +744,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		ctx.Subs_add(root, rv);
 		return rv;
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Bry_escape_lt_slash = Bry_.new_a7("&lt;/")
 	;
 	public static int Find_gt_pos(Xop_ctx ctx, byte[] src, int cur_pos, int src_len) {	// UNUSED

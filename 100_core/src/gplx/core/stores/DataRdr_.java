@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*;
 public class DataRdr_ {
-	public static final    DataRdr Null = new DataRdr_null();
+	public static final DataRdr Null = new DataRdr_null();
 	public static DataRdr as_(Object obj) {return obj instanceof DataRdr ? (DataRdr)obj : null;}
 	public static DataRdr cast(Object obj) {try {return (DataRdr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, DataRdr.class, obj);}}
 

@@ -18,7 +18,7 @@ import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_anch_href_data implements Xoh_itm_parser {
-	private final    Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
 	public void Fail_throws_err_(boolean v) {rdr.Fail_throws_err_(v);}// TEST
 	public Gfh_atr Atr() {return atr;} private Gfh_atr atr;
 	public byte Tid() {return tid;} private byte tid;
@@ -133,8 +133,8 @@ public class Xoh_anch_href_data implements Xoh_itm_parser {
 	, Tid__anch = 2		// EX: href="#A"
 	, Tid__inet = 3		// EX: href="https://a.org/A"
 	;
-	private static final    byte[] Bry__site = Bry_.new_a7("site/"), Bry__wiki = Bry_.new_a7("wiki/");
-	private static final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
+	private static final byte[] Bry__site = Bry_.new_a7("site/"), Bry__wiki = Bry_.new_a7("wiki/");
+	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Bry__wiki, Tid__wiki)
 	.Add_bry_byte(Bry__site, Tid__site)
 	;

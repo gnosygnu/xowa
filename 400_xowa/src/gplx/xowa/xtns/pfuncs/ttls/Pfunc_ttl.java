@@ -49,5 +49,5 @@ public class Pfunc_ttl extends Pf_func_base {
 	public Pfunc_ttl(int id) {this.id = id;}
 	@Override public int Id() {return id;} private int id;
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_ttl(id).Name_(name);}
-	public static final    Pfunc_ttl Instance = new Pfunc_ttl(-1);
+	public static final Pfunc_ttl Instance = new Pfunc_ttl(-1);
 }

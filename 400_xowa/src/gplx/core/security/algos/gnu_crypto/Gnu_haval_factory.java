@@ -48,5 +48,5 @@ public class Gnu_haval_factory implements Hash_algo_factory {
 	, Key__haval128_4 = "haval128,4", Key__haval160_4 = "haval160,4", Key__haval192_4 = "haval192,4", Key__haval224_4 = "haval224,4", Key__haval256_4 = "haval256,4"
 	, Key__haval128_5 = "haval128,5", Key__haval160_5 = "haval160,5", Key__haval192_5 = "haval192,5", Key__haval224_5 = "haval224,5", Key__haval256_5 = "haval256,5"
 	;
-	public static final    Gnu_haval_factory Instance = new Gnu_haval_factory(); Gnu_haval_factory() {}
+	public static final Gnu_haval_factory Instance = new Gnu_haval_factory(); Gnu_haval_factory() {}
 }

@@ -26,7 +26,7 @@ public class IoEngine_xrg_downloadFil {
 	}
 	public String User_agent() {return user_agent;} public IoEngine_xrg_downloadFil User_agent_(String v) {user_agent = v; return this;} private String user_agent;
 	public Gfo_usr_dlg Prog_dlg() {return prog_dlg;} public IoEngine_xrg_downloadFil Prog_dlg_(Gfo_usr_dlg v) {prog_dlg = v; download_fmt.Ctor(prog_dlg); return this;} private Gfo_usr_dlg prog_dlg;
-	public Bry_fmtr Prog_fmtr() {return prog_fmtr;} private final    Bry_fmtr prog_fmtr = Bry_fmtr.new_("~{download_header}: ~{download_read} of ~{download_length} kb;", "download_header", "download_url", "download_read", "download_length");
+	public Bry_fmtr Prog_fmtr() {return prog_fmtr;} private final Bry_fmtr prog_fmtr = Bry_fmtr.new_("~{download_header}: ~{download_read} of ~{download_length} kb;", "download_header", "download_url", "download_read", "download_length");
 	public String Prog_fmt_hdr() {return prog_fmt_hdr;} public IoEngine_xrg_downloadFil Prog_fmt_hdr_(String v) {prog_fmt_hdr = v; return this;} private String prog_fmt_hdr = "";	// NOTE: must init to "", else null ref when building String
 	public boolean Prog_cancel() {return prog_cancel;} public IoEngine_xrg_downloadFil Prog_cancel_y_() {prog_cancel = true; return this;} private volatile boolean prog_cancel;
 	public boolean Prog_running() {return prog_running;} public IoEngine_xrg_downloadFil Prog_running_(boolean v) {prog_running = v; return this;} private boolean prog_running;
@@ -34,7 +34,7 @@ public class IoEngine_xrg_downloadFil {
 	public DateAdp Src_last_modified() {return src_last_modified;} public IoEngine_xrg_downloadFil Src_last_modified_(DateAdp v) {src_last_modified = v; return this;} private DateAdp src_last_modified;
 	public boolean Src_last_modified_query() {return src_last_modified_query;} public IoEngine_xrg_downloadFil Src_last_modified_query_(boolean v) {src_last_modified_query = v; return this;} private boolean src_last_modified_query;
 	public String Trg_engine_key() {return trg_engine_key;} public IoEngine_xrg_downloadFil Trg_engine_key_(String v) {trg_engine_key = v; return this;} private String trg_engine_key = IoEngine_.SysKey;
-	public Io_download_fmt Download_fmt() {return download_fmt;} private final    Io_download_fmt download_fmt = new Io_download_fmt();
+	public Io_download_fmt Download_fmt() {return download_fmt;} private final Io_download_fmt download_fmt = new Io_download_fmt();
 	public boolean Exec() {return IoEnginePool.Instance.Get_by(trg.Info().EngineKey()).DownloadFil(this);}
 	public Io_stream_rdr Exec_as_rdr() {return IoEnginePool.Instance.Get_by(IoEngine_.SysKey).DownloadFil_as_rdr(this);}
 	public boolean Exec_meta_only() {return exec_meta_only;} private boolean exec_meta_only;

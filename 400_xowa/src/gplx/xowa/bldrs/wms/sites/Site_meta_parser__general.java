@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.core.primitives.*; import gplx.langs.jsons.*;
 class Site_meta_parser__general extends Json_parser__list_nde__base {
-	private final    Site_meta_parser__general__kv parser__image = new Site_meta_parser__general__kv("imagelimits", "width", "height");
-	private final    Site_meta_parser__general__lone parser__fallback = new Site_meta_parser__general__lone("fallback", "code");
-	private final    Site_meta_parser__general__kv parser__variants = new Site_meta_parser__general__kv("variants", "code", "name");
+	private final Site_meta_parser__general__kv parser__image = new Site_meta_parser__general__kv("imagelimits", "width", "height");
+	private final Site_meta_parser__general__lone parser__fallback = new Site_meta_parser__general__lone("fallback", "code");
+	private final Site_meta_parser__general__kv parser__variants = new Site_meta_parser__general__kv("variants", "code", "name");
 	private String cur_context;
 	public void Parse(String context, Ordered_hash list, Json_nde nde) {
 		this.cur_context = context + ".general";
@@ -36,7 +36,7 @@ class Site_meta_parser__general extends Json_parser__list_nde__base {
 		}
 	}
 	private static final int Tid__fallback = 1, Tid__variants = 2, Tid__thumblimits = 3, Tid__imagelimits = 4, Tid__imagelimits__width = 5, Tid__imagelimits__height = 6;
-	private static final    Hash_adp_bry complex_props = Hash_adp_bry.cs()
+	private static final Hash_adp_bry complex_props = Hash_adp_bry.cs()
 	.Add_str_int("fallback"		,  Tid__fallback)
 	.Add_str_int("variants"		,  Tid__variants)
 	.Add_str_int("thumblimits"	,  Tid__thumblimits)
@@ -247,7 +247,7 @@ class Site_meta_parser__showhook extends Json_parser__list_nde__base {
 		}
 		list.Add(key, new Site_showhook_itm(key, scribunto, subscribers_bry_ary));
 	}
-	private final    static byte[] Key__scribunto = Bry_.new_a7("scribunto");
+	private final static byte[] Key__scribunto = Bry_.new_a7("scribunto");
 }
 class Site_meta_parser__language extends Json_parser__list_nde__base {
 	private Ordered_hash list;

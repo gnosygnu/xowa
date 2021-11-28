@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 public class Xogui_nde_iter {
-	private final    Xoedit_nde_hash hash;
+	private final Xoedit_nde_hash hash;
 	private int bgn, max;
 	public Xogui_nde_iter(Xoedit_nde_hash hash, int max) {
 		this.hash = hash;

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.xwikis.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
 import org.junit.*; import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm_parser_tst {
-	private final    Xow_xwiki_itm_parser_fxt fxt = new Xow_xwiki_itm_parser_fxt();
+	private final Xow_xwiki_itm_parser_fxt fxt = new Xow_xwiki_itm_parser_fxt();
 	@Test  public void Manual() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "0|a|https://a.org/~{0}|A"
@@ -68,8 +68,8 @@ public class Xow_xwiki_itm_parser_tst {
 	}
 }
 class Xow_xwiki_itm_parser_fxt {
-	private final    Xow_xwiki_itm_parser parser = new Xow_xwiki_itm_parser();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xow_xwiki_itm_parser parser = new Xow_xwiki_itm_parser();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xow_xwiki_itm_parser_fxt() {
 		parser.Init_by_wiki(Xow_domain_itm_.parse(Bry_.new_a7("en.wikipedia.org")));
 	}

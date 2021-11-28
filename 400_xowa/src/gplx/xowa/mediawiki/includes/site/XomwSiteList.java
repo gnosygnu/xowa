@@ -30,7 +30,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	*
 	* @var array Array of integer
 	*/
-	private final    Ordered_hash byInternalId = Ordered_hash_.New();
+	private final Ordered_hash byInternalId = Ordered_hash_.New();
 
 	/**
 	* Global site identifiers pointing to their sites offset value.
@@ -39,7 +39,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	*
 	* @var array Array of String
 	*/
-	private final    Ordered_hash byGlobalId = Ordered_hash_.New();
+	private final Ordered_hash byGlobalId = Ordered_hash_.New();
 
 	/**
 	* Navigational site identifiers alias inter-language prefixes
@@ -49,7 +49,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	*
 	* @var array Array of String
 	*/
-	private final    Ordered_hash byNavigationId = Ordered_hash_.New();
+	private final Ordered_hash byNavigationId = Ordered_hash_.New();
 
 	/**
 	* @see GenericArrayObject::getObjectType

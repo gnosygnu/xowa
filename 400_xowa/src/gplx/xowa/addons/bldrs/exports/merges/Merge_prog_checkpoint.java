@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
 public class Merge_prog_checkpoint {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    Io_url url;
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final Io_url url;
 	private String resume_fil;
 	private int resume_wkr = -1;
 	private int resume_db = -1;

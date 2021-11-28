@@ -39,11 +39,11 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		this.key = key;
 		this.sort = sort;
 	}
-	public int		Id()		{return id;}	private final    int id;
-	public String	Key()		{return key;}	private final    String key;
+	public int		Id()		{return id;}	private final int id;
+	public String	Key()		{return key;}	private final String key;
 	public String	Help()		{return help;}	private String help;
 
-	public int		Sort()		{return sort;}	private final    int sort;
+	public int		Sort()		{return sort;}	private final int sort;
 	public void Load_by_meta(Bry_bfr tmp_bfr, String type, String dflt_str, String html_atrs, String html_cls) {
 		this.type = type;
 		this.dflt = Escape(tmp_bfr, type, dflt_str);

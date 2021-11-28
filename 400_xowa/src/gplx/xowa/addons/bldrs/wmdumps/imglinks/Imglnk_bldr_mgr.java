@@ -18,8 +18,8 @@ import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.files.repos.*;
 class Imglnk_bldr_mgr {
-	private final    Db_conn conn;
-	private final    Xowe_wiki wiki;
+	private final Db_conn conn;
+	private final Xowe_wiki wiki;
 	public Imglnk_tmp_tbl Tmp_tbl() {return tmp_tbl;} private Imglnk_tmp_tbl tmp_tbl;
 	public Imglnk_bldr_mgr(Xowe_wiki wiki) {
 		wiki.Init_assert();

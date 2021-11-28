@@ -43,8 +43,8 @@ public class Wbase_claim_grp_tst {
 	}
 }
 class Wbase_claim_grp_bldr {
-	private final    int pid;
-	private final    List_adp list = List_adp_.New();
+	private final int pid;
+	private final List_adp list = List_adp_.New();
 	public Wbase_claim_grp_bldr(int pid) {
 		this.pid = pid;
 	}

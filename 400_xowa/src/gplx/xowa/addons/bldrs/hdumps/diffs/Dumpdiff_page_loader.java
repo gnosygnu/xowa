@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.hdumps.diffs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.hdumps.*;
 import gplx.dbs.*;
 class Dumpdiff_page_loader {
-	private final    Db_attach_mgr attach_mgr = new Db_attach_mgr();
+	private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
 	private int select_count, cutoff_page_id;
 	public Dumpdiff_page_loader(Xowe_wiki cur_wiki, Xowe_wiki prv_wiki, int select_count) {
 		this.select_count = select_count;

@@ -19,17 +19,17 @@ import gplx.xowa.parsers.htmls.*;
 import gplx.langs.htmls.*; import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.xowa.mediawiki.includes.libs.*;
 public class XomwSanitizer {
-	private final    Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
-	private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();
-	private final    Xomw_regex_escape_invalid regex_clean_url = new Xomw_regex_escape_invalid();
-	private final    Xomw_regex_find_domain regex_find_domain = new Xomw_regex_find_domain();
-	private final    Xomw_regex_ipv6_brack regex_ipv6_brack = new Xomw_regex_ipv6_brack();
-	private final    Bry_tmp tmp_host = new Bry_tmp();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Bry_bfr tmp_bfr_2 = Bry_bfr_.New();
-	private final    Btrie_rv trv = new Btrie_rv();
-	private final    Xomw_regex_url_char_cbk__normalize normalize_cbk = new Xomw_regex_url_char_cbk__normalize();
-	private final    Xomw_regex_url_char_cbk__decode decode_cbk = new Xomw_regex_url_char_cbk__decode();
+	private final Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
+	private final Mwh_atr_parser atr_parser = new Mwh_atr_parser();
+	private final Xomw_regex_escape_invalid regex_clean_url = new Xomw_regex_escape_invalid();
+	private final Xomw_regex_find_domain regex_find_domain = new Xomw_regex_find_domain();
+	private final Xomw_regex_ipv6_brack regex_ipv6_brack = new Xomw_regex_ipv6_brack();
+	private final Bry_tmp tmp_host = new Bry_tmp();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_bfr tmp_bfr_2 = Bry_bfr_.New();
+	private final Btrie_rv trv = new Btrie_rv();
+	private final Xomw_regex_url_char_cbk__normalize normalize_cbk = new Xomw_regex_url_char_cbk__normalize();
+	private final Xomw_regex_url_char_cbk__decode decode_cbk = new Xomw_regex_url_char_cbk__decode();
 
 	private static Xomw_regex_url_char regex_url_char;
 	private static Btrie_slim_mgr invalid_idn_trie;
@@ -1225,7 +1225,7 @@ public class XomwSanitizer {
 		// '/\r\n|[\x20\x0d\x0a\x09]/',
 		.Add_many_str("\r\n", "\r", "\n", "\t")  // NOTE: skipping "x20" b/c replacement will be spaces
 		;
-	private final    Bry_tmp normalizeWhitespaceBry = new Bry_tmp();
+	private final Bry_tmp normalizeWhitespaceBry = new Bry_tmp();
 	public byte[] normalizeWhitespace(byte[] text) {
 		// XO.MW.REGEX
 		//	return preg_replace(
@@ -2097,10 +2097,10 @@ class Xomw_html_ent {
 		this.name = name;
 		this.html = html;
 	}
-	public final    byte type;
-	public final    int code;
-	public final    byte[] name;
-	public final    byte[] html;
+	public final byte type;
+	public final int code;
+	public final byte[] name;
+	public final byte[] html;
 	public static final byte Type__null = 0, Type__alias = 1, Type__char = 2, Type__entity = 3;
 }
 class Xomw_regex_find_domain {
@@ -2200,7 +2200,7 @@ class Xomw_regex_ipv6_brack {
 	public int host_end;
 	public int segs_bgn;
 	public int segs_end;
-	private final    byte[] 
+	private final byte[]
 	  Bry__host_bgn = Bry_.new_a7("//%5B")
 	, Bry__host_end = Bry_.new_a7("%5D")
 	;
@@ -2379,7 +2379,7 @@ class Xomw_regex_url_char_cbk__decode implements Xomw_regex_url_char_cbk {
 		}
 		return true;
 	}
-	private static final    byte[] Utf8_replacement_char = Bry_.New_by_ints(255, 253); // 0xfffd 
+	private static final byte[] Utf8_replacement_char = Bry_.New_by_ints(255, 253); // 0xfffd
 }
 class Xomw_regex_url_char {
 	// Regular expression to match various types of character references in

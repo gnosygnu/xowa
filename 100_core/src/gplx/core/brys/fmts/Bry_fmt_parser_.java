@@ -87,5 +87,5 @@ public class Bry_fmt_parser_ {
 			pos = rhs_pos;	// NOTE: auto-increment done at top of loop
 		}
 		return (byte[][])list.To_ary(byte[].class);
-	}	private static final    byte[] Bry_arg_lhs = Bry_.new_a7("~{");
+	}	private static final byte[] Bry_arg_lhs = Bry_.new_a7("~{");
 }

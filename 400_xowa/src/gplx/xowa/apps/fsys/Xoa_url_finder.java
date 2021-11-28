@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.fsys; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.users.*;
 public class Xoa_url_finder {
-	private final    Xoa_fsys_mgr app_fsys_mgr;
+	private final Xoa_fsys_mgr app_fsys_mgr;
 	private Xou_fsys_mgr usr_fsys_mgr;
 	public Xoa_url_finder(Xoa_fsys_mgr app_fsys_mgr) {
 		this.app_fsys_mgr = app_fsys_mgr;

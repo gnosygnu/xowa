@@ -25,5 +25,5 @@ public Object New_Checksum(String key) {
 	public static String // REF: /source/jonelo/jacksum/JacksumAPI.java
 	  Key__tiger_128 = "tiger-128", Key__tiger_160 = "tiger-160", Key__tiger_192= "tiger-192", Key__gost = "gost"
 	;
-	public static final    Jacksum_factory Instance = new Jacksum_factory(); Jacksum_factory() {}
+	public static final Jacksum_factory Instance = new Jacksum_factory(); Jacksum_factory() {}
 }

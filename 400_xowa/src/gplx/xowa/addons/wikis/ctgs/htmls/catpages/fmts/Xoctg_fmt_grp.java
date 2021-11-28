@@ -18,10 +18,10 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
 public class Xoctg_fmt_grp {	// subc|page|file
-	private final    byte tid;
-	private final    byte[] div_id, url_arg_bgn, url_arg_end;
-	private final    byte[] msg_label_key, msg_stats_key;
-	private final    Xoctg_fmt_ltr itms_fmt;
+	private final byte tid;
+	private final byte[] div_id, url_arg_bgn, url_arg_end;
+	private final byte[] msg_label_key, msg_stats_key;
+	private final Xoctg_fmt_ltr itms_fmt;
 	Xoctg_fmt_grp(byte tid, Xoctg_fmt_itm_base itm_fmt, byte[] msg_label_key, byte[] msg_stats_key, byte[] url_arg_bgn, byte[] url_arg_end, byte[] div_id) {
 		this.tid = tid;
 		this.itm_fmt = itm_fmt;
@@ -29,7 +29,7 @@ public class Xoctg_fmt_grp {	// subc|page|file
 		this.msg_label_key = msg_label_key; this.msg_stats_key = msg_stats_key;
 		this.url_arg_bgn = url_arg_bgn; this.url_arg_end = url_arg_end; this.div_id = div_id;
 	}
-	public Xoctg_fmt_itm_base Itm_fmt() {return itm_fmt;} private final    Xoctg_fmt_itm_base itm_fmt;
+	public Xoctg_fmt_itm_base Itm_fmt() {return itm_fmt;} private final Xoctg_fmt_itm_base itm_fmt;
 	public void Write_catpage_grp(Bry_bfr bfr, Xow_wiki wiki, Xol_lang_itm lang, Uca_ltr_extractor ltr_extractor, Xoctg_catpage_ctg dom_ctg, int grp_max) {	// TEST:
 		Xoctg_catpage_grp dom_grp = dom_ctg.Grp_by_tid(tid);
 		int count = dom_grp.Count_all();
@@ -92,7 +92,7 @@ public class Xoctg_fmt_grp {	// subc|page|file
 		else
 			Fmt__nav__href.Bld_many(bfr, nav_href, ttl.Full_url(), nav_text);
 	}
-	private static final    Bry_fmt 
+	private static final Bry_fmt
 	  Fmt__nav__href = Bry_fmt.New("\n(<a href=\"~{nav_href}\" class=\"xowa_nav\" title=\"~{nav_title}\">~{nav_text}</a>)")
 	, Fmt__nav__text = Bry_fmt.New("\n(~{nav_text})")
 	, Fmt__ctg = Bry_fmt.Auto_nl_skip_last

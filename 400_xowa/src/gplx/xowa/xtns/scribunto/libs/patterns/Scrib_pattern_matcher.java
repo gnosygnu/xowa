@@ -17,7 +17,7 @@ package gplx.xowa.xtns.scribunto.libs.patterns; import gplx.*; import gplx.xowa.
 import gplx.objects.strings.unicodes.*;
 import gplx.langs.regxs.*;
 public abstract class Scrib_pattern_matcher {
-	protected final    Scrib_regx_converter regx_converter = new Scrib_regx_converter();
+	protected final Scrib_regx_converter regx_converter = new Scrib_regx_converter();
 	public Keyval[] Capt_ary() {return regx_converter.Capt_ary();}
 	public abstract Regx_match Match_one(Ustring src_ucs, String pat_str, int bgn_as_codes, boolean replace);
 	public abstract String Gsub(Scrib_lib_ustring_gsub_mgr gsub_mgr, Ustring src_ucs, String pat_str, int bgn_as_codes);

@@ -68,12 +68,12 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 			return doc.Qid();
 		} catch (Exception e) {Err_.Noop(e); return Qid_null;}
 	}
-	public static final    byte[] Qid_null = Bry_.Empty;	// NOTE: return Empty, not null else Bry_fmtr will fail
+	public static final byte[] Qid_null = Bry_.Empty;	// NOTE: return Empty, not null else Bry_fmtr will fail
 }
 class Xoa_ttl_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoa_ttl lhs = (Xoa_ttl)lhsObj, rhs = (Xoa_ttl)rhsObj;
 		return Bry_.Compare(lhs.Raw(), rhs.Raw());
 	}
-	public static final    Xoa_ttl_sorter Instance = new Xoa_ttl_sorter(); Xoa_ttl_sorter() {}
+	public static final Xoa_ttl_sorter Instance = new Xoa_ttl_sorter(); Xoa_ttl_sorter() {}
 }

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
 import gplx.core.net.*; import gplx.core.threads.*; import gplx.core.primitives.*;
 class Http_server_socket implements Gfo_invk {
-	private final    Http_server_mgr server_mgr;
+	private final Http_server_mgr server_mgr;
 	private Server_socket_adp server_socket;
 	public Http_server_socket(Http_server_mgr server_mgr) {this.server_mgr = server_mgr;}
 	public boolean Canceled() {return canceled;}

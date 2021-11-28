@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.dbs.*;
 class Orig_fil_tbl implements Rls_able {
-	private final    Db_conn conn;
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final Db_conn conn;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private String tbl_name = "orig_fil";
 	private String fld_uid, fld_name, fld_ext_id, fld_w, fld_h, fld_dir_url;		
 	private Db_stmt stmt_insert, stmt_select;

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xoh_toc_wkr__lvl__basic__tst {
-	@Before public void init() {fxt.Clear();} private final    Xoh_toc_wkr__lvl__fxt fxt = new Xoh_toc_wkr__lvl__fxt();
+	@Before public void init() {fxt.Clear();} private final Xoh_toc_wkr__lvl__fxt fxt = new Xoh_toc_wkr__lvl__fxt();
 	@Test  public void D1_S0_S0() {
 		fxt.Test__calc(2, fxt.Make(1, 1, Int_ary_.New(1)));
 		fxt.Test__calc(2, fxt.Make(2, 1, Int_ary_.New(2)));
@@ -47,8 +47,8 @@ public class Xoh_toc_wkr__lvl__basic__tst {
 	}
 }
 class Xoh_toc_wkr__lvl__fxt {
-	private final    Xoh_toc_wkr__lvl wkr = new Xoh_toc_wkr__lvl();
-	private final    Xoh_toc_itm actl = new Xoh_toc_itm();
+	private final Xoh_toc_wkr__lvl wkr = new Xoh_toc_wkr__lvl();
+	private final Xoh_toc_itm actl = new Xoh_toc_itm();
 	public void Clear() {wkr.Clear();}
 	public Xoh_toc_itm Make(int uid, int lvl, int[] path) {
 		Xoh_toc_itm rv = new Xoh_toc_itm();

@@ -19,8 +19,8 @@ import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.tests.*;
 import gplx.xowa.langs.msgs.*;
 class Imap_html__fxt {
-	private final    Xoh_make_fxt make_fxt = new Xoh_make_fxt();
-	private final    Xop_fxt parser_fxt;
+	private final Xoh_make_fxt make_fxt = new Xoh_make_fxt();
+	private final Xop_fxt parser_fxt;
 	private boolean hdump;
 	public Imap_html__fxt() {
 		this.parser_fxt = new Xop_fxt();

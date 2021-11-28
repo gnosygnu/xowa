@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; 
 import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public class Xoh_img_cls_data implements Bfr_arg_clearable {
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	private byte[] src;
 	public byte Cls_tid() {return cls_tid;} private byte cls_tid;
 	public int Other_bgn() {return other_bgn;} private int other_bgn;

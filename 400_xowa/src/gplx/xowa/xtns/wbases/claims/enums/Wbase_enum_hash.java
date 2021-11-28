@@ -15,14 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.claims.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*;
 public class Wbase_enum_hash {
-	private final    Wbase_enum_itm[] ary; private final    int ary_len;
-	private final    Hash_adp_bry hash_by_bry = Hash_adp_bry.cs();
+	private final Wbase_enum_itm[] ary; private final int ary_len;
+	private final Hash_adp_bry hash_by_bry = Hash_adp_bry.cs();
 	public Wbase_enum_hash(String name, int ary_len) {
 		this.name = name;
 		this.ary = new Wbase_enum_itm[ary_len];
 		this.ary_len = ary_len;
 	}
-	public String Name() {return name;} private final    String name;
+	public String Name() {return name;} private final String name;
 	public int Len() {return ary_len;}
 	public Wbase_enum_itm Add(byte tid, String key)	{return Add(new Wbase_enum_itm(tid, key));}
 	public Wbase_enum_itm Add(Wbase_enum_itm rv) {

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import org.junit.*; import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.xowa.files.repos.*;
 public class Xof_bin_wkr__http_wmf__tst {
-	private final    Xof_bin_wkr__http_wmf__fxt fxt = new Xof_bin_wkr__http_wmf__fxt();
+	private final Xof_bin_wkr__http_wmf__fxt fxt = new Xof_bin_wkr__http_wmf__fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
 		fxt.Init__Http("mem/http/commons.wikimedia.org/thumb/7/70/A.png/220px-A.png", "test_data");
@@ -40,10 +40,10 @@ public class Xof_bin_wkr__http_wmf__tst {
 	}
 }
 class Xof_bin_wkr__http_wmf__fxt {
-	private final    Xof_bin_wkr__http_wmf wkr;
-	private final    Io_download_mgr__memory download_mgr;
+	private final Xof_bin_wkr__http_wmf wkr;
+	private final Io_download_mgr__memory download_mgr;
 	private Io_stream_rdr get_as_rdr__rdr;
-	public Xof_fsdb_itm_fxt Fsdb_itm_mkr() {return fsdb_itm_mkr;} private final    Xof_fsdb_itm_fxt fsdb_itm_mkr = new Xof_fsdb_itm_fxt();
+	public Xof_fsdb_itm_fxt Fsdb_itm_mkr() {return fsdb_itm_mkr;} private final Xof_fsdb_itm_fxt fsdb_itm_mkr = new Xof_fsdb_itm_fxt();
 	public Xof_bin_wkr__http_wmf__fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.progs.rates; import gplx.*; import gplx.core.*; import gplx.core.progs.*;
 import gplx.core.lists.rings.*;
 public class Gfo_rate_list {
-	private final    Ring__long ring;
+	private final Ring__long ring;
 	public Gfo_rate_list(int size) {
 		this.ring = new Ring__long(size * 2);	// *2 to store both data and time
 	}

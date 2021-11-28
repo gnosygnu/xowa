@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 public class Xomw_param_map {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
-	public final    Xomw_params_frame          Frame   = new Xomw_params_frame();
-	public final    Xomw_params_handler        Handler = new Xomw_params_handler();
-	public final    Xomw_params_horizAlign     HorizAlign = new Xomw_params_horizAlign();
-	public final    Xomw_params_vertAlign      VertAlign = new Xomw_params_vertAlign();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
+	public final Xomw_params_frame          Frame   = new Xomw_params_frame();
+	public final Xomw_params_handler        Handler = new Xomw_params_handler();
+	public final Xomw_params_horizAlign     HorizAlign = new Xomw_params_horizAlign();
+	public final Xomw_params_vertAlign      VertAlign = new Xomw_params_vertAlign();
 	public int Len() {return hash.Len();}
 	public Xomw_param_itm Get_at(int i) {return (Xomw_param_itm)hash.Get_at(i);}
 	public Xomw_param_itm Get_by(byte[] name) {

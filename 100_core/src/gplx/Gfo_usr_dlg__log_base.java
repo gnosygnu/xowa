@@ -16,12 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.core.brys.fmtrs.*;
 public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
-	private final    Object thread_lock = new Object();
+	private final Object thread_lock = new Object();
 	private int archive_dirs_max = 8;
 	private Io_url log_dir, err_fil;
-	private final    Ordered_hash queued_list = Ordered_hash_.New();
-	private final    Bry_fmtr fmtr = Bry_fmtr.New__tmp();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final Ordered_hash queued_list = Ordered_hash_.New();
+	private final Bry_fmtr fmtr = Bry_fmtr.New__tmp();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public boolean Queue_enabled() {return queue_enabled;} public void Queue_enabled_(boolean v) {queue_enabled = v; if (!v) this.Flush();} private boolean queue_enabled;
 	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} private boolean enabled = true;
 	public Io_url Session_dir() {return session_dir;} private Io_url session_dir;
@@ -115,10 +115,10 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	public static final    Gfo_usr_dlg__log_base Instance = new Gfo_usr_dlg__log_base();
+	public static final Gfo_usr_dlg__log_base Instance = new Gfo_usr_dlg__log_base();
 }
 class Usr_log_fil {
-	private final    String_bldr sb = String_bldr_.new_();
+	private final String_bldr sb = String_bldr_.new_();
 	public Usr_log_fil(Io_url url) {
 		this.url = url;
 	}

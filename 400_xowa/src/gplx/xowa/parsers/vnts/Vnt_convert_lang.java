@@ -18,9 +18,9 @@ import gplx.core.btries.*; import gplx.core.primitives.*; import gplx.dbs.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*;
 import gplx.xowa.parsers.htmls.*;
 public class Vnt_convert_lang {
-	private final    Xol_convert_mgr convert_mgr; private final    Xol_vnt_regy vnt_regy;
-	private final    Vnt_convert_rule converter_rule; private final    Vnt_html_doc_wkr html_convert_wkr; private final    Mwh_doc_parser doc_parser = new Mwh_doc_parser();
-	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(255), tmp_frame_bfr = Bry_bfr_.New_w_size(255), tmp_convert_bfr = Bry_bfr_.New_w_size(255);
+	private final Xol_convert_mgr convert_mgr; private final Xol_vnt_regy vnt_regy;
+	private final Vnt_convert_rule converter_rule; private final Vnt_html_doc_wkr html_convert_wkr; private final Mwh_doc_parser doc_parser = new Mwh_doc_parser();
+	private final Bry_bfr bfr = Bry_bfr_.New_w_size(255), tmp_frame_bfr = Bry_bfr_.New_w_size(255), tmp_convert_bfr = Bry_bfr_.New_w_size(255);
 	private byte[] src; private int src_len; private int pos;
 	private Vnt_log_mgr log_mgr; private int tag_bgn, tag_end;
 	public Vnt_convert_lang(Xol_convert_mgr convert_mgr, Xol_vnt_regy vnt_regy) {
@@ -178,8 +178,8 @@ public class Vnt_convert_lang {
 		}
 	}
 	private static final byte Tid__curly_bgn = 1, Tid__curly_end = 2;
-	private static final    byte[] Bry__curly_bgn = Bry_.new_a7("-{"), Bry__curly_end = Bry_.new_a7("}-");
-	private static final    Btrie_fast_mgr trie = Btrie_fast_mgr.cs()
+	private static final byte[] Bry__curly_bgn = Bry_.new_a7("-{"), Bry__curly_end = Bry_.new_a7("}-");
+	private static final Btrie_fast_mgr trie = Btrie_fast_mgr.cs()
 	.Add_bry_byte(Bry__curly_bgn, Tid__curly_bgn)
 	.Add_bry_byte(Bry__curly_end, Tid__curly_end);
 	private static final int max_depth = 32; 

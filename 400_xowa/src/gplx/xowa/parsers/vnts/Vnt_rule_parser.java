@@ -17,8 +17,8 @@ package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.btries.*;
 import gplx.xowa.langs.vnts.*;
 class Vnt_rule_parser implements gplx.core.brys.Bry_split_wkr {
-	private final    Btrie_slim_mgr vnt_trie = Btrie_slim_mgr.ci_a7();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_slim_mgr vnt_trie = Btrie_slim_mgr.ci_a7();
+	private final Btrie_rv trv = new Btrie_rv();
 	private Vnt_rule_undi_mgr undis; private Vnt_rule_bidi_mgr bidis;
 	private int src_end; private byte[] rule_raw;
 	public byte[] Raw() {return rule_raw;}
@@ -92,5 +92,5 @@ class Vnt_rule_parser implements gplx.core.brys.Bry_split_wkr {
 		if (bfr.Len_gt_0()) bfr.Add_byte_nl();
 		bidis.To_bry__dbg(bfr);
 	}
-	private static final    byte[] Bry__bidi_dlm = Bry_.new_a7("=>");
+	private static final byte[] Bry__bidi_dlm = Bry_.new_a7("=>");
 }

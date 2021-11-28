@@ -15,5 +15,5 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
 public class GfuiInvkCmd_ {
-	public static final    String Invk_sync = "Sync";
+	public static final String Invk_sync = "Sync";
 }

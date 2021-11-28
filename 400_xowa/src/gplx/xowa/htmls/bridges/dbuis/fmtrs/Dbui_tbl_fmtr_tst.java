@@ -17,7 +17,7 @@ package gplx.xowa.htmls.bridges.dbuis.fmtrs; import gplx.*; import gplx.xowa.*; 
 import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 import org.junit.*;
 public class Dbui_tbl_fmtr_tst {
-	@Before public void init() {fxt.Clear();} private final    Dbui_tbl_fmtr_fxt fxt = new Dbui_tbl_fmtr_fxt();
+	@Before public void init() {fxt.Clear();} private final Dbui_tbl_fmtr_fxt fxt = new Dbui_tbl_fmtr_fxt();
 	@Test public void Basic() {
 //			fxt.Test_write
 //			( fxt.Make_tbl()
@@ -26,8 +26,8 @@ public class Dbui_tbl_fmtr_tst {
 	}
 }
 class Dbui_tbl_fmtr_fxt {
-	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(255);
-	private final    Dbui_tbl_fmtr tbl_fmtr = new Dbui_tbl_fmtr();
+	private final Bry_bfr bfr = Bry_bfr_.New_w_size(255);
+	private final Dbui_tbl_fmtr tbl_fmtr = new Dbui_tbl_fmtr();
 	public void Clear() {}
 	public Dbui_tbl_itm Make_tbl() {
 		return null;

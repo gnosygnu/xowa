@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Cldr_name_loader_tst {
-	private final    Cldr_name_loader_fxt fxt = new Cldr_name_loader_fxt();
+	private final Cldr_name_loader_fxt fxt = new Cldr_name_loader_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Load_file_is_null() {
 		fxt.Init__file("CldrNamesEn.json", "{}");

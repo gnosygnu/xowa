@@ -37,5 +37,5 @@ public class Xop_uniq_lxr implements Xop_lxr {
 		ctx.Subs_add(root, uniq_tkn);
 		return rhs_end;
 	}
-        public static final    Xop_uniq_lxr Instance = new Xop_uniq_lxr(); Xop_uniq_lxr() {}
+        public static final Xop_uniq_lxr Instance = new Xop_uniq_lxr(); Xop_uniq_lxr() {}
 }

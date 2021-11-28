@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import org.junit.*;
 public class Xow_url_parser__xcmd_tst {
-	private final    Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
+	private final Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
 	@Test public void Basic() {
 		tstr.Exec__parse("xowa-cmd:xowa.app.version").Test__tid(Xoa_url_.Tid_xcmd).Test__page("xowa.app.version");
 	}

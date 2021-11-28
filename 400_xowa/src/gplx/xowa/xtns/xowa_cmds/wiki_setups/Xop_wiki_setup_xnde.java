@@ -45,5 +45,5 @@ public class Xop_wiki_setup_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public byte[] Xtn_html()		{throw Err_.new_unimplemented_w_msg("xowa_wiki_setup.xtn_html should not be called");}
 
 	private static final byte Xatr__language = 1, Xatr__wikis = 2;
-	private static final    Hash_adp_bry xatr_hash = Hash_adp_bry.ci_a7().Add_str_byte("language", Xatr__language).Add_str_byte("wikis", Xatr__wikis);
+	private static final Hash_adp_bry xatr_hash = Hash_adp_bry.ci_a7().Add_str_byte("language", Xatr__language).Add_str_byte("wikis", Xatr__wikis);
 }

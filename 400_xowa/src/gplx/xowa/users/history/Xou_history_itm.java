@@ -72,6 +72,6 @@ public class Xou_history_itm {
 			.Add(wiki)						.Add_byte(Bry_.Dlm_fld)
 			.Add(page)						.Add_byte(Bry_.Dlm_row);
 	}
-	public static byte[] key_(byte[] wiki, byte[] page) {return Bry_.Add(wiki, Key_dlm, page);} private static final    byte[] Key_dlm = Byte_ascii.Pipe_bry;
+	public static byte[] key_(byte[] wiki, byte[] page) {return Bry_.Add(wiki, Key_dlm, page);} private static final byte[] Key_dlm = Byte_ascii.Pipe_bry;
 	public static final byte Fld_key = 0, Fld_wiki = 1, Fld_page = 2, Fld_view_count = 3, Fld_view_bgn = 4, Fld_view_end = 5;
 }

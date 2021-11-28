@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class References_nde_rare_tst {
-	@Before public void init() {fxt.Clear_ref_mgr(); fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Clear_ref_mgr(); fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test public void Recursive() {	// PURPOSE: handle recursive situations; EX: ja.w:Kソリューション ; ja.w:Template:cite web。; DATE:2014-03-05
 		fxt.Init_page_create("Template:Recursive", "<ref>{{Recursive}}</ref>");

@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.qrys.bats; import gplx.*; import gplx.dbs.*; import gplx.dbs.qrys.*;
 import gplx.dbs.engines.*;
 public class Db_batch_grp {
-	public final    Ordered_hash hash = Ordered_hash_.New();
+	public final Ordered_hash hash = Ordered_hash_.New();
 	public Db_batch_grp(byte tid) {this.tid = tid;}
-	public byte Tid() {return tid;} private final    byte tid;
+	public byte Tid() {return tid;} private final byte tid;
 	public int Len()								{return hash.Len();}
 	public Db_batch_itm Get_at(int idx)				{return (Db_batch_itm)hash.Get_at(idx); }
 	public void Add(Db_batch_itm itm)				{hash.Add(itm.Key(), itm);}

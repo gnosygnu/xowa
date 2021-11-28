@@ -19,7 +19,7 @@ public class Xoh_page_mgr implements Gfo_invk {
 	private boolean font_enabled = false;
 	private String font_name = "Arial";
 	private byte[] font_css_bry = Bry_.Empty, custom_script = Bry_.Empty;
-	private final    Bry_fmt font_css_fmt = Bry_fmt.Auto("body {font-family: ~{font_name}; font-size: ~{font_size}px;}");
+	private final Bry_fmt font_css_fmt = Bry_fmt.Auto("body {font-family: ~{font_name}; font-size: ~{font_size}px;}");
 	public float Font_size() {return font_size;} private float font_size = Font_size_default;
 	private void Font_css_bry_() {
 		font_css_bry = font_css_fmt.Bld_many_to_bry(Bry_bfr_.New(), font_name, font_size);
@@ -31,8 +31,8 @@ public class Xoh_page_mgr implements Gfo_invk {
 			wtr.Write_css_style_itm(custom_script);
 	}
 
-	public Bry_fmt Content_code_fmt() {return content_code_fmt;} private final    Bry_fmt content_code_fmt = Bry_fmt.Auto("<pre>~{page_text}</pre>");
-	public Xoh_subpages_bldr Subpages_bldr() {return subpages_bldr;} private final    Xoh_subpages_bldr subpages_bldr = new Xoh_subpages_bldr();
+	public Bry_fmt Content_code_fmt() {return content_code_fmt;} private final Bry_fmt content_code_fmt = Bry_fmt.Auto("<pre>~{page_text}</pre>");
+	public Xoh_subpages_bldr Subpages_bldr() {return subpages_bldr;} private final Xoh_subpages_bldr subpages_bldr = new Xoh_subpages_bldr();
 	public void Init_by_app(Xoa_app app) {
 		app.Cfg().Bind_many_app(this, Cfg__font_enabled, Cfg__font_name, Cfg__font_size, Cfg__font_format, Cfg__custom_script, Cfg__content_code_fmt);
 	}

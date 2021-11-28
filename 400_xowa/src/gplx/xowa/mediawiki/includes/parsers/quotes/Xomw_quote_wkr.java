@@ -18,7 +18,7 @@ import gplx.xowa.parsers.htmls.*;
 import gplx.core.primitives.*;
 public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private Bry_bfr tmp;
-	private final    Int_list apos_pos_ary = new Int_list(32);
+	private final Int_list apos_pos_ary = new Int_list(32);
 	public Xomw_quote_wkr(Bry_bfr tmp) {
 		this.tmp = tmp;
 	}
@@ -260,7 +260,7 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 	, State__ib = 4
 	, State__both = 5
 	;
-	private static final    byte[] Wtxt__apos = Bry_.new_a7("''");
+	private static final byte[] Wtxt__apos = Bry_.new_a7("''");
 //		/**
 //		* Replace single quotes with HTML markup
 //		* @private

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
 import gplx.core.primitives.*; import gplx.core.lists.hashs.*;
 public class Xomp_ns_ord_mgr {
-	private final    Hash_adp__int hash = new Hash_adp__int();
+	private final Hash_adp__int hash = new Hash_adp__int();
 	public Xomp_ns_ord_mgr(int[] ns_id_ary) {
 		int len = ns_id_ary.length;
 		for (int i = 0; i < len; ++i) {

@@ -18,11 +18,11 @@ import gplx.core.btries.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*;
 public class Pfunc_expr_shunter {
-	private final    Btrie_fast_mgr trie = expression_(); private final    Btrie_rv trv = new Btrie_rv();
-	private final    Val_stack val_stack = new Val_stack();
-	private final    Func_tkn_stack prc_stack = new Func_tkn_stack();
-	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
-	public Bry_bfr Err() {return err_bfr;} private final    Bry_bfr err_bfr = Bry_bfr_.New();
+	private final Btrie_fast_mgr trie = expression_(); private final Btrie_rv trv = new Btrie_rv();
+	private final Val_stack val_stack = new Val_stack();
+	private final Func_tkn_stack prc_stack = new Func_tkn_stack();
+	private final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
+	public Bry_bfr Err() {return err_bfr;} private final Bry_bfr err_bfr = Bry_bfr_.New();
 	public Decimal_adp Err_set(Xop_ctx ctx, int msgId) {return Err_set(ctx, msgId, Bry_.Empty);}
 	public Decimal_adp Err_set(Xop_ctx ctx, int msg_id, byte[] arg) {
 		byte[] msg_val = ctx.Wiki().Msg_mgr().Val_by_id(msg_id);
@@ -164,7 +164,7 @@ public class Pfunc_expr_shunter {
 	}
 
 
-	public static final    Decimal_adp Null_rslt = null;
+	public static final Decimal_adp Null_rslt = null;
 	private static Btrie_fast_mgr expression_() {	// changed to instance; DATE:2016-07-20
 		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; math and expressions
 		Trie_add(rv, new Ws_tkn(Byte_ascii.Space));
@@ -224,5 +224,5 @@ public class Pfunc_expr_shunter {
 		return rv;
 	}
 	private static void Trie_add(Btrie_fast_mgr trie, Expr_tkn tkn) {trie.Add(tkn.Val_ary(), tkn);}
-	private static final    byte[] Err_bgn_ary = Bry_.new_a7("<strong class=\"error\">"), Err_end_ary = Bry_.new_a7("</strong>");
+	private static final byte[] Err_bgn_ary = Bry_.new_a7("<strong class=\"error\">"), Err_end_ary = Bry_.new_a7("</strong>");
 }

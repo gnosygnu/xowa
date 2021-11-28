@@ -62,7 +62,7 @@ public class GfuiForm_menu implements Gfo_invk {
 		form.TaskbarParkingWindowFix(owner.OwnerWin());	// else ContextMenu shows up as WindowsFormsParkingWindow
 		form.QuitMode_(GfuiQuitMode.Suspend);
 	}
-	public static final    String Msg_menu_Visible_toggle = "menu.visible_toggle";
+	public static final String Msg_menu_Visible_toggle = "menu.visible_toggle";
 
 
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -70,7 +70,7 @@ public class GfuiForm_menu implements Gfo_invk {
 		else if	(ctx.Match(k, Visible_toggle_cmd))			Visible_toggle(m);
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String Visible_hide_cmd = "Visible_hide", Visible_toggle_cmd = "Visible_toggle";
+	}	public static final String Visible_hide_cmd = "Visible_hide", Visible_toggle_cmd = "Visible_toggle";
 	public static GfuiWin new_(GfuiElem owner, GfuiElem sub, SizeAdp size) {
 		GfuiForm_menu rv = new GfuiForm_menu();
 		rv.ctor_GfuiForm_menu(owner, sub, size);

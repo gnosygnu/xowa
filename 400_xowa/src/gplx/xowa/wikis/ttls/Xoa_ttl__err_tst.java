@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*;
 public class Xoa_ttl__err_tst {
-	@Before public void init() {fxt.Clear();} private final    Xoa_ttl_fxt fxt = new Xoa_ttl_fxt();
+	@Before public void init() {fxt.Clear();} private final Xoa_ttl_fxt fxt = new Xoa_ttl_fxt();
 	@Test  public void Invalid__angle()			{fxt.Parse("<!--a").Test__null();}
 	@Test  public void Invalid__brace()			{fxt.Parse("[[a]]").Test__null();}
 	@Test  public void Invalid__curly()			{fxt.Parse("{{a}}").Test__null();}

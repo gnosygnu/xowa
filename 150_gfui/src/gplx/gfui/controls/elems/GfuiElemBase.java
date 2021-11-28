@@ -310,7 +310,7 @@ public class GfuiElemBase implements GfuiElem {
 //			}
 		}
 		return this;
-	}	public static final    String Invk_OwnerWin_cmd = "ownerWin";
+	}	public static final String Invk_OwnerWin_cmd = "ownerWin";
 
 		public void Invoke(Gfo_invk_cmd cmd) {
 		cmd.Exec();

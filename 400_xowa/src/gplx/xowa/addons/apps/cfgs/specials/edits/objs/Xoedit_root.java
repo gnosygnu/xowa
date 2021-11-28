@@ -17,10 +17,10 @@ package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gp
 import gplx.langs.mustaches.*;
 import gplx.core.gfobjs.*;
 public class Xoedit_root implements Mustache_doc_itm {
-	private final    Xoedit_nav_mgr nav_mgr;
-	private final    Xoedit_grp[] grps;
-	private final    String page_help;
-	private final    boolean app_is_drd;
+	private final Xoedit_nav_mgr nav_mgr;
+	private final Xoedit_grp[] grps;
+	private final String page_help;
+	private final boolean app_is_drd;
 	public Xoedit_root(Xoedit_nav_mgr nav_mgr, String page_help, Xoedit_grp[] grps) {
 		this.nav_mgr = nav_mgr;
 		this.page_help = page_help;

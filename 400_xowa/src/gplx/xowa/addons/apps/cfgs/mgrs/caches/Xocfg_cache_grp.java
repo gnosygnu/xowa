@@ -15,15 +15,15 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
 public class Xocfg_cache_grp {
-	private final    Hash_adp vals = Hash_adp_.New();
-	private final    Ordered_hash subs = Ordered_hash_.New();
+	private final Hash_adp vals = Hash_adp_.New();
+	private final Ordered_hash subs = Ordered_hash_.New();
 	public Xocfg_cache_grp(String key, String dflt, String data_type) {
 		this.key = key;
 		this.dflt = dflt;
 		this.data_type = data_type;
 	}
-	public String Key() {return key;} private final    String key;
-	public String Data_type() {return data_type;} private final    String data_type;
+	public String Key() {return key;} private final String key;
+	public String Data_type() {return data_type;} private final String data_type;
 	public String Dflt() {return dflt;} private String dflt;
 	public void Dflt_(String v) {this.dflt = v;}
 	public String Get(String ctx) {

@@ -35,5 +35,5 @@ public class Mem_kit extends Gfui_kit_base {
 	@Override protected GxwElem New_btn_impl() {return factory.control_();}
 	@Override protected GxwElem New_combo_impl() {return factory.comboBox_();}
 	@Override public ImageAdp New_img_load(Io_url url) {return ImageAdp_null.Instance;}
-	public static final    Mem_kit Instance = new Mem_kit(); Mem_kit() {}
+	public static final Mem_kit Instance = new Mem_kit(); Mem_kit() {}
 }

@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.htmls.css.bldrs; import gplx.*; import gplx.xowa.
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
 public class Xob_css_cmd implements Xob_cmd {
-	private final    Xob_bldr bldr; private final    Xowe_wiki wiki; private final    Gfo_usr_dlg usr_dlg;
+	private final Xob_bldr bldr; private final Xowe_wiki wiki; private final Gfo_usr_dlg usr_dlg;
 	private Io_url css_dir; private String css_key;
 	public Xob_css_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki; this.usr_dlg = wiki.Appe().Usr_dlg();}
 	public String Cmd_key() {return Xob_cmd_keys.Key_text_css;}

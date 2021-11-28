@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.tocs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 public class Xoh_toc_mgr {
-	private final    Ordered_hash itms = Ordered_hash_.New_bry();
-	private final    Xoh_toc_wkr__lvl lvl_wkr = new Xoh_toc_wkr__lvl();
-	private final    Xoh_toc_wkr__txt txt_wkr = new Xoh_toc_wkr__txt();
-	private final    Xoh_toc_htmlr htmlr = new Xoh_toc_htmlr();
+	private final Ordered_hash itms = Ordered_hash_.New_bry();
+	private final Xoh_toc_wkr__lvl lvl_wkr = new Xoh_toc_wkr__lvl();
+	private final Xoh_toc_wkr__txt txt_wkr = new Xoh_toc_wkr__txt();
+	private final Xoh_toc_htmlr htmlr = new Xoh_toc_htmlr();
 	public boolean Exists() {return exists && Enabled;} private boolean exists;
 	public void Exists_y_() {exists = true;}
 	public int Toc_bgn() {return toc_bgn;} private int toc_bgn;

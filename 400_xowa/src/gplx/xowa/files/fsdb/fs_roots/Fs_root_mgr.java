@@ -17,11 +17,11 @@ package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import
 import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.fsdb.meta.*;	
 class Fs_root_mgr {
-	private final    Xowe_wiki wiki;
-	private final    Fs_root_wkr wkr = new Fs_root_wkr();
-	private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
-	private final    Xof_img_size img_size = new Xof_img_size();
-	private final    String_obj_ref tmp_resize_result = String_obj_ref.null_();
+	private final Xowe_wiki wiki;
+	private final Fs_root_wkr wkr = new Fs_root_wkr();
+	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
+	private final Xof_img_size img_size = new Xof_img_size();
+	private final String_obj_ref tmp_resize_result = String_obj_ref.null_();
 	private Xof_repo_itm repo;
 	private Io_url orig_dir;
 	public Fs_root_mgr(Xowe_wiki wiki) {

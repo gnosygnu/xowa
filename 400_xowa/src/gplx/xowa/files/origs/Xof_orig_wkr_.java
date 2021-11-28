@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.apps.wms.apis.*; import gplx.xowa.files.fsdb.*;
 public class Xof_orig_wkr_ {
-	public static final    Xof_orig_wkr[] Ary_empty = new Xof_orig_wkr[0];
+	public static final Xof_orig_wkr[] Ary_empty = new Xof_orig_wkr[0];
 	public static void Find_by_list(Xof_orig_wkr wkr, Ordered_hash rv, List_adp itms) {
 		int len = itms.Count();
 		for (int i = 0; i < len; ++i) {

@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
 import gplx.langs.regxs.*;
 class Scrib_regx_grp_mgr {
-	private final    List_adp capt_list = List_adp_.New();
-	private final    List_adp full_list = List_adp_.New();
-	private final    List_adp open_list = List_adp_.New();
-	private final    Hash_adp idx_list = Hash_adp_.New();
+	private final List_adp capt_list = List_adp_.New();
+	private final List_adp full_list = List_adp_.New();
+	private final List_adp open_list = List_adp_.New();
+	private final Hash_adp idx_list = Hash_adp_.New();
 	private int fake_count;
 	public void Clear() {
 		open_list.Clear();
@@ -88,7 +88,7 @@ class Scrib_regx_grp_itm {
 		this.is_empty_capture = is_empty_capture;
 		this.idx = idx;
 	}
-	public boolean Is_fake() {return is_fake;} private final    boolean is_fake;
-	public boolean Is_empty_capture() {return is_empty_capture;} private final    boolean is_empty_capture;
-	public int Idx() {return idx;} private final    int idx;
+	public boolean Is_fake() {return is_fake;} private final boolean is_fake;
+	public boolean Is_empty_capture() {return is_empty_capture;} private final boolean is_empty_capture;
+	public int Idx() {return idx;} private final int idx;
 }

@@ -25,8 +25,8 @@ public class SnakFormatterFormat {
 	, Tid__html_verbose            =  5
 	, Tid__html_verbose_preview    =  6
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("snak_format", 6);
-	public static final    Wbase_enum_itm
+	public static final Wbase_enum_hash Reg = new Wbase_enum_hash("snak_format", 6);
+	public static final Wbase_enum_itm
 	  Itm__plain                   = Reg.Add(Tid__plain                , "text/plain")
 	, Itm__wiki                    = Reg.Add(Tid__wiki                 , "text/x-wiki")
 	, Itm__html                    = Reg.Add(Tid__html                 , "text/html")

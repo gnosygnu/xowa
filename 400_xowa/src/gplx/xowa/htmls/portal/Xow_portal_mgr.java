@@ -52,8 +52,8 @@ import gplx.xowa.wikis.nss.Xow_ns_mgr;
 import gplx.xowa.wikis.pages.Xopg_view_mode_;
 public class Xow_portal_mgr implements Gfo_invk {
 	private Xowe_wiki wiki; private boolean lang_is_rtl; private Xoapi_toggle_itm toggle_itm;
-	private final    Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
-	private final    Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
+	private final Vnt_mnu_grp_fmtr vnt_menu_fmtr = new Vnt_mnu_grp_fmtr();
+	private final Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 	private boolean sidebar_enabled;
 	private boolean indicators_pagesource_enabled = false;
 	private byte[]
@@ -206,7 +206,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 			);
 
 		return tmp_bfr.To_bry_and_rls();
-	}	public static final    byte[] Cls_selected_y = Bry_.new_a7("selected"), Cls_new = Bry_.new_a7("new"), Cls_display_none = Bry_.new_a7("xowa_display_none");
+	}	public static final byte[] Cls_selected_y = Bry_.new_a7("selected"), Cls_new = Bry_.new_a7("new"), Cls_display_none = Bry_.new_a7("xowa_display_none");
 	public byte[] Div_logo_bry(boolean nightmode) {return nightmode ? div_logo_night : div_logo_day;} private byte[] div_logo_day = Bry_.Empty, div_logo_night = Bry_.Empty;
 	public byte[] Div_home_bry() {return sidebar_enabled ? div_home_bry : Bry_.Empty;} private byte[] div_home_bry = Bry_.Empty;
 	public byte[] Div_sync_bry(Bry_bfr tmp_bfr, boolean manual_enabled, Xow_wiki wiki, Xoa_page page) {
@@ -225,7 +225,7 @@ public class Xow_portal_mgr implements Gfo_invk {
 		div_wikis_fmtr.Bld_bfr_many(tmp_bfr, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr());
 		return tmp_bfr.To_bry_and_rls();
 	}
-	private final    Bry_fmtr 
+	private final Bry_fmtr
 	  div_personal_fmtr = Bry_fmtr.new_("~{portal_personal_subj_href};~{portal_personal_subj_text};~{portal_personal_talk_cls};~{portal_personal_talk_href};~{portal_personal_talk_cls};~{portal_indicators_pagesource}", "portal_personal_subj_href", "portal_personal_subj_text", "portal_personal_subj_cls", "portal_personal_talk_href", "portal_personal_talk_cls", "portal_indicators_pagesource")
 	, div_ns_fmtr = Bry_fmtr.new_("~{portal_ns_subj_href};~{portal_ns_subj_cls};~{portal_ns_talk_href};~{portal_ns_talk_cls};~{portal_div_vnts}", "portal_ns_subj_href", "portal_ns_subj_cls", "portal_ns_talk_href", "portal_ns_talk_cls", "portal_div_vnts")
 	, div_view_fmtr = Bry_fmtr.new_("", "portal_view_read_cls", "portal_view_edit_cls", "portal_view_html_cls", "search_text", "portal_view_read_href", "portal_view_edit_href", "portal_view_html_href", "sitename")
@@ -259,11 +259,11 @@ public class Xow_portal_mgr implements Gfo_invk {
 	private static final String Invk_div_personal_ = "div_personal_", Invk_div_view_ = "div_view_", Invk_div_ns_ = "div_ns_", Invk_div_home_ = "div_home_"
 	, Invk_div_sync_ = "div_sync_", Invk_div_wikis_ = "div_wikis_";
 	public static final String Invk_div_logo_ = "div_logo_";
-	private static final    byte[] Missing_ns_cls_hide = Bry_.new_a7("xowa_display_none");
+	private static final byte[] Missing_ns_cls_hide = Bry_.new_a7("xowa_display_none");
 
 	// NOTE: emulate recent change but support backward compatibility; ISSUE#:394; REF.MW:https://phabricator.wikimedia.org/source/Vector/browse/master/includes/templates/index.mustache DATE:2019-03-20
 	// TODO: use "vector-jumptosearch", but need to update language.gfs files
-	private static final    Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_(String_.Concat
+	private static final Bry_fmtr Div_jump_to_fmtr = Bry_fmtr.new_(String_.Concat
 	( "\n    <div id=\"jump-to-nav\" class=\"mw-jump\">" // NOTE:class=mw-jump is for backward compatibility
 	, "\n    <a class=\"mw-jump-link\" href=\"#mw-head\">~{jumpto}~{jumptonavigation}</a>"
 	, "\n    <a class=\"mw-jump-link\" href=\"#p-search\">~{jumpto}~{jumptosearch}</a>"

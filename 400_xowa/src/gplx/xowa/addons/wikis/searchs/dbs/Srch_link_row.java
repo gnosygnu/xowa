@@ -20,9 +20,9 @@ public class Srch_link_row {
 		this.Page_id = page_id;
 		this.Link_score = link_score;
 	}
-	public final    int Word_id;
-	public final    int Page_id;
-	public final    int Link_score;
+	public final int Word_id;
+	public final int Page_id;
+	public final int Link_score;
 	public int Trg_db_id;
 
 	public int Db_row_size() {return Db_row_size_fixed;}

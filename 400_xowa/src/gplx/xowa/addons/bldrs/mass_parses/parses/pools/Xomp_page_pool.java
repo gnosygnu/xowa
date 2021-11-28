@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.parses.pools; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 public class Xomp_page_pool {
-	private final    Object thread_lock = new Object();
-	private final    Xomp_page_pool_loader loader;
-	private final    int num_pages_per_wkr;
+	private final Object thread_lock = new Object();
+	private final Xomp_page_pool_loader loader;
+	private final int num_pages_per_wkr;
 	private List_adp pool = List_adp_.New(); private int pool_idx = 0, pool_len = 0;
 	public Xomp_page_pool(Xomp_page_pool_loader loader, int num_pages_per_wkr) {
 		this.loader = loader; this.num_pages_per_wkr = num_pages_per_wkr;

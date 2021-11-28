@@ -17,7 +17,7 @@ package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.*; import gplx.xowa.langs.cases.*; import gplx.xowa.users.data.*;
 import gplx.xowa.wikis.*;
 public class Xoav_wiki_mgr implements Xoa_wiki_mgr {
-	private final    Xoav_app app; private final    Ordered_hash hash = Ordered_hash_.New_bry();		
+	private final Xoav_app app; private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xoav_wiki_mgr(Xoav_app app, Xol_case_mgr case_mgr) {this.app = app;}
 	public int			Count()								{return hash.Count();}
 	public boolean		Has(byte[] key)						{return hash.Has(key);}

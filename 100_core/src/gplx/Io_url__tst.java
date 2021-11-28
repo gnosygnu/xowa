@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.envs.*;
 public class Io_url__tst {
-	@Before public void init() {fxt.Clear();} private final    Io_url__fxt fxt = new Io_url__fxt();
+	@Before public void init() {fxt.Clear();} private final Io_url__fxt fxt = new Io_url__fxt();
 	@Test  public void Basic__lnx()	{fxt.Test__New__http_or_null(Bool_.N, "file:///C:/a.txt", "C:/a.txt");}
 	@Test  public void Basic__wnt()	{fxt.Test__New__http_or_null(Bool_.Y, "file:///C:/a.txt", "C:\\a.txt");}
 	@Test  public void Null()			{fxt.Test__New__http_or_null(Bool_.N, "C:/a.txt", null);}

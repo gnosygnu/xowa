@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.xohtml; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 public class Xomw_atr_mgr {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public int                 Len()                    {return hash.Len();}
 	public Xomw_atr_itm        Get_at(int i)            {return (Xomw_atr_itm)hash.Get_at(i);}
 	public Xomw_atr_itm        Get_by_or_null(byte[] k) {return (Xomw_atr_itm)hash.Get_by(k);}

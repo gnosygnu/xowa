@@ -75,7 +75,7 @@ public class Xomath_latex_bldr {
 		if (!pass)
 			app.Usr_dlg().Warn_many("", "dvi_to_png.fail", "fail: dvi_to_png: error=~{0} latex=~{1}", dvi_to_png_cmd.Rslt_out(), tex_doc);
 	}
-	private static final    Bry_fmt fmt__latex_doc = Bry_fmt.Auto(Bry_.new_a7(String_.Concat_lines_nl_skip_last
+	private static final Bry_fmt fmt__latex_doc = Bry_fmt.Auto(Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( "\\documentclass{article}"
 	, "\\usepackage{amsmath}"
 	, "\\usepackage{amsfonts}"

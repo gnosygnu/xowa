@@ -32,5 +32,5 @@ public class Lst_pfunc_lst extends Pf_func_base {
 		Lst_pfunc_lst_.Sect_include(bfr, itm.Sec_mgr(), itm.Itm_src(), sect_bgn, sect_end);
 	}
 
-	public static final    Lst_pfunc_lst Prime = new Lst_pfunc_lst(); Lst_pfunc_lst() {}
+	public static final Lst_pfunc_lst Prime = new Lst_pfunc_lst(); Lst_pfunc_lst() {}
 }

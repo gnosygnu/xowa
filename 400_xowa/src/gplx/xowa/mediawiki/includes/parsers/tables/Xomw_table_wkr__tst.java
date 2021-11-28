@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers.tables; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import org.junit.*;
 public class Xomw_table_wkr__tst {
-	private final    Xomw_table_wkr__fxt fxt = new Xomw_table_wkr__fxt();
+	private final Xomw_table_wkr__fxt fxt = new Xomw_table_wkr__fxt();
 	@Test public void Basic() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{|"
@@ -115,9 +115,9 @@ public class Xomw_table_wkr__tst {
 	}
 }
 class Xomw_table_wkr__fxt {
-	private final    XomwParserBfr parser_bfr = new XomwParserBfr();
-	private final    XomwParserCtx pctx = new XomwParserCtx();
-	private final    Xomw_table_wkr wkr;
+	private final XomwParserBfr parser_bfr = new XomwParserBfr();
+	private final XomwParserCtx pctx = new XomwParserCtx();
+	private final Xomw_table_wkr wkr;
 	public Xomw_table_wkr__fxt() {
 		XomwParser parser = new XomwParser(XomwEnv_fxt.NewTest());
 		this.wkr = new Xomw_table_wkr(Bry_bfr_.New(), parser.Sanitizer(), parser.Strip_state());

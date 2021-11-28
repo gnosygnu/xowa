@@ -20,7 +20,7 @@ import gplx.objects.strings.unicodes.*;
 import gplx.core.primitives.*;
 import gplx.objects.strings.bfrs.*;
 public class XophpString_ implements XophpCallbackOwner {
-	public static final    String False = null;
+	public static final String False = null;
 	public static boolean is_true (String s) {return s != null;} // handles code like "if ($var)" where var is an Object;
 	public static boolean is_false(String s) {return s == null;}
 	public static boolean is_null(String s) {return s == null;}
@@ -288,7 +288,7 @@ public class XophpString_ implements XophpCallbackOwner {
 	public static int strlen(byte[] src) {return src.length;}
 
 	// REF.PHP: https://www.php.net/manual/en/function.rtrim.php
-	private static final    Hash_adp trim_ws_hash = Hash_adp_.New().Add_many_as_key_and_val
+	private static final Hash_adp trim_ws_hash = Hash_adp_.New().Add_many_as_key_and_val
 		( Int_obj_ref.New(Byte_ascii.Space)
 		, Int_obj_ref.New(Byte_ascii.Tab)
 		, Int_obj_ref.New(Byte_ascii.Nl)

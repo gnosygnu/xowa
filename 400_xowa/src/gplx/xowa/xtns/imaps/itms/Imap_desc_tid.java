@@ -17,7 +17,7 @@ package gplx.xowa.xtns.imaps.itms; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Imap_desc_tid {
 	public static final byte Tid_tr = 0, Tid_br = 1, Tid_bl = 2, Tid_tl = 3, Tid_none = 4, Tid_null = 5;
-	public static final    byte[] 
+	public static final byte[]
 	  Key_tr		= Bry_.new_a7("top-right")
 	, Key_br		= Bry_.new_a7("bottom-right")
 	, Key_bl		= Bry_.new_a7("bottom-left")

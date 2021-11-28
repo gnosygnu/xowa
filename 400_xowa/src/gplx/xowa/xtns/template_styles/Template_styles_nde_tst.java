@@ -21,7 +21,7 @@ import gplx.xowa.Xop_fxt;
 import org.junit.Before;
 import org.junit.Test;
 public class Template_styles_nde_tst {
-	private final    Template_styles_nde_fxt fxt = new Template_styles_nde_fxt();
+	private final Template_styles_nde_fxt fxt = new Template_styles_nde_fxt();
 	@Before public void init() {
 		fxt.Reset();
 	}
@@ -148,7 +148,7 @@ public class Template_styles_nde_tst {
 	}
 }
 class Template_styles_nde_fxt {
-	private final    Xop_fxt parser_fxt = new Xop_fxt();
+	private final Xop_fxt parser_fxt = new Xop_fxt();
 	public Xop_fxt Parser_fxt() {return parser_fxt;}
 	public void Reset() {
 		parser_fxt.Reset();

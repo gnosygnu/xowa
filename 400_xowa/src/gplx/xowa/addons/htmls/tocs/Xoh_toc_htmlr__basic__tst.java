@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xoh_toc_htmlr__basic__tst {
-	@Before public void init() {fxt.Clear();} private final    Xoh_toc_htmlr__basic__fxt fxt = new Xoh_toc_htmlr__basic__fxt();
+	@Before public void init() {fxt.Clear();} private final Xoh_toc_htmlr__basic__fxt fxt = new Xoh_toc_htmlr__basic__fxt();
 	@Test  public void D1_S0_S0() {
 		fxt.Init__add(2, "a");
 		fxt.Init__add(2, "b");
@@ -160,8 +160,8 @@ public class Xoh_toc_htmlr__basic__tst {
 	}
 }
 class Xoh_toc_htmlr__basic__fxt {
-	private final    Xoh_toc_mgr wtr = new Xoh_toc_mgr();
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Xoh_toc_mgr wtr = new Xoh_toc_mgr();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public void Clear() {wtr.Clear();}
 	public void Init__add(int hdr_num, String hdr_txt) {wtr.Add(hdr_num, Bry_.new_u8(hdr_txt));}
 	public void Init__init_page(String toc_title, boolean page_banner) {wtr.Init(gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface_.Noop, Xoa_url.Test(), Bry_.new_u8(toc_title));}

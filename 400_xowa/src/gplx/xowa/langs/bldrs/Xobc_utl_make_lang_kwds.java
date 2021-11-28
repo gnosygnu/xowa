@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.parsers.*;
 public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
-	private final    Xoa_lang_mgr lang_mgr;
+	private final Xoa_lang_mgr lang_mgr;
 	public Xobc_utl_make_lang_kwds(Xoa_lang_mgr lang_mgr) {this.lang_mgr = lang_mgr;}		
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_keep_trailing_colon))	Parse_keep_trailing_colon(m.ReadBry("langs"), m.ReadBry("text"));

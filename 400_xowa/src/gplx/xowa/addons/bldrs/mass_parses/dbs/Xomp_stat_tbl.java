@@ -19,8 +19,8 @@ import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.wikis.pages.*;
 import gplx.xowa.parsers.logs.stats.*;
 public class Xomp_stat_tbl implements Rls_able {
-	private static final String tbl_name = "xomp_stats"; private static final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private static final    String
+	private static final String tbl_name = "xomp_stats"; private static final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final String
 	  fld_page_id = flds.Add_int_pkey("page_id"), fld_wkr_uid = flds.Add_int("wkr_uid")
 	, fld_wtxt_len = flds.Add_int("wtxt_len"), fld_html_len = flds.Add_int("html_len"), fld_zip_len = flds.Add_int("zip_len")
 	, fld_page_time = flds.Add_long("page_time"), fld_tidy_time = flds.Add_long("tidy_time"), fld_fulltext_time = flds.Add_long("fulltext_time")
@@ -30,7 +30,7 @@ public class Xomp_stat_tbl implements Rls_able {
 	, fld_math_count = flds.Add_int("math_count"), fld_imap_count = flds.Add_int("imap_count"), fld_hiero_count = flds.Add_int("hiero_count")
 	, fld_gallery_count = flds.Add_int("gallery_count"), fld_gallery_packed_count = flds.Add_int("gallery_packed_count")
 	;		
-	private final    Db_conn conn; private Db_stmt stmt_insert;
+	private final Db_conn conn; private Db_stmt stmt_insert;
 	public Xomp_stat_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.Create_tbl();

@@ -67,5 +67,5 @@ class Lst_pfunc_lsth_ {
 		}
 		return -1;
 	}
-	private static final    byte[] Bry__hdr_end = Bry_.new_a7("=\n");
+	private static final byte[] Bry__hdr_end = Bry_.new_a7("=\n");
 }

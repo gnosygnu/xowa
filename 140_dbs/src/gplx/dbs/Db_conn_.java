@@ -15,5 +15,5 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs; import gplx.*;
 public class Db_conn_ {
-	public static final    Db_conn Noop = new Db_conn(gplx.dbs.engines.noops.Noop_engine.Instance);
+	public static final Db_conn Noop = new Db_conn(gplx.dbs.engines.noops.Noop_engine.Instance);
 }

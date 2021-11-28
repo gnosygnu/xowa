@@ -24,14 +24,14 @@ NOTE: naive implementation of PHP parser; intended only for parsing Messages**.p
 public class Php_evaluator implements Php_tkn_wkr {
 	private byte mode = Mode_key_bgn, next_tid = 0, next_mode = 0;
 	private Php_line_assign cur_line; private Php_itm_ary cur_ary; private Php_key cur_kv_key;
-	private final    List_adp frame_stack = List_adp_.New();
-	private final    Php_quote_parser quote_parser = new Php_quote_parser();
-	private final    Gfo_msg_log msg_log;
+	private final List_adp frame_stack = List_adp_.New();
+	private final Php_quote_parser quote_parser = new Php_quote_parser();
+	private final Gfo_msg_log msg_log;
 	public Php_evaluator(Gfo_msg_log msg_log) {
 		this.msg_log = msg_log;
 	}
 	public void Init(Php_ctx ctx) {src = ctx.Src(); frame_stack.Clear();} private byte[] src;
-	public List_adp List() {return lines;} private final    List_adp lines = List_adp_.New();
+	public List_adp List() {return lines;} private final List_adp lines = List_adp_.New();
 	public Gfo_msg_log Msg_log() {return msg_log;}
 
 	public boolean Comments_for_kv() {return comments_for_kv;} public Php_evaluator Comments_for_kv_() {comments_for_kv = true; return this;} private boolean comments_for_kv;
@@ -277,7 +277,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 	public void Msg_many(byte[] src, int bgn, int end, Gfo_msg_itm itm, Object... args) {
 		msg_log.Add_itm_many(itm, src, bgn, end, args);
 	}
-	public static final    Gfo_msg_itm Expecting_itm_failed = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "expecting_itm_failed", "expecting_itm ~{0} but got ~{1} instead");
+	public static final Gfo_msg_itm Expecting_itm_failed = Gfo_msg_itm_.new_warn_(Php_parser.Log_nde, "expecting_itm_failed", "expecting_itm ~{0} but got ~{1} instead");
 	private static final byte Mode_key_bgn = 1, Mode_key_end = 2, Mode_expect = 3, Mode_suspend = 4, Mode_val = 5, Mode_ary_subs = 6, Mode_ary_dlm = 7, Mode_ary_term = 8, Mode_brack_itm = 9;		
 }
 class Php_scanner_frame {
@@ -286,6 +286,6 @@ class Php_scanner_frame {
 	public void Rls() {ary = null;}
 }
 class Php_parser_interrupt {
-	public static final    Php_parser_interrupt Char = new Php_parser_interrupt(); 
+	public static final Php_parser_interrupt Char = new Php_parser_interrupt();
 }
 

@@ -34,7 +34,7 @@ public class Xow_special_meta_ {
 	, Ttl__diag					= "XowaDiag"
 	, Ttl__error				= "XowaError"
 	;
-	public static final    Xow_special_meta
+	public static final Xow_special_meta
 	  Itm__all_pages			= new Xow_special_meta(Src__mw		, Ttl__all_pages)
 	, Itm__random				= new Xow_special_meta(Src__mw		, Ttl__random)
 	, Itm__random_root_page		= new Xow_special_meta(Src__mw		, Ttl__random_root_page)

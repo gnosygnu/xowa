@@ -22,8 +22,8 @@ import gplx.xowa.addons.apps.cfgs.*;
 import gplx.xowa.addons.wikis.fulltexts.indexers.specials.*;
 import gplx.xowa.addons.wikis.fulltexts.indexers.bldrs.*;
 class Xofulltext_indexer_svc implements Gfo_invk {
-	private final    Xoa_app app;
-	private final    Xog_cbk_trg cbk_trg = Xog_cbk_trg.New_by_page(Xofulltext_indexer_special.Prototype.Special__meta().Ttl_bry());
+	private final Xoa_app app;
+	private final Xog_cbk_trg cbk_trg = Xog_cbk_trg.New_by_page(Xofulltext_indexer_special.Prototype.Special__meta().Ttl_bry());
 	public Xofulltext_indexer_svc(Xoa_app app) {
 		this.app = app;
 	}

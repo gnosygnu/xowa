@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*;
 public class XomwParser_internalParse_tst {
-//		private final    XomwParser_fxt fxt = new XomwParser_fxt();
+//		private final XomwParser_fxt fxt = new XomwParser_fxt();
 	@Test public void Basic() {
 //			fxt.Test__internalParse(String_.Concat_lines_nl_skip_last
 //			( "{{A}}"

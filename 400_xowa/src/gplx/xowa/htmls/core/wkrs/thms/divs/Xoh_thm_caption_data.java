@@ -29,7 +29,7 @@ public class Xoh_thm_caption_data {
 	public int Capt_3_end() {return capt_3_end;} private int capt_3_end;
 	public boolean Capt_3_exists() {return capt_3_end > capt_3_bgn;}
 	public boolean Xowa_alt_text_exists() {return xowa_alt_text_exists;} private boolean xowa_alt_text_exists;
-	public Xoh_thm_magnify_data Magnify_data() {return magnify_data;} private final    Xoh_thm_magnify_data magnify_data = new Xoh_thm_magnify_data();
+	public Xoh_thm_magnify_data Magnify_data() {return magnify_data;} private final Xoh_thm_magnify_data magnify_data = new Xoh_thm_magnify_data();
 	public void Clear() {
 		this.capt_2_is_tidy = this.xowa_alt_text_exists = false;
 		this.src_bgn = src_end = capt_1_bgn = capt_1_end = capt_2_bgn = capt_2_end = capt_3_bgn = capt_3_end = -1;
@@ -77,5 +77,5 @@ public class Xoh_thm_caption_data {
 		}
 	}
 	public void Capt_3_(int bgn, int end) {this.capt_3_bgn = bgn; this.capt_3_end = end;}
-	public static final    byte[] Bry__div_1_tail_bgn = Bry_.new_a7("\n</div>");
+	public static final byte[] Bry__div_1_tail_bgn = Bry_.new_a7("\n</div>");
 }

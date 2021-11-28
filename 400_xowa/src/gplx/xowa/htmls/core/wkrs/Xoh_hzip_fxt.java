@@ -17,11 +17,11 @@ package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.files.caches.*;
 public class Xoh_hzip_fxt {
-	private final    Xowe_wiki wiki;
-	private final    Xop_fxt parser_fxt = new Xop_fxt();
-	private final    Xoh_hzip_bfr bfr = Xoh_hzip_bfr.New_txt(32);
-	private final    Xoh_hzip_mgr hzip_mgr;
-	private final    Xoh_page hpg = new Xoh_page();
+	private final Xowe_wiki wiki;
+	private final Xop_fxt parser_fxt = new Xop_fxt();
+	private final Xoh_hzip_bfr bfr = Xoh_hzip_bfr.New_txt(32);
+	private final Xoh_hzip_mgr hzip_mgr;
+	private final Xoh_page hpg = new Xoh_page();
 	private boolean mode_is_b256;
 	public Xoh_hzip_fxt() {
 		this.wiki = parser_fxt.Wiki();

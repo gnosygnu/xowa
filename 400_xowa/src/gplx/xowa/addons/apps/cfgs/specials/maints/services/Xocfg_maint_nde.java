@@ -23,11 +23,11 @@ abstract class Xocfg_maint_nde implements gplx.core.brys.Bry_bfr_able {
 		this.help = help;
 	}
 	public abstract boolean Type_is_grp();
-	public String Owner() {return owner;} private final    String owner;
-	public int Id() {return id;} private final    int id;
-	public String Key() {return key;} private final    String key;
-	public String Name() {return name;} private final    String name;
-	public String Help() {return help;} private final    String help;
+	public String Owner() {return owner;} private final String owner;
+	public int Id() {return id;} private final int id;
+	public String Key() {return key;} private final String key;
+	public String Name() {return name;} private final String name;
+	public String Help() {return help;} private final String help;
 	public void To_bfr(Bry_bfr bfr) {
 		bfr.Add_str_u8_fmt("{0}|{1}|{2}|{3}|{4}", owner, this.Type_is_grp(), key, name, help);
 		To_bfr_hook(bfr);
@@ -47,11 +47,11 @@ class Xocfg_maint_itm extends Xocfg_maint_nde {	public Xocfg_maint_itm(String ow
 		this.html_cls = html_cls;
 	}
 	@Override public boolean Type_is_grp() {return false;}
-	public String Scope() {return scope;} private final    String scope;
-	public String Type() {return type;} private final    String type;
-	public String Dflt() {return dflt;} private final    String dflt;
-	public String Html_atrs() {return html_atrs;} private final    String html_atrs;
-	public String Html_cls() {return html_cls;} private final    String html_cls;
+	public String Scope() {return scope;} private final String scope;
+	public String Type() {return type;} private final String type;
+	public String Dflt() {return dflt;} private final String dflt;
+	public String Html_atrs() {return html_atrs;} private final String html_atrs;
+	public String Html_cls() {return html_cls;} private final String html_cls;
 	@Override protected void To_bfr_hook(Bry_bfr bfr) {
 		bfr.Add_str_u8_fmt("|{0}|{1}|{2}|{3}|{4}", scope, type, dflt, html_atrs, html_cls);
 	}

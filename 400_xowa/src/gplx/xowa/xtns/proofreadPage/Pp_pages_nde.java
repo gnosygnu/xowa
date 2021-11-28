@@ -142,7 +142,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			rv = Bld_wikitext_for_header(full_bfr, index_page, rv);
 		}
 		return rv;
-	}	private static final    byte[] Toc_bry = Bry_.new_a7("toc");
+	}	private static final byte[] Toc_bry = Bry_.new_a7("toc");
 	private byte[] Make_lnki(Bry_bfr full_bfr, byte[] index_page_src, Xop_lnki_tkn lnki) {
 		byte[] caption = Get_caption(full_bfr, index_page_src, lnki);
 		full_bfr.Add(Xop_tkn_.Lnki_bgn);
@@ -441,7 +441,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	, Xatr_toc_prv		= 11
 	, Xatr_toc_nxt		= 12
 	;
-	private static final    byte[] 
+	private static final byte[]
 	  Bry_tmpl			= Bry_.new_a7("{{:MediaWiki:Proofreadpage_header_template")
 	, Bry_value			= Bry_.new_a7("|value=")
 	, Bry_toc_cur		= Bry_.new_a7("|current=")
@@ -450,7 +450,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	, Bry_page_bgn		= Bry_.new_a7("|from=")
 	, Bry_page_end		= Bry_.new_a7("|to=")
 	;
-	public static final    Xoa_ttl[] Ttls_null = null;
+	public static final Xoa_ttl[] Ttls_null = null;
 }	
 /*
 NOTE:page_regy

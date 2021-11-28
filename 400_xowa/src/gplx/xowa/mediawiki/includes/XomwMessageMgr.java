@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*;
 import gplx.xowa.mediawiki.languages.*;
 public class XomwMessageMgr {
-	private final    Hash_adp hash = Hash_adp_.New();
+	private final Hash_adp hash = Hash_adp_.New();
 	public void Old_add(String key, String val, XomwLanguage language) {
 		hash.Add(key, new XomwMessageOld(Bry_.new_u8(val), language));
 	}

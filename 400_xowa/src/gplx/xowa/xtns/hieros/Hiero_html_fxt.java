@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.tests.*;
 class Hiero_html_fxt {
-	private final    Hiero_html_mgr_fxt hiero_fxt = new Hiero_html_mgr_fxt(new Xop_fxt());
-	private final    Xoh_make_fxt make_fxt = new Xoh_make_fxt();
-	private final    Xop_fxt parser_fxt;
+	private final Hiero_html_mgr_fxt hiero_fxt = new Hiero_html_mgr_fxt(new Xop_fxt());
+	private final Xoh_make_fxt make_fxt = new Xoh_make_fxt();
+	private final Xop_fxt parser_fxt;
 	private String hdump_atr;
 	public Hiero_html_fxt() {
 		this.parser_fxt = hiero_fxt.Fxt();

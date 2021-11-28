@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.registrys.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.registrys.*;
 import gplx.langs.mustaches.*;
 class Xow_list_doc implements Mustache_doc_itm {
-	private final    byte[] import_root;
-	private final    Xow_list_doc_wiki[] subs;
+	private final byte[] import_root;
+	private final Xow_list_doc_wiki[] subs;
 	public Xow_list_doc(byte[] import_root, Xow_list_doc_wiki[] subs) {this.import_root = import_root; this.subs = subs;}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "import_root"))	bfr.Add_bry(import_root);
@@ -29,8 +29,8 @@ class Xow_list_doc implements Mustache_doc_itm {
 	}
 }
 class Xow_list_doc_wiki implements Mustache_doc_itm {
-	private final    byte[] domain;
-	private final    String date;
+	private final byte[] domain;
+	private final String date;
 	public Xow_list_doc_wiki(byte[] domain, String date) {
 		this.domain = domain; this.date = date;
 	}

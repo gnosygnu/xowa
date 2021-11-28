@@ -21,9 +21,9 @@ public class Xob_ns_file_itm {
 		this.db_file_tid = db_file_tid; this.file_name = file_name; this.ns_ids = ns_ids;
 		this.nth_db_id = Nth_db_id_null; this.nth_db_idx = 1;			
 	}
-	public byte		Db_file_tid() {return db_file_tid;} private final    byte db_file_tid;
-	public String	File_name() {return file_name;} private final    String file_name;
-	public int[]	Ns_ids() {return ns_ids;} private final    int[] ns_ids;
+	public byte		Db_file_tid() {return db_file_tid;} private final byte db_file_tid;
+	public String	File_name() {return file_name;} private final String file_name;
+	public int[]	Ns_ids() {return ns_ids;} private final int[] ns_ids;
 	public int		Nth_db_id() {return nth_db_id;} public void Nth_db_id_(int v) {nth_db_id = v;} private int nth_db_id;
 	public int		Nth_db_idx() {return nth_db_idx;} private int nth_db_idx;
 	public String Make_file_name() {								// EX: en.wikipedia.org-text-ns.000-001.xowa

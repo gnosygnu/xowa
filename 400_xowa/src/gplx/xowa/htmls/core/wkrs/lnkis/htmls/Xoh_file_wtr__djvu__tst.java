@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
 import org.junit.*; import gplx.xowa.files.*;
 public class Xoh_file_wtr__djvu__tst {
-	@Before public void init() {fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Djvu() {// ISSUE#:440 TODO
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.djvu|thumb|page=1]]", String_.Concat_lines_nl_skip_last

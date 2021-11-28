@@ -53,12 +53,12 @@ public class Xoh_img_bare_data implements Xoh_data_itm {
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_img_bare_data rv = new Xoh_img_bare_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
 
 	public static final byte Img_tid__hiero = 0, Img_tid__imap_btn = 1;
-	public static final    byte[] 
+	public static final byte[]
 	  Url__hiero = Bry_.new_a7("bin/any/xowa/xtns/Wikihiero/img/hiero_")
 	, Url__imap  = Bry_.new_a7("bin/any/xowa/xtns/ImageMap/imgs/")
 	;
-	private final    Btrie_rv trv = new Btrie_rv();
-	private static final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs()
+	private final Btrie_rv trv = new Btrie_rv();
+	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.cs()
 	.Add_bry_byte(Url__hiero, Img_tid__hiero)
 	.Add_bry_byte(Url__imap	, Img_tid__imap_btn)
 	;

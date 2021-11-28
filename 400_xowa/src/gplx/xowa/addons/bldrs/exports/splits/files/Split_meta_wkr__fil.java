@@ -18,8 +18,8 @@ import gplx.dbs.*;
 import gplx.fsdb.meta.*; import gplx.fsdb.data.*;
 import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 class Split_meta_wkr__fil extends Split_meta_wkr_base {
-	private final    Split_rslt_wkr__fil rslt_wkr = new Split_rslt_wkr__fil();
-	private final    Db_conn atr_conn;
+	private final Split_rslt_wkr__fil rslt_wkr = new Split_rslt_wkr__fil();
+	private final Db_conn atr_conn;
 	private Fsd_fil_tbl tbl; private Db_stmt stmt;
 	public Split_meta_wkr__fil(Split_ctx ctx, Db_conn atr_conn) {
 		this.atr_conn = atr_conn;

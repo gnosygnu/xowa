@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*;
 public class XophpString__tst {
-	private final    XophpString__fxt fxt = new XophpString__fxt();
+	private final XophpString__fxt fxt = new XophpString__fxt();
 	@Test public void Strspn_fwd__byte() {
 		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 0, -1, 5);	// basic
 		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 1, -1, 4);	// bgn

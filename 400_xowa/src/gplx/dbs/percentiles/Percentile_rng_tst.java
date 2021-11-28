@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.percentiles; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 public class Percentile_rng_tst {
-	private final    Percentile_rng_fxt fxt = new Percentile_rng_fxt();
+	private final Percentile_rng_fxt fxt = new Percentile_rng_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Found__000() {
 		fxt.Test__rng(999994, 1000001);
@@ -37,7 +37,7 @@ public class Percentile_rng_tst {
 	}
 }
 class Percentile_rng_fxt {
-	private final    Percentile_rng rng = new Percentile_rng();
+	private final Percentile_rng rng = new Percentile_rng();
 	public void Clear() {
 		this.Exec__init_for_wiki(16000000, 1000000);
 		this.Exec__init_for_search(100, 0);

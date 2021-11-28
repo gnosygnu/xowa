@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.cbks.swts; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.cbks.*;
 import gplx.core.gfobjs.*;
-public class Gfobj_wtr__json__browser extends Gfobj_wtr__json {		private final    Object thread_lock = new Object();
-	private final    Bry_bfr bfr;
+public class Gfobj_wtr__json__browser extends Gfobj_wtr__json {		private final Object thread_lock = new Object();
+	private final Bry_bfr bfr;
 	public Gfobj_wtr__json__browser() {
 		this.Opt_ws_(Bool_.N).Opt_backslash_2x_(Bool_.Y);
 		this.bfr = this.Bfr();
@@ -33,7 +33,7 @@ public class Gfobj_wtr__json__browser extends Gfobj_wtr__json {		private final  
 			return this.To_str();
 		}
 	}
-	private static final    byte[]
+	private static final byte[]
 	  Bry__func_bgn	= Bry_.new_a7("return ")
 	, Bry__args_bgn = Bry_.new_a7("('")
 	, Bry__args_end = Bry_.new_a7("');")

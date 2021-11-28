@@ -17,8 +17,8 @@ package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.names.*;
 public class Xoa_lang_mgr implements Gfo_invk {		
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
-	private final    Xobc_utl_make_lang mw_converter;		
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Xobc_utl_make_lang mw_converter;
 	public Xoa_lang_mgr(Xoa_app app, Xol_name_mgr name_mgr, Xoa_gfs_mgr gfs_mgr) {
 		this.root_dir = app.Fsys_mgr().Root_dir();
 		this.mw_converter = new Xobc_utl_make_lang(this, app.Fsys_mgr(), app.Tid_is_edit() ? ((Xoae_app)app).Msg_log() : null);
@@ -26,13 +26,13 @@ public class Xoa_lang_mgr implements Gfo_invk {
 		this.name_mgr = name_mgr;
 		this.gfs_mgr = gfs_mgr;
 	}
-	public Xoa_gfs_mgr				Gfs_mgr() {return gfs_mgr;} private final    Xoa_gfs_mgr gfs_mgr;
-	public Xol_lang_itm				Lang_en() {return lang_en;} private final    Xol_lang_itm lang_en; 
-	public Xol_name_mgr				Name_mgr() {return name_mgr;} private final    Xol_name_mgr name_mgr;
+	public Xoa_gfs_mgr				Gfs_mgr() {return gfs_mgr;} private final Xoa_gfs_mgr gfs_mgr;
+	public Xol_lang_itm				Lang_en() {return lang_en;} private final Xol_lang_itm lang_en;
+	public Xol_name_mgr				Name_mgr() {return name_mgr;} private final Xol_name_mgr name_mgr;
 	public void						Clear() {hash.Clear();}
 	public int						Len() {return hash.Count();}
 	public void						Add(Xol_lang_itm itm)		{hash.Add(itm.Key_bry(), itm);}
-	public Io_url					Root_dir() {return root_dir;} private final    Io_url root_dir;
+	public Io_url					Root_dir() {return root_dir;} private final Io_url root_dir;
 	public Xol_lang_itm Get_by_or_null(byte[] key) {return (Xol_lang_itm)hash.Get_by(key);} // check if exists
 	public Xol_lang_itm Get_by_or_load(byte[] key) { // main call
 		Xol_lang_itm rv = Get_by_or_null(key);
@@ -61,5 +61,5 @@ public class Xoa_lang_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_mediawiki_converter))	return mw_converter;
 		else	return Gfo_invk_.Rv_unhandled;
 	}	private static final String Invk_get = "get", Invk_mediawiki_converter = "mediawiki_converter";
-	public static final    byte[] Fallback_false = Bry_.new_a7("false");
+	public static final byte[] Fallback_false = Bry_.new_a7("false");
 }

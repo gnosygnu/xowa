@@ -39,7 +39,7 @@ public class Xow_domain_tid_ {
 	, Tid__other				= 20
 	, Tid___len					= 21
 	;
-	public static final    String	// SERIALIZED:xowa.gfs
+	public static final String	// SERIALIZED:xowa.gfs
 	  Str__wikipedia			= "wikipedia"
 	, Str__wiktionary			= "wiktionary"
 	, Str__wikisource			= "wikisource"
@@ -60,7 +60,7 @@ public class Xow_domain_tid_ {
 	, Str__home					= "home"
 	, Str__other				= "other"
 	;
-	public static final    byte[] 
+	public static final byte[]
 	  Bry__wikipedia			= Bry_.new_a7(Str__wikipedia)
 	, Bry__wiktionary			= Bry_.new_a7(Str__wiktionary)
 	, Bry__wikisource			= Bry_.new_a7(Str__wikisource)
@@ -81,10 +81,10 @@ public class Xow_domain_tid_ {
 	, Bry__home					= Bry_.new_a7(Str__home)
 	, Bry__other				= Bry_.new_a7(Str__other)
 	;
-	private static final    Xow_domain_tid[] ary = new Xow_domain_tid[Tid___len];
-	private static final    Hash_adp_bry type_regy = Hash_adp_bry.ci_a7();	// LOC:must go before new_()
-	private static final    Hash_adp_bry abrv_regy = Hash_adp_bry.cs();		// LOC:must go before new_()
-	public static final    Xow_domain_tid 
+	private static final Xow_domain_tid[] ary = new Xow_domain_tid[Tid___len];
+	private static final Hash_adp_bry type_regy = Hash_adp_bry.ci_a7();	// LOC:must go before new_()
+	private static final Hash_adp_bry abrv_regy = Hash_adp_bry.cs();		// LOC:must go before new_()
+	public static final Xow_domain_tid
 	  Itm__wikipedia			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikipedia		, Bry__wikipedia		, "w"			, ".wikipedia.org")
 	, Itm__wiktionary			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wiktionary		, Bry__wiktionary		, "d"			, ".wiktionary.org")
 	, Itm__wikisource			= new_(Bool_.Y	, Xow_domain_tid.Src__wmf	, Tid__wikisource		, Bry__wikisource		, "s"			, ".wikisource.org")

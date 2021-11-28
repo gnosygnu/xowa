@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.parses.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
 import gplx.xowa.wikis.caches.*;
 public class Xomp_prog_mgr {
-	private final    Object thread_lock = new Object();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Object thread_lock = new Object();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private Xow_page_cache page_cache;
 	private int prog_interval, perf_interval;
 	private int pages_done, pages_total;

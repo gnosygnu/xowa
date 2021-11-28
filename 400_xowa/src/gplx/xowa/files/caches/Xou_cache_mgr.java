@@ -21,9 +21,9 @@ public class Xou_cache_mgr implements Gfo_invk {
 	private long fsys_size_cur = 0;
 	private long fsys_size_min = Io_mgr.Len_mb * 75;
 	private long fsys_size_max = Io_mgr.Len_mb * 100;
-	private final    Xoa_wiki_mgr wiki_mgr; private final    Xou_cache_tbl cache_tbl; private final    Db_cfg_tbl cfg_tbl; private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(512);
-	private final    Ordered_hash hash = Ordered_hash_.New_bry(); private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final    Object thread_lock = new Object();
-	private final    Io_url cache_dir; private boolean db_load_needed = true;
+	private final Xoa_wiki_mgr wiki_mgr; private final Xou_cache_tbl cache_tbl; private final Db_cfg_tbl cfg_tbl; private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(512);
+	private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final Object thread_lock = new Object();
+	private final Io_url cache_dir; private boolean db_load_needed = true;
 	public Xou_cache_mgr(Xoa_wiki_mgr wiki_mgr, Io_url cache_dir, Xou_db_file db_file) {
 		this.wiki_mgr = wiki_mgr; this.cache_dir = cache_dir;
 		this.cfg_tbl = db_file.Tbl__cfg();
@@ -208,11 +208,11 @@ public class Xou_cache_mgr implements Gfo_invk {
 	}
 }
 class Xou_cache_grp {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	public Xou_cache_grp(Io_url file_url) {this.file_url = file_url;}
 	public long View_date() {return view_date;} private long view_date;
 	public long File_size() {return file_size;} private long file_size;
-	public Io_url File_url() {return file_url;} private final    Io_url file_url;
+	public Io_url File_url() {return file_url;} private final Io_url file_url;
 	public int Len() {return list.Count();}
 	public void Add(Xou_cache_itm itm) {
 		if (itm.View_date() > view_date) view_date = itm.View_date();
@@ -246,5 +246,5 @@ class Xou_cache_grp_sorter implements gplx.core.lists.ComparerAble {
 		Xou_cache_grp rhs = (Xou_cache_grp)rhsObj;
 		return -Long_.Compare(lhs.View_date(), rhs.View_date());	// - for DESC sort
 	}
-	public static final    Xou_cache_grp_sorter Instance = new Xou_cache_grp_sorter(); Xou_cache_grp_sorter() {}
+	public static final Xou_cache_grp_sorter Instance = new Xou_cache_grp_sorter(); Xou_cache_grp_sorter() {}
 }

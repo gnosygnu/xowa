@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.addons.htmls.tocs.*;
 public class Xoh_hdr_hzip_tst {
-	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
+	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Before public void init()		{Xoh_toc_mgr.Enabled = false;}
 	@After public void term()	{Xoh_toc_mgr.Enabled = true;}
 	@Test  public void Same() {

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.lists.rings; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Ring__long__tst {
-	private final    Ring__long__fxt fxt = new Ring__long__fxt();
+	private final Ring__long__fxt fxt = new Ring__long__fxt();
 	@Test  public void Basic__1()	{fxt.Clear().Add(1)												.Test__to_ary(1);}
 	@Test  public void Basic__2()	{fxt.Clear().Add(1, 2)											.Test__to_ary(1, 2);}
 	@Test  public void Basic__3()	{fxt.Clear().Add(1, 2, 3)										.Test__to_ary(1, 2, 3);}

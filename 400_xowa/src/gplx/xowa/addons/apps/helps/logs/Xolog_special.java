@@ -52,7 +52,7 @@ public class Xolog_special implements Xow_special_page {
 	}
 	static class Enm_cmd {//#*nested
 		public static final int Tid__view = 0, Tid__email = 1, Tid__delete_one = 2, Tid__delete_all = 3;
-		public static final    Gfo_qarg_enum_itm Itm = new Gfo_qarg_enum_itm("cmd")
+		public static final Gfo_qarg_enum_itm Itm = new Gfo_qarg_enum_itm("cmd")
 			.Add("view"			, Tid__view)
 			.Add("email"		, Tid__email)
 			.Add("delete_one"	, Tid__delete_one)
@@ -60,12 +60,12 @@ public class Xolog_special implements Xow_special_page {
 			;
 	}
 	Xolog_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
-	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
+	public Xow_special_meta Special__meta()		{return special__meta;} private final Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
-	public static final    Xow_special_page Prototype = new Xolog_special(Xow_special_meta.New_xo("XowaLog", "Logs"));
+	public static final Xow_special_page Prototype = new Xolog_special(Xow_special_meta.New_xo("XowaLog", "Logs"));
 }
 class Xoa_url_args_bldr {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	public Xoa_url_args_bldr Add(String key, Object val) {
 		list.Add(Keyval_.new_(key, val));
 		return this;

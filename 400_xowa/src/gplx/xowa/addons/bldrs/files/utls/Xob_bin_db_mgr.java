@@ -17,8 +17,8 @@ package gplx.xowa.addons.bldrs.files.utls; import gplx.*; import gplx.xowa.*; im
 import gplx.core.primitives.*; import gplx.core.ios.*;
 import gplx.fsdb.meta.*;
 public class Xob_bin_db_mgr {
-	private final    int[] ns_ids; private final    int ns_ids_len;
-	private final    Ordered_hash nth_hash = Ordered_hash_.New(); private final    Int_obj_ref tier_key = Int_obj_ref.New_neg1();
+	private final int[] ns_ids; private final int ns_ids_len;
+	private final Ordered_hash nth_hash = Ordered_hash_.New(); private final Int_obj_ref tier_key = Int_obj_ref.New_neg1();
 	public Xob_bin_db_mgr(int[] ns_ids) {
 		this.ns_ids = ns_ids; this.ns_ids_len = ns_ids.length;
 	}

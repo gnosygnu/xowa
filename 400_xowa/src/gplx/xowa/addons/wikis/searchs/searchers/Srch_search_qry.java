@@ -25,11 +25,11 @@ public class Srch_search_qry {
 		this.Slab_bgn = slab_bgn;
 		this.Slab_end = slab_end;
 	}
-	public final    byte				Tid;
-	public final    Srch_ns_mgr			Ns_mgr;
-	public final    Srch_search_phrase	Phrase;
-	public final    int					Slab_bgn;		// EX: 0
-	public final    int					Slab_end;		// EX: 20
+	public final byte				Tid;
+	public final Srch_ns_mgr			Ns_mgr;
+	public final Srch_search_phrase	Phrase;
+	public final int					Slab_bgn;		// EX: 0
+	public final int					Slab_end;		// EX: 20
 
 	public static final byte Tid_len = 4, Tid__url_bar = 0, Tid__suggest_box = 1, Tid__search_page = 2, Tid__android = 3;
 	public static Srch_search_qry New__url_bar(Xow_wiki wiki, Srch_ns_mgr ns_mgr, Srch_crt_scanner_syms syms, boolean auto_wildcard, int max_results, byte[] search_orig) {

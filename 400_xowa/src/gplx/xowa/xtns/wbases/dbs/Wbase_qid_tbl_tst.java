@@ -17,7 +17,7 @@ package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*; import gplx.dbs.*;
 import gplx.xowa.wikis.nss.*;
 public class Wbase_qid_tbl_tst {
-	private final    Xowd_wbase_qid_tbl_fxt fxt = new Xowd_wbase_qid_tbl_fxt();
+	private final Xowd_wbase_qid_tbl_fxt fxt = new Xowd_wbase_qid_tbl_fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test public void Space() {
 		fxt.Exec_insert("enwiki", Xow_ns_.Tid__main, "A B", "Q1");

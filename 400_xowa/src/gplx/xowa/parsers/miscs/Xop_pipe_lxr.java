@@ -86,5 +86,5 @@ public class Xop_pipe_lxr implements Xop_lxr {
 				return cur_pos;
 		}
 	}
-	public static final    Xop_pipe_lxr Instance = new Xop_pipe_lxr();
+	public static final Xop_pipe_lxr Instance = new Xop_pipe_lxr();
 }

@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.utls.*;
 public class Merge2_heap_mgr {// data tbls will only have 1 itms; blob tbls will have N itms
-	private final    Split_tbl tbl;
-	private final    List_adp list = List_adp_.New(), deleted = List_adp_.New();
+	private final Split_tbl tbl;
+	private final List_adp list = List_adp_.New(), deleted = List_adp_.New();
 	private Dbmeta_fld_list heap_flds;
 	public Merge2_heap_mgr(Split_tbl tbl) {this.tbl = tbl;}
 	public Merge2_heap_db	Cur()			{return cur;} private Merge2_heap_db cur;

@@ -74,5 +74,5 @@ public class Err_ {
 	
 	public static Err Cast_or_null(Exception e) {return Type_.Eq_by_obj(e, Err.class) ? (Err)e : null;}
 	public static Err Cast_or_make(Throwable e) {return Type_.Eq_by_obj(e, Err.class) ? (Err)e : new Err(Bool_.N, Err_.Trace_lang(e), Type_.Name_by_obj(e), Err_.Message_lang(e));}
-	public static final    String Type__op_canceled = "gplx.op_canceled";
+	public static final String Type__op_canceled = "gplx.op_canceled";
 }

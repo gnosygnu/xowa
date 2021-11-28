@@ -19,7 +19,7 @@ import gplx.xowa.mediawiki.includes.filerepo.file.*; import gplx.xowa.mediawiki.
 	* validateThumbParams
 */
 // MEMORY:only one instance per wiki
-public abstract class XomwImageHandler extends XomwMediaHandler {	private final    Xomw_param_map paramMap = new Xomw_param_map();
+public abstract class XomwImageHandler extends XomwMediaHandler {	private final Xomw_param_map paramMap = new Xomw_param_map();
 	public XomwImageHandler(byte[] key) {super(key);
 		paramMap.Add(Xomw_param_itm.Mw__img_width, Xomw_param_map.Type__handler, Xomw_param_itm.Name_bry__width);
 	}

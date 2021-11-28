@@ -17,8 +17,8 @@ package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xow
 import gplx.dbs.*; import gplx.xowa.htmls.core.dbs.*; 
 import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_html_db_rdr {
-	private final    Xowd_html_tbl[] src_tbls;
-	private final    Xomp_mgr_db mgr_db;
+	private final Xowd_html_tbl[] src_tbls;
+	private final Xomp_mgr_db mgr_db;
 	public Xomp_html_db_rdr(Xowe_wiki wiki) {
 		this.mgr_db = Xomp_mgr_db.New__load(wiki);
 		this.src_tbls = new Xowd_html_tbl[mgr_db.Tbl__wkr().Select_count()];

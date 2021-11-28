@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xow
 import gplx.core.brys.*;
 import gplx.dbs.*; import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_make_html {
-	private final    Int_flag_bldr src_body_flag_bldr = Xowd_html_tbl.Make_body_flag_bldr();
+	private final Int_flag_bldr src_body_flag_bldr = Xowd_html_tbl.Make_body_flag_bldr();
 	public void Exec(Xowe_wiki wiki, Xomp_make_cmd_cfg cfg) {
 		// init
 		Xomp_mgr_db mgr_db = Xomp_mgr_db.New__load(wiki);

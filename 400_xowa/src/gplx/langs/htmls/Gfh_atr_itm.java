@@ -19,8 +19,8 @@ public class Gfh_atr_itm {
 		this.key = key;
 		this.val = val;
 	}
-	public byte[] Key() {return key;} private final    byte[] key;
-	public byte[] Val() {return val;} private final    byte[] val;
+	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Val() {return val;} private final byte[] val;
 	public static Gfh_atr_itm New(byte[] key, String val) {return new Gfh_atr_itm(key, Bry_.new_u8(val));}
 	public static Gfh_atr_itm New(byte[] key, byte[] val) {return new Gfh_atr_itm(key, val);}
 }

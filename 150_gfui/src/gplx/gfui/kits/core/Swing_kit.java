@@ -31,5 +31,5 @@ public class Swing_kit extends Gfui_kit_base {
 	@Override protected GxwElem New_grp_impl() {return factory.control_();}
 	@Override protected GxwElem New_btn_impl() {return factory.control_();}
 	@Override protected GxwElem New_combo_impl() {return factory.control_();}
-	public static final    Swing_kit Instance = new Swing_kit(); Swing_kit() {}
+	public static final Swing_kit Instance = new Swing_kit(); Swing_kit() {}
 }

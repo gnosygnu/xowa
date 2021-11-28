@@ -18,15 +18,15 @@ import gplx.core.log_msgs.*;
 import gplx.xowa.apps.fsys.*;
 import gplx.xowa.langs.*;
 public class Xobc_utl_make_lang implements Gfo_invk {
-	private final    Xoa_lang_mgr lang_mgr; private final    Xoa_fsys_mgr fsys_mgr; Xol_mw_lang_parser lang_parser;
+	private final Xoa_lang_mgr lang_mgr; private final Xoa_fsys_mgr fsys_mgr; Xol_mw_lang_parser lang_parser;
 	public Xobc_utl_make_lang(Xoa_lang_mgr lang_mgr, Xoa_fsys_mgr fsys_mgr, Gfo_msg_log msg_log) {
 		this.lang_mgr = lang_mgr; this.fsys_mgr = fsys_mgr;
 		kwd_mgr = new Xobc_utl_make_lang_kwds(lang_mgr);
 		lang_parser = new Xol_mw_lang_parser(msg_log);
 	}
 	public Xobc_utl_make_lang_kwds Kwd_mgr() {return kwd_mgr;} private Xobc_utl_make_lang_kwds kwd_mgr;
-	public Ordered_hash Manual_text_bgn_hash() {return manual_text_bgn_hash;} private final    Ordered_hash manual_text_bgn_hash = Ordered_hash_.New_bry();
-	public Ordered_hash Manual_text_end_hash() {return manual_text_end_hash;} private final    Ordered_hash manual_text_end_hash = Ordered_hash_.New_bry();
+	public Ordered_hash Manual_text_bgn_hash() {return manual_text_bgn_hash;} private final Ordered_hash manual_text_bgn_hash = Ordered_hash_.New_bry();
+	public Ordered_hash Manual_text_end_hash() {return manual_text_end_hash;} private final Ordered_hash manual_text_end_hash = Ordered_hash_.New_bry();
 	public void Bld_all() {
 		Io_url lang_root = fsys_mgr.Cfg_lang_core_dir().OwnerDir();	// OwnerDir to get "/lang/" in "/cfg/lang/core/"
 		lang_parser.Parse_mediawiki(lang_mgr, lang_root.GenSubDir("mediawiki"), kwd_mgr);

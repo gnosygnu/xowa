@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
 class Dg_parser {
-	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance; private final    Bry_bfr key_bldr = Bry_bfr_.Reset(32);
-	private final    List_adp files = List_adp_.New(), lines = List_adp_.New(), words = List_adp_.New();
+	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance; private final Bry_bfr key_bldr = Bry_bfr_.Reset(32);
+	private final List_adp files = List_adp_.New(), lines = List_adp_.New(), words = List_adp_.New();
 	private int next_id = 0;
 	public Dg_file[] Parse_dir(Io_url dir) {
 		Io_url[] fil_urls = Io_mgr.Instance.QueryDir_args(dir).Recur_(true).ExecAsUrlAry();

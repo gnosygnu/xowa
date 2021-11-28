@@ -118,7 +118,7 @@ public class Wbase_repo_linker {
 //			return wfAppendQuery( $url, wfArrayToCgi( $params ) );
 //		}
 
-	private static final    byte[] 
+	private static final byte[]
 	  Format_Arg1        = Bry_.new_a7("$1")
 	, Special_EntityPage = Bry_.new_a7("Special:EntityPage/");
 }

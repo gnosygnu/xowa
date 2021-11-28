@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
-import org.junit.*; import gplx.core.strings.*;
+package gplx.dbs.sqls.wtrs; import gplx.*;
+import gplx.dbs.sqls.*;
+import org.junit.*;
 import gplx.core.criterias.*; /*Criteria_base*/
-import gplx.core.ios.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.wtrs.*;
+import gplx.core.ios.*;
 public class Sql_qry_wtr__iosql__tst {
 	@Test public void Type() {
 		fld = IoItm_base_.Prop_Type;
@@ -49,9 +50,9 @@ public class Sql_qry_wtr__iosql__tst {
 	}
 	Criteria ioCrt_(String fld, Criteria crt) {return Criteria_fld.new_(fld, crt);}
 	String fld;
-	private final    Sql_wtr_ctx ctx = new Sql_wtr_ctx(false);
+	private final Sql_wtr_ctx ctx = new Sql_wtr_ctx(false);
 	void tst_Write(String expd, Criteria crt) {
-		Sql_where_wtr where_wtr = ((Sql_core_wtr)Sql_qry_wtr_.New__basic()).Where_wtr();
+		Sql_where_wtr where_wtr = ((Sql_core_wtr)SqlQryWtrUtl.NewBasic()).Where_wtr();
 		Bry_bfr bfr = Bry_bfr_.New();
 		where_wtr.Bld_where_elem(bfr, ctx, crt);
 		Tfds.Eq(expd, bfr.To_str_and_clear());

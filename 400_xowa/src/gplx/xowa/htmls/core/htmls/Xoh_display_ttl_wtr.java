@@ -36,10 +36,10 @@ class Xoh_display_ttl_wtr {
 		}
 		return false;
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Atr_key_style = Bry_.new_a7("style")
 	, Msg_style_restricted = Bry_.new_a7(" style='/* attempt to bypass $wgRestrictDisplayTitle */'")
 	;
-	private static final    Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_a7()
+	private static final Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_byte__many(Byte_.By_int(0), "display", "user-select", "visibility");  // if ( preg_match( '/(display|user-select|visibility)\s*:/i', $decoded['style'] ) ) {
 }

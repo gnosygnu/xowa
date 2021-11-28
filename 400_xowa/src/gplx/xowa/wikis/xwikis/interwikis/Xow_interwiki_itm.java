@@ -20,7 +20,7 @@ public class Xow_interwiki_itm {
 		this.domain = domain;
 		this.url = url;
 	}
-	public byte[] Key() {return key;} private final    byte[] key;
-	public byte[] Domain() {return domain;} private final    byte[] domain;
-	public byte[] Url() {return url;} private final    byte[] url;
+	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Domain() {return domain;} private final byte[] domain;
+	public byte[] Url() {return url;} private final byte[] url;
 }

@@ -19,7 +19,7 @@ public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 	/**
 	* @var SiteLookup
 	*/
-	private final    XomwSiteLookup siteLookup;
+	private final XomwSiteLookup siteLookup;
 
 	/**
 	* @var Interwiki[]|null associative array mapping interwiki prefixes to Interwiki objects

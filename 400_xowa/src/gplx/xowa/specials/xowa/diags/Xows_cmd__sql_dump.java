@@ -39,10 +39,10 @@ class Xows_cmd__sql_dump {
 		}
 		Db_rdr_utl.Load_and_write(conn, String_.new_u8(sql_bry), bfr);
 	}
-        public static final    Xows_cmd__sql_dump Instance = new Xows_cmd__sql_dump(); Xows_cmd__sql_dump() {}
-	private static final    byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_db_file = Bry_.new_a7("db_file"), Arg_db_type = Bry_.new_a7("db_type"), Arg_sql = Bry_.new_a7("sql");
+        public static final Xows_cmd__sql_dump Instance = new Xows_cmd__sql_dump(); Xows_cmd__sql_dump() {}
+	private static final byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_db_file = Bry_.new_a7("db_file"), Arg_db_type = Bry_.new_a7("db_type"), Arg_sql = Bry_.new_a7("sql");
 	private static final byte Db_type_fsdb_abc = 1, Db_type_fsdb_atr = 2, Db_type_wiki_core = 3;
-	private static final    Hash_adp_bry db_type_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry db_type_hash = Hash_adp_bry.cs()
 	.Add_str_byte("fsdb.abc"		, Db_type_fsdb_abc)
 	.Add_str_byte("fsdb.atr"		, Db_type_fsdb_atr)
 	.Add_str_byte("wiki.core"		, Db_type_wiki_core)

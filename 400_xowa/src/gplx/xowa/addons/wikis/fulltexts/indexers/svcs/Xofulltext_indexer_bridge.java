@@ -32,10 +32,10 @@ public class Xofulltext_indexer_bridge implements Bridge_cmd_itm {
 	}
 
 	private static final byte Proc__index = 0;
-	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("index"						, Proc__index)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("xowa.wiki.fulltext.indexer");
-        public static final    Xofulltext_indexer_bridge Prototype = new Xofulltext_indexer_bridge(); Xofulltext_indexer_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("xowa.wiki.fulltext.indexer");
+        public static final Xofulltext_indexer_bridge Prototype = new Xofulltext_indexer_bridge(); Xofulltext_indexer_bridge() {}
 }

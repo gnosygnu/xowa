@@ -19,7 +19,7 @@ import gplx.core.btries.*;
 import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.xowa.mediawiki.languages.*; import gplx.xowa.langs.*;
 public class XomwMediaWikiTitleCodec_tst {
-	private final    XomwMediaWikiTitleCodec_fxt fxt = new XomwMediaWikiTitleCodec_fxt();
+	private final XomwMediaWikiTitleCodec_fxt fxt = new XomwMediaWikiTitleCodec_fxt();
 	@Test public void regexTitlePrefix() {
 		// no match
 		fxt.Test_regexTitlePrefix("a"         , "a", null);

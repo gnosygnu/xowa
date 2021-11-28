@@ -20,23 +20,23 @@ import gplx.xowa.mediawiki.*;
 * @ingroup Parser
 */
 import gplx.xowa.mediawiki.includes.exception.*;
-public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final    String name;
+public class XomwPPNode_Hash_Tree extends XomwPPNode {	public final String name;
 	/**
 	* The store array for children of this node. It is "raw" in the sense that
 	* nodes are two-element arrays ("descriptors") rather than PPNode_Hash_*
 	* objects.
 	*/
-	private final    XophpArray rawChildren;
+	private final XophpArray rawChildren;
 
 	/**
 	* The store array for the siblings of this node, including this node itself.
 	*/
-	private final    XophpArray store;
+	private final XophpArray store;
 
 	/**
 	* The index into this.store which contains the descriptor of this node.
 	*/
-	private final    int index;
+	private final int index;
 
 	/**
 	* The offset of the name within descriptors, used in some places for

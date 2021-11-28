@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; imp
 import gplx.dbs.*;
 public class Xob_fsdb_regy_tbl_ {
 	public static final String Tbl_name = "fsdb_regy";
-	public static final    String Tbl_sql = String_.Concat_lines_nl
+	public static final String Tbl_sql = String_.Concat_lines_nl
 	( "CREATE TABLE fsdb_regy "
 	, "( fsdb_id               integer             NOT NULL       PRIMARY KEY        AUTOINCREMENT"
 	, ", fsdb_name             varchar(255)        NOT NULL"
@@ -34,8 +34,8 @@ public class Xob_fsdb_regy_tbl_ {
 	, ", fsdb_deleted          tinyint             NOT NULL"
 	, ");"
 	);
-	public static final    Db_idx_itm Idx_main = Db_idx_itm.sql_("CREATE INDEX fsdb_regy__main ON fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page);");
-	public static final    String 
+	public static final Db_idx_itm Idx_main = Db_idx_itm.sql_("CREATE INDEX fsdb_regy__main ON fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page);");
+	public static final String
 	  Insert_fsdb_fil = String_.Concat_lines_nl
 	( "INSERT INTO fsdb_regy (fsdb_name, fsdb_is_orig, fsdb_repo, fsdb_w, fsdb_time, fsdb_page, fsdb_db_id, fsdb_size, fsdb_status, fsdb_fil_id, fsdb_thm_id, fsdb_deleted)"
 	, "SELECT  f.fil_name"

@@ -33,18 +33,18 @@ public class Xobc_import_step_itm {
 		this.Import_prog_data_max = import_prog_data_max;
 		this.Import_prog_row_max = import_prog_row_max;
 	}
-	public final    int Step_id;
-	public final    int Host_id;
-	public byte[] Wiki_abrv() {return wiki_abrv;} private final    byte[] wiki_abrv;
-	public final    String Wiki_date;
-	public final    String Import_name;
-	public final    int Import_type;
-	public final    byte Import_zip_type;
-	public final    long Import_size_zip;
-	public final    long Import_size_raw;
-	public final    String Import_md5;
-	public final    long Import_prog_data_max;
-	public final    int Import_prog_row_max;
+	public final int Step_id;
+	public final int Host_id;
+	public byte[] Wiki_abrv() {return wiki_abrv;} private final byte[] wiki_abrv;
+	public final String Wiki_date;
+	public final String Import_name;
+	public final int Import_type;
+	public final byte Import_zip_type;
+	public final long Import_size_zip;
+	public final long Import_size_raw;
+	public final String Import_md5;
+	public final long Import_prog_data_max;
+	public final int Import_prog_row_max;
 
-	public static final    Xobc_import_step_itm Null = null;
+	public static final Xobc_import_step_itm Null = null;
 }

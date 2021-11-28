@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.brys.fmtrs; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 import gplx.core.brys.*;
 public class Bry_fmtr_vals implements Bfr_arg {
-	private final    Bry_fmtr fmtr; private Object[] vals;
+	private final Bry_fmtr fmtr; private Object[] vals;
 	Bry_fmtr_vals(Bry_fmtr fmtr) {this.fmtr = fmtr;}
 	public Bry_fmtr_vals Vals_(Object... v) {this.vals = v; return this;}
 	public void Bfr_arg__add(Bry_bfr bfr) {

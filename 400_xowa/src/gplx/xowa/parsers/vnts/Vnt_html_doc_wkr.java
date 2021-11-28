@@ -19,8 +19,8 @@ import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.xndes.*; import gplx.
 import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*;
 import gplx.xowa.htmls.*;
 class Vnt_html_doc_wkr implements Mwh_doc_wkr {
-	private final    Hash_adp_bry atr_hash = Hash_adp_bry.ci_a7();
-	private final    Xol_convert_mgr convert_mgr; private final    Xol_vnt_regy vnt_regy;
+	private final Hash_adp_bry atr_hash = Hash_adp_bry.ci_a7();
+	private final Xol_convert_mgr convert_mgr; private final Xol_vnt_regy vnt_regy;
 	private Vnt_convert_lang atr_converter;
 	private Xol_vnt_itm vnt_itm; private int convert_vnt_idx;
 	private Bry_bfr bfr;
@@ -28,7 +28,7 @@ class Vnt_html_doc_wkr implements Mwh_doc_wkr {
 		this.convert_mgr = convert_mgr; this.vnt_regy = vnt_regy;
 		atr_hash.Add_many_str("title", "alt");
 	}
-	public Hash_adp_bry Nde_regy() {return nde_regy;} private final    Hash_adp_bry nde_regy = Mwh_doc_wkr_.Nde_regy__mw();
+	public Hash_adp_bry Nde_regy() {return nde_regy;} private final Hash_adp_bry nde_regy = Mwh_doc_wkr_.Nde_regy__mw();
 	public void Init(Bry_bfr bfr, Xol_vnt_itm vnt_itm) {this.bfr = bfr; this.vnt_itm = vnt_itm; this.convert_vnt_idx = vnt_itm.Idx();}
 	public void On_atr_each			(Mwh_atr_parser mgr, byte[] src, int nde_tid, boolean valid, boolean repeated, boolean key_exists, byte[] key_bry, byte[] val_bry_manual, int[] itm_ary, int itm_idx) {
 		boolean literal = true;
@@ -76,5 +76,5 @@ class Vnt_html_doc_wkr implements Mwh_doc_wkr {
 	public void On_nde_tail_end	(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {bfr.Add_mid(src, itm_bgn, itm_end);}
 	public void On_comment_end  (Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {bfr.Add_mid(src, itm_bgn, itm_end);}
 	public void On_entity_end  (Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end)	{bfr.Add_mid(src, itm_bgn, itm_end);}
-	private static final    byte[] Bry__url_frag = Bry_.new_a7("://");	// REF.MW: if ( !strpos( $attr, '://' ) ) {
+	private static final byte[] Bry__url_frag = Bry_.new_a7("://");	// REF.MW: if ( !strpos( $attr, '://' ) ) {
 }

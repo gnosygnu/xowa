@@ -20,5 +20,5 @@ class Func_tkn_plus_positive extends Func_tkn_base {
 	@Override public int ArgCount()		{return 1;}
 	@Override public int Precedence()	{return 10;}
 	@Override public boolean Calc_hook(Xop_ctx ctx, Pfunc_expr_shunter shunter, Val_stack val_stack) {return true;}// effectively a noop
-	public static final    Func_tkn_plus_positive Instance = new Func_tkn_plus_positive("+");
+	public static final Func_tkn_plus_positive Instance = new Func_tkn_plus_positive("+");
 }

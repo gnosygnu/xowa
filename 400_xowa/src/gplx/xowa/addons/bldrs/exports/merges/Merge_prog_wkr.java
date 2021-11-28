@@ -16,12 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
 import gplx.core.progs.*; import gplx.dbs.bulks.*;
 public class Merge_prog_wkr implements Db_bulk_prog {
-	private final    Gfo_prog_ui prog_ui;
-	private final    Merge_prog_checkpoint checkpoint;
-	private final    int prog_count_end;		
+	private final Gfo_prog_ui prog_ui;
+	private final Merge_prog_checkpoint checkpoint;
+	private final int prog_count_end;
 	private int prog_count_cur;
 	private long time_nxt, time_gap = 100;
-	// private final    int[] mergepoint_ary = new int[gplx.xowa.addons.bldrs.exports.splits.rslts.Split_rslt_tid_.Tid_max];
+	// private final int[] mergepoint_ary = new int[gplx.xowa.addons.bldrs.exports.splits.rslts.Split_rslt_tid_.Tid_max];
 	public Merge_prog_wkr(Gfo_prog_ui prog_ui, Io_url checkpoint_fil, int prog_count_end, long prog_size_end) {
 		this.prog_ui = prog_ui;
 		this.checkpoint = new Merge_prog_checkpoint(checkpoint_fil);

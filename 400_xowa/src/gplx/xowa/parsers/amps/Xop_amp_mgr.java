@@ -17,8 +17,8 @@ package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.btries.*;
 import gplx.langs.htmls.entitys.*;
 public class Xop_amp_mgr {	// TS
-	private static final    Btrie_rv trv = new Btrie_rv();
-	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private final    Btrie_slim_mgr amp_trie = Gfh_entity_trie.Instance;
+	private static final Btrie_rv trv = new Btrie_rv();
+	public Btrie_slim_mgr Amp_trie() {return amp_trie;} private final Btrie_slim_mgr amp_trie = Gfh_entity_trie.Instance;
 	public Xop_amp_mgr_rslt Parse_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, int amp_pos, int bgn) {
 		int fail_pos = amp_pos + 1;	// default to fail pos which is after &
 
@@ -152,5 +152,5 @@ public class Xop_amp_mgr {	// TS
 		}
 		return dirty ? bfr.To_bry_and_clear_and_rls() : src;
 	}
-        public static final    Xop_amp_mgr Instance = new Xop_amp_mgr(); Xop_amp_mgr() {}
+        public static final Xop_amp_mgr Instance = new Xop_amp_mgr(); Xop_amp_mgr() {}
 }

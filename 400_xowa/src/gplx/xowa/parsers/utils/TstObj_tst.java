@@ -50,7 +50,7 @@ class Xop_rule_mgr implements TstRuleMgr {
 	}
 	public String Reg() {return typeKey;}
 	Ordered_hash hash = Ordered_hash_.New();
-	public static final    Xop_rule_mgr Instance = new Xop_rule_mgr();
+	public static final Xop_rule_mgr Instance = new Xop_rule_mgr();
 }
 class Xop_rule_dat {
 	public String AtrKey() {return atrKey;} private String atrKey;
@@ -208,7 +208,7 @@ class TstObj implements SrlMgr {
 		return rv;
 	}
 	public static TstObj new_() {return new TstObj();} TstObj() {}
-	public static final    TstObj Null = new TstObj();
+	public static final TstObj Null = new TstObj();
 }
 class TstAtr {
 	public String TypeKey() {return typeKey;} public TstAtr TypeKey_(String v) {typeKey = v; return this;} private String typeKey;
@@ -227,5 +227,5 @@ class TstRslt {
 	public String Key() {return key;} public TstRslt Key_(String v) {key = v; return this;} private String key;
 	public String ActlStr() {return actlStr;} public TstRslt ActlStr_(String v) {actlStr = v; return this;} private String actlStr;
 	public String ExpdStr() {return expdStr;} public TstRslt ExpdStr_(String v) {expdStr = v; return this;} private String expdStr;
-	public static final    Object Ignore_null = new Object();
+	public static final Object Ignore_null = new Object();
 }

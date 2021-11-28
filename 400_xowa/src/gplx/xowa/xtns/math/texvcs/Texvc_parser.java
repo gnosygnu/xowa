@@ -17,7 +17,7 @@ package gplx.xowa.xtns.math.texvcs; import gplx.*; import gplx.xowa.*; import gp
 import gplx.core.btries.*;
 import gplx.xowa.xtns.math.texvcs.lxrs.*; import gplx.xowa.xtns.math.texvcs.tkns.*;
 public class Texvc_parser {
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	public void Parse(Texvc_ctx ctx, Texvc_root root, byte[] src) {
 		int src_len = src.length;
 		ctx.Clear();

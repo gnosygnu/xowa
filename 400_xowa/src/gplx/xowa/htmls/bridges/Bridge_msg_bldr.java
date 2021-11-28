@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.bridges; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.langs.jsons.*;
 public class Bridge_msg_bldr {
-	private final    Json_wtr wtr = new Json_wtr();
+	private final Json_wtr wtr = new Json_wtr();
 	private boolean rslt_pass; private String rslt_msg;
 	private String notify_text; private String notify_status;
-	private final    Gfo_tree_list data_root = new Gfo_tree_list("data");
+	private final Gfo_tree_list data_root = new Gfo_tree_list("data");
 	public Bridge_msg_bldr() {
 		wtr.Opt_ws_(Bool_.N);
 		this.Clear();
@@ -94,7 +94,7 @@ public class Bridge_msg_bldr {
 		}
 		wtr.Nde_end();
 	}
-	private static final    byte[]
+	private static final byte[]
 	  Key_rslt = Bry_.new_a7("rslt"), Key_rslt_pass = Bry_.new_a7("pass"), Key_rslt_msg = Bry_.new_a7("msg")
 	, Key_notify = Bry_.new_a7("notify"), Key_notify_text = Bry_.new_a7("text"), Key_notify_status = Bry_.new_a7("status"), Key_notify_hint = Bry_.new_a7("hint")
 	;

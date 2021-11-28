@@ -32,7 +32,7 @@ public class Pf_formatnum_fa_tst {
 	@Test public void English() {	// PURPOSE: make sure regular numbers are still read; DATE:2015-07-18
 		fxt.Test_parse_tmpl_str_test("{{formatnum:150|R}}"		, "{{test}}",	"150");
 	}
-	public static final    String Persian_numbers_gfs = String_.Concat_lines_nl
+	public static final String Persian_numbers_gfs = String_.Concat_lines_nl
 	( "numbers {"
 	, "  digits {"
 	, "    clear;"

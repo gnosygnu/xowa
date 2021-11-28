@@ -54,5 +54,5 @@ public class Xoa_app_ {
 		return rv;
 	}
 
-	public static final    Gfo_msg_grp Nde = Gfo_msg_grp_.prj_(Name);
+	public static final Gfo_msg_grp Nde = Gfo_msg_grp_.prj_(Name);
 }

@@ -72,7 +72,7 @@ class Synh_xtn_nde_ {
 			bfr.Add(Gfh_bldr_.Bry__div_rhs);
 		}
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Enclose_none = Bry_.new_a7("none")
 	, Style_line = Bry_.new_a7("-moz-user-select:none;"), Style_highlight = Bry_.new_a7("background-color: #FFFFCC;")
 	, Bry__style__overflow__auto = Bry_.new_a7("overflow:auto")

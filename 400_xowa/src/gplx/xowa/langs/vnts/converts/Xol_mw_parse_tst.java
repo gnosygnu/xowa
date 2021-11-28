@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import org.junit.*; import gplx.core.log_msgs.*; import gplx.langs.phps.*;
 public class Xol_mw_parse_tst {
-	private final    Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
+	private final Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
 //		@Test  public void Basic() {
 //			fxt.Test_convert("$zh2Hant = array('a' => 'A', 'b' => 'B',);", String_.Concat_lines_nl
 //			( "// zh_zh-hant"

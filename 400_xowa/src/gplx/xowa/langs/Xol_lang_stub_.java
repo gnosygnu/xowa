@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
 import gplx.core.lists.*;
 public class Xol_lang_stub_ {	// lists all known stub_ary supported by MW
-	public static final    byte[] Key__unknown = Bry_.Empty;
-	public static final    ComparerAble Comparer_key = new Xol_sub_itm_comparer();
+	public static final byte[] Key__unknown = Bry_.Empty;
+	public static final ComparerAble Comparer_key = new Xol_sub_itm_comparer();
 	public static final int 
   Id__intl = -2
 , Id__unknown = -1
@@ -1001,7 +1001,7 @@ Regy_add(stub_hash, Id_zu, "zu", "isiZulu");
 		}
 		return stub_hash;
 	}
-	private static Hash_adp_bry stub_hash; private static final    Xol_lang_stub[] stub_ary = new Xol_lang_stub[Id__max];
+	private static Hash_adp_bry stub_hash; private static final Xol_lang_stub[] stub_ary = new Xol_lang_stub[Id__max];
 	public static Xol_lang_stub[] Ary() {return stub_ary;}
 	private static void Regy_add(Hash_adp_bry stub_hash, int uid, String code_str, String canonical) {
 		byte[] code = Bry_.new_a7(code_str);// ASCII:lang_code should always be ASCII
@@ -1025,7 +1025,7 @@ Regy_add(stub_hash, Id_zu, "zu", "isiZulu");
 		Xol_lang_stub rv = Get_by_key_or_null(key, bgn, end);
 		return rv == null ? Intl : rv;
 	}
-	public static final    Xol_lang_stub Intl = new Xol_lang_stub(Xol_lang_stub_.Id__intl, Bry_.Empty, Bry_.Empty);	// intended for international wikis like commons, wikidata, etc..
+	public static final Xol_lang_stub Intl = new Xol_lang_stub(Xol_lang_stub_.Id__intl, Bry_.Empty, Bry_.Empty);	// intended for international wikis like commons, wikidata, etc..
 }
 class Xol_sub_itm_comparer implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {

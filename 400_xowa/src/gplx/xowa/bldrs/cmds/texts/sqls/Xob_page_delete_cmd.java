@@ -17,7 +17,7 @@ package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; impo
 import gplx.dbs.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_page_delete_cmd extends Xob_cmd_base {
-	private final    Xow_wiki wiki;
+	private final Xow_wiki wiki;
 	public Xob_page_delete_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.wiki = wiki;}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_text_delete_page;}
 	@Override public void Cmd_run() {

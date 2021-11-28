@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 public class Xop_section_list__slice__tst {
-	private final    Xop_section_list__fxt fxt = new Xop_section_list__fxt();
+	private final Xop_section_list__fxt fxt = new Xop_section_list__fxt();
 	@Test  public void Basic() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
@@ -142,8 +142,8 @@ public class Xop_section_list__slice__tst {
 	}
 }
 class Xop_section_list__fxt {
-	private final    Xop_section_list list = new Xop_section_list();
-	private final    Xop_fxt parser_fxt = new Xop_fxt();
+	private final Xop_section_list list = new Xop_section_list();
+	private final Xop_fxt parser_fxt = new Xop_fxt();
 	public void Init__template(String page, String text) {parser_fxt.Init_defn_add(page, text);}
 	public void Exec__parse(String... lines) {
 		list.Parse(parser_fxt.Wiki(), Xow_tidy_mgr_interface_.Noop, Xoa_url.Test(), Bry_.new_u8(String_.Concat_lines_nl_skip_last(lines)));

@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.strings.*;
 import gplx.langs.regxs.*;
 public class XophpRegex__tst {
-	private final    XophpRegex__fxt fxt = new XophpRegex__fxt();
+	private final XophpRegex__fxt fxt = new XophpRegex__fxt();
 	@After public void term() {fxt.Term();}
 	@Test  public void Basic() {
 		fxt.Test__preg_match("a", "abc", fxt.Expd__y().Add("a")); // found
@@ -90,7 +90,7 @@ class XophpRegex__expd {
 	public XophpRegex__expd(int pos) {
 		this.pos = pos;
 	}
-	public int Pos() {return pos;} private final    int pos;
+	public int Pos() {return pos;} private final int pos;
 	public XophpArray Matches() {return matches;} private XophpArray matches;
 	public XophpRegex__expd Add(String... ary) {
 		if (matches == null) matches = XophpArray.New();

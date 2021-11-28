@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
 import gplx.dbs.*;
 public class Xomp_page_tbl implements Db_tbl {
-	private final    Object thread_lock = new Object();
-	private final    Db_conn conn;
-	// private final    String fld_page_id, fld_page_status, fld_page_mgr_id;
+	private final Object thread_lock = new Object();
+	private final Db_conn conn;
+	// private final String fld_page_id, fld_page_status, fld_page_mgr_id;
 	public Xomp_page_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "xomp_page";
@@ -30,8 +30,8 @@ public class Xomp_page_tbl implements Db_tbl {
 		flds.Add_int_dflt("xomp_wkr_id", -1);
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
-	public Dbmeta_fld_list Flds() {return flds;} private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
+	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 
 	public void Create_tbl() {
 		conn.Meta_tbl_create

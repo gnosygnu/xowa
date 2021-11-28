@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
 import gplx.core.lists.hashs.*;
 class Dg_ns_skip_mgr {
-	private final    Hash_adp__int ns_hash = new Hash_adp__int();
+	private final Hash_adp__int ns_hash = new Hash_adp__int();
 	private boolean is_empty = true;
 	public boolean Has(int ns) {return is_empty ? false : ns_hash.Get_by_or_null(ns) != null;}
 	public void Load(Io_url url) {

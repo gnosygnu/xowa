@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.helps.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.helps.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 class Xolog_html extends Xow_special_wtr__base {
-	private final    Xolog_doc log_doc;
+	private final Xolog_doc log_doc;
 	public Xolog_html(Xolog_doc log_doc) {
 		this.log_doc = log_doc;
 	}

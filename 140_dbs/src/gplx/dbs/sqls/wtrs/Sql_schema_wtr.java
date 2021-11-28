@@ -13,8 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
-import gplx.dbs.metas.*;
+package gplx.dbs.sqls.wtrs; import gplx.Bool_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_ascii;
+import gplx.Err_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.dbs.Dbmeta_fld_itm;
+import gplx.dbs.Dbmeta_fld_tid;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.dbs.metas.Dbmeta_fld_mgr;
+import gplx.dbs.metas.Dbmeta_idx_fld;
 public class Sql_schema_wtr {
 	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public Sql_schema_wtr Bfr_(Bry_bfr bfr) {this.tmp_bfr = bfr; return this;}
@@ -99,5 +110,5 @@ public class Sql_schema_wtr {
 			default:							throw Err_.new_unhandled(tid);
 		}
 	}
-//        public static final    Sql_schema_wtr Instance = new Sql_schema_wtr();
+//        public static final Sql_schema_wtr Instance = new Sql_schema_wtr();
 }

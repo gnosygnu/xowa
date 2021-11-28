@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import org.junit.*; import gplx.xowa.langs.cases.*;
 public class Srch_highlight_mgr_tst {
-	private final    Srch_highlight_mgr_tstr tstr = new Srch_highlight_mgr_tstr();
+	private final Srch_highlight_mgr_tstr tstr = new Srch_highlight_mgr_tstr();
 	@Test  public void Full__one()				{tstr.Test("a"			, "A"					, "<strong>A</strong>");}
 	@Test  public void Full__many()			{tstr.Test("a b"		, "A B"					, "<strong>A</strong> <strong>B</strong>");}
 	@Test  public void Part__one()				{tstr.Test("a"			, "A1"					, "<strong>A</strong>1");}
@@ -34,8 +34,8 @@ public class Srch_highlight_mgr_tst {
 	// @Test  public void Slash()					{tstr.Test("b"			, "A/B/C"				, "A/<strong>B</strong>/C");}
 }
 class Srch_highlight_mgr_tstr {
-	private final    Srch_highlight_mgr mgr;
-	private final    Xol_case_mgr case_mgr = Xol_case_mgr_.A7();
+	private final Srch_highlight_mgr mgr;
+	private final Xol_case_mgr case_mgr = Xol_case_mgr_.A7();
 	public Srch_highlight_mgr_tstr() {
 		mgr = new Srch_highlight_mgr(case_mgr);
 	}

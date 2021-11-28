@@ -40,7 +40,7 @@ public class GfuiBnd_box_status implements Gfo_invk, UsrMsgWkr {
 		if		(ctx.Match(k, WriteText_cmd))		WriteText(m.ReadStr("v"));
 		else if	(ctx.Match(k, TimerTick_evt))		HideWin();
 		return this;
-	}	static final    String TimerTick_evt = "TimerTick", WriteText_cmd = "WriteText";
+	}	static final String TimerTick_evt = "TimerTick", WriteText_cmd = "WriteText";
 	TimerAdp timer;
 	public static GfuiBnd_box_status new_(String key) {
 		GfuiBnd_box_status rv = new GfuiBnd_box_status();

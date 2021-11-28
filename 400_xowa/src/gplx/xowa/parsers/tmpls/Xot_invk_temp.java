@@ -27,12 +27,12 @@ public class Xot_invk_temp implements Xot_invk {
 		this.name_tkn = name_tkn;
 		this.src = src; this.src_bgn = src_bgn; this.src_end = src_end;
 	}
-	public byte Defn_tid() {return defn_tid;} private final    byte defn_tid;
-	public Arg_nde_tkn Name_tkn() {return name_tkn;} private final    Arg_nde_tkn name_tkn;
+	public byte Defn_tid() {return defn_tid;} private final byte defn_tid;
+	public Arg_nde_tkn Name_tkn() {return name_tkn;} private final Arg_nde_tkn name_tkn;
 	public byte[] Src() {return src;} private byte[] src; public Xot_invk_temp Src_(byte[] src) {this.src = src; return this;}
-	public int Src_bgn() {return src_bgn;} private final    int src_bgn;
-	public int Src_end() {return src_end;} private final    int src_end;
-	public boolean Frame_is_root() {return root_frame;} private final    boolean root_frame;
+	public int Src_bgn() {return src_bgn;} private final int src_bgn;
+	public int Src_end() {return src_end;} private final int src_end;
+	public boolean Frame_is_root() {return root_frame;} private final boolean root_frame;
 	public byte Frame_tid() {return scrib_tid;} public void Frame_tid_(byte v) {scrib_tid = v;} private byte scrib_tid;
 	public byte[] Frame_ttl() {return frame_ttl;} public void Frame_ttl_(byte[] v) {frame_ttl = v;} private byte[] frame_ttl = Bry_.Empty;	// NOTE: set frame_ttl to non-null value; PAGE:en.w:Constantine_the_Great {{Christianity}}; DATE:2014-06-26
 	public int Frame_lifetime() {return frame_lifetime;} public void Frame_lifetime_(int v) {frame_lifetime = v;} private int frame_lifetime;
@@ -67,7 +67,7 @@ public class Xot_invk_temp implements Xot_invk {
 		arg_idx_hash.Add_if_dupe_use_nth(Int_obj_ref.New(int_key), arg);	// Add_if_dupe_use_nth to keep latest version; needed for {{A|1=a|1=b}} DATE:2014-07-23
 	}
 
-	public static final    Xot_invk Null_frame = null;
+	public static final Xot_invk Null_frame = null;
 
 	public static Xot_invk_temp New_root_w_src(byte[] frame_ttl, byte[] src) {
 		return new Xot_invk_temp(true, Xot_defn_.Tid_page, frame_ttl, null, src, 0, src.length);

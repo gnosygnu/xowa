@@ -41,6 +41,6 @@ public class Xobldr__orig_regy__create extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "file.orig_regy";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__orig_regy__create(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__orig_regy__create(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__orig_regy__create(bldr, wiki);}
 }

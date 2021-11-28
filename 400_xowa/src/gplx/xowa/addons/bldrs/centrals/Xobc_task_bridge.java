@@ -44,7 +44,7 @@ public class Xobc_task_bridge implements Bridge_cmd_itm {
 	, Proc__run_next = 4, Proc__stop_cur = 5, Proc__redo_cur = 6, Proc__download_db = 7, Proc__filter_todo = 8
 	, Proc__del_todo = 9
 	;
-	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("reload"						, Proc__reload)
 	.Add_str_byte("add_work"					, Proc__add_work)
 	.Add_str_byte("del_work"					, Proc__del_work)
@@ -57,6 +57,6 @@ public class Xobc_task_bridge implements Bridge_cmd_itm {
 	.Add_str_byte("del_todo"					, Proc__del_todo)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("builder_central.exec");
-        public static final    Xobc_task_bridge Prototype = new Xobc_task_bridge(); Xobc_task_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("builder_central.exec");
+        public static final Xobc_task_bridge Prototype = new Xobc_task_bridge(); Xobc_task_bridge() {}
 }

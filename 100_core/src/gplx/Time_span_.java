@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import gplx.core.strings.*; import gplx.core.envs.*;
 public class Time_span_ {
-	public static final    Time_span Zero = new Time_span(0);
-	public static final    Time_span Null = new Time_span(-1);
+	public static final Time_span Zero = new Time_span(0);
+	public static final Time_span Null = new Time_span(-1);
 	public static Time_span fracs_(long val)	{return new Time_span(val);}
 	public static Time_span seconds_(double seconds)	{
 		long fracs = (long)(seconds * Divisors[Idx_Sec]);
@@ -138,18 +138,18 @@ public class Time_span_ {
 		}
 		return rv;
 	}
-	public static final    String Fmt_PadZeros = "00:00:00.000";	// u,h00:m00:s00.f000
-	public static final    String Fmt_Short = "short";				// u,h##:m#0:s00;
-	public static final    String Fmt_Default = "0.000";			// v,#.000
-	public static final    String Fmt_NoFractionals = "0";			// v,#
-	@gplx.Internal protected static final    int[] Divisors =  {
+	public static final String Fmt_PadZeros = "00:00:00.000";	// u,h00:m00:s00.f000
+	public static final String Fmt_Short = "short";				// u,h##:m#0:s00;
+	public static final String Fmt_Default = "0.000";			// v,#.000
+	public static final String Fmt_NoFractionals = "0";			// v,#
+	@gplx.Internal protected static final int[] Divisors =  {
 												   1,			//1 fracs
 												   1000,		//1,000 fracs in a second
 												   60000,		//60,000 fracs in a minute (60 seconds * 1,000)
 												   3600000,	//3,600,000 fracs in an hour (60 minutes * 60,000)
 	};
-	public static final    String MajorDelimiter = ":";
-	public static final    int 
+	public static final String MajorDelimiter = ":";
+	public static final int
 	  Idx_Frac = 0
 	, Idx_Sec = 1
 	, Idx_Min = 2

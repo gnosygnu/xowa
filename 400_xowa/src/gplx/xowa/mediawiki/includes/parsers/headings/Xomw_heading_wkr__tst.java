@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers.headings; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import org.junit.*;
 public class Xomw_heading_wkr__tst {
-	private final    Xomw_heading_wkr__fxt fxt = new Xomw_heading_wkr__fxt();
+	private final Xomw_heading_wkr__fxt fxt = new Xomw_heading_wkr__fxt();
 	@Test public void Basic()		{
 		fxt.Test__parse("==A=="					, "<h2>A</h2>");
 		fxt.Test__parse("abc\n==A==\ndef"		, "abc\n<h2>A</h2>\ndef");
@@ -27,9 +27,9 @@ public class Xomw_heading_wkr__tst {
 	}
 }
 class Xomw_heading_wkr__fxt {
-	private final    Xomw_heading_wkr wkr = new Xomw_heading_wkr();
-	private final    Xomw_heading_cbk__html cbk = new Xomw_heading_cbk__html().Bfr_(Bry_bfr_.New());
-	private final    XomwParserCtx pctx = new XomwParserCtx();
+	private final Xomw_heading_wkr wkr = new Xomw_heading_wkr();
+	private final Xomw_heading_cbk__html cbk = new Xomw_heading_cbk__html().Bfr_(Bry_bfr_.New());
+	private final XomwParserCtx pctx = new XomwParserCtx();
 	
 	public void Test__parse(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);

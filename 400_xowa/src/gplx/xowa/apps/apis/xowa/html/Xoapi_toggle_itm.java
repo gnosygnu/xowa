@@ -16,12 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
 import gplx.core.brys.fmtrs.*;
 public class Xoapi_toggle_itm {
-	private final    Xoae_app app;	// NOTE: needed to get "img_dir" below
+	private final Xoae_app app;	// NOTE: needed to get "img_dir" below
 	private byte[] img_title_val_y, img_title_val_n;
 	public Xoapi_toggle_itm(Xoae_app app, byte[] key_bry) {
 		this.app = app; this.key_bry = key_bry;
 	}
-	public byte[] Key_bry() {return key_bry;} private final    byte[] key_bry;
+	public byte[] Key_bry() {return key_bry;} private final byte[] key_bry;
 	public byte[] Heading_bry() {return heading_bry;} private byte[] heading_bry;
 	public byte[] Icon_src() {return icon_src;} private byte[] icon_src = Bry_.Empty;
 	public byte[] Icon_title() {return icon_title;} private byte[] icon_title = Bry_.Empty;
@@ -82,7 +82,7 @@ public class Xoapi_toggle_itm {
 			;
 	}
 	private static byte[] Img_src_y, Img_src_n;	// assume these are the same for all itms
-	private static final    byte[] 
+	private static final byte[]
 	  Img_title_msg_y = Bry_.new_a7("hide"), Img_title_msg_n = Bry_.new_a7("show")
 	, Img_display_y = Bry_.new_a7("display:;"), Img_display_n = Bry_.new_a7("display:none;")
 	;

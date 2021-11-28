@@ -24,8 +24,8 @@ import gplx.xowa.addons.wikis.pages.syncs.wmapis.*;
 public class Xosync_read_mgr implements Gfo_invk {		
 	private int auto_interval = 60 * 24;	// in minutes
 	private Db_conn sync_conn; private Xosync_sync_tbl sync_tbl;
-	private final    Xopg_match_mgr auto_page_matcher = new Xopg_match_mgr();
-	private final    Xosync_update_mgr update_mgr = new Xosync_update_mgr();
+	private final Xopg_match_mgr auto_page_matcher = new Xopg_match_mgr();
+	private final Xosync_update_mgr update_mgr = new Xosync_update_mgr();
 	public void Init_by_wiki(Xow_wiki wiki) {
 		this.Auto_scope_("*:Main_Page");
 		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__manual__enabled, Cfg__auto__enabled, Cfg__auto__interval, Cfg__auto__scope);

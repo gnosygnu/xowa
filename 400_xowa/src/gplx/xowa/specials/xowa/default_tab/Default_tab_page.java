@@ -24,11 +24,11 @@ public class Default_tab_page implements Xow_special_page {
 		page.Html_data().Custom_html_(nightmode_enabled ? DEFAULT_HTML_NIGHT : DEFAULT_HTML_DAY);
 		page.Html_data().Custom_tab_name_(Tab_name_bry);
 	}
-	public static final    byte[] Tab_name_bry = Bry_.new_a7("New Tab");
+	public static final byte[] Tab_name_bry = Bry_.new_a7("New Tab");
 
 	public Xow_special_page Special__clone() {return this;}
 
-	public static final    byte[]
+	public static final byte[]
 	  DEFAULT_HTML_DAY   = Bry_.new_a7("<html><body style='background-color:white'></body></html>")
 	, DEFAULT_HTML_NIGHT = Bry_.new_a7("<html><body style='background-color:black'></body></html>")
 	;

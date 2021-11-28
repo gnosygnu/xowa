@@ -93,8 +93,8 @@ public class XomwPreprocessor_Hash extends XomwPreprocessor {
 		return node;
 	}
 
-	private static final    Hash_adp strspn_hash__eq = XophpString_.strspn_hash("=");
-	private static final    Hash_adp strspn_hash__ws_tab = XophpString_.strspn_hash(" \t");
+	private static final Hash_adp strspn_hash__eq = XophpString_.strspn_hash("=");
+	private static final Hash_adp strspn_hash__ws_tab = XophpString_.strspn_hash(" \t");
 	/**
 	* Preprocess some wikitext and return the document tree.
 	*

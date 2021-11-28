@@ -24,7 +24,7 @@ public class Imap_map implements Xoh_file_fmtr, Js_img_wkr {
 	public void Init(Imap_xtn_mgr xtn_mgr, byte[] img_src, Imap_part_img img, Imap_part_dflt dflt, Imap_part_desc desc, Imap_part_shape[] shapes, Imap_err[] errs) {
 		this.xtn_mgr = xtn_mgr; this.img_src = img_src; this.img = img; this.dflt = dflt; this.desc = desc; this.shapes = shapes; this.errs = errs;
 	}
-	public int					Id()			{return id;}			private final    int id;
+	public int					Id()			{return id;}			private final int id;
 	public byte[]				Img_src()		{return img_src;}		private byte[] img_src;
 	public Imap_part_img		Img()			{return img;}			private Imap_part_img img;
 	public Imap_part_dflt		Dflt()			{return dflt;}			private Imap_part_dflt dflt;

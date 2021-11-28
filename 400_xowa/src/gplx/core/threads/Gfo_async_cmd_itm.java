@@ -36,5 +36,5 @@ public class Gfo_async_cmd_itm implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	private static final String Invk_exec = "exec";
-	public static final    Gfo_async_cmd_itm[] Ary_empty = new Gfo_async_cmd_itm[0];
+	public static final Gfo_async_cmd_itm[] Ary_empty = new Gfo_async_cmd_itm[0];
 }

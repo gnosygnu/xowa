@@ -18,7 +18,7 @@ import gplx.fsdb.meta.*;
 public class Xob_bin_db_itm {
 	public Xob_bin_db_itm(int id, Io_url db_url, int ns_id, int pt_id) {this.id = id; this.db_url = db_url; this.ns_id = ns_id; this.pt_id = pt_id;}
 	public int Id() {return id;} private int id;
-	public int Ns_id() {return ns_id;} private final    int ns_id;
+	public int Ns_id() {return ns_id;} private final int ns_id;
 	public int Pt_id() {return pt_id;} private int pt_id;
 	public long Db_len() {return db_len;} public void Db_len_(long v) {this.db_len = v;} private long db_len;
 	public Io_url Db_url() {return db_url;} public void Db_url_(Io_url v) {db_url = v;} private Io_url db_url;

@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.centrals.dbs.datas; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*; import gplx.xowa.addons.bldrs.centrals.dbs.*;
 import gplx.dbs.*;
 public class Xobc_step_map_tbl implements Db_tbl {		
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_sm_id, fld_step_seqn, fld_task_id, fld_step_id;
-	private final    Db_conn conn; private Db_stmt insert_stmt;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_sm_id, fld_step_seqn, fld_task_id, fld_step_id;
+	private final Db_conn conn; private Db_stmt insert_stmt;
 	public Xobc_step_map_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "step_map";
@@ -28,7 +28,7 @@ public class Xobc_step_map_tbl implements Db_tbl {
 		this.fld_step_seqn			= flds.Add_int("step_seqn");
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public int Select_step_id(int task_id, int step_seqn) {
 		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, fld_task_id, fld_step_seqn).Crt_int(fld_task_id, task_id).Crt_int(fld_step_seqn, step_seqn).Exec_select__rls_auto();

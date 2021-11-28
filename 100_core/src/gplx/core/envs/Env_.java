@@ -51,6 +51,6 @@ public class Env_ {
 		return appUrl;
 	}	static Io_url appUrl = Io_url_.Empty;
 
-	public static final    String LocalHost = "127.0.0.1";
+	public static final String LocalHost = "127.0.0.1";
 	public static String NewLine_lang() {return mode_testing ? "\n" : "\n";}	
 }

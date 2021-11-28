@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.ctgs.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.core.btries.*;
 public class Xoctg_type_enum {
-	private final    Btrie_rv trv = new Btrie_rv();
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs()
+	private final Btrie_rv trv = new Btrie_rv();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs()
 		.Add_str_byte("subcat"		, Tid__subc)
 		.Add_str_byte("file"		, Tid__file)
 		.Add_str_byte("page"		, Tid__page);

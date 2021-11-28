@@ -26,7 +26,7 @@ public class Xoh_anch_cls_ {
 	, Tid__ctg_xnav			= 5
 	, Tid__voyage__email	= 7
 	;
-	public static final    byte[] 
+	public static final byte[]
 	  Bry__media_play		= Bry_.new_a7("xowa_media_play")
 	, Bry__media_info		= Bry_.new_a7("xowa_media_info")
 	, Bry__ctg_main			= Bry_.new_a7("internal")
@@ -34,7 +34,7 @@ public class Xoh_anch_cls_ {
 	, Bry__ctg_xnav			= Bry_.new_a7("xowa_nav")
 	, Bry__voyage_email		= Bry_.new_a7("email")
 	;
-	public static final    Btrie_slim_mgr Trie = Btrie_slim_mgr.cs()
+	public static final Btrie_slim_mgr Trie = Btrie_slim_mgr.cs()
 	.Add_bry_byte(Bry__media_play		, Tid__media_play)
 	.Add_bry_byte(Bry__media_info		, Tid__media_info)
 	.Add_bry_byte(Bry__ctg_main			, Tid__ctg_main)

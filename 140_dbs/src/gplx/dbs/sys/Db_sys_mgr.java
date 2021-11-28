@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sys; import gplx.*; import gplx.dbs.*;
 public class Db_sys_mgr {
-	private final    Db_conn conn;
-	private final    Db_sys_tbl sys_tbl;
+	private final Db_conn conn;
+	private final Db_sys_tbl sys_tbl;
 	private boolean assert_exists = true;
 	public Db_sys_mgr(Db_conn conn) {
 		this.conn = conn;

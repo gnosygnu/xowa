@@ -30,7 +30,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	private Xob_lnki_temp_tbl tbl; private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump, load_all_imglinks;
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;		
 	private boolean ns_file_is_case_match_all = true; private Xowe_wiki commons_wiki;
-	private final    Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr(); private Vnt_convert_lang converter_lang;
+	private final Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr(); private Vnt_convert_lang converter_lang;
 	public Xobldr__lnki_temp__create(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public byte Init_redirect()	{return Bool_.N_byte;}	// lnki_temp does not look at redirect pages
 	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = Int_ary_.New(Xow_ns_.Tid__main);
@@ -175,7 +175,7 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 	;
 	public static final String BLDR_CMD_KEY = "file.lnki_temp";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__lnki_temp__create(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__lnki_temp__create(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__lnki_temp__create(bldr, wiki);}
 
 	private Xop_log_invoke_wkr Invoke_wkr() {

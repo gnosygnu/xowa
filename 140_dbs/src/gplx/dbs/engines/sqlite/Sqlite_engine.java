@@ -43,7 +43,8 @@ import gplx.dbs.Dbmeta_fld_itm;
 import gplx.dbs.engines.Db_engine;
 import gplx.dbs.engines.Db_engine_sql_base;
 import gplx.dbs.metas.Dbmeta_tbl_mgr;
-import gplx.dbs.sqls.Sql_qry_wtr_;
+import gplx.dbs.sqls.SqlQryWtr;
+import gplx.dbs.sqls.SqlQryWtrUtl;
 import gplx.dbs.wkrs.SqlWkrMgr;
 import gplx.dbs.wkrs.randoms.SqliteRandomWkr;
 import org.sqlite.SQLiteConnection;
@@ -52,13 +53,13 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 public class Sqlite_engine extends Db_engine_sql_base {
-	private final    Sqlite_txn_mgr txn_mgr; private final    Sqlite_schema_mgr schema_mgr;
+	private final Sqlite_txn_mgr txn_mgr; private final Sqlite_schema_mgr schema_mgr;
 	Sqlite_engine() {
 		this.txn_mgr = new Sqlite_txn_mgr(this);
 		this.schema_mgr = new Sqlite_schema_mgr(this);
 	}
 	@Override public String Tid() {return Sqlite_conn_info.Key_const;}
-	@Override public gplx.dbs.sqls.Sql_qry_wtr Sql_wtr() {return Sql_qry_wtr_.New__sqlite();}
+	@Override public SqlQryWtr Sql_wtr() {return SqlQryWtrUtl.NewSqlite();}
 	public void CtorConn(SqlWkrMgr wkrMgr) {
 		wkrMgr.Set(new SqliteRandomWkr());
 	}
@@ -122,7 +123,7 @@ public class Sqlite_engine extends Db_engine_sql_base {
 		catch (SQLException e) {Gfo_usr_dlg_.Instance.Warn_many("", "", "failed to set busy timeout; err=~{0}", Err_.Message_gplx_log(e));}
 		return rv;
 	}
-	public static final    Sqlite_engine Instance = new Sqlite_engine();
+	public static final Sqlite_engine Instance = new Sqlite_engine();
 }
 class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(String k)		{try {return (byte)Int_.Cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "k", k, "type", Byte_.Cls_val_name);}} 
 		@Override public boolean Read_bool_by_byte(String k) {

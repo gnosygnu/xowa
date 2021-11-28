@@ -18,17 +18,17 @@ import gplx.core.stores.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*; impo
 import gplx.dbs.wkrs.SqlWkrMgr;
 
 public class Mem_engine implements Db_engine {
-	private final    Hash_adp tbl_hash = Hash_adp_.New();
+	private final Hash_adp tbl_hash = Hash_adp_.New();
 	Mem_engine(Db_conn_info conn_info) {
 		this.conn_info = conn_info;
 		this.qry_runner = new Mem_exec_select(this);
 	}
 	public String				Tid() {return Mem_conn_info.Tid_const;}
 	public Db_conn_info			Conn_info() {return conn_info;} private Db_conn_info conn_info;
-	public Db_conn_props_mgr	Props() {return props;} private final    Db_conn_props_mgr props = new Db_conn_props_mgr();
-	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
+	public Db_conn_props_mgr	Props() {return props;} private final Db_conn_props_mgr props = new Db_conn_props_mgr();
+	public Db_batch_mgr			Batch_mgr() {return batch_mgr;} private final Db_batch_mgr batch_mgr = new Db_batch_mgr();
 	public Mem_exec_select		Qry_runner() {return qry_runner;} private Mem_exec_select qry_runner;
-	public Sql_qry_wtr			Sql_wtr() {return sql_wtr;} private final    Sql_qry_wtr sql_wtr = Sql_qry_wtr_.New__basic();
+	public SqlQryWtr Sql_wtr() {return sql_wtr;} private final SqlQryWtr sql_wtr = SqlQryWtrUtl.NewBasic();
 	@Override public void       CtorConn(SqlWkrMgr wkrMgr) {}
 	public Db_engine			New_clone(Db_conn_info conn_info) {return new Mem_engine(conn_info);}
 	public Db_stmt				Stmt_by_qry(Db_qry qry) {return new Mem_stmt(this, qry);}
@@ -59,7 +59,7 @@ public class Mem_engine implements Db_engine {
 	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {}	// TODO_OLD: implement unique index
 	public void					Meta_idx_delete(String idx) {}
 	public void					Meta_fld_append(String tbl, Dbmeta_fld_itm fld)	{}
-	public Dbmeta_tbl_mgr		Meta_mgr() {return meta_mgr;} private final    Dbmeta_tbl_mgr meta_mgr = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
+	public Dbmeta_tbl_mgr		Meta_mgr() {return meta_mgr;} private final Dbmeta_tbl_mgr meta_mgr = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
 	public boolean					Meta_tbl_exists(String tbl)						{return tbl_hash.Has(tbl);}
 	public boolean					Meta_fld_exists(String tbl, String fld)			{
 		Mem_tbl mem_tbl = (Mem_tbl)tbl_hash.Get_by(tbl); if (mem_tbl == null) return false;
@@ -69,5 +69,5 @@ public class Mem_engine implements Db_engine {
 	public void					Env_db_attach(String alias, Db_conn conn)		{}
 	public void					Env_db_attach(String alias, Io_url db_url)		{}
 	public void					Env_db_detach(String alias)						{}
-        public static final    Mem_engine Instance = new Mem_engine(); Mem_engine() {}
+        public static final Mem_engine Instance = new Mem_engine(); Mem_engine() {}
 }

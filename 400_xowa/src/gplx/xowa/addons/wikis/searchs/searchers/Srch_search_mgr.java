@@ -19,15 +19,15 @@ import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.xowa.addons
 import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
 import gplx.core.net.*; import gplx.core.net.qargs.*;
 public class Srch_search_mgr implements Gfo_invk {
-	private final    Srch_search_addon			addon;
-	private final    Xow_wiki					wiki;
-	private final    Srch_rslt_list				cache__page = new Srch_rslt_list();
-	private final    Hash_adp_bry				cache__word_counts = Hash_adp_bry.cs();
-	private final    Srch_rslt_cache			cache__rslts = new Srch_rslt_cache();
-	private final    Srch_page_tbl_wkr			page_tbl_searcher = new Srch_page_tbl_wkr();
-	private final    Srch_crt_parser			crt_parser;
-	private final    Srch_search_cmd[]			cur_cmds;
-	private final    Object						mutex = new Object();
+	private final Srch_search_addon			addon;
+	private final Xow_wiki					wiki;
+	private final Srch_rslt_list				cache__page = new Srch_rslt_list();
+	private final Hash_adp_bry				cache__word_counts = Hash_adp_bry.cs();
+	private final Srch_rslt_cache			cache__rslts = new Srch_rslt_cache();
+	private final Srch_page_tbl_wkr			page_tbl_searcher = new Srch_page_tbl_wkr();
+	private final Srch_crt_parser			crt_parser;
+	private final Srch_search_cmd[]			cur_cmds;
+	private final Object						mutex = new Object();
 	private int search_count;
 	private boolean upgrade_prompted;
 	public Srch_search_mgr(Srch_search_addon addon, Xow_wiki wiki, Srch_text_parser parser) {

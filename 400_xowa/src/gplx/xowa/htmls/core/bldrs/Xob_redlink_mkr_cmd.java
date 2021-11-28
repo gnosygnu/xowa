@@ -68,7 +68,7 @@ public class Xob_redlink_mkr_cmd extends Xob_itm_basic_base implements Xob_cmd {
 		if ((commit_count % commit_interval ) == 0)
 			redlink_tbl.Conn().Txn_sav();
 	}
-	private static final    String Sql_select_clause = String_.Concat_lines_nl_skip_last
+	private static final String Sql_select_clause = String_.Concat_lines_nl_skip_last
 	( "SELECT p.page_html_db_id"
 	, ",      p.page_id"
 	, ",      ld.src_html_uid"

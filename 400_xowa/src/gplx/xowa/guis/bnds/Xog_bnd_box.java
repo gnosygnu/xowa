@@ -15,14 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 public class Xog_bnd_box {
-	private final    Ordered_hash key_hash = Ordered_hash_.New();
-	private final    Hash_adp cmd_hash = Hash_adp_.New();
+	private final Ordered_hash key_hash = Ordered_hash_.New();
+	private final Hash_adp cmd_hash = Hash_adp_.New();
 	public Xog_bnd_box(int tid, String key) {
 		this.tid = tid;
 		this.key = key;
 	}
-	public int Tid() {return tid;} private final    int tid;
-	public String Key() {return key;} private final    String key;
+	public int Tid() {return tid;} private final int tid;
+	public String Key() {return key;} private final String key;
 	public int Len() {return key_hash.Count();}
 	public Xog_bnd_itm Get_at(int i) {return (Xog_bnd_itm)key_hash.Get_at(i);}
 	public void Add(Xog_bnd_itm itm) {

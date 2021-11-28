@@ -22,7 +22,7 @@ public class Wdata_dict_claim_v1 {
 	, Str_rank									= "rank"
 	, Str_refs									= "refs"
 	;
-	public static final    byte[] 
+	public static final byte[]
 	  Bry_m										= Bry_.new_a7(Str_m)
 	, Bry_q										= Bry_.new_a7(Str_q)
 	, Bry_g										= Bry_.new_a7(Str_g)

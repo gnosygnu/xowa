@@ -19,8 +19,8 @@ import gplx.xowa.htmls.*;
 import gplx.xowa.wikis.*;
 import gplx.xowa.langs.specials.*;
 public class Xosp_special_mgr {
-//		private final    Xowv_wiki wiki;
-	private final    Hash_adp_bry hash;
+//		private final Xowv_wiki wiki;
+	private final Hash_adp_bry hash;
 	public Xosp_special_mgr(Xowv_wiki wiki) {
 //			this.wiki = wiki;
 		// hash.Add_str_obj(Xow_special_meta_.Ttl__statistics				, page_statistics);

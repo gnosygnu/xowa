@@ -28,7 +28,7 @@ public class Xoud_opt_scope_tst {
 	}
 }
 class Xoud_opt_scope_fxt {
-	private final    Xoud_opt_scope_parser parser = new Xoud_opt_scope_parser();
+	private final Xoud_opt_scope_parser parser = new Xoud_opt_scope_parser();
 	public void Clear() {
 		// Gfo_usr_dlg_.I = Xoa_app_.New__usr_dlg__console();
 	}

@@ -18,7 +18,7 @@ import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.guis.*; impor
 import gplx.langs.htmls.encoders.*;
 public class Xoapi_view implements Gfo_invk {
 	private Xoae_app app; private Xog_win_itm win;
-	private final    Gfo_url_encoder fsys_encoder = Gfo_url_encoder_.New__fsys_wnt().Make();
+	private final Gfo_url_encoder fsys_encoder = Gfo_url_encoder_.New__fsys_wnt().Make();
 	public void Init_by_kit(Xoae_app app) {
 		this.app = app; this.win = app.Gui_mgr().Browser_win();
 	}

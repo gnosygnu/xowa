@@ -17,9 +17,9 @@ package gplx.xowa.addons.bldrs.centrals.dbs.users; import gplx.*; import gplx.xo
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.tasks.*;
 public class Xobc_work_task_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_task_id, fld_task_seqn, fld_step_id, fld_cmd_id;
-	private final    Db_conn conn;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_task_id, fld_task_seqn, fld_step_id, fld_cmd_id;
+	private final Db_conn conn;
 	public Xobc_work_task_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "xobc_work_task";
@@ -29,7 +29,7 @@ public class Xobc_work_task_tbl implements Db_tbl {
 		this.fld_cmd_id				= flds.Add_int("cmd_id");
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Select_all(Xobc_task_mgr task_mgr, Xobc_task_regy__base todo_regy, Xobc_task_regy__base work_regy) {
 		work_regy.Clear();

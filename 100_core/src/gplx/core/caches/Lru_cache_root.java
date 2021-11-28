@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.caches; import gplx.*; import gplx.core.*;
 public class Lru_cache_root {
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public Lru_cache Get_by_key(String key) {return (Lru_cache)hash.Get_by(key);}
 	public void Add(Lru_cache grp) {
 		hash.Add(grp.Key(), grp);
@@ -46,5 +46,5 @@ public class Lru_cache_root {
 		}
 		return bfr.To_str_and_clear();
 	}
-	public static final    Lru_cache_root Instance = new Lru_cache_root();
+	public static final Lru_cache_root Instance = new Lru_cache_root();
 }

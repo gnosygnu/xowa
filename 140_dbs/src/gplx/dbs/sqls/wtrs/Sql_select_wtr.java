@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
-import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
+package gplx.dbs.sqls.wtrs; import gplx.Bry_bfr;
+import gplx.dbs.qrys.Db_qry__select_cmd;
+import gplx.dbs.sqls.itms.Sql_group_clause;
+import gplx.dbs.sqls.itms.Sql_order_clause;
+import gplx.dbs.sqls.itms.Sql_order_fld;
+import gplx.dbs.sqls.itms.Sql_select_fld;
+import gplx.dbs.sqls.itms.Sql_select_fld_list;
 public class Sql_select_wtr {
 	private final Sql_core_wtr qry_wtr;
 	public Sql_select_wtr(Sql_core_wtr qry_wtr) {this.qry_wtr = qry_wtr;}
@@ -61,7 +66,7 @@ public class Sql_select_wtr {
 		if (limit == Db_qry__select_cmd.Limit__disabled) return;
 		bfr.Add_str_a7(" LIMIT ").Add_int_variable(limit);
 	}
-	@gplx.Virtual protected void Bld_offset(Bry_bfr bfr, Sql_wtr_ctx ctx, Db_qry__select_cmd qry, int offset) {
+	protected void Bld_offset(Bry_bfr bfr, Sql_wtr_ctx ctx, Db_qry__select_cmd qry, int offset) {
 		bfr.Add_str_a7(" OFFSET ").Add_int_variable(offset);
 	}
 	private void Bld_indexed_by(Bry_bfr bfr, Sql_wtr_ctx ctx, Db_qry__select_cmd qry, String idx_name) {

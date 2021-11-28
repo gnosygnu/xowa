@@ -26,8 +26,8 @@ public class GfmlLxr_ {
 		return GfmlLxr_.solo_(key, tkn);
 	}
 	@gplx.Internal protected static GfmlLxr frame_(String key, GfmlFrame frame, String bgn, String end) {return GfmlLxr_frame.new_(key, frame, bgn, end, GfmlBldrCmd_pendingTkns_add.Instance, GfmlBldrCmd_frameEnd.data_());}
-	public static final    GfmlLxr Null = new GfmlLxr_null();
-	public static final    String CmdTknChanged_evt = "Changed";
+	public static final GfmlLxr Null = new GfmlLxr_null();
+	public static final String CmdTknChanged_evt = "Changed";
 	public static GfmlLxr as_(Object obj) {return obj instanceof GfmlLxr ? (GfmlLxr)obj : null;}
 	public static GfmlLxr cast(Object obj) {try {return (GfmlLxr)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, GfmlLxr.class, obj);}}
 }
@@ -172,7 +172,7 @@ class GfmlLxr_general_txtBfr {
 	public void Add(CharStream stream) {
 		if (Bgn == NullPos) Bgn = stream.Pos();
 		Len++;
-	}	static final    int NullPos = -1;
+	}	static final int NullPos = -1;
 	public GfmlTkn MakeTkn(CharStream stream, GfmlTkn textTkn) {
 		String raw = String_.new_charAry_(stream.Ary(), Bgn, Len);
 		Bgn = -1; Len = 0;

@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.xowa.langs.vnts.*;
 class Vnt_rule_parser_fxt {
-	private final    Vnt_rule_parser parser = new Vnt_rule_parser(); private final    Vnt_rule_undi_mgr undis = new Vnt_rule_undi_mgr(); private final    Vnt_rule_bidi_mgr bidis = new Vnt_rule_bidi_mgr();
-	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(255);
+	private final Vnt_rule_parser parser = new Vnt_rule_parser(); private final Vnt_rule_undi_mgr undis = new Vnt_rule_undi_mgr(); private final Vnt_rule_bidi_mgr bidis = new Vnt_rule_bidi_mgr();
+	private final Bry_bfr bfr = Bry_bfr_.New_w_size(255);
 	public Vnt_rule_parser_fxt() {
 		Xol_vnt_regy vnt_regy = new Xol_vnt_regy();
 		vnt_regy.Add(Bry_.new_a7("x1"), Bry_.new_a7("lang1"));

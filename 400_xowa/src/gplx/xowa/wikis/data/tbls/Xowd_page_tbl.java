@@ -18,12 +18,12 @@ import gplx.core.primitives.*; import gplx.core.criterias.*;
 import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
 public class Xowd_page_tbl implements Db_tbl {
-	private final    Object thread_lock = new Object();		
-	public final    boolean schema_is_1;
+	private final Object thread_lock = new Object();
+	public final boolean schema_is_1;
 	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_score, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_cat_db_id;
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private Db_stmt stmt_select_all_by_ttl, stmt_select_all_by_id, stmt_select_id_by_ttl, stmt_insert;
-	private final    String[] flds_select_all, flds_select_idx;
+	private final String[] flds_select_all, flds_select_idx;
 	public Xowd_page_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn; this.schema_is_1 = schema_is_1;
 		String fld_text_db_id_name = "";
@@ -51,8 +51,8 @@ public class Xowd_page_tbl implements Db_tbl {
 		flds_select_idx	= String_.Ary_wo_null(fld_ns, fld_title, fld_id, fld_len, fld_score);
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn()						{return conn;} private final    Db_conn conn; 
-	public String Tbl_name()					{return tbl_name;} private final    String tbl_name = TBL_NAME;
+	public Db_conn Conn()						{return conn;} private final Db_conn conn;
+	public String Tbl_name()					{return tbl_name;} private final String tbl_name = TBL_NAME;
 	public Dbmeta_fld_list Flds__all()			{return flds;}
 	public String Fld_page_id()					{return fld_id;}
 	public String Fld_page_ns()					{return fld_ns;}
@@ -405,7 +405,7 @@ public class Xowd_page_tbl implements Db_tbl {
 			stmt_insert = Db_stmt_.Rls(stmt_insert);
 		}
 	}
-	public static final    String Page_touched_fmt = "yyyyMMddHHmmss";
+	public static final String Page_touched_fmt = "yyyyMMddHHmmss";
 	public static final String TBL_NAME = "page", FLD__page_cat_db_id = "page_cat_db_id";
 	public static Xowd_page_tbl Get_by_key(Db_tbl_owner owner) {return (Xowd_page_tbl)owner.Tbls__get_by_key(TBL_NAME);}
 	public static final int INVALID_PAGE_ID = -1;

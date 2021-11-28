@@ -17,7 +17,7 @@ package gplx;
 import gplx.core.primitives.*; import gplx.core.strings.*; import gplx.core.brys.*; import gplx.core.interfaces.*;
 public class GfoMsg_ {
 	public static GfoMsg as_(Object obj) {return obj instanceof GfoMsg ? (GfoMsg)obj : null;}
-	public static final    GfoMsg Null = new GfoMsg_base().ctor_("<<NULL MSG>>", false);
+	public static final GfoMsg Null = new GfoMsg_base().ctor_("<<NULL MSG>>", false);
 	public static GfoMsg new_parse_(String key)	{return new GfoMsg_base().ctor_(key, true);}
 	public static GfoMsg new_cast_(String key)	{return new GfoMsg_base().ctor_(key, false);}
 	public static GfoMsg srl_(GfoMsg owner, String key)	{
@@ -181,7 +181,7 @@ class GfoMsg_base implements GfoMsg {
 	public byte[][] ReadBryAry(String k, byte spr)			{return Bry_split_.Split(ReadBry(k), spr);}
 	public String[] ReadStrAryIgnore(String k, String spr, String ignore) {return String_.Split(String_.Replace(ReadStr(k), ignore, ""), spr);}
 	public Object   ReadValAt(int i) {return Args_getAt(i).Val();}
-	@gplx.Virtual protected Object ReadOr(String k, Object defaultOr) {
+	protected Object ReadOr(String k, Object defaultOr) {
 		if (args == null) return Nil; // WORKAROUND.gfui: args null for DataBndr_whenEvt_execCmd
 		if (!String_.Eq(k, "")) {
 			for (int i = 0; i < args.Count(); i++) {
@@ -258,7 +258,7 @@ class GfoMsg_base implements GfoMsg {
 
 	public GfoMsg_base ctor_(String key, boolean parse)  {this.key = key; this.parse = parse; return this;} private boolean parse;
 	@gplx.Internal protected GfoMsg_base(){}
-	static final    String_obj_val Nil = String_obj_val.new_("<<NOT FOUND>>");
+	static final String_obj_val Nil = String_obj_val.new_("<<NOT FOUND>>");
 }
 interface XtoStrWkr {
 	String To_str(Object o);

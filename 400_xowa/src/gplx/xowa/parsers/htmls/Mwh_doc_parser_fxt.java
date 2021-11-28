@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 class Mwh_doc_parser_fxt {
-	private final    Bry_bfr expd_bfr = Bry_bfr_.New(), actl_bfr = Bry_bfr_.New();
-	private final    Mwh_doc_parser parser = new Mwh_doc_parser();
-	private final    Mwh_doc_wkr__itm_bldr wkr = new Mwh_doc_wkr__itm_bldr();
+	private final Bry_bfr expd_bfr = Bry_bfr_.New(), actl_bfr = Bry_bfr_.New();
+	private final Mwh_doc_parser parser = new Mwh_doc_parser();
+	private final Mwh_doc_wkr__itm_bldr wkr = new Mwh_doc_wkr__itm_bldr();
 	public Mwh_doc_itm Make_txt		(String raw) {return new Mwh_doc_itm(Mwh_doc_itm.Itm_tid__txt		, -1, Bry_.new_u8(raw));}
 	public Mwh_doc_itm Make_txt		(String raw, int nde_tid) {return new Mwh_doc_itm(Mwh_doc_itm.Itm_tid__txt		, nde_tid, Bry_.new_u8(raw));}
 	public Mwh_doc_itm Make_comment (String raw) {return new Mwh_doc_itm(Mwh_doc_itm.Itm_tid__comment	, -1, Bry_.new_u8(raw));}
@@ -59,8 +59,8 @@ class Mwh_doc_parser_fxt {
 	}
 }
 class Mwh_doc_wkr__itm_bldr implements Mwh_doc_wkr {
-	private final    List_adp list = List_adp_.New();		
-	public Hash_adp_bry Nde_regy() {return nde_regy;} private final    Hash_adp_bry nde_regy = Mwh_doc_wkr_.Nde_regy__mw();
+	private final List_adp list = List_adp_.New();
+	public Hash_adp_bry Nde_regy() {return nde_regy;} private final Hash_adp_bry nde_regy = Mwh_doc_wkr_.Nde_regy__mw();
 	public void On_atr_each		(Mwh_atr_parser mgr, byte[] src, int nde_tid, boolean valid, boolean repeated, boolean key_exists, byte[] key_bry, byte[] val_bry_manual, int[] itm_ary, int itm_idx) {}
 	public void On_txt_end		(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {list.Add(new Mwh_doc_itm(Mwh_doc_itm.Itm_tid__txt		, nde_tid, Bry_.Mid(src, itm_bgn, itm_end)));}
 	public void On_nde_head_bgn (Mwh_doc_parser mgr, byte[] src, int nde_tid, int key_bgn, int key_end) {}

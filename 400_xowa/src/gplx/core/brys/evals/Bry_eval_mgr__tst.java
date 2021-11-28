@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.brys.evals; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Bry_eval_mgr__tst {
-	private final    Bry_eval_mgr__fxt fxt = new Bry_eval_mgr__fxt();
+	private final Bry_eval_mgr__fxt fxt = new Bry_eval_mgr__fxt();
 	@Test 	public void Text()				{fxt.Test__eval("abc"												, "abc");}
 	@Test 	public void Args_0()			{fxt.Test__eval("abc~{test}xyz"										, "abctestxyz");}
 	@Test 	public void Args_n()			{fxt.Test__eval("abc~{concat|d|e|f}xyz"								, "abcdefxyz");}
@@ -27,7 +27,7 @@ public class Bry_eval_mgr__tst {
 	// @Test 	public void Eos()				{fxt.Test__eval("a~"												, "a~");}
 }
 class Bry_eval_mgr__fxt {
-	private final    Bry_eval_mgr mgr = Bry_eval_mgr.Dflt().Add_many(new Bry_eval_wkr__test(), new Bry_eval_wkr__concat());
+	private final Bry_eval_mgr mgr = Bry_eval_mgr.Dflt().Add_many(new Bry_eval_wkr__test(), new Bry_eval_wkr__concat());
 	public Bry_eval_mgr__fxt Test__eval(String raw, String expd) {
 		Gftest.Eq__bry(Bry_.new_u8(expd), mgr.Eval(Bry_.new_u8(raw)));
 		return this;

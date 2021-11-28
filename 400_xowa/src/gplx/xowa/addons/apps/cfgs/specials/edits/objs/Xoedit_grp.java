@@ -23,9 +23,9 @@ public class Xoedit_grp implements Xoedit_nde, Mustache_doc_itm {
 		this.key = key;
 		this.sort = sort;
 	}
-	public int		Id()		{return id;}	private final    int id;
-	public String	Key()		{return key;}	private final    String key;
-	public int		Sort()		{return sort;}	private final    int sort;
+	public int		Id()		{return id;}	private final int id;
+	public String	Key()		{return key;}	private final String key;
+	public int		Sort()		{return sort;}	private final int sort;
 	public String	Help()		{return help;}	private String help;
 
 	public Xoedit_itm[] Itms() {return itms;} private Xoedit_itm[] itms = new Xoedit_itm[0];

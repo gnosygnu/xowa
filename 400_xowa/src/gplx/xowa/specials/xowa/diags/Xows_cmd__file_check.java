@@ -112,8 +112,8 @@ class Xows_cmd__file_check {
 		bfr.Add_str_u8(key).Add_str_a7(": ").Add_obj(val).Add_byte_nl();
 		bfr.Add_str_u8("------------------------------------------------------").Add_byte_nl();
 	}
-	private static final    byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_file = Bry_.new_a7("file");
-        public static final    Xows_cmd__file_check Instance = new Xows_cmd__file_check(); Xows_cmd__file_check() {}
+	private static final byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_file = Bry_.new_a7("file");
+        public static final Xows_cmd__file_check Instance = new Xows_cmd__file_check(); Xows_cmd__file_check() {}
 }
 interface Fsdb_sql_mkr {
 	String Orig_by_ttl(byte[] ttl);
@@ -128,10 +128,10 @@ abstract class Fsdb_sql_mkr__base {
 class Fsdb_sql_mkr__v1 extends Fsdb_sql_mkr__base implements Fsdb_sql_mkr {
 	public String Orig_by_ttl(byte[] ttl) {return String_.Format("SELECT * FROM wiki_orig WHERE orig_ttl = '{0}';", ttl);}
 	public String Thm_by_id(int id) {return String_.Format("SELECT * FROM fsdb_xtn_thm WHERE thm_owner_id = {0};", id);}
-        public static final    Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v1(); Fsdb_sql_mkr__v1() {}
+        public static final Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v1(); Fsdb_sql_mkr__v1() {}
 }
 class Fsdb_sql_mkr__v2 extends Fsdb_sql_mkr__base implements Fsdb_sql_mkr {
 	public String Orig_by_ttl(byte[] ttl) {return String_.Format("SELECT * FROM orig_reg WHERE orig_ttl = '{0}';", ttl);}
 	public String Thm_by_id(int id) {return String_.Format("SELECT * FROM fsdb_thm WHERE thm_owner_id = {0};", id);}
-        public static final    Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v2(); Fsdb_sql_mkr__v2() {}
+        public static final Fsdb_sql_mkr Instance = new Fsdb_sql_mkr__v2(); Fsdb_sql_mkr__v2() {}
 }

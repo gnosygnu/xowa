@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.core.btries.*;
 import gplx.xowa.parsers.xndes.*;
 public class Scrib_lib_text__nowiki_util_tst {
-	private final    Scrib_lib_text__nowiki_util_fxt fxt = new Scrib_lib_text__nowiki_util_fxt();
+	private final Scrib_lib_text__nowiki_util_fxt fxt = new Scrib_lib_text__nowiki_util_fxt();
 	@Test public void Basic() {
 		// noop
 		fxt.Test__Strip_tag("abc", "abc");
@@ -43,8 +43,8 @@ public class Scrib_lib_text__nowiki_util_tst {
 	}
 }
 class Scrib_lib_text__nowiki_util_fxt {
-	private final    Scrib_lib_text__nowiki_util util = new Scrib_lib_text__nowiki_util();
-	private final    Btrie_slim_mgr trie;
+	private final Scrib_lib_text__nowiki_util util = new Scrib_lib_text__nowiki_util();
+	private final Btrie_slim_mgr trie;
 	public Scrib_lib_text__nowiki_util_fxt() {
 		this.trie = util.Make_trie(Xop_xnde_tag_.Tag__nowiki.Name_bry());
 	}

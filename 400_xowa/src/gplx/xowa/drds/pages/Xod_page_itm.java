@@ -35,8 +35,8 @@ public class Xod_page_itm {
 	public String First_allowed_editor_role() {return first_allowed_editor_role;} private String first_allowed_editor_role;
 	public List_adp Section_list() {return section_list;} private List_adp section_list = List_adp_.New();
 	public Xoh_page Hpg() {return hpg;} private Xoh_page hpg;
-	public Xopg_tag_mgr Head_tags() {return head_tags;} private final    Xopg_tag_mgr head_tags = new Xopg_tag_mgr(Bool_.Y);
-	public Xopg_tag_mgr Tail_tags() {return tail_tags;} private final    Xopg_tag_mgr tail_tags = new Xopg_tag_mgr(Bool_.N);
+	public Xopg_tag_mgr Head_tags() {return head_tags;} private final Xopg_tag_mgr head_tags = new Xopg_tag_mgr(Bool_.Y);
+	public Xopg_tag_mgr Tail_tags() {return tail_tags;} private final Xopg_tag_mgr tail_tags = new Xopg_tag_mgr(Bool_.N);
 	public void Init(int page_id, int rev_id
 		, String ttl_text, String ttl_db, String redirected, String description, String modified_on
 		, boolean is_editable, boolean is_main_page, boolean is_disambiguation, int lang_count

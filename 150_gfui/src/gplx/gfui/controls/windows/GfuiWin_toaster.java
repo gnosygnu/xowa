@@ -118,7 +118,7 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 			}
 		}
 	}
-	static final    int PopupAnchorTop = -1;	// HACK: wxp1 showed obvious flickering with top edge
+	static final int PopupAnchorTop = -1;	// HACK: wxp1 showed obvious flickering with top edge
 	void ChangeBounds(boolean isGrowing, int increment) {
 		increment = isGrowing ? increment : -increment;
 		this.Pos_(this.X(), PopupAnchorTop);	//this.Top - increment
@@ -149,7 +149,7 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 		if		(ctx.Match(k, Tmr_cmd))		WhenTick();
 		else super.Invk(ctx, ikey, k, m);
 		return this;
-	}	public static final    String Tmr_cmd = "Tmr";
+	}	public static final String Tmr_cmd = "Tmr";
 	GfuiTextMemo messageLabel;
 	TimerAdp timer;
 	SizeAdp fullyGrown = SizeAdp_.Zero;
@@ -171,7 +171,7 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 class PopupState {
 	public int Val() {return val;} int val;
 	public PopupState(int v) {this.val = v;}
-	public static final    PopupState
+	public static final PopupState
 		  FullyShrunk	= new PopupState(1)
 		, Growing		= new PopupState(2)
 		, FullyGrown	= new PopupState(3)

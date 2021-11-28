@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.bldrs.cmds.utils.*;
 public class Xob_import_marker {
-	private final    Hash_adp_bry in_progress_hash = Hash_adp_bry.cs();
+	private final Hash_adp_bry in_progress_hash = Hash_adp_bry.cs();
 	public void Bgn(Xowe_wiki wiki) {
 		in_progress_hash.Add_as_key_and_val(wiki.Domain_bry());
 		Io_mgr.Instance.SaveFilStr(url_(wiki), "XOWA has created this file to indicate that an import is in progress. This file will be deleted once the import is completed.");

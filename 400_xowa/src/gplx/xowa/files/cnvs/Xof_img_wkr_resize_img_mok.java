@@ -26,5 +26,5 @@ public class Xof_img_wkr_resize_img_mok implements Xof_img_wkr_resize_img {
 		Io_mgr.Instance.SaveFilStr(trg, SizeAdp_.new_(trg_w, trg_h).To_str());
 		return true;
 	}
-	public static final    Xof_img_wkr_resize_img_mok Instance = new Xof_img_wkr_resize_img_mok(); Xof_img_wkr_resize_img_mok() {}
+	public static final Xof_img_wkr_resize_img_mok Instance = new Xof_img_wkr_resize_img_mok(); Xof_img_wkr_resize_img_mok() {}
 }

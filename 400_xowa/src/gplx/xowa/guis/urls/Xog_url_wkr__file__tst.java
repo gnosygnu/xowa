@@ -17,7 +17,7 @@ package gplx.xowa.guis.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.files.origs.*;
 public class Xog_url_wkr__file__tst {
-	private final    Xog_url_wkr__file__fxt fxt = new Xog_url_wkr__file__fxt();
+	private final Xog_url_wkr__file__fxt fxt = new Xog_url_wkr__file__fxt();
 	@Test  public void Basic() {
 		fxt.Test__extract("A.png", "file:///mem/xowa/file/commons.wikimedia.org/orig/7/0/A.png", 300, 200);
 	}
@@ -29,10 +29,10 @@ public class Xog_url_wkr__file__tst {
 	}
 }
 class Xog_url_wkr__file__fxt {
-	private final    Xowe_wiki wiki;
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    Xog_url_wkr__file wkr;
-	private final    Xof_orig_wkr__mock orig_wkr = new Xof_orig_wkr__mock();
+	private final Xowe_wiki wiki;
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final Xog_url_wkr__file wkr;
+	private final Xof_orig_wkr__mock orig_wkr = new Xof_orig_wkr__mock();
 	public Xog_url_wkr__file__fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		wiki = Xoa_app_fxt.Make__wiki__edit(app);

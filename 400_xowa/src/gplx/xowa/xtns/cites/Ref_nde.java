@@ -75,8 +75,8 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	}
 	public static final int Idx_minor_follow = -2;
 	public static final byte Xatr_id_name = 0, Xatr_id_group = 1, Xatr_id_follow = 2;
-	private static final    Ref_nde[] Ary_empty = new Ref_nde[0];
-	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+	private static final Ref_nde[] Ary_empty = new Ref_nde[0];
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj("name", Byte_obj_val.new_(Ref_nde.Xatr_id_name))
 	.Add_str_obj("group", Byte_obj_val.new_(Ref_nde.Xatr_id_group))
 	.Add_str_obj("follow", Byte_obj_val.new_(Ref_nde.Xatr_id_follow));

@@ -20,9 +20,9 @@ public class Merge2_heap_db implements Merge2_trg_itm {
 		this.tbl = tbl; this.flds = flds; this.idx = idx;
 		this.url = url; this.conn = conn; 
 	}
-	public Split_tbl		Tbl()	{return tbl;}	private final    Split_tbl tbl;
-	public Dbmeta_fld_list	Flds()	{return flds;}	private final    Dbmeta_fld_list flds;
-	public int				Idx()	{return idx;}	private final    int idx;
-	public Io_url			Url()	{return url;}	private final    Io_url url;
-	public Db_conn			Conn()	{return conn;}	private final    Db_conn conn;
+	public Split_tbl		Tbl()	{return tbl;}	private final Split_tbl tbl;
+	public Dbmeta_fld_list	Flds()	{return flds;}	private final Dbmeta_fld_list flds;
+	public int				Idx()	{return idx;}	private final int idx;
+	public Io_url			Url()	{return url;}	private final Io_url url;
+	public Db_conn			Conn()	{return conn;}	private final Db_conn conn;
 }

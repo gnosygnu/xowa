@@ -17,7 +17,7 @@ package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 import gplx.xowa.langs.cases.*;
 public class Xop_lnki_wkr__ctg_tst {
-	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
 	@Test  public void Pre() { // PURPOSE: Category should trim preceding nl; EX:w:Mount Kailash
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last

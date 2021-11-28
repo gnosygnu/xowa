@@ -17,8 +17,8 @@ package gplx.xowa.addons.htmls.sidebars; import gplx.*; import gplx.xowa.*; impo
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_sidebar_mgr {
-	public Xoh_sidebar_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private final    Xowe_wiki wiki;		
-	public List_adp Grps() {return grps;} private final    List_adp grps = List_adp_.New();	// TEST:
+	public Xoh_sidebar_mgr(Xowe_wiki wiki) {this.wiki = wiki;} private final Xowe_wiki wiki;
+	public List_adp Grps() {return grps;} private final List_adp grps = List_adp_.New();	// TEST:
 	public byte[] Html_bry() {return html_bry;} private byte[] html_bry;
 	public void Init_by_wiki() {
 		try {
@@ -48,5 +48,5 @@ public class Xoh_sidebar_mgr {
 		Xoh_sidebar_parser.Parse(tmp_bfr, wiki, grps, src);
 		html_bry = Xoh_sidebar_htmlr.To_html(tmp_bfr, wiki, grps);
 	}
-	private static final    byte[] Ttl__sidebar = Bry_.new_a7("Sidebar");	// MediaWiki:Sidebar
+	private static final byte[] Ttl__sidebar = Bry_.new_a7("Sidebar");	// MediaWiki:Sidebar
 }

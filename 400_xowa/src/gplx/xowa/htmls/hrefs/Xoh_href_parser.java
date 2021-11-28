@@ -17,7 +17,7 @@ package gplx.xowa.htmls.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.xowa.langs.vnts.*;
 public class Xoh_href_parser {
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	public void Parse_as_url(Xoa_url rv, byte[] raw, Xowe_wiki wiki, byte[] cur_page) {
 		int bgn = 0;
 		Object seg_obj = btrie.Match_at(trv, raw, bgn, raw.length);		// match /wiki/ or /site/ or /xcmd/
@@ -75,7 +75,7 @@ public class Xoh_href_parser {
 		}
 	}
 	private static final byte Seg_wiki_tid = 0, Seg_site_tid = 1, Seg_xcmd_tid = 2;
-	private static final    Btrie_slim_mgr btrie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:XO_const.en; /wiki/, /site/ etc.
+	private static final Btrie_slim_mgr btrie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:XO_const.en; /wiki/, /site/ etc.
 	.Add_bry_tid(Xoh_href_.Bry__wiki, Seg_wiki_tid)
 	.Add_bry_tid(Xoh_href_.Bry__site, Seg_site_tid)
 	.Add_bry_tid(Xoh_href_.Bry__xcmd, Seg_xcmd_tid);

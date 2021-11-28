@@ -17,10 +17,10 @@ package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.x
 import gplx.core.caches.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Xow_ifexist_cache {
-	private final    Xowe_wiki wiki;
-	private final    Xow_page_cache page_cache;
-	private final    Gfo_cache_mgr cache_mgr = new Gfo_cache_mgr().Max_size_(64 * Io_mgr.Len_mb).Reduce_by_(32 * Io_mgr.Len_mb);
-	private final    Hash_adp ns_loaded_hash = Hash_adp_.New();		
+	private final Xowe_wiki wiki;
+	private final Xow_page_cache page_cache;
+	private final Gfo_cache_mgr cache_mgr = new Gfo_cache_mgr().Max_size_(64 * Io_mgr.Len_mb).Reduce_by_(32 * Io_mgr.Len_mb);
+	private final Hash_adp ns_loaded_hash = Hash_adp_.New();
 	public Xow_ifexist_cache(Xowe_wiki wiki, Xow_page_cache page_cache) {
 		this.wiki = wiki;
 		this.page_cache = page_cache;
@@ -85,9 +85,9 @@ public class Xow_ifexist_cache {
 }
 class Xow_ifexist_itm implements Rls_able {		
 	Xow_ifexist_itm(boolean exists) {this.exists = exists;}
-	public boolean Exists() {return exists;} private final    boolean exists;
+	public boolean Exists() {return exists;} private final boolean exists;
 	public void Rls() {}
 
-	private static final    Xow_ifexist_itm Itm__exists = new Xow_ifexist_itm(Bool_.Y), Itm__missing = new Xow_ifexist_itm(Bool_.N);
+	private static final Xow_ifexist_itm Itm__exists = new Xow_ifexist_itm(Bool_.Y), Itm__missing = new Xow_ifexist_itm(Bool_.N);
 	public static Xow_ifexist_itm Get(boolean exists) {return exists ? Itm__exists : Itm__missing;}
 }

@@ -27,7 +27,7 @@ public class GfuiStatusBar extends GfuiElemBase {
 		if		(ctx.Match(k, StatusBarFocus_cmd))			StatusBar_Focus();
 		else return super.Invk(ctx, ikey, k, m);
 		return this;
-	}	public static final    String StatusBarFocus_cmd = "StatusBarFocus";
+	}	public static final String StatusBarFocus_cmd = "StatusBarFocus";
 	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
 		moveBtn = GfuiMoveElemBtn.new_();

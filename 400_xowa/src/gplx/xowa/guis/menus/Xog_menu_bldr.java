@@ -51,7 +51,7 @@ class Xog_menu_bldr {
 		bfr.Add(Const_itm_btn_bgn_rhs);
 		return this;
 	}
-	private static final    byte[]
+	private static final byte[]
 	  Const_spr				= Bry_.new_a7("add_spr;\n")
 	, Const_itm_btn_bgn_lhs	= Bry_.new_a7("add_btn_default('")
 	, Const_itm_btn_bgn_rhs	= Bry_.new_a7("');\n")
@@ -59,5 +59,5 @@ class Xog_menu_bldr {
 	, Const_itm_grp_bgn_rhs	= Bry_.new_a7("') {\n")
 	, Const_itm_grp_end		= Bry_.new_a7("}\n")
 	;
-	public static final    Xog_menu_bldr Instance = new Xog_menu_bldr(); Xog_menu_bldr() {}
+	public static final Xog_menu_bldr Instance = new Xog_menu_bldr(); Xog_menu_bldr() {}
 }

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.ios; import gplx.*; import gplx.core.*;
 public class IoItmDir_ {
 	public static IoItmDir as_(Object obj) {return obj instanceof IoItmDir ? (IoItmDir)obj : null;}
-	public static final    IoItmDir Null = null_();
+	public static final IoItmDir Null = null_();
 	public static IoItmDir top_(Io_url url) {return scan_(url);}
 	public static IoItmDir scan_(Io_url url) {
 		IoItmDir rv = new IoItmDir(url.Info().CaseSensitive());

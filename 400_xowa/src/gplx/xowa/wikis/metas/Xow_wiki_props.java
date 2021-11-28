@@ -26,10 +26,10 @@ public class Xow_wiki_props {
 	public byte[]            Style_path()         {return style_path;}         private byte[] style_path = Bry_.new_a7("/wiki/skins");
 	public byte[]            Content_language()   {return content_language;}   private byte[] content_language = Bry_.Empty;
 	public byte[]            Direction_mark()     {return direction_mark;}     private byte[] direction_mark = Bry_.Empty;
-	public byte[]            Current_version()    {return CURRENT_VERSION;}    private static final    byte[] CURRENT_VERSION = Bry_.new_a7("1.21wmf11"); // approximate level of compatibility
+	public byte[]            Current_version()    {return CURRENT_VERSION;}    private static final byte[] CURRENT_VERSION = Bry_.new_a7("1.21wmf11"); // approximate level of compatibility
 
 	// XO props
-	public byte              Protocol_tid()       {return protocol_tid;}       private final    byte protocol_tid = gplx.core.net.Gfo_protocol_itm.Tid_https;	// NOTE: default protocol to https; handles external links like [//a.org]; may need to be changed for wikia or other non-WMF wikis; DATE:2015-07-27
+	public byte              Protocol_tid()       {return protocol_tid;}       private final byte protocol_tid = gplx.core.net.Gfo_protocol_itm.Tid_https;	// NOTE: default protocol to https; handles external links like [//a.org]; may need to be changed for wikia or other non-WMF wikis; DATE:2015-07-27
 	public byte[]            Main_page()          {return main_page;}          private byte[] main_page = Xoa_page_.Main_page_bry; // HACK: default to Main_Page b/c some code tries to do Xoa_ttl.Parse() which will not work with ""; DATE:2014-02-16; QUESTION:is this always "Main_Page" or "Main Page"; See Xoh_page_wtr_wkr_; DATE:2020-05-01
 	public byte[]            Bldr_version()       {return bldr_version;}       private byte[] bldr_version = Bry_.Empty;
 	public int               Css_version()        {return css_version;}        private int css_version = 1;

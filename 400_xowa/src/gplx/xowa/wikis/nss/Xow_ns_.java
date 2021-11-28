@@ -50,7 +50,7 @@ public class Xow_ns_ {
 	, Key__null				= "null"
 	, Key__wikipedia		= "Wikipedia"
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Bry__media			= Bry_.new_a7(Key__media)
 	, Bry__special			= Bry_.new_a7(Key__special)
 	, Bry__main				= Bry_.new_a7(Key__main)			, Bry__talk					= Bry_.new_a7(Key__talk)
@@ -71,8 +71,8 @@ public class Xow_ns_ {
 	  Alias__wikipedia = "Wikipedia"
 	, Alias__image = "Image"
 	;
-	public static final    byte[] Alias__image__bry = Bry_.new_a7(Alias__image);
-	public static final    byte[] 
+	public static final byte[] Alias__image__bry = Bry_.new_a7(Alias__image);
+	public static final byte[]
 	  Bry__template_w_colon	= Bry_.new_a7(Key__template + ":")
 	, Bry__module_w_colon	= Bry_.new_a7(Key__module + ":")
 	;

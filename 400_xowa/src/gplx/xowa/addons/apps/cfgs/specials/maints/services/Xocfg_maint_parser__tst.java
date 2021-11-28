@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.maints.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xocfg_maint_parser__tst {
-	private final    Xocfg_maint_parser__fxt fxt = new Xocfg_maint_parser__fxt();
+	private final Xocfg_maint_parser__fxt fxt = new Xocfg_maint_parser__fxt();
 	@Test  public void Parse_grp() {
 		fxt.Exec__parse("grp {id='123'; key='key_1'; owner='owner_1'; name='name_1'; help='help_1'}"
 		, fxt.Make__grp("owner_1", 123, "key_1", "name_1", "help_1")

@@ -84,8 +84,8 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 		this.lnki_bldr = new Xoh_lnki_bldr(app, href_wtr);
 		this.ctg_catpage_mgr = new Xoctg_catpage_mgr(this);
 	}
-	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final    Gfo_evt_mgr ev_mgr;
-	public Xow_ns_mgr				Ns_mgr() {return ns_mgr;} private final    Xow_ns_mgr ns_mgr;
+	public Gfo_evt_mgr				Evt_mgr() {return ev_mgr;} private final Gfo_evt_mgr ev_mgr;
+	public Xow_ns_mgr				Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
 	public Xoa_ttl					Ttl_parse(byte[] ttl)								{return Xoa_ttl.Parse(this, ttl);}
 	public Xoa_ttl					Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.Parse(this, src, src_bgn, src_end);}
 	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)					{return Xoa_ttl.Parse(this, ns_id, ttl);}
@@ -93,12 +93,12 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xoa_app					App() {return app;}
 	public Xol_lang_itm				Lang() {return lang;} private Xol_lang_itm lang;
 	public Xol_case_mgr				Case_mgr() {return lang.Case_mgr();}
-	public byte[]					Domain_bry() {return domain_bry;} private final    byte[] domain_bry; 
-	public String					Domain_str() {return domain_str;} private final    String domain_str;
-	public int						Domain_tid() {return domain_tid;} private final    int domain_tid;
-	public byte[]					Domain_abrv() {return domain_abrv;} private final    byte[] domain_abrv;
-	public Xow_domain_itm			Domain_itm() {return domain_itm;} private final    Xow_domain_itm domain_itm;
-	public Xow_fsys_mgr				Fsys_mgr() {return fsys_mgr;} private final    Xow_fsys_mgr fsys_mgr;
+	public byte[]					Domain_bry() {return domain_bry;} private final byte[] domain_bry;
+	public String					Domain_str() {return domain_str;} private final String domain_str;
+	public int						Domain_tid() {return domain_tid;} private final int domain_tid;
+	public byte[]					Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
+	public Xow_domain_itm			Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
+	public Xow_fsys_mgr				Fsys_mgr() {return fsys_mgr;} private final Xow_fsys_mgr fsys_mgr;
 	public Xow_db_mgr				Data__core_mgr() {if (db_mgr == null) return null; return db_mgr.Tid() == Xodb_mgr_txt.Tid_txt ? null : this.Db_mgr_as_sql().Core_data_mgr();}	// TEST:
 	public Xof_fsdb_mode			File__fsdb_mode() {return file_mgr.Fsdb_mode();}
 	public Fsdb_db_mgr				File__fsdb_core() {return file_mgr.Db_core();}
@@ -108,28 +108,28 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Fsm_mnt_mgr				File__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
 	public boolean						Html__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
 	public Xoh_page_wtr_mgr			Html__wtr_mgr() {return html_mgr.Page_wtr_mgr();}
-	public Xoh_lnki_bldr			Html__lnki_bldr() {return lnki_bldr;}  private final    Xoh_lnki_bldr lnki_bldr;
-	public Xoh_href_wtr				Html__href_wtr() {return href_wtr;} private final    Xoh_href_wtr href_wtr = new Xoh_href_wtr();
-	public Xoctg_pagebox_wtr		Ctg__pagebox_wtr() {return ctg_pagebox_wtr;} private final    Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
-	public Xoctg_catpage_mgr		Ctg__catpage_mgr() {return ctg_catpage_mgr;} private final    Xoctg_catpage_mgr ctg_catpage_mgr;
+	public Xoh_lnki_bldr			Html__lnki_bldr() {return lnki_bldr;}  private final Xoh_lnki_bldr lnki_bldr;
+	public Xoh_href_wtr				Html__href_wtr() {return href_wtr;} private final Xoh_href_wtr href_wtr = new Xoh_href_wtr();
+	public Xoctg_pagebox_wtr		Ctg__pagebox_wtr() {return ctg_pagebox_wtr;} private final Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
+	public Xoctg_catpage_mgr		Ctg__catpage_mgr() {return ctg_catpage_mgr;} private final Xoctg_catpage_mgr ctg_catpage_mgr;
 	public boolean						Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
-	public Xow_url_parser			Utl__url_parser() {return url__parser;} private final    Xow_url_parser url__parser;
-	public Xow_mw_parser_mgr		Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
-	public Xow_xwiki_mgr			Xwiki_mgr() {return xwiki_mgr;} private final    Xow_xwiki_mgr xwiki_mgr;
-	public Xow_wiki_props			Props() {return props;} private final    Xow_wiki_props props = new Xow_wiki_props();
-	public Xowd_site_stats_mgr		Stats() {return stats;} private final    Xowd_site_stats_mgr stats;
-	public Xow_parser_mgr			Parser_mgr() {return parser_mgr;} private final    Xow_parser_mgr parser_mgr;
-	public Xoax_addon_mgr			Addon_mgr() {return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
-	public Xog_cbk_mgr				Gui__cbk_mgr() {return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
-	public Xowe_page_mgr			Page_mgr() {return page_mgr;} private final    Xowe_page_mgr page_mgr;
-	public Xop_sanitizer			Sanitizer() {return sanitizer;} private final    Xop_sanitizer sanitizer;
+	public Xow_url_parser			Utl__url_parser() {return url__parser;} private final Xow_url_parser url__parser;
+	public Xow_mw_parser_mgr		Mw_parser_mgr() {return mw_parser_mgr;} private final Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
+	public Xow_xwiki_mgr			Xwiki_mgr() {return xwiki_mgr;} private final Xow_xwiki_mgr xwiki_mgr;
+	public Xow_wiki_props			Props() {return props;} private final Xow_wiki_props props = new Xow_wiki_props();
+	public Xowd_site_stats_mgr		Stats() {return stats;} private final Xowd_site_stats_mgr stats;
+	public Xow_parser_mgr			Parser_mgr() {return parser_mgr;} private final Xow_parser_mgr parser_mgr;
+	public Xoax_addon_mgr			Addon_mgr() {return addon_mgr;} private final Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
+	public Xog_cbk_mgr				Gui__cbk_mgr() {return gui__cbk_mgr;} private final Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
+	public Xowe_page_mgr			Page_mgr() {return page_mgr;} private final Xowe_page_mgr page_mgr;
+	public Xop_sanitizer			Sanitizer() {return sanitizer;} private final Xop_sanitizer sanitizer;
 	public byte[]					Wtxt__expand_tmpl(byte[] src) {return parser_mgr.Main().Expand_tmpl(src);}
 	public boolean                  Embeddable_enabled() {return embeddable_enabled;} public void Embeddable_enabled_(boolean v) {this.embeddable_enabled = v;} private boolean embeddable_enabled;
-	public Hxtn_page_mgr            Hxtn_mgr() {return hxtn_mgr;} private final    Hxtn_page_mgr hxtn_mgr = new Hxtn_page_mgr();
+	public Hxtn_page_mgr            Hxtn_mgr() {return hxtn_mgr;} private final Hxtn_page_mgr hxtn_mgr = new Hxtn_page_mgr();
 	public boolean                  Installed() {return installed_by_test || this.Data__core_mgr() != null;} // not sure if this is the best way
 	public void                     Installed_by_test_(boolean v) {installed_by_test = v;} private boolean installed_by_test = false; // HACK:need to manually mark installed for TEST; DATE:2019-11-17
 
-	public Xow_hdump_mgr			Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
+	public Xow_hdump_mgr			Html__hdump_mgr() {return html__hdump_mgr;} private final Xow_hdump_mgr html__hdump_mgr;
 	public Xoae_app					Appe() {return app;} private Xoae_app app;
 	public Xow_user					User() {return user;} private Xow_user user = new Xow_user();
 	public Xow_page_mgr				Data_mgr() {return data_mgr;} private Xow_page_mgr data_mgr;
@@ -142,11 +142,11 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 
 	public byte[]					Commons_wiki_key() {return commons_wiki_key;} private byte[] commons_wiki_key = Xow_domain_itm_.Bry__commons;
 	public Xob_hive_mgr				Hive_mgr() {return hive_mgr;} private Xob_hive_mgr hive_mgr;
-	public Xow_msg_mgr				Msg_mgr() {return msg_mgr;} private final    Xow_msg_mgr msg_mgr;
+	public Xow_msg_mgr				Msg_mgr() {return msg_mgr;} private final Xow_msg_mgr msg_mgr;
 	public Xow_fragment_mgr			Fragment_mgr() {return fragment_mgr;} private Xow_fragment_mgr fragment_mgr;
 	public Bfmtr_eval_wiki			Eval_mgr() {return eval_mgr;} private Bfmtr_eval_wiki eval_mgr;
-	public Bry_bfr_mkr				Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
-	public Io_stream_zip_mgr		Utl__zip_mgr()		{return utl__zip_mgr;}		private final    Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
+	public Bry_bfr_mkr				Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public Io_stream_zip_mgr		Utl__zip_mgr()		{return utl__zip_mgr;}		private final Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
 	public int						Wdata_wiki_tid() {return wdata_wiki_tid;} private int wdata_wiki_tid;
 	public byte[]					Wdata_wiki_lang() {return wdata_wiki_lang;} private byte[] wdata_wiki_lang;
 	public void						Wdata_wiki_lang_(byte[] v) {this.wdata_wiki_lang = v; Wdata_wiki_abrv_();}	// TEST:
@@ -162,7 +162,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public List_adp Rls_list() {if (rls_list == null) rls_list = List_adp_.New(); return rls_list;} private List_adp rls_list;
 	public Xow_file_mgr			File_mgr() {return file_mgr;} private Xow_file_mgr file_mgr;
 	public Xob_import_cfg		Import_cfg() {return import_cfg;} private Xob_import_cfg import_cfg;
-	public Xotdb_fsys_mgr		Tdb_fsys_mgr() {return tdb_fsys_mgr;} private final    Xotdb_fsys_mgr tdb_fsys_mgr;
+	public Xotdb_fsys_mgr		Tdb_fsys_mgr() {return tdb_fsys_mgr;} private final Xotdb_fsys_mgr tdb_fsys_mgr;
 	public Xou_history_cfg		Cfg_history() {return cfg_history;} private Xou_history_cfg cfg_history = new Xou_history_cfg();
 	public Xoh_file_page_wtr	Cfg_file_page() {return cfg_file_page;} private Xoh_file_page_wtr cfg_file_page = new Xoh_file_page_wtr();
 	public Xow_sys_cfg			Sys_cfg() {return sys_cfg;} private Xow_sys_cfg sys_cfg;

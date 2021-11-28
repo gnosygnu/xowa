@@ -32,5 +32,5 @@ class Gfui_mnu_itm_null implements Gfui_mnu_itm {
 	public ImageAdp Img() {return img;} public void Img_(ImageAdp v) {img = v;} private ImageAdp img;
 	public boolean Selected() {return true;} public void Selected_(boolean v) {}
 	public Object Under() {return null;}
-	public static final    Gfui_mnu_itm_null Null = new Gfui_mnu_itm_null(); Gfui_mnu_itm_null() {}
+	public static final Gfui_mnu_itm_null Null = new Gfui_mnu_itm_null(); Gfui_mnu_itm_null() {}
 }

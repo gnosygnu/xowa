@@ -17,7 +17,7 @@ package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.langs.msgs.*;
 public class Cite_mgr_tst {
-	private final    Cite_mgr_fxt fxt = new Cite_mgr_fxt();
+	private final Cite_mgr_fxt fxt = new Cite_mgr_fxt();
 	@Test  public void getLinkLabel_lower_alpha() {
 		fxt.Test__getLinkLabel("lower-alpha", 1, "a");
 		fxt.Test__getLinkLabel("lower-alpha", 2, "b");

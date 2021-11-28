@@ -46,7 +46,7 @@ public class GfuiMoveElemBnd implements IptBnd, Gfo_invk, InjectAble {
 		else if (val == IptEventType_.MouseMove.Val())		ExecMouseMove(iptData);
 	}
 	public GfuiElem TargetElem() {return targetElem;} public void TargetElem_set(GfuiElem v) {this.targetElem = v;} GfuiElem targetElem;
-	public static final    String target_idk = "target";
+	public static final String target_idk = "target";
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, target_idk))				return targetElem;
 		else if	(ctx.Match(k, "key"))					return key;

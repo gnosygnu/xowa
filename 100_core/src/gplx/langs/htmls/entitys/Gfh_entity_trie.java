@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.htmls.entitys; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import gplx.core.btries.*;
 public class Gfh_entity_trie {	// TS
-	public static final    String		// NOTE: top_define; entities needed for <nowiki> escaping
+	public static final String		// NOTE: top_define; entities needed for <nowiki> escaping
 	  Str__xowa_lt			= "&xowa_lt;"
 	, Str__xowa_brack_bgn	= "&xowa_brack_bgn;"
 	, Str__xowa_brack_end	= "&xowa_brack_end;"
@@ -29,7 +29,7 @@ public class Gfh_entity_trie {	// TS
 	, Str__xowa_nl			= "&xowa_nl;"
 	, Str__xowa_dash		= "&xowa_dash;"
 	;
-	public static final    Btrie_slim_mgr Instance = New(); Gfh_entity_trie() {}
+	public static final Btrie_slim_mgr Instance = New(); Gfh_entity_trie() {}
 	private static Btrie_slim_mgr New() {// REF.MW: Sanitizer|$wgHtmlEntities; NOTE:added apos
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();
 		Add_name(rv, Bool_.Y,   60, Str__xowa_lt);

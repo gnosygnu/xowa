@@ -51,7 +51,7 @@ public class XomwStringUtils {
 //		}
 
 	private static final byte DELIMITER_EXPLODE__SEP = 0, DELIMITER_EXPLODE__BGN = 1, DELIMITER_EXPLODE__END = 2;
-	private static final    Btrie_slim_mgr delimiter_explode_trie = Btrie_slim_mgr.cs()
+	private static final Btrie_slim_mgr delimiter_explode_trie = Btrie_slim_mgr.cs()
 		.Add_str_byte("|" , DELIMITER_EXPLODE__SEP)
 		.Add_str_byte("-{", DELIMITER_EXPLODE__BGN)
 		.Add_str_byte("}-", DELIMITER_EXPLODE__END)

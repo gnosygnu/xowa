@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.updates.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xoa_app_version_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__version_id, fld__version_name, fld__version_date, fld__version_priority, fld__version_url, fld__version_summary, fld__version_details;
-	private final    Db_conn conn;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld__version_id, fld__version_name, fld__version_date, fld__version_priority, fld__version_url, fld__version_summary, fld__version_details;
+	private final Db_conn conn;
 	public Xoa_app_version_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.fld__version_id		= flds.Add_int_pkey("version_id");
@@ -30,7 +30,7 @@ public class Xoa_app_version_tbl implements Db_tbl {
 		this.fld__version_details	= flds.Add_text("version_details");
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name = TBL_NAME;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name = TBL_NAME;
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));
 	}

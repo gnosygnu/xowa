@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.centrals.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
 public class Xobc_task_step_hash {
-	private final    Ordered_hash tasks_hash = Ordered_hash_.New();
-	private final    Ordered_hash steps_hash = Ordered_hash_.New();
+	private final Ordered_hash tasks_hash = Ordered_hash_.New();
+	private final Ordered_hash steps_hash = Ordered_hash_.New();
 	public int Tasks__len() {return tasks_hash.Len();}
 	public int Tasks__get_at(int i) {return Int_.Cast(tasks_hash.Get_at(i));}
 	public int Steps__len() {return steps_hash.Len();}

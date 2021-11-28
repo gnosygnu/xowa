@@ -77,6 +77,6 @@ public class IptCfg_tst {
 			if		(ctx.Match(k, Invk_Reg)) {actl = m.ReadIntOr("val", 0);}
 			else	return Gfo_invk_.Rv_unhandled;
 			return this;
-		}	public static final    String Invk_Reg = "Reg";
+		}	public static final String Invk_Reg = "Reg";
 	}
 }

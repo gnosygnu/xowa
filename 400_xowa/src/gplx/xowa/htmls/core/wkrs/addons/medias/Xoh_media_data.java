@@ -27,7 +27,7 @@ public class Xoh_media_data implements Xoh_data_itm, Gfh_style_wkr {
 	public int				Aud_width()		{return aud_width;} private int aud_width;
 	public int				Lnki_ttl_bgn()	{return lnki_ttl_bgn;} private int lnki_ttl_bgn;
 	public int				Lnki_ttl_end()	{return lnki_ttl_end;} private int lnki_ttl_end;
-	public Xoh_img_data		Img_data() {return img_data;} private final    Xoh_img_data img_data = new Xoh_img_data();
+	public Xoh_img_data		Img_data() {return img_data;} private final Xoh_img_data img_data = new Xoh_img_data();
 	public void Clear() {
 		this.src_bgn = this.src_end = this.lnki_ttl_bgn = this.lnki_ttl_end = aud_width = -1;
 		this.rng_valid = true;
@@ -116,8 +116,8 @@ public class Xoh_media_data implements Xoh_data_itm, Gfh_style_wkr {
 		tag_rdr.Err_wkr().Warn(msg, args);
 		return false;
 	}
-	public static final    byte[] Hook_bry = Bry_.new_a7(" class=\"media mw-media");
-	private static final    byte[] Style__max_width = Bry_.new_a7("max-width");
+	public static final byte[] Hook_bry = Bry_.new_a7(" class=\"media mw-media");
+	private static final byte[] Style__max_width = Bry_.new_a7("max-width");
 
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_media_data rv = new Xoh_media_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}

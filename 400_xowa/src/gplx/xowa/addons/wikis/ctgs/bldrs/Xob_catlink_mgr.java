@@ -20,7 +20,7 @@ import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 class Xob_catlink_mgr {
 	private Xowe_wiki wiki;
 	private Xodb_tmp_cat_db tmp_db; private Db_conn tmp_conn; private Xodb_tmp_cat_link_tbl tmp_link_tbl;
-	private final    Xoctg_collation_enum collation_enum = new Xoctg_collation_enum(); private final    Xoctg_type_enum type_enum = new Xoctg_type_enum();
+	private final Xoctg_collation_enum collation_enum = new Xoctg_collation_enum(); private final Xoctg_type_enum type_enum = new Xoctg_type_enum();
 	private int rows = 0;
 	public void On_cmd_bgn(Xowe_wiki wiki) {
 		this.wiki = wiki;

@@ -21,10 +21,10 @@ class Page_stub implements CompareAble {
 		this.Len = len;
 		this.Score = score;
 	}
-	public final    int Id;
-	public final    boolean Is_redirect;
-	public final    int Len;
-	public final    int Score;
+	public final int Id;
+	public final boolean Is_redirect;
+	public final int Len;
+	public final int Score;
 
 	public int compareTo(Object obj) {
 		Page_stub comp = (Page_stub)obj;

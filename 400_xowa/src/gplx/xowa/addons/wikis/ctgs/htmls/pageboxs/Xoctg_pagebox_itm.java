@@ -19,7 +19,7 @@ public class Xoctg_pagebox_itm {
 	public Xoctg_pagebox_itm(Xoa_ttl ttl) {
 		this.ttl = ttl;
 	}
-	public Xoa_ttl		Ttl()		{return ttl;} private final    Xoa_ttl ttl;
+	public Xoa_ttl		Ttl()		{return ttl;} private final Xoa_ttl ttl;
 	public int			Id()		{return id;} private int id;
 	public DateAdp		Timestamp() {return timestamp;} private DateAdp timestamp;
 	public boolean			Hidden()	{return hidden;} private boolean hidden;

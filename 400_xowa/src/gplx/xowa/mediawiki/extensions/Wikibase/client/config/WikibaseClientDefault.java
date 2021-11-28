@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.extensions.Wikibase.client.config; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.Wikibase.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
 public class WikibaseClientDefault {
-	private final    Hash_adp_bry settingCache = Hash_adp_bry.cs();
+	private final Hash_adp_bry settingCache = Hash_adp_bry.cs();
 	public Object getSetting(byte[] key) {
 		return settingCache.Get_by_bry(key);
 	}

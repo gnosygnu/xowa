@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 public class Byte_ {//RF:2017-10-08
 	public static final String Cls_val_name = "byte";
-	public static final    Class<?> Cls_ref_type = Byte.class; 
+	public static final Class<?> Cls_ref_type = Byte.class;
 
 	public static final byte
 	  Zero			= 0

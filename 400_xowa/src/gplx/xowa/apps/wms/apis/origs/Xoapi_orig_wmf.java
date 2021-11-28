@@ -81,8 +81,8 @@ public class Xoapi_orig_wmf extends Xoapi_orig_base {
 		}
 	}
 	private static Gfo_url_encoder tmp_encoder = Gfo_url_encoder_.New__http_url().Init__diff__one(Byte_ascii.Space, Byte_ascii.Underline).Make();
-	private static final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private static final    byte[]
+	private static final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private static final byte[]
 	  Bry_api					= Bry_.new_a7("/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:")	// NOTE: using File b/c it should be canonical
 	, Bry_width					= Bry_.new_a7("&iiurlwidth=")
 	, Bry_height				= Bry_.new_a7("&iiurlheight=")

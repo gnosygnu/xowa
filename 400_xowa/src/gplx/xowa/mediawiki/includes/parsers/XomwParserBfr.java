@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 public class XomwParserBfr {	// manages 2 bfrs to eliminate multiple calls to new memory allocations ("return bfr.To_bry_and_clear()")
-	private final    Bry_bfr bfr_1 = Bry_bfr_.New(), bfr_2 = Bry_bfr_.New();
+	private final Bry_bfr bfr_1 = Bry_bfr_.New(), bfr_2 = Bry_bfr_.New();
 	private Bry_bfr src, trg;
 	public XomwParserBfr() {
 		this.src = bfr_1;

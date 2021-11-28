@@ -21,7 +21,7 @@ class Xosql_fld_itm implements gplx.CompareAble {
 		this.idx = idx;
 	}
 	public int		Uid() {return uid;} private int uid;
-	public byte[]	Key() {return key;} private final    byte[] key;
+	public byte[]	Key() {return key;} private final byte[] key;
 	public int		Idx() {return idx;} private int idx;
 	public void Idx_(int v) {this.idx = v;}
 	public void Uid_(int v) {this.uid = v;}
@@ -32,7 +32,7 @@ class Xosql_fld_itm implements gplx.CompareAble {
 	}
 }
 class Xosql_fld_hash {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	private int hash_len;
 	public int Len() {return hash.Len();}
 	public Xosql_fld_itm Get_by_key(byte[] k)	{return (Xosql_fld_itm)hash.Get_by(k);}

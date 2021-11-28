@@ -22,11 +22,11 @@ public class Gfh_entity_itm {	// TS:immutable
 		this.xml_name_bry = xml_name_bry; 
 		this.key_name_len = xml_name_bry.length - 2;	// 2 for & and ;
 	}
-	public byte		Tid()			{return tid;}			private final    byte tid;
-	public int		Char_int()		{return char_int;}		private final    int char_int;			// val; EX: 160
-	public byte[]	U8_bry()		{return u8_bry;}		private final    byte[] u8_bry;			// EX: new byte[] {192, 160}; (C2, A0)
-	public byte[]	Xml_name_bry()	{return xml_name_bry;}	private final    byte[] xml_name_bry;	// EX: "&nbsp;"
-	public int		Key_name_len()	{return key_name_len;}	private final    int key_name_len;		// EX: "nbsp".Len
+	public byte		Tid()			{return tid;}			private final byte tid;
+	public int		Char_int()		{return char_int;}		private final int char_int;			// val; EX: 160
+	public byte[]	U8_bry()		{return u8_bry;}		private final byte[] u8_bry;			// EX: new byte[] {192, 160}; (C2, A0)
+	public byte[]	Xml_name_bry()	{return xml_name_bry;}	private final byte[] xml_name_bry;	// EX: "&nbsp;"
+	public int		Key_name_len()	{return key_name_len;}	private final int key_name_len;		// EX: "nbsp".Len
 
 	public void Print_ncr(Bry_bfr bfr) {
 		switch (char_int) {
@@ -49,7 +49,7 @@ public class Gfh_entity_itm {	// TS:immutable
 			default:					bfr.Add(u8_bry); break;				// write literal; EX: "[" not "&#91;"
 		}			
 	}
-	private static final    byte[] Escape_bgn = Bry_.new_a7("&#");
+	private static final byte[] Escape_bgn = Bry_.new_a7("&#");
 	public static final byte Tid_name_std = 1, Tid_name_xowa = 2, Tid_num_hex = 3, Tid_num_dec = 4;
 	public static final int Char_int_null = -1;
 }

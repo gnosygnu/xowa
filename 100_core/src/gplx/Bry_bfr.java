@@ -558,7 +558,7 @@ public class Bry_bfr {
 			this.Del_by(count);
 		return this;
 	}
-	private static final    boolean[] Trim_end_ws_ary = Trim_end_ws_new(); 
+	private static final boolean[] Trim_end_ws_ary = Trim_end_ws_new();
 	private static boolean[] Trim_end_ws_new() {
 		boolean[] rv = new boolean[256];
 		rv[32] = true;

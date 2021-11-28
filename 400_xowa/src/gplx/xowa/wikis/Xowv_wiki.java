@@ -30,7 +30,7 @@ import gplx.xowa.specials.mgrs.*;
 import gplx.xowa.addons.wikis.htmls.css.bldrs.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
 import gplx.xowa.htmls.hxtns.pages.*;
 public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
-	private final    Xof_fsdb_mgr__sql fsdb_mgr; private Fsdb_db_mgr db_core_mgr;
+	private final Xof_fsdb_mgr__sql fsdb_mgr; private Fsdb_db_mgr db_core_mgr;
 	private boolean init_needed = true;
 	public Xowv_wiki(Xoav_app app, byte[] domain_bry, Io_url wiki_root_dir) {
 		this.app = app;
@@ -58,43 +58,43 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	}
 	public Xoa_app						App() {return app;}
 	public boolean							Type_is_edit() {return Bool_.N;}
-	public byte[]						Domain_bry() {return domain_bry;} private final    byte[] domain_bry;
-	public String						Domain_str() {return domain_str;} private final    String domain_str;
-	public Xow_domain_itm				Domain_itm() {return domain_itm;} private final    Xow_domain_itm domain_itm;
-	public int							Domain_tid() {return domain_tid;} private final    int domain_tid;
-	public byte[]						Domain_abrv() {return domain_abrv;} private final    byte[] domain_abrv;
-	public Xow_ns_mgr					Ns_mgr() {return ns_mgr;} private final    Xow_ns_mgr ns_mgr;
+	public byte[]						Domain_bry() {return domain_bry;} private final byte[] domain_bry;
+	public String						Domain_str() {return domain_str;} private final String domain_str;
+	public Xow_domain_itm				Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
+	public int							Domain_tid() {return domain_tid;} private final int domain_tid;
+	public byte[]						Domain_abrv() {return domain_abrv;} private final byte[] domain_abrv;
+	public Xow_ns_mgr					Ns_mgr() {return ns_mgr;} private final Xow_ns_mgr ns_mgr;
 	public Xow_fsys_mgr					Fsys_mgr() {return fsys_mgr;} private Xow_fsys_mgr fsys_mgr;
 	public Xow_db_mgr					Data__core_mgr() {return data_mgr__core_mgr;} private Xow_db_mgr data_mgr__core_mgr;
 	public Xow_repo_mgr					File__repo_mgr() {return file_mgr__repo_mgr;} private Xowv_repo_mgr file_mgr__repo_mgr = new Xowv_repo_mgr();
-	public Xof_fsdb_mode				File__fsdb_mode() {return file_mgr__fsdb_mode;} private final    Xof_fsdb_mode file_mgr__fsdb_mode = Xof_fsdb_mode.New__v2__gui();
+	public Xof_fsdb_mode				File__fsdb_mode() {return file_mgr__fsdb_mode;} private final Xof_fsdb_mode file_mgr__fsdb_mode = Xof_fsdb_mode.New__v2__gui();
 	public Fsdb_db_mgr					File__fsdb_core() {return db_core_mgr;}
-	public Xof_orig_mgr					File__orig_mgr() {return orig_mgr;} private final    Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
+	public Xof_orig_mgr					File__orig_mgr() {return orig_mgr;} private final Xof_orig_mgr orig_mgr = new Xof_orig_mgr();
 	public Xof_bin_mgr					File__bin_mgr() {return fsdb_mgr.Bin_mgr();}
 	public Fsm_mnt_mgr					File__mnt_mgr() {return fsdb_mgr.Mnt_mgr();}
-	public Xoh_lnki_bldr				Html__lnki_bldr() {return lnki_bldr;}  private final    Xoh_lnki_bldr lnki_bldr;
-	public Xoh_href_wtr					Html__href_wtr()  {return href_wtr;} private final    Xoh_href_wtr href_wtr = new Xoh_href_wtr();
+	public Xoh_lnki_bldr				Html__lnki_bldr() {return lnki_bldr;}  private final Xoh_lnki_bldr lnki_bldr;
+	public Xoh_href_wtr					Html__href_wtr()  {return href_wtr;} private final Xoh_href_wtr href_wtr = new Xoh_href_wtr();
 	public boolean							Html__hdump_enabled() {return Bool_.Y;}
-	public Xow_hdump_mgr				Html__hdump_mgr() {return html__hdump_mgr;} private final    Xow_hdump_mgr html__hdump_mgr;
+	public Xow_hdump_mgr				Html__hdump_mgr() {return html__hdump_mgr;} private final Xow_hdump_mgr html__hdump_mgr;
 	public boolean							Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
-	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final    Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(Bool_.Y);
-	public Xoctg_pagebox_wtr			Ctg__pagebox_wtr() {return ctg_pagebox_wtr;} private final    Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
-	public Xoctg_catpage_mgr			Ctg__catpage_mgr() {return ctg_catpage_mgr;} private final    Xoctg_catpage_mgr ctg_catpage_mgr;
-	public Xow_msg_mgr					Msg_mgr() {return msg_mgr;} private final    Xow_msg_mgr msg_mgr;
+	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(Bool_.Y);
+	public Xoctg_pagebox_wtr			Ctg__pagebox_wtr() {return ctg_pagebox_wtr;} private final Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
+	public Xoctg_catpage_mgr			Ctg__catpage_mgr() {return ctg_catpage_mgr;} private final Xoctg_catpage_mgr ctg_catpage_mgr;
+	public Xow_msg_mgr					Msg_mgr() {return msg_mgr;} private final Xow_msg_mgr msg_mgr;
 	public byte[]						Wtxt__expand_tmpl(byte[] src) {return src;}
-	public Xow_mw_parser_mgr			Mw_parser_mgr() {return mw_parser_mgr;} private final    Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
-	public Xow_wiki_props				Props() {return props;} private final    Xow_wiki_props props = new Xow_wiki_props();
-	public Xol_lang_itm					Lang() {return lang;} private final    Xol_lang_itm lang;
+	public Xow_mw_parser_mgr			Mw_parser_mgr() {return mw_parser_mgr;} private final Xow_mw_parser_mgr mw_parser_mgr = new Xow_mw_parser_mgr();
+	public Xow_wiki_props				Props() {return props;} private final Xow_wiki_props props = new Xow_wiki_props();
+	public Xol_lang_itm					Lang() {return lang;} private final Xol_lang_itm lang;
 	public Xol_case_mgr					Case_mgr() {if (case_mgr == null) case_mgr = Xol_case_mgr_.U8(); return case_mgr;} private Xol_case_mgr case_mgr;
-	public Xowd_site_stats_mgr			Stats() {return stats;} private final    Xowd_site_stats_mgr stats;
-	public Bry_bfr_mkr					Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
-	public Io_stream_zip_mgr			Utl__zip_mgr()		{return utl__zip_mgr;}		private final    Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
-	public Xow_url_parser				Utl__url_parser()	{return url__parser;}		private final    Xow_url_parser url__parser;
-	public Xoax_addon_mgr				Addon_mgr() {return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
+	public Xowd_site_stats_mgr			Stats() {return stats;} private final Xowd_site_stats_mgr stats;
+	public Bry_bfr_mkr					Utl__bfr_mkr()		{return utl__bry_bfr_mkr;}	private final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public Io_stream_zip_mgr			Utl__zip_mgr()		{return utl__zip_mgr;}		private final Io_stream_zip_mgr utl__zip_mgr = new Io_stream_zip_mgr();
+	public Xow_url_parser				Utl__url_parser()	{return url__parser;}		private final Xow_url_parser url__parser;
+	public Xoax_addon_mgr				Addon_mgr() {return addon_mgr;} private final Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
 	public Xosp_special_mgr				Special_mgr() {return special_mgr;} private Xosp_special_mgr special_mgr;
-	public Xow_xwiki_mgr				Xwiki_mgr() {return xwiki_mgr;} private final    Xow_xwiki_mgr xwiki_mgr;
-	public Xoav_app						Appv() {return app;} private final    Xoav_app app;
-	public Hxtn_page_mgr                Hxtn_mgr() {return hxtn_mgr;} private final    Hxtn_page_mgr hxtn_mgr = new Hxtn_page_mgr();
+	public Xow_xwiki_mgr				Xwiki_mgr() {return xwiki_mgr;} private final Xow_xwiki_mgr xwiki_mgr;
+	public Xoav_app						Appv() {return app;} private final Xoav_app app;
+	public Hxtn_page_mgr                Hxtn_mgr() {return hxtn_mgr;} private final Hxtn_page_mgr hxtn_mgr = new Hxtn_page_mgr();
 	public boolean                      Embeddable_enabled() {return embeddable_enabled;} public void Embeddable_enabled_(boolean v) {this.embeddable_enabled = v;} private boolean embeddable_enabled;
 	public void Init_by_wiki() {
 		if (!init_needed) return;

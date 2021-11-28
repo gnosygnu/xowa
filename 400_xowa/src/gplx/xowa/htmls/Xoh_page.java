@@ -44,11 +44,11 @@ public class Xoh_page implements Xoa_page {
 	public Xow_wiki					Wiki()				{return wiki;}				private Xow_wiki wiki;
 	public Xoa_url					Url()				{return page_url;}			private Xoa_url page_url;
 	public Xoa_ttl					Ttl()				{return page_ttl;}			private Xoa_ttl page_ttl;
-	public Xopg_db_data				Db()				{return db;}				private final    Xopg_db_data db = new Xopg_db_data();
-	public Xopg_redirect_mgr		Redirect_trail()	{return redirect;}			private final    Xopg_redirect_mgr redirect = new Xopg_redirect_mgr();
-	public Xopg_html_data			Html_data()			{return html;}				private final    Xopg_html_data html = new Xopg_html_data();
-	public Xopg_wtxt_data			Wtxt()				{return wtxt;}				private final    Xopg_wtxt_data wtxt = new Xopg_wtxt_data();
-	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}				private final    Xopg_hdump_data hdump = new Xopg_hdump_data();
+	public Xopg_db_data				Db()				{return db;}				private final Xopg_db_data db = new Xopg_db_data();
+	public Xopg_redirect_mgr		Redirect_trail()	{return redirect;}			private final Xopg_redirect_mgr redirect = new Xopg_redirect_mgr();
+	public Xopg_html_data			Html_data()			{return html;}				private final Xopg_html_data html = new Xopg_html_data();
+	public Xopg_wtxt_data			Wtxt()				{return wtxt;}				private final Xopg_wtxt_data wtxt = new Xopg_wtxt_data();
+	public Xopg_hdump_data			Hdump_mgr()			{return hdump;}				private final Xopg_hdump_data hdump = new Xopg_hdump_data();
 	public Xol_lang_itm				Lang()				{return lang;}				private Xol_lang_itm lang;
 	private Guid_adp page_guid;
 	public Guid_adp Page_guid() {
@@ -66,13 +66,13 @@ public class Xoh_page implements Xoa_page {
 	public byte[]					Display_ttl()		{return display_ttl;} private byte[] display_ttl;
 	public byte[]					Content_sub()		{return content_sub;} private byte[] content_sub;
 	public byte[]					Sidebar_div()		{return sidebar_div;} private byte[] sidebar_div;
-	public Xoh_section_mgr			Section_mgr()		{return section_mgr;} private final    Xoh_section_mgr section_mgr = new Xoh_section_mgr();
+	public Xoh_section_mgr			Section_mgr()		{return section_mgr;} private final Xoh_section_mgr section_mgr = new Xoh_section_mgr();
 	public Xoh_img_mgr				Img_mgr()			{return img_mgr;} private Xoh_img_mgr img_mgr = new Xoh_img_mgr();
 	public Xopg_module_mgr			Head_mgr()			{return head_mgr;} private Xopg_module_mgr head_mgr = new Xopg_module_mgr();
 	public Hash_adp                 Props()             {return props;} private final Hash_adp props = Hash_adp_.New();
 
 	// util
-	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final    Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
+	public Xoa_page__commons_mgr	Commons_mgr()		{return commons_mgr;} private final Xoa_page__commons_mgr commons_mgr = new Xoa_page__commons_mgr();
 	public int						Exec_tid()			{return exec_tid;} private int exec_tid = Xof_exec_tid.Tid_wiki_page;
 	public byte[]					Html_head_xtn()		{return html_head_xtn;} public void Html_head_xtn_(byte[] v) {html_head_xtn = v;} private byte[] html_head_xtn = Bry_.Empty;	// drd:web_browser
 	public byte[]					Url_bry_safe()		{return Xoa_page_.Url_bry_safe(page_url, wiki, page_ttl);}

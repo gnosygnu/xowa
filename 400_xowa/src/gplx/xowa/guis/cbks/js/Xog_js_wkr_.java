@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.cbks.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.cbks.*;
 public class Xog_js_wkr_ {
-	public static final    Xog_js_wkr Noop = new Xog_js_wkr__noop();
+	public static final Xog_js_wkr Noop = new Xog_js_wkr__noop();
 }
 class Xog_js_wkr__noop implements Xog_js_wkr {
 	public void Html_img_update			(String uid, String src, int w, int h) {}

@@ -20,9 +20,9 @@ import gplx.xowa.bldrs.wms.*;
 import gplx.xowa.xtns.math.*;
 public class Xof_file_mgr implements Gfo_invk {
 	public Xoa_repo_mgr			Repo_mgr() {return repo_mgr;} private Xoa_repo_mgr repo_mgr;
-	public Xof_img_mgr			Img_mgr() {return img_mgr;} private final    Xof_img_mgr img_mgr = new Xof_img_mgr();
+	public Xof_img_mgr			Img_mgr() {return img_mgr;} private final Xof_img_mgr img_mgr = new Xof_img_mgr();
 	public Xof_cache_mgr		Cache_mgr() {return cache_mgr;} private Xof_cache_mgr cache_mgr;
-	public Xof_rule_mgr			Ext_rules() {return ext_rules;} private final    Xof_rule_mgr ext_rules = new Xof_rule_mgr();
+	public Xof_rule_mgr			Ext_rules() {return ext_rules;} private final Xof_rule_mgr ext_rules = new Xof_rule_mgr();
 	public void Ctor_by_app(Xoae_app app) {
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		this.cache_mgr = new Xof_cache_mgr(usr_dlg, app.Wiki_mgr(), repo_mgr);

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.xowa.htmls.core.wkrs.bfr_args.*;
 class Bfr_arg__hatr__xogly implements gplx.core.brys.Bfr_arg_clearable {
-	private final    byte[] atr_bgn;
+	private final byte[] atr_bgn;
 	private int xnde_w, xnde_h, xnde_per_row;
 	public Bfr_arg__hatr__xogly() {
 		this.atr_bgn = Bfr_arg__hatr_.Bld_atr_bgn(gplx.xowa.xtns.gallery.Gallery_mgr_wtr.Bry__data_xogly);

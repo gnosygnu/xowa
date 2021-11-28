@@ -19,6 +19,6 @@ public class Xoa_manifest_item {
 		this.src = src;
 		this.trg = trg;
 	}
-	public Io_url Src() {return src;} private final    Io_url src;
-	public Io_url Trg() {return trg;} private final    Io_url trg;
+	public Io_url Src() {return src;} private final Io_url src;
+	public Io_url Trg() {return trg;} private final Io_url trg;
 }

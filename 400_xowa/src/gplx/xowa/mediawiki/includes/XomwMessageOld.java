@@ -172,7 +172,7 @@ public class XomwMessageOld {
 	* Mapping from Message::listParam() types to Language methods.
 	* @var array
 	*/
-	private static final    Hash_adp listTypeMap = Hash_adp_.New()
+	private static final Hash_adp listTypeMap = Hash_adp_.New()
 	.Add_and_more("comma", "commaList")
 	.Add_and_more("semicolon", "semicolonList")
 	.Add_and_more("pipe", "pipeList")
@@ -817,7 +817,7 @@ public class XomwMessageOld {
 	*/
 
 	// NOTE: causes issues in C# source; E2A7BC; http://www.fileformat.info/info/unicode/char/29fc/index.htm
-	private static final    byte[] LeftPointingCurvedAngleBracket = gplx.core.encoders.Hex_utl_.Parse_hex_to_bry("E2A7BC");
+	private static final byte[] LeftPointingCurvedAngleBracket = gplx.core.encoders.Hex_utl_.Parse_hex_to_bry("E2A7BC");
 	public byte[] toString(int format) {
 		if (format == FORMAT_NULL) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "toString import implicit.*; format=~{0} key=~{1}", format, key);

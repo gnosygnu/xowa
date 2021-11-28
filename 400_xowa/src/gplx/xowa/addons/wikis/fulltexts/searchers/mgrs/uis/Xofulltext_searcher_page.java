@@ -22,9 +22,9 @@ public class Xofulltext_searcher_page {
 		this.page_ttl = page_ttl;
 		this.expand_snips = expand_snips;
 	}
-	public int Query_id() {return query_id;} private final    int query_id;
-	public byte[] Wiki_domain() {return wiki_domain;} private final    byte[] wiki_domain;
-	public int Page_id() {return page_id;} private final    int page_id;
-	public byte[] Page_ttl() {return page_ttl;} private final    byte[] page_ttl;
-	public boolean Expand_snips() {return expand_snips;} private final    boolean expand_snips;
+	public int Query_id() {return query_id;} private final int query_id;
+	public byte[] Wiki_domain() {return wiki_domain;} private final byte[] wiki_domain;
+	public int Page_id() {return page_id;} private final int page_id;
+	public byte[] Page_ttl() {return page_ttl;} private final byte[] page_ttl;
+	public boolean Expand_snips() {return expand_snips;} private final boolean expand_snips;
 }

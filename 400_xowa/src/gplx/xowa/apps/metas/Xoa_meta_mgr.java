@@ -17,8 +17,8 @@ package gplx.xowa.apps.metas; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.wms.sites.*;
 public class Xoa_meta_mgr {
-	private final    Xoa_app app;
-	private final    Hash_adp_bry ns__hash = Hash_adp_bry.cs();
+	private final Xoa_app app;
+	private final Hash_adp_bry ns__hash = Hash_adp_bry.cs();
 	private Site_core_db core_db;
 	public Xoa_meta_mgr(Xoa_app app) {
 		this.app = app;

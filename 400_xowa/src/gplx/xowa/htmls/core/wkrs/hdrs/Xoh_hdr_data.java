@@ -59,7 +59,7 @@ public class Xoh_hdr_data implements Xoh_data_itm {
 		this.anch_bgn = anch_bgn; this.anch_end = anch_end; this.capt_bgn = capt_bgn; this.capt_end = capt_end;
 		this.capt_rhs_bgn = capt_rhs_bgn; this.capt_rhs_end = capt_rhs_end;
 	}
-	public static final    byte[] Bry__class__mw_headline	= Bry_.new_a7("mw-headline");
+	public static final byte[] Bry__class__mw_headline	= Bry_.new_a7("mw-headline");
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_hdr_data rv = new Xoh_hdr_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
 }

@@ -19,18 +19,18 @@ import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*;
 class Xoud_opt_scope {
 	public Xoud_opt_scope(int lang_id, int type_id) {this.lang_id = lang_id; this.type_id = type_id;}
-	public int Lang_id() {return lang_id;} private final    int lang_id;
-	public int Type_id() {return type_id;} private final    int type_id;
+	public int Lang_id() {return lang_id;} private final int lang_id;
+	public int Type_id() {return type_id;} private final int type_id;
 	public String To_str() {
 		String lang_str = lang_id == Lang_id_wildcard ? "*" : String_.new_u8(Xol_lang_stub_.Get_by_id(lang_id).Key());
 		String type_str = type_id == Lang_id_wildcard ? "*" : String_.new_u8(Xow_domain_tid_.Get_type_as_bry(type_id));
 		return lang_str + "." + type_str;
 	}
 	public static final int Lang_id_wildcard = -1, Type_id_wildcard = -1;
-	public static final    Xoud_opt_scope App = new Xoud_opt_scope(Lang_id_wildcard, Type_id_wildcard);
+	public static final Xoud_opt_scope App = new Xoud_opt_scope(Lang_id_wildcard, Type_id_wildcard);
 }
 class Xoud_opt_scope_parser {
-	private Gfo_usr_dlg usr_dlg; private final    List_adp list = List_adp_.New();
+	private Gfo_usr_dlg usr_dlg; private final List_adp list = List_adp_.New();
 	public Xoud_opt_scope[] Parse(byte[] src) {
 		usr_dlg = Gfo_usr_dlg_.Instance;
 		list.Clear();
@@ -61,7 +61,7 @@ class Xoud_opt_scope_parser {
 		usr_dlg.Warn_many("", "", fmt, String_.new_u8(src, bgn, end));
 		return Xoud_opt_scope.App;
 	}
-	private static final    Btrie_slim_mgr btrie_by_type = Btrie_slim_mgr.cs()
+	private static final Btrie_slim_mgr btrie_by_type = Btrie_slim_mgr.cs()
 	.Add_str_int("w"			, Xow_domain_tid_.Tid__wikipedia)
 	.Add_str_int("d"			, Xow_domain_tid_.Tid__wiktionary)
 	.Add_str_int("s"			, Xow_domain_tid_.Tid__wikisource)
@@ -79,5 +79,5 @@ class Xoud_opt_scope_parser {
 	.Add_str_int("mw"			, Xow_domain_tid_.Tid__mediawiki)
 	.Add_str_int("wmf"			, Xow_domain_tid_.Tid__wmfblog)
 	;
-	private static final    Xoud_opt_scope[] Ary_app = new Xoud_opt_scope[] {Xoud_opt_scope.App};
+	private static final Xoud_opt_scope[] Ary_app = new Xoud_opt_scope[] {Xoud_opt_scope.App};
 }

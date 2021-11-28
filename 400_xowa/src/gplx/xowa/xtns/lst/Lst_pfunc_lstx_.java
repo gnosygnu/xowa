@@ -38,5 +38,5 @@ class Lst_pfunc_lstx_ {
 		}
 		bfr.Add_mid(src, bgn_pos, src.length);
 	}
-	public static final    byte[] Null_arg = null;
+	public static final byte[] Null_arg = null;
 }

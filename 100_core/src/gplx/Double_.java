@@ -17,13 +17,13 @@ package gplx;
 
 public class Double_ {
 	public static final String Cls_val_name = "double";
-	public static final    Class<?> Cls_ref_type = Double.class; 
+	public static final Class<?> Cls_ref_type = Double.class;
 	public static final double
 	  MinValue		= Double.MIN_VALUE			
 	, NaN			= Double.NaN				
 	, Inf_pos		= Double.POSITIVE_INFINITY	
 	;
-	public static final    byte[]
+	public static final byte[]
 	  NaN_bry		= Bry_.new_a7("NaN")
 	, Inf_pos_bry	= Bry_.new_a7("INF")
 	;

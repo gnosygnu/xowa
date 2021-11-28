@@ -22,9 +22,9 @@ class Xop_uniq_itm {
 		this.key = key;
 		this.val = val;
 	}
-	public boolean Expand_after_template_parsing() {return expand_after_template_parsing;} private final    boolean expand_after_template_parsing;
-	public byte[] Type() {return type;} private final    byte[] type;
-	public int Idx() {return idx;} private final    int idx;
-	public byte[] Key() {return key;} private final    byte[] key;
-	public byte[] Val() {return val;} private final    byte[] val;
+	public boolean Expand_after_template_parsing() {return expand_after_template_parsing;} private final boolean expand_after_template_parsing;
+	public byte[] Type() {return type;} private final byte[] type;
+	public int Idx() {return idx;} private final int idx;
+	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Val() {return val;} private final byte[] val;
 }

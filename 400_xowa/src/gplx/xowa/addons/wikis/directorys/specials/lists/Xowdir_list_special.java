@@ -20,7 +20,7 @@ public class Xowdir_list_special implements Xow_special_page {
 		new Xowdir_list_html().Bld_page_by_mustache(wiki.App(), page, this);
 	}
 	Xowdir_list_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
-	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
+	public Xow_special_meta Special__meta()		{return special__meta;} private final Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
-	public static final    Xow_special_page Prototype = new Xowdir_list_special(Xow_special_meta.New_xo("XowaWikiDirectory", "Wiki List"));
+	public static final Xow_special_page Prototype = new Xowdir_list_special(Xow_special_meta.New_xo("XowaWikiDirectory", "Wiki List"));
 }

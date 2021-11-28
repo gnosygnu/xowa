@@ -17,8 +17,8 @@ package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
 import gplx.core.bits.*;
 public class IptKey implements IptArg {
 	@gplx.Internal protected IptKey(int val, String key) {this.val = val; this.key = key;}
-	public String Key()					{return key;} private final    String key;
-	public int Val()					{return val;} private final    int val;
+	public String Key()					{return key;} private final String key;
+	public int Val()					{return val;} private final int val;
 	public boolean Eq(IptArg comp)			{return String_.Eq(key, comp.Key());}
 	public String XtoUiStr()			{return IptKeyStrMgr.Instance.To_str(this);}
 	public IptKey Add(IptKey comp)		{return IptKey_.add_(this, comp);}

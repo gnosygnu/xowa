@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.bulks; import gplx.*; import gplx.dbs.*;
 import gplx.dbs.*; import gplx.dbs.metas.*;
 public class Db_tbl_copy {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    Db_attach_mgr attach_mgr = new Db_attach_mgr();
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
 	public void Copy_many(Db_conn src_conn, Db_conn trg_conn, String... tbl_names) {
 		for (String tbl_name : tbl_names)
 			Copy_one(src_conn, trg_conn, tbl_name, tbl_name);

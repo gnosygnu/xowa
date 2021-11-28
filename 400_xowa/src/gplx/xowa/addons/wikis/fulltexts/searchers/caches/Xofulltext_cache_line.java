@@ -19,6 +19,6 @@ public class Xofulltext_cache_line {
 		this.line_seq = line_seq;
 		this.line_html = line_html;
 	}
-	public int Line_seq() {return line_seq;} private final    int line_seq;
-	public byte[] Line_html() {return line_html;} private final    byte[] line_html;
+	public int Line_seq() {return line_seq;} private final int line_seq;
+	public byte[] Line_html() {return line_html;} private final byte[] line_html;
 }

@@ -261,8 +261,8 @@ public static final int
 		update_val_(rv, val);
 		return rv;
 	}
-	private static final    Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp().Fail_when_invalid_escapes_(false);
-	private static final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private static final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp().Fail_when_invalid_escapes_(false);
+	private static final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	public static void update_val_(Xol_msg_itm itm, byte[] val) {
 		synchronized (tmp_fmtr) {	// LOCK:static-objs; DATE:2016-07-07
 			boolean has_fmt_arg = tmp_fmtr.Fmt_(val).Compile().Fmt_args_exist();
@@ -271,8 +271,8 @@ public static final int
 			itm.Atrs_set(val, has_fmt_arg, has_tmpl_txt);
 		}
 	}
-	public static final    byte[] Bry_nbsp = Byte_.Ary_by_ints(194, 160);
-	private static final    Btrie_slim_mgr trie_space = Btrie_slim_mgr.cs()	// MW:cache/MessageCache.php|get|Fix for trailing whitespace, removed by textarea|DATE:2014-04-29
+	public static final byte[] Bry_nbsp = Byte_.Ary_by_ints(194, 160);
+	private static final Btrie_slim_mgr trie_space = Btrie_slim_mgr.cs()	// MW:cache/MessageCache.php|get|Fix for trailing whitespace, removed by textarea|DATE:2014-04-29
 		.Add_bry("&#32;"	, " ")
 		.Add_bry("&nbsp;"	, Bry_nbsp)
 		.Add_bry("&#160;"	, Bry_nbsp)

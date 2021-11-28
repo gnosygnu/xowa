@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Xomath_core__tst {
-	private final    Xop_fxt fxt = Xop_fxt.New_app_html();
+	private final Xop_fxt fxt = Xop_fxt.New_app_html();
 	@Test public void Basic__latex() {
 		Renderer_(false);
 		fxt.Test__parse_to_html_mgr("<math>x + y</math>", "<img id='xowa_math_img_0' src='' width='' height=''/><span id='xowa_math_txt_0'>x + y</span>");	// latex has img

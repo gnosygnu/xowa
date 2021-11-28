@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_gly_hzip__basic__tst {
-	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
+	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Test  public void Basic() {
 		fxt.Test__bicode("~'!{,L#{\"g{\"b0!A1~!1A.png~9\"D\"D{\"g{\"b0!B1~!1B.png~9\"D\"Dabc", String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional' style='max-width:978px; _width:978px;'>"

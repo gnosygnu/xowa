@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
 public class Gfui_dlg_dir_ {
-	public static final    Gfui_dlg_dir Noop = new Gfui_dlg_dir__noop();
+	public static final Gfui_dlg_dir Noop = new Gfui_dlg_dir__noop();
 }
 class Gfui_dlg_dir__noop implements Gfui_dlg_dir {
 	public String Ask() {return "";}

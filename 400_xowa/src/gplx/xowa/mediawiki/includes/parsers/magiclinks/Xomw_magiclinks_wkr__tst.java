@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers.magiclinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import org.junit.*;
 public class Xomw_magiclinks_wkr__tst {
-	private final    Xomw_magiclinks_wkr__fxt fxt = new Xomw_magiclinks_wkr__fxt();
+	private final Xomw_magiclinks_wkr__fxt fxt = new Xomw_magiclinks_wkr__fxt();
 	@Test  public void Basic() {fxt.Test__parse("a https://b.org z", "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a> z");}
 	@Test  public void Invalid() {fxt.Test__parse("a _https://b.org z", "a _https://b.org z");}
 	@Test  public void Tag__anch() {fxt.Test__parse("a <a title=\"https://b.org\">b</a> z", "a <a title=\"https://b.org\">b</a> z");}
@@ -65,9 +65,9 @@ public class Xomw_magiclinks_wkr__tst {
 	}
 }
 class Xomw_magiclinks_wkr__fxt {
-	private final    Xomw_magiclinks_wkr wkr;
-	private final    XomwParserCtx pctx = new XomwParserCtx();
-	private final    XomwParserBfr pbfr = new XomwParserBfr();
+	private final Xomw_magiclinks_wkr wkr;
+	private final XomwParserCtx pctx = new XomwParserCtx();
+	private final XomwParserBfr pbfr = new XomwParserBfr();
 	public Xomw_magiclinks_wkr__fxt() {
 		Xomw_regex_space regex_space = new Xomw_regex_space();
 		XomwParser parser = new XomwParser(XomwEnv_fxt.NewTest());

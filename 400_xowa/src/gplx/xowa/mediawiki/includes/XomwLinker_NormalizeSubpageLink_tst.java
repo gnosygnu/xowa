@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import org.junit.*; import gplx.core.tests.*;
 public class XomwLinker_NormalizeSubpageLink_tst {
-	private final    XomwLinker_NormalizeSubpageLink_fxt fxt = new XomwLinker_NormalizeSubpageLink_fxt();
+	private final XomwLinker_NormalizeSubpageLink_fxt fxt = new XomwLinker_NormalizeSubpageLink_fxt();
 	@Test public void None()                {fxt.Test__normalize_subpage_link("A/B/C"          , "Z"             , ""    , "Z"          , "");}
 	@Test public void Hash()                {fxt.Test__normalize_subpage_link("A/B/C"          , "/Y#Z"          , ""    , "A/B/C/Y#Z"  , "/Y#Z");}
 	@Test public void Slash__basic()        {fxt.Test__normalize_subpage_link("A/B/C"          , "/Z"            , ""    , "A/B/C/Z"    , "/Z");}
@@ -26,9 +26,9 @@ public class XomwLinker_NormalizeSubpageLink_tst {
 	@Test public void Dot2__trailing()      {fxt.Test__normalize_subpage_link("A/B/C"          , "../../Z/"      , ""    , "A/Z"        , "Z");}
 }
 class XomwLinker_NormalizeSubpageLink_fxt {
-	private final    XomwEnv env;
-	private final    XomwLinker mgr = new XomwLinker(new gplx.xowa.mediawiki.includes.linkers.XomwLinkRenderer(new XomwSanitizer()));
-	private final    XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
+	private final XomwEnv env;
+	private final XomwLinker mgr = new XomwLinker(new gplx.xowa.mediawiki.includes.linkers.XomwLinkRenderer(new XomwSanitizer()));
+	private final XomwLinker_NormalizeSubpageLink normalize_subpage_link = new XomwLinker_NormalizeSubpageLink();
 	public XomwLinker_NormalizeSubpageLink_fxt() {
 		this.env = XomwEnv_fxt.NewTest();
 	}

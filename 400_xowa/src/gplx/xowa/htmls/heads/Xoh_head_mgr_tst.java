@@ -120,7 +120,7 @@ public class Xoh_head_mgr_tst {
 	}
 }
 class Xoh_head_mgr_fxt {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	private Xoh_head_mgr mgr;
 	private Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;

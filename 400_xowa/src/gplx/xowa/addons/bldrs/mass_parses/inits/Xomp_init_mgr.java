@@ -18,7 +18,7 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_init_mgr {
-	public Xomp_init_mgr_cfg Cfg() {return cfg;} private final    Xomp_init_mgr_cfg cfg = new Xomp_init_mgr_cfg();
+	public Xomp_init_mgr_cfg Cfg() {return cfg;} private final Xomp_init_mgr_cfg cfg = new Xomp_init_mgr_cfg();
 	public void Exec(Xowe_wiki wiki) {
 		// init vars
 		cfg.Init(wiki);

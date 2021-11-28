@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.dbs.*;
 class Site_extension_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_site_abrv, fld_type, fld_name, fld_namemsg, fld_description, fld_descriptionmsg, fld_author, fld_url, fld_version
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_site_abrv, fld_type, fld_name, fld_namemsg, fld_description, fld_descriptionmsg, fld_author, fld_url, fld_version
 	, fld_vcs_system, fld_vcs_version, fld_vcs_url, fld_vcs_date, fld_license_name, fld_license, fld_credits;
-	private final    Db_conn conn;
+	private final Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
 	public Site_extension_tbl(Db_conn conn) {
 		this.conn = conn;

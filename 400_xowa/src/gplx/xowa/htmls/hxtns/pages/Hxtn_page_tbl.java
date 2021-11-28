@@ -28,9 +28,9 @@ import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
 
 public class Hxtn_page_tbl implements Rls_able {
-	private static final String tbl_name = "hxtn_page"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_page_id, fld_wkr_id, fld_data_id;		
-	private final    Db_conn conn; private Db_stmt stmt_insert;
+	private static final String tbl_name = "hxtn_page"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_page_id, fld_wkr_id, fld_data_id;
+	private final Db_conn conn; private Db_stmt stmt_insert;
 	public Hxtn_page_tbl(Db_conn conn) {
 		this.conn = conn;
 		conn.Rls_reg(this);

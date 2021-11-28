@@ -32,12 +32,12 @@ public class Xob_image_tbl {
 		.Val_bry_as_str(img_timestamp)
 		.Exec_insert();
 	}
-	public static final    String Tbl_name = "image"
+	public static final String Tbl_name = "image"
 	, Fld_img_name = "img_name", Fld_img_media_type = "img_media_type", Fld_img_minor_mime = "img_minor_mime"
 	, Fld_img_size = "img_size", Fld_img_width = "img_width", Fld_img_height = "img_height", Fld_img_bits = "img_bits", Fld_img_ext_id = "img_ext_id"
 	, Fld_img_timestamp = "img_timestamp"
 	;
-	private static final    String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = String_.Concat_lines_nl
 	(	"CREATE TABLE IF NOT EXISTS image"
 	,	"( img_name        varchar(255)    NOT NULL -- varbinary(255)"
 	,	", img_media_type  varchar(64)     NOT NULL -- enum('UNKNOWN','BITMAP','DRAWING','AUDIO','VIDEO','MULTIMEDIA','OFFICE','TEXT','EXECUTABLE','ARCHIVE')"
@@ -50,7 +50,7 @@ public class Xob_image_tbl {
 	,	", img_timestamp   varchar(14)     NOT NULL -- 20140101155749"
 	,	");"
 	);
-	private static final    Db_idx_itm
+	private static final Db_idx_itm
 		Idx_img_name     	= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS image__img_name ON image (img_name, img_timestamp);")
 	;
 }

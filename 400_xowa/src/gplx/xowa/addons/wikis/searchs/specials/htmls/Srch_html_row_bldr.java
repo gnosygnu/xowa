@@ -17,9 +17,9 @@ package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gpl
 import gplx.xowa.htmls.core.htmls.utls.*; import gplx.langs.htmls.*;
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_html_row_bldr implements gplx.core.brys.Bfr_arg {
-	private final    Xoh_lnki_bldr lnki_bldr;
+	private final Xoh_lnki_bldr lnki_bldr;
 	private Srch_rslt_list rslt_list; private int slab_bgn, slab_end;
-	private final    Object thread_lock = new Object();
+	private final Object thread_lock = new Object();
 	public Srch_html_row_bldr(Xoh_lnki_bldr lnki_bldr) {this.lnki_bldr = lnki_bldr;}
 	public Srch_html_row_bldr Init(Srch_rslt_list rslt_list, int slab_bgn, int slab_end) {this.rslt_list = rslt_list; this.slab_bgn = slab_bgn; this.slab_end = slab_end; return this;}
 	public void Bfr_arg__add(Bry_bfr bfr) { // <a href="/wiki/A" title="A" class="xowa-visited">A</a>
@@ -38,7 +38,7 @@ public class Srch_html_row_bldr implements gplx.core.brys.Bfr_arg {
 			fmtr.Bld_many(bfr, Gfh_utl.Encode_id_as_str(row.Key), row.Page_score, lnki_bldr.Bld_to_bry());
 		}
 	}
-	public Bry_fmt Fmtr() {return fmtr;} private final    Bry_fmt fmtr = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
+	public Bry_fmt Fmtr() {return fmtr;} private final Bry_fmt fmtr = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <tr id='~{page_key}'>"
 	, "    <td style='padding-right:5px; vertical-align:top; text-align:right;'>~{page_len}"

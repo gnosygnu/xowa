@@ -19,8 +19,8 @@ public class Xocfg_grp_row {
 		this.id = id;
 		this.key = key;
 	}
-	public int Id() {return id;} private final    int id;
-	public String Key() {return key;} private final    String key;
+	public int Id() {return id;} private final int id;
+	public String Key() {return key;} private final String key;
 
 	public static final int Id__root = -1;
 }

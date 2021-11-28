@@ -20,8 +20,8 @@ import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.users.history.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.*;
 public class Xoctg_double_box implements Bfr_arg {
-	public Xoctg_double_grp Grp_normal() {return grp_normal;} private final    Xoctg_double_grp grp_normal = new Xoctg_double_grp();
-	public Xoctg_double_grp Grp_hidden() {return grp_hidden;} private final    Xoctg_double_grp grp_hidden = new Xoctg_double_grp();
+	public Xoctg_double_grp Grp_normal() {return grp_normal;} private final Xoctg_double_grp grp_normal = new Xoctg_double_grp();
+	public Xoctg_double_grp Grp_hidden() {return grp_hidden;} private final Xoctg_double_grp grp_hidden = new Xoctg_double_grp();
 	public void Init_by_wiki(Xow_wiki wiki) {
 		Xou_history_mgr history_mgr = wiki.App().User().History_mgr();
 		grp_normal.Init_by_wiki(wiki, history_mgr, Bool_.Y);
@@ -42,7 +42,7 @@ public class Xoctg_double_box implements Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		Fmt__all.Bld_many(bfr, grp_normal, grp_hidden);
 	}
-	private static final    Bry_fmt 
+	private static final Bry_fmt
 	  Fmt__all = Bry_fmt.Auto_nl_skip_last
 	( "<div id=\"catlinks\" class=\"catlinks\">~{grp_normal}~{grp_hidden}"
 	, "</div>"

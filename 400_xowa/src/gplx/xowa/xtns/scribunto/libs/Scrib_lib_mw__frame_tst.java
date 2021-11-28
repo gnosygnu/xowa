@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.xowa.xtns.scribunto.engines.mocks.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_mw__frame_tst {
-	private final    Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
+	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
 	@Before public void init() {
 		fxt.Clear();
 		fxt.Init__mock_mod_system();

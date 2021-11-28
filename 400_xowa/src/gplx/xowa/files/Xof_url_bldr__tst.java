@@ -38,7 +38,7 @@ public class Xof_url_bldr__tst {
 	@Test 	public void Math__file() 	{fxt.Repo_tid_(Xof_repo_tid_.Tid__math).Fsys_is_wnt_(Bool_.Y).Root_("file://xowa/").Ttl_("random_md5.svg").Expd_src_("file://xowa/random_md5.svg").Test();}	// NOTE: keep ".svg" if online
 }
 class Xof_url_bldr__fxt {
-	private final    Xof_url_bldr url_bldr = new Xof_url_bldr();
+	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
 	public Xof_url_bldr__fxt Clear() {
 		dir_spr = Byte_.Zero; ext = null; root = md5 = ttl = expd_src = null;
 		seek = Xof_lnki_time.Null;

@@ -18,7 +18,7 @@ import gplx.core.tests.*; import gplx.core.times.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xobldr_fxt {
-	private final    DateAdp_parser dateParser = DateAdp_parser.new_();
+	private final DateAdp_parser dateParser = DateAdp_parser.new_();
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xob_bldr Bldr() {return bldr;} private Xob_bldr bldr;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;

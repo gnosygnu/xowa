@@ -17,8 +17,8 @@ package gplx.xowa.addons.bldrs.exports.splits.htmls; import gplx.*; import gplx.
 import gplx.dbs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.htmls.core.dbs.*;
 public class Xoh_src_tbl_mgr {
-	private final    Xow_wiki wiki;
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Xow_wiki wiki;
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public Xoh_src_tbl_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
 	}

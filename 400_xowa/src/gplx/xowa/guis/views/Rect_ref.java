@@ -25,7 +25,7 @@ public class Rect_ref {
 	public gplx.gfui.RectAdp XtoRectAdp() {return gplx.gfui.RectAdp_.new_(x, y, w, h);}
 	public gplx.gfui.RectAdp XtoRectAdp_add(Rect_ref v) {return gplx.gfui.RectAdp_.new_(x + v.x, y + v.y, w + v.w, h + v.h);}
 	@Override public String toString() {return String_.Format("{0},{1},{2},{3}", x, y, w, h);}
-	public static final    Rect_ref Zero = new Rect_ref(0, 0, 0, 0);
+	public static final Rect_ref Zero = new Rect_ref(0, 0, 0, 0);
 	public static Rect_ref rectAdp_(gplx.gfui.RectAdp v) {return new Rect_ref(v.X(), v.Y(), v.Width(), v.Height());}
 	public static Rect_ref parse(String raw) {
 		try {

@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gpl
 import gplx.dbs.*; import gplx.dbs.stmts.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;	
 public class Srch_link_wkr_sql {
-	private final    Db_stmt_mgr stmt_mgr = new Db_stmt_mgr(); 
+	private final Db_stmt_mgr stmt_mgr = new Db_stmt_mgr();
 	public void Clear() {stmt_mgr.Clear();}
 	public String Dbg(Srch_search_ctx ctx, Db_attach_mgr attach_mgr, Srch_crt_itm sql_root) {
 		stmt_mgr.Mode_is_stmt_(Bool_.N);
@@ -109,7 +109,7 @@ public class Srch_link_wkr_sql {
 		stmt_mgr.Add_crt_int(link_tbl.fld_link_score, score_end);
 		stmt_mgr.Write_fmt(Fmt__link);
 	}
-	private static final    byte[]
+	private static final byte[]
 	  Bry__page__bgn = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( "SELECT  p.page_id, p.page_namespace, p.page_title, p.page_len, p.page_score, p.page_redirect_id"
 	, "FROM    <page_db>page p"
@@ -124,7 +124,7 @@ public class Srch_link_wkr_sql {
 	, "WHERE   "
 	))
 	;
-	private static final    String
+	private static final String
 	  Str__link__end = String_.Concat_lines_nl_skip_last
 	( "AND     l.link_score >= ~{score_bgn}"
 	, "AND     l.link_score <  ~{score_end}"
@@ -144,7 +144,7 @@ public class Srch_link_wkr_sql {
 	, "AND     w~{uid}.link_score_min <  ~{score_end}"
 	, ""
 	);
-	private static final    Bry_fmt 
+	private static final Bry_fmt
 	  Fmt__link				= Bry_fmt.Auto(Str__link__end)
 	, Fmt__word_id			= Bry_fmt.Auto("l.word_id = ~{word_uid}\n")
 	, Fmt__word_text__rng	= Bry_fmt.New(Str__word__text__bgn + Str__word__text__rng + Str__word__text__mnx  + ")\n", "uid", "and", "index", "word_bgn", "word_end", "score_bgn", "score_end")

@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xocfg_itm_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__itm_id, fld__itm_key, fld__itm_scope, fld__itm_type, fld__itm_dflt, fld__itm_html_atrs, fld__itm_html_cls;
-	private final    Db_conn conn;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld__itm_id, fld__itm_key, fld__itm_scope, fld__itm_type, fld__itm_dflt, fld__itm_html_atrs, fld__itm_html_cls;
+	private final Db_conn conn;
 	public Xocfg_itm_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "cfg_itm";
@@ -31,7 +31,7 @@ public class Xocfg_itm_tbl implements Db_tbl {
 		this.fld__itm_html_cls		= flds.Add_str("itm_html_cls", 255);		// EX: 'xocfg__bool__readonly' 
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, fld__itm_key, fld__itm_key)));

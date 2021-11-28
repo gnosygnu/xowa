@@ -39,15 +39,15 @@ public class Xob_page_regy_tbl {
 		cur.Exec_sql(String_.Format(Sql_create_redirect, repo_tid));
 		Sqlite_engine_.Db_detach(cur, "redirect_db");
 	}
-	public static final    String Tbl_name = "page_regy"
+	public static final String Tbl_name = "page_regy"
 	, Fld_uid = "uid", Fld_repo_id = "repo_id", Fld_itm_tid = "itm_tid"
 	, Fld_src_id = "src_id", Fld_src_ttl = "src_ttl"
 	, Fld_trg_id = "trg_id", Fld_trg_ttl = "trg_ttl"
 	;
-	public static final    Db_idx_itm
+	public static final Db_idx_itm
 		Idx_main     		= Db_idx_itm.sql_("CREATE INDEX IF NOT EXISTS page_regy__main           ON page_regy (repo_id, itm_tid, src_ttl, src_id, trg_id, trg_ttl);")
 	;
-	private static final    String
+	private static final String
 		Tbl_sql = String_.Concat_lines_nl
 	(	"CREATE TABLE IF NOT EXISTS page_regy"
 	,	"( uid                     integer             NOT NULL			PRIMARY KEY           AUTOINCREMENT"	// NOTE: must be PRIMARY KEY, else later REPLACE INTO will create dupe rows

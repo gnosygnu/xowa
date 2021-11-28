@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.cfgs; import gplx.*; import gplx.dbs.*;
 public class Db_cfg_itm {
 	public Db_cfg_itm(String grp, String key, String val) {this.grp = grp; this.key = key; this.val = val;}
-	public String		Grp() {return grp;} private final    String grp;
-	public String		Key() {return key;} private final    String key;
+	public String		Grp() {return grp;} private final String grp;
+	public String		Key() {return key;} private final String key;
 	public String		Val() {return val;} public Db_cfg_itm Val_(String v) {val = v; return this;} private String val;
 	public String		To_str_or(String or)			{return val == null ? or : val;}
 	public byte[]		To_bry_or(byte[] or)			{try {return val == null ? or : Bry_.new_u8(val)			;} catch (Exception e) {throw err_parse(e, Bry_.Cls_val_name);}}
@@ -51,5 +51,5 @@ public class Db_cfg_itm {
 	public static		Db_cfg_itm new_DateAdp	(String grp, String key, DateAdp val)			{return new Db_cfg_itm(grp		, key, val.XtoStr_fmt_yyyyMMdd_HHmmss());}
 	public static		Db_cfg_itm new_guid		(String key, Guid_adp val)						{return new Db_cfg_itm(Grp_none	, key, val.To_str());}
 	public static		Db_cfg_itm new_guid		(String grp, String key, Guid_adp val)			{return new Db_cfg_itm(grp		, key, val.To_str());}
-	public static final    Db_cfg_itm Empty = new Db_cfg_itm("empty", "empty", null);
+	public static final Db_cfg_itm Empty = new Db_cfg_itm("empty", "empty", null);
 }

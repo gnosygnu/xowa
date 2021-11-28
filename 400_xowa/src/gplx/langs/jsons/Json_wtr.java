@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*;
 public class Json_wtr {
-	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(255);
-	private final    Int_ary idx_stack = new Int_ary(4);
+	private final Bry_bfr bfr = Bry_bfr_.New_w_size(255);
+	private final Int_ary idx_stack = new Int_ary(4);
 	private int idx = 0;		
 	public Bry_bfr Bfr() {return bfr;}
 	public void Indent_(int v) {this.indent = v;} private int indent;
@@ -293,7 +293,7 @@ public class Json_wtr {
 		if (opt_ws) bfr.Add_byte_nl();
 		return this;
 	}
-	private static final    byte[]
+	private static final byte[]
 	  Sym_nde_bgn	= Bry_.new_a7("{")
 	, Sym_nde_end	= Bry_.new_a7("}")
 	, Sym_ary_bgn	= Bry_.new_a7("[")

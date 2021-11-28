@@ -48,7 +48,7 @@ public class Xoh_hdr_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_hdr_wtr rv = new Xoh_hdr_wtr(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
-	private static final    Bry_fmtr fmtr = Bry_fmtr.new_
+	private static final Bry_fmtr fmtr = Bry_fmtr.new_
 	( "<h~{lvl}><span class=\"mw-headline\" id=\"~{id}\">~{content}</span>~{capt_rhs}</h~{lvl}>"
 	, "lvl", "id", "content", "capt_rhs");
 }

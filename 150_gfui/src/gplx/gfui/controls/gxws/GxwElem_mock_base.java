@@ -17,7 +17,7 @@ package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.
 import gplx.gfui.ipts.*;
 import gplx.gfui.draws.*;
 public class GxwElem_mock_base implements GxwElem {
-	public GxwCore_base Core() {return ctrlMgr;} final    GxwCore_mock ctrlMgr = new GxwCore_mock();
+	public GxwCore_base Core() {return ctrlMgr;} final GxwCore_mock ctrlMgr = new GxwCore_mock();
 	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host = GxwCbkHost_.Null;
 	public String TextVal() {return text;} public void TextVal_set(String v) {text = v;} private String text = "";
 			public void SendKeyDown(IptKey key) {}

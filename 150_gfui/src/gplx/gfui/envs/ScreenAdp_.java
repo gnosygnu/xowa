@@ -20,7 +20,7 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Toolkit;
 import gplx.gfui.controls.gxws.*;
 public class ScreenAdp_ {
-	public static final    ScreenAdp Primary = screen_(0);
+	public static final ScreenAdp Primary = screen_(0);
 	public static ScreenAdp as_(Object obj) {return obj instanceof ScreenAdp ? (ScreenAdp)obj : null;}
 	public static ScreenAdp cast(Object obj) {try {return (ScreenAdp)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, ScreenAdp.class, obj);}}
 	public static ScreenAdp parse(String raw) {	// ex: {screen{1}

@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
 public class Xoedit_nde_hash {
-	private final    Ordered_hash hash = Ordered_hash_.New(); 
-	private final    Ordered_hash id_hash = Ordered_hash_.New(); 
-	private final    List_adp deleted = List_adp_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
+	private final Ordered_hash id_hash = Ordered_hash_.New();
+	private final List_adp deleted = List_adp_.New();
 	public int Len() {
 		return hash.Len();
 	}

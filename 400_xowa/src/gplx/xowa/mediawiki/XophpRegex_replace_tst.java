@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.core.primitives.*;
 import gplx.langs.regxs.*;
 public class XophpRegex_replace_tst {
-	private final    XophpRegex_replace_fxt fxt = new XophpRegex_replace_fxt();
+	private final XophpRegex_replace_fxt fxt = new XophpRegex_replace_fxt();
 	@Test  public void Basic() {
 		// basic
 		fxt.Test__preg_replace("0", "1", "0ab0cd0ef", fxt.Expd("1ab1cd1ef").Count_(3));
@@ -43,7 +43,7 @@ class XophpRegex_replace_expd {
 	public XophpRegex_replace_expd(String rslt) {
 		this.rslt = rslt;
 	}
-	public String Rslt() {return rslt;} private final    String rslt;
+	public String Rslt() {return rslt;} private final String rslt;
 	public int Count() {return count;} private int count = -1;
 	public XophpRegex_replace_expd Count_(int v) {count = v; return this;}
 }

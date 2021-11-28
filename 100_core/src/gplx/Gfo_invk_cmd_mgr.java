@@ -49,7 +49,7 @@ public class Gfo_invk_cmd_mgr {
 		}
 		return Unhandled;
 	}
-	public static final    String_obj_val Unhandled = String_obj_val.new_("Gfo_invk_cmd_mgr Unhandled");
+	public static final String_obj_val Unhandled = String_obj_val.new_("Gfo_invk_cmd_mgr Unhandled");
 	List_adp list = List_adp_.New();
         public static Gfo_invk_cmd_mgr new_() {return new Gfo_invk_cmd_mgr();} Gfo_invk_cmd_mgr() {}
 }

@@ -17,13 +17,13 @@ package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs; import gplx.*; import gp
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
 class Xoctg_catlink_loader {
-	private final    Xow_wiki wiki;
-	private final    Xoctg_catpage_mgr catpage_mgr;
-	private final    Xowd_page_tbl page_tbl;
-	private final    Db_attach_mgr attach_mgr;
-	private final    byte version;
-	private final    int link_dbs_len;
-	private final    Bry_bfr sortkey_val_bfr = Bry_bfr_.New();
+	private final Xow_wiki wiki;
+	private final Xoctg_catpage_mgr catpage_mgr;
+	private final Xowd_page_tbl page_tbl;
+	private final Db_attach_mgr attach_mgr;
+	private final byte version;
+	private final int link_dbs_len;
+	private final Bry_bfr sortkey_val_bfr = Bry_bfr_.New();
 	Xoctg_catlink_loader(Xow_wiki wiki, Xoctg_catpage_mgr catpage_mgr, Xowd_page_tbl page_tbl, byte version, int link_dbs_len, Db_attach_mgr attach_mgr) {
 		this.wiki = wiki;
 		this.catpage_mgr = catpage_mgr;
@@ -210,7 +210,7 @@ class Xoctg_catlink_loader {
 	}
 }
 class Xoctg_catlink_sorter implements gplx.core.lists.ComparerAble {
-	private final    int sort_multiplier;
+	private final int sort_multiplier;
 	public Xoctg_catlink_sorter(boolean sort_ascending) {
 		this.sort_multiplier = sort_ascending ? 1 : -1;
 	}

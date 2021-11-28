@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Cldr_name_converter_tst {
-	private final    Cldr_name_converter_fxt fxt = new Cldr_name_converter_fxt();
+	private final Cldr_name_converter_fxt fxt = new Cldr_name_converter_fxt();
 	@Test  public void Extract_key_or_fail() {
 		fxt.Test__Extract_key_or_fail("CldrNamesEn.php"	, "En");
 		fxt.Test__Extract_key_or_fail("CldrNameEn.php"	, null);
@@ -116,8 +116,8 @@ public class Cldr_name_converter_tst {
 //		}
 }
 class Cldr_name_converter_fxt {
-	private final    Cldr_name_converter bldr = new Cldr_name_converter();
-	private final    String dir_name = "mem/CldrNames/";
+	private final Cldr_name_converter bldr = new Cldr_name_converter();
+	private final String dir_name = "mem/CldrNames/";
 
 	public void Init__file(String fil_name, String txt) {
 		Io_mgr.Instance.SaveFilStr(Io_url_.new_fil_(dir_name + fil_name), txt);

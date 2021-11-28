@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*; import gplx.xowa.apps.urls.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_href_parser__qargs__tst {
-	private final    Xoh_href_parser_fxt fxt = new Xoh_href_parser_fxt();
+	private final Xoh_href_parser_fxt fxt = new Xoh_href_parser_fxt();
 	@Test  public void Basic() {
 		fxt.Exec__parse_as_url("/wiki/A?k1=v1&k2=v2");
 		fxt.Test__page("A");

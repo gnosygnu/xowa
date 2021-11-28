@@ -44,7 +44,7 @@ public class Queue_adp {
 	}
 }
 class Queue_itm {
-	private final    Object data;
+	private final Object data;
 	public Queue_itm next;
 	public Queue_itm(Object data) {
 		this.data = data;

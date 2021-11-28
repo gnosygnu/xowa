@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.logs; import gplx.*; import gplx.core.*;
 public class Gfo_log_itm_wtr__csv implements Gfo_log_itm_wtr {
-	private static final    byte[] Type__info = Bry_.new_a7("INFO"), Type__note = Bry_.new_a7("NOTE"), Type__warn = Bry_.new_a7("WARN");
+	private static final byte[] Type__info = Bry_.new_a7("INFO"), Type__note = Bry_.new_a7("NOTE"), Type__warn = Bry_.new_a7("WARN");
 	private String time_fmt = "yyyyMMdd_HHmmss.fff";
 	public void Write(Bry_bfr bfr, Gfo_log_itm itm) {
 		bfr.Add_str_a7(Int_.To_str_pad_bgn_space((int)itm.Elapsed, 6)).Add_byte_pipe();

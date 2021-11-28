@@ -26,5 +26,5 @@ public class Xop_xnde_tag_lang {
 	public String Name_str() {return name_str;} private String name_str;
 	public byte[] Name_bry() {return name_bry;} private byte[] name_bry;
 	public byte[] Xtn_end_tag_tmp() {return xtnEndTag_tmp;} private byte[] xtnEndTag_tmp;
-	public static final    Xop_xnde_tag_lang Instance = new Xop_xnde_tag_lang(-1, String_.Empty);
+	public static final Xop_xnde_tag_lang Instance = new Xop_xnde_tag_lang(-1, String_.Empty);
 }

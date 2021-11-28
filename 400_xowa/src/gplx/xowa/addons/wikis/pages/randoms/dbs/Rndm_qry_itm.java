@@ -22,11 +22,11 @@ public class Rndm_qry_itm {
 		this.qry_data = qry_data;
 		this.qry_name = qry_name;
 	}
-	public int Qry_idx()		{return qry_idx;}	private final    int qry_idx;
-	public int Rng_end()		{return rng_end;}	private final    int rng_end;
-	public String Qry_key()		{return qry_key;}	private final    String qry_key;
-	public String Qry_data()	{return qry_data;}	private final    String qry_data;
-	public String Qry_name()	{return qry_name;}	private final    String qry_name;
+	public int Qry_idx()		{return qry_idx;}	private final int qry_idx;
+	public int Rng_end()		{return rng_end;}	private final int rng_end;
+	public String Qry_key()		{return qry_key;}	private final String qry_key;
+	public String Qry_data()	{return qry_data;}	private final String qry_data;
+	public String Qry_name()	{return qry_name;}	private final String qry_name;
 	public int Seq_max()		{return seq_max;}	private int seq_max; public void Seq_max_(int v) {this.seq_max = v;}
 
 	public static Rndm_qry_itm New_by_ns(Xow_wiki wiki, int ns_id) {

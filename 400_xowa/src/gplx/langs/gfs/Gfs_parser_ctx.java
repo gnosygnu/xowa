@@ -17,7 +17,7 @@ package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import gplx.core.btries.*;
 class Gfs_parser_ctx {
 	public Btrie_fast_mgr Trie() {return trie;} Btrie_fast_mgr trie;
-	public Btrie_rv Trie_rv() {return trie_rv;} private final    Btrie_rv trie_rv = new Btrie_rv();
+	public Btrie_rv Trie_rv() {return trie_rv;} private final Btrie_rv trie_rv = new Btrie_rv();
 	public Gfs_nde Root() {return root;} Gfs_nde root = new Gfs_nde();
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_len() {return src_len;} private int src_len;
@@ -84,7 +84,7 @@ class Gfs_err_mgr {
 		tmp_fail_args.Add("excerpt_end", Fail_excerpt_end(src, src_len, pos));		
 		tmp_fail_args.Add("pos"	, pos);		
 	}
-	public static final    String Fail_msg_invalid_lxr = "invalid character", Fail_msg_unknown_char = "unknown char", Fail_msg_eos = "end of stream", Fail_msg_nde_stack_empty = "node stack empty";
+	public static final String Fail_msg_invalid_lxr = "invalid character", Fail_msg_unknown_char = "unknown char", Fail_msg_eos = "end of stream", Fail_msg_nde_stack_empty = "node stack empty";
 	String Fail_msg(String type, Keyval_list fail_args) {
 		tmp_fail_bfr.Add_str_u8(type).Add_byte(Byte_ascii.Colon);
 		int len = fail_args.Count();
@@ -121,5 +121,5 @@ class Gfs_err_mgr {
 			}
 		}
 	}
-	private static final    byte[] Esc_nl = Bry_.new_a7("\\n"), Esc_cr = Bry_.new_a7("\\r"), Esc_tab = Bry_.new_a7("\\t");
+	private static final byte[] Esc_nl = Bry_.new_a7("\\n"), Esc_cr = Bry_.new_a7("\\r"), Esc_tab = Bry_.new_a7("\\t");
 }

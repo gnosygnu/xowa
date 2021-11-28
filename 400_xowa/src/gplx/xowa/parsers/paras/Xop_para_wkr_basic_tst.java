@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.parsers.lists.*;
 public class Xop_para_wkr_basic_tst {
-	private final    Xop_fxt fxt = new Xop_fxt(); String raw;
+	private final Xop_fxt fxt = new Xop_fxt(); String raw;
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();}
 	@After public void teardown() {fxt.Init_para_n_();}
 	@Test public void Nl_0() {

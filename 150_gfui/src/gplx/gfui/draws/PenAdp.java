@@ -28,7 +28,7 @@ public class PenAdp implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_Color_))	Color_set((ColorAdp)m.ReadObj(Invk_Color_, ColorAdp_.Parser));
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	static final    String Invk_Width_ = "Width_", Invk_Color_ = "Color_";
+	}	static final String Invk_Width_ = "Width_", Invk_Color_ = "Color_";
 	@Override public String toString() {return String_bldr_.new_().Add_kv_obj("width", width).Add_kv("color", color.XtoHexStr()).To_str();}
 	@Override public int hashCode() {return color.Value() ^ (int)width;}
 	@Override public boolean equals(Object obj) {	// cannot use Eq b/c of difficulty in comparing null instances
@@ -47,5 +47,5 @@ class PenAdpCache {
 		return (BasicStroke)rv;
 	}
 		Hash_adp hash = Hash_adp_.New();
-	public static final    PenAdpCache Instance = new PenAdpCache(); PenAdpCache() {}
+	public static final PenAdpCache Instance = new PenAdpCache(); PenAdpCache() {}
 }

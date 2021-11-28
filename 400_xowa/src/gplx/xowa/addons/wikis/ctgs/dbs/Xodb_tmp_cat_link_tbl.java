@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.ctgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.addons.wikis.ctgs.*; 
 public class Xodb_tmp_cat_link_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_from, fld_to_ttl, fld_sortkey, fld_timestamp, fld_sortkey_prefix, fld_collation_id, fld_type_id;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_from, fld_to_ttl, fld_sortkey, fld_timestamp, fld_sortkey_prefix, fld_collation_id, fld_type_id;
 	private Db_stmt stmt_insert;
 	public Xodb_tmp_cat_link_tbl(Db_conn conn) {
 		this.conn = conn;
@@ -32,8 +32,8 @@ public class Xodb_tmp_cat_link_tbl implements Db_tbl {
 		conn.Rls_reg(this);
 		conn.Meta_tbl_remake(this);
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn; 
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name; 
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn() {conn.Txn_bgn("tcl__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}

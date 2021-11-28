@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.searchers.slabs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.core.brys.*;
 public class Srch_slab_itm_parser {
-	private final    List_adp itm_list = List_adp_.New();
-	private final    Bry_rdr rdr = new Bry_rdr();
+	private final List_adp itm_list = List_adp_.New();
+	private final Bry_rdr rdr = new Bry_rdr();
 	public Srch_slab_itm[] Parse(byte[] raw) {	// EX: en.wikipedia.org|41|60;en.wiktionary.org|21|40;
 		rdr.Init_by_src(raw);
 		while (!rdr.Pos_is_eos()) {

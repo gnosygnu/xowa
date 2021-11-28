@@ -17,8 +17,8 @@ package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*; import gplx.xowa
 import org.junit.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public class GetEntityStatements__tst {
-	private final    Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt();
-	private final    Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt();
+	private final Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt();
+	private final Wdata_wiki_mgr_fxt wdata_fxt = new Wdata_wiki_mgr_fxt();
 	private Scrib_lib lib;
 	@Before public void init() {
 		fxt.Clear_for_invoke();

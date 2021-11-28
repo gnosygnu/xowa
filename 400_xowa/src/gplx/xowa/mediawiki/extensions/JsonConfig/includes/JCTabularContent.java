@@ -166,7 +166,7 @@ public class JCTabularContent extends JCDataContent {//		protected function crea
 			result.Set_by_as_itm("data", array_map_func.Array_map(new JCLocalizeAryFunc(localize, isLocalized), data.Get_by_as_itm("data")));
 		}
 	}
-	public static final    String Model_id = "JCTabularContent";
+	public static final String Model_id = "JCTabularContent";
 }
 class JCArrayFunc {
 	public XophpStdClass Array_map(JCLocalizeAryFunc func, XophpStdClass src) {
@@ -181,8 +181,8 @@ class JCArrayFunc {
 	}
 }
 class JCLocalizeAryFunc {
-	private final    JCLocalizeItmFunc localize;
-	private final    Int_list isLocalized;
+	private final JCLocalizeItmFunc localize;
+	private final Int_list isLocalized;
 	public JCLocalizeAryFunc(JCLocalizeItmFunc localize, Int_list isLocalized) {
 		this.localize = localize;
 		this.isLocalized = isLocalized;
@@ -199,7 +199,7 @@ class JCLocalizeAryFunc {
 	}
 }
 class JCLocalizeItmFunc {
-	private final    Xol_lang_itm lang;
+	private final Xol_lang_itm lang;
 	public JCLocalizeItmFunc(Xol_lang_itm lang) {
 		this.lang = lang;
 	}

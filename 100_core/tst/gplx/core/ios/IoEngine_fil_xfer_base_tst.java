@@ -26,7 +26,7 @@ public abstract class IoEngine_fil_xfer_base_tst {
 	protected abstract IoEngine engine_();
 	protected abstract void setup_hook();
 	protected abstract Io_url AltRoot();
-	@Test @gplx.Virtual public void CopyFil() {
+	@Test public void CopyFil() {
 		fx.run_SaveFilText(src, "src"); fx.run_UpdateFilModifiedTime(src, srcModifiedTime);
 		fx.tst_ExistsPaths(true, src);
 		fx.tst_ExistsPaths(false, trg);
@@ -36,7 +36,7 @@ public abstract class IoEngine_fil_xfer_base_tst {
 		fx.tst_LoadFilStr(trg, "src");
 		fx.tst_QueryFil_modifiedTime(trg, srcModifiedTime);
 	}
-	@Test @gplx.Virtual public void CopyFil_overwrite_fail() {
+	@Test public void CopyFil_overwrite_fail() {
 		fx.run_SaveFilText(src, "src");
 		fx.run_SaveFilText(trg, "trg");
 
@@ -48,7 +48,7 @@ public abstract class IoEngine_fil_xfer_base_tst {
 		}
 		Tfds.Fail_expdError();
 	}
-	@Test @gplx.Virtual public void CopyFil_overwrite_pass() {
+	@Test public void CopyFil_overwrite_pass() {
 		fx.run_SaveFilText(src, "src"); fx.run_UpdateFilModifiedTime(src, srcModifiedTime);
 		fx.run_SaveFilText(trg, "trg"); fx.run_UpdateFilModifiedTime(trg, trgModifiedTime);
 
@@ -57,7 +57,7 @@ public abstract class IoEngine_fil_xfer_base_tst {
 		fx.tst_LoadFilStr(trg, "src");
 		fx.tst_QueryFil_modifiedTime(trg, srcModifiedTime);
 	}
-	@Test @gplx.Virtual public void MoveFil() {
+	@Test public void MoveFil() {
 		fx.run_SaveFilText(src, "src");
 		fx.tst_ExistsPaths(true, src);
 		fx.tst_ExistsPaths(false, trg);
@@ -66,7 +66,7 @@ public abstract class IoEngine_fil_xfer_base_tst {
 		fx.tst_ExistsPaths(false, src);
 		fx.tst_ExistsPaths(true, trg);
 	}
-	@Test @gplx.Virtual public void MoveFil_overwrite_fail() {
+	@Test public void MoveFil_overwrite_fail() {
 		fx.run_SaveFilText(src, "src");
 		fx.run_SaveFilText(trg, "trg");
 
@@ -79,7 +79,7 @@ public abstract class IoEngine_fil_xfer_base_tst {
 		}
 		Tfds.Fail_expdError();
 	}
-	@Test @gplx.Virtual public void MoveFil_overwrite_pass() {
+	@Test public void MoveFil_overwrite_pass() {
 		fx.run_SaveFilText(src, "src"); fx.run_UpdateFilModifiedTime(src, srcModifiedTime);
 		fx.run_SaveFilText(trg, "trg"); fx.run_UpdateFilModifiedTime(trg, trgModifiedTime);
 
@@ -89,7 +89,7 @@ public abstract class IoEngine_fil_xfer_base_tst {
 		fx.tst_LoadFilStr(trg, "src");
 		fx.tst_QueryFil_modifiedTime(trg, srcModifiedTime);
 	}
-	@Test @gplx.Virtual public void MoveFil_betweenDrives() {
+	@Test public void MoveFil_betweenDrives() {
 		IoEngine_xrg_deleteDir.new_(AltRoot()).Recur_().ReadOnlyFails_off().Exec();
 		src = root.GenSubFil_nest("dir", "fil1a.txt");
 		trg = AltRoot().GenSubFil_nest("dir", "fil1b.txt");

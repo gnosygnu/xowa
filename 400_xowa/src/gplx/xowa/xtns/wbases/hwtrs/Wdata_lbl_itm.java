@@ -20,9 +20,9 @@ public class Wdata_lbl_itm {
 		this.is_pid = is_pid; this.id = id; this.text_en_enabled = text_en_enabled;
 		this.ttl = Make_ttl(is_pid, id);			
 	}
-	public boolean Is_pid() {return is_pid;} private final    boolean is_pid;
-	public int Id() {return id;} private final    int id;
-	public byte[] Ttl() {return ttl;} private final    byte[] ttl;
+	public boolean Is_pid() {return is_pid;} private final boolean is_pid;
+	public int Id() {return id;} private final int id;
+	public byte[] Ttl() {return ttl;} private final byte[] ttl;
 	public byte[] Lang() {return lang;} private byte[] lang;
 	public byte[] Text() {return text;} private byte[] text;
 	public byte[] Text_en() {return text_en;} public void Text_en_(byte[] v) {text_en = v;} private byte[] text_en = Bry_.Empty;
@@ -34,8 +34,8 @@ public class Wdata_lbl_itm {
 			: Bry_.Add(Ttl_prefix_qid, Int_.To_bry(id))
 			;
 	}
-	private static final    byte[] Ttl_prefix_pid = Bry_.new_a7("Property:P"), Ttl_prefix_qid = Bry_.new_a7("Q");
-	private static final    byte[] Extract_ttl_qid = Bry_.new_a7("http://www.wikidata.org/entity/");
+	private static final byte[] Ttl_prefix_pid = Bry_.new_a7("Property:P"), Ttl_prefix_qid = Bry_.new_a7("Q");
+	private static final byte[] Extract_ttl_qid = Bry_.new_a7("http://www.wikidata.org/entity/");
 	public static byte[] Extract_ttl(byte[] href) {
 		if (Bry_.Has_at_bgn(href, Extract_ttl_qid))	// qid
 			return Bry_.Mid(href, Extract_ttl_qid.length, href.length);

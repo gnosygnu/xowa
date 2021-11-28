@@ -17,8 +17,8 @@ package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*; im
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.nss.*;
 public class Adjustment_cmd implements Gfo_invk {
-	private final    Xow_wiki wiki;
-	private final    Page_matcher_mgr matcher_mgr;
+	private final Xow_wiki wiki;
+	private final Page_matcher_mgr matcher_mgr;
 	private boolean enabled = true;
 	private double median_factor = .001d;
 	public Adjustment_cmd(Xow_wiki wiki) {

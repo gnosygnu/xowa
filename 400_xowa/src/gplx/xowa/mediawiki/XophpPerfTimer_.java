@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpPerfTimer_ {
-	public static final    XophpPerfTimer Noop = new XophpPerfTimerNoop();
+	public static final XophpPerfTimer Noop = new XophpPerfTimerNoop();
 }
 class XophpPerfTimerNoop implements XophpPerfTimer {
 	public void Bgn() {}

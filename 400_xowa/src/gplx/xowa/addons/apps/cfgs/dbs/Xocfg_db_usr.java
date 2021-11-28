@@ -17,15 +17,15 @@ package gplx.xowa.addons.apps.cfgs.dbs; import gplx.*; import gplx.xowa.*; impor
 import gplx.dbs.*;
 import gplx.xowa.addons.apps.cfgs.dbs.tbls.*;
 public class Xocfg_db_usr {
-	private final    Xocfg_itm_tbl tbl__itm;
+	private final Xocfg_itm_tbl tbl__itm;
 	public Xocfg_db_usr(Xocfg_db_app db_app, Db_conn conn) {
 		this.conn = conn;
 		this.tbl__val = new Xocfg_val_tbl(conn);
 		conn.Meta_tbl_assert(tbl__val);
 		this.tbl__itm = db_app.Tbl__itm();
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
-	public Xocfg_val_tbl Tbl__val() {return tbl__val;} private final    Xocfg_val_tbl tbl__val;
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public Xocfg_val_tbl Tbl__val() {return tbl__val;} private final Xocfg_val_tbl tbl__val;
 	public String Get_str(String ctx, String key) {
 		Xocfg_itm_row itm_row = tbl__itm.Select_by_key_or_null(key);
 		if (itm_row == null) throw Err_.new_wo_type("cfg not defined", "ctx", ctx, "key", key);

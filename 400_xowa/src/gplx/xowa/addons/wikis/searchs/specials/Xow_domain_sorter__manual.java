@@ -17,8 +17,8 @@ package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa
 import gplx.core.primitives.*; import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xow_domain_sorter__manual implements gplx.core.lists.ComparerAble {
-	private final    Xow_domain_itm cur_domain;
-	private final    Xow_domain_crt_itm[] ary; private final    int ary_len;
+	private final Xow_domain_itm cur_domain;
+	private final Xow_domain_crt_itm[] ary; private final int ary_len;
 	public Xow_domain_sorter__manual(Xow_domain_itm cur_domain, Xow_domain_crt_itm[] ary) {
 		this.cur_domain = cur_domain; this.ary = ary; this.ary_len = ary.length;
 	}
@@ -50,7 +50,7 @@ public class Xow_domain_sorter__manual implements gplx.core.lists.ComparerAble {
 	}
 }
 class Xow_domain_sorter__manual_tid implements gplx.core.lists.ComparerAble {
-	private final    Hash_adp sort_hash = Hash_adp_.New(); private final    Int_obj_ref sort_key = Int_obj_ref.New_neg1();
+	private final Hash_adp sort_hash = Hash_adp_.New(); private final Int_obj_ref sort_key = Int_obj_ref.New_neg1();
 	public Xow_domain_sorter__manual_tid(int[] id_ary) {
 		int len = id_ary.length;
 		for (int i = 0; i < len; ++i) {
@@ -84,7 +84,7 @@ class Xow_domain_sorter__manual_tid implements gplx.core.lists.ComparerAble {
 	}
 }
 class Xow_domain_sorter__manual_lang implements gplx.core.lists.ComparerAble {
-	private final    Hash_adp sort_hash = Hash_adp_.New(); private final    Int_obj_ref sort_key = Int_obj_ref.New_neg1();
+	private final Hash_adp sort_hash = Hash_adp_.New(); private final Int_obj_ref sort_key = Int_obj_ref.New_neg1();
 	public Xow_domain_sorter__manual_lang(int[] id_ary) {
 		int len = id_ary.length;
 		for (int i = 0; i < len; ++i) {

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
 import gplx.core.tests.*; import gplx.langs.jsons.*;
 public class Gfobj_wtr__json_fxt {
-	protected final    Gfobj_wtr__json mgr = new Gfobj_wtr__json();
+	protected final Gfobj_wtr__json mgr = new Gfobj_wtr__json();
 	public Gfobj_nde Make__nde(Gfobj_fld... ary)					{return Make__nde(Gfobj_nde.New(), ary);}
 	private Gfobj_nde Make__nde(Gfobj_nde nde, Gfobj_fld[] ary) {
 		int len = ary.length;

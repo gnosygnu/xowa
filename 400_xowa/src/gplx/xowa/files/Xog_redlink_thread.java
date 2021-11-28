@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.xowa.guis.cbks.js.*;
 public class Xog_redlink_thread implements Gfo_thread_wkr {
-	private final    int[] redlink_ary; private final    Xog_js_wkr js_wkr;
+	private final int[] redlink_ary; private final Xog_js_wkr js_wkr;
 	public Xog_redlink_thread(int[] redlink_ary, Xog_js_wkr js_wkr) {this.redlink_ary = redlink_ary; this.js_wkr = js_wkr;}
 	public String	Thread__name() {return "xowa.gui.html.redlinks.set";}
 	public boolean	Thread__resume() {return true;}

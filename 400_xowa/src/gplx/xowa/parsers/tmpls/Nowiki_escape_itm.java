@@ -42,7 +42,7 @@ public class Nowiki_escape_itm {
 		return dirty;
 	}
 
-	private static final    Btrie_slim_mgr trie = New_trie();
+	private static final Btrie_slim_mgr trie = New_trie();
 	private static Btrie_slim_mgr New_trie() {
 		byte[] pre_bry = new byte[] {Byte_ascii.Nl, Byte_ascii.Space};	// NOTE: must go before New_trie
 		Btrie_slim_mgr rv = Btrie_slim_mgr.cs();

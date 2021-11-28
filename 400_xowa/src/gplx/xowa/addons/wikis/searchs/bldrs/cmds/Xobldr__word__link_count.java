@@ -49,6 +49,6 @@ public class Xobldr__word__link_count extends Xob_cmd__base implements Xob_cmd {
 
 	public static final String BLDR_CMD_KEY = "search.word__link_count";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__word__link_count(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__word__link_count(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__word__link_count(bldr, wiki);}
 }

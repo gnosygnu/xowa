@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_specials_mgr implements Gfo_invk {
-	private final    Ordered_hash hash_by_special = Ordered_hash_.New_bry(), hash_by_aliases = Ordered_hash_.New_bry();
-	private final    Xol_lang_itm lang;
+	private final Ordered_hash hash_by_special = Ordered_hash_.New_bry(), hash_by_aliases = Ordered_hash_.New_bry();
+	private final Xol_lang_itm lang;
 	public Xol_specials_mgr(Xol_lang_itm lang) {this.lang = lang;}
 	public void Clear() {hash_by_special.Clear();}
 	public int Len() {return hash_by_special.Len();}

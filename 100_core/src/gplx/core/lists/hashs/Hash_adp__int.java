@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.lists.hashs; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
 import gplx.core.primitives.*;
 public class Hash_adp__int {
-	private final    Hash_adp hash = Hash_adp_.New();
-	private final    Int_obj_ref tmp_key = Int_obj_ref.New_neg1();
+	private final Hash_adp hash = Hash_adp_.New();
+	private final Int_obj_ref tmp_key = Int_obj_ref.New_neg1();
 	public void Clear()								{hash.Clear();}
 	public int Len()								{return hash.Count();}
 	public Object Get_by_or_fail(int key)			{synchronized (tmp_key) {return hash.Get_by_or_fail(tmp_key.Val_(key));}}	// LOCK:used by Xomp_ns_ord_mgr in xomp; DATE:2016-10-18

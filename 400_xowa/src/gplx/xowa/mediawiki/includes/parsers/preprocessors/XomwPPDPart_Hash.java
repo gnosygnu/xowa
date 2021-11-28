@@ -18,7 +18,7 @@ package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; impor
 /**
 * @ingroup Parser
 */
-public class XomwPPDPart_Hash extends XomwPPDPart {	private final    Xomw_prepro_accum__hash accum = new Xomw_prepro_accum__hash(XophpArray.New());
+public class XomwPPDPart_Hash extends XomwPPDPart {	private final Xomw_prepro_accum__hash accum = new Xomw_prepro_accum__hash(XophpArray.New());
 	public XomwPPDPart_Hash(String output) {super(output);
 		if (output != String_.Empty) {
 			accum.Ary().Add(output);

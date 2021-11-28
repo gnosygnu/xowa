@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.files.exts; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.apps.*;
 public class Xof_rule_mgr implements Gfo_invk {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Xof_rule_mgr() {
 		Xof_rule_grp app_default = new Xof_rule_grp(this, Xof_rule_grp.Grp_app_default);
 		Set_app_default(app_default, Io_mgr.Len_gb, Xof_ext_.Bry__ary);

@@ -18,9 +18,9 @@ import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.cent
 import gplx.core.brys.evals.*;
 import gplx.xowa.wikis.domains.*;
 public class Host_eval_itm {
-	private final    Bry_eval_mgr mgr = Bry_eval_mgr.Dflt();
-	private final    Host_eval_wkr wkr = new Host_eval_wkr();
-	private final    Hash_adp host_hash = Hash_adp_.New();
+	private final Bry_eval_mgr mgr = Bry_eval_mgr.Dflt();
+	private final Host_eval_wkr wkr = new Host_eval_wkr();
+	private final Hash_adp host_hash = Hash_adp_.New();
 	public Host_eval_itm() {
 		mgr.Add_many(wkr);
 	}

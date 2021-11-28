@@ -23,7 +23,7 @@ public abstract class IoEngine_dir_basic_base_tst {
 	}	protected IoEngine engine; @gplx.Internal protected IoEngineFxt fx; protected Io_url fil, root;
 	protected abstract IoEngine engine_();
 	protected abstract void setup_hook();
-	@Test @gplx.Virtual public void CreateDir() {
+	@Test public void CreateDir() {
 		fx.tst_ExistsPaths(false, root);
 
 		engine.CreateDir(root);
@@ -51,7 +51,7 @@ public abstract class IoEngine_dir_basic_base_tst {
 	@Test public void DeleteDir_missing_pass() {
 		engine.DeleteDir(root);
 	}
-	@Test @gplx.Virtual public void ScanDir() {
+	@Test public void ScanDir() {
 		Io_url fil = root.GenSubFil("fil1.txt"); fx.run_SaveFilText(fil, "test");
 		Io_url dir1 = root.GenSubDir_nest("dir1"); engine.CreateDir(dir1); 
 		Io_url dir1_1 = dir1.GenSubDir_nest("dir1_1"); engine.CreateDir(dir1_1); // NOTE: QueryDir should not recurse by default; dir1_1 should not be returned below
@@ -66,7 +66,7 @@ public abstract class IoEngine_dir_basic_base_tst {
 		engine.MoveDir(src, trg);
 		fx.tst_ExistsPaths(false, src); fx.tst_ExistsPaths(true, trg);
 	}
-	@Test @gplx.Virtual public void CopyDir() {
+	@Test public void CopyDir() {
 		Io_url src = root.GenSubDir_nest("src"), trg = root.GenSubDir_nest("trg");
 		engine.CreateDir(src);
 		fx.tst_ExistsPaths(true, src); fx.tst_ExistsPaths(false, trg);

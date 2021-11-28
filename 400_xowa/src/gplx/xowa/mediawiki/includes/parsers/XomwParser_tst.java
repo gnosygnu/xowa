@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 public class XomwParser_tst {
-	private final    XomwParser_fxt fxt = new XomwParser_fxt();
+	private final XomwParser_fxt fxt = new XomwParser_fxt();
 	@Test public void Basic() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "== heading_1 =="
@@ -59,9 +59,9 @@ public class XomwParser_tst {
 	}		
 }
 class XomwParser_fxt {
-	private final    XomwParser parser;
-	private final    XomwParserCtx pctx = new XomwParserCtx();
-	private final    XomwParserBfr pbfr = new XomwParserBfr();
+	private final XomwParser parser;
+	private final XomwParserCtx pctx = new XomwParserCtx();
+	private final XomwParserBfr pbfr = new XomwParserBfr();
 	public XomwParser_fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);

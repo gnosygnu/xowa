@@ -19,7 +19,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files
 import gplx.xowa.bldrs.wms.*; import gplx.xowa.apps.wms.apis.*; import gplx.xowa.apps.wms.apis.origs.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_xfer_mgr {
-	public Xof_xfer_mgr(Xof_file_mgr file_mgr, Xowmf_mgr wmf_mgr) {this.file_mgr = file_mgr; this.wmf_mgr = wmf_mgr;} private final    Xof_file_mgr file_mgr; private final    Xowmf_mgr wmf_mgr;
+	public Xof_xfer_mgr(Xof_file_mgr file_mgr, Xowmf_mgr wmf_mgr) {this.file_mgr = file_mgr; this.wmf_mgr = wmf_mgr;} private final Xof_file_mgr file_mgr; private final Xowmf_mgr wmf_mgr;
 	public Xof_xfer_rslt Rslt() {return rslt;} private Xof_xfer_rslt rslt = new Xof_xfer_rslt();
 	public boolean Force_orig() {return force_orig;} public Xof_xfer_mgr Force_orig_(boolean v) {force_orig = v; return this;} private boolean force_orig;
 	public Xof_xfer_mgr Force_orig_y_() {return Force_orig_(Bool_.Y);} public Xof_xfer_mgr Force_orig_n_() {return Force_orig_(Bool_.N);}

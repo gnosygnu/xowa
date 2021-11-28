@@ -16,11 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
 import gplx.dbs.*; import gplx.xowa.files.*;
 public class Xob_lnki_temp_tbl implements Db_tbl {
-	private static final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private static final    String tbl_name = "lnki_temp";
-	public static final    String 
+	private static final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final String tbl_name = "lnki_temp";
+	public static final String
 	  Fld_lnki_id				= flds.Add_int_pkey_autonum("lnki_id");	// NOTE: insertion order index; public b/c not used and want to bypass warning
-	private static final    String 
+	private static final String
 	  Fld_lnki_tier_id			= flds.Add_int("lnki_tier_id")
 	, Fld_lnki_page_id			= flds.Add_int("lnki_page_id")
 	, Fld_lnki_ttl				= flds.Add_str("lnki_ttl", 255)
@@ -36,7 +36,7 @@ public class Xob_lnki_temp_tbl implements Db_tbl {
 	;
 	private Db_stmt stmt_insert;
 	public Xob_lnki_temp_tbl(Db_conn conn) {this.conn = conn;}
-	public Db_conn Conn()		{return conn;} private final    Db_conn conn;
+	public Db_conn Conn()		{return conn;} private final Db_conn conn;
 	public String Tbl_name()	{return tbl_name;}
 	public void Create_tbl()	{conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert_bgn()	{conn.Txn_bgn("bldr__lnki_temp"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}

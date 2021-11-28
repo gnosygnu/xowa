@@ -17,8 +17,8 @@ package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.d
 import gplx.dbs.qrys.*;
 import gplx.dbs.metas.*; import gplx.dbs.metas.parsers.*;
 public class Sqlite_schema_mgr implements Dbmeta_reload_cmd {
-	private final    Db_engine engine; private boolean init = true;
-	private final    Dbmeta_idx_mgr idx_mgr = new Dbmeta_idx_mgr();		
+	private final Db_engine engine; private boolean init = true;
+	private final Dbmeta_idx_mgr idx_mgr = new Dbmeta_idx_mgr();
 	public Sqlite_schema_mgr(Db_engine engine) {
 		this.engine = engine;
 		this.tbl_mgr = new Dbmeta_tbl_mgr(this);
@@ -26,7 +26,7 @@ public class Sqlite_schema_mgr implements Dbmeta_reload_cmd {
 	public Dbmeta_tbl_mgr Tbl_mgr() {
 		if (init) Init(engine);
 		return tbl_mgr;
-	}	private final    Dbmeta_tbl_mgr tbl_mgr;
+	}	private final Dbmeta_tbl_mgr tbl_mgr;
 	public boolean Tbl_exists(String name) {
 		if (init) Init(engine);
 		return tbl_mgr.Has(name);

@@ -17,14 +17,14 @@ package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*; im
 import gplx.core.lists.hashs.*; import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 class Page_matcher_wkr implements Gfo_invk {// NOTE: tries would use less memory, but would be slower, especially for Has*()
-	private final    Xow_wiki wiki;
-	private final    List_adp rule_list = List_adp_.New();
-	private final    Hash_adp__int page_hash = new Hash_adp__int();
+	private final Xow_wiki wiki;
+	private final List_adp rule_list = List_adp_.New();
+	private final Hash_adp__int page_hash = new Hash_adp__int();
 	public Page_matcher_wkr(Xow_wiki wiki, int ns_id) {
 		this.wiki = wiki;
 		this.ns_id = ns_id;
 	}
-	public int Ns_id() {return ns_id;} private final    int ns_id;
+	public int Ns_id() {return ns_id;} private final int ns_id;
 	public Page_matcher_itm Get_by_or_null(int page_id) {return (Page_matcher_itm)page_hash.Get_by_or_null(page_id);}
 	public Page_matcher_wkr Load_all() {
 		int len = rule_list.Len();

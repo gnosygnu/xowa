@@ -120,7 +120,7 @@ public class IoEngineUtl {
 			if (trgStream != null) trgStream.Rls();
 		}
 	}
-	private static final    Lru_cache Dir_cache = new Lru_cache(Bool_.Y, "gplx.ios.dir_cache", 128, 256);
+	private static final Lru_cache Dir_cache = new Lru_cache(Bool_.Y, "gplx.ios.dir_cache", 128, 256);
 	public static boolean Query_read_only(IoEngine engine, Io_url url, int read_only_type) {
 		switch (read_only_type) {
 			case Io_mgr.Read_only__basic__file:

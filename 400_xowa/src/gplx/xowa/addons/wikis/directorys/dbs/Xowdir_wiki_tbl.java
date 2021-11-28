@@ -17,10 +17,10 @@ package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*
 import gplx.dbs.*; import gplx.dbs.utls.*;
 import gplx.langs.jsons.*;
 public class Xowdir_wiki_tbl implements Db_tbl { // for domain and user-specific data only (name, url); don't replicate wiki-specific info here (like main_page)
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__wiki_id, fld__wiki_domain, fld__wiki_core_url, fld__wiki_json;
-	private final    Db_conn conn;
-	private final    Json_parser json_parser = new Json_parser();
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld__wiki_id, fld__wiki_domain, fld__wiki_core_url, fld__wiki_json;
+	private final Db_conn conn;
+	private final Json_parser json_parser = new Json_parser();
 	public Xowdir_wiki_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= Tbl_name_dflt;
@@ -30,7 +30,7 @@ public class Xowdir_wiki_tbl implements Db_tbl { // for domain and user-specific
 		this.fld__wiki_json			= flds.Add_text("wiki_json");				// EX: '{category_level="1",search_level="2", ...}'
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public boolean Upsert(int id, String domain, Io_url core_url, String json) {
 		return Db_tbl__crud_.Upsert(conn, tbl_name, flds, String_.Ary(fld__wiki_id), id, domain, core_url.Xto_api(), json);

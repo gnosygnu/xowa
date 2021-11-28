@@ -15,13 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 public class Xomw_prepro_accum__hash implements Xomw_prepro_accum {
-	private final    XophpArray ary;
+	private final XophpArray ary;
 	public Xomw_prepro_accum__hash(XophpArray ary) {
 		this.ary = ary;
 	}
 	public XophpArray Ary() {return ary;}
 	public void Clear() {ary.Clear();}
 
-	public static final    Xomw_prepro_accum__hash Instance = new Xomw_prepro_accum__hash(null);
+	public static final Xomw_prepro_accum__hash Instance = new Xomw_prepro_accum__hash(null);
 	public Xomw_prepro_accum Make_new() {return new Xomw_prepro_accum__hash(XophpArray.New());}
 }

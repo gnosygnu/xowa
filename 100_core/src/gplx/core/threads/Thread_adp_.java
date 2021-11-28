@@ -40,5 +40,5 @@ public class Thread_adp_ {
 		rv.Thread__start();
 		return rv;
 	}
-	public static final    String Name_null = null;
+	public static final String Name_null = null;
 }

@@ -18,7 +18,7 @@ public interface Xomw_page_fetcher {
 	byte[] Get_wtxt(byte[] wiki, byte[] page);
 }
 class Xomw_page_fetcher__mock implements Xomw_page_fetcher {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public void Set_wtxt(byte[] wiki, byte[] page, byte[] wtxt) {
 		hash.Add(Make_key(wiki, page), wtxt);
 	}

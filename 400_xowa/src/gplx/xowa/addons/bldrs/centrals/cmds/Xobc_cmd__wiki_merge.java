@@ -18,11 +18,11 @@ import gplx.dbs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*; import gplx.xowa.addons.bldrs.exports.merges.*;
 public class Xobc_cmd__wiki_merge extends Xobc_cmd__base {
-	private final    String wiki_domain;
-	private final    Io_url src_dir;
-	private final    Merge2_mgr merge_mgr;
-	private final    Merge_prog_wkr prog_wkr;
-	private final    int idx_cur;
+	private final String wiki_domain;
+	private final Io_url src_dir;
+	private final Merge2_mgr merge_mgr;
+	private final Merge_prog_wkr prog_wkr;
+	private final int idx_cur;
 	public Xobc_cmd__wiki_merge(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_idx, Merge2_mgr merge_mgr, String wiki_domain, Io_url src_dir
 		, long prog_size_end, int prog_count_end, int idx_cur) {super(task_mgr, task_id, step_id, cmd_idx);
 		this.merge_mgr = merge_mgr;
@@ -33,7 +33,7 @@ public class Xobc_cmd__wiki_merge extends Xobc_cmd__base {
 		this.Prog_data_end_(prog_count_end);
 		this.idx_cur = idx_cur;
 	}
-	@Override public String Cmd_type() {return CMD_TYPE;} public static final    String CMD_TYPE = "xowa.wiki.merge";
+	@Override public String Cmd_type() {return CMD_TYPE;} public static final String CMD_TYPE = "xowa.wiki.merge";
 	@Override public String Cmd_name() {return "merge";}
 	@Override public boolean Cmd_suspendable() {return true;}
 	@Override protected void Cmd_exec_hook(Xobc_cmd_ctx ctx) {

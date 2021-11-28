@@ -45,7 +45,7 @@ public class IptBnd_txt_range implements InjectAble, Gfo_invk, Gfo_evt_itm {
 		else if (ctx.MatchPriv(k, initEvt))		ReadyEvtCmd();
 		else	return Gfo_invk_.Rv_unhandled;
 		return Gfo_invk_.Rv_handled;
-	}	static final    String Invk_dec = "txtBox_dec", Invk_inc = "txtBox_inc", Invk_upd = "txtBox_exec";
+	}	static final String Invk_dec = "txtBox_dec", Invk_inc = "txtBox_inc", Invk_upd = "txtBox_exec";
 	void PreviewCmd(int delta) {
 		int newVal = previewIdx + delta;
 		if (!Int_.RangeCheck(newVal, list.length)) return;

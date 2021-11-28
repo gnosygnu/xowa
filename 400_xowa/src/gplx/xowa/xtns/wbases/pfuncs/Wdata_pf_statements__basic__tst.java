@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
 import org.junit.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Wdata_pf_statements__basic__tst {
-	@Before public void init() {fxt.Init();} private final    Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
+	@Before public void init() {fxt.Init();} private final Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test  public void String() {
 		fxt.Init__docs__add(fxt.Wdoc("Q1")
 			.Add_claims(fxt.Make_claim_string(1, "a"))

@@ -57,5 +57,5 @@ public class Pfunc_pagesincategory extends Pf_func_base {
 		byte[] rslt = fmt_num ? lang.Num_mgr().Format_num(num_bry) : lang.Num_mgr().Raw(num_bry);
 		bfr.Add(rslt);
 	}
-	public static final    Pfunc_pagesincategory Instance = new Pfunc_pagesincategory(); Pfunc_pagesincategory() {}
+	public static final Pfunc_pagesincategory Instance = new Pfunc_pagesincategory(); Pfunc_pagesincategory() {}
 }

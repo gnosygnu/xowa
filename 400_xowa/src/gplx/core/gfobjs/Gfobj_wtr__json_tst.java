@@ -17,7 +17,7 @@ package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 import gplx.langs.jsons.*;
 public class Gfobj_wtr__json_tst {
-	private final    Gfobj_wtr__json_fxt fxt = new Gfobj_wtr__json_fxt();
+	private final Gfobj_wtr__json_fxt fxt = new Gfobj_wtr__json_fxt();
 	@Test 	public void Flds() {
 		fxt.Test__write
 		( fxt.Make__nde

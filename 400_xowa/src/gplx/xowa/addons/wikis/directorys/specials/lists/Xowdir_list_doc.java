@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.directorys.specials.lists; import gplx.*; import 
 import gplx.langs.mustaches.*;
 import gplx.xowa.addons.wikis.directorys.specials.items.*;
 class Xowdir_list_doc implements Mustache_doc_itm {
-	private final    Xowdir_item_doc[] itms_ary;
+	private final Xowdir_item_doc[] itms_ary;
 	public Xowdir_list_doc(Xowdir_item_doc[] itms_ary) {
 		this.itms_ary = itms_ary;
 	}

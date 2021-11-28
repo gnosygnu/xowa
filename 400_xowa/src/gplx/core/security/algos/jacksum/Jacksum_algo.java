@@ -28,7 +28,7 @@ public class Jacksum_algo implements Hash_algo {
 			throw Err_.new_wo_type("jacksum algo doesn't exist: key=" + key);
 		}
 	}
-	public String Key() {return key;} private final    String key;
+	public String Key() {return key;} private final String key;
 	public Hash_algo Clone_hash_algo() {return new Jacksum_algo(key);}
 	public void Update_digest(byte[] bry, int bgn, int end) {checksum.update(bry, bgn, end - bgn);}
 	public byte[] To_hash_bry() {

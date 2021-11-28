@@ -305,7 +305,7 @@ public class Scrib_lib_text_json_tst {
 	}
 }
 class Scrib_lib_json_fxt {
-	private final    Json_wtr wtr = new Json_wtr();
+	private final Json_wtr wtr = new Json_wtr();
 	public void Test_json_roundtrip(Scrib_invoke_func_fxt fxt, Scrib_lib_text lib, String json, Object obj) {
 		Test_json_decode(fxt, lib, Scrib_lib_text__json_util.Flag__none, json, obj);
 		Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none, obj, json);

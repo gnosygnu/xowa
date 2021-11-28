@@ -20,15 +20,15 @@ public class Srch_word_row {
 		this.Link_count = link_count; this.Link_count_score = link_count_score;
 		this.Link_score_min = link_score_min; this.Link_score_max = link_score_max;
 	}
-	public final    int Id;
-	public final    byte[] Text;
-	public final    int Link_count;
-	public final    int Link_count_score;
-	public final    int Link_score_min;
-	public final    int Link_score_max;
+	public final int Id;
+	public final byte[] Text;
+	public final int Link_count;
+	public final int Link_count_score;
+	public final int Link_score_min;
+	public final int Link_score_max;
 
 	public int Db_row_size() {return Db_row_size_fixed + Text.length;}
 	private static final int Db_row_size_fixed = (5 * 4);	// 5 ints
 
-        public static final    Srch_word_row Empty = new Srch_word_row(-1, Bry_.Empty, 0, 0, 0, 0);
+        public static final Srch_word_row Empty = new Srch_word_row(-1, Bry_.Empty, 0, 0, 0, 0);
 }

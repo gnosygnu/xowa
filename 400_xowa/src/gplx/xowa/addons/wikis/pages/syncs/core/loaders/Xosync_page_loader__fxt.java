@@ -19,9 +19,9 @@ import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.addons.wikis.pages.syncs.core.parsers.*;
 public class Xosync_page_loader__fxt {
-	private final    Xosync_page_loader mgr = new Xosync_page_loader();		
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Xoh_page hpg = new Xoh_page();
+	private final Xosync_page_loader mgr = new Xosync_page_loader();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xoh_page hpg = new Xoh_page();
 	private Xowe_wiki wiki;
 	public void Clear() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();

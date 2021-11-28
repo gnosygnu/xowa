@@ -17,8 +17,8 @@ package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.tests.*;
 import gplx.langs.jsons.*;
 public class Cldr_name_loader_fxt {
-	private static final    String Dir_name = "mem/CldrNames/";
-	private final    Cldr_name_loader name_loader = new Cldr_name_loader(Io_url_.mem_dir_(Dir_name));
+	private static final String Dir_name = "mem/CldrNames/";
+	private final Cldr_name_loader name_loader = new Cldr_name_loader(Io_url_.mem_dir_(Dir_name));
 
 	public void Clear() {name_loader.Clear();}
 	public void Init__file(String fil_name, String txt) {

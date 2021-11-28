@@ -20,7 +20,7 @@ public class Xoscript_page {
 		this.url_var = url_var;
 		this.doc_var = new Xoscript_doc(rv, this);
 	}
-	public Xoscript_env env() {return env_var;} private final    Xoscript_env env_var;
-	public Xoscript_url url() {return url_var;} private final    Xoscript_url url_var;
-	public Xoscript_doc doc() {return doc_var;} private final    Xoscript_doc doc_var;
+	public Xoscript_env env() {return env_var;} private final Xoscript_env env_var;
+	public Xoscript_url url() {return url_var;} private final Xoscript_url url_var;
+	public Xoscript_doc doc() {return doc_var;} private final Xoscript_doc doc_var;
 }

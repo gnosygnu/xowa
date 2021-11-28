@@ -24,5 +24,5 @@ class Func_tkn_minus_negative extends Func_tkn_base {
 		val_stack.Push(val.Multiply(Decimal_adp_.Neg1));
 		return true;
 	}
-	public static final    Func_tkn_minus_negative Instance = new Func_tkn_minus_negative("-");
+	public static final Func_tkn_minus_negative Instance = new Func_tkn_minus_negative("-");
 }

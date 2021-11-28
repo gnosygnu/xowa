@@ -20,7 +20,7 @@ public class Xobc_version_regy_itm {
 		this.date = date;
 		this.note = note;
 	}
-	public int Id() {return id;} private final    int id;
-	public String Date() {return date;} private final    String date;
-	public String Note() {return note;} private final    String note;
+	public int Id() {return id;} private final int id;
+	public String Date() {return date;} private final String date;
+	public String Note() {return note;} private final String note;
 }

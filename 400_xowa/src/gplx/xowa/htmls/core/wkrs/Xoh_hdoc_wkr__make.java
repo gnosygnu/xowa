@@ -19,9 +19,9 @@ import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.hdrs.*; im
 import gplx.xowa.wikis.ttls.*; 
 public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
 	private Bry_bfr bfr; private Xoh_page hpg; private Xoh_hdoc_ctx hctx; private byte[] src;
-	private final    Xoh_hdr_wtr wkr__hdr = new Xoh_hdr_wtr();
-	private final    Xoh_img_wtr wkr__img = new Xoh_img_wtr();
-	private final    Xoh_page_bfr page_bfr = new Xoh_page_bfr();
+	private final Xoh_hdr_wtr wkr__hdr = new Xoh_hdr_wtr();
+	private final Xoh_img_wtr wkr__img = new Xoh_img_wtr();
+	private final Xoh_page_bfr page_bfr = new Xoh_page_bfr();
 	private boolean toc_enabled;
 	private int html_uid;
 	public Bry_bfr Bfr() {return bfr;}
@@ -133,5 +133,5 @@ public class Xoh_hdoc_wkr__make implements Xoh_hdoc_wkr {
 			return html_uid;
 		}
 	}
-	private static final    byte[] Bry__a__bgn = Bry_.new_a7("<a "), Bry__a__id = Bry_.new_a7("<a id=\"xolnki_");
+	private static final byte[] Bry__a__bgn = Bry_.new_a7("<a "), Bry__a__id = Bry_.new_a7("<a id=\"xolnki_");
 }

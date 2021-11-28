@@ -22,10 +22,10 @@ class Page_matcher_itm {
 		this.Val = val;
 		this.Page_filter = page_filter;
 	}
-	public final    byte Match_type;
-	public final    byte Calc_type;
-	public final    double Val;
-	public final    String Page_filter;
+	public final byte Match_type;
+	public final byte Calc_type;
+	public final double Val;
+	public final String Page_filter;
 	public Int_obj_ref[] Page_ids;
 	public int Calc(int score_old) {
 		switch (this.Calc_type) {

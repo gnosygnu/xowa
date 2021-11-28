@@ -17,7 +17,7 @@ package gplx.objects.strings.unicodes; import gplx.*; import gplx.objects.*; imp
 import org.junit.*; import gplx.tests.*;
 import gplx.objects.errs.*;
 public class Ustring_tst {
-	private final    Ustring_fxt fxt = new Ustring_fxt();
+	private final Ustring_fxt fxt = new Ustring_fxt();
 	@Test public void Empty() {
 		fxt.Init("");
 		fxt.Test__Len(0, 0);

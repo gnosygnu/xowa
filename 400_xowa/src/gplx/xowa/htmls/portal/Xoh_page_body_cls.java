@@ -116,7 +116,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 		if (bgn != -1) trg_bfr.Add_mid(src, bgn, src_len);
 		return trg_bfr == null ? src : trg_bfr.To_bry_and_clear();
 	}
-	private static final    byte[]
+	private static final byte[]
 	  Bry_id_prefix			= Bry_.new_a7("ns-")
 	, Bry_type_special		= Bry_.new_a7("ns-special")
 	, Bry_type_talk			= Bry_.new_a7("ns-talk")

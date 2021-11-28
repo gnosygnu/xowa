@@ -28,5 +28,5 @@ public class Xoh_hdump_wkr_utl {
 	public static byte[] Build_hdump_atr(byte[] key) {
 		return Bry_.Add(Bry__data_xowa_hdump, key, Byte_ascii.Apos_bry);
 	}
-	private static final    byte[] Bry__data_xowa_hdump = Bry_.new_a7("data-xowa-hdump='");
+	private static final byte[] Bry__data_xowa_hdump = Bry_.new_a7("data-xowa-hdump='");
 }

@@ -26,8 +26,8 @@ public class Xoctg_catpage_itm {
 		this.sortkey_handle = sortkey_prefix;	// default handle to sortkey_prefix;
 		this.sortkey_binary = sortkey_binary;
 	}
-	public byte					Grp_tid()			{return grp_tid;}			private final    byte grp_tid;		// v2-v4:cl_type_id; subc,page,file
-	public int					Page_id()			{return page_id;}			private final    int page_id;		// v2-v4:cl_from
+	public byte					Grp_tid()			{return grp_tid;}			private final byte grp_tid;		// v2-v4:cl_type_id; subc,page,file
+	public int					Page_id()			{return page_id;}			private final int page_id;		// v2-v4:cl_from
 	public byte[]				Sortkey_prefix()	{return sortkey_prefix;}	private byte[] sortkey_prefix;		// v2-v3:cl_sortkey; v4:cl_sortkey_prefix
 	public byte[]				Sortkey_handle()	{return sortkey_handle;}	private byte[] sortkey_handle;		// v2-v3:cl_sortkey; v4:cl_sortkey_prefix\nttl_txt; never "cl_sortkey" which is binary ICU value;
 	public byte[]				Sortkey_binary()	{return sortkey_binary;}	private byte[] sortkey_binary;		// v2-v4:cl_sortkey; note that v4 is binary icu value
@@ -76,7 +76,7 @@ public class Xoctg_catpage_itm {
 		}
 	}
 
-	public static final    Xoctg_catpage_itm[] Ary_empty = new Xoctg_catpage_itm[0];
+	public static final Xoctg_catpage_itm[] Ary_empty = new Xoctg_catpage_itm[0];
 	public static Xoctg_catpage_itm New_by_rdr(Xow_wiki wiki, Db_rdr rdr, byte version) {
 		byte[] sortkey_binary = Bry_.Empty;
 		byte[] sortkey_prefix = Bry_.Empty;
@@ -104,5 +104,5 @@ public class Xoctg_catpage_itm {
 		return rv;
 	}
 	private static final byte Version__2 = 2, Version__4 = 4;
-	private static final    byte[] Sortkey_prefix_replace__src = Bry_.new_a7("\n\t"), Sortkey_prefix_replace__trg = Bry_.new_a7("  ");
+	private static final byte[] Sortkey_prefix_replace__src = Bry_.new_a7("\n\t"), Sortkey_prefix_replace__trg = Bry_.new_a7("  ");
 }

@@ -37,7 +37,7 @@ public class Xoa_css_extractor {
 	public Xoa_css_extractor Url_encoder_(Gfo_url_encoder v) {url_encoder = v; return this;} private Gfo_url_encoder url_encoder;
 	public Xoa_css_extractor Wiki_code_(byte[] v) {this.wiki_code = v; return this;} private byte[] wiki_code = null;
 	private byte[] mainpage_html; private boolean lang_is_ltr = true;
-	private final    Gfo_url_parser url_parser = new Gfo_url_parser();
+	private final Gfo_url_parser url_parser = new Gfo_url_parser();
 	public void Init_by_app(Xoae_app app) {
 		this.usr_dlg = app.Usr_dlg();
 		this.home_css_dir = app.Usere().Fsys_mgr().Wiki_html_dir("home").GenSubDir("html");
@@ -153,7 +153,7 @@ public class Xoa_css_extractor {
 		bry = Bry_.Replace(bry, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab_ent, gplx.xowa.bldrs.xmls.Xob_xml_parser_.Bry_tab);
 		Io_mgr.Instance.SaveFilBry(trg_fil, bry);
 		return true;
-	}	private static final    byte[] Ttl_common_css = Bry_.new_a7("Common.css"), Ttl_vector_css = Bry_.new_a7("Vector.css");
+	}	private static final byte[] Ttl_common_css = Bry_.new_a7("Common.css"), Ttl_vector_css = Bry_.new_a7("Vector.css");
 	private boolean Css_wiki_generate_section(Bry_bfr bfr, byte[] ttl) {
 		byte[] page = page_fetcher.Get_by(Xow_ns_.Tid__mediawiki, ttl);
 		if (page == null) return false;
@@ -161,7 +161,7 @@ public class Xoa_css_extractor {
 		Css_wiki_section_hdr.Bld_bfr_many(bfr, ttl);			// add "/*XOWA:MediaWiki:Common.css*/\n"
 		bfr.Add(page);											// add page
 		return true;
-	}	private static final    Bry_fmtr Css_wiki_section_hdr = Bry_fmtr.new_("/*XOWA:MediaWiki:~{ttl}*/\n", "ttl");
+	}	private static final Bry_fmtr Css_wiki_section_hdr = Bry_fmtr.new_("/*XOWA:MediaWiki:~{ttl}*/\n", "ttl");
 	public void Logo_setup() {
 		boolean logo_missing = true;
 		Io_url logo_url = wiki_html_dir.GenSubFil("logo.png");
@@ -196,7 +196,7 @@ public class Xoa_css_extractor {
 		Io_url src_fil = wiki_html_dir.GenSubFil(String_.new_u8(src_bry));
 		Io_mgr.Instance.CopyFil(src_fil, trg_fil, true);
 		return true;
-	}	private static final    byte[] Bry_mw_wiki_logo = Bry_.new_a7(".mw-wiki-logo{background-image:url(\"");
+	}	private static final byte[] Bry_mw_wiki_logo = Bry_.new_a7(".mw-wiki-logo{background-image:url(\"");
 	private String Logo_find_src() {
 		if (mainpage_html == null) return null;
 		int main_page_html_len = mainpage_html.length;
@@ -208,7 +208,7 @@ public class Xoa_css_extractor {
 		byte[] logo_bry = Bry_.Mid(mainpage_html, logo_bgn, logo_end);
 		return protocol_prefix + String_.new_u8(logo_bry);
 	}
-	private static final    byte[] Logo_find_bgn = Bry_.new_a7("<div id=\"p-logo\""), Logo_find_end = Bry_.new_a7("background-image: url(");
+	private static final byte[] Logo_find_bgn = Bry_.new_a7("<div id=\"p-logo\""), Logo_find_end = Bry_.new_a7("background-image: url(");
 	public boolean Mainpage_download() {
 		mainpage_html = Mainpage_download_html();
 		return mainpage_html != null;
@@ -267,7 +267,7 @@ public class Xoa_css_extractor {
 			prv_pos = url_end;
 		}
 		return rv.To_str_ary();
-	}	private static final    byte[] Css_find_bgn = Bry_.new_a7("<link rel=\"stylesheet\" href=\""), Css_amp_find = Bry_.new_a7("&amp;"), Css_amp_repl = Bry_.new_a7("&");
+	}	private static final byte[] Css_find_bgn = Bry_.new_a7("<link rel=\"stylesheet\" href=\""), Css_amp_find = Bry_.new_a7("&amp;"), Css_amp_repl = Bry_.new_a7("&");
 	private byte[] Css_scrape_download(String[] css_urls) {
 		int css_urls_len = css_urls.length;
 		Bry_bfr tmp_bfr = Bry_bfr_.New();

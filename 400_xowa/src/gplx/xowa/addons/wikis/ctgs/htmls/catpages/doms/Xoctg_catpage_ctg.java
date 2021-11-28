@@ -18,11 +18,11 @@ public class Xoctg_catpage_ctg {
 	public Xoctg_catpage_ctg(int id, byte[] name) {
 		this.id = id; this.name = name;
 	}
-	public int					Id()		{return id;} private final    int id;
-	public byte[]				Name()		{return name;} private final    byte[] name;
-	public Xoctg_catpage_grp	Subcs()		{return subcs;} private final    Xoctg_catpage_grp subcs = new Xoctg_catpage_grp(Xoa_ctg_mgr.Tid__subc);
-	public Xoctg_catpage_grp	Pages()		{return pages;} private final    Xoctg_catpage_grp pages = new Xoctg_catpage_grp(Xoa_ctg_mgr.Tid__page);
-	public Xoctg_catpage_grp	Files()		{return files;} private final    Xoctg_catpage_grp files = new Xoctg_catpage_grp(Xoa_ctg_mgr.Tid__file);
+	public int					Id()		{return id;} private final int id;
+	public byte[]				Name()		{return name;} private final byte[] name;
+	public Xoctg_catpage_grp	Subcs()		{return subcs;} private final Xoctg_catpage_grp subcs = new Xoctg_catpage_grp(Xoa_ctg_mgr.Tid__subc);
+	public Xoctg_catpage_grp	Pages()		{return pages;} private final Xoctg_catpage_grp pages = new Xoctg_catpage_grp(Xoa_ctg_mgr.Tid__page);
+	public Xoctg_catpage_grp	Files()		{return files;} private final Xoctg_catpage_grp files = new Xoctg_catpage_grp(Xoa_ctg_mgr.Tid__file);
 	public int					Total()		{return subcs.Count_all() + pages.Count_all() + files.Count_all();}
 	public Xoctg_catpage_grp Grp_by_tid(byte tid) {
 		switch (tid) {

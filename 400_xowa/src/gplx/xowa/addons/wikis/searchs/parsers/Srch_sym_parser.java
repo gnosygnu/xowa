@@ -26,7 +26,7 @@ class Srch_sym_parser_ {
 class Srch_sym_parser__terminal implements Srch_sym_parser {
 	public Srch_sym_parser__terminal(byte[] hook_bry) {this.hooks_ary = Bry_.Ary(hook_bry);}
 	public int Tid() {return Srch_sym_parser_.Tid__terminal;}
-	public byte[][]	Hooks_ary() {return hooks_ary;} private final    byte[][] hooks_ary;
+	public byte[][]	Hooks_ary() {return hooks_ary;} private final byte[][] hooks_ary;
 	public int Parse(Srch_text_parser mgr, byte[] src, int src_end, int hook_bgn, int hook_end) {
 		if (mgr.Cur__end__chk(hook_end)) {	// hook at word_end; EX: "a, b" -> "a", "b"
 			int word_bgn = mgr.Cur__bgn();
@@ -49,8 +49,8 @@ class Srch_sym_parser__terminal implements Srch_sym_parser {
 	}
 }
 class Srch_sym_parser__split implements Srch_sym_parser {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private final    boolean handle_eos;
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final boolean handle_eos;
 	public Srch_sym_parser__split(boolean handle_eos, String... hooks_ary_as_str) {
 		this.handle_eos = handle_eos;
 		this.hooks_ary = Bry_.Ary(hooks_ary_as_str);
@@ -61,7 +61,7 @@ class Srch_sym_parser__split implements Srch_sym_parser {
 		}
 	}
 	public int Tid() {return Srch_sym_parser_.Tid__split;}
-	public byte[][]	Hooks_ary() {return hooks_ary;} private final    byte[][] hooks_ary;
+	public byte[][]	Hooks_ary() {return hooks_ary;} private final byte[][] hooks_ary;
 	public int Parse(Srch_text_parser mgr, byte[] src, int src_end, int hook_bgn, int hook_end) {
 		mgr.Words__add_if_pending_and_clear(hook_bgn);
 
@@ -91,13 +91,13 @@ class Srch_sym_parser__split implements Srch_sym_parser {
 	}
 }
 class Srch_sym_parser__paren_bgn implements Srch_sym_parser {
-	private final    byte bgn_byte, end_byte;
+	private final byte bgn_byte, end_byte;
 	public Srch_sym_parser__paren_bgn(byte bgn_byte, byte end_byte) {
 		this.bgn_byte = bgn_byte; this.end_byte = end_byte;
 		this.hooks_ary = Bry_.Ary(Bry_.New_by_byte(bgn_byte));
 	}
 	public int Tid() {return Srch_sym_parser_.Tid__enclosure;}
-	public byte[][]	Hooks_ary() {return hooks_ary;} private final    byte[][] hooks_ary;
+	public byte[][]	Hooks_ary() {return hooks_ary;} private final byte[][] hooks_ary;
 	public int Parse(Srch_text_parser mgr, byte[] src, int src_end, int paren_lhs_bgn, int paren_lhs_end) {
 		int word_bgn = mgr.Cur__bgn();
 		paren_lhs_end = Bry_find_.Find_fwd_while(src, paren_lhs_end, src_end, bgn_byte);
@@ -129,10 +129,10 @@ class Srch_sym_parser__paren_bgn implements Srch_sym_parser {
 	}
 }
 class Srch_sym_parser__dot implements Srch_sym_parser {				// handle periods which will add two entries; EX: "H. G. Wells" -> "H.", "G.", "H", "G", "Wells"
-	private final    byte[] sym; private final    int sym_len;
+	private final byte[] sym; private final int sym_len;
 	public Srch_sym_parser__dot(String sym_str) {this.sym = Bry_.new_u8(sym_str); this.sym_len = sym.length;}
 	public int Tid() {return Srch_sym_parser_.Tid__dot;}
-	public byte[][]	Hooks_ary() {return Hooks_const;} private static final    byte[][] Hooks_const = Bry_.Ary(".");
+	public byte[][]	Hooks_ary() {return Hooks_const;} private static final byte[][] Hooks_const = Bry_.Ary(".");
 	public int Parse(Srch_text_parser mgr, byte[] src, int src_end, int hook_bgn, int hook_end) {
 		int word_bgn = mgr.Cur__bgn();
 		if		(word_bgn == -1) {									// dot at start of word; EX: ".NET", "Colt .45"
@@ -163,13 +163,13 @@ class Srch_sym_parser__dot implements Srch_sym_parser {				// handle periods whi
 	}
 }
 class Srch_sym_parser__ellipsis implements Srch_sym_parser {	// ellipsis which have variable length; EX: "..", "...", ".... "
-	private final    byte ellipsis_byte;
+	private final byte ellipsis_byte;
 	public Srch_sym_parser__ellipsis(byte ellipsis_byte, String hook) {
 		this.ellipsis_byte = ellipsis_byte;
 		this.hooks_ary = Bry_.Ary(hook);
 	}
 	public int Tid() {return Srch_sym_parser_.Tid__ellipsis;}
-	public byte[][]	Hooks_ary() {return hooks_ary;} private final    byte[][] hooks_ary;
+	public byte[][]	Hooks_ary() {return hooks_ary;} private final byte[][] hooks_ary;
 	public int Parse(Srch_text_parser mgr, byte[] src, int src_end, int hook_bgn, int hook_end) {
 		mgr.Words__add_if_pending_and_clear(hook_bgn);								// add word; EX: "Dreams" in "Dreams..."
 		int rv = Bry_find_.Find_fwd_while(src, hook_end, src_end, ellipsis_byte);	// skip multiple ellipsis; EX: ......
@@ -178,13 +178,13 @@ class Srch_sym_parser__ellipsis implements Srch_sym_parser {	// ellipsis which h
 	}
 }
 class Srch_sym_parser__apos implements Srch_sym_parser {	// apos which can be contraction ("I'm"), possessive ("today's") and plural ("plans'")
-	private final    byte[] hook_bry;
+	private final byte[] hook_bry;
 	public Srch_sym_parser__apos(String hook) {
 		this.hook_bry = Bry_.new_u8(hook);
 		this.hooks_ary = Bry_.Ary(hook_bry);
 	}
 	public int Tid() {return Srch_sym_parser_.Tid__apos;}
-	public byte[][]	Hooks_ary() {return hooks_ary;} private final    byte[][] hooks_ary;
+	public byte[][]	Hooks_ary() {return hooks_ary;} private final byte[][] hooks_ary;
 	public int Parse(Srch_text_parser mgr, byte[] src, int src_end, int hook_bgn, int hook_end) {
 		int word_bgn = mgr.Cur__bgn();
 		int word_end = -1;
@@ -225,7 +225,7 @@ class Srch_sym_parser__apos implements Srch_sym_parser {	// apos which can be co
 class Srch_sym_parser__dash implements Srch_sym_parser {
 	public Srch_sym_parser__dash(String hook) {this.hooks_ary = Bry_.Ary(hook);}
 	public int Tid() {return Srch_sym_parser_.Tid__dash;}
-	public byte[][]	Hooks_ary() {return hooks_ary;} private final    byte[][] hooks_ary;
+	public byte[][]	Hooks_ary() {return hooks_ary;} private final byte[][] hooks_ary;
 	public int Parse(Srch_text_parser mgr, byte[] src, int src_end, int hook_bgn, int hook_end) {
 		int cur_bgn = mgr.Cur__bgn();						// get word_bgn
 		if (cur_bgn == -1) {								// no word_bgn; "-" is 1st char

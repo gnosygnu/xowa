@@ -17,10 +17,10 @@ package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.
 import gplx.core.primitives.*;
 import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*;
 public class Mwh_doc_parser {
-	private final    Mwh_doc_mgr dom_mgr = new Mwh_doc_mgr(16);
-	private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();
-	private final    List_adp nde_stack = List_adp_.New();
-	private final    Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance; private final    Xop_tkn_mkr tkn_mkr = new Xop_tkn_mkr();
+	private final Mwh_doc_mgr dom_mgr = new Mwh_doc_mgr(16);
+	private final Mwh_atr_parser atr_parser = new Mwh_atr_parser();
+	private final List_adp nde_stack = List_adp_.New();
+	private final Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance; private final Xop_tkn_mkr tkn_mkr = new Xop_tkn_mkr();
 	private byte[] src; private int src_end;
 	private Mwh_doc_wkr wkr;
 	private Hash_adp_bry nde_regy;
@@ -243,5 +243,5 @@ public class Mwh_doc_parser {
 		return pos;
 	}
 	public static final int Nde_end_tid__invalid = 0, Nde_end_tid__gt = 1, Nde_end_tid__ws = 2, Nde_end_tid__inline = 3, Nde_end_tid__slash = 4, Nde_end_tid__backslash = 5, Nde_end_tid__comment = 6;
-	private static final    byte[] Comment_bgn = Bry_.new_a7("--"), Comment_end = Bry_.new_a7("-->");
+	private static final byte[] Comment_bgn = Bry_.new_a7("--"), Comment_end = Bry_.new_a7("-->");
 }

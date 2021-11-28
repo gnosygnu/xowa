@@ -20,7 +20,7 @@ public interface Xoctg_collation_wkr {
 	byte[] Get_sortkey(byte[] src);
 }
 class Xoctg_collation_wkr__uppercase implements Xoctg_collation_wkr {
-	private final    Xow_wiki wiki;
+	private final Xow_wiki wiki;
 	public Xoctg_collation_wkr__uppercase(Xow_wiki wiki) {this.wiki = wiki;}
 	public String Type_name() {return "uppercase";}
 	public String Wm_name() {return this.Type_name();}
@@ -54,10 +54,10 @@ class Xoctg_collation_wkr__uca implements Xoctg_collation_wkr {
 			this.icu_locale = icu_locale;
 		this.numeric_sorting = String_.Has_at_end(icu_locale, "-u-kn");
 	}
-	public String Type_name() {return wm_name;}	private final    String wm_name;
+	public String Type_name() {return wm_name;}	private final String wm_name;
 	public String Wm_name() {return this.Type_name();}
-	public String Icu_locale() {return icu_locale;} private final    String icu_locale;
-	public boolean Numeric_sorting() {return numeric_sorting;} private final    boolean numeric_sorting;
+	public String Icu_locale() {return icu_locale;} private final String icu_locale;
+	public boolean Numeric_sorting() {return numeric_sorting;} private final boolean numeric_sorting;
 	public byte[] Get_sortkey(byte[] src) {
 		if (collator == null) collator = gplx.core.intls.ucas.Uca_collator_.New(icu_locale, numeric_sorting);
 		return collator.Get_sortkey(String_.new_u8(src));

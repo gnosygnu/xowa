@@ -17,8 +17,8 @@ package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import gplx.core.criterias.*;
 import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
 public class Mem_exec_select {
-	private final    Mem_engine engine;
-	private final    List_adp tmp_where_rows = List_adp_.New();
+	private final Mem_engine engine;
+	private final List_adp tmp_where_rows = List_adp_.New();
 	public Mem_exec_select(Mem_engine engine) {this.engine = engine;}
 	public Db_rdr Select(Mem_stmt stmt) {
 		Db_qry stmt_qry = stmt.Qry();
@@ -71,7 +71,7 @@ public class Mem_exec_select {
 	}
 }
 class Mem_sorter implements gplx.core.lists.ComparerAble {
-	private final    Sql_order_fld[] flds;
+	private final Sql_order_fld[] flds;
 	public Mem_sorter(Sql_order_fld[] flds) {
 		this.flds = flds;
 	}

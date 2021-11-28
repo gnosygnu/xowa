@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.updates.apps; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
 import gplx.core.envs.*;
 class Xoa_manifest_wkr {
-	private final    Xoa_manifest_view view;
-	private final    Xoa_manifest_list list = new Xoa_manifest_list();
+	private final Xoa_manifest_view view;
+	private final Xoa_manifest_list list = new Xoa_manifest_list();
 	private Io_url manifest_url;
 	private String run_xowa_cmd;
 	public Xoa_manifest_wkr(Xoa_manifest_view view) {

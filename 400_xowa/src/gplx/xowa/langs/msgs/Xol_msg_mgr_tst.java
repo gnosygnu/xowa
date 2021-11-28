@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.langs.msgs.*;
 public class Xol_msg_mgr_tst {		
-	@Before public void init() {fxt.Clear();} private final    Xol_msg_mgr_fxt fxt = new Xol_msg_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final Xol_msg_mgr_fxt fxt = new Xol_msg_mgr_fxt();
 	@Test public void Template_msg() {fxt.Test_val_by_key("About {{SITENAME}}", "About Wikipedia");}	// PURPOSE.fix: {{Template}} not working inside label tags; EX:de.wikisource.org; DATE:2013-02-10
 	@Test public void Template_mediawiki() {	// PURPOSE.fix: {{Template}} not working inside MediaWiki template
 		fxt.Test_mediaWiki_msg("About {{SITENAME}}", "About Wikipedia");

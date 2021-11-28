@@ -20,13 +20,13 @@ import gplx.xowa.langs.*;
 import gplx.xowa.bldrs.filters.core.*;
 public class Dg_match_mgr {
 	private int score_init, score_fail; private boolean log_enabled, case_match;
-	private final    Btrie_slim_mgr btrie = Btrie_slim_mgr.cs();
-	private final    Ordered_hash rules = Ordered_hash_.New_bry();
-	private final    Ordered_hash rule_group_hash = Ordered_hash_.New_bry(), rule_tally_hash = Ordered_hash_.New_bry();
-	private final    Dg_parser parser = new Dg_parser();
-	private final    Xob_ttl_filter_mgr ttl_filter_mgr = new Xob_ttl_filter_mgr();
-	private final    Dg_ns_skip_mgr ns_skip_mgr = new Dg_ns_skip_mgr();
-	private final    Dg_log_mgr log_mgr = new Dg_log_mgr();
+	private final Btrie_slim_mgr btrie = Btrie_slim_mgr.cs();
+	private final Ordered_hash rules = Ordered_hash_.New_bry();
+	private final Ordered_hash rule_group_hash = Ordered_hash_.New_bry(), rule_tally_hash = Ordered_hash_.New_bry();
+	private final Dg_parser parser = new Dg_parser();
+	private final Xob_ttl_filter_mgr ttl_filter_mgr = new Xob_ttl_filter_mgr();
+	private final Dg_ns_skip_mgr ns_skip_mgr = new Dg_ns_skip_mgr();
+	private final Dg_log_mgr log_mgr = new Dg_log_mgr();
 	public Dg_match_mgr(Io_url root_dir, int score_init, int score_fail, boolean case_match, boolean log_enabled, Io_url log_url) {
 		this.score_init = score_init; this.score_fail = score_fail; this.case_match = case_match; this.log_enabled = log_enabled;
 		if (log_enabled) log_mgr.Init(log_url);
@@ -155,8 +155,8 @@ public class Dg_match_mgr {
 }
 class Dg_rule_group {
 	public Dg_rule_group(byte[] word) {this.word = word;}
-	public byte[] Word() {return word;} private final    byte[] word;
-	public List_adp Rules_list() {return rules_list;} private final    List_adp rules_list = List_adp_.New();
+	public byte[] Word() {return word;} private final byte[] word;
+	public List_adp Rules_list() {return rules_list;} private final List_adp rules_list = List_adp_.New();
 	public Dg_rule[] Rules_ary() {
 		if (rules_ary == null)
 			rules_ary = (Dg_rule[])rules_list.To_ary_and_clear(Dg_rule.class);
@@ -170,8 +170,8 @@ class Dg_rule_tally {
 		this.results_len = words.length;
 		this.results = new int[results_len];
 	}
-	public Dg_rule Rule() {return rule;} private final    Dg_rule rule;
-	public int[] Results() {return results;} private final    int[] results; private final    int results_len;
+	public Dg_rule Rule() {return rule;} private final Dg_rule rule;
+	public int[] Results() {return results;} private final int[] results; private final int results_len;
 	public void Process(byte[] word) {
 		Int_obj_ref idx = (Int_obj_ref)rule.Word_idx_hash().Get_by_bry(word);
 		int idx_val = idx.Val();

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
 public class Mustache_bfr {
-	private final    Bry_bfr bfr;
+	private final Bry_bfr bfr;
 	public Mustache_bfr(Bry_bfr bfr) {this.bfr = bfr;}
 	public Bry_bfr Bfr() {return bfr;}
 	public Mustache_bfr Escape_(boolean v) {escape = v; return this;} private boolean escape;

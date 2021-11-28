@@ -61,7 +61,7 @@ public class Graph_xnde implements Xox_xnde {
 		bfr.Add(Html__div_rhs);
 	}
 	public static Xop_log_basic_wkr Log_wkr = Xop_log_basic_wkr.Null;
-	private static final    byte[]
+	private static final byte[]
 	  Html__div_lhs_bgn = Bry_.new_a7("<div class='mw-graph' xo-graph-version=")
 	, Html__div_lhs_end = Bry_.new_a7(">")
 	, Html__div_rhs     = Bry_.new_a7("</div>\n")

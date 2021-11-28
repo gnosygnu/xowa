@@ -61,10 +61,10 @@ class StatRng {
 	public long Sum = 0;
 	public int Count = 0;
 	public float Avg() {return Sum  / Count;}
-	public final    StatItm[] Lo_ary;
+	public final StatItm[] Lo_ary;
 	public int Lo_ary_bound;
 	public int Lo_ary_len;
-	public final    StatItm[] Hi_ary;
+	public final StatItm[] Hi_ary;
 	public int Hi_ary_bound;
 	public int Hi_ary_len;
 	public StatRng[] Slot_ary;

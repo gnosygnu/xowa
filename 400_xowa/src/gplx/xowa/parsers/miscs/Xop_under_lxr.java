@@ -19,8 +19,8 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.addons.htmls.tocs.*;
 import gplx.xowa.wikis.pages.wtxts.*;
 public class Xop_under_lxr implements Xop_lxr {
-	private final    Object thread_lock = new Object();
-	private Btrie_mgr words_trie_ci, words_trie_cs; private final    Btrie_rv trv_cs = new Btrie_rv(), trv_ci = new Btrie_rv();
+	private final Object thread_lock = new Object();
+	private Btrie_mgr words_trie_ci, words_trie_cs; private final Btrie_rv trv_cs = new Btrie_rv(), trv_ci = new Btrie_rv();
 	public int Lxr_tid() {return Xop_lxr_.Tid_under;}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {}
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {
@@ -68,14 +68,14 @@ public class Xop_under_lxr implements Xop_lxr {
 		}
 	}
 	public void Term(Btrie_fast_mgr core_trie) {}
-	private static final    int[] under_kwds = new int[] // REF.MW:MagicWord.php
+	private static final int[] under_kwds = new int[] // REF.MW:MagicWord.php
 	{ Xol_kwd_grp_.Id_toc, Xol_kwd_grp_.Id_notoc, Xol_kwd_grp_.Id_forcetoc
 	, Xol_kwd_grp_.Id_nogallery, Xol_kwd_grp_.Id_noheader, Xol_kwd_grp_.Id_noeditsection
 	, Xol_kwd_grp_.Id_notitleconvert, Xol_kwd_grp_.Id_nocontentconvert, Xol_kwd_grp_.Id_newsectionlink, Xol_kwd_grp_.Id_nonewsectionlink
 	, Xol_kwd_grp_.Id_hiddencat, Xol_kwd_grp_.Id_index, Xol_kwd_grp_.Id_noindex, Xol_kwd_grp_.Id_staticredirect
 	, Xol_kwd_grp_.Id_disambig
 	};
-	private static final    Btrie_fast_mgr Hook_trie = Btrie_fast_mgr.cs()
+	private static final Btrie_fast_mgr Hook_trie = Btrie_fast_mgr.cs()
 	.Add(Xop_under_hook.Key_std, Xop_under_hook.Itm_std)
 	.Add(Xop_under_hook.Key_alt, Xop_under_hook.Itm_alt)
 	;
@@ -111,7 +111,7 @@ public class Xop_under_lxr implements Xop_lxr {
 			default:								break;	// ignore anything else
 		}				
 	}
-	public static final    Xop_under_lxr Instance = new Xop_under_lxr(); Xop_under_lxr() {}
+	public static final Xop_under_lxr Instance = new Xop_under_lxr(); Xop_under_lxr() {}
 }
 class Xop_word_lxr implements Xop_lxr {
 	private int kwd_id;
@@ -131,8 +131,8 @@ class Xop_under_hook {
 	public byte[] Key() {return key;} private byte[] key;
 	public int Key_len() {return key_len;} private int key_len;
 	public static final byte Tid_std = 1, Tid_alt = 2;
-	public static final    byte[] Key_std = new byte[] {Byte_ascii.Underline, Byte_ascii.Underline}, Key_alt = Bry_.new_u8("＿＿");	// ja wikis
-	public static final    Xop_under_hook
+	public static final byte[] Key_std = new byte[] {Byte_ascii.Underline, Byte_ascii.Underline}, Key_alt = Bry_.new_u8("＿＿");	// ja wikis
+	public static final Xop_under_hook
 	  Itm_std = new Xop_under_hook(Tid_std, Key_std)
 	, Itm_alt = new Xop_under_hook(Tid_alt, Key_alt)
 	;

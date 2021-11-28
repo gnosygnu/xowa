@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*;
 public class Gfo_test_list_base {
-	private final    List_adp expd = List_adp_.New();
+	private final List_adp expd = List_adp_.New();
 	public void Clear() {expd.Clear();}
 	public void Add(Object itm) {expd.Add(itm);}
 	public void Test(Object actl_obj) {

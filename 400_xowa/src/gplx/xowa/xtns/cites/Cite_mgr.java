@@ -18,9 +18,9 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 import gplx.langs.htmls.*;
 class Cite_mgr { // REF.MW:/extensions/Cite/includes/Cite.php
-	private final    Xowe_wiki wiki;
-	private final    Hash_adp_bry messages_by_group = Hash_adp_bry.cs();
-	private final    Cite_link_label_mgr link_label_mgr = new Cite_link_label_mgr(); // used to be a global reference; ISSUE#:495 DATE:2020-03-07
+	private final Xowe_wiki wiki;
+	private final Hash_adp_bry messages_by_group = Hash_adp_bry.cs();
+	private final Cite_link_label_mgr link_label_mgr = new Cite_link_label_mgr(); // used to be a global reference; ISSUE#:495 DATE:2020-03-07
 	public Cite_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 	}
@@ -84,7 +84,7 @@ class Cite_mgr { // REF.MW:/extensions/Cite/includes/Cite.php
 			);
 		return ret;
 	}
-	public static final    byte[]
+	public static final byte[]
 	  Msg__cite_link_label_group = Bry_.new_a7("cite_link_label_group-")
 	, Msg__cite_error = Bry_.new_a7("cite_error")
 	, Msg__cite_error_no_link_label_group = Bry_.new_a7("cite_error_no_link_label_group")

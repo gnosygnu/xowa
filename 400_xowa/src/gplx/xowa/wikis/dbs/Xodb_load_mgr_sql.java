@@ -19,7 +19,7 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; i
 import gplx.xowa.apps.gfs.*; 
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.*;
 public class Xodb_load_mgr_sql implements Xodb_load_mgr {
-	private final    Xodb_mgr_sql db_mgr;
+	private final Xodb_mgr_sql db_mgr;
 	private Wbase_pid_tbl pid_tbl;
 	private Wbase_qid_tbl qid_tbl;
 	public Xodb_load_mgr_sql(Xodb_mgr_sql db_mgr) {

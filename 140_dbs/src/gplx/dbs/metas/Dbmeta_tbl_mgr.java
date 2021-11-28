@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
 public class Dbmeta_tbl_mgr {
-	private final    Ordered_hash hash = Ordered_hash_.New();
-	private final    Dbmeta_reload_cmd load_cmd;
+	private final Ordered_hash hash = Ordered_hash_.New();
+	private final Dbmeta_reload_cmd load_cmd;
 	public Dbmeta_tbl_mgr(Dbmeta_reload_cmd load_cmd) {this.load_cmd = load_cmd;}
 	public int				Len()					{return hash.Count();}
 	public boolean			Has(String name)		{return hash.Has(name);}

@@ -19,7 +19,7 @@ import gplx.xowa.langs.msgs.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
 import gplx.xowa.users.history.*;
 class Xoctg_fmt_itm_subc extends Xoctg_fmt_itm_base {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	@Override public void Bld_html(Bry_bfr bfr, Xow_wiki wiki, Xou_history_mgr history_mgr, Xoh_href_parser href_parser, Xoctg_catpage_itm itm, Xoa_ttl ttl) {
 		byte[] itm_href = wiki.Html__href_wtr().Build_to_bry(wiki, ttl);
 		int count_subcs = 0;
@@ -44,8 +44,8 @@ class Xoctg_fmt_itm_subc extends Xoctg_fmt_itm_base {
 		if (val == 0) return;
 		if (bfr.Len() > 1) bfr.Add(Bld_contains_text_itm_dlm);	// NOTE: 1 b/c Paren_bgn is always added
 		bfr.Add(msg_mgr.Val_by_id_args(msg_id, val));
-	}	private static final    byte[] Bld_contains_text_itm_dlm = Bry_.new_a7(", "); 		
-	private static final    Bry_fmt
+	}	private static final byte[] Bld_contains_text_itm_dlm = Bry_.new_a7(", ");
+	private static final Bry_fmt
 	  Fmt__exists__subc = Bry_fmt.Auto_nl_skip_last
 	( ""
 	, "            <li>"

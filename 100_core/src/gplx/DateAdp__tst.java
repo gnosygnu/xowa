@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import org.junit.*; import gplx.core.tests.*;
 public class DateAdp__tst {		
-	private final    DateAdp__fxt fxt = new DateAdp__fxt();
+	private final DateAdp__fxt fxt = new DateAdp__fxt();
 	@Test public void Parse_gplx() {
 		fxt.Test__parse_gplx("99991231_235959.999"	, "99991231_235959.999");
 		fxt.Test__parse_gplx("20090430_213200.123"	, "20090430_213200.123");

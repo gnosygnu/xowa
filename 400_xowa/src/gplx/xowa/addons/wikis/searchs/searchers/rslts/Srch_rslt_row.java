@@ -26,15 +26,15 @@ public class Srch_rslt_row {
 		this.Page_redirect_id = page_redirect_id;
 		this.Page_score = page_score;
 	}
-	public final    byte[]		Key;
-	public final    byte[]		Wiki_bry;
-	public final    int			Page_id;
-	public final    Xoa_ttl		Page_ttl;
-	public final    int			Page_ns;
-	public final    byte[]		Page_ttl_wo_ns;
-	public final    int			Page_len;
+	public final byte[]		Key;
+	public final byte[]		Wiki_bry;
+	public final int			Page_id;
+	public final Xoa_ttl		Page_ttl;
+	public final int			Page_ns;
+	public final byte[]		Page_ttl_wo_ns;
+	public final int			Page_len;
 	public int			        Page_redirect_id;
-	public final    int			Page_score;
+	public final int			Page_score;
 	public byte[]				Page_redirect_ttl;
 	public byte[]               Page_ttl_highlight;
 
@@ -65,7 +65,7 @@ public class Srch_rslt_row {
 	}
 	public static final int Page_redirect_id_null = gplx.xowa.wikis.data.tbls.Xowd_page_itm.Redirect_id_null;
 	public static final String Str__redirect__text = "  ->  ";
-	private static final    byte[] 
+	private static final byte[]
 	  Bry__redirect__html = Bry_.new_u8(" → ")	// 8592; 8594
 	, Bry__redirect__text = Bry_.new_a7(Str__redirect__text);
 	public static final int

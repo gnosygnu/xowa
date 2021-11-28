@@ -43,7 +43,7 @@ public class Host_eval_wkr implements Bry_eval_wkr {
 	}
 
 	public static final byte Type__wiki_abrv = 0;
-	private static final    Hash_adp_bry hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry hash = Hash_adp_bry.cs()
 	.Add_str_byte("wiki_abrv", Type__wiki_abrv)
 	;
 }

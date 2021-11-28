@@ -18,7 +18,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.langs.numbers.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.addons.wikis.searchs.specials.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_html_page_bldr {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	private Srch_search_qry qry; private Xow_wiki wiki; private Xol_num_mgr num_mgr;
 	private int slab_idx;
 	private Xoh_lnki_bldr lnki_bldr; private Xoh_anchor_kv_bldr self_lnkr = new Xoh_anchor_kv_bldr(); private Srch_html_row_bldr html_row_bldr;
@@ -77,12 +77,12 @@ public class Srch_html_page_bldr {
 		}
 		return lnki_bldr.Title_(title).Href_wo_escape_(wiki.Domain_bry(), self_lnkr.Add_int(Srch_qarg_mgr.Bry__slab_idx, qarg_slab_idx).Bld_to_bry()).Img_16x16(img_path).Img_pos_is_left_(img_pos_is_left).Caption_(title).Bld_to_bry();
 	}
-	private static final    Bry_fmtr fmtr_page = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final Bry_fmtr fmtr_page = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "~{rslts_hdr}<span style='margin-left:10px'>~{option_link}</span>"
 	, "<div id='xowa_panel_top' style='width:60%;'><div style='float:right;'><span>~{bwd_a}</span><span style='margin-left:10px'>~{fwd_a}</span></div></div>~{tbls}"
 	, "<div id='xowa_panel_bot' style='width:60%;'><div style='float:right;'><span>~{bwd_a}</span><span style='margin-left:10px'>~{fwd_a}</span></div></div>"
 	), "rslts_hdr", "option_link", "bwd_a", "fwd_a", "tbls");
-	private static final    Bry_fmtr fmtr_tbl = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final Bry_fmtr fmtr_tbl = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<table class='wikitable sortable' style='width:60%;'>"
 	, "  <tr>"
 	, "    <th colspan='2' style='text-align:left'>~{wiki}<span style='float:right'>~{cancel}</span>"
@@ -98,9 +98,9 @@ public class Srch_html_page_bldr {
 	, "  </tr>"
 	, "</table>"
 	), "wiki", "cancel", "hdr_len", "hdr_ttl", "insert_key", "rows");
-	private static final    Bry_fmtr		fmtr_rslts = Bry_fmtr.new_("Results <b>~{bgn}</b> of <b>~{end}</b> for <b>~{raw}</b>", "bgn", "end", "raw");
-	private static final    byte[] Bry_paging_fwd = Bry_.new_a7("Next"), Bry_paging_bwd = Bry_.new_a7("Previous")// , Bry_cancel = Bry_.new_a7("Stop searching")
+	private static final Bry_fmtr		fmtr_rslts = Bry_fmtr.new_("Results <b>~{bgn}</b> of <b>~{end}</b> for <b>~{raw}</b>", "bgn", "end", "raw");
+	private static final byte[] Bry_paging_fwd = Bry_.new_a7("Next"), Bry_paging_bwd = Bry_.new_a7("Previous")// , Bry_cancel = Bry_.new_a7("Stop searching")
 	, Bry_hdr_len = Bry_.new_a7("Page score"), Bry_hdr_ttl = Bry_.new_a7("Page title")
 	;
-	private final    byte[] Bry__special_search = Bry_.new_a7("Special:Search/"), Bry__fulltext = Bry_.new_a7("?fulltext=y");
+	private final byte[] Bry__special_search = Bry_.new_a7("Special:Search/"), Bry__fulltext = Bry_.new_a7("?fulltext=y");
 }

@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
 public abstract class Xoscript_doc_sect_base {
-	protected final    Xoscript_doc doc;
-	private final    Hash_adp_bry marker_hash = Hash_adp_bry.cs();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	protected final Xoscript_doc doc;
+	private final Hash_adp_bry marker_hash = Hash_adp_bry.cs();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xoscript_doc_sect_base(Xoscript_doc doc) {this.doc = doc;}
 	private byte[] get_marker_by_pos(byte[] pos_bry) {
 		return (byte[])marker_hash.Get_by_or_fail(pos_bry);

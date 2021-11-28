@@ -18,10 +18,10 @@ import gplx.gfui.kits.core.*;
 public class GfuiQuitMode {
 	public int Val() {return val;} int val;
 	GfuiQuitMode(int val) {this.val = val;}
-	public static final    GfuiQuitMode ExitApp		= new GfuiQuitMode(1);
-	public static final    GfuiQuitMode Destroy		= new GfuiQuitMode(2);
-	public static final    GfuiQuitMode Suspend		= new GfuiQuitMode(3);
-	public static final    String
+	public static final GfuiQuitMode ExitApp		= new GfuiQuitMode(1);
+	public static final GfuiQuitMode Destroy		= new GfuiQuitMode(2);
+	public static final GfuiQuitMode Suspend		= new GfuiQuitMode(3);
+	public static final String
 		    Destroy_cmd			= "destroy"
 		,	Suspend_cmd			= "suspend"
 		,	SuspendApp_cmd		= "suspendApp"	// TODO_OLD: merge with suspend; needs Msg Addressing (*.suspend vs app.suspend)

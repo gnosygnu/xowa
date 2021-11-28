@@ -53,7 +53,7 @@ public class Xop_redirect_mgr_tst {
 	}
 }
 class Xop_redirect_mgr_fxt {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	public void Clear() {
 		fxt.Reset();
 	}

@@ -39,7 +39,7 @@ class Wdata_fmtr__langtext_tbl implements gplx.core.brys.Bfr_arg {
 		if (list_len == 0) return;
 		fmtr.Bld_bfr_many(bfr, toc_data.Href(), toc_data.Text(), col_hdr_lang_name, col_hdr_lang_code, col_hdr_text, toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_row);
 	}
-	private final    Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final Bry_fmtr fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "  <div class='wikibase-sitelinkgroupview'>"
 	, "    <div class='wikibase-sitelinkgroupview-heading-container'>"
@@ -67,7 +67,7 @@ class Wdata_fmtr__langtext_row_base implements gplx.core.brys.Bfr_arg, Wdata_fmt
 			row_fmtr.Bld_bfr_many(bfr, itm.Lang(), Gfh_utl.Escape_html_as_bry(lang_itm.Canonical_name()), Gfh_utl.Escape_html_as_bry(itm.Text()));
 		}
 	}
-	private final    Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private final Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "        <li class='wikibase-sitelinkview'>"
 	, "          <span class='wikibase-sitelinkview-siteid-container'>"
@@ -113,8 +113,8 @@ class Wdata_fmtr__alias_row implements gplx.core.brys.Bfr_arg, Wdata_fmtr__langt
 			}
 		}
 	}
-	private static final    byte[] lang_code_style_n = Bry_.new_a7("border:1px solid white;background:none;");
-	private final    Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final byte[] lang_code_style_n = Bry_.new_a7("border:1px solid white;background:none;");
+	private final Bry_fmtr row_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "        <li class='wikibase-sitelinkview'>"
 	, "          <span class='wikibase-sitelinkview-siteid-container' style='~{lang_code_style}>"

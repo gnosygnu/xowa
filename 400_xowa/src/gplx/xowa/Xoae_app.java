@@ -74,34 +74,34 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 		usr_dlg.Log_wkr().Log_to_session_fmt("app.ctor.end");
 	}
 	public boolean						Tid_is_edit()				{return Bool_.Y;}
-	public Xoa_app_mode				Mode()						{return mode;} private final    Xoa_app_mode mode;
-	public Xoa_fsys_mgr				Fsys_mgr()					{return fsys_mgr;} private final    Xoa_fsys_mgr fsys_mgr;
+	public Xoa_app_mode				Mode()						{return mode;} private final Xoa_app_mode mode;
+	public Xoa_fsys_mgr				Fsys_mgr()					{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
 	public Xof_cache_mgr			File__cache_mgr()			{return file_mgr.Cache_mgr();}
 	public Xof_img_mgr				File__img_mgr()				{return file_mgr.Img_mgr();}
 	public Io_download_fmt			File__download_fmt()		{return wmf_mgr.Download_wkr().Download_xrg().Download_fmt();}
-	public Xoh_href_parser			Html__href_parser()			{return html__href_parser;} private final    Xoh_href_parser html__href_parser = new Xoh_href_parser();
-	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final    Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
-	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final    Xoh_bridge_mgr html__bridge_mgr;
-	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final    Xowmf_mgr wmf_mgr = new Xowmf_mgr();
-	public Bry_bfr_mkr				Utl__bfr_mkr()				{return utl__bry_bfr_mkr;} private final    Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
-	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final    Json_parser utl__json_parser = new Json_parser();
-	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} private final    Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_();
-	public Xoa_meta_mgr				Dbmeta_mgr()				{return meta_mgr;} private final    Xoa_meta_mgr meta_mgr;
+	public Xoh_href_parser			Html__href_parser()			{return html__href_parser;} private final Xoh_href_parser html__href_parser = new Xoh_href_parser();
+	public Xoa_css_extractor		Html__css_installer()		{return html__css_installer;} private final Xoa_css_extractor html__css_installer = new Xoa_css_extractor();
+	public Xoh_bridge_mgr			Html__bridge_mgr()			{return html__bridge_mgr;} private final Xoh_bridge_mgr html__bridge_mgr;
+	public Xowmf_mgr				Wmf_mgr()					{return wmf_mgr;} private final Xowmf_mgr wmf_mgr = new Xowmf_mgr();
+	public Bry_bfr_mkr				Utl__bfr_mkr()				{return utl__bry_bfr_mkr;} private final Bry_bfr_mkr utl__bry_bfr_mkr = new Bry_bfr_mkr();
+	public Json_parser				Utl__json_parser()			{return utl__json_parser;} private final Json_parser utl__json_parser = new Json_parser();
+	public Gfo_inet_conn			Utl__inet_conn()			{return inet_conn;} private final Gfo_inet_conn inet_conn = Gfo_inet_conn_.new_();
+	public Xoa_meta_mgr				Dbmeta_mgr()				{return meta_mgr;} private final Xoa_meta_mgr meta_mgr;
 	public boolean						Bldr__running()				{return bldr__running;} public void Bldr__running_(boolean v) {this.bldr__running = v;} private boolean bldr__running;
-	public Xoa_parser_mgr			Parser_mgr()				{return parser_mgr;} private final    Xoa_parser_mgr parser_mgr = new Xoa_parser_mgr();
-	public Xoa_site_cfg_mgr			Site_cfg_mgr()				{return site_cfg_mgr;} private final    Xoa_site_cfg_mgr site_cfg_mgr;
-	public Xoa_sitelink_mgr			Xwiki_mgr__sitelink_mgr()	{return xwiki_mgr__sitelink_mgr;} private final    Xoa_sitelink_mgr xwiki_mgr__sitelink_mgr = new Xoa_sitelink_mgr();
+	public Xoa_parser_mgr			Parser_mgr()				{return parser_mgr;} private final Xoa_parser_mgr parser_mgr = new Xoa_parser_mgr();
+	public Xoa_site_cfg_mgr			Site_cfg_mgr()				{return site_cfg_mgr;} private final Xoa_site_cfg_mgr site_cfg_mgr;
+	public Xoa_sitelink_mgr			Xwiki_mgr__sitelink_mgr()	{return xwiki_mgr__sitelink_mgr;} private final Xoa_sitelink_mgr xwiki_mgr__sitelink_mgr = new Xoa_sitelink_mgr();
 	public boolean						Xwiki_mgr__missing(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) == null;} // NOTE: only the user_wiki has a full list of all wikis b/c it has xwiki objects; wiki_mgr does not, b/c it has heavier wiki objects which are loaded dynamically;
 	public boolean						Xwiki_mgr__exists(byte[] wiki_key)	{return user.Wiki().Xwiki_mgr().Get_by_key(wiki_key) != null;}
-	public Xow_xwiki_itm_parser		Xwiki_mgr__itm_parser()		{return xwiki_mgr__itm_parser;}	private final    Xow_xwiki_itm_parser xwiki_mgr__itm_parser = new Xow_xwiki_itm_parser();
-	public Xoax_addon_mgr			Addon_mgr()					{return addon_mgr;} private final    Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
-	public Xoa_special_regy			Special_regy()				{return special_regy;} private final    Xoa_special_regy special_regy = new Xoa_special_regy();
+	public Xow_xwiki_itm_parser		Xwiki_mgr__itm_parser()		{return xwiki_mgr__itm_parser;}	private final Xow_xwiki_itm_parser xwiki_mgr__itm_parser = new Xow_xwiki_itm_parser();
+	public Xoax_addon_mgr			Addon_mgr()					{return addon_mgr;} private final Xoax_addon_mgr addon_mgr = new Xoax_addon_mgr();
+	public Xoa_special_regy			Special_regy()				{return special_regy;} private final Xoa_special_regy special_regy = new Xoa_special_regy();
 	public Xob_bldr					Bldr()						{return bldr;} private Xob_bldr bldr;
-	public Xog_cbk_mgr				Gui__cbk_mgr()				{return gui__cbk_mgr;} private final    Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
-	public Xog_tab_mgr				Gui__tab_mgr()				{return gui__tab_mgr;} private final    Xog_tab_mgr gui__tab_mgr;
-	public Gfo_thread_mgr			Thread_mgr()				{return thread_mgr;} private final    Gfo_thread_mgr thread_mgr = new Gfo_thread_mgr();
-	public Xocfg_mgr				Cfg()						{return cfg;} private final    Xocfg_mgr cfg = new Xocfg_mgr();
-	public Xoa_misc_mgr				Misc_mgr()					{return misc_mgr;} private final    Xoa_misc_mgr misc_mgr = new Xoa_misc_mgr();
+	public Xog_cbk_mgr				Gui__cbk_mgr()				{return gui__cbk_mgr;} private final Xog_cbk_mgr gui__cbk_mgr = new Xog_cbk_mgr();
+	public Xog_tab_mgr				Gui__tab_mgr()				{return gui__tab_mgr;} private final Xog_tab_mgr gui__tab_mgr;
+	public Gfo_thread_mgr			Thread_mgr()				{return thread_mgr;} private final Gfo_thread_mgr thread_mgr = new Gfo_thread_mgr();
+	public Xocfg_mgr				Cfg()						{return cfg;} private final Xocfg_mgr cfg = new Xocfg_mgr();
+	public Xoa_misc_mgr				Misc_mgr()					{return misc_mgr;} private final Xoa_misc_mgr misc_mgr = new Xoa_misc_mgr();
 	
 	public Xoae_wiki_mgr		Wiki_mgr() {return wiki_mgr;} private Xoae_wiki_mgr wiki_mgr;
 	public Xoa_wiki_mgr			Wiki_mgri() {return wiki_mgr;}
@@ -115,14 +115,14 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoapi_root			Api_root() {return api_root;} private Xoapi_root api_root;
 	public Gfo_usr_dlg			Usr_dlg() {return Xoa_app_.Usr_dlg();}
 	public Gfo_usr_dlg__log		Log_wtr() {return log_wtr;} private Gfo_usr_dlg__log log_wtr;
-	public Xoa_gfs_mgr			Gfs_mgr() {return gfs_mgr;} private final    Xoa_gfs_mgr gfs_mgr;
+	public Xoa_gfs_mgr			Gfs_mgr() {return gfs_mgr;} private final Xoa_gfs_mgr gfs_mgr;
 	public Xoa_special_mgr		Special_mgr() {return special_mgr;} private Xoa_special_mgr special_mgr = new gplx.xowa.specials.Xoa_special_mgr();
 	public Xoh_html_mgr			Html_mgr() {return html_mgr;} private Xoh_html_mgr html_mgr;
 	public Xop_log_mgr			Log_mgr() {return log_mgr;} private Xop_log_mgr log_mgr;
 	public Xoa_shell			Shell() {return shell;} private Xoa_shell shell;
 	public Xoa_thread_mgr		Thread_mgr_old() {return thread_mgr_old;} private Xoa_thread_mgr thread_mgr_old = new Xoa_thread_mgr();
 	public Xoa_hive_mgr			Hive_mgr() {return hive_mgr;} private Xoa_hive_mgr hive_mgr;
-	public Xoa_prog_mgr			Prog_mgr() {return prog_mgr;} private final    Xoa_prog_mgr prog_mgr = new Xoa_prog_mgr();
+	public Xoa_prog_mgr			Prog_mgr() {return prog_mgr;} private final Xoa_prog_mgr prog_mgr = new Xoa_prog_mgr();
 	public Gfo_async_mgr		Async_mgr() {return async_mgr;} private Gfo_async_mgr async_mgr = new Gfo_async_mgr();
 
 	public Xoi_setup_mgr		Setup_mgr() {return setup_mgr;} private Xoi_setup_mgr setup_mgr;
@@ -142,7 +142,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 
 	public Xosrv_server			Tcp_server() {return tcp_server;} private Xosrv_server tcp_server = new Xosrv_server();
 	public Http_server_mgr		Http_server() {return http_server;} private Http_server_mgr http_server;
-	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private final    Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.Instance;
+	public Xop_amp_mgr			Parser_amp_mgr() {return parser_amp_mgr;} private final Xop_amp_mgr parser_amp_mgr = Xop_amp_mgr.Instance;
 
 	private Xoa_fmtr_mgr fmtr_mgr;
 	public Gfo_number_parser Utl_num_parser() {return utl_num_parser;} private Gfo_number_parser utl_num_parser = new Gfo_number_parser();

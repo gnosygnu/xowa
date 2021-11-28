@@ -22,14 +22,14 @@ public class Gallery_mgr_base_ {
 	, Tid__packed__hover	= 3
 	, Tid__packed__overlay	= 4
 	;
-	private static final    byte[]
+	private static final byte[]
 	  Bry__traditional		= Bry_.new_a7("traditional")
 	, Bry__nolines			= Bry_.new_a7("nolines")
 	, Bry__packed			= Bry_.new_a7("packed")
 	, Bry__packed__hover	= Bry_.new_a7("packed-hover")
 	, Bry__packed__overlay	= Bry_.new_a7("packed-overlay")
 	;
-	private static final    Hash_adp_bry bry_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry bry_hash = Hash_adp_bry.ci_a7()
 	.Add_bry_byte(Bry__traditional		, Tid__traditional)
 	.Add_bry_byte(Bry__nolines			, Tid__nolines)
 	.Add_bry_byte(Bry__packed			, Tid__packed)

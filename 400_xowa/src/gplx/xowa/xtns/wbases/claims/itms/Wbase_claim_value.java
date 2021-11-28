@@ -19,7 +19,7 @@ public class Wbase_claim_value extends Wbase_claim_base {
 	public Wbase_claim_value(int pid, byte val_tid, byte snak_tid) {super(pid, snak_tid);
 		this.val_tid = val_tid;
 	}
-	@Override public byte	Val_tid() {return val_tid;} private final    byte val_tid;
+	@Override public byte	Val_tid() {return val_tid;} private final byte val_tid;
 
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_system(this);}
 	@Override public String toString() {// TEST:

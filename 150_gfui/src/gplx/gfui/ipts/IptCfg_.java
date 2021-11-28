@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
 public class IptCfg_ {
-	public static final    IptCfg Null = IptCfg_null.Instance;
+	public static final IptCfg Null = IptCfg_null.Instance;
 	public static IptCfg new_(String key) {return IptCfgRegy.Instance.GetOrNew(key);}
 }
 class IptCfg_null implements IptCfg {
@@ -25,5 +25,5 @@ class IptCfg_null implements IptCfg {
 	public void Owners_del(String key) {}
 	public Object NewByKey(Object o) {return this;}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Rv_unhandled;}
-	public static final    IptCfg_null Instance = new IptCfg_null(); IptCfg_null() {}
+	public static final IptCfg_null Instance = new IptCfg_null(); IptCfg_null() {}
 }

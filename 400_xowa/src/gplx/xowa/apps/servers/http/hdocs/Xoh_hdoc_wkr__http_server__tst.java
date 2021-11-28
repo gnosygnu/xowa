@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.xowa.htmls.core.makes.*;
 public class Xoh_hdoc_wkr__http_server__tst {
-	private final    Xoh_hdoc_wkr__http_server__fxt fxt = new Xoh_hdoc_wkr__http_server__fxt();
+	private final Xoh_hdoc_wkr__http_server__fxt fxt = new Xoh_hdoc_wkr__http_server__fxt();
 	@Before public void init() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();}
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
 	@Test  public void Wiki_quot() {
@@ -171,9 +171,9 @@ public class Xoh_hdoc_wkr__http_server__tst {
 	}
 }
 class Xoh_hdoc_wkr__http_server__fxt {
-	private final    Xow_wiki wiki;
-	private final    Xoh_page hpg;
-	private final    Xoh_make_mgr hdoc_mgr = Xoh_make_mgr.New(new Xoh_hdoc_wkr__http_server());
+	private final Xow_wiki wiki;
+	private final Xoh_page hpg;
+	private final Xoh_make_mgr hdoc_mgr = Xoh_make_mgr.New(new Xoh_hdoc_wkr__http_server());
 	public Xoh_hdoc_wkr__http_server__fxt() {
 		Xop_fxt fxt = Xop_fxt.New_app_html();
 		this.wiki = fxt.Wiki();

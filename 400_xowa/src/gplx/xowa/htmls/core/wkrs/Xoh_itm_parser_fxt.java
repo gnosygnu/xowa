@@ -17,11 +17,11 @@ package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gpl
 import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public abstract class Xoh_itm_parser_fxt {
-	protected final    Xoae_app app;
-	protected final    Xowe_wiki wiki;
-	private final    Bry_err_wkr err_wkr = new Bry_err_wkr();
+	protected final Xoae_app app;
+	protected final Xowe_wiki wiki;
+	private final Bry_err_wkr err_wkr = new Bry_err_wkr();
 	protected byte[] src; protected int src_len;
-	protected final    Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
+	protected final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
 	public Xoh_itm_parser_fxt() {
 		this.app = Xoa_app_fxt.Make__app__edit();
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);

@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.users.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*;
 public class Xou_cfg_tbl implements Db_tbl {
-	public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_key, fld_usr, fld_ctx, fld_val;		
+	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_key, fld_usr, fld_ctx, fld_val;
 	public Xou_cfg_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.fld_usr				= flds.Add_int		("cfg_usr");			// EX: 1=anonymous; others will require usr_regy
@@ -26,8 +26,8 @@ public class Xou_cfg_tbl implements Db_tbl {
 		this.fld_val				= flds.Add_str		("cfg_val", 4096);		// EX: "y"
 		conn.Rls_reg(this);
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name = "user_cfg"; 
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name = "user_cfg";
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, fld_key, fld_key)

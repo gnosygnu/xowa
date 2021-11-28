@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.core.btries.*; import gplx.core.intls.*;
 public class Xol_convert_wkr {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs(); private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs(); private final Btrie_rv trv = new Btrie_rv();
 	public Xol_convert_wkr(byte[] key) {this.key = key;}
-	public byte[] Key() {return key;} private final    byte[] key;
+	public byte[] Key() {return key;} private final byte[] key;
 	public void Add(byte[] src, byte[] trg) {trie.Add_obj(src, trg);}	// called by -{H}-
 	public void Del(byte[] src)				{trie.Del(src);}			// called by -{-}-
 	public boolean Convert_text(Bry_bfr bfr, byte[] src) {return Convert_text(bfr, src, 0, src.length);}

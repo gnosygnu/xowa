@@ -20,7 +20,7 @@ public class Xobc_lang_regy_itm {
 		this.key = key;
 		this.name = name;
 	}
-	public int Id() {return id;} private final    int id;
-	public String Key() {return key;} private final    String key;
-	public String Name() {return name;} private final    String name;
+	public int Id() {return id;} private final int id;
+	public String Key() {return key;} private final String key;
+	public String Name() {return name;} private final String name;
 }

@@ -18,10 +18,10 @@ import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
 class Split_meta_wkr__link extends Split_meta_wkr_base {
-	private final    Srch_db_mgr srch_db_mgr;
+	private final Srch_db_mgr srch_db_mgr;
 	private Srch_link_tbl tbl;
 	private Db_stmt stmt;
-	private final    Split_rslt_wkr__link rslt_wkr = new Split_rslt_wkr__link();
+	private final Split_rslt_wkr__link rslt_wkr = new Split_rslt_wkr__link();
 	public Split_meta_wkr__link(Split_ctx ctx, Srch_db_mgr srch_db_mgr) {
 		this.srch_db_mgr = srch_db_mgr;
 		ctx.Rslt_mgr().Reg_wkr(rslt_wkr);

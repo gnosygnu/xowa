@@ -18,8 +18,8 @@ import gplx.core.primitives.*; import gplx.dbs.*; import gplx.xowa.addons.bldrs.
 public abstract class Split_rslt_wkr__int__base implements Split_rslt_wkr {
 	private Split_rslt_mgr rslt_mgr;
 	private Db_conn wkr_conn; private Db_stmt stmt; private int db_id;
-	private final    Int_ary pkey_ary = new Int_ary(128);
-	private final    String tbl_name, pkey_name;
+	private final Int_ary pkey_ary = new Int_ary(128);
+	private final String tbl_name, pkey_name;
 	public Split_rslt_wkr__int__base() {
 		this.tbl_name = Tbl_name();
 		this.pkey_name = Pkey_name();

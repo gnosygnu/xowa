@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.kvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 public class Xoa_kv_hash {
-	private final    Hash_adp hash = Hash_adp_.New();
+	private final Hash_adp hash = Hash_adp_.New();
 	public Object Get_or_make(Xoa_kv_itm itm) {
 		String key = itm.Kv__key();
 		Object val = hash.Get_by(key);

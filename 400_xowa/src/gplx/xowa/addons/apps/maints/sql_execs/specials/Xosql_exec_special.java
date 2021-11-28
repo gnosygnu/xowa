@@ -26,7 +26,7 @@ public class Xosql_exec_special implements Xow_special_page {
 		new Xosql_exec_html(domain, db, sql).Bld_page_by_mustache(wiki.App(), page, this);
 	}
 	Xosql_exec_special(Xow_special_meta special__meta) {this.special__meta = special__meta;}
-	public Xow_special_meta Special__meta()		{return special__meta;} private final    Xow_special_meta special__meta;
+	public Xow_special_meta Special__meta()		{return special__meta;} private final Xow_special_meta special__meta;
 	public Xow_special_page Special__clone()	{return this;}
-	public static final    Xow_special_page Prototype = new Xosql_exec_special(Xow_special_meta.New_xo("XowaSql", "SQL Exec"));
+	public static final Xow_special_page Prototype = new Xosql_exec_special(Xow_special_meta.New_xo("XowaSql", "SQL Exec"));
 }

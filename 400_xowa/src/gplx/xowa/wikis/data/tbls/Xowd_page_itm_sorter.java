@@ -43,9 +43,9 @@ public class Xowd_page_itm_sorter implements ComparerAble {
 	byte compareType; int order;
 	static final byte Tid_ns_ttl = 0, Tid_itm_len = 2, Tid_id = 3, Tid_ttl = 4, Tid_ctg_tid_sortkey = 5;
 	static final int Asc = 1, Dsc = -1;
-	public static final    Xowd_page_itm_sorter TitleAsc				= new Xowd_page_itm_sorter(Tid_ttl				, Asc);
-	public static final    Xowd_page_itm_sorter EnyLenDsc				= new Xowd_page_itm_sorter(Tid_itm_len			, Dsc);
-	public static final    Xowd_page_itm_sorter IdAsc					= new Xowd_page_itm_sorter(Tid_id				, Asc);
-	public static final    Xowd_page_itm_sorter Ns_id_TtlAsc			= new Xowd_page_itm_sorter(Tid_ns_ttl			, Asc);
-	public static final    Xowd_page_itm_sorter Ctg_tid_sortkey_asc	= new Xowd_page_itm_sorter(Tid_ctg_tid_sortkey	, Asc);
+	public static final Xowd_page_itm_sorter TitleAsc				= new Xowd_page_itm_sorter(Tid_ttl				, Asc);
+	public static final Xowd_page_itm_sorter EnyLenDsc				= new Xowd_page_itm_sorter(Tid_itm_len			, Dsc);
+	public static final Xowd_page_itm_sorter IdAsc					= new Xowd_page_itm_sorter(Tid_id				, Asc);
+	public static final Xowd_page_itm_sorter Ns_id_TtlAsc			= new Xowd_page_itm_sorter(Tid_ns_ttl			, Asc);
+	public static final Xowd_page_itm_sorter Ctg_tid_sortkey_asc	= new Xowd_page_itm_sorter(Tid_ctg_tid_sortkey	, Asc);
 }

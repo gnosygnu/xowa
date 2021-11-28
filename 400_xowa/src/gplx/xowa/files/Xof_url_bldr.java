@@ -18,8 +18,8 @@ import gplx.core.envs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.imgs.*;
 public class Xof_url_bldr {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(400);
-	private final    Gfo_url_encoder encoder_src_http = Gfo_url_encoder_.New__http_url().Make(); // NOTE: changed from new_html_href_mw_ to new_url_ on 2012-11-19; issues with A%2Cb becoming A%252Cb
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(400);
+	private final Gfo_url_encoder encoder_src_http = Gfo_url_encoder_.New__http_url().Make(); // NOTE: changed from new_html_href_mw_ to new_url_ on 2012-11-19; issues with A%2Cb becoming A%252Cb
 	private byte[] ttl; private byte[] md5; private Xof_ext ext; private boolean file_is_thumb; private int file_w;
 	private double time = Xof_lnki_time.Null; private int page = Xof_lnki_page.Null; private byte time_dlm = Byte_ascii.At;
 	private byte repo_tid;
@@ -82,7 +82,7 @@ public class Xof_url_bldr {
 		byte mode = orig ? Xof_img_mode_.Tid__orig : Xof_img_mode_.Tid__thumb;
 		return this.Init_for_trg_file(repo_itm, mode, itm.Orig_ttl(), itm.Orig_ttl_md5(), itm.Orig_ext_itm(), itm.File_w(), itm.Lnki_time(), itm.Lnki_page()).Xto_url();
 	}
-	private static final    byte[] Bry__http = Bry_.new_a7("http");
+	private static final byte[] Bry__http = Bry_.new_a7("http");
 	private void Bld() {
 		if (repo_tid == Xof_repo_tid_.Tid__math) {
 			tmp_bfr.Add(root);																// add root;				EX: "C:\xowa\file\"; assume trailing dir_spr
@@ -209,13 +209,13 @@ public class Xof_url_bldr {
 		repo_tid = Xof_repo_tid_.Tid__null;
 		return this;
 	}
-	public static final    byte[]
+	public static final byte[]
 	  Bry_reg = Bry_.new_a7("reg.csv")
 	, Bry_px = Bry_.new_a7("px"), Bry_px_dash = Bry_.new_a7("px-")
 	, Bry_thumb = Bry_.new_a7("thumb")
 	, Bry_thumnbail_w_dot = Bry_.new_a7("thumbnail.")
 	;
-	private static final    byte[]
+	private static final byte[]
 	  Bry_lossy_page  = Bry_.new_a7("lossy-page"), Bry_page = Bry_.new_a7("page")
 	, Bry_lossy_page1 = Bry_.new_a7("lossy-page1-"), Bry_page1 = Bry_.new_a7("page1-"), Bry_seek = Bry_.new_a7("seek%3D");
 	public static Xof_url_bldr new_v2() {

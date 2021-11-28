@@ -25,7 +25,7 @@ public class Xow_popup_cfg {
 	public boolean Stop_if_hdr_after_enabled() {return stop_if_hdr_after > 0;}
 	public byte[] Ellipsis() {return ellipsis;} public void Ellipsis_(byte[] v) {ellipsis = v;} private byte[] ellipsis = Bry_.Empty;
 	public byte[] Notoc() {return notoc;} public void Notoc_(byte[] v) {notoc = v;} private byte[] notoc = Notoc_const;
-	public static final    byte[]
+	public static final byte[]
 	  Notoc_const		= Bry_.new_a7("\n__NOTOC__") // NOTE: always add a whitespace tkn else __NOTOC__ will be deactivated if last tkn is lnke; DATE:2014-06-22
 	, Msg_key_ellipsis	= Bry_.new_a7("ellipsis")
 	;

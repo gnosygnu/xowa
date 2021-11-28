@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 public class Gfh_atr_ {
-	public static final    byte[] 
+	public static final byte[]
 	// "coreattrs"
 	  Bry__id					= Bry_.new_a7("id")
 	, Bry__class				= Bry_.new_a7("class")

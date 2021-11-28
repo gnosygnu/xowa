@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gflucene.core; import gplx.*; import gplx.gflucene.*;
 public class Gflucene_analyzer_data {
-	public final    String key;
+	public final String key;
 	public Gflucene_analyzer_data(String key) {
 		this.key = key;
 	}

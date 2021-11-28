@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers.doubleunders; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xomw_doubleunder_wkr__tst {
-	private final    Xomw_doubleunder_wkr__fxt fxt = new Xomw_doubleunder_wkr__fxt();
+	private final Xomw_doubleunder_wkr__fxt fxt = new Xomw_doubleunder_wkr__fxt();
 	@Test public void No_match()        {fxt.Test__parse("a b c"                                    , "a b c");}
 	@Test public void Force_toc()       {fxt.Test__parse("a __FORCETOC__ b"                         , "a  b").Test__prop_y(fxt.data.force_toc);}
 	@Test public void Toc()             {fxt.Test__parse("a __TOC__ b __TOC__ c"                    , "a <!--MWTOC--> b  c").Test__prop_y(fxt.data.toc, fxt.data.show_toc, fxt.data.force_toc_position);}
@@ -25,9 +25,9 @@ public class Xomw_doubleunder_wkr__tst {
 	@Test public void Case_match()      {fxt.Test__parse("a __index__ b"                            , "a __index__ b");}
 }
 class Xomw_doubleunder_wkr__fxt {
-	private final    XomwParserCtx pctx = new XomwParserCtx();
-	private final    XomwParserBfr pbfr = new XomwParserBfr();
-	private final    Xomw_doubleunder_wkr wkr = new Xomw_doubleunder_wkr();
+	private final XomwParserCtx pctx = new XomwParserCtx();
+	private final XomwParserBfr pbfr = new XomwParserBfr();
+	private final Xomw_doubleunder_wkr wkr = new Xomw_doubleunder_wkr();
 	public Xomw_doubleunder_data data = new Xomw_doubleunder_data();
 	public Xomw_doubleunder_wkr__fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();

@@ -24,11 +24,11 @@ public class Xocfg_itm_row {
 		this.html_atrs = html_atrs;
 		this.html_cls = html_cls;
 	}
-	public int Id() {return id;} private final    int id;
-	public String Key() {return key;} private final    String key;
-	public int Scope() {return scope;} private final    int scope;
-	public String Type() {return type;} private final    String type;
-	public String Dflt() {return dflt;} private final    String dflt;
-	public String Html_atrs() {return html_atrs;} private final    String html_atrs;
-	public String Html_cls() {return html_cls;} private final    String html_cls;
+	public int Id() {return id;} private final int id;
+	public String Key() {return key;} private final String key;
+	public int Scope() {return scope;} private final int scope;
+	public String Type() {return type;} private final String type;
+	public String Dflt() {return dflt;} private final String dflt;
+	public String Html_atrs() {return html_atrs;} private final String html_atrs;
+	public String Html_cls() {return html_cls;} private final String html_cls;
 }

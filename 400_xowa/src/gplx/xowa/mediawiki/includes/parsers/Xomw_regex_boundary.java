@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.core.btries.*;
 public class Xomw_regex_boundary {	// THREAD.SAFE: trv is only for consistent interface
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final Btrie_rv trv = new Btrie_rv();
 	public Xomw_regex_boundary(Xomw_regex_space space) {
 		// naive implementation of is_boundary; ignore all ws and underscore
 		byte[][] ary = space.Ws();

@@ -18,13 +18,13 @@ import gplx.core.envs.*; import gplx.core.security.algos.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 class Xomath_html_wtr {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(512);
-	private final    Xomath_subst_mgr subst_mgr = new Xomath_subst_mgr();
-	private final    Hash_algo md5_wkr = Hash_algo_.New__md5();
-	private final    Bry_fmt 
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(512);
+	private final Xomath_subst_mgr subst_mgr = new Xomath_subst_mgr();
+	private final Hash_algo md5_wkr = Hash_algo_.New__md5();
+	private final Bry_fmt
 	  fmt__latex	= Bry_fmt.Auto( "<img id='xowa_math_img_~{math_idx}' src='' width='' height=''/><span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>")
 	, fmt__mathjax	= Bry_fmt.Auto("<span id='xowa_math_txt_~{math_idx}'>~{math_text}</span>");
-	private static final    byte[] Bry__math = Bry_.new_a7("math");
+	private static final byte[] Bry__math = Bry_.new_a7("math");
 
 	public void Write(Bry_bfr bfr, Xop_ctx ctx, Xop_xnde_tkn xnde, byte[] src, boolean is_latex, boolean enabled) {
 		// init vars

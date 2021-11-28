@@ -19,7 +19,7 @@ import gplx.xowa.apps.apis.xowa.html.modules.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.guis.views.*;
 public class Xow_popup_parser_tst {
-	@Before public void init() {fxt.Clear();} private final    Xop_popup_parser_fxt fxt = new Xop_popup_parser_fxt();
+	@Before public void init() {fxt.Clear();} private final Xop_popup_parser_fxt fxt = new Xop_popup_parser_fxt();
 	@Test  public void Text_chars_one() {
 		fxt.Test_parse
 		( "a b c d", String_.Concat_lines_nl_skip_last

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.security.algos.gplx_crypto; import gplx.*; import gplx.core.*; import gplx.core.security.*; import gplx.core.security.algos.*;
 import org.junit.*; import gplx.core.consoles.*; import gplx.core.ios.streams.*; /*IoStream*/
 public class Hash_console_wtr_tst {
-	private final    Hash_console_wtr_fxt fxt = new Hash_console_wtr_fxt();
+	private final Hash_console_wtr_fxt fxt = new Hash_console_wtr_fxt();
 	@Test public void Basic() {
 		fxt.Test__Status(10, " - hash: 100%");
 		fxt.Test__Status(11, " - hash: 66%");

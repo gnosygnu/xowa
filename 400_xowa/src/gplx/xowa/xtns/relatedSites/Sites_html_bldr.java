@@ -22,7 +22,7 @@ class Sites_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private Sites_html_bldr html_bldr;
 	public Sites_xtn_skin_itm(Sites_html_bldr html_bldr) {this.html_bldr = html_bldr;}
 	public byte Tid() {return Xopg_xtn_skin_itm_tid.Tid_sidebar;}
-	public byte[] Key() {return KEY;} public static final    byte[] KEY = Bry_.new_a7("RelatedSites");
+	public byte[] Key() {return KEY;} public static final byte[] KEY = Bry_.new_a7("RelatedSites");
 	public void Add(Sites_regy_itm itm) {itms.Add(itm);}
 	public void Write(Bry_bfr bfr, Xoae_page page) {
 		html_bldr.Bld_all(bfr, page, itms);
@@ -59,7 +59,7 @@ public class Sites_html_bldr implements gplx.core.brys.Bfr_arg {
 			rv = Bry_.Add(Xoh_href_.Bry__site, rv);
 		return rv;
 	}
-	private static final    Bry_fmtr
+	private static final Bry_fmtr
 	  fmtr_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<div id='p-relatedsites' class='portal'>"
 	, "  <h3>~{related_sites_hdr}</h3>"

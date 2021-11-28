@@ -115,7 +115,7 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, Gfo_invk, Xow
 		rslt_prv = rslt_prv2;
 		return true;
 	}	private Gfo_qarg_mgr_old arg_hash = new Gfo_qarg_mgr_old();
-	private static final    byte[] Bry_arg_from = Bry_.new_a7("from"), Bry_arg_ns = Bry_.new_a7("namespace"), Bry_arg_hideredirects = Bry_.new_a7("hideredirects");
+	private static final byte[] Bry_arg_from = Bry_.new_a7("from"), Bry_arg_ns = Bry_.new_a7("namespace"), Bry_arg_hideredirects = Bry_.new_a7("hideredirects");
 	public Xow_ns Init_ns() {return init_ns;} private Xow_ns init_ns;
 	public void Build_html(Xoae_page page) {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_m001();
@@ -167,7 +167,7 @@ public class Xows_page_allpages implements gplx.core.brys.Bfr_arg, Gfo_invk, Xow
 	}
 	public static final String Invk_html_all_ = "html_all_", Invk_html_list_grp_ = "html_list_grp_", Invk_html_list_itm_normal_ = "html_list_itm_normal_", Invk_html_list_itm_redirect_ = "html_list_itm_redirect_"
 	, Invk_itms_per_page_ = "itms_per_page_", Invk_itms_per_grp_ = "itms_per_grp_", Invk_show_redirects_ = "show_redirects_";
-	public static final    String GRP_KEY = "xowa.special.allpages";
+	public static final String GRP_KEY = "xowa.special.allpages";
 
 	public Xow_special_page Special__clone() {return this;}
 }

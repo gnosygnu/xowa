@@ -20,8 +20,8 @@ import gplx.xowa.htmls.core.dbs.*;
 public class Split_wkr__html implements Split_wkr {
 	private Xoh_src_tbl_mgr src_tbl_mgr;
 	private Xowd_html_tbl tbl; private Db_stmt stmt;
-	private final    Xowd_html_row trg_itm = new Xowd_html_row();
-	private final    Split_rslt_wkr__html rslt_wkr = new Split_rslt_wkr__html();
+	private final Xowd_html_row trg_itm = new Xowd_html_row();
+	private final Split_rslt_wkr__html rslt_wkr = new Split_rslt_wkr__html();
 	public void Split__init(Split_ctx ctx, Xow_wiki wiki, Db_conn wkr_conn) {
 		this.src_tbl_mgr = new Xoh_src_tbl_mgr(wiki);
 		ctx.Rslt_mgr().Reg_wkr(rslt_wkr);

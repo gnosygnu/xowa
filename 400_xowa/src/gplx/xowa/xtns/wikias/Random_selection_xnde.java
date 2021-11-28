@@ -97,13 +97,13 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		if (val != null) bfr.Add(val);
 	}
 	public static final byte Xatr__before = 0, Xatr__after = 1;
-	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_str_byte("before", Xatr__before).Add_str_byte("after", Xatr__after);
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7().Add_str_byte("before", Xatr__before).Add_str_byte("after", Xatr__after);
 	private static final byte Tag__option = 0, Tag__choicetemplate = 1;
-	private static final    byte[] Atr__weight = Bry_.new_a7("weight");
+	private static final byte[] Atr__weight = Bry_.new_a7("weight");
 	public static int Rnd_test = -1;
 }
 class Rndsel_option_itm {
 	public Rndsel_option_itm(int weight, byte[] text) {this.Weight = weight; this.Text = text;}
-	public final    int Weight;
-	public final    byte[] Text;
+	public final int Weight;
+	public final byte[] Text;
 }

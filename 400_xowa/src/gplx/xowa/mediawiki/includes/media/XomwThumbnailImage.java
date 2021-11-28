@@ -18,7 +18,7 @@ import gplx.langs.htmls.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*;
 // Media transform output for images
-public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final    List_adp attribs = List_adp_.New(), link_attribs = List_adp_.New();
+public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final List_adp attribs = List_adp_.New(), link_attribs = List_adp_.New();
 	public XomwThumbnailImage(XomwFile file, byte[] url, byte[] path, int w, int h) {super(file, url, path, w, h);
 	}
 	/**
@@ -207,5 +207,5 @@ public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final
 		XomwXml.Element(tmp, Gfh_tag_.Bry__img, attribs, Bry_.Empty, Bool_.Y);
 		Link_wrap(bfr, link_attribs_is_null ? null : link_attribs, tmp.To_bry_and_clear());
 	}
-	private static final    byte[] Bry__vertical_align = Bry_.new_a7("vertical-align: ");
+	private static final byte[] Bry__vertical_align = Bry_.new_a7("vertical-align: ");
 }

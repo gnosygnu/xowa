@@ -137,9 +137,9 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Err_has(Exception e, String hdr) {
 		Tfds.Eq_true(String_.Has(Err_.Message_gplx_full(e), hdr), "could not find '{0}' in '{1}'", hdr, Err_.Message_gplx_full(e));
 	}
-	static final    String EmptyStr = TfdsMsgBldr.EmptyStr;
+	static final String EmptyStr = TfdsMsgBldr.EmptyStr;
 	static TfdsMsgBldr msgBldr = TfdsMsgBldr.new_();
-	public static final    Io_url RscDir		= Io_url_.Usr().GenSubDir_nest("000", "200_dev", "190_tst");
+	public static final Io_url RscDir		= Io_url_.Usr().GenSubDir_nest("000", "200_dev", "190_tst");
 	public static void WriteText(String text) {Console_adp__sys.Instance.Write_str(text);}
 	public static void Write(byte[] s, int b, int e) {Write(Bry_.Mid(s, b, e));}
 	public static void Write() {Write("tmp");}
@@ -156,7 +156,7 @@ class TfdsEqListItmStr_cls_default implements TfdsEqListItmStr {
 	public String To_str(Object cur, Object actl) {
 		return Object_.Xto_str_strict_or_null_mark(cur);
 	}
-	public static final    TfdsEqListItmStr_cls_default Instance = new TfdsEqListItmStr_cls_default(); TfdsEqListItmStr_cls_default() {}
+	public static final TfdsEqListItmStr_cls_default Instance = new TfdsEqListItmStr_cls_default(); TfdsEqListItmStr_cls_default() {}
 }
 class TfdsEqAryItm {
 	public int Idx() {return idx;} public TfdsEqAryItm Idx_(int v) {idx = v; return this;} int idx;
@@ -230,5 +230,5 @@ class TfdsMsgBldr {
 			);
 	}
 	public static TfdsMsgBldr new_() {return new TfdsMsgBldr();} TfdsMsgBldr() {}
-	public static final    String EmptyStr = "";
+	public static final String EmptyStr = "";
 }

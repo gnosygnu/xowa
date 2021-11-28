@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
 public class Xop_log_basic_tbl implements Db_tbl {		
-	public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	public final    String fld__log_id, fld__log_tid, fld__log_msg, fld__log_time, fld__page_id, fld__page_ttl, fld__args_len, fld__args_str, fld__src_len, fld__src_str;
+	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final String fld__log_id, fld__log_tid, fld__log_msg, fld__log_time, fld__page_id, fld__page_ttl, fld__args_len, fld__args_str, fld__src_len, fld__src_str;
 	private Db_stmt stmt_insert;
 	public Xop_log_basic_tbl(Db_conn conn){
 		this.conn = conn;
@@ -35,8 +35,8 @@ public class Xop_log_basic_tbl implements Db_tbl {
 		conn.Rls_reg(this);
 		this.Create_tbl();
 	} 
-	public Db_conn				Conn()			{return conn;} private final    Db_conn conn; 
-	public String				Tbl_name()		{return tbl_name;} private final    String tbl_name;
+	public Db_conn				Conn()			{return conn;} private final Db_conn conn;
+	public String				Tbl_name()		{return tbl_name;} private final String tbl_name;
 	public void					Create_tbl()	{conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void					Delete()		{conn.Exec_qry(Db_qry_delete.new_all_(tbl_name));}
 	public void Insert(int log_tid, String log_msg, int log_time, int page_id, String page_ttl, int args_len, String args_str, int src_len, String src_str) {

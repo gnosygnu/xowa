@@ -42,7 +42,7 @@ import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
 import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
 
 public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
-	private final    Scrib_core core;
+	private final Scrib_core core;
 	private String src_str;
 	private String pat_str;
 	private int limit;
@@ -228,7 +228,7 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 		return true;
 	}
 	private static final byte Repl_tid_null = 0, Repl_tid_string = 1, Repl_tid_table = 2, Repl_tid_luacbk = 3;
-	public static final    Scrib_lib_ustring_gsub_mgr[] Ary_empty = new Scrib_lib_ustring_gsub_mgr[0];
+	public static final Scrib_lib_ustring_gsub_mgr[] Ary_empty = new Scrib_lib_ustring_gsub_mgr[0];
 }
 /*
 == FOOTNOTE:CAPTURES [ISSUE#:726; DATE:2020-05-17] ==

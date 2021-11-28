@@ -18,7 +18,7 @@ import gplx.core.primitives.*; import gplx.core.btries.*;
 public class Xol_grammar_ {
 	public static final byte Tid__max = 9; 
 	public static final byte Tid_genitive = 0, Tid_elative = 1, Tid_partitive = 2, Tid_illative = 3, Tid_inessive = 4, Tid_accusative = 5, Tid_instrumental = 6, Tid_prepositional = 7, Tid_dative = 8, Tid_unknown = Byte_.Max_value_127;
-	private static final    Btrie_slim_mgr Tid_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:MW kwds
+	private static final Btrie_slim_mgr Tid_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:MW kwds
 	.Add_str_byte("genitive", Tid_genitive)
 	.Add_str_byte("elative", Tid_elative)
 	.Add_str_byte("partitive", Tid_partitive)
@@ -48,9 +48,9 @@ public class Xol_grammar_ {
 }
 class Xol_grammar__unimplemented implements Xol_grammar {
 	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang_itm lang, byte[] word, byte[] type) {return false;}
-	public static final    Xol_grammar__unimplemented Instance = new Xol_grammar__unimplemented(); Xol_grammar__unimplemented() {}
+	public static final Xol_grammar__unimplemented Instance = new Xol_grammar__unimplemented(); Xol_grammar__unimplemented() {}
 }
 class Xol_grammar__noop implements Xol_grammar {
 	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang_itm lang, byte[] word, byte[] type) {bfr.Add(word); return true;}
-	public static final    Xol_grammar__noop Instance = new Xol_grammar__noop(); Xol_grammar__noop() {}
+	public static final Xol_grammar__noop Instance = new Xol_grammar__noop(); Xol_grammar__noop() {}
 }

@@ -19,13 +19,13 @@ import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
 import gplx.xowa.wikis.xwikis.interwikis.*;
 public class Xow_xwiki_mgr {
-	private final    Ordered_hash list = Ordered_hash_.New_bry(); private final    Hash_adp_bry hash = Hash_adp_bry.ci_a7();
-	private final    Xow_wiki wiki;
+	private final Ordered_hash list = Ordered_hash_.New_bry(); private final Hash_adp_bry hash = Hash_adp_bry.ci_a7();
+	private final Xow_wiki wiki;
 	public Xow_xwiki_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
 		this.xwiki_domain_tid = Xwiki_tid(wiki.Domain_tid());
 	}
-	public Xow_interwiki_map Interwiki_map() {return interwiki_map;} private final    Xow_interwiki_map interwiki_map = new Xow_interwiki_map(); // separate map for Scrib; DATE:2017-04-01
+	public Xow_interwiki_map Interwiki_map() {return interwiki_map;} private final Xow_interwiki_map interwiki_map = new Xow_interwiki_map(); // separate map for Scrib; DATE:2017-04-01
 	public int	Xwiki_domain_tid() {return xwiki_domain_tid;} private int xwiki_domain_tid;
 	public int	Len() {return list.Count();}
 	public void Clear() {hash.Clear(); list.Clear();}
@@ -99,5 +99,5 @@ public class Xow_xwiki_mgr {
 		return url.Segs__get_at_1st();
 	}
 	public static byte[] Bld_url_fmt(byte[] domain_bry) {return Bry_.Add(gplx.core.net.Gfo_protocol_itm.Itm_https.Text_bry(), domain_bry, Bry__url_fmt_end);}
-	private static final    byte[] Bry__url_fmt_end = Bry_.new_a7("/wiki/~{0}");
+	private static final byte[] Bry__url_fmt_end = Bry_.new_a7("/wiki/~{0}");
 }

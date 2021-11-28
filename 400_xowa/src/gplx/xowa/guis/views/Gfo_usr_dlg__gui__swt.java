@@ -17,7 +17,7 @@ package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.lists.rings.*;
 import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.standards.*;
 public class Gfo_usr_dlg__gui__swt implements Gfo_usr_dlg__gui, Gfo_invk {
-	private final    GfuiInvkCmd cmd_sync; private final    GfuiTextBox prog_box, info_box;
+	private final GfuiInvkCmd cmd_sync; private final GfuiTextBox prog_box, info_box;
 	private boolean show_warn, show_note;
 	public Gfo_usr_dlg__gui__swt(Xoa_app app, Gfui_kit kit, GfuiTextBox prog_box, GfuiTextBox info_box, GfuiTextBox warn_box) {
 		this.cmd_sync	= kit.New_cmd_sync(this);	// NOTE: cmd_sync needed else progress messages may be sent out of order

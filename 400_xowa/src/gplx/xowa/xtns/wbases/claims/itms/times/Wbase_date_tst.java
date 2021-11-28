@@ -56,7 +56,7 @@ public class Wbase_date_tst {
 class Wbase_date_fxt {
 	private Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(16);
 	private Wdata_hwtr_msgs msgs;
-	private final    Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_(); private final    Bry_bfr tmp_time_bfr = Bry_bfr_.New_w_size(32);		
+	private final Bry_fmtr tmp_time_fmtr = Bry_fmtr.new_(); private final Bry_bfr tmp_time_bfr = Bry_bfr_.New_w_size(32);
 	public Wbase_date_fxt Clear() {
 		init_before = init_after = 0;
 		init_calendar_is_julian = false;

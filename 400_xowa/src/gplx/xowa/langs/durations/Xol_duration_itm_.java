@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.durations; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 public class Xol_duration_itm_ {
-	private static final    Hash_adp_bry regy = Hash_adp_bry.ci_a7();	// ASCII:MW.consts
+	private static final Hash_adp_bry regy = Hash_adp_bry.ci_a7();	// ASCII:MW.consts
 	public static final byte
 	  Tid_millenia		= 0
 	, Tid_centuries		= 1
@@ -27,7 +27,7 @@ public class Xol_duration_itm_ {
 	, Tid_minutes		= 7
 	, Tid_seconds		= 8
 	;
-	public static final    Xol_duration_itm
+	public static final Xol_duration_itm
 	  Itm_millenia		= new_(Tid_millenia		, "millenia"		, 31556952000L)
 	, Itm_centuries		= new_(Tid_centuries	, "centuries"		,  3155695200L)
 	, Itm_decades		= new_(Tid_decades		, "decades"			,   315569520L)
@@ -43,7 +43,7 @@ public class Xol_duration_itm_ {
 		regy.Add(rv.Name_bry(), rv);
 		return rv;
 	}
-	public static final    Xol_duration_itm[] Ary_default = new Xol_duration_itm[]
+	public static final Xol_duration_itm[] Ary_default = new Xol_duration_itm[]
 	{ Itm_millenia
 	, Itm_centuries
 	, Itm_decades
@@ -74,5 +74,5 @@ class Xol_duration_itm_sorter implements gplx.core.lists.ComparerAble {
 		Xol_duration_itm rhs = (Xol_duration_itm)rhsObj;
 		return -Long_.Compare(lhs.Seconds(), rhs.Seconds());	// - to sort from largest to smallest
 	}
-	public static final    Xol_duration_itm_sorter Instance = new Xol_duration_itm_sorter(); Xol_duration_itm_sorter() {}// TS.static
+	public static final Xol_duration_itm_sorter Instance = new Xol_duration_itm_sorter(); Xol_duration_itm_sorter() {}// TS.static
 }

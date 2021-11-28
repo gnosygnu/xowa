@@ -18,16 +18,16 @@ import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searc
 import gplx.xowa.addons.wikis.searchs.gui.urlbars.*;
 import gplx.xowa.langs.cases.*;
 public class Srch_search_addon implements Xoax_addon_itm, Srch_search_addon_api {
-	private final    Srch_search_mgr search_mgr;
+	private final Srch_search_mgr search_mgr;
 	public Srch_search_addon(Xow_wiki wiki) {
 		this.wiki_domain = wiki.Domain_bry();
 		this.db_mgr = new Srch_db_mgr(wiki.Data__core_mgr()).Init(wiki.Stats().Num_pages());
 		this.ttl_parser = new Srch_text_parser().Init_for_ttl(wiki.Case_mgr());
 		this.search_mgr = new Srch_search_mgr(this, wiki, ttl_parser);
 	}
-	public byte[]				Wiki_domain()	{return wiki_domain;}	private final    byte[] wiki_domain;
-	public Srch_db_mgr			Db_mgr()		{return db_mgr;}		private final    Srch_db_mgr db_mgr;
-	public Srch_text_parser		Ttl_parser()	{return ttl_parser;}	private final    Srch_text_parser ttl_parser;
+	public byte[]				Wiki_domain()	{return wiki_domain;}	private final byte[] wiki_domain;
+	public Srch_db_mgr			Db_mgr()		{return db_mgr;}		private final Srch_db_mgr db_mgr;
+	public Srch_text_parser		Ttl_parser()	{return ttl_parser;}	private final Srch_text_parser ttl_parser;
 
 	public void Search(Srch_search_qry qry, Srch_rslt_cbk cbk) {search_mgr.Search(qry, cbk);}
 	public void Clear_rslts_cache() {search_mgr.Clear_rslts_cache();}

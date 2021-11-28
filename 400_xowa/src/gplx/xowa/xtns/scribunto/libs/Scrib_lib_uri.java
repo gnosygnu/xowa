@@ -44,7 +44,7 @@ public class Scrib_lib_uri implements Scrib_lib {
 	}
 	private static final int Proc_anchorEncode = 0, Proc_localUrl = 1, Proc_fullUrl = 2, Proc_canonicalUrl = 3, Proc_init_uri_for_page = 4;
 	public static final String Invk_anchorEncode = "anchorEncode", Invk_localUrl = "localUrl", Invk_fullUrl = "fullUrl", Invk_canonicalUrl = "canonicalUrl", Invk_init_uri_for_page = "init_uri_for_page";
-	private static final    String[] Proc_names = String_.Ary(Invk_anchorEncode, Invk_localUrl, Invk_fullUrl, Invk_canonicalUrl, Invk_init_uri_for_page);
+	private static final String[] Proc_names = String_.Ary(Invk_anchorEncode, Invk_localUrl, Invk_fullUrl, Invk_canonicalUrl, Invk_init_uri_for_page);
 	public boolean AnchorEncode(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] raw_bry = args.Pull_bry(0);
 		Bry_bfr bfr = core.Wiki().Utl__bfr_mkr().Get_b512();

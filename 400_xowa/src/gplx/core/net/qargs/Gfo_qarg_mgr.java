@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.net.qargs; import gplx.*; import gplx.core.*; import gplx.core.net.*;
 public class Gfo_qarg_mgr {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Gfo_qarg_mgr Init(Gfo_qarg_itm[] args) {
 		hash.Clear();
 		int len = args.length;

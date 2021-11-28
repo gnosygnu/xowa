@@ -18,7 +18,7 @@ import gplx.core.net.*; import gplx.core.net.qargs.*;
 import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;	
 public class Srch_qarg_mgr {
 	public Srch_qarg_mgr(Srch_ns_mgr ns_mgr) {this.ns_mgr = ns_mgr;}
-	public Srch_ns_mgr			Ns_mgr()		{return ns_mgr;} private final    Srch_ns_mgr ns_mgr;
+	public Srch_ns_mgr			Ns_mgr()		{return ns_mgr;} private final Srch_ns_mgr ns_mgr;
 	public byte[]				Search_raw()	{return search_raw;} private byte[] search_raw; public Srch_qarg_mgr Search_raw_(byte[] v) {search_raw = v; return this;} 
 	public int					Slab_idx()		{return slab_idx;} private int slab_idx;
 	public byte[]				Cancel()		{return cancel;} private byte[] cancel;
@@ -53,8 +53,8 @@ public class Srch_qarg_mgr {
 	}
 	private static byte[] Ns_bry = Bry_.new_a7("ns");
 	private static final byte Uid__search = 0, Uid__slab_idx = 1, Uid__cancel = 2;
-	public static final    byte[] Bry__slab_idx = Bry_.new_a7("xowa_page_index"), Bry__cancel = Bry_.new_a7("cancel");
-	private static final    Hash_adp_bry qarg_regy = Hash_adp_bry.ci_a7()
+	public static final byte[] Bry__slab_idx = Bry_.new_a7("xowa_page_index"), Bry__cancel = Bry_.new_a7("cancel");
+	private static final Hash_adp_bry qarg_regy = Hash_adp_bry.ci_a7()
 	.Add_str_byte("search"				, Uid__search)
 	.Add_bry_byte(Bry__slab_idx			, Uid__slab_idx)
 	.Add_bry_byte(Bry__cancel			, Uid__cancel)

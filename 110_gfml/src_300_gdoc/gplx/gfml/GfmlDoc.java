@@ -39,5 +39,5 @@ public class GfmlDoc {
 //		public GfmlTkn BgnBrace() {return bgnBrace;} public GfmlDocEditor BgnBrace_(GfmlTkn v) {bgnBrace = v; return this;} GfmlTkn bgnBrace = GfmlTkn_.new_("{", "");
 //		public GfmlTkn EndBrace() {return endBrace;} public GfmlDocEditor EndBrace_(GfmlTkn v) {endBrace = v; return this;} GfmlTkn endBrace = GfmlTkn_.new_("}", "");
 //		public GfmlTkn Hnd() {return hnd;} public GfmlDocEditor Hnd_(GfmlTkn v) {hnd = v; return this;} GfmlTkn hnd = GfmlTkn_.new_(":", "");
-//        public static final    GfmlDocEditor Instance = new GfmlDocEditor(); GfmlDocEditor() {}
+//        public static final GfmlDocEditor Instance = new GfmlDocEditor(); GfmlDocEditor() {}
 //	}

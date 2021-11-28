@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 public class Xowe_hdr_bldr_fxt {		
-	private final    Bry_bfr tmp = Bry_bfr_.New();
-	public Xop_fxt Fxt() {return fxt;} private final    Xop_fxt fxt = new Xop_fxt();
+	private final Bry_bfr tmp = Bry_bfr_.New();
+	public Xop_fxt Fxt() {return fxt;} private final Xop_fxt fxt = new Xop_fxt();
 	public void Clear() {
 		fxt.Reset();
 		tmp.Clear();

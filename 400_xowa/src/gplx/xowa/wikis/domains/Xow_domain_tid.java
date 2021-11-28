@@ -19,12 +19,12 @@ public class Xow_domain_tid {
 		this.multi_lang = multi_lang; this.src = src; this.tid = tid; this.key_bry = key_bry; this.abrv = abrv; this.domain_bry = domain_bry;
 		this.key_str = String_.new_u8(key_bry);			
 	}
-	public boolean Multi_lang() {return multi_lang;} private final    boolean multi_lang;		// EX: y
-	public int Src() {return src;} private final    int src;							// EX: 1 (wm,mw,wk,xo)
-	public int Tid() {return tid;} private final    int tid;							// EX: 1 (Tid_wikipedia)
-	public String Key_str() {return key_str;} private final    String key_str;			// EX: wikipedia
-	public byte[] Key_bry() {return key_bry;} private final    byte[] key_bry;			// EX: wikipedia
-	public byte[] Abrv() {return abrv;} private final    byte[] abrv;					// EX: w
+	public boolean Multi_lang() {return multi_lang;} private final boolean multi_lang;		// EX: y
+	public int Src() {return src;} private final int src;							// EX: 1 (wm,mw,wk,xo)
+	public int Tid() {return tid;} private final int tid;							// EX: 1 (Tid_wikipedia)
+	public String Key_str() {return key_str;} private final String key_str;			// EX: wikipedia
+	public byte[] Key_bry() {return key_bry;} private final byte[] key_bry;			// EX: wikipedia
+	public byte[] Abrv() {return abrv;} private final byte[] abrv;					// EX: w
 	public byte[] Domain_bry() {return domain_bry;} private byte[] domain_bry;			// EX: .wikipedia.org
 	public byte[] Display_bry() {return Bry_.Ucase__1st(key_bry);}						// EX: Wikipedia
 

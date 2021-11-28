@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 public class Sql_val_wtr {
-//		private final    Bry_bfr tmp_bfr = Bry_bfr_.New(32);
+//		private final Bry_bfr tmp_bfr = Bry_bfr_.New(32);
 	public byte Seq__quote = Byte_ascii.Apos, Seq__escape = Byte_ascii.Backslash;
 	public void Bld_val(Bry_bfr bfr, Sql_wtr_ctx ctx, Object val) {
 		if (ctx.Mode_is_prep) {
@@ -41,16 +41,16 @@ public class Sql_val_wtr {
 			case Type_ids_.Id__obj:			Bld_val__str		(bfr, Object_.Xto_str_strict_or_null(val)); break;
 		}
 	}
-	@gplx.Virtual public void Bld_val__bool		(Bry_bfr bfr, boolean val)			{bfr.Add_int_digits(1, val ? 1 : 0);}	// NOTE: save boolean to 0 or 1 b/c sqlite doesn't support true / false //{bfr.Add_str_a7(val ? "true" : "false");}
-	@gplx.Virtual public void Bld_val__byte		(Bry_bfr bfr, byte val)			{bfr.Add_byte_variable(val);}
-	@gplx.Virtual public void Bld_val__short		(Bry_bfr bfr, short val)		{bfr.Add_short_variable(val);}
-	@gplx.Virtual public void Bld_val__int		(Bry_bfr bfr, int val)			{bfr.Add_int_variable(val);}
-	@gplx.Virtual public void Bld_val__long		(Bry_bfr bfr, long val)			{bfr.Add_long_variable(val);}
-	@gplx.Virtual public void Bld_val__float		(Bry_bfr bfr, float val)		{bfr.Add_float(val);}
-	@gplx.Virtual public void Bld_val__double		(Bry_bfr bfr, double val)		{bfr.Add_double(val);}
-	@gplx.Virtual public void Bld_val__date		(Bry_bfr bfr, DateAdp val)		{bfr.Add_str_u8_many("'", val.XtoStr_gplx_long(), "'");}
-	@gplx.Virtual public void Bld_val__decimal	(Bry_bfr bfr, Decimal_adp val)	{bfr.Add_str_u8_many("'", val.To_str(), "'");}
-	@gplx.Virtual public void Bld_val__str		(Bry_bfr bfr, String val) {
+	public void Bld_val__bool		(Bry_bfr bfr, boolean val)			{bfr.Add_int_digits(1, val ? 1 : 0);}	// NOTE: save boolean to 0 or 1 b/c sqlite doesn't support true / false //{bfr.Add_str_a7(val ? "true" : "false");}
+	public void Bld_val__byte		(Bry_bfr bfr, byte val)			{bfr.Add_byte_variable(val);}
+	public void Bld_val__short		(Bry_bfr bfr, short val)		{bfr.Add_short_variable(val);}
+	public void Bld_val__int		(Bry_bfr bfr, int val)			{bfr.Add_int_variable(val);}
+	public void Bld_val__long		(Bry_bfr bfr, long val)			{bfr.Add_long_variable(val);}
+	public void Bld_val__float		(Bry_bfr bfr, float val)		{bfr.Add_float(val);}
+	public void Bld_val__double		(Bry_bfr bfr, double val)		{bfr.Add_double(val);}
+	public void Bld_val__date		(Bry_bfr bfr, DateAdp val)		{bfr.Add_str_u8_many("'", val.XtoStr_gplx_long(), "'");}
+	public void Bld_val__decimal	(Bry_bfr bfr, Decimal_adp val)	{bfr.Add_str_u8_many("'", val.To_str(), "'");}
+	public void Bld_val__str		(Bry_bfr bfr, String val) {
 //			byte[] bry = Bry_.new_u8(val); int len = bry.length; int pos = 0; int prv = -1; boolean dirty = false;
 //			while (true) {
 //				if (pos == len) break;

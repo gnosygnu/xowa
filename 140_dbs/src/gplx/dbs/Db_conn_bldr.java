@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs; import gplx.*;
 public class Db_conn_bldr {
-	private final    Object thread_lock = new Object();	// LOCK:synchronized else random failures in Schema_mgr due to diff conn pointing to same db; DATE:2016-07-12
+	private final Object thread_lock = new Object();	// LOCK:synchronized else random failures in Schema_mgr due to diff conn pointing to same db; DATE:2016-07-12
 	private Db_conn_bldr_wkr wkr;
 	public void Reg_default_sqlite()	{wkr = Db_conn_bldr_wkr__sqlite.Instance; wkr.Clear_for_tests();}
 	public void Reg_default_mem()		{wkr = Db_conn_bldr_wkr__mem.Instance; wkr.Clear_for_tests();}
@@ -48,5 +48,5 @@ public class Db_conn_bldr {
 		if (rv == Db_conn_.Noop) throw Err_.new_wo_type("connection is null; file does not exist: file={0}", "file", url.Raw());
 		return rv;
 	}
-        public static final    Db_conn_bldr Instance = new Db_conn_bldr(); Db_conn_bldr() {}
+        public static final Db_conn_bldr Instance = new Db_conn_bldr(); Db_conn_bldr() {}
 }

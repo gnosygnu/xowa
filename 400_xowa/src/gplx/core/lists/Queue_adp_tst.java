@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.lists; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Queue_adp_tst {
-	private final    Queue_adp_fxt fxt = new Queue_adp_fxt();
+	private final Queue_adp_fxt fxt = new Queue_adp_fxt();
 	@Test public void Empty() {
 		boolean pass = true;
 		try {
@@ -50,7 +50,7 @@ public class Queue_adp_tst {
 	}
 }
 class Queue_adp_fxt {
-	private final    Queue_adp queue = new Queue_adp();
+	private final Queue_adp queue = new Queue_adp();
 	public void Exec__enqueue(String s) {queue.Enqueue(s);}
 	public void Test__dequeue(String expd_data, int expd_len) {
 		Gftest.Eq__str(expd_data, (String)queue.Dequeue());

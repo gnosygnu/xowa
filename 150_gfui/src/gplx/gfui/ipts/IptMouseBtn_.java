@@ -23,7 +23,7 @@ public class IptMouseBtn_ {
 	, Tid_x1		= 0x00400000
 	, Tid_x2		= 0x01000000
 	;
-	public static final    IptMouseBtn	// REF: System.Windows.Forms.MouseButtons
+	public static final IptMouseBtn	// REF: System.Windows.Forms.MouseButtons
 	  None		= new IptMouseBtn(Tid_none		, "mouse.none")
 	, Left		= new IptMouseBtn(Tid_left		, "mouse.left")
 	, Right		= new IptMouseBtn(Tid_right		, "mouse.right")

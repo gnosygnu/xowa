@@ -23,5 +23,5 @@ public class Http_send_msg_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_itm
 	}
 
 	public byte[] Key() {return BRIDGE_KEY;}
-	public static final    byte[] BRIDGE_KEY = Bry_.new_a7("send_msg");
+	public static final byte[] BRIDGE_KEY = Bry_.new_a7("send_msg");
 }

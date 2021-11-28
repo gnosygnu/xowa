@@ -17,9 +17,9 @@ package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*; im
 import gplx.core.lists.hashs.*; import gplx.core.primitives.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 class Page_matcher_mgr implements Gfo_invk {
-	private final    Xow_wiki wiki;
+	private final Xow_wiki wiki;
 	public Page_matcher_mgr(Xow_wiki wiki) {this.wiki = wiki;}
-	private final    Hash_adp__int hash = new Hash_adp__int();
+	private final Hash_adp__int hash = new Hash_adp__int();
 	public Page_matcher_wkr Get_by(int ns_id) {
 		Page_matcher_wkr rv = (Page_matcher_wkr)hash.Get_by_or_null(ns_id);
 		if (rv == null) {

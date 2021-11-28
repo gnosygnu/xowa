@@ -18,10 +18,10 @@ import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 public class Xow_find_file_mgr {
-	private final    Xof_repo_itm repo_itm;
-	private final    Xof_url_bldr url_bldr = new Xof_url_bldr();
-	private final    byte[] wiki_domain;
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Xof_repo_itm repo_itm;
+	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
+	private final byte[] wiki_domain;
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Xow_find_file_mgr(Xof_repo_itm repo_itm, String wiki_domain_str) {
 		this.repo_itm = repo_itm;
 		this.wiki_domain = Bry_.new_u8(wiki_domain_str);

@@ -65,10 +65,10 @@ public class XomwLinkRenderer {
 	*/
 //		private boolean runLegacyBeginHook = true;
 
-	private final    XomwHtmlTemp htmlTemp = new XomwHtmlTemp();
-	private final    Xomw_atr_mgr attribs = new Xomw_atr_mgr();
-	private final    List_adp tmp_merge_deleted = List_adp_.New();
-	private final    XomwSanitizer sanitizer;
+	private final XomwHtmlTemp htmlTemp = new XomwHtmlTemp();
+	private final Xomw_atr_mgr attribs = new Xomw_atr_mgr();
+	private final List_adp tmp_merge_deleted = List_adp_.New();
+	private final XomwSanitizer sanitizer;
 //		/**
 //		* @param TitleFormatter $titleFormatter
 //		* @param LinkCache $linkCache
@@ -469,7 +469,7 @@ public class XomwLinkRenderer {
 
 		return Bry_.Empty;
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Bry__classes__extiw = Bry_.new_a7("extiw")
 	, Bry__class__new = Bry_.new_a7("new")
 	, Bry__action__edit = Bry_.new_a7("edit")

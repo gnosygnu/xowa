@@ -46,7 +46,7 @@ class Xomath_check_mgr {
 		, count_total, count_xnde_invalid, count_xnde_w_atrs, count_texvc_invalid, count_texvc_adjusted);
 	}
 
-	private final    byte[] math_lhs_bry = Bry_.new_a7("<math"), math_rhs_bry = Bry_.new_a7("</math>"), nl_repl_bry = Bry_.new_a7("    ");
+	private final byte[] math_lhs_bry = Bry_.new_a7("<math"), math_rhs_bry = Bry_.new_a7("</math>"), nl_repl_bry = Bry_.new_a7("    ");
 	private byte[] Assert_flanking_math_ndes(int page_id, byte[] src) {
 		// assert "<math" at start
 		if (!Bry_.Has_at_bgn(src, math_lhs_bry)) {
@@ -71,10 +71,10 @@ class Xomath_check_mgr {
 		return Bry_.Mid(src, math_lhs_end + 1, src.length - math_rhs_bry.length);
 	}
 
-	private final    Texvc_parser parser = new Texvc_parser();
-	private final    Texvc_checker checker = new Texvc_checker();
-	private final    Texvc_ctx ctx = new Texvc_ctx();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Texvc_parser parser = new Texvc_parser();
+	private final Texvc_checker checker = new Texvc_checker();
+	private final Texvc_ctx ctx = new Texvc_ctx();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private void Check_texvc(int page_id, byte[] src) {
 		try {
 			Texvc_root root = new Texvc_root();

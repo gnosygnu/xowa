@@ -20,7 +20,7 @@ import gplx.xowa.apps.servers.tcp.*;
 import gplx.xowa.apps.servers.http.*; import gplx.xowa.guis.views.*;
 public class Gxw_html_server implements Gxw_html {
 	private Xosrv_socket_wtr wtr; private Gfo_usr_dlg usr_dlg;
-	private final    Js_wtr js_wtr = new Js_wtr();
+	private final Js_wtr js_wtr = new Js_wtr();
 	public Gxw_html_server(Gfo_usr_dlg usr_dlg, Xosrv_socket_wtr wtr) {
 		this.usr_dlg = usr_dlg; this.wtr = wtr;			
 	} 

@@ -83,7 +83,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Id__form			= 61
 	, Id__mark			= 62
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Bry__a			= Bry_.new_a7("a")
 	, Bry__ul			= Bry_.new_a7("ul")
 	, Bry__td			= Bry_.new_a7("td")
@@ -97,15 +97,15 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Bry__img			= Bry_.new_a7("img")
 	;
 
-//		private static final    Gfh_tag_meta[] Ary = new Gfh_tag_meta[Id__ary_max];
-//		private static final    Hash_adp_bry tags_by_bry = Hash_adp_bry.ci_a7();
+//		private static final Gfh_tag_meta[] Ary = new Gfh_tag_meta[Id__ary_max];
+//		private static final Hash_adp_bry tags_by_bry = Hash_adp_bry.ci_a7();
 //		public static Gfh_tag_meta New_tag(int id, String key_str) {
 //			Gfh_tag_meta rv = new Gfh_tag_meta(id, key_str);
 //			Ary[id] = rv;
 //			tags_by_bry.Add_bry_int(rv.Key_bry(), id);
 //			return rv;
 //		}
-	public static final    Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
+	public static final Hash_adp_bry Hash = Hash_adp_bry.ci_a7()
 	.Add_bry_int(Bry__a			, Id__a)
 	.Add_str_int("h1"			, Id__h1)
 	.Add_str_int("h2"			, Id__h2)
@@ -240,7 +240,7 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 			default:				throw Err_.new_unhandled(tid);
 		}
 	}
-	public static final    byte[]
+	public static final byte[]
 	  Br_inl					= Bry_.new_a7("<br/>")
 	, Br_lhs					= Bry_.new_a7("<br>")
 	, Hr_inl					= Bry_.new_a7("<hr/>")
@@ -275,14 +275,14 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Comm_end_str				= "-->"
 	, Anchor_str				= "#"
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Comm_bgn = Bry_.new_a7(Comm_bgn_str), Comm_end = Bry_.new_a7(Comm_end_str)
 	;
-	public static final    int
+	public static final int
 	  Comm_bgn_len = Comm_bgn.length
 	, Comm_end_len = Comm_end.length
 	;
-	public static final    byte[] Rhs_bgn = Bry_.new_a7("</");
+	public static final byte[] Rhs_bgn = Bry_.new_a7("</");
 	public static void Bld_lhs_bgn(Bry_bfr bfr, byte[] tag) {bfr.Add_byte(Byte_ascii.Lt).Add(tag);}						// <tag
 	public static void Bld_lhs_bgn(Bry_bfr bfr, int tag_id) {bfr.Add_byte(Byte_ascii.Lt).Add_str_a7(To_str(tag_id));}   // <tag
 	public static void Bld_lhs_end_nde(Bry_bfr bfr)			{bfr.Add_byte(Byte_ascii.Gt);}								// >

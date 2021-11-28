@@ -24,13 +24,13 @@ class Http_file_utl {
 		Object o = mime_hash.Get_by_mid(ext_bry, bgn, end);
 		return o == null ? Mime_octet_stream : (byte[])o;
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Mime_octet_stream		= Xof_ext_.Mime_type__ary[Xof_ext_.Id_unknown]
 	, Mime_html				= Bry_.new_a7("text/html")
 	, Mime_css				= Bry_.new_a7("text/css")
 	, Mime_js				= Bry_.new_a7("application/javascript")		
 	;
-	private static final    Hash_adp_bry mime_hash = Mime_hash__new();
+	private static final Hash_adp_bry mime_hash = Mime_hash__new();
 	private static Hash_adp_bry Mime_hash__new() {
 		Hash_adp_bry rv = Hash_adp_bry.ci_a7();
 		int len = Xof_ext_.Id__max;

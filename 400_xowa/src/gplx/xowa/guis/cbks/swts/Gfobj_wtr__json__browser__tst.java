@@ -17,7 +17,7 @@ package gplx.xowa.guis.cbks.swts; import gplx.*; import gplx.xowa.*; import gplx
 import org.junit.*; import gplx.core.tests.*;
 import gplx.core.gfobjs.*;
 public class Gfobj_wtr__json__browser__tst {
-	private final    Gfobj_wtr__json__browser__fxt fxt = new Gfobj_wtr__json__browser__fxt();
+	private final Gfobj_wtr__json__browser__fxt fxt = new Gfobj_wtr__json__browser__fxt();
 	@Test  public void Json_proc() {
 		fxt.Test__json_proc 
 		( "proc_name"

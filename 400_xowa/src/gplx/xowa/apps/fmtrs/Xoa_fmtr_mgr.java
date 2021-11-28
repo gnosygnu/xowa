@@ -20,5 +20,5 @@ public class Xoa_fmtr_mgr implements Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_new_grp))		return new Xoa_fmtr_itm(app);
 		else return Gfo_invk_.Rv_unhandled;
-	}	private static final    String Invk_new_grp = "new_grp";
+	}	private static final String Invk_new_grp = "new_grp";
 }

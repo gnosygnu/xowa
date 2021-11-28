@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
 import gplx.core.brys.*; import gplx.core.btries.*;
 public class Dbmeta_parser__idx {
-	private final    Sql_bry_rdr rdr = new Sql_bry_rdr();
-	private final    List_adp tmp_list = List_adp_.New();
+	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
+	private final List_adp tmp_list = List_adp_.New();
 	public Dbmeta_idx_itm Parse(byte[] src) {
 		rdr.Init_by_page(Bry_.Empty, src, src.length);
 		rdr.Skip_ws().Chk_trie_val(trie, Tid__create);
@@ -43,12 +43,12 @@ public class Dbmeta_parser__idx {
 		return new Dbmeta_idx_itm(unique, String_.new_u8(tbl_name), String_.new_u8(idx_name), (Dbmeta_idx_fld[])tmp_list.To_ary_and_clear(Dbmeta_idx_fld.class));
 	}
 	private static final byte Tid__create = 0, Tid__unique = 1, Tid__index = 2, Tid__on = 3;
-	private static final    byte[]
+	private static final byte[]
 	  Bry__create	= Bry_.new_a7("create")
 	, Bry__unique	= Bry_.new_a7("unique")
 	, Bry__index	= Bry_.new_a7("index")
 	, Bry__on		= Bry_.new_a7("on");
-	private static final    Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
+	private static final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Bry__create	, Tid__create)
 	.Add_bry_byte(Bry__unique	, Tid__unique)
 	.Add_bry_byte(Bry__index	, Tid__index)

@@ -19,7 +19,7 @@ import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.users.history.*;
 public class Xoctg_double_itm implements gplx.core.brys.Bfr_arg {
-	private final    List_adp itms = List_adp_.New();
+	private final List_adp itms = List_adp_.New();
 	private Xow_wiki wiki; private Xoh_href_wtr href_wtr; private Xou_history_mgr history_mgr;
 	public void Init_by_wiki(Xow_wiki wiki, Xou_history_mgr history_mgr) {
 		this.wiki = wiki;
@@ -50,7 +50,7 @@ public class Xoctg_double_itm implements gplx.core.brys.Bfr_arg {
 			Fmt__itm.Bld_many(bfr, lnki_cls, lnki_href, lnki_ttl, lnki_text);
 		}
 	}
-	private static final    Bry_fmt Fmt__itm = Bry_fmt.Auto_nl_skip_last
+	private static final Bry_fmt Fmt__itm = Bry_fmt.Auto_nl_skip_last
 	( ""
 	,     "<li>"
 	,       "<a~{lnki_cls} href=\"~{lnki_href}\" title=\"~{lnki_ttl}\">~{lnki_text}</a>"

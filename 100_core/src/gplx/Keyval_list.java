@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 public class Keyval_list {
-	public int				Count() {return list.Count();} private final    List_adp list = List_adp_.New();
+	public int				Count() {return list.Count();} private final List_adp list = List_adp_.New();
 	public void				Clear() {list.Clear();}
 	public Keyval			Get_at(int i) {return (Keyval)list.Get_at(i);}
 	public Keyval_list		Add(String key, Object val) {list.Add(Keyval_.new_(key, val)); return this;}

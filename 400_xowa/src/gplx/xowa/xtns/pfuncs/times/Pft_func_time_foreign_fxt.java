@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 class Pft_func_time_foreign_fxt {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	public void Clear() {
 		fxt.Reset();
 		Datetime_now.Manual_(DateAdp_.new_(2012, 1, 2, 3, 4, 5, 6));

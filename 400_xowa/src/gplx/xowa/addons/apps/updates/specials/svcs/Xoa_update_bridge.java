@@ -34,11 +34,11 @@ public class Xoa_update_bridge implements Bridge_cmd_itm {
 	}
 
 	private static final byte Proc__install = 0, Proc__skip = 1;
-	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("install"						, Proc__install)
 	.Add_str_byte("skip"						, Proc__skip)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("app.updater");
-        public static final    Xoa_update_bridge Prototype = new Xoa_update_bridge(); Xoa_update_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("app.updater");
+        public static final Xoa_update_bridge Prototype = new Xoa_update_bridge(); Xoa_update_bridge() {}
 }

@@ -18,8 +18,8 @@ import gplx.core.threads.*; import gplx.dbs.*; import gplx.dbs.metas.updates.*; 
 import gplx.xowa.files.caches.*;
 import gplx.xowa.users.cfgs.*; import gplx.xowa.users.bmks.*; import gplx.xowa.users.history.*;
 public class Xou_db_mgr {
-	private final    Xoa_app app;
-	private final    Xoud_id_mgr id_mgr;		
+	private final Xoa_app app;
+	private final Xoud_id_mgr id_mgr;		
 	public Xou_db_mgr(Xoa_app app) {
 		this.app = app;
 		this.id_mgr = new Xoud_id_mgr(cfg_mgr);
@@ -27,13 +27,13 @@ public class Xou_db_mgr {
 	}
 	public Db_conn				Conn()		{return conn;} private Db_conn conn;
 	public Xou_db_file			Db_file() {return db_file;} private Xou_db_file db_file;
-	public Xoud_cfg_mgr			Cfg_mgr() {return cfg_mgr;} private final    Xoud_cfg_mgr cfg_mgr = new Xoud_cfg_mgr();
-	public Xoud_site_mgr		Site_mgr() {return site_mgr;} private final    Xoud_site_mgr site_mgr;
-	public Xoud_history_mgr		History_mgr() {return history_mgr;} private final    Xoud_history_mgr history_mgr = new Xoud_history_mgr();
-	public Xoud_bmk_mgr			Bmk_mgr() {return bmk_mgr;} private final    Xoud_bmk_mgr bmk_mgr = new Xoud_bmk_mgr();
+	public Xoud_cfg_mgr			Cfg_mgr() {return cfg_mgr;} private final Xoud_cfg_mgr cfg_mgr = new Xoud_cfg_mgr();
+	public Xoud_site_mgr		Site_mgr() {return site_mgr;} private final Xoud_site_mgr site_mgr;
+	public Xoud_history_mgr		History_mgr() {return history_mgr;} private final Xoud_history_mgr history_mgr = new Xoud_history_mgr();
+	public Xoud_bmk_mgr			Bmk_mgr() {return bmk_mgr;} private final Xoud_bmk_mgr bmk_mgr = new Xoud_bmk_mgr();
 	public Xou_cache_mgr		Cache_mgr() {return cache_mgr;} private Xou_cache_mgr cache_mgr;
 	public Xou_file_itm_finder	File__xfer_itm_finder() {return xfer_itm_finder;} private Xou_file_itm_finder xfer_itm_finder;
-	public Xou_cfg_mgr			Cfg() {return cfg;} private final    Xou_cfg_mgr cfg = new Xou_cfg_mgr();
+	public Xou_cfg_mgr			Cfg() {return cfg;} private final Xou_cfg_mgr cfg = new Xou_cfg_mgr();
 	public void Init_by_app(boolean drd, Io_url db_url) {
 		Db_conn_bldr_data db_conn_bldr = Db_conn_bldr.Instance.Get_or_new(db_url);
 		this.conn = db_conn_bldr.Conn(); boolean created = db_conn_bldr.Created();

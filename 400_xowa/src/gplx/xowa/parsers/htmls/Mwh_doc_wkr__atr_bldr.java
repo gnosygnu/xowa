@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 public class Mwh_doc_wkr__atr_bldr implements Mwh_doc_wkr {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	public Hash_adp_bry Nde_regy() {return null;}
 	public void On_atr_each(Mwh_atr_parser mgr, byte[] src, int nde_tid, boolean valid, boolean repeated, boolean key_exists, byte[] key_bry, byte[] val_bry_manual, int[] data_ary, int itm_idx) {
 		int atr_bgn = data_ary[itm_idx + Mwh_atr_mgr.Idx_atr_bgn];

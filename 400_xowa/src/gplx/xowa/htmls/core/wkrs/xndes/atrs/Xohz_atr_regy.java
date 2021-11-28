@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 public class Xohz_atr_regy {
-	private final    Hash_adp_bry itm_regy = Hash_adp_bry.cs();
-	private final    Hash_adp_bry grp_regy = Hash_adp_bry.cs();
-	private final    List_adp tmp_list = List_adp_.New();
+	private final Hash_adp_bry itm_regy = Hash_adp_bry.cs();
+	private final Hash_adp_bry grp_regy = Hash_adp_bry.cs();
+	private final List_adp tmp_list = List_adp_.New();
 	public Xohz_atr_regy Grps__add(byte[] grp_key, byte[]... sub_keys) {
 		int sub_keys_len = sub_keys.length;
 		for (int i = 0; i < sub_keys_len; ++i) {
@@ -57,5 +57,5 @@ public class Xohz_atr_regy {
 }
 class Xohz_atr_grp {
 	public Xohz_atr_grp(byte[][] subs) {this.subs = subs;}
-	public byte[][] Subs() {return subs;} private final    byte[][] subs;
+	public byte[][] Subs() {return subs;} private final byte[][] subs;
 }

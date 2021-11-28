@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.portal.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.portal.*;
 import org.junit.*; import gplx.xowa.langs.vnts.*;
 public class Vnt_mnu_grp_fmtr_tst {		
-	@Before public void init() {fxt.Clear();} private final    Vnt_mnu_grp_fmtr_fxt fxt = new Vnt_mnu_grp_fmtr_fxt();
+	@Before public void init() {fxt.Clear();} private final Vnt_mnu_grp_fmtr_fxt fxt = new Vnt_mnu_grp_fmtr_fxt();
 	@Test public void Basic() {
 //			fxt.Test_to_str("Earth", "zh-hk", String_.Concat_lines_nl_skip_last
 //			( ""
@@ -38,7 +38,7 @@ public class Vnt_mnu_grp_fmtr_tst {
 	}
 }
 class Vnt_mnu_grp_fmtr_fxt {
-	private final    Xol_vnt_regy mgr = new Xol_vnt_regy();
+	private final Xol_vnt_regy mgr = new Xol_vnt_regy();
 	public void Clear() {
 		this.Init_grp("Choose lang", "zh-hans", "Simplified", "zh-hant", "Traditional", "zh-cn", "China", "zh-hk", "Hong Kong", "zh-mo", "Macau", "zh-sg", "Singapore", "zh-tw", "Taiwan");
 	}

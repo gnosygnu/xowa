@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*;
 public class XophpBool__tst {
-	private final    XophpBool__fxt fxt = new XophpBool__fxt();
+	private final XophpBool__fxt fxt = new XophpBool__fxt();
 	@Test public void is_true() {
 		fxt.Test__is_true_bry(Bool_.N, null);
 		fxt.Test__is_true_str(Bool_.N, null, "", "False", "0", "-0", "0.0", "-0.0");

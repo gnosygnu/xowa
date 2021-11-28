@@ -19,7 +19,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.core.intls.
 import gplx.xowa.users.history.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
 public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private Xow_wiki wiki;
 	private Xoctg_catpage_grp grp;
 	private Uca_ltr_extractor ltr_extractor;
@@ -78,7 +78,7 @@ public abstract class Xoctg_fmt_itm_base implements gplx.core.brys.Bfr_arg {
 		byte[] itm_atr_cls = Xoh_lnki_wtr.Lnki_cls_visited(history_mgr, wiki.Domain_bry(), ttl.Page_txt());	// NOTE: must be ttl.Page_txt() in order to match Xou_history_mgr.Add
 		Fmt__exists.Bld_many(bfr, itm_href, itm_atr_cls, itm_full_ttl, itm_full_ttl, gplx.core.encoders.Hex_utl_.Encode_bry(itm.Sortkey_binary()));
 	}
-	private static final    Bry_fmt
+	private static final Bry_fmt
 	  Fmt__missing = Bry_fmt.Auto_nl_skip_last
 	( ""
 	, "            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #~{itm_id} might be talk/user page\">missing page (~{itm_id})</li>"

@@ -167,7 +167,7 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unit;}
 	@Override public int Eval_idx() {return 10;}
 	public int Seg_multiple() {return seg_multiple;}
-	public byte[] Name() {return name;} private final    byte[] name;
+	public byte[] Name() {return name;} private final byte[] name;
 	public Pxd_itm MakeNew(int ary_idx) {
 		return new Pxd_itm_unit(ary_idx, name, this.Seg_idx(), seg_val);
 	}
@@ -228,7 +228,7 @@ class Pxd_itm_unit extends Pxd_itm_base implements Pxd_itm_prototype {
 }
 class Pxd_itm_ago extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_ago(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_ago;} public static final    byte[] Name_ago = Bry_.new_a7("ago");
+	public byte[] Name() {return Name_ago;} public static final byte[] Name_ago = Bry_.new_a7("ago");
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_ago;}
 	@Override public int Eval_idx() {return 5;}	// set to high priority so it can evaluate before unit_name
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_ago(ary_idx, this.Seg_idx());}
@@ -270,7 +270,7 @@ class Pxd_itm_day_suffix extends Pxd_itm_base implements Pxd_itm_prototype {
 		}
 		return true;
 	}
-	public static final    Pxd_itm_day_suffix Instance = new Pxd_itm_day_suffix(); Pxd_itm_day_suffix() {}
+	public static final Pxd_itm_day_suffix Instance = new Pxd_itm_day_suffix(); Pxd_itm_day_suffix() {}
 }
 class Pxd_itm_day_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_day_relative(int adj, int ary_idx) {Ctor(ary_idx); this.adj = adj;}
@@ -287,7 +287,7 @@ class Pxd_itm_day_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 		return true;
 	}
 
-	public static final    Pxd_itm_day_relative
+	public static final Pxd_itm_day_relative
 	  Today		= new Pxd_itm_day_relative(0)
 	, Tomorrow	= new Pxd_itm_day_relative(1)
 	, Yesterday	= new Pxd_itm_day_relative(-1)
@@ -311,7 +311,7 @@ class Pxd_itm_time_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 		bldr.Seg_set(DateAdp_.SegIdx_frac		, date.Frac());
 		return true;
 	}
-	public static final    Pxd_itm_time_relative
+	public static final Pxd_itm_time_relative
 	  Now		= new Pxd_itm_time_relative()
 	;
 	Pxd_itm_time_relative() {}		
@@ -319,7 +319,7 @@ class Pxd_itm_time_relative extends Pxd_itm_base implements Pxd_itm_prototype {
 class Pxd_itm_unixtime extends Pxd_itm_base implements Pxd_itm_prototype {
 	private long unixtime;
 	public Pxd_itm_unixtime(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_const;} public static final    byte[] Name_const = Bry_.new_a7("@");
+	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_a7("@");
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_unixtime;}
 	@Override public int Eval_idx() {return 5;}	// set to high priority so it can evaluate number early
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_unixtime(ary_idx, this.Seg_idx());}
@@ -342,7 +342,7 @@ class Pxd_itm_unixtime extends Pxd_itm_base implements Pxd_itm_prototype {
 }
 class Pxd_itm_iso8601_t extends Pxd_itm_base implements Pxd_itm_prototype {
 	public Pxd_itm_iso8601_t(int ary_idx, int seg_idx) {Ctor(ary_idx); Seg_idx_(seg_idx);} 
-	public byte[] Name() {return Name_const;} public static final    byte[] Name_const = Bry_.new_a7("T");
+	public byte[] Name() {return Name_const;} public static final byte[] Name_const = Bry_.new_a7("T");
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_iso8601_t;}
 	@Override public int Eval_idx() {return 99;}	// evaluate last
 	public Pxd_itm MakeNew(int ary_idx) {return new Pxd_itm_iso8601_t(ary_idx, this.Seg_idx());}

@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.apps.updates.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
 import gplx.xowa.guis.cbks.*;
 public class Xojs_wkr__replace extends Xojs_wkr__base {
-	private final    Io_url src_dir, trg_dir;
-	private final    Io_url[] src_fils;
+	private final Io_url src_dir, trg_dir;
+	private final Io_url[] src_fils;
 	public Xojs_wkr__replace(Xog_cbk_mgr cbk_mgr, Xog_cbk_trg cbk_trg, String js_cbk, Gfo_invk_cmd done_cbk, Io_url src_dir, Io_url trg_dir) {super(cbk_mgr, cbk_trg, js_cbk, done_cbk, null, "replacing");
 		this.src_dir = src_dir; 
 		this.trg_dir = trg_dir;

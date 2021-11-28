@@ -142,7 +142,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 	, Invk__getSetting             = "getSetting"
 	, Invk__incrementStatsKey      = "incrementStatsKey"
 	;
-	private static final    String[] Proc__names = String_.Ary
+	private static final String[] Proc__names = String_.Ary
 	( Invk__getGlobalSiteId
 	, Invk__getLanguageCode
 	, Invk__formatStatements

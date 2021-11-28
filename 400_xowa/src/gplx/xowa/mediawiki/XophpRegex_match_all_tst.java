@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.core.primitives.*;
 import gplx.langs.regxs.*;
 public class XophpRegex_match_all_tst {
-	private final    XophpRegex_match_all_fxt fxt = new XophpRegex_match_all_fxt();
+	private final XophpRegex_match_all_fxt fxt = new XophpRegex_match_all_fxt();
 	@Test  public void Pattern_order() {
 		fxt.Test__preg_match_all
 			( XophpRegex_.Pattern("<[^>]+>(.*)</[^>]+>", XophpRegex_.MODIFIER_U)
@@ -77,7 +77,7 @@ class XophpRegex_match_all_fxt {
 	}
 }
 class XophpRegex_match_all_expd {
-	public XophpArray Ary() {return ary;} private final    XophpArray ary = XophpArray.New();
+	public XophpArray Ary() {return ary;} private final XophpArray ary = XophpArray.New();
 	public XophpRegex_match_all_expd Add(int idx, Object val) {
 		XophpArray sub = ary.Get_at_ary(idx);
 		if (sub == null) {

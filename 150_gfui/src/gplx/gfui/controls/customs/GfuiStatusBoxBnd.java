@@ -37,7 +37,7 @@ public class GfuiStatusBoxBnd implements Gfo_invk {
 		if		(ctx.Match(k, Invk_ShowTime))			ShowTime();
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String Invk_ShowTime = "ShowTime";
+	}	public static final String Invk_ShowTime = "ShowTime";
 	public static GfuiStatusBoxBnd gft_(GfuiWin owner) {
 		GfuiStatusBoxBnd rv = new GfuiStatusBoxBnd();
 		rv.ctor_GfuiStatusBoxBnd(owner);

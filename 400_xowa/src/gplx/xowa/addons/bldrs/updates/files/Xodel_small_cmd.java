@@ -18,7 +18,7 @@ import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.files.*;
 public class Xodel_small_cmd extends Xob_cmd__base {
 	public Xodel_small_cmd(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
-	private final    int[] ext_max_ary = Xobldr__fsdb_db__delete_small_files_.New_ext_max_ary();
+	private final int[] ext_max_ary = Xobldr__fsdb_db__delete_small_files_.New_ext_max_ary();
 	@Override public void Cmd_run() {
 		wiki.Init_assert();
 		new Xodel_small_mgr().Exec(wiki, ext_max_ary);
@@ -27,7 +27,7 @@ public class Xodel_small_cmd extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "file.deletion_db.small_files";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}
-	public static final    Xob_cmd Prototype = new Xodel_small_cmd(null, null);
+	public static final Xob_cmd Prototype = new Xodel_small_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xodel_small_cmd(bldr, wiki);}
 }
 class Xobldr__fsdb_db__delete_small_files_ {

@@ -18,7 +18,7 @@ import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.domains.*;
 class Xoa_sitelink_itm_wtr implements gplx.core.brys.Bfr_arg {
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	private Xoa_app app; private Xoa_sitelink_grp grp;
 	public void Init_by_app(Xoa_app app) {this.app = app;}
 	public Xoa_sitelink_itm_wtr Fmt__init(Xoa_sitelink_grp grp) {this.grp = grp; return this;}
@@ -53,10 +53,10 @@ class Xoa_sitelink_itm_wtr implements gplx.core.brys.Bfr_arg {
 		}
 	}
 	private static final int td_max = 3;
-	private static final    byte[] tr_bgn = Bry_.new_a7("\n    <tr>");
-	private static final    byte[] td_nil = Bry_.new_a7("\n      <td/>");
-	private static final    byte[] tr_end = Bry_.new_a7("\n    </tr>");
-	private static final    Bry_fmtr td_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
+	private static final byte[] tr_bgn = Bry_.new_a7("\n    <tr>");
+	private static final byte[] td_nil = Bry_.new_a7("\n      <td/>");
+	private static final byte[] tr_end = Bry_.new_a7("\n    </tr>");
+	private static final Bry_fmtr td_fmtr = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( ""
 	, "      <td style='width: 10%; padding-bottom: 5px;'>~{lang_name}</td><td style='width: 20%; padding-bottom: 5px;'><li~{page_badge}><a hreflang=\"~{lang_code}\" title=\"~{pagename_translation}\" href=\"~{lang_href}\">~{pagename_translation}</a></li></td><td style='width: 3%; padding-bottom: 5px;'></td>"
 	), "lang_code", "lang_domain", "lang_name", "lang_href", "pagename_translation", "page_badge");

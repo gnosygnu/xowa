@@ -22,8 +22,8 @@ public class Wbase_claim_quantity_ {
 	, Tid__upperbound							= 2
 	, Tid__lowerbound							= 3
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.val.quantity", 4);
-	public static final    Wbase_enum_itm
+	public static final Wbase_enum_hash Reg = new Wbase_enum_hash("claim.val.quantity", 4);
+	public static final Wbase_enum_itm
 	  Itm__amount					= Reg.Add(Tid__amount			, "amount")
 	, Itm__unit						= Reg.Add(Tid__unit				, "unit")
 	, Itm__upperbound				= Reg.Add(Tid__upperbound		, "upperBound")

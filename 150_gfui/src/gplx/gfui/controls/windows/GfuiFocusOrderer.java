@@ -37,7 +37,7 @@ public class GfuiFocusOrderer {
 		return order;
 	}
 	static GfuiFocusOrderer_cls_x xcomparer = new GfuiFocusOrderer_cls_x(); static GfuiFocusOrderer_cls_y ycomparer = new GfuiFocusOrderer_cls_y();
-	public static final    int NullVal = -1;
+	public static final int NullVal = -1;
 }
 class GfuiFocusOrderer_cls_x implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {

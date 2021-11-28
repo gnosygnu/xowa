@@ -17,7 +17,7 @@ package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.flds.*; import gplx.core.ios.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.xowa.bldrs.sql_dumps.*; import gplx.xowa.wikis.tdbs.bldrs.*;
 public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob_cmd, Gfo_invk {
-	private final    Xosql_dump_parser parser; protected boolean fail = false;
+	private final Xosql_dump_parser parser; protected boolean fail = false;
 	public abstract String Cmd_key();
 	public Xob_sql_dump_base() {
 		this.parser = New_parser();

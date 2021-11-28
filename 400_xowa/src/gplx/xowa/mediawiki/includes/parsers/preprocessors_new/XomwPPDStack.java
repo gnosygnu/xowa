@@ -33,7 +33,7 @@ public class XomwPPDStack {
 	public XomwPPDStackElement elementClass;
 
 	// public static false = false;
-	private final    XomwPPDPart partClass;
+	private final XomwPPDPart partClass;
 
 	public XomwPPDStack(XomwPPDPart partClass) {
 		this.stack = XophpArray.New();

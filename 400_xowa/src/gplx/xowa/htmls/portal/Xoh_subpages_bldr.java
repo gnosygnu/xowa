@@ -20,7 +20,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
-	private final    Bry_bfr html_bfr = Bry_bfr_.Reset(255), path_bfr = Bry_bfr_.Reset(255), subpage_caption_bfr = Bry_bfr_.Reset(255);
+	private final Bry_bfr html_bfr = Bry_bfr_.Reset(255), path_bfr = Bry_bfr_.Reset(255), subpage_caption_bfr = Bry_bfr_.Reset(255);
 	private Xowe_wiki wiki;
 	private byte[][] segs;
 	public byte[] Bld(Xowe_wiki wiki, Xoa_ttl ttl) {
@@ -91,8 +91,8 @@ public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 		}
 		path_bfr.Clear();
 	}
-	private static final    byte[] Delimiter__1st = Bry_.new_a7("&lt; "), Delimiter__nth = Bry_.new_a7("&lrm; | ");
-	private static final    Bry_fmtr
+	private static final byte[] Delimiter__1st = Bry_.new_a7("&lt; "), Delimiter__nth = Bry_.new_a7("&lrm; | ");
+	private static final Bry_fmtr
 	  fmtr_grp = Bry_fmtr.new_(String_.Concat_lines_nl_skip_last
 	( "<span class=\"subpages\">~{itms}"
 	, "</span>"

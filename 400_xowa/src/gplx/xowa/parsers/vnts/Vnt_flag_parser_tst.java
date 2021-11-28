@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.langs.vnts.*;
 public class Vnt_flag_parser_tst {
-	private final    Vnt_flag_parser_fxt fxt = new Vnt_flag_parser_fxt();
+	private final Vnt_flag_parser_fxt fxt = new Vnt_flag_parser_fxt();
 	@Test  public void Basic()					{fxt.Test_parse("D"						, "D");}
 	@Test  public void Multiple()				{fxt.Test_parse("+;S;E"					, "+;S;E");}
 	@Test  public void Ws()					{fxt.Test_parse(" + ; S ; E "			, "+;S;E");}
@@ -40,10 +40,10 @@ public class Vnt_flag_parser_tst {
 	@Test  public void Lang__zap__codes()		{fxt.Test_parse("+;S;zh-hans;"			, "zh-hans");}
 }
 class Vnt_flag_parser_fxt {
-	private final    Vnt_flag_parser parser = new Vnt_flag_parser();
-	private final    Vnt_flag_code_mgr codes = new Vnt_flag_code_mgr(); private final    Vnt_flag_lang_mgr langs = new Vnt_flag_lang_mgr();
-	private final    Xol_vnt_regy vnt_regy = Xol_vnt_regy_fxt.new_chinese();
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Vnt_flag_parser parser = new Vnt_flag_parser();
+	private final Vnt_flag_code_mgr codes = new Vnt_flag_code_mgr(); private final Vnt_flag_lang_mgr langs = new Vnt_flag_lang_mgr();
+	private final Xol_vnt_regy vnt_regy = Xol_vnt_regy_fxt.new_chinese();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public void Test_parse(String raw, String expd) {
 		byte[] src = Bry_.new_u8(raw);			
 		parser.Parse(codes, langs, vnt_regy, src, 0, src.length);

@@ -70,5 +70,5 @@ class XomwPPDStackElement_Hash extends XomwPPDStackElement {
 
 	@Override public XomwPPDStackElement New(XomwPPDPart partClass, String open, String close, XophpArray parts, int count, boolean lineStart, int startPos) {return new XomwPPDStackElement_Hash(partClass, open, close, parts, count, lineStart, startPos);}
 
-	public static final    XomwPPDStackElement_Hash Prototype = new XomwPPDStackElement_Hash(new XomwPPDPart_Hash(""), null, null, null, 0, false, 0);
+	public static final XomwPPDStackElement_Hash Prototype = new XomwPPDStackElement_Hash(new XomwPPDPart_Hash(""), null, null, null, 0, false, 0);
 }

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*;
 public class Xoh_lnki_hzip__site__tst {
-	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
+	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Test  public void Basic() {				// EX: [[wikt:A]]
 		fxt.Test__bicode("~${$3en.wiktionary.org~A~wikt:A~"					, "<a href='/site/en.wiktionary.org/wiki/A' title='wikt:A'>wikt:A</a>");
 	}

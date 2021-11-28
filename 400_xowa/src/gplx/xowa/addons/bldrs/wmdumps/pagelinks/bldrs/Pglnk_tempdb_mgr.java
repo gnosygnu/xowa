@@ -18,17 +18,17 @@ import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.x
 import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs.*;
 class Pglnk_tempdb_mgr {
-	private final    Gfo_usr_dlg usr_dlg;
-	private final    Xow_wiki wiki;
-	private final    Db_conn conn;
-	private final    int row_max;
+	private final Gfo_usr_dlg usr_dlg;
+	private final Xow_wiki wiki;
+	private final Db_conn conn;
+	private final int row_max;
 	private int rows;
 
-	private final    Dbmeta_fld_list dump_flds;
-	private final    String dump_tbl_name = "pagelink_dump", dump_src_id, dump_trg_ns, dump_trg_ttl;
+	private final Dbmeta_fld_list dump_flds;
+	private final String dump_tbl_name = "pagelink_dump", dump_src_id, dump_trg_ns, dump_trg_ttl;
 	private Db_stmt dump_insert;
 
-	private final    String temp_tbl_name = "pagelink_temp";
+	private final String temp_tbl_name = "pagelink_temp";
 
 	public Pglnk_tempdb_mgr(Gfo_usr_dlg usr_dlg, Xow_wiki wiki, int row_max) {
 		// init members

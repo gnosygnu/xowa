@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.vendor.wikimedia.cldr_plural_rule_parser.src; import
 import org.junit.*; import gplx.core.tests.*;
 public class XomwEvaluator_tst {
 	// REF: https://unicode.org/reports/tr35/tr35-numbers.html#Language_Plural_Rules
-	private final    XomwEvaluator_fxt fxt = new XomwEvaluator_fxt();
+	private final XomwEvaluator_fxt fxt = new XomwEvaluator_fxt();
 	@Test public void Rule__n() { // "absolute value of the source number (integer and decimals)."
 		fxt.Init__rule("n = 1");
 		fxt.Test__match__y("1", "-1");
@@ -161,7 +161,7 @@ public class XomwEvaluator_tst {
 	}
 }
 class XomwEvaluator_fxt {
-	private final    XophpArray rules = XophpArray.New();
+	private final XophpArray rules = XophpArray.New();
 	public void Init__rule(String... ary) {
 		rules.Clear();
 		for (String itm : ary)

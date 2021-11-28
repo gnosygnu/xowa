@@ -17,7 +17,7 @@ package gplx.objects.primitives; import gplx.*; import gplx.objects.*;
 import gplx.objects.errs.*;
 public class Byte_ {
 	public static final String Cls_val_name = "byte";
-	public static final    Class<?> Cls_ref_type = Byte.class; 
+	public static final Class<?> Cls_ref_type = Byte.class;
 	public static byte Cast(Object o) {
 		try {
 			return (Byte)o;

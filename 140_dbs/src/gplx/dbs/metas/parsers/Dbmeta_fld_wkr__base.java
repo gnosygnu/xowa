@@ -17,9 +17,9 @@ package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.db
 import gplx.core.brys.*; import gplx.core.btries.*;
 abstract class Dbmeta_fld_wkr__base {
 	private byte[] hook;
-	private final    Btrie_slim_mgr words_trie = Btrie_slim_mgr.ci_a7();
+	private final Btrie_slim_mgr words_trie = Btrie_slim_mgr.ci_a7();
 	private int words_len;
-	@gplx.Virtual public int Tid() {return Tid_other;}
+	public int Tid() {return Tid_other;}
 	public void Ctor(byte[] hook, byte[]... words_ary) {
 		this.hook = hook;
 		this.words_len = words_ary.length;
@@ -29,7 +29,7 @@ abstract class Dbmeta_fld_wkr__base {
 	public void Reg(Btrie_slim_mgr trie) {
 		trie.Add_obj(hook, this);
 	}
-	@gplx.Virtual public void Match(Bry_rdr rdr, Dbmeta_fld_itm fld) {
+	public void Match(Bry_rdr rdr, Dbmeta_fld_itm fld) {
 		int words_len = words_trie.Count();
 		for (int i = 0; i < words_len; ++i) {
 			rdr.Skip_ws();
@@ -44,47 +44,47 @@ class Dbmeta_fld_wkr__end_comma extends Dbmeta_fld_wkr__base {
 	public Dbmeta_fld_wkr__end_comma() {this.Ctor(Hook);}
 	@Override public int Tid() {return Tid_end_comma;}
 	@Override protected void When_match(Dbmeta_fld_itm fld) {}
-	private static final    byte[] Hook = Bry_.new_a7(",");
-        public static final    Dbmeta_fld_wkr__end_comma Instance = new Dbmeta_fld_wkr__end_comma();
+	private static final byte[] Hook = Bry_.new_a7(",");
+        public static final Dbmeta_fld_wkr__end_comma Instance = new Dbmeta_fld_wkr__end_comma();
 }
 class Dbmeta_fld_wkr__end_paren extends Dbmeta_fld_wkr__base {
 	public Dbmeta_fld_wkr__end_paren() {this.Ctor(Hook);}
 	@Override public int Tid() {return Tid_end_paren;}
 	@Override protected void When_match(Dbmeta_fld_itm fld) {}
-	private static final    byte[] Hook = Bry_.new_a7(")");
-        public static final    Dbmeta_fld_wkr__end_paren Instance = new Dbmeta_fld_wkr__end_paren();
+	private static final byte[] Hook = Bry_.new_a7(")");
+        public static final Dbmeta_fld_wkr__end_paren Instance = new Dbmeta_fld_wkr__end_paren();
 }
 class Dbmeta_fld_wkr__nullable_null extends Dbmeta_fld_wkr__base {
 	public Dbmeta_fld_wkr__nullable_null() {this.Ctor(Hook);}
 	@Override protected void When_match(Dbmeta_fld_itm fld) {
 		fld.Nullable_tid_(Dbmeta_fld_itm.Nullable_null);
 	}
-	private static final    byte[] Hook = Bry_.new_a7("null");
-        public static final    Dbmeta_fld_wkr__nullable_null Instance = new Dbmeta_fld_wkr__nullable_null();
+	private static final byte[] Hook = Bry_.new_a7("null");
+        public static final Dbmeta_fld_wkr__nullable_null Instance = new Dbmeta_fld_wkr__nullable_null();
 }
 class Dbmeta_fld_wkr__nullable_not extends Dbmeta_fld_wkr__base {
 	public Dbmeta_fld_wkr__nullable_not() {this.Ctor(Hook, Bry_null);}
 	@Override protected void When_match(Dbmeta_fld_itm fld) {
 		fld.Nullable_tid_(Dbmeta_fld_itm.Nullable_not_null);
 	}
-	private static final    byte[] Hook = Bry_.new_a7("not"), Bry_null = Bry_.new_a7("null");
-        public static final    Dbmeta_fld_wkr__nullable_not Instance = new Dbmeta_fld_wkr__nullable_not();
+	private static final byte[] Hook = Bry_.new_a7("not"), Bry_null = Bry_.new_a7("null");
+        public static final Dbmeta_fld_wkr__nullable_not Instance = new Dbmeta_fld_wkr__nullable_not();
 }
 class Dbmeta_fld_wkr__primary_key extends Dbmeta_fld_wkr__base {
 	public Dbmeta_fld_wkr__primary_key() {this.Ctor(Hook, Bry_key);}
 	@Override protected void When_match(Dbmeta_fld_itm fld) {
 		fld.Primary_y_();
 	}
-	private static final    byte[] Hook = Bry_.new_a7("primary"), Bry_key = Bry_.new_a7("key");
-        public static final    Dbmeta_fld_wkr__primary_key Instance = new Dbmeta_fld_wkr__primary_key();
+	private static final byte[] Hook = Bry_.new_a7("primary"), Bry_key = Bry_.new_a7("key");
+        public static final Dbmeta_fld_wkr__primary_key Instance = new Dbmeta_fld_wkr__primary_key();
 }
 class Dbmeta_fld_wkr__autonumber extends Dbmeta_fld_wkr__base {
 	public Dbmeta_fld_wkr__autonumber() {this.Ctor(Hook);}
 	@Override protected void When_match(Dbmeta_fld_itm fld) {
 		fld.Autonum_y_();
 	}
-	private static final    byte[] Hook = Bry_.new_a7("autoincrement");
-        public static final    Dbmeta_fld_wkr__autonumber Instance = new Dbmeta_fld_wkr__autonumber();
+	private static final byte[] Hook = Bry_.new_a7("autoincrement");
+        public static final Dbmeta_fld_wkr__autonumber Instance = new Dbmeta_fld_wkr__autonumber();
 }
 class Dbmeta_fld_wkr__default extends Dbmeta_fld_wkr__base {
 	public Dbmeta_fld_wkr__default() {this.Ctor(Hook);}
@@ -141,6 +141,6 @@ class Dbmeta_fld_wkr__default extends Dbmeta_fld_wkr__base {
 		return String_.new_a7(src, bgn, end);
 	}
 	@Override protected void When_match(Dbmeta_fld_itm fld) {}
-	private static final    byte[] Hook = Bry_.new_a7("default");
-        public static final    Dbmeta_fld_wkr__default Instance = new Dbmeta_fld_wkr__default();
+	private static final byte[] Hook = Bry_.new_a7("default");
+        public static final Dbmeta_fld_wkr__default Instance = new Dbmeta_fld_wkr__default();
 }

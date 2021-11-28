@@ -32,7 +32,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	}
 	public Gfo_evt_mgr Evt_mgr() {return ev_mgr;} private Gfo_evt_mgr ev_mgr;
 	public Xoae_app App() {return app;} private Xoae_app app;
-	public Xog_win_itm Browser_win() {return browser_win;} private final    Xog_win_itm browser_win;
+	public Xog_win_itm Browser_win() {return browser_win;} private final Xog_win_itm browser_win;
 	public IptCfgRegy Ipt_cfgs() {return ipt_cfgs;} IptCfgRegy ipt_cfgs = new IptCfgRegy();
 	public Xog_bnd_mgr Bnd_mgr() {return bnd_mgr;} private Xog_bnd_mgr bnd_mgr;
 	public Gfui_kit Kit() {return kit;} private Gfui_kit kit = Gfui_kit_.Mem();
@@ -41,8 +41,8 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xog_layout Layout() {return layout;} private Xog_layout layout = new Xog_layout();
 	public Xog_html_mgr Html_mgr() {return html_mgr;} private Xog_html_mgr html_mgr;
 	public Xog_menu_mgr Menu_mgr() {return menu_mgr;} private Xog_menu_mgr menu_mgr;
-	public Xog_url_macro_mgr Url_macro_mgr() {return url_macro_mgr;} private final    Xog_url_macro_mgr url_macro_mgr = new Xog_url_macro_mgr();
-	public Xog_nightmode_mgr Nightmode_mgr() {return nightmode_mgr;} private final    Xog_nightmode_mgr nightmode_mgr = new Xog_nightmode_mgr();
+	public Xog_url_macro_mgr Url_macro_mgr() {return url_macro_mgr;} private final Xog_url_macro_mgr url_macro_mgr = new Xog_url_macro_mgr();
+	public Xog_nightmode_mgr Nightmode_mgr() {return nightmode_mgr;} private final Xog_nightmode_mgr nightmode_mgr = new Xog_nightmode_mgr();
 	public void Show_prog() {
 		// get rects for positioning
 		RectAdp statusbar_rect = browser_win.Statusbar_grp().Rect();

@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*;
 import gplx.core.lists.hashs.*;
 class Xoctg_pagebox_hash {
-	private final    Ordered_hash hash_by_ttl = Ordered_hash_.New_bry();
-	private final    Hash_adp__int hash_by_id = new Hash_adp__int();
+	private final Ordered_hash hash_by_ttl = Ordered_hash_.New_bry();
+	private final Hash_adp__int hash_by_id = new Hash_adp__int();
 	public int Len() {return hash_by_ttl.Len();}
 	public Xoctg_pagebox_itm Get_at(int i) {return (Xoctg_pagebox_itm)hash_by_ttl.Get_at(i);}
 	public Xoctg_pagebox_itm Get_by_ttl(byte[] full_db) {return (Xoctg_pagebox_itm)hash_by_ttl.Get_by(full_db);}
@@ -50,5 +50,5 @@ class Xoctg_pagebox_hash_sorter implements gplx.core.lists.ComparerAble {
 		Xoctg_pagebox_itm rhs = (Xoctg_pagebox_itm)rhsObj;
 		return -Int_.Compare(lhs.Count__all(), rhs.Count__all());
 	}
-	public static final    Xoctg_pagebox_hash_sorter Sorter = new Xoctg_pagebox_hash_sorter(); Xoctg_pagebox_hash_sorter() {}
+	public static final Xoctg_pagebox_hash_sorter Sorter = new Xoctg_pagebox_hash_sorter(); Xoctg_pagebox_hash_sorter() {}
 }

@@ -20,8 +20,8 @@ public class Wbase_claim_value_type_ {
 	, Tid__value								=  1
 	, Tid__somevalue							=  2
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("claim.value_type", 3);
-	public static final    Wbase_enum_itm
+	public static final Wbase_enum_hash Reg = new Wbase_enum_hash("claim.value_type", 3);
+	public static final Wbase_enum_itm
 	  Itm__novalue					= Reg.Add(Tid__novalue			, "novalue")
 	, Itm__value					= Reg.Add(Tid__value			, "value")
 	, Itm__somevalue				= Reg.Add(Tid__somevalue		, "somevalue")

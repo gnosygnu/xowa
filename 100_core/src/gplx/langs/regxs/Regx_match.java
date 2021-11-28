@@ -21,13 +21,13 @@ public class Regx_match {
 		this.find_end = find_end;
 		this.groups = groups;
 	}
-	public boolean Rslt() {return rslt;} private final    boolean rslt;
+	public boolean Rslt() {return rslt;} private final boolean rslt;
 	public boolean Rslt_none() {return !rslt;}	// NOTE: was "|| find_end - find_bgn == 0"; DATE:2013-04-11; DATE:2014-09-02
-	public int Find_bgn() {return find_bgn;} private final    int find_bgn;
-	public int Find_end() {return find_end;} private final    int find_end;
+	public int Find_bgn() {return find_bgn;} private final int find_bgn;
+	public int Find_end() {return find_end;} private final int find_end;
 	public int Find_len() {return find_end - find_bgn;}
 	public String Find_str(String s) {return String_.Mid(s, find_bgn, find_end);}
-	public Regx_group[] Groups() {return groups;} private final    Regx_group[] groups;
+	public Regx_group[] Groups() {return groups;} private final Regx_group[] groups;
 
-	public static final    Regx_match[] Ary_empty = new Regx_match[0];
+	public static final Regx_match[] Ary_empty = new Regx_match[0];
 }

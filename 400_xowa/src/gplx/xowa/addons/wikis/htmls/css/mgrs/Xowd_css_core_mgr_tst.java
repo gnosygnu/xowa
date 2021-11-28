@@ -59,7 +59,7 @@ public class Xowd_css_core_mgr_tst {
 	}
 }
 class Xowd_css_core_mgr_fxt {
-	private final    Bry_bfr bfr = Bry_bfr_.Reset(32);
+	private final Bry_bfr bfr = Bry_bfr_.Reset(32);
 	private Xowd_css_core_tbl core_tbl; private Xowd_css_file_tbl file_tbl;
 	public void Clear() {
 		Datetime_now.Manual_y_();

@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 public class XophpStdClass {
-	private final    List_adp list = List_adp_.New();
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final List_adp list = List_adp_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public int Len() {return list.Len();}
 	public boolean Has(String key) {return hash.Has(key);}
 	public void Add_at_as_itm(XophpStdClass itm) {

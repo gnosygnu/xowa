@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 public class Xou_user_mgr implements Gfo_invk {
-	private final    Ordered_hash regy = Ordered_hash_.New();
-	private final    Xoae_app app;
+	private final Ordered_hash regy = Ordered_hash_.New();
+	private final Xoae_app app;
 	public Xou_user_mgr(Xoae_app app, Xoue_user user) {this.app = app; this.Add(user);}
 	public void Add(Xoue_user itm) {regy.Add(itm.Key(), itm);}
 	private Xoue_user GetByKey(String key) {return (Xoue_user)regy.Get_by(key);}

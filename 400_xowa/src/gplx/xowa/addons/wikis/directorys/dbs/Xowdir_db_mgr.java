@@ -20,5 +20,5 @@ public class Xowdir_db_mgr {
 		tbl__wiki = new Xowdir_wiki_tbl(conn);
 		conn.Meta_tbl_assert(tbl__wiki);
 	}
-	public Xowdir_wiki_tbl Tbl__wiki() {return tbl__wiki;} private final    Xowdir_wiki_tbl tbl__wiki;
+	public Xowdir_wiki_tbl Tbl__wiki() {return tbl__wiki;} private final Xowdir_wiki_tbl tbl__wiki;
 }

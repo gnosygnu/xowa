@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
 import org.junit.*;
-import gplx.core.criterias.*; import gplx.dbs.sqls.*;
+import gplx.core.criterias.*;
 public class Sql_qry_wtr__ansi__tst {
-	Sql_qry_wtr sqlWtr = Sql_qry_wtr_.New__basic();
+	SqlQryWtr sqlWtr = SqlQryWtrUtl.NewBasic();
 	@Test public void Insert() {
 		tst_XtoSql
 			(	Db_qry_.insert_("people").Val_int("id", 1).Val_str("name", "me")
@@ -93,5 +93,5 @@ public class Sql_qry_wtr__ansi__tst {
 			);
 	}
 	void tst_XtoSql(Db_qry cmd, String expd)				{tst_XtoSql(cmd, expd, false);}
-	void tst_XtoSql(Db_qry cmd, String expd, boolean prepare)	{Tfds.Eq(expd, sqlWtr.To_sql_str(cmd, prepare));}
+	void tst_XtoSql(Db_qry cmd, String expd, boolean prepare)	{Tfds.Eq(expd, sqlWtr.ToSqlStr(cmd, prepare));}
 }

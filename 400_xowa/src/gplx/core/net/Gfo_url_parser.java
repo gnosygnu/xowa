@@ -18,10 +18,10 @@ import gplx.core.btries.*;
 import gplx.core.net.qargs.*;
 import gplx.langs.htmls.encoders.*;
 public class Gfo_url_parser {
-	private final    Btrie_slim_mgr protocols = Btrie_slim_mgr.ci_a7();	// ASCII:url_protocol; EX:"http:", "ftp:", etc
-	private final    Btrie_rv trv = new Btrie_rv();
-	private final    List_adp segs_list = List_adp_.New(), qargs_list = List_adp_.New();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(500);
+	private final Btrie_slim_mgr protocols = Btrie_slim_mgr.ci_a7();	// ASCII:url_protocol; EX:"http:", "ftp:", etc
+	private final Btrie_rv trv = new Btrie_rv();
+	private final List_adp segs_list = List_adp_.New(), qargs_list = List_adp_.New();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(500);
 	public Gfo_url_parser() {
 		Init_protocols(Gfo_protocol_itm.Ary());
 		Init_protocol_itm(Gfo_protocol_itm.Bry_relative, Gfo_protocol_itm.Tid_relative_1);
@@ -180,5 +180,5 @@ public class Gfo_url_parser {
 		return encoded ? Gfo_url_encoder_.Xourl.Decode(tmp_bfr, Bool_.N, src, bgn, end).To_bry_and_clear() : Bry_.Mid(src, bgn, end);
 	}
 
-	public static final    byte[] Bry_double_slash = new byte[] {Byte_ascii.Slash, Byte_ascii.Slash};
+	public static final byte[] Bry_double_slash = new byte[] {Byte_ascii.Slash, Byte_ascii.Slash};
 }

@@ -49,7 +49,7 @@ class GfmlPragmaDefault implements GfmlPragma {
 		return makr.Xto_bry();
 	}
 	public static GfmlPragmaDefault new_() {return new GfmlPragmaDefault();} GfmlPragmaDefault() {}
-	public static final    GfmlTkn Default_none = GfmlTkn_.raw_("DEFAULT NONE");
+	public static final GfmlTkn Default_none = GfmlTkn_.raw_("DEFAULT NONE");
 }
 class GfmlDefaultItem {
 	public String TypeKey() {return typeKey;} private String typeKey;

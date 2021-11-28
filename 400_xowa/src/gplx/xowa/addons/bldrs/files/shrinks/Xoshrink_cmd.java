@@ -23,6 +23,6 @@ public class Xoshrink_cmd extends Xob_cmd__base {
 	}
 
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}  private static final String BLDR_CMD_KEY = "fsdb.shrink";
-	public static final    Xob_cmd Prototype = new Xoshrink_cmd(null, null);
+	public static final Xob_cmd Prototype = new Xoshrink_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xoshrink_cmd(bldr, wiki);}
 }

@@ -25,9 +25,9 @@ import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
 
 public class Xow_page_cache {
-	private final    Object thread_lock = new Object(); // NOTE: thread-safety needed for xomp since one page-cache is shared across all wkrs
-	private final    Xowe_wiki wiki;
-	private final    Lru_cache cache;
+	private final Object thread_lock = new Object(); // NOTE: thread-safety needed for xomp since one page-cache is shared across all wkrs
+	private final Xowe_wiki wiki;
+	private final Lru_cache cache;
 	private long cache_tries = 0;
 	private long cache_misses = 0;
 	public Xow_page_cache(Xowe_wiki wiki) {
@@ -35,7 +35,7 @@ public class Xow_page_cache {
 		this.cache_key = "xowa.app.page_cache.'" + wiki.Domain_str() + "'." + this.hashCode();
 		this.cache = new Lru_cache(Bool_.Y, cache_key, 8 * Io_mgr.Len_mb, 16 * Io_mgr.Len_mb);
 	}
-	public String Cache_key() {return cache_key;} private final    String cache_key;
+	public String Cache_key() {return cache_key;} private final String cache_key;
 	public void Load_wkr_(Xow_page_cache_wkr v) {this.load_wkr = v;} private Xow_page_cache_wkr load_wkr;
 	public void Min_max_(long min, long max) {cache.Min_max_(min, max);}
 

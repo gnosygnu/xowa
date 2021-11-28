@@ -28,7 +28,7 @@ import gplx.xowa.addons.wikis.searchs.gui.urlbars.Srch_urlbar_mgr;
 import gplx.xowa.addons.wikis.searchs.specials.Srch_special_cfg;
 
 public class Xoax_addon_mgr {
-	private final    Ordered_hash hash = Ordered_hash_.New(); // LOCK: must synchronized else two search tabs will fail on startup
+	private final Ordered_hash hash = Ordered_hash_.New(); // LOCK: must synchronized else two search tabs will fail on startup
 	public Xoax_addon_itm	Itms__get_or_null(String key) {synchronized (hash) {return (Xoax_addon_itm)hash.Get_by(key);}}
 	public void				Itms__add_many(Xoax_addon_itm... ary) {
 		for (Xoax_addon_itm itm : ary)
@@ -42,9 +42,9 @@ public class Xoax_addon_mgr {
 		}
 	}
 	// HACK: should make separate generic app-level container
-	public Srch_urlbar_mgr Itms__search__urlbar()	{return itms__search__urlbar;} private final    Srch_urlbar_mgr itms__search__urlbar = new Srch_urlbar_mgr();
-	public Srch_htmlbar_mgr Itms__search__htmlbar()	{return itms__search__htmlbar;} private final    Srch_htmlbar_mgr itms__search__htmlbar = new Srch_htmlbar_mgr();
-	public Srch_special_cfg Itms__search__special()	{return itms__search__special;} private final    Srch_special_cfg itms__search__special = new Srch_special_cfg();
+	public Srch_urlbar_mgr Itms__search__urlbar()	{return itms__search__urlbar;} private final Srch_urlbar_mgr itms__search__urlbar = new Srch_urlbar_mgr();
+	public Srch_htmlbar_mgr Itms__search__htmlbar()	{return itms__search__htmlbar;} private final Srch_htmlbar_mgr itms__search__htmlbar = new Srch_htmlbar_mgr();
+	public Srch_special_cfg Itms__search__special()	{return itms__search__special;} private final Srch_special_cfg itms__search__special = new Srch_special_cfg();
 	public void Init_by_kit(Xoae_app app, gplx.gfui.kits.core.Gfui_kit kit) {
 		itms__search__urlbar.Init_by_kit(app, kit);
 		itms__search__htmlbar.Init_by_kit(app, kit);
@@ -152,5 +152,5 @@ public class Xoax_addon_mgr {
 			itm.Init_addon_by_wiki(wiki);
 		}
 	}
-	private final    List_adp init_list = List_adp_.New();
+	private final List_adp init_list = List_adp_.New();
 }

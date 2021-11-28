@@ -23,8 +23,8 @@ class Xog_bnd_wkr__null implements Xog_bnd_wkr {
 }
 class Xog_bnd_temp implements Gfo_invk {
 	private Xoae_app app;
-	private final    Ordered_hash regy = Ordered_hash_.New();
-	private final    Xog_bnd_wkr bnd_wkr = new Xog_bnd_wkr__null();
+	private final Ordered_hash regy = Ordered_hash_.New();
+	private final Xog_bnd_wkr bnd_wkr = new Xog_bnd_wkr__null();
 	private Xog_bnd_box[] boxs = Xog_bnd_box_.Ary();
 	public void Init_by_app(Xoae_app app) {
 		this.app = app;
@@ -56,8 +56,8 @@ class Xog_bnd_cfg_itm {
 		this.box = box;
 		this.ipt = ipt;
 	}
-	public String Box() {return box;} private final    String box;
-	public String Ipt() {return ipt;} private final    String ipt;
+	public String Box() {return box;} private final String box;
+	public String Ipt() {return ipt;} private final String ipt;
 	public static Xog_bnd_cfg_itm Parse(String s) {
 		String[] parts = String_.Split(s, "|");
 		return new Xog_bnd_cfg_itm(parts[0], parts[1]);

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
 public class Texvc_regy_tkn {
 	private int[] ary = Int_ary_.Empty; private int ary_max; private int itms_len;
-	private final    Texvc_root root; private Texvc_tkn_mkr tkn_mkr;
+	private final Texvc_root root; private Texvc_tkn_mkr tkn_mkr;
 	public int Len() {return itms_len;}
 	public Texvc_regy_tkn(Texvc_root root) {
 		this.root = root;

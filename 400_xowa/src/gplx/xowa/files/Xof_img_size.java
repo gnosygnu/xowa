@@ -133,7 +133,7 @@ public class Xof_img_size {
 	}
 	public static final int Null = -1;
 	public static final int Thumb_width_img = 220, Thumb_width_ogv = 220;
-	public static final    double Upright_null = -1, Upright_default_marker = 0; // REF:MW: if ( isset( $fp['upright'] ) && $fp['upright'] == 0 )
+	public static final double Upright_null = -1, Upright_default_marker = 0; // REF:MW: if ( isset( $fp['upright'] ) && $fp['upright'] == 0 )
 	public static final int Size__neg1 = -1, Size_null = 0;	// Size_null = 0, b/c either imageMagick / inkscape fails when -1 is passed
 	public static final int Size__same_as_orig = -1;
 	private static final int Svg_max_width = 2048;

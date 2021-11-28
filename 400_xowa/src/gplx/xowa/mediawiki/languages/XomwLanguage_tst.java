@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.mediawiki.includes.cache.localisation.*;
 public class XomwLanguage_tst {
-	private final    XomwLanguage_fxt fxt = new XomwLanguage_fxt();
+	private final XomwLanguage_fxt fxt = new XomwLanguage_fxt();
 	@Test public void Commafy_standard() {
 		// basic
 		fxt.Test_commafy("1"              , "1");

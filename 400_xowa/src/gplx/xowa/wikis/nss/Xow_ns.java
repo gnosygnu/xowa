@@ -103,5 +103,5 @@ public class Xow_ns implements Gfo_invk {
 		return this;
 	}	private static final String Invk_subpages_enabled_ = "subpages_enabled_", Invk_id = "id", Invk_name_txt = "name_txt", Invk_name_ui = "name_ui";
 
-	private static final    Xoa_url_encoder url_encoder = new Xoa_url_encoder();
+	private static final Xoa_url_encoder url_encoder = new Xoa_url_encoder();
 }

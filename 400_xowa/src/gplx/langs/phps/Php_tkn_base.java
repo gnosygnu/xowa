@@ -52,9 +52,9 @@ class Php_tkn_quote extends Php_tkn_base {
 	public byte[] Quote_text(Php_quote_parser quote_parser, byte[] src) {
 		return quote_parser.Parse(src, this.Src_bgn() + 1, this.Src_end() - 1);
 	}
-	public static final    byte Tid_null = 0, Tid_mult = 1, Tid_slash = 2, Tid_hash = 3;
+	public static final byte Tid_null = 0, Tid_mult = 1, Tid_slash = 2, Tid_hash = 3;
 }
 class Php_tkn_declaration extends Php_tkn_base {
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_declaration;}
-	public static final    Php_tkn_declaration Instance = new Php_tkn_declaration();	
+	public static final Php_tkn_declaration Instance = new Php_tkn_declaration();
 }

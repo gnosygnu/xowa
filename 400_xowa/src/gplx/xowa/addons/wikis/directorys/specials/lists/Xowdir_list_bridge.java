@@ -33,10 +33,10 @@ public class Xowdir_list_bridge implements Bridge_cmd_itm {
 	}
 
 	private static final byte Proc__import_wiki = 0;
-	private static final    Hash_adp_bry proc_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry proc_hash = Hash_adp_bry.cs()
 	.Add_str_byte("import_wiki"					, Proc__import_wiki)
 	;
 
-	public byte[] Key() {return BRIDGE_KEY;} public static final    byte[] BRIDGE_KEY = Bry_.new_a7("wiki.directory.list");
-        public static final    Xowdir_list_bridge Prototype = new Xowdir_list_bridge(); Xowdir_list_bridge() {}
+	public byte[] Key() {return BRIDGE_KEY;} public static final byte[] BRIDGE_KEY = Bry_.new_a7("wiki.directory.list");
+        public static final Xowdir_list_bridge Prototype = new Xowdir_list_bridge(); Xowdir_list_bridge() {}
 }

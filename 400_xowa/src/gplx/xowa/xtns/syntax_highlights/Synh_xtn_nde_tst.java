@@ -20,7 +20,7 @@ import gplx.xowa.Xop_fxt;
 import org.junit.Test;
 
 public class Synh_xtn_nde_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Test  public void Basic() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight>abc</syntaxHighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">abc</pre></div>");
 	}

@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.wmdumps.*;
 import gplx.dbs.*;
 public class Imglnk_tmp_tbl implements Db_tbl {
-	private final    String tbl_name = "imglnk_tmp"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld__page_id, fld__img_name;
-	private final    Db_conn conn;
+	private final String tbl_name = "imglnk_tmp"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld__page_id, fld__img_name;
+	private final Db_conn conn;
 	private Db_stmt stmt__insert;
 	public Imglnk_tmp_tbl(Db_conn conn) {
 		this.conn = conn;

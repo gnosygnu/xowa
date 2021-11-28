@@ -18,12 +18,12 @@ import gplx.core.gfobjs.*;
 import gplx.xowa.addons.bldrs.centrals.cmds.*;
 public class Xobc_step_itm {
 	private int cmd_idx = 0;
-	private final    Xobc_cmd_itm[] cmds;
+	private final Xobc_cmd_itm[] cmds;
 	public Xobc_step_itm(int step_id, int step_seqn, Xobc_cmd_itm[] cmds) {
 		this.step_id = step_id; this.step_seqn = step_seqn; this.cmds = cmds;
 	}
-	public int					Step_id() {return step_id;} private final    int step_id;
-	public int					Step_seqn() {return step_seqn;} private final    int step_seqn;
+	public int					Step_id() {return step_id;} private final int step_id;
+	public int					Step_seqn() {return step_seqn;} private final int step_seqn;
 	public String				Step_name() {return step_name;} private String step_name;
 	public Xobc_cmd_itm			Cmd() {return cmds[cmd_idx];}
 	public Xobc_step_itm		Cmd_idx_(int v) {cmd_idx = v; return this;}

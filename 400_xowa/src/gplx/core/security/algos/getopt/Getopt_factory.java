@@ -29,5 +29,5 @@ public class Getopt_factory implements Hash_algo_factory {
 	public static String
 	  Key__fnv132 = "fnv132", Key__fnv164 = "fnv164", Key__fnv1a32 = "fnv1a32", Key__fnv1a64 = "fnv1a64"
 	;
-	public static final    Getopt_factory Instance = new Getopt_factory(); Getopt_factory() {}
+	public static final Getopt_factory Instance = new Getopt_factory(); Getopt_factory() {}
 }

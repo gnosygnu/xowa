@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.htmls.css.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.htmls.*; import gplx.xowa.addons.wikis.htmls.css.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*;
 public class Css_db_mgr {
-	private final    Xow_wiki wiki;
+	private final Xow_wiki wiki;
 	public Css_db_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
 	}

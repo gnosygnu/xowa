@@ -18,5 +18,5 @@ public class Split_ns_itm {
 	public Split_ns_itm(int ns_id) {
 		this.ns_id = ns_id;
 	}
-	public int Ns_id() {return ns_id;} private final    int ns_id;
+	public int Ns_id() {return ns_id;} private final int ns_id;
 }

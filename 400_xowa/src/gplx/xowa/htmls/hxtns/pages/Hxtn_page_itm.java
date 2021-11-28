@@ -20,7 +20,7 @@ class Hxtn_page_itm {
 		this.wkr_id = wkr_id;
 		this.data_id = data_id;
 	}
-	public int Page_id() {return page_id;} private final    int page_id;
-	public int Wkr_id() {return wkr_id;} private final    int wkr_id;
-	public int Data_id() {return data_id;} private final    int data_id;
+	public int Page_id() {return page_id;} private final int page_id;
+	public int Wkr_id() {return wkr_id;} private final int wkr_id;
+	public int Data_id() {return data_id;} private final int data_id;
 }

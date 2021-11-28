@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.uniqs.*;
 public class Xoa_parser_mgr {		
-	private final    Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
-	public Xop_tkn_mkr			Tkn_mkr()		{return tkn_mkr;}		private final    Xop_tkn_mkr tkn_mkr = new Xop_tkn_mkr();
-	public Xop_uniq_mgr			Core__uniq_mgr() {return core__uniq_mgr;} private final    Xop_uniq_mgr core__uniq_mgr = new Xop_uniq_mgr();
-	public Mwh_atr_parser		Xnde__atr_parser() {return atr_parser;} private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();
+	private final Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
+	public Xop_tkn_mkr			Tkn_mkr()		{return tkn_mkr;}		private final Xop_tkn_mkr tkn_mkr = new Xop_tkn_mkr();
+	public Xop_uniq_mgr			Core__uniq_mgr() {return core__uniq_mgr;} private final Xop_uniq_mgr core__uniq_mgr = new Xop_uniq_mgr();
+	public Mwh_atr_parser		Xnde__atr_parser() {return atr_parser;} private final Mwh_atr_parser atr_parser = new Mwh_atr_parser();
 	public Mwh_atr_itm[]		Xnde__parse_atrs(byte[] src, int src_bgn, int src_end) {
 		synchronized (atr_bldr) {// LOCK:app-level; DATE:2016-07-06
 			//if (src_bgn < src_end) {	// CHART

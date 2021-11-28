@@ -17,8 +17,8 @@ package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*;
 public abstract class Json_parser__itm__base {
 	protected String context;
-	protected final    Hash_adp_bry hash = Hash_adp_bry.cs();
-	protected final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+	protected final Hash_adp_bry hash = Hash_adp_bry.cs();
+	protected final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	protected String[] keys;
 	protected Json_kv[] atrs;
 	protected Json_itm cur_itm;

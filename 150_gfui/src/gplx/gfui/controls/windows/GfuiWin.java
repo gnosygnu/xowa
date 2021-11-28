@@ -144,7 +144,7 @@ public class GfuiWin extends GfuiElemBase {
 			return (rv == Gfo_invk_cmd_mgr.Unhandled) ? super.Invk(ctx, ikey, k, m) : rv;
 		}
 		return this;
-	}	public static final    String Invk_Show = "Show", Invk_Hide = "Hide", Invk_Close = "Close", Invk_Quit = "Quit", Invk_Minimize = "Minimize"
+	}	public static final String Invk_Show = "Show", Invk_Hide = "Hide", Invk_Close = "Close", Invk_Quit = "Quit", Invk_Minimize = "Minimize"
 			, Invk_Pin_toggle = "Pin_toggle", Invk_Zorder_front = "Zorder_front", Invk_ShowFocusOwner = "ShowFocusOwner"
 			, Evt_VisibleChanged = "VisibleChanged", Evt_Opened = "Opened_evt", Evt_Quited = "Quited_evt"
 			, StopAppByAltF4_evt = "StopAppByAltF4_evt";

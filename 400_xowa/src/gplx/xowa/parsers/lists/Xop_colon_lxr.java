@@ -35,5 +35,5 @@ public class Xop_colon_lxr implements Xop_lxr {
 		ctx.Subs_add(root, tkn_mkr.Colon(bgn_pos, cur_pos));
 		return cur_pos;
 	}
-	public static final    Xop_colon_lxr Instance = new Xop_colon_lxr();
+	public static final Xop_colon_lxr Instance = new Xop_colon_lxr();
 }

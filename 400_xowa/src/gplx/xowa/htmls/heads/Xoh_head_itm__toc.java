@@ -29,13 +29,13 @@ public class Xoh_head_itm__toc extends Xoh_head_itm__base {
 //			wtr.Write_js_line(Xoh_head_itm__popups.Mw_init);
 //			wtr.Write_js_tail_load_lib(app.Fsys_mgr().Bin_any_dir().GenSubFil_nest("xowa", "html", "modules", "mw.toc", "mw.toc.js"));
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Key_exists				= Bry_.new_a7("toc-enabled")
 	, Key_collapsed				= Bry_.new_a7("mw_hidetoc")
 	, Val_collapsed_y			= Bry_.new_a7("1")
 	, Val_collapsed_n			= Bry_.new_a7("0")
 	;
-	public static final    byte[] 
+	public static final byte[]
 	  Key_showtoc				= Bry_.new_a7("showtoc")
 	, Key_hidetoc				= Bry_.new_a7("hidetoc")
 	;

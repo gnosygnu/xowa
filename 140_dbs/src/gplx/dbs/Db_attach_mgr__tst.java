@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs; import gplx.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.dbs.qrys.*;
 public class Db_attach_mgr__tst {
-	private final    Db_attach_mgr__fxt fxt = new Db_attach_mgr__fxt();
+	private final Db_attach_mgr__fxt fxt = new Db_attach_mgr__fxt();
 	@Test public void Basic() {
 		Db_qry__select_cmd qry = Db_qry_.select_()
 			.Cols_w_tbl_("t1", "fld_1")

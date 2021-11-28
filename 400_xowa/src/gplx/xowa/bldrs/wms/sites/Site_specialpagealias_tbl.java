@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
 import gplx.dbs.*;
 class Site_specialpagealias_tbl implements Db_tbl {
-	private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_site_abrv, fld_realname, fld_aliases;
-	private final    Db_conn conn;
+	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_site_abrv, fld_realname, fld_aliases;
+	private final Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
 	public Site_specialpagealias_tbl(Db_conn conn) {
 		this.conn = conn;

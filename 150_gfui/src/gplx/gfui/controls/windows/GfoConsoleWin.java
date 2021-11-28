@@ -110,9 +110,9 @@ public class GfoConsoleWin implements Gfo_invk, UsrMsgWkr {
 		if		(ctx.Match(k, Invk_Show))				Show();
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String Invk_Show	= "Show"
+	}	public static final String Invk_Show	= "Show"
 			;
-	public static final    GfoConsoleWin Instance = new GfoConsoleWin(); GfoConsoleWin() {}
+	public static final GfoConsoleWin Instance = new GfoConsoleWin(); GfoConsoleWin() {}
 }
 class GfoConsoleWinCmds implements Gfo_invk {
 	GfuiWin win; GfuiTextBox consoleFilBox, consoleBox, statusBox, resultBox;
@@ -227,7 +227,7 @@ class GfoConsoleWinCmds implements Gfo_invk {
 		}
 		else return win.Invk(ctx, ikey, k, m);
 		return this;
-	}	public static final    String Invk_Exec = "Exec", Invk_Hide	= "Hide", Invk_Save	= "Save", Invk_Load	= "Load", Invk_Help = "Help", Invk_Clear = "Clear"
+	}	public static final String Invk_Exec = "Exec", Invk_Hide	= "Hide", Invk_Save	= "Save", Invk_Load	= "Load", Invk_Help = "Help", Invk_Clear = "Clear"
 			, Invk_X_ = "X_", Invk_Y_ = "Y_", Invk_Width_ = "Width_", Invk_Height_ = "Height_", Invk_Enabled_ = "Enabled_", Invk_SaveUrl_ = "SaveUrl_"
 			;
 	GfoConsoleWin owner;

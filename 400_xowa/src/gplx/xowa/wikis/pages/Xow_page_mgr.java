@@ -19,7 +19,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.
 import gplx.xowa.guis.views.*;	import gplx.xowa.parsers.utils.*;
 import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.redirects.*;
 public class Xow_page_mgr implements Gfo_invk {
-	private final    Xowe_wiki wiki;
+	private final Xowe_wiki wiki;
 	public Xow_page_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
 	public Xoae_page Load_page_by_ttl			(Xoa_ttl ttl)	{return Load_page(ttl, Bool_.N);}
 	public Xoae_page Load_page_by_ttl_for_msg	(Xoa_ttl ttl)	{return Load_page(ttl, Bool_.Y);}

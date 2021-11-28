@@ -34,9 +34,9 @@ public class Xows_diag_page implements Xow_special_page {
 		bfr.Add_str_a7("</pre>\n");
 		page.Db().Text().Text_bry_(bfr.To_bry_and_clear());
 	}
-	private static final    byte[] Arg_type = Bry_.new_a7("type");
+	private static final byte[] Arg_type = Bry_.new_a7("type");
 	private static final byte Type_file_check = 1, Type_fs_check = 2, Type_sql_dump = 3;
-	private static final    Hash_adp_bry type_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry type_hash = Hash_adp_bry.cs()
 	.Add_str_byte("file.check"		, Type_file_check)
 	.Add_str_byte("fs.check"		, Type_fs_check)
 	.Add_str_byte("sql.dump"		, Type_sql_dump)

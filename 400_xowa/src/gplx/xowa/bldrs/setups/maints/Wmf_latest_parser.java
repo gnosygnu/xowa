@@ -17,7 +17,7 @@ package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import
 import gplx.core.btries.*; import gplx.core.ios.*;
 public class Wmf_latest_parser {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	public int Count() {return hash.Count();}
 	public Wmf_latest_itm Get_at(int i)		{return (Wmf_latest_itm)hash.Get_at(i);}
 	public Wmf_latest_itm Get_by(byte[] k)	{return (Wmf_latest_itm)hash.Get_by(k);}

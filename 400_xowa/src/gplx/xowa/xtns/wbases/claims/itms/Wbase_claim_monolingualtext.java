@@ -20,8 +20,8 @@ public class Wbase_claim_monolingualtext extends Wbase_claim_base {
 		this.lang = lang; this.text = text;
 	}
 	@Override public byte	Val_tid() {return Wbase_claim_type_.Tid__monolingualtext;}
-	public byte[]			Lang() {return lang;} private final    byte[] lang;
-	public byte[]			Text() {return text;} private final    byte[] text;
+	public byte[]			Lang() {return lang;} private final byte[] lang;
+	public byte[]			Text() {return text;} private final byte[] text;
 
 	@Override public void Welcome(Wbase_claim_visitor visitor) {visitor.Visit_monolingualtext(this);}
 	@Override public String toString() {// TEST:

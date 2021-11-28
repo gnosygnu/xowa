@@ -17,8 +17,8 @@ package gplx;
 import gplx.core.primitives.*;
 public class Gfo_invk_ {
 	public static final String Mutator_suffix = "_";
-	public static final    Gfo_invk Noop = new Gfo_invk__noop();
-	public static final    String_obj_val 
+	public static final Gfo_invk Noop = new Gfo_invk__noop();
+	public static final String_obj_val
 	  Rv_unhandled	= String_obj_val.new_("Unhandled")
 	, Rv_handled	= String_obj_val.new_("Handled")
 	, Rv_host		= String_obj_val.new_("Host")

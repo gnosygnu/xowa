@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.searchers.rslts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Srch_rslt_row_tst {
-	private final    Srch_rslt_row_fxt fxt = new Srch_rslt_row_fxt();
+	private final Srch_rslt_row_fxt fxt = new Srch_rslt_row_fxt();
 	@Test  public void To_display() {
 		Srch_rslt_row row_straight = fxt.Make__row_straight("Ab", "<b>A</b>b");
 		Srch_rslt_row row_redirect = fxt.Make__row_redirect("Ab", "<b>A</b>b", "C");
@@ -35,7 +35,7 @@ public class Srch_rslt_row_tst {
 	}
 }
 class Srch_rslt_row_fxt {
-	private final    Xow_wiki wiki;
+	private final Xow_wiki wiki;
 	public Srch_rslt_row_fxt() {
 		Xoa_app app = Xoa_app_fxt.Make__app__view();
 		this.wiki = Xoa_app_fxt.Make__wiki__view(app);

@@ -19,11 +19,11 @@ import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.files.*; import gplx.xowa.xtns.imaps.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
-	private final    Bfr_arg_clearable[] arg_ary;
-	private final    Bfr_arg__hatr_arg img_xowa_image = new Bfr_arg__hatr_arg(Xoh_img_xoimg_data.Bry__data_xowa_image); 
-	private final    Bfr_arg__hatr_id img_id = Bfr_arg__hatr_id.New_id(Xoh_img_mgr.Bry__html_uid), vid_play_id = Bfr_arg__hatr_id.New_id("xowa_file_play_"), img_imap_usemap = new Bfr_arg__hatr_id(Imap_xtn_mgr.Bry__usemap__name, Imap_xtn_mgr.Bry__usemap__prefix);
-	private final    Bfr_arg__hatr_int img_w = new Bfr_arg__hatr_int(Gfh_atr_.Bry__width), img_h = new Bfr_arg__hatr_int(Gfh_atr_.Bry__height);
-	private final    Bfr_arg__hatr_bry
+	private final Bfr_arg_clearable[] arg_ary;
+	private final Bfr_arg__hatr_arg img_xowa_image = new Bfr_arg__hatr_arg(Xoh_img_xoimg_data.Bry__data_xowa_image);
+	private final Bfr_arg__hatr_id img_id = Bfr_arg__hatr_id.New_id(Xoh_img_mgr.Bry__html_uid), vid_play_id = Bfr_arg__hatr_id.New_id("xowa_file_play_"), img_imap_usemap = new Bfr_arg__hatr_id(Imap_xtn_mgr.Bry__usemap__name, Imap_xtn_mgr.Bry__usemap__prefix);
+	private final Bfr_arg__hatr_int img_w = new Bfr_arg__hatr_int(Gfh_atr_.Bry__width), img_h = new Bfr_arg__hatr_int(Gfh_atr_.Bry__height);
+	private final Bfr_arg__hatr_bry
 	  anch_href = new Bfr_arg__hatr_bry(Gfh_atr_.Bry__href)
 	, anch_rel = new Bfr_arg__hatr_bry(Gfh_atr_.Bry__rel)
 	, anch_xowa_title = new Bfr_arg__hatr_bry(Xoh_img_data.Bry__atr__xowa_title)
@@ -34,7 +34,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	, img_cls = new Bfr_arg__hatr_bry(Gfh_atr_.Bry__class)
 	, img_xowa_title = new Bfr_arg__hatr_bry(Xoh_img_xoimg_data.Bry__data_xowa_title)
 	;
-	private final    Bfr_arg__pgbnr img_pgbnr_atrs = new Bfr_arg__pgbnr();
+	private final Bfr_arg__pgbnr img_pgbnr_atrs = new Bfr_arg__pgbnr();
 	private boolean img_is_vid; private boolean img_wo_anch;
 	private int div_w;
 	public Xoh_img_wtr() {
@@ -163,8 +163,8 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	}
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_img_wtr rv = new Xoh_img_wtr(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}
-	private static final    byte[] Vid__bry__bgn = Bry_.new_a7("<div class=\"xowa_media_div\">\n<div>");
-	private static final    Bry_fmtr 
+	private static final byte[] Vid__bry__bgn = Bry_.new_a7("<div class=\"xowa_media_div\">\n<div>");
+	private static final Bry_fmtr
 	  img_fmtr = Bry_fmtr.new_
 	( "<a~{anch_href}~{anch_rel}~{anch_cls}~{anch_title}~{anch_xowa_title}><img~{img_id}~{img_xowa_title}~{img_xowa_image}~{img_src}~{img_w}~{img_h}~{img_cls}~{img_alt}~{img_pgbnr_atrs}></a>"
 	, "anch_href", "anch_rel", "anch_cls", "anch_title", "anch_xowa_title", "img_id", "img_xowa_title", "img_xowa_image", "img_src", "img_w", "img_h", "img_cls", "img_alt", "img_pgbnr_atrs")
@@ -172,11 +172,11 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 	( "<img~{img_id}~{img_xowa_title}~{img_xowa_image}~{img_alt}~{img_src}~{img_w}~{img_h}~{img_cls}~{img_imap_usemap}/>"
 	, "img_id", "img_xowa_title", "img_xowa_image", "img_src", "img_w", "img_h", "img_cls", "img_alt", "img_imap_usemap")
 	;
-	private final    Bry_fmt
+	private final Bry_fmt
 	  vid_fmt = Bry_fmt.Auto_nl_apos
 	( "</div>"
 	, "<div><a~{vid_play_id} href=''~{xowa_title} class='xowa_media_play' style='width:~{a_width}px;max-width:~{a_max_width}px;' alt='Play sound'></a></div>"
 	, "</div>"
 	);
-	private static final    byte[] Bry__qarg__esc = Bry_.new_a7("%3F");
+	private static final byte[] Bry__qarg__esc = Bry_.new_a7("%3F");
 }

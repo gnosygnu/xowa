@@ -17,7 +17,7 @@ package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import 
 import gplx.gfui.draws.*;
 import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
 public class GfuiTextBox extends GfuiElemBase {
-	public static final    String SelectionStartChanged_evt = "SelectionStartChanged";
+	public static final String SelectionStartChanged_evt = "SelectionStartChanged";
 
 	public boolean Border_on() {return textBox.Border_on();} public void Border_on_(boolean v) {BorderOn_set(v);}
 	public ColorAdp Border_color() {return textBox.Border_color();} public void Border_color_(ColorAdp v) {textBox.Border_color_(v);}

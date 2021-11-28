@@ -18,8 +18,8 @@ import gplx.core.scripts.*;
 import gplx.xowa.addons.apps.scripts.apis.*;
 public class Xoscript_xtn_mgr {
 	private Xoscript_xtn_itm root_itm;
-	private final    Io_url root_dir;
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Io_url root_dir;
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public Xoscript_xtn_mgr(Io_url root_dir) {
 		this.root_dir = root_dir;
 	}

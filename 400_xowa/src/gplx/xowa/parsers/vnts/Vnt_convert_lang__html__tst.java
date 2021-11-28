@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*;
 public class Vnt_convert_lang__html__tst {	// REF: https://www.mediawiki.org/wiki/Writing_systems/Syntax
-	private final    Vnt_convert_lang_fxt fxt = new Vnt_convert_lang_fxt();
+	private final Vnt_convert_lang_fxt fxt = new Vnt_convert_lang_fxt();
 	private String rule;
 	@Before public void init() {
 		rule = "-{H|zh-cn:cn;zh-hk:hk;zh-tw:tw}-";

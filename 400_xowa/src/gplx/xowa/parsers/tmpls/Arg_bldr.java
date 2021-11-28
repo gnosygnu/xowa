@@ -188,7 +188,7 @@ public class Arg_bldr {	// TS
 //				itm.Dat_ary_(dat_end == dat_bgn ? Bry_.Empty : Bry_.Mid(src, dat_bgn, dat_end));
 		itm.Itm_static_(itm_is_static);
 	}
-	public static final    Arg_bldr Instance = new Arg_bldr(); Arg_bldr() {}
+	public static final Arg_bldr Instance = new Arg_bldr(); Arg_bldr() {}
 }
 /*
 NOTE_1:mark tkn ignore unless wkr is prm;

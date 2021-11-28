@@ -31,7 +31,7 @@ import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
 import gplx.xowa.wikis.data.tbls.Xowd_text_tbl;
 
 public class Xodb_save_mgr_sql implements Xodb_save_mgr {
-	private final    Xodb_mgr_sql db_mgr;
+	private final Xodb_mgr_sql db_mgr;
 	public Xodb_save_mgr_sql(Xodb_mgr_sql db_mgr) {this.db_mgr = db_mgr;} 
 	public boolean Create_enabled() {return create_enabled;} public void Create_enabled_(boolean v) {create_enabled = v;} private boolean create_enabled;
 	public boolean Update_modified_on_enabled() {return update_modified_on_enabled;} public void Update_modified_on_enabled_(boolean v) {update_modified_on_enabled = v;} private boolean update_modified_on_enabled;

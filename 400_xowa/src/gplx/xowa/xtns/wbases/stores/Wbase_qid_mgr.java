@@ -19,8 +19,8 @@ import gplx.xowa.wikis.domains.*;
 import gplx.xowa.wikis.data.*;
 import gplx.xowa.xtns.wbases.dbs.*;
 public class Wbase_qid_mgr {// EX: "enwiki|0|Earth" -> "Q2"
-	private final    Wdata_wiki_mgr wbase_mgr;
-	private final    Hash_adp_bry cache = Hash_adp_bry.cs();
+	private final Wdata_wiki_mgr wbase_mgr;
+	private final Hash_adp_bry cache = Hash_adp_bry.cs();
 	public Wbase_qid_mgr(Wdata_wiki_mgr wbase_mgr) {
 		this.wbase_mgr = wbase_mgr;
 	}

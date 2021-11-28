@@ -21,10 +21,10 @@ public class Xocfg_txt_itm {
 		this.name = name;
 		this.help = help;
 	}
-	public int Id() {return id;} private final    int id;
-	public String Lang() {return lang;} private final    String lang;
-	public String Name() {return name;} private final    String name;
-	public String Help() {return help;} private final    String help;
+	public int Id() {return id;} private final int id;
+	public String Lang() {return lang;} private final String lang;
+	public String Name() {return name;} private final String name;
+	public String Help() {return help;} private final String help;
 
 	public static final int Tid__grp = 1, Tid__itm = 2;
 }

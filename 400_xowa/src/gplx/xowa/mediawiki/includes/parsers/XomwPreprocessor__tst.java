@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import org.junit.*;
 public class XomwPreprocessor__tst {
-	private final    XomwPreprocessor__fxt fxt = new XomwPreprocessor__fxt();
+	private final XomwPreprocessor__fxt fxt = new XomwPreprocessor__fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test public void Text() {
 		fxt.Test__parse("abc", "<root>abc</root>");

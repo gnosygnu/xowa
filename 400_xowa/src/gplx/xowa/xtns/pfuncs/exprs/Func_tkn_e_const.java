@@ -24,5 +24,5 @@ class Func_tkn_e_const extends Func_tkn_base {
 		val_stack.Push(Decimal_adp_.Const_e);
 		return true;
 	}
-	public static final    Func_tkn_e_const Instance = new Func_tkn_e_const("e");
+	public static final Func_tkn_e_const Instance = new Func_tkn_e_const("e");
 }

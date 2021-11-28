@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.mass_parses.parses.pools; import gplx.*; import g
 import gplx.xowa.wikis.data.tbls.*;
 public class Xomp_page_itm implements Xowd_text_bry_owner {
 	public Xomp_page_itm(int id) {this.id = id;}
-	public int Id() {return id;} private final    int id;
+	public int Id() {return id;} private final int id;
 	public int Ns_id() {return ns_id;} private int ns_id;
 	public int Page_score() {return page_score;} private int page_score;
 	public byte[] Ttl_bry() {return ttl_bry;} private byte[] ttl_bry;
@@ -34,5 +34,5 @@ public class Xomp_page_itm implements Xowd_text_bry_owner {
 	public int Page_id() {return id;}
 	public void Set_text_bry_by_db(byte[] v) {this.text = v;}
 
-	public static final    Xomp_page_itm Null = new Xomp_page_itm(-1);
+	public static final Xomp_page_itm Null = new Xomp_page_itm(-1);
 }

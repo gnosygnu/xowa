@@ -17,14 +17,14 @@ package gplx.langs.htmls.docs; import gplx.*; import gplx.langs.*; import gplx.l
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.xowa.parsers.htmls.*;
 public class Gfh_tag_rdr {
-	private final    Hash_adp_bry name_hash;
-	private final    Mwh_atr_parser atr_parser = new Mwh_atr_parser();
-	private final    Gfh_tag tag__tmp__move = new Gfh_tag(), tag__tmp__peek = new Gfh_tag(), tag__eos = new Gfh_tag(), tag__comment = new Gfh_tag();
-	private final    Int_obj_ref tmp_depth = Int_obj_ref.New_zero();
+	private final Hash_adp_bry name_hash;
+	private final Mwh_atr_parser atr_parser = new Mwh_atr_parser();
+	private final Gfh_tag tag__tmp__move = new Gfh_tag(), tag__tmp__peek = new Gfh_tag(), tag__eos = new Gfh_tag(), tag__comment = new Gfh_tag();
+	private final Int_obj_ref tmp_depth = Int_obj_ref.New_zero();
 	Gfh_tag_rdr(Hash_adp_bry name_hash) {this.name_hash = name_hash;}
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_end() {return src_end;} private int src_end;
-	public Bry_err_wkr Err_wkr() {return err_wkr;} private final    Bry_err_wkr err_wkr = new Bry_err_wkr();
+	public Bry_err_wkr Err_wkr() {return err_wkr;} private final Bry_err_wkr err_wkr = new Bry_err_wkr();
 	public Gfh_tag_rdr Skip_ws_after_slash_y_() {skip_ws_after_slash_y = true; return this;} private boolean skip_ws_after_slash_y;
 	public Gfh_tag_rdr Reg(String tag_name, int tag_id) {name_hash.Add_str_int(tag_name, tag_id); return this;}
 	public Gfh_tag_rdr Init(byte[] ctx_name, byte[] src, int src_bgn, int src_end) {
@@ -360,7 +360,7 @@ public class Gfh_tag_rdr {
 		int tag_end = tag_bgn + 255; if (tag_end > src_end) tag_end = src_end;
 		return tag__comment.Init(this, src, Bool_.N, Bool_.N, tag_bgn, tag_end, tag_end, tag_end, Gfh_tag_.Id__eos, Bry_.Empty);
 	}
-	private static final    byte[] Bry__comment__mid = Bry_.new_a7("--"); 
+	private static final byte[] Bry__comment__mid = Bry_.new_a7("--");
 	public static Gfh_tag_rdr New__html()	{return new Gfh_tag_rdr(Gfh_tag_.Hash);}
 	public static Gfh_tag_rdr New__custom()	{return new Gfh_tag_rdr(Hash_adp_bry.cs());}
 }

@@ -50,8 +50,8 @@ public class Fsd_thm_itm {
 		+ 14		// modified_on
 	;
 
-	public static final    Fsd_thm_itm Null = null;
-	public static final    Fsd_thm_itm[] Ary_empty = new Fsd_thm_itm[0];
+	public static final Fsd_thm_itm Null = null;
+	public static final Fsd_thm_itm[] Ary_empty = new Fsd_thm_itm[0];
 	public static Fsd_thm_itm new_() {return new Fsd_thm_itm();} Fsd_thm_itm() {}
 }
 class Fsdb_thm_itm_sorter implements gplx.core.lists.ComparerAble {
@@ -62,5 +62,5 @@ class Fsdb_thm_itm_sorter implements gplx.core.lists.ComparerAble {
 			comp =	Double_.Compare	(lhs.Time()	, rhs.Time());	if (comp != CompareAble_.Same) return  comp;	// sort by increasing time
 		return		Int_.Compare	(lhs.Page()	, rhs.Page());													// sort by increasing page
 	}
-	public static final    Fsdb_thm_itm_sorter Instance = new Fsdb_thm_itm_sorter(); Fsdb_thm_itm_sorter() {}
+	public static final Fsdb_thm_itm_sorter Instance = new Fsdb_thm_itm_sorter(); Fsdb_thm_itm_sorter() {}
 }

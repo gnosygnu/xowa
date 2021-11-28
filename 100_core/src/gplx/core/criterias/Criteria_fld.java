@@ -17,9 +17,9 @@ package gplx.core.criterias; import gplx.*; import gplx.core.*;
 public class Criteria_fld implements Criteria {
 	Criteria_fld(String pre, String key, Criteria crt) {this.pre = pre; this.key = key; this.crt = crt;}
 	public byte			Tid() {return Criteria_.Tid_wrapper;}
-	public String		Pre() {return pre;} private final    String pre;
-	public String		Key() {return key;} private final    String key;
-	public Criteria		Crt() {return crt;} private final    Criteria crt;
+	public String		Pre() {return pre;} private final String pre;
+	public String		Key() {return key;} private final String key;
+	public Criteria		Crt() {return crt;} private final Criteria crt;
 	public String		Pre_w_key() {return pre == Pre_null ? key : String_.Concat(pre, ".", key);}
 	public void			Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
 	public void			Val_from_args(Hash_adp args) {

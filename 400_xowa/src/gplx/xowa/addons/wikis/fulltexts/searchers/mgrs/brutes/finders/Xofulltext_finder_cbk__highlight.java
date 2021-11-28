@@ -22,7 +22,7 @@ public class Xofulltext_finder_cbk__highlight implements Xofulltext_finder_cbk {
 	private Xow_wiki wiki;
 	private int qry_id;
 	private int page_id;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public int found;
 	private boolean show_all_matches;
 	public byte[] Page_ttl() {return page_ttl;} private byte[] page_ttl;
@@ -65,7 +65,7 @@ public class Xofulltext_finder_cbk__highlight implements Xofulltext_finder_cbk {
 		ui.Send_line_add(true, show_all_matches, qry_id, wiki.Domain_bry(), page_id, found, line_html);
 		found++;
 	}
-	private static final    byte[] Angle_bgn_escaped = Bry_.new_a7("&lt;");
+	private static final byte[] Angle_bgn_escaped = Bry_.new_a7("&lt;");
 	private void Add_snip(Bry_bfr bfr, byte[] src, int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];

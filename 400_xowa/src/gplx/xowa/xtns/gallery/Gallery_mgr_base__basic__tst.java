@@ -183,7 +183,7 @@ class Gallery_mgr_base_fxt {
 		fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());
 		Gallery_mgr_wtr.File_found_mode = Bool_.Y_byte;
 	}
-	public Xop_fxt Fxt() {return fxt;} private final    Xop_fxt fxt = new Xop_fxt();
+	public Xop_fxt Fxt() {return fxt;} private final Xop_fxt fxt = new Xop_fxt();
 	public void Init_files_missing_y_() {
 		Gallery_mgr_wtr.File_found_mode = Bool_.N_byte;
 	}

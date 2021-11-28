@@ -23,10 +23,10 @@ import gplx.xowa.addons.bldrs.exports.packs.files.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xobc_step_factory {
-	private final    Xobc_task_mgr task_mgr;
-	private final    Xobc_data_db data_db;
-	private final    Bry_eval_mgr eval_mgr = Bry_eval_mgr.Dflt(); private final    Host_eval_itm host_eval = new Host_eval_itm();
-	private final    Host_eval_wkr eval_wkr__host_regy = new Host_eval_wkr();
+	private final Xobc_task_mgr task_mgr;
+	private final Xobc_data_db data_db;
+	private final Bry_eval_mgr eval_mgr = Bry_eval_mgr.Dflt(); private final Host_eval_itm host_eval = new Host_eval_itm();
+	private final Host_eval_wkr eval_wkr__host_regy = new Host_eval_wkr();
 	public Xobc_step_factory(Xobc_task_mgr task_mgr, Xobc_data_db data_db, Io_url wiki_dir) {
 		this.task_mgr = task_mgr;
 		this.data_db = data_db;

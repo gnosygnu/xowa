@@ -28,7 +28,7 @@ public class Xof_repo_tid_ {
 		else if	(String_.Eq(v, "math")) return Tid__math;
 		else							throw Err_.new_unhandled_default(v);
 	}
-	public static final    byte[] 
+	public static final byte[]
 	  Bry__math		= Bry_.new_a7("wikimedia.org/math")	// EX: https://wikimedia.org/api/rest_v1/media/math/render/svg/596f8baf206a81478afd4194b44138715dc1a05c
 	;
 }

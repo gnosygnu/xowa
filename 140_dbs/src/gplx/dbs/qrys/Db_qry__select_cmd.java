@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
 import gplx.core.criterias.*;
+import gplx.dbs.sqls.SqlQryWtr;
 import gplx.dbs.sqls.itms.*;
 public class Db_qry__select_cmd implements Db_qry {
 	public int				Tid()				{return Db_qry_.Tid_select;}
@@ -107,6 +108,6 @@ public class Db_qry__select_cmd implements Db_qry {
 		return this;
 	}
 	
-	public String		To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr wtr)		{return wtr.To_sql_str(this, Bool_.N);}
-	public String		To_sql__prep(gplx.dbs.sqls.Sql_qry_wtr wtr)		{return wtr.To_sql_str(this, Bool_.Y);}
+	public String		To_sql__exec(SqlQryWtr wtr)		{return wtr.ToSqlStr(this, Bool_.N);}
+	public String		To_sql__prep(SqlQryWtr wtr)		{return wtr.ToSqlStr(this, Bool_.Y);}
 }

@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xol_convert_mgr {
-	private final    Ordered_hash tmp_page_list = Ordered_hash_.New_bry();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	public Xol_convert_regy			Converter_regy() {return converter_regy;} private final    Xol_convert_regy converter_regy = new Xol_convert_regy();
+	private final Ordered_hash tmp_page_list = Ordered_hash_.New_bry();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	public Xol_convert_regy			Converter_regy() {return converter_regy;} private final Xol_convert_regy converter_regy = new Xol_convert_regy();
 	public Xol_convert_wkr[]		Converter_ary() {return wkr_ary;} private Xol_convert_wkr[] wkr_ary;  private int wkr_ary_len;
 	public void Init(Xol_vnt_regy regy) {
 		int len = regy.Len();

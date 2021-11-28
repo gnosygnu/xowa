@@ -39,6 +39,6 @@ public class Pfunc_expr extends Pf_func_base {
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_expr().Name_(name);}
 }
 class Pfunc_expr_msg {
-	public static final    Gfo_msg_grp Nde = Gfo_msg_grp_.new_(Xoa_app_.Nde, "expr");
-	public static final    Gfo_msg_itm Unknown = Gfo_msg_itm_.new_warn_(Nde, "unknown", "unknown");
+	public static final Gfo_msg_grp Nde = Gfo_msg_grp_.new_(Xoa_app_.Nde, "expr");
+	public static final Gfo_msg_itm Unknown = Gfo_msg_itm_.new_warn_(Nde, "unknown", "unknown");
 }

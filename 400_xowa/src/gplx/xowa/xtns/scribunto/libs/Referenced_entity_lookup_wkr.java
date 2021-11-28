@@ -17,15 +17,15 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.stores.*;
 // REF: https://github.com/wmde/WikibaseDataModelServices/blob/master/src/Lookup/EntityRetrievingClosestReferencedEntityIdLookup.php
 class Referenced_entity_lookup_wkr {		
-	private final    Wbase_doc_mgr entity_mgr;
-	private final    int maxDepth;
-	private final    int maxEntityVisits;
-	private final    Xoa_url url;
-	private final    byte[] fromId;
-	private final    int propertyId;
-	private final    Ordered_hash toIds;
-	private final    Ordered_hash alreadyVisited = Ordered_hash_.New_bry();
-	private final    List_adp tmp_snak_list = List_adp_.New();
+	private final Wbase_doc_mgr entity_mgr;
+	private final int maxDepth;
+	private final int maxEntityVisits;
+	private final Xoa_url url;
+	private final byte[] fromId;
+	private final int propertyId;
+	private final Ordered_hash toIds;
+	private final Ordered_hash alreadyVisited = Ordered_hash_.New_bry();
+	private final List_adp tmp_snak_list = List_adp_.New();
 	public Referenced_entity_lookup_wkr(int maxDepth, int maxEntityVisits, Wbase_doc_mgr entity_mgr, Xoa_url url, byte[] fromId, int propertyId, Ordered_hash toIds) {
 		this.maxDepth = maxDepth;
 		this.maxEntityVisits = maxEntityVisits;

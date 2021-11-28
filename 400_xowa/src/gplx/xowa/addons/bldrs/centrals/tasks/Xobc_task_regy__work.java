@@ -19,8 +19,8 @@ import gplx.xowa.drds.powers.*;
 import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.cmds.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*;
 public class Xobc_task_regy__work extends Xobc_task_regy__base {
-	private final    Thread_adp_mgr thread_mgr = new Thread_adp_mgr(1000, 5000);
-	private final    Xobc_cmd_ctx ctx;
+	private final Thread_adp_mgr thread_mgr = new Thread_adp_mgr(1000, 5000);
+	private final Xobc_cmd_ctx ctx;
 	public Xobc_task_regy__work(Xobc_task_mgr task_mgr, Xoa_app app) {super(task_mgr, "work");
 		this.ctx = new Xobc_cmd_ctx(app);
 	}
@@ -148,8 +148,8 @@ public class Xobc_task_regy__work extends Xobc_task_regy__base {
 	}
 }
 class Xobc_task_skip implements Gfo_invk {
-	private final    Xobc_task_regy__work work_regy;
-	private final    Xobc_cmd_itm cmd;
+	private final Xobc_task_regy__work work_regy;
+	private final Xobc_cmd_itm cmd;
 	public Xobc_task_skip(Xobc_task_regy__work work_regy, Xobc_cmd_itm cmd) {
 		this.work_regy = work_regy;
 		this.cmd = cmd;

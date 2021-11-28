@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.skins; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 public class Xoh_skin_mgr implements Gfo_invk {
-	private final    Xoh_skin_regy regy = new Xoh_skin_regy();
+	private final Xoh_skin_regy regy = new Xoh_skin_regy();
 	public Xoh_skin_mgr() {
 		read = make_and_add(regy, "read");
 		edit = make_and_add(regy, "edit");

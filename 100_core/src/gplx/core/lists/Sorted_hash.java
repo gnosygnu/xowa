@@ -50,7 +50,7 @@ public class Sorted_hash implements Hash_adp {
 				return hash.pollFirstEntry().getValue();
 			}
 
-	private final    java.util.TreeMap hash;										
+	private final java.util.TreeMap hash;
 	public int Len() {return hash.size();}														
 	public int Count() {return hash.size();}														
 	public void Clear() {hash.clear();}															

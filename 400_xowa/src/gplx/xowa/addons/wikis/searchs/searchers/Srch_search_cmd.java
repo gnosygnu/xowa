@@ -17,11 +17,11 @@ package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xow
 import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Srch_search_cmd implements Cancelable, Gfo_invk {
-	private final    Srch_search_mgr	search_mgr;
-	public final    Srch_search_qry		qry;
-	public final    Srch_crt_mgr		crt_mgr;
-	private final    Srch_rslt_cbk		rslt_cbk;
-	private final    Srch_rslt_list		rslts_list;
+	private final Srch_search_mgr	search_mgr;
+	public final Srch_search_qry		qry;
+	public final Srch_crt_mgr		crt_mgr;
+	private final Srch_rslt_cbk		rslt_cbk;
+	private final Srch_rslt_list		rslts_list;
 	public Srch_search_cmd(Srch_search_mgr search_mgr, Srch_search_qry qry, Srch_crt_mgr crt_mgr, Srch_rslt_cbk rslt_cbk, Srch_rslt_list rslts_list) {
 		this.search_mgr = search_mgr; this.qry = qry; this.crt_mgr = crt_mgr; this.rslt_cbk = rslt_cbk; this.rslts_list = rslts_list;
 	}

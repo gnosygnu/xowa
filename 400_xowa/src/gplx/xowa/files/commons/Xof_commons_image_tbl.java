@@ -50,8 +50,8 @@ public class Xof_commons_image_tbl implements Rls_able {
 			);
 		}	finally {rdr.Rls();}
 	}
-	private static final String tbl_name = "image"; private static final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private static final    String
+	private static final String tbl_name = "image"; private static final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final String
 	  fld_img_name				= flds.Add_str("img_name", 255)			// varbinary(255)
 	, fld_img_media_type		= flds.Add_str("img_media_type", 255)	// enum('UNKNOWN','BITMAP','DRAWING','AUDIO','VIDEO','MULTIMEDIA','OFFICE','TEXT','EXECUTABLE','ARCHIVE')"
 	, fld_img_minor_mime		= flds.Add_str("img_minor_mime", 255)	// DEFAULT 'unknown'"

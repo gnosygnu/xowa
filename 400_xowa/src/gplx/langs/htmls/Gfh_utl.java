@@ -17,7 +17,7 @@ package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
 import gplx.langs.htmls.entitys.*;
 public class Gfh_utl {// TS:Gfo_url_encoder is TS
-	private static final    Gfo_url_encoder encoder_id = Gfo_url_encoder_.Id;
+	private static final Gfo_url_encoder encoder_id = Gfo_url_encoder_.Id;
 	public static String Encode_id_as_str(byte[] key) {return String_.new_u8(Encode_id_as_bry(key));}
 	public static byte[] Encode_id_as_bry(byte[] key) {
 		Bry_bfr tmp_bfr = Bry_bfr_.Get();
@@ -111,7 +111,7 @@ public class Gfh_utl {// TS:Gfo_url_encoder is TS
 		else
 			return dirty ? bfr.To_bry_and_clear() : bry;
 	}
-	private static final    Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_a7()
+	private static final Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_a7()
 	.Add_bry_byte(Gfh_entity_.Lt_bry		, Byte_ascii.Lt)
 	.Add_bry_byte(Gfh_entity_.Gt_bry		, Byte_ascii.Gt)
 	.Add_bry_byte(Gfh_entity_.Amp_bry		, Byte_ascii.Amp)

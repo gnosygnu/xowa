@@ -24,11 +24,11 @@ public class Xocfg_db_app {
 		this.tbl__txt = new Xocfg_txt_tbl(conn);
 		conn.Meta_tbl_assert(tbl__grp, tbl__map, tbl__itm, tbl__txt);
 	}
-	public Db_conn Conn() {return conn;} private final    Db_conn conn;
-	public Xocfg_grp_tbl Tbl__grp()	{return tbl__grp;} private final    Xocfg_grp_tbl tbl__grp;
-	public Xocfg_map_tbl Tbl__map()	{return tbl__map;} private final    Xocfg_map_tbl tbl__map;
-	public Xocfg_itm_tbl Tbl__itm() {return tbl__itm;} private final    Xocfg_itm_tbl tbl__itm;
-	public Xocfg_txt_tbl Tbl__txt() {return tbl__txt;} private final    Xocfg_txt_tbl tbl__txt;
+	public Db_conn Conn() {return conn;} private final Db_conn conn;
+	public Xocfg_grp_tbl Tbl__grp()	{return tbl__grp;} private final Xocfg_grp_tbl tbl__grp;
+	public Xocfg_map_tbl Tbl__map()	{return tbl__map;} private final Xocfg_map_tbl tbl__map;
+	public Xocfg_itm_tbl Tbl__itm() {return tbl__itm;} private final Xocfg_itm_tbl tbl__itm;
+	public Xocfg_txt_tbl Tbl__txt() {return tbl__txt;} private final Xocfg_txt_tbl tbl__txt;
 
 	public static Db_conn New_conn(Xoa_app app) {
 		Io_url url = app.Fsys_mgr().Bin_addon_dir().GenSubFil_nest("app", "cfg", "xo.cfg.sqlite3");

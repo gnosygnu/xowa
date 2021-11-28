@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.lists.binary_searches; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
 import org.junit.*; import gplx.core.primitives.*;
 public class Binary_search__tst {
-	private final    Binary_search__fxt fxt = new Binary_search__fxt();
+	private final Binary_search__fxt fxt = new Binary_search__fxt();
 	@Test public void Basic() {
 		fxt.Init__ary("", "e", "j", "o", "t", "y");
 		fxt.Test__binary_search("a", 0);

@@ -20,5 +20,5 @@ public class Pfunc_defaultsort extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_page_defaultsort;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_defaultsort().Name_(name);}
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {}
-	public static final    Pfunc_defaultsort Instance = new Pfunc_defaultsort(); Pfunc_defaultsort() {}
+	public static final Pfunc_defaultsort Instance = new Pfunc_defaultsort(); Pfunc_defaultsort() {}
 }	

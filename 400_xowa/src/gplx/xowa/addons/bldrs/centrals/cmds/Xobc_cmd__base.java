@@ -17,9 +17,9 @@ package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*;
 import gplx.core.gfobjs.*; import gplx.core.progs.*; import gplx.core.progs.rates.*;
 import gplx.xowa.apps.apis.*;
 public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
-	private final    Xobc_task_mgr task_mgr; 		
-	private final    Gfo_rate_list rate_list; private final    long notify_delay = 1000; 
-	private final    double delta_threshold = .25d;	// allow variance of up to 25% before updating rate
+	private final Xobc_task_mgr task_mgr;
+	private final Gfo_rate_list rate_list; private final long notify_delay = 1000;
+	private final double delta_threshold = .25d;	// allow variance of up to 25% before updating rate
 	private long time_prv;
 	private double rate_cur;
 	private boolean log_verbose;
@@ -35,13 +35,13 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 	public boolean			Canceled()		{return status == Gfo_prog_ui_.Status__suspended;}
 	public void				Cancel()		{status = Gfo_prog_ui_.Status__suspended;}
 
-	public int				Task_id()		{return task_id;} private final    int task_id;
-	public int				Step_id()		{return step_id;} private final    int step_id;
-	public int				Cmd_id()		{return cmd_id;} private final    int cmd_id;
+	public int				Task_id()		{return task_id;} private final int task_id;
+	public int				Step_id()		{return step_id;} private final int step_id;
+	public int				Cmd_id()		{return cmd_id;} private final int cmd_id;
 	public abstract String	Cmd_type();
 	public abstract String	Cmd_name();
 	public boolean		Cmd_suspendable() {return false;}
-	public String			Cmd_uid()		{return cmd_uid;} private final    String cmd_uid;
+	public String			Cmd_uid()		{return cmd_uid;} private final String cmd_uid;
 	public String	Cmd_fallback()	{return this.Cmd_type();}
 	public void		Cmd_clear()		{// called when restarting failed task
 		this.status = Gfo_prog_ui_.Status__init;
@@ -143,7 +143,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	public static final    String Invk__exec = "exec";
+	public static final String Invk__exec = "exec";
 	public static final int Seqn__0 = 0;
 	public static Gfo_rate_mgr New_rate_mgr() {
 		Gfo_rate_mgr rv = new Gfo_rate_mgr(128);

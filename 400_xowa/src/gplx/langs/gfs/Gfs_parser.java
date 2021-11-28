@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import gplx.core.btries.*;
 public class Gfs_parser {
-	private final    Btrie_fast_mgr trie = Gfs_parser_.trie_();
-	private final    Gfs_parser_ctx ctx = new Gfs_parser_ctx();
+	private final Btrie_fast_mgr trie = Gfs_parser_.trie_();
+	private final Gfs_parser_ctx ctx = new Gfs_parser_ctx();
 	public Gfs_nde Parse(byte[] src) {
 		ctx.Root().Subs_clear();
 		int src_len = src.length; if (src_len == 0) return ctx.Root();

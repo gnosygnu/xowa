@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.parsers.mediawikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.parsers.*;
 import gplx.xowa.parsers.utils.*;
 class Xow_page_cache_wkr__embeddable implements gplx.xowa.wikis.caches.Xow_page_cache_wkr {
-	private final    Xop_mediawiki_loader cbk;
-	private final    Xop_redirect_mgr redirect_mgr;
+	private final Xop_mediawiki_loader cbk;
+	private final Xop_redirect_mgr redirect_mgr;
 	public Xow_page_cache_wkr__embeddable(Xowe_wiki wiki, Xop_mediawiki_loader cbk) {
 		this.cbk = cbk;
 		this.redirect_mgr = new Xop_redirect_mgr(wiki);

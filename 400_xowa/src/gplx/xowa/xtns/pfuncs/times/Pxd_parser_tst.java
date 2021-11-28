@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import org.junit.*;
 public class Pxd_parser_tst {
-	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(16);
-	private final    Pxd_parser parser = new Pxd_parser();
-	private final    DateAdp test_date = DateAdp_.parse_fmt("2012-02-27", "yyyy-MM-dd");
+	private final Bry_bfr bfr = Bry_bfr_.New_w_size(16);
+	private final Pxd_parser parser = new Pxd_parser();
+	private final DateAdp test_date = DateAdp_.parse_fmt("2012-02-27", "yyyy-MM-dd");
 	@Before public void init() {
 		Datetime_now.Manual_y_();
 		Datetime_now.Manual_(test_date);

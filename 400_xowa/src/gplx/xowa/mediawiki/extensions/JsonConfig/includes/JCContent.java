@@ -83,7 +83,7 @@ public class JCContent extends TextContent { 	/** @var array */
 		return this.status.isGood();
 	}
 
-	private static final    byte[] Bry__ary__empty = Bry_.new_a7("{}");
+	private static final byte[] Bry__ary__empty = Bry_.new_a7("{}");
 	public boolean isEmpty() {
 		byte[] text = Bry_.Trim(this.getNativeData());
 		return Bry_.Len_eq_0(text) || Bry_.Eq(text, Bry__ary__empty);

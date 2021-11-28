@@ -47,6 +47,6 @@ public class GfuiFocusXferBnd implements InjectAble, Gfo_invk {
 		else if	(ctx.Match(k, Invk_FocusPrev))			Focus(GfuiElem_.cast(ctx.MsgSrc()), false);
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String Invk_FocusNext = "FocusNext", Invk_FocusPrev = "FocusPrev";
-	public static final    GfuiFocusXferBnd Instance = new GfuiFocusXferBnd(); GfuiFocusXferBnd() {}
+	}	public static final String Invk_FocusNext = "FocusNext", Invk_FocusPrev = "FocusPrev";
+	public static final GfuiFocusXferBnd Instance = new GfuiFocusXferBnd(); GfuiFocusXferBnd() {}
 }

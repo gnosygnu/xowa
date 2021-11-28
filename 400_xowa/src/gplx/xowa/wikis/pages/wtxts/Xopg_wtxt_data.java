@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.wtxts; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
 public class Xopg_wtxt_data {
-	public Xopg_toc_mgr				Toc()				{return toc;}	private final    Xopg_toc_mgr toc = new Xopg_toc_mgr(); 		
+	public Xopg_toc_mgr				Toc()				{return toc;}	private final Xopg_toc_mgr toc = new Xopg_toc_mgr();
 	public int						Ctgs__len()			{return ctg_hash == null ? 0 : ctg_hash.Len();} private Ordered_hash ctg_hash;
 	public Xoa_ttl					Ctgs__get_at(int i) {return (Xoa_ttl)ctg_hash.Get_at(i);}
 	public Xoa_ttl[]				Ctgs__to_ary()		{return ctg_hash == null ? new Xoa_ttl[0] : (Xoa_ttl[])ctg_hash.To_ary(Xoa_ttl.class);}

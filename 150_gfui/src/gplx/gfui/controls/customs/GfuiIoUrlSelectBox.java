@@ -25,7 +25,7 @@ public abstract class GfuiIoUrlSelectBox extends GfuiElemBase {
 		this.Lyt_activate();
 		this.Lyt().Bands_add(GftBand.new_().Cell_abs_(60).Cell_pct_(100).Cell_abs_(30));
 	}
-	public static final    String PathSelected_evt = "PathSelected_evt";
+	public static final String PathSelected_evt = "PathSelected_evt";
 	public GfuiLbl Label() {return label;} GfuiLbl label;
 	public Io_url Url() {return Io_url_.new_any_(pathBox.TextMgr().Val());}
 	public Io_url StartingFolder() {return startingFolder;}
@@ -43,7 +43,7 @@ public abstract class GfuiIoUrlSelectBox extends GfuiElemBase {
 		if		(ctx.Match(k, SelectAction_cmd))		SelectAction();
 		else return super.Invk(ctx, ikey, k, m);
 		return this;
-	}	public static final    String SelectAction_cmd = "SelectAction";
+	}	public static final String SelectAction_cmd = "SelectAction";
 	
 	GfuiComboBox pathBox = GfuiComboBox.new_();
 }

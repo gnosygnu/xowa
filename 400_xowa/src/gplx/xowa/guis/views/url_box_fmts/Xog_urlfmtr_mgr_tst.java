@@ -40,8 +40,8 @@ public class Xog_urlfmtr_mgr_tst {
 	}
 }
 class Xog_urlfmtr_mgr_fxt {
-	private final    Xog_urlfmtr_mgr mgr = new Xog_urlfmtr_mgr();
-	private final    Xow_url_parser url_parser;
+	private final Xog_urlfmtr_mgr mgr = new Xog_urlfmtr_mgr();
+	private final Xow_url_parser url_parser;
 	public Xog_urlfmtr_mgr_fxt() {
 		// create url parser
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();

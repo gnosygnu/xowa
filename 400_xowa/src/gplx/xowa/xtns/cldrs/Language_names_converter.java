@@ -20,12 +20,12 @@ import gplx.langs.jsons.*;
 
 // REF.MW: /languages/data/Names.php
 class Language_names_converter {
-	private final    Php_parser parser = new Php_parser();
-	private final    Php_evaluator eval = new Php_evaluator(new gplx.core.log_msgs.Gfo_msg_log("test")).Comments_for_kv_();
-	private final    Php_text_itm_parser text_itm_parser = new Php_text_itm_parser().Quote_is_single_(true);
-	private final    List_adp tmp_list = List_adp_.New();
-	private final    Byte_obj_ref tmp_result = Byte_obj_ref.zero_();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Php_parser parser = new Php_parser();
+	private final Php_evaluator eval = new Php_evaluator(new gplx.core.log_msgs.Gfo_msg_log("test")).Comments_for_kv_();
+	private final Php_text_itm_parser text_itm_parser = new Php_text_itm_parser().Quote_is_single_(true);
+	private final List_adp tmp_list = List_adp_.New();
+	private final Byte_obj_ref tmp_result = Byte_obj_ref.zero_();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 
 	public Language_name[] Parse_fil(Io_url url) {
 		byte[] src = Io_mgr.Instance.LoadFilBry(url);

@@ -73,7 +73,7 @@ public class Sqlite_engine_ {
 	public static final boolean Supports_read_binary_stream = false;	
 	public static final boolean Supports_indexed_by = true;			
 	public static String X_date_to_str(DateAdp v) {return v == Date_null ? "" : v.XtoStr_fmt_iso_8561();}
-	public static final    DateAdp Date_null = null;
+	public static final DateAdp Date_null = null;
 	public static final byte Wildcard_byte = Byte_ascii.Hash;
 	public static final String Wildcard_str = "%";
 	public static int Read_only_detection = Io_mgr.Read_only__basic__file;

@@ -17,7 +17,7 @@ package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.
 public class Tag_html_mkr_ {
 	// This maker is being applied to:
 	// * mapframe and maplink: currently unsupported by XOWA, but some pages will pass in HTML which will break tag; EX:{{#tag:mapframe||body='<div id="a">'}} PAGE:fr.v:France; DATE:2017-06-01
-	public static final    Tag_html_mkr Noop = new Tag_html_mkr_noop();
+	public static final Tag_html_mkr Noop = new Tag_html_mkr_noop();
 
 	// This maker is being applied to:
 	// - built-in xndes like b,i,li as specified by "/includes/parser/CoreParserFunctions.php|tagObj"

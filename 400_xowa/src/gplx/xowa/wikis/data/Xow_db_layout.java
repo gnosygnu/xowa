@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 public class Xow_db_layout {
 	Xow_db_layout(int tid) {this.tid = tid;}
-	public int Tid()					{return tid;} private final    int tid;
+	public int Tid()					{return tid;} private final int tid;
 	public boolean Tid_is_all()			{return tid == Tid__all;}
 	public boolean Tid_is_all_or_few()		{return tid != Tid__lot;}
 	public boolean Tid_is_lot()			{return tid == Tid__lot;}
@@ -31,7 +31,7 @@ public class Xow_db_layout {
 
 	public static final int Tid__all = 1, Tid__few = 2, Tid__lot = 3;
 	public static final String Key__all = "all", Key__few = "few", Key__lot = "lot";
-	public static final    Xow_db_layout
+	public static final Xow_db_layout
 	  Itm_all = new Xow_db_layout(Tid__all)
 	, Itm_few = new Xow_db_layout(Tid__few)
 	, Itm_lot = new Xow_db_layout(Tid__lot)

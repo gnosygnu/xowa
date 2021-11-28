@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.security.algos.jre; import gplx.*; import gplx.core.*; import gplx.core.security.*; import gplx.core.security.algos.*;
 import org.junit.*;
 public class Jre_hash_algo__sha2_256__tst {	// REF: https://www.cosic.esat.kuleuven.be/nessie/testvectors/
-	private final    Hash_algo__fxt fxt = new Hash_algo__fxt(Hash_algo_.New__sha2_256());
+	private final Hash_algo__fxt fxt = new Hash_algo__fxt(Hash_algo_.New__sha2_256());
 	@Test public void Empty()				{fxt.Test__hash("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "");}
 	@Test public void a()					{fxt.Test__hash("ca978112ca1bbdcafac231b39a23dc4da786eff8147c4e72b9807785afee48bb", "a");}
 	@Test public void abc()				{fxt.Test__hash("ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad", "abc");}

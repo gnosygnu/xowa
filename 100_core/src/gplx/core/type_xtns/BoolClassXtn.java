@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.type_xtns; import gplx.*; import gplx.core.*;
 public class BoolClassXtn extends ClassXtn_base implements ClassXtn {
-	public static final    String Key_const = "bo" + "ol";
+	public static final String Key_const = "bo" + "ol";
 	public String Key() {return Key_const;}
 	@Override public Class<?> UnderClass()					{return boolean.class;}
 	public Object DefaultValue()								{return false;}
@@ -35,5 +35,5 @@ public class BoolClassXtn extends ClassXtn_base implements ClassXtn {
 		throw Err_.new_parse_type(boolean.class, raw);
 	}
 	@Override public Object XtoDb(Object obj)					{return obj;}
-	public static final    BoolClassXtn Instance =  new BoolClassXtn(); BoolClassXtn() {} // added to ClassXtnPool by default
+	public static final BoolClassXtn Instance =  new BoolClassXtn(); BoolClassXtn() {} // added to ClassXtnPool by default
 }

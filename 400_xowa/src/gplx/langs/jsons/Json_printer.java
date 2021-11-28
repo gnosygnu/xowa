@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 public class Json_printer {
-	private final    Json_parser parser = new Json_parser();
-	private final    Json_wtr wtr = new Json_wtr();
+	private final Json_parser parser = new Json_parser();
+	private final Json_wtr wtr = new Json_wtr();
 	public Json_printer Opt_quote_byte_(byte v) {wtr.Opt_quote_byte_(v); return this;}
 	public Json_wtr Wtr() {return wtr;}
 	public byte[] To_bry() {return wtr.To_bry_and_clear();}

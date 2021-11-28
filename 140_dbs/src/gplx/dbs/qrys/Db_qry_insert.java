@@ -19,7 +19,7 @@ public class Db_qry_insert implements Db_arg_owner {
 	public Db_qry_insert(String base_table) {this.base_table = base_table;}
 	public int			Tid()					{return Db_qry_.Tid_insert;}
 	public boolean			Exec_is_rdr()			{return false;}
-	public String		To_sql__exec(Sql_qry_wtr wtr) {return wtr.To_sql_str(this, false);}		
+	public String		To_sql__exec(SqlQryWtr wtr) {return wtr.ToSqlStr(this, false);}
 	public int			Exec_qry(Db_conn conn)	{return conn.Exec_qry(this);}
 	public String		Base_table()			{return base_table;} private String base_table;
 	public String[]		Cols_for_insert() {return cols_for_insert;} private String[] cols_for_insert;

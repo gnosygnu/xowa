@@ -17,12 +17,12 @@ package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*;
 import gplx.core.progs.*;
 import gplx.core.security.algos.*; import gplx.core.security.files.*;
 public class Xobc_cmd__verify_dir extends Xobc_cmd__base {
-	private final    Io_url delete_fil, checksum_fil;
+	private final Io_url delete_fil, checksum_fil;
 	public Xobc_cmd__verify_dir(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_idx, Io_url checksum_fil, Io_url delete_fil) {super(task_mgr, task_id, step_id, cmd_idx);
 		this.checksum_fil = checksum_fil;
 		this.delete_fil = delete_fil;
 	}
-	@Override public String Cmd_type() {return CMD_TYPE;} public static final    String CMD_TYPE = "xowa.core.hash_dir";
+	@Override public String Cmd_type() {return CMD_TYPE;} public static final String CMD_TYPE = "xowa.core.hash_dir";
 	@Override public String Cmd_name() {return "verify";}
 	@Override public String Cmd_fallback() {return Xobc_cmd__unzip.CMD_TYPE;}
 

@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.bridges; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import gplx.langs.jsons.*;
 public class Bridge_cmd_mgr {
-	private final    Json_parser parser;
-	private final    Hash_adp_bry cmd_hash = Hash_adp_bry.cs();
+	private final Json_parser parser;
+	private final Hash_adp_bry cmd_hash = Hash_adp_bry.cs();
 	public Bridge_cmd_mgr(Json_parser parser) {this.parser = parser;}
 	public void Add(Bridge_cmd_itm cmd) {cmd_hash.Add_bry_obj(cmd.Key(), cmd);}
 	public String Exec(GfoMsg m) {
@@ -37,7 +37,7 @@ public class Bridge_cmd_mgr {
 			throw Err_.new_exc(e, "bridge.cmds", "exec json failed", "json", jdoc_bry);
 		}
 	}
-	private static final    byte[] Key_cmd = Bry_.new_a7("cmd"), Key_data = Bry_.new_a7("data");
-	public static final    byte[] Msg__proc = Bry_.new_a7("proc"), Msg__args = Bry_.new_a7("args");
+	private static final byte[] Key_cmd = Bry_.new_a7("cmd"), Key_data = Bry_.new_a7("data");
+	public static final byte[] Msg__proc = Bry_.new_a7("proc"), Msg__args = Bry_.new_a7("args");
 	public static String Msg__ok = String_.Empty;
 }

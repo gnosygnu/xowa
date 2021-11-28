@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.guis.views.url_box_fmts; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
 public class Xog_urlfmtr_mgr implements Gfo_invk {
 	private Xog_urlfmtr_itm wildcard = new Xog_urlfmtr_itm(Byte_ascii.Star_bry, Bry_.new_a7("~{wiki_domain}/wiki/~{page_title}"));
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public boolean Exists() {return exists;} private boolean exists = false;
 	public void Init_by_app(Xoa_app app) {
 		app.Cfg().Bind_many_app(this, Cfg__url_format);
@@ -64,7 +64,7 @@ public class Xog_urlfmtr_mgr implements Gfo_invk {
 	}	private static final String Cfg__url_format = "xowa.gui.url_bar.url_format";
 }
 class Xog_urlfmtr_itm {
-	private final    Bry_fmt fmt;
+	private final Bry_fmt fmt;
 	public Xog_urlfmtr_itm(byte[] wiki_domain, byte[] fmt_str) {
 		this.fmt = Bry_fmt.New(fmt_str, "wiki_domain", "page_title", "page_title_spaces");
 	}

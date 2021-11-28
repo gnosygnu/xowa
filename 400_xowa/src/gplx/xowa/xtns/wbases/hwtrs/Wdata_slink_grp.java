@@ -20,11 +20,11 @@ class Wdata_slink_grp {
 	public Wdata_slink_grp(int tid, byte[] wiki_name, Xoapi_toggle_itm toggle_itm, Wdata_toc_data toc_data) {
 		this.tid = tid; this.wiki_name = wiki_name; this.toggle_itm = toggle_itm; this.toc_data = toc_data;
 	}
-	public int Tid() {return tid;} private final    int tid;
-	public byte[] Wiki_name() {return wiki_name;} private final    byte[] wiki_name;
-	public Wdata_toc_data Toc_data() {return toc_data;} private final     Wdata_toc_data toc_data;
+	public int Tid() {return tid;} private final int tid;
+	public byte[] Wiki_name() {return wiki_name;} private final byte[] wiki_name;
+	public Wdata_toc_data Toc_data() {return toc_data;} private final  Wdata_toc_data toc_data;
 	public Xoapi_toggle_itm Toggle_itm() {return toggle_itm;} private Xoapi_toggle_itm toggle_itm;
-	public Ordered_hash Rows() {return rows;} private final    Ordered_hash rows = Ordered_hash_.New();
+	public Ordered_hash Rows() {return rows;} private final Ordered_hash rows = Ordered_hash_.New();
 	public static void Sift(Wdata_slink_grp[] rv, Ordered_hash list) {
 		for (int i = 0; i < Idx__len; ++i)
 			rv[i].Rows().Clear();
@@ -77,5 +77,5 @@ class Wdata_slink_grp {
 		}
 	}
 	public static final int Idx__len = 9, Idx_w = 0, Idx_d = 1, Idx_s = 2, Idx_v = 3, Idx_q = 4, Idx_b = 5, Idx_u = 6, Idx_n = 7, Idx_x = 8;
-	private static final    byte[] Name_special = Bry_.new_a7("special");
+	private static final byte[] Name_special = Bry_.new_a7("special");
 }

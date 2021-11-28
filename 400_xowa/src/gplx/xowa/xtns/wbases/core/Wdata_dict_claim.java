@@ -25,8 +25,8 @@ public class Wdata_dict_claim {
 	, Tid__qualifiers							= 5
 	, Tid__qualifiers_order						= 6
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("core.claim", 7);
-	public static final    Wbase_enum_itm
+	public static final Wbase_enum_hash Reg = new Wbase_enum_hash("core.claim", 7);
+	public static final Wbase_enum_itm
 	  Itm__mainsnak								= Reg.Add(Tid__mainsnak			, "mainsnak")
 	, Itm__type									= Reg.Add(Tid__type				, "type")
 	, Itm__id									= Reg.Add(Tid__id				, "id")

@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.primitives; import gplx.*; import gplx.core.*;
 public class Int_pool {
-	private final    List_adp available_list = List_adp_.New(); private int available_len;
-	// private final    Bry_bfr dbg_bfr = Bry_bfr_.New();
+	private final List_adp available_list = List_adp_.New(); private int available_len;
+	// private final Bry_bfr dbg_bfr = Bry_bfr_.New();
 	private int uid_max = -1;
 	public void Clear() {
 		synchronized (available_list) {

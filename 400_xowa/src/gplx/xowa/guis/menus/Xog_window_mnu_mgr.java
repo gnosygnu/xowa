@@ -17,7 +17,7 @@ package gplx.xowa.guis.menus; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.xowa.guis.menus.dom.*;
 import gplx.xowa.langs.*;
 public class Xog_window_mnu_mgr implements Gfo_invk {
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public Xog_mnu_grp Browser() {return browser;} private Xog_mnu_grp browser;
 	public Xog_window_mnu_mgr(Xoa_gui_mgr gui_mgr, Xog_menu_mgr menu_mgr) {
 		this.gui_mgr = gui_mgr;

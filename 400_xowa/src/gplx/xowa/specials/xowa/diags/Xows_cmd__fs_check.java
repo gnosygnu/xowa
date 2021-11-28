@@ -53,6 +53,6 @@ class Xows_cmd__fs_check {
 			}	catch (Exception e) {bfr.Add_str_u8(Err_.Message_gplx_full(e));}
 		}
 	}
-        public static final    Xows_cmd__fs_check Instance = new Xows_cmd__fs_check(); Xows_cmd__fs_check() {}
-	private static final    byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_dir = Bry_.new_a7("dir");
+        public static final Xows_cmd__fs_check Instance = new Xows_cmd__fs_check(); Xows_cmd__fs_check() {}
+	private static final byte[] Arg_wiki = Bry_.new_a7("wiki"), Arg_dir = Bry_.new_a7("dir");
 }

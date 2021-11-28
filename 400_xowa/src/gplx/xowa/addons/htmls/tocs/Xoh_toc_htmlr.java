@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 class Xoh_toc_htmlr implements gplx.core.brys.Bfr_arg {
-	private final    Bry_bfr numbering_bfr = Bry_bfr_.New();
+	private final Bry_bfr numbering_bfr = Bry_bfr_.New();
 	private byte[] toc_label;
 	private int prv_lvl;
 	private Ordered_hash toc_itms;
@@ -74,8 +74,8 @@ class Xoh_toc_htmlr implements gplx.core.brys.Bfr_arg {
 		fmtr_itm.Bld_many(bfr, itm.Lvl(), itm.Uid(), itm.Anch(), itm.Path_to_bry(numbering_bfr), itm.Text());
 		prv_lvl = cur_lvl;
 	}
-	private static final    byte[] Bry_toc_cls = Bry_.new_a7(" id=\"toc\" class=\"toc\"");
-	private final    Bry_fmt 
+	private static final byte[] Bry_toc_cls = Bry_.new_a7(" id=\"toc\" class=\"toc\"");
+	private final Bry_fmt
 	  fmtr_div = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
 	( "<div~{toc}>"
 	, "  <div id=\"toctitle\" class=\"toctitle\">"

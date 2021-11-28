@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Json_wtr_tst {
-	@Before public void init() {fxt.Clear();} private final    Json_wtr_fxt fxt = new Json_wtr_fxt();
+	@Before public void init() {fxt.Clear();} private final Json_wtr_fxt fxt = new Json_wtr_fxt();
 	@Test  public void Root() {
 		fxt.Wtr().Doc_nde_bgn().Doc_nde_end();
 		fxt.Test
@@ -120,7 +120,7 @@ public class Json_wtr_tst {
 	}
 }
 class Json_wtr_fxt {
-	private final    Json_wtr wtr = new Json_wtr().Opt_quote_byte_(Byte_ascii.Apos);
+	private final Json_wtr wtr = new Json_wtr().Opt_quote_byte_(Byte_ascii.Apos);
 	public void Clear() {wtr.Clear();}
 	public Json_wtr Wtr() {return wtr;}
 	public void Test(String... expd) {

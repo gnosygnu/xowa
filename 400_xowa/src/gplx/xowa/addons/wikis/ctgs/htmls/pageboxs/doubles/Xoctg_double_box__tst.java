@@ -79,7 +79,7 @@ public class Xoctg_double_box__tst {
 }
 class Xoctg_double_box__fxt {
 	private Xop_fxt fxt; private Xoctg_double_box hidden_wtr;
-	private final    List_adp init_ctgs = List_adp_.New();
+	private final List_adp init_ctgs = List_adp_.New();
 	public void Clear() {
 		fxt = new Xop_fxt();
 		hidden_wtr = new Xoctg_double_box();

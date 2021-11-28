@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.threads.poolables; import gplx.*; import gplx.core.*; import gplx.core.threads.*;
 import gplx.core.memorys.*;
 public class Gfo_poolable_mgr implements Gfo_memory_itm {
-	private final    Object thread_lock = new Object();
-	private final    Gfo_poolable_itm prototype; private final    Object[] make_args; 
+	private final Object thread_lock = new Object();
+	private final Gfo_poolable_itm prototype; private final Object[] make_args;
 	private Gfo_poolable_itm[] pool; private int pool_nxt, pool_len;
 	public Gfo_poolable_mgr(Gfo_poolable_itm prototype, Object[] make_args, int init_pool_len, int pool_max) {// NOTE: random IndexOutOfBounds errors in Get around free_ary[--free_len] with free_len being -1; put member variable initialization within thread_lock to try to avoid; DATE:2014-09-21
 		this.prototype = prototype; this.make_args = make_args;

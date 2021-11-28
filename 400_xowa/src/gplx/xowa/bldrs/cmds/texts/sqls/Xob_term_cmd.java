@@ -18,7 +18,7 @@ import gplx.dbs.cfgs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.*;
 import gplx.xowa.wikis.data.*;
 public class Xob_term_cmd extends Xob_term_base {
 	public Xob_term_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Ctor(bldr, wiki); this.wiki = wiki;} private Xowe_wiki wiki;
-	@Override public String Cmd_key() {return KEY;} public static final    String KEY = "text.term";
+	@Override public String Cmd_key() {return KEY;} public static final String KEY = "text.term";
 	@Override public void Cmd_end_hook() {
 		// delete wiki's temp dir
 		Io_mgr.Instance.DeleteDirDeep(wiki.Fsys_mgr().Tmp_dir());

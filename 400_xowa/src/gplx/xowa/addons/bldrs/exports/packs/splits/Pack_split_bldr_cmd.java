@@ -30,6 +30,6 @@ public class Pack_split_bldr_cmd extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "bldr.export.pack.split";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Pack_split_bldr_cmd(null, null);
+	public static final Xob_cmd Prototype = new Pack_split_bldr_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Pack_split_bldr_cmd(bldr, wiki);}
 }

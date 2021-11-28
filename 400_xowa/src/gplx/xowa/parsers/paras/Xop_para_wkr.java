@@ -22,7 +22,7 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 	private int para_stack;
 	private boolean in_block, block_is_bgn_xnde, block_is_end_xnde, in_blockquote, block_is_bgn_blockquote, block_is_end_blockquote;
 	private int prv_nl_pos; private Xop_para_tkn prv_para; private int prv_ws_bgn;
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	public boolean Enabled() {return enabled;} public Xop_para_wkr Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
 	public Xop_para_wkr Enabled_y_() {enabled = true; return this;} public Xop_para_wkr Enabled_n_() {enabled = false; return this;}				
 	public void Ctor_ctx(Xop_ctx ctx) {}

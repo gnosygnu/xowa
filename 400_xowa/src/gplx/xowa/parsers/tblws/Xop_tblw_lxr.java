@@ -116,7 +116,7 @@ public class Xop_tblw_lxr implements Xop_lxr {
 		return Continue;
 	}
 	public Xop_tblw_lxr(byte wlxr_type) {this.wlxr_type = wlxr_type;} private byte wlxr_type;
-	public static final    Xop_tblw_lxr Instance = new Xop_tblw_lxr(); Xop_tblw_lxr() {}
+	public static final Xop_tblw_lxr Instance = new Xop_tblw_lxr(); Xop_tblw_lxr() {}
 	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {
 		core_trie.Add(Hook_tb,	new Xop_tblw_lxr(Xop_tblw_wkr.Tblw_type_tb));
 		core_trie.Add(Hook_te,	new Xop_tblw_lxr(Xop_tblw_wkr.Tblw_type_te));
@@ -129,7 +129,7 @@ public class Xop_tblw_lxr implements Xop_lxr {
 	}
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
-	public static final    byte[] Hook_tb = Bry_.new_a7("\n{|"), Hook_te = Bry_.new_a7("\n|}"), Hook_tr = Bry_.new_a7("\n|-")
+	public static final byte[] Hook_tb = Bry_.new_a7("\n{|"), Hook_te = Bry_.new_a7("\n|}"), Hook_tr = Bry_.new_a7("\n|-")
 		, Hook_td = Bry_.new_a7("\n|"), Hook_th = Bry_.new_a7("\n!"), Hook_tc = Bry_.new_a7("\n|+")
 		, Hook_td2 = Bry_.new_a7("||"), Hook_th2 = Bry_.new_a7("!!");
 }

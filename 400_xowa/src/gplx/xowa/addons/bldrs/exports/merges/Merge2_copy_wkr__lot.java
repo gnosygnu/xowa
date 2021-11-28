@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.utls.*;
 class Merge2_copy_wkr__lot {
-	private final    Split_tbl tbl;
-	private final    String tbl_name, fld_blob_pkey, fld_blob_data;
-	private final    Merge2_copy_utl copy_utl;
+	private final Split_tbl tbl;
+	private final String tbl_name, fld_blob_pkey, fld_blob_data;
+	private final Merge2_copy_utl copy_utl;
 	private int resume__db_id;
 	private boolean tbl_has_blob;
 	public Merge2_copy_wkr__lot(Split_tbl tbl) {

@@ -23,7 +23,7 @@ public class Xob_hdump_bldr implements Gfo_invk {
 	private boolean enabled, hzip_enabled, hzip_diff, hzip_b256; private byte zip_tid = Byte_.Max_value_127;
 	private Xowe_wiki wiki; private Xob_hdump_tbl_retriever html_tbl_retriever;
 	private int prv_row_len = 0;
-	private final    Xoh_page tmp_hpg = new Xoh_page(); private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xoh_page tmp_hpg = new Xoh_page(); private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private boolean op_sys_is_wnt;
 	private byte[] toc_label = Bry_.Empty;
 	public Xoh_page Tmp_hpg() {return tmp_hpg;}

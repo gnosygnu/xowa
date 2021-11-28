@@ -27,7 +27,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
 public class GxwCbkHost_ {
-	public static final    GxwCbkHost Null = new GfuiHost_cls_null();
+	public static final GxwCbkHost Null = new GfuiHost_cls_null();
 		public static final boolean ExecKeyEvent(GxwCbkHost host, KeyEvent e) {
 		boolean rv = true; int id = e.getID(), val = e.getKeyCode();
 		boolean isAltF4 = false;

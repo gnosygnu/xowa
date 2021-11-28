@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.tests; import gplx.*; import gplx.core.*;
 import gplx.core.strings.*;
 public class Gfo_test_itm {
-	private final    boolean is_expd;
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final boolean is_expd;
+	private final Ordered_hash hash = Ordered_hash_.New();
 	Gfo_test_itm(boolean is_expd) {
 		this.is_expd = is_expd;
 	}

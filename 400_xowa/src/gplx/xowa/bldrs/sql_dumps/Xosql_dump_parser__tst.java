@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.sql_dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*; import gplx.core.ios.*; import gplx.core.tests.*;
 public class Xosql_dump_parser__tst {		
-	private final    Xosql_dump_parser__fxt fxt = new Xosql_dump_parser__fxt();
+	private final Xosql_dump_parser__fxt fxt = new Xosql_dump_parser__fxt();
 	private static final String table_def = "\n  KEY \n) ENGINE; ";
 	@Test public void One() {
 		fxt.Init(String_.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2);", "2|");
@@ -74,7 +74,7 @@ class Xosql_dump_parser__fxt {
 }
 class Xosql_dump_cbk__test implements Xosql_dump_cbk {
 	private int prv_idx = -1;
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public void Clear() {prv_idx = -1; bfr.Clear();}
 	public void On_fld_done(int fld_idx, byte[] src, int val_bgn, int val_end) {
 		if (fld_idx <= prv_idx) {

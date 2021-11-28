@@ -19,12 +19,12 @@ import gplx.langs.jsons.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.parsers.*;
 public class Wdata_doc {
-	private final    Wdata_wiki_mgr mgr;
+	private final Wdata_wiki_mgr mgr;
 	public Wdata_doc(Wdata_wiki_mgr mgr, Json_doc jdoc, byte[] qid) {
 		this.mgr = mgr; this.jdoc = jdoc; this.qid = qid;
 	}
-	public byte[] Qid() {return qid;} private final    byte[] qid;
-	public Json_doc Jdoc() {return jdoc;} private final    Json_doc jdoc;
+	public byte[] Qid() {return qid;} private final byte[] qid;
+	public Json_doc Jdoc() {return jdoc;} private final Json_doc jdoc;
 	public int Jdoc_size() {return jdoc == null ? 1 : jdoc.Src().length;}
 	public byte[][] Sort_langs() {return sort_langs;} public void Sort_langs_(byte[][] v) {sort_langs = v;} private byte[][] sort_langs = Bry_.Ary_empty;
 

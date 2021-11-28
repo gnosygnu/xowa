@@ -20,9 +20,9 @@ public class Wdata_pf_property_data {
 	public Wdata_pf_property_data(byte[] of, byte[] q, byte[] from) {
 		this.Of = of; this.Q = q; this.From = from;
 	}
-	public final    byte[]		Of;			// EX: "earth"
-	public final    byte[]		Q;			// EX: "Q123"
-	public final    byte[]		From;		// EX: "p2"
+	public final byte[]		Of;			// EX: "earth"
+	public final byte[]		Q;			// EX: "Q123"
+	public final byte[]		From;		// EX: "p2"
 
 	public static Wdata_pf_property_data Parse(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self) {
 		Bry_bfr tmp_bfr = ctx.Wiki().Utl__bfr_mkr().Get_b512();
@@ -64,7 +64,7 @@ public class Wdata_pf_property_data {
 		return new Wdata_pf_property_data(of, q, from);
 	}
 	private static final byte Tid__of = 0, Tid__q = 1, Tid__from = 2, Tid__id = 3;
-	private static final    Hash_adp_bry atrs_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry atrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_byte("of"		, Tid__of)
 	.Add_str_byte("q"		, Tid__q)
 	.Add_str_byte("from"	, Tid__from)	// "from" is alias as "q" except it seems to handle properties; EX: {{#property:p1|from=Q2}} == {{#property:p1|q=Q2}}; EX: {{#property:p1|from=p2}}

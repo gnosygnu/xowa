@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_gly_make__basic__tst {
-	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
+	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Before public void Init() {fxt.Clear();}
 	@Test  public void Media_div() {
 		String orig = String_.Concat_lines_nl_skip_last

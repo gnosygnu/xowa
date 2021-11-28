@@ -313,7 +313,7 @@ public class Xol_mw_lang_parser {
 				num_mgr.Separators_mgr().Set(key_bry, val_bry);
 			else throw Err_.new_unhandled(String_.new_u8(key_bry));	// NOTE: as of v1.22.2, all Messages only have a key of "." or "," DATE:2014-04-15
 		}
-	}	private static final    byte[] Bry_separatorTransformTable_comma = new byte[] {Byte_ascii.Comma}, Bry_separatorTransformTable_dot = new byte[] {Byte_ascii.Dot};
+	}	private static final byte[] Bry_separatorTransformTable_comma = new byte[] {Byte_ascii.Comma}, Bry_separatorTransformTable_dot = new byte[] {Byte_ascii.Dot};
 	private void Parse_digitTransformTable(Php_line_assign line, Xol_num_mgr num_mgr) {
 		if (line.Val().Itm_tid() == Php_itm_.Tid_null) return;// en is null; $digitTransformTable = null;
 		Php_itm_ary ary = (Php_itm_ary)line.Val();

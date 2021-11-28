@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.bulks; import gplx.*; import gplx.dbs.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.dbs.metas.*;
 public class Db_tbl_copy_tst {
-	private final    Db_tbl_copy_fxt fxt = new Db_tbl_copy_fxt();
+	private final Db_tbl_copy_fxt fxt = new Db_tbl_copy_fxt();
 	@Test  public void Basic() {
 		fxt.Test__bld_sql(fxt.Make_tbl("tbl_1", Dbmeta_fld_itm.new_int("fld_1"), Dbmeta_fld_itm.new_int("fld_2")), 
 		String_.Concat_lines_nl_skip_last
@@ -29,7 +29,7 @@ public class Db_tbl_copy_tst {
 	}
 }
 class Db_tbl_copy_fxt {
-	private final    Db_tbl_copy mgr = new Db_tbl_copy();
+	private final Db_tbl_copy mgr = new Db_tbl_copy();
 	public Dbmeta_tbl_itm Make_tbl(String name, Dbmeta_fld_itm... flds) {return Dbmeta_tbl_itm.New(name, flds);}
 	public void Test__bld_sql(Dbmeta_tbl_itm tbl, String expd) {
 		Gftest.Eq__ary__lines(expd, mgr.Bld_sql(tbl, "src", "trg"), "sql");

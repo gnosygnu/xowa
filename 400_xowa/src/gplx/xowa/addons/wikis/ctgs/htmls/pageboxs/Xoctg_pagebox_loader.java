@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*;
 import gplx.dbs.*; import gplx.xowa.addons.wikis.ctgs.dbs.*; import gplx.xowa.wikis.data.tbls.*;	
 class Xoctg_pagebox_loader implements Select_in_cbk {
-	private final    Xoctg_pagebox_hash hash; private final    byte[] page_url;
+	private final Xoctg_pagebox_hash hash; private final byte[] page_url;
 	public Xoctg_pagebox_loader(Xoctg_pagebox_hash hash, byte[] page_url) {
 		this.hash = hash; this.page_url = page_url;
 	}

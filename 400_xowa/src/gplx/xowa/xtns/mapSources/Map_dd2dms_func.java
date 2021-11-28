@@ -59,9 +59,9 @@ public class Map_dd2dms_func extends Pf_func_base {
 			bfr.Add(dir);
 		}
 	}
-	public static final    Map_dd2dms_func Instance = new Map_dd2dms_func(); Map_dd2dms_func() {}
+	public static final Map_dd2dms_func Instance = new Map_dd2dms_func(); Map_dd2dms_func() {}
 	private static final byte Key_tid_plus = 1, Key_tid_minus = 2, Key_tid_precision = 3;
-	private static final    Hash_adp_bry Key_hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry Key_hash = Hash_adp_bry.cs()
 	.Add_str_byte("plus"		, Key_tid_plus)
 	.Add_str_byte("minus"		, Key_tid_minus)
 	.Add_str_byte("precision"	, Key_tid_precision)

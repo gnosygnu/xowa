@@ -17,7 +17,7 @@ package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import
 import gplx.xowa.guis.cbks.js.*;
 public class Fs_root_core implements Xof_fsdb_mgr, Gfo_invk {	// reads images from file-system dir
 	private Xowe_wiki wiki;
-	private final    Fs_root_mgr mgr;
+	private final Fs_root_mgr mgr;
 	public Fs_root_core(Xowe_wiki wiki) {
 		this.Init_by_wiki(wiki);
 		this.mgr = new Fs_root_mgr(wiki);

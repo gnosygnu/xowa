@@ -56,8 +56,8 @@ class Io_stream_rdr_mgr {
 	}
 }
 class Io_stream_unzip_mgr {		
-	private final    String[] zip_exts;
-	private final    boolean stdout_enabled; private final    Process_adp stdout_process;
+	private final String[] zip_exts;
+	private final boolean stdout_enabled; private final Process_adp stdout_process;
 	public Io_stream_unzip_mgr(boolean stdout_enabled, Process_adp stdout_process, String[] zip_exts) {
 		this.stdout_enabled = stdout_enabled; this.stdout_process = stdout_process; this.zip_exts = zip_exts;
 	}

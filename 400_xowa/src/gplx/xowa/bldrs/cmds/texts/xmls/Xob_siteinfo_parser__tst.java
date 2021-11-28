@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.cmds.texts.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xob_siteinfo_parser__tst {
-	private final    Xob_siteinfo_parser__fxt fxt = new Xob_siteinfo_parser__fxt();
+	private final Xob_siteinfo_parser__fxt fxt = new Xob_siteinfo_parser__fxt();
 	@Test  public void Basic__simplewikt() {	// PURPOSE: basic test of siteinfo parse; DATE:2015-11-01
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "  <siteinfo>"
@@ -98,8 +98,8 @@ public class Xob_siteinfo_parser__tst {
 	}
 }
 class Xob_siteinfo_parser__fxt {
-	private final    Xow_ns_mgr ns_mgr = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Xow_ns_mgr ns_mgr = new Xow_ns_mgr(gplx.xowa.langs.cases.Xol_case_mgr_.U8());
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public void Test__parse(String src_str, String expd) {
 		Xob_siteinfo_nde nde = Xob_siteinfo_parser_.Parse(src_str, ns_mgr);
 		nde.To_bfr(bfr);

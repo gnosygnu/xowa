@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.preprocessors; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 public class Xomw_prepro_accum__dom implements Xomw_prepro_accum {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public Xomw_prepro_accum__dom(String val) {
 		this.Add_str_literal(val);
 	}
@@ -49,6 +49,6 @@ public class Xomw_prepro_accum__dom implements Xomw_prepro_accum {
 		return bfr.To_bry();
 	}
 
-	public static final    Xomw_prepro_accum__dom Instance = new Xomw_prepro_accum__dom("");
+	public static final Xomw_prepro_accum__dom Instance = new Xomw_prepro_accum__dom("");
 	public Xomw_prepro_accum Make_new() {return new Xomw_prepro_accum__dom("");}
 }

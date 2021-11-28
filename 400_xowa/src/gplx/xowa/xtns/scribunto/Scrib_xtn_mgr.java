@@ -18,7 +18,7 @@ import gplx.xowa.parsers.logs.*;
 import gplx.xowa.xtns.scribunto.engines.*;
 public class Scrib_xtn_mgr extends Xox_mgr_base {
 	private Xowe_wiki wiki;
-	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final    byte[] XTN_KEY = Bry_.new_a7("scribunto");
+	@Override public byte[] Xtn_key() {return XTN_KEY;} public static final byte[] XTN_KEY = Bry_.new_a7("scribunto");
 	@Override public void Xtn_ctor_by_app(Xoae_app app) {this.app = app;} private Xoae_app app;
 	@Override public Xox_mgr Xtn_clone_new() {return new Scrib_xtn_mgr();}
 	public Scrib_lib_mgr Lib_mgr() {return lib_mgr;} private Scrib_lib_mgr lib_mgr = new Scrib_lib_mgr();

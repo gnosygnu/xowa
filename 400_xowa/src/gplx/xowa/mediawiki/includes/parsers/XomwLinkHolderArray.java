@@ -21,17 +21,17 @@ import gplx.xowa.mediawiki.includes.linkers.*;
 * Holder of replacement pairs for wiki links
 */
 public class XomwLinkHolderArray {
-	private final    XomwLinkHolderList internals = new XomwLinkHolderList();
+	private final XomwLinkHolderList internals = new XomwLinkHolderList();
 //		public $interwikis = [];
 	// private int size = 0;
 
-	private final    Bry_bfr tmp = Bry_bfr_.New();
-	private final    Xomw_atr_mgr extraAtrs = new Xomw_atr_mgr();
-	private final    Xomw_qry_mgr query = new Xomw_qry_mgr();
+	private final Bry_bfr tmp = Bry_bfr_.New();
+	private final Xomw_atr_mgr extraAtrs = new Xomw_atr_mgr();
+	private final Xomw_qry_mgr query = new Xomw_qry_mgr();
 	/**
 	* @var Parser
 	*/
-	private final    XomwParserIface parent;
+	private final XomwParserIface parent;
 //		protected $tempIdOffset;
 
 	/**
@@ -744,7 +744,7 @@ public class XomwLinkHolderArray {
 		XomwLinkHolderItem item = new XomwLinkHolderItem(ttl, capt, Bry_.Ary_empty);
 		internals.Add(key, item);
 	}
-	private static final    byte[] Bry__link__bgn = Bry_.new_a7("<!--LINK ");
+	private static final byte[] Bry__link__bgn = Bry_.new_a7("<!--LINK ");
 }
 class XomwLinkHolderList {
 	private int ary_len = 0, ary_max = 128;
@@ -772,8 +772,8 @@ class XomwLinkHolderItem {
 		this.text = text;
 		this.query = query;
 	}
-	public XomwTitleOld Title() {return title;} private final    XomwTitleOld title;
-	public byte[] Text()      {return text;} private final    byte[] text;
+	public XomwTitleOld Title() {return title;} private final XomwTitleOld title;
+	public byte[] Text()      {return text;} private final byte[] text;
 	public byte[] Pdbk()      {return title.getPrefixedDBkey();}
-	public byte[][] Query()   {return query;} private final    byte[][] query;
+	public byte[][] Query()   {return query;} private final byte[][] query;
 }

@@ -18,9 +18,9 @@ import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.brys.ar
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
 public class Ref_html_wtr {
-	private final    Xoh_ref_list_fmtr grp_list_fmtr = new Xoh_ref_list_fmtr();
-	private final    Bfr_arg__bry_fmtr itm_id_fmtr = Bfr_arg_.New_bry_fmtr__null(), grp_id_fmtr = Bfr_arg_.New_bry_fmtr__null();
-	private final    Cite_mgr mgr;
+	private final Xoh_ref_list_fmtr grp_list_fmtr = new Xoh_ref_list_fmtr();
+	private final Bfr_arg__bry_fmtr itm_id_fmtr = Bfr_arg_.New_bry_fmtr__null(), grp_id_fmtr = Bfr_arg_.New_bry_fmtr__null();
+	private final Cite_mgr mgr;
 	public Ref_html_wtr(Xowe_wiki wiki) {
 		cfg = Ref_html_wtr_cfg.new_();
 		mgr = new Cite_mgr(wiki);

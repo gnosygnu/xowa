@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import org.junit.*; import gplx.core.tests.*;
 public class Bry_split__tst {
-	private final    Bry_split__fxt fxt = new Bry_split__fxt();
+	private final Bry_split__fxt fxt = new Bry_split__fxt();
 	@Test  public void Split() {
 		fxt.Test_split("a"				, Byte_ascii.Pipe, Bool_.N, "a");					// no trim
 		fxt.Test_split("a|"				, Byte_ascii.Pipe, Bool_.N, "a");
@@ -56,7 +56,7 @@ public class Bry_split__tst {
 	}
 }
 class Bry_split__fxt {
-	private final    Bry_split_wkr__example wkr = new Bry_split_wkr__example();
+	private final Bry_split_wkr__example wkr = new Bry_split_wkr__example();
 	public void Test_split(String raw_str, byte dlm, boolean trim, String... expd) {
 		byte[] src = Bry_.new_a7(raw_str);
 		Bry_split_.Split(src, 0, src.length, dlm, trim, wkr);
@@ -75,7 +75,7 @@ class Bry_split__fxt {
 	}
 }
 class Bry_split_wkr__example implements gplx.core.brys.Bry_split_wkr {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	public int Split(byte[] src, int itm_bgn, int itm_end) {
 		byte[] bry = itm_end == itm_bgn ? Bry_.Empty : Bry_.Mid(src, itm_bgn, itm_end);
 		if		(Bry_.Eq(bry, Bry_.new_a7("extend"))) return Bry_split_.Rv__extend;

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui; import gplx.*;
 public class RectAdp_ {
-	public static final    RectAdp Zero = new RectAdp(PointAdp_.Zero, SizeAdp_.Zero);
+	public static final RectAdp Zero = new RectAdp(PointAdp_.Zero, SizeAdp_.Zero);
 	public static RectAdp new_(int x, int y, int width, int height) {return new RectAdp(PointAdp_.new_(x, y), SizeAdp_.new_(width, height));}
 	public static RectAdp corners_(PointAdp upperLeft, PointAdp bottomRight) {return new RectAdp(upperLeft, SizeAdp_.corners_(upperLeft, bottomRight));}
 	public static RectAdp vector_(PointAdp pos, SizeAdp size) {return new RectAdp(pos, size);}

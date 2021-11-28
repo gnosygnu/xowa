@@ -17,7 +17,7 @@ package gplx.xowa.apps.apis.xowa.html; import gplx.*; import gplx.xowa.*; import
 import gplx.xowa.apps.cfgs.*;
 public class Xoapi_toggle_mgr implements Gfo_invk {
 	private Xoae_app app;
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public void Ctor_by_app(Xoae_app app) {this.app = app;}
 	public void Init_by_app(Xoae_app app) {
 		Io_url img_dir = app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.general");

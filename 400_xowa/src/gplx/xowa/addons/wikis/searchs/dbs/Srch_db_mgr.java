@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; i
 import gplx.dbs.cfgs.*;
 import gplx.xowa.wikis.data.*;
 public class Srch_db_mgr {
-	private final    Xow_db_mgr db_mgr;
+	private final Xow_db_mgr db_mgr;
 	public Srch_db_mgr(Xow_db_mgr db_mgr) {
 		this.db_mgr = db_mgr;
 	}

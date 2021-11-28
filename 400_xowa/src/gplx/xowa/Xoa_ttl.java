@@ -208,14 +208,14 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public boolean Is_external() {return this.wik_bgn != -1;}
 
 	public static final byte Subpage_spr = Byte_ascii.Slash;	// EX: A/B/C		
-	public static final    Xoa_ttl Null = null;
+	public static final Xoa_ttl Null = null;
 
 	private static final int Char__bidi = 1, Char__ws = 2;
-	private static final    Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
+	private static final Btrie_slim_mgr char_trie = Btrie_slim_mgr.cs()
 	.Add_many_int(Char__bidi	, Bry_.New_by_ints(0xE2, 0x80, 0x8E), Bry_.New_by_ints(0xE2, 0x80, 0x8F), Bry_.New_by_ints(0xE2, 0x80, 0xAA), Bry_.New_by_ints(0xE2, 0x80, 0xAB), Bry_.New_by_ints(0xE2, 0x80, 0xAC), Bry_.New_by_ints(0xE2, 0x80, 0xAD), Bry_.New_by_ints(0xE2, 0x80, 0xAE))
 	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000");
 
-	private final    static Gfo_url_encoder url_encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
+	private final static Gfo_url_encoder url_encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
 
 	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Space, Byte_ascii.Underline);}
 	public static byte[] Replace_unders(byte[] raw) {return Replace_unders(raw, 0, raw.length);}

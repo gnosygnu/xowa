@@ -23,7 +23,7 @@ import gplx.core.tests.Gftest;
 import org.junit.Test;
 
 public class XophpArrayStaticTest {
-	private final    XophpArray_fxt fxt = new XophpArray_fxt();
+	private final XophpArray_fxt fxt = new XophpArray_fxt();
 	// REF.PHP:https://www.php.net/manual/en/function.array-merge.php
 	@Test public void array_merge__basic() {
 		XophpArray ary1 = fxt.Make().Add("key1", "val1").Add("a");

@@ -35,14 +35,14 @@ class Xou_user_ {
 		app.Usr_dlg().Log_many(GRP_KEY, "bookmarks.create", "creating bookmarks page");
 		home_wiki.Db_mgr().Save_mgr().Data_create(home_wiki, Xoa_ttl.Parse(home_wiki, Bry_.new_a7("Data:Bookmarks")), Bry_.new_a7(Bookmarks_text));
 	}
-	public static final    String User_system_cfg_text = String_.Concat_lines_nl
+	public static final String User_system_cfg_text = String_.Concat_lines_nl
 	( "app.scripts.txns.get('user.prefs.general').version_('" + Xoa_app_.Version + "').bgn();"
 	, "app.files.download.enabled_('y');"	// default to true; DATE:2015-01-05
 	, "app.files.math.enabled_('y');"
 	, "app.files.math.renderer_('mathjax');"
 	, "app.scripts.txns.get('user.prefs.general').end();\n"
 	);
-	public static final    String Bookmarks_text = String_.Concat_lines_nl
+	public static final String Bookmarks_text = String_.Concat_lines_nl
 	( "Bookmarks are added automatically to the bottom of the page. All other text is not modified."
 	, ""
 	, "Please delete bookmarks by editing this page."

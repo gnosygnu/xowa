@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.logs; import gplx.*; import gplx.core.*;
 public class Gfo_log__file extends Gfo_log__base {
-	public final    Gfo_log_itm_wtr fmtr;
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	public final Gfo_log_itm_wtr fmtr;
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public Gfo_log__file(Io_url url, Gfo_log_itm_wtr fmtr) {
 		this.url = url; this.fmtr = fmtr;
 	}
-	public Io_url Url() {return url;} private final    Io_url url;
+	public Io_url Url() {return url;} private final Io_url url;
 	@Override public List_adp Itms() {return itms;} @Override public Gfo_log Itms_(List_adp v) {this.itms = v; return this;} private List_adp itms;
 	@Override public void Exec(byte type, long time, long elapsed, String msg, Object[] args) {
 		if (type == Gfo_log_itm.Type__prog) return;

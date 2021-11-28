@@ -45,7 +45,7 @@ import gplx.xowa.mediawiki.includes.xohtml.*;
 */
 public class XomwHtml {
 	// List of void elements from HTML5, section 8.1.2 as of 2016-09-19
-	private static final    Hash_adp_bry voidElements = Hash_adp_bry.cs().Add_many_str(
+	private static final Hash_adp_bry voidElements = Hash_adp_bry.cs().Add_many_str(
 		"area",
 		"super",
 		"br",
@@ -65,7 +65,7 @@ public class XomwHtml {
 
 	// Boolean attributes, which may have the value omitted entirely.  Manually
 	// collected from the HTML5 spec as of 2011-08-12.
-	private static final    Hash_adp_bry boolAttribs = Hash_adp_bry.ci_a7().Add_many_str(
+	private static final Hash_adp_bry boolAttribs = Hash_adp_bry.ci_a7().Add_many_str(
 		"async",
 		"autofocus",
 		"autoplay",
@@ -1082,7 +1082,7 @@ public class XomwHtml {
 //
 //			return implode(", ", $candidates);
 //		}
-	private static final    byte[]
+	private static final byte[]
 	  ELEM_INLINE                = Bry_.new_a7("/>")
 	, ATR_VAL_QUOTE              = Bry_.new_a7("=\"")
 	, ATR_VAL_EMPTY              = Bry_.new_a7("=\"\"")
@@ -1093,7 +1093,7 @@ public class XomwHtml {
 	, ATR_TYPE_SUBMIT            = Bry_.new_a7("submit")
 	;
 
-	private static final    Btrie_slim_mgr atrValEncodings = Btrie_slim_mgr.cs()
+	private static final Btrie_slim_mgr atrValEncodings = Btrie_slim_mgr.cs()
 	// Apparently we need to entity-encode \n, \r, \t, although the
 	// spec doesn't mention that.  Since we're doing strtr() anyway,
 	// we may as well not call htmlspecialchars().
@@ -1116,7 +1116,7 @@ public class XomwHtml {
 
 	// https://www.w3.org/TR/html401/index/attributes.html ("space-separated")
 	// https://www.w3.org/TR/html5/index.html#attributes-1 ("space-separated")
-	private static final    Hash_adp_bry spaceSeparatedListAttributes = Hash_adp_bry.ci_a7().Add_many_str(
+	private static final Hash_adp_bry spaceSeparatedListAttributes = Hash_adp_bry.ci_a7().Add_many_str(
 		"class", // html4, html5
 		"accesskey", // as of html5, multiple space-separated values allowed
 		// html4-spec doesn't document rel= as space-separated
@@ -1125,7 +1125,7 @@ public class XomwHtml {
 		"rel"
 	);
 
-	private static final    Hash_adp_bry validTypes = Hash_adp_bry.ci_a7().Add_many_str(
+	private static final Hash_adp_bry validTypes = Hash_adp_bry.ci_a7().Add_many_str(
 		// Remove invalid input types
 		"hidden",
 		"text",

@@ -20,5 +20,5 @@ public class Bry_comparer implements ComparerAble {
 		byte[] lhs = (byte[])lhsObj, rhs = (byte[])rhsObj;
 		return Bry_.Compare(lhs, 0, lhs.length, rhs, 0, rhs.length);
 	}
-	public static final    Bry_comparer Instance = new Bry_comparer(); Bry_comparer() {}	// TS.static
+	public static final Bry_comparer Instance = new Bry_comparer(); Bry_comparer() {}	// TS.static
 }

@@ -20,8 +20,8 @@ public abstract class Wbase_claim_base implements CompareAble {
 		this.pid = pid;
 		this.snak_tid = snak_tid;
 	}
-	public int						Pid()				{return pid;} private final    int pid;
-	public byte						Snak_tid()			{return snak_tid;} private final    byte snak_tid;
+	public int						Pid()				{return pid;} private final int pid;
+	public byte						Snak_tid()			{return snak_tid;} private final byte snak_tid;
 	public byte						Rank_tid()			{return rank_tid;} private byte rank_tid = Wbase_claim_rank_.Tid__normal;	// TEST: default to normal for tests
 	public String					Prop_type()			{return Prop_type_statement;} private static final String Prop_type_statement = "statement";
 	public byte[]					Wguid()				{return wguid;} private byte[] wguid;
@@ -42,5 +42,5 @@ public abstract class Wbase_claim_base implements CompareAble {
 		return Int_.Compare(pid, comp.pid);
 	}
 
-	public static final    Wbase_claim_base[] Ary_empty = new Wbase_claim_base[0];
+	public static final Wbase_claim_base[] Ary_empty = new Wbase_claim_base[0];
 }

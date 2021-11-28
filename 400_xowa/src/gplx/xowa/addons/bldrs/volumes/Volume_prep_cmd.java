@@ -41,6 +41,6 @@ public class Volume_prep_cmd extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "volume.prep";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;}
-	public static final    Xob_cmd Prototype = new Volume_prep_cmd(null, null);
+	public static final Xob_cmd Prototype = new Volume_prep_cmd(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Volume_prep_cmd(bldr, wiki);}
 }

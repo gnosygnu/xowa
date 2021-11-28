@@ -269,26 +269,26 @@ public class XomwParser implements XomwParserIface {
 	private int mMarkerIndex = 0;
 
 	// XOWA
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    XomwEnv env;
-	private final    XomwSanitizer sanitizer = new XomwSanitizer();
-	private final    Xomw_table_wkr tableWkr;
-	private final    Xomw_hr_wkr hrWkr = new Xomw_hr_wkr();
-	private final    Xomw_doubleunder_wkr doubleunderWkr = new Xomw_doubleunder_wkr();
-	private final    Xomw_heading_wkr headingWkr = new Xomw_heading_wkr();
-	private final    Xomw_heading_cbk__html headingWkrCbk = new Xomw_heading_cbk__html();
-	private final    Xomw_lnki_wkr lnkiWkr;
-	private final    Xomw_quote_wkr quoteWkr;
-	private final    Xomw_lnke_wkr lnkeWkr;
-	private final    Xomw_magiclinks_wkr magiclinksWkr;
-	private final    Xomw_nbsp_wkr nbspWkr = new Xomw_nbsp_wkr();
-	private final    XomwBlockLevelPass blockWkr = new XomwBlockLevelPass();
-	private final    Xomw_doubleunder_data doubleunder_data = new Xomw_doubleunder_data();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final XomwEnv env;
+	private final XomwSanitizer sanitizer = new XomwSanitizer();
+	private final Xomw_table_wkr tableWkr;
+	private final Xomw_hr_wkr hrWkr = new Xomw_hr_wkr();
+	private final Xomw_doubleunder_wkr doubleunderWkr = new Xomw_doubleunder_wkr();
+	private final Xomw_heading_wkr headingWkr = new Xomw_heading_wkr();
+	private final Xomw_heading_cbk__html headingWkrCbk = new Xomw_heading_cbk__html();
+	private final Xomw_lnki_wkr lnkiWkr;
+	private final Xomw_quote_wkr quoteWkr;
+	private final Xomw_lnke_wkr lnkeWkr;
+	private final Xomw_magiclinks_wkr magiclinksWkr;
+	private final Xomw_nbsp_wkr nbspWkr = new Xomw_nbsp_wkr();
+	private final XomwBlockLevelPass blockWkr = new XomwBlockLevelPass();
+	private final Xomw_doubleunder_data doubleunder_data = new Xomw_doubleunder_data();
 	private static Xomw_regex_space regex_space;
 	private static Xomw_regex_boundary regex_boundary;
 	private static Xomw_regex_url regex_url;
-	private final    Btrie_rv trv = new Btrie_rv();
-	private final    Bry_bfr tmp = Bry_bfr_.New();
+	private final Btrie_rv trv = new Btrie_rv();
+	private final Bry_bfr tmp = Bry_bfr_.New();
 
 	public XomwSanitizer Sanitizer() {return sanitizer;}
 	public XomwStripState Strip_state() {return mStripState;}
@@ -585,10 +585,10 @@ public class XomwParser implements XomwParserIface {
 		//	}
 		//	wfDebug(__CLASS__ . ": using preprocessor: {this.mPreprocessorClass}\n");
 	}
-	private final    Btrie_slim_mgr protocols_trie;
+	private final Btrie_slim_mgr protocols_trie;
 	public XomwEnv Env() {return env;}
 	public Xomw_lnki_wkr Lnki_wkr() {return lnkiWkr;}
-	public XomwLinker              Linker()          {return linker;}         private final    XomwLinker linker;
+	public XomwLinker              Linker()          {return linker;}         private final XomwLinker linker;
 	public byte[] Get_external_link_rel;
 	private static byte[] Atr__rel;
 	public XomwParser(XomwEnv env) {
@@ -5853,7 +5853,7 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 		// this.mLinkHolders.replace(text);
 		this.mLinkHolders.replace(pbfr);
 	}
-	private final    XomwParserBfr tmp_pbfr = new XomwParserBfr();
+	private final XomwParserBfr tmp_pbfr = new XomwParserBfr();
 	public byte[] replaceLinkHolders(byte[] text) {
 		// this.mLinkHolders.replace(text);
 		this.mLinkHolders.replace(tmp_pbfr.Init(text));
@@ -7242,16 +7242,16 @@ Tfds.Write(nowiki, isHTML, forceRawInterwiki, isChildObj, isLocalObj, titleText,
 //		OutputPage::setupOOUI();
 //		$this.mOutput.setEnableOOUI(true);
 //	}
-	public static final    String MARKER_PREFIX_STR = "\u007f'\"`UNIQ-";
-	public static final    byte[] 
+	public static final String MARKER_PREFIX_STR = "\u007f'\"`UNIQ-";
+	public static final byte[]
 	  MARKER_PREFIX  = Bry_.new_a7(MARKER_PREFIX_STR)
 	, MARKER_SUFFIX  = Bry_.new_a7("-QINU`\"'\u007f")
 	;
-	private static final    byte[]
+	private static final byte[]
 	  STRIP_ITEM = Bry_.new_a7("-item-")
 	, Bry__noparse = Bry_.new_a7("NOPARSE")
 	;
-	private static final    byte[] Bry__marker__noparse = Bry_.Add(MARKER_PREFIX, Bry__noparse);
+	private static final byte[] Bry__marker__noparse = Bry_.Add(MARKER_PREFIX, Bry__noparse);
 	public static Btrie_slim_mgr Protocols__dflt() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
 		Gfo_protocol_itm[] ary = Gfo_protocol_itm.Ary();

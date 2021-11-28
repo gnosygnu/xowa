@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 public class Xow_hdump_mode {
-	private final    int tid;
-	private final    String key;
-	private final    String gui;
+	private final int tid;
+	private final String key;
+	private final String gui;
 
 	public Xow_hdump_mode(int tid, String key, String gui) {
 		this.tid = tid; this.key = key; this.gui = gui;
@@ -26,7 +26,7 @@ public class Xow_hdump_mode {
 //		boolean			Tid_is_hdump_save() {return tid == Hdump_save.tid;}
 	public boolean  Tid_is_custom() {return tid < Shown.tid;}
 
-	public static final    Xow_hdump_mode
+	public static final Xow_hdump_mode
 	  Swt_browser       = new Xow_hdump_mode(0, "swt_browser"	, "SWT Browser")
 	, Hdump_save        = new Xow_hdump_mode(1, "hdump_save"	, "Saved for HTML DB")
 	, Shown             = new Xow_hdump_mode(2, "shown"			, "Shown")

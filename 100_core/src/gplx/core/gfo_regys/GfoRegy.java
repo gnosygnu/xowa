@@ -82,12 +82,12 @@ public class GfoRegy implements Gfo_invk {
 		}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String Invk_RegDir = "RegDir", Invk_RegObj = "RegObj";
+	}	public static final String Invk_RegDir = "RegDir", Invk_RegObj = "RegObj";
 	void RegItm(String key, Object val, int valType, Io_url url) {
 		hash.Add_if_dupe_use_nth(key, new GfoRegyItm(key, val, valType, url));
 	}
 	Hash_adp hash = Hash_adp_.New();
-	public static final    String Err_ChopBgn = "chopBgn results in null key", Err_ChopEnd = "chopEnd results in null key", Err_Dupe = "key already registered";
-        public static final    GfoRegy Instance = new GfoRegy(); GfoRegy() {}
+	public static final String Err_ChopBgn = "chopBgn results in null key", Err_ChopEnd = "chopEnd results in null key", Err_Dupe = "key already registered";
+        public static final GfoRegy Instance = new GfoRegy(); GfoRegy() {}
         @gplx.Internal protected static GfoRegy new_() {return new GfoRegy();}
 }

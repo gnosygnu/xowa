@@ -46,11 +46,11 @@ import gplx.xowa.wikis.pages.skins.Xopg_xtn_skin_itm_tid;
 import gplx.xowa.xtns.pfuncs.times.Pft_func_formatdate;
 import gplx.xowa.xtns.wbases.Wdata_xwiki_link_wtr;
 public class Xoh_page_wtr_wkr {
-	private final    Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); 
-	private final    Xoh_page_wtr_mgr mgr; private final    byte page_mode;
-	private final    Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
-	private final    gplx.xowa.addons.apps.scripts.Xoscript_mgr scripting_mgr = new gplx.xowa.addons.apps.scripts.Xoscript_mgr();
+	private final Object thread_lock_1 = new Object(), thread_lock_2 = new Object();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
+	private final Xoh_page_wtr_mgr mgr; private final byte page_mode;
+	private final Wdata_xwiki_link_wtr wdata_lang_wtr = new Wdata_xwiki_link_wtr();	// In other languages
+	private final gplx.xowa.addons.apps.scripts.Xoscript_mgr scripting_mgr = new gplx.xowa.addons.apps.scripts.Xoscript_mgr();
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private byte[] root_dir_bry;
 	public Xoh_page_wtr_wkr(Xoh_page_wtr_mgr mgr, byte page_mode) {this.mgr = mgr; this.page_mode = page_mode;}		
 	public Xoh_page_wtr_wkr Ctgs_enabled_(boolean v) {ctgs_enabled = v; return this;} private boolean ctgs_enabled = true;		
@@ -298,6 +298,6 @@ public class Xoh_page_wtr_wkr {
 		if (data_raw_len > 0)		// do not add nl if empty String
 			bfr.Add_byte_nl();		// per MW:EditPage.php: "Ensure there's a newline at the end, otherwise adding lines is awkward."
 	}
-	private static final    byte[] Key_lastmodifiedat = Bry_.new_a7("lastmodifiedat");
+	private static final byte[] Key_lastmodifiedat = Bry_.new_a7("lastmodifiedat");
 	
 }

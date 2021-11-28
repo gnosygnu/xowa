@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.data_stores; import gplx.*; import gplx.core.*;
 public class Gfo_data_store {
-	private final    Hash_adp hash = Hash_adp_.New();
+	private final Hash_adp hash = Hash_adp_.New();
 	public Gfo_data_itm Get_or_null(String key) {
 		return (Gfo_data_itm)hash.Get_by(key);
 	}

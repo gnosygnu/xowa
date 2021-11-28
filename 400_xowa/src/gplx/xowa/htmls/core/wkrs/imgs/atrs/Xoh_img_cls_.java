@@ -26,18 +26,18 @@ public class Xoh_img_cls_ {
 	  Str__thumbimage		= "thumbimage"
 	, Str__thumbborder		= "thumbborder"
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Bry__none				= Bry_.Empty
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Bry__thumbimage		= Bry_.new_a7(Str__thumbimage)
 	, Bry__thumbborder		= Bry_.new_a7(Str__thumbborder)
 	;
-	public static final    Btrie_slim_mgr Trie = Btrie_slim_mgr.cs()
+	public static final Btrie_slim_mgr Trie = Btrie_slim_mgr.cs()
 	.Add_bry_byte(Bry__thumbimage	, Tid__thumbimage)
 	.Add_bry_byte(Bry__thumbborder	, Tid__thumbborder)
 	;
-	private static final    byte[] Bry__html_class = Bry_.new_a7(" class=\"");
+	private static final byte[] Bry__html_class = Bry_.new_a7(" class=\"");
 	public static byte[] To_html(int tid, byte[] other) {
 		boolean other_is_empty = Bry_.Len_eq_0(other);
 		if (tid == Xoh_img_cls_.Tid__none && other_is_empty) return Bry_.Empty;

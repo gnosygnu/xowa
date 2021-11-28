@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 import org.junit.*; import gplx.core.tests.*;
 public class XomwTitle_tst {
-	private final    XomwTitleOld_fxt fxt = new XomwTitleOld_fxt();
+	private final XomwTitleOld_fxt fxt = new XomwTitleOld_fxt();
 	@Test public void Alphanum()           {fxt.Test__find_fwd_while_title("0aB"             , 3);}
 	@Test public void Angle()              {fxt.Test__find_fwd_while_title("0a<"             , 2);}
 }

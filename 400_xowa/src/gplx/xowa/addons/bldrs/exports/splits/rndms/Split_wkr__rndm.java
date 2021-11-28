@@ -19,8 +19,8 @@ import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bl
 import gplx.xowa.addons.wikis.pages.randoms.*; import gplx.xowa.addons.wikis.pages.randoms.dbs.*; import gplx.xowa.addons.wikis.pages.randoms.bldrs.*; import gplx.xowa.addons.wikis.pages.randoms.mgrs.*;
 import gplx.xowa.addons.bldrs.exports.utls.*;
 public class Split_wkr__rndm implements Split_wkr {
-	private final    Split_rslt_wkr__rndm rslt_wkr = new Split_rslt_wkr__rndm();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New(); private final    Db_attach_mgr attach_mgr = new Db_attach_mgr();
+	private final Split_rslt_wkr__rndm rslt_wkr = new Split_rslt_wkr__rndm();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New(); private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
 	private Rndm_bldr_wkr bldr;
 	private int cur_ns_id = -1;
 	public void Split__init(Split_ctx ctx, Xow_wiki wiki, Db_conn wkr_conn) {

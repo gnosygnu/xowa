@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 class Xow_db_file_hash {
-	private final    Ordered_hash hash = Ordered_hash_.New();
+	private final Ordered_hash hash = Ordered_hash_.New();
 	public int Count_total() {return count_total;} private int count_total;
 	public void Clear() {hash.Clear(); count_total = 0;}
 	public Ordered_hash Get_by_tid_or_null(byte tid) {return (Ordered_hash)hash.Get_by(tid);}

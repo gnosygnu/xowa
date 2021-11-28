@@ -17,7 +17,7 @@ package gplx;
 import gplx.core.primitives.*;
 import gplx.core.intls.*;
 public class Hash_adp_bry extends gplx.core.lists.Hash_adp_base implements Hash_adp {
-	private final    Hash_adp_bry_itm_base proto, key_ref;
+	private final Hash_adp_bry_itm_base proto, key_ref;
 	Hash_adp_bry(Hash_adp_bry_itm_base proto) {
 		this.proto = proto;
 		this.key_ref = proto.New();
@@ -106,7 +106,7 @@ class Hash_adp_bry_itm_cs extends Hash_adp_bry_itm_base {
 		}
 		return true;
 	}
-        public static final    Hash_adp_bry_itm_cs Instance = new Hash_adp_bry_itm_cs(); Hash_adp_bry_itm_cs() {}
+        public static final Hash_adp_bry_itm_cs Instance = new Hash_adp_bry_itm_cs(); Hash_adp_bry_itm_cs() {}
 }
 class Hash_adp_bry_itm_ci_a7 extends Hash_adp_bry_itm_base {
 	private byte[] src; int src_bgn, src_end;
@@ -139,10 +139,10 @@ class Hash_adp_bry_itm_ci_a7 extends Hash_adp_bry_itm_base {
 		}
 		return true;
 	}
-        public static final    Hash_adp_bry_itm_ci_a7 Instance = new Hash_adp_bry_itm_ci_a7(); Hash_adp_bry_itm_ci_a7() {}
+        public static final Hash_adp_bry_itm_ci_a7 Instance = new Hash_adp_bry_itm_ci_a7(); Hash_adp_bry_itm_ci_a7() {}
 }
 class Hash_adp_bry_itm_ci_u8 extends Hash_adp_bry_itm_base {
-	private final    Gfo_case_mgr case_mgr;
+	private final Gfo_case_mgr case_mgr;
 	Hash_adp_bry_itm_ci_u8(Gfo_case_mgr case_mgr) {this.case_mgr = case_mgr;}
 	private byte[] src; int src_bgn, src_end;
 	@Override public Hash_adp_bry_itm_base New() {return new Hash_adp_bry_itm_ci_u8(case_mgr);}

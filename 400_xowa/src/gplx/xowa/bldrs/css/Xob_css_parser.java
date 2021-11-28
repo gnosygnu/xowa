@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
 class Xob_css_parser {
-	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(255);
-	private final    Xob_mirror_mgr mgr;
-	private final    Xob_css_parser__url url_parser; private final    Xob_css_parser__import import_parser;
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Bry_bfr bfr = Bry_bfr_.New_w_size(255);
+	private final Xob_mirror_mgr mgr;
+	private final Xob_css_parser__url url_parser; private final Xob_css_parser__import import_parser;
+	private final Btrie_rv trv = new Btrie_rv();
 	public Xob_css_parser(Xob_mirror_mgr mgr) {
 		this.mgr = mgr;
 		this.url_parser = new Xob_css_parser__url(mgr.Site_url());
@@ -48,7 +48,7 @@ class Xob_css_parser {
 		}
 	}
 	private static final byte Tkn_import = 1, Tkn_url = 2;
-	private static final    Btrie_slim_mgr tkns_trie = Btrie_slim_mgr.ci_a7()
+	private static final Btrie_slim_mgr tkns_trie = Btrie_slim_mgr.ci_a7()
 	.Add_str_byte("@import"		, Tkn_import)
 	.Add_str_byte(" url("		, Tkn_url)
 	;

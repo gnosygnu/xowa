@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
 class Xoh_toc_wkr__lvl {
 	private static final int Toc_lvls_max = 7;
-	private final    int[] sub_lvl_count = new int[Toc_lvls_max], lvl_count = new int[Toc_lvls_max]; 
+	private final int[] sub_lvl_count = new int[Toc_lvls_max], lvl_count = new int[Toc_lvls_max];
 	private int prv_lvl, toc_lvl, prv_toc_lvl;
 	private int uid = 0;
 	public void Clear() {

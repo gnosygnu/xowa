@@ -46,5 +46,5 @@ public class Pfunc_wiki_stats extends Pf_func_base {
 	public Pfunc_wiki_stats(int id) {this.id = id;}
 	@Override public int Id() {return id;} private int id;
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_wiki_stats(id).Name_(name);}
-	public static final    Pfunc_wiki_stats Instance = new Pfunc_wiki_stats(-1);
+	public static final Pfunc_wiki_stats Instance = new Pfunc_wiki_stats(-1);
 }

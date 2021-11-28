@@ -17,13 +17,13 @@ package gplx.xowa.langs.lnki_trails; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*;
 import gplx.xowa.langs.names.*;
 public class Xol_lnki_trail_mgr_tst {
-	private final    Xol_lnki_trail_mgr_fxt fxt = new Xol_lnki_trail_mgr_fxt();
+	private final Xol_lnki_trail_mgr_fxt fxt = new Xol_lnki_trail_mgr_fxt();
 	@Test  public void Add_bulk() {
 		fxt.Test_add_bulk("äöüß", "ä", "ö", "ü", "ß");
 	}
 }
 class Xol_lnki_trail_mgr_fxt {
-	private final    Xol_lnki_trail_mgr lnki_trail_mgr = new Xol_lnki_trail_mgr();
+	private final Xol_lnki_trail_mgr lnki_trail_mgr = new Xol_lnki_trail_mgr();
 	public void Test_add_bulk(String raw, String... expd_ary) {
 		lnki_trail_mgr.Add_bulk(Bry_.new_u8(raw));
 		int expd_len = expd_ary.length;

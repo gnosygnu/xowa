@@ -17,8 +17,8 @@ package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import gplx.dbs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 class Xodb_page_rdr__sql implements Xodb_page_rdr {
-	private final    Xow_db_mgr db_mgr;
-	private final    Xowd_page_tbl page_tbl; private final    Db_rdr rdr;
+	private final Xow_db_mgr db_mgr;
+	private final Xowd_page_tbl page_tbl; private final Db_rdr rdr;
 	public Xodb_page_rdr__sql(Xowe_wiki wiki) {
 		this.db_mgr = wiki.Data__core_mgr();
 		this.page_tbl = db_mgr.Tbl__page();

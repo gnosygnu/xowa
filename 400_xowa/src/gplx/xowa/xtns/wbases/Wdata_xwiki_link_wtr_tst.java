@@ -17,7 +17,7 @@ package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*; import gplx.langs.jsons.*;
 import gplx.xowa.wikis.domains.*;
 public class Wdata_xwiki_link_wtr_tst {
-	@Before public void init() {fxt.Init();} private final    Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
+	@Before public void init() {fxt.Init();} private final Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
 	@Test public void Skip_xwiki_lang_for_self() {	// PURPOSE: list of language links should not include self
 		fxt.Init_xwikis_add("en", "fr", "de");
 		fxt.Init_qids_add("en", Xow_domain_tid_.Tid__wikipedia, "Q1_en", "Q1");

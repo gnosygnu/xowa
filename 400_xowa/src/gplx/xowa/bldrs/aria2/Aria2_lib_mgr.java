@@ -35,8 +35,8 @@ public class Aria2_lib_mgr implements Gfo_invk {
 		if		(ctx.Match(k, Invk_lib))				return lib;
 		else	return Gfo_invk_.Rv_unhandled;
 	}
-	private static final    String Invk_lib = "lib";
-	private static final    String Lib_args_fmt = String_.Concat
+	private static final String Invk_lib = "lib";
+	private static final String Lib_args_fmt = String_.Concat
 	( "--max-connection-per-server=2"
 	, " --max-concurrent-downloads=20"
 	, " --split=4"

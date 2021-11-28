@@ -48,7 +48,7 @@ public class GfuiCheckListPanel extends GfuiElemBase {
 		else if	(ctx.Match(k, ReverseChks_cmd))			listBox.Items_reverse();
 		else return super.Invk(ctx, ikey, k, m);
 		return this;
-	}	public static final    String ToggleChecks_cmd = "ToggleChecks", ReverseChks_cmd = "ReverseChks";
+	}	public static final String ToggleChecks_cmd = "ToggleChecks", ReverseChks_cmd = "ReverseChks";
 	GfuiChkBox toggle;
 	GfuiCheckListBox listBox = GfuiCheckListBox.new_();
 	public static GfuiCheckListPanel new_() {

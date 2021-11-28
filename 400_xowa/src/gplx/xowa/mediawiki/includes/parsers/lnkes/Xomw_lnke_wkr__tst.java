@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.mediawiki.includes.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import org.junit.*;
 public class Xomw_lnke_wkr__tst {
-	private final    Xomw_lnke_wkr__fxt fxt = new Xomw_lnke_wkr__fxt();
+	private final Xomw_lnke_wkr__fxt fxt = new Xomw_lnke_wkr__fxt();
 	@Test  public void Basic()                         {fxt.Test__parse("[https://a.org b]"           , "<a rel='nofollow' class='external text' href='https://a.org'>b</a>");}
 	@Test  public void Invaild__protocol()             {fxt.Test__parse("[httpz:a.org]"               , "[httpz:a.org]");}
 	@Test  public void Invaild__protocol_slash()       {fxt.Test__parse("[https:a.org]"               , "[https:a.org]");}
@@ -53,8 +53,8 @@ public class Xomw_lnke_wkr__tst {
 	}
 }
 class Xomw_lnke_wkr__fxt {
-	private final    Xomw_lnke_wkr wkr;
-	private final    XomwParserBfr pbfr = new XomwParserBfr();
+	private final Xomw_lnke_wkr wkr;
+	private final XomwParserBfr pbfr = new XomwParserBfr();
 	private boolean apos = true;
 	public Xomw_lnke_wkr__fxt() {
 		XomwParser parser = new XomwParser(XomwEnv_fxt.NewTest());

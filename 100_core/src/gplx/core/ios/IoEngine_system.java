@@ -577,7 +577,7 @@ public class IoEngine_system extends IoEngine_base {
 	}
 	void MarkFileWritable(File fil, Io_url url, boolean readOnlyFails, String op) {	
 		if (Fil_ReadOnly(fil)) {
-			if (readOnlyFails)	// NOTE: java will always allow final    files to be deleted; programmer api is responsible for check
+			if (readOnlyFails)	// NOTE: java will always allow final files to be deleted; programmer api is responsible for check
 				throw Err_.new_(IoEngineArgs.Instance.Err_ReadonlyFileNotWritable, "writable operation attempted on readOnly file", "op", op, "url", url.Xto_api());
 			else
 				Fil_Writable(fil);
@@ -599,7 +599,7 @@ class IoEngineArgs {
 	public String	Err_ReadonlyFileNotWritable = "gplx.core.ios.ReadonlyFileNotWritable";
 	public String	Err_FileNotFound 			= "gplx.core.ios.FileNotFound";
 	public String	Err_IoException				= "gplx.core.ios.IoException";
-	public static final    IoEngineArgs Instance = new IoEngineArgs();
+	public static final IoEngineArgs Instance = new IoEngineArgs();
 }
 class IoEngine_system_xtn {
 	// PATCH.DROID:VerifyError if file.setExecutable is referenced directly in IoEngine_system. However, if placed in separate class

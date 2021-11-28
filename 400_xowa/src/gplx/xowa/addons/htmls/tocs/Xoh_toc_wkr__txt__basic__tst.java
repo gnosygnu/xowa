@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.langs.htmls.*;
 public class Xoh_toc_wkr__txt__basic__tst {
-	@Before public void init() {fxt.Clear();} private final    Xoh_toc_wkr__txt__fxt fxt = new Xoh_toc_wkr__txt__fxt();
+	@Before public void init() {fxt.Clear();} private final Xoh_toc_wkr__txt__fxt fxt = new Xoh_toc_wkr__txt__fxt();
 	@Test  public void Basic() {
 		fxt.Test__both("a b c", "a_b_c", "a b c");
 	}
@@ -49,10 +49,10 @@ public class Xoh_toc_wkr__txt__basic__tst {
 	}
 }
 class Xoh_toc_wkr__txt__fxt {
-	private final    Xoh_toc_wkr__txt wkr = new Xoh_toc_wkr__txt();
-	private final    Xoh_toc_itm itm = new Xoh_toc_itm();
-	private final    Bry_bfr tmp = Bry_bfr_.New();
-	private final    Xow_tidy_mgr_interface__test tidy_mgr = new Xow_tidy_mgr_interface__test();
+	private final Xoh_toc_wkr__txt wkr = new Xoh_toc_wkr__txt();
+	private final Xoh_toc_itm itm = new Xoh_toc_itm();
+	private final Bry_bfr tmp = Bry_bfr_.New();
+	private final Xow_tidy_mgr_interface__test tidy_mgr = new Xow_tidy_mgr_interface__test();
 	public void Clear() {
 		wkr.Clear();
 		tidy_mgr.Clear();
@@ -76,7 +76,7 @@ class Xoh_toc_wkr__txt__fxt {
 	}
 }
 class Xow_tidy_mgr_interface__test implements gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public void Clear() {hash.Clear();}
 	public void Add(byte[] html, byte[] tidy) {hash.Add(html, tidy);}
 	public void Exec_tidy(Bry_bfr bfr, boolean indent, byte[] page_url) {

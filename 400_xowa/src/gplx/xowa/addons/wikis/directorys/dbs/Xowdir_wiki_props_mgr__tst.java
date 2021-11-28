@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.wikis.data.*;
 public class Xowdir_wiki_props_mgr__tst {
-	private final    Xowdir_wiki_props_mgr__fxt fxt = new Xowdir_wiki_props_mgr__fxt();
+	private final Xowdir_wiki_props_mgr__fxt fxt = new Xowdir_wiki_props_mgr__fxt();
 
 	@Test  public void Import__wiki__missing_all() {
 		// handle all imported .xowa wikis pre v4.3
@@ -48,7 +48,7 @@ public class Xowdir_wiki_props_mgr__tst {
 	}
 }
 class Xowdir_wiki_props_mgr__fxt {
-	private final    Xowdir_wiki_props_mgr mgr = new Xowdir_wiki_props_mgr__mock();
+	private final Xowdir_wiki_props_mgr mgr = new Xowdir_wiki_props_mgr__mock();
 	public Xowdir_wiki_props Make__json(String domain, String name, String main_page) {
 		return new Xowdir_wiki_props(domain, name, main_page);
 	}

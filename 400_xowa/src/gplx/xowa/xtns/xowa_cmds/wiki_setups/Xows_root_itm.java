@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.xowa_cmds.wiki_setups; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.xowa_cmds.*;
 import gplx.langs.mustaches.*;
 class Xows_root_itm implements Mustache_doc_itm {
-	private final    byte[] language, url_list;
-	private final    Xows_wiki_itm[] wiki_ary;
+	private final byte[] language, url_list;
+	private final Xows_wiki_itm[] wiki_ary;
 	public Xows_root_itm(byte[] language, byte[] url_list, Xows_wiki_itm[] wiki_ary) {
 		this.language = language;
 		this.url_list = url_list;
@@ -36,12 +36,12 @@ class Xows_root_itm implements Mustache_doc_itm {
 	}
 }
 class Xows_wiki_itm implements Mustache_doc_itm {
-	private final    Xows_task_itm[] task_ary;
+	private final Xows_task_itm[] task_ary;
 	public Xows_wiki_itm(byte[] wiki_domain, Xows_task_itm[] task_ary) {
 		this.wiki_domain = wiki_domain;
 		this.task_ary = task_ary;
 	}
-	public byte[] Wiki_domain() {return wiki_domain;} private final    byte[] wiki_domain;
+	public byte[] Wiki_domain() {return wiki_domain;} private final byte[] wiki_domain;
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "wiki_domain"))		bfr.Add_bry(wiki_domain);
 		else											return false;
@@ -53,14 +53,14 @@ class Xows_wiki_itm implements Mustache_doc_itm {
 	}
 }
 class Xows_task_itm implements Mustache_doc_itm {
-	private final    byte[] wiki_domain, task_full_name, task_name, task_date;
-	private final    Xows_file_itm[] file_ary;
+	private final byte[] wiki_domain, task_full_name, task_name, task_date;
+	private final Xows_file_itm[] file_ary;
 	public Xows_task_itm(int seqn_id, byte[] wiki_domain, byte[] task_full_name, byte[] task_name, byte[] task_date, Xows_file_itm[] file_ary) {
 		this.seqn_id = seqn_id;
 		this.wiki_domain = wiki_domain; this.task_full_name = task_full_name; this.task_name = task_name; this.task_date = task_date;
 		this.file_ary = file_ary;
 	}
-	public int Seqn_id() {return seqn_id;} private final    int seqn_id;
+	public int Seqn_id() {return seqn_id;} private final int seqn_id;
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "wiki_domain"))		bfr.Add_bry(wiki_domain);
 		else if	(String_.Eq(key, "task_name"))			bfr.Add_bry(task_name);
@@ -75,12 +75,12 @@ class Xows_task_itm implements Mustache_doc_itm {
 	}
 }
 class Xows_file_itm implements Mustache_doc_itm {
-	private final    byte[] file_href;
+	private final byte[] file_href;
 	public Xows_file_itm(int step_id, byte[] file_href) {
 		this.step_id = step_id;
 		this.file_href = file_href;
 	}
-	public int Step_id() {return step_id;} private final    int step_id;
+	public int Step_id() {return step_id;} private final int step_id;
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
 		if		(String_.Eq(key, "file_href"))			bfr.Add_bry(file_href);
 		else											return false;

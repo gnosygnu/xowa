@@ -438,7 +438,7 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static final    byte[] Trim_ary_ws = mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr, Byte_ascii.Space);
+	public static final byte[] Trim_ary_ws = mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr, Byte_ascii.Space);
 	public static byte[] Trim(byte[] src) {return Trim(src, 0, src.length, true, true, Trim_ary_ws, true);}
 	public static byte[] Trim(byte[] src, int bgn, int end) {return Trim(src, bgn, end, true, true, Trim_ary_ws, true);}
 	public static byte[] Trim(byte[] src, int bgn, int end, boolean trim_bgn, boolean trim_end, byte[] trim_ary, boolean reuse_bry_if_noop) {
@@ -826,8 +826,8 @@ public class Bry_ {
 			if (!Bry_.Eq(lhs[i], rhs[i])) return false;
 		return true;
 	}
-	public static final    byte Dlm_fld = (byte)'|', Dlm_row = (byte)'\n', Dlm_quote = (byte)'"', Dlm_null = 0, Ascii_zero = 48;
-	public static final    String Fmt_csvDte = "yyyyMMdd HHmmss.fff";
+	public static final byte Dlm_fld = (byte)'|', Dlm_row = (byte)'\n', Dlm_quote = (byte)'"', Dlm_null = 0, Ascii_zero = 48;
+	public static final String Fmt_csvDte = "yyyyMMdd HHmmss.fff";
 	public static DateAdp ReadCsvDte(byte[] ary, Int_obj_ref posRef, byte lkp) {// ASSUME: fmt = yyyyMMdd HHmmss.fff
 		int y = 0, M = 0, d = 0, H = 0, m = 0, s = 0, f = 0;
 		int bgn = posRef.Val();

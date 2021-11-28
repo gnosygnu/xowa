@@ -63,7 +63,7 @@ class Xob_log_property_temp_tbl {
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "log_property_temp", Fld_prop_page_ttl = "prop_page_ttl", Fld_prop_prop_name = "prop_prop_name", Fld_prop_eval_time = "prop_eval_time";
-	private static final    String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = String_.Concat_lines_nl
 		(	"CREATE TABLE IF NOT EXISTS log_property_temp"
 		,	"( prop_id                  integer             NOT NULL    PRIMARY KEY AUTOINCREMENT"
 		,	", prop_page_ttl            varchar(255)        NOT NULL"

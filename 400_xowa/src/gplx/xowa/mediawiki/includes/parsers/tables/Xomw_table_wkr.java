@@ -17,10 +17,10 @@ package gplx.xowa.mediawiki.includes.parsers.tables; import gplx.*; import gplx.
 import gplx.xowa.parsers.htmls.*;
 import gplx.xowa.mediawiki.includes.libs.*; import gplx.xowa.parsers.uniqs.*;
 public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.UNSAFE: caching for repeated calls
-	private final    Bry_bfr tmp;
+	private final Bry_bfr tmp;
 	private Bry_bfr bfr;
-	private final    XomwSanitizer sanitizer; private final    XomwStripState strip_state;
-	private final    List_adp 
+	private final XomwSanitizer sanitizer; private final XomwStripState strip_state;
+	private final List_adp
 	  td_history       = List_adp_.New() // Is currently a td tag open?
 	, last_tag_history = List_adp_.New() // Save history of last lag activated (td, th or caption)
 	, tr_history       = List_adp_.New() // Is currently a tr tag open?
@@ -455,7 +455,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 //
 //			return $out;
 //		}
-	private static final    byte[] 
+	private static final byte[]
 	  Wtxt__tb__bgn     = Bry_.new_a7("{|")
 	, Wtxt__tb__end     = Bry_.new_a7("|}")
 	, Wtxt__tr          = Bry_.new_a7("|-")
@@ -475,6 +475,6 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 	, Html__dl__end     = Bry_.new_a7("</dd></dl>")
 	, Html__tb__empty   = Bry_.new_a7("<table>\n<tr><td></td></tr>\n</table>")
 	;
-	private static final    int Len__tb__empty = Html__tb__empty.length;
-	private static final    byte[][] Cells__empty = new byte[][] {Bry_.Empty};
+	private static final int Len__tb__empty = Html__tb__empty.length;
+	private static final byte[][] Cells__empty = new byte[][] {Bry_.Empty};
 }

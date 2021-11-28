@@ -20,8 +20,8 @@ public class Wdata_dict_langtext {
 	  Tid__language								= 0
 	, Tid__value								= 1
 	;
-	public static final    Wbase_enum_hash Reg = new Wbase_enum_hash("core.langtext", 2);
-	public static final    Wbase_enum_itm
+	public static final Wbase_enum_hash Reg = new Wbase_enum_hash("core.langtext", 2);
+	public static final Wbase_enum_itm
 	  Itm__language								= Reg.Add(Tid__language		, "language")
 	, Itm__value								= Reg.Add(Tid__value		, "value")
 	;

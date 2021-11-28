@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; im
 import gplx.xowa.wikis.nss.*; import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.htmls.core.bldrs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.wikis.data.*;
 class Xob_hdump_tbl_retriever__ns_to_db implements Xob_hdump_tbl_retriever {
-	private final    Xob_ns_to_db_mgr ns_to_db_mgr;
+	private final Xob_ns_to_db_mgr ns_to_db_mgr;
 	public Xob_hdump_tbl_retriever__ns_to_db(Xowe_wiki wiki) {
 		Xow_db_mgr core_data_mgr = wiki.Db_mgr_as_sql().Core_data_mgr();
 		this.ns_to_db_mgr = new Xob_ns_to_db_mgr(new Xob_ns_to_db_wkr__html(core_data_mgr.Db__core()), core_data_mgr, Xobldr_cfg.Max_size__html(wiki.App()));

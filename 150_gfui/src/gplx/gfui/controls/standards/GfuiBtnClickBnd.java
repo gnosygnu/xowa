@@ -35,6 +35,6 @@ class GfuiBtnClickBnd implements InjectAble, Gfo_invk {
 		if		(ctx.Match(k, ExecMouseUp_cmd))		ExecMouseUp(IptEventData.ctx_(ctx, m));
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	static final    String ExecMouseUp_cmd = "ExecMouseUp";
-	public static final    GfuiBtnClickBnd Instance = new GfuiBtnClickBnd(); GfuiBtnClickBnd() {}
+	}	static final String ExecMouseUp_cmd = "ExecMouseUp";
+	public static final GfuiBtnClickBnd Instance = new GfuiBtnClickBnd(); GfuiBtnClickBnd() {}
 }

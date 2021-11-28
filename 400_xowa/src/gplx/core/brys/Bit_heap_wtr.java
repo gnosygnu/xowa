@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.brys; import gplx.*; import gplx.core.*;
 public class Bit_heap_wtr {
-	private final    gplx.xowa.htmls.core.hzips.Xoh_hzip_int hzip_int = new gplx.xowa.htmls.core.hzips.Xoh_hzip_int().Mode_is_b256_(true);
-	private final    Bry_bfr hzip_int_bfr = Bry_bfr_.Reset(5);
+	private final gplx.xowa.htmls.core.hzips.Xoh_hzip_int hzip_int = new gplx.xowa.htmls.core.hzips.Xoh_hzip_int().Mode_is_b256_(true);
+	private final Bry_bfr hzip_int_bfr = Bry_bfr_.Reset(5);
 	public int Cur()		{return cur;} private int cur;
 	public int Cur_bits()	{return cur_bits;} private int cur_bits;
-	public Bry_bfr Heap()	{return heap;} private final    Bry_bfr heap = Bry_bfr_.New();
+	public Bry_bfr Heap()	{return heap;} private final Bry_bfr heap = Bry_bfr_.New();
 	public void Clear()		{heap.Clear(); cur = 0; cur_bits = 0;}
 	public void Add_bool(boolean v) {
 		if (v)
@@ -65,5 +65,5 @@ public class Bit_heap_wtr {
 		hzip_int_bfr.Clear();
 	}
 	public void Save(Bry_bfr bfr) {}
-	public static final    int[] Pow_ary = new int[] {1, 2, 4, 8, 16, 32, 64, 128, 256};
+	public static final int[] Pow_ary = new int[] {1, 2, 4, 8, 16, 32, 64, 128, 256};
 }

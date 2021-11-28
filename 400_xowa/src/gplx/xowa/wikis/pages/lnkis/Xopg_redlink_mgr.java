@@ -18,7 +18,7 @@ import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.langs.vnts.*;
 public class Xopg_redlink_mgr implements Gfo_invk {
-	private final    Xoa_page page; private final    Xog_js_wkr js_wkr;
+	private final Xoa_page page; private final Xog_js_wkr js_wkr;
 	public Xopg_redlink_mgr(Xoa_page page, Xog_js_wkr js_wkr) {this.page = page; this.js_wkr = js_wkr;	}
 	private void Redlink() {
 		// init; exit if redlink disabled (on Module pages)

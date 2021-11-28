@@ -67,7 +67,7 @@ class Xof_bin_skip_wkr__page_gt_1 implements Xof_bin_skip_wkr {	// prior to v2.4
 	public void Skip_term(Fsm_cfg_mgr cfg_mgr) {
 		cfg_mgr.Patch__save(Fsm_cfg_mgr.Key_patch__page_gt_1);
 	}
-        public static final    Xof_bin_skip_wkr__page_gt_1 Instance = new Xof_bin_skip_wkr__page_gt_1(); Xof_bin_skip_wkr__page_gt_1() {}
+        public static final Xof_bin_skip_wkr__page_gt_1 Instance = new Xof_bin_skip_wkr__page_gt_1(); Xof_bin_skip_wkr__page_gt_1() {}
 }
 class Xof_bin_skip_wkr__small_size implements Xof_bin_skip_wkr {// downloads can randomly be broken; assume that anything with a small size is broken and redownload again; DATE:2015-04-21
 	public String Key() {return Xof_bin_skip_wkr_.Key__small_size;}
@@ -83,5 +83,5 @@ class Xof_bin_skip_wkr__small_size implements Xof_bin_skip_wkr {// downloads can
 		return rv;
 	}
 	public void Skip_term(Fsm_cfg_mgr cfg_mgr) {}
-        public static final    Xof_bin_skip_wkr__small_size Instance = new Xof_bin_skip_wkr__small_size(); Xof_bin_skip_wkr__small_size() {}
+        public static final Xof_bin_skip_wkr__small_size Instance = new Xof_bin_skip_wkr__small_size(); Xof_bin_skip_wkr__small_size() {}
 }

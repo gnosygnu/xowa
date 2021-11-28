@@ -21,7 +21,7 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 	private int score_multiplier = 100000000;
 	private boolean page_rank_enabled = false;
 	private boolean delete_plink_db = false;
-	private final    Adjustment_cmd score_adjustment_mgr;
+	private final Adjustment_cmd score_adjustment_mgr;
 	public Xobldr__link__link_score(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);
 		this.score_adjustment_mgr = new Adjustment_cmd(wiki);
 	}
@@ -186,6 +186,6 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 
 	public static final String BLDR_CMD_KEY = "search.link__link_score";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__link__link_score(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__link__link_score(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__link__link_score(bldr, wiki);}
 }

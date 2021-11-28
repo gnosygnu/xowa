@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.ctgs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xob_catlink_mgr__tst {
-	private final    Xob_catlink_mgr__fxt fxt = new Xob_catlink_mgr__fxt();
+	private final Xob_catlink_mgr__fxt fxt = new Xob_catlink_mgr__fxt();
 	@Test  public void Parse_timestamp() {// fix bad parsing b/c of "YYYY" instead of "yyyy"; ISSUE#:664; DATE:2020-02-05
 		fxt.Test__Parse_timestamp("2016-02-01 18:34:08", 1454351648); // fails if 1451241248
 	}

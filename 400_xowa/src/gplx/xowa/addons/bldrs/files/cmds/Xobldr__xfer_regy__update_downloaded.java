@@ -63,6 +63,6 @@ public class Xobldr__xfer_regy__update_downloaded extends Xob_cmd__base implemen
 
 	public static final String BLDR_CMD_KEY = "file.xfer_regy_update";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__xfer_regy__update_downloaded(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__xfer_regy__update_downloaded(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__xfer_regy__update_downloaded(bldr, wiki);}
 }

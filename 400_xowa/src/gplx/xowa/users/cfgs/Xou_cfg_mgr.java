@@ -17,8 +17,8 @@ package gplx.xowa.users.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.dbs.*;
 public class Xou_cfg_mgr {
 	private Xou_cfg_tbl tbl;
-	private final    Hash_adp hash = Hash_adp_.New();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Hash_adp hash = Hash_adp_.New();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public void Init_by_app(Db_conn conn) {
 		tbl = new Xou_cfg_tbl(conn);
 		tbl.Conn().Meta_tbl_assert(tbl);

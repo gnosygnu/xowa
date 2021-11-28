@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.jsons.*;
 public class Language_name_loader {
-	private final    Json_parser parser = new Json_parser();
-	private final    Io_url names_url;
+	private final Json_parser parser = new Json_parser();
+	private final Io_url names_url;
 
 	public Language_name_loader(Io_url root_dir) {
 		names_url = root_dir.GenSubFil_nest("bin", "any", "xowa", "cfg", "lang", "data", "names.json");

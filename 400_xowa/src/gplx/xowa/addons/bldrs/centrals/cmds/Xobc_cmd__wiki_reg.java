@@ -17,13 +17,13 @@ package gplx.xowa.addons.bldrs.centrals.cmds; import gplx.*; import gplx.xowa.*;
 import gplx.core.security.*;
 import gplx.xowa.wikis.*;
 public class Xobc_cmd__wiki_reg extends Xobc_cmd__base {
-	private final    Io_url wiki_dir;
-	private final    String wiki_domain;
+	private final Io_url wiki_dir;
+	private final String wiki_domain;
 	public Xobc_cmd__wiki_reg(Xobc_task_mgr task_mgr, int task_id, int step_id, int cmd_idx, Io_url wiki_dir, String wiki_domain) {super(task_mgr, task_id, step_id, cmd_idx);
 		this.wiki_dir = wiki_dir;
 		this.wiki_domain = wiki_domain;
 	}
-	@Override public String Cmd_type() {return CMD_TYPE;} public static final    String CMD_TYPE = "xowa.wiki.reg";
+	@Override public String Cmd_type() {return CMD_TYPE;} public static final String CMD_TYPE = "xowa.wiki.reg";
 	@Override public String Cmd_name() {return "import";}		
 	@Override protected void Cmd_exec_hook(Xobc_cmd_ctx ctx) {
 		ctx.App().User().User_db_mgr().Init_site_mgr();	// must init for wiki.register cmd

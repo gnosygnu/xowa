@@ -17,7 +17,7 @@ package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx
 import gplx.core.btries.*;
 public class Xol_grammar_ru implements Xol_grammar {
 	static final byte Genitive_null = 0, Genitive_bnkn = 1, Genitive_Bnkn = 26, Genitive_b = 3, Genitive_nr = 4, Genitive_ka = 5, Genitive_tn = 6, Genitive_abl = 7, Genitive_hnk = 8;
-	private final    Btrie_rv trv = new Btrie_rv();
+	private final Btrie_rv trv = new Btrie_rv();
 	private static Btrie_bwd_mgr Genitive_trie;
 	private static Btrie_bwd_mgr genitive_trie_() {
 		Btrie_bwd_mgr rv = new Btrie_bwd_mgr(false);

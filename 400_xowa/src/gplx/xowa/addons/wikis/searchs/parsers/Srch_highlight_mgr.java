@@ -17,8 +17,8 @@ package gplx.xowa.addons.wikis.searchs.parsers; import gplx.*; import gplx.xowa.
 import gplx.core.btries.*;
 import gplx.xowa.langs.cases.*;
 public class Srch_highlight_mgr {
-	private final    Xol_case_mgr	case_mgr;
-	private final    Bry_bfr		tmp_bfr = Bry_bfr_.New_w_size(32);
+	private final Xol_case_mgr	case_mgr;
+	private final Bry_bfr		tmp_bfr = Bry_bfr_.New_w_size(32);
 	private	Srch_highlight_itm[]	srch_lc_itms;
 	private int						srch_words_len;
 	public Srch_highlight_mgr(Xol_case_mgr case_mgr) {this.case_mgr = case_mgr;}
@@ -101,9 +101,9 @@ public class Srch_highlight_mgr {
 }
 class Srch_highlight_itm {
 	public Srch_highlight_itm(int idx, byte[] word) {this.Idx = idx; this.Word = word; this.Word_len = word.length;}
-	public final    int Idx;
-	public final    byte[] Word;
-	public final    int Word_len;
+	public final int Idx;
+	public final byte[] Word;
+	public final int Word_len;
 }
 class Srch_highlight_bry_sorter implements gplx.core.lists.ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -111,5 +111,5 @@ class Srch_highlight_bry_sorter implements gplx.core.lists.ComparerAble {
 		Srch_highlight_itm rhs = (Srch_highlight_itm)rhsObj;
 		return -Int_.Compare(lhs.Word_len, rhs.Word_len);	// - for descending
 	}
-        public static final    Srch_highlight_bry_sorter Instance = new Srch_highlight_bry_sorter(); Srch_highlight_bry_sorter() {}
+        public static final Srch_highlight_bry_sorter Instance = new Srch_highlight_bry_sorter(); Srch_highlight_bry_sorter() {}
 }

@@ -46,10 +46,10 @@ public class Xoa_fmtr_itm implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final    String Invk_src = "src", Invk_src_ = "src_", Invk_fmt = "fmt", Invk_fmt_ = "fmt_"		
+	private static final String Invk_src = "src", Invk_src_ = "src_", Invk_fmt = "fmt", Invk_fmt_ = "fmt_"
 	, Invk_run = "run"
 	;
-	public static final    String Invk_get_at = "get_at", Invk_len = "len"
+	public static final String Invk_get_at = "get_at", Invk_len = "len"
 	, Invk_sorter = "sorter"
 	;
 }

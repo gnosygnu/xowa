@@ -60,7 +60,7 @@ public class Jscfg_scrib_lib implements Scrib_lib {
 	}
 	private static final int Proc_get = 0;
 	public static final String Invk_get = "get";
-	private static final    String[] Proc_names = String_.Ary(Invk_get);
+	private static final String[] Proc_names = String_.Ary(Invk_get);
 	public boolean Get(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		byte[] ttl_bry = args.Xstr_bry_or_null(0);
 		byte[] langCode = args.Xstr_bry_or_null(1);

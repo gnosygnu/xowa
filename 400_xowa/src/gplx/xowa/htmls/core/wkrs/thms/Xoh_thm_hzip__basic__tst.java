@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.parsers.lnkis.*;
 public class Xoh_thm_hzip__basic__tst {
-	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
+	private final Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void setup() {fxt.Clear();}
 	@Test  public void Image_wo_alt_text() {// LEGACY: pre xowa_alt_text
 		fxt.Test__bicode("~&3abc~abc~!uA.png~)#Sabc~", String_.Concat_lines_nl_skip_last

@@ -20,11 +20,11 @@ import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.addons.wikis.pages.syncs.core.parsers.*;
 public class Xosync_page_loader {
-	private final    Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
-	private final    Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html();
-	private final    Bry_err_wkr err_wkr = new Bry_err_wkr();
-	private final    Xoh_img_src_data img_src_parser = new Xoh_img_src_data();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
+	private final Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html();
+	private final Bry_err_wkr err_wkr = new Bry_err_wkr();
+	private final Xoh_img_src_data img_src_parser = new Xoh_img_src_data();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public byte[] Parse(Xow_wiki wiki, Xoh_page hpg, byte[] src) {
 		// init hctx, tag_rdr, err_wkr
 		int src_len = src.length;

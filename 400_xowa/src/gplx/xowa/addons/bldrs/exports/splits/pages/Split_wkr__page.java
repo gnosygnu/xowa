@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.exports.splits.pages; import gplx.*; import gplx.
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.bulks.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*; import gplx.xowa.addons.bldrs.exports.splits.mgrs.*;
 public class Split_wkr__page implements Split_wkr {
-	private final    Split_rslt_wkr__page rslt_wkr = new Split_rslt_wkr__page();
+	private final Split_rslt_wkr__page rslt_wkr = new Split_rslt_wkr__page();
 	private Xowd_page_tbl tbl; private Db_stmt stmt;
 	public void Split__init(Split_ctx ctx, Xow_wiki wiki, Db_conn wkr_conn) {
 		ctx.Rslt_mgr().Reg_wkr(rslt_wkr);

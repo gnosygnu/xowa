@@ -73,9 +73,9 @@ public class Xoh_subpages_bldr_tst {
 	}
 }
 class Xoh_subpages_bldr_fxt {
-	private final    Xoae_app app;
-	private final    Xowe_wiki wiki;
-	private final    Xoh_subpages_bldr subpages_bldr = new Xoh_subpages_bldr();
+	private final Xoae_app app;
+	private final Xowe_wiki wiki;
+	private final Xoh_subpages_bldr subpages_bldr = new Xoh_subpages_bldr();
 	public Xoh_subpages_bldr_fxt() {
 		this.app = Xoa_app_fxt.Make__app__edit();
 		this.wiki = Xoa_app_fxt.Make__wiki__edit(app);

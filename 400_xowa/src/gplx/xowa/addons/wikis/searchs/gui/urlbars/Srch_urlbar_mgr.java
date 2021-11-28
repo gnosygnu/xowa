@@ -25,7 +25,7 @@ public class Srch_urlbar_mgr implements Gfo_invk {	// NOTE: needs to be app-leve
 	private boolean enabled = true;
 	private int max_results = 10;
 	private boolean auto_wildcard = true;
-	private final    Srch_ns_mgr ns_mgr = new Srch_ns_mgr().Add_main_if_empty();
+	private final Srch_ns_mgr ns_mgr = new Srch_ns_mgr().Add_main_if_empty();
 	private Srch_crt_scanner_syms syms = Srch_crt_scanner_syms.New__dflt();
 	private void Ns_ids_(String s) {
 		int[] ns_ids = Int_ary_.Empty;

@@ -20,17 +20,17 @@ import gplx.xowa.apps.*;
 import gplx.xowa.htmls.js.*;
 import gplx.xowa.wikis.pages.*;
 public class Http_server_wkr implements Gfo_invk {
-	private final    int uid;
-	private final    Http_server_mgr server_mgr;
-	private final    Http_server_wtr server_wtr;
-	private final    Http_client_wtr client_wtr = Http_client_wtr_.new_stream();
-	private final    Http_client_rdr client_rdr = Http_client_rdr_.new_stream();
-	private final    Http_request_parser request_parser;
-	private final    Gfo_url_encoder url_encoder;
-	private final    Xoae_app app;
-	private final    String root_dir_http;
-	private final    byte[] root_dir_fsys;
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(64);
+	private final int uid;
+	private final Http_server_mgr server_mgr;
+	private final Http_server_wtr server_wtr;
+	private final Http_client_wtr client_wtr = Http_client_wtr_.new_stream();
+	private final Http_client_rdr client_rdr = Http_client_rdr_.new_stream();
+	private final Http_request_parser request_parser;
+	private final Gfo_url_encoder url_encoder;
+	private final Xoae_app app;
+	private final String root_dir_http;
+	private final byte[] root_dir_fsys;
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(64);
 	private Socket_adp socket;
 	private Http_data__client data__client;
 	public Http_server_wkr(Http_server_mgr server_mgr, int uid){
@@ -136,9 +136,9 @@ public class Http_server_wkr implements Gfo_invk {
 			rv = Convert_page(rv, root_dir_http			, "<<MISSING_WIKI>>");
 		Xosrv_http_wkr_.Write_response_as_html(client_wtr, app_mode_itm.Tid() == Xoa_app_mode.Itm_file.Tid(), rv);
 	}
-	private static final    byte[] Key__msg = Bry_.new_a7("msg"), Key__app_mode = Bry_.new_a7("app_mode");
+	private static final byte[] Key__msg = Bry_.new_a7("msg"), Key__app_mode = Bry_.new_a7("app_mode");
 	private static final int Tid_post_url_json = 1, Tid_post_url_gfs = 2;
-	private static final    Hash_adp_bry post_url_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry post_url_hash = Hash_adp_bry.ci_a7()
 	.Add_str_int("/exec/json"	, Tid_post_url_json)
 	.Add_str_int("/exec/gfs"	, Tid_post_url_gfs)
 	;
@@ -156,14 +156,14 @@ public class Http_server_wkr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	public static final String Invk_run = "run";
-	private static final    byte[] 
+	private static final byte[]
 	  Url__home = Bry_.new_a7("/")
 	, Url__exec = Bry_.new_a7("/exec/"), Url__exec_2 = Bry_.new_a7("/xowa-cmd:")
 	;
-	public static final    byte[]
+	public static final byte[]
 	  Url__fsys = Bry_.new_a7("/fsys/")
 	;
-	private static final    int Url__fsys_len = Url__fsys.length;
+	private static final int Url__fsys_len = Url__fsys.length;
 }
 class Xosrv_http_wkr_ {
 	public static void Write_response_as_html(Http_client_wtr client_wtr, boolean cross_domain, String html) {Write_response_as_html(client_wtr, cross_domain, Bry_.new_u8(html));}
@@ -200,7 +200,7 @@ class Xosrv_http_wkr_ {
 			client_wtr.Rls();
 		}
 	}
-	public static final    byte[]
+	public static final byte[]
 	  Rsp__http_ok				= Bry_.new_a7("HTTP/1.1 200 OK:\n")
 	, Rsp__content_type_html	= Bry_.new_a7("Content-Type: text/html; charset=utf-8\n")
 	, Rsp__http_redirect        = Bry_.new_a7("HTTP/1.1 302 Found:\n")

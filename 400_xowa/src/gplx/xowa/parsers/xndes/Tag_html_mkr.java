@@ -21,7 +21,7 @@ class Tag_html_mkr_noop implements Tag_html_mkr {
 	public Tag_html_wkr Tag__create(Xowe_wiki wiki, Xop_ctx ctx) {return Tag_html_wkr_noop.Instance;}
 }
 class Tag_html_mkr_basic implements Tag_html_mkr {
-	private final    boolean atrs_encode;
+	private final boolean atrs_encode;
 	public Tag_html_mkr_basic(boolean atrs_encode) {
 		this.atrs_encode = atrs_encode;
 	}

@@ -18,9 +18,9 @@ import gplx.core.brys.fmtrs.*; import gplx.core.stores.*;
 import gplx.dbs.engines.*;
 public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statements; not used for actual insert into database
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
-	private final    List_adp args = List_adp_.New();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Bry_fmtr tmp_fmtr = Bry_fmtr.new_();
+	private final List_adp args = List_adp_.New();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_fmtr tmp_fmtr = Bry_fmtr.new_();
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {}
 	public Db_conn Conn() {return conn;} public void Conn_(Db_conn v) {this.conn = v;} Db_conn conn;
 	public Db_stmt Reset_stmt() {return this;}

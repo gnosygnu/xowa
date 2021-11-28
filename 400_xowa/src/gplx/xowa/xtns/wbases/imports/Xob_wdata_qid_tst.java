@@ -21,10 +21,10 @@ import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.bldrs.wms.sites.*;
 public class Xob_wdata_qid_tst {
 	private Db_conn conn;
-	private final    Xobldr_fxt fxt = new Xobldr_fxt().Ctor_mem();
+	private final Xobldr_fxt fxt = new Xobldr_fxt().Ctor_mem();
 	private Xob_wdata_qid wkr;
-	private final    Gfo_db_tester db_tester = new Gfo_db_tester();
-	private final    Dbmeta_fld_list flds__wbase_qid = new Dbmeta_fld_list().Bld_str("src_wiki").Bld_int("src_ns").Bld_str("src_ttl").Bld_str("trg_ttl");
+	private final Gfo_db_tester db_tester = new Gfo_db_tester();
+	private final Dbmeta_fld_list flds__wbase_qid = new Dbmeta_fld_list().Bld_str("src_wiki").Bld_int("src_ns").Bld_str("src_ttl").Bld_str("trg_ttl");
 	@Before public void init() {
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.langs.*;
 class Pft_fmt_itm_timezone_offset_4 implements Pft_fmt_itm {
-	private final    boolean colon;
+	private final boolean colon;
 	public Pft_fmt_itm_timezone_offset_4(boolean colon) {this.colon = colon;}
 	public int TypeId() {return Pft_fmt_itm_.Tid_timezone_offset_4;}
 	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {

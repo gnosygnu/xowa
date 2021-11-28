@@ -18,7 +18,7 @@ import gplx.core.primitives.*;
 import gplx.core.ios.*; /*IoItmFil, IoItmDir..*/ import gplx.core.ios.streams.*; import gplx.core.ios.loaders.*; import gplx.core.ios.atrs.*;
 public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather all cmds under gplx namespace; otherwise need to use gplx.core.ios whenever copying/deleting file
 	public Io_mgr() {evt_mgr = new Gfo_evt_mgr(this);}
-	public Gfo_evt_mgr					Evt_mgr() {return evt_mgr;} private final    Gfo_evt_mgr evt_mgr;
+	public Gfo_evt_mgr					Evt_mgr() {return evt_mgr;} private final Gfo_evt_mgr evt_mgr;
 	public boolean							Exists(Io_url url) {return url.Type_dir() ? ExistsDir(url) : ExistsFil(url);}
 	public boolean							ExistsFil(Io_url url) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey()).ExistsFil_api(url);}
 	public void							ExistsFilOrFail(Io_url url) {if (!ExistsFil(url)) throw Err_.new_wo_type("could not find file", "url", url);}
@@ -91,7 +91,7 @@ public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather
 		byte[] bry = LoadFilBry_reuse(url, Bry_.Empty, len);
 		bfr.Bfr_init(bry, len.Val());
 	}
-	public static final    byte[] LoadFilBry_fail = Bry_.Empty;
+	public static final byte[] LoadFilBry_fail = Bry_.Empty;
 	public byte[]						LoadFilBry_reuse(Io_url url, byte[] ary, Int_obj_ref ary_len) {
 		if (loader != null) {
 			byte[] rv = loader.Load_fil_as_bry(url);
@@ -152,11 +152,11 @@ public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather
 	public boolean DownloadFil(String src, Io_url trg) {return IoEngine_xrg_downloadFil.new_(src, trg).Exec();}
 	public IoEngine_xrg_downloadFil DownloadFil_args(String src, Io_url trg) {return IoEngine_xrg_downloadFil.new_(src, trg);}
 	public boolean Query_read_only(Io_url url, int read_only_type) {return IoEngineUtl.Query_read_only(IoEnginePool.Instance.Get_by(url.Info().EngineKey()), url, read_only_type);}
-	public static final    Io_mgr Instance = new Io_mgr();
+	public static final Io_mgr Instance = new Io_mgr();
 	public static final int Len_kb = 1024, Len_mb = 1048576, Len_gb = 1073741824, Len_gb_2 = 2147483647;
 	public static final long Len_mb_long = Len_mb;
 	public static final long Len_null = -1;
-	public static final    String Evt__fil_created = "fil_created";
+	public static final String Evt__fil_created = "fil_created";
 	public static final int Read_only__basic__file = 1, Read_only__basic__file_and_dirs = 2, Read_only__perms__file = 3;
 }
 class Io_mgr_ {

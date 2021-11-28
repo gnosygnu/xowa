@@ -18,10 +18,10 @@ import gplx.core.primitives.*;
 import gplx.xowa.xtns.cldrs.*;
 
 public class Xol_name_mgr {
-	private final    Cldr_name_loader cldr_loader;
-	private final    Language_name_loader name_loader;
-	private final    Io_url root_dir;
-	private final    Object thread_lock = new Object(); // THREAD:Xol_name_mgr can be used by multiple wiki threads; ISSUE#:549; DATE:2019-08-14
+	private final Cldr_name_loader cldr_loader;
+	private final Language_name_loader name_loader;
+	private final Io_url root_dir;
+	private final Object thread_lock = new Object(); // THREAD:Xol_name_mgr can be used by multiple wiki threads; ISSUE#:549; DATE:2019-08-14
 //		private Ordered_hash hash;
 //		private Keyval[] kvs;
 
@@ -113,8 +113,8 @@ public class Xol_name_mgr {
 //			return kvs;
 //		}
 	/*
-	private static final    Hash_adp isValidCode_cache = Hash_adp_bry.cs();
-	private static final    Strcpn isValidCode_strcpn = Strcpn.New_by_concatenated_ascii(":/\\\000&<>'\"");
+	private static final Hash_adp isValidCode_cache = Hash_adp_bry.cs();
+	private static final Strcpn isValidCode_strcpn = Strcpn.New_by_concatenated_ascii(":/\\\000&<>'\"");
 	private boolean isValidCode(byte[] code) {
 		Bool_obj_val rv = (Bool_obj_val)isValidCode_cache.Get_by(code);
 		if (rv == null) {
@@ -160,12 +160,12 @@ public class Xol_name_mgr {
 		, Scope__int__all     = 1 // cldr + Names.php
 		, Scope__int__mwFile  = 2 // *.json|*.php
 		;
-	public static final    String
+	public static final String
 		  Scope__str__mw      = "mw"
 		, Scope__str__all     = "all"
 		, Scope__str__mwFile  = "mwFile"
 		;
-	private static final    Hash_adp Scope__hash = Hash_adp_.New()
+	private static final Hash_adp Scope__hash = Hash_adp_.New()
 		.Add_and_more(Scope__str__mw    , Byte_obj_val.new_(Scope__int__mw))
 		.Add_and_more(Scope__str__all   , Byte_obj_val.new_(Scope__int__all))
 		.Add_and_more(Scope__str__mwFile, Byte_obj_val.new_(Scope__int__mwFile))
@@ -258,5 +258,5 @@ class Hash_kv_sorter implements gplx.core.lists.ComparerAble {
 		Keyval rhs = (Keyval)rhsObj;
 		return String_.Compare(lhs.Key(), rhs.Key());
 	}
-        public static final    Hash_kv_sorter Instance = new Hash_kv_sorter(); Hash_kv_sorter() {}
+        public static final Hash_kv_sorter Instance = new Hash_kv_sorter(); Hash_kv_sorter() {}
 }

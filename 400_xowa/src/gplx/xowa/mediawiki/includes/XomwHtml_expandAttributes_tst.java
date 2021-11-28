@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
 public class XomwHtml_expandAttributes_tst{
-	private final    XomwHtml_expandAttributes_fxt fxt = new XomwHtml_expandAttributes_fxt();
+	private final XomwHtml_expandAttributes_fxt fxt = new XomwHtml_expandAttributes_fxt();
 	@Test  public void Basic()	{
 		fxt.Test__expand_attributes(" a=\"b\"", "a", "b");
 	}
@@ -26,8 +26,8 @@ public class XomwHtml_expandAttributes_tst{
 	}
 }
 class XomwHtml_expandAttributes_fxt {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
-	private final    XomwHtmlTemp temp = new XomwHtmlTemp();
+	private final Bry_bfr bfr = Bry_bfr_.New();
+	private final XomwHtmlTemp temp = new XomwHtmlTemp();
 	public void Test__expand_attributes(String expd, String... kvs) {
 		Xomw_atr_mgr atrs = new Xomw_atr_mgr();
 		int kvs_len = kvs.length;

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 public abstract class Xob_cmd__base implements Xob_cmd, Gfo_invk {
-	protected final    Xoae_app app; protected final    Xob_bldr bldr; protected Xowe_wiki wiki; protected final    Gfo_usr_dlg usr_dlg;
+	protected final Xoae_app app; protected final Xob_bldr bldr; protected Xowe_wiki wiki; protected final Gfo_usr_dlg usr_dlg;
 	public Xob_cmd__base(Xob_bldr bldr, Xowe_wiki wiki) {
 		this.bldr = bldr;
 		this.wiki = wiki;

@@ -22,9 +22,9 @@ public class Xoctg_ctg_itm {
 		this.Files = files;
 		this.All = pages + subcs  + files;
 	}
-	public final    byte[] Ttl_wo_ns;
-	public final    int Pages;
-	public final    int Subcs;
-	public final    int Files;
-	public final    int All;
+	public final byte[] Ttl_wo_ns;
+	public final int Pages;
+	public final int Subcs;
+	public final int Files;
+	public final int All;
 }

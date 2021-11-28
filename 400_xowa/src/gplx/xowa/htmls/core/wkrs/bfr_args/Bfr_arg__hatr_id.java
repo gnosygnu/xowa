@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.bfr_args; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*;
 public class Bfr_arg__hatr_id implements Bfr_arg_clearable {
-	private final    byte[] atr_bgn;
-	private final    byte[] bry; private int num;
+	private final byte[] atr_bgn;
+	private final byte[] bry; private int num;
 	public Bfr_arg__hatr_id(byte[] atr_key, byte[] bry)	{this.bry = bry; this.atr_bgn = Bfr_arg__hatr_.Bld_atr_bgn(atr_key);}
 	public Bfr_arg__hatr_id Set(int num)				{this.num = num; return this;}
 	public byte[] Get_id_val()							{return Bry_.Add(bry, Int_.To_bry(num));}

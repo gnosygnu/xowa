@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import gplx.dbs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
 public class Fsd_thm_tbl implements Db_tbl {
-	public final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	public final    String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
-	public final    Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_exact, stmt_select_by_fil_near; private int mnt_id; private boolean schema_thm_page;
+	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
+	public final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_exact, stmt_select_by_fil_near; private int mnt_id; private boolean schema_thm_page;
 	public Fsd_thm_tbl(Db_conn conn, boolean schema_is_1, int mnt_id, boolean schema_thm_page) {
 		this.conn = conn; this.mnt_id = mnt_id; this.schema_thm_page = schema_thm_page;
 		this.tbl_name = schema_is_1 ? "fsdb_xtn_thm" : "fsdb_thm";
@@ -40,7 +40,7 @@ public class Fsd_thm_tbl implements Db_tbl {
 		this.fld_hash			= flds.Add_str		("thm_hash", 40);
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "owner", fld_owner_id, fld_id, fld_w, fld_time, fld_page)
@@ -123,7 +123,7 @@ public class Fsd_thm_tbl implements Db_tbl {
 		itm.Ctor(mnt_id, dir_id, fil_id, thm_id, bin_db_id, w, h, time, page, size, modified, hash);
 		return true;
 	}
-	public static final    DateAdp Modified_null = null;
+	public static final DateAdp Modified_null = null;
 	public static final String Hash_null = "", Modified_null_str = "";
 	public static boolean Match_nearest(List_adp list, Fsd_thm_itm thm, boolean schema_thm_page) {
 		int len = list.Count(); if (len == 0) return Bool_.N;

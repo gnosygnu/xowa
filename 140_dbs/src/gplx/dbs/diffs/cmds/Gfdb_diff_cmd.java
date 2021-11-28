@@ -77,12 +77,12 @@ class Gfo_srl_mgr_rdr__db {
 }
 class Gfdb_diff_cmd__idx__delete {
 	public Gfdb_diff_cmd__idx__delete(Dbmeta_idx_itm old) {this.Old = old;}
-	public final    Dbmeta_idx_itm Old;
+	public final Dbmeta_idx_itm Old;
 }
 class Gfdb_diff_cmd__idx__modify {
 	public Gfdb_diff_cmd__idx__modify(Dbmeta_idx_itm old, Dbmeta_idx_itm cur) {this.Old = old; this.Cur = cur;}
-	public final    Dbmeta_idx_itm Old;
-	public final    Dbmeta_idx_itm Cur;
+	public final Dbmeta_idx_itm Old;
+	public final Dbmeta_idx_itm Cur;
 }
 class Gfdb_diff_txn {
 	public int Id = 0;
@@ -123,20 +123,20 @@ class Gfdb_diff_cmd__fld__create {
 }
 class Gfdb_diff_cmd__fld__delete {
 	public Gfdb_diff_cmd__fld__delete(Dbmeta_fld_itm old) {this.Old = old;}
-	public final    Dbmeta_fld_itm Old;
+	public final Dbmeta_fld_itm Old;
 }
 class Gfdb_diff_cmd__fld__modify {
 	public Gfdb_diff_cmd__fld__modify(Dbmeta_fld_itm old, Dbmeta_fld_itm cur) {this.Old = old; this.Cur = cur;}
-	public final    Dbmeta_fld_itm Old;
-	public final    Dbmeta_fld_itm Cur;
+	public final Dbmeta_fld_itm Old;
+	public final Dbmeta_fld_itm Cur;
 }
 class Gfdb_diff_cmd__tbl__create {
 	public Gfdb_diff_cmd__tbl__create(Dbmeta_tbl_itm cur) {this.Cur = cur;}
-	public final    Dbmeta_tbl_itm Cur;
+	public final Dbmeta_tbl_itm Cur;
 }
 class Gfdb_diff_cmd__tbl__delete {
 	public Gfdb_diff_cmd__tbl__delete(Dbmeta_tbl_itm old) {this.Old = old;}
-	public final    Dbmeta_tbl_itm Old;
+	public final Dbmeta_tbl_itm Old;
 }
 class Gfdb_diff_cmd_bldr {
 	public void Chk_tbls(List_adp rv, Dbmeta_tbl_mgr old_tbls, Dbmeta_tbl_mgr cur_tbls) {
@@ -232,8 +232,8 @@ class Gfdb_diff_cmd__insert {
 	}
 }
 class Gfdb_diff_cmd_sql_bldr {
-	private final    Bry_fmtr fmtr = Bry_fmtr.new_();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Bry_fmtr fmtr = Bry_fmtr.new_();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public void Bld_insert(Bry_bfr bfr, String tbl_name, String[] keys, String[] vals, int rng_bgn, int rng_end) {
 		fmtr.Fmt_(Insert__fmt).Keys_(Insert__keys);
 		fmtr.Bld_bfr_many(bfr, tbl_name, Bld_flds(tmp_bfr, ", ", "d.", keys, vals), Bld_join(keys), rng_bgn, rng_end);
@@ -271,8 +271,8 @@ class Gfdb_diff_cmd_sql_bldr {
 		}
 		return tmp_bfr.To_str_and_clear();
 	}
-	private static final    String[] Insert__keys = String_.Ary("tbl", "flds", "join", "rng_bgn", "rng_end");
-	private static final    String Insert__fmt = String_.Concat_lines_nl_skip_last
+	private static final String[] Insert__keys = String_.Ary("tbl", "flds", "join", "rng_bgn", "rng_end");
+	private static final String Insert__fmt = String_.Concat_lines_nl_skip_last
 	( "INSERT  INTO db_curr.~{tbl}"
 	, "SELECT  ~{flds}"
 	, "FROM    db_temp.~{tbl}_pkey k"
@@ -280,8 +280,8 @@ class Gfdb_diff_cmd_sql_bldr {
 	, "WHERE   k.diff_type = 1"
 	, "AND     k.diff_uid BETWEEN ~{rng_bgn} AND ~{rng_end};"
 	);
-	private static final    String[] Update__keys = String_.Ary("tbl", "flds", "join", "rng_bgn", "rng_end");
-	private static final    String Update__fmt = String_.Concat_lines_nl_skip_last
+	private static final String[] Update__keys = String_.Ary("tbl", "flds", "join", "rng_bgn", "rng_end");
+	private static final String Update__fmt = String_.Concat_lines_nl_skip_last
 	( "REPLACE INTO db_curr.~{tbl}" 
 	, "SELECT  ~{flds}"
 	, "FROM    db_temp.~{tbl}_pkey k"
@@ -289,8 +289,8 @@ class Gfdb_diff_cmd_sql_bldr {
 	, "WHERE   k.diff_type = 2"
 	, "AND     k.diff_uid BETWEEN ~{rng_bgn} AND ~{rng_end};"
 	);
-	private static final    String[] Delete__keys = String_.Ary("tbl", "pkey_where", "pkey_select", "join", "rng_bgn", "rng_end");
-	private static final    String Delete__fmt = String_.Concat_lines_nl_skip_last
+	private static final String[] Delete__keys = String_.Ary("tbl", "pkey_where", "pkey_select", "join", "rng_bgn", "rng_end");
+	private static final String Delete__fmt = String_.Concat_lines_nl_skip_last
 	( "DELETE  db_curr.~{tbl}"
 	, "WHERE   ~{pkey_where} IN"
 	, "(       SELECT  ~{pkey_select}"

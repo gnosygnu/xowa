@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import gplx.core.primitives.*;
 public class Xof_meta_thumb_parser extends Obj_ary_parser_base {
-	private final    Gfo_number_parser number_parser = new Gfo_number_parser(); 
-	private final    Int_ary_parser int_ary_parser = new Int_ary_parser();
+	private final Gfo_number_parser number_parser = new Gfo_number_parser();
+	private final Int_ary_parser int_ary_parser = new Int_ary_parser();
 	public Xof_meta_thumb[] Ary() {return ary;} private Xof_meta_thumb[] ary = new Xof_meta_thumb[Ary_max]; static final int Ary_max = 16;
 	public int Len() {return ary_idx;} private int ary_idx;
 	public void Parse_ary(byte[] bry, int bgn, int end) {super.Parse_core(bry, bgn, end, Byte_ascii.Semic, Byte_ascii.Null);}

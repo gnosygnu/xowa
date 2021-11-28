@@ -30,8 +30,8 @@ import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
 import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
 
 public class Xoh_href_wtr {	// TS:do not move to app-level
-	private final    Gfo_url_encoder encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
-	private final    Bry_bfr encoder_bfr = Bry_bfr_.Reset(255), tmp_bfr = Bry_bfr_.Reset(255);
+	private final Gfo_url_encoder encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
+	private final Bry_bfr encoder_bfr = Bry_bfr_.Reset(255), tmp_bfr = Bry_bfr_.Reset(255);
 	public byte[] Build_to_bry(Xow_wiki wiki, byte[] ttl_bry) {
 		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
 		Build_to_bfr(tmp_bfr, wiki.App(), Xoh_wtr_ctx.Basic, wiki.Domain_bry(), ttl);

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.phps; import gplx.*; import gplx.langs.*;
 import gplx.core.encoders.*;
 class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.String.php
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public byte[] Parse(byte[] src, int src_pos, int src_end) {
 		try {
 			while (src_pos < src_end) {

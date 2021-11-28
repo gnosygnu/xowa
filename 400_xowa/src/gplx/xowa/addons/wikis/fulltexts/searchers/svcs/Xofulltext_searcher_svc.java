@@ -28,8 +28,8 @@ import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
 class Xofulltext_searcher_svc implements Gfo_invk {
-	private final    Xoa_app app;
-	private final    Ordered_hash wkr_hash = Ordered_hash_.New();
+	private final Xoa_app app;
+	private final Ordered_hash wkr_hash = Ordered_hash_.New();
 	public Xofulltext_searcher_svc(Xoa_app app) {
 		this.app = app;
 	}

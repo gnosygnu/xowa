@@ -147,8 +147,8 @@ public class Xowd_page_itm {
 	}
 	public void Srl_save(Bry_bfr bfr) {gplx.xowa.wikis.tdbs.Xotdb_page_itm_.Txt_id_save(bfr, this);}
 	public static final int Id_null = -1, Modified_on_null_int = 0, Redirect_id_null = -1;
-	public static final    Xowd_page_itm[] Ary_empty = new Xowd_page_itm[0];
-	public static final    Xowd_page_itm Null = null;
+	public static final Xowd_page_itm[] Ary_empty = new Xowd_page_itm[0];
+	public static final Xowd_page_itm Null = null;
 	public static Xowd_page_itm new_tmp()							{return new Xowd_page_itm();}
 	public static Xowd_page_itm new_srch(int id, int text_len)		{return new Xowd_page_itm().Id_(id).Text_len_(text_len);}
 

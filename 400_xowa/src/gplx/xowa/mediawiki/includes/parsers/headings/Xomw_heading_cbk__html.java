@@ -43,7 +43,7 @@ public class Xomw_heading_cbk__html implements Xomw_heading_cbk {
 		if (txt_bgn != src_end)	// PERF: don't call Add_mid() if hdr is at end of EOS
 			bfr.Add_mid(src, txt_bgn, src_end);
 	}
-	private static final    byte[] 
+	private static final byte[]
 	  Tag__lhs = Bry_.new_a7("<h")
 	, Tag__rhs = Bry_.new_a7("</h")
 	;

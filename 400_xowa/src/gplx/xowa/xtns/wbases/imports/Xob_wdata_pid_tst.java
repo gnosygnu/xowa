@@ -20,8 +20,8 @@ import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Xob_wdata_pid_tst {
 	private Db_conn conn;
-	private final    Xobldr_fxt fxt = new Xobldr_fxt().Ctor_mem();
-	private final    Gfo_db_tester db_tester = new Gfo_db_tester();
+	private final Xobldr_fxt fxt = new Xobldr_fxt().Ctor_mem();
+	private final Gfo_db_tester db_tester = new Gfo_db_tester();
 	@Before public void init() {
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();

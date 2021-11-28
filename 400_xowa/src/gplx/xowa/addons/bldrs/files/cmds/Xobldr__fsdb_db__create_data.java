@@ -25,7 +25,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 	private Db_conn bldr_conn; private Db_cfg_tbl bldr_cfg_tbl;
 	private Xof_bin_mgr src_bin_mgr; private Xof_bin_wkr__fsdb_sql src_fsdb_wkr; private boolean src_bin_mgr__cache_enabled = Bool_.N; private String src_bin_mgr__fsdb_version; private String[] src_bin_mgr__fsdb_skip_wkrs; private boolean src_bin_mgr__wmf_enabled;
 	private Fsm_mnt_itm trg_mnt_itm; private Fsm_cfg_mgr trg_cfg_mgr; private Fsm_atr_fil trg_atr_fil; private Fsm_bin_fil trg_bin_fil; private long trg_bin_db_max; private String trg_bin_mgr__fsdb_version;
-	private final    Xof_bin_updater trg_bin_updater = new Xof_bin_updater(); private Xob_bin_db_mgr bin_db_mgr; private int[] ns_ids; private int prv_lnki_tier_id = -1;
+	private final Xof_bin_updater trg_bin_updater = new Xof_bin_updater(); private Xob_bin_db_mgr bin_db_mgr; private int[] ns_ids; private int prv_lnki_tier_id = -1;
 	private long download_size_max = Io_mgr.Len_mb_long * 5; private int[] download_keep_tier_ids = Int_ary_.New(0);
 	private Xobu_poll_mgr poll_mgr; private int poll_interval; private long time_bgn;
 	private int select_interval = 2500, progress_interval = 1, commit_interval = 1, delete_interval = 5000;
@@ -324,7 +324,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final    String
+	private static final String
 	  Invk_tier_id_bmk_ = "tier_id_bmk_", Invk_page_id_bmk_ = "page_id_bmk_", Invk_lnki_id_bmk_ = "lnki_id_bmk_"
 	, Invk_select_interval_ = "select_interval_", Invk_commit_interval_ = "commit_interval_", Invk_progress_interval_ = "progress_interval_", Invk_delete_interval_ = "delete_interval_"
 	, Invk_exec_count_max_ = "exec_count_max_", Invk_exec_fail_max_ = "exec_fail_max_", Invk_exit_now_ = "exit_now_", Invk_exit_after_commit_ = "exit_after_commit_"
@@ -338,7 +338,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 
 	public static final String BLDR_CMD_KEY = "file.fsdb_make";
 	@Override public String Cmd_key() {return BLDR_CMD_KEY;} 
-	public static final    Xob_cmd Prototype = new Xobldr__fsdb_db__create_data(null, null);
+	public static final Xob_cmd Prototype = new Xobldr__fsdb_db__create_data(null, null);
 	@Override public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return new Xobldr__fsdb_db__create_data(bldr, wiki);}
 
 	public static Fsdb_db_mgr new_src_bin_db_mgr(Xow_wiki wiki, String version) {

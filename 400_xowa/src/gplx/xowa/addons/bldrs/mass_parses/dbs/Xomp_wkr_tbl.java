@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
 import gplx.dbs.*;
 public class Xomp_wkr_tbl implements Db_tbl {
-	private final    String fld_wkr_uid, fld_wkr_url, fld_wkr_status, fld_wkr_status_time, fld_wkr_exec_count, fld_wkr_exec_time;
-	private final    Db_conn conn;
-	private final    Object thread_lock = new Object();
+	private final String fld_wkr_uid, fld_wkr_url, fld_wkr_status, fld_wkr_status_time, fld_wkr_exec_count, fld_wkr_exec_time;
+	private final Db_conn conn;
+	private final Object thread_lock = new Object();
 	public Xomp_wkr_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "xomp_wkr";
@@ -30,8 +30,8 @@ public class Xomp_wkr_tbl implements Db_tbl {
 		fld_wkr_exec_time	= flds.Add_int("wkr_exec_time");		// EX: 123
 		conn.Rls_reg(this);
 	}
-	public String Tbl_name() {return tbl_name;} private final    String tbl_name;
-	public Dbmeta_fld_list Flds() {return flds;} private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public String Tbl_name() {return tbl_name;} private final String tbl_name;
+	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 
 	public int Init_wkrs(String wkr_url, int wkr_len) {

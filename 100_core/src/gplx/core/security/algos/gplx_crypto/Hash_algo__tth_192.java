@@ -17,7 +17,7 @@ package gplx.core.security.algos.gplx_crypto; import gplx.*; import gplx.core.*;
 import gplx.core.consoles.*; import gplx.core.ios.streams.*; /*IoStream*/
 import gplx.core.progs.*;
 public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
-	public String Key() {return KEY;} public static final    String KEY = "tth192";
+	public String Key() {return KEY;} public static final String KEY = "tth192";
 	public Hash_algo Clone_hash_algo() {return new Hash_algo__tth_192();}
 	public int BlockSize() {return blockSize;} public void BlockSize_set(int v) {blockSize = v;} int blockSize = 1024;
 	public void Update_digest(byte[] src, int bgn, int end) {throw Err_.new_unimplemented();}

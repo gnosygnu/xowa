@@ -17,8 +17,8 @@ package gplx.dbs; import gplx.*;
 import gplx.dbs.engines.*;
 import gplx.dbs.qrys.bats.*;
 public class Db_conn_pool {	// PURPOSE: cache one connection per connection_string
-	private final    Ordered_hash hash = Ordered_hash_.New();
-	public Db_batch_mgr Batch_mgr() {return batch_mgr;} private final    Db_batch_mgr batch_mgr = new Db_batch_mgr();
+	private final Ordered_hash hash = Ordered_hash_.New();
+	public Db_batch_mgr Batch_mgr() {return batch_mgr;} private final Db_batch_mgr batch_mgr = new Db_batch_mgr();
 	public void Del(Db_conn_info url)				{hash.Del(url.Db_api());}
 	public Db_conn Get_or_new(String s)				{return Get_or_new(Db_conn_info_.parse(s));}
 	public Db_conn Get_or_new(Db_conn_info url) {
@@ -45,8 +45,8 @@ public class Db_conn_pool {	// PURPOSE: cache one connection per connection_stri
 		hash.Clear();
 	}
 
-	private final    Hash_adp prime_hash = Hash_adp_.New();
-        public static final    Db_conn_pool Instance = new Db_conn_pool(); Db_conn_pool() {this.Init();}
+	private final Hash_adp prime_hash = Hash_adp_.New();
+        public static final Db_conn_pool Instance = new Db_conn_pool(); Db_conn_pool() {this.Init();}
 	public void Primes__add(Db_engine... ary) {	// PUBLIC.DRD:
 		for (Db_engine itm : ary)
 			prime_hash.Add(itm.Tid(), itm);

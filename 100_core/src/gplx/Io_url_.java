@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import gplx.core.ios.*; /*IoUrlInfo_*/ import gplx.core.stores.*; import gplx.core.envs.*;
 public class Io_url_ {
-	public static final    Io_url Empty = new Io_url("", IoUrlInfo_.Nil);
-	public static final    Io_url NullPtr = null;
-	public static final    Io_url Parser = new Io_url("", IoUrlInfo_.Nil);
+	public static final Io_url Empty = new Io_url("", IoUrlInfo_.Nil);
+	public static final Io_url NullPtr = null;
+	public static final Io_url Parser = new Io_url("", IoUrlInfo_.Nil);
 	public static Io_url as_(Object obj) {return obj instanceof Io_url ? (Io_url)obj : null;}
 	public static Io_url cast(Object obj) {try {return (Io_url)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, Io_url.class, obj);}}
 	public static Io_url Usr() {

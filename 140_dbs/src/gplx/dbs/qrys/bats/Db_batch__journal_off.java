@@ -32,7 +32,7 @@ class Db_batch__journal_off__conn_bgn implements Db_batch_itm {
 		engine.Exec_as_obj(Sqlite_pragma.New__journal__off());				// off b/c failure and corruption doesn't matter to import
 		engine.Exec_as_obj(Sqlite_pragma.New__synchronous__off());			// off b/c failure and corruption doesn't matter to import
 	}
-        public static final    Db_batch__journal_off__conn_bgn Instance = new Db_batch__journal_off__conn_bgn(); Db_batch__journal_off__conn_bgn() {}
+        public static final Db_batch__journal_off__conn_bgn Instance = new Db_batch__journal_off__conn_bgn(); Db_batch__journal_off__conn_bgn() {}
 }
 class Db_batch__journal_off__conn_end implements Db_batch_itm {
 	public String Key() {return KEY;} public static final String KEY = "journal_off.conn_end";
@@ -42,5 +42,5 @@ class Db_batch__journal_off__conn_end implements Db_batch_itm {
 		engine.Exec_as_obj(Sqlite_pragma.New__synchronous__full());
 		engine.Props().Del(Sqlite_pragma.Const__journal_mode);
 	}
-        public static final    Db_batch__journal_off__conn_end Instance = new Db_batch__journal_off__conn_end(); Db_batch__journal_off__conn_end() {}
+        public static final Db_batch__journal_off__conn_end Instance = new Db_batch__journal_off__conn_end(); Db_batch__journal_off__conn_end() {}
 }

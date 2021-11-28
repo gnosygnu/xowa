@@ -190,5 +190,5 @@ class Gfs_parser_fxt {
 			bfr.Add(val);
 		bfr.Add_byte_nl();		
 	}
-	private static final    byte[] Atr_name = Bry_.new_a7("name=");
+	private static final byte[] Atr_name = Bry_.new_a7("name=");
 }

@@ -20,7 +20,7 @@ public class Xow_ns_mgr_name_itm {
 		this.name = name;
 		this.name_len = name.length;
 	}
-	public Xow_ns Ns() {return ns;} private final    Xow_ns ns;
-	public byte[] Name() {return name;} private final    byte[] name;
-	public int Name_len() {return name_len;} private final    int name_len;
+	public Xow_ns Ns() {return ns;} private final Xow_ns ns;
+	public byte[] Name() {return name;} private final byte[] name;
+	public int Name_len() {return name_len;} private final int name_len;
 }

@@ -103,7 +103,7 @@ public class Xoa_url {
 			bfr.Add(anch_spr).Add(anch);								// add anch			EX: "#", "B"
 		return bfr.To_bry_and_clear();
 	}
-	public static final    Xoa_url Null = null;
+	public static final Xoa_url Null = null;
 	public static Xoa_url blank() {return new Xoa_url();}
 	public static Xoa_url Test() {return New(Bry_.new_a7("test_wiki"), Bry_.new_a7("test_page"));}
 	public static Xoa_url New(Xow_wiki wiki, Xoa_ttl ttl) {return New(wiki.Domain_bry(), ttl.Full_txt());}

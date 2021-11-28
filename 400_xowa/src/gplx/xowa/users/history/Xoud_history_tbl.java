@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.metas.*; import gplx.dbs.metas.updates.*;
 public class Xoud_history_tbl implements Rls_able {
-	private final    String tbl_name = "user_history"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
-	private final    String fld_id, fld_wiki, fld_url, fld_time, fld_count;
-	private final    Db_conn conn; private Db_stmt stmt_select_by_page, stmt_select_by_top, stmt_insert, stmt_update, stmt_delete;
+	private final String tbl_name = "user_history"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String fld_id, fld_wiki, fld_url, fld_time, fld_count;
+	private final Db_conn conn; private Db_stmt stmt_select_by_page, stmt_select_by_top, stmt_insert, stmt_update, stmt_delete;
 	public Xoud_history_tbl(Db_conn conn) {
 		this.conn = conn;
 		fld_id							= flds.Add_int_pkey_autonum("hist_id");

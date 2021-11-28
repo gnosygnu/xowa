@@ -17,7 +17,7 @@ package gplx.core.ios.streams; import gplx.*; import gplx.core.*; import gplx.co
 import gplx.core.ios.streams.rdrs.*;
 public class Io_stream_rdr_ {
 	public static final int Read_done = -1, Read_done_compare = 1;
-	public static final    Io_stream_rdr Noop = new Io_stream_rdr__noop();
+	public static final Io_stream_rdr Noop = new Io_stream_rdr__noop();
 	public static Io_stream_rdr		New__raw(Io_url url)			{return new Io_stream_rdr__raw().Url_(url);}
 	public static Io_stream_rdr		New__raw(java.io.InputStream strm)	{return new Io_stream_rdr__raw().Under_(strm);}	
 	private static Io_stream_rdr	New__zip(Io_url url)			{return new Io_stream_rdr__zip().Url_(url);}

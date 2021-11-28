@@ -29,17 +29,17 @@ import gplx.xowa.Xoae_app;
 import gplx.xowa.apps.Xoa_app_eval;
 import gplx.xowa.apps.fsys.Xoa_fsys_mgr;
 public class Xoa_gfs_mgr implements Gfo_invk, Gfo_invk_root_wkr {
-	private final    String user_name;
+	private final String user_name;
 	public Xoa_gfs_mgr(String user_name, Gfo_invk root_invk, Xoa_fsys_mgr app_fsys_mgr) {
 		this.user_name = user_name;
 		this.root_invk = root_invk; this.app_fsys_mgr = app_fsys_mgr;
 		GfsCore.Instance.AddCmd(root_invk, Xoae_app.Invk_app);
 		GfsCore.Instance.AddCmd(root_invk, Xoae_app.Invk_xowa);
 	}
-	public Gfo_invk Root_invk() {return root_invk;} private final    Gfo_invk root_invk; 
-	public Xoa_fsys_mgr App_fsys_mgr() {return app_fsys_mgr;} private final    Xoa_fsys_mgr app_fsys_mgr; 
-	public Xoa_app_eval Eval_mgr() {return eval_mgr;} private final    Xoa_app_eval eval_mgr = new Xoa_app_eval();
-	public Gfs_wtr Wtr() {return wtr;} private final    Gfs_wtr wtr = new Gfs_wtr();
+	public Gfo_invk Root_invk() {return root_invk;} private final Gfo_invk root_invk;
+	public Xoa_fsys_mgr App_fsys_mgr() {return app_fsys_mgr;} private final Xoa_fsys_mgr app_fsys_mgr;
+	public Xoa_app_eval Eval_mgr() {return eval_mgr;} private final Xoa_app_eval eval_mgr = new Xoa_app_eval();
+	public Gfs_wtr Wtr() {return wtr;} private final Gfs_wtr wtr = new Gfs_wtr();
 	public void Run_url(Io_url url) {
 		Run_url_for(GfsCore.Instance.Root(), url);
 		Gfo_usr_dlg_.Instance.Log_wkr().Log_to_session_fmt("gfs.done: ~{0}", url.Raw());

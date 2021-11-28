@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 public abstract class DataWtr_base implements SrlMgr {
-	@gplx.Virtual public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.New();
+	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.New();
 	public boolean Type_rdr() {return false;}
 	public abstract void WriteData(String key, Object o);
 	public abstract void WriteNodeBgn(String nodeName);
 	public abstract void WriteNodeEnd();
-	@gplx.Virtual public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {
+	public void SrlList(String key, List_adp list, SrlObj proto, String itmKey) {
 		this.WriteNodeBgn(key);
 		for (Object itmObj : list) {
 			SrlObj itm = (SrlObj)itmObj;
@@ -30,7 +30,7 @@ public abstract class DataWtr_base implements SrlMgr {
 		}
 		this.WriteNodeEnd();
 	}
-	@gplx.Virtual public Object StoreRoot(SrlObj root, String key) {
+	public Object StoreRoot(SrlObj root, String key) {
 		this.WriteNodeBgn(key);
 		root.SrlObj_Srl(this);
 		this.WriteNodeEnd();

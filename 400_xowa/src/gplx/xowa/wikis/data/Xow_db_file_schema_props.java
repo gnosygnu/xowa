@@ -20,8 +20,8 @@ public class Xow_db_file_schema_props {
 		this.search__word__page_count_exists = search__word__page_count_exists;
 		this.wbase__qid__src_ttl_has_spaces = wbase__qid__src_ttl_has_spaces;
 	}
-	public boolean Search__word__page_count_exists() {return search__word__page_count_exists;} private final    boolean search__word__page_count_exists;
-	public boolean Wbase__qid__src_ttl_has_spaces() {return wbase__qid__src_ttl_has_spaces;} private final    boolean wbase__qid__src_ttl_has_spaces;
+	public boolean Search__word__page_count_exists() {return search__word__page_count_exists;} private final boolean search__word__page_count_exists;
+	public boolean Wbase__qid__src_ttl_has_spaces() {return wbase__qid__src_ttl_has_spaces;} private final boolean wbase__qid__src_ttl_has_spaces;
 	public static Xow_db_file_schema_props make_() {return new Xow_db_file_schema_props(Bool_.Y, Bool_.N);}
 	public static Xow_db_file_schema_props load_(Db_cfg_tbl cfg_tbl, int tid, String version) {
 		boolean search__word__page_count_exists = cfg_tbl.Select_yn_or(Grp, Key__col_search_word_page_count, Bool_.N);

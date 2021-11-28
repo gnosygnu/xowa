@@ -23,12 +23,12 @@ public class Srch_crt_mgr {
 		this.Words_ary = words_ary;
 		this.Words_nth = words_nth;
 	}
-	public final    byte[]				Key;
-	public final    Srch_crt_tkn[]		Tkns;
-	public final    Srch_crt_itm		Root;
-	public final    byte				Words_tid;
-	public final    Srch_crt_itm[]		Words_ary;
-	public final    Srch_crt_itm		Words_nth;
+	public final byte[]				Key;
+	public final Srch_crt_tkn[]		Tkns;
+	public final Srch_crt_itm		Root;
+	public final byte				Words_tid;
+	public final Srch_crt_itm[]		Words_ary;
+	public final Srch_crt_itm		Words_nth;
 	public int Words_nth__len() {
 		return Words_nth == null ? 0 : Words_nth.Raw.length;
 	}

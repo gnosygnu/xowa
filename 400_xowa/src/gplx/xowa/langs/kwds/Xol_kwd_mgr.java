@@ -17,7 +17,7 @@ package gplx.xowa.langs.kwds; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.core.btries.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_kwd_mgr implements Gfo_invk {
-	private final    Xol_lang_itm lang; private final    Xol_kwd_grp[] grps = new Xol_kwd_grp[Xol_kwd_grp_.Id__max];
+	private final Xol_lang_itm lang; private final Xol_kwd_grp[] grps = new Xol_kwd_grp[Xol_kwd_grp_.Id__max];
 	private Btrie_slim_mgr kwd_default_trie; private byte[] kwd_default_key; private boolean kwd_default_init_needed = true;
 	public Xol_kwd_mgr(Xol_lang_itm lang) {this.lang = lang;}
 	public int Len() {return grps.length;}

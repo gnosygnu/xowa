@@ -17,10 +17,10 @@ package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gpl
 import gplx.langs.htmls.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_html_row_wkr {
-	private final    Srch_html_row_bldr html_row_bldr; private final    Xog_js_wkr js_wkr;
-	private final    Srch_rslt_row[] rows; private final    int rows_len;
-	private final    Bry_bfr bfr = Bry_bfr_.New_w_size(255);
-	private final    byte[] insert_new_key;
+	private final Srch_html_row_bldr html_row_bldr; private final Xog_js_wkr js_wkr;
+	private final Srch_rslt_row[] rows; private final int rows_len;
+	private final Bry_bfr bfr = Bry_bfr_.New_w_size(255);
+	private final byte[] insert_new_key;
 	public Srch_html_row_wkr(Srch_html_row_bldr html_row_bldr, Xog_js_wkr js_wkr, int slab_len, byte[] wiki) {			
 		this.html_row_bldr = html_row_bldr; this.js_wkr = js_wkr;
 		this.rows = new Srch_rslt_row[slab_len];
@@ -70,5 +70,5 @@ public class Srch_html_row_wkr {
 		return -Int_.Compare(lhs.Page_score, rhs.Page_score);
 	}
 	public static byte[] Gen_insert_key(byte[] wiki) {return Bry_.Add(Bry_insert_key, wiki);}
-	private static final    byte[] Bry_insert_key = Bry_.new_a7("xowa_insert_");
+	private static final byte[] Bry_insert_key = Bry_.new_a7("xowa_insert_");
 }

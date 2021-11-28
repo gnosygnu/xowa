@@ -19,8 +19,8 @@ import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.x
 import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*;
 class Merge_wkr__core {
-	private final    Db_attach_mgr attach_mgr = new Db_attach_mgr();
-	private final    Db_tbl_copy copy_mgr = new Db_tbl_copy();
+	private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
+	private final Db_tbl_copy copy_mgr = new Db_tbl_copy();
 	public void Copy_to_temp(Merge_prog_wkr prog_wkr, Xow_wiki wiki, Db_conn src_conn) {
 		Create_dbs(wiki, src_conn);
 		Merge_core(wiki, src_conn);

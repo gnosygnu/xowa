@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.assessments; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*;
 public class Assessment_func__tst {
-	@Before public void init()				{fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
+	@Before public void init()				{fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Basic() {
 		fxt.Test__parse__tmpl_to_html("{{#assessment:Name|A|Hi}}", "");
 	}

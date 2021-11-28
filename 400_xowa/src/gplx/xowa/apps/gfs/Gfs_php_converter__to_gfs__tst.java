@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.gfs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import org.junit.*;
 public class Gfs_php_converter__to_gfs__tst {
-	@Before public void init() {fxt.Clear();} private final    Gfs_php_converter_fxt fxt = new Gfs_php_converter_fxt();
+	@Before public void init() {fxt.Clear();} private final Gfs_php_converter_fxt fxt = new Gfs_php_converter_fxt();
 	@Test public void Escape_sequences() {
 		fxt.Test__to_gfs("a\\\"b"					, "a\"b");
 		fxt.Test__to_gfs("a\\'b"					, "a'b");
@@ -38,7 +38,7 @@ public class Gfs_php_converter__to_gfs__tst {
 	}
 }
 class Gfs_php_converter_fxt {
-	private final    Bry_bfr bfr = Bry_bfr_.New();
+	private final Bry_bfr bfr = Bry_bfr_.New();
 	public void Clear() {}
 	public void Test__to_gfs(String raw, String expd) {
 		byte[] actl = Gfs_php_converter.To_gfs(bfr, Bry_.new_u8(raw));

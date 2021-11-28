@@ -21,8 +21,8 @@ class Xomath_latex_itm {
 		this.md5 = md5;
 		this.png = png;
 	}
-	public int		Uid() {return uid;} private final    int uid;
-	public byte[]	Src() {return src;} private final    byte[] src;
-	public byte[]	Md5() {return md5;} private final    byte[] md5;
-	public Io_url	Png() {return png;} private final    Io_url png;
+	public int		Uid() {return uid;} private final int uid;
+	public byte[]	Src() {return src;} private final byte[] src;
+	public byte[]	Md5() {return md5;} private final byte[] md5;
+	public Io_url	Png() {return png;} private final Io_url png;
 }

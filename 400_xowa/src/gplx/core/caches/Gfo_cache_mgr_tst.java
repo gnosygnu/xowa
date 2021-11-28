@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.caches; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.envs.*;
 public class Gfo_cache_mgr_tst {
-	@Before public void init() {fxt.Clear();} private final    Gfo_cache_mgr_fxt fxt = new Gfo_cache_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final Gfo_cache_mgr_fxt fxt = new Gfo_cache_mgr_fxt();
 	@Test public void Basic() {
 		fxt.Exec__add("a");
 		fxt.Test__cur_size(1);
@@ -35,7 +35,7 @@ public class Gfo_cache_mgr_tst {
 	}
 }
 class Gfo_cache_mgr_fxt {
-	private final    Gfo_cache_mgr mgr = new Gfo_cache_mgr().Max_size_(4).Reduce_by_(2);
+	private final Gfo_cache_mgr mgr = new Gfo_cache_mgr().Max_size_(4).Reduce_by_(2);
 	public void Clear() {mgr.Clear();}
 	public Gfo_cache_mgr_fxt Exec__add(String... ary) {
 		int len = ary.length;

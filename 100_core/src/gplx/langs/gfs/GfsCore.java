@@ -82,7 +82,7 @@ public class GfsCore implements Gfo_invk {
 		}
 		else	return Gfo_invk_.Rv_unhandled;
 //			return this;
-	}	public static final    String Invk_ExecFil = "ExecFil";
-        public static final    GfsCore Instance = new GfsCore();
+	}	public static final String Invk_ExecFil = "ExecFil";
+        public static final GfsCore Instance = new GfsCore();
         @gplx.Internal protected static GfsCore new_() {return new GfsCore();}
 }

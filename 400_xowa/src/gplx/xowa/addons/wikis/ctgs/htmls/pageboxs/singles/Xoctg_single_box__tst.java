@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.singles; import gplx.*; impor
 import org.junit.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoctg_single_box__tst {		
-	@Before public void init() {fxt.Clear();} private final    Xoh_ctg_mgr_fxt fxt = new Xoh_ctg_mgr_fxt();
+	@Before public void init() {fxt.Clear();} private final Xoh_ctg_mgr_fxt fxt = new Xoh_ctg_mgr_fxt();
 	@Test  public void Basic() {
 		fxt.Init__ctgs("Category:A", "Category:B").Test_html(String_.Concat_lines_nl
 		(	"<div id=\"catlinks\" class=\"catlinks\">"

@@ -18,16 +18,16 @@ import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-write state
-	private final    Xowe_wiki wiki;
-	private final    Btrie_fast_mgr tmpl_trie, wtxt_trie;
+	private final Xowe_wiki wiki;
+	private final Btrie_fast_mgr tmpl_trie, wtxt_trie;
 	private Xot_compile_data tmpl_props = new Xot_compile_data();	// NOTE: probably should not be a member variable, but leave for now; DATE:2016-12-02
 	Xop_parser(Xowe_wiki wiki, Xop_lxr_mgr tmpl_lxr_mgr, Xop_lxr_mgr wtxt_lxr_mgr) {
 		this.wiki = wiki;
 		this.tmpl_lxr_mgr = tmpl_lxr_mgr; this.tmpl_trie = tmpl_lxr_mgr.Trie();
 		this.wtxt_lxr_mgr = wtxt_lxr_mgr; this.wtxt_trie = wtxt_lxr_mgr.Trie();
 	}
-	public Xop_lxr_mgr Tmpl_lxr_mgr() {return tmpl_lxr_mgr;} private final    Xop_lxr_mgr tmpl_lxr_mgr;
-	public Xop_lxr_mgr Wtxt_lxr_mgr() {return wtxt_lxr_mgr;} private final    Xop_lxr_mgr wtxt_lxr_mgr;
+	public Xop_lxr_mgr Tmpl_lxr_mgr() {return tmpl_lxr_mgr;} private final Xop_lxr_mgr tmpl_lxr_mgr;
+	public Xop_lxr_mgr Wtxt_lxr_mgr() {return wtxt_lxr_mgr;} private final Xop_lxr_mgr wtxt_lxr_mgr;
 	public void Init_by_wiki(Xowe_wiki wiki) {
 		tmpl_lxr_mgr.Init_by_wiki(wiki);
 		wtxt_lxr_mgr.Init_by_wiki(wiki);

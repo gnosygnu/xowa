@@ -60,6 +60,6 @@ public class Indicator_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (this.name == null) bfr.Add_str_a7("Error: Page status indicators' name attribute must not be empty.");
 	}
 	private static final byte Xatr_name = 0;
-	private static final    Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
+	private static final Hash_adp_bry xatrs_hash = Hash_adp_bry.ci_a7()
 	.Add_str_obj("name", Byte_obj_val.new_(Xatr_name));
 }

@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.fulltexts.indexers.specials; import gplx.*; impor
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.dbs.*;
 class Xofulltext_indexer_html extends Xow_special_wtr__base implements Mustache_doc_itm {
-	private final    String wikis_bry, ns_ids, idx_opt;
+	private final String wikis_bry, ns_ids, idx_opt;
 	public Xofulltext_indexer_html(String wikis_bry, String ns_ids, String idx_opt) {
 		this.wikis_bry = wikis_bry;
 		this.ns_ids = ns_ids;

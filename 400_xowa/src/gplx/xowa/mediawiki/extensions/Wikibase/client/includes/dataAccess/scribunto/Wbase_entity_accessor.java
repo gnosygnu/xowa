@@ -29,7 +29,7 @@ import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
 import gplx.xowa.xtns.wbases.stores.Wbase_doc_mgr;
 
 public class Wbase_entity_accessor {
-	private final    Wbase_doc_mgr entity_mgr;
+	private final Wbase_doc_mgr entity_mgr;
 	public Wbase_entity_accessor(Wbase_doc_mgr entity_mgr) {
 		this.entity_mgr = entity_mgr;
 	}
@@ -97,7 +97,7 @@ public class Wbase_entity_accessor {
 	}
 
 	private static final int ID_NULL = 0, ID_BEST = 1, ID_ALL = 2;
-	private static final    byte[]
+	private static final byte[]
 	  RANK_BEST = Bry_.new_a7("best")
 	, RANK_ALL  = Bry_.new_a7("all");
 }

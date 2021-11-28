@@ -121,7 +121,7 @@ public class Io_size_ {
 		}
 		return unitPow;
 	}
-	private static final    String[][] Units = new String[][]
+	private static final String[][] Units = new String[][]
 	{	String_.Ary("B", "BYTE")
 	,	String_.Ary("KB", "KILOBYTE")
 	,	String_.Ary("MB", "MEGABYTE")
@@ -130,7 +130,7 @@ public class Io_size_ {
 	,	String_.Ary("PB", "PETABYTE")
 	,	String_.Ary("EB", "EXABYTE")
 	};
-	public static final    byte[][] Units_bry = new byte[][] 
+	public static final byte[][] Units_bry = new byte[][]
 	{	Bry_.new_a7("B")
 	,	Bry_.new_a7("KB")
 	,	Bry_.new_a7("MB")

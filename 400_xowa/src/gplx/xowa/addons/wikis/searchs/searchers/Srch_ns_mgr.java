@@ -17,8 +17,8 @@ package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xow
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.nss.*;
 public class Srch_ns_mgr {
-	private final    Ordered_hash ns_hash = Ordered_hash_.New(); private final    Int_obj_ref tmp_ns_id = Int_obj_ref.New_neg1();
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
+	private final Ordered_hash ns_hash = Ordered_hash_.New(); private final Int_obj_ref tmp_ns_id = Int_obj_ref.New_neg1();
+	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
 	private boolean ns_all, ns_main;
 	public void Clear() {
 		ns_hash.Clear();
@@ -93,5 +93,5 @@ public class Srch_ns_mgr {
 			return rv;
 		}
 	}
-	private static final    byte[] Hash_key_all = new byte[] {Srch_search_addon.Wildcard__star}, Hash_key_main = new byte[] {Byte_ascii.Num_0};
+	private static final byte[] Hash_key_all = new byte[] {Srch_search_addon.Wildcard__star}, Hash_key_main = new byte[] {Byte_ascii.Num_0};
 }

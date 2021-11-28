@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm_tst {
-	private final    Xow_xwiki_itm_fxt fxt = new Xow_xwiki_itm_fxt();
+	private final Xow_xwiki_itm_fxt fxt = new Xow_xwiki_itm_fxt();
 	@Test  public void Show_in_sitelangs__basic() {		// PURPOSE: basic test for show in "In other languages"; DATE:2015-11-06
 		fxt.Test__type_is_xwiki_lang(Bool_.Y, fxt.Make__xwiki("en", "en.wikipedia.org/wiki/{0}", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikipedia, "en.wikipedia.org", "enwiki"), "simple");
 	}

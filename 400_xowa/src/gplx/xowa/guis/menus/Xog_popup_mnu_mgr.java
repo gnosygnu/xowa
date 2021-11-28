@@ -17,8 +17,8 @@ package gplx.xowa.guis.menus; import gplx.*; import gplx.xowa.*; import gplx.xow
 import gplx.xowa.guis.menus.dom.*;
 import gplx.xowa.langs.*;
 public class Xog_popup_mnu_mgr implements Gfo_invk {
-	private final    Ordered_hash hash = Ordered_hash_.New();
-	private final    Xog_mnu_grp[] mnus = new Xog_mnu_grp[6];
+	private final Ordered_hash hash = Ordered_hash_.New();
+	private final Xog_mnu_grp[] mnus = new Xog_mnu_grp[6];
 	private Xoa_gui_mgr gui_mgr;
 	public Xog_popup_mnu_mgr(Xoa_gui_mgr gui_mgr, Xog_menu_mgr menu_mgr) {
 		this.gui_mgr = gui_mgr;

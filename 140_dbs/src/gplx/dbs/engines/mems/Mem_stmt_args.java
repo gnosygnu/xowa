@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.criterias.*;
 public class Mem_stmt_args {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	private int cur_idx = -1;
 	public void Clear() {list.Clear(); cur_idx = -1;}
 	public void Add(String k, Object v) {list.Add(Keyval_.new_(k, v));}

@@ -19,9 +19,9 @@ import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.pars
 import gplx.xowa.htmls.sections.*;
 import gplx.xowa.htmls.core.wkrs.lnkis.*;
 public class Xoh_make_fxt {
-	private final    Xowe_wiki wiki;
-	private final    Xoh_make_mgr make_mgr;
-	private final    Gfo_test_list_base expd_redlinks = new Gfo_test_list_base();
+	private final Xowe_wiki wiki;
+	private final Xoh_make_mgr make_mgr;
+	private final Gfo_test_list_base expd_redlinks = new Gfo_test_list_base();
 	private Xoh_page actl;
 	public Xoh_make_fxt() {
 		// set member reference
@@ -38,8 +38,8 @@ public class Xoh_make_fxt {
 		page_chkr.Clear();
 		expd_redlinks.Clear();
 	}
-	public Xoh_page_chkr Page_chkr() {return page_chkr;} private final    Xoh_page_chkr page_chkr = new Xoh_page_chkr();
-	public Xop_fxt Parser_fxt() {return parser_fxt;} private final    Xop_fxt parser_fxt = new Xop_fxt();
+	public Xoh_page_chkr Page_chkr() {return page_chkr;} private final Xoh_page_chkr page_chkr = new Xoh_page_chkr();
+	public Xop_fxt Parser_fxt() {return parser_fxt;} private final Xop_fxt parser_fxt = new Xop_fxt();
 	public Xou_cache_finder_mem Init__usr_cache(Xof_fsdb_itm... ary) {
 		Xou_cache_finder_mem rv = Xou_cache_finder_.New_mem();
 		parser_fxt.Wiki().Html__hdump_mgr().Load_mgr().Make_mgr().Hctx().Test__cache__mgr_(rv);

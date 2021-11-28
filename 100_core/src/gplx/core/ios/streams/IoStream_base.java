@@ -19,7 +19,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 public class IoStream_base implements IoStream {
-	@gplx.Virtual public Io_url Url() {return url;} Io_url url = Io_url_.Empty;
+	public Io_url Url() {return url;} Io_url url = Io_url_.Empty;
 	public void Transfer(IoStream trg, int bufferLength) {
 		byte[] buffer = new byte[bufferLength];
 		int read = -1;
@@ -31,11 +31,11 @@ public class IoStream_base implements IoStream {
 	}
 	public int ReadAry(byte[] ary) {return this.Read(ary, 0, ary.length);}
 	public void WriteAry(byte[] ary) {this.Write(ary, 0, ary.length);}
-		@gplx.Virtual public Object UnderRdr() {return under;}
-	@gplx.Virtual public void UnderRdr_(Object v) {this.under = (RandomAccessFile)v;}
-	@gplx.Virtual public long Pos() {return pos;} long pos;
-	@gplx.Virtual public long Len() {return length;} long length;
-	@gplx.Virtual public int Read(byte[] array, int offset, int count) {
+		public Object UnderRdr() {return under;}
+	public void UnderRdr_(Object v) {this.under = (RandomAccessFile)v;}
+	public long Pos() {return pos;} long pos;
+	public long Len() {return length;} long length;
+	public int Read(byte[] array, int offset, int count) {
 		try 	{
 			int rv = under.read(array, offset, count);
 			return rv == -1 ? 0 : rv;	// NOTE: fis returns -1 if nothing read; .NET returned 0; Hash will fail if -1 returned (will try to create array of 0 length)
@@ -50,7 +50,7 @@ public class IoStream_base implements IoStream {
 		}
 		catch 	(IOException e) {throw Err_.new_exc(e, "io", "seek failed", "url", url);}
 	}
-	@gplx.Virtual public void Write(byte[] array, int offset, int count) {bfr.Add_mid(array, offset, offset + count); this.Flush();} Bry_bfr bfr = Bry_bfr_.Reset(16);
+	public void Write(byte[] array, int offset, int count) {bfr.Add_mid(array, offset, offset + count); this.Flush();} Bry_bfr bfr = Bry_bfr_.Reset(16);
 	public void Write_and_flush(byte[] bry, int bgn, int end) {
 //		ConsoleAdp._.WriteLine(bry.length +" " + bgn + " " + end);
 		Flush();// flush anything already in buffer
@@ -85,7 +85,7 @@ public class IoStream_base implements IoStream {
 //		    }
 //		}
 	}
-	@gplx.Virtual public void Flush() {
+	public void Flush() {
 		try {
 			if (mode_is_append) under.seek(under.length());
 //			else				under.seek(0);
@@ -95,7 +95,7 @@ public class IoStream_base implements IoStream {
 		catch 	(IOException e) {throw Err_.new_exc(e, "io", "write failed", "url", url);}
 		bfr.Clear();
 	}
-	@gplx.Virtual public void Rls() {
+	public void Rls() {
 		IoEngine_system.Closeable_close(under, url, true);
 	}
 	RandomAccessFile under; boolean mode_is_append; byte mode;

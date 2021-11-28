@@ -23,7 +23,7 @@ import gplx.xowa.htmls.*;
 // TODO.XO:cache files in memory, else commonly used files (Wiki.png) will be loaded from fsdb for every usage on page
 // TODO.XO:save results to db to verify unused images (images in fsdb, but not loaded during this code)
 class Xocheck_mgr {
-	private final    Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final    Xof_img_size img_size = new Xof_img_size(); 	
+	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2(); private final Xof_img_size img_size = new Xof_img_size();
 	private Xowe_wiki wiki;
 	public void Exec(Xowe_wiki wiki) {
 		// init

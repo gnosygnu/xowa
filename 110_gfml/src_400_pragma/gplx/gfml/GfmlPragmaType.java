@@ -45,7 +45,7 @@ class GfmlPragmaType implements GfmlPragma {
 		makr.AddSubFld(GfmlFld.new_(false,						"fld", "_type/type/fld"));
 		return makr.Xto_bry();
 	}
-	public static final    String CacheLog_key = "log:type";
+	public static final String CacheLog_key = "log:type";
 	@gplx.Internal protected static void ExecList(GfmlTypRegy regy, Ordered_hash list, List_adp replaced) {
 		for (Object typeObj : list) {
 			GfmlType type = (GfmlType)typeObj;

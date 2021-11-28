@@ -78,9 +78,9 @@ public class Xog_mnu_itm extends Xog_mnu_base {
 		else	return super.Invk(ctx, ikey, k, m);
 		return this;
 	}
-	private static final    String Invk_text = "text", Invk_text_ = "text_", Invk_shortcut = "shortcut", Invk_shortcut_ = "shortcut_", Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_img = "img", Invk_img_ = "img_"
+	private static final String Invk_text = "text", Invk_text_ = "text_", Invk_shortcut = "shortcut", Invk_shortcut_ = "shortcut_", Invk_cmd = "cmd", Invk_cmd_ = "cmd_", Invk_img = "img", Invk_img_ = "img_"
 	;
 	public static final byte Tid_nil = 0, Tid_grp = 1, Tid_spr = 2, Tid_btn = 3, Tid_chk = 4, Tid_rdo = 5;
 	private static String[] Img_nest_of(String img) {return String_.Len_eq_0(img) ? String_.Ary_empty : String_.Split(img, "/");}
-	public static final    Xog_mnu_itm Null = new Xog_mnu_itm(null, "null");
+	public static final Xog_mnu_itm Null = new Xog_mnu_itm(null, "null");
 }

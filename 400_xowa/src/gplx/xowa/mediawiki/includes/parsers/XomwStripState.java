@@ -26,10 +26,10 @@ public class XomwStripState {
 //
 //		static final UNSTRIP_RECURSION_LIMIT = 20;
 
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private final    Btrie_rv trv = new Btrie_rv();
-	private final    Bry_bfr tmp_1 = Bry_bfr_.New();
-	private final    Bry_bfr tmp_2 = Bry_bfr_.New();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final Btrie_rv trv = new Btrie_rv();
+	private final Bry_bfr tmp_1 = Bry_bfr_.New();
+	private final Bry_bfr tmp_2 = Bry_bfr_.New();
 	private boolean tmp_2_used = false;
 	private int generalLen, nowikiLen;
 
@@ -328,8 +328,8 @@ public class XomwStripState {
 //		public function killMarkers($text) {
 //			return preg_replace(this.regex, '', $text);
 //		}
-//		public static final    String Str__marker_bgn = "\u007f'\"`UNIQ-";
-//		public static final    byte[] 
+//		public static final String Str__marker_bgn = "\u007f'\"`UNIQ-";
+//		public static final byte[]
 //		  Bry__marker__bgn		= Bry_.new_a7(Str__marker_bgn)
 //		, Bry__marker__end		= Bry_.new_a7("-QINU`\"'\u007f")
 //		;
@@ -341,7 +341,7 @@ class XomwStripItem {
 		this.key = key;
 		this.val = val;
 	}
-	public byte Type() {return tid;} private final    byte tid;
-	public byte[] Key() {return key;} private final    byte[] key;
-	public byte[] Val() {return val;} private final    byte[] val;
+	public byte Type() {return tid;} private final byte tid;
+	public byte[] Key() {return key;} private final byte[] key;
+	public byte[] Val() {return val;} private final byte[] val;
 }

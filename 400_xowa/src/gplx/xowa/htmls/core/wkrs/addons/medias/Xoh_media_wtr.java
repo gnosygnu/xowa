@@ -19,7 +19,7 @@ import gplx.xowa.files.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
 import gplx.xowa.htmls.sections.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_media_wtr {
-	private final    Bfr_arg__bry lnki_ttl = Bfr_arg__bry.New_empty();
+	private final Bfr_arg__bry lnki_ttl = Bfr_arg__bry.New_empty();
 	public void Write(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, Xoh_data_itm data_itm, Xoh_img_wtr img_wtr) {
 		// make fsdb_itm
 		hpg.Img_mgr().Make_aud();
@@ -48,8 +48,8 @@ public class Xoh_media_wtr {
 		}
 	}
 
-	private final    Bfr_arg__bry_fmt fmt__noicon = new Bfr_arg__bry_fmt(Bry_fmt.Auto_nl_apos("\n<div><a href='/wiki/File:~{lnki_ttl}' class='xowa_media_info' title='About this file'></a></div>"));
-	private final    Bry_fmt 
+	private final Bfr_arg__bry_fmt fmt__noicon = new Bfr_arg__bry_fmt(Bry_fmt.Auto_nl_apos("\n<div><a href='/wiki/File:~{lnki_ttl}' class='xowa_media_info' title='About this file'></a></div>"));
+	private final Bry_fmt
 	  fmt__audio = Bry_fmt.Auto_nl_apos
 	( "<div class='xowa_media_div'>"
 	, "<div><a href='' xowa_title='~{lnki_ttl}' class='xowa_media_play' style='width:~{a_width}px;max-width:~{a_max_width}px;' alt='Play sound'></a></div>~{noicon}"

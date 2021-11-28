@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.centrals.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.brys.evals.*;
 public class Bry_eval_wkr__builder_central implements Bry_eval_wkr {
-	private final    byte[] wiki_dir;
+	private final byte[] wiki_dir;
 	public Bry_eval_wkr__builder_central(Io_url wiki_dir) {this.wiki_dir = wiki_dir.RawBry();}
 	public String Key() {return "builder_central";}
 	public void Resolve(Bry_bfr rv, byte[] src, int args_bgn, int args_end) {
@@ -39,7 +39,7 @@ public class Bry_eval_wkr__builder_central implements Bry_eval_wkr {
 	}
 
 	public static final byte Type__download_fil = 0, Type__unzip_dir = 1, Type__wiki_dir = 2;
-	private static final    Hash_adp_bry hash = Hash_adp_bry.cs()
+	private static final Hash_adp_bry hash = Hash_adp_bry.cs()
 	.Add_str_byte("download_fil", Type__download_fil)
 	.Add_str_byte("unzip_dir", Type__unzip_dir)
 	.Add_str_byte("wiki_dir", Type__wiki_dir)

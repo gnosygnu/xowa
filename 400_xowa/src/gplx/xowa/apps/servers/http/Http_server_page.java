@@ -32,7 +32,7 @@ import gplx.xowa.specials.Xow_special_meta_;
 import gplx.xowa.specials.xowa.errors.Xoerror_special;
 
 public class Http_server_page {
-	private final    Xoae_app app;
+	private final Xoae_app app;
 	public Http_server_page(Xoae_app app) {
 		this.app = app;
 	}

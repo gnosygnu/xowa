@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.drds.ios.media_scanners; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*; import gplx.xowa.drds.ios.*;
 public abstract class Xod_media_scanner__base implements Xod_media_scanner {
-	private final    List_adp list = List_adp_.New();
+	private final List_adp list = List_adp_.New();
 	public Xod_media_scanner__base() {
 		this.evt_mgr = new Gfo_evt_mgr(this);
 		Gfo_evt_mgr_.Sub_same(Io_mgr.Instance, Io_mgr.Evt__fil_created, this);
 	}
-	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private final    Gfo_evt_mgr evt_mgr;
+	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private final Gfo_evt_mgr evt_mgr;
 	public Xod_media_scanner Add(Io_url url) {list.Add(url.Xto_api()); return this;}
 	public void Scan() {
 		String[] urls = list.To_str_ary_and_clear();

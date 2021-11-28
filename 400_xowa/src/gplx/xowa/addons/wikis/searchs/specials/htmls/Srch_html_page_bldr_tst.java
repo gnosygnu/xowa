@@ -45,7 +45,7 @@ public class Srch_html_page_bldr_tst {
 	}
 }
 class Srch_html_page_bldr_fxt {
-	private Xoae_app app; private Xowe_wiki wiki; private Srch_html_page_bldr html_mgr; private final    Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
+	private Xoae_app app; private Xowe_wiki wiki; private Srch_html_page_bldr html_mgr; private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	private int page_id;
 	public Srch_html_page_bldr_fxt Clear() {
 		if (app == null) {

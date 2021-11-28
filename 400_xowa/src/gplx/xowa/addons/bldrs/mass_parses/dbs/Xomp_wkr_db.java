@@ -24,10 +24,10 @@ public class Xomp_wkr_db {
 		this.html_tbl = new Xowd_html_tbl(conn);
 		conn.Meta_tbl_assert(html_tbl);
 	}
-	public int Idx() {return idx;} private final    int idx;
+	public int Idx() {return idx;} private final int idx;
 	public Io_url Url() {return url;}  private Io_url url;
 	public Db_conn Conn() {return conn;} private Db_conn conn;
-	public Xowd_html_tbl Html_tbl() {return html_tbl;} private final    Xowd_html_tbl html_tbl;
+	public Xowd_html_tbl Html_tbl() {return html_tbl;} private final Xowd_html_tbl html_tbl;
 
 	public static Xomp_wkr_db New(Io_url root_dir, int uid) {
 		Io_url url = root_dir.GenSubFil_nest("xomp_" + Int_.To_str_fmt(uid, "000"), "xomp_wkr.sqlite3");

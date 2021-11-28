@@ -17,7 +17,7 @@ package gplx.core.criterias; import gplx.*; import gplx.core.*;
 public class Criteria_in implements Criteria {
 	public Criteria_in(boolean neg, Object[] ary) {this.neg = neg; Ary_(ary);}
 	public byte			Tid() {return Criteria_.Tid_in;}
-	public boolean			Neg() {return neg;} private final    boolean neg;
+	public boolean			Neg() {return neg;} private final boolean neg;
 	public Object[]		Ary() {return ary;} private Object[] ary;
 	public int			Ary_len() {return ary_len;} private int ary_len;
 	public Class<?>	Itm_type() {return itm_type;} private Class<?> itm_type;

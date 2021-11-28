@@ -144,8 +144,8 @@ class DsvParser {
 		rv.bldr.MakeFldNames(names); rv.bldr.MakeFldTypes(types);
 		return rv;
 	}
-	static final    int ValType_Data = 0, ValType_CmdName = 1;
-	static final    int LineType_Data = 0, LineType_Comment = 1, LineType_TblBgn = 2, LineType_FldNames = 3, LineType_FldTypes = 4, LineType_BlankLine = 5;
+	static final int ValType_Data = 0, ValType_CmdName = 1;
+	static final int LineType_Data = 0, LineType_Comment = 1, LineType_TblBgn = 2, LineType_FldNames = 3, LineType_FldTypes = 4, LineType_BlankLine = 5;
 }
 class DsvTblBldr {
 	public void Init() {
@@ -241,6 +241,6 @@ class DsvTblBldr {
 	List_adp fldNames = List_adp_.New(); List_adp fldTypes = List_adp_.New(); 
 	int stage = Stage_Init;
 	public static DsvTblBldr new_() {return new DsvTblBldr();} DsvTblBldr() {this.Init();}
-	@gplx.Internal protected static final    String NullTblName = "";
-	static final    int Stage_Init = 0, Stage_Hdr = 1, Stage_Row = 2;
+	@gplx.Internal protected static final String NullTblName = "";
+	static final int Stage_Init = 0, Stage_Hdr = 1, Stage_Row = 2;
 }

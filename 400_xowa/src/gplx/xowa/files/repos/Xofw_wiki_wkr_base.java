@@ -66,5 +66,5 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 		else
 			return Xop_redirect_mgr.Redirect_null_bry;
 	}
-	private static final    Xowd_page_itm tmp_db_page = Xowd_page_itm.new_tmp();
+	private static final Xowd_page_itm tmp_db_page = Xowd_page_itm.new_tmp();
 }

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Graph_html_tst {
-	private final    Graph_html_fxt fxt = new Graph_html_fxt();
+	private final Graph_html_fxt fxt = new Graph_html_fxt();
 	@Before public void init() {
 		fxt.Reset();
 	}

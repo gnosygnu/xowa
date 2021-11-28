@@ -17,7 +17,7 @@ package gplx.xowa.addons.apps.maints.sql_execs.specials; import gplx.*; import g
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.dbs.*;
 class Xosql_exec_html extends Xow_special_wtr__base {
-	private final    String domain, db, sql;
+	private final String domain, db, sql;
 	public Xosql_exec_html(String domain, String db, String sql) {
 		this.domain = domain;
 		this.db = db;

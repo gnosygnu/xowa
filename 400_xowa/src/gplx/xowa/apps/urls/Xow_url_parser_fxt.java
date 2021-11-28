@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.xowa.wikis.nss.*;
 public class Xow_url_parser_fxt {
-	protected final    Xoae_app app; protected final    Xowe_wiki cur_wiki;
-	protected final    Xow_url_parser parser;
+	protected final Xoae_app app; protected final Xowe_wiki cur_wiki;
+	protected final Xow_url_parser parser;
 	protected Xoa_url actl_url;
 	public Xow_url_parser_fxt() {
 		this.app = Xoa_app_fxt.Make__app__edit();

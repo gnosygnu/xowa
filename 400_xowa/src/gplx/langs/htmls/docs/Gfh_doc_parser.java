@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.htmls.docs; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
 import gplx.core.btries.*;
 public class Gfh_doc_parser {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
-	private final    Gfh_txt_wkr txt_wkr;
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final Gfh_txt_wkr txt_wkr;
 	public Gfh_doc_parser(Gfh_txt_wkr txt_wkr, Gfh_doc_wkr... wkr_ary) {
 		this.txt_wkr = txt_wkr;
 		for (Gfh_doc_wkr wkr : wkr_ary)

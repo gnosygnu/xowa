@@ -85,7 +85,7 @@ public class Xot_invk_mock implements Xot_invk {
 		}
 		return rv;
 	}
-	public static final    Xot_invk_mock Null = new Xot_invk_mock(Xot_defn_.Tid_null, 1, Bry_.Empty);
+	public static final Xot_invk_mock Null = new Xot_invk_mock(Xot_defn_.Tid_null, 1, Bry_.Empty);
 }
 /*
 NOTE_1: Xot_invk_mock is being used as a container for two functions

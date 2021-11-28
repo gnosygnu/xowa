@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
 public class XomwMagicWordMgr {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public void Add(byte[] name, boolean cs, byte[]... synonyms) {
 		XomwMagicWord mw = new XomwMagicWord(name, cs, synonyms);
 		hash.Add(name, mw);

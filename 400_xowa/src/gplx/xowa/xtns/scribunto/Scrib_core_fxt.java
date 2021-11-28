@@ -135,7 +135,7 @@ public class Scrib_core_fxt {
 		core.Invoke(wiki, core.Ctx(), Bry_.Empty, Xot_invk_mock.Null, Xot_invk_mock.new_(Frame_ttl_test, args), tmp_bfr, Bry_.new_u8(mod_name), Bry_.new_u8(mod_code), Bry_.new_u8(prc_name));
 		Test_server_logs();
 		return this;
-	}	private static final    byte[] Frame_ttl_test = Bry_.new_a7("test");
+	}	private static final byte[] Frame_ttl_test = Bry_.new_a7("test");
 	private void Test_server_logs() {
 		if (expd_server_rcvd_list.Count() > 0) {
 			Tfds.Eq_ary_str(expd_server_rcvd_list.To_str_ary(), server.Log_rcvd().To_str_ary());

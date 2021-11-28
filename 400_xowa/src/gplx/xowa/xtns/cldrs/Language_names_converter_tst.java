@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.langs.phps.*;
 import gplx.langs.jsons.*;
 public class Language_names_converter_tst {
-	private final    Language_names_converter_fxt fxt = new Language_names_converter_fxt();
+	private final Language_names_converter_fxt fxt = new Language_names_converter_fxt();
 	@Test  public void Parse_fil() {
 		fxt.Exec__Parse(String_.Concat_lines_nl
 		( "/*ignore_bgn*/ $names = ["
@@ -61,7 +61,7 @@ public class Language_names_converter_tst {
 //		}
 }
 class Language_names_converter_fxt {
-	private final    Language_names_converter converter = new Language_names_converter();
+	private final Language_names_converter converter = new Language_names_converter();
 	public Language_name Make__language_name(String code, String name, String note) {return new Language_name(Bry_.new_u8(code), Bry_.new_u8(name), Bry_.new_u8(note));}
 	public void Exec__Parse(String src, Language_name[] expd_names, String expd_json) {
 		Language_name[] actl = converter.Parse(Bry_.new_u8(src));

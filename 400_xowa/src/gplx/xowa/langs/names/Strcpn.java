@@ -17,7 +17,7 @@ package gplx.xowa.langs.names; import gplx.*; import gplx.xowa.*; import gplx.xo
 import gplx.core.btries.*;
 import gplx.core.intls.*;
 class Strcpn {
-	private final    Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
+	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	public Strcpn(byte[][] ary) {
 		for (byte[] val : ary) {
 			trie.Add_bry(val);

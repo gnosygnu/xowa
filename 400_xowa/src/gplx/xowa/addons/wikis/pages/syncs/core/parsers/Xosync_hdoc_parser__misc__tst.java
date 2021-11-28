@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*; import g
 import org.junit.*;
 import gplx.langs.htmls.*;
 public class Xosync_hdoc_parser__misc__tst {
-	private final    Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
+	private final Xosync_hdoc_parser__fxt fxt = new Xosync_hdoc_parser__fxt();
 	@Before public void init() {fxt.Init(true);}
 	@After public void term() {fxt.Term();}
 	@Test  public void Math() {

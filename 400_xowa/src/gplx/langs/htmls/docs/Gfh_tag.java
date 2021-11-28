@@ -18,7 +18,7 @@ import gplx.xowa.parsers.htmls.*; import gplx.langs.htmls.styles.*; import gplx.
 public class Gfh_tag implements Mwh_atr_wkr {
 	private Gfh_tag_rdr tag_rdr;
 	private Ordered_hash atrs_hash; private boolean atrs_null; private int atrs_bgn, atrs_end;
-	private final    Gfh_style_wkr__val_as_int style_wkr = new Gfh_style_wkr__val_as_int();
+	private final Gfh_style_wkr__val_as_int style_wkr = new Gfh_style_wkr__val_as_int();
 	public Gfh_tag Init(Gfh_tag_rdr tag_rdr, byte[] src, boolean tag_is_tail, boolean tag_is_inline, int src_bgn, int src_end, int atrs_bgn, int atrs_end, int name_id, byte[] name_bry) {
 		this.tag_rdr = tag_rdr; this.src = src; this.atrs_null = true;
 		this.tag_is_tail = tag_is_tail; this.tag_is_inline = tag_is_inline;

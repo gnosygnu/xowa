@@ -35,9 +35,9 @@ public abstract class Db_bulk_cmd_base {
 	protected abstract void Bulk_run(int uid_bgn, int uid_end);
 }
 class Imglnk_bulk_cmd__img_id extends Db_bulk_cmd_base {
-	private final    Db_conn conn;
-	private final    Db_attach_mgr attach_mgr;
-	private final    int img_wiki;
+	private final Db_conn conn;
+	private final Db_attach_mgr attach_mgr;
+	private final int img_wiki;
 	private String sql;
 	public Imglnk_bulk_cmd__img_id(Db_conn conn, boolean wiki_is_local, Xowe_wiki wiki) {
 		this.conn = conn;

@@ -116,7 +116,7 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 		else if	(String_.Eq(cmd_key, Xoi_cmd_search2_build.KEY))						return new Xoi_cmd_search2_build(install_mgr, wiki_key).Owner_(this);
 		else																			throw Err_.new_unhandled(cmd_key);
 	}
-	public static final    String Wiki_cmd_custom = "wiki.custom", Wiki_cmd_dump_file = "wiki.dump_file";
+	public static final String Wiki_cmd_custom = "wiki.custom", Wiki_cmd_dump_file = "wiki.dump_file";
 	public Gfo_thread_cmd Cmd_add(GfoMsg m) {Gfo_thread_cmd rv = Cmd_clone(m); cmds.Add(rv); return rv;}
 	Gfo_thread_cmd Cmd_clone(GfoMsg m) {
 		String cmd_key = m.ReadStr("v");

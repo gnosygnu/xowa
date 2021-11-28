@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.directorys.specials.items; import gplx.*; import 
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.dbs.*; import gplx.xowa.addons.wikis.directorys.dbs.*;
 class Xowdir_item_html extends Xow_special_wtr__base {
-	private final    String domain;
+	private final String domain;
 	public Xowdir_item_html(String domain) {
 		this.domain = domain;
 	}

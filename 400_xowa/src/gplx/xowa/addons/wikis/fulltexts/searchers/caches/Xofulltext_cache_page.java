@@ -20,8 +20,8 @@ public class Xofulltext_cache_page {
 		this.page_seq = page_seq;
 		this.page_ttl = page_ttl;
 	}
-	public int Page_id() {return page_id;} private final    int page_id;
-	public int Page_seq() {return page_seq;} private final    int page_seq;
-	public byte[] Page_ttl() {return page_ttl;} private final    byte[] page_ttl;
-	public List_adp Lines() {return lines;} private final    List_adp lines = List_adp_.New();
+	public int Page_id() {return page_id;} private final int page_id;
+	public int Page_seq() {return page_seq;} private final int page_seq;
+	public byte[] Page_ttl() {return page_ttl;} private final byte[] page_ttl;
+	public List_adp Lines() {return lines;} private final List_adp lines = List_adp_.New();
 }

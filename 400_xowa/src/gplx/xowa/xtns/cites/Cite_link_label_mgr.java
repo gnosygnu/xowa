@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 class Cite_link_label_mgr {
-	private final    Hash_adp_bry hash = Hash_adp_bry.cs();
+	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public void Clear() {
 		hash.Clear();
 	}
@@ -27,12 +27,12 @@ class Cite_link_label_mgr {
 	}
 }
 class Cite_link_label_grp {
-	private final    byte[][] labels;
+	private final byte[][] labels;
 	public Cite_link_label_grp(byte[] name, byte[][] labels) {
 		this.name = name;
 		this.labels = labels;
 	}
-	public byte[] Name() {return name;} private final    byte[] name;
+	public byte[] Name() {return name;} private final byte[] name;
 	public int Len() {return labels.length;}
 	public byte[] Get_or_null(int idx) {
 		return idx < labels.length ? labels[idx] : null;

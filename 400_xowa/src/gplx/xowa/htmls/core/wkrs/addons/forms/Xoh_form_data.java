@@ -44,7 +44,7 @@ public class Xoh_form_data implements Xoh_data_itm {
 		// process
 		return hdoc_wkr.Process_parse(this);
 	}
-	public static final    byte[] Hook_bry = Bry_.new_a7("<form");
+	public static final byte[] Hook_bry = Bry_.new_a7("<form");
 
 	public void				Pool__rls	() {pool_mgr.Rls_fast(pool_idx);} private Gfo_poolable_mgr pool_mgr; private int pool_idx;
 	public Gfo_poolable_itm	Pool__make	(Gfo_poolable_mgr mgr, int idx, Object[] args) {Xoh_form_data rv = new Xoh_form_data(); rv.pool_mgr = mgr; rv.pool_idx = idx; return rv;}

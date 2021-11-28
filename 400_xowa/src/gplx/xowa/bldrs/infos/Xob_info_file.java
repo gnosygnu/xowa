@@ -20,14 +20,14 @@ public class Xob_info_file {
 		this.id = id; this.type = type; this.ns_ids = ns_ids; this.part_id = part_id; this.guid = guid;
 		this.schema_version = schema_version; this.core_file_name = core_file_name; this.orig_file_name = orig_file_name;
 	}
-	public int Id() {return id;} private final    int id;
-	public String Type() {return type;} private final    String type;
-	public String Ns_ids() {return ns_ids;} private final    String ns_ids;
-	public int Part_id() {return part_id;} private final    int part_id;
-	public Guid_adp Guid() {return guid;} private final    Guid_adp guid;
-	public int Schema_version() {return schema_version;} private final    int schema_version;
-	public String Core_file_name() {return core_file_name;} private final    String core_file_name;
-	public String Orig_file_name() {return orig_file_name;} private final    String orig_file_name;
+	public int Id() {return id;} private final int id;
+	public String Type() {return type;} private final String type;
+	public String Ns_ids() {return ns_ids;} private final String ns_ids;
+	public int Part_id() {return part_id;} private final int part_id;
+	public Guid_adp Guid() {return guid;} private final Guid_adp guid;
+	public int Schema_version() {return schema_version;} private final int schema_version;
+	public String Core_file_name() {return core_file_name;} private final String core_file_name;
+	public String Orig_file_name() {return orig_file_name;} private final String orig_file_name;
 	public void Save(Db_cfg_tbl tbl) {
 		tbl.Conn().Txn_bgn("make__info__file");
 		tbl.Insert_int		(Cfg_grp, Cfg_key__id				, id);

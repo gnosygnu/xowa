@@ -73,12 +73,12 @@ public class Xopg_match_mgr {
 	}
 }
 class Xopg_match_wiki {
-	private final    Ordered_hash hash = Ordered_hash_.New_bry();
+	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	private boolean wildcard_exists;
 	public Xopg_match_wiki(byte[] domain_bry) {
 		this.domain_bry = domain_bry;
 	}
-	public byte[] Domain_bry() {return domain_bry;} private final    byte[] domain_bry;
+	public byte[] Domain_bry() {return domain_bry;} private final byte[] domain_bry;
 	public boolean Has(byte[] page_db) {
 		return wildcard_exists ? true : hash.Has(page_db);
 	}

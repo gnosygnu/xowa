@@ -19,7 +19,7 @@ import gplx.xowa.drds.pages.*;
 import gplx.xowa.files.*; import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.htmls.*;
 public class Xod_file_mgr {
-	private final    Gfo_thread_pool thread_pool = new Gfo_thread_pool();
+	private final Gfo_thread_pool thread_pool = new Gfo_thread_pool();
 	public void Load_files(Xow_wiki wiki, Xod_page_itm pg, Xog_js_wkr js_wkr) {
 		Xoh_page hpg = pg.Hpg();
 		List_adp img_list = To_img_list(hpg.Img_mgr());

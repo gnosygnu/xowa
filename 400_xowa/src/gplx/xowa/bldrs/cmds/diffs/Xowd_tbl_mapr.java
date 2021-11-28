@@ -20,8 +20,8 @@ class Xowd_tbl_mapr {
 		this.Name = name;
 		this.Db_ids = db_ids; 
 	}
-	public final    String Name;
-	public final    int[] Db_ids;
+	public final String Name;
+	public final int[] Db_ids;
 	public boolean Db_ids__has(int id) {return true;}
 //		private static List_adp Fill_tbl_names(List_adp rv, int db_tid) {
 //			switch (db_tid) {

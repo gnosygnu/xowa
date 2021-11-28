@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.centrals.hosts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.wikis.domains.*;
 public class Host_eval_wkr__tst {
-	private final    Host_eval_wkr__fxt fxt = new Host_eval_wkr__fxt();
+	private final Host_eval_wkr__fxt fxt = new Host_eval_wkr__fxt();
 	@Test 	public void En_w()		{fxt.Test__resolve_quick("en.wikipedia.org"			, "Xowa_enwiki_latest");}
 	@Test 	public void Fr_d()		{fxt.Test__resolve_quick("fr.wiktionary.org"		, "Xowa_frwiki_latest");}
 	@Test 	public void Species()	{fxt.Test__resolve_quick("species.wikimedia.org"	, "Xowa_enwiki_latest");}

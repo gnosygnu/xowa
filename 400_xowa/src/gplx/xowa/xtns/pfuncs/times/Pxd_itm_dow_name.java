@@ -15,8 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
 class Pxd_itm_dow_name extends Pxd_itm_base implements Pxd_itm_prototype {
-	private final    int dow_idx;
-	private final    byte[] dow_name;
+	private final int dow_idx;
+	private final byte[] dow_name;
 	private int relative_adj = Int_.Max_value;
 	public Pxd_itm_dow_name(int ary_idx, byte[] dow_name, int dow_idx) {
 		this.dow_name = dow_name; 

@@ -18,10 +18,10 @@ import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_anchorencode_mgr {
-	private final    Xop_parser parser; // create a special-parser for handling wikitext inside {{anchorencode:}}
-	private final    Bry_bfr tmp_bfr = Bry_bfr_.New();
-	private final    Xop_ctx ctx;
-	private final    byte[] src;
+	private final Xop_parser parser; // create a special-parser for handling wikitext inside {{anchorencode:}}
+	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
+	private final Xop_ctx ctx;
+	private final byte[] src;
 	public Pfunc_anchorencode_mgr(Xop_parser parser, Xop_ctx owner_ctx, byte[] src) {
 		this.parser = parser;
 		this.ctx = Xop_ctx.New__sub__reuse_page(owner_ctx);

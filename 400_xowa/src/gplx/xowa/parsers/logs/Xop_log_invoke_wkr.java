@@ -21,7 +21,7 @@ public class Xop_log_invoke_wkr implements Gfo_invk {
 	private Db_conn conn; private Db_stmt stmt;
 	private boolean log_enabled = true;
 	private Hash_adp_bry exclude_mod_names = Hash_adp_bry.cs();
-	public Scrib_err_filter_mgr Err_filter_mgr() {return err_filter_mgr;} private final    Scrib_err_filter_mgr err_filter_mgr = new Scrib_err_filter_mgr();
+	public Scrib_err_filter_mgr Err_filter_mgr() {return err_filter_mgr;} private final Scrib_err_filter_mgr err_filter_mgr = new Scrib_err_filter_mgr();
 	public Xop_log_invoke_wkr(Db_conn conn) {
 		this.conn = conn;
 		if (log_enabled) {
@@ -66,7 +66,7 @@ class Xop_log_invoke_tbl {
 		.Exec_insert();
 	}
 	public static final String Tbl_name = "log_invoke_temp", Fld_invk_page_ttl = "invk_page_ttl", Fld_invk_mod_name = "invk_mod_name", Fld_invk_fnc_name = "invk_fnc_name", Fld_invk_eval_time = "invk_eval_time";
-	private static final    String Tbl_sql = String_.Concat_lines_nl
+	private static final String Tbl_sql = String_.Concat_lines_nl
 		(	"CREATE TABLE IF NOT EXISTS log_invoke_temp"
 		,	"( invk_id                  integer             NOT NULL    PRIMARY KEY AUTOINCREMENT"
 		,	", invk_page_ttl            varchar(255)        NOT NULL"

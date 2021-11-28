@@ -28,7 +28,7 @@ class Xoud_user_mgr {
 	}
 }
 class Xoud_user_tbl {
-	private String tbl_name = "user_user_regy"; private final    Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "user_user_regy"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
 	private String fld_id, fld_name;
 	private Db_conn conn;
 	public void Conn_(Db_conn new_conn, boolean created) {

@@ -53,7 +53,7 @@ public class Xoh_img_xoimg_hzip {
 		int page			= page_exists		? rdr.Read_hzip_int(2)					: Xof_lnki_page.Null;
 		arg.Set(tid, w, h, upright, time, page);
 	}
-	private final    Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_( 1, 1	, 1, 1, 1, 3);	
+	private final Int_flag_bldr flag_bldr = new Int_flag_bldr().Pow_ary_bld_( 1, 1	, 1, 1, 1, 3);	
 	private static final int // SERIALIZED
 	  Flag__page_exists						=  0
 	, Flag__time_exists						=  1

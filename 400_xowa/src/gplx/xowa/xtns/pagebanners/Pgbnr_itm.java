@@ -154,8 +154,8 @@ public class Pgbnr_itm implements Mustache_doc_itm {
 		else if	(String_.Eq(key, "hasPosition"))                    return Mustache_doc_itm_.Ary__bool(hasPosition);
 		return Mustache_doc_itm_.Ary__empty;
 	}
-	private static final    byte[] Bry__anch_atr_id = Bry_.new_a7(" id=\"xoimg_");
-	public static final    byte[] 
+	private static final byte[] Bry__anch_atr_id = Bry_.new_a7(" id=\"xoimg_");
+	public static final byte[]
 	  Atr_key__srcset = Bry_.new_a7("srcset")
 	, Atr_key__data_pos_x = Bry_.new_a7("data-pos-x")
 	, Atr_key__data_pos_y = Bry_.new_a7("data-pos-y")

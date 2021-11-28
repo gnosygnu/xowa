@@ -55,7 +55,7 @@ public class Xow_popup_html_mkr {
 		return wrdx_bfr.To_bry_and_clear();
 	}
 
-	private static final    byte[]
+	private static final byte[]
 	  Dflt_html_fmtr_popup = Bry_.new_a7(String_.Concat_lines_nl_skip_last
 	( "<div dir=~{page_lang_ltr}>"
 	, "  <div>~{content}"
@@ -101,7 +101,7 @@ public class Xow_popup_html_mkr {
 	, "</div>"
 	))
 	;
-	private static final    String[]
+	private static final String[]
 	  Dflt_html_fmtr_popup_keys			= String_.Ary("content", "page_lang_ltr", "page_url", "page_title", "popup_id", "wiki_item", "page_size", "edit_time", "view_time_item", "xowa_root_dir")
 	, Dflt_html_fmtr_viewed_keys		= String_.Ary("viewed_val")
 	, Dflt_html_fmtr_wiki_keys			= String_.Ary("wiki_val")

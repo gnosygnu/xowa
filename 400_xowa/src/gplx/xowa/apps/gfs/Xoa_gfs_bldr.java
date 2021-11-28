@@ -69,7 +69,7 @@ public class Xoa_gfs_bldr {
 		bfr.Add(Bry_semic_nl);
 		return this;
 	}
-	private static final    byte[] Bry_eq = Bry_.new_a7(" = "), Bry_semic_nl = Bry_.new_a7(";\n");
+	private static final byte[] Bry_eq = Bry_.new_a7(" = "), Bry_semic_nl = Bry_.new_a7(";\n");
 	private void Add_str_escape_apos(Bry_bfr bfr, byte[] src) {
 		int len = src.length;
 		for (int i = 0; i < len; i++) {
@@ -80,7 +80,7 @@ public class Xoa_gfs_bldr {
 				bfr.Add_byte(b);
 		}
 	}
-	public static final    byte[]
+	public static final byte[]
 		Bry_xquote_bgn			= Bry_.new_a7("<:['\n")
 	,	Bry_xquote_end			= Bry_.new_a7("']:>\n")
 	;

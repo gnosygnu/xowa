@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*;
 public class Xot_prm_tkn_tst {
-	private final    Xop_fxt fxt = new Xop_fxt();
+	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
 	@Test public void Idx_1()							{fxt.Test_parse_tmpl_str_test("{{{1}}}"							, "{{test|a|b}}"					, "a");}
 	@Test public void Idx_2()							{fxt.Test_parse_tmpl_str_test("{{{2}}}"							, "{{test|a|b}}"					, "b");}

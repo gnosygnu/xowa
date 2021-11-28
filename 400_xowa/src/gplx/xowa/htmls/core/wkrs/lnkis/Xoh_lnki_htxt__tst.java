@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
 import org.junit.*;
 public class Xoh_lnki_htxt__tst {
-	private final    Xoh_htxt_fxt fxt = new Xoh_htxt_fxt();
+	private final Xoh_htxt_fxt fxt = new Xoh_htxt_fxt();
 	@Test  public void Redlink__basic() {
 		fxt.Test__decode
 		( "<a href='/wiki/A'>a</a> <a href='/wiki/B'>b</a>"

@@ -23,11 +23,11 @@ import gplx.xowa.files.origs.*; import gplx.xowa.htmls.core.bldrs.*;
 import gplx.xowa.addons.wikis.searchs.bldrs.*;
 import gplx.xowa.addons.bldrs.files.cmds.*; import gplx.xowa.addons.wikis.htmls.css.bldrs.*;
 public class Xob_cmd_mgr implements Gfo_invk {
-	private final    Xob_bldr bldr;
-	public final    Xob_cmd_regy cmd_regy;
+	private final Xob_bldr bldr;
+	public final Xob_cmd_regy cmd_regy;
 	public Xob_cmd_mgr(Xob_bldr bldr, Xob_cmd_regy cmd_regy) {this.bldr = bldr; this.cmd_regy = cmd_regy;}
 	public void Clear() {list.Clear(); dump_rdrs.Clear();}
-	public int Len() {return list.Count();} private final    List_adp list = List_adp_.New();
+	public int Len() {return list.Count();} private final List_adp list = List_adp_.New();
 	public Xob_cmd Get_at(int i) {return (Xob_cmd)list.Get_at(i);} 
 	public Xob_cmd Add(Xob_cmd cmd) {list.Add(cmd); return cmd;}
 	public Gfo_invk Add_cmd(Xowe_wiki wiki, String cmd_key) {

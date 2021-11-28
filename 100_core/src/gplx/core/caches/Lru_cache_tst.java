@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.caches; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Lru_cache_tst {
-	private final    Lru_cache_fxt fxt = new Lru_cache_fxt();
+	private final Lru_cache_fxt fxt = new Lru_cache_fxt();
 	@Test public void Get_one() {
 		fxt.Exec__set("a", 5);
 		fxt.Test__get_y("a");
@@ -73,7 +73,7 @@ public class Lru_cache_tst {
 	}
 }
 class Lru_cache_fxt {
-	private final    Lru_cache cache = new Lru_cache(Bool_.N, "test", -1, 10);
+	private final Lru_cache cache = new Lru_cache(Bool_.N, "test", -1, 10);
 	public void Exec__set(String key, long size) {
 		cache.Set(key, key, size);
 	}

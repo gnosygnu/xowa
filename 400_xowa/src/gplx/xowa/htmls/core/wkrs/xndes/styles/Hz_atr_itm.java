@@ -64,7 +64,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		}
 //	}
 //	class Hz_regy {
-//		private final    Ordered_hash tag_hash = Ordered_hash_.New();
+//		private final Ordered_hash tag_hash = Ordered_hash_.New();
 //		public Hz_tag_itm Tags__get_or_new(int name_id) {
 //			return null;
 //		}
@@ -123,7 +123,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		}
 //	}
 //	class Hz_tag_hzip {
-//		private static final    byte[] Hook_tag = Bry_.new_a7("~z");
+//		private static final byte[] Hook_tag = Bry_.new_a7("~z");
 //		public void Encode(Bry_bfr bfr, Hz_regy regy, Gfh_tag htag) {
 //			Hz_tag_itm ztag = regy.Tags__get_or_new(htag.Name_id());
 //
@@ -180,7 +180,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		public Xohz_style_val(int uid, byte[] txt, boolean scope_is_doc) {
 //			this.uid = uid; this.txt = txt; this.scope_is_doc = scope_is_doc;
 //		}
-//		public int Uid() {return uid;} private final    int uid;
-//		public byte[] Txt() {return txt;} private final    byte[] txt;
+//		public int Uid() {return uid;} private final int uid;
+//		public byte[] Txt() {return txt;} private final byte[] txt;
 //		public boolean Scope_is_doc() {return scope_is_doc;} private boolean scope_is_doc;
 //	}

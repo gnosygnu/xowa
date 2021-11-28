@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.pages.randoms.dbs; import gplx.*; import gplx.xow
 import gplx.dbs.*;
 import gplx.xowa.wikis.data.*;
 public class Rndm_db_mgr {
-	private final    Xow_wiki wiki;
+	private final Xow_wiki wiki;
 	public Rndm_db_mgr(Xow_wiki wiki) {
 		this.wiki = wiki;
 	}

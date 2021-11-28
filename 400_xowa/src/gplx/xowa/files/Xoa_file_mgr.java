@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //namespace gplx.xowa.files {
 //	using gplx.xowa.files.caches;
 //	public class Xoa_file_mgr {
-//		private final    List_adp list = List_adp_.New();
+//		private final List_adp list = List_adp_.New();
 //		public void Clear() {list.Clear();}
 //		public boolean Check_cache(Xow_wiki wiki, byte[] page_url, Xof_fsdb_itm fsdb_itm) {
 //			fsdb_itm.Init_at_cache(0, 0, null);

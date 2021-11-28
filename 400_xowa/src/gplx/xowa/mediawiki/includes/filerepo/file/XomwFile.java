@@ -21,7 +21,7 @@ public class XomwFile {
 	* P8: normalizeExtension
 	* P8: normalizeTitle
 */
-	private final    XomwEnv env;
+	private final XomwEnv env;
 //		// Bitfield values akin to the Revision deletion constants
 //		static final DELETED_FILE = 1;
 //		static final DELETED_COMMENT = 2;
@@ -695,7 +695,7 @@ public class XomwFile {
 	public byte[] getMimeType() {
 		return Mime_type__unknown;
 	}
-	private static final    byte[] Mime_type__unknown = Bry_.new_a7("unknown/unknown");
+	private static final byte[] Mime_type__unknown = Bry_.new_a7("unknown/unknown");
 
 //		/**
 //		* Return the type of the media in the file.

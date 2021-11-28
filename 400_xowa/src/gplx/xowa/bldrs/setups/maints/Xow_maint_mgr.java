@@ -49,7 +49,7 @@ public class Xow_maint_mgr implements Gfo_invk {
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}
-	private static final    String Invk_wmf_dump_date = "wmf_dump_date", Invk_wmf_dump_date_ = "wmf_dump_date_", Invk_wmf_dump_done = "wmf_dump_done", Invk_wmf_dump_done_ = "wmf_dump_done_"
+	private static final String Invk_wmf_dump_date = "wmf_dump_date", Invk_wmf_dump_date_ = "wmf_dump_date_", Invk_wmf_dump_done = "wmf_dump_done", Invk_wmf_dump_done_ = "wmf_dump_done_"
 	, Invk_wmf_dump_status = "wmf_dump_status", Invk_wmf_dump_status_ = "wmf_dump_status_", Invk_wiki_dump_date = "wiki_dump_date", Invk_wiki_dump_date_ = "wiki_dump_date_"
 	, Invk_wiki_update_needed = "wiki_update_needed"
 	;

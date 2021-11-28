@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_amp_mgr__decode__tst {
-	@Before public void init() {} private final    Xop_amp_mgr_fxt fxt = new Xop_amp_mgr_fxt();
+	@Before public void init() {} private final Xop_amp_mgr_fxt fxt = new Xop_amp_mgr_fxt();
 	@Test public void Text()						{fxt.Test__decode_as_bry("a"				, "a");}
 	@Test public void Name()						{fxt.Test__decode_as_bry("&amp;"			, "&");}
 	@Test public void Name_w_text()				{fxt.Test__decode_as_bry("a&amp;b"			, "a&b");}
@@ -35,7 +35,7 @@ public class Xop_amp_mgr__decode__tst {
 	@Test public void Num_ignore_extra_x()			{fxt.Test__decode_as_bry("&#xx26D0;"		, Char_.To_str(Char_.By_int(9936)));}	// 2nd x is ignored
 }
 class Xop_amp_mgr_fxt {
-	private final    Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
+	private final Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;
 	public void Test__decode_as_bry(String raw, String expd) {
 		Gftest.Eq__str(expd, String_.new_u8(amp_mgr.Decode_as_bry(Bry_.new_u8(raw))));
 	}

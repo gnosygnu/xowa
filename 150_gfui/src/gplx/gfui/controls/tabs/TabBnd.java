@@ -61,7 +61,7 @@ class TabBnd_selectTab implements InjectAble, Gfo_invk {
 		else if	(ctx.Match(k, SelectPrev_cmd))			Select(m, -1);
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	static final    String SelectNext_cmd = "SelectNext", SelectPrev_cmd = "SelectPrev";
+	}	static final String SelectNext_cmd = "SelectNext", SelectPrev_cmd = "SelectPrev";
 	TabBox tabBox;
 	public static TabBnd_selectTab new_() {return new TabBnd_selectTab();} TabBnd_selectTab() {}
 }
@@ -87,7 +87,7 @@ class TabBnd_reorderTab implements InjectAble, Gfo_invk {
 		else if	(ctx.Match(k, MovePrev_cmd))			MoveTab(GfuiBtn_.cast(ctx.MsgSrc()), -1);
 		else return Gfo_invk_.Rv_unhandled;
 		return this;
-	}	public static final    String MoveNext_cmd = "MoveNext", MovePrev_cmd = "MovePrev";
+	}	public static final String MoveNext_cmd = "MoveNext", MovePrev_cmd = "MovePrev";
 	public static TabBnd_reorderTab new_(TabBox tabBox) {
 		TabBnd_reorderTab rv = new TabBnd_reorderTab();
 		rv.tabBox = tabBox;

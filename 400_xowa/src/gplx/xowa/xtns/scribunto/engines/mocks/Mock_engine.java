@@ -17,12 +17,12 @@ package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*; import gplx.xowa.
 import gplx.core.primitives.*;
 import gplx.core.lists.hashs.*;
 public class Mock_engine implements Scrib_engine {
-	private final    Hash_adp__int fnc_hash = new Hash_adp__int();
-	private final    Hash_adp mod_init_hash = Hash_adp_.New();
-	private final    Hash_adp__int mod_fnc_hash = new Hash_adp__int();
+	private final Hash_adp__int fnc_hash = new Hash_adp__int();
+	private final Hash_adp mod_init_hash = Hash_adp_.New();
+	private final Hash_adp__int mod_fnc_hash = new Hash_adp__int();
 
 	public boolean Dbg_print() {return false;}	public void Dbg_print_(boolean v) {}
-	public Scrib_server Server() {return server;} public void Server_(Scrib_server v) {} private final    Mock_server server = new Mock_server();
+	public Scrib_server Server() {return server;} public void Server_(Scrib_server v) {} private final Mock_server server = new Mock_server();
 
 	public Scrib_lua_proc LoadString(String name, String text) {
 		return (Scrib_lua_proc)mod_init_hash.Get_by(name);

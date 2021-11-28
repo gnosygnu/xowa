@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import org.junit.*;
 public class Xow_url_parser__proto_tst {
-	private final    Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
+	private final Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
 	@Test public void Relative() {
 		tstr.Exec__parse("//en.wikipedia.org/wiki/A").Test__wiki("en.wikipedia.org").Test__page("A");
 	}

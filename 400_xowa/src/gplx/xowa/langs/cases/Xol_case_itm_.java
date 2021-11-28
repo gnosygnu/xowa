@@ -142,6 +142,6 @@ public class Xol_case_itm_ {
 			++pos;
 		}
 		return pos;
-	}	private static final    byte[] parse_mw_upper= Bry_.new_a7("wikiUpperChars"), parse_mw_lower= Bry_.new_a7("wikiLowerChars"), Bry_upper = Bry_.new_a7("upper"), Bry_lower = Bry_.new_a7("lower"), Bry_pipe = Bry_.new_a7("|");
+	}	private static final byte[] parse_mw_upper= Bry_.new_a7("wikiUpperChars"), parse_mw_lower= Bry_.new_a7("wikiLowerChars"), Bry_upper = Bry_.new_a7("upper"), Bry_lower = Bry_.new_a7("lower"), Bry_pipe = Bry_.new_a7("|");
 	static final String GRP_KEY = "xowa.langs.case_parser";
 }

@@ -22,7 +22,7 @@ import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store.*;
 // REF.MW:https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php
 public class Scrib_lib_wikibase implements Scrib_lib {
-	private final    Scrib_core core;
+	private final Scrib_core core;
 	private Wbase_doc_mgr entity_mgr;
 	private Wbase_entity_accessor entity_accessor;
 	private Wdata_wiki_mgr wdata_mgr;
@@ -30,7 +30,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	public Scrib_lib_wikibase(Scrib_core core) {this.core = core;}
 	public String Key() {return "mw.wikibase";}
 	public Scrib_lua_mod Mod() {return mod;} private Scrib_lua_mod mod;
-	public Scrib_proc_mgr Procs() {return procs;} private final    Scrib_proc_mgr procs = new Scrib_proc_mgr();
+	public Scrib_proc_mgr Procs() {return procs;} private final Scrib_proc_mgr procs = new Scrib_proc_mgr();
 
 //		/**
 //		* @var WikibaseLanguageIndependentLuaBindings|null
@@ -140,7 +140,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 	, Invk_isValidEntityId = "isValidEntityId", Invk_getPropertyOrder = "getPropertyOrder", Invk_orderProperties = "orderProperties"
 	, Invk_incrementStatsKey = "incrementStatsKey", Invk_getEntityModuleName = "getEntityModuleName"
 	;
-	private static final    String[] Proc_names = String_.Ary
+	private static final String[] Proc_names = String_.Ary
 	( Invk_getLabel, Invk_getLabelByLanguage, Invk_getEntity, Invk_entityExists, Invk_getEntityStatements, Invk_getSetting, Invk_getEntityUrl
 	, Invk_renderSnak, Invk_formatValue, Invk_renderSnaks, Invk_formatValues
 	, Invk_getEntityId, Invk_getReferencedEntityId, Invk_getUserLang, Invk_getDescription, Invk_resolvePropertyId, Invk_getSiteLinkPageName, Invk_incrementExpensiveFunctionCount

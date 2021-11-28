@@ -18,8 +18,8 @@ import gplx.core.primitives.*; import gplx.dbs.*; import gplx.xowa.addons.bldrs.
 public abstract class Split_rslt_wkr__objs__base implements Split_rslt_wkr {
 	private Split_rslt_mgr rslt_mgr;
 	private Db_conn wkr_conn; private Db_stmt stmt; private int db_id;
-	private final    List_adp pkey_list = List_adp_.New();
-	private final    String tbl_name; private final    int pkey_flds_len; private final    Dbmeta_fld_itm[] pkey_flds; private final    String[] pkey_names;
+	private final List_adp pkey_list = List_adp_.New();
+	private final String tbl_name; private final int pkey_flds_len; private final Dbmeta_fld_itm[] pkey_flds; private final String[] pkey_names;
 	public Split_rslt_wkr__objs__base() {
 		this.tbl_name = Tbl_name();
 		this.pkey_flds = Pkey_flds();

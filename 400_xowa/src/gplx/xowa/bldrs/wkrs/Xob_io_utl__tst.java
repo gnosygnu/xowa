@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xob_io_utl__tst {
-	private final    Xob_io_utl__fxt fxt = new Xob_io_utl__fxt();
+	private final Xob_io_utl__fxt fxt = new Xob_io_utl__fxt();
 	@Test  public void Basic() {
 		fxt.Test__match(String_.Ary("a.txt", "b.txt", "c.txt"), "b", String_.Ary(".txt"), "b.txt");
 	}

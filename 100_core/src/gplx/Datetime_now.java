@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import java.util.GregorianCalendar;
 public class Datetime_now {
-	private static final    DateAdp dflt = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
+	private static final DateAdp dflt = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
 	private static DateAdp manual;
 	private static boolean autoincrement = true;
 	public static void Manual_y_() {
@@ -49,7 +49,7 @@ public class Datetime_now {
 	public static DateAdp Get_force() {	// ignore manual and force get of real time
 		return new DateAdp(new GregorianCalendar());
 	}
-//		private static final    DateAdp manual_time_dflt = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
+//		private static final DateAdp manual_time_dflt = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
 //		private static DateAdp manual_time;
 //		static boolean Now_enabled() {return now_enabled;} private static boolean now_enabled;
 //		static void Now_enabled_y_() {now_enabled = Bool_.Y; manual_time = manual_time_dflt;}

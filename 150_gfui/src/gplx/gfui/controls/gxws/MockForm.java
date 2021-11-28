@@ -26,5 +26,5 @@ public class MockForm extends GxwElem_mock_base implements GxwWin {
 	public void OpenedCmd_set(Gfo_invk_cmd v) {}
 	public void TaskbarVisible_set(boolean val) {}
 	public void TaskbarParkingWindowFix(GxwElem form) {}
-	public static final    MockForm Instance = new MockForm(); MockForm() {}
+	public static final MockForm Instance = new MockForm(); MockForm() {}
 }

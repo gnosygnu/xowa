@@ -22,7 +22,7 @@ import gplx.xowa.htmls.portal.*; import gplx.xowa.addons.htmls.tocs.*; import gp
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.singles.*;
 public class Xow_html_mgr implements Gfo_invk {
-	private final    Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
+	private final Gfo_url_encoder fsys_lnx_encoder = Gfo_url_encoder_.New__fsys_lnx().Make();
 	public Xow_html_mgr(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		html_wtr = new Xoh_html_wtr(wiki, this);
@@ -46,9 +46,9 @@ public class Xow_html_mgr implements Gfo_invk {
 	public Xowe_wiki				Wiki() {return wiki;} private Xowe_wiki wiki;
 	public Xoh_html_wtr				Html_wtr() {return html_wtr;} private Xoh_html_wtr html_wtr;
 	public Xoh_page_wtr_mgr			Page_wtr_mgr() {return page_wtr_mgr;} private Xoh_page_wtr_mgr page_wtr_mgr;
-	public Xow_tidy_mgr				Tidy_mgr()	{return tidy_mgr;} private final    Xow_tidy_mgr tidy_mgr = new Xow_tidy_mgr();
-	public Xoh_js_cleaner			Js_cleaner() {return js_cleaner;} private final    Xoh_js_cleaner js_cleaner;
-	public Xop_xatr_whitelist_mgr	Whitelist_mgr() {return whitelist_mgr;} private final    Xop_xatr_whitelist_mgr whitelist_mgr = new Xop_xatr_whitelist_mgr().Ini();
+	public Xow_tidy_mgr				Tidy_mgr()	{return tidy_mgr;} private final Xow_tidy_mgr tidy_mgr = new Xow_tidy_mgr();
+	public Xoh_js_cleaner			Js_cleaner() {return js_cleaner;} private final Xoh_js_cleaner js_cleaner;
+	public Xop_xatr_whitelist_mgr	Whitelist_mgr() {return whitelist_mgr;} private final Xop_xatr_whitelist_mgr whitelist_mgr = new Xop_xatr_whitelist_mgr().Ini();
 	public Xow_portal_mgr			Portal_mgr() {return portal_mgr;} private Xow_portal_mgr portal_mgr;
 	public Xow_module_mgr			Head_mgr() {return module_mgr;} private Xow_module_mgr module_mgr;
 	public boolean Importing_ctgs() {return importing_ctgs;} public void Importing_ctgs_(boolean v) {importing_ctgs = v;} private boolean importing_ctgs;

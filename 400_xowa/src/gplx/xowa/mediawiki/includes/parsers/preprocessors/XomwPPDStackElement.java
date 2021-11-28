@@ -48,7 +48,7 @@ public class XomwPPDStackElement {
 	public String partClass = "PPDPart";
 
 	public int start_pos;
-	private final    XomwPPDPart part_factory;
+	private final XomwPPDPart part_factory;
 	public XomwPPDStackElement(XomwPPDPart part_factory, String open, String close, int count, int start_pos, boolean lineStart) {
 		this.parts = new XophpArray();
 

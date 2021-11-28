@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.xodirs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
 import gplx.langs.mustaches.*;
 class Xobc_xodir_doc implements Mustache_doc_itm {
-	private final    byte[] import_root, app_root_dir;
-	private final    Xobc_xodir_dir[] dirs;
+	private final byte[] import_root, app_root_dir;
+	private final Xobc_xodir_dir[] dirs;
 	public Xobc_xodir_doc(Xobc_xodir_dir[] dirs, byte[] import_root, byte[] app_root_dir) {
 		this.dirs = dirs; this.import_root = import_root; this.app_root_dir = app_root_dir;
 	}
@@ -32,8 +32,8 @@ class Xobc_xodir_doc implements Mustache_doc_itm {
 	}
 }
 public class Xobc_xodir_dir implements Mustache_doc_itm {
-	private final    boolean is_selected, is_custom;
-	private final    byte[] path;
+	private final boolean is_selected, is_custom;
+	private final byte[] path;
 	public Xobc_xodir_dir(boolean is_selected, boolean is_custom, byte[] path) {
 		this.is_selected = is_selected; this.is_custom = is_custom; this.path = path;
 	}

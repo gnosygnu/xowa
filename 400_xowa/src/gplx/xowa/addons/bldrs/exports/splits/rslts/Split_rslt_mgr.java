@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 public class Split_rslt_mgr {
-	private final    Db_conn wkr_conn;
+	private final Db_conn wkr_conn;
 	private Db_stmt rslt_type_stmt, rslt_db_stmt;
 	private Io_url db_url; private int db_id, ns_id;
 	private int score_min, score_max;		

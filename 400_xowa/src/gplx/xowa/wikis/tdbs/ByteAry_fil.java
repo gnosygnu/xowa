@@ -33,5 +33,5 @@ public class ByteAry_fil {
 		raw_len.Val_zero_();
 		return rv;
 	}
-	public static final    ByteAry_fil Instance = new ByteAry_fil(); ByteAry_fil() {}
+	public static final ByteAry_fil Instance = new ByteAry_fil(); ByteAry_fil() {}
 }

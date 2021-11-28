@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.wikis.searchs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Srch_bldr_wkr implements Xob_page_wkr {
-	private final    Xowe_wiki wiki;
-	private final    Srch_temp_tbl_wkr temp_tbl_wkr = new Srch_temp_tbl_wkr(); 
+	private final Xowe_wiki wiki;
+	private final Srch_temp_tbl_wkr temp_tbl_wkr = new Srch_temp_tbl_wkr();
 	public Srch_bldr_wkr(Xob_bldr bldr, Xowe_wiki wiki) {this.wiki = wiki;}
 	public String Page_wkr__key() {return Xob_cmd_keys.Key_text_search_wkr;}
 	public void Page_wkr__bgn() {
