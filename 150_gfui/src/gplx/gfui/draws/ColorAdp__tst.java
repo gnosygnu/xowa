@@ -16,12 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfui.draws; import gplx.*; import gplx.gfui.*;
 import org.junit.*;
 public class ColorAdp__tst {
-	@Test  public void parse_hex_() {
+	@Test public void parse_hex_() {
 		tst_parse_hex_("#00000000", 0, 0, 0, 0);
 		tst_parse_hex_("#000102FF", 0, 1, 2, 255);
 		tst_parse_hex_("#FF000102", 255, 0, 1, 2);
 	}
-	@Test  public void parse_int_() {
+	@Test public void parse_int_() {
 		tst_parse_int_(0, 0, 0, 0, 0);
 		tst_parse_int_(255, 0, 0, 0, 255);
 		tst_parse_int_(65535, 0, 0, 255, 255);
@@ -29,7 +29,7 @@ public class ColorAdp__tst {
 		tst_parse_int_(Int_.Max_value, 127, 255, 255, 255);
 		tst_parse_int_(-1, 255, 255, 255, 255);
 	}
-	@Test  public void parse() {
+	@Test public void parse() {
 		tst_parse_("0,0,0,0", 0, 0, 0, 0);	// parse all ints
 		tst_parse_("0,0,0", 255, 0, 0, 0);	// a=255, parse rest
 		tst_parse_("255", 0, 0, 0, 255);	// parse as single int

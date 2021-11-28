@@ -17,17 +17,17 @@ package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gpl
 import org.junit.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
 public class Srch_page_tbl_wkr_tst {
 	private final    Srch_page_tbl_wkr_fxt fxt = new Srch_page_tbl_wkr_fxt();
-	@Test   public void Word__one()				{fxt.Test__to_bry_or_null("a"					, "a");}
-	@Test   public void Word__many()			{fxt.Test__to_bry_or_null("a b c"				, "a b c");}
-	@Test   public void Wild__end()				{fxt.Test__to_bry_or_null("a*"					, "a");}
-	@Test   public void Wild__both()			{fxt.Test__to_bry_or_null("a*b*"				, null);}
-	@Test   public void Quote()					{fxt.Test__to_bry_or_null("\"a b\""				, "a b");}
-	@Test   public void Quote__mixed()			{fxt.Test__to_bry_or_null("a \"b \"\" c\" d"	, "a b \" c d");}
-	@Test   public void Escape()				{fxt.Test__to_bry_or_null("a\\+"				, "a+");}
-	@Test   public void Not()					{fxt.Test__to_bry_or_null("a -b"				, null);}
-	@Test   public void And()					{fxt.Test__to_bry_or_null("a + b"				, null);}
-	@Test   public void Or()					{fxt.Test__to_bry_or_null("a , b"				, null);}
-	@Test   public void Parens()				{fxt.Test__to_bry_or_null("(a)"					, null);}
+	@Test  public void Word__one()				{fxt.Test__to_bry_or_null("a"					, "a");}
+	@Test  public void Word__many()			{fxt.Test__to_bry_or_null("a b c"				, "a b c");}
+	@Test  public void Wild__end()				{fxt.Test__to_bry_or_null("a*"					, "a");}
+	@Test  public void Wild__both()			{fxt.Test__to_bry_or_null("a*b*"				, null);}
+	@Test  public void Quote()					{fxt.Test__to_bry_or_null("\"a b\""				, "a b");}
+	@Test  public void Quote__mixed()			{fxt.Test__to_bry_or_null("a \"b \"\" c\" d"	, "a b \" c d");}
+	@Test  public void Escape()				{fxt.Test__to_bry_or_null("a\\+"				, "a+");}
+	@Test  public void Not()					{fxt.Test__to_bry_or_null("a -b"				, null);}
+	@Test  public void And()					{fxt.Test__to_bry_or_null("a + b"				, null);}
+	@Test  public void Or()					{fxt.Test__to_bry_or_null("a , b"				, null);}
+	@Test  public void Parens()				{fxt.Test__to_bry_or_null("(a)"					, null);}
 }
 class Srch_page_tbl_wkr_fxt {
 	private final    Srch_crt_parser crt_parser;

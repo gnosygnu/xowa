@@ -16,14 +16,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.interfaces; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class SrlAble__tst {
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		tst_Srl_
 			(	GfoMsg_.new_cast_("itm").Add("key", "a").Add("val", 1)
 			,	"itm:key='a' val='1';"
 			);
 
 	}
-	@Test  public void Depth1_1() {
+	@Test public void Depth1_1() {
 		tst_Srl_
 			(	GfoMsg_.new_cast_("itm").Add("key", "a").Add("val", 1).Subs_
 			(		GfoMsg_.new_cast_("itm").Add("key", "aa").Add("val", 11)
@@ -33,7 +33,7 @@ public class SrlAble__tst {
 			)
 			);
 	}
-	@Test  public void Depth1_2() {
+	@Test public void Depth1_2() {
 		tst_Srl_
 			(	GfoMsg_.new_cast_("itm").Add("key", "a").Add("val", 1).Subs_
 			(		GfoMsg_.new_cast_("itm").Add("key", "aa").Add("val", 11)
@@ -47,7 +47,7 @@ public class SrlAble__tst {
 			)
 			);
 	}
-	@Test  public void Depth1_1_2() {
+	@Test public void Depth1_1_2() {
 		tst_Srl_
 			(	GfoMsg_.new_cast_("itm").Add("key", "a").Add("val", 1).Subs_
 			(		GfoMsg_.new_cast_("itm").Add("key", "aa").Add("val", 11).Subs_(

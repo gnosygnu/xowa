@@ -17,6 +17,6 @@ package gplx.xowa.xtns.categoryList; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*;
 public class Xtn_categoryList_nde_tst {
 //		private final Xop_fxt fxt = new Xop_fxt(); String raw_src;
-	@Test  public void Basic() {
+	@Test public void Basic() {
 	}
 }

@@ -17,14 +17,14 @@ package gplx.xowa.xtns.wbases.pfuncs; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Wdata_pf_noExternalLangLinks_tst {
 	@Before public void init() {fxt.Clear();} Wdata_pf_noExternalLangLinks_fxt fxt = new Wdata_pf_noExternalLangLinks_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Clear().Expd_enabled_(true).Test_parse("{{noexternallanglinks}}");
 		fxt.Clear().Expd_enabled_(false).Expd_sort_(false).Expd_langs_().Test_parse("");
 	}
-	@Test   public void Selected() {
+	@Test  public void Selected() {
 		fxt.Clear().Expd_enabled_(true).Expd_langs_("en", "fr").Test_parse("{{noexternallanglinks:en|fr}}");
 	}
-	@Test   public void Sort() {
+	@Test  public void Sort() {
 		fxt.Clear().Expd_enabled_(true).Expd_sort_(true).Expd_langs_().Test_parse("{{noexternallanglinks:*}}");
 	}
 }

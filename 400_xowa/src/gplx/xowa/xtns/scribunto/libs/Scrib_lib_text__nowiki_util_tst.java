@@ -19,7 +19,7 @@ import gplx.core.btries.*;
 import gplx.xowa.parsers.xndes.*;
 public class Scrib_lib_text__nowiki_util_tst {
 	private final    Scrib_lib_text__nowiki_util_fxt fxt = new Scrib_lib_text__nowiki_util_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		// noop
 		fxt.Test__Strip_tag("abc", "abc");
 

@@ -17,13 +17,13 @@ package gplx;
 import org.junit.*;
 public class Object__tst {
 	@Before public void init() {} private Object__fxt fxt = new Object__fxt();
-	@Test  public void Eq() {
+	@Test public void Eq() {
 		fxt.Test_eq(null, null, true);		// both null
 		fxt.Test_eq(5, 5, true);			// both non-null
 		fxt.Test_eq(5, null, false);		// rhs non-null
 		fxt.Test_eq(null, 5, false);		// lhs non-null
 	}
-	@Test  public void Xto_str_loose_or_null() {
+	@Test public void Xto_str_loose_or_null() {
 		fxt.Test_xto_str_loose_or_null(null, null);	
 		fxt.Test_xto_str_loose_or_null(2449.6000000000004d, "2449.6");
 	}

@@ -21,14 +21,14 @@ public class z451_dflts_compile_tst {
 		pragma = GfmlPragmaDefault.new_();
 		fx_typ.run_InitPragma(regy, pragma);
 	}	GfmlTypRegy regy; GfmlPragmaDefault pragma; GfmlDefaultItem_fxt fx = GfmlDefaultItem_fxt.new_(); GfmlTypeCompiler_fxt fx_typ = GfmlTypeCompiler_fxt.new_(); 
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		GfmlNde gnde = fx_typ.run_Resolve(regy, "_default/type/atr"
 			, fx_typ.nde_().Atru_("x").Atru_("10")
 			);
 		GfmlDefaultItem actl = pragma.CompileItem(gnde, "point");
 		fx.tst_Item(actl, fx.make_("point", "x", "10"));
 	}
-	@Test  public void Many() {
+	@Test public void Many() {
 		GfmlNde gnde = fx_typ.run_Resolve(regy, "_default/type"
 			, 	fx_typ.nde_().Atru_("point").Subs_
 			(		fx_typ.nde_().Atrs_("x", "10")

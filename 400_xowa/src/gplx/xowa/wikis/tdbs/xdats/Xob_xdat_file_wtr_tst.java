@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import org.junit.*;
 public class Xob_xdat_file_wtr_tst {
-	@Test  public void Write() {
+	@Test public void Write() {
 		Io_mgr.Instance.InitEngine_mem();
 		Io_url dir = Io_url_.mem_dir_("mem/dir");
 		Xob_xdat_file_wtr wtr = Xob_xdat_file_wtr.new_file_(1000, dir);

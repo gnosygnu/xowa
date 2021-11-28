@@ -17,23 +17,23 @@ package gplx.xowa.xtns.wbases.specials; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.xowa.wikis.domains.*;
 public class Wdata_itemByTitle_page_tst {
 	@Before public void init() {fxt.Clear();} private Wdata_itemByTitle_page_fxt fxt = new Wdata_itemByTitle_page_fxt();
-	@Test   public void Url() {
+	@Test  public void Url() {
 		fxt.Init_wdata_page("Q2", "q2_earth");
 		fxt.Init_wdata_label("enwiki", "Earth", "Q2");
 		fxt.Test_open("Special:ItemByTitle/enwiki/Earth", "q2_earth");
 	}
-	@Test   public void Missing() {
+	@Test  public void Missing() {
 		fxt.Test_open("Special:ItemByTitle/enwiki/unknown_page", fxt.Expd_html("enwiki", "unknown page"));
 	}
-	@Test   public void Html() {
+	@Test  public void Html() {
 		fxt.Test_open("Special:ItemByTitle", fxt.Expd_html("enwiki", ""));
 	}
-	@Test   public void Args() {
+	@Test  public void Args() {
 		fxt.Init_wdata_page("Q2", "q2_earth");
 		fxt.Init_wdata_label("enwiki", "Earth", "Q2");
 		fxt.Test_open("Special:ItemByTitle?site=enwiki&page=Earth", "q2_earth");
 	}
-	@Test   public void Url_decode() {	// PURPOSE: spaces not handled; EX: Albert Einstein -> Albert+Einstein; DATE:2013-07-24
+	@Test  public void Url_decode() {	// PURPOSE: spaces not handled; EX: Albert Einstein -> Albert+Einstein; DATE:2013-07-24
 		fxt.Init_wdata_page("Q2", "q2_page");
 		fxt.Init_wdata_label("enwiki", "A_B", "Q2");
 		fxt.Test_open("Special:ItemByTitle?site=enwiki&page=A+B", "q2_page");

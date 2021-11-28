@@ -18,62 +18,62 @@ import org.junit.*;
 import gplx.core.criterias.*; import gplx.dbs.sqls.*;
 public class Sql_qry_wtr__ansi__tst {
 	Sql_qry_wtr sqlWtr = Sql_qry_wtr_.New__basic();
-	@Test  public void Insert() {
+	@Test public void Insert() {
 		tst_XtoSql
 			(	Db_qry_.insert_("people").Val_int("id", 1).Val_str("name", "me")
 			,	"INSERT INTO people (id, name) VALUES (1, 'me')"
 			);
 	}
-	@Test  public void Delete() {
+	@Test public void Delete() {
 		Criteria crt = Db_crt_.New_eq("id", 1);
 		tst_XtoSql
 			(	Db_qry_.delete_("people", crt)
 			,	"DELETE FROM people WHERE id = 1"
 			);
 	}
-	@Test  public void Update() {
+	@Test public void Update() {
 		tst_XtoSql
 			(	Db_qry_.update_("people", Db_crt_.New_eq("id", 1)).Val_str("name", "me")
 			,	"UPDATE people SET name='me' WHERE id = 1"
 			);
 	}
-	@Test  public void SelectAll() {
+	@Test public void SelectAll() {
 		tst_XtoSql
 			(	Db_qry_.select_().From_("people")
 			,	"SELECT * FROM people"
 			);
 	}
-	@Test  public void SelectFlds() {
+	@Test public void SelectFlds() {
 		tst_XtoSql
 			(	Db_qry_.select_().Cols_("id", "name").From_("people")
 			,	"SELECT id, name FROM people"
 			);
 	}
-	@Test  public void SelectOrderBy() {
+	@Test public void SelectOrderBy() {
 		tst_XtoSql
 			(	Db_qry_.select_().From_("people").Order_("name", false)
 			,	"SELECT * FROM people ORDER BY name DESC"
 			);
 	}
-	@Test  public void SelectWhere() {
+	@Test public void SelectWhere() {
 		tst_XtoSql
 			(	Db_qry_.select_().From_("people").Where_(Db_crt_.New_eq("id", 1))
 			,	"SELECT * FROM people WHERE id = 1"
 			);
 	}
-	@Test  public void Select_From_Alias() {
+	@Test public void Select_From_Alias() {
 		tst_XtoSql
 			(	Db_qry_.select_().From_("people", "p")
 			,	"SELECT * FROM people p"
 			);
 	}
-	@Test  public void Select_Join_Alias() {
+	@Test public void Select_Join_Alias() {
 		tst_XtoSql
 			(	Db_qry_.select_().From_("people", "p").Join_("roles", "r", Db_qry_.New_join__same("p", "id"))
 			,	"SELECT * FROM people p INNER JOIN roles r ON p.id = r.id"
 			);
 	}
-	@Test  public void Prepare() {
+	@Test public void Prepare() {
 		tst_XtoSql
 			(	Db_qry_.insert_("people").Val_int("id", 1).Val_str("name", "me")
 			,	"INSERT INTO people (id, name) VALUES (?, ?)"

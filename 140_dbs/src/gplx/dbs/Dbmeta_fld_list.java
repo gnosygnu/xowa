@@ -31,6 +31,7 @@ public class Dbmeta_fld_list {
 	public String Add_int_dflt(String name, int dflt)	{return Add(Dbmeta_fld_itm.new_int(name).Default_(dflt));}
 	public String Add_int_null(String name)             {return Add(Dbmeta_fld_itm.new_int(name).Nullable_y_());}
 	public String Add_long(String name)					{return Add(Dbmeta_fld_itm.new_long(name));}
+	public String Add_long_null(String name)			{return Add(Dbmeta_fld_itm.new_long(name).Nullable_y_());}
 	public String Add_float(String name)				{return Add(Dbmeta_fld_itm.new_float(name));}
 	public String Add_double(String name)				{return Add(Dbmeta_fld_itm.new_double(name));}
 	public String Add_text(String name)					{return Add(Dbmeta_fld_itm.new_text(name));}

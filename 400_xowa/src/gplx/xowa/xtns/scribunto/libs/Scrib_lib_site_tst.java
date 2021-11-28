@@ -21,19 +21,19 @@ public class Scrib_lib_site_tst {
 		fxt.Clear();
 		lib = fxt.Core().Lib_site().Init();
 	}
-	@Test   public void GetNsIndex__valid() {
+	@Test  public void GetNsIndex__valid() {
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Help"), 12);
 	}
-	@Test   public void GetNsIndex__invalid() {
+	@Test  public void GetNsIndex__invalid() {
 		fxt.Test__proc__objs__empty(lib, Scrib_lib_site.Invk_getNsIndex, Object_.Ary("Helpx"));	// unknown ns; return empty String
 	}
-	@Test   public void UsersInGroup() {
+	@Test  public void UsersInGroup() {
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_usersInGroup, Object_.Ary("sysop"), 0); // SELECT * FROM user_groups;
 	}
-	@Test   public void PagesInCategory__invalid() {
+	@Test  public void PagesInCategory__invalid() {
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A|"), 0);
 	}
-	@Test   public void PagesInCategory__exists() {
+	@Test  public void PagesInCategory__exists() {
 		gplx.xowa.addons.wikis.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A"), 3, 2, 1);
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "pages")	, 3);
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A", "subcats")	, 2);
@@ -47,14 +47,14 @@ public class Scrib_lib_site_tst {
 		, "  files=1"
 		));
 	}
-	@Test   public void PagesInCategory__spaces() { // replace space with underlines (and possibly other normalizations) else TOC will not show; PAGE:en.wiktionary.org/wiki/Category:English_conjunctions; ISSUE#:557; DATE:2019-08-22
+	@Test  public void PagesInCategory__spaces() { // replace space with underlines (and possibly other normalizations) else TOC will not show; PAGE:en.wiktionary.org/wiki/Category:English_conjunctions; ISSUE#:557; DATE:2019-08-22
 		gplx.xowa.addons.wikis.ctgs.Xoax_ctg_addon.Get(fxt.Core().Wiki()).Itms__add(Bry_.new_a7("A_b"), 3, 2, 1);
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInCategory, Object_.Ary("A b", "pages")	, 3);
 	}
-	@Test   public void PagesInNs() {
+	@Test  public void PagesInNs() {
 		fxt.Test__proc__ints(lib, Scrib_lib_site.Invk_pagesInNs, Object_.Ary("12"), 0);
 	}
-	@Test   public void InterwikiMap() {
+	@Test  public void InterwikiMap() {
 		String key = "scribunto.interwikimap.en.wikipedia.org.!local";
 		fxt.Core().Wiki().Cache_mgr().Misc_cache().Add(key, new Keyval[] 
 		{ Keyval_.new_("en"
@@ -72,7 +72,7 @@ public class Scrib_lib_site_tst {
 		, "    isExtraLanguageLink=false"
 		));
 	}
-	@Test   public void Init_lib_site() {
+	@Test  public void Init_lib_site() {
 		Xowe_wiki wiki = fxt.Core().Wiki();
 		wiki.Stats().Load_by_db(1, 2, 3, 4, 5, 6, 7, 8);
 		wiki.Ns_mgr()
@@ -187,7 +187,7 @@ public class Scrib_lib_site_tst {
 		, "    admins=8"
 		));
 	}
-//		@Test   public void LoadSiteStats() {	// deprecated by Scribunto; DATE:2013-04-12
+//		@Test  public void LoadSiteStats() {	// deprecated by Scribunto; DATE:2013-04-12
 //			fxt.Parser_fxt().Wiki().Stats().NumPages_(1).NumArticles_(2).NumFiles_(3).NumEdits_(4).NumViews_(5).NumUsers_(6).NumUsersActive_(7);
 //			fxt.Test_scrib_proc_str_ary(lib, Scrib_lib_site.Invk_loadSiteStats, Object_.Ary_empty, "1;2;3;4;5;6;7");
 //		}

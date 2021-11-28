@@ -17,49 +17,49 @@ package gplx.core.consoles; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.envs.*;
 public class Gfo_cmd_arg_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private final    Gfo_cmd_arg_mgr_fxt fxt = new Gfo_cmd_arg_mgr_fxt();
-	@Test  public void Val__many() {
+	@Test public void Val__many() {
 		fxt.Init_args(fxt.Make_arg("a"), fxt.Make_arg("b"));
 		fxt.Exec_process("--a", "0", "--b", "1");
 		fxt.Test_errs_none();
 		fxt.Test_actl(fxt.Make_chkr("a", "0"), fxt.Make_chkr("b", "1"));
 	}
-	@Test  public void Val__yn() {
+	@Test public void Val__yn() {
 		fxt.Init_args(fxt.Make_arg("a", Gfo_cmd_arg_itm_.Val_tid_yn), fxt.Make_arg("b", Gfo_cmd_arg_itm_.Val_tid_yn));
 		fxt.Exec_process("--a", "y", "--b", "n");
 		fxt.Test_errs_none();
 		fxt.Test_actl(fxt.Make_chkr("a", Bool_.Y), fxt.Make_chkr("b", Bool_.N));
 	}
-	@Test  public void Dflt() {
+	@Test public void Dflt() {
 		fxt.Init_args(fxt.Make_arg("a", Gfo_cmd_arg_itm_.Val_tid_yn).Dflt_(Bool_.Y));
 		fxt.Exec_process("--a", "n").Test_actl(fxt.Make_chkr("a", Bool_.N));	// if val, use it
 		fxt.Exec_process()			.Test_actl(fxt.Make_chkr("a", Bool_.Y));	// if no val, use default
 	}
-	@Test  public void Err__key__unknown() {
+	@Test public void Err__key__unknown() {
 		fxt.Init_args(fxt.Make_arg("a"));
 		fxt.Exec_process("--b");
 		fxt.Test_errs(Gfo_cmd_arg_mgr_.Err__key__unknown);			
 	}
-	@Test  public void Err__key__missing() {
+	@Test public void Err__key__missing() {
 		fxt.Init_args(fxt.Make_arg("a"));
 		fxt.Exec_process("a");
 		fxt.Test_errs(Gfo_cmd_arg_mgr_.Err__key__missing);
 	}
-	@Test  public void Err__key__dupe() {
+	@Test public void Err__key__dupe() {
 		fxt.Init_args(fxt.Make_arg("a"));
 		fxt.Exec_process("--a", "0", "--a", "0");
 		fxt.Test_errs(Gfo_cmd_arg_mgr_.Err__key__duplicate);
 	}
-	@Test  public void Err__val__reqd() {
+	@Test public void Err__val__reqd() {
 		fxt.Init_args(fxt.Make_arg("a", Bool_.Y), fxt.Make_arg("b", Bool_.N));
 		fxt.Exec_process("--b", "1");
 		fxt.Test_errs(Gfo_cmd_arg_mgr_.Err__val__required);
 	}
-	@Test  public void Err__val__parse__yn() {
+	@Test public void Err__val__parse__yn() {
 		fxt.Init_args(fxt.Make_arg("a", Gfo_cmd_arg_itm_.Val_tid_yn));
 		fxt.Exec_process("--a", "x");
 		fxt.Test_errs(Gfo_cmd_arg_mgr_.Err__val__invalid__yn);
 	}
-	@Test  public void Val_as_url_rel_dir_or() {	// PURPOSE: "/xowa" -> "/xowa/"
+	@Test public void Val_as_url_rel_dir_or() {	// PURPOSE: "/xowa" -> "/xowa/"
 		String root_dir = Op_sys.Cur().Tid_is_wnt() ? "C:\\" : "/", dir_spr = Op_sys.Cur().Fsys_dir_spr_str();
 		fxt.Test_val_as_url_rel_dir_or(root_dir, dir_spr, root_dir + "sub"				, root_dir + "sub" + dir_spr);						// /sub   -> /sub/
 		fxt.Test_val_as_url_rel_dir_or(root_dir, dir_spr, root_dir + "sub" + dir_spr	, root_dir + "sub" + dir_spr);						// /sub/  -> /sub/

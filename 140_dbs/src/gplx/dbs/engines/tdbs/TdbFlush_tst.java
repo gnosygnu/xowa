@@ -23,7 +23,7 @@ public class TdbFlush_tst {
 	}
 	TdbEngine engine; Io_url dbPath = Io_url_.mem_fil_("mem/dir/db0.dsv"); DateAdp time = DateAdp_.parse_gplx("2001-01-01");
 	TdbEngineFxt fx_engine = TdbEngineFxt.new_(); IoMgrFxt fx_io = IoMgrFxt.new_();
-	@Test  public void FlushNewDb() {
+	@Test public void FlushNewDb() {
 		fx_engine.tst_FilesCount(engine, 1);
 		fx_engine.tst_File(engine, 0, TdbFile.MainFileId, Io_url_.mem_fil_("mem/dir/db0.dsv"), "dsv");
 		fx_io.tst_Exists(false, dbPath);
@@ -31,7 +31,7 @@ public class TdbFlush_tst {
 		engine.FlushAll();
 		fx_io.tst_Exists(true, dbPath);
 	}
-	@Test  public void IgnoreFlushedDb() {
+	@Test public void IgnoreFlushedDb() {
 		engine.FlushAll();
 		fx_io.tst_Exists(true, dbPath);
 		fx_io.run_UpdateFilModifiedTime(dbPath, time);
@@ -39,7 +39,7 @@ public class TdbFlush_tst {
 		engine.FlushAll();
 		fx_io.tst_QueryFilModified(true, dbPath, time);
 	}
-	@Test  public void FlushNewTbl() {
+	@Test public void FlushNewTbl() {
 		engine.FlushAll();
 		fx_engine.run_MakeTbl(engine, "tbl0", TdbFile.MainFileId);
 		fx_io.run_UpdateFilModifiedTime(dbPath, time);
@@ -47,7 +47,7 @@ public class TdbFlush_tst {
 		engine.FlushAll();
 		fx_io.tst_QueryFilModified(false, dbPath, time);
 	}
-	@Test  public void IgnoreFlushedTbl() {
+	@Test public void IgnoreFlushedTbl() {
 		fx_engine.run_MakeTbl(engine, "tbl0", TdbFile.MainFileId);
 		engine.FlushAll();
 		fx_io.run_UpdateFilModifiedTime(dbPath, time);
@@ -55,7 +55,7 @@ public class TdbFlush_tst {
 		engine.FlushAll();
 		fx_io.tst_QueryFilModified(true, dbPath, time);
 	}
-	@Test  public void FlushDirtyTbl() {
+	@Test public void FlushDirtyTbl() {
 		fx_engine.run_MakeTbl(engine, "tbl0", TdbFile.MainFileId);
 		engine.FlushAll();
 		fx_io.run_UpdateFilModifiedTime(dbPath, time);
@@ -64,7 +64,7 @@ public class TdbFlush_tst {
 		engine.FlushAll();
 		fx_io.tst_QueryFilModified(false, dbPath, time);
 	}
-	@Test  public void FlushDirtyFilOnly() {
+	@Test public void FlushDirtyFilOnly() {
 		Io_url dbPathOther = Io_url_.mem_fil_("mem/dir/db1.dsv");
 		TdbFile filOther = fx_engine.run_MakeFile(engine, dbPathOther); Tfds.Eq(false, Object_.Eq(filOther.Id(), TdbFile.MainFileId));
 		fx_engine.run_MakeTbl(engine, "tbl0", TdbFile.MainFileId); fx_engine.run_MakeTbl(engine, "tbl1", filOther.Id());

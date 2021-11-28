@@ -19,7 +19,7 @@ import gplx.xowa.langs.cases.*;
 public class Xop_lnki_wkr__pre_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Previous_pre() {	// PURPOSE: if pre is already in effect, end it; EX: en.b:Knowing_Knoppix/Other_applications
+	@Test public void Previous_pre() {	// PURPOSE: if pre is already in effect, end it; EX: en.b:Knowing_Knoppix/Other_applications
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, " b"
@@ -39,7 +39,7 @@ public class Xop_lnki_wkr__pre_tst {
 		, ""
 		));
 	}
-	@Test  public void Current_pre_and_thumb() {	// PURPOSE: current pre should be ended by thumb; EX: w:Roller coaster; it.w:Provincia_di_Pesaro_e_Urbino; DATE:2014-02-17
+	@Test public void Current_pre_and_thumb() {	// PURPOSE: current pre should be ended by thumb; EX: w:Roller coaster; it.w:Provincia_di_Pesaro_e_Urbino; DATE:2014-02-17
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, "  [[File:A.png|thumb]]"
@@ -55,7 +55,7 @@ public class Xop_lnki_wkr__pre_tst {
 		, ""
 		));
 	}
-	@Test  public void Current_pre_and_halign() {	// PURPOSE: current pre should be ended by halign since they also produce divs; EX: w:Trombiculidae; DATE:2014-02-17
+	@Test public void Current_pre_and_halign() {	// PURPOSE: current pre should be ended by halign since they also produce divs; EX: w:Trombiculidae; DATE:2014-02-17
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, "  [[File:A.png|right]]"
@@ -71,7 +71,7 @@ public class Xop_lnki_wkr__pre_tst {
 		, ""
 		));
 	}
-	@Test  public void Current_pre() {	// PURPOSE: current pre should exist if not div; DATE:2014-02-17
+	@Test public void Current_pre() {	// PURPOSE: current pre should exist if not div; DATE:2014-02-17
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, "  [[File:A.png]]"

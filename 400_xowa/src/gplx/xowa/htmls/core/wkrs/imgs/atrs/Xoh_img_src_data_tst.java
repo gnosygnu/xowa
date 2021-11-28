@@ -19,26 +19,26 @@ import gplx.xowa.wikis.domains.*;
 public class Xoh_img_src_data_tst {
 	private final    Xoh_img_src_data_fxt fxt = new Xoh_img_src_data_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__parse("file:///C:/xowa/file/en.wikipedia.org/orig/7/0/A.png"						, "en.wikipedia.org"		, Bool_.Y, "A.png",  -1, -1, -1);
 		fxt.Test__parse("file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/220px.png"		, "commons.wikimedia.org"	, Bool_.N, "A.png", 220, -1, -1);
 	}
-	@Test   public void Video() {
+	@Test  public void Video() {
 		fxt.Test__parse("file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/A.ogv/220px-5.jpg"	, "commons.wikimedia.org"	, Bool_.N, "A.ogv", 220,  5, -1);
 	}
-	@Test   public void Pdf() {
+	@Test  public void Pdf() {
 		fxt.Test__parse("file:///C:/xowa/file/commons.wikimedia.org/thumb/7/0/A.pdf/220px-5.png"	, "commons.wikimedia.org"	, Bool_.N, "A.pdf", 220, -1,  5);
 	}
-	@Test   public void Md5_depth_4() {
+	@Test  public void Md5_depth_4() {
 		fxt.Test__parse("file:///C:/xowa/file/en.wikipedia.org/orig/7/0/1/0/A.png"					, "en.wikipedia.org"		, Bool_.Y, "A.png",  -1, -1, -1);
 	}
-	@Test   public void Math() {	// PURPOSE: "xowa:/math" shouldn't cause img_src_parser to fail; DATE:2016-11-17
+	@Test  public void Math() {	// PURPOSE: "xowa:/math" shouldn't cause img_src_parser to fail; DATE:2016-11-17
 		fxt.Test__parse("xowa:/math/596f8baf206a81478afd4194b44138715dc1a05c"						, "en.wikipedia.org"		, Bool_.Y, "A.png",  -1, -1, -1);
 	}
-//		@Test   public void Fail__orig_mode() {
+//		@Test  public void Fail__orig_mode() {
 //			fxt.Test__parse__fail("file:///C:/xowa/file/commons.wikimedia.org/fail/7/0/A.png", "failed trie check: mid='fail/7/0/A.png' ctx='Main_Page' wkr='img.src.xowa' excerpt='file:///C:/xowa/file/commons.wikimedia.org/fail/7/0/A.png'");
 //		}
-//		@Test   public void Fail__repo_mode() {
+//		@Test  public void Fail__repo_mode() {
 //			fxt.Test__parse__fail("file:///C:/xowa/file/en.wiktionary.org/orig/7/0/A.png", "repo must be commons or self: repo='en.wiktionary.org' ctx='Main_Page' wkr='img.src.xowa' excerpt='file:///C:/xowa/file/en.wiktionary.org/orig/7/0/A.png'");
 //		}
 }

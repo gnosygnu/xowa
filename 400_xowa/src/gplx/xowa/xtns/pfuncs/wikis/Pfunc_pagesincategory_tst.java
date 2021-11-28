@@ -18,18 +18,18 @@ import org.junit.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.*;
 public class Pfunc_pagesincategory_tst {
 	private final    Pfunc_pagesincategory_tstr tstr = new Pfunc_pagesincategory_tstr();
 	@Before	public void setup()	{tstr.Init(); tstr.Init_category_counts("A", 1000, 2000, 3000);}
-	@Test   public void Type__none()				{tstr.Test_parse("{{PAGESINCATEGORY:A}}"			, "6,000");}
-	@Test   public void Type__empty()				{tstr.Test_parse("{{PAGESINCATEGORY:A|}}"			, "6,000");}	// FIX:throws null error; PAGE: DATE:2016-04-21
-	@Test   public void Type__none__fmt()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R}}"			, "6000");}
-	@Test   public void Type__page__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|pages}}"		, "1,000");}
-	@Test   public void Type__subc__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|subcats}}"	, "2,000");}
-	@Test   public void Type__file__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|files}}"		, "3,000");}
-	@Test   public void Type__page__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|pages}}"	, "1000");}
-	@Test   public void Type__subc__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|subcats}}"	, "2000");}
-	@Test   public void Type__file__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|files}}"	, "3000");}
-	@Test   public void Zero__no_title()			{tstr.Test_parse("{{PAGESINCATEGORY:}}"				, "0");}
-	@Test   public void Zero__missing_title()		{tstr.Test_parse("{{PAGESINCATEGORY:Missing}}"		, "0");}
-	@Test   public void Wrong_args()				{tstr.Test_parse("{{PAGESINCATEGORY:A|invalid|x}}"	, "6,000");}	// defaults to all,fmt
+	@Test  public void Type__none()				{tstr.Test_parse("{{PAGESINCATEGORY:A}}"			, "6,000");}
+	@Test  public void Type__empty()				{tstr.Test_parse("{{PAGESINCATEGORY:A|}}"			, "6,000");}	// FIX:throws null error; PAGE: DATE:2016-04-21
+	@Test  public void Type__none__fmt()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R}}"			, "6000");}
+	@Test  public void Type__page__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|pages}}"		, "1,000");}
+	@Test  public void Type__subc__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|subcats}}"	, "2,000");}
+	@Test  public void Type__file__1st()			{tstr.Test_parse("{{PAGESINCATEGORY:A|files}}"		, "3,000");}
+	@Test  public void Type__page__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|pages}}"	, "1000");}
+	@Test  public void Type__subc__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|subcats}}"	, "2000");}
+	@Test  public void Type__file__2nd()			{tstr.Test_parse("{{PAGESINCATEGORY:A|R|files}}"	, "3000");}
+	@Test  public void Zero__no_title()			{tstr.Test_parse("{{PAGESINCATEGORY:}}"				, "0");}
+	@Test  public void Zero__missing_title()		{tstr.Test_parse("{{PAGESINCATEGORY:Missing}}"		, "0");}
+	@Test  public void Wrong_args()				{tstr.Test_parse("{{PAGESINCATEGORY:A|invalid|x}}"	, "6,000");}	// defaults to all,fmt
 }
 class Pfunc_pagesincategory_tstr {
 	private final    Xop_fxt parser_tstr;

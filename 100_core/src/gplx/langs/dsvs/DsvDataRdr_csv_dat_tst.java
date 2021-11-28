@@ -20,20 +20,20 @@ public class DsvDataRdr_csv_dat_tst {
 		fx.Parser_(DsvParser.csv_(false, GfoFldList_.Null));
 		fx.Clear();
 	}	DsvDataRdr_fxt fx = DsvDataRdr_fxt.new_();
-	@Test  public void Empty() {
+	@Test public void Empty() {
 		fx.run_parse_("");
 		fx.tst_DatNull();
 	}
-	@Test  public void Fld_0() {
+	@Test public void Fld_0() {
 		fx.run_parse_("a");
 		fx.tst_DatCsv(fx.ary_("a"));
 	}
-	@Test  public void Fld_N() {
+	@Test public void Fld_N() {
 		fx.run_parse_("a,b,c");
 		fx.tst_FldListCsv("fld0", "fld1", "fld2");
 		fx.tst_DatCsv(fx.ary_("a", "b", "c"));
 	}
-	@Test  public void Row_N() {
+	@Test public void Row_N() {
 		fx.run_parse_
 			(	"a,b,c", String_.CrLf
 			,	"1,2,3"
@@ -43,43 +43,43 @@ public class DsvDataRdr_csv_dat_tst {
 			, fx.ary_("1", "2", "3")
 			);
 	}
-	@Test  public void Escape_WhiteSpace() {
+	@Test public void Escape_WhiteSpace() {
 		fx.run_parse_("a,\" \t\",c");
 		fx.tst_DatCsv(fx.ary_("a", " \t", "c"));
 	}
-	@Test  public void Escape_FldSep() {
+	@Test public void Escape_FldSep() {
 		fx.run_parse_("a,\",\",c");
 		fx.tst_DatCsv(fx.ary_("a", ",", "c"));
 	}
-	@Test  public void Escape_RowSep() {
+	@Test public void Escape_RowSep() {
 		fx.run_parse_("a,\"" + String_.CrLf + "\",c");
 		fx.tst_DatCsv(fx.ary_("a", String_.CrLf, "c"));
 	}
-	@Test  public void Escape_Quote() {
+	@Test public void Escape_Quote() {
 		fx.run_parse_("a,\"\"\"\",c");
 		fx.tst_DatCsv(fx.ary_("a", "\"", "c"));
 	}
-	@Test  public void Blank_Null() {
+	@Test public void Blank_Null() {
 		fx.run_parse_("a,,c");
 		fx.tst_DatCsv(fx.ary_("a", null, "c"));
 	}
-	@Test  public void Blank_EmptyString() {
+	@Test public void Blank_EmptyString() {
 		fx.run_parse_("a,\"\",c");
 		fx.tst_DatCsv(fx.ary_("a", "", "c"));
 	}
-	@Test  public void Blank_Null_Multiple() {
+	@Test public void Blank_Null_Multiple() {
 		fx.run_parse_(",,");
 		fx.tst_DatCsv(fx.ary_(null, null, null));
 	}
-	@Test  public void TrailingNull() {
+	@Test public void TrailingNull() {
 		fx.run_parse_("a,");
 		fx.tst_DatCsv(fx.ary_("a", null));
 	}
-	@Test  public void TrailingEmpty() {
+	@Test public void TrailingEmpty() {
 		fx.run_parse_("a,\"\"");
 		fx.tst_DatCsv(fx.ary_("a", ""));
 	}
-	@Test  public void Quote_Error() {
+	@Test public void Quote_Error() {
 		try {
 			fx.run_parse_("a,\"\" ,c");
 			Tfds.Fail_expdError();
@@ -88,7 +88,7 @@ public class DsvDataRdr_csv_dat_tst {
     			Tfds.Eq_true(String_.Has(Err_.Message_lang(e), "invalid quote in quoted field"));
 		}
 	}
-	@Test  public void Misc_AllowValsLessThanFields() {
+	@Test public void Misc_AllowValsLessThanFields() {
 		// assume null when vals.Count < fields.Count; PURPOSE: MsExcel will not save trailing commas for csvExport; ex: a, -> a
 		fx.run_parse_
 			( "a0,a1", String_.CrLf
@@ -99,7 +99,7 @@ public class DsvDataRdr_csv_dat_tst {
 			, fx.ary_("b0", null)
 			);
 	}
-	@Test  public void Misc_NewLineValidForSingleColumnTables() {
+	@Test public void Misc_NewLineValidForSingleColumnTables() {
 		fx.run_parse_
 			( "a", String_.CrLf
 			, String_.CrLf
@@ -113,7 +113,7 @@ public class DsvDataRdr_csv_dat_tst {
 			, fx.ary_null_()
 			);
 	}
-	@Test  public void Misc_NewLineValidForSingleColumnTables_FirstLine() {
+	@Test public void Misc_NewLineValidForSingleColumnTables_FirstLine() {
 		fx.run_parse_
 			( String_.CrLf
 			, "b", String_.CrLf
@@ -125,7 +125,7 @@ public class DsvDataRdr_csv_dat_tst {
 			, fx.ary_("c")
 			);
 	}
-	@Test  public void Hdr_Basic() {
+	@Test public void Hdr_Basic() {
 		fx.Parser_(DsvParser.csv_(true, GfoFldList_.Null));
 		fx.run_parse_
 			(	"id,name", String_.CrLf
@@ -134,7 +134,7 @@ public class DsvDataRdr_csv_dat_tst {
 		fx.tst_FldListCsv("id", "name");
 		fx.tst_DatCsv(fx.ary_("0", "me"));
 	}
-//		@Test  public void Hdr_Manual() {
+//		@Test public void Hdr_Manual() {
 //			fx.Parser_(DsvParser.csv_(false, GfoFldList_.new_().Add("id", IntClassXtn.Instance).Add("name", StringClassXtn.Instance), true));
 //			fx.run_parse_("0,me"); 
 //			fx.tst_DatCsv(fx.ary_(0, "me"));	// NOTE: testing auto-parsing of id to int b/c id fld is IntClassXtn.Instance;

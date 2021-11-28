@@ -18,19 +18,19 @@ import org.junit.*;
 public class Percentile_rng_tst {
 	private final    Percentile_rng_fxt fxt = new Percentile_rng_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Found__000() {
+	@Test  public void Found__000() {
 		fxt.Test__rng(999994, 1000001);
 		fxt.Exec__update(  0).Test__rng(999966, 999994);
 		fxt.Exec__update(  0).Test__rng(999854, 999966);
 	}
-	@Test   public void Found__025() {
+	@Test  public void Found__025() {
 		fxt.Test__rng(999994, 1000001);
 		fxt.Exec__update( 25).Test__rng(999973, 999994);
 		fxt.Exec__update( 25).Test__rng(999931, 999973);
 		fxt.Exec__update( 25).Test__rng(999889, 999931);
 		fxt.Exec__update( 25).Test__rng(999847, 999889);
 	}
-	@Test   public void Calc_score_unit() {
+	@Test  public void Calc_score_unit() {
 		fxt.Test__calc_score_unit(50, 16000000, 1000000,       4);	// to fill 50 ->   16 pages per point -> read every 4 points to get 64 pages
 		fxt.Test__calc_score_unit(50,     1000, 1000000,   50000);	// to fill 50 -> 1000 points per page -> read every 50k points to get 50 pages
 		fxt.Test__calc_score_unit(50,       25, 1000000, 1000000);	// range bounds check; to fill 50, always read full amount

@@ -25,7 +25,7 @@ public class GetEntityStatements__tst {
 		lib = fxt.Core().Lib_wikibase().Init();
 		wdata_fxt.Init(fxt.Parser_fxt(), false);
 	}
-	@Test  public void Get_preferred() {
+	@Test public void Get_preferred() {
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2")
 			.Add_claims
 			( wdata_fxt.Make_claim_string(3, "3c").Rank_tid_(Wbase_claim_rank_.Tid__deprecated)
@@ -48,7 +48,7 @@ public class GetEntityStatements__tst {
 		, "      type=statement"
 		));
 	}
-	@Test  public void Get_normal_when_no_preferred() {
+	@Test public void Get_normal_when_no_preferred() {
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2")
 			.Add_claims
 			( wdata_fxt.Make_claim_string(3, "3c").Rank_tid_(Wbase_claim_rank_.Tid__deprecated)
@@ -70,7 +70,7 @@ public class GetEntityStatements__tst {
 		, "      type=statement"
 		));
 	}
-	@Test  public void Never_get_deprecated() {
+	@Test public void Never_get_deprecated() {
 		wdata_fxt.Init__docs__add(wdata_fxt.Wdoc_bldr("q2")
 			.Add_claims
 			( wdata_fxt.Make_claim_string(3, "3c").Rank_tid_(Wbase_claim_rank_.Tid__deprecated)

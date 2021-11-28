@@ -17,10 +17,10 @@ package gplx.dbs.metas.updates; import gplx.*; import gplx.dbs.*; import gplx.db
 import org.junit.*; import gplx.dbs.*;
 public class Schema_update_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Schema_update_mgr_fxt fxt = new Schema_update_mgr_fxt();
-	@Test   public void Create() {
+	@Test  public void Create() {
 		fxt.Test_exec_y(new Schema_update_cmd__mock());
 	}
-	@Test   public void Delete() {
+	@Test  public void Delete() {
 		fxt.Init_itm(Dbmeta_itm_tid.Tid_table, Schema_update_cmd__mock.Tbl_name);
 		fxt.Test_exec_n(new Schema_update_cmd__mock());
 	}

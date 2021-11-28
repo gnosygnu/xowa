@@ -21,7 +21,7 @@ import org.junit.Test;
 
 public class Wdata_doc_parser_v2__claims__tst {
 	@Before public void init() {fxt.Init();} private Wdata_doc_parser_v2_fxt fxt = new Wdata_doc_parser_v2_fxt();
-	@Test   public void Full__string() {
+	@Test  public void Full__string() {
 		fxt.Test_claims(String_.Concat_lines_nl_skip_last
 		( "{ 'claims':"
 		, "  { 'P1':"
@@ -46,7 +46,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_string(1, "abc")
 		);
 	}
-	@Test   public void Full__novalue() {
+	@Test  public void Full__novalue() {
 		fxt.Test_claims(String_.Concat_lines_nl_skip_last
 		( "{ 'claims':"
 		, "  { 'P1':"
@@ -64,7 +64,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_novalue(1)
 		);
 	}
-	@Test   public void Data__string() {
+	@Test  public void Data__string() {
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':'abc'"
 		, ", 'type':'string'"
@@ -73,7 +73,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_string(1, "abc")
 		);
 	}
-	@Test   public void Data__item() {
+	@Test  public void Data__item() {
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':"
 		, "  { 'entity-type':'item'"
@@ -85,7 +85,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_entity_qid(1, 123)
 		);
 	}
-	@Test   public void Data__property() {
+	@Test  public void Data__property() {
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':"
 		, "  { 'entity-type':'property'"
@@ -97,7 +97,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_entity_pid(1, 398)
 		);
 	}
-	@Test   public void Data__monolingualtext() {
+	@Test  public void Data__monolingualtext() {
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':"
 		, "  { 'text':'en_text'"
@@ -109,7 +109,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_monolingualtext(1, "en", "en_text")
 		);
 	}
-	@Test   public void Data__globecoordinate() {
+	@Test  public void Data__globecoordinate() {
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':"
 		, "  { 'latitude':1.2"
@@ -124,7 +124,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_globecoordinate(1, "1.2", "3.4", "0.0002")
 		);
 	}
-	@Test   public void Data__quantity() {
+	@Test  public void Data__quantity() {
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':"
 		, "  { 'amount':'123'"
@@ -138,7 +138,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_quantity(1, 123, 2, 125, 121)
 		);
 	}
-	@Test   public void Data__time() {
+	@Test  public void Data__time() {
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':"
 		, "  { 'time':'+00000002001-02-03T04:05:06Z'"
@@ -154,7 +154,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_time(1, "2001-02-03 04:05:06")
 		);
 	}
-	@Test   public void Data__url() {	// NOTE:has "String" property-type; EX:wd:Q23548; DATE:2016-07-28
+	@Test  public void Data__url() {	// NOTE:has "String" property-type; EX:wd:Q23548; DATE:2016-07-28
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':'http:\\/\\/www.nasa.gov\\/rss\\/dyn\\/breaking_news.rss'"
 		, ", 'type':'string'"
@@ -163,7 +163,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_string(1, "http://www.nasa.gov/rss/dyn/breaking_news.rss")
 		);
 	}
-	@Test   public void Data__commonsMedia() {	// NOTE:has "String" property-type; EX:wd:Q327162; DATE:2016-07-28
+	@Test  public void Data__commonsMedia() {	// NOTE:has "String" property-type; EX:wd:Q327162; DATE:2016-07-28
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':'Tabliczka E40.svg'"
 		, ", 'type':'string'"
@@ -172,7 +172,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_string(1, "Tabliczka E40.svg")
 		);
 	}
-	@Test   public void Data__externalid() {	// NOTE:has "String" property-type; EX:wd:Q77177; DATE:2016-07-28
+	@Test  public void Data__externalid() {	// NOTE:has "String" property-type; EX:wd:Q77177; DATE:2016-07-28
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':'000331371'"
 		, ", 'type':'string'"
@@ -181,7 +181,7 @@ public class Wdata_doc_parser_v2__claims__tst {
 		, fxt.Make_claim_string(1, "000331371")
 		);
 	}
-	@Test   public void Data__math() {	// NOTE:has "String" property-type; EX:wd:Q11518; DATE:2016-07-28
+	@Test  public void Data__math() {	// NOTE:has "String" property-type; EX:wd:Q11518; DATE:2016-07-28
 		fxt.Test_claims_data(String_.Concat_lines_nl_skip_last
 		( "{ 'value':'a^2+b^2=c^2'"
 		, ", 'type':'string'"

@@ -17,29 +17,29 @@ package gplx.core.brys; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Bit_heap_wtr_tst {
 	private final Bit_heap_wtr_fxt fxt = new Bit_heap_wtr_fxt();
-	@Test   public void Add_bool() {
+	@Test  public void Add_bool() {
 		fxt.Clear().Add_bool(Bool_.Y).Test__vals(1, 1);
 		fxt.Clear().Add_bool(Bool_.N).Test__vals(1, 0);
 		fxt.Clear().Add_bool(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y).Test__vals(4,  15);
 		fxt.Clear().Add_bool(Bool_.Y, Bool_.N, Bool_.N, Bool_.Y).Test__vals(4,   9);
 		fxt.Clear().Add_bool(8, Bool_.Y).Test__vals(0, 0, 255);
 	}
-	@Test   public void Add_byte() {
+	@Test  public void Add_byte() {
 		fxt.Clear().Add_byte(255).Test__vals(0, 0, 255);
 	}
-	@Test   public void Add_bool_byte() {
+	@Test  public void Add_bool_byte() {
 		fxt.Clear().Add_bool(Bool_.N).Add_byte(255).Test__vals(1, 127, 254);
 		fxt.Clear().Add_bool(Bool_.Y).Add_byte(255).Test__vals(1, 127, 255);
 		fxt.Clear().Add_bool(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y).Add_byte(255).Test__vals(4, 15, 255);
 	}
-	@Test   public void Add_byte_digits() {
+	@Test  public void Add_byte_digits() {
 		fxt.Clear().Add_byte(4,  15).Test__vals(4,  15);
 		fxt.Clear().Add_byte(7, 127).Add_byte(2, 3).Test__vals(1, 1, 255);
 		fxt.Clear().Add_byte(3, 7).Add_byte(3, 7).Test__vals(6, 63);
 		fxt.Clear().Add_byte(6, 63).Add_byte(3, 7).Test__vals(1, 1, 255);
 		fxt.Clear().Add_byte(3, 6).Add_byte(3, 6).Test__vals(6, 54);
 	}
-	@Test   public void Add_int_hzip() {
+	@Test  public void Add_int_hzip() {
 		fxt.Clear().Add_int_hzip(1, 100).Test__vals(0, 0, 100);
 		fxt.Clear().Add_int_hzip(1, 300).Test__vals(0, 0, 253, 1, 44);
 		fxt.Clear().Add_int_hzip(2, 100).Test__vals(0, 0, 0, 100);

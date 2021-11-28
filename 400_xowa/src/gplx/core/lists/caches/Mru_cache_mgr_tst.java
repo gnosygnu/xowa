@@ -20,30 +20,30 @@ public class Mru_cache_mgr_tst {
 	@Before public void init() {
 		fxt.Init__New_cache_mgr(3, 3, 2);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Exec__Add("a", "b", "c", "d");
 		fxt.Test__Print("b", "c", "d"); // adding "d" pushes out "a"
 	}
-	@Test  public void Used() {
+	@Test public void Used() {
 		fxt.Exec__Add("a", "b", "c");
 		fxt.Exec__Get_and_compress("a");
 		fxt.Test__Print("b", "c", "a"); // getting "a" pushes to back
 	}
-	@Test  public void Used__more_uses_at_back() {
+	@Test public void Used__more_uses_at_back() {
 		fxt.Exec__Add("a", "b", "c");
 		fxt.Exec__Get_and_compress("a", "a", "a");
 		fxt.Test__Print("b", "c", "a");
 		fxt.Exec__Get_and_compress("b");
 		fxt.Test__Print("c", "b", "a"); // getting "a" multiple time still keeps towards back
 	}
-	@Test  public void Time() {
+	@Test public void Time() {
 		fxt.Exec__Add("a", "b", "c");
 		fxt.Exec__Get_and_compress("a", "a", "a");
 		fxt.Exec__Wait(10);
 		fxt.Exec__Get_and_compress("b");
 		fxt.Test__Print("c", "a", "b");	// long wait puts "b" at back
 	}
-	@Test  public void Compress() {
+	@Test public void Compress() {
 		fxt.Init__New_cache_mgr(3, 2, 2);
 		fxt.Exec__Add("a", "b", "c", "d");
 		fxt.Test__Print("c", "d");

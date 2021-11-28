@@ -17,7 +17,7 @@ package gplx.xowa.wikis.xwikis.parsers; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm_parser_tst {
 	private final    Xow_xwiki_itm_parser_fxt fxt = new Xow_xwiki_itm_parser_fxt();
-	@Test   public void Manual() {
+	@Test  public void Manual() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "0|a|https://a.org/~{0}|A"
 		));
@@ -25,7 +25,7 @@ public class Xow_xwiki_itm_parser_tst {
 		( "a|https://a.org/~{0}|A"
 		));
 	}
-	@Test   public void Mw_domain() {
+	@Test  public void Mw_domain() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "1|w|en.wikipedia.org|Wikipedia"
 		));
@@ -33,7 +33,7 @@ public class Xow_xwiki_itm_parser_tst {
 		( "w|https://en.wikipedia.org/wiki/~{0}|Wikipedia"
 		));
 	}
-	@Test   public void Wm_peer() {
+	@Test  public void Wm_peer() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "2|wikt|wiktionary|Wiktionary"
 		));
@@ -41,7 +41,7 @@ public class Xow_xwiki_itm_parser_tst {
 		( "wikt|https://en.wiktionary.org/wiki/~{0}|Wiktionary"
 		));
 	}
-	@Test   public void Wm_lang() {
+	@Test  public void Wm_lang() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "3|fr|fr|French"
 		));
@@ -49,7 +49,7 @@ public class Xow_xwiki_itm_parser_tst {
 		( "fr|https://fr.wikipedia.org/wiki/~{0}|French"
 		));
 	}
-	@Test   public void Multiple() {
+	@Test  public void Multiple() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "2|wikt;wiktionary|wiktionary|Wiktionary"
 		));
@@ -58,7 +58,7 @@ public class Xow_xwiki_itm_parser_tst {
 		, "wiktionary|https://en.wiktionary.org/wiki/~{0}|Wiktionary"
 		));
 	}
-	@Test   public void Default_name() {
+	@Test  public void Default_name() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "2|wikt|wiktionary|"
 		));

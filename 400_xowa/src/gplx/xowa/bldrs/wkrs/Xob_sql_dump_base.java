@@ -50,7 +50,7 @@ public abstract class Xob_sql_dump_base extends Xob_itm_dump_base implements Xob
 		if (fail) return;
 		parser.Parse(bldr.Usr_dlg());
 	}
-	@gplx.Virtual public void Cmd_end() {
+	public void Cmd_end() {
 		if (fail) return;
 		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Io_line_rdr_key_gen_all.Instance, new Io_sort_fil_basic(bldr.Usr_dlg(), make_url_gen, make_fil_len));
 	}

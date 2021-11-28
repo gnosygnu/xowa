@@ -23,11 +23,11 @@ public class Pfunc_plural_tst {
 		XomwLanguage_fxt lang_fxt = new XomwLanguage_fxt();
 		lang_fxt.Init__pluralRulesXml__en();
 	}
-	@Test  public void Singular()				{fxt.Test__parse__tmpl_to_html("{{plural:1|wiki|wikis}}" , "wiki");}
-	@Test  public void Plural()					{fxt.Test__parse__tmpl_to_html("{{plural:2|wiki|wikis}}" , "wikis");}
-	@Test  public void Plural_but_one_arg()		{fxt.Test__parse__tmpl_to_html("{{plural:2|wiki}}"       , "wiki");}
-	@Test  public void Null()					{fxt.Test__parse__tmpl_to_html("{{plural:|wiki|wikis}}"  , "wikis");}
-	@Test  public void handleExplicitPluralForms() {
+	@Test public void Singular()				{fxt.Test__parse__tmpl_to_html("{{plural:1|wiki|wikis}}" , "wiki");}
+	@Test public void Plural()					{fxt.Test__parse__tmpl_to_html("{{plural:2|wiki|wikis}}" , "wikis");}
+	@Test public void Plural_but_one_arg()		{fxt.Test__parse__tmpl_to_html("{{plural:2|wiki}}"       , "wiki");}
+	@Test public void Null()					{fxt.Test__parse__tmpl_to_html("{{plural:|wiki|wikis}}"  , "wikis");}
+	@Test public void handleExplicitPluralForms() {
 		fxt.Test__parse__tmpl_to_html("{{plural:1|2=two|3=three|one|many}}", "one");
 		fxt.Test__parse__tmpl_to_html("{{plural:2|2=two|3=three|one|many}}", "two");
 		fxt.Test__parse__tmpl_to_html("{{plural:3|2=two|3=three|one|many}}", "three");

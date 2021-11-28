@@ -17,35 +17,35 @@ package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*;
 public class Xow_mainpage_finder_tst {
 	@Before public void init() {fxt.Clear();}	private Xow_mainpage_finder_fxt fxt = new Xow_mainpage_finder_fxt();
-	@Test   public void Mediawiki() {
+	@Test  public void Mediawiki() {
 		fxt.Init_mediawiki_page("Mainpage_by_mediawiki");
 		fxt.Test_mainpage("Mainpage_by_mediawiki");
 	}
-	@Test   public void Lang() {
+	@Test  public void Lang() {
 		fxt.Init_lang("Mainpage_by_lang");
 		fxt.Test_mainpage("Mainpage_by_lang");
 	}
-	@Test   public void Siteinfo() {
+	@Test  public void Siteinfo() {
 		fxt.Init_siteinfo("Mainpage_by_siteinfo");
 		fxt.Test_mainpage("Mainpage_by_siteinfo");
 	}
-	@Test   public void Lang_and_siteinfo() {
+	@Test  public void Lang_and_siteinfo() {
 		fxt.Init_lang("Mainpage_by_lang");
 		fxt.Init_siteinfo("Mainpage_by_siteinfo");
 		fxt.Test_mainpage("Mainpage_by_lang");
 	}
-	@Test   public void Mediawiki_and_siteinfo() {
+	@Test  public void Mediawiki_and_siteinfo() {
 		fxt.Init_mediawiki_page("Mainpage_by_mediawiki");
 		fxt.Init_siteinfo("Mainpage_by_siteinfo");
 		fxt.Test_mainpage("Mainpage_by_mediawiki");
 	}
-	@Test   public void Mediawiki_and_lang_and_siteinfo() {
+	@Test  public void Mediawiki_and_lang_and_siteinfo() {
 		fxt.Init_mediawiki_page("Mainpage_by_mediawiki");
 		fxt.Init_lang("Mainpage_by_lang");
 		fxt.Init_siteinfo("Mainpage_by_siteinfo");
 		fxt.Test_mainpage("Mainpage_by_mediawiki");
 	}
-	@Test   public void Mediawiki_tmpl() {	// PURPOSE: de.wiktionary.org has "{{ns:project}}:Hauptseite"; DATE:2013-07-07
+	@Test  public void Mediawiki_tmpl() {	// PURPOSE: de.wiktionary.org has "{{ns:project}}:Hauptseite"; DATE:2013-07-07
 		fxt.Init_mediawiki_page("{{ns:project}}:Hauptseite");
 		fxt.Test_mainpage("Wikipedia:Hauptseite");
 	}

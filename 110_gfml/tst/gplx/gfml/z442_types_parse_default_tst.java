@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z442_types_parse_default_tst {
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Parse(String_.Concat
 			(	"_type:{"
 			,		"point {x;}"
@@ -26,7 +26,7 @@ public class z442_types_parse_default_tst {
 			,	fx.nde_().Hnd_("point").Typ_("point").Atrk_("x", "1")
 			);
 	}
-	@Test  public void Pinned() {
+	@Test public void Pinned() {
 		fx.tst_Parse(String_.Concat
 			(	"_type:{"
 			,		"point {x;}"
@@ -38,7 +38,7 @@ public class z442_types_parse_default_tst {
 			,	fx.nde_().Hnd_("point").Typ_("point").Atrk_("x", "2")
 			);
 	}
-	@Test  public void Many() {
+	@Test public void Many() {
 		fx.tst_Parse(String_.Concat
 			(	"_type:{"
 			,		"point {x;}"	// point is always pinned
@@ -51,7 +51,7 @@ public class z442_types_parse_default_tst {
 			,	fx.nde_().Hnd_("point").Typ_("point").Atrk_("x", "2")
 			);
 	}
-	@Test  public void Nested() {
+	@Test public void Nested() {
 		fx.tst_Parse(String_.Concat
 			(	"_type:{"
 			,		"item {"
@@ -65,7 +65,7 @@ public class z442_types_parse_default_tst {
 			)
 			);
 	}
-	@Test  public void NestedWithAtr() {
+	@Test public void NestedWithAtr() {
 		fx.tst_Parse(String_.Concat
 			(	"_type:{"
 			,		"item {"

@@ -17,7 +17,7 @@ package gplx;
 import org.junit.*; import gplx.core.tests.*;
 public class Bry_find__tst {
 	private Bry_find__fxt fxt = new Bry_find__fxt();
-	@Test  public void Find_fwd() {
+	@Test public void Find_fwd() {
 		fxt.Test_Find_fwd("abcba",  "b", 0, 1);
 		fxt.Test_Find_fwd("abcba",  "z", 0, -1);
 		fxt.Test_Find_fwd("abcba",  "b", 1, 1);
@@ -26,7 +26,7 @@ public class Bry_find__tst {
 		fxt.Test_Find_fwd("abcba", "zb", 4, -1);
 		fxt.Test_Find_fwd("abcba",  "a", 6, -1);
 	}
-	@Test  public void Find_bwd() {
+	@Test public void Find_bwd() {
 		fxt.Test_Find_bwd("abcba",  "b", 4, 3);
 		fxt.Test_Find_bwd("abcba",  "z", 4, -1);
 		fxt.Test_Find_bwd("abcba",  "b", 3, 1);
@@ -36,12 +36,12 @@ public class Bry_find__tst {
 		fxt.Test_Find_fwd("abcba",  "a", -1, -1);
 		fxt.Test_Find_bwd("abcba", "ab", 4, 0);
 	}
-	@Test  public void Find_bwd_last_ws() {
+	@Test public void Find_bwd_last_ws() {
 		fxt.Test_Find_bwd_1st_ws_tst("a b"			, 2, 1);					// basic
 		fxt.Test_Find_bwd_1st_ws_tst("a   b"		, 3, 1);					// multiple
 		fxt.Test_Find_bwd_1st_ws_tst("ab"			, 1, Bry_find_.Not_found);		// none
 	}
-	@Test  public void Trim_fwd_space_tab() {
+	@Test public void Trim_fwd_space_tab() {
 		fxt.Test_Trim_fwd_space_tab(" a b"			, 1);
 		fxt.Test_Trim_fwd_space_tab("\ta b"			, 1);
 		fxt.Test_Trim_fwd_space_tab(" \ta b"		, 2);
@@ -49,7 +49,7 @@ public class Bry_find__tst {
 		fxt.Test_Trim_fwd_space_tab(""				, 0);
 		fxt.Test_Trim_fwd_space_tab(" \t"			, 2);
 	}
-	@Test  public void Trim_bwd_space_tab() {
+	@Test public void Trim_bwd_space_tab() {
 		fxt.Test_Trim_bwd_space_tab("a b "			, 3);
 		fxt.Test_Trim_bwd_space_tab("a b\t"			, 3);
 		fxt.Test_Trim_bwd_space_tab("a b\t "		, 3);
@@ -57,7 +57,7 @@ public class Bry_find__tst {
 		fxt.Test_Trim_bwd_space_tab(""				, 0);
 		fxt.Test_Trim_bwd_space_tab(" \t"			, 0);
 	}
-	@Test  public void Find_fwd_while_in() {
+	@Test public void Find_fwd_while_in() {
 		boolean[] while_ary = fxt.Init__find_fwd_while_in(Byte_ascii.Space, Byte_ascii.Tab, Byte_ascii.Nl);
 		fxt.Test__find_fwd_while_in(" \t\na", while_ary, 3);
 	}

@@ -21,61 +21,61 @@ public class Xoh_hdoc_wkr__http_server__tst {
 	private final    Xoh_hdoc_wkr__http_server__fxt fxt = new Xoh_hdoc_wkr__http_server__fxt();
 	@Before public void init() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();}
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
-	@Test   public void Wiki_quot() {
+	@Test  public void Wiki_quot() {
 		fxt.Test
 		( "<a id=\"id1\" href=\"/wiki/A\">abc</a>"
 		, "<a id=\"id1\" href=\"/en.wikipedia.org/wiki/A\">abc</a>"
 		);
 	}
-	@Test   public void Wiki_apos() {
+	@Test  public void Wiki_apos() {
 		fxt.Test
 		( "<a id=\"id1\" href='/wiki/A'>abc</a>"
 		, "<a id=\"id1\" href='/en.wikipedia.org/wiki/A'>abc</a>"
 		);
 	}
-//		@Test   public void Lnki_caption() {
+//		@Test  public void Lnki_caption() {
 //			fxt.Test
 //			( "<a id=\"id1\" href='/wiki/A'>abc <a href='/wiki/B'</a>lmn</a> xyz</a>"
 //			, "<a id=\"id1\" href='/en.wikipedia.org/wiki/A'>abc <a href='/en.wikipedia.org/wiki/B'</a>lmn</a> xyz</a>"
 //			);
 //		}
-	@Test   public void Xcmd() {
+	@Test  public void Xcmd() {
 		fxt.Test
 		( "<a id=\"id1\" href=\"xowa-cmd:a\">abc</a>"
 		, "<a id=\"id1\" href=\"/exec/a\">abc</a>"
 		);
 	}
-	@Test   public void Site() {
+	@Test  public void Site() {
 		fxt.Test
 		( "<a id=\"id1\" href=\"/site/en.wikipedia.org/wiki/Special:Search/A\">abc</a>"
 		, "<a id=\"id1\" href=\"/en.wikipedia.org/wiki/Special:Search/A\">abc</a>"
 		);
 	}
-	@Test   public void Action() { // NOTE: also used by Special:ItemByTitle; EX: "<form method=\"get\" action=\"//www.wikidata.org/wiki/Special:ItemByTitle\" name=\"itembytitle\" id=\"wb-itembytitle-form1\">"
+	@Test  public void Action() { // NOTE: also used by Special:ItemByTitle; EX: "<form method=\"get\" action=\"//www.wikidata.org/wiki/Special:ItemByTitle\" name=\"itembytitle\" id=\"wb-itembytitle-form1\">"
 		fxt.Test
 		( "<form id=\"searchform\" action=\"/wiki/SearchUrl\">abc</form>"
 		, "<form id=\"searchform\" action=\"/en.wikipedia.org/wiki/SearchUrl\">abc</form>"
 		);
 	}
-	@Test   public void Fsys() {
+	@Test  public void Fsys() {
 		fxt.Test
 		( "<a id=\"id1\" href=\"file:///mem/xowa/file/A.png\">abc</a>"
 		, "<a id=\"id1\" href=\"/fsys/file/A.png\">abc</a>"
 		);
 	}
-	@Test   public void Fsys_bug() { // 2019-05 enwiki embedded build machine's path
+	@Test  public void Fsys_bug() { // 2019-05 enwiki embedded build machine's path
 		fxt.Test
 		( "<a id=\"id1\" href=\"file:////home/lnxusr/xowa/file/A.png\">abc</a>"
 		, "<a id=\"id1\" href=\"/fsys/file/A.png\">abc</a>"
 		);
 	}
-	@Test   public void Fsys_img() {
+	@Test  public void Fsys_img() {
 		fxt.Test
 		( "<a href='/wiki/File:A.jpg' class='image'><img src=\"file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/128px.png\">abc</img></a>"
 		, "<a href='/en.wikipedia.org/wiki/File:A.jpg' class='image'><img src=\"/fsys/file/commons.wikimedia.org/thumb/7/0/A.png/128px.png\">abc</img></a>"
 		);
 	}
-	@Test   public void Fsys_div() {
+	@Test  public void Fsys_div() {
 		fxt.Test
 		( String_.Concat_lines_nl
 			( "<div class='thumb tleft'>"
@@ -105,7 +105,7 @@ public class Xoh_hdoc_wkr__http_server__tst {
 			)
 		);
 	}
-	@Test   public void Fsys_gallery() {
+	@Test  public void Fsys_gallery() {
 		fxt.Test
 		( String_.Concat_lines_nl_skip_last
 			( "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"

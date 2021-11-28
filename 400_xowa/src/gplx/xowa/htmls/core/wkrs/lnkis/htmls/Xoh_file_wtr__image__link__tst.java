@@ -18,7 +18,7 @@ import org.junit.*; import gplx.xowa.files.*;
 public class Xoh_file_wtr__image__link__tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
-	@Test  public void Link__file() {	// PURPOSE.FIX: link=file:/// was creating "href='/wiki/file'" handle IPA links; EX:[[File:Speakerlink-new.svg|11px|link=file:///C:/xowa/file/commons.wikimedia.org/orig/c/7/a/3/En-LudwigVanBeethoven.ogg|Listen]]; PAGE:en.w:Beethoven DATE:2015-12-28
+	@Test public void Link__file() {	// PURPOSE.FIX: link=file:/// was creating "href='/wiki/file'" handle IPA links; EX:[[File:Speakerlink-new.svg|11px|link=file:///C:/xowa/file/commons.wikimedia.org/orig/c/7/a/3/En-LudwigVanBeethoven.ogg|Listen]]; PAGE:en.w:Beethoven DATE:2015-12-28
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|11px|link=file:///C:/A.ogg|b]]", String_.Concat_lines_nl_skip_last
 		( "<a href=\"file:///C:/A.ogg\" class=\"image\" xowa_title=\"A.ogg\">"
@@ -26,13 +26,13 @@ public class Xoh_file_wtr__image__link__tst {
 		+ "</a>"
 		));		
 	}
-	@Test  public void Link__empty() {	// empty link should not create anchor; EX:[[File:A.png|link=|abc]]; PAGE:en.w:List_of_counties_in_New_York; DATE:2016-01-10
+	@Test public void Link__empty() {	// empty link should not create anchor; EX:[[File:A.png|link=|abc]]; PAGE:en.w:List_of_counties_in_New_York; DATE:2016-01-10
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|11px|link=|abc]]", String_.Concat_lines_nl_skip_last
 		( "<img id=\"xoimg_0\" alt=\"abc\" src=\"file:///mem/wiki/repo/trg/thumb/7/0/A.png/11px.png\" width=\"11\" height=\"0\" />"
 		));		
 	}
-	@Test  public void Link__lc() {	// links to items in same Srch_rslt_cbk should automatically title-case words; DATE:2016-01-11
+	@Test public void Link__lc() {	// links to items in same Srch_rslt_cbk should automatically title-case words; DATE:2016-01-11
 		fxt.Init_xwiki_add_wiki_and_user_("en", "en.wikipedia.org");
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|11px|link=en:Help:a?b=c#d|abc]]", String_.Concat_lines_nl_skip_last
@@ -41,7 +41,7 @@ public class Xoh_file_wtr__image__link__tst {
 		+ "</a>"));
 		fxt.Init_xwiki_clear();
 	}
-	@Test  public void Link__xwiki_empty_ns() {	// handle NPE in odd case where link has xwiki,ns, but no ttl; EX:"|link=en.w:User_talk:" PAGE:en.w:Wikipedia:Teahouse/The_menu; DATE:2017-12-02
+	@Test public void Link__xwiki_empty_ns() {	// handle NPE in odd case where link has xwiki,ns, but no ttl; EX:"|link=en.w:User_talk:" PAGE:en.w:Wikipedia:Teahouse/The_menu; DATE:2017-12-02
 		fxt.Init_xwiki_add_wiki_and_user_("en", "en.wikipedia.org");
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.png|link=en:User_talk:|abc]]", String_.Concat_lines_nl_skip_last

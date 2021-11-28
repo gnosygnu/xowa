@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.gfo_ndes.*;
 public class GfoNdeRdr_tst {
-	@Test  public void Subs_leafs() {
+	@Test public void Subs_leafs() {
 		root = 
 			fx.root_
 			(	fx.row_vals_(0)
@@ -25,7 +25,7 @@ public class GfoNdeRdr_tst {
 			);
 		tst_NdeVals(root, 0, 1, 2);
 	}
-	@Test  public void Subs_ndes() {
+	@Test public void Subs_ndes() {
 		root =
 			fx.root_
 			(	leaf_("", 0)
@@ -34,7 +34,7 @@ public class GfoNdeRdr_tst {
 			);
 		tst_NdeVals(root, 0, 1, 2);
 	}
-	@Test  public void Subs_mix() {
+	@Test public void Subs_mix() {
 		root = 
 			fx.root_
 			(	leaf_("", 0)
@@ -43,7 +43,7 @@ public class GfoNdeRdr_tst {
 			);
 		tst_NdeVals(root, 0, 1, 2);
 	}
-	@Test  public void Subs_rdr() {
+	@Test public void Subs_rdr() {
 		root = 
 			fx.root_
 			(	fx.row_vals_(0)
@@ -54,7 +54,7 @@ public class GfoNdeRdr_tst {
 		Tfds.Eq(0, rdr.ReadAt(0));
 		Tfds.Eq_false(rdr.MoveNextPeer());
 	}
-	@Test  public void MoveNextPeer_implicit() {
+	@Test public void MoveNextPeer_implicit() {
 		root = 
 			fx.root_
 			(	fx.csv_dat_
@@ -68,7 +68,7 @@ public class GfoNdeRdr_tst {
 		DataRdr subRdr = subsRdr.Subs();	// MoveNextPeer not needed; implicitly moves to pos=0
 		tst_RdrVals(subRdr, Object_.Ary(0, 1, 2));
 	}
-	@Test  public void MoveNextPeer_explicit() {
+	@Test public void MoveNextPeer_explicit() {
 		root =
 			fx.root_
 			(	fx.csv_dat_
@@ -83,7 +83,7 @@ public class GfoNdeRdr_tst {
 		DataRdr subRdr = subsRdr.Subs();
 		tst_RdrVals(subRdr, Object_.Ary(0, 1, 2));
 	}
-	@Test  public void Xpath_basic() {
+	@Test public void Xpath_basic() {
 		root = fx.root_
 			(	leaf_("root", 0)
 			,	leaf_("root", 1)
@@ -91,7 +91,7 @@ public class GfoNdeRdr_tst {
 			);
 		tst_Xpath_all(root, "root", 0, 1, 2);
 	}
-	@Test  public void Xpath_nested() {
+	@Test public void Xpath_nested() {
 		root = fx.root_
 			(	fx.tbl_("owner"
 			,		leaf_("root", 0)
@@ -100,7 +100,7 @@ public class GfoNdeRdr_tst {
 			));
 		tst_Xpath_all(root, "owner/root", 0, 1, 2);
 	}
-	@Test  public void Xpath_null() {
+	@Test public void Xpath_null() {
 		root = fx.root_
 			(	leaf_("match", 0)
 			);
@@ -108,13 +108,13 @@ public class GfoNdeRdr_tst {
 		DataRdr sub = rootRdr.Subs_byName("no_match");
 		Tfds.Eq_false(sub.MoveNextPeer());
 	}
-	@Test  public void Xpath_moveFirst_basic() {
+	@Test public void Xpath_moveFirst_basic() {
 		root = fx.root_
 			(	leaf_("nde0", 0)
 			);
 		tst_Xpath_first(root, "nde0", 0);
 	}
-	@Test  public void Xpath_moveFirst_shallow() {
+	@Test public void Xpath_moveFirst_shallow() {
 		root = fx.root_
 			(	leaf_("nde0", 0)
 			,	leaf_("nde1", 1)
@@ -122,7 +122,7 @@ public class GfoNdeRdr_tst {
 			);
 		tst_Xpath_first(root, "nde2", 2);
 	}
-	@Test  public void Xpath_moveFirst_nested() {
+	@Test public void Xpath_moveFirst_nested() {
 		root = fx.root_
 			(	node_("nde0", Object_.Ary("0")
 			,		leaf_("nde00", "00")
@@ -130,7 +130,7 @@ public class GfoNdeRdr_tst {
 		tst_Xpath_first(root, "nde0", "0");
 		tst_Xpath_first(root, "nde0/nde00", "00");
 	}
-	@Test  public void Xpath_moveFirst_nested_similarName() {
+	@Test public void Xpath_moveFirst_nested_similarName() {
 		root = fx.root_
 			(	node_("nde0", Object_.Ary("0")
 			,		leaf_("nde00", "00")
@@ -140,7 +140,7 @@ public class GfoNdeRdr_tst {
 			));
 		tst_Xpath_first(root, "nde1/nde00", "10");
 	}
-	@Test  public void Xpath_moveFirst_many() {
+	@Test public void Xpath_moveFirst_many() {
 		root = fx.root_
 			(	leaf_("root", 0)
 			,	leaf_("root", 1)
@@ -148,7 +148,7 @@ public class GfoNdeRdr_tst {
 			);
 		tst_Xpath_first(root, "root", 0);	// returns first
 	}
-	@Test  public void Xpath_moveFirst_null() {
+	@Test public void Xpath_moveFirst_null() {
 		root = fx.root_
 			(	leaf_("nde0", 0)
 			,	leaf_("nde1", 1)

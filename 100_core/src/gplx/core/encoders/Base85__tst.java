@@ -17,7 +17,7 @@ package gplx.core.encoders; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Base85__tst {
 	private final Base85__fxt fxt = new Base85__fxt();
-	@Test  public void Log() {
+	@Test public void Log() {
 		fxt.Test_log(            0, 1);
 		fxt.Test_log(           84, 1);
 		fxt.Test_log(           85, 2);
@@ -29,7 +29,7 @@ public class Base85__tst {
 		fxt.Test_log(     52200625, 5);
 		fxt.Test_log(Int_.Max_value, 5);
 	}
-	@Test  public void To_str() {
+	@Test public void To_str() {
 		fxt.Test_to_str(           0, "!");
 		fxt.Test_to_str(          84, "u");
 		fxt.Test_to_str(          85, "\"!");
@@ -40,7 +40,7 @@ public class Base85__tst {
 		fxt.Test_to_str(    52200624, "uuuu");
 		fxt.Test_to_str(    52200625, "\"!!!!");
 	}
-	@Test  public void XtoStrAry() {
+	@Test public void XtoStrAry() {
 		byte[] ary = new byte[9];
 		fxt.Exec_to_str(ary,      0,     2); // !!#
 		fxt.Exec_to_str(ary,      3,   173); // !#$

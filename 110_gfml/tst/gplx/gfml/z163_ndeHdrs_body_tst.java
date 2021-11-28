@@ -24,22 +24,22 @@ public class z163_ndeHdrs_body_tst {
 			,	GfmlDocLxrs.NdeBodyEnd_lxr()
 			);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Doc("a:{}", fx.nde_().Hnd_("a"));
 	}	
-	@Test  public void Many() {
+	@Test public void Many() {
 		fx.tst_Doc("a:{}b:{}"
 			,	fx.nde_().Hnd_("a")
 			,	fx.nde_().Hnd_("b")
 			);
 	}	
-	@Test  public void Nested() {
+	@Test public void Nested() {
 		fx.tst_Doc("a:{b:{}}"
 			,	fx.nde_().Hnd_("a").Subs_
 			(		fx.nde_().Hnd_("b"))
 			);
 	}	
-	@Test  public void NestedMany() {
+	@Test public void NestedMany() {
 		fx.tst_Doc("a:{b:{}c:{}}"
 			,	fx.nde_().Hnd_("a").Subs_
 			(		fx.nde_().Hnd_("b")

@@ -17,7 +17,7 @@ package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*;
 public class Xow_ns_tst {
 	@Before public void init() {fxt.Clear();} private Xow_ns_fxt fxt = new Xow_ns_fxt();
-	@Test   public void Category() {
+	@Test  public void Category() {
 		fxt	.Expd_id_subjId_(Xow_ns_.Tid__category)
 			.Expd_id_talkId_(Xow_ns_.Tid__category_talk)
 			.Expd_id_subj_(Bool_.Y)
@@ -25,7 +25,7 @@ public class Xow_ns_tst {
 			.Test(Xow_ns_.Tid__category)
 			;
 	}		
-	@Test   public void Category_talk() {
+	@Test  public void Category_talk() {
 		fxt	.Expd_id_subjId_(Xow_ns_.Tid__category)
 			.Expd_id_talkId_(Xow_ns_.Tid__category_talk)
 			.Expd_id_subj_(Bool_.N)
@@ -33,7 +33,7 @@ public class Xow_ns_tst {
 			.Test(Xow_ns_.Tid__category_talk)
 			;
 	}
-	@Test   public void Special() {
+	@Test  public void Special() {
 		fxt	.Expd_id_subjId_(Xow_ns_.Tid__special)
 			.Expd_id_talkId_(Xow_ns_.Tid__special)
 			.Expd_id_subj_(Bool_.Y)

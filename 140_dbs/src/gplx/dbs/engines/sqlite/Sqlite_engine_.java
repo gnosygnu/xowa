@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.primitives.*;	import gplx.dbs.qrys.*; import gplx.dbs.utls.*; import gplx.dbs.engines.*; import gplx.dbs.engines.sqlite.*;
+package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*;
+import gplx.dbs.qrys.*;
+
 public class Sqlite_engine_ {
 	public static void Db_attach(Db_conn p, String alias, String url) {
 		String s = String_.Format("ATTACH '{0}' AS {1};", url, alias);
@@ -74,5 +75,6 @@ public class Sqlite_engine_ {
 	public static String X_date_to_str(DateAdp v) {return v == Date_null ? "" : v.XtoStr_fmt_iso_8561();}
 	public static final    DateAdp Date_null = null;
 	public static final byte Wildcard_byte = Byte_ascii.Hash;
+	public static final String Wildcard_str = "%";
 	public static int Read_only_detection = Io_mgr.Read_only__basic__file;
 }

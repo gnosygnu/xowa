@@ -17,7 +17,7 @@ package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
 import org.junit.*; import gplx.core.strings.*;
 public class Gfo_pattern_tst {
 	@Before public void init() {fxt.Clear();} private Gfo_pattern_itm_fxt fxt = new Gfo_pattern_itm_fxt();
-	@Test  public void Compile() {
+	@Test public void Compile() {
 		fxt.Test_Compile("a"		, fxt.itm_text_("a"));
 		fxt.Test_Compile("*"		, fxt.itm_wild_());
 		fxt.Test_Compile("a*"		, fxt.itm_text_("a"), fxt.itm_wild_());
@@ -25,31 +25,31 @@ public class Gfo_pattern_tst {
 		fxt.Test_Compile("*ab*"		, fxt.itm_wild_(), fxt.itm_text_("ab"), fxt.itm_wild_());
 		fxt.Test_Compile(""			);
 	}
-	@Test  public void Match() {
+	@Test public void Match() {
 		Gfo_pattern pattern = fxt.pattern_("abc");
 		fxt.Test_Match_y(pattern, "abc");
 		fxt.Test_Match_n(pattern, "ab", "a", "bc", "Abc", "");
 	}
-	@Test  public void Match_all() {
+	@Test public void Match_all() {
 		Gfo_pattern pattern = fxt.pattern_("*");
 		fxt.Test_Match_y(pattern, "a", "abc", "");
 	}
-	@Test  public void Match_bgn() {
+	@Test public void Match_bgn() {
 		Gfo_pattern pattern = fxt.pattern_("abc*");
 		fxt.Test_Match_y(pattern, "abc", "abcdef");
 		fxt.Test_Match_n(pattern, "abd", "aabc", "");
 	}
-	@Test  public void Match_end() {
+	@Test public void Match_end() {
 		Gfo_pattern pattern = fxt.pattern_("*abc");
 		fxt.Test_Match_y(pattern, "abc", "xyzabc");
 		fxt.Test_Match_n(pattern, "abcd", "");
 	}
-	@Test  public void Match_mid() {
+	@Test public void Match_mid() {
 		Gfo_pattern pattern = fxt.pattern_("a*c*e");
 		fxt.Test_Match_y(pattern, "ace", "abcde");
 		fxt.Test_Match_n(pattern, "abc", "");
 	}
-	@Test  public void Bug_ctx() {	// PURPOSE.fix: cb was true b/c ctx was not reset correctly
+	@Test public void Bug_ctx() {	// PURPOSE.fix: cb was true b/c ctx was not reset correctly
 		Gfo_pattern pattern = fxt.pattern_("b*");
 		fxt.Test_Match_y(pattern, "bc");
 		fxt.Test_Match_n(pattern, "cb");

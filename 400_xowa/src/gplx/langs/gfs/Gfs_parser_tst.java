@@ -17,50 +17,50 @@ package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Gfs_parser_tst {		
 	@Before public void init() {fxt.Clear();} Gfs_parser_fxt fxt = new Gfs_parser_fxt();
-	@Test   public void Semicolon() {
+	@Test  public void Semicolon() {
 		fxt	.Test_parse("a;", fxt.nde_("a"));
 		fxt	.Test_parse("a;b;c;", fxt.nde_("a"), fxt.nde_("b"), fxt.nde_("c"));
 		fxt	.Test_parse("a_0;", fxt.nde_("a_0"));
 	}
-	@Test   public void Dot() {
+	@Test  public void Dot() {
 		fxt	.Test_parse("a.b;", fxt.nde_("a").Subs_add(fxt.nde_("b")));
 		fxt	.Test_parse("a.b;c.d;", fxt.nde_("a").Subs_add(fxt.nde_("b")), fxt.nde_("c").Subs_add(fxt.nde_("d")));
 	}
-	@Test   public void Parens() {
+	@Test  public void Parens() {
 		fxt	.Test_parse("a();b();", fxt.nde_("a"), fxt.nde_("b"));
 		fxt	.Test_parse("a().b();c().d();", fxt.nde_("a").Subs_add(fxt.nde_("b")), fxt.nde_("c").Subs_add(fxt.nde_("d")));
 	}
-	@Test   public void Num() {
+	@Test  public void Num() {
 		fxt	.Test_parse("a(1,2);", fxt.nde_("a").Atrs_add_many(fxt.val_("1"), fxt.val_("2")));
 	}
-	@Test   public void Quote() {
+	@Test  public void Quote() {
 		fxt	.Test_parse("a('b');", fxt.nde_("a").Atrs_add(fxt.val_("b")));
 	}
-	@Test   public void Quote_escaped() {
+	@Test  public void Quote_escaped() {
 		fxt	.Test_parse("a('b''c''d');", fxt.nde_("a").Atrs_add(fxt.val_("b'c'd")));
 	}
-	@Test   public void Quote_escaped_2() {
+	@Test  public void Quote_escaped_2() {
 		fxt	.Test_parse("a('a''''b');", fxt.nde_("a").Atrs_add(fxt.val_("a''b")));
 	}
-	@Test   public void Quote_mixed() {
+	@Test  public void Quote_mixed() {
 		fxt	.Test_parse("a('b\"c');", fxt.nde_("a").Atrs_add(fxt.val_("b\"c")));
 	}
-	@Test   public void Comma() {
+	@Test  public void Comma() {
 		fxt	.Test_parse("a('b','c','d');", fxt.nde_("a").Atrs_add_many(fxt.val_("b"), fxt.val_("c"), fxt.val_("d")));
 	}
-	@Test   public void Ws() {
+	@Test  public void Ws() {
 		fxt	.Test_parse(" a ( 'b' , 'c' ) ; ", fxt.nde_("a").Atrs_add_many(fxt.val_("b"), fxt.val_("c")));
 	}
-	@Test   public void Comment_slash_slash() {
+	@Test  public void Comment_slash_slash() {
 		fxt	.Test_parse("//z\na;//y\n", fxt.nde_("a"));
 	}
-	@Test   public void Comment_slash_star() {
+	@Test  public void Comment_slash_star() {
 		fxt	.Test_parse("/*z*/a;/*y*/", fxt.nde_("a"));
 	}
-	@Test   public void Curly() {
+	@Test  public void Curly() {
 		fxt	.Test_parse("a{b;}", fxt.nde_("a").Subs_add(fxt.nde_("b")));
 	}
-	@Test   public void Curly_nest() {
+	@Test  public void Curly_nest() {
 		fxt	.Test_parse("a{b{c{d;}}}"
 		, fxt.nde_("a").Subs_add
 		(	fxt.nde_("b").Subs_add
@@ -68,7 +68,7 @@ public class Gfs_parser_tst {
 		(			fxt.nde_("d")
 		))));
 	}
-	@Test   public void Curly_nest_peers() {
+	@Test  public void Curly_nest_peers() {
 		fxt	.Test_parse(String_.Concat_lines_nl
 		(	"a{"
 		,	"  a0{"
@@ -90,14 +90,14 @@ public class Gfs_parser_tst {
 		,	fxt.nde_("a1")
 		));
 	}
-	@Test   public void Curly_dot() {
+	@Test  public void Curly_dot() {
 		fxt	.Test_parse("a{a0.a00;a1.a10;}"
 		, fxt.nde_("a").Subs_add_many
 		(	fxt.nde_("a0").Subs_add_many(fxt.nde_("a00"))
 		,	fxt.nde_("a1").Subs_add_many(fxt.nde_("a10"))
 		));
 	}
-	@Test   public void Eq() {
+	@Test  public void Eq() {
 		fxt	.Test_parse("a='b';", fxt.nde_("a").Atrs_add(fxt.val_("b")));
 		fxt	.Test_parse("a.b.c='d';"
 		,	fxt.nde_("a").Subs_add
@@ -111,7 +111,7 @@ public class Gfs_parser_tst {
 		,			fxt.nde_("e").Atrs_add(fxt.val_("f"))
 		)));
 	}
-	@Test   public void Curly_nest_peers2() {
+	@Test  public void Curly_nest_peers2() {
 		fxt	.Test_parse(String_.Concat_lines_nl
 		(	"a() {"
 		,	"  k1 = 'v1';"
@@ -122,7 +122,7 @@ public class Gfs_parser_tst {
 		)
 		);
 	}
-	@Test   public void Fail() {
+	@Test  public void Fail() {
 		fxt	.Test_parse_fail("a(.);", Gfs_err_mgr.Fail_msg_invalid_lxr);	// (.)
 		fxt	.Test_parse_fail("a..b;", Gfs_err_mgr.Fail_msg_invalid_lxr);	// ..
 		fxt	.Test_parse_fail("a.;", Gfs_err_mgr.Fail_msg_invalid_lxr);		// .;

@@ -17,13 +17,13 @@ package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xomw_regex_parser__tst {
 	private final    Xomw_regex_parser__fxt fxt = new Xomw_regex_parser__fxt();
-	@Test   public void Ary__space() {
+	@Test  public void Ary__space() {
 		fxt.Test__parse_ary(String_.Ary("\\s"), String_.Ary(" "));
 	}
-	@Test   public void Ary__utf8() {
+	@Test  public void Ary__utf8() {
 		fxt.Test__parse_ary(String_.Ary("\\xc2\\xa7", "\\xe0\\xb9\\x90"), String_.Ary("§", "๐"));
 	}
-	@Test   public void Rng__ascii() {
+	@Test  public void Rng__ascii() {
 		fxt.Test__parse_rng("a", "c", String_.Ary("a", "b", "c"));
 	}
 }

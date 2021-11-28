@@ -17,12 +17,12 @@ package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Gfh_parser_tst {		
 	@Before public void init() {fxt.Clear();} private Gfh_parser_fxt fxt = new Gfh_parser_fxt();
-	@Test   public void One() 				{fxt.Test_parse_find_all("<a id='id0'></a>", "id0");}
-	@Test   public void Many() 				{fxt.Test_parse_find_all("<a id='id0'></a><a id='id1'></a><a id='id2'></a>", "id0", "id1", "id2");}
-	@Test   public void Inline() 			{fxt.Test_parse_find_all("<a id='id0'/>", "id0");}
-	@Test   public void Mix()				{fxt.Test_parse_find_all("012<a id='id0'></a>id=id2<a id='id1'/>345<a id='id2'></a>abc", "id0", "id1", "id2");}
-	@Test   public void Quote_double() 		{fxt.Test_parse_find_all("<a id='id''0'/>", "id'0");}
-	@Test   public void Quote_escape() 		{fxt.Test_parse_find_all("<a id='id\\'0'/>", "id'0");}
+	@Test  public void One() 				{fxt.Test_parse_find_all("<a id='id0'></a>", "id0");}
+	@Test  public void Many() 				{fxt.Test_parse_find_all("<a id='id0'></a><a id='id1'></a><a id='id2'></a>", "id0", "id1", "id2");}
+	@Test  public void Inline() 			{fxt.Test_parse_find_all("<a id='id0'/>", "id0");}
+	@Test  public void Mix()				{fxt.Test_parse_find_all("012<a id='id0'></a>id=id2<a id='id1'/>345<a id='id2'></a>abc", "id0", "id1", "id2");}
+	@Test  public void Quote_double() 		{fxt.Test_parse_find_all("<a id='id''0'/>", "id'0");}
+	@Test  public void Quote_escape() 		{fxt.Test_parse_find_all("<a id='id\\'0'/>", "id'0");}
 }
 class Gfh_parser_fxt {
 	public void Clear() {

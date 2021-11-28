@@ -17,12 +17,12 @@ package gplx.xowa.bldrs.filters.core; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Xob_ttl_filter_mgr_srl_tst {
 	@Before public void init() {fxt.Clear();} private final Xob_ttl_filter_mgr_srl_fxt fxt = new Xob_ttl_filter_mgr_srl_fxt();
-	@Test  public void One()			{fxt.Test_parse("a"			, 1, "a");}
-	@Test  public void Two()			{fxt.Test_parse("a\nb"		, 2, "a", "b");}
-	@Test  public void Comment()		{fxt.Test_parse("|x"		, 0);}
-	@Test  public void Comment_many()	{fxt.Test_parse("|x||"		, 0);}
-	@Test  public void Blank()			{fxt.Test_parse("\n"		, 0);}
-	@Test  public void Mix()			{
+	@Test public void One()			{fxt.Test_parse("a"			, 1, "a");}
+	@Test public void Two()			{fxt.Test_parse("a\nb"		, 2, "a", "b");}
+	@Test public void Comment()		{fxt.Test_parse("|x"		, 0);}
+	@Test public void Comment_many()	{fxt.Test_parse("|x||"		, 0);}
+	@Test public void Blank()			{fxt.Test_parse("\n"		, 0);}
+	@Test public void Mix()			{
 		fxt.Test_parse(String_.Concat_lines_nl_skip_last
 		( "|comment 1"
 		, "a"

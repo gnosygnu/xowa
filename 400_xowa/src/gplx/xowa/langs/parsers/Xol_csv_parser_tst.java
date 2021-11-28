@@ -18,11 +18,11 @@ import org.junit.*;
 public class Xol_csv_parser_tst {
 	Xol_csv_parser_fxt fxt = new Xol_csv_parser_fxt();
 	@Before public void init()	{fxt.Clear();}
-	@Test  public void Save()			{fxt.Tst_save("a\r\n\t|d", "a\\r\\n\\t\\u007Cd");}
-	@Test  public void Load()			{fxt.Tst_load("a\r\n\t|d", "a\\r\\n\\t\\u007Cd");}
-	@Test  public void Save_backslash()	{fxt.Tst_save("a\\\\n", "a\\\\\\\\n");}
-	@Test  public void Load_backslash()	{fxt.Tst_load("a\\\\n", "a\\\\\\\\n");}
-	@Test  public void Utf()			{fxt.Tst_load(" ", "\\u00c2\\u00a0");}	// NOTE: 1st String is nbsp;
+	@Test public void Save()			{fxt.Tst_save("a\r\n\t|d", "a\\r\\n\\t\\u007Cd");}
+	@Test public void Load()			{fxt.Tst_load("a\r\n\t|d", "a\\r\\n\\t\\u007Cd");}
+	@Test public void Save_backslash()	{fxt.Tst_save("a\\\\n", "a\\\\\\\\n");}
+	@Test public void Load_backslash()	{fxt.Tst_load("a\\\\n", "a\\\\\\\\n");}
+	@Test public void Utf()			{fxt.Tst_load(" ", "\\u00c2\\u00a0");}	// NOTE: 1st String is nbsp;
 }
 class Xol_csv_parser_fxt {
 	Xol_csv_parser parser = Xol_csv_parser.Instance; Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);

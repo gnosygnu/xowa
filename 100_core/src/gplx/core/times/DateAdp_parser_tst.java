@@ -17,7 +17,7 @@ package gplx.core.times; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class DateAdp_parser_tst {
 	@Before public void init() {} DateAdp_parser_fxt fxt = new DateAdp_parser_fxt();
-	@Test  public void Parse_gplx() {
+	@Test public void Parse_gplx() {
 		fxt.Test_Parse_iso8651_like("2000-01-02T03:04:05.006-05:00"		, 2000, 1, 2, 3, 4, 5, 6);
 		fxt.Test_Parse_iso8651_like("2000-01-02"						, 2000, 1, 2, 0, 0, 0, 0);
 	}

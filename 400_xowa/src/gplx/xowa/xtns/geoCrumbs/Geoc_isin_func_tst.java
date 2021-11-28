@@ -17,7 +17,7 @@ package gplx.xowa.xtns.geoCrumbs; import gplx.*; import gplx.xowa.*; import gplx
 import org.junit.*;
 public class Geoc_isin_func_tst {
 	@Before public void init()				{fxt.Reset();} private Geoc_isin_func_fxt fxt = new Geoc_isin_func_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse("{{#isin:A}}", "<a href=\"/wiki/A\">A</a>");
 	}
 }

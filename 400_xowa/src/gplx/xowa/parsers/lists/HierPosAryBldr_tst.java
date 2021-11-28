@@ -17,43 +17,43 @@ package gplx.xowa.parsers.lists; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class HierPosAryBldr_tst {
 	@Before public void init() {bldr.Init();} HierPosAryBldr bldr = new HierPosAryBldr(256);
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		tst_ary(Int_ary_.Empty);
 	}
-	@Test  public void Move_d() {
+	@Test public void Move_d() {
 		bldr.MoveDown();
 		tst_ary(0);
 	}
-	@Test  public void Move_dd() {
+	@Test public void Move_dd() {
 		bldr.MoveDown();
 		bldr.MoveDown();
 		tst_ary(0, 0);
 	}
-	@Test  public void Move_ddu() {
+	@Test public void Move_ddu() {
 		bldr.MoveDown();
 		bldr.MoveDown();
 		bldr.MoveUp();
 		tst_ary(1);
 	}
-	@Test  public void Move_ddud() {
+	@Test public void Move_ddud() {
 		bldr.MoveDown();
 		bldr.MoveDown();
 		bldr.MoveUp();
 		bldr.MoveDown();
 		tst_ary(1, 0);
 	}
-	@Test  public void Move_dud() {
+	@Test public void Move_dud() {
 		bldr.MoveDown();
 		bldr.MoveUp();
 		bldr.MoveDown();
 		tst_ary(1);
 	}
-	@Test  public void Move_dn() {
+	@Test public void Move_dn() {
 		bldr.MoveDown();
 		bldr.MoveNext();
 		tst_ary(1);
 	}
-	@Test  public void Move_ddn() {
+	@Test public void Move_ddn() {
 		bldr.MoveDown();
 		bldr.MoveDown();
 		bldr.MoveNext();

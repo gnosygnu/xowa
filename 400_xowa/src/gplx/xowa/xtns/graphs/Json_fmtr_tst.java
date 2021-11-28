@@ -17,7 +17,7 @@ package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*; import gplx.core.tests.*;
 public class Json_fmtr_tst {
 	private final    Json_fmtr_fxt fxt = new Json_fmtr_fxt();
-	@Test  public void Comments() {
+	@Test public void Comments() {
 		// basic: // \n
 		fxt.Test_clean("a//b\nc", "ac");
 
@@ -37,7 +37,7 @@ public class Json_fmtr_tst {
 		fxt.Test_clean("\"a\\\"/*b*/c\"");
 	}
 
-	@Test  public void Trailing_commas() {
+	@Test public void Trailing_commas() {
 		// remove: ]
 		fxt.Test_clean("[a,]", "[a]");
 

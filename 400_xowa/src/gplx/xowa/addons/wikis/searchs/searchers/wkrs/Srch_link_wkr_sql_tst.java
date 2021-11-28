@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gpl
 import org.junit.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
 public class Srch_link_wkr_sql_tst {
 	private final    Srch_link_wkr_sql_fxt fxt = new Srch_link_wkr_sql_fxt();
-	@Test   public void Rng() {
+	@Test  public void Rng() {
 		fxt.Run__search("a").Test__eq
 		( "select"
 		);

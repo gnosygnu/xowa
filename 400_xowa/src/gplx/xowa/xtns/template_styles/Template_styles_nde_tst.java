@@ -25,7 +25,7 @@ public class Template_styles_nde_tst {
 	@Before public void init() {
 		fxt.Reset();
 	}
-	@Test  public void Implicit_template() { // PURPOSE: default to template
+	@Test public void Implicit_template() { // PURPOSE: default to template
 		String css = fxt.Make_css_color("red");
 		fxt.Init_page("Template:Test.css", css);
 		fxt.Test_parse
@@ -89,7 +89,7 @@ public class Template_styles_nde_tst {
 		, fxt.Make_style(0, css)
 		);
 	}
-	@Test  public void Fix_single_word_paragraph() { // PURPOSE:make sure block is closed, else single-word paragraphs; ISSUE#:616; DATE:2019-11-18
+	@Test public void Fix_single_word_paragraph() { // PURPOSE:make sure block is closed, else single-word paragraphs; ISSUE#:616; DATE:2019-11-18
 		String css = fxt.Make_css_color("red");
 		fxt.Init_page("Template:Test.css", css);
 		fxt.Parser_fxt().Init_para_y_();

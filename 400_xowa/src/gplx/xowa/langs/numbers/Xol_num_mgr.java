@@ -42,7 +42,7 @@ public class Xol_num_mgr implements Gfo_invk {
 			num = digits_mgr.Replace(tmp_bfr, num, true);
 		return num;
 	}
-	@gplx.Virtual public byte[] Commafy(byte[] num_bry) {
+	public byte[] Commafy(byte[] num_bry) {
 		if (num_bry == null) return Bry_.Empty;	// MW: if ( $number === null ) return '';
 		if (num_grp_fmtr.Mode_is_regx())
 			return num_grp_fmtr.Fmt_regx(tmp_bfr, num_bry);

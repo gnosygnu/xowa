@@ -20,7 +20,7 @@ public class z101_core_ndeInline_tst {
 	@Before public void setup() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.NdeInline_lxr());
 	}
-	@Test  public void One() {
+	@Test public void One() {
 		fx.tst_Doc("a;", fx.nde_().Atru_("a"));
 		fx.tst_Tkn("a;"
 			,	fx.tkn_grp_
@@ -28,7 +28,7 @@ public class z101_core_ndeInline_tst {
 			,		fx.tkn_itm_(";")
 			));
 	}	
-	@Test  public void Many() {
+	@Test public void Many() {
 		fx.tst_Doc("a;b;"
 			,	fx.nde_().Atru_("a")
 			,	fx.nde_().Atru_("b")

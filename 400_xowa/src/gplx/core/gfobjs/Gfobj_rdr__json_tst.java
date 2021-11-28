@@ -37,7 +37,7 @@ public class Gfobj_rdr__json_tst {
 		, fxt.Make__fld_str		("k6", "abc")
 		));
 	}
-	@Test   public void Nested() {
+	@Test  public void Nested() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{ 'a1':'1a'"
 		, ", 'a2':"
@@ -59,7 +59,7 @@ public class Gfobj_rdr__json_tst {
 		, fxt.Make__fld_ary		("a3", 1, 2, 3)
 		));
 	}
-	@Test   public void Array() {
+	@Test  public void Array() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "["
 		, "  [1, 2, 3]"

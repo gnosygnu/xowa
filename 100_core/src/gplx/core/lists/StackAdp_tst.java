@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.lists; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class StackAdp_tst {
-	@Test  public void XtoList() {
+	@Test public void XtoList() {
 		tst_XtoList(1, 2, 3);
 	}
 	void tst_XtoList(int... ary) {

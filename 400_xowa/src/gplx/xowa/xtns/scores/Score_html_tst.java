@@ -20,7 +20,7 @@ public class Score_html_tst {
 	@Before public void init() {
 		fxt.Clear();
 	}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		String wtxt = fxt.Basic__wtxt();
 		fxt.Test__hview(wtxt, fxt.Hdump_n_().Basic__html(Bool_.Y));
 		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Basic__html(Bool_.N), fxt.Basic__html(Bool_.Y));

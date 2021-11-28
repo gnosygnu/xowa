@@ -17,7 +17,7 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*; import gplx.xowa.bldrs.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 public class Xowd_page_tbl_tst {
 	private Xowd_page_tbl_fxt fxt = new Xowd_page_tbl_fxt();
-	@Test  public void Find_search_end() {
+	@Test public void Find_search_end() {
 		fxt.Test_find_search_end("ab", "ac");
 		fxt.Test_find_search_end("ab%", "ac%");
 	}

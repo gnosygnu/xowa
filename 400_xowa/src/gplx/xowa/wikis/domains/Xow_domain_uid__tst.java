@@ -17,7 +17,7 @@ package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Xow_domain_uid__tst {
 	@Before public void init() {fxt.Clear();} private final    Xow_domain_uid__fxt fxt = new Xow_domain_uid__fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test(Xow_domain_uid_.Tid_commons	, "commons.wikimedia.org"	, "", Xow_domain_tid_.Tid__commons);
 		fxt.Test(100							, "en.wikipedia.org"		, "en", Xow_domain_tid_.Tid__wikipedia);
 	}

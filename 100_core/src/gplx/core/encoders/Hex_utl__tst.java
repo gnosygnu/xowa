@@ -17,7 +17,7 @@ package gplx.core.encoders; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Hex_utl__tst {
 	private final    Hex_utl__fxt fxt = new Hex_utl__fxt();
-	@Test  public void To_int() {
+	@Test public void To_int() {
 		fxt.Test__to_int("0"		, 0);
 		fxt.Test__to_int("F"		, 15);
 		fxt.Test__to_int("0F"		, 15);
@@ -29,7 +29,7 @@ public class Hex_utl__tst {
 		fxt.Test__to_int("7FFFFFFF"	, Int_.Max_value);
 		fxt.Test__to_int_bry("100"	, 256);
 	}
-	@Test  public void To_str() {
+	@Test public void To_str() {
 		fxt.Test__to_str(0			, "0");
 		fxt.Test__to_str(15			, "F");
 		fxt.Test__to_str(16			, "10");
@@ -40,11 +40,11 @@ public class Hex_utl__tst {
 		fxt.Test__to_str(15, 2		, "0F");
 		fxt.Test__to_str(15, 3		, "00F");
 	}
-	@Test   public void Write() {
+	@Test  public void Write() {
 		fxt.Test__write("[00000000]", 1, 9,  15, "[0000000F]");
 		fxt.Test__write("[00000000]", 1, 9, 255, "[000000FF]");
 	}
-	@Test   public void Write_bfr() {
+	@Test  public void Write_bfr() {
 		fxt.Test__write_bfr(Bool_.Y,              0, "0");
 		fxt.Test__write_bfr(Bool_.Y,             15, "f");
 		fxt.Test__write_bfr(Bool_.Y,             16, "10");
@@ -53,7 +53,7 @@ public class Hex_utl__tst {
 		fxt.Test__write_bfr(Bool_.Y,            256, "100");
 		fxt.Test__write_bfr(Bool_.Y, Int_.Max_value, "7fffffff");
 	}
-	@Test   public void Encode() {
+	@Test  public void Encode() {
 		fxt.Test__parse_hex_to_bry("E2A7BC", 226, 167, 188);
 	}
 }

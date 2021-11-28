@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.parsers.tables; import gplx.*; import gplx.
 import org.junit.*;
 public class Xomw_table_wkr__tst {
 	private final    Xomw_table_wkr__fxt fxt = new Xomw_table_wkr__fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-"
@@ -31,7 +31,7 @@ public class Xomw_table_wkr__tst {
 		, "</td></tr></table>"
 		));
 	}		
-	@Test  public void Tb__atrs() {
+	@Test public void Tb__atrs() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{|id='1'"
 		, "|-"
@@ -45,7 +45,7 @@ public class Xomw_table_wkr__tst {
 		, "</td></tr></table>"
 		));
 	}		
-	@Test  public void Tc__atrs() {
+	@Test public void Tc__atrs() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|+id='1'|a"
@@ -56,7 +56,7 @@ public class Xomw_table_wkr__tst {
 		, "</caption><tr><td></td></tr></table>"
 		));
 	}
-	@Test  public void Th__double() {
+	@Test public void Th__double() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "!a!!b"
@@ -69,14 +69,14 @@ public class Xomw_table_wkr__tst {
 		, "</th></tr></table>"
 		));
 	}		
-	@Test  public void Blank() {	// COVERS: "empty line, go to next line"
+	@Test public void Blank() {	// COVERS: "empty line, go to next line"
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "   "
 		), String_.Concat_lines_nl_skip_last
 		( "   "
 		));
 	}
-	@Test  public void Tb__indent() {
+	@Test public void Tb__indent() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "::{|"
 		, "|-"
@@ -90,7 +90,7 @@ public class Xomw_table_wkr__tst {
 		, "</td></tr></table></dd></dl></dd></dl>"
 		));
 	}
-	@Test  public void Tb__empty() {	// COVERS: "if (has_opened_tr.Len() == 0) {"
+	@Test public void Tb__empty() {	// COVERS: "if (has_opened_tr.Len() == 0) {"
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|}"
@@ -99,7 +99,7 @@ public class Xomw_table_wkr__tst {
 		, "<tr><td></td></tr></table>"
 		));
 	}
-	@Test  public void Td__empty() {	// PURPOSE: handles (a) failure due to "first_2" array not handling "\n|\n"; (b) missing <tr><td></td></tr>
+	@Test public void Td__empty() {	// PURPOSE: handles (a) failure due to "first_2" array not handling "\n|\n"; (b) missing <tr><td></td></tr>
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-"

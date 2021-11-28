@@ -28,5 +28,5 @@ public abstract class Json_itm_base implements Json_itm {
 		return bfr.To_str_and_clear();
 	}
 	public abstract void Print_as_json(Bry_bfr bfr, int depth);
-	@gplx.Virtual public boolean Data_eq(byte[] comp) {return false;}
+	public boolean Data_eq(byte[] comp) {return false;}
 }

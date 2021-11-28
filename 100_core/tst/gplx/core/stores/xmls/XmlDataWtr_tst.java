@@ -19,17 +19,17 @@ public class XmlDataWtr_tst {
 	@Before public void setup() {
 		wtr = XmlDataWtr.new_();
 	}
-	@Test  public void WriteNodeBgn() {
+	@Test public void WriteNodeBgn() {
 		wtr.WriteNodeBgn("chapter");
 		tst_XStr(wtr, "<chapter />", String_.CrLf);
 	}
-	@Test  public void Attributes() {
+	@Test public void Attributes() {
 		wtr.WriteNodeBgn("chapter");
 		wtr.WriteData("id", 1);
 		wtr.WriteData("name", "first");
 		tst_XStr(wtr, "<chapter id=\"1\" name=\"first\" />", String_.CrLf);
 	}
-	@Test  public void Subs() {
+	@Test public void Subs() {
 		wtr.WriteNodeBgn("title");
 		wtr.WriteNodeBgn("chapters");
 		wtr.WriteNodeBgn("chapter");
@@ -41,7 +41,7 @@ public class XmlDataWtr_tst {
 			,	"</title>", String_.CrLf
 			);
 	}
-	@Test  public void Subs_Iterate() {
+	@Test public void Subs_Iterate() {
 		wtr.WriteNodeBgn("titles");
 		for (int title = 1; title <= 2; title++) {
 			wtr.WriteNodeBgn("title");
@@ -62,7 +62,7 @@ public class XmlDataWtr_tst {
 			,	"</titles>", String_.CrLf
 			);
 	}
-	@Test  public void Peers() {
+	@Test public void Peers() {
 		wtr.WriteNodeBgn("title");
 		wtr.WriteNodeBgn("chapters");
 		wtr.WriteNodeEnd();
@@ -74,7 +74,7 @@ public class XmlDataWtr_tst {
 			,	"</title>", String_.CrLf
 			);
 	}
-	@Test  public void AtrsWithNesting() {
+	@Test public void AtrsWithNesting() {
 		wtr.WriteNodeBgn("title");
 		wtr.WriteData("id", 1);
 		wtr.WriteData("name", "first");

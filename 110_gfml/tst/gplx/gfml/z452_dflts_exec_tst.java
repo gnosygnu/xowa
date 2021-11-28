@@ -19,7 +19,7 @@ public class z452_dflts_exec_tst {
 	@Before public void setup() {
 		type = make_("gfml.point", "point", "x");
 	}	GfmlDefaultItem item; GfmlType type; GfmlDefaultItem_fxt fx_item = GfmlDefaultItem_fxt.new_();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		tst_SubFldDefault(type, "x", null);
 
 		item = fx_item.make_("gfml.point", "x", "10");
@@ -29,7 +29,7 @@ public class z452_dflts_exec_tst {
 		item.Exec_end(type);
 		tst_SubFldDefault(type, "x", null);
 	}
-	@Test  public void Overwrite() {
+	@Test public void Overwrite() {
 		ini_SubFldDefault_add(type, "x", "0");
 		tst_SubFldDefault(type, "x", "0");
 
@@ -40,7 +40,7 @@ public class z452_dflts_exec_tst {
 		item.Exec_end(type);
 		tst_SubFldDefault(type, "x", "0");
 	}
-	@Test  public void CreateDefault() {
+	@Test public void CreateDefault() {
 		tst_SubFldExists(type, "y", false);
 
 		item = fx_item.make_("gfml.point", "y", "10");
@@ -51,7 +51,7 @@ public class z452_dflts_exec_tst {
 		item.Exec_end(type);
 		tst_SubFldExists(type, "y", false);
 	}
-	@Test  public void DefaultTkn() {
+	@Test public void DefaultTkn() {
 		Object[] ary = ini_eval_("0");
 		GfmlTkn varTkn = (GfmlTkn)ary[0];
 		GfmlVarItm varItem = (GfmlVarItm)ary[1];

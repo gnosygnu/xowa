@@ -17,8 +17,8 @@ package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*; import gplx.core.tests.*;
 public class XomwTitle_tst {
 	private final    XomwTitleOld_fxt fxt = new XomwTitleOld_fxt();
-	@Test  public void Alphanum()           {fxt.Test__find_fwd_while_title("0aB"             , 3);}
-	@Test  public void Angle()              {fxt.Test__find_fwd_while_title("0a<"             , 2);}
+	@Test public void Alphanum()           {fxt.Test__find_fwd_while_title("0aB"             , 3);}
+	@Test public void Angle()              {fxt.Test__find_fwd_while_title("0a<"             , 2);}
 }
 class XomwTitleOld_fxt {
 	public void Test__find_fwd_while_title(String src_str, int expd) {

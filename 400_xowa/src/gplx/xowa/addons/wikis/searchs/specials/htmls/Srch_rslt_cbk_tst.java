@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gpl
 import org.junit.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.guis.cbks.js.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_rslt_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Srch_rslt_cbk_fxt fxt = new Srch_rslt_cbk_fxt();
-	@Test   public void Basic() {// ISSUE#:462; DATE:2019-05-12
+	@Test  public void Basic() {// ISSUE#:462; DATE:2019-05-12
 		fxt.Test_add(fxt.Make_rslt(50, "L"), fxt.Make_args_append("xowa_insert_w"   , "w|L")); // insert new
 		fxt.Test_add(fxt.Make_rslt(30, "N"), fxt.Make_args_append("xowa_insert_w"   , "w|N")); // insert below last
 		fxt.Test_add(fxt.Make_rslt(70, "J"), fxt.Make_args_append("w|L"             , "w|J")); // insert above first

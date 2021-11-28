@@ -18,7 +18,7 @@ import org.junit.*;
 public class References_nde_rare_tst {
 	@Before public void init() {fxt.Clear_ref_mgr(); fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Recursive() {	// PURPOSE: handle recursive situations; EX: ja.w:Kソリューション ; ja.w:Template:cite web。; DATE:2014-03-05
+	@Test public void Recursive() {	// PURPOSE: handle recursive situations; EX: ja.w:Kソリューション ; ja.w:Template:cite web。; DATE:2014-03-05
 		fxt.Init_page_create("Template:Recursive", "<ref>{{Recursive}}</ref>");
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		(	"<ref>{{Recursive}}</ref>"
@@ -32,7 +32,7 @@ public class References_nde_rare_tst {
 		,	""
 		));
 	}
-	@Test  public void Backlabel_out_of_range() {	// PURPOSE: handle more backlabels than expected; PAGE:en.w:List_of_Russula_species; DATE:2014-06-07
+	@Test public void Backlabel_out_of_range() {	// PURPOSE: handle more backlabels than expected; PAGE:en.w:List_of_Russula_species; DATE:2014-06-07
 		Ref_html_wtr_cfg cfg = fxt.Wiki().Html_mgr().Html_wtr().Ref_wtr().Cfg();
 		byte[][] old = cfg.Backlabels();
 		cfg.Backlabels_(Bry_.Ary("a"));
@@ -49,7 +49,7 @@ public class References_nde_rare_tst {
 		));
 		cfg.Backlabels_(old);
 	}
-	@Test  public void Tag() { // PURPOSE: #tag can create nested refs; PAGE:en.w:Battle_of_Midway DATE:2014-06-27
+	@Test public void Tag() { // PURPOSE: #tag can create nested refs; PAGE:en.w:Battle_of_Midway DATE:2014-06-27
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "{{#tag:ref|x<ref>y</ref>}}" //"<ref>x<ref>y</ref></ref>"
 		, "<references/>"
@@ -62,7 +62,7 @@ public class References_nde_rare_tst {
 		, ""
 		));
 	}
-	@Test  public void Tag_2() { // PURPOSE: more involved nested refs; PAGE:en.w:Battle_of_Midway DATE:2014-06-27
+	@Test public void Tag_2() { // PURPOSE: more involved nested refs; PAGE:en.w:Battle_of_Midway DATE:2014-06-27
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a<ref name='itm_0'/> b {{#tag:ref|c<ref name='itm_0'>d</ref>}}"	// <ref>c<ref name='itm_0'>d</ref></ref>
 		, "<references/>"
@@ -75,7 +75,7 @@ public class References_nde_rare_tst {
 		, ""
 		));
 	}
-	@Test  public void Dangling_references__nested() { // PURPOSE: handle nested <references/>; PAGE:en.w:Hwair; DATE:2014-06-27
+	@Test public void Dangling_references__nested() { // PURPOSE: handle nested <references/>; PAGE:en.w:Hwair; DATE:2014-06-27
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<ref>a</ref>"
 		, "<references>"
@@ -89,7 +89,7 @@ public class References_nde_rare_tst {
 		, ""
 		));
 	}
-	@Test  public void Dangling_ref_and_stack_overflow() { // PURPOSE: handle dangling <ref> with nested <references/>; PAGE:cs.s:Page:Hejčl,_Jan_-_Pentateuch.pdf/128 DATE:2016-09-01
+	@Test public void Dangling_ref_and_stack_overflow() { // PURPOSE: handle dangling <ref> with nested <references/>; PAGE:cs.s:Page:Hejčl,_Jan_-_Pentateuch.pdf/128 DATE:2016-09-01
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a<ref name='ref_0'>b</ref>c"
 		, "<references><ref name='ref_1'>d"
@@ -103,7 +103,7 @@ public class References_nde_rare_tst {
 		, ""
 		));
 	}
-	@Test  public void Dangling_references() { // PURPOSE:dangling references should escape AND auto-close ISSUE#:583; DATE:2019-10-05
+	@Test public void Dangling_references() { // PURPOSE:dangling references should escape AND auto-close ISSUE#:583; DATE:2019-10-05
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a<ref name='ref_0'>b</ref>c"
 		, "<references>xyz"

@@ -18,25 +18,25 @@ import org.junit.*; import gplx.core.ios.*; import gplx.core.tests.*;
 public class Xosql_dump_parser__tst {		
 	private final    Xosql_dump_parser__fxt fxt = new Xosql_dump_parser__fxt();
 	private static final String table_def = "\n  KEY \n) ENGINE; ";
-	@Test  public void One() {
+	@Test public void One() {
 		fxt.Init(String_.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2);", "2|");
 	}
-	@Test  public void Many() {
+	@Test public void Many() {
 		fxt.Init(String_.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2),(3,4),(5,6);", "2|\n4|\n6|");
 	}
-	@Test  public void Quote_basic() {
+	@Test public void Quote_basic() {
 		fxt.Init(String_.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'a','b');", "a|b|");
 	}
-	@Test  public void Escape_backslash() {
+	@Test public void Escape_backslash() {
 		fxt.Init(String_.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'a\\\\b','c');", "a\\b|c|");
 	}
-	@Test  public void Escape_quote() {
+	@Test public void Escape_quote() {
 		fxt.Init(String_.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'a\"b','c');", "a\"b|c|");
 	}
-	@Test  public void Fld_paren_end() {
+	@Test public void Fld_paren_end() {
 		fxt.Init(String_.Ary("c1", "c2", "c3"), "c2", "c3").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,'Психостимуляторы_(лекарственные_средства)','c');", "Психостимуляторы_(лекарственные_средства)|c|");
 	}
-	@Test  public void Insert_multiple() {
+	@Test public void Insert_multiple() {
 		fxt.Init(String_.Ary("c1", "c2"), "c2").Test__parse(table_def + "INSERT INTO 'tbl_1' VALUES (1,2);INSERT INTO 'tbl_1' VALUES (3,4)", "2|\n4|");
 	}
 }

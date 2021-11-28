@@ -18,12 +18,12 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.core.primitives.*;
 public class Binary_heap_tst {
 	private final    Binary_heap_fxt fxt = new Binary_heap_fxt();
-	@Test  public void Max() {
+	@Test public void Max() {
 		fxt.Init(Bool_.Y);
 		fxt.Exec__add(4, 3, 5, 7, 1, 6, 9, 8, 2);
 		fxt.Test__pop(9, 8, 7, 6, 5, 4, 3, 2, 1);
 	}
-	@Test  public void Min() {
+	@Test public void Min() {
 		fxt.Init(Bool_.N);
 		fxt.Exec__add(4, 3, 5, 7, 1, 6, 9, 8, 2);
 		fxt.Test__pop(1, 2, 3, 4, 5, 6, 7, 8, 9);

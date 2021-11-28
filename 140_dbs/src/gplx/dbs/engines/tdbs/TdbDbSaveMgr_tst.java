@@ -22,7 +22,7 @@ public class TdbDbSaveMgr_tst {
 		db = TdbDatabase.new_(dbInfo);
 		wtr.Clear();
 	}	TdbDatabase db; TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_(); DataWtr wtr = DsvDataWtr_.new_();
-	@Test  public void WriteDbFils() {
+	@Test public void WriteDbFils() {
 		String expd = String_.Concat_lines_crlf
 			(	""	
 			,	""
@@ -38,7 +38,7 @@ public class TdbDbSaveMgr_tst {
 		String actl = wtr.To_str();
 		Tfds.Eq(expd, actl);
 	}
-	@Test  public void WriteDbTbls() {
+	@Test public void WriteDbTbls() {
 		String expd = String_.Concat_lines_crlf
 			(	""
 			,	""
@@ -53,7 +53,7 @@ public class TdbDbSaveMgr_tst {
 		String actl = wtr.To_str();
 		Tfds.Eq(expd, actl);			
 	}
-	@Test  public void WriteTbl() {
+	@Test public void WriteTbl() {
 		String expd = String_.Concat_lines_crlf
 			(	""
 			,	""

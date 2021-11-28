@@ -17,7 +17,7 @@ package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs
 import org.junit.*; import gplx.dbs.sqls.itms.*;
 public class Mem_exec_select_tst {
 	private final Mem_db_fxt__single fxt = new Mem_db_fxt__single();
-	@Test    public void Basic() {
+	@Test   public void Basic() {
 		fxt.Exec__create_tbl("tbl_1", "fld_1");
 		fxt.Exec__insert("tbl_1"
 		, String_.Ary("a_1")
@@ -51,7 +51,7 @@ public class Mem_exec_select_tst {
 		, String_.Ary("a_2")
 		);
 	}
-	@Test    public void Join__single() {
+	@Test   public void Join__single() {
 		fxt.Exec__create_tbl("tbl_1", "fld_a", "fld_1a");
 		fxt.Exec__create_tbl("tbl_2", "fld_a", "fld_2a");
 		fxt.Exec__insert("tbl_1"
@@ -83,7 +83,7 @@ public class Mem_exec_select_tst {
 		, String_.Ary("a_2", "1a_2", "2a_2")
 		);
 	}
-	@Test    public void Join__many() {
+	@Test   public void Join__many() {
 		fxt.Exec__create_tbl("tbl_1", "fld_a", "fld_1a");
 		fxt.Exec__create_tbl("tbl_2", "fld_a", "fld_2a");
 		fxt.Exec__insert("tbl_1"

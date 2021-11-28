@@ -18,18 +18,18 @@ import org.junit.*;
 public class Btrie_slim_itm_tst {
 	private Btrie_slim_itm itm = new Btrie_slim_itm(Byte_.Zero, null, false);
 	@Before public void init() {itm.Clear();}
-	@Test  public void Find_nil() {
+	@Test public void Find_nil() {
 		tst_Find(Byte_ascii.Ltr_a, null);
 	}
-	@Test  public void Add_one() {
+	@Test public void Add_one() {
 		run_Add(Byte_ascii.Ltr_a);
 		tst_Find(Byte_ascii.Ltr_a, "a");
 	}
-	@Test  public void Add_many() {
+	@Test public void Add_many() {
 		run_Add(Byte_ascii.Bang, Byte_ascii.Num_0, Byte_ascii.Ltr_a, Byte_ascii.Ltr_B);
 		tst_Find(Byte_ascii.Ltr_a, "a");
 	}
-	@Test  public void Del() {
+	@Test public void Del() {
 		run_Add(Byte_ascii.Bang, Byte_ascii.Num_0, Byte_ascii.Ltr_a, Byte_ascii.Ltr_B);
 		tst_Find(Byte_ascii.Ltr_a, "a");
 		run_Del(Byte_ascii.Ltr_a);

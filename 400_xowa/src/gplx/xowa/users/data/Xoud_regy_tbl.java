@@ -37,19 +37,19 @@ public class Xoud_regy_tbl {
 		}
 		return this;
 	} private Db_conn conn;
-	@gplx.Virtual public void Insert(String grp, String key, String val) {
+	public void Insert(String grp, String key, String val) {
 		if (stmt_insert == null) stmt_insert = Db_stmt_.new_insert_(conn, Tbl_name, Flds__all);
 		stmt_insert.Clear().Val_str(grp).Val_str(key).Val_str(val).Exec_insert();
 	}
-	@gplx.Virtual public void Update(String grp, String key, String val) {
+	public void Update(String grp, String key, String val) {
 		if (stmt_update == null) stmt_update = Db_stmt_.new_update_(conn, Tbl_name, String_.Ary(Fld_regy_grp, Fld_regy_key), Fld_regy_val);
 		stmt_update.Clear().Val_str(val).Val_str(grp).Val_str(key).Exec_update();
 	}
-	@gplx.Virtual public void Delete(String grp, String key) {
+	public void Delete(String grp, String key) {
 		if (stmt_delete == null) stmt_delete = Db_stmt_.new_delete_(conn, Tbl_name, Fld_regy_grp, Fld_regy_key);
 		stmt_delete.Clear().Val_str(grp).Val_str(key).Exec_delete();
 	}
-	@gplx.Virtual public void Select_by_grp(List_adp rv, String grp) {
+	public void Select_by_grp(List_adp rv, String grp) {
 		if (stmt_select_grp == null) stmt_select_grp = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_regy_grp), Flds__all, Db_qry__select_in_tbl.Order_by_null));
 		Db_rdr rdr = stmt_select_grp.Clear().Val_str(grp).Exec_select__rls_manual();
 		try {
@@ -60,7 +60,7 @@ public class Xoud_regy_tbl {
 		}
 		finally {rdr.Rls();}
 	}
-	@gplx.Virtual public String Select_val(String grp, String key) {
+	public String Select_val(String grp, String key) {
 		if (stmt_select_key == null) stmt_select_key = Db_stmt_.new_select_as_rdr(conn, Db_qry__select_in_tbl.new_(Tbl_name, String_.Ary(Fld_regy_grp, Fld_regy_key), Flds__all, Db_qry__select_in_tbl.Order_by_null));
 		Db_rdr rdr = stmt_select_key.Clear().Val_str(Fld_regy_grp, grp).Val_str(Fld_regy_key, key).Exec_select__rls_manual();
 		String rv = null;

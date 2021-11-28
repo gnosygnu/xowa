@@ -17,7 +17,7 @@ package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.core.tests.*;
 public class Xoh_toc_htmlr__basic__tst {
 	@Before public void init() {fxt.Clear();} private final    Xoh_toc_htmlr__basic__fxt fxt = new Xoh_toc_htmlr__basic__fxt();
-	@Test   public void D1_S0_S0() {
+	@Test  public void D1_S0_S0() {
 		fxt.Init__add(2, "a");
 		fxt.Init__add(2, "b");
 		fxt.Init__add(2, "c");
@@ -32,7 +32,7 @@ public class Xoh_toc_htmlr__basic__tst {
 		, "  </ul>"
 		);
 	}
-	@Test   public void D1_D1_D1() {
+	@Test  public void D1_D1_D1() {
 		fxt.Init__add(2, "a");
 		fxt.Init__add(3, "a_a");
 		fxt.Init__add(4, "a_a_a");
@@ -51,7 +51,7 @@ public class Xoh_toc_htmlr__basic__tst {
 		, "  </ul>"
 		);
 	}
-	@Test   public void D1_D1_S0_U1() {
+	@Test  public void D1_D1_S0_U1() {
 		fxt.Init__add(2, "a");
 		fxt.Init__add(3, "a_a");
 		fxt.Init__add(3, "a_b");
@@ -71,7 +71,7 @@ public class Xoh_toc_htmlr__basic__tst {
 		, "  </ul>"
 		);
 	}
-	@Test   public void D1_D1_U1_D1() {
+	@Test  public void D1_D1_U1_D1() {
 		fxt.Init__add(2, "a");
 		fxt.Init__add(3, "a_a");
 		fxt.Init__add(2, "b");
@@ -93,7 +93,7 @@ public class Xoh_toc_htmlr__basic__tst {
 		, "  </ul>"
 		);
 	}
-	@Test   public void D1_D1_D1_U2() {
+	@Test  public void D1_D1_D1_U2() {
 		fxt.Init__add(2, "a");
 		fxt.Init__add(3, "a_a");
 		fxt.Init__add(4, "a_a_a");
@@ -115,7 +115,7 @@ public class Xoh_toc_htmlr__basic__tst {
 		, "  </ul>"
 		);
 	}
-	@Test   public void D1_D2_U1_D1() {
+	@Test  public void D1_D2_U1_D1() {
 		fxt.Init__add(2, "a");
 		fxt.Init__add(4, "a_a_a_a");
 		fxt.Init__add(3, "a_a_a");
@@ -137,7 +137,7 @@ public class Xoh_toc_htmlr__basic__tst {
 		, "  </ul>"
 		);
 	}
-	@Test   public void Div() {
+	@Test  public void Div() {
 		fxt.Init__init_page("Table of contents", false);
 		fxt.Init__add(2, "a");
 		fxt.Init__add(2, "b");

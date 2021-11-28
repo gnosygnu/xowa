@@ -17,7 +17,7 @@ package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import
 import org.junit.*; import gplx.core.log_msgs.*; import gplx.langs.phps.*;
 public class Xol_mw_parse_tst {
 	private final    Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
-//		@Test   public void Basic() {
+//		@Test  public void Basic() {
 //			fxt.Test_convert("$zh2Hant = array('a' => 'A', 'b' => 'B',);", String_.Concat_lines_nl
 //			( "// zh_zh-hant"
 //			, "app.langs.get('zh').converts.get('zh-hant').add_bulk("
@@ -28,12 +28,12 @@ public class Xol_mw_parse_tst {
 //			, ");"
 //			));
 //		}
-//		@Test   public void Run() {
+//		@Test  public void Run() {
 //			Io_url src_dir = Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\cfg\\lang\\mediawiki\\converts\\");
 //			Io_url trg_dir = Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\cfg\\lang\\");
 //			fxt.Test_run(src_dir, trg_dir);
 //		}
-	@Test   public void Ignore() {
+	@Test  public void Ignore() {
 		fxt.toString();
 	}
 }

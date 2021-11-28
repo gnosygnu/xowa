@@ -46,7 +46,7 @@ public abstract class XomwPPFrame {
 	* @return PPFrame
 	*/
 	public XomwPPFrame newChild(Object args, XomwTitleOld title) {return newChild(args, title, 0);}
-	@gplx.Virtual public XomwPPFrame newChild(Object args, XomwTitleOld title, int indexOffset) {return null;}
+	public XomwPPFrame newChild(Object args, XomwTitleOld title, int indexOffset) {return null;}
 
 	/**
 	* Expand a document tree node, caching the result on its parent with the given key
@@ -56,7 +56,7 @@ public abstract class XomwPPFrame {
 	* @return String
 	*/
 	public String cachedExpand(String key, XomwPPNode root) {return cachedExpand(key, root, 0);}
-	@gplx.Virtual public String cachedExpand(String key, XomwPPNode root, int flags) {return null;}
+	public String cachedExpand(String key, XomwPPNode root, int flags) {return null;}
 
 	/**
 	* Expand a document tree node
@@ -64,8 +64,8 @@ public abstract class XomwPPFrame {
 	* @param int $flags
 	* @return String
 	*/
-	@gplx.Virtual public String expand(Object root) {return expand(root, 0);}
-	@gplx.Virtual public String expand(Object root, int flags) {return null;}
+	public String expand(Object root) {return expand(root, 0);}
+	public String expand(Object root, int flags) {return null;}
 
 	/**
 	* Implode with flags for expand()
@@ -74,7 +74,7 @@ public abstract class XomwPPFrame {
 	* @param String|PPNode $args,...
 	* @return String
 	*/
-	@gplx.Virtual public String implodeWithFlags(String sep, int flags, Object... args) {return null;}
+	public String implodeWithFlags(String sep, int flags, Object... args) {return null;}
 
 	/**
 	* Implode with no flags specified
@@ -82,7 +82,7 @@ public abstract class XomwPPFrame {
 	* @param String|PPNode $args,...
 	* @return String
 	*/
-	@gplx.Virtual public String implode(String sep, Object... args) {return null;}
+	public String implode(String sep, Object... args) {return null;}
 
 	/**
 	* Makes an Object that, when expand()ed, will be the same as one obtained
@@ -91,7 +91,7 @@ public abstract class XomwPPFrame {
 	* @param String|PPNode $args,...
 	* @return PPNode
 	*/
-	@gplx.Virtual public XomwPPNode virtualImplode(String sep, Object... args) {return null;}
+	public XomwPPNode virtualImplode(String sep, Object... args) {return null;}
 
 	/**
 	* Virtual implode with brackets
@@ -101,39 +101,39 @@ public abstract class XomwPPFrame {
 	* @param String|PPNode $args,...
 	* @return PPNode
 	*/
-	@gplx.Virtual public XomwPPNode virtualBracketedImplode(String start, String sep, String end, Object... args) {return null;}
+	public XomwPPNode virtualBracketedImplode(String start, String sep, String end, Object... args) {return null;}
 
 	/**
 	* Returns true if there are no arguments in this frame
 	*
 	* @return boolean
 	*/
-	@gplx.Virtual public boolean isEmpty() {return false;}
+	public boolean isEmpty() {return false;}
 
 	/**
 	* Returns all arguments of this frame
 	* @return array
 	*/
-	@gplx.Virtual public XophpArray getArguments() {return null;}
+	public XophpArray getArguments() {return null;}
 
 	/**
 	* Returns all numbered arguments of this frame
 	* @return array
 	*/
-	@gplx.Virtual public XophpArray getNumberedArguments() {return null;}
+	public XophpArray getNumberedArguments() {return null;}
 
 	/**
 	* Returns all named arguments of this frame
 	* @return array
 	*/
-	@gplx.Virtual public XophpArray getNamedArguments() {return null;}
+	public XophpArray getNamedArguments() {return null;}
 
 	/**
 	* Get an argument to this frame by name
 	* @param int|String $name
 	* @return String|boolean
 	*/
-	@gplx.Virtual public String getArgument(String name) {return null;}
+	public String getArgument(String name) {return null;}
 
 	/**
 	* Returns true if the infinite loop check is OK, false if a loop is detected
@@ -141,13 +141,13 @@ public abstract class XomwPPFrame {
 	* @param Title $title
 	* @return boolean
 	*/
-	@gplx.Virtual public boolean loopCheck(XomwTitleOld title) {return false;}
+	public boolean loopCheck(XomwTitleOld title) {return false;}
 
 	/**
 	* Return true if the frame is a template frame
 	* @return boolean
 	*/
-	@gplx.Virtual public boolean isTemplate() {return false;}
+	public boolean isTemplate() {return false;}
 
 	/**
 	* Set the "volatile" flag.
@@ -160,7 +160,7 @@ public abstract class XomwPPFrame {
 	*
 	* @param boolean $flag
 	*/
-	@gplx.Virtual public void setVolatile(boolean flag) {}
+	public void setVolatile(boolean flag) {}
 
 	/**
 	* Get the "volatile" flag.
@@ -171,7 +171,7 @@ public abstract class XomwPPFrame {
 	* @see self::setVolatile()
 	* @return boolean
 	*/
-	@gplx.Virtual public boolean isVolatile() {return false;}
+	public boolean isVolatile() {return false;}
 
 	/**
 	* Get the TTL of the frame's output.
@@ -185,7 +185,7 @@ public abstract class XomwPPFrame {
 	*
 	* @return int|null
 	*/
-	@gplx.Virtual public int getTTL() {return 0;}
+	public int getTTL() {return 0;}
 
 	/**
 	* Set the TTL of the output of this frame and all of its ancestors.
@@ -196,12 +196,12 @@ public abstract class XomwPPFrame {
 	* @see self::getTTL()
 	* @param int $ttl
 	*/
-	@gplx.Virtual public void setTTL(int ttl) {}
+	public void setTTL(int ttl) {}
 
 	/**
 	* Get a title of frame
 	*
 	* @return Title
 	*/
-	@gplx.Virtual public XomwTitleOld getTitle() {return null;}
+	public XomwTitleOld getTitle() {return null;}
 }

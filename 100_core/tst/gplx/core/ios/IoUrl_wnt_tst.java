@@ -17,61 +17,61 @@ package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class IoUrl_wnt_tst {
 	IoUrlFxt fx = IoUrlFxt.new_();
-	@Test  public void Raw() {
+	@Test public void Raw() {
 		fx.tst_Xto_gplx(Io_url_.wnt_fil_("C:\\dir\\fil.txt"), "C:\\dir\\fil.txt");
 		fx.tst_Xto_gplx(Io_url_.wnt_dir_("C:\\dir\\"), "C:\\dir\\");
 		fx.tst_Xto_gplx(Io_url_.wnt_dir_("C:\\dir")	, "C:\\dir\\"); // add \
 	}
-	@Test  public void Xto_api() {
+	@Test public void Xto_api() {
 		fx.tst_Xto_api(Io_url_.wnt_fil_("C:\\fil.txt"), "C:\\fil.txt");
 		fx.tst_Xto_api(Io_url_.wnt_dir_("C:\\dir\\"), "C:\\dir");	// del \
 		fx.tst_Xto_api(Io_url_.wnt_dir_("C:"), "C:");
 	}
-	@Test  public void OwnerRoot() {
+	@Test public void OwnerRoot() {
 		fx.tst_OwnerRoot(Io_url_.wnt_dir_("C:\\dir")		, "C:\\");
 		fx.tst_OwnerRoot(Io_url_.wnt_dir_("C:\\fil.png")	, "C:\\");
 		fx.tst_OwnerRoot(Io_url_.wnt_dir_("C:")			, "C:\\");
 	}
-	@Test  public void IsDir() {
+	@Test public void IsDir() {
 		fx.tst_IsDir(Io_url_.wnt_dir_("C:\\dir\\"), true);
 		fx.tst_IsDir(Io_url_.wnt_fil_("C:\\dir"), false);
 		fx.tst_IsDir(Io_url_.wnt_fil_("C:\\fil.txt"), false);
 	}
-	@Test  public void OwnerDir() {
+	@Test public void OwnerDir() {
 		fx.tst_OwnerDir(Io_url_.wnt_dir_("C:\\dir\\sub1"), Io_url_.wnt_dir_("C:\\dir"));
 		fx.tst_OwnerDir(Io_url_.wnt_fil_("C:\\fil.txt"), Io_url_.wnt_dir_("C:"));
 		fx.tst_OwnerDir(Io_url_.wnt_dir_("C:"), Io_url_.Empty);
 //			fx.tst_OwnerDir(Io_url_.wnt_fil_("press enter to select this folder"), Io_url_.Empty);
 	}
-	@Test  public void NameAndExt() {
+	@Test public void NameAndExt() {
 		fx.tst_NameAndExt(Io_url_.wnt_fil_("C:\\fil.txt"), "fil.txt");
 		fx.tst_NameAndExt(Io_url_.wnt_dir_("C:\\dir"), "dir\\");
 	}
-	@Test  public void NameOnly() {
+	@Test public void NameOnly() {
 		fx.tst_NameOnly(Io_url_.wnt_fil_("C:\\fil.txt"), "fil");
 		fx.tst_NameOnly(Io_url_.wnt_dir_("C:\\dir"), "dir");
 		fx.tst_NameOnly(Io_url_.wnt_dir_("C:"), "C");
 	}
-	@Test  public void Ext() {
+	@Test public void Ext() {
 		fx.tst_Ext(Io_url_.wnt_fil_("C:\\fil.txt"), ".txt"); // fil
 		fx.tst_Ext(Io_url_.wnt_fil_("C:\\fil.multiple.txt"), ".txt"); // multiple ext
 		fx.tst_Ext(Io_url_.wnt_fil_("C:\\fil"), ""); // no ext
 		fx.tst_Ext(Io_url_.wnt_dir_("C:\\dir"), "\\"); // dir
 	}
-	@Test  public void GenSubDir_nest() {
+	@Test public void GenSubDir_nest() {
 		fx.tst_GenSubDir_nest(Io_url_.wnt_dir_("C:"), fx.ary_("dir1", "sub1"), Io_url_.wnt_dir_("C:\\dir1\\sub1"));
 	}
-	@Test  public void GenNewExt() {
+	@Test public void GenNewExt() {
 		fx.tst_GenNewExt(Io_url_.wnt_fil_("C:\\fil.gif"), ".png", Io_url_.wnt_fil_("C:\\fil.png")); // basic
 		fx.tst_GenNewExt(Io_url_.wnt_fil_("C:\\fil.tst.gif"), ".png", Io_url_.wnt_fil_("C:\\fil.tst.png")); // last in multiple dotted
 	}
-	@Test  public void GenRelUrl_orEmpty() {
+	@Test public void GenRelUrl_orEmpty() {
 		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_fil_("C:\\root\\fil.txt")		, Io_url_.wnt_dir_("C:\\root")	, "fil.txt"); // fil
 		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_dir_("C:\\root\\dir")			, Io_url_.wnt_dir_("C:\\root")	, "dir\\"); // dir
 		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_fil_("C:\\root\\dir\\fil.txt")	, Io_url_.wnt_dir_("C:\\root")	, "dir\\fil.txt"); // fil: nested1			
 		fx.tst_GenRelUrl_orEmpty(Io_url_.wnt_fil_("C:\\root\\dir\\fil.txt")	, Io_url_.wnt_dir_("C:")			, "root\\dir\\fil.txt"); // fil: nested2
 	}
-	@Test  public void GenParallel() {
+	@Test public void GenParallel() {
 		fx.tst_GenParallel(Io_url_.wnt_fil_("C:\\root1\\fil.txt"), Io_url_.wnt_dir_("C:\\root1"), Io_url_.wnt_dir_("D:\\root2"), Io_url_.wnt_fil_("D:\\root2\\fil.txt"));
 		fx.tst_GenParallel(Io_url_.wnt_dir_("C:\\root1\\dir")	, Io_url_.wnt_dir_("C:\\root1"), Io_url_.wnt_dir_("D:\\root2"), Io_url_.wnt_dir_("D:\\root2\\dir"));
 	}

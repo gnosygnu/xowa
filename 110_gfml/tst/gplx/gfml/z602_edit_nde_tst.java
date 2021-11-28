@@ -17,6 +17,6 @@ package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z602_edit_nde_tst {
 	GfmlUpdateFx fx = GfmlUpdateFx.new_();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 	}
 }

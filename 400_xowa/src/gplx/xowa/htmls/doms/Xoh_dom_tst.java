@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.doms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
 import org.junit.*;
 public class Xoh_dom_tst {
-	@Test  public void Find_atr() {
+	@Test public void Find_atr() {
 		String src = "a <nde0 atr0=\"val0\" atr1=\"val1\"/> b <nde1 atr0=\"val3\" atr1=\"val4\"/> c";
 		tst_Find(src, "nde0", "atr0", "val0", "atr1", "val1");	// match nde0
 		tst_Find(src, "nde1", "atr0", "val3", "atr1", "val4");	// match nde1
@@ -24,7 +24,7 @@ public class Xoh_dom_tst {
 		tst_Find(src, "nde0", "atr2", "val0", "atr1", null);	// wrong key
 		tst_Find(src, "nde2", "atr0", "val0", "atr1", null);	// wrong nde
 	}
-	@Test  public void Title_by_href() {// PURPOSE: handle content-editable=n and finding file directly for download
+	@Test public void Title_by_href() {// PURPOSE: handle content-editable=n and finding file directly for download
 		Title_by_href_tst
 		( "/wiki/File:Bazille,_Fr%C3%A9d%C3%A9ric_%7E_Le_Petit_Jardinier_%28The_Little_Gardener%29,_c1866-67_oil_on_canvas_Museum_of_Fine_Arts,_Houston.jpg"
 		, "<a href=\"lure\" xowa_title=\"wrong\"></a><a href=\"/wiki/File:Bazille,_Fr%C3%A9d%C3%A9ric_%7E_Le_Petit_Jardinier_%28The_Little_Gardener%29,_c1866-67_oil_on_canvas_Museum_of_Fine_Arts,_Houston.jpg\" xowa_title=\"find_me\"></a>"

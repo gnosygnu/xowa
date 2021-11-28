@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 public class Int_ary__tst {
 	private Int_ary__fxt fxt = new Int_ary__fxt();
 
-	@Test  public void Parse() {
+	@Test public void Parse() {
 		fxt.Test__Parse("1,2,3"                        , 3, Int_ary_.Empty,   1,   2,   3);
 		fxt.Test__Parse("123,321,213"                  , 3, Int_ary_.Empty, 123, 321, 213);
 		fxt.Test__Parse(" 1,  2,3"                     , 3, Int_ary_.Empty,   1,   2,   3);
@@ -31,7 +31,7 @@ public class Int_ary__tst {
 		fxt.Test__Parse("1-2,"                         , 1, Int_ary_.Empty);
 	}
 
-	@Test  public void Parse_list_or_() {
+	@Test public void Parse_list_or_() {
 		fxt.Test__Parse_or("1", 1);
 		fxt.Test__Parse_or("123", 123);
 		fxt.Test__Parse_or("1,2,123", 1, 2, 123);

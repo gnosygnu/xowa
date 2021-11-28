@@ -18,7 +18,7 @@ import org.junit.*;
 public class References_nde_basic_tst {	
 	@Before public void init() {fxt.Clear_ref_mgr();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref>x</ref>"
 			, "<ref>y</ref>"
@@ -36,7 +36,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Name_dif() {
+	@Test public void Name_dif() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref name='r_x'>x</ref>"
 			, "<ref name='r_y'>y</ref>"
@@ -54,7 +54,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Name_same() {
+	@Test public void Name_same() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref name='r_x'>x</ref>"
 			, "<ref name='r_y'>y</ref>"
@@ -71,7 +71,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Name_same_text_in_last_ref() {	// WP:Hundred Years' War
+	@Test public void Name_same_text_in_last_ref() {	// WP:Hundred Years' War
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref name='ref_a'></ref>"
 			, "<ref name='ref_a'></ref>"
@@ -87,7 +87,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void List_ignored() {
+	@Test public void List_ignored() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref>*x</ref>"
 			, "<references/>"
@@ -99,7 +99,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Name_mixed_case() {
+	@Test public void Name_mixed_case() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref NAME=A>x</ref>"
 			, "<ref Name=A>y</ref>"
@@ -113,7 +113,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Name2() { // PURPOSE: make sure inline tag matches open tag
+	@Test public void Name2() { // PURPOSE: make sure inline tag matches open tag
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "a<ref name=name_0>b</ref>"
 			, "b<ref name=name_0/>"
@@ -127,7 +127,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void References_refs() {
+	@Test public void References_refs() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "a<ref group=group_0 name=name_0/>"
 			, "<references group=group_0>"
@@ -141,7 +141,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Nested() {	// PURPOSE: nested ref was creating 3rd [1]
+	@Test public void Nested() {	// PURPOSE: nested ref was creating 3rd [1]
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "a<ref name=r_x/>"
 			, "b<ref name=r_x/>"
@@ -157,7 +157,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Key_ignore_nl_tab() {	// PURPOSE: \n in ref_name should be escaped to \s; PAGE:en.w:Self-Transcendence 3100 Mile Race
+	@Test public void Key_ignore_nl_tab() {	// PURPOSE: \n in ref_name should be escaped to \s; PAGE:en.w:Self-Transcendence 3100 Mile Race
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref name=\"name\na\">b</ref>"
 			, "<references/>"
@@ -169,7 +169,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test   public void Empty_group_before_ref() {	// PURPOSE: empty grp before itm should not throw error; DATE:2013-02-18; EX: w:Help:External links and references; Johnstown,_Colorado
+	@Test  public void Empty_group_before_ref() {	// PURPOSE: empty grp before itm should not throw error; DATE:2013-02-18; EX: w:Help:External links and references; Johnstown,_Colorado
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
 			( "<references/><references/>a<ref>test</ref>"
 			, "<references/>"
@@ -181,7 +181,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Follow__main_and_follow_have_text() {
+	@Test public void Follow__main_and_follow_have_text() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref name='ref_a'>x</ref>"
 			, "<ref>y</ref>"
@@ -197,7 +197,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Follow__follow_only_has_text() {// ISSUE#:555; DATE:2019-09-01
+	@Test public void Follow__follow_only_has_text() {// ISSUE#:555; DATE:2019-09-01
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref name='ref1'/>"
 			, "<ref follow='ref1'>abc</ref>"
@@ -210,7 +210,7 @@ public class References_nde_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Follow__main_only_has_text() {
+	@Test public void Follow__main_only_has_text() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref name='ref1'>abc</ref>"
 			, "<ref follow='ref1'></ref>"

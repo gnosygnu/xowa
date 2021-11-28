@@ -17,24 +17,24 @@ package gplx.core.caches; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Lru_cache_tst {
 	private final    Lru_cache_fxt fxt = new Lru_cache_fxt();
-	@Test  public void Get_one() {
+	@Test public void Get_one() {
 		fxt.Exec__set("a", 5);
 		fxt.Test__get_y("a");
 	}
-	@Test  public void Pop_one() {
+	@Test public void Pop_one() {
 		fxt.Exec__set("a", 10);
 		fxt.Exec__set("b", 10);
 		fxt.Test__get_n("a");
 		fxt.Test__get_y("b");
 	}
-	@Test  public void Add_many() {
+	@Test public void Add_many() {
 		fxt.Exec__set("a", 4);
 		fxt.Exec__set("b", 3);
 		fxt.Exec__set("c", 2);
 		fxt.Exec__set("d", 1);
 		fxt.Test__get_y("a", "b", "c", "d");
 	}
-	@Test  public void Pop_many() {
+	@Test public void Pop_many() {
 		fxt.Exec__set("a", 4);
 		fxt.Exec__set("b", 3);
 		fxt.Exec__set("c", 2);
@@ -43,13 +43,13 @@ public class Lru_cache_tst {
 		fxt.Test__get_y("c", "d", "e");
 		fxt.Test__get_n("a", "b");
 	}
-	@Test  public void Set_repeatedly() {
+	@Test public void Set_repeatedly() {
 		fxt.Exec__set("a", "a1", 10);
 		fxt.Exec__set("a", "a2", 10);
 		fxt.Exec__set("a", "a3", 10);
 		fxt.Test__get_val("a", "a3");
 	}
-	@Test  public void Set_bumps_priority() {
+	@Test public void Set_bumps_priority() {
 		fxt.Exec__set("a", 2);
 		fxt.Exec__set("b", 3);
 		fxt.Exec__set("c", 2);
@@ -58,14 +58,14 @@ public class Lru_cache_tst {
 		fxt.Test__get_y("a", "d");
 		fxt.Test__get_n("b", "c");
 	}
-	@Test  public void Del() {
+	@Test public void Del() {
 		fxt.Exec__set("a", 2);
 		fxt.Exec__set("b", 2);
 		fxt.Exec__del("b");
 		fxt.Test__get_y("a");
 		fxt.Test__get_n("b");
 	}
-	@Test  public void Clear() {
+	@Test public void Clear() {
 		fxt.Exec__set("a", 2);
 		fxt.Exec__set("b", 2);
 		fxt.Exec__clear();

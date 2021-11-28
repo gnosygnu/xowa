@@ -24,19 +24,19 @@ public class z161_ndeHdrs_inline_tst {
 			,	GfmlDocLxrs.Whitespace_lxr()
 			);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Doc("a:;", fx.nde_().Hnd_("a"));
 		fx.tst_Tkn("a:;"
 			,	fx.tkn_grp_ary_("a", ":", ";")
 			);
 	}
-	@Test  public void Many() {
+	@Test public void Many() {
 		fx.tst_Doc("a:;b:;"
 			, fx.nde_().Hnd_("a")
 			, fx.nde_().Hnd_("b")
 			);
 	}
-	@Test  public void Ws() {
+	@Test public void Ws() {
 		fx.tst_Tkn("a : ;"
 			,	fx.tkn_grp_ary_("a", " ", ":", " ", ";")
 			);

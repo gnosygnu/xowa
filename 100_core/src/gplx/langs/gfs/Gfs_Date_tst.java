@@ -21,10 +21,10 @@ public class Gfs_Date_tst {
 		fx.AddObj(DateAdp_.Gfs, "Date_");
 		Datetime_now.Manual_y_();
 	}	GfsCoreFxt fx;
-	@Test  public void Now() {
+	@Test public void Now() {
 		fx.tst_MsgStr(fx.msg_(String_.Ary("Date_", "Now")), DateAdp_.parse_gplx("2001-01-01 00:00:00.000"));
 	}
-	@Test  public void Add_day() {
+	@Test public void Add_day() {
 		fx.tst_MsgStr(fx.msg_(String_.Ary("Date_", "Now", "Add_day"), Keyval_.new_("days", 1)), DateAdp_.parse_gplx("2001-01-02 00:00:00.000"));
 	}
 }

@@ -17,11 +17,11 @@ package gplx.xowa.mediawiki.includes.parsers.hrs; import gplx.*; import gplx.xow
 import org.junit.*;
 public class Xomw_hr_wkr__tst {
 	private final    Xomw_hr_wkr__fxt fxt = new Xomw_hr_wkr__fxt();
-	@Test  public void Basic()       {fxt.Test__parse("a\n-----b"                         , "a\n<hr />b");}
-	@Test  public void Extend()      {fxt.Test__parse("a\n------b"                        , "a\n<hr />b");}
-	@Test  public void Not_found()   {fxt.Test__parse("a\n----b"                          , "a\n----b");}
-	@Test  public void Bos()         {fxt.Test__parse("-----a"                            , "<hr />a");}
-	@Test  public void Bos_and_mid() {fxt.Test__parse("-----a\n-----b"                    , "<hr />a\n<hr />b");}
+	@Test public void Basic()       {fxt.Test__parse("a\n-----b"                         , "a\n<hr />b");}
+	@Test public void Extend()      {fxt.Test__parse("a\n------b"                        , "a\n<hr />b");}
+	@Test public void Not_found()   {fxt.Test__parse("a\n----b"                          , "a\n----b");}
+	@Test public void Bos()         {fxt.Test__parse("-----a"                            , "<hr />a");}
+	@Test public void Bos_and_mid() {fxt.Test__parse("-----a\n-----b"                    , "<hr />a\n<hr />b");}
 }
 class Xomw_hr_wkr__fxt {
 	private final    XomwParserBfr pbfr = new XomwParserBfr();

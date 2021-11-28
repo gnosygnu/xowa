@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
 import org.junit.*;
 public class IptKeyStrMgr_tst {
-	@Test  public void KeyBasic() {
+	@Test public void KeyBasic() {
 		tst_XtoUiStr(IptKey_.A, "a");
 		tst_XtoUiStr(IptKey_.Z, "z");
 		tst_XtoUiStr(IptKey_.Shift.Add(IptKey_.A), "A");
@@ -43,7 +43,7 @@ public class IptKeyStrMgr_tst {
 		tst_XtoUiStrShifted(IptKey_.OpenBracket, "[", "{");
 		tst_XtoUiStrShifted(IptKey_.CloseBracket, "]", "}");
 	}
-	@Test  public void FetchByKeyPress() {
+	@Test public void FetchByKeyPress() {
 		tst_FetchByKeyPress('a', IptKey_.add_(IptKey_.A));
 		tst_FetchByKeyPress('A', IptKey_.add_(IptKey_.A, IptKey_.Shift));
 		tst_FetchByKeyPress('1', IptKey_.add_(IptKey_.D1));

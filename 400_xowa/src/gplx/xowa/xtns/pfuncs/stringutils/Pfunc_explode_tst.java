@@ -17,10 +17,10 @@ package gplx.xowa.xtns.pfuncs.stringutils; import gplx.*; import gplx.xowa.*; im
 import org.junit.*;
 public class Pfunc_explode_tst {
 	@Before public void init()						{fxt.Reset();} private final Xop_fxt fxt = Xop_fxt.new_nonwmf();
-	@Test   public void Idx_1st()					{fxt.Test_parse_template("{{#explode:a,b,c|,|0}}"				, "a");}
-	@Test   public void Idx_mid()					{fxt.Test_parse_template("{{#explode:a,b,c|,|1}}"				, "b");}
-	@Test   public void Idx_nth()					{fxt.Test_parse_template("{{#explode:a,b,c|,|2}}"				, "c");}
-	@Test   public void Idx_missing()				{fxt.Test_parse_template("{{#explode:a,b,c|,|3}}"				, "");}
-	@Test   public void Idx_neg()					{fxt.Test_parse_template("{{#explode:a,b,c|,|-1}}"				, "b");}
-	@Test   public void Find_defaults_to_space()	{fxt.Test_parse_template("{{#explode:a b c||0}}"				, "a");}
+	@Test  public void Idx_1st()					{fxt.Test_parse_template("{{#explode:a,b,c|,|0}}"				, "a");}
+	@Test  public void Idx_mid()					{fxt.Test_parse_template("{{#explode:a,b,c|,|1}}"				, "b");}
+	@Test  public void Idx_nth()					{fxt.Test_parse_template("{{#explode:a,b,c|,|2}}"				, "c");}
+	@Test  public void Idx_missing()				{fxt.Test_parse_template("{{#explode:a,b,c|,|3}}"				, "");}
+	@Test  public void Idx_neg()					{fxt.Test_parse_template("{{#explode:a,b,c|,|-1}}"				, "b");}
+	@Test  public void Find_defaults_to_space()	{fxt.Test_parse_template("{{#explode:a b c||0}}"				, "a");}
 }

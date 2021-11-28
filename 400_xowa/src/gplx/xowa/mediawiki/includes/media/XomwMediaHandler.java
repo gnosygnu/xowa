@@ -315,7 +315,7 @@ public abstract class XomwMediaHandler {
 	* @param File $file
 	* @return boolean
 	*/
-	@gplx.Virtual public boolean canRender(XomwFile file) {
+	public boolean canRender(XomwFile file) {
 		return true;
 	}
 

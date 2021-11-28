@@ -13,11 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.windows; import gplx.Err_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.controls.gxws.GxwElem;
+import gplx.gfui.controls.gxws.GxwTextMemo_lang;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.FocusTraversalPolicy;
-import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*;
 public class GfuiWinFocusMgr {
 	public List_adp SubElems() {return subElems;} List_adp subElems = List_adp_.New();
 	public void InitForm() {this.Init(win);}
@@ -71,7 +75,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 			GfuiElem elem = null;
 			try {elem = (GfuiElem)elems.Get_at(idx);}
 			catch (Exception e) {
-				System.out.println(idx);
+				System.out.println("getComponentAfter:" + e.getMessage() + ":" + idx);
 				Err_.Noop(e);
 			}
 			if (elem == null) return c; // FIXME: why is elem null?; REP: add new tab through history and then close out
@@ -107,7 +111,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 				}
 			}
 			catch (Exception e) {
-				System.out.println(idx);
+				System.out.println("getComponentBefore:" + e.getMessage() + ":" + idx);
 				Err_.Noop(e);				
 			}
 			if (elem == null) return c; // FIXME: why is elem null?; REP: add new tab through history and then close out

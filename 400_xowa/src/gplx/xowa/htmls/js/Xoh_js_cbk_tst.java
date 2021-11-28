@@ -18,7 +18,7 @@ import org.junit.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.guis.views.*;
 public class Xoh_js_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_js_cbk_fxt fxt = new Xoh_js_cbk_fxt();
-	@Test   public void Get_title() {
+	@Test  public void Get_title() {
 		fxt.Fxt().Init_page_create("exists");
 		fxt.Test_get_title("exists", "1" , "0" , Int_.To_str(Int_.Min_value), "Exists", "false", "0001-01-01 00:00:00", "0");
 		fxt.Test_get_title("absent", "0", "-1", Int_.To_str(Int_.Min_value), null	, "false", "0001-01-01 00:00:00", "0");

@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xof_file_ext__pdf_tst {
 	@Before public void init() {fxt.Reset();} private final Xof_file_fxt fxt = new Xof_file_fxt();
 	@After public void term() {fxt.Rls();}
-	@Test  public void Copy_thumb() {// PURPOSE: download pdf thumb only; [[File:Physical world.pdf|thumb]]
+	@Test public void Copy_thumb() {// PURPOSE: download pdf thumb only; [[File:Physical world.pdf|thumb]]
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.pdf", 2200, 1700));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_thumb("A.pdf", 220, 170));
 		fxt.Exec_get(Xof_exec_arg.new_thumb("A.pdf", 220));

@@ -19,7 +19,7 @@ public class IptBndMgr_tst {
 	@Before public void setup() {
 		fx = new IptBndMgr_fx();
 	}	IptBndMgr_fx fx;
-	@Test  public void Add() {
+	@Test public void Add() {
 		fx.ini_Clear().run_Add("key.a").tst_Exec_same("key.a").tst_Exec_none("key.b");
 		fx.ini_Clear().run_Add("key.ctrl+key.a").tst_Exec_same("key.ctrl+key.a").tst_Exec_none("key.ctrl").tst_Exec_none("key.a");
 		fx.ini_Clear().run_Add("key.a|key.b").tst_Exec_same("key.a").tst_Exec_same("key.b").tst_Exec_none("key.c");

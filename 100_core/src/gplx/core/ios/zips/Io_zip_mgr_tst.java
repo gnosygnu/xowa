@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.ios.zips; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
 import org.junit.*;
 public class Io_zip_mgr_tst {
-	@Test  public void Zip_unzip() {
+	@Test public void Zip_unzip() {
 		Zip_unzip_tst("abcdefghijklmnopqrstuvwxyz"); 
 	}
 	private void Zip_unzip_tst(String s) {

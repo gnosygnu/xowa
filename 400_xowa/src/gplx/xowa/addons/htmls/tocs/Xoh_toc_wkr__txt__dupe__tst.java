@@ -17,20 +17,20 @@ package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.core.tests.*;
 public class Xoh_toc_wkr__txt__dupe__tst {
 	@Before public void init() {fxt.Clear();} private final    Xoh_toc_wkr__txt__fxt fxt = new Xoh_toc_wkr__txt__fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__anch("a"		, "a");
 		fxt.Test__anch("a"		, "a_2");
 	}
-	@Test   public void Case_insensitive() {
+	@Test  public void Case_insensitive() {
 		fxt.Test__anch("a"		, "a");
 		fxt.Test__anch("A"		, "A_2");
 	}
-	@Test   public void Autonumber_exists() {	// PAGE:fr.w:Itanium; EX: Itanium,Itanium_2,Itanium
+	@Test  public void Autonumber_exists() {	// PAGE:fr.w:Itanium; EX: Itanium,Itanium_2,Itanium
 		fxt.Test__anch("a"		, "a");
 		fxt.Test__anch("a_2"	, "a_2");
 		fxt.Test__anch("a"		, "a_3");
 	}
-	@Test   public void Autonumber_exists_2() {
+	@Test  public void Autonumber_exists_2() {
 		fxt.Test__anch("a_2"	, "a_2");
 		fxt.Test__anch("a"		, "a");
 		fxt.Test__anch("a"		, "a_3");

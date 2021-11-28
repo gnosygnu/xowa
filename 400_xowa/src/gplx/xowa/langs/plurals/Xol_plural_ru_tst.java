@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.langs.plurals; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import org.junit.*;
 public class Xol_plural_ru_tst {
-	@Test  public void Plural() {
+	@Test public void Plural() {
 		Tst(1, String_.Ary_empty, null);			// 0 forms
 		Tst(1, String_.Ary("a", "b"), "a");			// 2 forms; singluar
 		Tst(2, String_.Ary("a", "b"), "b");			// 2 forms; plural

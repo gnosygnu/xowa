@@ -19,12 +19,12 @@ import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.files.imgs.*;
 import gplx.fsdb.meta.*;
 public class Fs_root_wkr_tst {
 	@Before public void init() {fxt.Reset();} private Fs_root_wkr_fxt fxt = new Fs_root_wkr_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init_fs("mem/dir/7/70/A.png", 200, 100);
 		fxt.Test_get("A.png", fxt.itm_().Url_("mem/dir/7/70/A.png").Size_(200, 100));
 		fxt.Test_db("A.png", fxt.itm_().Init(1, "mem/dir/7/70/A.png", 200, 100));
 	}
-	@Test   public void Recurse() {
+	@Test  public void Recurse() {
 		fxt.Init_fs("mem/dir/A/A1.png", 200, 100);
 		fxt.Test_get("A1.png", fxt.itm_().Url_("mem/dir/A/A1.png").Size_(200, 100));
 	}

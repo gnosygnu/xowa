@@ -18,7 +18,7 @@ import org.junit.*; import gplx.xowa.files.*;
 public class Xof_meta_fil_tst {
 	Xof_meta_fil_fxt fxt = new Xof_meta_fil_fxt();
 	@Before public void init() {fxt.Ini();}
-	@Test  public void Bld_url() {fxt.Bld_url("mem/root/", "abcdef", 3, "mem/root/a/b/abc.csv");}
+	@Test public void Bld_url() {fxt.Bld_url("mem/root/", "abcdef", 3, "mem/root/a/b/abc.csv");}
 }
 class Xof_meta_fil_fxt {
 	byte[] md5_(byte[] name) {return Xof_file_wkr_.Md5(name);}

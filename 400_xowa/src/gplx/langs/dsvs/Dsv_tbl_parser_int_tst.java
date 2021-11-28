@@ -17,7 +17,7 @@ package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Dsv_tbl_parser_int_tst {		
 	private Dsv_mok_fxt fxt = new Dsv_mok_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt	.Test_load(String_.Concat_lines_nl_skip_last
 		( "a|1|3"
 		, "b|2|4"

@@ -40,20 +40,20 @@ public class Pfunc_filepath_tst {
 		en_wiki.File_mgr().Repo_mgr().Add_repo(Bry_.new_a7("src_commons"), Bry_.new_a7("trg_commons"));
 		Io_mgr.Instance.CreateDir(Io_url_.new_dir_("mem/xowa/wiki/commons.wikimedia.org/ns/000/page/"));	// HACK: create page_dir so Scan_dirs_zip will not identify commons as zipped; FIX: remove; WHEN: after redoing commons.css download logic
 	}
-	@Test  public void Wiki_is_local() {
+	@Test public void Wiki_is_local() {
 		fxt.Init_page_create(en_wiki, "File:A.png", "");
 		mock_wkr.Redirect_("A.png", "A.png").Repo_idx_(0);
 		fxt.Test_parse_tmpl_str_test("{{filepath:A.png}}", "{{test}}", "file:///mem/wiki/repo/trg/orig/7/0/A.png");
 	}
-	@Test  public void Wiki_is_commons() {
+	@Test public void Wiki_is_commons() {
 		fxt.Init_page_create(commons_wiki, "File:A.png", "");
 		mock_wkr.Redirect_("A.png", "A.png").Repo_idx_(1);
 		fxt.Test_parse_tmpl_str_test("{{filepath:A.png}}", "{{test}}", "file:///mem/xowa/file/commons/trg/orig/7/0/1/c/A.png");
 	}
-	@Test  public void Not_found() {
+	@Test public void Not_found() {
 		fxt.Test_parse_tmpl_str_test("{{filepath:B.png}}", "{{test}}", "");
 	}
-	@Test  public void Invalid() {	// PURPOSE: handle invalid ttls; EX:w:Germicidin
+	@Test public void Invalid() {	// PURPOSE: handle invalid ttls; EX:w:Germicidin
 		fxt.Test_parse_tmpl_str_test("{{filepath:{{{ImageFile}}}}}", "{{test}}", "");
 	}
 //		private static void Init_orig_mgr(Xow_wiki wiki) {

@@ -27,7 +27,7 @@ public class z421_types_apply_ndes_basic_tst {
 			(		GfmlFld_mok.new_().ini_ndk_("pos", "pos")
 			).XtoGfmlType());
 	}	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void NamedNde_but_UnnamedAtr() {
+	@Test public void NamedNde_but_UnnamedAtr() {
 		fx.tst_Resolve
 		(	fx.nde_().Hnd_("rect").Subs_
 			(	fx.nde_().Key_("pos").Atrs_("1")
@@ -37,7 +37,7 @@ public class z421_types_apply_ndes_basic_tst {
 			)
 		);
 	}
-	@Test  public void UnnamedNde() {
+	@Test public void UnnamedNde() {
 		fx.tst_Resolve
 		(	fx.nde_().Hnd_("rect").Subs_
 			(	fx.nde_().Key_(GfmlTkn_.NullRaw).Atrs_("1")

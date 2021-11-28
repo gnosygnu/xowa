@@ -17,9 +17,9 @@ package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*;
 public class Xomath_subst_mgr__tst {
 	private final    Xomath_subst_mgr subst_regy = new Xomath_subst_mgr();
-	@Test  public void Basic()						{tst("a\\plusmn b"			, "a\\pm b");}
-	@Test  public void Match_fails()				{tst("a\\plusmna b"			, "a\\plusmna b");}
-	@Test  public void Part()						{tst("a\\part_t b"			, "a\\partial_t b");}	// PAGE:en.w:Faraday's law of induction
-	@Test  public void Partial()					{tst("a\\partial_{x_i}"		, "a\\partial_{x_i}");}	// DEFECT: partial -> partialial
+	@Test public void Basic()						{tst("a\\plusmn b"			, "a\\pm b");}
+	@Test public void Match_fails()				{tst("a\\plusmna b"			, "a\\plusmna b");}
+	@Test public void Part()						{tst("a\\part_t b"			, "a\\partial_t b");}	// PAGE:en.w:Faraday's law of induction
+	@Test public void Partial()					{tst("a\\partial_{x_i}"		, "a\\partial_{x_i}");}	// DEFECT: partial -> partialial
 	private void tst(String src, String expd) {Tfds.Eq(expd, String_.new_u8(subst_regy.Subst(Bry_.new_u8(src))));}
 }

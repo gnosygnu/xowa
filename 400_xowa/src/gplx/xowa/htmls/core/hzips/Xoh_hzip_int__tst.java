@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*; import gplx.core.encoders.*;
 public class Xoh_hzip_int__tst {
 	private final    Xoh_hzip_int__fxt fxt = new Xoh_hzip_int__fxt();
-	@Test   public void Reqd__1() {
+	@Test  public void Reqd__1() {
 		fxt.Test__encode(1,          0,       "!");
 		fxt.Test__encode(1,         84,       "u");
 		fxt.Test__encode(1,         85,    "{\"!");
@@ -25,7 +25,7 @@ public class Xoh_hzip_int__tst {
 		fxt.Test__encode(1,     614125,  "}\"!!!");
 		fxt.Test__encode(1,   52200625, "~\"!!!!");
 	}
-	@Test   public void Reqd__2() {
+	@Test  public void Reqd__2() {
 		fxt.Test__encode(2,          0,      "!!");
 		fxt.Test__encode(2,         84,      "!u");
 		fxt.Test__encode(2,         85,     "\"!");

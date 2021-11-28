@@ -17,17 +17,17 @@ package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*; import gplx.core.strings.*;
 public class Xol_case_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xol_case_mgr_fxt fxt = new Xol_case_mgr_fxt();
-	@Test  public void Mw_parse() {
+	@Test public void Mw_parse() {
 		fxt.parse_mw__tst(fxt.itm_both_("A", "a"), fxt.itm_both_("B", "b"));
 	}
-	@Test  public void Xo_parse() {
+	@Test public void Xo_parse() {
 		fxt.parse_xo__tst(fxt.Init_ltrs_raw(), fxt.itm_both_("a", "A"), fxt.itm_upper_("b", "B"), fxt.itm_lower_("C", "c"));
 	}
-	@Test  public void Upper_a()		{fxt.Init_ltrs().Upper("aAaz", "AAAz");}
-	@Test  public void Upper_ab()		{fxt.Init_ltrs().Upper("abac", "ABAc");}
-	@Test  public void Lower_a()		{fxt.Init_ltrs().Lower("aAaZ", "aaaZ");}
-	@Test  public void Lower_ac()		{fxt.Init_ltrs().Lower("ABAC", "aBac");}
-	@Test  public void Upper_1st() {
+	@Test public void Upper_a()		{fxt.Init_ltrs().Upper("aAaz", "AAAz");}
+	@Test public void Upper_ab()		{fxt.Init_ltrs().Upper("abac", "ABAc");}
+	@Test public void Lower_a()		{fxt.Init_ltrs().Lower("aAaZ", "aaaZ");}
+	@Test public void Lower_ac()		{fxt.Init_ltrs().Lower("ABAC", "aBac");}
+	@Test public void Upper_1st() {
 		fxt.Init_ltrs_universal();
 		fxt.Test_reuse_1st_upper("a", "A");
 		fxt.Test_reuse_1st_upper("abc", "Abc");
@@ -37,14 +37,14 @@ public class Xol_case_mgr_tst {
 		fxt.Test_reuse_1st_upper("É");
 		fxt.Lower("Ι", "ι");	// PURPOSE:test reversal; PAGE:en.d:ἀρχιερεύς DATE:2014-09-02
 	}
-	@Test   public void Turkish_redirect() {	// PURPOSE: lowercase redirect should match uppercase for asymmetric brys; PAGE:tr.w:Zvishavane DATE:2015-09-07
+	@Test  public void Turkish_redirect() {	// PURPOSE: lowercase redirect should match uppercase for asymmetric brys; PAGE:tr.w:Zvishavane DATE:2015-09-07
 		Hash_adp_bry hash = Hash_adp_bry.c__u8(Bool_.N, Xol_case_mgr_.U8());
 		byte[] upper = Bry_.new_u8("YÖNLENDİRME");
 		byte[] lower = Bry_.new_u8("yönlendirme");
 		hash.Add(upper, upper);								// add upper to hash
 		Tfds.Eq_bry(upper, (byte[])hash.Get_by_bry(lower));	// get upper by using lower
 	}
-//		@Test  public void Hack() {
+//		@Test public void Hack() {
 //			Xol_case_itm[] ary = Xol_case_mgr_.Utf_8;
 //			Bry_bfr bfr = Bry_bfr_.New();
 //			for (int i = 0; i < ary.length; i++) {

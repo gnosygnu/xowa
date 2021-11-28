@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import org.junit.*;
 public class Int__tst {
-	@Test  public void XtoStr_PadBgn() {
+	@Test public void XtoStr_PadBgn() {
 		tst_XtoStr_PadLeft_Zeroes(1		, 3, "001");		// pad
 		tst_XtoStr_PadLeft_Zeroes(123	, 3, "123");		// no pad
 		tst_XtoStr_PadLeft_Zeroes(1234	, 3, "1234");		// val exceeds pad; confirm noop
@@ -25,11 +25,11 @@ public class Int__tst {
 		tst_XtoStr_PadLeft_Zeroes(-123	, 3, "-123");		// negative
 		tst_XtoStr_PadLeft_Zeroes(-1234	, 3, "-1234");		// negative
 	}	void tst_XtoStr_PadLeft_Zeroes(int val, int zeros, String expd) {Tfds.Eq(expd, Int_.To_str_pad_bgn_zero(val, zeros));}
-	@Test  public void Xto_fmt() {
+	@Test public void Xto_fmt() {
 		tst_XtoStr_fmt(1, "1");
 		tst_XtoStr_fmt(1000, "1,000");
 	}	void tst_XtoStr_fmt(int v, String expd) {Tfds.Eq(expd, Int_.To_str_fmt(v, "#,###"));}
-	@Test  public void Xto_int_hex_tst() {
+	@Test public void Xto_int_hex_tst() {
 		Xto_int_hex("007C", 124);
 	}	void Xto_int_hex(String raw, int expd) {Tfds.Eq(expd, Int_.By_hex_bry(Bry_.new_a7(raw)));}
 }

@@ -17,7 +17,7 @@ package gplx;
 import org.junit.*;
 public class Bool__tst {
 	private final Bool__fxt fxt = new Bool__fxt();
-	@Test  public void Compare() {
+	@Test public void Compare() {
 		fxt.Test__compare(Bool_.Y, Bool_.Y, CompareAble_.Same);
 		fxt.Test__compare(Bool_.N, Bool_.N, CompareAble_.Same);
 		fxt.Test__compare(Bool_.N, Bool_.Y, CompareAble_.Less);

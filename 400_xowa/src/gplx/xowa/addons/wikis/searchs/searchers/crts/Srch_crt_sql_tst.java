@@ -17,11 +17,11 @@ package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gpl
 import org.junit.*;
 public class Srch_crt_sql_tst {
 	private final    Srch_crt_sql_fxt fxt = new Srch_crt_sql_fxt();
-	@Test   public void Eq()				{fxt.Exec__new_or_null("a").Test__tid(Srch_crt_sql.Tid__eq).Test__eq("a");}
-	@Test   public void Rng()				{fxt.Exec__new_or_null("a*").Test__tid(Srch_crt_sql.Tid__rng).Test__rng_bgn("a").Test__rng_end("b").Test__pattern("a*");}
-	@Test   public void Like()				{fxt.Exec__new_or_null("a*b").Test__tid(Srch_crt_sql.Tid__like).Test__like("a%b").Test__pattern("a*b");}
-	@Test   public void Like__escape()		{fxt.Exec__new_or_null("a|\\*b").Test__tid(Srch_crt_sql.Tid__like).Test__like("a|\\%b").Test__pattern("a\\*b");}	// "a\*b"
-	@Test   public void Quote()				{fxt.Exec__new_or_null("\"a b\"").Test__tid(Srch_crt_sql.Tid__eq).Test__eq("\"a b\"");}
+	@Test  public void Eq()				{fxt.Exec__new_or_null("a").Test__tid(Srch_crt_sql.Tid__eq).Test__eq("a");}
+	@Test  public void Rng()				{fxt.Exec__new_or_null("a*").Test__tid(Srch_crt_sql.Tid__rng).Test__rng_bgn("a").Test__rng_end("b").Test__pattern("a*");}
+	@Test  public void Like()				{fxt.Exec__new_or_null("a*b").Test__tid(Srch_crt_sql.Tid__like).Test__like("a%b").Test__pattern("a*b");}
+	@Test  public void Like__escape()		{fxt.Exec__new_or_null("a|\\*b").Test__tid(Srch_crt_sql.Tid__like).Test__like("a|\\%b").Test__pattern("a\\*b");}	// "a\*b"
+	@Test  public void Quote()				{fxt.Exec__new_or_null("\"a b\"").Test__tid(Srch_crt_sql.Tid__eq).Test__eq("\"a b\"");}
 }
 class Srch_crt_sql_fxt {
 	private Srch_crt_sql actl;

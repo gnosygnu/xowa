@@ -17,9 +17,9 @@ package gplx.xowa.apps.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*; import gplx.core.tests.*;
 public class Xoa_url_encoder__tst {
 	private final    Xoa_url_encoder__fxt fxt = new Xoa_url_encoder__fxt();
-	@Test  public void Syms__diff() 	{fxt.Test__encode(" &'=+", "_%26%27%3D%2B");}
-	@Test  public void Syms__same() 	{fxt.Test__encode("!\"#$%()*,-./:;<>?@[\\]^_`{|}~", "!\"#$%()*,-./:;<>?@[\\]^_`{|}~");}
-	@Test  public void Mixed() 			{fxt.Test__encode("a &'=+b", "a_%26%27%3D%2Bb");}	// PURPOSE: make sure dirty flag is set
+	@Test public void Syms__diff() 	{fxt.Test__encode(" &'=+", "_%26%27%3D%2B");}
+	@Test public void Syms__same() 	{fxt.Test__encode("!\"#$%()*,-./:;<>?@[\\]^_`{|}~", "!\"#$%()*,-./:;<>?@[\\]^_`{|}~");}
+	@Test public void Mixed() 			{fxt.Test__encode("a &'=+b", "a_%26%27%3D%2Bb");}	// PURPOSE: make sure dirty flag is set
 }
 class Xoa_url_encoder__fxt {
 	private final    Xoa_url_encoder encoder = new Xoa_url_encoder();

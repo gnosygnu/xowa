@@ -19,7 +19,7 @@ public class GfoRegy_basic_tst {
 	@Before public void setup() {
 		regy = GfoRegy.new_();
 	}	GfoRegy regy;
-	@Test  public void RegObjByType() {
+	@Test public void RegObjByType() {
 		regy.Parsers().Add("Io_url", Io_url_.Parser);
 		Io_url expd = Io_url_.new_any_("C:\\fil.txt");
 		regy.RegObjByType("test", expd.Xto_api(), "Io_url");

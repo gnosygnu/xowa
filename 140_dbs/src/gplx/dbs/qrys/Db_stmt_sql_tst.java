@@ -17,7 +17,7 @@ package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 public class Db_stmt_sql_tst {
 	@Before public void init() {}
-	@Test    public void Basic() {
+	@Test   public void Basic() {
 		Db_stmt_sql stmt = new Db_stmt_sql();
 		stmt.Parse(null, "UPDATE tbl_0 SET col_0 = ? WHERE col_1 = ?");
 		stmt.Add("col_0", "1");

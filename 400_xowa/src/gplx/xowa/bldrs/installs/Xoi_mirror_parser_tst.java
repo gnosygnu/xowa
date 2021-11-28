@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import org.junit.*;
 public class Xoi_mirror_parser_tst {
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		Tst_parse(String_.Concat_lines_nl
 		(	"<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
 		,	"<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.1//EN\" \"http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd\">"
@@ -44,7 +44,7 @@ public class Xoi_mirror_parser_tst {
 		,	"</html>"
 		), String_.Ary("20120516", "20121220", "20130214", "latest"));
 	}
-	@Test  public void Find_last_lte() {
+	@Test public void Find_last_lte() {
 		Tst_find_last_lte(String_.Ary("20120516", "20121220", "20130214", "latest"), "20130101", "20121220");
 		Tst_find_last_lte(String_.Ary("20120516", "20121220", "20130214", "latest"), "20120101", "");
 	}

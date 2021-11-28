@@ -19,7 +19,7 @@ public class Site_json_parser_tst {
 	private final    Site_json_parser_fxt fxt = new Site_json_parser_fxt();
 	@Before public void init() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();}
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
-	@Test  public void General() {
+	@Test public void General() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'general':"
 		, "  { 'mainpage': 'Main Page'"
@@ -44,7 +44,7 @@ public class Site_json_parser_tst {
 		));
 		fxt.Test_general(Keyval_.new_("mainpage", "Main Page"), Keyval_.new_("imagewhitelistenabled", ""), Keyval_.new_("timeoffset", "0"), Keyval_.new_("thumblimits", "120|150"), Keyval_.new_("imagelimits", "320=240|640=480"));
 	}
-	@Test  public void Namespace() {
+	@Test public void Namespace() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'namespaces':"
 		, "  { '0':"
@@ -84,7 +84,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_namespace(2600	, Bool_.Y, "Topic"		, "Topic"		, Bool_.N, Bool_.N, "flow-board")
 		);
 	}
-	@Test  public void Statistic() {
+	@Test public void Statistic() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'statistics':"
 		, "  { 'pages': 1"
@@ -103,7 +103,7 @@ public class Site_json_parser_tst {
 		( fxt.Make_statistic(1, 2, 3, 4, 5, 6, 7, 8, 9)
 		);
 	}
-	@Test  public void Interwikimap() {
+	@Test public void Interwikimap() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'interwikimap':"
 		, "  ["
@@ -127,7 +127,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_interwikimap("ar"			, Bool_.Y, Bool_.Y, "More languages", "Multilingual Wikisource"	, "العربية"		, Bool_.N, "https://ar.wikipedia.org/wiki/$1"	, Bool_.Y)
 		);
 	}
-	@Test  public void Namespacealias() {
+	@Test public void Namespacealias() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'namespacealiases':"
 		, "  [ "
@@ -146,7 +146,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_namespacealias(7	, "Image talk")
 		);
 	}
-	@Test  public void Specialpagealias() {
+	@Test public void Specialpagealias() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'specialpagealiases':"
 		, "  [ "
@@ -170,7 +170,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_specialpagealias("Lonelypages"		, "LonelyPages", "OrphanedPages")
 		);
 	}
-	@Test  public void Library() {
+	@Test public void Library() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'libraries':"
 		, "  [ "
@@ -189,7 +189,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_library("leafo/lessphp"		, "0.5.0")
 		);
 	}
-	@Test  public void Extension() {
+	@Test public void Extension() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'extensions':"
 		, "  [ "
@@ -229,7 +229,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_extension("media", "A", "A-name", "desc", "A-desc", "B", "C", "0.1.0", "git", "d", "e", "2015-03-27T16:44:25Z", "f", "g", null)
 		);
 	}
-	@Test  public void Skin() {
+	@Test public void Skin() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'skins':"
 		, "  [ "
@@ -255,7 +255,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_skin("fallback"		, Bool_.N, "Fallback"	, Bool_.Y)
 		);
 	}
-	@Test  public void Magicword() {
+	@Test public void Magicword() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'magicwords':"
 		, "  [ "
@@ -280,7 +280,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_magicword("currentmonth"		, Bool_.Y, "CURRENTMONTH", "CURRENTMONTH2")
 		);
 	}
-	@Test  public void Functionhook() {
+	@Test public void Functionhook() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'functionhooks':"
 		, "  [ 'ns'"
@@ -290,7 +290,7 @@ public class Site_json_parser_tst {
 		));
 		fxt.Test_functionhook("ns", "nse");
 	}
-	@Test  public void Showhook() {
+	@Test public void Showhook() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'showhooks':"
 		, "  [ "
@@ -315,7 +315,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_showhook("ParserLimitReport"		, "ScribuntoHooks::reportLimits")
 		);
 	}
-	@Test  public void Extensiontag() {
+	@Test public void Extensiontag() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'extensiontags':"
 		, "  [ '<pre>'"
@@ -325,7 +325,7 @@ public class Site_json_parser_tst {
 		));
 		fxt.Test_extensiontag("<pre>", "<nowiki>");
 	}
-	@Test  public void Protocol() {
+	@Test public void Protocol() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'protocols':"
 		, "  [ 'bitcoin:'"
@@ -335,7 +335,7 @@ public class Site_json_parser_tst {
 		));
 		fxt.Test_protocol("bitcoin:", "ftp://");
 	}
-	@Test  public void Defaultoption() {
+	@Test public void Defaultoption() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'defaultoptions':"
 		, "  { 'globaluserpage': true"
@@ -346,7 +346,7 @@ public class Site_json_parser_tst {
 		));
 		fxt.Test_defaultoption(Keyval_.new_("globaluserpage", "true"), Keyval_.new_("cols", "80"), Keyval_.new_("echo-email-format", "html"));
 	}
-	@Test  public void Language() {
+	@Test public void Language() {
 		fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 		( "{ 'languages':"
 		, "  [ "
@@ -367,7 +367,7 @@ public class Site_json_parser_tst {
 		, fxt.Make_language("ab"	, "ab-bcp47", "Аҧсшәа")
 		);
 	}
-//		@Test   public void Smoke() {
+//		@Test  public void Smoke() {
 //			Io_url json_url = Tfds.RscDir.GenSubFil_nest("400_xowa", "site_meta__en.wikipedia.org.json");
 //			byte[] src = Io_mgr.Instance.LoadFilBry(json_url);
 //			Site_json_parser parser = new Site_json_parser();

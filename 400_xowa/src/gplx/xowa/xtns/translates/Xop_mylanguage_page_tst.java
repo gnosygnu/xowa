@@ -17,17 +17,17 @@ package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*;
 public class Xop_mylanguage_page_tst {
 	@Before public void init() {fxt.Clear();} private Xop_mylanguage_page_fxt fxt = new Xop_mylanguage_page_fxt();
-	@Test  public void Non_english_exists() {
+	@Test public void Non_english_exists() {
 		fxt.Init_create_page("Help:A/fr");
 		fxt.Init_cur_lang("fr");
 		fxt.Test_open("Special:MyLanguage/Help:A", "Help:A/fr");
 	}
-	@Test  public void English() {
+	@Test public void English() {
 		fxt.Init_create_page("Help:A");
 		fxt.Init_cur_lang("en");
 		fxt.Test_open("Special:MyLanguage/Help:A", "Help:A");
 	}
-	@Test  public void Non_english_absent() {
+	@Test public void Non_english_absent() {
 		fxt.Init_create_page("Help:A");
 		fxt.Init_cur_lang("fr");
 		fxt.Test_open("Special:MyLanguage/Help:A", "Help:A");

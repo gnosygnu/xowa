@@ -17,15 +17,15 @@ package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.primitives.*; import gplx.gfui.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
 public class Xof_xfer_itm_tst {		
 	@Before public void init() {fxt.ini();} Xof_xfer_itm_fxt fxt = new Xof_xfer_itm_fxt();
-	@Test  public void Box()						{tst_Calc_view("40,50"	, "40,40"	, "40,40");}	// EX:[[File:Crystal Clear app kedit.svg|50x40px]]
-	@Test  public void Long_w()						{tst_Calc_view("128,80"	, "720,194"	, "128,34");}	// EX:[[File:Firma B.Ohiggins.svg|128x80px|alt=|Bernardo O'Higgins's signature]]
-	@Test  public void Long_h()						{tst_Calc_view("300,-1"	, "149,408"	, "149,408");}	// EX:[[File:Adhanema Lasva.jpg|thumb|300px|The Firman given to the Bosnian Franciscans]]
-	@Test  public void Width_too_long()				{tst_Calc_view("100,-1"	, "40,40"	, "40,40");}	// limit to height;
-	@Test  public void Width_missing()				{tst_Calc_view("-1,20"	, "80,40"	, "40,20");}	// calc width based on height and file_size
-	@Test  public void Prefer_height_over_width()	{tst_Calc_view("60,20"	, "120,60"	, "40,20");}	// prefer height; if width was preferred, size would be 60,30
-	@Test  public void Height_missing()				{tst_Calc_view("50,-1"	, "100,200"	, "50,100");}
-	@Test  public void Explicit_ratio_large()		{tst_Calc_view("120,40"	, "200,100"	, "80,40");}		// see NOTE_1:view ratio > file ratio
-	@Test  public void Explicit_ratio_small()		{tst_Calc_view("120,80"	, "200,100"	, "120,60");}		// see NOTE_1:view ratio > file ratio
+	@Test public void Box()						{tst_Calc_view("40,50"	, "40,40"	, "40,40");}	// EX:[[File:Crystal Clear app kedit.svg|50x40px]]
+	@Test public void Long_w()						{tst_Calc_view("128,80"	, "720,194"	, "128,34");}	// EX:[[File:Firma B.Ohiggins.svg|128x80px|alt=|Bernardo O'Higgins's signature]]
+	@Test public void Long_h()						{tst_Calc_view("300,-1"	, "149,408"	, "149,408");}	// EX:[[File:Adhanema Lasva.jpg|thumb|300px|The Firman given to the Bosnian Franciscans]]
+	@Test public void Width_too_long()				{tst_Calc_view("100,-1"	, "40,40"	, "40,40");}	// limit to height;
+	@Test public void Width_missing()				{tst_Calc_view("-1,20"	, "80,40"	, "40,20");}	// calc width based on height and file_size
+	@Test public void Prefer_height_over_width()	{tst_Calc_view("60,20"	, "120,60"	, "40,20");}	// prefer height; if width was preferred, size would be 60,30
+	@Test public void Height_missing()				{tst_Calc_view("50,-1"	, "100,200"	, "50,100");}
+	@Test public void Explicit_ratio_large()		{tst_Calc_view("120,40"	, "200,100"	, "80,40");}		// see NOTE_1:view ratio > file ratio
+	@Test public void Explicit_ratio_small()		{tst_Calc_view("120,80"	, "200,100"	, "120,60");}		// see NOTE_1:view ratio > file ratio
 	private void tst_Calc_view(String lnki_str, String file_str, String expd_str) {
 		Int_2_ref rv = new Int_2_ref();
 		Int_2_val lnki = Int_2_val.parse(lnki_str);

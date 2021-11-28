@@ -20,22 +20,22 @@ import gplx.xowa.drds.*;
 public class Xol_convert_regy_tst {
 	private final    Xol_convert_regy_fxt fxt = new Xol_convert_regy_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		// fxt.Parser_fxt().Init_page_create("Template:Test_x1", "val");
 		fxt.Init_page("Template:Test_x1", "val");
 		fxt.Parser_fxt().Test_parse_tmpl_str_test("{{Test_x0}}", "{{test}}", "val");
 	}
-	@Test  public void Upper_1st() {	// PURPOSE: convert should call Xoa_ttl.Parse(), which will upper 1st letter; EX:{{jez-eng|sense}} -> Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
+	@Test public void Upper_1st() {	// PURPOSE: convert should call Xoa_ttl.Parse(), which will upper 1st letter; EX:{{jez-eng|sense}} -> Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
 		fxt.Init_page("Template:X1", "val");
 		fxt.Parser_fxt().Test_parse_tmpl_str_test("{{x0}}", "{{test}}", "val");
 	}
-	@Test  public void Redlink() {		// PURPOSE: check redlink's Convert_ttl(Xowe_wiki wiki, Xoa_ttl ttl); DATE:2014-07-06
+	@Test public void Redlink() {		// PURPOSE: check redlink's Convert_ttl(Xowe_wiki wiki, Xoa_ttl ttl); DATE:2014-07-06
 		fxt.Init_page("Template:Test_x1", "val");
 		fxt.Test_convert_by_ttl("zh", "Template:Test_x0", Bool_.Y);	// Template:Test_xo should not be parsed to Template:Template:Test_x0; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
 		fxt.Test_convert_by_ttl("zh", "Template:Test_x1", Bool_.N);	// note that convert of trg should not find title;
 		fxt.Test_convert_by_ttl("zh", "Template:Test_x2", Bool_.N);	// test that non-convert characters return false
 	}
-	@Test  public void Pfunc() {
+	@Test public void Pfunc() {
 		fxt.Parser_fxt().Init_defn_clear();
 		fxt.Init_page("Test_x1", "");
 		fxt.Test_parse("{{#ifexist:Test_x0|y|n}}", "y");

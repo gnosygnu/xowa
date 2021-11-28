@@ -17,13 +17,13 @@ package gplx.xowa.htmls.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.
 import org.junit.*; import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*;
 public class Xoh_js_cbk_wdata_labels_tst {
 	@Before public void init() {fxt.Init();} private final    Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init__docs__add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Xto_wdoc());
 		fxt.Init__docs__add(fxt.Wdoc_bldr("q2").Add_label("en", "en_q2").Xto_wdoc());
 		fxt.Init__docs__add(fxt.Wdoc_bldr("Property:P1").Add_label("en", "en_property_p1").Xto_wdoc());
 		Tst_wikidata_label_get(String_.Ary("en", "q1", "q2", "Property:P1"), String_.Ary("en_q1", "en_q2", "en_property_p1"));
 	}
-	@Test   public void Outliers() {
+	@Test  public void Outliers() {
 		fxt.Init__docs__add(fxt.Wdoc_bldr("q1").Add_label("en", "en_q1").Add_label("de", "de_q1").Xto_wdoc());
 		Tst_wikidata_label_get(String_.Ary("fr", "q1"), String_.Ary((String)null));
 		Tst_wikidata_label_get(String_.Ary("de", "q1"), String_.Ary("de_q1"));
@@ -31,7 +31,7 @@ public class Xoh_js_cbk_wdata_labels_tst {
 		Tst_wikidata_label_get(String_.Ary("xowa_ui_lang", "q1"), String_.Ary("en_q1"));
 		Tst_wikidata_label_get(String_.Ary("fr;de", "q1"), String_.Ary("de_q1"));
 	}
-	@Test   public void Escaped() {	// PURPOSE: \t should be escaped; EX:wd.q:2; DATE:2014-04-23
+	@Test  public void Escaped() {	// PURPOSE: \t should be escaped; EX:wd.q:2; DATE:2014-04-23
 		Wdata_doc d = doc_("q1", String_.Concat_lines_nl
 		(	"{ 'entity':['item',1]"
 		,	", 'label':"

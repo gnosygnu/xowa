@@ -17,20 +17,20 @@ package gplx;
 import org.junit.*;
 public class Hash_adp_bry_tst {		
 	@Before public void setup() {fxt.Clear();} private Hash_adp_bry_fxt fxt = new Hash_adp_bry_fxt();
-	@Test   public void Add_bry() {
+	@Test  public void Add_bry() {
 		fxt	.New_cs()
 			.Add("a0").Add("b0").Add("c0")
 			.Get_bry_tst("a0").Get_bry_tst("b0").Get_bry_tst("c0").Get_bry_tst("A0", null)
 			;
 	}
-	@Test   public void Get_mid() {
+	@Test  public void Get_mid() {
 		fxt	.New_cs()
 			.Add("a0").Add("b0").Add("c0")
 			.Get_mid_tst("xyza0xyz", 3, 5, "a0")
 			.Get_mid_tst("xyza0xyz", 3, 4, null)
 			;
 	}
-	@Test   public void Case_insensitive() {
+	@Test  public void Case_insensitive() {
 		fxt	.New_ci()
 			.Add("a0").Add("B0").Add("c0")
 			.Get_bry_tst("a0", "a0")

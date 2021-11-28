@@ -17,10 +17,10 @@ package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*; import gplx.core.strings.*;
 public class Xof_meta_thumb_parser_tst {
 	Xof_meta_thumb_parser parser = new Xof_meta_thumb_parser();
-	@Test  public void Exists_y()		{Tst_parse("1?45,40", itm_y_(45, 40));}
-	@Test  public void Exists_n()		{Tst_parse("0?45,40", itm_n_(45, 40));}
-	@Test  public void Many()			{Tst_parse("1?45,40;0?90,80", itm_y_(45, 40), itm_n_(90, 80));}
-	@Test  public void Seek()			{Tst_parse("1?45,40@2,3,4", itm_y_(45, 40, 2, 3, 4));}
+	@Test public void Exists_y()		{Tst_parse("1?45,40", itm_y_(45, 40));}
+	@Test public void Exists_n()		{Tst_parse("0?45,40", itm_n_(45, 40));}
+	@Test public void Many()			{Tst_parse("1?45,40;0?90,80", itm_y_(45, 40), itm_n_(90, 80));}
+	@Test public void Seek()			{Tst_parse("1?45,40@2,3,4", itm_y_(45, 40, 2, 3, 4));}
 	private void Tst_parse(String raw_str, Xof_meta_thumb... expd) {
 		byte[] raw = Bry_.new_a7(raw_str);
 		parser.Parse_ary(raw, 0, raw.length);

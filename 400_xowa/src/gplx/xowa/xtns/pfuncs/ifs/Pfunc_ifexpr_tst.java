@@ -18,12 +18,12 @@ import org.junit.*;
 public class Pfunc_ifexpr_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
-	@Test  public void Basic_y()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: 1 > 0 |y|n}}"					, "{{test}}"	, "y");}
-	@Test  public void Basic_n()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: 1 < 0 |y|n}}"					, "{{test}}"	, "n");}
-	@Test  public void Blank_n()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: |y|n}}"						, "{{test}}"	, "n");}
-	@Test  public void Args_0_n()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: 1 > 0}}"						, "{{test}}"	, "");}
-	@Test  public void Args_0_y()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: 0 > 1}}"						, "{{test}}"	, "");}
-	@Test  public void Err()					{fxt.Test_parse_tmpl_str_test("{{#ifexpr:20abc >1|y|n}}"					, "{{test}}"	, "<strong class=\"error\">Expression error: Unrecognised word \"abc \"</strong>");}	// HACK: shouldn't be "abc " 
+	@Test public void Basic_y()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: 1 > 0 |y|n}}"					, "{{test}}"	, "y");}
+	@Test public void Basic_n()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: 1 < 0 |y|n}}"					, "{{test}}"	, "n");}
+	@Test public void Blank_n()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: |y|n}}"						, "{{test}}"	, "n");}
+	@Test public void Args_0_n()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: 1 > 0}}"						, "{{test}}"	, "");}
+	@Test public void Args_0_y()				{fxt.Test_parse_tmpl_str_test("{{#ifexpr: 0 > 1}}"						, "{{test}}"	, "");}
+	@Test public void Err()					{fxt.Test_parse_tmpl_str_test("{{#ifexpr:20abc >1|y|n}}"					, "{{test}}"	, "<strong class=\"error\">Expression error: Unrecognised word \"abc \"</strong>");}	// HACK: shouldn't be "abc "
 }
 /*
 */

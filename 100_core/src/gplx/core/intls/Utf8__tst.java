@@ -17,20 +17,20 @@ package gplx.core.intls; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Utf8__tst {
 	private Utf8__fxt fxt = new Utf8__fxt();
-	@Test  public void Get_prv_char_pos0() {
+	@Test public void Get_prv_char_pos0() {
 		fxt.Test__Get_prv_char_pos0("abcd", 3);        // len=1; (note that bry.len = 4)
 		fxt.Test__Get_prv_char_pos0("a", 0);           // len=1; short-String
 		fxt.Test__Get_prv_char_pos0("abc¢", 3);        // len=2; (note that bry.len = 5)
 		fxt.Test__Get_prv_char_pos0("abc€", 3);        // len=3; (note that bry.len = 6)
 		fxt.Test__Get_prv_char_pos0("abc" + String_.new_u8(Byte_.Ary_by_ints(240, 164, 173, 162)), 3);		// len=4; (note that bry.len = 7)
 	}
-	@Test  public void Increment_char_at_last_pos() {
+	@Test public void Increment_char_at_last_pos() {
 		fxt.Test_Increment_char_at_last_pos("a", "b");
 		fxt.Test_Increment_char_at_last_pos("abc", "abd");
 		fxt.Test_Increment_char_at_last_pos("É", "Ê");	// len=2
 		fxt.Test_Increment_char_at_last_pos("€", "₭");	// len=3
 	}
-//		@Test  public void Increment_char_at_last_pos_exhaustive_check() {	// check all values; commented for perf
+//		@Test public void Increment_char_at_last_pos_exhaustive_check() {	// check all values; commented for perf
 //			Bry_bfr bfr = Bry_bfr_.New();
 //			int bgn = 32;
 //			while (true) {

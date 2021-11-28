@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.core.stores.*;
 public class z801_useCase_DataRdr_tst {
 	String raw;
-	@Test  public void Subs_byName() {
+	@Test public void Subs_byName() {
 		raw = String_.Concat
 			(	"_type:{"
 			,	"	item {"

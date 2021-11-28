@@ -17,12 +17,12 @@ package gplx.xowa.mediawiki.includes.parsers.lnkes; import gplx.*; import gplx.x
 import org.junit.*;
 public class Xomw_lnke_wkr__tst {
 	private final    Xomw_lnke_wkr__fxt fxt = new Xomw_lnke_wkr__fxt();
-	@Test   public void Basic()                         {fxt.Test__parse("[https://a.org b]"           , "<a rel='nofollow' class='external text' href='https://a.org'>b</a>");}
-	@Test   public void Invaild__protocol()             {fxt.Test__parse("[httpz:a.org]"               , "[httpz:a.org]");}
-	@Test   public void Invaild__protocol_slash()       {fxt.Test__parse("[https:a.org]"               , "[https:a.org]");}
-	@Test   public void Invaild__urlchars__0()          {fxt.Test__parse("[https://]"                  , "[https://]");}
-	@Test   public void Invaild__urlchars__bad()        {fxt.Test__parse("[https://\"]"                , "[https://\"]");}
-	@Test   public void Many() {
+	@Test  public void Basic()                         {fxt.Test__parse("[https://a.org b]"           , "<a rel='nofollow' class='external text' href='https://a.org'>b</a>");}
+	@Test  public void Invaild__protocol()             {fxt.Test__parse("[httpz:a.org]"               , "[httpz:a.org]");}
+	@Test  public void Invaild__protocol_slash()       {fxt.Test__parse("[https:a.org]"               , "[https:a.org]");}
+	@Test  public void Invaild__urlchars__0()          {fxt.Test__parse("[https://]"                  , "[https://]");}
+	@Test  public void Invaild__urlchars__bad()        {fxt.Test__parse("[https://\"]"                , "[https://\"]");}
+	@Test  public void Many() {
 		fxt.Test__parse(String_.Concat_lines_nl_apos_skip_last
 		( "a"
 		, "[https://b.org c]"
@@ -37,18 +37,18 @@ public class Xomw_lnke_wkr__tst {
 		, "g"
 		));
 	}
-	@Test   public void Protocol_rel() {
+	@Test  public void Protocol_rel() {
 		fxt.Test__parse("[//a.org b]"                             , "<a rel='nofollow' class='external text' href='//a.org'>b</a>");
 	}
-	@Test   public void Url_should_not_has_angle_entities() {
+	@Test  public void Url_should_not_has_angle_entities() {
 		fxt.Test__parse("[https://a.org/b&lt;c z]"                , "<a rel='nofollow' class='external text' href='https://a.org/b'>&lt;c z</a>");
 		fxt.Test__parse("[https://a.org/b&gt;c z]"                , "<a rel='nofollow' class='external text' href='https://a.org/b'>&gt;c z</a>");
 	}
-	@Test   public void Link_trail() {// checks for noop via "Have link text"
+	@Test  public void Link_trail() {// checks for noop via "Have link text"
 		fxt.Test__parse("[https://a.org b]xyz"                    , "<a rel='nofollow' class='external text' href='https://a.org'>b</a>xyz");
 		fxt.Test__parse("[https://a.org b]x!z"                    , "<a rel='nofollow' class='external text' href='https://a.org'>b</a>x!z");
 	}
-	@Test   public void Clean_url() {
+	@Test  public void Clean_url() {
 		fxt.Test__parse("[https://a&quot;­b c]"                   , "<a rel='nofollow' class='external text' href='https://a%22b'>c</a>");
 	}
 }

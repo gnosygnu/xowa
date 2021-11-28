@@ -17,7 +17,7 @@ package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Xol_num_grp_fmtr_tst {
 	@Before public void init() {fxt.Reset();} private Xol_num_grp_fmtr_fxt fxt = new Xol_num_grp_fmtr_fxt();
-	@Test   public void Num() {
+	@Test  public void Num() {
 		fxt.Test_fmt_regx(""					, "");
 		fxt.Test_fmt_regx("1"					, "1");
 		fxt.Test_fmt_regx("12"					, "12");
@@ -28,14 +28,14 @@ public class Xol_num_grp_fmtr_tst {
 		fxt.Test_fmt_regx("1234567"				, "1,234,567");
 		fxt.Test_fmt_regx("1234567890"			, "1,234,567,890");
 	}
-	@Test   public void Dec() {
+	@Test  public void Dec() {
 		fxt.Test_fmt_regx("1.9876"				, "1.9876");
 		fxt.Test_fmt_regx("1234.9876"			, "1,234.9876");
 	}
-	@Test   public void Neg() {
+	@Test  public void Neg() {
 		fxt.Test_fmt_regx("-1234.5678"			, "-1,234.5678");
 	}
-	@Test   public void Char() {
+	@Test  public void Char() {
 		fxt.Test_fmt_regx("1,234"				, "1,234");
 		fxt.Test_fmt_regx("1a2345"				, "1a2,345");
 		fxt.Test_fmt_regx("1234a5678b2345c.3456d7890e3210.f5432", "1,234a5,678b2,345c.3456d7,890e3,210.f5,432");

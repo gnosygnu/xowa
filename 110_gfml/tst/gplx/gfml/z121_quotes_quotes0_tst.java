@@ -23,7 +23,7 @@ public class z121_quotes_quotes0_tst {
 			,	GfmlDocLxrs.Quote0_lxr()
 			);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Doc("'abc';", fx.nde_().Atru_("abc"));
 		fx.tst_Tkn("'abc';"
 			,	fx.tkn_grp_
@@ -33,7 +33,7 @@ public class z121_quotes_quotes0_tst {
 			)
 			);
 	}
-	@Test  public void Escape() {
+	@Test public void Escape() {
 		fx.tst_Doc("'a''b';", fx.nde_().Atru_("a'b"));
 		fx.tst_Tkn("'a''b';"
 			,	fx.tkn_grp_
@@ -43,7 +43,7 @@ public class z121_quotes_quotes0_tst {
 			)
 			);
 	}
-	@Test  public void ManyAtrs_LastQuoted() {	// bugfix
+	@Test public void ManyAtrs_LastQuoted() {	// bugfix
 		fx.ini_RootLxr_Add(GfmlDocLxrs.Whitespace_lxr());
 		fx.tst_Doc("a 'b';", fx.nde_().Atru_("a").Atru_("b"));
 	}	

@@ -18,16 +18,16 @@ import org.junit.*;
 public class Lst_pfunc_lstx_tst {
 	private Lst_pfunc_lst_fxt fxt = new Lst_pfunc_lst_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Page_txt_("a<section begin=key0/> val0<section end=key0/> b<section begin=key1/> val1<section end=key1/> c").Test_lst("{{#lstx:section_test|key0}}", "a b val1 c");
 	}
-	@Test  public void Replace() {
+	@Test public void Replace() {
 		fxt.Page_txt_("a<section begin=key0/> val0<section end=key0/> b<section begin=key1/> val1<section end=key1/> c").Test_lst("{{#lstx:section_test|key0|val3}}", "aval3 b val1 c");
 	}
-	@Test  public void Section_is_empty() {
+	@Test public void Section_is_empty() {
 		fxt.Page_txt_("a<section begin=key0/> val0<section end=key0/> b<section begin=key1/> val1<section end=key1/> c").Test_lst("{{#lstx:section_test|}}", "a val0 b val1 c");
 	}
-	@Test  public void Missing_bgn_end() {
+	@Test public void Missing_bgn_end() {
 		fxt.Page_txt_("a<section begin=key0/> b<section end=key0/> c").Test_lst("{{#lstx:section_test}}", "a b c");
 	}
 }

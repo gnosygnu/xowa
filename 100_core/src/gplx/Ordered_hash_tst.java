@@ -19,11 +19,11 @@ public class Ordered_hash_tst {
 	@Before public void setup() {
 		hash = Ordered_hash_.New();
 	}
-	@Test  public void Get_at() {
+	@Test public void Get_at() {
 		hash.Add("key1", "val1");
 		Tfds.Eq("val1", hash.Get_at(0));
 	}
-	@Test  public void iterator() {
+	@Test public void iterator() {
 		hash.Add("key2", "val2");
 		hash.Add("key1", "val1");
 
@@ -33,5 +33,16 @@ public class Ordered_hash_tst {
 		Tfds.Eq("val2", list.Get_at(0));
 		Tfds.Eq("val1", list.Get_at(1));
 	}
+
+//  NOTE: this test shows that Del breaks iterator when vals are the same
+//	@Test
+//	public void Del() {
+//		hash.Add("a", "v1");
+//		hash.Add("b", "v2");
+//		hash.Add("c", "v1");
+//		hash.Del("c");
+//		Tfds.Eq("v1", hash.Get_at(0)); // should be "v1" b/c "a" was not deleted, but Del deletes "c" and first instance of "v1"
+//	}
+
 	Ordered_hash hash;
 }

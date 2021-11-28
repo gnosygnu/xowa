@@ -19,7 +19,7 @@ public class z403_types_compile_default_tst {
 	@Before public void setup() {
 		fx.run_InitPragma(fx.Regy(), GfmlPragmaType.new_());
 	}	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("point", "gfml.point").Subs_
 			(		fx.nde_().Atru_("x").Atrk_("default", "10")	
@@ -30,7 +30,7 @@ public class z403_types_compile_default_tst {
 			,		fx.fld_().Name_("y").Default_(GfmlTkn_.NullRaw)
 			));
 	}
-	@Test  public void Nde() {
+	@Test public void Nde() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("rect", "gfml.rect").Subs_
 			(		fx.nde_().Atru_("point").Subs_
@@ -41,7 +41,7 @@ public class z403_types_compile_default_tst {
 			(			ndek_("point", atr_("x", "1"), atr_("y", "2")))
 			));
 	}
-	@Test  public void Nde_unnamed() {
+	@Test public void Nde_unnamed() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("rect", "gfml.rect").Subs_
 			(		fx.nde_().Atru_("point").Subs_

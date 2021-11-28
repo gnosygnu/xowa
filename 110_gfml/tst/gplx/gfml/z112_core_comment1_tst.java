@@ -23,13 +23,13 @@ public class z112_core_comment1_tst {
 			,	GfmlDocLxrs.Comment1_lxr()
 			);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Doc("/*a*/");
 		fx.tst_Tkn("/*a*/"
 			, fx.tkn_grp_ary_("/*", "a", "*/")
 			);
 	}
-	@Test  public void Data() {
+	@Test public void Data() {
 		fx.tst_Doc("a;/*b*/", fx.nde_().Atru_("a"));
 		fx.tst_Tkn("a;/*b*/"
 			,	fx.tkn_grp_
@@ -38,22 +38,22 @@ public class z112_core_comment1_tst {
 			,	fx.tkn_grp_ary_("/*", "b", "*/")
 			);
 	}
-	@Test  public void IgnoreWs() {
+	@Test public void IgnoreWs() {
 		fx.tst_Tkn("/* b c */"
 			, fx.tkn_grp_ary_("/*", " b c ", "*/")
 			);
 	}
-	@Test  public void EscapeBgn() {
+	@Test public void EscapeBgn() {
 		fx.tst_Tkn("/* /*/* */"
 			, fx.tkn_grp_ary_("/*", " ", "/*/*", " ", "*/")
 			);
 	}
-	@Test  public void EscapeEnd() {
+	@Test public void EscapeEnd() {
 		fx.tst_Tkn("/* */*/ */"
 			, fx.tkn_grp_ary_("/*", " ", "*/*/", " ", "*/")
 			);
 	}
-	@Test  public void Nest() {
+	@Test public void Nest() {
 		fx.tst_Tkn("/* b0 /* c */ b1 */"
 			,	fx.tkn_grp_
 			(		fx.tkn_itm_("/*")

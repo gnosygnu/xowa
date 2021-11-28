@@ -17,17 +17,17 @@ package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.langs.msgs.*;
 public class Xol_msg_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private final    Xol_msg_mgr_fxt fxt = new Xol_msg_mgr_fxt();
-	@Test  public void Template_msg() {fxt.Test_val_by_key("About {{SITENAME}}", "About Wikipedia");}	// PURPOSE.fix: {{Template}} not working inside label tags; EX:de.wikisource.org; DATE:2013-02-10
-	@Test  public void Template_mediawiki() {	// PURPOSE.fix: {{Template}} not working inside MediaWiki template
+	@Test public void Template_msg() {fxt.Test_val_by_key("About {{SITENAME}}", "About Wikipedia");}	// PURPOSE.fix: {{Template}} not working inside label tags; EX:de.wikisource.org; DATE:2013-02-10
+	@Test public void Template_mediawiki() {	// PURPOSE.fix: {{Template}} not working inside MediaWiki template
 		fxt.Test_mediaWiki_msg("About {{SITENAME}}", "About Wikipedia");
 	}	
-	@Test  public void Val_html_accesskey_and_title() {
+	@Test public void Val_html_accesskey_and_title() {
 		fxt.Clear().Test_val_html_accesskey_and_title("test_title"	, "a"	, " accesskey=\"a\" title=\"test_title [a]\"");
 		fxt.Clear().Test_val_html_accesskey_and_title("test_title"	, null	, " title=\"test_title\"");		// accesskey is missing
 		fxt.Clear().Test_val_html_accesskey_and_title("test_title"	, ""	, " title=\"test_title\"");		// accesskey is ""
 		fxt.Clear().Test_val_html_accesskey_and_title(null			, "a"	, " title=\"\"");				// no title; leave blank
 	}
-	@Test   public void Missing() {
+	@Test  public void Missing() {
 		fxt.Test__get_msg_val("missing", "<missing>");	// check that key is enclosed in <>
 		fxt.Test__get_msg_val("Missing", "<Missing>");	// check that val matches key; used to match 1st case-insensitive variant; EX: "<missing>" b/c "<missing>" was returned above; DATE:2016-08-01
 	}

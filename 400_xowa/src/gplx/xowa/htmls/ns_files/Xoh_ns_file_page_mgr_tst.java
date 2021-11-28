@@ -18,7 +18,7 @@ import org.junit.*; import gplx.xowa.files.*;
 public class Xoh_ns_file_page_mgr_tst {
 	private final    Xoh_ns_file_page_mgr_fxt fxt = new Xoh_ns_file_page_mgr_fxt();
 	@Before public void init() {fxt.Reset();}
-	@Test  public void Image() {
+	@Test public void Image() {
 		fxt.Ttl_str_("Test.png").Html_src_("mem/file/cur.png").Html_orig_src_("mem/file/orig.png").Html_w_(300).Html_h_(200).Html_file_size_(100)
 		.tst(String_.Concat_lines_nl_skip_last
 		( Xoh_ns_file_page_mgr_fxt.Hdr
@@ -49,7 +49,7 @@ public class Xoh_ns_file_page_mgr_tst {
 		, ""		
 		));
 	}
-	@Test  public void Audio() {
+	@Test public void Audio() {
 		fxt.Ttl_str_("Test.oga").Html_src_("mem/file/cur.oga").Html_orig_src_("mem/file/orig.oga").Html_w_(300).Html_h_(200).Html_file_size_(100)
 		.tst(String_.Concat_lines_nl_skip_last
 		( Xoh_ns_file_page_mgr_fxt.Hdr
@@ -59,7 +59,7 @@ public class Xoh_ns_file_page_mgr_tst {
 		, ""		
 		));
 	}
-	@Test  public void Video() {
+	@Test public void Video() {
 		fxt.Ttl_str_("Test.ogv").Html_src_("mem/file/thumb.png").Html_orig_src_("mem/file/orig.ogv").Html_w_(300).Html_h_(200).Html_file_size_(100)
 		.tst(String_.Concat_lines_nl_skip_last
 		(	Xoh_ns_file_page_mgr_fxt.Hdr

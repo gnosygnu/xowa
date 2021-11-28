@@ -19,11 +19,11 @@ public class GfoMsg_tst {
 	@Before public void setup() {
 		GfsCore.Instance.AddObj(new Mok(), "Mok");
 	}
-	@Test  public void Write1() {
+	@Test public void Write1() {
 		GfoMsg m = GfoMsg_.root_leafArgs_(String_.Ary("a", "b"), Keyval_.new_("int0", 1));
 		tst_Msg(m, "a.b:int0='1';");
 	}
-	@Test  public void Write() {
+	@Test public void Write() {
 		Mok mok = new Mok();
 		tst_Msg(Gfo_invk_to_str.WriteMsg(mok, Mok.Invk_Cmd0, true, 1, "a"), "Mok.Cmd0:bool0='y' int0='1' str0='a';");
 		mok.Int0 = 2;

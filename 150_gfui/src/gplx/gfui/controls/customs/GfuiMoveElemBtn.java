@@ -13,8 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*; import gplx.gfui.controls.windows.*;
+package gplx.gfui.controls.customs; import gplx.GfoMsg;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Keyval_hash;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.gfui.PointAdp;
+import gplx.gfui.PointAdp_;
+import gplx.gfui.SizeAdp;
+import gplx.gfui.SizeAdp_;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.controls.elems.GfuiElem_;
+import gplx.gfui.controls.gxws.GxwElem;
+import gplx.gfui.controls.gxws.GxwElemFactory_;
+import gplx.gfui.controls.standards.GfuiBtn;
+import gplx.gfui.controls.windows.GfuiWin;
+import gplx.gfui.ipts.IptBnd;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptEventData;
+import gplx.gfui.ipts.IptEventType;
+import gplx.gfui.ipts.IptEventType_;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.ipts.IptMouseBtn_;
+import gplx.gfui.ipts.IptMouseMove;
+import gplx.gfui.layouts.GftGrid;
 public class GfuiMoveElemBtn extends GfuiBtn { 	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.lbl_();}
 	@Override public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		super.ctor_GfuiBox_base(ctorArgs);
@@ -78,9 +101,9 @@ class GfuiResizeFormBnd implements IptBnd {
 	public static GfuiResizeFormBnd new_() {return new GfuiResizeFormBnd();}
 	GfuiResizeFormBnd() {
 		args.Add_many(IptMouseBtn_.Right, IptMouseMove.AnyDirection);
-		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Shift).Add(IptKey_.Up), SizeAdp_.new_(0, -10));
-		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Shift).Add(IptKey_.Down), SizeAdp_.new_(0, 10));
-		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Shift).Add(IptKey_.Left), SizeAdp_.new_(-10, 0));
-		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Shift).Add(IptKey_.Right), SizeAdp_.new_(10, 0));
+		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Shift).Add(IptKey_.Up), SizeAdp_.new_(0, -10));
+		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Shift).Add(IptKey_.Down), SizeAdp_.new_(0, 10));
+		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Shift).Add(IptKey_.Left), SizeAdp_.new_(-10, 0));
+		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Shift).Add(IptKey_.Right), SizeAdp_.new_(10, 0));
 	}
 }

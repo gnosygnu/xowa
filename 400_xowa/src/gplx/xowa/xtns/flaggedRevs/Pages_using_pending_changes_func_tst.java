@@ -17,7 +17,7 @@ package gplx.xowa.xtns.flaggedRevs; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*; import gplx.xowa.wikis.pages.skins.*;
 public class Pages_using_pending_changes_func_tst {
 	@Before public void init()				{fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_html_full_str("{{PAGESUSINGPENDINGCHANGES}}", "0");	
 	}
 }

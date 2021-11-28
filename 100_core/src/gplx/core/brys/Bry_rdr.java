@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
-import gplx.core.errs.*; import gplx.core.btries.*;
+package gplx.core.brys; import gplx.Bool_;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Byte_;
+import gplx.Byte_ascii;
+import gplx.Double_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
 public class Bry_rdr {
 	private final    gplx.core.primitives.Int_obj_ref pos_ref = gplx.core.primitives.Int_obj_ref.New_neg1();
 	private final    Btrie_rv trv = new Btrie_rv();
@@ -22,6 +30,9 @@ public class Bry_rdr {
 	public int Src_end() {return src_end;} protected int src_end; 
 	public int Pos() {return pos;} protected int pos;
 	public boolean Pos_is_eos() {return pos == src_end;}
+	public boolean Pos_is_reading() {return pos > -1 && pos < src_end;}
+	public byte Cur() {return src[pos];}
+	public byte Nxt() {return pos + 1 >= src_end ? Not_found : src[pos + 1];}
 	public Bry_rdr Dflt_dlm_(byte b) {this.dflt_dlm = b; return this;} private byte dflt_dlm;
 	public Bry_rdr Fail_throws_err_(boolean v) {err_wkr.Fail_throws_err_(v); return this;}
 	public Bry_rdr Init_by_src(byte[] src)										{err_wkr.Init_by_page("", src);						this.pos = 0; this.src = src; this.src_end = src.length; return this;}
@@ -35,13 +46,19 @@ public class Bry_rdr {
 	}
 	public Bry_err_wkr Err_wkr()		{return err_wkr;} private Bry_err_wkr err_wkr = new Bry_err_wkr();
 	public int Move_to(int v)			{this.pos = v; return pos;}
+	public int Move_to_last()           {this.pos = src_end - 1; return pos;}
+	public int Move_to_end()            {this.pos = src_end; return pos;}
 	public int Move_by_one()			{return Move_by(1);}
 	public int Move_by(int v)			{this.pos += v; return pos;}
 	public int Find_fwd_lr()			{return Find_fwd(dflt_dlm	, Bool_.Y, Bool_.N, Fail_if_missing);}
 	public int Find_fwd_lr(byte find)	{return Find_fwd(find		, Bool_.Y, Bool_.N, Fail_if_missing);}
 	public int Find_fwd_lr_or(byte find, int or)
 										{return Find_fwd(find		, Bool_.Y, Bool_.N, or);}
+	public int Find_fwd_lr(String find) {return Find_fwd(Bry_.new_u8(find), Bool_.Y, Bool_.N, Fail_if_missing);}
 	public int Find_fwd_lr(byte[] find) {return Find_fwd(find		, Bool_.Y, Bool_.N, Fail_if_missing);}
+	public int Find_fwd_lr_or(String find, int or) {return Find_fwd(Bry_.new_u8(find), Bool_.Y, Bool_.N, or);}
+	public int Find_fwd_lr_or(byte[] find, int or)
+										{return Find_fwd(find		, Bool_.Y, Bool_.N, or);}
 	public int Find_fwd_rr()			{return Find_fwd(dflt_dlm	, Bool_.N, Bool_.N, Fail_if_missing);}
 	public int Find_fwd_rr(byte find)	{return Find_fwd(find		, Bool_.N, Bool_.N, Fail_if_missing);}
 	public int Find_fwd_rr(byte[] find) {return Find_fwd(find		, Bool_.N, Bool_.N, Fail_if_missing);}
@@ -141,6 +158,29 @@ public class Bry_rdr {
 		int bgn = pos;
 		return Bry_.Mid(src, bgn, Find_fwd_lr(b));
 	}
+	public int Move_fwd_while(byte b) {
+		while (pos < src_end) {
+			if (src[pos] != b) {
+				break;
+			}
+			pos++;
+		}
+		return pos;
+	}
+	public int Move_bwd_while(byte b) {
+		while (pos > -1) {
+			if (src[pos] != b) {
+				return pos + 1; // return position which is start of b sequence
+			}
+			pos--;
+		}
+		return -1;
+	}
+	public boolean Match(byte[] find) { // same as Is but no auto-move
+		int find_len = find.length;
+		int find_end = pos + find_len;
+		return Bry_.Match(src, pos, find_end, find, 0, find_len);
+	}
 	public boolean Is(byte find) {
 		boolean rv = src[pos] == find;
 		if (rv) ++pos;	// only advance if match;
@@ -189,7 +229,7 @@ public class Bry_rdr {
 		pos = trv.Pos();
 		return ((gplx.core.primitives.Byte_obj_val)rv_obj).Val();
 	}
-	@gplx.Virtual public Bry_rdr Skip_ws() {
+	public Bry_rdr Skip_ws() {
 		while (pos < src_end) {
 			switch (src[pos]) {
 				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
@@ -226,4 +266,5 @@ public class Bry_rdr {
 		return this;
 	}
 	private static final int Fail_if_missing = Int_.Min_value;
+	public static final int Not_found = Bry_find_.Not_found;
 }

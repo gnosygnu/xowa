@@ -17,8 +17,8 @@ package gplx.langs.htmls.clses; import gplx.*; import gplx.langs.*; import gplx.
 import org.junit.*;
 public class Gfh_class_parser__tst {
 	private final    Gfh_class_parser__fxt fxt = new Gfh_class_parser__fxt();
-	@Test   public void Basic()		{fxt.Test__parse("v1"						, "v1");}
-	@Test   public void Many()		{fxt.Test__parse("v1 v2"					, "v1", "v2");}
+	@Test  public void Basic()		{fxt.Test__parse("v1"						, "v1");}
+	@Test  public void Many()		{fxt.Test__parse("v1 v2"					, "v1", "v2");}
 }
 class Gfh_class_parser__fxt {
 	private final    Gfh_class_wkr__list wkr = new Gfh_class_wkr__list();

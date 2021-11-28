@@ -19,10 +19,10 @@ import gplx.xowa.files.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Gallery_mgr_packed_base__tst {
 	private final    Gallery_mgr_packed_base__fxt fxt = new Gallery_mgr_packed_base__fxt();
-	@Test  public void Get_thumb_size_static() {
+	@Test public void Get_thumb_size_static() {
 		fxt.Test__Get_thumb_size_static(Xof_ext_.Id_png, 300, 200, fxt.Make__lnki(4650, 450));
 	}
-	@Test  public void Adjust_image_parameters() {// PURPOSE: use ceil; ISSUE#:640; DATE:2020-01-08
+	@Test public void Adjust_image_parameters() {// PURPOSE: use ceil; ISSUE#:640; DATE:2020-01-08
 		fxt.Test__Adjust_image_parameters(fxt.Make__file(4, 4), 3, 3); // fails if 2, 2
 	}
 }

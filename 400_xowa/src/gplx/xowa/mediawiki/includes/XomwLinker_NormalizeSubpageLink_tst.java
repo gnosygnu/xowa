@@ -17,13 +17,13 @@ package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*; import gplx.core.tests.*;
 public class XomwLinker_NormalizeSubpageLink_tst {
 	private final    XomwLinker_NormalizeSubpageLink_fxt fxt = new XomwLinker_NormalizeSubpageLink_fxt();
-	@Test  public void None()                {fxt.Test__normalize_subpage_link("A/B/C"          , "Z"             , ""    , "Z"          , "");}
-	@Test  public void Hash()                {fxt.Test__normalize_subpage_link("A/B/C"          , "/Y#Z"          , ""    , "A/B/C/Y#Z"  , "/Y#Z");}
-	@Test  public void Slash__basic()        {fxt.Test__normalize_subpage_link("A/B/C"          , "/Z"            , ""    , "A/B/C/Z"    , "/Z");}
-	@Test  public void Slash__slash()        {fxt.Test__normalize_subpage_link("A/B/C"          , "/Z/"           , ""    , "A/B/C/Z"    , "Z");}
-	@Test  public void Dot2__empty()         {fxt.Test__normalize_subpage_link("A/B/C"          , "../"           , ""    , "A/B"        , "");}
-	@Test  public void Dot2__many()          {fxt.Test__normalize_subpage_link("A/B/C"          , "../../Z"       , "z1"  , "A/Z"        , "z1");}
-	@Test  public void Dot2__trailing()      {fxt.Test__normalize_subpage_link("A/B/C"          , "../../Z/"      , ""    , "A/Z"        , "Z");}
+	@Test public void None()                {fxt.Test__normalize_subpage_link("A/B/C"          , "Z"             , ""    , "Z"          , "");}
+	@Test public void Hash()                {fxt.Test__normalize_subpage_link("A/B/C"          , "/Y#Z"          , ""    , "A/B/C/Y#Z"  , "/Y#Z");}
+	@Test public void Slash__basic()        {fxt.Test__normalize_subpage_link("A/B/C"          , "/Z"            , ""    , "A/B/C/Z"    , "/Z");}
+	@Test public void Slash__slash()        {fxt.Test__normalize_subpage_link("A/B/C"          , "/Z/"           , ""    , "A/B/C/Z"    , "Z");}
+	@Test public void Dot2__empty()         {fxt.Test__normalize_subpage_link("A/B/C"          , "../"           , ""    , "A/B"        , "");}
+	@Test public void Dot2__many()          {fxt.Test__normalize_subpage_link("A/B/C"          , "../../Z"       , "z1"  , "A/Z"        , "z1");}
+	@Test public void Dot2__trailing()      {fxt.Test__normalize_subpage_link("A/B/C"          , "../../Z/"      , ""    , "A/Z"        , "Z");}
 }
 class XomwLinker_NormalizeSubpageLink_fxt {
 	private final    XomwEnv env;

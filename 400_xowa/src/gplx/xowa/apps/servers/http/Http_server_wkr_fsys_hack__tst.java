@@ -17,40 +17,40 @@ package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.core.tests.*;
 public class Http_server_wkr_fsys_hack__tst {
 	private final    Http_server_wkr_fsys_hack__fxt fxt = new Http_server_wkr_fsys_hack__fxt();
-	@Test   public void File_bgn_missing() { // "file:" missing
+	@Test  public void File_bgn_missing() { // "file:" missing
 		fxt.Test__Replace_fsys_hack("src='file////home/lnxusr/xowa/file/'");
 	}
-	@Test   public void File_bgn_at_bos() { // "file:" at start of page
+	@Test  public void File_bgn_at_bos() { // "file:" at start of page
 		fxt.Test__Replace_fsys_hack("file:////home/lnxusr/xowa/file/");
 	}
-	@Test   public void Quote_bgn_missing() {
+	@Test  public void Quote_bgn_missing() {
 		fxt.Test__Replace_fsys_hack("<file:////home/lnxusr/xowa/file/>");
 	}
-	@Test   public void Quote_end_missing() {
+	@Test  public void Quote_end_missing() {
 		fxt.Test__Replace_fsys_hack("a'file:////home/lnxusr/xowa/file/");
 	}
-	@Test   public void Too_long() { // skip if too long
+	@Test  public void Too_long() { // skip if too long
 		fxt.Test__Replace_fsys_hack("'file:" + String_.Repeat("a", 301) + "'");
 	}
-	@Test   public void File_mid_missing() { // skip if no /file/
+	@Test  public void File_mid_missing() { // skip if no /file/
 		fxt.Test__Replace_fsys_hack("'file:////home/lnxusr/xowa/file_missing/'");
 	}
-	@Test   public void File__one() {
+	@Test  public void File__one() {
 		fxt.Test__Replace_fsys_hack("'file:////home/lnxusr/xowa/file/A.png'", "'/fsys/file/A.png'");
 	}
-	@Test   public void File__many() {
+	@Test  public void File__many() {
 		fxt.Test__Replace_fsys_hack("a 'file:////home/lnxusr/xowa/file/A.png' b 'file:////home/lnxusr/xowa/file/B.png' c", "a '/fsys/file/A.png' b '/fsys/file/B.png' c");
 	}
-	@Test   public void Quote() {
+	@Test  public void Quote() {
 		fxt.Test__Replace_fsys_hack("a \"file:////home/lnxusr/xowa/file/A.png\" b", "a \"/fsys/file/A.png\" b");
 	}
-	@Test   public void Ws() {
+	@Test  public void Ws() {
 		fxt.Test__Replace_fsys_hack("a file:////home/lnxusr/xowa/file/A.png\nb", "a /fsys/file/A.png\nb");
 	}
-	@Test   public void Bin_any() {
+	@Test  public void Bin_any() {
 		fxt.Test__Replace_fsys_hack("a 'file:///C:/xowa/bin/any/xowa/file/app.window/app_icon.png' b", "a '/fsys/bin/any/xowa/file/app.window/app_icon.png' b");
 	}
-	@Test   public void Url() {
+	@Test  public void Url() {
 		fxt.Test__Replace_fsys_hack("url(file:///C:/xowa/user/anonymous/wiki/en.wikipedia.org/html/logo.png)", "url(/fsys/user/anonymous/wiki/en.wikipedia.org/html/logo.png)");
 	}
 }

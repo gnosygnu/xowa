@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; im
 import org.junit.*;
 public class Xobldr__lnki_temp__create__tst {
 	private Xobldr__lnki_temp__create__fxt fxt = new Xobldr__lnki_temp__create__fxt();
-	@Test   public void Xto_commons() {
+	@Test  public void Xto_commons() {
 		fxt.Init__to_commons(true);
 		fxt.Test__to_commons("a", "A");
 		fxt.Test__to_commons("A", null);

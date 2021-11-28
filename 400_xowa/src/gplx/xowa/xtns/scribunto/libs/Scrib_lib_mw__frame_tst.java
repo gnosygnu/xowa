@@ -29,23 +29,23 @@ public class Scrib_lib_mw__frame_tst {
 			, fxt.Init__mock_fnc_for_lib("Get_frame_title_parent", lib, Scrib_lib_mw.Invk_getFrameTitle, "parent")
 			);
 	}
-	@Test  public void GetFrameTitle__template() {
+	@Test public void GetFrameTitle__template() {
 		fxt.Init__page("Template:Template_1", "{{#invoke:Mod_1|Get_frame_title_{{{1}}}}}");
 		fxt.Test__parse__tmpl_to_html("{{Template_1|current}}", "Module:Mod 1");
 		fxt.Test__parse__tmpl_to_html("{{Template_1|parent}}" , "Template:Template 1");
 	}
-	@Test  public void GetFrameTitle__transclude() {
+	@Test public void GetFrameTitle__transclude() {
 		fxt.Init__page("Page_1", "{{#invoke:Mod_1|Get_frame_title_parent}}");
 		fxt.Test__parse__tmpl_to_html("{{:Page_1}}", "Page 1");
 
 		fxt.Init__page("Page_2", "{{#invoke:Mod_1|Get_frame_title_current}}");
 		fxt.Test__parse__tmpl_to_html("{{:Page_2}}", "Module:Mod 1");
 	}
-	@Test  public void GetFrameTitle__page() {
+	@Test public void GetFrameTitle__page() {
 		fxt.Test__parse__tmpl_to_html("{{#invoke:Mod_1|Get_frame_title_parent}}", "Test page");
 		fxt.Test__parse__tmpl_to_html("{{#invoke:Mod_1|Get_frame_title_current}}", "Module:Mod 1");
 	}
-	@Test  public void GetFrameTitle__onlyinclude() {
+	@Test public void GetFrameTitle__onlyinclude() {
 		fxt.Test__parse__tmpl_to_html("<onlyinclude>{{#invoke:Mod_1|Get_frame_title_parent}}</onlyinclude>", "Test page");
 		fxt.Test__parse__tmpl_to_html("<onlyinclude>{{#invoke:Mod_1|Get_frame_title_current}}</onlyinclude>", "Module:Mod 1");
 	}

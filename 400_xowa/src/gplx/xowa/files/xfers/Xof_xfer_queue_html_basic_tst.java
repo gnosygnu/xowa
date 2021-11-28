@@ -19,7 +19,7 @@ import gplx.core.ios.*; import gplx.gfui.*; import gplx.xowa.files.*;
 public class Xof_xfer_queue_html_basic_tst {
 	Xof_xfer_queue_html_fxt fxt = new Xof_xfer_queue_html_fxt();
 	@Before public void init() {fxt.Clear(true);}
-	@Test  public void Main_orig() {
+	@Test public void Main_orig() {
 		fxt	.ini_page_create_en_wiki("File:A.png");
 		fxt	.Lnki_orig_("A.png")
 			.Src(	fxt.img_("mem/src/en.wikipedia.org/7/70/A.png", 900, 800))
@@ -28,7 +28,7 @@ public class Xof_xfer_queue_html_basic_tst {
 				);
 		fxt.tst();
 	}
-	@Test  public void Main_thumb_download() {
+	@Test public void Main_thumb_download() {
 		fxt	.ini_page_create_en_wiki("File:A.png");
 		fxt	.Lnki_thumb_("A.png", 90)
 			.Src(	fxt.img_("mem/src/en.wikipedia.org/thumb/7/70/A.png/90px-A.png", 90, 80))
@@ -37,7 +37,7 @@ public class Xof_xfer_queue_html_basic_tst {
 				);
 		fxt.tst();
 	}
-	@Test  public void Main_thumb_convert() {
+	@Test public void Main_thumb_convert() {
 		fxt	.ini_page_create_en_wiki("File:A.png");
 		fxt	.Lnki_thumb_("A.png", 90)
 			.Src(	fxt.img_("mem/src/en.wikipedia.org/7/70/A.png", 900, 800))
@@ -47,7 +47,7 @@ public class Xof_xfer_queue_html_basic_tst {
 				);
 		fxt.tst();
 	}
-	@Test  public void Ptr_orig() {
+	@Test public void Ptr_orig() {
 		fxt	.ini_page_create_en_wiki			("File:A.png");
 		fxt	.ini_page_create_en_wiki_redirect	("File:B.png", "File:A.png");
 		fxt	.Lnki_orig_("B.png")
@@ -60,7 +60,7 @@ public class Xof_xfer_queue_html_basic_tst {
 			.Html_src_("file:///mem/trg/en.wikipedia.org/raw/7/0/A.png")
 			.tst();
 	}
-	@Test  public void Ptr_thumb_download() {
+	@Test public void Ptr_thumb_download() {
 		fxt	.ini_page_create_en_wiki			("File:A.png");
 		fxt	.ini_page_create_en_wiki_redirect	("File:B.png", "File:A.png");
 		fxt	.Lnki_thumb_("B.png", 90)
@@ -70,7 +70,7 @@ public class Xof_xfer_queue_html_basic_tst {
 				);
 		fxt.tst();
 	}
-	@Test  public void Ptr_thumb_convert() {
+	@Test public void Ptr_thumb_convert() {
 		fxt	.ini_page_create_en_wiki			("File:A.png");
 		fxt	.ini_page_create_en_wiki_redirect	("File:B.png", "File:A.png");
 		fxt	.Lnki_thumb_("B.png", 90)
@@ -81,7 +81,7 @@ public class Xof_xfer_queue_html_basic_tst {
 				);
 		fxt.tst();
 	}
-	@Test  public void Vrtl_orig() {
+	@Test public void Vrtl_orig() {
 		fxt	.ini_page_create_commons			("File:A.png");
 		fxt	.Lnki_orig_("A.png")
 			.Src(	fxt.img_("mem/src/commons.wikimedia.org/7/70/A.png", 900, 800))
@@ -90,7 +90,7 @@ public class Xof_xfer_queue_html_basic_tst {
 				);
 		fxt.tst();
 	}
-	@Test  public void Vrtl_thumb_download() {
+	@Test public void Vrtl_thumb_download() {
 		fxt	.ini_page_create_commons			("File:A.png");
 		fxt	.Lnki_thumb_("A.png", 90)
 			.Src(	fxt.img_("mem/src/commons.wikimedia.org/thumb/7/70/A.png/90px-A.png", 90, 80))
@@ -99,7 +99,7 @@ public class Xof_xfer_queue_html_basic_tst {
 				);
 		fxt.tst();
 	}
-	@Test  public void Vrtl_thumb_convert() {
+	@Test public void Vrtl_thumb_convert() {
 		fxt	.ini_page_create_commons			("File:A.png");
 		fxt	.Lnki_thumb_("A.png", 90)
 			.Src(	fxt.img_("mem/src/commons.wikimedia.org/7/70/A.png", 900, 800))
@@ -109,7 +109,7 @@ public class Xof_xfer_queue_html_basic_tst {
 				);
 		fxt.tst();
 	}
-	@Test  public void Vrtl_ptr_orig() {
+	@Test public void Vrtl_ptr_orig() {
 		fxt	.ini_page_create_commons_redirect	("File:B.png", "File:A.png");
 		fxt	.ini_page_create_commons			("File:A.png");
 		fxt	.Lnki_orig_("B.png")
@@ -119,7 +119,7 @@ public class Xof_xfer_queue_html_basic_tst {
 				);
 		fxt.tst();
 	}
-	@Test  public void Ptr_vrtl_orig() {
+	@Test public void Ptr_vrtl_orig() {
 		fxt	.ini_page_create_en_wiki_redirect	("File:B.png", "File:A.png");
 		fxt	.ini_page_create_commons			("File:A.png");
 		fxt	.Lnki_orig_("B.png")

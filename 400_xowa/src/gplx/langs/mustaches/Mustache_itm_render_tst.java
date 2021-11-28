@@ -52,7 +52,7 @@ public class Mustache_itm_render_tst {
 		fxt.Test__parse("a{{^bool_n}}b{{/bool_n}}c", "abc");
 		fxt.Test__parse("a{{^bool_y}}b{{/bool_y}}c{{^bool_n}}d{{/bool_n}}e", "acde");
 	}
-	@Test  public void Section_ws() {
+	@Test public void Section_ws() {
 		fxt.Init__root(fxt.Make_mock(0).Add_bool_y("bool_y"));
 		fxt.Test__parse("a\n  {{#bool_y}}   \nb\n  {{/bool_y}}   \nc", "a\nb\nc");
 	}

@@ -17,14 +17,14 @@ package gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs; import gplx.*; import 
 import org.junit.*; import gplx.core.tests.*;
 public class Xoctg_collation_wkr___tst {
 	private final    Xoctg_collation_wkr___fxt fxt = new Xoctg_collation_wkr___fxt();
-	@Test   public void Uppercase()							{fxt.Test__make("uppercase"	, "uppercase");}
-	@Test   public void Identity()							{fxt.Test__make("identity"	, "identity");}
-	@Test   public void Unknown()							{fxt.Test__make("unknown"	, "uppercase");}
-	@Test   public void Uca__uca_default()					{fxt.Test__make__uca("uca-default"					, "en", false);}
-	@Test   public void Uca__xx_uca_ckb()					{fxt.Test__make__uca("xx-uca-ckb"					, "fa", false);}
-	@Test   public void Uca__xx_uca_et()					{fxt.Test__make__uca("xx-uca-et"					, "et", false);}
-	@Test   public void Uca__uca_default_u_kn()				{fxt.Test__make__uca("uca-default-u-kn"				, "en", true);}
-	@Test   public void Uca__uca_at_logic()					{fxt.Test__make__uca("uca-sv@collation=standard"	, "sv", false);}
+	@Test  public void Uppercase()							{fxt.Test__make("uppercase"	, "uppercase");}
+	@Test  public void Identity()							{fxt.Test__make("identity"	, "identity");}
+	@Test  public void Unknown()							{fxt.Test__make("unknown"	, "uppercase");}
+	@Test  public void Uca__uca_default()					{fxt.Test__make__uca("uca-default"					, "en", false);}
+	@Test  public void Uca__xx_uca_ckb()					{fxt.Test__make__uca("xx-uca-ckb"					, "fa", false);}
+	@Test  public void Uca__xx_uca_et()					{fxt.Test__make__uca("xx-uca-et"					, "et", false);}
+	@Test  public void Uca__uca_default_u_kn()				{fxt.Test__make__uca("uca-default-u-kn"				, "en", true);}
+	@Test  public void Uca__uca_at_logic()					{fxt.Test__make__uca("uca-sv@collation=standard"	, "sv", false);}
 }
 class Xoctg_collation_wkr___fxt {
 	public void Test__make(String wm_name, String expd_type) {

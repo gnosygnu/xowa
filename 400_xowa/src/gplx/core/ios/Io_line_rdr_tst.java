@@ -21,21 +21,21 @@ public class Io_line_rdr_tst {
 		fxt = new Io_line_rdr_fxt(Io_url_.new_fil_("mem/test.txt"));
 		fxt.Clear();
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.File_lines_(3).tst_Read_til_lines(3, "00", "01", "02");
 		fxt.tst_Read_til_lines(1);	// make sure nothing more is read
 	}
-	@Test  public void Load_3x() {
+	@Test public void Load_3x() {
 		fxt.File_lines_(9).Load_len_lines_(3).tst_Read_til_lines(9, "00", "01", "02", "03", "04", "05", "06", "07", "08");
 	}
-	@Test  public void Load_irregular() {
+	@Test public void Load_irregular() {
 		fxt.File_lines_(9).Load_len_(4).tst_Read_til_lines(9, "00", "01", "02", "03", "04", "05", "06", "07", "08");
 	}
-	@Test  public void Load_multiple_files() {
+	@Test public void Load_multiple_files() {
 		fxt = new Io_line_rdr_fxt(Io_url_.new_fil_("mem/test0.txt"), Io_url_.new_fil_("mem/test1.txt"), Io_url_.new_fil_("mem/test2.txt"));
 		fxt.File_lines_(0, 0, 3).File_lines_(1, 3, 5).File_lines_(2, 5, 9).Load_len_(4).tst_Read_til_lines(9, "00", "01", "02", "03", "04", "05", "06", "07", "08");
 	}
-	@Test  public void Match() {
+	@Test public void Match() {
 		fxt.File_lines_pipe_(9).Load_len_(6);
 		fxt.tst_Match("00", "00");
 		fxt.tst_Match("01", "01");

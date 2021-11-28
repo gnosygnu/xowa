@@ -17,7 +17,7 @@ package gplx.core.encoders; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class B85_fp__tst {
 	private final B85_fp__fxt fxt = new B85_fp__fxt();
-	@Test  public void Double_to_str() {
+	@Test public void Double_to_str() {
 		fxt.Test__to_str(.1d, "/\"");
 	}
 }

@@ -17,7 +17,7 @@ package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Xop_tblw_wkr__errs_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Err_row_empty() {
+	@Test public void Err_row_empty() {
 		fxt.Test_parse_page_wiki("{|\n|-\n|-\n|a\n|}"
 			,	fxt.tkn_tblw_tb_(0, 14).Subs_
 			(		fxt.tkn_tblw_tr_(2,  5)
@@ -26,7 +26,7 @@ public class Xop_tblw_wkr__errs_tst {
 			))
 			);
 	}
-	@Test  public void Err_row_trailing() {
+	@Test public void Err_row_trailing() {
 		fxt.Test_parse_page_wiki("{|\n|-\n|a\n|-\n|}"
 			, fxt.tkn_tblw_tb_(0, 14).Subs_
 			(	fxt.tkn_tblw_tr_(2, 8).Subs_
@@ -34,14 +34,14 @@ public class Xop_tblw_wkr__errs_tst {
 			))
 			);
 	}
-	@Test  public void Err_caption_after_tr() {
+	@Test public void Err_caption_after_tr() {
 		fxt.Test_parse_page_wiki("{|\n|-\n|+a\n|}"
 			, fxt.tkn_tblw_tb_(0, 12).Caption_count_(1).Subs_
 			(	fxt.tkn_tblw_tr_(2, 5)
 			,	fxt.tkn_tblw_tc_(5, 9).Subs_(fxt.tkn_txt_(8, 9), fxt.tkn_para_blank_(10)))
 			);
 	}
-	@Test  public void Err_caption_after_td() {
+	@Test public void Err_caption_after_td() {
 		fxt.Init_log_(Xop_tblw_log.Caption_after_td).Test_parse_page_wiki("{|\n|-\n|a\n|+b\n|}"
 			, fxt.tkn_tblw_tb_(0, 15).Caption_count_(1).Subs_
 			(	fxt.tkn_tblw_tr_(2,  8).Subs_
@@ -49,21 +49,21 @@ public class Xop_tblw_wkr__errs_tst {
 			,	fxt.tkn_tblw_tc_(8, 12).Subs_(fxt.tkn_txt_(11, 12), fxt.tkn_para_blank_(13)))
 			);
 	}
-	@Test  public void Err_caption_after_tc() {
+	@Test public void Err_caption_after_tc() {
 		fxt.Init_log_(Xop_tblw_log.Caption_after_tc).Test_parse_page_wiki("{|\n|+a\n|+b\n|}"
 			, fxt.tkn_tblw_tb_(0, 13).Caption_count_(2).Subs_
 			(	fxt.tkn_tblw_tc_(2,  6).Subs_(fxt.tkn_txt_( 5, 6))
 			,	fxt.tkn_tblw_tc_(6, 10).Subs_(fxt.tkn_txt_( 9, 10), fxt.tkn_para_blank_(11)))
 			);
 	}
-	@Test  public void Err_row_auto_opened() {
+	@Test public void Err_row_auto_opened() {
 		fxt.Test_parse_page_wiki("{|\n|a\n|}"
 			, fxt.tkn_tblw_tb_(0, 8).Subs_
 			(	fxt.tkn_tblw_tr_(2, 5).Subs_
 			(		fxt.tkn_tblw_td_(2, 5).Subs_(fxt.tkn_txt_(4, 5), fxt.tkn_para_blank_(6))
 			)));
 	}
-	@Test  public void Err_caption_auto_closed() {
+	@Test public void Err_caption_auto_closed() {
 		fxt.Test_parse_page_wiki("{|\n|+a\n|b\n|}"
 			, fxt.tkn_tblw_tb_(0, 12).Caption_count_(1).Subs_
 			(	fxt.tkn_tblw_tc_(2, 6).Subs_(fxt.tkn_txt_(5, 6))
@@ -71,7 +71,7 @@ public class Xop_tblw_wkr__errs_tst {
 			(		fxt.tkn_tblw_td_(6, 9).Subs_(fxt.tkn_txt_(8, 9),fxt.tkn_para_blank_(10))
 			)));
 	}
-	@Test  public void Err_Atrs_dumped_into_text() {	// PURPOSE: [[Prawn]] and {{Taxobox}} was dumping text
+	@Test public void Err_Atrs_dumped_into_text() {	// PURPOSE: [[Prawn]] and {{Taxobox}} was dumping text
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"{|"
 			,	"|-"

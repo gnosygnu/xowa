@@ -26,21 +26,21 @@ public class Listing_xnde_template_tst {
 		listings_xtn_mgr.Enabled_y_();			
 	}
 	private void Init_xtn_mgr() {listings_xtn_mgr.Xtn_init_by_wiki(fxt.Wiki());}
-	@Test  public void Disabled() {
+	@Test public void Disabled() {
 		listings_xtn_mgr.Enabled_n_();
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' address='address_0'>content_0</sleep>"
 		,	"&lt;sleep name='name_0' address='address_0'&gt;content_0&lt;/sleep&gt;"
 		);
 	}
-	@Test  public void Ignore_empty() {
+	@Test public void Ignore_empty() {
 		Init_xtn_mgr();
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' alt='' address='' directions='' phone='' url='' checkin='' checkout='' price='' lat='' long=''>  </sleep>"
 		,	"<strong>name_0</strong>. "
 		);
 	}
-	@Test  public void Ignore_invalid() {	// PURPOSE: invalid atrs were causing null reference exception; PAGE:nl.v:Rome;EX:<sleep phone='' "abc"/> DATE:2014-06-04
+	@Test public void Ignore_invalid() {	// PURPOSE: invalid atrs were causing null reference exception; PAGE:nl.v:Rome;EX:<sleep phone='' "abc"/> DATE:2014-06-04
 		fxt.Init_page_create("Template:ListingsSample", "{{{name|nil_name}}};{{{address|nil_address}}};{{{1|nil_content}}}");
 		fxt.Init_page_create("MediaWiki:listings-template", "ListingsSample");
 		Init_xtn_mgr();
@@ -49,7 +49,7 @@ public class Listing_xnde_template_tst {
 		,	"name_0;nil_address;"
 		);
 	}
-	@Test  public void Template() {
+	@Test public void Template() {
 		fxt.Init_page_create("Template:ListingsSample", "{{{name|nil_name}}};{{{address|nil_address}}};{{{1|nil_content}}}");
 		fxt.Init_page_create("MediaWiki:listings-template", "ListingsSample");
 		Init_xtn_mgr();
@@ -58,7 +58,7 @@ public class Listing_xnde_template_tst {
 		,	"name_0;address_0;content_0"
 		);
 	}
-	@Test  public void Template_lat() {	// PURPOSE: lat / long was not being set for listings sample; PAGE:fr.v:Marrakech; DATE:2014-05-21
+	@Test public void Template_lat() {	// PURPOSE: lat / long was not being set for listings sample; PAGE:fr.v:Marrakech; DATE:2014-05-21
 		fxt.Init_page_create("Template:ListingsSample2", "{{{name|nil_name}}};{{{lat|nil_lat}}};{{{long|nil_long}}}");
 		fxt.Init_page_create("MediaWiki:listings-template", "ListingsSample2");
 		Init_xtn_mgr();
@@ -67,7 +67,7 @@ public class Listing_xnde_template_tst {
 		,	"name_0;12;"
 		);
 	}
-	@Test  public void Position_template_as_text() {
+	@Test public void Position_template_as_text() {
 		fxt.Init_page_create("MediaWiki:listings-position-template"	, "position_template|$1|$2");
 		fxt.Init_page_create("Template:position_template"			, "tmpl:lat={{{1}}} long={{{2}}}");
 		fxt.Init_page_create("MediaWiki:listings-position"			, "msg: $1");
@@ -77,7 +77,7 @@ public class Listing_xnde_template_tst {
 		,	"<strong>name_0</strong> (<em>msg: tmpl:lat=100 long=200</em>). "
 		);
 	}
-	@Test  public void Phone__text() {
+	@Test public void Phone__text() {
 		fxt.Init_page_create("MediaWiki:listings-phone"				, "phone");
 		Init_xtn_mgr();
 		fxt.Test_parse_page_all_str
@@ -85,7 +85,7 @@ public class Listing_xnde_template_tst {
 		,	"<strong>name_0</strong>, <abbr title=\"phone\">☎</abbr> 0. "
 		);
 	}
-	@Test  public void Phone__text_and_symbol() {
+	@Test public void Phone__text_and_symbol() {
 		fxt.Init_page_create("MediaWiki:listings-phone"				, "phone");
 		fxt.Init_page_create("MediaWiki:listings-phone-symbol"		, "P");
 		Init_xtn_mgr();
@@ -94,7 +94,7 @@ public class Listing_xnde_template_tst {
 		,	"<strong>name_0</strong>, <abbr title=\"phone\">P</abbr> 0. "
 		);
 	}
-	@Test  public void Tollfree__text_and_symbol() {
+	@Test public void Tollfree__text_and_symbol() {
 		fxt.Init_page_create("MediaWiki:listings-tollfree"				, "tollfree");
 		fxt.Init_page_create("MediaWiki:listings-tollfree-symbol"		, "tf");
 		Init_xtn_mgr();
@@ -103,7 +103,7 @@ public class Listing_xnde_template_tst {
 		,	"<strong>name_0</strong>, <abbr title=\"phone\">☎</abbr>  (<abbr title=\"tollfree\">tf</abbr>: 0). "
 		);
 	}
-	@Test  public void Fax__text_and_symbol() {
+	@Test public void Fax__text_and_symbol() {
 		fxt.Init_page_create("MediaWiki:listings-fax"				, "fax");
 		fxt.Init_page_create("MediaWiki:listings-fax-symbol"		, "f");
 		Init_xtn_mgr();
@@ -112,7 +112,7 @@ public class Listing_xnde_template_tst {
 		,	"<strong>name_0</strong>, <abbr title=\"fax\">f</abbr>: 0. "
 		);
 	}
-	@Test  public void Email__text_and_symbol() {
+	@Test public void Email__text_and_symbol() {
 		fxt.Init_page_create("MediaWiki:listings-email"				, "email");
 		fxt.Init_page_create("MediaWiki:listings-email-symbol"		, "e");
 		Init_xtn_mgr();
@@ -121,7 +121,7 @@ public class Listing_xnde_template_tst {
 		,	"<strong>name_0</strong>, <abbr title=\"email\">e</abbr>: <a href=\"mailto:a@b.org\" class=\"email\">a@b.org</a>. "
 		);
 	}
-	@Test  public void Checkin__template() {
+	@Test public void Checkin__template() {
 		fxt.Init_page_create("MediaWiki:listings-checkin"				, "checkin: $1");
 		Init_xtn_mgr();
 		fxt.Test_parse_page_all_str
@@ -129,7 +129,7 @@ public class Listing_xnde_template_tst {
 		,	"<strong>name_0</strong>. checkin: checkin_0. "
 		);
 	}
-	@Test  public void Checkout__template() {
+	@Test public void Checkout__template() {
 		fxt.Init_page_create("MediaWiki:listings-checkout"				, "checkout: $1");
 		Init_xtn_mgr();
 		fxt.Test_parse_page_all_str

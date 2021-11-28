@@ -17,7 +17,7 @@ package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 public class Xop_section_list__slice__tst {
 	private final    Xop_section_list__fxt fxt = new Xop_section_list__fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"
@@ -41,7 +41,7 @@ public class Xop_section_list__slice__tst {
 		, "Para 3"
 		);
 	}
-	@Test   public void Covering() {
+	@Test  public void Covering() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"
@@ -66,7 +66,7 @@ public class Xop_section_list__slice__tst {
 		, "Para 1b"
 		);
 	}
-	@Test   public void Xml() {
+	@Test  public void Xml() {
 		fxt.Exec__parse
 		( "== <i>Hdr 1</i> =="
 		, "Para 1"
@@ -79,7 +79,7 @@ public class Xop_section_list__slice__tst {
 		, "Para 1"
 		));
 	}
-	@Test   public void Math() {
+	@Test  public void Math() {
 		fxt.Exec__parse
 		( "== <math>\\delta</math> =="
 		, "Para 1"
@@ -92,7 +92,7 @@ public class Xop_section_list__slice__tst {
 		, "Para 1"
 		));
 	}
-	@Test   public void Template() {
+	@Test  public void Template() {
 		fxt.Init__template("mock", "''{{{1}}}''");
 		fxt.Exec__parse
 		( "== {{mock|a}} =="
@@ -106,7 +106,7 @@ public class Xop_section_list__slice__tst {
 		, "Para 1"
 		));
 	}
-	@Test   public void Lead() {
+	@Test  public void Lead() {
 		fxt.Exec__parse
 		( "lead text"
 		, ""
@@ -118,7 +118,7 @@ public class Xop_section_list__slice__tst {
 		, "lead text"
 		);
 	}
-	@Test   public void Lead__none() {
+	@Test  public void Lead__none() {
 		fxt.Exec__parse
 		( ""
 		, "== Hdr 1 =="
@@ -127,7 +127,7 @@ public class Xop_section_list__slice__tst {
 		);
 		fxt.Test__slice_bry_or_null("");
 	}
-	@Test   public void Lead__eos() {
+	@Test  public void Lead__eos() {
 		fxt.Exec__parse
 		( "lead text"
 		, ""

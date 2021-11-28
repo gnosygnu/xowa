@@ -18,7 +18,7 @@ import org.junit.*;
 public class z423_types_apply_ndes_misc_tst {
 	@Before public void setup() {
 	}	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void Recurse() {
+	@Test public void Recurse() {
 		fx.Regy().Add(
 			fx.typ_().Key_("item").Subs_
 			(	GfmlFld_mok.new_().ini_atr_("key")
@@ -31,7 +31,7 @@ public class z423_types_apply_ndes_misc_tst {
 			(		fx.nde_().Hnd_("item").Atrk_("key", "2")				
 			));
 	}
-	@Test  public void OwnerTypePrecedesTopLevel() {
+	@Test public void OwnerTypePrecedesTopLevel() {
 		GfmlTypeMakr makr = GfmlTypeMakr.new_();
 		GfmlType topLevelSize = makr.MakeSubType("size", "width", "height");
 		GfmlType rect = makr.MakeSubTypeAsOwner("rect");

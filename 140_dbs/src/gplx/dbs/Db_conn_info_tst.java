@@ -19,7 +19,7 @@ public class Db_conn_info_tst {
 	@Before public void setup() {
 		regy.Add(Db_conn_info_mock.Instance);
 	}	private final Db_conn_info_pool regy = new Db_conn_info_pool();
-	@Test  public void Parse() {
+	@Test public void Parse() {
 		tst_Parse("gplx_key=mock;id=1;", kv_("id", "1"));							 // one; gplx_key removed
 		tst_Parse("gplx_key=mock;id=1;name=me;", kv_("id", "1"), kv_("name", "me")); // many
 		tst_Parse("gplx_key=mock;id=1;name=me" , kv_("id", "1"), kv_("name", "me")); // no semi-colon at end

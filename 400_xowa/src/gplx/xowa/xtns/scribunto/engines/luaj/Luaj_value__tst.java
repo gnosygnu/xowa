@@ -20,7 +20,7 @@ import org.luaj.vm2.LuaTable;
 import org.luaj.vm2.LuaValue;
 public class Luaj_value__tst {
 		private static final Luaj_value__fxt fxt = new Luaj_value__fxt();
-	@Test  public void Obj_to_lua_val() {		
+	@Test public void Obj_to_lua_val() {
 		fxt.Test__Obj_to_lua_val
 		( 	Keyval_.Ary
 			(   Keyval_.new_("data", Object_.Ary

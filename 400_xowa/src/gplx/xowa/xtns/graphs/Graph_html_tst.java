@@ -20,7 +20,7 @@ public class Graph_html_tst {
 	@Before public void init() {
 		fxt.Reset();
 	}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Parser_fxt().Test_html_full_str(String_.Concat_lines_nl_skip_last
 		( "<graph>"
 		, "{"
@@ -39,17 +39,17 @@ public class Graph_html_tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Wikirawupload() {
+	@Test  public void Wikirawupload() {
 		String wtxt = fxt.Wikirawupload__wtxt();
 		fxt.Test__hview(wtxt, fxt.Hdump_n_().Wikirawupload__html(Bool_.Y));
 		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Wikirawupload__html(Bool_.N), fxt.Wikirawupload__html(Bool_.Y));
 	}
-	@Test   public void Literal_XOWA_ROOT() {
+	@Test  public void Literal_XOWA_ROOT() {
 		String wtxt = fxt.Literal_XOWA_ROOT__wtxt();
 		fxt.Test__hview(wtxt, fxt.Hdump_n_().Literal_XOWA_ROOT__html(Bool_.Y));
 		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Literal_XOWA_ROOT__html(Bool_.N), fxt.Literal_XOWA_ROOT__html(Bool_.Y));
 	}
-	@Test   public void Error__missing_endquote() {
+	@Test  public void Error__missing_endquote() {
 		fxt.Test__hload(String_.Concat_lines_nl_skip_last
 		( "<div class='mw-graph' xo-graph-version=2 data-xowa-hdump='graph-json'>"
 		, "{"
@@ -59,7 +59,7 @@ public class Graph_html_tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Error__invalid() {
+	@Test  public void Error__invalid() {
 		fxt.Test__hload(String_.Concat_lines_nl_skip_last
 		( "<div class='mw-graph' xo-graph-version=2 data-xowa-hdump='graph-json'>"
 		, "{"

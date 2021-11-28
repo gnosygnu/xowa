@@ -17,15 +17,15 @@ package gplx.core.brys.fmts; import gplx.*; import gplx.core.*; import gplx.core
 import org.junit.*;
 public class Bry_fmt_tst {
 	private final    Bry_fmt_fxt fxt = new Bry_fmt_fxt();
-	@Test  public void Text()			{fxt.Clear().Fmt("a").Test("a");}
-	@Test  public void Key__basic() 	{fxt.Clear().Fmt("~{key}").Vals("a").Test("a");}
-	@Test  public void Key__mult()		{fxt.Clear().Fmt("~{key1}~{key2}").Vals("a", "b").Test("ab");}
-	@Test  public void Key__repeat()	{fxt.Clear().Fmt("~{key1}~{key1}").Vals("a").Test("aa");}
-	@Test  public void Key__missing() 	{fxt.Clear().Fmt("~{key}").Test("~{key}");}
-	@Test  public void Tilde()			{fxt.Clear().Fmt("~~~~").Test("~~");}
-	@Test  public void Simple()			{fxt.Clear().Fmt("0~{key1}1~{key2}2").Vals(".", ",").Test("0.1,2");}
-	@Test  public void Arg()			{fxt.Clear().Fmt("~{custom}").Args("custom", new Bfr_fmt_arg_mok(123)).Test("123");}
-	@Test  public void Keys()			{fxt.Clear().Fmt("~{b}~{c}~{a}").Keys("a", "b", "c").Vals("a", "b", "c").Test("bca");}
+	@Test public void Text()			{fxt.Clear().Fmt("a").Test("a");}
+	@Test public void Key__basic() 	{fxt.Clear().Fmt("~{key}").Vals("a").Test("a");}
+	@Test public void Key__mult()		{fxt.Clear().Fmt("~{key1}~{key2}").Vals("a", "b").Test("ab");}
+	@Test public void Key__repeat()	{fxt.Clear().Fmt("~{key1}~{key1}").Vals("a").Test("aa");}
+	@Test public void Key__missing() 	{fxt.Clear().Fmt("~{key}").Test("~{key}");}
+	@Test public void Tilde()			{fxt.Clear().Fmt("~~~~").Test("~~");}
+	@Test public void Simple()			{fxt.Clear().Fmt("0~{key1}1~{key2}2").Vals(".", ",").Test("0.1,2");}
+	@Test public void Arg()			{fxt.Clear().Fmt("~{custom}").Args("custom", new Bfr_fmt_arg_mok(123)).Test("123");}
+	@Test public void Keys()			{fxt.Clear().Fmt("~{b}~{c}~{a}").Keys("a", "b", "c").Vals("a", "b", "c").Test("bca");}
 }
 class Bfr_fmt_arg_mok implements Bfr_arg {
 	private int num;

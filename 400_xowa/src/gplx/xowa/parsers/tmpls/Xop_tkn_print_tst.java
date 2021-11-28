@@ -17,15 +17,15 @@ package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Xop_tkn_print_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Text()			{tst_Print("a ''b'' c [[d]] e");}
-	@Test  public void Prm()			{tst_Print("{{{1}}}");}
-	@Test  public void Prm_dflt()		{tst_Print("{{{1|a}}}");}
-	@Test  public void Prm_dflt_prm()	{tst_Print("{{{1|{{{2}}}}}}");}
-	@Test  public void Tmpl()			{tst_Print("{{a}}");}
-	@Test  public void Tmpl_arg()		{tst_Print("{{a|1|2}}");}
-	@Test  public void Tmpl_arg_prm()	{tst_Print("{{a|1|{{{1}}}}}");}
-	@Test  public void Tmpl_arg_tmpl()	{tst_Print("{{a|1|{{b}}}}");}
-	@Test  public void Tmpl_pf()		{tst_Print("{{#expr:1}}");}
+	@Test public void Text()			{tst_Print("a ''b'' c [[d]] e");}
+	@Test public void Prm()			{tst_Print("{{{1}}}");}
+	@Test public void Prm_dflt()		{tst_Print("{{{1|a}}}");}
+	@Test public void Prm_dflt_prm()	{tst_Print("{{{1|{{{2}}}}}}");}
+	@Test public void Tmpl()			{tst_Print("{{a}}");}
+	@Test public void Tmpl_arg()		{tst_Print("{{a|1|2}}");}
+	@Test public void Tmpl_arg_prm()	{tst_Print("{{a|1|{{{1}}}}}");}
+	@Test public void Tmpl_arg_tmpl()	{tst_Print("{{a|1|{{b}}}}");}
+	@Test public void Tmpl_pf()		{tst_Print("{{#expr:1}}");}
 	private void tst_Print(String raw) {
 		Xop_ctx ctx = fxt.Ctx();
 		byte[] raw_bry = Bry_.new_u8(raw);

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs.setups.upgrades; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
 import org.junit.*;
 public class Xoa_upgrade_mgr_tst {
-	@Test  public void Run() {
+	@Test public void Run() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Io_url old_history_dir = app.Usere().Fsys_mgr().App_data_dir();
 		Io_url new_history_dir = app.Usere().Fsys_mgr().App_data_dir().GenSubDir("history");

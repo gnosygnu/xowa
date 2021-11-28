@@ -18,19 +18,19 @@ import org.junit.*;
 import gplx.langs.htmls.*;
 public class Xosync_page_loader__tst {
 	@Before public void init() {fxt.Clear();} private final    Xosync_page_loader__fxt fxt = new Xosync_page_loader__fxt();
-	@Test   public void File() {
+	@Test  public void File() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("a<img src='xowa:/file/commons.wikimedia.org/thumb/4/a/6/9/Commons-logo.svg/12px.png' width='12' height='20'>b"))
 			.Test__html(Gfh_utl.Replace_apos("a<img id='xoimg_0' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/4/a/6/9/Commons-logo.svg/12px.png' width='12' height='20'>b"))
 			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "Commons-logo.svg", "svg", 12, -1, -1))
 			;
 	}
-	@Test   public void Math() {
+	@Test  public void Math() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("a<img src='xowa:/math/596f8baf206a81478afd4194b44138715dc1a05c' width='12' height='20'>b"))
 			.Test__html(Gfh_utl.Replace_apos("a<img id='xoimg_0' src='file:///mem/xowa/file/math/596f8baf206a81478afd4194b44138715dc1a05c' width='12' height='20'>b"))
 			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.Y, "596f8baf206a81478afd4194b44138715dc1a05c", "svg", -1, -1, -1))
 			;
 	}
-	@Test   public void Ogg() {
+	@Test  public void Ogg() {
 		fxt.Exec__parse(Gfh_utl.Replace_apos("a<img src='xowa:/file/commons.wikimedia.org/thumb/4/2/7/e/A.ogg/320px.jpg'>b"))
 			.Test__html(Gfh_utl.Replace_apos("a<img id='xoimg_0' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/4/2/7/e/A.ogg/320px.jpg'>b"))
 			.Test__fsdb(fxt.Make__fsdb(Bool_.Y, Bool_.N, "A.ogg", "ogv", 320, -1, -1))

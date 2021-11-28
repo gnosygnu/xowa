@@ -17,7 +17,7 @@ package gplx.xowa.apps.setups; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*;
 public class Xoa_setup_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xoa_setup_mgr_fxt fxt = new Xoa_setup_mgr_fxt();
-	@Test  public void Compare() {
+	@Test public void Compare() {
 		fxt.Test_delete_old_dir("mem/dir/", "1.8.1.1"	, "1.8.2.1", Bool_.Y);		// version is earlier than checkpoint; delete
 		fxt.Test_delete_old_dir("mem/dir/", "1.8.2.1"	, "1.8.2.1", Bool_.N);		// version is not earlier than checkpoint; don't delete
 		fxt.Test_delete_old_dir("mem/dir/", ""			, "1.8.2.1", Bool_.Y);		// version is empty; delete;

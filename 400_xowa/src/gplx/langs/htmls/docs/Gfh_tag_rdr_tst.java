@@ -17,32 +17,32 @@ package gplx.langs.htmls.docs; import gplx.*; import gplx.langs.*; import gplx.l
 import org.junit.*;
 public class Gfh_tag_rdr_tst {
 	private final    Gfh_tag_rdr_fxt fxt = new Gfh_tag_rdr_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init("1<div id='1'>2</div>3<div id='2'>4</div>5<div id='3'>6</div>7");
 		fxt.Test__move_fwd_head("<div id='1'>"); fxt.Test__pos("2");
 		fxt.Test__peek_fwd_head("<div id='2'>"); fxt.Test__pos("2");
 		fxt.Test__move_fwd_head("<div id='2'>"); fxt.Test__pos("4");
 		fxt.Test__peek_bwd_tail("</div>3")	   ; fxt.Test__pos("4");
 	}
-	@Test   public void Comment() {
+	@Test  public void Comment() {
 		fxt.Init("1<!--2-->3<!--4-->5<div id='1'>6</div>");
 		fxt.Test__move_fwd_head(Gfh_tag_.Id__any		, "<div id='1'>")	; fxt.Test__pos("6");
 	}
-	@Test   public void Meta() {
+	@Test  public void Meta() {
 		fxt.Init("<!DOCTYPE html>1<div id='1'>2</div>3");
 		fxt.Test__move_fwd_head(Gfh_tag_.Id__div		, "<div id='1'>")	; fxt.Test__pos("2");
 	}
-	@Test   public void Recursive__same_tags() {
+	@Test  public void Recursive__same_tags() {
 		fxt.Init("1<a>2<a>3</a>4</a>5");
 		fxt.Test__move_fwd_head(Gfh_tag_.Id__a		, "<a>")	; fxt.Test__pos("2");
 		fxt.Test__move_fwd_tail(Gfh_tag_.Id__a		, "</a>")	; fxt.Test__pos("5");
 	}
-	@Test   public void Recursive__diff_tags() {
+	@Test  public void Recursive__diff_tags() {
 		fxt.Init("1<div>2<a>3<img/>4</a>5</div>6");
 		fxt.Test__move_fwd_head(Gfh_tag_.Id__div	, "<div>")	; fxt.Test__pos("2");
 		fxt.Test__move_fwd_tail(Gfh_tag_.Id__div	, "</div>")	; fxt.Test__pos("6");
 	}
-	@Test   public void Inline() {
+	@Test  public void Inline() {
 		fxt.Init("1<br/>2");
 		fxt.Test__move_fwd_head(Gfh_tag_.Id__br		, "<br/>")	; fxt.Test__pos("2");
 	}

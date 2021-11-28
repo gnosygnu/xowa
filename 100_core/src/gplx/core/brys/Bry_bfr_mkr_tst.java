@@ -18,21 +18,21 @@ import org.junit.*;
 public class Bry_bfr_mkr_tst {
 	private final Bry_bfr_mkr_fxt fxt = new Bry_bfr_mkr_fxt();
 	@Before public void setup() {fxt.Clear();}
-	@Test   public void Get_1() 		{fxt.Clear().Get().Test__used(0);}
-	@Test   public void Get_2()			{fxt.Clear().Get().Get().Test__used(0, 1);}
-	@Test   public void Get_3()			{fxt.Clear().Get().Get().Get().Test__used(0, 1, 2);}
-	@Test   public void Rls()			{fxt.Clear().Get().Rls(0).Test__used();}
-	@Test   public void Rls_skip_1() {
+	@Test  public void Get_1() 		{fxt.Clear().Get().Test__used(0);}
+	@Test  public void Get_2()			{fxt.Clear().Get().Get().Test__used(0, 1);}
+	@Test  public void Get_3()			{fxt.Clear().Get().Get().Get().Test__used(0, 1, 2);}
+	@Test  public void Rls()			{fxt.Clear().Get().Rls(0).Test__used();}
+	@Test  public void Rls_skip_1() {
 		fxt.Clear().Get().Get().Rls(0).Test__used(-1, 1);
 		fxt.Get().Test__used(0, 1);
 	}
-	@Test   public void Rls_skip_2_1() {
+	@Test  public void Rls_skip_2_1() {
 		fxt.Clear().Get().Get().Get().Rls(1).Rls(0).Test__used(-1, -1, 2);
 		fxt.Get().Test__used(0, -1, 2);
 		fxt.Get().Test__used(0, 1, 2);
 		fxt.Get().Test__used(0, 1, 2, 3);
 	}
-	@Test   public void Get_rls_get() {	// PURPOSE: defect in which last rls failed b/c was not doing ++ if rv existed
+	@Test  public void Get_rls_get() {	// PURPOSE: defect in which last rls failed b/c was not doing ++ if rv existed
 		fxt.Clear().Get().Rls(0).Get().Get().Rls(1).Rls(0).Test__used();
 	}
 }

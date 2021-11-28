@@ -23,22 +23,22 @@ public class Xoscript_doc_head__tst {
 		fxt.Exec__reg_marker("<!--bot-->", "bot");
 		fxt.Exec__doc__html("a<!--top-->b<!--bot-->c");
 	}
-	@Test  public void Add_html() {
+	@Test public void Add_html() {
 		fxt.Exec__add_html("top", "<b>add_1</b>");
 		fxt.Exec__add_html("top", "<b>add_2</b>");
 		fxt.Test__html("a<b>add_1</b><b>add_2</b><!--top-->b<!--bot-->c");
 	}
-	@Test  public void Add_html__default() {
+	@Test public void Add_html__default() {
 		fxt.Exec__add_html("<b>add_1</b>");
 		fxt.Test__html("a<b>add_1</b><!--top-->b<!--bot-->c");
 	}
-	@Test  public void Add_tag() {
+	@Test public void Add_tag() {
 		fxt.Exec__add_tag("top", "div", "div_body", "k0", "v0", "k1", "v1");
 		fxt.Test__html
 		( "a<div k0=\"v0\" k1=\"v1\">div_body</div>"
 		, "<!--top-->b<!--bot-->c");
 	}
-	@Test  public void Add_js_file() {
+	@Test public void Add_js_file() {
 		fxt.Exec__add_js_file("top", "./a.js");
 		fxt.Test__html
 		( "a<script src=\"file:///mem/wiki/test_wiki/bin/script/a.js\" type=\"text/javascript\"></script>"

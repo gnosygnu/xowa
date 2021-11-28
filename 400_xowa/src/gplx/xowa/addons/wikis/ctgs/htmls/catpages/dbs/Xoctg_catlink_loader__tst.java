@@ -18,10 +18,10 @@ import org.junit.*; import gplx.core.tests.*; import gplx.xowa.apps.urls.*;
 import gplx.xowa.langs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
 public class Xoctg_catlink_loader__tst {
 	private final    Xoctg_catlink_loader__fxt fxt = new Xoctg_catlink_loader__fxt();
-	@Test   public void Build_sortkey_val__v4() {			// PURPOSE: remove "\n" and afterwards else will omit 1 record
+	@Test  public void Build_sortkey_val__v4() {			// PURPOSE: remove "\n" and afterwards else will omit 1 record
 		fxt.Test__build_sortkey_sql(4, "A\nA", "x'41'");	// fails if "x'410a41'"
 	}
-	@Test   public void Build_sortkey_val__v2() {			// PURPOSE: remove "\n" and afterwards else SQL will be malformed
+	@Test  public void Build_sortkey_val__v2() {			// PURPOSE: remove "\n" and afterwards else SQL will be malformed
 		fxt.Test__build_sortkey_sql(2, "A\nA", "'A'");		// fails if "'A\nA'"
 	}
 }

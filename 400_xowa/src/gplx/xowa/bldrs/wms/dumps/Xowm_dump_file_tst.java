@@ -17,11 +17,11 @@ package gplx.xowa.bldrs.wms.dumps; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*;
 public class Xowm_dump_file_tst {
 	private final Xowm_dump_file_fxt fxt = new Xowm_dump_file_fxt();
-	@Test  public void Parse()	{fxt.Test_parse("enwiki-20121201-pages-articles.xml.bz2", "en.wikipedia.org", "20121201", Xowm_dump_type_.Int__pages_articles);}
-	@Test  public void Bld_dump_dir_url() {
+	@Test public void Parse()	{fxt.Test_parse("enwiki-20121201-pages-articles.xml.bz2", "en.wikipedia.org", "20121201", Xowm_dump_type_.Int__pages_articles);}
+	@Test public void Bld_dump_dir_url() {
 		fxt.Test_bld_dump_dir_url("simplewiki", "latest", "http://dumps.wikimedia.your.org/simplewiki/latest/");
 	}
-	@Test  public void Bld_dump_file_name() {
+	@Test public void Bld_dump_file_name() {
 		fxt.Test_bld_dump_file_name("simplewiki", "latest", Xowm_dump_type_.Str__pages_articles, "simplewiki-latest-pages-articles.xml.bz2");
 	}
 }

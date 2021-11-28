@@ -18,13 +18,13 @@ import org.junit.*;
 import gplx.xowa.langs.cases.*;
 public class Xow_ns_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xow_ns_mgr_fxt fxt = new Xow_ns_mgr_fxt();
-	@Test  public void Basic() 				{fxt.ini_ns_(-2, 0, 1).run_Ords_sort().tst_Ords(-2, -100, 0, 1);}
-	@Test  public void Talk_skip() 			{fxt.ini_ns_(-2, 0, 2, 3).run_Ords_sort().tst_Ords(-2, -100, 0, 1, 2, 3);}
-	@Test  public void Subj_skip() 			{fxt.ini_ns_(-2, 1, 2, 3).run_Ords_sort().tst_Ords(-2, -100, 0, 1, 2, 3);}
-	@Test  public void Out_of_order() 		{fxt.ini_ns_(3, 1, 2, -2).run_Ords_sort().tst_Ords(-2, -100, 0, 1, 2, 3);}
-	@Test  public void Skip_odd() 			{fxt.ini_ns_(-2, 1, 3).run_Ords_sort().tst_Ords(-2, -100, 0, 1, 2, 3);}
-	@Test  public void Skip_even() 			{fxt.ini_ns_(-2, 2, 4).run_Ords_sort().tst_Ords(-2, -100, 2, 3, 4, 5);}
-	@Test  public void Ns_alias() {
+	@Test public void Basic() 				{fxt.ini_ns_(-2, 0, 1).run_Ords_sort().tst_Ords(-2, -100, 0, 1);}
+	@Test public void Talk_skip() 			{fxt.ini_ns_(-2, 0, 2, 3).run_Ords_sort().tst_Ords(-2, -100, 0, 1, 2, 3);}
+	@Test public void Subj_skip() 			{fxt.ini_ns_(-2, 1, 2, 3).run_Ords_sort().tst_Ords(-2, -100, 0, 1, 2, 3);}
+	@Test public void Out_of_order() 		{fxt.ini_ns_(3, 1, 2, -2).run_Ords_sort().tst_Ords(-2, -100, 0, 1, 2, 3);}
+	@Test public void Skip_odd() 			{fxt.ini_ns_(-2, 1, 3).run_Ords_sort().tst_Ords(-2, -100, 0, 1, 2, 3);}
+	@Test public void Skip_even() 			{fxt.ini_ns_(-2, 2, 4).run_Ords_sort().tst_Ords(-2, -100, 2, 3, 4, 5);}
+	@Test public void Ns_alias() {
 		fxt.Ns_mgr().Aliases_clear();
 		fxt.Ns_mgr().Add_new(Xow_ns_.Tid__template, "Template");
 		fxt.Ns_mgr().Aliases_add(Xow_ns_.Tid__template, "Templatex");
@@ -32,7 +32,7 @@ public class Xow_ns_mgr_tst {
 		byte[] name = Bry_.new_a7("Templatex:Abc");
 		Tfds.Eq(10, fxt.Ns_mgr().Tmpls_get_w_colon(name, 0, name.length));
 	}
-	@Test  public void Utf8() {// PURPOSE: handle different casings for ns_names; PAGE:ru.w:Портрет_итальянского_Ренессанса DATE:2014-07-04
+	@Test public void Utf8() {// PURPOSE: handle different casings for ns_names; PAGE:ru.w:Портрет_итальянского_Ренессанса DATE:2014-07-04
 		Xow_ns_mgr ns_mgr = new Xow_ns_mgr(Xol_case_mgr_.U8());
 		ns_mgr.Add_new(1234, "Test");
 		ns_mgr.Add_new(1235, "файл");

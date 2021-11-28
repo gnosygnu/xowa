@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
 public class Xoedit_itm_html_tst {
 	private final    Xoedit_itm_html_fxt fxt = new Xoedit_itm_html_fxt();
-	@Test   public void Build_html__memo() {
+	@Test  public void Build_html__memo() {
 		fxt.Type_("memo").Key_("key1").Name_("name1").Html_cls_("html_cls1").Html_atrs_("key1=val1");
 
 		// normal

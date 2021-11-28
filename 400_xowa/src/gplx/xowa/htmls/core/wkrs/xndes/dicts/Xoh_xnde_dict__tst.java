@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.xndes.dicts; import gplx.*; import gplx.xowa.*
 import org.junit.*; import gplx.core.brys.*;
 public class Xoh_xnde_dict__tst {
 	private final Xoh_xnde_dict__fxt fxt = new Xoh_xnde_dict__fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Exec__add("a");
 		fxt.Test__get_by_key_or_new("a", 0);
 		fxt.Test__get_by_key_or_new("b", 1);

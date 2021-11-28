@@ -17,11 +17,11 @@ package gplx.core.brys; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Int_flag_bldr__tst {
 	private final Int_flag_bldr__fxt fxt = new Int_flag_bldr__fxt();
-	@Test  public void Bld_pow_ary() {
+	@Test public void Bld_pow_ary() {
 		fxt.Test__bld_pow_ary(fxt.Make__ary(1, 1, 1, 1), fxt.Make__ary(8, 4, 2, 1));
 		fxt.Test__bld_pow_ary(fxt.Make__ary(3, 2)      , fxt.Make__ary(4, 1));
 	}
-	@Test  public void To_int__1_1_1() {
+	@Test public void To_int__1_1_1() {
 		int[] seg_ary = fxt.Make__ary(1, 1, 1);
 		fxt.Test__to_int(seg_ary						, fxt.Make__ary(0, 0, 0), 0);
 		fxt.Test__to_int(seg_ary						, fxt.Make__ary(1, 1, 1), 7);
@@ -29,22 +29,22 @@ public class Int_flag_bldr__tst {
 		fxt.Test__to_int(seg_ary						, fxt.Make__ary(1, 1, 0), 6);
 		fxt.Test__to_int(seg_ary						, fxt.Make__ary(0, 1, 1), 3);
 	}
-	@Test  public void To_int__2_3() {
+	@Test public void To_int__2_3() {
 		fxt.Test__to_int(fxt.Make__ary(2, 3)          , fxt.Make__ary(3, 7)      , 31);
 		fxt.Test__to_int(fxt.Make__ary(1, 2, 3)       , fxt.Make__ary(1, 3, 7)   , 63);
 	}
-	@Test  public void To_int__11_4_5_5_6() {
+	@Test public void To_int__11_4_5_5_6() {
 		fxt.Test__to_int(fxt.Make__ary(11, 4, 5, 5, 6), fxt.Make__ary(2012, 6, 3, 23, 17), 2110135761);
 		fxt.Test__to_int(fxt.Make__ary(11, 4, 5, 5, 6), fxt.Make__ary(2012, 6, 3, 23, 18), 2110135762);
 	}
-	@Test  public void To_int_ary() {
+	@Test public void To_int_ary() {
 		fxt.Test__to_int_ary(fxt.Make__ary(1, 1, 1, 1)    ,         15, fxt.Make__ary(1, 1, 1, 1));
 		fxt.Test__to_int_ary(fxt.Make__ary(3, 2)          ,         31, fxt.Make__ary(7, 3));
 		fxt.Test__to_int_ary(fxt.Make__ary(3, 2, 1)       ,         63, fxt.Make__ary(7, 3, 1));
 		fxt.Test__to_int_ary(fxt.Make__ary(12, 4, 5, 5, 6), 2110135761, fxt.Make__ary(2012, 6, 3, 23, 17));
 		fxt.Test__to_int_ary(fxt.Make__ary(12, 4, 5, 5, 6), 2110135762, fxt.Make__ary(2012, 6, 3, 23, 18));
 	}
-	@Test  public void To_int_date_short() {
+	@Test public void To_int_date_short() {
 		fxt.Test__to_int_date_short("20120604 2359", 117843451);
 		fxt.Test__to_int_date_short("20120604 2358", 117843450);
 		fxt.Test__to_int_date_short("20120605 0000", 117843968);

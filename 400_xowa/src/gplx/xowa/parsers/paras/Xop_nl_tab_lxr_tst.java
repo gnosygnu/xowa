@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xop_nl_tab_lxr_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void teardown() {fxt.Init_para_n_();}
-	@Test  public void Basic() {		// PURPOSE: \n\t|- should be recognized as tblw; EX:zh.v:西安; DATE:2014-05-06
+	@Test public void Basic() {		// PURPOSE: \n\t|- should be recognized as tblw; EX:zh.v:西安; DATE:2014-05-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
 		( "{|"
 		, "\t|-"
@@ -33,7 +33,7 @@ public class Xop_nl_tab_lxr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Ws() {			// PURPOSE: \n\t|- should be recognized as tblw; EX:zh.v:西安; DATE:2014-05-06
+	@Test public void Ws() {			// PURPOSE: \n\t|- should be recognized as tblw; EX:zh.v:西安; DATE:2014-05-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
 		( "{|"
 		, "\t  |-"	// \t  
@@ -48,7 +48,7 @@ public class Xop_nl_tab_lxr_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Ignore() {// PURPOSE: \n\t should not be pre; EX:pl.w:Main_Page; DATE:2014-05-06
+	@Test public void Ignore() {// PURPOSE: \n\t should not be pre; EX:pl.w:Main_Page; DATE:2014-05-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, "\t b"

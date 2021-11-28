@@ -17,7 +17,7 @@ package gplx.gfml; import gplx.*;
 import org.junit.*; import gplx.core.strings.*; import gplx.core.envs.*;
 public class z901_perf_tst {
 	TimerWatch tmr = TimerWatch.new_();
-	@Test  public void EmptyTestSoJunitWillNotFail() {}
+	@Test public void EmptyTestSoJunitWillNotFail() {}
 //		@Test 
 	public void Long() {
 //			String longText = String_.Repeat("a", 30 * 1000 * 1000);
@@ -45,7 +45,7 @@ public class z901_perf_tst {
 		GfmlDoc_.parse_any_eol_(sbGfml.To_str());
 		tmr.End_and_print("gfml");	// 1700
 	}
-	//@Test  
+	//@Test
 	public void Prop() {
 		int max = 100 * 1000 * 1000;
 		PerfFieldVsProc c = new PerfFieldVsProc();
@@ -64,7 +64,7 @@ public class z901_perf_tst {
 		tmr.End_and_print("proc");
             Tfds.Write(v);
 	}
-//		@Test  
+//		@Test
 //		public void ClassComp() {
 //			int max = 100 * 1000 * 1000;
 //			ClassType ct = new ClassType3();

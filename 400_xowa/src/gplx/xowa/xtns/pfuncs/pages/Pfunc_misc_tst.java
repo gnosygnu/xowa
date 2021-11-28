@@ -18,5 +18,5 @@ import org.junit.*;
 public class Pfunc_misc_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
-	@Test  public void CascadingSources()		{fxt.Test_parse_page_all_str("{{CASCADINGSOURCES}}", "");} // PURPOSE: noop; DATE:2014-04-09
+	@Test public void CascadingSources()		{fxt.Test_parse_page_all_str("{{CASCADINGSOURCES}}", "");} // PURPOSE: noop; DATE:2014-04-09
 }

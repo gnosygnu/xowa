@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*;
 public class Xow_tidy_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final    Xoh_tidy_mgr_fxt fxt = new Xoh_tidy_mgr_fxt();
-	@Test   public void Wrap() {
+	@Test  public void Wrap() {
 		fxt.Test__wrap("<b>a</b>"
 		, "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
@@ -29,7 +29,7 @@ public class Xow_tidy_mgr_tst {
 		+ "</html>"
 		);
 	}
-	@Test   public void Unwrap_pass() {
+	@Test  public void Unwrap_pass() {
 		fxt.Test__unwrap
 		( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
@@ -42,7 +42,7 @@ public class Xow_tidy_mgr_tst {
 		, Bool_.Y, "<b>a</b>"
 		);
 	}
-	@Test   public void Unwrap_fail_bgn() {
+	@Test  public void Unwrap_fail_bgn() {
 		fxt.Test__unwrap
 		( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"
@@ -55,7 +55,7 @@ public class Xow_tidy_mgr_tst {
 		, Bool_.N, ""
 		);
 	}
-	@Test   public void Unwrap_fail_end() {
+	@Test  public void Unwrap_fail_end() {
 		fxt.Test__unwrap
 		( "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">"
 		+ "<html>"

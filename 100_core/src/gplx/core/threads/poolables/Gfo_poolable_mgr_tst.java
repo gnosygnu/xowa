@@ -18,19 +18,19 @@ import org.junit.*;
 public class Gfo_poolable_mgr_tst {
 	private final    Gfo_poolable_mgr_tstr tstr = new Gfo_poolable_mgr_tstr();
 	@Before public void init() {tstr.Clear();}
-	@Test  public void Get__one() {
+	@Test public void Get__one() {
 		tstr.Test__get(0);
 		tstr.Test__free__len(0);
 		tstr.Test__pool__len(2);
 	}
-	@Test  public void Get__many__expand() {
+	@Test public void Get__many__expand() {
 		tstr.Test__get(0);
 		tstr.Test__get(1);
 		tstr.Test__get(2);
 		tstr.Test__free__len(0);
 		tstr.Test__pool__len(4);
 	}
-	@Test  public void Rls__lifo() {
+	@Test public void Rls__lifo() {
 		tstr.Test__get(0);
 		tstr.Test__get(1);
 		tstr.Test__get(2);
@@ -40,7 +40,7 @@ public class Gfo_poolable_mgr_tst {
 		tstr.Test__pool__nxt(0);
 		tstr.Test__free__len(0);
 	}
-	@Test  public void Rls__fifo() {
+	@Test public void Rls__fifo() {
 		tstr.Test__get(0);
 		tstr.Test__get(1);
 		tstr.Test__get(2);

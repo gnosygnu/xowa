@@ -13,9 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
-import gplx.core.gfobjs.*; import gplx.core.progs.*; import gplx.core.progs.rates.*;
-import gplx.xowa.guis.cbks.*;
+package gplx.xowa.addons.apps.updates.js; import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.GfoMsg_;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_invk_cmd;
+import gplx.Gfo_usr_dlg_;
+import gplx.GfsCtx;
+import gplx.Math_;
+import gplx.String_;
+import gplx.core.gfobjs.Gfobj_nde;
+import gplx.core.progs.Gfo_prog_ui;
+import gplx.core.progs.Gfo_prog_ui_;
+import gplx.core.progs.rates.Gfo_rate_list;
+import gplx.xowa.guis.cbks.Xog_cbk_mgr;
+import gplx.xowa.guis.cbks.Xog_cbk_trg;
 public class Xojs_wkr__base implements Gfo_prog_ui, Gfo_invk {
 	private final    Gfo_invk_cmd done_cbk;
 	private final    Gfo_invk_cmd fail_cbk;
@@ -46,7 +59,7 @@ public class Xojs_wkr__base implements Gfo_prog_ui, Gfo_invk {
 				fail_cbk.Exec();
 		}
 	}
-	@gplx.Virtual protected void Exec_run() {}
+	protected void Exec_run() {}
 	public void Exec_async(String thread_name) {
 		gplx.core.threads.Thread_adp_.Start_by_key(thread_name + ".download", this, Invk__exec);
 	}

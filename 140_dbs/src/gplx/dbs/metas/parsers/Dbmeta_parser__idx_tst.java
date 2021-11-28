@@ -17,9 +17,9 @@ package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.db
 import org.junit.*;
 public class Dbmeta_parser__idx_tst {
 	@Before public void init() {fxt.Clear();} private final Dbmeta_parser__idx_fxt fxt = new Dbmeta_parser__idx_fxt();
-	@Test  public void Unique() {fxt.Test_parse("CREATE UNIQUE INDEX idx_1 ON tbl_1 (fld_1, fld_2, fld_3)"	, fxt.Make_idx(Bool_.Y, "idx_1", "tbl_1", "fld_1", "fld_2", "fld_3"));}
-	@Test  public void Normal() {fxt.Test_parse("CREATE INDEX idx_1 ON tbl_1 (fld_1, fld_2, fld_3)"			, fxt.Make_idx(Bool_.N, "idx_1", "tbl_1", "fld_1", "fld_2", "fld_3"));}
-	@Test  public void Fld_1()  {fxt.Test_parse("CREATE INDEX idx_1 ON tbl_1 (fld_1)"						, fxt.Make_idx(Bool_.N, "idx_1", "tbl_1", "fld_1"));}
+	@Test public void Unique() {fxt.Test_parse("CREATE UNIQUE INDEX idx_1 ON tbl_1 (fld_1, fld_2, fld_3)"	, fxt.Make_idx(Bool_.Y, "idx_1", "tbl_1", "fld_1", "fld_2", "fld_3"));}
+	@Test public void Normal() {fxt.Test_parse("CREATE INDEX idx_1 ON tbl_1 (fld_1, fld_2, fld_3)"			, fxt.Make_idx(Bool_.N, "idx_1", "tbl_1", "fld_1", "fld_2", "fld_3"));}
+	@Test public void Fld_1()  {fxt.Test_parse("CREATE INDEX idx_1 ON tbl_1 (fld_1)"						, fxt.Make_idx(Bool_.N, "idx_1", "tbl_1", "fld_1"));}
 }
 class Dbmeta_parser__idx_fxt {
 	private final Dbmeta_parser__idx parser = new Dbmeta_parser__idx();

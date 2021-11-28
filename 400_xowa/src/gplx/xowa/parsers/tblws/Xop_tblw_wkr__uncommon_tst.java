@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xop_tblw_wkr__uncommon_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test   public void Tr_pops_entire_stack() {	// PURPOSE: in strange cases, tr will pop entire stack; PAGE:en.w:Turks_in_Denmark; DATE:2014-03-02
+	@Test  public void Tr_pops_entire_stack() {	// PURPOSE: in strange cases, tr will pop entire stack; PAGE:en.w:Turks_in_Denmark; DATE:2014-03-02
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "<caption>a"
@@ -42,7 +42,7 @@ public class Xop_tblw_wkr__uncommon_tst {
 		, "</table>"
 		));
 	}
-	@Test   public void Atrs_defect() {	// PURPOSE: < in atrs was causing premature termination; PAGE:en.w:Wikipedia:List of hoaxes on Wikipedia
+	@Test  public void Atrs_defect() {	// PURPOSE: < in atrs was causing premature termination; PAGE:en.w:Wikipedia:List of hoaxes on Wikipedia
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|id=\"a<b\""
 		, "|a"
@@ -56,7 +56,7 @@ public class Xop_tblw_wkr__uncommon_tst {
 		, ""
 		));
 	}
-	@Test   public void Broken_lnki() {	// PURPOSE: broken lnki was not closing table properly; PAGE:en.w:Wikipedia:Changing_attribution_for_an_edit; DATE:2014-03-16
+	@Test  public void Broken_lnki() {	// PURPOSE: broken lnki was not closing table properly; PAGE:en.w:Wikipedia:Changing_attribution_for_an_edit; DATE:2014-03-16
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-"
@@ -78,7 +78,7 @@ public class Xop_tblw_wkr__uncommon_tst {
 		, "</p>"
 		));
 	}
-	@Test   public void Broken_lnki_2() {	// PURPOSE: variation on above; PAGE:hr.b:Knjiga_pojmova_u_zrakoplovstvu/Kratice_u_zrakoplovstvu/S; DATE:2014-09-05
+	@Test  public void Broken_lnki_2() {	// PURPOSE: variation on above; PAGE:hr.b:Knjiga_pojmova_u_zrakoplovstvu/Kratice_u_zrakoplovstvu/S; DATE:2014-09-05
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-"
@@ -99,7 +99,7 @@ public class Xop_tblw_wkr__uncommon_tst {
 		, "</table>"
 		));
 	}
-	@Test   public void Tr_with_pipe_ignores_content() {	// PURPOSE: "|-" followed by "|" ignores rest of content; EX: {|\n|-|<b>a</b>\n|} PAGE:lv.w:Starptautiska_kosmosa_stacija; DATE:2015-11-21
+	@Test  public void Tr_with_pipe_ignores_content() {	// PURPOSE: "|-" followed by "|" ignores rest of content; EX: {|\n|-|<b>a</b>\n|} PAGE:lv.w:Starptautiska_kosmosa_stacija; DATE:2015-11-21
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|- |<b>a</b>"
@@ -109,7 +109,7 @@ public class Xop_tblw_wkr__uncommon_tst {
 		, "</table>"
 		));
 	}
-	@Test   public void Tr_with_pipe_should_ignore() {	// PURPOSE: ignore sequences like "\n|- ||"; PAGE: nl.w:Tabel_van_Belgische_gemeenten; DATE:2015-12-03
+	@Test  public void Tr_with_pipe_should_ignore() {	// PURPOSE: ignore sequences like "\n|- ||"; PAGE: nl.w:Tabel_van_Belgische_gemeenten; DATE:2015-12-03
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|- ||"

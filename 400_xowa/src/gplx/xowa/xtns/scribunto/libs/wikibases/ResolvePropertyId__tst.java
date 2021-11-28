@@ -21,7 +21,7 @@ public class ResolvePropertyId__tst {
 	@Before public void init() {
 		fxt.Init();
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init__doc("Property:P2");
 		fxt.Init__pid("de", "de0", 2);
 		fxt.Init__pid("en", "en0", 2);

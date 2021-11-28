@@ -17,59 +17,59 @@ package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z601_edit_atr_tst {
 	GfmlUpdateFx fx = GfmlUpdateFx.new_();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx	.Raw_("a=1;").Update_(fx.atr_().NdeIdxs_(0).Atr_("a", "2"))
 			.tst_("a=2;");
 	}
-	@Test  public void WhiteSpaceComment() {
+	@Test public void WhiteSpaceComment() {
 		fx	.Raw_("a = /*comment*/1;").Update_(fx.atr_().NdeIdxs_(0).Atr_("a", "2"))
 			.tst_("a = /*comment*/2;");
 	}
-	@Test  public void Quoted() {
+	@Test public void Quoted() {
 		fx	.Raw_("a='1';").Update_(fx.atr_().NdeIdxs_(0).Atr_("a", "2"))
 			.tst_("a='2';");
 	}
-	@Test  public void EmbeddedQuote() {
+	@Test public void EmbeddedQuote() {
 		fx	.Raw_("a=1;").Update_(fx.atr_().NdeIdxs_(0).Atr_("a", "1'2"))
 			.tst_("a='1''2';");
 	}
-	@Test  public void ReuseQuote() {
+	@Test public void ReuseQuote() {
 		fx	.Raw_("a=|'1'|;").Update_(fx.atr_().NdeIdxs_(0).Atr_("a", "2"))
 			.tst_("a=|'2'|;");
 	}
-	@Test  public void ReuseQuoteWithEmbeddedQuote() {
+	@Test public void ReuseQuoteWithEmbeddedQuote() {
 		fx	.Raw_("a=|'1'2'|;").Update_(fx.atr_().NdeIdxs_(0).Atr_("a", "2'3"))
 			.tst_("a=|'2'3'|;");
 	}
-//		@Test  public void AtrIdx() {
+//		@Test public void AtrIdx() {
 //			fx	.Raw_("1;").Update_(fx.atr_().NdeIdxs_(0).AtrIdx_(0, "2"))
 //				.tst_("2;");
 //		}
-//		@Test  public void AtrIdx_parens() {
+//		@Test public void AtrIdx_parens() {
 //			fx	.Raw_("A_('1');").Update_(fx.atr_().NdeIdxs_(0).AtrIdx_(0, "2"))
 //				.tst_("A_('2');");
 //		}
-	@Test  public void AddNew() {
+	@Test public void AddNew() {
 		fx	.Raw_("a:;").Update_(fx.atr_().NdeIdxs_(0).Atr_("b", "1"))
 			.tst_("a:b='1';");
 	}
-	@Test  public void AddExisting() {
+	@Test public void AddExisting() {
 		fx	.Raw_("a='1';").Update_(fx.atr_().NdeIdxs_(0).Atr_("b", "2"))
 			.tst_("a='1' b='2';");
 	}
-	@Test  public void Add_many() {
+	@Test public void Add_many() {
 		fx	.Raw_("a='1';").Update_(fx.atr_().NdeIdxs_(0).Atr_("b", "2")).Update_(fx.atr_().NdeIdxs_(0).Atr_("c", "3"))
 			.tst_("a='1' b='2' c='3';");
 	}
-	@Test  public void AddNode() {
+	@Test public void AddNode() {
 		fx	.Raw_("a(){}").Update_(fx.nde_().NdeIdxs_(0).Nest_("b"))
 			.tst_("a(){b(){}}");
 	}
-	@Test  public void AddNodeMany() {
+	@Test public void AddNodeMany() {
 		fx	.Raw_("a(){}").Update_(fx.nde_().NdeIdxs_(0).Nest_("b")).Update_(fx.nde_().NdeIdxs_(0).Nest_("c"))
 			.tst_("a(){b(){}c(){}}");
 	}
-	@Test  public void EditNode() {
+	@Test public void EditNode() {
 		fx	.Raw_("a(){b(){}}").Update_(fx.nde_().NdeIdxs_(0).Nest_("b"))
 			.tst_("a(){b(){}}");
 	}

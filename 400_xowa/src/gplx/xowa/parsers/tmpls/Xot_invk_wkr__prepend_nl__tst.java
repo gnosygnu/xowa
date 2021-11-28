@@ -17,19 +17,19 @@ package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Xot_invk_wkr__prepend_nl__tst {		
 	@Before public void init() {fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {	// PURPOSE: if {| : ; # *, auto add new_line REF.MW:Parser.php|braceSubstitution
+	@Test public void Basic() {	// PURPOSE: if {| : ; # *, auto add new_line REF.MW:Parser.php|braceSubstitution
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_inner", "# a");
 		fxt.Test_parse_tmpl_str_test("{{test_inner}}"	, "z {{test}}"				, "z \n# a");
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Skip_if_nl_exists() {
+	@Test public void Skip_if_nl_exists() {
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_inner", "# a");
 		fxt.Test_parse_tmpl_str_test("{{test_inner}}"	, "z \n{{test}}"			, "z \n# a");		// NOTE: no \n
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Skip_if_nl_exists_2() {	// PURPOSE: \n inside template args should not print \n\n; PAGE:bn.w:লিওনেল_মেসি |ko.w:도쿄_지하철_히비야_선|DATE:2014-05-27
+	@Test public void Skip_if_nl_exists_2() {	// PURPOSE: \n inside template args should not print \n\n; PAGE:bn.w:লিওনেল_মেসি |ko.w:도쿄_지하철_히비야_선|DATE:2014-05-27
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_list", "# a");
 		fxt.Init_defn_add("test_print", "{{{1}}}");
@@ -46,13 +46,13 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		));
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Pfunc() {// PURPOSE: if {| : ; # *, auto add new_line; parser_function variant; PAGE:en.w:Soviet Union; Infobox former country
+	@Test public void Pfunc() {// PURPOSE: if {| : ; # *, auto add new_line; parser_function variant; PAGE:en.w:Soviet Union; Infobox former country
 		fxt.Test_parse_tmpl_str_test(""					, "z {{#if:true|#a|n}}"		, "z \n#a");
 	}
-	@Test  public void Bos() {	// PURPOSE: function should expand "*a" to "\n*a" even if "*a" is bos; SEE:NOTE_1 PAGE:en.w:Rome and Panoramas; DATE:2014-02-05
+	@Test public void Bos() {	// PURPOSE: function should expand "*a" to "\n*a" even if "*a" is bos; SEE:NOTE_1 PAGE:en.w:Rome and Panoramas; DATE:2014-02-05
 		fxt.Test_parse_page_tmpl_str("{{#if:x|*a}}", "\n*a");
 	}
-	@Test  public void Tmpl_arg() {	// PURPOSE: tmpl arg should auto-create; PAGE:vi.w:Friedrich_II_của_Phổ; DATE:2014-04-26
+	@Test public void Tmpl_arg() {	// PURPOSE: tmpl arg should auto-create; PAGE:vi.w:Friedrich_II_của_Phổ; DATE:2014-04-26
 		fxt.Init_defn_add("cquote"		, "*b");
 		fxt.Init_defn_add("blockquote"	, "<blockquote>{{{1}}}</blockquote>");
 		fxt.Test_html_full_str("a\n{{blockquote|{{cquote}}}}"
@@ -66,7 +66,7 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		)
 		);
 	}
-	@Test  public void Nested_1_n() {	// PURPOSE: handled nested templates; PAGE:en.w:Central_Line en.w:Panama_Canal; DATE:2014-08-21
+	@Test public void Nested_1_n() {	// PURPOSE: handled nested templates; PAGE:en.w:Central_Line en.w:Panama_Canal; DATE:2014-08-21
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("Nest_1"		, "a{{Nest_1_1}}");			// 0: no \n
 		fxt.Init_defn_add("Nest_1_1"	, "b\n{{Nest_1_1_1}}");		// 1: \n
@@ -76,7 +76,7 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		, "*c"
 		));
 	}
-	@Test  public void Nested_1_y() {	// PURPOSE: handled nested templates; PAGE:en.w:Lackawanna_Cut-Off; DATE:2014-08-21
+	@Test public void Nested_1_y() {	// PURPOSE: handled nested templates; PAGE:en.w:Lackawanna_Cut-Off; DATE:2014-08-21
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("Nest_1"		, "a\n{{Nest_1_1}}");		// 0: no \n
 		fxt.Init_defn_add("Nest_1_1"	, "b{{Nest_1_1_1}}");		// 1: char
@@ -87,7 +87,7 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		, "*c"
 		));
 	}
-	@Test  public void Nested_0_n() {	// PURPOSE: handled nested templates variation of above; DATE:2014-08-21
+	@Test public void Nested_0_n() {	// PURPOSE: handled nested templates variation of above; DATE:2014-08-21
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("Nest_1"		, "a\n{{Nest_1_1}}");		// 0: \n
 		fxt.Init_defn_add("Nest_1_1"	, "{{Nest_1_1_1}}");		// 1: ""
@@ -97,7 +97,7 @@ public class Xot_invk_wkr__prepend_nl__tst {
 		, "*b"
 		));
 	}
-	@Test  public void Nested_0_y() {	// PURPOSE: handled nested templates variation of above; DATE:2014-08-21
+	@Test public void Nested_0_y() {	// PURPOSE: handled nested templates variation of above; DATE:2014-08-21
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("Nest_1"		, "a{{Nest_1_1}}");			// 0: no \n
 		fxt.Init_defn_add("Nest_1_1"	, "{{Nest_1_1_1}}");		// 1: ""

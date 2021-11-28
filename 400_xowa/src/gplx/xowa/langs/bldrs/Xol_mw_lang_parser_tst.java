@@ -20,83 +20,83 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.specials.*;
 public class Xol_mw_lang_parser_tst {		
 	@Before public void init() {fxt.Clear();} private Xol_mw_lang_parser_fxt fxt = new Xol_mw_lang_parser_fxt();
-	@Test  public void Core_keywords() {
+	@Test public void Core_keywords() {
 		fxt.Parse_core("$magicWords = array('toc' => array(0, 'a1', 'a2', 'a3'), 'notoc' => array(1, 'b1', 'b2', 'b3'));")
 			.Tst_keyword(Xol_kwd_grp_.Id_toc, false, "a1", "a2", "a3")
 			.Tst_keyword(Xol_kwd_grp_.Id_notoc, true, "b1", "b2", "b3")
 			;
 	}
-	@Test  public void Core_keywords_img_thumb() {
+	@Test public void Core_keywords_img_thumb() {
 		fxt.Parse_core("$magicWords = array('img_thumbnail' => array(1, 'thumb', 'thmb'));")
 			.Tst_keyword_img("thumb", Xop_lnki_arg_parser.Tid_thumb)
 			.Tst_keyword_img("thmb"	, Xop_lnki_arg_parser.Tid_thumb)
 			.Tst_keyword_img("thum"	, Xop_lnki_arg_parser.Tid_caption)
 			;
 	}
-	@Test  public void Core_keywords_img_upright() {
+	@Test public void Core_keywords_img_upright() {
 		fxt.Parse_core("$magicWords = array('img_upright' => array(1, 'upright', 'upright=$1', 'upright $1'));")
 			.Tst_keyword_img("upright"	, Xop_lnki_arg_parser.Tid_upright)
 			.Tst_keyword_img("upright "	, Xop_lnki_arg_parser.Tid_upright)
 			;
 	}
-	@Test  public void Core_keywords_func_currentmonth() {
+	@Test public void Core_keywords_func_currentmonth() {
 		Datetime_now.Manual_y_();
 		fxt.Parse_core("$magicWords = array('currentmonth' => array(0, 'MOISACTUEL'));")
 			.Tst_parse("{{MOISACTUEL}}", "01")
 			;
 		Datetime_now.Manual_n_();
 	}
-	@Test  public void Core_keywords_func_ns() {
+	@Test public void Core_keywords_func_ns() {
 		fxt.Parse_core("$magicWords = array('ns' => array(0, 'ESPACEN'));")
 			.Tst_parse("{{ESPACEN:6}}", "File")
 			;
 	}
-	@Test  public void Keywords_img_dim() {
+	@Test public void Keywords_img_dim() {
 		fxt.Parse_core("$magicWords = array('img_width' => array(1, '$1pxl'));")
 			.Tst_keyword_img("50pxl", Xop_lnki_arg_parser.Tid_dim)
 			.Tst_keyword_img("50pxlpxl", Xop_lnki_arg_parser.Tid_dim)
 			.Tst_keyword_img("50xl", Xop_lnki_arg_parser.Tid_caption)
 			;
 	}
-	@Test  public void Core_namespaces_names() {
+	@Test public void Core_namespaces_names() {
 		fxt.Parse_core("$namespaceNames = array(NS_FILE => 'Fichier');")
 			.Sync_ns()
 			.Tst_ns_lkp("Fichier", Xow_ns_.Tid__file)
 			.Tst_ns_lkp("File"	, Xow_ns_.Tid__null)
 			;
 	}
-	@Test  public void Core_namespaces_aliases() {
+	@Test public void Core_namespaces_aliases() {
 		fxt.Parse_core("$namespaceAliases = array('Discussion_Fichier' => NS_FILE_TALK);")
 			.Sync_ns()
 			.Tst_ns_lkp("Discussion Fichier", Xow_ns_.Tid__file_talk)
 			.Tst_ns_lkp("Discussion Fichierx", Xow_ns_.Tid__null)
 			;
 	}
-	@Test  public void Core_specialPageAliases() {
+	@Test public void Core_specialPageAliases() {
 		fxt.Parse_core("$specialPageAliases = array('Randompage' => array('PageAuHasard', 'Page_au_hasard'));")
 			.Test_specialPageAliases("Randompage", "PageAuHasard", "Page_au_hasard")
 			;
 	}
-	@Test  public void Xtn_keywords_fr() {fxt.Parse_xtn("$magicWords['fr'] = array('if' => array(0, 'si' ));").Tst_parse("{{si:|y|n}}", "n");}
-	@Test  public void Xtn_keywords_de() {fxt.Parse_xtn("$magicWords['de'] = array('if' => array(0, 'si' ));").Tst_parse("{{si:|y|n}}", "<a href=\"/wiki/Template:Si:\">Template:Si:</a>");}	// should be "Si", not "si"; ALSO, should probably be "{{si:|y|n}}" not "[[:Template:si:]]" DATE:2014-07-04
-	@Test  public void Core_messages() {
+	@Test public void Xtn_keywords_fr() {fxt.Parse_xtn("$magicWords['fr'] = array('if' => array(0, 'si' ));").Tst_parse("{{si:|y|n}}", "n");}
+	@Test public void Xtn_keywords_de() {fxt.Parse_xtn("$magicWords['de'] = array('if' => array(0, 'si' ));").Tst_parse("{{si:|y|n}}", "<a href=\"/wiki/Template:Si:\">Template:Si:</a>");}	// should be "Si", not "si"; ALSO, should probably be "{{si:|y|n}}" not "[[:Template:si:]]" DATE:2014-07-04
+	@Test public void Core_messages() {
 		fxt.Parse_core("$messages = array('sunday' => 'dimanche');")
 			.Tst_message("sunday", 0, "dimanche", false)
 			;
 	}
-	@Test  public void Fallback() {
+	@Test public void Fallback() {
 		fxt.Parse_core("$fallback = 'zh-hans';");
 		Tfds.Eq("zh-hans", String_.new_u8(fxt.Lang().Fallback_bry()));
 	}
-	@Test  public void Separator_transform_table() {
+	@Test public void Separator_transform_table() {
 		fxt.Parse_core("$separatorTransformTable = array( ',' => '.', '.' => ',' );");
 		fxt.Num_fmt_tst("1234,56", "1.234.56");	// NOTE: dot is repeated; confirmed with dewiki and {{formatnum:1234,56}}
 	}
-	@Test  public void Separator_transform_table_fr() {
+	@Test public void Separator_transform_table_fr() {
 		fxt.Parse_core("$separatorTransformTable = array( ',' => '\\xc2\\xa0', '.' => ',' );");
 		fxt.Num_fmt_tst("1234,56", "1 234 56");	// NOTE: nbsp here; also, nbsp is repeated. see dewiki and {{formatnum:1234,56}}
 	}
-	@Test  public void Digit_transform_table() {
+	@Test public void Digit_transform_table() {
 		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/core_php/MessagesFr.php"
 		, "$digitTransformTable = array("
 		, "  '0' => 'nulla',"
@@ -132,7 +132,7 @@ public class Xol_mw_lang_parser_tst {
 		, ";"
 		));
 	}
-	@Test  public void Digit_grouping_pattern() {
+	@Test public void Digit_grouping_pattern() {
 		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/core_php/MessagesFr.php"
 		, "$digitGroupingPattern = '##,##,###'"
 		, ");"
@@ -146,7 +146,7 @@ public class Xol_mw_lang_parser_tst {
 		, ";"
 		));
 	}
-	@Test   public void Bld() {
+	@Test  public void Bld() {
 		fxt.Save_file("mem/xowa/bin/any/xowa/cfg/lang/mediawiki/core_php/MessagesFr.php"
 		, "$fallback = 'zh-hans';"
 		, "$rtl = true;"
@@ -215,21 +215,21 @@ public class Xol_mw_lang_parser_tst {
 		, ";"
 		));
 	}
-	@Test   public void Dir_ltr() {
+	@Test  public void Dir_ltr() {
 		fxt.Parse_core("$rtl = 'true';");
 		Tfds.Eq(false, fxt.Lang().Dir_ltr());
 	}
-	@Test  public void Core_keywords__only_1() {	// PURPOSE: some magic words don't specify case-match; EX: Disambiguator.php; DATE:2013-12-24
+	@Test public void Core_keywords__only_1() {	// PURPOSE: some magic words don't specify case-match; EX: Disambiguator.php; DATE:2013-12-24
 		fxt.Parse_core("$magicWords = array('toc' => array('a1'));")
 			.Tst_keyword(Xol_kwd_grp_.Id_toc, false, "a1")
 			;
 	}
-	@Test  public void Core_keywords__skip_case_match__1() {	// PURPOSE: some magic words don't specify case-match; EX: Disambiguator.php; DATE:2013-12-24
+	@Test public void Core_keywords__skip_case_match__1() {	// PURPOSE: some magic words don't specify case-match; EX: Disambiguator.php; DATE:2013-12-24
 		fxt.Parse_core("$magicWords = array('toc' => array('a1'));")
 			.Tst_keyword(Xol_kwd_grp_.Id_toc, false, "a1")
 			;
 	}
-	@Test  public void Core_keywords__skip_case_match__2() {	// PURPOSE: some magic words don't specify case-match; EX: Disambiguator.php; DATE:2013-12-24
+	@Test public void Core_keywords__skip_case_match__2() {	// PURPOSE: some magic words don't specify case-match; EX: Disambiguator.php; DATE:2013-12-24
 		fxt.Parse_core("$magicWords = array('toc' => array('a1', 'a2'));")
 			.Tst_keyword(Xol_kwd_grp_.Id_toc, false, "a1", "a2")
 			;

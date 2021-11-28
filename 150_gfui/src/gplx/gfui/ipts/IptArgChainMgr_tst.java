@@ -19,7 +19,7 @@ public class IptArgChainMgr_tst {
 	@Before public void setup() {
 		fx = new IptArgChainMgr_fx();
 	}	IptArgChainMgr_fx fx;
-	@Test  public void Add() {
+	@Test public void Add() {
 		fx.run_Add(IptKey_.A, IptKey_.B, IptKey_.C);
 		fx.tst_(IptKey_.A, 1);
 		fx.tst_(IptKey_.B, 1);
@@ -27,7 +27,7 @@ public class IptArgChainMgr_tst {
 		fx.tst_(IptKey_.B, 0);
 		fx.tst_(IptKey_.C, 0);
 	}
-	@Test  public void Del() {
+	@Test public void Del() {
 		fx.run_Add(IptKey_.A, IptKey_.B, IptKey_.C);
 		fx.run_Del(IptKey_.A, IptKey_.B, IptKey_.C);
 		fx.tst_(IptKey_.A, 0);

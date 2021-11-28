@@ -18,37 +18,37 @@ import org.junit.*;
 public class Btrie_fast_mgr_tst {
 	private Btrie_fast_mgr_fxt fxt = new Btrie_fast_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Get_by() {
+	@Test public void Get_by() {
 		fxt.Test_matchAtCur("a"		, 1);
 		fxt.Test_matchAtCur("abc"	, 123);
 		fxt.Test_matchAtCur("ab"	, 1);
 		fxt.Test_matchAtCur("abcde"	, 123);
 		fxt.Test_matchAtCur(" a"	, null);
 	}
-	@Test  public void Bos() {
+	@Test public void Bos() {
 		fxt.Test_match("bc", Byte_ascii.Ltr_a, -1, 123);
 	}
-	@Test  public void Match_exact() {
+	@Test public void Match_exact() {
 		fxt.Test_matchAtCurExact("a", 1);
 		fxt.Test_matchAtCurExact("ab", null);
 		fxt.Test_matchAtCurExact("abc", 123);
 	}
-	@Test  public void Del_noop__no_match() {
+	@Test public void Del_noop__no_match() {
 		fxt.Exec_del("d");
 		fxt.Test_matchAtCurExact("a"	, 1);
 		fxt.Test_matchAtCurExact("abc"	, 123);
 	}
-	@Test  public void Del_noop__partial_match() {
+	@Test public void Del_noop__partial_match() {
 		fxt.Exec_del("ab");
 		fxt.Test_matchAtCurExact("a"	, 1);
 		fxt.Test_matchAtCurExact("abc"	, 123);
 	}
-	@Test  public void Del_match__long() {
+	@Test public void Del_match__long() {
 		fxt.Exec_del("abc");
 		fxt.Test_matchAtCurExact("a"	, 1);
 		fxt.Test_matchAtCurExact("abc"	, null);
 	}
-	@Test  public void Del_match__short() {
+	@Test public void Del_match__short() {
 		fxt.Exec_del("a");
 		fxt.Test_matchAtCurExact("a"	, null);
 		fxt.Test_matchAtCurExact("abc"	, 123);

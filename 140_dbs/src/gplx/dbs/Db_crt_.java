@@ -18,6 +18,7 @@ import gplx.core.criterias.*;
 public class Db_crt_ {
 	public static final Criteria Wildcard = Criteria_.All;
 	public static Criteria     New_and			(Criteria lhs, Criteria rhs)					{return Criteria_.And(lhs, rhs);}
+	public static Criteria     New_or			(Criteria lhs, Criteria rhs)					{return Criteria_.Or(lhs, rhs);}
 	public static Criteria_fld New_eq			(String key, Object val)						{return Criteria_fld.new_(key, Criteria_.eq_(val));}
 	public static Criteria_fld New_eq			(String pre, String key, Object val)			{return Criteria_fld.new_(pre, key, Criteria_.eq_(val));}
 	public static Criteria_fld New_eq_not		(String key, Object val)						{return Criteria_fld.new_(key, Criteria_.eqn_(val));}

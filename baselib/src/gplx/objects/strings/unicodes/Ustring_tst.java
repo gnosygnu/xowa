@@ -18,35 +18,35 @@ import org.junit.*; import gplx.tests.*;
 import gplx.objects.errs.*;
 public class Ustring_tst {
 	private final    Ustring_fxt fxt = new Ustring_fxt();
-	@Test  public void Empty() {
+	@Test public void Empty() {
 		fxt.Init("");
 		fxt.Test__Len(0, 0);
 	}
-	@Test  public void Blank() {
+	@Test public void Blank() {
 		fxt.Init("");
 		fxt.Test__Len(0, 0);
 	}
-	@Test  public void Single() {
+	@Test public void Single() {
 		fxt.Init("Abc");
 		fxt.Test__Len(3, 3);
 		fxt.Test__Get_code(65, 98, 99);
 		fxt.Test__Map_code_to_char(0, 1, 2, 3);
 		fxt.Test__Map_char_to_code(0, 1, 2, 3);
 	}
-	@Test  public void Multi() {
+	@Test public void Multi() {
 		fxt.Init("a¢€𤭢b");
 		fxt.Test__Len(5, 6);
 		fxt.Test__Get_code(97, 162, 8364, 150370, 98);
 		fxt.Test__Map_code_to_char(0, 1, 2, 3, 5, 6);
 		fxt.Test__Map_char_to_code(0,  1,  2,  3, -1,  4, 5);
 	}
-	@Test  public void Index_of() {
+	@Test public void Index_of() {
 		fxt.Test__Index_of("abc", "b", 0, 1);  // basic
 		fxt.Test__Index_of("ab", "bc", 0, -1); // out-of-bounds
 		fxt.Test__Index_of("a¢e", "¢", 0, 1);  // check UTF-8 strings still match at byte-level
 	}
 
-	@Test  public void Substring() {
+	@Test public void Substring() {
 		fxt.Test__Substring("abc", 1, 2, "b");  // basic
 		fxt.Test__Substring("¢bc", 1, 2, "b");  // check UTF-8 strings don't get lopped off
 	}

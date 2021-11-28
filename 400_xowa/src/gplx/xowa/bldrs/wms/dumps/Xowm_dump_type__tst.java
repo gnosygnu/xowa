@@ -17,7 +17,7 @@ package gplx.xowa.bldrs.wms.dumps; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.wikis.*;
 public class Xowm_dump_type__tst {
 	private final Xowm_dump_type__fxt fxt = new Xowm_dump_type__fxt();
-	@Test  public void Parse() {
+	@Test public void Parse() {
 		fxt.Test_parse("pages-articles.xml"				, Xowm_dump_type_.Int__pages_articles);
 		fxt.Test_parse("pages-meta-current.xml"			, Xowm_dump_type_.Int__pages_meta_current);
 	}

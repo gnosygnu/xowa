@@ -19,7 +19,7 @@ public class StringTableBldr_tst {
 	@Before public void setup() {
 		bldr = StringTableBldr.new_();
 	}	StringTableBldr bldr;
-	@Test  public void TwoCols() {
+	@Test public void TwoCols() {
 		bldr.Add("a", "aa")
 			.Add("bb", "b");
 		tst_XtoStr
@@ -28,7 +28,7 @@ public class StringTableBldr_tst {
 			, ""
 			);
 	}
-	@Test  public void RightAlign() {
+	@Test public void RightAlign() {
 		bldr.Add("a", "aa")
 			.Add("bb", "b");
 		bldr.FetchAtOrNew(0).Halign_(StringTableColAlign.Right);
@@ -39,7 +39,7 @@ public class StringTableBldr_tst {
 			, ""
 			);
 	}
-	@Test  public void CenterAlign() {
+	@Test public void CenterAlign() {
 		bldr.Add("aaaa", "a")
 			.Add("b", "bbbb");
 		bldr.FetchAtOrNew(0).Halign_(StringTableColAlign.Mid);

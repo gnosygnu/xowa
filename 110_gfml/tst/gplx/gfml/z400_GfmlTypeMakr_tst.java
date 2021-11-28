@@ -19,7 +19,7 @@ public class z400_GfmlTypeMakr_tst {
 	@Before public void setup() {
 		makr = GfmlTypeMakr.new_();
 	}	GfmlTypeMakr makr; GfmlType type; GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void MakeSubType() {
+	@Test public void MakeSubType() {
 		type = makr.MakeSubType("point", "x", "y");			
 		fx.tst_Type
 			(	fx.typ_().Key_("point").Subs_
@@ -30,7 +30,7 @@ public class z400_GfmlTypeMakr_tst {
 			);
 		tst_XtoAry(makr, "point");
 	}
-	@Test  public void MakeSubTypeAsOwner() {
+	@Test public void MakeSubTypeAsOwner() {
 		type = makr.MakeSubTypeAsOwner("item");
 		fx.tst_Type
 			(	fx.typ_().Key_("item")
@@ -39,7 +39,7 @@ public class z400_GfmlTypeMakr_tst {
 		tst_Owner(makr, "item");
 		tst_XtoAry(makr, "item");
 	}
-	@Test  public void MakeSubTypeAsOwner_MakeSubType() {
+	@Test public void MakeSubTypeAsOwner_MakeSubType() {
 		type = makr.MakeSubTypeAsOwner("item");
 		makr.MakeSubType("pos", "x", "y");
 		fx.tst_Type

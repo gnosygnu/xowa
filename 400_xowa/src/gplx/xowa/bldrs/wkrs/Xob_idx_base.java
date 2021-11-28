@@ -28,7 +28,7 @@ public abstract class Xob_idx_base extends Xob_itm_basic_base implements Xob_cmd
 	}
 	public abstract void Cmd_bgn_hook(); 
 	public abstract void Cmd_run();
-	@gplx.Virtual public void Cmd_end() {}
+	public void Cmd_end() {}
 	public void Cmd_term() {}	
 	public Io_line_rdr rdr_(Io_url dir) {
 		Io_url[] fils = Io_mgr.Instance.QueryDir_fils(dir);

@@ -21,12 +21,12 @@ public class DsvDataWtr_tbls_tst {
 		layout.HeaderList().Add_TableName();
 		wtr.InitWtr(DsvStoreLayout.Key_const, layout);
 	}
-	@Test  public void Rows_0() {
+	@Test public void Rows_0() {
 		root = fx_nde.tbl_("tbl0");
 		expd = String_.Concat_lines_crlf(	"tbl0, ,\" \",#");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Rows_N() {
+	@Test public void Rows_N() {
 		root = fx_nde.tbl_
 			(	"numbers"
 			,	fx_nde.row_vals_(1, 2, 3)
@@ -39,7 +39,7 @@ public class DsvDataWtr_tbls_tst {
 			);
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Tbls_N_Empty() {
+	@Test public void Tbls_N_Empty() {
 		root = fx_nde.root_
 			(	fx_nde.tbl_("tbl0")
 			,	fx_nde.tbl_("tbl1")
@@ -50,7 +50,7 @@ public class DsvDataWtr_tbls_tst {
 			);
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Tbls_N() {
+	@Test public void Tbls_N() {
 		root = fx_nde.root_
 			(	fx_nde.tbl_("letters"
 			,		fx_nde.row_vals_("a", "b", "c"))

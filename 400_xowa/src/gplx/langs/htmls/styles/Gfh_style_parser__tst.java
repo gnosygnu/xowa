@@ -17,24 +17,24 @@ package gplx.langs.htmls.styles; import gplx.*; import gplx.langs.*; import gplx
 import org.junit.*;
 public class Gfh_style_parser__tst {
 	private final    Gfh_style_parser__fxt fxt = new Gfh_style_parser__fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__parse("k_0:v_0"					, fxt.Make("k_0", "v_0"));
 		fxt.Test__parse("k_0:v_0;"					, fxt.Make("k_0", "v_0"));
 		fxt.Test__parse("k_0:v_0;k_1:v_1"			, fxt.Make("k_0", "v_0"), fxt.Make("k_1", "v_1"));
 	}
-	@Test   public void Ws() {
+	@Test  public void Ws() {
 		fxt.Test__parse(" k_0 : v_0 ;"				, fxt.Make("k_0", "v_0"));
 		fxt.Test__parse(" k_0 : v_0 ; k_1 : v_1 "	, fxt.Make("k_0", "v_0"), fxt.Make("k_1", "v_1"));
 		fxt.Test__parse(" k_0 : v 0 ;"				, fxt.Make("k_0", "v 0"));
 	}
-	@Test   public void Empty() {
+	@Test  public void Empty() {
 		fxt.Test__parse("k_0:v_0;;"					, fxt.Make("k_0", "v_0"));
 		fxt.Test__parse("k_0:v_0; ; "				, fxt.Make("k_0", "v_0"));
 	}
-	@Test   public void Invalid__no_semic() {
+	@Test  public void Invalid__no_semic() {
 		fxt.Test__parse("k_0"						, fxt.Make("k_0", ""));
 	}
-	@Test   public void Invalid__dupe_colon() {
+	@Test  public void Invalid__dupe_colon() {
 		fxt.Test__parse("a:b:c:d;"					, fxt.Make("a", "b:c:d"));
 	}
 }

@@ -18,13 +18,13 @@ import org.junit.*; import gplx.core.tests.*;
 public class Xowmf_imageinfo_item__tst {
 	private final    Xowmf_imageinfo_item__fxt fxt = new Xowmf_imageinfo_item__fxt();
 
-	@Test   public void Normalize_ttl() {
+	@Test  public void Normalize_ttl() {
 		fxt.Test__Normalize_ttl("File:A b.png", "A_b.png");
 	}
-	@Test   public void Normalize_minor_mime() {
+	@Test  public void Normalize_minor_mime() {
 		fxt.Test__Normalize_minor_mime("image/svg+xml", "svg+xml");
 	}
-	@Test   public void Normalize_timestamp() {
+	@Test  public void Normalize_timestamp() {
 		fxt.Test__Normalize_timestamp("2017-03-06T08:09:10Z", "20170306080910");
 	}
 }

@@ -17,7 +17,7 @@ package gplx.core.lists; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Queue_adp_tst {
 	private final    Queue_adp_fxt fxt = new Queue_adp_fxt();
-	@Test  public void Empty() {
+	@Test public void Empty() {
 		boolean pass = true;
 		try {
 			fxt.Test__dequeue(null, -1);
@@ -28,11 +28,11 @@ public class Queue_adp_tst {
 		}
 		if (pass) throw Err_.new_wo_type("empty should have failed");
 	}
-	@Test  public void Add_1() {
+	@Test public void Add_1() {
 		fxt.Exec__enqueue("a");
 		fxt.Test__dequeue("a", 0);
 	}
-	@Test  public void Add_n() {
+	@Test public void Add_n() {
 		fxt.Exec__enqueue("a");
 		fxt.Exec__enqueue("b");
 		fxt.Exec__enqueue("c");
@@ -40,7 +40,7 @@ public class Queue_adp_tst {
 		fxt.Test__dequeue("b", 1);
 		fxt.Test__dequeue("c", 0);
 	}
-	@Test  public void Mix() {
+	@Test public void Mix() {
 		fxt.Exec__enqueue("a");
 		fxt.Exec__enqueue("b");
 		fxt.Test__dequeue("a", 1);

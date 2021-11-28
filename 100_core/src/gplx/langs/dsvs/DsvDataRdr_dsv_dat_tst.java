@@ -17,12 +17,12 @@ package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class DsvDataRdr_dsv_dat_tst {
 	@Before public void setup() {fx.Clear();} DsvDataRdr_fxt fx = DsvDataRdr_fxt.new_();
-	@Test  public void NameOnly() {
+	@Test public void NameOnly() {
 		fx.run_parse_("tableName, ,\" \",#");
 		fx.tst_Tbls("tableName");
 		fx.tst_Dat(0);
 	}
-	@Test  public void Rows_N() {
+	@Test public void Rows_N() {
 		fx.run_parse_lines_
 			(	"numbers, ,\" \",#"
 			,	"1,2,3"
@@ -34,7 +34,7 @@ public class DsvDataRdr_dsv_dat_tst {
 			,	fx.ary_("4", "5", "6")
 			);
 	}
-	@Test  public void Tbls_N() {
+	@Test public void Tbls_N() {
 		fx.run_parse_lines_
 			(	"letters, ,\" \",#"
 			,	"a,b,c"
@@ -46,7 +46,7 @@ public class DsvDataRdr_dsv_dat_tst {
 		fx.tst_Dat(0, fx.ary_("a", "b", "c"));
 		fx.tst_Dat(1, fx.ary_("1", "2", "3"), fx.ary_("4", "5", "6"));
 	}
-	@Test  public void IgnoreTrailingBlankRow() {
+	@Test public void IgnoreTrailingBlankRow() {
 		fx.run_parse_lines_
 			(	"letters, ,\" \",#"
 			,	"a,b,c"
@@ -55,7 +55,7 @@ public class DsvDataRdr_dsv_dat_tst {
 		fx.tst_Tbls("letters");
 		fx.tst_Dat(0, fx.ary_("a", "b", "c"));
 	}
-	@Test  public void AllowCommentsDuringData() {
+	@Test public void AllowCommentsDuringData() {
 		fx.run_parse_lines_
 			(	"letters, ,\" \",#"
 			,	"a,b,c"

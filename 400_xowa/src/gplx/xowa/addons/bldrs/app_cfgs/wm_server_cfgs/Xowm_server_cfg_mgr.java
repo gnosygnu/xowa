@@ -13,11 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.app_cfgs.wm_server_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.app_cfgs.*;
-import gplx.core.ios.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
-import gplx.langs.phps.*;
-import gplx.xowa.wikis.domains.*;
+package gplx.xowa.addons.bldrs.app_cfgs.wm_server_cfgs; import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.DateAdp;
+import gplx.Datetime_now;
+import gplx.Err_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.core.ios.IoItmFil;
+import gplx.langs.phps.Php_evaluator;
+import gplx.langs.phps.Php_itm_ary;
+import gplx.langs.phps.Php_itm_kv;
+import gplx.langs.phps.Php_line;
+import gplx.langs.phps.Php_line_assign;
+import gplx.langs.phps.Php_parser;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.wikis.domains.Xow_abrv_wm_;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
 public class Xowm_server_cfg_mgr {
 	public void Exec(Xoa_app app) {
 		// get local file
@@ -63,7 +79,7 @@ public class Xowm_server_cfg_mgr {
 				bfr.Add_str_u8_fmt("app.bldr.wiki_cfg_bldr.get('{0}').new_cmd_('wiki.ctgs.collations', \"catpage_mgr.collation_('{1}');\");\n", itm.Domain_bry(), collation);
 			} catch (Exception e) {throw Err_.new_("failed to parse line", "wiki", wiki_abrv, "collation", collation, "err", Err_.Message_lang(e));}
 		}
-		Tfds.Write(bfr.To_str_and_clear());
+		// Tfds.Write(bfr.To_str_and_clear());
 	}
 	private static void Assert_recent_or_download(Io_url trg, String src, int min) {
 		// get file

@@ -18,10 +18,10 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
 public class XomwHtml_expandAttributes_tst{
 	private final    XomwHtml_expandAttributes_fxt fxt = new XomwHtml_expandAttributes_fxt();
-	@Test   public void Basic()	{
+	@Test  public void Basic()	{
 		fxt.Test__expand_attributes(" a=\"b\"", "a", "b");
 	}
-	@Test   public void NullVal()	{
+	@Test  public void NullVal()	{
 		fxt.Test__expand_attributes("", "a", null);
 	}
 }

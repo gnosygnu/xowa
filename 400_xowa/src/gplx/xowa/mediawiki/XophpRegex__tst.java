@@ -19,25 +19,25 @@ import gplx.langs.regxs.*;
 public class XophpRegex__tst {
 	private final    XophpRegex__fxt fxt = new XophpRegex__fxt();
 	@After public void term() {fxt.Term();}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__preg_match("a", "abc", fxt.Expd__y().Add("a")); // found
 		fxt.Test__preg_match("z", "abc", fxt.Expd__n()); // not found
 		fxt.Test__preg_match("c", "abc", 1, fxt.Expd__y().Add("c")); // offset
 		fxt.Test__preg_match("c", "abc", 3, fxt.Expd__err()); // offset: too large
 		fxt.Test__preg_match("c", "abc", -1, fxt.Expd__err()); // offset: negative
 	}
-	@Test   public void Not_found() {
+	@Test  public void Not_found() {
 		fxt.Test__preg_match("a", "abc", fxt.Expd__y().Add("a")); // found
 		fxt.Test__preg_match("z", "abc", fxt.Expd__n()); // not found
 		fxt.Test__preg_match("c", "abc", 1, fxt.Expd__y().Add("c")); // offset
 		fxt.Test__preg_match("c", "abc", 3, fxt.Expd__err()); // offset: too large
 		fxt.Test__preg_match("c", "abc", -1, fxt.Expd__err()); // offset: negative
 	}
-	@Test   public void Character_classes() {
+	@Test  public void Character_classes() {
 		fxt.Test__preg_match("[bc]", "abc", fxt.Expd__y().Add("b")); // character class
 		fxt.Test__preg_match("[bc]", "abc", XophpRegex_.PREG_OFFSET_CAPTURE, 2, fxt.Expd__y().Add("c", 2)); // character class
 	}
-	@Test   public void Groups() {
+	@Test  public void Groups() {
 		fxt.Test__preg_match("(foo)(bar)(baz)", "foobarbaz", XophpRegex_.PREG_OFFSET_CAPTURE, 0, fxt.Expd__y()
 			.Add("foobarbaz", 0)
 			.Add("foo", 0)
@@ -51,7 +51,7 @@ public class XophpRegex__tst {
 			.Add("baz")
 		);
 	}
-	@Test   public void preg_quote() {
+	@Test  public void preg_quote() {
 		Gftest.Eq__str("abc", XophpRegex_.preg_quote("abc", "/"));
 		Gftest.Eq__str("\\.\\\\\\+\\*\\?\\[\\^\\]\\$\\(\\)\\{\\}\\=\\!\\<\\>\\|\\:\\-\\#", XophpRegex_.preg_quote(".\\+*?[^]$(){}=!<>|:-#", "/"));
 	}

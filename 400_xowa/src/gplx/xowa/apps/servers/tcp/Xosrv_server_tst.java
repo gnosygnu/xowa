@@ -18,10 +18,10 @@ import org.junit.*;
 import gplx.core.ios.*;
 public class Xosrv_server_tst {
 	@Before public void init() {fxt.Clear();} private Xosrv_server_fxt fxt = new Xosrv_server_fxt();
-	@Test   public void Exec_js() {
+	@Test  public void Exec_js() {
 		fxt.Test_exec_js("{\"args\":[\"xowa_exec_test\",\"a\",\"b\"]}", "{\"xowa_js_result\":\"xowa_exec_test|a|b\"}");
 	}
-	@Test   public void Exec_js_ary() {
+	@Test  public void Exec_js_ary() {
 		fxt.Test_exec_js("{\"args\":[\"xowa_exec_test_as_array\",\"a\",\"b\"]}", "{\"xowa_js_result\":[\"xowa_exec_test_as_array\",\"a\",\"b\"]}");
 	}
 }

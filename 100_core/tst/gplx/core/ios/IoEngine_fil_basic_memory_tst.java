@@ -21,10 +21,10 @@ public class IoEngine_fil_basic_memory_tst extends IoEngine_fil_basic_base_tst {
 		root = Io_url_.mem_dir_("mem");
 		fil = root.GenSubFil_nest("root", "fil.txt");
 	}
-	@Test  @Override public void OpenStreamRead() {
+	@Test @Override public void OpenStreamRead() {
 		super.OpenStreamRead ();
 	}
-	@Test  @Override public void SaveFilText_overwrite() {
+	@Test @Override public void SaveFilText_overwrite() {
 		super.SaveFilText_overwrite();
 
 		// bugfix: verify changed file in ownerDir's hash
@@ -32,7 +32,7 @@ public class IoEngine_fil_basic_memory_tst extends IoEngine_fil_basic_base_tst {
 		IoItmFil_mem filItm = (IoItmFil_mem)dirItm.SubFils().Get_at(0);
 		Tfds.Eq(filItm.Text(), "changed");
 	}
-	@Test  public void RecycleFil() {
+	@Test public void RecycleFil() {
 		fx.run_SaveFilText(fil, "text");
 		fx.tst_ExistsPaths(true, fil);
 

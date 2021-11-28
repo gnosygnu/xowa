@@ -20,20 +20,20 @@ public class z091_GfmlLxr_basic_tst {
 	@Before public void setup() {
 		rootLxr = GfmlLxr_.general_("gfml.root", GfmlTkn_.cmd_("tkn:text", GfmlBldrCmd_.Null));
 	}	GfmlLxr rootLxr;
-	@Test  public void Empty() {
+	@Test public void Empty() {
 		tst_Fetch("");
 	}
-	@Test  public void General() {
+	@Test public void General() {
 		tst_Fetch("text", "text");
 	}
-	@Test  public void Solo() {
+	@Test public void Solo() {
 		ini_AddSymbol(",");
 		tst_Fetch(",", ",");
 		tst_Fetch(",data0", ",", "data0");
 		tst_Fetch("data0,", "data0", ",");
 		tst_Fetch("data0,data1", "data0", ",", "data1");
 	}
-	@Test  public void Range() {
+	@Test public void Range() {
 		ini_AddRange(" ", "\t");
 		tst_Fetch(" ", " ");
 		tst_Fetch(" a", " ", "a");

@@ -17,13 +17,13 @@ package gplx.core.brys; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Bry_diff_tst {
 	@Before public void init() {} private final Bry_diff_fxt fxt = new Bry_diff_fxt();
-	@Test   public void Diff_1st() {
+	@Test  public void Diff_1st() {
 		fxt.Test__diff_1st("a|b|c"	, "a|b|c"	, null		, null);
 		fxt.Test__diff_1st("a|b|c"	, "a|b1|c"	, "b"		, "b1");
 		fxt.Test__diff_1st("a|b|"	, "a|b|c"	, "<<EOS>>"	, "c");
 		fxt.Test__diff_1st("a|b|c"	, "a|b|"	, "c"		, "<<EOS>>");
 	}
-	@Test   public void Diff_1st_show() {
+	@Test  public void Diff_1st_show() {
 		fxt.Test__diff_1st("a|b<c>d|e"	, "a|b<c>e|e"	, "<c>d", "<c>e");
 	}
 }

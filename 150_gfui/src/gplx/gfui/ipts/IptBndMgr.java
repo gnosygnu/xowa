@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
-import gplx.core.interfaces.*;
+package gplx.gfui.ipts; import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.GfoMsg_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.UsrDlg_;
+import gplx.UsrMsg;
+import gplx.core.interfaces.SrlAble;
+import gplx.core.interfaces.SrlAble_;
 public class IptBndMgr implements SrlAble {
 	public IptEventType EventsToFwd() {return eventsToFwd;}
 	public void EventsToFwd_set(IptEventType v) {eventsToFwd = v;} IptEventType eventsToFwd = IptEventType_.KeyDown;

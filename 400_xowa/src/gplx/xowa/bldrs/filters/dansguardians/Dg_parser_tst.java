@@ -17,20 +17,20 @@ package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*
 import org.junit.*;
 public class Dg_parser_tst {
 	@Before public void init() {fxt.Init();} private Dg_parser_fxt fxt = new Dg_parser_fxt();
-	@Test   public void One()				{fxt.Test_parse_line("<a><123>", fxt.Make_line(123, "a"));}
-	@Test   public void Many()				{fxt.Test_parse_line("<a>,<b>,<c><-123>", fxt.Make_line(-123, "a", "b", "c"));}
-	@Test   public void Score_0()			{fxt.Test_parse_line("<a><0>", fxt.Make_line(Dg_rule.Score_banned, "a"));}
-	@Test   public void Noscore()			{fxt.Test_parse_line("<a>", fxt.Make_line(Dg_rule.Score_banned, "a"));}
-	@Test   public void Noscore_2()			{fxt.Test_parse_line("<a>,<b>", fxt.Make_line(Dg_rule.Score_banned, "a", "b"));}
-	@Test   public void Comment()			{fxt.Test_parse_line("# comment", Dg_rule.Itm_comment);}
-	@Test   public void Blank()				{fxt.Test_parse_line("", Dg_rule.Itm_blank);}
-	@Test   public void Invalid_line_bgn()	{fxt.Test_parse_line(" <a><1>", Dg_rule.Itm_invalid);}
-	@Test   public void Dangling_word()		{fxt.Test_parse_line("<a", Dg_rule.Itm_invalid);}
-	@Test   public void Dangling_score()	{fxt.Test_parse_line("<a><12", fxt.Make_line(Dg_rule.Score_banned, "a"));}
-	@Test   public void Invalid_dlm()		{fxt.Test_parse_line("<a> <1>", fxt.Make_line(Dg_rule.Score_banned, "a"));}
-	@Test   public void Invalid_dlm_2()		{fxt.Test_parse_line("<a>,<b><c><2>", fxt.Make_line(Dg_rule.Score_banned, "a", "b"));}
-	@Test   public void Invalid_score()		{fxt.Test_parse_line("<a><1a>", fxt.Make_line(Dg_rule.Score_banned, "a"));}
-//		@Test   public void Parse_dir() {
+	@Test  public void One()				{fxt.Test_parse_line("<a><123>", fxt.Make_line(123, "a"));}
+	@Test  public void Many()				{fxt.Test_parse_line("<a>,<b>,<c><-123>", fxt.Make_line(-123, "a", "b", "c"));}
+	@Test  public void Score_0()			{fxt.Test_parse_line("<a><0>", fxt.Make_line(Dg_rule.Score_banned, "a"));}
+	@Test  public void Noscore()			{fxt.Test_parse_line("<a>", fxt.Make_line(Dg_rule.Score_banned, "a"));}
+	@Test  public void Noscore_2()			{fxt.Test_parse_line("<a>,<b>", fxt.Make_line(Dg_rule.Score_banned, "a", "b"));}
+	@Test  public void Comment()			{fxt.Test_parse_line("# comment", Dg_rule.Itm_comment);}
+	@Test  public void Blank()				{fxt.Test_parse_line("", Dg_rule.Itm_blank);}
+	@Test  public void Invalid_line_bgn()	{fxt.Test_parse_line(" <a><1>", Dg_rule.Itm_invalid);}
+	@Test  public void Dangling_word()		{fxt.Test_parse_line("<a", Dg_rule.Itm_invalid);}
+	@Test  public void Dangling_score()	{fxt.Test_parse_line("<a><12", fxt.Make_line(Dg_rule.Score_banned, "a"));}
+	@Test  public void Invalid_dlm()		{fxt.Test_parse_line("<a> <1>", fxt.Make_line(Dg_rule.Score_banned, "a"));}
+	@Test  public void Invalid_dlm_2()		{fxt.Test_parse_line("<a>,<b><c><2>", fxt.Make_line(Dg_rule.Score_banned, "a", "b"));}
+	@Test  public void Invalid_score()		{fxt.Test_parse_line("<a><1a>", fxt.Make_line(Dg_rule.Score_banned, "a"));}
+//		@Test  public void Parse_dir() {
 //			Dg_parser parser = new Dg_parser();
 //			Gfo_usr_dlg_.I = Xoa_app_.New__usr_dlg__console();
 //			parser.Parse_dir(Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\bldr\\filters\simple.wikipedia.org\\Dansguardian\\\\"));

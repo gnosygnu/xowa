@@ -19,7 +19,7 @@ import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.tdbs.hives.*;
 public class Xows_page_allpages_tst {		
 	@Before public void init() {fxt.Clear();} private Xows_page_allpages_fxt fxt = new Xows_page_allpages_fxt();
-	@Test  public void Build_data() {
+	@Test public void Build_data() {
 		Xow_hive_mgr_fxt.Ttls_create_rng(fxt.Wiki(), 5, 7);
 		fxt.Clear().Init_ttl_leaf("/B1").Expd_prv("A3").Expd_nxt("B6").Expd_ttls("B1", "B2", "B3", "B4", "B5").Test_build_data();	// SpecialPage:AllPages/B1
 		fxt.Clear().Init_arg("from", "B1").Expd_prv("A3").Expd_nxt("B6").Expd_ttls("B1", "B2", "B3", "B4", "B5").Test_build_data();	// single file
@@ -30,7 +30,7 @@ public class Xows_page_allpages_tst {
 		fxt.Clear().Init_arg("from", "B1").Init_arg("hideredirects", "1").Expd_prv("A0").Expd_nxt("C4").Expd_ttls("B2", "B4", "B6", "C0", "C2").Test_build_data();	// hide redirects
 		fxt.Clear().Init_arg("from", "A6").Expd_prv("A0").Expd_nxt("E1").Init_itms_per_page(23).Expd_ttls("A6", "B0", "B1", "B2", "B3", "B4", "B5", "B6", "C0", "C1", "C2", "C3", "C4", "C5", "C6", "D0", "D1", "D2", "D3", "D4", "D5", "D6", "E0").Test_build_data();	// overflow rhs x2			
 	}
-	@Test  public void Build_html_main() {
+	@Test public void Build_html_main() {
 		Xow_hive_mgr_fxt.Ttls_create_rng(fxt.Wiki(), 5, 7);
 		fxt.Clear().Init_arg("from", "B2").Init_itms_per_page(5).Test_build_html(String_.Concat_lines_nl
 		(	"<table class=\"mw-allpages-table-form\">"
@@ -61,7 +61,7 @@ public class Xows_page_allpages_tst {
 		,	"</div>"
 		));
 	}
-	@Test  public void Build_html_redirect() {
+	@Test public void Build_html_redirect() {
 		Xow_hive_mgr_fxt.Ttls_create_rng(fxt.Wiki(), 1, 7);
 		fxt.Clear().Init_arg("from", "A2").Init_arg("hideredirects", "1").Init_itms_per_page(2).Test_build_html(String_.Concat_lines_nl
 		(	"<table class=\"mw-allpages-table-form\">"
@@ -87,7 +87,7 @@ public class Xows_page_allpages_tst {
 		,	"</div>"
 		));
 	}
-	@Test  public void Build_html_ns() {
+	@Test public void Build_html_ns() {
 		Xow_hive_mgr_fxt.Ttls_create_rng(fxt.Wiki(), fxt.Wiki().Ns_mgr().Ns_template(), 1, 7);
 		fxt.Clear().Init_arg("from", "A2").Init_arg("namespace", "10").Init_itms_per_page(2).Test_build_html(String_.Concat_lines_nl
 		(	"<table class=\"mw-allpages-table-form\">"
@@ -113,7 +113,7 @@ public class Xows_page_allpages_tst {
 		,	"</div>"
 		));
 	}
-	@Test   public void Misc() {
+	@Test  public void Misc() {
 		Xow_hive_mgr_fxt.Ttls_create_rng(fxt.Wiki(), fxt.Wiki().Ns_mgr().Ns_template(), 1, 7);
 		fxt.Clear().Init_arg("from", "Template:B1").Expd_arg("from", "B1").Expd_arg("namespace", "10").Test_build_data();	// extract ns from ttl
 		fxt.Clear().Init_arg("from", "Template:B1").Expd_display_ttl("All pages").Expd_address_page("Special:AllPages").Test_special_gen();	// display ttl

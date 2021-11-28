@@ -13,19 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.gxws; import gplx.GfoMsg;
+import gplx.GfsCtx;
+import gplx.gfui.RectAdp;
+import gplx.gfui.gfxs.GfxAdpBase;
+import gplx.gfui.gfxs.PaintArgs;
+import gplx.gfui.ipts.IptEvtDataMouse;
+import gplx.gfui.ipts.IptKey;
+import gplx.gfui.ipts.IptMouseBtn;
+import gplx.gfui.ipts.IptMouseBtn_;
+import gplx.gfui.ipts.IptMouseWheel_;
+import javax.swing.JComponent;
 import java.awt.AWTEvent;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import javax.swing.JComponent;
-import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*;
 public class GxwElem_lang extends JComponent implements GxwElem {
 	public static final String AlignH_cmd = "AlignH";
 	public GxwCbkHost Host() {return host;} public void Host_set(GxwCbkHost host) {this.host = host;} GxwCbkHost host = GxwCbkHost_.Null;
@@ -58,8 +62,7 @@ public class GxwElem_lang extends JComponent implements GxwElem {
 	public GxwCore_base Core() {return ctrlMgr;} GxwCore_base ctrlMgr;
 	public void SendKeyDown(IptKey key)								{}
 	public void SendMouseMove(int x, int y)							{}
-	public void SendMouseDown(IptMouseBtn btn)						{
-	}
+	public void SendMouseDown(IptMouseBtn btn)						{}
 	public void EnableDoubleBuffering() {}	// eliminates flickering during OnPaint
 	JComponent comp = null;
 	public GxwElem_lang() {this.ctor_GxwElem();}

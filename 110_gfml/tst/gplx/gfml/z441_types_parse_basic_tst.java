@@ -17,14 +17,14 @@ package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z441_types_parse_basic_tst {
 	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void Null() {
+	@Test public void Null() {
 		fx.tst_Parse(String_.Concat
 			(	"point:1;"
 			)
 			,	fx.nde_().Hnd_("point").Typ_(GfmlType_.AnyKey).Atru_("1")
 			);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Parse(String_.Concat
 			(	"_type:{"
 			,		"point {"
@@ -36,7 +36,7 @@ public class z441_types_parse_basic_tst {
 			,	fx.nde_().Hnd_("point").Typ_("point").Atrk_("x", "1")
 			);
 	}
-	@Test  public void MultipleAtrs() {
+	@Test public void MultipleAtrs() {
 		fx.tst_Parse(String_.Concat
 			(	"_type:{"
 			,		"point {"

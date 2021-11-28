@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.parsers.headings; import gplx.*; import gpl
 import org.junit.*;
 public class Xomw_heading_wkr__tst {
 	private final    Xomw_heading_wkr__fxt fxt = new Xomw_heading_wkr__fxt();
-	@Test  public void Basic()		{
+	@Test public void Basic()		{
 		fxt.Test__parse("==A=="					, "<h2>A</h2>");
 		fxt.Test__parse("abc\n==A==\ndef"		, "abc\n<h2>A</h2>\ndef");
 

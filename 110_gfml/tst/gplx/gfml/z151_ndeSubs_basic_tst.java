@@ -23,29 +23,29 @@ public class z151_ndeSubs_basic_tst {
 			,	GfmlDocLxrs.NdeBodyEnd_lxr()
 			);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Doc("{}", fx.nde_());
 		fx.tst_Tkn("{}"
 			,	fx.tkn_grp_ary_("{", "}")
 			);
 	}	
-	@Test  public void Many() {
+	@Test public void Many() {
 		fx.tst_Doc("{}{}", fx.nde_(), fx.nde_());
 	}
-	@Test  public void Nested() {
+	@Test public void Nested() {
 		fx.tst_Doc("{{}}"
 			, fx.nde_().Subs_
 			(		fx.nde_())
 			);
 	}
-	@Test  public void NestedMany() {
+	@Test public void NestedMany() {
 		fx.tst_Doc("{{}{}}"
 			, fx.nde_().Subs_
 			(		fx.nde_()
 			,		fx.nde_()
 			));
 	}
-	@Test  public void Complex() {
+	@Test public void Complex() {
 		fx.tst_Doc(String_.Concat
 			(	"{"
 			,		"{"

@@ -24,7 +24,7 @@ public class Pf_formatnum_es_tst {
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "es.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 	}
-	@Test  public void Basic()	{
+	@Test public void Basic()	{
 		fxt.Test_parse_tmpl_str_test("{{formatnum:1234.56}}"		, "{{test}}",	"1234.56");		// fmt.n;
 		fxt.Test_parse_tmpl_str_test("{{formatnum:1234}}"			, "{{test}}",	"1234");		// fmt.n; decimal
 		fxt.Test_parse_tmpl_str_test("{{formatnum:-1234.56}}"		, "{{test}}",	"-1234.56");	// fmt.n; neg

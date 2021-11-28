@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import org.junit.*; import gplx.core.strings.*; import gplx.xowa.wikis.tdbs.hives.*;
 public class Xob_xdat_file_tst {
-	@Test  public void Find() {
+	@Test public void Find() {
 		Xob_xdat_file rdr = rdr_("!!!!%|!!!!%|!!!!%|!!!!%|!!!!%|", "0|b", "1|d", "2|f", "3|h", "4|j");
 		tst_ReadAt(rdr, 0, "0|b");
 		tst_ReadAt(rdr, 1, "1|d");
@@ -29,7 +29,7 @@ public class Xob_xdat_file_tst {
 		tst_Find(rdr, "c", 1, false);
 		tst_Find(rdr, "k", 4, false);
 	}
-	@Test  public void Update() {
+	@Test public void Update() {
 		Xob_xdat_file rdr = rdr_("!!!!%|!!!!%|!!!!%|!!!!%|!!!!%|", "0|b", "1|d", "2|f", "3|h", "4|j");
 		tst_Update(rdr, 3, "3|h1\n", String_.Concat_lines_nl_skip_last
 		(	"!!!!%|!!!!%|!!!!%|!!!!&|!!!!%|"
@@ -41,7 +41,7 @@ public class Xob_xdat_file_tst {
 		,	""
 		));
 	}
-	@Test  public void Insert() {
+	@Test public void Insert() {
 		Xob_xdat_file rdr = rdr_("!!!!%|!!!!%|!!!!%|!!!!%|!!!!%|", "0|b", "1|d", "2|f", "3|h", "4|j");
 		tst_Insert(rdr, "5|k\n", String_.Concat_lines_nl_skip_last
 		(	"!!!!%|!!!!%|!!!!%|!!!!%|!!!!%|!!!!%|"
@@ -54,7 +54,7 @@ public class Xob_xdat_file_tst {
 		,	""
 		));
 	}
-	@Test  public void Sort() {
+	@Test public void Sort() {
 		Xob_xdat_file rdr = rdr_("!!!!%|!!!!%|!!!!%|!!!!%|!!!!%|", "4|j", "2|f", "0|b", "1|d", "3|h");
 		Bry_comparer_bgn_eos comparer = new Bry_comparer_bgn_eos(2);
 		tst_Sort(rdr, comparer, String_.Concat_lines_nl_skip_last
@@ -67,7 +67,7 @@ public class Xob_xdat_file_tst {
 		,	""
 		));
 	}
-	@Test   public void Rebuild_header() {
+	@Test  public void Rebuild_header() {
 		String orig = String_.Concat_lines_nl(""								, "4|j", "2|f", "0|b", "1|d", "3|h");
 		String expd = String_.Concat_lines_nl("!!!!%|!!!!%|!!!!%|!!!!%|!!!!%|"	, "4|j", "2|f", "0|b", "1|d", "3|h");
 		Rebuild_header_tst(orig, expd);

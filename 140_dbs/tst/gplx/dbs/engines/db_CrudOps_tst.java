@@ -17,16 +17,16 @@ package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
 import org.junit.*; import gplx.dbs.qrys.*;
 public class db_CrudOps_tst {
 	CrudOpsFxt fx = new CrudOpsFxt();
-	@Test  public void Mysql() {if (Tfds.SkipDb) return;
+	@Test public void Mysql() {if (Tfds.SkipDb) return;
 		fx.RunAll(Db_conn_fxt.Mysql());
 	}
-	@Test  public void Tdb() {if (Tfds.SkipDb) return;
+	@Test public void Tdb() {if (Tfds.SkipDb) return;
 		fx.RunAll(Db_conn_fxt.Tdb("100_dbs_crud_ops.dsv"));
 	}
-	@Test  public void Postgres() {if (Db_conn_fxt.SkipPostgres) return;
+	@Test public void Postgres() {if (Db_conn_fxt.SkipPostgres) return;
 		fx.RunAll(Db_conn_fxt.Postgres());
 	}
-	@Test  public void Sqlite() {if (Tfds.SkipDb) return;
+	@Test public void Sqlite() {if (Tfds.SkipDb) return;
 		fx.Fx().DmlAffectedAvailable_(false);
 		fx.RunAll(Db_conn_fxt.Sqlite());
 	}

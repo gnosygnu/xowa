@@ -19,7 +19,7 @@ import gplx.core.consoles.*;
 import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_ustring__find__tst {
 	private final    Scrib_lib_ustring__find__fxt fxt = new Scrib_lib_ustring__find__fxt();
-	@Test  public void Plain() {
+	@Test public void Plain() {
 		fxt.Test__find("aabaab"        , "b"    ,  2, Bool_.Y, "3;3"); // bytes=1
 		fxt.Test__find("¢¢b¢¢b"        , "b"    ,  2, Bool_.Y, "3;3"); // bytes=2
 		fxt.Test__find("€€b€€b"        , "b"    ,  2, Bool_.Y, "3;3"); // bytes=3
@@ -28,15 +28,15 @@ public class Scrib_lib_ustring__find__tst {
 		fxt.Test__find("abcd"          , ""     ,  2, Bool_.Y, "2;1"); // empty find should return values; EX:w:Fool's_mate; DATE:2014-03-04
 		fxt.Test__find("a€b"           , "€"    ,  1, Bool_.Y, "2;2"); // find is bytes=3
 	}
-	@Test   public void Plain_u8() {
+	@Test  public void Plain_u8() {
 		fxt.Test__find("𤭢-a-"         , "-"    ,  3, Bool_.Y, "4;4"); // starts at cp=3 which should be a, not 1st dash; ISSUE#:506; DATE:2019-06-30
 	}
-	@Test   public void Bgn__negative() {
+	@Test  public void Bgn__negative() {
 		fxt.Test__find("abab"          , "b"    , -1, Bool_.Y, "4;4"); // search from back of String
 		fxt.Test__find("abab"          , "b"    , -9, Bool_.Y, "2;2"); // do not throw error if negative index > text.length; ISSUE#:366; DATE:2019-02-23
 		fxt.Test__find("𤭢"            , "𤭢"   , -1, Bool_.Y, "1;1"); // fails if "" b/c it would have counted -1 as -1 char instead of -1 codepoint
 	}
-	@Test  public void Regx__simple() {
+	@Test public void Regx__simple() {
 		fxt.Test__find("aabaab"        , "b"       ,  2, Bool_.N, "3;3"); // bytes=1
 		fxt.Test__find("¢¢b¢¢b"        , "b"       ,  2, Bool_.N, "3;3"); // bytes=2
 		fxt.Test__find("€€b€€b"        , "b"       ,  2, Bool_.N, "3;3"); // bytes=3
@@ -46,28 +46,28 @@ public class Scrib_lib_ustring__find__tst {
 		fxt.Test__find("abcd"          , "x"       ,  1, Bool_.N, String_.Null_mark);  // no-match
 		fxt.Test__find("abcd"          , ""        ,  2, Bool_.N, "2;1"); // empty regx should return values; regx; EX:w:Fool's_mate; DATE:2014-03-04
 	}
-	@Test   public void Regx__int() { // PURPOSE: allow int find; PAGE:ro.w:Innsbruck DATE:2015-09-12
+	@Test  public void Regx__int() { // PURPOSE: allow int find; PAGE:ro.w:Innsbruck DATE:2015-09-12
 		fxt.Test__find(123             , "2"       ,  1, Bool_.N, "2;2");
 	}
-	@Test  public void Regx__groups() {
+	@Test public void Regx__groups() {
 		fxt.Test__find("a bcd e"       , "(b(c)d)" ,  2, Bool_.N, "3;5;bcd;c"); // groups
 		fxt.Test__find("a bcd e"       , "()(b)"   ,  2, Bool_.N, "3;3;3;b");   // groups; empty capture
 	}
-	@Test  public void Regx__caret() {
+	@Test public void Regx__caret() {
 		fxt.Test__find("abcd"          , "^(c)"    ,  3, Bool_.N, "3;3;c");	// ^ should be converted to \G; regx; EX:cs.n:Category:1._září_2008; DATE:2014-05-07
 	}
-	@Test   public void Regx__return_is_int() {
+	@Test  public void Regx__return_is_int() {
 		fxt.Test__find("a"             , "()"      ,  2, Bool_.N, "2;1;2");
 	}
-	@Test  public void Surrogate__find__value() {	// PURPOSE: handle surrogates in Find PAGE:zh.w:南北鐵路_(越南); DATE:2014-08-28
+	@Test public void Surrogate__find__value() {	// PURPOSE: handle surrogates in Find PAGE:zh.w:南北鐵路_(越南); DATE:2014-08-28
 		fxt.Test__find("aé𡼾\nbî𡼾\n"  , "\n"      ,  1, Bool_.N, "4;4"); // 4 b/c \n starts at pos 4 (super 1)
 		fxt.Test__find("aé𡼾\nbî𡼾\n"  , "\n"      ,  5, Bool_.N, "8;8"); // 8 b/c \n starts at pos 8 (super 1)
 	}
-	@Test  public void Surrogate__find__empty() {	// PURPOSE: handle surrogates in Find PAGE:zh.w:南北鐵路_(越南); DATE:2014-08-28
+	@Test public void Surrogate__find__empty() {	// PURPOSE: handle surrogates in Find PAGE:zh.w:南北鐵路_(越南); DATE:2014-08-28
 		fxt.Test__find("aé𡼾\nbî𡼾\n"  , ""        ,  1, Bool_.N, "1;0"); // 4 b/c \n starts at pos 4 (super 1)
 		fxt.Test__find("aé𡼾\nbî𡼾\n"  , ""        ,  5, Bool_.N, "5;4"); // 8 b/c \n starts at pos 8 (super 1)
 	}
-	@Test  public void Balanced__numbered_1() {	// PURPOSE: handle mix of balanced and regular capture; PAGE:en.w:Bahamas
+	@Test public void Balanced__numbered_1() {	// PURPOSE: handle mix of balanced and regular capture; PAGE:en.w:Bahamas
 		fxt.Test__find("[[5]]XccY", "%b[]X(%a)%1Y", 1, Bool_.N, "1;9;c");
 	}
 }

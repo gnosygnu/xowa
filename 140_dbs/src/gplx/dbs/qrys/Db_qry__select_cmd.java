@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
 import gplx.core.criterias.*;
-import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*; 
+import gplx.dbs.sqls.itms.*;
 public class Db_qry__select_cmd implements Db_qry {
 	public int				Tid()				{return Db_qry_.Tid_select;}
 	public boolean				Exec_is_rdr()		{return Bool_.Y;}
@@ -30,6 +30,7 @@ public class Db_qry__select_cmd implements Db_qry {
 	}
 	public Db_qry__select_cmd Join_(String name, String alias, Sql_join_fld... join_flds)				{return Join_(Sql_tbl_itm.Tid__inner, Sql_tbl_itm.Db__null	, name, alias, join_flds);}
 	public Db_qry__select_cmd Join_(String db, String name, String alias, Sql_join_fld... join_flds)	{return Join_(Sql_tbl_itm.Tid__inner, db					, name, alias, join_flds);}
+	public Db_qry__select_cmd Join_(int join_tid, String name, String alias, Sql_join_fld... join_flds) {return Join_(join_tid, Sql_tbl_itm.Db__null, name, alias, join_flds);}
 	public Db_qry__select_cmd Join_(int join_tid, String db, String name, String alias, Sql_join_fld... join_flds) {
 		if (from == null) throw Err_.new_("sql_qry", "super table is not defined");
 		from.Tbls.Add(new Sql_tbl_itm(join_tid, db, name, alias, join_flds));
@@ -107,5 +108,5 @@ public class Db_qry__select_cmd implements Db_qry {
 	}
 	
 	public String		To_sql__exec(gplx.dbs.sqls.Sql_qry_wtr wtr)		{return wtr.To_sql_str(this, Bool_.N);}
-	public String		To_sql__prep(gplx.dbs.sqls.Sql_qry_wtr wtr)		{return wtr.To_sql_str(this, Bool_.Y);}		
+	public String		To_sql__prep(gplx.dbs.sqls.Sql_qry_wtr wtr)		{return wtr.To_sql_str(this, Bool_.Y);}
 }

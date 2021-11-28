@@ -17,10 +17,10 @@ package gplx.xowa.wikis.pages.redirects; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.specials.*;
 public class Xopg_redirect_mgr__tst {
 	@Before public void init() {fxt.Clear();} private final    Xopg_redirect_mgr__fxt fxt = new Xopg_redirect_mgr__fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test__Itms__add__special(fxt.Make_meta("XowaTest"), Keyval_.Ary_empty, fxt.Make__itm("en.wikipedia.org/wiki/Special:XowaTest", "Special:XowaTest", null));
 	}
-	@Test  public void Args() {
+	@Test public void Args() {
 		fxt.Test__Itms__add__special
 		( fxt.Make_meta("XowaTest"), Keyval_.Ary(Keyval_.new_("k1", "v1"), Keyval_.new_("k2", "v2"), Keyval_.new_("k3", "v3"))
 		, fxt.Make__itm("en.wikipedia.org/wiki/Special:XowaTest?k1=v1&k2=v2&k3=v3", "Special:XowaTest", null)

@@ -17,13 +17,13 @@ package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*;
 public class XomwStripState_tst {
 	private final    XomwStripState_fxt fxt = new XomwStripState_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init__add    (XomwStripState.TYPE_GENERAL, "\u007f'\"`UNIQ-key-1-QINU`\"'\u007f", "val-1");
 		fxt.Test__nostrip(XomwStripState.TYPE_NOWIKI , "a \u007f'\"`UNIQ-key-1-QINU`\"'\u007f b");
 		fxt.Test__unstrip(XomwStripState.TYPE_GENERAL, "a \u007f'\"`UNIQ-key-1-QINU`\"'\u007f b", "a val-1 b");
 		fxt.Test__unstrip(XomwStripState.TYPE_BOTH   , "a \u007f'\"`UNIQ-key-1-QINU`\"'\u007f b", "a val-1 b");
 	}
-	@Test   public void Recurse() {
+	@Test  public void Recurse() {
 		fxt.Init__add    (XomwStripState.TYPE_GENERAL, "\u007f'\"`UNIQ-key-1-QINU`\"'\u007f", "val-1");
 		fxt.Init__add    (XomwStripState.TYPE_GENERAL, "\u007f'\"`UNIQ-key-2-QINU`\"'\u007f", "\u007f'\"`UNIQ-key-1-QINU`\"'\u007f");
 		fxt.Test__unstrip(XomwStripState.TYPE_GENERAL, "a \u007f'\"`UNIQ-key-2-QINU`\"'\u007f b", "a val-1 b");

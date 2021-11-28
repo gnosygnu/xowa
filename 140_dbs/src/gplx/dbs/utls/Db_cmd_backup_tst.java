@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 public class Db_cmd_backup_tst {
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		Datetime_now.Manual_y_();
 		Db_cmd_backup bkpWkr = Db_cmd_backup.new_()
 			.ExeUrl_(Io_url_.new_any_("C:\\mysql\\mysqldump.exe"))

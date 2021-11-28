@@ -22,7 +22,7 @@ public class z424_types_apply_ndes_nest_tst {
 		makr.MakeSubType("pos", "x", "y");
 		fx.Regy().Add_ary(makr.Xto_bry());
 	}	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void InvokeByHnd() {
+	@Test public void InvokeByHnd() {
 		fx.tst_Resolve
 			(	fx.nde_().Hnd_("gfml.item").Subs_
 			(		fx.nde_().Hnd_("pos").Atrs_("10", "20"))
@@ -30,7 +30,7 @@ public class z424_types_apply_ndes_nest_tst {
 			(		fx.nde_().Typ_("gfml.item/pos").Atrk_("x", "10").Atrk_("y", "20")
 			));
 	}
-	@Test  public void InvokeByTyp() {
+	@Test public void InvokeByTyp() {
 		fx.tst_Resolve
 			(	fx.nde_().Hnd_("gfml.item").Subs_
 			(		fx.nde_().Hnd_("gfml.item/pos").Atrs_("10", "20"))
@@ -38,7 +38,7 @@ public class z424_types_apply_ndes_nest_tst {
 			(		fx.nde_().Typ_("gfml.item/pos").Atrk_("x", "10").Atrk_("y", "20")
 			));
 	}
-	@Test  public void NoInvokeByName() {
+	@Test public void NoInvokeByName() {
 		fx.tst_Resolve
 			(	fx.nde_().Hnd_("gfml.item").Subs_
 			(		fx.nde_().Hnd_("gfml.item").Atrs_("10", "20"))	// item is not in .SubFlds, but is in regy
@@ -46,7 +46,7 @@ public class z424_types_apply_ndes_nest_tst {
 			(		fx.nde_().Typ_("gfml.item").Atrs_("10", "20")
 			));
 	}
-	@Test  public void Name_subLevel() {
+	@Test public void Name_subLevel() {
 		GfmlTypeMakr makr = GfmlTypeMakr.new_();
 		makr.MakeRootType("font", "size");
 		makr.MakeSubType("color", "name");
@@ -56,7 +56,7 @@ public class z424_types_apply_ndes_nest_tst {
 			,	fx.nde_().Typ_(GfmlType_.AnyKey).Atru_("blue")// confirm that subFlds in other types are not selectable by name; i.e.: must be font/color, not just color
 			);
 	}
-	@Test  public void Unresolved() {
+	@Test public void Unresolved() {
 		fx.tst_Resolve
 			(	fx.nde_().Hnd_("").Atrs_("10", "20")
 			,	fx.nde_().Typ_(GfmlType_.AnyKey).Atrs_("10", "20")

@@ -18,12 +18,12 @@ import org.junit.*; import gplx.core.tests.*;
 public class Cldr_name_loader_tst {
 	private final    Cldr_name_loader_fxt fxt = new Cldr_name_loader_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Load_file_is_null() {
+	@Test  public void Load_file_is_null() {
 		fxt.Init__file("CldrNamesEn.json", "{}");
 		fxt.Test__load_file_is_empty(Bool_.N, "En");
 		fxt.Test__load_file_is_empty(Bool_.N, "en"); // NOTE: scrib will pass "en", but earlier implementation was trying to read CldrNamesen.json which failed on LNX; DATE:2018-10-14
 	}
-	@Test   public void Hyphen() {
+	@Test  public void Hyphen() {
 		fxt.Init__file("CldrNamesEn_gb.json", "{}");
 		fxt.Test__load_file_is_empty(Bool_.N, "en-gb");
 		fxt.Test__load_file_is_empty(Bool_.Y, "en_gb");

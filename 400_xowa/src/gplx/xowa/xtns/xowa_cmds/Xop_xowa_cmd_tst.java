@@ -22,7 +22,7 @@ public class Xop_xowa_cmd_tst {
 		Xoa_gfs_mgr.Msg_parser_init();
 		fxt.Reset();
 	} private final    Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		GfsCore.Instance.AddCmd(fxt.App(), Xoae_app.Invk_app);
 		fxt.Wiki().Sys_cfg().Xowa_cmd_enabled_(false);
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
@@ -42,7 +42,7 @@ public class Xop_xowa_cmd_tst {
 		));
 		fxt.Wiki().Sys_cfg().Xowa_cmd_enabled_(false);
 	}
-	@Test  public void Template() { // PURPOSE: xowa_cmd should do template expansion; DATE:2014-05-29
+	@Test public void Template() { // PURPOSE: xowa_cmd should do template expansion; DATE:2014-05-29
 		fxt.Init_page_create("Template:Xowa_cmd_test", "val_0");
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<xowa_cmd>{{xowa_cmd_test}}</xowa_cmd>"
@@ -50,7 +50,7 @@ public class Xop_xowa_cmd_tst {
 		( "val_0"
 		));
 	}
-	@Test  public void Ref() { // PURPOSE: ref should not be expanded twice; DATE:2014-05-29
+	@Test public void Ref() { // PURPOSE: ref should not be expanded twice; DATE:2014-05-29
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<xowa_cmd><ref name='a'></ref><references/></xowa_cmd>"
 		), String_.Concat_lines_nl_skip_last
@@ -60,7 +60,7 @@ public class Xop_xowa_cmd_tst {
 		, ""
 		));
 	}
-//		@Test  public void Xow_list_fmtrs() {
+//		@Test public void Xow_list_fmtrs() {
 //			fxt.Wiki().Sys_cfg().Xowa_cmd_enabled_(true);
 //			fxt.App().Setup_mgr().Maint_mgr().Wiki_mgr().Add(Bry_.new_a7("en.wikipedia.org"));
 //			fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last

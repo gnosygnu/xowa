@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*
 import org.junit.*; import gplx.xowa.files.*;
 public class Xoh_file_wtr__audio__tst {
 	@Before public void init() {fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Audio__full() {
+	@Test public void Audio__full() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.oga|noicon]]", String_.Concat_lines_nl_skip_last
 		( "    <div class=\"xowa_media_div\">"
@@ -27,7 +27,7 @@ public class Xoh_file_wtr__audio__tst {
 		, "    </div>"
 		));		
 	}
-	@Test  public void Audio__full_ogg() {// PURPOSE: ogg should show src on first load
+	@Test public void Audio__full_ogg() {// PURPOSE: ogg should show src on first load
 		fxt.Wiki().Html_mgr().Img_suppress_missing_src_(true);	// simulate release-mode wherein missing images will not have src
 		fxt.Test_parse_page_all_str
 		( "[[File:A.ogg]]", String_.Concat_lines_nl_skip_last
@@ -42,7 +42,7 @@ public class Xoh_file_wtr__audio__tst {
 		));
 		fxt.Wiki().Html_mgr().Img_suppress_missing_src_(false);
 	}
-	@Test  public void Audio__thumb() {
+	@Test public void Audio__thumb() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.oga|thumb|a|alt=b]]", String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
@@ -64,13 +64,13 @@ public class Xoh_file_wtr__audio__tst {
 		, ""
 		));		
 	}
-	@Test  public void Audio__full_width() {	// ISSUE: width arg ignored for v2; zh.b:小学数学/自然数; DATE:2014-05-03
+	@Test public void Audio__full_width() {	// ISSUE: width arg ignored for v2; zh.b:小学数学/自然数; DATE:2014-05-03
 		fxt.Wiki().File_mgr().Version_2_y_();
 		fxt.App().Usere().Init_by_app(fxt.App());	// TEST: init cache else null reference
 		fxt.Test_html_wiki_frag("[[File:A.oga|30px|a]]", "<div id=\"xowa_file_div_0\" class=\"thumbinner\" style=\"width:30px;\">");
 		fxt.Wiki().File_mgr().Version_1_y_();
 	}
-	@Test  public void Audio__noicon() {
+	@Test public void Audio__noicon() {
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.oga|thumb|noicon|a|alt=b]]", String_.Concat_lines_nl_skip_last
 		( "    <div class=\"xowa_media_div\">"
@@ -86,7 +86,7 @@ public class Xoh_file_wtr__audio__tst {
 		));		
 	}
 }
-//		@Test  public void Ogg() {
+//		@Test public void Ogg() {
 //			fxt.Src_en_wiki_repo().Ext_rules().Get_or_new(Xof_ext_.Bry_ogg).View_max_(0);
 //			fxt	.ini_page_api("commons", "A.ogg", "", 0, 0);
 //			fxt	.Lnki_orig_("A.ogg")

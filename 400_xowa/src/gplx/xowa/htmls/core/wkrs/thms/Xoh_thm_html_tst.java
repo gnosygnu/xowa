@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_thm_html_tst {
 	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
-	@Test   public void Image() {
+	@Test  public void Image() {
 		fxt.Test__html("[[File:A.png|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"
 		, "  <div class='thumbinner' style='width:220px;'>"
@@ -29,7 +29,7 @@ public class Xoh_thm_html_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Audio__link() {	// PURPOSE: handle IPA links; EX:[[File:Speakerlink-new.svg|11px|link=file:///C:/xowa/file/commons.wikimedia.org/orig/c/7/a/3/En-LudwigVanBeethoven.ogg|Listen]]; PAGE:en.w:Beethoven DATE:2015-12-28
+	@Test public void Audio__link() {	// PURPOSE: handle IPA links; EX:[[File:Speakerlink-new.svg|11px|link=file:///C:/xowa/file/commons.wikimedia.org/orig/c/7/a/3/En-LudwigVanBeethoven.ogg|Listen]]; PAGE:en.w:Beethoven DATE:2015-12-28
 		fxt.Test__html("[[File:A.oga|11px|link=file:///C:/A.ogg|b]]", String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div class=\"thumbinner\" style=\"width:11px;\">"
@@ -45,7 +45,7 @@ public class Xoh_thm_html_tst {
 		, ""
 		));		
 	}
-	@Test   public void Video() {
+	@Test  public void Video() {
 		fxt.Test__html("[[File:A.ogv|thumb|test_caption]]", String_.Concat_lines_nl_skip_last
 		( "<div class=\"thumb tright\">"
 		, "  <div class=\"thumbinner\" style=\"width:220px;\">"

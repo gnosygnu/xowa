@@ -17,7 +17,7 @@ package gplx.xowa.mediawiki.includes.libs; import gplx.*; import gplx.xowa.*; im
 import org.junit.*; import gplx.core.tests.*;
 public class XomwStringUtils_tst {
 	private final    XomwStringUtils_fxt fxt = new XomwStringUtils_fxt();
-	@Test  public void Delimiter_explode() {
+	@Test public void Delimiter_explode() {
 		// basic
 		fxt.Test_delimiter_explode("a|b|c"                             , "a", "b", "c");
 		// empty
@@ -27,7 +27,7 @@ public class XomwStringUtils_tst {
 		// nest_many
 		fxt.Test_delimiter_explode("a|-{b-{c|d}-e}-|f"                 , "a", "-{b-{c|d}-e}-", "f");
 	}
-	@Test  public void Replace_markup() {
+	@Test public void Replace_markup() {
 		// basic
 		fxt.Test_replace_markup("a!!b"             , "!!", "||", "a||b");
 		// missing
@@ -41,7 +41,7 @@ public class XomwStringUtils_tst {
 		// ignore asym_lhs
 		fxt.Test_replace_markup("a!!b<!!>!!>!!c"   , "!!", "||", "a||b<!!>||>||c");	// NOTE: should probably be "!!>!!>", but unmatched ">" are escaped to "&gt;"
 	}
-	@Test   public void delimiterReplace() {
+	@Test  public void delimiterReplace() {
 		// basic
 		fxt.Test_delimiterReplace("/*", "*/", "a/*0*/c"         , "9", "a9c");
 		// overlapping; "/*/"

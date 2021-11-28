@@ -20,27 +20,27 @@ import gplx.xowa.wikis.data.*;
 public class Xowdir_wiki_props_mgr__tst {
 	private final    Xowdir_wiki_props_mgr__fxt fxt = new Xowdir_wiki_props_mgr__fxt();
 
-	@Test   public void Import__wiki__missing_all() {
+	@Test  public void Import__wiki__missing_all() {
 		// handle all imported .xowa wikis pre v4.3
 		fxt.Init__wiki_props(null, null, null);
 		fxt.Test__verify(Bool_.Y, "/dir/test.xowa", Bool_.Y, fxt.Make__json("test", "test", "Main_Page"));
 	}
-	@Test   public void Import__wiki__missing_domain() {
+	@Test  public void Import__wiki__missing_domain() {
 		// handle personal wikis from v4.2
 		fxt.Init__wiki_props(null, null, "Main_Page");
 		fxt.Test__verify(Bool_.Y, "/dir/test.xowa", Bool_.Y, fxt.Make__json("test", "test", "Main_Page"));
 	}
-	@Test   public void Import__wiki__wmf_domain() {
+	@Test  public void Import__wiki__wmf_domain() {
 		// handle wmf wikis with a core-file of "test-core.xowa"
 		fxt.Init__wiki_props(null, null, "Main_Page");
 		fxt.Test__verify(Bool_.Y, "/dir/test-core.xowa", Bool_.Y, fxt.Make__json("test", "test", "Main_Page"));
 	}
-	@Test   public void Import__wiki__clean() {
+	@Test  public void Import__wiki__clean() {
 		// handle clean wiki
 		fxt.Init__wiki_props("test", "test", "Main_Page");
 		fxt.Test__verify(Bool_.Y, "/dir/test.xowa", Bool_.N, fxt.Make__json("test", "test", "Main_Page"));
 	}
-	@Test   public void Open__wiki__missing_name() {
+	@Test  public void Open__wiki__missing_name() {
 		// handle missing name
 		fxt.Init__user_json("test", "my test", "Main_Page");
 		fxt.Init__wiki_props(null, null, "Main_Page");

@@ -13,9 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.core.ios.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.bldrs; import gplx.Bry_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.GfsCtx;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.Tfds;
+import gplx.core.ios.Io_fil_chkr;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.bldrs.wkrs.Xob_page_wkr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
 public class Xob_base_fxt {
 	public Xob_base_fxt Clear() {
 		if (app == null) {
@@ -27,7 +39,7 @@ public class Xob_base_fxt {
 		Clear_hook();
 		return this;
 	}
-	@gplx.Virtual public void Clear_hook() {}
+	public void Clear_hook() {}
 	public Xob_base_fxt Init_(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki; return this;}
 	public Xoae_app App() {return app;} private Xoae_app app;
 	public Xob_bldr Bldr() {return bldr;} private Xob_bldr bldr;
@@ -50,7 +62,7 @@ public class Xob_base_fxt {
 		GfsCtx ctx = GfsCtx.new_();
 		for (int i = 0; i < len; i++) {
 			GfoMsg msg = msgs[i];
-			cmd.Invk(ctx, GfsCtx.Ikey_null, msg.Key(), msg);
+			cmd.Invk(ctx, -1, msg.Key(), msg);
 		}
 		Run_cmd(bldr, cmd);
 		return this;

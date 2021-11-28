@@ -23,11 +23,11 @@ public abstract class Xob_cmd__base implements Xob_cmd, Gfo_invk {
 		this.usr_dlg = bldr == null ? null : bldr.Usr_dlg();
 	}
 	public abstract String	Cmd_key();
-	@gplx.Virtual public Xob_cmd	Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
+	public Xob_cmd	Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public abstract void	Cmd_run();
-	@gplx.Virtual public void		Cmd_init(Xob_bldr bldr) {}
-	@gplx.Virtual public void		Cmd_bgn(Xob_bldr bldr) {}
-	@gplx.Virtual public void		Cmd_end() {}
-	@gplx.Virtual public void		Cmd_term() {}
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Rv_unhandled;}
+	public void		Cmd_init(Xob_bldr bldr) {}
+	public void		Cmd_bgn(Xob_bldr bldr) {}
+	public void		Cmd_end() {}
+	public void		Cmd_term() {}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {return Gfo_invk_.Rv_unhandled;}
 }

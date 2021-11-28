@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*;
 public class Process_stream_rdr_tst {
 	@Before public void init() {fxt.Clear();} Scrib_lua_srl_fxt fxt = new Scrib_lua_srl_fxt();
-	@Test  public void Body_basic() {
+	@Test public void Body_basic() {
 		Process_stream_rdr_fxt fxt2 = new Process_stream_rdr_fxt().Init();
 		fxt2.Init_src_str_("abcd").Test_read_body();				// read_1
 		fxt2.Init_src_str_("abcde").Test_read_body();				// read_2

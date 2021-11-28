@@ -23,24 +23,24 @@ public class Xomw_lnki_wkr__file__tst {
 		fxt.Clear();
 		fxt.Init__file("File:A.png", 300, 200);
 	}
-	@Test   public void Orig() {
+	@Test  public void Orig() {
 		// basic
 		fxt.Test__to_html("[[File:A.png]]", "<a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/orig/7/70/A.png' width='300' height='200' /></a>");
 
 		// caption
 		fxt.Test__to_html("[[File:A.png|abc]]", "<a href='/wiki/File:A.png' class='image' title='abc'><img alt='abc' src='/orig/7/70/A.png' width='300' height='200' /></a>");
 	}
-	@Test   public void Thumb() {
+	@Test  public void Thumb() {
 		// basic
 		fxt.Test__to_html("[[File:A.png|thumb]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/220px-A.png' width='220' height='146' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='/wiki/File:A.png' class='internal' title='enlarge'></a></div></div></div></div>");
 
 		// caption
 		fxt.Test__to_html("[[File:A.png|thumb|abc]]", "<div class='thumb tright'><div class='thumbinner' style='width:222px;'><a href='/wiki/File:A.png' class='image'><img alt='' src='/thumb/7/70/A.png/220px-A.png' width='220' height='146' class='thumbimage' /></a>  <div class='thumbcaption'><div class='magnify'><a href='/wiki/File:A.png' class='internal' title='enlarge'></a></div>abc</div></div></div>");
 	}
-	@Test   public void Size() {
+	@Test  public void Size() {
 		fxt.Test__to_html("[[File:A.png|123x456px]]", "<a href='/wiki/File:A.png' class='image'><img alt='A.png' src='/thumb/7/70/A.png/123px-A.png' width='123' height='82' /></a>");
 	}
-	@Test   public void fitBoxWidth() {
+	@Test  public void fitBoxWidth() {
 		// COMMENT:"Height is the relative smaller dimension, so scale width accordingly"
 		// consider file of 200,100 (2:1)
 		// EX_1: view is 120,40 (3:1)
@@ -54,7 +54,7 @@ public class Xomw_lnki_wkr__file__tst {
 		fxt.Test__to_html__has("[[File:A.png|120x80px]]", "/120px-A.png");
 	}
 
-	@Test   public void Test__parseWidthParam() {
+	@Test  public void Test__parseWidthParam() {
 		int[] img_size = new int[2];
 		// WxHpx
 		fxt.Test__parseWidthParam(img_size, "12x34px"  , 12, 34);

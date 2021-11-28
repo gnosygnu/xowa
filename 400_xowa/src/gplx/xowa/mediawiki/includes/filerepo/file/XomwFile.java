@@ -444,7 +444,7 @@ public class XomwFile {
 	* @return int|boolean
 	*/
 	// @dflt: page = 1
-	@gplx.Virtual public int getWidth(int page) {
+	public int getWidth(int page) {
 		return -1;
 	}
 	public int getWidth() {return this.getWidth(1);}
@@ -460,7 +460,7 @@ public class XomwFile {
 	* @return boolean|int False on failure
 	*/
 	// @dflt: page = 1
-	@gplx.Virtual public int getHeight(int page) {
+	public int getHeight(int page) {
 		return -1;
 	}
 	public int getHeight() {return this.getHeight(1);}
@@ -692,7 +692,7 @@ public class XomwFile {
 	*
 	* @return String
 	*/
-	@gplx.Virtual public byte[] getMimeType() {
+	public byte[] getMimeType() {
 		return Mime_type__unknown;
 	}
 	private static final    byte[] Mime_type__unknown = Bry_.new_a7("unknown/unknown");

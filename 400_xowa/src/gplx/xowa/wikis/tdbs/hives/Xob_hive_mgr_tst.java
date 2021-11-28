@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xob_hive_mgr_tst {
 	Xow_hive_mgr_fxt fxt = new Xow_hive_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Drilldown() {
+	@Test public void Drilldown() {
 //			fxt.Files_create_range(10, 10);
 //			fxt.Drilldown("A00", "J09", "A00", "B09", "C00", "D09", "E00", "F09", "G00", "H09", "I00", "J09");
 //			fxt.Drilldown("E00", "F09", "E00", "E03", "E04", "E07", "E08", "F01", "F02", "F05", "F06", "F09");

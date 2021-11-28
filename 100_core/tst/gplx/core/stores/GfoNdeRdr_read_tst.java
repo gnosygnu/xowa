@@ -16,23 +16,23 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.stores; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
 public class GfoNdeRdr_read_tst {
-	@Test  public void ReadInt() {
+	@Test public void ReadInt() {
 		rdr = rdr_(IntClassXtn.Instance, "id", 1);
 		Tfds.Eq(rdr.ReadInt("id"), 1);
 	}
-	@Test  public void ReadIntOr() {
+	@Test public void ReadIntOr() {
 		rdr = rdr_(IntClassXtn.Instance, "id", 1);
 		Tfds.Eq(rdr.ReadIntOr("id", -1), 1);
 	}
-	@Test  public void ReadIntElse_minus1() {
+	@Test public void ReadIntElse_minus1() {
 		rdr = rdr_(IntClassXtn.Instance, "id", null);
 		Tfds.Eq(rdr.ReadIntOr("id", -1), -1);
 	}
-	@Test  public void ReadInt_parse() {
+	@Test public void ReadInt_parse() {
 		rdr = rdr_(StringClassXtn.Instance, "id", "1");
 		Tfds.Eq(rdr.ReadInt("id"), 1);
 	}
-	@Test  public void ReadIntElse_parse() {
+	@Test public void ReadIntElse_parse() {
 		rdr = rdr_(StringClassXtn.Instance, "id", "2");
 		Tfds.Eq(rdr.ReadIntOr("id", -1), 2);
 	}

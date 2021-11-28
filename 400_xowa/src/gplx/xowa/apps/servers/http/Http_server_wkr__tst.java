@@ -17,7 +17,7 @@ package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*;
 public class Http_server_wkr__tst {
 	@Before public void init() {fxt.Clear();} private Http_server_wkr__fxt fxt = new Http_server_wkr__fxt();
-	@Test  public void Assert_main_page() {
+	@Test public void Assert_main_page() {
 		fxt.Init_wiki_main_page("fr.wikiversity.org", "Accueil");
 		fxt.Test_assert_main_page("/fr.wikiversity.org/"		, "/fr.wikiversity.org/wiki/Accueil");
 		fxt.Test_assert_main_page("/fr.wikiversity.org/wiki"	, "/fr.wikiversity.org/wiki/Accueil");

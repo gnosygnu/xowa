@@ -21,21 +21,21 @@ public class PoolIds_tst {
 		Db_qry_fxt.DeleteAll(conn, PoolIds.Tbl_Name);
 		mgr = PoolIds.Instance;
 	}
-	@Test  public void FetchNextId() {
+	@Test public void FetchNextId() {
 		tst_Fetch("/test0", 0);
 	}
-	@Test  public void ChangeNextId_Insert() {
+	@Test public void ChangeNextId_Insert() {
 		run_Change("/test0", 1);
 
 		tst_Fetch("/test0", 1);
 	}
-	@Test  public void ChangeNextId_Update() {
+	@Test public void ChangeNextId_Update() {
 		run_Change("/test0", 0);
 		run_Change("/test0", 1);
 
 		tst_Fetch("/test0", 1);
 	}
-	@Test  public void FetchNextId_Multiple() {
+	@Test public void FetchNextId_Multiple() {
 		run_Change("/test0", 0);
 		run_Change("/test1", 1);
 

@@ -17,7 +17,7 @@ package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.db
 import org.junit.*;
 public class Sql_bry_rdr_tst {
 	@Before public void init() {fxt.Clear();} private Sql_bry_rdr_fxt fxt = new Sql_bry_rdr_fxt();
-	@Test   public void Skip_ws() {
+	@Test  public void Skip_ws() {
 		fxt.Test_skip_ws("a", 0);				// char
 		fxt.Test_skip_ws("\ta", 1);				// tab
 		fxt.Test_skip_ws("\na", 1);				// \n
@@ -26,7 +26,7 @@ public class Sql_bry_rdr_tst {
 		fxt.Test_skip_ws("\t\n\r a", 4);		// multi
 		fxt.Test_skip_ws("", 0);				// eos
 	}
-	@Test   public void Read_sql_identifier() {
+	@Test  public void Read_sql_identifier() {
 		fxt.Test_read_sql_identifier("a", "a");				// one
 		fxt.Test_read_sql_identifier("abc_1", "abc_1");		// many
 		fxt.Test_read_sql_identifier("[abc_1]", "abc_1");	// bracket

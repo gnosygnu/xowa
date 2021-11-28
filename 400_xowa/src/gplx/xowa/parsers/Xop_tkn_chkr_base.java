@@ -16,8 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import gplx.core.tests.*;
 public class Xop_tkn_chkr_base implements Tst_chkr {
-	@gplx.Virtual public Class<?> TypeOf() {return Xop_tkn_itm.class;}
-	@gplx.Virtual public byte Tkn_tid() {return Byte_.Max_value_127;}
+	public Class<?> TypeOf() {return Xop_tkn_itm.class;}
+	public byte Tkn_tid() {return Byte_.Max_value_127;}
 	public Xop_tkn_chkr_base TypeId_dynamic(int v) {typeId = Xop_tkn_itm_.Tid__names[v]; return this;} private String typeId = null;
 	public int Src_bgn() {return src_bgn;} private int src_bgn = -1;
 	public int Src_end() {return src_end;} private int src_end = -1;
@@ -27,7 +27,7 @@ public class Xop_tkn_chkr_base implements Tst_chkr {
 	public String Raw() {return raw;} public Xop_tkn_chkr_base Raw_(String v) {raw = v; return this;} private String raw;
 	public String Raw_src() {return raw_src;} public Xop_tkn_chkr_base Raw_src_(String v) {raw_src = v; return this;} private String raw_src;
 	public Xop_tkn_chkr_base[] Subs() {return subs;} public Xop_tkn_chkr_base Subs_(Xop_tkn_chkr_base... v) {subs = v; return this;} private Xop_tkn_chkr_base[] subs = null;
-	@gplx.Virtual public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
+	public int Chk(Tst_mgr mgr, String path, Object actl_obj) {
 		Xop_tkn_itm actl = (Xop_tkn_itm)actl_obj;
 		int rv = 0;
 		rv += Chk_basic(mgr, path, actl, rv);
@@ -35,7 +35,7 @@ public class Xop_tkn_chkr_base implements Tst_chkr {
 		rv += Chk_subs(mgr, path, actl, rv);
 		return rv;
 	}
-	@gplx.Virtual public int Chk_hook(Tst_mgr mgr, String path, Object actl_obj, int err) {return 0;}
+	public int Chk_hook(Tst_mgr mgr, String path, Object actl_obj, int err) {return 0;}
 	int Chk_basic(Tst_mgr mgr, String path, Xop_tkn_itm actl, int err) {
 		if (typeId == null) typeId = Xop_tkn_itm_.Tid__names[this.Tkn_tid()];
 		err += mgr.Tst_val(typeId == null, path, "typeId", typeId, Xop_tkn_itm_.Tid__names[actl.Tkn_tid()]);

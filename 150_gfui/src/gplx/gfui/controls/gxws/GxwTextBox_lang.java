@@ -13,26 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import java.awt.AWTEvent;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+package gplx.gfui.controls.gxws; import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.GfsCtx;
+import gplx.gfui.GfuiAlign;
+import gplx.gfui.GfuiAlign_;
+import gplx.gfui.RectAdp_;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.draws.ColorAdp;
+import gplx.gfui.gfxs.GfxAdpBase;
+import gplx.gfui.gfxs.PaintArgs;
+import gplx.gfui.ipts.IptEvtDataMouse;
+import gplx.gfui.ipts.IptKey;
+import gplx.gfui.ipts.IptMouseBtn;
+import gplx.gfui.ipts.IptMouseBtn_;
+import gplx.gfui.ipts.IptMouseWheel;
+import gplx.gfui.ipts.IptMouseWheel_;
+
+import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.text.JTextComponent;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.Border;
-import javax.swing.text.JTextComponent;
-import gplx.gfui.draws.*;
-import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*; import gplx.gfui.controls.elems.*;
 public class GxwTextBox_lang extends JTextArea implements GxwTextFld {
 	public Object UnderElem() {return this;}
 	public GxwCore_base Core() {return ctrlMgr;} GxwCore_base ctrlMgr;
@@ -86,7 +91,7 @@ public class GxwTextBox_lang extends JTextArea implements GxwTextFld {
 	}
 	public void EnableDoubleBuffering() {}	// eliminates flickering during OnPaint
 	public void CreateControlIfNeeded() {}
-	@gplx.Virtual public void ctor_MsTextBox_() {
+	public void ctor_MsTextBox_() {
 		ctor_();
 	}
 }
@@ -108,7 +113,7 @@ class GxwTextFld_cls_lang extends JTextField implements GxwTextFld {
 			} // NOTE: sometimes fails when skipping ahead in dvd player; v = 0, and start/end = 0
 	}
 	public int SelLen() {return this.getSelectionEnd() - this.getSelectionStart();} public void SelLen_set(int v) {this.setSelectionEnd(this.SelBgn() + v);}
-	@gplx.Virtual public void ctor_MsTextBox_() {
+	public void ctor_MsTextBox_() {
 		ctor_();
 	}
 	//@#if !plat_wce

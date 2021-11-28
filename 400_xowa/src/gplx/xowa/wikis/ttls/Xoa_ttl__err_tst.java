@@ -17,12 +17,12 @@ package gplx.xowa.wikis.ttls; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*;
 public class Xoa_ttl__err_tst {
 	@Before public void init() {fxt.Clear();} private final    Xoa_ttl_fxt fxt = new Xoa_ttl_fxt();
-	@Test   public void Invalid__angle()			{fxt.Parse("<!--a").Test__null();}
-	@Test   public void Invalid__brace()			{fxt.Parse("[[a]]").Test__null();}
-	@Test   public void Invalid__curly()			{fxt.Parse("{{a}}").Test__null();}
-	@Test   public void Colon_is_last()				{fxt.Parse("Help:").Test__null();}
-	@Test   public void Len_max()					{fxt.Parse(String_.Repeat("A", 512)).Test__page_txt(String_.Repeat("A", 512));}
-	@Test   public void Len_0() {
+	@Test  public void Invalid__angle()			{fxt.Parse("<!--a").Test__null();}
+	@Test  public void Invalid__brace()			{fxt.Parse("[[a]]").Test__null();}
+	@Test  public void Invalid__curly()			{fxt.Parse("{{a}}").Test__null();}
+	@Test  public void Colon_is_last()				{fxt.Parse("Help:").Test__null();}
+	@Test  public void Len_max()					{fxt.Parse(String_.Repeat("A", 512)).Test__page_txt(String_.Repeat("A", 512));}
+	@Test  public void Len_0() {
 		fxt.Parse("").Test__null();
 		fxt.Parse(" ").Test__null();
 		fxt.Parse("_").Test__null();

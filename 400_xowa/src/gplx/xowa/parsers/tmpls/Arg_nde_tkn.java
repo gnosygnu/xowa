@@ -22,7 +22,7 @@ public class Arg_nde_tkn extends Xop_tkn_itm_base {
 	public int Arg_colon_pos() {return arg_colon_pos;} public Arg_nde_tkn Arg_colon_pos_(int v) {arg_colon_pos = v; return this;} private int arg_colon_pos = -1;
 	public Arg_itm_tkn Key_tkn() {return key_tkn;} public Arg_nde_tkn Key_tkn_(Arg_itm_tkn v) {key_tkn = v; return this;} Arg_itm_tkn key_tkn = Arg_itm_tkn_null.Null_arg_itm;
 	public Arg_itm_tkn Val_tkn() {return val_tkn;} public Arg_nde_tkn Val_tkn_(Arg_itm_tkn v) {val_tkn = v; return this;} Arg_itm_tkn val_tkn = Arg_itm_tkn_null.Null_arg_itm;
-	@gplx.Virtual public boolean KeyTkn_exists() {return key_tkn != Arg_itm_tkn_null.Null_arg_itm;}
+	public boolean KeyTkn_exists() {return key_tkn != Arg_itm_tkn_null.Null_arg_itm;}
 	public Xop_tkn_itm Eq_tkn() {return eq_tkn;} public Arg_nde_tkn Eq_tkn_(Xop_tkn_itm v) {eq_tkn = v; return this;} private Xop_tkn_itm eq_tkn = Xop_tkn_null.Null_tkn;
 	public int Arg_tid() {return arg_tid;} public void Arg_tid_(int v) {arg_tid = v;} private int arg_tid = Int_.Max_value;
 	@Override public void Tmpl_fmt(Xop_ctx ctx, byte[] src, Xot_fmtr fmtr) {fmtr.Reg_arg(ctx, src, arg_idx, this);}

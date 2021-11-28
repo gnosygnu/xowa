@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.ipts.*; import gplx.gfui.controls.elems.*;
+package gplx.gfui.controls.windows; import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.gfui.PointAdp;
+import gplx.gfui.RectAdp;
+import gplx.gfui.RectAdp_;
+import gplx.gfui.SizeAdp;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptCfg_;
+import gplx.gfui.ipts.IptEventType_;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.ipts.IptMouseBtn_;
 public class GfuiForm_menu implements Gfo_invk {
 	public GfuiWin Form() {return form;} GfuiWin form;
 	void Visible_toggle(GfoMsg msg) {
@@ -45,7 +57,7 @@ public class GfuiForm_menu implements Gfo_invk {
 //			form.CmdsA().Del(GfuiWin.Invk_Minimize);
 //			form.CmdsA().Del(GfuiStatusBoxBnd.Invk_ShowTime);
 		IptBnd_.cmd_to_(IptCfg_.Null, form, this, Visible_hide_cmd, IptKey_.Escape);
-		IptBnd_.cmd_to_(IptCfg_.Null, owner, this, Visible_toggle_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Space), IptMouseBtn_.Right);
+		IptBnd_.cmd_to_(IptCfg_.Null, owner, this, Visible_toggle_cmd, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.Space), IptMouseBtn_.Right);
 
 		form.TaskbarParkingWindowFix(owner.OwnerWin());	// else ContextMenu shows up as WindowsFormsParkingWindow
 		form.QuitMode_(GfuiQuitMode.Suspend);

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Xpath__tst {
-	@Test  public void Select_all() {
+	@Test public void Select_all() {
 		String xml = String_.Concat
 			( "<root>"
 			,	"<a>"

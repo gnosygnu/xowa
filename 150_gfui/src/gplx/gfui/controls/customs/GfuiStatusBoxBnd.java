@@ -13,8 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.draws.*; import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; import gplx.gfui.controls.windows.*;
+package gplx.gfui.controls.customs; import gplx.Datetime_now;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.UsrMsg;
+import gplx.UsrMsgWkr_;
+import gplx.gfui.DirInt;
+import gplx.gfui.controls.windows.GfuiWin;
+import gplx.gfui.draws.ColorAdp_;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptCfg_;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.layouts.GftBand;
+import gplx.gfui.layouts.GftGrid;
 public class GfuiStatusBoxBnd implements Gfo_invk {
 	public GfuiStatusBox Box() {return statusBox;} GfuiStatusBox statusBox = GfuiStatusBox_.new_("statusBox");
 	void ShowTime() {
@@ -31,7 +44,7 @@ public class GfuiStatusBoxBnd implements Gfo_invk {
 		return rv;
 	}
 	void ctor_GfuiStatusBoxBnd(GfuiWin win) {
-		IptBnd_.cmd_to_(IptCfg_.Null, win, this, GfuiStatusBoxBnd.Invk_ShowTime, IptKey_.add_(IptKey_.Ctrl, IptKey_.Shift, IptKey_.T));
+		IptBnd_.cmd_to_(IptCfg_.Null, win, this, GfuiStatusBoxBnd.Invk_ShowTime, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.Shift, IptKey_.T));
 		statusBox.Owner_(win).Visible_off_().BackColor_(ColorAdp_.Black).TextAlignH_right_().ForeColor_(ColorAdp_.Green);
 		win.Lyt().SubLyts().Add(GftGrid.new_().Bands_dir_(DirInt.Bwd).Bands_add(GftBand.new_().Cells_num_(1).Len1_abs_(13)));
 	}

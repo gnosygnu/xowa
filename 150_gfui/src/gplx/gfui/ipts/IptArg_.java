@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts; import gplx.Err;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
 public class IptArg_ {
 	public static final    IptArg[] Ary_empty = new IptArg[0];
 	public static final    IptArg Null = null;
@@ -91,6 +96,7 @@ class IptMacro {
 		Reg("mod", "c", IptKey_.add_(IptKey_.Ctrl));
 		Reg("mod", "a", IptKey_.add_(IptKey_.Alt));
 		Reg("mod", "s", IptKey_.add_(IptKey_.Shift));
+		Reg("mod", "m", IptKey_.add_(IptKey_.Meta));
 		Reg("mod", "ca", IptKey_.add_(IptKey_.Ctrl, IptKey_.Alt));
 		Reg("mod", "cs", IptKey_.add_(IptKey_.Ctrl, IptKey_.Shift));
 		Reg("mod", "as", IptKey_.add_(IptKey_.Alt, IptKey_.Shift));

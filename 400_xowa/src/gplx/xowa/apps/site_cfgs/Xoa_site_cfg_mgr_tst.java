@@ -23,38 +23,38 @@ public class Xoa_site_cfg_mgr_tst {
 	private final    Xoa_site_cfg_mgr_fxt fxt = new Xoa_site_cfg_mgr_fxt();
 	@Before		public void init() {fxt.Init();}
 	@After  public void term() {fxt.Term();}
-	@Test  public void Extensiontags__cfg() {
+	@Test public void Extensiontags__cfg() {
 		fxt.Init_db(Xoa_site_cfg_loader__inet.Qarg__extensiontags, fxt.Make_data(Xoa_site_cfg_loader_.Tid__inet, 1, "math", "source"));
 		fxt.Exec_load();
 		fxt.Test_extensiontags_y("math"	, "source");
 		fxt.Test_extensiontags_n("ref"	, "graph");
 		fxt.Test_extensiontags_y("translate", "languages");	// always whitelist <translate>,<languages> DATE:2015-10-13
 	}
-	@Test  public void Extensiontags__fsys() {
+	@Test public void Extensiontags__fsys() {
 		fxt.Init_fsys(Xoa_site_cfg_loader__inet.Qarg__extensiontags, fxt.Make_data(Xoa_site_cfg_loader_.Tid__null, 1, "math", "source"));
 		fxt.Exec_load();
 		fxt.Test_extensiontags_y("math", "source");
 		fxt.Test_extensiontags_n("ref"	, "graph");
 		fxt.Test_db(Xoa_site_cfg_loader__inet.Qarg__extensiontags, fxt.Make_data(Xoa_site_cfg_loader_.Tid__fsys, 1, "math", "source"));
 	}
-	@Test  public void Extensiontags__inet() {
+	@Test public void Extensiontags__inet() {
 		fxt.Init_inet(fxt.Make_api(fxt.Make_api_extensiontags("math", "source")));
 		fxt.Exec_load();
 		fxt.Test_extensiontags_y("math", "source");
 		fxt.Test_extensiontags_n("ref"	, "graph");
 		fxt.Test_db(Xoa_site_cfg_loader__inet.Qarg__extensiontags, fxt.Make_data(Xoa_site_cfg_loader_.Tid__inet, 1, "math", "source"));
 	}
-	@Test  public void Extensiontags__fallback() {
+	@Test public void Extensiontags__fallback() {
 		fxt.Exec_load();
 		fxt.Test_db(Xoa_site_cfg_loader__inet.Qarg__extensiontags, fxt.Make_data(Xoa_site_cfg_loader_.Tid__fallback, 1));
 		fxt.Test_extensiontags_y("math", "source", "ref", "graph");
 	}
-	@Test  public void Interwikimap__inet() {
+	@Test public void Interwikimap__inet() {
 		fxt.Init_inet(fxt.Make_api(fxt.Make_api_interwikimap("w", "https://en.wikipedia.org", "c", "https://commons.wikimedia.org")));
 		fxt.Exec_load();
 		fxt.Test_db(Xoa_site_cfg_loader__inet.Qarg__interwikimap, fxt.Make_data(Xoa_site_cfg_loader_.Tid__inet, 2, "w", "https://en.wikipedia.org", "c", "https://commons.wikimedia.org"));
 	}
-//		@Test   public void Print() {
+//		@Test  public void Print() {
 //			String s = fxt.Make_api(fxt.Make_api_interwikimap("k1", "v1", "k2", "v2"), fxt.Make_api_extensiontags2("k3", "v3", "k4", "v4"));
 //            Tfds.Dbg(s);
 //		}

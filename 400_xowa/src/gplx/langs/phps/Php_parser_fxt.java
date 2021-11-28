@@ -92,7 +92,7 @@ abstract class Php_tkn_chkr_base implements Tst_chkr {
 		rv += Chk_tkn(mgr, path, actl);
 		return rv;
 	}
-	@gplx.Virtual public int Chk_tkn(Tst_mgr mgr, String path, Php_tkn actl_obj) {return 0;}
+	public int Chk_tkn(Tst_mgr mgr, String path, Php_tkn actl_obj) {return 0;}
 }
 class Php_tkn_declaration_chkr extends Php_tkn_chkr_base {
 	@Override public Class<?> TypeOf() {return Php_tkn_declaration.class;}
@@ -194,7 +194,7 @@ abstract class Php_itm_chkr_base implements Tst_chkr {
 		rv += Chk_itm(mgr, path, actl);
 		return rv;
 	}
-	@gplx.Virtual public int Chk_itm(Tst_mgr mgr, String path, Php_itm actl_obj) {return 0;}
+	public int Chk_itm(Tst_mgr mgr, String path, Php_itm actl_obj) {return 0;}
 	public static final    Php_itm_chkr_base[] Ary_empty = new Php_itm_chkr_base[0];
 }
 class Php_itm_generic_chkr extends Php_itm_chkr_base {

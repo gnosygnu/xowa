@@ -25,7 +25,7 @@ class Srch_rslt_cbk__js implements Srch_rslt_cbk {
 	}
 	public String To_str_and_clear() {return js_wtr.To_str_and_clear();}
 	public void On_cancel() {}
-	@gplx.Virtual public void On_rslts_found(Srch_search_ctx ctx, Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
+	public void On_rslts_found(Srch_search_ctx ctx, Srch_search_qry qry, Srch_rslt_list rslts_list, int rslts_bgn, int rslts_end) {
 		// exit if done
 		if (!rslts_list.Rslts_are_enough && !rslts_list.Rslts_are_done) return;
 

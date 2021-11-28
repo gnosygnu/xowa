@@ -17,10 +17,10 @@ package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.db
 import org.junit.*; import gplx.dbs.engines.sqlite.*;
 public class Dbmeta_parser__tbl_tst {
 	@Before public void init() {fxt.Clear();} private Dbmeta_parser__tbl_fxt fxt = new Dbmeta_parser__tbl_fxt();
-	@Test  public void Test_parse() {
+	@Test public void Test_parse() {
 		fxt.Test_parse("CREATE TABLE tbl_1 (fld_1 int, fld_2 int)", fxt.Make_tbl("tbl_1", "fld_1", "fld_2"));
 	}
-	@Test  public void Test_smoke() {
+	@Test public void Test_smoke() {
 		fxt.Test_parse(String_.Concat_lines_nl_skip_last
 		( "CREATE TABLE page"
 		, "( page_id integer NOT NULL PRIMARY KEY"

@@ -53,13 +53,13 @@ public abstract class Percentile_select_base {	// SELECT * FROM x ORDER BY y LIM
 		}
 	}
 	protected abstract Db_rdr		Rdr__init();
-	@gplx.Virtual protected void			Rdr__done(boolean found_enough, boolean none_left) {}
-	@gplx.Virtual protected Db_rdr		Rdr__term(Db_rdr rdr) {
+	protected void			Rdr__done(boolean found_enough, boolean none_left) {}
+	protected Db_rdr		Rdr__term(Db_rdr rdr) {
 		if (rdr != null) rdr.Rls();
 		return null;
 	}
-	@gplx.Virtual protected void			Rng__update(int rdr_found) {rng.Update(rdr_found);}
-	@gplx.Virtual protected boolean			Row__read(Db_rdr rdr) {return true;}
-	@gplx.Virtual protected boolean			Row__eval() {return true;}	// NOTE: return true by default; DEPENDENCY: Srch_word_count_wkr
-	@gplx.Virtual protected boolean			Found_enough() {return false;}
+	protected void			Rng__update(int rdr_found) {rng.Update(rdr_found);}
+	protected boolean			Row__read(Db_rdr rdr) {return true;}
+	protected boolean			Row__eval() {return true;}	// NOTE: return true by default; DEPENDENCY: Srch_word_count_wkr
+	protected boolean			Found_enough() {return false;}
 }

@@ -22,7 +22,7 @@ public class Xof_xfer_queue_base_fxt {
 	public Xoapi_orig_mok Api_size() {return api_size;} private Xoapi_orig_mok api_size = Xoapi_orig_mok.Instance;
 	public Xof_repo_itm Src_commons_repo() {return src_commons_repo;} private Xof_repo_itm src_commons_repo;
 	public Xof_repo_itm Src_en_wiki_repo() {return src_en_wiki_repo;} private Xof_repo_itm src_en_wiki_repo;
-	@gplx.Virtual public void Clear(boolean src_repo_is_wmf) {
+	public void Clear(boolean src_repo_is_wmf) {
 		Io_mgr.Instance.InitEngine_mem();
 		if (app == null) {
 			app = Xoa_app_fxt.Make__app__edit();

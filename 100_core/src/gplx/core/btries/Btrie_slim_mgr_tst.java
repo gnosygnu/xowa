@@ -23,7 +23,7 @@ public class Btrie_slim_mgr_tst {
 		run_Add("a"		,	1);
 		run_Add("abc"	,	123);
 	}
-	@Test  public void Get_by() {
+	@Test public void Get_by() {
 		ini_setup1();
 		tst_MatchAtCur("a"		, 1);
 		tst_MatchAtCur("abc"	, 123);
@@ -31,11 +31,11 @@ public class Btrie_slim_mgr_tst {
 		tst_MatchAtCur("abcde"	, 123);
 		tst_MatchAtCur(" a"		, null);
 	}
-	@Test  public void Bos() {
+	@Test public void Bos() {
 		ini_setup1();
 		tst_Match("bc", Byte_ascii.Ltr_a, -1, 123);
 	}
-	@Test  public void Match_exact() {
+	@Test public void Match_exact() {
 		ini_setup1();
 		tst_MatchAtCurExact("a", 1);
 		tst_MatchAtCurExact("ab", null);
@@ -46,7 +46,7 @@ public class Btrie_slim_mgr_tst {
 		run_Add("a"	,	1);
 		run_Add("b"	,	2);
 	}
-	@Test  public void Match_2() {
+	@Test public void Match_2() {
 		ini_setup2();
 		tst_MatchAtCur("a", 1);
 		tst_MatchAtCur("b", 2);
@@ -56,12 +56,12 @@ public class Btrie_slim_mgr_tst {
 		run_Add("a"	,	1);
 		run_Add("b"	,	2);
 	}
-	@Test  public void CaseAny() {
+	@Test public void CaseAny() {
 		ini_setup_caseAny();
 		tst_MatchAtCur("a", 1);
 		tst_MatchAtCur("A", 1);
 	}
-	@Test  public void Del() {
+	@Test public void Del() {
 		ini_setup1();
 		trie.Del(Bry_.new_a7("a"));	// delete "a"; "abc" still remains;
 		tst_MatchAtCur("a"		, null);
@@ -70,7 +70,7 @@ public class Btrie_slim_mgr_tst {
 		trie.Del(Bry_.new_a7("abc"));
 		tst_MatchAtCur("abc"	, null);
 	}
-	@Test  public void Match_none() {
+	@Test public void Match_none() {
 		Btrie_slim_mgr_fxt fxt = new Btrie_slim_mgr_fxt();
 		fxt.Init__add("k1", "v1");
 		fxt.Exec__match("ak1", 1, 3, "v1", 3); // 3 to position after match

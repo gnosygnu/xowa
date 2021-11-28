@@ -17,7 +17,7 @@ package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*;
 public class Hiero_parser_tst {
 	@Before public void init() {fxt.Reset();} private Hiero_parser_fxt fxt = new Hiero_parser_fxt();
-	@Test  public void Separator() {
+	@Test public void Separator() {
 		String[][] expd = new String[][] {fxt.block_("A1"), fxt.block_("B1")};
 		fxt.Test_parse("A1 B1"			, expd);	// space
 		fxt.Test_parse("A1-B1"			, expd);	// dash

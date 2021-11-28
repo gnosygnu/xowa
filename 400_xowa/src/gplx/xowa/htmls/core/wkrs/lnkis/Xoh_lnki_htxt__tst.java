@@ -17,13 +17,13 @@ package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*;
 public class Xoh_lnki_htxt__tst {
 	private final    Xoh_htxt_fxt fxt = new Xoh_htxt_fxt();
-	@Test   public void Redlink__basic() {
+	@Test  public void Redlink__basic() {
 		fxt.Test__decode
 		( "<a href='/wiki/A'>a</a> <a href='/wiki/B'>b</a>"
 		, "<a id='xolnki_2' href='/wiki/A'>a</a> <a id='xolnki_3' href='/wiki/B'>b</a>");
 		fxt.Test__hpg__redlinks("A", "B");
 	}
-	@Test   public void Redlink__anchor() {
+	@Test  public void Redlink__anchor() {
 		fxt.Test__decode
 		( "<a href='#A'>a</a>"
 		, "<a href='#A'>a</a>");

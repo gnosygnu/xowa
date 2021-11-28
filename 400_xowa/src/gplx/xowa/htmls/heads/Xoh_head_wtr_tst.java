@@ -18,13 +18,13 @@ import org.junit.*;
 import gplx.xowa.guis.*;
 public class Xoh_head_wtr_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_head_wtr_fxt fxt = new Xoh_head_wtr_fxt();
-	@Test   public void Globals_none() {
+	@Test  public void Globals_none() {
 		Xoh_head_wtr wtr = fxt.Wtr();
 		wtr.Write_js_head_global_bgn();
 		wtr.Write_js_head_global_end();
 		fxt.Test("");
 	}
-	@Test   public void Globals_some() {
+	@Test  public void Globals_some() {
 		Xoh_head_wtr wtr = fxt.Wtr();
 		wtr.Write_js_head_global_bgn();
 		fxt.Exec_Write_js_global_ini_atr_val("key_1", "val_1");

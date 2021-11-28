@@ -16,13 +16,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
 import org.junit.*; import gplx.core.lists.*;
 public class Xowd_regy_mgr__tst implements ComparerAble {
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		String[] slotAry = new String[] {"b", "e", "h"};  // 0=b 1=e 2=h
 		tst_FindSlot(slotAry, "f", "h");	// f ->  1 2 -> 2
 		tst_FindSlot(slotAry, "c", "e");	// c -> -1 1 -> 0 ->  0 1 -> 1
 		tst_FindSlot(slotAry, "a", "b");	// a -> -1 1 -> 0 -> -1 0 -> 0
 	}
-	@Test  public void Null() {
+	@Test public void Null() {
 		String[] slotAry = new String[] {"b", "g", "l", "q", "v", null}; 
 		tst_FindSlot(slotAry, "a", "b");
 		tst_FindSlot(slotAry, "b", "b");

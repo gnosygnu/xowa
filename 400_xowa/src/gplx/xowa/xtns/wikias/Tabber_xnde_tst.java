@@ -21,7 +21,7 @@ public class Tabber_xnde_tst {
 		fxt.Reset();
 		Tabber_xnde.Id_test = Bry_.new_a7("test");
 	}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__parse__tmpl_to_html(String_.Concat_lines_nl_skip_last
 		( "<tabber>"
 		, "tab1=''a''"
@@ -39,7 +39,7 @@ public class Tabber_xnde_tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Eq__missing() {
+	@Test  public void Eq__missing() {
 		fxt.Test__parse__tmpl_to_html(String_.Concat_lines_nl_skip_last
 		( "<tabber>"
 		, "tab1"
@@ -52,7 +52,7 @@ public class Tabber_xnde_tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Eq__many() {
+	@Test  public void Eq__many() {
 		fxt.Test__parse__tmpl_to_html(String_.Concat_lines_nl_skip_last
 		( "<tabber>"
 		, "tab1=A=B"

@@ -13,16 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
-import gplx.gfui.envs.*; import gplx.gfui.controls.elems.*;
+package gplx.gfui.ipts; import gplx.GfoMsg;
+import gplx.GfoMsg_;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.controls.elems.GfuiElemKeys;
+import gplx.gfui.envs.TimerAdp;
 public class IptEventMgr implements Gfo_invk {
 	public static void ExecKeyDown(GfuiElem sender, IptEvtDataKey keyState) {
 		keyHandled = false; keyStateCur = keyState; // cache for simultaneous ipt events (ex: key.ctrl + mouse.left)
 		IptEventData iptData = IptEventData.new_(sender, IptEventType_.KeyDown, keyState.Key(), keyState, mouseStateCur);
-//			if (keyState.Key().Eq(IptKey_.add_(IptKey_.F1))) {
-//				Tfds.Write(keyState.Key(), keyState.Key().Val());
-//			}
-		sender.IptBnds().Process(iptData); 
+		sender.IptBnds().Process(iptData);
 		SendData(iptData);
 		keyHandled = keyState.Handled(); // WORKAROUND (WinForms): cache keyHandled b/c KeyDown.Handled=true does not make KeyPress.Handled=true;
 	}

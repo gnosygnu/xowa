@@ -230,6 +230,12 @@ public class Bry_find_ {
 			--cur;
 		}
 	}
+	public static int Find_bwd_while_in(byte[] src, int cur, int end, boolean[] while_ary) {
+		while (true) {
+			if (cur <= end || !while_ary[src[cur]]) return cur;
+			cur--;
+		}
+	}
 	public static int Find_bwd_while_v2(byte[] src, int cur, int end, byte while_byte) {
 		--cur;
 		while (true) {

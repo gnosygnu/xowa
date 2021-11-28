@@ -20,7 +20,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.parsers.lnkis.*;
 public class Xof_orig_tbl_tst {
 	@Before public void init() {fxt.Clear();} private Xof_orig_tbl_fxt fxt = new Xof_orig_tbl_fxt();
-	@Test   public void Select_in() {
+	@Test  public void Select_in() {
 		Xof_orig_itm itm_1 = fxt.Exec_insert("A.png", 220, 330);
 		fxt.Exec_insert("B.png", 220, 330);
 		Xof_orig_itm itm_3 = fxt.Exec_insert("C.png", 220, 330);

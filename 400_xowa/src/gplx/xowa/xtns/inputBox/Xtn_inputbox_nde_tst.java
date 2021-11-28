@@ -17,7 +17,7 @@ package gplx.xowa.xtns.inputBox; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Xtn_inputbox_nde_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_page_wiki_str("a<inputbox>b</inputbox>c", "ac");
 	}
 }

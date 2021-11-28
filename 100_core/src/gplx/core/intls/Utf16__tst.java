@@ -17,19 +17,19 @@ package gplx.core.intls; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.primitives.*;
 public class Utf16__tst {
 	private Utf16__fxt fxt = new Utf16__fxt();
-	@Test  public void Encode_decode() {
+	@Test public void Encode_decode() {
 		fxt.Test_encode_decode(162, 194, 162);				// cent; ¢
 		fxt.Test_encode_decode(8364, 226, 130, 172);		// euro; €
 		fxt.Test_encode_decode(150370, 240, 164, 173, 162);	// example from [[UTF-8]]; should be encoded as two bytes; 𤭢
 		fxt.Test_encode_decode(143489, 240, 163, 130, 129); // EX: 駣𣂁脁 DATE:2017-04-22; 𣂁
 	}
-	@Test  public void Encode_as_bry_by_hex() {
+	@Test public void Encode_as_bry_by_hex() {
 		fxt.Test_Encode_hex_to_bry("00", 0);
 		fxt.Test_Encode_hex_to_bry("41", 65);
 		fxt.Test_Encode_hex_to_bry("0041", 65);
 		fxt.Test_Encode_hex_to_bry("00C0", 195, 128);
 	}
-	@Test  public void Surrogate() {
+	@Test public void Surrogate() {
 		fxt.Test_surrogate(0x64321, 0xD950, 0xDF21);	// example from w:UTF-16
 		fxt.Test_surrogate(66643, 55297, 56403);		// example from d:Boomerang
 	}

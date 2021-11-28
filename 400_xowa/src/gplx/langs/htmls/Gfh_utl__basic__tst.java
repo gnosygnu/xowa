@@ -17,17 +17,17 @@ package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Gfh_utl__basic__tst {
 	@Before public void init() {fxt.Clear();} private Gfh_class_fxt fxt = new Gfh_class_fxt();
-	@Test   public void Escape()	 	{
+	@Test  public void Escape()	 	{
 		fxt.Test_escape_html(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, "a<b"			, "a&lt;b");	// basic
 		fxt.Test_escape_html(Bool_.Y, Bool_.Y, Bool_.N, Bool_.Y, Bool_.Y, "a<&b"		, "a&lt;&b");	// fix: & not escaped when <> present
 		fxt.Test_escape_html(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, "a<>'&\"b"	, "a&lt;&gt;&#39;&amp;&quot;b");
 	}
-	@Test   public void Escape_for_atr_val() {
+	@Test  public void Escape_for_atr_val() {
 		fxt.Test_escape_for_atr("abc"		, Bool_.N, "abc");			// basic
 		fxt.Test_escape_for_atr("a'\"b"		, Bool_.Y, "a&#39;\"b");	// quote is '
 		fxt.Test_escape_for_atr("a'\"b"		, Bool_.N, "a'&quot;b");	// quote is "
 	}
-	@Test   public void Unescape()	 	{
+	@Test  public void Unescape()	 	{
 		fxt.Test_unescape_html(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, "a&lt;&gt;&#39;&amp;&quot;b"		, "a<>'&\"b");	// basic
 	}
 }

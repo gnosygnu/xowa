@@ -17,14 +17,14 @@ package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.parsers.tmpls.*;
 public class Xop_redirect_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xop_redirect_mgr_fxt fxt = new Xop_redirect_mgr_fxt();
-	@Test  public void Basic()					{fxt.Test_redirect("#REDIRECT [[a]]", "A");}
-	@Test  public void Basic_colon()			{fxt.Test_redirect("#REDIRECT:[[a]]", "A");}
-	@Test  public void Ns_help()				{fxt.Test_redirect("#REDIRECT [[Help:a]]", "Help:A");}
-	@Test  public void First()					{fxt.Test_redirect("#REDIRECT [[a]] [[b]]", "A");}
-	@Test  public void Exc_false_match()		{fxt.Test_redirect("#REDIRECTA [[a]]", "");}
-	@Test  public void Exc_lnki_not_found()		{fxt.Test_redirect("#REDIRECT test", "");}
-	@Test  public void Ws()						{fxt.Test_redirect("\n#REDIRECT [[a]]", "A");}	// PAGE:en.w:Germany; {{Template group}} -> \n#REDIRECT [[Template:Navboxes]]
-	@Test  public void U8() {
+	@Test public void Basic()					{fxt.Test_redirect("#REDIRECT [[a]]", "A");}
+	@Test public void Basic_colon()			{fxt.Test_redirect("#REDIRECT:[[a]]", "A");}
+	@Test public void Ns_help()				{fxt.Test_redirect("#REDIRECT [[Help:a]]", "Help:A");}
+	@Test public void First()					{fxt.Test_redirect("#REDIRECT [[a]] [[b]]", "A");}
+	@Test public void Exc_false_match()		{fxt.Test_redirect("#REDIRECTA [[a]]", "");}
+	@Test public void Exc_lnki_not_found()		{fxt.Test_redirect("#REDIRECT test", "");}
+	@Test public void Ws()						{fxt.Test_redirect("\n#REDIRECT [[a]]", "A");}	// PAGE:en.w:Germany; {{Template group}} -> \n#REDIRECT [[Template:Navboxes]]
+	@Test public void U8() {
 		fxt.Init_u8();
 		fxt.Init_kwds(Bool_.N, "#REDIRECT", "#перенаправление");
 		fxt.Test_redirect("#REDIRECT [[A]]", "A");
@@ -32,19 +32,19 @@ public class Xop_redirect_mgr_tst {
 		fxt.Test_redirect("#перенаправление [[A]]", "A");
 		fxt.Test_redirect("#ПЕРЕНАПРАВЛЕНИЕ [[A]]", "A");
 	}
-	@Test  public void Url_decode()				{fxt.Test_redirect("#REDIRECT [[A%28B%29]]"	, "A(B)");}		// PURPOSE: url-decode links; PAGE:en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
-	@Test  public void Url_decode_plus()		{fxt.Test_redirect("#REDIRECT [[A%28B%29+]]", "A(B)+");}	// PURPOSE: do not url-decode +; PAGE:en.w:Template:Positionskarte+; DATE:2014-08-22
-	@Test  public void Amp()					{fxt.Test_redirect("#REDIRECT [[A &amp; B]]", "A & B");}	// PURPOSE: &amp; -> &; PAGE:en.w:Amadou Bagayoko?redirect=n; DATE:2014-09-23
-	@Test  public void Frame_ttl() {	// PURPOSE: redirect should set invk frame title to redirect_trg, not original; PAGE:en.w:Statutory_city DATE:2014-08-22
+	@Test public void Url_decode()				{fxt.Test_redirect("#REDIRECT [[A%28B%29]]"	, "A(B)");}		// PURPOSE: url-decode links; PAGE:en.w:Watcher_(Buffy_the_Vampire_Slayer); DATE:2014-08-18
+	@Test public void Url_decode_plus()		{fxt.Test_redirect("#REDIRECT [[A%28B%29+]]", "A(B)+");}	// PURPOSE: do not url-decode +; PAGE:en.w:Template:Positionskarte+; DATE:2014-08-22
+	@Test public void Amp()					{fxt.Test_redirect("#REDIRECT [[A &amp; B]]", "A & B");}	// PURPOSE: &amp; -> &; PAGE:en.w:Amadou Bagayoko?redirect=n; DATE:2014-09-23
+	@Test public void Frame_ttl() {	// PURPOSE: redirect should set invk frame title to redirect_trg, not original; PAGE:en.w:Statutory_city DATE:2014-08-22
 		fxt.Test_frame_ttl("Template:A", "#REDIRECT [[Template:B]]", "Template:B", "Template:B");
 	}
-	@Test  public void State_collapsed() {	// PURPOSE: state=collapsed broke redirects; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
+	@Test public void State_collapsed() {	// PURPOSE: state=collapsed broke redirects; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
 		fxt.Test_redirect("#REDIRECT [[Template:A|state=collapsed]]", "Template:A");
 	}
-	@Test  public void Parse_1st_link_only() {	// PURPOSE: do not take pipe from 2nd lnki; PAGE:en.w:Template:pp-semi; DATE:2015-11-14
+	@Test public void Parse_1st_link_only() {	// PURPOSE: do not take pipe from 2nd lnki; PAGE:en.w:Template:pp-semi; DATE:2015-11-14
 		fxt.Test_redirect("#REDIRECT [[Template:A]][[Category:B|b]]", "Template:A");
 	}
-	@Test  public void Redirected_html() {
+	@Test public void Redirected_html() {
 		// PURPOSE: "Redirected from" message was using "_" instead of " "; PAGE:en.w:Summer_Solstice; DATE:2015-12-29
 		fxt.Test__redirected_html("A_B", "<span class=\"mw-redirectedfrom\">(Redirected from <a href=\"/wiki/A_B?redirect=no\" class=\"mw-redirect\" title=\"A B\">A B</a>)</span>");
 

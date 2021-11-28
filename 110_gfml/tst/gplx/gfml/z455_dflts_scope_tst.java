@@ -23,7 +23,7 @@ public class z455_dflts_scope_tst {
 		GfmlType type = makr.MakeRootType("point", "point", "x", "y").DocPos_(rootPos);
 		regy.Add(type);
 	}	GfmlDocPos rootPos, currPos; GfmlTypRegy regy;
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		currPos = rootPos.NewDown(0);
 		tst_FetchOrNullByPos(regy, "point", rootPos, "point", "x", "y");
 		tst_FetchOrNullByPos(regy, "point", currPos, "point", "x", "y");

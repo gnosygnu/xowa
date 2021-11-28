@@ -25,32 +25,32 @@ public abstract class IoEngine_dir_deep_base_tst {
 	}	protected IoEngine engine; protected Io_url fil, root; @gplx.Internal protected IoEngineFxt fx; 
 	protected abstract IoEngine engine_();
 	protected abstract void setup_hook();
-	@Test  @gplx.Virtual public void SearchDir() {
+	@Test @gplx.Virtual public void SearchDir() {
 		Io_url[] expd = paths_(src_dir0a, src_fil0a, src_dir0a_dir0a, src_dir0a_fil0a);
 		Io_url[] actl = IoEngine_xrg_queryDir.new_(src).Recur_().DirInclude_().ExecAsUrlAry();
 		Tfds.Eq_ary(expd, actl);
 	}
-	@Test  @gplx.Virtual public void MoveDirDeep() {
+	@Test @gplx.Virtual public void MoveDirDeep() {
 		fx.tst_ExistsPaths(true, srcTree); fx.tst_ExistsPaths(false, trgTree);
 
 		engine.MoveDirDeep(IoEngine_xrg_xferDir.move_(src, trg).Recur_());
 		fx.tst_ExistsPaths(false, srcTree);
 		fx.tst_ExistsPaths(true, trgTree);
 	}
-	@Test  @gplx.Virtual public void CopyDir() {
+	@Test @gplx.Virtual public void CopyDir() {
 		fx.tst_ExistsPaths(true, srcTree); fx.tst_ExistsPaths(false, trgTree);
 
 		engine.CopyDir(src, trg);
 		fx.tst_ExistsPaths(true, srcTree);
 		fx.tst_ExistsPaths(true, trgTree);
 	}
-	@Test  @gplx.Virtual public void DeleteDir() {
+	@Test @gplx.Virtual public void DeleteDir() {
 		fx.tst_ExistsPaths(true, srcTree);
 
 		engine.DeleteDirDeep(IoEngine_xrg_deleteDir.new_(src).Recur_());
 		fx.tst_ExistsPaths(false, srcTree);
 	}
-//		@Test  public virtual void CopyDir_IgnoreExisting() {
+//		@Test public virtual void CopyDir_IgnoreExisting() {
 //			fx.tst_ExistsPaths(true, srcTree); fx.tst_ExistsPaths(false, trgTree);
 //			engine.SaveFilStr(trg_dir0a_fil0a, "x");	// NOTE: this file is different than src counterpart; should be overwritten by Copy
 //			fx.tst_ExistsPaths(true, trg_dir0a, trg_dir0a_fil0a);
@@ -59,7 +59,7 @@ public abstract class IoEngine_dir_deep_base_tst {
 //			fx.tst_ExistsPaths(true, srcTree);
 //			fx.tst_ExistsPaths(true, trgTree);
 //		}
-//		@Test  public virtual void CopyDir_IgnoreExistingReadOnlyFile() {
+//		@Test public virtual void CopyDir_IgnoreExistingReadOnlyFile() {
 //			fx.tst_ExistsPaths(true, srcTree); fx.tst_ExistsPaths(false, trgTree);
 //			engine.SaveFilStr(trg_fil0a, "x");	// NOTE: this file is different than src counterpart; should be overwritten by Copy
 //			fx.tst_ExistsPaths(true, trg_fil0a);
@@ -69,7 +69,7 @@ public abstract class IoEngine_dir_deep_base_tst {
 //			fx.tst_ExistsPaths(true, srcTree);
 //			fx.tst_ExistsPaths(true, trgTree);
 //		}
-//		@Test  public void MoveDir_IgnoreExisting() {
+//		@Test public void MoveDir_IgnoreExisting() {
 //			fx.tst_ExistsPaths(true, srcTree);
 //			fx.tst_ExistsPaths(false, trgTree);
 //			engine.SaveFilStr(trg_dir0a_fil0a, @"x");	// NOTE: this file is different than src counterpart; should be overwritten by Copy
@@ -80,7 +80,7 @@ public abstract class IoEngine_dir_deep_base_tst {
 //			fx.tst_ExistsPaths(true, srcTree);
 //			fx.tst_ExistsPaths(true, trgTree);
 //		}
-//		@Test  public virtual void ProgressUi() {
+//		@Test public virtual void ProgressUi() {
 //			Console_adp__mem dialog = Console_adp__mem.new_();
 //			engine.SearchDir(src).Recur_().Prog_(dialog).ExecAsDir();
 //

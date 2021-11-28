@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.strings.*;
 import gplx.xowa.langs.*;
 public class Xobc_utl_make_lang_tst {		
 	@Before public void init() {fxt.Clear();} private Xobc_utl_make_lang_fxt fxt = new Xobc_utl_make_lang_fxt();
-	@Test  public void Parse() {
+	@Test public void Parse() {
 		fxt.Parse_rows(String_.Concat_lines_nl
 			(	""
 			,	"if|#if~#si~"
@@ -32,7 +32,7 @@ public class Xobc_utl_make_lang_tst {
 			, 	fxt.row_("expr")
 			);
 	}
-	@Test  public void Trailing_colon() {
+	@Test public void Trailing_colon() {
 		fxt.Kwd_mgr().Parse_keep_trailing_colon(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"if|if:~si:~"
 			,	"ifeq|"
@@ -59,7 +59,7 @@ public class Xobc_utl_make_lang_tst {
 			,	";"
 			));
 	}
-	@Test  public void Prepend_hash() {
+	@Test public void Prepend_hash() {
 		fxt.Kwd_mgr().Parse_prepend_hash(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"if|if:~si:~"
 			,	"ifeq|"
@@ -89,7 +89,7 @@ public class Xobc_utl_make_lang_tst {
 			,	";"
 			));
 	}
-	@Test  public void Add_words_hash() {
+	@Test public void Add_words_hash() {
 		fxt.Kwd_mgr().Parse_add_words(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"if|if_new:~if~"
 			,	"ifeq|"
@@ -114,7 +114,7 @@ public class Xobc_utl_make_lang_tst {
 			,	";"
 			));
 	}
-	@Test  public void Manual_text() {
+	@Test public void Manual_text() {
 		fxt.Mgr().Parse_manual_text(Bry_.new_a7("fr"), Bry_.new_u8(String_.Concat_lines_nl
 			(	"app;"
 			))

@@ -17,7 +17,7 @@ package gplx;
 import gplx.langs.gfs.*;
 public class Gfo_invk_to_str {
 	public static GfoMsg ReadMsg(Gfo_invk invk, String k) {
-		GfsCtx ctx = GfsCtx.wtr_();
+		GfsCtx ctx = GfsCtx.NewDeny();
 		GfoMsg m = GfoMsg_.rdr_(k);
 		invk.Invk(ctx, 0, k, m);
 		String invkKey = GfsCore.Instance.FetchKey(invk);
@@ -27,7 +27,7 @@ public class Gfo_invk_to_str {
 	}
 	public static GfoMsg WriteMsg(Gfo_invk invk, String k, Object... ary) {return WriteMsg(GfsCore.Instance.FetchKey(invk), invk, k, ary);}
 	public static GfoMsg WriteMsg(String invkKey, Gfo_invk invk, String k, Object... ary) {
-		GfsCtx ctx = GfsCtx.wtr_();
+		GfsCtx ctx = GfsCtx.NewDeny();
 		GfoMsg m = GfoMsg_.wtr_();
 		invk.Invk(ctx, 0, k, m);
 		GfoMsg rv = GfoMsg_.new_cast_(k);

@@ -17,7 +17,7 @@ package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
 import org.junit.*;
 public class Fsd_thm_tbl_tst {
 	@Before public void init() {fxt.Clear();} private Fsd_thm_tbl_fxt fxt = new Fsd_thm_tbl_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init_list(fxt.Make(100), fxt.Make(200), fxt.Make(400));
 		fxt.Test_match_nearest_itm(fxt.Make(400), fxt.Make(400));
 		fxt.Test_match_nearest_itm(fxt.Make(200), fxt.Make(200));
@@ -26,7 +26,7 @@ public class Fsd_thm_tbl_tst {
 		fxt.Test_match_nearest_itm(fxt.Make(150), fxt.Make(200));
 		fxt.Test_match_nearest_itm(fxt.Make(999), fxt.Make(400));
 	}
-	@Test   public void Empty() {
+	@Test  public void Empty() {
 		fxt.Init_list();	// no items
 		fxt.Test_match_nearest_itm(fxt.Make(100), Fsd_thm_itm.Null);
 	}

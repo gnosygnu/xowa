@@ -19,7 +19,7 @@ public class IoEngine_xrg_recycleFil_tst {
 	@Before public void setup() {
 		IoEngine_.Mem_init_();
 	}
-	@Test  public void GenRecycleUrl() {
+	@Test public void GenRecycleUrl() {
 		tst_GenRecycleUrl(recycle_(), Io_url_.mem_fil_("mem/z_trash/20100102/gplx.images;115559123;;fil.txt"));
 		tst_GenRecycleUrl(recycle_().Uuid_include_(), Io_url_.mem_fil_("mem/z_trash/20100102/gplx.images;115559123;467ffb41-cdfe-402f-b22b-be855425784b;fil.txt"));
 	}

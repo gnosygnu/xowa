@@ -17,10 +17,10 @@ package gplx.xowa.langs.kwds; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.core.primitives.*;
 public class Xol_kwd_parse_data_tst {
 	@Before public void init() {Clear();}
-	@Test  public void Basic()			{Key_("upright" ).Tst_strip("upright");}
-	@Test  public void Eq_arg()			{Key_("upright" ).Tst_strip("upright=$1");}
-	@Test  public void Space()			{Key_("upright ").Tst_strip("upright $1");}
-	@Test  public void Px()				{Key_("px").Tst_strip("$1px");}
+	@Test public void Basic()			{Key_("upright" ).Tst_strip("upright");}
+	@Test public void Eq_arg()			{Key_("upright" ).Tst_strip("upright=$1");}
+	@Test public void Space()			{Key_("upright ").Tst_strip("upright $1");}
+	@Test public void Px()				{Key_("px").Tst_strip("$1px");}
 
 	private void Clear() {
 		key = null;

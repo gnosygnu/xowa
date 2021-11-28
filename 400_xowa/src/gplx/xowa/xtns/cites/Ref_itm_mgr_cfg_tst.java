@@ -17,7 +17,7 @@ package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*;
 public class Ref_itm_mgr_cfg_tst {		
 	@Before public void init() {fxt.Clear();} private Ref_itm_mgr_cfg_fxt fxt = new Ref_itm_mgr_cfg_fxt();
-	@Test  public void Ref_backlabels_xby_bry()	{
+	@Test public void Ref_backlabels_xby_bry()	{
 		fxt.Test_Ref_backlabels_xby_bry("a b c"			, "a", "b", "c");		// basic
 		fxt.Test_Ref_backlabels_xby_bry("  a b c"		, "a", "b", "c");		// leading ws
 		fxt.Test_Ref_backlabels_xby_bry("a b c   "		, "a", "b", "c");		// trailing ws

@@ -23,7 +23,7 @@ public class z102_core_whitespace_tst {
 			,	GfmlDocLxrs.Whitespace_lxr()
 			);
 	}
-	@Test  public void Space() {
+	@Test public void Space() {
 		fx.tst_Doc("a b;", fx.nde_().Atru_("a").Atru_("b"));
 		fx.tst_Tkn("a b;"
 			, fx.tkn_grp_
@@ -34,16 +34,16 @@ public class z102_core_whitespace_tst {
 			)
 			);
 	}
-	@Test  public void Tab() {
+	@Test public void Tab() {
 		fx.tst_Doc("a\tb;", fx.nde_().Atru_("a").Atru_("b"));
 	}
-	@Test  public void NewLine() {
+	@Test public void NewLine() {
 		fx.tst_Doc(String_.Format("a{0}b;", String_.CrLf), fx.nde_().Atru_("a").Atru_("b"));
 	}
-	@Test  public void MergeSameWs() {
+	@Test public void MergeSameWs() {
 		fx.tst_Doc("a  b;", fx.nde_().Atru_("a").Atru_("b"));
 	}
-	@Test  public void MergeDiffWs() {
+	@Test public void MergeDiffWs() {
 		fx.tst_Doc("a\t b;", fx.nde_().Atru_("a").Atru_("b"));
 		fx.tst_Tkn("a\t b;"
 			, fx.tkn_grp_
@@ -54,7 +54,7 @@ public class z102_core_whitespace_tst {
 			)
 			);
 	}
-	@Test  public void LeadingWs() {
+	@Test public void LeadingWs() {
 		fx.tst_Doc(" a;", fx.nde_().Atru_("a"));
 		fx.tst_Tkn(" a;"
 			, fx.tkn_itm_(" ")
@@ -64,7 +64,7 @@ public class z102_core_whitespace_tst {
 			)
 			);
 	}
-	@Test  public void TrailingWs() {
+	@Test public void TrailingWs() {
 		fx.tst_Doc("a ;", fx.nde_().Atru_("a"));
 		fx.tst_Tkn("a ;"
 			, fx.tkn_grp_

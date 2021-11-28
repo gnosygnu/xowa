@@ -17,12 +17,12 @@ package gplx;
 import org.junit.*;
 public class Io_mgr__tst {
 	@Before public void init() {fxt.Clear();} private final Io_mgr__fxt fxt = new Io_mgr__fxt();
-	@Test   public void Dir_delete_empty__basic() {
+	@Test  public void Dir_delete_empty__basic() {
 		fxt.Exec_itm_create("mem/dir/");
 		fxt.Exec_dir_delete_empty("mem/dir/");
 		fxt.Test_itm_exists_n("mem/dir/");
 	}
-	@Test   public void Dir_delete_empty__no_delete() {
+	@Test  public void Dir_delete_empty__no_delete() {
 		fxt.Exec_itm_create
 		( "mem/dir/"
 		, "mem/dir/fil.txt"
@@ -30,7 +30,7 @@ public class Io_mgr__tst {
 		fxt.Exec_dir_delete_empty("mem/dir/");
 		fxt.Test_itm_exists_y("mem/dir/");
 	}
-	@Test   public void Dir_delete_empty__nested_simple() {
+	@Test  public void Dir_delete_empty__nested_simple() {
 		fxt.Exec_itm_create
 		( "mem/dir/"
 		, "mem/dir/1/"
@@ -39,7 +39,7 @@ public class Io_mgr__tst {
 		fxt.Exec_dir_delete_empty("mem/dir/");
 		fxt.Test_itm_exists_n("mem/dir/");
 	}
-	@Test   public void Dir_delete_empty__nested_many() {
+	@Test  public void Dir_delete_empty__nested_many() {
 		fxt.Exec_itm_create
 		( "mem/dir/"
 		, "mem/dir/1/"
@@ -51,7 +51,7 @@ public class Io_mgr__tst {
 		fxt.Exec_dir_delete_empty("mem/dir/");
 		fxt.Test_itm_exists_n("mem/dir/");
 	}
-	@Test   public void Dir_delete_empty__nested_some() {
+	@Test  public void Dir_delete_empty__nested_some() {
 		fxt.Exec_itm_create
 		( "mem/dir/"
 		, "mem/dir/1/"

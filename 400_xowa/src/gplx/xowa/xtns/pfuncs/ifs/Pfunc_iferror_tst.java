@@ -18,11 +18,11 @@ import org.junit.*;
 public class Pfunc_iferror_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
-	@Test  public void Basic_pass()				{fxt.Test_parse_tmpl_str_test("{{#iferror: {{#expr: 1 + 2 }} | error | ok }}"					, "{{test}}"	, "ok");}
-	@Test  public void Basic_fail()				{fxt.Test_parse_tmpl_str_test("{{#iferror: {{#expr: 1 + X }} | error | ok }}"					, "{{test}}"	, "error");}
-	@Test  public void Basic_omit()				{fxt.Test_parse_tmpl_str_test("{{#iferror: ok | error}}"											, "{{test}}"	, "ok");}
-	@Test  public void NoMatch_0()				{fxt.Test_parse_tmpl_str_test("{{#iferror: <strong>error</strong> | error | ok }}"				, "{{test}}"	, "ok");}
-	@Test  public void NoMatch_1()				{fxt.Test_parse_tmpl_str_test("{{#iferror: <strong test=\"error\"></strong> | error | ok }}"		, "{{test}}"	, "ok");}
-	@Test  public void NoMatch_2()				{fxt.Test_parse_tmpl_str_test("{{#iferror: <strong class=\"errora\"></strong> | error | ok }}"	, "{{test}}"	, "ok");}
-	//@Test  public void NoMatch_3()				{fxt.Test_parse_tmpl_str_test("{{#iferror: <strong class=\"error a| error | ok }}"				, "{{test}}"	, "ok");} // FUTURE: match for ">
+	@Test public void Basic_pass()				{fxt.Test_parse_tmpl_str_test("{{#iferror: {{#expr: 1 + 2 }} | error | ok }}"					, "{{test}}"	, "ok");}
+	@Test public void Basic_fail()				{fxt.Test_parse_tmpl_str_test("{{#iferror: {{#expr: 1 + X }} | error | ok }}"					, "{{test}}"	, "error");}
+	@Test public void Basic_omit()				{fxt.Test_parse_tmpl_str_test("{{#iferror: ok | error}}"											, "{{test}}"	, "ok");}
+	@Test public void NoMatch_0()				{fxt.Test_parse_tmpl_str_test("{{#iferror: <strong>error</strong> | error | ok }}"				, "{{test}}"	, "ok");}
+	@Test public void NoMatch_1()				{fxt.Test_parse_tmpl_str_test("{{#iferror: <strong test=\"error\"></strong> | error | ok }}"		, "{{test}}"	, "ok");}
+	@Test public void NoMatch_2()				{fxt.Test_parse_tmpl_str_test("{{#iferror: <strong class=\"errora\"></strong> | error | ok }}"	, "{{test}}"	, "ok");}
+	//@Test public void NoMatch_3()				{fxt.Test_parse_tmpl_str_test("{{#iferror: <strong class=\"error a| error | ok }}"				, "{{test}}"	, "ok");} // FUTURE: match for ">
 }

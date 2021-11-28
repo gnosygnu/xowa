@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
+package gplx.fsdb.data; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.envs.*;
-import gplx.dbs.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.dbs.engines.sqlite.*;
-public class Fsd_bin_tbl implements Rls_able {		
+import gplx.dbs.*;
+import gplx.core.ios.streams.*;
+
+public class Fsd_bin_tbl implements Rls_able {
 	public final    String fld__owner_id, fld__owner_tid, fld__part_id, fld__data_url, fld__data;
 	private Db_conn conn; private Db_stmt stmt_insert, stmt_select, stmt_select_itm; private Bry_bfr tmp_bfr;
 	private final    Bool_obj_ref saved_in_parts = Bool_obj_ref.n_();
@@ -26,7 +27,7 @@ public class Fsd_bin_tbl implements Rls_able {
 		fld__owner_id		= flds.Add_int_pkey	("bin_owner_id");
 		fld__owner_tid		= flds.Add_byte		("bin_owner_tid");
 		fld__part_id			= flds.Add_int		("bin_part_id");
-		fld__data_url		= flds.Add_str		("bin_data_url", 255);
+		fld__data_url		= flds.Add_str		("bin_data_url", 255); // for items which are > 2 GB, just store it on disc, with a path to it; EX: 120 GB file
 		fld__data			= flds.Add_bry		("bin_data");	// mediumblob
 		conn.Rls_reg(this);
 	}

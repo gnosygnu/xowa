@@ -17,7 +17,7 @@ package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*; import gplx.dbs.*;
 public class Xof_cache_mgr_tst {
 //		@Before public void init() {fxt.Reset();} private Xof_cache_mgr_fxt fxt = new Xof_cache_mgr_fxt();
-	@Test  	public void Basic() {
+	@Test 	public void Basic() {
 //			Xou_cache_itm itm = fxt.Bldr_itm("A.png").Make();
 //			fxt.Test_get_n(itm);
 //			fxt.Exec_update(itm);

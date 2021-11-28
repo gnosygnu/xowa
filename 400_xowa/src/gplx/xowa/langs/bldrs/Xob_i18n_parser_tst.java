@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.core.intls.*;
 public class Xob_i18n_parser_tst {
 	@Before public void init() {fxt.Clear();} private Xob_i18n_parser_fxt fxt = new Xob_i18n_parser_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_xto_gfs(String_.Concat_lines_nl_skip_last
 		( "{"
 		, "    \"@metadata\": {"
@@ -38,7 +38,7 @@ public class Xob_i18n_parser_tst {
 		, ");"
 		));
 	}
-//		@Test  public void Load_msgs_validate() {
+//		@Test public void Load_msgs_validate() {
 //			fxt.Test_load_msgs_dir("C:\\xowa\\bin\\any\\xowa\\xtns\\Insider\\i18n\\");
 //		}
 }

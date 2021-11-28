@@ -17,7 +17,7 @@ package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z501_lxr_parse_tst {
 	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void SymCreate() {
+	@Test public void SymCreate() {
 		fx.tst_Parse(String_.Concat
 			(	"_lxr_sym:key='gfml.elm_key_1' raw='<-' cmd='gfml.elm_key';"
 			,	"a<-1;"
@@ -25,7 +25,7 @@ public class z501_lxr_parse_tst {
 			,	fx.nde_().Atrk_("a", "1")
 			);
 	}
-	@Test  public void SymUpdate() {
+	@Test public void SymUpdate() {
 		fx.tst_Parse(String_.Concat
 			(	"_lxr_sym:key='gfml.elm_key_0' raw='<-';"
 			,	"a<-1 b=1;"
@@ -33,7 +33,7 @@ public class z501_lxr_parse_tst {
 			,	fx.nde_().Atrk_("a", "1").Atru_("b=1")
 			);
 	}
-	@Test  public void SwapCreate() {
+	@Test public void SwapCreate() {
 		fx.tst_Parse(String_.Concat
 			(	"_lxr_sym:key='gfml.swap_0' raw='/?/?' val='/?';"
 			,	"/?/?;"
@@ -41,7 +41,7 @@ public class z501_lxr_parse_tst {
 			,	fx.nde_().Atru_("/?")
 			);
 	}
-	@Test  public void FrameCreate() {
+	@Test public void FrameCreate() {
 		fx.tst_Parse(String_.Concat
 			(	"_lxr_frame:key='gfml.comment_2' type='comment' bgn='/-' end='-/';"
 			,	"a=/-ignore-/b;"
@@ -49,7 +49,7 @@ public class z501_lxr_parse_tst {
 			,	fx.nde_().Atrk_("a", "b")
 			);
 	}
-	@Test  public void FrameUpdate() {
+	@Test public void FrameUpdate() {
 		fx.tst_Parse(String_.Concat
 			(	"_lxr_frame:key='gfml.comment_0' bgn='--' end='!';"
 			,	"a=--ignore!"
@@ -75,7 +75,7 @@ public class z501_lxr_parse_tst {
 		//		how to change inner lxrs (lookup by key?)
 	}
 
-//		@Test  public void FrameUpdateEval() {
+//		@Test public void FrameUpdateEval() {
 //			raw = String_.Concat
 //				(	"_lxr_frame:key='gfml.eval_0' bgn='~<' end='>';"	// how to handle '<~' where <~ (block quote)
 //				,	"a=~[t];"

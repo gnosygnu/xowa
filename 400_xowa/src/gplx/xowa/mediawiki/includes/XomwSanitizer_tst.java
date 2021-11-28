@@ -17,22 +17,22 @@ package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*; import gplx.xowa.mediawiki.includes.xohtml.*;
 public class XomwSanitizer_tst {
 	private final    XomwSanitizer_fxt fxt = new XomwSanitizer_fxt();
-	@Test   public void Normalize__text()                  {fxt.Test__normalize_char_references("abc"                      , "abc");}
-	@Test   public void Normalize__dec()                   {fxt.Test__normalize_char_references("&#08;"                    , "&amp;#08;");}
-	@Test   public void Normalize__dec__invalid()          {fxt.Test__normalize_char_references("&#09;"                    , "&#9;");}
-	@Test   public void Normalize__hex()                   {fxt.Test__normalize_char_references("&#xFF;"                   , "&#xff;");}
-	@Test   public void Normalize__entity()                {fxt.Test__normalize_char_references("&alpha;"                  , "&#945;");}
-	@Test   public void Normalize__entity__lt()            {fxt.Test__normalize_char_references("&lt;"                     , "&lt;");}
-	@Test   public void Normalize__entity__alias()         {fxt.Test__normalize_char_references("&רלמ;"                    , "&rlm;");}
-	@Test   public void Normalize__amp()                   {fxt.Test__normalize_char_references("a&b"                      , "a&amp;b");}
-	@Test   public void Normalize__invalid()               {fxt.Test__normalize_char_references("&(invalid);"              , "&amp;(invalid);");}
-	@Test   public void Normalize__many() {
+	@Test  public void Normalize__text()                  {fxt.Test__normalize_char_references("abc"                      , "abc");}
+	@Test  public void Normalize__dec()                   {fxt.Test__normalize_char_references("&#08;"                    , "&amp;#08;");}
+	@Test  public void Normalize__dec__invalid()          {fxt.Test__normalize_char_references("&#09;"                    , "&#9;");}
+	@Test  public void Normalize__hex()                   {fxt.Test__normalize_char_references("&#xFF;"                   , "&#xff;");}
+	@Test  public void Normalize__entity()                {fxt.Test__normalize_char_references("&alpha;"                  , "&#945;");}
+	@Test  public void Normalize__entity__lt()            {fxt.Test__normalize_char_references("&lt;"                     , "&lt;");}
+	@Test  public void Normalize__entity__alias()         {fxt.Test__normalize_char_references("&רלמ;"                    , "&rlm;");}
+	@Test  public void Normalize__amp()                   {fxt.Test__normalize_char_references("a&b"                      , "a&amp;b");}
+	@Test  public void Normalize__invalid()               {fxt.Test__normalize_char_references("&(invalid);"              , "&amp;(invalid);");}
+	@Test  public void Normalize__many() {
 		fxt.Test__normalize_char_references
 		( "a &#09; b &alpha; c &#xFF; d &(invalid); e"
 		, "a &#9; b &#945; c &#xff; d &amp;(invalid); e"
 		);
 	}
-	@Test   public void Regex__domain() {
+	@Test  public void Regex__domain() {
 		Xomw_regex_find_domain regex_domain = new Xomw_regex_find_domain();
 		// normal
 		fxt.Test__regex_domain_y(regex_domain, "https://a.org/bcd", "https:", "//a.org", "/bcd");
@@ -49,7 +49,7 @@ public class XomwSanitizer_tst {
 		// host_bgn.///
 		fxt.Test__regex_domain_n(regex_domain, "https:///a.org/b");
 	}
-	@Test   public void Regex__clean_url() {
+	@Test  public void Regex__clean_url() {
 		Xomw_regex_escape_invalid regex = new Xomw_regex_escape_invalid();
 		// noop
 		fxt.Test__regex_escape_invalid(regex, "https://a.org/bcd", Bool_.N, "");
@@ -58,7 +58,7 @@ public class XomwSanitizer_tst {
 		// range: 00 - 32
 		fxt.Test__regex_escape_invalid(regex, "\t\n ", Bool_.Y, "%09%0A+");
 	}
-	@Test   public void Regex__ipv6_brack() {
+	@Test  public void Regex__ipv6_brack() {
 		Xomw_regex_ipv6_brack regex = new Xomw_regex_ipv6_brack();
 		// basic
 		fxt.Test__regex_ipv6_brack(regex, Bool_.Y, "//%5B0a.1b:12%5D:123");
@@ -77,7 +77,7 @@ public class XomwSanitizer_tst {
 		// port: 0-len
 		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "//%5Ba%5D:");
 	}
-	@Test   public void Decode() {
+	@Test  public void Decode() {
 		// dec
 		fxt.Test__decode_char_references("&#33;"           , "!");
 		// hex
@@ -93,7 +93,7 @@ public class XomwSanitizer_tst {
 		// amp
 		fxt.Test__decode_char_references("a&b"             , "a&b");
 	}
-	@Test   public void Clean_url() {
+	@Test  public void Clean_url() {
 		// entity
 		fxt.Test__clean_url("http://a.org/b&amp;c"           , "http://a.org/b&c");
 		// entity: escape
@@ -105,7 +105,7 @@ public class XomwSanitizer_tst {
 		// ipv6_brack
 		fxt.Test__clean_url("http://[0a.1b:12]:123/cd"       , "http://[0a.1b:12]:123/cd");
 	}
-	@Test   public void Merge_atrs() {
+	@Test  public void Merge_atrs() {
 		Xomw_atr_mgr src_atrs = new Xomw_atr_mgr();
 		Xomw_atr_mgr trg_atrs = new Xomw_atr_mgr();
 		Xomw_atr_mgr expd_atrs = new Xomw_atr_mgr();
@@ -122,7 +122,7 @@ public class XomwSanitizer_tst {
 		fxt.Test__merge_attributes(src_atrs.Clear().Add_many(cls, "  v1   v2  "), trg_atrs.Clear().Add_many(cls, "  v3   v4   "), expd_atrs.Clear().Add_many(cls, "v1 v2 v3 v4"));
 	}
 
-	@Test   public void normalizeWhitespace() {
+	@Test  public void normalizeWhitespace() {
 		fxt.Test_normalizeWhitespace("a\r\nb", "a b");
 		fxt.Test_normalizeWhitespace("a\rb", "a b");
 		fxt.Test_normalizeWhitespace("a\nb", "a b");

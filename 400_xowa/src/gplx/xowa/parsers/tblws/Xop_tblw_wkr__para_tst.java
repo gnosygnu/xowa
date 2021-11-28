@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xop_tblw_wkr__para_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Para() {	// PURPOSE: para causing strange breaks; SEE:[[John F. Kennedy]] and "two Supreme Court appointments"
+	@Test public void Para() {	// PURPOSE: para causing strange breaks; SEE:[[John F. Kennedy]] and "two Supreme Court appointments"
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"{|"
 			,	"<p></p>"
@@ -37,7 +37,7 @@ public class Xop_tblw_wkr__para_tst {
 			)
 			);
 	}
-	@Test  public void Nl() {	// PURPOSE: para causing strange breaks; SEE:[[John F. Kennedy]] and "two Supreme Court appointments"
+	@Test public void Nl() {	// PURPOSE: para causing strange breaks; SEE:[[John F. Kennedy]] and "two Supreme Court appointments"
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"{|"
 			,	"|-"
@@ -56,7 +56,7 @@ public class Xop_tblw_wkr__para_tst {
 			)
 			);
 	}
-	@Test  public void Unnecessary_para() {	// PURPOSE: tblw causes unnecessary <p>; home/wiki/Dashboard/Image_databases; DATE:2014-02-20
+	@Test public void Unnecessary_para() {	// PURPOSE: tblw causes unnecessary <p>; home/wiki/Dashboard/Image_databases; DATE:2014-02-20
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"{|"
 			,	"|-"
@@ -88,7 +88,7 @@ public class Xop_tblw_wkr__para_tst {
 			)
 			);
 	}
-	@Test  public void Ws_leading() {	// PAGE:en.w:AGPLv3
+	@Test public void Ws_leading() {	// PAGE:en.w:AGPLv3
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"{|"
 			,	" !a"
@@ -108,7 +108,7 @@ public class Xop_tblw_wkr__para_tst {
 			)
 			);
 	}
-	@Test  public void Ws_th_2() {	// "\n\s!" should still be interpreted as tblw; s.w:Manchester; DATE:2014-02-14
+	@Test public void Ws_th_2() {	// "\n\s!" should still be interpreted as tblw; s.w:Manchester; DATE:2014-02-14
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"{|"
 			,	"|-"
@@ -129,7 +129,7 @@ public class Xop_tblw_wkr__para_tst {
 			)
 			);
 	}
-	@Test  public void Ws_th_3() {	// "\n\s!" and "!!" breaks tblw; ru.w:Храмы_Санкт-Петербурга (List of churches in St Petersburg); DATE:2014-02-20
+	@Test public void Ws_th_3() {	// "\n\s!" and "!!" breaks tblw; ru.w:Храмы_Санкт-Петербурга (List of churches in St Petersburg); DATE:2014-02-20
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"{|"
 			,	" ! id='1' | a !! id='2' | b"
@@ -148,10 +148,10 @@ public class Xop_tblw_wkr__para_tst {
 			)
 			);
 	}
-	@Test  public void Tblw_td2_should_not_create_ws() { // PURPOSE: a||b -> a\n||b; EX:none;discovered during luaj test; DATE:2014-04-14
+	@Test public void Tblw_td2_should_not_create_ws() { // PURPOSE: a||b -> a\n||b; EX:none;discovered during luaj test; DATE:2014-04-14
 		fxt.Test_parse_page_wiki_str("a||b", "<p>a||b\n</p>");
 	}
-	@Test  public void Para_on_tblw() {	// PURPOSE:table following link should automatically add para around link; PAGE:en.w:Template_engine_(web) DATE:2017-04-08
+	@Test public void Para_on_tblw() {	// PURPOSE:table following link should automatically add para around link; PAGE:en.w:Template_engine_(web) DATE:2017-04-08
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		(	"[[A]] b"
 		,	"{|"

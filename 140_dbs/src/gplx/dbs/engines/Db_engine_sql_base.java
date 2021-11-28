@@ -13,10 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
-import java.sql.*; 
-import gplx.core.stores.*;
-import gplx.dbs.engines.*; import gplx.dbs.metas.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.wtrs.*; import gplx.dbs.conn_props.*; import gplx.dbs.qrys.bats.*;
+package gplx.dbs.engines; import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_url;
+import gplx.Keyval;
+import gplx.core.stores.DataRdr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_info;
+import gplx.dbs.Db_qry;
+import gplx.dbs.Db_qry_;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_rdr__basic;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Dbmeta_fld_itm;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.dbs.conn_props.Db_conn_props_mgr;
+import gplx.dbs.metas.Dbmeta_tbl_mgr;
+import gplx.dbs.qrys.Db_qry_sql;
+import gplx.dbs.qrys.Db_stmt_cmd;
+import gplx.dbs.qrys.bats.Db_batch_mgr;
+import gplx.dbs.sqls.Sql_qry_wtr;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 public abstract class Db_engine_sql_base implements Db_engine {
 	@gplx.Internal protected void Ctor(Db_conn_info conn_info) {this.conn_info = conn_info;}
 	public abstract String		Tid();
@@ -27,12 +51,14 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	public abstract				Db_engine New_clone(Db_conn_info conn_info);
 	public Db_rdr				Exec_as_rdr__rls_manual(Object rdr_obj, String sql)				{return New_rdr(null, rdr_obj, sql);}
 	public Db_rdr				Exec_as_rdr__rls_auto(Db_stmt stmt, Object rdr_obj, String sql)	{return New_rdr(stmt, rdr_obj, sql);}
-	@gplx.Virtual public 			Db_rdr New_rdr_clone() {return new Db_rdr__basic();}
-	@gplx.Virtual public Db_stmt		Stmt_by_qry(Db_qry qry) {return new Db_stmt_cmd(this, qry);}
-	@gplx.Virtual public void			Txn_bgn(String name)	{Exec_as_obj(Db_qry_sql.xtn_("BEGIN TRANSACTION;"));}
-	@gplx.Virtual public String		Txn_end()				{Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;")); batch_mgr.Txn_end().Run(this); return "";}
-	@gplx.Virtual public void			Txn_cxl()				{Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));}
-	@gplx.Virtual public void			Txn_sav() {
+	public 			Db_rdr New_rdr_clone() {return new Db_rdr__basic();}
+	public Db_stmt		Stmt_by_qry(Db_qry qry) {return new Db_stmt_cmd(this, qry);}
+	protected String Txn_bgn_str() {return "BEGIN TRANSACTION;";}
+	protected String Txn_end_str() {return "COMMIT TRANSACTION;";}
+	public void			Txn_bgn(String name)	{Exec_as_obj(Db_qry_sql.xtn_(this.Txn_bgn_str()));}
+	public String		Txn_end()				{Exec_as_obj(Db_qry_sql.xtn_(this.Txn_end_str())); batch_mgr.Txn_end().Run(this); return "";}
+	public void			Txn_cxl()				{Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));}
+	public void			Txn_sav() {
 		String txn_name = this.Txn_end();
 		this.Txn_bgn(txn_name);
 	}
@@ -68,7 +94,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		}
 		this.Meta_mgr().Load_all();
 	}
-	@gplx.Virtual public void Meta_idx_delete(String idx) {
+	public void Meta_idx_delete(String idx) {
 		if (Meta_idx_exists(idx)) Exec_as_int("DROP INDEX " + idx);
 	}
 	public void Meta_fld_append(String tbl, Dbmeta_fld_itm fld) {
@@ -82,14 +108,14 @@ public abstract class Db_engine_sql_base implements Db_engine {
 		}
 		this.Meta_mgr().Load_all();
 	}
-	@gplx.Virtual public boolean Meta_tbl_exists(String tbl)					{return false;}
-	@gplx.Virtual public boolean	Meta_fld_exists(String tbl, String fld)		{return false;}
-	@gplx.Virtual public boolean	Meta_idx_exists(String idx)					{return false;}
+	public boolean Meta_tbl_exists(String tbl)					{return false;}
+	public boolean	Meta_fld_exists(String tbl, String fld)		{return false;}
+	public boolean	Meta_idx_exists(String idx)					{return false;}
 	public abstract Dbmeta_tbl_mgr Meta_mgr();
-	@gplx.Virtual public void Env_db_attach(String alias, Io_url db_url)	{}
-	@gplx.Virtual public void Env_db_attach(String alias, Db_conn db_url)	{}
-	@gplx.Virtual public void	Env_db_detach(String alias)					{}
-	@gplx.Virtual public DataRdr New_rdr(ResultSet rdr, String sql)		{return gplx.core.stores.Db_data_rdr_.new_(rdr, sql);}
+	public void Env_db_attach(String alias, Io_url db_url)	{}
+	public void Env_db_attach(String alias, Db_conn db_url)	{}
+	public void	Env_db_detach(String alias)					{}
+	public DataRdr New_rdr(ResultSet rdr, String sql)		{return gplx.core.stores.Db_data_rdr_.new_(rdr, sql);}
 	private Db_rdr New_rdr(Db_stmt stmt, Object rdr, String sql) {
 		Db_rdr__basic rv = (Db_rdr__basic)New_rdr_clone();	
 		rv.Ctor(stmt, (ResultSet)rdr, sql);	

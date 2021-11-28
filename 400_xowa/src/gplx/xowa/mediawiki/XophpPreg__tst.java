@@ -17,9 +17,9 @@ package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*;
 public class XophpPreg__tst {
 	private final    XophpPreg__fxt fxt = new XophpPreg__fxt();
-	@Test  public void Basic()         {fxt.Test_split("a''b''c"          , "''", Bool_.Y, "a", "''", "b", "''", "c");}
-	@Test  public void Extend()        {fxt.Test_split("a'''b'''c"        , "''", Bool_.Y, "a", "'''", "b", "'''", "c");}
-	@Test  public void Eos()           {fxt.Test_split("a''"              , "''", Bool_.Y, "a", "''");}
+	@Test public void Basic()         {fxt.Test_split("a''b''c"          , "''", Bool_.Y, "a", "''", "b", "''", "c");}
+	@Test public void Extend()        {fxt.Test_split("a'''b'''c"        , "''", Bool_.Y, "a", "'''", "b", "'''", "c");}
+	@Test public void Eos()           {fxt.Test_split("a''"              , "''", Bool_.Y, "a", "''");}
 }
 class XophpPreg__fxt {
 	private final    gplx.core.primitives.Int_list rv = new gplx.core.primitives.Int_list();

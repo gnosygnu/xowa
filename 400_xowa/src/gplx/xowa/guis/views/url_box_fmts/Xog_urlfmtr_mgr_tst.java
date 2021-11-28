@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.apps.urls.*;
 public class Xog_urlfmtr_mgr_tst {
 	private Xog_urlfmtr_mgr_fxt fxt = new Xog_urlfmtr_mgr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		String fmt_suffix = "domain:~{wiki_domain}; page_unders:~{page_title_unders}; page_spaces:~{page_title_spaces}";
 		fxt.Init__init_by_parse
 		( "*|wild -- " + fmt_suffix
@@ -29,7 +29,7 @@ public class Xog_urlfmtr_mgr_tst {
 		fxt.Test__gen_or_null("de.wikibooks.org/wiki/Page_1", "de.b -- domain:de.wikibooks.org; page_unders:Page_1; page_spaces:Page 1");
 		fxt.Test__gen_or_null("fr.wikibooks.org/wiki/Page_1", "wild -- domain:fr.wikibooks.org; page_unders:Page_1; page_spaces:Page 1");
 	}
-	@Test  public void Wildcard_default() {
+	@Test public void Wildcard_default() {
 		String fmt_suffix = "domain:~{wiki_domain}; page_unders:~{page_title_unders}; page_spaces:~{page_title_spaces}";
 		fxt.Init__init_by_parse
 		( "en.wikipedia.org|en.w -- " + fmt_suffix

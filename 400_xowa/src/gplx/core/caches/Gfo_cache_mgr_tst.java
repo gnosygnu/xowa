@@ -17,17 +17,17 @@ package gplx.core.caches; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.envs.*;
 public class Gfo_cache_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final    Gfo_cache_mgr_fxt fxt = new Gfo_cache_mgr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Exec__add("a");
 		fxt.Test__cur_size(1);
 		fxt.Test__itms("a");
 	}
-	@Test  public void Reduce() {
+	@Test public void Reduce() {
 		fxt.Exec__add("a", "b", "c", "d", "e");
 		fxt.Test__cur_size(2);
 		fxt.Test__itms("a", "b");
 	}
-	@Test  public void Reduce_after_get() {
+	@Test public void Reduce_after_get() {
 		fxt.Exec__add("a", "b", "c", "d");
 		fxt.Exec__get("a", "c");
 		fxt.Exec__add("e");

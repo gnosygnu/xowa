@@ -18,14 +18,14 @@ import org.junit.*;
 public class Xop_tblw_wkr__double_pipe_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void No_tblw() {			// PURPOSE: if || has no tblw, treat as lnki; none; DATE:2014-05-06
+	@Test public void No_tblw() {			// PURPOSE: if || has no tblw, treat as lnki; none; DATE:2014-05-06
 		fxt.Test_parse_page_all_str("[[A||b|c]]", String_.Concat_lines_nl_skip_last
 		( "<p><a href=\"/wiki/A\">b|c</a>"	// NOTE: technically this should be "|b|c", but difficult to implement; DATE:2014-05-06
 		, "</p>"
 		, ""
 		));
 	}
-	@Test  public void Lnki_nth() {	// PURPOSE: if || is nth pipe, then treat as lnki; PAGE:en.w:Main_Page;de.w:Main_Page; DATE:2014-05-06
+	@Test public void Lnki_nth() {	// PURPOSE: if || is nth pipe, then treat as lnki; PAGE:en.w:Main_Page;de.w:Main_Page; DATE:2014-05-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|[[File:A.png|b||c]]"
@@ -41,7 +41,7 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		)
 		);
 	}
-	@Test  public void Lnki_list_1st() {	// PURPOSE: if || is 1st pipe, but inside list, then treat as lnki; EX:w:Second_Boer_War; DATE:2014-05-05
+	@Test public void Lnki_list_1st() {	// PURPOSE: if || is 1st pipe, but inside list, then treat as lnki; EX:w:Second_Boer_War; DATE:2014-05-05
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|"
@@ -63,7 +63,7 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		)
 		);
 	}
-	@Test  public void Double_bang_lnki() {	// PURPOSE: do not treat !! as tblw; PAGE:en.w:Pink_(singer); DATE:2014-06-25
+	@Test public void Double_bang_lnki() {	// PURPOSE: do not treat !! as tblw; PAGE:en.w:Pink_(singer); DATE:2014-06-25
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|"
@@ -83,7 +83,7 @@ public class Xop_tblw_wkr__double_pipe_tst {
 		)
 		);
 	}
-	@Test  public void Double_bang_list() {	// PURPOSE: do not treat !! as tblw; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-10-19
+	@Test public void Double_bang_list() {	// PURPOSE: do not treat !! as tblw; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-10-19
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "* a !! b"

@@ -17,11 +17,11 @@ package gplx.objects.strings; import gplx.*; import gplx.objects.*;
 import org.junit.*; import gplx.tests.*;
 public class String__tst {
 	private final    String__fxt fxt = new String__fxt();
-	@Test  public void Len() {
+	@Test public void Len() {
 		fxt.Test__Len(""   , 0);
 		fxt.Test__Len("abc", 3);
 	}
-	@Test  public void Format() {
+	@Test public void Format() {
 		fxt.Test__Format(""        , "");                      // empty fmt
 		fxt.Test__Format(""        , "", "a");                 // empty fmt w/ args
 		fxt.Test__Format("a"       , "a");                     // no args

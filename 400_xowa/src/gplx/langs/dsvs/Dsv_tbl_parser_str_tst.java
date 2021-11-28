@@ -17,7 +17,7 @@ package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Dsv_tbl_parser_str_tst {
 	private Dsv_mok_fxt fxt = new Dsv_mok_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt	.Test_load(String_.Concat_lines_nl_skip_last
 		( "a|A"
 		, "b|B"
@@ -27,7 +27,7 @@ public class Dsv_tbl_parser_str_tst {
 		, fxt.itm_str_("b", "B")
 		);
 	}
-	@Test  public void Blank_lines() {
+	@Test public void Blank_lines() {
 		fxt	.Test_load(String_.Concat_lines_nl_skip_last
 		( ""
 		, "a|A"
@@ -40,7 +40,7 @@ public class Dsv_tbl_parser_str_tst {
 		, fxt.itm_str_("b", "B")
 		);
 	}
-	@Test  public void Incomplete_row() {
+	@Test public void Incomplete_row() {
 		fxt	.Test_load(String_.Concat_lines_nl_skip_last
 		( "a"
 		, "b"
@@ -51,7 +51,7 @@ public class Dsv_tbl_parser_str_tst {
 		, fxt.itm_str_("b")
 		);
 	}
-	@Test  public void Incomplete_row_2() {	// PURPOSE: handle multiple incomplete cells
+	@Test public void Incomplete_row_2() {	// PURPOSE: handle multiple incomplete cells
 		fxt	.Test_load(String_.Concat_lines_nl_skip_last
 		( "a|")
 		, fxt.mgr_str_(3)

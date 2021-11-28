@@ -19,24 +19,24 @@ public class z011_IntObjHash_tst {
 	@Before public void setup() {
 		hash = new IntObjHash_base();
 	}	IntObjHash_base hash;
-	@Test  public void Empty() {
+	@Test public void Empty() {
 		tst_Count(0);
 		tst_Fetch(1, null);
 	}
-	@Test  public void Add() {
+	@Test public void Add() {
 		hash.Add(1, "1");
 		tst_Count(1);
 		tst_Fetch(1, "1");
 		tst_Fetch(2, null);
 	}
-	@Test  public void Del() {
+	@Test public void Del() {
 		hash.Add(1, "1");
 
 		hash.Del(1);
 		tst_Count(0);
 		tst_Fetch(1, null);
 	}
-	@Test  public void Clear() {
+	@Test public void Clear() {
 		hash.Add(1, "1");
 		hash.Add(32, "32");
 		tst_Fetch(1, "1");
@@ -48,7 +48,7 @@ public class z011_IntObjHash_tst {
 		tst_Fetch(2, null);
 		tst_Fetch(32, null);
 	}
-	@Test  public void Add_bug() { // fails after expanding ary, and fetching at key=n*16
+	@Test public void Add_bug() { // fails after expanding ary, and fetching at key=n*16
 		hash.Add(1, "1");
 		tst_Count(1);
 		tst_Fetch(1, "1");

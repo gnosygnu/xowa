@@ -18,10 +18,10 @@ import org.junit.*; import gplx.xowa.langs.*;
 public class Pfunc_grammar_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
-	@Test  public void English() {// for now, mark unimplemented langs by returning not_found; [[Template:grammar]]; wait for users to report
+	@Test public void English() {// for now, mark unimplemented langs by returning not_found; [[Template:grammar]]; wait for users to report
 		fxt	.Test_parse_tmpl_str_test ("{{grammar:a|b}}"			, "{{test}}", "[[:Template:grammar]]");
 	}
-	@Test  public void Finnish() {
+	@Test public void Finnish() {
 		fxt.Lang_by_id_(Xol_lang_stub_.Id_fi);
 		fxt.Reset().Test_html_full_str("{{grammar:elative|Wikiuutiset}}"		, "Wikiuutisista");
 		fxt.Reset().Test_html_full_str("{{grammar:talo}}"						, "");
@@ -36,7 +36,7 @@ public class Pfunc_grammar_tst {
 		fxt.Reset().Test_html_full_str("{{grammar:partitive|sängy}}"			, "sängyä");
 		fxt.Reset().Test_html_full_str("{{grammar:illative|sängy}}"				, "sängyyn");
 	}
-	@Test  public void Russian() {
+	@Test public void Russian() {
 		fxt.Lang_by_id_(Xol_lang_stub_.Id_ru);
 		fxt.Reset().Test_html_full_str("{{grammar:unknown}}"					, "");
 		fxt.Reset().Test_html_full_str("{{grammar:genitive|aвики}}"				, "aвики");
@@ -52,7 +52,7 @@ public class Pfunc_grammar_tst {
 		fxt.Reset().Test_html_full_str("{{grammar:instrumental|a}}"				, "a");
 		fxt.Reset().Test_html_full_str("{{grammar:prepositional|a}}"			, "a");
 	}
-	@Test  public void Hebrew() {
+	@Test public void Hebrew() {
 		fxt.Lang_by_id_(Xol_lang_stub_.Id_he);
 		fxt.Reset().Test_html_full_str("{{grammar:unknown|abc}}"				, "abc");
 		fxt.Reset().Test_html_full_str("{{grammar:prefixed|וabc}}"				, "ווabc");	// waw: add ו

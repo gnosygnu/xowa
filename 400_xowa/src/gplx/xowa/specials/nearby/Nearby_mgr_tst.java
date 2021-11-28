@@ -17,24 +17,24 @@ package gplx.xowa.specials.nearby; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*;
 public class Nearby_mgr_tst {
 	@Before public void init() {fxt.Clear();} Nearby_mgr_fxt fxt = new Nearby_mgr_fxt(); 
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init_page("A", "[[B]]");
 		fxt.Test_find("A", "B", "A|B");
 	}
-	@Test  public void Shortest() {
+	@Test public void Shortest() {
 		fxt.Init_page("A", "[[B]]");
 		fxt.Init_page("B", "[[C]] [[D]]");
 		fxt.Init_page("C", "[[D]]");
 		fxt.Test_find("A", "D", "A|B|D");
 		fxt.Init_results_max(2).Test_find("A", "D", "A|B|D", "A|B|C|D");
 	}
-	@Test  public void Circular() {
+	@Test public void Circular() {
 		fxt.Init_page("A", "[[B]]");
 		fxt.Init_page("B", "[[C]]");
 		fxt.Init_page("C", "[[A]]");
 		fxt.Test_find("A", "D", "");
 	}
-	@Test  public void Page_doesnt_exist() {
+	@Test public void Page_doesnt_exist() {
 		fxt.Init_page("A", "[[B]]");
 		fxt.Test_find("A", "C", "");
 	}

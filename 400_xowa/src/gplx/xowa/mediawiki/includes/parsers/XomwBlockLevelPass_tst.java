@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.linkers.*;
 public class XomwBlockLevelPass_tst {
 	private final    XomwBlockLevelPass_fxt fxt = new XomwBlockLevelPass_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__do_block_levels(String_.Concat_lines_nl_skip_last
 		( "a"
 		), String_.Concat_lines_nl_skip_last

@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.core.ios.*;
 public class Xoi_firefox_installer_tst {
 	private Xoi_firefox_pref_fxt fxt = new Xoi_firefox_pref_fxt();
-	@Test  public void Pref_update() {
+	@Test public void Pref_update() {
 		fxt.Test_pref_update(String_.Concat_lines_nl
 		(	"pref(\"key_0\", \"val_0\"); // comment_0"
 		,	"pref(\"key_1\", \"val_1\"); // comment_1"

@@ -17,7 +17,7 @@ package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class BinaryHeap_Io_line_rdr_tst {
 	BinaryHeap_Io_line_rdr_fxt fxt = new BinaryHeap_Io_line_rdr_fxt();
-	@Test  public void Add() {
+	@Test public void Add() {
 		fxt.Add("c", "a", "b").tst("a", "b", "c");
 		fxt.Add("b", "a", "a").tst("a", "a", "b");
 		fxt.Add("f", "b", "d", "c", "e", "a").tst("a", "b", "c", "d", "e", "f");

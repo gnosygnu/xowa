@@ -24,7 +24,7 @@ public abstract class GfxItm_base implements GfxItm {
 		GfxItm_base comp = GfxItm_base.as_(obj); if (comp == null) return false;
 		return Object_.Eq(pos, comp.pos) && Object_.Eq(size, comp.size);
 	}
-	@gplx.Virtual public void ctor_GfxItmBase(PointAdp posVal, SizeAdp sizeVal) {
+	public void ctor_GfxItmBase(PointAdp posVal, SizeAdp sizeVal) {
 		pos = posVal; size = sizeVal;
 	}
 	public static GfxItm_base as_(Object obj) {return obj instanceof GfxItm_base ? (GfxItm_base)obj : null;}

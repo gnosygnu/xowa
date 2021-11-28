@@ -23,7 +23,7 @@ public class z103_core_elmKey_tst {
 			,	GfmlDocLxrs.ElmKey_lxr()
 			);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Doc("a=b;", fx.nde_().Atrk_("a", "b"));
 		fx.tst_Tkn("a=b;"
 			, fx.tkn_grp_
@@ -32,7 +32,7 @@ public class z103_core_elmKey_tst {
 			)
 			);
 	}
-	@Test  public void Ws() {
+	@Test public void Ws() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.Whitespace_lxr());
 		fx.tst_Tkn("a = b;"
 			, fx.tkn_grp_
@@ -41,10 +41,10 @@ public class z103_core_elmKey_tst {
 			)
 			);
 	}
-//		@Test  public void Err_NotNamed() {
+//		@Test public void Err_NotNamed() {
 //			fx.tst_Err("=", GfmlOutCmds.DatTkn_notFound_Err_());
 //		}
-//		@Test  public void Err_NotValued() {
+//		@Test public void Err_NotValued() {
 //			fx.tst_Err("a=;", GfmlOutCmds.elmKey_notValued_Err());
 //		}
 }

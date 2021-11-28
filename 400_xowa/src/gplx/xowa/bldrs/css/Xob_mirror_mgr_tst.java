@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.xowa.files.downloads.*;
 public class Xob_mirror_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xob_mirror_mgr_fxt fxt = new Xob_mirror_mgr_fxt();
-	@Test   public void Download_1() {
+	@Test  public void Download_1() {
 		fxt.Fsys().Init_fil("mem/http/enwiki/file/a.png");
 		fxt.Fsys().Init_fil("mem/http/enwiki/wiki/Main_Page", "url('//enwiki/wiki/a.png')");
 //			fxt.Test_css();

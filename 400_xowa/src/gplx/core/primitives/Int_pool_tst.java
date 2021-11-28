@@ -18,20 +18,20 @@ import org.junit.*;
 public class Int_pool_tst {
 	private final Int_pool_tstr tstr = new Int_pool_tstr();
 	@Before public void init() {tstr.Clear();}
-	@Test  public void Get__one() {
+	@Test public void Get__one() {
 		tstr.Test_get(0);
 	}
-	@Test  public void Get__many() {
+	@Test public void Get__many() {
 		tstr.Test_get(0);
 		tstr.Test_get(1);
 		tstr.Test_get(2);
 	}
-	@Test  public void Del__one() {
+	@Test public void Del__one() {
 		tstr.Test_get(0);
 		tstr.Exec_del(0);
 		tstr.Test_get(0);
 	}
-	@Test  public void Del__sequential() {
+	@Test public void Del__sequential() {
 		tstr.Test_get(0);
 		tstr.Test_get(1);
 		tstr.Test_get(2);
@@ -40,7 +40,7 @@ public class Int_pool_tst {
 		tstr.Exec_del(1);
 		tstr.Exec_del(0).Test_get(0);
 	}
-	@Test  public void Del__out_of_order() {
+	@Test public void Del__out_of_order() {
 		tstr.Test_get(0);
 		tstr.Test_get(1);
 		tstr.Test_get(2);
@@ -50,7 +50,7 @@ public class Int_pool_tst {
 		tstr.Exec_del(2);
 		tstr.Test_get(0);
 	}
-	@Test  public void Del__out_of_order_2() {
+	@Test public void Del__out_of_order_2() {
 		tstr.Test_get(0);
 		tstr.Test_get(1);
 		tstr.Test_get(2);

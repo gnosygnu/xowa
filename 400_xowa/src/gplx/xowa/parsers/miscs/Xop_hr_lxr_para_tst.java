@@ -17,7 +17,7 @@ package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Xop_hr_lxr_para_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
-	@Test   public void Bos()	{	// PURPOSE: check that bos rendered correctly; DATE:2014-04-18
+	@Test  public void Bos()	{	// PURPOSE: check that bos rendered correctly; DATE:2014-04-18
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "----"
 		, "a"
@@ -28,7 +28,7 @@ public class Xop_hr_lxr_para_tst {
 		, "</p>"
 		));
 	}
-	@Test   public void Multiple()	{	// PURPOSE.fix: hr disables para for rest of page; ca.b:Xarxes; DATE:2014-04-18
+	@Test  public void Multiple()	{	// PURPOSE.fix: hr disables para for rest of page; ca.b:Xarxes; DATE:2014-04-18
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, "----"

@@ -17,8 +17,8 @@ package gplx.xowa.xtns.pfuncs.stringutils; import gplx.*; import gplx.xowa.*; im
 import org.junit.*;
 public class Pfunc_len_tst {
 	@Before public void init()						{fxt.Reset();} private final Xop_fxt fxt = Xop_fxt.new_nonwmf();
-	@Test   public void Basic()						{fxt.Test_parse_template("{{#len:abc}}"				, "3");}
-	@Test   public void Empty()						{fxt.Test_parse_template("{{#len:}}"				, "0");}
-	@Test   public void Utf8_2()					{fxt.Test_parse_template("{{#len:Ĉ}}"				, "1");}
-	@Test   public void Utf8_3()					{fxt.Test_parse_template("{{#len:Ⱥ}}"				, "1");}
+	@Test  public void Basic()						{fxt.Test_parse_template("{{#len:abc}}"				, "3");}
+	@Test  public void Empty()						{fxt.Test_parse_template("{{#len:}}"				, "0");}
+	@Test  public void Utf8_2()					{fxt.Test_parse_template("{{#len:Ĉ}}"				, "1");}
+	@Test  public void Utf8_3()					{fxt.Test_parse_template("{{#len:Ⱥ}}"				, "1");}
 }

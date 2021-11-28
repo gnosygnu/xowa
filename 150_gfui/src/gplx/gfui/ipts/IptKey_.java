@@ -13,11 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts;
+import gplx.Bool_;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.bits.Bitmask_;
+import gplx.core.envs.Op_sys;
+import gplx.core.primitives.EnmMgr;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.core.stores.DataRdr;
 import java.awt.event.KeyEvent;
-import gplx.core.primitives.*; import gplx.core.stores.*; import gplx.core.bits.*;
 public class IptKey_ {
-	private static EnmMgr enm_mgr = EnmMgr.new_().BitRngBgn_(65536).BitRngEnd_(262144).Prefix_("key.");
+	public static final int KeyCode_Shift = 65536, KeyCode_Ctrl = 131072, KeyCode_Alt = 262144, KeyCode_Meta = 524288;
+	private static EnmMgr enm_mgr = EnmMgr.new_().BitRngBgn_(KeyCode_Shift).BitRngEnd_(KeyCode_Meta).Prefix_("key.");
 	public static IptKey[] Ary(IptKey... ary) {return ary;}
 	public static final    IptKey[] Ary_empty = new IptKey[0];
 	public static IptKey as_(Object obj) {return obj instanceof IptKey ? (IptKey)obj : null;}
@@ -75,7 +88,6 @@ public class IptKey_ {
 		enm_mgr.RegObj(val, name, rv);
 		return rv;
 	}
-	public static final int KeyCode_Shift = 65536, KeyCode_Ctrl = 131072, KeyCode_Alt = 262144;
 	public static final    IptKey
 	// NOTE: integer values represent .NET keycodes; NOTE: SWT keycodes are converted to SWING keycodes in Swt_core_lnrs
 	// none
@@ -179,8 +191,15 @@ public class IptKey_ {
 	, Shift					= new_(KeyCode_Shift, "shift")
 	, Ctrl					= new_(KeyCode_Ctrl, "ctrl")
 	, Alt					= new_(KeyCode_Alt, "alt")
-	, ShiftKey				= new_(16, "shiftKey")			, CtrlKey = new_(17, "ctrlKey")		, AltKey = new_(18, "altKey")	// NOTE: used for .NET NPI
+	, Meta					= new_(KeyCode_Meta, "meta")
+	// NOTE: used for .NET NPI
+	, ShiftKey				= new_(16, "shiftKey")
+	, CtrlKey = new_(17, "ctrlKey")
+	, AltKey = new_(18, "altKey")
 	;
+	public static final IptKey
+		MOD_1ST = Op_sys.Cur().Tid_is_osx() ? Meta : Ctrl,
+		MOD_2ND = Alt;
 	private static Ordered_hash ui_str_hash;
 	public static Ordered_hash Ui_str_hash() {
 		if (ui_str_hash == null) {
@@ -222,9 +241,10 @@ public class IptKey_ {
 	public static String To_str(int orig_val) {
 		String mod_str = "", rv = "";
 		int temp_val = orig_val;
-		boolean mod_c = Bitmask_.Has_int(temp_val, IptKey_.Ctrl.Val());	if (mod_c) {mod_str += "c"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Ctrl.Val());}
-		boolean mod_a = Bitmask_.Has_int(temp_val, IptKey_.Alt.Val());		if (mod_a) {mod_str += "a"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Alt.Val());}
-		boolean mod_s = Bitmask_.Has_int(temp_val, IptKey_.Shift.Val());	if (mod_s) {mod_str += "s"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Shift.Val());}
+		boolean mod_c = Bitmask_.Has_int(temp_val, IptKey_.Ctrl.Val());	 if (mod_c) {mod_str += "c"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Ctrl.Val());}
+		boolean mod_a = Bitmask_.Has_int(temp_val, IptKey_.Alt.Val());	 if (mod_a) {mod_str += "a"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Alt.Val());}
+		boolean mod_s = Bitmask_.Has_int(temp_val, IptKey_.Shift.Val()); if (mod_s) {mod_str += "s"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Shift.Val());}
+		boolean mod_m = Bitmask_.Has_int(temp_val, IptKey_.Meta.Val());	 if (mod_m) {mod_str += "m"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Meta.Val());}
 		if (String_.Len_gt_0(mod_str)) {
 			rv = "mod." + mod_str;
 			// handle modifiers only, like "mod.cs"; else will be "mod.cs+key.#0"

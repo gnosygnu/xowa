@@ -17,12 +17,12 @@ package gplx.langs.htmls.clses; import gplx.*; import gplx.langs.*; import gplx.
 import org.junit.*;
 public class Gfh_class__tst {
 	private final Gfh_class__fxt fxt = new Gfh_class__fxt();
-	@Test   public void Has() {
+	@Test  public void Has() {
 		fxt.Test__has__y("a b c", "a", "b", "c");
 		fxt.Test__has__n("a b c", "d");
 		fxt.Test__has__n("ab", "a");
 	}
-	@Test   public void Cls__has__hash() {
+	@Test  public void Cls__has__hash() {
 		Hash_adp_bry hash = fxt.Make_hash("x", "y", "z");
 		fxt.Test__find_1st(hash,					0, "x");
 		fxt.Test__find_1st(hash,					2, "z");

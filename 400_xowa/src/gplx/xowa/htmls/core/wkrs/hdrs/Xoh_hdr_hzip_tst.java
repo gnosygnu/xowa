@@ -19,7 +19,7 @@ public class Xoh_hdr_hzip_tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Before public void init()		{Xoh_toc_mgr.Enabled = false;}
 	@After public void term()	{Xoh_toc_mgr.Enabled = true;}
-	@Test   public void Same() {
+	@Test  public void Same() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~\"'A~"
 		, "a"
@@ -28,7 +28,7 @@ public class Xoh_hdr_hzip_tst {
 		, "a"
 		));
 	}
-	@Test   public void Diff() {
+	@Test  public void Diff() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~\"+<i>A</i>~A~"
 		, "a"
@@ -37,7 +37,7 @@ public class Xoh_hdr_hzip_tst {
 		, "a"
 		));
 	}
-	@Test   public void Diff_by_underscore() {
+	@Test  public void Diff_by_underscore() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~\"#A 1~"
 		, "a"
@@ -46,7 +46,7 @@ public class Xoh_hdr_hzip_tst {
 		, "a"
 		));
 	}
-	@Test   public void Diff_by_lnki() {
+	@Test  public void Diff_by_lnki() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~\"+<a href=\"/wiki/Category:A\" title=\"Category:A\">Category:A</a>~Category:A~"
 		, "a"
@@ -55,7 +55,7 @@ public class Xoh_hdr_hzip_tst {
 		, "a"
 		));
 	}
-	@Test   public void Same_w_underscore() {
+	@Test  public void Same_w_underscore() {
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~\"#A_1~"
 		, "a"
@@ -64,13 +64,13 @@ public class Xoh_hdr_hzip_tst {
 		, "a"
 		));
 	}
-	@Test   public void Tidy__bad_end() {
+	@Test  public void Tidy__bad_end() {
 		fxt.Test__bicode(
 		"~\"?A~AB~B~"
 		, "<h6><span class='mw-headline' id='AB'>A</span>B</h6>"
 		);
 	}
-	@Test   public void Tidy__no_span() {	// PURPOSE.TIDY: tidy will duplicate hdr if content has center; will fail if span/div is nearby; EX: ==<center>A</center>==\n<span><div>; PAGE:en.s:On_the_Vital_Principle/Book_2/Prelude_to_Chapter_2 DATE:2016-01-21
+	@Test  public void Tidy__no_span() {	// PURPOSE.TIDY: tidy will duplicate hdr if content has center; will fail if span/div is nearby; EX: ==<center>A</center>==\n<span><div>; PAGE:en.s:On_the_Vital_Principle/Book_2/Prelude_to_Chapter_2 DATE:2016-01-21
 		fxt.Test__encode(String_.Concat_lines_nl_skip_last
 		( "\"+A"
 		, "<center>"
@@ -91,13 +91,13 @@ public class Xoh_hdr_hzip_tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Manual__no_id() {// PURPOSE: ignore manual "<h2>" with no id; PAGE:fr.w:Portail:Nord-Am�rindiens/Image_s�lectionn�e; DATE:2016-07-01
+	@Test  public void Manual__no_id() {// PURPOSE: ignore manual "<h2>" with no id; PAGE:fr.w:Portail:Nord-Am�rindiens/Image_s�lectionn�e; DATE:2016-07-01
 		fxt.Test__bicode
 		( "<h6><span class=\"mw-headline\">A</span></h6>"
 		, "<h6><span class='mw-headline'>A</span></h6>"
 		);
 	}
-	@Test   public void Manual__h_has_atrs() {// PURPOSE: ignore manual "<h2>" with atrs; PAGE:fr.w:Wikip�dia:LiveRC/ToDo; DATE:2016-07-02
+	@Test  public void Manual__h_has_atrs() {// PURPOSE: ignore manual "<h2>" with atrs; PAGE:fr.w:Wikip�dia:LiveRC/ToDo; DATE:2016-07-02
 		fxt.Test__bicode
 		( "<h6 style=\"color:red\"><span class=\"mw-headline\" id=\"A\">B</span></h6>"
 		, "<h6 style=\"color:red\"><span class=\"mw-headline\" id=\"A\">B</span></h6>"

@@ -21,7 +21,7 @@ public class z481_vars_compile_tst {
 		pragma = GfmlPragmaVar.new_();
 		fx.run_InitPragma(regy, pragma);
 	}	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_(); GfmlTypRegy regy; GfmlPragmaVar pragma;
-	@Test  public void Text1() {
+	@Test public void Text1() {
 		GfmlNde gnde = fx.run_Resolve(regy, "_var/text"
 			, fx.nde_().Atru_("key_test").Atru_("val_test").Atru_("context_test"));
 

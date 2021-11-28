@@ -17,7 +17,7 @@ package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Insider_func_tst {
 	@Before public void init()				{fxt.Reset();} private Insider_func_fxt fxt = new Insider_func_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse("{{#insider:A}}x{{#insider:B}}", "x", "A", "B");
 	}
 }

@@ -14,8 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import java.lang.*;
-import gplx.core.strings.*; import gplx.langs.gfs.*; import gplx.core.envs.*;
+import gplx.core.envs.Op_sys;
+import gplx.core.strings.String_bldr;
+import gplx.core.strings.String_bldr_;
 public class String_ {
 	// -------- BASELIB_COPY --------
 	public static final    Class<?> Cls_ref_type = String.class;
@@ -145,11 +146,10 @@ public class String_ {
 	public static int FindFwd(String s, String find, int bgn, int end)		{
 		int rv = FindFwd(s, find, bgn);
 		return rv > end ? String_.Find_none : rv;
-	}			
-	public static int FindBwd(String s, String find)						{return s.lastIndexOf(find);}			
-	public static int FindBwd(String s, String find, int pos)				{
-				return s.lastIndexOf(find, pos);
-			}
+	}
+	public static int FindBwdOr(String s, String find, int or)				{int pos = FindBwd(s, find); return pos == Pos_neg1 ? or : pos;}
+	public static int FindBwd(String s, String find)						{return s.lastIndexOf(find);}
+	public static int FindBwd(String s, String find, int pos)				{return s.lastIndexOf(find, pos);}
 	public static int FindBetween(String s, String find, int bgn, int end) {
 		int rv = FindFwd(s, find, bgn);
 		return (rv > end) ? String_.Find_none : rv;

@@ -20,8 +20,8 @@ import gplx.xowa.apps.*; import gplx.xowa.wikis.*; import gplx.xowa.files.origs.
 public class Xofv_file_mgr_tst {
 //		@Before public void init() {fxt.Clear();} private final Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
 	@After  public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
-	@Test  public void Stub() {}
-//		@Test   public void Thumb() {
+	@Test public void Stub() {}
+//		@Test  public void Thumb() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
@@ -31,7 +31,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(1);
 //				;
 //		}
-//		@Test   public void Orig() {
+//		@Test  public void Orig() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_orig("A.png", 440, 400))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_none(0, "A.png"))
@@ -41,7 +41,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(1);
 //				;
 //		}
-//		@Test   public void Img_size() {	// PURPOSE: test integration of Xof_img_size
+//		@Test  public void Img_size() {	// PURPOSE: test integration of Xof_img_size
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 110, 100))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", Xof_img_size.Null, Xof_img_size.Null).Upright_(.5f))
@@ -51,7 +51,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(1);
 //				;
 //		}
-//		@Test   public void Orig_mgr() {	// PURPOSE: test integration of Orig_mgr
+//		@Test  public void Orig_mgr() {	// PURPOSE: test integration of Orig_mgr
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm_redirect("B.jpg", "A.png", 440, 400))	// B.jpg redirects to A.png
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "B.jpg", 220, 200))
@@ -61,7 +61,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(1);
 //				;
 //		}
-//		@Test   public void Cache_exists() {
+//		@Test  public void Cache_exists() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
@@ -71,7 +71,7 @@ public class Xofv_file_mgr_tst {
 //				.Test_fsdb_download(0)	// skip download
 //				;
 //		}
-//		@Test   public void Cache_absent() {
+//		@Test  public void Cache_absent() {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))

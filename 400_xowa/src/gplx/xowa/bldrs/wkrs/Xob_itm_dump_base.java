@@ -36,7 +36,7 @@ public abstract class Xob_itm_dump_base extends Xob_itm_basic_base {
 		Io_mgr.Instance.DeleteDirDeep_ary(temp_dir, make_dir);
 		dump_url_gen = Io_url_gen_.dir_(temp_dir.GenSubDir("dump"));
 	}
-	@gplx.Virtual public void Term_dump(Io_sort_cmd make_cmd) {
+	public void Term_dump(Io_sort_cmd make_cmd) {
 		Io_mgr.Instance.AppendFilBfr(dump_url_gen.Nxt_url(), dump_bfr); dump_bfr.Rls();
 		Xobdc_merger.Basic(bldr.Usr_dlg(), dump_url_gen, temp_dir.GenSubDir("sort"), sort_mem_len, Io_line_rdr_key_gen_.first_pipe, make_cmd);
 	}

@@ -17,10 +17,10 @@ package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.x
 import org.junit.*; import gplx.core.tests.*;
 public class Pack_zip_name_bldr__tst {
 	private Pack_zip_name_bldr__fxt fxt = new Pack_zip_name_bldr__fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__to_wiki_url("mem/wiki/en.wikipedia.org/", "mem/wiki/en.wikipedia.org/tmp/Xowa_enwiki_2016-09_file_deletion_2016.09/", "mem/wiki/en.wikipedia.org/en.wikipedia.org-file-deletion-2016.09.xowa");
 	}
-	@Test   public void Bld_by_suffix() {
+	@Test  public void Bld_by_suffix() {
 		Pack_zip_name_bldr bldr = fxt.Make__bldr("mem/wiki/en.wikipedia.org/tmp/pack/", "en.wikipedia.org", "enwiki", "2017-03", null);
 		fxt.Test__bld_by_suffix(bldr, "xtn.fulltext_search", 1, "mem/wiki/en.wikipedia.org/tmp/pack/Xowa_enwiki_2017-03_xtn.fulltext_search.002.zip");
 	}

@@ -17,26 +17,26 @@ package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
 import org.junit.*; import gplx.core.strings.*;
 public class Gfs_msg_bldr_tst {
 	@Before public void init() {fxt.Clear();} Gfs_msg_bldr_fxt fxt = new Gfs_msg_bldr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_build("a;", fxt.msg_("a"));
 	}
-	@Test  public void Dot() {
+	@Test public void Dot() {
 		fxt.Test_build("a.b.c;"
 		, fxt.msg_("a").Subs_
 		(	fxt.msg_("b").Subs_
 		(		fxt.msg_("c")
 		)));
 	}
-	@Test  public void Args() {
+	@Test public void Args() {
 		fxt.Test_build("a('b', 'c');", fxt.msg_("a", fxt.kv_("", "b"), fxt.kv_("", "c")));
 	}
-	@Test  public void Args_num() {
+	@Test public void Args_num() {
 		fxt.Test_build("a(1);", fxt.msg_("a", fxt.kv_("", "1")));
 	}
-	@Test   public void Assign() {
+	@Test  public void Assign() {
 		fxt.Test_build("a = 'b';", fxt.msg_("a_", fxt.kv_("", "b")));
 	}
-	@Test   public void Assign_num() {
+	@Test  public void Assign_num() {
 		fxt.Test_build("a = 1;", fxt.msg_("a_", fxt.kv_("", "1")));
 	}
 }

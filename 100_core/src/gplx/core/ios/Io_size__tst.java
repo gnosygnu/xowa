@@ -17,7 +17,7 @@ package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Io_size__tst {
 	private Io_size__fxt fxt = new Io_size__fxt();
-	@Test    public void XtoLong() {
+	@Test   public void XtoLong() {
 		fxt.Test_XtoLong("1", 1);
 		fxt.Test_XtoLong("1 KB", 1024);
 		fxt.Test_XtoLong("1 MB", 1024 * 1024);
@@ -32,21 +32,21 @@ public class Io_size__tst {
 		// fxt.Test_XtoLongFail("1.1");	// DELETED:do not check for fractional bytes; EX: 10.7 GB DATE:2015-01-06
 		// fxt.Test_XtoLongFail("1.51 kb");
 	}
-	@Test    public void To_str() {
+	@Test   public void To_str() {
 		fxt.Test_XtoStr(1, "1.000  B");
 		fxt.Test_XtoStr(1024, "1.000 KB");
 		fxt.Test_XtoStr(1536, "1.500 KB");
 		fxt.Test_XtoStr(1024 * 1024, "1.000 MB");
 		fxt.Test_XtoStr(1016, "1,016.000  B");	// NOTE: 1016 is not 1.016 KB
 	}
-	@Test    public void Xto_str_full() {
+	@Test   public void Xto_str_full() {
 		fxt.Test_Xto_str(       500, 1, "#,###", " ", Bool_.Y,             "1 KB");
 		fxt.Test_Xto_str(      1000, 1, "#,###", " ", Bool_.Y,             "1 KB");
 		fxt.Test_Xto_str(      2000, 1, "#,###", " ", Bool_.Y,             "2 KB");
 		fxt.Test_Xto_str(   1234567, 1, "#,###", " ", Bool_.Y,         "1,206 KB");
 		fxt.Test_Xto_str(1234567890, 1, "#,###", " ", Bool_.Y,     "1,205,633 KB");
 	}
-	@Test    public void EqualsTest() {
+	@Test   public void EqualsTest() {
 		fxt.Test_Equals("1", "1");
 		fxt.Test_Equals("1 kb", "1 kb");
 		fxt.Test_Equals("1024", "1 kb");
@@ -54,18 +54,18 @@ public class Io_size__tst {
 		fxt.Test_Equals("1024 kb", "1 mb");
 		fxt.Test_Equals("1.5 kb", "1536 b");
 	}
-	@Test    public void To_str_new___b___0()			{fxt.Test__to_str_new(           0, 2,    "0 B");}
-	@Test    public void To_str_new___b___1()			{fxt.Test__to_str_new(           1, 2,    "1 B");}
-	@Test    public void To_str_new__kb___1_501__1()	{fxt.Test__to_str_new(        1538, 1,    "1.5 KB");}
-	@Test    public void To_str_new__kb___1_501__2()	{fxt.Test__to_str_new(        1538, 2,    "1.50 KB");}
-	@Test    public void To_str_new__kb___1_501__3()	{fxt.Test__to_str_new(        1538, 3,    "1.501 KB");}
-	@Test    public void To_str_new__kb___1_512__1()	{fxt.Test__to_str_new(        1549, 1,    "1.5 KB");}
-	@Test    public void To_str_new__kb___1_512__2()	{fxt.Test__to_str_new(        1549, 2,    "1.51 KB");}
-	@Test    public void To_str_new__kb___1_512__3()	{fxt.Test__to_str_new(        1549, 3,    "1.512 KB");}
-	@Test    public void To_str_new__mb___1_512__1()	{fxt.Test__to_str_new((1024 * 1024) + 536871, 1,    "1.5 MB");}
-	@Test    public void To_str_new__mb___1_512__2()	{fxt.Test__to_str_new((1024 * 1024) + 536871, 2,    "1.51 MB");}
-	@Test    public void To_str_new__mb___1_512__3()	{fxt.Test__to_str_new((1024 * 1024) + 536871, 3,    "1.512 MB");}
-	@Test    public void To_str_new__gb___1()			{fxt.Test__to_str_new(1819264175, 2,    "1.69 GB");}
+	@Test   public void To_str_new___b___0()			{fxt.Test__to_str_new(           0, 2,    "0 B");}
+	@Test   public void To_str_new___b___1()			{fxt.Test__to_str_new(           1, 2,    "1 B");}
+	@Test   public void To_str_new__kb___1_501__1()	{fxt.Test__to_str_new(        1538, 1,    "1.5 KB");}
+	@Test   public void To_str_new__kb___1_501__2()	{fxt.Test__to_str_new(        1538, 2,    "1.50 KB");}
+	@Test   public void To_str_new__kb___1_501__3()	{fxt.Test__to_str_new(        1538, 3,    "1.501 KB");}
+	@Test   public void To_str_new__kb___1_512__1()	{fxt.Test__to_str_new(        1549, 1,    "1.5 KB");}
+	@Test   public void To_str_new__kb___1_512__2()	{fxt.Test__to_str_new(        1549, 2,    "1.51 KB");}
+	@Test   public void To_str_new__kb___1_512__3()	{fxt.Test__to_str_new(        1549, 3,    "1.512 KB");}
+	@Test   public void To_str_new__mb___1_512__1()	{fxt.Test__to_str_new((1024 * 1024) + 536871, 1,    "1.5 MB");}
+	@Test   public void To_str_new__mb___1_512__2()	{fxt.Test__to_str_new((1024 * 1024) + 536871, 2,    "1.51 MB");}
+	@Test   public void To_str_new__mb___1_512__3()	{fxt.Test__to_str_new((1024 * 1024) + 536871, 3,    "1.512 MB");}
+	@Test   public void To_str_new__gb___1()			{fxt.Test__to_str_new(1819264175, 2,    "1.69 GB");}
 }
 class Io_size__fxt {
 	public void Test_XtoLong(String raw, long expd) {Tfds.Eq(expd, Io_size_.parse_or(raw, Long_.Min_value));}

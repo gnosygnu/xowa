@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.texts; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class BaseXXConverter_tst {
-	@Test  public void Base32() {
+	@Test public void Base32() {
 		tst_Base32("", "");
 		tst_Base32("f", "MY");
 		tst_Base32("fo", "MZXQ");
@@ -28,7 +28,7 @@ public class BaseXXConverter_tst {
 		tst_Base32("a", "ME");
 		tst_Base32("ABCDEFGHIJKLMNOPQRSTUVWXYZ234567", "IFBEGRCFIZDUQSKKJNGE2TSPKBIVEU2UKVLFOWCZLIZDGNBVGY3Q");
 	}
-	@Test  public void Base64() {
+	@Test public void Base64() {
 		tst_Base64("", "");
 		tst_Base64("f", "Zg==");
 		tst_Base64("fo", "Zm8=");

@@ -17,7 +17,7 @@ package gplx.objects.primitives; import gplx.*; import gplx.objects.*;
 import org.junit.*; import gplx.tests.*;
 public class Int__tst {
 	private final    Int__fxt fxt = new Int__fxt();
-	@Test  public void Parse_or() {			
+	@Test public void Parse_or() {
 		fxt.Test__Parse_or("123", 123);            // basic			
 		fxt.Test__Parse_or_min_value(null);        // null			
 		fxt.Test__Parse_or_min_value("");          // empty			
@@ -26,20 +26,20 @@ public class Int__tst {
 		fxt.Test__Parse_or("-123", -123);          // negative
 		fxt.Test__Parse_or_min_value("1-23");      // negative at invalid position
 	}
-	@Test  public void Between() {
+	@Test public void Between() {
 		fxt.Test__Between(1, 0, 2, true);   // simple true
 		fxt.Test__Between(3, 0, 2, false);  // simple false
 		fxt.Test__Between(0, 0, 2, true);   // bgn true
 		fxt.Test__Between(2, 0, 2, true);   // end true
 	}
-	@Test  public void Count_digits() {
+	@Test public void Count_digits() {
 		fxt.Test__Count_digits(   0, 1);
 		fxt.Test__Count_digits(   9, 1);
 		fxt.Test__Count_digits( 100, 3);
 		fxt.Test__Count_digits(  -1, 2);
 		fxt.Test__Count_digits(-100, 4);
 	}
-	@Test  public void Log10() {
+	@Test public void Log10() {
 		fxt.Test__Log10(             0,  0);
 		fxt.Test__Log10(             1,  0);
 		fxt.Test__Log10(             2,  0);

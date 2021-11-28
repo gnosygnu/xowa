@@ -18,14 +18,14 @@ import org.junit.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*;
 public class Xosrv_msg_rdr_tst {
 	@Before public void init() {fxt.Clear();} private Xosrv_msg_rdr_fxt fxt = new Xosrv_msg_rdr_fxt();
-	@Test  public void Parse() {
+	@Test public void Parse() {
 		String raw = "0|0000000045|0000000091|cmd_0|id_0|sender_0|recipient_0|date_0|text_0";
 		Xosrv_msg msg = fxt.Test_parse_msg(raw, "cmd_0", "id_0", "sender_0", "recipient_0", "date_0", "text_0");
 		fxt.Test_print(msg, raw);
 	}
-	@Test   public void Err_header_is_invalid() 			{fxt.Test_parse_err("abcde", "header is invalid");}
-	@Test   public void Err_checksum_failed() 				{fxt.Test_parse_err("0|0000000000|0000000000|", "checksum failed");}
-	@Test   public void Err_cmd_missing() 					{fxt.Test_parse_err("0|0000000001|0000000003|a", "pipe not found for cmd_name");}
+	@Test  public void Err_header_is_invalid() 			{fxt.Test_parse_err("abcde", "header is invalid");}
+	@Test  public void Err_checksum_failed() 				{fxt.Test_parse_err("0|0000000000|0000000000|", "checksum failed");}
+	@Test  public void Err_cmd_missing() 					{fxt.Test_parse_err("0|0000000001|0000000003|a", "pipe not found for cmd_name");}
 }
 class Xosrv_msg_rdr_fxt {
 	public Xosrv_msg_rdr_fxt Clear() {

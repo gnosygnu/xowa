@@ -23,10 +23,10 @@ public class z124_quotes_quoteFold_tst {
 			,	GfmlDocLxrs.QuoteFold_lxr()
 			);
 	}
-	@Test  public void Quote() {
+	@Test public void Quote() {
 		fx.tst_Doc("^'a b'^;", fx.nde_().Atru_("a b"));
 	}
-	@Test  public void Tab() {
+	@Test public void Tab() {
 		fx.tst_Doc("^'a\tb'^;", fx.nde_().Atru_("ab"));
 		fx.tst_Tkn("^'a\tb'^;"
 			,	fx.tkn_grp_
@@ -35,25 +35,25 @@ public class z124_quotes_quoteFold_tst {
 			,		fx.tkn_itm_(";"))
 			);
 	}
-	@Test  public void NewLine() {
+	@Test public void NewLine() {
 		fx.tst_Doc(String_.Concat("^'a", String_.CrLf, "b'^;"), fx.nde_().Atru_("ab"));
 	}
-	@Test  public void Eval() {
+	@Test public void Eval() {
 		fx.tst_Doc("^'a<~t>b'^;", fx.nde_().Atru_("a\tb"));
 	}
-	@Test  public void Nest() {
+	@Test public void Nest() {
 		fx.tst_Doc("^'a^'-'^b'^;", fx.nde_().Atru_("a-b"));
 	}
-	@Test  public void EscapeBgn() {
+	@Test public void EscapeBgn() {
 		fx.tst_Doc("^'a^'^'b'^;", fx.nde_().Atru_("a^'b"));
 	}
-	@Test  public void EscapeEnd() {
+	@Test public void EscapeEnd() {
 		fx.tst_Doc("^'a'^'^b'^;", fx.nde_().Atru_("a'^b"));
 	}
-	@Test  public void Comment0() {
+	@Test public void Comment0() {
 		fx.tst_Doc(String_.Concat("^'a//comment", String_.CrLf, "b'^;"), fx.nde_().Atru_("ab"));
 	}
-	@Test  public void Comment1() {
+	@Test public void Comment1() {
 		fx.tst_Doc("^'a/*comment*/b'^;", fx.nde_().Atru_("ab"));
 	}
 }

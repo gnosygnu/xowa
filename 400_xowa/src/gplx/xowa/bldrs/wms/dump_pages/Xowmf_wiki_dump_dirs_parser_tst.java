@@ -18,10 +18,10 @@ import org.junit.*;
 import gplx.xowa.wikis.domains.*;
 public class Xowmf_wiki_dump_dirs_parser_tst {
 	@Before public void init() {fxt.Clear();} private final Xowmf_wiki_dump_dirs_parser_fxt fxt = new Xowmf_wiki_dump_dirs_parser_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse("<a href=\"20141230/\">20141230/</a><a href=\"20150118/\">20150118/</a>", "20141230", "20150118");
 	}
-	@Test  public void Example() {	// http://dumps.wikimedia.org/jawiki/
+	@Test public void Example() {	// http://dumps.wikimedia.org/jawiki/
 		fxt.Test_parse(String_.Concat_lines_nl_skip_last
 		( "<html>"
 		, "<head><title>Index of /jawiki/</title></head>"

@@ -19,7 +19,7 @@ import gplx.xowa.langs.*; import gplx.xowa.langs.numbers.*;
 public class Xow_fragment_mgr_tst {
 	Xow_fragment_mgr_fxt fxt = new Xow_fragment_mgr_fxt();
 	@Before public void init()	{fxt.Clear();}
-	@Test   public void Html_js_edit_toolbar_fmt() {
+	@Test  public void Html_js_edit_toolbar_fmt() {
 		fxt.Test_fragment(Xow_fragment_mgr.Invk_html_js_edit_toolbar, String_.Concat_lines_nl
 		(	"  var xowa_edit_i18n = {"
 		,	"    'bold_tip'             : 'Bold text',"

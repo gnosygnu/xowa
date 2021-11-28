@@ -18,13 +18,13 @@ import org.junit.*;
 public class Xof_file_ext__xcf_tst {
 	@Before public void init() {fxt.Reset();} private final Xof_file_fxt fxt = new Xof_file_fxt();
 	@After public void term() {fxt.Rls();}
-	@Test   public void Make_orig() {
+	@Test  public void Make_orig() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.xcf", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_orig("A.xcf", 440, 400));
 		fxt.Exec_get(Xof_exec_arg.new_orig("A.xcf").Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_y());
 		fxt.Test_fsys("mem/root/common/thumb/4/4/A.xcf/440px.png", "440,400");
 	}
-	@Test   public void Make_thumb() {
+	@Test  public void Make_thumb() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.xcf", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_orig("A.xcf", 440, 400));
 		fxt.Exec_get(Xof_exec_arg.new_thumb("A.xcf").Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_y());

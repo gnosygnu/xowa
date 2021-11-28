@@ -17,7 +17,7 @@ package gplx.xowa.bldrs.sql_dumps; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*; import gplx.core.tests.*;
 public class Xosql_tbl_parser__tst {
 	private final    Xosql_tbl_parser__fxt fxt = new Xosql_tbl_parser__fxt();
-	@Test  public void Unique_key() {
+	@Test public void Unique_key() {
 		fxt.Exec__parse(String_.Concat_lines_nl
 		( "ignore"
 		, "CREATE TABLE tbl_0 ("	
@@ -33,7 +33,7 @@ public class Xosql_tbl_parser__tst {
 		fxt.Test__get("fld_2",  0);
 		fxt.Test__get("fld_3", -1);
 	}
-	@Test  public void Primary_key() {
+	@Test public void Primary_key() {
 		fxt.Test__extract(String_.Concat_lines_nl
 		( "ignore"
 		, "CREATE TABLE tbl_0 ("	
@@ -44,7 +44,7 @@ public class Xosql_tbl_parser__tst {
 		( "  `fld_0` int,"
 		));
 	}
-	@Test  public void Key() {
+	@Test public void Key() {
 		fxt.Test__extract(String_.Concat_lines_nl
 		( "ignore"
 		, "CREATE TABLE tbl_0 ("	
@@ -55,7 +55,7 @@ public class Xosql_tbl_parser__tst {
 		( "  `fld_0` int,"
 		));
 	}
-	@Test  public void Unique_key__key__primary_key() {
+	@Test public void Unique_key__key__primary_key() {
 		fxt.Test__extract(String_.Concat_lines_nl
 		( "ignore"
 		, "CREATE TABLE tbl_0 ("	

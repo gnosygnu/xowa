@@ -17,28 +17,28 @@ package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx
 import org.junit.*;
 public class Xoi_cmd_dumpfile_tst {		
 	@Before public void init() {fxt.Clear();} private Xoi_cmd_dumpfile_fxt fxt = new Xoi_cmd_dumpfile_fxt();
-	@Test   public void Bz2__unzip() {
+	@Test  public void Bz2__unzip() {
 		fxt	.Exec_parse_msg("mem/en.wikipedia.org/fil.xml.bz2", "", "unzip")
 			.Test_domain("en.wikipedia.org")
 			.Test_vals("mem/en.wikipedia.org/fil.xml.bz2", "mem/en.wikipedia.org/fil.xml", true)
 			;
 	}
-	@Test   public void Bz2__unzip__assert_xml_ext() {	// xml ext relies on removing ".bz2" from ".xml.bz2"; if just ".bz2" add an ".xml"
+	@Test  public void Bz2__unzip__assert_xml_ext() {	// xml ext relies on removing ".bz2" from ".xml.bz2"; if just ".bz2" add an ".xml"
 		fxt	.Exec_parse_msg("mem/en.wikipedia.org/fil.bz2", "", "unzip")
 			.Test_vals("mem/en.wikipedia.org/fil.bz2", "mem/en.wikipedia.org/fil.xml", true)
 			;
 	}
-	@Test   public void Bz2__direct() {
+	@Test  public void Bz2__direct() {
 		fxt	.Exec_parse_msg("mem/en.wikipedia.org/fil.bz2", "", "")
 			.Test_vals("mem/en.wikipedia.org/fil.bz2", null, false)				
 			;
 	}
-	@Test   public void Xml__unzip_n() {
+	@Test  public void Xml__unzip_n() {
 		fxt	.Exec_parse_msg("mem/en.wikipedia.org/fil.xml", "", "")
 			.Test_vals(null, "mem/en.wikipedia.org/fil.xml", false)
 			;
 	}
-	@Test   public void Xml__unzip_y() {
+	@Test  public void Xml__unzip_y() {
 		fxt	.Exec_parse_msg("mem/en.wikipedia.org/fil.xml", "", "")
 			.Test_vals(null, "mem/en.wikipedia.org/fil.xml", false)
 			;

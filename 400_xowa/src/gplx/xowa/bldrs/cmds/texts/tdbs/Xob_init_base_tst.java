@@ -18,7 +18,7 @@ import org.junit.*; import gplx.xowa.htmls.portal.*; import gplx.xowa.wikis.xwik
 import gplx.xowa.bldrs.cmds.texts.sqls.*;
 public class Xob_init_base_tst {
 	@Before public void init() {fxt.Clear();} private Xob_init_base_fxt fxt = new Xob_init_base_fxt();
-	@Test  public void Dirty_wiki_itms() {
+	@Test public void Dirty_wiki_itms() {
 		Xoae_app app = fxt.App(); Xowe_wiki wiki = fxt.Wiki();
 		Xoa_available_wikis_mgr wikis_list = fxt.App().Gui_mgr().Html_mgr().Portal_mgr().Wikis();
 		Tfds.Eq("", wikis_list.Itms_as_html());			// assert

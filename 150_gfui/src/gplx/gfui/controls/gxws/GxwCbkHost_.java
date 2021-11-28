@@ -13,13 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import java.awt.KeyboardFocusManager;
+package gplx.gfui.controls.gxws;
+import gplx.gfui.gfxs.PaintArgs;
+import gplx.gfui.ipts.IptEvtDataKey;
+import gplx.gfui.ipts.IptEvtDataKeyHeld;
+import gplx.gfui.ipts.IptEvtDataMouse;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.ipts.IptMouseBtn_;
+import gplx.gfui.ipts.IptMouseWheel;
+import gplx.gfui.ipts.IptMouseWheel_;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*;
-public class GxwCbkHost_ { 
+public class GxwCbkHost_ {
 	public static final    GxwCbkHost Null = new GfuiHost_cls_null();
 		public static final boolean ExecKeyEvent(GxwCbkHost host, KeyEvent e) {
 		boolean rv = true; int id = e.getID(), val = e.getKeyCode();
@@ -34,10 +41,10 @@ public class GxwCbkHost_ {
 		}
 		else {
 			if (e.isShiftDown()) 		val |= IptKey_.Shift.Val();
-			if (e.isControlDown())		val |= IptKey_.Ctrl.Val();
+			if (e.isControlDown())      val |= IptKey_.Ctrl.Val();
 			if (e.isAltDown())			val |= IptKey_.Alt.Val();
+			if (e.isMetaDown())			val |= IptKey_.Meta.Val();
 			IptEvtDataKey keyData = IptEvtDataKey.int_(val);
-//			Tfds.Write(e.getKeyChar(), e.getKeyCode(), val, id);
 			if 		(id == KeyEvent.KEY_PRESSED)	rv = host.KeyDownCbk(keyData);
 			else if	(id == KeyEvent.KEY_RELEASED)	rv = host.KeyUpCbk(keyData);
 			if (keyData.Handled()) rv = false;	// was false

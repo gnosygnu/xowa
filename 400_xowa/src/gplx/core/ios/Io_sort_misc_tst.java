@@ -18,7 +18,7 @@ import org.junit.*;
 public class Io_sort_misc_tst {
 	@Before public void init() {
 	}
-	@Test  public void Io_url_gen_dir() {
+	@Test public void Io_url_gen_dir() {
 		tst_Io_url_gen_dir("mem/dir/", "{0}.xdat", 4, 3, "0000.xdat", "0001.xdat", "0002.xdat");
 	}
 	private void tst_Io_url_gen_dir(String dir_str, String fmt, int digits, int calls, String... expd) {
@@ -32,7 +32,7 @@ public class Io_sort_misc_tst {
 			expd[i] = dir_str + expd[i];
 		Tfds.Eq_ary_str(expd, actl);
 	}
-	@Test  public void Io_line_rdr_comparer_all() {
+	@Test public void Io_line_rdr_comparer_all() {
 		tst_Io_line_rdr_fld_comparer(-1, "a", "b");
 		tst_Io_line_rdr_fld_comparer( 0, "a", "a");
 		tst_Io_line_rdr_fld_comparer( 1, "b", "a");
@@ -50,7 +50,7 @@ public class Io_sort_misc_tst {
 		rv.Read_next();
 		return rv;
 	}
-	@Test  public void ExternalSort() {
+	@Test public void ExternalSort() {
 		// fxt("c", "a", "b")
 	}
 }

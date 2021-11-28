@@ -17,11 +17,11 @@ package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*;
 public class Xol_msg_itm_tst {		
 	@Before public void init() {fxt.Clear();} private Xol_msg_itm_fxt fxt = new Xol_msg_itm_fxt();
-	@Test   public void New_plain() 			{fxt.Test_new("a"					, Bool_.N, Bool_.N);}
-	@Test   public void New_fmt() 				{fxt.Test_new("a~{0}b"				, Bool_.Y, Bool_.N);}
-	@Test   public void New_tmpl() 				{fxt.Test_new("a{{b}}c"				, Bool_.N, Bool_.Y);}
-	@Test   public void New_fmt_tmpl() 			{fxt.Test_new("a{{b}}c~{0}d"		, Bool_.Y, Bool_.Y);}
-	@Test   public void New_space() 			{fxt.Test_val("a&#32;b"				, "a b");}
+	@Test  public void New_plain() 			{fxt.Test_new("a"					, Bool_.N, Bool_.N);}
+	@Test  public void New_fmt() 				{fxt.Test_new("a~{0}b"				, Bool_.Y, Bool_.N);}
+	@Test  public void New_tmpl() 				{fxt.Test_new("a{{b}}c"				, Bool_.N, Bool_.Y);}
+	@Test  public void New_fmt_tmpl() 			{fxt.Test_new("a{{b}}c~{0}d"		, Bool_.Y, Bool_.Y);}
+	@Test  public void New_space() 			{fxt.Test_val("a&#32;b"				, "a b");}
 }
 class Xol_msg_itm_fxt {
 	public void Clear() {}

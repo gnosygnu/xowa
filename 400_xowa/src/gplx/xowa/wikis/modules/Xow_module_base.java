@@ -18,7 +18,7 @@ public class Xow_module_base implements Gfo_invk {
 	public byte Enabled() {return enabled;} private byte enabled = Bool_.__byte;
 	public boolean Enabled_y() {return enabled == Bool_.Y_byte;}
 	public boolean Enabled_n() {return enabled == Bool_.N_byte;}
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))			return Yn.To_nullable_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))			enabled = Yn.To_nullable_byte(m.ReadStr("v"));
 		else	return Gfo_invk_.Rv_unhandled;

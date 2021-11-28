@@ -18,43 +18,43 @@ import org.junit.*;
 import gplx.xowa.htmls.*;
 public class Gallery_mgr_base__xatrs__tst {		
 	@Before public void init() {fxt.Reset();} private final    Gallery_mgr_base_fxt fxt = new Gallery_mgr_base_fxt();
-	@Test  public void Atr_misc() {// PURPOSE: add other atrs to end of ul
+	@Test public void Atr_misc() {// PURPOSE: add other atrs to end of ul
 		fxt.Test_html_frag
 		( "<gallery id=a>File:A.png</gallery>"
 		, "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\" id=\"a\">"
 		);
 	}
-	@Test  public void Atr_style() {	// PURPOSE: combine style with itms_per_row
+	@Test public void Atr_style() {	// PURPOSE: combine style with itms_per_row
 		fxt.Test_html_frag
 		( "<gallery perrow=2 style='color:blue;'>File:A.png</gallery>"
 		, "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\" style=\"max-width:326px; _width:326px; color:blue;\">"
 		);
 	}
-	@Test  public void Atr_whitelist() {	// PURPOSE: ignore atrs not in whitelist
+	@Test public void Atr_whitelist() {	// PURPOSE: ignore atrs not in whitelist
 		fxt.Test_html_frag
 		( "<gallery onmouseover='alert();'>A.png</gallery>"
 		, "<ul id=\"xowa_gallery_ul_0\" class=\"gallery mw-gallery-traditional\">"
 		);
 	}
-	@Test  public void Mgr_caption() {		// PURPOSE: caption atr adds new element
+	@Test public void Mgr_caption() {		// PURPOSE: caption atr adds new element
 		fxt.Test_html_frag
 		( "<gallery caption=B>File:A.png</gallery>"
 		, "<li class=\"gallerycaption\">B</li>"
 		);
 	}
-	@Test  public void Mgr_caption_ignore() {	// PURPOSE: blank caption should not create caption element; PAGE:fr.w:Chronologie_du_si�ge_de_Paris_(1870) DATE:2014-08-15
+	@Test public void Mgr_caption_ignore() {	// PURPOSE: blank caption should not create caption element; PAGE:fr.w:Chronologie_du_si�ge_de_Paris_(1870) DATE:2014-08-15
 		fxt.Test_html_frag_n
 		( "<gallery caption=>File:A.png</gallery>"
 		, "<li class=\"gallerycaption\">"
 		);
 	}
-	@Test  public void Show_filename() {	// PURPOSE: show filename
+	@Test public void Show_filename() {	// PURPOSE: show filename
 		fxt.Test_html_frag
 		( "<gallery showfilename=true>A.png</gallery>"
 		, "<div class=\"gallerytext\"><a href=\"/wiki/File:A.png\">File:A.png</a>"
 		);
 	}
-	//@Test  public void Ttl_caption() {	// PURPOSE: category entries get rendered with name only (no ns)
+	//@Test public void Ttl_caption() {	// PURPOSE: category entries get rendered with name only (no ns)
 	//	fxt.Test_html_frag
 	//	( "<gallery>Category:A</gallery>"
 	//	, "<li class='gallerycaption'>B</li>"

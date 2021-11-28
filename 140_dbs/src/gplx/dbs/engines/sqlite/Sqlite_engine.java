@@ -13,17 +13,44 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import java.sql.*; 
-import gplx.core.stores.*; import gplx.dbs.engines.*; import gplx.dbs.engines.sqlite.*; import gplx.dbs.metas.*; import gplx.dbs.sqls.*;
-import gplx.dbs.qrys.*;
-import gplx.core.consoles.Console_adp_;
-import gplx.core.consoles.Console_adp__sys;
+package gplx.dbs.engines.sqlite; import gplx.Bool_;
+import gplx.Byte_;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Decimal_adp;
+import gplx.Decimal_adp_;
+import gplx.Err_;
+import gplx.Float_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Long_;
+import gplx.String_;
+import gplx.Type_;
 import gplx.core.ios.IoItmFil;
-
+import gplx.core.stores.DataRdr;
+import gplx.core.stores.Db_data_rdr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_info;
+import gplx.dbs.Db_qry;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_rdr__basic;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Dbmeta_fld_itm;
+import gplx.dbs.engines.Db_engine;
+import gplx.dbs.engines.Db_engine_sql_base;
+import gplx.dbs.metas.Dbmeta_tbl_mgr;
+import gplx.dbs.sqls.Sql_qry_wtr_;
 import gplx.dbs.wkrs.SqlWkrMgr;
 import gplx.dbs.wkrs.randoms.SqliteRandomWkr;
 import org.sqlite.SQLiteConnection;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 public class Sqlite_engine extends Db_engine_sql_base {
 	private final    Sqlite_txn_mgr txn_mgr; private final    Sqlite_schema_mgr schema_mgr;
 	Sqlite_engine() {
@@ -138,13 +165,28 @@ class Sqlite_rdr extends Db_data_rdr {		@Override public float ReadFloat(String 
 	@Override public Decimal_adp ReadDecimal(String key) {return ReadDecimalOr(key, null);}
 	@Override public Decimal_adp ReadDecimalOr(String key, Decimal_adp or) {
 		Object val = Read(key);
-		Double d = ((Double)val);
-		return val == null ? or : Decimal_adp_.double_(d);
+		if (val == null) return or;
+		if (Type_.Eq_by_obj(val, Double.class)) {
+			return Decimal_adp_.double_((Double)val);
+		}
+		else if (Type_.Eq_by_obj(val, Integer.class)) { // 2021-09-16|needed for gfds
+			return Decimal_adp_.int_((Integer)val);
+		}
+		else {
+			throw Err_.New("sqlite decimal must be either double or int; val={0}", val);
+		}
 	}
 	@Override public DateAdp ReadDate(String key) {return ReadDateOr(key, null);}
 	@Override public DateAdp ReadDateOr(String key, DateAdp or) {
 		Object val = Read(key);
-		return val == null ? or : DateAdp_.parse_fmt((String)val, "M/dd/yyyy hh:mm tt");
+		if (val == null) return or;
+		String valStr = (String)val;
+		try {
+			return DateAdp_.parse_fmt(valStr, "M/dd/yyyy hh:mm tt");
+		}
+		catch (Exception exc) { // 2021-09-16|needed for gfds
+			return DateAdp_.parse_fmt(valStr, "yyyy-MM-dd hh:mm:ss");
+		}
 	}
 	@Override public boolean ReadBool(String key) {return ReadBoolOr(key, false);}
 	@Override public boolean ReadBoolOr(String key, boolean or) {

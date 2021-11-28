@@ -22,7 +22,7 @@ abstract class Xob_css_tkn__base {
 	public int Tid() {return tid;} protected int tid;
 	public int Pos_bgn() {return pos_bgn;} protected int pos_bgn;
 	public int Pos_end() {return pos_end;} protected int pos_end;
-	@gplx.Virtual public void Process(Xob_mirror_mgr mgr) {}
+	public void Process(Xob_mirror_mgr mgr) {}
 	public abstract int Write(Bry_bfr bfr, byte[] src);
 	public static final int Tid_warn = 1, Tid_base64 = 2, Tid_url = 3, Tid_import = 4;
 }

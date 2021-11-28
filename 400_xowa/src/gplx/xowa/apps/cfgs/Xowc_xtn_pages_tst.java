@@ -17,14 +17,14 @@ package gplx.xowa.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.nss.*;
 public class Xowc_xtn_pages_tst {
 	@Before public void init() {fxt.Clear();} private Xowc_xtn_pages_fxt fxt = new Xowc_xtn_pages_fxt();
-	@Test  public void Init() {
+	@Test public void Init() {
 		fxt.Init_ns(200, "Foreign_page").Init_ns(201, "Foreign_page_talk").Init_ns(202, "Foreign_index").Init_ns(203, "Foreign_index_talk");	// ns set by <siteinfo>
 		fxt.Init_names("Foreign_page", "Foreign_page_talk", "Foreign_index", "Foreign_index_talk");	// ns set by .gfs files in /user/wiki/#cfg
 		fxt.Exec_init();
 		fxt.Test_ns_ids(200, 201, 202, 203);
 		fxt.Test_ns_canonical("Page", "Page_talk", "Index", "Index_talk");
 	}
-	@Test  public void Spaces() {	// PURPOSE: ensure underlines, not space; EX:"Mục_lục" not "Mục lục"; PAGE:vi.s:Việt_Nam_sử_lược/Quyển_II DATE:2015-10-27
+	@Test public void Spaces() {	// PURPOSE: ensure underlines, not space; EX:"Mục_lục" not "Mục lục"; PAGE:vi.s:Việt_Nam_sử_lược/Quyển_II DATE:2015-10-27
 		fxt.Init_ns(200, "Foreign_page").Init_ns(201, "Foreign_page_talk").Init_ns(202, "Foreign_index").Init_ns(203, "Foreign_index_talk");	// ns set by <siteinfo>
 		fxt.Init_names("Foreign page", "Foreign page talk", "Foreign index", "Foreign index talk");	// ns set by .gfs files in /user/wiki/#cfg
 		fxt.Exec_init();

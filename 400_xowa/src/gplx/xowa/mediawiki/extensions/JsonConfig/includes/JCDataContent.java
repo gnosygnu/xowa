@@ -65,7 +65,7 @@ public class JCDataContent extends JCObjContent { //		/**
 	* @param Object $result
 	* @param Language $lang
 	*/
-	@gplx.Virtual protected void localizeData(XophpStdClass result, Xol_lang_itm lang) {
+	protected void localizeData(XophpStdClass result, Xol_lang_itm lang) {
 		XophpStdClass data = this.getData();
 		if (data.Has("description")) {
 			result.Set_by_as_str("description", JCUtils.pickLocalizedString(data.Get_by_as_itm("description"), lang));

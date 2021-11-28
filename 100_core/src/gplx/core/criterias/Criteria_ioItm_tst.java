@@ -18,23 +18,23 @@ import org.junit.*;
 import gplx.core.ios.*;
 public class Criteria_ioItm_tst {
 	IoItmFil fil; Criteria crt; IoItm_fxt fx = IoItm_fxt.new_();
-	@Test  public void IoType() {
+	@Test public void IoType() {
 		crt = crt_(IoItm_base_.Prop_Type, Criteria_.eq_(IoItmFil.Type_Fil));
 		tst_Match(true, crt, fx.fil_wnt_("C:\\fil.txt"));
 		tst_Match(false, crt, fx.dir_wnt_("C:\\dir"));
 	}
-	@Test  public void Ext() {
+	@Test public void Ext() {
 		crt = crt_(IoItm_base_.Prop_Ext, Criteria_.eq_(".txt"));
 		tst_Match(true, crt, fx.fil_wnt_("C:\\fil.txt"));
 		tst_Match(false, crt, fx.fil_wnt_("C:\\fil.xml"), fx.fil_wnt_("C:\\fil.txt1"), fx.fil_wnt_("C:\\fil1.txt.xml"), fx.dir_wnt_("C:\\.txt"));
 	}
-	@Test  public void Modified() {
+	@Test public void Modified() {
 		fil = fx.fil_wnt_("C:\\fil.txt");
 		crt = crt_(IoItmFil_.Prop_Modified, Criteria_.mte_(DateAdp_.parse_gplx("2001-01-01")));
 		tst_Match(true, crt, fil.ModifiedTime_(DateAdp_.parse_gplx("2001-01-02")), fil.ModifiedTime_(DateAdp_.parse_gplx("2001-01-01")));
 		tst_Match(false, crt, fil.ModifiedTime_(DateAdp_.parse_gplx("2000-12-31")));
 	}
-	@Test  public void IoMatch() {
+	@Test public void IoMatch() {
 		Criteria crt = Criteria_ioMatch.parse(true, "*.txt", false);
 		CriteriaFxt fx_crt = new CriteriaFxt();
 		fx_crt.tst_Matches(crt, Io_url_.new_any_("file.txt"));

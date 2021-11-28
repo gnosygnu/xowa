@@ -17,33 +17,33 @@ package gplx.gfui; import gplx.*;
 import org.junit.*;
 public class Gfui_bnd_parser_tst {
 	@Before public void init() {fxt.Clear();} private Gfui_bnd_parser_fxt fxt = new Gfui_bnd_parser_fxt();
-	@Test  public void Norm_one() {
+	@Test public void Norm_one() {
 		fxt.Test__to_norm("mod.c"							, "Ctrl");
 		fxt.Test__to_norm("key.ctrl"						, "Ctrl");
 		fxt.Test__to_norm("key.a"							, "A");
 		fxt.Test__to_norm("key.left"						, "Left");
 	}
-	@Test  public void Norm_add() {
+	@Test public void Norm_add() {
 		fxt.Test__to_norm("mod.c+key.a"						, "Ctrl + A");
 		fxt.Test__to_norm("mod.ca+key.a"					, "Ctrl + Alt + A");
 		fxt.Test__to_norm("mod.cas+key.a"					, "Ctrl + Alt + Shift + A");
 	}
-	@Test  public void Norm_chord() {
+	@Test public void Norm_chord() {
 		fxt.Test__to_norm("key.a,key.b"						, "A, B");
 	}
-	@Test  public void Norm_add_and_chord() {
+	@Test public void Norm_add_and_chord() {
 		fxt.Test__to_norm("mod.c+key.a,mod.a+key.b"			, "Ctrl + A, Alt + B");
 	}
-	@Test  public void Gfui_add() {
+	@Test public void Gfui_add() {
 		fxt.Test__to_gfui("Ctrl + A"						, "mod.c+key.a");
 		fxt.Test__to_gfui("Ctrl + Shift + A"				, "mod.cs+key.a");
 		fxt.Test__to_gfui("Ctrl + Alt + Shift + A"			, "mod.cas+key.a");
 	}
-	@Test  public void Keypad_enter() {
+	@Test public void Keypad_enter() {
 		fxt.Test__to_norm("key.numpad_enter"				, "Numpad Enter");
 		fxt.Test__to_norm("mod.c+key.numpad_enter"			, "Ctrl + Numpad Enter");
 	}
-	@Test  public void None() {
+	@Test public void None() {
 		fxt.Test__to_gfui("None"							, "key.none");
 		fxt.Test__to_norm("key.none"						, "None");
 	}

@@ -17,7 +17,7 @@ package gplx.core.brys; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Bit_heap_rdr_tst {
 	private final Bit_heap_rdr_fxt fxt = new Bit_heap_rdr_fxt();
-	@Test   public void Get_bool() {
+	@Test  public void Get_bool() {
 		fxt.Load(255);
 		fxt.Test__get_bool(Bool_.Y).Test__cur(127, 1, 0);
 		fxt.Test__get_bool(Bool_.Y).Test__cur( 63, 2, 0);
@@ -34,7 +34,7 @@ public class Bit_heap_rdr_tst {
 		fxt.Test__get_bool(Bool_.Y).Test__cur(  1, 2, 0);
 		fxt.Test__get_bool(Bool_.Y).Test__cur(  0, 3, 0);
 	}
-	@Test   public void Get_byte() {
+	@Test  public void Get_byte() {
 		fxt.Load(255).Test__get_byte(2, 3).Test__cur(63, 2, 0);
 		fxt.Load(255, 3);
 		fxt.Test__get_byte(7, 127);
@@ -43,7 +43,7 @@ public class Bit_heap_rdr_tst {
 		fxt.Test__get_bool(false);
 		fxt.Test__get_byte(3, 5);
 	}
-	@Test   public void Get_int_hzip() {
+	@Test  public void Get_int_hzip() {
 		fxt.Load(100).Test__get_int_hzip(1, 100).Test__cur(0, 0, 1);
 		fxt.Load(253, 1, 44).Test__get_int_hzip(1, 300).Test__cur(0, 0, 3);
 		fxt.Load(0, 100).Test__get_int_hzip(2, 100).Test__cur(0, 0, 2);

@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.xtns.gallery.*;
 public class Xoh_gly_itm_wtr_tst {
 	private final    Xoh_gly_itm_wtr_fxt fxt = new Xoh_gly_itm_wtr_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init__gly(Gallery_mgr_base_.Tid__traditional, -1, -1, -1, 0, 155, 150, 5, "caption");
 		fxt.Init__img("/wiki/File:A.png", "A.png", "0|120|120|-1|-1|-1");
 		fxt.Test__write(String_.Concat_lines_nl_skip_last

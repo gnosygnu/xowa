@@ -17,8 +17,8 @@ package gplx.xowa.xtns.pfuncs.stringutils; import gplx.*; import gplx.xowa.*; im
 import org.junit.*;
 public class Pfunc_rpos_tst {
 	@Before public void init()						{fxt.Reset();} private final Xop_fxt fxt = Xop_fxt.new_nonwmf();
-	@Test   public void Basic()						{fxt.Test_parse_template("{{#rpos:abcabc|b}}"				, "4");}
-	@Test   public void Index()						{fxt.Test_parse_template("{{#rpos:abcabc|b|3}}"				, "1");}
-	@Test   public void Missing()					{fxt.Test_parse_template("{{#rpos:abcabc|z}}"				, "-1");}
-	@Test   public void Find_missing()				{fxt.Test_parse_template("{{#rpos:abc def}}"				, "3");}
+	@Test  public void Basic()						{fxt.Test_parse_template("{{#rpos:abcabc|b}}"				, "4");}
+	@Test  public void Index()						{fxt.Test_parse_template("{{#rpos:abcabc|b|3}}"				, "1");}
+	@Test  public void Missing()					{fxt.Test_parse_template("{{#rpos:abcabc|z}}"				, "-1");}
+	@Test  public void Find_missing()				{fxt.Test_parse_template("{{#rpos:abc def}}"				, "3");}
 }

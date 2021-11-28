@@ -18,28 +18,28 @@ import org.junit.*; import gplx.core.tests.*;
 public class Xopg_match_mgr__tst {
 	private final    Xopg_match_mgr__fxt fxt = new Xopg_match_mgr__fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Specific() {
+	@Test public void Specific() {
 		fxt.Init__set("en.w:A");
 		fxt.Test__match_y("A");
 		fxt.Test__match_n("AB");
 	}
-	@Test  public void Other_wiki() {
+	@Test public void Other_wiki() {
 		fxt.Init__set("fr.w:A");
 		fxt.Test__match_n("A");	// note that test defaults to "en.w" as primary wiki
 	}
-	@Test  public void Wildcard__app() {
+	@Test public void Wildcard__app() {
 		fxt.Init__set("*");
 		fxt.Test__match_y("A", "B");
 	}
-	@Test  public void Wildcard__page() {
+	@Test public void Wildcard__page() {
 		fxt.Init__set("en.w:*");
 		fxt.Test__match_y("A", "B");
 	}
-	@Test  public void Wildcard__page__other() {
+	@Test public void Wildcard__page__other() {
 		fxt.Init__set("fr.w:*");
 		fxt.Test__match_n("A", "B");
 	}
-	@Test  public void Wildcard__wiki() {
+	@Test public void Wildcard__wiki() {
 		fxt.Init__set("*:A");
 		fxt.Test__match_y("A");
 		fxt.Test__match_n("B");

@@ -17,7 +17,7 @@ package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx
 import org.junit.*;
 public class Scrib_fsys_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Scrib_fsys_mgr_fxt fxt = new Scrib_fsys_mgr_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init("mem/xowa/"
 		, "mw.lua"
 		, "mw.ustring.lua"

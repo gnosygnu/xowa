@@ -17,19 +17,19 @@ package gplx.dbs.engines; import gplx.*; import gplx.dbs.*;
 import org.junit.*; import gplx.core.type_xtns.*; import gplx.core.stores.*;
 public class db_DataTypes_tst {
 	DataTypes_base_fxt fx = new DataTypes_base_fxt();
-	@Test  public void Mysql() {if (Tfds.SkipDb) return;
+	@Test public void Mysql() {if (Tfds.SkipDb) return;
 		fx.Select_FloatStr_("0.333333");
 		fx.RunAll(Db_conn_fxt.Mysql());
 	}
-	@Test  public void Tdb() {if (Tfds.SkipDb) return;
+	@Test public void Tdb() {if (Tfds.SkipDb) return;
 		fx.Select_FloatStr_(Float_.To_str(Float_.Div(1, 3)));
 		fx.RunAll(Db_conn_fxt.Tdb("110_dbs_multiple_data_types.dsv"));
 	}
-	@Test  public void Postgres() {if (Db_conn_fxt.SkipPostgres) return;
+	@Test public void Postgres() {if (Db_conn_fxt.SkipPostgres) return;
 		fx.Select_FloatStr_("0.33333334");
 		fx.RunAll(Db_conn_fxt.Postgres());
 	}
-	@Test  public void Sqlite() {if (Tfds.SkipDb) return;
+	@Test public void Sqlite() {if (Tfds.SkipDb) return;
 		fx.Select_FloatStr_("0.33333334");
 		fx.RunAll(Db_conn_fxt.Sqlite());
 	}

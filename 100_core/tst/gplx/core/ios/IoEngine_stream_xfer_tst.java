@@ -24,7 +24,7 @@ public class IoEngine_stream_xfer_tst {
 		IoUrlInfoRegy.Instance.Reg(IoUrlInfo_.mem_("mem2/", trgEngine.Key()));
 		srcDir = Io_url_.mem_dir_("mem1/dir"); trgDir = Io_url_.mem_dir_("mem2/dir");
 	}
-	@Test  public void TransferBetween() {
+	@Test public void TransferBetween() {
 		Io_url srcPath = srcDir.GenSubFil("fil.txt");
 		Io_url trgPath = trgDir.GenSubFil("fil.txt");
 		tst_TransferStreams(srcEngine, srcPath, trgEngine, trgPath);

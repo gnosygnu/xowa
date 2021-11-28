@@ -21,29 +21,29 @@ public class Xot_examples_tst {
 		Io_mgr.Instance.InitEngine_mem();
 		fxt.Reset();
 	}
-	@Test  public void Arg_0()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For}}"				, "For other uses, see [[Test page (disambiguation)]].");}
-	@Test  public void Arg_1()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a}}"			, "For a, see [[Test page (disambiguation)]].");}
-	@Test  public void Arg_2()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a|b}}"			, "For a, see [[b]].");}
-	@Test  public void Arg_3()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a|b|c}}"		, "For a, see [[b]]&#32;and [[c]].");}
-	@Test  public void Arg_4()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a|b|c|d}}"		, "For a, see [[b]], [[c]], and [[d]].");}
-	@Test  public void Arg_5()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a|b|c|d|e}}"	, "For a, see [[b]], [[c]], [[d]], and [[e]].");}
-	@Test  public void Arg_1_nil()				{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For||a|b}}"			, "For other uses, see [[a]]&#32;and [[b]].");}
-	@Test  public void Main() {
+	@Test public void Arg_0()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For}}"				, "For other uses, see [[Test page (disambiguation)]].");}
+	@Test public void Arg_1()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a}}"			, "For a, see [[Test page (disambiguation)]].");}
+	@Test public void Arg_2()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a|b}}"			, "For a, see [[b]].");}
+	@Test public void Arg_3()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a|b|c}}"		, "For a, see [[b]]&#32;and [[c]].");}
+	@Test public void Arg_4()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a|b|c|d}}"		, "For a, see [[b]], [[c]], and [[d]].");}
+	@Test public void Arg_5()					{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For|a|b|c|d|e}}"	, "For a, see [[b]], [[c]], [[d]], and [[e]].");}
+	@Test public void Arg_1_nil()				{Init_tmpl_for(); fxt.Test_parse_tmpl_str("{{For||a|b}}"			, "For other uses, see [[a]]&#32;and [[b]].");}
+	@Test public void Main() {
 		Init_tmpl_main(); fxt.Test_parse_tmpl_str("{{Main|a}}", "Main article: [[a|a]]");
 	}
-	@Test  public void About() {
+	@Test public void About() {
 		Init_tmpl_about(); fxt.Test_parse_tmpl_str("{{About|abc}}", "This article is about abc.&#32;&#32;For other uses, see [[Test page (disambiguation)]].");
 	}
-	@Test  public void About_2() {	// PAGE:en.w:{{About|the NASA space mission||Messenger (disambiguation)}}
+	@Test public void About_2() {	// PAGE:en.w:{{About|the NASA space mission||Messenger (disambiguation)}}
 		Init_tmpl_about(); fxt.Test_parse_tmpl_str("{{About|a||b{{!}}c}}", "This article is about a.&#32;&#32;For other uses, see [[b|c]].");
 	}
-	@Test  public void OtherUses() {
+	@Test public void OtherUses() {
 		Init_tmpl_other_uses(); fxt.Test_parse_tmpl_str("{{Other uses|abc}}", "For other uses, see [[abc]].");
 	}
-	@Test  public void SeeAlso() {
+	@Test public void SeeAlso() {
 		Init_tmpl_see_also(); fxt.Test_parse_tmpl_str("{{See also|abc}}", "See also: [[abc]]");
 	}
-	@Test  public void Redirect() {
+	@Test public void Redirect() {
 		Init_tmpl_redirect(); fxt.Test_parse_tmpl_str("{{Redirect|abc}}", "\"abc\" redirects here. For other uses, see [[abc (disambiguation)]].");
 	}
 	private void Init_tmpl_main() {

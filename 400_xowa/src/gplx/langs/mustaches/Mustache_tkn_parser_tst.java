@@ -17,10 +17,10 @@ package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Mustache_tkn_parser_tst {
 	private final    Mustache_tkn_parser_fxt fxt = new Mustache_tkn_parser_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse("a{{b}}c", "ac");
 	}
-	@Test  public void Comment() {
+	@Test public void Comment() {
 		fxt.Test_parse("a{{!b}}c", "ac");
 	}
 }

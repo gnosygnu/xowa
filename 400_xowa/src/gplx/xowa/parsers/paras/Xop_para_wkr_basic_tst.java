@@ -19,7 +19,7 @@ public class Xop_para_wkr_basic_tst {
 	private final    Xop_fxt fxt = new Xop_fxt(); String raw;
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();}
 	@After public void teardown() {fxt.Init_para_n_();}
-	@Test  public void Nl_0() {
+	@Test public void Nl_0() {
 		raw = "a";
 		fxt.Test_parse_page_wiki_str(raw, String_.Concat_lines_nl_skip_last
 			( "<p>a"
@@ -30,7 +30,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(0, 1), fxt.tkn_para_end_para_(1)								// t2/x1: a     -> a\n</p>		1=bgn    2=blank
 			);
 	}
-	@Test  public void Nl_1() {
+	@Test public void Nl_1() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, "b"
@@ -46,7 +46,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(2, 3), fxt.tkn_para_end_para_(3)								// t3/x1: b     -> b\n</p>		2=blank  3=blank
 			);
 	}
-	@Test  public void Nl_2() {
+	@Test public void Nl_2() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -66,7 +66,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(3, 4), fxt.tkn_para_end_para_(4)								// t1/x1: b     -> b\n</p>		2=mid    3=blank
 			);
 	}
-	@Test  public void Nl_3() {
+	@Test public void Nl_3() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -89,7 +89,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(4, 5), fxt.tkn_para_end_para_(5)		// t1/x1: b     -> b\n</p>		4=blank
 			);
 	}
-	@Test  public void Nl_4() {
+	@Test public void Nl_4() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -116,7 +116,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(6, 7), fxt.tkn_para_end_para_(7)
 			);
 	}
-	@Test  public void Nl_5() {
+	@Test public void Nl_5() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "<p>a"
 			, "b"
@@ -128,7 +128,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</p>"
 			));
 	}
-	@Test  public void Pre() {
+	@Test public void Pre() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " b"
@@ -151,7 +151,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(5, 6), fxt.tkn_para_end_para_(6)
 			);
 	}
-	@Test  public void Pre_2() {
+	@Test public void Pre_2() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " b"
@@ -170,7 +170,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</p>"
 			));			
 	}
-	@Test  public void Pre_3() {
+	@Test public void Pre_3() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -188,7 +188,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</pre>"
 			));			
 	}
-	@Test  public void Pre_4() {
+	@Test public void Pre_4() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -207,7 +207,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</p>"
 			));			
 	}
-	@Test  public void Pre_5() {	// PAGE:en.w:SHA-2
+	@Test public void Pre_5() {	// PAGE:en.w:SHA-2
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "a"
 			, " b"
@@ -224,7 +224,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</pre>"
 			));			
 	}
-	@Test  public void Pre_6() {	// PURPOSE: close list if open; PAGE:en.w:SHA-2
+	@Test public void Pre_6() {	// PURPOSE: close list if open; PAGE:en.w:SHA-2
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "*a"
 			, " b"
@@ -238,7 +238,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</pre>"
 			));			
 	}
-	@Test  public void Pre_init() {
+	@Test public void Pre_init() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( " a"
 			), String_.Concat_lines_nl_skip_last
@@ -246,7 +246,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</pre>"
 			));
 	}
-	@Test  public void Pre_leading_ws() {	// PURPOSE: preserve leading ws; PAGE:en.w:Merge sort
+	@Test public void Pre_leading_ws() {	// PURPOSE: preserve leading ws; PAGE:en.w:Merge sort
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( " a"
 			, "   b"
@@ -258,7 +258,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</pre>"
 			));			
 	}
-	@Test  public void Pre_newLine() {	// PURPOSE: "\n \n" inside pre should be ignored; trims to ""
+	@Test public void Pre_newLine() {	// PURPOSE: "\n \n" inside pre should be ignored; trims to ""
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " b"
@@ -279,7 +279,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</p>"
 			));
 	}
-	@Test  public void Pre_xnde() {	// PURPOSE: <div> and other xndes should invalidate pre on same line; EX: "\n a<div>b"; SEE: any {{refimprove}} article
+	@Test public void Pre_xnde() {	// PURPOSE: <div> and other xndes should invalidate pre on same line; EX: "\n a<div>b"; SEE: any {{refimprove}} article
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " b<div>c</div>d"
@@ -294,7 +294,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</p>"
 			));
 	}
-	@Test  public void Pre_lnki_in_td() {	// PURPOSE: ]] in td causes strange parsing; SEE: any {{Commons category}} article; updated test; DATE:2015-03-31
+	@Test public void Pre_lnki_in_td() {	// PURPOSE: ]] in td causes strange parsing; SEE: any {{Commons category}} article; updated test; DATE:2015-03-31
 		raw = String_.Concat_lines_nl_skip_last
 			( "<table>"
 			, "<tr>"
@@ -316,7 +316,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</table>"
 			));
 	}
-	@Test  public void Pre_trailing_end() {	// PURPOSE: "\n " at end was failing
+	@Test public void Pre_trailing_end() {	// PURPOSE: "\n " at end was failing
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " "
@@ -326,7 +326,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</p>"
 			));
 	}
-	@Test  public void Pre_xnde_code() {	// PAGE:en.w:cURL
+	@Test public void Pre_xnde_code() {	// PAGE:en.w:cURL
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " <code>b</code>"
@@ -344,7 +344,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</p>"
 			));
 	}
-	@Test  public void Pre_xnde_pre() {
+	@Test public void Pre_xnde_pre() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "<ul>"
 			, "<li>"
@@ -364,7 +364,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</ul>"
 			));
 	}
-	@Test  public void Pre_td() {	// PURPOSE: EX: "\n a</td>"; </td> deactivates pre; PAGE:en.w:AGPLv3
+	@Test public void Pre_td() {	// PURPOSE: EX: "\n a</td>"; </td> deactivates pre; PAGE:en.w:AGPLv3
 		raw = String_.Concat_lines_nl_skip_last
 			( "<table>"
 			, "<tr>"
@@ -383,7 +383,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</table>"
 			));
 	}
-	@Test  public void Nl_2_2_space() {	// test trim
+	@Test public void Nl_2_2_space() {	// test trim
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -402,7 +402,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</p>"
 			));
 	}
-	@Test  public void File_1() {
+	@Test public void File_1() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, "[[Image:Test.png|thumb|caption]]"
@@ -421,7 +421,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_para_blank_(34)
 			);
 	}
-	@Test  public void File_2() {
+	@Test public void File_2() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, "[[Image:Test.png|thumb|caption]]"
@@ -445,7 +445,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(35, 36), fxt.tkn_para_end_para_(36)
 			);
 	}
-	@Test  public void File_3() {
+	@Test public void File_3() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "[[Image:Test.png|thumb|caption]]"
 			, ""
@@ -466,7 +466,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(34, 35), fxt.tkn_para_end_para_(35)
 			);
 	}
-	@Test  public void File_4() {
+	@Test public void File_4() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -494,7 +494,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(37, 38), fxt.tkn_para_end_para_(38)
 			);
 	}
-	@Test  public void File_5() {	// PURPOSE: \n in caption should not force paragraph
+	@Test public void File_5() {	// PURPOSE: \n in caption should not force paragraph
 		raw = String_.Concat_lines_nl_skip_last
 			( "[[Image:Test.png|thumb|"
 			, "caption]]"
@@ -514,7 +514,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_txt_(34, 35), fxt.tkn_para_end_para_(35)
 			);
 	}
-	@Test  public void File_6() {	// PAGE:en.w:Pyotr Ilyich Tchaikovsky
+	@Test public void File_6() {	// PAGE:en.w:Pyotr Ilyich Tchaikovsky
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " [[Image:Test.png|thumb|caption]]"
@@ -532,7 +532,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void List() {
+	@Test public void List() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, "*b"
@@ -555,7 +555,7 @@ public class Xop_para_wkr_basic_tst {
 			,	fxt.tkn_para_blank_(4)
 			);
 	}
-	@Test  public void Hdr_1() {
+	@Test public void Hdr_1() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, "==b=="
@@ -568,7 +568,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Hdr_2() {
+	@Test public void Hdr_2() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -582,7 +582,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Hdr_list() {
+	@Test public void Hdr_list() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "==a=="
 			, "*b"
@@ -596,7 +596,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</ul>"
 			));
 	}
-	@Test  public void Hdr_list_multi() {
+	@Test public void Hdr_list_multi() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "==a=="
 			, ""
@@ -615,7 +615,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</ul>"
 			));
 	}
-	@Test  public void Para_hdr() {
+	@Test public void Para_hdr() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -638,7 +638,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Div() {	// PURPOSE: <div> should not go into para
+	@Test public void Div() {	// PURPOSE: <div> should not go into para
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, ""
@@ -658,7 +658,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}	
-	@Test  public void Div_para() {	// PURPOSE: </p> inserted between closing divs
+	@Test public void Div_para() {	// PURPOSE: </p> inserted between closing divs
 		raw = String_.Concat_lines_nl_skip_last
 			( "<div>"
 			, "<div>"
@@ -676,7 +676,7 @@ public class Xop_para_wkr_basic_tst {
 			, "</div>"
 			));
 	}
-	@Test  public void Tbl() {
+	@Test public void Tbl() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "<table>"
 			, "<tr>"
@@ -699,7 +699,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Tbl_leading_ws() { // REF: [[Corneal dystrophy (human)]]
+	@Test public void Tbl_leading_ws() { // REF: [[Corneal dystrophy (human)]]
 		raw = String_.Concat_lines_nl_skip_last
 			( " {|"
 			, " |-"
@@ -716,14 +716,14 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Bos_pipe() {	// PURPOSE: | is interpreted as a tblw dlm and calls a different section of code
+	@Test public void Bos_pipe() {	// PURPOSE: | is interpreted as a tblw dlm and calls a different section of code
 		fxt.Test_parse_page_wiki_str("|", String_.Concat_lines_nl_skip_last
 			( "<p>|"
 			, "</p>"
 			, ""
 			));
 	}
-	@Test   public void Ws_mistakenly_ignored() {// PURPOSE: ws before ''' somehow gets ignored; EX: en.w:Vacuum tube; {{Unreferenced section|date=July 2010|reason=date taken from existing cn}}
+	@Test  public void Ws_mistakenly_ignored() {// PURPOSE: ws before ''' somehow gets ignored; EX: en.w:Vacuum tube; {{Unreferenced section|date=July 2010|reason=date taken from existing cn}}
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 			( "<table><tr><td><span>a"
 			, " '''b'''</span></td></tr></table>"
@@ -738,7 +738,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test   public void Pre_7() {	// PURPOSE: alternating pres; EX:w:World Wide Web
+	@Test  public void Pre_7() {	// PURPOSE: alternating pres; EX:w:World Wide Web
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, " b"
@@ -763,7 +763,7 @@ public class Xop_para_wkr_basic_tst {
 		, ""
 		));
 	}
-	@Test  public void Nowiki() {
+	@Test public void Nowiki() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, " <nowiki>b</nowiki>"
@@ -780,7 +780,7 @@ public class Xop_para_wkr_basic_tst {
 		, ""
 		));
 	}
-	@Test  public void Nowiki_tbl() {	// EX: de.wikipedia.org/wiki/Hilfe:Vorlagenprogrammierung
+	@Test public void Nowiki_tbl() {	// EX: de.wikipedia.org/wiki/Hilfe:Vorlagenprogrammierung
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, " <nowiki>b</nowiki>c"
@@ -805,7 +805,7 @@ public class Xop_para_wkr_basic_tst {
 		, ""
 		));
 	}
-	@Test  public void Pre_at_end_should_autoclose() { // PURPOSE: as per proc_name
+	@Test public void Pre_at_end_should_autoclose() { // PURPOSE: as per proc_name
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, " b"
@@ -819,7 +819,7 @@ public class Xop_para_wkr_basic_tst {
 		, ""
 		));
 	}
-	@Test  public void Pre_xtn() {	// PURPOSE: <ref> (and other xtn) was unnecessarily canceling pre; PAGE:en.w:MD5_Hash
+	@Test public void Pre_xtn() {	// PURPOSE: <ref> (and other xtn) was unnecessarily canceling pre; PAGE:en.w:MD5_Hash
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( " <span>a</span>"
 		, " <ref>b</ref>"
@@ -837,7 +837,7 @@ public class Xop_para_wkr_basic_tst {
 		, ""
 		));
 	}
-	@Test   public void Pre_tbl() {	// PURPOSE: pre was being garbled by tables b/c table was ignoring whitespace; DATE:2013-02-11
+	@Test  public void Pre_tbl() {	// PURPOSE: pre was being garbled by tables b/c table was ignoring whitespace; DATE:2013-02-11
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|a"
@@ -877,7 +877,7 @@ public class Xop_para_wkr_basic_tst {
 		, ""
 		));
 	}
-	@Test  public void Nowiki_tbl2() {	// EX: de.wikipedia.org/wiki/Hilfe:Vorlagenprogrammierung
+	@Test public void Nowiki_tbl2() {	// EX: de.wikipedia.org/wiki/Hilfe:Vorlagenprogrammierung
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|a"
@@ -911,10 +911,10 @@ public class Xop_para_wkr_basic_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Pre_nowiki() {	// PURPOSE: nowikis inside pre should be ignored; DATE:2013-03-30
+	@Test public void Pre_nowiki() {	// PURPOSE: nowikis inside pre should be ignored; DATE:2013-03-30
 		fxt.Test_parse_page_all_str("\n a<nowiki>&lt;</nowiki>b"	, "\n<pre>a&lt;b\n</pre>\n");										// basic
 	}
-	@Test  public void Para_bos_tblw() {
+	@Test public void Para_bos_tblw() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "{|"
 			, "|-"
@@ -931,7 +931,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test  public void Para_bos_tblx() {
+	@Test public void Para_bos_tblx() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "<table>"
 			, "<tr>"
@@ -950,7 +950,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test   public void Pre_tblw_td() {
+	@Test  public void Pre_tblw_td() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " b"
@@ -970,7 +970,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test   public void Pre_tblw_tr() {
+	@Test  public void Pre_tblw_tr() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " b"
@@ -990,7 +990,7 @@ public class Xop_para_wkr_basic_tst {
 			, ""
 			));
 	}
-	@Test   public void Pre_tblw_te() {
+	@Test  public void Pre_tblw_te() {
 		raw = String_.Concat_lines_nl_skip_last
 			( "a"
 			, " b"

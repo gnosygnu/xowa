@@ -18,7 +18,7 @@ import org.junit.*;
 public class Io_stream_rdr__tst {
 	@Before public void init() {fxt.Clear();} private Io_stream_rdr__fxt fxt = new Io_stream_rdr__fxt();
 	@After public void term() {fxt.Rls();}
-	@Test  public void Bz2_read() {
+	@Test public void Bz2_read() {
 		fxt	.Init_stream("abcd")	// read everything at once
 			.Expd_bytes_read(4).Test_read(0, 4, "abcd");
 		fxt	.Init_stream("abcd")	// read in steps

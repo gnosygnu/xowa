@@ -225,7 +225,7 @@ public abstract class XomwGenericArrayObject extends XomwArrayObject {	/**
 	*
 	* @return boolean
 	*/
-	@gplx.Virtual public boolean isEmpty() {
+	public boolean isEmpty() {
 		return this.count() == 0;
 	}
 }

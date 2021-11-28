@@ -19,7 +19,7 @@ import gplx.core.primitives.*;
 import gplx.langs.regxs.*;
 public class XophpRegex_replace_tst {
 	private final    XophpRegex_replace_fxt fxt = new XophpRegex_replace_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		// basic
 		fxt.Test__preg_replace("0", "1", "0ab0cd0ef", fxt.Expd("1ab1cd1ef").Count_(3));
 

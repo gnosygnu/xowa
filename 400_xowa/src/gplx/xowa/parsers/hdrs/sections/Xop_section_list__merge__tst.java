@@ -17,7 +17,7 @@ package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_section_list__merge__tst {
 	private final    Xop_section_list__fxt fxt = new Xop_section_list__fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"
@@ -43,7 +43,7 @@ public class Xop_section_list__merge__tst {
 		)
 		);
 	}
-	@Test   public void Nl_many() {
+	@Test  public void Nl_many() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"
@@ -77,7 +77,7 @@ public class Xop_section_list__merge__tst {
 		)
 		);
 	}
-	@Test   public void Bos() {
+	@Test  public void Bos() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"
@@ -97,7 +97,7 @@ public class Xop_section_list__merge__tst {
 		)
 		);
 	}
-	@Test   public void Bos__ws() {
+	@Test  public void Bos__ws() {
 		fxt.Exec__parse
 		( ""
 		, "== Hdr 1 =="
@@ -119,7 +119,7 @@ public class Xop_section_list__merge__tst {
 		)
 		);
 	}
-	@Test   public void Eos() {
+	@Test  public void Eos() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"
@@ -139,7 +139,7 @@ public class Xop_section_list__merge__tst {
 		)
 		);
 	}
-	@Test   public void Lead() {
+	@Test  public void Lead() {
 		fxt.Exec__parse
 		( "lead para"
 		, ""
@@ -159,7 +159,7 @@ public class Xop_section_list__merge__tst {
 		)
 		);
 	}
-	@Test   public void Lead__new() {
+	@Test  public void Lead__new() {
 		fxt.Exec__parse
 		( "== Hdr 1 =="
 		, "Para 1"

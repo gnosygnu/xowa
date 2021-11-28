@@ -26,7 +26,7 @@ public abstract class Xob_init_base implements Xob_cmd, Gfo_invk {
 	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
 	public abstract void Cmd_ini_wdata(Xob_bldr bldr, Xowe_wiki wiki);
 	public abstract void Cmd_run_end(Xowe_wiki wiki);
-	@gplx.Virtual public void Cmd_init(Xob_bldr bldr) {		// add other cmds; EX: wikidata
+	public void Cmd_init(Xob_bldr bldr) {		// add other cmds; EX: wikidata
 		bldr.Import_marker().Bgn(wiki);
 		if (wbase_enabled == Bool_.__byte) wbase_enabled = wiki.Domain_tid() == Xow_domain_tid_.Tid__wikidata ? Bool_.Y_byte : Bool_.N_byte;	// if wbase_enabled not explicitly set, set it to y if wiki is "www.wikidata.org"
 		if (wbase_enabled == Bool_.Y_byte)		// if wbase_enabled, auto-add wdata_wkrs bldr
@@ -53,8 +53,8 @@ public abstract class Xob_init_base implements Xob_cmd, Gfo_invk {
 			Xowd_cfg_tbl_.Upsert__create(wiki);
 		}
 	}
-	@gplx.Virtual public void Cmd_term() {}
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+	public void Cmd_term() {}
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src_xml_fil_))				wiki.Import_cfg().Src_fil_xml_(m.ReadIoUrl("v"));
 		else if	(ctx.Match(k, Invk_src_bz2_fil_))				wiki.Import_cfg().Src_fil_bz2_(m.ReadIoUrl("v"));
 		else if	(ctx.Match(k, Invk_wdata_enabled_))				wbase_enabled = m.ReadYn("v") ? Bool_.Y_byte : Bool_.N_byte;

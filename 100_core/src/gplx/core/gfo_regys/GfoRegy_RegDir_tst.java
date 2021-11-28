@@ -21,7 +21,7 @@ public class GfoRegy_RegDir_tst {
 		Io_mgr.Instance.InitEngine_mem();
 		root = Io_url_.mem_dir_("mem/root");
 	}	GfoRegy regy; Io_url root;
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		ini_fil("101_tsta.txt");
 		ini_fil("102_tstb.txt");
 		ini_fil("103_tstc.png");
@@ -31,20 +31,20 @@ public class GfoRegy_RegDir_tst {
 		tst_Exists("tsta");
 		tst_Exists("tstb");
 	}
-	@Test  public void Err_dupe() {
+	@Test public void Err_dupe() {
 		ini_fil("101_tsta.txt");
 		ini_fil("102_tsta.txt");
 		try {regy.RegDir(root, "*.txt", false, "_", ".");}
 		catch (Exception e) {Tfds.Err_has(e, GfoRegy.Err_Dupe); return;}
 		Tfds.Fail_expdError();
 	}
-	@Test  public void Err_chopBgn() {
+	@Test public void Err_chopBgn() {
 		ini_fil("123_");
 		try {regy.RegDir(root, "*", false, "_", ".");}
 		catch (Exception e) {Tfds.Err_has(e, GfoRegy.Err_ChopBgn); return;}
 		Tfds.Fail_expdError();
 	}
-	@Test  public void Err_chopEnd() {
+	@Test public void Err_chopEnd() {
 		ini_fil(".txt");
 		try {regy.RegDir(root, "*.txt", false, "_", ".");}
 		catch (Exception e) {Tfds.Err_has(e, GfoRegy.Err_ChopEnd); return;}

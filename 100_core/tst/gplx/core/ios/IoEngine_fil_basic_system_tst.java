@@ -21,13 +21,13 @@ public class IoEngine_fil_basic_system_tst extends IoEngine_fil_basic_base_tst {
 		fil = root.GenSubFil("fil.txt");
 		IoEngine_xrg_deleteDir.new_(fil.OwnerDir()).Recur_().ReadOnlyFails_off().Exec();
 	}	@Override protected IoEngine engine_() {return IoEngine_system.new_();}
-	@Test  public void ExistsFil_IgnoreDifferentCasing() {
+	@Test public void ExistsFil_IgnoreDifferentCasing() {
 		if (root.Info().CaseSensitive()) return;
 		fx.run_SaveFilText(fil, "text");
 		fx.tst_ExistsPaths(true, fil);
 		fx.tst_ExistsPaths(true, fil.OwnerDir().GenSubFil("FIL.txt"));
 	}
-	@Test  @gplx.Virtual public void RecycleFil() {
+	@Test @gplx.Virtual public void RecycleFil() {
 		fx.run_SaveFilText(fil, "text");
 		fx.tst_ExistsPaths(true, fil);
 
@@ -44,13 +44,13 @@ public class IoEngine_fil_basic_system_tst extends IoEngine_fil_basic_base_tst {
 		fx.tst_ExistsPaths(true, fil);
 		fx.tst_ExistsPaths(false, recycleXrg.RecycleUrl());
 	}
-	@Test  @Override public void DeleteFil_missing_pass() {
+	@Test @Override public void DeleteFil_missing_pass() {
 		super.DeleteFil_missing_pass();
 	}
-	@Test  @Override public void DeleteFil_readOnly_pass() {
+	@Test @Override public void DeleteFil_readOnly_pass() {
 		super.DeleteFil_readOnly_pass ();
 	}
-	@Test  @Override public void SaveFilText_readOnlyFails() {
+	@Test @Override public void SaveFilText_readOnlyFails() {
 		super.SaveFilText_readOnlyFails();
 	}
 }

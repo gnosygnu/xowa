@@ -68,6 +68,6 @@ public class Json_parser__list_nde__base extends Json_parser__itm__base {
 			list.Add(key, Keyval_.new_(String_.new_u8(key), String_.new_u8(val)));
 		}
 	}
-	@gplx.Virtual protected byte[] Parse_to_list_as_kv__get_val(Json_kv sub, byte[] key) {return sub.Val_as_bry();}
+	protected byte[] Parse_to_list_as_kv__get_val(Json_kv sub, byte[] key) {return sub.Val_as_bry();}
 	@Override protected void Parse_hook_nde(Json_nde sub, Json_kv[] atrs) {}
 }

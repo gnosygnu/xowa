@@ -17,7 +17,7 @@ package gplx.core.js; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Js_wtr_tst {
 	@Before public void Init() {fxt.Clear();} private Js_wtr_fxt fxt = new Js_wtr_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test_write_val_html("abc"					, "'abc'");
 		fxt.Test_write_val_html("a'b"					, "'a\\'b'");
 		fxt.Test_write_val_html("a\"b"					, "'a\\\"b'");

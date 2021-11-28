@@ -17,7 +17,7 @@ package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Json_doc_wtr_tst {
 	private final    Json_doc_wtr_fxt fxt = new Json_doc_wtr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test__Bld_as_str
 		( fxt.Exec__Kv_simple("k1", "v\"1")
 		, fxt.Exec__Concat_apos
@@ -25,7 +25,7 @@ public class Json_doc_wtr_tst {
 		, "  'k1':'v\\\"1'"
 		, "}"));
 	}
-	@Test  public void Quotes() {
+	@Test public void Quotes() {
 		fxt.Test__string__quotes("a\"z"                      , "a\\\"z");
 		fxt.Test__string__quotes("a\u0008z"                  , "a\\bz");
 		fxt.Test__string__quotes("a\fz"                      , "a\\fz");

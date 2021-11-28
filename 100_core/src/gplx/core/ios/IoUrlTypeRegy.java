@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.strings.*; import gplx.langs.gfs.*;
+package gplx.core.ios; import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.UsrDlg_;
+import gplx.UsrMsg;
+import gplx.core.strings.String_bldr;
+import gplx.core.strings.String_bldr_;
 public class IoUrlTypeRegy implements Gfo_invk {
 	public String[] FetchAryOr(String key, String... or) {
 		IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.Get_by(key);
@@ -52,7 +60,7 @@ class IoUrlTypeGrp implements Gfo_invk {
 			for (int i = 0; i < m.Args_count(); i++) {
 				String s = m.ReadStr("v");
 				if (list.Has(s)) {
-					ctx.Write_warn(UsrMsg.new_("itm already has filter").Add("key", key).Add("filter", s).To_str());
+					UsrDlg_.Instance.Warn(UsrMsg.new_("itm already has filter").Add("key", key).Add("filter", s).To_str());
 					list.Del(s);
 				}
 				list.Add(s, s);

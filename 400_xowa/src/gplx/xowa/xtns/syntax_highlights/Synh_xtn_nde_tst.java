@@ -21,19 +21,19 @@ import org.junit.Test;
 
 public class Synh_xtn_nde_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight>abc</syntaxHighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\">abc</pre></div>");
 	}
-	@Test   public void Text() {
+	@Test  public void Text() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight lang=\"text\">abc</syntaxHighlight>", "<div class=\"mw-highlight\"><pre style=\"overflow:auto\" class=\"prettyprint lang-text\">abc</pre></div>");
 	}
-	@Test   public void Style_pre() {
+	@Test  public void Style_pre() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight style=\"color:red;\">abc</syntaxHighlight>", "<div class=\"mw-highlight\" style=\"color:red;\"><pre style=\"overflow:auto\">abc</pre></div>");
 	}
-	@Test   public void Style_code() {
+	@Test  public void Style_code() {
 		fxt.Test_parse_page_all_str("<syntaxHighlight lang=\"text\" style=\"color:red;\">abc</syntaxHighlight>", "<div class=\"mw-highlight\" style=\"color:red;\"><pre style=\"overflow:auto\" class=\"prettyprint lang-text\">abc</pre></div>");
 	}
-	@Test   public void Trim_ws() {
+	@Test  public void Trim_ws() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	"<syntaxHighlight>"
 		,	"abc"
@@ -44,7 +44,7 @@ public class Synh_xtn_nde_tst {
 		,	"</pre></div>"
 		));
 	}
-	@Test   public void Line() {
+	@Test  public void Line() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	"<syntaxHighlight line>"
 		,	"a"
@@ -57,7 +57,7 @@ public class Synh_xtn_nde_tst {
 		,	"</pre></div>"
 		));
 	}
-	@Test   public void Start() {
+	@Test  public void Start() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	"<syntaxHighlight line start=3>"
 		,	"a"
@@ -70,7 +70,7 @@ public class Synh_xtn_nde_tst {
 		,	"</pre></div>"
 		));
 	}
-	@Test   public void Highlight() {
+	@Test  public void Highlight() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	"<syntaxHighlight line highlight='1,3'>"
 		,	"a"
@@ -85,7 +85,7 @@ public class Synh_xtn_nde_tst {
 		,	"</pre></div>"
 		));
 	}
-	@Test   public void Highlight_wo_line_arg() {
+	@Test  public void Highlight_wo_line_arg() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	"<syntaxHighlight highlight='1,3'>"
 		,	"a"
@@ -100,7 +100,7 @@ public class Synh_xtn_nde_tst {
 		,	"</pre></div>"
 		));
 	}
-	@Test   public void Enclose_none() {
+	@Test  public void Enclose_none() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	"<syntaxHighlight enclose=none style='color:red'>"
 		,	"a"
@@ -115,7 +115,7 @@ public class Synh_xtn_nde_tst {
 		,	"</code>"
 		));
 	}
-	@Test   public void Line_padded() {
+	@Test  public void Line_padded() {
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	"<syntaxHighlight line start=9>"
 		,	"a"
@@ -128,7 +128,7 @@ public class Synh_xtn_nde_tst {
 		,	"</pre></div>"
 		));
 	}
-	@Test  public void EndTag_has_ws() {	// PURPOSE: </syntaxhighlight > not being closed correctly; PAGE:en.w:Mergesort; updated; DATE:2014-06-24
+	@Test public void EndTag_has_ws() {	// PURPOSE: </syntaxhighlight > not being closed correctly; PAGE:en.w:Mergesort; updated; DATE:2014-06-24
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		(	"a"
@@ -155,7 +155,7 @@ public class Synh_xtn_nde_tst {
 		));
 		fxt.Init_para_n_();
 	}
-	@Test   public void Trim_ws_from_end_tab() {// PURPOSE: trim ws between "abc" and "</syntaxhighlight"; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
+	@Test  public void Trim_ws_from_end_tab() {// PURPOSE: trim ws between "abc" and "</syntaxhighlight"; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	"<syntaxHighlight>"
 		,	"abc"
@@ -166,7 +166,7 @@ public class Synh_xtn_nde_tst {
 		,	"</pre></div>"
 		));
 	}
-	@Test   public void Pre() {// PURPOSE: handle pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
+	@Test  public void Pre() {// PURPOSE: handle pre; PAGE:en.w:Comment_(computer_programming); DATE:2014-06-23
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	"a"

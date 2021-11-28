@@ -17,14 +17,14 @@ package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*;
 public class Gfo_decimal_parser_tst {
 	private final Gfo_decimal_parser_fxt fxt = new Gfo_decimal_parser_fxt();
-	@Test   public void Positive() {
+	@Test  public void Positive() {
 		fxt.Test__parse("123"		, Bool_.Y,  0, 123);
 		fxt.Test__parse("12.3"		, Bool_.Y, -1, 123);
 		fxt.Test__parse("1.23"		, Bool_.Y, -2, 123);
 		fxt.Test__parse(".123"		, Bool_.Y, -3, 123);
 		fxt.Test__parse("0.123"		, Bool_.Y, -3, 123);
 	}
-	@Test   public void Negative() {
+	@Test  public void Negative() {
 		fxt.Test__parse("-123"		, Bool_.N,  0, 123);
 		fxt.Test__parse("-12.3"		, Bool_.N, -1, 123);
 		fxt.Test__parse("-1.23"		, Bool_.N, -2, 123);

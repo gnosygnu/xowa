@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import g
 import org.junit.*; import gplx.core.tests.*;
 public class Xofulltext_finder_cbk__eval__tst {
 	private final    Xofulltext_finder_cbk__eval__fxt fxt = new Xofulltext_finder_cbk__eval__fxt();
-	@Test   public void Exact() {
+	@Test  public void Exact() {
 		fxt.Init__search("a");
 		// y: basic match
 		fxt.Test__eval_y("a");
@@ -26,7 +26,7 @@ public class Xofulltext_finder_cbk__eval__tst {
 		// n: wildcard_bgn not enabled
 		fxt.Test__eval_n("az");
 	}
-	@Test   public void Or() {
+	@Test  public void Or() {
 		fxt.Init__search("a, c");
 		// y: lone char
 		fxt.Test__eval_y("a"  , "c");
@@ -37,54 +37,54 @@ public class Xofulltext_finder_cbk__eval__tst {
 		// n: no chars
 		fxt.Test__eval_n("b");
 	}
-	@Test   public void And() {
+	@Test  public void And() {
 		fxt.Init__search("a + c");
 		// y: both chars
 		fxt.Test__eval_y("a c", "a b c");
 		// n: one char only
 		fxt.Test__eval_n("a", "c", "a b", "b c");
 	}
-	@Test   public void And__shorthand() {
+	@Test  public void And__shorthand() {
 		fxt.Init__search("a c");
 		// y: both chars
 		fxt.Test__eval_y("a b c");
 		// n: one char only
 		fxt.Test__eval_n("a", "c");
 	}
-	@Test   public void Not() {
+	@Test  public void Not() {
 		fxt.Init__search("-a");
 		// y: no chars
 		fxt.Test__eval_y("b");
 		// n: char exists
 		fxt.Test__eval_n("a");
 	}
-	@Test   public void Trim_end() {
+	@Test  public void Trim_end() {
 		fxt.Init__search("a");
 		// y: single
 		fxt.Test__eval_y("a!");
 		// y: many
 		fxt.Test__eval_y("a!!!");
 	}
-	@Test   public void Trim_bgn() {
+	@Test  public void Trim_bgn() {
 		fxt.Init__search("a");
 		// y: single
 		fxt.Test__eval_y("!a");
 		// y: many
 		fxt.Test__eval_y("!!!a");
 	}
-	@Test   public void Trim_both() {
+	@Test  public void Trim_both() {
 		fxt.Init__search("a");
 		// y: single
 		fxt.Test__eval_y("'a'");
 		// y: many
 		fxt.Test__eval_y("'''a'''");
 	}
-	@Test   public void Slash() {
+	@Test  public void Slash() {
 		fxt.Init__search("a");
 		// y: slash before, after
 		fxt.Test__eval_y("a/b/c", "b/a/c", "b/c/a");
 	}
-	@Test   public void Brack() {
+	@Test  public void Brack() {
 		fxt.Init__search("a");
 		// y
 		fxt.Test__eval_y("[[a]]");

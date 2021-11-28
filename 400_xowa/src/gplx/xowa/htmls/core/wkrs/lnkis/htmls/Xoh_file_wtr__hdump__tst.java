@@ -19,7 +19,7 @@ import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_file_wtr__hdump__tst {
 	private final    Xoh_file_wtr__hdump__fxt fxt = new Xoh_file_wtr__hdump__fxt();
 
-	@Test   public void Plain() {
+	@Test  public void Plain() {
 		fxt.Init__hctx__hzip__none();
 		fxt.Test__parse
 		( "[[File:A.png]]"

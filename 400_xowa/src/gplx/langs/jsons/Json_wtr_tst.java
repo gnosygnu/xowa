@@ -17,14 +17,14 @@ package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Json_wtr_tst {
 	@Before public void init() {fxt.Clear();} private final    Json_wtr_fxt fxt = new Json_wtr_fxt();
-	@Test   public void Root() {
+	@Test  public void Root() {
 		fxt.Wtr().Doc_nde_bgn().Doc_nde_end();
 		fxt.Test
 		( "{"
 		, "}"
 		);
 	}
-	@Test   public void Kv() {
+	@Test  public void Kv() {
 		fxt.Wtr()
 			.Doc_nde_bgn()
 			.Kv_str("k0", "v0")
@@ -36,7 +36,7 @@ public class Json_wtr_tst {
 		, "}"
 		);
 	}
-	@Test   public void Escaped() {
+	@Test  public void Escaped() {
 		fxt.Wtr()
 			.Doc_nde_bgn()
 			.Kv_str("backslash", "\\")
@@ -56,7 +56,7 @@ public class Json_wtr_tst {
 		, "}"
 		);
 	}
-	@Test   public void Nde() {
+	@Test  public void Nde() {
 		fxt.Wtr()
 			.Doc_nde_bgn()
 				.Nde_bgn("s0")
@@ -82,7 +82,7 @@ public class Json_wtr_tst {
 		, "}"
 		);
 	}
-	@Test   public void Ary() {
+	@Test  public void Ary() {
 		fxt.Wtr()
 			.Doc_nde_bgn()
 			.Ary_bgn("a0")
@@ -98,7 +98,7 @@ public class Json_wtr_tst {
 		, "}"
 		);
 	}
-	@Test   public void Nde__nested() {
+	@Test  public void Nde__nested() {
 		fxt.Wtr()
 			.Doc_nde_bgn()
 			.Ary_bgn("a0")

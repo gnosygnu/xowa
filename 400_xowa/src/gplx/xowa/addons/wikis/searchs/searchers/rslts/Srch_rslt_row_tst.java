@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.searchs.searchers.rslts; import gplx.*; import gp
 import org.junit.*; import gplx.core.tests.*;
 public class Srch_rslt_row_tst {
 	private final    Srch_rslt_row_fxt fxt = new Srch_rslt_row_fxt();
-	@Test   public void To_display() {
+	@Test  public void To_display() {
 		Srch_rslt_row row_straight = fxt.Make__row_straight("Ab", "<b>A</b>b");
 		Srch_rslt_row row_redirect = fxt.Make__row_redirect("Ab", "<b>A</b>b", "C");
 

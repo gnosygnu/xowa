@@ -27,7 +27,7 @@ public abstract class XomwArrayObject {
 	public void offsetUnset(Object key) {
 		hash.Del(key);
 	}
-	@gplx.Virtual public void offsetSet(int key, Object val) {
+	public void offsetSet(int key, Object val) {
 		hash.Add(key, val);
 	}
 

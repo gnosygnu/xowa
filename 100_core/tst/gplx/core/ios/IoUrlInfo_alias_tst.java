@@ -17,31 +17,31 @@ package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class IoUrlInfo_alias_tst {
 	IoUrlInfo_alias alias;
-	@Test  public void MapWntToWnt() {
+	@Test public void MapWntToWnt() {
 		Make("usr:\\", "D:\\usr\\");
 		tst_Xto_api("usr:\\dir\\fil.txt", "D:\\usr\\dir\\fil.txt");
 		tst_OwnerDir("usr:\\dir\\", "usr:\\");
 		tst_OwnerDir("usr:\\", "");
 		tst_NameOnly("usr:\\", "usr");
 	}
-	@Test  public void MapToLnx() {
+	@Test public void MapToLnx() {
 		Make("usr:\\", "/home/");
 		tst_Xto_api("usr:\\dir\\fil.txt", "/home/dir/fil.txt");
 	}
-	@Test  public void MapLnxToWnt() {
+	@Test public void MapLnxToWnt() {
 		Make("usr:/", "C:\\usr\\");
 		tst_Xto_api("usr:/dir/fil.txt", "C:\\usr\\dir\\fil.txt");
 	}
-	@Test  public void WntToWnt() {
+	@Test public void WntToWnt() {
 		Make("C:\\", "X:\\");
 		tst_Xto_api("C:\\dir\\fil.txt", "X:\\dir\\fil.txt");
 		tst_NameOnly("C:\\", "C");
 	}
-	@Test  public void WntToLnx() {
+	@Test public void WntToLnx() {
 		Make("C:\\", "/home/");
 		tst_Xto_api("C:\\dir\\fil.txt", "/home/dir/fil.txt");
 	}
-	@Test  public void LnxToWnt() {
+	@Test public void LnxToWnt() {
 		Make("/home/", "C:\\");
 		tst_Xto_api("/home/dir/fil.txt", "C:\\dir\\fil.txt");
 		tst_NameOnly("/home/", "home");

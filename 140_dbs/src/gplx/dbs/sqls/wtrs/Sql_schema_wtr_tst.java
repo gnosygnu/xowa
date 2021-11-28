@@ -17,12 +17,12 @@ package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sq
 import org.junit.*;
 public class Sql_schema_wtr_tst {
 	@Before public void setup() {} private final    Sql_schema_wtr_fxt fxt = new Sql_schema_wtr_fxt();
-	@Test  public void Idx_unique() {
+	@Test public void Idx_unique() {
 		fxt.Test_create_idx(Dbmeta_idx_itm.new_unique_by_tbl("tbl_name", "idx_name", "fld_1", "fld_2")
 		, "CREATE UNIQUE INDEX IF NOT EXISTS tbl_name__idx_name ON tbl_name (fld_1, fld_2);"
 		);
 	}
-	@Test  public void Tbl_basic() {
+	@Test public void Tbl_basic() {
 		Dbmeta_fld_list flds = new Dbmeta_fld_list();
 		flds.Add_int_pkey("fld_int_pkey");
 		flds.Add_bool("fld_bool");
@@ -50,7 +50,7 @@ public class Sql_schema_wtr_tst {
 		, ");"
 		));
 	}
-	@Test  public void Tbl_alter_tbl_add() {
+	@Test public void Tbl_alter_tbl_add() {
 		Dbmeta_fld_list flds = new Dbmeta_fld_list();
 		flds.Add_int_dflt("fld_int", -1);
 		flds.Add_str_dflt("fld_str", 255, "a");

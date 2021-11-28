@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_gly_html__dump__tst {		
 	@Before public void init() {fxt.Clear();} private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
 		( "<gallery>"
 		, "File:A.png|A1"
@@ -53,7 +53,7 @@ public class Xoh_gly_html__dump__tst {
 		, "  </li>"
 		, "</ul>"));
 	}
-	@Test   public void Atrs() {
+	@Test  public void Atrs() {
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
 		( "<gallery perrow='5' widths='200' heights='300'>"
 		, "File:A.png|A1"
@@ -75,7 +75,7 @@ public class Xoh_gly_html__dump__tst {
 		, "  </li>"
 		, "</ul>"));
 	}
-	@Test   public void Packed() {
+	@Test  public void Packed() {
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
 		( "<gallery mode='packed'>"
 		, "File:A.png|A1"

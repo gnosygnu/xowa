@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.envs.*;
 public class Io_download_fmt_tst {
 	Io_download_fmt_fxt fxt = new Io_download_fmt_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Fmt() {
+	@Test public void Fmt() {
 		fxt.Clear().Ini("downloading ~{src_name}: ~{prog_left} left (@ ~{prog_rate}); ~{prog_done} of ~{src_len} (~{prog_pct}%)", "http://a.org/b.png", Io_mgr.Len_kb * 10);
 		fxt.Now_add_f(1000).Prog_done_(1 * Io_mgr.Len_kb).Prog_pct_(1 * 1000).Prog_rate_(Io_mgr.Len_kb).Prog_left_(9 * 1000)
 		.Prog_msg_("downloading b.png: 09s left (@ 1.000 KBps); 1.000 KB of 10.000 KB (10.00%)")
@@ -32,7 +32,7 @@ public class Io_download_fmt_tst {
 		.Download_(Io_mgr.Len_kb)
 		;
 	}
-	@Test  public void Tilde() {
+	@Test public void Tilde() {
 		fxt.Clear().Ini("a~b", "http://a.org/b.png", Io_mgr.Len_kb * 10);
 	}
 }

@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xop_para_wkr_pre_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void teardown() {fxt.Init_para_n_();}
-	@Test  public void Pre_ignore_bos() {			// PURPOSE: ignore pre at bgn; DATE:2013-07-09
+	@Test public void Pre_ignore_bos() {			// PURPOSE: ignore pre at bgn; DATE:2013-07-09
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	" "
 		,	"b"
@@ -28,7 +28,7 @@ public class Xop_para_wkr_pre_tst {
 		,	"</p>"
 		));
 	}
-	@Test  public void Pre_ignore_bos_tblw() {		// PURPOSE: ignore pre at bgn shouldn't break tblw; EX:commons.wikimedia.org; DATE:2013-07-11
+	@Test public void Pre_ignore_bos_tblw() {		// PURPOSE: ignore pre at bgn shouldn't break tblw; EX:commons.wikimedia.org; DATE:2013-07-11
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl
 		(	" "
 		,	"{|"
@@ -46,7 +46,7 @@ public class Xop_para_wkr_pre_tst {
 		,	"</table>"
 		));
 	}
-	@Test  public void Ignore_bos_xnde() {		// PURPOSE: space at bgn shouldn't create pre; EX:commons.wikimedia.org; " <center>a\n</center>"; DATE:2013-11-28
+	@Test public void Ignore_bos_xnde() {		// PURPOSE: space at bgn shouldn't create pre; EX:commons.wikimedia.org; " <center>a\n</center>"; DATE:2013-11-28
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		(	" <center>a"	// NOTE: leading " " matches MW; DATE:2014-06-23
 		,	"</center>"
@@ -56,7 +56,7 @@ public class Xop_para_wkr_pre_tst {
 		,	""
 		));
 	}
-	@Test  public void Ignore_pre_in_gallery() {// PURPOSE: pre in gallery should be ignored; EX:uk.w:EP2; DATE:2014-03-11
+	@Test public void Ignore_pre_in_gallery() {// PURPOSE: pre in gallery should be ignored; EX:uk.w:EP2; DATE:2014-03-11
 		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = Bool_.Y_byte;
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "a"
@@ -84,7 +84,7 @@ public class Xop_para_wkr_pre_tst {
 		));
 		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = Bool_.N_byte;
 	}
-	@Test  public void Pre_xnde_gallery() {	// PURPOSE: <gallery> should invalidate pre; EX: en.w:Mary, Queen of Scots
+	@Test public void Pre_xnde_gallery() {	// PURPOSE: <gallery> should invalidate pre; EX: en.w:Mary, Queen of Scots
 		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = Bool_.Y_byte;
 		fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());
 		String raw = String_.Concat_lines_nl_skip_last
@@ -111,7 +111,7 @@ public class Xop_para_wkr_pre_tst {
 			));
 		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = Bool_.N_byte;
 	}
-	@Test  public void Ignore_pre_in_center() {// PURPOSE: pre in gallery should be ignored; EX:uk.w:EP2; DATE:2014-03-11
+	@Test public void Ignore_pre_in_center() {// PURPOSE: pre in gallery should be ignored; EX:uk.w:EP2; DATE:2014-03-11
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, " <center>b"
@@ -128,7 +128,7 @@ public class Xop_para_wkr_pre_tst {
 		)
 		);
 	}
-	@Test  public void Remove_only_1st_space() {	// PURPOSE: pre should only remove 1st space]; EX: w:Wikipedia:WikiProject_History/CategoryExample; DATE:2014-04-14
+	@Test public void Remove_only_1st_space() {	// PURPOSE: pre should only remove 1st space]; EX: w:Wikipedia:WikiProject_History/CategoryExample; DATE:2014-04-14
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "    a"
 		, "    b"
@@ -141,7 +141,7 @@ public class Xop_para_wkr_pre_tst {
 		)
 		);
 	}
-	@Test  public void Remove_only_1st_space__bos() {	// PURPOSE: similar to above but check that pre at \n\s is indented correctly; DATE:2014-04-14
+	@Test public void Remove_only_1st_space__bos() {	// PURPOSE: similar to above but check that pre at \n\s is indented correctly; DATE:2014-04-14
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( ""
 		, "    a"
@@ -154,7 +154,7 @@ public class Xop_para_wkr_pre_tst {
 		)
 		);
 	}
-	@Test  public void Ignore_tblw_td() {// PURPOSE: \n\s| should continue pre; EX:w:Wikipedia:WikiProject_History/CategoryExample; DATE:2014-04-14
+	@Test public void Ignore_tblw_td() {// PURPOSE: \n\s| should continue pre; EX:w:Wikipedia:WikiProject_History/CategoryExample; DATE:2014-04-14
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( " a"
 		, " |"
@@ -167,7 +167,7 @@ public class Xop_para_wkr_pre_tst {
 		)
 		);
 	}
-	@Test   public void Tab() {	// PURPOSE: tab inside pre was being converted to space; PAGE:en.w:Cascading_Style_Sheets DATE:2014-06-23
+	@Test  public void Tab() {	// PURPOSE: tab inside pre was being converted to space; PAGE:en.w:Cascading_Style_Sheets DATE:2014-06-23
 		fxt.Test_html_full_str
 		( " \ta"
 		, String_.Concat_lines_nl
@@ -175,7 +175,7 @@ public class Xop_para_wkr_pre_tst {
 		, "</pre>"
 		));	
 	}
-	@Test   public void Style() {	// PURPOSE: " <style>" was not being put in pre; PAGE:en.w:Cascading_Style_Sheets DATE:2014-06-23
+	@Test  public void Style() {	// PURPOSE: " <style>" was not being put in pre; PAGE:en.w:Cascading_Style_Sheets DATE:2014-06-23
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl
 		( " <style>"
 		, " </style>"
@@ -185,7 +185,7 @@ public class Xop_para_wkr_pre_tst {
 		, "</pre>"
 		));	
 	}
-	@Test  public void Nl_only() {	// PURPOSE: wiki_pre with \n only was being dropped; PAGE:en.w:Preferred_number DATE:2014-06-24
+	@Test public void Nl_only() {	// PURPOSE: wiki_pre with \n only was being dropped; PAGE:en.w:Preferred_number DATE:2014-06-24
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
 		( " a"
 		, " "	// was being dropped
@@ -197,7 +197,7 @@ public class Xop_para_wkr_pre_tst {
 		, "</pre>"
 		));	
 	}
-	@Test  public void Nl_w_ws() {	// PURPOSE: based on Nl_only; make sure that 1 or more spaces does not add extra \n; PAGE:en.w:Preferred_number DATE:2014-06-24
+	@Test public void Nl_w_ws() {	// PURPOSE: based on Nl_only; make sure that 1 or more spaces does not add extra \n; PAGE:en.w:Preferred_number DATE:2014-06-24
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
 		( " a"
 		, "  "	// 2 spaces
@@ -209,7 +209,7 @@ public class Xop_para_wkr_pre_tst {
 		, "</pre>"
 		));	
 	}
-	@Test  public void Nl_many() {	// PURPOSE: handle alternating \n\s; PAGE:en.w:Preferred_number DATE:2014-06-24
+	@Test public void Nl_many() {	// PURPOSE: handle alternating \n\s; PAGE:en.w:Preferred_number DATE:2014-06-24
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
 		( " a"
 		, " "
@@ -225,7 +225,7 @@ public class Xop_para_wkr_pre_tst {
 		, "</pre>"
 		));	
 	}
-	@Test   public void Source() {	// PURPOSE: " <source>" in pre has issues; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
+	@Test  public void Source() {	// PURPOSE: " <source>" in pre has issues; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
 		fxt.Init_para_y_();
 		fxt.Test_html_wiki_str(String_.Concat_lines_nl
 		( " "
@@ -244,7 +244,7 @@ public class Xop_para_wkr_pre_tst {
 		, "</p>"
 		));	
 	}
-	@Test   public void False_match_xnde() {	// PURPOSE: "\s<trk>" being evaluted as "\s<tr>"; PAGE:de.v:Via_Jutlandica/Gpx DATE:2014-11-29
+	@Test  public void False_match_xnde() {	// PURPOSE: "\s<trk>" being evaluted as "\s<tr>"; PAGE:de.v:Via_Jutlandica/Gpx DATE:2014-11-29
 		fxt.Init_para_y_();
 		fxt.Test_html_wiki_str(String_.Concat_lines_nl
 		( ""

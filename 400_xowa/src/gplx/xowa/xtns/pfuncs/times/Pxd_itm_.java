@@ -86,8 +86,8 @@ abstract class Pxd_itm_base implements Pxd_itm {
 	public void Seg_idx_(int v) {seg_idx = v;}
 	public int Data_idx() {return data_idx;} public void Data_idx_(int v) {data_idx = v;} private int data_idx;
 	public abstract int Eval_idx();
-	@gplx.Virtual public boolean Eval(Pxd_parser state) {return true;}
-	@gplx.Virtual public boolean Time_ini(Pxd_date_bldr bldr) {return true;}
+	public boolean Eval(Pxd_parser state) {return true;}
+	public boolean Time_ini(Pxd_date_bldr bldr) {return true;}
 	public void Ctor(int ary_idx) {this.ary_idx = ary_idx;}
 	public static final int Seg_idx_null = -1, Seg_idx_skip = -2;
 }

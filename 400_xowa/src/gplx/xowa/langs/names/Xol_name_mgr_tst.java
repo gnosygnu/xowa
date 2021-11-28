@@ -20,7 +20,7 @@ import gplx.xowa.xtns.cldrs.*;
 public class Xol_name_mgr_tst {
 	private final    Xol_name_mgr_fxt fxt = new Xol_name_mgr_fxt();
 
-	@Test   public void Cldr_only() {
+	@Test  public void Cldr_only() {
 		fxt.Test__fetchLanguageNamesUncached
 			( "en", Xol_name_mgr.Scope__int__all
 			, fxt.Make__cldr_names("en", "de")
@@ -31,7 +31,7 @@ public class Xol_name_mgr_tst {
 			, "en|en_cldr"
 			));
 	}
-	@Test   public void Lang_name__langs() {
+	@Test  public void Lang_name__langs() {
 		fxt.Test__fetchLanguageNamesUncached
 			( "en", Xol_name_mgr.Scope__int__all
 			, fxt.Make__cldr_names("en", "de", "es")
@@ -44,7 +44,7 @@ public class Xol_name_mgr_tst {
 			, "fr|fr_lang" // add fr_lang
 			));
 	}
-	@Test   public void mwFile() {
+	@Test  public void mwFile() {
 		fxt.Test__fetchLanguageNamesUncached
 			( "en", Xol_name_mgr.Scope__int__mwFile
 			, fxt.Make__cldr_names("en", "de")
@@ -55,7 +55,7 @@ public class Xol_name_mgr_tst {
 			, "en|en_lang"
 			));
 	}
-	@Test   public void mw() {
+	@Test  public void mw() {
 		fxt.Test__fetchLanguageNamesUncached
 			( "en", Xol_name_mgr.Scope__int__mw
 			, fxt.Make__cldr_names("en", "de")

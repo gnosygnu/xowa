@@ -17,15 +17,15 @@ package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Imap_html__hview__tst {
 	private final    Imap_html__fxt fxt = new Imap_html__fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		String wtxt = fxt.Basic__wtxt();
 		fxt.Test__hview(wtxt, fxt.Hdump_n_().Basic__html(Bool_.Y));
 		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Basic__html(Bool_.N), fxt.Basic__html(Bool_.Y), fxt.Basic__fsdb());
 	}
-	@Test  public void Caption_xml() {	// PURPOSE: xnde in caption was being escaped; PAGE:en.w:Council_of_Europe; DATE:2014-07-25
+	@Test public void Caption_xml() {	// PURPOSE: xnde in caption was being escaped; PAGE:en.w:Council_of_Europe; DATE:2014-07-25
 		fxt.Test_html_full_frag("<imagemap>File:A.png|thumb|<b>c</b>\n</imagemap>", "<b>c</b>");
 	}
-	@Test  public void Default() {
+	@Test public void Default() {
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
 		( "<imagemap>"
 		, "File:A.png|thumb|123px|a1"
@@ -48,12 +48,12 @@ public class Imap_html__hview__tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Desc() {
+	@Test public void Desc() {
 		String wtxt = fxt.Desc__wtxt();
 		fxt.Test__hview(wtxt, fxt.Hdump_n_().Desc__html(Bool_.Y));
 		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Desc__html(Bool_.N), fxt.Desc__html(Bool_.Y), fxt.Basic__fsdb());
 	}
-	@Test  public void Lnke() {	// PURPOSE: handle shapes with lnke; PAGE:en.w:Cholesterolt DATE:2014-07-25
+	@Test public void Lnke() {	// PURPOSE: handle shapes with lnke; PAGE:en.w:Cholesterolt DATE:2014-07-25
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
 		( "<imagemap>"
 		, "File:A.png|thumb|123px|a1"
@@ -76,7 +76,7 @@ public class Imap_html__hview__tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Err_trailing_ws() {	// PURPOSE: empty 1st line causes failure
+	@Test public void Err_trailing_ws() {	// PURPOSE: empty 1st line causes failure
 		fxt.Test_html_full_frag(String_.Concat_lines_nl_skip_last
 		( "<imagemap> "
 		, "File:A.png|thumb|test_caption"
@@ -84,12 +84,12 @@ public class Imap_html__hview__tst {
 		), "test_caption"		// no error if test_caption appears; 
 		);
 	}
-	@Test  public void Para_omitted() {	// PURPOSE: imagemap should not be automatically enclosed in para; PAGE:cs.w:Seznam_clenu_ctrn�ct�ho_Knesetu; DATE:2014-05-08;
+	@Test public void Para_omitted() {	// PURPOSE: imagemap should not be automatically enclosed in para; PAGE:cs.w:Seznam_clenu_ctrn�ct�ho_Knesetu; DATE:2014-05-08;
 		fxt.Fxt().Init_para_y_();
 		fxt.Test_html_full_str("<imagemap>File:A.png</imagemap> a", fxt.Frag_html_full() + " a"); // NOTE: "a" no longer enclosed in <p>; DATE:2014-07-25
 		fxt.Fxt().Init_para_n_();
 	}
-	@Test  public void Xnde_double_pipe() {// PURPOSE: if || is inside table and imagemap, treat as lnki; EX:w:United_States_presidential_election,_1992; DATE:2014-03-29; DATE:2014-05-06
+	@Test public void Xnde_double_pipe() {// PURPOSE: if || is inside table and imagemap, treat as lnki; EX:w:United_States_presidential_election,_1992; DATE:2014-03-29; DATE:2014-05-06
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-"
@@ -114,11 +114,11 @@ public class Imap_html__hview__tst {
 		)
 		);
 	}
-	@Test  public void Template_image() {	// PURPOSE: handle templates in caption; PAGE:en.w:Kilauea; DATE:2014-07-27
+	@Test public void Template_image() {	// PURPOSE: handle templates in caption; PAGE:en.w:Kilauea; DATE:2014-07-27
 		fxt.Fxt().Init_page_create("Template:Test_template", "xyz");
 		fxt.Test_html_full_frag("<imagemap>File:A.png|thumb|{{Test_template}}\n</imagemap>", "xyz");
 	}
-	@Test  public void Template_shape() {	// PURPOSE: handle templates in shape; PAGE:fr.w:Arrondissements_de_Lyon DATE:2014-08-12
+	@Test public void Template_shape() {	// PURPOSE: handle templates in shape; PAGE:fr.w:Arrondissements_de_Lyon DATE:2014-08-12
 		fxt.Fxt().Init_page_create("Template:B1", "<b>b1</b>");	// note that an xnde is a better example as it will throw ArrayOutOfBounds error
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last
 		( "<imagemap>"
@@ -142,7 +142,7 @@ public class Imap_html__hview__tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Template_multi_line() {	// PURPOSE: handle multiple-line captions; PAGE:en.w:Archaea; DATE:2014-08-22			
+	@Test public void Template_multi_line() {	// PURPOSE: handle multiple-line captions; PAGE:en.w:Archaea; DATE:2014-08-22
 		fxt.Test_html_full_frag(String_.Concat_lines_nl_skip_last
 		( "<imagemap>"
 		, "File:A.png|thumb|<ref>text"

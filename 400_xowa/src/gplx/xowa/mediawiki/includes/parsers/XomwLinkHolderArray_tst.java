@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.linkers.*;
 public class XomwLinkHolderArray_tst {
 	private final    XomwLinkHolderArray_fxt fxt = new XomwLinkHolderArray_fxt();
-	@Test   public void Replace__basic() {
+	@Test  public void Replace__basic() {
 		fxt.Init__add("A", "a");
 		fxt.Test__replace("a <!--LINK 0--> b", "a <a href='/wiki/A' title='A'>a</a> b");
 	}

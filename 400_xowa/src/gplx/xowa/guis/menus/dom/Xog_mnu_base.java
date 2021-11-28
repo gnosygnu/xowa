@@ -73,7 +73,7 @@ public abstract class Xog_mnu_base implements Gfo_invk {
 		list.Add(rv);
 		return rv;
 	}
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_clear))				this.Clear();
 //			else if	(ctx.Match(k, Invk_add))				return Add_itm_default(Xog_mnu_itm.Tid_nil, m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_add_spr))			return Add_spr();

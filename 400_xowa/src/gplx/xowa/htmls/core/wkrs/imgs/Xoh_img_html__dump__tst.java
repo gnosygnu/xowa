@@ -18,19 +18,19 @@ import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_img_html__dump__tst {
 	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__html
 		( "[[File:A.png|220x110px|upright=.5|abc]]"
 		, "<a href='/wiki/File:A.png' class='image' title='abc' xowa_title='A.png'><img data-xowa-title=\"A.png\" data-xoimg='0|220|110|0.5|-1|-1' alt='abc' src='' width='0' height='0'/></a>");
 	}
-	@Test   public void Empty_link() {
+	@Test  public void Empty_link() {
 		fxt.Test__html("[[File:A.png|220x110px|link=|abc]]", "<img data-xowa-title=\"A.png\" data-xoimg='0|220|110|-1|-1|-1' alt='abc' src='' width='0' height='0'/>");
 	}
-	@Test   public void Lcase_img() {
+	@Test  public void Lcase_img() {
 		Make_ns_case_sensitive(fxt.Parser_fxt().Wiki(), gplx.xowa.wikis.nss.Xow_ns_.Tid__file);
 		fxt.Test__html("[[File:a_b.png]]", "<a href=\"/wiki/File:a_b.png\" class=\"image\" xowa_title=\"a_b.png\"><img data-xowa-title=\"a_b.png\" data-xoimg=\"0|-1|-1|-1|-1|-1\" alt=\"\" src=\"\" width=\"0\" height=\"0\"/></a>");
 	}
-	@Test   public void Lcase_video() {
+	@Test  public void Lcase_video() {
 		Make_ns_case_sensitive(fxt.Parser_fxt().Wiki(), gplx.xowa.wikis.nss.Xow_ns_.Tid__file);
 		fxt.Test__html("[[File:a b.ogv]]"
 		, String_.Concat_lines_nl_skip_last

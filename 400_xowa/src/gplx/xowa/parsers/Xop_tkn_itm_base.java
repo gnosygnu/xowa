@@ -21,7 +21,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 	public Xop_tkn_grp Tkn_grp() {return grp == null ? this : grp;} private Xop_tkn_grp grp;	// NOTE: not sure about this; need to handle null refs when tkns are manipulated but not yet added to a group
 	public Xop_tkn_itm Tkn_ini_pos(boolean immutable, int bgn, int end) {this.immutable = immutable; this.src_bgn = bgn; this.src_end = end; return this;}
 	public Xop_tkn_itm Tkn_grp_(Xop_tkn_grp grp, int sub_idx) {this.grp = grp; this.tkn_sub_idx = sub_idx; return this;}
-	@gplx.Virtual public Xop_tkn_itm Tkn_clone(Xop_ctx ctx, int bgn, int end) {throw Err_.new_wo_type("tkn_clone not implemented", "name", Xop_tkn_itm_.Tid__names[this.Tkn_tid()]);}
+	public Xop_tkn_itm Tkn_clone(Xop_ctx ctx, int bgn, int end) {throw Err_.new_wo_type("tkn_clone not implemented", "name", Xop_tkn_itm_.Tid__names[this.Tkn_tid()]);}
 	public boolean Tkn_immutable() {return immutable;} private boolean immutable;
 	public int Tkn_sub_idx() {return tkn_sub_idx;} private int tkn_sub_idx = -1;
 	public int Src_bgn() {return src_bgn;} private int src_bgn = -1;
@@ -132,7 +132,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 //			if (tkn.Tkn_immutable()) tkn = Subs_immutable_clone(ctx, tkn);
 //			tkn.Tkn_grp_(grp, sub_idx);
 	}
-	@gplx.Virtual public void Reset() {
+	public void Reset() {
 		src_bgn = src_end = tkn_sub_idx = -1; ignore = false;  tmpl_static = false;
 		if (subs.length > Tkn_subs_max) {
 			subs = new Xop_tkn_itm[Tkn_subs_max];
@@ -145,18 +145,18 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 		}
 		subs_len = 0;
 	}
-	@gplx.Virtual public void Html__write(Bry_bfr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src) {throw Err_.new_unimplemented();}
+	public void Html__write(Bry_bfr bfr, Xoh_html_wtr wtr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, Xoh_html_wtr_cfg cfg, Xop_tkn_grp grp, int sub_idx, byte[] src) {throw Err_.new_unimplemented();}
 	public void Clear() {
 		src_bgn = src_end = tkn_sub_idx = -1; ignore = false;  tmpl_static = false;
 		Subs_clear();
 	}
-	@gplx.Virtual public void Tmpl_fmt(Xop_ctx ctx, byte[] src, Xot_fmtr fmtr) {fmtr.Reg_ary(ctx, src, tmpl_static, src_bgn, src_end, subs_len, subs);}
-	@gplx.Virtual public void Tmpl_compile(Xop_ctx ctx, byte[] src, Xot_compile_data prep_data) {
+	public void Tmpl_fmt(Xop_ctx ctx, byte[] src, Xot_fmtr fmtr) {fmtr.Reg_ary(ctx, src, tmpl_static, src_bgn, src_end, subs_len, subs);}
+	public void Tmpl_compile(Xop_ctx ctx, byte[] src, Xot_compile_data prep_data) {
 		if (!ignore) tmpl_static = true;
 		for (int i = 0; i < subs_len; i++)
 			subs[i].Tmpl_compile(ctx, src, prep_data);
 	}	boolean tmpl_static = false;
-	@gplx.Virtual public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {
+	public boolean Tmpl_evaluate(Xop_ctx ctx, byte[] src, Xot_invk caller, Bry_bfr bfr) {
 		if (tmpl_static) bfr.Add_mid(src, src_bgn, src_end);
 		for (int i = 0; i < subs_len; i++)
 			subs[i].Tmpl_evaluate(ctx, src, caller, bfr);

@@ -17,34 +17,34 @@ package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.core.tests.*; import gplx.langs.htmls.*;
 public class Xoh_toc_wkr__txt__basic__tst {
 	@Before public void init() {fxt.Clear();} private final    Xoh_toc_wkr__txt__fxt fxt = new Xoh_toc_wkr__txt__fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__both("a b c", "a_b_c", "a b c");
 	}
-	@Test   public void Ws() {
+	@Test  public void Ws() {
 		fxt.Test__both(" a b ", "a_b", "a b");
 	}
-	@Test   public void Nl() {
+	@Test  public void Nl() {
 		fxt.Test__both("\na b\n", "a_b", "a b");
 	}
-	@Test   public void Empty() {	// PAGE:s.w:Colac,_Victoria DATE:2016-07-17
+	@Test  public void Empty() {	// PAGE:s.w:Colac,_Victoria DATE:2016-07-17
 		fxt.Test__both("", "", "");
 	}
-	@Test   public void Amp__ncr() {
+	@Test  public void Amp__ncr() {
 		fxt.Test__both("&#91;a&#93;", "[a]", "&#91;a&#93;");// ISSUE#:462; DATE:2019-05-12
 	}
-	@Test   public void Encode() {
+	@Test  public void Encode() {
 		fxt.Test__both("a+b", "a+b", "a+b");// ISSUE#:462; DATE:2019-05-12
 	}
-	@Test   public void Comment() {
+	@Test  public void Comment() {
 		fxt.Test__text("a<!--b-->c", "ac");
 	}
-	@Test   public void Remove_comment__one() {
+	@Test  public void Remove_comment__one() {
 		fxt.Test__remove_comment("a<!--b-->c", "ac");
 	}
-	@Test   public void Remove_comment__many() {
+	@Test  public void Remove_comment__many() {
 		fxt.Test__remove_comment("1<!--2-->3<!--4-->5", "135");
 	}
-	@Test   public void Remove_comment__dangling() {
+	@Test  public void Remove_comment__dangling() {
 		fxt.Test__remove_comment("1<!--2-->3<!--4->5", "13");
 	}
 }

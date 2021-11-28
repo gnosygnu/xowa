@@ -28,7 +28,7 @@ public abstract class Xow_special_wtr__base {
 		Bld_tags(app, addon_dir, page_data);
 		page_data.Apply(page);
 	}
-	@gplx.Virtual protected byte[] Bld_html_body(Io_url addon_dir, gplx.langs.mustaches.Mustache_doc_itm itm) {
+	protected byte[] Bld_html_body(Io_url addon_dir, gplx.langs.mustaches.Mustache_doc_itm itm) {
 		byte[] tmpl = Io_mgr.Instance.LoadFilBry(this.Get_mustache_fil(addon_dir));
 		return gplx.langs.mustaches.Mustache_wtr_.Write_to_bry(Bry_bfr_.New(), tmpl, itm);
 	}
@@ -37,7 +37,7 @@ public abstract class Xow_special_wtr__base {
 	protected abstract Io_url Get_mustache_fil(Io_url addon_dir);
 	protected abstract Mustache_doc_itm	Bld_mustache_root(Xoa_app app);
 	protected abstract void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data data);
-	@gplx.Virtual protected void Handle_invalid(Xoa_app app, Xoa_page page, Xow_special_page special) {
+	protected void Handle_invalid(Xoa_app app, Xoa_page page, Xow_special_page special) {
 		new Xopage_html_data(special.Special__meta().Display_ttl(), Bry_.new_a7("Not available")).Apply(page);
 	}
 }

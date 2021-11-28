@@ -18,13 +18,13 @@ import org.junit.*;
 public class Xof_file_ext__ogv_tst {
 	@Before public void init() {fxt.Reset();} private final Xof_file_fxt fxt = new Xof_file_fxt();
 	@After public void term() {fxt.Rls();}
-	@Test   public void Copy_orig() {
+	@Test  public void Copy_orig() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.ogv", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_thumb("A.ogv", 440, 400));
 		fxt.Exec_get(Xof_exec_arg.new_orig("A.ogv").Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_n());
 		fxt.Test_fsys("mem/root/common/thumb/d/0/A.ogv/440px.jpg", "440,400");
 	}
-	@Test   public void Copy_orig_w_thumbtime() {
+	@Test  public void Copy_orig_w_thumbtime() {
 		fxt.Init_orig_db(Xof_orig_arg.new_comm("A.ogv", 440, 400));
 		fxt.Init_fsdb_db(Xof_fsdb_arg.new_comm_thumb("A.ogv", 440, 400, 10));
 		fxt.Exec_get(Xof_exec_arg.new_orig("A.ogv").Lnki_time_(10).Rslt_orig_exists_y().Rslt_file_exists_y().Rslt_file_resized_n());

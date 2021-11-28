@@ -20,7 +20,7 @@ import gplx.xowa.addons.bldrs.app_cfgs.*;
 public class Xoi_wiki_props_api_tst {
 	private Xoi_wiki_props_fxt fxt = new Xoi_wiki_props_fxt();
 	@Before public void init() {} // private Xob_subpage_tst_fxt fxt = new] Xob_subpage_tst_fxt();
-	@Test   public void Parse() {
+	@Test  public void Parse() {
 		fxt.Test_parse(String_.Concat_lines_nl
 		(	"<api>"
 		,	"<query>"
@@ -39,7 +39,7 @@ public class Xoi_wiki_props_api_tst {
 		.Ns_ary_(fxt.ns_(0, false), fxt.ns_(1, true))
 		);
 	}
-//		@Test   public void Build() {
+//		@Test  public void Build() {
 //			fxt.Test_build(fxt.wiki_("enwiki")
 //				.Alias_ary_(fxt.alias_(4, "WP"), fxt.alias_(5, "WT"))
 //				.Ns_ary_(fxt.ns_(0, false), fxt.ns_(1, true))

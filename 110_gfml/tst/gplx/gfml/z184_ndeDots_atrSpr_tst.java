@@ -27,7 +27,7 @@ public class z184_ndeDots_atrSpr_tst {
 			,	GfmlDocLxrs.AtrSpr_lxr()
 			);
 	}	GfmlParse_fxt fx = GfmlParse_fxt.new_();
-	@Test  public void NestMult() {
+	@Test public void NestMult() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.AtrSpr_lxr());
 		fx.tst_Doc("{a.b(c.d,e.f);z;}"
 			,	fx.nde_().ChainId_(0).Subs_

@@ -17,7 +17,7 @@ package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wbases.*;
 public class Xoh_page_body_cls_tst {
 	@Before public void init() {} private Xoh_page_body_cls_fxt fxt = new Xoh_page_body_cls_fxt();
-	@Test   public void Escape_cls() {
+	@Test  public void Escape_cls() {
 		fxt.Test_escape_cls("0123456789", "0123456789");											// noop: num
 		fxt.Test_escape_cls("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "ABCDEFGHIJKLMNOPQRSTUVWXYZ");			// noop: ucase
 		fxt.Test_escape_cls("abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz");			// noop: lcase
@@ -26,7 +26,7 @@ public class Xoh_page_body_cls_tst {
 		fxt.Test_escape_cls("a__b___c"	, "a_b_c");													// multiple underlines
 		fxt.Test_escape_cls("a b", "a_b");															// nbsp
 	}
-	@Test   public void Calc() {
+	@Test  public void Calc() {
 		fxt.Test_calc(Xow_page_tid.Tid_wikitext	, "A"							, "ns-0 ns-subject page-A");
 		fxt.Test_calc(Xow_page_tid.Tid_wikitext	, "Talk:A"						, "ns-1 ns-talk page-Talk_A");
 		fxt.Test_calc(Xow_page_tid.Tid_wikitext	, "Wikipedia:Página principal"	, "ns-4 ns-subject page-Wikipedia_Página_principal");

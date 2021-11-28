@@ -17,7 +17,7 @@ package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import
 import org.junit.*;
 public class Xow_wiki_tst {
 	@Before public void init() {fxt.Clear();} private Xow_wiki_fxt fxt = new Xow_wiki_fxt();
-	@Test   public void Load_page_and_parse() {	// PURPOSE.fix: unknown page causes null reference error in scribunto; DATE:2013-08-27
+	@Test  public void Load_page_and_parse() {	// PURPOSE.fix: unknown page causes null reference error in scribunto; DATE:2013-08-27
 		fxt.Fxt().Wiki().Parser_mgr().Scrib().Core_init(fxt.Fxt().Ctx());
 		fxt.Test_getPageByTtl("Does_not_exist", null);
 	}

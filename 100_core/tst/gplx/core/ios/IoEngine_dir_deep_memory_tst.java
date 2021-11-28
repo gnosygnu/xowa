@@ -19,16 +19,16 @@ public class IoEngine_dir_deep_memory_tst extends IoEngine_dir_deep_base_tst {
 	@Override protected void setup_hook() {
 		root = Io_url_.mem_dir_("mem/root");
 	}	@Override protected IoEngine engine_() {return IoEngine_.Mem_init_();}
-	@Test  @Override public void SearchDir() {
+	@Test @Override public void SearchDir() {
 		super.SearchDir();
 	}
-	@Test  @Override public void MoveDirDeep() {
+	@Test @Override public void MoveDirDeep() {
 		super.MoveDirDeep();
 	}
-	@Test  @Override public void CopyDir() {
+	@Test @Override public void CopyDir() {
 		super.CopyDir();
 	}
-	@Test  @Override public void DeleteDir() {
+	@Test @Override public void DeleteDir() {
 		super.DeleteDir();
 	}
 }

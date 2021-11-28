@@ -17,44 +17,44 @@ package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx
 import org.junit.*;
 public class Scrib_core_tst {
 	@Before public void init() {fxt.Clear();} Scrib_core_fxt fxt = new Scrib_core_fxt();
-	@Test  public void LoadString() {
+	@Test public void LoadString() {
 		String mod_text = Mod_basic();
 		fxt	.Expd_server_rcvd_add("00000067000000CD{[\"op\"]=\"loadString\",[\"text\"]=\"" + fxt.Encode(mod_text) + "\",[\"chunkName\"]=\"lib_name\"}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:1;}}")
 			.Test_LoadString("lib_name", mod_text, 1)
 			;
 	}
-	@Test  public void CallFunction() {
+	@Test public void CallFunction() {
 		fxt	.Expd_server_rcvd_add("000000300000005F{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=0,[\"args\"]={}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:1:{s:4:\"noop\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:2;}}}}")
 			.Test_CallFunction(1, Object_.Ary_empty, fxt.kv_ary_(fxt.kv_(1, fxt.kv_func_("noop", 2))))
 			;
 	}
-	@Test  public void CallFunction_args() {
+	@Test public void CallFunction_args() {
 		fxt	.Expd_server_rcvd_add("0000004100000081{[\"op\"]=\"call\",[\"id\"]=1,[\"nargs\"]=1,[\"args\"]={[1]={[\"key\"]=123}}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:1:{s:4:\"noop\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:2;}}}}")
 			.Test_CallFunction(1, Object_.Ary(fxt.kv_("key", 123)), fxt.kv_ary_(fxt.kv_(1, fxt.kv_func_("noop", 2))))
 			;
 	}
-	@Test  public void RegisterLibrary() {
+	@Test public void RegisterLibrary() {
 		fxt	.Expd_server_rcvd_add("00000074000000E7{[\"op\"]=\"registerLibrary\",[\"name\"]=\"mw_interface\",[\"functions\"]={[\"prc_0\"]=\"mwInit|prc_0\",[\"prc_1\"]=\"mwInit|prc_1\"}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:0;s:6:\"values\";a:0:{}}")
 			.Test_RegisterLibrary(String_.Ary("prc_0", "prc_1"), String_.Ary("mwInit|prc_0", "mwInit|prc_1"))
 			;
 	}
-	@Test  public void LoadLibraryFromFile() {
+	@Test public void LoadLibraryFromFile() {
 		fxt	.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:15;}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:2:{s:5:\"prc_2\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:2;}s:5:\"prc_3\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:3;}}}}")
 			.Test_LoadLibraryFromFile("lib_name", "doesn't matter", fxt.kv_("prc_2", 2), fxt.kv_("prc_3", 3));
 			;
 	}
-	@Test  public void LoadLibraryFromFile__rv_has_no_values() {	// PURPOSE: "package.lua" does not return any prc_ids
+	@Test public void LoadLibraryFromFile__rv_has_no_values() {	// PURPOSE: "package.lua" does not return any prc_ids
 		fxt	.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:15;}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:0;s:6:\"values\";a:0:{}}")
 			.Test_LoadLibraryFromFile("lib_name", "doesn't matter");
 			;
 	}
-	@Test  public void CallFunction_cbk() {	// PURPOSE: 'simulates interpreter.CallFunction(mw_lib.Fncs_get_by_key("setup").Id(), "allowEnvFuncs", allow_env_funcs);'
+	@Test public void CallFunction_cbk() {	// PURPOSE: 'simulates interpreter.CallFunction(mw_lib.Fncs_get_by_key("setup").Id(), "allowEnvFuncs", allow_env_funcs);'
 		fxt	.Expd_server_rcvd_add("00000080000000FF{[\"op\"]=\"registerLibrary\",[\"name\"]=\"mw_interface\",[\"functions\"]={[\"loadPackage\"]=\"mwInit|loadPackage\",[\"prc_1\"]=\"mwInit|prc_1\"}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:0;s:6:\"values\";a:0:{}}")
 			.Test_RegisterLibrary(String_.Ary("loadPackage", "prc_1"), String_.Ary("mwInit|loadPackage", "mwInit|prc_1"))
@@ -68,27 +68,27 @@ public class Scrib_core_tst {
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:0;s:6:\"values\";a:0:{}}")
 			.Test_CallFunction(2, Object_.Ary(fxt.kv_("key_0", "val_0")));
 	}
-	@Test  public void Module_GetInitChunk() {	// PURPOSE: similar to LoadString except name is prepended with "="
+	@Test public void Module_GetInitChunk() {	// PURPOSE: similar to LoadString except name is prepended with "="
 		String mod_text = Mod_basic();
 		fxt	.Expd_server_rcvd_add("0000006F000000DD{[\"op\"]=\"loadString\",[\"text\"]=\"" + fxt.Encode(mod_text) + "\",[\"chunkName\"]=\"=Module:Mod_name\"}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:1;}}")
 			.Test_Module_GetInitChunk("Module:Mod_name", mod_text, 1)
 			;
 	}
-	@Test  public void Module_GetInitChunk_tabs() {	// PURPOSE: swap out xowa's &#09; with literal tabs, else will break lua
+	@Test public void Module_GetInitChunk_tabs() {	// PURPOSE: swap out xowa's &#09; with literal tabs, else will break lua
 		fxt	.Expd_server_rcvd_add("0000004500000089{[\"op\"]=\"loadString\",[\"text\"]=\"" + "a\tb" + "\",[\"chunkName\"]=\"=Module:Mod_name\"}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;i:1;}}")
 			.Test_Module_GetInitChunk("Module:Mod_name", "a&#09;b", 1)
 			;
 	}
-	@Test  public void ExecuteModule() {
+	@Test public void ExecuteModule() {
 		fxt	.Init_lib_mw();
 		fxt	.Expd_server_rcvd_add("0000003E0000007B{[\"op\"]=\"call\",[\"id\"]=8,[\"nargs\"]=1,[\"args\"]={[1]=chunks[14]}}")
 			.Init_server_prep_add("a:3:{s:2:\"op\";s:6:\"return\";s:7:\"nvalues\";i:1;s:6:\"values\";a:1:{i:1;a:2:{s:5:\"prc_0\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:15;}s:5:\"prc_1\";O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:16;}}}}")
 			.Test_ExecuteModule(14, fxt.kv_func_("prc_0", 15), fxt.kv_func_("prc_1", 16))
 			;
 	}
-//		@Test  public void Invoke() {
+//		@Test public void Invoke() {
 //			fxt	.Init_lib_mw();
 //			fxt	.Init_cbks_add("getExpandedArgument", gplx.xowa.xtns.scribunto.libs.Scrib_lib_mw.Proc_getExpandedArgument);
 //			fxt	.Expd_server_rcvd_add("0000004900000091{[\"op\"]=\"loadString\",[\"text\"]=\"Mod_0_code\",[\"chunkName\"]=\"=Module:Mod_0\"}")

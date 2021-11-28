@@ -69,7 +69,7 @@ public class XomwPPDStackElement {
 	public void addPart(String s) {
 		this.parts.Add(Make_part(s));
 	}
-	@gplx.Virtual protected XomwPPDPart Make_part(String s) {
+	protected XomwPPDPart Make_part(String s) {
 		return part_factory.Make_new(s);
 	}
 
@@ -96,7 +96,7 @@ public class XomwPPDStackElement {
 	* @param boolean|int $openingCount
 	* @return String
 	*/
-	@gplx.Virtual public Object breakSyntax(int openingCount) {
+	public Object breakSyntax(int openingCount) {
 		Char_bfr bfr = new Char_bfr(16);
 		if (String_.Eq(this.open, "\n")) {
 			XomwPPDPart_DOM part_0 = (XomwPPDPart_DOM)Get_at(0);

@@ -18,5 +18,5 @@ import org.junit.*;
 public class Translation_func_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
-	@Test  public void Basic() {fxt.Test__parse__tmpl_to_html("{{#translation}}", "");}
+	@Test public void Basic() {fxt.Test__parse__tmpl_to_html("{{#translation}}", "");}
 }

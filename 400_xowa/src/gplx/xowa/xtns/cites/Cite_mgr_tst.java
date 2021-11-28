@@ -18,20 +18,20 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.langs.msgs.*;
 public class Cite_mgr_tst {
 	private final    Cite_mgr_fxt fxt = new Cite_mgr_fxt();
-	@Test   public void getLinkLabel_lower_alpha() {
+	@Test  public void getLinkLabel_lower_alpha() {
 		fxt.Test__getLinkLabel("lower-alpha", 1, "a");
 		fxt.Test__getLinkLabel("lower-alpha", 2, "b");
 		fxt.Test__getLinkLabel("lower-alpha", 3, "c");
 	}
-	@Test   public void getLinkLabel_upper_roman() {
+	@Test  public void getLinkLabel_upper_roman() {
 		fxt.Test__getLinkLabel("upper-roman", 1, "I");
 		fxt.Test__getLinkLabel("upper-roman", 2, "II");
 		fxt.Test__getLinkLabel("upper-roman", 3, "III");
 	}
-	@Test   public void getLinkLabel_unknown() {
+	@Test  public void getLinkLabel_unknown() {
 		fxt.Test__getLinkLabel("unknown", 1, "unknown 1");
 	}
-	@Test   public void getLinkLabel_err() {
+	@Test  public void getLinkLabel_err() {
 		fxt.Test__getLinkLabel("upper-roman", 4, "<span class=\"error mw-ext-cite-error\" lang=\"en\" dir=\"ltr\">Cite error: Ran out of custom link labels for group \"upper-roman\".\nDefine more in the <nowiki>[[MediaWiki:cite_link_label_group-upper-roman]]</nowiki> message.</span>");
 	}
 }

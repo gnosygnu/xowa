@@ -13,11 +13,61 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.elems; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.draws.*; import gplx.gfui.gfxs.*; import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; import gplx.gfui.imgs.*; import gplx.gfui.kits.core.*;
-import gplx.gfui.layouts.swts.*;
-import gplx.gfui.controls.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.standards.*; import gplx.gfui.controls.windows.*;
-import gplx.core.strings.*; import gplx.core.interfaces.*;
+package gplx.gfui.controls.elems; import gplx.Bool_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_mgr;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_invk_;
+import gplx.Gfo_invk_cmd;
+import gplx.Gfo_invk_cmd_mgr;
+import gplx.GfsCtx;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Keyval_hash;
+import gplx.Object_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.interfaces.InjectAble;
+import gplx.gfui.GfuiAlign;
+import gplx.gfui.GfuiAlign_;
+import gplx.gfui.PointAdp;
+import gplx.gfui.PointAdp_;
+import gplx.gfui.RectAdp;
+import gplx.gfui.RectAdp_;
+import gplx.gfui.SizeAdp;
+import gplx.gfui.SizeAdp_;
+import gplx.gfui.controls.GfuiBorderMgr;
+import gplx.gfui.controls.gxws.GxwCore_base;
+import gplx.gfui.controls.gxws.GxwElem;
+import gplx.gfui.controls.gxws.GxwElemFactory_;
+import gplx.gfui.controls.windows.GfuiFocusMgr;
+import gplx.gfui.controls.windows.GfuiFocusOrderer;
+import gplx.gfui.controls.windows.GfuiWin;
+import gplx.gfui.controls.windows.GfuiWinKeyCmdMgr;
+import gplx.gfui.draws.ColorAdp;
+import gplx.gfui.draws.ColorAdp_;
+import gplx.gfui.draws.FontStyleAdp;
+import gplx.gfui.draws.FontStyleAdp_;
+import gplx.gfui.draws.PenAdp_;
+import gplx.gfui.gfxs.GfxStringData;
+import gplx.gfui.gfxs.PaintArgs;
+import gplx.gfui.ipts.IptBndMgr;
+import gplx.gfui.ipts.IptEventMgr;
+import gplx.gfui.ipts.IptEventType;
+import gplx.gfui.ipts.IptEvtDataKey;
+import gplx.gfui.ipts.IptEvtDataKeyHeld;
+import gplx.gfui.ipts.IptEvtDataMouse;
+import gplx.gfui.ipts.IptKey;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.gfui.kits.core.Gfui_kit_;
+import gplx.gfui.kits.core.Swing_kit;
+import gplx.gfui.layouts.GftGrid;
+import gplx.gfui.layouts.GftItem;
+import gplx.gfui.layouts.swts.Swt_layout_data;
+import gplx.gfui.layouts.swts.Swt_layout_mgr;
 public class GfuiElemBase implements GfuiElem {
 	//% Layout
 	public Gfo_evt_mgr Evt_mgr() {if (evt_mgr == null) evt_mgr = new Gfo_evt_mgr(this); return evt_mgr;} Gfo_evt_mgr evt_mgr;
@@ -55,7 +105,7 @@ public class GfuiElemBase implements GfuiElem {
 		SizeChanged_ignore = false;
 	}
 	public void Zorder_front() {underMgr.Zorder_front();} public void Zorder_back() {underMgr.Zorder_back();}
-	@gplx.Virtual public void Zorder_front_and_focus() {
+	public void Zorder_front_and_focus() {
 		this.Zorder_front();
 		this.Visible_set(true);
 		this.Focus();
@@ -66,28 +116,28 @@ public class GfuiElemBase implements GfuiElem {
 	public void Layout_data_(Swt_layout_data v) {underElem.Core().Layout_data_(v);}
 
 	//% Visual
-	@gplx.Virtual public boolean Visible() {return underMgr.Visible();} @gplx.Virtual public void Visible_set(boolean v) {underMgr.Visible_set(v);}
+	public boolean Visible() {return underMgr.Visible();} public void Visible_set(boolean v) {underMgr.Visible_set(v);}
 	public GfuiElem Visible_on_() {this.Visible_set(true); return this;} public GfuiElem Visible_off_() {this.Visible_set(false); return this;}
-	@gplx.Virtual public ColorAdp BackColor() {return backColor;} ColorAdp backColor = ColorAdp_.White;
-	@gplx.Virtual public GfuiElem BackColor_(ColorAdp v) {backColor = v; underMgr.BackColor_set(backColor); return this;}
+	public ColorAdp BackColor() {return backColor;} ColorAdp backColor = ColorAdp_.White;
+	public GfuiElem BackColor_(ColorAdp v) {backColor = v; underMgr.BackColor_set(backColor); return this;}
 	public GfuiBorderMgr Border() {return border;} GfuiBorderMgr border = GfuiBorderMgr.new_();
 	public GfuiElem Border_on_() {border.All_(PenAdp_.new_(ColorAdp_.Black, 1)); return this;}
 	public GfuiElem Border_off_() {border.All_(null); return this;}
 	public GfxStringData TextMgr() {return textMgr;} GfxStringData textMgr;
 	public String Text() {return textMgr.Val();}
 	public GfuiElem Text_any_(Object obj) {return Text_(Object_.Xto_str_strict_or_null_mark(obj));}
-	@gplx.Virtual public GfuiElem Text_(String v) {
+	public GfuiElem Text_(String v) {
 		this.TextMgr().Text_set(v);
 		Click_key_set_(v);
 		return this;
 	}
-	@gplx.Virtual public GfuiElem ForeColor_(ColorAdp v) {textMgr.Color_(v); return this;}
+	public GfuiElem ForeColor_(ColorAdp v) {textMgr.Color_(v); return this;}
 	public void TextAlignH_(GfuiAlign v) {textMgr.AlignH_(v);}
 	public GfuiElem TextAlignH_left_() {textMgr.AlignH_(GfuiAlign_.Left); return this;}
 	public GfuiElem TextAlignH_right_() {textMgr.AlignH_(GfuiAlign_.Right); return this;}
 	public GfuiElem TextAlignH_center_() {textMgr.AlignH_(GfuiAlign_.Mid); return this;}
 	public String TipText() {return underElem.Core().TipText();} public GfuiElem TipText_(String v) {underElem.Core().TipText_set(v); return this;}
-	@gplx.Virtual public void Redraw() {underMgr.Invalidate();}
+	public void Redraw() {underMgr.Invalidate();}
 	public boolean CustomDraw() {return customDraw;} public void CustomDraw_set(boolean v) {customDraw = v;} private boolean customDraw;
 
 
@@ -101,7 +151,7 @@ public class GfuiElemBase implements GfuiElem {
 		focusKey_order_manual = val;
 		return this;
 	}
-	@gplx.Virtual public void Focus() {
+	public void Focus() {
 		if (subElems.Count() == 0)							// if no subs, focus self
 			underElem.Core().Focus();
 		else if (defaultFocusKey != null) {					// if default is specified, focus it
@@ -124,10 +174,10 @@ public class GfuiElemBase implements GfuiElem {
 	public IptBndMgr IptBnds() {return iptBnds;} IptBndMgr iptBnds = IptBndMgr.new_();
 
 	//% ActionKey
-	@gplx.Virtual public void Click() {}
-	@gplx.Virtual public boolean Click_able() {return false;}
+	public void Click() {}
+	public boolean Click_able() {return false;}
 	public IptKey Click_key() {return clickKey;}
-	@gplx.Internal @gplx.Virtual protected void Click_key_set_(String v) {clickKey = GfuiWinKeyCmdMgr.ExtractKeyFromText(v);} IptKey clickKey = IptKey_.None;
+	@gplx.Internal protected void Click_key_set_(String v) {clickKey = GfuiWinKeyCmdMgr.ExtractKeyFromText(v);} IptKey clickKey = IptKey_.None;
 
 	//% Owner
 	public String Key_of_GfuiElem() {return keyIdf;} public GfuiElem Key_of_GfuiElem_(String val) {keyIdf = val; return this;} private String keyIdf;
@@ -140,9 +190,9 @@ public class GfuiElemBase implements GfuiElem {
 	}
 
 	//% Form
-	@gplx.Virtual public GfuiWin OwnerWin() {return ownerForm;} public GfuiElem OwnerWin_(GfuiWin val) {ownerForm = val; return this;} GfuiWin ownerForm = null;		
-	@gplx.Virtual public boolean Opened_done() {return ownerForm == null ? false : ownerForm.Opened_done();}
-	@gplx.Virtual public void Opened_cbk() {
+	public GfuiWin OwnerWin() {return ownerForm;} public GfuiElem OwnerWin_(GfuiWin val) {ownerForm = val; return this;} GfuiWin ownerForm = null;		
+	public boolean Opened_done() {return ownerForm == null ? false : ownerForm.Opened_done();}
+	public void Opened_cbk() {
 		for (int i = 0; i < subElems.Count(); i++) {
 			GfuiElem elem = subElems.Get_at(i);
 			elem.Opened_cbk();
@@ -154,23 +204,23 @@ public class GfuiElemBase implements GfuiElem {
 	}
 
 	//% Cbks
-	@gplx.Virtual public boolean KeyDownCbk(IptEvtDataKey data)				{IptEventMgr.ExecKeyDown(this, data); return true;}
-	@gplx.Virtual public boolean KeyUpCbk(IptEvtDataKey data)				{IptEventMgr.ExecKeyUp(this, data); return true;}
-	@gplx.Virtual public boolean KeyHeldCbk(IptEvtDataKeyHeld data)			{IptEventMgr.ExecKeyPress(this, data); return true;}
-	@gplx.Virtual public boolean MouseDownCbk(IptEvtDataMouse data)			{IptEventMgr.ExecMouseDown(this, data); return true;}
-	@gplx.Virtual public boolean MouseUpCbk(IptEvtDataMouse data)			{IptEventMgr.ExecMouseUp(this, data); return true;}
-	@gplx.Virtual public boolean MouseMoveCbk(IptEvtDataMouse data)			{IptEventMgr.ExecMouseMove(this, data); return true;}
-	@gplx.Virtual public boolean MouseWheelCbk(IptEvtDataMouse data)		{IptEventMgr.ExecMouseWheel(this, data); return true;}
-	@gplx.Virtual public boolean PaintCbk(PaintArgs args)				{border.DrawData(args.Graphics()); return true;}
-	@gplx.Virtual public boolean PaintBackgroundCbk(PaintArgs args)		{return true;}
-	@gplx.Virtual public boolean DisposeCbk()							{return true;}
-	@gplx.Virtual public boolean VisibleChangedCbk()						{return true;}
-	@gplx.Virtual public boolean FocusGotCbk() {
+	public boolean KeyDownCbk(IptEvtDataKey data)				{IptEventMgr.ExecKeyDown(this, data); return true;}
+	public boolean KeyUpCbk(IptEvtDataKey data)				{IptEventMgr.ExecKeyUp(this, data); return true;}
+	public boolean KeyHeldCbk(IptEvtDataKeyHeld data)			{IptEventMgr.ExecKeyPress(this, data); return true;}
+	public boolean MouseDownCbk(IptEvtDataMouse data)			{IptEventMgr.ExecMouseDown(this, data); return true;}
+	public boolean MouseUpCbk(IptEvtDataMouse data)			{IptEventMgr.ExecMouseUp(this, data); return true;}
+	public boolean MouseMoveCbk(IptEvtDataMouse data)			{IptEventMgr.ExecMouseMove(this, data); return true;}
+	public boolean MouseWheelCbk(IptEvtDataMouse data)		{IptEventMgr.ExecMouseWheel(this, data); return true;}
+	public boolean PaintCbk(PaintArgs args)				{border.DrawData(args.Graphics()); return true;}
+	public boolean PaintBackgroundCbk(PaintArgs args)		{return true;}
+	public boolean DisposeCbk()							{return true;}
+	public boolean VisibleChangedCbk()						{return true;}
+	public boolean FocusGotCbk() {
 		GfuiFocusMgr.Instance.FocusedElem_set(this);
 		return true;
 	}
-	@gplx.Virtual public boolean FocusLostCbk()							{return true;}
-	@gplx.Virtual public boolean SizeChangedCbk() {
+	public boolean FocusLostCbk()							{return true;}
+	public boolean SizeChangedCbk() {
 		this.TextMgr().OwnerSize_sync(this.Size());
 		this.Border().Bounds_sync(RectAdp_.size_(this.Size().Op_subtract(1)));
 		if (SizeChanged_ignore
@@ -186,8 +236,8 @@ public class GfuiElemBase implements GfuiElem {
 	//% InjectAble
 	public GfuiElem Inject_(InjectAble sub) {sub.Inject(this); return this;}
 
-	@gplx.Virtual public GxwElem UnderElem() {return underElem;} GxwElem underElem;
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+	public GxwElem UnderElem() {return underElem;} GxwElem underElem;
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, GfuiElemKeys.Redraw_cmd))				Redraw();
 		else if	(ctx.Match(k, GfuiElemKeys.Key_set)) {
 			String v = m.ReadStr("v");
@@ -241,15 +291,15 @@ public class GfuiElemBase implements GfuiElem {
 		else if	(ctx.Match(k, GfuiElemKeys.Zorder_front_cmd))		Zorder_front();
 		else if (ctx.Match(k, Invk_OwnerWin_cmd))					return OwnerWin();
 		else {
-			if (ctx.Help_browseMode()) {
-				String_bldr sb = String_bldr_.new_();
-				for (int i = 0; i < this.SubElems().Count(); i++) {
-					GfuiElem subE = (GfuiElem)this.SubElems().Get_at(i);
-					sb.Add_str_w_crlf(subE.Key_of_GfuiElem());
-				}
-				return sb.To_str();
-			}
-			else {
+//			if (ctx.Help_browseMode()) {
+//				String_bldr sb = String_bldr_.new_();
+//				for (int i = 0; i < this.SubElems().Count(); i++) {
+//					GfuiElem subE = (GfuiElem)this.SubElems().Get_at(i);
+//					sb.Add_str_w_crlf(subE.Key_of_GfuiElem());
+//				}
+//				return sb.To_str();
+//			}
+//			else {
 				Object rv = this.InvkMgr().Invk(ctx, ikey, k, m, this);
 				if (rv != Gfo_invk_.Rv_unhandled) return rv;
 
@@ -257,7 +307,7 @@ public class GfuiElemBase implements GfuiElem {
 				if (findObj == null) findObj = this.subElems.Get_by(k);
 				if (findObj == null) return Gfo_invk_.Rv_unhandled;				
 				return findObj;	// necessary for gplx.images
-			}
+//			}
 		}
 		return this;
 	}	public static final    String Invk_OwnerWin_cmd = "ownerWin";
@@ -267,7 +317,7 @@ public class GfuiElemBase implements GfuiElem {
 	}
 		public Gfui_kit Kit() {return kit;} private Gfui_kit kit = Gfui_kit_.Mem();
 
-	@gplx.Virtual public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
+	public void ctor_GfuiBox_base(Keyval_hash ctorArgs) {
 		this.kit = Swing_kit.Instance;	// NOTE: assume that callers want Swing; SWT / Mem should be calling ctor_kit_GfuiElemBase
 		underElem = UnderElem_make(ctorArgs);
 		underElem.Host_set(this);
@@ -277,7 +327,7 @@ public class GfuiElemBase implements GfuiElem {
 		this.Focus_able_(Bool_.Cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
 		underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
-	@gplx.Virtual public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
+	public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
 		this.kit = kit;
 		this.keyIdf = key;
 		this.underElem = underElem;
@@ -288,7 +338,7 @@ public class GfuiElemBase implements GfuiElem {
 		this.Focus_able_(Bool_.Cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
 //			underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
-	@gplx.Virtual public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.control_();}
+	public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.control_();}
 	public Object SubItms_getObj(String key) {return injected.Get_by(key);}
 	public GfuiElemBase SubItms_add(String key, Object v) {injected.Add(key, v); return this;}
 	public Ordered_hash XtnAtrs() {return xtnAtrs;} Ordered_hash xtnAtrs = Ordered_hash_.New();

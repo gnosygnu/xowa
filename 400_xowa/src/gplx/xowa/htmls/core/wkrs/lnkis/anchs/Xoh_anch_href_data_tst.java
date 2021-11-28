@@ -18,28 +18,28 @@ import org.junit.*; import gplx.core.brys.*; import gplx.xowa.wikis.ttls.*;
 public class Xoh_anch_href_data_tst {
 	private final    Xoh_anch_href_data_fxt fxt = new Xoh_anch_href_data_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Site() {
+	@Test  public void Site() {
 		fxt.Test__parse("/site/A/wiki/B", "A", "B");
 	}
-	@Test   public void Page() {
+	@Test  public void Page() {
 		fxt.Test__parse("/wiki/B", "", "B");
 	}
-	@Test   public void Href() {
+	@Test  public void Href() {
 		fxt.Test__parse("#A", "", "A");
 	}
-	@Test   public void None() {
+	@Test  public void None() {
 		fxt.Test__parse("", "", "");
 	}
-	@Test   public void Inet() {
+	@Test  public void Inet() {
 		fxt.Test__parse("http://a.org", "", "http://a.org");
 	}
-//		@Test   public void Inet__mw() {
+//		@Test  public void Inet__mw() {
 //			fxt.Test__parse("https://en.wikipedia.org/wiki/A", "en.wikipedia.org", "A");
 //		}
-	@Test   public void Fail__1st_seg_must_be_site_or_wiki() {
+	@Test  public void Fail__1st_seg_must_be_site_or_wiki() {
 		fxt.Test__parse__fail("/fail/A", "failed trie check: mid='fail/A' page='Main_Page' sect='href' text=/fail/A");
 	}
-	@Test   public void Fail__2nd_seg_must_be_wiki() {
+	@Test  public void Fail__2nd_seg_must_be_wiki() {
 		fxt.Test__parse__fail("/site/A/B/C", "failed check: chk='wiki/' page='Main_Page' sect='href' text=/site/A/B/C");
 	}
 }

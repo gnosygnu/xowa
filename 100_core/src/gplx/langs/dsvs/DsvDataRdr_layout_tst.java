@@ -16,27 +16,27 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
 import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
 public class DsvDataRdr_layout_tst {
-	@Test  public void TableName() {
+	@Test public void TableName() {
 		run_parse_lines("table0, ,\" \",#");
 		tst_Layout(0, DsvHeaderItm.Id_TableName);
 	}
-	@Test  public void Comment() {
+	@Test public void Comment() {
 		run_parse_lines("-------------, ,\" \",//", "data");		// need dataLine or parser will throw away standalone header
 		tst_Layout(0, DsvHeaderItm.Id_Comment);
 	}
-	@Test  public void BlankLine() {
+	@Test public void BlankLine() {
 		run_parse_lines("", "data");								// need dataLine or parser will throw away standalone header
 		tst_Layout(0, DsvHeaderItm.Id_BlankLine);
 	}
-	@Test  public void LeafNames() {
+	@Test public void LeafNames() {
 		run_parse_lines("id,name, ,\" \",@");
 		tst_Layout(0, DsvHeaderItm.Id_LeafNames);
 	}
-	@Test  public void LeafTypes() {
+	@Test public void LeafTypes() {
 		run_parse_lines("int," + StringClassXtn.Key_const + ", ,\" \",$");
 		tst_Layout(0, DsvHeaderItm.Id_LeafTypes);
 	}
-	@Test  public void Combined() {
+	@Test public void Combined() {
 		run_parse_lines
 			(	""
 			,	"-------------, ,\" \",//"
@@ -55,7 +55,7 @@ public class DsvDataRdr_layout_tst {
 			, DsvHeaderItm.Id_Comment
 			);
 	}
-	@Test  public void Tbl_N() {
+	@Test public void Tbl_N() {
 		run_parse_lines
 			(	""
 			,	"*************, ,\" \",//"
@@ -83,7 +83,7 @@ public class DsvDataRdr_layout_tst {
 			, DsvHeaderItm.Id_Comment
 			);
 	}
-	@Test  public void Tbl_N_FirstIsEmpty() {
+	@Test public void Tbl_N_FirstIsEmpty() {
 		run_parse_lines
 			(	""
 			,	"*************, ,\" \",//"

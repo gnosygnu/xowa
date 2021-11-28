@@ -16,22 +16,22 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
 import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
 public class DsvDataWtr_csv_tst {
-	@Test  public void Dat_Val_0() {
+	@Test public void Dat_Val_0() {
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root);
 		expd = String_.Concat_lines_crlf("");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Dat_Val_1() {
+	@Test public void Dat_Val_1() {
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root, "a");
 		expd = String_.Concat_lines_crlf("a");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Dat_Val_N() {
+	@Test public void Dat_Val_N() {
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root, "a", "b", "c");
 		expd = String_.Concat_lines_crlf("a,b,c");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Dat_Row_N() {
+	@Test public void Dat_Row_N() {
 		root = fx_nde.csv_dat_();
 		this.AddCsvRow(root, "a", "b", "c");
 		this.AddCsvRow(root, "d", "e", "f");
@@ -41,37 +41,37 @@ public class DsvDataWtr_csv_tst {
 			);
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Dat_Escape_FldSpr() {	// ,
+	@Test public void Dat_Escape_FldSpr() {	// ,
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root, "a", ",", "c");
 		expd = String_.Concat_lines_crlf("a,\",\",c");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Dat_Escape_RcdSpr() {	// NewLine
+	@Test public void Dat_Escape_RcdSpr() {	// NewLine
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root, "a", String_.CrLf, "c");
 		expd = String_.Concat_lines_crlf("a,\"" + String_.CrLf + "\",c");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Dat_Escape_Quote() {		// " -> ""
+	@Test public void Dat_Escape_Quote() {		// " -> ""
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root, "a", "\"", "c");
 		expd = String_.Concat_lines_crlf("a,\"\"\"\",c");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Dat_Whitespace() {
+	@Test public void Dat_Whitespace() {
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root, "a", " b\t", "c");
 		expd = String_.Concat_lines_crlf("a, b\t,c");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Dat_Null() {
+	@Test public void Dat_Null() {
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root, "a", null, "c");
 		expd = String_.Concat_lines_crlf("a,,c");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Dat_EmptyString() {
+	@Test public void Dat_EmptyString() {
 		root = fx_nde.csv_dat_(); this.AddCsvRow(root, "a", "", "c");
 		expd = String_.Concat_lines_crlf("a,\"\",c");
 		fx.tst_XtoStr(wtr, root, expd);
 	}
-	@Test  public void Hdr_Flds() {
+	@Test public void Hdr_Flds() {
 		wtr = DsvDataWtr_.csv_hdr_();
 		GfoFldList flds = GfoFldList_.new_().Add("id", StringClassXtn.Instance).Add("name", StringClassXtn.Instance);
 		root = fx_nde.csv_hdr_(flds); this.AddCsvRow(root, "0", "me");

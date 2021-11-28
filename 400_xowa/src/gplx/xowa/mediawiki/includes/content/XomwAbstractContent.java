@@ -172,7 +172,7 @@ public abstract class XomwAbstractContent implements XomwContent {
 	*
 	* @see Content::isValid
 	*/
-	@gplx.Virtual public boolean isValid() {
+	public boolean isValid() {
 		return true;
 	}
 
@@ -433,7 +433,7 @@ public abstract class XomwAbstractContent implements XomwContent {
 	*
 	* @see Content::matchMagicWord
 	*/
-	@gplx.Virtual public boolean matchMagicWord(XomwMagicWord word) {
+	public boolean matchMagicWord(XomwMagicWord word) {
 		return false;
 	}
 

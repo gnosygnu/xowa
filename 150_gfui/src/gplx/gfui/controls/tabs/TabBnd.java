@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.tabs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.core.interfaces.*;
-import gplx.gfui.ipts.*; import gplx.gfui.controls.standards.*;
+package gplx.gfui.controls.tabs; import gplx.GfoMsg;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.core.interfaces.InjectAble;
+import gplx.gfui.controls.standards.GfuiBtn;
+import gplx.gfui.controls.standards.GfuiBtn_;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptCfg_;
+import gplx.gfui.ipts.IptKey_;
 class TabBoxEvt_nameChange {
 	public static String Key = "TabBoxEvt_nameChange";
 	public static void Send(TabBoxMgr mgr, TabPnlItm itm) {
@@ -40,8 +48,8 @@ class TabBoxEvt_tabSelectByBtn {
 class TabBnd_selectTab implements InjectAble, Gfo_invk {
 	public void Inject(Object obj) {
 		tabBox = TabBox_.cast(obj);
-		IptBnd_.cmd_to_(IptCfg_.Null, tabBox, this, SelectNext_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Tab), IptKey_.add_(IptKey_.Ctrl, IptKey_.PageDown));
-		IptBnd_.cmd_to_(IptCfg_.Null, tabBox, this, SelectPrev_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Tab, IptKey_.Shift), IptKey_.add_(IptKey_.Ctrl, IptKey_.PageUp));
+		IptBnd_.cmd_to_(IptCfg_.Null, tabBox, this, SelectNext_cmd, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.Tab), IptKey_.add_(IptKey_.MOD_1ST, IptKey_.PageDown));
+		IptBnd_.cmd_to_(IptCfg_.Null, tabBox, this, SelectPrev_cmd, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.Tab, IptKey_.Shift), IptKey_.add_(IptKey_.MOD_1ST, IptKey_.PageUp));
 	}
 	void Select(GfoMsg msg, int delta) {
 		TabPnlItm curTab = tabBox.Mgr().CurTab();
@@ -60,8 +68,8 @@ class TabBnd_selectTab implements InjectAble, Gfo_invk {
 class TabBnd_reorderTab implements InjectAble, Gfo_invk {
 	public void Inject(Object owner) {
 		GfuiBtn btn = GfuiBtn_.cast(owner);
-		IptBnd_.cmd_to_(IptCfg_.Null, btn, this, MovePrev_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Left));
-		IptBnd_.cmd_to_(IptCfg_.Null, btn, this, MoveNext_cmd, IptKey_.add_(IptKey_.Ctrl, IptKey_.Right));
+		IptBnd_.cmd_to_(IptCfg_.Null, btn, this, MovePrev_cmd, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.Left));
+		IptBnd_.cmd_to_(IptCfg_.Null, btn, this, MoveNext_cmd, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.Right));
 	}
 	@gplx.Internal protected void MoveTab(GfuiBtn curBtn, int delta) {
 		TabPnlItm curItm = tabBox.Mgr().Get_by(curBtn.Key_of_GfuiElem());

@@ -17,19 +17,19 @@ package gplx.core.brys; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Bry_rdr_tst {
 	@Before public void init() {fxt.Clear();} private Bry_rdr_fxt fxt = new Bry_rdr_fxt();
-	@Test   public void Int() {
+	@Test  public void Int() {
 		fxt.Init_src("12|3456|789");
 		fxt.Test_read_int(12);
 		fxt.Test_read_int(3456);
 		fxt.Test_read_int(789);
 		fxt.Test_read_int(Int_.Min_value);
 	}
-	@Test   public void Int_negative() {
+	@Test  public void Int_negative() {
 		fxt.Init_src("-1|-2");
 		fxt.Test_read_int(-1);
 		fxt.Test_read_int(-2);
 	}
-	@Test   public void Bry() {
+	@Test  public void Bry() {
 		fxt.Init_src("abc|d||ef");
 		fxt.Test_read_bry("abc");
 		fxt.Test_read_bry("d");

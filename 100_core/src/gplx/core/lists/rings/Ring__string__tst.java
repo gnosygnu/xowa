@@ -18,7 +18,7 @@ import org.junit.*;
 public class Ring__string__tst {
 	private final    Ring__string__fxt fxt = new Ring__string__fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Clear().Max_(3).Push_many("a")								.Expd("a");
 		fxt.Clear().Max_(3).Push_many("a", "b")							.Expd("a", "b");
 		fxt.Clear().Max_(3).Push_many("a", "b", "c")					.Expd("a", "b", "c");

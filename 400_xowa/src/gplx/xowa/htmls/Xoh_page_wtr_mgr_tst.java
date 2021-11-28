@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.xowa.guis.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.portal.*; import gplx.xowa.wikis.pages.*;
 public class Xoh_page_wtr_mgr_tst {
 	@Before public void init() {}
-	@Test  public void Logo_has_correct_main_page() {	// PURPOSE: Logo href should be "/site/en.wikipedia.org/wiki/", not "/wiki/Main_Page"
+	@Test public void Logo_has_correct_main_page() {	// PURPOSE: Logo href should be "/site/en.wikipedia.org/wiki/", not "/wiki/Main_Page"
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		Xow_portal_mgr portal_mgr = wiki.Html_mgr().Portal_mgr();
@@ -28,7 +28,7 @@ public class Xoh_page_wtr_mgr_tst {
 		page_wtr_mgr.Gen(wiki.Parser_mgr().Ctx().Page(), Xopg_view_mode_.Tid__read);
 		Tfds.Eq(String_.new_a7(portal_mgr.Div_logo_bry(true)), "/site/en.wikipedia.org/wiki/");
 	}
-	@Test   public void Skip__math__basic() {
+	@Test  public void Skip__math__basic() {
 		Xop_fxt fxt = Xop_fxt.New_app_html();
 		fxt.Init_lang_vnts("zh-hans", "zh-hant");
 

@@ -17,7 +17,7 @@ package gplx;
 import org.junit.*;
 public class Err_tst {
 	private final Err_fxt fxt = new Err_fxt();
-	@Test  public void Trace_to_str__gplx() {
+	@Test public void Trace_to_str__gplx() {
 		fxt.Test_Trace_to_str(Bool_.Y, Bool_.N, 0, String_.Concat_lines_nl_skip_last
 		( "gplx.Err_.new_wo_type(Err_.java:1)"			// ignore this line
 		, "gplx.String_.Len(String_.java:2)"
@@ -26,7 +26,7 @@ public class Err_tst {
 		, "  gplx.String_.Len(String_.java:2)"
 		));
 	}
-	@Test  public void Trace_to_str__gplx_ignore() {
+	@Test public void Trace_to_str__gplx_ignore() {
 		fxt.Test_Trace_to_str(Bool_.Y, Bool_.N, 1, String_.Concat_lines_nl_skip_last
 		( "gplx.Err_.new_wo_type(Err_.java:1)"				// ignore this line
 		, "gplx.String_.Fail(String_.java:2)"		// ignore this line also

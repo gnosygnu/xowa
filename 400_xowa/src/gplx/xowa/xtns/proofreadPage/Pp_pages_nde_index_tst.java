@@ -26,7 +26,7 @@ public class Pp_pages_nde_index_tst {
 	@After public void term() {
 		fxt.Wiki().Cache_mgr().Free_mem__all();
 	}
-	@Test  public void Repeated() {	// PURPOSE: repeated pages should still show (and not be excluded by recursive logic); DATE:2014-01-01
+	@Test public void Repeated() {	// PURPOSE: repeated pages should still show (and not be excluded by recursive logic); DATE:2014-01-01
 		fxt.Init_page_create("Page:A/1", "<pages index=\"A\" from=1 to=1 />abc");	// NOTE: recursive call to self
 		fxt.Init_page_create("Page:D/1", "d");
 		String main_txt = String_.Concat_lines_nl
@@ -47,7 +47,7 @@ public class Pp_pages_nde_index_tst {
 		,	"</p>"
 		));
 	}
-	@Test  public void Index() {
+	@Test public void Index() {
 		fxt.Init_page_create("Index:A", String_.Concat_lines_nl
 		(	"[[ignore]]"
 		,	"[[Page:A b/1]]"
@@ -85,17 +85,17 @@ public class Pp_pages_nde_index_tst {
 		,	"</p>"
 		));
 	}
-	@Test  public void Index_amp_encoded() {	// handle ampersand encoded strings; EX: en.s:Team_Work_Wins!; DATE:2014-01-19
+	@Test public void Index_amp_encoded() {	// handle ampersand encoded strings; EX: en.s:Team_Work_Wins!; DATE:2014-01-19
 		fxt.Init_page_create("Index:\"A\"", "[[Page:\"A\"]]");
 		fxt.Init_page_create("Page:\"A\"", "a");
 		fxt.Test_parse_page_wiki_str("<pages index=\"&quot;A&quot;\" from='&quot;A&quot;' />", "<p>a&#32;\n</p>");
 	}
-	@Test  public void Index_amp_encoded_num() {// handle num-encoded vals; EX: pl.s:Zarządzenie_Nr_11_Ministra_Finansów_z_dnia_21_lipca_2008_r._w_sprawie_ustanowienia_„Dnia_Skarbowości”; DATE:2014-05-07
+	@Test public void Index_amp_encoded_num() {// handle num-encoded vals; EX: pl.s:Zarządzenie_Nr_11_Ministra_Finansów_z_dnia_21_lipca_2008_r._w_sprawie_ustanowienia_„Dnia_Skarbowości”; DATE:2014-05-07
 		fxt.Init_page_create("Index:\"A\"", "[[Page:\"A\"]]");
 		fxt.Init_page_create("Page:\"A\"", "a");
 		fxt.Test_parse_page_wiki_str("<pages index=\"&#34;A&#34;\" from='&#34;A&#34;' />", "<p>a&#32;\n</p>");
 	}
-//		@Test  public void Index_all() {	// PURPOSE: if from / to not specified, add all titles
+//		@Test public void Index_all() {	// PURPOSE: if from / to not specified, add all titles
 //			fxt.Init_page_create("Index:A", String_.Concat_lines_nl
 //			(	"[[Page:A b/1]]"
 //			,	"[[Page:A b/2]]"
@@ -111,14 +111,14 @@ public class Pp_pages_nde_index_tst {
 //			,	"</p>"
 //			));
 //		}
-	@Test  public void Section_failed_when_xnde() {	// PURPOSE: section failed to be retrieved if preceding xnde; DATE:2014-01-15
+	@Test public void Section_failed_when_xnde() {	// PURPOSE: section failed to be retrieved if preceding xnde; DATE:2014-01-15
 		fxt.Init_page_create("Page:A/1", "<b>a</b><section begin=\"sect_0\"/>b<section end=\"sect_0\"/>");
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 fromsection='sect_0' tosection='sect_0' />", String_.Concat_lines_nl
 		(	"<p>b&#32;"
 		,	"</p>"
 		));
 	}
-	@Test  public void Index_to_missing() {	// PURPOSE: if no to, get rest of pages
+	@Test public void Index_to_missing() {	// PURPOSE: if no to, get rest of pages
 		fxt.Init_page_create("Index:A", String_.Concat_lines_nl
 		(	"[[Page:A b/1]]"
 		,	"[[Page:A b/2]]"
@@ -132,7 +132,7 @@ public class Pp_pages_nde_index_tst {
 		,	"</p>"
 		));
 	}
-	@Test  public void Set_from_to_if_missing() {	// PURPOSE: if no from / to, set from / to variables; note that earlier version of XO was correctly transcluding content, but just not updating from / to variable; fr.s:Constitution_de_la_France_de_1958_(version_initiale); DATE:2014-05-21
+	@Test public void Set_from_to_if_missing() {	// PURPOSE: if no from / to, set from / to variables; note that earlier version of XO was correctly transcluding content, but just not updating from / to variable; fr.s:Constitution_de_la_France_de_1958_(version_initiale); DATE:2014-05-21
 		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", "{{{from}}}-{{{to}}}\n");
 		fxt.Init_page_create("Index:A", String_.Concat_lines_nl
 		(	"[[Page:A/1]]"
@@ -148,7 +148,7 @@ public class Pp_pages_nde_index_tst {
 		, "</p>"
 		));
 	}
-	@Test  public void Various() {
+	@Test public void Various() {
 		fxt.Init_page_create("Page:A/1", "a");
 		fxt.Init_page_create("Page:A/2", "b");
 		fxt.Init_page_create("Page:A/3", "c");
@@ -169,7 +169,7 @@ public class Pp_pages_nde_index_tst {
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=5 exclude=''3' />", "<p>a&#32;b&#32;c&#32;d&#32;e&#32;\n</p>\n");// exclude is invalid; EX:fr.s:Sanguis_martyrum/Première_partie/I DATE:2014-01-18
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" exclude from=1 to=5 />", "<p>a&#32;b&#32;c&#32;d&#32;e&#32;\n</p>\n");		// exclude empty; ru.s:ПБЭ/Гуттен,_Ульрих_фон DATE:2014-02-22
 	}
-	@Test  public void Ref() {	// PURPOSE: ref on page should show; DATE:2014-01-18
+	@Test public void Ref() {	// PURPOSE: ref on page should show; DATE:2014-01-18
 		fxt.Init_page_create("Page:A/1", "a<ref>b</ref>c");
 		fxt.Test_parse_page_wiki_str("<pages index=\"A\" from=1 to=1 /><references/>", String_.Concat_lines_nl
 		( "<p>a<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[1]</a></sup>c&#32;"
@@ -179,7 +179,7 @@ public class Pp_pages_nde_index_tst {
 		, "</ol>"
 		));
 	}
-	@Test  public void Tblw() {	// PURPOSE: if page begins with *, {|, etc, , automatically prepend \n (just like templates); DATE:2014-01-23
+	@Test public void Tblw() {	// PURPOSE: if page begins with *, {|, etc, , automatically prepend \n (just like templates); DATE:2014-01-23
 		fxt.Init_page_create("Page:A/1", "a");
 		fxt.Init_page_create("Page:A/2", "* b");
 		fxt.Init_page_create("Page:A/3", "c");
@@ -194,7 +194,7 @@ public class Pp_pages_nde_index_tst {
 		,	""
 		));
 	}
-	@Test  public void Index_various() {// varying logic depending on whether [[Index:]] has [[Page]] or <pagelist> DATE:2014-01-27
+	@Test public void Index_various() {// varying logic depending on whether [[Index:]] has [[Page]] or <pagelist> DATE:2014-01-27
 		fxt.Init_page_create("Page:A/0", "A/0");
 		fxt.Init_page_create("Page:A/1", "A/1");
 		fxt.Init_page_create("Page:A/2", "A/2");
@@ -231,7 +231,7 @@ public class Pp_pages_nde_index_tst {
 		, "</p>"
 		));
 	}
-	@Test  public void Index__caption_w_xml() { // PURPOSE: do not escape XML in caption; ISSUE#:624 DATE:2019-11-30
+	@Test public void Index__caption_w_xml() { // PURPOSE: do not escape XML in caption; ISSUE#:624 DATE:2019-11-30
 		// create header page with just "prev" token
 		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", "{{{prev}}}\n");
 

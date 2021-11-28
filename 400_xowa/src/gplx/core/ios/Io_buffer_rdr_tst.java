@@ -23,7 +23,7 @@ public class Io_buffer_rdr_tst {
 		rdr = Io_buffer_rdr.new_(Io_stream_rdr_.New__raw(fil), 4);
 	}	Io_buffer_rdr rdr; Io_url fil;
 	@After public void teardown() {rdr.Rls();}
-	@Test  public void Bfr_load_all() {
+	@Test public void Bfr_load_all() {
 		tst_Bfr("0", "1", "2", "3").tst_ReadDone(false);
 
 		rdr.Bfr_load_all();
@@ -34,7 +34,7 @@ public class Io_buffer_rdr_tst {
 		rdr.Bfr_load_all();	// NOTE: change to zip_rdrs make eof detection difficult; force another load to ensure that file_pos goes past file_len
 		tst_ReadDone(true);	// NOTE: bfr truncated from 4 to 2
 	}
-	@Test  public void Bfr_load_from() {
+	@Test public void Bfr_load_from() {
 		tst_Bfr("0", "1", "2", "3").tst_ReadDone(false);
 
 		rdr.Bfr_load_from(3);	// read from pos 3

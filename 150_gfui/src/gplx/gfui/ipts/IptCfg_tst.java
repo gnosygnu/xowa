@@ -22,16 +22,16 @@ public class IptCfg_tst {
 		cfg = new IptCfg_mok();
 		key = IptBndsOwner_mok.Invk_Reg;
 	}	IptBndsOwner_mok box; IptCfg_mok cfg; String key;
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		cfg.run_GetOrDflt(box, key, IptKey_.A);
 		box.tst_SendKey(IptKey_.A, 1);
 	}
-	@Test  public void Del() {
+	@Test public void Del() {
 		cfg.run_GetOrDflt(box, key, IptKey_.A);
 		box.IptBnds().Cfgs_delAll();
 		box.tst_SendKey(IptKey_.A, 0);
 	}
-	@Test  public void Change() {
+	@Test public void Change() {
 		cfg.run_GetOrDflt(box, key, IptKey_.A);
 		cfg.run_Set(key, IptKey_.B);
 		box.tst_SendKey(IptKey_.B, 1);
@@ -40,19 +40,19 @@ public class IptCfg_tst {
 		box.tst_SendKey(IptKey_.C, 1);
 		box.tst_SendKey(IptKey_.B, 0);
 	}
-	@Test  public void SetBeforeInit() {
+	@Test public void SetBeforeInit() {
 		cfg.run_Set(key, IptKey_.B);
 		cfg.run_GetOrDflt(box, key, IptKey_.A);
 		box.tst_SendKey(IptKey_.B, 1);
 		box.tst_SendKey(IptKey_.A, 0);
 	}
-	@Test  public void SetBeforeInit_msg() {
+	@Test public void SetBeforeInit_msg() {
 		cfg.run_Set_msg(key, 2, IptKey_.B);
 		cfg.run_GetOrDflt(box, key, IptKey_.A);	// iptBnd exists; ignore Key_.A (and also msg=1)
 		box.tst_SendKey(IptKey_.B, 2);
 		box.tst_SendKey(IptKey_.A, 0);
 	}
-	@Test  public void Chained() {
+	@Test public void Chained() {
 		cfg.run_GetOrDflt(box, key, IptKeyChain.parse("key.ctrl+key.a,key.b"));
 		cfg.run_Set(key, IptKey_.A);
 		box.tst_SendKey(IptKey_.A, 1);

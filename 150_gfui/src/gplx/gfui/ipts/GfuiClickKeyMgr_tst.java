@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
 import org.junit.*; import gplx.gfui.ipts.*; import gplx.gfui.controls.windows.*;
 public class GfuiClickKeyMgr_tst {
-	@Test  public void ExtractKeyFromText() {
+	@Test public void ExtractKeyFromText() {
 		tst_ExtractKey("&click", IptKey_.C);
 		tst_ExtractKey("&", IptKey_.None);
 		tst_ExtractKey("trailing &", IptKey_.None);

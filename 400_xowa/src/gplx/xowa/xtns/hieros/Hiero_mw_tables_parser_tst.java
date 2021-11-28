@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.core.intls.*;
 public class Hiero_mw_tables_parser_tst {
 	@Before public void init() {fxt.Reset();} private Hiero_mw_tables_parser_fxt fxt = new Hiero_mw_tables_parser_fxt();
-	@Test  public void Basic() {// DATE:2014-04-19
+	@Test public void Basic() {// DATE:2014-04-19
 		fxt.Test_bld_all
 		( String_.Concat_lines_nl_skip_last
 		( "$wh_prefabs = array("

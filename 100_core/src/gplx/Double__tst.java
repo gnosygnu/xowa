@@ -17,7 +17,7 @@ package gplx;
 import org.junit.*;
 public class Double__tst {
 	private Double__fxt fxt = new Double__fxt();
-	@Test  public void Xto_str_loose() {			
+	@Test public void Xto_str_loose() {
 		fxt.Test_Xto_str_loose(2449.6000000d		, "2449.6");
 		fxt.Test_Xto_str_loose(623.700d				, "623.7");
 	}

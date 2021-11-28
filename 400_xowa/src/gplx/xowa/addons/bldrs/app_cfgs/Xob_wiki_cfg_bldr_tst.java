@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.strings.*;
 public class Xob_wiki_cfg_bldr_tst {
 	Xob_wiki_cfg_bldr_fxt fxt = new Xob_wiki_cfg_bldr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Exec() {
+	@Test public void Exec() {
 		fxt	.Init_cmd("en.wikipedia.org", "key0", "en.val0")
 			.Init_cmd("en.wikipedia.org", "key1", "en.val1")
 			.Init_cmd("fr.wikipedia.org", "key0", "fr.val0")
@@ -55,7 +55,7 @@ public class Xob_wiki_cfg_bldr_tst {
 			,	"// key2.end"
 			));
 	}
-//		@Test  public void Lang_names_run() {
+//		@Test public void Lang_names_run() {
 //			Io_url dir = Io_url_.new_dir_("/var/www/mediawiki/languages/messages/");
 //			Io_url[] fils = Io_mgr.Instance.QueryDir_args(dir).ExecAsUrlAry();
 //			int fils_len = fils.length;
@@ -89,7 +89,7 @@ public class Xob_wiki_cfg_bldr_tst {
 //			}
 //			Tfds.Dbg(sb.To_str_and_clear());
 //		}
-	@Test  public void Ns_aliases() {
+	@Test public void Ns_aliases() {
 		Io_mgr.Instance.InitEngine_mem();
 		Io_mgr.Instance.SaveFilStr("mem/en.wikipedia.org/w/api.php?action=query&format=xml&meta=siteinfo&siprop=namespacealiases", String_.Concat_lines_nl
 		(	"<api>"

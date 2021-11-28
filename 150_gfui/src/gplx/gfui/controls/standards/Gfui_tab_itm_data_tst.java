@@ -17,7 +17,7 @@ package gplx.gfui.controls.standards; import gplx.*; import gplx.gfui.*; import 
 import org.junit.*;
 public class Gfui_tab_itm_data_tst {		
 	@Before public void init() {} private Gfui_tab_itm_data_fxt fxt = new Gfui_tab_itm_data_fxt();
-	@Test  public void Get_idx_after_closing() {
+	@Test public void Get_idx_after_closing() {
 		fxt.Test_Get_idx_after_closing(0, 1, -1);
 		fxt.Test_Get_idx_after_closing(4, 5, 3);
 		fxt.Test_Get_idx_after_closing(3, 5, 4);

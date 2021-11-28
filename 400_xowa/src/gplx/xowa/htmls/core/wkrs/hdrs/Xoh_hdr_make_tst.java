@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_hdr_make_tst {
 	private final Xoh_make_fxt fxt = new Xoh_make_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		String html = String_.Concat_lines_nl_skip_last
 		( "z"
 		, "<h2><span class='mw-headline' id='A_1'>A 1</span></h2>"
@@ -31,7 +31,7 @@ public class Xoh_hdr_make_tst {
 			.Sections__add(2, 2, "B"	, "B"	, "b")
 		);
 	}
-	@Test   public void Consecutive() {
+	@Test  public void Consecutive() {
 		String html = String_.Concat_lines_nl_skip_last
 		( "abc"
 		, "<h2><span class='mw-headline' id='A'>A</span></h2>"

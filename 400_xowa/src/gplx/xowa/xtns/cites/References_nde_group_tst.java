@@ -18,7 +18,7 @@ import org.junit.*;
 public class References_nde_group_tst {	
 	@Before public void init() {fxt.Clear_ref_mgr();} private final    Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref>x</ref>"
 			, "<ref group='group_a'>y</ref>"
@@ -39,7 +39,7 @@ public class References_nde_group_tst {
 			, ""
 			));
 	}
-	@Test  public void Unknown() {
+	@Test public void Unknown() {
 		String expd = 
 			String_.Concat_lines_nl_skip_last
 			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[unknown 1]</a></sup>"
@@ -59,7 +59,7 @@ public class References_nde_group_tst {
 			, "<references group=''/>"
 			), expd);
 	}
-	@Test  public void Empty() {	// PURPOSE: <references group=""/> is same as <references/>; DATE:2013-02-06
+	@Test public void Empty() {	// PURPOSE: <references group=""/> is same as <references/>; DATE:2013-02-06
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref>b</ref>"
 			, "<references group=\"\"/>"
@@ -71,7 +71,7 @@ public class References_nde_group_tst {
 			, ""
 			));
 	}
-	@Test  public void Val_less_defaults_to_key() {	// PURPOSE: similar to above, except "group" is same as "group=group"; DATE:2014-07-03
+	@Test public void Val_less_defaults_to_key() {	// PURPOSE: similar to above, except "group" is same as "group=group"; DATE:2014-07-03
 		String expd = String_.Concat_lines_nl_skip_last
 			( "<sup id=\"cite_ref-0\" class=\"reference\"><a href=\"#cite_note-0\">[group 1]</a></sup>"
 			, "<ol class=\"references\">"
@@ -90,10 +90,10 @@ public class References_nde_group_tst {
 			), expd
 			);
 	}
-	@Test   public void Empty_group() {	// PURPOSE: group without items should be blank; should not throw error; DATE:2013-02-12
+	@Test  public void Empty_group() {	// PURPOSE: group without items should be blank; should not throw error; DATE:2013-02-12
 		fxt.Test_parse_page_wiki_str("<references name='group_a'/>", "");
 	}
-	@Test  public void Multiple_same_name_groups() {	// PURPOSE: multiple groups with same name "clears" out references; DATE:2013-02-11
+	@Test public void Multiple_same_name_groups() {	// PURPOSE: multiple groups with same name "clears" out references; DATE:2013-02-11
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref>a</ref>"
 			, "<references/>"

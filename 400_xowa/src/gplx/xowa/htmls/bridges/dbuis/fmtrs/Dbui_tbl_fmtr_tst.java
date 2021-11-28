@@ -18,7 +18,7 @@ import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 import org.junit.*;
 public class Dbui_tbl_fmtr_tst {
 	@Before public void init() {fxt.Clear();} private final    Dbui_tbl_fmtr_fxt fxt = new Dbui_tbl_fmtr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 //			fxt.Test_write
 //			( fxt.Make_tbl()
 //			, String_.Concat_lines_nl_skip_last()

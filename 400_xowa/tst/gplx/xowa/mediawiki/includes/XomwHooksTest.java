@@ -34,7 +34,7 @@ public class XomwHooksTest {
         XomwHooks.register("test1", callbackOwner.NewCallback("test1"));
         Gftest.Eq__bool_y(XomwHooks.isRegistered("test1"));
         XomwHooks.clear("test1");
-        Gftest.Eq__bool_y(XomwHooks.isRegistered("test1"));
+        Gftest.Eq__bool_n(XomwHooks.isRegistered("test1"));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class XomwHooksTest {
 
         Gftest.Eq__bool_y(XomwHooks.run("test1", XophpArray.New(1, 2, 3)));
 
-        Gftest.Eq__str("test1a:3;test1b:3", callbackOwner.Result());
+        Gftest.Eq__str("test1a:3;test1b:3;", callbackOwner.Result());
     }
 
     private static String[] extractKeysFromCallbackAry(XophpArray callbacks) {

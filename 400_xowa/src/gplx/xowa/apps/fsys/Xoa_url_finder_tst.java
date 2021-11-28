@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.users.*;
 public class Xoa_url_finder_tst {
 	private final    Xoa_url_finder_fxt fxt = new Xoa_url_finder_fxt();
-	@Test  public void Find_by_css_or_null() {
+	@Test public void Find_by_css_or_null() {
 		// init
 		String wiki = "en.wikipedia.org";
 		String file = "logo_night.png";

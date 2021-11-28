@@ -17,10 +17,10 @@ package gplx.xowa.users.wikis; import gplx.*; import gplx.xowa.*; import gplx.xo
 import org.junit.*; import gplx.core.envs.*;
 public class Xofs_url_itm_parser_tst {		
 	@Before public void init() {fxt.Clear();} private Xofs_url_itm_parser_fxt fxt = new Xofs_url_itm_parser_fxt();
-	@Test  public void Custom() 				{fxt.Test_parse_custom("/xowa/wiki/en.wikipedia.org/");}
-	@Test  public void Lnx() 					{fxt.Init_dir_spr_lnx().Init_name("xowa", "/xowa")		.Test_parse("xowa-fs://~{xowa}/bin/any/", "/xowa/bin/any/");}
-	@Test  public void Wnt() 					{fxt.Init_dir_spr_wnt().Init_name("xowa", "C:\\xowa")	.Test_parse("xowa-fs://~{xowa}/bin/any/", "C:\\xowa\\bin\\any\\");}
-	@Test  public void Outliers() {
+	@Test public void Custom() 				{fxt.Test_parse_custom("/xowa/wiki/en.wikipedia.org/");}
+	@Test public void Lnx() 					{fxt.Init_dir_spr_lnx().Init_name("xowa", "/xowa")		.Test_parse("xowa-fs://~{xowa}/bin/any/", "/xowa/bin/any/");}
+	@Test public void Wnt() 					{fxt.Init_dir_spr_wnt().Init_name("xowa", "C:\\xowa")	.Test_parse("xowa-fs://~{xowa}/bin/any/", "C:\\xowa\\bin\\any\\");}
+	@Test public void Outliers() {
 		fxt.Init_name("xowa", "/xowa");
 		fxt.Test_parse("xowa-fs://ab"		, "ab");		// no subst
 		fxt.Test_parse("xowa-fs://a~b"		, "a~b");		// tilde

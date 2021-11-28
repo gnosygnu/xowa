@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.threads.*; 
+import gplx.core.threads.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.wikis.domains.*;

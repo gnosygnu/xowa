@@ -20,7 +20,7 @@ public class Xowm_rev_wkr__meta__wm_tst {
 	private final Xowm_rev_wkr__meta__wm_fxt fxt = new Xowm_rev_wkr__meta__wm_fxt();
 	@Before public void init() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();}
 	@After public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		Wmapi_itm__pge[] expd = fxt.Make_pge_ary
 		( fxt.Make_pge(Xow_ns_.Tid__main, "A", 1, 11, 100, "2015-01-01T01:01:01Z", "user1", "note1")
 		, fxt.Make_pge(Xow_ns_.Tid__main, "B", 2, 22, 200, "2015-02-02T02:02:02Z", "user2", "note2")

@@ -17,7 +17,7 @@ package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z482_vars_parse_tst {
 	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Parse(String_.Concat
 			(	"_var:{"
 			,	"	size '20,20';"
@@ -27,7 +27,7 @@ public class z482_vars_parse_tst {
 			,	fx.nde_().Atru_("20,20")
 			);
 	}
-	@Test  public void Many() {
+	@Test public void Many() {
 		fx.tst_Parse(String_.Concat
 			(	"_var:{"
 			,	"	size '20,20';"
@@ -38,7 +38,7 @@ public class z482_vars_parse_tst {
 			,	fx.nde_().Atru_("20,20").Atru_("30,30")
 			);
 	}
-	@Test  public void Deferred() {
+	@Test public void Deferred() {
 		fx.tst_Parse(String_.Concat
 			(	"_var:{"
 			,	"	key0 '<~key1>';"
@@ -51,7 +51,7 @@ public class z482_vars_parse_tst {
 			,	fx.nde_().Atru_("val1")
 			);
 	}
-	@Test  public void Swap() {
+	@Test public void Swap() {
 		fx.tst_Parse(String_.Concat
 			(	"{"
 			,	"	_var:{"
@@ -70,7 +70,7 @@ public class z482_vars_parse_tst {
 			)
 			);
 	}
-	@Test  public void Context() {
+	@Test public void Context() {
 		fx.tst_Parse(String_.Concat
 			(	"_var:{"
 			,	"	size '20,20' gui;"

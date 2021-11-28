@@ -18,9 +18,9 @@ import org.junit.*;
 public class Int_rng_mgr_tst {
 	private final Int_rng_mgr_fxt fxt = new Int_rng_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Val()	{fxt.Test_parse_y("2")				.Test_match_y(2)					.Test_match_n(1, 3);}
-	@Test  public void Rng()	{fxt.Test_parse_y("2-5")			.Test_match_y(2, 3, 4, 5)			.Test_match_n(0, 1, 6);}
-	@Test  public void Many()	{fxt.Test_parse_y("1,3-5,7,9-10")	.Test_match_y(1, 3, 4, 5, 7, 9, 10)	.Test_match_n(0, 2, 6, 8, 11);}
+	@Test public void Val()	{fxt.Test_parse_y("2")				.Test_match_y(2)					.Test_match_n(1, 3);}
+	@Test public void Rng()	{fxt.Test_parse_y("2-5")			.Test_match_y(2, 3, 4, 5)			.Test_match_n(0, 1, 6);}
+	@Test public void Many()	{fxt.Test_parse_y("1,3-5,7,9-10")	.Test_match_y(1, 3, 4, 5, 7, 9, 10)	.Test_match_n(0, 2, 6, 8, 11);}
 }
 class Int_rng_mgr_fxt {
 	private Int_rng_mgr_base mgr;

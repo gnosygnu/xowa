@@ -20,24 +20,24 @@ public class Scrib_lib_message_tst {
 		fxt.Clear_for_lib();
 		lib = fxt.Core().Lib_message().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
-	@Test   public void Plain() {
+	@Test  public void Plain() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary("sun"))							, "Sun");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary("sunx"))						, "&lt;sunx&gt;");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary_arg("redirectedfrom", "A"))		, "(Redirected from A)");
 	}
-	@Test  public void Plain_lang() {
+	@Test public void Plain_lang() {
 		Xol_lang_itm lang = fxt.Parser_fxt().Wiki().Appe().Lang_mgr().Get_by_or_new(Bry_.new_a7("fr"));
 		Init_msg(lang, "sun", "dim");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)keys_ary_lang("sun", "fr"))				, "dim");
 	}
-	@Test  public void Plain_rawMessage() {
+	@Test public void Plain_rawMessage() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "$1", "params", Keyval_.Ary(Keyval_.int_(1, "abc")))), "abc");
 	}
-	@Test  public void Plain_rawMessage_empty() {// PURPOSE:rawMessage would throw null ref if rawMessage called template that returns empty value; PAGE:it.w:L'Internazionale DATE:2015-02-25
+	@Test public void Plain_rawMessage_empty() {// PURPOSE:rawMessage would throw null ref if rawMessage called template that returns empty value; PAGE:it.w:L'Internazionale DATE:2015-02-25
 		fxt.Parser_fxt().Init_page_create("Template:Msg", "");
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_plain, Object_.Ary((Object)Scrib_kv_utl_.flat_many_("rawMessage", "{{Msg}}", "params", Keyval_.Ary(Keyval_.int_(1, "abc")))), "");
 	}
-	@Test   public void Check() {
+	@Test  public void Check() {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("exists"				, keys_ary("sun"))							, true);
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("exists"				, keys_ary("sunx"))							, false);
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("isBlank"				, keys_ary("sun"))							, false);
@@ -49,7 +49,7 @@ public class Scrib_lib_message_tst {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("isDisabled"			, keys_ary("disabled"))						, true);
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_message.Invk_check, Object_.Ary("isBlank"				, keys_ary("disabled"))						, false);
 	}
-	@Test  public void Init_message_for_lang() {
+	@Test public void Init_message_for_lang() {
 		fxt.Test_scrib_proc_str(lib, Scrib_lib_message.Invk_init_message_for_lang, Object_.Ary_empty						, "lang=en");
 	}
 	private void Init_msg(String key, String val) {Init_msg(fxt.Core().Wiki().Lang(), key, val);}

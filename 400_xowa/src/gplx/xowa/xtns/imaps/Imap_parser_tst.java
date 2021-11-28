@@ -17,22 +17,22 @@ package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.parsers.*; import gplx.xowa.xtns.imaps.itms.*;
 public class Imap_parser_tst {		
 	@Before public void init() {fxt.Reset();} private Imap_parser_fxt fxt = new Imap_parser_fxt();
-	@Test  public void Rect_pass()				{fxt.Test_shape("rect 1 2 3 4 [[A]]"								, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));}
-	@Test  public void Rect_pass_many()			{fxt.Test_shape("rect 1 2 3 4 5 6[[A]]"								, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));} // PURPOSE: MW allows extra points to be passed; PAGE:en.w:Kilauea DATE:2014-07-28
-	@Test  public void Rect_pass_invalid()		{fxt.Test_shape("rect 1 2 3 4 a b [[A]]"							, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));} // PURPOSE: MW only scans first 4 tokens for numbers; PAGE:de.w:Wilhelm_Angele DATE:2014-10-30
-	@Test  public void Circle_pass()			{fxt.Test_shape("circle 1 2 3 [[A]]"								, fxt.itm_circle_("[[A]]", 1, 2, 3));}
-	@Test  public void Poly_pass()				{fxt.Test_shape("poly 1 2 3 4 5 6 [[A]]"							, fxt.itm_poly_("[[A]]", 1, 2, 3, 4, 5, 6));}
-	@Test  public void Poly_pass_chars()		{fxt.Test_shape("poly a b [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}		// PURPOSE: non-numeric should be converted to 0; PAGE:uk.w:Стратосфера; DATE:2014-07-26
-	@Test  public void Poly_pass_chars_2()		{fxt.Test_shape("poly 1a 2a [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}		// PURPOSE: non-numeric should be converted to 0; PAGE:ru.w:Системный_блок; DATE:2014-10-22
-	@Test  public void Poly_pass_dots()			{fxt.Test_shape("poly 1.2 3.4 [[A]]"								, fxt.itm_poly_("[[A]]", 1.2d, 3.4d));}	// PURPOSE: make sure decimals are handled correctly
-	@Test  public void Poly_pass_commas()		{fxt.Test_shape("poly 1, 2, 3, 4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 2, 3, 4));}	// PURPOSE: commas should be ignored; PAGE:de.w:Kaimnitz; DATE:2014-08-05
-	@Test  public void Poly_pass_commas_2()		{fxt.Test_shape("poly 1,2 3,4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 3));}		// PURPOSE: commas should be ignored for purpose of parse; PAGE:fr.w:Gouesnou; DATE:2014-08-12
-	@Test  public void Poly_pass_commas_3()		{fxt.Test_shape("poly ,1 2 [[A]]"									, fxt.itm_poly_("[[A]]", 1, 2));}		// PURPOSE: do not fail if comma is at start of number; PAGE:en.w:Area_codes_281,_346,_713,_and_832; DATE:2015-07-31
-	@Test  public void Rect_fail()				{fxt.Test_shape_err("rect 1 2 3 [[A]]"								, "imagemap_missing_coord");}
-	@Test  public void Circle_fail()			{fxt.Test_shape_err("circle 1 2 [[A]]"								, "imagemap_missing_coord");}
-	@Test  public void Poly_fail_odd()			{fxt.Test_shape_err("poly 1 2 3 [[A]]"								, "imagemap_poly_odd");}
-	@Test  public void Poly_fail_zero()			{fxt.Test_shape_err("poly [[A]]"									, "imagemap_missing_coord");}
-	@Test  public void Circle_fail_invalid()	{fxt.Test_shape_err("rect 1 2..3 4 [[A]]"							, "imagemap_invalid_coord");}
+	@Test public void Rect_pass()				{fxt.Test_shape("rect 1 2 3 4 [[A]]"								, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));}
+	@Test public void Rect_pass_many()			{fxt.Test_shape("rect 1 2 3 4 5 6[[A]]"								, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));} // PURPOSE: MW allows extra points to be passed; PAGE:en.w:Kilauea DATE:2014-07-28
+	@Test public void Rect_pass_invalid()		{fxt.Test_shape("rect 1 2 3 4 a b [[A]]"							, fxt.itm_rect_("[[A]]", 1, 2, 3, 4));} // PURPOSE: MW only scans first 4 tokens for numbers; PAGE:de.w:Wilhelm_Angele DATE:2014-10-30
+	@Test public void Circle_pass()			{fxt.Test_shape("circle 1 2 3 [[A]]"								, fxt.itm_circle_("[[A]]", 1, 2, 3));}
+	@Test public void Poly_pass()				{fxt.Test_shape("poly 1 2 3 4 5 6 [[A]]"							, fxt.itm_poly_("[[A]]", 1, 2, 3, 4, 5, 6));}
+	@Test public void Poly_pass_chars()		{fxt.Test_shape("poly a b [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}		// PURPOSE: non-numeric should be converted to 0; PAGE:uk.w:Стратосфера; DATE:2014-07-26
+	@Test public void Poly_pass_chars_2()		{fxt.Test_shape("poly 1a 2a [[A]]"									, fxt.itm_poly_("[[A]]", 0, 0));}		// PURPOSE: non-numeric should be converted to 0; PAGE:ru.w:Системный_блок; DATE:2014-10-22
+	@Test public void Poly_pass_dots()			{fxt.Test_shape("poly 1.2 3.4 [[A]]"								, fxt.itm_poly_("[[A]]", 1.2d, 3.4d));}	// PURPOSE: make sure decimals are handled correctly
+	@Test public void Poly_pass_commas()		{fxt.Test_shape("poly 1, 2, 3, 4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 2, 3, 4));}	// PURPOSE: commas should be ignored; PAGE:de.w:Kaimnitz; DATE:2014-08-05
+	@Test public void Poly_pass_commas_2()		{fxt.Test_shape("poly 1,2 3,4 [[A]]"								, fxt.itm_poly_("[[A]]", 1, 3));}		// PURPOSE: commas should be ignored for purpose of parse; PAGE:fr.w:Gouesnou; DATE:2014-08-12
+	@Test public void Poly_pass_commas_3()		{fxt.Test_shape("poly ,1 2 [[A]]"									, fxt.itm_poly_("[[A]]", 1, 2));}		// PURPOSE: do not fail if comma is at start of number; PAGE:en.w:Area_codes_281,_346,_713,_and_832; DATE:2015-07-31
+	@Test public void Rect_fail()				{fxt.Test_shape_err("rect 1 2 3 [[A]]"								, "imagemap_missing_coord");}
+	@Test public void Circle_fail()			{fxt.Test_shape_err("circle 1 2 [[A]]"								, "imagemap_missing_coord");}
+	@Test public void Poly_fail_odd()			{fxt.Test_shape_err("poly 1 2 3 [[A]]"								, "imagemap_poly_odd");}
+	@Test public void Poly_fail_zero()			{fxt.Test_shape_err("poly [[A]]"									, "imagemap_missing_coord");}
+	@Test public void Circle_fail_invalid()	{fxt.Test_shape_err("rect 1 2..3 4 [[A]]"							, "imagemap_invalid_coord");}
 }
 class Imap_parser_fxt extends Imap_base_fxt {
 	private Imap_parser parser;

@@ -17,14 +17,14 @@ package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Json_printer_tst {
 	private final Json_printer_fxt fxt = new Json_printer_fxt();
-	@Test   public void Root_nde() {
+	@Test  public void Root_nde() {
 		fxt.Test_print(Json_doc.Make_str_by_apos("{'k1':'v1','k2':'v2'}"), String_.Concat_lines_nl
 		( "{ 'k1':'v1'"
 		, ", 'k2':'v2'"
 		, "}"
 		));
 	}
-	@Test   public void Root_ary() {
+	@Test  public void Root_ary() {
 		fxt.Test_print(Json_doc.Make_str_by_apos("[1,2,3]"), String_.Concat_lines_nl
 		( "[ 1"
 		, ", 2"
@@ -32,7 +32,7 @@ public class Json_printer_tst {
 		, "]"
 		));
 	}
-	@Test   public void Ary_w_ary() {
+	@Test  public void Ary_w_ary() {
 		fxt.Test_print(Json_doc.Make_str_by_apos("[[1,2],[3,4]]"), String_.Concat_lines_nl
 		( "[ "
 		, "  [ 1"
@@ -45,7 +45,7 @@ public class Json_printer_tst {
 		, "]"
 		));
 	}
-	@Test   public void Ary_w_nde() {
+	@Test  public void Ary_w_nde() {
 		fxt.Test_print(Json_doc.Make_str_by_apos("[{'k1':'v1','k2':'v2'},{'k3':'v3','k4':'v4'}]"), String_.Concat_lines_nl
 		( "[ "
 		, "  { 'k1':'v1'"
@@ -58,7 +58,7 @@ public class Json_printer_tst {
 		, "]"
 		));
 	}
-	@Test   public void Nde_w_ary() {
+	@Test  public void Nde_w_ary() {
 		fxt.Test_print(Json_doc.Make_str_by_apos("{'k1':[1,2],'k2':[3,4]}"), String_.Concat_lines_nl
 		( "{ 'k1':"
 		, "  [ 1"
@@ -71,7 +71,7 @@ public class Json_printer_tst {
 		, "}"
 		));
 	}
-//		@Test   public void Smoke() {
+//		@Test  public void Smoke() {
 //			Json_printer printer = new Json_printer();
 //			String url = "C:\\temp.json";
 //			String s = printer.Pretty_print_as_str(Bry_.new_u8(Io_mgr.Instance.LoadFilStr(url)));

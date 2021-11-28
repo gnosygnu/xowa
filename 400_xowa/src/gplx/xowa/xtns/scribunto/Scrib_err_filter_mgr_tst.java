@@ -17,7 +17,7 @@ package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx
 import org.junit.*;
 public class Scrib_err_filter_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final    Scrib_err_filter_mgr_fxt fxt = new Scrib_err_filter_mgr_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Exec_add(11, "Mod_1", "Fnc_1", "Err_11", "Comm_11");
 		fxt.Exec_add(12, "Mod_1", "Fnc_2", "Err_12", "Comm_12");
 		fxt.Exec_add(21, "Mod_2", "Fnc_1", "Err_21", "Comm_21");

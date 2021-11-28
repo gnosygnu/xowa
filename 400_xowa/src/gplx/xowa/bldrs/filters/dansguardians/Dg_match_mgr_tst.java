@@ -17,7 +17,7 @@ package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*
 import org.junit.*; import gplx.dbs.*;
 public class Dg_match_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Dg_match_mgr_fxt fxt = new Dg_match_mgr_fxt();
-	@Test   public void One() {
+	@Test  public void One() {
 		fxt.Init_line(100, "a");
 		fxt.Test_match_many_y("a", "ab", "ba", "abc");
 		fxt.Test_match_many_n("b");

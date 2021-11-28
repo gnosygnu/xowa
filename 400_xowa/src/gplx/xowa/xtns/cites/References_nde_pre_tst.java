@@ -18,7 +18,7 @@ import org.junit.*;
 public class References_nde_pre_tst {	
 	@Before public void init() {fxt.Clear_ref_mgr();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Pre_ignored() {
+	@Test public void Pre_ignored() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref> x</ref>"
 			, "<references/>"
@@ -30,7 +30,7 @@ public class References_nde_pre_tst {
 			, ""
 			));
 	}
-	@Test  public void Pre_ignored_2() {	// PURPOSE: <ref> creates <li> which will effectively disable all pre; PAGE:en.w:Robert_Browning
+	@Test public void Pre_ignored_2() {	// PURPOSE: <ref> creates <li> which will effectively disable all pre; PAGE:en.w:Robert_Browning
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref>x"
 			, " y"
@@ -46,7 +46,7 @@ public class References_nde_pre_tst {
 			, ""
 			));
 	}
-	@Test  public void Pre_ignored_3() {	// PURPOSE: " <references>" should not create pre; fr.w:Heidi_(roman); DATE:2014-02-17
+	@Test public void Pre_ignored_3() {	// PURPOSE: " <references>" should not create pre; fr.w:Heidi_(roman); DATE:2014-02-17
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			( "<ref>x</ref>"

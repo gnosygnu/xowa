@@ -17,14 +17,14 @@ package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*
 import org.junit.*; import gplx.xowa.parsers.*;
 public class Xoh_lnki_title_bldr_tst {
 	private final    Xoh_lnki_title_bldr_fxt fxt = new Xoh_lnki_title_bldr_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__parse("a b c", "a b c");
 		fxt.Test__parse("a ''b'' c", "a b c");
 		fxt.Test__parse("a <i>b</i> c", "a b c");
 		fxt.Test__parse("a\nb", "a b");
 		fxt.Test__parse("a\"b", "a&quot;b");
 	}
-	@Test   public void Lnki__quotes() {	// PURPOSE: handle titles with quotes; PAGE:s.w:Styx_(band) DATE:2015-11-29
+	@Test  public void Lnki__quotes() {	// PURPOSE: handle titles with quotes; PAGE:s.w:Styx_(band) DATE:2015-11-29
 		fxt.Test__parse("[[A\"B]]", "A&quot;B");
 	}
 }

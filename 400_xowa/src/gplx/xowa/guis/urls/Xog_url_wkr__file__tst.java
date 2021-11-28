@@ -18,13 +18,13 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.files.origs.*;
 public class Xog_url_wkr__file__tst {
 	private final    Xog_url_wkr__file__fxt fxt = new Xog_url_wkr__file__fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__extract("A.png", "file:///mem/xowa/file/commons.wikimedia.org/orig/7/0/A.png", 300, 200);
 	}
-	@Test   public void Url_encoded() {
+	@Test  public void Url_encoded() {
 		fxt.Test__extract("A,b.png", "file:///mem/xowa/file/commons.wikimedia.org/orig/d/6/A%2Cb.png", 300, 200);
 	}
-	@Test   public void Utf8() {
+	@Test  public void Utf8() {
 		fxt.Test__extract("Volcán_Chimborazo,_\"El_Taita_Chimborazo\".jpg", "file:///mem/xowa/file/commons.wikimedia.org/orig/3/c/Volc%C3%A1n_Chimborazo%2C_%22El_Taita_Chimborazo%22.jpg", 300, 200);
 	}
 }

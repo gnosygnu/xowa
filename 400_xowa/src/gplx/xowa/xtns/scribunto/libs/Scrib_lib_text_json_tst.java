@@ -24,7 +24,7 @@ public class Scrib_lib_text_json_tst {
 		lib = fxt.Core().Lib_text();
 		lib.Init();
 	}
-	@Test  public void Nde__key_obj__primitives() {	// NOTE: based on MW
+	@Test public void Nde__key_obj__primitives() {	// NOTE: based on MW
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'int':1"
@@ -48,7 +48,7 @@ public class Scrib_lib_text_json_tst {
 		, Keyval_.new_("node", Keyval_.Ary(Keyval_.new_("key", "val")))
 		));
 	}
-	@Test  public void Nde__obj_in_obj() {
+	@Test public void Nde__obj_in_obj() {
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'x':"
@@ -69,7 +69,7 @@ public class Scrib_lib_text_json_tst {
 		)
 		);
 	}
-	@Test  public void Nde__ary_in_obj() {	// NOTE: based on MW
+	@Test public void Nde__ary_in_obj() {	// NOTE: based on MW
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'x':"
@@ -91,7 +91,7 @@ public class Scrib_lib_text_json_tst {
 		))}))			
 		);
 	}
-	@Test  public void Nde__key_int__mixed() {// NOTE: based on MW
+	@Test public void Nde__key_int__mixed() {// NOTE: based on MW
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'x':'x'"
@@ -105,7 +105,7 @@ public class Scrib_lib_text_json_tst {
 		, Keyval_.new_("2", 2)
 		));
 	}
-	@Test  public void Nde__key_int__auto() {// NOTE: based on MW
+	@Test public void Nde__key_int__auto() {// NOTE: based on MW
 		json_fxt.Test_json_encode(fxt, lib
 		, Scrib_lib_text__json_util.Flag__preserve_keys
 		, Kv_ary_utl.new_(Bool_.Y, new Object[]
@@ -139,7 +139,7 @@ public class Scrib_lib_text_json_tst {
 		}
 		));
 	}
-//		@Test  public void Nde__empty() {	// NOTE: based on MW
+//		@Test public void Nde__empty() {	// NOTE: based on MW
 //			json_fxt.Test_json_roundtrip(fxt, lib
 //			, Json_doc.Make_str_by_apos
 //			( "{"
@@ -148,7 +148,7 @@ public class Scrib_lib_text_json_tst {
 //			, Keyval_.Ary_empty
 //			);
 //		}
-	@Test  public void Ary__empty() {	// NOTE: based on MW
+	@Test public void Ary__empty() {	// NOTE: based on MW
 		json_fxt.Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none
 		, Kv_ary_utl.new_(Bool_.Y, new Object[] {})
 		, Json_doc.Make_str_by_apos
@@ -157,7 +157,7 @@ public class Scrib_lib_text_json_tst {
 		)
 		);
 	}
-	@Test  public void Ary__obj() {	// NOTE: based on MW
+	@Test public void Ary__obj() {	// NOTE: based on MW
 		json_fxt.Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none
 		, Kv_ary_utl.new_(Bool_.Y, 1, "abc", true)
 		, Json_doc.Make_str_by_apos
@@ -168,7 +168,7 @@ public class Scrib_lib_text_json_tst {
 		)
 		);
 	}
-	@Test  public void Ary__nested() {	// NOTE: based on MW
+	@Test public void Ary__nested() {	// NOTE: based on MW
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "[ 1"
@@ -189,7 +189,7 @@ public class Scrib_lib_text_json_tst {
 		, Kv_ary_utl.new_(Bool_.Y, new Object[] {1, 2, 3, new Object[] {4, 5, new Object[] {6, 7, 8}, 9}})
 		);
 	}
-	@Test   public void Nested__ary__nde() {
+	@Test  public void Nested__ary__nde() {
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'axes':"
@@ -217,7 +217,7 @@ public class Scrib_lib_text_json_tst {
 		)
 		);
 	}
-	@Test   public void Nested__ary__ary() {
+	@Test  public void Nested__ary__ary() {
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'axes':"
@@ -246,7 +246,7 @@ public class Scrib_lib_text_json_tst {
 		)
 		);
 	}
-	@Test   public void Nested__ary__ary_nde() {
+	@Test  public void Nested__ary__ary_nde() {
 		json_fxt.Test_json_roundtrip(fxt, lib
 		, Json_doc.Make_str_by_apos
 		( "{ 'axes':"
@@ -277,7 +277,7 @@ public class Scrib_lib_text_json_tst {
 		)))
 		);
 	}
-	@Test   public void Decode__key__int() {
+	@Test  public void Decode__key__int() {
 		Keyval[] kv_ary = (Keyval[])json_fxt.Test_json_decode(fxt, lib
 		, Scrib_lib_text__json_util.Flag__none
 		, Json_doc.Make_str_by_apos
@@ -297,7 +297,7 @@ public class Scrib_lib_text_json_tst {
 		Tfds.Eq(kv_ary[0].Key_as_obj(), 1);
 		Tfds.Eq(((Keyval[])kv_ary[0].Val())[0].Key_as_obj(), 11);
 	}
-	@Test  public void Primitives() {	// NOTE: based on MW; ISSUE#:329; DATE:2019-01-13
+	@Test public void Primitives() {	// NOTE: based on MW; ISSUE#:329; DATE:2019-01-13
 		json_fxt.Test_json_roundtrip_primitive(fxt, lib, "abc", "abc");
 		json_fxt.Test_json_roundtrip_primitive(fxt, lib, true, "true");
 		json_fxt.Test_json_roundtrip_primitive(fxt, lib, false, "false");

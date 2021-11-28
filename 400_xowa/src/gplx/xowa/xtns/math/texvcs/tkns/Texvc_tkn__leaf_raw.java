@@ -24,7 +24,7 @@ public class Texvc_tkn__leaf_raw implements Texvc_tkn {
 		return this;
 	}
 	public Texvc_root Root() {return root;} private Texvc_root root;
-	@gplx.Virtual public int Tid() {return tid;} private int tid;
+	public int Tid() {return tid;} private int tid;
 	public int Uid() {return uid;} private int uid;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
 	public int Src_end() {return src_end;} private int src_end;

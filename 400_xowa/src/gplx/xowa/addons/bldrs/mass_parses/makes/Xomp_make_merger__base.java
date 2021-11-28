@@ -45,7 +45,7 @@ abstract class Xomp_make_merger__base implements Xomp_make_merger, gplx.core.lis
 	}
 	protected abstract Db_tbl	Init__trg_tbl(Xob_db_file trg_db);
 	protected abstract String	Init__src_fld__page_id();
-	@gplx.Virtual protected void		Init__trg_bgn() {}
+	protected void		Init__trg_bgn() {}
 
 	public int Merger__load(Xomp_mgr_db src_mgr_db, Xomp_wkr_db src_wkr_db, int uid_bgn, int uid_end) {
 		// build sql

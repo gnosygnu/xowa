@@ -18,15 +18,15 @@ import org.junit.*; import gplx.core.log_msgs.*; import gplx.xowa.parsers.amps.*
 public class Xop_sanitizer_tst {
 	Xop_sanitizer_fxt fxt = new Xop_sanitizer_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Space()						{fxt.tst_Escape_id("a b"						, "a_b");}
-	@Test  public void Colon()						{fxt.tst_Escape_id("a%3Ab"						, "a:b");}
-	@Test  public void Percent()					{fxt.tst_Escape_id("a%b"						, "a%b");}
-	@Test  public void Amp_eos()					{fxt.tst_Escape_id("a&"							, "a&");}
-	@Test  public void Amp_unrecognized()			{fxt.tst_Escape_id("a&bcd"						, "a&bcd");}
-	@Test  public void Amp_name()					{fxt.tst_Escape_id("a&lt;b"						, "a<b");}
-	@Test  public void Amp_ncr_dec_pass()			{fxt.tst_Escape_id("a&#33;b"					, "a!b");}
-	@Test  public void Amp_ncr_dec_fail()			{fxt.tst_Escape_id("a&#33x;b"					, "a&#33x;b");}
-	@Test  public void Amp_ncr_hex_pass()			{fxt.tst_Escape_id("a&#x21;b"					, "a!b");}
+	@Test public void Space()						{fxt.tst_Escape_id("a b"						, "a_b");}
+	@Test public void Colon()						{fxt.tst_Escape_id("a%3Ab"						, "a:b");}
+	@Test public void Percent()					{fxt.tst_Escape_id("a%b"						, "a%b");}
+	@Test public void Amp_eos()					{fxt.tst_Escape_id("a&"							, "a&");}
+	@Test public void Amp_unrecognized()			{fxt.tst_Escape_id("a&bcd"						, "a&bcd");}
+	@Test public void Amp_name()					{fxt.tst_Escape_id("a&lt;b"						, "a<b");}
+	@Test public void Amp_ncr_dec_pass()			{fxt.tst_Escape_id("a&#33;b"					, "a!b");}
+	@Test public void Amp_ncr_dec_fail()			{fxt.tst_Escape_id("a&#33x;b"					, "a&#33x;b");}
+	@Test public void Amp_ncr_hex_pass()			{fxt.tst_Escape_id("a&#x21;b"					, "a!b");}
 }
 class Xop_sanitizer_fxt {
 	public Xop_sanitizer sanitizer;

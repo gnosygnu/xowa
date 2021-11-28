@@ -17,11 +17,11 @@ package gplx.core.ios.streams; import gplx.*; import gplx.core.*; import gplx.co
 import org.junit.*;
 public class IoStream_mock_tst {
 	@Before public void init() {fxt.Clear();} IoStream_mock_fxt fxt = new IoStream_mock_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init_src_str_("abcde").Init_trg_len_(5).Init_rdr_limit_(2).Init_read_len_(2);
 		fxt.Test_read("ab").Test_read("cd").Test_read("e");
 	}
-	@Test   public void Read_limit() {
+	@Test  public void Read_limit() {
 		fxt.Init_src_str_("abcde").Init_trg_len_(5).Init_rdr_limit_(2).Init_read_len_(4);
 		fxt.Test_read("ab").Test_read("cd").Test_read("e");
 	}

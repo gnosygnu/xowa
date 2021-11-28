@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_hdr_html_tst {
 	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
 		( "z"
 		, "==A 1=="			
@@ -34,7 +34,7 @@ public class Xoh_hdr_html_tst {
 		, "b"
 		));
 	}
-	@Test   public void Uniq() {
+	@Test  public void Uniq() {
 		fxt.Test__html(String_.Concat_lines_nl_skip_last
 		( "== a <math>c</math> e =="
 		, "text"

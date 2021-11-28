@@ -19,12 +19,12 @@ import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wik
 public class Dpl_xnde_tst {
 	private final    Dpl_xnde_fxt fxt = new Dpl_xnde_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Ctg() {
+	@Test  public void Ctg() {
 		fxt.Init__create_ctg("Ctg_0", "B", "A");
 		fxt.Exec__parse("<DynamicPageList>category=Ctg_0</DynamicPageList>");
 		fxt.Test__html(fxt.Make__html__itms__null("B", "A"));
 	}
-	@Test   public void Ctg_multiple() {
+	@Test  public void Ctg_multiple() {
 		fxt.Init__create_ctg_pages("Ctg_0", Dpl_page_mok.new_(101, "A"), Dpl_page_mok.new_(102, "B"));
 		fxt.Init__create_ctg_pages("Ctg_1", Dpl_page_mok.new_(101, "A"));
 		fxt.Exec__parse
@@ -35,7 +35,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("A"));
 	}
-	@Test   public void Ctg_multiple_none() {	// PURPOSE: page must be in both categories
+	@Test  public void Ctg_multiple_none() {	// PURPOSE: page must be in both categories
 		fxt.Init__create_ctg("Ctg_0", "A");
 		fxt.Init__create_ctg("Ctg_1", "B");
 		fxt.Exec__parse
@@ -46,7 +46,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html("No pages meet these criteria.");
 	}
-	@Test   public void Ctg_multiple_ignore_invalid() {	// PURPOSE: ignore invalid category titles; PAGE:en.n:Category:Egypt DATE:2016-10-18
+	@Test  public void Ctg_multiple_ignore_invalid() {	// PURPOSE: ignore invalid category titles; PAGE:en.n:Category:Egypt DATE:2016-10-18
 		fxt.Init__create_ctg_pages("Ctg_0", Dpl_page_mok.new_(101, "A"));
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -56,7 +56,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("A"));	// should not return nothing
 	}
-	@Test   public void Notcategory() {
+	@Test  public void Notcategory() {
 		fxt.Init__create_ctg_pages("Ctg_0", Dpl_page_mok.new_(101, "A"), Dpl_page_mok.new_(102, "B"));
 		fxt.Init__create_ctg_pages("Ctg_1", Dpl_page_mok.new_(101, "A"));
 		fxt.Exec__parse
@@ -67,7 +67,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("B"));
 	}
-	@Test  public void Ctg_ascending() {
+	@Test public void Ctg_ascending() {
 		fxt.Init__create_ctg("Ctg_0", "B", "A");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -77,7 +77,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("A", "B"));
 	}
-	@Test  public void Ctg_ws() {
+	@Test public void Ctg_ws() {
 		fxt.Init__create_ctg("Ctg_0", "B", "A");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -87,7 +87,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("A", "B"));
 	}
-	@Test  public void Ctg_descending() {
+	@Test public void Ctg_descending() {
 		fxt.Init__create_ctg("Ctg_0", "A", "B");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -97,7 +97,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("B", "A"));
 	}
-	@Test  public void Nofollow() {
+	@Test public void Nofollow() {
 		fxt.Init__create_ctg("Ctg_0", "A", "B");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -107,7 +107,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html(" rel=\"nofollow\"", "A", "B"));
 	}
-	@Test  public void Invalid_key() {
+	@Test public void Invalid_key() {
 		fxt.Init__create_ctg("Ctg_0", "A", "B");
 		fxt.Init__warns("dynamic_page_list:unknown_key: page=Test page key=invalid_key");
 		fxt.Exec__parse
@@ -118,7 +118,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("A", "B"));
 	}
-	@Test  public void No_results() {
+	@Test public void No_results() {
 		fxt.Exec__parse
 		( "<DynamicPageList>"
 		, "category=Ctg_0"
@@ -126,7 +126,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html("No pages meet these criteria.");
 	}
-	@Test  public void Suppress_errors() {
+	@Test public void Suppress_errors() {
 		fxt.Exec__parse
 		( "<DynamicPageList>"
 		, "category=Ctg_0"
@@ -135,7 +135,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html("");
 	}
-	@Test  public void Count() {
+	@Test public void Count() {
 		fxt.Init__create_ctg("Ctg_0", "A", "B", "C");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -145,7 +145,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("A", "B"));
 	}
-	@Test  public void Offset() {
+	@Test public void Offset() {
 		fxt.Init__create_ctg("Ctg_0", "A", "B", "C");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -156,7 +156,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("C"));
 	}
-	@Test  public void Ns() {
+	@Test public void Ns() {
 		fxt.Init__create_ctg("Ctg_0", "Talk:A B", "B");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -170,7 +170,7 @@ public class Dpl_xnde_tst {
 		,  "</ul>"
 		));
 	}
-	@Test  public void Show_ns() {
+	@Test public void Show_ns() {
 		fxt.Init__create_ctg("Ctg_0", "Talk:A");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -196,7 +196,7 @@ public class Dpl_xnde_tst {
 		,  "</ul>"
 		));
 	}
-	@Test  public void Comment() {	// PURPOSE: comment should be ignored; en.n:Portal:Federally_Administered_Tribal_Areas; DATE:2014-01-18
+	@Test public void Comment() {	// PURPOSE: comment should be ignored; en.n:Portal:Federally_Administered_Tribal_Areas; DATE:2014-01-18
 		fxt.Init__create_ctg("Ctg_0", "B", "A");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -206,12 +206,12 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("B", "A"));
 	}
-	@Test  public void Error_skip_line() {	// PURPOSE: error should skip rest of line; was failing with array out of bounds; en.n:Portal:Austria/Wikipedia; DATE:2014-01-18
+	@Test public void Error_skip_line() {	// PURPOSE: error should skip rest of line; was failing with array out of bounds; en.n:Portal:Austria/Wikipedia; DATE:2014-01-18
 		fxt.Init__warns("dynamic_page_list:unknown_key: page=Test page key=Ctg_0 order");	// ignore warning message
 		fxt.Exec__parse("<DynamicPageList> category=Ctg_0 order=descending</DynamicPageList>");
 		fxt.Test__html("No pages meet these criteria.");
 	}
-	@Test  public void Atr_has_template() {	// PURPOSE: attribute also has template; DATE:2014-01-31
+	@Test public void Atr_has_template() {	// PURPOSE: attribute also has template; DATE:2014-01-31
 		fxt.Init__create_ctg("Test_page", "B", "A");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -220,7 +220,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("B", "A"));
 	}
-	@Test  public void Err_page_ns_doesnt_exist() {// PURPOSE: check that <dpl> is not enabled if wiki does not have Page / Index ns; PAGE:fr.w:Wikipedia:Le_Bistro/novembre_2006 DATE:2014-11-28
+	@Test public void Err_page_ns_doesnt_exist() {// PURPOSE: check that <dpl> is not enabled if wiki does not have Page / Index ns; PAGE:fr.w:Wikipedia:Le_Bistro/novembre_2006 DATE:2014-11-28
 		// reset categories to (a) remove ns for Page / Index; (b) add back Category (else null error)
 		fxt.Wiki().Ns_mgr().Clear();
 		fxt.Wiki().Ns_mgr().Add_new(14, "Category").Init();
@@ -232,7 +232,7 @@ public class Dpl_xnde_tst {
 		// reset categories for rest of tests
 		fxt.Wiki().Ns_mgr().Add_new(0, "").Init();	// call .Clear() to remove ns for Page / Index
 	}
-	@Test  public void Ordermethod__invalid() {	// PURPOSE: do not fail if ordermethod is invalid; PAGE:sr.d:Викиречник:Википројекат_1001_арапска_реч/Списак_уноса; DATE:2015-10-16
+	@Test public void Ordermethod__invalid() {	// PURPOSE: do not fail if ordermethod is invalid; PAGE:sr.d:Викиречник:Википројекат_1001_арапска_реч/Списак_уноса; DATE:2015-10-16
 		fxt.Init__create_ctg("Ctg_0", "A", "B", "C");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -243,7 +243,7 @@ public class Dpl_xnde_tst {
 		);
 		fxt.Test__html(fxt.Make__html__itms__null("A", "B", "C"));
 	}
-	@Test  public void Encode_spaces() {// PURPOSE:encode spaces in href; PAGE:en.q:Wikiquote:Speedy_deletions DATE:2016-01-19
+	@Test public void Encode_spaces() {// PURPOSE:encode spaces in href; PAGE:en.q:Wikiquote:Speedy_deletions DATE:2016-01-19
 		fxt.Init__create_ctg("Ctg_0", "A B");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -257,7 +257,7 @@ public class Dpl_xnde_tst {
 		,  "</ul>"
 		));
 	}
-	@Test  public void Encode_quotes() {// PURPOSE:encode quotes; PAGE:en.b:Wikibooks:Alphabetical_classification/All_Books; DATE:2016-01-21
+	@Test public void Encode_quotes() {// PURPOSE:encode quotes; PAGE:en.b:Wikibooks:Alphabetical_classification/All_Books; DATE:2016-01-21
 		fxt.Init__create_ctg("Ctg_0", "A\"B");
 		fxt.Exec__parse
 		( "<DynamicPageList>"
@@ -271,7 +271,7 @@ public class Dpl_xnde_tst {
 		,  "</ul>"
 		));
 	}
-	@Test   public void Err__bad_key_causes_out_of_bound() {	// PURPOSE: bad key causes out of bounds error; PAGE:de.n:Portal:Brandenburg DATE:2016-04-21
+	@Test  public void Err__bad_key_causes_out_of_bound() {	// PURPOSE: bad key causes out of bounds error; PAGE:de.n:Portal:Brandenburg DATE:2016-04-21
 		fxt.Exec__parse
 		( "<DynamicPageList>"
 		, "<DynamicPageList>category=A</DynamicPageList>a=b c=d"

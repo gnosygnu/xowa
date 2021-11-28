@@ -24,7 +24,7 @@ public class Flagged_revs_lib_tst {
 		lib.Init();
 		lib.Core_(fxt.Core());
 	}
-	@Test   public void GetStabilitySettings() {
+	@Test  public void GetStabilitySettings() {
 		fxt.Test__proc__objs__nest(lib, Flagged_revs_lib.Invk_getStabilitySettings, Object_.Ary("Page1"), String_.Concat_lines_nl_skip_last
 		( "1="
 		, "  over"+"ride=0"

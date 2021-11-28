@@ -13,22 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.AbstractButton;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JSeparator;
-import javax.swing.border.EmptyBorder;
-import gplx.gfui.draws.*; import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*;
-import gplx.langs.gfs.*;
+package gplx.gfui.controls.windows; import gplx.Char_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.GfoMsgUtl;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.gfui.controls.gxws.GxwWin;
+import gplx.gfui.draws.ColorAdp;
+import gplx.gfui.draws.ColorAdpCache;
+import gplx.gfui.draws.ColorAdp_;
+import gplx.gfui.draws.FontStyleAdp;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptKey;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.kits.core.GfuiEnv_;
+import gplx.gfui.layouts.GftBand;
+import gplx.gfui.layouts.GftGrid;
+import gplx.langs.gfs.GfsCore;
+
+import javax.swing.*;
+import java.awt.*;
 public class GfuiMenuBar implements Gfo_invk {
 	public Object Under() {return winMenu;}
 	public boolean Visible() {return visible;} private boolean visible;
@@ -130,7 +140,7 @@ public class GfuiMenuBar implements Gfo_invk {
 		root = GfuiMenuBarItm.root_(winMenu);
 		itms.Add(root.Key(), root);
 		this.win = win;
-		IptBnd_.cmd_to_(GfuiEnv_.IptBndMgr_win, win, this, Invk_visible_toggle, IptKey_.add_(IptKey_.Ctrl, IptKey_.Shift, IptKey_.F12));
+		IptBnd_.cmd_to_(GfuiEnv_.IptBndMgr_win, win, this, Invk_visible_toggle, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.Shift, IptKey_.F12));
 		win.SubItms_add(SubItms_key, this);
 	}
 	Hash_adp itms = Hash_adp_.New(); GfuiWin win;

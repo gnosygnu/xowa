@@ -22,17 +22,17 @@ public abstract class Xox_mgr_base implements Xox_mgr {
 	}
 	public abstract	byte[]		Xtn_key();
 	public			boolean		Enabled() {return enabled;} private boolean enabled;
-	@gplx.Virtual public boolean		Enabled_default() {return true;}
+	public boolean		Enabled_default() {return true;}
 	public void					Enabled_y_() {enabled = true; enabled_manually = true;} public void Enabled_n_() {enabled = false; enabled_manually = true;}	// TEST:
-	@gplx.Virtual public void			Enabled_(boolean v) {enabled = v;}
+	public void			Enabled_(boolean v) {enabled = v;}
 	public boolean					Enabled_manually() {return enabled_manually;} private boolean enabled_manually;
 	public abstract	Xox_mgr		Xtn_clone_new();
-	@gplx.Virtual public void			Xtn_ctor_by_app(Xoae_app app) {}
-	@gplx.Virtual public void			Xtn_ctor_by_wiki(Xowe_wiki wiki) {}
-	@gplx.Virtual public void			Xtn_init_by_app(Xoae_app app) {}
-	@gplx.Virtual public void			Xtn_init_by_wiki(Xowe_wiki wiki) {}
+	public void			Xtn_ctor_by_app(Xoae_app app) {}
+	public void			Xtn_ctor_by_wiki(Xowe_wiki wiki) {}
+	public void			Xtn_init_by_app(Xoae_app app) {}
+	public void			Xtn_init_by_wiki(Xowe_wiki wiki) {}
 
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled))			return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_))			{this.Enabled_(m.ReadYn("v")); enabled_manually = true;}
 		else	return Gfo_invk_.Rv_unhandled;

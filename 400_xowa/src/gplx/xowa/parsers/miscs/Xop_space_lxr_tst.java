@@ -19,7 +19,7 @@ public class Xop_space_lxr_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
 	@After public void term() {fxt.Init_para_n_();}
-	@Test   public void Toc_basic() {	// PURPOSE: make sure nbsp char is not converted to space; PAGE:en.w:Macedonian–Carthaginian_Treaty; DATE:2014-06-07
+	@Test  public void Toc_basic() {	// PURPOSE: make sure nbsp char is not converted to space; PAGE:en.w:Macedonian–Carthaginian_Treaty; DATE:2014-06-07
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_all_str("     a", String_.Concat_lines_nl_skip_last	// NOTE: ws is actually nbsp;
 		( "<p>     a"	// should be <p> not <pre>

@@ -18,17 +18,17 @@ import org.junit.*; import gplx.core.tests.*;
 public class Bry_bfr_tst {
 	private Bry_bfr bb = Bry_bfr_.New();
 	@Before public void setup() {bb.Clear();} private ByteAryBfr_fxt fxt = new ByteAryBfr_fxt();
-	@Test  public void AddByte() {
+	@Test public void AddByte() {
 		bb = Bry_bfr_.New_w_size(2);	// NOTE: make sure auto-expands
 		tst_AddByte("a", "a", 2);
 		tst_AddByte("b", "ab", 2);
 		tst_AddByte("c", "abc", 4);
 	}
-	@Test  public void AddAry() {	// NOTE: make sure auto-expands
+	@Test public void AddAry() {	// NOTE: make sure auto-expands
 		bb = Bry_bfr_.New_w_size(2);
 		tst_AddByte("abcd", "abcd", 12);
 	}
-	@Test  public void Add_byte_repeat() {	// NOTE: make sure auto-expands
+	@Test public void Add_byte_repeat() {	// NOTE: make sure auto-expands
 		bb = Bry_bfr_.New_w_size(2);
 		tst_Add_byte_repeat(Byte_ascii.Space, 12, String_.Repeat(" ", 12));
 	}	void tst_Add_byte_repeat(byte b, int len, String expd) {Tfds.Eq(expd, bb.Add_byte_repeat(b, len).To_str_and_clear());}
@@ -40,14 +40,14 @@ public class Bry_bfr_tst {
 		Tfds.Eq(expdStr, String_.new_u8(bb.To_bry()));
 		Tfds.Eq(expdLen, bb.Bfr_max());
 	}
-	@Test  public void Add_dte() {
+	@Test public void Add_dte() {
 		tst_AddDte("20110801 221435.987");
 	}
 	void tst_AddDte(String raw) {
 		bb.Add_dte(DateAdp_.parse_fmt(raw, Bry_.Fmt_csvDte));
 		Tfds.Eq(raw, String_.new_u8(bb.To_bry()));
 	}
-	@Test  public void Add_int_variable() {
+	@Test public void Add_int_variable() {
 		Add_int_variable(-1);
 		Add_int_variable(-12);
 		Add_int_variable(-1234);
@@ -56,7 +56,7 @@ public class Bry_bfr_tst {
 		Add_int_variable(1234);
 		Add_int_variable(123456789);
 	}
-	@Test  public void Add_float() {
+	@Test public void Add_float() {
 		tst_Add_float(1 / 3);
 		tst_Add_float(-1 / 3);
 	}
@@ -69,26 +69,26 @@ public class Bry_bfr_tst {
 		bb.Add_int_variable(val);
 		Tfds.Eq(val, Int_.Parse(String_.new_u8(bb.To_bry())));
 	}
-	@Test  public void Add_int_fixed_len3()				{tst_Add_int_fixed(123, 3, "123");}
-	@Test  public void Add_int_fixed_pad_1()			{tst_Add_int_fixed(2, 1, "2");}
-	@Test  public void Add_int_fixed_pad_2()			{tst_Add_int_fixed(2, 2, "02");}
-	@Test  public void Add_int_fixed_pad_16()			{tst_Add_int_fixed(2, 16, "0000000000000002");}	// test overflows int
-	@Test  public void Add_int_fixed_neg()				{tst_Add_int_fixed(-2, 2, "-2");}
-	@Test  public void Add_int_fixed_neg_pad1()			{tst_Add_int_fixed(-2, 1, "-");}
-	@Test  public void Add_int_fixed_chop_1()			{tst_Add_int_fixed(123, 1, "3");}
-	@Test  public void Add_int_fixed_chop_neg()			{tst_Add_int_fixed(-21, 2, "-1");}
+	@Test public void Add_int_fixed_len3()				{tst_Add_int_fixed(123, 3, "123");}
+	@Test public void Add_int_fixed_pad_1()			{tst_Add_int_fixed(2, 1, "2");}
+	@Test public void Add_int_fixed_pad_2()			{tst_Add_int_fixed(2, 2, "02");}
+	@Test public void Add_int_fixed_pad_16()			{tst_Add_int_fixed(2, 16, "0000000000000002");}	// test overflows int
+	@Test public void Add_int_fixed_neg()				{tst_Add_int_fixed(-2, 2, "-2");}
+	@Test public void Add_int_fixed_neg_pad1()			{tst_Add_int_fixed(-2, 1, "-");}
+	@Test public void Add_int_fixed_chop_1()			{tst_Add_int_fixed(123, 1, "3");}
+	@Test public void Add_int_fixed_chop_neg()			{tst_Add_int_fixed(-21, 2, "-1");}
 	void tst_Add_int_fixed(int val, int digits, String expd) {Tfds.Eq(expd, String_.new_u8(bb.Add_int_fixed(val, digits).To_bry()));}
-	@Test  public void Add_long_fixed_len3()			{tst_Add_long_fixed(123, 3, "123");}
-	@Test  public void Add_long_fixed_pad_1()			{tst_Add_long_fixed(2, 1, "2");}
-	@Test  public void Add_long_fixed_pad_2()			{tst_Add_long_fixed(2, 2, "02");}
-	@Test  public void Add_long_fixed_pad_16()			{tst_Add_long_fixed(2, 16, "0000000000000002");}	// test overflows long
-	@Test  public void Add_long_fixed_neg()				{tst_Add_long_fixed(-2, 2, "-2");}
-	@Test  public void Add_long_fixed_neg_pad1()		{tst_Add_long_fixed(-2, 1, "-");}
-	@Test  public void Add_long_fixed_chop_1()			{tst_Add_long_fixed(123, 1, "3");}
-	@Test  public void Add_long_fixed_chop_neg()		{tst_Add_long_fixed(-21, 2, "-1");}
-	@Test  public void Add_long_fixed_large()			{tst_Add_long_fixed(123456789012345L, 15, "123456789012345");}
+	@Test public void Add_long_fixed_len3()			{tst_Add_long_fixed(123, 3, "123");}
+	@Test public void Add_long_fixed_pad_1()			{tst_Add_long_fixed(2, 1, "2");}
+	@Test public void Add_long_fixed_pad_2()			{tst_Add_long_fixed(2, 2, "02");}
+	@Test public void Add_long_fixed_pad_16()			{tst_Add_long_fixed(2, 16, "0000000000000002");}	// test overflows long
+	@Test public void Add_long_fixed_neg()				{tst_Add_long_fixed(-2, 2, "-2");}
+	@Test public void Add_long_fixed_neg_pad1()		{tst_Add_long_fixed(-2, 1, "-");}
+	@Test public void Add_long_fixed_chop_1()			{tst_Add_long_fixed(123, 1, "3");}
+	@Test public void Add_long_fixed_chop_neg()		{tst_Add_long_fixed(-21, 2, "-1");}
+	@Test public void Add_long_fixed_large()			{tst_Add_long_fixed(123456789012345L, 15, "123456789012345");}
 	void tst_Add_long_fixed(long val, int digits, String expd) {Tfds.Eq(expd, String_.new_u8(bb.Add_long_fixed(val, digits).To_bry()));}
-	@Test  public void AddDte_short() {
+	@Test public void AddDte_short() {
 		tst_AddDte_short("2010-08-26T22:38:36Z");
 	}
 	void tst_AddDte_short(String raw) {
@@ -111,7 +111,7 @@ public class Bry_bfr_tst {
 ////			Base85_.Set_bry(l, bb.
 //			bb.Add_int(l);
 	}
-//		@Test  public void InsertAt_str() {
+//		@Test public void InsertAt_str() {
 //			tst_InsertAt_str("", 0, "c", "c");
 //			tst_InsertAt_str("ab", 0, "c", "cab");
 //			tst_InsertAt_str("ab", 0, "cdefghij", "cdefghijab");
@@ -123,7 +123,7 @@ public class Bry_bfr_tst {
 //			String actl = bb.To_str_and_clear();
 //			Tfds.Eq(expd, actl);
 //		}
-	@Test  public void To_bry_and_clear_and_trim() {
+	@Test public void To_bry_and_clear_and_trim() {
 		tst_XtoAryAndClearAndTrim("a"	, "a");
 		tst_XtoAryAndClearAndTrim(" a "	, "a");
 		tst_XtoAryAndClearAndTrim(" a b "	, "a b");
@@ -133,7 +133,7 @@ public class Bry_bfr_tst {
 		bb.Add_str_u8(raw);
 		Tfds.Eq(expd, String_.new_u8(bb.To_bry_and_clear_and_trim()));
 	}
-	@Test  public void XtoInt() {
+	@Test public void XtoInt() {
 		tst_XtoInt("123", 123);
 		tst_XtoInt("a", Int_.Min_value);
 		tst_XtoInt("9999999999", Int_.Min_value);
@@ -160,14 +160,14 @@ public class Bry_bfr_tst {
 		int second	= (int)((v		) & 0x3f); 
 		return DateAdp_.new_(year, month, day, hour, minute, second, 0);
 	}
-	@Test  public void Add_bfr_trimEnd_and_clear() {
+	@Test public void Add_bfr_trimEnd_and_clear() {
 		tst_Add_bfr_trimEnd_and_clear("a ", "a");
 	}
 	void tst_Add_bfr_trimEnd_and_clear(String raw, String expd) {
 		Bry_bfr tmp = Bry_bfr_.New().Add_str_u8(raw);
 		Tfds.Eq(expd, bb.Add_bfr_trim_and_clear(tmp, false, true).To_str_and_clear());
 	}
-	@Test  public void Add_bfr_trimAll_and_clear() {
+	@Test public void Add_bfr_trimAll_and_clear() {
 		tst_Add_bfr_trimAll_and_clear(" a ", "a");
 		tst_Add_bfr_trimAll_and_clear(" a b ", "a b");
 		tst_Add_bfr_trimAll_and_clear("a", "a");
@@ -177,49 +177,49 @@ public class Bry_bfr_tst {
 		Bry_bfr tmp = Bry_bfr_.New().Add_str_u8(raw);
 		Tfds.Eq(expd, bb.Add_bfr_trim_and_clear(tmp, true, true).To_str_and_clear());
 	}
-	@Test  public void Add_int_pad_bgn() {
+	@Test public void Add_int_pad_bgn() {
 		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3,    0, "000");
 		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3,    1, "001");
 		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3,   10, "010");
 		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3,  100, "100");
 		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3, 1000, "1000");
 	}
-	@Test  public void Add_bry_escape() {
+	@Test public void Add_bry_escape() {
 		fxt.Test__add_bry_escape("abc"                  , "abc");            // nothing to escape
 		fxt.Test__add_bry_escape("a'bc"                 , "a''bc");          // single escape (code handles first quote differently)
 		fxt.Test__add_bry_escape("a'b'c"                , "a''b''c");        // double escape (code handles subsequent quotes different than first)
 		fxt.Test__add_bry_escape("abc", 1, 2            , "b");              // nothing to escape
 	}
-	@Test   public void Add_bry_escape_html() {
+	@Test  public void Add_bry_escape_html() {
 		fxt.Test__add_bry_escape_html("abc"             , "abc");                            // escape=none
 		fxt.Test__add_bry_escape_html("a&\"'<>b"        , "a&amp;&quot;&#39;&lt;&gt;b");     // escape=all; code handles first escape differently
 		fxt.Test__add_bry_escape_html("a&b&c"           , "a&amp;b&amp;c");                  // staggered; code handles subsequent escapes differently
 		fxt.Test__add_bry_escape_html("abc", 1, 2       , "b");                              // by index; fixes bug in initial implementation
 	}
-	@Test  public void Insert_at() {
+	@Test public void Insert_at() {
 		fxt.Test_Insert_at("abcd", 0, "xyz"					, "xyzabcd");	// bgn
 		fxt.Test_Insert_at("abcd", 4, "xyz"					, "abcdxyz");	// end
 		fxt.Test_Insert_at("abcd", 2, "xyz"					, "abxyzcd");	// mid
 		fxt.Test_Insert_at("abcd", 2, "xyz", 1, 2			, "abycd");		// mid
 	}
-	@Test  public void Delete_rng() {
+	@Test public void Delete_rng() {
 		fxt.Test_Delete_rng("abcd", 0, 2						, "cd");	// bgn
 		fxt.Test_Delete_rng("abcd", 2, 4						, "ab");	// end
 		fxt.Test_Delete_rng("abcd", 1, 3						, "ad");	// mid
 	}
-	@Test  public void Delete_rng_to_bgn() {
+	@Test public void Delete_rng_to_bgn() {
 		fxt.Test_Delete_rng_to_bgn("abcd", 2					, "cd");
 	}
-	@Test  public void Delete_rng_to_end() {
+	@Test public void Delete_rng_to_end() {
 		fxt.Test_Delete_rng_to_end("abcd", 2					, "ab");
 	}
-	@Test   public void To_bry_ary_and_clear() {
+	@Test  public void To_bry_ary_and_clear() {
 		fxt.Test__to_bry_ary_and_clear(""			);						// empty
 		fxt.Test__to_bry_ary_and_clear("a"			, "a");					// lines=1
 		fxt.Test__to_bry_ary_and_clear("a\nb\nc"	, "a", "b", "c");		// lines=n
 		fxt.Test__to_bry_ary_and_clear("a\n"		, "a");					// nl at end
 	}
-	@Test   public void To_bry_ary_and_clear_and_trim__memory_reference_bug() {// PURPOSE:test that bry isn't reused; ISSUE#:562; DATE:2019-09-02
+	@Test  public void To_bry_ary_and_clear_and_trim__memory_reference_bug() {// PURPOSE:test that bry isn't reused; ISSUE#:562; DATE:2019-09-02
 		String str_a = "aaaaaaaaaaaaaaaa" // NOTE: length is 16 b/c bry_bfr init's to 16 len
 			,  str_b = "bbbbbbbbbbbbbbbb";
 		Bry_bfr bfr = Bry_bfr_.New();

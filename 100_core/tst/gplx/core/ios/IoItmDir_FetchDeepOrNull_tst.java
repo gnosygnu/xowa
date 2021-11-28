@@ -20,7 +20,7 @@ public class IoItmDir_FetchDeepOrNull_tst {
 		drive = Io_url_.mem_dir_("mem");
 		rootDir = bldr.dir_(drive, bldr.dir_(drive.GenSubDir("sub1")));
 	}	IoItm_fxt bldr = IoItm_fxt.new_(); Io_url drive; IoItmDir rootDir;
-	@Test  public void FetchDeepOrNull() {
+	@Test public void FetchDeepOrNull() {
 		tst_FetchDeepOrNull(rootDir, drive.GenSubDir("sub1"), true);
 		tst_FetchDeepOrNull(rootDir, drive.GenSubDir("sub2"), false);
 		tst_FetchDeepOrNull(rootDir.SubDirs().Get_at(0), drive.GenSubDir("sub1"), true);

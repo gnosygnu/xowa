@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 public class Xol_lang_itm_tst {
 	private final    Xol_lang_itm_fxt fxt = new Xol_lang_itm_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Fallback_bry__dupes() { // ISSUE#:330; DATE:2019-02-17
+	@Test public void Fallback_bry__dupes() { // ISSUE#:330; DATE:2019-02-17
 		Xol_lang_itm lang = fxt.Make("qqq");
 		fxt.Init_fallback_bry(lang, "en");
 		fxt.Init_fallback_bry(lang, "en"); // dupes would throw error; note that dupes can happen b/c "en" is default language; EX: isRTL("gl") -> "pt-br,en" -> "pt,en"

@@ -17,14 +17,14 @@ package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.db
 import org.junit.*;
 public class Dbmeta_parser__fld_tst {
 	@Before public void init() {fxt.Clear();} private Dbmeta_parser__fld_fxt fxt = new Dbmeta_parser__fld_fxt();
-	@Test  public void Parse_type() {
+	@Test public void Parse_type() {
 		fxt.Test_parse_type("int"					, fxt.Make_type(Dbmeta_fld_tid.Tid__int));
 		fxt.Test_parse_type("varchar(255)"			, fxt.Make_type(Dbmeta_fld_tid.Tid__str, 255));
 		fxt.Test_parse_type("decimal(12,10)"		, fxt.Make_type(Dbmeta_fld_tid.Tid__decimal, 12, 10));
 		fxt.Test_parse_type(" int"					, fxt.Make_type(Dbmeta_fld_tid.Tid__int));
 		fxt.Test_parse_type(" decimal ( 12 , 10 )"	, fxt.Make_type(Dbmeta_fld_tid.Tid__decimal, 12, 10));
 	}
-	@Test  public void Parse_fld() {
+	@Test public void Parse_fld() {
 		fxt.Test_parse_fld("name_1 int"									, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_unknown));
 		fxt.Test_parse_fld("name_1 int null"							, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_null));
 		fxt.Test_parse_fld("name_1 int not null"						, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null));
@@ -33,7 +33,7 @@ public class Dbmeta_parser__fld_tst {
 		fxt.Test_parse_fld("name_1 int not null default -1"				, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N, -1));
 		fxt.Test_parse_fld("name_1 varchar(3) not null default 'abc'"	, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__str, Dbmeta_fld_itm.Nullable_not_null, Bool_.Y, Bool_.N, "abc"));
 	}
-	@Test  public void Comment() {
+	@Test public void Comment() {
 		fxt.Test_parse_fld("name_1 int --a\n"							, fxt.Make_fld("name_1", Dbmeta_fld_tid.Tid__int, Dbmeta_fld_itm.Nullable_unknown));
 	}
 }

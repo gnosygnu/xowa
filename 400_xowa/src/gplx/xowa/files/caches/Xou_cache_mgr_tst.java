@@ -17,24 +17,24 @@ package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*; import gplx.dbs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
 public class Xou_cache_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final    Xou_cache_mgr_fxt fxt = new Xou_cache_mgr_fxt();
-	@Test   public void Update() {
+	@Test  public void Update() {
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		fxt.Exec_update(itm_1);
 		fxt.Test_get(itm_1, 1, 0);
 	}
-	@Test   public void Update_mult() {
+	@Test  public void Update_mult() {
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		fxt.Exec_update(itm_1, itm_1, itm_1);
 		fxt.Test_get(itm_1, 3, 2);
 	}
-	@Test   public void Reload() {
+	@Test  public void Reload() {
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		fxt.Exec_update(itm_1, itm_1, itm_1);
 		fxt.Test_get(itm_1, 3, 2);
 		fxt.Exec_save_and_clear();
 		fxt.Test_get(itm_1, 3, 2);
 	}
-	@Test  public void Reduce() {
+	@Test public void Reduce() {
 		fxt.Init_delete(3, 5);
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		Xof_fsdb_itm itm_2 = fxt.Make_itm("en.w", "2.png", 2);
@@ -44,7 +44,7 @@ public class Xou_cache_mgr_tst {
 		fxt.Test_get_y(itm_3);
 		fxt.Test_get_n(itm_1, itm_2);
 	}
-	@Test  public void Reduce_same() {
+	@Test public void Reduce_same() {
 		fxt.Init_delete(3, 5);
 		Xof_fsdb_itm itm_1 = fxt.Make_itm("en.w", "1.png", 2);
 		Xof_fsdb_itm itm_2 = fxt.Make_itm("fr.w", "1.png", 2);

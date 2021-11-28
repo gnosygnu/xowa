@@ -19,7 +19,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.pars
 public class Xoh_thm_hzip__tidy__tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void setup() {fxt.Clear();}
-	@Test   public void Tidy__moved_capt() {
+	@Test  public void Tidy__moved_capt() {
 		fxt.Test__bicode("~&S~abc\n~!uA.png~)#Sabc~", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tleft'>"
 		,   "<div class='thumbinner' style='width:220px;'><a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' class='thumbimage' alt='abc'></a> "
@@ -30,7 +30,7 @@ public class Xoh_thm_hzip__tidy__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Tidy__extra_closing_div() {// handle extra closing div in caption; PAGE:en.w:Damask; DATE:2016-01-05
+	@Test  public void Tidy__extra_closing_div() {// handle extra closing div in caption; PAGE:en.w:Damask; DATE:2016-01-05
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~&U<div>A</div>"
 		, "B~"
@@ -45,7 +45,7 @@ public class Xoh_thm_hzip__tidy__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Tidy__ul() {	// tidy will move <div> on to different lines depending on <ul>; PAGE:en.w:Chimney_sweep; DATE:2016-01-05
+	@Test  public void Tidy__ul() {	// tidy will move <div> on to different lines depending on <ul>; PAGE:en.w:Chimney_sweep; DATE:2016-01-05
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~&=$b* ABC~"
 		, "<ul>"
@@ -67,7 +67,7 @@ public class Xoh_thm_hzip__tidy__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Tidy__video() {	// tidy may relocate xowa-alt-div to last div; PAGE:en.w:Non-helical_models_of_DNA_structure; DATE:2016-01-11
+	@Test  public void Tidy__video() {	// tidy may relocate xowa-alt-div to last div; PAGE:en.w:Non-helical_models_of_DNA_structure; DATE:2016-01-11
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~&eabc~"
 		, "<hr>"

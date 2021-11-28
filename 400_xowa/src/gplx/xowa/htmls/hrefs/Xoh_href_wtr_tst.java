@@ -18,16 +18,16 @@ import org.junit.*;
 import gplx.core.net.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_href_wtr_tst {		
 	private final    Xoh_href_wtr_fxt fxt = new Xoh_href_wtr_fxt();
-	@Test   public void Xwiki_enc()					{fxt.Test_build("wikt:abc?d"				, "/site/en.wiktionary.org/wiki/abc%3Fd");}	
-	@Test   public void Page_quote()				{fxt.Test_build("a\"b\"c"					, "/wiki/A%22b%22c");}
-	@Test   public void Page()						{fxt.Test_build("abc"						, "/wiki/Abc");}
-	@Test   public void Page_ns()					{fxt.Test_build("Image:A.png"				, "/wiki/Image:A.png");}
-	@Test   public void Anchor()					{fxt.Test_build("#abc"						, "#abc");}
-	@Test   public void Page_anchor()				{fxt.Test_build("Abc#def"					, "/wiki/Abc#def");}
-	@Test   public void Xwiki()						{fxt.Test_build("wikt:abc"					, "/site/en.wiktionary.org/wiki/abc");}	// NOTE: "abc" not capitalized, b/c other wiki's case sensitivity is not known; this emulates WP's behavior
-	@Test   public void Xwiki_2()					{fxt.Test_build("wikt:Special:Search/a"		, "/site/en.wiktionary.org/wiki/Special:Search/a");}
-	@Test   public void Category() 					{fxt.Test_build("Category:abc"				, "/wiki/Category:Abc");}
-	@Test   public void Xwiki_wikimedia_mail() {	// PURPOSE: DATE:2015-04-22
+	@Test  public void Xwiki_enc()					{fxt.Test_build("wikt:abc?d"				, "/site/en.wiktionary.org/wiki/abc%3Fd");}
+	@Test  public void Page_quote()				{fxt.Test_build("a\"b\"c"					, "/wiki/A%22b%22c");}
+	@Test  public void Page()						{fxt.Test_build("abc"						, "/wiki/Abc");}
+	@Test  public void Page_ns()					{fxt.Test_build("Image:A.png"				, "/wiki/Image:A.png");}
+	@Test  public void Anchor()					{fxt.Test_build("#abc"						, "#abc");}
+	@Test  public void Page_anchor()				{fxt.Test_build("Abc#def"					, "/wiki/Abc#def");}
+	@Test  public void Xwiki()						{fxt.Test_build("wikt:abc"					, "/site/en.wiktionary.org/wiki/abc");}	// NOTE: "abc" not capitalized, b/c other wiki's case sensitivity is not known; this emulates WP's behavior
+	@Test  public void Xwiki_2()					{fxt.Test_build("wikt:Special:Search/a"		, "/site/en.wiktionary.org/wiki/Special:Search/a");}
+	@Test  public void Category() 					{fxt.Test_build("Category:abc"				, "/wiki/Category:Abc");}
+	@Test  public void Xwiki_wikimedia_mail() {	// PURPOSE: DATE:2015-04-22
 		fxt.Prep_xwiki_by_many("0|mail|https://lists.wikimedia.org/mailman/listinfo/~{0}|Wikitech Mailing List");
 		fxt.Test_build("mail:A"				, "https://lists.wikimedia.org/mailman/listinfo/A");
 	}

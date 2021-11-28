@@ -25,7 +25,7 @@ import org.junit.Test;
 public class Xop_xatr_whitelist_mgr_tst {
 	private final Xop_xatr_whitelist_fxt fxt = new Xop_xatr_whitelist_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "style"          , true);
 		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "xstyle"         , false);
 		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "stylex"         , false);
@@ -36,11 +36,11 @@ public class Xop_xatr_whitelist_mgr_tst {
 		fxt.Whitelist(Xop_xnde_tag_.Tid__data  , "value"          , true);
 		fxt.Whitelist(Xop_xnde_tag_.Tid__data  , "valuex"         , false);
 	}
-	@Test  public void Role() {
+	@Test public void Role() {
 		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "role"           , "presentation", true);
 		fxt.Whitelist(Xop_xnde_tag_.Tid__div   , "role"           , "other", true);
 	}
-	@Test  public void Scrub() {
+	@Test public void Scrub() {
 		fxt.Scrub_style_fail("expression");
 		fxt.Scrub_style_fail("filter:a");
 		fxt.Scrub_style_fail("filter\t \n:a");

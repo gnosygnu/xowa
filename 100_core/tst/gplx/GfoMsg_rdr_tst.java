@@ -20,31 +20,31 @@ public class GfoMsg_rdr_tst {
 		msg = msg_().Add("a", "1").Add("b", "2").Add("c", "3");
 		ctx.Match("init", "init");
 	}	GfoMsg msg; GfsCtx ctx = GfsCtx.new_();
-	@Test  public void Key() {
+	@Test public void Key() {
 		tst_Msg(msg, "a", "1");
 		tst_Msg(msg, "b", "2");
 		tst_Msg(msg, "c", "3");
 		tst_Msg(msg, "d", null);
 	}
-	@Test  public void Pos() {
+	@Test public void Pos() {
 		msg = msg_().Add("", "1").Add("", "2").Add("", "3");
 		tst_Msg(msg, "", "1");
 		tst_Msg(msg, "", "2");
 		tst_Msg(msg, "", "3");
 		tst_Msg(msg, "", null);
 	}
-	@Test  public void OutOfOrder() {
+	@Test public void OutOfOrder() {
 		tst_Msg(msg, "c", "3");
 		tst_Msg(msg, "b", "2");
 		tst_Msg(msg, "a", "1");
 	}
-	@Test  public void Key3_Pos1_Pos2() {
+	@Test public void Key3_Pos1_Pos2() {
 		msg = msg_().Add("", "1").Add("", "2").Add("c", "3");
 		tst_Msg(msg, "c", "3");
 		tst_Msg(msg, "", "1");
 		tst_Msg(msg, "", "2");
 	}
-	@Test  public void MultipleEmpty() {
+	@Test public void MultipleEmpty() {
 		msg = msg_().Add("", "1").Add("", "2").Add("", "3");
 		tst_Msg(msg, "", "1");
 		tst_Msg(msg, "", "2");

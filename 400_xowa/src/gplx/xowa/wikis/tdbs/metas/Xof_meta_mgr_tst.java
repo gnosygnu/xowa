@@ -20,11 +20,11 @@ import gplx.gfui.*; import gplx.xowa.files.*;
 public class Xof_meta_mgr_tst {
 	Xof_file_regy_fxt fxt = new Xof_file_regy_fxt();
 	@Before public void init() {fxt.Ini();}
-	@Test  public void Set_one() {
+	@Test public void Set_one() {
 		fxt	.Set("A.png", 440, 400, true, "440,400", "220,200")
 			.tst_Save("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv", "A.png|y||1?440,400|1?440,400;1?220,200");
 	}
-	@Test  public void Set_many() {
+	@Test public void Set_many() {
 		fxt	.Set("A.png"		, 440, 400, true, "440,400", "220,200")
 			.Set("Cabbage.jpg"	, 640, 456, false, "220,200", "200,180")
 			.tst_Save("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv"
@@ -32,7 +32,7 @@ public class Xof_meta_mgr_tst {
 			,	"Cabbage.jpg|y||2?640,456|1?220,200;1?200,180"
 			);
 	}
-	@Test  public void Load_and_add() {
+	@Test public void Load_and_add() {
 		fxt.Save_fil("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv"
 			,	"A.png|y||1?440,400|"
 			,	"Cabbage.jpg|y||2?640,456|1?440,220;1?220,200"
@@ -44,7 +44,7 @@ public class Xof_meta_mgr_tst {
 			,	"Wooden_hourglass_3.jpg|y||2?967,1959|1?220,200"
 			);
 	}
-	@Test  public void Load_and_update() {
+	@Test public void Load_and_update() {
 		fxt.Save_fil("mem/xowa/file/#meta/en.wikipedia.org/7/70.csv"
 			,	"A.png|y||0?440,400|"
 			,	"Cabbage.jpg|y||2?640,456|1?440,400;1?220,200"

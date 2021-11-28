@@ -24,7 +24,7 @@ public class TdbDbLoadMgr_tst {
 	}
 	TdbDatabase db; TdbDbLoadMgr loadMgr = TdbDbLoadMgr.new_(); TdbDbSaveMgr saveMgr = TdbDbSaveMgr.new_();
 	DataRdr rdr; DataWtr wtr;
-	@Test  public void ReadDbFiles() {
+	@Test public void ReadDbFiles() {
 		String raw = String_.Concat_lines_crlf
 			(	"=======DIF======================, ,\" \",//"
 			,	"_files, ,\" \",#"
@@ -45,7 +45,7 @@ public class TdbDbLoadMgr_tst {
 		db.Files().DataObj_Wtr(wtr);
 		Tfds.Eq(wtr.To_str(), raw);
 	}
-	@Test  public void ReadDbTbls() {
+	@Test public void ReadDbTbls() {
 		String raw = String_.Concat_lines_crlf
 			(	"=======DIF======================, ,\" \",//"
 			,	"_tables, ,\" \",#"
@@ -66,7 +66,7 @@ public class TdbDbLoadMgr_tst {
 		db.Tables().DataObj_Wtr(wtr);
 		Tfds.Eq(wtr.To_str(), raw);
 	}
-	@Test  public void ReadTbl() {
+	@Test public void ReadTbl() {
 		String raw = String_.Concat_lines_crlf
 			(	"=======DIF======================, ,\" \",//"
 			,	"tbl0, ,\" \",#"

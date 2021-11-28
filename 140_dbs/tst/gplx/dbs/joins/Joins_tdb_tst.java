@@ -17,7 +17,7 @@ package gplx.dbs.joins; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 public class Joins_tdb_tst extends Joins_base_tst {
 	@Override protected Db_conn provider_() {return Db_conn_fxt.Tdb("120_dbs_joins.dsv");}
-	@Test  public void InnerJoin() {
+	@Test public void InnerJoin() {
 		try {
 			InnerJoin_hook();
 		}

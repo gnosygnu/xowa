@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Xoctg_double_box__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_double_box__fxt fxt = new Xoctg_double_box__fxt();
-	@Test   public void Single() {
+	@Test  public void Single() {
 		fxt.Init_ctg_hidden("Category:A");
 		fxt.Init_ctg_normal("Category:D");
 		fxt.Test_print_hidden(String_.Concat_lines_nl
@@ -41,7 +41,7 @@ public class Xoctg_double_box__tst {
 		,	"</div>"
 		));
 	}
-	@Test   public void Plural() {
+	@Test  public void Plural() {
 		fxt.Init_ctg_hidden("Category:A", "Category:B", "Category:C");
 		fxt.Init_ctg_normal("Category:D", "Category:E", "Category:F");
 		fxt.Test_print_hidden(String_.Concat_lines_nl

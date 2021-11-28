@@ -17,7 +17,7 @@ package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.wikis.xwikis.*;
 public class Xou_user_tst {
 	private final    Xou_user_fxt fxt = new Xou_user_fxt();
-	@Test   public void Available_from_fsys() {
+	@Test  public void Available_from_fsys() {
 		Io_mgr.Instance.CreateDir(fxt.App().Fsys_mgr().Wiki_dir().GenSubDir("en.wikipedia.org"));
 		fxt.App().Usere().Available_from_fsys();
 		fxt.Test_xwikis

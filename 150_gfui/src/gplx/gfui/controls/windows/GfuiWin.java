@@ -13,10 +13,38 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import java.awt.Window;
-import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.customs.*;
-import gplx.core.envs.*; import gplx.gfui.imgs.*;
+package gplx.gfui.controls.windows; import gplx.Datetime_now;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_invk_cmd;
+import gplx.Gfo_invk_cmd_mgr;
+import gplx.GfsCtx;
+import gplx.Keyval_hash;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.UsrDlg_;
+import gplx.UsrMsg;
+import gplx.core.envs.Env_;
+import gplx.gfui.SizeAdp;
+import gplx.gfui.SizeAdp_;
+import gplx.gfui.controls.customs.GfuiStatusBoxBnd;
+import gplx.gfui.controls.elems.GfuiElemBase;
+import gplx.gfui.controls.elems.GfuiElemKeys;
+import gplx.gfui.controls.gxws.GxwElem;
+import gplx.gfui.controls.gxws.GxwElemFactory_;
+import gplx.gfui.controls.gxws.GxwWin;
+import gplx.gfui.imgs.IconAdp;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptCfg_;
+import gplx.gfui.ipts.IptEventData;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.kits.core.GfuiEnv_;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.gfui.kits.core.Gfui_kit_;
+import gplx.gfui.layouts.GftGrid;
+
+import java.awt.*;
 public class GfuiWin extends GfuiElemBase {
 	private GxwWin win; private List_adp loadList = List_adp_.New(); 
 	public void Show()					{win.ShowWin();}
@@ -25,7 +53,7 @@ public class GfuiWin extends GfuiElemBase {
 	public IconAdp Icon()				{return win.IconWin();} public GfuiWin Icon_(IconAdp icon) {win.IconWin_set(icon); return this;}
 	public boolean Pin()					{return win.Pin();} public GfuiWin Pin_(boolean v) {win.Pin_set(v); return this;}
 	public GfuiWin Pin_()				{return Pin_(true);} public void Pin_toggle() {Pin_(!Pin());}
-	@gplx.Virtual public void Quit()			{GfuiQuitMode.Exec(this, quitMode);}
+	public void Quit()			{GfuiQuitMode.Exec(this, quitMode);}
 	public boolean Maximized() {return win.Maximized();} public void Maximized_(boolean v) {win.Maximized_(v);}
 	public boolean Minimized() {return win.Minimized();} public void Minimized_(boolean v) {win.Minimized_(v);}
 	public GfuiQuitMode QuitMode()		{return quitMode;} public GfuiWin QuitMode_(GfuiQuitMode val) {quitMode = val; return this;} private GfuiQuitMode quitMode = GfuiQuitMode.ExitApp; // easier to debug
@@ -44,9 +72,9 @@ public class GfuiWin extends GfuiElemBase {
 		win = (GxwWin)underElem;
 		win.OpenedCmd_set(Gfo_invk_cmd.New_by_key(this, Evt_Opened));
 		Gfo_evt_mgr_.Sub(this, GfuiElemKeys.IptRcvd_evt, keyCmdMgr, GfuiWinKeyCmdMgr.CheckForHotKey_cmd);
-		IptBnd_.cmd_(IptCfg_.Null, this, StopAppByAltF4_evt, IptKey_.Alt.Add(IptKey_.F4));
-//			IptBnd_.cmd_to_(IptCfg_.Null, this, GfoConsoleWin.Instance, GfoConsoleWin.Invk_Show, IptKey_.Ctrl.Add(IptKey_.Alt).Add(IptKey_.E));
-		IptBnd_.cmd_(IptCfg_.Null, this, Invk_ShowFocusOwner, IptKey_.add_(IptKey_.Ctrl, IptKey_.Alt, IptKey_.F12));
+		IptBnd_.cmd_(IptCfg_.Null, this, StopAppByAltF4_evt, IptKey_.MOD_2ND.Add(IptKey_.F4));
+//			IptBnd_.cmd_to_(IptCfg_.Null, this, GfoConsoleWin.Instance, GfoConsoleWin.Invk_Show, IptKey_.MOD_1ST.Add(IptKey_.MOD_2ND).Add(IptKey_.E));
+		IptBnd_.cmd_(IptCfg_.Null, this, Invk_ShowFocusOwner, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.MOD_2ND, IptKey_.F12));
 		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr.Instance);
 		focusMgr = GfuiWinFocusMgr.new_(this);
 	}
@@ -55,9 +83,9 @@ public class GfuiWin extends GfuiElemBase {
 		win = (GxwWin)this.UnderElem();
 		win.OpenedCmd_set(Gfo_invk_cmd.New_by_key(this, Evt_Opened));
 		Gfo_evt_mgr_.Sub(this, GfuiElemKeys.IptRcvd_evt, keyCmdMgr, GfuiWinKeyCmdMgr.CheckForHotKey_cmd);
-		IptBnd_.cmd_(IptCfg_.Null, this, StopAppByAltF4_evt, IptKey_.Alt.Add(IptKey_.F4));
-		IptBnd_.cmd_to_(IptCfg_.Null, this, GfoConsoleWin.Instance, GfoConsoleWin.Invk_Show, IptKey_.Ctrl.Add(IptKey_.Alt).Add(IptKey_.E));
-		IptBnd_.cmd_(IptCfg_.Null, this, Invk_ShowFocusOwner, IptKey_.add_(IptKey_.Ctrl, IptKey_.Alt, IptKey_.F12));
+		IptBnd_.cmd_(IptCfg_.Null, this, StopAppByAltF4_evt, IptKey_.MOD_2ND.Add(IptKey_.F4));
+		IptBnd_.cmd_to_(IptCfg_.Null, this, GfoConsoleWin.Instance, GfoConsoleWin.Invk_Show, IptKey_.MOD_1ST.Add(IptKey_.MOD_2ND).Add(IptKey_.E));
+		IptBnd_.cmd_(IptCfg_.Null, this, Invk_ShowFocusOwner, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.MOD_2ND, IptKey_.F12));
 		loadList.Add(keyCmdMgr); loadList.Add(GfuiTipTextMgr.Instance);
 		focusMgr = GfuiWinFocusMgr.new_(this);
 	}

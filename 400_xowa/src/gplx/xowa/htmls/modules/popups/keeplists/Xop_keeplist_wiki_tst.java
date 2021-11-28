@@ -17,14 +17,14 @@ package gplx.xowa.htmls.modules.popups.keeplists; import gplx.*; import gplx.xow
 import org.junit.*;
 public class Xop_keeplist_wiki_tst {
 	@Before public void init() {fxt.Clear();} private Xop_keeplist_wiki_fxt fxt = new Xop_keeplist_wiki_fxt();
-	@Test  public void Tmpl_keeplist() {
+	@Test public void Tmpl_keeplist() {
 		Xop_keeplist_wiki keeplist_wiki = fxt.keeplist_wiki_(String_.Concat_lines_nl
 		( "enwiki|a*|abc*"
 		));
 		fxt.Test_Match_y(keeplist_wiki, "a", "ab");
 		fxt.Test_Match_n(keeplist_wiki, "abc", "abcd", "d");
 	}
-	@Test  public void Tmpl_keeplist2() {
+	@Test public void Tmpl_keeplist2() {
 		Xop_keeplist_wiki keeplist_wiki = fxt.keeplist_wiki_(String_.Concat_lines_nl
 		( "enwiki|a*|abc*"
 		, "enwiki|b*|*xyz"

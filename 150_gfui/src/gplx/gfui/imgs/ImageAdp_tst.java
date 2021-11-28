@@ -23,14 +23,14 @@ public class ImageAdp_tst {
 	@Before public void setup() {
 		load = Tfds.RscDir.GenSubFil_nest("150_gfui", "imgs", "strawberry_java.bmp");	
 	}	ImageAdp img; Io_url load;
-	@Test  public void load_() {
+	@Test public void load_() {
 		img = ImageAdp_.file_(load);
 		Tfds.Eq(80, img.Width());
 		Tfds.Eq(80, img.Height());
 		Tfds.Eq("80,80", img.Size().toString());
 		Tfds.Eq(img.Url(), load);
 	}
-	@Test  public void SaveAsBmp() {
+	@Test public void SaveAsBmp() {
 		img = ImageAdp_.file_(load);
 		Io_url save = load.GenNewNameOnly("strawberry_temp");
 		DateAdp beforeModifiedTime = Io_mgr.Instance.QueryFil(save).ModifiedTime();

@@ -18,7 +18,7 @@ import org.junit.*;
 public class Random_selection_xnde_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		Random_selection_xnde.Rnd_test = 2;
 		fxt.Test__parse__tmpl_to_html(String_.Concat_lines_nl_skip_last
 		( "<choose before=\"bgn_''\" after=\"''_end\">"
@@ -29,7 +29,7 @@ public class Random_selection_xnde_tst {
 		), "bgn_<i>B</i>_end");
 		Random_selection_xnde.Rnd_test = -1;
 	}
-	@Test   public void Choicetemplate() {
+	@Test  public void Choicetemplate() {
 		Random_selection_xnde.Rnd_test = 2;
 		fxt.Init_page_create("Template:Tmpl", "bgn_''{{{1}}}''_end");
 		fxt.Test__parse__tmpl_to_html(String_.Concat_lines_nl_skip_last

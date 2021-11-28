@@ -26,19 +26,19 @@ public class Xoh_img_bare_hzip__tst {
 	@After  public void term() {
 		Op_sys.Cur_(prv_os_tid);			// revert back to previous mode; otherwise global Op_sys is set to Drd which will cause other tests to fail (notably tidy)
 	}
-	@Test   public void Hiero() {
+	@Test  public void Hiero() {
 		fxt.Test__bicode
 		( "~(!<img style=\"margin: 1px; height: 11px;\" src=\"~X1.png\" title=\"X1 [t]\" alt=\"t\">~"
 		, "<img style='margin: 1px; height: 11px;' src='file:///android_asset/xowa/bin/any/xowa/xtns/Wikihiero/img/hiero_X1.png' title='X1 [t]' alt='t'>"
 		);
 	}
-	@Test   public void Imap_btn() {
+	@Test  public void Imap_btn() {
 		fxt.Test__bicode
 		( "~(\"<img alt=\"About this image\" src=\"~desc-20.png\" style=\"border: none;\">~"
 		, "<img alt=\"About this image\" src=\"file:///android_asset/xowa/bin/any/xowa/xtns/ImageMap/imgs/desc-20.png\" style=\"border: none;\">"
 		);
 	}
-	@Test   public void Imap_map() {
+	@Test  public void Imap_map() {
 		fxt.Test__bicode
 		( "~%}*BhtA.png~#$m#T\"A.png~"
 		, "<img class=\"thumbimage\" alt=\"\" src=\"file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/330px.png\" width=\"330\" height=\"220\" usemap=\"#imageMap_1_1\"/>"

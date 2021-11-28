@@ -22,89 +22,89 @@ public class Xob_xml_parser_tst {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
 		bldr = new Xob_bldr(app);
 	}	private Xow_ns_mgr ns_mgr = Xow_ns_mgr_.default_(gplx.xowa.langs.cases.Xol_case_mgr_.A7());
-	@Test  public void Basic_docs_1() {
+	@Test public void Basic_docs_1() {
 		Xowd_page_itm doc = doc_(1, "a", "a a", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
 		tst_parse(fil, doc, 0);
 	}
-	@Test  public void Basic_docs_2() {
+	@Test public void Basic_docs_2() {
 		Xowd_page_itm doc1 = doc_(1, "a", "a a", Date_1);
 		Xowd_page_itm doc2 = doc_(2, "b", "b b", Date_2);
 		fil = page_bldr.Add_ary(doc1, doc2).XtoByteStreamRdr();
 		int pos = tst_parse(fil, doc1, 0);
 		tst_parse(fil, doc2, pos);
 	}
-	@Test  public void Basic_space() {
+	@Test public void Basic_space() {
 		Xowd_page_itm doc1 = doc_(1, "a_b", "abc", Date_1);
 		fil = page_bldr.Add_ary(doc1).Upd("a_b", "a b").XtoByteStreamRdr();
 		tst_parse(fil, doc1, 0);
 	}
-	@Test  public void Xml() {
+	@Test public void Xml() {
 		Xowd_page_itm doc = doc_(1, "a", "&quot;a &amp; b &lt;&gt; a | b&quot;", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
 		tst_parse(fil, doc.Text_(Bry_.new_a7("\"a & b <> a | b\"")), 0);
 	}
-	@Test  public void Tab() {
+	@Test public void Tab() {
 		Xowd_page_itm doc = doc_(1, "a", "a \t b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
 		tst_parse(fil, doc.Text_(Bry_.new_a7("a &#09; b")), 0);
 	}
-	@Test  public void Tab_disable() {
+	@Test public void Tab_disable() {
 		Xowd_page_itm doc = doc_(1, "a", "a \t b", Date_1);
 		page_parser.Trie_tab_del_();
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
 		tst_parse(fil, doc.Text_(Bry_.new_a7("a \t b")), 0);
 	}
-	@Test  public void Cr_nl() {
+	@Test public void Cr_nl() {
 		Xowd_page_itm doc = doc_(1, "a", "a \r\n b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
 		tst_parse(fil, doc.Text_(Bry_.new_a7("a \n b")), 0);
 	}
-	@Test  public void Cr() {
+	@Test public void Cr() {
 		Xowd_page_itm doc = doc_(1, "a", "a \r b", Date_1);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr();
 		tst_parse(fil, doc.Text_(Bry_.new_a7("a \n b")), 0);
 	}
-	@Test  public void Text_long() {
+	@Test public void Text_long() {
 		String s = String_.Repeat("a", 1024);
 		Xowd_page_itm doc = doc_(1, "a", s, Date_1);
 		page_parser.Tag_len_max_(32);
 		fil = page_bldr.Add(doc).XtoByteStreamRdr(512);
 		tst_parse(fil, doc, 0);
 	}
-	@Test  public void Text_empty() {
+	@Test public void Text_empty() {
 		Xowd_page_itm doc = doc_(1, "a", "", Date_1);
 		fil = page_bldr.Add(doc).Upd("<text></text>", "<text />").XtoByteStreamRdr();
 		tst_parse(fil, doc, 0);
 	}
-	@Test  public void Text_frag() {
+	@Test public void Text_frag() {
 		Xowd_page_itm doc = doc_(1, "a", "a", Date_1);
 		fil = page_bldr.Add(doc).Upd("<text>a</text>", "<text xml:space=\"preserve\">a</text>").XtoByteStreamRdr();
 		tst_parse(fil, doc, 0);
 	}
-	@Test  public void Ns_file() {
+	@Test public void Ns_file() {
 		Xowd_page_itm doc = doc_(1, "File:a", "a", Date_1);
 		Tfds.Eq(Xow_ns_.Tid__file, doc.Ns_id());
 		Tfds.Eq("a", String_.new_u8(doc.Ttl_page_db()));
 	}
-	@Test  public void Ns_main() {
+	@Test public void Ns_main() {
 		Xowd_page_itm doc = doc_(1, "a", "a", Date_1);
 		Tfds.Eq(Xow_ns_.Tid__main, doc.Ns_id());
 		Tfds.Eq("a", String_.new_u8(doc.Ttl_page_db()));
 	}
-	@Test  public void Ns_main_book() {
+	@Test public void Ns_main_book() {
 		Xowd_page_itm doc = doc_(1, "Book", "a", Date_1);
 		Tfds.Eq(Xow_ns_.Tid__main, doc.Ns_id());
 		Tfds.Eq("Book", String_.new_u8(doc.Ttl_page_db()));
 	}
-	@Test  public void XmlEntities() {
+	@Test public void XmlEntities() {
 		Xowd_page_itm orig = doc_(1, "A&amp;b", "a", Date_1);
 		Xowd_page_itm actl = new Xowd_page_itm();
 		fil = page_bldr.Add(orig).XtoByteStreamRdr();
 		page_parser.Parse_page(actl, usr_dlg, fil, fil.Bfr(), 0, ns_mgr);
 		Tfds.Eq("A&b", String_.new_u8(actl.Ttl_full_db()));
 	}
-	@Test  public void Root() {
+	@Test public void Root() {
 		Xowd_page_itm doc = doc_(1, "a", "a", Date_1);
 		page_bldr.Bfr().Add_str_a7("<root>\n");
 		page_bldr.Add(doc);

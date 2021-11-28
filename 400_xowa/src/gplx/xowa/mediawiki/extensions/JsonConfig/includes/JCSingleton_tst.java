@@ -20,7 +20,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 //	using gplx.xowa.xtns.jsonConfigs.scribunto;
 //	public class JCSingleton_tst {
 //		private final    JCSingleton_fxt fxt = new JCSingleton_fxt();
-//		@Test   public void Get() {
+//		@Test  public void Get() {
 //			fxt.Init__store("en.wikipedia.org", "Page1"
 //			, Json_doc.Make_str_by_apos
 //			( "{"

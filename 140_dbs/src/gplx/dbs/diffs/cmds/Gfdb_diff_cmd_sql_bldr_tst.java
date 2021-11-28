@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.dbs.*; import gplx.dbs.engines.mems.*;
 public class Gfdb_diff_cmd_sql_bldr_tst {
 	private final    Gfdb_diff_cmd_sql_bldr_fxt fxt = new Gfdb_diff_cmd_sql_bldr_fxt();
-	@Test   public void Insert() {
+	@Test  public void Insert() {
 		fxt.Test__insert("tbl1", String_.Ary("key1", "key2"), String_.Ary("fld1", "fld2"), 0, 99, String_.Concat_lines_nl_skip_last
 		( "INSERT  INTO db_curr.tbl1"
 		, "SELECT  d.key1, d.key2, d.fld1, d.fld2"
@@ -28,7 +28,7 @@ public class Gfdb_diff_cmd_sql_bldr_tst {
 		, "AND     k.diff_uid BETWEEN 0 AND 99;"
 		));
 	}
-	@Test   public void Update() {
+	@Test  public void Update() {
 		fxt.Test__update("tbl1", String_.Ary("key1", "key2"), String_.Ary("fld1", "fld2"), 0, 99, String_.Concat_lines_nl_skip_last
 		( "REPLACE INTO db_curr.tbl1"
 		, "SELECT  d.key1, d.key2, d.fld1, d.fld2"
@@ -38,7 +38,7 @@ public class Gfdb_diff_cmd_sql_bldr_tst {
 		, "AND     k.diff_uid BETWEEN 0 AND 99;"
 		));
 	}
-	@Test   public void Delete() {
+	@Test  public void Delete() {
 		fxt.Test__delete("tbl1", String_.Ary("key1", "key2"), 0, 99, String_.Concat_lines_nl_skip_last
 		( "DELETE  db_curr.tbl1"
 		, "WHERE   key1 || '|' || key2 IN"

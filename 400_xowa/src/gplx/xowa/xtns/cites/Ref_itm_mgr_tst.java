@@ -18,10 +18,10 @@ import org.junit.*; import gplx.core.tests.*;
 public class Ref_itm_mgr_tst {
 	Ref_itm_mgr_fxt fxt = new Ref_itm_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Basic()	{fxt.run_Add("key_1", "key_2").tst(fxt.itm_("key_1", 0, 0), fxt.itm_("key_2", 1, 1));}
-	@Test  public void Repeat() {fxt.run_Add("key_1", "key_2", "key_1").tst(fxt.itm_("key_1", 0).Related_(fxt.itm_uid_(2)), fxt.itm_("key_2", 1, 1));}
-	@Test  public void Group()	{fxt.run_Add_grp("grp_1", "key_1").run_Add("key_1").tst_grp("grp_1", fxt.itm_("key_1", 0, 0)).tst(fxt.itm_("key_1", 0, 1));}
-	@Test  public void Follow()	{fxt.run_Add("key_1").run_Add_follow("key_1").tst(fxt.itm_("key_1", 0, 0).Related_(fxt.itm_uid_(1).Idx_minor_follow_()));}
+	@Test public void Basic()	{fxt.run_Add("key_1", "key_2").tst(fxt.itm_("key_1", 0, 0), fxt.itm_("key_2", 1, 1));}
+	@Test public void Repeat() {fxt.run_Add("key_1", "key_2", "key_1").tst(fxt.itm_("key_1", 0).Related_(fxt.itm_uid_(2)), fxt.itm_("key_2", 1, 1));}
+	@Test public void Group()	{fxt.run_Add_grp("grp_1", "key_1").run_Add("key_1").tst_grp("grp_1", fxt.itm_("key_1", 0, 0)).tst(fxt.itm_("key_1", 0, 1));}
+	@Test public void Follow()	{fxt.run_Add("key_1").run_Add_follow("key_1").tst(fxt.itm_("key_1", 0, 0).Related_(fxt.itm_uid_(1).Idx_minor_follow_()));}
 }
 class Ref_itm_mgr_fxt {
 	private Ref_itm_mgr ref_mgr = new Ref_itm_mgr();

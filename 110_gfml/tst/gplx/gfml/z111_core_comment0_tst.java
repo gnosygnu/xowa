@@ -24,13 +24,13 @@ public class z111_core_comment0_tst {
 			,	GfmlDocLxrs.Comment0_lxr()		// bgn=// end=\n
 			);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Doc("//a" + String_.Lf);
 		fx.tst_Tkn("//a" + String_.Lf
 			, fx.tkn_grp_ary_("//", "a", String_.Lf)
 			);
 	}
-	@Test  public void Data() {
+	@Test public void Data() {
 		fx.tst_Doc("a;//b" + String_.Lf, fx.nde_().Atru_("a"));
 		fx.tst_Tkn("a;//b" + String_.Lf
 			,	fx.tkn_grp_
@@ -39,7 +39,7 @@ public class z111_core_comment0_tst {
 			,	fx.tkn_grp_ary_("//", "b", String_.Lf)
 			);
 	}
-//		@Test  public void DanglingBgn() {
+//		@Test public void DanglingBgn() {
 //			try {
 //				fx.tst_Err("//", GfmlOutCmds.Frame_danglingBgn_Err_());
 //				Tfds.Fail_expdError();

@@ -18,7 +18,7 @@ package gplx.xowa.mediawiki;
 import org.junit.*; import gplx.core.tests.*;
 public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.types.array.php
 	private final XophpArrayfxt fxt = new XophpArrayfxt();
-	@Test  public void array__kvs() {
+	@Test public void array__kvs() {
 		// $array = array("foo" => "bar", "bar" => "foo",);
 		fxt.Test__array
 			( XophpArray.New()
@@ -28,7 +28,7 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 			, XophpArrayItm.NewStr("bar", "foo")
 			);
 	}
-	@Test  public void array__casting() {
+	@Test public void array__casting() {
 		// $array = array(1 => "a", "1" => "b", 1.5 => "c", true => "d",);
 		fxt.Test__array
 			( XophpArray.New()
@@ -38,7 +38,7 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 			.   Add(true, "d")				
 			, XophpArrayItm.NewInt(1, "d"));
 	}
-	@Test  public void array__mixed() {
+	@Test public void array__mixed() {
 		// $array = array("foo" => "bar", "bar" => "foo", 100 => -100, -100 => 100);
 		fxt.Test__array
 			( XophpArray.New()
@@ -52,7 +52,7 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 			, XophpArrayItm.NewInt(-100, 100)
 			);
 	}
-	@Test  public void array__objs() {
+	@Test public void array__objs() {
 		// $array = array("foo", "bar", "hello", "world");
 		fxt.Test__array
 			( XophpArray.New()
@@ -66,7 +66,7 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 			, XophpArrayItm.NewInt(3, "world")
 			);
 	}
-	@Test  public void array__unkeyed() {
+	@Test public void array__unkeyed() {
 		// $array = array("a", "b", 6 => "c", "d");
 		fxt.Test__array
 			( XophpArray.New()
@@ -80,7 +80,7 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 			, XophpArrayItm.NewInt(7, "d")
 			);
 	}
-	@Test  public void array__multidimensional() {
+	@Test public void array__multidimensional() {
 		/*
 		$array = array(
 			"foo" => "bar",
@@ -108,7 +108,7 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 		))
 		);
 	}
-	@Test  public void array__unset() {
+	@Test public void array__unset() {
 		XophpArray ary = XophpArray.New();
 		ary.Add(0, "a").Add(1, "b");
 
@@ -121,7 +121,7 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 		ary.Add("c");
 		fxt.Test__array(ary, XophpArrayItm.NewInt(2, "c"));
 	}
-	@Test  public void Pop() {
+	@Test public void Pop() {
 		XophpArray ary = XophpArray.New();
 		ary.Add(0, "a").Add(1, "b").Add(2, "c");
 
@@ -132,7 +132,7 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 		fxt.Test__Count(ary, 0);
 		fxt.Test__Pop(ary, null);
 	}
-	@Test   public void Itm_str_concat_end() {
+	@Test  public void Itm_str_concat_end() {
 		XophpArray ary = XophpArray.New();
 		ary.Add(0, "a").Add(1, "b").Add(2, "c");
 
@@ -141,13 +141,13 @@ public class XophpArrayInstanceTest { // REF: http://php.net/manual/en/language.
 		fxt.Test__Itm_str_concat_end(ary, "b1", 1, "1");
 		fxt.Test__Itm_str_concat_end(ary, "c2", 2, "2");
 	}
-	@Test   public void Clone() {
+	@Test  public void Clone() {
 		XophpArray ary = XophpArray.New();
 		ary.Add(0, "a").Add(1, "b").Add(2, "c");
 
 		fxt.Test__Eq(ary, ary.Clone());
 	}
-	@Test   public void Get_by() {
+	@Test  public void Get_by() {
 		XophpArray ary = XophpArray.New();
 		ary.Add("0", "a").Add("1", "b").Add("2", "c");
 

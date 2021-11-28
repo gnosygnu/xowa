@@ -24,7 +24,7 @@ public class z182_ndeDots_subs_tst {
 			,	GfmlDocLxrs.NdeBodyEnd_lxr()
 			);
 	}	GfmlParse_fxt fx = GfmlParse_fxt.new_();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Doc("{a.b{}z;}"
 			,	fx.nde_().ChainId_(0).Subs_
 			(		fx.nde_().Hnd_("a").ChainId_(1).Subs_
@@ -33,7 +33,7 @@ public class z182_ndeDots_subs_tst {
 			,		fx.nde_().Atru_("z").ChainId_(0)
 			));
 	}
-	@Test  public void Nest() {
+	@Test public void Nest() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.NdeHeader_lxr());
 		fx.tst_Doc("{a.b.c{d:e;}z;}"	// shorthand of {a{b{c{d:e;}}}}
 			,	fx.nde_().ChainId_(0).Subs_
@@ -47,7 +47,7 @@ public class z182_ndeDots_subs_tst {
 			,		fx.nde_().ChainId_(0).Atru_("z")
 			));
 	}
-	@Test  public void Chain() {
+	@Test public void Chain() {
 		fx.tst_Doc("{a.b.c;z;}"
 			,	fx.nde_().ChainId_(0).Subs_
 			(		fx.nde_().Hnd_("a").ChainId_(1).Subs_
@@ -57,7 +57,7 @@ public class z182_ndeDots_subs_tst {
 			,		fx.nde_().ChainId_(0).Atru_("z")
 			));
 	}
-	@Test  public void NdeHdr() {
+	@Test public void NdeHdr() {
 		fx.ini_RootLxr_Add(GfmlDocLxrs.NdeHeader_lxr());
 		fx.tst_Doc("{a:b.c;z;}"
 			,	fx.nde_().ChainId_(0).Subs_

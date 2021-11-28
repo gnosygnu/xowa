@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.fulltexts.core; import gplx.*; import gplx.xowa.*
 import org.junit.*; import gplx.core.tests.*;
 public class Xofulltext_extractor__tst {
 	private final    Xofulltext_extractor__fxt fxt = new Xofulltext_extractor__fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		// simple node
 		fxt.Test__extract("a <i>b</i> c", "a b c");
 

@@ -17,9 +17,9 @@ package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*; import gplx.xowa.xtns.imaps.itms.*;
 public class Imap_shapes_arg_tst {
 	@Before public void init() {fxt.Reset();} private Imap_shapes_arg_fxt fxt = new Imap_shapes_arg_fxt();
-	@Test  public void Rect()	{fxt.Test_shape_html(fxt.itm_rect_("[[A|b]]", 1, 2, 3, 4), "\n        <area href=\"/wiki/A\" shape=\"rect\" coords=\"1,2,3,4\" alt=\"b\" title=\"b\"/>");}
-	@Test  public void Circle() {fxt.Test_shape_html(fxt.itm_circle_("[[A|b]]", 1, 2, 3 ), "\n        <area href=\"/wiki/A\" shape=\"circle\" coords=\"1,2,3\" alt=\"b\" title=\"b\"/>");}
-	@Test  public void Poly()	{fxt.Test_shape_html(fxt.itm_poly_("[[A|b]]", 1, 2, 3, 4), "\n        <area href=\"/wiki/A\" shape=\"poly\" coords=\"1,2,3,4\" alt=\"b\" title=\"b\"/>");}
+	@Test public void Rect()	{fxt.Test_shape_html(fxt.itm_rect_("[[A|b]]", 1, 2, 3, 4), "\n        <area href=\"/wiki/A\" shape=\"rect\" coords=\"1,2,3,4\" alt=\"b\" title=\"b\"/>");}
+	@Test public void Circle() {fxt.Test_shape_html(fxt.itm_circle_("[[A|b]]", 1, 2, 3 ), "\n        <area href=\"/wiki/A\" shape=\"circle\" coords=\"1,2,3\" alt=\"b\" title=\"b\"/>");}
+	@Test public void Poly()	{fxt.Test_shape_html(fxt.itm_poly_("[[A|b]]", 1, 2, 3, 4), "\n        <area href=\"/wiki/A\" shape=\"poly\" coords=\"1,2,3,4\" alt=\"b\" title=\"b\"/>");}
 }
 class Imap_shapes_arg_fxt extends Imap_base_fxt {
 	public void Test_shape_html(Imap_part_shape shape, String expd) {

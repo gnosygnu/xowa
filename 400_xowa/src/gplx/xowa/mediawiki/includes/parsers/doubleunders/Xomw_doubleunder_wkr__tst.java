@@ -17,12 +17,12 @@ package gplx.xowa.mediawiki.includes.parsers.doubleunders; import gplx.*; import
 import org.junit.*; import gplx.core.tests.*;
 public class Xomw_doubleunder_wkr__tst {
 	private final    Xomw_doubleunder_wkr__fxt fxt = new Xomw_doubleunder_wkr__fxt();
-	@Test  public void No_match()        {fxt.Test__parse("a b c"                                    , "a b c");}
-	@Test  public void Force_toc()       {fxt.Test__parse("a __FORCETOC__ b"                         , "a  b").Test__prop_y(fxt.data.force_toc);}
-	@Test  public void Toc()             {fxt.Test__parse("a __TOC__ b __TOC__ c"                    , "a <!--MWTOC--> b  c").Test__prop_y(fxt.data.toc, fxt.data.show_toc, fxt.data.force_toc_position);}
-	@Test  public void Notoc_only()      {fxt.Test__parse("a __NOTOC__ b"                            , "a  b").Test__prop_y(fxt.data.no_toc).Test__prop_n(fxt.data.show_toc);}	// show_toc is false
-	@Test  public void Notoc_w_toc()     {fxt.Test__parse("a __TOC__ b __NOTOC__ c"                  , "a <!--MWTOC--> b  c").Test__prop_y(fxt.data.toc, fxt.data.show_toc, fxt.data.force_toc_position);} // show_toc is true
-	@Test  public void Case_match()      {fxt.Test__parse("a __index__ b"                            , "a __index__ b");}
+	@Test public void No_match()        {fxt.Test__parse("a b c"                                    , "a b c");}
+	@Test public void Force_toc()       {fxt.Test__parse("a __FORCETOC__ b"                         , "a  b").Test__prop_y(fxt.data.force_toc);}
+	@Test public void Toc()             {fxt.Test__parse("a __TOC__ b __TOC__ c"                    , "a <!--MWTOC--> b  c").Test__prop_y(fxt.data.toc, fxt.data.show_toc, fxt.data.force_toc_position);}
+	@Test public void Notoc_only()      {fxt.Test__parse("a __NOTOC__ b"                            , "a  b").Test__prop_y(fxt.data.no_toc).Test__prop_n(fxt.data.show_toc);}	// show_toc is false
+	@Test public void Notoc_w_toc()     {fxt.Test__parse("a __TOC__ b __NOTOC__ c"                  , "a <!--MWTOC--> b  c").Test__prop_y(fxt.data.toc, fxt.data.show_toc, fxt.data.force_toc_position);} // show_toc is true
+	@Test public void Case_match()      {fxt.Test__parse("a __index__ b"                            , "a __index__ b");}
 }
 class Xomw_doubleunder_wkr__fxt {
 	private final    XomwParserCtx pctx = new XomwParserCtx();

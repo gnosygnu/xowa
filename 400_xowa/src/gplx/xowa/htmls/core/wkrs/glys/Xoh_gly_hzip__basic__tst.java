@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_gly_hzip__basic__tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__bicode("~'!{,L#{\"g{\"b0!A1~!1A.png~9\"D\"D{\"g{\"b0!B1~!1B.png~9\"D\"Dabc", String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional' style='max-width:978px; _width:978px;'>"
 		,   "<li class='gallerybox' style='width:155px;'>"
@@ -42,7 +42,7 @@ public class Xoh_gly_hzip__basic__tst {
 		,   "</li>"
 		, "</ul>abc"));
 	}
-	@Test   public void Clear_state() {	// page # wasn't being cleared between gallery itms; PAGE:en.w:Almagest; DATE:2016-01-05
+	@Test  public void Clear_state() {	// page # wasn't being cleared between gallery itms; PAGE:en.w:Almagest; DATE:2016-01-05
 		fxt.Test__bicode("~'!{,L#{\"g{\"b0!A1~!1A.png~{\"d\"D\"D!#{\"g{\"b0!B1~!1B.png~{\"d\"D\"D!$abc", String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional' style='max-width:978px; _width:978px;'>"
 		,   "<li class='gallerybox' style='width:155px;'>"
@@ -67,7 +67,7 @@ public class Xoh_gly_hzip__basic__tst {
 		,   "</li>"
 		, "</ul>abc"));
 	}
-	@Test   public void Extra_cls() {		// PURPOSE: handle extra cls; EX: <gallery class='abc'>
+	@Test  public void Extra_cls() {		// PURPOSE: handle extra cls; EX: <gallery class='abc'>
 		fxt.Test__bicode("~'1!cls1 cls2~\"{\"g{\"b0!A1~!1A.png~9\"D\"D", String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional cls1 cls2'>"
 		,   "<li class='gallerybox' style='width:155px;'>"
@@ -82,7 +82,7 @@ public class Xoh_gly_hzip__basic__tst {
 		,   "</li>"
 		, "</ul>"));
 	}
-	@Test   public void Caption() {	// handle <li class='gallerycaption'>A</li>; PAGE:en.d:a; DATE:2016-06-24
+	@Test  public void Caption() {	// handle <li class='gallerycaption'>A</li>; PAGE:en.d:a; DATE:2016-06-24
 		fxt.Test__bicode("~'{\"L!Z\"{\"g{\"b0!A1~!1A.png~9\"D\"D", String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional'>"
 		,   "<li class='gallerycaption'>Z</li>"
@@ -98,7 +98,7 @@ public class Xoh_gly_hzip__basic__tst {
 		,   "</li>"
 		, "</ul>"));
 	}
-	@Test   public void Extra_cls__gallery() {	// handle redundant gallery; EX: <gallery class='gallery'>; PAGE:en.w:Butuan; DATE:2016-01-05
+	@Test  public void Extra_cls__gallery() {	// handle redundant gallery; EX: <gallery class='gallery'>; PAGE:en.w:Butuan; DATE:2016-01-05
 		fxt.Test__bicode("~'1!gallery~\"{\"g{\"b0!A1~!1A.png~9\"D\"D", String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional gallery'>"
 		,   "<li class='gallerybox' style='width:155px;'>"
@@ -113,7 +113,7 @@ public class Xoh_gly_hzip__basic__tst {
 		,   "</li>"
 		, "</ul>"));
 	}
-	@Test   public void Xtra_atr() {			// PURPOSE: handle extra atr; EX: <gallery id='abc'>
+	@Test  public void Xtra_atr() {			// PURPOSE: handle extra atr; EX: <gallery id='abc'>
 		fxt.Test__bicode("~'A! id=\"abc\"\"{\"g{\"b0!A1~!1A.png~9\"D\"D", String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional' id='abc'>"
 		,   "<li class='gallerybox' style='width:155px;'>"
@@ -128,7 +128,7 @@ public class Xoh_gly_hzip__basic__tst {
 		,   "</li>"
 		, "</ul>"));
 	}
-	@Test   public void Tidy__br_at_end() {	// PURPOSE: handle inconsistent tidy behavior where <p> is put on one line ("<p>a</p>") unless it ends with <br> ("<p>a<br>\n</p>")
+	@Test  public void Tidy__br_at_end() {	// PURPOSE: handle inconsistent tidy behavior where <p> is put on one line ("<p>a</p>") unless it ends with <br> ("<p>a<br>\n</p>")
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~'!!\"{\"g{\"b0!A1<br>"
 		, "~!1A.png~9\"D\"D"
@@ -147,11 +147,11 @@ public class Xoh_gly_hzip__basic__tst {
 		,   "</li>"
 		, "</ul>"));
 	}
-	@Test   public void Tidy__empty() {	// PURPOSE: no items should place </ul> on same line
+	@Test  public void Tidy__empty() {	// PURPOSE: no items should place </ul> on same line
 		fxt.Test__bicode("~'!!!", String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional'></ul>"));	// TIDY: <ul></ul> should be on same line if 0 items
 	}
-	@Test   public void Xnde_atrs() {
+	@Test  public void Xnde_atrs() {
 		fxt.Test__bicode("~'{6({,L!!#?!!$N&#{\"g{\"b0!A1~!1A.png~9\"D\"D{\"g{\"b0!B1~!1B.png~9\"D\"Dabc", String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='200|300|5' class='gallery mw-gallery-traditional' style='max-width:978px; _width:978px;'>"
 		,   "<li class='gallerybox' style='width:155px;'>"

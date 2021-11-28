@@ -17,7 +17,7 @@ package gplx.xowa.wikis.tdbs.utils; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*;
 import gplx.core.ios.*;
 public class Xos_url_gen_tst {
-	@Test  public void Url_gen() {
+	@Test public void Url_gen() {
 		tst_url_gen("mem/root/",          0, "mem/root/00/00/00/00/0000000000.csv");
 		tst_url_gen("mem/root/",         99, "mem/root/00/00/00/00/0000000099.csv");
 		tst_url_gen("mem/root/", 1234567890, "mem/root/12/34/56/78/1234567890.csv");

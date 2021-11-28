@@ -20,13 +20,13 @@ public class z082_GfmlDataWtrOpts_tst {
 		wtr = GfmlDataWtr.new_();
 		wtr.WriteNodeBgn("root");
 	}	DataWtr wtr;
-	@Test  public void KeyedSpr() {
+	@Test public void KeyedSpr() {
 		wtr.InitWtr(GfmlDataWtrOpts.Key_const, GfmlDataWtrOpts.new_().KeyedSeparator_("\t"));
 		wtr.WriteData("key1", "data1");
 		wtr.WriteData("key2", "data2");
 		tst_XtoStr(wtr, "root:key1='data1'\tkey2='data2';");
 	}
-	@Test  public void IndentNamesOn() {
+	@Test public void IndentNamesOn() {
 		wtr.InitWtr(GfmlDataWtrOpts.Key_const, GfmlDataWtrOpts.new_().IndentNodesOn_());
 		wtr.WriteNodeBgn("nde1");
 		wtr.WriteNodeBgn("nde2");
@@ -39,7 +39,7 @@ public class z082_GfmlDataWtrOpts_tst {
 			,	"}"
 			));
 	}
-	@Test  public void IgnoreNullNamesOn() {
+	@Test public void IgnoreNullNamesOn() {
 		wtr.InitWtr(GfmlDataWtrOpts.Key_const, GfmlDataWtrOpts.new_().IgnoreNullNamesOn_());
 		wtr.WriteNodeBgn("");
 		wtr.WriteData("key1", "data1");

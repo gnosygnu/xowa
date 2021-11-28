@@ -19,7 +19,7 @@ import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.pages.*;
 public class Http_url_parser_tst {
 	private final    Http_url_parser_fxt fxt = new Http_url_parser_fxt();
-	@Test  public void Parse() {
+	@Test public void Parse() {
 		// wiki-only
 		fxt.Test__parse("/en.wikipedia.org", fxt.Make().Wiki_("en.wikipedia.org"));
 
@@ -62,14 +62,14 @@ public class Http_url_parser_tst {
 */
 		// add qarg_ary and test for qarg;
 	}
-	@Test   public void Popup() {
+	@Test  public void Popup() {
 		fxt.Test__parse
 		( "/en.wikipedia.org/wiki/Page_1?action=popup&popup_id=xo_2&popup_mode=more"
 		, fxt.Make().Wiki_("en.wikipedia.org").Page_("Page_1")
 			.Popup_(true).Popup_id_("xo_2").Popup_mode_("more")
 		);
 	}
-	@Test   public void Qarg__search() {
+	@Test  public void Qarg__search() {
 		fxt.Test__parse
 		( "/en.wikipedia.org/wiki/Special:XowaSearch?search=earth&fulltext=y"
 		, fxt.Make().Wiki_("en.wikipedia.org").Page_("Special:XowaSearch")

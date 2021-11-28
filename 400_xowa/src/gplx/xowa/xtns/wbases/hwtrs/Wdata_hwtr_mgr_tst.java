@@ -19,8 +19,8 @@ import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apps.apis.xowa.xtns.*;
 public class Wdata_hwtr_mgr_tst {
 	@Before public void init() {fxt.init();} private Wdata_hwtr_mgr_fxt fxt = new Wdata_hwtr_mgr_fxt();
-	@Test   public void Stub() {}
-//		@Test   public void Write_label() {
+	@Test  public void Stub() {}
+//		@Test  public void Write_label() {
 //			fxt.Test_doc(fxt.Wdoc_bldr()
 //			.Add_label("en", "en_label")
 //			.Add_label("de", "de_label").Xto_wdoc(), String_.Concat_lines_nl_skip_last
@@ -43,7 +43,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</table>"
 //			));
 //		}
-//		@Test   public void Write_descr() {
+//		@Test  public void Write_descr() {
 //			fxt.Test_doc(fxt.Wdoc_bldr()
 //			.Add_description("en", "en_descr")
 //			.Add_description("de", "de_descr").Xto_wdoc(), String_.Concat_lines_nl_skip_last
@@ -66,7 +66,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</table>"
 //			));
 //		}
-//		@Test   public void Write_alias() {
+//		@Test  public void Write_alias() {
 //			fxt.Test_doc(fxt.Wdoc_bldr()
 //			.Add_alias("en", "en_1", "en_2")
 //			.Add_alias("de", "de_1").Xto_wdoc(), String_.Concat_lines_nl_skip_last
@@ -89,7 +89,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</table>"
 //			));
 //		}
-//		@Test   public void Write_slink_tbl_one() {
+//		@Test  public void Write_slink_tbl_one() {
 //			fxt
 //			.Init_resolved_qid(1, "featured article").Init_resolved_qid(2, "good article")
 //			.Test_doc(fxt.Wdoc_bldr()			
@@ -160,7 +160,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "  </div>"
 //			));
 //		}
-//		@Test   public void Write_slink_tbl_many() {
+//		@Test  public void Write_slink_tbl_many() {
 //			fxt.Test_doc(fxt.Wdoc_bldr()
 //			.Add_sitelink("enwiki"		, "Earth")
 //			.Add_sitelink("enwiktionary", "Earth")
@@ -231,7 +231,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</p>"
 //			));
 //		}
-//		@Test   public void Write_claim() {
+//		@Test  public void Write_claim() {
 //			Wdata_wiki_mgr_fxt mkr = fxt.Wdata_fxt();			
 //			fxt
 //			.Init_resolved_pid(1, "prop_1")
@@ -262,7 +262,7 @@ public class Wdata_hwtr_mgr_tst {
 //			, "</table>"
 //			));
 //		}
-//		@Test   public void Write_json() {
+//		@Test  public void Write_json() {
 //			Json_doc jdoc = Json_doc.new_apos_("{ 'node':['val_0', 'val_1'] }");
 //			Wdata_doc wdoc = new Wdata_doc(Bry_.Empty, null, jdoc);
 //			fxt.Test_json(wdoc, String_.Concat_lines_nl_skip_last

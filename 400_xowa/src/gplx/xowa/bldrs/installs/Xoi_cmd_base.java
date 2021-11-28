@@ -22,7 +22,7 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 		this.install_mgr = install_mgr; this.wiki_key = wiki_key;
 		this.Owner_(install_mgr);
 	}	private Xoi_setup_mgr install_mgr; String wiki_key;
-	@gplx.Virtual public void Cmd_ctor() {}
+	public void Cmd_ctor() {}
 	public abstract String Async_key();
 	public int Async_sleep_interval()	{return Gfo_thread_cmd_.Async_sleep_interval_1_second;}
 	public boolean Async_prog_enabled()	{return false;}

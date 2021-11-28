@@ -16,12 +16,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.lists; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class List_adp_sorter_tst {
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		Object[] src = new Object[] {0,8,1,7,2,6,3,5,4};
 		List_adp_sorter.new_().Sort(src, src.length);
 		Tfds.Eq_ary(src, Sequential(0, 8));
 	}
-	@Test  public void Basic2() {
+	@Test public void Basic2() {
 		Object[] src = new Object[] {"0","8","1","7","2","6","3","5","4"};
 		List_adp_sorter.new_().Sort(src, src.length);
 		Tfds.Eq_ary(src, new Object[] {"0","1","2","3","4","5","6","7","8"});

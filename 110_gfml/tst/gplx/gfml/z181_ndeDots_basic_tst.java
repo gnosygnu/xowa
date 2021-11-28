@@ -25,7 +25,7 @@ public class z181_ndeDots_basic_tst {
 			,	GfmlDocLxrs.NdeBodyEnd_lxr()
 			);
 	}
-	@Test  public void One() {
+	@Test public void One() {
 		fx.tst_Doc("{a.b;c;}"
 			,	fx.nde_().ChainId_(0).Subs_
 			(		fx.nde_().Hnd_("a").ChainId_(1).Subs_
@@ -49,7 +49,7 @@ public class z181_ndeDots_basic_tst {
 			,		fx.tkn_itm_("}")
 			));
 	}
-	@Test  public void Many() {
+	@Test public void Many() {
 		fx.tst_Doc("{a.b.c.d;e;}"
 			,	fx.nde_().ChainId_(0).Subs_
 			(		fx.nde_().Hnd_("a").ChainId_(1).Subs_

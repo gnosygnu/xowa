@@ -19,7 +19,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.pars
 public class Xoh_thm_hzip__basic__tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void setup() {fxt.Clear();}
-	@Test   public void Image_wo_alt_text() {// LEGACY: pre xowa_alt_text
+	@Test  public void Image_wo_alt_text() {// LEGACY: pre xowa_alt_text
 		fxt.Test__bicode("~&3abc~abc~!uA.png~)#Sabc~", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tleft'>"
 		,   "<div class='thumbinner' style='width:220px;'><a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' class='thumbimage' alt='abc'></a> "
@@ -32,7 +32,7 @@ public class Xoh_thm_hzip__basic__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Image_w_alt_text() {// NOTE: xowa_alt_text; PAGE:es.w:Biome DATE:2017-09-04
+	@Test  public void Image_w_alt_text() {// NOTE: xowa_alt_text; PAGE:es.w:Biome DATE:2017-09-04
 		fxt.Test__bicode("~&{\"^abc~abc~!uA.png~)#Sabc~", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tleft'>"
 		,   "<div class='thumbinner' style='width:220px;'><a href='/wiki/File:A.png' class='image' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' class='thumbimage' alt='abc'></a> "
@@ -47,7 +47,7 @@ public class Xoh_thm_hzip__basic__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Capt_is_missing() {	// [[File:A.png|thumb]]
+	@Test  public void Capt_is_missing() {	// [[File:A.png|thumb]]
 		fxt.Test__bicode("~&#~!%A.png~)#S~", String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tleft'>"
 		,   "<div class='thumbinner' style='width:220px;'><a href='/wiki/File:A.png' class='image' title='' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|220|-1|-1|-1|-1' src='' width='0' height='0' class='thumbimage' alt=''></a> "
@@ -58,7 +58,7 @@ public class Xoh_thm_hzip__basic__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Fix__omitted_table_tail() {	// PURPOSE.hdiff: handle omitted </table>; PAGE:en.w:Alphabet; DATE:2016-01-06
+	@Test  public void Fix__omitted_table_tail() {	// PURPOSE.hdiff: handle omitted </table>; PAGE:en.w:Alphabet; DATE:2016-01-06
 		fxt.Test__bicode(String_.Concat_lines_nl_skip_last
 		( "~&]&D~"
 		, "<table>"
@@ -86,7 +86,7 @@ public class Xoh_thm_hzip__basic__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Div_width_uses_img_width() {
+	@Test  public void Div_width_uses_img_width() {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();
 		itm.Init_at_lnki(Xof_exec_tid.Tid_wiki_page, Bry_.new_a7("en.w"), Bry_.new_a7("A.png"), Xop_lnki_type.Id_null, -1, 220, -1, -1, -1, 0);
 		itm.Init_at_cache(true, 400, 440, Io_url_.mem_fil_("mem/A.png"));
@@ -107,7 +107,7 @@ public class Xoh_thm_hzip__basic__tst {
 
 		fxt.Init_file_mgr__noop();
 	}
-//		@Test   public void Dump() {
+//		@Test  public void Dump() {
 //			Xowe_wiki en_d = fxt.Init_wiki_alias("wikt", "en.wiktionary.org");
 //			gplx.xowa.wikis.nss.Xow_ns_mgr ns_mgr = en_d.Ns_mgr();
 //			ns_mgr.Ns_main().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__all);

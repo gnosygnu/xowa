@@ -17,7 +17,7 @@ package gplx.xowa.xtns.pfuncs.pages; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.xowa.wikis.ttls.*;
 public class Pfunc_pagelanguage__tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test__parse__tmpl_to_html("{{PAGELANGUAGE}}", "en");
 	}
 }

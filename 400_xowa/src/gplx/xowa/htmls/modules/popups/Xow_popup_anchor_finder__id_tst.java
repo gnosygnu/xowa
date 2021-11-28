@@ -19,7 +19,7 @@ import gplx.xowa.apps.apis.xowa.html.modules.*;
 import gplx.xowa.guis.views.*;
 public class Xow_popup_anchor_finder__id_tst {
 	@Before public void init() {fxt.Clear();} private Xop_popup_hdr_finder_fxt fxt = new Xop_popup_hdr_finder_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "b"
 		, "<span id=\"a\"/>"
@@ -29,7 +29,7 @@ public class Xow_popup_anchor_finder__id_tst {
 		fxt.Test_find_not(src_str, "b");
 		fxt.Test_find_not(src_str, "c");
 	}
-	@Test   public void Ws() {
+	@Test  public void Ws() {
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "b"
 		, "<span id = \"a\"/>"
@@ -37,7 +37,7 @@ public class Xow_popup_anchor_finder__id_tst {
 		);
 		fxt.Test_find(src_str, "a",  1);
 	}
-	@Test   public void Fail() {
+	@Test  public void Fail() {
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "b"
 		, "<span xid = \"a\"/>"

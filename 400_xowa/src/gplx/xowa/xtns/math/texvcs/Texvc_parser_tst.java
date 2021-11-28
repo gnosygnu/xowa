@@ -18,17 +18,17 @@ import org.junit.*; import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.x
 public class Texvc_parser_tst {
 	private final    Texvc_parser_fxt fxt = new Texvc_parser_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Text() {
+	@Test public void Text() {
 		fxt.Test_parse("abc"
 		,	fxt.Mkr().text(0, 3)
 		);
 	}
-	@Test  public void Ws() {
+	@Test public void Ws() {
 		fxt.Test_parse("   "
 		,	fxt.Mkr().ws(0, 3)
 		);
 	}
-	@Test  public void Mix() {
+	@Test public void Mix() {
 		fxt.Test_parse("a b c"
 		,	fxt.Mkr().text(0, 1)
 		,	fxt.Mkr().ws	(1, 2)
@@ -37,14 +37,14 @@ public class Texvc_parser_tst {
 		,	fxt.Mkr().text(4, 5)
 		);
 	}
-	@Test  public void Curly() {
+	@Test public void Curly() {
 		fxt.Test_parse("{a}"
 		,	fxt.Mkr().curly(0, 3
 		,		fxt.Mkr().text(1, 2)
 		)
 		);
 	}
-	@Test  public void Curly_2() {
+	@Test public void Curly_2() {
 		fxt.Test_parse("{a{b}c}"
 		,	fxt.Mkr().curly(0, 7
 			,	fxt.Mkr().text	(1, 2)
@@ -55,14 +55,14 @@ public class Texvc_parser_tst {
 		)
 		);
 	}
-	@Test  public void Func() {
+	@Test public void Func() {
 		fxt.Test_parse("\\abc \\def"
 		,	fxt.Mkr().func(0, 4, Texvc_func_itm_.Id__xowa_unknown)
 		,	fxt.Mkr().ws  (4, 5)
 		,	fxt.Mkr().func(5, 9, Texvc_func_itm_.Id__xowa_unknown)
 		);
 	}
-	@Test  public void Mathrm() {
+	@Test public void Mathrm() {
 		fxt.Test_parse("\\mathrm\\frac{a}{b}"
 		,	fxt.Mkr().func	( 0,  7, Texvc_func_itm_.Id__mathrm)
 		,	fxt.Mkr().func	( 7, 12, Texvc_func_itm_.Id__frac)

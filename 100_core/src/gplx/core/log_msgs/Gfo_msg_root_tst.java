@@ -18,16 +18,16 @@ import org.junit.*;
 public class Gfo_msg_root_tst {
 	Gfo_msg_root_fxt fxt = new Gfo_msg_root_fxt();
 	@Before public void setup() {fxt.Reset();}
-	@Test  public void Str() {
+	@Test public void Str() {
 		fxt.Clear().Expd_data_str_("failed a0 b0").Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a0", "b0");
 		fxt.Clear().Expd_data_str_("failed a1 b1").Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a1", "b1");
 	}
-//		@Test  public void Item() {	// DISABLED: no longer registering items with owner;
+//		@Test public void Item() {	// DISABLED: no longer registering items with owner;
 //			fxt.Clear().Expd_item_uid_(0).Expd_item_fmtr_arg_exists_(Bool_.Y).Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a0", "b0");
 //			fxt.Clear().Expd_item_uid_(1).Expd_item_fmtr_arg_exists_(Bool_.N).Tst_data_new_many("proj.cls.proc", "err_1", "failed");
 //			fxt.Clear().Expd_item_uid_(0).Tst_data_new_many("proj.cls.proc", "err_0", "failed ~{0} ~{1}", "a0", "b0");	// make sure item_uid stays the same
 //		}
-	@Test  public void Cache() {
+	@Test public void Cache() {
 		fxt.Mgr().Data_ary_len_(2);
 		fxt.Clear().Expd_data_uid_(0).Tst_data_new_many("x", "err_0", "a");
 		fxt.Clear().Expd_data_uid_(1).Tst_data_new_many("x", "err_0", "b");

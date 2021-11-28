@@ -22,8 +22,8 @@ public class Gfui_html extends GfuiElemBase {
 	public byte					Html_doc_html_load_tid()							{return under.Html_doc_html_load_tid();}
 	public void					Html_doc_html_load_tid_(byte v)						{under.Html_doc_html_load_tid_(v);}
 	public void					Html_js_enabled_(boolean v) {under.Html_js_enabled_(v);}
-	@gplx.Virtual public String		Html_js_eval_proc_as_str(String name, Object... args) {return under.Html_js_eval_proc_as_str(name, args);}
-	@gplx.Virtual public boolean			Html_js_eval_proc_as_bool(String name, Object... args) {return under.Html_js_eval_proc_as_bool(name, args);}
+	public String		Html_js_eval_proc_as_str(String name, Object... args) {return under.Html_js_eval_proc_as_str(name, args);}
+	public boolean			Html_js_eval_proc_as_bool(String name, Object... args) {return under.Html_js_eval_proc_as_bool(name, args);}
 	public String				Html_js_eval_script(String script) {return under.Html_js_eval_script(script);}
 	public Object				Html_js_eval_script_as_obj(String script) {return under.Html_js_eval_script_as_obj(script);}
 	public String				Html_js_send_json(String name, String data) {return under.Html_js_send_json(name, data);}

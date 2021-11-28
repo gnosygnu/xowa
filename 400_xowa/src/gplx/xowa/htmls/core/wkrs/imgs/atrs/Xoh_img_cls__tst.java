@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; 
 import org.junit.*;
 public class Xoh_img_cls__tst {
 	private Xoh_img_cls__fxt fxt = new Xoh_img_cls__fxt();
-	@Test  public void To_html() {
+	@Test public void To_html() {
 		fxt.Test__to_html(Xoh_img_cls_.Tid__none		, null	, "");
 		fxt.Test__to_html(Xoh_img_cls_.Tid__none		, "a"	, " class=\"a\"");
 		fxt.Test__to_html(Xoh_img_cls_.Tid__thumbimage	, null	, " class=\"thumbimage\"");

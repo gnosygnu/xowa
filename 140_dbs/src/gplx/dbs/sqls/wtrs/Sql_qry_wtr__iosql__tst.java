@@ -18,28 +18,28 @@ import org.junit.*; import gplx.core.strings.*;
 import gplx.core.criterias.*; /*Criteria_base*/
 import gplx.core.ios.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.wtrs.*;
 public class Sql_qry_wtr__iosql__tst {
-	@Test  public void Type() {
+	@Test public void Type() {
 		fld = IoItm_base_.Prop_Type;
 		tst_Write("type = 1", ioCrt_(fld, Criteria_.eq_(IoItmDir.Type_Dir)));
 		tst_Write("type = 2", ioCrt_(fld, Criteria_.eq_(IoItmFil.Type_Fil)));
 	}
-	@Test  public void Ext() {
+	@Test public void Ext() {
 		fld = IoItm_base_.Prop_Ext;
 		tst_Write("ext = '.txt'", ioCrt_(fld, Criteria_.eq_(".txt")));
 		tst_Write("ext IN ('.txt', '.xml', '.html')", ioCrt_(fld, Criteria_.in_(".txt", ".xml", ".html")));
 		tst_Write("ext NOT IN ('.dll', '.exe')", ioCrt_(fld, Criteria_.inn_(".dll", ".exe")));
 	}
-	@Test  public void Title() {
+	@Test public void Title() {
 		fld = IoItm_base_.Prop_Title;
 		tst_Write("title = 'bin'", ioCrt_(fld, Criteria_.eq_("bin")));
 		tst_Write("title NOT IN ('bin', 'obj')", ioCrt_(fld, Criteria_.inn_("bin", "obj")));
 	}
-	@Test  public void Url() {
+	@Test public void Url() {
 		fld = IoItm_base_.Prop_Path;
 		tst_Write("url = 'C:\\fil.txt'", ioCrt_(fld, Criteria_.eq_("C:\\fil.txt")));
 		tst_Write("url IOMATCH '*.txt'", ioCrt_(fld, Criteria_ioMatch.parse(true, "*.txt", false)));
 	}
-	@Test  public void Binary() {
+	@Test public void Binary() {
 		// parentheses around lhs and rhs
 		tst_Write(
 			"(type = 1 OR type = 2)"

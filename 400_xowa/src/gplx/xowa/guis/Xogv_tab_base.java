@@ -53,6 +53,6 @@ public abstract class Xogv_tab_base {
 		thread_pool.Run();
 		return new_hpg;
 	}
-	@gplx.Virtual protected void Fetch_page__bgn(byte[] wiki_domain, byte[] page_bry, byte[] qarg_bry) {}
+	protected void Fetch_page__bgn(byte[] wiki_domain, byte[] page_bry, byte[] qarg_bry) {}
 	public abstract void Show_page(Xog_history_itm old_itm, Xog_history_itm new_itm, Xoh_page new_hpg);
 }

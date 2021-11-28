@@ -28,14 +28,14 @@ public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
 	public int Async_sleep_interval()	{return Gfo_thread_cmd_.Async_sleep_interval_1_second;}
 	public boolean Async_prog_enabled()	{return false;}
-	@gplx.Virtual public byte Async_init() {
+	public byte Async_init() {
 		if (!Io_mgr.Instance.ExistsFil(fil)) {kit.Ask_ok(GRP_KEY, "file_missing", "File does not exist: '~{0}'", fil.Raw()); return Gfo_thread_cmd_.Init_cancel_step;}
 		return Gfo_thread_cmd_.Init_ok;
 	}
 	public boolean Async_term() {return true;}
 	public void Async_prog_run(int async_sleep_sum) {}
 	public boolean Async_running() {return false;} 
-	@gplx.Virtual public void Async_run() {Exec_find_replace();}	// NOTE: do not run async; if multiple commands for same file then they will not always work
+	public void Async_run() {Exec_find_replace();}	// NOTE: do not run async; if multiple commands for same file then they will not always work
 	public void Exec_find_replace() {
 		String raw = Io_mgr.Instance.LoadFilStr(fil);
 		int pairs_len = pairs.Count();
@@ -47,7 +47,7 @@ public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 		usr_dlg.Prog_many(GRP_KEY, "done", "replace completed: ~{0} ~{1}", fil.Raw(), pairs_len);
 	}
 	public List_adp pairs = List_adp_.New();
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_async_bgn))				Exec_find_replace();
 		else if	(ctx.Match(k, Invk_owner))					return owner;
 		else if	(ctx.Match(k, Invk_fil_))					fil = Bry_fmtr_eval_mgr_.Eval_url(url_eval_mgr, m.ReadBry("v"));

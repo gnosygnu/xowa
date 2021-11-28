@@ -22,7 +22,7 @@ public class Btrie_bwd_mgr_tst {
 		run_Add("c"		,	1);
 		run_Add("abc"	,	123);
 	}
-	@Test  public void Get_by() {
+	@Test public void Get_by() {
 		ini_setup1();
 		tst_MatchAtCur("c"		, 1);
 		tst_MatchAtCur("abc"	, 123);
@@ -30,17 +30,17 @@ public class Btrie_bwd_mgr_tst {
 		tst_MatchAtCur("yzabc"	, 123);
 		tst_MatchAtCur("ab"		, null);
 	}
-	@Test  public void Fetch_intl() {
+	@Test public void Fetch_intl() {
 		trie = new Btrie_bwd_mgr(false);
 		run_Add("a�",	1);
 		tst_MatchAtCur("a�"		, 1);
 		tst_MatchAtCur("�"		, null);
 	}
-	@Test  public void Eos() {
+	@Test public void Eos() {
 		ini_setup1();
 		tst_Match("ab", Byte_ascii.Ltr_c, 2, 123);
 	}
-	@Test  public void Match_exact() {
+	@Test public void Match_exact() {
 		ini_setup1();
 		tst_MatchAtCurExact("c", 1);
 		tst_MatchAtCurExact("bc", null);
@@ -51,7 +51,7 @@ public class Btrie_bwd_mgr_tst {
 		run_Add("a"	,	1);
 		run_Add("b"	,	2);
 	}
-	@Test  public void Match_2() {
+	@Test public void Match_2() {
 		ini_setup2();
 		tst_MatchAtCur("a", 1);
 		tst_MatchAtCur("b", 2);
@@ -61,7 +61,7 @@ public class Btrie_bwd_mgr_tst {
 		run_Add("a"	,	1);
 		run_Add("b"	,	2);
 	}
-	@Test  public void CaseAny() {
+	@Test public void CaseAny() {
 		ini_setup_caseAny();
 		tst_MatchAtCur("a", 1);
 		tst_MatchAtCur("A", 1);

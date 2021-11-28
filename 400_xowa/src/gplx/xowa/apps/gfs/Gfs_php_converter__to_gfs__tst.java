@@ -17,7 +17,7 @@ package gplx.xowa.apps.gfs; import gplx.*; import gplx.xowa.*; import gplx.xowa.
 import org.junit.*;
 public class Gfs_php_converter__to_gfs__tst {
 	@Before public void init() {fxt.Clear();} private final    Gfs_php_converter_fxt fxt = new Gfs_php_converter_fxt();
-	@Test  public void Escape_sequences() {
+	@Test public void Escape_sequences() {
 		fxt.Test__to_gfs("a\\\"b"					, "a\"b");
 		fxt.Test__to_gfs("a\\'b"					, "a'b");
 		fxt.Test__to_gfs("a\\$b"					, "a$b");
@@ -29,10 +29,10 @@ public class Gfs_php_converter__to_gfs__tst {
 		fxt.Test__to_gfs("a\\\\b\\'c\\\"d\\$e"		, "a\\b'c\"d$e");			// backslash.escape
 		fxt.Test__to_gfs("\\"						, "\\");					// backslash.eos; eos, but nothing to escape; render self but dont fail
 	}
-	@Test  public void Tilde() {
+	@Test public void Tilde() {
 		fxt.Test__to_gfs("a~b"						, "a~~b");					// tilde.escape
 	}
-	@Test  public void Arguments() {
+	@Test public void Arguments() {
 		fxt.Test__to_gfs("a$1b"						, "a~{0}b");				// dollar
 		fxt.Test__to_gfs("a $ b"					, "a $ b");					// noop
 	}

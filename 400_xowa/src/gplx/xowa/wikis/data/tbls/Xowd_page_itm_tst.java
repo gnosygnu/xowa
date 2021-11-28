@@ -17,7 +17,7 @@ package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
 public class Xowd_page_itm_tst {
 	@Before public void init() {fxt.Init();} private Xowd_page_itm_fxt fxt = new Xowd_page_itm_fxt();
-	@Test  public void Ttl_() {
+	@Test public void Ttl_() {
 		fxt.Test_ttl_("User_talk:A", Xow_ns_.Tid__user_talk, "A");
 		fxt.Test_ttl_("User talk:A", Xow_ns_.Tid__user_talk, "A");
 	}

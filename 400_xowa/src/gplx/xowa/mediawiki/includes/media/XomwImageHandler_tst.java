@@ -23,7 +23,7 @@ public class XomwImageHandler_tst {
 	@Before public void init() {
 		fxt.Init__file("A.png", 400, 200);
 	}
-	@Test   public void normaliseParams() {
+	@Test  public void normaliseParams() {
 		// widthOnly; "Because thumbs are only referred to by width, the height always needs"
 		fxt.Test__normaliseParams(fxt.Make__handlerParams(200), fxt.Make__handlerParams(200, 100, 200, 100));
 	}

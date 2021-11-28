@@ -18,18 +18,18 @@ import org.junit.*; import gplx.xowa.htmls.core.htmls.*; import gplx.core.intls.
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts.*;
 public class Xoctg_catpage_mgr__basic__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_catpage_mgr_fxt fxt = new Xoctg_catpage_mgr_fxt();
-	@Test   public void Page_itm() {
+	@Test  public void Page_itm() {
 		fxt	.Init_itms__pages("A1")
 			.Test__html__page(Xoa_ctg_mgr.Tid__page, Byte_ascii.Ltr_A, "\n            <li><a href=\"/wiki/A1\" title=\"A1\">A1</a></li>");
 	}
-	@Test   public void Page_itm_missing() {
+	@Test  public void Page_itm_missing() {
 		fxt.Init_itms__pages("A1");
 		Xoctg_catpage_itm itm = fxt.Ctg().Grp_by_tid(Xoa_ctg_mgr.Tid__page).Itms__get_at(0);
 		itm.Page_ttl_(Xoa_ttl.Null);
 		itm.Sortkey_handle_make(Bry_bfr_.New(), fxt.Wiki(), Bry_.Empty);
 		fxt.Test__html__page(Xoa_ctg_mgr.Tid__page, Byte_ascii.Ltr_A, "\n            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #0 might be talk/user page\">missing page (0)</li>");
 	}
-	@Test   public void Visited_doesnt_work_for_space() {// PURPOSE: xowa-visited not inserted for pages with space
+	@Test  public void Visited_doesnt_work_for_space() {// PURPOSE: xowa-visited not inserted for pages with space
 		byte[] page_bry = Bry_.new_a7("A 1");
 		Xoa_url url = Xoa_url.New(Bry_.new_a7("en.wikipedia.org"), page_bry);
 		Xoa_ttl ttl = Xoa_ttl.Parse(fxt.Wiki(), page_bry);
@@ -55,7 +55,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test   public void Page_all() {
+	@Test  public void Page_all() {
 		fxt	.Init_itms__pages("A1")
 			.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
 			( ""
@@ -77,7 +77,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test   public void File_all() {
+	@Test  public void File_all() {
 		fxt	.Init_itms__files("File:A1.png")
 			.Test__html__all(Xoa_ctg_mgr.Tid__file, String_.Concat_lines_nl_skip_last
 			( ""
@@ -99,7 +99,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test   public void Subc_all() {
+	@Test  public void Subc_all() {
 		fxt	.Init_itms__subcs("Category:Subc_1")
 			.Test__html__all(Xoa_ctg_mgr.Tid__subc, String_.Concat_lines_nl_skip_last
 			( ""
@@ -135,7 +135,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test   public void Page_all_cols() {
+	@Test  public void Page_all_cols() {
 		fxt.Init_itms__pages("A1", "A2", "A3", "B1", "C1");
 		fxt.Init__grp_max_(6); // SEE:FOOTNOTE:LT_NOT_LTE DATE:2019-12-14
 		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
@@ -175,7 +175,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Page__numeric() {	// PURPOSE: check numeric sorting; 0, 2, 3, 10; not 0, 10, 2, 3; DATE:2016-10-09
+	@Test  public void Page__numeric() {	// PURPOSE: check numeric sorting; 0, 2, 3, 10; not 0, 10, 2, 3; DATE:2016-10-09
 		fxt.Init_itms__pages("0", "2", "3", "10");
 		fxt.Init__grp_max_(5); // SEE:FOOTNOTE:LT_NOT_LTE DATE:2019-12-14
 		fxt.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
@@ -211,7 +211,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Title__escape_quotes() {// PURPOSE: quotes in title should be escaped; DATE:2015-12-28
+	@Test  public void Title__escape_quotes() {// PURPOSE: quotes in title should be escaped; DATE:2015-12-28
 		fxt	.Init_itms__pages("A\"1")
 			.Test__html__all(Xoa_ctg_mgr.Tid__page, String_.Concat_lines_nl_skip_last
 			( ""
@@ -233,7 +233,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test   public void Mixed_case_titles() {// PURPOSE: titles in mixed-case should sort under same upper-case letter; ISSUE#:637 DATE:2019-12-14
+	@Test  public void Mixed_case_titles() {// PURPOSE: titles in mixed-case should sort under same upper-case letter; ISSUE#:637 DATE:2019-12-14
 		// init main ns to be case-sensitive, so that "A1" and "a2" get sorted into different groups (fr.wikisource)
 		fxt.Wiki().Ns_mgr().Ns_main().Case_match_(gplx.xowa.wikis.nss.Xow_ns_case_.Tid__all);
 
@@ -266,7 +266,7 @@ public class Xoctg_catpage_mgr__basic__tst {
 			, "</div>"
 			));
 	}
-	@Test   public void Calc_col_len() {
+	@Test  public void Calc_col_len() {
 		fxt.Test__calc_col_len(10, 0, 4);	// for 10 items, col 0 has 4 items
 		fxt.Test__calc_col_len(10, 1, 3);	// for 10 items, col 1 has 3 items
 		fxt.Test__calc_col_len(10, 2, 3);	// for 10 items, col 2 has 3 items

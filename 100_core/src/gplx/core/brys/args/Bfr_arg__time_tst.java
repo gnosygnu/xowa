@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.brys.args; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
 import org.junit.*;
 public class Bfr_arg__time_tst {
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		Time_fmtr_arg_fxt fxt = new Time_fmtr_arg_fxt().Clear();
 		fxt.XferAry(      1,             "01s");	// seconds
 		fxt.XferAry(     62,         "01m 02s");	// minutes

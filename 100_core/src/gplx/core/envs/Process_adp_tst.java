@@ -17,7 +17,7 @@ package gplx.core.envs; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Process_adp_tst {
 	private Process_adp_fxt fxt = new Process_adp_fxt();
-	@Test  public void Escape_ampersands_if_process_is_cmd() {
+	@Test public void Escape_ampersands_if_process_is_cmd() {
 		fxt.Test_Escape_ampersands_if_process_is_cmd(Bool_.Y, "cmd"	, "/c \"http://a.org?b=c&d=e\"", "/c \"http://a.org?b=c^&d=e\"");
 		fxt.Test_Escape_ampersands_if_process_is_cmd(Bool_.Y, "cmd1", "/c \"http://a.org?b=c&d=e\"", "/c \"http://a.org?b=c&d=e\"");
 		fxt.Test_Escape_ampersands_if_process_is_cmd(Bool_.N, "cmd"	, "/c \"http://a.org?b=c&d=e\"", "/c \"http://a.org?b=c&d=e\"");

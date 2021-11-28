@@ -17,7 +17,7 @@ package gplx.dbs.sys; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 public class Db_sys_mgr_tst {
 	private final Db_sys_mgr_fxt fxt = new Db_sys_mgr_fxt();
-	@Test  public void FetchNextId() {
+	@Test public void FetchNextId() {
 		fxt.Test__autonum_next("tbl_1.fld", 1);	// default to "1" on first creation
 		fxt.Test__autonum_next("tbl_1.fld", 2);	// read "2" from db
 	}

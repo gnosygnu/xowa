@@ -13,10 +13,40 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.draws.*; import gplx.gfui.ipts.*; import gplx.gfui.layouts.*; import gplx.gfui.envs.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*; import gplx.gfui.controls.customs.*;
-import gplx.core.envs.*;
-import gplx.gfml.*; import gplx.langs.gfs.*;
+package gplx.gfui.controls.windows; import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.GfoMsg_;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_invk_cmd;
+import gplx.GfsCtx;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.UsrDlg_;
+import gplx.UsrMsg;
+import gplx.UsrMsgWkr;
+import gplx.UsrMsgWkr_;
+import gplx.core.envs.System_;
+import gplx.gfml.GfmlDataNde;
+import gplx.gfui.PointAdp;
+import gplx.gfui.PointAdp_;
+import gplx.gfui.controls.customs.GfuiIoDialogUtl;
+import gplx.gfui.controls.customs.GfuiStatusBarBnd;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.controls.standards.GfuiTextBox;
+import gplx.gfui.controls.standards.GfuiTextBox_;
+import gplx.gfui.draws.FontAdp;
+import gplx.gfui.draws.FontStyleAdp_;
+import gplx.gfui.envs.ScreenAdp_;
+import gplx.gfui.envs.TimerAdp;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptCfg_;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.layouts.GftBand;
+import gplx.langs.gfs.GfsCore;
 public class GfoConsoleWin implements Gfo_invk, UsrMsgWkr {
 	GfuiWin win; GfoConsoleWinCmds cmds; GfuiTextBox statusBox, resultBox; GfuiTextBoxLogger logger;
 	public boolean Enabled() {return enabled;} public GfoConsoleWin Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
@@ -40,11 +70,11 @@ public class GfoConsoleWin implements Gfo_invk, UsrMsgWkr {
 		cmds = new GfoConsoleWinCmds(this);
 		cmds.Owner_set(win); cmds.Init();
 		IptBnd_.cmd_to_(IptCfg_.Null, win, cmds, GfoConsoleWinCmds.Invk_Hide, IptKey_.Escape);
-		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Exec, IptKey_.add_(IptKey_.Ctrl, IptKey_.E));
-		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Save, IptKey_.add_(IptKey_.Ctrl, IptKey_.S));
-		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Load, IptKey_.add_(IptKey_.Ctrl, IptKey_.L));			
-		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Help, IptKey_.add_(IptKey_.Ctrl, IptKey_.D));			
-		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Clear, IptKey_.add_(IptKey_.Ctrl, IptKey_.Alt, IptKey_.C));			
+		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Exec, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.E));
+		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Save, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.S));
+		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Load, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.L));
+		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Help, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.D));
+		IptBnd_.cmd_to_(IptCfg_.Null, consoleBox, cmds, GfoConsoleWinCmds.Invk_Clear, IptKey_.add_(IptKey_.MOD_1ST, IptKey_.MOD_2ND, IptKey_.C));
 		logger = new GfuiTextBoxLogger(this).Init(statusBox);
 //			gplx.core.ios.GfioApp.InitGfs();
 		UsrDlg_.Instance.Reg(UsrMsgWkr_.Type_Note, this);

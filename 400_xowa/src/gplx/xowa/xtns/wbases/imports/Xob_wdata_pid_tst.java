@@ -28,7 +28,7 @@ public class Xob_wdata_pid_tst {
 		this.conn = Db_conn_bldr.Instance.New(Io_url_.mem_fil_("mem/db/wbase.xowa"));
 	}
 
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Wiki().Ns_mgr().Add_new(Wdata_wiki_mgr.Ns_property, "Property");
 		Xob_wdata_pid wkr = new Xob_wdata_pid(conn);
 		wkr.Ctor(fxt.Bldr(), fxt.Wiki());

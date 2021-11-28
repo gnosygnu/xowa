@@ -17,16 +17,16 @@ package gplx.xowa.guis.history; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*;
 public class Xog_history_stack_tst {		
 	@Before public void init() {fxt.Clear();} private Xog_history_stack_fxt fxt = new Xog_history_stack_fxt();
-	@Test  public void Init()				{fxt.Test_cur(null);}
-	@Test  public void Add_1()				{fxt.Exec_add_many("A").Test_cur("A").Test_len(1).Test_pos(0);}
-	@Test  public void Add_same()			{fxt.Exec_add_many("A", "A").Test_cur("A").Test_len(1).Test_pos(0);}
-	@Test  public void Add_3()				{fxt.Exec_add_many("A", "B", "C").Test_cur("C").Test_len(3).Test_pos(2);}
-	@Test  public void Add_3_bwd()			{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Test_cur("B").Test_pos(1);}
-	@Test  public void Add_3_bwd_fwd()		{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Exec_go_fwd().Test_cur("C").Test_pos(2);}
-	@Test  public void Add_3_bwd_add()		{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Exec_add_many("D").Test_len(3).Test_cur("D").Test_pos(2);}
-	@Test  public void Add_3_bwd_bwd_add()	{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Exec_go_bwd().Exec_add_many("D").Test_len(2).Test_cur("D").Test_pos(1);}
-	@Test  public void Add_dif_ns()			{fxt.Exec_add_many("A", "Help:A").Test_cur("Help:A");}	// PURPOSE.fix: page_stack was only differtiating by Page_db, not Full; EX: Unicode -> Category:Unicode
-	@Test  public void Add_qargs() {// PURPOSE.fix: page_stack was only differentiating by qtxt args
+	@Test public void Init()				{fxt.Test_cur(null);}
+	@Test public void Add_1()				{fxt.Exec_add_many("A").Test_cur("A").Test_len(1).Test_pos(0);}
+	@Test public void Add_same()			{fxt.Exec_add_many("A", "A").Test_cur("A").Test_len(1).Test_pos(0);}
+	@Test public void Add_3()				{fxt.Exec_add_many("A", "B", "C").Test_cur("C").Test_len(3).Test_pos(2);}
+	@Test public void Add_3_bwd()			{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Test_cur("B").Test_pos(1);}
+	@Test public void Add_3_bwd_fwd()		{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Exec_go_fwd().Test_cur("C").Test_pos(2);}
+	@Test public void Add_3_bwd_add()		{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Exec_add_many("D").Test_len(3).Test_cur("D").Test_pos(2);}
+	@Test public void Add_3_bwd_bwd_add()	{fxt.Exec_add_many("A", "B", "C").Exec_go_bwd().Exec_go_bwd().Exec_add_many("D").Test_len(2).Test_cur("D").Test_pos(1);}
+	@Test public void Add_dif_ns()			{fxt.Exec_add_many("A", "Help:A").Test_cur("Help:A");}	// PURPOSE.fix: page_stack was only differtiating by Page_db, not Full; EX: Unicode -> Category:Unicode
+	@Test public void Add_qargs() {// PURPOSE.fix: page_stack was only differentiating by qtxt args
 		fxt	.Exec_add_one("Special:AllPages", "?from=A")
 			.Exec_add_one("Special:AllPages", "?from=B")
 			.Exec_add_many("B")

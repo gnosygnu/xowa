@@ -38,7 +38,7 @@ public class Xoh_href_gui_utl_tst {
 		fxt.Test_extract_text("2|/wiki/Page_2"                                     , "en.wikipedia.org/wiki/Page_2");
 		fxt.Test_extract_text("2|#anchor"                                          , "en.wikipedia.org/wiki/Page_0#anchor");
 	}
-	@Test  public void Html_window_vpos_parse() {
+	@Test public void Html_window_vpos_parse() {
 		fxt.Test_Html_window_vpos_parse("0|0,1,2", "0", "'0','1','2'");
 		fxt.Test_Html_window_vpos_parse("org.eclipse.swt.SWTException: Permission denied for <file://> to get property Selection.rangeCount", null, null);	// check that invalid path doesn't fail; DATE:2014-04-05
 	}

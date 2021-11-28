@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*;
 public class Xoh_hzip_int_tst {
 	private final    Xoh_hzip_int_fxt fxt = new Xoh_hzip_int_fxt();
-	@Test   public void B256__reqd__1() {
+	@Test  public void B256__reqd__1() {
 		fxt.Init__b256();
 		fxt.Test__b256(1,          0		,   0);
 		fxt.Test__b256(1,        252		, 252, 252);
@@ -29,7 +29,7 @@ public class Xoh_hzip_int_tst {
 		fxt.Test__b256(1,      65536		, 254,   1,   0,   0);
 		fxt.Test__b256(1,   16777216		, 255,   1,   0,   0,   0);
 	}
-	@Test   public void B256__reqd__2() {
+	@Test  public void B256__reqd__2() {
 		fxt.Init__b256();
 		fxt.Test__b256(2,          0		,   0,   0);
 		fxt.Test__b256(2,        252		,   0, 252);
@@ -43,7 +43,7 @@ public class Xoh_hzip_int_tst {
 		fxt.Test__b256(2,      65536		, 254,   1,   0,   0);
 		fxt.Test__b256(2,   16777216		, 255,   1,   0,   0,   0);
 	}
-	@Test   public void B085__reqd__1() {
+	@Test  public void B085__reqd__1() {
 		fxt.Init__b085();
 		fxt.Test__b085(1,          0,       "!");
 		fxt.Test__b085(1,         84,       "u");
@@ -52,7 +52,7 @@ public class Xoh_hzip_int_tst {
 		fxt.Test__b085(1,     614125,  "}\"!!!");
 		fxt.Test__b085(1,   52200625, "~\"!!!!");
 	}
-	@Test   public void B085__reqd__2() {
+	@Test  public void B085__reqd__2() {
 		fxt.Init__b085();
 		fxt.Test__b085(2,          0,      "!!");
 		fxt.Test__b085(2,         84,      "!u");

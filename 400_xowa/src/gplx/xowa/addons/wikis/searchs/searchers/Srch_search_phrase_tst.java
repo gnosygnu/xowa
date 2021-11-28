@@ -17,22 +17,22 @@ package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xow
 import org.junit.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 public class Srch_search_phrase_tst {
 	private final    Srch_search_phrase_fxt fxt = new Srch_search_phrase_fxt();
-	@Test   public void Word() 						{fxt.Test__auto_wildcard("a"		, "a*");}
-	@Test   public void Paren_end() 				{fxt.Test__auto_wildcard("(a)"		, "(a*)");}
-	@Test   public void Quoted() 					{fxt.Test__auto_wildcard("\"a\""	, "\"a\"");}
-	@Test   public void Space() 					{fxt.Test__auto_wildcard(" "		, " ");}
-	@Test   public void Not() 						{fxt.Test__auto_wildcard("-"		, "-");}
-	@Test   public void And() 						{fxt.Test__auto_wildcard("+"		, "+");}
-	@Test   public void Or() 						{fxt.Test__auto_wildcard(","		, ",");}
-	@Test   public void Paren_bgn() 				{fxt.Test__auto_wildcard("("		, "(");}
-	@Test   public void Star() 						{fxt.Test__auto_wildcard("*"		, "*");}
-	@Test   public void Wildcard__exists__y() 		{fxt.Test__auto_wildcard("a*b"		, "a*b");}
-	@Test   public void Wildcard__exists__escaped() {fxt.Test__auto_wildcard("a\\*b"	, "a\\*b*");}
-	@Test   public void Wildcard__exists__n() 		{fxt.Test__auto_wildcard("a* bc"	, "a* bc*");}
-	@Test   public void Escape() 					{fxt.Test__auto_wildcard("\\*"		, "\\**");}
-	@Test   public void Escape__incomplete() 		{fxt.Test__auto_wildcard("a\\"		, "a\\");}
-	@Test   public void Escape__escaped() 			{fxt.Test__auto_wildcard("a\\\\"	, "a\\\\*");}
-	@Test   public void Auto_wildcard_n() 			{fxt.Init__auto_wildcard_n_().Test__auto_wildcard("a", "a");}
+	@Test  public void Word() 						{fxt.Test__auto_wildcard("a"		, "a*");}
+	@Test  public void Paren_end() 				{fxt.Test__auto_wildcard("(a)"		, "(a*)");}
+	@Test  public void Quoted() 					{fxt.Test__auto_wildcard("\"a\""	, "\"a\"");}
+	@Test  public void Space() 					{fxt.Test__auto_wildcard(" "		, " ");}
+	@Test  public void Not() 						{fxt.Test__auto_wildcard("-"		, "-");}
+	@Test  public void And() 						{fxt.Test__auto_wildcard("+"		, "+");}
+	@Test  public void Or() 						{fxt.Test__auto_wildcard(","		, ",");}
+	@Test  public void Paren_bgn() 				{fxt.Test__auto_wildcard("("		, "(");}
+	@Test  public void Star() 						{fxt.Test__auto_wildcard("*"		, "*");}
+	@Test  public void Wildcard__exists__y() 		{fxt.Test__auto_wildcard("a*b"		, "a*b");}
+	@Test  public void Wildcard__exists__escaped() {fxt.Test__auto_wildcard("a\\*b"	, "a\\*b*");}
+	@Test  public void Wildcard__exists__n() 		{fxt.Test__auto_wildcard("a* bc"	, "a* bc*");}
+	@Test  public void Escape() 					{fxt.Test__auto_wildcard("\\*"		, "\\**");}
+	@Test  public void Escape__incomplete() 		{fxt.Test__auto_wildcard("a\\"		, "a\\");}
+	@Test  public void Escape__escaped() 			{fxt.Test__auto_wildcard("a\\\\"	, "a\\\\*");}
+	@Test  public void Auto_wildcard_n() 			{fxt.Init__auto_wildcard_n_().Test__auto_wildcard("a", "a");}
 }
 class Srch_search_phrase_fxt {
 	private final    Srch_crt_scanner_syms syms = Srch_crt_scanner_syms.Dflt;

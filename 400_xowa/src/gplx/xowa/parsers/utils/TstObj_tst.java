@@ -59,7 +59,7 @@ class Xop_rule_dat {
 	public Xop_rule_dat(String atrKey, String subKey, Object skipVal) {this.atrKey = atrKey; this.subKey = subKey; this.skipVal = skipVal;}
 }
 public class TstObj_tst {
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		tst_(mock_().Val1_(1).Val2_("a"), mock_().Val1_(1).Val2_("a"));
 //			tst_(mock_().Val1_(3).Val2_("a"), mock_().Val1_(1).Val2_("b"));
 	}

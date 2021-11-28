@@ -17,7 +17,7 @@ package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z803_useCase_KbdKeyboard_tst {
 	String raw; GfmlDoc gdoc;
-	@Test  public void Quote() {		// smokeTest; make sure DefaultLxr supports both quoting mechanisms
+	@Test public void Quote() {		// smokeTest; make sure DefaultLxr supports both quoting mechanisms
 		fx.tst_Parse(String_.Concat
 			(	"gfui-keyboard-ui:{"
 			,	"	keyQuote {"
@@ -34,7 +34,7 @@ public class z803_useCase_KbdKeyboard_tst {
 			)
 			);
 	}
-	@Test  public void Key_LtrA() {
+	@Test public void Key_LtrA() {
 		fx.tst_Parse(String_.Concat
 			(	TypeHeader
 			,	"keys:{"
@@ -52,7 +52,7 @@ public class z803_useCase_KbdKeyboard_tst {
 			)
 			);
 	}
-	@Test  public void Load_Smoke() {
+	@Test public void Load_Smoke() {
 		Io_url url = Tfds.RscDir.GenSubFil_nest("110_gfml", "cfgs_archive", "gfui-keyboard-ui.cfg.gfml");
 		raw = Io_mgr.Instance.LoadFilStr(url);
 		gdoc = GfmlDoc_.parse_any_eol_(raw);

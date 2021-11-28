@@ -29,7 +29,7 @@ public class Xoh_toc_make__basic__tst {
 	, "b 1"
 	);
 	@Before public void Init() {fxt.Clear();}
-	@Test   public void Enabled() {
+	@Test  public void Enabled() {
 		String expd = String_.Concat_lines_nl_skip_last
 		( "abc"
 		, "<div id='toc' class='toc'>"
@@ -52,7 +52,7 @@ public class Xoh_toc_make__basic__tst {
 		);
 		fxt.Test__make(orig, fxt.Page_chkr().Body_(expd));
 	}
-	@Test   public void Disabled_if_drd() {
+	@Test  public void Disabled_if_drd() {
 		int curTid = Op_sys.Cur().Tid();
 		gplx.core.envs.Op_sys.Cur_(gplx.core.envs.Op_sys.Tid_drd);
 		String expd = String_.Concat_lines_nl_skip_last

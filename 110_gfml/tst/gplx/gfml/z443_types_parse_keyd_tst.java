@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z443_types_parse_keyd_tst {
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Parse(String_.Concat
 			(	"[10 12];"
 			)

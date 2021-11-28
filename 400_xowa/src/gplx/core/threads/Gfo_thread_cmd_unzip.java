@@ -24,7 +24,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 	}	private Io_url src, trg; private Gfui_kit kit; private Gfo_usr_dlg usr_dlg; private Xob_unzip_wkr unzip_wkr;
 	public Gfo_invk Owner() {return owner;} public Gfo_thread_cmd_unzip Owner_(Gfo_invk v) {owner = v; return this;} Gfo_invk owner;
 	public void Cmd_ctor() {}
-	@gplx.Virtual public String Async_key() {return KEY;}
+	public String Async_key() {return KEY;}
 	public Gfo_thread_cmd Async_next_cmd() {return next_cmd;} public void Async_next_cmd_(Gfo_thread_cmd v) {next_cmd = v;} Gfo_thread_cmd next_cmd;
 	public Bry_fmtr_eval_mgr Url_eval_mgr() {return url_eval_mgr;} public Gfo_thread_cmd_unzip Url_eval_mgr_(Bry_fmtr_eval_mgr v) {url_eval_mgr = v; return this;} Bry_fmtr_eval_mgr url_eval_mgr;
 	public int Async_sleep_interval()	{return Gfo_thread_cmd_.Async_sleep_interval_1_second;}
@@ -34,7 +34,7 @@ public class Gfo_thread_cmd_unzip implements Gfo_thread_cmd {
 		if (trg.Type_fil()) size_str = gplx.core.ios.Io_size_.To_str(Io_mgr.Instance.QueryFil(trg).Size());
 		usr_dlg.Prog_many(GRP_KEY, "unzip", "unzipping: ~{0}", size_str);
 	}
-	@gplx.Virtual public byte Async_init() {
+	public byte Async_init() {
 		if (!Io_mgr.Instance.ExistsFil(src)) {
 			kit.Ask_ok(GRP_KEY, "source_missing", "Source file does not exist: '~{0}'", src.Raw());
 			return Gfo_thread_cmd_.Init_cancel_step;

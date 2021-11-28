@@ -17,7 +17,7 @@ package gplx.xowa.htmls.portal.vnts; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.xowa.langs.vnts.*;
 public class Vnt_mnu_grp_fmtr_tst {		
 	@Before public void init() {fxt.Clear();} private final    Vnt_mnu_grp_fmtr_fxt fxt = new Vnt_mnu_grp_fmtr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 //			fxt.Test_to_str("Earth", "zh-hk", String_.Concat_lines_nl_skip_last
 //			( ""
 //			, "    <div id='p-variants' role='navigation' class='vectorMenu' aria-labelledby='p-variants-label'>"

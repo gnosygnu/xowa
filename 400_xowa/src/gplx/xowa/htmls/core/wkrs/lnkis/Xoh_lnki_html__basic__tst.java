@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*;
 public class Xoh_lnki_html__basic__tst {
 	@After public void term() {fxt.Init_para_n_(); fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Ns__title() {	// PURPOSE: title should have full ns; "title='Help talk:A'" not "title='A'" DATE:2015-11-16
+	@Test public void Ns__title() {	// PURPOSE: title should have full ns; "title='Help talk:A'" not "title='A'" DATE:2015-11-16
 		fxt.Wtr_cfg().Lnki__title_(Bool_.Y);
 		fxt.Test__parse__wtxt_to_html("[[Help talk:A b]]"					, "<a href='/wiki/Help_talk:A_b' title='Help talk:A b'>Help talk:A b</a>");
 		fxt.Wtr_cfg().Lnki__title_(Bool_.N);

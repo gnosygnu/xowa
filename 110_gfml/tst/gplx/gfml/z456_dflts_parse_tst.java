@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfml; import gplx.*;
 import org.junit.*;
 public class z456_dflts_parse_tst {
-	@Test  public void Fix_DefaultChangesPinnedType() {
+	@Test public void Fix_DefaultChangesPinnedType() {
 		fx.tst_Parse(String_.Concat
 			(	"_type:{"
 			,		"item {"

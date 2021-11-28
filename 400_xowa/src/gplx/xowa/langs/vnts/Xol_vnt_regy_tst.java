@@ -17,12 +17,12 @@ package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*;
 public class Xol_vnt_regy_tst {
 	private final Xol_vnt_regy_fxt fxt = new Xol_vnt_regy_fxt();
-	@Test  public void Calc() {
+	@Test public void Calc() {
 		fxt.Test_calc(String_.Ary("zh")				, 1);
 		fxt.Test_calc(String_.Ary("zh", "zh-hans")	, 3);
 		fxt.Test_calc(String_.Ary("zh", "bad")		, 1);
 	}
-	@Test  public void Match() {
+	@Test public void Match() {
 		String[] lang_chain = fxt.Make_lang_chain_cn();	// zh;zh-hans;zh-hant;zh-cn
 		fxt.Test_match_any(Bool_.Y, lang_chain
 		, String_.Ary("zh")
@@ -39,7 +39,7 @@ public class Xol_vnt_regy_tst {
 		, String_.Ary("zh-hk", "zh-sg")
 		);
 	}
-	@Test   public void Match_2() {
+	@Test  public void Match_2() {
 		fxt.Test_match_any(Bool_.Y, String_.Ary("zh-hans")
 		, String_.Ary("zh", "zh-hant", "zh-hans")
 		);

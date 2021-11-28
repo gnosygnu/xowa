@@ -18,11 +18,11 @@ import org.junit.*;
 public class Pfunc_language_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init()					{fxt.Reset();}
-	@Test  public void English()				{fxt.Test_parse_tmpl_str_test("{{#language:en}}"						, "{{test}}"	, "English");}
-	@Test  public void English_case()			{fxt.Test_parse_tmpl_str_test("{{#language:eN}}"						, "{{test}}"	, "English");}
-	@Test  public void Arabic()					{fxt.Test_parse_tmpl_str_test("{{#language:ar}}"						, "{{test}}"	, "العربية");}
-	@Test  public void Unknown()				{fxt.Test_parse_tmpl_str_test("{{#language:unknown}}"					, "{{test}}"	, "unknown");}
-	@Test  public void Foreign()				{fxt.Test_parse_tmpl_str_test("{{#language:anp}}"						, "{{test}}"	, "अङ्गिका");}
-	@Test  public void Foreign_2()				{fxt.Test_parse_tmpl_str_test("{{#language:no}}"						, "{{test}}"	, "‪Norsk (bokmål)‬");}	// PURPOSE: Names.php have bookend "pipes" (\xE2\x80\xAA)
-	@Test  public void Empty()					{fxt.Test_parse_tmpl_str_test("{{#language:}}"							, "{{test}}"	, "");}
+	@Test public void English()				{fxt.Test_parse_tmpl_str_test("{{#language:en}}"						, "{{test}}"	, "English");}
+	@Test public void English_case()			{fxt.Test_parse_tmpl_str_test("{{#language:eN}}"						, "{{test}}"	, "English");}
+	@Test public void Arabic()					{fxt.Test_parse_tmpl_str_test("{{#language:ar}}"						, "{{test}}"	, "العربية");}
+	@Test public void Unknown()				{fxt.Test_parse_tmpl_str_test("{{#language:unknown}}"					, "{{test}}"	, "unknown");}
+	@Test public void Foreign()				{fxt.Test_parse_tmpl_str_test("{{#language:anp}}"						, "{{test}}"	, "अङ्गिका");}
+	@Test public void Foreign_2()				{fxt.Test_parse_tmpl_str_test("{{#language:no}}"						, "{{test}}"	, "‪Norsk (bokmål)‬");}	// PURPOSE: Names.php have bookend "pipes" (\xE2\x80\xAA)
+	@Test public void Empty()					{fxt.Test_parse_tmpl_str_test("{{#language:}}"							, "{{test}}"	, "");}
 }

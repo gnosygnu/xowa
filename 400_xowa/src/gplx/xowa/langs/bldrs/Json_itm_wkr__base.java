@@ -44,8 +44,8 @@ abstract class Json_itm_wkr__base implements Json_itm_wkr {
 		}
 		this.Exec_end();
 	}
-	@gplx.Virtual public void Exec_bgn() {}
-	@gplx.Virtual public void Exec_end() {}
+	public void Exec_bgn() {}
+	public void Exec_end() {}
 	public abstract void Read_kv_sub(byte[] key, byte[] val);
 	private static final    byte[] Name_metadata = Bry_.new_a7("@metadata");
 }

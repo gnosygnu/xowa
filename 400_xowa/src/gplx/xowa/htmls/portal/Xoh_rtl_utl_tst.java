@@ -17,16 +17,16 @@ package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*;
 public class Xoh_rtl_utl_tst {
 	@Before public void init() {fxt.Init();} private Xoh_rtl_utl_fxt fxt = new Xoh_rtl_utl_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_reverse_li("<ul><li>a</li><li>b</li></ul>", "<ul><li>b</li><li>a</li></ul>");
 	}
-	@Test  public void Zero() {
+	@Test public void Zero() {
 		fxt.Test_reverse_li("a", "a");
 	}
-	@Test  public void One() {
+	@Test public void One() {
 		fxt.Test_reverse_li("<ul><li>a</li></ul>", "<ul><li>a</li></ul>");
 	}
-	@Test  public void Example() {
+	@Test public void Example() {
 		fxt.Test_reverse_li(String_.Concat_lines_nl_skip_last
 		( "<div>"
 		, "  <ul>"

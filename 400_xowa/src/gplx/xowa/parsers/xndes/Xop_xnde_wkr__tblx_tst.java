@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xop_xnde_wkr__tblx_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Table() {
+	@Test public void Table() {
 		fxt.Test_parse_page_wiki("a<table><tr><td>b</td></tr></table>c"
 			, fxt.tkn_txt_ ( 0,  1)
 			, fxt.tkn_tblw_tb_(1, 35).Subs_
@@ -29,7 +29,7 @@ public class Xop_xnde_wkr__tblx_tst {
 			, fxt.tkn_txt_ (35, 36)
 			);
 	}
-	@Test  public void Ws_bgn() {	// PURPOSE: some templates return leading ws; PAGE:en.w:UK
+	@Test public void Ws_bgn() {	// PURPOSE: some templates return leading ws; PAGE:en.w:UK
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 			(	"  <table>"
@@ -49,7 +49,7 @@ public class Xop_xnde_wkr__tblx_tst {
 			));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Td_in_lnki_should_be_ignored() {// PURPOSE: \n| inside lnki should not be interpreted as table cell; EX: uk.w:Дніпро; DATE:2014-03-11
+	@Test public void Td_in_lnki_should_be_ignored() {// PURPOSE: \n| inside lnki should not be interpreted as table cell; EX: uk.w:Дніпро; DATE:2014-03-11
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<table><tr><td>"
@@ -66,7 +66,7 @@ public class Xop_xnde_wkr__tblx_tst {
 		));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Nl() {
+	@Test public void Nl() {
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str
 			(	"<table>\n\n\n\n\n</table>"

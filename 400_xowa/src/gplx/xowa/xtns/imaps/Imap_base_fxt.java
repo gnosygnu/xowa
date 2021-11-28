@@ -19,7 +19,7 @@ import gplx.xowa.parsers.*;
 import gplx.xowa.xtns.imaps.itms.*;
 public class Imap_base_fxt {
 	protected Xoae_app app; protected Xowe_wiki wiki;
-	@gplx.Virtual public void Reset() {
+	public void Reset() {
 		app = Xoa_app_fxt.Make__app__edit();
 		wiki = Xoa_app_fxt.Make__wiki__edit(app);
 		wiki.Parser_mgr().Ctx().Para().Enabled_n_();

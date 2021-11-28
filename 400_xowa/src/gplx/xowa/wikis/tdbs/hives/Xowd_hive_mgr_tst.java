@@ -19,20 +19,20 @@ import gplx.xowa.wikis.nss.*;
 public class Xowd_hive_mgr_tst {
 	Xowd_hive_mgr_fxt fxt = new Xowd_hive_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Create() {
+	@Test public void Create() {
 		fxt.Create("A", "A|A data\n")
 			.Tst_reg(String_.Concat_lines_nl("0|A|A|1"))
 			.Tst_fil(0, String_.Concat("!!!!*|\n", "A|A data\n"))
 			;
 	}
-	@Test  public void Create_2() {
+	@Test public void Create_2() {
 		fxt	.Create("A", "A|1\n")
 			.Create("B", "B|12\n")
 			.Tst_reg(String_.Concat_lines_nl("0|A|B|2"))
 			.Tst_fil(0, String_.Concat("!!!!%|!!!!&|\n", "A|1\n", "B|12\n"))
 			;
 	}
-	@Test  public void Create_3() {
+	@Test public void Create_3() {
 		fxt	.Create("A", "A|1\n")
 			.Create("B", "B|12\n")
 			.Create("C", "C|123\n")
@@ -40,7 +40,7 @@ public class Xowd_hive_mgr_tst {
 			.Tst_fil(0, String_.Concat("!!!!%|!!!!&|!!!!'|\n", "A|1\n", "B|12\n", "C|123\n"))
 			;
 	}
-	@Test  public void Create_sort() {
+	@Test public void Create_sort() {
 		fxt	.Create_and_sort("C", "C|1\n")
 			.Create_and_sort("A", "A|12\n")
 			.Create_and_sort("B", "B|123\n")
@@ -48,7 +48,7 @@ public class Xowd_hive_mgr_tst {
 			.Tst_fil(0, String_.Concat("!!!!&|!!!!'|!!!!%|\n", "A|12\n", "B|123\n", "C|1\n"))
 			;
 	}
-	@Test  public void Update() {
+	@Test public void Update() {
 		fxt	.Create("A", "A|A data\n")
 			.Create("B", "B|B data\n")
 			.Create("C", "C|C data\n")

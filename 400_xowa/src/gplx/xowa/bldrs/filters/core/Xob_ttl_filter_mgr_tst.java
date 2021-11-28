@@ -17,7 +17,7 @@ package gplx.xowa.bldrs.filters.core; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Xob_ttl_filter_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Xob_ttl_filter_mgr_fxt fxt = new Xob_ttl_filter_mgr_fxt();
-	@Test  public void One() {
+	@Test public void One() {
 		fxt.Init_load_exclude("A");
 		fxt.Init_load_include("B");
 		fxt.Test_match_exclude_y("A");

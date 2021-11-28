@@ -18,21 +18,21 @@ import org.junit.*;
 import gplx.xowa.parsers.lists.*;
 public class Xop_apos_wkr_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_page_wiki("''a''"			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn)	, fxt.tkn_txt_(2, 3), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end));
 		fxt.Test_parse_page_wiki("'''a'''"			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn)	, fxt.tkn_txt_(3, 4), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end));
 		fxt.Test_parse_page_wiki("'''''a'''''"		, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_ib_bgn)	, fxt.tkn_txt_(5, 6), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_bi_end));
 	}
-	@Test  public void Advanced() {
+	@Test public void Advanced() {
 		fxt.Test_parse_page_wiki("''''a''''"			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn).Apos_lit_(1)	, fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end).Apos_lit_(1));		// 1 apos + bold
 		fxt.Test_parse_page_wiki("''''''''a''''''''"	, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_ib_bgn).Apos_lit_(3)	, fxt.tkn_txt_(), fxt.tkn_apos_( Xop_apos_tkn_.Cmd_bi_end).Apos_lit_(3));	// 3 apos + dual
 	}
-	@Test  public void Combo() {
+	@Test public void Combo() {
 		fxt.Test_parse_page_wiki("''a'''b'''c''", fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end));	// b{i}
 		fxt.Test_parse_page_wiki("'''a''b''c'''", fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end));	// i{b}
 		fxt.Test_parse_page_wiki("''a''b'''c'''", fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end));	// b_i
 	}
-	@Test  public void Assume_apos() {
+	@Test public void Assume_apos() {
 		fxt.Test_parse_page_wiki("a01'''b01 '''c0 1'''d01''"		// pick c0 1, b/c it is idxNeg2
 			, fxt.tkn_txt_()									, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn)
 			, fxt.tkn_txt_(), fxt.tkn_space_()					, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end)
@@ -52,7 +52,7 @@ public class Xop_apos_wkr_tst {
 			, fxt.tkn_txt_()									, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn).Apos_lit_(2)
 			, fxt.tkn_txt_()									, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end));	// 4 apos -> 2 apos + ital
 	}
-	@Test  public void Dual() {
+	@Test public void Dual() {
 		fxt.Test_parse_page_wiki("'''''a'''b''"		// +ib -b -i; 5apos defaults to ib
 			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_ib_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end));
 		fxt.Test_parse_page_wiki("'''''a''b'''"		// +bi -i -b; change 5apos to bi
@@ -60,7 +60,7 @@ public class Xop_apos_wkr_tst {
 		fxt.Test_parse_page_wiki("''b'''''c'''"		// 5q toggles ital n, bold y
 			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end__b_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end));
 	}
-	@Test  public void Unclosed() {
+	@Test public void Unclosed() {
 		fxt.Test_parse_page_wiki("''a"
 			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end));
 		fxt.Test_parse_page_wiki("'''a"
@@ -68,7 +68,7 @@ public class Xop_apos_wkr_tst {
 		fxt.Test_parse_page_wiki("'''''a"
 			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_ib_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_bi_end));
 	}
-	@Test  public void Outliers() {
+	@Test public void Outliers() {
 		fxt.Test_parse_page_wiki("''a'''b'''c'''"		// '''b -> ' +i b
 			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end).Apos_lit_(1)
 			, fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end));
@@ -79,20 +79,20 @@ public class Xop_apos_wkr_tst {
 			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_bgn)
 			, fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_bi_end__b_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_b_end));
 	}
-	@Test  public void MultiLines() {
+	@Test public void MultiLines() {
 		fxt.Test_parse_page_wiki("a''b\nc''d"
 			, fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_txt_(3, 4), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end), fxt.tkn_nl_char_len1_(4)
 			, fxt.tkn_txt_(5, 6), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end));
 	}
-	@Test  public void Lnki() {
+	@Test public void Lnki() {
 		fxt.Test_parse_page_wiki_str("[[''a''']]", "<a href=\"/wiki/%27%27a%27%27%27\">''a'''</a>");
 	}
-	@Test  public void Dual_exceptions() {
+	@Test public void Dual_exceptions() {
 		fxt.Test_parse_page_wiki("'''''a''b''"
 			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_bi_bgn), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_end), fxt.tkn_txt_(), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn), fxt.tkn_apos_(Xop_apos_tkn_.Cmd_ib_end)
 			);
 	}
-	@Test  public void Mix_list_autoClose() {
+	@Test public void Mix_list_autoClose() {
 		fxt.Test_parse_page_wiki("''a\n*b"
 			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn).Src_rng_(0, 2)
 			, fxt.tkn_txt_(2, 3)
@@ -102,7 +102,7 @@ public class Xop_apos_wkr_tst {
 			, fxt.tkn_list_end_(6)
 			);
 	}
-	@Test  public void Mix_hr_autoClose() {
+	@Test public void Mix_hr_autoClose() {
 		fxt.Test_parse_page_wiki("''a\n----"
 			, fxt.tkn_apos_(Xop_apos_tkn_.Cmd_i_bgn).Src_rng_(0, 2)
 			, fxt.tkn_txt_(2, 3)
@@ -111,27 +111,27 @@ public class Xop_apos_wkr_tst {
 			, fxt.tkn_hr_(3, 8)
 			);
 	}
-	@Test  public void Mix_hdr_autoClose() {
+	@Test public void Mix_hdr_autoClose() {
 		fxt.Test_parse_page_wiki_str("''a\n==b==", "<i>a</i>\n\n<h2>b</h2>");
 	}
-	@Test  public void Apos_broken_by_tblw_th() {	// DATE:2013-04-24
+	@Test public void Apos_broken_by_tblw_th() {	// DATE:2013-04-24
 		fxt.Test_parse_page_all_str("A ''[[b!!]]'' c", "A <i><a href=\"/wiki/B!!\">b!!</a></i> c");
 	}
-	@Test   public void Nowiki() {	// PAGE:en.w:Wiki; DATE:2013-05-13
+	@Test  public void Nowiki() {	// PAGE:en.w:Wiki; DATE:2013-05-13
 		fxt.Test_parse_page_all_str("<nowiki>''a''</nowiki>", "''a''");
 	}
-	@Test  public void Lnki_multi_line() {	// PURPOSE: handle apos within multi-line lnki caption; DATE:2013-11-10
+	@Test public void Lnki_multi_line() {	// PURPOSE: handle apos within multi-line lnki caption; DATE:2013-11-10
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		(	"[[A|b '' c"
 		,	"d '' e ]]"
 		)
 		,	"<a href=\"/wiki/A\">b <i> c d </i> e</a>");	// NOTE: c d should be italicized, not c e (latter occurs when apos is ended on each line)
 	}
-	@Test  public void French() {	// PURPOSE: L'''A'' -> L'<i>A</i>; DATE:2014-01-06
+	@Test public void French() {	// PURPOSE: L'''A'' -> L'<i>A</i>; DATE:2014-01-06
 		fxt.Test_parse_page_all_str("L''''A'''",	"L'<b>A</b>");
 		fxt.Test_parse_page_all_str("L'''A''",	"L'<i>A</i>");
 	}
-//	@Test  public void Mix_lnke() {	// FUTURE: requires rewrite of apos
+//	@Test public void Mix_lnke() {	// FUTURE: requires rewrite of apos
 //		fxt.Test_parse_page_wiki("''a[irc://b c''d''e]f''"
 //			, fxt.tkn_apos_(0, 2, Xop_apos_tkn_.Cmd_i_bgn)
 //			, fxt.tkn_txt_(2, 3)

@@ -17,21 +17,21 @@ package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*;
 public class Xow_url_parser__wiki_tst {
 	private final    Xow_url_parser_fxt tstr = new Xow_url_parser_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		tstr.Exec__parse("en.wikipedia.org/wiki/A").Test__tid(Xoa_url_.Tid_page).Test__wiki("en.wikipedia.org").Test__page("A");
 	}
-	@Test  public void No_wiki() {	// PURPOSE: no "/wiki/"
+	@Test public void No_wiki() {	// PURPOSE: no "/wiki/"
 		tstr.Exec__parse("en.wikipedia.org/A").Test__wiki("en.wikipedia.org").Test__page("A");
 	}
-	@Test  public void Nested() {
+	@Test public void Nested() {
 		tstr.Exec__parse("en.wikipedia.org/wiki/A/b").Test__wiki("en.wikipedia.org").Test__page("A/b");
 	}
-	@Test  public void Slash() {
+	@Test public void Slash() {
 		tstr.Exec__parse("en.wikipedia.org/wiki//A").Test__wiki("en.wikipedia.org").Test__page("/A");
 		tstr.Exec__parse("en.wikipedia.org/wiki/A//b").Test__wiki("en.wikipedia.org").Test__page("A//b");
 		tstr.Exec__parse("en.wikipedia.org/wiki///A").Test__wiki("en.wikipedia.org").Test__page("//A");
 	}
-	@Test  public void Vnt() {
+	@Test public void Vnt() {
 		Xowe_wiki wiki = tstr.Wiki();
 		gplx.xowa.langs.vnts.Xol_vnt_regy_fxt.Init__vnt_mgr(wiki.Lang().Vnt_mgr(), 0, String_.Ary("zh-hans", "zh-hant"));
 		tstr.Exec__parse("en.wikipedia.org/zh-hans/A").Test__wiki("en.wikipedia.org").Test__page("A").Test__vnt("zh-hans");

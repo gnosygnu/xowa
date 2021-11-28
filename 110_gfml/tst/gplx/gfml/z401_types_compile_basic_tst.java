@@ -19,7 +19,7 @@ public class z401_types_compile_basic_tst {
 	@Before public void setup() {
 		fx.run_InitPragma(fx.Regy(), GfmlPragmaType.new_());
 	}	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("point", "gfml.point").Subs_
 			(		fx.nde_().Atru_("x")
@@ -28,7 +28,7 @@ public class z401_types_compile_basic_tst {
 			,	fx.typ_().Name_("point").Key_("gfml.point").Atrs_("x", "y")
 			);
 	}
-	@Test  public void Nest() {
+	@Test public void Nest() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("item", "gfml.item").Subs_
 			(		fx.nde_().Atru_("pos").Atrk_("type", "gfml.item.point")
@@ -38,7 +38,7 @@ public class z401_types_compile_basic_tst {
 			)
 			);
 	}
-	@Test  public void NestMany() {
+	@Test public void NestMany() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("item", "gfml.item").Subs_
 			(		fx.nde_().Atru_("pos").Atrk_("type", "gfml.item.point")
@@ -50,7 +50,7 @@ public class z401_types_compile_basic_tst {
 			)
 			);
 	}
-	@Test  public void Recurse() {
+	@Test public void Recurse() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("widget", "gfml.widget").Subs_
 			(		fx.nde_().Atru_("widget").Atrk_("type", "gfml.widget")

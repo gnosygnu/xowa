@@ -17,7 +17,7 @@ package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
 public class Xop_ctx__tst {
 	@Before public void init() {fxt.Clear();} private Xop_ctx__fxt fxt = new Xop_ctx__fxt();
-	@Test  public void Src_limit_and_escape_nl() {
+	@Test public void Src_limit_and_escape_nl() {
 		fxt.Test_Src_limit_and_escape_nl("abcdefg", 4, 3, "efg");	// PURPOSE: bug fix; outOfBounds thrown; DATE:2014-03-31
 	}
 }

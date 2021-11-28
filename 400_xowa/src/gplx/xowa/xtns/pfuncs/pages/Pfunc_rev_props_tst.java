@@ -18,12 +18,12 @@ import org.junit.*; import gplx.xowa.wikis.ttls.*;
 public class Pfunc_rev_props_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before	public void setup()						{fxt.Reset(); fxt.Page().Db().Protection().User_(Bry_.new_a7("user")).Protection_level_(Bry_.new_a7("normal"));}
-	@Test  public void Revision_id()				{fxt.Page().Db().Page().Id_(1); fxt.Test_parse_tmpl_str_test("{{REVISIONID}}"		, "{{test}}", "1");}
-	@Test  public void Page_id()					{fxt.Page().Db().Page().Id_(1); fxt.Test_parse_tmpl_str_test("{{PAGEID}}"			, "{{test}}", "1");}
-	@Test  public void Revision_user()				{fxt.Test_parse_tmpl_str_test("{{REVISIONUSER}}"									, "{{test}}", "user");}
-	@Test  public void Page_size()					{fxt.Test_parse_tmpl_str_test("{{PAGESIZE:Test page}}"								, "{{test}}", "0");}
-	@Test  public void Revision_size()				{fxt.Test_parse_tmpl_str_test("{{REVISIONSIZE}}"									, "{{test}}", "8");}
-	@Test  public void Protection_level()			{fxt.Test_parse_tmpl_str_test("{{PROTECTIONLEVEL}}"									, "{{test}}", "normal");}
-	@Test  public void Protection_expiry()			{fxt.Test_parse_tmpl_str_test("{{PROTECTIONEXPIRY}}"								, "{{test}}", "infinity");}
-	@Test  public void PageSize_invalid_ttl()		{fxt.Test_parse_tmpl_str_test("{{PAGESIZE:{{{100}}}|R}}"							, "{{test}}", "0");}
+	@Test public void Revision_id()				{fxt.Page().Db().Page().Id_(1); fxt.Test_parse_tmpl_str_test("{{REVISIONID}}"		, "{{test}}", "1");}
+	@Test public void Page_id()					{fxt.Page().Db().Page().Id_(1); fxt.Test_parse_tmpl_str_test("{{PAGEID}}"			, "{{test}}", "1");}
+	@Test public void Revision_user()				{fxt.Test_parse_tmpl_str_test("{{REVISIONUSER}}"									, "{{test}}", "user");}
+	@Test public void Page_size()					{fxt.Test_parse_tmpl_str_test("{{PAGESIZE:Test page}}"								, "{{test}}", "0");}
+	@Test public void Revision_size()				{fxt.Test_parse_tmpl_str_test("{{REVISIONSIZE}}"									, "{{test}}", "8");}
+	@Test public void Protection_level()			{fxt.Test_parse_tmpl_str_test("{{PROTECTIONLEVEL}}"									, "{{test}}", "normal");}
+	@Test public void Protection_expiry()			{fxt.Test_parse_tmpl_str_test("{{PROTECTIONEXPIRY}}"								, "{{test}}", "infinity");}
+	@Test public void PageSize_invalid_ttl()		{fxt.Test_parse_tmpl_str_test("{{PAGESIZE:{{{100}}}|R}}"							, "{{test}}", "0");}
 }

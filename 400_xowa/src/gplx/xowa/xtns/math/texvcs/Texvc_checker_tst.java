@@ -18,7 +18,7 @@ import org.junit.*; import gplx.xowa.xtns.math.texvcs.tkns.*; import gplx.xowa.x
 public class Texvc_checker_tst {
 	private final    Texvc_checker_fxt fxt = new Texvc_checker_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Mathrm_tkns() {
+	@Test public void Mathrm_tkns() {
 		fxt.Test_check("\\mathrm\\frac{a}{b}"
 		,	fxt.Mkr().func(0, 7, Texvc_func_itm_.Id__mathrm
 			,	fxt.Mkr().func(7, 12, Texvc_func_itm_.Id__frac
@@ -32,7 +32,7 @@ public class Texvc_checker_tst {
 			)
 		);
 	}
-	@Test   public void Mathrm() {
+	@Test  public void Mathrm() {
 		fxt.Test_check("\\mathrm\\frac{a}{b}"	, "\\mathrm{\\frac{a}{b}}");
 		fxt.Test_check("\\mathrm{\\frac{a}{b}}"	, "\\mathrm{\\frac{a}{b}}");
 		fxt.Test_check("\\frac a b"	, "\\frac a b");

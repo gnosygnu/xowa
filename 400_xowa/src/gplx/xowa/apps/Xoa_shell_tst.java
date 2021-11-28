@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.xowa.apps.gfs.*;
 public class Xoa_shell_tst {
-	@Test  public void Fetch_page() {	// PURPOSE.fix: fetch_page failed with nullRef; DATE:2013-04-12
+	@Test public void Fetch_page() {	// PURPOSE.fix: fetch_page failed with nullRef; DATE:2013-04-12
 		Xop_fxt parser_fxt = new Xop_fxt();
 		Xoae_app app = parser_fxt.App(); Xowe_wiki wiki = parser_fxt.Wiki();
 		parser_fxt.Init_page_create("A", "test"); // need to create page in order for html output to gen

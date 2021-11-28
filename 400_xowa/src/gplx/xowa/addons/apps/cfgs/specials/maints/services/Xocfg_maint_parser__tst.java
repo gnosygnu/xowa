@@ -17,12 +17,12 @@ package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*; impo
 import org.junit.*; import gplx.core.tests.*;
 public class Xocfg_maint_parser__tst {
 	private final    Xocfg_maint_parser__fxt fxt = new Xocfg_maint_parser__fxt();
-	@Test   public void Parse_grp() {
+	@Test  public void Parse_grp() {
 		fxt.Exec__parse("grp {id='123'; key='key_1'; owner='owner_1'; name='name_1'; help='help_1'}"
 		, fxt.Make__grp("owner_1", 123, "key_1", "name_1", "help_1")
 		);
 	}
-	@Test   public void Parse_itm() {
+	@Test  public void Parse_itm() {
 		fxt.Exec__parse("itm {id='123'; key='key_1'; owner='owner_1'; name='name_1'; help='help_1'; scope='scope_1'; type='type_1'; dflt='dflt_1'; html_atrs='html_atrs_1'; html_cls='html_cls_1'}"
 		, fxt.Make__itm("owner_1", 123, "key_1", "name_1", "help_1", "scope_1", "type_1", "dflt_1", "html_atrs_1", "html_cls_1")
 		);

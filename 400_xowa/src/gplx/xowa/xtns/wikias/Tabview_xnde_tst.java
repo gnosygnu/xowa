@@ -18,7 +18,7 @@ import org.junit.*;
 public class Tabview_xnde_tst {
 	private final    Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init_page_create("A", "''a''");
 		fxt.Init_page_create("B", "''b''");
 		fxt.Test__parse__tmpl_to_html(String_.Concat_lines_nl_skip_last

@@ -17,22 +17,22 @@ package gplx.xowa.xtns.scribunto.procs; import gplx.*; import gplx.xowa.*; impor
 import org.junit.*; import gplx.core.tests.*; 
 public class Scrib_proc_args__tst {
 	private final    Scrib_proc_args__fxt fxt = new Scrib_proc_args__fxt();
-	@Test   public void Pull_kv_ary__basic() {	// PURPOSE.assert:
+	@Test  public void Pull_kv_ary__basic() {	// PURPOSE.assert:
 		fxt.Init(Keyval_.int_(1, Keyval_.Ary(Keyval_.int_(1, "a"), Keyval_.int_(2, "b"), Keyval_.int_(3, "c"))));
 		fxt.Test__pull_kv_ary(0, Keyval_.int_(1, "a"), Keyval_.int_(2, "b"), Keyval_.int_(3, "c"));
 	}
-	@Test   public void Pull_kv_ary__gaps() {	// PURPOSE.fix: gaps cause null-ref; PAGE:en.w:Shalkar_District DATE:2016-09-12
+	@Test  public void Pull_kv_ary__gaps() {	// PURPOSE.fix: gaps cause null-ref; PAGE:en.w:Shalkar_District DATE:2016-09-12
 		fxt.Init(Keyval_.int_(1, Keyval_.Ary(Keyval_.int_(1, "a"), Keyval_.int_(3, "c"), Keyval_.int_(5, "e"))));
 		fxt.Test__pull_kv_ary(0, Keyval_.int_(1, "a"), Keyval_.int_(2, null), Keyval_.int_(3, "c"), Keyval_.int_(4, null), Keyval_.int_(5, "e"));
 	}
-	@Test   public void Pull_kv_ary__gaps__many() {	// PURPOSE.assert:
+	@Test  public void Pull_kv_ary__gaps__many() {	// PURPOSE.assert:
 		fxt.Init(Keyval_.int_(1, Keyval_.Ary(Keyval_.int_(1, "a"), Keyval_.int_(4, "d"), Keyval_.int_(5, "e"), Keyval_.int_(8, "h"))));
 		fxt.Test__pull_kv_ary(0
 		, Keyval_.int_(1, "a"), Keyval_.int_(2, null), Keyval_.int_(3, null), Keyval_.int_(4, "d"), Keyval_.int_(5, "e")
 		, Keyval_.int_(6, null), Keyval_.int_(7, null), Keyval_.int_(8, "h")
 		);
 	}
-	@Test   public void Pull_kv_ary__null() {	// PURPOSE: null arg shouldn't fail; PAGE:en.w:Huadu_District DATE:2017-05-11
+	@Test  public void Pull_kv_ary__null() {	// PURPOSE: null arg shouldn't fail; PAGE:en.w:Huadu_District DATE:2017-05-11
 		fxt.Init(Keyval_.int_(1, Keyval_.Ary(Keyval_.int_(1, "a"), null, Keyval_.int_(2, "b"))));
 		fxt.Test__pull_kv_ary(0, Keyval_.int_(1, "a"), null, Keyval_.int_(2, "b"));
 	}

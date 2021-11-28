@@ -17,11 +17,11 @@ package gplx.xowa.mediawiki.includes.parsers.magiclinks; import gplx.*; import g
 import org.junit.*;
 public class Xomw_magiclinks_wkr__tst {
 	private final    Xomw_magiclinks_wkr__fxt fxt = new Xomw_magiclinks_wkr__fxt();
-	@Test   public void Basic() {fxt.Test__parse("a https://b.org z", "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a> z");}
-	@Test   public void Invalid() {fxt.Test__parse("a _https://b.org z", "a _https://b.org z");}
-	@Test   public void Tag__anch() {fxt.Test__parse("a <a title=\"https://b.org\">b</a> z", "a <a title=\"https://b.org\">b</a> z");}
-	@Test   public void Tag__misc() {fxt.Test__parse("a <div title=\"https://b.org\">b</div> z", "a <div title=\"https://b.org\">b</div> z");}
-	@Test   public void Interrupt() {
+	@Test  public void Basic() {fxt.Test__parse("a https://b.org z", "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a> z");}
+	@Test  public void Invalid() {fxt.Test__parse("a _https://b.org z", "a _https://b.org z");}
+	@Test  public void Tag__anch() {fxt.Test__parse("a <a title=\"https://b.org\">b</a> z", "a <a title=\"https://b.org\">b</a> z");}
+	@Test  public void Tag__misc() {fxt.Test__parse("a <div title=\"https://b.org\">b</div> z", "a <div title=\"https://b.org\">b</div> z");}
+	@Test  public void Interrupt() {
 		// ent
 		fxt.Test__parse("a https://b.org&lt;z"   , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>&lt;z");
 		// hex
@@ -31,11 +31,11 @@ public class Xomw_magiclinks_wkr__tst {
 		// num_post_proto rule
 		fxt.Test__parse("a https://&lt; z"       , "a https://&lt; z");
 	}
-	@Test   public void Interrupt__hex_dec() {// implementation specific test for mixed hex / dec
+	@Test  public void Interrupt__hex_dec() {// implementation specific test for mixed hex / dec
 		// dec-hex
 		fxt.Test__parse("a https://b.org&#3c;z"      , "a <a rel='nofollow' class='external free' href='https://b.org&amp;#3c;z'>https://b.org&amp;#3c;z</a>");
 	}
-	@Test   public void Separator() {
+	@Test  public void Separator() {
 		// basic; ,;.:!?
 		fxt.Test__parse("a https://b.org,;.:!? z"    , "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a>,;.:!? z");
 		// ")" excluded
@@ -59,7 +59,7 @@ public class Xomw_magiclinks_wkr__tst {
 		// num_post_proto rule
 		fxt.Test__parse("a https://.:!? z"           , "a https://.:!? z");
 	}
-	@Test   public void Clean_url() {
+	@Test  public void Clean_url() {
 		// basic
 		fxt.Test__parse("http://a᠆b.org/c᠆d"          , "<a rel='nofollow' class='external free' href='http://ab.org/c᠆d'>http://ab.org/c᠆d</a>");
 	}

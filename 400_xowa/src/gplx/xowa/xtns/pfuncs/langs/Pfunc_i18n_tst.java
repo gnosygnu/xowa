@@ -17,12 +17,12 @@ package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.xowa.langs.*;
 public class Pfunc_i18n_tst {
 	private final    Pfunc_i18n_fxt fxt = new Pfunc_i18n_fxt();
-	@Test  public void Casing()	{
+	@Test public void Casing()	{
 		fxt.Init__func("de", "fullurl", false, "VOLLSTÄNDIGE_URL");
 		fxt.Init__lang("de");
 		fxt.Test__parse("{{vollstÄndige_url:a}}", "{{test}}"	, "//de.wikipedia.org/wiki/A");
 	}
-	@Test  public void Time() {
+	@Test public void Time() {
 		fxt.Init__msg("de", "march", "März");
 		fxt.Init__lang("de");
 		fxt.Test__parse("{{#time: d F Y|1 Mar 2013}}", "{{test}}"	, "01 März 2013");

@@ -17,7 +17,7 @@ package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.core.tests.*;
 public class Http_server_page__tst {
 	private final    Http_server_page__fxt fxt = new Http_server_page__fxt();
-	@Test   public void Xwiki() {
+	@Test  public void Xwiki() {
 		fxt.Init__xwiki("en.wikipedia.org", "it", "it.wikipedia.org");
 		fxt.Test__make_url(false, "en.wikipedia.org", "it:Roma", "");
 		fxt.Test__redirect("it.wikipedia.org/wiki/Roma");

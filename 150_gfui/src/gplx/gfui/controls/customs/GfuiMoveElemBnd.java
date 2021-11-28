@@ -13,9 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.customs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.gfui.ipts.*; import gplx.gfui.controls.elems.*;
-import gplx.core.interfaces.*;
+package gplx.gfui.controls.customs; import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.core.interfaces.InjectAble;
+import gplx.gfui.PointAdp;
+import gplx.gfui.PointAdp_;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.ipts.IptArg;
+import gplx.gfui.ipts.IptBnd;
+import gplx.gfui.ipts.IptBnd_;
+import gplx.gfui.ipts.IptEventData;
+import gplx.gfui.ipts.IptEventType;
+import gplx.gfui.ipts.IptEventType_;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.ipts.IptMouseBtn_;
+import gplx.gfui.ipts.IptMouseMove;
 public class GfuiMoveElemBnd implements IptBnd, Gfo_invk, InjectAble {
 	public String Key() {return "gplx.gfui.moveWidget";}
 	public List_adp Ipts() {return args;} List_adp args = List_adp_.New();
@@ -29,7 +47,7 @@ public class GfuiMoveElemBnd implements IptBnd, Gfo_invk, InjectAble {
 	}
 	public GfuiElem TargetElem() {return targetElem;} public void TargetElem_set(GfuiElem v) {this.targetElem = v;} GfuiElem targetElem;
 	public static final    String target_idk = "target";
-	@gplx.Virtual public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
+	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, target_idk))				return targetElem;
 		else if	(ctx.Match(k, "key"))					return key;
 		else return Gfo_invk_.Rv_unhandled;
@@ -66,10 +84,10 @@ public class GfuiMoveElemBnd implements IptBnd, Gfo_invk, InjectAble {
 	public static GfuiMoveElemBnd new_() {return new GfuiMoveElemBnd();}
 	GfuiMoveElemBnd() {
 		args.Add_many(IptMouseBtn_.Left, IptMouseMove.AnyDirection);
-		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Up), PointAdp_.new_(0, -10));
-		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Down), PointAdp_.new_(0, 10));
-		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Left), PointAdp_.new_(-10, 0));
-		IptBndArgsBldr.AddWithData(args, hash, IptKey_.Ctrl.Add(IptKey_.Right), PointAdp_.new_(10, 0));
+		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Up), PointAdp_.new_(0, -10));
+		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Down), PointAdp_.new_(0, 10));
+		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Left), PointAdp_.new_(-10, 0));
+		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Right), PointAdp_.new_(10, 0));
 	}
 }
 class IptBndArgsBldr {

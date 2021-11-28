@@ -17,31 +17,31 @@ package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*;
 public class XophpString__tst {
 	private final    XophpString__fxt fxt = new XophpString__fxt();
-	@Test  public void Strspn_fwd__byte() {
+	@Test public void Strspn_fwd__byte() {
 		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 0, -1, 5);	// basic
 		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 1, -1, 4);	// bgn
 		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 1,  2, 2);	// max
 	}
-	@Test  public void Strspn_fwd__space_or_tab() {
+	@Test public void Strspn_fwd__space_or_tab() {
 		fxt.Test_strspn_fwd__space_or_tab("     a", 0, -1, 5);	// basic
 		fxt.Test_strspn_fwd__space_or_tab("     a", 1, -1, 4);	// bgn
 		fxt.Test_strspn_fwd__space_or_tab("     a", 1,  2, 2);	// max
 	}
-	@Test  public void Strspn_bwd__byte() {
+	@Test public void Strspn_bwd__byte() {
 		fxt.Test_strspn_bwd__byte("aaaaab", Byte_ascii.Ltr_a, 5, -1, 5);	// basic
 		fxt.Test_strspn_bwd__byte("aaaaab", Byte_ascii.Ltr_a, 4, -1, 4);	// bgn
 		fxt.Test_strspn_bwd__byte("aaaaab", Byte_ascii.Ltr_a, 4,  2, 2);	// max
 	}
-	@Test  public void Strspn_bwd__space_or_tab() {
+	@Test public void Strspn_bwd__space_or_tab() {
 		fxt.Test_strspn_bwd__space_or_tab("     a", 5, -1, 5);	// basic
 		fxt.Test_strspn_bwd__space_or_tab("     a", 4, -1, 4);	// bgn
 		fxt.Test_strspn_bwd__space_or_tab("     a", 4,  2, 2);	// max
 	}
-	@Test   public void Substr__bgn_is_neg() {
+	@Test  public void Substr__bgn_is_neg() {
 		fxt.Test_substr("abcde"                   , -1, "e");
 		fxt.Test_substr("abcde"                   , -3, -1, "cd");
 	}
-	@Test   public void Strtr() {
+	@Test  public void Strtr() {
 		fxt.Init_strtr_by_trie("01", "89", "02", "79");
 		fxt.Test_strtr_by_trie("abc"           , "abc");                 // found=none
 		fxt.Test_strtr_by_trie("ab_01_cd"      , "ab_89_cd");            // found=one
@@ -49,18 +49,18 @@ public class XophpString__tst {
 		fxt.Test_strtr_by_trie("01_ab"         , "89_ab");               // BOS
 		fxt.Test_strtr_by_trie("ab_01"         , "ab_89");               // EOS
 	}
-	@Test   public void Str_repeat() {
+	@Test  public void Str_repeat() {
 		fxt.Test_str_repeat("abc", 3, "abcabcabc");
 		fxt.Test_str_repeat("", 3, "");
 		fxt.Test_str_repeat("abc", 0, "");
 	}
-	@Test   public void Strpos() {
+	@Test  public void Strpos() {
 		fxt.Test__strpos("abc", "b", 0, 1);
 		fxt.Test__strpos("abc", "z", 0, XophpString_.strpos_NULL);
 		fxt.Test__strpos("aba", "a", 1, 2);
 		fxt.Test__strpos("aba", "a", -2, 2);
 	}
-    @Test  public void rtrim() {
+    @Test public void rtrim() {
 		// pad is 0, 1 char
 		fxt.Test__rtrim("0100", "", "0100"); // empty pad returns String
 		fxt.Test__rtrim("010", "0", "01"); // basic test; trim 1;
@@ -88,7 +88,7 @@ public class XophpString__tst {
 		// REF.MW:https://www.php.net/manual/en/function.trim.php
 		fxt.Test__rtrim("\u00A0µ déjà\u00A0", "\u00A0", "\u00A0µ déj�");// NOTE: technically should be "...j\xC3", but String_.new_u8 ignores invalid bytes
 	}
-    @Test  public void ltrim() {
+    @Test public void ltrim() {
 		// pad is 0, 1 char
 		fxt.Test__ltrim("0010", "", "0010"); // empty pad returns String
 		fxt.Test__ltrim("010", "0", "10"); // basic test; trim 1;
@@ -109,7 +109,7 @@ public class XophpString__tst {
 		fxt.Test__ltrim("Hello World", "Hdle", "o World");
 		fxt.Test__ltrim("\u0009Example String\n", "\u0000..\u001F", "Example String\n");
 	}
-    @Test  public void trim() {
+    @Test public void trim() {
 		// pad is 0, 1 char
 		fxt.Test__trim("0010", "", "0010"); // empty pad returns String
 		fxt.Test__trim("010", "0", "1"); // basic test; trim 1;
@@ -130,13 +130,13 @@ public class XophpString__tst {
 		fxt.Test__trim("Hello World", "Hdle", "o Wor");
 		fxt.Test__trim("\u0009Example String\n", "\u0000..\u001F", "Example String");
 	}
-	@Test  public void ord() {
+	@Test public void ord() {
 		fxt.Test__ord("a", 97); // 1 char
 		fxt.Test__ord("abc", 97); // 2+ chars takes first
 		fxt.Test__ord("", 0); // no chars returns 0
 		fxt.Test__ord(null, 0); // null returns 0
 	}
-	@Test  public void Fmt() {
+	@Test public void Fmt() {
 		fxt.Test__Fmt("a", "a"); // no keys
 		fxt.Test__Fmt("a$", "a$"); // key at end
 		fxt.Test__Fmt("ax", "a${x}", "x"); // curly
@@ -145,16 +145,16 @@ public class XophpString__tst {
 		fxt.Test__Fmt("a$0b", "a$0b", "z"); // invalid identifier
 		fxt.Test__Fmt("a0", "a$xyz0b", "0"); // long identifier
 	}
-	@Test  public void strrev() {
+	@Test public void strrev() {
 		fxt.Test__strrev("", "");
 		fxt.Test__strrev("Hello world!", "!dlrow olleH");
 		fxt.Test__strrev("☆❤world", "dlrow❤☆");
 		fxt.Test__strrev("a¢€𤭢b", "b𤭢€¢a");
 	}
-	@Test  public void str_repeat() {
+	@Test public void str_repeat() {
 		fxt.Test__str_repeat("-=", 10, "-=-=-=-=-=-=-=-=-=-=");
 	}
-	@Test  public void strspn() {
+	@Test public void strspn() {
 		fxt.Test__strspn(1, "<-", "abc", "abc", -1);
 
 		// PHP samples
@@ -163,7 +163,7 @@ public class XophpString__tst {
 		fxt.Test__strspn(2, "<-", "foo", "o", 1, 2);
 		fxt.Test__strspn(1, "<-", "foo", "o", 1, 1);
 	}
-	@Test  public void strcspn() {
+	@Test public void strcspn() {
 		fxt.Test__strcspn(3, "abc", "x", 0);
 		fxt.Test__strcspn(3, "abc", "x", -5);
 

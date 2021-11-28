@@ -17,16 +17,16 @@ package gplx.core.net; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Http_request_parser_tst {
 	@Before public void init() {fxt.Clear();} private final    Http_request_parser_fxt fxt = new Http_request_parser_fxt();
-	@Test   public void Type_post()	{
+	@Test  public void Type_post()	{
 		fxt.Test_type_post("POST /url HTTP/1.1", Http_request_itm.Type_post, "/url", "HTTP/1.1");
 	}
-	@Test   public void Type_content_type()	{
+	@Test  public void Type_content_type()	{
 		fxt.Test_content_type("Content-Type: multipart/form-data; boundary=---------------------------72432484930026", "multipart/form-data", "-----------------------------72432484930026");
 	}
-	@Test   public void Type_content_type__x_www_form_url_encoded()	{	// PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04
+	@Test  public void Type_content_type__x_www_form_url_encoded()	{	// PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04
 		fxt.Test_content_type("Content-Type: application/x-www-form-urlencoded", null, null);
 	}
-	@Test   public void Type_form_data() {
+	@Test  public void Type_form_data() {
 		fxt.Test_form_data(String_.Ary
 		( "POST /url HTTP/1.1"
 		, "Content-Type: multipart/form-data; boundary=---------------------------12345678901234"
@@ -45,10 +45,10 @@ public class Http_request_parser_tst {
 		, fxt.Make_post_data_itm("key1", "val1")
 		);
 	}
-	@Test   public void Type_accept_charset()	{
+	@Test  public void Type_accept_charset()	{
 		fxt.Test_ignore("Accept-Charset: ISO-8859-1,utf-8;q=0.7");
 	}
-	@Test   public void Nginx() {// PURPOSE: support http headers from nginx; ISSUE#:255
+	@Test  public void Nginx() {// PURPOSE: support http headers from nginx; ISSUE#:255
 		fxt.Test_ignore("Upgrade-Insecure-Requests: test1; X-Host: test2; X-Real-IP: test3;");
 	}
 }

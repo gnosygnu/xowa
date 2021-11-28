@@ -17,7 +17,7 @@ package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*; import gplx.core.strings.*;
 public class Io_sort_tst {
 	Io_sort_fxt fxt = new Io_sort_fxt();
-	@Test  public void ExternalSort() {
+	@Test public void ExternalSort() {
 		fxt.Clear().Memory_max_(12).Src_(fxt.GenRandom(6, 4)).Sorted_(fxt.GenOrdered(6, 4)).tst();
 		fxt.Clear().Memory_max_(64).Src_(fxt.GenRandom(50, 4)).Sorted_(fxt.GenOrdered(50, 4)).tst();
 	}

@@ -18,46 +18,46 @@ import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_subpages_bldr_tst {
 	private Xoh_subpages_bldr_fxt fxt;
 	@Before public void init() {fxt = new Xoh_subpages_bldr_fxt();}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init__Create_pages("Help:A", "Help:A/B");
 		fxt.Test__Parse("Help:A/B/C", String_.Concat_lines_nl_skip_last
 		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A\" title=\"Help:A\">Help:A</a>&lrm; | <a href=\"/wiki/Help:A/B\" title=\"Help:A/B\">B</a>"
 		, "</span>"
 		));
 	}
-	@Test  public void Underscore_space() {// PURPOSE: convert underscore to space; ISSUE#:308 PAGE:en.v:Computer-aided_design/Software DATE:2018-12-23
+	@Test public void Underscore_space() {// PURPOSE: convert underscore to space; ISSUE#:308 PAGE:en.v:Computer-aided_design/Software DATE:2018-12-23
 		fxt.Init__Create_pages("Help:A_1", "Help:A_1/B_1");
 		fxt.Test__Parse("Help:A_1/B_1/C_1", String_.Concat_lines_nl_skip_last
 		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A_1\" title=\"Help:A 1\">Help:A 1</a>&lrm; | <a href=\"/wiki/Help:A_1/B_1\" title=\"Help:A 1/B 1\">B 1</a>"
 		, "</span>"
 		));
 	}
-	@Test  public void Underscore_quote() { // PURPOSE: escape " as &quot; PAGE:en.s:A_Critical_Examination_of_Dr_G._Birkbeck_Hills_"Johnsonian"_Editions/The_Preface_and_Dedication; ISSUE#:627; DATE:2020-03-10
+	@Test public void Underscore_quote() { // PURPOSE: escape " as &quot; PAGE:en.s:A_Critical_Examination_of_Dr_G._Birkbeck_Hills_"Johnsonian"_Editions/The_Preface_and_Dedication; ISSUE#:627; DATE:2020-03-10
 		fxt.Init__Create_pages("Help:A", "Help:A/\"B\"");
 		fxt.Test__Parse("Help:A/\"B\"/C", String_.Concat_lines_nl_skip_last
 		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A\" title=\"Help:A\">Help:A</a>&lrm; | <a href=\"/wiki/Help:A/%22B%22\" title=\"Help:A/&quot;B&quot;\">\"B\"</a>"
 		, "</span>"
 		));
 	}
-	@Test  public void Skip_page_ns() {
+	@Test public void Skip_page_ns() {
 		fxt.Init__Page_ns();
 		fxt.Test__Parse("Page:A/B/C", "");
 	}
-	@Test  public void Missing_pages() { // PURPOSE: missing pages should not show up in subpages; ISSUE#:626; DATE:2019-12-01
+	@Test public void Missing_pages() { // PURPOSE: missing pages should not show up in subpages; ISSUE#:626; DATE:2019-12-01
 		fxt.Init__Create_pages("Help:A", "Help:A/B/C"); // NOTE: "Help:A/B" is missing
 		fxt.Test__Parse("Help:A/B/C/D", String_.Concat_lines_nl_skip_last
 		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A\" title=\"Help:A\">Help:A</a>&lrm; | <a href=\"/wiki/Help:A/B/C\" title=\"Help:A/B/C\">B/C</a>"
 		, "</span>"
 		));
 	}
-	@Test  public void Utf8() { // PURPOSE: do not url-encode non-ascii chars; DATE:2019-12-07
+	@Test public void Utf8() { // PURPOSE: do not url-encode non-ascii chars; DATE:2019-12-07
 		fxt.Init__Create_pages("Help:A_é", "Help:A_é/1");
 		fxt.Test__Parse("Help:A_é/1", String_.Concat_lines_nl_skip_last
 		( "<span class=\"subpages\">&lt; <a href=\"/wiki/Help:A_%C3%A9\" title=\"Help:A é\">Help:A é</a>"
 		, "</span>"
 		));
 	}
-	@Test  public void Title_case_segments() { // PURPOSE: make sure ns and page_ttl is properly-cased; ISSUE#:626; DATE:2019-12-01
+	@Test public void Title_case_segments() { // PURPOSE: make sure ns and page_ttl is properly-cased; ISSUE#:626; DATE:2019-12-01
 		fxt.Init__Create_pages("Help:A", "Help:A/b");
 
 		/*

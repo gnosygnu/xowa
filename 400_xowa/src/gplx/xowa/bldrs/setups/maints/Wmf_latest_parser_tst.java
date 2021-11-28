@@ -17,13 +17,13 @@ package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import
 import org.junit.*; import gplx.core.ios.*;
 public class Wmf_latest_parser_tst {
 	@Before public void init() {fxt.Clear();} private Wmf_latest_parser_fxt fxt = new Wmf_latest_parser_fxt();
-	@Test  public void Parse() {
+	@Test public void Parse() {
 		fxt.Test_parse
 		( "\n<a href=\"enwiki-latest-pages-articles.xml.bz2\">enwiki-latest-pages-articles.xml.bz2</a>               15-Jan-2015 05:43         11575640561\r\n"
 		, fxt.itm("enwiki-latest-pages-articles.xml.bz2", "2015-01-15 05:43", "10.781 GB")
 		);
 	}
-//		@Test   public void Smoke() {
+//		@Test  public void Smoke() {
 //			Wmf_latest_parser parser = new Wmf_latest_parser();
 //			parser.Parse(Io_mgr.Instance.LoadFilBry("C:\\wmf_latest.html"));
 //			Tfds.Dbg(String_.Concat_lines_nl(Wmf_latest_parser_fxt.Xto_str_ary(parser.To_ary())));

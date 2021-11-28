@@ -55,7 +55,7 @@ public class Scrib_lib_ustring__match__tst {
 	@Test public void Balanced__numbered_2() {
 		Exec_match("A88B[[5]]X99Y", "A(%d)%1B%b[]X(%d)%2Y", 1, "8;9");
 	}
-	@Test  public void Unicode_alpha() {// ISSUE#:502; DATE:2019-07-01
+	@Test public void Unicode_alpha() {// ISSUE#:502; DATE:2019-07-01
 		Exec_match("ä"	, "%a", 1, "ä");
 	}
 	@Test public void Number() {// 2019-20-01|ISSUE#:802|passing integer should return NULL, not throw error

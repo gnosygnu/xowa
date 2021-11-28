@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import org.junit.*;
 public class String__tst {
-	@Test  public void LimitToFirst() {
+	@Test public void LimitToFirst() {
 		tst_LimitToFirst("abc", 0, "");
 		tst_LimitToFirst("abc", 1, "a");
 		tst_LimitToFirst("abc", 2, "ab");
@@ -26,7 +26,7 @@ public class String__tst {
 	}
 	void tst_LimitToFirst(String s, int v, String expd) {Tfds.Eq(expd, String_.LimitToFirst(s, v));}
 	void err_LimitToFirst(String s, int v) {try {String_.LimitToFirst(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
-	@Test  public void LimitToLast() {
+	@Test public void LimitToLast() {
 		tst_LimitToLast("abc", 0, "");
 		tst_LimitToLast("abc", 1, "c");
 		tst_LimitToLast("abc", 2, "bc");
@@ -36,7 +36,7 @@ public class String__tst {
 	}
 	void tst_LimitToLast(String s, int v, String expd) {Tfds.Eq(expd, String_.LimitToLast(s, v));}
 	void err_LimitToLast(String s, int v) {try {String_.LimitToLast(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
-	@Test  public void DelBgn() {
+	@Test public void DelBgn() {
 		tst_DelBgn("abc", 0, "abc");
 		tst_DelBgn("abc", 1, "bc");
 		tst_DelBgn("abc", 2, "c");
@@ -46,7 +46,7 @@ public class String__tst {
 	}
 	void tst_DelBgn(String s, int v, String expd) {Tfds.Eq(expd, String_.DelBgn(s, v));}
 	void err_DelBgn(String s, int v) {try {String_.DelBgn(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
-	@Test  public void DelBgnIf() {
+	@Test public void DelBgnIf() {
 		tst_DelBgnIf("abc", "", "abc");
 		tst_DelBgnIf("abc", "a", "bc");
 		tst_DelBgnIf("abc", "ab", "c");
@@ -58,7 +58,7 @@ public class String__tst {
 	}
 	void tst_DelBgnIf(String s, String v, String expd) {Tfds.Eq(expd, String_.DelBgnIf(s, v));}
 	void err_DelBgnIf(String s, String v) {try {String_.DelBgnIf(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
-	@Test  public void DelEnd() {
+	@Test public void DelEnd() {
 		tst_DelEnd("abc", 0, "abc");
 		tst_DelEnd("abc", 1, "ab");
 		tst_DelEnd("abc", 2, "a");
@@ -68,7 +68,7 @@ public class String__tst {
 	}
 	void tst_DelEnd(String s, int v, String expd) {Tfds.Eq(expd, String_.DelEnd(s, v));}
 	void err_DelEnd(String s, int v) {try {String_.DelEnd(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
-	@Test  public void DelEndIf() {
+	@Test public void DelEndIf() {
 		tst_DelEndIf("abc", "", "abc");
 		tst_DelEndIf("abc", "c", "ab");
 		tst_DelEndIf("abc", "bc", "a");
@@ -80,7 +80,7 @@ public class String__tst {
 	}
 	void tst_DelEndIf(String s, String v, String expd) {Tfds.Eq(expd, String_.DelEndIf(s, v));}
 	void err_DelEndIf(String s, String v) {try {String_.DelEndIf(s, v);} catch (Exception exc) {Tfds.Err_classMatch(exc, Err.class); return;} Tfds.Fail_expdError();}
-	@Test  public void MidByPos() {
+	@Test public void MidByPos() {
 		tst_MidByPos("abc", 0, 0, "");
 		tst_MidByPos("abc", 0, 1, "a");
 		tst_MidByPos("abc", 0, 2, "ab");
@@ -91,7 +91,7 @@ public class String__tst {
 	}
 	void tst_MidByPos(String s, int bgn, int end, String expd) {Tfds.Eq(expd, String_.Mid(s, bgn, end));}
 	void err_MidByPos(String s, int bgn, int end) {try {String_.Mid(s, bgn, end);} catch (Exception e) {Tfds.Err_classMatch(e, Err.class); return;} Tfds.Fail_expdError();}
-	@Test  public void TrimEnd() {
+	@Test public void TrimEnd() {
 		tst_TrimEnd("a", "a");
 		tst_TrimEnd("a ", "a");
 		tst_TrimEnd("a\t", "a");
@@ -103,19 +103,19 @@ public class String__tst {
 	}
 	void tst_TrimEnd(String s, String expd) {Tfds.Eq(expd, String_.TrimEnd(s));}
 
-	@Test  public void Count() {
+	@Test public void Count() {
 		String text = "0 0 0";
 		Tfds.Eq(3, String_.Count(text, "0"));
 	}
-	@Test  public void Has() {
+	@Test public void Has() {
 		String text = "find word";
 		Tfds.Eq_true(String_.Has(text, "word"));
 		Tfds.Eq_false(String_.Has(text, "nothing"));
 	}
-	@Test  public void Repeat() {
+	@Test public void Repeat() {
 		Tfds.Eq("333", String_.Repeat("3", 3));
 	}
-	@Test  public void Split() {
+	@Test public void Split() {
 		tst_Split("ab", " ", "ab");							// no match -> return array with original input
 		tst_Split("ab cd", " ", "ab", "cd");				// separator.length = 1
 		tst_Split("ab+!cd", "+!", "ab", "cd");				// separator.length = 2
@@ -132,12 +132,12 @@ public class String__tst {
 		// acceptance
 		tst_Split("this\r\nis\na\rtest\r\n.", "\r\n", "this", "is\na\rtest", ".");
 	}	void tst_Split(String text, String separator, String... expd) {Tfds.Eq_ary(expd, String_.Split(text, separator));}
-	@Test  public void Concat_with_obj() {
+	@Test public void Concat_with_obj() {
 		tst_ConcatWith_any("a|b", "|", "a", "b");						// do not append final delimiter
 		tst_ConcatWith_any("a||c", "|", "a", null, "c");				// null
 		tst_ConcatWith_any("a|b", "|", Object_.Ary("a", "b"));			// pass array as arg
 	}	void tst_ConcatWith_any(String expd, String delimiter, Object... array) {Tfds.Eq(expd, String_.Concat_with_obj(delimiter, array));}
-	@Test  public void Compare_byteAry() {
+	@Test public void Compare_byteAry() {
 		tst_Compare_byteAry("a", "a", CompareAble_.Same);
 		tst_Compare_byteAry("a", "b", CompareAble_.Less);
 		tst_Compare_byteAry("b", "a", CompareAble_.More);
@@ -148,14 +148,14 @@ public class String__tst {
 		tst_Compare_byteAry("101", "1-0-1", CompareAble_.More);			// NOTE: regular String_.Compare_as_ordinals returns Less in .NET, More in Java
 		tst_Compare_byteAry("1-0-1", "101 (album)", CompareAble_.Less);	
 	}	void tst_Compare_byteAry(String lhs, String rhs, int expd) {Tfds.Eq(expd, String_.Compare_byteAry(lhs, rhs));}
-	@Test  public void FindBwd() {	// WORKAROUND.CS:String.LastIndexOf returns -1 for multi-chars; 
+	@Test public void FindBwd() {	// WORKAROUND.CS:String.LastIndexOf returns -1 for multi-chars;
 		tst_FindRev("abc", "a", 0, 0);
 		tst_FindRev("abc", "ab", 0, 0);		// 2 chars
 		tst_FindRev("abc", "abc", 0, 0);	// 3 chars
 		tst_FindRev("ab", "abc", 0, -1);	// out of index error
 		tst_FindRev("ababab", "ab", 2, 2);	// make sure cs implementation doesn't pick up next
 	}	void tst_FindRev(String s, String find, int pos, int expd) {Tfds.Eq(expd, String_.FindBwd(s, find, pos));}
-	@Test  public void Extract_after_bwd() {
+	@Test public void Extract_after_bwd() {
 		Extract_after_bwd_tst("a/b", "/", "b");
 		Extract_after_bwd_tst("a/", "/", "");
 		Extract_after_bwd_tst("a", "/", "");

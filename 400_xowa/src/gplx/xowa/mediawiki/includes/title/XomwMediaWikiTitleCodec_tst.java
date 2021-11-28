@@ -20,7 +20,7 @@ import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.xowa.mediawiki.languages.*; import gplx.xowa.langs.*;
 public class XomwMediaWikiTitleCodec_tst {
 	private final    XomwMediaWikiTitleCodec_fxt fxt = new XomwMediaWikiTitleCodec_fxt();
-	@Test  public void regexTitlePrefix() {
+	@Test public void regexTitlePrefix() {
 		// no match
 		fxt.Test_regexTitlePrefix("a"         , "a", null);
 		// ns
@@ -28,7 +28,7 @@ public class XomwMediaWikiTitleCodec_tst {
 		// underscores
 		fxt.Test_regexTitlePrefix("a__:___b"  , "a", "b");
 	}
-	@Test  public void splitTitleString() {
+	@Test public void splitTitleString() {
 		XomwMediaWikiTitleCodec codec = fxt.Make_codec(fxt.Make_lang());
 		// ns
 		fxt.Test_splitTitleString(codec, "File:A"    , fxt.Make_parts(XomwDefines.NS_FILE, "A"));

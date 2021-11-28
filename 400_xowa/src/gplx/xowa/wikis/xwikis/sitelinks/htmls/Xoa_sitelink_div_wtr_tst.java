@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xoa_sitelink_div_wtr_tst {
 	private final Xoa_sitelink_div_wtr_fxt fxt = new Xoa_sitelink_div_wtr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.tst("[[simple:Earth]] [[fr:Terre]] [[es:Tierra]] [[de:Erde]] [[it:Terre]]", String_.Concat_lines_nl_skip_last
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 5) </h5>"
@@ -43,7 +43,7 @@ public class Xoa_sitelink_div_wtr_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Empty() {
+	@Test public void Empty() {
 		fxt.tst("[[simple:]]", String_.Concat_lines_nl_skip_last
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 1) </h5>"
@@ -60,7 +60,7 @@ public class Xoa_sitelink_div_wtr_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Unregistered() {
+	@Test public void Unregistered() {
 //			fxt.Wiki().Xwiki_mgr().Add_full(Bry_.new_a7("zh"), Bry_.new_a7("zh.wikipedia.org"), Bry_.new_a7("http://zh.wikipedia.org/~{0}"));
 		fxt.tst("[[zh:Earth]]", String_.Concat_lines_nl_skip_last
 		( "<div id=\"xowa-lang\">"
@@ -78,7 +78,7 @@ public class Xoa_sitelink_div_wtr_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Anchor() {// PURPOSE: A#b was not showing anchor "#b"; DATE:2013-10-23
+	@Test public void Anchor() {// PURPOSE: A#b was not showing anchor "#b"; DATE:2013-10-23
 		fxt.tst("[[simple:A#b]]", String_.Concat_lines_nl_skip_last
 		( "<div id=\"xowa-lang\">"
 		, "  <h5><a href='javascript:xowa_toggle_visible(\"wikidata-langs\");' style='text-decoration: none !important;'>In other languages<img id='wikidata-langs-toggle-icon' src='file:///mem/xowa/bin/any/xowa/file/app.general/twisty_right.png' title='' /></a> (links: 1) </h5>"

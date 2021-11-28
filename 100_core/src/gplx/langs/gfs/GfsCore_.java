@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
+package gplx.langs.gfs; import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg_;
+import gplx.GfsCtx;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Type_;
+import gplx.UsrDlg_;
 public class GfsCore_ {
 	public static final    String Arg_primitive = "v";
 	public static Object Exec(GfsCtx ctx, Gfo_invk owner_invk, GfoMsg owner_msg, Object owner_primitive, int depth) {
@@ -25,8 +34,7 @@ public class GfsCore_ {
 			if (ctx.Fail_if_unhandled())
 				throw Err_.new_wo_type("Object does not support key", "key", owner_msg.Key(), "ownerType", Type_.Canonical_name_by_obj(owner_invk));
 			else {
-				Gfo_usr_dlg usr_dlg = ctx.Usr_dlg();
-				if (usr_dlg != null) usr_dlg.Warn_many(GRP_KEY, "unhandled_key", "Object does not support key: key=~{0} ownerType=~{1}", owner_msg.Key(), Type_.Canonical_name_by_obj(owner_invk));
+				Gfo_usr_dlg_.Instance.Warn_many(GRP_KEY, "unhandled_key", "Object does not support key: key=~{0} ownerType=~{1}", owner_msg.Key(), Type_.Canonical_name_by_obj(owner_invk));
 				return Gfo_invk_.Noop;
 			}
 		}

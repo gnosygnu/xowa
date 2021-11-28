@@ -29,7 +29,7 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 	}
 	private final    Bry_fmt fmtr_full_media = Bry_fmt.Auto("<a href=\"~{a_href}\" xowa_title=\"~{a_xowa_title}\">~{html}</a>"); // changed from '~{html}\n</a>' due to extra whitespace; ISSUE#:703; PAGE:en.w:Poland; DATE:2020-04-10
 
-	@gplx.Virtual public void Add_full_img(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
+	public void Add_full_img(Bry_bfr bfr, Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid
 	, byte[] a_href, boolean a_href_is_file, byte a_cls, byte a_rel, byte[] a_title, byte[] a_xowa_title
 	, int img_w, int img_h, byte[] img_src, byte[] img_alt, byte img_cls, byte[] img_cls_other
 	) {
@@ -83,13 +83,13 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 	public byte[] Bld_thumb_file_image(byte[] thumb_image, byte[] caption, byte[] alt) {return fmtr_thumb_file_image.Bld_many_to_bry(tmp_bfr, thumb_image, caption, alt);}
 	private final    Bry_fmt fmtr_thumb_file_image = Bry_fmt.Auto("    ~{thumb_image}~{caption}~{alt}");
 
-	@gplx.Virtual public byte[] Bld_thumb_file_audio(byte[] caption, byte[] alt, byte[] play_btn, byte[] info_btn) {return fmtr_thumb_file_audio.Bld_many_to_bry(tmp_bfr, play_btn, info_btn, caption, alt);}
+	public byte[] Bld_thumb_file_audio(byte[] caption, byte[] alt, byte[] play_btn, byte[] info_btn) {return fmtr_thumb_file_audio.Bld_many_to_bry(tmp_bfr, play_btn, info_btn, caption, alt);}
 	private Bry_fmt fmtr_thumb_file_audio = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
 	( "    <div class=\"xowa_media_div\">~{play_btn}~{info_btn}"
 	, "    </div>~{caption}~{alt}"
 	));
 
-	@gplx.Virtual public byte[] Bld_thumb_file_video(byte[] caption, byte[] alt, byte[] play_btn, byte[] vid_img) {return fmtr_thumb_file_video.Bld_many_to_bry(tmp_bfr, vid_img, play_btn, caption, alt);}
+	public byte[] Bld_thumb_file_video(byte[] caption, byte[] alt, byte[] play_btn, byte[] vid_img) {return fmtr_thumb_file_video.Bld_many_to_bry(tmp_bfr, vid_img, play_btn, caption, alt);}
 	private final    Bry_fmt fmtr_thumb_file_video = Bry_fmt.Auto(String_.Concat_lines_nl_skip_last
 	( "    <div class=\"xowa_media_div\">"
 	, "      <div>~{vid_img}"

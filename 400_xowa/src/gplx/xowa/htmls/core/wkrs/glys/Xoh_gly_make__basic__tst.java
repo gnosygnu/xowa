@@ -18,7 +18,7 @@ import org.junit.*; import gplx.xowa.htmls.core.makes.tests.*; import gplx.xowa.
 public class Xoh_gly_make__basic__tst {
 	private final    Xoh_make_fxt fxt = new Xoh_make_fxt();
 	@Before public void Init() {fxt.Clear();}
-	@Test   public void Media_div() {
+	@Test  public void Media_div() {
 		String orig = String_.Concat_lines_nl_skip_last
 		( "<ul data-xogly='-1|-1|-1' class='gallery mw-gallery-traditional' style='max-width:978px; _width:978px;'>"
 		,   "<li class='gallerybox' style='width:155px;'>"

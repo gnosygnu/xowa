@@ -56,7 +56,7 @@ public class Wdata_wiki_mgr_tst {
 
 		fxt.Test_link(Xoa_ttl.Parse(fxt.Wiki(), 124, Bry_.new_a7("Test_page")), "Q1"); // NOTE: wdata will save to "000" ns, b/c "124" ns is not canonical
 	}
-	@Test  public void Write_json_as_html() {
+	@Test public void Write_json_as_html() {
 		Wdata_wiki_mgr_fxt fxt = new Wdata_wiki_mgr_fxt().Init();
 		fxt.Test_write_json_as_html("{'a':'b','c':['d','e'],'f':{'g':'<h>'}}", String_.Concat_lines_nl_skip_last
 		(	"<span id=\"xowa-wikidata-json\">"

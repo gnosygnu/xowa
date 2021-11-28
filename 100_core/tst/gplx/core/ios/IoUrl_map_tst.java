@@ -17,12 +17,12 @@ package gplx.core.ios; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class IoUrl_map_tst {
 	IoUrlFxt fx = IoUrlFxt.new_();
-	@Test  public void Xto_api() {
+	@Test public void Xto_api() {
 		IoUrlInfo inf = IoUrlInfo_.alias_("tst:\\", "C:\\tst\\", IoEngine_.SysKey);
 		fx.tst_Xto_api(Io_url_.new_inf_("tst:\\dir\\fil.txt", inf), "C:\\tst\\dir\\fil.txt");
 		fx.tst_Xto_api(Io_url_.new_inf_("tst:\\dir\\", inf), "C:\\tst\\dir");	// no trailing \
 	}		
-	@Test  public void Xto_api_wce() {			
+	@Test public void Xto_api_wce() {			
 		IoUrlInfo inf = IoUrlInfo_.alias_("wce:\\", "\\SD Card\\", IoEngine_.SysKey); 
 		fx.tst_Xto_api(Io_url_.new_inf_("wce:\\dir\\", inf), "\\SD Card\\dir");
 	}

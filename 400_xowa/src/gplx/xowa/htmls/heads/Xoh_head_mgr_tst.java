@@ -19,7 +19,7 @@ import gplx.xowa.guis.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
 public class Xoh_head_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xoh_head_mgr_fxt fxt = new Xoh_head_mgr_fxt();
-	@Test   public void Css() {
+	@Test  public void Css() {
 		fxt.Mgr().Itm__css().Enabled_y_();
 		fxt.Test_write(String_.Concat_lines_nl_skip_last
 		( ""
@@ -28,7 +28,7 @@ public class Xoh_head_mgr_tst {
 		, "  </style>"
 		));
 	}
-	@Test   public void Toc() {
+	@Test  public void Toc() {
 		fxt.Init_msg(Xoh_head_itm__toc.Key_showtoc, "Sh\"ow");
 		fxt.Init_msg(Xoh_head_itm__toc.Key_hidetoc, "Hi'de");
 		fxt.Mgr().Itm__toc().Enabled_y_();
@@ -44,7 +44,7 @@ public class Xoh_head_mgr_tst {
 		, "  </script>"
 		));
 	}
-	@Test  public void Globals() {
+	@Test public void Globals() {
 		fxt.Init_msg(Xol_msg_itm_.Id_dte_month_name_january, "Jan'uary" );	// add apos to simulate apostrophes in Hebrew months; DATE:2014-07-28
 		fxt.Mgr().Itm__globals().Enabled_y_();
 		fxt.Test_write(String_.Concat_lines_nl_skip_last
@@ -80,7 +80,7 @@ public class Xoh_head_mgr_tst {
 		));
 		fxt.Init_msg(Xol_msg_itm_.Id_dte_month_name_january, "January" );	// set it back
 	}
-	@Test   public void Globals_la() { // PURPOSE: la.gfs only specifies "," not "."; make sure both "." and "," show up, or else null ref error during import; DATE:2014-05-13
+	@Test  public void Globals_la() { // PURPOSE: la.gfs only specifies "," not "."; make sure both "." and "," show up, or else null ref error during import; DATE:2014-05-13
 		Xol_lang_itm la_lang = fxt.Wiki().Lang();
 		gplx.xowa.langs.numbers.Xol_transform_mgr separators_mgr = la_lang.Num_mgr().Separators_mgr();
 		separators_mgr.Clear();

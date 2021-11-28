@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
-import gplx.core.gfo_regys.*;
+package gplx.langs.gfs; import gplx.DateAdp_;
+import gplx.GfoTemplateFactory;
+import gplx.Io_url_;
+import gplx.RandomAdp_;
+import gplx.core.gfo_regys.GfoRegy;
 public class GfsLibIni_core implements GfsLibIni {
 	public void Ini(GfsCore core) {
-		core.AddCmd(GfsCoreHelp.new_(core), "help");
 		core.AddObj(DateAdp_.Gfs, "Date_");
 		core.AddObj(RandomAdp_.Gfs, "RandomAdp_");
 		core.AddObj(GfoTemplateFactory.Instance, "factory");

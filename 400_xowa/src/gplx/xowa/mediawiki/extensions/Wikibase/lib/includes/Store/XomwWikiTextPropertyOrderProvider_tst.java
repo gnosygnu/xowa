@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
 public class XomwWikiTextPropertyOrderProvider_tst {
 	private final    XomwWikiTextPropertyOrderProvider_fxt fxt = new XomwWikiTextPropertyOrderProvider_fxt();
-	@Test   public void Basic()	{
+	@Test  public void Basic()	{
 		fxt.Test__getPropertyOrder(String_.Concat_lines_nl
 			( "* [[Property:P1]]"
 			, "* [[Property:P2]]"
@@ -27,7 +27,7 @@ public class XomwWikiTextPropertyOrderProvider_tst {
 			.Add("P2", "1")
 			);
 	}
-	@Test   public void Comments() {
+	@Test  public void Comments() {
 		fxt.Test__getPropertyOrder(String_.Concat_lines_nl
 			( "<!--* [[Property:P0]]-->"
 			, "* [[Property:P1]]"
@@ -37,7 +37,7 @@ public class XomwWikiTextPropertyOrderProvider_tst {
 			.Add("P2", "1")
 			);
 	}
-	@Test   public void Invalid_properties() {
+	@Test  public void Invalid_properties() {
 		fxt.Test__getPropertyOrder(String_.Concat_lines_nl
 			( "* [[Property:P0a]]"
 			, "* [[Property:P1]]"

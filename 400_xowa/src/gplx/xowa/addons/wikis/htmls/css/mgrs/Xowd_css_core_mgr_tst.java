@@ -17,7 +17,7 @@ package gplx.xowa.addons.wikis.htmls.css.mgrs; import gplx.*; import gplx.xowa.*
 import org.junit.*; import gplx.core.ios.*; import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.htmls.css.dbs.*;
 public class Xowd_css_core_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xowd_css_core_mgr_fxt fxt = new Xowd_css_core_mgr_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		Xowd_css_core_itm[] skin_ary = fxt.Make_skin_ary
 		( fxt.Make_skin_itm(1, "desktop", "20010101_050200")
 		);
@@ -35,7 +35,7 @@ public class Xowd_css_core_mgr_tst {
 		fxt.Exec_get(trg_dir, "desktop");
 		fxt.Test_fs(trg_dir, file_ary);
 	}
-	@Test   public void Update() {	// update css files; keep same skin_id; insert new files
+	@Test  public void Update() {	// update css files; keep same skin_id; insert new files
 		Xowd_css_core_itm[] skin_ary = fxt.Make_skin_ary
 		( fxt.Make_skin_itm(1, "desktop", "20010101_050500")
 		);

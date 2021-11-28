@@ -19,7 +19,7 @@ import gplx.xowa.apps.apis.xowa.html.modules.*;
 import gplx.xowa.guis.views.*;
 public class Xow_popup_anchor_finder__hdr_tst {
 	@Before public void init() {fxt.Clear();} private Xop_popup_hdr_finder_fxt fxt = new Xop_popup_hdr_finder_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "a"
 		, "==b1=="
@@ -29,7 +29,7 @@ public class Xow_popup_anchor_finder__hdr_tst {
 		fxt.Test_find_not(src_str, "b");
 		fxt.Test_find_not(src_str, "a");
 	}
-	@Test   public void Mid() {
+	@Test  public void Mid() {
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "a"
 		, "==b=="
@@ -39,21 +39,21 @@ public class Xow_popup_anchor_finder__hdr_tst {
 		);
 		fxt.Test_find(src_str, "d",  9);
 	}
-	@Test   public void Eos() {
+	@Test  public void Eos() {
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "a"
 		, "==b=="
 		);
 		fxt.Test_find(src_str, "b",  1);
 	}
-	@Test   public void Bos() {
+	@Test  public void Bos() {
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "==a=="
 		, "b"
 		);
 		fxt.Test_find(src_str, "a",  -1);
 	}
-	@Test   public void Trim() {
+	@Test  public void Trim() {
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "a"
 		, "== b =="
@@ -61,7 +61,7 @@ public class Xow_popup_anchor_finder__hdr_tst {
 		);
 		fxt.Test_find(src_str, "b",   1);
 	}
-	@Test   public void Ws() {
+	@Test  public void Ws() {
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "a"
 		, "== b c =="

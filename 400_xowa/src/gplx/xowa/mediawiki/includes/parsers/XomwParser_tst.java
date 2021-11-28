@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 public class XomwParser_tst {
 	private final    XomwParser_fxt fxt = new XomwParser_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "== heading_1 =="
 		, "para_1"

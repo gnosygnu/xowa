@@ -17,7 +17,7 @@ package gplx.xowa.specials.statistics; import gplx.*; import gplx.xowa.*; import
 import org.junit.*;
 public class Xop_statistics_page_tst {
 @Before public void init() {fxt.Clear();} private Xop_statistics_page_fxt fxt = new Xop_statistics_page_fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test_html(String_.Concat_lines_nl_skip_last
 		(  "<div id=\"mw-content-text\">"
 		,	"<table class=\"wikitable mw-statistics-table\">"

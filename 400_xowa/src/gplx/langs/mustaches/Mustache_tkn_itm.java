@@ -37,9 +37,9 @@ abstract class Mustache_tkn_base implements Mustache_tkn_itm {
 	public Mustache_tkn_base(int tid, byte[] key_bry) {this.tid = tid; this.key = String_.new_u8(key_bry);}
 	public int Tid() {return tid;} private final int tid;
 	public String Key() {return key;} private final String key;
-	@gplx.Virtual public Mustache_tkn_itm[] Subs_ary() {return Mustache_tkn_itm_.Ary_empty;}
-	@gplx.Virtual public void Subs_ary_(Mustache_tkn_itm[] v) {throw Err_.new_unsupported();}	// fail if trying to set and not overridden
-	@gplx.Virtual public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx)	{throw Err_.new_unsupported();}	// should be abstract
+	public Mustache_tkn_itm[] Subs_ary() {return Mustache_tkn_itm_.Ary_empty;}
+	public void Subs_ary_(Mustache_tkn_itm[] v) {throw Err_.new_unsupported();}	// fail if trying to set and not overridden
+	public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx)	{throw Err_.new_unsupported();}	// should be abstract
 }
 class Mustache_tkn_root extends Mustache_tkn_base { // EX: {{variable}} -> &lt;a&gt;
 	private Mustache_tkn_itm[] subs_ary;

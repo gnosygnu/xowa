@@ -17,8 +17,8 @@ package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*; import gplx.xowa.mediawiki.includes.parsers.*;
 public class XomwLinker_SplitTrail_tst {
 	private final    XomwLinker_SplitTrail_fxt fxt = new XomwLinker_SplitTrail_fxt();
-	@Test  public void Basic()                {fxt.Test__split_trail("abc def"          , "abc"             , " def");}
-	@Test  public void None()                 {fxt.Test__split_trail(" abc"             , null              , " abc");}
+	@Test public void Basic()                {fxt.Test__split_trail("abc def"          , "abc"             , " def");}
+	@Test public void None()                 {fxt.Test__split_trail(" abc"             , null              , " abc");}
 }
 class XomwLinker_SplitTrail_fxt {
 	private final    XomwLinker linker = new XomwLinker(new gplx.xowa.mediawiki.includes.linkers.XomwLinkRenderer(new XomwSanitizer()));

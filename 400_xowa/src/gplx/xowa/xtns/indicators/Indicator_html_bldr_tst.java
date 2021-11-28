@@ -17,7 +17,7 @@ package gplx.xowa.xtns.indicators; import gplx.*; import gplx.xowa.*; import gpl
 import org.junit.*; import gplx.xowa.xtns.indicators.*;
 public class Indicator_html_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Indicator_html_bldr_fxt fxt = new Indicator_html_bldr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init_indicator("a", "a1");
 		fxt.Init_indicator("b", "b1");
 		fxt.Test_bld(String_.Concat_lines_nl_skip_last
@@ -28,7 +28,7 @@ public class Indicator_html_bldr_tst {
 		, "  </div>"
 		));
 	}
-	@Test  public void Multiple_ignore() {
+	@Test public void Multiple_ignore() {
 		fxt.Init_indicator("a", "a1");
 		fxt.Init_indicator("a", "a2");
 		fxt.Test_bld(String_.Concat_lines_nl_skip_last

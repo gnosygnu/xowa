@@ -17,7 +17,7 @@ package gplx.xowa.bldrs.cmds.texts.xmls; import gplx.*; import gplx.xowa.*; impo
 import org.junit.*; import gplx.xowa.wikis.nss.*;
 public class Xob_siteinfo_parser__tst {
 	private final    Xob_siteinfo_parser__fxt fxt = new Xob_siteinfo_parser__fxt();
-	@Test   public void Basic__simplewikt() {	// PURPOSE: basic test of siteinfo parse; DATE:2015-11-01
+	@Test  public void Basic__simplewikt() {	// PURPOSE: basic test of siteinfo parse; DATE:2015-11-01
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "  <siteinfo>"
 		, "    <sitename>Wiktionary</sitename>"
@@ -83,7 +83,7 @@ public class Xob_siteinfo_parser__tst {
 		, "2601|first-letter|2601"	// NOTE: Topic_talk doesn't exist in <siteinfo>, but added by XOWA b/c every subj ns must have a talk ns
 		));
 	}
-	@Test   public void Case_dflt() {	// PURPOSE: missing case should use dflt DATE:2015-11-01
+	@Test  public void Case_dflt() {	// PURPOSE: missing case should use dflt DATE:2015-11-01
 		fxt.Test__parse(String_.Concat_lines_nl_skip_last
 		( "  <siteinfo>"
 		, "    <case>case-sensitive</case>"

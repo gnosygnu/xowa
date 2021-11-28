@@ -17,7 +17,7 @@ package gplx;
 import org.junit.*; import gplx.core.tests.*;
 public class Bry_split__tst {
 	private final    Bry_split__fxt fxt = new Bry_split__fxt();
-	@Test   public void Split() {
+	@Test  public void Split() {
 		fxt.Test_split("a"				, Byte_ascii.Pipe, Bool_.N, "a");					// no trim
 		fxt.Test_split("a|"				, Byte_ascii.Pipe, Bool_.N, "a");
 		fxt.Test_split("|a"				, Byte_ascii.Pipe, Bool_.N, "", "a");
@@ -37,19 +37,19 @@ public class Bry_split__tst {
 		fxt.Test_split("extend|a"		, Byte_ascii.Pipe, Bool_.Y, "extend|a");			// extend
 		fxt.Test_split("a|cancel|b"		, Byte_ascii.Pipe, Bool_.Y, "a");					// cancel
 	}
-	@Test   public void Split__bry() {
+	@Test  public void Split__bry() {
 		fxt.Test_split("a|b|c|d"		, 2, 6, "|", "b", "c");
 		fxt.Test_split("a|b|c|d"		, 2, 4, "|", "b");
 	}
-	@Test   public void Empty() {
+	@Test  public void Empty() {
 		fxt.Test_split("a\n\nb"         , Byte_ascii.Nl, Bool_.N, "a", "", "b");
 	}
-	@Test   public void Split_w_max() {
+	@Test  public void Split_w_max() {
 		fxt.Test__split_w_max("a|b|c|d"              , Byte_ascii.Pipe, 2, "a", "b");		// max is less
 		fxt.Test__split_w_max("a"                    , Byte_ascii.Pipe, 2, "a", null);		// max is more
 		fxt.Test__split_w_max("|"                    , Byte_ascii.Pipe, 2, "", "");		    // empty itms
 	}
-	@Test  public void Split_ws() {
+	@Test public void Split_ws() {
 		fxt.Test__split_ws("a b", "a", "b");
 		fxt.Test__split_ws(" a ", "a");
 		fxt.Test__split_ws("  abc   def  ", "abc", "def");

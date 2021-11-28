@@ -13,15 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mysql; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.stores.*; import gplx.dbs.engines.*; import gplx.dbs.sqls.*; import gplx.dbs.metas.*;
+package gplx.dbs.engines.mysql;
+import gplx.Err_;
+import gplx.core.stores.DataRdr;
+import gplx.core.stores.Db_data_rdr;
+import gplx.dbs.Db_conn_info;
+import gplx.dbs.engines.Db_engine;
+import gplx.dbs.engines.Db_engine_sql_base;
+import gplx.dbs.metas.Dbmeta_tbl_mgr;
+import gplx.dbs.sqls.Sql_qry_wtr;
+import gplx.dbs.sqls.Sql_qry_wtr_;
 import gplx.dbs.wkrs.SqlWkrMgr;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
 public class Mysql_engine extends Db_engine_sql_base {
 	@Override public String Tid() {return Mysql_conn_info.Tid_const;}
 	@Override public Sql_qry_wtr	Sql_wtr() {return Sql_qry_wtr_.New__mysql();}
 	@Override public void CtorConn(SqlWkrMgr wkrMgr) {}
+	@Override protected String Txn_bgn_str() {return "START TRANSACTION;";}
+	@Override protected String Txn_end_str() {return "COMMIT;";}
 	@Override public Db_engine New_clone(Db_conn_info connectInfo) {
 		Mysql_engine rv = new Mysql_engine();
 		rv.Ctor(connectInfo);

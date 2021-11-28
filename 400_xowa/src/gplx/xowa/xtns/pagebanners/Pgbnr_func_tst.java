@@ -32,7 +32,7 @@ import org.junit.Test;
 public class Pgbnr_func_tst {
 	private final Pgbnr_func_fxt fxt = new Pgbnr_func_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init__orig(true, "A.png", 500, 200); // 500 > 200 * 2 for pageBanner;
 		fxt.Test__parse(Bool_.N, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner pre-content'>"
@@ -52,7 +52,7 @@ public class Pgbnr_func_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Hdump__basic() {
+	@Test public void Hdump__basic() {
 		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner pre-content'>"
 		, " <div class='wpb-topbanner'>"
@@ -67,7 +67,7 @@ public class Pgbnr_func_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Hdump__quote() {	// PAGE:en.v:Europe; DATE:2016-07-12
+	@Test public void Hdump__quote() {	// PAGE:en.v:Europe; DATE:2016-07-12
 		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A\"b.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner pre-content'>"
 		, " <div class='wpb-topbanner'>"

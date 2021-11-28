@@ -17,7 +17,7 @@ package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
 import org.junit.*;
 public class Json_doc_tst {
 	private final Json_qry_mgr_fxt fxt = new Json_qry_mgr_fxt();
-	@Test  public void Select() {
+	@Test public void Select() {
 		Json_doc doc = fxt.Make_json
 		(	"{'0':"
 		,	"  {'0_0':"

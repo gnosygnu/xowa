@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xop_xnde_wkr__blockquote_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
-	@Test  public void Pre() { // PURPOSE: preserve leading spaces within blockquote; PAGE:en.w:Tenerife_airport_disaster
+	@Test public void Pre() { // PURPOSE: preserve leading spaces within blockquote; PAGE:en.w:Tenerife_airport_disaster
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<blockquote>"
@@ -31,7 +31,7 @@ public class Xop_xnde_wkr__blockquote_tst {
 		));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Trailing_nls() { // PURPOSE: para/pre not working after blockquote; PAGE:en.w:Snappy_(software); DATE:2014-04-25
+	@Test public void Trailing_nls() { // PURPOSE: para/pre not working after blockquote; PAGE:en.w:Snappy_(software); DATE:2014-04-25
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<blockquote>a"
@@ -52,7 +52,7 @@ public class Xop_xnde_wkr__blockquote_tst {
 		));
 		fxt.Init_para_n_();
 	}
-	@Test  public void Dangling_multiple() { // PURPOSE: handle multiple dangling; PAGE:en.w:Ring_a_Ring_o'_Roses DATE:2014-06-26
+	@Test public void Dangling_multiple() { // PURPOSE: handle multiple dangling; PAGE:en.w:Ring_a_Ring_o'_Roses DATE:2014-06-26
 		fxt.Test_parse_page_wiki_str("<blockquote>a<blockquote>b", "<blockquote>a</blockquote><blockquote>b</blockquote>");
 	}
 }

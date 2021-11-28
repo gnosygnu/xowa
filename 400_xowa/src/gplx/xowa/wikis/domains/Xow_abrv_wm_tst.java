@@ -17,7 +17,7 @@ package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*; import gplx.xowa.langs.*;
 public class Xow_abrv_wm_tst {
 	private Xow_abrv_wm_fxt fxt = new Xow_abrv_wm_fxt();
-	@Test  public void Parse() {
+	@Test public void Parse() {
 		fxt.Test_parse("foundationwiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__wmfblog);
 		fxt.Test_parse("wikidatawiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__wikidata);
 		fxt.Test_parse("mediawikiwiki"			, Xol_lang_stub_.Id__intl	, Xow_domain_tid_.Tid__mediawiki);
@@ -37,34 +37,34 @@ public class Xow_abrv_wm_tst {
 		fxt.Test_parse_null("unknown");
 		fxt.Test_parse("plwikimedia"			, Xol_lang_stub_.Id_pl		, Xow_domain_tid_.Tid__wikimedia);
 	}
-	@Test  public void Parse_override() {
+	@Test public void Parse_override() {
 		fxt.Test_parse("arwikimedia"			, Xol_lang_stub_.Id_es		, Xow_domain_tid_.Tid__wikimedia);
 		fxt.Test_parse("ukwikimedia"			, Xol_lang_stub_.Id_uk		, Xow_domain_tid_.Tid__wikimedia);
 	}
-	@Test   public void To_domain_itm() {
+	@Test  public void To_domain_itm() {
 		fxt.Test_to_domain_itm("enwiki"		, "en"		, "en.wikipedia.org");
 		fxt.Test_to_domain_itm("zh_yuewiki"	, "zh-yue"	, "zh-yue.wikipedia.org");
 	}
-	@Test   public void To_domain_bry() {
+	@Test  public void To_domain_bry() {
 		fxt.Test_to_domain_bry("enwiki"		, "en.wikipedia.org");
 		fxt.Test_to_domain_bry("zh_yuewiki"	, "zh-yue.wikipedia.org");
 		fxt.Test_to_domain_bry("arwikimedia", "ar.wikimedia.org");
 		fxt.Test_to_domain_bry("ukwikimedia", "ua.wikimedia.org");
 	}
-	@Test  public void To_abrv() {
+	@Test public void To_abrv() {
 		fxt.Test_to_abrv("simple.wikipedia.org"		, "simplewiki");
 		fxt.Test_to_abrv("en.wikipedia.org"			, "enwiki");
 		fxt.Test_to_abrv("commons.wikimedia.org"	, "commonswiki");
 	}
-	@Test  public void To_abrv_by_lang() {
+	@Test public void To_abrv_by_lang() {
 		fxt.Test_to_abrv_by_lang("en", Xow_domain_tid_.Tid__wikipedia, "enwiki");
 	}
-	@Test  public void Wikimania() {
+	@Test public void Wikimania() {
 		fxt.Test_parse("wikimaniawiki", Xol_lang_stub_.Id__intl, Xow_domain_tid_.Tid__wikimania);
 		fxt.Test_to_domain_itm("wikimaniawiki", "", "wikimania.wikimedia.org");
 		fxt.Test_to_abrv("wikimania.wikimedia.org", "wikimaniawiki");
 	}
-	@Test  public void Wikisources() {
+	@Test public void Wikisources() {
 		fxt.Test_parse("sourceswiki", Xol_lang_stub_.Id_en, Xow_domain_tid_.Tid__wikisource_org);
 		fxt.Test_to_domain_itm("sourceswiki", "", "wikisource.org");
 		fxt.Test_to_abrv("wikisource.org", "sourceswiki");

@@ -22,7 +22,7 @@ import gplx.xowa.wikis.nss.*;
 public class Xol_lang_srl_tst {
 	private Xol_lang_srl_fxt fxt = new Xol_lang_srl_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Ns_names() {
+	@Test public void Ns_names() {
 		String raw = String_.Concat_lines_nl
 			(	"ns_names"
 			,	"  .load_text("
@@ -37,7 +37,7 @@ public class Xol_lang_srl_tst {
 		fxt.Tst_ns_grp(grp, fxt.ns_(6, "Filex"), fxt.ns_(10, "Templatex"));
 		fxt.Run_save_ns_grp(grp, Xol_lang_itm.Invk_ns_names, raw);
 	}
-	@Test  public void Ns_aliases() {
+	@Test public void Ns_aliases() {
 		String raw = String_.Concat_lines_nl
 			(	"ns_aliases"
 			,	"  .load_text("
@@ -52,7 +52,7 @@ public class Xol_lang_srl_tst {
 		fxt.Tst_ns_grp(grp, fxt.ns_(6, "Filex"), fxt.ns_(10, "Templatex"));
 		fxt.Run_save_ns_grp(grp, Xol_lang_itm.Invk_ns_aliases, raw);
 	}
-	@Test  public void Kwds() {
+	@Test public void Kwds() {
 		String raw = String_.Concat_lines_nl	// NOTE: notoc must go before toc because ID order
 			(	"keywords"
 			,	"  .load_text("
@@ -67,7 +67,7 @@ public class Xol_lang_srl_tst {
 		fxt.Tst_keywords(kwd_mgr, fxt.kwd_("notoc", true, "no_table_of_contents", "toc_n"), fxt.kwd_("toc", false, "table_of_contents", "toc_y"));
 		fxt.Run_save_kwd_mgr(kwd_mgr, Xol_lang_itm.Invk_keywords, raw);
 	}
-	@Test  public void Specials() {
+	@Test public void Specials() {
 		String raw = String_.Concat_lines_nl	// NOTE: notoc must go before toc because ID order
 			(	"specials"
 			,	"  .clear"
@@ -83,7 +83,7 @@ public class Xol_lang_srl_tst {
 		fxt.Tst_specials(specials_mgr, fxt.special_("Randompage", "PageAuHasard", "Page_au_hasard"), fxt.special_("Search", "Recherche", "Rechercher"));
 		fxt.Run_save_specials_mgr(specials_mgr, Xol_lang_itm.Invk_specials, raw);
 	}
-	@Test  public void Kwds_blank_line() {	// PURPOSE.fix: extra blank line negates entire entry
+	@Test public void Kwds_blank_line() {	// PURPOSE.fix: extra blank line negates entire entry
 		String raw = String_.Concat_lines_nl
 			(	"keywords"
 			,	"  .load_text("
@@ -97,7 +97,7 @@ public class Xol_lang_srl_tst {
 		Xol_kwd_mgr kwd_mgr = fxt.Lang().Kwd_mgr();
 		fxt.Tst_keywords(kwd_mgr, fxt.kwd_("toc", false, "table_of_contents", "toc_y"));	// make sure 2 items (and not 0)
 	}
-	@Test  public void Msgs() {
+	@Test public void Msgs() {
 		String raw = String_.Concat_lines_nl
 			(	"messages"
 			,	"  .load_text("
@@ -112,7 +112,7 @@ public class Xol_lang_srl_tst {
 		fxt.Tst_messages(msg_mgr, fxt.msg_("sunday", "dimanche"), fxt.msg_("monday", "lundi"));
 		fxt.Run_save_msg_mgr(msg_mgr, Xol_lang_itm.Invk_messages, raw);
 	}
-	@Test  public void Fallback() {
+	@Test public void Fallback() {
 		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "zh-hans"), String_.Concat_lines_nl
 			(	"this"
 			,	".keywords"
@@ -162,12 +162,12 @@ public class Xol_lang_srl_tst {
 		fxt.Tst_ns_grp(fxt.Lang().Ns_names(), fxt.ns_(6, "FileA"), fxt.ns_(6, "FileB"));
 		fxt.Tst_messages(fxt.Lang().Msg_mgr(), fxt.msg_("sunday", "sunday1"), fxt.msg_("monday", "monday1"));
 	}
-	@Test  public void Fallback_circular() {	// PURPOSE: pt and pt-br cite each other as fallback in Messages*.php; DATE:2013-02-18
+	@Test public void Fallback_circular() {	// PURPOSE: pt and pt-br cite each other as fallback in Messages*.php; DATE:2013-02-18
 		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt")		, "fallback_load('pt-br');");
 		Io_mgr.Instance.SaveFilStr(Xol_lang_itm_.xo_lang_fil_(fxt.App().Fsys_mgr(), "pt-br")	, "fallback_load('pt');");
 		fxt.App().Lang_mgr().Get_by_or_load(Bry_.new_a7("pt")); // fails if test-suite gets stuck
 	}
-	@Test  public void Num_fmt() {
+	@Test public void Num_fmt() {
 		String raw = String_.Concat_lines_nl
 		( "numbers {"
 		, "  separators {"
@@ -181,7 +181,7 @@ public class Xol_lang_srl_tst {
 		fxt.Tst_num_fmt("1234,56", "1.234.56"); // NOTE: dot is repeated; confirmed with dewiki and {{formatnum:1234,56}}
 		fxt.Run_save_num_mgr(fxt.Lang().Num_mgr(), raw);
 	}
-	@Test  public void Num_fmt_apos() {	// PURPOSE:de.ch has apos which breaks gfs
+	@Test public void Num_fmt_apos() {	// PURPOSE:de.ch has apos which breaks gfs
 		fxt	.Init_clear()
 			.Init_separators(",", "'")
 			.Init_separators(".", ",")

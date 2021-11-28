@@ -18,7 +18,7 @@ import org.junit.*;
 import gplx.xowa.langs.names.*;
 public class Xol_lnki_trail_mgr_tst {
 	private final    Xol_lnki_trail_mgr_fxt fxt = new Xol_lnki_trail_mgr_fxt();
-	@Test   public void Add_bulk() {
+	@Test  public void Add_bulk() {
 		fxt.Test_add_bulk("äöüß", "ä", "ö", "ü", "ß");
 	}
 }

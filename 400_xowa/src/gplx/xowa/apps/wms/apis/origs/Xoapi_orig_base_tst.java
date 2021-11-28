@@ -19,18 +19,18 @@ import org.junit.*;
 public class Xoapi_orig_base_tst {
 	Xoapi_orig_base_fxt fxt = new Xoapi_orig_base_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Bld_api_url() {
+	@Test public void Bld_api_url() {
 		fxt.Bld_api_url_tst("A.png"		, 220, 110, "https://en.wikipedia.org/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:A.png&iiurlwidth=220&iiurlheight=110");
 		fxt.Bld_api_url_tst("A.png"		, 220,   0, "https://en.wikipedia.org/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:A.png&iiurlwidth=220");
 		fxt.Bld_api_url_tst("A.png"		,   0, 110, "https://en.wikipedia.org/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:A.png");	// assert that null width does not write height
 		fxt.Bld_api_url_tst("A b.png"	, 220,   0, "https://en.wikipedia.org/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:A_b.png&iiurlwidth=220");
 		fxt.Bld_api_url_tst("A&b.png"	, 220,   0, "https://en.wikipedia.org/w/api.php?action=query&format=xml&prop=imageinfo&iiprop=size|url&redirects&titles=File:A%26b.png&iiurlwidth=220");
 	}
-	@Test  public void Parse_size() {
+	@Test public void Parse_size() {
 		String raw = "<api><query><pages><page ns=\"6\" title=\"File:A.png\" missing=\"\" imagerepository=\"shared\"><imageinfo><ii size=\"1234\" width=\"220\" height=\"110\" /></imageinfo></page></pages></query></api>";
 		fxt.Parse_size_tst(raw, 220, 110);
 	}
-	@Test  public void Parse_reg() {
+	@Test public void Parse_reg() {
 		String raw = "<api><query><pages><page ns=\"6\" title=\"File:A.png\" missing=\"\" imagerepository=\"shared\"><imageinfo><ii descriptionurl=\"http://commons.wikimedia.org/wiki/File:Berkheyde-Haarlem.png\" /></imageinfo></page></pages></query></api>";
 		fxt.Parse_reg_tst(raw, "commons.wikimedia.org", "Berkheyde-Haarlem.png");
 	}

@@ -18,13 +18,13 @@ import org.junit.*;
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.core.*;
 public class Wdata_doc_parser_v1_tst {
 	@Before public void init() {fxt.Init();} private Wdata_doc_parser_v1_fxt fxt = new Wdata_doc_parser_v1_fxt();
-	@Test   public void Entity_v1_1() {
+	@Test  public void Entity_v1_1() {
 		fxt.Test_entity("{ 'entity':'q1' }", "q1");
 	}
-	@Test   public void Entity_v1_2() {
+	@Test  public void Entity_v1_2() {
 		fxt.Test_entity("{ 'entity':['item',1] }", "q1");
 	}
-	@Test   public void Sitelink_v1_1() {
+	@Test  public void Sitelink_v1_1() {
 		fxt.Test_sitelinks(String_.Concat_lines_nl_skip_last
 		( "{ 'links':"
 		, "  { 'enwiki':'en_val'"
@@ -38,7 +38,7 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_sitelink("frwiki", "fr_val")
 		);
 	}
-	@Test   public void Sitelink_v1_2() {
+	@Test  public void Sitelink_v1_2() {
 		fxt.Test_sitelinks(String_.Concat_lines_nl_skip_last
 		( "{ 'links':"
 		, "  { 'enwiki':"
@@ -67,7 +67,7 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_sitelink("frwiki", "fr_val")
 		);
 	}
-	@Test   public void Labels() {
+	@Test  public void Labels() {
 		fxt.Test_labels(String_.Concat_lines_nl_skip_last
 		( "{ 'label':"
 		, "  { 'en':'en_val'"
@@ -81,7 +81,7 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_langval("fr", "fr_val")
 		);
 	}
-	@Test   public void Descriptions() {
+	@Test  public void Descriptions() {
 		fxt.Test_descriptions(String_.Concat_lines_nl_skip_last
 		( "{ 'description':"
 		, "  { 'en':'en_val'"
@@ -95,7 +95,7 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_langval("fr", "fr_val")
 		);
 	}
-	@Test   public void Aliases() {
+	@Test  public void Aliases() {
 		fxt.Test_aliases(String_.Concat_lines_nl_skip_last
 		( "{ 'aliases':"
 		, "  { 'en':"
@@ -120,7 +120,7 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_alias("fr", "fr_val_1")
 		);
 	}
-	@Test   public void Aliases_alt() {
+	@Test  public void Aliases_alt() {
 		fxt.Test_aliases(String_.Concat_lines_nl_skip_last
 		( "{ 'aliases':"
 		, "  { 'en':"
@@ -134,7 +134,7 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_alias("en", "en_val_1", "en_val_2", "en_val_3")
 		);
 	}
-	@Test   public void Claims() {
+	@Test  public void Claims() {
 		fxt.Test_claims(String_.Concat_lines_nl_skip_last
 		( "{ 'claims':"
 		, "  ["
@@ -155,7 +155,7 @@ public class Wdata_doc_parser_v1_tst {
 		, fxt.Make_claim_string(1, "abc")
 		);
 	}
-	@Test   public void Claim_bad() {	// wikidata flags several entries as "bad"; https://www.wikidata.org/wiki/Wikidata:Project_chat/Archive/2013/10
+	@Test  public void Claim_bad() {	// wikidata flags several entries as "bad"; https://www.wikidata.org/wiki/Wikidata:Project_chat/Archive/2013/10
 		fxt.Test_claims(String_.Concat_lines_nl_skip_last
 		(	"{ 'entity':['item',2]"
 		,	", 'claims':"

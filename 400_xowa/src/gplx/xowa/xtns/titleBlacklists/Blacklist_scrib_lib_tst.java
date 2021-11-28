@@ -21,7 +21,7 @@ public class Blacklist_scrib_lib_tst {
 		fxt.Clear_for_lib();
 		lib = new Blacklist_scrib_lib().Init();
 	}	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib lib;
-	@Test   public void Exec_test() {
+	@Test  public void Exec_test() {
 		fxt.Test_scrib_proc_str(lib, Blacklist_scrib_lib.Invk_test, Object_.Ary("title")						, String_.Null_mark);
 	}
 }	

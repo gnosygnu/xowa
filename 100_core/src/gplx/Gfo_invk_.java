@@ -23,7 +23,9 @@ public class Gfo_invk_ {
 	, Rv_handled	= String_obj_val.new_("Handled")
 	, Rv_host		= String_obj_val.new_("Host")
 	, Rv_cancel		= String_obj_val.new_("Cancel")
-	, Rv_error		= String_obj_val.new_("Error");
+	, Rv_error		= String_obj_val.new_("Error")
+	, ArgNone       = String_obj_val.new_("")
+	;
 
 	public static Gfo_invk as_(Object obj) {return obj instanceof Gfo_invk ? (Gfo_invk)obj : null;}
 

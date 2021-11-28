@@ -19,27 +19,27 @@ import gplx.dbs.*; import gplx.dbs.metas.*; import gplx.dbs.engines.mems.*;
 public class Gfdb_diff_bldr_tst {
 	private final    Gfdb_diff_bldr_fxt fxt = new Gfdb_diff_bldr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Same() {
+	@Test  public void Same() {
 		fxt.Init__tbl__old(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
 		fxt.Init__tbl__cur(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
 		fxt.Test__bld();
 	}
-	@Test   public void Update() {
+	@Test  public void Update() {
 		fxt.Init__tbl__old(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
 		fxt.Init__tbl__cur(Object_.Ary(1, "A1")	, Object_.Ary(2, "B1"));
 		fxt.Test__bld("U|1|A1", "U|2|B1");
 	}
-	@Test   public void Insert() {
+	@Test  public void Insert() {
 		fxt.Init__tbl__old(Object_.Ary(1, "A"));
 		fxt.Init__tbl__cur(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
 		fxt.Test__bld("I|2|B");
 	}
-	@Test   public void Delete() {
+	@Test  public void Delete() {
 		fxt.Init__tbl__old(Object_.Ary(1, "A")	, Object_.Ary(2, "B"));
 		fxt.Init__tbl__cur(Object_.Ary(1, "A"));
 		fxt.Test__bld("D|2");
 	}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Init__tbl__old
 		( Object_.Ary(1, "A")
 		, Object_.Ary(2, "B")

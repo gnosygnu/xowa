@@ -18,13 +18,13 @@ import org.junit.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_img_hzip__view__tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt();
 	@Before public void Clear() {fxt.Clear();}
-	@Test   public void Basic__border__class__caption() {	// [[File:A.png|border|class=other|220px|abc]]
+	@Test  public void Basic__border__class__caption() {	// [[File:A.png|border|class=other|220px|abc]]
 		fxt.Test__bicode
 		( "~%iAA.png#T\";abc~other~"
 		, "<a href='/wiki/File:A.png' class='image' title='abc' xowa_title='A.png'><img id='xoimg_0' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/220px.png' width='220' height='110' class='thumbborder other' alt='abc'></a>"
 		);
 	}
-	@Test   public void Link() {	// [[File:A.png|link=B]]
+	@Test  public void Link() {	// [[File:A.png|link=B]]
 		fxt.Test__bicode
 		( "~%}'h+RB~A.png##T\";B~A.png~A.png~"
 		, "<a href='/wiki/B' class='image' title='B' xowa_title='A.png'><img id='xoimg_0' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/A.png/220px.png' width='220' height='110' alt='A.png'></a>"

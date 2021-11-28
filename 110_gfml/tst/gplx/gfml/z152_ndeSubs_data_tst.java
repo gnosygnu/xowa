@@ -25,37 +25,37 @@ public class z152_ndeSubs_data_tst {
 			,	GfmlDocLxrs.Whitespace_lxr()
 			);
 	}
-	@Test  public void ToInline() {
+	@Test public void ToInline() {
 		fx.tst_Doc("{a;}"
 			,	fx.nde_().Subs_
 			(		fx.nde_().Atru_("a"))
 			);
 	}
-	@Test  public void ToInline_many() {
+	@Test public void ToInline_many() {
 		fx.tst_Doc("{a b;}"
 			,	fx.nde_().Subs_
 			(		fx.nde_().Atru_("a").Atru_("b"))
 			);
 	}
-	@Test  public void ToBody() {
+	@Test public void ToBody() {
 		fx.tst_Doc("{a{}}"
 			,	fx.nde_().Subs_
 			(		fx.nde_().Atru_("a"))
 			);
 	}	
-	@Test  public void ToBody_many() {
+	@Test public void ToBody_many() {
 		fx.tst_Doc("{a b{}}"
 			,	fx.nde_().Subs_
 			(		fx.nde_().Atru_("a").Atru_("b"))
 			);
 	}	
-	@Test  public void ToBody_manyNest() {
+	@Test public void ToBody_manyNest() {
 		fx.tst_Doc("a{b;}"
 			,	fx.nde_().Atru_("a").Subs_
 			(		fx.nde_().Atru_("b"))				
 			);
 	}	
-	@Test  public void ToBody_many2() {
+	@Test public void ToBody_many2() {
 		fx.tst_Doc("a{b{c;}}"
 			,	fx.nde_().Atru_("a").Subs_
 			(		fx.nde_().Atru_("b").Subs_

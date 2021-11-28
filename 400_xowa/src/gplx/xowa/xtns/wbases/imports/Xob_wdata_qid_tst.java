@@ -33,7 +33,7 @@ public class Xob_wdata_qid_tst {
 		wkr.Ctor(fxt.Bldr(), fxt.Wiki());
 	}
 
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Run_page_wkr(wkr
 			,	fxt.New_page_wo_date(2, "q2", Wdata_wiki_mgr_fxt.New_json("q2", "links", String_.Ary("enwiki", "q2_en", "frwiki", "q2_fr")))
 			,	fxt.New_page_wo_date(1, "q1", Wdata_wiki_mgr_fxt.New_json("q1", "links", String_.Ary("enwiki", "q1_en", "frwiki", "q1_fr")))
@@ -46,7 +46,7 @@ public class Xob_wdata_qid_tst {
 		, Object_.Ary("frwiki", 0, "Q1_fr", "q1")
 		);
 	}
-	@Test  public void Ns() {
+	@Test public void Ns() {
 		Site_core_db json_db = new Site_core_db(fxt.App().Fsys_mgr().Cfg_site_meta_fil());
 		Site_namespace_tbl ns_tbl = json_db.Tbl__namespace();
 		ns_tbl.Insert(Bry_.new_a7("en.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Help"), Bool_.N, Bool_.N, Bry_.Empty);
@@ -61,7 +61,7 @@ public class Xob_wdata_qid_tst {
 		, Object_.Ary("frwiki", 12, "Q1_fr", "q1")
 		);
 	}
-	@Test  public void Links_w_name() {	// PURPOSE: wikidata changed links node from "enwiki:A" to "enwiki:{name:A,badges:[]}"; DATE:2013-09-14
+	@Test public void Links_w_name() {	// PURPOSE: wikidata changed links node from "enwiki:A" to "enwiki:{name:A,badges:[]}"; DATE:2013-09-14
 		String q1_str = String_.Concat_lines_nl
 		(	"{ \"entity\":\"q1\""
 		,	", \"links\":"
@@ -91,7 +91,7 @@ public class Xob_wdata_qid_tst {
 		, Object_.Ary("frwiki", 0, "Q2_fr", "q2")
 		);
 	}
-	@Test  public void Spaces() {	// PURPOSE: assert that ttls with spaces are converted to unders DATE:2015-04-21
+	@Test public void Spaces() {	// PURPOSE: assert that ttls with spaces are converted to unders DATE:2015-04-21
 		fxt.Run_page_wkr(wkr
 		,	fxt.New_page_wo_date(2, "q2", Wdata_wiki_mgr_fxt.New_json("q2", "links", String_.Ary("enwiki", "q2 en", "frwiki", "q2 fr")))	// note "q2 en" not "q2_en"
 		,	fxt.New_page_wo_date(1, "q1", Wdata_wiki_mgr_fxt.New_json("q1", "links", String_.Ary("enwiki", "q1 en", "frwiki", "q1 fr")))

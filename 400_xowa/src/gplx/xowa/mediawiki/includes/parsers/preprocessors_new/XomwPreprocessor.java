@@ -128,7 +128,7 @@ public abstract class XomwPreprocessor {
 	*
 	* @return PPFrame
 	*/
-	@gplx.Virtual public XomwPPFrame newFrame() {return null;}
+	public XomwPPFrame newFrame() {return null;}
 
 	/**
 	* Create a new custom frame for programmatic use of parameter replacement
@@ -138,7 +138,7 @@ public abstract class XomwPreprocessor {
 	*
 	* @return PPFrame
 	*/
-	@gplx.Virtual public XomwPPFrame newCustomFrame(XophpArray args) {return null;}
+	public XomwPPFrame newCustomFrame(XophpArray args) {return null;}
 
 	/**
 	* Create a new custom node for programmatic use of parameter replacement
@@ -146,7 +146,7 @@ public abstract class XomwPreprocessor {
 	*
 	* @param array $values
 	*/
-	@gplx.Virtual public XomwPPNode newPartNodeArray(XophpArray values) {return null;}
+	public XomwPPNode newPartNodeArray(XophpArray values) {return null;}
 
 	/**
 	* Preprocess text to a PPNode
@@ -156,7 +156,7 @@ public abstract class XomwPreprocessor {
 	*
 	* @return PPNode
 	*/
-	@gplx.Virtual public XomwPPNode preprocessToObj(String text, int flags) {return null;} // flags = 0
+	public XomwPPNode preprocessToObj(String text, int flags) {return null;} // flags = 0
 
-	@gplx.Virtual public String preprocessToDbg(String src, boolean for_inclusion) {return null;}
+	public String preprocessToDbg(String src, boolean for_inclusion) {return null;}
 }

@@ -23,7 +23,7 @@ public class z120_quotes_eval0_tst {
 			,	GfmlDocLxrs.Eval0_lxr()
 			);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fx.tst_Doc("<~t>;", fx.nde_().Atru_("\t"));
 		fx.tst_Tkn("<~t>;"
 			,	fx.tkn_grp_
@@ -33,7 +33,7 @@ public class z120_quotes_eval0_tst {
 			)
 			);
 	}
-	@Test  public void DoublingIsNotEscaping() {
+	@Test public void DoublingIsNotEscaping() {
 		fx.tst_Doc("<~t>>>;", fx.nde_().Atru_("\t").Atru_(">>")); // >> does not resolve to >
 	}
 }

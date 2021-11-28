@@ -17,12 +17,12 @@ package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*; import gplx.core.tests.*;
 public class Cldr_name_converter_tst {
 	private final    Cldr_name_converter_fxt fxt = new Cldr_name_converter_fxt();
-	@Test   public void Extract_key_or_fail() {
+	@Test  public void Extract_key_or_fail() {
 		fxt.Test__Extract_key_or_fail("CldrNamesEn.php"	, "En");
 		fxt.Test__Extract_key_or_fail("CldrNameEn.php"	, null);
 		fxt.Test__Extract_key_or_fail("CldrNamesEn.txt"	, null);
 	}
-	@Test   public void Parse_fil() {
+	@Test  public void Parse_fil() {
 		Cldr_name_file file = fxt.Exec__Parse_fil("En", String_.Concat_lines_nl
 		( "$languageNames = ["
 		, "  'aa' => 'Afar',"
@@ -110,7 +110,7 @@ public class Cldr_name_converter_tst {
 			, Keyval_.new_("year-short-past-other", "{0} yr. ago")
 		);
 	}
-//		@Test   public void Smoke() {
+//		@Test  public void Smoke() {
 //			Cldr_name_converter bldr = new Cldr_name_converter();
 //			bldr.Convert(Io_url_.new_dir_("C:\\000\\100_bin\\200_server\\200_http\\100_apache\\100_v2.4\\htdocs\\mediawiki\\v1.29.1\\extensions\\cldr\\CldrNames\\"), Io_url_.new_dir_("C:\\xowa\\bin\\any\\xowa\\xtns\\cldr\\"));
 //		}

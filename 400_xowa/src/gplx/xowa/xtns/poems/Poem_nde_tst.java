@@ -17,7 +17,7 @@ package gplx.xowa.xtns.poems; import gplx.*; import gplx.xowa.*; import gplx.xow
 import org.junit.*;
 public class Poem_nde_tst {
 	@Before public void init() {fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());} private final    Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Lines() {	// NOTE: first \n (poem\n) and last \n (\n</poem>)ignored
+	@Test public void Lines() {	// NOTE: first \n (poem\n) and last \n (\n</poem>)ignored
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, "a"
@@ -36,7 +36,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Nbsp_basic() {
+	@Test public void Nbsp_basic() {
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, "a 1"
@@ -55,7 +55,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Nbsp_line_0() {// PURPOSE: indent on 1st line caused page_break
+	@Test public void Nbsp_line_0() {// PURPOSE: indent on 1st line caused page_break
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, "  a"
@@ -74,7 +74,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Nbsp_blank_lines() {// PURPOSE: check blank lines; PAGE:none
+	@Test public void Nbsp_blank_lines() {// PURPOSE: check blank lines; PAGE:none
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, "  a"
@@ -93,7 +93,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Comment() {
+	@Test public void Comment() {
 		fxt.Test_parse_page_wiki_str("<poem>a<!-- b --> c</poem>", String_.Concat_lines_nl_skip_last
 		( "<div class=\"poem\">"
 		, "<p>"
@@ -102,7 +102,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Xtn() {	// NOTE: behavior as per MW: DATE:2014-03-03
+	@Test public void Xtn() {	// NOTE: behavior as per MW: DATE:2014-03-03
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("test_print", "{{{1}}}");
 		fxt.Init_defn_add("test_outer", String_.Concat_lines_nl_skip_last
@@ -119,7 +119,7 @@ public class Poem_nde_tst {
 		));
 		fxt.Init_defn_clear();
 	}
-	@Test  public void Err_empty_line() {// PURPOSE: one \n caused poem to fail
+	@Test public void Err_empty_line() {// PURPOSE: one \n caused poem to fail
 		fxt.Test_parse_page_wiki_str("<poem>\n</poem>", String_.Concat_lines_nl_skip_last
 		( "<div class=\"poem\">"
 		, "<p>"
@@ -128,7 +128,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Err_dangling_comment() {// PURPOSE: ArrayIndexOutOfBoundsError if poem has <references/> and ends with <!--; PAGE:en.s:The Hebrew Nation did not write it; DATE:2015-01-31
+	@Test public void Err_dangling_comment() {// PURPOSE: ArrayIndexOutOfBoundsError if poem has <references/> and ends with <!--; PAGE:en.s:The Hebrew Nation did not write it; DATE:2015-01-31
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, "<references/>"
@@ -137,7 +137,7 @@ public class Poem_nde_tst {
 		( "&lt;poem&gt;"
 		));
 	}
-	@Test  public void Ref() {	// PURPOSE: <ref> inside poem was not showing up; DATE:2014-01-17
+	@Test public void Ref() {	// PURPOSE: <ref> inside poem was not showing up; DATE:2014-01-17
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<poem>a<ref>b</ref></poem>"
 		, "<references/>"), String_.Concat_lines_nl_skip_last
@@ -152,14 +152,14 @@ public class Poem_nde_tst {
 		, ""
 		));
 	}
-	@Test  public void Template_tkn() {	// PURPOSE: make sure {{{1}}} is interpreted as invk_prm, not as text; DATE:2014-03-03
+	@Test public void Template_tkn() {	// PURPOSE: make sure {{{1}}} is interpreted as invk_prm, not as text; DATE:2014-03-03
 		fxt.Test_parse_tmpl("<poem>{{{1}}}</poem>"
 		, fxt.tkn_xnde_(0, 20).Subs_
 		( fxt.tkn_tmpl_prm_find_(fxt.tkn_txt_(9, 10))
 		)
 		);
 	}
-	@Test  public void Template_parse() {	// PURPOSE: <poem> inside template was not evaluating args; EX:en.s:The_Canterville_Ghost; DATE:2014-03-03
+	@Test public void Template_parse() {	// PURPOSE: <poem> inside template was not evaluating args; EX:en.s:The_Canterville_Ghost; DATE:2014-03-03
 		fxt.Init_page_create("Template:A", "<poem>{{{1}}}</poem>");
 		fxt.Test_parse_page_all_str("{{A|b}}", String_.Concat_lines_nl_skip_last
 		( "<div class=\"poem\">"
@@ -169,7 +169,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Nested() {	// PURPOSE: handled nested poems; EX:en.s:The_Canterville_Ghost; DATE:2014-03-03
+	@Test public void Nested() {	// PURPOSE: handled nested poems; EX:en.s:The_Canterville_Ghost; DATE:2014-03-03
 		fxt.Test_parse_page_all_str("a<poem>b<poem>c</poem>d</poem>e", String_.Concat_lines_nl_skip_last
 		( "a<div class=\"poem\">"
 		, "<p>"
@@ -182,7 +182,7 @@ public class Poem_nde_tst {
 		, "</div>e"
 		));
 	}
-	@Test  public void Indent_line_0() {	// PURPOSE: handle colon on 1st line; PAGE:en.w:Mary_Wollstonecraft DATE:2014-10-19
+	@Test public void Indent_line_0() {	// PURPOSE: handle colon on 1st line; PAGE:en.w:Mary_Wollstonecraft DATE:2014-10-19
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, ":a"
@@ -197,7 +197,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Indent_many() {	// PURPOSE: handle colon on 2nd line; PAGE:vi.s:Văn_Côi_thánh_nguyệt_tán_tụng_thi_ca DATE:2014-10-15
+	@Test public void Indent_many() {	// PURPOSE: handle colon on 2nd line; PAGE:vi.s:Văn_Côi_thánh_nguyệt_tán_tụng_thi_ca DATE:2014-10-15
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, "a"
@@ -214,7 +214,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Indent_blank() {	// PURPOSE: check blank lines; PAGE:none DATE:2014-10-19
+	@Test public void Indent_blank() {	// PURPOSE: check blank lines; PAGE:none DATE:2014-10-19
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, ":a"
@@ -231,7 +231,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void List_does_not_end() {// PURPOSE: list does not end with "\ntext"; PAGE:vi.s:Dương_Từ_Hà_Mậu_(dị_bản_mới); li.s:Sint_Servaes_legende/Nuuj_fergmènter DATE:2014-10-19
+	@Test public void List_does_not_end() {// PURPOSE: list does not end with "\ntext"; PAGE:vi.s:Dương_Từ_Hà_Mậu_(dị_bản_mới); li.s:Sint_Servaes_legende/Nuuj_fergmènter DATE:2014-10-19
 		fxt.Test_parse_page_all_str(String_.Concat_lines_nl_skip_last
 		( "<poem>"
 		, "a"
@@ -256,7 +256,7 @@ public class Poem_nde_tst {
 		, "</div>"
 		));
 	}
-	@Test  public void Page() {	// PURPOSE: handled dangling poems across pages; PAGE:ca.s:Llibre_de_Disputació_de_l'Ase DATE:2014-10-19
+	@Test public void Page() {	// PURPOSE: handled dangling poems across pages; PAGE:ca.s:Llibre_de_Disputació_de_l'Ase DATE:2014-10-19
 		fxt.Init_xtn_pages();
 		fxt.Init_page_create("Page:A/1", "<poem>a\nb\n");
 		fxt.Init_page_create("Page:A/2", "<poem>c\nd\n");

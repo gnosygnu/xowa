@@ -25,61 +25,61 @@ public class Listing_xnde_basic_tst {
 		listings_xtn_mgr.Enabled_y_();
 		listings_xtn_mgr.Xtn_init_by_wiki(fxt.Wiki());
 	}
-	@Test  public void Url() {
+	@Test public void Url() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' url='http://site.org'/>"
 		,	"<a href=\"http://site.org\" rel=\"nofollow\" class=\"external text\" title=\"name_0\"><strong>name_0</strong></a>. "
 		);
 	}
-	@Test  public void Alt() {
+	@Test public void Alt() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' alt=\"''alt_0''\"/>"
 		,	"<strong>name_0</strong> (<em><i>alt_0</i></em>). "
 		);
 	}
-	@Test  public void Address_directions() {
+	@Test public void Address_directions() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' address='address_0' directions='directions_0'/>"
 		,	"<strong>name_0</strong>, address_0 (<em>directions_0</em>). "
 		);
 	}
-	@Test  public void Phone_tollfree() {
+	@Test public void Phone_tollfree() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' phone='phone_0' tollfree='tollfree_0'/>"
 		,	"<strong>name_0</strong>, <abbr title=\"phone\">☎</abbr> phone_0 (toll-free: tollfree_0). "
 		);
 	}
-	@Test  public void Fax() {
+	@Test public void Fax() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' fax='fax_0'/>"
 		,	"<strong>name_0</strong>, fax: fax_0. "
 		);
 	}
-	@Test  public void Email() {
+	@Test public void Email() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' email='email_0'/>"
 		,	"<strong>name_0</strong>, email: <a href=\"mailto:email_0\" class=\"email\">email_0</a>. "
 		);
 	}
-	@Test  public void Hours() {
+	@Test public void Hours() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' hours='hours_0'/>"
 		,	"<strong>name_0</strong>. hours_0. "
 		);
 	}
-	@Test  public void Checkin_checkout() {
+	@Test public void Checkin_checkout() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' checkin='checkin_0' checkout='checkout_0'/>"
 		,	"<strong>name_0</strong>. Check-in: checkin_0, check-out: checkout_0. "
 		);
 	}
-	@Test  public void Price() {
+	@Test public void Price() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0' price='price_0'/>"
 		,	"<strong>name_0</strong>. price_0. "
 		);
 	}
-	@Test  public void Content() {
+	@Test public void Content() {
 		fxt.Test_parse_page_all_str
 		(	"<sleep name='name_0'>content_0</sleep>"
 		,	"<strong>name_0</strong>. content_0"

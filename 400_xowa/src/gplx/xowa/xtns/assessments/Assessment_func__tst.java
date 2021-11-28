@@ -17,7 +17,7 @@ package gplx.xowa.xtns.assessments; import gplx.*; import gplx.xowa.*; import gp
 import org.junit.*;
 public class Assessment_func__tst {
 	@Before public void init()				{fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test__parse__tmpl_to_html("{{#assessment:Name|A|Hi}}", "");
 	}
 }

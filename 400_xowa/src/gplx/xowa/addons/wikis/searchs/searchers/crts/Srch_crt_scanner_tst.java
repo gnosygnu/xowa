@@ -17,33 +17,33 @@ package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gpl
 import org.junit.*; import gplx.xowa.addons.wikis.searchs.parsers.*;
 public class Srch_crt_scanner_tst {
 	private final    Srch_crt_scanner_fxt fxt = new Srch_crt_scanner_fxt();
-	@Test   public void Word() 						{fxt.Test__scan("abc"				, "abc");}
-	@Test   public void Word__many() 				{fxt.Test__scan("abc d ef"			, "abc", "d", "ef");}
-	@Test   public void Word__symbol() 				{fxt.Test__scan("a; b"				, "a;", "b");}
-	@Test   public void And() 						{fxt.Test__scan("a + b"				, "a", "+", "b");}
-	@Test   public void And__parens() 				{fxt.Test__scan("a +(b)"			, "a", "+", "(", "b", ")");}		// check that ( causes and to be treated as separate word
-	@Test   public void Or() 						{fxt.Test__scan("a , b"				, "a", ",", "b");}
-	@Test   public void Or__no_space() 				{fxt.Test__scan("a, b"				, "a", ",", "b");}
-	@Test   public void Not() 						{fxt.Test__scan("-abc"				, "-", "abc");}
-	@Test   public void Not__mid__1()				{fxt.Test__scan("a-b"				, "a-b");}							// fails if "a", "-", "b"
-	@Test   public void Not__mid__2() 				{fxt.Test__scan("a b-c"				, "a", "b-c");}						// ignore - if in middle of word
-	@Test   public void Not__and() 					{fxt.Test__scan("a -bc"				, "a", "-", "bc");}					// auto-add AND for -
-	@Test   public void Not__dangling() 			{fxt.Test__scan("a -"				, "a", "-");}
-	@Test   public void Space() 					{fxt.Test__scan(" a   b "			, "a", "b");}						// spaces should not generate tkns
-	@Test   public void Quote() 					{fxt.Test__scan("\"a b\""			, "a b");}
-	@Test   public void Quote__mid() 				{fxt.Test__scan("a\"b"				, "a", "b");}
-	@Test   public void Quote__double() 			{fxt.Test__scan("\"a\"\"b\""		, "a\"b");}
-	@Test   public void Quote__missing__one() 		{fxt.Test__scan("\"abc"				, "abc");}
-	@Test   public void Quote__missing__many() 		{fxt.Test__scan("\"abc a"			, "abc", "a");}
-	@Test   public void Escape__bgn() 				{fxt.Test__scan("\\-a"				, "-a");}							// fails if "-", "a"
-	@Test   public void Escape__and__bgn() 			{fxt.Test__scan("\\+"				, "+");}							// fails if "a", "&", "b"
-	@Test   public void Escape__and__mid() 			{fxt.Test__scan("a\\+b"				, "a+b");}							// fails if "a", "&", "b"
-	@Test   public void Escape__eos__1() 			{fxt.Test__scan("\\"				, String_.Ary_empty);}
-	@Test   public void Escape__eos__2() 			{fxt.Test__scan("a \\"				, "a");}
-	@Test   public void Escape__eos__3() 			{fxt.Test__scan("a\\"				, "a");}
-	@Test   public void Escape__many() 				{fxt.Test__scan("c\\+\\+"			, "c++");}
-	@Test   public void Escape__end() 				{fxt.Test__scan("a\\\\"				, "a\\");}
-	@Test   public void Complicated() 				{fxt.Test__scan("(a + \"b\") , -c", "(", "a", "+", "b", ")", ",", "-", "c");}
+	@Test  public void Word() 						{fxt.Test__scan("abc"				, "abc");}
+	@Test  public void Word__many() 				{fxt.Test__scan("abc d ef"			, "abc", "d", "ef");}
+	@Test  public void Word__symbol() 				{fxt.Test__scan("a; b"				, "a;", "b");}
+	@Test  public void And() 						{fxt.Test__scan("a + b"				, "a", "+", "b");}
+	@Test  public void And__parens() 				{fxt.Test__scan("a +(b)"			, "a", "+", "(", "b", ")");}		// check that ( causes and to be treated as separate word
+	@Test  public void Or() 						{fxt.Test__scan("a , b"				, "a", ",", "b");}
+	@Test  public void Or__no_space() 				{fxt.Test__scan("a, b"				, "a", ",", "b");}
+	@Test  public void Not() 						{fxt.Test__scan("-abc"				, "-", "abc");}
+	@Test  public void Not__mid__1()				{fxt.Test__scan("a-b"				, "a-b");}							// fails if "a", "-", "b"
+	@Test  public void Not__mid__2() 				{fxt.Test__scan("a b-c"				, "a", "b-c");}						// ignore - if in middle of word
+	@Test  public void Not__and() 					{fxt.Test__scan("a -bc"				, "a", "-", "bc");}					// auto-add AND for -
+	@Test  public void Not__dangling() 			{fxt.Test__scan("a -"				, "a", "-");}
+	@Test  public void Space() 					{fxt.Test__scan(" a   b "			, "a", "b");}						// spaces should not generate tkns
+	@Test  public void Quote() 					{fxt.Test__scan("\"a b\""			, "a b");}
+	@Test  public void Quote__mid() 				{fxt.Test__scan("a\"b"				, "a", "b");}
+	@Test  public void Quote__double() 			{fxt.Test__scan("\"a\"\"b\""		, "a\"b");}
+	@Test  public void Quote__missing__one() 		{fxt.Test__scan("\"abc"				, "abc");}
+	@Test  public void Quote__missing__many() 		{fxt.Test__scan("\"abc a"			, "abc", "a");}
+	@Test  public void Escape__bgn() 				{fxt.Test__scan("\\-a"				, "-a");}							// fails if "-", "a"
+	@Test  public void Escape__and__bgn() 			{fxt.Test__scan("\\+"				, "+");}							// fails if "a", "&", "b"
+	@Test  public void Escape__and__mid() 			{fxt.Test__scan("a\\+b"				, "a+b");}							// fails if "a", "&", "b"
+	@Test  public void Escape__eos__1() 			{fxt.Test__scan("\\"				, String_.Ary_empty);}
+	@Test  public void Escape__eos__2() 			{fxt.Test__scan("a \\"				, "a");}
+	@Test  public void Escape__eos__3() 			{fxt.Test__scan("a\\"				, "a");}
+	@Test  public void Escape__many() 				{fxt.Test__scan("c\\+\\+"			, "c++");}
+	@Test  public void Escape__end() 				{fxt.Test__scan("a\\\\"				, "a\\");}
+	@Test  public void Complicated() 				{fxt.Test__scan("(a + \"b\") , -c", "(", "a", "+", "b", ")", ",", "-", "c");}
 }
 class Srch_crt_scanner_fxt {
 	private final    Srch_crt_scanner scanner;

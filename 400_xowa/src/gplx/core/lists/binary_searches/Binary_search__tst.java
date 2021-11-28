@@ -17,7 +17,7 @@ package gplx.core.lists.binary_searches; import gplx.*; import gplx.core.*; impo
 import org.junit.*; import gplx.core.primitives.*;
 public class Binary_search__tst {
 	private final    Binary_search__fxt fxt = new Binary_search__fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init__ary("", "e", "j", "o", "t", "y");
 		fxt.Test__binary_search("a", 0);
 		fxt.Test__binary_search("f", 1);
@@ -26,11 +26,11 @@ public class Binary_search__tst {
 		fxt.Test__binary_search("u", 4);
 		fxt.Test__binary_search("z", 5);
 	}
-	@Test  public void One() {
+	@Test public void One() {
 		fxt.Init__ary("");
 		fxt.Test__binary_search("a", 0);
 	}
-	@Test  public void Catpage() {
+	@Test public void Catpage() {
 		String[] ary = new String[25];
 		for (int i = 0; i < 25; ++i)
 			ary[i] = Int_.To_str_pad_bgn_zero(i, 2);

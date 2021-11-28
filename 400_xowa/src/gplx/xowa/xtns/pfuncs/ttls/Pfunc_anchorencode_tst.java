@@ -19,49 +19,49 @@ import gplx.core.consoles.*;
 public class Pfunc_anchorencode_tst {
 	private final    Pfunc_anchorenchode_fxt fxt = new Pfunc_anchorenchode_fxt(Bool_.N);
 	@Before public void init() {fxt.Reset();}
-	@Test  public void Text_apos() {
+	@Test public void Text_apos() {
 		fxt.Test("{{anchorencode:a 'b c}}", "a_'b_c");
 	}
-	@Test  public void Apos_bold() {
+	@Test public void Apos_bold() {
 		fxt.Test("{{anchorencode:a ''b'' c}}", "a_b_c");
 	}
-	@Test  public void Html_ncr() {
+	@Test public void Html_ncr() {
 		fxt.Test("{{anchorencode:a &#34; b}}", "a_&quot;_b");
 	}
-	@Test  public void Html_ref() {
+	@Test public void Html_ref() {
 		fxt.Test("{{anchorencode:a &quot; b}}", "a_&quot;_b");
 	}
-	@Test  public void Xnde() {
+	@Test public void Xnde() {
 		fxt.Test("{{anchorencode:a <i>b</i> c}}", "a_b_c");
 	}
-	@Test  public void Lnke() {
+	@Test public void Lnke() {
 		fxt.Test("{{anchorencode:[irc://a b c]}}", "b_c");
 	}
-	@Test  public void Lnki_trg() {
+	@Test public void Lnki_trg() {
 		fxt.Test("{{anchorencode:a [[b]] c}}", "a_b_c");
 	}
-	@Test  public void Lnki_caption() {
+	@Test public void Lnki_caption() {
 		fxt.Test("{{anchorencode:a [[b|c]] c}}", "a_c_c");
 	}
-	@Test  public void Lnki_file() {
+	@Test public void Lnki_file() {
 		fxt.Test("{{anchorencode:a [[Image:b|thumb|123px|c]] d}}", "a_thumb|123px|c_d");
 	}
-	@Test  public void Lnki_trailing() {
+	@Test public void Lnki_trailing() {
 		fxt.Test("{{anchorencode:a [[b]]c d}}", "a_bc_d");
 	}
-	@Test  public void Lnki_literal() {
+	@Test public void Lnki_literal() {
 		fxt.Test("{{anchorencode:[[:a]]}}", "a");
 	}
-	@Test  public void Lnki_caption_html() { // ISSUE#:460
+	@Test public void Lnki_caption_html() { // ISSUE#:460
 		fxt.Test("{{anchorencode:[[a|<span style=\"color:red\">b</span>]]}}", "b");
 	}
-	@Test  public void Lnki_missing_basic() {
+	@Test public void Lnki_missing_basic() {
 		fxt.Test("{{anchorencode:{{Xowa_missing}}}}", "Template:Xowa_missing");
 	}
-	@Test  public void Lnki_missing_colon() {
+	@Test public void Lnki_missing_colon() {
 		fxt.Test("{{anchorencode:{{:Xowa_missing}}}}", "Xowa_missing");
 	}
-	@Test  public void Tmpl() {
+	@Test public void Tmpl() {
 		fxt.Make_page("Template:Xowa1", "a<span>b</span>c");
 		fxt.Test(false, "{{anchorencode:{{Xowa1}}}}", "abc");
 	}

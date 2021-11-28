@@ -20,13 +20,13 @@ public class List_adp_tst {
 		list = List_adp_.New();
 		listBase = (List_adp_base)list;
 	}	List_adp list; List_adp_base listBase;
-	@Test  public void Add() {
+	@Test public void Add() {
 		Tfds.Eq(0, list.Count());
 
 		list.Add("0");
 		Tfds.Eq(1, list.Count());
 	}
-	@Test  public void Add_changeCapacity() {
+	@Test public void Add_changeCapacity() {
 		int capacity = 8;
 		for (int i = 0; i < capacity; i++)
 			list.Add("0");
@@ -37,30 +37,30 @@ public class List_adp_tst {
 		Tfds.Eq(capacity + 1, list.Count());
 		Tfds.Eq(capacity * 2, listBase.Capacity());
 	}
-	@Test  public void Get_at() {
+	@Test public void Get_at() {
 		list.Add("0");
 
 		Tfds.Eq("0", list.Get_at(0));
 	}
-	@Test  public void Fetch_many() {
+	@Test public void Fetch_many() {
 		list_AddMany("0", "1");
 
 		Tfds.Eq("0", list.Get_at(0));
 		Tfds.Eq("1", list.Get_at(1));
 	}
-	@Test  public void FetchAt_fail() {
+	@Test public void FetchAt_fail() {
 		try {list.Get_at(0);}
 		catch (Exception exc) {Err_.Noop(exc); return;}
 		Tfds.Fail("Get_at should fail for out of bound index");
 	}
-	@Test  public void Del_at() {
+	@Test public void Del_at() {
 		list.Add("0");
 		Tfds.Eq(1, list.Count());
 
 		list.Del_at(0);
 		Tfds.Eq(0, list.Count());
 	}
-	@Test  public void DelAt_shiftDown() {
+	@Test public void DelAt_shiftDown() {
 		list_AddMany("0", "1");
 		Tfds.Eq(list.Count(), 2);
 
@@ -68,19 +68,19 @@ public class List_adp_tst {
 		Tfds.Eq(1, list.Count());
 		Tfds.Eq("1", list.Get_at(0));
 	}
-	@Test  public void DelAt_fail() {
+	@Test public void DelAt_fail() {
 		try {list.Del_at(0);}
 		catch (Exception exc) {Err_.Noop(exc); return;}
 		Tfds.Fail("Del_at should fail for out of bound index");
 	}
-	@Test  public void Del() {
+	@Test public void Del() {
 		list.Add("0");
 		Tfds.Eq(1, list.Count());
 
 		list.Del("0");
 		Tfds.Eq(0, list.Count());
 	}
-	@Test  public void Del_matchMember() {
+	@Test public void Del_matchMember() {
 		list_AddMany("0", "1");
 		Tfds.Eq(2, list.Count());
 
@@ -88,23 +88,23 @@ public class List_adp_tst {
 		Tfds.Eq(1, list.Count());
 		Tfds.Eq("0", list.Get_at(0));
 	}
-	@Test  public void Del_matchFirst() {
+	@Test public void Del_matchFirst() {
 		list_AddMany("0", "1", "0");
 		Tfds.Eq(3, list.Count());
 
 		list.Del("0");
 		tst_Enumerator("1", "0");
 	}
-	@Test  public void Enumerator() {
+	@Test public void Enumerator() {
 		list_AddMany("0", "1", "2");
 		tst_Enumerator("0", "1", "2");
 	}
-	@Test  public void Enumerator_stateLess() { // run 2x, to confirm no state is being cached
+	@Test public void Enumerator_stateLess() { // run 2x, to confirm no state is being cached
 		list_AddMany("0", "1", "2");
 		tst_Enumerator("0", "1", "2");
 		tst_Enumerator("0", "1", "2"); 
 	}
-	@Test  public void Enumerator_recursive() { // confirm separate enumerator objects are used
+	@Test public void Enumerator_recursive() { // confirm separate enumerator objects are used
 		int pos = 0;
 		list_AddMany("0", "1", "2");
 		for (Object valObj : list) {
@@ -113,7 +113,7 @@ public class List_adp_tst {
 			tst_Enumerator("0", "1", "2");
 		}
 	}
-	@Test  public void Clear() {
+	@Test public void Clear() {
 		int capacity = 8;
 		for (int i = 0; i < capacity + 1; i++)
 			list.Add("0");
@@ -123,36 +123,36 @@ public class List_adp_tst {
 		Tfds.Eq(0, list.Count());
 		Tfds.Eq(16, listBase.Capacity()); // check that capacity has increased
 	}
-	@Test  public void Clear_empty() { // confirm no failure
+	@Test public void Clear_empty() { // confirm no failure
 		list.Clear();
 		Tfds.Eq(0, list.Count());
 	}
-	@Test  public void Reverse() {
+	@Test public void Reverse() {
 		list_AddMany("0", "1", "2");
 		
 		list.Reverse();
 		tst_Enumerator("2", "1", "0");
 	}
-	@Test  public void Reverse_empty() {list.Reverse();}
-	@Test  public void Sort() {
+	@Test public void Reverse_empty() {list.Reverse();}
+	@Test public void Sort() {
 		list_AddMany("2", "0", "1");
 		
 		list.Sort();
 		tst_Enumerator("0", "1", "2");
 	}
-	@Test  public void Sort_empty() {list.Sort();}
-	@Test  public void Xto_bry() {
+	@Test public void Sort_empty() {list.Sort();}
+	@Test public void Xto_bry() {
 		list_AddMany("0", "1");
 		String[] ary = (String[])list.To_ary(String.class);
 		Tfds.Eq_nullNot(ary);
 		Tfds.Eq(2, Array_.Len(ary));
 	}
-	@Test  public void XtoAry_empty() {
+	@Test public void XtoAry_empty() {
 		String[] ary = (String[])list.To_ary(String.class);
 		Tfds.Eq_nullNot(ary);
 		Tfds.Eq(0, Array_.Len(ary));
 	}
-	@Test  public void Shuffle() {
+	@Test public void Shuffle() {
 		for (int i = 0; i < 25; i++)
 			list.Add(i);
 
@@ -169,14 +169,14 @@ public class List_adp_tst {
 			list.Del(i);
 		Tfds.Eq(0, list.Count(), "shuffled list does not have the same contents as original list");
 	}
-	@Test  public void Shuffle_empty() {list.Shuffle();}
-	@Test  public void Move_to() {
+	@Test public void Shuffle_empty() {list.Shuffle();}
+	@Test public void Move_to() {
 		run_ClearAndAdd("0", "1", "2").run_MoveTo(0, 1).tst_Order("1", "0", "2");
 		run_ClearAndAdd("0", "1", "2").run_MoveTo(0, 2).tst_Order("1", "2", "0");
 		run_ClearAndAdd("0", "1", "2").run_MoveTo(2, 1).tst_Order("0", "2", "1");
 		run_ClearAndAdd("0", "1", "2").run_MoveTo(2, 0).tst_Order("2", "0", "1");
 	}
-	@Test  public void Del_range() {
+	@Test public void Del_range() {
 		run_ClearAndAdd("0", "1", "2", "3").tst_DelRange(0, 2, "3");
 		run_ClearAndAdd("0", "1", "2", "3").tst_DelRange(0, 3);
 		run_ClearAndAdd("0", "1", "2", "3").tst_DelRange(1, 2, "0", "3");

@@ -23,33 +23,33 @@ public class Scrib_lib_title_tst {
 		fxt.Core().Wiki().File__fsdb_mode().Tid__v2__bld__y_();
 		lib = fxt.Core().Lib_title().Init();
 	}
-	@Test  public void NewTitle() {
+	@Test public void NewTitle() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("Page_0")				, ttl_fast(0	, "", "Page 0", "", "", "Page_0"));
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("A", "Template")			, ttl_fast(10	, "Template", "A"));
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("a[b")					, Scrib_invoke_func_fxt.Null_rslt_ary);	// invalid
 	}
-	@Test  public void NewTitle_int() {
+	@Test public void NewTitle_int() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary(1234)					, ttl_fast(0	, "", "1234", "", "", "1234"));
 	}
-	@Test  public void NewTitle_ns() {// ns in title takes precedence over argument; ISSUE#:473 DATE:2019-05-22
+	@Test public void NewTitle_ns() {// ns in title takes precedence over argument; ISSUE#:473 DATE:2019-05-22
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("Template:A", "Template"), ttl_fast(10   , "Template", "A"));
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("Help:A"    , "Template"), ttl_fast(12   , "Help", "A"));
 	}
-	@Test  public void NewTitle__foreign() {// PURPOSE: must be local language's version; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
+	@Test public void NewTitle__foreign() {// PURPOSE: must be local language's version; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
 		fxt.Core().Wiki().Ns_mgr().Ns_template().Name_bry_(Bry_.new_a7("Template_in_nonenglish_name"));
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_newTitle, Object_.Ary("A", "Template")			, ttl_fast(10	, "Template_in_nonenglish_name", "A"));	// "Template_in_nonenglish_name" not "Template"
 	}
-	@Test   public void GetUrl() {
+	@Test  public void GetUrl() {
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl")						, "//en.wikipedia.org/wiki/Main_Page");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl", "action=edit")			, "//en.wikipedia.org/wiki/Main_Page?action=edit");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "localUrl")						, "/wiki/Main_Page");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "canonicalUrl")					, "https://en.wikipedia.org/wiki/Main_Page");
 		// fxt.Test_scrib_proc_str(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl", "", "http")			, "http://en.wikipedia.org/wiki/Main_Page");	// TODO_OLD
 	}
-	@Test  public void GetUrl__args_many() {	// PUPROSE: GetUrl sometimes passes in kvs for qry_args; fr.w:Wikipédia:Image_du_jour/Date; DATE:2013-12-24
+	@Test public void GetUrl__args_many() {	// PUPROSE: GetUrl sometimes passes in kvs for qry_args; fr.w:Wikipédia:Image_du_jour/Date; DATE:2013-12-24
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "canonicalUrl", Keyval_.Ary(Keyval_.new_("action", "edit"), Keyval_.new_("preload", "b"))), "https://en.wikipedia.org/wiki/Main_Page?action=edit&preload=b");
 	}
-	@Test  public void GetUrl__args_encode() {	// PUPROSE: GetUrl should url-encode arguments; ISSUE#:465 DATE:2019-05-18
+	@Test public void GetUrl__args_encode() {	// PUPROSE: GetUrl should url-encode arguments; ISSUE#:465 DATE:2019-05-18
 		// NOTE: tested with following
 		// =mw.title.makeTitle("Template", "A"):fullUrl{"a / b", "c / d"}
 		// //en.wikipedia.org/w/index.php?title=Template:A&1=a+%2F+b&2=c+%2F+d
@@ -62,7 +62,7 @@ public class Scrib_lib_title_tst {
 		// do not encode if String
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getUrl, Object_.Ary("Main_Page", "fullUrl", "a / b=c / d"), "//en.wikipedia.org/wiki/Main_Page?a / b=c / d");
 	}
-	@Test   public void MakeTitle() {
+	@Test  public void MakeTitle() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Module", "A")								, ttl_fast(828, "Module", "A"));
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary(828, "A")									, ttl_fast(828, "Module", "A"));
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b")						, ttl_fast(10, "Template", "A", "b"));
@@ -70,20 +70,20 @@ public class Scrib_lib_title_tst {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "A", "b", "fr")					, ttl_fast(0, "", "Template:A", "b", "fr"));
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "a[b"), Scrib_invoke_func_fxt.Null_rslt_ary);	// PURPOSE: handle bad MakeTitle cmds; PAGE:en.w:Disney; DATE:2013-10-15
 	}
-	@Test   public void GetExpensiveData_absent() {
+	@Test  public void GetExpensiveData_absent() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.N, 0, Bool_.N));
 	}
-	@Test   public void GetExpensiveData_exists() {
+	@Test  public void GetExpensiveData_exists() {
 		fxt.Parser_fxt().Init_page_create("A");
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.Y, 0, Bool_.N));
 	}
-	@Test   public void GetExpensiveData_cache() { // ISSUE#:597; DATE:2019-11-18
+	@Test  public void GetExpensiveData_cache() { // ISSUE#:597; DATE:2019-11-18
 		gplx.xowa.wikis.caches.Xow_page_cache cache_mgr = fxt.Parser_fxt().Wiki().Cache_mgr().Page_cache();
 		Gftest.Eq__bool(Bool_.N, cache_mgr.Get_itm_or_null("A") != null); // item does not exist
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.N, 0, Bool_.N));
 		Gftest.Eq__bool(Bool_.Y, cache_mgr.Get_itm_or_null("A") != null); // item exists
 	}
-	@Test   public void GetFileInfo() {
+	@Test  public void GetFileInfo() {
 		Wiki_orig_tbl__create(fxt.Core().Wiki());
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("A")										, file_info_absent());
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("Template:A")								, file_info_absent());
@@ -92,36 +92,36 @@ public class Scrib_lib_title_tst {
 		Wiki_orig_tbl__insert(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")								, file_info_exists("A.png", 220, 200));
 	}
-	@Test   public void GetFileInfo_commons() {	// PURPOSE: check that Scribunto GetFileInfo calls filepath.FileExists; DATE:2014-01-07
+	@Test  public void GetFileInfo_commons() {	// PURPOSE: check that Scribunto GetFileInfo calls filepath.FileExists; DATE:2014-01-07
 		Xowe_wiki commons_wiki = fxt.Parser_fxt().Wiki().Appe().Wiki_mgr().Get_by_or_make(gplx.xowa.wikis.domains.Xow_domain_itm_.Bry__commons).Init_assert();
 		Wiki_orig_tbl__create(fxt.Core().Wiki());
 		Wiki_orig_tbl__insert(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Parser_fxt().Init_page_create(commons_wiki, "File:A.png", "text_is_blank");
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("File:A.png")							, file_info_exists("A.png", 220, 200));
 	}
-	@Test   public void GetFileInfo_media() {	// PURPOSE: [[Media:]] ns should find entries in [[File:]]; DATE:2014-01-07
+	@Test  public void GetFileInfo_media() {	// PURPOSE: [[Media:]] ns should find entries in [[File:]]; DATE:2014-01-07
 		Wiki_orig_tbl__create(fxt.Core().Wiki());
 		Wiki_orig_tbl__insert(fxt.Core().Wiki(), "A.png", 220, 200);
 		fxt.Parser_fxt().Init_page_create("File:A.png");
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getFileInfo, Object_.Ary("Media:A.png")							, file_info_exists("A.png", 220, 200));
 	}
-	@Test   public void GetContent() {
+	@Test  public void GetContent() {
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")										, Scrib_invoke_func_fxt.Null_rslt);
 
 		fxt.Parser_fxt().Ctx().Wiki().Cache_mgr().Page_cache().Free_mem(true);
 		fxt.Parser_fxt().Init_page_create("A", "test");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")										, "test");
 	}
-	@Test   public void GetContent_redirect() {// PURPOSE: GetContent should return source text for redirect, not target; PAGE:de.w:Wikipedia:Autorenportal DATE:2014-07-11
+	@Test  public void GetContent_redirect() {// PURPOSE: GetContent should return source text for redirect, not target; PAGE:de.w:Wikipedia:Autorenportal DATE:2014-07-11
 		fxt.Parser_fxt().Init_page_create("A", "#REDIRECT [[B]]");
 		fxt.Parser_fxt().Init_page_create("B", "C");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")										, "#REDIRECT [[B]]");	// should not be "C"
 	}
-	@Test   public void GetContent__redirect_missing() {// PURPOSE: // page redirects to missing page; note that page.Missing == true and page.Redirected_src() != null; PAGE: en.w:Shah_Rukh_Khan; DATE:2016-05-02
+	@Test  public void GetContent__redirect_missing() {// PURPOSE: // page redirects to missing page; note that page.Missing == true and page.Redirected_src() != null; PAGE: en.w:Shah_Rukh_Khan; DATE:2016-05-02
 		fxt.Parser_fxt().Init_page_create("A", "#REDIRECT [[B]]");
 		fxt.Test__proc__objs__flat(lib, Scrib_lib_title.Invk_getContent, Object_.Ary("A")										, "#REDIRECT [[B]]");	// fails with null
 	}
-	@Test   public void ProtectionLevels() {
+	@Test  public void ProtectionLevels() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_protectionLevels, Object_.Ary("A"), 
 			String_.Concat_lines_nl_skip_last
 			( "1="
@@ -131,10 +131,10 @@ public class Scrib_lib_title_tst {
 			, "    1=sysop"
 			));
 	}
-	@Test   public void CascadingProtection() {
+	@Test  public void CascadingProtection() {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_cascadingProtection, Object_.Ary("A")								, Scrib_lib_title.CascadingProtection_rv);
 	}
-	@Test   public void RedirectTarget() {
+	@Test  public void RedirectTarget() {
 		fxt.Parser_fxt().Init_page_create("A", "#REDIRECT [[B]]");
 		fxt.Parser_fxt().Init_page_create("B", "C");
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_redirectTarget, Object_.Ary("A")									, ttl_fast(0	, "", "B", "", "", "B"));

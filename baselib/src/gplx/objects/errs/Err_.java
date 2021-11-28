@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.objects.errs; import gplx.*; import gplx.objects.*;
-import gplx.objects.strings.*;
+package gplx.objects.errs; import gplx.objects.Object_;
+import gplx.objects.strings.String_;
 public class Err_ {
 	public static void Noop(Exception e) {}
 	public static Err New_fmt(String fmt, Object... args) {return new Err(String_.Format(fmt, args));}
@@ -27,14 +27,15 @@ public class Err_ {
 	public static Err New_unhandled_default(Object o) {
 		return new Err("val is not in switch; val=" + Object_.To_str(o));
 	}
+	public static Err New_unimplemented() {return new Err("Method is not implemented");}
 
-		public static String Message_lang(Exception e) {
+	public static String Message_lang(Exception e) {
 		return Error.class.isAssignableFrom(e.getClass())
 				? e.toString()    // java.lang.Error returns null for "getMessage()"; return "toString()" instead
 				: e.getMessage();
 	}
 	
-		public static String Trace_lang(Throwable e) {
+	public static String Trace_lang(Throwable e) {
 		StackTraceElement[] ary = e.getStackTrace();
 		String rv = "";
 		for (int i = 0; i < ary.length; i++) {
@@ -43,4 +44,4 @@ public class Err_ {
 		}
 		return rv;
 	}
-	}
+}

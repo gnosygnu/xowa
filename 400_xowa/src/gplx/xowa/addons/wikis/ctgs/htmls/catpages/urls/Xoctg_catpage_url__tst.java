@@ -17,15 +17,15 @@ package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls; import gplx.*; import g
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.apps.urls.*;
 public class Xoctg_catpage_url__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_catpage_url__fxt fxt = new Xoctg_catpage_url__fxt();
-	@Test   public void Specific() {
+	@Test  public void Specific() {
 		fxt.Exec__parse("A?subcatfrom=B&filefrom=C&pagefrom=D"		).Test__keys("B", "C", "D").Test__fwds(Bool_.Y, Bool_.Y, Bool_.Y);
 		fxt.Exec__parse("A?subcatuntil=B&fileuntil=C&pageuntil=D"	).Test__keys("B", "C", "D").Test__fwds(Bool_.N, Bool_.N, Bool_.N);
 	}
-	@Test   public void General() {
+	@Test  public void General() {
 		fxt.Exec__parse("A?from=B"	).Test__keys("B", "B", "B").Test__fwds(Bool_.Y, Bool_.Y, Bool_.Y);
 		fxt.Exec__parse("A?until=B"	).Test__keys("B", "B", "B").Test__fwds(Bool_.N, Bool_.N, Bool_.N);
 	}
-	@Test   public void Url_encoded() {
+	@Test  public void Url_encoded() {
 		fxt.Exec__parse("A?from=B+C").Test__keys("B C", "B C", "B C").Test__fwds(Bool_.Y, Bool_.Y, Bool_.Y);
 	}
 }

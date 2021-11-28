@@ -17,10 +17,10 @@ package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*;
 public class Xob_css_parser__import_tst {
 	@Before public void init() {fxt.Clear();} private Xob_css_parser__import_fxt fxt = new Xob_css_parser__import_fxt();
-	@Test   public void Basic()				{fxt.Test_parse_import	(" @import url(//site/a.png)"	, " @import url('site/a.png')");}
-	@Test   public void Warn_eos()			{fxt.Test_parse_warn	(" @import"						, " @import"				, "EOS");}
-	@Test   public void Warn_missing()		{fxt.Test_parse_warn	(" @import ('//site/a.png')"	, " @import"				, "missing");}	// no "url("
-	@Test   public void Warn_invalid()		{fxt.Test_parse_warn	(" @import url('//site')"		, " @import url('//site')"	, "invalid");}	// invalid
+	@Test  public void Basic()				{fxt.Test_parse_import	(" @import url(//site/a.png)"	, " @import url('site/a.png')");}
+	@Test  public void Warn_eos()			{fxt.Test_parse_warn	(" @import"						, " @import"				, "EOS");}
+	@Test  public void Warn_missing()		{fxt.Test_parse_warn	(" @import ('//site/a.png')"	, " @import"				, "missing");}	// no "url("
+	@Test  public void Warn_invalid()		{fxt.Test_parse_warn	(" @import url('//site')"		, " @import url('//site')"	, "invalid");}	// invalid
 }
 class Xob_css_parser__import_fxt extends Xob_css_parser__url_fxt {		private Xob_css_parser__import import_parser;
 	@Override public void Clear() {

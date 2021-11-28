@@ -17,7 +17,7 @@ package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*;
 public class Sites_html_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Sites_html_bldr_fxt fxt = new Sites_html_bldr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init_ttl("commons:A");
 		fxt.Init_ttl("dmoz:A");
 		fxt.Init_ttl("w:A");		// not in sites_regy_mgr; ignore

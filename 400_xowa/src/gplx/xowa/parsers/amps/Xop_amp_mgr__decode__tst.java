@@ -17,22 +17,22 @@ package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.x
 import org.junit.*; import gplx.core.tests.*;
 public class Xop_amp_mgr__decode__tst {
 	@Before public void init() {} private final    Xop_amp_mgr_fxt fxt = new Xop_amp_mgr_fxt();
-	@Test  public void Text()						{fxt.Test__decode_as_bry("a"				, "a");}
-	@Test  public void Name()						{fxt.Test__decode_as_bry("&amp;"			, "&");}
-	@Test  public void Name_w_text()				{fxt.Test__decode_as_bry("a&amp;b"			, "a&b");}
-	@Test  public void Name_fail_semic_missing()	{fxt.Test__decode_as_bry("a&ampb"			, "a&ampb");}
-	@Test  public void Name_fail_amp_only()			{fxt.Test__decode_as_bry("a&"				, "a&");}
-	@Test  public void Num_fail()					{fxt.Test__decode_as_bry("&#!;"				, "&#!;");}		// ! is not valid num
-	@Test  public void Hex_fail()					{fxt.Test__decode_as_bry("&#x!;"			, "&#x!;");}	// ! is not valid hex
-	@Test  public void Hex_fail_x_only()            {fxt.Test__decode_as_bry("&#x;"             , "&#x;");}     // ISSUE#:494; handle "&#x;"; DATE:2019-06-16
-	@Test  public void Num_basic()					{fxt.Test__decode_as_bry("&#0931;"			, "Σ");}
-	@Test  public void Num_zero_padded()			{fxt.Test__decode_as_bry("&#00931;"			, "Σ");}
-	@Test  public void Hex_upper()					{fxt.Test__decode_as_bry("&#x3A3;"			, "Σ");}
-	@Test  public void Hex_lower()					{fxt.Test__decode_as_bry("&#x3a3;"			, "Σ");}
-	@Test  public void Hex_zero_padded()			{fxt.Test__decode_as_bry("&#x03a3;"			, "Σ");}
-	@Test  public void Hex_upper_x()				{fxt.Test__decode_as_bry("&#X3A3;"			, "Σ");}
-	@Test  public void Num_fail_large_codepoint()	{fxt.Test__decode_as_bry("&#538189831;"		, "&#538189831;");}
-	@Test  public void Num_ignore_extra_x()			{fxt.Test__decode_as_bry("&#xx26D0;"		, Char_.To_str(Char_.By_int(9936)));}	// 2nd x is ignored
+	@Test public void Text()						{fxt.Test__decode_as_bry("a"				, "a");}
+	@Test public void Name()						{fxt.Test__decode_as_bry("&amp;"			, "&");}
+	@Test public void Name_w_text()				{fxt.Test__decode_as_bry("a&amp;b"			, "a&b");}
+	@Test public void Name_fail_semic_missing()	{fxt.Test__decode_as_bry("a&ampb"			, "a&ampb");}
+	@Test public void Name_fail_amp_only()			{fxt.Test__decode_as_bry("a&"				, "a&");}
+	@Test public void Num_fail()					{fxt.Test__decode_as_bry("&#!;"				, "&#!;");}		// ! is not valid num
+	@Test public void Hex_fail()					{fxt.Test__decode_as_bry("&#x!;"			, "&#x!;");}	// ! is not valid hex
+	@Test public void Hex_fail_x_only()            {fxt.Test__decode_as_bry("&#x;"             , "&#x;");}     // ISSUE#:494; handle "&#x;"; DATE:2019-06-16
+	@Test public void Num_basic()					{fxt.Test__decode_as_bry("&#0931;"			, "Σ");}
+	@Test public void Num_zero_padded()			{fxt.Test__decode_as_bry("&#00931;"			, "Σ");}
+	@Test public void Hex_upper()					{fxt.Test__decode_as_bry("&#x3A3;"			, "Σ");}
+	@Test public void Hex_lower()					{fxt.Test__decode_as_bry("&#x3a3;"			, "Σ");}
+	@Test public void Hex_zero_padded()			{fxt.Test__decode_as_bry("&#x03a3;"			, "Σ");}
+	@Test public void Hex_upper_x()				{fxt.Test__decode_as_bry("&#X3A3;"			, "Σ");}
+	@Test public void Num_fail_large_codepoint()	{fxt.Test__decode_as_bry("&#538189831;"		, "&#538189831;");}
+	@Test public void Num_ignore_extra_x()			{fxt.Test__decode_as_bry("&#xx26D0;"		, Char_.To_str(Char_.By_int(9936)));}	// 2nd x is ignored
 }
 class Xop_amp_mgr_fxt {
 	private final    Xop_amp_mgr amp_mgr = Xop_amp_mgr.Instance;

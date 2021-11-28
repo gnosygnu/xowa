@@ -17,7 +17,7 @@ package gplx.xowa.htmls.core.wkrs.addons.gallerys; import gplx.*; import gplx.xo
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.htmls.core.makes.tests.*;
 public class Xoh_gallery_hzip_tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Test__decode
 		( "<ul class=\"gallery mw-gallery-traditional style=\"max-width:489px; _width:489px;\">"
 		, "<ul class=\"gallery mw-gallery-traditional style=\"max-width:489px; _width:489px;\">"

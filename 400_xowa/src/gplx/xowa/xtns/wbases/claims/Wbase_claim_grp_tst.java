@@ -17,7 +17,7 @@ package gplx.xowa.xtns.wbases.claims; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*; import gplx.core.tests.*; import gplx.core.primitives.*; 
 import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 public class Wbase_claim_grp_tst {
-	@Test   public void Get_best__preferred() {
+	@Test  public void Get_best__preferred() {
 		Wbase_claim_grp_bldr bldr = new Wbase_claim_grp_bldr(123);
 		bldr.Add("P1", Wbase_claim_rank_.Tid__preferred);
 		bldr.Add("N1", Wbase_claim_rank_.Tid__normal);
@@ -25,7 +25,7 @@ public class Wbase_claim_grp_tst {
 		bldr.Add("N2", Wbase_claim_rank_.Tid__normal);
 		bldr.Test__Get_best("P1", "P2");
 	}
-	@Test   public void Get_best__normal_if_no_preferred() {
+	@Test  public void Get_best__normal_if_no_preferred() {
 		Wbase_claim_grp_bldr bldr = new Wbase_claim_grp_bldr(123);
 		bldr.Add("D1", Wbase_claim_rank_.Tid__deprecated);
 		bldr.Add("D2", Wbase_claim_rank_.Tid__deprecated);
@@ -33,7 +33,7 @@ public class Wbase_claim_grp_tst {
 		bldr.Add("N2", Wbase_claim_rank_.Tid__normal);
 		bldr.Test__Get_best("N1", "N2");
 	}
-	@Test   public void Get_best__preferred_after_normal() {
+	@Test  public void Get_best__preferred_after_normal() {
 		Wbase_claim_grp_bldr bldr = new Wbase_claim_grp_bldr(123);
 		bldr.Add("N1", Wbase_claim_rank_.Tid__normal);
 		bldr.Add("N2", Wbase_claim_rank_.Tid__normal);

@@ -27,7 +27,7 @@ class Xoa_update_itm__leaf implements Mustache_doc_itm {
 		this.details = details;
 		this.package_url = package_url;
 	}
-	@gplx.Virtual public boolean Mustache__write(String k, Mustache_bfr bfr) {
+	public boolean Mustache__write(String k, Mustache_bfr bfr) {
 		if		(String_.Eq(k, "version"))			bfr.Add_str_u8(version);
 		else if	(String_.Eq(k, "date"))				bfr.Add_str_u8(date);
 		else if	(String_.Eq(k, "priority"))			bfr.Add_str_u8(Xoa_app_version_itm.Priority__to_name(priority));
@@ -36,7 +36,7 @@ class Xoa_update_itm__leaf implements Mustache_doc_itm {
 		else if	(String_.Eq(k, "package_url"))		bfr.Add_str_u8(package_url);
 		return true;
 	}
-	@gplx.Virtual public Mustache_doc_itm[] Mustache__subs(String key) {
+	public Mustache_doc_itm[] Mustache__subs(String key) {
 		if		(String_.Eq(key, "priority_is_major"))		return Mustache_doc_itm_.Ary__bool(priority >= Xoa_app_version_itm.Priority__major);
 		return Mustache_doc_itm_.Ary__empty;
 	}

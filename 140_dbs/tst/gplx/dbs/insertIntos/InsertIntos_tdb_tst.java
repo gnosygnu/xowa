@@ -17,6 +17,6 @@ package gplx.dbs.insertIntos; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 public class InsertIntos_tdb_tst extends InsertIntos_base_tst {
 	@Override protected Db_conn provider_() {return Db_conn_fxt.Tdb("140_dbs_insert_intos.dsv");}
-	@Test  public void Select() {super.Select_hook();}
-	@Test  public void GroupBy() {super.GroupBy_hook();}
+	@Test public void Select() {super.Select_hook();}
+	@Test public void GroupBy() {super.GroupBy_hook();}
 }

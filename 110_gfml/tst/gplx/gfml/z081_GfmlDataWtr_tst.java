@@ -20,45 +20,45 @@ public class z081_GfmlDataWtr_tst {
 		wtr = GfmlDataWtr.new_();
 		wtr.WriteNodeBgn("root");
 	}	DataWtr wtr;
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		tst_XtoStr(wtr, "root:;");
 	}
-	@Test  public void Atr_one() {
+	@Test public void Atr_one() {
 		wtr.WriteData("key", "data");;
 		tst_XtoStr(wtr, "root:key='data';");
 	}
-	@Test  public void Atr_many() {
+	@Test public void Atr_many() {
 		wtr.WriteData("key1", "data1");
 		wtr.WriteData("key2", "data2");
 		tst_XtoStr(wtr, "root:key1='data1' key2='data2';");
 	}
-	@Test  public void Nde_one() {
+	@Test public void Nde_one() {
 		wtr.WriteNodeBgn("sub0");
 		tst_XtoStr(wtr, "root:{sub0:;}");
 	}
-	@Test  public void Nde_many() {
+	@Test public void Nde_many() {
 		wtr.WriteNodeBgn("sub0");
 		wtr.WriteNodeEnd();
 		wtr.WriteNodeBgn("sub1");
 		tst_XtoStr(wtr, "root:{sub0:;sub1:;}");
 	}
-	@Test  public void Nde_nested() {
+	@Test public void Nde_nested() {
 		wtr.WriteNodeBgn("sub0");
 		wtr.WriteNodeBgn("sub1");
 		tst_XtoStr(wtr, "root:{sub0:{sub1:;}}");
 	}
-	@Test  public void OneAtrOneNde() {
+	@Test public void OneAtrOneNde() {
 		wtr.WriteData("key1", "data1");
 		wtr.WriteNodeBgn("sub0");
 		tst_XtoStr(wtr, "root:key1='data1'{sub0:;}");
 	}
-	@Test  public void OneAtrOneNdeOneAtr() {
+	@Test public void OneAtrOneNdeOneAtr() {
 		wtr.WriteData("key1", "data1");
 		wtr.WriteNodeBgn("sub0");
 		wtr.WriteData("key2", "data2");
 		tst_XtoStr(wtr, "root:key1='data1'{sub0:key2='data2';}");
 	}
-	@Test  public void EscapeQuote() {
+	@Test public void EscapeQuote() {
 		wtr.WriteData("key", "data's");;
 		tst_XtoStr(wtr, "root:key='data''s';");
 	}

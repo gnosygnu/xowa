@@ -34,7 +34,7 @@ public class Pp_pages_nde_hdr_tst {
 		, "\n\n"
 		));
 	}
-	@Test  public void Default_to_toc() {	// PURPOSE: default header to "toc" if no "from", "to", "include"; DATE:2014-01-27
+	@Test public void Default_to_toc() {	// PURPOSE: default header to "toc" if no "from", "to", "include"; DATE:2014-01-27
 		fxt.Init_page_create("Index:A", "");
 		// only index supplied; add header='toc'
 		fxt.Test_parse_page_wiki_str("<pages index='A'/>", String_.Concat_lines_nl
@@ -52,7 +52,7 @@ public class Pp_pages_nde_hdr_tst {
 		,	"</p>"
 		));
 	}
-	@Test  public void From_set() {	// PURPOSE: "from" should (a) appear in toc; and (b) select pages; DATE:2014-01-27
+	@Test public void From_set() {	// PURPOSE: "from" should (a) appear in toc; and (b) select pages; DATE:2014-01-27
 		fxt.Init_page_create("Index:A" , "idx");
 		fxt.Init_page_create("Page:A/1", "a1");
 		fxt.Init_page_create("Page:A/2", "a2");
@@ -65,7 +65,7 @@ public class Pp_pages_nde_hdr_tst {
 		,	"</p>"
 		));
 	}
-	@Test  public void Mainspace_toc() {	// PURPOSE: Mainspace links should be sent to toc; DATE:2014-01-27
+	@Test public void Mainspace_toc() {	// PURPOSE: Mainspace links should be sent to toc; DATE:2014-01-27
 		fxt.Init_page_create("Index:A" , String_.Concat_lines_nl_skip_last
 		( "[[Page/1]]"
 		, "[[Page/2]]"
@@ -120,7 +120,7 @@ public class Pp_pages_nde_hdr_tst {
 		,	"</p>"
 		));
 	}
-	@Test  public void Mainspace_caption() {	// PURPOSE: extract caption; DATE:2014-01-27
+	@Test public void Mainspace_caption() {	// PURPOSE: extract caption; DATE:2014-01-27
 		fxt.Init_page_create("Index:A" , String_.Concat_lines_nl_skip_last
 		( "[[Page/1|Caption_1]]"
 		, "[[Page/2]]"
@@ -136,7 +136,7 @@ public class Pp_pages_nde_hdr_tst {
 		,	"</p>"
 		));
 	}
-	@Test  public void Xwiki() {	// PURPOSE: Mainspace links should be sent to toc; DATE:2014-01-27
+	@Test public void Xwiki() {	// PURPOSE: Mainspace links should be sent to toc; DATE:2014-01-27
 		fxt.Init_xwiki_add_wiki_and_user_("commons", "commons.wikimedia.org");
 		fxt.Init_page_create("Index:A" , String_.Concat_lines_nl_skip_last
 		( "[[Page/1]]"
@@ -152,14 +152,14 @@ public class Pp_pages_nde_hdr_tst {
 		,	"</p>"
 		));
 	}
-	@Test  public void Header_is_0() {// PURPOSE: if header is PHP false, ignore; ISSUE#:622 DATE:2019-11-28
+	@Test public void Header_is_0() {// PURPOSE: if header is PHP false, ignore; ISSUE#:622 DATE:2019-11-28
 		// fails if TOC is included ("value=0")
 		fxt.Test_parse_page_wiki_str("<pages index='A' include=1 header=0/>", String_.Concat_lines_nl
 		(	"<p>&#32;"
 		,	"</p>"
 		));
 	}
-	@Test  public void Unknown_args() { // PURPOSE:unknown args should be captured; ISSUE#:635; DATE:2020-01-19
+	@Test public void Unknown_args() { // PURPOSE:unknown args should be captured; ISSUE#:635; DATE:2020-01-19
 		Io_mgr.Instance.InitEngine_mem(); // NOTE: Init_page_update doesn't actually update, so for now, just reset file_system
 		fxt.Init_page_create("MediaWiki:Proofreadpage_header_template", String_.Concat
 		( "{{#if:{{{value|}}}|value={{{value}}};|value=nil;}}"

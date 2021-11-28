@@ -19,24 +19,24 @@ import gplx.core.tests.*;
 public class Strcpn_tst {
 	private final    Strcpn_fxt fxt = new Strcpn_fxt();
 
-	@Test   public void Single() {
+	@Test  public void Single() {
 		fxt.Test__exec(0, "a"			, "a__");
 		fxt.Test__exec(1, "a"			, "_a_");
 		fxt.Test__exec(2, "a"			, "__a");
 		fxt.Test__exec(3, "a"			, "___");
 	}
-	@Test   public void Multiple() {
+	@Test  public void Multiple() {
 		fxt.Test__exec(2, "ab"			, "__a");
 		fxt.Test__exec(2, "ab"			, "__b");
 		fxt.Test__exec(1, "ab"			, "_ba");
 		fxt.Test__exec(3, "ab"			, "___");
 	}
-	@Test   public void Utf8() {
+	@Test  public void Utf8() {
 		fxt.Test__exec(3, "d"			, "ab¢d"); // len=2
 		fxt.Test__exec(3, "d"			, "ab€d"); // len=3
 		fxt.Test__exec(4, "z"			, "ab€d"); // len=3
 	}
-	@Test   public void Php_doc() { // REF: http://php.net/manual/en/function.strcspn.php
+	@Test  public void Php_doc() { // REF: http://php.net/manual/en/function.strcspn.php
 		fxt.Test__exec_rev(0, "abcd"			, "apple");
 		fxt.Test__exec_rev(0, "abcd"			, "banana");
 		fxt.Test__exec_rev(2, "hello"			, "l");

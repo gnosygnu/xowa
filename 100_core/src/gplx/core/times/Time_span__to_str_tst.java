@@ -16,28 +16,28 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.times; import gplx.*; import gplx.core.*;
 import org.junit.*;
 public class Time_span__to_str_tst {
-	@Test  public void Zero() {
+	@Test public void Zero() {
 		tst_Default(0, "0");
 	}
-	@Test  public void MinuteSeconds() {
+	@Test public void MinuteSeconds() {
 		tst_Default(77000, "1:17");
 	}
-	@Test  public void ZeroSuppression() {		 	
+	@Test public void ZeroSuppression() {
 		tst_Default(660000, "11:00");	//fractional 0 and leading 0s are suppressed; i.e.: not 00:11:00.000
 	}
-	@Test  public void HourTest() {
+	@Test public void HourTest() {
 		tst_Default(3723987, "1:02:03.987");
 	}
-	@Test  public void NegSeconds() {
+	@Test public void NegSeconds() {
 		tst_Default(-2000, "-2");
 	}
-	@Test  public void NegMins() {
+	@Test public void NegMins() {
 		tst_Default(-60000, "-1:00");
 	}
-	@Test  public void NegHours() {
+	@Test public void NegHours() {
 		tst_Default(-3723981, "-1:02:03.981");
 	}
-	@Test  public void ZeroPadding() {
+	@Test public void ZeroPadding() {
 		tst_ZeroPadding("0", "00:00:00.000");
 		tst_ZeroPadding("1:02:03.123", "01:02:03.123");
 		tst_ZeroPadding("1", "00:00:01.000");

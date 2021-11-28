@@ -17,7 +17,7 @@ package gplx.xowa.xtns.quiz; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*;
 public class Quiz_xnde_tst {		
 	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_page_all_str("<quiz>test</quiz>", "XOWA does not support this extension: &lt;quiz&gt;&lt;/quiz&gt;");
 	}
 }

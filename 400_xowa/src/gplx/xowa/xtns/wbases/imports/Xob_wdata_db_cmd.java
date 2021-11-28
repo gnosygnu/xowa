@@ -127,7 +127,7 @@ abstract class Wdata_tbl_base {
 	public abstract String Tbl_create_sql();
 	public abstract Db_idx_itm[] Idx_ary();
 	public abstract String[] Fld_ary();
-	@gplx.Virtual public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {}
+	public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {}
 	public void Make_tbl(Db_conn p) {Sqlite_engine_.Tbl_create(p, this.Tbl_name(), this.Tbl_create_sql());}
 	public void Make_idxs(Gfo_usr_dlg usr_dlg, Db_conn p) {
 		Sqlite_engine_.Idx_create(usr_dlg, p, this.Tbl_name(), this.Idx_ary());

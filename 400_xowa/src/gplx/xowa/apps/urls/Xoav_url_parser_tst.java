@@ -17,10 +17,10 @@ package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*;
 public class Xoav_url_parser_tst {		
 	@Before public void init() {fxt.Clear();} private final Xoav_url_parser_fxt fxt = new Xoav_url_parser_fxt();
-	@Test   public void Page() {
+	@Test  public void Page() {
 		fxt.Exec_parse_xo_href("http:/wiki/Earth").Test_wiki("en.wikipedia.org").Test_page("Earth");
 	}
-	@Test   public void Site() {
+	@Test  public void Site() {
 		fxt.Exec_parse_xo_href("http:/site/en.wikipedia.org/wiki/Earth").Test_wiki("en.wikipedia.org").Test_page("Earth");
 	}
 }

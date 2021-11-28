@@ -17,7 +17,7 @@ package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Insider_html_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Insider_html_bldr_fxt fxt = new Insider_html_bldr_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Init_insider("A_1");
 		fxt.Test_bld(String_.Concat_lines_nl_skip_last
 		( "<div id='p-insiders' class='portal' role='navigation'>"

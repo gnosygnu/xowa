@@ -19,7 +19,7 @@ public class z402_types_compile_implicit_tst {
 	@Before public void setup() {
 		fx.run_InitPragma(fx.Regy(), GfmlPragmaType.new_());
 	}	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void Fld_typeKey_leaf() {
+	@Test public void Fld_typeKey_leaf() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("point", "gfml.point").Subs_
 			(		fx.nde_().Atru_("x").Atrk_("type", "gfml.int")		// explicit
@@ -30,7 +30,7 @@ public class z402_types_compile_implicit_tst {
 			,		fx.fld_().Name_("y").TypeKey_("gfml.String")
 			));
 	}
-	@Test  public void Fld_typeKey_nest() {
+	@Test public void Fld_typeKey_nest() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("rect", "gfml.rect").Subs_
 			(		fx.nde_().Atru_("pos").Atrk_("type", "gfml.point").Subs_	// explicit
@@ -47,7 +47,7 @@ public class z402_types_compile_implicit_tst {
 			,		fx.fld_().Name_("size").TypeKey_("gfml.rect/size")
 			));
 	}
-	@Test  public void Typ_key() {
+	@Test public void Typ_key() {
 		fx.tst_Compile
 			(	fx.nde_().Atrs_("point", "gfml.point")				// explicit: gfml.point
 			,	fx.typ_().Name_("point").Key_("gfml.point")

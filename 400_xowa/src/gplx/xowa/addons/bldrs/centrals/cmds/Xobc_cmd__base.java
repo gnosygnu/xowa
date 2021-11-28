@@ -40,10 +40,10 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 	public int				Cmd_id()		{return cmd_id;} private final    int cmd_id;
 	public abstract String	Cmd_type();
 	public abstract String	Cmd_name();
-	@gplx.Virtual public boolean		Cmd_suspendable() {return false;}
+	public boolean		Cmd_suspendable() {return false;}
 	public String			Cmd_uid()		{return cmd_uid;} private final    String cmd_uid;
-	@gplx.Virtual public String	Cmd_fallback()	{return this.Cmd_type();}
-	@gplx.Virtual public void		Cmd_clear()		{// called when restarting failed task
+	public String	Cmd_fallback()	{return this.Cmd_type();}
+	public void		Cmd_clear()		{// called when restarting failed task
 		this.status = Gfo_prog_ui_.Status__init;
 		this.cmd_exec_err = null;	// reset error
 		this.data_cur = 0;			// reset progress else bad progress updates; DATE:2016-06-29
@@ -79,13 +79,13 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 		}
 	}
 	protected abstract void Cmd_exec_hook(Xobc_cmd_ctx ctx);
-	@gplx.Virtual protected boolean Cmd_fail_resumes() {return false;}
+	protected boolean Cmd_fail_resumes() {return false;}
 	protected void Cmd_exec_err_(String v) {
 		Gfo_log_.Instance.Warn("xobc_cmd task err", "task_id", task_id, "step_id", step_id, "cmd_id", cmd_id, "err", v);
 		this.status = Gfo_prog_ui_.Status__fail;
 		this.cmd_exec_err = v;
 	}	private String cmd_exec_err;
-	@gplx.Virtual public void Cmd_cleanup() {}
+	public void Cmd_cleanup() {}
 
 	public Gfobj_nde Save_to(Gfobj_nde nde) {
 		nde.Add_int ("task_id"				, task_id);
@@ -106,7 +106,7 @@ public abstract class Xobc_cmd__base implements Xobc_cmd_itm {
 		if (data_cur > 0)
 			this.Prog_status_(Gfo_prog_ui_.Status__suspended);	// set status to suspended, else js won't warn about accidental removal
 	}
-	@gplx.Virtual protected long	Load_checkpoint_hook() {return 0;}
+	protected long	Load_checkpoint_hook() {return 0;}
 
 	public boolean Prog_notify_and_chk_if_suspended(long new_data_cur, long new_data_end) {
 		if (status == Gfo_prog_ui_.Status__suspended) return true;	// task paused by ui; exit now;

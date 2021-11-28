@@ -17,29 +17,29 @@ package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import g
 import org.junit.*; import gplx.core.tests.*;
 public class Xoh_toc_wkr__lvl__basic__tst {
 	@Before public void init() {fxt.Clear();} private final    Xoh_toc_wkr__lvl__fxt fxt = new Xoh_toc_wkr__lvl__fxt();
-	@Test   public void D1_S0_S0() {
+	@Test  public void D1_S0_S0() {
 		fxt.Test__calc(2, fxt.Make(1, 1, Int_ary_.New(1)));
 		fxt.Test__calc(2, fxt.Make(2, 1, Int_ary_.New(2)));
 		fxt.Test__calc(2, fxt.Make(3, 1, Int_ary_.New(3)));
 	}
-	@Test   public void D1_D1_D1() {
+	@Test  public void D1_D1_D1() {
 		fxt.Test__calc(2, fxt.Make(1, 1, Int_ary_.New(1)));
 		fxt.Test__calc(3, fxt.Make(2, 2, Int_ary_.New(1, 1)));
 		fxt.Test__calc(4, fxt.Make(3, 3, Int_ary_.New(1, 1, 1)));
 	}
-	@Test   public void D1_D1_S0_U1() {
+	@Test  public void D1_D1_S0_U1() {
 		fxt.Test__calc(2, fxt.Make(1, 1, Int_ary_.New(1)));
 		fxt.Test__calc(3, fxt.Make(2, 2, Int_ary_.New(1, 1)));
 		fxt.Test__calc(3, fxt.Make(3, 2, Int_ary_.New(1, 2)));
 		fxt.Test__calc(2, fxt.Make(4, 1, Int_ary_.New(2)));
 	}
-	@Test   public void D1_D1_U1_D1() {
+	@Test  public void D1_D1_U1_D1() {
 		fxt.Test__calc(2, fxt.Make(1, 1, Int_ary_.New(1)));
 		fxt.Test__calc(3, fxt.Make(2, 2, Int_ary_.New(1, 1)));
 		fxt.Test__calc(2, fxt.Make(3, 1, Int_ary_.New(2)));
 		fxt.Test__calc(3, fxt.Make(4, 2, Int_ary_.New(2, 1)));
 	}
-	@Test   public void D1_D1_D1_U2() {
+	@Test  public void D1_D1_D1_U2() {
 		fxt.Test__calc(2, fxt.Make(1, 1, Int_ary_.New(1)));
 		fxt.Test__calc(3, fxt.Make(2, 2, Int_ary_.New(1, 1)));
 		fxt.Test__calc(4, fxt.Make(3, 3, Int_ary_.New(1, 1, 1)));

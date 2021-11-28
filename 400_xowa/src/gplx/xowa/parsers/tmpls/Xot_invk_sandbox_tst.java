@@ -22,25 +22,25 @@ public class Xot_invk_sandbox_tst {
 		fxt.Init_defn_clear();
 		fxt.Init_defn_add("concat", "{{{1}}}{{{2}}}");
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_tmpl_str("{{concat|a|b}}", "ab");
 	}
-	@Test  public void Basic_too_many() {	// c gets ignored
+	@Test public void Basic_too_many() {	// c gets ignored
 		fxt.Test_parse_tmpl_str("{{concat|a|b|c}}", "ab");
 	}
-	@Test  public void Basic_too_few() {
+	@Test public void Basic_too_few() {
 		fxt.Test_parse_tmpl_str("{{concat|a}}", "a{{{2}}}");
 	}
-	@Test  public void Basic_else() {
+	@Test public void Basic_else() {
 		fxt.Init_defn_add("concat", "{{{1}}}{{{2|?}}}");
 		fxt.Test_parse_tmpl_str("{{concat|a}}", "a?");
 	}
-	@Test  public void Eq_2() {
+	@Test public void Eq_2() {
 		fxt.Init_defn_add("concat", "{{{lkp1}}}");
 		fxt.Test_parse_tmpl_str("{{concat|lkp1=a=b}}", "a=b");
 	}
-	@Test  public void Recurse()		{fxt.Test_parse_tmpl_str_test("<{{concat|{{{1}}}|{{{2}}}}}>"	, "{{test|a|b}}", "<ab>");}
-	@Test  public void Recurse_mix()	{fxt.Test_parse_tmpl_str_test("{{concat|.{{{1}}}.|{{{2}}}}}"	, "{{test|a|b}}", ".a.b");}
-	@Test  public void Recurse_err()	{fxt.Test_parse_tmpl_str_test("{{concat|{{{1}}}|{{{2}}}}}"	, "{{test1|a|b}}", "[[:Template:test1]]");} // NOTE: make sure test1 does not match test
-	@Test  public void KeyNewLine()		{fxt.Test_parse_tmpl_str_test("{{\n  concat|a|b}}"			, "{{\n  test}}", "ab");}
+	@Test public void Recurse()		{fxt.Test_parse_tmpl_str_test("<{{concat|{{{1}}}|{{{2}}}}}>"	, "{{test|a|b}}", "<ab>");}
+	@Test public void Recurse_mix()	{fxt.Test_parse_tmpl_str_test("{{concat|.{{{1}}}.|{{{2}}}}}"	, "{{test|a|b}}", ".a.b");}
+	@Test public void Recurse_err()	{fxt.Test_parse_tmpl_str_test("{{concat|{{{1}}}|{{{2}}}}}"	, "{{test1|a|b}}", "[[:Template:test1]]");} // NOTE: make sure test1 does not match test
+	@Test public void KeyNewLine()		{fxt.Test_parse_tmpl_str_test("{{\n  concat|a|b}}"			, "{{\n  test}}", "ab");}
 }

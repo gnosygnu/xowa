@@ -27,10 +27,10 @@ public class Lst_pfunc_lsth_tst {
 	, "txt_3"
 	);
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Bgn__missing() {	// PURPOSE: return ""
+	@Test public void Bgn__missing() {	// PURPOSE: return ""
 		fxt.Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_x}}", "");
 	}
-	@Test  public void End__exists() {
+	@Test public void End__exists() {
 		fxt.Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_1|hdr_3}}", String_.Concat_lines_nl_skip_last
 		( "txt_1"
 		, ""
@@ -38,21 +38,21 @@ public class Lst_pfunc_lsth_tst {
 		, "txt_2"
 		));
 	}
-	@Test  public void End__missing() {	// PURPOSE: read to end of next section
+	@Test public void End__missing() {	// PURPOSE: read to end of next section
 		String expd = String_.Concat_lines_nl_skip_last
 		( "txt_1"
 		);
 		fxt.Clear().Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_1}}"		, expd);	// argument not given
 		fxt.Clear().Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_1|hdr_x}}", expd);	// argument is wrong
 	}
-	@Test  public void End__missing_eos() {	// PURPOSE: read to EOS if last
+	@Test public void End__missing_eos() {	// PURPOSE: read to EOS if last
 		String expd = String_.Concat_lines_nl_skip_last
 		( "txt_3"
 		);
 		fxt.Clear().Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_3}}"		, expd);	// argument not given
 		fxt.Clear().Page_txt_(src_str_dflt).Test_lst("{{#lsth:section_test|hdr_3|hdr_x}}", expd);	// argument is wrong
 	}
-	@Test  public void End__missing__match__len() {	// PURPOSE:match next hdr with same length; PAGE:en.w:10s_BC; DATE:2016-08-13
+	@Test public void End__missing__match__len() {	// PURPOSE:match next hdr with same length; PAGE:en.w:10s_BC; DATE:2016-08-13
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "txt_0"
 		, "== hdr_1 =="
@@ -69,7 +69,7 @@ public class Lst_pfunc_lsth_tst {
 		, "txt_1a"
 		));
 	}
-	@Test  public void Extra_nl() {	// PURPOSE: hdr.Src_end() includes trailing nl; PAGE:en.w:10s_BC; DATE:2016-08-13
+	@Test public void Extra_nl() {	// PURPOSE: hdr.Src_end() includes trailing nl; PAGE:en.w:10s_BC; DATE:2016-08-13
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "txt_0"
 		, "== hdr_1 =="
@@ -80,7 +80,7 @@ public class Lst_pfunc_lsth_tst {
 		);
 		fxt.Clear().Page_txt_(src_str).Test_lst("{{#lsth:section_test|hdr_1}}"		, "txt_1");
 	}
-	@Test  public void Only_include() {	// PAGE:en.w:10s_BC; DATE:2016-08-13
+	@Test public void Only_include() {	// PAGE:en.w:10s_BC; DATE:2016-08-13
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "txt_0"
 		, "== hdr_1 =="
@@ -92,7 +92,7 @@ public class Lst_pfunc_lsth_tst {
 		);
 		fxt.Page_txt_(src_str).Test_lst("{{#lsth::section_test|hdr_1}}", "txt_1");
 	}
-	@Test   public void Bos() {	// PURPOSE.defensive:handle == at BOS; DATE:2016-08-13
+	@Test  public void Bos() {	// PURPOSE.defensive:handle == at BOS; DATE:2016-08-13
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "==hdr_1 =="
 		, "txt_1"
@@ -101,7 +101,7 @@ public class Lst_pfunc_lsth_tst {
 		);
 		fxt.Clear().Page_txt_(src_str).Test_lst("{{#lsth:section_test|hdr_1}}", "txt_1");
 	}
-	@Test  public void Nested__lst() {	// PURPOSE:lst inside lsth will add its toc_mgr to lsth; PAGE:en.w:Germany_national_football_team; DATE:2016-08-13
+	@Test public void Nested__lst() {	// PURPOSE:lst inside lsth will add its toc_mgr to lsth; PAGE:en.w:Germany_national_football_team; DATE:2016-08-13
 		fxt.Fxt().Init_page_create("Nested_lst", String_.Concat_lines_nl_skip_last
 		( "test"
 		, "==hdr_1=="
@@ -116,7 +116,7 @@ public class Lst_pfunc_lsth_tst {
 		);
 		fxt.Page_txt_(src_str).Test_lst("{{#lsth::section_test|hdr_1}}", "txt_1");	// will fail with idx_out_of_bounds b/c hdr_1.Src_bgn / hdr_1.Src_end will be for Nested_lst's src
 	}
-	@Test  public void Tmpl_w_nowiki() {	// ISSUE:nowiki inside template can cause wrong offsets; PAGE:en.w:Germany_national_football_team; DATE:2016-08-13
+	@Test public void Tmpl_w_nowiki() {	// ISSUE:nowiki inside template can cause wrong offsets; PAGE:en.w:Germany_national_football_team; DATE:2016-08-13
 		fxt.Fxt().Init_page_create("Template:Nested_nowiki", "<nowiki>test</nowiki>");
 		String src_str = String_.Concat_lines_nl_skip_last
 		( "{{Nested_nowiki}}"

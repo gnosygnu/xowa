@@ -25,7 +25,7 @@ public class Xot_defn_trace_dbg_tst {
 		fx.Init_defn_add("mid_1", "{{print|[ {{concat|{{{1}}}|{{{2}}}}} ]}}");
 		fx.Ctx().Defn_trace_(Xot_defn_trace_dbg.Instance);
 	}
-	@Test  public void Tmpl() {
+	@Test public void Tmpl() {
 		fx.tst_
 			( "{{print|a|key1=b}}"
 			, "*source"
@@ -43,5 +43,5 @@ public class Xot_defn_trace_dbg_tst {
 			, "a"
 			);
 	}
-	//@Test  public void Basic_b()		{fx.tst_("{{mwo_b|2}}"						, "[[Test page]]", "00 11 {{mwo_b|1}} -> b");}
+	//@Test public void Basic_b()		{fx.tst_("{{mwo_b|2}}"						, "[[Test page]]", "00 11 {{mwo_b|1}} -> b");}
 }

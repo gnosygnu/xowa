@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.core.times.DateAdp_parser;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +23,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
-import gplx.core.times.*;
 public class DateAdp_ implements Gfo_invk {
 	public static final String Cls_ref_name = "Date";
 	public static final    Class<?> Cls_ref_type = DateAdp.class;
@@ -84,8 +84,11 @@ public class DateAdp_ implements Gfo_invk {
 		try {return parse_fmt(raw, fmt);}
 		catch (Exception e) {Err_.Noop(e); return or;}
 	}
-		public static DateAdp db_(Object v) {
-		Timestamp ts = (Timestamp)v;		
+	public static DateAdp db_(Object v) {
+		if (v instanceof String) {
+			return DateAdp_.parse_iso8561((String)v);
+		}
+		Timestamp ts = (Timestamp)v;
 		Calendar gc = Calendar.getInstance();
 		gc.setTimeInMillis(ts.getTime());
 		return new DateAdp(gc);

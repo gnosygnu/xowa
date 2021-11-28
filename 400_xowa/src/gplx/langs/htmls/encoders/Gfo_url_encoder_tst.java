@@ -17,51 +17,51 @@ package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gp
 import org.junit.*;
 public class Gfo_url_encoder_tst {
 	private final    Gfo_url_encoder_fxt fxt = new Gfo_url_encoder_fxt();
-	@Test  public void Id__nums() 			{fxt.Encoder_id().Test__bicode("0123456789");}
-	@Test  public void Id__ltrs_lower() 	{fxt.Encoder_id().Test__bicode("abcdefghijklmnopqrstuvwxyz");}
-	@Test  public void Id__ltrs_upper() 	{fxt.Encoder_id().Test__bicode("ABCDEFGHIJKLMNOPQRSTUVWXYZ");}
-	@Test  public void Id__syms_0()         {fxt.Encoder_id().Test__bicode("!\"#$%&'()*+,-./");} // ISSUE#:462; DATE:2019-05-12
-	@Test  public void Id__syms_1()         {fxt.Encoder_id().Test__bicode(":;=?@");} // ISSUE#:462; DATE:2019-05-12
-	@Test  public void Id__syms_2()         {fxt.Encoder_id().Test__bicode("[\\]^`");} // ISSUE#:462; DATE:2019-05-12
-	@Test  public void Id__syms_3()         {fxt.Encoder_id().Test__bicode("{|}~");}// ISSUE#:462; DATE:2019-05-12
-	@Test  public void Id__foreign() 		{fxt.Encoder_id().Test__bicode("aéb");}
-	@Test  public void Id__space() 			{fxt.Encoder_id().Test__bicode("a b", "a_b");}
-	@Test  public void Id__syms_1_angles() { // NOTE:should not be encoded, but will break existings tests; EX:{{#tag:pre|a|id='<br/>'}}; DATE:2019-05-12;
+	@Test public void Id__nums() 			{fxt.Encoder_id().Test__bicode("0123456789");}
+	@Test public void Id__ltrs_lower() 	{fxt.Encoder_id().Test__bicode("abcdefghijklmnopqrstuvwxyz");}
+	@Test public void Id__ltrs_upper() 	{fxt.Encoder_id().Test__bicode("ABCDEFGHIJKLMNOPQRSTUVWXYZ");}
+	@Test public void Id__syms_0()         {fxt.Encoder_id().Test__bicode("!\"#$%&'()*+,-./");} // ISSUE#:462; DATE:2019-05-12
+	@Test public void Id__syms_1()         {fxt.Encoder_id().Test__bicode(":;=?@");} // ISSUE#:462; DATE:2019-05-12
+	@Test public void Id__syms_2()         {fxt.Encoder_id().Test__bicode("[\\]^`");} // ISSUE#:462; DATE:2019-05-12
+	@Test public void Id__syms_3()         {fxt.Encoder_id().Test__bicode("{|}~");}// ISSUE#:462; DATE:2019-05-12
+	@Test public void Id__foreign() 		{fxt.Encoder_id().Test__bicode("aéb");}
+	@Test public void Id__space() 			{fxt.Encoder_id().Test__bicode("a b", "a_b");}
+	@Test public void Id__syms_1_angles() { // NOTE:should not be encoded, but will break existings tests; EX:{{#tag:pre|a|id='<br/>'}}; DATE:2019-05-12;
 		fxt.Encoder_id().Test__encode("<", ".3C");
 		fxt.Encoder_id().Test__decode(".3C", "<");
 		fxt.Encoder_id().Test__encode(">", ".3E");
 		fxt.Encoder_id().Test__decode(".3E", ">");
 	}
-	@Test  public void Id__syms_2_lodash() { // ISSUE#:462; DATE:2019-05-12
+	@Test public void Id__syms_2_lodash() { // ISSUE#:462; DATE:2019-05-12
 		fxt.Encoder_id().Test__encode("_", "_");
 		fxt.Encoder_id().Test__decode("_", " ");
 	}
-	@Test  public void Id__nbsp() {
+	@Test public void Id__nbsp() {
 		fxt.Encoder_id().Test__encode("a&nbsp;b", "a.C2.A0b");	// NOTE: not just .A0 (160) but utf8-encoded .C2.A0
 		fxt.Encoder_id().Test__decode("a.C2.A0b", "a b"); // WS is nbsp
 	}
-	@Test  public void Id__err()  {
+	@Test public void Id__err()  {
 		byte[] raw = Bry_.new_a7("0%.jpg");
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		fxt.Encoder_id().Encoder().Decode(tmp_bfr, Bool_.N, raw, 0, raw.length);
 		Tfds.Eq("0%.jpg", tmp_bfr.To_str_and_clear()); 
 	}
-	@Test  public void Ttl__syms__diff() 	{fxt.Encoder_ttl().Test__encode(" &'=+", "_%26%27%3D%2B");}
-	@Test  public void Ttl__syms__same() 	{fxt.Encoder_ttl().Test__encode("!\"#$%()*,-./:;<>?@[\\]^_`{|}~", "!\"#$%()*,-./:;<>?@[\\]^_`{|}~");}
-	@Test  public void Url__syms() 			{fxt.Encoder_url().Test__bicode("!?^~", "%21%3F%5E%7E");}
-	@Test  public void Url__foreign() 		{fxt.Encoder_url().Test__bicode("aéb", "a%C3%A9b");}
-	@Test  public void Url__space() 		{fxt.Encoder_url().Test__bicode("a b", "a+b");}
-	@Test  public void Href__space() 		{
+	@Test public void Ttl__syms__diff() 	{fxt.Encoder_ttl().Test__encode(" &'=+", "_%26%27%3D%2B");}
+	@Test public void Ttl__syms__same() 	{fxt.Encoder_ttl().Test__encode("!\"#$%()*,-./:;<>?@[\\]^_`{|}~", "!\"#$%()*,-./:;<>?@[\\]^_`{|}~");}
+	@Test public void Url__syms() 			{fxt.Encoder_url().Test__bicode("!?^~", "%21%3F%5E%7E");}
+	@Test public void Url__foreign() 		{fxt.Encoder_url().Test__bicode("aéb", "a%C3%A9b");}
+	@Test public void Url__space() 		{fxt.Encoder_url().Test__bicode("a b", "a+b");}
+	@Test public void Href__space() 		{
 		fxt.Encoder_href().Test__encode("a b", "a_b");
 	}
-	@Test  public void Href__special_and_anchor() { // PURPOSE: MediaWiki encodes with % for ttls, but . for anchors; REF:Title.php!(before-anchor)getLocalUrl;wfUrlencode (after-anchor)escapeFragmentForURL
+	@Test public void Href__special_and_anchor() { // PURPOSE: MediaWiki encodes with % for ttls, but . for anchors; REF:Title.php!(before-anchor)getLocalUrl;wfUrlencode (after-anchor)escapeFragmentForURL
 		fxt.Encoder_href().Test__bicode("^#^", "%5E#^");
 		fxt.Encoder_href().Test__encode("A#", "A#");
 	}
-	@Test  public void Href__invalid() { // PURPOSE: check that invalid url decodings are rendered literally; DATE:2014-04-10
+	@Test public void Href__invalid() { // PURPOSE: check that invalid url decodings are rendered literally; DATE:2014-04-10
 		fxt.Encoder_href().Test__encode("%GC", "%25GC");
 	}
-	@Test  public void Fsys__wnt() 		{
+	@Test public void Fsys__wnt() 		{
 		fxt.Encoder_fsys_safe().Test__encode("Options/HTML", "Options%2FHTML");
 	}
 }

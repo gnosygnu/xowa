@@ -26,10 +26,10 @@ public class Pf_formatnum_fa_tst {
 		Xowe_wiki wiki = Xoa_app_fxt.Make__wiki__edit(app, "fa.wikipedia.org", lang);
 		fxt = new Xop_fxt(app, wiki);
 	}
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_tmpl_str_test("{{formatnum:۱۵۰|R}}"		, "{{test}}",	"150");
 	}
-	@Test  public void English() {	// PURPOSE: make sure regular numbers are still read; DATE:2015-07-18
+	@Test public void English() {	// PURPOSE: make sure regular numbers are still read; DATE:2015-07-18
 		fxt.Test_parse_tmpl_str_test("{{formatnum:150|R}}"		, "{{test}}",	"150");
 	}
 	public static final    String Persian_numbers_gfs = String_.Concat_lines_nl

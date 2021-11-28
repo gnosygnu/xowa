@@ -19,7 +19,7 @@ import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.pars
 public class Xoh_thm_hzip__pseudo__tst {
 	private final    Xoh_hzip_fxt fxt = new Xoh_hzip_fxt().Init_mode_diff_y_();
 	@Before public void setup() {fxt.Clear();}
-	@Test   public void Fake__div_1__next_nde() {	// PURPOSE: handle fake-thumbs with pseudo thumbimage class; PAGE:s.w:Mars
+	@Test  public void Fake__div_1__next_nde() {	// PURPOSE: handle fake-thumbs with pseudo thumbimage class; PAGE:s.w:Mars
 		fxt.Test__bicode(String_.Replace(String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright' style='width:212px;'>"
 		, "<div class='thumbinner'>"
@@ -40,7 +40,7 @@ public class Xoh_thm_hzip__pseudo__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Fake__div_1__style() {	// PURPOSE.hdiff: handle fake-thumbs with bad style; PAGE:en.w:Carlisle_United_F.C.
+	@Test  public void Fake__div_1__style() {	// PURPOSE.hdiff: handle fake-thumbs with bad style; PAGE:en.w:Carlisle_United_F.C.
 		fxt.Test__bicode(String_.Replace(String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"
 		, "<div class='thumbinner' style='width: px;'>"
@@ -65,7 +65,7 @@ public class Xoh_thm_hzip__pseudo__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Fake__div_1__width_w_space() {	// PURPOSE.hdiff: handle fake-thumbs with style of "width "; PAGE:en.w:Abraham_Lincoln
+	@Test  public void Fake__div_1__width_w_space() {	// PURPOSE.hdiff: handle fake-thumbs with style of "width "; PAGE:en.w:Abraham_Lincoln
 		fxt.Test__bicode(String_.Replace(String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"
 		, "<div class='thumbinner' style='width: 230px;'>"
@@ -90,7 +90,7 @@ public class Xoh_thm_hzip__pseudo__tst {
 		, "</div>"
 		));
 	}
-	@Test   public void Fake__div_1__thumbimage() {	// PURPOSE.hdiff: handle fake-thumbs with image-map style; PAGE:en.w:UK
+	@Test  public void Fake__div_1__thumbimage() {	// PURPOSE.hdiff: handle fake-thumbs with image-map style; PAGE:en.w:UK
 		String html = String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"
 		, "<div class='thumbinner' style='width:252px;'>"
@@ -110,7 +110,7 @@ public class Xoh_thm_hzip__pseudo__tst {
 		);
 		fxt.Test__bicode(String_.Replace(String_.Format(html, "<div style=\"background-color: ;\">~%!!A.svg~)#q~</div>"), "'", "\""), String_.Format(html, "<div style='background-color: ;'><a href='/wiki/File:A.svg' class='image' title='' xowa_title='A.svg'><img data-xowa-title='A.svg' data-xoimg='0|250|-1|-1|-1|-1' src='' width='0' height='0' alt=''></a></div>"));
 	}
-	@Test   public void Fake__div_1__extra_attribs() {// PURPOSE.hdiff: handle fake thumbs with extra attribs; PAGE:en.w:Wikipedia:New_CSS_framework; DATE:2016-01-11
+	@Test  public void Fake__div_1__extra_attribs() {// PURPOSE.hdiff: handle fake thumbs with extra attribs; PAGE:en.w:Wikipedia:New_CSS_framework; DATE:2016-01-11
 		String html = String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"
 		, "<div class='thumbinner' style='width:252px;color:blue;'>{0}"	// "color:blue;" is invalid attribs
@@ -121,7 +121,7 @@ public class Xoh_thm_hzip__pseudo__tst {
 		);
 		fxt.Test__bicode(String_.Replace(String_.Format(html, "~%!!A.png~)#g~"), "'", "\""), String_.Format(html, "<a href='/wiki/File:A.png' class='image' title='' xowa_title='A.png'><img data-xowa-title='A.png' data-xoimg='0|240|-1|-1|-1|-1' src='' width='0' height='0' alt=''></a>"));
 	}
-	@Test   public void Fake__div_2__not_media() {	// PURPOSE.hdiff: handle fake-thumbs created through en.w:Template:Image_label_begin; PAGE:en.w:Blackburnshire; DATE:2016-01-04
+	@Test  public void Fake__div_2__not_media() {	// PURPOSE.hdiff: handle fake-thumbs created through en.w:Template:Image_label_begin; PAGE:en.w:Blackburnshire; DATE:2016-01-04
 		String html = String_.Concat_lines_nl_skip_last
 		( "<div class='thumb tright'>"
 		, "<div class='thumbinner' style='width:240px;'>"

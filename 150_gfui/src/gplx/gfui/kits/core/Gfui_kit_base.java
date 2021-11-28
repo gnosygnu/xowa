@@ -26,9 +26,9 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 	public void Cfg_set(String type, String key, Object val) {}
 	public boolean Kit_mode__ready() {return true;}
 	public void Kit_init(Gfo_usr_dlg gui_wtr) {}
-	@gplx.Virtual public void Kit_run() {}
-	@gplx.Virtual public void Kit_term() {kit_term_cbk.Exec();}
-	@gplx.Virtual public void Ask_ok(String grp_key, String msg_key, String fmt, Object... args) {}
+	public void Kit_run() {}
+	public void Kit_term() {kit_term_cbk.Exec();}
+	public void Ask_ok(String grp_key, String msg_key, String fmt, Object... args) {}
 	public boolean Ask_yes_no(String grp_key, String msg_key, String fmt, Object... args) {return false;}
 	public int Ask_yes_no_cancel(String grp_key, String msg_key, String fmt, Object... args) {return Gfui_dlg_msg_.Btn_cancel;}
 	public boolean Ask_ok_cancel(String grp_key, String msg_key, String fmt, Object... args) {return false;}
@@ -41,7 +41,7 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 		return rv;
 	}
 	public GfuiWin New_win_utl(String key, GfuiWin owner, Keyval... args) {return GfuiWin_.kit_(this, key, this.Factory().win_tool_(ctor_args), ctor_args);}
-	@gplx.Virtual public Gfui_html New_html(String key, GfuiElem owner, Keyval... args) {
+	public Gfui_html New_html(String key, GfuiElem owner, Keyval... args) {
 		Gfui_html rv = Gfui_html.kit_(this, key, this.New_html_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
@@ -66,22 +66,22 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	@gplx.Virtual public GfuiBtn New_btn(String key, GfuiElem owner, Keyval... args) {
+	public GfuiBtn New_btn(String key, GfuiElem owner, Keyval... args) {
 		GfuiBtn rv = GfuiBtn_.kit_(this, key, New_btn_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	@gplx.Virtual public GfuiComboBox New_combo(String key, GfuiElem owner, Keyval... args) {
+	public GfuiComboBox New_combo(String key, GfuiElem owner, Keyval... args) {
 		GfuiComboBox rv = GfuiComboBox.kit_(this, key, New_combo_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	@gplx.Virtual public GfuiLbl New_lbl(String key, GfuiElem owner, Keyval... args) {
+	public GfuiLbl New_lbl(String key, GfuiElem owner, Keyval... args) {
 		GfuiLbl rv = GfuiLbl_.kit_(this, key, New_btn_impl(), ctor_args);
 		owner.SubElems().Add(rv);
 		return rv;
 	}
-	@gplx.Virtual public GfuiStatusBox New_status_box(String key, GfuiElem owner, Keyval... args) {
+	public GfuiStatusBox New_status_box(String key, GfuiElem owner, Keyval... args) {
 		GfuiStatusBox rv = GfuiStatusBox_.kit_(this, key, this.Factory().text_memo_());
 		owner.SubElems().Add(rv);
 		return rv;
@@ -93,10 +93,10 @@ public abstract class Gfui_kit_base implements Gfui_kit {
 	protected abstract GxwElem New_grp_impl();
 	protected abstract GxwElem New_btn_impl();
 	protected abstract GxwElem New_combo_impl();
-	@gplx.Virtual public Gfui_dlg_file New_dlg_file(byte type, String msg) {return Gfui_dlg_file_.Noop;}
-	@gplx.Virtual public Gfui_dlg_msg New_dlg_msg(String msg) {return Gfui_dlg_msg_.Noop;}
-	@gplx.Virtual public Gfui_mnu_grp New_mnu_popup(String key, GfuiElem owner) {return Gfui_mnu_grp_.Noop;}
-	@gplx.Virtual public Gfui_mnu_grp New_mnu_bar(String key, GfuiWin owner) {return Gfui_mnu_grp_.Noop;}
+	public Gfui_dlg_file New_dlg_file(byte type, String msg) {return Gfui_dlg_file_.Noop;}
+	public Gfui_dlg_msg New_dlg_msg(String msg) {return Gfui_dlg_msg_.Noop;}
+	public Gfui_mnu_grp New_mnu_popup(String key, GfuiElem owner) {return Gfui_mnu_grp_.Noop;}
+	public Gfui_mnu_grp New_mnu_bar(String key, GfuiWin owner) {return Gfui_mnu_grp_.Noop;}
 	public abstract ImageAdp New_img_load(Io_url url);
 	public Object New_color(int a, int r, int g, int b) {return null;}
 	public float Calc_font_height(GfuiElem elem, String s) {return 13;}

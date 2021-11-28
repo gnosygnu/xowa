@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.tests.*;
 import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.stores.*;
 public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 	@Before public void init() {fxt.Clear();} private Srl__fxt fxt = new Srl__fxt();
-	@Test   public void Label() {
+	@Test  public void Label() {
 		fxt.Init_label("en", "Earth").Init_label("fr", "Terre").Init_label("de", "Erde");
 		fxt.Test
 		(	"labels:"
@@ -34,7 +34,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Description() {
+	@Test  public void Description() {
 		fxt.Init_description("en", "Earth").Init_description("fr", "Terre").Init_description("de", "Erde");
 		fxt.Test
 		(	"descriptions:"
@@ -50,7 +50,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Sitelinks() {
+	@Test  public void Sitelinks() {
 		fxt.Init_link("enwiki", "Earth").Init_link("frwiki", "Terre").Init_link("dewiki", "Erde");
 		fxt.Test
 		(	"sitelinks:"
@@ -69,7 +69,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Sitelinks_both_formats() {	// PURPOSE: check that both formats are serializable; DATE:2014-02-06
+	@Test  public void Sitelinks_both_formats() {	// PURPOSE: check that both formats are serializable; DATE:2014-02-06
 		Json_doc jdoc = fxt.Wdata_fxt().App().Utl__json_parser().Parse_by_apos_ary
 		(	"{ 'entity':['item',2]"
 		,	", 'links':"
@@ -95,7 +95,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Aliases() {
+	@Test  public void Aliases() {
 		fxt.Init_alias("en", "en_0", "en_1", "en_2").Init_alias("fr", "fr_0").Init_alias("de", "de_0", "de_1");
 		fxt.Test
 		(	"aliases:"
@@ -123,7 +123,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_str() {
+	@Test  public void Claims_str() {
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_string(2, "Moon"));
 		fxt.Test
 		(	"claims:"
@@ -142,7 +142,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_somevalue() {	// PURPOSE: changed to not return value-node; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 // somevalue should always return value node; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07;
+	@Test  public void Claims_somevalue() {	// PURPOSE: changed to not return value-node; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 // somevalue should always return value node; EX:w:Joseph-François_Malgaigne; DATE:2014-04-07;
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_somevalue(2));
 		fxt.Test
 		(	"claims:"
@@ -158,7 +158,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_novalue() {	// PURPOSE: novalue must return empty array (no datavalue node in json); PAGE:ru.w:Лимонов,_Эдуард_Вениаминович; DATE:2015-02-16
+	@Test  public void Claims_novalue() {	// PURPOSE: novalue must return empty array (no datavalue node in json); PAGE:ru.w:Лимонов,_Эдуард_Вениаминович; DATE:2015-02-16
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_novalue(2));
 		fxt.Test
 		(	"claims:"
@@ -174,7 +174,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_entity() {
+	@Test  public void Claims_entity() {
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_entity_qid(2, 3));
 		fxt.Test
 		(	"claims:"
@@ -196,7 +196,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_base_0() {	// PURPOSE: test for legacyStyle (aka base_0); used by pl.w:Module:Wikidane; DATE:2014-05-09
+	@Test  public void Claims_base_0() {	// PURPOSE: test for legacyStyle (aka base_0); used by pl.w:Module:Wikidane; DATE:2014-05-09
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_entity_qid(2, 3));
 		fxt.Test(true
 		,	"claims:"
@@ -233,7 +233,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_time() {
+	@Test  public void Claims_time() {
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_time(2, "2001-02-03 04:05:06", 9));
 		fxt.Test
 		(	"claims:"
@@ -258,7 +258,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_globecoordinate() {
+	@Test  public void Claims_globecoordinate() {
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_geo(2, "6.789", "1.2345"));
 		fxt.Test
 		(	"claims:"
@@ -282,7 +282,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_quantity() {
+	@Test  public void Claims_quantity() {
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_quantity(2, "+1,234", "2", "+1,236", "+1232"));
 		fxt.Test
 		(	"claims:"
@@ -305,7 +305,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_monolingualtext() {// PURPOSE.fix: type was mistakenly "language" instead of "monolingualtext" DATE:2014-10-21
+	@Test  public void Claims_monolingualtext() {// PURPOSE.fix: type was mistakenly "language" instead of "monolingualtext" DATE:2014-10-21
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_monolingual(2, "en", "en_text"));
 		fxt.Test
 		(	"claims:"
@@ -326,7 +326,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Qualifiers() {
+	@Test  public void Qualifiers() {
 		Wdata_wiki_mgr_fxt wdata_fxt = fxt.Wdata_fxt();
 		fxt.Init_prop
 		(	wdata_fxt.Make_claim_string(2, "Earth")
@@ -386,7 +386,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void References() {
+	@Test  public void References() {
 		Wdata_wiki_mgr_fxt wdata_fxt = fxt.Wdata_fxt();
 		fxt.Init_prop
 		(	wdata_fxt.Make_claim_string(2, "Earth")
@@ -448,7 +448,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Claims_time_typed() {
+	@Test  public void Claims_time_typed() {
 		Wbase_claim_time claim = (Wbase_claim_time)fxt.Wdata_fxt().Make_claim_time(2, "2001-02-03 04:05:06", 9);
 		Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();
 		visitor.Visit_time(claim);
@@ -456,7 +456,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		Gftest.Eq__str("timezone", keyval.Key());
 		Gftest.Eq__int(0, (int)keyval.Val());	// fails when keyval.Val() is String; DATE:2016-10-28
 	}
-	@Test   public void Claims__commonsMedia() {
+	@Test  public void Claims__commonsMedia() {
 		fxt.Wdata_fxt().Wdata_mgr().Prop_mgr().Loader_(Wbase_prop_mgr_loader_.New_mock(Keyval_.new_("P2", "commonsMedia")));
 		fxt.Init_prop(fxt.Wdata_fxt().Make_claim_string(2, "abc"));
 		fxt.Test
@@ -476,7 +476,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		,	""
 		);
 	}
-	@Test   public void Type_is_property() {	// PURPOSE: type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
+	@Test  public void Type_is_property() {	// PURPOSE: type should be "property"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
 		fxt.Wdata_fxt().Wdata_mgr().Prop_mgr().Loader_(Wbase_prop_mgr_loader_.New_mock(Keyval_.new_("P1", "commonsMedia")));
 		fxt.Init_header_enabled_y_();
 		fxt.Wdata_fxt().doc_("Property:P1", fxt.Wdata_fxt().Make_claim_string(123, "abc"));
@@ -488,7 +488,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		, ""
 		);
 	}
-	@Test   public void Type_is_item() {	// PURPOSE: type should be "item"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
+	@Test  public void Type_is_item() {	// PURPOSE: type should be "item"; PAGE:ru.w:Викитека:Проект:Викиданные DATE:2016-11-23
 		fxt.Init_header_enabled_y_();
 		fxt.Wdata_fxt().doc_("Q2", fxt.Wdata_fxt().Make_claim_string(123, "abc"));
 		fxt.Test
@@ -498,7 +498,7 @@ public class Srl__tst {// see also FOOTNOTE:VIEWING_WIKIDATA_JSON
 		, ""
 		);
 	}
-	@Test   public void Numeric_id_is_int() {	// PURPOSE: assert that numeric-id is integer, not String, else will fail when comparing directly to integer; PAGE:en.w:Hollywood_Walk_of_Fame DATE:2016-12-17
+	@Test  public void Numeric_id_is_int() {	// PURPOSE: assert that numeric-id is integer, not String, else will fail when comparing directly to integer; PAGE:en.w:Hollywood_Walk_of_Fame DATE:2016-12-17
 		Wbase_claim_entity claim = (Wbase_claim_entity)fxt.Wdata_fxt().Make_claim_entity_qid(123, 456);
 		Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();
 		visitor.Visit_entity(claim);

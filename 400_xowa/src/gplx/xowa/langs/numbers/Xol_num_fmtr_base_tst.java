@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xol_num_fmtr_base_tst {
 	Xol_num_fmtr_base mgr = new Xol_num_fmtr_base();
 	@Before public void init() {mgr.Clear();}
-	@Test  public void Outliers() {
+	@Test public void Outliers() {
 		ini_(".", dat_(",", 3));
 		tst_Fmt("1234a1234"							, "1,234a1,234");
 		tst_Fmt("1234abc1234"						, "1,234abc1,234");
@@ -29,7 +29,7 @@ public class Xol_num_fmtr_base_tst {
 		tst_Fmt("-1234567"							, "-1,234,567");
 		tst_Fmt("1,234,567"							, "1,234,567");
 	}
-	@Test  public void English() {
+	@Test public void English() {
 		ini_(".", dat_(",", 3));
 		tst_Fmt("123"								, "123");
 		tst_Fmt("1234"								, "1,234");
@@ -37,7 +37,7 @@ public class Xol_num_fmtr_base_tst {
 		tst_Fmt("12345678901234567890"				, "12,345,678,901,234,567,890");
 		tst_Raw("1,234.12"							, "1234.12");
 	}
-	@Test  public void French() {
+	@Test public void French() {
 		ini_(",", dat_(" ", 3));
 		tst_Fmt("123"								, "123");
 		tst_Fmt("1234"								, "1 234");
@@ -45,14 +45,14 @@ public class Xol_num_fmtr_base_tst {
 		tst_Fmt("12345678901234567890"				, "12 345 678 901 234 567 890");
 		tst_Fmt("1234,5678"							, "1 234 5 678"); // NOTE: nbsp here; also, nbsp is repeated. see dewiki and {{formatnum:1234,56}}
 	}
-	@Test  public void Croatia() {
+	@Test public void Croatia() {
 		ini_(",", dat_(".", 3), dat_(",", 3));
 		tst_Fmt("123"								, "123");
 		tst_Fmt("1234"								, "1.234");
 		tst_Fmt("12345678"							, "12,345.678");
 		tst_Fmt("12345678901234567890"				, "12,345.678,901.234,567.890");
 	}
-	@Test  public void Mexico() {
+	@Test public void Mexico() {
 		ini_(".", dat_(",", 3, false), dat_("'", 3, false), dat_(",", 3));
 		tst_Fmt("123"								, "123");
 		tst_Fmt("1234"								, "1,234");
@@ -60,28 +60,28 @@ public class Xol_num_fmtr_base_tst {
 		tst_Fmt("12345678901234567890"				, "12,345,678,901,234'567,890");
 		tst_Raw("12'345,678.90"						, "12345678.90");
 	}
-	@Test  public void China() {
+	@Test public void China() {
 		ini_(".", dat_(",", 4));
 		tst_Fmt("123"								, "123");
 		tst_Fmt("1234"								, "1234");
 		tst_Fmt("12345678"							, "1234,5678");
 		tst_Fmt("12345678901234567890"				, "1234,5678,9012,3456,7890");
 	}
-	@Test  public void Hindi() {
+	@Test public void Hindi() {
 		ini_(".", dat_(",", 3, false), dat_(",", 2));
 		tst_Fmt("123"								, "123");
 		tst_Fmt("1234"								, "1,234");
 		tst_Fmt("12345678"							, "1,23,45,678");
 		tst_Fmt("12345678901234567890"				, "1,23,45,67,89,01,23,45,67,890");
 	}
-	@Test  public void India() {
+	@Test public void India() {
 		ini_(".", dat_(",", 3), dat_(",", 2), dat_(",", 2));
 		tst_Fmt("123"								, "123");
 		tst_Fmt("1234"								, "1,234");
 		tst_Fmt("12345678"							, "1,23,45,678");
 		tst_Fmt("12345678901234567890"				, "1,23,456,78,90,123,45,67,890");
 	}
-	@Test  public void MiddleDot() {
+	@Test public void MiddleDot() {
 		ini_("·", dat_("·", 3));
 		tst_Fmt("123"								, "123");
 		tst_Fmt("1234"								, "1·234");

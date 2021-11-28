@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xou_history_mgr_tst {
 	private Xou_history_mgr_fxt fxt = new Xou_history_mgr_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Archive() {
+	@Test public void Archive() {
 		Datetime_now.Manual_y_();	// NOTE: each DateTime_.Now() advances clock by 1 min; adding a new Datetime_now.Get() anywhere will throw off times on this test; DATE:2014-04-01
 		fxt.Invk(Xou_history_mgr.Invk_current_itms_max_, 4).Invk(Xou_history_mgr.Invk_current_itms_reset_, 2);
 		fxt.Add_many("A", "B", "C", "D", "E");
@@ -30,17 +30,17 @@ public class Xou_history_mgr_tst {
 			,	"20010101 000100.000|20010101 000100.000|1|en.wikipedia.org|A"
 			));
 	}
-	@Test   public void Normalize() {
+	@Test  public void Normalize() {
 		fxt.Clear();
 		fxt.Add_many("Category:A_B", "Category:A B", "Category:a B", "Category:_A B_");
 		fxt.List_tst("Category:A_B");
 	}
-	@Test   public void Args() {
+	@Test  public void Args() {
 		fxt.Clear();
 		fxt.Add_one("Special:AllPages", "?from=A");
 		fxt.List_tst("Special:AllPages?from=A");
 	}
-	@Test   public void Remove_nl() {
+	@Test  public void Remove_nl() {
 		fxt.Clear();
 		fxt.Add_many("Category:A?pagefrom=B\nB");
 		fxt.List_tst("Category:A?pagefrom=B");

@@ -17,7 +17,7 @@ package gplx.xowa.xtns.categorytrees; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Categorytree_func_tst {
 	@Before public void init()				{fxt.Reset();} private final    Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test__parse__tmpl_to_html("{{#categorytree:A B}}", "<a href='/wiki/Category:A_B'>Category:A B</a>");
 	}
 }

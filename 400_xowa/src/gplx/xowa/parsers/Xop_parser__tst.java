@@ -17,7 +17,7 @@ package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
 public class Xop_parser__tst {
 	@Before public void init() {fxt.Clear();} private Xop_parser__fxt fxt = new Xop_parser__fxt();
-	@Test  public void Para_y() {
+	@Test public void Para_y() {
 		fxt.Test_parse_to_html(String_.Concat_lines_nl_skip_last
 		( "a"
 		, ""
@@ -31,7 +31,7 @@ public class Xop_parser__tst {
 		, ""
 		));
 	}
-	@Test  public void Para_n() {
+	@Test public void Para_n() {
 		fxt.Test_parse_to_html(String_.Concat_lines_nl_skip_last
 		( "a"
 		, ""

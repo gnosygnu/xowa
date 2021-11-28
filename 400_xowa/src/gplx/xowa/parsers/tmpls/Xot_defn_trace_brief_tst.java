@@ -23,9 +23,9 @@ public class Xot_defn_trace_brief_tst {
 		fxt.Init_defn_add("leaf_b", "{{{1}}}");
 		fxt.Ctx().Defn_trace_(new Xot_defn_trace_brief());
 	}
-	@Test  public void Basic_a_1()				{fxt.tst_("{{leaf_a}}"						, "0001 leaf_a");}
-	@Test  public void Basic_a_2()				{fxt.tst_("{{leaf_a}} {{leaf_a}}"			, "0002 leaf_a");}
-	@Test  public void Basic_a_b()				{fxt.tst_("{{leaf_a}} {{leaf_b}}"			, "0001 leaf_a", "0001 leaf_b");}
+	@Test public void Basic_a_1()				{fxt.tst_("{{leaf_a}}"						, "0001 leaf_a");}
+	@Test public void Basic_a_2()				{fxt.tst_("{{leaf_a}} {{leaf_a}}"			, "0002 leaf_a");}
+	@Test public void Basic_a_b()				{fxt.tst_("{{leaf_a}} {{leaf_b}}"			, "0001 leaf_a", "0001 leaf_b");}
 }
 class Xot_defn_trace_fxt {
 	private final    Xop_fxt fxt = new Xop_fxt();

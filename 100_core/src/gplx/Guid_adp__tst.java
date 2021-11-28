@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx;
 import org.junit.*;
 public class Guid_adp__tst {
-	@Test  public void parse() {
+	@Test public void parse() {
 		tst_parse_("467ffb41-cdfe-402f-b22b-be855425784b");
 	}
 	void tst_parse_(String s) {

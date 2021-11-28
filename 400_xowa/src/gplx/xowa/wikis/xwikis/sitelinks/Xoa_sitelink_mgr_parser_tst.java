@@ -18,7 +18,7 @@ import org.junit.*;
 public class Xoa_sitelink_mgr_parser_tst {
 	private final    Xoa_sitelink_mgr_parser_fxt fxt = new Xoa_sitelink_mgr_parser_fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		String raw = String_.Concat_lines_nl_skip_last
 		( "0|Tier 0"
 		, "1|de|German"
@@ -30,7 +30,7 @@ public class Xoa_sitelink_mgr_parser_tst {
 		fxt.Exec_parse(raw);
 		fxt.Test_parse(raw);
 	}
-	@Test   public void Move() {
+	@Test  public void Move() {
 		String raw = String_.Concat_lines_nl_skip_last
 		( "0|Tier 0"
 		, "1|de|German"

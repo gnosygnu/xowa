@@ -21,14 +21,14 @@ public class XmlFileSplitter_tst {
 		splitter = new XmlFileSplitter();
 		Io_mgr.Instance.InitEngine_mem();
 	} XmlFileSplitter splitter;
-	@Test  public void FindMatchPos() {
+	@Test public void FindMatchPos() {
 		tst_FindMatchPos("abcde", "a", 0);
 		tst_FindMatchPos("abcde", "b", 1);
 		tst_FindMatchPos("abcde", "cd", 2);
 		tst_FindMatchPos("abcde", "f", -1);
 		tst_FindMatchPos("abcde", "fg", -1);
 	}	void tst_FindMatchPos(String src, String find, int expd) {Tfds.Eq(expd, splitter.FindMatchPos(byte_(src), byteAry_(find)));}
-	@Test  public void FindMatchPosRev() {
+	@Test public void FindMatchPosRev() {
 		tst_FindMatchPosRev("abcde", "a", 0);
 		tst_FindMatchPosRev("abcde", "b", 1);
 		tst_FindMatchPosRev("abcde", "cd", 2);
@@ -37,10 +37,10 @@ public class XmlFileSplitter_tst {
 		tst_FindMatchPosRev("abcde", "za", -1);
 		tst_FindMatchPosRev("dbcde", "d", 3);
 	}	void tst_FindMatchPosRev(String src, String find, int expd) {Tfds.Eq(expd, splitter.FindMatchPosRev(byte_(src), byteAry_(find)));}
-	@Test  public void ExtractHdr() {
+	@Test public void ExtractHdr() {
 		tst_ExtractHdr("<a><b>", "<b", "<a>", "<b>");
 	}
-	@Test  public void Split() {
+	@Test public void Split() {
 		splitter.Opts().FileSizeMax_(30).XmlNames_("<a").XmlEnd_("</root>");
 		tst_Split
 			( "<root><a id='1'/><a id='2'/><a id='3'/><a id='4'/><a id='5'/></root>"

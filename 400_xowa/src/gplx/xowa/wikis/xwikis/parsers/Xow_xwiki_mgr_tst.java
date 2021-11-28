@@ -18,7 +18,7 @@ import org.junit.*; import gplx.core.strings.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.langs.*;
 public class Xow_xwiki_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xow_xwiki_mgr_fxt fxt = new Xow_xwiki_mgr_fxt();
-	@Test   public void Add_bulk_langs_wiki() 		{
+	@Test  public void Add_bulk_langs_wiki() 		{
 		fxt.Init_langs();
 		fxt.Test_add_bulk_langs
 		( fxt.xwiki_("en", "en.wikipedia.org", "https://en.wikipedia.org/wiki/~{0}")
@@ -27,12 +27,12 @@ public class Xow_xwiki_mgr_tst {
 		, fxt.xwiki_("ja", "ja.wikipedia.org", "https://ja.wikipedia.org/wiki/~{0}")
 		);
 	}
-	@Test   public void Add_bulk_langs_grp_commons() {
+	@Test  public void Add_bulk_langs_grp_commons() {
 		fxt.Init_langs();
 		fxt.Wiki().Xwiki_mgr().Add_by_sitelink_mgr(Xow_domain_tid_.Tid__wikipedia);
 		fxt.Tst_itms(fxt.xwiki_("de", "de.wikipedia.org", "https://de.wikipedia.org/wiki/~{0}"), fxt.xwiki_("fr", "fr.wikipedia.org", "https://fr.wikipedia.org/wiki/~{0}"));
 	}
-	@Test   public void Add_bulk_peers() {
+	@Test  public void Add_bulk_peers() {
 		fxt.Init_peers();
 		fxt.Test_add_bulk_peers
 		( fxt.xwiki_("wikt", "en.wiktionary.org"
@@ -41,16 +41,16 @@ public class Xow_xwiki_mgr_tst {
 		, "https://en.wiktionary.org/wiki/~{0}")
 		, fxt.xwiki_("s", "en.wikisource.org", "https://en.wikisource.org/wiki/~{0}"));
 	}
-	@Test   public void Add_bulk_peers_skip_self() 	{	// PURPOSE: skip "wikipedia" as alias since "Wikipedia" is Srch_rslt_cbk; needed for titles of "Wikipedia:Main page" (which would otherwise try to go to page "Main Page" in the main names of xwiki "Wikipedia"
+	@Test  public void Add_bulk_peers_skip_self() 	{	// PURPOSE: skip "wikipedia" as alias since "Wikipedia" is Srch_rslt_cbk; needed for titles of "Wikipedia:Main page" (which would otherwise try to go to page "Main Page" in the main names of xwiki "Wikipedia"
 		fxt.Init_peers();
 		fxt.Test_add_bulk_peers
 		( fxt.xwiki_null_("wikipedia")
 		, fxt.xwiki_("w", "en.wikipedia.org", "https://en.wikipedia.org/wiki/~{0}"));
 	}
-	@Test   public void Add_bulk_peers_tid() { // PURPOSE:wikt should generate wiki_tid of wiktionary, not wikipedia; PAGE:en.s:Main_Page DATE:2014-09-14
+	@Test  public void Add_bulk_peers_tid() { // PURPOSE:wikt should generate wiki_tid of wiktionary, not wikipedia; PAGE:en.s:Main_Page DATE:2014-09-14
 		fxt.Init_wikt ().Test_add_bulk_peers(fxt.xwiki_("wikt", "en.wiktionary.org", "https://en.wiktionary.org/wiki/~{0}"));
 	}
-//		@Test   public void Duplicate() {	// PURPOSE.FIX: multiple aliases for same domain should only be added once to Get_at's list; DATE:2014-11-07
+//		@Test  public void Duplicate() {	// PURPOSE.FIX: multiple aliases for same domain should only be added once to Get_at's list; DATE:2014-11-07
 //			fxt.Exec_parse(String_.Concat_lines_nl_skip_last
 //			( "0|a1|a.org"
 //			, "0|a2|a.org"

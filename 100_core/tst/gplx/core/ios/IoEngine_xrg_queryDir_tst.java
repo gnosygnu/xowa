@@ -19,32 +19,32 @@ public class IoEngine_xrg_queryDir_tst {
 	@Before public void setup() {
 		engine = IoEngine_.Mem_init_();
 	}	IoEngine engine; Io_url[] ary;
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		ary = save_text_(fil_("fil1.txt"));
 
 		tst_ExecPathAry(finder_(), ary);
 	}
-	@Test  public void FilPath() {
+	@Test public void FilPath() {
 		ary = save_text_(fil_("fil1.txt"), fil_("fil2.jpg"), fil_("fil3.txt"));
 		
 		tst_ExecPathAry(finder_(), ary);						// default: all files
 		tst_ExecPathAry(finder_().FilPath_("*.txt")				// findPattern of *.txt
 			, fil_("fil1.txt"), fil_("fil3.txt"));
 	}
-	@Test  public void Recur() {
+	@Test public void Recur() {
 		ary = save_text_(fil_("fil1.txt"), fil_("dirA", "fil1A.jpg"));
 
 		tst_ExecPathAry(finder_(), fil_("fil1.txt"));			// default: no recursion
 		tst_ExecPathAry(finder_().Recur_(), ary);				// recurse
 	}
-	@Test  public void DirPattern() {
+	@Test public void DirPattern() {
 		save_text_(fil_("fil1.txt"), fil_("dirA", "fil1A.jpg"));
 
 		tst_ExecPathAry(finder_(), fil_("fil1.txt"));			// default: files only
 		tst_ExecPathAry(finder_().DirInclude_()					// include dirs; NOTE: fil1A not returned b/c Recur_ is not true
 			, dir_("dirA"), fil_("fil1.txt"));
 	}
-	@Test  public void Sort_by() {
+	@Test public void Sort_by() {
 		save_text_(fil_("fil2a.txt"), fil_("fil1.txt"));
 
 		tst_ExecPathAry(finder_()								// default: sortByAscOrder

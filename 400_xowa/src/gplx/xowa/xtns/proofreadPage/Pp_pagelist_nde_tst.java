@@ -17,7 +17,7 @@ package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import 
 import org.junit.*;
 public class Pp_pagelist_nde_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Basic() {
+	@Test public void Basic() {
 		fxt.Test_parse_page_wiki_str("a<pagelist>b</pagelist>c", "ac");
 	}
 }

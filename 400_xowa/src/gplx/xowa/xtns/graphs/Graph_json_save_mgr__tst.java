@@ -20,22 +20,22 @@ import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
 public class Graph_json_save_mgr__tst {
 	private final    Graph_json_save_mgr__fxt fxt = new Graph_json_save_mgr__fxt();
 	@Before public void init() {fxt.Clear();}
-	@Test  public void Xowa_file() {
+	@Test public void Xowa_file() {
 		fxt.Test__parse("a-{XOWA_ROOT}-z", "a-{XOWA_ROOT}{XOWA_ROOT}-z");
 	}
-	@Test  public void Missing_wikirawupload() {
+	@Test public void Missing_wikirawupload() {
 		fxt .Expd__err("missing wikirawupload")
 			.Test__parse("a-file:///mem/xowa/-z");
 	}
-	@Test  public void Missing_endquote() {
+	@Test public void Missing_endquote() {
 		fxt .Expd__err("missing endquote")
 			.Test__parse("a-\"wikirawupload:file:///mem/xowa/-z");
 	}
-	@Test  public void Invalid_img_src() {
+	@Test public void Invalid_img_src() {
 		fxt .Expd__err("invalid file_path")
 			.Test__parse("a-\"wikirawupload:file:///mem/xowa/invalid-z\"");
 	}
-	@Test  public void File() {
+	@Test public void File() {
 		fxt .Expd__file(Bool_.Y, Bool_.Y, "A.png")
 			.Test__parse
 			( "a-\"wikirawupload:file:///mem/xowa/file/commons.wikimedia.org/orig/7/0/1/c/A.png\"-z"

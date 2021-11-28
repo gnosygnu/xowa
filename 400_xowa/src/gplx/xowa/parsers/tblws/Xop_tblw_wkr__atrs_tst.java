@@ -17,7 +17,7 @@ package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.
 import org.junit.*;
 public class Xop_tblw_wkr__atrs_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
-	@Test  public void Tr() {
+	@Test public void Tr() {
 		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-style='a'"
@@ -29,7 +29,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		))
 		);
 	}
-	@Test  public void Td() {
+	@Test public void Td() {
 		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-"
@@ -41,7 +41,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		))
 		);
 	}
-	@Test  public void Td_mult() {
+	@Test public void Td_mult() {
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
@@ -77,7 +77,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		);
 		fxt.Init_para_n_();
 	}
-	@Test  public void Tc() {	// PAGE:en.w:1920_Palm_Sunday_tornado_outbreak
+	@Test public void Tc() {	// PAGE:en.w:1920_Palm_Sunday_tornado_outbreak
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|id='1'"
@@ -94,7 +94,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		);
 		fxt.Init_para_n_();
 	}
-	@Test  public void Td_mixed() {
+	@Test public void Td_mixed() {
 		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-"
@@ -107,7 +107,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		))
 		);
 	}
-	@Test  public void Th() {
+	@Test public void Th() {
 		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-"
@@ -119,7 +119,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		))
 		);
 	}
-	@Test  public void Skip_hdr() {
+	@Test public void Skip_hdr() {
 		fxt.Test_parse_page_wiki(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|+b"
@@ -132,7 +132,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		)				
 		));
 	}
-	@Test  public void Td_bg_color() {	// PURPOSE: atr_parser should treat # as valid character in unquoted val; PAGE:en.w:UTF8; |bgcolor=#eeeeee|<small>Indic</small><br/><small>0800*</small><br/>'''''224'''''
+	@Test public void Td_bg_color() {	// PURPOSE: atr_parser should treat # as valid character in unquoted val; PAGE:en.w:UTF8; |bgcolor=#eeeeee|<small>Indic</small><br/><small>0800*</small><br/>'''''224'''''
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
@@ -151,7 +151,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		);
 		fxt.Init_para_n_();
 	}
-	@Test  public void Xnde_tb() {	// PURPOSE: xnde should close any open xatrs; PAGE:en.w:Western_Front_(World_War_I); stray > after == Dramatizations ==
+	@Test public void Xnde_tb() {	// PURPOSE: xnde should close any open xatrs; PAGE:en.w:Western_Front_(World_War_I); stray > after == Dramatizations ==
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|id='1'<p></p>"
 		, "|a"
@@ -165,7 +165,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		, ""
 		));
 	}
-	@Test   public void Xnde_tr() { // PURPOSE: xnde should disable all tkns; PAGE:en.w:A DATE:2014-07-16
+	@Test  public void Xnde_tr() { // PURPOSE: xnde should disable all tkns; PAGE:en.w:A DATE:2014-07-16
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "{|"
 		, "|-<b>c</b>id='d'<br/>"	// note that id='d' should not show up since <b> invalidates entire line
@@ -180,7 +180,7 @@ public class Xop_tblw_wkr__atrs_tst {
 		, "</table>"
 		));
 	}
-	@Test  public void Xnde_mix_tblw_tblx() {	// PURPOSE: issue with </tr> somehow rolling up everything after <td>; PAGE:en.w:20th_century; {{Decades and years}}
+	@Test public void Xnde_mix_tblw_tblx() {	// PURPOSE: issue with </tr> somehow rolling up everything after <td>; PAGE:en.w:20th_century; {{Decades and years}}
 		fxt.Init_para_y_();
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "<table><tr><td>a"

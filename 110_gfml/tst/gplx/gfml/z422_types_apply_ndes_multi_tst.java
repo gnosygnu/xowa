@@ -33,7 +33,7 @@ public class z422_types_apply_ndes_multi_tst {
 			,		GfmlFld_mok.new_().ini_ndk_("size", "size")
 			).XtoGfmlType());
 	}	GfmlTypeCompiler_fxt fx = GfmlTypeCompiler_fxt.new_();
-	@Test  public void Unnamed() {
+	@Test public void Unnamed() {
 		fx.tst_Resolve
 		(	fx.nde_().Hnd_("rect").Subs_
 			(	fx.nde_().Key_(GfmlTkn_.NullRaw).Atrs_("1")
@@ -45,7 +45,7 @@ public class z422_types_apply_ndes_multi_tst {
 			)
 		);
 	}
-	@Test  public void Partial() {
+	@Test public void Partial() {
 		fx.tst_Resolve
 		(	fx.nde_().Hnd_("rect").Subs_
 			(	fx.nde_().Key_("pos").Atrs_("1")
@@ -57,7 +57,7 @@ public class z422_types_apply_ndes_multi_tst {
 			)
 		);
 	}
-	@Test  public void OutOfOrder() {
+	@Test public void OutOfOrder() {
 		fx.tst_Resolve
 		(	fx.nde_().Hnd_("rect").Subs_
 			(	fx.nde_().Key_("size").Atrs_("3")

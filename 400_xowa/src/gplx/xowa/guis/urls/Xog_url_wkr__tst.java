@@ -17,11 +17,11 @@ package gplx.xowa.guis.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa
 import org.junit.*; import gplx.core.tests.*;
 public class Xog_url_wkr__tst {
 	private final    Xog_url_wkr__fxt fxt = new Xog_url_wkr__fxt();
-	@Test   public void Basic() {
+	@Test  public void Basic() {
 		fxt.Exec__parse("/wiki/A?k1=B%26C");
 		fxt.Test__raw("/wiki/A?k1=B%26C");
 	}
-	@Test   public void Anch_early() {	// de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages
+	@Test  public void Anch_early() {	// de.wikipedia.org/wiki/Kategorie:Begriffskl%C3%A4rung?pagefrom=#::12%20PANZERDIVISION#mw-pages
 		fxt.Exec__parse("/wiki/A?pagefrom=%23%3A7p#mw-pages");
 		fxt.Test__qarg("?pagefrom=#:7p");
 		fxt.Test__anch("mw-pages");
