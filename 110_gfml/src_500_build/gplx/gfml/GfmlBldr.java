@@ -39,7 +39,7 @@ public class GfmlBldr {
 			curNdeFrame.Build_end(this, GfmlFrame_nde_.OwnerRoot_);
 			if (frameStack.Count() > 0) UsrMsgs_fail(GfmlUsrMsgs.fail_Frame_danglingBgn());
 		}
-		if (throwErrors && gdoc.UsrMsgs().Count() > 0) throw GfmlUsrMsgs.gfmlParseError(this);
+		if (throwErrors && gdoc.UsrMsgs().Len() > 0) throw GfmlUsrMsgs.gfmlParseError(this);
 		raw = "";
 		return gdoc;
 	}

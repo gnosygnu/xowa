@@ -137,7 +137,7 @@ public class Db_Section_list {
 		else if (Bry_.Len_eq_0(from))
 			include_mode = Include_to_bos;
 		int bgn_pos = 0; boolean bgn_found = false; int src_page_bry_len = src.length;
-		int sections_len = sects.Count();
+		int sections_len = sects.Len();
 		for (int i = 0; i < sections_len; i++) {
 			Section sect = (Section)sects.Get_at(i);
 			byte section_tid = (byte)sect.type;
@@ -179,7 +179,7 @@ public class Db_Section_list {
 		if		(Bry_.Len_eq_0(sect_exclude)) {	// no exclude arg; EX: {{#lstx:page}} or {{#lstx:page}}
 			return Compile3(src);							// write all and exit
 		}
-		int sections_len = sects.Count();
+		int sections_len = sects.Len();
 		int bgn_pos = 0;
 		Bry_bfr bfr = Bry_bfr_.New();
 		for (int i = 0; i < sections_len; i++) {

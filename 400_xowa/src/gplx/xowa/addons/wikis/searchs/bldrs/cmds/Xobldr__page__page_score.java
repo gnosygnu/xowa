@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.bldrs.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs.*;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds; import gplx.*; import gplx.xowa.*;
+import gplx.dbs.*;
+import gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Xobldr__page__page_score extends Xob_cmd__base implements Xob_cmd {	// create page_rank in page_db; drop and vaccuum later; avoid cross db for now
 	private double damping_factor = .85;
@@ -41,13 +41,13 @@ public class Xobldr__page__page_score extends Xob_cmd__base implements Xob_cmd {
 		if (!plink_conn.Meta_tbl_exists(plink_tbl.Tbl_name())) plink_tbl.Create_tbl();// create page_link if it doesn't exist; occurs when page_rank_enabled == false;
 		plink_conn.Meta_tbl_create(Dbmeta_tbl_itm.New
 		( Pagerank__tbl_name
-		, Dbmeta_fld_itm.new_int		(Pagerank__fld_page_id).Primary_y_()
-		, Dbmeta_fld_itm.new_int		(Pagerank__fld_link_count)
-		, Dbmeta_fld_itm.new_int		(Pagerank__fld_has_converged).Default_(0)
-		, Dbmeta_fld_itm.new_double		(Pagerank__fld_page_rank).Default_(1)
-		, Dbmeta_fld_itm.new_int		("page_namespace").Default_(Int_.Min_value)
-		, Dbmeta_fld_itm.new_byte		("page_is_redirect").Default_(0)
-		, Dbmeta_fld_itm.new_int		("page_len").Default_(0)
+		, DbmetaFldItm.NewInt(Pagerank__fld_page_id).PrimarySetY()
+		, DbmetaFldItm.NewInt(Pagerank__fld_link_count)
+		, DbmetaFldItm.NewInt(Pagerank__fld_has_converged).DefaultValSet(0)
+		, DbmetaFldItm.NewDouble(Pagerank__fld_page_rank).DefaultValSet(1)
+		, DbmetaFldItm.NewInt("page_namespace").DefaultValSet(Int_.Min_value)
+		, DbmetaFldItm.NewByte("page_is_redirect").DefaultValSet(0)
+		, DbmetaFldItm.NewInt("page_len").DefaultValSet(0)
 		));
 
 		new Db_attach_mgr(plink_conn, new Db_attach_itm("page_db", page_conn))

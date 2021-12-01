@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*;
 import gplx.core.criterias.*;
-import gplx.dbs.*; import gplx.dbs.utls.*;
+import gplx.dbs.*;
 class Xowd_page_tbl__ttl extends Xowd_page_tbl__in_wkr__base {
 	private Ordered_hash hash; private int in_ns;
 	@Override protected int Interval() {return 64;}	// NOTE: 96+ overflows; EX: w:Space_Liability_Convention; DATE:2013-10-24
@@ -35,5 +35,5 @@ class Xowd_page_tbl__ttl extends Xowd_page_tbl__in_wkr__base {
 			stmt.Val_bry_as_str(page.Ttl_page_db());
 		}
 	}
-	@Override protected Xowd_page_itm Get_page_or_null(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Get_by(rdr_page.Ttl_page_db());}
+	@Override protected Xowd_page_itm Get_page_or_null(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.GetByOrNull(rdr_page.Ttl_page_db());}
 }

@@ -21,9 +21,9 @@ public class Dbmeta_tbl_itm {
 	public Dbmeta_fld_mgr Flds() {return flds;} private final Dbmeta_fld_mgr flds = new Dbmeta_fld_mgr();
 	public String To_sql_create(SqlQryWtr sql_wtr) {return sql_wtr.Schema_wtr().Bld_create_tbl(this);}
 
-	public static Dbmeta_tbl_itm New(String name, Dbmeta_fld_list flds, Dbmeta_idx_itm... idxs)	{return New(name, flds.To_fld_ary(), idxs);}
-	public static Dbmeta_tbl_itm New(String name, Dbmeta_fld_itm... flds)							{return New(name, flds, Dbmeta_idx_itm.Ary_empty);}
-	public static Dbmeta_tbl_itm New(String name, Dbmeta_fld_itm[] flds, Dbmeta_idx_itm... idxs) {
+	public static Dbmeta_tbl_itm New(String name, DbmetaFldList flds, Dbmeta_idx_itm... idxs)	{return New(name, flds.ToFldAry(), idxs);}
+	public static Dbmeta_tbl_itm New(String name, DbmetaFldItm... flds)							{return New(name, flds, Dbmeta_idx_itm.Ary_empty);}
+	public static Dbmeta_tbl_itm New(String name, DbmetaFldItm[] flds, Dbmeta_idx_itm... idxs) {
 		Dbmeta_tbl_itm rv = new Dbmeta_tbl_itm();
 		rv.name = name;
 		if (flds != null) {

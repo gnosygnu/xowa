@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.domains; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.langs.*;
 public class Xow_abrv_wm_ {
@@ -100,7 +100,7 @@ public class Xow_abrv_wm_ {
 		return null;
 	}
 	public static void To_abrv(Bry_bfr bfr, byte[] lang_key, Int_obj_ref domain_type) {
-		byte[] suffix_bry = (byte[])int_hash.Get_by(domain_type); if (suffix_bry == null) return;
+		byte[] suffix_bry = (byte[])int_hash.GetByOrNull(domain_type); if (suffix_bry == null) return;
 		switch (domain_type.Val()) {
 			case Xow_domain_tid_.Tid__commons:
 			case Xow_domain_tid_.Tid__species:
@@ -117,7 +117,7 @@ public class Xow_abrv_wm_ {
 	}
 	public static byte[] To_abrv(Xow_domain_itm domain_itm) {
 		int tid = domain_itm.Domain_type_id();
-		byte[] suffix = (byte[])int_hash.Get_by(Int_obj_ref.New(tid));
+		byte[] suffix = (byte[])int_hash.GetByOrNull(Int_obj_ref.New(tid));
 		if (suffix == null) // Tid__home and Tid__other (wikia)
 			return domain_itm.Domain_bry(); // return domain; needed for WikibaseLanguageIndependentLuaBindings; DATE:2019-11-23
 		switch (tid) {

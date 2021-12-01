@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.mgrs.types; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
+package gplx.xowa.addons.apps.cfgs.mgrs.types; import gplx.*;
 public class Xocfg_type_mgr {
 	private final Ordered_hash list_hash = Ordered_hash_.New();
 	public Xocfg_type_mgr() {
@@ -42,6 +42,6 @@ public class Xocfg_type_mgr {
 			list_hash.Add(key, itms);
 	}
 	public Keyval[] Lists__get(String key) {
-		return (Keyval[])list_hash.Get_by_or_fail(key);
+		return (Keyval[])list_hash.GetByOrFail(key);
 	}
 }

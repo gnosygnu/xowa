@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*;
+import gplx.dbs.*;
 public class Fsm_bin_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_uid, fld_url, fld_bin_len, fld_bin_max;
 	private final Db_conn conn; private int mnt_id;
 	public Fsm_bin_tbl(Db_conn conn, boolean schema_is_1, int mnt_id) {
@@ -24,15 +24,15 @@ public class Fsm_bin_tbl implements Db_tbl {
 		String fld_prefix = "";
 		if (schema_is_1)	{tbl_name = "fsdb_db_bin";}
 		else				{tbl_name = "fsdb_dbb"; fld_prefix = "dbb_";}
-		fld_uid				= flds.Add_int_pkey	(fld_prefix + "uid");
-		fld_url				= flds.Add_str		(fld_prefix + "url", 255);
+		fld_uid				= flds.AddIntPkey(fld_prefix + "uid");
+		fld_url				= flds.AddStr(fld_prefix + "url", 255);
 		if (schema_is_1) {
-			fld_bin_len = flds.Add_long("bin_len");
-			fld_bin_max = flds.Add_long("bin_max");
+			fld_bin_len = flds.AddLong("bin_len");
+			fld_bin_max = flds.AddLong("bin_max");
 		}
 		else {
-			fld_bin_len = Dbmeta_fld_itm.Key_null;
-			fld_bin_max = Dbmeta_fld_itm.Key_null;
+			fld_bin_len = DbmetaFldItm.KeyNull;
+			fld_bin_max = DbmetaFldItm.KeyNull;
 		}
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
@@ -42,7 +42,7 @@ public class Fsm_bin_tbl implements Db_tbl {
 	}
 	public Fsm_bin_fil[] Select_all(Fsdb_db_mgr db_conn_mgr) {
 		List_adp rv = List_adp_.New();
-		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty, fld_uid).Clear().Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select_order(tbl_name, flds, DbmetaFldItm.StrAryEmpty, fld_uid).Clear().Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				int bin_id = rdr.Read_int(fld_uid);
@@ -52,7 +52,7 @@ public class Fsm_bin_tbl implements Db_tbl {
 				rv.Add(itm);
 			}
 		}	finally {rdr.Rls();}
-		return (Fsm_bin_fil[])rv.To_ary(Fsm_bin_fil.class);
+		return (Fsm_bin_fil[])rv.ToAry(Fsm_bin_fil.class);
 	}
 	public void Rls() {}
 }

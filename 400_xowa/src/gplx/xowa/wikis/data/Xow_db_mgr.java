@@ -94,8 +94,8 @@ public class Xow_db_mgr {
 
 	public int						Dbs__len()						{return hash_by_id.Len();}		
 	public Xow_db_file				Dbs__get_at(int i)				{return (Xow_db_file)hash_by_id.Get_at(i);}
-	public Xow_db_file				Dbs__get_by_id_or_fail(int id)	{return (Xow_db_file)hash_by_id.Get_by_or_fail(id);}
-	public Xow_db_file				Dbs__get_by_id_or_null(int id)	{return (Xow_db_file)hash_by_id.Get_by(id);}
+	public Xow_db_file				Dbs__get_by_id_or_fail(int id)	{return (Xow_db_file)hash_by_id.GetByOrFail(id);}
+	public Xow_db_file				Dbs__get_by_id_or_null(int id)	{return (Xow_db_file)hash_by_id.GetByOrNull(id);}
 	public Xow_db_file				Dbs__get_by_tid_or_core(byte... tids_ary) {Xow_db_file rv = Dbs__get_by_tid_or_null(tids_ary); return rv == null ? db__core : rv;}
 	public Xow_db_file				Dbs__get_by_tid_or_null(byte... tids_ary) {
 		int tids_len = tids_ary.length;
@@ -200,7 +200,7 @@ public class Xow_db_mgr {
 				rv.Add(db);
 		}
 
-		return (Xow_db_file[])rv.To_ary_and_clear(Xow_db_file.class);
+		return (Xow_db_file[])rv.ToAryAndClear(Xow_db_file.class);
 	}
 	public void Create_page(Xowd_page_tbl core_tbl, Xowd_text_tbl text_tbl, int page_id, int ns_id, byte[] ttl_wo_ns, boolean redirect, DateAdp modified_on, byte[] text_zip_data, int text_raw_len, int random_int, int text_db_id, int html_db_id) {
 		core_tbl.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, redirect, modified_on, text_raw_len, random_int, text_db_id, html_db_id, -1);

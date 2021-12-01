@@ -21,7 +21,7 @@ public class GfmlNde implements GfmlItm {
 	public GfmlType		Type() {return type;} GfmlType type;
 	public boolean			KeyedSubObj() {return keyedSubObj;} public GfmlNde KeyedSubObj_(boolean v) {keyedSubObj = v; return this;} private boolean keyedSubObj;
 	public int ChainId() {return chainId;} public GfmlNde ChainId_(int v) {chainId = v; return this;} int chainId;	// can use boolean chainHead, but this is easier for debugging
-	public int			SubObjs_Count() {return subObjs.Count();} GfmlObjList subObjs = GfmlObjList.new_();
+	public int			SubObjs_Count() {return subObjs.Len();} GfmlObjList subObjs = GfmlObjList.new_();
 	public GfmlObj		SubObjs_GetAt(int i) {return (GfmlObj)subObjs.Get_at(i);}
 	public void			SubObjs_Add(GfmlObj gobj) {
 		subObjs.Add(gobj);
@@ -61,8 +61,8 @@ public class GfmlNde implements GfmlItm {
 		// a:{} -> a:{b:{}}
 	}
 	int PosOf(boolean fwd, String... find) {
-		int bgn = fwd ? 0 : subObjs.Count() - 1;
-		int end = fwd ? subObjs.Count() : 0;
+		int bgn = fwd ? 0 : subObjs.Len() - 1;
+		int end = fwd ? subObjs.Len() : 0;
 		int dif = fwd ? 1 : -1;
 		for (int i = bgn; i != end; i+=dif) {
 			GfmlObj subObj = (GfmlObj)subObjs.Get_at(i);

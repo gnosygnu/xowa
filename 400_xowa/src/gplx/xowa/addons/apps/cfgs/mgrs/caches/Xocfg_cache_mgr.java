@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
+package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*;
+import gplx.xowa.addons.apps.cfgs.*;
 import gplx.dbs.*;
-import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*; import gplx.xowa.addons.apps.cfgs.enums.*;
+import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*;
 public class Xocfg_cache_mgr {
 	private final Hash_adp grps = Hash_adp_.New();
 	public Xocfg_cache_mgr() {
@@ -34,7 +35,7 @@ public class Xocfg_cache_mgr {
 		return grp.Get(ctx);
 	}
 	public String Get_or(String ctx, String key, String or) {
-		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.Get_by(key);
+		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.GetByOrNull(key);
 		if (grp == null) {
 			grp = Load_grp(key, or);
 			grps.Add(key, grp);
@@ -74,7 +75,7 @@ public class Xocfg_cache_mgr {
 		grp.Pub(Xocfg_mgr.Ctx__app, val);	// need to pub after dflt is changed; for now, just pub at app-level
 	}
 	public Xocfg_cache_grp Grps__get_or_load(String key) {
-		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.Get_by(key);
+		Xocfg_cache_grp grp = (Xocfg_cache_grp)grps.GetByOrNull(key);
 		if (grp == null) {
 			grp = Load_grp(key, "");
 			grps.Add(key, grp);

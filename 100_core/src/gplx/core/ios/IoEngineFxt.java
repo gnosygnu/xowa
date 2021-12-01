@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 public class IoEngineFxt {
 	IoEngine EngineOf(Io_url url) {return IoEnginePool.Instance.Get_by(url.Info().EngineKey());}
 	public void tst_ExistsPaths(boolean expd, Io_url... ary) {			
@@ -32,14 +32,14 @@ public class IoEngineFxt {
 	public IoEngineFxt tst_QueryFil_modifiedTime(Io_url fil, DateAdp expd) {Tfds.Eq_date(expd, EngineOf(fil).QueryFil(fil).ModifiedTime()); return this;}
 	public IoItmDir tst_ScanDir(Io_url dir, Io_url... expd) {
 		IoItmDir dirItem = EngineOf(dir).QueryDir(dir);
-		Io_url[] actl = new Io_url[dirItem.SubDirs().Count() + dirItem.SubFils().Count()];
-		for (int i = 0; i < dirItem.SubDirs().Count(); i++) {
+		Io_url[] actl = new Io_url[dirItem.SubDirs().Len() + dirItem.SubFils().Len()];
+		for (int i = 0; i < dirItem.SubDirs().Len(); i++) {
 			IoItmDir subDir = IoItmDir_.as_(dirItem.SubDirs().Get_at(i));
 			actl[i] = subDir.Url();
 		}
-		for (int i = 0; i < dirItem.SubFils().Count(); i++) {
+		for (int i = 0; i < dirItem.SubFils().Len(); i++) {
 			IoItmFil subFil = IoItmFil_.as_(dirItem.SubFils().Get_at(i));
-			actl[i + dirItem.SubDirs().Count()] = subFil.Url();
+			actl[i + dirItem.SubDirs().Len()] = subFil.Url();
 		}
 		Tfds.Eq_ary_str(expd, actl);
 		return dirItem;

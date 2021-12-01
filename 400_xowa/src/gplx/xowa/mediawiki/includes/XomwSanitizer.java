@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+package gplx.xowa.mediawiki.includes; import gplx.*;
+import gplx.xowa.mediawiki.*;
 import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
 import gplx.xowa.parsers.htmls.*;
 import gplx.langs.htmls.*; import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.parsers.*;
@@ -2087,7 +2088,7 @@ public class XomwSanitizer {
 	private static void Html_entities_set(Hash_adp_bry rv, byte type, int code, String name_str, String html_str) {Html_entities_set(rv, type, code, name_str, Bry_.new_u8(html_str));}
 	private static void Html_entities_set(Hash_adp_bry rv, byte type, int code, String name_str, byte[] html_bry) {
 		byte[] name_bry = Bry_.new_u8(name_str);
-		rv.Add_if_dupe_use_1st(name_bry, new Xomw_html_ent(type, code, name_bry, html_bry));	// Add_dupe needed b/c "lt" and co. are added early; ignore subsequent call
+		rv.AddIfDupeUse1st(name_bry, new Xomw_html_ent(type, code, name_bry, html_bry));	// Add_dupe needed b/c "lt" and co. are added early; ignore subsequent call
 	}
 }
 class Xomw_html_ent {

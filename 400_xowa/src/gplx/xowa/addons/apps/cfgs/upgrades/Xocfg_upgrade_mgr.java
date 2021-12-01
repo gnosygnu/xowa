@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.upgrades; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+package gplx.xowa.addons.apps.cfgs.upgrades; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.langs.gfs.*;
 public class Xocfg_upgrade_mgr {
@@ -46,7 +46,7 @@ public class Xocfg_upgrade_mgr {
 
 			// remap
 			for (Keyval kv : kvs) {
-				Keyval mapping = (Keyval)mappings.Get_by(kv.Key());
+				Keyval mapping = (Keyval)mappings.GetByOrNull(kv.Key());
 				if (mapping == null) {
 					Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:could not find mapping; key=~{0} val=~{1}", kv.Key(), kv.Val());
 					kv.Key_("");
@@ -92,7 +92,7 @@ public class Xocfg_upgrade_mgr {
 			String args_kv_key = args_kv.Key();
 			String args_kv_val = args_kv.Val_to_str_or_empty();
 			if (String_.Has_at_end(args_kv_key, ".args")) {
-				Keyval cmd_kv = (Keyval)hash.Get_by(String_.Replace(args_kv_key, ".args", ".cmd"));
+				Keyval cmd_kv = (Keyval)hash.GetByOrNull(String_.Replace(args_kv_key, ".args", ".cmd"));
 				if (cmd_kv == null) {
 					Gfo_usr_dlg_.Instance.Log_many("", "", "cfg.convert:could not find cmd; key=~{0} val=~{1}", args_kv_key, args_kv.Val());
 					continue;

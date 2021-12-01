@@ -13,9 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls; import gplx.*;
 import gplx.core.primitives.*;
-import gplx.xowa.xtns.scribunto.*;
 public class Xot_invk_temp implements Xot_invk {
 	private List_adp     list;
 	private Hash_adp_bry arg_key_hash;
@@ -37,11 +36,11 @@ public class Xot_invk_temp implements Xot_invk {
 	public byte[] Frame_ttl() {return frame_ttl;} public void Frame_ttl_(byte[] v) {frame_ttl = v;} private byte[] frame_ttl = Bry_.Empty;	// NOTE: set frame_ttl to non-null value; PAGE:en.w:Constantine_the_Great {{Christianity}}; DATE:2014-06-26
 	public int Frame_lifetime() {return frame_lifetime;} public void Frame_lifetime_(int v) {frame_lifetime = v;} private int frame_lifetime;
 	public boolean Rslt_is_redirect() {return rslt_is_redirect;} public void Rslt_is_redirect_(boolean v) {rslt_is_redirect = v;} private boolean rslt_is_redirect;
-	public int Args_len() {return list == null ? 0 : list.Count();}
+	public int Args_len() {return list == null ? 0 : list.Len();}
 	public Arg_nde_tkn Args_eval_by_idx(byte[] src, int idx) {			// NOTE: idx is base0
 		return arg_idx_hash == null										// only true if no args, or all args are keys; EX: {{A|b=1|c=2}}
 			? null
-			: (Arg_nde_tkn)arg_idx_hash.Get_by(arg_idx_ref.Val_(idx));	// lookup int in hash; needed b/c multiple identical keys should retrieve last, not first; EX: {{A|1=a|1=b}}; PAGE:el.d:ἔχω DATE:2014-07-23
+			: (Arg_nde_tkn)arg_idx_hash.GetByOrNull(arg_idx_ref.Val_(idx));	// lookup int in hash; needed b/c multiple identical keys should retrieve last, not first; EX: {{A|1=a|1=b}}; PAGE:el.d:ἔχω DATE:2014-07-23
 	}
 	public Arg_nde_tkn Args_get_by_idx(int i) {return list == null ? null : (Arg_nde_tkn)list.Get_at(i);}
 	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {
@@ -53,7 +52,7 @@ public class Xot_invk_temp implements Xot_invk {
 	}
 	public void Args_add_by_key(byte[] key, Arg_nde_tkn arg) {
 		if (arg_key_hash == null) arg_key_hash = Hash_adp_bry.cs();	// PERF: lazy
-		arg_key_hash.Add_if_dupe_use_nth(key, arg);
+		arg_key_hash.AddIfDupeUseNth(key, arg);
 		int key_as_int = Bry_.To_int_or(key, Int_.Min_value);
 		if (key_as_int != Int_.Min_value)						// key is int; add it to arg_idx_hash; EX:{{A|1=a}} vs {{A|a}}; DATE:2014-07-23
 			Arg_idx_hash_add(key_as_int - List_adp_.Base1, arg);
@@ -64,7 +63,7 @@ public class Xot_invk_temp implements Xot_invk {
 			arg_idx_hash = Hash_adp_.New();
 			arg_idx_ref = Int_obj_ref.New_neg1();
 		}
-		arg_idx_hash.Add_if_dupe_use_nth(Int_obj_ref.New(int_key), arg);	// Add_if_dupe_use_nth to keep latest version; needed for {{A|1=a|1=b}} DATE:2014-07-23
+		arg_idx_hash.AddIfDupeUseNth(Int_obj_ref.New(int_key), arg);	// Add_if_dupe_use_nth to keep latest version; needed for {{A|1=a|1=b}} DATE:2014-07-23
 	}
 
 	public static final Xot_invk Null_frame = null;

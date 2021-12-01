@@ -13,9 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.specials; import gplx.*; import gplx.xowa.*;
 import gplx.core.net.qargs.*;
-import gplx.dbs.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
 import gplx.xowa.addons.apps.cfgs.*;
 import gplx.xowa.parsers.amps.*;
@@ -94,7 +93,7 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 	}
 
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		String val = (String)props.Get_by(key);
+		String val = (String)props.GetByOrNull(key);
 		if (val == null)
 			return false;
 		else {
@@ -103,7 +102,7 @@ class Xofulltext_searcher_html extends Xow_special_wtr__base implements Mustache
 		}
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		Object val_obj = props.Get_by(key);
+		Object val_obj = props.GetByOrNull(key);
 		if (val_obj == null) {
 			return Mustache_doc_itm_.Ary__empty;
 		}

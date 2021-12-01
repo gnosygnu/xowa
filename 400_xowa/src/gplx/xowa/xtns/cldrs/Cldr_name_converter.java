@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cldrs; import gplx.*;
 import gplx.core.primitives.*;
 import gplx.langs.phps.*;
 import gplx.langs.jsons.*;
@@ -40,7 +40,7 @@ class Cldr_name_converter {
 			byte[] src = Io_mgr.Instance.LoadFilBry(fil);			
 			rv.Add(Parse_fil(key, src));
 		}
-		return (Cldr_name_file[])rv.To_ary_and_clear(Cldr_name_file.class);
+		return (Cldr_name_file[])rv.ToAryAndClear(Cldr_name_file.class);
 	}
 	public String Extract_key_or_fail(String fil_name) {
 		if (!String_.Has_at_bgn(fil_name, File_CldrNames) || !String_.Has_at_end(fil_name, ".php")) throw Err_.new_wo_type("file name must have a format of CldrNamesLANG.php", "fil_name", fil_name);
@@ -49,7 +49,7 @@ class Cldr_name_converter {
 	public Cldr_name_file Parse_fil(String key, byte[] src) {
 		Cldr_name_file file = new Cldr_name_file(key);
 		parser.Parse_tkns(src, eval);
-		Php_line[] lines = (Php_line[])eval.List().To_ary(Php_line.class);
+		Php_line[] lines = (Php_line[])eval.List().ToAry(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			Php_line line = lines[i];
@@ -91,7 +91,7 @@ class Cldr_name_converter {
 		return doc_wtr.Bld_as_str();
 	}
 	private void To_json(Int_obj_ref written, String node_name, Ordered_hash hash) {
-		int len = hash.Count();
+		int len = hash.Len();
 		if (len == 0) return;
 		doc_wtr.Key(written.Val() != 0, node_name);
 		doc_wtr.Nde_bgn();

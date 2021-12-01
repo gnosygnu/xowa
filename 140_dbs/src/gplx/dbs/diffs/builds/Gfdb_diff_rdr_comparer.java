@@ -18,7 +18,7 @@ class Gfdb_diff_rdr_comparer {
 	private Db_rdr old_rdr, new_rdr;
 	private boolean old_rdr_move, new_rdr_move;
 	private boolean old_rdr_done, new_rdr_done;
-	private Dbmeta_fld_itm[] key_flds; private int key_flds_len;
+	private DbmetaFldItm[] key_flds; private int key_flds_len;
 	public void Init_rdrs(Gfdb_diff_tbl tbl, Db_rdr old_rdr, Db_rdr new_rdr) {
 		this.old_rdr = old_rdr; this.new_rdr = new_rdr;
 		this.old_rdr_move = new_rdr_move = Bool_.Y;

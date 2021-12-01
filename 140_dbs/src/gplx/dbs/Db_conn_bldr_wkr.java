@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs; import gplx.*;
-import gplx.dbs.engines.sqlite.*; import gplx.dbs.qrys.bats.*;
+import gplx.dbs.engines.sqlite.*;
 public interface Db_conn_bldr_wkr {
 	void Clear_for_tests();
 	boolean Exists(Io_url url);
@@ -53,7 +53,7 @@ class Db_conn_bldr_wkr__mem implements Db_conn_bldr_wkr {
 	}
 	public Db_conn New(Io_url url) {
 		String io_url_str = url.Xto_api();
-		hash.Add_if_dupe_use_nth(io_url_str, io_url_str);	// NOTE: tests can call New multiple times; don't fail if exists; just overwrite existing entry; DATE:2016-04-21
+		hash.AddIfDupeUseNth(io_url_str, io_url_str);	// NOTE: tests can call New multiple times; don't fail if exists; just overwrite existing entry; DATE:2016-04-21
 		return Get_or_new(url);
 	}
 	private Db_conn Get_or_new(Io_url url) {

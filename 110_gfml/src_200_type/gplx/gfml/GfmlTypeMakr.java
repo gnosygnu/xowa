@@ -37,7 +37,7 @@ class GfmlTypeMakr {
 	}
 	public void AddSubFld(GfmlFld subFld) {AddSubFld_imp(owner, subFld);}
 	public GfmlType[] Xto_bry() {
-		GfmlType[] rv = (GfmlType[])list.To_ary(GfmlType.class);
+		GfmlType[] rv = (GfmlType[])list.ToAry(GfmlType.class);
 		list.Clear();
 		owner = null;
 		return rv;

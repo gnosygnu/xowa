@@ -94,12 +94,12 @@ public class Xob_wdata_pid extends Xob_itm_dump_base implements Xob_page_wkr, Gf
 
 		// add datatype
 		byte[] datatype = jdoc.Root_nde().Get_as_bry(Wdata_dict_mainsnak.Itm__datatype.Key_str());
-		Wbase_claim_type claim_type = (Wbase_claim_type)datatype_hash.Get_by_or_fail(datatype);
+		Wbase_claim_type claim_type = (Wbase_claim_type)datatype_hash.GetByOrFail(datatype);
 		tbl__prop.Insert_cmd_by_batch(pid, claim_type.Tid());
 
 		// add langs
 		Ordered_hash list = wdoc_parser.Parse_langvals(pid, jdoc, Bool_.Y);
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wdata_langtext_itm label = (Wdata_langtext_itm)list.Get_at(i);
 			tbl__pid.Insert_cmd_by_batch(label.Lang(), label.Text(), pid);

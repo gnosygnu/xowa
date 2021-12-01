@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
+package gplx.xowa.langs.vnts.converts; import gplx.*;
 import org.junit.*; import gplx.core.log_msgs.*; import gplx.langs.phps.*;
 public class Xol_mw_parse_tst {
 	private final Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
@@ -106,14 +106,14 @@ class Xol_mw_parse_fxt {
 		Gfo_msg_log msg_log = new Gfo_msg_log("xowa");
 		Php_evaluator evaluator = new Php_evaluator(msg_log);
 		parser.Parse_tkns(src, evaluator);
-		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
+		Php_line[] lines = (Php_line[])evaluator.List().ToAry(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];
 			Xol_mw_parse_grp grp = Parse_grp(line);
 			list.Add(grp);
 		}
-		return (Xol_mw_parse_grp[])list.To_ary(Xol_mw_parse_grp.class);
+		return (Xol_mw_parse_grp[])list.ToAry(Xol_mw_parse_grp.class);
 	}
 	private List_adp tmp_itm_list = List_adp_.New();
 	private Xol_mw_parse_grp Parse_grp(Php_line_assign line) {
@@ -136,6 +136,6 @@ class Xol_mw_parse_fxt {
 			Xol_mw_parse_itm itm = new Xol_mw_parse_itm(kv.Key().Val_obj_bry(), kv.Val().Val_obj_bry());
 			tmp_itm_list.Add(itm);
 		}
-		grp.Itms_((Xol_mw_parse_itm[])tmp_itm_list.To_ary(Xol_mw_parse_itm.class));
+		grp.Itms_((Xol_mw_parse_itm[])tmp_itm_list.ToAry(Xol_mw_parse_itm.class));
 	}
 }

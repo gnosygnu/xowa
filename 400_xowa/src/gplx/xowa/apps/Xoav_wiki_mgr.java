@@ -14,22 +14,22 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.*; import gplx.xowa.langs.cases.*; import gplx.xowa.users.data.*;
+import gplx.xowa.langs.cases.*; import gplx.xowa.users.data.*;
 import gplx.xowa.wikis.*;
 public class Xoav_wiki_mgr implements Xoa_wiki_mgr {
 	private final Xoav_app app; private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xoav_wiki_mgr(Xoav_app app, Xol_case_mgr case_mgr) {this.app = app;}
-	public int			Count()								{return hash.Count();}
+	public int			Count()								{return hash.Len();}
 	public boolean		Has(byte[] key)						{return hash.Has(key);}
 	public Xow_wiki		Get_at(int idx)						{return (Xow_wiki)hash.Get_at(idx);}
-	public Xow_wiki		Get_by_or_null(byte[] key)			{return (Xow_wiki)hash.Get_by(key);}
+	public Xow_wiki		Get_by_or_null(byte[] key)			{return (Xow_wiki)hash.GetByOrNull(key);}
 	public Xow_wiki		Get_by_or_make_init_y(byte[] key) {
 		Xow_wiki rv = this.Get_by_or_null(key);
 		rv.Init_by_wiki();
 		return rv;
 	}
 	public Xow_wiki		Get_by_or_make_init_n(byte[] key) {return Get_by_or_make_init_y(key);}
-	public void			Add(Xow_wiki wiki) {hash.Add_if_dupe_use_nth(wiki.Domain_bry(), wiki);}
+	public void			Add(Xow_wiki wiki) {hash.AddIfDupeUseNth(wiki.Domain_bry(), wiki);}
 	public Xow_wiki		Make(byte[] domain_bry, Io_url wiki_root_dir) {return new Xowv_wiki(app, domain_bry, wiki_root_dir);}
 	public Xow_wiki		Import_by_url(Io_url url) {return Xoa_wiki_mgr_.Import_by_url(app, this, url);}
 	public void			Load_by_user_data() {

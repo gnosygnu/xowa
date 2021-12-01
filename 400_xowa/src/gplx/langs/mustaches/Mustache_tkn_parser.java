@@ -91,8 +91,8 @@ public class Mustache_tkn_parser {
 			}
 			if (end_grp) break;
 		}
-		if (subs_list.Count() > 0)															// don't create subs if no members
-			owner.Subs_ary_((Mustache_tkn_itm[])subs_list.To_ary_and_clear(Mustache_tkn_itm.class));
+		if (subs_list.Len() > 0)															// don't create subs if no members
+			owner.Subs_ary_((Mustache_tkn_itm[])subs_list.ToAryAndClear(Mustache_tkn_itm.class));
 		return txt_bgn;
 	}
 	private int Parse_itm(Mustache_tkn_data tkn_data, List_adp subs_list, int lhs_end, int rhs_bgn, int rhs_end) {

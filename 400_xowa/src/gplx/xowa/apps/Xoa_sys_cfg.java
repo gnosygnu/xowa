@@ -63,10 +63,10 @@ class Options_list_lang_ {
 			if (translated.Has(itm.Key())) continue;
 			untranslated.Add(itm);
 		}
-		untranslated.Sort_by(Xol_lang_stub_.Comparer_key);
+		untranslated.SortBy(Xol_lang_stub_.Comparer_key);
 
 		Keyval[] rv = new Keyval[len];
-		int translated_max = translated.Count();
+		int translated_max = translated.Len();
 		for (int i = 0; i < translated_max; i++)
 			rv[i] = new_itm((Xol_lang_stub)translated.Get_at(i));
 
@@ -83,7 +83,7 @@ class Options_list_lang_ {
 		int langs_len = langs.length;
 		for (int i = 0; i < langs_len; i++) {
 			Xol_lang_stub itm = Xol_lang_stub_.Get_by_id(langs[i]);
-			translated.Add_if_dupe_use_nth(itm.Key(), itm);
+			translated.AddIfDupeUseNth(itm.Key(), itm);
 		}
 	}
 }

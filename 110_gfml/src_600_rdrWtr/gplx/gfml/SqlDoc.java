@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
-import gplx.core.strings.*; import gplx.core.criterias.*;
+import gplx.core.strings.*;
 public class SqlDoc {
 	public static GfmlDoc XtoDoc(String raw) {
 		GfmlBldr bldr = GfmlBldr_.new_();
@@ -76,7 +76,7 @@ class SqlCmd_quote_end implements GfmlBldrCmd {
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {
 		String_bldr sb = String_bldr_.new_();
 		GfmlObjList list = bldr.CurFrame().WaitingTkns();
-		for (int i = 0; i < list.Count(); i++) {
+		for (int i = 0; i < list.Len(); i++) {
 			GfmlTkn pnd = (GfmlTkn)list.Get_at(i);
 			sb.Add(pnd.Val());
 		}

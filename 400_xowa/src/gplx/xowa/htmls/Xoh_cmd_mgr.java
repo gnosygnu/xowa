@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
 public class Xoh_cmd_mgr {
-	public int Count() {return cmds.Count();}
+	public int Count() {return cmds.Len();}
 	public void Clear() {cmds.Clear();}
 	public void Add(Xoh_cmd_itm itm) {cmds.Add(itm);} List_adp cmds = List_adp_.New();
 	public void Exec(Xoae_app app, Xoae_page page) {
-		int len = cmds.Count();
+		int len = cmds.Len();
 		if (len == 0) return;
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		usr_dlg.Prog_one(GRP_KEY, "bgn", "cmds bgn: ~{0}", len);	// NOTE: this message will not show, but is needed for other messages to show; SWT swallowing 1st msg before showing others?; DATE:2013-04-25

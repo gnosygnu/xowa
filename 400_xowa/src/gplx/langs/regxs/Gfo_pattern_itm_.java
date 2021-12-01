@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
+package gplx.langs.regxs; import gplx.*;
 public class Gfo_pattern_itm_ {
 	public static final byte Tid_text = 0, Tid_wild = 1;
 	public static Gfo_pattern_itm[] Compile(byte[] raw) {
@@ -44,6 +44,6 @@ public class Gfo_pattern_itm_ {
 			++pos;
 			if (last) break;
 		}
-		return (Gfo_pattern_itm[])rv.To_ary_and_clear(Gfo_pattern_itm.class);
+		return (Gfo_pattern_itm[])rv.ToAryAndClear(Gfo_pattern_itm.class);
 	}
 }

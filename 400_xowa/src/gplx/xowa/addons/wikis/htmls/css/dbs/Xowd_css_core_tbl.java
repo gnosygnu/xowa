@@ -13,16 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.htmls.css.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.htmls.*; import gplx.xowa.addons.wikis.htmls.css.*;
+package gplx.xowa.addons.wikis.htmls.css.dbs; import gplx.*;
 import gplx.dbs.*;
 public class Xowd_css_core_tbl implements Rls_able {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_key, fld_updated_on;
 	public Xowd_css_core_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld_id				= flds.Add_int_pkey_autonum("css_id");
-		this.fld_key			= flds.Add_str("css_key", 255);
-		this.fld_updated_on		= flds.Add_str("css_updated_on", 20);
+		this.fld_id				= flds.AddIntPkeyAutonum("css_id");
+		this.fld_key			= flds.AddStr("css_key", 255);
+		this.fld_updated_on		= flds.AddStr("css_updated_on", 20);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
@@ -59,7 +59,7 @@ public class Xowd_css_core_tbl implements Rls_able {
 			while (rdr.Move_next())
 				rv.Add(new_itm(rdr));
 		} finally {rdr.Rls();}
-		return (Xowd_css_core_itm[])rv.To_ary_and_clear(Xowd_css_core_itm.class);
+		return (Xowd_css_core_itm[])rv.ToAryAndClear(Xowd_css_core_itm.class);
 	}
 	public void Delete_all() {
 		conn.Stmt_delete(tbl_name).Exec_delete();

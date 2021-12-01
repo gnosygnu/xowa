@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps; import gplx.*;
 import gplx.core.log_msgs.*;
 /*
 NOTE: naive implementation of PHP parser; intended only for parsing Messages**.php files in MediaWiki. Specifically, it assumes the following:
@@ -203,7 +203,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 					case Php_tkn_.Tid_paren_end:
 					case Php_tkn_.Tid_brack_end:
 						mode = Mode_ary_term;						
-						if (frame_stack.Count() == 0)
+						if (frame_stack.Len() == 0)
 							cur_ary = null;
 						else {
 							Php_scanner_frame frame = (Php_scanner_frame)List_adp_.Pop(frame_stack);
@@ -229,7 +229,7 @@ public class Php_evaluator implements Php_tkn_wkr {
 					case Php_tkn_.Tid_paren_end:
 					case Php_tkn_.Tid_brack_end:
 						mode = Mode_ary_term;						
-						if (frame_stack.Count() == 0)
+						if (frame_stack.Len() == 0)
 							cur_ary = null;
 						else {
 							Php_scanner_frame frame = (Php_scanner_frame)List_adp_.Pop(frame_stack);

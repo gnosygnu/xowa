@@ -173,17 +173,17 @@ class Mustache_doc_itm__mock implements Mustache_doc_itm {
 	public Mustache_doc_itm__mock Add_bool_n(String key)			{hash_bool.Add(key, Bool_obj_ref.n_()); return this;}
 	public Mustache_doc_itm__mock Add_subs(String key, Mustache_doc_itm__mock... ary)	{hash_subs.Add(key, ary); return this;}
 	public boolean Mustache__write(String key, Mustache_bfr bfr) {
-		byte[] rv = (byte[])hash_prop.Get_by(key);
+		byte[] rv = (byte[])hash_prop.GetByOrNull(key);
 		if (rv == null) return false;
 		bfr.Add_bry(rv);
 		return true;
 	}
 	public Mustache_doc_itm[] Mustache__subs(String key) {
-		Object rv = hash_bool.Get_by(key);
+		Object rv = hash_bool.GetByOrNull(key);
 		if (rv != null) {
 			boolean bool_val = ((Bool_obj_ref)rv).Val();
 			return bool_val ? Mustache_doc_itm_.Ary__bool__y : Mustache_doc_itm_.Ary__bool__n;
 		}
-		return (Mustache_doc_itm__mock[])hash_subs.Get_by(key);
+		return (Mustache_doc_itm__mock[])hash_subs.GetByOrNull(key);
 	}
 }

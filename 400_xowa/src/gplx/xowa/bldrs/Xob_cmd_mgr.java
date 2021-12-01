@@ -16,18 +16,19 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wbases.imports.*;
-import gplx.xowa.wikis.data.*;
-import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.cmds.texts.*; import gplx.xowa.bldrs.cmds.texts.sqls.*; import gplx.xowa.bldrs.cmds.texts.tdbs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.addons.wikis.ctgs.bldrs.*; import gplx.xowa.bldrs.cmds.utils.*;
+import gplx.xowa.bldrs.wkrs.*;
+import gplx.xowa.bldrs.cmds.texts.sqls.*;
+import gplx.xowa.bldrs.cmds.utils.*;
 import gplx.xowa.bldrs.cmds.diffs.*;
-import gplx.xowa.files.origs.*; import gplx.xowa.htmls.core.bldrs.*;
+import gplx.xowa.htmls.core.bldrs.*;
 import gplx.xowa.addons.wikis.searchs.bldrs.*;
-import gplx.xowa.addons.bldrs.files.cmds.*; import gplx.xowa.addons.wikis.htmls.css.bldrs.*;
+import gplx.xowa.addons.wikis.htmls.css.bldrs.*;
 public class Xob_cmd_mgr implements Gfo_invk {
 	private final Xob_bldr bldr;
 	public final Xob_cmd_regy cmd_regy;
 	public Xob_cmd_mgr(Xob_bldr bldr, Xob_cmd_regy cmd_regy) {this.bldr = bldr; this.cmd_regy = cmd_regy;}
 	public void Clear() {list.Clear(); dump_rdrs.Clear();}
-	public int Len() {return list.Count();} private final List_adp list = List_adp_.New();
+	public int Len() {return list.Len();} private final List_adp list = List_adp_.New();
 	public Xob_cmd Get_at(int i) {return (Xob_cmd)list.Get_at(i);} 
 	public Xob_cmd Add(Xob_cmd cmd) {list.Add(cmd); return cmd;}
 	public Gfo_invk Add_cmd(Xowe_wiki wiki, String cmd_key) {
@@ -66,7 +67,7 @@ public class Xob_cmd_mgr implements Gfo_invk {
 	}
 	private Xob_page_wkr_cmd Xml_rdr_get(Xowe_wiki wiki) {
 		byte[] wiki_key = wiki.Domain_bry();
-		Xob_page_wkr_cmd rv = (Xob_page_wkr_cmd)dump_rdrs.Get_by(dump_rdrs_ref.Val_(wiki_key));
+		Xob_page_wkr_cmd rv = (Xob_page_wkr_cmd)dump_rdrs.GetByOrNull(dump_rdrs_ref.Val_(wiki_key));
 		if (rv == null) {
 			rv = new Xob_page_wkr_cmd(bldr, wiki);
 			dump_rdrs.Add(Bry_obj_ref.New(wiki_key), rv);
@@ -85,7 +86,7 @@ public class Xob_cmd_mgr implements Gfo_invk {
 	private static final String Invk_add = "add", Invk_add_many = "add_many", Invk_new_batch = "new_batch", Invk_get_first = "get_first";
 	private Object Get_first(GfoMsg m) {
 		String cmd_key = m.ReadStr("v");
-		int cmds_len = list.Count();
+		int cmds_len = list.Len();
 		for (int i = 0;i < cmds_len; i++) {
 			Xob_cmd cmd = (Xob_cmd)list.Get_at(i);
 			if (String_.Eq(cmd.Cmd_key(), cmd_key)) return cmd;

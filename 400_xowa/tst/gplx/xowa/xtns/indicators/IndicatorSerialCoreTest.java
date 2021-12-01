@@ -49,7 +49,7 @@ class IndicatorSerialCoreTstr {
     private Ordered_hash ToList(Indicator_xnde[] xndes) {
         Ordered_hash list = Ordered_hash_.New();
         for (Indicator_xnde xnde : xndes) {
-            list.Add_if_dupe_use_nth(xnde.Name(), xnde);
+            list.AddIfDupeUseNth(xnde.Name(), xnde);
         }
         return list;
     }

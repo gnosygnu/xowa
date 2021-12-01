@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.dbs.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.core.*;
+package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*;
+import gplx.dbs.*;
+import gplx.xowa.xtns.wbases.core.*;
 import gplx.xowa.wikis.data.*;
 public class Wbase_pid_tbl implements Rls_able {
-	private final String tbl_name; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_src_lang, fld_src_ttl, fld_trg_ttl;
 	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;
 	Wbase_pid_tbl(Db_conn conn, boolean schema_is_1) {
@@ -25,9 +26,9 @@ public class Wbase_pid_tbl implements Rls_able {
 		String fld_prefix = "";
 		if (schema_is_1)	{tbl_name = "wdata_pids"; fld_prefix = "wp_";}
 		else				{tbl_name = "wbase_pid";}
-		fld_src_lang		= flds.Add_str(fld_prefix + "src_lang", 255);
-		fld_src_ttl			= flds.Add_str(fld_prefix + "src_ttl", 512);
-		fld_trg_ttl			= flds.Add_str(fld_prefix + "trg_ttl", 512);
+		fld_src_lang		= flds.AddStr(fld_prefix + "src_lang", 255);
+		fld_src_ttl			= flds.AddStr(fld_prefix + "src_ttl", 512);
+		fld_trg_ttl			= flds.AddStr(fld_prefix + "trg_ttl", 512);
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}

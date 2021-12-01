@@ -13,19 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
+package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xocfg_val_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__itm_key, fld__itm_ctx, fld__itm_val, fld__itm_date;
 	private final Db_conn conn;
 	public Xocfg_val_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "cfg_val";
-		this.fld__itm_key			= flds.Add_str("itm_key", 255);			// EX: 'xowa.app.cfg_1'
-		this.fld__itm_ctx			= flds.Add_str("itm_ctx", 255);			// EX: 'app'; 'en.w'; 'ns-10'
-		this.fld__itm_val			= flds.Add_str("itm_val", 4096);		// EX: 'abc'
-		this.fld__itm_date			= flds.Add_str("itm_date", 16);			// EX: '20160901_010203'
+		this.fld__itm_key			= flds.AddStr("itm_key", 255);			// EX: 'xowa.app.cfg_1'
+		this.fld__itm_ctx			= flds.AddStr("itm_ctx", 255);			// EX: 'app'; 'en.w'; 'ns-10'
+		this.fld__itm_val			= flds.AddStr("itm_val", 4096);		// EX: 'abc'
+		this.fld__itm_date			= flds.AddStr("itm_date", 16);			// EX: '20160901_010203'
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
@@ -54,7 +54,7 @@ public class Xocfg_val_tbl implements Db_tbl {
 			}
 		}
 		finally {rdr.Rls();}
-		return (Xocfg_val_row[])list.To_ary_and_clear(Xocfg_val_row.class);
+		return (Xocfg_val_row[])list.ToAryAndClear(Xocfg_val_row.class);
 	}
 	private Xocfg_val_row Load(Db_rdr rdr) {
 		return new Xocfg_val_row

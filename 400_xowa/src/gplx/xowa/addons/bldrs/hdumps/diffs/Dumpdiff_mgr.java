@@ -13,11 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.hdumps.diffs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.hdumps.*;
+package gplx.xowa.addons.bldrs.hdumps.diffs; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.*;
-import gplx.dbs.*;
-import gplx.xowa.htmls.*;
-import gplx.xowa.wikis.data.tbls.*;
 class Dumpdiff_mgr {
 	public void Exec(Xoae_app app, Xowe_wiki wiki, Dumpdiff_cfg cfg) {
 		// init log_tbl, wikis
@@ -38,7 +35,7 @@ class Dumpdiff_mgr {
 		// loop page_table until no more
 		while (true) {
 			page_loader.Load(list);
-			int list_len = list.Count();
+			int list_len = list.Len();
 			if (list_len == 0) break;
 
 			// loop pages, compare, and log

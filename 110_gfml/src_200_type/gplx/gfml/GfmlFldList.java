@@ -15,13 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
 public class GfmlFldList {
-	public int Count() {return hash.Count();}
+	public int Count() {return hash.Len();}
 	public GfmlFld Get_at(int index) {return (GfmlFld)hash.Get_at(index);}
-	public GfmlFld Get_by(String id) {return (GfmlFld)hash.Get_by(id);}
+	public GfmlFld Get_by(String id) {return (GfmlFld)hash.GetByOrNull(id);}
 	public void Add(GfmlFld fld) {
 		if (String_.Len_eq_0(fld.Name())) throw Err_.new_wo_type("fld name cannot be null");
 		if (hash.Has(fld.Name())) throw Err_.new_wo_type("key already exists", "key", fld.Name()); // FIXME: commented out to allow multiple types with same name; need "_type:invk"
-		hash.Add_if_dupe_use_nth(fld.Name(), fld);
+		hash.AddIfDupeUseNth(fld.Name(), fld);
 	}
 	public void Del(GfmlFld fld) {
 		hash.Del(fld);

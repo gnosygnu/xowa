@@ -111,12 +111,12 @@ class GfmlBldrCmd_frameEnd implements GfmlBldrCmd {
 class GfmlBldrCmd_whitespace implements GfmlBldrCmd {
 	public String Key() {return "gfml.whitespace_exec";}
 	public void Exec(GfmlBldr bldr, GfmlTkn tkn) {
-		if (bldr.CurNdeFrame().waitingTkns.Count() > 0) {
-			GfmlObj t = (GfmlObj)bldr.CurNdeFrame().waitingTkns.Get_at(bldr.CurNdeFrame().waitingTkns.Count() - 1);
+		if (bldr.CurNdeFrame().waitingTkns.Len() > 0) {
+			GfmlObj t = (GfmlObj)bldr.CurNdeFrame().waitingTkns.Get_at(bldr.CurNdeFrame().waitingTkns.Len() - 1);
 			if (t.ObjType() == GfmlObj_.Type_nde)
-				bldr.CurNdeFrame().IdxNdeBgn_set(bldr.CurNdeFrame().WaitingTkns().Count() + 1);
+				bldr.CurNdeFrame().IdxNdeBgn_set(bldr.CurNdeFrame().WaitingTkns().Len() + 1);
 		}
-		if (bldr.CurFrame().WaitingTkns().Count() == 0) {
+		if (bldr.CurFrame().WaitingTkns().Len() == 0) {
 			bldr.CurNde().SubObjs_Add(tkn);		// if curFrame begins with whitespace, add directly to node (whitespace should not belong to atr)
 		}
 		else

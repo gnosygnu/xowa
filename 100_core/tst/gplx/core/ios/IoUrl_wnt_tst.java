@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import org.junit.*;
 public class IoUrl_wnt_tst {
 	IoUrlFxt fx = IoUrlFxt.new_();
@@ -79,7 +79,7 @@ public class IoUrl_wnt_tst {
 class IoUrlFxt {
 	public void tst_Xto_api(Io_url url, String expd) {Tfds.Eq(expd, url.Xto_api());}
 	public void tst_OwnerRoot(Io_url url, String expd) {Tfds.Eq(expd, url.OwnerRoot().Raw());}
-	public void tst_XtoNames(Io_url url, String... expdAry) {Tfds.Eq_ary(expdAry, url.XtoNames().To_str_ary());}
+	public void tst_XtoNames(Io_url url, String... expdAry) {Tfds.Eq_ary(expdAry, url.XtoNames().ToStrAry());}
 	public void tst_NameAndExt(Io_url url, String expd) {Tfds.Eq(expd, url.NameAndExt());}
 	public void tst_Xto_gplx(Io_url url, String expd) {Tfds.Eq(expd, url.Raw());}
 	public void tst_IsDir(Io_url url, boolean expd) {Tfds.Eq(expd, url.Type_dir());}

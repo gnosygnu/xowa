@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
+import gplx.xowa.xtns.wbases.*;
 import gplx.core.primitives.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 public class Wdata_lbl_mgr {
@@ -27,7 +28,7 @@ public class Wdata_lbl_mgr {
 	public List_adp Queue() {return queue;} private List_adp queue = List_adp_.New();
 	@gplx.Internal protected void Wkr_(Wdata_lbl_wkr v) {this.wkr = v;} private Wdata_lbl_wkr wkr;
 	public Wdata_lbl_itm Get_itm__ttl(byte[] ttl) {
-		Wdata_lbl_itm rv = (Wdata_lbl_itm)ttl_hash.Get_by(ttl);
+		Wdata_lbl_itm rv = (Wdata_lbl_itm)ttl_hash.GetByOrNull(ttl);
 		if (rv == null) Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown entity; ttl=~{0}", String_.new_u8(ttl));	// NOTE: should not happen
 		return rv;
 	}
@@ -39,7 +40,7 @@ public class Wdata_lbl_mgr {
 	public byte[] Get_text__pid(int id) {return Get_text(Bool_.Y, id);}
 	private byte[] Get_text(boolean is_pid, int id) {
 		Hash_adp hash = is_pid ? pid_hash : qid_hash;
-		Wdata_lbl_itm rv_itm = (Wdata_lbl_itm)hash.Get_by(int_hash_key.Val_(id));
+		Wdata_lbl_itm rv_itm = (Wdata_lbl_itm)hash.GetByOrNull(int_hash_key.Val_(id));
 		if (rv_itm != null) return rv_itm.Text();	// found; return lbl
 		Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown entity; is_pid=~{0} id=~{1}", Yn.To_str(is_pid), id);	// NOTE: should not happen
 		return Wdata_lbl_itm.Make_ttl(is_pid, id);	// missing; return ttl; EX: "Property:P1", "Q1";
@@ -64,10 +65,10 @@ public class Wdata_lbl_mgr {
 		queue.Add(itm);
 	}
 	public void Resolve(Ordered_hash found) {
-		int len = queue.Count();
+		int len = queue.Len();
 		for (int i = 0; i < len; ++i) {
 			Wdata_lbl_itm pending_itm = (Wdata_lbl_itm)queue.Get_at(i);
-			Wdata_langtext_itm found_itm = (Wdata_langtext_itm)found.Get_by(pending_itm.Ttl());
+			Wdata_langtext_itm found_itm = (Wdata_langtext_itm)found.GetByOrNull(pending_itm.Ttl());
 			if (found_itm != null)
 				pending_itm.Load_vals(found_itm.Lang(), found_itm.Text());
 		}
@@ -75,7 +76,7 @@ public class Wdata_lbl_mgr {
 	}
 	public void Gather_labels(Wdata_doc wdoc, Wdata_lang_sorter sorter) {
 		Ordered_hash claim_list = wdoc.Claim_list();
-		int len = claim_list.Count();
+		int len = claim_list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wbase_claim_grp grp = (Wbase_claim_grp)claim_list.Get_at(i);
 			int grp_len = grp.Len();
@@ -117,7 +118,7 @@ public class Wdata_lbl_mgr {
 			}
 		}
 		Ordered_hash slink_list = wdoc.Slink_list();
-		len = slink_list.Count();
+		len = slink_list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)slink_list.Get_at(i);
 			byte[][] badges = itm.Badges();

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores.xmls; import gplx.*; import gplx.core.*; import gplx.core.stores.*;
+package gplx.core.stores.xmls; import gplx.*;
+import gplx.core.stores.*;
 import gplx.core.strings.*; import gplx.core.gfo_ndes.*;
 public class XmlDataWtr_ {
 	public static DataWtr new_() {return XmlDataWtr.new_();}
@@ -44,7 +45,7 @@ class XmlDataWtr extends DataWtr_base implements DataWtr {
 	@Override public void WriteNodeBgn(String nodeName) {this.WriteXmlNodeBegin(nodeName);}
 	@Override public void WriteNodeEnd() {this.WriteXmlNodeEnd();}
 	public String To_str() {
-		while (names.Count() > 0) {
+		while (names.Len() > 0) {
 			WriteXmlNodeEnd();
 		}
 		return sb.To_str();
@@ -83,10 +84,10 @@ class XmlDataWtr extends DataWtr_base implements DataWtr {
 			ndeOpened = false;
 		}
 		else {
-			String name = (String)names.Get_at_last();
+			String name = (String)names.GetAtLast();
 			sb.Add("</" + name + ">" + String_.CrLf);
 		}
-		names.Del_at(names.Count() - 1);
+		names.DelAt(names.Len() - 1);
 		//			if (nde.ParentNode == null) throw Err_.new_wo_type("WriteXmlNodeEnd() called on root node");
 //			nde = nde.ParentNode;
 //			WriteLineFeed(doc, nde);

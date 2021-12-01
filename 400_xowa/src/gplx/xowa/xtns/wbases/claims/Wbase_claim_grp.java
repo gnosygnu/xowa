@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.claims; import gplx.*;
 import gplx.core.primitives.*;
 import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 public class Wbase_claim_grp {
@@ -49,12 +49,12 @@ public class Wbase_claim_grp {
 					break;
 			}
 		}
-		return tmp_snak_list.Count() == 0 ? Empty_array : (Wbase_claim_base[])tmp_snak_list.To_ary_and_clear(Wbase_claim_base.class);
+		return tmp_snak_list.Len() == 0 ? Empty_array : (Wbase_claim_base[])tmp_snak_list.ToAryAndClear(Wbase_claim_base.class);
 	}
 	private static final Wbase_claim_base[] Empty_array = new Wbase_claim_base[0];
 
 	public static List_adp Xto_list(Ordered_hash hash) {
-		int len = hash.Count();
+		int len = hash.Len();
 		List_adp rv = List_adp_.New();
 		for (int i = 0; i < len; ++i) {
 			Wbase_claim_grp grp = (Wbase_claim_grp)hash.Get_at(i);

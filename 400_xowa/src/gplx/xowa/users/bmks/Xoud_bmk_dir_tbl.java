@@ -13,22 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*;
+package gplx.xowa.users.bmks; import gplx.*;
+import gplx.dbs.*;
 public class Xoud_bmk_dir_tbl implements Rls_able {
-	private final String tbl_name = "bmk_dir"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name = "bmk_dir"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_owner, fld_sort, fld_name;
 	public Xoud_bmk_dir_tbl(Db_conn conn) {
 		this.conn = conn;
-		fld_id						= flds.Add_int_pkey_autonum("dir_id");
-		fld_owner					= flds.Add_int("dir_owner");
-		fld_sort					= flds.Add_int("dir_sort");
-		fld_name					= flds.Add_str("dir_name", 255);
+		fld_id						= flds.AddIntPkeyAutonum("dir_id");
+		fld_owner					= flds.AddInt("dir_owner");
+		fld_sort					= flds.AddInt("dir_sort");
+		fld_name					= flds.AddStr("dir_name", 255);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public String Tbl_name() {return tbl_name;}
-	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.ToFldAry()));}
 	public void Insert(int owner, int sort, byte[] name) {
 		Db_stmt stmt_insert = conn.Stmt_insert(tbl_name, flds);
 		stmt_insert.Clear()

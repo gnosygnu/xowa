@@ -104,17 +104,17 @@ class GfmlTypeMgr {
 class GfmlFldPool {
 	public GfmlTkn Keyed_PopNextAsTkn() {return GfmlTkn_.val_(Keyed_PopNext().Name());} // helper method for GfmlFrame_nde
 	public GfmlFld Keyed_PopNext() {
-		if (keyedRegy.Count() == 0) return GfmlFld.Null;
+		if (keyedRegy.Len() == 0) return GfmlFld.Null;
 		GfmlFld rv = (GfmlFld)keyedRegy.Get_at(0);
 		keyedRegy.Del(rv.Name());
 		return rv;
 	}
 	public GfmlFld Keyed_PopByKey(String key) {
-		GfmlFld rv = (GfmlFld)keyedRegy.Get_by(key); if (rv == null) return GfmlFld.Null;
+		GfmlFld rv = (GfmlFld)keyedRegy.GetByOrNull(key); if (rv == null) return GfmlFld.Null;
 		keyedRegy.Del(rv.Name());
 		return rv;
 	}
-	@gplx.Internal protected int Keyd_Count() {return keyedRegy.Count();}
+	@gplx.Internal protected int Keyd_Count() {return keyedRegy.Len();}
 	@gplx.Internal protected GfmlFld Keyd_FetchAt(int i) {return (GfmlFld)keyedRegy.Get_at(i);}
 	public GfmlFld DefaultMember() {return defaultMember;} GfmlFld defaultMember = GfmlFld.Null;
 	@gplx.Internal protected GfmlType Type() {return type;} GfmlType type = GfmlType_.Null;

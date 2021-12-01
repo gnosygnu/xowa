@@ -54,7 +54,7 @@ class GfmlTyp_mok {
 	}
 	public GfmlType XtoGfmlType() {
 		GfmlType rv = GfmlType_.new_(key, name); // all types in tests are top-level
-		for (int i = 0; i < subFlds.Count(); i++) {
+		for (int i = 0; i < subFlds.Len(); i++) {
 			GfmlFld_mok fld = (GfmlFld_mok)subFlds.Get_at(i);
 			rv.SubFlds().Add(fld.XtoGfmlFld());
 		}

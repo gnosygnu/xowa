@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
+package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.wikis.data.*;
 public interface Xowdir_wiki_props_mgr {
@@ -79,12 +79,12 @@ class Xowdir_wiki_props_mgr__mock extends Xowdir_wiki_props_mgr__base {
 	public Xowdir_wiki_props_mgr__mock() {super(Gfo_usr_dlg_.Noop);}
 	@Override public void                Wiki_cfg__upsert(String key, String val) {
 		if (val != null)
-			wiki_cfg_hash.Add_if_dupe_use_nth(key, val);
+			wiki_cfg_hash.AddIfDupeUseNth(key, val);
 	}
 	@Override public String              Wiki_cfg__select_or(String key, String or)   {
-		String rv = (String)wiki_cfg_hash.Get_by(key);
+		String rv = (String)wiki_cfg_hash.GetByOrNull(key);
 		return rv == null ? or : rv;
 	}
-	@Override public void                User_reg__upsert(String domain, String val)  {user_reg_hash.Add_if_dupe_use_nth(domain, val);}
-	@Override public String              User_reg__select(String domain)              {return (String)user_reg_hash.Get_by(domain);}
+	@Override public void                User_reg__upsert(String domain, String val)  {user_reg_hash.AddIfDupeUseNth(domain, val);}
+	@Override public String              User_reg__select(String domain)              {return (String)user_reg_hash.GetByOrNull(domain);}
 }

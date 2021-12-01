@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.tdbs; import gplx.*;
 import gplx.core.primitives.*;
 public class ByteAry_fil {
 	public List_adp Itms() {return itms;} List_adp itms = List_adp_.New();
@@ -27,7 +27,7 @@ public class ByteAry_fil {
 		return this;
 	}
 	public Object Xto_itms(Class<?> itm_type) {
-		Object rv = itms.To_ary(itm_type);
+		Object rv = itms.ToAry(itm_type);
 		itms.Clear();
 		if (raw_bry.length > raw_max) raw_bry = Bry_.Empty;
 		raw_len.Val_zero_();

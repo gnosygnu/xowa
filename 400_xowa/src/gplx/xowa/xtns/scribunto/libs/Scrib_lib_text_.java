@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
 import gplx.core.net.*;
 class Scrib_lib_text_ {
 	public static Keyval[] Init_nowiki_protocols(Xowe_wiki wiki) {
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b128();
 		Ordered_hash protocols = Gfo_protocol_itm.Regy;
-		int len = protocols.Count();
+		int len = protocols.Len();
 		List_adp rv = List_adp_.New();
 		for (int i = 0; i < len; i++) {
 			Gfo_protocol_itm itm = (Gfo_protocol_itm)protocols.Get_at(i);
@@ -29,7 +29,7 @@ class Scrib_lib_text_ {
 			}
 		}
 		bfr.Mkr_rls();
-		return (Keyval[])rv.To_ary(Keyval.class);
+		return (Keyval[])rv.ToAry(Keyval.class);
 	}
 	private static Keyval Init_nowiki_protocols_itm(Bry_bfr bfr, Gfo_protocol_itm itm) {
 		byte[] key = itm.Key_wo_colon_bry();

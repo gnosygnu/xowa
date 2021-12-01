@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_make_lnki {
 	public void Exec(Xowe_wiki wiki, Xomp_make_cmd_cfg cfg, int uid_count) {
@@ -24,7 +24,7 @@ class Xomp_make_lnki {
 		List_adp merger_list = List_adp_.New();
 		merger_list.Add(new Xomp_make_merger__lnki_temp());
 		if (cfg.Merger_wkrs().Has("xnde"))		merger_list.Add(new Xomp_make_merger__xnde());
-		Xomp_make_merger[] merger_ary = (Xomp_make_merger[])merger_list.To_ary_and_clear(Xomp_make_merger.class);
+		Xomp_make_merger[] merger_ary = (Xomp_make_merger[])merger_list.ToAryAndClear(Xomp_make_merger.class);
 
 		// create ary; add index
 		int wkr_count = src_mgr_db.Tbl__wkr().Select_count();

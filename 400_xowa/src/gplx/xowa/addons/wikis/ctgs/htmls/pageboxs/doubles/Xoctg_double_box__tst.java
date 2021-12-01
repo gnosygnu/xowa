@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 import org.junit.*;
-import gplx.xowa.wikis.data.tbls.*;
 public class Xoctg_double_box__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_double_box__fxt fxt = new Xoctg_double_box__fxt();
 	@Test  public void Single() {
@@ -94,12 +94,12 @@ class Xoctg_double_box__fxt {
 			Xoa_ttl ttl = fxt.Wiki().Ttl_parse(Bry_.new_u8(ary[i]));
 			Xoctg_pagebox_itm itm = Xoctg_pagebox_itm.New_by_ttl(ttl);
 			itm.Load_by_cat_core(hidden, 0, 0, 0);
-			init_ctgs.Add_many(itm);
+			init_ctgs.AddMany(itm);
 		}
 	}
 	public void Test_print_hidden(String expd) {
 		Bry_bfr bfr = Bry_bfr_.New();
-		Xoctg_pagebox_itm[] ary = (Xoctg_pagebox_itm[])init_ctgs.To_ary_and_clear(Xoctg_pagebox_itm.class);
+		Xoctg_pagebox_itm[] ary = (Xoctg_pagebox_itm[])init_ctgs.ToAryAndClear(Xoctg_pagebox_itm.class);
 		hidden_wtr.Write_pagebox(bfr, ary);
 		Tfds.Eq_str_lines(expd, bfr.To_str_and_clear());
 	}

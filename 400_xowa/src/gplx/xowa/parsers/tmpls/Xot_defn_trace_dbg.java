@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls; import gplx.*;
+import gplx.xowa.parsers.*;
 import gplx.xowa.xtns.pfuncs.*;
 public class Xot_defn_trace_dbg implements Xot_defn_trace {
 	public void Trace_bgn(Xop_ctx ctx, byte[] src, byte[] name, Xot_invk caller, Xot_invk invk, Xot_defn defn) {
@@ -88,7 +89,7 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 				}
 			}
 			argKeys.Sort();
-			for (int i = 0; i < argKeys.Count(); i++) {
+			for (int i = 0; i < argKeys.Len(); i++) {
 				String s = (String)argKeys.Get_at(i);
 				String key = String_.GetStrBefore(s, "=");
 				String val = String_.GetStrAfter(s, "=");

@@ -13,14 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfo_regys; import gplx.*; import gplx.core.*;
-import gplx.langs.gfs.*; import gplx.core.type_xtns.*; import gplx.core.interfaces.*;
+package gplx.core.gfo_regys; import gplx.*;
+import gplx.core.type_xtns.*; import gplx.core.interfaces.*;
 public class GfoRegy implements Gfo_invk {
-	public int Count() {return hash.Count();}
+	public int Count() {return hash.Len();}
 	public Hash_adp Parsers() {return parsers;} Hash_adp parsers = Hash_adp_.New();
-	public GfoRegyItm FetchOrNull(String key) {return (GfoRegyItm)hash.Get_by(key);}
+	public GfoRegyItm FetchOrNull(String key) {return (GfoRegyItm)hash.GetByOrNull(key);}
 	public Object FetchValOrFail(String key) {
-		GfoRegyItm rv = (GfoRegyItm)hash.Get_by(key); if (rv == null) throw Err_.new_wo_type("regy does not have key", "key", key);
+		GfoRegyItm rv = (GfoRegyItm)hash.GetByOrNull(key); if (rv == null) throw Err_.new_wo_type("regy does not have key", "key", key);
 		return rv.Val();
 	}
 	public Object FetchValOrNull(String key) {return FetchValOr(key, null);}
@@ -57,7 +57,7 @@ public class GfoRegy implements Gfo_invk {
 	public void RegObjByType(String key, String val, String type) {
 		Object o = val;
 		if (String_.EqNot(type, StringClassXtn.Key_const)) {
-			ParseAble parser = (ParseAble)parsers.Get_by(type);
+			ParseAble parser = (ParseAble)parsers.GetByOrNull(type);
 			if (parser == null) throw Err_.new_wo_type("could not find parser", "type", type, "key", key, "val", val);
 			o = parser.ParseAsObj(val);
 		}
@@ -84,7 +84,7 @@ public class GfoRegy implements Gfo_invk {
 		return this;
 	}	public static final String Invk_RegDir = "RegDir", Invk_RegObj = "RegObj";
 	void RegItm(String key, Object val, int valType, Io_url url) {
-		hash.Add_if_dupe_use_nth(key, new GfoRegyItm(key, val, valType, url));
+		hash.AddIfDupeUseNth(key, new GfoRegyItm(key, val, valType, url));
 	}
 	Hash_adp hash = Hash_adp_.New();
 	public static final String Err_ChopBgn = "chopBgn results in null key", Err_ChopEnd = "chopEnd results in null key", Err_Dupe = "key already registered";

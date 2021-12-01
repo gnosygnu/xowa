@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*;
-import gplx.xowa.langs.*; import gplx.xowa.wikis.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.apps.apis.xowa.html.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.apps.apis.xowa.html.*;
 class Wdata_fmtr__langtext_tbl implements gplx.core.brys.Bfr_arg {
 	private Wdata_toc_data toc_data; private Wdata_lang_sorter lang_sorter; private Xoapi_toggle_itm toggle_itm; private Wdata_fmtr__langtext_row fmtr_row;
 	private byte[] col_hdr_lang_name, col_hdr_lang_code, col_hdr_text; private int list_len;
@@ -30,7 +31,7 @@ class Wdata_fmtr__langtext_tbl implements gplx.core.brys.Bfr_arg {
 		toggle_itm.Init_msgs(msgs.Toggle_title_y(), msgs.Toggle_title_n());
 	}
 	public void Init_by_wdoc(Ordered_hash list) {
-		this.list_len = list.Count(); if (list_len == 0) return;
+		this.list_len = list.Len(); if (list_len == 0) return;
 		toc_data.Make(list_len);
 		list.Sort_by(lang_sorter);
 		fmtr_row.Init_by_page(list);
@@ -60,7 +61,7 @@ class Wdata_fmtr__langtext_row_base implements gplx.core.brys.Bfr_arg, Wdata_fmt
 	private Ordered_hash list;
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wdata_langtext_itm itm = (Wdata_langtext_itm)list.Get_at(i);
 			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_intl(itm.Lang());
@@ -95,7 +96,7 @@ class Wdata_fmtr__alias_row implements gplx.core.brys.Bfr_arg, Wdata_fmtr__langt
 	private Ordered_hash list;
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wdata_alias_itm itm = (Wdata_alias_itm)list.Get_at(i);
 			byte[][] vals_ary = itm.Vals();

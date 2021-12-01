@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.tests; import gplx.*; import gplx.core.*;
+package gplx.core.tests; import gplx.*;
 import gplx.core.strings.*;
 public class Gfo_test_itm {
 	private final boolean is_expd;
@@ -23,7 +23,7 @@ public class Gfo_test_itm {
 	}
 	public int Len() {return hash.Len();}
 	public Gfo_test_itm Add(String key, Object val) {hash.Add(key, Keyval_.new_(key, val)); return this;}
-	private Object Get_by_val(String key) {return ((Keyval)hash.Get_by_or_fail(key)).Val();}
+	private Object Get_by_val(String key) {return ((Keyval)hash.GetByOrFail(key)).Val();}
 	public String Get_str(String key) {
 		Object val_obj = Get_by_val(key);
 		if (Type_.Eq_by_obj(val_obj, byte[].class)) {
@@ -77,7 +77,7 @@ public class Gfo_test_itm {
 			String key = expd_kv.Key();
 			expd_ary[i] = Object_.Xto_str_strict_or_null(expd_kv.Val());
 
-			Keyval actl_kv = (Keyval)actl.hash.Get_by(key);
+			Keyval actl_kv = (Keyval)actl.hash.GetByOrNull(key);
 			actl_ary[i] = actl_kv == null ? "MISSING" : Object_.Xto_str_strict_or_null(actl_kv.Val());
 		}
 		Gftest.Eq__ary(expd_ary, actl_ary);

@@ -15,7 +15,6 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.diffs.builds; import gplx.*; import gplx.dbs.*; import gplx.dbs.diffs.*;
 import org.junit.*;
-import gplx.dbs.*; import gplx.dbs.metas.*; import gplx.dbs.engines.mems.*;
 public class Gfdb_diff_bldr_tst {
 	private final Gfdb_diff_bldr_fxt fxt = new Gfdb_diff_bldr_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -58,13 +57,13 @@ class Gfdb_diff_bldr_fxt {
 	private final Db_conn old_conn, new_conn;
 	private final Gfdb_diff_tbl tbl;
 	private final Gfdb_diff_wkr__test wkr = new Gfdb_diff_wkr__test();
-	private final Dbmeta_fld_itm[] flds_ary;
+	private final DbmetaFldItm[] flds_ary;
 	private final String tbl_name = "tbl";
 	private final Gdif_bldr_ctx ctx = new Gdif_bldr_ctx();
 	public Gfdb_diff_bldr_fxt() {
 		old_conn = Db_conn_utl.Conn__new("old_db");
 		new_conn = Db_conn_utl.Conn__new("new_db");
-		this.flds_ary = new Dbmeta_fld_itm[] {Dbmeta_fld_itm.new_int("id").Primary_y_(), Dbmeta_fld_itm.new_str("val", 255)};
+		this.flds_ary = new DbmetaFldItm[] {DbmetaFldItm.NewInt("id").PrimarySetY(), DbmetaFldItm.NewStr("val", 255)};
 		tbl = Gfdb_diff_tbl.New(Dbmeta_tbl_itm.New(tbl_name, flds_ary));
 		bldr.Init(wkr);
 	}
@@ -101,5 +100,5 @@ class Gfdb_diff_wkr__test implements Gfdb_diff_wkr {
 	public void Handle_new_missing() {
 		list.Add(bfr.Add_str_a7("D").Add_byte_pipe().Add_obj(old_rdr.Read_obj("id")).To_str_and_clear());
 	}
-	public String[] To_str_ary() {return list.To_str_ary_and_clear();}
+	public String[] To_str_ary() {return list.ToStrAryAndClear();}
 }

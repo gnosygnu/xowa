@@ -73,7 +73,7 @@ public class GfuiMoveElemBnd implements IptBnd, Gfo_invk, InjectAble {
 	}
 	void ExecKeyDown(IptEventData msg) {
 		PointAdp current = targetElem.Pos();
-		PointAdp offset = PointAdp_.cast(hash.Get_by(msg.EventArg()));
+		PointAdp offset = PointAdp_.cast(hash.GetByOrNull(msg.EventArg()));
 		targetElem.Pos_(current.Op_add(offset));
 	}
 	@gplx.Internal protected void Key_set(String key) {this.key = key;} private String key;
@@ -83,7 +83,7 @@ public class GfuiMoveElemBnd implements IptBnd, Gfo_invk, InjectAble {
 	PointAdp anchor = PointAdp_.Zero; Hash_adp hash = Hash_adp_.New();
 	public static GfuiMoveElemBnd new_() {return new GfuiMoveElemBnd();}
 	GfuiMoveElemBnd() {
-		args.Add_many(IptMouseBtn_.Left, IptMouseMove.AnyDirection);
+		args.AddMany(IptMouseBtn_.Left, IptMouseMove.AnyDirection);
 		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Up), PointAdp_.new_(0, -10));
 		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Down), PointAdp_.new_(0, 10));
 		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Left), PointAdp_.new_(-10, 0));

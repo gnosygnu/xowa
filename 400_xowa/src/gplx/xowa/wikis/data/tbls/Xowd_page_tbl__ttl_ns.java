@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*;
 import gplx.core.criterias.*;
-import gplx.dbs.*; import gplx.dbs.utls.*;
+import gplx.dbs.*;
 import gplx.xowa.wikis.nss.*;
 class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
 	private Xowd_page_tbl page_tbl;
@@ -45,6 +45,6 @@ class Xowd_page_tbl__ttl_ns extends Xowd_page_tbl__in_wkr__base {
 		if (ns == null) return null;	// NOTE: ns seems to "randomly" be null when threading during redlinks; guard against null; DATE:2014-01-03
 		byte[] ttl_wo_ns = rdr_page.Ttl_page_db();
 		rdr_page.Ttl_(ns, ttl_wo_ns);
-		return (Xowd_page_itm)hash.Get_by(rdr_page.Ttl_full_db());
+		return (Xowd_page_itm)hash.GetByOrNull(rdr_page.Ttl_full_db());
 	}
 }

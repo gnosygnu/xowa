@@ -32,7 +32,7 @@ public class Mem_engine implements Db_engine {
 	@Override public void       CtorConn(SqlWkrMgr wkrMgr) {}
 	public Db_engine			New_clone(Db_conn_info conn_info) {return new Mem_engine(conn_info);}
 	public Db_stmt				Stmt_by_qry(Db_qry qry) {return new Mem_stmt(this, qry);}
-	public Mem_tbl				Tbls__get(String name)	{return (Mem_tbl)tbl_hash.Get_by(name);}
+	public Mem_tbl				Tbls__get(String name)	{return (Mem_tbl)tbl_hash.GetByOrNull(name);}
 	public void					Tbls__del(String name)	{tbl_hash.Del(name);}
 	public void					Txn_bgn(String name)	{}//++txn_count;} private int txn_count = 0;
 	public String				Txn_end()				{return "";}// --txn_count; return "";}
@@ -49,20 +49,20 @@ public class Mem_engine implements Db_engine {
 	public Object				Stmt_by_sql(String sql) {throw Err_.new_unimplemented();}
 	public void					Meta_tbl_create(Dbmeta_tbl_itm meta) {
 		Mem_tbl mem_tbl = new Mem_tbl(meta);
-		tbl_hash.Add_if_dupe_use_nth(meta.Name(), mem_tbl);
+		tbl_hash.AddIfDupeUseNth(meta.Name(), mem_tbl);
 		meta_mgr.Add(meta);
 	}
 	public void					Meta_tbl_delete(String tbl_key) {
-		Mem_tbl tbl = (Mem_tbl)tbl_hash.Get_by(tbl_key);
+		Mem_tbl tbl = (Mem_tbl)tbl_hash.GetByOrNull(tbl_key);
 		if (tbl != null) tbl.rows.Clear();
 	}
 	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {}	// TODO_OLD: implement unique index
 	public void					Meta_idx_delete(String idx) {}
-	public void					Meta_fld_append(String tbl, Dbmeta_fld_itm fld)	{}
+	public void					Meta_fld_append(String tbl, DbmetaFldItm fld)	{}
 	public Dbmeta_tbl_mgr		Meta_mgr() {return meta_mgr;} private final Dbmeta_tbl_mgr meta_mgr = new Dbmeta_tbl_mgr(Dbmeta_reload_cmd_.Noop);
 	public boolean					Meta_tbl_exists(String tbl)						{return tbl_hash.Has(tbl);}
 	public boolean					Meta_fld_exists(String tbl, String fld)			{
-		Mem_tbl mem_tbl = (Mem_tbl)tbl_hash.Get_by(tbl); if (mem_tbl == null) return false;
+		Mem_tbl mem_tbl = (Mem_tbl)tbl_hash.GetByOrNull(tbl); if (mem_tbl == null) return false;
 		return mem_tbl.Meta().Flds().Has(fld);
 	}
 	public boolean					Meta_idx_exists(String idx)						{return false;}

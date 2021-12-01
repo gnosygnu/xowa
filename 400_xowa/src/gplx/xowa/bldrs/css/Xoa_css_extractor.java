@@ -13,14 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.ios.*; import gplx.core.envs.*;
-import gplx.xowa.htmls.*; import gplx.langs.htmls.encoders.*;
+import gplx.langs.htmls.encoders.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.files.downloads.*;
 import gplx.core.net.*;
-import gplx.xowa.addons.wikis.htmls.css.bldrs.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
+import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
 import gplx.xowa.wikis.data.fetchers.*;
 public class Xoa_css_extractor {
 	private Io_url home_css_dir;
@@ -266,7 +266,7 @@ public class Xoa_css_extractor {
 			rv.Add(String_.new_u8(css_url_bry));
 			prv_pos = url_end;
 		}
-		return rv.To_str_ary();
+		return rv.ToStrAry();
 	}	private static final byte[] Css_find_bgn = Bry_.new_a7("<link rel=\"stylesheet\" href=\""), Css_amp_find = Bry_.new_a7("&amp;"), Css_amp_repl = Bry_.new_a7("&");
 	private byte[] Css_scrape_download(String[] css_urls) {
 		int css_urls_len = css_urls.length;

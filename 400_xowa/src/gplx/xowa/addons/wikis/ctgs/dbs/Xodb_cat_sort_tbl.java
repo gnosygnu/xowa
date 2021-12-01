@@ -13,16 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.addons.wikis.ctgs.*; 
+package gplx.xowa.addons.wikis.ctgs.dbs; import gplx.*;
+import gplx.dbs.*;
 public class Xodb_cat_sort_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_key;
 	public Xodb_cat_sort_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "cat_sort";
-		flds.Add_int_pkey_autonum("cs_id");
-		this.fld_key			= flds.Add_str	("cs_key", 255);
+		flds.AddIntPkeyAutonum("cs_id");
+		this.fld_key			= flds.AddStr("cs_key", 255);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;

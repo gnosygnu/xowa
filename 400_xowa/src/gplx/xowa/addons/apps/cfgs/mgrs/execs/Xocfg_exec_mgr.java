@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.mgrs.execs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
+package gplx.xowa.addons.apps.cfgs.mgrs.execs; import gplx.*;
 public class Xocfg_exec_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public void Add(Gfo_invk invk, String... cmds) {
@@ -22,7 +22,7 @@ public class Xocfg_exec_mgr {
 		}
 	}
 	public void Exec(String cmd, Object... args) {
-		Gfo_invk invk = (Gfo_invk)hash.Get_by(cmd);
+		Gfo_invk invk = (Gfo_invk)hash.GetByOrNull(cmd);
 
 		// create msg and add args
 		GfoMsg msg = GfoMsg_.new_parse_(cmd);

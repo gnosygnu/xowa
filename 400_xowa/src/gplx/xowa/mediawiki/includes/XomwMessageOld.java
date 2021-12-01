@@ -173,10 +173,10 @@ public class XomwMessageOld {
 	* @var array
 	*/
 	private static final Hash_adp listTypeMap = Hash_adp_.New()
-	.Add_and_more("comma", "commaList")
-	.Add_and_more("semicolon", "semicolonList")
-	.Add_and_more("pipe", "pipeList")
-	.Add_and_more("text", "listToText")
+	.AddAndMore("comma", "commaList")
+	.AddAndMore("semicolon", "semicolonList")
+	.AddAndMore("pipe", "pipeList")
+	.AddAndMore("text", "listToText")
 	;
 
 	/**

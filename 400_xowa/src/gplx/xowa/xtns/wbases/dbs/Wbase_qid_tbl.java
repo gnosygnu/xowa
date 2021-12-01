@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.xtns.wbases.core.*;
+import gplx.xowa.wikis.data.*;
 public class Wbase_qid_tbl implements Rls_able {
 	private final Object thread_lock = new Object();
-	private final String tbl_name; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_src_wiki, fld_src_ns, fld_src_ttl, fld_trg_ttl;
 	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;
 	private boolean src_ttl_has_spaces;
@@ -28,10 +28,10 @@ public class Wbase_qid_tbl implements Rls_able {
 		String fld_prefix = "";
 		if (schema_is_1)	{tbl_name = "wdata_qids"; fld_prefix = "wq_";}
 		else				{tbl_name = "wbase_qid";}
-		fld_src_wiki		= flds.Add_str(fld_prefix + "src_wiki", 255);
-		fld_src_ns			= flds.Add_int(fld_prefix + "src_ns");
-		fld_src_ttl			= flds.Add_str(fld_prefix + "src_ttl", 512);
-		fld_trg_ttl			= flds.Add_str(fld_prefix + "trg_ttl", 512);
+		fld_src_wiki		= flds.AddStr(fld_prefix + "src_wiki", 255);
+		fld_src_ns			= flds.AddInt(fld_prefix + "src_ns");
+		fld_src_ttl			= flds.AddStr(fld_prefix + "src_ttl", 512);
+		fld_trg_ttl			= flds.AddStr(fld_prefix + "trg_ttl", 512);
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}

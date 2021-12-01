@@ -13,20 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.scripts.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
+package gplx.xowa.addons.apps.scripts.apis; import gplx.*;
+import gplx.xowa.addons.apps.scripts.*;
 public abstract class Xoscript_doc_sect_base {
 	protected final Xoscript_doc doc;
 	private final Hash_adp_bry marker_hash = Hash_adp_bry.cs();
 	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public Xoscript_doc_sect_base(Xoscript_doc doc) {this.doc = doc;}
 	private byte[] get_marker_by_pos(byte[] pos_bry) {
-		return (byte[])marker_hash.Get_by_or_fail(pos_bry);
+		return (byte[])marker_hash.GetByOrFail(pos_bry);
 	}
 	public void reg_marker(String marker_str, String... pos_ary) {
 		int len = pos_ary.length;
 		byte[] marker_bry = Bry_.new_u8(marker_str);
 		for (int i = 0; i < len; ++i) {
-			marker_hash.Add_if_dupe_use_nth(Bry_.new_u8(pos_ary[i]), marker_bry);
+			marker_hash.AddIfDupeUseNth(Bry_.new_u8(pos_ary[i]), marker_bry);
 		}
 	}
 	public void add_html(String html)					{add_html(Pos__default, html);}

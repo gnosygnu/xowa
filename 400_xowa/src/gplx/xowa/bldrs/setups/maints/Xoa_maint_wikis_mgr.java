@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
+package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*;
 public class Xoa_maint_wikis_mgr implements Gfo_invk {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xoa_maint_wikis_mgr(Xoae_app app) {this.app = app;} private Xoae_app app;
-	public int Len() {return hash.Count();}
+	public int Len() {return hash.Len();}
 	public Xowe_wiki Get_at(int i) {
 		if (init) Init();
 		byte[] domain = (byte[])hash.Get_at(i);
@@ -25,7 +25,7 @@ public class Xoa_maint_wikis_mgr implements Gfo_invk {
 		wiki.Init_assert();
 		return wiki;
 	}
-	public void Add(byte[] domain) {hash.Add_if_dupe_use_nth(domain, domain);}	// NOTE: must be Add_if_dupe_use_nth to replace existing wikis
+	public void Add(byte[] domain) {hash.AddIfDupeUseNth(domain, domain);}	// NOTE: must be Add_if_dupe_use_nth to replace existing wikis
 	public void Init() {
 		int len = this.Len();
 		for (int i = 0; i < len; i++) {

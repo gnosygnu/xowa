@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
+package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.htmls.tidy.*;
-import gplx.xowa.parsers.amps.*; import gplx.core.primitives.*;
+import gplx.xowa.parsers.amps.*;
 class Xoh_toc_wkr__txt {
 	private final Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html().Skip_ws_after_slash_y_();
 	private final Bry_bfr anch_bfr = Bry_bfr_.New(), text_bfr = Bry_bfr_.New();
@@ -70,7 +70,7 @@ class Xoh_toc_wkr__txt {
 				}
 			}
 		}
-		anch_hash.Add_as_key_and_val(anch_bry);
+		anch_hash.AddAsKeyAndVal(anch_bry);
 		rv.Set__txt
 		( anch_bry
 		, text_bfr.To_bry_and_clear_and_trim());	// NOTE: both id and text trim ends

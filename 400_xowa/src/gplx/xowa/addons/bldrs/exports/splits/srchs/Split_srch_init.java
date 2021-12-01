@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.srchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.srchs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*;
 class Split_srch_init {
@@ -22,16 +23,16 @@ class Split_srch_init {
 		if (!(ctx.Cfg().Force_rebuild() || !wkr_conn.Meta_tbl_exists("split_search_word"))) return;
 		Gfo_log_.Instance.Prog("creating split_search_word");
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("split_search_word"
-		, Dbmeta_fld_itm.new_int("word_id")
-		, Dbmeta_fld_itm.new_str("word_text", 255)
-		, Dbmeta_fld_itm.new_int("link_count")
-		, Dbmeta_fld_itm.new_int("link_count_score")
-		, Dbmeta_fld_itm.new_int("link_score_min")
-		, Dbmeta_fld_itm.new_int("link_score_max")
-		, Dbmeta_fld_itm.new_int("page_uid")
-		, Dbmeta_fld_itm.new_int("page_ns")
-		, Dbmeta_fld_itm.new_int("page_id")
-		, Dbmeta_fld_itm.new_int("page_score")
+		, DbmetaFldItm.NewInt("word_id")
+		, DbmetaFldItm.NewStr("word_text", 255)
+		, DbmetaFldItm.NewInt("link_count")
+		, DbmetaFldItm.NewInt("link_count_score")
+		, DbmetaFldItm.NewInt("link_score_min")
+		, DbmetaFldItm.NewInt("link_score_max")
+		, DbmetaFldItm.NewInt("page_uid")
+		, DbmetaFldItm.NewInt("page_ns")
+		, DbmetaFldItm.NewInt("page_id")
+		, DbmetaFldItm.NewInt("page_score")
 		));
 
 		// insert search_word w/ Min(pr.page_uid)

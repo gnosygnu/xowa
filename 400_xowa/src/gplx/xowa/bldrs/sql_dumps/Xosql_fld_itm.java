@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.sql_dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.sql_dumps; import gplx.*;
 class Xosql_fld_itm implements gplx.CompareAble {
 	public Xosql_fld_itm(int uid, byte[] key, int idx) {
 		this.uid = uid;
@@ -35,7 +35,7 @@ class Xosql_fld_hash {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	private int hash_len;
 	public int Len() {return hash.Len();}
-	public Xosql_fld_itm Get_by_key(byte[] k)	{return (Xosql_fld_itm)hash.Get_by(k);}
+	public Xosql_fld_itm Get_by_key(byte[] k)	{return (Xosql_fld_itm)hash.GetByOrNull(k);}
 	public Xosql_fld_itm Get_by_idx_or_null(int i) {
 		return i > -1 && i < hash_len ? (Xosql_fld_itm)hash.Get_at(i) : null;
 	}

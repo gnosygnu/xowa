@@ -13,23 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
+package gplx.xowa.files.fsdb.fs_roots; import gplx.*;
 import gplx.dbs.*;
 class Orig_fil_tbl implements Rls_able {
 	private final Db_conn conn;
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private String tbl_name = "orig_fil";
 	private String fld_uid, fld_name, fld_ext_id, fld_w, fld_h, fld_dir_url;		
 	private Db_stmt stmt_insert, stmt_select;
 	public Orig_fil_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn; conn.Rls_reg(this);
 		String fld_prefix = schema_is_1 ? "fil_" : "";
-		fld_uid				= flds.Add_int(fld_prefix + "uid");
-		fld_name			= flds.Add_str(fld_prefix + "name", 1024);
-		fld_ext_id			= flds.Add_int(fld_prefix + "ext_id");
-		fld_w				= flds.Add_int(fld_prefix + "w");
-		fld_h				= flds.Add_int(fld_prefix + "h");
-		fld_dir_url			= flds.Add_str(fld_prefix + "dir_url", 1024);	// NOTE: don't put dir in separate table; note that entire root_dir_wkr is not built to scale due to need for recursively loading all files
+		fld_uid				= flds.AddInt(fld_prefix + "uid");
+		fld_name			= flds.AddStr(fld_prefix + "name", 1024);
+		fld_ext_id			= flds.AddInt(fld_prefix + "ext_id");
+		fld_w				= flds.AddInt(fld_prefix + "w");
+		fld_h				= flds.AddInt(fld_prefix + "h");
+		fld_dir_url			= flds.AddStr(fld_prefix + "dir_url", 1024);	// NOTE: don't put dir in separate table; note that entire root_dir_wkr is not built to scale due to need for recursively loading all files
 	}
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds

@@ -20,7 +20,7 @@ interface GfmlScopeItm {
 }
 class GfmlScopeRegy {
 	public boolean Has(String key) {
-		GfmlScopeList list = (GfmlScopeList)hash.Get_by(key); if (list == null) return false;
+		GfmlScopeList list = (GfmlScopeList)hash.GetByOrNull(key); if (list == null) return false;
 		return list.Count() > 0;
 	}
 	public void Add(GfmlScopeItm itm) {
@@ -28,16 +28,16 @@ class GfmlScopeRegy {
 		list.Add(itm);
 	}
 	public void Del(GfmlScopeItm itm) {
-		GfmlScopeList list = (GfmlScopeList)hash.Get_by(itm.Key()); if (list == null) return;
+		GfmlScopeList list = (GfmlScopeList)hash.GetByOrNull(itm.Key()); if (list == null) return;
 		list.Del(itm);
 		if (list.Count() == 0) hash.Del(itm.Key());
 	}
 	public GfmlScopeItm Get_by(String key, GfmlDocPos pos) {
-		GfmlScopeList list = (GfmlScopeList)hash.Get_by(key); if (list == null) return null;
+		GfmlScopeList list = (GfmlScopeList)hash.GetByOrNull(key); if (list == null) return null;
 		return list.Get_by(pos);
 	}
 	GfmlScopeList ItmOrNew(String key) {
-		GfmlScopeList rv = (GfmlScopeList)hash.Get_by(key);
+		GfmlScopeList rv = (GfmlScopeList)hash.GetByOrNull(key);
 		if (rv == null) {
 			rv = GfmlScopeList.new_(key);
 			hash.Add(key, rv);
@@ -49,11 +49,11 @@ class GfmlScopeRegy {
 }
 class GfmlScopeList {
 	public String Key() {return key;} private String key;
-	public int Count() {return list.Count();}
+	public int Count() {return list.Len();}
 	public void Add(GfmlScopeItm itm) {list.Add(itm);}
 	public void Del(GfmlScopeItm itm) {list.Del(itm);}
 	public GfmlScopeItm Get_by(GfmlDocPos pos) {
-		if (list.Count() == 0) return null;
+		if (list.Len() == 0) return null;
 		GfmlScopeItm rv = null;
 		for (Object itemObj : list) {
 			GfmlScopeItm itm = (GfmlScopeItm)itemObj;

@@ -152,7 +152,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @return Site
 	*/
 	public XomwSite getSite(String globalSiteId) {
-		return (XomwSite)this.offsetGet(this.byGlobalId.Get_by(globalSiteId));
+		return (XomwSite)this.offsetGet(this.byGlobalId.GetByOrNull(globalSiteId));
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @param String globalSiteId
 	*/
 	public void removeSite(String globalSiteId) {
-		this.offsetUnset(this.byGlobalId.Get_by(globalSiteId));
+		this.offsetUnset(this.byGlobalId.GetByOrNull(globalSiteId));
 	}
 
 	/**
@@ -200,7 +200,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @return Site
 	*/
 	public XomwSite getSiteByInternalId(int id) {
-		return (XomwSite)this.offsetGet(this.byInternalId.Get_by(id));
+		return (XomwSite)this.offsetGet(this.byInternalId.GetByOrNull(id));
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @param int id
 	*/
 	public void removeSiteByInternalId(int id) {
-		this.offsetUnset(this.byInternalId.Get_by(id));
+		this.offsetUnset(this.byInternalId.GetByOrNull(id));
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @return Site
 	*/
 	public XomwSite getSiteByNavigationId(String id) {
-		return (XomwSite)this.offsetGet(this.byNavigationId.Get_by(id));
+		return (XomwSite)this.offsetGet(this.byNavigationId.GetByOrNull(id));
 	}
 
 	/**
@@ -249,7 +249,7 @@ public class XomwSiteList extends XomwGenericArrayObject {	public int Len() {ret
 	* @param String id
 	*/
 	public void removeSiteByNavigationId(String id) {
-		this.offsetUnset(this.byNavigationId.Get_by(id));
+		this.offsetUnset(this.byNavigationId.GetByOrNull(id));
 	}
 
 	/**

@@ -25,7 +25,7 @@ import gplx.xowa.Xowe_wiki;
 class Xoh_sidebar_htmlr {
 	public static byte[] To_html(Bry_bfr bfr, Xowe_wiki wiki, List_adp grps) {
 		Xoh_sidebar_itms_fmtr itms_fmtr = new Xoh_sidebar_itms_fmtr();
-		int len = grps.Count();
+		int len = grps.Len();
 		boolean popups_enabled = wiki.Html_mgr().Head_mgr().Popup_mgr().Enabled();
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		for (int i = 0; i < len; ++i) {

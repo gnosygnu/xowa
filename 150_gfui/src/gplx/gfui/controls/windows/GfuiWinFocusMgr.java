@@ -42,8 +42,8 @@ public class GfuiWinFocusMgr {
 	}
 	public GfuiElem Focus(boolean fwd, int cur) {
 		int nxt = fwd 
-			? cur == subElems.Idx_last() ? 0 : ++cur
-			: cur == 0 ? subElems.Idx_last() : --cur;
+			? cur == subElems.IdxLast() ? 0 : ++cur
+			: cur == 0 ? subElems.IdxLast() : --cur;
 		GfuiElem elm = (GfuiElem)subElems.Get_at(nxt);
 		elm.Focus();
 		return elm;
@@ -61,7 +61,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 		this.elems = formFocusMgr.subElems;
 		this.formFocusMgr = formFocusMgr;
 	}
-	boolean elems_empty() {return elems.Count() == 0;}
+	boolean elems_empty() {return elems.Len() == 0;}
 	public Component getComponentAfter(Container focusCycleRoot, Component c) {
 		formFocusMgr.InitForm();
 		if (elems_empty()) return c;
@@ -70,7 +70,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 		int idx = orig;
 		while (true) {
 			idx++;
-			if (idx == elems.Count())
+			if (idx == elems.Len())
 				idx = 0;
 			GfuiElem elem = null;
 			try {elem = (GfuiElem)elems.Get_at(idx);}
@@ -100,7 +100,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 		while (true) {
 			idx--;
 			if (idx == -1)
-				idx = elems.Count() - List_adp_.Base1;
+				idx = elems.Len() - List_adp_.Base1;
 			GfuiElem elem = null;
 			try {
 				elem = (GfuiElem)elems.Get_at(idx);
@@ -129,7 +129,7 @@ class FocusTraversalPolicy_cls_base extends FocusTraversalPolicy {
 	}
 	public Component getDefaultComponent(Container focusCycleRoot) 	{return getFirstComponent(focusCycleRoot);}
 	public Component getFirstComponent(Container focusCycleRoot) 	{return elems_empty() ? focusCycleRoot : (Component)FetchAt(0).UnderElem();}
-	public Component getLastComponent(Container focusCycleRoot) 	{return elems_empty() ? focusCycleRoot : (Component)FetchAt(elems.Count() - 1).UnderElem();} 
+	public Component getLastComponent(Container focusCycleRoot) 	{return elems_empty() ? focusCycleRoot : (Component)FetchAt(elems.Len() - 1).UnderElem();}
 	GfuiElem FetchAt(int idx) {return (GfuiElem)elems.Get_at(idx);}
 	GxwElem GxwElemOf(Component c) {		
 		if (GxwElem.class.isAssignableFrom(c.getClass())) return (GxwElem)c;		

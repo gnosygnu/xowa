@@ -123,7 +123,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	public int Get_by_int_or(String key, int or) {Object rv = this.Get_by(key); return rv == null ? or : Int_.Cast(rv);}
 	public int Get_by_int(String key) {return Int_.Cast(this.Get_by(key));}
 	public XophpArray Xet_by_ary(String key) {
-		XophpArrayItm itm = (XophpArrayItm)hash.Get_by(key);
+		XophpArrayItm itm = (XophpArrayItm)hash.GetByOrNull(key);
 		if (itm == null) {
 			XophpArray val = new XophpArray();
 			this.Set(key, val);
@@ -139,11 +139,11 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	public String Get_by_str(int key) {return (String)this.Get_by(Int_.To_str(key));}
 	public String Get_by_str(String key) {return (String)this.Get_by(key);}
 	public T Get_by(String key) {
-		XophpArrayItm itm = (XophpArrayItm)hash.Get_by(key);
+		XophpArrayItm itm = (XophpArrayItm)hash.GetByOrNull(key);
 		return itm == null ? null : (T)itm.Val();
 	}
 	public XophpArrayItm Get_by_itm(String key) {
-		return (XophpArrayItm)hash.Get_by(key);
+		return (XophpArrayItm)hash.GetByOrNull(key);
 	}
 	public void Set(int key, Object val) {
 		this.Set(XophpArrayItm.NewInt(key, val));
@@ -153,7 +153,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	}
 	private void Set(XophpArrayItm itm) {
 		String key = itm.Key();
-		XophpArrayItm cur = (XophpArrayItm)hash.Get_by(key);
+		XophpArrayItm cur = (XophpArrayItm)hash.GetByOrNull(key);
 		if (cur == null) {
 			hash.Add(key, itm);
 		}
@@ -323,7 +323,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 			rv.Add(val);
 		return rv;
 	}
-	public static boolean Eq_to_new(XophpArray array) {return array.hash.Count() == 0;}// same as "array === []"
+	public static boolean Eq_to_new(XophpArray array) {return array.hash.Len() == 0;}// same as "array === []"
 
 	public static boolean empty(XophpArray array) {return array.Len() == 0;}
 	public static int count(XophpArray array) {return array.Len();}

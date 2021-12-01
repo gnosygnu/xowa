@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*;
+package gplx.xowa.addons.wikis.imports; import gplx.*;
 import gplx.core.ios.*;
 import gplx.langs.mustaches.*;
 class Xow_import_doc implements Mustache_doc_itm {
@@ -54,7 +54,7 @@ class Xow_import_doc implements Mustache_doc_itm {
 		List_adp sub_list = List_adp_.New();
 		New_subs(owner_dir.Url(), sub_list, owner_dir.SubDirs(), dir_cmd);
 		New_subs(owner_dir.Url(), sub_list, owner_dir.SubFils(), Bry_.Empty);
-		Xow_import_doc[] subs = (Xow_import_doc[])sub_list.To_ary_and_clear(Xow_import_doc.class);
+		Xow_import_doc[] subs = (Xow_import_doc[])sub_list.ToAryAndClear(Xow_import_doc.class);
 		return new Xow_import_doc(Bool_.Y, Bool_.N, 0, owner_dir.Url().OwnerDir().RawBry(), owner_dir.Url().RawBry(), Bry_.new_u8(owner_dir.Name()), Bry_.Empty, Bry_.Empty, dir_cmd, subs);
 	}
 	private static void New_subs(Io_url owner_dir, List_adp list, IoItmList subs, byte[] dir_cmd) {

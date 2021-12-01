@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.stores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.stores; import gplx.*;
 import gplx.xowa.xtns.wbases.core.*;
 public class Wbase_prop_mgr {	// lang-agnostic registry of props; EX: "p15" -> commonsmedia		
 	private Ordered_hash cache;
@@ -30,7 +30,7 @@ public class Wbase_prop_mgr {	// lang-agnostic registry of props; EX: "p15" -> c
 		if (init_needed) Init();
 		if (cache == null) return null;
 		pid = Wbase_pid.Ucase_pid_as_str(pid);
-		String rv = (String)cache.Get_by(pid);
+		String rv = (String)cache.GetByOrNull(pid);
 		if (rv == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "wbase:could not find datatype for pid; pid=~{0} url=~{1}", pid, page_url);
 		}

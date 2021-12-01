@@ -16,11 +16,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.users.history.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.specials.*;
-import gplx.xowa.specials.*;
 import gplx.xowa.specials.allPages.*; import gplx.xowa.specials.nearby.*; import gplx.xowa.specials.statistics.*; import gplx.xowa.xtns.translates.*; import gplx.xowa.specials.movePage.*;
-import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*; import gplx.xowa.addons.wikis.imports.*; import gplx.xowa.specials.xowa.diags.*; import gplx.xowa.mediawiki.extensions.Wikibase.repo.includes.specials.*; import gplx.xowa.specials.xowa.errors.*;
+import gplx.xowa.specials.xowa.system_data.*; import gplx.xowa.specials.xowa.default_tab.*; import gplx.xowa.specials.xowa.popup_history.*;
+import gplx.xowa.specials.xowa.diags.*; import gplx.xowa.mediawiki.extensions.Wikibase.repo.includes.specials.*; import gplx.xowa.specials.xowa.errors.*;
 import gplx.xowa.xtns.wbases.specials.*;
-import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
+import gplx.xowa.users.bmks.*;
 import gplx.xowa.specials.mgrs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
 import gplx.xowa.wikis.pages.*;
 public class Xow_special_mgr {
@@ -75,9 +75,9 @@ public class Xow_special_mgr {
 		for (int i = 0; i < len; ++i) {
 			Xow_special_page proto = special_regy.Get_at(i);
 			Xow_special_meta proto_meta = proto.Special__meta();
-			hash.Add_if_dupe_use_1st(proto_meta.Key_bry(), proto);
+			hash.AddIfDupeUse1st(proto_meta.Key_bry(), proto);
 			for (byte[] alias : proto_meta.Aliases())
-				hash.Add_if_dupe_use_1st(alias, proto);
+				hash.AddIfDupeUse1st(alias, proto);
 		}
 
 		// add lang's special aliases to hash table; EX: Special:Recherche
@@ -88,7 +88,7 @@ public class Xow_special_mgr {
 			Xow_special_page page = (Xow_special_page)hash.Get_by_bry(lang_itm.Special());
 			if (page == null) continue;	// NOTE: ignore specials that are not in XOWA; EX: Special:ChangeEmail
 			for (byte[] alias : lang_itm.Aliases())
-				hash.Add_if_dupe_use_1st(alias, page);
+				hash.AddIfDupeUse1st(alias, page);
 		}
 	}
 	public void Special__gen(Xoa_app app, Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
@@ -102,7 +102,7 @@ public class Xow_special_mgr {
 		if (special != null) {	// special found; generate it;
 			// check safelisted pages; DATE:2017-07-22
 			Hash_adp safelist = app.Special_regy().Safelist_pages();
-			if (safelist.Count() > 0) { // safelist pages enabled
+			if (safelist.Len() > 0) { // safelist pages enabled
 				if (!safelist.Has(special_name)) {
 					byte[] safelist_failed = Bry_.new_u8("This special page is not listed in the special_pages safelist. Re-run XOWA and list it in the command-line arguments similar to this: \"--http_server.special_pages_safelist " + String_.new_u8(special_name) + "\"");
 					Xopage_html_data page_data = new Xopage_html_data(special.Special__meta().Display_ttl(), safelist_failed);

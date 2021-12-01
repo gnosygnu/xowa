@@ -27,7 +27,7 @@ public class Gfo_usr_dlg_ {
 	}
 	public static String Test__list__term__get_1st() {
 		Instance = Noop;
-		String[] rv = ((Gfo_usr_dlg__gui_mock)test__list.Gui_wkr()).Warns().To_str_ary_and_clear();
+		String[] rv = ((Gfo_usr_dlg__gui_mock)test__list.Gui_wkr()).Warns().ToStrAryAndClear();
 		return rv.length == 0 ? "" : rv[0];
 	}
 	public static void Test__show__init() {

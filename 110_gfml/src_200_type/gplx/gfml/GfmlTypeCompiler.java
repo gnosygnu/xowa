@@ -63,7 +63,7 @@ class GfmlTypeCompiler {
 	static GfmlType FetchTypeOrNew(String name, String typeKey, GfmlTypRegy typeRegy, Ordered_hash results) {
 		GfmlType rv = typeRegy.FetchOrNull(typeKey);					// look for type in regy to see if it was declared earlier
 		if (rv == GfmlType_.Null) {
-			rv = (GfmlType)results.Get_by(rv.Key());						// look for type in current pragma's results
+			rv = (GfmlType)results.GetByOrNull(rv.Key());						// look for type in current pragma's results
 			if (rv == null) {											// nothing found; create and add
 				rv = GfmlType_.new_(typeKey, name);
 				results.Add(typeKey, rv);

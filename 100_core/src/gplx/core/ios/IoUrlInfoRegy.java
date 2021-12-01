@@ -13,18 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import gplx.core.envs.*;
-import gplx.langs.gfs.*;
 public class IoUrlInfoRegy implements Gfo_invk {
-	public void Reg(IoUrlInfo info) {hash.Add_if_dupe_use_nth(info.Key(), info);}
+	public void Reg(IoUrlInfo info) {hash.AddIfDupeUseNth(info.Key(), info);}
 	public IoUrlInfo Match(String raw) {
 		if (String_.Len(raw) == 0) return IoUrlInfo_.Nil;
-		for (int i = hash.Count(); i > 0; i--) {
+		for (int i = hash.Len(); i > 0; i--) {
 			IoUrlInfo info = (IoUrlInfo)hash.Get_at(i - 1);
 			if (info.Match(raw)) return info;
 		}
-		throw Err_.new_wo_type("could not match ioPathInfo", "raw", raw, "count", hash.Count());
+		throw Err_.new_wo_type("could not match ioPathInfo", "raw", raw, "count", hash.Len());
 	}
 	public void Reset() {
 		hash.Clear();

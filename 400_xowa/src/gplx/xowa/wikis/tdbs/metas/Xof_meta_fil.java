@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.metas; import gplx.*;
 import gplx.core.flds.*;
 public class Xof_meta_fil {
 	private final Ordered_hash itms = Ordered_hash_.New_bry();
@@ -29,9 +29,9 @@ public class Xof_meta_fil {
 		}
 		return rv;
 	}
-	public Xof_meta_itm Get_or_null(byte[] ttl) {return (Xof_meta_itm)itms.Get_by(ttl);}
+	public Xof_meta_itm Get_or_null(byte[] ttl) {return (Xof_meta_itm)itms.GetByOrNull(ttl);}
 	public void Save(Gfo_fld_wtr wtr) {
-		int itms_len = itms.Count();
+		int itms_len = itms.Len();
 		for (int i = 0; i < itms_len; i++) {
 			Xof_meta_itm itm = (Xof_meta_itm)itms.Get_at(i);
 			itm.Save(wtr);

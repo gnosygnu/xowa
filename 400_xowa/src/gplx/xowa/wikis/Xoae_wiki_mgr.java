@@ -65,11 +65,11 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 		this.db_mgr = new Xowdir_db_mgr(app.User().User_db_mgr().Conn());
 		wdata_mgr.Init_by_app();
 	}
-	public int			Count()							{return list.Count();}
+	public int			Count()							{return list.Len();}
 	public boolean			Has(byte[] key)					{return hash.Has(key);}
 	public Xow_wiki		Get_at(int idx)					{return (Xow_wiki)list.Get_at(idx);}
 	public Xowe_wiki	Get_at_or_null(int i)			{return Int_.Between(i, 0, this.Count() - 1) ? (Xowe_wiki)list.Get_at(i) : null;}
-	public Xow_wiki		Get_by_or_null(byte[] key)		{return Bry_.Len_eq_0(key) ? null : (Xowe_wiki)hash.Get_by(key);}
+	public Xow_wiki		Get_by_or_null(byte[] key)		{return Bry_.Len_eq_0(key) ? null : (Xowe_wiki)hash.GetByOrNull(key);}
 	public Xow_wiki		Get_by_or_make_init_y(byte[] key) {
 		synchronized (this) {	// LOCK:app-level; DATE:2016-07-06
 			Xowe_wiki rv = (Xowe_wiki)this.Get_by_or_null(key); if (rv == null) rv = Make_and_add(key);
@@ -126,7 +126,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 	public void Del(byte[] key) {hash.Del(key);}
 	public void Clear() {hash.Clear(); list.Clear();}
 	public void Free_mem(boolean clear_ctx) {
-		int list_len = list.Count();
+		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
 			Xowe_wiki wiki = (Xowe_wiki)list.Get_at(i);
 //				wiki.Defn_cache().ReduceCache();
@@ -135,7 +135,7 @@ public class Xoae_wiki_mgr implements Xoa_wiki_mgr, Gfo_invk {
 		}
 	}
 	public void Rls() {
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; i++) {
 			Xowe_wiki wiki = (Xowe_wiki)list.Get_at(i);
 			wiki.Rls();

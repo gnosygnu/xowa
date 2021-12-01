@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
+package gplx.xowa.bldrs.filters.core; import gplx.*;
 import org.junit.*;
 public class Xob_ttl_filter_mgr_srl_tst {
 	@Before public void init() {fxt.Clear();} private final Xob_ttl_filter_mgr_srl_fxt fxt = new Xob_ttl_filter_mgr_srl_fxt();
@@ -42,7 +42,7 @@ class Xob_ttl_filter_mgr_srl_fxt {
 	public void Test_parse(String src, int expd_count, String... expd_itms) {
 		mgr.Init(hash);
 		mgr.Load_by_bry(Bry_.new_u8(src));
-		Tfds.Eq(expd_count, hash.Count());
+		Tfds.Eq(expd_count, hash.Len());
 		int expd_len = expd_itms.length;
 		for (int i = 0; i < expd_len; ++i) {
 			String expd_itm = expd_itms[i];

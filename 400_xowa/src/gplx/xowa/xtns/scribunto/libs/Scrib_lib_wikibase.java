@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.xtns.wbases.*;
+import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.includes.dataAccess.scribunto.*;
-import gplx.xowa.mediawiki.*;
-import gplx.xowa.mediawiki.extensions.Wikibase.lib.includes.Store.*;
 // REF.MW:https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseLibrary.php
 public class Scrib_lib_wikibase implements Scrib_lib {
 	private final Scrib_core core;
@@ -216,7 +216,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		Keyval[] toIdsAry = args.Pull_kv_ary_safe(2);
 		Ordered_hash toIds = Ordered_hash_.New_bry();
 		for (Keyval kv : toIdsAry) {
-			toIds.Add_as_key_and_val(checkEntityIdOrNull(Bry_.new_u8((String)kv.Val())));
+			toIds.AddAsKeyAndVal(checkEntityIdOrNull(Bry_.new_u8((String)kv.Val())));
 		}
 		Referenced_entity_lookup_wkr wkr = new Referenced_entity_lookup_wkr(ReferencedEntityIdMaxDepth, ReferencedEntityIdMaxReferencedEntityVisits, entity_mgr, core.Page().Url(), fromId, propertyId, toIds);
 		return rslt.Init_obj(wkr.Get_referenced_entity());

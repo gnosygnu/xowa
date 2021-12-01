@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios.atrs; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
+package gplx.core.ios.atrs; import gplx.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.attribute.AclEntry;
@@ -55,7 +55,7 @@ class Io_itm_atr_wkr__acl extends Io_itm_atr_wkr {		private final AclFileAttribu
 				// * for diff principals, return true if any of them does have permissions
 				case ALLOW: {
 					// if current principal is forbidden, ignore entry; want to skip lists like Everyone:Forbidden:C:/folder;Everyone:Allowed;C:/
-					Bool_obj_val forbidden = (Bool_obj_val)principals.Get_by(itm.Principal());
+					Bool_obj_val forbidden = (Bool_obj_val)principals.GetByOrNull(itm.Principal());
 					if (forbidden != null) {
 						continue;
 					}

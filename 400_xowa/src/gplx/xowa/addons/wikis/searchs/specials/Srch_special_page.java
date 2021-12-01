@@ -13,11 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
-import gplx.core.primitives.*; import gplx.xowa.addons.wikis.searchs.specials.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;	
-import gplx.xowa.specials.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.cbks.*;
-import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
+package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
+import gplx.xowa.specials.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
 public class Srch_special_page implements Xow_special_page {
 	public Xow_special_meta		Special__meta()			{return Xow_special_meta_.Itm__search;}
 	public void Special__gen(Xow_wiki wikii, Xoa_page pagei, Xoa_url url, Xoa_ttl ttl) {
@@ -93,7 +91,7 @@ public class Srch_special_page implements Xow_special_page {
 			Xow_domain_itm domain_itm = Xow_domain_itm_.parse(xwiki.Domain_bry());
 			if (crt.Matches(cur, domain_itm)) rv.Add(domain_itm);
 		}
-		return (Xow_domain_itm[])rv.To_ary_and_clear(Xow_domain_itm.class);
+		return (Xow_domain_itm[])rv.ToAryAndClear(Xow_domain_itm.class);
 	}
 	private static Xow_domain_itm[] Get_domains(Xoae_app app, Srch_special_cfg cfg, Xow_domain_itm wiki_domain) {
 		Xow_domain_crt_itm crt = cfg.Multi_wikis_crt(wiki_domain);

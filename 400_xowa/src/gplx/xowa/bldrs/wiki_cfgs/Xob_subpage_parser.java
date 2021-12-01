@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wiki_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.wiki_cfgs; import gplx.*;
 import gplx.core.log_msgs.*;
 import gplx.langs.phps.*; import gplx.xowa.langs.bldrs.*;
 class Xob_subpage_parser {
@@ -24,7 +24,7 @@ class Xob_subpage_parser {
 			Php_parser php_parser = new Php_parser();
 			Php_evaluator eval = new Php_evaluator(new Gfo_msg_log("test"));
 			php_parser.Parse_tkns(src, eval);
-			Php_line[] lines = (Php_line[])eval.List().To_ary(Php_line.class);
+			Php_line[] lines = (Php_line[])eval.List().ToAry(Php_line.class);
 			Php_line_assign line = (Php_line_assign)lines[0];
 			Php_itm_ary root_ary = (Php_itm_ary)line.Val();
 			Php_itm_kv root_kv = (Php_itm_kv)root_ary.Subs_get(0);
@@ -40,7 +40,7 @@ class Xob_subpage_parser {
 		catch (Exception e) {
 			throw Err_.new_exc(e, "xo", "parse failed", "src", String_.new_u8(src));
 		}
-		return (Xob_subpage_wiki[])wikis_list.To_ary(Xob_subpage_wiki.class);
+		return (Xob_subpage_wiki[])wikis_list.ToAry(Xob_subpage_wiki.class);
 	}
 	private void Parse_wiki(Php_itm_kv wiki_tkn, Xob_subpage_wiki wiki_itm) {
 		wiki_itm.Name_(wiki_tkn.Key().Val_obj_bry());

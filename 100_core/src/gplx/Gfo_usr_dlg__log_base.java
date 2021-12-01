@@ -27,7 +27,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 	public Io_url Session_dir() {return session_dir;} private Io_url session_dir;
 	public Io_url Session_fil() {return session_fil;} private Io_url session_fil;
 	private void Flush() {
-		int queued_len = queued_list.Count();
+		int queued_len = queued_list.Len();
 		for (int i = 0; i < queued_len; i++) {
 			Usr_log_fil fil = (Usr_log_fil)queued_list.Get_at(i);
 			if (fil.Url() == null) {
@@ -95,7 +95,7 @@ public class Gfo_usr_dlg__log_base implements Gfo_usr_dlg__log {
 		synchronized (thread_lock) { // THREAD:synchronized neded b/c queued_list can be accessible by multiple threads; ISSUE#:646; DATE:2020-01-09
 		if (queue_enabled) {
 			String url_raw = url == null ? "mem" : url.Raw();
-			Usr_log_fil fil = (Usr_log_fil)queued_list.Get_by(url_raw);
+			Usr_log_fil fil = (Usr_log_fil)queued_list.GetByOrNull(url_raw);
 			if (fil == null) {
 				fil = new Usr_log_fil(url);
 				queued_list.Add(url_raw, fil);

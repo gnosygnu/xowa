@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.names; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.names; import gplx.*;
 import gplx.core.primitives.*;
 import gplx.xowa.xtns.cldrs.*;
 
@@ -42,7 +42,7 @@ public class Xol_name_mgr {
 		code = String_.Lower(code);
 		if (include == null) include = Scope__str__all;
 		Ordered_hash array = fetchLanguageNames(inLanguage, include, page_url);
-		Keyval rv = (Keyval)array.Get_by(code);
+		Keyval rv = (Keyval)array.GetByOrNull(code);
 		return rv == null ? "" : rv.Val_to_str_or_null();
 		}
 	}
@@ -68,9 +68,9 @@ public class Xol_name_mgr {
 		String cacheKey = inLanguage + ":" + include_str;
 		if (languageNameCache == null)
 			languageNameCache = Ordered_hash_.New();
-		Ordered_hash ret = (Ordered_hash)languageNameCache.Get_by(cacheKey);
+		Ordered_hash ret = (Ordered_hash)languageNameCache.GetByOrNull(cacheKey);
 		if (ret == null) {
-			Byte_obj_val include_byte = (Byte_obj_val)Scope__hash.Get_by(include_str);
+			Byte_obj_val include_byte = (Byte_obj_val)Scope__hash.GetByOrNull(include_str);
 			byte include = include_byte == null ? Scope__int__all : include_byte.Val();
 
 			Cldr_name_file cldr_file = cldr_loader.Load_or_empty(inLanguage);
@@ -166,9 +166,9 @@ public class Xol_name_mgr {
 		, Scope__str__mwFile  = "mwFile"
 		;
 	private static final Hash_adp Scope__hash = Hash_adp_.New()
-		.Add_and_more(Scope__str__mw    , Byte_obj_val.new_(Scope__int__mw))
-		.Add_and_more(Scope__str__all   , Byte_obj_val.new_(Scope__int__all))
-		.Add_and_more(Scope__str__mwFile, Byte_obj_val.new_(Scope__int__mwFile))
+		.AddAndMore(Scope__str__mw    , Byte_obj_val.new_(Scope__int__mw))
+		.AddAndMore(Scope__str__all   , Byte_obj_val.new_(Scope__int__all))
+		.AddAndMore(Scope__str__mwFile, Byte_obj_val.new_(Scope__int__mwFile))
 		;
 	public static Ordered_hash fetchLanguageNamesUncached
 		( String inLanguage, byte include
@@ -207,7 +207,7 @@ public class Xol_name_mgr {
 			// # - For other mwNames just add if not added through the hook
 			String code = mw_name.Key();
 			if (String_.Eq(code, inLanguage) || !names.Has(code)) {
-				names.Add_if_dupe_use_nth(code, Keyval_.new_(code, mw_name.Val_to_str_or_empty()));
+				names.AddIfDupeUseNth(code, Keyval_.new_(code, mw_name.Val_to_str_or_empty()));
 			}
 		}
 
@@ -221,7 +221,7 @@ public class Xol_name_mgr {
 		for (int i = 0; i < mwNames_len; i++) {
 			Keyval coreName = (Keyval)mwNames.Get_at(i);
 			String code = coreName.Key();
-			returnMw.Add(code, (Keyval)names.Get_by(code));
+			returnMw.Add(code, (Keyval)names.GetByOrNull(code));
 		}
 
 		// REF.MW: /languages/classes/i18n/*.json
@@ -235,7 +235,7 @@ public class Xol_name_mgr {
 				Keyval kv = (Keyval)returnMw.Get_at(i);
 				String code = kv.Key();
 				if (lang_files.Has(code)) {
-					namesMwFile.Add(code, (Keyval)names.Get_by(code));
+					namesMwFile.Add(code, (Keyval)names.GetByOrNull(code));
 				}
 			}
 

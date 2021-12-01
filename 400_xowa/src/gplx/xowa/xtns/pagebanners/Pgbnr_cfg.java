@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pagebanners; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.pagebanners; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 public class Pgbnr_cfg {
 	private final Hash_adp ns_hash = Hash_adp_.New(); private final Int_obj_ref tmp_ns_key = Int_obj_ref.New_neg1();
@@ -22,7 +22,7 @@ public class Pgbnr_cfg {
 		this.standard_sizes = standard_sizes;
 		this.dflt_img_wdata_prop = dflt_img_wdata_prop; this.dflt_img_title = dflt_img_title;
 		for (int ns : ns_ary)
-			this.ns_hash.Add_as_key_and_val(Int_obj_ref.New(ns));
+			this.ns_hash.AddAsKeyAndVal(Int_obj_ref.New(ns));
 	}
 	public final boolean enabled;
 	public final boolean enable_heading_override;

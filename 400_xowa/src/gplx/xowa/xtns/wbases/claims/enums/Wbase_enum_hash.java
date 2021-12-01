@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*;
+package gplx.xowa.xtns.wbases.claims.enums; import gplx.*;
 public class Wbase_enum_hash {
 	private final Wbase_enum_itm[] ary; private final int ary_len;
 	private final Hash_adp_bry hash_by_bry = Hash_adp_bry.cs();
@@ -34,10 +34,10 @@ public class Wbase_enum_hash {
 	public String Get_str_or(byte tid, String or)	{return tid < ary_len ? ary[tid].Key_str() : or;}
 	public String Get_str_or_fail(byte tid) {return ary[tid].Key_str();}
 	public byte[] Get_bry_or_fail(byte tid) {return ary[tid].Key_bry();}
-	public byte Get_tid_or_fail(byte[] key) {return ((Wbase_enum_itm)hash_by_bry.Get_by_or_fail(key)).Tid();}
+	public byte Get_tid_or_fail(byte[] key) {return ((Wbase_enum_itm)hash_by_bry.GetByOrFail(key)).Tid();}
 	public byte Get_tid_or_max_and_log(byte[] qid, String key) {return Get_tid_or_max_and_log(qid, Bry_.new_u8(key));}
 	public byte Get_tid_or_max_and_log(byte[] qid, byte[] key) {
-		Object rv_obj = hash_by_bry.Get_by(key);
+		Object rv_obj = hash_by_bry.GetByOrNull(key);
 		if (rv_obj == null) {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "unknown enum key for wikibase; qid=~{0} enum=~{1} key=~{2}", qid, name, key);
 			return Byte_.Max_value_127;

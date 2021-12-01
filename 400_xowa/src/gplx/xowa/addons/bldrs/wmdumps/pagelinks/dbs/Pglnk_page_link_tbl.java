@@ -13,17 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.wmdumps.*; import gplx.xowa.addons.bldrs.wmdumps.pagelinks.*;
-import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.cfgs.*;
+package gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs; import gplx.*;
+import gplx.dbs.*;
 public class Pglnk_page_link_tbl implements Rls_able {
-	private static final String tbl_name = "page_link"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final String tbl_name = "page_link"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_src_id, fld_trg_id;
 	private final Db_conn conn;
 	public Pglnk_page_link_tbl(Db_conn conn) {
 		this.conn = conn;
-		fld_src_id			= flds.Add_int("src_id");
-		fld_trg_id			= flds.Add_int("trg_id");
-		flds.Add_int("trg_count");
+		fld_src_id			= flds.AddInt("src_id");
+		fld_trg_id			= flds.AddInt("trg_id");
+		flds.AddInt("trg_count");
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}

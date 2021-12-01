@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.wikis.caches.*;
 public class Xomp_tmpl_cache_bldr {
@@ -72,7 +72,7 @@ public class Xomp_tmpl_cache_bldr {
 		int redirect_len = redirect_list.Len();
 		for (int i = 0; i < redirect_len; ++i) {
 			Xow_page_cache_itm src_itm = (Xow_page_cache_itm)redirect_list.Get_at(i);
-			Xow_page_cache_itm trg_itm = (Xow_page_cache_itm)page_regy.Get_by(src_itm.Redirect_id());
+			Xow_page_cache_itm trg_itm = (Xow_page_cache_itm)page_regy.GetByOrNull(src_itm.Redirect_id());
 			byte[] trg_itm_wtxt = null;
 			Xoa_ttl trg_ttl = null;
 			if (trg_itm == null) {	// template can redirect to non-template pages

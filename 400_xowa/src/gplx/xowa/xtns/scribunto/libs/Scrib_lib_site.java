@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.xtns.scribunto.*;
+import gplx.xowa.langs.msgs.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.addons.wikis.ctgs.*;
-import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.interwikis.*;
 public class Scrib_lib_site implements Scrib_lib {
@@ -107,7 +108,7 @@ public class Scrib_lib_site implements Scrib_lib {
 			throw Err_.new_wo_type("bad argument #1 to 'interwikiMap' (unknown filter '$filter')", "filter", filter);
 		Hash_adp misc_cache = core.Wiki().Cache_mgr().Misc_cache();
 		String cache_key = "scribunto.interwikimap." + core.Wiki().Domain_str() + "." + filter;
-		Keyval[] rv = (Keyval[])misc_cache.Get_by(cache_key);
+		Keyval[] rv = (Keyval[])misc_cache.GetByOrNull(cache_key);
 		if (rv == null) {
 			Xow_interwiki_map interwiki_map = core.Wiki().Xwiki_mgr().Interwiki_map();
 			int interwiki_map_len = interwiki_map.Len();
@@ -121,7 +122,7 @@ public class Scrib_lib_site implements Scrib_lib {
 				String prefix = String_.new_u8(itm.Key());
 				list.Add(Keyval_.new_(prefix, InterwikiMap_itm(prefix, itm_is_local, String_.new_u8(itm.Url()))));
 			}
-			rv = (Keyval[])list.To_ary_and_clear(Keyval.class);
+			rv = (Keyval[])list.ToAryAndClear(Keyval.class);
 			misc_cache.Add(cache_key, rv);
 		}
 		return rslt.Init_obj(rv);

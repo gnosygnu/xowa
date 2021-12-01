@@ -13,30 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.sites;
 import gplx.dbs.*;
 class Site_statistic_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_pages, fld_articles, fld_edits, fld_images, fld_users, fld_activeusers, fld_admins, fld_jobs, fld_queued_massmessages;
 	private final Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete;
 	public Site_statistic_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld_site_abrv				= flds.Add_str("site_abrv", 255);
-		this.fld_pages					= flds.Add_long("pages");
-		this.fld_articles				= flds.Add_long("articles");
-		this.fld_edits					= flds.Add_long("edits");
-		this.fld_images					= flds.Add_long("images");
-		this.fld_users					= flds.Add_long("users");
-		this.fld_activeusers			= flds.Add_long("activeusers");
-		this.fld_admins					= flds.Add_long("admins");
-		this.fld_jobs					= flds.Add_long("jobs");
-		this.fld_queued_massmessages	= flds.Add_long("queued_massmessages");
+		this.fld_site_abrv				= flds.AddStr("site_abrv", 255);
+		this.fld_pages					= flds.AddLong("pages");
+		this.fld_articles				= flds.AddLong("articles");
+		this.fld_edits					= flds.AddLong("edits");
+		this.fld_images					= flds.AddLong("images");
+		this.fld_users					= flds.AddLong("users");
+		this.fld_activeusers			= flds.AddLong("activeusers");
+		this.fld_admins					= flds.AddLong("admins");
+		this.fld_jobs					= flds.AddLong("jobs");
+		this.fld_queued_massmessages	= flds.AddLong("queued_massmessages");
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private static final String tbl_name = "site_statistic";
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_name(tbl_name, Dbmeta_idx_itm.Bld_idx_name(tbl_name, "main"), fld_site_abrv)));}
-	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
+	public void Delete_all() {conn.Stmt_delete(tbl_name, DbmetaFldItm.StrAryEmpty).Exec_delete();}
 	public void Rls() {
 		stmt_select = Db_stmt_.Rls(stmt_select);
 		stmt_insert = Db_stmt_.Rls(stmt_insert);

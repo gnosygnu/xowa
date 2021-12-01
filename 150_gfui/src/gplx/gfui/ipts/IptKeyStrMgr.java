@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts; import gplx.*;
 class IptKeyStrMgr {
 	public IptKey FetchByKeyPress(int charVal) {
 		if (literals == null) Init();
@@ -22,12 +22,12 @@ class IptKeyStrMgr {
 	}
 	public String To_str(IptKey key) {
 		if (literals == null) Init();
-		Object rv = literals.Get_by(key.Val());
+		Object rv = literals.GetByOrNull(key.Val());
 		return rv == null ? String_.Empty : (String)rv;
 	}
 	public void XtoIptKeyAry(List_adp list) {
 		if (literals == null) Init();
-		for (int i = 0; i < keys.Count(); i++)
+		for (int i = 0; i < keys.Len(); i++)
 			list.Add((IptKey)keys.Get_at(i));
 	}
 	void Init() {// default to US style keyboard

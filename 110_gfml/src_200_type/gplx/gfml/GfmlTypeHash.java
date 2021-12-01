@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
 class GfmlTypeHash {
-	public GfmlType Get_by(String key) {return (GfmlType)hash.Get_by(key);}
+	public GfmlType Get_by(String key) {return (GfmlType)hash.GetByOrNull(key);}
 	public void Add(GfmlType type) {
 		if (type.IsTypeNull()) throw Err_.new_wo_type("cannot add null type to GfmlTypeHash");
 		if (hash.Has(type.Key())) throw Err_.new_wo_type("type key already exists", "key", type.Key());

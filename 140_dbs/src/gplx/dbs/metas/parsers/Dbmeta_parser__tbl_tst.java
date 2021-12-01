@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
-import org.junit.*; import gplx.dbs.engines.sqlite.*;
+package gplx.dbs.metas.parsers; import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldType;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.dbs.metas.Dbmeta_fld_mgr;
+import org.junit.Before;
+import org.junit.Test;
 public class Dbmeta_parser__tbl_tst {
 	@Before public void init() {fxt.Clear();} private Dbmeta_parser__tbl_fxt fxt = new Dbmeta_parser__tbl_fxt();
 	@Test public void Test_parse() {
@@ -42,9 +49,9 @@ class Dbmeta_parser__tbl_fxt {
 	public void Clear() {}
 	public Dbmeta_tbl_itm Make_tbl(String tbl_name, String... fld_names) {
 		int len = fld_names.length;
-		Dbmeta_fld_itm[] flds = new Dbmeta_fld_itm[len];
+		DbmetaFldItm[] flds = new DbmetaFldItm[len];
 		for (int i = 0; i < len; ++i)
-			flds[i] = new Dbmeta_fld_itm(fld_names[i], new Dbmeta_fld_tid(Dbmeta_fld_tid.Tid__int, Sqlite_tid.Tid_int, Bry_.new_a7("int"), Int_.Min_value, Int_.Min_value));
+			flds[i] = new DbmetaFldItm(fld_names[i], DbmetaFldType.ItmInt);
 		return Dbmeta_tbl_itm.New(tbl_name, flds);
 	}
 	public void Test_parse(String src, Dbmeta_tbl_itm expd_tbl) {

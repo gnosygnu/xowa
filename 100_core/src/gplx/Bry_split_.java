@@ -86,7 +86,7 @@ public class Bry_split_ {
 			cur_pos = find_pos + dlm_len;
 			if (cur_pos >= src_end) break;
 		}
-		return (byte[][])rv.To_ary(byte[].class);
+		return (byte[][])rv.ToAry(byte[].class);
 	}
 	public static byte[][] Split_lines(byte[] src) {
 		if (Bry_.Len_eq_0(src)) return Bry_.Ary_empty;
@@ -112,7 +112,7 @@ public class Bry_split_ {
 			if (last) break;
 			src_pos = nxt_bgn;
 		}
-		return (byte[][])rv.To_ary(byte[].class);
+		return (byte[][])rv.ToAry(byte[].class);
 	}
 	public static byte[][] Split_w_max(byte[] src, byte dlm, int max) {
 		byte[][] rv = new byte[max][];
@@ -149,7 +149,7 @@ public class Bry_split_ {
 			pos = end + 1;
 			if (pos >= len) break;
 		}
-		return (byte[][])list.To_ary_and_clear(byte[].class);
+		return (byte[][])list.ToAryAndClear(byte[].class);
 	}
 
 
@@ -166,7 +166,7 @@ class Bry_split_wkr__to_ary implements gplx.core.brys.Bry_split_wkr {
 	}
 	public byte[][] To_ary() {
 		synchronized (list) {
-			return (byte[][])list.To_ary_and_clear(byte[].class);
+			return (byte[][])list.ToAryAndClear(byte[].class);
 		}
 	}
         public static final Bry_split_wkr__to_ary Instance = new Bry_split_wkr__to_ary(); Bry_split_wkr__to_ary() {}

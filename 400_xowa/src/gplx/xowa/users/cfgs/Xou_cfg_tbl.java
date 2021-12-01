@@ -13,17 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.cfgs; import gplx.*;
 import gplx.dbs.*;
 public class Xou_cfg_tbl implements Db_tbl {
-	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_key, fld_usr, fld_ctx, fld_val;
 	public Xou_cfg_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld_usr				= flds.Add_int		("cfg_usr");			// EX: 1=anonymous; others will require usr_regy
-		this.fld_ctx				= flds.Add_str		("cfg_ctx", 1024);		// EX: "app"; "en.w"
-		this.fld_key				= flds.Add_str		("cfg_key", 1024);		// EX: "xowa.net.web_enabled"
-		this.fld_val				= flds.Add_str		("cfg_val", 4096);		// EX: "y"
+		this.fld_usr				= flds.AddInt("cfg_usr");			// EX: 1=anonymous; others will require usr_regy
+		this.fld_ctx				= flds.AddStr("cfg_ctx", 1024);		// EX: "app"; "en.w"
+		this.fld_key				= flds.AddStr("cfg_key", 1024);		// EX: "xowa.net.web_enabled"
+		this.fld_val				= flds.AddStr("cfg_val", 4096);		// EX: "y"
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
@@ -58,7 +58,7 @@ public class Xou_cfg_tbl implements Db_tbl {
 				list.Add(Make_itm(rdr));
 			}
 		} finally {rdr.Rls();}
-		return (Xou_cfg_itm[])list.To_ary_and_clear(Xou_cfg_itm.class);
+		return (Xou_cfg_itm[])list.ToAryAndClear(Xou_cfg_itm.class);
 	}
 	public void Rls() {}
 

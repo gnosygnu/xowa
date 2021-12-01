@@ -13,17 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.site_stats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.site_stats.*;
+package gplx.xowa.wikis.data.site_stats; import gplx.*;
+import gplx.dbs.*;
 public class Xowd_site_stats_tbl implements Db_tbl {		
 	private final String fld_row_id, fld_good_articles, fld_total_pages, fld_images;
-	private final Db_conn conn; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final Db_conn conn; private final DbmetaFldList flds = new DbmetaFldList();
 	public Xowd_site_stats_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
-		fld_row_id			= flds.Add_int_pkey("ss_row_id");
-		fld_good_articles	= flds.Add_long("ss_good_articles");
-		fld_total_pages		= flds.Add_long("ss_total_pages");
-		fld_images			= flds.Add_int("ss_images");
+		fld_row_id			= flds.AddIntPkey("ss_row_id");
+		fld_good_articles	= flds.AddLong("ss_good_articles");
+		fld_total_pages		= flds.AddLong("ss_total_pages");
+		fld_images			= flds.AddInt("ss_images");
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name = TBL_NAME;
 	public void Create_tbl() {

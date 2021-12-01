@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.claims; import gplx.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.primitives.*; 
 import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 public class Wbase_claim_grp_tst {
@@ -54,7 +54,7 @@ class Wbase_claim_grp_bldr {
 		list.Add(claim);
 	}
 	public void Test__Get_best(String... expd) {
-		Wbase_claim_grp grp = new Wbase_claim_grp(Int_obj_ref.New(pid), (Wbase_claim_base[])list.To_ary_and_clear(Wbase_claim_base.class));
+		Wbase_claim_grp grp = new Wbase_claim_grp(Int_obj_ref.New(pid), (Wbase_claim_base[])list.ToAryAndClear(Wbase_claim_base.class));
 
 		List_adp tmp_list = List_adp_.New();
 		Gftest.Eq__ary(expd, To_string(grp.Get_best(tmp_list)));

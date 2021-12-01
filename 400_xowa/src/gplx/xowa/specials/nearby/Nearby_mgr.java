@@ -38,7 +38,7 @@ public class Nearby_mgr implements Xow_special_page {
 		form_fmtr.Bld_bfr_many(tmp_bfr);
 		List_adp list = Find_from_to(wiki, Bry_.new_a7("Earth"), Bry_.new_a7("Atom"), excluded);
 		tmp_bfr.Add_str_a7("<table>");
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; i++) {
 			Nearby_rslt rslt = (Nearby_rslt)list.Get_at(i);
 			tmp_bfr.Add_str_a7("<tr>");
@@ -83,7 +83,7 @@ public class Nearby_mgr implements Xow_special_page {
 		return results;
 	}
 	private void Examine_page(Ordered_hash src_pool){
-		int len = src_pool.Count();
+		int len = src_pool.Len();
 		Ordered_hash next_pool = Ordered_hash_.New_bry();
 		for (int i = 0; i < len; i++) {
 			Nearby_itmx itmx = (Nearby_itmx)src_pool.Get_at(i);
@@ -102,7 +102,7 @@ public class Nearby_mgr implements Xow_special_page {
 				results.Add(new Nearby_rslt(itmx.Trail(), trg_ttl));
 				if (results_cur == results_max) return;
 			}
-			int lnkis_len = lnkis.Count();
+			int lnkis_len = lnkis.Len();
 			for (int j = 0; j < lnkis_len; j++) {
 				Xoa_ttl lnki_ttl = (Xoa_ttl)lnkis.Get_at(j);
 				if (next_pool.Has(lnki_ttl.Page_db())) continue;
@@ -110,7 +110,7 @@ public class Nearby_mgr implements Xow_special_page {
 				next_pool.Add(lnki_ttl.Page_db(), next_itmx);
 			}
 		}
-		if (next_pool.Count() > 0)
+		if (next_pool.Len() > 0)
 			Examine_page(next_pool);
 //			++pages_count;
 //			wiki.Parser_mgr().Parse(page, true);
@@ -173,20 +173,20 @@ public class Nearby_mgr implements Xow_special_page {
 }
 class Nearby_rslt {
 	public Nearby_rslt(List_adp trail, Xoa_ttl trg_ttl) {
-		int len = trail.Count();
+		int len = trail.Len();
 		for (int i = 0; i < len; i++) {
 			Xoa_ttl ttl = (Xoa_ttl)trail.Get_at(i);
 			list.Add(ttl);
 		}
 		list.Add(trg_ttl);
 	}
-	public int Len() {return list.Count();}
+	public int Len() {return list.Len();}
 	public Xoa_ttl Get_at(int i) {return (Xoa_ttl)list.Get_at(i);}
 	List_adp list = List_adp_.New();	
 }
 class Nearby_itmx {
 	public Nearby_itmx(List_adp v, Xoa_ttl ttl) {
-		int len = v.Count();
+		int len = v.Len();
 		for (int i = 0; i < len; i++) {
 			Xoa_ttl v_ttl = (Xoa_ttl)v.Get_at(i);
 			trail.Add(v_ttl);

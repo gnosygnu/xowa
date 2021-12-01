@@ -13,12 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.addons.bldrs.files.missing_origs.*;
+package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*; import gplx.xowa.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.langs.jsons.*;
-import gplx.xowa.files.repos.*;
 import gplx.xowa.files.downloads.*;
-import gplx.xowa.apps.wms.apis.origs.*;
 public class Xowmf_imageinfo_api {
 	private final Xof_download_wkr download_wkr;
 	private final Ordered_hash temp_hash = Ordered_hash_.New();
@@ -109,7 +107,7 @@ public class Xowmf_imageinfo_api {
 					byte[] to = redirect.Get_as_bry("to");
 
 					// get nde by "to" and copy redirect
-					Xowmf_imageinfo_item trg_item = (Xowmf_imageinfo_item)temp_hash.Get_by_or_fail(to);
+					Xowmf_imageinfo_item trg_item = (Xowmf_imageinfo_item)temp_hash.GetByOrFail(to);
 					trg_item.Init_by_api_redirect(from, to);
 
 					// update temp_hash key
@@ -121,7 +119,7 @@ public class Xowmf_imageinfo_api {
 				int temp_hash_len = temp_hash.Len();
 				for (int i = 0; i < temp_hash_len; i++) {
 					Xowmf_imageinfo_item trg_item = (Xowmf_imageinfo_item)temp_hash.Get_at(i);
-					Xowmf_imageinfo_item src_item = (Xowmf_imageinfo_item)temp_hash.Get_by(trg_item.Lnki_ttl());
+					Xowmf_imageinfo_item src_item = (Xowmf_imageinfo_item)temp_hash.GetByOrNull(trg_item.Lnki_ttl());
 					src_item.Copy_api_props(trg_item);
 				}
 			}

@@ -58,7 +58,7 @@ public class ScribCfgResolverApp implements ScribCfgResolver, CfgResolver {
     private void SetResolverCfg(Xow_wiki wikii) {
         Xowe_wiki wiki = (Xowe_wiki)wikii;
         byte[] key = wiki.Domain_bry();
-        ScribCfgResolverWiki wikiScope = (ScribCfgResolverWiki)wikis.Get_by(key);
+        ScribCfgResolverWiki wikiScope = (ScribCfgResolverWiki)wikis.GetByOrNull(key);
         if (wikiScope == null) { // no defined cfg; create defailt
             wikiScope = new ScribCfgResolverWiki(String_.new_u8(key));
             wikis.Add(key, wikiScope); // cache it for future
@@ -77,9 +77,9 @@ class ScribCfgResolverWiki implements ScribCfgResolver {
     @Override public String Key() {return key;} private final String key;
     @Override public ScribCfg Fallback() {return fallback;} @Override public void FallbackSet(ScribCfg v) {fallback = v;} private ScribCfg fallback;
     @Override public ScribCfg Resolve(byte[] page, byte[] mod, byte[] func) {
-        ScribCfgResolverModule modResolver = (ScribCfgResolverModule)mods.Get_by(mod);
+        ScribCfgResolverModule modResolver = (ScribCfgResolverModule)mods.GetByOrNull(mod);
         if (modResolver == null) {
-            ScribCfgResolverMods pageResolver = (ScribCfgResolverMods)pages.Get_by(mod);
+            ScribCfgResolverMods pageResolver = (ScribCfgResolverMods)pages.GetByOrNull(mod);
             return pageResolver == null
                 ? fallback
                 : pageResolver.Resolve(page, mod, func);
@@ -104,9 +104,9 @@ class ScribCfgResolverModule implements ScribCfgResolver {
     @Override public String Key() {return key;} private final String key;
     @Override public ScribCfg Fallback() {return fallback;} @Override public void FallbackSet(ScribCfg v) {fallback = v;} private ScribCfg fallback;
     @Override public ScribCfg Resolve(byte[] page, byte[] mod, byte[] func) {
-        ScribCfgResolverPages funcResolver = (ScribCfgResolverPages)funcs.Get_by(func);
+        ScribCfgResolverPages funcResolver = (ScribCfgResolverPages)funcs.GetByOrNull(func);
         if (funcResolver == null) {
-            ScribCfgResolverFuncs pageResolver = (ScribCfgResolverFuncs)pages.Get_by(page);
+            ScribCfgResolverFuncs pageResolver = (ScribCfgResolverFuncs)pages.GetByOrNull(page);
             return pageResolver == null
                 ? fallback
                 : pageResolver.Resolve(page, mod, func);
@@ -132,7 +132,7 @@ class ScribCfgResolverPages implements ScribCfgResolver {
     @Override public String Key() {return key;} private final String key;
     @Override public ScribCfg Fallback() {return fallback;} @Override public void FallbackSet(ScribCfg v) {fallback = v;} private ScribCfg fallback;
     @Override public ScribCfg Resolve(byte[] page, byte[] mod, byte[] func) {
-        ScribCfg rv = (ScribCfg)pages.Get_by(page);
+        ScribCfg rv = (ScribCfg)pages.GetByOrNull(page);
         return rv == null
             ? fallback
             : rv;
@@ -153,7 +153,7 @@ class ScribCfgResolverMods implements ScribCfgResolver {
     @Override public String Key() {return key;} private final String key;
     @Override public ScribCfg Fallback() {return fallback;} @Override public void FallbackSet(ScribCfg v) {fallback = v;} private ScribCfg fallback;
     @Override public ScribCfg Resolve(byte[] page, byte[] mod, byte[] func) {
-        ScribCfgResolverFuncs rv = (ScribCfgResolverFuncs)mods.Get_by(mod);
+        ScribCfgResolverFuncs rv = (ScribCfgResolverFuncs)mods.GetByOrNull(mod);
         return rv == null
             ? fallback
             : rv.Resolve(page, mod, func);
@@ -172,7 +172,7 @@ class ScribCfgResolverFuncs implements ScribCfgResolver {
     @Override public String Key() {return key;} private final String key;
     @Override public ScribCfg Fallback() {return fallback;} @Override public void FallbackSet(ScribCfg v) {fallback = v;} private ScribCfg fallback;
     @Override public ScribCfg Resolve(byte[] page, byte[] mod, byte[] func) {
-        ScribCfg rv = (ScribCfg)funcs.Get_by(func);
+        ScribCfg rv = (ScribCfg)funcs.GetByOrNull(func);
         return rv == null
             ? fallback
             : rv;

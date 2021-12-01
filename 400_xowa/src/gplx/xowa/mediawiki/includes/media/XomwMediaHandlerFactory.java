@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.media; import gplx.*;
 // XO.MW:MW has registry and instance cache; XO only has instance
 // XO.MW:SYNC:1.29; DATE:2017-02-05
 public class XomwMediaHandlerFactory {
@@ -40,7 +40,7 @@ public class XomwMediaHandlerFactory {
 
 	// XO.MW:SYNC:1.29; DATE:2017-02-05
 	public XomwMediaHandler getHandler(byte[] type) {
-		return (XomwMediaHandler)handlers.Get_by(type);
+		return (XomwMediaHandler)handlers.GetByOrNull(type);
 	}
 
 	public static byte[]

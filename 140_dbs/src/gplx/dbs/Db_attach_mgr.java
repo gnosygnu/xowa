@@ -55,7 +55,7 @@ public class Db_attach_mgr {
 	}
 	public String Resolve_sql(String sql) {
 		attach_list.Clear();
-		int hash_len = links_hash.Count();
+		int hash_len = links_hash.Len();
 		for (int i = 0; i < hash_len; ++i) {
 			Db_attach_itm attach_itm = (Db_attach_itm)links_hash.Get_at(i);
 			String tkn = "<" + attach_itm.Key + ">";
@@ -86,7 +86,7 @@ public class Db_attach_mgr {
 	}
 	public String Test__attach_sql() {return attached_sql;} private String attached_sql;
 	public String[] Test__attach_list_keys() {
-		int rv_len = attach_list.Count();
+		int rv_len = attach_list.Len();
 		String[] rv = new String[rv_len];
 		for (int i = 0; i < rv_len; ++i) {
 			Db_attach_itm itm = (Db_attach_itm)attach_list.Get_at(i);
@@ -98,12 +98,12 @@ public class Db_attach_mgr {
 		attach_list.Clear();
 		SqlQryWtr sql_wtr = main_conn.Engine().Sql_wtr();
 		List_adp from_tbls = from_itm.Tbls;
-		int from_tbls_len = from_tbls.Count();
+		int from_tbls_len = from_tbls.Len();
 		for (int i = 0; i < from_tbls_len; ++i) {
 			Sql_tbl_itm from_tbl = (Sql_tbl_itm)from_tbls.Get_at(i);
 			String from_tbl_db = from_tbl.Db;
 			if (String_.Eq(Sql_tbl_itm.Db__null, from_tbl_db)) continue;	// tbl does not have db defined; only "tbl" not "db.tbl"; skip
-			Db_attach_itm attach_itm = (Db_attach_itm)links_hash.Get_by(from_tbl_db); if (attach_itm == null) throw Err_.new_("dbs", "qry defines an unknown database for attach_wkr", "from_tbl_db", from_tbl_db, "sql", qry.To_sql__exec(sql_wtr)); 
+			Db_attach_itm attach_itm = (Db_attach_itm)links_hash.GetByOrNull(from_tbl_db); if (attach_itm == null) throw Err_.new_("dbs", "qry defines an unknown database for attach_wkr", "from_tbl_db", from_tbl_db, "sql", qry.ToSqlExec(sql_wtr));
 			if (attach_itm.Url.Eq(main_conn_url)) // attach_db same as conn; blank db, so "tbl", not "db.tbl"
 				from_tbl.Db_enabled = false;
 			else

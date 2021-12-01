@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.utils; import gplx.*;
 import org.junit.*; import gplx.core.strings.*; import gplx.core.type_xtns.*; import gplx.core.stores.*; import gplx.core.envs.*;
 interface TstRuleMgr {
 	boolean SkipChkVal(String expdTypeKey, TstAtr expd);
@@ -22,14 +22,14 @@ interface TstRuleMgr {
 class Xop_rule_mgr implements TstRuleMgr {
 	public boolean SkipChkVal(String expdTypeKey, TstAtr expd) {
 		String key = expdTypeKey + "." + expd.Key();
-		Xop_rule_dat ruleDat = (Xop_rule_dat)hash.Get_by(key); if (ruleDat == null) return false;
+		Xop_rule_dat ruleDat = (Xop_rule_dat)hash.GetByOrNull(key); if (ruleDat == null) return false;
 		if (expd.ValType().Eq(expd.Val(), ruleDat.SkipVal())) return true;
 		return false;
 	}
 	public boolean SkipChkObj(String expdTypeKey, String atrKey, TstObj expd) {
 		String key = expdTypeKey + "." + atrKey;
-		Xop_rule_dat ruleDat = (Xop_rule_dat)hash.Get_by(key); if (ruleDat == null) return false;
-		TstAtr expdAtr = (TstAtr)expd.Atrs().Get_by(ruleDat.SubKey());
+		Xop_rule_dat ruleDat = (Xop_rule_dat)hash.GetByOrNull(key); if (ruleDat == null) return false;
+		TstAtr expdAtr = (TstAtr)expd.Atrs().GetByOrNull(ruleDat.SubKey());
 		if (expdAtr == null) return false;
 		if (expdAtr.ValType().Eq(expdAtr.Val(), ruleDat.SkipVal())) return true;
 		return false;
@@ -83,14 +83,14 @@ public class TstObj_tst {
 		sb.Add(raw).Add(Op_sys.Lnx.Nl_str());
 		boolean pass = true;
 		int[] cols = new int[3];
-		for (int i = 0; i < rslts.Count(); i++) {
+		for (int i = 0; i < rslts.Len(); i++) {
 			TstRslt rslt = (TstRslt)rslts.Get_at(i);
 			Max(cols, 0, rslt.EvalStr());
 			Max(cols, 1, rslt.Id());
 			Max(cols, 2, rslt.Key());
 		}
 		String hdr =  String_.Repeat(" ", Add(cols) + 3);
-		for (int i = 0; i < rslts.Count(); i++) {
+		for (int i = 0; i < rslts.Len(); i++) {
 			TstRslt rslt = (TstRslt)rslts.Get_at(i);
 //				if (rslt.EvalPass()) continue;
 			sb	.Add(String_.PadEnd(rslt.EvalStr(), cols[0] + 1, " "))
@@ -106,12 +106,12 @@ public class TstObj_tst {
 		throw Err_.new_wo_type(Op_sys.Lnx.Nl_str() + sb.To_str());
 	}
 	private static void Eval(List_adp rslts, TstRuleMgr ruleMgr, Ordered_hash props, String idx, TstObj expd, TstObj actl) {
-		int expdLen = expd.Atrs().Count();
+		int expdLen = expd.Atrs().Len();
 		props.Clear();
 		for (int i = 0; i < expdLen; i++) {
 			TstAtr expdAtr = (TstAtr)expd.Atrs().Get_at(i);
 			String key = expdAtr.Key();
-			TstAtr actlAtr = (TstAtr)actl.Atrs().Get_by(key);
+			TstAtr actlAtr = (TstAtr)actl.Atrs().GetByOrNull(key);
 			if (expdAtr.ValType() == ObjectClassXtn.Instance) {
 				SrlObj expdSrl = (SrlObj)expdAtr.Val();
 				TstObj expdTst = TstObj.new_();
@@ -128,7 +128,7 @@ public class TstObj_tst {
 			}
 			props.Add(key, key);
 		}
-		int expdSubsLen = expd.Subs().Count(), actlSubsLen = actl.Subs().Count();
+		int expdSubsLen = expd.Subs().Len(), actlSubsLen = actl.Subs().Len();
 		int maxLen = expdSubsLen > actlSubsLen ? expdSubsLen : actlSubsLen;
 		for (int i = 0; i < maxLen; i++) {
 			TstObj expdSub = i < expdSubsLen ? (TstObj)expd.Subs().Get_at(i) : TstObj.Null;

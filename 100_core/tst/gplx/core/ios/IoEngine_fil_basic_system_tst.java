@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import org.junit.*;
 public class IoEngine_fil_basic_system_tst extends IoEngine_fil_basic_base_tst {
 	@Override protected void setup_hook() {
@@ -32,7 +32,7 @@ public class IoEngine_fil_basic_system_tst extends IoEngine_fil_basic_base_tst {
 		fx.tst_ExistsPaths(true, fil);
 
 		IoRecycleBin bin = IoRecycleBin.Instance;
-		List_adp list = root.XtoNames(); list.Del_at(0); // remove drive
+		List_adp list = root.XtoNames(); list.DelAt(0); // remove drive
 		IoEngine_xrg_recycleFil recycleXrg = bin.Send_xrg(fil)
 			.RootDirNames_(list)
 			.AppName_("gplx.test").Time_(DateAdp_.parse_gplx("20100102_115559123")).Uuid_(Guid_adp_.Parse("467ffb41-cdfe-402f-b22b-be855425784b"));

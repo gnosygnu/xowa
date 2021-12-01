@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.specials.allPages; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import org.junit.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.wikis.data.tbls.*;
+import org.junit.*;
+import gplx.core.net.qargs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.tdbs.hives.*;
 public class Xows_page_allpages_tst {		
@@ -181,8 +182,8 @@ class Xows_page_allpages_fxt {
 		if (expd_ttls != null) Tfds.Eq_ary_str(expd_ttls, Xto_str_ary(wiki, allpages.Rslt_list_ttls()));
 		if (expd_nxt != null) Tfds.Eq(expd_nxt, Xto_str(wiki, allpages.Rslt_nxt()));
 		if (expd_prv != null) Tfds.Eq(expd_prv, Xto_str(wiki, allpages.Rslt_prv()));
-		if (expd_args.Count() > 0) {
-			Gfo_qarg_itm[] expd_args_ary = (Gfo_qarg_itm[])expd_args.To_ary(Gfo_qarg_itm.class); 
+		if (expd_args.Len() > 0) {
+			Gfo_qarg_itm[] expd_args_ary = (Gfo_qarg_itm[])expd_args.ToAry(Gfo_qarg_itm.class);
 			Tfds.Eq_ary_str(Xto_str_ary(expd_args_ary), Xto_str_ary(init_url.Qargs_ary()));
 		}
 		return this;
@@ -195,7 +196,7 @@ class Xows_page_allpages_fxt {
 	}
 	private void Exec_build() {
 		if (allpages.Itms_per_page() != init_itms_per_page) allpages.Itms_per_page_(init_itms_per_page);
-		init_url.Qargs_ary_((Gfo_qarg_itm[])init_args.To_ary(Gfo_qarg_itm.class));
+		init_url.Qargs_ary_((Gfo_qarg_itm[])init_args.ToAry(Gfo_qarg_itm.class));
 		init_args.Clear();
 		Xoa_ttl init_ttl = Make_init_ttl();
 		allpages.Build_data(init_url, init_ttl);

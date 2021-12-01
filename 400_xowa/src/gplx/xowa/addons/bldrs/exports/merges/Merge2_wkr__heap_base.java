@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
+package gplx.xowa.addons.bldrs.exports.merges;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.utls.*;
 public abstract class Merge2_wkr__heap_base implements Merge2_wkr {
 	public Merge2_wkr__heap_base(Split_tbl tbl) {
@@ -28,5 +28,5 @@ public abstract class Merge2_wkr__heap_base implements Merge2_wkr {
 	}
 	protected abstract void Copy_to_heap(Merge_ctx ctx, Merge_prog_wkr prog_wkr, Merge2_heap_mgr heap_mgr, Split_tbl tbl);
 	protected abstract void Copy_to_wiki(Merge_ctx ctx, Merge_prog_wkr prog_wkr, Merge2_heap_mgr heap_mgr, Split_tbl tbl);
-	public abstract void Copy_to_wiki(Merge_ctx ctx, Merge_prog_wkr prog_wkr, String tbl_name, Dbmeta_fld_list src_flds, Db_conn src_conn, Merge2_trg_itm trg_db, String[] fld_pkeys);
+	public abstract void Copy_to_wiki(Merge_ctx ctx, Merge_prog_wkr prog_wkr, String tbl_name, DbmetaFldList src_flds, Db_conn src_conn, Merge2_trg_itm trg_db, String[] fld_pkeys);
 }

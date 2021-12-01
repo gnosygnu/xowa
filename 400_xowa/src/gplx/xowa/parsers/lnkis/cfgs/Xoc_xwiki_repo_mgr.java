@@ -13,17 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.parsers.lnkis.cfgs; import gplx.*; import gplx.xowa.*;
 public class Xoc_xwiki_repo_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private Xowe_wiki wiki;
 	public Xoc_xwiki_repo_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
 	public boolean Has(byte[] abrv) {
-		Xoc_xwiki_repo_itm itm = (Xoc_xwiki_repo_itm)hash.Get_by(abrv);
+		Xoc_xwiki_repo_itm itm = (Xoc_xwiki_repo_itm)hash.GetByOrNull(abrv);
 		return itm != null;
 	}
 	public void Add_or_mod(byte[] abrv) {
-		Xoc_xwiki_repo_itm itm = (Xoc_xwiki_repo_itm)hash.Get_by(abrv);
+		Xoc_xwiki_repo_itm itm = (Xoc_xwiki_repo_itm)hash.GetByOrNull(abrv);
 		if (itm == null) {
 			itm = new Xoc_xwiki_repo_itm(abrv);
 			hash.Add(abrv, itm);

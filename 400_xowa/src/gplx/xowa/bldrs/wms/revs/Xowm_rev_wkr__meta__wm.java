@@ -54,7 +54,7 @@ class Xowm_rev_wkr__meta__wm implements Xowm_rev_wkr__meta {
 	}
 	private void Parse_page(Ordered_hash hash, Json_nde page_nde) {
 		json_page_parser.Parse("update", tmp_pge, page_nde);	// have to pass tmp_pge, b/c don't know which itm is in hash
-		Wmapi_itm__pge hash_itm = (Wmapi_itm__pge)hash.Get_by(tmp_pge.Page_ttl()); if (hash_itm == null) return;
+		Wmapi_itm__pge hash_itm = (Wmapi_itm__pge)hash.GetByOrNull(tmp_pge.Page_ttl()); if (hash_itm == null) return;
 		hash_itm.Init_id(tmp_pge.Page_id());
 		Wmapi_itm__rvn tmp_rvn = tmp_pge.Rvn_itm_last();
 		hash_itm.Rvn_ary_(new Wmapi_itm__rvn());

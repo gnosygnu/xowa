@@ -18,10 +18,10 @@ import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*;
 public class Db_qry_insert implements Db_arg_owner {
 	public Db_qry_insert(String base_table) {this.base_table = base_table;}
 	public int			Tid()					{return Db_qry_.Tid_insert;}
-	public boolean			Exec_is_rdr()			{return false;}
-	public String		To_sql__exec(SqlQryWtr wtr) {return wtr.ToSqlStr(this, false);}
+	public boolean ReturnsRdr()			{return false;}
+	public String ToSqlExec(SqlQryWtr wtr) {return wtr.ToSqlStr(this, false);}
 	public int			Exec_qry(Db_conn conn)	{return conn.Exec_qry(this);}
-	public String		Base_table()			{return base_table;} private String base_table;
+	public String BaseTable()			{return base_table;} private String base_table;
 	public String[]		Cols_for_insert() {return cols_for_insert;} private String[] cols_for_insert;
 	public Db_arg_owner From_(String tbl) {base_table = tbl; return this;}
 	public Keyval_hash	Args() {return args;} private final Keyval_hash args = new Keyval_hash();
@@ -35,7 +35,7 @@ public class Db_qry_insert implements Db_arg_owner {
 	public Db_arg_owner Val_blob(String k, byte[] v)			{return Val_obj_type(k, v, Db_val_type.Tid_bry);}
 	public Db_arg_owner Val_obj(String k, Object v)				{return Val_obj_type(k, v, Db_val_type.Tid_null);}
 	public Db_arg_owner Val_obj_type(String key, Object val, byte val_tid) {
-		if (key == Dbmeta_fld_itm.Key_null) return this;
+		if (key == DbmetaFldItm.KeyNull) return this;
 		args.Add(key, new Db_arg(key, val, val_tid));
 		return this;
 	}

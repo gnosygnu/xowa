@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.dump_pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.dump_pages; import gplx.*;
 public class Xowmf_wiki_dump_dirs_parser {
 	public static String[] Parse(byte[] wiki, byte[] src) {
 		List_adp rv = List_adp_.New();
@@ -27,7 +27,7 @@ public class Xowmf_wiki_dump_dirs_parser {
 			if (Bry_.Eq(href_bry, Tkn_owner)) continue;	// ignore <a href="../">
 			rv.Add(String_.new_u8(href_bry));
 		}
-		return (String[])rv.To_ary_and_clear(String.class);
+		return (String[])rv.ToAryAndClear(String.class);
 	}
 	private static final byte[] Tkn_href = Bry_.new_a7(" href=\""), Tkn_owner = Bry_.new_a7("..");
 }

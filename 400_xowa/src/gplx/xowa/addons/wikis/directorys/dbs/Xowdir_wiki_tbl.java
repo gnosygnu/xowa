@@ -13,21 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*;
+package gplx.xowa.addons.wikis.directorys.dbs; import gplx.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 import gplx.langs.jsons.*;
 public class Xowdir_wiki_tbl implements Db_tbl { // for domain and user-specific data only (name, url); don't replicate wiki-specific info here (like main_page)
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__wiki_id, fld__wiki_domain, fld__wiki_core_url, fld__wiki_json;
 	private final Db_conn conn;
 	private final Json_parser json_parser = new Json_parser();
 	public Xowdir_wiki_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= Tbl_name_dflt;
-		this.fld__wiki_id			= flds.Add_int_pkey("wiki_id");
-		this.fld__wiki_domain		= flds.Add_str("wiki_domain", 255);			// EX: "en.wikipedia.org"
-		this.fld__wiki_core_url		= flds.Add_str("wiki_core_url", 255);		// EX: "/xowa/wiki/en.wikipedia.org/en.wikipedia.org-core.xowa"
-		this.fld__wiki_json			= flds.Add_text("wiki_json");				// EX: '{category_level="1",search_level="2", ...}'
+		this.fld__wiki_id			= flds.AddIntPkey("wiki_id");
+		this.fld__wiki_domain		= flds.AddStr("wiki_domain", 255);			// EX: "en.wikipedia.org"
+		this.fld__wiki_core_url		= flds.AddStr("wiki_core_url", 255);		// EX: "/xowa/wiki/en.wikipedia.org/en.wikipedia.org-core.xowa"
+		this.fld__wiki_json			= flds.AddText("wiki_json");				// EX: '{category_level="1",search_level="2", ...}'
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
@@ -42,7 +42,7 @@ public class Xowdir_wiki_tbl implements Db_tbl { // for domain and user-specific
 			while (rdr.Move_next()) {
 				list.Add(Make(rdr));
 			}
-			return (Xowdir_wiki_itm[])list.To_ary_and_clear(Xowdir_wiki_itm.class);
+			return (Xowdir_wiki_itm[])list.ToAryAndClear(Xowdir_wiki_itm.class);
 		}
 		finally {rdr.Rls();}
 	}

@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.dbs.*; import gplx.core.ios.*; import gplx.core.envs.*;
+package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+import gplx.core.ios.*; import gplx.core.envs.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.wms.dumps.*;
 public class Xob_download_cmd extends Xob_cmd__base implements Xob_cmd {
 	private String dump_date = "latest", dump_type = null, dump_src = null;
@@ -74,7 +74,7 @@ public class Xob_download_cmd extends Xob_cmd__base implements Xob_cmd {
 	}
 	private static boolean Found(IoItmHash hash, String dump_type) {
 		String match = String_.Format("{0}.sql", dump_type); // EX: "page_props.sql"
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
 			IoItm_base fil = (IoItm_base)hash.Get_at(i);
 			if (String_.Has(fil.Url().NameAndExt(), match))

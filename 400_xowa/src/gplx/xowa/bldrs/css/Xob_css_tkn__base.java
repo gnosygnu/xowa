@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.css; import gplx.*;
 import gplx.core.envs.*;
 abstract class Xob_css_tkn__base {
 	public void Init(int tid, int pos_bgn, int pos_end) {
@@ -58,7 +58,7 @@ class Xob_css_tkn__url extends Xob_css_tkn__base {
 	public byte[] Src_url() {return src_url;} private byte[] src_url;
 	public byte[] Trg_url() {return trg_url;} private byte[] trg_url;
 	@Override public void Process(Xob_mirror_mgr mgr) {
-		mgr.File_hash().Add_if_dupe_use_1st(src_url, new Xobc_download_itm(Xobc_download_itm.Tid_file, String_.new_u8(src_url), trg_url));
+		mgr.File_hash().AddIfDupeUse1st(src_url, new Xobc_download_itm(Xobc_download_itm.Tid_file, String_.new_u8(src_url), trg_url));
 	}
 	@Override public int Write(Bry_bfr bfr, byte[] src) {
 		byte quote = quote_byte; if (quote == Byte_ascii.Null) quote = Byte_ascii.Apos;

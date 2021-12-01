@@ -16,9 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.apps.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.core.consoles.*;  import gplx.core.envs.*;
 import gplx.dbs.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.xowa.guis.views.boots.*;
+import gplx.gfui.kits.core.*; import gplx.xowa.guis.views.boots.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.users.*;	
 public class Xoa_boot_mgr {
 	private Gfo_usr_dlg usr_dlg; private Gfo_usr_dlg__log log_wtr;
 	public void Run(String[] args, Xoa_cmd_arg_mgr arg_mgr) {
@@ -102,7 +101,7 @@ public class Xoa_boot_mgr {
 						special_pages = new byte[][] {Bry_.Empty};
 					}
 					for (byte[] special_page : special_pages) {
-						app.Special_regy().Safelist_pages().Add_as_key_and_val(special_page);
+						app.Special_regy().Safelist_pages().AddAsKeyAndVal(special_page);
 					}
 				}
 

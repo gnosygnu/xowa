@@ -26,7 +26,7 @@ import gplx.dbs.Db_qry;
 import gplx.dbs.Db_qry_;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
-import gplx.dbs.Dbmeta_fld_itm;
+import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.engines.Db_engine;
 import gplx.objects.lists.GfoListBase;
 
@@ -42,7 +42,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt_cmd(Db_engine engine, Db_qry qry) {Ctor_stmt(engine, qry);}
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {
 		this.engine = engine;
-		sql = qry.Tid() == Db_qry_.Tid_select_in_tbl ? ((Db_qry__select_in_tbl)qry).To_sql__exec(engine.Sql_wtr()) : engine.Sql_wtr().ToSqlStr(qry, true);
+		sql = qry.Tid() == Db_qry_.Tid_select_in_tbl ? ((Db_qry__select_in_tbl)qry).ToSqlExec(engine.Sql_wtr()) : engine.Sql_wtr().ToSqlStr(qry, true);
 		Reset_stmt();
 	}
 	public Db_stmt Reset_stmt() {
@@ -57,7 +57,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_byte(String k, byte v)	{return Add_byte(Bool_.N, k, v);}
 	public Db_stmt Val_byte(byte v)				{return Add_byte(Bool_.N, Key_na, v);}
 	private Db_stmt Add_byte(boolean where, String k, byte v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setByte(++val_idx, v);
 			paramList.Add(v);
@@ -72,7 +72,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_int(String k, int v)	{return Add_int(Bool_.N, k, v);}
 	public Db_stmt Val_int(int v)			{return Add_int(Bool_.N, Key_na, v);}
 	private Db_stmt Add_int(boolean where, String k, int v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setInt(++val_idx, v);
 			paramList.Add(v);
@@ -86,7 +86,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_long(String k, long v)	{return Add_long(Bool_.N, k, v);}
 	public Db_stmt Val_long(long v)				{return Add_long(Bool_.N, Key_na, v);}
 	private Db_stmt Add_long(boolean where, String k, long v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setLong(++val_idx, v);
 			paramList.Add(v);
@@ -100,7 +100,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_float(String k, float v)	{return Add_float(Bool_.N, k, v);}
 	public Db_stmt Val_float(float v)			{return Add_float(Bool_.N, Key_na, v);}
 	private Db_stmt Add_float(boolean where, String k, float v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setFloat(++val_idx, v);
 			paramList.Add(v);
@@ -114,7 +114,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_double(String k, double v)	{return Add_double(Bool_.N, k, v);}
 	public Db_stmt Val_double(double v)				{return Add_double(Bool_.N, Key_na, v);}
 	private Db_stmt Add_double(boolean where, String k, double v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setDouble(++val_idx, v);
 			paramList.Add(v);
@@ -128,7 +128,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_decimal(String k, Decimal_adp v)	{return Add_decimal(Bool_.N, k, v);}
 	public Db_stmt Val_decimal(Decimal_adp v)			{return Add_decimal(Bool_.N, Key_na, v);}
 	private Db_stmt Add_decimal(boolean where, String k, Decimal_adp v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setBigDecimal(++val_idx, v.Under_as_native());
 			paramList.Add(v);
@@ -142,7 +142,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_bry(String k, byte[] v)	{return Add_bry(Bool_.N, k, v);}
 	public Db_stmt Val_bry(byte[] v)			{return Add_bry(Bool_.N, Key_na, v);}
 	private Db_stmt Add_bry(boolean where, String k, byte[] v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setBytes(++val_idx, v);
 			paramList.Add(v);
@@ -160,7 +160,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Val_str(String k, String v)	{return Add_str(Bool_.N, k, v);}
 	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, Key_na, v);}
 	protected Db_stmt Add_str(boolean where, String k, String v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setString(++val_idx, v);
 			paramList.Add(v);
@@ -173,7 +173,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Crt_date(String k, DateAdp v)	{return Add_date(Bool_.Y, k, v);}
 	public Db_stmt Val_date(String k, DateAdp v)	{return Add_date(Bool_.N, k, v);}
 	protected Db_stmt Add_date(boolean where, String k, DateAdp v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setTimestamp(++val_idx, new java.sql.Timestamp(v.UnderDateTime().getTime().getTime()));
 			paramList.Add(v);
@@ -186,7 +186,7 @@ public class Db_stmt_cmd implements Db_stmt {
 	public Db_stmt Crt_text(String k, String v)	{return Add_text(Bool_.Y, k, v);}
 	public Db_stmt Val_text(String k, String v)	{return Add_text(Bool_.N, k, v);}
 	private Db_stmt Add_text(boolean where, String k, String v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		try {
 			stmt.setString(++val_idx, v);
 			paramList.Add(v);

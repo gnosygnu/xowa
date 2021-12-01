@@ -15,7 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.threads.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.imgs.*;
+import gplx.fsdb.meta.*;
+import gplx.xowa.files.imgs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.caches.*; import gplx.xowa.guis.cbks.js.*;
 public class Xof_file_wkr implements Gfo_thread_wkr {
 	private final Xof_orig_mgr orig_mgr; private final Xof_bin_mgr bin_mgr; private final Fsm_mnt_mgr mnt_mgr; private final Xou_cache_mgr cache_mgr;
@@ -30,7 +31,7 @@ public class Xof_file_wkr implements Gfo_thread_wkr {
 	public String			Thread__name() {return "xowa.load_imgs";}
 	public boolean			Thread__resume() {return true;}
 	public void Thread__exec() {
-		int len = imgs.Count();
+		int len = imgs.Len();
 		for (int i = 0; i < len; ++i)
 			Exec_by_fsdb((Xof_fsdb_itm)imgs.Get_at(i));
 		Xoa_app_.Usr_dlg().Prog_none("", "", "");

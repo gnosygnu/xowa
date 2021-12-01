@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.bins; import gplx.*;
+import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.fsdb.meta.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.cnvs.*; import gplx.xowa.files.caches.*;
-import gplx.xowa.bldrs.wms.*;
+import gplx.xowa.files.repos.*;
+import gplx.xowa.files.cnvs.*;
 public class Xof_bin_mgr {		
 	private final Fsm_mnt_mgr mnt_mgr;
 	private final Gfo_usr_dlg usr_dlg; private final Xow_repo_mgr repo_mgr; private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
@@ -37,7 +38,7 @@ public class Xof_bin_mgr {
 			if (String_.Eq(key, wkr.Key())) continue;
 			list.Add(wkr);
 		}
-		this.wkrs = (Xof_bin_wkr[])list.To_ary(Xof_bin_wkr.class);
+		this.wkrs = (Xof_bin_wkr[])list.ToAry(Xof_bin_wkr.class);
 		this.wkrs_len = wkrs.length;
 	}
 	public void Wkrs__add(Xof_bin_wkr v) {

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps; import gplx.*;
 import gplx.core.tests.*; import gplx.core.log_msgs.*;
 class Php_parser_fxt {
 	Php_tkn_factory tkn_factory = new Php_tkn_factory();
@@ -54,7 +54,7 @@ class Php_parser_fxt {
 	public void tst_tkns(String raw, Php_tkn_chkr_base... expd) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		parser.Parse_tkns(raw_bry, tkn_wkr);
-		Php_tkn[] actl = (Php_tkn[])tkn_wkr.List().To_ary(Php_tkn.class);
+		Php_tkn[] actl = (Php_tkn[])tkn_wkr.List().ToAry(Php_tkn.class);
 		tst_mgr.Vars().Clear().Add("raw_bry", raw_bry);
 		tst_mgr.Tst_ary("", expd, actl);
 		log_mgr_chkr.tst(tst_mgr, tkn_wkr.Msg_log());
@@ -62,7 +62,7 @@ class Php_parser_fxt {
 	public void tst_lines(String raw, Php_line_assign_chkr... expd) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		parser.Parse_tkns(raw_bry, line_wkr);
-		Php_line[] actl = (Php_line[])line_wkr.List().To_ary(Php_line.class);
+		Php_line[] actl = (Php_line[])line_wkr.List().ToAry(Php_line.class);
 		tst_mgr.Vars().Clear().Add("raw_bry", raw_bry);
 		tst_mgr.Tst_ary("", expd, actl);
 		log_mgr_chkr.tst(tst_mgr, line_wkr.Msg_log());
@@ -71,7 +71,7 @@ class Php_parser_fxt {
 		line_wkr.Clear();
 		byte[] raw_bry = Bry_.new_u8("$var =\"" + raw +"\";");
 		parser.Parse_tkns(raw_bry, line_wkr);
-		Php_line[] actl_lines = (Php_line[])line_wkr.List().To_ary(Php_line.class);
+		Php_line[] actl_lines = (Php_line[])line_wkr.List().ToAry(Php_line.class);
 		Php_line_assign actl_line = (Php_line_assign)actl_lines[0];
 		Php_itm_quote actl = (Php_itm_quote)actl_line.Val();
 		Tfds.Eq_str(expd, String_.new_u8(actl.Val_obj_bry()));
@@ -280,7 +280,7 @@ class Gfo_msg_log_chkr implements Tst_chkr {
 		Gfo_msg_data[] actl_itms = new Gfo_msg_data[actl_itms_len];		
 		for (int i = 0; i < actl_itms_len; i++)
 			actl_itms[i] = actl.Ary_get(i);
-		mgr.Tst_ary("itms", (Gfo_msg_data_chkr[])itms.To_ary(Gfo_msg_data_chkr.class), actl_itms);
+		mgr.Tst_ary("itms", (Gfo_msg_data_chkr[])itms.ToAry(Gfo_msg_data_chkr.class), actl_itms);
 	}
 }
 class Gfo_msg_data_chkr implements Tst_chkr {

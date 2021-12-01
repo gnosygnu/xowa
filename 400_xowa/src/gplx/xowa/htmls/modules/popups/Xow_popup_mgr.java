@@ -13,15 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
-import gplx.core.primitives.*; import gplx.core.threads.*; import gplx.core.envs.*;
+package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*;
+import gplx.core.primitives.*; import gplx.core.threads.*;
 import gplx.core.js.*;
-import gplx.xowa.addons.apps.cfgs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.guis.views.*;
-import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.specials.*;
-import gplx.xowa.apps.apis.xowa.html.modules.*;
 public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 	private Xoae_app app; private Xowe_wiki wiki; private Js_wtr js_wtr = new Js_wtr();
 	private int show_init_word_count, show_more_word_count;
@@ -90,7 +87,7 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 //					return load_popup_wkr.Rslt_bry();
 				Running_(true);
 				if (itm.Canceled()) return null;
-				cur_page.Popup_mgr().Itms().Add_if_dupe_use_nth(itm.Popup_id(), itm);
+				cur_page.Popup_mgr().Itms().AddIfDupeUseNth(itm.Popup_id(), itm);
 				app.Html__href_parser().Parse_as_url(tmp_url, itm.Page_href(), wiki, cur_page.Ttl().Full_url());	// NOTE: use Full_url, not Page_url, else anchors won't work for non-main ns; PAGE:en.w:Project:Sandbox; DATE:2014-08-07
 				if (!Xoa_url_.Tid_is_pagelike(tmp_url.Tid())) return Bry_.Empty;		// NOTE: do not get popups for "file:///"; DATE:2015-04-05
 				Xowe_wiki popup_wiki = (Xowe_wiki)app.Wiki_mgr().Get_by_or_null(tmp_url.Wiki_bry());
@@ -104,7 +101,7 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 						if (!Xow_special_meta_.Itm__popup_history.Match_ttl(popup_ttl)) return Bry_.Empty;	// do not popup for special, unless popupHistory; DATE:2015-04-20
 						break;
 				}
-				if (ns_allowed_regy.Count() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return Bry_.Empty;
+				if (ns_allowed_regy.Len() > 0 && !ns_allowed_regy.Has(ns_allowed_regy_key.Val_(popup_ttl.Ns().Id()))) return Bry_.Empty;
 				itm.Init(popup_wiki.Domain_bry(), popup_ttl);
 				int wait_count = 0;
 				while (gplx.xowa.guis.views.Load_page_wkr.Running() && ++wait_count < 100) {
@@ -172,11 +169,11 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 			Int_obj_ref ns_id_itm = Int_obj_ref.New(ns.Id());
 			rv.Add(ns_id_itm);
 		}
-		return (Int_obj_ref[])rv.To_ary(Int_obj_ref.class);
+		return (Int_obj_ref[])rv.ToAry(Int_obj_ref.class);
 	}	private Hash_adp ns_allowed_regy = Hash_adp_.New(); private Int_obj_ref ns_allowed_regy_key = Int_obj_ref.New_zero();
 	private Xoae_page Cur_page() {return app.Gui_mgr().Browser_win().Active_page();}
 	private Xowe_wiki Cur_wiki() {return app.Gui_mgr().Browser_win().Active_tab().Wiki();}
-	private Xow_popup_itm Itms_get_or_null(Xoae_page page, String popup_id) {return (Xow_popup_itm)page.Popup_mgr().Itms().Get_by(popup_id);}
+	private Xow_popup_itm Itms_get_or_null(Xoae_page page, String popup_id) {return (Xow_popup_itm)page.Popup_mgr().Itms().GetByOrNull(popup_id);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if      (ctx.Match(k, Cfg__enabled))										enabled = m.ReadYn("v");
 		else if (ctx.Match(k, Cfg__show_init_word_count))							show_init_word_count = m.ReadInt("v");

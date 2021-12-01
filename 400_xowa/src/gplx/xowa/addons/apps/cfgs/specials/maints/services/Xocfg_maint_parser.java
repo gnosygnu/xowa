@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.maints.*;
+package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*;
 import gplx.langs.gfs.*;
 class Xocfg_maint_parser {
 	public Xocfg_maint_nde[] Parse(String raw) {
@@ -66,7 +66,7 @@ class Xocfg_maint_parser {
 		return rv;
 	}
 	private static String Get_atr_as_str_or(Ordered_hash hash, String key, String or) {
-		String val = (String)hash.Get_by(key);
+		String val = (String)hash.GetByOrNull(key);
 		return val == null ? or : val;
 	}
 }

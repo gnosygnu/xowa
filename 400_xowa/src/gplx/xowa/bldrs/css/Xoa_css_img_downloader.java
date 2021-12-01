@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*;
 import gplx.core.envs.*; import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.xowa.files.downloads.*;
 public class Xoa_css_img_downloader {
@@ -30,7 +30,7 @@ public class Xoa_css_img_downloader {
 		byte[] rel_url_prefix = Bry_.Add(Bry_fwd_slashes, wiki_domain);
 		byte[] new_bry = Convert_to_local_urls(rel_url_prefix, old_bry, img_list);
 		Io_url img_dir = css_fil.OwnerDir();
-		Download_fils(img_dir, img_list.To_str_ary());
+		Download_fils(img_dir, img_list.ToStrAry());
 		Io_mgr.Instance.SaveFilBry(css_fil, new_bry);
 	}
 	public byte[] Convert_to_local_urls(byte[] rel_url_prefix, byte[] src, List_adp list) {
@@ -148,7 +148,7 @@ public class Xoa_css_img_downloader {
 					bfr.Add_mid(src, prv_pos, bgn_pos); prv_pos = bgn_pos; continue;
 				}
 				if (!img_hash.Has(img_cleaned)) {// only add unique items for download;
-					img_hash.Add_as_key_and_val(img_cleaned);
+					img_hash.AddAsKeyAndVal(img_cleaned);
 					list.Add(String_.new_u8(img_cleaned));
 				}
 				img_cleaned = Replace_invalid_chars(Bry_.Copy(img_cleaned));	// NOTE: must call ByteAry.Copy else img_cleaned will change *inside* hash

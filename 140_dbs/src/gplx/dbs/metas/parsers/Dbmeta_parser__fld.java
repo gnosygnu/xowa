@@ -13,15 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
-import gplx.dbs.engines.sqlite.*;
+package gplx.dbs.metas.parsers; import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Byte_ascii;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.core.brys.Bry_rdr;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldType;
+import gplx.dbs.engines.sqlite.SqliteType;
 public class Dbmeta_parser__fld {
 	private final Btrie_rv trv = new Btrie_rv();
-	public Dbmeta_fld_itm Parse_fld(Sql_bry_rdr rdr) {	// starts after "(" or ","; EX: "(fld1 int", ", fld2 int"; ends at ")"
+	public DbmetaFldItm Parse_fld(Sql_bry_rdr rdr) {	// starts after "(" or ","; EX: "(fld1 int", ", fld2 int"; ends at ")"
 		byte[] name = rdr.Read_sql_identifier();
-		Dbmeta_fld_tid type = this.Parse_type(rdr);
-		Dbmeta_fld_itm fld = new Dbmeta_fld_itm(String_.new_u8(name), type);
+		DbmetaFldType type = this.Parse_type(rdr);
+		DbmetaFldItm fld = new DbmetaFldItm(String_.new_u8(name), type);
 		byte[] src = rdr.Src(); int src_len = rdr.Src_end();
 		while (true) {
 			rdr.Skip_ws();
@@ -51,7 +60,7 @@ public class Dbmeta_parser__fld {
 			}
 		}
 	}
-	@gplx.Internal protected Dbmeta_fld_tid Parse_type(Bry_rdr rdr) {
+	@gplx.Internal protected DbmetaFldType Parse_type(Bry_rdr rdr) {
 		rdr.Skip_ws();
 		Dbmeta_parser__fld_itm type_itm = (Dbmeta_parser__fld_itm)rdr.Chk_trie_as_obj(trv, type_trie);
 		rdr.Move_by(type_itm.Word().length);
@@ -66,7 +75,7 @@ public class Dbmeta_parser__fld {
 			}
 			rdr.Skip_ws().Chk(Byte_ascii.Paren_end);
 		}
-		return new Dbmeta_fld_tid(type_itm.Tid_ansi(), type_itm.Tid_sqlite(), type_itm.Word(), len_1, len_2);
+		return new DbmetaFldType(type_itm.Tid_ansi(), String_.new_u8(type_itm.Word()), len_1, len_2);
 	}
 	private static final Btrie_slim_mgr fld_trie = fld_trie_init
 	( Dbmeta_fld_wkr__nullable_null.Instance
@@ -84,20 +93,20 @@ public class Dbmeta_parser__fld {
 	private static final Btrie_slim_mgr type_trie = type_trie_init();
 	private static Btrie_slim_mgr type_trie_init() {
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_a7();
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__byte		, Sqlite_tid.Tid_int		, 0, "tinyint", "int2");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__short		, Sqlite_tid.Tid_int		, 0, "smallint");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__int			, Sqlite_tid.Tid_int		, 0, "int", "integer", "mediumint");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__long		, Sqlite_tid.Tid_int		, 0, "bigint", "int8");	// "UNSIGNED BIG INT"
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__str			, Sqlite_tid.Tid_text		, 1, "character", "varchar", "nchar");	// "varying character", "native character"
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__text		, Sqlite_tid.Tid_text		, 0, "text", "clob");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__bry			, Sqlite_tid.Tid_none		, 0, "blob", "mediumblob");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__float		, Sqlite_tid.Tid_real		, 0, "float");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__double		, Sqlite_tid.Tid_real		, 0, "real", "double");	// "double precision"
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__decimal		, Sqlite_tid.Tid_numeric	, 0, "numeric");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__decimal		, Sqlite_tid.Tid_numeric	, 2, "decimal");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__decimal		, Sqlite_tid.Tid_numeric	, 2, "decimal");
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__bool		, Sqlite_tid.Tid_numeric	, 0, "boolean", "bit");		// "bit" is not SQLITE
-		Dbmeta_parser__fld_itm.reg_many(rv, Dbmeta_fld_tid.Tid__date		, Sqlite_tid.Tid_numeric	, 0, "date", "datetime");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidByte, SqliteType.Int, 0, "tinyint", "int2");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidShort, SqliteType.Int, 0, "smallint");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidInt, SqliteType.Int, 0, "int", "integer", "mediumint");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidLong, SqliteType.Int, 0, "bigint", "int8");	// "UNSIGNED BIG INT"
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidStr, SqliteType.Text, 1, "character", "varchar", "nchar");	// "varying character", "native character"
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidText, SqliteType.Text, 0, "text", "clob");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidBry, SqliteType.None, 0, "blob", "mediumblob");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidFloat, SqliteType.Real, 0, "float");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidDouble, SqliteType.Real, 0, "real", "double");	// "double precision"
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidDecimal, SqliteType.Numeric, 0, "numeric");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidDecimal, SqliteType.Numeric, 2, "decimal");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidDecimal, SqliteType.Numeric, 2, "decimal");
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidBool, SqliteType.Numeric, 0, "boolean", "bit");		// "bit" is not SQLITE
+		Dbmeta_parser__fld_itm.reg_many(rv, DbmetaFldType.TidDate, SqliteType.Numeric, 0, "date", "datetime");
 		return rv;
 	}
 }

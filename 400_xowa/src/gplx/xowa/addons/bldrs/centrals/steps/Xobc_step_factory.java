@@ -13,14 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.steps; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.steps; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.brys.evals.*; import gplx.core.primitives.*;
-import gplx.xowa.addons.bldrs.centrals.tasks.*; import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.steps.*; import gplx.xowa.addons.bldrs.centrals.utils.*;
-import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
-import gplx.xowa.addons.bldrs.exports.merges.*;
-import gplx.xowa.addons.bldrs.updates.files.*;
+import gplx.xowa.addons.bldrs.centrals.tasks.*; import gplx.xowa.addons.bldrs.centrals.cmds.*;
+import gplx.xowa.addons.bldrs.centrals.utils.*;
+import gplx.xowa.addons.bldrs.centrals.dbs.*;
+import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
 import gplx.xowa.addons.bldrs.exports.packs.files.*;
-import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xobc_step_factory {
 	private final Xobc_task_mgr task_mgr;
@@ -79,7 +79,7 @@ public class Xobc_step_factory {
 			case Xobc_import_type.Tid__wiki__core:		list.Add(new Xobc_cmd__wiki_reg		(task_mgr, task_id, step_id, cmd_idx++, wiki_dir_url, wiki_domain)); break;
 			case Xobc_import_type.Tid__fsdb__delete:	list.Add(new Xobc_cmd__fsdb_delete	(task_mgr, task_id, step_id, cmd_idx++, Pack_zip_name_bldr.To_wiki_url(wiki_dir_url, zip_file_url.OwnerDir()))); break;
 		}
-		return (Xobc_cmd_itm[])list.To_ary_and_clear(Xobc_cmd_itm.class);
+		return (Xobc_cmd_itm[])list.ToAryAndClear(Xobc_cmd_itm.class);
 	}
 	private Io_url Eval_url(String src) {return Io_url_.new_any_(String_.new_u8(eval_mgr.Eval(Bry_.new_u8(src))));}
 	public static Xow_wiki Get_wiki_by_abrv(Xoa_app app, byte[] wiki_abrv) {

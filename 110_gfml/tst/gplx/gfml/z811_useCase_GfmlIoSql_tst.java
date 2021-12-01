@@ -42,7 +42,7 @@ public class z811_useCase_GfmlIoSql_tst {
 			GfmlAtr atr = (GfmlAtr)nde.SubObjs_GetAt(i);
 			list.Add(atr.Key() +  "=" + atr.DatTkn().Raw());
 		}
-		return list.To_str_ary();
+		return list.ToStrAry();
 	}
 	GfmlNdeWrapper nde_(String name) {return GfmlNdeWrapper.new_().Name_(name);}
 }

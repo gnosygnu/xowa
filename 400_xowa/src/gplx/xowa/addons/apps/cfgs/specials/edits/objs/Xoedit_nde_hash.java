@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*;
 public class Xoedit_nde_hash {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	private final Ordered_hash id_hash = Ordered_hash_.New();
@@ -29,10 +29,10 @@ public class Xoedit_nde_hash {
 		return (Xoedit_nde)hash.Get_at(i);
 	}
 	public Xoedit_nde Get_by_or_fail(String key) {
-		return (Xoedit_nde)hash.Get_by_or_fail(key);
+		return (Xoedit_nde)hash.GetByOrFail(key);
 	}
 	public Xoedit_nde Get_by_or_fail(int id) {
-		return (Xoedit_nde)id_hash.Get_by_or_fail(id);
+		return (Xoedit_nde)id_hash.GetByOrFail(id);
 	}
 	public Xoedit_grp[] To_grp_ary_and_clear() {
 		Xoedit_grp[] rv = (Xoedit_grp[])hash.To_ary_and_clear(Xoedit_grp.class);

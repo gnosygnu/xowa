@@ -78,8 +78,8 @@ public class Db_conn {
 	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... idxs)				{engine.Meta_idx_create(usr_dlg, idxs);}
 	public void					Meta_idx_delete(String idx)														{engine.Meta_idx_delete(idx);}
 	public void					Meta_idx_delete(String tbl, String suffix)										{engine.Meta_idx_delete(tbl + "__" + suffix);}
-	public void					Meta_fld_append(String tbl, Dbmeta_fld_itm fld)									{engine.Meta_fld_append(tbl, fld);}
-	public void					Meta_fld_assert(String tbl, String fld, Dbmeta_fld_tid tid, Object dflt)		{if (!Meta_fld_exists(tbl, fld)) this.Meta_fld_append(tbl, new Dbmeta_fld_itm(fld, tid).Default_(dflt));}
+	public void					Meta_fld_append(String tbl, DbmetaFldItm fld)									{engine.Meta_fld_append(tbl, fld);}
+	public void					Meta_fld_assert(String tbl, String fld, DbmetaFldType tid, Object dflt)		{if (!Meta_fld_exists(tbl, fld)) this.Meta_fld_append(tbl, new DbmetaFldItm(fld, tid).DefaultValSet(dflt));}
 	public boolean				Meta_tbl_exists(String tbl)														{return engine.Meta_tbl_exists(tbl);}
 	public boolean				Meta_fld_exists(String tbl, String fld)											{return engine.Meta_fld_exists(tbl, fld);}
 	public boolean				Meta_idx_exists(String idx)														{return engine.Meta_idx_exists(idx);}
@@ -94,7 +94,7 @@ public class Db_conn {
 		}
 		if (dirty) this.Meta_mgr().Load_all();
 	}
-	public String Meta_fld_append_if_missing(String tbl_name, Dbmeta_fld_list flds, Dbmeta_fld_itm fld) {
+	public String Meta_fld_append_if_missing(String tbl_name, DbmetaFldList flds, DbmetaFldItm fld) {
 		String fld_name = fld.Name();
 		// if fld doesn't exist, add it; NOTE: need to check if tbl exists first else meta_fld not available
 		if (	this.Meta_tbl_exists(tbl_name)
@@ -102,7 +102,7 @@ public class Db_conn {
 			try {this.Meta_fld_append(tbl_name, fld);}
 			catch (Exception e) {
 				Gfo_log_.Instance.Warn("failed to append fld", "conn", this.Conn_info().Db_api(), "tbl", tbl_name, "fld", fld_name, "err", Err_.Message_gplx_log(e));
-				fld_name = Dbmeta_fld_itm.Key_null;
+				fld_name = DbmetaFldItm.KeyNull;
 			}
 		}
 		// if fld does exist, or tbl doesn't exist, just add fld to collection
@@ -113,15 +113,15 @@ public class Db_conn {
 		return fld_name;
 	}
 	public Dbmeta_tbl_mgr		Meta_mgr()																		{return engine.Meta_mgr();}
-	public Db_stmt				Stmt_insert(String tbl, Dbmeta_fld_list flds)									{return engine.Stmt_by_qry(Db_qry_insert.new_(tbl, flds.To_str_ary_wo_autonum()));}
+	public Db_stmt				Stmt_insert(String tbl, DbmetaFldList flds)									{return engine.Stmt_by_qry(Db_qry_insert.new_(tbl, flds.ToStrAryWoAutonum()));}
 	public Db_stmt				Stmt_insert(String tbl, String... cols)									{return engine.Stmt_by_qry(Db_qry_insert.new_(tbl, cols));}
 	public Db_stmt				Stmt_update(String tbl, String[] where, String... cols)					{return engine.Stmt_by_qry(Db_qry_update.New(tbl, where, cols));}
-	public Db_stmt				Stmt_update_exclude(String tbl, Dbmeta_fld_list flds, String... where)	{return engine.Stmt_by_qry(Db_qry_update.New(tbl, where, flds.To_str_ary_exclude(where)));}
+	public Db_stmt				Stmt_update_exclude(String tbl, DbmetaFldList flds, String... where)	{return engine.Stmt_by_qry(Db_qry_update.New(tbl, where, flds.ToStrAryExclude(where)));}
 	public Db_stmt				Stmt_delete(String tbl, String... where)									{return engine.Stmt_by_qry(Db_qry_delete.new_(tbl, where));}
-	public Db_stmt				Stmt_select_all(String tbl, Dbmeta_fld_list flds)								{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, String_.Ary_empty, flds.To_str_ary(), null));}
+	public Db_stmt				Stmt_select_all(String tbl, DbmetaFldList flds)								{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, String_.Ary_empty, flds.ToStrAry(), null));}
 	public Db_stmt				Stmt_select(String tbl, String[] cols, String... where)					{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, cols, null));}
-	public Db_stmt				Stmt_select(String tbl, Dbmeta_fld_list flds, String... where)			{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary(), null));}
-	public Db_stmt				Stmt_select_order(String tbl, Dbmeta_fld_list flds, String[] where, String... orderbys) {return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds.To_str_ary(), orderbys));}
+	public Db_stmt				Stmt_select(String tbl, DbmetaFldList flds, String... where)			{return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds.ToStrAry(), null));}
+	public Db_stmt				Stmt_select_order(String tbl, DbmetaFldList flds, String[] where, String... orderbys) {return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds.ToStrAry(), orderbys));}
 	public Db_stmt				Stmt_select_order(String tbl, String[] flds, String[] where, String... orderbys) {return engine.Stmt_by_qry(Db_qry__select_in_tbl.new_(tbl, where, flds, orderbys));}
 	public Db_stmt				Stmt_new(Db_qry qry) {return engine.Stmt_by_qry(qry);}
 	public Db_stmt				Stmt_sql(String sql) {return engine.Stmt_by_qry(Db_qry_sql.sql_(sql));}
@@ -163,7 +163,7 @@ public class Db_conn {
 		rls_list.Add(rls);
 	}
 	public void					Rls_conn() {
-		int len = rls_list.Count();
+		int len = rls_list.Len();
 		for (int i = 0; i < len; ++i) {
 			Rls_able itm = (Rls_able)rls_list.Get_at(i);
 			itm.Rls();

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps; import gplx.*;
 import gplx.core.primitives.*;
 public class Php_text_itm_parser {
 	public static final byte Rslt_orig = 0, Rslt_dirty = 1, Rslt_fmt = 2;
@@ -26,7 +26,7 @@ public class Php_text_itm_parser {
 			case Rslt_dirty:
 			case Rslt_fmt:
 				tmp_bfr.Clear();
-				int tmp_list_len = tmp_list.Count();
+				int tmp_list_len = tmp_list.Len();
 				for (int i = 0; i < tmp_list_len; i++) {
 					Php_text_itm itm = (Php_text_itm)tmp_list.Get_at(i);
 					itm.Bld(tmp_bfr, raw);

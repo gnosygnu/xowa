@@ -78,7 +78,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 			tab_itm.Tab_name_();
 		}
 	}
-	public int Tabs_len() {return tab_regy.Count();}
+	public int Tabs_len() {return tab_regy.Len();}
 	public Xog_tab_itm Tabs_new_init(Xowe_wiki wiki, Xoae_page page) {return this.Tabs_new(true, true, wiki, page);}
 	public Xog_tab_itm Tabs_get_at(int i) {return (Xog_tab_itm)tab_regy.Get_at(i);}
 	public Xog_tab_itm Tabs_new_dflt() {return Tabs_new_dflt(false);}
@@ -93,7 +93,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		return rv;
 	}
 	private Xog_tab_itm Tabs_new(boolean focus, boolean active_tab_is_null, Xowe_wiki wiki, Xoae_page page) {
-		String tab_key = "tab_" + Int_.To_str(tab_uid++); int tab_idx = tab_regy.Count();
+		String tab_key = "tab_" + Int_.To_str(tab_uid++); int tab_idx = tab_regy.Len();
 		Gfui_tab_itm_data tab_data = new Gfui_tab_itm_data(tab_key, tab_idx);
 		Xog_tab_itm rv = new Xog_tab_itm(this, tab_data, wiki, page);
 		Gfui_tab_itm tab_box = tab_mgr.Tabs_add(tab_data);
@@ -118,7 +118,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	}
 	public void Tabs_javascript_enabled_(boolean v) {
 		this.javascript_enabled = v;
-		int len = tab_regy.Count();
+		int len = tab_regy.Len();
 		for (int i = 0; i < len; i++) {
 			Xog_tab_itm tab = Tabs_get_by_idx_or_warn(i);
 			tab.Html_itm().Js_enabled_(v);
@@ -140,7 +140,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	}
 	public void Tabs_close_others() {this.Tabs_close_to_bgn(); this.Tabs_close_to_end();}
 	public void Tabs_close_to_bgn() {if (Active_tab_is_null()) return; Tabs_close_rng(0							, active_tab.Tab_idx());}
-	public void Tabs_close_to_end() {if (Active_tab_is_null()) return; Tabs_close_rng(active_tab.Tab_idx() + 1	, tab_regy.Count());}
+	public void Tabs_close_to_end() {if (Active_tab_is_null()) return; Tabs_close_rng(active_tab.Tab_idx() + 1	, tab_regy.Len());}
 	public void Tabs_close_rng(int bgn, int end) {
 		for (int i = bgn; i < end; i++) {
 			Xog_tab_itm tab = Tabs_get_at(bgn);
@@ -163,7 +163,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		return tab.Page().Tab_data().Close_mgr().When_close(tab, Xoa_url.Null);
 	}
 	public void Tabs_close_undo() {
-		if (closed_undo_list.Count() == 0) return;
+		if (closed_undo_list.Len() == 0) return;
 		String url = (String)List_adp_.Pop(closed_undo_list);
 		Tabs_new_dflt(true);
 		win.Page__navigate_by_url_bar(url);
@@ -174,7 +174,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		itm.Html_box().Html_dispose();
 		closed_undo_list.Add(itm.Page().Url().To_str());
 		tab_regy.Del(key);
-		if (tab_regy.Count() == 0) {
+		if (tab_regy.Len() == 0) {
 			active_tab = Xog_tab_itm_.Null;
 			Xog_tab_itm_read_mgr.Update_selected_tab_blank(win);
 		}
@@ -183,7 +183,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		Tabs_hide_if_one_chk(false);
 	}
 	private Xog_tab_itm Tabs_get_by_key_or_warn(String key) {
-		Xog_tab_itm rv = (Xog_tab_itm)tab_regy.Get_by(key); if (rv == null) win.App().Usr_dlg().Warn_many("", "", "tab.selected could not find tab; key={0}", key);
+		Xog_tab_itm rv = (Xog_tab_itm)tab_regy.GetByOrNull(key); if (rv == null) win.App().Usr_dlg().Warn_many("", "", "tab.selected could not find tab; key={0}", key);
 		return rv;
 	}
 	private Xog_tab_itm Tabs_get_by_idx_or_warn(int idx) {
@@ -191,7 +191,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		return rv;
 	}
 	private void Tabs_recalc_idx() {
-		int len = tab_regy.Count();
+		int len = tab_regy.Len();
 		for (int i = 0; i < len; i++) {
 			Xog_tab_itm itm = Tabs_get_by_idx_or_warn(i);
 			itm.Tab_idx_(i);
@@ -199,17 +199,17 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	}
 	public void Tabs_select(boolean fwd) {
 		if (this.Active_tab_is_null()) return;
-		int new_idx = TabBox_.Cycle(fwd, active_tab.Tab_idx(), tab_regy.Count());
+		int new_idx = TabBox_.Cycle(fwd, active_tab.Tab_idx(), tab_regy.Len());
 		tab_mgr.Tabs_select_by_idx(new_idx);
 	}
 	public void Tabs_select_by_idx(int v) {
-		if (v < 0 || v >= tab_regy.Count()) return;
+		if (v < 0 || v >= tab_regy.Len()) return;
 		tab_mgr.Tabs_select_by_idx(v);
 	}
 	public void Tabs_move(boolean fwd) {
 		if (this.Active_tab_is_null()) return;
 		int src_idx = active_tab.Tab_idx();
-		int trg_idx = TabBox_.Cycle(fwd, src_idx, tab_regy.Count());
+		int trg_idx = TabBox_.Cycle(fwd, src_idx, tab_regy.Len());
 		tab_mgr.Tabs_switch(src_idx, trg_idx);
 	}
 	private void Tabs_switched(String src_key, String trg_key) {
@@ -245,7 +245,7 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 	}
 	private void Tabs_hide_if_one_chk(boolean force) {
 		if (btns__hide_if_one || force) {// run code only if enabled or forced
-			if (tab_regy.Count() == 1) {
+			if (tab_regy.Len() == 1) {
 				int desired_height = btns__hide_if_one ? 0 : btns__height;
 				if (tab_mgr.Btns_height() != desired_height)
 					tab_mgr.Btns_height_(desired_height);

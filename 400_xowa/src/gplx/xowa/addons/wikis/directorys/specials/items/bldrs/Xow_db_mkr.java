@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.sys.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.core.ios.streams.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.site_stats.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.site_stats.*;
 import gplx.xowa.langs.cases.*;
-import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.addons.wikis.directorys.dbs.*;
+import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.addons.wikis.ctgs.dbs.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*;
 public class Xow_db_mkr {
@@ -41,7 +41,7 @@ public class Xow_db_mkr {
 		);
 
 		// upgrade tbl: page for categories; NOTE: should change page_tbl to do this automatically
-		core_conn.Meta_fld_append(Xowd_page_tbl.TBL_NAME, Dbmeta_fld_itm.new_int(Xowd_page_tbl.FLD__page_cat_db_id).Default_(-1));
+		core_conn.Meta_fld_append(Xowd_page_tbl.TBL_NAME, DbmetaFldItm.NewInt(Xowd_page_tbl.FLD__page_cat_db_id).DefaultValSet(-1));
 
 		// create tbls: cat; may want to do "if (props.Layout_text().Tid_is_all_or_few())"	// create in advance else will fail for v2; import wiki -> wiki loads and tries to load categories; v2 category processes and builds tbl; DATE:2015-03-22
 		core_db.Tbls__add(Bool_.Y

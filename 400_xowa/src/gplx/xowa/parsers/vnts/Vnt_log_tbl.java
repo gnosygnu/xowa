@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.vnts; import gplx.*;
 import gplx.dbs.*;
 public class Vnt_log_tbl implements Rls_able {
-	private final String tbl_name = "log_vnt"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name = "log_vnt"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_uid, fld_page_id, fld_rule_idx
 	, fld_flag_count, fld_lang_count, fld_undi_count, fld_bidi_count
 	, fld_flag_add, fld_flag_del, fld_flag_aout, fld_flag_hide, fld_flag_raw, fld_flag_show, fld_flag_descrip, fld_flag_name, fld_flag_title, fld_flag_err
@@ -25,36 +25,36 @@ public class Vnt_log_tbl implements Rls_able {
 	private Db_stmt stmt_insert;
 	public Vnt_log_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld_uid = flds.Add_int("uid");
-		this.fld_page_id = flds.Add_int("page_id");
-		this.fld_rule_idx = flds.Add_int("rule_idx");
-		this.fld_flag_count = flds.Add_int("flag_count");
-		this.fld_lang_count = flds.Add_int("lang_count");
-		this.fld_undi_count = flds.Add_int("undi_count");
-		this.fld_bidi_count = flds.Add_int("bidi_count");
-		this.fld_flag_add = flds.Add_int("flag_add");
-		this.fld_flag_del = flds.Add_int("flag_del");
-		this.fld_flag_aout = flds.Add_int("flag_aout");
-		this.fld_flag_hide = flds.Add_int("flag_hide");
-		this.fld_flag_raw = flds.Add_int("flag_raw");
-		this.fld_flag_show = flds.Add_int("flag_show");
-		this.fld_flag_descrip = flds.Add_int("flag_descrip");
-		this.fld_flag_name = flds.Add_int("flag_name");
-		this.fld_flag_title = flds.Add_int("flag_title");
-		this.fld_flag_err = flds.Add_int("flag_err");
-		this.fld_vnt_0 = flds.Add_int("vnt_0");
-		this.fld_vnt_1 = flds.Add_int("vnt_1");
-		this.fld_vnt_2 = flds.Add_int("vnt_2");
-		this.fld_vnt_3 = flds.Add_int("vnt_3");
-		this.fld_vnt_4 = flds.Add_int("vnt_4");
-		this.fld_vnt_5 = flds.Add_int("vnt_5");
-		this.fld_vnt_6 = flds.Add_int("vnt_6");
-		this.fld_vnt_7 = flds.Add_int("vnt_7");
-		this.fld_vnt_8 = flds.Add_int("vnt_8");
-		this.fld_vnt_9 = flds.Add_int("vnt_9");
-		this.fld_src_bgn = flds.Add_int("src_bgn");
-		this.fld_src_end = flds.Add_int("src_end");
-		this.fld_src_txt = flds.Add_text("src_txt");
+		this.fld_uid = flds.AddInt("uid");
+		this.fld_page_id = flds.AddInt("page_id");
+		this.fld_rule_idx = flds.AddInt("rule_idx");
+		this.fld_flag_count = flds.AddInt("flag_count");
+		this.fld_lang_count = flds.AddInt("lang_count");
+		this.fld_undi_count = flds.AddInt("undi_count");
+		this.fld_bidi_count = flds.AddInt("bidi_count");
+		this.fld_flag_add = flds.AddInt("flag_add");
+		this.fld_flag_del = flds.AddInt("flag_del");
+		this.fld_flag_aout = flds.AddInt("flag_aout");
+		this.fld_flag_hide = flds.AddInt("flag_hide");
+		this.fld_flag_raw = flds.AddInt("flag_raw");
+		this.fld_flag_show = flds.AddInt("flag_show");
+		this.fld_flag_descrip = flds.AddInt("flag_descrip");
+		this.fld_flag_name = flds.AddInt("flag_name");
+		this.fld_flag_title = flds.AddInt("flag_title");
+		this.fld_flag_err = flds.AddInt("flag_err");
+		this.fld_vnt_0 = flds.AddInt("vnt_0");
+		this.fld_vnt_1 = flds.AddInt("vnt_1");
+		this.fld_vnt_2 = flds.AddInt("vnt_2");
+		this.fld_vnt_3 = flds.AddInt("vnt_3");
+		this.fld_vnt_4 = flds.AddInt("vnt_4");
+		this.fld_vnt_5 = flds.AddInt("vnt_5");
+		this.fld_vnt_6 = flds.AddInt("vnt_6");
+		this.fld_vnt_7 = flds.AddInt("vnt_7");
+		this.fld_vnt_8 = flds.AddInt("vnt_8");
+		this.fld_vnt_9 = flds.AddInt("vnt_9");
+		this.fld_src_bgn = flds.AddInt("src_bgn");
+		this.fld_src_end = flds.AddInt("src_end");
+		this.fld_src_txt = flds.AddText("src_txt");
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;

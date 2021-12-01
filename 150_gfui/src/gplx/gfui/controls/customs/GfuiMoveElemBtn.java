@@ -83,7 +83,7 @@ class GfuiResizeFormBnd implements IptBnd {
 		active = false;
 	}
 	void ExecKeyDown(IptEventData iptData) {
-		SizeAdp deltaSize = (SizeAdp)hash.Get_by(iptData.EventArg());
+		SizeAdp deltaSize = (SizeAdp)hash.GetByOrNull(iptData.EventArg());
 		ResizeForm(iptData.Sender(), deltaSize);
 	}
 	void ResizeForm(GfuiElem elem, SizeAdp deltaSize) {
@@ -100,7 +100,7 @@ class GfuiResizeFormBnd implements IptBnd {
 	boolean active = false; PointAdp lastPos = PointAdp_.Zero; Hash_adp hash = Hash_adp_.New();
 	public static GfuiResizeFormBnd new_() {return new GfuiResizeFormBnd();}
 	GfuiResizeFormBnd() {
-		args.Add_many(IptMouseBtn_.Right, IptMouseMove.AnyDirection);
+		args.AddMany(IptMouseBtn_.Right, IptMouseMove.AnyDirection);
 		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Shift).Add(IptKey_.Up), SizeAdp_.new_(0, -10));
 		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Shift).Add(IptKey_.Down), SizeAdp_.new_(0, 10));
 		IptBndArgsBldr.AddWithData(args, hash, IptKey_.MOD_1ST.Add(IptKey_.Shift).Add(IptKey_.Left), SizeAdp_.new_(-10, 0));

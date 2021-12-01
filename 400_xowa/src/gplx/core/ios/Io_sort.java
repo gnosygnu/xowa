@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import gplx.core.envs.*;
 import gplx.core.lists.*;
 public class Io_sort {
@@ -30,11 +30,11 @@ public class Io_sort {
 			int size_new = size_cur + size_row;
 			if (size_new > memory_max || !reading) {
 				usr_dlg.Prog_none(GRP_KEY, "sort", "sorting chunk");
-				row_list.Sort_by(row_comparer);
+				row_list.SortBy(row_comparer);
 				Io_url trg_url = trg_fil_gen.Nxt_url();
 				usr_dlg.Prog_one(GRP_KEY, "write", "writing chunk: ~{0}", trg_url.Raw());
 				Split_flush(trg_url, row_list, memory_max, bfr, rv);
-				row_list.Resize_bounds(16);	// MEM: resize bounds manually; note that each Flush-set may have widely disparately #of rows (EX: 1 row with a million pages vs. 1 million rows with 1 page)
+				row_list.ResizeBounds(16);	// MEM: resize bounds manually; note that each Flush-set may have widely disparately #of rows (EX: 1 row with a million pages vs. 1 million rows with 1 page)
 				size_new = size_row; System_.Garbage_collect();
 				if (!reading) break;
 			}
@@ -42,7 +42,7 @@ public class Io_sort {
 			size_cur = size_new;
 		}
 		rdr.Rls(); bfr.Rls(); System_.Garbage_collect();
-		return (Io_url[])rv.To_ary(Io_url.class);
+		return (Io_url[])rv.ToAry(Io_url.class);
 	}
 	public void Merge(Gfo_usr_dlg usr_dlg, Io_url[] src_ary, ComparerAble comparer, Io_line_rdr_key_gen key_gen, Io_sort_cmd cmd) {
 		BinaryHeap_Io_line_rdr heap = load_(usr_dlg, src_ary, comparer, key_gen, memory_max); if (heap.Len() == 0) return;//throw Err_.new_wo_type(Array_.To_str(src_ary));
@@ -65,7 +65,7 @@ public class Io_sort {
 		heap.Rls();
 	}
 	private static void Split_flush(Io_url url, List_adp list, int max, Bry_bfr tmp, List_adp url_list) {
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; i++) {
 			Io_sort_split_itm itm = (Io_sort_split_itm)list.Get_at(i);
 			int add_len = itm.Row_end() - itm.Row_bgn();

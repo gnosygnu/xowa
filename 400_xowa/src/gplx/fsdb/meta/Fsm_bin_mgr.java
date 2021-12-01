@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.dbs.*;
+import gplx.core.ios.streams.*; import gplx.dbs.*;
 public class Fsm_bin_mgr {
 	private final Fsdb_db_mgr core_mgr; private final int mnt_id; private final Fsm_bin_tbl tbl;
 	private final Ordered_hash db_hash = Ordered_hash_.New();
@@ -35,7 +35,7 @@ public class Fsm_bin_mgr {
 	public int Dbs__len()							{return db_hash.Len();}
 	public Fsm_bin_fil Dbs__get_nth()				{return nth_db;}
 	public Fsm_bin_fil Dbs__get_at(int i)			{return (Fsm_bin_fil)db_hash.Get_at(i);}
-	public Fsm_bin_fil Dbs__get_by_or_null(int i)	{return (Fsm_bin_fil)db_hash.Get_by(i);}
+	public Fsm_bin_fil Dbs__get_by_or_null(int i)	{return (Fsm_bin_fil)db_hash.GetByOrNull(i);}
 	public Fsm_bin_fil Dbs__make(String file_name) {return Dbs__make(db_hash.Len(), file_name);}
 	public Fsm_bin_fil Dbs__make(int id, String file_name) {
 		Fsdb_db_file db = core_mgr.File__bin_file__new(mnt_id, file_name);
@@ -46,7 +46,7 @@ public class Fsm_bin_mgr {
 		return rv;
 	}
 	public void Insert(int db_id, int bin_id, byte owner_tid, long bin_len, Io_stream_rdr bin_rdr) {
-		Fsm_bin_fil fil = (Fsm_bin_fil)db_hash.Get_by(db_id);
+		Fsm_bin_fil fil = (Fsm_bin_fil)db_hash.GetByOrNull(db_id);
 		fil.Insert(bin_id, owner_tid, bin_len, bin_rdr);
 		fil.Insert(bin_id, owner_tid, bin_len, bin_rdr);
 	}

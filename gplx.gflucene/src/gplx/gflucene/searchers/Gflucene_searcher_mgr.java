@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gflucene.searchers; import gplx.*; import gplx.gflucene.*;
+package gplx.gflucene.searchers; import gplx.*;
 import gplx.gflucene.core.*;
 import gplx.gflucene.analyzers.*;
 import java.io.IOException;
@@ -28,17 +28,13 @@ import org.apache.lucene.queries.CustomScoreQuery;
 import org.apache.lucene.queries.function.FunctionQuery;
 import org.apache.lucene.queries.function.valuesource.LongFieldSource;
 import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
-import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.search.ScoreDoc;
 import org.apache.lucene.search.TopDocs;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
-
-import gplx.gflucene.indexers.*;
 public class Gflucene_searcher_mgr {
 		private Analyzer analyzer;
 	private Directory index;
@@ -78,7 +74,7 @@ public class Gflucene_searcher_mgr {
 				Document d = searcher.doc(docId);
 //				Gflucene_doc_data doc = new Gflucene_doc_data(Integer.parseInt(d.get("page_id")), Integer.parseInt(d.get("page_score")), d.get("title"), "");
 				String docTitle = d.get("title");
-				Gflucene_doc_data doc = (Gflucene_doc_data)list.Get_by(docTitle);
+				Gflucene_doc_data doc = (Gflucene_doc_data)list.GetByOrNull(docTitle);
 				if (doc == null) {
 					int doc_id = Integer.parseInt(d.get("page_id"));
 					doc = new Gflucene_doc_data(doc_id, 0, docTitle, "");

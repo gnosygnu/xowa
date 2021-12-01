@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*;
 import gplx.langs.regxs.*;
 class Scrib_regx_grp_mgr {
 	private final List_adp capt_list = List_adp_.New();
@@ -33,7 +33,7 @@ class Scrib_regx_grp_mgr {
 	public int Open__get_at(int idx) {return Int_.Cast(open_list.Get_at(idx));}
 	public void Open__pop() {List_adp_.Del_at_last(open_list);}
 	public boolean Open__has(int v) {
-		int len = open_list.Count();
+		int len = open_list.Len();
 		for (int i = 0; i < len; i++) {
 			Object o = open_list.Get_at(i);
 			if (Int_.Cast(o) == v) return true;
@@ -41,8 +41,8 @@ class Scrib_regx_grp_mgr {
 		return false;
 	}
 
-	public int Capt__len() {return capt_list.Count();}
-	public Keyval[] Capt__to_ary() {return capt_list.Count() == 0 ? null : (Keyval[])capt_list.To_ary(Keyval.class);}
+	public int Capt__len() {return capt_list.Len();}
+	public Keyval[] Capt__to_ary() {return capt_list.Len() == 0 ? null : (Keyval[])capt_list.ToAry(Keyval.class);}
 	public void Capt__add__real(int grp_idx, boolean is_empty_capture) {
 		capt_list.Add(Keyval_.int_(grp_idx, is_empty_capture));
 		open_list.Add(grp_idx);
@@ -55,7 +55,7 @@ class Scrib_regx_grp_mgr {
 		fake_count += count;
 	}
 	public void Idx__add(Bry_bfr bfr, int regx_idx) {
-		int actl_idx = Int_.Cast(idx_list.Get_by(regx_idx));
+		int actl_idx = Int_.Cast(idx_list.GetByOrNull(regx_idx));
 		bfr.Add_int_variable(actl_idx);
 	}
 	public Regx_match[] Adjust_balanced_many(Regx_match[] matches) {

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*;
+import org.junit.*;
+import gplx.xowa.langs.kwds.*;
 public class Pfunc_switch_tst {		
 	@Before public void init()				{fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Basic_a()			{fxt.Test_parse_tmpl_str_test("{{#switch:a|a=1|b=2|3}}"					, "{{test}}"			, "1");}
@@ -67,7 +68,7 @@ public class Pfunc_switch_tst {
 		fxt.Init_defn_add("pass", "{{#xowa_dbg:Pass}}");
 		fxt.Init_defn_add("dflt", "{{#xowa_dbg:Dflt}}");
 		fxt.Test_parse_tmpl_str_test("{{#switch:{{{1}}}|a={{fail}}|#default={{dflt}}|b={{pass}}}}", "{{test|b}}", "Pass");
-		Tfds.Eq(1, Xop_xowa_dbg.Argx_list.Count());
+		Tfds.Eq(1, Xop_xowa_dbg.Argx_list.Len());
 	}
 	@Test public void Dflt_empty()	{	// PURPOSE: empty default should return "" not "#default"; PAGE:de.v:M�nchen/Sehensw�rdigkeiten; DATE:2014-05-29
 		fxt.Test_parse_tmpl_str_test("{{#switch:z|b=1|#default}}"			, "{{test}}"			, "");

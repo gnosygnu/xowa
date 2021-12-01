@@ -23,7 +23,7 @@ import gplx.dbs.Db_conn_info;
 import gplx.dbs.Db_qry;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
-import gplx.dbs.Dbmeta_fld_itm;
+import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
 import gplx.dbs.conn_props.Db_conn_props_mgr;
@@ -48,7 +48,7 @@ public interface Db_engine {
 	void				Txn_sav();
 	void				Meta_tbl_create(Dbmeta_tbl_itm meta);
 	void				Meta_tbl_delete(String tbl);
-	void				Meta_fld_append(String tbl, Dbmeta_fld_itm fld);
+	void				Meta_fld_append(String tbl, DbmetaFldItm fld);
 	void				Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary);
 	void				Meta_idx_delete(String idx);
 	Dbmeta_tbl_mgr		Meta_mgr();

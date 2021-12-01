@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
+package gplx.xowa.bldrs.filters.dansguardians; import gplx.*;
 class Dg_parser {
 	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance; private final Bry_bfr key_bldr = Bry_bfr_.Reset(32);
 	private final List_adp files = List_adp_.New(), lines = List_adp_.New(), words = List_adp_.New();
@@ -29,7 +29,7 @@ class Dg_parser {
 			Dg_file file = Parse_fil(i, fil_url.GenRelUrl_orEmpty(dir), fil_src);
 			if (file != null) files.Add(file);
 		}
-		return (Dg_file[])files.To_ary_and_clear(Dg_file.class);
+		return (Dg_file[])files.ToAryAndClear(Dg_file.class);
 	}
 	private Dg_file Parse_fil(int file_idx, String rel_path, byte[] src) {
 		int line_idx = 0; int line_bgn = 0; int src_len = src.length;
@@ -43,7 +43,7 @@ class Dg_parser {
 				lines.Add(line);
 			line_bgn = line_end + 1;
 		}
-		return new Dg_file(file_id, rel_path, (Dg_rule[])lines.To_ary_and_clear(Dg_rule.class));
+		return new Dg_file(file_id, rel_path, (Dg_rule[])lines.ToAryAndClear(Dg_rule.class));
 	}
 	public Dg_rule Parse_line(String rel_path, int file_id, int line_idx, byte[] src, int line_bgn, int line_end) {
 		int score = Dg_rule.Score_banned;
@@ -76,7 +76,7 @@ class Dg_parser {
 			}
 		}
 		byte[] key = key_bldr.Add_int_variable(file_id).Add_byte_dot().Add_int_variable(line_idx).To_bry_and_clear();
-		return new Dg_rule(file_id, ++next_id, line_idx, Dg_rule.Tid_rule, key, score, Ary_new_by_ary((byte[][])words.To_ary_and_clear(byte[].class)));
+		return new Dg_rule(file_id, ++next_id, line_idx, Dg_rule.Tid_rule, key, score, Ary_new_by_ary((byte[][])words.ToAryAndClear(byte[].class)));
 	}
 	private static Dg_word[] Ary_new_by_ary(byte[][] ary) {
 		int ary_len = ary.length;

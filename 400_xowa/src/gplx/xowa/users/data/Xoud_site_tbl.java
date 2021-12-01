@@ -13,22 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.data; import gplx.*;
 import gplx.dbs.*;
 public class Xoud_site_tbl implements Rls_able {
 	public static final String Tbl_name = "user_site";
-	private final String tbl_name = Tbl_name; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name = Tbl_name; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_id, fld_site_priority, fld_site_domain, fld_site_name, fld_site_path, fld_site_xtn, fld_site_date;
 	private final Db_conn conn;
 	public Xoud_site_tbl(Db_conn conn) {
 		this.conn = conn;
-		fld_site_id				= flds.Add_int_pkey("site_id");
-		fld_site_priority		= flds.Add_int("site_priority");			// EX: 0=default; 1+ is order if 0 is unavailable
-		fld_site_domain			= flds.Add_str("site_domain", 255);			// EX: en.wikipedia.org; NOTE: no protocol (https:)
-		fld_site_name			= flds.Add_str("site_name", 255);			// EX: English Wikipedia
-		fld_site_path			= flds.Add_str("site_path", 255);			// EX: ~{xowa_root}/wiki/en.wikipedia.org/
-		fld_site_date			= conn.Meta_fld_append_if_missing(tbl_name, flds, Dbmeta_fld_itm.new_str("site_date", 255).Default_("")); // EX: 2016-06-10
-		fld_site_xtn			= flds.Add_text("site_xtn");
+		fld_site_id				= flds.AddIntPkey("site_id");
+		fld_site_priority		= flds.AddInt("site_priority");			// EX: 0=default; 1+ is order if 0 is unavailable
+		fld_site_domain			= flds.AddStr("site_domain", 255);			// EX: en.wikipedia.org; NOTE: no protocol (https:)
+		fld_site_name			= flds.AddStr("site_name", 255);			// EX: English Wikipedia
+		fld_site_path			= flds.AddStr("site_path", 255);			// EX: ~{xowa_root}/wiki/en.wikipedia.org/
+		fld_site_date			= conn.Meta_fld_append_if_missing(tbl_name, flds, DbmetaFldItm.NewStr("site_date", 255).DefaultValSet("")); // EX: 2016-06-10
+		fld_site_xtn			= flds.AddText("site_xtn");
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
@@ -54,7 +54,7 @@ public class Xoud_site_tbl implements Rls_able {
 		try {
 			while (rdr.Move_next())
 				rv.Add(New_site(rdr));
-			return (Xoud_site_row[])rv.To_ary_and_clear(Xoud_site_row.class);
+			return (Xoud_site_row[])rv.ToAryAndClear(Xoud_site_row.class);
 		}
 		finally {rdr.Rls();}
 	}

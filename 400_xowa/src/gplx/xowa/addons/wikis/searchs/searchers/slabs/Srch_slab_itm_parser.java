@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.slabs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.slabs; import gplx.*;
 import gplx.core.brys.*;
 public class Srch_slab_itm_parser {
 	private final List_adp itm_list = List_adp_.New();
@@ -27,6 +27,6 @@ public class Srch_slab_itm_parser {
 			Srch_slab_itm itm = new Srch_slab_itm(wiki, bgn, end);
 			itm_list.Add(itm);
 		}
-		return (Srch_slab_itm[])itm_list.To_ary_and_clear(Srch_slab_itm.class);
+		return (Srch_slab_itm[])itm_list.ToAryAndClear(Srch_slab_itm.class);
 	}
 }

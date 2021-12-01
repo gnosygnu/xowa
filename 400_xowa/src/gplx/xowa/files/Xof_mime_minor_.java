@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.files; import gplx.*;
 import gplx.core.primitives.*;
 public class Xof_mime_minor_ {
 	public static Xof_ext ext_(byte[] minor_mime) {
-		Int_obj_val id_obj = (Int_obj_val)mime_hash.Get_by(minor_mime);
+		Int_obj_val id_obj = (Int_obj_val)mime_hash.GetByOrNull(minor_mime);
 		int id = id_obj == null ? Xof_ext_.Id_unknown : id_obj.Val();
 		return Xof_ext_.new_by_id_(id);
 	}

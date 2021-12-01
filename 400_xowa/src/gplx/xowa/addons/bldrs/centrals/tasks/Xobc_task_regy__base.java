@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.core.gfobjs.*;
 public abstract class Xobc_task_regy__base {
 	private final Ordered_hash hash = Ordered_hash_.New();
@@ -24,7 +25,7 @@ public abstract class Xobc_task_regy__base {
 	public void						Add(Xobc_task_itm t)	{hash.Add(t.Task_id(), t);}
 	public void						Clear()					{hash.Clear();}
 	public Xobc_task_itm			Get_at(int i)			{return (Xobc_task_itm)hash.Get_at(i);}
-	public Xobc_task_itm			Get_by(int i)			{return (Xobc_task_itm)hash.Get_by(i);}
+	public Xobc_task_itm			Get_by(int i)			{return (Xobc_task_itm)hash.GetByOrNull(i);}
 	public void						Del_by(int i)			{hash.Del(i);}
 	public void						Sort()					{hash.Sort();}
 

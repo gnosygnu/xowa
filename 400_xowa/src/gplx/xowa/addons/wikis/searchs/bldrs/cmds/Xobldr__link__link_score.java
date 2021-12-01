@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.bldrs.*;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.addons.bldrs.utils_rankings.bldrs.*; import gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*;
@@ -32,9 +33,9 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		Db_conn plink_conn = Db_conn_bldr.Instance.Get_or_autocreate(false, wiki.Fsys_mgr().Root_dir().GenSubFil(Xob_db_file.Name__page_link));
 		String page_rank_tbl = Xobldr__page__page_score.Pagerank__tbl_name;
 		Gfo_usr_dlg_.Instance.Prog_none("", "", "search.page.score:adding fields to page_rank_temp");
-		plink_conn.Meta_fld_assert(page_rank_tbl, "page_len_score"	, Dbmeta_fld_tid.Itm__int, 0);
-		plink_conn.Meta_fld_assert(page_rank_tbl, "page_rank_score"	, Dbmeta_fld_tid.Itm__double, 0);
-		plink_conn.Meta_fld_assert(page_rank_tbl, "page_score"		, Dbmeta_fld_tid.Itm__int, 0);
+		plink_conn.Meta_fld_assert(page_rank_tbl, "page_len_score"	, DbmetaFldType.ItmInt, 0);
+		plink_conn.Meta_fld_assert(page_rank_tbl, "page_rank_score"	, DbmetaFldType.ItmDouble, 0);
+		plink_conn.Meta_fld_assert(page_rank_tbl, "page_score"		, DbmetaFldType.ItmInt, 0);
 		int link_score_max = Srch_search_addon.Score_max;
 
 		// percentize page_len_score to 0 : 100,000,000; NOTE: 100,000,000 so that no individual score should have 2+ page; i.e.: score_range > page_count
@@ -56,7 +57,7 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 			double page_rank_max = plink_conn.Exec_select_as_double("SELECT Max(page_rank) FROM " + page_rank_tbl, Double_.MinValue); if (page_rank_max == Double_.MinValue) throw Err_.new_("bldr", "failed to get max; tbl=~{0}", page_rank_tbl);
 			double page_rank_rng = page_rank_max - page_rank_min;
 			if (page_rank_rng == 0) page_rank_rng = 1; // if 0, set to 1 to prevent divide by 0 below;
-			String score_multiplier_as_str = Dbmeta_fld_itm.To_double_str_by_int(score_multiplier);
+			String score_multiplier_as_str = DbmetaFldItm.ToDoubleStrByInt(score_multiplier);
 
 			// normalize page_rank to 0 : 100,000,000
 			plink_conn.Exec_sql
@@ -95,8 +96,8 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		// update page table
 		Xowd_page_tbl page_tbl = wiki.Data__core_mgr().Tbl__page();
 		Db_conn page_conn = page_tbl.Conn();
-		if (page_tbl.Fld_page_score() == Dbmeta_fld_itm.Key_null) {
-			page_conn.Meta_fld_append(page_tbl.Tbl_name(), Dbmeta_fld_itm.new_int(Xowd_page_tbl.Fld__page_score__key).Default_(0));
+		if (page_tbl.Fld_page_score() == DbmetaFldItm.KeyNull) {
+			page_conn.Meta_fld_append(page_tbl.Tbl_name(), DbmetaFldItm.NewInt(Xowd_page_tbl.Fld__page_score__key).DefaultValSet(0));
 			page_tbl = wiki.Data__core_mgr().Db__core().Tbl__page__rebind();
 		}
 		new Db_attach_mgr(page_conn, new Db_attach_itm("plink_db", plink_conn))
@@ -110,12 +111,12 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		Srch_word_tbl word_tbl = search_db_mgr.Tbl__word();
 		if (!page_tbl.Conn().Eq(word_tbl.conn)) page_tbl.Conn().Env_vacuum();	// don't vacuum if single-db
 		// Srch_db_mgr.Optimize_unsafe_(word_tbl.conn, Bool_.Y);
-		word_tbl.conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("link_score_mnx", Dbmeta_fld_itm.new_int("word_id"), Dbmeta_fld_itm.new_int("mnx_val")));
+		word_tbl.conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("link_score_mnx", DbmetaFldItm.NewInt("word_id"), DbmetaFldItm.NewInt("mnx_val")));
 		int link_tbls_len = search_db_mgr.Tbl__link__len();
 		for (int i = 0; i < link_tbls_len; ++i) {
 			Srch_link_tbl link_tbl = search_db_mgr.Tbl__link__get_at(i);
 			// update search_link.link_score
-			link_tbl.conn.Meta_fld_assert(link_tbl.Tbl_name(), Srch_link_tbl.Fld_link_score, Dbmeta_fld_tid.Itm__int, 0);
+			link_tbl.conn.Meta_fld_assert(link_tbl.Tbl_name(), Srch_link_tbl.Fld_link_score, DbmetaFldType.ItmInt, 0);
 			new Db_attach_mgr(link_tbl.conn
 				, new Db_attach_itm("page_db", page_conn)
 				).Exec_sql_w_msg

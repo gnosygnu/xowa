@@ -133,7 +133,7 @@ public class Pgbnr_func extends Pf_func_base {
 		Xof_file_itm banner_file_itm = File__make_tkn(ctx, Xop_file_logger_.Tid__pgbnr_main, banner_ttl, Xop_lnki_tkn.Width_null, Xop_lnki_tkn.Height_null);
 
 		Pgbnr_itm itm = new Pgbnr_itm();
-		itm.Init_from_wtxt(banner_ttl, banner_file_itm, tooltip, title, bottomtoc, toc, data_pos_x, data_pos_y, origin_x, icons_list == null ? Pgbnr_icon.Ary_empty : (Pgbnr_icon[])icons_list.To_ary_and_clear(Pgbnr_icon.class));
+		itm.Init_from_wtxt(banner_ttl, banner_file_itm, tooltip, title, bottomtoc, toc, data_pos_x, data_pos_y, origin_x, icons_list == null ? Pgbnr_icon.Ary_empty : (Pgbnr_icon[])icons_list.ToAryAndClear(Pgbnr_icon.class));
 		page.Html_data().Xtn_pgbnr_(itm);
 		page.Html_data().Head_mgr().Itm__pgbnr().Enabled_y_();	// register css / js during parse stage
 		page.Wtxt().Toc().Flag__toc_(true);	// NOTE: must mark toc_manual else will show 2nd TOC in edit mode; DATE:2016-07-10
@@ -213,7 +213,7 @@ public class Pgbnr_func extends Pf_func_base {
 		for (int i = 0; i < sizes_len; ++i) {
 			byte[] url = Get_image_url(wiki, banner_ttl, sizes[i]);
 			if (url != null)
-				hash.Add_if_dupe_use_1st(url, url);
+				hash.AddIfDupeUse1st(url, url);
 		}
 		return (byte[][])hash.To_ary_and_clear(byte[].class);
 	}

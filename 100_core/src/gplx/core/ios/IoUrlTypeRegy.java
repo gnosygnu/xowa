@@ -25,14 +25,14 @@ import gplx.core.strings.String_bldr;
 import gplx.core.strings.String_bldr_;
 public class IoUrlTypeRegy implements Gfo_invk {
 	public String[] FetchAryOr(String key, String... or) {
-		IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.Get_by(key);
+		IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.GetByOrNull(key);
 		return itm == null ? or : itm.AsAry();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_Get)) {
 			String key = m.ReadStr(k);
 			if (ctx.Deny()) return this;
-			IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.Get_by(key);
+			IoUrlTypeGrp itm = (IoUrlTypeGrp)hash.GetByOrNull(key);
 			if (itm == null) {
 				itm = new IoUrlTypeGrp(key);
 				hash.Add(key, itm);
@@ -47,8 +47,8 @@ public class IoUrlTypeRegy implements Gfo_invk {
 }
 class IoUrlTypeGrp implements Gfo_invk {
 	public String[] AsAry() {
-		String[] rv = new String[list.Count()];
-		for (int i = 0; i < list.Count(); i++)
+		String[] rv = new String[list.Len()];
+		for (int i = 0; i < list.Len(); i++)
 			rv[i] = (String)list.Get_at(i);
 		return rv;
 	}
@@ -70,7 +70,7 @@ class IoUrlTypeGrp implements Gfo_invk {
 			if (ctx.Deny()) return this;
 			String_bldr sb = String_bldr_.new_();
 			sb.Add(key).Add("{");
-			for (int i = 0; i < list.Count(); i++)
+			for (int i = 0; i < list.Len(); i++)
 				sb.Add_spr_unless_first((String)list.Get_at(i), " ", i);
 			sb.Add("}");
 			return sb.To_str();

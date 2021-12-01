@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*;
 import gplx.core.bits.*;
 import gplx.xowa.wikis.pages.*;
 public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
@@ -179,7 +179,7 @@ public class Xoh_head_mgr implements gplx.core.brys.Bfr_arg {
 }
 class Xoh_head_wkr {
 	private final List_adp list = List_adp_.New_w_size(Xoh_head_itm__base.Idx__max);
-	public int Len() {return list.Count();}
+	public int Len() {return list.Len();}
 	public void Clear() {list.Clear();}
 	public void Add(Xoh_head_itm__base itm) {list.Add(itm);}
 	public Xoh_head_itm__base Get_at(int i) {return (Xoh_head_itm__base)list.Get_at(i);}

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.procs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.procs; import gplx.*;
+import gplx.xowa.xtns.scribunto.*;
 public class Scrib_proc_rslt {
 	private Keyval[] ary;
 	public Keyval[] Ary() {return ary;}
@@ -38,7 +39,7 @@ public class Scrib_proc_rslt {
 		return true;
 	}
 	public boolean Init_many_list(List_adp list) {
-		int len = list.Count();
+		int len = list.Len();
 		ary = new Keyval[len];
 		for (int i = 0; i < len; i++)
 			ary[i] = Keyval_.int_(i + Scrib_core.Base_1, list.Get_at(i));

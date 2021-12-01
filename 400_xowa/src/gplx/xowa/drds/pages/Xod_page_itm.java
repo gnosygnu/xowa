@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.drds.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
+package gplx.xowa.drds.pages; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.sections.*;
 import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
+import gplx.xowa.wikis.pages.tags.*;
 public class Xod_page_itm {
 	public int Page_id() {return page_id;} private int page_id;
 	public long Rev_id() {return rev_id;} private long rev_id;
@@ -84,7 +84,7 @@ public class Xod_page_itm {
 			.Add_str_a7_null(head_ttl).Add_byte_pipe()
 			.Add_str_a7_null(first_allowed_editor_role).Add_byte_nl()
 			;
-		int len = section_list.Count();
+		int len = section_list.Len();
 		for (int i = 0; i < len; ++i) {
 			Xoh_section_itm section = (Xoh_section_itm)section_list.Get_at(i);
 			section.To_bfr(bfr);

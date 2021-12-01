@@ -13,14 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cites; import gplx.*;
 public class Ref_itm_lst {
 	private final Hash_adp hash = Hash_adp_bry.cs();
 	private final List_adp list = List_adp_.New();
 	private int idx_major_last = 0;
 	// private byte[] grp_name; 
 	public Ref_itm_lst(byte[] grp_name) {} //this.grp_name = grp_name;
-	public int Itms_len() {return list.Count();}
+	public int Itms_len() {return list.Len();}
 	public Ref_nde Itms_get_at(int i) {return (Ref_nde)list.Get_at(i);}
 	public void Itms_add(byte[] itm_name, byte[] follow, Ref_nde itm) {
 		if (itm_name == Bry_.Empty) {
@@ -29,7 +29,7 @@ public class Ref_itm_lst {
 				list.Add(itm);
 			}
 			else {
-				Object o = hash.Get_by(follow);
+				Object o = hash.GetByOrNull(follow);
 				if (o == null) {// fail
 				}
 				else {
@@ -41,7 +41,7 @@ public class Ref_itm_lst {
 			}
 		}
 		else {
-			Object o = hash.Get_by(itm_name);
+			Object o = hash.GetByOrNull(itm_name);
 			if (o == null) {
 				hash.Add(itm_name, itm);
 				itm.Idx_major_(idx_major_last++);

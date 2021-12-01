@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
+package gplx.xowa.files.caches; import gplx.*;
+import gplx.dbs.*;
 class Xofc_dir_tbl implements Rls_able {
-	private String tbl_name = "file_cache_dir"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "file_cache_dir"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String fld_id, fld_name;
 	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_stmt;
 	public void Conn_(Db_conn new_conn, boolean created, boolean schema_is_1) {
@@ -26,8 +26,8 @@ class Xofc_dir_tbl implements Rls_able {
 			tbl_name		= "cache_dir";
 			fld_prefix		= "dir_";
 		}
-		fld_id				= flds.Add_int_pkey(fld_prefix + "id");
-		fld_name			= flds.Add_str(fld_prefix + "name", 255);
+		fld_id				= flds.AddIntPkey(fld_prefix + "id");
+		fld_name			= flds.AddStr(fld_prefix + "name", 255);
 		if (created) {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "name", fld_name)
@@ -71,7 +71,7 @@ class Xofc_dir_tbl implements Rls_able {
 	}		
 	public void Select_all(List_adp list) {
 		list.Clear();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next())
 				list.Add(new_itm(rdr));

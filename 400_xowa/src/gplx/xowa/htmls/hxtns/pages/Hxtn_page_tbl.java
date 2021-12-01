@@ -23,21 +23,21 @@ import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_rdr_;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.Db_stmt_;
-import gplx.dbs.Dbmeta_fld_list;
+import gplx.dbs.DbmetaFldList;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
 
 public class Hxtn_page_tbl implements Rls_able {
-	private static final String tbl_name = "hxtn_page"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final String tbl_name = "hxtn_page"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_page_id, fld_wkr_id, fld_data_id;
 	private final Db_conn conn; private Db_stmt stmt_insert;
 	public Hxtn_page_tbl(Db_conn conn) {
 		this.conn = conn;
 		conn.Rls_reg(this);
-		flds.Add_int_pkey_autonum("id");
-		this.fld_page_id = flds.Add_int("page_id");
-		this.fld_wkr_id = flds.Add_int("wkr_id");
-		this.fld_data_id = flds.Add_int("data_id");
+		flds.AddIntPkeyAutonum("id");
+		this.fld_page_id = flds.AddInt("page_id");
+		this.fld_wkr_id = flds.AddInt("wkr_id");
+		this.fld_data_id = flds.AddInt("data_id");
 	}
 	public String Tbl_name() {return tbl_name;}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}

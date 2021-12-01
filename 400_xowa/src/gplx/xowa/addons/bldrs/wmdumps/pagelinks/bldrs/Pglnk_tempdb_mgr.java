@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.pagelinks.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.wmdumps.*; import gplx.xowa.addons.bldrs.wmdumps.pagelinks.*;
-import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.cfgs.*;
+package gplx.xowa.addons.bldrs.wmdumps.pagelinks.bldrs; import gplx.*; import gplx.xowa.*;
+import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.bldrs.wmdumps.pagelinks.dbs.*;
 class Pglnk_tempdb_mgr {
@@ -24,7 +24,7 @@ class Pglnk_tempdb_mgr {
 	private final int row_max;
 	private int rows;
 
-	private final Dbmeta_fld_list dump_flds;
+	private final DbmetaFldList dump_flds;
 	private final String dump_tbl_name = "pagelink_dump", dump_src_id, dump_trg_ns, dump_trg_ttl;
 	private Db_stmt dump_insert;
 
@@ -40,17 +40,17 @@ class Pglnk_tempdb_mgr {
 		conn = Xob_db_file.New__page_link(wiki).Conn();
 
 		// create dump_tbl
-		dump_flds = new Dbmeta_fld_list();
-		dump_flds.Add_int_pkey_autonum("uid");
-		dump_src_id  = dump_flds.Add_int("src_id");
-		dump_trg_ns  = dump_flds.Add_int("trg_ns");
-		dump_trg_ttl = dump_flds.Add_str("trg_ttl", 255);
+		dump_flds = new DbmetaFldList();
+		dump_flds.AddIntPkeyAutonum("uid");
+		dump_src_id  = dump_flds.AddInt("src_id");
+		dump_trg_ns  = dump_flds.AddInt("trg_ns");
+		dump_trg_ttl = dump_flds.AddStr("trg_ttl", 255);
 
 		// create temp_tbl
-		Dbmeta_fld_list temp_flds = new Dbmeta_fld_list();
-		temp_flds.Add_int("src_id");
-		temp_flds.Add_int("trg_id");
-		temp_flds.Add_int("trg_count");
+		DbmetaFldList temp_flds = new DbmetaFldList();
+		temp_flds.AddInt("src_id");
+		temp_flds.AddInt("trg_id");
+		temp_flds.AddInt("trg_count");
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(temp_tbl_name, temp_flds));
 	}
 	private void Dump__insert_bgn() {

@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.xowa_cmds.wiki_setups; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.xowa_cmds.*;
+package gplx.xowa.xtns.xowa_cmds.wiki_setups; import gplx.*; import gplx.xowa.*;
 import gplx.langs.mustaches.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
-import gplx.xowa.addons.bldrs.exports.packs.files.*; import gplx.xowa.addons.bldrs.centrals.tasks.*;
+import gplx.xowa.addons.bldrs.centrals.tasks.*;
 import gplx.xowa.parsers.*;
 class Xop_wiki_setup_mgr {
 	private final Mustache_tkn_parser parser = new Mustache_tkn_parser();
@@ -55,8 +55,8 @@ class Xop_wiki_setup_mgr {
 			Xows_file_itm[] files = Make_file_ary(url_list_bfr, wiki_domain, task_row.Id());
 			list.Add(new Xows_task_itm(task_row.Seqn(), wiki_domain, task_row.Name(), Bry_.new_u8(task_key_type), Bry_.new_u8(task_key.Wiki_date_ui()), files));
 		}
-		list.Sort_by(new Xows_task_itm_sorter());			
-		return (Xows_task_itm[])list.To_ary_and_clear(Xows_task_itm.class);
+		list.SortBy(new Xows_task_itm_sorter());
+		return (Xows_task_itm[])list.ToAryAndClear(Xows_task_itm.class);
 	}
 	private Xows_file_itm[] Make_file_ary(Bry_bfr url_list_bfr, byte[] wiki_domain, int task_id) {
 		Xobc_import_step_itm[] rows = data_db.Tbl__import_step().Select_by_task_id(task_id);

@@ -13,16 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.flds.*; import gplx.core.envs.*;
-import gplx.xowa.addons.wikis.ctgs.bldrs.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.core.encoders.*;
+package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*;
+import gplx.core.primitives.*; import gplx.core.brys.*;
+import gplx.core.envs.*;
+import gplx.core.encoders.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
-import gplx.xowa.wikis.pages.*;
 import gplx.xowa.addons.wikis.searchs.specials.*;
 import gplx.xowa.guis.views.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
 public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	private final Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); private final Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm();
 	private final Xowd_page_itm tmp_page = new Xowd_page_itm();
@@ -365,7 +364,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 			xdat_file = null;
 			--fil_idx;
 		}
-		if (prv_itm == null && rslt_list.Count() > 0) {
+		if (prv_itm == null && rslt_list.Len() > 0) {
 			prv_itm = (Xowd_page_itm)rslt_list.Get_at(0);
 		}
 		if (rslt_prv != null)

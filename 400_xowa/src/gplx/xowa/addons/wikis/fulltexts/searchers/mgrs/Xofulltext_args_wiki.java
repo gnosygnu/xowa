@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs; import gplx.*;
 public class Xofulltext_args_wiki {
 	public byte[] wiki;
 	public byte[] ns_ids;
@@ -34,7 +34,7 @@ public class Xofulltext_args_wiki {
 			byte[][] ns_ary = Bry_split_.Split(ns_ids, Byte_ascii.Comma, true);
 			for (byte[] ns_id : ns_ary) {
 				int ns_int = Bry_.To_int(ns_id);
-				ns_hash.Add_if_dupe_use_1st(ns_int, ns_int);
+				ns_hash.AddIfDupeUse1st(ns_int, ns_int);
 			}
 		}
 		else if (String_.Eq(key, "offsets"))          this.bgn = Bry_.To_int(val);

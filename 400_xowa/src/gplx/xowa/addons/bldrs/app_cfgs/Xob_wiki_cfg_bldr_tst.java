@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.app_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.app_cfgs; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.strings.*;
 public class Xob_wiki_cfg_bldr_tst {
 	Xob_wiki_cfg_bldr_fxt fxt = new Xob_wiki_cfg_bldr_fxt();
@@ -165,7 +165,7 @@ class Xob_wiki_cfg_bldr_fxt {
 	}
 	public void Test() {
 		wiki_cfg_bldr.Exec();
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
 			Keyval kv = (Keyval)hash.Get_at(i);
 			String wiki = kv.Key();

@@ -13,20 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.addons.wikis.ctgs.*; 
 public class Xowd_cat_link_tbl implements Db_tbl {		
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_from, fld_to_id, fld_sortkey, fld_timestamp, fld_type_id;
 	private Db_stmt stmt_insert, stmt_select_in;
 	public Xowd_cat_link_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		this.tbl_name = schema_is_1 ? "categorylinks" : "cat_link";
-		fld_from			= flds.Add_int	("cl_from");            // page_id
-		fld_to_id			= flds.Add_int	("cl_to_id");           // cat_id
-		fld_type_id			= flds.Add_byte	("cl_type_id");
-		fld_sortkey			= flds.Add_str	("cl_sortkey", 230);
-		fld_timestamp		= flds.Add_str	("cl_timestamp", 14);
+		fld_from			= flds.AddInt("cl_from");            // page_id
+		fld_to_id			= flds.AddInt("cl_to_id");           // cat_id
+		fld_type_id			= flds.AddByte("cl_type_id");
+		fld_sortkey			= flds.AddStr("cl_sortkey", 230);
+		fld_timestamp		= flds.AddStr("cl_timestamp", 14);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
@@ -49,7 +49,7 @@ public class Xowd_cat_link_tbl implements Db_tbl {
 			.Val_int(fld_timestamp		, timestamp)
 			.Exec_insert();
 	}
-	public void Delete_all() {conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
+	public void Delete_all() {conn.Stmt_delete(tbl_name, DbmetaFldItm.StrAryEmpty).Exec_delete();}
 	public int Select_by_type(List_adp list, int cat_page_id, byte arg_tid, byte[] arg_sortkey, boolean arg_is_from, int limit) {
 		String arg_sortkey_str = arg_sortkey == null ? "" : String_.new_u8(arg_sortkey);
 		gplx.core.criterias.Criteria comp_crt = !arg_is_from 
@@ -70,7 +70,7 @@ public class Xowd_cat_link_tbl implements Db_tbl {
 				++count;
 			}
 		}	finally {rdr.Rls();}
-		list.Sort_by(Xowd_page_itm_sorter.Ctg_tid_sortkey_asc);
+		list.SortBy(Xowd_page_itm_sorter.Ctg_tid_sortkey_asc);
 		return count;
 	}
 	public void Select_in(List_adp rv, int cat_id) {

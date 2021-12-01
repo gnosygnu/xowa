@@ -17,7 +17,7 @@ package gplx.gfml; import gplx.*;
 import gplx.core.texts.*; /*CharStream*/
 public class GfmlTrie {
 	public String[] Symbols() {
-		String[] rv = new String[symbols.Count()];
+		String[] rv = new String[symbols.Len()];
 		for (int i = 0; i < rv.length; i++)
 			rv[i] = String_.cast(symbols.Get_at(i));
 		return rv;
@@ -77,7 +77,7 @@ public class GfmlTrie {
 				curLink = foundAsLink;
 			}
 		}
-		symbols.Add_if_dupe_use_nth(symbol, symbol);
+		symbols.AddIfDupeUseNth(symbol, symbol);
 	}
 	public void Del(String symbol) {
 		char[] ary = String_.XtoCharAry(symbol); int lastIndex = ary.length - 1;

@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.consoles.*; import gplx.core.intls.*; import gplx.langs.phps.*; import gplx.core.log_msgs.*;
+package gplx.xowa.langs.bldrs; import gplx.*;
+import gplx.xowa.langs.*;
+import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.consoles.*;
+import gplx.langs.phps.*; import gplx.core.log_msgs.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.apps.fsys.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.parsers.*; import gplx.xowa.langs.specials.*;
+import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.parsers.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.wikis.nss.*;
 public class Xol_mw_lang_parser {
 	private Php_parser parser = new Php_parser(); private Php_evaluator evaluator;
@@ -55,7 +57,7 @@ public class Xol_mw_lang_parser {
 		}
 	}
 	private void Save_langs_by_manual_text(Xoa_gfs_bldr bldr, Ordered_hash manual_text_hash, String lang_key) {
-		byte[][] itm = (byte[][])manual_text_hash.Get_by(Bry_.new_u8(lang_key));
+		byte[][] itm = (byte[][])manual_text_hash.GetByOrNull(Bry_.new_u8(lang_key));
 		if (itm != null) bldr.Bfr().Add(itm[1]);
 	}
 	public void Parse_mediawiki(Xoa_lang_mgr lang_mgr, Io_url mediawiki_root, Xol_lang_transform lang_transform) {
@@ -112,7 +114,7 @@ public class Xol_mw_lang_parser {
 	public void Parse_core(String text, Xol_lang_itm lang, Bry_bfr bfr, Xol_lang_transform lang_transform) {
 		evaluator.Clear();
 		parser.Parse_tkns(text, evaluator);
-		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
+		Php_line[] lines = (Php_line[])evaluator.List().ToAry(Php_line.class);
 		int lines_len = lines.length;
 		List_adp bry_list = List_adp_.New();
 		for (int i = 0; i < lines_len; i++) {
@@ -171,7 +173,7 @@ public class Xol_mw_lang_parser {
 		evaluator.Clear();
 		parser.Parse_tkns(text, evaluator);
 		List_adp bry_list = List_adp_.New();
-		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
+		Php_line[] lines = (Php_line[])evaluator.List().ToAry(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];
@@ -214,7 +216,7 @@ public class Xol_mw_lang_parser {
 		}		
 	}
 	public Xow_ns[] Parse_namespace_strings(List_adp list, boolean ns_names) {
-		byte[][] brys = (byte[][])list.To_ary(byte[].class);
+		byte[][] brys = (byte[][])list.ToAry(byte[].class);
 		int brys_len = brys.length;
 		Xow_ns[] rv = new Xow_ns[brys_len / 2];
 		int key_dif = ns_names ? 0 : 1;
@@ -230,7 +232,7 @@ public class Xol_mw_lang_parser {
 		return rv;
 	}
 	private void Parse_messages(List_adp rv, Xol_lang_itm lang, Bry_bfr bfr) {
-		byte[][] brys = (byte[][])rv.To_ary(byte[].class);
+		byte[][] brys = (byte[][])rv.ToAry(byte[].class);
 		int brys_len = brys.length;
 		Xol_msg_mgr mgr = lang.Msg_mgr();
 		List_adp quote_itm_list = List_adp_.New(); Byte_obj_ref quote_parse_result = Byte_obj_ref.zero_(); 

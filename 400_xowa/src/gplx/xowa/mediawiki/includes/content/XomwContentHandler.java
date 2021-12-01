@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.content; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.content; import gplx.*;
+import gplx.xowa.mediawiki.includes.*;
 /**
 * A content handler knows how do deal with a specific type of content on a wiki
 * page. Content is stored in the database in a serialized form (using a
@@ -374,7 +375,7 @@ public abstract class XomwContentHandler {
 		this.mSupportedFormats = formats;
 
 		for (String format : formats) {
-			mSupportedFormatsHash.Add_as_key_and_val(format);
+			mSupportedFormatsHash.AddAsKeyAndVal(format);
 		}
 	}
 

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.packs.*;
+package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.ios.*;
 import gplx.fsdb.meta.*;
 import gplx.xowa.wikis.data.*;
@@ -116,7 +116,7 @@ class Pack_hash_bldr {
 
 			// size exceeded; make new pack
 			if (size_new >= size_max) {
-				rv.Add(Xobc_import_type.Tid__wiki__lucene, zip_name_bldr.Bld_by_suffix("xtn.fulltext_search", pack_num), (Io_url[])url_list.To_ary_and_clear(Io_url.class));
+				rv.Add(Xobc_import_type.Tid__wiki__lucene, zip_name_bldr.Bld_by_suffix("xtn.fulltext_search", pack_num), (Io_url[])url_list.ToAryAndClear(Io_url.class));
 				pack_num++;
 				size_cur = 0;
 			}

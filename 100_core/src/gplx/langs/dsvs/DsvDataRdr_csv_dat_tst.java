@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
+package gplx.langs.dsvs; import gplx.*;
 import org.junit.*; import gplx.core.strings.*; import gplx.core.gfo_ndes.*;
 public class DsvDataRdr_csv_dat_tst {
 	@Before public void setup() {
@@ -171,7 +171,7 @@ class DsvDataRdr_fxt {
 			GfoNde tbl = root.Subs().FetchAt_asGfoNde(i);
 			actlList.Add(tbl.Name());
 		}
-		Tfds.Eq_ary(expdNames, actlList.To_str_ary());
+		Tfds.Eq_ary(expdNames, actlList.ToStrAry());
 		return this;
 	}
 	public DsvDataRdr_fxt tst_DatNull() {

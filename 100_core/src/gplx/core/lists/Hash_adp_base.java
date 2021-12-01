@@ -13,24 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*; import gplx.core.*;
+package gplx.core.lists; import gplx.Err_;
+import gplx.Hash_adp;
 public abstract class Hash_adp_base implements Hash_adp {
 	public boolean Has(Object key) {return Has_base(key);}
-	public Object Get_by(Object key) {return Fetch_base(key);}
-	public Object Get_by_or_fail(Object key) {return Get_by_or_fail_base(key);}
+	public Object GetByOrNull(Object key) {return Fetch_base(key);}
+	public Object GetByOrFail(Object key) {return Get_by_or_fail_base(key);}
 	public void Add(Object key, Object val) {Add_base(key, val);}
-	public Hash_adp Add_and_more(Object key, Object val) {Add_base(key, val); return this;}
-	public Hash_adp Add_many_as_key_and_val(Object... ary) {
+	public Hash_adp AddAndMore(Object key, Object val) {Add_base(key, val); return this;}
+	public Hash_adp AddManyAsKeyAndVal(Object... ary) {
 		for (Object itm : ary)
 			Add_base(itm, itm);
 		return this;
 	}
-	public void Add_as_key_and_val(Object val) {Add_base(val, val);}
-	public void Add_if_dupe_use_nth(Object key, Object val) {
+	public void AddAsKeyAndVal(Object val) {Add_base(val, val);}
+	public void AddIfDupeUseNth(Object key, Object val) {
 		Object existing = Fetch_base(key); if (existing != null) Del(key);	// overwrite if exists
 		Add(key, val);
 	}
-	public boolean Add_if_dupe_use_1st(Object key, Object val) {
+	public boolean AddIfDupeUse1st(Object key, Object val) {
 		if (Has(key)) return false;
 		Add(key, val);
 		return true;
@@ -45,7 +46,6 @@ public abstract class Hash_adp_base implements Hash_adp {
 	// private final java.util.HashMap<Object, Object> hash = new java.util.HashMap<Object, Object>();
 	private final java.util.Hashtable hash = new java.util.Hashtable();
 	public int Len() {return hash.size();}
-	public int Count() {return hash.size();}
 	public void Clear() {hash.clear();}
 	protected void Add_base(Object key, Object val) {hash.put(key, val);}
 	protected void Del_base(Object key) {hash.remove(key);}

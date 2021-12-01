@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gflucene.indexers; import gplx.*; import gplx.gflucene.*;
+package gplx.gflucene.indexers; import gplx.*;
 public class Gflucene_idx_opt {
 	public Gflucene_idx_opt(int uid, String key, String name) {
 		this.uid = uid;
@@ -44,6 +44,6 @@ public class Gflucene_idx_opt {
 		return rv;
 	}
 	public static Gflucene_idx_opt Parse(String key) {
-		return (Gflucene_idx_opt)parse_hash.Get_by_or_fail(key);
+		return (Gflucene_idx_opt)parse_hash.GetByOrFail(key);
 	}
 }

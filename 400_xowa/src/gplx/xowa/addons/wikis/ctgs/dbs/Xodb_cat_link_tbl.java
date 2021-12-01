@@ -13,23 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
+package gplx.xowa.addons.wikis.ctgs.dbs; import gplx.*;
 import gplx.dbs.*;
-import gplx.xowa.wikis.data.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
 public class Xodb_cat_link_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__from, fld__to_id, fld__type_id, fld__timestamp_unix, fld__sortkey, fld__sortkey_prefix;
 	private Db_stmt stmt_insert;
 	public Xodb_cat_link_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = TBL_NAME;
-		this.fld__from				= flds.Add_int	("cl_from");                    // page_id
-		this.fld__to_id				= flds.Add_int	("cl_to_id");                   // cat_id 
-		this.fld__type_id			= flds.Add_byte	("cl_type_id");                 // page,file,subc
-		this.fld__timestamp_unix	= flds.Add_long	("cl_timestamp_unix");
-		this.fld__sortkey			= flds.Add_bry	("cl_sortkey");                 // uca key
-		this.fld__sortkey_prefix	= flds.Add_str	(FLD__cl_sortkey_prefix, 255);  // page_title; needed for sorting under letter on catpage
+		this.fld__from				= flds.AddInt("cl_from");                    // page_id
+		this.fld__to_id				= flds.AddInt("cl_to_id");                   // cat_id
+		this.fld__type_id			= flds.AddByte("cl_type_id");                 // page,file,subc
+		this.fld__timestamp_unix	= flds.AddLong("cl_timestamp_unix");
+		this.fld__sortkey			= flds.AddBry("cl_sortkey");                 // uca key
+		this.fld__sortkey_prefix	= flds.AddStr(FLD__cl_sortkey_prefix, 255);  // page_title; needed for sorting under letter on catpage
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
@@ -74,7 +72,7 @@ public class Xodb_cat_link_tbl implements Db_tbl {
 		} finally {
 			rdr.Rls();
 		}
-		return (Xodb_cat_link_row[])list.To_ary_and_clear(Xodb_cat_link_row.class);
+		return (Xodb_cat_link_row[])list.ToAryAndClear(Xodb_cat_link_row.class);
 	}
 	public void Delete_pages(int page_id) {
 		Gfo_usr_dlg_.Instance.Log_many("", "", "db.cat_link: delete pages started: db=~{0} page_id=~{1}", conn.Conn_info().Raw(), page_id);

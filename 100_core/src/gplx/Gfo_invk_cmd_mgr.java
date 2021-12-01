@@ -34,7 +34,7 @@ public class Gfo_invk_cmd_mgr {
 		return this;
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m, Object host) {
-		for (int i = 0; i < list.Count(); i++) {
+		for (int i = 0; i < list.Len(); i++) {
 			GfoInvkCmdItm itm = (GfoInvkCmdItm)list.Get_at(i);
 			if (itm.Type_isXtn()) {
 				Object invkVal = itm.Invk().Invk(ctx, ikey, k, m);

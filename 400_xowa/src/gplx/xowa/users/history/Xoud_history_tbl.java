@@ -13,19 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.metas.*; import gplx.dbs.metas.updates.*;
+package gplx.xowa.users.history; import gplx.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xoud_history_tbl implements Rls_able {
-	private final String tbl_name = "user_history"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name = "user_history"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_wiki, fld_url, fld_time, fld_count;
 	private final Db_conn conn; private Db_stmt stmt_select_by_page, stmt_select_by_top, stmt_insert, stmt_update, stmt_delete;
 	public Xoud_history_tbl(Db_conn conn) {
 		this.conn = conn;
-		fld_id							= flds.Add_int_pkey_autonum("hist_id");
-		fld_wiki						= flds.Add_str("hist_wiki", 255);
-		fld_url							= flds.Add_str("hist_url", 255);
-		fld_time						= flds.Add_str("hist_time", 20);
-		fld_count						= flds.Add_int("hist_count");
+		fld_id							= flds.AddIntPkeyAutonum("hist_id");
+		fld_wiki						= flds.AddStr("hist_wiki", 255);
+		fld_url							= flds.AddStr("hist_url", 255);
+		fld_time						= flds.AddStr("hist_time", 20);
+		fld_count						= flds.AddInt("hist_count");
 		stmt_insert = stmt_update = stmt_delete = stmt_select_by_page = stmt_select_by_top = null;
 		conn.Rls_reg(this);
 	}
@@ -69,7 +69,7 @@ public class Xoud_history_tbl implements Rls_able {
 	}
 	public void Select_by_top(List_adp rv, int count) {
 		if (stmt_select_by_top == null) {
-			Db_qry__select_in_tbl qry = new Db_qry__select_in_tbl(tbl_name, flds.To_str_ary(), null, null, null, fld_time + " DESC", " LIMIT " + Int_.To_str(count));
+			Db_qry__select_in_tbl qry = new Db_qry__select_in_tbl(tbl_name, flds.ToStrAry(), null, null, null, fld_time + " DESC", " LIMIT " + Int_.To_str(count));
 			stmt_select_by_top = conn.Stmt_new(qry);
 		}
 		Db_rdr rdr = stmt_select_by_top.Clear().Exec_select__rls_manual();

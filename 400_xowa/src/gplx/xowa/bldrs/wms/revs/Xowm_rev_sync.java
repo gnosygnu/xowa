@@ -13,8 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.revs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.revs; import gplx.*; import gplx.xowa.*;
 class Xowm_rev_sync {
 	private final Ordered_hash cur_hash = Ordered_hash_.New_bry(), new_hash = Ordered_hash_.New_bry();
 	private final List_adp del_list = List_adp_.New();
@@ -31,7 +30,7 @@ class Xowm_rev_sync {
 		synchronized (new_hash) {
 			Xowm_rev_sync_utl.Build_itms(cur_hash, ttls_ary);
 			Xowm_rev_sync_utl.Build_itms(new_hash, ttls_ary);
-			int len = new_hash.Count();
+			int len = new_hash.Len();
 			for (int i = 0; i < len; i += batch_size)
 				Exec_batch(domain_str, i, len);
 		}
@@ -72,11 +71,11 @@ class Xowm_rev_sync_utl {
 		for (int i = bgn; i < end; ++i) {
 			Wmapi_itm__pge new_itm = (Wmapi_itm__pge)new_hash.Get_at(i);
 			byte[] new_key = new_itm.Page_ttl();
-			Wmapi_itm__pge cur_itm = (Wmapi_itm__pge)cur_hash.Get_by(new_key); if (cur_itm == null) continue;	// itm not found; ignore
+			Wmapi_itm__pge cur_itm = (Wmapi_itm__pge)cur_hash.GetByOrNull(new_key); if (cur_itm == null) continue;	// itm not found; ignore
 			if (new_itm.Eq_meta(cur_itm, 0))	// itm is same; add to deleted list
 				del_list.Add(new_itm);
 		}
-		int len = del_list.Count();
+		int len = del_list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wmapi_itm__pge itm = (Wmapi_itm__pge)del_list.Get_at(i);
 			new_hash.Del(itm.Page_ttl());

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfo_ndes; import gplx.*; import gplx.core.*;
+package gplx.core.gfo_ndes; import gplx.*;
 import gplx.core.strings.*; import gplx.core.type_xtns.*;
 public class GfoFldList_ {
 	public static final GfoFldList Null = new GfoFldList_null();
@@ -26,23 +26,23 @@ public class GfoFldList_ {
 	}
 }
 class GfoFldList_base implements GfoFldList {
-	public int Count() {return hash.Count();}
+	public int Count() {return hash.Len();}
 	public boolean Has(String key) {return hash.Has(key);}
 	public int Idx_of(String key) {			
-		Object rv = idxs.Get_by(key);
+		Object rv = idxs.GetByOrNull(key);
 		return rv == null ? List_adp_.Not_found : Int_.Cast(rv);
 	}
 	public GfoFld Get_at(int i) {return (GfoFld)hash.Get_at(i);}
-	public GfoFld FetchOrNull(String key) {return (GfoFld)hash.Get_by(key);}
+	public GfoFld FetchOrNull(String key) {return (GfoFld)hash.GetByOrNull(key);}
 	public GfoFldList Add(String key, ClassXtn c) {
 		GfoFld fld = GfoFld.new_(key, c);
 		hash.Add(key, fld);
-		idxs.Add(key, idxs.Count());
+		idxs.Add(key, idxs.Len());
 		return this;
 	}
 	public String To_str() {
 		String_bldr sb = String_bldr_.new_();
-		for (int i = 0; i < hash.Count(); i++) {
+		for (int i = 0; i < hash.Len(); i++) {
 			GfoFld fld = this.Get_at(i);
 			sb.Add(fld.Key()).Add("|");
 		}

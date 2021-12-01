@@ -84,12 +84,12 @@ public class IptArg_ {
 class IptMacro {
 	public void Reg(String prefix, String alias, IptArg arg) {
 		if (regy == null) Init();
-		Ordered_hash list = (Ordered_hash)regy.Get_by(prefix);
+		Ordered_hash list = (Ordered_hash)regy.GetByOrNull(prefix);
 		if (list == null) {
 			list = Ordered_hash_.New();
 			regy.Add(prefix, list);
 		}
-		list.Add_if_dupe_use_nth(alias, arg);
+		list.AddIfDupeUseNth(alias, arg);
 	}
 	void Init() {
 		regy = Ordered_hash_.New();
@@ -107,9 +107,9 @@ class IptMacro {
 		String[] plusAry = String_.Split(raw, "+");
 		String[] dotAry	= String_.Split(plusAry[0], ".");
 		String bgn = dotAry[0], end = dotAry[1];
-		Ordered_hash list = (Ordered_hash)regy.Get_by(bgn);
+		Ordered_hash list = (Ordered_hash)regy.GetByOrNull(bgn);
 		if (list == null) throw parse_err(raw, "list not found").Args_add("list", bgn);
-		IptKey rv = (IptKey)list.Get_by(end);
+		IptKey rv = (IptKey)list.GetByOrNull(end);
 		if (rv == null) throw parse_err(raw, "arg not found").Args_add("arg", end);
 		for (int i = 1; i < plusAry.length; i++) {
 			rv = rv.Add((IptKey)IptKey_.parse(plusAry[i]));

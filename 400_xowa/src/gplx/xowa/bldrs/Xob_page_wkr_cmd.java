@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.core.consoles.*; import gplx.core.ios.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.xmls.*; 
 public class Xob_page_wkr_cmd implements Xob_cmd {
 	private final Xob_bldr bldr; private final Xowe_wiki wiki;
@@ -74,7 +74,7 @@ public class Xob_page_wkr_cmd implements Xob_cmd {
 	public void Cmd_end() {}
 	public void Cmd_term() {}
 	public void Wkr_add(Xob_page_wkr wkr) {wkrs.Add(wkr.Page_wkr__key(), wkr);} private Ordered_hash wkrs = Ordered_hash_.New();
-	public Xob_page_wkr Wkr_get(String key) {return (Xob_page_wkr)wkrs.Get_by(key);}
+	public Xob_page_wkr Wkr_get(String key) {return (Xob_page_wkr)wkrs.GetByOrNull(key);}
 	public Xobd_parser Page_parser_assert() {
 		if (page_parser == null) {
 			page_parser = new Xobd_parser(bldr);

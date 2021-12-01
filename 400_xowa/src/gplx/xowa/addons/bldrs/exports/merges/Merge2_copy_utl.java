@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
+package gplx.xowa.addons.bldrs.exports.merges; import gplx.*;
 import gplx.dbs.*;
 public class Merge2_copy_utl {
 	private final Bry_bfr bfr = Bry_bfr_.New();
@@ -60,11 +60,11 @@ public class Merge2_copy_utl {
 		}
 		return bfr.To_bry_and_clear();
 	}
-	public String Bld_sql(Dbmeta_fld_list flds, int flds_end, boolean src_is_pack, byte mode, int resume__db_id) {
+	public String Bld_sql(DbmetaFldList flds, int flds_end, boolean src_is_pack, byte mode, int resume__db_id) {
 		bfr.Add_str_a7("SELECT");
 		for (int i = 0; i < flds_end; ++i) {
 			bfr.Add_str_a7(i == 0 ? " " : ", ");
-			bfr.Add_str_u8(flds.Get_at(i).Name());
+			bfr.Add_str_u8(flds.GetAt(i).Name());
 		}
 		bfr.Add_str_u8(Bld_select_fld(mode));
 		bfr.Add_str_a7("\nFROM    ").Add_str_u8(tbl_name);

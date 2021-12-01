@@ -67,7 +67,7 @@ public class Xocfg_edit_loader {
 		grp_list.Add(owner);
 
 		// load tree by selecting subs until no more grps
-		while (grp_temp.Count() > 0) {
+		while (grp_temp.Len() > 0) {
 			owner = (Xoedit_grp)grp_temp.Get_at(0);
 			grp_temp.Del(owner.Id());
 			Load_subs(grp_list, itm_list, grp_temp, owner);
@@ -147,7 +147,7 @@ public class Xocfg_edit_loader {
 		finally {
 			rdr.Rls();
 		}
-		return new Xoedit_nav_mgr((Xoedit_nav_itm[])list.To_ary_and_clear(Xoedit_nav_itm.class));
+		return new Xoedit_nav_mgr((Xoedit_nav_itm[])list.ToAryAndClear(Xoedit_nav_itm.class));
 	}
 	private void Load_subs(Xoedit_nde_hash grp_list, Xoedit_nde_hash itm_list, Ordered_hash grp_temp, Xoedit_grp owner) {
 		String sql = Db_sql_.Make_by_fmt(String_.Ary
@@ -178,7 +178,7 @@ public class Xocfg_edit_loader {
 				itm_list.Add(gui_itm);
 			}
 		}
-		owner.Itms_((Xoedit_itm[])itms_list.To_ary_and_clear(Xoedit_itm.class));
+		owner.Itms_((Xoedit_itm[])itms_list.ToAryAndClear(Xoedit_itm.class));
 	}
 	private void Load_itm_meta(Bry_bfr tmp_bfr, Xoedit_nde_hash itm_list) {
 		Xogui_nde_iter iter = Xogui_nde_iter.New_sql(itm_list);

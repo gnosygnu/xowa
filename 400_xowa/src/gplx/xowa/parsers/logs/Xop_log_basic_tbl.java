@@ -13,25 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
+package gplx.xowa.parsers.logs;
+import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Xop_log_basic_tbl implements Db_tbl {		
-	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final DbmetaFldList flds = new DbmetaFldList();
 	public final String fld__log_id, fld__log_tid, fld__log_msg, fld__log_time, fld__page_id, fld__page_ttl, fld__args_len, fld__args_str, fld__src_len, fld__src_str;
 	private Db_stmt stmt_insert;
 	public Xop_log_basic_tbl(Db_conn conn){
 		this.conn = conn;
 		this.tbl_name				= "log_basic_temp";
-		this.fld__log_id			= flds.Add_int_pkey_autonum("log_id");
-		this.fld__log_tid			= flds.Add_int("log_tid");
-		this.fld__log_msg			= flds.Add_str("log_msg", 255);
-		this.fld__log_time			= flds.Add_int("log_time");
-		this.fld__page_id			= flds.Add_int("page_id");
-		this.fld__page_ttl			= flds.Add_str("page_ttl", 255);
-		this.fld__args_len			= flds.Add_int("args_len");
-		this.fld__args_str			= flds.Add_str("args_str", 4096);
-		this.fld__src_len			= flds.Add_int("src_len");
-		this.fld__src_str			= flds.Add_str("src_str", 4096);
+		this.fld__log_id			= flds.AddIntPkeyAutonum("log_id");
+		this.fld__log_tid			= flds.AddInt("log_tid");
+		this.fld__log_msg			= flds.AddStr("log_msg", 255);
+		this.fld__log_time			= flds.AddInt("log_time");
+		this.fld__page_id			= flds.AddInt("page_id");
+		this.fld__page_ttl			= flds.AddStr("page_ttl", 255);
+		this.fld__args_len			= flds.AddInt("args_len");
+		this.fld__args_str			= flds.AddStr("args_str", 4096);
+		this.fld__src_len			= flds.AddInt("src_len");
+		this.fld__src_str			= flds.AddStr("src_str", 4096);
 		conn.Rls_reg(this);
 		this.Create_tbl();
 	} 

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.scribunto; import gplx.*;
 public class Scrib_fsys_mgr {
 	private Ordered_hash libs;
 	private Io_url[] lib_dirs = new Io_url[lib_dirs_len]; static final int lib_dirs_len = 3;
@@ -28,7 +28,7 @@ public class Scrib_fsys_mgr {
 	}
 	public String Get_or_null(String name) {
 		if (libs == null) libs = libs_init(script_dir);
-		Object lib_fil_obj = libs.Get_by(name); if (lib_fil_obj == null) return null;
+		Object lib_fil_obj = libs.GetByOrNull(name); if (lib_fil_obj == null) return null;
 		gplx.core.ios.Io_fil lib_fil = (gplx.core.ios.Io_fil)lib_fil_obj;
 		String lib_data = lib_fil.Data();
 		if (lib_data == null) {
@@ -53,15 +53,15 @@ public class Scrib_fsys_mgr {
 			if (gplx.core.envs.Op_sys.Cur().Tid_is_wnt()) // if windows, replace "\"
 				rel_path = String_.Replace(rel_path, fil.Info().DirSpr(), "/");
 			rel_path = String_.DelEndIf(rel_path, ".lua"); // remove ".lua"	
-			rv.Add_if_dupe_use_1st(fil.NameOnly(), fil_itm); // add filename only (no extension); EX: "c"
-			rv.Add_if_dupe_use_1st(rel_path, fil_itm); // add relpath; EX: "a/b/c"
-			rv.Add_if_dupe_use_1st(String_.Replace(rel_path, "/", "."), fil_itm); // add relpath in dotted form; EX: "a.b.c"
+			rv.AddIfDupeUse1st(fil.NameOnly(), fil_itm); // add filename only (no extension); EX: "c"
+			rv.AddIfDupeUse1st(rel_path, fil_itm); // add relpath; EX: "a/b/c"
+			rv.AddIfDupeUse1st(String_.Replace(rel_path, "/", "."), fil_itm); // add relpath in dotted form; EX: "a.b.c"
 		}
 		
 		return rv;
 	}
 	public void Shrink() {
-		int len = libs.Count();
+		int len = libs.Len();
 		for (int i = 0; i < len; i++) {
 			gplx.core.ios.Io_fil fil = (gplx.core.ios.Io_fil)libs.Get_at(i);
 			fil.Url_(null).Data_(null);

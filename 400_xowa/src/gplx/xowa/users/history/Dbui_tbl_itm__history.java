@@ -13,10 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.errs.*;
-import gplx.langs.jsons.*; import gplx.langs.htmls.*;
-import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
+import gplx.langs.htmls.*;
 import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.bridges.dbuis.fmtrs.*;
 public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 	private final Xoa_app app; private final Xoud_history_tbl tbl;
@@ -36,7 +35,7 @@ public class Dbui_tbl_itm__history implements Dbui_tbl_itm {
 	private final List_adp select_list = List_adp_.New();
 	public void Select(Bry_bfr bfr, int top) {
 		tbl.Select_by_top(select_list, 100);
-		Xoud_history_row[] db_rows = (Xoud_history_row[])select_list.To_ary_and_clear(Xoud_history_row.class);
+		Xoud_history_row[] db_rows = (Xoud_history_row[])select_list.ToAryAndClear(Xoud_history_row.class);
 		Xow_wiki usr_wiki = app.User().Wikii();
 		byte[] option_link = usr_wiki.Html__lnki_bldr().Href_(Bry_.new_a7("home"), usr_wiki.Ttl_parse(Bry_.new_a7("Options/PageHistory"))).Img_16x16(gplx.xowa.htmls.core.htmls.utls.Xoh_img_path.Img_option).Bld_to_bry();// HOME
 		byte[] delete_confirm_msg = app.Api_root().Usr().Bookmarks().Delete_confirm() ? Msg__delete_confirm : Bry_.Empty;

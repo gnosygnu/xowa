@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.primitives.*; import gplx.core.strings.*; import gplx.core.brys.*; import gplx.core.interfaces.*;
+import gplx.core.primitives.*; import gplx.core.strings.*;
+import gplx.core.interfaces.*;
 public class GfoMsg_ {
 	public static GfoMsg as_(Object obj) {return obj instanceof GfoMsg ? (GfoMsg)obj : null;}
 	public static final GfoMsg Null = new GfoMsg_base().ctor_("<<NULL MSG>>", false);
@@ -55,7 +56,7 @@ public class GfoMsg_ {
 
 		GfoMsg root = GfoMsg_.new_parse_((String)list.Get_at(0));
 		GfoMsg cur = root;
-		for (int i = 1; i < list.Count(); i++) {
+		for (int i = 1; i < list.Len(); i++) {
 			String k = (String)list.Get_at(i);
 			GfoMsg mm = GfoMsg_.new_parse_(k);
 			cur.Subs_add(mm);
@@ -78,7 +79,7 @@ public class GfoMsg_ {
 		if (ary_len == 0) return Hash_adp_.Noop;
 		Hash_adp rv = Hash_adp_.New();
 		for (int i = 0; i < ary_len; i++) {
-			 rv.Add_if_dupe_use_1st(ary[i], ary[i]);
+			 rv.AddIfDupeUse1st(ary[i], ary[i]);
 		}
 		return rv;
 	}
@@ -99,11 +100,11 @@ class GfoMsg_rdr extends GfoMsg_base {
 }
 class GfoMsg_base implements GfoMsg {
 	public String Key() {return key;} private String key; 
-	public int Subs_count() {return subs == null ? 0 : subs.Count();}
+	public int Subs_count() {return subs == null ? 0 : subs.Len();}
 	public GfoMsg Subs_getAt(int i) {return subs == null ? null : (GfoMsg)subs.Get_at(i);}
 	public GfoMsg Subs_add(GfoMsg m) {if (subs == null) subs = List_adp_.New(); subs.Add(m); return this;}
 	public GfoMsg Subs_(GfoMsg... ary) {for (GfoMsg m : ary) Subs_add(m); return this;}
-	public int Args_count() {return args == null ? 0 : args.Count();}
+	public int Args_count() {return args == null ? 0 : args.Len();}
 	public void Args_reset() {
 		counter = 0;
 		Args_reset(this);
@@ -124,7 +125,7 @@ class GfoMsg_base implements GfoMsg {
 	public Keyval Args_getAt(int i) {return args == null ? null : (Keyval)args.Get_at(i);}
 	public GfoMsg Args_ovr(String k, Object v) {
 		if (args == null) args = List_adp_.New();
-		for (int i = 0; i < args.Count(); i++) {
+		for (int i = 0; i < args.Len(); i++) {
 			Keyval kv = (Keyval)args.Get_at(i);
 			if (String_.Eq(k, kv.Key())) {
 				kv.Val_(v);
@@ -184,13 +185,13 @@ class GfoMsg_base implements GfoMsg {
 	protected Object ReadOr(String k, Object defaultOr) {
 		if (args == null) return Nil; // WORKAROUND.gfui: args null for DataBndr_whenEvt_execCmd
 		if (!String_.Eq(k, "")) {
-			for (int i = 0; i < args.Count(); i++) {
+			for (int i = 0; i < args.Len(); i++) {
 				Keyval kv = (Keyval)args.Get_at(i);
 				if (String_.Eq(k, kv.Key())) return kv.Val();
 			}
 		}
-		if (counter >= args.Count()) return Nil;
-		for (int i = 0; i < args.Count(); i++) {
+		if (counter >= args.Len()) return Nil;
+		for (int i = 0; i < args.Len(); i++) {
 			Keyval kv = (Keyval)args.Get_at(i);
 			if (String_.Eq(kv.Key(), "") && i >= counter) {
 				counter++;
@@ -213,12 +214,12 @@ class GfoMsg_base implements GfoMsg {
 		GfoMsg_base rv = new GfoMsg_base().ctor_(key, parse);
 		if (args != null) {
 			rv.args = List_adp_.New();
-			for (int i = 0; i < args.Count(); i++)
+			for (int i = 0; i < args.Len(); i++)
 				rv.args.Add(args.Get_at(i));
 		}
 		if (subs != null) {
 			rv.subs = List_adp_.New();
-			for (int i = 0; i < args.Count(); i++) {
+			for (int i = 0; i < args.Len(); i++) {
 				GfoMsg sub = (GfoMsg)args.Get_at(i);
 				rv.subs.Add(sub.CloneNew());	// NOTE: recursion
 			}

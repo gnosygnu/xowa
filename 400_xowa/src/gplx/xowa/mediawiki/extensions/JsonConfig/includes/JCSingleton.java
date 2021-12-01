@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.JsonConfig.*;
-import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*;
+import gplx.xowa.mediawiki.*;
 public class JCSingleton {
 //		/**
 //		* @var array describes how a title should be handled by JsonConfig extension.
@@ -335,13 +335,13 @@ public class JCSingleton {
 		// seems wasteful and redundant, plus most of the time there will be just a single
 		// namespace declared, so this structure seems efficient and easy enough.
 		String mapCacheLruKey = String_.Concat(wiki, "|", ns);
-		Ordered_hash cache = (Ordered_hash)mapCacheLru.Get_by(mapCacheLruKey);
+		Ordered_hash cache = (Ordered_hash)mapCacheLru.GetByOrNull(mapCacheLruKey);
 		if (cache == null) {
 			cache = Ordered_hash_.New();
 			mapCacheLru.Add(mapCacheLruKey, cache);
 		} 
 
-		return (JCContent)cache.Get_by(page);
+		return (JCContent)cache.GetByOrNull(page);
 	}
 
 	/**

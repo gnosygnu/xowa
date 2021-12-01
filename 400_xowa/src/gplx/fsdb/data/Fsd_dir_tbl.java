@@ -13,17 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
+package gplx.fsdb.data;
 import gplx.dbs.*;
 public class Fsd_dir_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_owner_id, fld_name;
 	private final Db_conn conn; private Db_stmt stmt_select_by_name;
 	public Fsd_dir_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
-		this.fld_id				= flds.Add_int_pkey	("dir_id");
-		this.fld_owner_id		= flds.Add_int		("dir_owner_id");
-		this.fld_name			= flds.Add_str		("dir_name", 255);
+		this.fld_id				= flds.AddIntPkey("dir_id");
+		this.fld_owner_id		= flds.AddInt("dir_owner_id");
+		this.fld_name			= flds.AddStr("dir_name", 255);
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name = "fsdb_dir";

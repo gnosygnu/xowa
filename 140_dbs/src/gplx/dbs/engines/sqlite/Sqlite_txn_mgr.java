@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.sqlite; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.sqlite; import gplx.*;
+import gplx.dbs.engines.*;
 import gplx.dbs.qrys.*;
 public class Sqlite_txn_mgr {
 	private final List_adp txn_list = List_adp_.New();
@@ -41,9 +42,9 @@ public class Sqlite_txn_mgr {
 		txn_list.Add(name);
 	}
 	public String Txn_end() {
-		if (txn_list.Count() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return "";}
+		if (txn_list.Len() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return "";}
 		String txn_last = (String)List_adp_.Pop_last(txn_list);
-		if (txn_list.Count() == 0) {// no txns left; commit it
+		if (txn_list.Len() == 0) {// no txns left; commit it
 			engine.Exec_as_obj(Db_qry_sql.xtn_("COMMIT TRANSACTION;"));
 			txn_started = false;
 		}
@@ -52,9 +53,9 @@ public class Sqlite_txn_mgr {
 		return txn_last;
 	}
 	public void	Txn_cxl() {
-		if (txn_list.Count() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return;}
+		if (txn_list.Len() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return;}
 		String txn_last = (String)List_adp_.Pop_last(txn_list);
-		if (txn_list.Count() == 0) {// no txns left; rollback
+		if (txn_list.Len() == 0) {// no txns left; rollback
 			engine.Exec_as_obj(Db_qry_sql.xtn_("ROLLBACK TRANSACTION;"));
 			txn_started = false;
 		}
@@ -62,8 +63,8 @@ public class Sqlite_txn_mgr {
 			engine.Exec_as_obj(Db_qry_sql.xtn_(String_.Format("ROLBACK TRANSACTION TO SAVEPOINT {0};", txn_last)));
 	}
 	public void	Txn_sav() {
-		if (txn_list.Count() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return;}
-		String name = (String)txn_list.Get_at(txn_list.Count() - 1);
+		if (txn_list.Len() == 0) {Gfo_usr_dlg_.Instance.Warn_many("", "", "no txns in stack;"); return;}
+		String name = (String)txn_list.Get_at(txn_list.Len() - 1);
 		this.Txn_end(); this.Txn_bgn(name);
 	}
 }

@@ -13,8 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
-import gplx.xowa.wikis.ttls.*;
+package gplx.xowa.bldrs.filters.core; import gplx.*;
 public class Xob_ttl_filter_mgr {
 	private boolean exclude_is_empty = true, include_is_empty = true;
 	private final Xob_ttl_filter_mgr_srl srl = new Xob_ttl_filter_mgr_srl();
@@ -34,8 +33,8 @@ public class Xob_ttl_filter_mgr {
 		Hash_adp_bry hash = exclude ? exclude_hash : include_hash;
 		srl.Init(hash).Load_by_bry(src);
 		if (exclude)
-			exclude_is_empty = exclude_hash.Count() == 0;
+			exclude_is_empty = exclude_hash.Len() == 0;
 		else
-			include_is_empty = include_hash.Count() == 0;
+			include_is_empty = include_hash.Len() == 0;
 	}
 }

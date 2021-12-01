@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.volumes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.volumes; import gplx.*;
 class Volume_prep_mgr {
 	private final Volume_page_loader loader;
 	private final Volume_page_itm tmp_page = new Volume_page_itm();
@@ -27,7 +27,7 @@ class Volume_prep_mgr {
 			ctx.Init(ctx, itm);
 			Calc_make(ctx, itm.Page_ttl);
 		}
-		return (Volume_make_itm[])list.To_ary_and_clear(Volume_make_itm.class);
+		return (Volume_make_itm[])list.ToAryAndClear(Volume_make_itm.class);
 	}
 	private void Calc_make(Volume_prep_ctx ctx, byte[] page_ttl) {
 		if (!loader.Load(tmp_page, page_ttl)) return;

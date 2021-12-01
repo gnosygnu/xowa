@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*;
+import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.users.data.*;
 public class Xou_cache_mgr implements Gfo_invk {
 	private long fsys_size_cur = 0;
@@ -41,7 +41,7 @@ public class Xou_cache_mgr implements Gfo_invk {
 		synchronized (thread_lock) {
 			this.Page_bgn();
 			byte[] key = Xou_cache_itm.Key_gen(tmp_bfr, wiki, ttl, type, upright, w, h, time, page, user_thumb_w);
-			Xou_cache_itm rv = (Xou_cache_itm)hash.Get_by(key);
+			Xou_cache_itm rv = (Xou_cache_itm)hash.GetByOrNull(key);
 			if (rv == Xou_cache_itm.Null) {
 				rv = cache_tbl.Select_one(wiki, ttl, type, upright, w, h, time, page, user_thumb_w);
 				if (rv == Xou_cache_itm.Null) return Xou_cache_itm.Null;
@@ -89,7 +89,7 @@ public class Xou_cache_mgr implements Gfo_invk {
 			Db_conn conn = cache_tbl.Conn();
 			try {
 				conn.Txn_bgn("user__file_cache__save");
-				int len = hash.Count();
+				int len = hash.Len();
 				for (int i = 0; i < len; ++i) {
 					Xou_cache_itm itm = (Xou_cache_itm)hash.Get_at(i);
 					cache_tbl.Db_save(itm);
@@ -105,12 +105,12 @@ public class Xou_cache_mgr implements Gfo_invk {
 			try {
 				this.Db_save(); cache_tbl.Select_all(tmp_bfr, hash);		// save and load
 				Ordered_hash grp_hash = Ordered_hash_.New();				// aggregate by file path; needed when same commons file used by two wikis
-				int len = hash.Count();
+				int len = hash.Len();
 				for (int i = 0; i < len; ++i) {
 					Xou_cache_itm itm = (Xou_cache_itm)hash.Get_at(i);
 					Io_url itm_url = Calc_url(itm);
 					itm.File_url_(itm_url);
-					Xou_cache_grp grp = (Xou_cache_grp)grp_hash.Get_by(itm_url.Raw());
+					Xou_cache_grp grp = (Xou_cache_grp)grp_hash.GetByOrNull(itm_url.Raw());
 					if (grp == null) {
 						grp = new Xou_cache_grp(itm_url);
 						grp_hash.Add(itm_url.Raw(), grp);
@@ -118,7 +118,7 @@ public class Xou_cache_mgr implements Gfo_invk {
 					grp.Add(itm);
 				}
 				grp_hash.Sort_by(Xou_cache_grp_sorter.Instance);				// sorts by cache_time desc
-				len = grp_hash.Count();
+				len = grp_hash.Len();
 				long fsys_size_calc = 0, fsys_size_temp = 0;
 				List_adp deleted = List_adp_.New();
 				for (int i = 0; i < len; ++i) {							// iterate and find items to delete
@@ -131,7 +131,7 @@ public class Xou_cache_mgr implements Gfo_invk {
 					else
 						fsys_size_calc = fsys_size_temp;
 				}
-				len = deleted.Count();
+				len = deleted.Len();
 				Db_conn conn = cache_tbl.Conn();
 				conn.Txn_bgn("user__file_cache__delete");
 				for (int i = 0; i < len; i++) {							// iterate and delete
@@ -193,7 +193,7 @@ public class Xou_cache_mgr implements Gfo_invk {
 	private Keyval[] Info_kvs() {
 		long view_date = Long_.Max_value;
 		long fsys_size = 0;
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
 			Xou_cache_itm itm = (Xou_cache_itm)hash.Get_at(i);
 			fsys_size += itm.File_size();
@@ -213,14 +213,14 @@ class Xou_cache_grp {
 	public long View_date() {return view_date;} private long view_date;
 	public long File_size() {return file_size;} private long file_size;
 	public Io_url File_url() {return file_url;} private final Io_url file_url;
-	public int Len() {return list.Count();}
+	public int Len() {return list.Len();}
 	public void Add(Xou_cache_itm itm) {
 		if (itm.View_date() > view_date) view_date = itm.View_date();
 		file_size += itm.File_size();
 		list.Add(itm);
 	}
 	public void Delete(Ordered_hash cache_hash, Xou_cache_tbl cache_tbl) {
-		int len = list.Count();
+		int len = list.Len();
 		boolean deleted = false;
 		for (int i = 0; i < len; ++i) {
 			Xou_cache_itm itm = (Xou_cache_itm)list.Get_at(i);

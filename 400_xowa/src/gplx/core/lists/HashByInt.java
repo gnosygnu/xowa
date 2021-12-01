@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*; import gplx.core.*;
+package gplx.core.lists; import gplx.*;
 import gplx.core.primitives.*;
 public class HashByInt {
 	private final Ordered_hash hash = Ordered_hash_.New();
@@ -30,13 +30,13 @@ public class HashByInt {
 	}
 	public Object Get_by_or_fail(int key) {
 		synchronized (tmp_key) {
-			HashByIntItem item = (HashByIntItem)hash.Get_by_or_fail(tmp_key.Val_(key));
+			HashByIntItem item = (HashByIntItem)hash.GetByOrFail(tmp_key.Val_(key));
 			return item.val;
 		}
 	}
 	public Object Get_by_or_null(int key) {
 		synchronized (tmp_key) {
-			HashByIntItem item = (HashByIntItem)hash.Get_by(tmp_key.Val_(key));
+			HashByIntItem item = (HashByIntItem)hash.GetByOrNull(tmp_key.Val_(key));
 			return item == null ? null : item.val;
 		}
 	}

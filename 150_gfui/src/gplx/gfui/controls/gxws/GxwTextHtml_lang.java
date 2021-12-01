@@ -13,52 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.gxws; import gplx.*; import gplx.gfui.*;
 import gplx.core.strings.*;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseWheelEvent;
-import java.io.StringWriter;
 import java.util.Enumeration;
 
 import javax.swing.BorderFactory;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.border.Border;
-import javax.swing.plaf.ComponentUI;
-import javax.swing.text.AbstractDocument;
 import javax.swing.text.AttributeSet;
-import javax.swing.text.BoxView;
-import javax.swing.text.ComponentView;
-import javax.swing.text.DefaultEditorKit;
-import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Document;
-import javax.swing.text.EditorKit;
 import javax.swing.text.Element;
-import javax.swing.text.IconView;
-import javax.swing.text.LabelView;
-import javax.swing.text.MutableAttributeSet;
-import javax.swing.text.ParagraphView;
-import javax.swing.text.PlainDocument;
-import javax.swing.text.Segment;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 import javax.swing.text.StyledEditorKit;
-import javax.swing.text.View;
-import javax.swing.text.ViewFactory;
-import javax.swing.text.html.HTML;
 import javax.swing.text.html.HTMLDocument;
 import javax.swing.text.html.HTMLEditorKit;
-import javax.swing.text.html.HTMLEditorKit.HTMLFactory;
-import javax.swing.text.html.InlineView;
 import javax.swing.text.html.StyleSheet;
 import gplx.gfui.draws.*;
 import gplx.gfui.ipts.*; import gplx.gfui.gfxs.*;
@@ -218,7 +192,7 @@ class GxwTextHtml_editor extends JEditorPane implements GxwTextHtml {
 		Element elm = Html_sel_elm(); if (elm == null) return Keyval_.Ary_empty;
 		List_adp sel_atrs_list = List_adp_.New();
 		Html_sel_atrs(elm.getAttributes(), sel_atrs_list, null, ".");
-		return (Keyval[])sel_atrs_list.To_ary(Keyval.class);
+		return (Keyval[])sel_atrs_list.ToAry(Keyval.class);
 	}
 
 	@Override public void processKeyEvent(KeyEvent e) 					{

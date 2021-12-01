@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.numbers; import gplx.*;
 import gplx.core.btries.*;
 public class Xol_transform_mgr implements Gfo_invk {
 	private Btrie_fast_mgr trie_k_to_v = Btrie_fast_mgr.cs();
@@ -21,10 +21,10 @@ public class Xol_transform_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private boolean empty = true;
 	public void Clear() {hash.Clear(); trie_k_to_v.Clear(); trie_v_to_k.Clear(); empty = true;}
-	public int Len() {return hash.Count();}
+	public int Len() {return hash.Len();}
 	public Keyval Get_at(int i) {return (Keyval)hash.Get_at(i);}
 	public byte[] Get_val_or_self(byte[] k) {	// NOTE: return self; note that MW defaults "." and "," to self, even though MessagesLa.php only specifies ","; i.e.: always return something for "."; DATE:2014-05-13
-		Keyval kv = (Keyval)hash.Get_by(k);
+		Keyval kv = (Keyval)hash.GetByOrNull(k);
 		return kv == null ? k : (byte[])kv.Val();
 	}
 	public Xol_transform_mgr Set(byte[] k, byte[] v) {

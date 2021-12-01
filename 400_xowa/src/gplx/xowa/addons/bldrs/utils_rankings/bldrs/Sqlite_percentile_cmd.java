@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.utils_rankings.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.utils_rankings.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.addons.bldrs.utils_rankings.bldrs; import gplx.*; import gplx.xowa.*;
+import gplx.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
 public class Sqlite_percentile_cmd extends Xob_cmd__base implements Xob_cmd {
 	private String db_rel_url, tbl_name = "tmp_score"; private int score_max = 100000000; private String select_sql;
@@ -36,24 +36,24 @@ public class Sqlite_percentile_cmd extends Xob_cmd__base implements Xob_cmd {
 		conn.Meta_tbl_delete(tbl_name);
 		conn.Meta_tbl_create
 		( Dbmeta_tbl_itm.New(tbl_name
-		,	Dbmeta_fld_itm.new_int("row_rank").Primary_y_().Autonum_y_()
-		,	Dbmeta_fld_itm.new_int("row_key")
-		,	Dbmeta_fld_itm.new_double("row_val")
-		,	Dbmeta_fld_itm.new_double("row_score").Default_(-1)
+		,	DbmetaFldItm.NewInt("row_rank").PrimarySetY().AutonumSetY()
+		,	DbmetaFldItm.NewInt("row_key")
+		,	DbmetaFldItm.NewDouble("row_val")
+		,	DbmetaFldItm.NewDouble("row_score").DefaultValSet(-1)
 		));
 		Xoa_app_.Usr_dlg().Prog_many("", "", "filling temp_table: tbl=~{0} sql=~{1}", tbl_name, select_sql);
 		new Db_attach_mgr(conn, new Db_attach_itm("page_db", wiki.Data__core_mgr().Tbl__page().Conn()))
 			.Exec_sql(Bry_fmt.Make_str("INSERT INTO ~{tbl} (row_key, row_val) ~{select}", tbl_name, select_sql));
 		Xoa_app_.Usr_dlg().Prog_many("", "", "updating row_score: tbl=~{0}", tbl_name);
-		String score_max_as_str = Dbmeta_fld_itm.To_double_str_by_int(score_max);
+		String score_max_as_str = DbmetaFldItm.ToDoubleStrByInt(score_max);
 		this.count = conn.Exec_select_as_int("SELECT Count(*) FROM " + tbl_name, -1); if (count == -1) throw Err_.new_("bldr", "failed to get count; tbl=~{0}", tbl_name);
-		String count_as_str = Dbmeta_fld_itm.To_double_str_by_int(count);
+		String count_as_str = DbmetaFldItm.ToDoubleStrByInt(count);
 		conn.Exec_sql(Bry_fmt.Make_str("UPDATE ~{tbl} SET row_score = (row_rank * ~{score_max}) / ~{count}", tbl_name, score_max_as_str, count_as_str));
 		Xoa_app_.Usr_dlg().Prog_many("", "", "resolving ties: tbl=~{0}", tbl_name);
 		conn.Meta_tbl_remake
 		( Dbmeta_tbl_itm.New(tbl_name + "_avg"
-		,	Dbmeta_fld_itm.new_double("row_val").Primary_y_()
-		,	Dbmeta_fld_itm.new_double("row_score")
+		,	DbmetaFldItm.NewDouble("row_val").PrimarySetY()
+		,	DbmetaFldItm.NewDouble("row_score")
 		));
 		conn.Exec_sql(Bry_fmt.Make_str(String_.Concat_lines_nl_skip_last
 		( "INSERT INTO ~{tbl}_avg (row_val, row_score)"

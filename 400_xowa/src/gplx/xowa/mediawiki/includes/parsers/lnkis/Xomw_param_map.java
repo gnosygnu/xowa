@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*;
 public class Xomw_param_map {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public final Xomw_params_frame          Frame   = new Xomw_params_frame();
@@ -23,7 +23,7 @@ public class Xomw_param_map {
 	public int Len() {return hash.Len();}
 	public Xomw_param_itm Get_at(int i) {return (Xomw_param_itm)hash.Get_at(i);}
 	public Xomw_param_itm Get_by(byte[] name) {
-		return (Xomw_param_itm)hash.Get_by(name);
+		return (Xomw_param_itm)hash.GetByOrNull(name);
 	}
 	public Xomw_param_itm Get_by(int name_type) {
 		return null;

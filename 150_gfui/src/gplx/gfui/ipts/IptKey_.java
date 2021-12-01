@@ -57,8 +57,8 @@ public class IptKey_ {
 			list.Add(key);
 
 		// add keypad numbers
-		list.Add_many(IptKey_.Numpad_0, IptKey_.Numpad_1, IptKey_.Numpad_2, IptKey_.Numpad_3, IptKey_.Numpad_4);
-		list.Add_many(IptKey_.Numpad_5, IptKey_.Numpad_6, IptKey_.Numpad_7, IptKey_.Numpad_8, IptKey_.Numpad_9);
+		list.AddMany(IptKey_.Numpad_0, IptKey_.Numpad_1, IptKey_.Numpad_2, IptKey_.Numpad_3, IptKey_.Numpad_4);
+		list.AddMany(IptKey_.Numpad_5, IptKey_.Numpad_6, IptKey_.Numpad_7, IptKey_.Numpad_8, IptKey_.Numpad_9);
 
 		IptKeyStrMgr.Instance.XtoIptKeyAry(list);
 		for (IptKey key : del)
@@ -69,15 +69,15 @@ public class IptKey_ {
 		List_adp list = List_adp_.New();
 
 		// add keypad numbers
-		list.Add_many(IptKey_.Numpad_0, IptKey_.Numpad_1, IptKey_.Numpad_2, IptKey_.Numpad_3, IptKey_.Numpad_4);
-		list.Add_many(IptKey_.Numpad_5, IptKey_.Numpad_6, IptKey_.Numpad_7, IptKey_.Numpad_8, IptKey_.Numpad_9);
+		list.AddMany(IptKey_.Numpad_0, IptKey_.Numpad_1, IptKey_.Numpad_2, IptKey_.Numpad_3, IptKey_.Numpad_4);
+		list.AddMany(IptKey_.Numpad_5, IptKey_.Numpad_6, IptKey_.Numpad_7, IptKey_.Numpad_8, IptKey_.Numpad_9);
 
 		for (IptKey key : add)
 			list.Add(key);
 		IptKeyStrMgr.Instance.XtoIptKeyAry(list);
 		for (IptKey key : del)
 			list.Del(key);
-		return (IptKey[])list.To_ary(IptKey.class);
+		return (IptKey[])list.ToAry(IptKey.class);
 	}
 	private static IptKey get_or_new_(int val) {
 		IptKey rv = (IptKey)enm_mgr.Get(val);
@@ -235,7 +235,7 @@ public class IptKey_ {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			IptKey key = ary[i];
-			hash.Add_if_dupe_use_nth(Int_obj_ref.New(key.Val()), key);
+			hash.AddIfDupeUseNth(Int_obj_ref.New(key.Val()), key);
 		}
 	}
 	public static String To_str(int orig_val) {
@@ -251,7 +251,7 @@ public class IptKey_ {
             if (temp_val == 0) return rv;
 			rv += "+";
 		}
-		IptKey key = (IptKey)IptKey_.Ui_str_hash().Get_by(Int_obj_ref.New(temp_val));
+		IptKey key = (IptKey)IptKey_.Ui_str_hash().GetByOrNull(Int_obj_ref.New(temp_val));
 		String key_str = key == null ? "key.#" + Int_.To_str(temp_val) : key.Key();
 		// Tfds.Write(rv + key_str, orig_val, temp_val, mod_c, mod_a, mod_s);
 		return rv + key_str;

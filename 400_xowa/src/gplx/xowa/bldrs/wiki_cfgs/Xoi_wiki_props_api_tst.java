@@ -13,9 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wiki_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.wiki_cfgs; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.strings.*;
-import gplx.langs.xmls.*;
 import gplx.xowa.addons.bldrs.app_cfgs.*;
 public class Xoi_wiki_props_api_tst {
 	private Xoi_wiki_props_fxt fxt = new Xoi_wiki_props_fxt();
@@ -130,7 +129,7 @@ class Xob_subpage_tst_fxt {
 	}
 	private void X_str_wiki(String_bldr sb, Xob_subpage_wiki wiki) {
 		sb.Add(wiki.Name()).Add_char_nl();
-		int ns_len = wiki.Ns_list().Count();
+		int ns_len = wiki.Ns_list().Len();
 		for (int i = 0; i < ns_len; i++) {
 			Xob_subpage_ns ns = (Xob_subpage_ns)wiki.Ns_list().Get_at(i);
 			sb.Add(ns.Id()).Add("=").Add(Bool_.To_str_lower(ns.Enabled())).Add_char_nl();

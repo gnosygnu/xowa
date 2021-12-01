@@ -46,7 +46,7 @@ public class IndicatorSerialCore {
             Indicator_xnde xnde = new Indicator_xnde();
             xnde.Name_(wkr.LoadStr());
             xnde.Html_(wkr.LoadBry());
-            list.Add_if_dupe_use_nth(xnde.Name(), xnde);
+            list.AddIfDupeUseNth(xnde.Name(), xnde);
         }
         return list;
     }

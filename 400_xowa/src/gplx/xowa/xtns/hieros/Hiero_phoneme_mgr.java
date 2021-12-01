@@ -13,17 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.hieros; import gplx.*;
 import gplx.langs.dsvs.*;
 class Hiero_phoneme_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private Hiero_phoneme_srl srl;
 	public Hiero_phoneme_mgr() {srl = new Hiero_phoneme_srl(this);}
-	public int Len() {return hash.Count();}
+	public int Len() {return hash.Len();}
 	public Hiero_phoneme_itm Get_at(int i) {return (Hiero_phoneme_itm)hash.Get_at(i);}
 	public void Add(byte[] key, byte[] val) {hash.Add(key, new Hiero_phoneme_itm(key, val));}
 	public void Clear() {hash.Clear();}
-	public Hiero_phoneme_itm Get_by_key(byte[] key) {return (Hiero_phoneme_itm)hash.Get_by(key);}
+	public Hiero_phoneme_itm Get_by_key(byte[] key) {return (Hiero_phoneme_itm)hash.GetByOrNull(key);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_srl))			return srl;
 		else	return Gfo_invk_.Rv_unhandled;

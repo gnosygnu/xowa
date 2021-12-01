@@ -10,8 +10,8 @@ public class GfdbCfgMeta extends GfdbMetaBase<GfdbCfgItm> {
 	public String Key() {return key;} private String key;
 	public String Val() {return val;} private String val;
 	@Override protected void CtorFlds() {
-		this.key = flds.Add_str_pkey("cfg_key", 1024);
-		this.val = flds.Add_str("cfg_val", 1024);
+		this.key = flds.AddStrPkey("cfg_key", 1024);
+		this.val = flds.AddStr("cfg_val", 1024);
 	}
 	@Override protected String[] CtorPkeys() {return new String[] {key};}
 	@Override public void SaveStmtPkeys(Db_stmt stmt, GfdbCfgItm itm) {stmt.Crt_str(this.Key(), itm.Key());}

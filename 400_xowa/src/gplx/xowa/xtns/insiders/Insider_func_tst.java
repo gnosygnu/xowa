@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
 public class Insider_func_tst {
 	@Before public void init()				{fxt.Reset();} private Insider_func_fxt fxt = new Insider_func_fxt();
@@ -30,7 +30,7 @@ class Insider_func_fxt {
 		fxt.Test_parse_tmpl_str_test(raw, "{{test}}", expd);
 		Insider_xtn_skin_itm skin_itm = (Insider_xtn_skin_itm)fxt.Page().Html_data().Xtn_skin_mgr().Get_or_null(Insider_xtn_skin_itm.KEY);
 		List_adp list = skin_itm.Itms();
-		byte[][] brys = (byte[][])list.To_ary(byte[].class);
+		byte[][] brys = (byte[][])list.ToAry(byte[].class);
 		Tfds.Eq_ary_str(insiders, String_.Ary(brys));
 	}
 }

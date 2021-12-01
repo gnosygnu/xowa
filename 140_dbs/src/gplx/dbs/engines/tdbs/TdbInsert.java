@@ -15,12 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.gfo_ndes.*; import gplx.core.stores.*;
-import gplx.core.lists.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*;
+import gplx.dbs.qrys.*;
+import gplx.dbs.sqls.itms.*;
 class TdbInsertWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_insert cmd = (Db_qry_insert)cmdObj;
 
-		TdbTable tbl = engine.FetchTbl(cmd.Base_table());
+		TdbTable tbl = engine.FetchTbl(cmd.BaseTable());
 		tbl.IsDirty_set(true);
 		return cmd.Select() == null
 			? InsertRowsByVals(engine, tbl, cmd)

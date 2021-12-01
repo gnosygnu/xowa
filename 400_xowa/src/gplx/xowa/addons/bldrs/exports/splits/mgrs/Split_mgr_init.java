@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.mgrs; import gplx.*;
+import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 public class Split_mgr_init {
 	public void Init(Split_ctx ctx, Db_conn wkr_conn, Db_conn page_conn) {
@@ -25,8 +26,8 @@ public class Split_mgr_init {
 		if (!(force_rebuild || !wkr_conn.Meta_tbl_exists("ns_regy"))) return;
 		Gfo_log_.Instance.Prog("creating ns_regy");
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("ns_regy"
-			, Dbmeta_fld_itm.new_int("ns_id").Primary_y_()
-			, Dbmeta_fld_itm.new_int("ns_ord")
+			, DbmetaFldItm.NewInt("ns_id").PrimarySetY()
+			, DbmetaFldItm.NewInt("ns_ord")
 			));
 		int len = ns_itms.length;
 		Db_stmt stmt = wkr_conn.Stmt_insert("ns_regy", "ns_id", "ns_ord");
@@ -39,12 +40,12 @@ public class Split_mgr_init {
 		if (!(force_rebuild || !wkr_conn.Meta_tbl_exists("page_regy"))) return;
 		Gfo_log_.Instance.Prog("creating page_regy");
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("page_regy"
-		, Dbmeta_fld_itm.new_int("page_uid").Primary_y_().Autonum_y_()
-		, Dbmeta_fld_itm.new_int("page_ns_id")
-		, Dbmeta_fld_itm.new_int("page_ns_ord")
-		, Dbmeta_fld_itm.new_int("page_score")
-		, Dbmeta_fld_itm.new_int("page_len")
-		, Dbmeta_fld_itm.new_int("page_id")
+		, DbmetaFldItm.NewInt("page_uid").PrimarySetY().AutonumSetY()
+		, DbmetaFldItm.NewInt("page_ns_id")
+		, DbmetaFldItm.NewInt("page_ns_ord")
+		, DbmetaFldItm.NewInt("page_score")
+		, DbmetaFldItm.NewInt("page_len")
+		, DbmetaFldItm.NewInt("page_id")
 		));
 		page_conn.Meta_idx_create("page", "page_uid", "page_namespace", "page_score", "page_len", "page_id");	// index page table; will drop below
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(wkr_conn, new Db_attach_itm("page_db", page_conn));

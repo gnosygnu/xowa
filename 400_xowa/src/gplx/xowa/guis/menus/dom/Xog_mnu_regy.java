@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
+package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
 import gplx.xowa.guis.cmds.*;
 public class Xog_mnu_regy {
 	private Ordered_hash hash;
@@ -34,7 +34,7 @@ public class Xog_mnu_regy {
 		Init_obsolete(hash, gui_mgr);
 	}
 	public Xog_mnu_itm Get_or_make(String key) {
-		Xog_mnu_itm rv = (Xog_mnu_itm)hash.Get_by(key);
+		Xog_mnu_itm rv = (Xog_mnu_itm)hash.GetByOrNull(key);
 		if (rv == null) {
 			rv = new Xog_mnu_itm(gui_mgr, key);
 			hash.Add(key, rv);

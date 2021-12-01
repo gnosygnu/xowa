@@ -15,13 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*; import gplx.core.envs.*;
-import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.origs.*;
 import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.wikis.tdbs.metas.*;
 public class Xof_xfer_queue {
 	private final List_adp xfer_list = List_adp_.New(); private final Ordered_hash dirty_meta_mgrs = Ordered_hash_.New_bry();
 	public Int_obj_ref Html_uid() {return html_uid;} private Int_obj_ref html_uid = Int_obj_ref.New_neg1();
-	public int Count() {return xfer_list.Count();}
+	public int Count() {return xfer_list.Len();}
 	public void Clear() {
 		dirty_meta_mgrs.Clear();
 		xfer_list.Clear();
@@ -37,7 +36,7 @@ public class Xof_xfer_queue {
 	}
 	private void Exec_v1(Xowe_wiki wiki, Xoae_page page) {
 		Xof_meta_mgr meta_mgr = null;
-		int xfer_len = xfer_list.Count();
+		int xfer_len = xfer_list.Len();
 		Gfo_usr_dlg usr_dlg = Xoa_app_.Usr_dlg();
 		for (int i = 0; i < xfer_len; i++) {
 			if (wiki.Appe().Usr_dlg().Canceled()) break;
@@ -57,7 +56,7 @@ public class Xof_xfer_queue {
 				Js_img_mgr.Update_img(page, js_wkr, xfer_itm);
 			}
 		}
-		for (int i = 0; i < dirty_meta_mgrs.Count(); i++) {
+		for (int i = 0; i < dirty_meta_mgrs.Len(); i++) {
 			meta_mgr = (Xof_meta_mgr)dirty_meta_mgrs.Get_at(i);
 			meta_mgr.Save(true);
 		}
@@ -70,7 +69,7 @@ public class Xof_xfer_queue {
 	}
 	private List_adp Xfer_itms_to_fsdb_itms(Xowe_wiki cur_wiki, Xoae_page page, List_adp xfer_list, int upright_patch) {
 		List_adp rv = List_adp_.New();
-		int list_len = xfer_list.Count();
+		int list_len = xfer_list.Len();
 		for (int i = 0; i < list_len; i++) {
 			Xof_file_itm xfer = (Xof_file_itm)xfer_list.Get_at(i);
 			if (xfer.Hdump_mode() == Xof_fsdb_itm.Hdump_mode__null) {

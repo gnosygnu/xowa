@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+package gplx.xowa.wikis.xwikis.parsers; import gplx.*;
+import gplx.xowa.wikis.xwikis.*;
 import org.junit.*; import gplx.xowa.wikis.domains.*;
 public class Xow_xwiki_itm_parser_tst {
 	private final Xow_xwiki_itm_parser_fxt fxt = new Xow_xwiki_itm_parser_fxt();
@@ -82,7 +83,7 @@ class Xow_xwiki_itm_parser_fxt {
 	}
 	private String To_str() {
 		Ordered_hash list = parser.Xwiki_list();
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
 			Xow_xwiki_itm itm = (Xow_xwiki_itm)list.Get_at(i);
 			tmp_bfr.Add(itm.Key_bry()).Add_byte_pipe();

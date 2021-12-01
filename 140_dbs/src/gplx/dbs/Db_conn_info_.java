@@ -36,7 +36,7 @@ class Db_conn_info_pool {
 		this.Add(Noop_conn_info.Instance).Add(Tdb_conn_info.Instance).Add(Mysql_conn_info.Instance).Add(Postgres_conn_info.Instance).Add(Sqlite_conn_info.Instance);
 		this.Add(Mem_conn_info.Instance);
 	}
-	public Db_conn_info_pool Add(Db_conn_info itm) {regy.Add_if_dupe_use_nth(itm.Key(), itm); return this;}
+	public Db_conn_info_pool Add(Db_conn_info itm) {regy.AddIfDupeUseNth(itm.Key(), itm); return this;}
 	public Db_conn_info Parse(String raw) {// assume each pair has format of: name=val;
 		try {
 			Keyval_hash hash = new Keyval_hash();
@@ -50,7 +50,7 @@ class Db_conn_info_pool {
 				else
 					hash.Add(kv[0], kv[1]);
 			}
-			Db_conn_info prototype = (Db_conn_info)regy.Get_by(url_tid);
+			Db_conn_info prototype = (Db_conn_info)regy.GetByOrNull(url_tid);
 			return prototype.New_self(raw, hash);
 		}
 		catch(Exception exc) {throw Err_.new_parse_exc(exc, Db_conn_info.class, raw);}
@@ -79,7 +79,7 @@ class Db_conn_info_pool {
 			hash.Add(Sqlite_conn_info.Cs__data_source, sqlite_url.Raw());
 			hash.Add(Sqlite_conn_info.Cs__version	, Sqlite_conn_info.Cs__version__3);
 		}
-		Db_conn_info prototype = (Db_conn_info)regy.Get_by(cs_tid);
+		Db_conn_info prototype = (Db_conn_info)regy.GetByOrNull(cs_tid);
 		return prototype.New_self(raw, hash);
 	}
 	public static final Db_conn_info_pool Instance = new Db_conn_info_pool();

@@ -8669,7 +8669,7 @@ public class XomwDefaultSettings {
 	 * @since 1.20
 	 */
 	public static Hash_adp wgSiteTypes = Hash_adp_.New()
-		.Add_and_more("mediawiki", wgSiteTypes__MediaWikiSite)
+		.AddAndMore("mediawiki", wgSiteTypes__MediaWikiSite)
 		;
 ///**
 // * Whether the page_props table has a pp_sortkey column. Set to false in case

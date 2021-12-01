@@ -14,9 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wikias; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.tmpls.*;
-import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	private byte[] val = Bry_.Empty;
@@ -68,7 +67,7 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 			}
 		}
 		if (weight_total == 0) return; // empty <choose> will be 0
-		this.options_ary = (Rndsel_option_itm[])option_list.To_ary_and_clear(Rndsel_option_itm.class);
+		this.options_ary = (Rndsel_option_itm[])option_list.ToAryAndClear(Rndsel_option_itm.class);
 
 		// randomly select option_bry from all <option>s
 		byte[] option_bry = null;

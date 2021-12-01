@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.site; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.site; import gplx.*;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.includes.exception.*;
 /**
 * Represents a single site.
@@ -496,14 +497,14 @@ public class XomwSite {
 			this.localIds = Ordered_hash_.New();
 		}
 
-		Ordered_hash typeHash = (Ordered_hash)this.localIds.Get_by(type);
+		Ordered_hash typeHash = (Ordered_hash)this.localIds.GetByOrNull(type);
 		if (typeHash == null) {
 			typeHash = Ordered_hash_.New();
 			this.localIds.Add(type, typeHash);
 		}
 
-		if (typeHash.Get_by(identifier) == null) {
-			typeHash.Add_as_key_and_val(identifier);
+		if (typeHash.GetByOrNull(identifier) == null) {
+			typeHash.AddAsKeyAndVal(identifier);
 		}
 	}
 
@@ -537,7 +538,7 @@ public class XomwSite {
 	* @return String[]
 	*/
 	public Ordered_hash getInterwikiIds() {
-		return (Ordered_hash)this.localIds.Get_by(XomwSite.ID_INTERWIKI);
+		return (Ordered_hash)this.localIds.GetByOrNull(XomwSite.ID_INTERWIKI);
 	}
 
 	/**
@@ -549,7 +550,7 @@ public class XomwSite {
 	* @return String[]
 	*/
 	public Ordered_hash getNavigationIds() {
-		return (Ordered_hash)this.localIds.Get_by(XomwSite.ID_EQUIVALENT);
+		return (Ordered_hash)this.localIds.GetByOrNull(XomwSite.ID_EQUIVALENT);
 	}
 
 	/**
@@ -579,13 +580,13 @@ public class XomwSite {
 		//		throw new MWException('$fullUrl needs to be a String');
 		//	}
 
-		Hash_adp paths = (Hash_adp)this.extraData.Get_by("paths");
+		Hash_adp paths = (Hash_adp)this.extraData.GetByOrNull("paths");
 		if (paths == null) {
 			paths = Hash_adp_.New();
 			this.extraData.Add("paths", paths);
 		}
 
-		paths.Add_if_dupe_use_nth(pathType, fullUrl);
+		paths.AddIfDupeUseNth(pathType, fullUrl);
 	}
 
 	/**
@@ -599,7 +600,7 @@ public class XomwSite {
 	*/
 	public String getPath(String pathType) {
 		Hash_adp paths = this.getAllPaths();
-		return (String)paths.Get_by(pathType);
+		return (String)paths.GetByOrNull(pathType);
 	}
 
 	/**
@@ -611,7 +612,7 @@ public class XomwSite {
 	* @return String[]
 	*/
 	public Hash_adp getAllPaths() {
-		return (Hash_adp)this.extraData.Get_by("paths");
+		return (Hash_adp)this.extraData.GetByOrNull("paths");
 	}
 
 	/**
@@ -622,7 +623,7 @@ public class XomwSite {
 	* @param String $pathType
 	*/
 	public void removePath(String pathType) {
-		Hash_adp pathsHash = (Hash_adp)this.extraData.Get_by(pathType);
+		Hash_adp pathsHash = (Hash_adp)this.extraData.GetByOrNull(pathType);
 		if (pathsHash != null) {
 			pathsHash.Del(pathType);
 		}
@@ -636,7 +637,7 @@ public class XomwSite {
 	* @return Site
 	*/
 	public static XomwSite newForType(String siteType) {
-		String type = (String)XomwDefaultSettings.wgSiteTypes.Get_by(siteType);
+		String type = (String)XomwDefaultSettings.wgSiteTypes.GetByOrNull(siteType);
 		if (String_.Eq(type, XomwDefaultSettings.wgSiteTypes__MediaWikiSite)) {
 			return new XomwMediaWikiSite();
 		}

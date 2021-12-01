@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*; import gplx.langs.htmls.*;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wbases.core.*;
@@ -25,7 +25,7 @@ class Wdata_fmtr__slink_grp implements gplx.core.brys.Bfr_arg {
 	}
 	public void Init_by_lang(Wdata_hwtr_msgs msgs) {fmtr_tbl.Init_by_lang(msgs);}
 	public void Init_by_wdoc(Ordered_hash list) {
-		this.is_empty = list.Count() == 0; if (is_empty) return;
+		this.is_empty = list.Len() == 0; if (is_empty) return;
 		fmtr_tbl.Init_by_wdoc(list);
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
@@ -68,7 +68,7 @@ class Wdata_fmtr__slink_tbl implements gplx.core.brys.Bfr_arg {
 		Wdata_slink_grp.Sift(grps, list);
 		for (int i = 0; i < Wdata_slink_grp.Idx__len; ++i) {
 			Wdata_slink_grp grp = grps[i];
-			int itms_count = grp.Rows().Count();
+			int itms_count = grp.Rows().Len();
 			if (itms_count == 0) continue;
 			grp.Toc_data().Make(itms_count);
 			grp.Rows().Sort_by(lang_sorter);
@@ -77,7 +77,7 @@ class Wdata_fmtr__slink_tbl implements gplx.core.brys.Bfr_arg {
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		for (int i = 0; i < Wdata_slink_grp.Idx__len; ++i) {
 			Wdata_slink_grp grp = grps[i];
-			if (grp.Rows().Count() == 0) continue;
+			if (grp.Rows().Len() == 0) continue;
 			fmtr_row.Init_by_page(grp.Rows());
 			Xoapi_toggle_itm toggle_itm = grp.Toggle_itm();
 			fmtr.Bld_bfr_many(bfr, grp.Toc_data().Href(), grp.Toc_data().Text(), msgs.Langtext_col_lang_name(), msgs.Langtext_col_lang_code(), msgs.Slink_col_hdr_text(), toggle_itm.Html_toggle_btn(), toggle_itm.Html_toggle_hdr(), fmtr_row);
@@ -106,7 +106,7 @@ class Wdata_fmtr__slink_row implements gplx.core.brys.Bfr_arg {
 	}
 	public void Init_by_page(Ordered_hash list) {this.list = list;}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);
 			Xow_domain_itm domain_info = itm.Domain_info();

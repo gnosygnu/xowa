@@ -13,20 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.sites; import gplx.*;
 import gplx.dbs.*;
 public class Site_core_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_site_domain, fld_json_completed, fld_json_date, fld_json_text;
 	private final Db_conn conn;
 	private Db_stmt stmt_select, stmt_insert, stmt_delete, stmt_update;
 	public Site_core_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld_site_abrv		= flds.Add_str("site_abrv", 255);
-		this.fld_site_domain	= flds.Add_str("site_domain", 255);
-		this.fld_json_completed	= flds.Add_bool("json_completed");
-		this.fld_json_date		= flds.Add_str("json_date", 20);
-		this.fld_json_text		= flds.Add_text("json_text");
+		this.fld_site_abrv		= flds.AddStr("site_abrv", 255);
+		this.fld_site_domain	= flds.AddStr("site_domain", 255);
+		this.fld_json_completed	= flds.AddBool("json_completed");
+		this.fld_json_date		= flds.AddStr("json_date", 20);
+		this.fld_json_text		= flds.AddText("json_text");
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}
@@ -79,7 +79,7 @@ public class Site_core_tbl implements Db_tbl {
 			}
 		}
 		finally {rdr.Rls();}
-		return (Site_core_itm[])list.To_ary_and_clear(Site_core_itm.class);
+		return (Site_core_itm[])list.ToAryAndClear(Site_core_itm.class);
 	}
 	private Site_core_itm new_itm(Db_rdr rdr) {
 		return new Site_core_itm

@@ -29,7 +29,7 @@ import gplx.xowa.addons.wikis.searchs.specials.Srch_special_cfg;
 
 public class Xoax_addon_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New(); // LOCK: must synchronized else two search tabs will fail on startup
-	public Xoax_addon_itm	Itms__get_or_null(String key) {synchronized (hash) {return (Xoax_addon_itm)hash.Get_by(key);}}
+	public Xoax_addon_itm	Itms__get_or_null(String key) {synchronized (hash) {return (Xoax_addon_itm)hash.GetByOrNull(key);}}
 	public void				Itms__add_many(Xoax_addon_itm... ary) {
 		for (Xoax_addon_itm itm : ary)
 			Itms__add(itm);

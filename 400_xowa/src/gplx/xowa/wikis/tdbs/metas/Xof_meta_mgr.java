@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*;
 import gplx.core.flds.*;
 public class Xof_meta_mgr implements Gfo_invk {
 	private Object[] root = new Object[16]; private final Ordered_hash dirty_fils = Ordered_hash_.New_bry();
@@ -48,7 +48,7 @@ public class Xof_meta_mgr implements Gfo_invk {
 	public void Clear() {root = new Object[16]; dirty_fils.Clear();}
 	public void Save() {Save(false);}
 	public void Save(boolean clear) {
-		int dirty_len = dirty_fils.Count();
+		int dirty_len = dirty_fils.Len();
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		wtr.Bfr_(tmp_bfr);
 		for (int i = 0; i < dirty_len; i++) {

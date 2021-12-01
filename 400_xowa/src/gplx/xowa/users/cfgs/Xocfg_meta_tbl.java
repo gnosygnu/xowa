@@ -13,19 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.cfgs; import gplx.*;
 import gplx.dbs.*;
 public class Xocfg_meta_tbl implements Rls_able {
-	private final String tbl_name; public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name; public final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_key, fld_type, fld_dflt, fld_version;
 	private final Db_conn conn;
 	public Xocfg_meta_tbl(Db_conn conn) {
 		this.conn = conn;
 		tbl_name			= Tbl_name;
-		fld_key				= flds.Add_str_pkey	("cfg_key"		, 1024);		// EX: "xowa.net.web_enabled"
-		fld_type			= flds.Add_str		("cfg_type"		, 255);			// EX: "yn"
-		fld_dflt			= flds.Add_str		("cfg_dflt"		, 1024);		// EX: "n"
-		fld_version			= flds.Add_str		("cfg_version"	, 16);			// EX: "v1.1.1.1"
+		fld_key				= flds.AddStrPkey("cfg_key"		, 1024);		// EX: "xowa.net.web_enabled"
+		fld_type			= flds.AddStr("cfg_type"		, 255);			// EX: "yn"
+		fld_dflt			= flds.AddStr("cfg_dflt"		, 1024);		// EX: "n"
+		fld_version			= flds.AddStr("cfg_version"	, 16);			// EX: "v1.1.1.1"
 	}
 	public void Create_tbl()		{conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Insert(String key, String type, String dflt, String version) {

@@ -13,9 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
-import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
-import gplx.xowa.addons.wikis.searchs.parsers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*;
+import gplx.core.btries.*;
 class Srch_crt_scanner {
 	private final List_adp tkns = List_adp_.New(); private byte[] src; private int src_len, pos, txt_bgn;
 	private final Srch_crt_scanner_syms trie_bldr; private final Btrie_slim_mgr trie; private final Btrie_rv trv = new Btrie_rv();
@@ -113,7 +112,7 @@ class Srch_crt_scanner {
 		if (txt_bgn != -1) {	// pending word; create
 			Add_word(Srch_crt_tkn.Tid__word, txt_bgn, pos);
 		}
-		return (Srch_crt_tkn[])tkns.To_ary_and_clear(Srch_crt_tkn.class);
+		return (Srch_crt_tkn[])tkns.ToAryAndClear(Srch_crt_tkn.class);
 	}
 	private void Add_word(byte tid, int src_bgn, int src_end) {
 		// generate word_bry

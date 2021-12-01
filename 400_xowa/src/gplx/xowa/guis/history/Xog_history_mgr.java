@@ -28,7 +28,7 @@ import gplx.xowa.Xowe_wiki;
 
 public class Xog_history_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Xog_history_stack stack = new Xog_history_stack();
-	public int Count() {return hash.Count();}
+	public int Count() {return hash.Len();}
 	public Xoae_page Cur_page(Xowe_wiki wiki) {return Get_or_fetch(wiki, stack.Cur_itm());}
 	public Xoae_page Go_bwd(Xowe_wiki wiki) {return Go_by_dir(wiki, Bool_.N);}
 	public Xoae_page Go_fwd(Xowe_wiki wiki) {return Go_by_dir(wiki, Bool_.Y);}
@@ -72,7 +72,7 @@ public class Xog_history_mgr {
 	}
 	private Xoae_page Get_or_fetch(Xowe_wiki wiki, Xog_history_itm itm) {
 		byte[] page_key = Build_page_key(itm.Wiki(), itm.Page(), itm.Qarg());
-		Xoae_page rv = (Xoae_page)hash.Get_by(page_key);
+		Xoae_page rv = (Xoae_page)hash.GetByOrNull(page_key);
 		if (rv != null) return rv;
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, itm.Page());
 		return wiki.Data_mgr().Load_page_by_ttl(ttl);

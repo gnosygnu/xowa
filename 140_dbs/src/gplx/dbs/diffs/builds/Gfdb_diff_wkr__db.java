@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.diffs.builds; import gplx.*; import gplx.dbs.*; import gplx.dbs.diffs.*;
-import gplx.dbs.metas.*; import gplx.dbs.diffs.itms.*;
+import gplx.dbs.diffs.itms.*;
 public class Gfdb_diff_wkr__db implements Gfdb_diff_wkr {
-	private Dbmeta_fld_itm[] val_flds; private int val_flds_len;
+	private DbmetaFldItm[] val_flds; private int val_flds_len;
 	private Gfdb_diff_tbl tbl; private Db_rdr old_rdr, new_rdr;
 	private Gdif_bldr_ctx ctx;
 	private Db_conn dif_conn; private Db_stmt stmt;
@@ -28,7 +28,7 @@ public class Gfdb_diff_wkr__db implements Gfdb_diff_wkr {
 		this.val_flds = tbl.Vals; val_flds_len = val_flds.length;
 		this.uid = 0; this.prog_count = 0;
 
-		String dif_tbl = tbl.Name; Dbmeta_fld_itm[] dif_flds = Gfdb_diff_wkr__db_.New_dif_flds(tbl.Flds);
+		String dif_tbl = tbl.Name; DbmetaFldItm[] dif_flds = Gfdb_diff_wkr__db_.New_dif_flds(tbl.Flds);
 		if (!dif_conn.Meta_tbl_exists(dif_tbl)) dif_conn.Meta_tbl_create(Dbmeta_tbl_itm.New(dif_tbl, dif_flds));
 		this.stmt = dif_conn.Stmt_insert(dif_tbl, Gfdb_diff_wkr__db_.To_str_ary(dif_flds));
 		dif_conn.Txn_bgn("dif_db_tbl_" + dif_tbl);
@@ -43,7 +43,7 @@ public class Gfdb_diff_wkr__db implements Gfdb_diff_wkr {
 		if (Gfdb_rdr_utl_.Compare(val_flds, val_flds_len, old_rdr, new_rdr) != CompareAble_.Same)
 			Insert(Gdif_db_.Tid__update, ++uid, new_rdr, tbl.Flds);
 	}
-	private void Insert(byte dif_type, int uid, Db_rdr rdr, Dbmeta_fld_itm[] flds) {
+	private void Insert(byte dif_type, int uid, Db_rdr rdr, DbmetaFldItm[] flds) {
 		if (cmd_create) {
 			cmd_create = false;
 			ctx.Cur_cmd = ctx.Core.New_cmd(ctx, Gdif_cmd_itm.Tid__data);
@@ -61,23 +61,23 @@ public class Gfdb_diff_wkr__db implements Gfdb_diff_wkr {
 	}
 }
 class Gfdb_diff_wkr__db_ {
-	public static Dbmeta_fld_itm[] New_dif_flds(Dbmeta_fld_itm[] cur_flds) {
+	public static DbmetaFldItm[] New_dif_flds(DbmetaFldItm[] cur_flds) {
 		int len = cur_flds.length;
 		int sys_flds = 5;
-		Dbmeta_fld_itm[] rv = new Dbmeta_fld_itm[len + sys_flds];
-		rv[0] = Dbmeta_fld_itm.new_int	(Gdif_db_.Fld__dif_txn);
-		rv[1] = Dbmeta_fld_itm.new_int	(Gdif_db_.Fld__dif_uid);
-		rv[2] = Dbmeta_fld_itm.new_byte	(Gdif_db_.Fld__dif_type);
-		rv[3] = Dbmeta_fld_itm.new_int	(Gdif_db_.Fld__dif_db_trg);
-		rv[4] = Dbmeta_fld_itm.new_int	(Gdif_db_.Fld__dif_db_src);
+		DbmetaFldItm[] rv = new DbmetaFldItm[len + sys_flds];
+		rv[0] = DbmetaFldItm.NewInt(Gdif_db_.Fld__dif_txn);
+		rv[1] = DbmetaFldItm.NewInt(Gdif_db_.Fld__dif_uid);
+		rv[2] = DbmetaFldItm.NewByte(Gdif_db_.Fld__dif_type);
+		rv[3] = DbmetaFldItm.NewInt(Gdif_db_.Fld__dif_db_trg);
+		rv[4] = DbmetaFldItm.NewInt(Gdif_db_.Fld__dif_db_src);
 		for (int i = 0; i < len; ++i) {
-			Dbmeta_fld_itm cur_fld = cur_flds[i];
-			Dbmeta_fld_itm dif_fld = new Dbmeta_fld_itm(cur_fld.Name(), cur_fld.Type());
+			DbmetaFldItm cur_fld = cur_flds[i];
+			DbmetaFldItm dif_fld = new DbmetaFldItm(cur_fld.Name(), cur_fld.Type());
 			rv[i + sys_flds] = dif_fld;
 		}
 		return rv;
 	}
-	public static String[] To_str_ary(Dbmeta_fld_itm[] ary) {
+	public static String[] To_str_ary(DbmetaFldItm[] ary) {
 		int len = ary.length;
 		String[] rv = new String[len];
 		for (int i = 0; i < len; ++i)

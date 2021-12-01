@@ -13,18 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs.datas; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*; import gplx.xowa.addons.bldrs.centrals.dbs.*;
+package gplx.xowa.addons.bldrs.centrals.dbs.datas; import gplx.*;
 import gplx.dbs.*;
-import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.tasks.*;
 public class Xobc_step_regy_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_step_id, fld_step_type;
 	private final Db_conn conn; private Db_stmt insert_stmt;
 	public Xobc_step_regy_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "step_regy";
-		this.fld_step_id			= flds.Add_int_pkey("step_id");
-		this.fld_step_type			= flds.Add_int("step_type");
+		this.fld_step_id			= flds.AddIntPkey("step_id");
+		this.fld_step_type			= flds.AddInt("step_type");
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;

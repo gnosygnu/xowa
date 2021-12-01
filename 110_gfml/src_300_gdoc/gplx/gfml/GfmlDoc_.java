@@ -35,7 +35,7 @@ class GfmlUsrMsgs {
 	}
 	public static Err gfmlParseError(GfmlBldr bldr) {
 		Err rv = Err_.new_wo_type("gfml parse error");
-		for (int i = 0; i < bldr.Doc().UsrMsgs().Count(); i++) {
+		for (int i = 0; i < bldr.Doc().UsrMsgs().Len(); i++) {
 			UsrMsg um = (UsrMsg)bldr.Doc().UsrMsgs().Get_at(i);
 			rv.Args_add("err" + Int_.To_str(i), um.To_str());
 		}

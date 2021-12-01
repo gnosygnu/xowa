@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.caches; import gplx.*; import gplx.core.*;
+package gplx.core.caches; import gplx.*;
 public class Lru_cache_root {
 	private final Ordered_hash hash = Ordered_hash_.New();
-	public Lru_cache Get_by_key(String key) {return (Lru_cache)hash.Get_by(key);}
+	public Lru_cache Get_by_key(String key) {return (Lru_cache)hash.GetByOrNull(key);}
 	public void Add(Lru_cache grp) {
 		hash.Add(grp.Key(), grp);
 	}

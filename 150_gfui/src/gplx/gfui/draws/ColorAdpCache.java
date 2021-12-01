@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.draws; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.draws; import gplx.*;
 public class ColorAdpCache {
 	public java.awt.Color GetNativeColor(ColorAdp color) {
-		Object rv = hash.Get_by(color.Value()); if (rv != null) return (java.awt.Color)rv;
+		Object rv = hash.GetByOrNull(color.Value()); if (rv != null) return (java.awt.Color)rv;
 		rv = new java.awt.Color(color.Red(), color.Green(), color.Blue(), color.Alpha());
 		hash.Add(color.Value(), rv);
 		return (java.awt.Color)rv;

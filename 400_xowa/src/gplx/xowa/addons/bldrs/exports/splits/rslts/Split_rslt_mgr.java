@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*;
 import gplx.dbs.*;
 public class Split_rslt_mgr {
 	private final Db_conn wkr_conn;
@@ -29,21 +29,21 @@ public class Split_rslt_mgr {
 	public void Init() {
 		// init rslt_db
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("rslt_db"
-		, Dbmeta_fld_itm.new_int("db_id")
-		, Dbmeta_fld_itm.new_long("db_size")
-		, Dbmeta_fld_itm.new_long("obj_size")
-		, Dbmeta_fld_itm.new_int("ns_id")
-		, Dbmeta_fld_itm.new_int("score_min")
-		, Dbmeta_fld_itm.new_int("score_max")
+		, DbmetaFldItm.NewInt("db_id")
+		, DbmetaFldItm.NewLong("db_size")
+		, DbmetaFldItm.NewLong("obj_size")
+		, DbmetaFldItm.NewInt("ns_id")
+		, DbmetaFldItm.NewInt("score_min")
+		, DbmetaFldItm.NewInt("score_max")
 		));
 		this.rslt_db_stmt = wkr_conn.Stmt_insert("rslt_db", "db_id", "db_size", "obj_size", "ns_id", "score_min", "score_max");
 
 		// init rslt_type
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("rslt_type"
-		, Dbmeta_fld_itm.new_int("db_id")
-		, Dbmeta_fld_itm.new_byte("tbl_id")
-		, Dbmeta_fld_itm.new_int("row_count")
-		, Dbmeta_fld_itm.new_long("obj_size")
+		, DbmetaFldItm.NewInt("db_id")
+		, DbmetaFldItm.NewByte("tbl_id")
+		, DbmetaFldItm.NewInt("row_count")
+		, DbmetaFldItm.NewLong("obj_size")
 		));
 		this.rslt_type_stmt = wkr_conn.Stmt_insert("rslt_type", "db_id", "tbl_id", "row_count", "obj_size");
 	}

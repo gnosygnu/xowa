@@ -13,11 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.*; import gplx.dbs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
+package gplx.xowa.xtns.wbases.imports; import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_ascii;
+import gplx.Io_mgr;
+import gplx.Io_url_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Type_;
+import gplx.core.tests.Gftest;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_rdr_;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.DbmetaFldType;
+import gplx.xowa.bldrs.Xobldr_fxt;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
+import org.junit.Before;
+import org.junit.Test;
 public class Xob_wdata_pid_tst {
 	private Db_conn conn;
 	private final Xobldr_fxt fxt = new Xobldr_fxt().Ctor_mem();
@@ -38,21 +55,21 @@ public class Xob_wdata_pid_tst {
 			, fxt.New_page_wo_date(1, "Property:P1", Xob_wdata_tst_utl.Json("p1", "label", String_.Ary("en", "p1_en", "fr", "p1_fr")))
 			);
 
-		db_tester.Test__select_tbl(conn, "wbase_pid", new Dbmeta_fld_list().Bld_str("src_lang").Bld_str("src_ttl").Bld_str("trg_ttl")
+		db_tester.Test__select_tbl(conn, "wbase_pid", new DbmetaFldList().BldStr("src_lang").BldStr("src_ttl").BldStr("trg_ttl")
 		, Object_.Ary("en", "p2_en", "p2")
 		, Object_.Ary("fr", "p2_fr", "p2")
 		, Object_.Ary("en", "p1_en", "p1")
 		, Object_.Ary("fr", "p1_fr", "p1")
 		);
 
-		db_tester.Test__select_tbl(conn, "wbase_prop", new Dbmeta_fld_list().Bld_str("wbp_pid").Bld_int("wbp_datatype")
+		db_tester.Test__select_tbl(conn, "wbase_prop", new DbmetaFldList().BldStr("wbp_pid").BldInt("wbp_datatype")
 		, Object_.Ary("p2", 12)
 		, Object_.Ary("p1", 12)
 		);
 	}
 }
 class Gfo_db_tester {
-	public void Test__select_tbl(Db_conn conn, String tbl, Dbmeta_fld_list flds, Object[]... expd_rows) {
+	public void Test__select_tbl(Db_conn conn, String tbl, DbmetaFldList flds, Object[]... expd_rows) {
 		// get actl
 		List_adp actl_list = List_adp_.New();
 		Db_rdr rdr = Db_rdr_.Empty;
@@ -63,10 +80,10 @@ class Gfo_db_tester {
 				actl_list.Add(actl_row);
 				for (int i = 0; i < flds.Len(); i++) {
 					Object val = rdr.Read_at(i);
-					int val_tid = Dbmeta_fld_tid.Get_by_obj(val);
-					Dbmeta_fld_itm fld = flds.Get_at(i);
-					if (val_tid != fld.Type().Tid_ansi())
-						actl_row[i] = Object_.Xto_str_strict_or_null_mark(val) + "|shouldBe=" + String_.new_u8(fld.Type().Name()) + "|was=" + Type_.Name_by_obj(val);
+					int val_tid = DbmetaFldType.GetTypeIdByObj(val);
+					DbmetaFldItm fld = flds.GetAt(i);
+					if (val_tid != fld.Type().Tid())
+						actl_row[i] = Object_.Xto_str_strict_or_null_mark(val) + "|shouldBe=" + fld.Type().Name() + "|was=" + Type_.Name_by_obj(val);
 					else
 						actl_row[i] = val;
 				}
@@ -75,17 +92,17 @@ class Gfo_db_tester {
 		finally {
 			rdr.Rls();
 		}
-		Object[][] actl_rows = (Object[][])actl_list.To_ary_and_clear(Object[].class);
+		Object[][] actl_rows = (Object[][])actl_list.ToAryAndClear(Object[].class);
 
 		// validate expd datatypes
 		for (Object[] expd_row : expd_rows) {
 			int len = expd_row.length;
 			for (int i = 0; i < len; i++) {
 				Object val = expd_row[i];
-				int val_tid = Dbmeta_fld_tid.Get_by_obj(val);
-				Dbmeta_fld_itm fld = flds.Get_at(i);
-				if (val_tid != fld.Type().Tid_ansi())
-					expd_row[i] = Object_.Xto_str_strict_or_null_mark(val) + "|shouldBe=" + String_.new_u8(fld.Type().Name()) + "|was=" + Type_.Name_by_obj(val);
+				int val_tid = DbmetaFldType.GetTypeIdByObj(val);
+				DbmetaFldItm fld = flds.GetAt(i);
+				if (val_tid != fld.Type().Tid())
+					expd_row[i] = Object_.Xto_str_strict_or_null_mark(val) + "|shouldBe=" + fld.Type().Name() + "|was=" + Type_.Name_by_obj(val);
 			}
 		}
             Gftest.Eq__ary(To_str_ary(expd_rows), To_str_ary(actl_rows), "rows mismatch");

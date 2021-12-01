@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts; import gplx.*;
 import gplx.core.strings.*;
 public class IptBnd_ {
 	public static void msg_(IptCfg cfg, IptBndsOwner box, String bndKey, GfoMsg m, IptArg... ipt) {bld_(cfg, box, (Gfo_invk)box, bndKey, m, ipt);}
@@ -34,7 +34,7 @@ public class IptBnd_ {
 	public static Object Srl(GfoMsg owner, IptBnd bnd) {GfoMsg_.srl_(owner, "bnd").Add("key", bnd.Key()).Add("ipt", AryXtoStr(bnd.Ipts())); return bnd;}
 	static String AryXtoStr(List_adp ary) {
 		String_bldr sb = String_bldr_.new_();
-		for (int i = 0; i < ary.Count(); i++)
+		for (int i = 0; i < ary.Len(); i++)
 			sb.Add_spr_unless_first(((IptArg)ary.Get_at(i)).Key(), "|", i);
 		return sb.To_str();
 	}

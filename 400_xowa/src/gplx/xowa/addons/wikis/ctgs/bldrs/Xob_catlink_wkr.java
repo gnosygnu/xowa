@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
+package gplx.xowa.addons.wikis.ctgs.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
 class Xob_catlink_wkr {
@@ -116,7 +116,7 @@ class Xob_catlink_wkr {
 		// assert page_cat_db_id exists
 		Xow_db_mgr db_mgr = wiki.Data__core_mgr();
 		Xowd_page_tbl page_tbl = db_mgr.Db__core().Tbl__page();
-		page_conn.Meta_fld_append_if_missing(page_tbl.Tbl_name(), page_tbl.Flds__all(), Dbmeta_fld_itm.new_int("page_cat_db_id").Default_(-1));
+		page_conn.Meta_fld_append_if_missing(page_tbl.Tbl_name(), page_tbl.Flds__all(), DbmetaFldItm.NewInt("page_cat_db_id").DefaultValSet(-1));
 
 		// prep sql
 		String sql = String_.Concat_lines_nl_skip_last

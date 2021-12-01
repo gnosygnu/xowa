@@ -252,7 +252,7 @@ class GfuiMenuBarItmType {
 	public String Name() {return name;} private String name;
 	GfuiMenuBarItmType(int v, String n) {val = v; name = n; regy.Add(n, this);}
 	public static GfuiMenuBarItmType parse(String raw) {
-		try {return (GfuiMenuBarItmType)regy.Get_by(raw);}
+		try {return (GfuiMenuBarItmType)regy.GetByOrNull(raw);}
 		catch (Exception e) {Err_.Noop(e); throw Err_.new_parse("GfuiMenuBarItmType", raw);}
 	}
 	static Hash_adp regy = Hash_adp_.New();

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.files.dbs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;	
 public class Xobldr__page_file_map__create extends Xob_cmd__base {
@@ -31,7 +31,7 @@ public class Xobldr__page_file_map__create extends Xob_cmd__base {
 		String fld = "fsdb_id";
 		for (String tbl : tbls) {
 			if (!conn.Meta_fld_exists(tbl, fld))
-				conn.Meta_fld_append(tbl, Dbmeta_fld_itm.new_int(fld).Default_(-1));	// EX: ALTER TABLE xfer_regy ADD fsdb_id INTEGER DEFAULT -1;
+				conn.Meta_fld_append(tbl, DbmetaFldItm.NewInt(fld).DefaultValSet(-1));	// EX: ALTER TABLE xfer_regy ADD fsdb_id INTEGER DEFAULT -1;
 		}
 	}
 	private void Create__fsdb_idxs() {

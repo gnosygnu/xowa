@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.css; import gplx.*;
 import gplx.core.ios.*; import gplx.xowa.files.downloads.*;
 public class Xob_mirror_mgr {
 	private final Xof_download_wkr download_wkr; private final Xob_css_parser css_parser;
@@ -27,7 +27,7 @@ public class Xob_mirror_mgr {
 	public byte[] Site_url() {return site_url;} private final byte[] site_url;
 	public void Code_add(byte[] src_url) {
 		byte[] trg_url = Xob_css_tkn__url.To_fsys(src_url);
-		code_hash.Add_if_dupe_use_1st(src_url, new Xobc_download_itm(Xobc_download_itm.Tid_css, String_.new_u8(src_url), trg_url));
+		code_hash.AddIfDupeUse1st(src_url, new Xobc_download_itm(Xobc_download_itm.Tid_css, String_.new_u8(src_url), trg_url));
 	}
 	public Ordered_hash Code_hash() {return code_hash;} private final Ordered_hash code_hash = Ordered_hash_.New();
 	public Ordered_hash File_hash() {return file_hash;} private final Ordered_hash file_hash = Ordered_hash_.New();

@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
+package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.utls.*;
 public class Merge2_heap_mgr {// data tbls will only have 1 itms; blob tbls will have N itms
 	private final Split_tbl tbl;
 	private final List_adp list = List_adp_.New(), deleted = List_adp_.New();
-	private Dbmeta_fld_list heap_flds;
+	private DbmetaFldList heap_flds;
 	public Merge2_heap_mgr(Split_tbl tbl) {this.tbl = tbl;}
 	public Merge2_heap_db	Cur()			{return cur;} private Merge2_heap_db cur;
 	public Merge2_heap_db Make_itm(Xow_wiki wiki, int trg_db_id) {
@@ -26,8 +26,8 @@ public class Merge2_heap_mgr {// data tbls will only have 1 itms; blob tbls will
 		this.heap_flds = tbl.Flds().Clone();
 		int len = heap_flds.Len();
 		for (int i = 0; i < len; ++i) {
-			Dbmeta_fld_itm itm = heap_flds.Get_at(i);
-			if (itm.Primary()) itm.Primary_n_();
+			DbmetaFldItm itm = heap_flds.GetAt(i);
+			if (itm.Primary()) itm.PrimarySetN();
 		}
 
 		// if blob, add "blob_len" in penultimate pos; note that last fld is "blob_fld"			
@@ -80,7 +80,7 @@ public class Merge2_heap_mgr {// data tbls will only have 1 itms; blob tbls will
 		Split_tbl tbl = wkr.Tbl();
 		String tbl_name = tbl.Tbl_name();
 		Db_conn heap_conn = itm.Conn();
-		Dbmeta_fld_list tbl_flds = tbl.Flds();
+		DbmetaFldList tbl_flds = tbl.Flds();
 		Db_conn wiki_conn = tbl.Wiki_conn__get_or_new(ctx.Wiki(), itm.Idx());
 
 		// index heap table

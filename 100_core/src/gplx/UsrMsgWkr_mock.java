@@ -19,7 +19,7 @@ public class UsrMsgWkr_mock implements UsrMsgWkr {
 		msgs.Add(m);
 	}
 	public boolean HasWarn(UsrMsg um) {
-		for (int i = 0; i < msgs.Count(); i++) {
+		for (int i = 0; i < msgs.Len(); i++) {
 			UsrMsg found = (UsrMsg)msgs.Get_at(i);
 			if (String_.Eq(um.To_str(), found.To_str())) return true;
 		}

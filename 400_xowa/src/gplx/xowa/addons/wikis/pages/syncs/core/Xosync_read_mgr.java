@@ -13,9 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.syncs.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.syncs.*;
+package gplx.xowa.addons.wikis.pages.syncs.core; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
-import gplx.xowa.htmls.*;
 import gplx.xowa.addons.wikis.pages.syncs.dbs.*;
 import gplx.xowa.apps.apis.xowa.addons.bldrs.*;
 import gplx.xowa.wikis.data.tbls.*;
@@ -52,12 +51,12 @@ public class Xosync_read_mgr implements Gfo_invk {
 		while (true) {
 			// exit early...
 			if (pages.Has(page_ttl.Full_db()) // ... if circular redirect; EX: A -> B -> A
-				|| pages.Count() == 3) {      // ... or too many redirects EX: A -> B -> C -> D
+				|| pages.Len() == 3) {      // ... or too many redirects EX: A -> B -> C -> D
 				return rv;
 			}
 			// else, add to list of pages
 			else {
-				pages.Add_as_key_and_val(page_ttl.Full_db());
+				pages.AddAsKeyAndVal(page_ttl.Full_db());
 			}
 
 			// skip if special
@@ -100,7 +99,7 @@ public class Xosync_read_mgr implements Gfo_invk {
 			sync_tbl.Upsert(parse_data.Page_id(), Datetime_now.Get());
 
 			// redirect occurred; EX: A -> B will have A,B in pages
-			if (pages.Count() > 1) {
+			if (pages.Len() > 1) {
 				wiki.Data__core_mgr().Tbl__page().Update__redirect(parse_data.Page_id(), prv_page_id);
 			}
 

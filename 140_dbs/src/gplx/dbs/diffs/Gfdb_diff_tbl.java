@@ -16,15 +16,15 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.diffs; import gplx.*; import gplx.dbs.*;
 import gplx.dbs.metas.*;
 public class Gfdb_diff_tbl {		
-	public Gfdb_diff_tbl(String name, Dbmeta_fld_itm[] flds, Dbmeta_fld_itm[] keys, Dbmeta_fld_itm[] vals) {
+	public Gfdb_diff_tbl(String name, DbmetaFldItm[] flds, DbmetaFldItm[] keys, DbmetaFldItm[] vals) {
 		this.Name = name; this.Flds = flds; this.Keys = keys; this.Vals = vals;
 	}
 	public final String Name;
-	public final Dbmeta_fld_itm[] Flds;
-	public final Dbmeta_fld_itm[] Keys;
-	public final Dbmeta_fld_itm[] Vals;
+	public final DbmetaFldItm[] Flds;
+	public final DbmetaFldItm[] Keys;
+	public final DbmetaFldItm[] Vals;
 	public Db_rdr Make_rdr(Db_conn conn) {
-		Db_stmt stmt = conn.Stmt_select_order(Name, Dbmeta_fld_itm.To_str_ary(Flds), Dbmeta_fld_itm.Str_ary_empty, Dbmeta_fld_itm.To_str_ary(Keys));
+		Db_stmt stmt = conn.Stmt_select_order(Name, DbmetaFldItm.ToStrAry(Flds), DbmetaFldItm.StrAryEmpty, DbmetaFldItm.ToStrAry(Keys));
 		return stmt.Exec_select__rls_auto();
 	}
 
@@ -40,7 +40,7 @@ public class Gfdb_diff_tbl {
 		Dbmeta_fld_mgr flds = tbl.Flds();
 		int flds_len = flds.Len();
 		for (int i = 0; i < flds_len; ++i) {
-			Dbmeta_fld_itm fld = flds.Get_at(i);
+			DbmetaFldItm fld = flds.Get_at(i);
 			if (fld.Primary()) {
 				rv.Add(fld);
 				return rv;
@@ -67,7 +67,7 @@ public class Gfdb_diff_tbl {
 		}
 		// just add all
 		for (int i = 0; i < flds_len; ++i) {
-			Dbmeta_fld_itm fld = flds.Get_at(i);
+			DbmetaFldItm fld = flds.Get_at(i);
 			rv.Add(fld);					
 		}
 		return rv;
@@ -76,7 +76,7 @@ public class Gfdb_diff_tbl {
 		Dbmeta_fld_mgr rv = new Dbmeta_fld_mgr();
 		int flds_len = flds.Len();
 		for (int i = 0; i < flds_len; ++i) {
-			Dbmeta_fld_itm fld = flds.Get_at(i);
+			DbmetaFldItm fld = flds.Get_at(i);
 			if (!keys.Has(fld.Name())) rv.Add(fld);
 		}
 		return rv;

@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
-import gplx.core.primitives.*; import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
+package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*;
+import gplx.dbs.*;
 public abstract class Split_rslt_wkr__objs__base implements Split_rslt_wkr {
 	private Split_rslt_mgr rslt_mgr;
 	private Db_conn wkr_conn; private Db_stmt stmt; private int db_id;
 	private final List_adp pkey_list = List_adp_.New();
-	private final String tbl_name; private final int pkey_flds_len; private final Dbmeta_fld_itm[] pkey_flds; private final String[] pkey_names;
+	private final String tbl_name; private final int pkey_flds_len; private final DbmetaFldItm[] pkey_flds; private final String[] pkey_names;
 	public Split_rslt_wkr__objs__base() {
 		this.tbl_name = Tbl_name();
 		this.pkey_flds = Pkey_flds();
@@ -30,14 +30,14 @@ public abstract class Split_rslt_wkr__objs__base implements Split_rslt_wkr {
 	}
 	public abstract byte Tid();
 	public abstract String Tbl_name();
-	public abstract Dbmeta_fld_itm[] Pkey_flds();
+	public abstract DbmetaFldItm[] Pkey_flds();
 	public int Row_count() {return pkey_list.Len();}
 	public long Obj_size() {return obj_size;} private long obj_size;
 	public void On__init(Split_rslt_mgr rslt_mgr, Db_conn wkr_conn) {
 		this.rslt_mgr = rslt_mgr;
 		this.wkr_conn = wkr_conn;
-		Dbmeta_tbl_itm meta_tbl = Dbmeta_tbl_itm.New(tbl_name, Dbmeta_fld_itm.new_int("db_id"));
-		for (Dbmeta_fld_itm pkey_fld : pkey_flds )
+		Dbmeta_tbl_itm meta_tbl = Dbmeta_tbl_itm.New(tbl_name, DbmetaFldItm.NewInt("db_id"));
+		for (DbmetaFldItm pkey_fld : pkey_flds )
 			meta_tbl.Flds().Add(pkey_fld);
 		wkr_conn.Meta_tbl_remake(meta_tbl);
 		this.stmt = wkr_conn.Stmt_insert(tbl_name, String_.Ary_add(String_.Ary("db_id"), pkey_names));
@@ -58,8 +58,8 @@ public abstract class Split_rslt_wkr__objs__base implements Split_rslt_wkr {
 			stmt.Clear().Val_int("db_id", db_id);
 			Object[] pkey_objs = (Object[])pkey_list.Get_at(i);
 			for (int j = 0; j < pkey_flds_len; ++j) {
-				Dbmeta_fld_itm pkey_fld = pkey_flds[j];
-				gplx.dbs.stmts.Db_stmt_arg_list.Fill_val(stmt, pkey_fld.Type().Tid_ansi(), pkey_fld.Name(), pkey_objs[j]);
+				DbmetaFldItm pkey_fld = pkey_flds[j];
+				gplx.dbs.stmts.Db_stmt_arg_list.Fill_val(stmt, pkey_fld.Type().Tid(), pkey_fld.Name(), pkey_objs[j]);
 			}
 			stmt.Exec_insert();
 		}

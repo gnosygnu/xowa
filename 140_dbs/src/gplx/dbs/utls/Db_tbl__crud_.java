@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
 import gplx.dbs.stmts.*;
 public class Db_tbl__crud_ {
-	public static boolean Upsert(Db_conn conn, String tbl_name, Dbmeta_fld_list flds, String[] crt_cols, Object... objs) {
+	public static boolean Upsert(Db_conn conn, String tbl_name, DbmetaFldList flds, String[] crt_cols, Object... objs) {
 		// init
 		int crt_cols_len = crt_cols.length;
 		String[] val_cols = Find_excepts(flds, crt_cols);
@@ -48,33 +48,33 @@ public class Db_tbl__crud_ {
 			return true;
 		}
 	}
-	private static String[] Find_excepts(Dbmeta_fld_list flds, String[] cols) {
+	private static String[] Find_excepts(DbmetaFldList flds, String[] cols) {
 		// hash cols
 		Hash_adp hash = Hash_adp_.New();
 		int cols_len = cols.length;
 		for (int i = 0; i < cols_len; ++i)
-			hash.Add_as_key_and_val(cols[i]);
+			hash.AddAsKeyAndVal(cols[i]);
 
 		// loop flds and get excepts
 		List_adp list = List_adp_.New();
 		int flds_len = flds.Len();
 		for (int i = 0; i < flds_len; ++i) {
-			Dbmeta_fld_itm fld = flds.Get_at(i);
+			DbmetaFldItm fld = flds.GetAt(i);
 			if (!hash.Has(fld.Name()))
 				list.Add(fld.Name());
 		}
-		return list.To_str_ary_and_clear();
+		return list.ToStrAryAndClear();
 	}
-	private static void Add_arg(Db_stmt stmt, Dbmeta_fld_list flds, String[] cols, Object[] objs, boolean mode_is_crt, int objs_bgn) {
+	private static void Add_arg(Db_stmt stmt, DbmetaFldList flds, String[] cols, Object[] objs, boolean mode_is_crt, int objs_bgn) {
 		int cols_len = cols.length;
 		for (int i = 0; i < cols_len; ++i) {
 			String col = cols[i];
-			Dbmeta_fld_itm fld = flds.Get_by(col);
+			DbmetaFldItm fld = flds.GetByOrNull(col);
 			Object obj = objs[i + objs_bgn];
 			if (mode_is_crt)
-				Db_stmt_arg_list.Fill_crt(stmt, fld.Type().Tid_ansi(), col, obj);
+				Db_stmt_arg_list.Fill_crt(stmt, fld.Type().Tid(), col, obj);
 			else
-				Db_stmt_arg_list.Fill_val(stmt, fld.Type().Tid_ansi(), col, obj);
+				Db_stmt_arg_list.Fill_val(stmt, fld.Type().Tid(), col, obj);
 		}
 	}
 }

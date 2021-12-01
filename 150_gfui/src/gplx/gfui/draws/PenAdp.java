@@ -13,9 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.draws; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.draws; import gplx.*;
 import java.awt.BasicStroke;
-import java.awt.Stroke;
 import gplx.core.strings.*;
 public class PenAdp implements Gfo_invk {
 	public float Width() {return width;} public void Width_set(float v) {width = v; InitUnder();} float width;
@@ -39,7 +38,7 @@ public class PenAdp implements Gfo_invk {
 }
 class PenAdpCache {
 		public BasicStroke Fetch(float width) {
-		Object rv = hash.Get_by(width);
+		Object rv = hash.GetByOrNull(width);
 		if (rv == null) {
 			rv = new BasicStroke(width);
 			hash.Add(width, rv);

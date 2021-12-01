@@ -15,7 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.core.primitives.*;
-import gplx.dbs.*; import gplx.fsdb.*; import gplx.xowa.wikis.*;
+import gplx.dbs.*;
+import gplx.xowa.wikis.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 class Xofc_fil_mgr {
 	private Xof_cache_mgr cache_mgr;		
@@ -23,7 +24,7 @@ class Xofc_fil_mgr {
 	public Xofc_fil_mgr(Xof_cache_mgr v) {this.cache_mgr = v;}
 	public void Conn_(Db_conn v, boolean created, boolean schema_is_1) {tbl.Conn_(v, created, schema_is_1);}
 	public void Save_all() {
-		int len = hash.Count();
+		int len = hash.Len();
 		boolean err_seen = false;
 		for (int i = 0; i < len; i++) {
 			Xofc_fil_itm itm = (Xofc_fil_itm)hash.Get_at(i);
@@ -43,7 +44,7 @@ class Xofc_fil_mgr {
 	}
 	public Xofc_fil_itm Get_or_make(int dir_id, byte[] name, boolean is_orig, int w, int h, double time, Xof_ext ext, long size, Bool_obj_ref created) {
 		byte[] key = Xofc_fil_itm.Gen_hash_key_v1(key_bldr, dir_id, name, is_orig, w, h, time);
-		Xofc_fil_itm itm = (Xofc_fil_itm)hash.Get_by(key);
+		Xofc_fil_itm itm = (Xofc_fil_itm)hash.GetByOrNull(key);
 		if (itm == Xofc_fil_itm.Null) {								// not in memory
 			itm = tbl.Select_one_v1(dir_id, name, is_orig, w, h, time);
 			if (itm == Xofc_fil_itm.Null) {							// not in db
@@ -57,7 +58,7 @@ class Xofc_fil_mgr {
 	}
 	public Xofc_fil_itm Get_or_null(int dir_id, byte[] name, boolean is_orig, int w, double time, int page) {
 		byte[] key = Xofc_fil_itm.Gen_hash_key_v2(key_bldr, dir_id, name, is_orig, w, time, page);
-		Xofc_fil_itm itm = (Xofc_fil_itm)hash.Get_by(key);
+		Xofc_fil_itm itm = (Xofc_fil_itm)hash.GetByOrNull(key);
 		if (itm == null) {											// not in memory
 			itm = tbl.Select_one_v2(dir_id, name, is_orig, w, time, page);
 			if (itm == Xofc_fil_itm.Null) return itm;				// not in db
@@ -80,7 +81,7 @@ class Xofc_fil_mgr {
 			dir_mgr.Save_all(); dir_mgr.Load_all();				// save and load all dirs
 			this.Save_all(); tbl.Select_all(key_bldr, hash);	// save and load all fils				
 			hash.Sort();	// sorts by cache_time desc
-			int len = hash.Count();
+			int len = hash.Len();
 			long cur_size = 0, actl_size = 0;
 			Xof_url_bldr url_bldr = new Xof_url_bldr();
 			List_adp deleted = List_adp_.New();
@@ -102,7 +103,7 @@ class Xofc_fil_mgr {
 				if (err_msg != null)
 					Db_recalc_next_id(itm, err_msg);
 			}
-			len = deleted.Count();
+			len = deleted.Len();
 			for (int i = 0; i < len; i++) {
 				Xofc_fil_itm itm = (Xofc_fil_itm)deleted.Get_at(i);
 				byte[] fil_key = itm.Gen_hash_key_v1(key_bldr);

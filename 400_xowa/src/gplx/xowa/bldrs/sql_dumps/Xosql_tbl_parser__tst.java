@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.sql_dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.sql_dumps; import gplx.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Xosql_tbl_parser__tst {
 	private final Xosql_tbl_parser__fxt fxt = new Xosql_tbl_parser__fxt();
@@ -75,7 +75,7 @@ class Xosql_tbl_parser__fxt {
 	public void Exec__parse(String v) {this.tbl_flds = parser.Parse(Bry_.new_a7(v));}
 	public void Test__count(int expd) {Gftest.Eq__int(expd, tbl_flds.Len());}
 	public void Test__get(String key, int expd) {
-		Xosql_fld_itm actl_itm = (Xosql_fld_itm)tbl_flds.Get_by(Bry_.new_u8(key));
+		Xosql_fld_itm actl_itm = (Xosql_fld_itm)tbl_flds.GetByOrNull(Bry_.new_u8(key));
 		Gftest.Eq__int(expd, actl_itm == null ? Bry_find_.Not_found : actl_itm.Idx());
 	}
 	public void Test__extract(String raw, String expd) {

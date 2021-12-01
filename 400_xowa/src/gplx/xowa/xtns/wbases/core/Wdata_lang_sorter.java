@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.core; import gplx.*;
+import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.apps.apis.xowa.xtns.*;
 public class Wdata_lang_sorter implements Gfo_evt_itm, gplx.core.lists.ComparerAble {
 	private Hash_adp_bry hash = Hash_adp_bry.cs();
@@ -27,7 +28,7 @@ public class Wdata_lang_sorter implements Gfo_evt_itm, gplx.core.lists.ComparerA
 		for (int i = 0; i < len; ++i) {
 			byte[] lang = langs[i];
 			Wdata_lang_sorter_itm itm = new Wdata_lang_sorter_itm(i, lang);
-			hash.Add_if_dupe_use_1st(lang, itm);
+			hash.AddIfDupeUse1st(lang, itm);
 		}
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -48,7 +49,7 @@ public class Wdata_lang_sorter implements Gfo_evt_itm, gplx.core.lists.ComparerA
 		Sort_wdoc_list(Bool_.N, wdoc.Alias_list());
 	}
 	private void Sort_wdoc_list(boolean is_slink, Ordered_hash list) {
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wdata_lang_sortable itm = (Wdata_lang_sortable)list.Get_at(i);
 			if (is_slink) {
@@ -61,7 +62,7 @@ public class Wdata_lang_sorter implements Gfo_evt_itm, gplx.core.lists.ComparerA
 		}
 	}
 	private int Sort_calc(Wdata_lang_sortable data_itm) {
-		Wdata_lang_sorter_itm sort_itm = (Wdata_lang_sorter_itm)hash.Get_by(data_itm.Lang_code());
+		Wdata_lang_sorter_itm sort_itm = (Wdata_lang_sorter_itm)hash.GetByOrNull(data_itm.Lang_code());
 		int new_sort = sort_itm == null ? Sort_none : sort_itm.Sort();
 		data_itm.Lang_sort_(new_sort);
 		return new_sort;

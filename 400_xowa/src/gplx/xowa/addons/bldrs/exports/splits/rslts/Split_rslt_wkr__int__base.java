@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.rslts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
-import gplx.core.primitives.*; import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
+package gplx.xowa.addons.bldrs.exports.splits.rslts;
+import gplx.core.primitives.*; import gplx.dbs.*;
 public abstract class Split_rslt_wkr__int__base implements Split_rslt_wkr {
 	private Split_rslt_mgr rslt_mgr;
 	private Db_conn wkr_conn; private Db_stmt stmt; private int db_id;
@@ -33,8 +33,8 @@ public abstract class Split_rslt_wkr__int__base implements Split_rslt_wkr {
 		this.rslt_mgr = rslt_mgr;
 		this.wkr_conn = wkr_conn;
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New(tbl_name
-		, Dbmeta_fld_itm.new_int("db_id")
-		, Dbmeta_fld_itm.new_int(pkey_name)
+		, DbmetaFldItm.NewInt("db_id")
+		, DbmetaFldItm.NewInt(pkey_name)
 		));
 		this.stmt = wkr_conn.Stmt_insert(tbl_name, "db_id", pkey_name);
 	}

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.parsers.*;
+package gplx.xowa.langs.bldrs; import gplx.*;
+import gplx.xowa.langs.*;
+import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.parsers.*;
 public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 	private final Xoa_lang_mgr lang_mgr;
 	public Xobc_utl_make_lang_kwds(Xoa_lang_mgr lang_mgr) {this.lang_mgr = lang_mgr;}		
@@ -42,7 +43,7 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 	public void Add_words() {
 		Ordered_hash hash = add_words_hash;
 		Ordered_hash tmp = Ordered_hash_.New_bry();
-		int hash_len = hash.Count();
+		int hash_len = hash.Len();
 		for (int i = 0; i < hash_len; i++) {
 			Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.Get_at(i); 
 			Xol_lang_itm lang = lang_mgr.Get_by_or_null(cfg_lang.Key_bry()); if (lang == null) continue;
@@ -74,7 +75,7 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 		}
 	}
 	boolean Hash_itm_applies(Ordered_hash hash, byte[] lang_key, byte[] kwd_key, byte[] kwd_word) {
-		Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.Get_by(lang_key); if (cfg_lang == null) return false;
+		Xobcl_kwd_lang cfg_lang = (Xobcl_kwd_lang)hash.GetByOrNull(lang_key); if (cfg_lang == null) return false;
 		Xobcl_kwd_row cfg_grp = cfg_lang.Grps_get_by_key(kwd_key); if (cfg_grp == null) return false;
 		return cfg_grp.Itms().length == 0 || cfg_grp.Itms_has(kwd_word);
 	}
@@ -88,7 +89,7 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 		for (int i = 0; i < len; ++i) {
 			Xol_lang_stub stub_itm = stub_ary[i];
 			byte[] key = stub_itm.Key();
-			Xobcl_kwd_lang grp = (Xobcl_kwd_lang)hash.Get_by(key);
+			Xobcl_kwd_lang grp = (Xobcl_kwd_lang)hash.GetByOrNull(key);
 			if (grp == null) {
 				grp = new Xobcl_kwd_lang(key, itms); 
 				hash.Add(key, grp);
@@ -126,7 +127,7 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 			if (last) break;
 			++pos;
 		}		
-		return (Xobcl_kwd_row[])rv.To_ary(Xobcl_kwd_row.class);
+		return (Xobcl_kwd_row[])rv.ToAry(Xobcl_kwd_row.class);
 	}
 }
 class Xobcl_kwd_lang {
@@ -138,10 +139,10 @@ class Xobcl_kwd_lang {
 	public void Merge(Xobcl_kwd_row[] v) {
 		grps = (Xobcl_kwd_row[])Array_.Resize_add(grps, v);
 		for (Xobcl_kwd_row grp : v) {
-			grps_hash.Add_if_dupe_use_nth(grp.Key(), grp);	// NOTE: Add_if_dupe_use_nth instead of Add b/c kwds may be expanded; EX: lst is added to all langs but de requires #lst~#section~Abschnitt~; DATE:2013-06-02
+			grps_hash.AddIfDupeUseNth(grp.Key(), grp);	// NOTE: Add_if_dupe_use_nth instead of Add b/c kwds may be expanded; EX: lst is added to all langs but de requires #lst~#section~Abschnitt~; DATE:2013-06-02
 		}
 	}
-	public Xobcl_kwd_row Grps_get_by_key(byte[] key) {return (Xobcl_kwd_row)grps_hash.Get_by(key);} private Ordered_hash grps_hash = Ordered_hash_.New_bry();
+	public Xobcl_kwd_row Grps_get_by_key(byte[] key) {return (Xobcl_kwd_row)grps_hash.GetByOrNull(key);} private Ordered_hash grps_hash = Ordered_hash_.New_bry();
 	public byte[] Key_bry() {return key_bry;} private byte[] key_bry;
 	public Xobcl_kwd_row[] Grps() {return grps;} private Xobcl_kwd_row[] grps;
 }

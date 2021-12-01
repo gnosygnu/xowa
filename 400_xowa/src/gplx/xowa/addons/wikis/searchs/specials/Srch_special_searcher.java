@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.specials.htmls.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_special_searcher {
@@ -54,7 +55,7 @@ public class Srch_special_searcher {
 		cancel_hash.Del(cmd.key);
 	}
 	public void Search__cancel(byte[] cmd_key) {
-		Srch_special_cmd cmd = (Srch_special_cmd)cancel_hash.Get_by(cmd_key); // if (cmd == null) return;	// ignore false calls to cancel
+		Srch_special_cmd cmd = (Srch_special_cmd)cancel_hash.GetByOrNull(cmd_key); // if (cmd == null) return;	// ignore false calls to cancel
 		cmd.On_cancel();
 		cancel_hash.Del(cmd.key);
 	}

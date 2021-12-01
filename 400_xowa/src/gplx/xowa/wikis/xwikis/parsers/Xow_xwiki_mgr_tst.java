@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+package gplx.xowa.wikis.xwikis.parsers; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.wikis.xwikis.*;
 import org.junit.*; import gplx.core.strings.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.langs.*;
 public class Xow_xwiki_mgr_tst {		
@@ -128,7 +129,7 @@ class Xow_xwiki_mgr_fxt {
 			if (itm == null) itm = xwiki_null_(String_.new_u8(alias)); // "null", ignore
 			rv.Add(itm);
 		}
-		return (Xow_xwiki_itm[])rv.To_ary(Xow_xwiki_itm.class);
+		return (Xow_xwiki_itm[])rv.ToAry(Xow_xwiki_itm.class);
 	}
 	String Xto_str(Xow_xwiki_itm[] itms) {
 		int len = itms.length;

@@ -42,22 +42,22 @@ public class GftBand {
 		int x = 0;
 		y = grid.Bands_dir().GetValByDir(y - h, y);
 		int availX = owner.Gft_w();
-		for (int i = 0; i < cells.Count(); i++) {
+		for (int i = 0; i < cells.Len(); i++) {
 			GftCell cell = (GftCell)cells.Get_at(i);
 			if (cell.Len0().Key() == GftSizeCalc_abs.KEY) {
 				GftSizeCalc_abs calc = (GftSizeCalc_abs)cell.Len0();
 				availX -= calc.Val();
 			}
 			else if (cell.Len0().Key() == GftSizeCalc_var.KEY) {
-				if (i >= items.Count()) continue;
+				if (i >= items.Len()) continue;
 				GftItem item = (GftItem)items.Get_at(i);
 				GfuiElem elem = GfuiElem_.as_(item);
 				availX -= elem == null ? item.Gft_w() : elem.Width();
 			}
 		}
-		for (int i = 0; i < items.Count(); i++) {
+		for (int i = 0; i < items.Len(); i++) {
 			GftItem item = (GftItem)items.Get_at(i);
-			GftCell cell = i >= cells.Count() ? cell_dfl : (GftCell)cells.Get_at(i);
+			GftCell cell = i >= cells.Len() ? cell_dfl : (GftCell)cells.Get_at(i);
 			int w = cell.Len0().Calc(grid, this, owner, item, availX);
 			item.Gft_rect_(RectAdp_.new_(x, y, w, h));
 //				Tfds.Write(item.Key_of_GfuiElem(), w, h, x, y);
@@ -69,7 +69,7 @@ public class GftBand {
 		GftBand rv = new GftBand();
 		rv.grid = grid;
 		rv.key = key; rv.idx = idx; rv.cell_dfl = cell_dfl.Clone(); rv.len1 = this.len1.Clone();
-		for (int i = 0; i < cells.Count(); i++) {
+		for (int i = 0; i < cells.Len(); i++) {
 			GftCell cell = (GftCell)cells.Get_at(i);
 			rv.cells.Add(cell.Clone());
 		}

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps; import gplx.*;
 import org.junit.*;
 public class Php_text_itm_tst {
 	@Before public void init() {fxt.Clear();} private Php_text_itm_fxt fxt = new Php_text_itm_fxt();
@@ -41,7 +41,7 @@ class Php_text_itm_fxt {
 		byte[] raw = Bry_.new_u8(raw_str);
 		parser.Parse(list, raw);
 		Bry_bfr bfr = Bry_bfr_.Reset(255);
-		int list_len = list.Count();
+		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
 			Php_text_itm itm = (Php_text_itm)list.Get_at(i);
 			itm.Bld(bfr, raw);

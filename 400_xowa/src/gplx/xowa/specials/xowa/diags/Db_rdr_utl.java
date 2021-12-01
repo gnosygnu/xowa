@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.xowa.diags; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*; import gplx.xowa.specials.xowa.*;
+package gplx.xowa.specials.xowa.diags; import gplx.*;
 import gplx.core.stores.*;
 import gplx.dbs.*;
 import gplx.dbs.engines.mems.*;
@@ -21,7 +21,7 @@ public class Db_rdr_utl {
 	public static void Load_and_write(Db_conn conn, String sql, Bry_bfr bfr) {
 		Write_to_bfr(bfr, Load(conn, sql));
 	}
-	public static Mem_qry_set Load_as_qry_set(Db_conn conn, Dbmeta_fld_list fld_list, String sql) {
+	public static Mem_qry_set Load_as_qry_set(Db_conn conn, DbmetaFldList fld_list, String sql) {
 		Mem_qry_set qry_set = new Mem_qry_set();
 		DataRdr rdr = conn.Exec_sql_as_old_rdr(sql);
 		try {
@@ -29,7 +29,7 @@ public class Db_rdr_utl {
 			while (rdr.MoveNextPeer()) {
 				Mem_row row = new Mem_row();
 				for (int i = 0; i < fld_count; ++i)						
-					row.Add(fld_list.Get_at(i).Name(), rdr.ReadAt(i));
+					row.Add(fld_list.GetAt(i).Name(), rdr.ReadAt(i));
 				qry_set.Add(row);
 			}
 		}
@@ -54,7 +54,7 @@ public class Db_rdr_utl {
 		finally {
 			rdr.Rls();
 		}
-		return (Object[][])list.To_ary_and_clear(Object[].class);
+		return (Object[][])list.ToAryAndClear(Object[].class);
 	}
 	public static void Write_to_bfr(Bry_bfr bfr, Object[][] rows, int... skip) {
 		int rows_len = rows.length;

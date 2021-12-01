@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys.fmts; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
+package gplx.core.brys.fmts; import gplx.*;
 public class Bry_fmt_parser_ {
 	public static Bry_fmt_itm[] Parse(byte escape, byte grp_bgn, byte grp_end, Bfr_fmt_arg[] args, byte[][] keys, byte[] src) {
 		int src_len = src.length;
@@ -56,18 +56,18 @@ public class Bry_fmt_parser_ {
 				++pos;
 			}
 		}
-		Bry_fmt_itm[] rv = (Bry_fmt_itm[])list.To_ary_and_clear(Bry_fmt_itm.class);
+		Bry_fmt_itm[] rv = (Bry_fmt_itm[])list.ToAryAndClear(Bry_fmt_itm.class);
 		int len = args.length;
 		for (int i = 0; i < len; ++i) {
 			Bfr_fmt_arg arg = args[i];
-			Bry_fmt_itm key_itm = (Bry_fmt_itm)keys_hash.Get_by(arg.Key); if (key_itm == null) continue;
+			Bry_fmt_itm key_itm = (Bry_fmt_itm)keys_hash.GetByOrNull(arg.Key); if (key_itm == null) continue;
 			key_itm.Tid = Bry_fmt_itm.Tid__arg;
 			key_itm.Arg = arg.Arg;
 		}
 		len = keys.length;
 		for (int i = 0; i < len; ++i) {
 			byte[] key = keys[i];
-			Bry_fmt_itm key_itm = (Bry_fmt_itm)keys_hash.Get_by(key); if (key_itm == null) continue; // NOTE: ignore missing keys; EX: fmt=a~{b}c keys=b,d; do not fail b/c ~{d} is not in fmt; allows redefining from tests
+			Bry_fmt_itm key_itm = (Bry_fmt_itm)keys_hash.GetByOrNull(key); if (key_itm == null) continue; // NOTE: ignore missing keys; EX: fmt=a~{b}c keys=b,d; do not fail b/c ~{d} is not in fmt; allows redefining from tests
 			key_itm.Key_idx = i;
 		}
 		return rv;

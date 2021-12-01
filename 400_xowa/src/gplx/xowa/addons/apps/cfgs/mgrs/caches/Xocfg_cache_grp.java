@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.mgrs.*;
+package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*;
+import gplx.xowa.addons.apps.cfgs.*;
 public class Xocfg_cache_grp {
 	private final Hash_adp vals = Hash_adp_.New();
 	private final Ordered_hash subs = Ordered_hash_.New();
@@ -28,18 +29,18 @@ public class Xocfg_cache_grp {
 	public void Dflt_(String v) {this.dflt = v;}
 	public String Get(String ctx) {
 		// exact match; EX: "en.w|key_1"
-		Xocfg_cache_itm rv = (Xocfg_cache_itm)vals.Get_by(ctx);
+		Xocfg_cache_itm rv = (Xocfg_cache_itm)vals.GetByOrNull(ctx);
 		if (rv != null) return rv.Val();
 
 		// global match; EX: "app|key_1"
-		rv = (Xocfg_cache_itm)vals.Get_by(Xocfg_mgr.Ctx__app);
+		rv = (Xocfg_cache_itm)vals.GetByOrNull(Xocfg_mgr.Ctx__app);
 		if (rv != null) return rv.Val();
 
 		// dflt
 		return dflt;
 	}
 	public void Set(String ctx, String val) {
-		Xocfg_cache_itm rv = (Xocfg_cache_itm)vals.Get_by(ctx);
+		Xocfg_cache_itm rv = (Xocfg_cache_itm)vals.GetByOrNull(ctx);
 		if (rv == null) {
 			rv = new Xocfg_cache_itm(ctx, key, val);
 			vals.Add(ctx, rv);
@@ -55,7 +56,7 @@ public class Xocfg_cache_grp {
 		vals.Add(ctx, itm);
 	}
 	public void Sub(Gfo_invk sub, String ctx, String evt) {
-		List_adp list = (List_adp)subs.Get_by(ctx);
+		List_adp list = (List_adp)subs.GetByOrNull(ctx);
 		if (list == null) {
 			list = List_adp_.New();
 			subs.Add(ctx, list);
@@ -64,7 +65,7 @@ public class Xocfg_cache_grp {
 	}
 	public void Pub(String ctx, String val) {
 		// exact match; EX: "en.w|key_1"
-		List_adp list = (List_adp)subs.Get_by(ctx);
+		List_adp list = (List_adp)subs.GetByOrNull(ctx);
 		if (list == null) {// global match; EX: "app|key_1"
 			int len = subs.Len();
 			for (int i = 0; i < len; i++) {

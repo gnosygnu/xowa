@@ -13,10 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
-import gplx.xowa.bldrs.installs.*;
-import gplx.xowa.xtns.scribunto.*;
 public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	private Ordered_hash id_hash = Ordered_hash_.New();		// hash for retrieval by id
 	private Hash_adp_bry name_hash;							// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
@@ -52,9 +50,9 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	public Xow_ns[]		Ords_ary() {return ords;} private Xow_ns[] ords = new Xow_ns[Xow_ns_mgr_.Ordinal_max];
 	public int			Ords_len() {return ords_len;} private int ords_len;
 	public Xow_ns		Ords_get_at(int ord)	{return ords[ord];}
-	public int			Ids_len()				{return id_hash.Count();}
+	public int			Ids_len()				{return id_hash.Len();}
 	public Xow_ns		Ids_get_at(int idx)		{return (Xow_ns)id_hash.Get_at(idx);}
-	public Xow_ns		Ids_get_or_null(int id) {synchronized (id_hash_ref) {return (Xow_ns)id_hash.Get_by(id_hash_ref.Val_(id));}}	// LOCK:hash-key; DATE:2016-07-06
+	public Xow_ns		Ids_get_or_null(int id) {synchronized (id_hash_ref) {return (Xow_ns)id_hash.GetByOrNull(id_hash_ref.Val_(id));}}	// LOCK:hash-key; DATE:2016-07-06
 	private Xow_ns		Ids_get_or_empty(int id) {
 		Xow_ns rv = Ids_get_or_null(id);
 		return rv == null ? Ns__empty : rv;
@@ -84,7 +82,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	public void			Aliases_clear() {aliases.Clear();}		
 	public Xow_ns_mgr	Aliases_add(int ns_id, String name) {
 		Keyval kv = Keyval_.new_(name, new Int_obj_val(ns_id));
-		aliases.Add_if_dupe_use_nth(name, kv);
+		aliases.AddIfDupeUseNth(name, kv);
 		return this;
 	}
 	public void	Aliases_del(String name) {aliases.Del(name);}
@@ -106,7 +104,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 			Rebuild_hashes__add(name_hash, ns, ns.Name_db());
 			if (ns.Id_is_tmpl()) tmpl_hash.Add(ns.Name_db_w_colon(), ns.Name_db_w_colon());
 		}
-		int aliases_len = aliases.Count();
+		int aliases_len = aliases.Len();
 		for (int i = 0; i < aliases_len; i++) {
 			Keyval kv = (Keyval)aliases.Get_at(i);
 			int ns_id = ((Int_obj_val)kv.Val()).Val();
@@ -117,7 +115,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 			if (ns.Id_is_tmpl()) {
 				byte[] alias_name = Bry_.new_u8(kv.Key());
 				alias_name = Bry_.Add(alias_name, Byte_ascii.Colon);
-				tmpl_hash.Add_if_dupe_use_nth(alias_name, alias_name);
+				tmpl_hash.AddIfDupeUseNth(alias_name, alias_name);
 			}
 		}
 	}
@@ -130,9 +128,9 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	}	private static final byte[] Project_talk_fmt_arg = Bry_.new_a7("$1");
 	private void Rebuild_hashes__add(Hash_adp_bry hash, Xow_ns ns, byte[] key) {
 		Xow_ns_mgr_name_itm ns_itm = new Xow_ns_mgr_name_itm(ns, key);
-		hash.Add_if_dupe_use_nth(key, ns_itm);
+		hash.AddIfDupeUseNth(key, ns_itm);
 		if (Bry_find_.Find_fwd(key, Byte_ascii.Underline) != Bry_find_.Not_found)	// ns has _; add another entry for space; EX: Help_talk -> Help talk
-			hash.Add_if_dupe_use_nth(Bry_.Replace(key, Byte_ascii.Underline, Byte_ascii.Space), ns_itm);
+			hash.AddIfDupeUseNth(Bry_.Replace(key, Byte_ascii.Underline, Byte_ascii.Space), ns_itm);
 	}
 	public Xow_ns_mgr Add_defaults() { // NOTE: needs to happen after File ns is added; i.e.: cannot be put in Xow_ns_mgr() {} ctor
 		Aliases_add(Xow_ns_.Tid__file		, "Image");			// REF.MW: Setup.php; add "Image", "Image talk" for backward compatibility; note that MW hardcodes Image ns as well
@@ -165,7 +163,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 		if (!id_hash.Has(id_hash_ref.Val_(ns_id)))		// NOTE: do not add if already exists; avoids alias
 			id_hash.Add(Int_obj_ref.New(ns.Id()), ns);
 		}
-		name_hash.Add_if_dupe_use_nth(ns.Name_db(), new Xow_ns_mgr_name_itm(ns, ns.Name_db()));
+		name_hash.AddIfDupeUseNth(ns.Name_db(), new Xow_ns_mgr_name_itm(ns, ns.Name_db()));
 		return this;
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -175,7 +173,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	}
 	private void Ords_sort() {
 		int ords_cur = 0;
-		int ns_len = id_hash.Count();
+		int ns_len = id_hash.Len();
 		id_hash.Sort_by(this);
 		// assert that all items are grouped in pairs of subj, talk; note that subj is even and talk is odd
 		int nxt_ns_id = Int_.Min_value;
@@ -204,7 +202,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 		
 		// sort again b/c new ns may have been added
 		id_hash.Sort_by(this);
-		ns_len = id_hash.Count();
+		ns_len = id_hash.Len();
 		// assign ords; assert that subj has even ordinal index
 		ords_len = 0;
 		for (int i = 0; i < ns_len; i++) {

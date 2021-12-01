@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
+package gplx.langs.dsvs; import gplx.*;
 import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
 public class DsvDataRdr_layout_tst {
 	@Test public void TableName() {
@@ -119,7 +119,7 @@ public class DsvDataRdr_layout_tst {
 	}
 	void tst_Layout(int subIdx, int... expd) {
 		GfoNde tbl = root.Subs().FetchAt_asGfoNde(subIdx);
-		DsvStoreLayout layout = (DsvStoreLayout)tbl.EnvVars().Get_by(DsvStoreLayout.Key_const);
+		DsvStoreLayout layout = (DsvStoreLayout)tbl.EnvVars().GetByOrNull(DsvStoreLayout.Key_const);
 		int[] actl = new int[layout.HeaderList().Count()];
 		for (int i = 0; i < actl.length; i++)
 			actl[i] = layout.HeaderList().Get_at(i).Id();

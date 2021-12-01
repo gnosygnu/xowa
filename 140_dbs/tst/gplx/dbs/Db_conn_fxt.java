@@ -23,7 +23,7 @@ public class Db_conn_fxt implements Rls_able {
 	public void tst_ExecDml(int expd, Db_qry qry) {
 		int actl = conn.Exec_qry(qry);
 		if (dmlAffectedAvailable)
-			Tfds.Eq(expd, actl, "Exec_qry failed: sql={0}", qry.To_sql__exec(conn.Engine().Sql_wtr()));
+			Tfds.Eq(expd, actl, "Exec_qry failed: sql={0}", qry.ToSqlExec(conn.Engine().Sql_wtr()));
 	}
 	public void tst_ExecRdrTbl(int expd, String tblName) {tst_ExecRdr(expd, Db_qry_.select_tbl_(tblName));}
 	public void tst_ExecRdr(int expd, Db_qry qry) {
@@ -33,7 +33,7 @@ public class Db_conn_fxt implements Rls_able {
 			tbl = GfoNde_.rdr_(rdr);
 		}
 		catch (Exception e) {Err_.Noop(e); rdr.Rls();}
-		Tfds.Eq(expd, tbl.Subs().Count(), "Exec_qry_as_rdr failed: sql={0}", qry.To_sql__exec(conn.Engine().Sql_wtr()));
+		Tfds.Eq(expd, tbl.Subs().Count(), "Exec_qry_as_rdr failed: sql={0}", qry.ToSqlExec(conn.Engine().Sql_wtr()));
 	}	GfoNde tbl;
 	public GfoNde tst_RowAry(int index, Object... expdValAry) {
 		GfoNde record = tbl.Subs().FetchAt_asGfoNde(index);

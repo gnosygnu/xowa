@@ -14,11 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.criterias.*; import gplx.core.lists.*; /*GfoNde*/ import gplx.dbs.qrys.*; import gplx.core.gfo_ndes.*;
+import gplx.core.criterias.*;
+import gplx.dbs.qrys.*; import gplx.core.gfo_ndes.*;
 class TdbDeleteWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_delete cmd = (Db_qry_delete)cmdObj;
-		TdbTable tbl = engine.FetchTbl(cmd.Base_table());
+		TdbTable tbl = engine.FetchTbl(cmd.BaseTable());
 		List_adp deleted = List_adp_.New();
 		int rv = 0;
 		if (cmd.Where() == Db_qry_delete.Where__null) {
@@ -32,7 +33,7 @@ class TdbDeleteWkr implements Db_qryWkr {
 				if (crt.Matches(row))
 					deleted.Add(row);
 			}
-			for (int i = 0; i < deleted.Count(); i++) {
+			for (int i = 0; i < deleted.Len(); i++) {
 				GfoNde row = (GfoNde)deleted.Get_at(i);
 				tbl.Rows().Del(row);
 				rv++;

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.files; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*;
 class Split_init__file {
@@ -22,15 +23,15 @@ class Split_init__file {
 		// get min page for each score
 		Gfo_log_.Instance.Prog("creating fsdb_img_regy");
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("fsdb_img_regy"
-		, Dbmeta_fld_itm.new_int("img_uid").Primary_y_().Autonum_y_()
-		, Dbmeta_fld_itm.new_byte("img_type")
-		, Dbmeta_fld_itm.new_int("fil_id")
-		, Dbmeta_fld_itm.new_int("thm_id")
-		, Dbmeta_fld_itm.new_int("bin_db_id")
-		, Dbmeta_fld_itm.new_int("page_uid")
-		, Dbmeta_fld_itm.new_int("page_ns")
-		, Dbmeta_fld_itm.new_int("page_score")
-		, Dbmeta_fld_itm.new_int("page_id")
+		, DbmetaFldItm.NewInt("img_uid").PrimarySetY().AutonumSetY()
+		, DbmetaFldItm.NewByte("img_type")
+		, DbmetaFldItm.NewInt("fil_id")
+		, DbmetaFldItm.NewInt("thm_id")
+		, DbmetaFldItm.NewInt("bin_db_id")
+		, DbmetaFldItm.NewInt("page_uid")
+		, DbmetaFldItm.NewInt("page_ns")
+		, DbmetaFldItm.NewInt("page_score")
+		, DbmetaFldItm.NewInt("page_id")
 		));
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(wkr_conn
 			, new Db_attach_itm("page_db", wiki.Data__core_mgr().Tbl__page().Conn())
@@ -72,9 +73,9 @@ class Split_init__file {
 		// promote fil if thm shows up earlier; i.e.: if thm_id=11 is score=99 and fil_id=10 is score=80, move fil_id to 99
 		Gfo_log_.Instance.Prog("creating fsdb_fil_min");
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("fsdb_fil_min"
-		, Dbmeta_fld_itm.new_byte("img_uid")
-		, Dbmeta_fld_itm.new_int("fil_id")
-		, Dbmeta_fld_itm.new_int("thm_id")
+		, DbmetaFldItm.NewByte("img_uid")
+		, DbmetaFldItm.NewInt("fil_id")
+		, DbmetaFldItm.NewInt("thm_id")
 		));
 
 		// add fils via thms; for thms with multiple fils, use Min(img_uid)
@@ -96,8 +97,8 @@ class Split_init__file {
 		// dupes may still exist, so do one more group by
 		Gfo_log_.Instance.Prog("creating fsdb_fil_min_unique");
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("fsdb_fil_min_unique"
-		, Dbmeta_fld_itm.new_byte("img_uid")
-		, Dbmeta_fld_itm.new_int("fil_id")
+		, DbmetaFldItm.NewByte("img_uid")
+		, DbmetaFldItm.NewInt("fil_id")
 		));
 		wkr_conn.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
 		( "INSERT INTO fsdb_fil_min_unique (img_uid, fil_id)"
@@ -109,11 +110,11 @@ class Split_init__file {
 		// create fsdb_fil_regy
 		Gfo_log_.Instance.Prog("creating fsdb_fil_regy");
 		wkr_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("fsdb_fil_regy"
-		, Dbmeta_fld_itm.new_int("img_uid").Primary_y_()
-		, Dbmeta_fld_itm.new_int("fil_id")
-		, Dbmeta_fld_itm.new_int("page_ns")
-		, Dbmeta_fld_itm.new_int("page_score")
-		, Dbmeta_fld_itm.new_int("page_id")
+		, DbmetaFldItm.NewInt("img_uid").PrimarySetY()
+		, DbmetaFldItm.NewInt("fil_id")
+		, DbmetaFldItm.NewInt("page_ns")
+		, DbmetaFldItm.NewInt("page_score")
+		, DbmetaFldItm.NewInt("page_id")
 		));
 		wkr_conn.Exec_sql(String_.Concat_lines_nl	// ANSI.Y
 		( "INSERT INTO fsdb_fil_regy (img_uid, fil_id, page_ns, page_score, page_id)"

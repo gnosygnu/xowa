@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.utls.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*;
+import gplx.core.ios.*; import gplx.dbs.*;
 public class Xowd_text_tbl implements Db_tbl {
 	private final Object thread_lock = new Object();
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_page_id, fld_text_data;
 	private final Db_conn conn; private Db_stmt stmt_select, stmt_insert;
 	private final Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr(); private final byte zip_tid;
@@ -26,8 +26,8 @@ public class Xowd_text_tbl implements Db_tbl {
 		this.conn = conn; this.zip_tid = zip_tid;
 		String fld_text_data_name = "";
 		fld_text_data_name = schema_is_1 ? "old_text" : "text_data";
-		fld_page_id			= flds.Add_int_pkey("page_id");
-		fld_text_data		= flds.Add_bry(fld_text_data_name);
+		fld_page_id			= flds.AddIntPkey("page_id");
+		fld_text_data		= flds.AddBry(fld_text_data_name);
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name = TBL_NAME;
@@ -79,7 +79,7 @@ public class Xowd_text_tbl implements Db_tbl {
 				list.Add(new Xowd_text_row(page_id, text));
 			}
 		}	finally {rdr.Rls();}
-		return (Xowd_text_row[])list.To_ary_and_clear(Xowd_text_row.class);
+		return (Xowd_text_row[])list.ToAryAndClear(Xowd_text_row.class);
 	}
 	public byte[] Zip(byte[] data) {return zip_mgr.Zip(zip_tid, data);}
 	public void Rls() {

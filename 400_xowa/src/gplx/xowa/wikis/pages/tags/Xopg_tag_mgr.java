@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.wikis.pages.tags; import gplx.*;
 public class Xopg_tag_mgr {
 	private final List_adp list = List_adp_.New();
 	public Xopg_tag_mgr(boolean pos_is_head) {this.pos_is_head = pos_is_head;}
@@ -21,7 +21,7 @@ public class Xopg_tag_mgr {
 	public int Len() {return list.Len();}
 	public void Clear() {list.Clear();}
 	public Xopg_tag_itm Get_at(int i) {return (Xopg_tag_itm)list.Get_at(i);}
-	public Xopg_tag_itm[] To_ary() {return (Xopg_tag_itm[])list.To_ary(Xopg_tag_itm.class);}
+	public Xopg_tag_itm[] To_ary() {return (Xopg_tag_itm[])list.ToAry(Xopg_tag_itm.class);}
 	public void Add(Xopg_tag_itm... ary) {for (Xopg_tag_itm itm : ary) list.Add(itm);}
 	public void Copy(Xopg_tag_mgr src) {
 		int len = src.Len();

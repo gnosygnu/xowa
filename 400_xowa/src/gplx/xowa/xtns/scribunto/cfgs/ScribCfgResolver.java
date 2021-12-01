@@ -39,7 +39,7 @@ class ScribCfgResolverUtil {
             Json_ary subKeys = subNde.Get_as_ary("keys");
             for (int keyIdx = 0; keyIdx < subKeys.Len(); keyIdx++) {
                 byte[] subKey = subKeys.Get_at(keyIdx).Data_bry();
-                ScribCfgResolver subScope = (ScribCfgResolver)hash.Get_by(subKey);
+                ScribCfgResolver subScope = (ScribCfgResolver)hash.GetByOrNull(subKey);
                 if (subScope == null) {
                     subScope = proto.CloneNew(String_.new_u8(subKey));
                     hash.Add(subKey, subScope);

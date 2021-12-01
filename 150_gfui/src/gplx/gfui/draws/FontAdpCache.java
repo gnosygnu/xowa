@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.draws; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.draws; import gplx.*;
 import java.awt.Font;
 import java.awt.Toolkit;
 public class FontAdpCache {
 	public Font GetNativeFont(FontAdp fontAdp) {
 		String key = fontAdp.toString();
-		Font rv = (Font)hash.Get_by(key); if (rv != null) return rv;
+		Font rv = (Font)hash.GetByOrNull(key); if (rv != null) return rv;
 				if (screenResolutionInDpi == -1) ScreenResolution_set();
 	    int fontSize = XtoJavaDpi(fontAdp.Size());
 		rv = new Font(fontAdp.Name(), fontAdp.Style().Val(), fontSize);		

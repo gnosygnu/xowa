@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.caches; import gplx.*; import gplx.core.*;
+package gplx.core.caches; import gplx.*;
 public class Lru_cache {
 	private final Hash_adp map = Hash_adp_.New();
 	private Lru_node head, tail;
@@ -32,7 +32,7 @@ public class Lru_cache {
 		this.max = max;
 	}
 	public Object Get_or_null(Object key) {
-		Lru_node nde = (Lru_node)map.Get_by(key);
+		Lru_node nde = (Lru_node)map.GetByOrNull(key);
 		if (nde == null) {
 			return null;
 		}
@@ -43,7 +43,7 @@ public class Lru_cache {
 		return nde.Val();
 	}
 	public void Set(Object key, Object val, long size) {
-		Lru_node nde = (Lru_node)map.Get_by(key);
+		Lru_node nde = (Lru_node)map.GetByOrNull(key);
 		if (nde != null) {
 			nde.Val_(val);
 
@@ -60,7 +60,7 @@ public class Lru_cache {
 		}
 	}
 	public void Del(Object key) {
-		Lru_node nde = (Lru_node)map.Get_by(key);
+		Lru_node nde = (Lru_node)map.GetByOrNull(key);
 		if (nde != null) {
 			Del_node_from_this(nde);
 		}

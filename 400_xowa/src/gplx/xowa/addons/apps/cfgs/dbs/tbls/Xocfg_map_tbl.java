@@ -13,18 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.dbs.*;
+package gplx.xowa.addons.apps.cfgs.dbs.tbls; import gplx.*;
 import gplx.dbs.*; import gplx.dbs.utls.*;
 public class Xocfg_map_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__map_src, fld__map_trg, fld__map_sort;
 	private final Db_conn conn;
 	public Xocfg_map_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "cfg_map";
-		this.fld__map_src			= flds.Add_int("map_src");
-		this.fld__map_trg			= flds.Add_int("map_trg");
-		this.fld__map_sort			= flds.Add_int("map_sort");
+		this.fld__map_src			= flds.AddInt("map_src");
+		this.fld__map_trg			= flds.AddInt("map_trg");
+		this.fld__map_sort			= flds.AddInt("map_sort");
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;

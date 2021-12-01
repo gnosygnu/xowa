@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.app_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.app_cfgs; import gplx.*;
 public class Xoac_wiki_cfg_bldr_fil implements Gfo_invk {
 	public Xoac_wiki_cfg_bldr_fil(String wiki) {this.wiki = wiki;}
 	public String Wiki() {return wiki;} private String wiki;
-	public int Itms_count() {return list.Count();}
+	public int Itms_count() {return list.Len();}
 	public Xoac_wiki_cfg_bldr_cmd Itms_get_at(int i) {return (Xoac_wiki_cfg_bldr_cmd)list.Get_at(i);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_new_cmd_)) 		{Itms_add(m.ReadStr("id"), m.ReadStr("text"));}

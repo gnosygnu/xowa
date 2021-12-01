@@ -13,17 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.vnts; import gplx.*;
 import gplx.core.btries.*; import gplx.core.bits.*;
-import gplx.xowa.parsers.vnts.*;
 public class Xol_vnt_regy {
 	private final Hash_adp_bry hash = Hash_adp_bry.ci_a7(); private int hash_len;
 	private final List_adp list = List_adp_.New();
 	public Btrie_slim_mgr	Trie()				{return trie;} private final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();
-	public int				Len()				{return hash.Count();}
+	public int				Len()				{return hash.Len();}
 	public boolean				Has(byte[] k)		{return hash.Has(k);}
 	public Xol_vnt_itm		Get_at(int i)		{return (Xol_vnt_itm)list.Get_at(i);}
-	public Xol_vnt_itm		Get_by(byte[] k)	{return (Xol_vnt_itm)hash.Get_by(k);}
+	public Xol_vnt_itm		Get_by(byte[] k)	{return (Xol_vnt_itm)hash.GetByOrNull(k);}
 	public Xol_vnt_itm		Get_by(byte[] s, int b, int e) {return (Xol_vnt_itm)hash.Get_by_mid(s, b, e);}
 	public void				Clear()				{hash.Clear(); list.Clear(); trie.Clear(); hash_len = 0;}
 	public Xol_vnt_itm Add(byte[] key, byte[] name) {
@@ -32,7 +31,7 @@ public class Xol_vnt_regy {
 		hash.Add(key, itm);
 		list.Add(itm);
 		trie.Add_obj(key, itm);
-		hash_len = hash.Count();
+		hash_len = hash.Len();
 		return itm;
 	}
 	public int Mask__calc(byte[]... ary) {
@@ -40,7 +39,7 @@ public class Xol_vnt_regy {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			byte[] key = ary[i];
-			Xol_vnt_itm itm = (Xol_vnt_itm)hash.Get_by(key); if (itm == null) continue;	// handle bad vnt from user input; EX: -{zh;bad|text}-
+			Xol_vnt_itm itm = (Xol_vnt_itm)hash.GetByOrNull(key); if (itm == null) continue;	// handle bad vnt from user input; EX: -{zh;bad|text}-
 			int itm_mask = itm.Mask__vnt();
 			rv = rv == 0 ? itm_mask : Bitmask_.Flip_int(true, rv, itm_mask);
 		}

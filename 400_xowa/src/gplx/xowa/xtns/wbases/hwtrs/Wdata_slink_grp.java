@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.apps.apis.xowa.html.*;
 import gplx.xowa.wikis.domains.*;
 class Wdata_slink_grp {
@@ -28,7 +28,7 @@ class Wdata_slink_grp {
 	public static void Sift(Wdata_slink_grp[] rv, Ordered_hash list) {
 		for (int i = 0; i < Idx__len; ++i)
 			rv[i].Rows().Clear();
-		int list_len = list.Count();
+		int list_len = list.Len();
 		for (int i = 0; i < list_len; ++i) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);				
 			int idx = Idx_by_tid(itm.Domain_info().Domain_type_id());

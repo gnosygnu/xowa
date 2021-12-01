@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.durations; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.durations; import gplx.*;
+import gplx.xowa.langs.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.langs.msgs.*;
@@ -33,13 +34,13 @@ public class Xol_duration_mgr {
 			long itm_seconds = itm.Seconds();
 			val = seconds / itm_seconds;
 			if (	val > 0
-				||	(i == intervals_len - 1 && rv.Count() == 0) // always add one seg; EX: 40 seconds, but minutes requested -> 0 minutes; DATE:2014-05-10
+				||	(i == intervals_len - 1 && rv.Len() == 0) // always add one seg; EX: 40 seconds, but minutes requested -> 0 minutes; DATE:2014-05-10
 			) {
 				seconds -= val * itm_seconds;
 				rv.Add(new Xol_interval_itm(itm, val));
 			}
 		}
-		return (Xol_interval_itm[])rv.To_ary(Xol_interval_itm.class);
+		return (Xol_interval_itm[])rv.ToAry(Xol_interval_itm.class);
 	}
 	public byte[] Format_durations(Xop_ctx ctx, long seconds, Xol_duration_itm[] ary) {
 		if (interval_msgs == null) Format_durations_init();

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xow_script_mgr implements Gfo_invk {
@@ -23,7 +23,7 @@ public class Xow_script_mgr implements Gfo_invk {
 		return this;
 	}	private static final String Invk_set = "set";
 	public void Exec(Xowe_wiki wiki) {
-		int len = hash.Count();
+		int len = hash.Len();
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
 		for (int i = 0; i < len; i++) {
 			Xow_script_itm itm = (Xow_script_itm)hash.Get_at(i);
@@ -43,7 +43,7 @@ public class Xow_script_mgr implements Gfo_invk {
 			wiki_tids[i] = Xow_domain_tid_.Get_type_as_tid(wiki_tid_names[i]);
 
 		Xow_script_itm itm = new Xow_script_itm(key, wiki_tids, script);
-		hash.Add_if_dupe_use_nth(itm.Key(), itm);
+		hash.AddIfDupeUseNth(itm.Key(), itm);
 	}
 	public Ordered_hash hash = Ordered_hash_.New_bry();
 }

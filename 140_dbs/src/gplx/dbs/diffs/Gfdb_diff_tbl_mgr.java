@@ -16,9 +16,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.diffs; import gplx.*; import gplx.dbs.*;
 class Gfdb_diff_tbl_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New();
-	public int Len() {return hash.Count();}
+	public int Len() {return hash.Len();}
 	public Gfdb_diff_tbl Get_at(int idx) {return (Gfdb_diff_tbl)hash.Get_at(idx);}
-	public Gfdb_diff_tbl Get_by(String key) {return (Gfdb_diff_tbl)hash.Get_by(key);}
+	public Gfdb_diff_tbl Get_by(String key) {return (Gfdb_diff_tbl)hash.GetByOrNull(key);}
 }
 class Gfdb_diff_tbl_mgr__sqlite {
 	public void Fill(Gfdb_diff_tbl_mgr tbl_mgr, Db_conn conn) {

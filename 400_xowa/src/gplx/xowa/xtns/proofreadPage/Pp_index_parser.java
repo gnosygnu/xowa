@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.parsers.*;
+import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
 class Pp_index_parser {
 	public static Pp_index_page Parse(Xowe_wiki wiki, Xop_ctx ctx, Xoa_ttl index_ttl, int ns_page_id) {
 		byte[] src = wiki.Cache_mgr().Page_cache().Get_src_else_load_or_null(index_ttl);
@@ -93,7 +94,7 @@ class Pp_index_page {
 	public List_adp		Main_lnkis()		{return main_lnkis;} private List_adp main_lnkis = List_adp_.New();
 	public List_adp		Invk_args()			{return invk_args;} private List_adp invk_args = List_adp_.New();
 	public Xoa_ttl[] Get_ttls_rng(Xowe_wiki wiki, int ns_page_id, byte[] bgn_page_bry, byte[] end_page_bry, Int_obj_ref bgn_page_ref, Int_obj_ref end_page_ref) {
-		int list_len = page_ttls.Count(); if (list_len == 0) return Pp_pages_nde.Ttls_null;
+		int list_len = page_ttls.Len(); if (list_len == 0) return Pp_pages_nde.Ttls_null;
 		List_adp rv = List_adp_.New();
 		Xoa_ttl bgn_page_ttl = new_ttl_(wiki, ns_page_id, bgn_page_bry), end_page_ttl = new_ttl_(wiki, ns_page_id, end_page_bry);
 		boolean add = bgn_page_ttl == Xoa_ttl.Null;		// if from is missing, default to bgn; EX: <pages index=A to="A/5"/>
@@ -107,8 +108,8 @@ class Pp_index_page {
 		}
 		if (bgn_page_ref.Val() == -1) bgn_page_ref.Val_(0);				// NOTE: set "from" which will be passed to {{MediaWiki:Proofreadpage_header_template}}; DATE:2014-05-21
 		if (end_page_ref.Val() == -1) end_page_ref.Val_(list_len - 1);  // NOTE: set "to"   which will be passed to {{MediaWiki:Proofreadpage_header_template}}; DATE:2014-05-21
-		if (rv.Count() == 0) return Pp_pages_nde.Ttls_null;
-		return (Xoa_ttl[])rv.To_ary(Xoa_ttl.class);
+		if (rv.Len() == 0) return Pp_pages_nde.Ttls_null;
+		return (Xoa_ttl[])rv.ToAry(Xoa_ttl.class);
 	}
 	private static Xoa_ttl new_ttl_(Xowe_wiki wiki, int ns_page_id, byte[] bry) {return bry == null ? Xoa_ttl.Null : Xoa_ttl.Parse(wiki, ns_page_id, bry);}
 	public static final Pp_index_page Null = new Pp_index_page();

@@ -2,11 +2,11 @@ package gplx.gfdbs.cores;
 
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_stmt;
-import gplx.dbs.Dbmeta_fld_list;
+import gplx.dbs.DbmetaFldList;
 
 public interface GfdbMeta<I> extends GfdbItmFactory<I> {
     String TblName();
-    Dbmeta_fld_list Flds();
+    DbmetaFldList Flds();
     String[] Pkeys();
     void SaveStmtPkeys(Db_stmt stmt, I itm);
     void SaveStmtVals(GfdbState state, Db_stmt stmt, I itm);

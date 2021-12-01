@@ -15,13 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.*; import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.*;
+import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.utils.*;
 public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 	public Xofw_wiki_wkr_base(Xowe_wiki wiki, Xoae_wiki_mgr wiki_mgr) {this.wiki = wiki; this.wiki_mgr = wiki_mgr;} private Xowe_wiki wiki; Xoae_wiki_mgr wiki_mgr;
 	public void Find(List_adp repo_pairs, Xof_xfer_itm file) {
 		byte[] ttl_bry = file.Lnki_ttl();
-		int repo_pairs_len = repo_pairs.Count();
+		int repo_pairs_len = repo_pairs.Len();
 		for (int i = 0; i < repo_pairs_len; i++) {
 			Xof_repo_pair repo_pair = (Xof_repo_pair)repo_pairs.Get_at(i);
 			byte[] wiki_key = repo_pair.Src().Wiki_domain();
@@ -43,7 +44,7 @@ public class Xofw_wiki_wkr_base implements Xofw_wiki_finder {
 		Xow_ns file_ns = wiki.Ns_mgr().Ns_file();		// NOTE: file_ns should also be the same across all wikis; being used for data_mgr.Parse below
 		byte[] ttl_db_key = ttl.Page_db();
 		rv.Init(ttl_db_key);
-		int repo_pairs_len = repo_pairs.Count();
+		int repo_pairs_len = repo_pairs.Len();
 		for (int i = 0; i < repo_pairs_len; i++) {
 			Xof_repo_pair repo_pair = (Xof_repo_pair)repo_pairs.Get_at(i);
 			byte[] src_wiki_key = repo_pair.Src().Wiki_domain();

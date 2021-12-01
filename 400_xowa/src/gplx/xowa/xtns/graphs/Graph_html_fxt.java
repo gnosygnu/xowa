@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*;
 import gplx.core.tests.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.tests.*;
 class Graph_html_fxt {
@@ -55,7 +55,7 @@ class Graph_html_fxt {
 
 	private Gfo_test_lnr_base hdump_wkr_lnr = Gfo_test_lnr_base.New__keys("is_commons", "is_orig", "ttl");
 	public String Wikirawupload__wtxt() {
-		Graph_json_load_mgr hdump_wkr = (Graph_json_load_mgr)parser_fxt.Wiki().Html__hdump_mgr().Wkrs().Get_by(Graph_json_load_mgr.KEY);
+		Graph_json_load_mgr hdump_wkr = (Graph_json_load_mgr)parser_fxt.Wiki().Html__hdump_mgr().Wkrs().GetByOrNull(Graph_json_load_mgr.KEY);
 		hdump_wkr_lnr = Gfo_test_lnr_base.New__keys("is_commons", "is_orig", "ttl");
 		hdump_wkr.Test_lnr_(hdump_wkr_lnr);
 

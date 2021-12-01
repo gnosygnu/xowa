@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.updates.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.updates.*;
+package gplx.xowa.addons.bldrs.updates.files; import gplx.*; import gplx.xowa.*;
 import gplx.core.progs.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.bldrs.*;
@@ -88,7 +88,7 @@ public class Xodel_exec_mgr {
 			}
 		}	finally {rdr.Rls();}
 
-		int len = list.Count();
+		int len = list.Len();
 		if (len == 0) return;	// no files; exit, else will vacuum below
 
 		deletion_conn.Env_db_attach("bin_db", bin_db.Conn());

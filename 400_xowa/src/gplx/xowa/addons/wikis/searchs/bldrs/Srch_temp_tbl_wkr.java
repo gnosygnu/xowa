@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.bldrs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.parsers.*;
 class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
@@ -82,7 +83,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		// dump everything into a temp table in order to index it
 		page_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl("page", "page_ns__page_id", "page_namespace", "page_id"));
 		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.Y);
-		word_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("search_link_temp", Dbmeta_fld_itm.new_int("word_id"), Dbmeta_fld_itm.new_int("page_id"), Dbmeta_fld_itm.new_int("page_namespace")));
+		word_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("search_link_temp", DbmetaFldItm.NewInt("word_id"), DbmetaFldItm.NewInt("page_id"), DbmetaFldItm.NewInt("page_namespace")));
 		attach_mgr.Conn_main_(word_conn).Conn_links_(new Db_attach_itm("page_db", page_conn));
 		attach_mgr.Exec_sql_w_msg
 		( "filling search_link_temp (please wait)", String_.Concat_lines_nl_skip_last
@@ -185,9 +186,9 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 	private static void Search_word__insert(Db_conn word_conn) {
 		// fill search_word; need to insert into temp first b/c PRIMARY KEY on search_word will dramatically slow down insertion
 		word_conn.Meta_tbl_create(Dbmeta_tbl_itm.New("search_word_temp"
-		, Dbmeta_fld_itm.new_int("word_id")
-		, Dbmeta_fld_itm.new_str("word_text", 255)
-		, Dbmeta_fld_itm.new_int("link_count")
+		, DbmetaFldItm.NewInt("word_id")
+		, DbmetaFldItm.NewStr("word_text", 255)
+		, DbmetaFldItm.NewInt("link_count")
 		));
 		word_conn.Exec_sql_concat_w_msg
 		( "filling search_word_temp (please wait)"

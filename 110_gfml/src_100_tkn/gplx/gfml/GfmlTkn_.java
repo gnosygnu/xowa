@@ -29,8 +29,8 @@ public class GfmlTkn_ {
 	@gplx.Internal protected static GfmlTkn singleton_(String tknType, String raw, String val, GfmlBldrCmd cmd) {return new GfmlTkn_singleton().ctor_GfmlTkn_base(tknType, raw, val, cmd);}
 	@gplx.Internal protected static GfmlTkn composite_(String tknType, GfmlTkn[] ary) {return new GfmlTkn_composite(tknType, ary);}
 	@gplx.Internal protected static GfmlTkn composite_list_(String tknType, GfmlObjList list) {
-		GfmlTkn[] ary = new GfmlTkn[list.Count()];
-		for (int i = 0; i < list.Count(); i++)
+		GfmlTkn[] ary = new GfmlTkn[list.Len()];
+		for (int i = 0; i < list.Len(); i++)
 			ary[i] = (GfmlTkn)list.Get_at(i);
 		return GfmlTkn_.composite_(tknType, ary);
 	}

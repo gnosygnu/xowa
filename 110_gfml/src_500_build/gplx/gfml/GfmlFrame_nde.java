@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfml; import gplx.*;
+package gplx.gfml;
 class GfmlFrame_nde extends GfmlFrame_base {
 	@Override public int		FrameType()			{return GfmlFrame_.Type_nde;}
 	public GfmlNde			CurNde()			{return nde;} GfmlNde nde;
@@ -105,7 +105,7 @@ class GfmlFrame_nde extends GfmlFrame_base {
 		if (!frmHasParens) {
 			bldr.Frames_end();
 			GfmlFrame_nde frm = bldr.CurNdeFrame(); // get the current frm after all popped
-			int idx = frm.waitingTkns.Count();		// NOTE: reset idxs b/c endFrame will automatically set to 0, and should be objCount
+			int idx = frm.waitingTkns.Len();		// NOTE: reset idxs b/c endFrame will automatically set to 0, and should be objCount
 			frm.tknMgr.IdxAtrBgn_setHack(idx);
 			frm.tknMgr.IdxNdeBgn_set(idx);
 			frm.nullArea = false;					// NOTE: endFrame automatically sets nullArea to true; set to false
@@ -114,7 +114,7 @@ class GfmlFrame_nde extends GfmlFrame_base {
 	public void NdeProp_bgn(GfmlTkn symTkn) {		// EX: < [ >
 		int oldNdeBgn = tknMgr.IdxNdeBgn();	// get oldNdeBgn; needed for header atrs; EX: < a:b [d] > ndeBgn = 0 (a pos), but will start keyNde at 5 ([ pos)
 		GfmlTkn keyTkn = tknMgr.KeyTkn_pop(); boolean keyTknExists = keyTkn != GfmlTkn_.Null;
-		int newNdeBgn = keyTknExists ? tknMgr.IdxAtrBgn() : waitingTkns.Count(); // if there is a key, set ndeBgn end atrBgn (EX: a=[); else set end curIdx
+		int newNdeBgn = keyTknExists ? tknMgr.IdxAtrBgn() : waitingTkns.Len(); // if there is a key, set ndeBgn end atrBgn (EX: a=[); else set end curIdx
 		tknMgr.IdxNdeBgn_set(newNdeBgn);
 		WaitingTkns_AddSym(symTkn, GfmlNdeSymType.PrpBgn);
 		tknMgr.ConsumeWaitingDatTkn(nde);// NEEDED for KeydDefault
@@ -156,7 +156,7 @@ class GfmlFrame_nde extends GfmlFrame_base {
 		}
 		else if (ndeType == GfmlNdeStartType.Prop) {}
 		else {
-			ownerNdeFrame.tknMgr.IdxNdeBgn_set(ownerNdeFrame.waitingTkns.Count());
+			ownerNdeFrame.tknMgr.IdxNdeBgn_set(ownerNdeFrame.waitingTkns.Len());
 			ownerNdeFrame.nullArea = true;	// reset
 		}
 	}
@@ -204,20 +204,20 @@ class GfmlFrame_nde_ {
 	@gplx.Internal protected static GfmlFrame_nde root_(GfmlBldr bldr, GfmlNde newNde, GfmlLxr newLxr) {return GfmlFrame_nde.new_(bldr, newNde, newLxr);}
 	@gplx.Internal protected static final GfmlFrame_nde OwnerRoot_ = null;
 	@gplx.Internal protected static void TransferToNde(GfmlObjList waitingTkns, GfmlNde nde, int bgn) {
-		int end = waitingTkns.Count();
+		int end = waitingTkns.Len();
 		for (int i = bgn; i < end; i++) {
 			GfmlObj tkn = waitingTkns.Get_at(i);
 			nde.SubObjs_Add(tkn);
 		}
 		if (bgn != end) // ignore if bgn == end
-			waitingTkns.Del_range(bgn, end - 1);
+			waitingTkns.DelRange(bgn, end - 1);
 	}
 	@gplx.Internal protected static void TransferToAtr(GfmlObjList src, GfmlAtr trg, int bgn, int end) {
 		int len = end - bgn;
 		if (len <= 0 || end == -1) return;	// -1 b/c calling proc passes end - 1, and end may be 0
 		for (int i = 0; i < len; i++)
 			trg.SubObjs_Add(src.Get_at(i + bgn));
-		src.Del_range(bgn, end - 1);
+		src.DelRange(bgn, end - 1);
 	}		
 }
 class GfmlNdeStartType {

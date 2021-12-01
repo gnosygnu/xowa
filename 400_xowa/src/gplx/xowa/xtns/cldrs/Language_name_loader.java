@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cldrs; import gplx.*;
 import gplx.langs.jsons.*;
 public class Language_name_loader {
 	private final Json_parser parser = new Json_parser();
@@ -53,6 +53,6 @@ public class Language_name_loader {
 			Language_name itm = new Language_name(code, name, null);
 			list.Add(itm);
 		}
-		return (Language_name[])list.To_ary_and_clear(Language_name.class);
+		return (Language_name[])list.ToAryAndClear(Language_name.class);
 	}
 }

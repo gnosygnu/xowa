@@ -18,8 +18,6 @@ package gplx.xowa.xtns.indicators;
 import gplx.Bool_;
 import gplx.Bry_;
 import gplx.Bry_bfr;
-import gplx.Bry_bfr_;
-import gplx.Int_;
 import gplx.Ordered_hash;
 import gplx.Ordered_hash_;
 import gplx.String_;
@@ -41,14 +39,14 @@ public class Indicator_html_bldr implements gplx.core.brys.Bfr_arg {
 		enabled = Bool_.Y;
 		list.Clear();
 	}
-	public int Count() {return list.Count();}
+	public int Count() {return list.Len();}
 	public boolean Has(String key) {return list.Has(key);}
 	public void Add(Indicator_xnde xnde) {
 		if (!enabled) return;				// do not add if disabled; called from <page>; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
-		list.Add_if_dupe_use_nth(xnde.Name(), xnde);	// Add_if_dupe_use_nth: 2nd indicator overwrites 1st; DATE:2015-04-29
+		list.AddIfDupeUseNth(xnde.Name(), xnde);	// Add_if_dupe_use_nth: 2nd indicator overwrites 1st; DATE:2015-04-29
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		if (list.Count() == 0) return;		// do not build html if no items; DATE:2015-04-29
+		if (list.Len() == 0) return;		// do not build html if no items; DATE:2015-04-29
 		bldr_itm.Init(list);
 		fmtr_grp.Bld_bfr_many(bfr, bldr_itm);
 	}
@@ -62,7 +60,7 @@ public class Indicator_html_bldr implements gplx.core.brys.Bfr_arg {
 
 	public void HxtnSave(Xowe_wiki wiki, Hxtn_page_mgr hxtnPageMgr, Xoae_page page, int pageId) {
 		// exit if empty
-		int len = list.Count();
+		int len = list.Len();
 		if (len == 0) return;
 
 		// reparse html to generate xoimg attribute b/c indicators are parsed differently due to location above the "mw-content-text" div
@@ -86,7 +84,7 @@ public class Indicator_html_bldr implements gplx.core.brys.Bfr_arg {
 		this.list = IndicatorSerialCore.Load(data);
 
 		// reparse html to convert xoimg attribute to file
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; i++) {
 			Indicator_xnde xnde = (Indicator_xnde)list.Get_at(i);
 			byte[] html = wiki.Html__hdump_mgr().Load_mgr().Make_mgr().Parse(xnde.Html(), wiki, hpg);
@@ -98,7 +96,7 @@ class Indicator_html_bldr_itm implements gplx.core.brys.Bfr_arg {
 	private Ordered_hash list;
 	public void Init(Ordered_hash list) {this.list = list;}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int list_len = list.Count();
+		int list_len = list.Len();
 		for (int i = list_len - 1; i > -1; --i) {	// reverse order
 			Indicator_xnde xnde = (Indicator_xnde)list.Get_at(i);
 			fmtr_itm.Bld_bfr_many(bfr, xnde.Name(), xnde.Html());

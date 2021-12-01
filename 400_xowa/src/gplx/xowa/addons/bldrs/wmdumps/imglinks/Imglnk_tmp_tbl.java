@@ -13,20 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.wmdumps.*;
+package gplx.xowa.addons.bldrs.wmdumps.imglinks;
 import gplx.dbs.*;
 public class Imglnk_tmp_tbl implements Db_tbl {
-	private final String tbl_name = "imglnk_tmp"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name = "imglnk_tmp"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__page_id, fld__img_name;
 	private final Db_conn conn;
 	private Db_stmt stmt__insert;
 	public Imglnk_tmp_tbl(Db_conn conn) {
 		this.conn = conn;
-		flds.Add_int_pkey_autonum("img_uid");
-		this.fld__page_id			= flds.Add_int("page_id");
-		this.fld__img_name			= flds.Add_str("img_name", 255);
-		flds.Add_int_dflt("img_wiki", -1);
-		flds.Add_int_dflt("img_id", -1);
+		flds.AddIntPkeyAutonum("img_uid");
+		this.fld__page_id			= flds.AddInt("page_id");
+		this.fld__img_name			= flds.AddStr("img_name", 255);
+		flds.AddIntDflt("img_wiki", -1);
+		flds.AddIntDflt("img_id", -1);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}

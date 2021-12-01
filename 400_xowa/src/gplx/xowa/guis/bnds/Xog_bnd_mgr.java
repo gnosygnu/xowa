@@ -46,9 +46,9 @@ public class Xog_bnd_mgr implements Gfo_invk {
 	private List_adp startup_itms = List_adp_.New();
 	private Ordered_hash regy = Ordered_hash_.New();
 	public Xog_bnd_mgr(Xog_win_itm win) {this.win = win; invk_mgr = win.Gui_mgr().Cmd_mgr().Invk_mgr();}
-	public int Len() {return regy.Count();}
+	public int Len() {return regy.Len();}
 	public Xog_bnd_itm Get_at(int i)			{return (Xog_bnd_itm)regy.Get_at(i);}
-	public Xog_bnd_itm Get_or_null(String v)	{return (Xog_bnd_itm)regy.Get_by(v);}
+	public Xog_bnd_itm Get_or_null(String v)	{return (Xog_bnd_itm)regy.GetByOrNull(v);}
 	public void Init_by_kit(Xoae_app app) {
 		this.app = app;
 		Add_system_bnds();
@@ -213,7 +213,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 			}
 
 			// remove old bnd from box
-			int deleted_len = deleted.Count();
+			int deleted_len = deleted.Len();
 			for (int j = 0; j < deleted_len; j++) {
 				// delete from box
 				Xog_bnd_itm deleted_itm = (Xog_bnd_itm)deleted.Get_at(j);
@@ -384,11 +384,11 @@ public class Xog_bnd_mgr implements Gfo_invk {
 		IptBnd_.ipt_to_(null_cfg		, win.Url_box()			 , invk_mgr, Xog_cmd_itm_.Key_gui_browser_url_type			, IptEventType_.KeyUp, IptKey_.printableKeys_(IptKey_.Ary(IptKey_.Back, IptKey_.Escape, IptKey_.MOD_1ST.Add(IptKey_.X), IptKey_.MOD_1ST.Add(IptKey_.V)), IptKey_.Ary()));
 	}
 	private void Add_custom_bnds() {	// NOTE: custom bnds are stored in cfg; cfg executes before Init_by_kit when all windows elements are null; run cfg now, while Init_by_kit is called and elems are now created
-		int len = startup_itms.Count();
+		int len = startup_itms.Len();
 		for (int i = 0; i < len; i++) {
 			Xog_bnd_itm new_itm = (Xog_bnd_itm)startup_itms.Get_at(i);
 			try {
-				Xog_bnd_itm cur_itm = (Xog_bnd_itm)regy.Get_by(new_itm.Key());
+				Xog_bnd_itm cur_itm = (Xog_bnd_itm)regy.GetByOrNull(new_itm.Key());
 				if (cur_itm == null) {win.Usr_dlg().Warn_many("", "", "binding no longer exists; key=~{0}", new_itm.Key());}	// could happen when breaking backward compatibility
 				cur_itm.Init_by_set(new_itm.Box(), new_itm.Ipt());
 			}	catch (Exception e) {win.Usr_dlg().Warn_many("", "", "failed to set custom binding; key=~{0} err=~{1}", new_itm.Key(), Err_.Message_gplx_full(e));}

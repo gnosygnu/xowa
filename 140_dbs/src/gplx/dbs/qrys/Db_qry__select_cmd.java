@@ -19,8 +19,8 @@ import gplx.dbs.sqls.SqlQryWtr;
 import gplx.dbs.sqls.itms.*;
 public class Db_qry__select_cmd implements Db_qry {
 	public int				Tid()				{return Db_qry_.Tid_select;}
-	public boolean				Exec_is_rdr()		{return Bool_.Y;}
-	public String			Base_table()		{return from.Base_tbl.Name;}
+	public boolean ReturnsRdr()		{return Bool_.Y;}
+	public String BaseTable()		{return from.Base_tbl.Name;}
 	public Sql_from_clause		From()				{return from;} private Sql_from_clause from;
 	public Db_qry__select_cmd From_(String tbl) {return From_(tbl, Sql_tbl_itm.Alias__null);}
 	public Db_qry__select_cmd From_(String name, String alias) {return From_(Sql_tbl_itm.Db__null, name, alias);}
@@ -108,6 +108,6 @@ public class Db_qry__select_cmd implements Db_qry {
 		return this;
 	}
 	
-	public String		To_sql__exec(SqlQryWtr wtr)		{return wtr.ToSqlStr(this, Bool_.N);}
+	public String ToSqlExec(SqlQryWtr wtr)		{return wtr.ToSqlStr(this, Bool_.N);}
 	public String		To_sql__prep(SqlQryWtr wtr)		{return wtr.ToSqlStr(this, Bool_.Y);}
 }

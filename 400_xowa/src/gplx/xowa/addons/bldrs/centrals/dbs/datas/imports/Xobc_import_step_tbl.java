@@ -13,27 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs.datas.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*; import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*;
+package gplx.xowa.addons.bldrs.centrals.dbs.datas.imports; import gplx.*;
+import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*;
 import gplx.dbs.*;
 public class Xobc_import_step_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_step_id, fld_host_id, fld_wiki_abrv, fld_wiki_date, fld_import_name, fld_import_type, fld_import_zip, fld_import_md5, fld_import_size_zip, fld_import_size_raw, fld_prog_size_end, fld_prog_count_end;
 	public final Db_conn conn; private Db_stmt insert_stmt;
 	public Xobc_import_step_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "import_step";
-		this.fld_step_id			= flds.Add_int_pkey("step_id");
-		this.fld_host_id			= flds.Add_int("host_id");
-		this.fld_wiki_abrv			= flds.Add_str("wiki_abrv", 255);
-		this.fld_wiki_date			= flds.Add_str("wiki_date", 8);
-		this.fld_import_name		= flds.Add_str("import_name", 255);
-		this.fld_import_type		= flds.Add_int("import_type");
-		this.fld_import_zip			= flds.Add_byte("import_zip");
-		this.fld_import_size_zip	= flds.Add_long("import_size_zip");
-		this.fld_import_size_raw 	= flds.Add_long("import_size_raw");
-		this.fld_import_md5			= flds.Add_str("import_md5", 48);
-		this.fld_prog_size_end 		= flds.Add_long("prog_size_end");
-		this.fld_prog_count_end 	= flds.Add_long("prog_count_end");
+		this.fld_step_id			= flds.AddIntPkey("step_id");
+		this.fld_host_id			= flds.AddInt("host_id");
+		this.fld_wiki_abrv			= flds.AddStr("wiki_abrv", 255);
+		this.fld_wiki_date			= flds.AddStr("wiki_date", 8);
+		this.fld_import_name		= flds.AddStr("import_name", 255);
+		this.fld_import_type		= flds.AddInt("import_type");
+		this.fld_import_zip			= flds.AddByte("import_zip");
+		this.fld_import_size_zip	= flds.AddLong("import_size_zip");
+		this.fld_import_size_raw 	= flds.AddLong("import_size_raw");
+		this.fld_import_md5			= flds.AddStr("import_md5", 48);
+		this.fld_prog_size_end 		= flds.AddLong("prog_size_end");
+		this.fld_prog_count_end 	= flds.AddLong("prog_count_end");
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
@@ -94,7 +95,7 @@ public class Xobc_import_step_tbl implements Db_tbl {
 				list.Add(New_itm(rdr));
 			}
 		} finally {rdr.Rls();}
-		return (Xobc_import_step_itm[])list.To_ary_and_clear(Xobc_import_step_itm.class);
+		return (Xobc_import_step_itm[])list.ToAryAndClear(Xobc_import_step_itm.class);
 	}
 	public void Rls() {
 		insert_stmt = Db_stmt_.Rls(insert_stmt);

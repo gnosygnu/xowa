@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.cases; import gplx.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_case_itm_ {
 	public static final byte Tid_both = 0, Tid_upper = 1, Tid_lower = 2;
@@ -69,7 +69,7 @@ public class Xol_case_itm_ {
 			if (last) break;
 			++src_pos;
 		}
-		return (Xol_case_itm[])list.To_ary(Xol_case_itm.class);
+		return (Xol_case_itm[])list.ToAry(Xol_case_itm.class);
 	}
 	public static Xol_case_itm[] parse_mw_(byte[] raw) {
 		Ordered_hash hash = Ordered_hash_.New_bry();
@@ -116,7 +116,7 @@ public class Xol_case_itm_ {
 								tid = Xol_case_itm_.Tid_lower;
 								rev_tid = Xol_case_itm_.Tid_upper;
 							}
-							Xol_case_itm_bry itm = (Xol_case_itm_bry)hash.Get_by(upper);
+							Xol_case_itm_bry itm = (Xol_case_itm_bry)hash.GetByOrNull(upper);
 							if (itm == null) {
 								itm = new Xol_case_itm_bry(tid, upper, lower);
 								hash.Add(upper, itm);

@@ -103,7 +103,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	}
 	static void Eq_list_wkr(List_adp lhsList, List_adp rhsList, TfdsEqListItmStr xtoStr, String customMsg) {
 		List_adp list = List_adp_.New(); boolean pass = true;
-		int lhsLen = lhsList.Count(), rhsLen = rhsList.Count();
+		int lhsLen = lhsList.Len(), rhsLen = rhsList.Len();
 		for (int i = 0; i < lhsLen; i++) {
 			Object lhs = lhsList.Get_at(i);
 			Object rhs = i >= rhsLen ? null : rhsList.Get_at(i);
@@ -180,13 +180,13 @@ class TfdsMsgBldr {
 		if (lhsAryLen != rhsAryLen) 
 			sb.Add_fmt_line("{0}element counts differ: {1} {2}", "\t\t", lhsAryLen, rhsAryLen);
 		int lhsLenMax = 0, rhsLenMax = 0;
-		for (int i = 0; i < list.Count(); i++) {
+		for (int i = 0; i < list.Len(); i++) {
 			TfdsEqAryItm itm = (TfdsEqAryItm)list.Get_at(i);
 			int lhsLen = String_.Len(itm.Lhs()), rhsLen = String_.Len(itm.Rhs());
 			if (lhsLen > lhsLenMax) lhsLenMax = lhsLen;
 			if (rhsLen > rhsLenMax) rhsLenMax = rhsLen;
 		}
-		for (int i = 0; i < list.Count(); i++) {
+		for (int i = 0; i < list.Len(); i++) {
 			TfdsEqAryItm itm = (TfdsEqAryItm)list.Get_at(i);
 			String eq_str = itm.Eq() ? "==" : "";
 			if (!itm.Eq()) {

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.parsers.htmls.*;
@@ -174,7 +174,7 @@ public class Gallery_mgr_wtr {
 		Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__class, ul_cls);
 		Gfh_wtr.Write_atr_bry(bfr, Gfh_atr_.Bry__style, ul_style);
 		if (xatr_list != null) {
-			int len = xatr_list.Count();
+			int len = xatr_list.Len();
 			for (int i = 0; i < len; i++) {
 				Mwh_atr_itm xatr = (Mwh_atr_itm)xatr_list.Get_at(i);
 				if (!whitelist_mgr.Chk(Xop_xnde_tag_.Tid__ul, xatr)) continue;

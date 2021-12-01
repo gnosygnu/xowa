@@ -13,8 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.parsers.tmpls; import gplx.*;
 public class Xot_invk_mock implements Xot_invk {
 	Xot_invk_mock(byte defn_tid, int idx_adj, byte[] frame_ttl) {
 		this.defn_tid = defn_tid; this.idx_adj = idx_adj; this.frame_ttl = frame_ttl;
@@ -28,10 +27,10 @@ public class Xot_invk_mock implements Xot_invk {
 	public int Frame_lifetime() {return frame_lifetime;} public void Frame_lifetime_(int v) {frame_lifetime = v;} private int frame_lifetime;
 	public boolean Rslt_is_redirect() {return rslt_is_redirect;} public void Rslt_is_redirect_(boolean v) {rslt_is_redirect = v;} private boolean rslt_is_redirect;
 	public Arg_nde_tkn Name_tkn() {return Arg_nde_tkn.Null;}
-	public int Args_len() {return args.Count() + idx_adj;} private Ordered_hash args = Ordered_hash_.New_bry();
+	public int Args_len() {return args.Len() + idx_adj;} private Ordered_hash args = Ordered_hash_.New_bry();
 	public Arg_nde_tkn Args_get_by_idx(int i) {return (Arg_nde_tkn)args.Get_at(i - idx_adj);}
 	public Arg_nde_tkn Args_eval_by_idx(byte[] src, int idx) {// DUPE:MW_ARG_RETRIEVE
-		int cur = 0, list_len = args.Count(); 
+		int cur = 0, list_len = args.Len();
 		if (idx >= list_len) return null;
 		for (int i = 0; i < list_len; i++) {	// iterate over list to find nth *non-keyd* arg; SEE:NOTE_1
 			Arg_nde_tkn nde = (Arg_nde_tkn)args.Get_at(i);
@@ -53,7 +52,7 @@ public class Xot_invk_mock implements Xot_invk {
 		}
 		return Args_get_by_key(src, Bry_.To_a7_bry(idx + 1, 1));
 	}
-	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {return (Arg_nde_tkn)args.Get_by(key);}
+	public Arg_nde_tkn Args_get_by_key(byte[] src, byte[] key) {return (Arg_nde_tkn)args.GetByOrNull(key);}
 	public static Xot_invk_mock new_(byte defn_tid, byte[] frame_ttl, Keyval... args)		{return new_(defn_tid, 1, frame_ttl, args);}
 	public static Xot_invk_mock new_(byte[] frame_ttl, Keyval... args)					{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
 	public static Xot_invk_mock preprocess_(byte[] frame_ttl, Keyval... args)				{return new_(Xot_defn_.Tid_null, 1, frame_ttl, args);}
@@ -81,7 +80,7 @@ public class Xot_invk_mock implements Xot_invk {
 			}
 			else																		// regular nde
 				nde_tkn = new Arg_nde_tkn_mock(kv_key_str, kv.Val_to_str_or_empty());	// add regular key, val strings
-			rv.args.Add_if_dupe_use_nth(Bry_.new_u8(kv_key_str), nde_tkn);
+			rv.args.AddIfDupeUseNth(Bry_.new_u8(kv_key_str), nde_tkn);
 		}
 		return rv;
 	}

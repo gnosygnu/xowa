@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.fmtrs; import gplx.*;
 public class Xoa_fmtr_sort_mgr implements Gfo_invk {
 	private Ordered_hash itms = Ordered_hash_.New();
 	private Xoa_fmtr_sort_wkr wkr = new Xoa_fmtr_sort_wkr();
@@ -24,7 +24,7 @@ public class Xoa_fmtr_sort_mgr implements Gfo_invk {
 		int keys_len = keys.length;
 		for (int i = 0; i < keys_len; i++) {
 			Xoa_fmtr_sort_itm itm = new Xoa_fmtr_sort_itm(keys[i], true);
-			itms.Add_if_dupe_use_1st(itm.Key(), itm);
+			itms.AddIfDupeUse1st(itm.Key(), itm);
 		}
 	}
 	public void Exec() {

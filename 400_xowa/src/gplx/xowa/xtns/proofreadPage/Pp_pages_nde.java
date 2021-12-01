@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.apps.cfgs.*;
-import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.xtns.lst.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
@@ -118,11 +118,11 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	}
 	private byte[] Bld_wikitext(Bry_bfr full_bfr, Gfo_number_parser num_parser, Hash_adp_bry lst_page_regy) {
 		Pp_index_page index_page = Pp_index_parser.Parse(wiki, ctx, index_ttl, ns_page_id);
-		int index_page_ttls_len = index_page.Page_ttls().Count();
+		int index_page_ttls_len = index_page.Page_ttls().Len();
 		byte[] rv = Bry_.Empty;
 		if (bgn_page_bry != null || end_page_bry != null || include != null) {	// from, to, or include specified				
 			Xoa_ttl[] ttls = null;
-			if (	index_page.Pagelist_xndes().Count() > 0		// pagelist exists; don't get from args
+			if (	index_page.Pagelist_xndes().Len() > 0		// pagelist exists; don't get from args
 				||	index_page_ttls_len == 0					// no [[Page:]] in [[Index:]]
 				)												// NOTE: this simulates MW's if (empty($links)); REF.MW:ProofreadPageRenderer.php|renderPages
 				ttls = Get_ttls_from_xnde_args(num_parser);
@@ -171,7 +171,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	}
 	private byte[] Bld_wikitext_for_header(Bry_bfr full_bfr, Pp_index_page index_page, byte[] rv) {
 		List_adp main_lnkis = index_page.Main_lnkis();
-		int main_lnkis_len = main_lnkis.Count();
+		int main_lnkis_len = main_lnkis.Len();
 		byte[] index_page_src = index_page.Src();
 		if (main_lnkis_len > 0) {
 			Xoa_ttl page_ttl = ctx.Page().Ttl();
@@ -213,7 +213,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		return full_bfr.To_bry_and_clear();
 	}
 	private void Add_args(Bry_bfr full_bfr, List_adp invk_args) {
-		int invk_args_len = invk_args.Count();
+		int invk_args_len = invk_args.Len();
 		for (int i = 0; i < invk_args_len; i++) {
 			Pp_index_arg arg = (Pp_index_arg)invk_args.Get_at(i);
 			full_bfr
@@ -308,7 +308,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 				exclude_pages_hash.Add(exclude_page, exclude_page);
 		}
 		List_adp new_list = List_adp_.New();
-		int list_len = list.Count();
+		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
 			Int_obj_val page = (Int_obj_val)list.Get_at(i);
 			if (exclude_pages_hash.Has(page)) continue;
@@ -317,7 +317,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		return new_list;
 	}
 	private Xoa_ttl[] Get_ttls_from_xnde_args__ttls(List_adp list) {
-		int list_len = list.Count(); if (list_len == 0) return Ttls_null; 
+		int list_len = list.Len(); if (list_len == 0) return Ttls_null;
 		Xoa_ttl[] rv = new Xoa_ttl[(list_len / step_int) + ((list_len % step_int == 0) ? 0 : 1)];
 		int rv_idx = 0;
 		Bry_bfr ttl_bfr = wiki.Utl__bfr_mkr().Get_b512();

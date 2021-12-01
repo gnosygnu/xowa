@@ -139,7 +139,7 @@ abstract class Wdata_tbl_base {
 		insert_stmt = this.Make_insert_stmt(conn);
 	}
 	public static void Exec_insert_kvs(Db_stmt stmt, int page_id, Ordered_hash hash) {
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
 			Json_kv kv = (Json_kv)hash.Get_at(i);
 			stmt.Clear()
@@ -181,7 +181,7 @@ class Wdata_alias_tbl extends Wdata_tbl_base {
 	@Override public String[] Fld_ary() {return new String[] {Fld_page_id, Fld_lang_key, Fld_val};}
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {
 		Ordered_hash hash = wdoc.Alias_list();
-		int len = hash.Count();
+		int len = hash.Len();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
 			Json_kv kv = (Json_kv)hash.Get_at(i);
@@ -237,7 +237,7 @@ class Wdata_link_tbl extends Wdata_tbl_base {
 	@Override public String[] Fld_ary() {return new String[] {Fld_page_id, Fld_wiki_key, Fld_val};}
 	@Override public void Exec_insert_by_wdoc(byte[] lang_key, Wdata_wiki_mgr wdata_mgr, int page_id, Wdata_doc wdoc) {
 		Ordered_hash hash = wdoc.Slink_list();
-		int len = hash.Count();
+		int len = hash.Len();
 		Db_stmt insert_stmt = this.Insert_stmt();
 		for (int i = 0; i < len; i++) {
 			Json_kv kv = (Json_kv)hash.Get_at(i);
@@ -291,7 +291,7 @@ class Wbase_claim_tbl extends Wdata_tbl_base {
 		if (visitor == null) visitor = new Xob_wdata_db_visitor(wdata_mgr);
 		visitor.Init(lang_key);
 		Ordered_hash list = wdoc.Claim_list();
-		int list_len = list.Count();
+		int list_len = list.Len();
 		for (int i = 0; i < list_len; i++) {
 			Wbase_claim_grp claim_grp = (Wbase_claim_grp)list.Get_at(i);
 			int itms_len = claim_grp.Len();

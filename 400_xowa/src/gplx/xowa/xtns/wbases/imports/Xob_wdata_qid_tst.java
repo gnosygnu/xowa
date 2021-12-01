@@ -13,18 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.imports; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.*; import gplx.dbs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
+package gplx.xowa.xtns.wbases.imports; import gplx.*;
+import gplx.xowa.xtns.wbases.*;
+import org.junit.*;
+import gplx.dbs.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.bldrs.*;
 import gplx.xowa.bldrs.wms.sites.*;
 public class Xob_wdata_qid_tst {
 	private Db_conn conn;
 	private final Xobldr_fxt fxt = new Xobldr_fxt().Ctor_mem();
 	private Xob_wdata_qid wkr;
 	private final Gfo_db_tester db_tester = new Gfo_db_tester();
-	private final Dbmeta_fld_list flds__wbase_qid = new Dbmeta_fld_list().Bld_str("src_wiki").Bld_int("src_ns").Bld_str("src_ttl").Bld_str("trg_ttl");
+	private final DbmetaFldList flds__wbase_qid = new DbmetaFldList().BldStr("src_wiki").BldInt("src_ns").BldStr("src_ttl").BldStr("trg_ttl");
 	@Before public void init() {
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();

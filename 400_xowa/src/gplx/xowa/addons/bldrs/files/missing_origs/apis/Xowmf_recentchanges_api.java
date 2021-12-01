@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.addons.bldrs.files.missing_origs.*;
+package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.files.downloads.*;
 public class Xowmf_recentchanges_api {
@@ -66,7 +66,7 @@ public class Xowmf_recentchanges_api {
 				Json_nde nde = ary.Get_as_nde(i);
 				try {
 					byte[] title = Xowmf_imageinfo_item.Normalize_ttl(nde.Get_as_bry("title"));
-					Xowmf_recentchanges_item item = (Xowmf_recentchanges_item)list.Get_by(title);
+					Xowmf_recentchanges_item item = (Xowmf_recentchanges_item)list.GetByOrNull(title);
 					// not in list; add it
 					if (item == null) {
 						item = new Xowmf_recentchanges_item();

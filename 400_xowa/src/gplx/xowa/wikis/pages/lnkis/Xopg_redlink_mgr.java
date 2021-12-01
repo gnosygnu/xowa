@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.wikis.pages.lnkis; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.guis.cbks.js.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.langs.vnts.*;
@@ -55,7 +55,7 @@ public class Xopg_redlink_mgr implements Gfo_invk {
 		for (int i = 0; i < len; ++i) {
 			Xopg_lnki_itm lnki = lnki_list.Get_at(i);
 			byte[] full_db = lnki.Ttl().Full_db();
-			Xowd_page_itm page_row = (Xowd_page_itm)lnki_hash.Get_by(full_db);
+			Xowd_page_itm page_row = (Xowd_page_itm)lnki_hash.GetByOrNull(full_db);
 			if (page_row.Exists()) continue;	// page exists; nothing to do;
 
 			// for vnt languages, convert missing ttl to vnt and check again; EX: [[zh_cn]] will check for page_ttl for [[zh_tw]]

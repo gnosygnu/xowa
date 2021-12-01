@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
+import gplx.xowa.xtns.wbases.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.apps.apis.xowa.xtns.*;
@@ -39,7 +40,7 @@ class Wdata_fmtr__oview_tbl implements gplx.core.brys.Bfr_arg {
 		byte[][] oview_alias	= Alias_get_or_empty(wdoc.Alias_list(), core_langs);
 		byte[] aliases_hdr		= oview_alias == Bry_.Ary_empty ? hdr_alias_n : hdr_alias_y;
 		fmtr_aliases.Init_by_itm(oview_alias);
-		Wdata_sitelink_itm slink = (Wdata_sitelink_itm)wdoc.Slink_list().Get_by(wikibase_api.Link_wikis());
+		Wdata_sitelink_itm slink = (Wdata_sitelink_itm)wdoc.Slink_list().GetByOrNull(wikibase_api.Link_wikis());
 		if (slink != null) {
 			oview_label = slink_fmtr.Bld_bry_many(tmp_bfr, slink.Domain_info().Domain_bry(), href_encoder.Encode(slink.Name()), oview_label);
 		}
@@ -66,7 +67,7 @@ class Wdata_fmtr__oview_tbl implements gplx.core.brys.Bfr_arg {
 		if (list == null) return Bry_.Ary_empty;
 		int langs_len = langs.length;
 		for (int i = 0; i < langs_len; ++i) {
-			Object itm_obj = list.Get_by(langs[i]);
+			Object itm_obj = list.GetByOrNull(langs[i]);
 			if (itm_obj != null) {
 				Wdata_alias_itm itm = (Wdata_alias_itm)itm_obj;
 				return itm.Vals();

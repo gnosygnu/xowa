@@ -13,14 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.consoles; import gplx.*; import gplx.core.*;
+package gplx.core.consoles; import gplx.*;
 public class Console_adp__mem implements Console_adp {
 	private final List_adp written = List_adp_.New();
 	private final Hash_adp ignored = Hash_adp_.New();
 	public boolean Enabled() {return true;}
 	public boolean Canceled_chk() {return false;}
 	public int Chars_per_line_max() {return 80;} public void Chars_per_line_max_(int v) {}
-	public Console_adp__mem Ignore_add(String s) {ignored.Add_as_key_and_val(s); return this;}
+	public Console_adp__mem Ignore_add(String s) {ignored.AddAsKeyAndVal(s); return this;}
 	public void Write_str(String s) {WriteString(s);}
 	public void Write_fmt_w_nl(String s, Object... args) {WriteString(String_.Format(s, args) + String_.CrLf);}
 	public void Write_tmp(String s) {WriteString(s);}
@@ -39,7 +39,7 @@ public class Console_adp__mem implements Console_adp {
 
 	public List_adp Written() {return written;}
 	public void tst_WrittenStr(String... expd) {
-		String[] actl = new String[written.Count()];
+		String[] actl = new String[written.Len()];
 		int actlLength = Array_.Len(actl);
 		for (int i = 0; i < actlLength; i++)
 			actl[i] = written.Get_at(i).toString();

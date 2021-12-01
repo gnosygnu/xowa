@@ -135,7 +135,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		html_data.Content_sub_(tmp_hpg.Content_sub());			
 		html_data.Xtn_skin_mgr().Add(new Xopg_xtn_skin_itm_stub(tmp_hpg.Sidebar_div()));
 		html_data.Custom_head_tags().Add(hpg.Html_data().Custom_head_tags().To_ary());
-		html_data.Indicators().Deserialise(wiki, hpg, (byte[])tmp_hpg.Props().Get_by(Indicator_hxtn_page_wkr.KEY));
+		html_data.Indicators().Deserialise(wiki, hpg, (byte[])tmp_hpg.Props().GetByOrNull(Indicator_hxtn_page_wkr.KEY));
 
 		Xoh_head_mgr wpg_head = html_data.Head_mgr();
 		Xopg_module_mgr hpg_head = hpg.Head_mgr();			

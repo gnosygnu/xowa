@@ -33,15 +33,15 @@ public class TfdsTstr_fxt {
 	public void Fail() {
 		manualFail = true;
 	}boolean manualFail = false;
-	public int List_Max(List_adp expd, List_adp actl) {return Math_.Max(expd.Count(), actl.Count());}
+	public int List_Max(List_adp expd, List_adp actl) {return Math_.Max(expd.Len(), actl.Len());}
 	public int List_Max(String[] expd, String[] actl) {return Math_.Max(expd.length, actl.length);}
-	public Object List_FetchAtOrNull(List_adp l, int i) {return (i >= l.Count()) ? null : l.Get_at(i);}
+	public Object List_FetchAtOrNull(List_adp l, int i) {return (i >= l.Len()) ? null : l.Get_at(i);}
 
 	public void SubName_pop() {stack.Pop();}
 	int nameLenMax = 0;
 	public void tst_Equal(String hdr) {
 		boolean pass = true;
-		for (int i = 0; i < list.Count(); i++) {
+		for (int i = 0; i < list.Len(); i++) {
 			TfdsTstrItm itm = (TfdsTstrItm)list.Get_at(i);
 			if (!itm.Compare()) pass = false;	// don't break early; Compare all vals
 		}
@@ -49,7 +49,7 @@ public class TfdsTstr_fxt {
 		String_bldr sb = String_bldr_.new_();
 		sb.Add_char_crlf();
 		sb.Add_str_w_crlf(hdr);
-		for (int i = 0; i < list.Count(); i++) {
+		for (int i = 0; i < list.Len(); i++) {
 			TfdsTstrItm itm = (TfdsTstrItm)list.Get_at(i);
 			if (itm.TypeOf == 1) {
 				sb.Add_fmt_line(" /{0}", itm.SubName());
@@ -77,7 +77,7 @@ class TfdsTstrItm {
 		if (stack.Count() == 0) return;
 		List_adp list = stack.XtoList();
 		String_bldr sb = String_bldr_.new_();
-		for (int i = 0; i < list.Count(); i++) {
+		for (int i = 0; i < list.Len(); i++) {
 			if (i != 0) sb.Add(".");
 			sb.Add((String)list.Get_at(i));
 		}

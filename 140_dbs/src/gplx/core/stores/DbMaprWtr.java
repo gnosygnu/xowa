@@ -13,20 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores; import gplx.*; import gplx.core.*;
+package gplx.core.stores; import gplx.*;
 import gplx.core.criterias.*; import gplx.core.gfo_ndes.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class DbMaprWtr extends DataWtr_base implements DataWtr {
 	public void InitWtr(String key, Object val) {}
 	@Override public Object StoreRoot(SrlObj root, String key) {
-		mgr = (DbMaprMgr)this.EnvVars().Get_by_or_fail(DbMaprWtr.Key_Mgr);
+		mgr = (DbMaprMgr)this.EnvVars().GetByOrFail(DbMaprWtr.Key_Mgr);
 		DbMaprWtrUtl.PurgeObjTree(root, mgr, conn);
 		WriteGfoObj(root, mgr.Root());
 		mgr.Clear();
 		return null;
 	}
 	@Override public void SrlList(String subPropKey, List_adp list, SrlObj subProto, String itmKey) {
-		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().Get_at_last();
+		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().GetAtLast();
 		DbMaprItm subMapr = ownerMapr.Subs_get(subPropKey);
 
 		for (Object subObj : list) {
@@ -43,7 +43,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 		mgr.EnvStack_del(mapr, gobj);
 	}
 	void WriteContextFlds() {
-		int maprStackCount = mgr.MaprStack().Count() - 1; // -1 b/c current is added to stack
+		int maprStackCount = mgr.MaprStack().Len() - 1; // -1 b/c current is added to stack
 		for (int i = 0; i < maprStackCount; i ++) {
 			DbMaprItm mapr = (DbMaprItm)mgr.MaprStack().Get_at(i);
 			SrlObj gobj = (SrlObj)mgr.OwnerStack().Get_at(i);
@@ -60,7 +60,7 @@ public class DbMaprWtr extends DataWtr_base implements DataWtr {
 		insertCmd = null;
 	}
 	@Override public void WriteData(String name, Object val) {
-		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().Get_at_last();
+		DbMaprItm ownerMapr = (DbMaprItm)mgr.MaprStack().GetAtLast();
 		String fld = ""; try {fld = ownerMapr.Flds_get(name).DbFld();} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to fetch fld from mapr", "key", name);}
 		WriteDataVal(fld, val);
 	}

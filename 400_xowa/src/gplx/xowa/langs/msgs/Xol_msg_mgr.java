@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_msg_mgr implements Gfo_invk {
 	private final Gfo_invk owner; private final boolean owner_is_lang;
@@ -31,7 +31,7 @@ public class Xol_msg_mgr implements Gfo_invk {
 	}
 	public int Itms_max() {return itms_max;} private Xol_msg_itm[] itms; int itms_max = Xol_msg_itm_.Id__max; int itms_id_next = Xol_msg_itm_.Id__max;
 	public Xol_msg_itm Itm_by_id_or_null(int id) {return id < itms_max ? itms[id] : null;}
-	public Xol_msg_itm Itm_by_key_or_null(byte[] key) {return (Xol_msg_itm)hash.Get_by(key);}
+	public Xol_msg_itm Itm_by_key_or_null(byte[] key) {return (Xol_msg_itm)hash.GetByOrNull(key);}
 	public Xol_msg_itm Itms_new(byte[] msg_key) {
 		Xol_msg_itm rv = new Xol_msg_itm(itms_id_next++, msg_key);
 		Itms_reg(rv);
@@ -44,7 +44,7 @@ public class Xol_msg_mgr implements Gfo_invk {
 		return rv;
 	}
 	public Xol_msg_itm Itm_by_key_or_new(byte[] key) {
-		Object o = hash.Get_by(key);
+		Object o = hash.GetByOrNull(key);
 		Xol_msg_itm rv = null;
 		if (o == null) { // key not found; likely not a system_id; generate a custom one
 			rv = new Xol_msg_itm(itms_id_next++, key);

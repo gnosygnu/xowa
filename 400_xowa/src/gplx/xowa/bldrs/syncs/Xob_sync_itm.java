@@ -13,8 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.syncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.ios.*;
+package gplx.xowa.bldrs.syncs; import gplx.*;
 class Xob_sync_grp {
 	private final Ordered_hash itms = Ordered_hash_.New();
 	public Xob_sync_grp Ctor_itm(DateAdp dump_time, DateAdp upload_time) {
@@ -23,7 +22,7 @@ class Xob_sync_grp {
 	}
 	public DateAdp Dump_time() {return dump_time;} private DateAdp dump_time;
 	public DateAdp Upload_time() {return upload_time;} private DateAdp upload_time;
-	public int Itms__len() {return itms.Count();}
+	public int Itms__len() {return itms.Len();}
 	public void Itms__add(Xob_sync_pkg file) {itms.Add(file.Path(), file);}
 	public Xob_sync_pkg Itms__get_at(int i) {return (Xob_sync_pkg)itms.Get_at(i);}
 }
@@ -34,7 +33,7 @@ class Xob_sync_pkg extends Xob_sync_fil {	private final Ordered_hash itms = Orde
 	}
 	public String Url() {return url;} private String url;
 	public byte Zip_tid() {return zip_tid;} private byte zip_tid;
-	public int Itms__len() {return itms.Count();}
+	public int Itms__len() {return itms.Len();}
 	public void Itms__add(Xob_sync_fil file) {itms.Add(file.Path(), file);}
 	public Xob_sync_fil Itms__get_at(int i) {return (Xob_sync_fil)itms.Get_at(i);}
 }

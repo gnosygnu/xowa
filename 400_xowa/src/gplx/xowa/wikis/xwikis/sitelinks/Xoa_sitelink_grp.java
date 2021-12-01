@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*;
+package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*;
 public class Xoa_sitelink_grp implements gplx.CompareAble {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xoa_sitelink_grp(byte[] name, int sort) {
@@ -22,14 +22,14 @@ public class Xoa_sitelink_grp implements gplx.CompareAble {
 	}
 	public byte[] Name() {return name;} private final byte[] name;
 	public int Sort() {return sort;} private final int sort;
-	public int Len() {return hash.Count();}
+	public int Len() {return hash.Len();}
 	public Xoa_sitelink_itm Get_at(int i) {return (Xoa_sitelink_itm)hash.Get_at(i);}
 	public void Add(Xoa_sitelink_itm itm) {hash.Add(itm.Key(), itm);}
 	public void Del(byte[] key) {hash.Del(key);}
 	public void	Active_len__add() {++active_len;}
 	public int	Active_len() {return active_len;} private int active_len;
 	public void Reset() {
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
 			Xoa_sitelink_itm itm = (Xoa_sitelink_itm)hash.Get_at(i);
 			itm.Init_by_page(null, null, false, null);	// clear out pre-existing page names; needed b/c this struct is a singleton for entire wiki
@@ -40,7 +40,7 @@ public class Xoa_sitelink_grp implements gplx.CompareAble {
 	public void To_bfr(Bry_bfr bfr) {
 		bfr.Add_int_digits(1, Xoa_sitelink_mgr_parser.Tid__grp).Add_byte_pipe();
 		bfr.Add(name).Add_byte_nl();
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
 			Xoa_sitelink_itm itm = (Xoa_sitelink_itm)hash.Get_at(i);
 			itm.To_bfr(bfr);

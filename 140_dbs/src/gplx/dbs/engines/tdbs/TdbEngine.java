@@ -42,7 +42,7 @@ public class TdbEngine implements Db_engine {
 		return rv;
 	}
 	public Object Exec_as_obj(Db_qry qry) {
-		Db_qryWkr wkr = (Db_qryWkr)wkrs.Get_by_or_fail(qry.Tid());
+		Db_qryWkr wkr = (Db_qryWkr)wkrs.GetByOrFail(qry.Tid());
 		return wkr.Exec(this, qry);
 	}
 	public Db_stmt	Stmt_by_qry(Db_qry qry) {return new Db_stmt_sql().Parse(qry, sql_wtr.ToSqlStr(qry, true));}
@@ -64,7 +64,7 @@ public class TdbEngine implements Db_engine {
 	public void	Meta_tbl_create(Dbmeta_tbl_itm meta) {throw Err_.new_unimplemented();}
 	public void Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {throw Err_.new_unimplemented();}
 	public void	Meta_idx_delete(String idx) {throw Err_.new_unimplemented();}
-	public void				Meta_fld_append(String tbl, Dbmeta_fld_itm fld) {throw Err_.new_unimplemented();}
+	public void				Meta_fld_append(String tbl, DbmetaFldItm fld) {throw Err_.new_unimplemented();}
 	public void				Meta_tbl_delete(String tbl)						{}
 	public boolean				Meta_tbl_exists(String name)					{return false;}
 	public boolean				Meta_fld_exists(String tbl, String fld)			{return false;}

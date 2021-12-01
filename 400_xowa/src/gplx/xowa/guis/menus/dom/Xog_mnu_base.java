@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
-import gplx.gfui.*; import gplx.gfui.imgs.*;
-import gplx.xowa.langs.*; import gplx.xowa.guis.cmds.*;
+package gplx.xowa.guis.menus.dom; import gplx.*;
+import gplx.xowa.guis.*;
+import gplx.gfui.imgs.*;
+import gplx.xowa.langs.*;
 public abstract class Xog_mnu_base implements Gfo_invk {
 	private List_adp list = List_adp_.New();
 	public Xog_mnu_base() {evt_mgr = new Xog_mnu_evt_mgr(this);}
@@ -25,14 +26,14 @@ public abstract class Xog_mnu_base implements Gfo_invk {
 	public abstract boolean Tid_is_app_menu_grp();
 	public void Ctor(Xoa_gui_mgr gui_mgr) {this.gui_mgr = gui_mgr;}
 	public void Clear() {
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; i++) {
 			Xog_mnu_itm itm = (Xog_mnu_itm)list.Get_at(i);
 			itm.Clear();
 		}
 		list.Clear();
 	}
-	public int Len() {return list.Count();}
+	public int Len() {return list.Len();}
 	public Xog_mnu_itm Get_at(int i) {return (Xog_mnu_itm)list.Get_at(i);}
 	public Xog_mnu_itm Add_btn_default(String key) {return Add_itm_default(Xog_mnu_itm.Tid_btn, key);}
 	public Xog_mnu_itm Add_chk_default(String key) {return Add_itm_default(Xog_mnu_itm.Tid_chk, key);}
@@ -68,7 +69,7 @@ public abstract class Xog_mnu_base implements Gfo_invk {
 		return itm;
 	}
 	public Xog_mnu_itm Add_spr() {
-		String key = "xowa.spr" + Int_.To_str(list.Count());
+		String key = "xowa.spr" + Int_.To_str(list.Len());
 		Xog_mnu_itm rv = new Xog_mnu_itm(gui_mgr, key).Tid_(Xog_mnu_itm.Tid_spr);
 		list.Add(rv);
 		return rv;

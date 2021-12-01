@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.app_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.app_cfgs; import gplx.*; import gplx.xowa.*;
 import gplx.core.strings.*;
 import gplx.xowa.bldrs.*;
 public class Xob_wiki_cfg_bldr implements Gfo_invk {
 	public Xob_wiki_cfg_bldr(Xob_bldr bldr) {this.app = bldr.App();} private Xoae_app app;
 	public void Exec() {
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
 			Xoac_wiki_cfg_bldr_fil fil = (Xoac_wiki_cfg_bldr_fil)hash.Get_at(i);
 			Exec_fil(fil);
@@ -45,7 +45,7 @@ public class Xob_wiki_cfg_bldr implements Gfo_invk {
 	}	private static final String Invk_get = "get", Invk_run = "run";
 	public void Clear() {hash.Clear();}
 	public Xoac_wiki_cfg_bldr_fil Itms_get_or_new(String wiki) {
-		Xoac_wiki_cfg_bldr_fil rv = (Xoac_wiki_cfg_bldr_fil)hash.Get_by(wiki);
+		Xoac_wiki_cfg_bldr_fil rv = (Xoac_wiki_cfg_bldr_fil)hash.GetByOrNull(wiki);
 		if (rv == null) {
 			rv = new Xoac_wiki_cfg_bldr_fil(wiki);
 			hash.Add(wiki, rv);

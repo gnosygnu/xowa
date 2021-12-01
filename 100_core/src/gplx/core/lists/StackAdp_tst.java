@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*; import gplx.core.*;
+package gplx.core.lists; import gplx.*;
 import org.junit.*;
 public class StackAdp_tst {
 	@Test public void XtoList() {
@@ -24,7 +24,7 @@ public class StackAdp_tst {
 		for (int i : ary)
 			stack.Push(i);
 		List_adp list = stack.XtoList();
-		int[] actl = (int[])list.To_ary(int.class);
+		int[] actl = (int[])list.ToAry(int.class);
 		for (int i = 0; i < ary.length; i++)
 			Tfds.Eq(ary[i], actl[i]);
 	}

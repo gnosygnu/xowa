@@ -13,16 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
+package gplx.langs.gfs; import gplx.*;
 class GfsRegy implements Gfo_invk {
-	public int Count() {return hash.Count();}
+	public int Count() {return hash.Len();}
 	public void Clear() {hash.Clear(); typeHash.Clear();}
 	public boolean Has(String k) {return hash.Has(k);}
 	public GfsRegyItm Get_at(int i) {return (GfsRegyItm)hash.Get_at(i);}
-	public GfsRegyItm Get_by(String key) {return (GfsRegyItm)hash.Get_by(key);}
-	public GfsRegyItm FetchByType(Gfo_invk invk) {return (GfsRegyItm)typeHash.Get_by(Type_.Canonical_name_by_obj(invk));}
+	public GfsRegyItm Get_by(String key) {return (GfsRegyItm)hash.GetByOrNull(key);}
+	public GfsRegyItm FetchByType(Gfo_invk invk) {return (GfsRegyItm)typeHash.GetByOrNull(Type_.Canonical_name_by_obj(invk));}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		Object rv = (GfsRegyItm)hash.Get_by(k); if (rv == null) throw Err_.new_missing_key(k);
+		Object rv = (GfsRegyItm)hash.GetByOrNull(k); if (rv == null) throw Err_.new_missing_key(k);
 		return rv;
 	}
 	public void AddObj(Gfo_invk invk, String key) {Add(key, invk, false);}
@@ -31,10 +31,10 @@ class GfsRegy implements Gfo_invk {
 		if (hash.Has(key)) return;
 		GfsRegyItm regyItm = new GfsRegyItm().Key_(key).InvkAble_(invk).IsCmd_(typeCmd).TypeKey_(Type_.Canonical_name_by_obj(invk));
 		hash.Add(key, regyItm);
-		typeHash.Add_if_dupe_use_1st(regyItm.TypeKey(), regyItm);	// NOTE: changed to allow same Object to be added under different aliases (app, xowa) DATE:2014-06-09;
+		typeHash.AddIfDupeUse1st(regyItm.TypeKey(), regyItm);	// NOTE: changed to allow same Object to be added under different aliases (app, xowa) DATE:2014-06-09;
 	}
 	public void Del(String k) {
-		GfsRegyItm itm =(GfsRegyItm)hash.Get_by(k);
+		GfsRegyItm itm =(GfsRegyItm)hash.GetByOrNull(k);
 		if (itm != null) typeHash.Del(itm.TypeKey());
 		hash.Del(k);
 	}

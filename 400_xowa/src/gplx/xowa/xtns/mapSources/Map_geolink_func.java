@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.mapSources; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.mapSources; import gplx.*;
 import gplx.core.primitives.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Map_geolink_func extends Pf_func_base {
@@ -33,7 +33,7 @@ public class Map_geolink_func extends Pf_func_base {
 				Arg_nde_tkn arg = self.Args_get_by_idx(i);				
 				func_arg.Set(tmp_bfr, ctx, src, caller, self, arg);;
 				byte[] key = func_arg.key;
-				Object key_tid_obj = Key_hash.Get_by(key);
+				Object key_tid_obj = Key_hash.GetByOrNull(key);
 				if (key_tid_obj != null) {
 					byte[] val = func_arg.val;
 					switch (((Byte_obj_val)key_tid_obj).Val()) {

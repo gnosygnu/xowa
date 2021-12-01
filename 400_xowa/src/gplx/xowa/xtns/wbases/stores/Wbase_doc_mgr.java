@@ -103,7 +103,7 @@ public class Wbase_doc_mgr {
 		if (!enabled) return null;
 
 		// loggging
-		Wbase_db_log_itm wbase_db_itm = (Wbase_db_log_itm)wbase_db_hash.Get_by(ttl_bry);
+		Wbase_db_log_itm wbase_db_itm = (Wbase_db_log_itm)wbase_db_hash.GetByOrNull(ttl_bry);
 		if (wbase_db_itm == null) {
 			wbase_db_itm = new Wbase_db_log_itm(ttl_bry);
 			wbase_db_hash.Add(ttl_bry, wbase_db_itm);

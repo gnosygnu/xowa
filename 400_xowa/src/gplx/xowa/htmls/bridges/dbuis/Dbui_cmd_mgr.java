@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.bridges.dbuis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.bridges.*;
+package gplx.xowa.htmls.bridges.dbuis; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.htmls.bridges.*;
 import gplx.langs.jsons.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 public class Dbui_cmd_mgr {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
@@ -36,7 +37,7 @@ public class Dbui_cmd_mgr {
 	}
 	private Dbui_tbl_itm Get_tbl(Json_nde data) {
 		byte[] tbl_key = data.Get_bry(Arg_tbl_key);
-		Dbui_tbl_itm rv = (Dbui_tbl_itm)hash.Get_by(tbl_key); if (rv == null) throw Err_.new_("dbui", "unknown tbl_key", "tbl_key", tbl_key);
+		Dbui_tbl_itm rv = (Dbui_tbl_itm)hash.GetByOrNull(tbl_key); if (rv == null) throw Err_.new_("dbui", "unknown tbl_key", "tbl_key", tbl_key);
 		return rv;
 	}
 	private static Dbui_val_hash To_hash(Json_grp grp) {

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.tests; import gplx.*; import gplx.core.*;
+package gplx.core.tests; import gplx.*;
 public class Gfo_test_err_mgr {
 	private final List_adp expd = List_adp_.New();
 	public void Init() {
@@ -33,10 +33,10 @@ public class Gfo_test_err_mgr {
 		int actl_len = actl.Len();
 		if (expd_len == 0 && actl_len == 0) {}
 		else if (actl_len == 0) {
-			Gftest.Fail("expected some errors; got zero; expd={0}", expd.To_str());
+			Gftest.Fail("expected some errors; got zero; expd={0}", expd.ToStr());
 		}
 		else if (expd_len == 0) {
-			Gftest.Fail("expected zero errors; got some; actl={0}", actl.To_str());
+			Gftest.Fail("expected zero errors; got some; actl={0}", actl.ToStr());
 		}
 		else {
 			for (int i = 0; i < actl_len; i++) {

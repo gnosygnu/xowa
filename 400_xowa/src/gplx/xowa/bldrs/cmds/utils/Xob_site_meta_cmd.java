@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
+package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.core.net.*;
-import gplx.dbs.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.sites.*;
+import gplx.xowa.bldrs.wkrs.*;
+import gplx.xowa.bldrs.wms.sites.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.site_cfgs.*;
 public class Xob_site_meta_cmd implements Xob_cmd {
 	private final Xob_bldr bldr;
@@ -38,7 +38,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 		Ordered_hash reqd_hash = Ordered_hash_.New();
 		int reqd_len = reqd_ary.length;
 		for (int i = 0; i < reqd_len; ++i)
-			reqd_hash.Add_as_key_and_val(reqd_ary[i]);
+			reqd_hash.AddAsKeyAndVal(reqd_ary[i]);
 
 		Site_core_db json_db = new Site_core_db(db_url);			
 		Site_core_itm[] actl_ary = json_db.Tbl__core().Select_all_downloaded(cutoff);
@@ -48,7 +48,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 			reqd_hash.Del(String_.new_u8(actl_itm.Site_domain()));
 		}
 		
-		reqd_len = reqd_hash.Count();
+		reqd_len = reqd_hash.Len();
 		for (int i = 0; i < reqd_len; ++i) {
 			String domain_str = (String)reqd_hash.Get_at(i);
 			DateAdp json_date = Datetime_now.Get();

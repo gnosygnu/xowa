@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wiki_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.wiki_cfgs; import gplx.*;
 import gplx.langs.xmls.*; import gplx.core.ios.*;
 public class Xoi_wiki_props_api {
 	private IoEngine_xrg_downloadFil download_args = IoEngine_xrg_downloadFil.new_("", Io_url_.Empty);
@@ -67,7 +67,7 @@ public class Xoi_wiki_props_api {
 			sub_itm.Init_by_xml(sub_nde);
 			list.Add(sub_itm);
 		}
-		return (Xoi_wiki_props_alias[])list.To_ary_and_clear(Xoi_wiki_props_alias.class);
+		return (Xoi_wiki_props_alias[])list.ToAryAndClear(Xoi_wiki_props_alias.class);
 	}
 	private Xoi_wiki_props_ns[] Parse_ns_ary(XmlNde xnde) {
 		int xndes_len = xnde.SubNdes().Count();
@@ -79,6 +79,6 @@ public class Xoi_wiki_props_api {
 			sub_itm.Init_by_xml(sub_nde);
 			list.Add(sub_itm);
 		}
-		return (Xoi_wiki_props_ns[])list.To_ary_and_clear(Xoi_wiki_props_ns.class);
+		return (Xoi_wiki_props_ns[])list.ToAryAndClear(Xoi_wiki_props_ns.class);
 	}
 }

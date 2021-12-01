@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.xohtml; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.xohtml; import gplx.*;
 public class Xomw_atr_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public int                 Len()                    {return hash.Len();}
 	public Xomw_atr_itm        Get_at(int i)            {return (Xomw_atr_itm)hash.Get_at(i);}
-	public Xomw_atr_itm        Get_by_or_null(byte[] k) {return (Xomw_atr_itm)hash.Get_by(k);}
+	public Xomw_atr_itm        Get_by_or_null(byte[] k) {return (Xomw_atr_itm)hash.GetByOrNull(k);}
 	public Xomw_atr_mgr        Clear()                  {hash.Clear(); return this;}
 	public void                Del(byte[] key)          {hash.Del(key);}
 	public void                Add(Xomw_atr_itm itm)    {hash.Add(itm.Key_bry(), itm);}
@@ -27,7 +27,7 @@ public class Xomw_atr_mgr {
 		return this;
 	}
 	public void Add_or_set(Xomw_atr_itm src) {
-		Xomw_atr_itm trg = (Xomw_atr_itm)hash.Get_by(src.Key_bry());
+		Xomw_atr_itm trg = (Xomw_atr_itm)hash.GetByOrNull(src.Key_bry());
 		if (trg == null)
 			this.Add(src);
 		else
@@ -38,7 +38,7 @@ public class Xomw_atr_mgr {
 		atr.Val_(val);
 	}
 	public Xomw_atr_itm Get_by_or_make(byte[] k) {
-		Xomw_atr_itm rv = (Xomw_atr_itm)hash.Get_by(k);
+		Xomw_atr_itm rv = (Xomw_atr_itm)hash.GetByOrNull(k);
 		if (rv == null) {
 			rv = new Xomw_atr_itm(-1, k, null);
 			Add(rv);
@@ -46,7 +46,7 @@ public class Xomw_atr_mgr {
 		return rv;
 	}
 	public byte[] Get_val_or_null(byte[] k) {
-		Xomw_atr_itm atr = (Xomw_atr_itm)hash.Get_by(k);
+		Xomw_atr_itm atr = (Xomw_atr_itm)hash.GetByOrNull(k);
 		return atr == null ? null : atr.Val();
 	}
 	public Xomw_atr_mgr Add_many(String... kvs) {// TEST

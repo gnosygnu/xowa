@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
+package gplx.langs.dsvs; import gplx.*;
 import gplx.core.strings.*; import gplx.core.gfo_ndes.*; import gplx.core.stores.*; import gplx.core.type_xtns.*;
 import gplx.core.texts.*; /*CharStream*/
 public class DsvDataRdr_ {
@@ -104,7 +104,7 @@ class DsvParser {
 			throw Err_.new_wo_type("unable to process field value", "value", val);
 	}
 	void ProcessLine(CharStream strm, boolean cleanup) {
-		if (sb.Count() == 0 && tkns.Count() == 0)
+		if (sb.Count() == 0 && tkns.Len() == 0)
 			if (csvOn) {		// csvOn b/c csvMode allows blank lines as empty data
 				if (cleanup)	// cleanup b/c blankLine should not be added when called by cleanup, else will always add extra row at end
 					return;		// cleanup, so no further action needed; return;
@@ -186,7 +186,7 @@ class DsvTblBldr {
 			tkns.Clear();
 		else {								// comments in HDR
 			String_bldr sb = String_bldr_.new_();
-			for (int i = 0; i < tkns.Count(); i++)
+			for (int i = 0; i < tkns.Len(); i++)
 				sb.Add((String)tkns.Get_at(i));
 			layout.HeaderList().Add_Comment(sb.To_str());
 			tkns.Clear();
@@ -198,18 +198,18 @@ class DsvTblBldr {
 		stage = Stage_Init;						// NOTE: mark stage as INIT;
 	}
 	public void MakeVals(List_adp tkns) {
-		if (stage != Stage_Row) CreateFlds(tkns.Count());		// stage != Stage_Row means if (noRowsCreated)
+		if (stage != Stage_Row) CreateFlds(tkns.Len());		// stage != Stage_Row means if (noRowsCreated)
 		GfoNde row = GfoNde_.vals_(tbl.SubFlds(), MakeValsAry(tkns));
 		tbl.Subs().Add(row);
 		stage = Stage_Row; tkns.Clear();
 	}
 	Object[] MakeValsAry(List_adp tkns) {
 		GfoFldList subFlds = tbl.SubFlds(); int subFldsCount = subFlds.Count();
-		if (tkns.Count() > subFldsCount) throw Err_.new_wo_type("values.Count cannot be greater than fields.Count", "values.Count", tkns.Count(), "fields.Count", subFldsCount);
+		if (tkns.Len() > subFldsCount) throw Err_.new_wo_type("values.Count cannot be greater than fields.Count", "values.Count", tkns.Len(), "fields.Count", subFldsCount);
 		Object[] rv = new Object[subFldsCount];
 		for (int i = 0; i < subFldsCount; i++) {
 			ClassXtn typx = subFlds.Get_at(i).Type();
-			String val = i < tkns.Count() ? (String)tkns.Get_at(i) : null;
+			String val = i < tkns.Len() ? (String)tkns.Get_at(i) : null;
 			rv[i] = typx.ParseOrNull(val);
 		}
 		return rv;
@@ -223,7 +223,7 @@ class DsvTblBldr {
 		stage = Stage_Hdr;
 	}		
 	void CreateFlds(int valCount) {
-		int fldNamesCount = fldNames.Count(), fldTypesCount = fldTypes.Count();
+		int fldNamesCount = fldNames.Len(), fldTypesCount = fldTypes.Len();
 		if (fldNamesCount == 0 && fldTypesCount == 0) {			// csv tbls where no names or types, just values
 			for (int i = 0; i < valCount; i++)
 				tbl.SubFlds().Add("fld" + i, StringClassXtn.Instance);

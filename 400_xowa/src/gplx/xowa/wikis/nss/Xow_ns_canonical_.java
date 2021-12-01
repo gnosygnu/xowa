@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.nss; import gplx.*;
 import gplx.core.primitives.*;
 public class Xow_ns_canonical_ {
 	public static final Xow_ns[] Ary = new Xow_ns[]	// REF.MW: Namespace.php|$wgCanonicalNamespaceNames
@@ -48,7 +48,7 @@ public class Xow_ns_canonical_ {
 				id_hash.Add(ns.Name_db(), new Int_obj_val(ns.Id()));
 			}
 		}
-		Object rv_obj = id_hash.Get_by(key);
+		Object rv_obj = id_hash.GetByOrNull(key);
 		return rv_obj == null ? Xow_ns_.Tid__null : ((Int_obj_val)rv_obj).Val();
 	}
 	public static String To_canonical_or_local_as_str(Xow_ns ns) {	// NOTE: prefer canonical names if they exist; otherwise use local; PAGE:sh.w:Koprno; DATE:2015-11-08

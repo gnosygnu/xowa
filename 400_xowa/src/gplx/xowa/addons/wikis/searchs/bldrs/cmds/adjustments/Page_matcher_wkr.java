@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.bldrs.*; import gplx.xowa.addons.wikis.searchs.bldrs.cmds.*;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*; import gplx.xowa.*;
 import gplx.core.lists.hashs.*; import gplx.core.primitives.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.dbs.*;
 class Page_matcher_wkr implements Gfo_invk {// NOTE: tries would use less memory, but would be slower, especially for Has*()
 	private final Xow_wiki wiki;
 	private final List_adp rule_list = List_adp_.New();
@@ -51,7 +51,7 @@ class Page_matcher_wkr implements Gfo_invk {// NOTE: tries would use less memory
 				page_hash.Add_if_dupe_use_nth(page_id, itm);
 			}
 		} finally {rdr.Rls();}
-		itm.Page_ids = (Int_obj_ref[])page_ids.To_ary_and_clear(Int_obj_ref.class);
+		itm.Page_ids = (Int_obj_ref[])page_ids.ToAryAndClear(Int_obj_ref.class);
 		stmt.Rls();
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {

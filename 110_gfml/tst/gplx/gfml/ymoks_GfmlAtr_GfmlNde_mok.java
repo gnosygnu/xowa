@@ -51,7 +51,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 	public List_adp Subs() {return subs;}
 	public String XtoStrStub() {
 		String_bldr sb = String_bldr_.new_();
-		sb.Add_kv("key=", key).Add_kv("hnd=", hnd).Add_kv("typ=", typ).Add_kv("subs=", Int_.To_str(subs.Count()));
+		sb.Add_kv("key=", key).Add_kv("hnd=", hnd).Add_kv("typ=", typ).Add_kv("subs=", Int_.To_str(subs.Len()));
 		return sb.To_str();
 	}
 	public GfmlNde_mok Subs_(GfmlItm_mok... ary) {
@@ -75,7 +75,7 @@ class GfmlNde_mok implements GfmlItm_mok {
 		rv.ChainId_(ownerMok.chainId);
 		if (ownerMok.keyed) rv.KeyedSubObj_(ownerMok.keyed);
 		if (ownerMok.key != null) rv.KeyTkn_set(GfmlTkn_.val_(ownerMok.key));
-		for (int i = 0; i < ownerMok.subs.Count(); i++) {
+		for (int i = 0; i < ownerMok.subs.Len(); i++) {
 			GfmlItm_mok itm = (GfmlItm_mok)ownerMok.subs.Get_at(i);
 			if (itm.ObjType() == GfmlObj_.Type_nde) {
 				GfmlNde_mok itmMok = (GfmlNde_mok)itm;

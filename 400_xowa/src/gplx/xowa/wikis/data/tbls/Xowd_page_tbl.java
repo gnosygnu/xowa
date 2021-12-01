@@ -13,47 +13,48 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.criterias.*;
-import gplx.dbs.*; import gplx.xowa.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.qrys.*;
+import gplx.dbs.*;
+import gplx.dbs.qrys.*;
 import gplx.xowa.wikis.nss.*;
 public class Xowd_page_tbl implements Db_tbl {
 	private final Object thread_lock = new Object();
 	public final boolean schema_is_1;
 	private String fld_id, fld_ns, fld_title, fld_is_redirect, fld_touched, fld_len, fld_random_int, fld_score, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_cat_db_id;
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private Db_stmt stmt_select_all_by_ttl, stmt_select_all_by_id, stmt_select_id_by_ttl, stmt_insert;
 	private final String[] flds_select_all, flds_select_idx;
 	public Xowd_page_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn; this.schema_is_1 = schema_is_1;
 		String fld_text_db_id_name = "";
-		String fld_cat_db_id_name = Dbmeta_fld_itm.Key_null;
+		String fld_cat_db_id_name = DbmetaFldItm.KeyNull;
 		if (schema_is_1)	{fld_text_db_id_name = "page_file_idx";}
 		else				{
 			fld_text_db_id_name = "page_text_db_id";
 			if (conn.Meta_fld_exists(tbl_name, "page_cat_db_id"))
 				fld_cat_db_id_name = "page_cat_db_id";
 		}
-		fld_id				= flds.Add_int_pkey("page_id");					// int(10); unsigned -- MW:same
-		fld_ns				= flds.Add_int("page_namespace");			// int(11);          -- MW:same
-		fld_title			= flds.Add_str("page_title", 255);				// varbinary(255);   -- MW:blob
-		fld_is_redirect		= flds.Add_int("page_is_redirect");				// tinyint(3);       -- MW:same
-		fld_touched			= flds.Add_str("page_touched", 14);				// binary(14);       -- MW:blob; NOTE: should be revision!rev_timestamp, but needs extra join
-		fld_len				= flds.Add_int("page_len");						// int(10); unsigned -- MW:same except NULL REF: WikiPage.php!updateRevisionOn;"
-		fld_random_int		= flds.Add_int("page_random_int");				// MW:XOWA
-		fld_text_db_id		= flds.Add_int(fld_text_db_id_name);			// MW:XOWA
-		fld_html_db_id		= flds.Add_int_dflt("page_html_db_id", -1);		// MW:XOWA
-		fld_redirect_id		= flds.Add_int_dflt("page_redirect_id", -1);	// MW:XOWA
-		fld_score			= flds.Add_int_dflt(Fld__page_score__key, -1);	// MW:XOWA
-		if (fld_cat_db_id_name != Dbmeta_fld_itm.Key_null)
-			fld_cat_db_id		= flds.Add_int_dflt(fld_cat_db_id_name, -1);// MW:XOWA
+		fld_id				= flds.AddIntPkey("page_id");					// int(10); unsigned -- MW:same
+		fld_ns				= flds.AddInt("page_namespace");			// int(11);          -- MW:same
+		fld_title			= flds.AddStr("page_title", 255);				// varbinary(255);   -- MW:blob
+		fld_is_redirect		= flds.AddInt("page_is_redirect");				// tinyint(3);       -- MW:same
+		fld_touched			= flds.AddStr("page_touched", 14);				// binary(14);       -- MW:blob; NOTE: should be revision!rev_timestamp, but needs extra join
+		fld_len				= flds.AddInt("page_len");						// int(10); unsigned -- MW:same except NULL REF: WikiPage.php!updateRevisionOn;"
+		fld_random_int		= flds.AddInt("page_random_int");				// MW:XOWA
+		fld_text_db_id		= flds.AddInt(fld_text_db_id_name);			// MW:XOWA
+		fld_html_db_id		= flds.AddIntDflt("page_html_db_id", -1);		// MW:XOWA
+		fld_redirect_id		= flds.AddIntDflt("page_redirect_id", -1);	// MW:XOWA
+		fld_score			= flds.AddIntDflt(Fld__page_score__key, -1);	// MW:XOWA
+		if (fld_cat_db_id_name != DbmetaFldItm.KeyNull)
+			fld_cat_db_id		= flds.AddIntDflt(fld_cat_db_id_name, -1);// MW:XOWA
 		flds_select_all	= String_.Ary_wo_null(fld_id, fld_ns, fld_title, fld_touched, fld_is_redirect, fld_len, fld_random_int, fld_text_db_id, fld_html_db_id, fld_redirect_id, fld_score, fld_cat_db_id);
 		flds_select_idx	= String_.Ary_wo_null(fld_ns, fld_title, fld_id, fld_len, fld_score);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn()						{return conn;} private final Db_conn conn;
 	public String Tbl_name()					{return tbl_name;} private final String tbl_name = TBL_NAME;
-	public Dbmeta_fld_list Flds__all()			{return flds;}
+	public DbmetaFldList Flds__all()			{return flds;}
 	public String Fld_page_id()					{return fld_id;}
 	public String Fld_page_ns()					{return fld_ns;}
 	public String Fld_page_title()				{return fld_title;}
@@ -68,11 +69,11 @@ public class Xowd_page_tbl implements Db_tbl {
 	public String[] Flds_select_idx()			{return flds_select_idx;}
 	public String[] Flds_select_all()			{return flds_select_all;}
 	public void Flds__assert() {
-		conn.Meta_fld_assert(tbl_name, this.Fld_html_db_id()	, Dbmeta_fld_tid.Itm__int, -1);
-		conn.Meta_fld_assert(tbl_name, this.Fld_redirect_id()	, Dbmeta_fld_tid.Itm__int, -1);
-		conn.Meta_fld_assert(tbl_name, Fld__page_score__key		, Dbmeta_fld_tid.Itm__int, -1);
+		conn.Meta_fld_assert(tbl_name, this.Fld_html_db_id()	, DbmetaFldType.ItmInt, -1);
+		conn.Meta_fld_assert(tbl_name, this.Fld_redirect_id()	, DbmetaFldType.ItmInt, -1);
+		conn.Meta_fld_assert(tbl_name, Fld__page_score__key		, DbmetaFldType.ItmInt, -1);
 	}
-	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()));}
+	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds.ToFldAry()));}
 	public void Insert(int page_id, int ns_id, byte[] ttl_wo_ns, boolean page_is_redirect, DateAdp modified_on, int page_len, int random_int, int text_db_id, int html_db_id) {
 		this.Insert_bgn();
 		this.Insert_cmd_by_batch(page_id, ns_id, ttl_wo_ns, page_is_redirect, modified_on, page_len, random_int, text_db_id, html_db_id, -1);
@@ -188,9 +189,9 @@ public class Xowd_page_tbl implements Db_tbl {
 		wkr.Init(this, ns_mgr, rv);
 		wkr.Select_in(cancelable, conn, bgn, end);
 	}
-	public boolean Select_in__id(Cancelable cancelable, boolean show_progress, List_adp rv)	{return Select_in__id(cancelable, false, show_progress, rv, 0, rv.Count());}
+	public boolean Select_in__id(Cancelable cancelable, boolean show_progress, List_adp rv)	{return Select_in__id(cancelable, false, show_progress, rv, 0, rv.Len());}
 	public boolean Select_in__id(Cancelable cancelable, boolean skip_table_read, boolean show_progress, List_adp rv, int bgn, int end) {
-		Xowd_page_itm[] page_ary = (Xowd_page_itm[])rv.To_ary(Xowd_page_itm.class);
+		Xowd_page_itm[] page_ary = (Xowd_page_itm[])rv.ToAry(Xowd_page_itm.class);
 		int len = page_ary.length; if (len == 0) return false;
 		Ordered_hash hash = Ordered_hash_.New();
 		for (int i = 0; i < len; i++) {
@@ -246,7 +247,7 @@ public class Xowd_page_tbl implements Db_tbl {
 				Read_page__idx(page, rdr);
 				rslt_list.Add(page);
 			}
-			rslt_list.Sort_by(Xowd_page_itm_sorter.TitleAsc);
+			rslt_list.SortBy(Xowd_page_itm_sorter.TitleAsc);
 		}
 		finally {rdr.Rls();}
 	}
@@ -300,7 +301,7 @@ public class Xowd_page_tbl implements Db_tbl {
 				if (found)
 					rslt_prv.Copy(prv_itm);
 				else {	// at beginning of range, so no items found; EX: "Module:A" is search, but 1st Module is "Module:B"
-					if (rslt_list.Count() > 0)	// use 1st item
+					if (rslt_list.Len() > 0)	// use 1st item
 						rslt_prv.Copy((Xowd_page_itm)rslt_list.Get_at(0));
 				}
 			}
@@ -319,8 +320,8 @@ public class Xowd_page_tbl implements Db_tbl {
 	public void Read_page__all(Xowd_page_itm page, Db_rdr rdr) {
 		// handle page_score defaulting to page_len
 		int page_len = rdr.Read_int(fld_len);
-		int page_score = fld_score == Dbmeta_fld_itm.Key_null ? page_len : rdr.Read_int(fld_score);
-		int cat_db_id = fld_cat_db_id == Dbmeta_fld_itm.Key_null ? -1 : rdr.Read_int(fld_cat_db_id);
+		int page_score = fld_score == DbmetaFldItm.KeyNull ? page_len : rdr.Read_int(fld_score);
+		int cat_db_id = fld_cat_db_id == DbmetaFldItm.KeyNull ? -1 : rdr.Read_int(fld_cat_db_id);
 
 		page.Init_by_load__all
 		( rdr.Read_int(fld_id)
@@ -395,7 +396,7 @@ public class Xowd_page_tbl implements Db_tbl {
 		);
 	}
 	public int Fld_page_score_eval(Db_rdr rdr, int page_len) {
-		return fld_score == Dbmeta_fld_itm.Key_null ? page_len : rdr.Read_int(fld_score);
+		return fld_score == DbmetaFldItm.KeyNull ? page_len : rdr.Read_int(fld_score);
 	}
 	public void Rls() {
 		synchronized (thread_lock) {// LOCK:stmt-rls; DATE:2016-07-06

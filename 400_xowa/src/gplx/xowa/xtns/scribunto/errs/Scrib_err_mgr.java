@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.errs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.errs; import gplx.*;
 class Scrib_err_mgr implements Gfo_invk {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private int key_id = 0;
@@ -21,7 +21,7 @@ class Scrib_err_mgr implements Gfo_invk {
 	private Scrib_err_cmd Set(byte[] key) {
 		if (key == null) Bry_.Add(Key_prefix, Bry_.new_by_int(key_id++));
 		Scrib_err_cmd rv = new Scrib_err_cmd(key);
-		hash.Add_if_dupe_use_1st(key, rv);
+		hash.AddIfDupeUse1st(key, rv);
 		return rv;
 	}
 	public void Clear() {
@@ -29,7 +29,7 @@ class Scrib_err_mgr implements Gfo_invk {
 		key_id = 0;
 	}
 	public void Process(Scrib_err_data err) {
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; i++) {
 			Scrib_err_cmd itm = (Scrib_err_cmd)hash.Get_at(i);
 			if (itm.Warn_disabled(err)) {

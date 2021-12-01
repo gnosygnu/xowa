@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.syntax_highlights; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.syntax_highlights; import gplx.*;
 public interface Int_rng_mgr {
 	boolean Match(int v);
 	boolean Parse(byte[] src);
@@ -27,7 +27,7 @@ class Int_rng_mgr_base implements Int_rng_mgr {
 	private List_adp itms = List_adp_.New();
 	public void Clear() {itms.Clear();}
 	public boolean Match(int v) {
-		int len = itms.Count();
+		int len = itms.Len();
 		for (int i = 0; i < len; i++) {
 			Int_where itm = (Int_where)itms.Get_at(i);
 			if (itm.Match(v)) return true;

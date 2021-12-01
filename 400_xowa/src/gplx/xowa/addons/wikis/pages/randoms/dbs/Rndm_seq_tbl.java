@@ -13,21 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.randoms.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.randoms.*;
-import gplx.core.ios.*; import gplx.dbs.*; import gplx.dbs.utls.*;
+package gplx.xowa.addons.wikis.pages.randoms.dbs; import gplx.*;
+import gplx.dbs.*;
 public class Rndm_seq_tbl implements Rls_able {	// list of page_ids w/ random_idx; EX: 0,123|1,23|2,31|...
 	private final String fld_qry_idx, fld_rng_idx, fld_seq_idx, fld_page_id;
 	private final Db_conn conn;
 	public Rndm_seq_tbl(Db_conn conn) {
 		this.conn = conn;
-		fld_qry_idx			= flds.Add_int("qry_idx");
-		fld_rng_idx			= flds.Add_int("rng_idx");
-		fld_seq_idx			= flds.Add_int("seq_idx");
-		fld_page_id 		= flds.Add_int("page_id");
+		fld_qry_idx			= flds.AddInt("qry_idx");
+		fld_rng_idx			= flds.AddInt("rng_idx");
+		fld_seq_idx			= flds.AddInt("seq_idx");
+		fld_page_id 		= flds.AddInt("page_id");
 	}
 	public Db_conn Conn() {return conn;}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name = "rndm_seq";
-	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public DbmetaFldList Flds() {return flds;} private final DbmetaFldList flds = new DbmetaFldList();
 	public String Fld__qry_idx() {return fld_qry_idx;}
 	public String Fld__rng_idx() {return fld_rng_idx;}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}

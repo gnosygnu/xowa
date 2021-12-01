@@ -13,17 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
+package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 class Xob_link_dump_tbl implements Rls_able {
-	public static final String Tbl_name = "link_dump"; private static final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public static final String Tbl_name = "link_dump"; private static final DbmetaFldList flds = new DbmetaFldList();
 	public static final String
-	  Fld_uid				= flds.Add_int_pkey_autonum("uid")
-	, Fld_src_page_id		= flds.Add_int("src_page_id")
-	, Fld_src_html_uid		= flds.Add_int("src_html_uid")
-	, Fld_trg_page_id		= flds.Add_int_dflt("trg_page_id", -1)
-	, Fld_trg_ns			= flds.Add_int("trg_ns")
-	, Fld_trg_ttl			= flds.Add_str("trg_ttl", 255)
+	  Fld_uid				= flds.AddIntPkeyAutonum("uid")
+	, Fld_src_page_id		= flds.AddInt("src_page_id")
+	, Fld_src_html_uid		= flds.AddInt("src_html_uid")
+	, Fld_trg_page_id		= flds.AddIntDflt("trg_page_id", -1)
+	, Fld_trg_ns			= flds.AddInt("trg_ns")
+	, Fld_trg_ttl			= flds.AddStr("trg_ttl", 255)
 	;		
 	private Db_stmt stmt_insert;
 	public Xob_link_dump_tbl(Db_conn conn) {
@@ -49,7 +49,7 @@ class Xob_link_dump_tbl implements Rls_able {
 	public void Insert_bgn() {conn.Txn_bgn("bldr__link_dump");}
 	public void Insert_end() {conn.Txn_end(); stmt_insert = Db_stmt_.Rls(stmt_insert);}
 	public void Insert_cmd_by_batch(int src_page_id, int src_html_uid, int trg_ns, byte[] trg_ttl) {
-		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(Tbl_name, flds.To_str_ary_wo_autonum());
+		if (stmt_insert == null) stmt_insert = conn.Stmt_insert(Tbl_name, flds.ToStrAryWoAutonum());
 		stmt_insert.Clear().Val_int(Fld_src_page_id, src_page_id)
 			.Val_int(Fld_src_html_uid, src_html_uid).Val_int(Fld_trg_page_id, -1).Val_int(Fld_trg_ns, trg_ns).Val_bry_as_str(Fld_trg_ttl, trg_ttl)
 			.Exec_insert();

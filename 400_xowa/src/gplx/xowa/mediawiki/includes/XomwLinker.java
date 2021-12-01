@@ -2212,7 +2212,7 @@ class Linker_rel_splitter implements gplx.core.brys.Bry_split_wkr {
 		byte[] val = (byte[])hash.Get_by_mid(src, itm_bgn, itm_end);
 		if (val == null) {
 			val = Bry_.Mid(src, itm_bgn, itm_end);
-			hash.Add_as_key_and_val(val);
+			hash.AddAsKeyAndVal(val);
 			if (bfr.Len_gt_0()) bfr.Add_byte_space();
 			bfr.Add(val);
 		}

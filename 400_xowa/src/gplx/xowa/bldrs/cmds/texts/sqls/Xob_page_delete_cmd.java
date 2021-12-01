@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
+package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.bldrs.wkrs.*;
 public class Xob_page_delete_cmd extends Xob_cmd_base {
@@ -28,9 +28,9 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 		usr_dlg.Plog_many("", "", "creating page_filter");
 		if (!core_db_conn.Meta_tbl_exists("page_filter")) {
 			core_db_conn.Meta_tbl_create
-			( Dbmeta_tbl_itm.New("page_filter", new Dbmeta_fld_itm[]
-			{	Dbmeta_fld_itm.new_int("page_id").Primary_y_()
-			,	Dbmeta_fld_itm.new_int("page_text_db_id")
+			( Dbmeta_tbl_itm.New("page_filter", new DbmetaFldItm[]
+			{	DbmetaFldItm.NewInt("page_id").PrimarySetY()
+			,	DbmetaFldItm.NewInt("page_text_db_id")
 			}
 			,   Dbmeta_idx_itm.new_normal_by_tbl("page_filter", "db_id__page", "page_text_db_id", "page_id")
 			,   Dbmeta_idx_itm.new_normal_by_tbl("page_filter", "page_id", "page_id")

@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.dbs.percentiles.*;
-import gplx.xowa.langs.cases.*; import gplx.xowa.addons.wikis.searchs.parsers.*;	
+import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.dbs.percentiles.*;
 public class Srch_link_wkr extends Percentile_select_base {
 	private final Srch_link_wkr_sql sql_mkr = new Srch_link_wkr_sql();
 	private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
@@ -124,7 +124,7 @@ public class Srch_link_wkr extends Percentile_select_base {
 		this.cur_row = ctx.Cache__page.Get_by(key);				// note that page could have been added from another word
 		if (cur_row == null) {
 			int page_len = rdr.Read_int(page_tbl.Fld_page_len());
-			int page_score = page_tbl.Fld_page_score() == Dbmeta_fld_itm.Key_null ? page_len : rdr.Read_int(page_tbl.Fld_page_score());
+			int page_score = page_tbl.Fld_page_score() == DbmetaFldItm.KeyNull ? page_len : rdr.Read_int(page_tbl.Fld_page_score());
 			int page_ns_id = rdr.Read_int(page_tbl.Fld_page_ns());
 			byte[] page_ttl_wo_ns = rdr.Read_bry_by_str(page_tbl.Fld_page_title());
 			Xoa_ttl page_ttl = ctx.Wiki.Ttl_parse(page_ns_id, page_ttl_wo_ns);

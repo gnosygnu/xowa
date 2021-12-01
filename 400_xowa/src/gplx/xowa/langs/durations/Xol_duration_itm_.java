@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.durations; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.durations; import gplx.*;
 public class Xol_duration_itm_ {
 	private static final Hash_adp_bry regy = Hash_adp_bry.ci_a7();	// ASCII:MW.consts
 	public static final byte
@@ -61,11 +61,11 @@ public class Xol_duration_itm_ {
 		for (int i = 0; i < len; i++) {
 			Keyval kv = kv_ary[i];
 			String name = kv.Val_to_str_or_empty();
-			Xol_duration_itm itm = (Xol_duration_itm)regy.Get_by(Bry_.new_u8(name));
+			Xol_duration_itm itm = (Xol_duration_itm)regy.GetByOrNull(Bry_.new_u8(name));
 			if (itm != null)
 				rv.Add(itm);
 		}
-		return (Xol_duration_itm[])rv.To_ary(Xol_duration_itm.class);
+		return (Xol_duration_itm[])rv.ToAry(Xol_duration_itm.class);
 	}
 }
 class Xol_duration_itm_sorter implements gplx.core.lists.ComparerAble {

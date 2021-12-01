@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls; import gplx.*;
+import gplx.xowa.parsers.*;
 import gplx.core.primitives.*;
 public interface Xot_defn_trace {
 	void Clear();
@@ -22,11 +23,11 @@ public interface Xot_defn_trace {
 	void Print(byte[] src, Bry_bfr bb);
 }
 class Xot_defn_trace_brief implements Xot_defn_trace {
-	public int Count() {return hash.Count();}
+	public int Count() {return hash.Len();}
 	public Xot_defn_trace_itm_brief GetAt(int i) {return (Xot_defn_trace_itm_brief)hash.Get_at(i);}
 	public void Trace_bgn(Xop_ctx ctx, byte[] src, byte[] name, Xot_invk caller, Xot_invk self, Xot_defn defn) {
 		int hashKey = Bry_obj_ref.CalcHashCode(name, 0, name.length);
-		Object o = hash.Get_by(hashKey);
+		Object o = hash.GetByOrNull(hashKey);
 		Xot_defn_trace_itm_brief itm = null;
 		if (o == null) {
 			itm = new Xot_defn_trace_itm_brief().Name_(name);
@@ -38,7 +39,7 @@ class Xot_defn_trace_brief implements Xot_defn_trace {
 	}	private Ordered_hash hash = Ordered_hash_.New();
 	public void Trace_end(int trg_bgn, Bry_bfr trg) {}
 	public void Print(byte[] src, Bry_bfr bb) {
-		int count = hash.Count(); if (count == 0) return;
+		int count = hash.Len(); if (count == 0) return;
 		if (bb.Len() != 0) bb.Add_byte_nl();	// only add newLine if something in bb; needed for tests
 		for (int i = 0; i < count; i++) {
 			Xot_defn_trace_itm_brief itm = (Xot_defn_trace_itm_brief)hash.Get_at(i);

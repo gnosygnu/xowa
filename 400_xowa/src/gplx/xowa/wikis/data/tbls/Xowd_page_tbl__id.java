@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*;
 import gplx.core.criterias.*;
-import gplx.dbs.*; import gplx.dbs.utls.*;
+import gplx.dbs.*;
 class Xowd_page_tbl__id extends Xowd_page_tbl__in_wkr__base {
 	private final List_adp list;		// list is original list of ids which may have dupes; needed to fill statement (which takes range of bgn - end); DATE:2013-12-08
 	private final Ordered_hash hash;	// hash is unique list of ids; needed for fetch from rdr (which indexes by id)
@@ -34,5 +34,5 @@ class Xowd_page_tbl__id extends Xowd_page_tbl__in_wkr__base {
 			stmt.Val_int(page.Id());		
 		}
 	}
-	@Override protected Xowd_page_itm Get_page_or_null(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.Get_by(rdr_page.Id_val());}
+	@Override protected Xowd_page_itm Get_page_or_null(Xowd_page_itm rdr_page) {return (Xowd_page_itm)hash.GetByOrNull(rdr_page.Id_val());}
 }

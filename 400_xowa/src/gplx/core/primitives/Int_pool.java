@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives; import gplx.*;
 public class Int_pool {
 	private final List_adp available_list = List_adp_.New(); private int available_len;
 	// private final Bry_bfr dbg_bfr = Bry_bfr_.New();
@@ -53,7 +53,7 @@ public class Int_pool {
 				for (int i = 0; i < available_len; ++i) {
 					Int_obj_val itm = (Int_obj_val)available_list.Get_at(i);
 					if (i != itm.Val())
-						throw Err_.new_("core", "available_list out of order", "contents", available_list.To_str());
+						throw Err_.new_("core", "available_list out of order", "contents", available_list.ToStr());
 				}
 				// dbg_bfr.Add_str("-:c:").Add_int_variable(v).Add_byte_nl();
 				this.Clear();

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs; import gplx.*;
 import org.junit.*; import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
 import gplx.core.stores.*; /*DsvDataRdr*/ import gplx.langs.dsvs.*; /*DsvDataWtr*/
 public class TdbDbLoadMgr_tst {
@@ -38,7 +38,7 @@ public class TdbDbLoadMgr_tst {
 		rdr = rdr_(raw);
 
 		db.Files().DataObj_Rdr(rdr);
-		Tfds.Eq(db.Files().Count(), 2);
+		Tfds.Eq(db.Files().Len(), 2);
 		TdbFile file2 = db.Files().Get_by_or_fail(2);
 		Tfds.Eq(file2.Path().Raw(), "C:\\file.dsv");
 
@@ -58,7 +58,7 @@ public class TdbDbLoadMgr_tst {
 		rdr = rdr_(raw);
 
 		db.Tables().DataObj_Rdr(rdr, db.Files());
-		Tfds.Eq(db.Tables().Count(), 1);
+		Tfds.Eq(db.Tables().Len(), 1);
 		TdbTable table = db.Tables().Get_by_or_fail("tbl1");
 		Tfds.Eq(table.Name(), "tbl1");
 		Tfds.Eq(table.File().Id(), 1);
@@ -80,7 +80,7 @@ public class TdbDbLoadMgr_tst {
 
 		db.MakeTbl("tbl0", TdbFile.MainFileId);
 		db.Tables().Get_by_or_fail(rdr.NameOfNode()).DataObj_Rdr(rdr);
-		Tfds.Eq(db.Tables().Count(), 1);
+		Tfds.Eq(db.Tables().Len(), 1);
 		TdbTable tbl = db.Tables().Get_by_or_fail("tbl0");
 		Tfds.Eq(tbl.Rows().Count(), 1);
 

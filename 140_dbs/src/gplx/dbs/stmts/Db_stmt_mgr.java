@@ -27,14 +27,14 @@ public class Db_stmt_mgr {
 	}
 	public void Add_crt_str(String key, String val) {			
 		fmt_list.Add(mode_is_stmt ? stmt_arg_placeholder : SqlQryWtrUtl.QuoteArg(val));
-		arg_list.Add(Bool_.Y, Dbmeta_fld_tid.Tid__str, key, val);
+		arg_list.Add(Bool_.Y, DbmetaFldType.TidStr, key, val);
 	}
 	public void Add_crt_int(String key, int val) {			
 		fmt_list.Add(mode_is_stmt ? stmt_arg_placeholder : Int_.To_str(val));			
-		arg_list.Add(Bool_.Y, Dbmeta_fld_tid.Tid__int, key, val);
+		arg_list.Add(Bool_.Y, DbmetaFldType.TidInt, key, val);
 	}
 	public void Write_fmt(Bry_fmt fmt) {
-		fmt.Bld_many(bfr, (Object[])fmt_list.To_ary_and_clear(Object.class));
+		fmt.Bld_many(bfr, (Object[])fmt_list.ToAryAndClear(Object.class));
 	}
 	public String Make_sql(Bry_fmt fmt) {	// should only be called publicly for debugging purposes
 		Write_fmt(fmt);

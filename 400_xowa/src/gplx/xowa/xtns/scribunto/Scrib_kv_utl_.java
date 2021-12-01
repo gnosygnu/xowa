@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.scribunto; import gplx.*;
 public class Scrib_kv_utl_ {
 	public static Keyval[] base1_obj_(Object v) {return new Keyval[] {Keyval_.int_(0 + Scrib_core.Base_1, v)};}
 	public static Keyval[] base1_many_(Object... vals) {
@@ -31,7 +31,7 @@ public class Scrib_kv_utl_ {
 		return rv;
 	}
 	public static Keyval[] base1_list_(List_adp list) {
-		int len = list.Count();
+		int len = list.Len();
 		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++)
 			rv[i] = Keyval_.int_(i + Scrib_core.Base_1, list.Get_at(i));

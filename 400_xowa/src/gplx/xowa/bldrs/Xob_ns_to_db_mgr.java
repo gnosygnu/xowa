@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.bldrs; import gplx.*;
+import gplx.xowa.wikis.data.*;
 import gplx.xowa.bldrs.cmds.*;
 public class Xob_ns_to_db_mgr {
 	private final Xob_ns_to_db_wkr wkr; private final Xow_db_mgr db_mgr; private final long db_max; private boolean one_file_conn_init = true;
@@ -78,7 +78,7 @@ public class Xob_ns_to_db_mgr {
 		}
 	}
 	public void Commit() {
-		int len = db_list.Count();
+		int len = db_list.Len();
 		for (int i = 0; i < len; ++i) {
 			Xow_db_file db = (Xow_db_file)db_list.Get_at(i);
 			db.Conn().Txn_sav();

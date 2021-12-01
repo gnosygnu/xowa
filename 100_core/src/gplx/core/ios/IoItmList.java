@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import gplx.core.lists.*; /*Ordered_hash_base*/
 public class IoItmList extends Ordered_hash_base {
 	public boolean Has(Io_url url) {return Has_base(MakeKey(url));}
@@ -28,7 +28,7 @@ public class IoItmList extends Ordered_hash_base {
 		super.Del(key);
 	}
 	public Io_url[] XtoIoUrlAry() {
-		int count = this.Count();
+		int count = this.Len();
 		Io_url[] rv = new Io_url[count];
 		for (int i = 0; i < count; i++)
 			rv[i] = IoItm_base_.as_(i).Url();

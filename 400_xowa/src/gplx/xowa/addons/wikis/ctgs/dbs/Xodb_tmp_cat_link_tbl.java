@@ -13,22 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.addons.wikis.ctgs.*; 
+package gplx.xowa.addons.wikis.ctgs.dbs;
+import gplx.dbs.*;
 public class Xodb_tmp_cat_link_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_from, fld_to_ttl, fld_sortkey, fld_timestamp, fld_sortkey_prefix, fld_collation_id, fld_type_id;
 	private Db_stmt stmt_insert;
 	public Xodb_tmp_cat_link_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "tmp_cat_link";
-		this.fld_from			= flds.Add_int	("cl_from");
-		this.fld_to_ttl			= flds.Add_str	("cl_to_ttl", 255);
-		this.fld_sortkey		= flds.Add_bry	("cl_sortkey");
-		this.fld_timestamp		= flds.Add_long	("cl_timestamp");
-		this.fld_sortkey_prefix	= flds.Add_str	("cl_sortkey_prefix", 230);
-		this.fld_collation_id	= flds.Add_byte	("cl_collation_id");
-		this.fld_type_id		= flds.Add_byte	("cl_type_id");
+		this.fld_from			= flds.AddInt("cl_from");
+		this.fld_to_ttl			= flds.AddStr("cl_to_ttl", 255);
+		this.fld_sortkey		= flds.AddBry("cl_sortkey");
+		this.fld_timestamp		= flds.AddLong("cl_timestamp");
+		this.fld_sortkey_prefix	= flds.AddStr("cl_sortkey_prefix", 230);
+		this.fld_collation_id	= flds.AddByte("cl_collation_id");
+		this.fld_type_id		= flds.AddByte("cl_type_id");
 		conn.Rls_reg(this);
 		conn.Meta_tbl_remake(this);
 	}

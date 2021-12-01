@@ -26,7 +26,7 @@ import gplx.dbs.Db_qry_;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_rdr__basic;
 import gplx.dbs.Db_stmt;
-import gplx.dbs.Dbmeta_fld_itm;
+import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
 import gplx.dbs.conn_props.Db_conn_props_mgr;
@@ -65,7 +65,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	public Object		Exec_as_obj(Db_qry qry) {
 		if (qry.Tid() == Db_qry_.Tid_flush) return null;	// ignore flush (delete-db) statements
 		String sql = this.Sql_wtr().ToSqlStr(qry, false); // DBG: Tfds.Write(sql);
-		return qry.Exec_is_rdr() ? (Object)this.Exec_as_rdr(sql) : this.Exec_as_int(sql);
+		return qry.ReturnsRdr() ? (Object)this.Exec_as_rdr(sql) : this.Exec_as_int(sql);
 	}
 	protected int Exec_as_int(String sql) {
 		try {
@@ -97,7 +97,7 @@ public abstract class Db_engine_sql_base implements Db_engine {
 	public void Meta_idx_delete(String idx) {
 		if (Meta_idx_exists(idx)) Exec_as_int("DROP INDEX " + idx);
 	}
-	public void Meta_fld_append(String tbl, Dbmeta_fld_itm fld) {
+	public void Meta_fld_append(String tbl, DbmetaFldItm fld) {
 		Gfo_usr_dlg_.Instance.Plog_many("", "", "adding column to table: db=~{0} tbl=~{1} fld=~{2}", conn_info.Database(), tbl, fld.Name());
 		try {
 			Exec_as_int(this.Sql_wtr().Schema_wtr().Bld_alter_tbl_add(tbl, fld));

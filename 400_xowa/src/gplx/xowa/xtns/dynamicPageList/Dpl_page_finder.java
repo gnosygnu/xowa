@@ -13,9 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.lists.*;
-import gplx.xowa.wikis.dbs.*;
 import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
 class Dpl_page_finder {
@@ -94,7 +93,7 @@ class Dpl_page_finder {
 			return rv;
 
 		// loop exclude ttls
-		int len = ttls.Count();
+		int len = ttls.Len();
 		for (int i = 0; i < len; i++) {
 			Xoa_ttl ttl = Get_ctg_ttl_or_null(ttls, i);
 			if (ttl == null) continue;

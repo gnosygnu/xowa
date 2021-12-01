@@ -13,8 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.jsons.*;
+package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.pfuncs.*;
 public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
@@ -38,7 +37,7 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 			boolean external_links_mgr_enabled = external_links_mgr.Enabled();
 			Ordered_hash links = doc.Slink_list();
 			Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
-			int len = links.Count();
+			int len = links.Len();
 			for (int i = 0; i < len; i++) {
 				Wdata_sitelink_itm slink = (Wdata_sitelink_itm)links.Get_at(i);
 				byte[] xwiki_key = slink.Site();
@@ -64,7 +63,7 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 			}
 			tmp_bfr.Mkr_rls();
 			if (external_links_mgr_enabled && external_links_mgr.Sort())
-				slink_list.Sort_by(Xoa_ttl_sorter.Instance);
+				slink_list.SortBy(Xoa_ttl_sorter.Instance);
 			return doc.Qid();
 		} catch (Exception e) {Err_.Noop(e); return Qid_null;}
 	}

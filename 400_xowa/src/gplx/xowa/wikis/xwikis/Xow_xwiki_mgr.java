@@ -13,9 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.net.*; import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.langs.*;	
+package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*;
+import gplx.core.net.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
 import gplx.xowa.wikis.xwikis.interwikis.*;
 public class Xow_xwiki_mgr {
@@ -27,7 +26,7 @@ public class Xow_xwiki_mgr {
 	}
 	public Xow_interwiki_map Interwiki_map() {return interwiki_map;} private final Xow_interwiki_map interwiki_map = new Xow_interwiki_map(); // separate map for Scrib; DATE:2017-04-01
 	public int	Xwiki_domain_tid() {return xwiki_domain_tid;} private int xwiki_domain_tid;
-	public int	Len() {return list.Count();}
+	public int	Len() {return list.Len();}
 	public void Clear() {hash.Clear(); list.Clear();}
 	public void Sort_by_key() {list.Sort();}
 	public Xow_xwiki_itm Get_at(int i)								{return (Xow_xwiki_itm)list.Get_at(i);}
@@ -72,7 +71,7 @@ public class Xow_xwiki_mgr {
 			itm_parser.Init_by_wiki(wiki.Domain_itm());
 			itm_parser.Load_by_bry(src);
 			Ordered_hash xwiki_list = itm_parser.Xwiki_list();
-			int len = xwiki_list.Count();
+			int len = xwiki_list.Len();
 			for (int i = 0; i < len; ++i) {
 				Xow_xwiki_itm itm = (Xow_xwiki_itm)xwiki_list.Get_at(i);
 				Add_itm(itm);
@@ -82,8 +81,8 @@ public class Xow_xwiki_mgr {
 	public void Add_itm(Xow_xwiki_itm itm) {
 		byte[] key_bry = itm.Key_bry();
 		if (wiki.Ns_mgr().Names_get_or_null(key_bry) != null) return;// NOTE: do not add xwiki if key matches Srch_rslt_cbk; EX: en.wiktionary.org has ns of "Wiktionary"; do not add key of "wiktionary"; note that wikipedia does have an key to wiktionary
-		list.Add_if_dupe_use_nth(key_bry, itm);		// NOTE: some wikis like commons will be added multiple times under different aliases (commons, c, commons.wikimedia.org); need to check domain and add only once DATE:2014-11-07
-		hash.Add_if_dupe_use_nth(key_bry, itm);
+		list.AddIfDupeUseNth(key_bry, itm);		// NOTE: some wikis like commons will be added multiple times under different aliases (commons, c, commons.wikimedia.org); need to check domain and add only once DATE:2014-11-07
+		hash.AddIfDupeUseNth(key_bry, itm);
 	}
 	private static int Xwiki_tid(int tid) {
 		switch (tid) {

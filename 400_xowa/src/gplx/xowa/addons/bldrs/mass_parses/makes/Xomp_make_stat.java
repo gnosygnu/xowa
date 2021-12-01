@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
-import gplx.core.brys.*;
-import gplx.dbs.*; import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*;
+import gplx.dbs.*;
+import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 class Xomp_make_stat {
 	public void Exec(Xowe_wiki wiki, Xomp_make_cmd_cfg cfg) {
 		// init mgr_db and mgr_tbl
@@ -23,7 +23,7 @@ class Xomp_make_stat {
 		Db_conn mgr_conn = mgr_db.Conn();
 		Xomp_stat_tbl mgr_tbl = new Xomp_stat_tbl(mgr_conn);
 		mgr_conn.Txn_bgn("xomp_stats");
-		mgr_conn.Stmt_delete("xomp_stats", Dbmeta_fld_itm.Str_ary_empty).Exec_delete();
+		mgr_conn.Stmt_delete("xomp_stats", DbmetaFldItm.StrAryEmpty).Exec_delete();
 		mgr_tbl.Stmt_new();
 
 		// loop wkrs

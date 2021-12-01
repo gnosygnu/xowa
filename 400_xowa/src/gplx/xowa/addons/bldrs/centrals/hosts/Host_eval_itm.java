@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.hosts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.hosts; import gplx.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*;
 import gplx.core.brys.evals.*;
 import gplx.xowa.wikis.domains.*;
@@ -32,7 +32,7 @@ public class Host_eval_itm {
 		return Eval_src_dir(data_db, host_id, domain) + file_name;
 	}
 	public String Eval_src_dir(Xobc_data_db data_db, int host_id, Xow_domain_itm domain) {
-		Xobc_host_regy_itm host_itm = (Xobc_host_regy_itm)host_hash.Get_by(host_id);
+		Xobc_host_regy_itm host_itm = (Xobc_host_regy_itm)host_hash.GetByOrNull(host_id);
 		if (host_itm == null) {
 			host_itm = data_db.Tbl__host_regy().Select(host_id);
 			host_hash.Add(host_id, host_itm);

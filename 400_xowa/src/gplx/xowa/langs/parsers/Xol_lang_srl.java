@@ -14,7 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.intls.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.wikis.nss.*;
@@ -46,7 +45,7 @@ public class Xol_lang_srl {
 			if (last) break;
 			++pos;
 		}
-		return (Xow_ns[])rv.To_ary(Xow_ns.class);
+		return (Xow_ns[])rv.ToAry(Xow_ns.class);
 	}
 	public static void Load_keywords(Xol_kwd_mgr keyword_mgr, byte[] src) {
 		int src_len = src.length, pos = 0, fld_bgn = 0, fld_idx = 0;
@@ -80,10 +79,10 @@ public class Xol_lang_srl {
 					fld_bgn = pos + 1;
 					break;
 				case Byte_ascii.Nl:
-					if (cur_words.Count() > 0) {	// guard against blank line wiping out entries; EX: "toc|0|toc1\n\n"; 2nd \n will get last grp and make 0 entries
+					if (cur_words.Len() > 0) {	// guard against blank line wiping out entries; EX: "toc|0|toc1\n\n"; 2nd \n will get last grp and make 0 entries
 						int cur_id = Xol_kwd_grp_.Id_by_bry(cur_key); if (cur_id == -1) throw Err_.new_wo_type("key does not have id", "id", cur_id);
 						Xol_kwd_grp grp = keyword_mgr.Get_or_new(cur_id);
-						grp.Srl_load(cur_cs, (byte[][])cur_words.To_ary(byte[].class));
+						grp.Srl_load(cur_cs, (byte[][])cur_words.ToAry(byte[].class));
 					}
 					fld_bgn = pos + 1;
 					fld_idx = 0;

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.wikis; import gplx.*;
 import gplx.core.envs.*;
 class Xofs_url_itm {
 	public boolean Tid_is_xowa() {return tid_is_xowa;} public void Tid_is_xowa_(boolean v) {tid_is_xowa = v;} private boolean tid_is_xowa = true;
@@ -29,7 +29,7 @@ class Xofs_url_itm_parser {
 	public void Names_add(String key_str, String val_str) {
 		byte[] key_bry = Bry_.new_u8(key_str);
 		byte[] val_bry = Bry_.new_u8(val_str);
-		names.Add_if_dupe_use_nth(key_bry, val_bry);
+		names.AddIfDupeUseNth(key_bry, val_bry);
 	}
 	public void Parse(Xofs_url_itm itm, String raw_str) {
 		itm.Raw_(raw_str);

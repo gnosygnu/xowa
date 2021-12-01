@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
+package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.mediawiki.includes.parsers.headingsOld.*;
 import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 class Xop_section_list implements Xomw_heading_cbk {
@@ -69,7 +69,7 @@ class Xop_section_list implements Xomw_heading_cbk {
 		}
 		// else, get section matching key
 		else {
-			Xop_section_itm itm = (Xop_section_itm)hash.Get_by(key);
+			Xop_section_itm itm = (Xop_section_itm)hash.GetByOrNull(key);
 			if (itm == null) return null;
 
 			// get bgn
@@ -111,7 +111,7 @@ class Xop_section_list implements Xomw_heading_cbk {
 		Xoh_toc_itm toc_itm = toc_mgr.Add(num, key);
 		key = toc_itm.Anch();
 
-		Xop_section_itm itm = new Xop_section_itm(hash.Count(), num, key, wkr.Hdr_bgn(), wkr.Hdr_end());
+		Xop_section_itm itm = new Xop_section_itm(hash.Len(), num, key, wkr.Hdr_bgn(), wkr.Hdr_end());
 		hash.Add(key, itm);
 	}
 	public void On_src_done(Xomw_heading_wkr wkr) {}

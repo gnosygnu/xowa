@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.indexers.*;
+package gplx.xowa.addons.wikis.fulltexts.indexers.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.gflucene.indexers.*;
 public class Xofulltext_indexer_args implements Gfo_invk {
@@ -49,7 +49,7 @@ public class Xofulltext_indexer_args implements Gfo_invk {
 				temp_ns_list.Add(Bry_.To_int(ns_bry));
 			}
 		}
-		ns_ids_ary = (int[])temp_ns_list.To_ary_and_clear(int.class);
+		ns_ids_ary = (int[])temp_ns_list.ToAryAndClear(int.class);
 
 		// idx_opt
 		if (idx_opt == null) {

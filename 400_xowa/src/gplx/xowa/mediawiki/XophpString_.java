@@ -80,7 +80,7 @@ public class XophpString_ implements XophpCallbackOwner {
 			else {
 				key = Char_.To_str(hi_char);
 			}
-			rv.Add_if_dupe_use_1st(key, key);
+			rv.AddIfDupeUse1st(key, key);
 			i++;
 		}
 		return rv;
@@ -288,7 +288,7 @@ public class XophpString_ implements XophpCallbackOwner {
 	public static int strlen(byte[] src) {return src.length;}
 
 	// REF.PHP: https://www.php.net/manual/en/function.rtrim.php
-	private static final Hash_adp trim_ws_hash = Hash_adp_.New().Add_many_as_key_and_val
+	private static final Hash_adp trim_ws_hash = Hash_adp_.New().AddManyAsKeyAndVal
 		( Int_obj_ref.New(Byte_ascii.Space)
 		, Int_obj_ref.New(Byte_ascii.Tab)
 		, Int_obj_ref.New(Byte_ascii.Nl)
@@ -336,7 +336,7 @@ public class XophpString_ implements XophpCallbackOwner {
 									for (byte j = prv_byte; j < nxt_byte; j++) {
 										Byte_obj_ref rng_obj = Byte_obj_ref.new_(j);
 										if (!pad_hash.Has(rng_obj))
-											pad_hash.Add_as_key_and_val(rng_obj);
+											pad_hash.AddAsKeyAndVal(rng_obj);
 									}
 									i += 2;
 									continue;
@@ -350,7 +350,7 @@ public class XophpString_ implements XophpCallbackOwner {
 					prv_byte = pad_byte;
 					Byte_obj_ref pad_obj = Byte_obj_ref.new_(pad_byte);
 					if (!pad_hash.Has(pad_obj))
-						pad_hash.Add_as_key_and_val(pad_obj);
+						pad_hash.AddAsKeyAndVal(pad_obj);
 				}
 			}
 		}

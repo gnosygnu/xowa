@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.stores.*;
 // REF: https://github.com/wmde/WikibaseDataModelServices/blob/master/src/Lookup/EntityRetrievingClosestReferencedEntityIdLookup.php
 class Referenced_entity_lookup_wkr {		
@@ -41,7 +41,7 @@ class Referenced_entity_lookup_wkr {
 
 		int steps = this.maxDepth + 1;// Add one as checking $fromId already is a step
 		Ordered_hash toVisit = Ordered_hash_.New_bry();
-		toVisit.Add_as_key_and_val(fromId);
+		toVisit.AddAsKeyAndVal(fromId);
 
 		while (steps-- > 0) {
 			// $this->entityPrefetcher->prefetch( $toVisit );
@@ -89,7 +89,7 @@ class Referenced_entity_lookup_wkr {
 			Gfo_usr_dlg_.Instance.Warn_many("", "", "Entity " + String_.new_u8(id) + " already visited");
 			return null;
 		}
-		alreadyVisited.Add_as_key_and_val(id);
+		alreadyVisited.AddAsKeyAndVal(id);
 		if (alreadyVisited.Len() > maxEntityVisits)
 			throw newErr(false);
 		return entity_mgr.Get_by_loose_id_or_null(id);
@@ -106,7 +106,7 @@ class Referenced_entity_lookup_wkr {
 		byte[] entityId = snakEntity.Page_ttl_db();
 		if (toIds.Has(entityId))
 			return entityId;
-		toVisit.Add_as_key_and_val(entityId);
+		toVisit.AddAsKeyAndVal(entityId);
 		return null;
 	}
 

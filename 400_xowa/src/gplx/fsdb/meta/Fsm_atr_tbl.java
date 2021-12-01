@@ -14,9 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*;
+import gplx.dbs.*;
 public class Fsm_atr_tbl implements Db_tbl {
-	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_uid, fld_url;
 	private final Db_conn conn;
 	public Fsm_atr_tbl(Db_conn conn, boolean schema_is_1) {
@@ -24,13 +24,13 @@ public class Fsm_atr_tbl implements Db_tbl {
 		String fld_prefix = "";
 		if (schema_is_1)			{tbl_name = "fsdb_db_atr";}
 		else						{tbl_name = "fsdb_dba"; fld_prefix = "dba_";}
-		this.fld_uid				= flds.Add_int_pkey	(fld_prefix + "uid");
-		this.fld_url				= flds.Add_str		(fld_prefix + "url", 255);
+		this.fld_uid				= flds.AddIntPkey(fld_prefix + "uid");
+		this.fld_url				= flds.AddStr(fld_prefix + "url", 255);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public Fsm_atr_fil Select_1st_or_fail(Fsm_mnt_itm mnt_itm, Fsdb_db_mgr core_mgr, int mnt_id, boolean schema_thm_page) {
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 		boolean schema_is_1 = core_mgr.File__schema_is_1();
 		try {
 			if (rdr.Move_next()) {

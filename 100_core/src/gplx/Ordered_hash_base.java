@@ -31,25 +31,25 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 		AssertCounts("Del", key);
 	}
 	protected Object Get_at_base(int index) {return ordered.Get_at(index);}
-	protected int IndexOf_base(Object obj) {return ordered.Idx_of(obj);}
+	protected int IndexOf_base(Object obj) {return ordered.IdxOf(obj);}
 	@Override public void Clear() {
 		if (locked) Lock_fail();
 		super.Clear();
 		ordered.Clear();
 	}
-	public Object To_ary(Class<?> type)			{return ordered.To_ary(type);}
+	public Object To_ary(Class<?> type)			{return ordered.ToAry(type);}
 	public Object To_ary_and_clear(Class<?> t)	{
 		Object rv = To_ary(t);
 		this.Clear();
 		return rv;
 	}
 	public void Sort()						{if (locked) Lock_fail(); ordered.Sort();}	// NOTE: uses item's .compareTo
-	public void Sort_by(ComparerAble comparer)		{if (locked) Lock_fail(); ordered.Sort_by(comparer);}
+	public void Sort_by(ComparerAble comparer)		{if (locked) Lock_fail(); ordered.SortBy(comparer);}
 	@Override public java.util.Iterator iterator() {return ordered.iterator();}
 	public void Add_at(int i, Object key, Object val) {
 		if (locked) Lock_fail(); 
 		super.Add_base(key, val);
-		ordered.Add_at(i, val);
+		ordered.AddAt(i, val);
 		AssertCounts("Add_at", key);
 	}
 	public Ordered_hash Add_many_str(String... ary) {
@@ -62,19 +62,19 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 		return this;
 	}
 	private void AssertCounts(String proc, Object key) {
-		if (super.Count() != ordered.Count()) throw Err_.new_wo_type("counts do not match; same key is either added twice, or delete failed", "proc", proc, "key", Object_.Xto_str_strict_or_null_mark(key), "hash", super.Count(), "list", ordered.Count());
+		if (super.Len() != ordered.Len()) throw Err_.new_wo_type("counts do not match; same key is either added twice, or delete failed", "proc", proc, "key", Object_.Xto_str_strict_or_null_mark(key), "hash", super.Len(), "list", ordered.Len());
 	}
-	public void Resize_bounds(int i) {if (locked) Lock_fail(); ordered.Resize_bounds(i);}
+	public void Resize_bounds(int i) {if (locked) Lock_fail(); ordered.ResizeBounds(i);}
 	public void Lock() {locked = true;} private boolean locked = false;
 	void Lock_fail() {throw Err_.new_wo_type("collection is locked");}
 	static final String GRP_KEY = "gplx.core.lists.ordered_hash";
-	public void Add_at(int i, Object o) {if (locked) Lock_fail(); ordered.Add_at(i, o);}
+	public void Add_at(int i, Object o) {if (locked) Lock_fail(); ordered.AddAt(i, o);}
 	public Object Get_at(int i) {return Get_at_base(i);}
 	public int Idx_of(Object obj) {return this.IndexOf_base(obj);}
-	public void Move_to(int src, int trg) {if (locked) Lock_fail(); ordered.Move_to(src, trg);}
+	public void Move_to(int src, int trg) {if (locked) Lock_fail(); ordered.MoveTo(src, trg);}
 	private String To_str_ui() {
 		String_bldr sb = String_bldr_.new_();
-		int count = ordered.Count();
+		int count = ordered.Len();
 		int pad = String_.Len(Int_.To_str(count));
 		for (int i = 0; i < count; i++) {
 			sb	.Add(Int_.To_str_pad_bgn_zero(i, pad))
@@ -96,6 +96,6 @@ public class Ordered_hash_base extends Hash_adp_base implements Ordered_hash, Gf
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;
 	}	static final String Invk_SetKeyOnly = "SetKeyOnly", Invk_Print = "Print";
-	@Override public int Count() {return ordered.Count();}
+	@Override public int Len() {return ordered.Len();}
 	public Ordered_hash_base() {}
 }

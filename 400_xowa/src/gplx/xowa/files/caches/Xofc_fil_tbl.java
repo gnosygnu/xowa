@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.dbs.engines.sqlite.*;
+package gplx.xowa.files.caches; import gplx.*;
+import gplx.xowa.files.*;
+import gplx.dbs.*;
 class Xofc_fil_tbl implements Rls_able {
-	private String tbl_name = "file_cache_fil"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "file_cache_fil"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String fld_uid, fld_dir_id, fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_page, fld_ext, fld_size, fld_cache_time;
 	private Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr(); private Db_stmt select_itm_stmt, select_itm_v2_stmt;
 	public Db_conn Conn() {return conn;}
@@ -27,22 +28,22 @@ class Xofc_fil_tbl implements Rls_able {
 			tbl_name		= "cache_fil";
 			fld_prefix		= "fil_";
 		}
-		fld_uid				= flds.Add_int_pkey("uid");
-		fld_dir_id			= flds.Add_int("dir_id");
-		fld_name			= flds.Add_str(fld_prefix + "name", 255);
-		fld_is_orig			= flds.Add_byte(fld_prefix + "is_orig");
-		fld_w				= flds.Add_int(fld_prefix + "w");
-		fld_h				= flds.Add_int(fld_prefix + "h");
-		fld_time			= flds.Add_int(fld_prefix + "thumbtime");
+		fld_uid				= flds.AddIntPkey("uid");
+		fld_dir_id			= flds.AddInt("dir_id");
+		fld_name			= flds.AddStr(fld_prefix + "name", 255);
+		fld_is_orig			= flds.AddByte(fld_prefix + "is_orig");
+		fld_w				= flds.AddInt(fld_prefix + "w");
+		fld_h				= flds.AddInt(fld_prefix + "h");
+		fld_time			= flds.AddInt(fld_prefix + "thumbtime");
 		if (schema_is_1) {
-			fld_page		= Dbmeta_fld_itm.Key_null;
+			fld_page		= DbmetaFldItm.KeyNull;
 		}
 		else {
-			fld_page		= flds.Add_int(fld_prefix + "page");
+			fld_page		= flds.AddInt(fld_prefix + "page");
 		}
-		fld_ext				= flds.Add_int(fld_prefix + "ext");
-		fld_size			= flds.Add_long(fld_prefix + "size");
-		fld_cache_time		= flds.Add_long("cache_time");
+		fld_ext				= flds.AddInt(fld_prefix + "ext");
+		fld_size			= flds.AddLong(fld_prefix + "size");
+		fld_cache_time		= flds.AddLong("cache_time");
 		if (created) {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "fil", fld_name, fld_is_orig, fld_w, fld_h, fld_time, fld_cache_time, fld_uid)
@@ -120,7 +121,7 @@ class Xofc_fil_tbl implements Rls_able {
 	}
 	public void Select_all(Bry_bfr fil_key_bldr, Ordered_hash hash) {
 		hash.Clear();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				Xofc_fil_itm fil_itm = new_itm(rdr);

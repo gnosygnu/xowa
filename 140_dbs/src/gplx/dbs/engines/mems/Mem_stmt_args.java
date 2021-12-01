@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.mems; import gplx.*;
 import gplx.core.criterias.*;
 public class Mem_stmt_args {
 	private final List_adp list = List_adp_.New();
@@ -22,7 +22,7 @@ public class Mem_stmt_args {
 	public void Add(String k, Object v) {list.Add(Keyval_.new_(k, v));}
 	public Keyval Get_next() {
 		int idx = ++cur_idx;
-		return idx == list.Count() ? null: (Keyval)list.Get_at(idx);
+		return idx == list.Len() ? null: (Keyval)list.Get_at(idx);
 	}
 }
 class Mem_stmt_args_ {

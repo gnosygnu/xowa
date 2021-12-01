@@ -76,7 +76,7 @@ public class Xob_wdata_qid extends Xob_itm_dump_base implements Xob_page_wkr, Gf
 			byte[] qid = wdoc_parser.Parse_qid(jdoc);
 			Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 			Ordered_hash sitelinks = wdoc_parser.Parse_sitelinks(qid, jdoc);
-			int sitelinks_len = sitelinks.Count(); if (sitelinks_len == 0) return;	// no subs; return;
+			int sitelinks_len = sitelinks.Len(); if (sitelinks_len == 0) return;	// no subs; return;
 			for (int i = 0; i < sitelinks_len; i++) { // iterate sitelinks
 				Wdata_sitelink_itm sitelink = (Wdata_sitelink_itm)sitelinks.Get_at(i);
 				byte[] sitelink_site = sitelink.Site(), sitelink_ttl = sitelink.Name();

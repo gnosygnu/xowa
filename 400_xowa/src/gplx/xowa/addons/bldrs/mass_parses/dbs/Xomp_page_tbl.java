@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*;
 import gplx.dbs.*;
 public class Xomp_page_tbl implements Db_tbl {
 	private final Object thread_lock = new Object();
@@ -22,16 +22,16 @@ public class Xomp_page_tbl implements Db_tbl {
 	public Xomp_page_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "xomp_page";
-		flds.Add_int_pkey("xomp_uid");
-		flds.Add_int("page_id");
-		flds.Add_int("page_ns");
-		flds.Add_byte("page_status");			// 0=wait; 1=done; 2=fail
-		flds.Add_int_dflt("html_len", -1);
-		flds.Add_int_dflt("xomp_wkr_id", -1);
+		flds.AddIntPkey("xomp_uid");
+		flds.AddInt("page_id");
+		flds.AddInt("page_ns");
+		flds.AddByte("page_status");			// 0=wait; 1=done; 2=fail
+		flds.AddIntDflt("html_len", -1);
+		flds.AddIntDflt("xomp_wkr_id", -1);
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
-	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public DbmetaFldList Flds() {return flds;} private final DbmetaFldList flds = new DbmetaFldList();
 
 	public void Create_tbl() {
 		conn.Meta_tbl_create

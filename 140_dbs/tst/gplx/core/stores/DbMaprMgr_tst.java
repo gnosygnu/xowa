@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores; import gplx.*; import gplx.core.*;
+package gplx.core.stores; import gplx.*;
 import org.junit.*;
 import gplx.dbs.*; /*Db_conn_info*/
 public class DbMaprMgr_tst {
@@ -95,7 +95,7 @@ public class DbMaprMgr_tst {
 
 		Tfds.Eq(1, disc.Id());
 		Tfds.Eq("name", disc.Name());
-		Tfds.Eq(0, disc.Titles().Count());
+		Tfds.Eq(0, disc.Titles().Len());
 	}
 	@Test public void Load_subs() {
 		rdr = rdr_();
@@ -106,7 +106,7 @@ public class DbMaprMgr_tst {
 
 		Tfds.Eq(1, disc.Id());
 		Tfds.Eq("name", disc.Name());
-		Tfds.Eq(2, disc.Titles().Count());
+		Tfds.Eq(2, disc.Titles().Len());
 		Tfds.Eq("title1", ((MockTitle)disc.Titles().Get_at(0)).Name());
 		Tfds.Eq("title2", ((MockTitle)disc.Titles().Get_at(1)).Name());
 	}
@@ -121,12 +121,12 @@ public class DbMaprMgr_tst {
 
 		Tfds.Eq(1, disc.Id());
 		Tfds.Eq("name", disc.Name());
-		Tfds.Eq(1, disc.Titles().Count());
+		Tfds.Eq(1, disc.Titles().Len());
 		MockTitle t = ((MockTitle)disc.Titles().Get_at(0));
 		Tfds.Eq("title1", t.Name());
 		Tfds.Eq("chapter1", ((MockChapter)t.Chapters().Get_at(0)).Name());
-		Tfds.Eq(1, t.Audios().Count());
-		Tfds.Eq(1, t.Subtitles().Count());
+		Tfds.Eq(1, t.Audios().Len());
+		Tfds.Eq(1, t.Subtitles().Len());
 		Tfds.Eq("audio1", ((MockStream)t.Audios().Get_at(0)).Name());
 		Tfds.Eq("subtitle1", ((MockStream)t.Subtitles().Get_at(0)).Name());
 	}

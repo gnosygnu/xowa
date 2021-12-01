@@ -13,11 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.insiders; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.pages.skins.*;
-import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.wikis.pages.skins.*;
 import gplx.xowa.wikis.nss.*;
 class Insider_xtn_skin_itm implements Xopg_xtn_skin_itm {
 	private List_adp itms = List_adp_.New();
@@ -38,7 +37,7 @@ public class Insider_html_bldr implements gplx.core.brys.Bfr_arg {
 	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Insider_html_bldr(Insider_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	public void Bld_all(Bry_bfr bfr, Xoae_page page, List_adp list) {
-		this.list = list; this.list_len = list.Count();
+		this.list = list; this.list_len = list.Len();
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_sidebar_ttl(), xtn_mgr.Msg_about_page(), xtn_mgr.Msg_about_ttl(), this);
 	}

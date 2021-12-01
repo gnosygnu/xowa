@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.data; import gplx.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*;
@@ -42,7 +42,7 @@ class Xoud_opt_scope_parser {
 			list.Add(itm);
 			pos = comma_pos + 1;
 		}
-		return (Xoud_opt_scope[])list.To_ary_and_clear(Xoud_opt_scope.class);
+		return (Xoud_opt_scope[])list.ToAryAndClear(Xoud_opt_scope.class);
 	}
 	public Xoud_opt_scope Parse_itm(byte[] src, int bgn, int end) {
 		int lang_dot = Bry_find_.Find_fwd(src, Byte_ascii.Dot, bgn, end);					if (lang_dot == Bry_find_.Not_found) return Warn("scope.parse.missing_lang_dot: src=~{0}", src, bgn, end);

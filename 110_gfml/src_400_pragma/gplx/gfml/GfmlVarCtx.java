@@ -16,10 +16,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.gfml; import gplx.*;
 class GfmlVarCtx {
 	public String Key() {return key;} private String key;
-	public void Add_if_dupe_use_nth(GfmlVarItm itm) {hash.Add_if_dupe_use_nth(itm.Key(), itm);}
+	public void Add_if_dupe_use_nth(GfmlVarItm itm) {hash.AddIfDupeUseNth(itm.Key(), itm);}
 	public void Del(String key) {hash.Del(key);}
 	public String Fetch_Val(String key) {
-		GfmlVarItm itm = (GfmlVarItm)hash.Get_by(key); if (itm == null) return null;
+		GfmlVarItm itm = (GfmlVarItm)hash.GetByOrNull(key); if (itm == null) return null;
 		return itm.TknVal();
 	}
 	Hash_adp hash = Hash_adp_.New();
@@ -32,7 +32,7 @@ class GfmlVarCtx {
 class GfmlVarCtx_ {
 	public static GfmlVarCtx FetchFromCacheOrNew(Hash_adp cache, String ctxKey) {
 		Hash_adp ctxRegy = FetchRegyOrNew(cache);
-		GfmlVarCtx rv = (GfmlVarCtx)ctxRegy.Get_by(ctxKey);
+		GfmlVarCtx rv = (GfmlVarCtx)ctxRegy.GetByOrNull(ctxKey);
 		if (rv == null) {
 			rv = (String_.Eq(ctxKey, DefaultKey))
 				? default_(ctxKey)
@@ -49,7 +49,7 @@ class GfmlVarCtx_ {
 	}
 	static Hash_adp FetchRegyOrNew(Hash_adp cache) {
 		String key = "gfml.cacheKeys.ctxRegy";
-		Hash_adp rv = (Hash_adp)cache.Get_by(key);
+		Hash_adp rv = (Hash_adp)cache.GetByOrNull(key);
 		if (rv == null) {
 			rv = Hash_adp_.New();
 			cache.Add(key, rv);

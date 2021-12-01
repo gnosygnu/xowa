@@ -47,14 +47,14 @@ class GfmlFrame_ndeTknMgr {
 	@gplx.Internal protected GfmlTkn DatTkn_pop() {GfmlTkn rv = datTkn; datTkn = GfmlTkn_.Null; return rv;} GfmlTkn datTkn = GfmlTkn_.Null;
 	@gplx.Internal protected void DatTkn_set(GfmlTkn tkn) {
 		this.ConsumeWaitingDatTkn(frame.CurNde());
-		idxAtrBgn = frame.waitingTkns.Count();
+		idxAtrBgn = frame.waitingTkns.Len();
 		idxAtrEnd = idxAtrBgn + 1;
 		frame.waitingTkns.Add(tkn);
 		datTkn = tkn;
 	}
 	@gplx.Internal protected void ExecMakeAtr(GfmlTkn itmKeyTkn, GfmlTkn valTkn) {
 		frame.waitingTkns.Add(valTkn);
-		idxAtrEnd = frame.waitingTkns.Count();
+		idxAtrEnd = frame.waitingTkns.Len();
 		this.MakeAtr(itmKeyTkn, valTkn);
 	}
 	@gplx.Internal protected void ExecXferTkns_ndeAll(GfmlNde nde) {ExecXferTkns(nde, 0);}

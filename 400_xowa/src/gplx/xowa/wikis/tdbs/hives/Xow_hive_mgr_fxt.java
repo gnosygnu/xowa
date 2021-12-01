@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.wikis.tdbs.*;
 import gplx.core.encoders.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Xow_hive_mgr_fxt {
@@ -30,7 +31,7 @@ public class Xow_hive_mgr_fxt {
 	public void Find_nearby(String key, int count, boolean include_redirects, String... expd) {
 		List_adp list = List_adp_.New();
 		wiki.Hive_mgr().Find_bgn(list, wiki.Ns_mgr().Ns_main(), Bry_.new_a7(key), count, include_redirects);
-		int actl_len = list.Count();
+		int actl_len = list.Len();
 		String[] actl = new String[actl_len];
 		for (int i = 0; i < actl_len; i++) {
 			Xowd_page_itm itm = (Xowd_page_itm)list.Get_at(i);

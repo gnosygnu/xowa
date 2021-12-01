@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.servers.https; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.servers.*;
+package gplx.xowa.addons.servers.https; import gplx.*; import gplx.xowa.*;
 import gplx.core.envs.*;
 public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_itm {
 	private final List_adp msgs = List_adp_.New();
@@ -69,7 +69,7 @@ public class Http_long_poll_cmd implements gplx.xowa.htmls.bridges.Bridge_cmd_it
 		// return commands
 		String[] rv = null;
 		synchronized (msgs) {
-			rv = msgs.To_str_ary_and_clear();
+			rv = msgs.ToStrAryAndClear();
 		}
 		return String_.Concat_lines_nl(rv);
 	}

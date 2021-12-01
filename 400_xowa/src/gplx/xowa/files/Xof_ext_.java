@@ -91,7 +91,7 @@ public class Xof_ext_ {
 		return Bry__ary[id];
 	}
 	public static int Get_id_by_ext_(byte[] ext_bry) {
-		Object o = id_hash.Get_by(ext_bry);
+		Object o = id_hash.GetByOrNull(ext_bry);
 		return o == null ? Id_unknown : ((Int_obj_val)o).Val();
 	}
 	public static Xof_ext new_by_ttl_(byte[] ttl) {

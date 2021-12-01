@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.clses; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
+package gplx.langs.htmls.clses; import gplx.*;
 import org.junit.*;
 public class Gfh_class_parser__tst {
 	private final Gfh_class_parser__fxt fxt = new Gfh_class_parser__fxt();
@@ -37,6 +37,6 @@ class Gfh_class_wkr__list implements Gfh_class_parser_wkr {
 	}
 	public String[] Parse(byte[] src, int src_bgn, int src_end) {
 		Gfh_class_parser_.Parse(src, src_bgn, src_end, this);
-		return (String[])list.To_ary_and_clear(String.class);
+		return (String[])list.ToAryAndClear(String.class);
 	}
 }

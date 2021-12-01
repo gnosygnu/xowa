@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.htmls; import gplx.*;
 import gplx.xowa.files.*;
 public class Xoh_img_mgr {
 	private final List_adp list = List_adp_.New();
@@ -22,7 +22,7 @@ public class Xoh_img_mgr {
 		this.uid_nxt = -1;
 		list.Clear();
 	}
-	public int Len() {return list.Count();}
+	public int Len() {return list.Len();}
 	public Xof_fsdb_itm Get_at(int i) {return (Xof_fsdb_itm)list.Get_at(i);}
 	public Xof_fsdb_itm Make_aud() {
 		Xof_fsdb_itm itm = new Xof_fsdb_itm();

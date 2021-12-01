@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; 
+import gplx.dbs.cfgs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
 import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.wikis.tdbs.metas.*;
@@ -99,7 +99,7 @@ public class Xow_file_mgr implements Gfo_invk {
 	}
 	public void Cfg_set(String grp, String key, String val) {	// TEST: should only be called by tests
 		if (test_grps == null) test_grps = Hash_adp_.New();
-		Db_cfg_hash grp_itm = (Db_cfg_hash)test_grps.Get_by(grp);
+		Db_cfg_hash grp_itm = (Db_cfg_hash)test_grps.GetByOrNull(grp);
 		if (grp_itm == null) {
 			grp_itm = new Db_cfg_hash(grp);
 			test_grps.Add(grp, grp_itm);
@@ -108,7 +108,7 @@ public class Xow_file_mgr implements Gfo_invk {
 	}	private Hash_adp test_grps;
 	public Db_cfg_hash Cfg_get(String grp) {
 		if (test_grps != null) {
-			Db_cfg_hash rv = (Db_cfg_hash)test_grps.Get_by(grp);
+			Db_cfg_hash rv = (Db_cfg_hash)test_grps.GetByOrNull(grp);
 			return rv == null ? new Db_cfg_hash("") : rv;
 		}
 		if (this.Version() == Version_1) return new Db_cfg_hash("");

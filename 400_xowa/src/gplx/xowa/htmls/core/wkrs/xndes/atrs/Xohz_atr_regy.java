@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
+package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*;
 public class Xohz_atr_regy {
 	private final Hash_adp_bry itm_regy = Hash_adp_bry.cs();
 	private final Hash_adp_bry grp_regy = Hash_adp_bry.cs();
@@ -24,14 +24,14 @@ public class Xohz_atr_regy {
 			byte[] sub_key = sub_keys[i];
 			Grps__add__recur(sub_key);
 		}
-		Xohz_atr_grp grp = new Xohz_atr_grp((byte[][])tmp_list.To_ary_and_clear(byte[].class));
+		Xohz_atr_grp grp = new Xohz_atr_grp((byte[][])tmp_list.ToAryAndClear(byte[].class));
 		grp_regy.Add(grp_key, grp);
 		return this;
 	}
 	private void Grps__add__recur(byte[] sub_key) {
-		Object sub_obj = itm_regy.Get_by(sub_key);
+		Object sub_obj = itm_regy.GetByOrNull(sub_key);
 		if (sub_obj == null) {
-			sub_obj = grp_regy.Get_by(sub_key);
+			sub_obj = grp_regy.GetByOrNull(sub_key);
 			if (sub_obj == null) throw Err_.new_("hzip", "sub_key is not known itm or grp", "sub_key", sub_key);
 			Xohz_atr_grp sub_grp = (Xohz_atr_grp)sub_obj;
 			byte[][] subs = sub_grp.Subs(); int subs_len = subs.length;
@@ -47,11 +47,11 @@ public class Xohz_atr_regy {
 	public Xohz_atr_regy Itms__add_str(int uid, byte[] key)						{itm_regy.Add(key, new Xohz_atr_itm__str(uid, key)); return this;}
 	public Xohz_atr_itm[] Resolve(byte[] key) {
 		Grps__add__recur(key);
-		byte[][] itm_keys = (byte[][])tmp_list.To_ary_and_clear(byte[].class);
+		byte[][] itm_keys = (byte[][])tmp_list.ToAryAndClear(byte[].class);
 		int itm_keys_len = itm_keys.length;
 		Xohz_atr_itm[] rv = new Xohz_atr_itm[itm_keys_len];
 		for (int i = 0; i < itm_keys_len; ++i)
-			rv[i] = (Xohz_atr_itm)itm_regy.Get_by(itm_keys[i]);
+			rv[i] = (Xohz_atr_itm)itm_regy.GetByOrNull(itm_keys[i]);
 		return rv;
 	}
 }

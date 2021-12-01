@@ -18,7 +18,7 @@ public class Schema_update_mgr {
 	private List_adp cmds = List_adp_.New();
 	public void Add(Schema_update_cmd cmd) {cmds.Add(cmd);}
 	public void Update(Schema_db_mgr schema_mgr, Db_conn conn) {
-		int cmds_len = cmds.Count();
+		int cmds_len = cmds.Len();
 		for (int i = 0; i < cmds_len; ++i) {
 			Schema_update_cmd cmd = (Schema_update_cmd)cmds.Get_at(i);
 			try {cmd.Exec(schema_mgr, conn);}

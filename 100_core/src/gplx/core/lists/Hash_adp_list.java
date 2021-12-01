@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*; import gplx.core.*;
+package gplx.core.lists; import gplx.*;
 public class Hash_adp_list extends Hash_adp_base {
-	@gplx.New public List_adp Get_by(Object key) {return ((List_adp)Fetch_base(key));}
+	@gplx.New public List_adp GetByOrNull(Object key) {return ((List_adp)Fetch_base(key));}
 	public List_adp Get_by_or_new(Object key) {
-		List_adp rv = Get_by(key);
+		List_adp rv = GetByOrNull(key);
 		if (rv == null) {
 			rv = List_adp_.New();
 			Add_base(key, rv);
@@ -29,10 +29,10 @@ public class Hash_adp_list extends Hash_adp_base {
 		list.Add(val);
 	}
 	public void DelInList(Object key, Object val) {
-		List_adp list = Get_by(key);
+		List_adp list = GetByOrNull(key);
 		if (list == null) return;
 		list.Del(val);
-		if (list.Count() == 0) Del(key);
+		if (list.Len() == 0) Del(key);
 	}
 	public static Hash_adp_list new_() {return new Hash_adp_list();} Hash_adp_list() {}
 }

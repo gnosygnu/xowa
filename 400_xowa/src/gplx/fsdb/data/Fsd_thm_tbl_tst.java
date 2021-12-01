@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
+package gplx.fsdb.data; import gplx.*;
 import org.junit.*;
 public class Fsd_thm_tbl_tst {
 	@Before public void init() {fxt.Clear();} private Fsd_thm_tbl_fxt fxt = new Fsd_thm_tbl_fxt();
@@ -41,7 +41,7 @@ class Fsd_thm_tbl_fxt {
 		rv.Init_by_req(w, time, page);
 		return rv;
 	}
-	public void Init_list(Fsd_thm_itm... ary) {list.Add_many((Object[])ary);}
+	public void Init_list(Fsd_thm_itm... ary) {list.AddMany((Object[])ary);}
 	public void Test_match_nearest_itm(Fsd_thm_itm req, Fsd_thm_itm expd) {
 		Fsd_thm_tbl.Match_nearest(list, req, Bool_.Y);
 		if (expd == Fsd_thm_itm.Null) {

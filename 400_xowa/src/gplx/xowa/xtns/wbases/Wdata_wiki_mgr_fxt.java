@@ -213,7 +213,7 @@ public class Wdata_wiki_mgr_fxt {
 		Tfds.Eq_ary_str(expd, Test_xwiki_links_xto_str_ary(tmp_langs));
 	}	private List_adp tmp_langs = List_adp_.New();
 	String[] Test_xwiki_links_xto_str_ary(List_adp list) {
-		int len = list.Count();
+		int len = list.Len();
 		String[] rv = new String[len];
 		for (int i = 0; i < len; i++) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);

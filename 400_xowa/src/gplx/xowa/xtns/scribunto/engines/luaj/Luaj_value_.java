@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import java.util.*;
+package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*;
+import gplx.xowa.xtns.scribunto.*;
 import org.luaj.vm2.*;
 class Luaj_value_ {
 	public static String Get_val_as_str(LuaTable owner, String key) {
@@ -103,7 +103,7 @@ class Luaj_value_ {
 			cur = itm_key;
 			++rv_idx;
 		}
-		return rv_list == null ? rv_ary : (Keyval[])rv_list.To_ary_and_clear(Keyval.class);
+		return rv_list == null ? rv_ary : (Keyval[])rv_list.ToAryAndClear(Keyval.class);
 	}
 	private static Object Lua_val_to_obj(Luaj_server server, LuaValue v) {
 		switch (v.type()) {

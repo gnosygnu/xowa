@@ -13,18 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.dbs; import gplx.*;
 import gplx.dbs.*;
 public class Xob_page_dump_tbl {
 	public final static String Tbl_name = "page_dump";
 	private final String fld_id, fld_title, fld_namespace, fld_is_redirect;
-	private final Db_conn conn; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final Db_conn conn; private final DbmetaFldList flds = new DbmetaFldList();
 	public Xob_page_dump_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld_id				= flds.Add_int_pkey("page_id");
-		this.fld_title			= flds.Add_str("page_title", 255);
-		this.fld_namespace		= flds.Add_int("page_namespace");
-		this.fld_is_redirect	= flds.Add_int("page_is_redirect");
+		this.fld_id				= flds.AddIntPkey("page_id");
+		this.fld_title			= flds.AddStr("page_title", 255);
+		this.fld_namespace		= flds.AddInt("page_namespace");
+		this.fld_is_redirect	= flds.AddInt("page_is_redirect");
 	}
 	public void Create_data(Io_url page_db_url, int text_db_id) {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(Tbl_name, flds));

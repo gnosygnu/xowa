@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import gplx.core.strings.*;
 public class IoRecycleBin {
 	public void							Send(Io_url url) {Send_xrg(url).Exec();}
@@ -21,7 +21,7 @@ public class IoRecycleBin {
 	public void							Recover(Io_url url) {
 		String_bldr sb = String_bldr_.new_();
 		List_adp list = Regy_search(url, sb);
-		int listCount = list.Count(); if (listCount > 1) throw Err_.new_wo_type("found more than 1 url", "count", list.Count());
+		int listCount = list.Len(); if (listCount > 1) throw Err_.new_wo_type("found more than 1 url", "count", list.Len());
 		Io_url trgUrl = (Io_url)list.Get_at(0);
 		IoEngine_xrg_xferFil.move_(url, trgUrl).ReadOnlyFails_(true).Overwrite_(false).Exec();
 		IoEngine_xrg_saveFilStr.new_(FetchRegistryUrl(url), sb.To_str()).Exec();

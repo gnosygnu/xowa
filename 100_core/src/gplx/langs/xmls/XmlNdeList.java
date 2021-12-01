@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.xmls; import gplx.*;
 import org.w3c.dom.NodeList;
 public interface XmlNdeList {
 	int Count();
@@ -25,9 +25,9 @@ class XmlNdeList_cls_xml implements XmlNdeList {
 	@gplx.Internal protected XmlNdeList_cls_xml(NodeList list) {this.list = list;} NodeList list;
 }
 class XmlNdeList_cls_list implements XmlNdeList {
-	public int Count() {return list.Count();}
+	public int Count() {return list.Len();}
 	public XmlNde Get_at(int i) {return (XmlNde)list.Get_at(i);}
 	public void Add(XmlNde xnde) {list.Add(xnde);}
-	@gplx.Internal protected XmlNdeList_cls_list(int count) {list = List_adp_.New(); list.Resize_bounds(count);} List_adp list;
+	@gplx.Internal protected XmlNdeList_cls_list(int count) {list = List_adp_.New(); list.ResizeBounds(count);} List_adp list;
 }
 //#}

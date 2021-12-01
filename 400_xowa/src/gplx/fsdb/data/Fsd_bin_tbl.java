@@ -24,15 +24,15 @@ public class Fsd_bin_tbl implements Rls_able {
 	private final Bool_obj_ref saved_in_parts = Bool_obj_ref.n_();
 	public Fsd_bin_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
-		fld__owner_id		= flds.Add_int_pkey	("bin_owner_id");
-		fld__owner_tid		= flds.Add_byte		("bin_owner_tid");
-		fld__part_id			= flds.Add_int		("bin_part_id");
-		fld__data_url		= flds.Add_str		("bin_data_url", 255); // for items which are > 2 GB, just store it on disc, with a path to it; EX: 120 GB file
-		fld__data			= flds.Add_bry		("bin_data");	// mediumblob
+		fld__owner_id		= flds.AddIntPkey("bin_owner_id");
+		fld__owner_tid		= flds.AddByte("bin_owner_tid");
+		fld__part_id			= flds.AddInt("bin_part_id");
+		fld__data_url		= flds.AddStr("bin_data_url", 255); // for items which are > 2 GB, just store it on disc, with a path to it; EX: 120 GB file
+		fld__data			= flds.AddBry("bin_data");	// mediumblob
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name = "fsdb_bin";
-	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public DbmetaFldList Flds() {return flds;} private final DbmetaFldList flds = new DbmetaFldList();
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);
 		stmt_select = Db_stmt_.Rls(stmt_select);

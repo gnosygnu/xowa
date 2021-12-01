@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*;
 import gplx.dbs.*;
 public class Srch_link_tbl {
 	public final String fld_word_id, fld_page_id, fld_link_score;
@@ -21,12 +21,12 @@ public class Srch_link_tbl {
 	public Srch_link_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "search_link";
-		fld_word_id			= flds.Add_int("word_id");
-		fld_page_id			= flds.Add_int("page_id");
-		fld_link_score		= flds.Add_int_dflt(Fld_link_score, 0);
+		fld_word_id			= flds.AddInt("word_id");
+		fld_page_id			= flds.AddInt("page_id");
+		fld_link_score		= flds.AddIntDflt(Fld_link_score, 0);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
-	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public DbmetaFldList Flds() {return flds;} private final DbmetaFldList flds = new DbmetaFldList();
 	public int Id;
 	public void Create_tbl()				{conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 	public void Create_idx__page_id()		{}	// TODO_OLD: conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "page_id", fld_page_id));}

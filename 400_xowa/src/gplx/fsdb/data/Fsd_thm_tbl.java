@@ -13,31 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.*;
+package gplx.fsdb.data; import gplx.*;
+import gplx.dbs.*;
+import gplx.xowa.files.*;
 public class Fsd_thm_tbl implements Db_tbl {
-	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final DbmetaFldList flds = new DbmetaFldList();
 	public final String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
 	public final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by_fil_exact, stmt_select_by_fil_near; private int mnt_id; private boolean schema_thm_page;
 	public Fsd_thm_tbl(Db_conn conn, boolean schema_is_1, int mnt_id, boolean schema_thm_page) {
 		this.conn = conn; this.mnt_id = mnt_id; this.schema_thm_page = schema_thm_page;
 		this.tbl_name = schema_is_1 ? "fsdb_xtn_thm" : "fsdb_thm";
-		this.fld_id				= flds.Add_int_pkey	("thm_id");
-		this.fld_owner_id		= flds.Add_int		("thm_owner_id");
-		this.fld_w				= flds.Add_int		("thm_w");
-		this.fld_h				= flds.Add_int		("thm_h");
+		this.fld_id				= flds.AddIntPkey("thm_id");
+		this.fld_owner_id		= flds.AddInt("thm_owner_id");
+		this.fld_w				= flds.AddInt("thm_w");
+		this.fld_h				= flds.AddInt("thm_h");
 		if (schema_thm_page) {
-			this.fld_time		= flds.Add_double	("thm_time");
-			this.fld_page		= flds.Add_int		("thm_page");
+			this.fld_time		= flds.AddDouble("thm_time");
+			this.fld_page		= flds.AddInt("thm_page");
 		}
 		else {
-			this.fld_time		= flds.Add_int		("thm_thumbtime");
-			this.fld_page		= Dbmeta_fld_itm.Key_null;
+			this.fld_time		= flds.AddInt("thm_thumbtime");
+			this.fld_page		= DbmetaFldItm.KeyNull;
 		}
-		this.fld_bin_db_id		= flds.Add_int		("thm_bin_db_id");
-		this.fld_size			= flds.Add_long		("thm_size");
-		this.fld_modified		= flds.Add_str		("thm_modified", 14);		// stored as yyyyMMddHHmmss
-		this.fld_hash			= flds.Add_str		("thm_hash", 40);
+		this.fld_bin_db_id		= flds.AddInt("thm_bin_db_id");
+		this.fld_size			= flds.AddLong("thm_size");
+		this.fld_modified		= flds.AddStr("thm_modified", 14);		// stored as yyyyMMddHHmmss
+		this.fld_hash			= flds.AddStr("thm_hash", 40);
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
@@ -126,8 +127,8 @@ public class Fsd_thm_tbl implements Db_tbl {
 	public static final DateAdp Modified_null = null;
 	public static final String Hash_null = "", Modified_null_str = "";
 	public static boolean Match_nearest(List_adp list, Fsd_thm_itm thm, boolean schema_thm_page) {
-		int len = list.Count(); if (len == 0) return Bool_.N;
-		list.Sort_by(Fsdb_thm_itm_sorter.Instance);
+		int len = list.Len(); if (len == 0) return Bool_.N;
+		list.SortBy(Fsdb_thm_itm_sorter.Instance);
 		int thm_w = thm.W(), thm_page = thm.Page(); double thm_time = thm.Time();
 		Fsd_thm_itm max = null;
 		for (int i = 0; i < len; ++i) {

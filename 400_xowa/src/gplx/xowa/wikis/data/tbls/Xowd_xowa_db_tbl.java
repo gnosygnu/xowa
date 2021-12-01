@@ -13,27 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*;
 import gplx.xowa.wikis.data.*;
+import gplx.dbs.*;
 public class Xowd_xowa_db_tbl implements Db_tbl {
 	public static final String Fld_id = "db_id", Fld_type = "db_type", Fld_url = "db_url";
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_type, fld_url, fld_ns_ids, fld_part_id, fld_guid; private boolean schema_is_1;
 	private final Db_conn conn; private final Db_stmt_bldr stmt_bldr = new Db_stmt_bldr();
 	public Xowd_xowa_db_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn; this.schema_is_1 = schema_is_1;
 		this.tbl_name = TBL_NAME;
-		fld_id				= flds.Add_int_pkey	(Fld_id);
-		fld_type			= flds.Add_byte		(Fld_type);
-		fld_url				= flds.Add_str		(Fld_url, 512);
+		fld_id				= flds.AddIntPkey(Fld_id);
+		fld_type			= flds.AddByte(Fld_type);
+		fld_url				= flds.AddStr(Fld_url, 512);
 		if (schema_is_1) {
-			fld_ns_ids = fld_part_id = fld_guid = Dbmeta_fld_itm.Key_null;
+			fld_ns_ids = fld_part_id = fld_guid = DbmetaFldItm.KeyNull;
 		}
 		else {
-			fld_ns_ids		= flds.Add_str		("db_ns_ids", 255);
-			fld_part_id		= flds.Add_int		("db_part_id");
-			fld_guid		= flds.Add_str		("db_guid", 36);
+			fld_ns_ids		= flds.AddStr("db_ns_ids", 255);
+			fld_part_id		= flds.AddInt("db_part_id");
+			fld_guid		= flds.AddStr("db_guid", 36);
 		}
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_id);
 	}
@@ -55,8 +55,8 @@ public class Xowd_xowa_db_tbl implements Db_tbl {
 				list.Add(db_file);
 			}
 		}	finally {rdr.Rls();}
-		list.Sort_by(Xow_db_file_sorter__id.Instance);
-		return (Xow_db_file[])list.To_ary_and_clear(Xow_db_file.class);
+		list.SortBy(Xow_db_file_sorter__id.Instance);
+		return (Xow_db_file[])list.ToAryAndClear(Xow_db_file.class);
 	}
 	public void Commit_all(Xow_db_mgr core_data_mgr) {
 		stmt_bldr.Batch_bgn();

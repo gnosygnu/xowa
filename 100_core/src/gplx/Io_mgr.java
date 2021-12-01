@@ -162,13 +162,13 @@ public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather
 class Io_mgr_ {
 	public static int Delete_dir_empty(Io_url url) {
 		IoItmDir dir = Io_mgr.Instance.QueryDir_args(url).ExecAsDir();
-		int sub_dirs_len = dir.SubDirs().Count();
+		int sub_dirs_len = dir.SubDirs().Len();
 		int deleted_dirs = 0;
 		for (int i = 0; i < sub_dirs_len; ++i) {
 			IoItmDir sub_dir = (IoItmDir)dir.SubDirs().Get_at(i);
 			deleted_dirs += Io_mgr.Instance.Delete_dir_empty(sub_dir.Url());
 		}
-		if (	dir.SubFils().Count() == 0
+		if (	dir.SubFils().Len() == 0
 			&&	deleted_dirs == sub_dirs_len
 			) {
 			Io_mgr.Instance.DeleteDirIfEmpty(url);

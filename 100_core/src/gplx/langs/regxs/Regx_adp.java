@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
+package gplx.langs.regxs; import gplx.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 public class Regx_adp {
@@ -39,7 +39,7 @@ public class Regx_adp {
 				: find_bgn + find_len		// otherwise search after find_end
 				;
 		}
-		return (Regx_match[])rv.To_ary(Regx_match.class);
+		return (Regx_match[])rv.ToAry(Regx_match.class);
 	}
 		private int flags = FLAG__DOTALL | FLAG__UNICODE_CHARACTER_CLASS;// JRE.7:UNICODE_CHARACTER_CLASS; added during %w fix for en.w:A#; DATE:2015-06-10
 	private Pattern under;

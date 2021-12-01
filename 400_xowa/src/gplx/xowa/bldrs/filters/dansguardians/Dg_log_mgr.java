@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
+package gplx.xowa.bldrs.filters.dansguardians; import gplx.*;
 import gplx.dbs.*;
 class Dg_log_mgr {
 	private Db_conn conn;
@@ -41,14 +41,14 @@ class Dg_log_mgr {
 	public void Rls()		{conn.Txn_end();}
 }
 class Dg_file_tbl {
-	private String tbl_name = "dg_file"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "dg_file"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String fld_file_id, fld_file_path, fld_rule_count;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
 		this.conn = new_conn; flds.Clear();
-		fld_file_id			= flds.Add_int("file_id");
-		fld_file_path		= flds.Add_str("file_path", 512);
-		fld_rule_count		= flds.Add_int("rule_count");
+		fld_file_id			= flds.AddInt("file_id");
+		fld_file_path		= flds.AddStr("file_path", 512);
+		fld_rule_count		= flds.AddInt("rule_count");
 		if (created) {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "file_id", fld_file_id)
@@ -67,16 +67,16 @@ class Dg_file_tbl {
 	}
 }
 class Dg_rule_tbl implements Rls_able {
-	private String tbl_name = "dg_rule"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "dg_rule"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String fld_file_id, fld_rule_id, fld_rule_idx, fld_rule_score, fld_rule_text;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
 		this.conn = new_conn; flds.Clear();
-		fld_file_id			= flds.Add_int("file_id");
-		fld_rule_id			= flds.Add_int("rule_id");
-		fld_rule_idx		= flds.Add_int("rule_idx");
-		fld_rule_score		= flds.Add_int("rule_score");
-		fld_rule_text		= flds.Add_str("rule_text", 1024);
+		fld_file_id			= flds.AddInt("file_id");
+		fld_rule_id			= flds.AddInt("rule_id");
+		fld_rule_idx		= flds.AddInt("rule_idx");
+		fld_rule_score		= flds.AddInt("rule_score");
+		fld_rule_text		= flds.AddStr("rule_text", 1024);
 		if (created) {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_rule_id)
@@ -100,19 +100,19 @@ class Dg_rule_tbl implements Rls_able {
 	}
 }
 class Dg_page_score_tbl implements Rls_able {
-	private String tbl_name = "dg_page_score"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "dg_page_score"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String fld_log_tid, fld_page_id, fld_page_ns, fld_page_ttl, fld_page_len, fld_page_score, fld_page_rule_count, fld_clude_type;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
 		this.conn = new_conn; flds.Clear();
-		fld_log_tid			= flds.Add_int("log_tid");	// title or text
-		fld_page_id			= flds.Add_int("page_id");
-		fld_page_ns			= flds.Add_int("page_ns");
-		fld_page_ttl		= flds.Add_int("page_ttl");
-		fld_page_len		= flds.Add_int("page_len");
-		fld_page_score		= flds.Add_int("page_score");
-		fld_page_rule_count	= flds.Add_int("page_rule_count");
-		fld_clude_type		= flds.Add_int("page_clude_type");
+		fld_log_tid			= flds.AddInt("log_tid");	// title or text
+		fld_page_id			= flds.AddInt("page_id");
+		fld_page_ns			= flds.AddInt("page_ns");
+		fld_page_ttl		= flds.AddInt("page_ttl");
+		fld_page_len		= flds.AddInt("page_len");
+		fld_page_score		= flds.AddInt("page_score");
+		fld_page_rule_count	= flds.AddInt("page_rule_count");
+		fld_clude_type		= flds.AddInt("page_clude_type");
 		if (created) {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id)
@@ -140,15 +140,15 @@ class Dg_page_score_tbl implements Rls_able {
 	}
 }
 class Dg_page_rule_tbl implements Rls_able {
-	private String tbl_name = "dg_page_rule"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "dg_page_rule"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String fld_log_tid, fld_page_id, fld_rule_id, fld_rule_score_total;
 	private Db_conn conn; private Db_stmt stmt_insert;
 	public void Conn_(Db_conn new_conn, boolean created) {
 		this.conn = new_conn; flds.Clear();
-		fld_log_tid				= flds.Add_int("log_tid");	// title or text
-		fld_page_id				= flds.Add_int("page_id");
-		fld_rule_id				= flds.Add_int("rule_id");
-		fld_rule_score_total	= flds.Add_int("rule_score_total");
+		fld_log_tid				= flds.AddInt("log_tid");	// title or text
+		fld_page_id				= flds.AddInt("page_id");
+		fld_rule_id				= flds.AddInt("rule_id");
+		fld_rule_score_total	= flds.AddInt("rule_score_total");
 		if (created) {
 			Dbmeta_tbl_itm meta = Dbmeta_tbl_itm.New(tbl_name, flds
 			, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "pkey", fld_log_tid, fld_page_id, fld_rule_id)

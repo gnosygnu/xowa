@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
+package gplx.xowa.bldrs.filters.dansguardians; import gplx.*;
 import org.junit.*; import gplx.dbs.*;
 public class Dg_match_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Dg_match_mgr_fxt fxt = new Dg_match_mgr_fxt();
@@ -45,7 +45,7 @@ class Dg_match_mgr_fxt {
 	}
 	public void Test_match_one(boolean expd, String word_str) {
 		match_mgr.Clear();
-		int rule_list_len = rule_list.Count();
+		int rule_list_len = rule_list.Len();
 		for (int j = 0; j < rule_list_len; ++j) {
 			Dg_rule rule = (Dg_rule)rule_list.Get_at(j);
 			match_mgr.Init_by_rule(rule);

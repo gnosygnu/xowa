@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*; import gplx.core.*;
+package gplx.core.threads; import gplx.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*;
+import gplx.gfui.kits.core.*;
 public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 	public Gfo_thread_cmd Init(Gfo_usr_dlg usr_dlg, Gfui_kit kit, Io_url fil) {
 		this.usr_dlg = usr_dlg; this.kit = kit; this.fil = fil;
@@ -38,7 +38,7 @@ public class Gfo_thread_cmd_replace implements Gfo_thread_cmd {
 	public void Async_run() {Exec_find_replace();}	// NOTE: do not run async; if multiple commands for same file then they will not always work
 	public void Exec_find_replace() {
 		String raw = Io_mgr.Instance.LoadFilStr(fil);
-		int pairs_len = pairs.Count();
+		int pairs_len = pairs.Len();
 		for (int i = 0; i < pairs_len; i++) {
 			Keyval kv = (Keyval)pairs.Get_at(i);
 			raw = String_.Replace(raw, kv.Key(), kv.Val_to_str_or_null());

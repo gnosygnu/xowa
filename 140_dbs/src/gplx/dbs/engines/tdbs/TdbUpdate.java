@@ -14,14 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.criterias.*; import gplx.core.lists.*; /*GfoNde*/ import gplx.core.gfo_ndes.*;
+import gplx.core.criterias.*;
+import gplx.core.gfo_ndes.*;
 import gplx.dbs.qrys.*;
 class TdbUpdateWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_update cmd = (Db_qry_update)cmdObj;
 
 		int rv = 0;
-		TdbTable tbl = engine.FetchTbl(cmd.Base_table());
+		TdbTable tbl = engine.FetchTbl(cmd.BaseTable());
 		Criteria crt = cmd.Where();
 		for (int i = 0; i < tbl.Rows().Count(); i++) {
 			GfoNde row = (GfoNde)tbl.Rows().FetchAt_asGfoNde(i);

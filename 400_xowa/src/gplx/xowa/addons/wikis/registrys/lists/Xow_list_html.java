@@ -13,10 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.registrys.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.registrys.*;
+package gplx.xowa.addons.wikis.registrys.lists; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
-import gplx.xowa.wikis.xwikis.*;
-import gplx.xowa.users.data.*; 
+import gplx.xowa.users.data.*;
 class Xow_list_html extends Xow_special_wtr__base {
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "wiki", "registry", "list");}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xow_list.mustache.html");}
@@ -31,7 +30,7 @@ class Xow_list_html extends Xow_special_wtr__base {
 			if (String_.Eq(site_itm.Domain(), gplx.xowa.wikis.domains.Xow_domain_itm_.Str__home)) continue;
 			list.Add(new Xow_list_doc_wiki(Bry_.new_u8(site_itm.Domain()), site_itm.Date()));
 		}
-		return new Xow_list_doc(gplx.xowa.addons.wikis.imports.Xow_import_special.Get_root_url(), (Xow_list_doc_wiki[])list.To_ary_and_clear(Xow_list_doc_wiki.class));
+		return new Xow_list_doc(gplx.xowa.addons.wikis.imports.Xow_import_special.Get_root_url(), (Xow_list_doc_wiki[])list.ToAryAndClear(Xow_list_doc_wiki.class));
 	}
 	@Override protected void Bld_tags(Xoa_app app, Io_url addon_dir, Xopage_html_data page_data) {
 		Xopg_tag_mgr head_tags = page_data.Head_tags();

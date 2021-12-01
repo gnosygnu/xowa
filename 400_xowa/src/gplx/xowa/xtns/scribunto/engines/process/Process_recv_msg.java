@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
+package gplx.xowa.xtns.scribunto.engines.process; import gplx.*;
+import gplx.xowa.xtns.scribunto.*;
 import gplx.core.primitives.*; import gplx.langs.phps.*;
 public class Process_recv_msg {
 	private Php_srl_parser parser = new Php_srl_parser();
@@ -38,7 +39,7 @@ public class Process_recv_msg {
 			for (int i = 0; i < len; i++) {
 				Keyval kv = rslt_ary[i];
 				String kv_key = kv.Key();
-				Byte_obj_val bv = (Byte_obj_val)arg_keys.Get_by(kv_key);
+				Byte_obj_val bv = (Byte_obj_val)arg_keys.GetByOrNull(kv_key);
 				if	(bv != null) {
 					switch (bv.Val()) {
 						case Arg_op:		op = kv.Val_to_str_or_empty(); break;

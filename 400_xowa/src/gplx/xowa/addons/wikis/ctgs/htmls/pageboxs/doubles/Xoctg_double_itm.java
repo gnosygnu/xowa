@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
-import gplx.core.brys.fmts.*; import gplx.core.brys.fmtrs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
+import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.users.history.*;
 public class Xoctg_double_itm implements gplx.core.brys.Bfr_arg {
 	private final List_adp itms = List_adp_.New();
@@ -27,10 +27,10 @@ public class Xoctg_double_itm implements gplx.core.brys.Bfr_arg {
 		this.history_mgr = history_mgr;
 	}
 	public void Itms__clear() {itms.Clear();}
-	public int Itms__count() {return itms.Count();}
+	public int Itms__count() {return itms.Len();}
 	public void Itms__add(Xoctg_pagebox_itm page) {itms.Add(page);}	
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int len = itms.Count();
+		int len = itms.Len();
 		for (int i = 0; i < len; ++i) {
 			Xoctg_pagebox_itm itm = (Xoctg_pagebox_itm)itms.Get_at(i);
 			Xoa_ttl ttl = itm.Ttl();

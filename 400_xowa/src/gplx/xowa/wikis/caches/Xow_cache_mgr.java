@@ -61,7 +61,7 @@ public class Xow_cache_mgr {
 				Keyval kv = Keyval_.new_(String_.new_u8(itm.Key()), String_.new_u8(itm.Name()));
 				list.Add(kv);
 			}
-			scrib_lang_names = (Keyval[])list.To_ary(Keyval.class);
+			scrib_lang_names = (Keyval[])list.ToAry(Keyval.class);
 		}
 		return scrib_lang_names;
 	}

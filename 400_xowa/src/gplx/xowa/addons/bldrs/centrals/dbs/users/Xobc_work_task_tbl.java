@@ -13,20 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs.users; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*; import gplx.xowa.addons.bldrs.centrals.dbs.*;
+package gplx.xowa.addons.bldrs.centrals.dbs.users; import gplx.*;
+import gplx.xowa.addons.bldrs.centrals.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.tasks.*;
 public class Xobc_work_task_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_task_id, fld_task_seqn, fld_step_id, fld_cmd_id;
 	private final Db_conn conn;
 	public Xobc_work_task_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "xobc_work_task";
-		this.fld_task_id			= flds.Add_int_pkey("task_id");
-		this.fld_task_seqn			= flds.Add_int("task_seqn");
-		this.fld_step_id			= flds.Add_int("step_id");
-		this.fld_cmd_id				= flds.Add_int("cmd_id");
+		this.fld_task_id			= flds.AddIntPkey("task_id");
+		this.fld_task_seqn			= flds.AddInt("task_seqn");
+		this.fld_step_id			= flds.AddInt("step_id");
+		this.fld_cmd_id				= flds.AddInt("cmd_id");
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;

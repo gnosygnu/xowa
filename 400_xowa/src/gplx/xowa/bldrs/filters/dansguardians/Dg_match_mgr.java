@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
+package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.addons.apps.cfgs.*;
 import gplx.xowa.langs.*;
@@ -63,7 +63,7 @@ public class Dg_match_mgr {
 		}
 	}
 	private Dg_rule_group Get_rule_group_or_new(byte[] word) {
-		Dg_rule_group rv = (Dg_rule_group)rule_group_hash.Get_by(word);
+		Dg_rule_group rv = (Dg_rule_group)rule_group_hash.GetByOrNull(word);
 		if (rv == null) {
 			rv = new Dg_rule_group(word);
 			rule_group_hash.Add(word, rv);
@@ -71,7 +71,7 @@ public class Dg_match_mgr {
 		return rv;
 	}
 	private Dg_rule_tally Get_rule_tally_or_new(byte[] key, Dg_rule rule) {
-		Dg_rule_tally rv = (Dg_rule_tally)rule_tally_hash.Get_by(key);
+		Dg_rule_tally rv = (Dg_rule_tally)rule_tally_hash.GetByOrNull(key);
 		if (rv == null) {
 			rv = new Dg_rule_tally(rule);
 			rule_tally_hash.Add(key, rv);
@@ -113,7 +113,7 @@ public class Dg_match_mgr {
 				++pos;
 			}
 		}
-		int rule_tally_len = rule_tally_hash.Count(); if (rule_tally_len == 0) return false;
+		int rule_tally_len = rule_tally_hash.Len(); if (rule_tally_len == 0) return false;
 		int rule_match_count = 0;
 		for (int i = 0; i < rule_tally_len; ++i) {
 			Dg_rule_tally rule_tally = (Dg_rule_tally)rule_tally_hash.Get_at(i);
@@ -159,7 +159,7 @@ class Dg_rule_group {
 	public List_adp Rules_list() {return rules_list;} private final List_adp rules_list = List_adp_.New();
 	public Dg_rule[] Rules_ary() {
 		if (rules_ary == null)
-			rules_ary = (Dg_rule[])rules_list.To_ary_and_clear(Dg_rule.class);
+			rules_ary = (Dg_rule[])rules_list.ToAryAndClear(Dg_rule.class);
 		return rules_ary;
 	}	private Dg_rule[] rules_ary;
 }

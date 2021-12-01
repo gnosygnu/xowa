@@ -13,16 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.vnts; import gplx.*;
 class Vnt_rule_undi_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
-	public int Len() {return hash.Count();}
-	public boolean Has_none() {return hash.Count() == 0;}
+	public int Len() {return hash.Len();}
+	public boolean Has_none() {return hash.Len() == 0;}
 	public void Clear() {hash.Clear();}
 	public Vnt_rule_undi_grp Get_at(int i)		{return (Vnt_rule_undi_grp)hash.Get_at(i);}
-	public Vnt_rule_undi_grp Get_by(byte[] key) {return (Vnt_rule_undi_grp)hash.Get_by(key);}
+	public Vnt_rule_undi_grp Get_by(byte[] key) {return (Vnt_rule_undi_grp)hash.GetByOrNull(key);}
 	public byte[] Get_text_by_key_or_null(byte[] key) {
-		Vnt_rule_undi_grp grp = (Vnt_rule_undi_grp)hash.Get_by(key); if (grp == null) return null;
+		Vnt_rule_undi_grp grp = (Vnt_rule_undi_grp)hash.GetByOrNull(key); if (grp == null) return null;
 		return grp.Len() == 0 ? null : grp.Get_at(0).Trg();	// REF.MW: $disp = $disp[0];
 	}
 	public byte[] Get_text_at(int i) {
@@ -30,7 +30,7 @@ class Vnt_rule_undi_mgr {
 		return grp.Len() == 0 ? null : grp.Get_at(0).Trg();
 	}
 	public Vnt_rule_undi_grp Set(byte[] vnt, byte[] src, byte[] trg) {
-		Vnt_rule_undi_grp grp = (Vnt_rule_undi_grp)hash.Get_by(vnt);
+		Vnt_rule_undi_grp grp = (Vnt_rule_undi_grp)hash.GetByOrNull(vnt);
 		if (grp == null) {
 			grp = new Vnt_rule_undi_grp(vnt);
 			hash.Add(vnt, grp);
@@ -39,7 +39,7 @@ class Vnt_rule_undi_mgr {
 		return grp;
 	}
 	public void To_bry__dbg(Bry_bfr bfr) {
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
 			if (i != 0)	bfr.Add_byte_nl();
 			Vnt_rule_undi_grp grp = (Vnt_rule_undi_grp)hash.Get_at(i);
@@ -51,11 +51,11 @@ class Vnt_rule_undi_mgr {
 class Vnt_rule_undi_grp {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Vnt_rule_undi_grp(byte[] vnt) {this.vnt = vnt;}
-	public int Len() {return hash.Count();}
+	public int Len() {return hash.Len();}
 	public Vnt_rule_undi_itm Get_at(int i) {return (Vnt_rule_undi_itm)hash.Get_at(i);}
 	public byte[] Vnt() {return vnt;} private final byte[] vnt;
 	public Vnt_rule_undi_itm Set(byte[] src, byte[] trg) {
-		Vnt_rule_undi_itm itm = (Vnt_rule_undi_itm)hash.Get_by(src);
+		Vnt_rule_undi_itm itm = (Vnt_rule_undi_itm)hash.GetByOrNull(src);
 		if (itm == null) {
 			itm = new Vnt_rule_undi_itm(src, trg);
 			hash.Add(src, itm);
@@ -63,7 +63,7 @@ class Vnt_rule_undi_grp {
 		return itm;
 	}
 	public void To_bry__dbg(Bry_bfr bfr) {
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
 			Vnt_rule_undi_itm itm = (Vnt_rule_undi_itm)hash.Get_at(i);
 			bfr.Add(itm.Src()).Add_byte_eq().Add(itm.Trg());

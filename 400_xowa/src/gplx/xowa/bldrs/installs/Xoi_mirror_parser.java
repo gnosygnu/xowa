@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.installs; import gplx.*;
 public class Xoi_mirror_parser {
 	public String[] Parse(String raw_str) {
 		if (String_.Len_eq_0(raw_str)) return String_.Ary_empty;
@@ -32,7 +32,7 @@ public class Xoi_mirror_parser {
 			if (date[date_pos_last] == Byte_ascii.Slash) date = Bry_.Mid(date, 0, date_pos_last);	// trim trailing /; EX: "20130101/" -> "20130101" 
 			rv.Add(String_.new_u8(date));
 		}
-		return rv.To_str_ary();
+		return rv.ToStrAry();
 	}	private static final byte[] CONST_href_bgn = Bry_.new_a7("<a href=\""), CONST_href_end = Bry_.new_a7("\""), CONST_date_parent_dir = Bry_.new_a7("../");
 	public static String Find_last_lte(String[] ary, String comp) {	// assuming sorted ary, find last entry that is lte comp
 		int len = ary.length;

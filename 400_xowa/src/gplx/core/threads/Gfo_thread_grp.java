@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*; import gplx.core.*;
+package gplx.core.threads; import gplx.*;
 public class Gfo_thread_grp implements Gfo_invk {
 	private final Object thread_lock = new Object();
 	private final List_adp list = List_adp_.New();
@@ -24,7 +24,7 @@ public class Gfo_thread_grp implements Gfo_invk {
 	public int Active_max() {return active_max;} public Gfo_thread_grp Active_max_(int v) {active_max = v; return this;} private int active_max = 1;
 	public void Add(Gfo_thread_itm... ary) {
 		synchronized (thread_lock) {
-			list.Add_many((Object[])ary);
+			list.AddMany((Object[])ary);
 		}
 		if (autorun)
 			this.Run();

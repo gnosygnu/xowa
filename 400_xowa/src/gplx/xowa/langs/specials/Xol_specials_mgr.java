@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.specials; import gplx.*;
+import gplx.xowa.langs.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_specials_mgr implements Gfo_invk {
 	private final Ordered_hash hash_by_special = Ordered_hash_.New_bry(), hash_by_aliases = Ordered_hash_.New_bry();
@@ -22,10 +23,10 @@ public class Xol_specials_mgr implements Gfo_invk {
 	public void Clear() {hash_by_special.Clear();}
 	public int Len() {return hash_by_special.Len();}
 	public Xol_specials_itm Get_at(int i) {return (Xol_specials_itm)hash_by_special.Get_at(i);}
-	public Xol_specials_itm Get_by_alias(byte[] alias) {return (Xol_specials_itm)hash_by_aliases.Get_by(alias);}
-	public Xol_specials_itm Get_by_key(byte[] special) {return (Xol_specials_itm)hash_by_special.Get_by(special);}
+	public Xol_specials_itm Get_by_alias(byte[] alias) {return (Xol_specials_itm)hash_by_aliases.GetByOrNull(alias);}
+	public Xol_specials_itm Get_by_key(byte[] special) {return (Xol_specials_itm)hash_by_special.GetByOrNull(special);}
 	public void Add(byte[] special, byte[][] alias_ary) {
-		Xol_specials_itm itm = (Xol_specials_itm)hash_by_special.Get_by(special);
+		Xol_specials_itm itm = (Xol_specials_itm)hash_by_special.GetByOrNull(special);
 		if (itm == null) {	// NOTE: most items will be null, but MessagesCs.php has two entries for PasswordReset; DATE:2016-07-08
 			itm = new Xol_specials_itm(special, alias_ary);
 			hash_by_special.Add(special, itm);

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists.caches; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
+package gplx.core.lists.caches; import gplx.*;
+import gplx.core.lists.*;
 import gplx.core.logs.*;
 public class Mru_cache_mgr {
 	private final Mru_cache_time_mgr time_mgr;
@@ -34,10 +35,10 @@ public class Mru_cache_mgr {
 	}
 	public long Cache_max() {return cache_max;} public void Cache_max_(long v) {this.cache_max = v;}
 	public Object Get_or_null(String key) {
-		Object itm_obj = key_hash.Get_by(key);
+		Object itm_obj = key_hash.GetByOrNull(key);
 		if (itm_obj == null) return null;
 		Mru_cache_itm itm = (Mru_cache_itm)itm_obj;
-		dirty.Add_if_dupe_use_1st(key, itm);
+		dirty.AddIfDupeUse1st(key, itm);
 		itm.Dirty(time_mgr.Now());
 		return itm.Val();
 	}

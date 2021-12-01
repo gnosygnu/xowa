@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.core.primitives.*; import gplx.core.envs.*; import gplx.core.errs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.funcs.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.xtns.scribunto.*;
+import gplx.core.primitives.*; import gplx.core.envs.*;
+import gplx.xowa.langs.funcs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.xtns.scribunto.procs.*;
 public class Scrib_lib_mw implements Scrib_lib {
@@ -39,7 +40,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		this.cur_wiki = wiki; this.ctx = ctx; this.src = new_src;
 	}	private Xowe_wiki cur_wiki; private byte[] src; private Xop_ctx ctx; private List_adp src_stack = List_adp_.New();
 	public void Invoke_end() {
-		if (src_stack.Count() > 0)	// src_stack item exists; pop
+		if (src_stack.Len() > 0)	// src_stack item exists; pop
 			src = (byte[])List_adp_.Pop(src_stack);
 		else						// entry point; set to null
 			src = null;
@@ -209,7 +210,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			rv.Add(kv);
 		}
 		tmp_bfr.Mkr_rls();
-		return rslt.Init_obj((Keyval[])rv.To_ary(Keyval.class));
+		return rslt.Init_obj((Keyval[])rv.ToAry(Keyval.class));
 	}
 	public boolean FrameExists(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		String frame_id = args.Cast_str_or_null(0);
@@ -287,7 +288,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			else
 				rv.Add(arg);
 		}
-		rv.Sort_by(Scrib_lib_mw_callParserFunction_sorter.Instance);
+		rv.SortBy(Scrib_lib_mw_callParserFunction_sorter.Instance);
 		// get argx
 		byte[] fnc_name = fnc_name_ref.Val();
 		int fnc_name_len = fnc_name.length;
@@ -296,7 +297,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (rv.Len() > 0) {	// some parser_functions can pass 0 args; PAGE:en.w:Paris EX:{{#coordinates}} DATE:2016-10-12
 				Keyval arg_argx = (Keyval)rv.Get_at(0);
 				argx_ref.Val_(arg_argx.Val_to_bry());
-				rv.Del_at(0);
+				rv.DelAt(0);
 			}
 		}
 		else {
@@ -304,7 +305,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			fnc_name = Bry_.Mid(fnc_name, 0, fnc_name_colon_pos);
 			fnc_name_ref.Val_(fnc_name);
 		}
-		return (Keyval[])rv.To_ary(Keyval.class);
+		return (Keyval[])rv.ToAry(Keyval.class);
 	}
 	private static boolean Is_kv_ary(Keyval kv) {return Type_.Eq_by_obj(kv.Val(), Keyval[].class);}
 	public boolean ExpandTemplate(Scrib_proc_args args, Scrib_proc_rslt rslt) {
@@ -356,7 +357,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 	}
 	public boolean NewChildFrame(Scrib_proc_args args, Scrib_proc_rslt rslt) {
 		Ordered_hash frame_list = core.Frame_created_list();
-		int frame_list_len = frame_list.Count();
+		int frame_list_len = frame_list.Len();
 		if (frame_list_len > 100) throw Err_.new_wo_type("newChild: too many frames");
 		String frame_id = args.Pull_str(0);
 		Xot_invk frame = Scrib_frame_.Get_frame(core, frame_id);

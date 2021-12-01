@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*; import gplx.core.*;
+package gplx.core.threads; import gplx.*;
 public class Gfo_thread_pool implements Gfo_invk {
 	private Object thread_lock = new Object();
 	private List_adp queue = List_adp_.New();
@@ -35,7 +35,7 @@ public class Gfo_thread_pool implements Gfo_invk {
 		Gfo_thread_wkr wkr = null;
 		synchronized (thread_lock) {
 			if (running) return;								// already running; discard run request and rely on running-wkr to call Run when done
-			int len = queue.Count(); if (len == 0) return;		// nothing in list; occurs when last item calls Run when done
+			int len = queue.Len(); if (len == 0) return;		// nothing in list; occurs when last item calls Run when done
 			running = true;
 			wkr = (Gfo_thread_wkr)List_adp_.Pop_first(queue);
 		}			

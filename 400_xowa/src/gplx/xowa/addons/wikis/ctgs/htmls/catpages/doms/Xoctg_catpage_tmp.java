@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.ctgs.*;
 public class Xoctg_catpage_tmp {
 	private final List_adp subc_list = List_adp_.New(), page_list = List_adp_.New(), file_list = List_adp_.New();
 	public void Add(Xoctg_catpage_itm itm) {
@@ -28,7 +29,7 @@ public class Xoctg_catpage_tmp {
 		byte tid = grp.Tid();
 		List_adp list = Get_by_tid(tid);
 		if (list.Len() == 0) return;
-		grp.Itms_(wiki, (Xoctg_catpage_itm[])list.To_ary_and_clear(Xoctg_catpage_itm.class));
+		grp.Itms_(wiki, (Xoctg_catpage_itm[])list.ToAryAndClear(Xoctg_catpage_itm.class));
 	}
 	private List_adp Get_by_tid(byte tid) {
 		switch (tid) {

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.addons.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.addons.*;
+package gplx.xowa.apps.apis.xowa.addons.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.apps.urls.*;
 public class Xopg_match_mgr {
 	private String scope_raw;
@@ -34,7 +34,7 @@ public class Xopg_match_mgr {
 			if (wildcard_wiki.Has(page_ttl))
 				return true;
 		}
-		Xopg_match_wiki match_wiki = (Xopg_match_wiki)wikis.Get_by(wiki.Domain_bry());
+		Xopg_match_wiki match_wiki = (Xopg_match_wiki)wikis.GetByOrNull(wiki.Domain_bry());
 		if (match_wiki == null) return false;
 		return match_wiki.Has(page_ttl);
 	}
@@ -59,7 +59,7 @@ public class Xopg_match_mgr {
 					wiki_domain = url.Wiki_bry();
 					page_db = url.Page_bry();
 				}
-				Xopg_match_wiki match_wiki = (Xopg_match_wiki)wikis.Get_by(wiki_domain);
+				Xopg_match_wiki match_wiki = (Xopg_match_wiki)wikis.GetByOrNull(wiki_domain);
 				if (match_wiki == null) {
 					match_wiki = new Xopg_match_wiki(wiki_domain);
 					wikis.Add(wiki_domain, match_wiki);
@@ -87,7 +87,7 @@ class Xopg_match_wiki {
 			wildcard_exists = true;
 		}
 		else {
-			hash.Add_if_dupe_use_1st(page_db, page_db);
+			hash.AddIfDupeUse1st(page_db, page_db);
 		}
 	}
 }

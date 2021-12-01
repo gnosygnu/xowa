@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
 class Xoctg_catlink_loader {
@@ -44,7 +45,7 @@ class Xoctg_catlink_loader {
 		if (catlink_list.Len() == 0) return;
 
 		// sort and reduce list to 200 total
-		catlink_list.Sort_by(new Xoctg_catlink_sorter(url_is_from));
+		catlink_list.SortBy(new Xoctg_catlink_sorter(url_is_from));
 		Ordered_hash catlink_hash = Ordered_hash_.New();
 		int catlink_list_len = catlink_list.Len();
 		int max = catlink_list_len < limit ? catlink_list_len : limit;
@@ -205,7 +206,7 @@ class Xoctg_catlink_loader {
 		// add page_db
 		db_list.Add(new Db_attach_itm("page_db", page_tbl.Conn()));
 
-		Db_attach_mgr attach_mgr = new Db_attach_mgr(db_1st, (Db_attach_itm[])db_list.To_ary_and_clear(Db_attach_itm.class));
+		Db_attach_mgr attach_mgr = new Db_attach_mgr(db_1st, (Db_attach_itm[])db_list.ToAryAndClear(Db_attach_itm.class));
 		return new Xoctg_catlink_loader(wiki, catpage_mgr, page_tbl, version, link_dbs_len, attach_mgr);
 	}
 }

@@ -20,7 +20,7 @@ public class GfmlAtr implements GfmlItm {
 	public GfmlTkn	DatTkn() {return datTkn;} GfmlTkn datTkn;
 	public GfmlType Type() {return type;} GfmlType type; 
 	public boolean		KeyedSubObj() {return true;}
-	public int		SubObjs_Count()			{return subObjs.Count();}
+	public int		SubObjs_Count()			{return subObjs.Len();}
 	public GfmlObj	SubObjs_GetAt(int i)	{return (GfmlObj)subObjs.Get_at(i);} GfmlObjList subObjs = GfmlObjList.new_();	// PERF?: make capacity 3 instead of 8
 	public void		SubObjs_Add(GfmlObj o)	{subObjs.Add(o);}
 	public String	To_str() {return String_.Concat(this.Key(), "=", this.DatTkn().Val());}
@@ -41,13 +41,13 @@ public class GfmlAtr implements GfmlItm {
 		int idx = GetTknIdx(oldTkn);
 		GfmlTkn tkn = MakeTkn(oldTkn, s);
 		if (idx != -1)
-			subObjs.Del_at(idx);
+			subObjs.DelAt(idx);
 		if (idx == -1) idx = 0;
 		subObjs.Add_at(tkn, idx);
 		return tkn;
 	}
 	int GetTknIdx(GfmlTkn t) {
-		for (int i = 0; i < subObjs.Count(); i++) {
+		for (int i = 0; i < subObjs.Len(); i++) {
 			GfmlObj obj = (GfmlObj)subObjs.Get_at(i);
 			if (obj == t) return  i;
 		}

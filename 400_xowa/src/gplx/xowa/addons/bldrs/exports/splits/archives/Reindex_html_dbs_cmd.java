@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.archives; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.archives; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.metas.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.htmls.core.dbs.*;
 import gplx.xowa.addons.bldrs.exports.splits.htmls.*;
@@ -59,12 +59,12 @@ class Reindex_html_dbs_cmd {
 	}
 	private void Create_repack_tbl() {
 		core_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("repack"
-			, Dbmeta_fld_itm.new_int("sort_idx").Autonum_y_().Primary_y_()
-			, Dbmeta_fld_itm.new_int("page_id")
-			, Dbmeta_fld_itm.new_int("page_ns")
-			, Dbmeta_fld_itm.new_int("page_score")
-			, Dbmeta_fld_itm.new_int("page_len")
-			, Dbmeta_fld_itm.new_int("src_db")
+			, DbmetaFldItm.NewInt("sort_idx").AutonumSetY().PrimarySetY()
+			, DbmetaFldItm.NewInt("page_id")
+			, DbmetaFldItm.NewInt("page_ns")
+			, DbmetaFldItm.NewInt("page_score")
+			, DbmetaFldItm.NewInt("page_len")
+			, DbmetaFldItm.NewInt("src_db")
 			));
 	}
 	private void Insert_repack_rows() {

@@ -17,9 +17,9 @@ package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
 import gplx.dbs.sqls.*;
 public class Db_qry_flush implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_flush;}
-	public boolean			Exec_is_rdr() {return false;}
-	public String		Base_table() {return tableNames[0];}
-	public String		To_sql__exec(SqlQryWtr wtr) {return wtr.ToSqlStr(this, false);}
+	public boolean ReturnsRdr() {return false;}
+	public String BaseTable() {return tableNames[0];}
+	public String ToSqlExec(SqlQryWtr wtr) {return wtr.ToSqlStr(this, false);}
 	public int Exec_qry(Db_conn conn) {return conn.Exec_qry(this);}
 
 	public String[] TableNames() {return tableNames;} private String[] tableNames;

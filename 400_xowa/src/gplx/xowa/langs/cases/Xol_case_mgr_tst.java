@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.cases; import gplx.*;
 import org.junit.*; import gplx.core.strings.*;
 public class Xol_case_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xol_case_mgr_fxt fxt = new Xol_case_mgr_fxt();
@@ -116,7 +116,7 @@ class Xol_case_mgr_fxt {
 					break;
 			}
 		}
-		return raw_str_(uppers_list.To_str_ary(), lowers_list.To_str_ary());
+		return raw_str_(uppers_list.ToStrAry(), lowers_list.ToStrAry());
 	}	List_adp uppers_list = List_adp_.New(), lowers_list = List_adp_.New();
 	String raw_str_(String[] uppers, String[] lowers) {
 		sb.Add("a:2:{s:14:\"wikiUpperChars\";a:1046:{");

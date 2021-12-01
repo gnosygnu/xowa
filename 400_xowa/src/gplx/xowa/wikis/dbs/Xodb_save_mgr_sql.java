@@ -19,7 +19,7 @@ import gplx.DateAdp;
 import gplx.Datetime_now;
 import gplx.String_;
 import gplx.dbs.Db_rdr;
-import gplx.dbs.Dbmeta_fld_itm;
+import gplx.dbs.DbmetaFldItm;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_page;
 import gplx.xowa.Xowe_wiki;
@@ -42,7 +42,7 @@ public class Xodb_save_mgr_sql implements Xodb_save_mgr {
 		int ns_count = db_file.Tbl__ns().Select_ns_count(ns_id) + 1;
 		int page_id = db_file.Tbl__cfg().Select_int_or(Xowd_cfg_key_.Grp__db, Xowd_cfg_key_.Key__wiki__page__id_next, -1);
 		if (page_id == -1) {	// HACK: changed for tests; was dbs.qrys.Db_qry_sql.rdr_("SELECT (Max(page_id) + 1) AS max_page_id FROM page;")
-			Db_rdr rdr = db_mgr.Core_data_mgr().Tbl__page().Conn().Stmt_select(db_file.Tbl__page().Tbl_name(), String_.Ary(db_file.Tbl__page().Fld_page_id()), Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
+			Db_rdr rdr = db_mgr.Core_data_mgr().Tbl__page().Conn().Stmt_select(db_file.Tbl__page().Tbl_name(), String_.Ary(db_file.Tbl__page().Fld_page_id()), DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 			try {
 				int max_page_id = -1;
 				while (rdr.Move_next()) {

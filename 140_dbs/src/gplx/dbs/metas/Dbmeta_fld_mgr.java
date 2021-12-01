@@ -16,16 +16,16 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.metas; import gplx.*; import gplx.dbs.*;
 public class Dbmeta_fld_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New();
-	public int				Len()					{return hash.Count();}
+	public int				Len()					{return hash.Len();}
 	public void				Clear()					{hash.Clear();}
-	public void				Add(Dbmeta_fld_itm itm)	{hash.Add(itm.Name(), itm);}
+	public void				Add(DbmetaFldItm itm)	{hash.Add(itm.Name(), itm);}
 	public boolean				Has(String name)		{return hash.Has(name);}
-	public Dbmeta_fld_itm	Get_at(int idx)			{return (Dbmeta_fld_itm)hash.Get_at(idx);}
-	public Dbmeta_fld_itm	Get_by(String name)		{return (Dbmeta_fld_itm)hash.Get_by(name);}
-	public Dbmeta_fld_itm[]	To_ary()				{return hash.Count() == 0 ? Dbmeta_fld_itm.Ary_empty : (Dbmeta_fld_itm[])hash.To_ary(Dbmeta_fld_itm.class);}
-	public Dbmeta_fld_list	To_fld_list() {
-		Dbmeta_fld_list rv = new Dbmeta_fld_list();
-		int len = hash.Count();
+	public DbmetaFldItm Get_at(int idx)			{return (DbmetaFldItm)hash.Get_at(idx);}
+	public DbmetaFldItm Get_by(String name)		{return (DbmetaFldItm)hash.GetByOrNull(name);}
+	public DbmetaFldItm[]	To_ary()				{return hash.Len() == 0 ? DbmetaFldItm.AryEmpty : (DbmetaFldItm[])hash.To_ary(DbmetaFldItm.class);}
+	public DbmetaFldList To_fld_list() {
+		DbmetaFldList rv = new DbmetaFldList();
+		int len = hash.Len();
 		for (int i = 0; i < len; ++i)
 			rv.Add(Get_at(i));
 		return rv;

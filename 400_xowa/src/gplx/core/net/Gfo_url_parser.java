@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*; import gplx.core.*;
+package gplx.core.net; import gplx.*;
 import gplx.core.btries.*;
 import gplx.core.net.qargs.*;
 import gplx.langs.htmls.encoders.*;
@@ -122,7 +122,7 @@ public class Gfo_url_parser {
 		segs_list.Add(Make_bry(encoded, src, seg_bgn, seg_end));
 
 		// build url and return it
-		return new Gfo_url(src, protocol_tid, protocol_bry, (byte[][])segs_list.To_ary_and_clear(byte[].class), qarg_ary, anch);
+		return new Gfo_url(src, protocol_tid, protocol_bry, (byte[][])segs_list.ToAryAndClear(byte[].class), qarg_ary, anch);
 	}
 	private Gfo_qarg_itm[] Make_qarg_ary(byte[] src, int qarg_bgn, int qarg_end) {
 		// init
@@ -143,7 +143,7 @@ public class Gfo_url_parser {
 					break;
 				case Byte_ascii.Null:	// "EOS" makes qarg as long as "=" seen or at least one qarg; specifically, "A?B" shouldn't make qarg
 					if (	val_bgn != -1				// "=" seen; EX: "?A=B"
-						||	qargs_list.Count() > 0)		// at least one qarg exists; EX: "?A=B&C"
+						||	qargs_list.Len() > 0)		// at least one qarg exists; EX: "?A=B&C"
 						make_qarg = true;
 					break;
 				case Byte_ascii.Eq:
@@ -174,7 +174,7 @@ public class Gfo_url_parser {
 			if (b_is_last) break;
 			++qarg_pos;
 		}
-		return (Gfo_qarg_itm[])qargs_list.To_ary_and_clear(Gfo_qarg_itm.class);
+		return (Gfo_qarg_itm[])qargs_list.ToAryAndClear(Gfo_qarg_itm.class);
 	} 
 	private byte[] Make_bry(boolean encoded, byte[] src, int bgn, int end) {
 		return encoded ? Gfo_url_encoder_.Xourl.Decode(tmp_bfr, Bool_.N, src, bgn, end).To_bry_and_clear() : Bry_.Mid(src, bgn, end);

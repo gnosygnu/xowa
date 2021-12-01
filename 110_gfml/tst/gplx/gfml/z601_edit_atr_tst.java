@@ -115,7 +115,7 @@ class GfmlUpdateFx {
 	public GfmlUpdateFx Update_(GfmlUpdateCmd cmd) {cmds.Add(cmd); return this;} List_adp cmds = List_adp_.New();
 	public GfmlUpdateFx tst_(String expd) {
 		GfmlDoc actlDoc = GfmlDataNde.new_any_eol_(raw).Doc();
-		for (int i = 0; i < cmds.Count(); i++) {
+		for (int i = 0; i < cmds.Len(); i++) {
 			GfmlUpdateCmd cmd = (GfmlUpdateCmd)cmds.Get_at(i);
 			cmd.Exec(actlDoc);
 		}

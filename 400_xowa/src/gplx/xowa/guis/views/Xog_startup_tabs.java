@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.updates.specials.*;
 public class Xog_startup_tabs {
 	private String type, custom_list, prev_list, prev_version, curr_version;
@@ -56,7 +56,7 @@ public class Xog_startup_tabs {
 		}
 
 		// generate urls
-		startup_urls = (String[])list.To_ary_and_clear(String.class);
+		startup_urls = (String[])list.ToAryAndClear(String.class);
 
 		// do bounds check
 		if (startup_idx < 0 || startup_idx >= startup_urls.length)

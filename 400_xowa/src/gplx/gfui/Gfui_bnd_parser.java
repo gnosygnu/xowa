@@ -88,7 +88,7 @@ public class Gfui_bnd_parser {
 				++pos;
 			itm_bgn = itm_end = -1;
 		}
-		int tkns_len = tkns.Count();
+		int tkns_len = tkns.Len();
 		for (int i = 0; i < tkns_len; i++) {
 			Gfui_bnd_tkn tkn = (Gfui_bnd_tkn)tkns.Get_at(i);
 			tkn.Write(tmp_bfr, !src_is_gfui);
@@ -267,7 +267,7 @@ public class Gfui_bnd_parser {
 		byte[] norm_bry = Bry_.new_u8(norm);
 		Gfui_bnd_tkn itm = new Gfui_bnd_tkn(tid, Gfui_bnd_tkn.Keycode_null, gfui_bry, norm_bry);
 		gfui_regy.Add(gfui_bry, itm);
-		norm_regy.Add_if_dupe_use_1st(norm_bry, itm);
+		norm_regy.AddIfDupeUse1st(norm_bry, itm);
 	}
 	private static final int Mod_val_null = 0;
 	public static Gfui_bnd_parser new_en_() {return new Gfui_bnd_parser().Init_en();} Gfui_bnd_parser() {}

@@ -13,22 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.hzips.*;	
-import gplx.xowa.wikis.pages.*;
+import gplx.xowa.htmls.*;
 import gplx.xowa.parsers.logs.stats.*;
 public class Xomp_stat_tbl implements Rls_able {
-	private static final String tbl_name = "xomp_stats"; private static final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final String tbl_name = "xomp_stats"; private static final DbmetaFldList flds = new DbmetaFldList();
 	private static final String
-	  fld_page_id = flds.Add_int_pkey("page_id"), fld_wkr_uid = flds.Add_int("wkr_uid")
-	, fld_wtxt_len = flds.Add_int("wtxt_len"), fld_html_len = flds.Add_int("html_len"), fld_zip_len = flds.Add_int("zip_len")
-	, fld_page_time = flds.Add_long("page_time"), fld_tidy_time = flds.Add_long("tidy_time"), fld_fulltext_time = flds.Add_long("fulltext_time")
-	, fld_scrib_time = flds.Add_long("scrib_time"), fld_scrib_count = flds.Add_int("scrib_count"), fld_scrib_depth = flds.Add_int("scrib_depth")
-	, fld_image_count = flds.Add_int("image_count"), fld_audio_count = flds.Add_int("audio_count"), fld_video_count = flds.Add_int("video_count"), fld_media_count = flds.Add_int("media_count")
-	, fld_lnki_count = flds.Add_int("lnki_count"), fld_lnke_count = flds.Add_int("lnke_count"), fld_hdr_count = flds.Add_int("hdr_count")
-	, fld_math_count = flds.Add_int("math_count"), fld_imap_count = flds.Add_int("imap_count"), fld_hiero_count = flds.Add_int("hiero_count")
-	, fld_gallery_count = flds.Add_int("gallery_count"), fld_gallery_packed_count = flds.Add_int("gallery_packed_count")
+	  fld_page_id = flds.AddIntPkey("page_id"), fld_wkr_uid = flds.AddInt("wkr_uid")
+	, fld_wtxt_len = flds.AddInt("wtxt_len"), fld_html_len = flds.AddInt("html_len"), fld_zip_len = flds.AddInt("zip_len")
+	, fld_page_time = flds.AddLong("page_time"), fld_tidy_time = flds.AddLong("tidy_time"), fld_fulltext_time = flds.AddLong("fulltext_time")
+	, fld_scrib_time = flds.AddLong("scrib_time"), fld_scrib_count = flds.AddInt("scrib_count"), fld_scrib_depth = flds.AddInt("scrib_depth")
+	, fld_image_count = flds.AddInt("image_count"), fld_audio_count = flds.AddInt("audio_count"), fld_video_count = flds.AddInt("video_count"), fld_media_count = flds.AddInt("media_count")
+	, fld_lnki_count = flds.AddInt("lnki_count"), fld_lnke_count = flds.AddInt("lnke_count"), fld_hdr_count = flds.AddInt("hdr_count")
+	, fld_math_count = flds.AddInt("math_count"), fld_imap_count = flds.AddInt("imap_count"), fld_hiero_count = flds.AddInt("hiero_count")
+	, fld_gallery_count = flds.AddInt("gallery_count"), fld_gallery_packed_count = flds.AddInt("gallery_packed_count")
 	;		
 	private final Db_conn conn; private Db_stmt stmt_insert;
 	public Xomp_stat_tbl(Db_conn conn) {

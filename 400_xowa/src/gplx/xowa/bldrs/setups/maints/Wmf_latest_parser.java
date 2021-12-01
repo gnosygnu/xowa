@@ -13,14 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
-import gplx.core.btries.*; import gplx.core.ios.*;
+package gplx.xowa.bldrs.setups.maints; import gplx.*;
+import gplx.core.btries.*;
 public class Wmf_latest_parser {
 	private Ordered_hash hash = Ordered_hash_.New_bry();
 	private final Btrie_rv trv = new Btrie_rv();
-	public int Count() {return hash.Count();}
+	public int Count() {return hash.Len();}
 	public Wmf_latest_itm Get_at(int i)		{return (Wmf_latest_itm)hash.Get_at(i);}
-	public Wmf_latest_itm Get_by(byte[] k)	{return (Wmf_latest_itm)hash.Get_by(k);}
+	public Wmf_latest_itm Get_by(byte[] k)	{return (Wmf_latest_itm)hash.GetByOrNull(k);}
 	public Wmf_latest_itm[] To_ary()		{return (Wmf_latest_itm[])hash.To_ary(Wmf_latest_itm.class);}
 	public void Parse(byte[] src) {
 		hash.Clear();

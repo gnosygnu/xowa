@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.xtns.scribunto.engines.process.*; import gplx.xowa.parsers.tmpls.*;
 public class Scrib_core_fxt {
 	public Scrib_core_fxt() {}
@@ -137,8 +137,8 @@ public class Scrib_core_fxt {
 		return this;
 	}	private static final byte[] Frame_ttl_test = Bry_.new_a7("test");
 	private void Test_server_logs() {
-		if (expd_server_rcvd_list.Count() > 0) {
-			Tfds.Eq_ary_str(expd_server_rcvd_list.To_str_ary(), server.Log_rcvd().To_str_ary());
+		if (expd_server_rcvd_list.Len() > 0) {
+			Tfds.Eq_ary_str(expd_server_rcvd_list.ToStrAry(), server.Log_rcvd().ToStrAry());
 			expd_server_rcvd_list.Clear();
 			server.Log_rcvd().Clear();
 		}

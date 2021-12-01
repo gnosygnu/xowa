@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki; import gplx.*;
 import gplx.langs.regxs.*;
 import gplx.core.strings.*; import gplx.core.primitives.*; import gplx.core.bits.*;
 public class XophpRegex_ {
 	// REF.PHP: https://www.php.net/manual/en/function.preg-quote.php
 	// The special regular expression characters are:
-	private static final Hash_adp preg_quote_hash = Hash_adp_.New().Add_many_as_key_and_val
+	private static final Hash_adp preg_quote_hash = Hash_adp_.New().AddManyAsKeyAndVal
 		('.', '\\', '+', '*', '?', '[', '^', ']', '$', '(', ')', '{', '}', '=', '!', '<', '>', '|', ':', '-', '#');
 	public static String preg_quote(String str, String delimiter) {// NOTE: "String delimiter" not used b/c Java / XO does not allow symbolic quotes; EX: "/abc/i"
 		String_bldr sb = String_bldr_.new_();

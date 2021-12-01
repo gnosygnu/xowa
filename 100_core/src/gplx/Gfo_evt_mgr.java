@@ -14,7 +14,6 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.lists.*;
 public class Gfo_evt_mgr {
 	private final Gfo_evt_mgr_owner sender; private Ordered_hash subsRegy, pubsRegy;
 	public Gfo_evt_mgr(Gfo_evt_mgr_owner sender) {this.sender = sender;}
@@ -29,7 +28,7 @@ public class Gfo_evt_mgr {
 		pub.Evt_mgr().lnks.Add(this);
 	}	List_adp lnks;
 	void AddInList(Ordered_hash regy, String key, GfoEvLnk lnk) {
-		GfoEvLnkList list = (GfoEvLnkList)regy.Get_by(key);
+		GfoEvLnkList list = (GfoEvLnkList)regy.GetByOrNull(key);
 		if (list == null) {
 			list = new GfoEvLnkList(key);
 			regy.Add(key, list);
@@ -42,7 +41,7 @@ public class Gfo_evt_mgr {
 	}
 	@gplx.Internal protected void Pub(GfsCtx ctx, String evt, GfoMsg m) {
 		ctx.MsgSrc_(sender);
-		GfoEvLnkList subs = subsRegy == null ? null : (GfoEvLnkList)subsRegy.Get_by(evt);
+		GfoEvLnkList subs = subsRegy == null ? null : (GfoEvLnkList)subsRegy.GetByOrNull(evt);
 		if (subs != null) {
 			for (int i = 0; i < subs.Count(); i++) {
 				GfoEvLnk lnk = (GfoEvLnk)subs.Get_at(i);
@@ -50,7 +49,7 @@ public class Gfo_evt_mgr {
 			}
 		}
 		if (lnks != null) {
-			for (int i = 0; i < lnks.Count(); i++) {
+			for (int i = 0; i < lnks.Len(); i++) {
 				Gfo_evt_mgr lnk = (Gfo_evt_mgr)lnks.Get_at(i);
 				lnk.Pub(ctx, evt, m);
 			}
@@ -67,14 +66,14 @@ public class Gfo_evt_mgr {
 	@gplx.Internal protected void RlsRegyObj(Ordered_hash regy, Gfo_evt_mgr_owner eobj, boolean pub) {
 		if (regy == null) return;
 		List_adp delList = List_adp_.New();
-		for (int i = 0; i < regy.Count(); i++) {
+		for (int i = 0; i < regy.Len(); i++) {
 			GfoEvLnkList pubsList = (GfoEvLnkList)regy.Get_at(i);
 			delList.Clear();
 			for (int j = 0; j < pubsList.Count(); j++) {
 				GfoEvLnk lnk = (GfoEvLnk)pubsList.Get_at(j);
 				if (lnk.End(!pub) == eobj) delList.Add(lnk);
 			}
-			for (int j = 0; j < delList.Count(); j++) {
+			for (int j = 0; j < delList.Len(); j++) {
 				GfoEvLnk del = (GfoEvLnk)delList.Get_at(j);
 				del.End(pub).Evt_mgr().RlsLnk(!pub, pubsList.Key(), del.End(!pub));
 				pubsList.Del(del);
@@ -83,13 +82,13 @@ public class Gfo_evt_mgr {
 	}
 	@gplx.Internal protected void RlsLnk(boolean pubEnd, String key, Gfo_evt_mgr_owner endObj) {
 		Ordered_hash regy = pubEnd ? pubsRegy : subsRegy;
-		GfoEvLnkList list = (GfoEvLnkList)regy.Get_by(key);
+		GfoEvLnkList list = (GfoEvLnkList)regy.GetByOrNull(key);
 		List_adp delList = List_adp_.New();
 		for (int i = 0; i < list.Count(); i++) {
 			GfoEvLnk lnk = (GfoEvLnk)list.Get_at(i);
 			if (lnk.End(pubEnd) == endObj) delList.Add(lnk);
 		}
-		for (int i = 0; i < delList.Count(); i++) {
+		for (int i = 0; i < delList.Len(); i++) {
 			GfoEvLnk lnk = (GfoEvLnk)delList.Get_at(i);
 			list.Del(lnk);
 		}
@@ -98,7 +97,7 @@ public class Gfo_evt_mgr {
 }
 class GfoEvLnkList {
 	public String Key() {return key;} private String key;
-	public int Count() {return list.Count();}
+	public int Count() {return list.Len();}
 	public void Add(GfoEvLnk lnk) {list.Add(lnk);}
 	public void Del(GfoEvLnk lnk) {list.Del(lnk);}
 	public GfoEvLnk Get_at(int i) {return (GfoEvLnk)list.Get_at(i);}

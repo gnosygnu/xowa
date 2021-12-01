@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
+package gplx.xowa.langs.vnts.converts; import gplx.*;
 import gplx.xowa.apps.fsys.*;
 public class Xol_convert_regy implements Gfo_invk {	// registry of convert_grp; EX: zh-hans;zh-hant;
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
-	public Xol_convert_grp Get_or_null(byte[] key) {return (Xol_convert_grp)hash.Get_by(key);}
+	public Xol_convert_grp Get_or_null(byte[] key) {return (Xol_convert_grp)hash.GetByOrNull(key);}
 	public Xol_convert_grp Get_or_make(byte[] key) {
-		Xol_convert_grp rv = (Xol_convert_grp)hash.Get_by(key);
+		Xol_convert_grp rv = (Xol_convert_grp)hash.GetByOrNull(key);
 		if (rv == null) {
 			rv = new Xol_convert_grp(key);
 			hash.Add(key, rv);

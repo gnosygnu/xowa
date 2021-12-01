@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.imports.json; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.imports.*;
+package gplx.xowa.xtns.wbases.imports.json; import gplx.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.criterias.*; import gplx.core.envs.*;
 class Io_stream_rdr_mgr {
 	public static Io_stream_rdr Get_rdr_or_null(Io_url src_fil, Io_url src_dir, Io_stream_unzip_mgr unzip_mgr, String... filter_ary) {			
@@ -44,7 +44,7 @@ class Io_stream_rdr_mgr {
 		// get files and check each file for match
 		IoItmFil rv = null;
 		IoItmHash itm_hash = Io_mgr.Instance.QueryDir_args(dir).ExecAsItmHash();
-		int len = itm_hash.Count();
+		int len = itm_hash.Len();
 		for (int i = 0; i < len; ++i) {
 			IoItm_base itm = itm_hash.Get_at(i);
 			for (int j = 0; j < match_ary_len; ++j) {

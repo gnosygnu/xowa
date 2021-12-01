@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
+package gplx.xowa.htmls.core.dbs; import gplx.*;
+import gplx.xowa.htmls.*;
 import gplx.dbs.*; import gplx.core.brys.*;
 public class Xowd_html_tbl implements Db_tbl {
 	private final String fld_page_id, fld_head_flag, fld_body_flag, fld_display_ttl, fld_content_sub, fld_sidebar_div, fld_body;
@@ -21,18 +22,18 @@ public class Xowd_html_tbl implements Db_tbl {
 	private final Int_flag_bldr body_flag_bldr = Make_body_flag_bldr();
 	public Xowd_html_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld_page_id			= flds.Add_int_pkey("page_id");
-		this.fld_head_flag			= flds.Add_int("head_flag");
-		this.fld_body_flag			= flds.Add_int("body_flag");
-		this.fld_display_ttl		= flds.Add_str("display_ttl", 1024);
-		this.fld_content_sub		= flds.Add_str("content_sub", 1024);
-		this.fld_sidebar_div		= flds.Add_str("sidebar_div", 2048);
-		this.fld_body				= flds.Add_bry("body");
+		this.fld_page_id			= flds.AddIntPkey("page_id");
+		this.fld_head_flag			= flds.AddInt("head_flag");
+		this.fld_body_flag			= flds.AddInt("body_flag");
+		this.fld_display_ttl		= flds.AddStr("display_ttl", 1024);
+		this.fld_content_sub		= flds.AddStr("content_sub", 1024);
+		this.fld_sidebar_div		= flds.AddStr("sidebar_div", 2048);
+		this.fld_body				= flds.AddBry("body");
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public String Tbl_name() {return tbl_name;} private final String tbl_name = "html";
-	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public DbmetaFldList Flds() {return flds;} private final DbmetaFldList flds = new DbmetaFldList();
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 
 	public void Insert_bgn() {conn.Txn_bgn("html__insert"); stmt_insert = conn.Stmt_insert(tbl_name, flds);}

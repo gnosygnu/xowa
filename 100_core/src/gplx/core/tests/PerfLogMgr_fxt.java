@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.tests; import gplx.*; import gplx.core.*;
+package gplx.core.tests; import gplx.*;
 import gplx.core.strings.*; import gplx.core.envs.*;
 public class PerfLogMgr_fxt {
 	public void Init(Io_url url, String text) {
 		this.url = url;
-		entries.Resize_bounds(1000);
+		entries.ResizeBounds(1000);
 		entries.Add(new PerfLogItm(0, text + "|" + Datetime_now.Get().XtoStr_gplx()));
 		tmr.Bgn();
 	}

@@ -13,15 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.diffs.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.diffs.*;
+package gplx.dbs.diffs.itms; import gplx.*; import gplx.dbs.*;
 public class Gdif_txn_tbl implements Rls_able {
 	private String tbl_name = "gdif_txn";
 	private String fld_job_id, fld_txn_id, fld_cmd_id, fld_owner_txn;
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final Db_conn conn; private Db_stmt stmt_insert;
 	public Gdif_txn_tbl(Db_conn conn) {
 		this.conn = conn;
-		fld_job_id = flds.Add_int("job_id"); fld_txn_id = flds.Add_int("txn_id"); fld_cmd_id = flds.Add_int("cmd_id"); fld_owner_txn = flds.Add_int("owner_txn");
+		fld_job_id = flds.AddInt("job_id"); fld_txn_id = flds.AddInt("txn_id"); fld_cmd_id = flds.AddInt("cmd_id"); fld_owner_txn = flds.AddInt("owner_txn");
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_job_id, fld_txn_id)));}

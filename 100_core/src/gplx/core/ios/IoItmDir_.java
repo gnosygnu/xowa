@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 public class IoItmDir_ {
 	public static IoItmDir as_(Object obj) {return obj instanceof IoItmDir ? (IoItmDir)obj : null;}
 	public static final IoItmDir Null = null_();
@@ -36,12 +36,12 @@ public class IoItmDir_ {
 	}
 	public static void Make(IoItmDir dir) {
 		Io_mgr.Instance.CreateDir(dir.Url());
-		int len = dir.SubDirs().Count();
+		int len = dir.SubDirs().Len();
 		for (int i = 0; i < len; ++i) {
 			IoItmDir sub_dir = (IoItmDir)dir.SubDirs().Get_at(i);
 			Make(sub_dir);
 		}
-		len = dir.SubFils().Count();
+		len = dir.SubFils().Len();
 		for (int i = 0; i < len; ++i) {
 			IoItmFil sub_fil = (IoItmFil)dir.SubFils().Get_at(i);
 			String text = String_.Repeat("a", (int)sub_fil.Size());

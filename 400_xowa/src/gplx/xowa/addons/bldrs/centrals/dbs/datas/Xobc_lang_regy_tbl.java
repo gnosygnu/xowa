@@ -13,18 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs.datas; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*; import gplx.xowa.addons.bldrs.centrals.dbs.*;
+package gplx.xowa.addons.bldrs.centrals.dbs.datas; import gplx.*;
 import gplx.dbs.*;
 public class Xobc_lang_regy_tbl implements Db_tbl {		
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__lang_id, fld__lang_key, fld__lang_name;
 	private final Db_conn conn;
 	public Xobc_lang_regy_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "lang_regy";
-		this.fld__lang_id			= flds.Add_int_pkey("lang_id");
-		this.fld__lang_key			= flds.Add_str("lang_key", 255);
-		this.fld__lang_name			= flds.Add_str("lang_name", 255);
+		this.fld__lang_id			= flds.AddIntPkey("lang_id");
+		this.fld__lang_key			= flds.AddStr("lang_key", 255);
+		this.fld__lang_name			= flds.AddStr("lang_name", 255);
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
@@ -37,7 +37,7 @@ public class Xobc_lang_regy_tbl implements Db_tbl {
 				list.Add(new Xobc_lang_regy_itm(rdr.Read_int(fld__lang_id), rdr.Read_str(fld__lang_key), rdr.Read_str(fld__lang_name)));
 		}
 		finally {rdr.Rls();}
-		return (Xobc_lang_regy_itm[])list.To_ary_and_clear(Xobc_lang_regy_itm.class);
+		return (Xobc_lang_regy_itm[])list.ToAryAndClear(Xobc_lang_regy_itm.class);
 	}
 	public void Rls() {}
 }

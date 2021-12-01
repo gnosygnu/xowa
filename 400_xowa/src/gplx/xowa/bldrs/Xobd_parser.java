@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.bldrs; import gplx.*;
 import gplx.core.btries.*; import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.wikis.data.tbls.*;
 public class Xobd_parser implements Xob_page_wkr {
@@ -25,11 +25,11 @@ public class Xobd_parser implements Xob_page_wkr {
 	public Xobd_parser(Xob_bldr bldr) {this.bldr = bldr;}
 	public void Wkr_add(Xobd_parser_wkr wkr) {wkr_list.Add(wkr);}
 	public void Page_wkr__bgn() {
-		int wkr_list_len = wkr_list.Count();
+		int wkr_list_len = wkr_list.Len();
 		for (int i = 0; i < wkr_list_len; i++) {
 			Xobd_parser_wkr wkr = (Xobd_parser_wkr)wkr_list.Get_at(i);
 			wkr.Wkr_bgn(bldr);
-			int hooks_len = wkr.Wkr_hooks().Count();
+			int hooks_len = wkr.Wkr_hooks().Len();
 			for (int j = 0; j < hooks_len; j++) {
 				byte[] bry = (byte[])wkr.Wkr_hooks().Get_at(j);
 				trie.Add_obj(bry, wkr);
@@ -52,7 +52,7 @@ public class Xobd_parser implements Xob_page_wkr {
 	}
 	public void Page_wkr__run_cleanup() {}
 	public void Page_wkr__end() {
-		int wkr_list_len = wkr_list.Count();
+		int wkr_list_len = wkr_list.Len();
 		for (int i = 0; i < wkr_list_len; i++) {
 			Xobd_parser_wkr wkr = (Xobd_parser_wkr)wkr_list.Get_at(i);
 			wkr.Wkr_end();

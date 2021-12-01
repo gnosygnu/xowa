@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.tests; import gplx.*; import gplx.core.*;
+package gplx.core.tests; import gplx.*;
 import gplx.core.strings.*;
 public class Tst_mgr {
 	public Tst_mgr ThrowError_n_() {throwError = false; return this;} private boolean throwError = true;
@@ -89,7 +89,7 @@ public class Tst_mgr {
 	String Build() {
 		String_bldr sb = String_bldr_.new_();
 		int comp_max = 0, path_max =0, name_max = 0;
-		int len = results.Count();
+		int len = results.Len();
 		for (int i = 0; i < len; i++) {
 			Tst_itm itm = (Tst_itm)results.Get_at(i);
 			comp_max = Max(comp_max, itm.Comp());

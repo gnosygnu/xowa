@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfobjs; import gplx.*; import gplx.core.*;
+package gplx.core.gfobjs; import gplx.*;
 public class Gfobj_nde implements Gfobj_grp {
 	private Ordered_hash subs;
 	public byte				Grp_tid()									{return Gfobj_grp_.Grp_tid__nde;}
 	public int				Len()										{return subs == null ? 0 : subs.Len();}
 	public Gfobj_fld		Get_at(int i)								{return subs == null ? null : (Gfobj_fld)subs.Get_at(i);}
-	public Gfobj_fld		Get_by(String k)							{return subs == null ? null : (Gfobj_fld)subs.Get_by(k);}
+	public Gfobj_fld		Get_by(String k)							{return subs == null ? null : (Gfobj_fld)subs.GetByOrNull(k);}
 	public Gfobj_ary		Get_ary(String k)							{return ((Gfobj_fld_ary)Get_by(k)).As_ary();}
 	public Gfobj_nde		Get_nde(int i)								{return ((Gfobj_fld_nde)Get_at(i)).As_nde();}
 	public Gfobj_nde		Get_nde(String k)							{return ((Gfobj_fld_nde)Get_by(k)).As_nde();}

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.specials; import gplx.*;
 import gplx.core.primitives.*; import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
 public class Xow_domain_sorter__manual implements gplx.core.lists.ComparerAble {
@@ -55,7 +55,7 @@ class Xow_domain_sorter__manual_tid implements gplx.core.lists.ComparerAble {
 		int len = id_ary.length;
 		for (int i = 0; i < len; ++i) {
 			int id_itm = id_ary[i];
-			sort_hash.Add_if_dupe_use_nth(Int_obj_ref.New(id_itm), Int_obj_ref.New(i));
+			sort_hash.AddIfDupeUseNth(Int_obj_ref.New(id_itm), Int_obj_ref.New(i));
 		}
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -69,7 +69,7 @@ class Xow_domain_sorter__manual_tid implements gplx.core.lists.ComparerAble {
 		else										return Bry_.Compare(Xow_domain_tid_.Get_type_as_bry(lhs.Domain_type_id()), Xow_domain_tid_.Get_type_as_bry(rhs.Domain_type_id()));
 	}
 	private int Get_sort_idx_or_neg1(int tid) {
-		Object o = sort_hash.Get_by(sort_key.Val_(tid));
+		Object o = sort_hash.GetByOrNull(sort_key.Val_(tid));
 		return o == null ? -1 : ((Int_obj_ref)o).Val();
 	}
 	public static Xow_domain_sorter__manual_tid new_(byte[]... id_brys) {
@@ -89,7 +89,7 @@ class Xow_domain_sorter__manual_lang implements gplx.core.lists.ComparerAble {
 		int len = id_ary.length;
 		for (int i = 0; i < len; ++i) {
 			int id_int = id_ary[i];
-			sort_hash.Add_if_dupe_use_nth(Int_obj_ref.New(id_int), Int_obj_ref.New(i));
+			sort_hash.AddIfDupeUseNth(Int_obj_ref.New(id_int), Int_obj_ref.New(i));
 		}
 	}
 	public int compare(Object lhsObj, Object rhsObj) {
@@ -103,7 +103,7 @@ class Xow_domain_sorter__manual_lang implements gplx.core.lists.ComparerAble {
 		else										return Bry_.Compare(lhs.Lang_actl_key(), rhs.Lang_actl_key());
 	}
 	private int Get_sort_idx_or_neg1(int tid) {
-		Object o = sort_hash.Get_by(sort_key.Val_(tid));
+		Object o = sort_hash.GetByOrNull(sort_key.Val_(tid));
 		return o == null ? -1 : ((Int_obj_ref)o).Val();
 	}
 	public static Xow_domain_sorter__manual_lang new_(byte[]... id_brys) {

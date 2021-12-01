@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.interwiki; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.interwiki; import gplx.*;
+import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.site.*;
 public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 	/**
@@ -60,7 +61,7 @@ public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 			return null;
 		}
 
-		return (XomwInterwiki)this.interwikiMap.Get_by(prefix);
+		return (XomwInterwiki)this.interwikiMap.GetByOrNull(prefix);
 	}
 
 	/**
@@ -82,7 +83,7 @@ public class XomwInterwikiLookupAdapter implements XomwInterwikiLookup {
 				res.Add(interwiki.interwikiId);
 			}
 		}
-		return (byte[][])res.To_ary_and_clear(byte[].class);
+		return (byte[][])res.ToAryAndClear(byte[].class);
 	}
 
 	//	/**

@@ -36,12 +36,12 @@ public class Noop_engine implements Db_engine {
 	public String				Txn_end()				{return "";}
 	public void					Txn_cxl()				{}
 	public void					Txn_sav()				{}
-	public Object				Exec_as_obj(Db_qry cmd) {return cmd.Exec_is_rdr() ? (Object)DataRdr_.Null : -1;}
+	public Object				Exec_as_obj(Db_qry cmd) {return cmd.ReturnsRdr() ? (Object)DataRdr_.Null : -1;}
 	public void					Meta_tbl_create(Dbmeta_tbl_itm meta) {}
 	public void					Meta_tbl_delete(String tbl)						{}
 	public void					Meta_idx_create(Gfo_usr_dlg usr_dlg, Dbmeta_idx_itm... ary) {}
 	public void					Meta_idx_delete(String idx) {}
-	public void					Meta_fld_append(String tbl, Dbmeta_fld_itm fld)	{}
+	public void					Meta_fld_append(String tbl, DbmetaFldItm fld)	{}
 	public void					Env_db_attach(String alias, Db_conn conn)		{}
 	public void					Env_db_attach(String alias, Io_url db_url)		{}
 	public void					Env_db_detach(String alias)						{}

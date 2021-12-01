@@ -24,7 +24,7 @@ public class UsrMsg {
 		return this;
 	}
 	public UsrMsg Add_if_dupe_use_nth(String k, Object v) {
-		args.Add_if_dupe_use_nth(k, Keyval_.new_(k, v));
+		args.AddIfDupeUseNth(k, Keyval_.new_(k, v));
 		return this;
 	}
 	public String XtoStrSingleLine()	{return To_str(" ");}
@@ -32,7 +32,7 @@ public class UsrMsg {
 	String To_str(String spr) {
 		if (hdr == null) {
 			GfoMsg m = GfoMsg_.new_cast_(cmd);
-			for (int i = 0; i < args.Count(); i++) {
+			for (int i = 0; i < args.Len(); i++) {
 				Keyval kv = (Keyval)args.Get_at(i);
 				m.Add(kv.Key(), kv.Val());
 			}
@@ -40,7 +40,7 @@ public class UsrMsg {
 		}
 		String_bldr sb = String_bldr_.new_();
 		sb.Add(hdr).Add(spr);
-		for (int i = 0; i < args.Count(); i++) {
+		for (int i = 0; i < args.Len(); i++) {
 			Keyval kv = (Keyval)args.Get_at(i);
 			sb.Add_spr_unless_first("", " ", i);
 			sb.Add_fmt("{0}={1}", kv.Key(), kv.Val(), spr);

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*;
+import org.junit.*;
+import gplx.xowa.langs.kwds.*;
 public class Gallery_parser_tst {
 	@Before public void init() {fxt.Init();} private Gallery_parser_fxt fxt = new Gallery_parser_fxt();
 	@Test  public void All()				{fxt.Test_parse("File:A.png|a|alt=b|link=c"		, fxt.Expd("File:A.png", "a" , "b" , "c"));}
@@ -91,7 +92,7 @@ class Gallery_parser_fxt {
 		Tfds.Eq_ary(String_.Ary_flatten(expd), String_.Ary_flatten(Xto_str_ary(src, actl)));
 	}
 	private String[][] Xto_str_ary(byte[] src, List_adp list) {
-		int len = list.Count();
+		int len = list.Len();
 		String[][] rv = new String[len][];
 		for (int i = 0; i < len; i++) {
 			Gallery_itm itm = (Gallery_itm)list.Get_at(i);

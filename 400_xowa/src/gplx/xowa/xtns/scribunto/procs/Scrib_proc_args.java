@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.procs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.procs; import gplx.*; import gplx.xowa.*;
 import gplx.langs.htmls.encoders.*;
 public class Scrib_proc_args {		
 	private Keyval[] ary; private int ary_len;
@@ -113,7 +113,7 @@ public class Scrib_proc_args {
 		}
 		return (list == null)
 			? rv
-			: (Keyval[])list.To_ary(Keyval.class);
+			: (Keyval[])list.ToAry(Keyval.class);
 	}
 	public String	Cast_str_or(int i, String or)	{Object rv = Get_or_null(i); return rv == null ? or				: String_.cast		(rv);}
 	public String	Cast_str_or_null(int i)			{Object rv = Get_or_null(i); return rv == null ? null			: String_.cast		(rv);}

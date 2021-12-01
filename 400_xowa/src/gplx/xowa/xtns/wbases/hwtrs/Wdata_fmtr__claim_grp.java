@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
+import gplx.xowa.xtns.wbases.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 import gplx.xowa.apps.apis.xowa.html.*;
 class Wdata_fmtr__claim_grp implements gplx.core.brys.Bfr_arg {
 	private Wdata_fmtr__claim_tbl fmtr_tbl = new Wdata_fmtr__claim_tbl(); private boolean is_empty;
@@ -32,8 +33,8 @@ class Wdata_fmtr__claim_grp implements gplx.core.brys.Bfr_arg {
 		fmtr_tbl.Init_by_lang(lang, msgs);
 	}
 	public void Init_by_wdoc(byte[] ttl, Ordered_hash list) {
-		int list_count = list.Count();
-		this.is_empty = list.Count() == 0; if (is_empty) return;
+		int list_count = list.Len();
+		this.is_empty = list.Len() == 0; if (is_empty) return;
 		toc_data.Make(list_count);
 		fmtr_tbl.Init_by_wdoc(ttl, list);
 	}
@@ -64,7 +65,7 @@ class Wdata_fmtr__claim_tbl implements gplx.core.brys.Bfr_arg {
 		this.ttl = ttl;
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wbase_claim_grp grp = (Wbase_claim_grp)list.Get_at(i);
 			if (grp.Len() == 0) continue;	// NOTE: group will be empty when claims are empty; EX: "claims": []; PAGE:wd.p:585; DATE:2014-10-03

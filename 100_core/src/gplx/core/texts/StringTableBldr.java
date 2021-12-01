@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.texts; import gplx.*; import gplx.core.*;
+package gplx.core.texts; import gplx.*;
 import gplx.core.strings.*;
 public class StringTableBldr {
 	public void ClearRows() {rows.Clear();}
@@ -28,7 +28,7 @@ public class StringTableBldr {
 		return this;
 	}
 	public StringTableCol FetchAtOrNew(int i) {
-		if (i < cols.Count()) return StringTableCol.as_(cols.Get_at(i));
+		if (i < cols.Len()) return StringTableCol.as_(cols.Get_at(i));
 		StringTableCol col = StringTableCol.new_();
 		col.Halign_(defaultHalign);
 		cols.Add(i, col);
@@ -36,11 +36,11 @@ public class StringTableBldr {
 	}
 	public String To_str() {
 		sb.Clear();
-		for (int rowI = 0; rowI < rows.Count(); rowI++) {
+		for (int rowI = 0; rowI < rows.Len(); rowI++) {
 			String[] row = (String[])rows.Get_at(rowI);
 			for (int colI = 0; colI < row.length; colI++) {
 				if (colI != 0) sb.Add(" ");
-				StringTableCol col = StringTableCol.as_(cols.Get_at(colI)); if (col == null) throw Err_.new_missing_idx(colI, cols.Count());
+				StringTableCol col = StringTableCol.as_(cols.Get_at(colI)); if (col == null) throw Err_.new_missing_idx(colI, cols.Len());
 				sb.Add(col.PadCell(row[colI]));
 			}
 			sb.Add(String_.CrLf);

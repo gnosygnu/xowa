@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*;
 import gplx.core.stores.*; import gplx.core.envs.*; import gplx.core.ios.streams.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.engines.sqlite.*;
+import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.fsdb.*; import gplx.core.ios.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.bins.*; import gplx.xowa.files.fsdb.*;	
-import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
+import gplx.fsdb.*; import gplx.core.ios.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.bins.*;
+import gplx.fsdb.meta.*;
 import gplx.xowa.addons.bldrs.files.dbs.*; import gplx.xowa.addons.bldrs.files.utls.*;
 public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_cmd {
 	private Db_conn bldr_conn; private Db_cfg_tbl bldr_cfg_tbl;
@@ -108,7 +109,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 				case Select_rv_process:		break;
 			}
 			if (!loop) break; // no more ttls found
-			int len = list.Count();
+			int len = list.Len();
 			usr_dlg.Prog_many("", "", "fetched pages: ~{0}", len);
 			for (int i = 0; i < len; ++i) {
 				Xodb_tbl_oimg_xfer_itm fsdb = (Xodb_tbl_oimg_xfer_itm)list.Get_at(i);

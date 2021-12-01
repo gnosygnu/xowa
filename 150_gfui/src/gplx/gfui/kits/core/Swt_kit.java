@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.core; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
+package gplx.gfui.kits.core; import gplx.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.gfui.imgs.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*; import gplx.gfui.controls.customs.*; import gplx.gfui.controls.windows.*;
+import gplx.gfui.imgs.*;
+import gplx.gfui.controls.standards.*;
 import gplx.gfui.kits.swts.*;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Control;
@@ -23,38 +24,19 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.ToolItem;
-import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.dnd.Clipboard;
-import org.eclipse.swt.dnd.TextTransfer;
-import org.eclipse.swt.dnd.Transfer;
-import org.eclipse.swt.events.DisposeEvent;
-import org.eclipse.swt.events.DisposeListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
-import org.eclipse.swt.widgets.Button;
-
 import gplx.core.threads.*;
 import gplx.gfui.controls.customs.GfuiStatusBox;
 import gplx.gfui.controls.customs.GfuiStatusBox_;
 import gplx.gfui.controls.elems.GfuiElem;
-import gplx.gfui.controls.gxws.GxwCore_base;
 import gplx.gfui.controls.gxws.GxwTextFld;
-import gplx.gfui.controls.standards.*;
 import gplx.gfui.controls.windows.GfoConsoleWin;
 import gplx.gfui.controls.windows.GfuiWin;
 import gplx.gfui.controls.windows.GfuiWin_;
 import gplx.gfui.draws.*;
-import gplx.gfui.imgs.*;
 public class Swt_kit implements Gfui_kit {
 	private final Keyval_hash ctor_args = new Keyval_hash(); private final Keyval_hash ctor_args_null = new Keyval_hash();
 	private final Hash_adp kit_args = Hash_adp_.New(); private Swt_msg_wkr_stop msg_wkr_stop;
@@ -71,7 +53,7 @@ public class Swt_kit implements Gfui_kit {
 	public void					Kit_mode_(int v) 		{synchronized (thread_lock) {mode = v;}}
 	public boolean				Kit_mode__ready() 		{return Kit_mode() == Swt_kit_mode.Tid_ready;}
 	public boolean 				Kit_mode__term() 		{return Kit_mode() == Swt_kit_mode.Tid_term;}
-	public boolean 				Kit_sync_cmd_exists() {synchronized (thread_lock) {return sync_cmd_list.Count() != 0;}} private final List_adp sync_cmd_list = List_adp_.New();
+	public boolean 				Kit_sync_cmd_exists() {synchronized (thread_lock) {return sync_cmd_list.Len() != 0;}} private final List_adp sync_cmd_list = List_adp_.New();
 	public void 				Kit_sync_cmd_add(Swt_gui_cmd cmd) {synchronized (thread_lock) {sync_cmd_list.Add(cmd);}}
 	public void 				Kit_sync_cmd_del(Swt_gui_cmd cmd) {synchronized (thread_lock) {sync_cmd_list.Del(cmd);}}
 	public Gfo_invk_cmd 		Kit_term_cbk() {return term_cbk;} public void Kit_term_cbk_(Gfo_invk_cmd v) {this.term_cbk = v;} private Gfo_invk_cmd term_cbk = Gfo_invk_cmd.Noop;
@@ -117,7 +99,7 @@ public class Swt_kit implements Gfui_kit {
 			return;
 		}
 		// add kv to widget_cfg_hash; new controls will get properties from cfg_hash
-		Keyval_hash widget_cfg_hash = (Keyval_hash)kit_args.Get_by(type);
+		Keyval_hash widget_cfg_hash = (Keyval_hash)kit_args.GetByOrNull(type);
 		if (widget_cfg_hash == null) {
 			widget_cfg_hash = new Keyval_hash();
 			kit_args.Add(type, widget_cfg_hash);
@@ -169,7 +151,7 @@ public class Swt_kit implements Gfui_kit {
 	public Gfui_html New_html(String key, GfuiElem owner, Keyval... args) {
 		ctor_args.Clear();
 		// check cfg for browser type
-		Keyval_hash html_cfg_args = (Keyval_hash)kit_args.Get_by(Gfui_kit_.Cfg_HtmlBox);
+		Keyval_hash html_cfg_args = (Keyval_hash)kit_args.GetByOrNull(Gfui_kit_.Cfg_HtmlBox);
 		if (html_cfg_args != null) {
 			Keyval browser_type = html_cfg_args.Get_kvp_or_null(Cfg_Html_BrowserType);
 			if (browser_type != null) ctor_args.Add(browser_type);

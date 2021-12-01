@@ -28,7 +28,7 @@ public class Xog_window_mnu_mgr implements Gfo_invk {
 		app.Cfg().Bind_many_app(this, Cfg__browser__enabled, Cfg__browser__source);
 	}
 	public Xog_mnu_grp Get_or_new(String key) {			
-		Xog_mnu_grp rv = (Xog_mnu_grp)hash.Get_by(key);
+		Xog_mnu_grp rv = (Xog_mnu_grp)hash.GetByOrNull(key);
 		if (rv == null) {
 			rv = new Xog_mnu_grp(gui_mgr, false, key);
 			hash.Add(key, rv);

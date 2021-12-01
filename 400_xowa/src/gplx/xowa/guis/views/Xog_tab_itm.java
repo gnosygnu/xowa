@@ -266,7 +266,7 @@ public class Xog_tab_itm implements Gfo_invk {
 		}
 	}
 	public void Exec_async_hdump(Xoa_app app, Xow_wiki wiki, gplx.xowa.guis.cbks.js.Xog_js_wkr js_wkr, gplx.core.threads.Gfo_thread_pool thread_pool, Xoa_page page, List_adp imgs, int[] redlink_ary) {
-		if (imgs.Count() > 0) {
+		if (imgs.Len() > 0) {
 			Xof_file_wkr file_thread = new Xof_file_wkr
 				( wiki.File__orig_mgr(), wiki.File__bin_mgr(), wiki.File__mnt_mgr()
 				, app.User().User_db_mgr().Cache_mgr(), wiki.File__repo_mgr(), html_itm, page, imgs

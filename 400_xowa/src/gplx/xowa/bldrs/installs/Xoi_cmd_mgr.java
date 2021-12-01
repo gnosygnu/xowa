@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.threads.*;
 public class Xoi_cmd_mgr implements Gfo_invk {
 	List_adp cmds = List_adp_.New();
@@ -51,7 +51,7 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 			app.Gui_mgr().Kit().Ask_ok("", "", "An import is in progress. Please wait for it to complete. If you want to do multiple imports at once, see Dashboard/Import/Offline.");	// HOME
 			return;
 		}
-		int cmds_len = cmds.Count();
+		int cmds_len = cmds.Len();
 		if (cmds_len == 0) return;
 		for (int i = 0; i < cmds_len - 1; i++) {
 			Gfo_thread_cmd cur_cmd = (Gfo_thread_cmd)cmds.Get_at(i);

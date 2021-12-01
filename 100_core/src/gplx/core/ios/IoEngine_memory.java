@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import gplx.core.ios.streams.*; import gplx.core.ios.atrs.*;
 public class IoEngine_memory extends IoEngine_base {
 	@Override public String Key() {return key;} private String key = IoEngine_.MemKey;
@@ -21,7 +21,7 @@ public class IoEngine_memory extends IoEngine_base {
 	@Override public void DeleteFil_api(IoEngine_xrg_deleteFil args) {
 		Io_url url = args.Url();
 		IoItmDir dir = FetchDir(url.OwnerDir()); if (dir == null) return; // url doesn't exist; just exit
-		IoItmFil fil = IoItmFil_.as_(dir.SubFils().Get_by(url.NameAndExt()));
+		IoItmFil fil = IoItmFil_.as_(dir.SubFils().GetByOrNull(url.NameAndExt()));
 		if (fil != null && fil.ReadOnly() && args.ReadOnlyFails()) throw IoErr.FileIsReadOnly(url);
 		dir.SubFils().Del(url);
 	}
@@ -52,7 +52,7 @@ public class IoEngine_memory extends IoEngine_base {
 		Io_url url = args.Url();
 		IoItmDir dir = FetchDir(url.OwnerDir());
 		if (dir != null) {
-			IoItmFil fil = IoItmFil_.as_(dir.SubFils().Get_by(url.NameAndExt()));
+			IoItmFil fil = IoItmFil_.as_(dir.SubFils().GetByOrNull(url.NameAndExt()));
 			if (fil != null && fil.ReadOnly()) throw IoErr.FileIsReadOnly(url);
 		}
 
@@ -163,7 +163,7 @@ public class IoEngine_memory extends IoEngine_base {
 	IoItmFil_mem FetchFil(Io_url url) {
 		IoItmDir ownerDir = FetchDir(url.OwnerDir());
 		if (ownerDir == null) return IoItmFil_mem.Null;
-		IoItmFil_mem rv = IoItmFil_mem.as_(ownerDir.SubFils().Get_by(url.NameAndExt())); 
+		IoItmFil_mem rv = IoItmFil_mem.as_(ownerDir.SubFils().GetByOrNull(url.NameAndExt()));
 		if (rv == null) rv = IoItmFil_mem.Null;
 		return rv;
 	}

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.searchers.*;
 import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.langs.cases.*;
 import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
 class Srch_link_wkr_ {
@@ -63,9 +64,9 @@ class Srch_link_wkr_ {
 			Srch_word_row word_row = ctx.Tbl__word.Select_or_empty(word); if (word_row == Srch_word_row.Empty) continue;
 			tmp_list.Add(word_row);
 		}
-		if (tmp_list.Count() == 0) return null;	// no words exist in db; EX: "xyz1 xyz2"
-		tmp_list.Sort_by(Srch_word_row_sorter__link_count.Desc);
-		Srch_word_row[] rows = (Srch_word_row[])tmp_list.To_ary_and_clear(Srch_word_row.class);
+		if (tmp_list.Len() == 0) return null;	// no words exist in db; EX: "xyz1 xyz2"
+		tmp_list.SortBy(Srch_word_row_sorter__link_count.Desc);
+		Srch_word_row[] rows = (Srch_word_row[])tmp_list.ToAryAndClear(Srch_word_row.class);
 		return rows;
 	}
 	private static int Find_sql_root__ands(Srch_search_ctx ctx, Srch_word_tbl word_tbl, Srch_crt_itm sub) {

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.envs; import gplx.*; import gplx.core.*;
+package gplx.core.envs;
 import gplx.Bool_;
 import gplx.Bry_;
 import gplx.Bry_bfr;
@@ -33,17 +33,13 @@ import gplx.List_adp_;
 import gplx.Rls_able;
 import gplx.String_;
 import gplx.Tfds;
-import gplx.Virtual;
 import gplx.core.threads.*;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import javax.management.RuntimeErrorException;
 import gplx.core.brys.fmtrs.*; import gplx.core.strings.*;
-import gplx.langs.gfs.*;
 public class Process_adp implements Gfo_invk, Rls_able {
 	public boolean Enabled() {return enabled;} public Process_adp Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
 	public byte Exe_exists() {return exe_exists;} public Process_adp Exe_exists_(byte v) {exe_exists = v; return this;} private byte exe_exists = Bool_.__byte;
@@ -324,7 +320,7 @@ public class Process_adp implements Gfo_invk, Rls_able {
 				sb.Add(c);
 		}
 		if (sb.Has_some()) list.Add(sb.To_str());
-		return list.To_str_ary();
+		return list.ToStrAry();
 	}
 }
 class Thread_ProcessAdp_async extends Thread {

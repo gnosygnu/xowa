@@ -26,6 +26,6 @@ public class GfoNdeTstr {
 			GfoNde sub = nde.Subs().FetchAt_asGfoNde(i);
 			actl.Add(Object_.Xto_str_strict_or_empty(sub.Read(fld)));
 		}
-		Tfds.Eq_ary(expd.To_str_ary(), actl.To_str_ary());
+		Tfds.Eq_ary(expd.ToStrAry(), actl.ToStrAry());
 	}
 }

@@ -21,9 +21,9 @@ public class Mem_stmt implements Db_stmt {
 	public Mem_stmt(Mem_engine engine, Db_qry qry) {Ctor_stmt(engine, qry);} private Mem_engine engine;
 	public void Ctor_stmt(Db_engine engine, Db_qry qry) {this.engine = (Mem_engine)engine; this.qry = qry;}
 	public Mem_stmt_args Stmt_args() {return stmt_args;} private final Mem_stmt_args stmt_args = new Mem_stmt_args();
-	public int Args_len() {return val_list.Count();}
+	public int Args_len() {return val_list.Len();}
 	public Object Args_get_at(int i)	{return val_list.Get_at(i);}
-	public Object Args_get_by(String k) {return val_list.Get_by(k);}
+	public Object Args_get_by(String k) {return val_list.GetByOrNull(k);}
 	public Db_qry Qry() {return qry;} private Db_qry qry;
 	public Db_stmt Reset_stmt() {return this;}
 	public Db_stmt Clear() {
@@ -118,16 +118,16 @@ public class Mem_stmt implements Db_stmt {
 		return this;
 	}
 	public boolean Exec_insert() {
-		Mem_tbl tbl = engine.Tbls__get(qry.Base_table());
-		if (tbl == null) throw Err_.new_wo_type("must call Create_tbl", "tbl", qry.Base_table());
+		Mem_tbl tbl = engine.Tbls__get(qry.BaseTable());
+		if (tbl == null) throw Err_.new_wo_type("must call Create_tbl", "tbl", qry.BaseTable());
 		return tbl.Insert(this) == 1;
 	}
 	public int Exec_update() {
-		Mem_tbl tbl = engine.Tbls__get(qry.Base_table());
+		Mem_tbl tbl = engine.Tbls__get(qry.BaseTable());
 		return tbl.Update(this);
 	}
 	public int Exec_delete() {
-		Mem_tbl tbl = engine.Tbls__get(qry.Base_table());
+		Mem_tbl tbl = engine.Tbls__get(qry.BaseTable());
 		return tbl.Delete(this);
 	}
 	public DataRdr Exec_select() {throw Err_.new_unimplemented();}	
@@ -139,8 +139,8 @@ public class Mem_stmt implements Db_stmt {
 	}
 	public Object Exec_select_val() {throw Err_.new_unimplemented();}
 	private void Add(String k, boolean where, Object v) {
-		if (k == Dbmeta_fld_itm.Key_null) return;		// key is explicitly null; ignore; allows schema_2+ type definitions
-		val_list.Add_if_dupe_use_1st(k, v);				// NOTE: only add if new; WHERE with IN will call Add many times; fld_ttl IN ('A.png', 'B.png');
+		if (k == DbmetaFldItm.KeyNull) return;		// key is explicitly null; ignore; allows schema_2+ type definitions
+		val_list.AddIfDupeUse1st(k, v);				// NOTE: only add if new; WHERE with IN will call Add many times; fld_ttl IN ('A.png', 'B.png');
 		if (where) stmt_args.Add(k, v);
 	}
 }

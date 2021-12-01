@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.cmds; import gplx.*;
 import gplx.langs.dsvs.*;
 import gplx.xowa.wikis.nss.*;
 public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
@@ -78,7 +78,7 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 	}
 	public Xob_ns_file_itm[] To_ary(byte[] bry) {
 		this.Load_by_bry(bry);
-		return (Xob_ns_file_itm[])rslts.To_ary(Xob_ns_file_itm.class);
+		return (Xob_ns_file_itm[])rslts.ToAry(Xob_ns_file_itm.class);
 	}
 	public static final byte[] Ns_file_map__few = Bry_.new_a7("few"), Ns_file_map__each = Bry_.new_a7("<each>");
 	/*

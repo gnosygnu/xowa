@@ -57,7 +57,7 @@ public class Xowm_server_cfg_mgr {
 		Php_parser php_parser = new Php_parser();
 		Php_evaluator eval = new Php_evaluator(new gplx.core.log_msgs.Gfo_msg_log("test"));
 		php_parser.Parse_tkns(src, eval);
-		Php_line[] lines = (Php_line[])eval.List().To_ary(Php_line.class);
+		Php_line[] lines = (Php_line[])eval.List().ToAry(Php_line.class);
 		Php_line_assign line = (Php_line_assign)lines[0];
 		Php_itm_ary root_ary = (Php_itm_ary)line.Val();
 

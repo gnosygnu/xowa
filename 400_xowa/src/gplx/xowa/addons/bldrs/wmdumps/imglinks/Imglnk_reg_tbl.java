@@ -13,19 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.wmdumps.*;
+package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.xowa.bldrs.*;
 public class Imglnk_reg_tbl implements Db_tbl {
-	private final String tbl_name = "imglnk_reg"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name = "imglnk_reg"; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__img_src, fld__img_trg, fld__img_repo;
 	private final Db_conn conn;
 	public Imglnk_reg_tbl(Db_conn conn) {
 		this.conn = conn;
-		fld__img_src = flds.Add_str("img_src", 255);
-		fld__img_trg = flds.Add_str("img_trg", 255);
-		fld__img_repo = flds.Add_byte("img_repo");
-		flds.Add_int("img_count");
+		fld__img_src = flds.AddStr("img_src", 255);
+		fld__img_trg = flds.AddStr("img_trg", 255);
+		fld__img_repo = flds.AddByte("img_repo");
+		flds.AddInt("img_count");
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;}

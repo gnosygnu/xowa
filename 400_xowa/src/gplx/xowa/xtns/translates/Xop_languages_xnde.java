@@ -61,14 +61,14 @@ public class Xop_languages_xnde implements Xox_xnde {
 				rv.Add(lang_itm);
 			}
 		}
-		if (rv.Count() == 0) return List_adp_.Noop;	// no lang items; handles situations where just "Page" is returned
+		if (rv.Len() == 0) return List_adp_.Noop;	// no lang items; handles situations where just "Page" is returned
 		if (english_needed)	// english not found; always add; handles situations wherein Page/fr and Page/de added, but not Page/en
 			rv.Add(Xol_lang_stub_.Get_by_key_or_en(Xol_lang_itm_.Key_en));
-		rv.Sort_by(Xol_lang_stub_.Comparer_key);
+		rv.SortBy(Xol_lang_stub_.Comparer_key);
 		return rv;
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
-		if (langs.Count() == 0) return; // no langs; don't write anything;
+		if (langs.Len() == 0) return; // no langs; don't write anything;
 		fmtr_mgr_itms.Init(langs, ctx.Wiki(), root_ttl, ctx.Page().Lang().Key_bry());
 		fmtr_all.Bld_bfr_many(bfr, "Other languages", fmtr_mgr_itms);
 	}
@@ -107,7 +107,7 @@ class Xop_languages_fmtr implements gplx.core.brys.Bfr_arg {
 		this.cur_lang = cur_lang;
 	}	private List_adp langs; private Xowe_wiki wiki; private Xoa_ttl root_ttl; private byte[] cur_lang;
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		int len = langs.Count();
+		int len = langs.Len();
 		Xoh_href_wtr href_wtr = wiki.Html__href_wtr();
 		int ns_id = root_ttl.Ns().Id();
 		byte[] root_ttl_bry = root_ttl.Page_db();	// NOTE: do not use .Full(); ns will be added in Xoa_ttl.Parse below

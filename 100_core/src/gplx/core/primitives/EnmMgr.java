@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives; import gplx.*;
 import gplx.core.strings.*;
 public class EnmMgr {
 	public String BitRngSpr() {return bitRngSpr;} public EnmMgr BitRngSpr_(String val) {bitRngSpr = val; return this;} private String bitRngSpr = "+";
@@ -25,7 +25,7 @@ public class EnmMgr {
 		valRegy.Add(val, raw);
 		objRegy.Add(val, o);
 	}
-	public Object Get(int val) {return objRegy.Get_by(val);}
+	public Object Get(int val) {return objRegy.GetByOrNull(val);}
 	public int GetVal(String raw) {
 		String[] ary = String_.Split(raw, bitRngSpr);
 		int rv = 0;
@@ -36,7 +36,7 @@ public class EnmMgr {
 			if (String_.Has_at_bgn(term, "#"))
 				cur = Int_.Parse(String_.Mid(term, 1));
 			else
-				cur = Int_.Cast(rawRegy.Get_by(term));			
+				cur = Int_.Cast(rawRegy.GetByOrNull(term));
 			rv |= cur;
 		}
 		return rv;
@@ -60,7 +60,7 @@ public class EnmMgr {
 		return sb.To_str();
 	}
 	void AppendRaw(String_bldr sb, int key) {
-		String raw = (String)valRegy.Get_by(key);
+		String raw = (String)valRegy.GetByOrNull(key);
 		if (sb.Count() > 0) sb.Add(bitRngSpr);
 		if (prefix != null) sb.Add(prefix);
 		sb.Add(raw);

@@ -13,18 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.hdumps.diffs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.hdumps.*;
+package gplx.xowa.addons.bldrs.hdumps.diffs; import gplx.xowa.*;
 import gplx.dbs.*;
 class Dumpdiff_log_tbl implements Db_tbl {		
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__page_id, fld__cur_snip, fld__prv_snip;
 	private Db_stmt stmt__insert;
 	public Dumpdiff_log_tbl(Db_conn conn) {
 		this.conn = conn;
-		flds.Add_int_pkey("uid");
-		this.fld__page_id = flds.Add_int("page_id");
-		this.fld__cur_snip = flds.Add_str("cur_snip", 1024);
-		this.fld__prv_snip = flds.Add_str("prv_snip", 1024);
+		flds.AddIntPkey("uid");
+		this.fld__page_id = flds.AddInt("page_id");
+		this.fld__cur_snip = flds.AddStr("cur_snip", 1024);
+		this.fld__prv_snip = flds.AddStr("prv_snip", 1024);
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name = "diff_log";

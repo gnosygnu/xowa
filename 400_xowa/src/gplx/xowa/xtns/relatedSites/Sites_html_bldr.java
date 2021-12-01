@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.relatedSites; import gplx.*; import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.pages.skins.*;
 import gplx.xowa.htmls.hrefs.*;
@@ -36,7 +36,7 @@ public class Sites_html_bldr implements gplx.core.brys.Bfr_arg {
 	public Sites_html_bldr(Sites_xtn_mgr xtn_mgr) {this.xtn_mgr = xtn_mgr;}
 	private Bry_fmtr url_fmtr = Bry_fmtr.keys_("title");
 	public void Bld_all(Bry_bfr bfr, Xoae_page page, List_adp list) {
-		this.list = list; this.list_len = list.Count();
+		this.list = list; this.list_len = list.Len();
 		hash.Clear();
 		fmtr_grp.Bld_bfr_many(bfr, xtn_mgr.Msg_related_sites(), this);
 	}

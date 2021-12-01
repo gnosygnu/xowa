@@ -13,13 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*;
 import gplx.core.envs.*;
 public class Xomath_latex_bldr {
 	public static void Async(Xoae_app app, Xoae_page page, gplx.xowa.guis.cbks.js.Xog_js_wkr js_wkr) {
 		// get len; if 0, exit
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
-		int len = page.File_math().Count();
+		int len = page.File_math().Len();
 		if (len == 0) return;
 
 		usr_dlg.Prog_one("", "", "page.async.math; count=~{0}", len);

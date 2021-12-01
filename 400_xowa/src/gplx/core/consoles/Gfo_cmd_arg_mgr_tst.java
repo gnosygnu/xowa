@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.consoles; import gplx.*; import gplx.core.*;
+package gplx.core.consoles; import gplx.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.envs.*;
 public class Gfo_cmd_arg_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private final Gfo_cmd_arg_mgr_fxt fxt = new Gfo_cmd_arg_mgr_fxt();
@@ -100,7 +100,7 @@ class Gfo_cmd_arg_mgr_fxt {
 		return this;
 	}
 	public Gfo_cmd_arg_mgr_fxt Test_write(String... expd) {
-		Tfds.Eq_ary_str(expd, ((Gfo_usr_dlg__gui_mock)usr_dlg.Gui_wkr()).Msgs().To_str_ary_and_clear());
+		Tfds.Eq_ary_str(expd, ((Gfo_usr_dlg__gui_mock)usr_dlg.Gui_wkr()).Msgs().ToStrAryAndClear());
 		return this;
 	}
 	public void Test_val_as_url_rel_dir_or(String root_dir, String dir_spr, String val, String expd) {

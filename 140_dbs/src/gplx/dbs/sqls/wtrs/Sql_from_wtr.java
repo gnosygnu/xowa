@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
+package gplx.dbs.sqls.wtrs; import gplx.*;
 import gplx.dbs.sqls.itms.*;
 public class Sql_from_wtr {
 	public void Bld_clause_from(Bry_bfr bfr, Sql_from_clause from) {
-		List_adp tbls = from.Tbls; int tbls_len = tbls.Count();
+		List_adp tbls = from.Tbls; int tbls_len = tbls.Len();
 		for (int i = 0; i < tbls_len; ++i) {
 			Sql_tbl_itm tbl = (Sql_tbl_itm)tbls.Get_at(i);
 			bfr.Add_byte_space().Add_str_a7(Bld_join(tbl.Join_tid)).Add_byte_space();

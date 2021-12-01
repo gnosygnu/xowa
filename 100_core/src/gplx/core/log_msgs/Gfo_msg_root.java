@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.log_msgs; import gplx.*; import gplx.core.*;
+package gplx.core.log_msgs; import gplx.*;
 public class Gfo_msg_root {
 	public Gfo_msg_root(String root_key) {
 		this.root_key = root_key;
@@ -40,7 +40,7 @@ public class Gfo_msg_root {
 	public Gfo_msg_data Data_new_note_many(String owner_key, String key, String fmt, Object... vals) {return Data_new_many(Gfo_msg_itm_.Cmd_note, Bry_.Empty, -1, -1, owner_key, key, fmt, vals);}
 	public Gfo_msg_data Data_new_many(byte cmd, String owner_key, String key, String fmt, Object[] vals) {return Data_new_many(cmd, Bry_.Empty, -1, -1, owner_key, key, fmt, vals);}
 	public Gfo_msg_data Data_new_many(byte cmd, byte[] src, int bgn, int end, String owner_key, String key, String fmt, Object[] vals) {
-		Object owner_obj = owners.Get_by(owner_key);
+		Object owner_obj = owners.GetByOrNull(owner_key);
 		Gfo_msg_grp owner = null;
 		if (owner_obj == null) {
 			owner = New_list_by_key(owner_key);

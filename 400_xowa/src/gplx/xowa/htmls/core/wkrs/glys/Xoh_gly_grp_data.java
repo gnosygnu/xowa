@@ -13,10 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*;	
+package gplx.xowa.htmls.core.wkrs.glys; import gplx.*;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*; import gplx.langs.htmls.clses.*;
-import gplx.xowa.htmls.core.hzips.*;
 import gplx.xowa.xtns.gallery.*;
 public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	// FUTURE:add gallerycaption
 	private final List_adp itms_list = List_adp_.New();
@@ -39,7 +38,7 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	/
 	public boolean				Xtra_style_exists() {return xtra_style_end > xtra_style_bgn;}
 	public int				Capt_bgn() {return capt_bgn;} private int capt_bgn;
 	public int				Capt_end() {return capt_end;} private int capt_end;
-	public int				Itms__len() {return itms_list.Count();}
+	public int				Itms__len() {return itms_list.Len();}
 	public Xoh_gly_itm_data Itms__get_at(int i) {return (Xoh_gly_itm_data)itms_list.Get_at(i);}
 	private void Clear() {
 		this.gly_tid = Byte_.Max_value_127;
@@ -170,9 +169,9 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	/
 	private static final Hash_adp_bry atrs_ignored = Make_atrs_ignored();
 	private static Hash_adp_bry Make_atrs_ignored() {
 		Hash_adp_bry rv = Hash_adp_bry.ci_a7();
-		rv.Add_as_key_and_val(Gfh_atr_.Bry__class);
-		rv.Add_as_key_and_val(Gfh_atr_.Bry__style);
-		rv.Add_as_key_and_val(Gallery_mgr_wtr.Bry__data_xogly);
+		rv.AddAsKeyAndVal(Gfh_atr_.Bry__class);
+		rv.AddAsKeyAndVal(Gfh_atr_.Bry__style);
+		rv.AddAsKeyAndVal(Gallery_mgr_wtr.Bry__data_xogly);
 		return rv;
 	}
 }

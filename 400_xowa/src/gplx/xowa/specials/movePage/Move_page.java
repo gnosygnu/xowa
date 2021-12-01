@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.specials.movePage; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
-import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
+import gplx.core.net.qargs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.langs.msgs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
@@ -154,7 +155,7 @@ class Move_url_args {
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++) {
 			Gfo_qarg_itm arg = args[i];
-			Object tid_obj = arg_keys.Get_by(arg.Key_bry());
+			Object tid_obj = arg_keys.GetByOrNull(arg.Key_bry());
 			byte[] val_bry = arg.Val_bry();
 			if (tid_obj != null) {
 				switch (((Byte_obj_val)tid_obj).Val()) {

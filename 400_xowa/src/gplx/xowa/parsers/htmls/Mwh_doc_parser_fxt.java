@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.htmls; import gplx.*;
 class Mwh_doc_parser_fxt {
 	private final Bry_bfr expd_bfr = Bry_bfr_.New(), actl_bfr = Bry_bfr_.New();
 	private final Mwh_doc_parser parser = new Mwh_doc_parser();
@@ -69,5 +69,5 @@ class Mwh_doc_wkr__itm_bldr implements Mwh_doc_wkr {
 	public void On_comment_end  (Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end) {list.Add(new Mwh_doc_itm(Mwh_doc_itm.Itm_tid__comment	, nde_tid, Bry_.Mid(src, itm_bgn, itm_end)));}
 	public void On_entity_end	(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end)	{list.Add(new Mwh_doc_itm(Mwh_doc_itm.Itm_tid__entity	, nde_tid, Bry_.Mid(src, itm_bgn, itm_end)));}
 
-	public Mwh_doc_itm[] To_atr_ary() {return (Mwh_doc_itm[])list.To_ary_and_clear(Mwh_doc_itm.class);}
+	public Mwh_doc_itm[] To_atr_ary() {return (Mwh_doc_itm[])list.ToAryAndClear(Mwh_doc_itm.class);}
 }

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.xtns.imaps.itms.*;
@@ -83,7 +83,7 @@ public class Imap_parser {
 			} catch (Exception e) {usr_dlg.Warn_many("", "", "imap.parse:skipping line; page=~{0} line=~{1} err=~{2}", page_url.To_str(), Bry_.Mid_safe(src, itm_bgn, itm_end), Err_.Message_gplx_log(e));}
 			++itm_idx;
 		}
-		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_part_shape[])shapes.To_ary_and_clear(Imap_part_shape.class), (Imap_err[])errs.To_ary_and_clear(Imap_err.class));
+		rv.Init(xtn_mgr, imap_img_src, imap_img, imap_dflt, imap_desc, (Imap_part_shape[])shapes.ToAryAndClear(Imap_part_shape.class), (Imap_err[])errs.ToAryAndClear(Imap_err.class));
 	}
 	private void Parse_comment(int itm_bgn, int itm_end) {}	// noop comments; EX: "# comment\n"
 	private void Parse_invalid(int itm_bgn, int itm_end) {usr_dlg.Warn_many("", "", "imap has invalid line: page=~{0} line=~{1}", page_url.To_str(), String_.new_u8(src, itm_bgn, itm_end));}
@@ -148,7 +148,7 @@ public class Imap_parser {
 			if		(pts_len < reqd_pts)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
 		}
 		pos = Bry_find_.Trim_fwd_space_tab(src, pos, itm_end);
-		Imap_part_shape shape_itm = new Imap_part_shape(shape_tid, (Double_obj_val[])pts.To_ary_and_clear(Double_obj_val.class));
+		Imap_part_shape shape_itm = new Imap_part_shape(shape_tid, (Double_obj_val[])pts.ToAryAndClear(Double_obj_val.class));
 		Init_link_owner(shape_itm, src, pos, itm_end);
 		shapes.Add(shape_itm);
 		return true;

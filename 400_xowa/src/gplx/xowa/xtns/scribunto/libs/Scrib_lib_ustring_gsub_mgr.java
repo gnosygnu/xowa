@@ -168,7 +168,7 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 					Regx_group grp = grps[0];
 					find_str = grp.Val();
 				}
-				Object actl_repl_obj = repl_hash.Get_by(find_str);
+				Object actl_repl_obj = repl_hash.GetByOrNull(find_str);
 				if (actl_repl_obj == null)			// match found, but no replacement specified; EX:"abc", "[ab]", "a:A"; "b" in regex but not in tbl; EX:d:DVD; DATE:2014-03-31
 					tmp_bfr.Add_str_u8(find_str);
 				else

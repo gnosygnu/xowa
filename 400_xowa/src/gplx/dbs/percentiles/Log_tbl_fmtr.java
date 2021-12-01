@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.percentiles; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.percentiles; import gplx.*;
 class Log_tbl_fmtr {
 	private final Bry_bfr bfr = Bry_bfr_.New();
 	private final List_adp itms = List_adp_.New();
@@ -22,7 +22,7 @@ class Log_tbl_fmtr {
 	public Log_tbl_fmtr Add_int(String key, int bgn, int end)	{ary = null; itms.Add(new Log_fld_itm__int(Type_ids_.Id__int, key, bgn, end)); return this;}
 	public void Log(Object... vals) {
 		if (ary == null)
-			ary = (Log_fld_itm[])itms.To_ary_and_clear(Log_fld_itm.class);
+			ary = (Log_fld_itm[])itms.ToAryAndClear(Log_fld_itm.class);
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Log_fld_itm itm = ary[i];

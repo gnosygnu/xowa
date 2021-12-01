@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.files; import gplx.*;
+import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*;
 import gplx.fsdb.meta.*; import gplx.fsdb.data.*;
 import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
@@ -28,7 +29,7 @@ class Split_meta_wkr__bin extends Split_meta_wkr_base {
 	@Override public byte Tid() {return Split_page_list_type_.Tid__fsdb_bin;}
 	@Override public void On_nth_new(Split_ctx ctx, Db_conn trg_conn) {
 		this.tbl = new Fsd_bin_tbl(trg_conn, Bool_.N);
-		Dbmeta_fld_list trg_flds = Make_flds_for_split(tbl.Flds());
+		DbmetaFldList trg_flds = Make_flds_for_split(tbl.Flds());
 		trg_conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl.Tbl_name(), trg_flds));
 		this.stmt = trg_conn.Stmt_insert(tbl.Tbl_name(), trg_flds);
 	}
@@ -92,15 +93,15 @@ class Split_meta_wkr__bin extends Split_meta_wkr_base {
 			.Exec_insert();
 		rslt_wkr.On__nth__itm(db_row_size, bin_id);
 	}
-	private static Dbmeta_fld_list Make_flds_for_split(Dbmeta_fld_list flds) {
-		Dbmeta_fld_list rv = new Dbmeta_fld_list();
-		rv.Add(flds.Get_by("bin_owner_id"));
-		rv.Add_int("trg_db_id");
-		rv.Add_int("blob_len");
-		rv.Add(flds.Get_by("bin_owner_tid"));
-		rv.Add(flds.Get_by("bin_part_id"));
-		rv.Add(flds.Get_by("bin_data_url"));
-		rv.Add(flds.Get_by("bin_data"));
+	private static DbmetaFldList Make_flds_for_split(DbmetaFldList flds) {
+		DbmetaFldList rv = new DbmetaFldList();
+		rv.Add(flds.GetByOrNull("bin_owner_id"));
+		rv.AddInt("trg_db_id");
+		rv.AddInt("blob_len");
+		rv.Add(flds.GetByOrNull("bin_owner_tid"));
+		rv.Add(flds.GetByOrNull("bin_part_id"));
+		rv.Add(flds.GetByOrNull("bin_data_url"));
+		rv.Add(flds.GetByOrNull("bin_data"));
 		return rv;
 	}
 }

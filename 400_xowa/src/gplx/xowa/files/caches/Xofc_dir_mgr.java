@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.caches; import gplx.*;
 import gplx.dbs.*;
 class Xofc_dir_mgr {
 	private final Xofc_dir_tbl tbl = new Xofc_dir_tbl();
@@ -21,7 +21,7 @@ class Xofc_dir_mgr {
 	private Xof_cache_mgr cache_mgr;
 	public Xofc_dir_mgr(Xof_cache_mgr v) {this.cache_mgr = v;}
 	public void Conn_(Db_conn v, boolean created, boolean schema_is_1) {tbl.Conn_(v, created, schema_is_1);}
-	public Xofc_dir_itm Get_by_id(int id) {return (Xofc_dir_itm)hash_by_ids.Get_by(id);}
+	public Xofc_dir_itm Get_by_id(int id) {return (Xofc_dir_itm)hash_by_ids.GetByOrNull(id);}
 	public Xofc_dir_itm Get_by_name_or_make(byte[] name) {
 		Xofc_dir_itm itm = Get_by_name_or_null(name);
 		if (itm == null) {											// not in memory / db
@@ -32,7 +32,7 @@ class Xofc_dir_mgr {
 		return itm;
 	}
 	public Xofc_dir_itm Get_by_name_or_null(byte[] name) {
-		Xofc_dir_itm itm = (Xofc_dir_itm)hash_by_names.Get_by(name);
+		Xofc_dir_itm itm = (Xofc_dir_itm)hash_by_names.GetByOrNull(name);
 		if (itm == null) {											// not in memory
 			itm = tbl.Select_one(name);								// check db
 			if (itm == Xofc_dir_itm.Null) return null;				// in db
@@ -45,7 +45,7 @@ class Xofc_dir_mgr {
 		hash_by_ids.Add(dir.Id(), dir);
 	}
 	public void Save_all() {
-		int len = hash_by_names.Count();
+		int len = hash_by_names.Len();
 		boolean err_seen = false;
 		for (int i = 0; i < len; i++) {
 			Xofc_dir_itm itm = (Xofc_dir_itm)hash_by_names.Get_at(i);
@@ -66,7 +66,7 @@ class Xofc_dir_mgr {
 	public void Load_all() {
 		List_adp list = List_adp_.New();
 		tbl.Select_all(list);
-		int len = list.Count();
+		int len = list.Len();
 		hash_by_ids.Clear();
 		hash_by_names.Clear();
 		for (int i = 0; i < len; ++i) {

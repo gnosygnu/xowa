@@ -46,7 +46,7 @@ public class Sql_select_wtr {
 	private void Bld_select_group_by(Bry_bfr bfr, Sql_wtr_ctx ctx, Db_qry__select_cmd qry, Sql_group_clause groupBy) {
 		if (groupBy == null) return;
 		bfr.Add_str_a7(" GROUP BY ");
-		for (int i = 0; i < groupBy.Flds().Count(); i++) {
+		for (int i = 0; i < groupBy.Flds().Len(); i++) {
 			String item = (String)groupBy.Flds().Get_at(i);
 			if (i > 0) bfr.Add_str_a7(", ");
 			bfr.Add_str_a7(item);

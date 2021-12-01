@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*; import gplx.core.*;
+package gplx.core.net; import gplx.*;
 public class Gfo_protocol_itm {
 	public Gfo_protocol_itm(byte tid, String text) {
 		this.tid = tid;
@@ -113,7 +113,7 @@ public class Gfo_protocol_itm {
 	}
 	public static Gfo_protocol_itm[] Ary() {
 		if (protocol_itm_ary == null) {
-			int len = Regy.Count();
+			int len = Regy.Len();
 			protocol_itm_ary = new Gfo_protocol_itm[len];
 			for (int i = 0; i < len; i++)
 				protocol_itm_ary[i] = (Gfo_protocol_itm)Regy.Get_at(i);
@@ -122,7 +122,7 @@ public class Gfo_protocol_itm {
 	}	private static Gfo_protocol_itm[] protocol_itm_ary;
 	public static String[] Protocol_str_ary() {
 		if (protocol_str_ary == null) {
-			int len = Regy.Count();
+			int len = Regy.Len();
 			protocol_str_ary = new String[len];
 			for (int i = 0; i < len; i++)
 				protocol_str_ary[i] = ((Gfo_protocol_itm)Regy.Get_at(i)).Text_str();

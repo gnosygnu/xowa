@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.ipts; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.ipts; import gplx.*;
 public interface IptCfg extends Gfo_invk {
 	String CfgKey();
 	Object NewByKey(Object o);
@@ -24,7 +24,7 @@ public interface IptCfg extends Gfo_invk {
 class IptCfg_base implements IptCfg {
 	public String CfgKey() {return cfgKey;} private String cfgKey;
 	public IptCfgItm GetOrDefaultArgs(String bndKey, GfoMsg defaultMsg, IptArg[] defaultArgs) {
-		IptCfgItm rv = (IptCfgItm)hash.Get_by(bndKey);
+		IptCfgItm rv = (IptCfgItm)hash.GetByOrNull(bndKey);
 		if (rv == null) {	// no cfg
 			rv = IptCfgItm.new_().Key_(bndKey).Ipt_(List_adp_.New_by_many((Object[])defaultArgs)).Msg_(defaultMsg);
 			hash.Add(bndKey, rv);
@@ -44,7 +44,7 @@ class IptCfg_base implements IptCfg {
 		return rv;
 	}
 	boolean Dif(List_adp lhs, IptArg[] rhs) {
-		if (lhs.Count() != rhs.length) return true;
+		if (lhs.Len() != rhs.length) return true;
 		for (int i = 0; i < rhs.length; i++) {
 			IptArg lhsArg = (IptArg)lhs.Get_at(i);
 			IptArg rhsArg = rhs[i];
@@ -53,16 +53,16 @@ class IptCfg_base implements IptCfg {
 		return false;
 	}
 	void Change(String bndKey, IptArg[] ary) {
-		List_adp list = (List_adp)owners.Get_by(bndKey);
+		List_adp list = (List_adp)owners.GetByOrNull(bndKey);
 		if (list == null) return;
-		for (int i = 0; i < list.Count(); i++) {
+		for (int i = 0; i < list.Len(); i++) {
 			IptBndsOwner owner = (IptBndsOwner)list.Get_at(i);
 			owner.IptBnds().Change(bndKey, ary);
 		}
 	}
 	public void Owners_del(String bndKey) {owners.Del(bndKey);}
 	public void Owners_add(String bndKey, IptBndsOwner owner) {
-		List_adp list = (List_adp)owners.Get_by(bndKey);
+		List_adp list = (List_adp)owners.GetByOrNull(bndKey);
 		if (list == null) {
 			list = List_adp_.New();
 			owners.Add(bndKey, list);

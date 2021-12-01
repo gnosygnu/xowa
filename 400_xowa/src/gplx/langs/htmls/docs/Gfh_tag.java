@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.docs; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
+package gplx.langs.htmls.docs; import gplx.*;
+import gplx.langs.htmls.*;
 import gplx.xowa.parsers.htmls.*; import gplx.langs.htmls.styles.*; import gplx.langs.htmls.clses.*;
 public class Gfh_tag implements Mwh_atr_wkr {
 	private Gfh_tag_rdr tag_rdr;
@@ -51,21 +52,21 @@ public class Gfh_tag implements Mwh_atr_wkr {
 	public boolean Tag_is_tail() {return tag_is_tail;} private boolean tag_is_tail;
 	public boolean Tag_is_inline() {return tag_is_inline;} private boolean tag_is_inline;
 	public Ordered_hash Atrs__hash() {if (atrs_null) Atrs__make(); return atrs_hash;}
-	public int Atrs__len() {if (atrs_null) Atrs__make(); return atrs_hash.Count();}
+	public int Atrs__len() {if (atrs_null) Atrs__make(); return atrs_hash.Len();}
 	public boolean Atrs__match_pair(byte[] key, byte[] val) {
 		if (atrs_null) Atrs__make();
-		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(key);
+		Gfh_atr rv = (Gfh_atr)atrs_hash.GetByOrNull(key);
 		return rv == null ? false : Bry_.Eq(val, rv.Val());
 	}
 	public boolean Atrs__cls_has(byte[] val) {
 		if (atrs_null) Atrs__make();
-		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(Gfh_atr_.Bry__class); if (rv == null) return false;
+		Gfh_atr rv = (Gfh_atr)atrs_hash.GetByOrNull(Gfh_atr_.Bry__class); if (rv == null) return false;
 		byte[] rv_val = rv.Val();
 		return Gfh_class_.Has(rv_val, 0, rv_val.length, val);
 	}
 	public boolean Atrs__cls_eq(byte[] val) {
 		if (atrs_null) Atrs__make();
-		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(Gfh_atr_.Bry__class); if (rv == null) return false;
+		Gfh_atr rv = (Gfh_atr)atrs_hash.GetByOrNull(Gfh_atr_.Bry__class); if (rv == null) return false;
 		return Bry_.Eq(val, rv.Val());
 	}
 	public byte Atrs__cls_find_or_fail(Hash_adp_bry hash) {
@@ -74,23 +75,23 @@ public class Gfh_tag implements Mwh_atr_wkr {
 	}
 	public byte Atrs__cls_find_or(Hash_adp_bry hash, byte or) {
 		if (atrs_null) Atrs__make();
-		Gfh_atr cls_atr = (Gfh_atr)atrs_hash.Get_by(Gfh_atr_.Bry__class); if (cls_atr == null) return or;
+		Gfh_atr cls_atr = (Gfh_atr)atrs_hash.GetByOrNull(Gfh_atr_.Bry__class); if (cls_atr == null) return or;
 		byte rv = Gfh_class_.Find_1st(src, cls_atr.Val_bgn(), cls_atr.Val_end(), hash); if (rv == Byte_.Max_value_127) return or;
 		return rv;
 	}
 	public int Atrs__style_get_as_int(byte[] key) {
 		if (atrs_null) Atrs__make();
-		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(Gfh_atr_.Bry__style); if (rv == null) return -1;
+		Gfh_atr rv = (Gfh_atr)atrs_hash.GetByOrNull(Gfh_atr_.Bry__style); if (rv == null) return -1;
 		byte[] rv_val = rv.Val();
 		return style_wkr.Parse(rv_val, 0, rv_val.length, key);
 	}
 	public boolean Atrs__has(byte[] key) {
 		if (atrs_null) Atrs__make();
-		return atrs_hash.Get_by(key) != null;
+		return atrs_hash.GetByOrNull(key) != null;
 	}		
 	public byte[] Atrs__get_as_bry(byte[] key) {
 		if (atrs_null) Atrs__make();
-		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(key);
+		Gfh_atr rv = (Gfh_atr)atrs_hash.GetByOrNull(key);
 		return rv == null ? Bry_.Empty : rv.Val();
 	}		
 	public int Atrs__get_as_int(byte[] key) {
@@ -99,12 +100,12 @@ public class Gfh_tag implements Mwh_atr_wkr {
 	}
 	public int Atrs__get_as_int_or(byte[] key, int or) {
 		if (atrs_null) Atrs__make();
-		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(key); if (rv == null) return or;
+		Gfh_atr rv = (Gfh_atr)atrs_hash.GetByOrNull(key); if (rv == null) return or;
 		return Bry_.To_int_or(src, rv.Val_bgn(), rv.Val_end(), or);
 	}
 	public double Atrs__get_as_double_or(byte[] key, double or) {
 		if (atrs_null) Atrs__make();
-		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(key); if (rv == null) return or;
+		Gfh_atr rv = (Gfh_atr)atrs_hash.GetByOrNull(key); if (rv == null) return or;
 		return Bry_.To_double_or(src, rv.Val_bgn(), rv.Val_end(), or);
 	}
 	public Gfh_atr Atrs__get_at(int i)					{return (Gfh_atr)atrs_hash.Get_at(i);}
@@ -112,7 +113,7 @@ public class Gfh_tag implements Mwh_atr_wkr {
 	public Gfh_atr Atrs__get_by_or_empty(byte[] key)	{return Atrs__get_by_or_fail(key, Bool_.N);}
 	public Gfh_atr Atrs__get_by_or_fail(byte[] key, boolean fail_if_null) {
 		if (atrs_null) Atrs__make();
-		Gfh_atr rv = (Gfh_atr)atrs_hash.Get_by(key);
+		Gfh_atr rv = (Gfh_atr)atrs_hash.GetByOrNull(key);
 		if (rv == null) {
 			if (fail_if_null) tag_rdr.Err_wkr().Fail("atr missing", "key", key);
 			else return Gfh_atr.Noop;
@@ -122,7 +123,7 @@ public class Gfh_tag implements Mwh_atr_wkr {
 	public String Atrs__print() {
 		if (atrs_null) Atrs__make();
 		Bry_bfr bfr = Bry_bfr_.New();
-		int len = atrs_hash.Count();
+		int len = atrs_hash.Len();
 		for (int i = 0; i < len; ++i) {
 			Gfh_atr atr = (Gfh_atr)atrs_hash.Get_at(i);
 			bfr.Add(atr.Key()).Add_byte_eq().Add(atr.Val()).Add_byte_nl();
@@ -147,7 +148,7 @@ public class Gfh_tag implements Mwh_atr_wkr {
 		}
 		else
 			val_bry = key_bry;
-		Gfh_atr atr = new Gfh_atr(atrs_hash.Count(), atr_bgn, atr_end, key_bry, val_bry, src, val_bgn, val_end);
+		Gfh_atr atr = new Gfh_atr(atrs_hash.Len(), atr_bgn, atr_end, key_bry, val_bry, src, val_bgn, val_end);
 		atrs_hash.Add(key_bry, atr);
 	}
 	public String To_str() {
@@ -157,7 +158,7 @@ public class Gfh_tag implements Mwh_atr_wkr {
 	}
 	private static Ordered_hash Copy(Ordered_hash src) {
 		Ordered_hash rv = Ordered_hash_.New();
-		int len = src.Count();
+		int len = src.Len();
 		for (int i = 0; i < len; ++i) {
 			Gfh_atr atr = (Gfh_atr)src.Get_at(i);
 			rv.Add(atr.Key(), atr);

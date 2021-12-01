@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.helps.logs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.helps.*;
-import gplx.xowa.specials.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.addons.apps.helps.logs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.specials.*;
+import gplx.core.net.qargs.*;
 import gplx.core.net.emails.*;
 public class Xolog_special implements Xow_special_page {
 	public void Special__gen(Xow_wiki wiki, Xoa_page page, Xoa_url url, Xoa_ttl ttl) {
@@ -70,7 +71,7 @@ class Xoa_url_args_bldr {
 		list.Add(Keyval_.new_(key, val));
 		return this;
 	}
-	public Keyval[] To_ary() {return (Keyval[])list.To_ary_and_clear(Keyval.class);}
+	public Keyval[] To_ary() {return (Keyval[])list.ToAryAndClear(Keyval.class);}
 }
 class Xolog_file_utl {// yyyyMMdd_HHmmss.log
 	private static final String Gui__date_fmt = "yyyy-MM-dd HH:mm:ss";

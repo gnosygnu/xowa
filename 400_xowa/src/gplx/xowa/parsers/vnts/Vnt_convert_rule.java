@@ -13,8 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.core.primitives.*;
+package gplx.xowa.parsers.vnts; import gplx.*;
 import gplx.xowa.langs.vnts.*;
 class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRule
 	private final Vnt_flag_parser flag_parser = new Vnt_flag_parser(); private final Vnt_flag_code_mgr flag_codes = new Vnt_flag_code_mgr(); private final Vnt_flag_lang_mgr flag_langs = new Vnt_flag_lang_mgr();
@@ -122,7 +121,7 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 				if (bidi_bry != null) rule_bidis.Set(vnt_key, bidi_bry);
 			}
 			if (bidi_bry != null) {
-				int marked_len = cnv_marked_hash.Count();
+				int marked_len = cnv_marked_hash.Len();
 				for (int j = 0; j < marked_len; ++j) {
 					Xol_vnt_itm marked_itm = (Xol_vnt_itm)cnv_marked_hash.Get_at(j);
 					byte[] marked_key = marked_itm.Key();

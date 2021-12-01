@@ -13,24 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.engines.sqlite.*;
+package gplx.fsdb.data; import gplx.*;
+import gplx.dbs.*; import gplx.dbs.qrys.*;
 public class Fsd_fil_tbl implements Db_tbl {
-	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final DbmetaFldList flds = new DbmetaFldList();
 	public final String fld_id, fld_owner_id, fld_name, fld_xtn_id, fld_ext_id, fld_size, fld_modified, fld_hash, fld_bin_db_id;
 	private final String idx_owner;
 	public final Db_conn conn; private Db_stmt stmt_insert, stmt_update, stmt_select_by_name; private int mnt_id;
 	public Fsd_fil_tbl(Db_conn conn, boolean schema_is_1, int mnt_id) {
 		this.conn = conn; this.mnt_id = mnt_id;
-		this.fld_id					= flds.Add_int_pkey	("fil_id");
-		this.fld_owner_id			= flds.Add_int		("fil_owner_id");
-		this.fld_xtn_id				= flds.Add_int		("fil_xtn_id");
-		this.fld_ext_id				= flds.Add_int		("fil_ext_id");
-		this.fld_bin_db_id			= flds.Add_int		("fil_bin_db_id");		// group ints at beginning of table
-		this.fld_name				= flds.Add_str		("fil_name", 255);
-		this.fld_size				= flds.Add_long		("fil_size");
-		this.fld_modified			= flds.Add_str		("fil_modified", 14);	// stored as yyyyMMddHHmmss
-		this.fld_hash				= flds.Add_str		("fil_hash", 40);
+		this.fld_id					= flds.AddIntPkey("fil_id");
+		this.fld_owner_id			= flds.AddInt("fil_owner_id");
+		this.fld_xtn_id				= flds.AddInt("fil_xtn_id");
+		this.fld_ext_id				= flds.AddInt("fil_ext_id");
+		this.fld_bin_db_id			= flds.AddInt("fil_bin_db_id");		// group ints at beginning of table
+		this.fld_name				= flds.AddStr("fil_name", 255);
+		this.fld_size				= flds.AddLong("fil_size");
+		this.fld_modified			= flds.AddStr("fil_modified", 14);	// stored as yyyyMMddHHmmss
+		this.fld_hash				= flds.AddStr("fil_hash", 40);
 		this.idx_owner				= Dbmeta_idx_itm.Bld_idx_name(tbl_name, "owner");
 		conn.Rls_reg(this);
 	}
@@ -78,7 +78,7 @@ public class Fsd_fil_tbl implements Db_tbl {
 	}	
 	public Fsd_fil_itm Select_or_null(int dir_id, byte[] fil_name) {
 		if (stmt_select_by_name == null) {
-			Db_qry__select_cmd qry = new Db_qry__select_cmd().From_(tbl_name).Cols_(flds.To_str_ary()).Where_(Db_crt_.eq_many_(fld_owner_id, fld_name)).Indexed_by_(idx_owner);
+			Db_qry__select_cmd qry = new Db_qry__select_cmd().From_(tbl_name).Cols_(flds.ToStrAry()).Where_(Db_crt_.eq_many_(fld_owner_id, fld_name)).Indexed_by_(idx_owner);
 			stmt_select_by_name = conn.Stmt_new(qry);
 		}
 		Db_rdr rdr = stmt_select_by_name.Clear()
@@ -91,7 +91,7 @@ public class Fsd_fil_tbl implements Db_tbl {
 		finally {rdr.Rls();}
 	}
 	public void Select_all(Bry_bfr key_bfr, gplx.core.caches.Gfo_cache_mgr_bry cache) {
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				Fsd_fil_itm fil = New_by_rdr(mnt_id, rdr);

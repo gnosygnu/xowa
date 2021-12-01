@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cldrs; import gplx.*;
 import gplx.core.primitives.*;
 import gplx.langs.phps.*;
 import gplx.langs.jsons.*;
@@ -35,7 +35,7 @@ class Language_names_converter {
 	}
 	public Language_name[] Parse(byte[] src) {
 		parser.Parse_tkns(src, eval);
-		Php_line[] lines = (Php_line[])eval.List().To_ary(Php_line.class);
+		Php_line[] lines = (Php_line[])eval.List().ToAry(Php_line.class);
 		
 		List_adp rv = List_adp_.New();
 		int lines_len = lines.length;
@@ -49,7 +49,7 @@ class Language_names_converter {
 			}
 		}
 		eval.Clear();
-		return (Language_name[])rv.To_ary_and_clear(Language_name.class);
+		return (Language_name[])rv.ToAryAndClear(Language_name.class);
 	}
 	private byte[][][] Parse_ary_kvs(byte[] src, Php_line_assign assign) {
 		List_adp list = List_adp_.New();
@@ -69,7 +69,7 @@ class Language_names_converter {
 			byte[] comm = tmp_bfr.To_bry_and_clear();
                 list.Add(new byte[][] {key, val, comm});
 		}
-		return (byte[][][])list.To_ary_and_clear(byte[][].class);
+		return (byte[][][])list.ToAryAndClear(byte[][].class);
 	}
 	public String To_json(Language_name[] ary) {
 		Json_doc_wtr doc_wtr = new Json_doc_wtr();

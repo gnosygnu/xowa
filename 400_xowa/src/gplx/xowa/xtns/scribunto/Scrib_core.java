@@ -36,7 +36,6 @@ import gplx.xowa.parsers.Xop_ctx;
 import gplx.xowa.parsers.tmpls.Xot_invk;
 import gplx.xowa.xtns.scribunto.engines.Scrib_engine;
 import gplx.xowa.xtns.scribunto.engines.Scrib_engine_type;
-import gplx.xowa.xtns.scribunto.cfgs.ScribCfgResolver;
 import gplx.xowa.xtns.scribunto.libs.Scrib_lib_hash;
 import gplx.xowa.xtns.scribunto.libs.Scrib_lib_html;
 import gplx.xowa.xtns.scribunto.libs.Scrib_lib_language;
@@ -235,9 +234,9 @@ public class Scrib_core {
 			frame_created_list.Clear();
 		}
 	}
-	public Scrib_lua_mod Mods_get(byte[] mod_name) {return (Scrib_lua_mod)mods.Get_by(mod_name);}
+	public Scrib_lua_mod Mods_get(byte[] mod_name) {return (Scrib_lua_mod)mods.GetByOrNull(mod_name);}
 	private Scrib_lua_mod Mods_get_or_new(byte[] mod_name, byte[] mod_text) {
-		Scrib_lua_mod rv = (Scrib_lua_mod)mods.Get_by(mod_name);
+		Scrib_lua_mod rv = (Scrib_lua_mod)mods.GetByOrNull(mod_name);
 		if (rv == null) {
 			rv = new Scrib_lua_mod(this, "Module:" + String_.new_u8(mod_name));
 			rv.LoadString(String_.new_u8(mod_text));

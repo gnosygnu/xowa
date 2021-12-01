@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.pfuncs; import gplx.*;
 import gplx.core.primitives.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.xowa.xtns.pfuncs.tags.*; import gplx.xowa.xtns.pfuncs.stringutils.*; import gplx.xowa.xtns.pfuncs.pages.*; import gplx.xowa.xtns.pfuncs.wikis.*;
@@ -92,7 +92,7 @@ public class Pf_func_ {
 			for (int i = 0; i < len; ++i) {
 				list.Add(Ary_wmf[i]);
 			}
-			list.Add_many
+			list.AddMany
 			( Xol_kwd_grp_.Id_strx_len
 			, Xol_kwd_grp_.Id_strx_pos
 			, Xol_kwd_grp_.Id_strx_rpos
@@ -103,7 +103,7 @@ public class Pf_func_ {
 			, Xol_kwd_grp_.Id_strx_urldecode
 			, Xol_kwd_grp_.Id_new_window_link
 			);
-			Ary_nonwmf = (int[])list.To_ary_and_clear(int.class);
+			Ary_nonwmf = (int[])list.ToAryAndClear(int.class);
 		}
 		return Ary_nonwmf;
 	}

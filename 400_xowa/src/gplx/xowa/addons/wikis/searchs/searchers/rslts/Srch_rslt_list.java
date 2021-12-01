@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.rslts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.rslts; import gplx.*;
 import gplx.core.lists.hashs.*;
 public class Srch_rslt_list {
 	private final Ordered_hash key_hash = Ordered_hash_.New_bry();
@@ -25,7 +25,7 @@ public class Srch_rslt_list {
 	public boolean			Rslts_are_done;
 	public int				Len()								{return key_hash.Len();}
 	public boolean			Has(byte[] key)						{return key_hash.Has(key);}
-	public Srch_rslt_row	Get_by(byte[] key)					{return (Srch_rslt_row)key_hash.Get_by(key);}
+	public Srch_rslt_row	Get_by(byte[] key)					{return (Srch_rslt_row)key_hash.GetByOrNull(key);}
 	public Srch_rslt_row	Get_at(int i)						{return (Srch_rslt_row)key_hash.Get_at(i);}
 	public void				Clear()								{key_hash.Clear(); id_hash.Clear();}
 	public void				Add(Srch_rslt_row row)				{key_hash.Add(row.Key, row);}

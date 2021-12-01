@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
+import gplx.core.btries.*;
 public class Dbmeta_parser__idx {
 	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	private final List_adp tmp_list = List_adp_.New();
@@ -40,7 +40,7 @@ public class Dbmeta_parser__idx {
 			byte sym = rdr.Skip_ws().Read_byte();
 			if (sym == Byte_ascii.Paren_end) break;
 		}
-		return new Dbmeta_idx_itm(unique, String_.new_u8(tbl_name), String_.new_u8(idx_name), (Dbmeta_idx_fld[])tmp_list.To_ary_and_clear(Dbmeta_idx_fld.class));
+		return new Dbmeta_idx_itm(unique, String_.new_u8(tbl_name), String_.new_u8(idx_name), (Dbmeta_idx_fld[])tmp_list.ToAryAndClear(Dbmeta_idx_fld.class));
 	}
 	private static final byte Tid__create = 0, Tid__unique = 1, Tid__index = 2, Tid__on = 3;
 	private static final byte[]

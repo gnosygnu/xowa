@@ -22,39 +22,39 @@ public class GftGrid {
 	public void Clear() {bands.Clear(); subLyts.Clear(); bandDir = DirInt.Fwd;}
 	public DirInt Bands_dir() {return bandDir;} public GftGrid Bands_dir_(DirInt v) {bandDir = v; return this;} DirInt bandDir = DirInt.Fwd;
 	public GftGrid SubLyts_get(String key) {
-		for (int i = 0; i < subLyts.Count(); i++) {
+		for (int i = 0; i < subLyts.Len(); i++) {
 			GftGrid grid = (GftGrid)subLyts.Get_at(i);
 			if (String_.Eq(key, grid.Key())) return grid;
 		}
 		return null;
 	}
 	public GftBand Bands_get(String key) {
-		for (int i = 0; i < bands.Count(); i++) {
+		for (int i = 0; i < bands.Len(); i++) {
 			GftBand band = (GftBand)bands.Get_at(i);
 			if (String_.Eq(key, band.Key())) return band;
 		}
 		return null;
 	}
 	public GftGrid Bands_add(GftBand band) {
-		bands.Add(band.Clone(this, bands.Count()));
+		bands.Add(band.Clone(this, bands.Len()));
 		return this;
 	}
 	public GftGrid Bands_add(int count, GftBand band) {
 		for (int i = 0; i < count; i++) {
-			GftBand copy = band.Clone(this, bands.Count() + i);
+			GftBand copy = band.Clone(this, bands.Len() + i);
 			bands.Add(copy);
 		}
 		return this;
 	}
-	@gplx.Internal protected void Bands_delAt(int i) {bands.Del_at(i);}
+	@gplx.Internal protected void Bands_delAt(int i) {bands.DelAt(i);}
 	public boolean Bands_has(String key) {return Bands_indexOf(key) != List_adp_.Not_found;}
 	public void Bands_del(String key) {
 		int idx = Bands_indexOf(key);
-		if (idx != List_adp_.Not_found) bands.Del_at(idx);
+		if (idx != List_adp_.Not_found) bands.DelAt(idx);
 	}
 	int Bands_indexOf(String key) {
 		int curIdx = List_adp_.Not_found;
-		for (int i = 0; i < bands.Count(); i++) {
+		for (int i = 0; i < bands.Len(); i++) {
 			GftBand band = (GftBand)bands.Get_at(i);
 			if (String_.Eq(key, band.Key())) {
 				curIdx = i;
@@ -78,7 +78,7 @@ public class GftGrid {
 	}
 	void ExecLyts(GftItem owner, GftItem[] ary) {
 		int idx = 0;
-		for (int i = 0; i < subLyts.Count(); i++) {
+		for (int i = 0; i < subLyts.Len(); i++) {
 			GftGrid subGrid = (GftGrid)subLyts.Get_at(i);
 			GftItem[] subAry = new GftItem[subGrid.Bands_cellCount()];
 			for (int j = 0; j < subAry.length; j++) {
@@ -88,11 +88,11 @@ public class GftGrid {
 		}
 	}
 	void ExecBands(GftItem owner, GftItem[] ary) {
-		if (bands.Count() == 0) return;
+		if (bands.Len() == 0) return;
 		int availY = owner.Gft_h();
 		GftBand band = null;
-		int bgn = bandDir.GetValByDir(bands.Idx_last(), 0);
-		int end = bandDir.GetValByDir(-1, bands.Count());
+		int bgn = bandDir.GetValByDir(bands.IdxLast(), 0);
+		int end = bandDir.GetValByDir(-1, bands.Len());
 		for (int i = bgn; i != end; i += bandDir.Val()) {
 			band = (GftBand)bands.Get_at(i);
 			if (band.Len1().Key() == GftSizeCalc_abs.KEY) {
@@ -106,11 +106,11 @@ public class GftGrid {
 		int y = bandDir.GetValByDir(owner.Gft_h(), 0);
 		for (int itmIdx = 0; itmIdx < ary.length; itmIdx++) {
 			GftItem itm = ary[itmIdx];
-			if (band.Items().Count() >= band.Cells().Count()) {
+			if (band.Items().Len() >= band.Cells().Len()) {
 				int h = band.Len1().Calc(this, band, owner, itm, availY);
 				band.Calc(owner, y, h);
 				y += h * bandDir.Val();
-				if (bandIdx + 1 >= bands.Count()) throw Err_.new_wo_type("error retrieving band", "owner", owner.Key_of_GfuiElem(), "item", itm.Key_of_GfuiElem(), "bandIdx", bandIdx + 1, "count", bands.Count());
+				if (bandIdx + 1 >= bands.Len()) throw Err_.new_wo_type("error retrieving band", "owner", owner.Key_of_GfuiElem(), "item", itm.Key_of_GfuiElem(), "bandIdx", bandIdx + 1, "count", bands.Len());
 				band = (GftBand)bands.Get_at(++bandIdx);
 				band.Items().Clear();
 			}
@@ -120,9 +120,9 @@ public class GftGrid {
 	}
 	int Bands_cellCount() {
 		int rv = 0;
-		for (int i = 0; i < bands.Count(); i++) {
+		for (int i = 0; i < bands.Len(); i++) {
 			GftBand band = (GftBand)bands.Get_at(i);
-			rv += band.Cells().Count();
+			rv += band.Cells().Len();
 		}
 		return rv;
 	}

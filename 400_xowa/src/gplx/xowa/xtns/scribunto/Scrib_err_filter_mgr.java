@@ -34,7 +34,7 @@ public class Scrib_err_filter_mgr implements Gfo_invk {
 	public boolean Empty() {return empty;} private boolean empty = true;
 	public boolean Match(String mod, String fnc, String err) {
 		List_adp itms = Get_itms_or_null(mod, fnc); if (itms == null) return false;
-		int itms_len = itms.Count();
+		int itms_len = itms.Len();
 		boolean match = false;
 		for (int i = 0; i < itms_len; ++i) {
 			Scrib_err_filter_itm itm = (Scrib_err_filter_itm)itms.Get_at(i);
@@ -56,13 +56,13 @@ public class Scrib_err_filter_mgr implements Gfo_invk {
 	}
 	public String Print() {
 		Bry_bfr bfr = Bry_bfr_.New_w_size(8);
-		int i_len = hash_by_mod.Count();
+		int i_len = hash_by_mod.Len();
 		for (int i = 0; i < i_len; ++i) {
 			Ordered_hash fncs = (Ordered_hash)hash_by_mod.Get_at(i);
-			int j_len = fncs.Count();
+			int j_len = fncs.Len();
 			for (int j = 0; j < j_len; ++j) {
 				List_adp errs = (List_adp)fncs.Get_at(j);
-				int k_len = errs.Count();
+				int k_len = errs.Len();
 				for (int k = 0; k < k_len; ++k) {
 					Scrib_err_filter_itm err = (Scrib_err_filter_itm)errs.Get_at(k);
 					bfr.Add_int_variable(err.Count_actl()).Add_byte_pipe().Add_int_variable(err.Count_expd())
@@ -75,16 +75,16 @@ public class Scrib_err_filter_mgr implements Gfo_invk {
 		return bfr.To_str_and_clear();
 	}
 	private List_adp Get_itms_or_null(String mod, String fnc) {
-		Ordered_hash hash_by_fnc = (Ordered_hash)hash_by_mod.Get_by(mod); if (hash_by_fnc == null) return null;
-		return (List_adp)hash_by_fnc.Get_by(fnc);
+		Ordered_hash hash_by_fnc = (Ordered_hash)hash_by_mod.GetByOrNull(mod); if (hash_by_fnc == null) return null;
+		return (List_adp)hash_by_fnc.GetByOrNull(fnc);
 	}
 	private List_adp New_itms(String mod, String fnc) {
-		Ordered_hash hash_by_fnc = (Ordered_hash)hash_by_mod.Get_by(mod);
+		Ordered_hash hash_by_fnc = (Ordered_hash)hash_by_mod.GetByOrNull(mod);
 		if (hash_by_fnc == null) {
 			hash_by_fnc = Ordered_hash_.New();
 			hash_by_mod.Add(mod, hash_by_fnc);
 		}
-		List_adp list_of_err = (List_adp)hash_by_fnc.Get_by(fnc);
+		List_adp list_of_err = (List_adp)hash_by_fnc.GetByOrNull(fnc);
 		if (list_of_err == null) {
 			list_of_err = List_adp_.New();
 			hash_by_fnc.Add(fnc, list_of_err);

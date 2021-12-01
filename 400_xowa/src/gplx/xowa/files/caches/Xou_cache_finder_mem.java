@@ -22,7 +22,7 @@ public class Xou_cache_finder_mem implements Xou_cache_finder {
 	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	public boolean Find(Xow_wiki wiki, byte[] page_url, Xof_fsdb_itm cur) {
 		byte[] key = Xou_cache_itm.Key_gen(tmp_bfr, cur.Lnki_wiki_abrv(), cur.Lnki_ttl(), cur.Lnki_type(), cur.Lnki_upright(), cur.Lnki_w(), cur.Lnki_h(), cur.Lnki_time(), cur.Lnki_page(), cur.User_thumb_w());
-		Xof_fsdb_itm mem = (Xof_fsdb_itm)hash.Get_by(key); 
+		Xof_fsdb_itm mem = (Xof_fsdb_itm)hash.GetByOrNull(key);
 		if (mem == null) {
 			cur.Init_at_cache(false, 0, 0, Io_url_.Empty);
 			return false;

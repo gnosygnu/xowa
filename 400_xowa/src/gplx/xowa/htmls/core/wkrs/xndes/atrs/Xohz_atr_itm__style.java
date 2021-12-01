@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
+package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*;
+import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*;
 class Xohz_atr_itm__style implements Xohz_atr_itm {	// EX: style='width:20em;'
 	private int flag_idx;
 	private final Ordered_hash zatr_hash;
@@ -36,7 +37,7 @@ class Xohz_atr_itm__style implements Xohz_atr_itm {	// EX: style='width:20em;'
 		bfr.Add_hzip_int(1, len);
 		for (int i = 0; i < len; ++i) {
 			Gfh_style_itm hitm = itms[i];
-			Xohz_atr_itm zitm = (Xohz_atr_itm)zatr_hash.Get_by(hitm.Key());
+			Xohz_atr_itm zitm = (Xohz_atr_itm)zatr_hash.GetByOrNull(hitm.Key());
 			if (zitm == null) {
 				// get dict key
 				// write dict key
@@ -53,7 +54,7 @@ class Xohz_atr_itm__style implements Xohz_atr_itm {	// EX: style='width:20em;'
 		int len = rdr.Read_hzip_int(1);
 		for (int i = 0; i < len; ++i) {
 			int key_uid = rdr.Read_hzip_int(1);
-			Xohz_atr_itm zatr = (Xohz_atr_itm)zatr_hash.Get_by(key_uid);
+			Xohz_atr_itm zatr = (Xohz_atr_itm)zatr_hash.GetByOrNull(key_uid);
 			bfr.Add(zatr.Key());
 			int val_bgn = rdr.Pos();
 			int val_end = rdr.Find_fwd_lr();

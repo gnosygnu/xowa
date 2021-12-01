@@ -13,22 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*;
 import gplx.dbs.*;
 public class Srch_word_tbl implements Rls_able {
 	public final String tbl_name;
-	public final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public final DbmetaFldList flds = new DbmetaFldList();
 	public final String fld_id, fld_text, fld_link_count, fld_link_count_score, fld_link_score_min, fld_link_score_max;
 	public final Db_conn conn; private Db_stmt stmt_insert, stmt_select_by;
 	public Srch_word_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= TABLE_NAME;
-		this.fld_id					= flds.Add_int_pkey("word_id");
-		this.fld_text				= flds.Add_str("word_text", 255);
-		this.fld_link_count			= flds.Add_int("link_count");
-		this.fld_link_count_score	= Dbmeta_fld_itm.Make_or_null(conn, flds, tbl_name, Dbmeta_fld_tid.Tid__int, 0, "link_count_score");
-		this.fld_link_score_min		= Dbmeta_fld_itm.Make_or_null(conn, flds, tbl_name, Dbmeta_fld_tid.Tid__int, Int_.Max_value__31, "link_score_min");
-		this.fld_link_score_max		= Dbmeta_fld_itm.Make_or_null(conn, flds, tbl_name, Dbmeta_fld_tid.Tid__int, 0, "link_score_max");
+		this.fld_id					= flds.AddIntPkey("word_id");
+		this.fld_text				= flds.AddStr("word_text", 255);
+		this.fld_link_count			= flds.AddInt("link_count");
+		this.fld_link_count_score	= DbmetaFldItm.Make_or_null(conn, flds, tbl_name, DbmetaFldType.TidInt, 0, "link_count_score");
+		this.fld_link_score_min		= DbmetaFldItm.Make_or_null(conn, flds, tbl_name, DbmetaFldType.TidInt, Int_.Max_value__31, "link_score_min");
+		this.fld_link_score_max		= DbmetaFldItm.Make_or_null(conn, flds, tbl_name, DbmetaFldType.TidInt, 0, "link_score_max");
 		conn.Rls_reg(this);
 	}
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
@@ -57,11 +57,11 @@ public class Srch_word_tbl implements Rls_able {
 		finally {rdr.Rls();}
 	}
 	public Srch_word_row New_row(Db_rdr rdr) {
-		int page_count			= fld_link_count		== Dbmeta_fld_itm.Key_null ? 0 : rdr.Read_int(fld_link_count);
-		int link_score_min		= fld_link_score_min	== Dbmeta_fld_itm.Key_null ? page_count : rdr.Read_int(fld_link_score_min);
-		int link_score_max		= fld_link_score_max	== Dbmeta_fld_itm.Key_null ? page_count : rdr.Read_int(fld_link_score_max);
+		int page_count			= fld_link_count		== DbmetaFldItm.KeyNull ? 0 : rdr.Read_int(fld_link_count);
+		int link_score_min		= fld_link_score_min	== DbmetaFldItm.KeyNull ? page_count : rdr.Read_int(fld_link_score_min);
+		int link_score_max		= fld_link_score_max	== DbmetaFldItm.KeyNull ? page_count : rdr.Read_int(fld_link_score_max);
 		int link_count_score	= 0;
-		if (fld_link_count_score != Dbmeta_fld_itm.Key_null) {
+		if (fld_link_count_score != DbmetaFldItm.KeyNull) {
 			try {link_count_score = rdr.Read_int(fld_link_count_score);}
 			catch (Exception e) {// handle 2016-05 and earlier wikis which stored value as double instead of int
 				Err_.Noop(e);

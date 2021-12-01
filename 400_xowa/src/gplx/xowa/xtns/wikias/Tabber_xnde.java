@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wikias; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.htmls.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.core.security.algos.*;
+import gplx.xowa.htmls.core.htmls.*; import gplx.core.security.algos.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Tabber_xnde implements Xox_xnde {
 	private byte[] id;
@@ -48,7 +48,7 @@ public class Tabber_xnde implements Xox_xnde {
 			}
 			tab_itms_list.Add(new Tabber_tab_itm(Bool_.N, tab_head, tab_body));
 		}
-		tab_itms_ary = (Tabber_tab_itm[])tab_itms_list.To_ary_and_clear(Tabber_tab_itm.class);
+		tab_itms_ary = (Tabber_tab_itm[])tab_itms_list.ToAryAndClear(Tabber_tab_itm.class);
 
 		ctx.Page().Html_data().Head_mgr().Itm__tabber().Enabled_y_();
 		ctx.Para().Process_block__xnde(xnde.Tag(), Xop_xnde_tag.Block_end);

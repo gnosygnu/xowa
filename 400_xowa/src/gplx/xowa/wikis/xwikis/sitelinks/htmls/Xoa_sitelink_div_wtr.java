@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis.sitelinks.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
+package gplx.xowa.wikis.xwikis.sitelinks.htmls; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.wikis.xwikis.sitelinks.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.apps.apis.xowa.html.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.langs.msgs.*;
 import gplx.xowa.xtns.wbases.core.*;
 public class Xoa_sitelink_div_wtr {
 	private final Xoa_sitelink_grp_wtr grp_wtr = new Xoa_sitelink_grp_wtr();
@@ -30,7 +31,7 @@ public class Xoa_sitelink_div_wtr {
 			grp.Reset();
 		}
 		// add itms to each grp
-		int slink_len = slink_list.Count();
+		int slink_len = slink_list.Len();
 		for (int i = 0; i < slink_len; i++) {
 			Wdata_sitelink_itm slink = (Wdata_sitelink_itm)slink_list.Get_at(i);
 			Xoa_ttl ttl = slink.Page_ttl();

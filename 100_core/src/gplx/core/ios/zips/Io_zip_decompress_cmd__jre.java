@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios.zips; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
+package gplx.core.ios.zips; import gplx.*;
 import java.io.*;
 import java.util.zip.*;
-import gplx.core.envs.*; import gplx.core.threads.*; import gplx.core.progs.*;
+import gplx.core.envs.*;
+import gplx.core.progs.*;
 class Io_zip_decompress_cmd__jre extends Io_zip_decompress_cmd__base {
 	@Override public Io_zip_decompress_cmd Make_new() {return new Io_zip_decompress_cmd__jre();}
 	@Override protected byte Exec_hook(gplx.core.progs.Gfo_prog_ui prog_ui, Io_url src_fil, Io_url trg_dir, List_adp trg_fils, String resume_name, long resume_file, long resume_item) {
@@ -90,7 +91,7 @@ class Io_zip_decompress_cmd__jre extends Io_zip_decompress_cmd__base {
 					Io_mgr.Instance.CreateDir(trg_fil_url);
 				}
 			}
-			Gfo_evt_mgr_.Pub_val(Io_mgr.Instance, Io_mgr.Evt__fil_created, trg_fils.To_ary(Io_url.class));
+			Gfo_evt_mgr_.Pub_val(Io_mgr.Instance, Io_mgr.Evt__fil_created, trg_fils.ToAry(Io_url.class));
 		}
 		catch(IOException e) {throw Err_.new_exc(e, "ios.zip", "error duing unzip", "src", src_fil.Raw(), "trg", trg_dir.Raw());}
 		finally {

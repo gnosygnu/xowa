@@ -13,8 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
-import gplx.xowa.apps.apis.xowa.html.modules.*;
+package gplx.xowa.htmls.modules.popups; import gplx.*;
 import gplx.xowa.parsers.*;
 public class Xow_popup_parser_data {
 	public int Tmpl_max() {return tmpl_max;} private int tmpl_max;
@@ -23,7 +22,7 @@ public class Xow_popup_parser_data {
 	private int words_needed_min;
 	public int Words_found() {return words_found;} private int words_found;
 	public Bry_bfr Wrdx_bfr() {return wrdx_bfr;} private Bry_bfr wrdx_bfr = Bry_bfr_.Reset(255);
-	public Xow_popup_word[] Words_found_ary() {return (Xow_popup_word[])words_found_list.To_ary_and_clear(Xow_popup_word.class);} private List_adp words_found_list = List_adp_.New();
+	public Xow_popup_word[] Words_found_ary() {return (Xow_popup_word[])words_found_list.ToAryAndClear(Xow_popup_word.class);} private List_adp words_found_list = List_adp_.New();
 	public int Tmpl_loop_count() {return tmpl_loop_count;} private int tmpl_loop_count;
 	public void Tmpl_loop_count_add() {++tmpl_loop_count;}
 	private Xow_popup_itm popup_itm;

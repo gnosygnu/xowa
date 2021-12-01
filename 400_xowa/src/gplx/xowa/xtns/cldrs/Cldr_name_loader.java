@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cldrs; import gplx.*;
 import gplx.langs.jsons.*;
 public class Cldr_name_loader {
 	private final Json_parser parser = new Json_parser();
@@ -34,7 +34,7 @@ public class Cldr_name_loader {
 		lang_key = String_.Lower(lang_key);
 
 		// return file if already exists
-		Cldr_name_file file = (Cldr_name_file)files_hash.Get_by(lang_key);
+		Cldr_name_file file = (Cldr_name_file)files_hash.GetByOrNull(lang_key);
 		if (file != null) return file;
 
 		// create urls_hash from dir if it doesn't exist
@@ -42,7 +42,7 @@ public class Cldr_name_loader {
 			urls_hash = Make_urls_hash(Io_mgr.Instance.QueryDir_fils(cldr_dir));
 
 		// get file
-		Io_url url = (Io_url)urls_hash.Get_by(lang_key);
+		Io_url url = (Io_url)urls_hash.GetByOrNull(lang_key);
 		if (url == null) {
 			Gfo_usr_dlg_.Instance.Log_many("", "", "no cldrName file exists for lang; lang=~{0}", lang_key);
 			return Cldr_name_file.Empty;
@@ -112,7 +112,7 @@ public class Cldr_name_loader {
 			}
 			name = String_.Lower(name);
 			name = String_.Replace(name, "_", "-"); // CldrNamesEn_gb.json should have a key of "en-gb", not en_gb; ISSUE#:349; DATE:2019-02-01
-			rv.Add_if_dupe_use_1st(name, url);
+			rv.AddIfDupeUse1st(name, url);
 		}
 		return rv;
 	}

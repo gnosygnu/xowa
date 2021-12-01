@@ -14,13 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*;
-import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.parsers.quotes.*;
+import gplx.core.btries.*;
+import gplx.xowa.mediawiki.includes.parsers.quotes.*;
 import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.linkers.*;
 import gplx.xowa.mediawiki.includes.libs.*;
 import gplx.xowa.mediawiki.includes.media.*; import gplx.xowa.mediawiki.includes.filerepo.file.*;
-import gplx.xowa.parsers.uniqs.*;
 /*	TODO.XO
 	* P7: multi-line links; // look at the next 'line' to see if we can close it there
 	* P7: interwiki
@@ -680,7 +678,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 	private void getImageParams(Xomw_image_params rv, XomwMediaHandler handler) {
 		byte[] handlerClass = handler == null ? Bry_.Empty : handler.Key();
-		rv.paramMap = (Xomw_param_map)mImageParams.Get_by(handlerClass);
+		rv.paramMap = (Xomw_param_map)mImageParams.GetByOrNull(handlerClass);
 		// NOTE: lazy-init; code below can be inefficent
 		if (rv.paramMap == null) {
 			// Initialise static lists				
@@ -718,7 +716,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			rv.mwArray = mw_array;
 		}
 		else {
-			rv.mwArray = (XomwMagicWordArray)mImageParamsMagicArray.Get_by(handlerClass);
+			rv.mwArray = (XomwMagicWordArray)mImageParamsMagicArray.GetByOrNull(handlerClass);
 		}
 	}
 	// Parsed a width param of imagelink like 300px or 200x300px

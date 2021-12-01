@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys.fmtrs; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
-import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.strings.*;
+package gplx.core.brys.fmtrs; import gplx.*;
+import gplx.core.brys.*;
+import gplx.core.primitives.*; import gplx.core.strings.*;
 public class Bry_fmtr {
 	public byte[] Fmt() {return fmt;} private byte[] fmt = Bry_.Empty;
 	public boolean Fmt_null() {return fmt.length == 0;}
@@ -136,7 +137,7 @@ public class Bry_fmtr {
 							list.Add(Bry_fmtr_itm.arg_(lkp_bfr.To_int(0) - baseInt));
 						else {
 							byte[] key_fmt = lkp_bfr.To_bry();
-							Object idx_ref = keys.Get_by(Bry_obj_ref.New(key_fmt));
+							Object idx_ref = keys.GetByOrNull(Bry_obj_ref.New(key_fmt));
 							if (idx_ref == null) {
 								int lkp_bfr_len = lkp_bfr.Len();
 								byte[] lkp_bry = lkp_bfr.Bfr();
@@ -210,7 +211,7 @@ public class Bry_fmtr {
 			}
 			if (lkp_is_active) throw Err_.new_wo_type("idx mode not closed");
 			if (trg_pos > 0) {list.Add(Bry_fmtr_itm.dat_(trg_bry, trg_pos)); trg_pos = 0;}
-			itms = (Bry_fmtr_itm[])list.To_ary(Bry_fmtr_itm.class);
+			itms = (Bry_fmtr_itm[])list.ToAry(Bry_fmtr_itm.class);
 			itms_len = itms.length;
 			if (dirty_disable)
 				dirty = false; // ISSUE#:575; DATE:2019-09-16

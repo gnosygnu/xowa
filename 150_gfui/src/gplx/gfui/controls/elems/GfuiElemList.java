@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.elems; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.elems; import gplx.*;
 public class GfuiElemList {
-	public int Count()						{return hash.Count();}
+	public int Count()						{return hash.Len();}
 	public GfuiElem Get_at(int idx)		{return (GfuiElem)hash.Get_at(idx);}
-	public GfuiElem Get_by(String key)		{return (GfuiElem)hash.Get_by(key);}
+	public GfuiElem Get_by(String key)		{return (GfuiElem)hash.GetByOrNull(key);}
 	public void Add(GfuiElem box)			{Add_exec(box);}
 	public void DelOrFail(GfuiElem box)		{Del_exec(box);}
 	public void Del_at(int idx)				{Del_exec(Get_at(idx));}

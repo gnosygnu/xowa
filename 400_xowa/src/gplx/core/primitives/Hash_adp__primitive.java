@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives; import gplx.*;
 public class Hash_adp__primitive {
 	private final Hash_adp hash = Hash_adp_.New();
 	public byte Get_by_str_or_max(String key) {
-		Byte_obj_val rv = (Byte_obj_val)hash.Get_by(key);
+		Byte_obj_val rv = (Byte_obj_val)hash.GetByOrNull(key);
 		return rv == null ? Byte_.Max_value_127 : rv.Val();
 	}
 	public Hash_adp__primitive Add_byte(String key, byte val) {

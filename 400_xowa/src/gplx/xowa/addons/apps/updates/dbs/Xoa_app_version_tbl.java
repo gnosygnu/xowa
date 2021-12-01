@@ -13,21 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
-import gplx.dbs.*; import gplx.dbs.utls.*;
+package gplx.xowa.addons.apps.updates.dbs; import gplx.*;
+import gplx.dbs.*;
 public class Xoa_app_version_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__version_id, fld__version_name, fld__version_date, fld__version_priority, fld__version_url, fld__version_summary, fld__version_details;
 	private final Db_conn conn;
 	public Xoa_app_version_tbl(Db_conn conn) {
 		this.conn = conn;
-		this.fld__version_id		= flds.Add_int_pkey("version_id");
-		this.fld__version_name		= flds.Add_str("version_name", 32);
-		this.fld__version_date		= flds.Add_str("version_date", 32);
-		this.fld__version_priority	= flds.Add_int("version_priority");		// 3:trivial; 5:minor; 7:major;
-		this.fld__version_url		= flds.Add_str("version_url", 255);
-		this.fld__version_summary	= flds.Add_str("version_summary", 255);
-		this.fld__version_details	= flds.Add_text("version_details");
+		this.fld__version_id		= flds.AddIntPkey("version_id");
+		this.fld__version_name		= flds.AddStr("version_name", 32);
+		this.fld__version_date		= flds.AddStr("version_date", 32);
+		this.fld__version_priority	= flds.AddInt("version_priority");		// 3:trivial; 5:minor; 7:major;
+		this.fld__version_url		= flds.AddStr("version_url", 255);
+		this.fld__version_summary	= flds.AddStr("version_summary", 255);
+		this.fld__version_details	= flds.AddText("version_details");
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name = TBL_NAME;
@@ -48,7 +48,7 @@ public class Xoa_app_version_tbl implements Db_tbl {
 			while (rdr.Move_next()) {
 				list.Add(Load(rdr));
 			}
-			return (Xoa_app_version_itm[])list.To_ary_and_clear(Xoa_app_version_itm.class);
+			return (Xoa_app_version_itm[])list.ToAryAndClear(Xoa_app_version_itm.class);
 		} finally {rdr.Rls();}
 	}
 	public Xoa_app_version_itm Select_by_name_or_null(String name) {

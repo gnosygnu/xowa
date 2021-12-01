@@ -17,7 +17,9 @@ package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
 import gplx.core.envs.*;
 import gplx.gfui.draws.*;
 import gplx.xowa.langs.cases.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.grammars.*; import gplx.xowa.langs.genders.*; import gplx.xowa.langs.plurals.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.durations.*; import gplx.xowa.langs.lnki_trails.*; import gplx.xowa.langs.funcs.*; import gplx.xowa.langs.specials.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.commas.*;
-import gplx.xowa.apps.gfs.*; import gplx.xowa.apps.fsys.*; import gplx.core.intls.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.xtns.lst.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.apps.gfs.*; import gplx.xowa.apps.fsys.*;
+import gplx.xowa.wikis.nss.*; import gplx.xowa.xtns.lst.*;
+import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.guis.langs.*;
 import gplx.xowa.mediawiki.languages.*;
 public class Xol_lang_itm implements Gfo_invk {
@@ -69,7 +71,7 @@ public class Xol_lang_itm implements Gfo_invk {
 				// EX:
 				// * lang.Load_lang("gl") calls lang.Fallback_bry_ with "pt" (the fallback_lang) and "en" (the default lang)
 				// * then lang.Fallback_bry_ calls lang.Exec_fallback_load("pt") which calls lang.Fallack_bry_ with "pt-br"(the fallback_lang) and "en" (the default lang)
-				fallback_hash.Add_if_dupe_use_1st(val, val);
+				fallback_hash.AddIfDupeUse1st(val, val);
 			}
 		} catch (Exception exc) {
 			String cur_fallbacks = String_.AryXtoStr((String[])fallback_hash.To_ary(String.class));

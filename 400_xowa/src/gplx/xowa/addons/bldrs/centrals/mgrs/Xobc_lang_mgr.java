@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.mgrs; import gplx.*;
 import gplx.core.gfobjs.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.datas.*;
 public class Xobc_lang_mgr {
@@ -27,6 +27,6 @@ public class Xobc_lang_mgr {
 			itm_nde.Add_str("key", itm.Key());
 			itm_nde.Add_str("name", itm.Name());
 		}
-		return new Gfobj_ary((Gfobj_nde[])list.To_ary_and_clear(Gfobj_nde.class));
+		return new Gfobj_ary((Gfobj_nde[])list.ToAryAndClear(Gfobj_nde.class));
 	}
 }

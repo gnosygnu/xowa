@@ -20,5 +20,5 @@ public class XomwMessageMgr {
 	public void Old_add(String key, String val, XomwLanguage language) {
 		hash.Add(key, new XomwMessageOld(Bry_.new_u8(val), language));
 	}
-	public XomwMessageOld Old_get_by_str(String key) {return (XomwMessageOld)hash.Get_by(key);}
+	public XomwMessageOld Old_get_by_str(String key) {return (XomwMessageOld)hash.GetByOrNull(key);}
 }

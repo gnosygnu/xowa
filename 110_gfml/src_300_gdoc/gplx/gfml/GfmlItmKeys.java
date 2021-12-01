@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
 public class GfmlItmKeys {
-	public int Count() {return list.Count();}
+	public int Count() {return list.Len();}
 	public boolean Has(String key) {return hash.Has(key);}
 	public GfmlItm Get_at(int i) {return (GfmlItm)list.Get_at(i);}
-	public GfmlItm Get_by(String key) {return (GfmlItm)hash.Get_by(key);}
+	public GfmlItm Get_by(String key) {return (GfmlItm)hash.GetByOrNull(key);}
 	public String FetchDataOr(String key, String or) {
 		GfmlAtr atr = FetchAtr(key);
 		return (atr == null) ? or : atr.DatTkn().Val();
@@ -52,7 +52,7 @@ public class GfmlItmKeys {
 		}
 		if (toDel != null) list.Del(toDel);
 	}
-	GfmlAtr FetchAtr(String key) {return GfmlAtr.as_(hash.Get_by(key));}
+	GfmlAtr FetchAtr(String key) {return GfmlAtr.as_(hash.GetByOrNull(key));}
 	List_adp list = List_adp_.New(); Hash_adp hash = Hash_adp_.New(); 
 	public static GfmlItmKeys new_() {return new GfmlItmKeys();} GfmlItmKeys() {}
 	@gplx.Internal protected static final String NullKey = "";

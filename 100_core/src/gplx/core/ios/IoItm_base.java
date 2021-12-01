@@ -13,8 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.langs.gfs.*;
+package gplx.core.ios; import gplx.*;
 public abstract class IoItm_base implements Gfo_invk, CompareAble {
 	public abstract int TypeId(); public abstract boolean Type_dir(); public abstract boolean Type_fil();
 	public Io_url Url() {return ownerDir == null ? url : ownerDir.Url().GenSubFil(name); /*NOTE: must call .Url*/} Io_url url;		
@@ -31,7 +30,7 @@ public abstract class IoItm_base implements Gfo_invk, CompareAble {
 		if (ownerDir == null) url = url.OwnerDir().GenSubFil(name); 
 		return this;
 	} 
-	public Object XtnProps_get(String key) {return props.Get_by(key);} Hash_adp props = Hash_adp_.Noop;
+	public Object XtnProps_get(String key) {return props.GetByOrNull(key);} Hash_adp props = Hash_adp_.Noop;
 	public IoItm_base XtnProps_set(String key, Object val) {
 		if (props == Hash_adp_.Noop) props = Hash_adp_.New();
 		props.Del(key);

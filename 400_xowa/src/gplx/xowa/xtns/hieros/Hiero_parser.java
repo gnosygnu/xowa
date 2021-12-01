@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.btries.*; import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
+package gplx.xowa.xtns.hieros; import gplx.*;
+import gplx.core.btries.*; import gplx.langs.htmls.*;
 class Hiero_parser {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private final Btrie_rv trv = new Btrie_rv();
@@ -64,7 +64,7 @@ class Hiero_parser {
 				}
 			}			
 			this.New_block();// flush remaining items
-			return (Hiero_block[])blocks.To_ary_and_clear(Hiero_block.class);
+			return (Hiero_block[])blocks.ToAryAndClear(Hiero_block.class);
 		}
 	}
 	private void New_block() {
@@ -127,7 +127,7 @@ class Hiero_parser_itm {
 }
 class Hiero_block {
 	private List_adp list = List_adp_.New();
-	public int Len() {return list.Count();}
+	public int Len() {return list.Len();}
 	public byte[] Get_at(int i) {return (byte[])list.Get_at(i);}
 	public void Add(byte[] v) {list.Add(v);}
 }

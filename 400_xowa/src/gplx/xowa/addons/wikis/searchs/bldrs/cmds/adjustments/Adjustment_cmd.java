@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.bldrs.*; import gplx.xowa.addons.wikis.searchs.bldrs.cmds.*;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.searchs.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.nss.*;
 public class Adjustment_cmd implements Gfo_invk {
@@ -34,16 +35,16 @@ public class Adjustment_cmd implements Gfo_invk {
 
 		// add fields to page_rank_tbl
 		String page_rank_tbl = Xobldr__page__page_score.Pagerank__tbl_name;
-		pl_conn.Meta_fld_assert(page_rank_tbl, "score_old"	, Dbmeta_fld_tid.Itm__int, 0);
-		pl_conn.Meta_fld_assert(page_rank_tbl, "len_avg"	, Dbmeta_fld_tid.Itm__int, 0);
+		pl_conn.Meta_fld_assert(page_rank_tbl, "score_old"	, DbmetaFldType.ItmInt, 0);
+		pl_conn.Meta_fld_assert(page_rank_tbl, "len_avg"	, DbmetaFldType.ItmInt, 0);
 
 		// create penalty summary tbl
 		pl_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("penalty_summary"
-		, Dbmeta_fld_itm.new_int("page_ns")
-		, Dbmeta_fld_itm.new_int("score_bgn")
-		, Dbmeta_fld_itm.new_int("score_end")
-		, Dbmeta_fld_itm.new_int("len_avg")
-		, Dbmeta_fld_itm.new_int("page_count")
+		, DbmetaFldItm.NewInt("page_ns")
+		, DbmetaFldItm.NewInt("score_bgn")
+		, DbmetaFldItm.NewInt("score_end")
+		, DbmetaFldItm.NewInt("len_avg")
+		, DbmetaFldItm.NewInt("page_count")
 		));
 		Db_stmt summary_stmt = pl_conn.Stmt_insert("penalty_summary", "page_ns", "score_bgn", "score_end", "len_avg", "page_count");
 		Db_stmt detail_stmt = pl_conn.Stmt_update(page_rank_tbl, String_.Ary("page_id"), "page_score", "score_old", "len_avg");

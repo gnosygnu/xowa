@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.apps.wms.apis.*; import gplx.xowa.files.fsdb.*;
+package gplx.xowa.files.origs; import gplx.*;
+import gplx.xowa.files.*;
 public class Xof_orig_wkr_ {
 	public static final Xof_orig_wkr[] Ary_empty = new Xof_orig_wkr[0];
 	public static void Find_by_list(Xof_orig_wkr wkr, Ordered_hash rv, List_adp itms) {
-		int len = itms.Count();
+		int len = itms.Len();
 		for (int i = 0; i < len; ++i) {
 			Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.Get_at(i);
 			byte[] fsdb_ttl = fsdb.Lnki_ttl();

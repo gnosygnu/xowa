@@ -15,17 +15,22 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa; import gplx.*;
 import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.ios.*;
-import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.apps.urls.*; 
+import gplx.xowa.apps.*;
+import gplx.xowa.apps.cfgs.*; import gplx.xowa.apps.urls.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.cases.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.caches.*; import gplx.xowa.wikis.fsys.*;
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*;
+import gplx.xowa.wikis.data.*;
+import gplx.xowa.wikis.caches.*; import gplx.xowa.wikis.fsys.*;
 import gplx.xowa.users.*; import gplx.xowa.htmls.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.wikis.dbs.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.exts.*;		
-import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;	import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.hxtns.pages.*; 
-import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.installs.*; import gplx.xowa.bldrs.setups.maints.*;
+import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.*; import gplx.fsdb.meta.*;
+import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*;
+import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.ns_files.*;
+import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.hxtns.pages.*;
+import gplx.xowa.bldrs.xmls.*;
+import gplx.xowa.bldrs.setups.maints.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.utils.*;
-import gplx.xowa.addons.wikis.ctgs.*;
-import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.views.*;
-import gplx.xowa.xtns.gallery.*; import gplx.xowa.xtns.pfuncs.*; 
+import gplx.xowa.guis.cbks.*;
+import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*;
 import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
 public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
@@ -273,7 +278,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	}
 	public void Rls() {
 		if (rls_list != null) {
-			int len = rls_list.Count();
+			int len = rls_list.Len();
 			for (int i = 0; i < len; i++) {
 				Rls_able rls = (Rls_able)rls_list.Get_at(i);
 				rls.Rls();

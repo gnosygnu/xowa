@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
+package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*;
+import gplx.core.btries.*;
 public class Dbmeta_parser__tbl {
 	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	private final Dbmeta_parser__fld fld_parser = new Dbmeta_parser__fld();
@@ -27,7 +27,7 @@ public class Dbmeta_parser__tbl {
 		Dbmeta_tbl_itm rv = Dbmeta_tbl_itm.New(String_.new_u8(tbl_name));
 		boolean loop = true;
 		while (loop) {
-			Dbmeta_fld_itm fld = fld_parser.Parse_fld(rdr); if (fld == null) rdr.Err_wkr().Fail("unknown field", "src", src);
+			DbmetaFldItm fld = fld_parser.Parse_fld(rdr); if (fld == null) rdr.Err_wkr().Fail("unknown field", "src", src);
 			rv.Flds().Add(fld);
 			int pos = rdr.Pos();
 			byte b = pos == rdr.Src_end() ? Byte_ascii.Null : src[pos];

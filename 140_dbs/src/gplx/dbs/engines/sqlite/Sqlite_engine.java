@@ -39,7 +39,7 @@ import gplx.dbs.Db_qry;
 import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_rdr__basic;
 import gplx.dbs.Db_stmt;
-import gplx.dbs.Dbmeta_fld_itm;
+import gplx.dbs.DbmetaFldItm;
 import gplx.dbs.engines.Db_engine;
 import gplx.dbs.engines.Db_engine_sql_base;
 import gplx.dbs.metas.Dbmeta_tbl_mgr;
@@ -214,7 +214,7 @@ class Sqlite_rdr extends Db_data_rdr {		@Override public float ReadFloat(String 
 }
 class Sqlite_stmt extends gplx.dbs.qrys.Db_stmt_cmd {	public Sqlite_stmt(Db_engine engine, Db_qry qry) {super(engine, qry);}
 	@Override protected Db_stmt Add_date(boolean where, String k, DateAdp v) {
-		if (k == Dbmeta_fld_itm.Key_null) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return this;	// key is explicitly null; ignore; allows version_2+ type definitions
 		return super.Add_str(where, k, v.XtoStr_fmt_iso_8561());
 	}
 }

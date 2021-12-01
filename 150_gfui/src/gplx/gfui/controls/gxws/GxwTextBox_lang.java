@@ -183,7 +183,7 @@ class GxwTextFld_cls_lang extends JTextField implements GxwTextFld {
 class GxwTextBox_overrideKeyCmd extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		if (focus) {
-			int z = owner.OwnerWin().FocusMgr().SubElems().Idx_of(owner);
+			int z = owner.OwnerWin().FocusMgr().SubElems().IdxOf(owner);
 			owner.OwnerWin().FocusMgr().Focus(focusDir, z);
 			return;
 		}

@@ -22,9 +22,9 @@ public class Sqlite_pragma implements Db_qry {
 		this.sql = String_.Format(fmt, key, val);
 	}
 	public int			Tid() {return Db_qry_.Tid_pragma;}
-	public boolean			Exec_is_rdr() {return false;}
-	public String		Base_table() {return "";}
-	public String		To_sql__exec(SqlQryWtr wtr) {return sql;}
+	public boolean ReturnsRdr() {return false;}
+	public String BaseTable() {return "";}
+	public String ToSqlExec(SqlQryWtr wtr) {return sql;}
 
 	public static final String Const__journal_mode = "journal_mode", Const__journal_mode__wal = "wal", Const__journal_mode__off = "off";
 	public static Sqlite_pragma New__journal__delete()					{return new Sqlite_pragma(Bool_.N, Const__journal_mode	, "delete");}		// default

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import gplx.core.criterias.*;
 public class IoItmDir extends IoItm_base {
 	public boolean Exists() {return exists;} public void Exists_set(boolean v) {exists = v;} private boolean exists = true;
@@ -30,7 +30,7 @@ public class IoItmDir extends IoItm_base {
 	Io_url[] XtoIoUrlAry() {
 		IoItmHash list = this.XtoIoItmList(Criteria_.All);
 //#plat_wce			list.Sort(); // NOTE: on wce, subFils retrieved in unexpected order; createTime vs pathString
-		int count = list.Count();
+		int count = list.Len();
 		Io_url[] rv = new Io_url[count];
 		for (int i = 0; i < count; i++)
 			rv[i] = list.Get_at(i).Url();
@@ -48,7 +48,7 @@ public class IoItmDir extends IoItm_base {
 			int nextDirSprPos = String_.FindFwd(findDirStr, dirSpr); if (nextDirSprPos == String_.Find_none) nextDirSprPos = String_.Len(findDirStr);
 			findName = String_.MidByLen(findDirStr, 0, nextDirSprPos);
 			if (String_.Eq(findDirStr, "")) return curDir;	// findDirStr completely removed; all parts match; return curDir
-			curDir = IoItmDir_.as_(curDir.subDirs.Get_by(findName)); // try to find dir
+			curDir = IoItmDir_.as_(curDir.subDirs.GetByOrNull(findName)); // try to find dir
 			if (curDir == null) return null;	// dir not found; exit; NOTE: if dir found, loop restarts; with curDir as either findDir, or owner of findDir
 		}
 	}

@@ -84,6 +84,6 @@ class Bry_split_wkr__example implements gplx.core.brys.Bry_split_wkr {
 		return Bry_split_.Rv__ok;
 	}
 	public byte[][] To_ary() {
-		return (byte[][])list.To_ary_and_clear(byte[].class);
+		return (byte[][])list.ToAryAndClear(byte[].class);
 	}
 }

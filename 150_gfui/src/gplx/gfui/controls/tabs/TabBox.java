@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.tabs; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.tabs; import gplx.*;
 import gplx.gfui.draws.*; import gplx.gfui.layouts.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
 public class TabBox extends GfuiElemBase {
 	public int Tabs_Count() {return mgr.Count();}
@@ -129,7 +129,7 @@ class TabPnlAreaMgr {
 	}
 	public static void Del(TabBox tabBox, TabPnlItm itm) {
 		tabBox.PnlBox().SubElems().Del_at(itm.Idx());
-		((GfuiElemBase)tabBox.PnlBox()).Lyt().SubLyts().Del_at(itm.Idx());
+		((GfuiElemBase)tabBox.PnlBox()).Lyt().SubLyts().DelAt(itm.Idx());
 	}
 	public static void Select(TabBox tabBox, TabPnlItm curTabItm, TabPnlItm newTabItm) {
 		if (curTabItm != null) {

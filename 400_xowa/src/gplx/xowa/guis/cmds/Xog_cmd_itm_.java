@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.cmds; import gplx.*;
 public class Xog_cmd_itm_ {
 	private static final Ordered_hash regy = Ordered_hash_.New();	// NOTE: must be defined at top
 	public static final String
@@ -168,9 +168,9 @@ public class Xog_cmd_itm_ {
 		regy.Add(key, new Xog_cmd_itm(key, ctg_itm, text));
 		return key;
 	}
-	public static int Regy_len() {return regy.Count();}
+	public static int Regy_len() {return regy.Len();}
 	public static Xog_cmd_itm Regy_get_at(int i) {return (Xog_cmd_itm)regy.Get_at(i);}
-	public static Xog_cmd_itm Regy_get_or_null(String key) {return (Xog_cmd_itm)regy.Get_by(key);}
+	public static Xog_cmd_itm Regy_get_or_null(String key) {return (Xog_cmd_itm)regy.GetByOrNull(key);}
 	public static void Regy_add(Xog_cmd_itm itm) {regy.Add(itm.Key(), itm);}
 	public static final byte[]
 	  Msg_pre_api		= Bry_.new_a7("api-")

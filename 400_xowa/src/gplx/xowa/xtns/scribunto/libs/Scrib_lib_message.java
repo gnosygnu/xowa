@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.xtns.scribunto.*;
 import gplx.core.primitives.*; import gplx.langs.htmls.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
@@ -71,7 +72,7 @@ class Scrib_lib_message_data {
 		for (int i = 0; i < len; i++) {
 			Keyval kv = ary[i];
 			byte[] kv_key = Bry_.new_a7(kv.Key());
-			Object key_obj = key_hash.Get_by(kv_key); if (key_obj == null) throw Err_.new_wo_type("msg_key is invalid", "key", kv_key);
+			Object key_obj = key_hash.GetByOrNull(kv_key); if (key_obj == null) throw Err_.new_wo_type("msg_key is invalid", "key", kv_key);
 			byte key_tid = ((Byte_obj_val)key_obj).Val();
 			switch (key_tid) {
 				case Key_tid_keys:

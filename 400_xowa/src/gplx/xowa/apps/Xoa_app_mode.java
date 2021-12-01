@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.apps; import gplx.*;
 import gplx.core.primitives.*;
 public class Xoa_app_mode {
 	Xoa_app_mode(int tid) {this.tid = tid;}
@@ -50,7 +50,7 @@ public class Xoa_app_mode {
 	.Add_bry_int(Key_file	, Tid_file)
 	;
 	public static Xoa_app_mode parse(String s) {
-		Object o = type_hash.Get_by(Bry_.new_u8(s)); if (o == null) return Itm_cmd;	// default to cmd as per early behaviour; handles mistaken "--app_mode wrong"
+		Object o = type_hash.GetByOrNull(Bry_.new_u8(s)); if (o == null) return Itm_cmd;	// default to cmd as per early behaviour; handles mistaken "--app_mode wrong"
 		int tid = ((Int_obj_val)o).Val();
 		switch (tid) {
 			case Tid_cmd:		return Itm_cmd;

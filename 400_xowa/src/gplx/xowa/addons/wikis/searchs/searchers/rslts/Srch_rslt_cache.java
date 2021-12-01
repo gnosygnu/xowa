@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.rslts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.rslts; import gplx.*;
 public class Srch_rslt_cache {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public void Clear() {hash.Clear();}
 	public Srch_rslt_list Get_or_new(byte[] key) {
-		Srch_rslt_list rv = (Srch_rslt_list)hash.Get_by(key);
+		Srch_rslt_list rv = (Srch_rslt_list)hash.GetByOrNull(key);
 		if (rv == null) {
 			rv = new Srch_rslt_list();
 			hash.Add(key, rv);

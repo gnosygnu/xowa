@@ -60,7 +60,7 @@ class MockEvObj implements Gfo_evt_itm {
 	}
 	List_adp handled = List_adp_.New();
 	public void tst_Handled(String... expd) {
-		Tfds.Eq_ary_str(expd, handled.To_str_ary());
+		Tfds.Eq_ary_str(expd, handled.ToStrAry());
 		handled.Clear();
 	}
 	public MockEvObj(){eventMgr = new Gfo_evt_mgr(this);}

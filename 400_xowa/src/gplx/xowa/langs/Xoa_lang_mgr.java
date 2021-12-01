@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.gfs.*;
+import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.names.*;
 public class Xoa_lang_mgr implements Gfo_invk {		
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
@@ -30,10 +30,10 @@ public class Xoa_lang_mgr implements Gfo_invk {
 	public Xol_lang_itm				Lang_en() {return lang_en;} private final Xol_lang_itm lang_en;
 	public Xol_name_mgr				Name_mgr() {return name_mgr;} private final Xol_name_mgr name_mgr;
 	public void						Clear() {hash.Clear();}
-	public int						Len() {return hash.Count();}
+	public int						Len() {return hash.Len();}
 	public void						Add(Xol_lang_itm itm)		{hash.Add(itm.Key_bry(), itm);}
 	public Io_url					Root_dir() {return root_dir;} private final Io_url root_dir;
-	public Xol_lang_itm Get_by_or_null(byte[] key) {return (Xol_lang_itm)hash.Get_by(key);} // check if exists
+	public Xol_lang_itm Get_by_or_null(byte[] key) {return (Xol_lang_itm)hash.GetByOrNull(key);} // check if exists
 	public Xol_lang_itm Get_by_or_load(byte[] key) { // main call
 		Xol_lang_itm rv = Get_by_or_null(key);
 		if (rv == null) {

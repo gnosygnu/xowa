@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.core.primitives.*;
+package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*;
+import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.core.lists.hashs.*;
 public class Mock_engine implements Scrib_engine {
 	private final Hash_adp__int fnc_hash = new Hash_adp__int();
@@ -25,7 +25,7 @@ public class Mock_engine implements Scrib_engine {
 	public Scrib_server Server() {return server;} public void Server_(Scrib_server v) {} private final Mock_server server = new Mock_server();
 
 	public Scrib_lua_proc LoadString(String name, String text) {
-		return (Scrib_lua_proc)mod_init_hash.Get_by(name);
+		return (Scrib_lua_proc)mod_init_hash.GetByOrNull(name);
 	}
 	public Keyval[] CallFunction(int id, Keyval[] args) {
 		Mock_proc_stub fnc = (Mock_proc_stub)fnc_hash.Get_by_or_fail(id);
@@ -41,7 +41,7 @@ public class Mock_engine implements Scrib_engine {
 	}
 
 	public void Init_module(String mod_name, int mod_id) {
-		mod_init_hash.Add_if_dupe_use_nth(mod_name, new Scrib_lua_proc(mod_name, mod_id));
+		mod_init_hash.AddIfDupeUseNth(mod_name, new Scrib_lua_proc(mod_name, mod_id));
 	}
 	public void Init_module_func(int mod_id, Mock_proc_stub fnc) {
 		Hash_adp funcs = (Hash_adp)mod_fnc_hash.Get_by_or_null(mod_id);
@@ -54,7 +54,7 @@ public class Mock_engine implements Scrib_engine {
 	}
 	public Scrib_lua_proc Get_module_func(int mod_id, String fnc_name) {
 		Hash_adp funcs = (Hash_adp)mod_fnc_hash.Get_by_or_fail(mod_id);
-		return (Scrib_lua_proc)funcs.Get_by_or_fail(fnc_name);
+		return (Scrib_lua_proc)funcs.GetByOrFail(fnc_name);
 	}
 }
 class Mock_server implements Scrib_server {

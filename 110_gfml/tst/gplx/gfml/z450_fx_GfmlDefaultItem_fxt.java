@@ -29,7 +29,7 @@ class GfmlDefaultItem_fxt {
 			GfmlDefaultItem expd = expdAry[i];
 			tst_Item(actl, expd);
 		}
-		Tfds.Eq(expdAry.length, list.Count());
+		Tfds.Eq(expdAry.length, list.Len());
 	}
 	String Val_to_str_or_null(GfmlObj gobj) {
 		GfmlTkn tkn = GfmlTkn_.as_(gobj);

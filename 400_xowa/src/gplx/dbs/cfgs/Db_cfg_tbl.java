@@ -14,17 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.cfgs; import gplx.*; import gplx.dbs.*;
-import gplx.core.primitives.*;
 public class Db_cfg_tbl implements Db_tbl {
-	private final String tbl_name; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final String tbl_name; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_grp, fld_key, fld_val;
 	private Db_stmt stmt_insert, stmt_update, stmt_select;
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
 	public Db_cfg_tbl(Db_conn conn, String tbl_name) {
 		this.conn = conn; this.tbl_name = tbl_name;
-		this.fld_grp				= flds.Add_str("cfg_grp", 255);
-		this.fld_key				= flds.Add_str("cfg_key", 255);
-		this.fld_val				= flds.Add_str("cfg_val", 1024);
+		this.fld_grp				= flds.AddStr("cfg_grp", 255);
+		this.fld_key				= flds.AddStr("cfg_key", 255);
+		this.fld_val				= flds.AddStr("cfg_val", 1024);
 		conn.Rls_reg(this);
 	}
 	public void Rls() {
@@ -36,7 +35,7 @@ public class Db_cfg_tbl implements Db_tbl {
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds, Dbmeta_idx_itm.new_unique_by_tbl(tbl_name, "main", fld_grp, fld_key, fld_val)));}
 	public void Delete_val(String grp, String key)	{conn.Stmt_delete(tbl_name, fld_grp, fld_key).Crt_str(fld_grp, grp).Crt_str(fld_key, key).Exec_delete();}
 	public void Delete_grp(String grp)				{conn.Stmt_delete(tbl_name, fld_grp).Crt_str(fld_grp, grp).Exec_delete();}
-	public void Delete_all()						{conn.Stmt_delete(tbl_name, Dbmeta_fld_itm.Str_ary_empty).Exec_delete();}
+	public void Delete_all()						{conn.Stmt_delete(tbl_name, DbmetaFldItm.StrAryEmpty).Exec_delete();}
 	public void Insert_yn		(String grp, String key, boolean  val)		{Insert_str(grp, key, val ? "y" : "n");}
 	public void Insert_byte		(String grp, String key, byte val)			{Insert_str(grp, key, Byte_.To_str(val));}
 	public void Insert_int		(String grp, String key, int val)			{Insert_str(grp, key, Int_.To_str(val));}

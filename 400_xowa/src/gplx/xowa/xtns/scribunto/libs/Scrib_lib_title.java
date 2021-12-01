@@ -13,14 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.xtns.scribunto.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.files.commons.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.apps.wms.apis.*;
+import gplx.xowa.wikis.caches.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.wikis.xwikis.*;
+import gplx.xowa.files.origs.*;
 import gplx.xowa.xtns.scribunto.procs.*;
-import gplx.xowa.wikis.pages.redirects.*;
 public class Scrib_lib_title implements Scrib_lib {
 	public Scrib_lib_title(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public String Key() {return "mw.title";}
@@ -91,7 +90,7 @@ public class Scrib_lib_title implements Scrib_lib {
 		Xowe_wiki wiki = core.Wiki();
 		byte[] ttl_bry = args.Pull_bry(0);
 		byte[] url_func_bry = args.Pull_bry(1);
-		Object url_func_obj = url_func_hash.Get_by(url_func_bry);
+		Object url_func_obj = url_func_hash.GetByOrNull(url_func_bry);
 		if (url_func_obj == null) throw Err_.new_wo_type("url_function is not valid", "url_func", String_.new_u8(url_func_bry));
 		byte url_func_tid = ((Byte_obj_val)url_func_obj).Val();
 		byte[] qry_bry = args.Extract_qry_args(wiki, 2);

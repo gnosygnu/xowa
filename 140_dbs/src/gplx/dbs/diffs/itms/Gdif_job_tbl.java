@@ -13,15 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.diffs.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.diffs.*;
+package gplx.dbs.diffs.itms; import gplx.*; import gplx.dbs.*;
 public class Gdif_job_tbl implements Rls_able {
 	private String tbl_name = "gdif_job";
 	private String fld_job_id, fld_name, fld_made_by, fld_made_on, fld_data;
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final Db_conn conn; private Db_stmt stmt_insert;
 	public Gdif_job_tbl(Db_conn conn) {
 		this.conn = conn;
-		fld_job_id = flds.Add_int_pkey("job_id"); fld_name = flds.Add_str("name", 255); fld_made_by = flds.Add_str("made_by", 255); fld_made_on = flds.Add_date("made_on"); fld_data = flds.Add_text("data");
+		fld_job_id = flds.AddIntPkey("job_id"); fld_name = flds.AddStr("name", 255); fld_made_by = flds.AddStr("made_by", 255); fld_made_on = flds.AddDate("made_on"); fld_data = flds.AddText("data");
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;}

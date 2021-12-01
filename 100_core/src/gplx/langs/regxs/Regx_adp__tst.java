@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
+package gplx.langs.regxs; import gplx.*;
 import org.junit.*; import gplx.core.tests.*;
 public class Regx_adp__tst implements TfdsEqListItmStr {
 	@Test public void Match() {
@@ -82,7 +82,7 @@ public class Regx_adp__tst implements TfdsEqListItmStr {
 				rv.Add(itm.Groups()[j].Val());
 			}
 		}
-		return rv.To_str_ary();
+		return rv.ToStrAry();
 	}
 	public String To_str(Object curObj, Object expdObj) {
 		Regx_match cur = (Regx_match)curObj, expd = (Regx_match)expdObj;

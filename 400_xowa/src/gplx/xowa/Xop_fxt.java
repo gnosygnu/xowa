@@ -18,7 +18,9 @@ import gplx.core.tests.*; import gplx.core.log_msgs.*;
 import gplx.xowa.apps.cfgs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.apos.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*;
+import gplx.xowa.parsers.*;
+import gplx.xowa.parsers.apos.*;
+import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*;
 import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.wikis.tdbs.hives.*;
@@ -352,12 +354,12 @@ public class Xop_fxt {
 				actl_list.Add(String_.new_u8(eny.Item().Path_bry()));
 			}
 		}
-		String[] actl = actl_list.To_str_ary();
+		String[] actl = actl_list.ToStrAry();
 		msg_log.Clear();
 		return actl;
 	}
 	public Xop_fxt tst_Log_check() {
-		int len = log_itms.Count();
+		int len = log_itms.Len();
 		String[] expd = new String[len];
 		for (int i = 0; i < len; i++) {
 			Gfo_msg_itm itm = (Gfo_msg_itm)log_itms.Get_at(i);
@@ -371,7 +373,7 @@ public class Xop_fxt {
 	public void tst_Warn(String... expd) {
 		Gfo_usr_dlg usr_dlg = app.Usr_dlg();
 		Gfo_usr_dlg__gui_mock ui_wkr = (Gfo_usr_dlg__gui_mock)usr_dlg.Gui_wkr();
-		String[] actl = ui_wkr.Warns().To_str_ary();
+		String[] actl = ui_wkr.Warns().ToStrAry();
 		Tfds.Eq_ary_str(expd, actl);
 	}
 	public void Test_parse_page(String ttl, String expd) {

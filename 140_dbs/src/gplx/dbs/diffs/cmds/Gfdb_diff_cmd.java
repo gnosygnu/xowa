@@ -37,12 +37,12 @@ class Gfo_srl_mgr_rdr__db {
 
 		Gfo_srl_mgr_rdr__defn defn = new Gfo_srl_mgr_rdr__defn();	// Get(key)
 		Db_conn conn = Db_conn_.Noop;
-		Db_stmt select = conn.Stmt_select(defn.Tbl, Dbmeta_fld_itm.Str_ary_empty, defn.Select_crt_cols);
+		Db_stmt select = conn.Stmt_select(defn.Tbl, DbmetaFldItm.StrAryEmpty, defn.Select_crt_cols);
 		int crt_len = crt_mgr.Len();
 		for (int i = 0; i < crt_len; ++i) {
 			Dbmeta_dat_itm crt = crt_mgr.Get_at(i);
 			switch (crt.Tid) {
-				case Dbmeta_fld_tid.Tid__int: select.Crt_int(crt.Key, Int_.Cast(crt.Val)); break;
+				case DbmetaFldType.TidInt: select.Crt_int(crt.Key, Int_.Cast(crt.Val)); break;
 			}				
 		}
 		Db_rdr rdr = select.Exec_select__rls_manual();
@@ -53,7 +53,7 @@ class Gfo_srl_mgr_rdr__db {
 		}
 		rdr.Rls();
 
-		return list.To_ary_and_clear(proto.getClass());
+		return list.ToAryAndClear(proto.getClass());
 	}
 	public void	Set_subs	(Gfo_srl_ctx ctx, Gfo_srl_itm owner, Gfo_srl_itm proto, Gfo_srl_itm[] subs_ary, String defn_key, Dbmeta_dat_mgr crt_mgr) {
 		Gfo_srl_mgr_rdr__defn defn = new Gfo_srl_mgr_rdr__defn();	// Get(key)
@@ -63,7 +63,7 @@ class Gfo_srl_mgr_rdr__db {
 		for (int i = 0; i < crt_len; ++i) {
 			Dbmeta_dat_itm crt = crt_mgr.Get_at(i);
 			switch (crt.Tid) {
-				case Dbmeta_fld_tid.Tid__int: delete.Crt_int(crt.Key, Int_.Cast(crt.Val)); break;
+				case DbmetaFldType.TidInt: delete.Crt_int(crt.Key, Int_.Cast(crt.Val)); break;
 			}				
 		}
 		delete.Exec_delete();
@@ -88,18 +88,18 @@ class Gfdb_diff_txn {
 	public int Id = 0;
 }
 class Gfdb_diff_cmd__fld__create {
-	public Gfdb_diff_cmd__fld__create(Dbmeta_fld_itm cur) {this.cur = cur;}
-	private Dbmeta_fld_itm cur;
+	public Gfdb_diff_cmd__fld__create(DbmetaFldItm cur) {this.cur = cur;}
+	private DbmetaFldItm cur;
 	public void Save(Gfo_srl_ctx ctx, Gfo_srl_itm owner) {
 		Gfo_srl_mgr_wtr wtr = ctx.Wtr_bgn("cmd.fld");
 		wtr.Set_int		("txn_id"		, ((Gfdb_diff_txn)owner).Id);
 		wtr.Set_str		("name"			, cur.Name());
-		wtr.Set_int		("type_tid"		, cur.Type().Tid_ansi());
-		wtr.Set_int		("type_len_1"	, cur.Type().Len_1());
-		wtr.Set_int		("type_len_2"	, cur.Type().Len_2());
+		wtr.Set_int		("type_tid"		, cur.Type().Tid());
+		wtr.Set_int		("type_len_1"	, cur.Type().Len1());
+		wtr.Set_int		("type_len_2"	, cur.Type().Len2());
 		wtr.Set_bool	("primary"		, cur.Primary());
-		wtr.Set_int		("nullable"		, cur.Nullable_tid());
-		wtr.Set_str		("dflt"			, Object_.Xto_str_or(cur.Default(), null));
+		wtr.Set_int		("nullable"		, cur.Nullable());
+		wtr.Set_str		("dflt"			, Object_.Xto_str_or(cur.DefaultVal(), null));
 		wtr.Itm_end();
 	}
 	public void Load(Gfo_srl_ctx ctx, Gfo_srl_itm owner) {
@@ -111,10 +111,10 @@ class Gfdb_diff_cmd__fld__create {
 		boolean primary = rdr.Get_bool("primary");
 		int nullable_tid = rdr.Get_int("nullable");
 		String dflt_str = rdr.Get_str("dflt");
-		cur = new Dbmeta_fld_itm(name, Dbmeta_fld_tid.New(type_tid, type_len_1));
-		cur.Nullable_tid_(nullable_tid);
-		if (primary) cur.Primary_y_();
-		if (dflt_str != null) cur.Default_(dflt_str);
+		cur = new DbmetaFldItm(name, DbmetaFldType.New(type_tid, type_len_1));
+		cur.NullableSet(nullable_tid);
+		if (primary) cur.PrimarySetY();
+		if (dflt_str != null) cur.DefaultValSet(dflt_str);
 		rdr.Itm_end();
 //			Gfdb_diff_cmd__idx__create idx = ((Gfdb_diff_cmd__idx__create)owner);			
 //			Dbmeta_tbl_itm tbl = ((Gfdb_diff_ctx)ctx).Tbls__get(idx.cur.Tbl());
@@ -122,13 +122,13 @@ class Gfdb_diff_cmd__fld__create {
 	}
 }
 class Gfdb_diff_cmd__fld__delete {
-	public Gfdb_diff_cmd__fld__delete(Dbmeta_fld_itm old) {this.Old = old;}
-	public final Dbmeta_fld_itm Old;
+	public Gfdb_diff_cmd__fld__delete(DbmetaFldItm old) {this.Old = old;}
+	public final DbmetaFldItm Old;
 }
 class Gfdb_diff_cmd__fld__modify {
-	public Gfdb_diff_cmd__fld__modify(Dbmeta_fld_itm old, Dbmeta_fld_itm cur) {this.Old = old; this.Cur = cur;}
-	public final Dbmeta_fld_itm Old;
-	public final Dbmeta_fld_itm Cur;
+	public Gfdb_diff_cmd__fld__modify(DbmetaFldItm old, DbmetaFldItm cur) {this.Old = old; this.Cur = cur;}
+	public final DbmetaFldItm Old;
+	public final DbmetaFldItm Cur;
 }
 class Gfdb_diff_cmd__tbl__create {
 	public Gfdb_diff_cmd__tbl__create(Dbmeta_tbl_itm cur) {this.Cur = cur;}
@@ -184,8 +184,8 @@ class Gfdb_diff_cmd_bldr {
 		Dbmeta_fld_mgr old_flds = old_tbl.Flds(), cur_flds = cur_tbl.Flds();
 		int cur_flds_len = cur_flds.Len();
 		for (int i = 0; i < cur_flds_len; ++i) {
-			Dbmeta_fld_itm cur_fld = cur_flds.Get_at(i);
-			Dbmeta_fld_itm old_fld = old_flds.Get_by(cur_fld.Name());
+			DbmetaFldItm cur_fld = cur_flds.Get_at(i);
+			DbmetaFldItm old_fld = old_flds.Get_by(cur_fld.Name());
 			if (old_fld == null)
 				rv.Add(new Gfdb_diff_cmd__fld__create(cur_fld));
 			else
@@ -194,8 +194,8 @@ class Gfdb_diff_cmd_bldr {
 		}
 		int old_flds_len = old_flds.Len();
 		for (int i = 0; i < old_flds_len; ++i) {
-			Dbmeta_fld_itm old_fld = old_flds.Get_at(i);
-			Dbmeta_fld_itm cur_fld = cur_flds.Get_by(old_fld.Name());
+			DbmetaFldItm old_fld = old_flds.Get_at(i);
+			DbmetaFldItm cur_fld = cur_flds.Get_by(old_fld.Name());
 			if (cur_fld == null)
 				rv.Add(new Gfdb_diff_cmd__fld__delete(old_fld));
 		}

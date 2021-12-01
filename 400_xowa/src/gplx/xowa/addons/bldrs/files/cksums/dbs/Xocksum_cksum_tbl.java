@@ -13,23 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cksums.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.addons.bldrs.files.cksums.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.addons.wikis.ctgs.*; 
+package gplx.xowa.addons.bldrs.files.cksums.dbs; import gplx.*;
+import gplx.dbs.*;
 public class Xocksum_cksum_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__fil_id, fld__thm_id, fld__bin_db_id, fld__bin_len, fld__cksum_tid, fld__cksum_count, fld__cksum_val, fld__cksum_date;
 	private Db_stmt stmt__update;
 	public Xocksum_cksum_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "fsdb_cksum";
-		this.fld__fil_id		= flds.Add_int("fil_id");
-		this.fld__thm_id		= flds.Add_int("thm_id");
-		this.fld__bin_db_id		= flds.Add_int("bin_db_id");
-		this.fld__bin_len		= flds.Add_long("bin_size");
-		this.fld__cksum_tid		= flds.Add_byte("cksum_tid");
-		this.fld__cksum_count	= flds.Add_int("cksum_count");
-		this.fld__cksum_val		= flds.Add_str("cksum_val", 255);
-		this.fld__cksum_date	= flds.Add_str("cksum_date", 16);
+		this.fld__fil_id		= flds.AddInt("fil_id");
+		this.fld__thm_id		= flds.AddInt("thm_id");
+		this.fld__bin_db_id		= flds.AddInt("bin_db_id");
+		this.fld__bin_len		= flds.AddLong("bin_size");
+		this.fld__cksum_tid		= flds.AddByte("cksum_tid");
+		this.fld__cksum_count	= flds.AddInt("cksum_count");
+		this.fld__cksum_val		= flds.AddStr("cksum_val", 255);
+		this.fld__cksum_date	= flds.AddStr("cksum_date", 16);
 		conn.Rls_reg(this);
 	}
 	public Db_conn Conn() {return conn;} private final Db_conn conn;
@@ -87,7 +87,7 @@ public class Xocksum_cksum_tbl implements Db_tbl {
 			}
 		} finally {rdr.Rls();}
 
-		return (Xocksum_cksum_row[])rv.To_ary_and_clear(Xocksum_cksum_row.class);
+		return (Xocksum_cksum_row[])rv.ToAryAndClear(Xocksum_cksum_row.class);
 	}
 	public void Update(int fil_id, int thm_id, int bin_db_id, long bin_size, byte cksum_tid, int cksum_count, byte[] cksum_val, String cksum_date) {
 		if (stmt__update == null) stmt__update = conn.Stmt_update_exclude(tbl_name, flds, fld__fil_id, fld__thm_id);

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps; import gplx.*;
 import gplx.core.btries.*; import gplx.core.log_msgs.*;
 public class Php_parser {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci:PHP tkns are ASCII
@@ -50,8 +50,8 @@ public class Php_parser {
 		Init_lxr(list, new Php_lxr_num());
 		Init_lxr(list, new Php_lxr_quote(Byte_ascii.Apos));
 		Init_lxr(list, new Php_lxr_quote(Byte_ascii.Quote));
-		lxrs = (Php_lxr[])list.To_ary(Php_lxr.class);
-		lxrs_len = list.Count();
+		lxrs = (Php_lxr[])list.ToAry(Php_lxr.class);
+		lxrs_len = list.Len();
 	}
 	private void Init_lxr(List_adp list, Php_lxr lxr) {
 		lxr.Lxr_ini(trie, parser_interrupts);

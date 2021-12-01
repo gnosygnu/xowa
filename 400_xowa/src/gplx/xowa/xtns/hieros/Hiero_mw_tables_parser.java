@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.hieros; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.log_msgs.*;
 import gplx.langs.phps.*; import gplx.langs.dsvs.*;
 import gplx.xowa.apps.gfs.*;
@@ -30,7 +30,7 @@ public class Hiero_mw_tables_parser {
 	public void Load_data(Hiero_xtn_mgr xtn_mgr, Io_url load_fil) {// NOTE: parsing tables.php instead of tables.ser b/c latter is too difficult to read / debug
 		evaluator.Clear();
 		parser.Parse_tkns(Io_mgr.Instance.LoadFilBry(load_fil), evaluator);
-		Php_line[] lines = (Php_line[])evaluator.List().To_ary(Php_line.class);
+		Php_line[] lines = (Php_line[])evaluator.List().ToAry(Php_line.class);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			Php_line_assign line = (Php_line_assign)lines[i];

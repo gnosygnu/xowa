@@ -303,7 +303,7 @@ public class GfuiElemBase implements GfuiElem {
 				Object rv = this.InvkMgr().Invk(ctx, ikey, k, m, this);
 				if (rv != Gfo_invk_.Rv_unhandled) return rv;
 
-				Object findObj = injected.Get_by(k);
+				Object findObj = injected.GetByOrNull(k);
 				if (findObj == null) findObj = this.subElems.Get_by(k);
 				if (findObj == null) return Gfo_invk_.Rv_unhandled;				
 				return findObj;	// necessary for gplx.images
@@ -339,7 +339,7 @@ public class GfuiElemBase implements GfuiElem {
 //			underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
 	public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.control_();}
-	public Object SubItms_getObj(String key) {return injected.Get_by(key);}
+	public Object SubItms_getObj(String key) {return injected.GetByOrNull(key);}
 	public GfuiElemBase SubItms_add(String key, Object v) {injected.Add(key, v); return this;}
 	public Ordered_hash XtnAtrs() {return xtnAtrs;} Ordered_hash xtnAtrs = Ordered_hash_.New();
 	Hash_adp injected = Hash_adp_.New();

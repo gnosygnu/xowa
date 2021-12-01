@@ -304,7 +304,7 @@ public class Xop_xatr_whitelist_mgr {
 					keys.Add(grp_keys[j]);
 			}
 		}
-		len = keys.Count();
+		len = keys.Len();
 		for (int i = 0; i < len; i++) {
 			byte[] key_bry = (byte[])keys.Get_at(i);
 			Xop_xatr_whitelist_itm itm = (Xop_xatr_whitelist_itm)key_trie.Match_exact(key_bry, 0, key_bry.length);
@@ -325,7 +325,7 @@ public class Xop_xatr_whitelist_mgr {
 			itm.Tags()[i] = 1;
 	}
 	private Xop_xatr_whitelist_itm  Ini_key_trie_add(byte[] key, boolean exact) {
-		Object key_tid_obj = tid_hash.Get_by(key);
+		Object key_tid_obj = tid_hash.GetByOrNull(key);
 		byte key_tid = key_tid_obj == null ? Mwh_atr_itm_.Key_tid__generic : ((Byte_obj_val)key_tid_obj).Val();
 		Xop_xatr_whitelist_itm rv = new Xop_xatr_whitelist_itm(key, key_tid, exact);
 		key_trie.Add_obj(key, rv);

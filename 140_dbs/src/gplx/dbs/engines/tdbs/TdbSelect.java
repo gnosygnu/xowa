@@ -14,12 +14,13 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.criterias.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*; import gplx.dbs.sqls.*; import gplx.dbs.sqls.itms.*; 
+import gplx.core.criterias.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*;
+import gplx.dbs.sqls.itms.*;
 import gplx.core.lists.*; /*ComparerAble*/ import gplx.core.stores.*; /*GfoNdeRdr*/
 class TdbSelectWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry__select_cmd cmd = (Db_qry__select_cmd)cmdObj;
-		if (cmd.From().Tbls.Count() > 1) throw Err_.new_("gplx.tdbs", "joins not supported for tdbs", "sql", cmd.To_sql__exec(engineObj.Sql_wtr()));
+		if (cmd.From().Tbls.Len() > 1) throw Err_.new_("gplx.tdbs", "joins not supported for tdbs", "sql", cmd.ToSqlExec(engineObj.Sql_wtr()));
 
 		TdbTable tbl = engine.FetchTbl(cmd.From().Base_tbl.Name);
 		GfoNdeList rv = (cmd.Where_itm() == Sql_where_clause.Where__null && cmd.Limit() == Db_qry__select_cmd.Limit__disabled) ? rv = tbl.Rows() : FilterRecords(tbl, cmd.Where_itm().Root, cmd.Limit());
@@ -77,14 +78,14 @@ class TdbGroupByWkr {
 		return rv;
 	}
 	static GfoNde FindOrNew(GfoFldList selectFldsForNewRow, List_adp groupByFlds, GfoNde selectRow, Ordered_hash groupByRows, GfoNdeList rslt) {
-		int len = groupByFlds.Count();
+		int len = groupByFlds.Len();
 		Ordered_hash curHash = groupByRows;
 		GfoNde rv = null;
 		for (int i = 0; i < len; i++) {
 			String fld = (String)groupByFlds.Get_at(i);
 			boolean last = i == len - 1;
 			Object val = selectRow.Read(fld);
-			Object o = curHash.Get_by(val);
+			Object o = curHash.GetByOrNull(val);
 			if (last) {
 				if (o == null) {
 					Object[] valAry = new Object[selectFldsForNewRow.Count()];

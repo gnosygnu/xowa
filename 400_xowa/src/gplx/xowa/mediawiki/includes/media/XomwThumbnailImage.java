@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.media; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.media; import gplx.*;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*;
@@ -132,23 +133,23 @@ public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final
 //			byte[] query = options.desc_query;
 
 		attribs.Clear();
-		attribs.Add_many(Gfh_atr_.Bry__alt, alt);
-		attribs.Add_many(Gfh_atr_.Bry__src, url);
+		attribs.AddMany(Gfh_atr_.Bry__alt, alt);
+		attribs.AddMany(Gfh_atr_.Bry__src, url);
 		boolean link_attribs_is_null = false;
 		if (!XophpObject_.empty(options.custom_url_link)) {
 			link_attribs.Clear();
-			link_attribs.Add_many(Gfh_atr_.Bry__href, options.custom_url_link);
+			link_attribs.AddMany(Gfh_atr_.Bry__href, options.custom_url_link);
 			if (!XophpObject_.empty(options.title)) {
-				link_attribs.Add_many(Gfh_atr_.Bry__title, options.title);
+				link_attribs.AddMany(Gfh_atr_.Bry__title, options.title);
 			}
 			if (XophpObject_.empty(options.custom_target_link)) {
-				link_attribs.Add_many(Gfh_atr_.Bry__target, options.custom_target_link);
+				link_attribs.AddMany(Gfh_atr_.Bry__target, options.custom_target_link);
 			}
 			else if (XophpObject_.empty(options.parser_extlink_target)) {
-				link_attribs.Add_many(Gfh_atr_.Bry__target, options.parser_extlink_target);
+				link_attribs.AddMany(Gfh_atr_.Bry__target, options.parser_extlink_target);
 			}
 			if (XophpObject_.empty(options.parser_extlink_rel)) {
-				link_attribs.Add_many(Gfh_atr_.Bry__rel, options.parser_extlink_rel);
+				link_attribs.AddMany(Gfh_atr_.Bry__rel, options.parser_extlink_rel);
 			}
 		}
 		else if (!XophpObject_.empty(options.custom_title_link)) {
@@ -175,25 +176,25 @@ public class XomwThumbnailImage extends XomwMediaTransformOutput {	private final
 		else {
 			link_attribs_is_null = true;
 			if (!XophpObject_.empty(options.title)) {
-				attribs.Add_many(Gfh_atr_.Bry__title, options.title);
+				attribs.AddMany(Gfh_atr_.Bry__title, options.title);
 			}
 		}
 
 		if (XophpObject_.empty(options.no_dimensions)) {
-			attribs.Add_many(Gfh_atr_.Bry__width, Int_.To_bry(width));
-			attribs.Add_many(Gfh_atr_.Bry__height, Int_.To_bry(height));
+			attribs.AddMany(Gfh_atr_.Bry__width, Int_.To_bry(width));
+			attribs.AddMany(Gfh_atr_.Bry__height, Int_.To_bry(height));
 		}
 		if (!XophpObject_.empty(options.valign)) {
-			attribs.Add_many(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
+			attribs.AddMany(Gfh_atr_.Bry__style, Bry_.Add(Bry__vertical_align, options.valign));
 		}
 		if (!XophpObject_.empty(options.img_cls)) {
-			attribs.Add_many(Gfh_atr_.Bry__class, options.img_cls);
+			attribs.AddMany(Gfh_atr_.Bry__class, options.img_cls);
 		}
 		if (XophpObject_.isset(options.override_height)) {
-			attribs.Add_many(Gfh_atr_.Bry__class, options.override_height);
+			attribs.AddMany(Gfh_atr_.Bry__class, options.override_height);
 		}
 		if (XophpObject_.isset(options.override_width)) {
-			attribs.Add_many(Gfh_atr_.Bry__width, options.override_height);
+			attribs.AddMany(Gfh_atr_.Bry__width, options.override_height);
 		}
 
 		// Additional densities for responsive images, if specified.

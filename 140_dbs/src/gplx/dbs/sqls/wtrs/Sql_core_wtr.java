@@ -54,20 +54,20 @@ public class Sql_core_wtr implements SqlQryWtr {
 				case Db_qry_.Tid_update:        return Bld_qry_update(ctx, (Db_qry_update)qry);
 				case Db_qry_.Tid_select_in_tbl:
 				case Db_qry_.Tid_select:        select_wtr.Bld_qry_select(bfr, ctx, (Db_qry__select_cmd)qry); return bfr.To_str_and_clear();
-				case Db_qry_.Tid_pragma:        return ((gplx.dbs.engines.sqlite.Sqlite_pragma)qry).To_sql__exec(this);
-				case Db_qry_.Tid_sql:            return ((Db_qry_sql)qry).To_sql__exec(this);
+				case Db_qry_.Tid_pragma:        return ((gplx.dbs.engines.sqlite.Sqlite_pragma)qry).ToSqlExec(this);
+				case Db_qry_.Tid_sql:            return ((Db_qry_sql)qry).ToSqlExec(this);
 				default:                        throw Err_.new_unhandled(qry.Tid());
 			}
 		}
 	}
 	private String Bld_qry_delete(Sql_wtr_ctx ctx, Db_qry_delete qry) {
-		bfr.Add_str_u8_many("DELETE FROM ", qry.Base_table());
+		bfr.Add_str_u8_many("DELETE FROM ", qry.BaseTable());
 		where_wtr.Bld_where(bfr, ctx, qry.Where());
 		return bfr.To_str_and_clear();
 	}
 	private String Bld_qry_insert(Sql_wtr_ctx ctx, Db_qry_insert qry) {
 		if (qry.Select() != null) {
-			bfr.Add_str_u8_many("INSERT INTO ", qry.Base_table(), " (");
+			bfr.Add_str_u8_many("INSERT INTO ", qry.BaseTable(), " (");
 			int cols_len = qry.Cols().Len();
 			for (int i = 0; i < cols_len; i++) {
 				Sql_select_fld fld = qry.Cols().Get_at(i);
@@ -77,9 +77,9 @@ public class Sql_core_wtr implements SqlQryWtr {
 			select_wtr.Bld_qry_select(bfr, ctx, qry.Select());
 			return bfr.To_str_and_clear();
 		}
-		int arg_count = qry.Args().Count(); if (arg_count == 0) throw Err_.new_wo_type("Db_qry_insert has no columns", "base_table", qry.Base_table());
+		int arg_count = qry.Args().Count(); if (arg_count == 0) throw Err_.new_wo_type("Db_qry_insert has no columns", "base_table", qry.BaseTable());
 		int last = arg_count - 1;
-		bfr.Add_str_u8_many("INSERT INTO ", qry.Base_table(), " (");
+		bfr.Add_str_u8_many("INSERT INTO ", qry.BaseTable(), " (");
 		for (int i = 0; i < arg_count; i++) {
 			Keyval pair = qry.Args().Get_at(i);
 			this.Bld_col_name(bfr, pair.Key());
@@ -95,8 +95,8 @@ public class Sql_core_wtr implements SqlQryWtr {
 		return bfr.To_str_and_clear();
 	}
 	private String Bld_qry_update(Sql_wtr_ctx ctx, Db_qry_update qry) {
-		int arg_count = qry.Args().Count(); if (arg_count == 0) throw Err_.new_wo_type("Db_qry_update has no columns", "base_table", qry.Base_table());
-		bfr.Add_str_u8_many("UPDATE ", qry.Base_table(), " SET ");
+		int arg_count = qry.Args().Count(); if (arg_count == 0) throw Err_.new_wo_type("Db_qry_update has no columns", "base_table", qry.BaseTable());
+		bfr.Add_str_u8_many("UPDATE ", qry.BaseTable(), " SET ");
 		for (int i = 0; i < arg_count; i++) {
 			Keyval pair = qry.Args().Get_at(i);
 			if (i > 0) bfr.Add_str_a7(", ");

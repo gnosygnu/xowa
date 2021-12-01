@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads; import gplx.*; import gplx.core.*;
+package gplx.core.threads; import gplx.*;
 import gplx.core.primitives.*;
 public class Gfo_async_mgr implements Gfo_invk {
 	private List_adp queue = List_adp_.New();
@@ -36,7 +36,7 @@ public class Gfo_async_mgr implements Gfo_invk {
 		try {
 			while (true) {
 				synchronized (queue) {
-					if (queue.Count() == 0) break;
+					if (queue.Len() == 0) break;
 					cmd = (Gfo_async_cmd_itm)List_adp_.Pop(queue);
 					cmd.Exec();
 				}

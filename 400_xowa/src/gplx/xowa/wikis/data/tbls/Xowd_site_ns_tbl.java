@@ -13,21 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*;
+import gplx.dbs.*;
 import gplx.xowa.wikis.nss.*;
 public class Xowd_site_ns_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_name, fld_case, fld_count, fld_is_alias;
 	private final Db_conn conn;
 	public Xowd_site_ns_tbl(Db_conn conn, boolean schema_is_1) {
 		this.conn = conn;
 		this.tbl_name = schema_is_1 ? "xowa_ns" : "site_ns";
-		fld_id				= flds.Add_int_pkey	("ns_id");
-		fld_name			= flds.Add_str		("ns_name", 255);
-		fld_case			= flds.Add_byte		("ns_case");
-		fld_is_alias		= flds.Add_bool		("ns_is_alias");
-		fld_count			= flds.Add_int		("ns_count");
+		fld_id				= flds.AddIntPkey("ns_id");
+		fld_name			= flds.AddStr("ns_name", 255);
+		fld_case			= flds.AddByte("ns_case");
+		fld_is_alias		= flds.AddBool("ns_is_alias");
+		fld_count			= flds.AddInt("ns_count");
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}

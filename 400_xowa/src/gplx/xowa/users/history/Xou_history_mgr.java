@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.htmls.hrefs.*; 
+package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*;
+import gplx.core.primitives.*;
+import gplx.core.net.qargs.*; import gplx.xowa.htmls.hrefs.*;
 public class Xou_history_mgr implements Gfo_invk {
 	private final Xou_history_html html_mgr = new Xou_history_html(); private Xou_history_sorter sorter = new Xou_history_sorter().Sort_fld_(Xou_history_itm.Fld_view_end).Ascending_(false);
 	private final Io_url history_fil;
@@ -29,19 +30,19 @@ public class Xou_history_mgr implements Gfo_invk {
 		app.Cfg().Bind_many_app(this, Cfg__enabled, Cfg__log_all);
 	}
 	public boolean Enabled() {return enabled;} private boolean enabled = true;
-	public int Len() {return itms.Count();}
+	public int Len() {return itms.Len();}
 	public void Clear() {itms.Clear();}
 	public Xou_history_itm Get_at(int i) {return (Xou_history_itm)itms.Get_at(i);}		
 	public String Get_at_last() {
 		if (!load_chk) Load();
-		int len = itms.Count(); if (len == 0) return String_.new_a7(Xoa_page_.Main_page_bry);	// if no history, return Main_page (which should go to home/wiki/Main_page)
+		int len = itms.Len(); if (len == 0) return String_.new_a7(Xoa_page_.Main_page_bry);	// if no history, return Main_page (which should go to home/wiki/Main_page)
 		Xou_history_itm itm = (Xou_history_itm)itms.Get_at(0);
 		return String_.new_u8(Bry_.Add(itm.Wiki(), Xoh_href_.Bry__wiki, itm.Page()));
 	}
 	public Xou_history_itm Get_or_null(byte[] wiki, byte[] page) {
 		if (!load_chk) Load();
 		byte[] key = Xou_history_itm.key_(wiki, page);
-		return (Xou_history_itm)itms.Get_by(key);
+		return (Xou_history_itm)itms.GetByOrNull(key);
 	}
 	public boolean Has(byte[] wiki, byte[] page) {
 		if (!load_chk) Load();
@@ -65,7 +66,7 @@ public class Xou_history_mgr implements Gfo_invk {
 		if (gplx.xowa.users.history.Xoud_history_mgr.Skip_history(ttl)) return;
 		if (!load_chk) Load();
 		byte[] key = Xou_history_itm.key_(url.Wiki_bry(), page_ttl);
-		Xou_history_itm itm = (Xou_history_itm)itms.Get_by(key);
+		Xou_history_itm itm = (Xou_history_itm)itms.GetByOrNull(key);
 		if (itm == null) {
 			itm = new Xou_history_itm(url.Wiki_bry(), To_full_db_w_qargs(url, ttl));
 			itms.Add(key, itm);
@@ -91,7 +92,7 @@ public class Xou_history_mgr implements Gfo_invk {
 	}
 	public void Save(Xoae_app app) {
 		if (!load_chk) return; // nothing loaded; nothing to save
-		int itms_len = itms.Count();
+		int itms_len = itms.Len();
 		if (itms_len == 0) return;	// no items; occurs when history disable;
 		itms.Sort_by(sorter);
 		if (itms_len > current_itms_max) itms = Archive(app);
@@ -105,11 +106,11 @@ public class Xou_history_mgr implements Gfo_invk {
 		Ordered_hash archive_itms = Ordered_hash_.New_bry();
 
 		// iterate over all itms
-		int itms_len = itms.Count();
+		int itms_len = itms.Len();
 		for (int i = 0; i < itms_len; i++) {
 			Xou_history_itm itm = (Xou_history_itm)itms.Get_at(i);
 			Ordered_hash itms_hash = (i < current_itms_reset) ? current_itms : archive_itms;	// if < cutoff, add to current file; else add to archive
-			itms_hash.Add_if_dupe_use_nth(itm.Key(), itm);	// NOTE: dupes should not exist, but if they do, ignore it; else app won't close on first time; DATE:2016-07-14
+			itms_hash.AddIfDupeUseNth(itm.Key(), itm);	// NOTE: dupes should not exist, but if they do, ignore it; else app won't close on first time; DATE:2016-07-14
 		}
 
 		// save archive
@@ -146,7 +147,7 @@ class Xou_history_itm_srl {
 			if (pos.Val() == aryLen) break;
 			Xou_history_itm itm = Xou_history_itm.csv_(ary, pos);
 			byte[] key = itm.Key();
-			Xou_history_itm existing = (Xou_history_itm)list.Get_by(key);
+			Xou_history_itm existing = (Xou_history_itm)list.GetByOrNull(key);
 			if (existing == null)	// new itm; add
 				list.Add(itm.Key(), itm);
 			else					// existing itm; update
@@ -157,7 +158,7 @@ class Xou_history_itm_srl {
 	}
 	public static byte[] Save(Ordered_hash list) {
 		Bry_bfr bb = Bry_bfr_.New();
-		int listLen = list.Count();
+		int listLen = list.Len();
 		for (int i = 0; i < listLen; i++)
 			((Xou_history_itm)list.Get_at(i)).Save(bb);
 		return bb.To_bry();

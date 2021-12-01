@@ -21,8 +21,8 @@ public class Db_qry__select_in_tbl implements Db_qry {
 		this.base_table = base_table; this.select_flds = select_flds; this.where_flds = where_flds; this.group_by_sql = group_by_sql; this.having_sql = having_sql; this.order_by_sql = order_by_sql; this.limit_sql = limit_sql;
 	}
 	public int			Tid() {return Db_qry_.Tid_select_in_tbl;}
-	public boolean			Exec_is_rdr() {return true;}
-	public String		Base_table() {return base_table;} private final String base_table;
+	public boolean ReturnsRdr() {return true;}
+	public String BaseTable() {return base_table;} private final String base_table;
 	public Criteria		Where() {return where;} private Criteria where;
 	public void Where_(Criteria v) {this.where = v;}
 	public String[]		Select_flds() {return select_flds;} private final String[] select_flds;
@@ -40,7 +40,7 @@ public class Db_qry__select_in_tbl implements Db_qry {
 	public String Having_sql() {return having_sql;} private final String having_sql;
 	public String Order_by_sql() {return order_by_sql;} public Db_qry__select_in_tbl Order_by_sql_(String v) {order_by_sql = v; return this;} private String order_by_sql;
 	public String Limit_sql() {return limit_sql;} private final String limit_sql;
-	public String To_sql__exec(SqlQryWtr wtr) {
+	public String ToSqlExec(SqlQryWtr wtr) {
 		synchronized (this) {
 			String_bldr sb = String_bldr_.new_();
 			sb.Add("SELECT ");

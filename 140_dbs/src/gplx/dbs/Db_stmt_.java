@@ -71,27 +71,27 @@ public class Db_stmt_ {
 			default:                        throw Err_.new_unhandled_default(tid);
 		}
 	}
-	public static void Insert_by_rdr(Dbmeta_fld_list flds, Db_rdr rdr, Db_stmt stmt) {
+	public static void Insert_by_rdr(DbmetaFldList flds, Db_rdr rdr, Db_stmt stmt) {
 		stmt.Clear();
 		Fill_by_rdr(flds, rdr, stmt);
 		stmt.Exec_insert();
 	}
-	private static void Fill_by_rdr(Dbmeta_fld_list flds, Db_rdr rdr, Db_stmt stmt) {
+	private static void Fill_by_rdr(DbmetaFldList flds, Db_rdr rdr, Db_stmt stmt) {
 		int flds_len = flds.Len();
 		for (int i = 0; i < flds_len; i++) {
-			Dbmeta_fld_itm fld = (Dbmeta_fld_itm)flds.Get_at(i);
+			DbmetaFldItm fld = (DbmetaFldItm)flds.GetAt(i);
 			String fld_name = fld.Name();
-			int fld_tid = fld.Type().Tid_ansi();
+			int fld_tid = fld.Type().Tid();
 			if (fld.Autonum()) continue;
 			switch (fld_tid) {
-				case Dbmeta_fld_tid.Tid__bool:        stmt.Val_bool_as_byte   (fld_name, rdr.Read_bool_by_byte(fld_name)); break;
-				case Dbmeta_fld_tid.Tid__byte:        stmt.Val_byte           (fld_name, rdr.Read_byte(fld_name)); break;
-				case Dbmeta_fld_tid.Tid__int:         stmt.Val_int            (fld_name, rdr.Read_int(fld_name)); break;
-				case Dbmeta_fld_tid.Tid__long:        stmt.Val_long           (fld_name, rdr.Read_long(fld_name)); break;
-				case Dbmeta_fld_tid.Tid__float:       stmt.Val_float          (fld_name, rdr.Read_float(fld_name)); break;
-				case Dbmeta_fld_tid.Tid__double:      stmt.Val_double         (fld_name, rdr.Read_double(fld_name)); break;
-				case Dbmeta_fld_tid.Tid__str:         stmt.Val_str            (fld_name, rdr.Read_str(fld_name)); break;
-				case Dbmeta_fld_tid.Tid__bry:         stmt.Val_bry            (fld_name, rdr.Read_bry(fld_name)); break;
+				case DbmetaFldType.TidBool:        stmt.Val_bool_as_byte   (fld_name, rdr.Read_bool_by_byte(fld_name)); break;
+				case DbmetaFldType.TidByte:        stmt.Val_byte           (fld_name, rdr.Read_byte(fld_name)); break;
+				case DbmetaFldType.TidInt:         stmt.Val_int            (fld_name, rdr.Read_int(fld_name)); break;
+				case DbmetaFldType.TidLong:        stmt.Val_long           (fld_name, rdr.Read_long(fld_name)); break;
+				case DbmetaFldType.TidFloat:       stmt.Val_float          (fld_name, rdr.Read_float(fld_name)); break;
+				case DbmetaFldType.TidDouble:      stmt.Val_double         (fld_name, rdr.Read_double(fld_name)); break;
+				case DbmetaFldType.TidStr:         stmt.Val_str            (fld_name, rdr.Read_str(fld_name)); break;
+				case DbmetaFldType.TidBry:         stmt.Val_bry            (fld_name, rdr.Read_bry(fld_name)); break;
 				default:                              throw Err_.new_unhandled_default_w_msg(fld_tid, fld_name);
 			}
 		}

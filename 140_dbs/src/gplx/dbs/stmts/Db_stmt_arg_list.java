@@ -19,9 +19,9 @@ public class Db_stmt_arg_list {
 	public void Clear() {list.Clear();}
 	public int Len() {return list.Len();}
 	public Db_stmt_arg Get_at(int i) {return (Db_stmt_arg)list.Get_at(i);}
-	public Db_stmt_arg_list Crt_int			(String key, int val)		{return Add(Bool_.Y, Dbmeta_fld_tid.Tid__int, key, val);}
-	public Db_stmt_arg_list Crt_str_by_bry	(String key, byte[] val)	{return Add(Bool_.Y, Dbmeta_fld_tid.Tid__str, key, String_.new_u8(val));}
-	public Db_stmt_arg_list Crt_str			(String key, String val)	{return Add(Bool_.Y, Dbmeta_fld_tid.Tid__str, key, val);}
+	public Db_stmt_arg_list Crt_int			(String key, int val)		{return Add(Bool_.Y, DbmetaFldType.TidInt, key, val);}
+	public Db_stmt_arg_list Crt_str_by_bry	(String key, byte[] val)	{return Add(Bool_.Y, DbmetaFldType.TidStr, key, String_.new_u8(val));}
+	public Db_stmt_arg_list Crt_str			(String key, String val)	{return Add(Bool_.Y, DbmetaFldType.TidStr, key, val);}
 	public Db_stmt_arg_list Add(boolean crt, int tid, String key, Object val) {list.Add(new Db_stmt_arg(crt, tid, key, val)); return this;}
 	public void Fill(Db_stmt stmt) {
 		int len = list.Len();
@@ -36,29 +36,29 @@ public class Db_stmt_arg_list {
 	}
 	public static void Fill_crt(Db_stmt stmt, int tid, String key, Object val) {
 		switch (tid) {
-			case Dbmeta_fld_tid.Tid__bool:			stmt.Crt_bool_as_byte	(key, Bool_.Cast(val)); break;
-			case Dbmeta_fld_tid.Tid__byte:			stmt.Crt_byte			(key, Byte_.Cast(val)); break;
-			case Dbmeta_fld_tid.Tid__int:			stmt.Crt_int			(key, Int_.Cast(val)); break;
-			case Dbmeta_fld_tid.Tid__long:			stmt.Crt_long			(key, Long_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__float:			stmt.Crt_float			(key, Float_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__double:		stmt.Crt_double			(key, Double_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__str:			stmt.Crt_str			(key, String_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__text:			stmt.Crt_text			(key, String_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__bry:			stmt.Crt_bry			(key, Bry_.cast(val)); break;
+			case DbmetaFldType.TidBool:			stmt.Crt_bool_as_byte	(key, Bool_.Cast(val)); break;
+			case DbmetaFldType.TidByte:			stmt.Crt_byte			(key, Byte_.Cast(val)); break;
+			case DbmetaFldType.TidInt:			stmt.Crt_int			(key, Int_.Cast(val)); break;
+			case DbmetaFldType.TidLong:			stmt.Crt_long			(key, Long_.cast(val)); break;
+			case DbmetaFldType.TidFloat:			stmt.Crt_float			(key, Float_.cast(val)); break;
+			case DbmetaFldType.TidDouble:		stmt.Crt_double			(key, Double_.cast(val)); break;
+			case DbmetaFldType.TidStr:			stmt.Crt_str			(key, String_.cast(val)); break;
+			case DbmetaFldType.TidText:			stmt.Crt_text			(key, String_.cast(val)); break;
+			case DbmetaFldType.TidBry:			stmt.Crt_bry			(key, Bry_.cast(val)); break;
 			default:								throw Err_.new_unhandled_default(tid);
 		}
 	}
 	public static void Fill_val(Db_stmt stmt, int tid, String key, Object val) {
 		switch (tid) {
-			case Dbmeta_fld_tid.Tid__bool:			stmt.Val_bool_as_byte	(key, Bool_.Cast(val)); break;
-			case Dbmeta_fld_tid.Tid__byte:			stmt.Val_byte			(key, Byte_.Cast(val)); break;
-			case Dbmeta_fld_tid.Tid__int:			stmt.Val_int			(key, Int_.Cast(val)); break;
-			case Dbmeta_fld_tid.Tid__long:			stmt.Val_long			(key, Long_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__float:			stmt.Val_float			(key, Float_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__double:		stmt.Val_double			(key, Double_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__str:			stmt.Val_str			(key, String_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__text:			stmt.Val_text			(key, String_.cast(val)); break;
-			case Dbmeta_fld_tid.Tid__bry:			stmt.Val_bry			(key, Bry_.cast(val)); break;
+			case DbmetaFldType.TidBool:			stmt.Val_bool_as_byte	(key, Bool_.Cast(val)); break;
+			case DbmetaFldType.TidByte:			stmt.Val_byte			(key, Byte_.Cast(val)); break;
+			case DbmetaFldType.TidInt:			stmt.Val_int			(key, Int_.Cast(val)); break;
+			case DbmetaFldType.TidLong:			stmt.Val_long			(key, Long_.cast(val)); break;
+			case DbmetaFldType.TidFloat:			stmt.Val_float			(key, Float_.cast(val)); break;
+			case DbmetaFldType.TidDouble:		stmt.Val_double			(key, Double_.cast(val)); break;
+			case DbmetaFldType.TidStr:			stmt.Val_str			(key, String_.cast(val)); break;
+			case DbmetaFldType.TidText:			stmt.Val_text			(key, String_.cast(val)); break;
+			case DbmetaFldType.TidBry:			stmt.Val_bry			(key, Bry_.cast(val)); break;
 			default:								throw Err_.new_unhandled_default(tid);
 		}
 	}

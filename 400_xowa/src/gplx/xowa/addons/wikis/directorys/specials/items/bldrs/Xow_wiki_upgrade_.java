@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
+package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
 import gplx.xowa.addons.wikis.directorys.dbs.*;
@@ -64,7 +64,7 @@ public class Xow_wiki_upgrade_ {
 			try {
 				if (!core_db_conn.Meta_fld_exists(Xowd_page_tbl.TBL_NAME, Xowd_page_tbl.FLD__page_cat_db_id)) {
 					Gfo_usr_dlg_.Instance.Log_many("", "", "xo.personal:page.page_cat_db_id upgrade; fil=~{0}", core_db_url.Raw());
-					core_db_conn.Meta_fld_append(Xowd_page_tbl.TBL_NAME, Dbmeta_fld_itm.new_int(Xowd_page_tbl.FLD__page_cat_db_id).Default_(-1));
+					core_db_conn.Meta_fld_append(Xowd_page_tbl.TBL_NAME, DbmetaFldItm.NewInt(Xowd_page_tbl.FLD__page_cat_db_id).DefaultValSet(-1));
 				}
 			} catch (Exception e) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "xo.personal:page.page_cat_db_id upgrade failed; err=~{0}", Err_.Message_gplx_log(e));

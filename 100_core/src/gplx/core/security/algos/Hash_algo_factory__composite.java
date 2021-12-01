@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.security.algos; import gplx.*; import gplx.core.*; import gplx.core.security.*;
+package gplx.core.security.algos; import gplx.*;
 public class Hash_algo_factory__composite implements Hash_algo_factory {
 	private boolean dirty = true;
 	private final Ordered_hash hash = Ordered_hash_.New();
@@ -30,7 +30,7 @@ public class Hash_algo_factory__composite implements Hash_algo_factory {
 		return algo_keys;
 	}
 	public Hash_algo New_hash_algo(String key) {
-		Hash_algo rv = (Hash_algo)hash.Get_by(key);
+		Hash_algo rv = (Hash_algo)hash.GetByOrNull(key);
 		if (rv == null) {
 			throw Err_.new_wo_type("hash_algo unknown; key=" + key);
 		}

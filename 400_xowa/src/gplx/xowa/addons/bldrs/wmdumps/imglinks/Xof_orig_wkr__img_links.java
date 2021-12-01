@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.wmdumps.*;
+package gplx.xowa.addons.bldrs.wmdumps.imglinks; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
+import gplx.xowa.files.origs.*;
 public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	private Db_conn imglnk_conn;
@@ -24,7 +24,7 @@ public class Xof_orig_wkr__img_links implements Xof_orig_wkr {
 	}
 	public byte			Tid() {return Xof_orig_wkr_.Tid_xowa_img_links;}
 	public Xof_orig_itm	Find_as_itm(byte[] ttl, int list_idx, int list_len) {
-		Xof_orig_itm rv = (Xof_orig_itm)hash.Get_by(ttl);
+		Xof_orig_itm rv = (Xof_orig_itm)hash.GetByOrNull(ttl);
 		if		(rv == Missing) return Xof_orig_itm.Null;
 		else if (rv == null)	rv = Load_from_db(ttl);
 		return rv == Missing ? Xof_orig_itm.Null : rv;

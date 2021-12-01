@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.windows; import gplx.*;
 import gplx.gfui.ipts.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
 import gplx.core.lists.*; import gplx.core.bits.*;
 public class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, Gfo_invk, Gfo_evt_itm {
@@ -31,8 +31,8 @@ public class GfuiWinKeyCmdMgr implements GfuiWinOpenAble, Gfo_invk, Gfo_evt_itm 
 		if (GfuiTextBox_.as_(sender) != null				// is sender textBox?
 			&& !Bitmask_.Has_int(keyVal, IptKey_.Alt.Val())		// does key not have alt
 			) return false;									// ignore keys from textbox if they do not have alt
-		List_adp elemList = (List_adp)listHash.Get_by(keyVal); if (elemList == null) return false;
-		for (int i = 0; i < elemList.Count(); i++) {
+		List_adp elemList = (List_adp)listHash.GetByOrNull(keyVal); if (elemList == null) return false;
+		for (int i = 0; i < elemList.Len(); i++) {
 			GfuiElem elem = (GfuiElem)elemList.Get_at(i);
 			if (elem.Visible())
 				elem.Click();

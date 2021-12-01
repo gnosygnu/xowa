@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.wbases; import gplx.*;
 import gplx.langs.jsons.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*;
+import gplx.xowa.xtns.wbases.core.*;
+import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*;
 public class Wdata_doc_wtr {
 	private Json_doc_wtr wtr = new Json_doc_wtr();
 	public byte[] Xto_bry(Wdata_doc wdoc) {
@@ -30,7 +31,7 @@ public class Wdata_doc_wtr {
 		return wtr.Bld();
 	}
 	private void Xto_bry__list(byte[] key, Ordered_hash list) {
-		int len = list.Count();
+		int len = list.Len();
 		if (len == 0) return;
 		wtr.Key(true, key);
 		wtr.Nde_bgn();
@@ -42,7 +43,7 @@ public class Wdata_doc_wtr {
 		list.Clear();
 	}
 	private void Xto_bry__sitelinks(byte[] key, Ordered_hash list) {	// NOTE: changed to reflect new sitelinks structure; DATE:2014-02-04
-		int len = list.Count();
+		int len = list.Len();
 		if (len == 0) return;
 		wtr.Key(true, key);
 		wtr.Nde_bgn();
@@ -58,7 +59,7 @@ public class Wdata_doc_wtr {
 		list.Clear();
 	}
 	private void Xto_bry__aliases(Ordered_hash aliases) {
-		int len = aliases.Count();
+		int len = aliases.Len();
 		if (len == 0) return;
 		wtr.Key(true, Wdata_doc_parser_v1.Bry_aliases);
 		wtr.Nde_bgn();
@@ -78,7 +79,7 @@ public class Wdata_doc_wtr {
 		aliases.Clear();
 	}
 	private void Xto_bry__claims(byte[] qid, Ordered_hash props) {
-		int len = props.Count();
+		int len = props.Len();
 		if (len == 0) return;
 		wtr.Key(true, Wdata_doc_parser_v1.Bry_claims);
 		wtr.Ary_bgn();

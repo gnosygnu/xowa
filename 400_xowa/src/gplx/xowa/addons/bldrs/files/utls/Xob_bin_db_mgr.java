@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.utls; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.ios.*;
 import gplx.fsdb.meta.*;
 public class Xob_bin_db_mgr {
@@ -38,12 +38,12 @@ public class Xob_bin_db_mgr {
 			Fsm_bin_fil fil = bin_db_mgr.Dbs__get_at(i);
 			Xob_bin_db_itm itm = schema_is_1 ? Xob_bin_db_itm.new_v1(fil) : Xob_bin_db_itm.new_v2(fil);
 			int ns_id = itm.Ns_id();
-			Xob_bin_db_itm nth = (Xob_bin_db_itm)nth_hash.Get_by(tier_key.Val_(ns_id));
+			Xob_bin_db_itm nth = (Xob_bin_db_itm)nth_hash.GetByOrNull(tier_key.Val_(ns_id));
 			if (	nth != null					// occurs when existing fsdb_dbb has "file-ns.014-db.001", but 14 no longer specified in fsdb_make; DATE:2016-09-23
 				&&	itm.Pt_id() > nth.Pt_id())	// update max pt_id
 				nth.Set(itm.Id(), itm.Pt_id(), itm.Db_url()); // note that ns_id is same
 		}
-		len = nth_hash.Count();
+		len = nth_hash.Len();
 		for (int i = 0; i < len; ++i) {	// iterated tiers to calculate max_size
 			Xob_bin_db_itm nth = (Xob_bin_db_itm)nth_hash.Get_at(i);
 			if (nth.Id() == -1) continue;	// ignore default nth
@@ -62,9 +62,9 @@ public class Xob_bin_db_mgr {
 		return schema_is_1 ? Xob_bin_db_itm.Gen_name_v1(pt_id) : Xob_bin_db_itm.Gen_name_v2(domain_str, ns_id, pt_id);
 	}
 	public Xob_bin_db_itm Get_nth_by_tier(int tier_id) {
-		if (schema_is_1) return (Xob_bin_db_itm)nth_hash.Get_by(tier_key.Val_(0)); // v1 is always in ns_0
+		if (schema_is_1) return (Xob_bin_db_itm)nth_hash.GetByOrNull(tier_key.Val_(0)); // v1 is always in ns_0
 		if (tier_id >= ns_ids_len) throw Err_.new_wo_type("tier out of range", "tier_id", tier_id, "len", ns_ids_len);
 		int ns_id = ns_ids[tier_id];
-		return (Xob_bin_db_itm)nth_hash.Get_by(tier_key.Val_(ns_id));
+		return (Xob_bin_db_itm)nth_hash.GetByOrNull(tier_key.Val_(ns_id));
 	}
 }

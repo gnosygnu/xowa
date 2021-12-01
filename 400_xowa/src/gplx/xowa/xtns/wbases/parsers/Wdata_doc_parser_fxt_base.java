@@ -91,7 +91,7 @@ abstract class Wdata_doc_parser_fxt_base {
 	public void Test_claims(String raw, Wbase_claim_base... expd) {
 		Ordered_hash actl_hash = wdoc_parser.Parse_claims(Q1_bry, json_parser.Parse_by_apos(raw));
 		List_adp actl_list = Wbase_claim_grp.Xto_list(actl_hash);
-		Tfds.Eq_ary_str(actl_list.To_ary(Wbase_claim_base.class), expd);
+		Tfds.Eq_ary_str(actl_list.ToAry(Wbase_claim_base.class), expd);
 	}
 	public void Test_claims_data(String raw, Wbase_claim_base expd) {
 		Json_doc jdoc = json_parser.Parse_by_apos(raw);
@@ -129,7 +129,7 @@ abstract class Wdata_doc_parser_fxt_base {
 				rv.Add(itm);
 			}
 		}
-		return (Wbase_claim_base[])rv.To_ary_and_clear(Wbase_claim_base.class);
+		return (Wbase_claim_base[])rv.ToAryAndClear(Wbase_claim_base.class);
 	}
 	private static final byte[] Q1_bry = Bry_.new_a7("Q1");
 }

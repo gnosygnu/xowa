@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views.url_box_fmts; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
+package gplx.xowa.guis.views.url_box_fmts; import gplx.*; import gplx.xowa.*;
 public class Xog_urlfmtr_mgr implements Gfo_invk {
 	private Xog_urlfmtr_itm wildcard = new Xog_urlfmtr_itm(Byte_ascii.Star_bry, Bry_.new_a7("~{wiki_domain}/wiki/~{page_title}"));
 	private final Bry_bfr bfr = Bry_bfr_.New();
@@ -46,12 +46,12 @@ public class Xog_urlfmtr_mgr implements Gfo_invk {
 				wildcard = itm;
 			}
 			else {
-				hash.Add_if_dupe_use_nth(domain, itm);
+				hash.AddIfDupeUseNth(domain, itm);
 			}
 		}
 	}
 	public String Gen(Xoa_url url) {
-		Xog_urlfmtr_itm itm = (Xog_urlfmtr_itm)hash.Get_by(url.Wiki_bry());
+		Xog_urlfmtr_itm itm = (Xog_urlfmtr_itm)hash.GetByOrNull(url.Wiki_bry());
 		if (itm == null) {
 			itm = wildcard;
 		}

@@ -15,9 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
 import org.junit.*; import gplx.core.strings.*;
-import gplx.core.intls.*;
 import gplx.xowa.apps.gfs.*;
-import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.specials.*; import gplx.xowa.langs.names.*;
+import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.wikis.nss.*;
 public class Xol_lang_srl_tst {
 	private Xol_lang_srl_fxt fxt = new Xol_lang_srl_fxt();
@@ -307,7 +306,7 @@ class Xol_lang_srl_fxt {
 			if (kwd_grp == null) continue;
 			rv.Add(kwd_grp);
 		}
-		return (Xol_kwd_grp[])rv.To_ary(Xol_kwd_grp.class);
+		return (Xol_kwd_grp[])rv.ToAry(Xol_kwd_grp.class);
 	}
 	String Xto_str(Xol_kwd_grp[] ary) {
 		int len = ary.length;			
@@ -331,7 +330,7 @@ class Xol_lang_srl_fxt {
 			if (itm == null || !itm.Dirty()) continue;
 			rv.Add(itm);
 		}
-		return (Xol_msg_itm[])rv.To_ary(Xol_msg_itm.class);
+		return (Xol_msg_itm[])rv.ToAry(Xol_msg_itm.class);
 	}
 	String Xto_str(Xol_msg_itm[] ary) {
 		int len = ary.length;			

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.sites; import gplx.*;
 import gplx.dbs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.bldrs.*;
@@ -115,7 +115,7 @@ public class Site_core_db {
 	public void Load_interwikimap(Xow_domain_itm domain_itm, gplx.xowa.wikis.xwikis.Xow_xwiki_mgr xwiki_mgr) {
 		Ordered_hash hash = Ordered_hash_.New();
 		tbl__interwikimap.Select(domain_itm.Abrv_xo(), hash);
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; ++i)  {
 			Site_interwikimap_itm itm = (Site_interwikimap_itm)hash.Get_at(i);
 			Xow_xwiki_itm xwiki_itm = Xow_xwiki_itm_bldr.Instance.Bld_mw(domain_itm, itm.Prefix, itm.Url, null);
@@ -124,7 +124,7 @@ public class Site_core_db {
 	}
 	private static void Ns_mgr__load(Xow_ns_mgr rv, Ordered_hash hash) {
 		rv.Clear();
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
 			Site_namespace_itm itm = (Site_namespace_itm)hash.Get_at(i);
 			byte case_match = Xow_ns_case_.To_tid(String_.new_u8(itm.Case_tid()));

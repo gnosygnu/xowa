@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import org.junit.*; import gplx.core.envs.*;
 public class Io_line_rdr_tst {
 	Io_line_rdr_fxt fxt;
@@ -88,7 +88,7 @@ class Io_line_rdr_fxt {
 			else
 				break;
 		}
-		Tfds.Eq_ary_str(expd, lines.To_str_ary());
+		Tfds.Eq_ary_str(expd, lines.ToStrAry());
 		return this;
 	}		
 }

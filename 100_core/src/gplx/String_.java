@@ -407,7 +407,7 @@ public class String_ {
 			if (itm == null) continue;
 			list.Add(itm);
 		}
-		return list.To_str_ary();
+		return list.ToStrAry();
 	}
 	public static String AryXtoStr(String... ary) {
 		String_bldr sb = String_bldr_.new_();
@@ -431,7 +431,7 @@ public class String_ {
 		}
 		if (sb.Count() > 0)
 			list.Add(sb.To_str_and_clear());
-		return list.To_str_ary();
+		return list.ToStrAry();
 	}
 	public static String[] Split(String s, String separator) {return Split_do(s, separator, false);}
 	public static String[] SplitLines_crlf(String s) {return Split(s, Op_sys.Wnt.Nl_str());}
@@ -476,7 +476,7 @@ public class String_ {
 				i++;
 			}
 		}		
-		return (String[])list.To_ary(String.class);
+		return (String[])list.ToAry(String.class);
 	}
 	static String Mid_lang(String s, int bgn, int len) {return s.substring(bgn, bgn + len);}
 	public static String Extract_after_bwd(String src, String dlm) {
@@ -508,7 +508,7 @@ public class String_ {
 		int len = filter.length;
 		for (int i = 0; i < len; i++) {
 			String itm = filter[i];
-			hash.Add_if_dupe_use_nth(itm, itm);				
+			hash.AddIfDupeUseNth(itm, itm);
 		}
 		List_adp rv = List_adp_.New();
 		len = src.length;
@@ -516,7 +516,7 @@ public class String_ {
 			String itm = src[i];
 			if (hash.Has(itm)) rv.Add(itm);
 		}
-		return rv.To_str_ary();
+		return rv.ToStrAry();
 	}
 	public static String[] Ary_flatten(String[][] src_ary) {
 		int trg_len = 0;

@@ -128,7 +128,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		full_list.Sort();
 		Ordered_hash rv = Ordered_hash_.New(); List_adp temp_itms = List_adp_.New();
 		int prv_pid = -1;
-		int len = full_list.Count();
+		int len = full_list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wbase_claim_base claim_itm = (Wbase_claim_base)full_list.Get_at(i);
 			int cur_pid = claim_itm.Pid();
@@ -141,9 +141,9 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 		return rv;
 	}
 	private static void Claims_list_to_hash__add(Ordered_hash rv, int pid, List_adp temp_itms) {
-		if (temp_itms.Count() == 0) return; // NOTE: will be empty when claims are empty; EX: "claims": []; PAGE:wd.p:585; DATE:2014-10-03
+		if (temp_itms.Len() == 0) return; // NOTE: will be empty when claims are empty; EX: "claims": []; PAGE:wd.p:585; DATE:2014-10-03
 		Int_obj_ref claim_grp_key = Int_obj_ref.New(pid);
-		Wbase_claim_grp claim_grp = new Wbase_claim_grp(claim_grp_key, (Wbase_claim_base[])temp_itms.To_ary_and_clear(Wbase_claim_base.class));
+		Wbase_claim_grp claim_grp = new Wbase_claim_grp(claim_grp_key, (Wbase_claim_base[])temp_itms.ToAryAndClear(Wbase_claim_base.class));
 		rv.Add(claim_grp_key, claim_grp);
 	}
 	private Wbase_claim_base Make_claim_itm(byte[] src, Json_nde prop_nde) {

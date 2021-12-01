@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.libs; import gplx.*;
 // bare-bones implementation of PHP ArrayObject
 // REF:http://php.net/manual/en/class.arrayobject.php
 public abstract class XomwArrayObject {
@@ -22,7 +22,7 @@ public abstract class XomwArrayObject {
 		return hash.Has(key);
 	}
 	public Object offsetGet(Object key) {
-		return hash.Get_by(key);
+		return hash.GetByOrNull(key);
 	}
 	public void offsetUnset(Object key) {
 		hash.Del(key);
@@ -34,6 +34,6 @@ public abstract class XomwArrayObject {
 	public int count() {return hash.Len();}
 	public Object Get_at(int i) {return hash.Get_at(i);}
 	public void Add_or_update(Object val) {
-		hash.Add(hash.Count(), val);
+		hash.Add(hash.Len(), val);
 	}
 }

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.security.files; import gplx.*; import gplx.core.*; import gplx.core.security.*;
+package gplx.core.security.files; import gplx.*;
 import gplx.core.security.algos.*;
 public class Cksum_list {
 	public Cksum_list(byte type, Cksum_itm[] itms, long itms_size) {
@@ -60,7 +60,7 @@ public class Cksum_list {
 			Cksum_itm itm = new Cksum_itm(hash, file_url, file_size);
 			list.Add(itm);
 		}
-		return new Cksum_list(type, (Cksum_itm[])list.To_ary_and_clear(Cksum_itm.class), itms_size);
+		return new Cksum_list(type, (Cksum_itm[])list.ToAryAndClear(Cksum_itm.class), itms_size);
 	}
 	private static Io_url GenSubFil_nest(Io_url dir, byte[] src) {	// split "a/b/c" or "a\b\c" -> [a, b, c]
 		byte dir_spr = gplx.core.envs.Op_sys.Lnx.Fsys_dir_spr_byte();

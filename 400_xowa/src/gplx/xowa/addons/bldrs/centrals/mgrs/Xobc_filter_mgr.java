@@ -13,11 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.mgrs; import gplx.*;
 import gplx.core.gfobjs.*;
 import gplx.xowa.addons.bldrs.centrals.tasks.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.langs.*;
 public class Xobc_filter_mgr {
 	private String lang_key_str = Xow_domain_itm_.Lang_key__all, type_key_str = Xow_domain_itm_.Type_key__all;
 	public Xobc_task_itm[] Filter(Xobc_task_regy__base task_list) {return Filter(task_list, lang_key_str, type_key_str);}
@@ -39,7 +38,7 @@ public class Xobc_filter_mgr {
 				tmp.Add(task);
 		}
 
-		return (Xobc_task_itm[])tmp.To_ary_and_clear(Xobc_task_itm.class);
+		return (Xobc_task_itm[])tmp.ToAryAndClear(Xobc_task_itm.class);
 	}
 	public Gfobj_nde Make_init_msg() {
 		Gfobj_nde root = Gfobj_nde.New();

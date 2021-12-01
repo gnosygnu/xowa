@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*;
 import gplx.core.criterias.*;
 import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
 public class Mem_exec_select {
@@ -22,7 +22,7 @@ public class Mem_exec_select {
 	public Mem_exec_select(Mem_engine engine) {this.engine = engine;}
 	public Db_rdr Select(Mem_stmt stmt) {
 		Db_qry stmt_qry = stmt.Qry();
-		Mem_tbl tbl = engine.Tbls__get(stmt_qry.Base_table());
+		Mem_tbl tbl = engine.Tbls__get(stmt_qry.BaseTable());
 		String[] select = null; Criteria where = null;
 		Db_qry__select_in_tbl qry = Db_qry__select_in_tbl.as_(stmt_qry);
 		Db_qry__select_cmd qry2 = null;
@@ -36,20 +36,20 @@ public class Mem_exec_select {
 			where = qry.Where();
 		}
 		Mem_stmt_args_.Fill(stmt.Stmt_args(), where);
-		Mem_row[] tbl_rows = (Mem_row[])tbl.rows.To_ary(Mem_row.class);
+		Mem_row[] tbl_rows = (Mem_row[])tbl.rows.ToAry(Mem_row.class);
 		if (qry2 != null) {
 			tbl_rows = Mem_exec_.Rows__alias(tbl_rows, qry2.From().Base_tbl.Alias);
 			List_adp join_tbls = qry2.From().Tbls;
 			int join_tbls_len = join_tbls.Len();
 			for (int i = 1; i < join_tbls_len; ++i) {
 				Sql_tbl_itm join_tbl = (Sql_tbl_itm)join_tbls.Get_at(i);
-				Mem_row[] join_rows = (Mem_row[])engine.Tbls__get(join_tbl.Name).rows.To_ary(Mem_row.class);
+				Mem_row[] join_rows = (Mem_row[])engine.Tbls__get(join_tbl.Name).rows.ToAry(Mem_row.class);
 				join_rows = Mem_exec_.Rows__alias(join_rows, join_tbl.Alias);
 				tbl_rows = Mem_exec_.Rows__join(join_tbl.Join_tid, tbl_rows, join_rows, join_tbl.Alias, join_tbl.Join_flds);
 			}
 		}			
 		Mem_exec_.Where__filter(tmp_where_rows, tbl_rows, stmt, where);
-		Mem_row[] rslt_rows = (Mem_row[])tmp_where_rows.To_ary_and_clear(Mem_row.class);
+		Mem_row[] rslt_rows = (Mem_row[])tmp_where_rows.ToAryAndClear(Mem_row.class);
 		if (qry2 != null) {
 			if (qry2.Order() != null && qry2.Order().Flds().length > 0)
 				Array_.Sort(rslt_rows, new Mem_sorter(qry2.Order().Flds()));
@@ -125,7 +125,7 @@ class Mem_exec_ {
 				rv.Add(merged);
 			}
 		}
-		return (Mem_row[])rv.To_ary_and_clear(Mem_row.class);
+		return (Mem_row[])rv.ToAryAndClear(Mem_row.class);
 	}
 	public static Mem_row[] Rows__alias(Mem_row[] src_rows, String tbl_alias) {
 		int src_rows_len = src_rows.length;

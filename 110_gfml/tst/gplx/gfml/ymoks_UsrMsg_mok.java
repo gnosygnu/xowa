@@ -24,7 +24,7 @@ class UsrMsg_mok {
 		UsrMsg_mok rv = new UsrMsg_mok();
 		if (um != null) {
 			rv.main = um.Hdr();
-			for (int i = 0; i < um.Args().Count(); i++) {
+			for (int i = 0; i < um.Args().Len(); i++) {
 				Keyval kv = (Keyval)um.Args().Get_at(i);
 				rv.Add_(kv.Key(), kv.Val());
 			}

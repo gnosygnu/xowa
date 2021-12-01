@@ -25,15 +25,15 @@ import gplx.dbs.Db_rdr;
 import gplx.dbs.Db_rdr_;
 import gplx.dbs.Db_stmt;
 import gplx.dbs.Db_stmt_;
-import gplx.dbs.Dbmeta_fld_list;
+import gplx.dbs.DbmetaFldList;
 import gplx.dbs.Dbmeta_idx_itm;
 import gplx.dbs.Dbmeta_tbl_itm;
 
 public class Hxtn_blob_tbl implements Rls_able {
-	private static final String tbl_name = "hxtn_blob"; private static final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final String tbl_name = "hxtn_blob"; private static final DbmetaFldList flds = new DbmetaFldList();
 	private static final String
-	  fld_blob_tid = flds.Add_int("blob_tid"), fld_wiki_id = flds.Add_int("wiki_id"), fld_blob_id = flds.Add_int("blob_id")
-	, fld_zip_tid = flds.Add_byte("zip_tid"), fld_blob_data = flds.Add_bry("blob_data");
+	  fld_blob_tid = flds.AddInt("blob_tid"), fld_wiki_id = flds.AddInt("wiki_id"), fld_blob_id = flds.AddInt("blob_id")
+	, fld_zip_tid = flds.AddByte("zip_tid"), fld_blob_data = flds.AddBry("blob_data");
 	private final Db_conn conn; private Db_stmt stmt_insert;
 	private final byte zip_tid_default;
 	private final Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
@@ -88,7 +88,7 @@ public class Hxtn_blob_tbl implements Rls_able {
 		try {
 			while (rdr.Move_next()) {
 				byte[] key = Make_key(temp_bfr, rdr.Read_int(fld_wiki_id), rdr.Read_int(fld_blob_id), rdr.Read_int(fld_blob_tid));
-				blob_data_hash.Add_as_key_and_val(key);
+				blob_data_hash.AddAsKeyAndVal(key);
 			}
 		} finally {
 			rdr.Rls();

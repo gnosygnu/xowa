@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
+package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.langs.htmls.*;
 public class Xoh_toc_wkr__txt__basic__tst {
 	@Before public void init() {fxt.Clear();} private final Xoh_toc_wkr__txt__fxt fxt = new Xoh_toc_wkr__txt__fxt();
@@ -81,7 +81,7 @@ class Xow_tidy_mgr_interface__test implements gplx.xowa.htmls.core.htmls.tidy.Xo
 	public void Add(byte[] html, byte[] tidy) {hash.Add(html, tidy);}
 	public void Exec_tidy(Bry_bfr bfr, boolean indent, byte[] page_url) {
 		byte[] html = bfr.To_bry_and_clear();
-		byte[] actl = (byte[])hash.Get_by_or_fail(html);
+		byte[] actl = (byte[])hash.GetByOrFail(html);
 		bfr.Add(actl);
 	}
 }

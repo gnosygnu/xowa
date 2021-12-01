@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes; import gplx.*;
+import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 public class Xop_xnde_tag_regy {
 	private boolean init_needed = true;
@@ -70,7 +71,7 @@ public class Xop_xnde_tag_regy {
 		trie.Add_obj(xnde.Name_bry(), xnde);
 		Ordered_hash langs = xnde.Langs();
 		if (langs != null) {						// tag has langs; EX: <section>; DATE:2014-07-18
-			int langs_len = langs.Count();
+			int langs_len = langs.Len();
 			for (int i = 0; i < langs_len; ++i) {	// register each lang's tag; EX: "<Abschnitt>", "<trecho>"
 				Xop_xnde_tag_lang lang = (Xop_xnde_tag_lang)langs.Get_at(i);
 				trie.Add_obj(lang.Name_bry(), xnde);

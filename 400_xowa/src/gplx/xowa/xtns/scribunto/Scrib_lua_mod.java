@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.scribunto; import gplx.*;
 public class Scrib_lua_mod {
 	private Ordered_hash hash = Ordered_hash_.New();
 	public Scrib_lua_mod(Scrib_core core, String name) {this.name = name; this.core = core;} private Scrib_core core;
@@ -22,9 +22,9 @@ public class Scrib_lua_mod {
 	public Scrib_lua_proc Init_chunk_func() {return init_chunk_func;} private Scrib_lua_proc init_chunk_func;
 	public byte[] Text_bry() {return text_bry;} private byte[] text_bry;
 	public void Fncs_clear() {hash.Clear();}
-	public int Fncs_len() {return hash.Count();}
+	public int Fncs_len() {return hash.Len();}
 	public Scrib_lua_proc Fncs_get_at(int i) {return (Scrib_lua_proc)hash.Get_at(i);}
-	public Scrib_lua_proc Fncs_get_by_key(String key) {return (Scrib_lua_proc)hash.Get_by(key);}
+	public Scrib_lua_proc Fncs_get_by_key(String key) {return (Scrib_lua_proc)hash.GetByOrNull(key);}
 	public void Fncs_add(Scrib_lua_proc prc) {hash.Add(prc.Key(), prc);}
 	public int Fncs_get_id(String key) {
 		Scrib_lua_proc fnc = Fncs_get_by_key(key); if (fnc == null) throw Err_.new_wo_type("Scrb_fnc does not exist", "module", name, "func", key);

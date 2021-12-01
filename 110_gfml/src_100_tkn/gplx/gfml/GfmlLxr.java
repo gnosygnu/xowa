@@ -25,8 +25,8 @@ public interface GfmlLxr extends Gfo_evt_itm {
 	void SubLxr_Add(GfmlLxr... lexer);
 }
 class GfmlLxrRegy {
-	public int Count() {return hash.Count();}
+	public int Count() {return hash.Len();}
 	public void Add(GfmlLxr lxr) {hash.Add(lxr.Key(), lxr);}
-	public GfmlLxr Get_by(String key) {return (GfmlLxr)hash.Get_by(key);}
+	public GfmlLxr Get_by(String key) {return (GfmlLxr)hash.GetByOrNull(key);}
 	Hash_adp hash = Hash_adp_.New();
 }

@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.htmls; import gplx.*;
 import gplx.core.brys.*;
 public class Gfh_parser {
 	public Gfh_parser() {
@@ -51,7 +51,7 @@ public class Gfh_parser {
 					break;
 			}
 		}
-		return (Gfh_nde[])rv.To_ary(Gfh_nde.class);
+		return (Gfh_nde[])rv.ToAry(Gfh_nde.class);
 	}
 	int cur_lhs_bgn, cur_lhs_end, cur_name_bgn, cur_name_end, cur_rhs_bgn; boolean xnde_init = true, tag_tid_is_inline = false;
 	private boolean Parse_xnde_rhs() {

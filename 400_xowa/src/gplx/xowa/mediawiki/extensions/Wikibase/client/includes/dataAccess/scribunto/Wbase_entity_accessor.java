@@ -93,7 +93,7 @@ public class Wbase_entity_accessor {
 //			$serialization = $this->newClientStatementListSerializer()->serialize( $statements );
 //			$this->renumber( $serialization );
 //			return $serialization;
-		return rv.Len() == 0 ? null : (Wbase_claim_base[])rv.To_ary(Wbase_claim_base.class);
+		return rv.Len() == 0 ? null : (Wbase_claim_base[])rv.ToAry(Wbase_claim_base.class);
 	}
 
 	private static final int ID_NULL = 0, ID_BEST = 1, ID_ALL = 2;

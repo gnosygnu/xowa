@@ -15,14 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 public class Keyval_list {
-	public int				Count() {return list.Count();} private final List_adp list = List_adp_.New();
+	public int				Count() {return list.Len();} private final List_adp list = List_adp_.New();
 	public void				Clear() {list.Clear();}
 	public Keyval			Get_at(int i) {return (Keyval)list.Get_at(i);}
 	public Keyval_list		Add(String key, Object val) {list.Add(Keyval_.new_(key, val)); return this;}
-	public Keyval[]			To_ary() {return (Keyval[])list.To_ary(Keyval.class);}
+	public Keyval[]			To_ary() {return (Keyval[])list.ToAry(Keyval.class);}
 	public String To_str() {
 		Bry_bfr bfr = Bry_bfr_.New();
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
 			Keyval kv = (Keyval)list.Get_at(i);
 			if (i == 0) bfr.Add_byte_space();

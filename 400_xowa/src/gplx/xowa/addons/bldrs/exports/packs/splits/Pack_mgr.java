@@ -13,10 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.packs.splits; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.packs.*;
+package gplx.xowa.addons.bldrs.exports.packs.splits; import gplx.*; import gplx.xowa.*;
 import gplx.core.progs.*; import gplx.core.ios.zips.*; import gplx.core.ios.streams.*; import gplx.core.security.algos.*;
 import gplx.dbs.*;
-import gplx.xowa.wikis.data.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.steps.*;
 import gplx.xowa.addons.bldrs.exports.splits.mgrs.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 // NOTE: used for experimental pack / split approach (html,file,search in one db)
@@ -76,7 +75,7 @@ class Pack_mgr {
 				Io_url fil_1st = (Io_url)list.Get_at(0);
 				int ns_id = Split_file_tid_.Get_ns_by_url(fil_1st);
 				Io_url zip_url = pack_root.GenSubFil(Split_file_tid_.Make_file_name(wiki_abrv, wiki_date, rv.Len(), ns_id, ".zip"));
-				Pack_itm itm = new Pack_itm(pack_idx, Xobc_import_type.Tid__pack, zip_url, (Io_url[])list.To_ary_and_clear(Io_url.class));
+				Pack_itm itm = new Pack_itm(pack_idx, Xobc_import_type.Tid__pack, zip_url, (Io_url[])list.ToAryAndClear(Io_url.class));
 				rv.Add(itm);
 				pack_size_cur = 0;
 			}

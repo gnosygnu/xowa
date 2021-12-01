@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
+import gplx.xowa.mediawiki.*;
 import gplx.core.btries.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 /**
@@ -178,7 +179,7 @@ public abstract class XomwPreprocessor {
 		Elements_trie__add(trie, Bool_.N, xmlish_elem, xmlish_elem);
 
 		// PORTED: $xmlishRegex = implode( '|', array_merge( $xmlishElements, $ignoredTags ) );
-		int ignored_tags_len = ignored_tags.Count();
+		int ignored_tags_len = ignored_tags.Len();
 		for (int j = 0; j < ignored_tags_len; j++) {
 			byte[] bry = (byte[])ignored_tags.Get_at(j);
 			String str = String_.new_u8(bry);
@@ -585,7 +586,7 @@ public abstract class XomwPreprocessor {
 							i = tag_end_pos + 1;
 							this.preprocessToObj_literal(src, tag_bgn_pos, tag_end_pos + 1);
 							// Cache results, otherwise we have O(N^2) performance for input like <foo><foo><foo>...
-							no_more_closing_tag.Add_if_dupe_use_nth(name, name);
+							no_more_closing_tag.AddIfDupeUseNth(name, name);
 							continue;
 						}
 					}

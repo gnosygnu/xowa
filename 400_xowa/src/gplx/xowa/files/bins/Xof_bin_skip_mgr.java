@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*;
+import gplx.core.ios.streams.*;
+import gplx.fsdb.meta.*;
 public class Xof_bin_skip_mgr {
 	private Xof_bin_skip_wkr[] wkrs = new Xof_bin_skip_wkr[0]; private int wkrs_len;
 	public Xof_bin_skip_mgr(Fsm_cfg_mgr cfg_mgr, String[] wkr_keys) {
@@ -24,7 +24,7 @@ public class Xof_bin_skip_mgr {
 			Xof_bin_skip_wkr wkr = New_wkr(cfg_mgr, wkr_keys[i]);
 			if (wkr != null) list.Add(wkr);
 		}
-		this.wkrs = (Xof_bin_skip_wkr[])list.To_ary_and_clear(Xof_bin_skip_wkr.class);
+		this.wkrs = (Xof_bin_skip_wkr[])list.ToAryAndClear(Xof_bin_skip_wkr.class);
 		this.wkrs_len = wkrs.length;
 	}
 	public boolean Skip(Xof_fsdb_itm fsdb, Io_stream_rdr src_rdr) {

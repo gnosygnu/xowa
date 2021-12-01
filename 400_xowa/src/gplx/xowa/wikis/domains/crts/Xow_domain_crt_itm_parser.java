@@ -13,16 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
+package gplx.xowa.wikis.domains.crts; import gplx.*;
+import gplx.xowa.wikis.domains.*;
 import gplx.xowa.langs.*;
 class Xow_domain_crt_itm_parser {
 	public Xow_domain_crt_kv_itm[] Parse_as_kv_itms_or_null(byte[] raw) {
 		List_adp rv = Parse_as_obj_or_null(raw, Bool_.N);
-		return rv == null ? null : (Xow_domain_crt_kv_itm[])rv.To_ary_and_clear(Xow_domain_crt_kv_itm.class);
+		return rv == null ? null : (Xow_domain_crt_kv_itm[])rv.ToAryAndClear(Xow_domain_crt_kv_itm.class);
 	}
 	public Xow_domain_crt_kv_ary[] Parse_as_kv_arys_or_null(byte[] raw) {
 		List_adp rv = Parse_as_obj_or_null(raw, Bool_.Y);
-		return rv == null ? null : (Xow_domain_crt_kv_ary[])rv.To_ary_and_clear(Xow_domain_crt_kv_ary.class);
+		return rv == null ? null : (Xow_domain_crt_kv_ary[])rv.ToAryAndClear(Xow_domain_crt_kv_ary.class);
 	}
 	public List_adp Parse_as_obj_or_null(byte[] raw, boolean is_ary) {
 		List_adp rv = List_adp_.New();

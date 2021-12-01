@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
+package gplx.xowa.htmls.core.wkrs.xndes.tags; import gplx.*;
+import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.htmls.core.wkrs.xndes.atrs.*;
@@ -32,23 +33,23 @@ public class Xohz_tag {
 	private void Init_flag_bldr() {
 		for (int i = 0; i < zatr_ary_len; ++i) {
 			Xohz_atr_itm zatr = zatr_ary[i];
-			zatr.Ini_flag(tmp_pow_ary_list.Count(), tmp_pow_ary_list);
+			zatr.Ini_flag(tmp_pow_ary_list.Len(), tmp_pow_ary_list);
 			zatr_hash.Add(zatr.Key(), zatr);
 		}
 		tmp_pow_ary_list.Add(1);	// 0=no unknown	; 1=unknown atrs
 		tmp_pow_ary_list.Add(1);	// 0=head		; 1=inline
-		int tmp_pow_ary_len = tmp_pow_ary_list.Count();
+		int tmp_pow_ary_len = tmp_pow_ary_list.Len();
 		flag__tag_is_inline			= tmp_pow_ary_len - 2;
 		flag__unknown_atrs_exist	= tmp_pow_ary_len - 1;
-		flag_bldr.Pow_ary_bld_((int[])tmp_pow_ary_list.To_ary_and_clear(int.class));
+		flag_bldr.Pow_ary_bld_((int[])tmp_pow_ary_list.ToAryAndClear(int.class));
 	}
 	public boolean Encode(Xoh_hdoc_ctx hctx, Xoh_hzip_bfr bfr, byte[] src, Xoh_xnde_parser parser) {
 		Ordered_hash hatrs = parser.Atrs();
-		int hatrs_len = hatrs.Count();
+		int hatrs_len = hatrs.Len();
 		int unknown_atrs = 0;
 		for (int i = 0; i < hatrs_len; ++i) {
 			Gfh_atr hatr = (Gfh_atr)hatrs.Get_at(i);
-			Xohz_atr_itm zatr = (Xohz_atr_itm)zatr_hash.Get_by(hatr.Key());
+			Xohz_atr_itm zatr = (Xohz_atr_itm)zatr_hash.GetByOrNull(hatr.Key());
 			if (zatr == null)	++unknown_atrs;
 			else				zatr.Enc_flag(hctx, src, hatr, flag_bldr);
 		}
@@ -58,7 +59,7 @@ public class Xohz_tag {
 		if (unknown_atrs > 0) bfr.Add_hzip_int(1, unknown_atrs);
 		for (int i = 0; i < zatr_ary_len; ++i) {
 			Gfh_atr hatr = (Gfh_atr)hatrs.Get_at(i);
-			Xohz_atr_itm zatr = (Xohz_atr_itm)zatr_hash.Get_by(hatr.Key());
+			Xohz_atr_itm zatr = (Xohz_atr_itm)zatr_hash.GetByOrNull(hatr.Key());
 			if (zatr != null)	zatr.Enc_data(hctx, src, hatr, bfr);	// zatr should be String
 //				else				zatr.Enc_data(hctx, src, hatr, bfr);
 		}			

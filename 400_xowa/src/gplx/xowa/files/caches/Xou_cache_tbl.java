@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.caches; import gplx.*;
+import gplx.xowa.files.*;
 import gplx.dbs.*;
 public class Xou_cache_tbl implements Rls_able {
-	private String tbl_name = "file_cache"; private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private String tbl_name = "file_cache"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String
 	  fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w
 	, fld_orig_repo, fld_orig_ttl, fld_orig_ext, fld_orig_w, fld_orig_h
@@ -31,31 +32,31 @@ public class Xou_cache_tbl implements Rls_able {
 	public Db_conn Conn() {return conn;}
 	public Xou_cache_tbl(Db_conn conn) {
 		this.conn = conn;
-		fld_lnki_wiki_abrv	= flds.Add_str("lnki_wiki_abrv", 255);
-		fld_lnki_ttl		= flds.Add_str("lnki_ttl", 255);
-		fld_lnki_type		= flds.Add_int("lnki_type");
-		fld_lnki_upright	= flds.Add_double("lnki_upright");
-		fld_lnki_w			= flds.Add_int("lnki_w");
-		fld_lnki_h			= flds.Add_int("lnki_h");
-		fld_lnki_time		= flds.Add_double("lnki_time");
-		fld_lnki_page		= flds.Add_int("lnki_page");
-		fld_user_thumb_w	= flds.Add_int("user_thumb_w");
-		fld_orig_repo		= flds.Add_int("orig_repo");
-		fld_orig_ttl		= flds.Add_str("orig_ttl", 255);
-		fld_orig_ext		= flds.Add_int("orig_ext");
-		fld_orig_w			= flds.Add_int("orig_w");
-		fld_orig_h			= flds.Add_int("orig_h");
-		fld_html_w			= flds.Add_int("html_w");
-		fld_html_h			= flds.Add_int("html_h");
-		fld_html_time		= flds.Add_double("html_time");
-		fld_html_page		= flds.Add_int("html_page");
-		fld_file_is_orig	= flds.Add_bool("file_is_orig");
-		fld_file_w			= flds.Add_int("file_w");
-		fld_file_time		= flds.Add_double("file_time");
-		fld_file_page		= flds.Add_int("file_page");
-		fld_file_size		= flds.Add_long("file_size");
-		fld_view_count		= flds.Add_int("view_count");
-		fld_view_date		= flds.Add_long("view_date");
+		fld_lnki_wiki_abrv	= flds.AddStr("lnki_wiki_abrv", 255);
+		fld_lnki_ttl		= flds.AddStr("lnki_ttl", 255);
+		fld_lnki_type		= flds.AddInt("lnki_type");
+		fld_lnki_upright	= flds.AddDouble("lnki_upright");
+		fld_lnki_w			= flds.AddInt("lnki_w");
+		fld_lnki_h			= flds.AddInt("lnki_h");
+		fld_lnki_time		= flds.AddDouble("lnki_time");
+		fld_lnki_page		= flds.AddInt("lnki_page");
+		fld_user_thumb_w	= flds.AddInt("user_thumb_w");
+		fld_orig_repo		= flds.AddInt("orig_repo");
+		fld_orig_ttl		= flds.AddStr("orig_ttl", 255);
+		fld_orig_ext		= flds.AddInt("orig_ext");
+		fld_orig_w			= flds.AddInt("orig_w");
+		fld_orig_h			= flds.AddInt("orig_h");
+		fld_html_w			= flds.AddInt("html_w");
+		fld_html_h			= flds.AddInt("html_h");
+		fld_html_time		= flds.AddDouble("html_time");
+		fld_html_page		= flds.AddInt("html_page");
+		fld_file_is_orig	= flds.AddBool("file_is_orig");
+		fld_file_w			= flds.AddInt("file_w");
+		fld_file_time		= flds.AddDouble("file_time");
+		fld_file_page		= flds.AddInt("file_page");
+		fld_file_size		= flds.AddLong("file_size");
+		fld_view_count		= flds.AddInt("view_count");
+		fld_view_date		= flds.AddLong("view_date");
 		stmt_bldr.Conn_(conn, tbl_name, flds, fld_lnki_wiki_abrv, fld_lnki_ttl, fld_lnki_type, fld_lnki_upright, fld_lnki_w, fld_lnki_h, fld_lnki_time, fld_lnki_page, fld_user_thumb_w);
 		conn.Rls_reg(this);
 	}
@@ -88,12 +89,12 @@ public class Xou_cache_tbl implements Rls_able {
 	}
 	public void Select_all(Bry_bfr fil_key_bldr, Ordered_hash hash) {
 		hash.Clear();
-		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_auto();
+		Db_rdr rdr = conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
 				Xou_cache_itm itm = new_itm(rdr);
 				if (hash.Has(itm.Lnki_key())) { // dupes shouldn't happen, but has been reported; ISSUE#:534; DATE:2019-08-11
-					Gfo_usr_dlg_.Instance.Note_many("", "", "user_cache: duplicate key; key=~{0} count=~{1}", itm.Lnki_key(), hash.Count());
+					Gfo_usr_dlg_.Instance.Note_many("", "", "user_cache: duplicate key; key=~{0} count=~{1}", itm.Lnki_key(), hash.Len());
 				}
 				else {
 					hash.Add(itm.Lnki_key(), itm);
@@ -115,7 +116,7 @@ public class Xou_cache_tbl implements Rls_able {
 			itm.Db_state_(Db_cmd_mode.Tid_ignore);
 		} catch (Exception e) {stmt_bldr.Rls(); throw Err_.new_exc(e, "xo", "db_save failed");}
 	}
-	@gplx.Internal protected Db_rdr Select_all_for_test() {return conn.Stmt_select(tbl_name, flds, Dbmeta_fld_itm.Str_ary_empty).Exec_select__rls_manual();}
+	@gplx.Internal protected Db_rdr Select_all_for_test() {return conn.Stmt_select(tbl_name, flds, DbmetaFldItm.StrAryEmpty).Exec_select__rls_manual();}
 	private void Db_save_crt(Db_stmt stmt, Xou_cache_itm itm, boolean insert) {
 		if (insert) {
 			stmt.Val_bry_as_str		(fld_lnki_wiki_abrv		, itm.Lnki_wiki_abrv())

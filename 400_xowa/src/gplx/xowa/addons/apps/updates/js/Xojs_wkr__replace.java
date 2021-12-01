@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
+package gplx.xowa.addons.apps.updates.js; import gplx.*;
 import gplx.xowa.guis.cbks.*;
 public class Xojs_wkr__replace extends Xojs_wkr__base {
 	private final Io_url src_dir, trg_dir;
@@ -46,6 +46,6 @@ public class Xojs_wkr__replace extends Xojs_wkr__base {
 			}
 		}
 
-		this.failed = (Keyval[])failed_list.To_ary_and_clear(Keyval.class);
+		this.failed = (Keyval[])failed_list.ToAryAndClear(Keyval.class);
 	}
 }

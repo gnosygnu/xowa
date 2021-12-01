@@ -29,9 +29,9 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 	}
 	public Xof_xfer_mgr Xfer_mgr() {return xfer_mgr;} private Xof_xfer_mgr xfer_mgr;
 	public Xowe_repo_mgr Page_finder_(Xofw_wiki_finder v) {page_finder = v; return this;} private Xofw_wiki_finder page_finder;
-	public int Repos_len() {return repos.Count();}
+	public int Repos_len() {return repos.Len();}
 	public Xof_repo_pair Repos_get_by_wiki(byte[] wiki) {
-		int len = repos.Count();
+		int len = repos.Len();
 		for (int i = 0; i < len; i++) {
 			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
 			if (Bry_.Eq(wiki, pair.Wiki_domain()))
@@ -50,7 +50,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 	}
 	public Xof_repo_pair Repos_get_at(int i) {return (Xof_repo_pair)repos.Get_at(i);}
 	private Xof_repo_pair Repos_get_by_id(int id) {
-		int len = repos.Count();
+		int len = repos.Len();
 		for (int i = 0; i < len; i++) {
 			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
 			if (pair.Id() == id) return pair;
@@ -78,7 +78,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 	public Xof_repo_itm	Get_trg_by_tid_or_null(byte[] tid) {
 		return null;
 	}
-	public Xof_repo_pair[] Repos_ary() {if (repos_ary == null) repos_ary = (Xof_repo_pair[])repos.To_ary(Xof_repo_pair.class); return repos_ary;} private Xof_repo_pair[] repos_ary;
+	public Xof_repo_pair[] Repos_ary() {if (repos_ary == null) repos_ary = (Xof_repo_pair[])repos.ToAry(Xof_repo_pair.class); return repos_ary;} private Xof_repo_pair[] repos_ary;
 	public boolean Xfer_by_meta(Xof_xfer_itm xfer_itm, Xof_xfer_queue queue) {
 		byte[] ttl = xfer_itm.Lnki_ttl();
 		Xof_meta_itm meta_itm = xfer_itm.Dbmeta_itm();
@@ -152,7 +152,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 		return trg_repo.Wiki_domain();
 	}
 	boolean Xfer_by_meta__exec(boolean chk_all, Xof_xfer_itm xfer_itm, Xof_meta_itm meta_itm, byte[] main_wiki_key, Xof_xfer_queue queue, boolean second_chance) {
-		int repos_len = repos.Count();
+		int repos_len = repos.Len();
 		for (int i = 0; i < repos_len; i++) {								// iterate over all repo pairs
 			Xof_repo_pair pair = (Xof_repo_pair)repos.Get_at(i);
 			Xof_repo_itm pair_src = pair.Src();
@@ -207,7 +207,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 		Xof_repo_itm src_repo = repo_mgr.Get_by(src_repo_key), trg_repo = repo_mgr.Get_by(trg_repo_key);
 		byte[] src_wiki_key = src_repo.Wiki_domain(), trg_wiki_key = trg_repo.Wiki_domain();
 		if (!Bry_.Eq(src_wiki_key, trg_wiki_key) && !Bry_.Eq(src_wiki_key, Xow_domain_tid_.Bry__home)) throw Err_.new_wo_type("wiki keys do not match", "src", String_.new_u8(src_wiki_key), "trg", String_.new_u8(trg_wiki_key));
-		Xof_repo_pair pair = new Xof_repo_pair((byte)repos.Count(), src_wiki_key, src_repo, trg_repo);
+		Xof_repo_pair pair = new Xof_repo_pair((byte)repos.Len(), src_wiki_key, src_repo, trg_repo);
 		repos.Add(pair);
 		return pair;
 	}
@@ -215,7 +215,7 @@ public class Xowe_repo_mgr implements Xow_repo_mgr, Gfo_invk {
 		int repo_idx = file.Orig_repo_id();
 		boolean wiki_is_unknown = repo_idx == Xof_meta_itm.Repo_unknown;
 		boolean make_pass = false;
-		int len = repos.Count();			
+		int len = repos.Len();
 		if (!wiki_is_unknown) make_pass = Xfer_file_exec(file, this.Repos_get_at(repo_idx), repo_idx);
 		if (make_pass) return true;
 

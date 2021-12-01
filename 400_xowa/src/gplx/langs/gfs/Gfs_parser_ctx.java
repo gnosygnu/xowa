@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
+package gplx.langs.gfs; import gplx.*;
 import gplx.core.btries.*;
 class Gfs_parser_ctx {
 	public Btrie_fast_mgr Trie() {return trie;} Btrie_fast_mgr trie;
@@ -53,10 +53,10 @@ class Gfs_parser_ctx {
 		cur_nde.Atrs_add(nde);
 		return nde;
 	}
-	public void Cur_nde_from_stack() {cur_nde = (Gfs_nde)nodes.Get_at_last();}
+	public void Cur_nde_from_stack() {cur_nde = (Gfs_nde)nodes.GetAtLast();}
 	public void Stack_add() {nodes.Add(cur_nde);} List_adp nodes = List_adp_.New();
 	public void Stack_pop(int pos) {
-		if (nodes.Count() < 2) err_mgr.Fail_nde_stack_empty(this, pos);	// NOTE: need at least 2 items; 1 to pop and 1 to set as current
+		if (nodes.Len() < 2) err_mgr.Fail_nde_stack_empty(this, pos);	// NOTE: need at least 2 items; 1 to pop and 1 to set as current
 		List_adp_.Del_at_last(nodes);
 		Cur_nde_from_stack();
 	}

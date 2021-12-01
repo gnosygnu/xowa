@@ -14,33 +14,32 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs; import gplx.*;
-import gplx.dbs.metas.*;
 public class Db_conn_utl {
 	public static Db_conn Conn__new(String url_rel) {
 		Db_conn_bldr.Instance.Reg_default_mem();
 		return Db_conn_bldr.Instance.Get_or_new(Io_url_.mem_fil_("mem/" + url_rel)).Conn();
 	}
-	public static void Tbl__new(Db_conn conn, String tbl, Dbmeta_fld_itm[] flds, Object[]... rows) {
+	public static void Tbl__new(Db_conn conn, String tbl, DbmetaFldItm[] flds, Object[]... rows) {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl, flds));
 		int rows_len = rows.length;
-		Db_stmt stmt = conn.Stmt_insert(tbl, Dbmeta_fld_itm.To_str_ary(flds));
+		Db_stmt stmt = conn.Stmt_insert(tbl, DbmetaFldItm.ToStrAry(flds));
 		for (int i = 0; i < rows_len; ++i) {
 			Object[] row = rows[i];
 			int dat_len = row.length;
 			stmt.Clear();
 			for (int j = 0; j < dat_len; ++j) {
-				Dbmeta_fld_itm fld = flds[j];
+				DbmetaFldItm fld = flds[j];
 				String fld_name = fld.Name();
 				Object val = row[j];
-				switch (fld.Type().Tid_ansi()) {
-					case Dbmeta_fld_tid.Tid__bool:		stmt.Val_bool_as_byte	(fld_name, Bool_.Cast(val)); break;
-					case Dbmeta_fld_tid.Tid__byte:		stmt.Val_byte			(fld_name, Byte_.Cast(val)); break;
-					case Dbmeta_fld_tid.Tid__int:		stmt.Val_int			(fld_name, Int_.Cast(val)); break;
-					case Dbmeta_fld_tid.Tid__long:		stmt.Val_long			(fld_name, Long_.cast(val)); break;
-					case Dbmeta_fld_tid.Tid__float:		stmt.Val_float			(fld_name, Float_.cast(val)); break;
-					case Dbmeta_fld_tid.Tid__double:	stmt.Val_double			(fld_name, Double_.cast(val)); break;
-					case Dbmeta_fld_tid.Tid__str:		stmt.Val_str			(fld_name, String_.cast(val)); break;
-					case Dbmeta_fld_tid.Tid__bry:		stmt.Val_bry			(fld_name, Bry_.cast(val)); break;
+				switch (fld.Type().Tid()) {
+					case DbmetaFldType.TidBool:		stmt.Val_bool_as_byte	(fld_name, Bool_.Cast(val)); break;
+					case DbmetaFldType.TidByte:		stmt.Val_byte			(fld_name, Byte_.Cast(val)); break;
+					case DbmetaFldType.TidInt:		stmt.Val_int			(fld_name, Int_.Cast(val)); break;
+					case DbmetaFldType.TidLong:		stmt.Val_long			(fld_name, Long_.cast(val)); break;
+					case DbmetaFldType.TidFloat:		stmt.Val_float			(fld_name, Float_.cast(val)); break;
+					case DbmetaFldType.TidDouble:	stmt.Val_double			(fld_name, Double_.cast(val)); break;
+					case DbmetaFldType.TidStr:		stmt.Val_str			(fld_name, String_.cast(val)); break;
+					case DbmetaFldType.TidBry:		stmt.Val_bry			(fld_name, Bry_.cast(val)); break;
 				}
 			}
 			stmt.Exec_insert();
@@ -70,6 +69,6 @@ public class Db_conn_utl {
 				rv.Add(row);
 			}
 		}	finally {rdr.Rls();}
-		return (Object[][])rv.To_ary_and_clear(Object[].class);
+		return (Object[][])rv.ToAryAndClear(Object[].class);
 	}
 }

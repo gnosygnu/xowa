@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.kvs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.kvs; import gplx.*;
 public class Xoa_kv_hash {
 	private final Hash_adp hash = Hash_adp_.New();
 	public Object Get_or_make(Xoa_kv_itm itm) {
 		String key = itm.Kv__key();
-		Object val = hash.Get_by(key);
+		Object val = hash.GetByOrNull(key);
 		if (val == null) {
 			val = itm.Kv__val_make();
 			hash.Add(key, val);

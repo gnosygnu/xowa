@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
+package gplx.xowa.addons.bldrs.exports.splits.htmls; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.bldrs.exports.splits.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
+import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
 import gplx.xowa.htmls.core.dbs.*;
 public class Split_wkr__html implements Split_wkr {
 	private Xoh_src_tbl_mgr src_tbl_mgr;
@@ -28,7 +29,7 @@ public class Split_wkr__html implements Split_wkr {
 	}
 	public void Split__trg__nth__new(Split_ctx ctx, Db_conn trg_conn) {
 		this.tbl = new Xowd_html_tbl(trg_conn);
-		Dbmeta_fld_list trg_flds = Make_flds_for_split(tbl.Flds());
+		DbmetaFldList trg_flds = Make_flds_for_split(tbl.Flds());
 		trg_conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl.Tbl_name(), trg_flds));
 		this.stmt = trg_conn.Stmt_insert(tbl.Tbl_name(), trg_flds);
 	}
@@ -64,17 +65,17 @@ public class Split_wkr__html implements Split_wkr {
 	public void Split__trg__1st__new(Split_ctx ctx, Db_conn trg_conn) {}						// html_dbs have no core tables
 	public void Split__pages_loaded(Split_ctx ctx, int ns_id, int score_bgn, int score_end) {}	// html_wkr has no caching
 	public void Split__term(Split_ctx ctx) {}													// html_wkr has no cleanup
-	private static Dbmeta_fld_list Make_flds_for_split(Dbmeta_fld_list flds) {
-		Dbmeta_fld_list rv = new Dbmeta_fld_list();
-		rv.Add(flds.Get_by("page_id"));
-		rv.Add_int("trg_db_id");
-		rv.Add_int("blob_len");
-		rv.Add(flds.Get_by("head_flag"));
-		rv.Add(flds.Get_by("body_flag"));
-		rv.Add(flds.Get_by("display_ttl"));
-		rv.Add(flds.Get_by("content_sub"));
-		rv.Add(flds.Get_by("sidebar_div"));
-		rv.Add(flds.Get_by("body"));
+	private static DbmetaFldList Make_flds_for_split(DbmetaFldList flds) {
+		DbmetaFldList rv = new DbmetaFldList();
+		rv.Add(flds.GetByOrNull("page_id"));
+		rv.AddInt("trg_db_id");
+		rv.AddInt("blob_len");
+		rv.Add(flds.GetByOrNull("head_flag"));
+		rv.Add(flds.GetByOrNull("body_flag"));
+		rv.Add(flds.GetByOrNull("display_ttl"));
+		rv.Add(flds.GetByOrNull("content_sub"));
+		rv.Add(flds.GetByOrNull("sidebar_div"));
+		rv.Add(flds.GetByOrNull("body"));
 		return rv;
 	}
 }

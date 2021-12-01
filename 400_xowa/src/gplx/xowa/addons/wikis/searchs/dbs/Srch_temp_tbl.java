@@ -13,19 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
+package gplx.xowa.addons.wikis.searchs.dbs; import gplx.xowa.*;
 import gplx.dbs.*;
 public class Srch_temp_tbl {
 	public final String tbl_name = "search_temp";
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_word_id, fld_page_id, fld_word_text;
 	public final Db_conn conn; private Db_stmt stmt_insert;
 	public Srch_temp_tbl(Db_conn conn) {
 		this.conn = conn;
-		flds.Add_int_pkey_autonum("word_uid");
-		fld_word_id			= flds.Add_int("word_id");
-		fld_page_id			= flds.Add_int("page_id");
-		fld_word_text		= flds.Add_str("word_text", 255);
+		flds.AddIntPkeyAutonum("word_uid");
+		fld_word_id			= flds.AddInt("word_id");
+		fld_page_id			= flds.AddInt("page_id");
+		fld_word_text		= flds.AddStr("word_text", 255);
 	}
 	public void Insert_bgn() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));

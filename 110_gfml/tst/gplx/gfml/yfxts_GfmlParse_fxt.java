@@ -49,7 +49,7 @@ class GfmlParse_fxt {
 		bldr.ThrowErrors_set(false);
 		GfmlDoc actlDoc = bldr.XtoGfmlDoc(raw);
 		List_adp expd = List_adp_.New(), actl = actlDoc.UsrMsgs();
-		expd.Add_many((Object[])expdErrs);
+		expd.AddMany((Object[])expdErrs);
 		TfdsTstr_fxt tstr = TfdsTstr_fxt.new_();
 		int max = tstr.List_Max(expd, actl);
 		for (int i = 0; i < max; i++) {
@@ -57,15 +57,15 @@ class GfmlParse_fxt {
 			UsrMsg actlUm = (UsrMsg)tstr.List_FetchAtOrNull(actl, i);
 			UsrMsg_mok actlUmm = UsrMsg_mok.new_(actlUm);
 			tstr.Eq_str(expdUm.Main(), actlUmm.Main(), "main");
-			for (int j = 0; j < expdUm.Args().Count(); j++) {
+			for (int j = 0; j < expdUm.Args().Len(); j++) {
 				Keyval expdKv = (Keyval)expdUm.Args().Get_at(j);
-				Keyval actlKv = (Keyval)actlUmm.Args().Get_by(expdKv.Key());
+				Keyval actlKv = (Keyval)actlUmm.Args().GetByOrNull(expdKv.Key());
 				Object actlVal = actlKv == null ? String_.Null_mark : actlKv.Val();
 				tstr.Eq_str(expdKv.Val(), actlVal, expdKv.Key());
 			}
-			for (int j = 0; j < expdUm.Required().Count(); j++) {
+			for (int j = 0; j < expdUm.Required().Len(); j++) {
 				String expdKv = (String)expdUm.Required().Get_at(j);
-				Keyval actlKv = (Keyval)actlUmm.Args().Get_by(expdKv);
+				Keyval actlKv = (Keyval)actlUmm.Args().GetByOrNull(expdKv);
 				Object actlVal = actlKv == null ? String_.Null_mark : actlKv.Val();
 				Object actlValV = actlKv == null ? "<<REQD>>" : actlKv.Val();
 				tstr.Eq_str(actlValV, actlVal, expdKv);

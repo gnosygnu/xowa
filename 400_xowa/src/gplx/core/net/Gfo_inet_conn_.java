@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*; import gplx.core.*;
+package gplx.core.net; import gplx.*;
 public class Gfo_inet_conn_ {
 	public static final int Tid__http = 1, Tid__mem__hash = 2, Tid__mem__pile = 3;
 	public static Gfo_inet_conn new_http()		{return new Gfo_inet_conn__http();}
@@ -34,7 +34,7 @@ class Gfo_inet_conn__mem__hash implements Gfo_inet_conn {
 	public int				Tid() {return Gfo_inet_conn_.Tid__mem__hash;}
 	public void				Clear() {hash.Clear();}
 	public void				Upload_by_bytes(String url, byte[] data) {hash.Add(url, data);}
-	public byte[]			Download_as_bytes_or_null(String url) {return (byte[])hash.Get_by(url);}
+	public byte[]			Download_as_bytes_or_null(String url) {return (byte[])hash.GetByOrNull(url);}
 }
 class Gfo_inet_conn__mem__pile implements Gfo_inet_conn {
 	private final List_adp pile = List_adp_.New();

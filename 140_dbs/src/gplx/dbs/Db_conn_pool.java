@@ -22,9 +22,9 @@ public class Db_conn_pool {	// PURPOSE: cache one connection per connection_stri
 	public void Del(Db_conn_info url)				{hash.Del(url.Db_api());}
 	public Db_conn Get_or_new(String s)				{return Get_or_new(Db_conn_info_.parse(s));}
 	public Db_conn Get_or_new(Db_conn_info url) {
-		Db_conn rv = (Db_conn)hash.Get_by(url.Db_api());
+		Db_conn rv = (Db_conn)hash.GetByOrNull(url.Db_api());
 		if (rv == null) {
-			Db_engine prime = (Db_engine)prime_hash.Get_by(url.Key()); if (prime == null) Err_.new_wo_type("db engine prototype not found", "key", url.Key());
+			Db_engine prime = (Db_engine)prime_hash.GetByOrNull(url.Key()); if (prime == null) Err_.new_wo_type("db engine prototype not found", "key", url.Key());
 			Db_engine clone = prime.New_clone(url);
 			rv = new Db_conn(clone);
 			clone.Batch_mgr().Copy(clone.Tid(), batch_mgr);

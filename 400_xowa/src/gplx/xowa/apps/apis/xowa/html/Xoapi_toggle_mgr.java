@@ -13,15 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.html; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
-import gplx.xowa.apps.cfgs.*;
+package gplx.xowa.apps.apis.xowa.html; import gplx.*; import gplx.xowa.*;
 public class Xoapi_toggle_mgr implements Gfo_invk {
 	private Xoae_app app;
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public void Ctor_by_app(Xoae_app app) {this.app = app;}
 	public void Init_by_app(Xoae_app app) {
 		Io_url img_dir = app.Fsys_mgr().Bin_xowa_file_dir().GenSubDir_nest("app.general");
-		int len = hash.Count();
+		int len = hash.Len();
 		for (int i = 0; i < len; ++i) {
 			Xoapi_toggle_itm itm = (Xoapi_toggle_itm)hash.Get_at(i);
 			itm.Init_fsys(img_dir);
@@ -48,7 +47,7 @@ public class Xoapi_toggle_mgr implements Gfo_invk {
 	}
 	public Xoapi_toggle_itm Get_or_new(String key_str) {
 		byte[] key_bry = Bry_.new_u8(key_str);
-		Xoapi_toggle_itm rv = (Xoapi_toggle_itm)hash.Get_by(key_bry);
+		Xoapi_toggle_itm rv = (Xoapi_toggle_itm)hash.GetByOrNull(key_bry);
 		if (rv == null) {
 			rv = new Xoapi_toggle_itm(app, key_bry);
 			hash.Add(key_bry, rv);

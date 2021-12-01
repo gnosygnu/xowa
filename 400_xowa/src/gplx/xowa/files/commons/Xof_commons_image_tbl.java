@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.commons; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.commons; import gplx.*;
 import gplx.dbs.*;
 public class Xof_commons_image_tbl implements Rls_able {
 	private Db_stmt stmt_insert;
@@ -50,20 +50,20 @@ public class Xof_commons_image_tbl implements Rls_able {
 			);
 		}	finally {rdr.Rls();}
 	}
-	private static final String tbl_name = "image"; private static final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private static final String tbl_name = "image"; private static final DbmetaFldList flds = new DbmetaFldList();
 	private static final String
-	  fld_img_name				= flds.Add_str("img_name", 255)			// varbinary(255)
-	, fld_img_media_type		= flds.Add_str("img_media_type", 255)	// enum('UNKNOWN','BITMAP','DRAWING','AUDIO','VIDEO','MULTIMEDIA','OFFICE','TEXT','EXECUTABLE','ARCHIVE')"
-	, fld_img_minor_mime		= flds.Add_str("img_minor_mime", 255)	// DEFAULT 'unknown'"
-	, fld_img_size				= flds.Add_int("img_size")				// int(8) unsigned
-	, fld_img_width				= flds.Add_int("img_width")				// int(5)
-	, fld_img_height			= flds.Add_int("img_height")			// int(5)
-	, fld_img_bits				= flds.Add_short("img_bits")			// int(3)
-	, fld_img_ext_id			= flds.Add_int("img_ext_id")			// xowa
-	, fld_img_timestamp			= flds.Add_str("img_timestamp", 255)	// 20140101155749
+	  fld_img_name				= flds.AddStr("img_name", 255)			// varbinary(255)
+	, fld_img_media_type		= flds.AddStr("img_media_type", 255)	// enum('UNKNOWN','BITMAP','DRAWING','AUDIO','VIDEO','MULTIMEDIA','OFFICE','TEXT','EXECUTABLE','ARCHIVE')"
+	, fld_img_minor_mime		= flds.AddStr("img_minor_mime", 255)	// DEFAULT 'unknown'"
+	, fld_img_size				= flds.AddInt("img_size")				// int(8) unsigned
+	, fld_img_width				= flds.AddInt("img_width")				// int(5)
+	, fld_img_height			= flds.AddInt("img_height")			// int(5)
+	, fld_img_bits				= flds.AddShort("img_bits")			// int(3)
+	, fld_img_ext_id			= flds.AddInt("img_ext_id")			// xowa
+	, fld_img_timestamp			= flds.AddStr("img_timestamp", 255)	// 20140101155749
 	;
 	public static Dbmeta_tbl_itm new_meta() {
-		return Dbmeta_tbl_itm.New(tbl_name, flds.To_fld_ary()
+		return Dbmeta_tbl_itm.New(tbl_name, flds.ToFldAry()
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "name", fld_img_name, fld_img_timestamp)
 		);
 	} 

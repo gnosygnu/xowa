@@ -13,19 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.dbs.*; import gplx.dbs.utls.*;
+package gplx.xowa.xtns.wbases.dbs; import gplx.*;
+import gplx.dbs.*;
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public class Xowb_prop_tbl implements Db_tbl {
-	private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld__wbp_pid, fld__wbp_datatype;
 	private final Db_conn conn;
 	private Db_stmt stmt_insert;
 	public Xowb_prop_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name				= "wbase_prop";
-		this.fld__wbp_pid			= flds.Add_str_pkey("wbp_pid", 16);			// EX: "p1"; NOTE: String, not int to conform to wbase_pid
-		this.fld__wbp_datatype		= flds.Add_int("wbp_datatype");				// EX: 12=commonsMedia; SEE:Wbase_claim_type_
+		this.fld__wbp_pid			= flds.AddStrPkey("wbp_pid", 16);			// EX: "p1"; NOTE: String, not int to conform to wbase_pid
+		this.fld__wbp_datatype		= flds.AddInt("wbp_datatype");				// EX: 12=commonsMedia; SEE:Wbase_claim_type_
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;

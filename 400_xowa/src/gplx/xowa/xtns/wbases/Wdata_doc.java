@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.wbases; import gplx.*;
 import gplx.core.primitives.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.langs.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.parsers.*;
+import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*;
 public class Wdata_doc {
 	private final Wdata_wiki_mgr mgr;
 	public Wdata_doc(Wdata_wiki_mgr mgr, Json_doc jdoc, byte[] qid) {
@@ -37,21 +37,21 @@ public class Wdata_doc {
 
 	// various getters
 	public Wbase_claim_grp Get_claim_grp_or_null(int pid) {
-		Object o = this.Claim_list().Get_by(Int_obj_ref.New(pid));
+		Object o = this.Claim_list().GetByOrNull(Int_obj_ref.New(pid));
 		return (Wbase_claim_grp)o;
 	}
 	public byte[] Get_label_bry_or_null(byte[] lang_key) {
-		Wdata_langtext_itm itm = (Wdata_langtext_itm)this.Label_list().Get_by(lang_key);
+		Wdata_langtext_itm itm = (Wdata_langtext_itm)this.Label_list().GetByOrNull(lang_key);
 		return itm == null ? null : itm.Text();
 	}
 	public Wdata_langtext_itm Get_label_itm_or_null(Xol_lang_itm lang) {return Get_langtext_itm_or_null(this.Label_list(), lang);}
 	public Wdata_langtext_itm Get_descr_itm_or_null(Xol_lang_itm lang) {return Get_langtext_itm_or_null(this.Descr_list(), lang);}
-	public Wdata_sitelink_itm Get_slink_itm_or_null(byte[] abrv_wm)    {return (Wdata_sitelink_itm)this.Slink_list().Get_by(abrv_wm);}
+	public Wdata_sitelink_itm Get_slink_itm_or_null(byte[] abrv_wm)    {return (Wdata_sitelink_itm)this.Slink_list().GetByOrNull(abrv_wm);}
 
 	// helper method
 	private Wdata_langtext_itm Get_langtext_itm_or_null(Ordered_hash hash, Xol_lang_itm lang) {
 		// get itm by lang's key
-		Wdata_langtext_itm itm = (Wdata_langtext_itm)hash.Get_by(lang.Key_bry());
+		Wdata_langtext_itm itm = (Wdata_langtext_itm)hash.GetByOrNull(lang.Key_bry());
 		if (itm != null) return itm;
 
 		// loop over fallback_langs
@@ -59,7 +59,7 @@ public class Wdata_doc {
 		int len = fallback_langs.length;
 		for (int i = 0; i < len; i++) {
 			byte[] lang_key = fallback_langs[i];
-			Object itm_obj = hash.Get_by(lang_key);
+			Object itm_obj = hash.GetByOrNull(lang_key);
 			if (itm_obj != null) {
 				return (Wdata_langtext_itm)itm_obj;
 			}

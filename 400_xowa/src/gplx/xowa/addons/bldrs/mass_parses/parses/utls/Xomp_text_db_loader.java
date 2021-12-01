@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.core.ios.*;
 import gplx.xowa.wikis.data.tbls.*;
@@ -26,7 +26,7 @@ public class Xomp_text_db_loader {
 		this.zip_mgr = wiki.Utl__zip_mgr();
 	}
 	public void Add(int text_db_id, Xowd_text_bry_owner ppg) {
-		Xomp_text_db_itm itm = (Xomp_text_db_itm)text_db_hash.Get_by(text_db_id);
+		Xomp_text_db_itm itm = (Xomp_text_db_itm)text_db_hash.GetByOrNull(text_db_id);
 		if (itm == null) {
 			itm = new Xomp_text_db_itm(text_db_id);
 			text_db_hash.Add(text_db_id, itm);
@@ -77,7 +77,7 @@ public class Xomp_text_db_loader {
 				int page_id = rdr.Read_int("page_id");
 				byte[] text_data = rdr.Read_bry("text_data");
 				text_data = zip_mgr.Unzip(zip_tid, text_data);
-				Xowd_text_bry_owner ppg = (Xowd_text_bry_owner)page_hash.Get_by(page_id);
+				Xowd_text_bry_owner ppg = (Xowd_text_bry_owner)page_hash.GetByOrNull(page_id);
 				ppg.Set_text_bry_by_db(text_data);
 			}
 		}

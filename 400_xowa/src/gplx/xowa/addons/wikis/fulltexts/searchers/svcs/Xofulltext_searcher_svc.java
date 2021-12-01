@@ -13,16 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.svcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*;
-import gplx.core.btries.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.svcs; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.fulltexts.*;
 import gplx.langs.jsons.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.guis.cbks.*;
 import gplx.xowa.addons.apps.cfgs.*;
-import gplx.xowa.addons.wikis.fulltexts.searchers.specials.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
-import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
-import gplx.xowa.addons.wikis.searchs.searchers.crts.visitors.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.gflucenes.*;
@@ -35,7 +31,7 @@ class Xofulltext_searcher_svc implements Gfo_invk {
 	}
 	public void Search_cxl(Json_nde args) {this.Search_cxl(args.Get_as_str("page_guid"));}
 	private void Search_cxl(String page_guid) {
-		Xofulltext_args_qry prv_args = (Xofulltext_args_qry)wkr_hash.Get_by(page_guid);
+		Xofulltext_args_qry prv_args = (Xofulltext_args_qry)wkr_hash.GetByOrNull(page_guid);
 		if (prv_args != null) {
 			prv_args.Cancel();
 			synchronized (wkr_hash) {

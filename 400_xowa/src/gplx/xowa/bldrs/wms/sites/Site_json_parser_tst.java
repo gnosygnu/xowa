@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.sites; import gplx.*;
 import org.junit.*; import gplx.langs.jsons.*; import gplx.xowa.wikis.nss.*;
 public class Site_json_parser_tst {
 	private final Site_json_parser_fxt fxt = new Site_json_parser_fxt();
@@ -416,7 +416,7 @@ class Site_json_parser_fxt {
 	public void Test_namespace(Site_namespace_itm... expd) {Tfds.Eq_ary_str(expd, (Site_namespace_itm[])site_meta.Namespace_list().To_ary(Site_namespace_itm.class));}
 	public void Test_statistic(Site_statistic_itm expd) {Tfds.Eq_str_intf(expd, site_meta.Statistic_itm());}
 	public void Test_interwikimap(Site_interwikimap_itm... expd) {Tfds.Eq_ary_str(expd, (Site_interwikimap_itm[])site_meta.Interwikimap_list().To_ary(Site_interwikimap_itm.class));}
-	public void Test_namespacealias(Site_namespacealias_itm... expd) {Tfds.Eq_ary_str(expd, (Site_namespacealias_itm[])site_meta.Namespacealias_list().To_ary(Site_namespacealias_itm.class));}
+	public void Test_namespacealias(Site_namespacealias_itm... expd) {Tfds.Eq_ary_str(expd, (Site_namespacealias_itm[])site_meta.Namespacealias_list().ToAry(Site_namespacealias_itm.class));}
 	public void Test_specialpagealias(Site_specialpagealias_itm... expd) {Tfds.Eq_ary_str(expd, (Site_specialpagealias_itm[])site_meta.Specialpagealias_list().To_ary(Site_specialpagealias_itm.class));}
 	public void Test_library(Site_library_itm... expd) {Tfds.Eq_ary_str(expd, (Site_library_itm[])site_meta.Library_list().To_ary(Site_library_itm.class));}
 	public void Test_extension(Site_extension_itm... expd) {Tfds.Eq_ary_str(expd, (Site_extension_itm[])site_meta.Extension_list().To_ary(Site_extension_itm.class));}

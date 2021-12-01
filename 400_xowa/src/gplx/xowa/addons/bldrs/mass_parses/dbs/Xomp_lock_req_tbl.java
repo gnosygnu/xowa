@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*;
 import gplx.dbs.*;
 public class Xomp_lock_req_tbl implements Db_tbl {
 	private final String fld_machine_name, fld_req_time;
@@ -21,12 +21,12 @@ public class Xomp_lock_req_tbl implements Db_tbl {
 	public Xomp_lock_req_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "xomp_lock_req";
-		this.fld_machine_name	= flds.Add_str("machine_name", 255);		// EX: "MACHINE1"
-		this.fld_req_time		= flds.Add_str("req_time", 32);				// EX: 20160801 010203
+		this.fld_machine_name	= flds.AddStr("machine_name", 255);		// EX: "MACHINE1"
+		this.fld_req_time		= flds.AddStr("req_time", 32);				// EX: 20160801 010203
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
-	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public DbmetaFldList Flds() {return flds;} private final DbmetaFldList flds = new DbmetaFldList();
 	public void Create_tbl() {
 		conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds
 		, Dbmeta_idx_itm.new_normal_by_tbl(tbl_name, "req_time", fld_req_time)

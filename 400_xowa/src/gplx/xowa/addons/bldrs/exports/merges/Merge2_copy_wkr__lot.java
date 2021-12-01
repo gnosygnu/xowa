@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
+package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.bldrs.exports.utls.*;
 class Merge2_copy_wkr__lot {
 	private final Split_tbl tbl;
@@ -45,7 +45,7 @@ class Merge2_copy_wkr__lot {
 		}
 	}
 	private void Copy_by_trg_conn(String msg, Merge_prog_wkr prog_wkr, Db_conn src_conn, Merge2_trg_itm trg_db, int trg_db_id, boolean src_is_pack) {
-		Dbmeta_fld_list src_flds = tbl.Flds().Clone(); // src_flds.Insert(0, Dbmeta_fld_itm.new_int("trg_db_id"));
+		DbmetaFldList src_flds = tbl.Flds().Clone(); // src_flds.Insert(0, Dbmeta_fld_itm.new_int("trg_db_id"));
 		Merge_wkr_utl.Merge_by_sql(prog_wkr, msg, tbl.Tbl_name(), src_flds, src_conn, trg_db, trg_db_id, !src_is_pack);
 	}
 	private int[] Get_trg_dbs(Db_conn conn, String tbl_name) {
@@ -59,7 +59,7 @@ class Merge2_copy_wkr__lot {
 		finally {
 			rdr.Rls();
 		}
-		return (int[])list.To_ary_and_clear(int.class);
+		return (int[])list.ToAryAndClear(int.class);
 	}
 	public void Copy_entire_src(Merge_ctx ctx, Merge_prog_wkr prog_wkr, Db_conn src_conn, Merge2_trg_itm trg_db, Merge2_trg_mgr trg_mgr, boolean src_is_pack) {
 		Xow_wiki wiki = ctx.Wiki();
@@ -73,9 +73,9 @@ class Merge2_copy_wkr__lot {
 	}
 	private void Copy_rows(Merge_ctx ctx, Merge_prog_wkr prog_wkr, Xow_wiki wiki, Split_tbl tbl, Db_conn src_conn, Merge2_trg_itm trg_db, Merge2_trg_mgr trg_mgr, boolean src_is_pack, byte select_mode) {
 		// init src
-		Dbmeta_fld_list src_flds = tbl.Flds().Clone();
+		DbmetaFldList src_flds = tbl.Flds().Clone();
 		if (src_is_pack)
-			src_flds.Insert(0, Dbmeta_fld_itm.new_int("trg_db_id"));
+			src_flds.AddAt(0, DbmetaFldItm.NewInt("trg_db_id"));
 		int flds_nth = src_flds.Len();
 		if (tbl_has_blob) {
 			Split_tbl_.Flds__add_blob_len(src_flds);
@@ -85,7 +85,7 @@ class Merge2_copy_wkr__lot {
 		Db_rdr src_rdr = src_conn.Stmt_sql(src_sql).Exec_select__rls_auto();
 		copy_utl.Init_conn(src_conn);
 
-		Dbmeta_fld_list trg_flds = tbl.Flds().Clone();
+		DbmetaFldList trg_flds = tbl.Flds().Clone();
 		if (tbl_has_blob && src_is_pack) {
 			Split_tbl_.Flds__add_blob_len(trg_flds);
 		}

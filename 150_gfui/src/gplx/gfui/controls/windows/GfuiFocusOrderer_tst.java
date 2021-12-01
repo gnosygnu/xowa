@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
+package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*;
 import org.junit.*; import gplx.gfui.controls.elems.*;
 public class GfuiFocusOrderer_tst {
 	@Before public void setup() {
@@ -74,7 +74,7 @@ public class GfuiFocusOrderer_tst {
 		}
 	}
 	void tst_FocusIndxs(GfuiElem owner, List_adp list, int... expd) {
-		int[] actl = new int[list.Count()];
+		int[] actl = new int[list.Len()];
 		for (int i = 0; i < actl.length; i++) {
 			GfuiElem sub = (GfuiElem)list.Get_at(i);
 			actl[i] = sub.UnderElem().Core().Focus_index();

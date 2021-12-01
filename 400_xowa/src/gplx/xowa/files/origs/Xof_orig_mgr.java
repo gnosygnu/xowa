@@ -14,9 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.dbs.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.downloads.*;
-import gplx.xowa.apps.wms.apis.*; import gplx.xowa.apps.wms.apis.origs.*;
+import gplx.xowa.files.repos.*;
+import gplx.xowa.apps.wms.apis.origs.*;
 public class Xof_orig_mgr {
 	private Xof_orig_wkr[] wkrs; private int wkrs_len;
 	private Xof_url_bldr url_bldr; private Xow_repo_mgr repo_mgr; private final Xof_img_size img_size = new Xof_img_size();
@@ -59,12 +58,12 @@ public class Xof_orig_mgr {
 			Xof_orig_wkr wkr = wkrs[i];
 			wkr.Find_by_list(rv, itms);
 		}
-		int len = itms.Count();
+		int len = itms.Len();
 		for (int i = 0; i < len; i++) {
 			try {
 				Xof_fsdb_itm fsdb = (Xof_fsdb_itm)itms.Get_at(i);
 				fsdb.Orig_exists_n_();	// default to status = missing
-				Xof_orig_itm orig = (Xof_orig_itm)rv.Get_by(fsdb.Lnki_ttl()); if (orig == Xof_orig_itm.Null) continue;
+				Xof_orig_itm orig = (Xof_orig_itm)rv.GetByOrNull(fsdb.Lnki_ttl()); if (orig == Xof_orig_itm.Null) continue;
 				if (orig.Insert_new()) this.Insert(orig.Repo(), fsdb.Lnki_ttl(), orig.Ext_id(), orig.W(), orig.H(), orig.Redirect());	// NOTE: orig_page must be same as find_arg not orig.Page() else will not be found for next call; DATE:2015-04-14
 				Xof_file_wkr.Eval_orig(orig, fsdb, url_bldr, repo_mgr, img_size);
 				if (!Io_mgr.Instance.ExistsFil(fsdb.Html_view_url()))
@@ -96,7 +95,7 @@ public class Xof_orig_mgr {
 			if (wkr.Tid() == tid) continue;	// do not add deleted wkr
 			list.Add(wkr);
 		}
-		wkrs = (Xof_orig_wkr[])list.To_ary_and_clear(Xof_orig_wkr.class);
+		wkrs = (Xof_orig_wkr[])list.ToAryAndClear(Xof_orig_wkr.class);
 		wkrs_len = wkrs.length;
 	}
 }

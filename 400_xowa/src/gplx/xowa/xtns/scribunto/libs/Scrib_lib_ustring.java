@@ -218,7 +218,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			}
 		}
 		else if (	op_is_match				// if op_is_match, and no captures, extract find_txt; note that UstringLibrary.php says "$arr[] = $m[0][0];" which means get the 1st match;
-				&&	tmp_list.Count() == 0)	// only add match once; EX: "aaaa", "a" will have four matches; get 1st; DATE:2014-04-02
+				&&	tmp_list.Len() == 0)	// only add match once; EX: "aaaa", "a" will have four matches; get 1st; DATE:2014-04-02
 			tmp_list.Add(String_.Mid(text, rslt.Find_bgn(), rslt.Find_end()));
 	}
 	public static Regx_adp RegxAdp_new_(byte[] page_url, String regx) {

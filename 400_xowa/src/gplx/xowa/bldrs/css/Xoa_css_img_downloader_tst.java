@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.css; import gplx.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.files.downloads.*;
 public class Xoa_css_img_downloader_tst {		
 	@Before public void init() {fxt.Clear();} private Xoa_css_img_downloader_fxt fxt = new Xoa_css_img_downloader_fxt();
@@ -199,7 +199,7 @@ class Xoa_css_img_downloader_fxt {
 		List_adp actl_img_list = List_adp_.New();
 		byte[] actl_bry = downloader.Convert_to_local_urls(Bry_.new_a7("mem/en.wikipedia.org"), Bry_.new_u8(raw), actl_img_list);
 		Tfds.Eq_str_lines(expd, String_.new_u8(actl_bry));
-		Tfds.Eq_ary_str(expd_img_ary, actl_img_list.To_str_ary());
+		Tfds.Eq_ary_str(expd_img_ary, actl_img_list.ToStrAry());
 	}
 	public void Test_clean_img_url(String raw_str, String expd) {
 		byte[] raw = Bry_.new_a7(raw_str);
@@ -215,6 +215,6 @@ class Xoa_css_img_downloader_fxt {
 		byte[] actl = downloader.Convert_to_local_urls(Bry_.new_a7("mem/en.wikipedia.org"), Bry_.new_u8(raw), actl_imgs);
 		Gftest.Eq__str(expd, actl);
 
-		Gftest.Eq__ary(expd_imgs, actl_imgs.To_str_ary());
+		Gftest.Eq__ary(expd_imgs, actl_imgs.ToStrAry());
 	}
 }

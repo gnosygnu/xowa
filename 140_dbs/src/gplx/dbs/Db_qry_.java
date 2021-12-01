@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -22,14 +22,14 @@ import gplx.dbs.qrys.Db_qry_insert;
 import gplx.dbs.qrys.Db_qry_update;
 import gplx.dbs.sqls.itms.Sql_join_fld;
 public class Db_qry_ {
-	public static Db_qry__select_cmd select_cols_(String tbl, Criteria crt, String... cols){return select_().From_(tbl).Where_(crt).Cols_(cols);}
-	public static Db_qry__select_cmd select_val_(String tbl, String col, Criteria crt)        {return select_().From_(tbl).Where_(crt).Cols_(col);}
+	public static Db_qry__select_cmd select_cols_(String tbl, Criteria crt, String... cols) {return select_().From_(tbl).Where_(crt).Cols_(cols);}
+	public static Db_qry__select_cmd select_val_(String tbl, String col, Criteria crt)      {return select_().From_(tbl).Where_(crt).Cols_(col);}
 	public static Db_qry__select_cmd select_tbl_(String tbl)                                {return select_().From_(tbl).Cols_all_();}
-	public static Db_qry__select_cmd select_()                                                {return new Db_qry__select_cmd();}
-	public static Db_qry__select_cmd select_(String tbl, String... cols)                {return new Db_qry__select_cmd().From_(tbl).Cols_(cols);}
-	public static Db_qry_delete delete_(String tbl, Criteria crt)                            {return Db_qry_delete.new_(tbl, crt);}
-	public static Db_qry_delete delete_tbl_(String tbl)                                        {return Db_qry_delete.new_(tbl);}
-	public static Db_qry_insert insert_(String tbl)                                            {return new Db_qry_insert(tbl);}
+	public static Db_qry__select_cmd select_()                                              {return new Db_qry__select_cmd();}
+	public static Db_qry__select_cmd select_(String tbl, String... cols)                    {return new Db_qry__select_cmd().From_(tbl).Cols_(cols);}
+	public static Db_qry_delete delete_(String tbl, Criteria crt)                           {return Db_qry_delete.new_(tbl, crt);}
+	public static Db_qry_delete delete_tbl_(String tbl)                                     {return Db_qry_delete.new_(tbl);}
+	public static Db_qry_insert insert_(String tbl)                                         {return new Db_qry_insert(tbl);}
 	public static Db_qry_insert insert_common_(String tbl, Keyval... pairs) {
 		Db_qry_insert cmd = new Db_qry_insert(tbl);
 		for (Keyval pair : pairs)
@@ -58,9 +58,17 @@ public class Db_qry_ {
 		gplx.core.stores.DataRdr rdr = conn.Exec_qry_as_old_rdr(qry);
 		try {
 			return rdr.MoveNextPeer() ? rdr.Read(qry.Cols().Flds.Get_at(0).Fld) : null;    // NOTE: need to access from flds for tdb
-		}    finally {rdr.Rls();}
+		}
+		finally {rdr.Rls();}
 	}
 
-	public static Db_qry as_(Object obj) {return obj instanceof Db_qry ? (Db_qry)obj : null;}
-	public static final int Tid_insert = 0, Tid_delete = 1, Tid_update = 2, Tid_select = 3, Tid_sql = 4, Tid_select_in_tbl = 5, Tid_flush = 6, Tid_noop = 7, Tid_pragma = 8;
+	public static final int
+		Tid_insert = 0,
+		Tid_delete = 1,
+		Tid_update = 2,
+		Tid_select = 3,
+		Tid_sql = 4,
+		Tid_select_in_tbl = 5,
+		Tid_flush = 6,
+		Tid_pragma = 8;
 }

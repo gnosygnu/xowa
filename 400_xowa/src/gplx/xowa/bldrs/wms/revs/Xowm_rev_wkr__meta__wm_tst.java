@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.revs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
-import org.junit.*; import gplx.langs.jsons.*; import gplx.core.net.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.bldrs.wms.revs; import gplx.*;
+import org.junit.*;
+import gplx.core.net.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*;
 public class Xowm_rev_wkr__meta__wm_tst {
 	private final Xowm_rev_wkr__meta__wm_fxt fxt = new Xowm_rev_wkr__meta__wm_fxt();
@@ -66,7 +67,7 @@ class Xowm_rev_wkr__meta__wm_fxt {
 	}
 	public void Test_fetch(String[] ttl_ary, Wmapi_itm__pge... expd) {
 		Init_rev_hash(ttl_ary);
-		meta_wkr.Fetch_meta(domain_str, rev_hash, 0, rev_hash.Count());
+		meta_wkr.Fetch_meta(domain_str, rev_hash, 0, rev_hash.Len());
 		Tfds.Eq_str_lines(String_.new_u8(json_wtr.To_bry(expd)), String_.new_u8(json_wtr.To_bry((Wmapi_itm__pge[])rev_hash.To_ary_and_clear(Wmapi_itm__pge.class))));
 	}
 	private void Init_rev_hash(String[] ttl_ary) {

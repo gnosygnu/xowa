@@ -34,7 +34,7 @@ public class Fs_root_core implements Xof_fsdb_mgr, Gfo_invk {	// reads images fr
 	}
 	public void Orig_dir_(Io_url v) {mgr.Orig_dir_(v);}
 	public void Fsdb_search_by_list(List_adp itms, Xow_wiki wiki, Xoa_page page, Xog_js_wkr js_wkr) {
-		int itms_len = itms.Count();
+		int itms_len = itms.Len();
 
 		// NOTE: do not cache in /xowa/file b/c files will already exist in /xowa/wiki/wiki_name/file/thumb
 		gplx.xowa.files.caches.Xou_cache_mgr cache_mgr = wiki.App().User().User_db_mgr().Cache_mgr();

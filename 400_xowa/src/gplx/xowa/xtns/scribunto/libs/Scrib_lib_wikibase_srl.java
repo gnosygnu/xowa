@@ -66,14 +66,14 @@ public class Scrib_lib_wikibase_srl {
 		Srl_root(rv, Wdata_doc_parser_v2.Str_sitelinks		, Srl_sitelinks	(Wdata_dict_sitelink.Itm__site.Key_str()	, Wdata_dict_sitelink.Itm__title.Key_str(), wdoc.Slink_list(), base_adj));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_aliases		, Srl_aliases	(base_adj, wdoc.Alias_list()));
 		Srl_root(rv, Wdata_doc_parser_v2.Str_claims			, Srl_claims	(base_adj, legacy_style, prop_mgr, wdoc.Claim_list(), page_url));
-		return (Keyval[])rv.To_ary(Keyval.class);
+		return (Keyval[])rv.ToAry(Keyval.class);
 	}
 	private static void Srl_root(List_adp rv, String label, Keyval[] ary) {
 		if (ary == null) return;	// don't add node if empty; EX: labels:{} should not add "labels" kv
 		rv.Add(Keyval_.new_(label, ary));
 	}
 	private static Keyval[] Srl_langtexts(String lang_label, String text_label, Ordered_hash list) {
-		int len = list.Count(); if (len == 0) return null;
+		int len = list.Len(); if (len == 0) return null;
 		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++) {
 			Wdata_langtext_itm itm = (Wdata_langtext_itm)list.Get_at(i);
@@ -84,7 +84,7 @@ public class Scrib_lib_wikibase_srl {
 		return rv;
 	}
 	private static Keyval[] Srl_sitelinks(String key_label, String val_label, Ordered_hash list, int base_adj) {
-		int len = list.Count(); if (len == 0) return null;
+		int len = list.Len(); if (len == 0) return null;
 		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++) {
 			Wdata_sitelink_itm itm = (Wdata_sitelink_itm)list.Get_at(i);
@@ -105,7 +105,7 @@ public class Scrib_lib_wikibase_srl {
 		return Keyval_.new_("badges", kvs);
 	}
 	private static Keyval[] Srl_aliases(int base_adj, Ordered_hash list) {
-		int len = list.Count(); if (len == 0) return null;
+		int len = list.Len(); if (len == 0) return null;
 		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++) {
 			Wdata_alias_itm itm = (Wdata_alias_itm)list.Get_at(i);
@@ -124,7 +124,7 @@ public class Scrib_lib_wikibase_srl {
 		return rv;
 	}
 	private static Keyval[] Srl_claims(int base_adj, boolean legacy_style, Wbase_prop_mgr prop_mgr, Ordered_hash claim_grps, byte[] page_url) {
-		int len = claim_grps.Count(); if (len == 0) return null;
+		int len = claim_grps.Len(); if (len == 0) return null;
 		Scrib_lib_wikibase_srl_visitor visitor = new Scrib_lib_wikibase_srl_visitor();
 		int rv_len = legacy_style ? len * 2 : len;	// NOTE: legacyStyle returns 2 sets of properties: official "P" and legacy "p"; DATE:2014-05-11
 		Keyval[] rv = new Keyval[rv_len];
@@ -166,7 +166,7 @@ public class Scrib_lib_wikibase_srl {
 		Srl_root(list, Wdata_dict_claim.Itm__qualifiers.Key_str(), Srl_qualifiers(prop_mgr, visitor, itm.Qualifiers(), base_adj, page_url));
 		Srl_root(list, Wdata_dict_claim.Itm__qualifiers_order.Key_str(), Srl_qualifiers_order(prop_mgr, visitor, itm.Qualifiers_order(), base_adj, page_url));
 		Srl_root(list, Wdata_dict_claim.Itm__references.Key_str(), Srl_references(prop_mgr, visitor, itm.References(), base_adj, page_url));
-		return (Keyval[])list.To_ary_and_clear(Keyval.class);
+		return (Keyval[])list.ToAryAndClear(Keyval.class);
 	}
 	private static Keyval[] Srl_qualifiers(Wbase_prop_mgr prop_mgr, Scrib_lib_wikibase_srl_visitor visitor, Wbase_claim_grp_list list, int base_adj, byte[] page_url) {
 		if (list == null) return null;
@@ -182,9 +182,9 @@ public class Scrib_lib_wikibase_srl {
 				Wbase_claim_base itm = grp.Get_at(j);
 				pid_list.Add(Keyval_.int_(j + base_adj, Srl_claims_prop_itm_core(prop_mgr, visitor, itm_pid, itm, page_url)));	// NOTE: was originally "+ 1"; changed to base_adj; PAGE:ru.w:Tor ru.w:Кактусовые DATE:2014-10-25
 			}
-			rv.Add(Keyval_.new_(itm_pid, pid_list.To_ary_and_clear(Keyval.class)));
+			rv.Add(Keyval_.new_(itm_pid, pid_list.ToAryAndClear(Keyval.class)));
 		}
-		return (Keyval[])rv.To_ary_and_clear(Keyval.class);
+		return (Keyval[])rv.ToAryAndClear(Keyval.class);
 	}
 	private static Keyval[] Srl_qualifiers_order(Wbase_prop_mgr prop_mgr, Scrib_lib_wikibase_srl_visitor visitor, int[] list, int base_adj, byte[] page_url) {
 		if (list == null) return null;
@@ -194,7 +194,7 @@ public class Scrib_lib_wikibase_srl {
 			String itm_pid = "P" + Int_.To_str(list[i]);
 			rv.Add(Keyval_.int_(i + base_adj, itm_pid));
 		}
-		return (Keyval[])rv.To_ary_and_clear(Keyval.class);
+		return (Keyval[])rv.ToAryAndClear(Keyval.class);
 	}
 	private static Keyval[] Srl_references(Wbase_prop_mgr prop_mgr, Scrib_lib_wikibase_srl_visitor visitor, Wbase_references_grp[] list, int base_adj, byte[] page_url) {
 		if (list == null) return null;
@@ -208,7 +208,7 @@ public class Scrib_lib_wikibase_srl {
 			references_kvs[2] = Keyval_.new_("snaks-order", Srl_qualifiers_order(prop_mgr, visitor, references_grp.Snaks_order(), base_adj, page_url));
 			rv.Add(Keyval_.int_(i + base_adj, references_kvs));
 		}
-		return (Keyval[])rv.To_ary_and_clear(Keyval.class);
+		return (Keyval[])rv.ToAryAndClear(Keyval.class);
 	}
 	private static Keyval[] Srl_claims_prop_itm_core(Wbase_prop_mgr prop_mgr, Scrib_lib_wikibase_srl_visitor visitor, String pid, Wbase_claim_base itm, byte[] page_url) {
 		boolean snak_is_valued = itm.Snak_tid() == Wbase_claim_value_type_.Tid__value; // PURPOSE: was != Wbase_claim_value_type_.Tid__novalue; PAGE:it.s:Autore:Anonimo DATE:2015-12-06 

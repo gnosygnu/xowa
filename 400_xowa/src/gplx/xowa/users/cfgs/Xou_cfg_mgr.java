@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.cfgs; import gplx.*;
 import gplx.dbs.*;
 public class Xou_cfg_mgr {
 	private Xou_cfg_tbl tbl;
@@ -27,7 +27,7 @@ public class Xou_cfg_mgr {
 	public String Get_app_str_or(String key, String or) {	// NOTE: app-level is always loaded at start; don't check db
 		synchronized (hash) {	// LOCK:app-level
 			String uid = Bld_uid(tmp_bfr, Usr__anonymous, Ctx__app, key);
-			Xou_cfg_itm itm = (Xou_cfg_itm)hash.Get_by(uid);
+			Xou_cfg_itm itm = (Xou_cfg_itm)hash.GetByOrNull(uid);
 			return itm == null ? or : itm.Val();
 		}
 	}
@@ -37,7 +37,7 @@ public class Xou_cfg_mgr {
 			// update val in reg
 			String uid = Bld_uid(tmp_bfr, Usr__anonymous, Ctx__app, key);
 			boolean insert = false;
-			Xou_cfg_itm itm = (Xou_cfg_itm)hash.Get_by(uid);
+			Xou_cfg_itm itm = (Xou_cfg_itm)hash.GetByOrNull(uid);
 			if (itm == null) {
 				itm = new Xou_cfg_itm(Usr__anonymous, Ctx__app, key, val);
 				hash.Add(uid, itm);

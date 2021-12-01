@@ -25,7 +25,7 @@ public class Xoa_special_mgr implements Gfo_invk {
 		wbase_cfg.Init_by_app(app);
 	}
 	public void Add(String key, Gfo_invk cfg)	{hash.Add(key, cfg);}
-	public Gfo_invk Get_or_null(String key)		{return (Gfo_invk)hash.Get_by(key);}
+	public Gfo_invk Get_or_null(String key)		{return (Gfo_invk)hash.GetByOrNull(key);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))		return Get_or_null(m.ReadStr("v"));
 		else	return Gfo_invk_.Rv_unhandled;

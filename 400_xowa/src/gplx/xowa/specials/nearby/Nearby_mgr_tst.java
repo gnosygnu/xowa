@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.nearby; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+package gplx.xowa.specials.nearby; import gplx.*; import gplx.xowa.*;
 import org.junit.*;
 public class Nearby_mgr_tst {
 	@Before public void init() {fxt.Clear();} Nearby_mgr_fxt fxt = new Nearby_mgr_fxt(); 
@@ -59,7 +59,7 @@ class Nearby_mgr_fxt {
 		Tfds.Eq_ary(String_.SplitLines_nl(Xto_str(actl)), expd);
 	}
 	String Xto_str(List_adp list) {
-		int len = list.Count();
+		int len = list.Len();
 		for (int i = 0; i < len; i++) {
 			Nearby_rslt rslt = (Nearby_rslt)list.Get_at(i);
 			int ttls = rslt.Len();

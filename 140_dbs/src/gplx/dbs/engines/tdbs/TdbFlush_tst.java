@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
+package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*;
 import org.junit.*;
 import gplx.core.ios.*; /*IoMgrFxt*/ import gplx.dbs.qrys.*; import gplx.core.type_xtns.*;
 public class TdbFlush_tst {
@@ -96,7 +96,7 @@ class TdbEngineFxt {
 		engine.Exec_as_obj(cmd);
 	}
 
-	public void tst_FilesCount(TdbEngine engine, int count) {Tfds.Eq(engine.Db().Files().Count(), count);}
+	public void tst_FilesCount(TdbEngine engine, int count) {Tfds.Eq(engine.Db().Files().Len(), count);}
 	public void tst_File(TdbEngine engine, int index, int id, Io_url url, String format) {
 		TdbFile src = engine.Db().Files().Get_by_or_fail(id);
 		Tfds.Eq(src.Path().Raw(), url.Raw());

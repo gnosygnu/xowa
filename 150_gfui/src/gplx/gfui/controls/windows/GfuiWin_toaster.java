@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2017 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -13,10 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.windows; import gplx.*; import gplx.gfui.*; import gplx.gfui.controls.*;
-import gplx.core.envs.*;
-import gplx.gfui.draws.*; import gplx.gfui.envs.*; import gplx.gfui.controls.gxws.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*; import gplx.gfui.controls.windows.*;
-public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin owner, String text, int interval) {
+package gplx.gfui.controls.windows;
+import gplx.GfoMsg;
+import gplx.GfsCtx;
+import gplx.Keyval_hash;
+import gplx.Math_;
+import gplx.core.envs.Env_;
+import gplx.gfui.RectAdp;
+import gplx.gfui.SizeAdp;
+import gplx.gfui.SizeAdp_;
+import gplx.gfui.controls.elems.GfuiElem_;
+import gplx.gfui.controls.gxws.GxwElem;
+import gplx.gfui.controls.gxws.GxwElemFactory_;
+import gplx.gfui.controls.gxws.GxwWin;
+import gplx.gfui.controls.standards.GfuiTextBox_;
+import gplx.gfui.controls.standards.GfuiTextMemo;
+import gplx.gfui.draws.ColorAdp_;
+import gplx.gfui.draws.FontAdp;
+import gplx.gfui.draws.FontStyleAdp_;
+import gplx.gfui.envs.ScreenAdp_;
+import gplx.gfui.envs.TimerAdp;
+public class GfuiWin_toaster extends GfuiWin {
+	public void ShowPopup(GfuiWin owner, String text, int interval) {
 		this.TaskbarParkingWindowFix(owner);
 		ShowPopup(text, interval);
 	}
@@ -55,39 +73,39 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 		RectAdp screenRect = ScreenAdp_.Primary.Rect();//WorkingArea
 		int screenX_max = screenRect.X() + screenRect.Width();
 		int val = popupState.Val();
-		if	(val == PopupState.FullyShrunk.Val()) {
+		if    (val == PopupState.FullyShrunk.Val()) {
 			this.Size_(SizeAdp_.new_(this.Width(), 0));
-			this.Pos_(screenX_max / 2 - this.Width()/2, PopupAnchorTop);	//screenRect.Bottom - 1
-			//		gplx.gfui.npis.FormNpi.BringToFrontDoNotFocus(gplx.gfui.npis.ControlNpi.Hwnd(this.UnderElem()));
-						if (!this.Visible()) {
-//					GfuiElem last = GfuiFocusMgr.Instance.FocusedElem();
+			this.Pos_(screenX_max / 2 - this.Width()/2, PopupAnchorTop);    //screenRect.Bottom - 1
+			//        gplx.gfui.npis.FormNpi.BringToFrontDoNotFocus(gplx.gfui.npis.ControlNpi.Hwnd(this.UnderElem()));
+			if (!this.Visible()) {
+//                    GfuiElem last = GfuiFocusMgr.Instance.FocusedElem();
 				this.Visible_on_();
-//					GfuiFocusMgr.Instance.FocusedElem_set(last);
+//                    GfuiFocusMgr.Instance.FocusedElem_set(last);
 			}
 			timer.Interval_(growingTimerInterval);
 			popupState = PopupState.Growing;
 		}
-		else if	(val == PopupState.Growing.Val()) {
+		else if    (val == PopupState.Growing.Val()) {
 			this.Redraw();
 		}
-		else if	(val == PopupState.FullyGrown.Val()) {
+		else if    (val == PopupState.FullyGrown.Val()) {
 			timer.Interval_(fullyGrownTimerInterval);
 			this.Redraw();
 		}
-		else if	(val == PopupState.Shrinking.Val()) {
+		else if    (val == PopupState.Shrinking.Val()) {
 			this.Size_(SizeAdp_.new_(this.Width(), 0));
-			this.Pos_(screenX_max / 2 - this.Width()/2, PopupAnchorTop);	//screenRect.Bottom - 1
+			this.Pos_(screenX_max / 2 - this.Width()/2, PopupAnchorTop);    //screenRect.Bottom - 1
 			timer.Interval_(fullyGrownTimerInterval);
 			popupState = PopupState.FullyGrown;
 		}
 		timer.Enabled_on();
 	}
-//		public override boolean FocusGotCbk() {
-//			GfuiElem last = GfuiFocusMgr.Instance.FocusedElemPrev();
-//			GfuiFocusMgr.Instance.FocusedElem_set(last);
-//			last.Focus();
-//			return false;
-//		}
+//        public override boolean FocusGotCbk() {
+//            GfuiElem last = GfuiFocusMgr.Instance.FocusedElemPrev();
+//            GfuiFocusMgr.Instance.FocusedElem_set(last);
+//            last.Focus();
+//            return false;
+//        }
 
 	void WhenTick() {
 		int fullHeight = fullyGrown.Height();
@@ -108,20 +126,20 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 		}
 		else if (val == PopupState.Shrinking.Val()) {
 			// if (bReShowOnMouseOver && bIsMouseOverPopup) {popupState = PopupState.Growing; break;}
-			if (this.Height() > 2)	// NOTE.Val()) { does not shrink less than 2 //this.Top > screenRect.Bottom
+			if (this.Height() > 2)    // NOTE.Val()) { does not shrink less than 2 //this.Top > screenRect.Bottom
 				ChangeBounds(false, shrinkingIncrement);
 			else {
-//					this.Pos_(-500, -500);	// WORKAROUND:JAVA: cannot do this.Hide() b/c it will focus ownerForm; EX: typing in textApp when musicApp moves forward
+//                    this.Pos_(-500, -500);    // WORKAROUND:JAVA: cannot do this.Hide() b/c it will focus ownerForm; EX: typing in textApp when musicApp moves forward
 				this.Visible_off_();
 				popupState = PopupState.FullyShrunk;
 				timer.Enabled_off();
 			}
 		}
 	}
-	static final int PopupAnchorTop = -1;	// HACK: wxp1 showed obvious flickering with top edge
+	static final int PopupAnchorTop = -1;    // HACK: wxp1 showed obvious flickering with top edge
 	void ChangeBounds(boolean isGrowing, int increment) {
 		increment = isGrowing ? increment : -increment;
-		this.Pos_(this.X(), PopupAnchorTop);	//this.Top - increment
+		this.Pos_(this.X(), PopupAnchorTop);    //this.Top - increment
 		this.Size_(SizeAdp_.new_(this.Width(), this.Height() + increment));
 	}
 	@Override public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.win_toaster_(ctorArgs);}
@@ -135,21 +153,21 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 		messageLabel.TextMgr().Font_(FontAdp.new_("Arial", 8, FontStyleAdp_.Bold));
 		messageLabel.Border_on_(true);
 		messageLabel.Focus_able_(false);
-//			this.Focus_able_(false);
-//			this.UnderElem().Core().Focus_able_force_(false);
+//            this.Focus_able_(false);
+//            this.UnderElem().Core().Focus_able_force_(false);
 		timer = TimerAdp.new_(this, Tmr_cmd, 3000, false);
 
 		GxwWin formRef = (GxwWin)this.UnderElem();
-		if (formRef != null) {	// FIXME: nullCheck, needed for MediaPlaylistMgr_tst
+		if (formRef != null) {    // FIXME: nullCheck, needed for MediaPlaylistMgr_tst
 			formRef.Pin_set(true);
 			formRef.TaskbarVisible_set(false);
 		}
 	}
 	@Override public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Tmr_cmd))		WhenTick();
+		if        (ctx.Match(k, Tmr_cmd))        WhenTick();
 		else super.Invk(ctx, ikey, k, m);
 		return this;
-	}	public static final String Tmr_cmd = "Tmr";
+	}    public static final String Tmr_cmd = "Tmr";
 	GfuiTextMemo messageLabel;
 	TimerAdp timer;
 	SizeAdp fullyGrown = SizeAdp_.Zero;
@@ -158,7 +176,7 @@ public class GfuiWin_toaster extends GfuiWin {	public void ShowPopup(GfuiWin own
 	PopupState popupState = PopupState.FullyShrunk;
 	public static GfuiWin_toaster new_(GfuiWin owner) {
 		GfuiWin_toaster rv = new GfuiWin_toaster();
-//			rv.Icon_(IconAdp.cfg_("popup"));
+//            rv.Icon_(IconAdp.cfg_("popup"));
 		rv.ctor_GfuiBox_base
 			(new Keyval_hash()
 			.Add(GfuiElem_.InitKey_focusAble, false)
@@ -172,9 +190,9 @@ class PopupState {
 	public int Val() {return val;} int val;
 	public PopupState(int v) {this.val = v;}
 	public static final PopupState
-		  FullyShrunk	= new PopupState(1)
-		, Growing		= new PopupState(2)
-		, FullyGrown	= new PopupState(3)
-		, Shrinking		= new PopupState(4)
+			FullyShrunk    = new PopupState(1)
+		, Growing        = new PopupState(2)
+		, FullyGrown    = new PopupState(3)
+		, Shrinking        = new PopupState(4)
 		;
 }

@@ -135,14 +135,14 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 	}
 	public void Rls() {this.Clear();}
 	public void Add(String k, String v) {
-		if (k == Dbmeta_fld_itm.Key_null) return;	// key is explicitly null; ignore; allows version_2+ type definitions
+		if (k == DbmetaFldItm.KeyNull) return;	// key is explicitly null; ignore; allows version_2+ type definitions
 		args.Add(v);
 	}
 	public String Xto_sql() {
-		tmp_fmtr.Bld_bfr_many(tmp_bfr, (Object[])args.To_ary_and_clear(Object.class));
+		tmp_fmtr.Bld_bfr_many(tmp_bfr, (Object[])args.ToAryAndClear(Object.class));
 		return tmp_bfr.To_str_and_clear();
 	}
-	public int Args_len() {return args.Count();}
+	public int Args_len() {return args.Len();}
 	public String Args_get_at(int i) {return (String)args.Get_at(i);}
 	private String sql_orig; 
 	public Db_qry Qry() {return qry;} private Db_qry qry;
@@ -169,7 +169,7 @@ public class Db_stmt_sql implements Db_stmt {// used for formatting SQL statemen
 	}
 	public static String Xto_str(Bry_bfr tmp_bfr, Bry_fmtr tmp_fmtr, String sql_str, List_adp args) {
 		Init_fmtr(tmp_bfr, tmp_fmtr, sql_str);
-		Object[] ary = args.To_obj_ary();
+		Object[] ary = args.ToObjAry();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
 			Object obj = ary[i];

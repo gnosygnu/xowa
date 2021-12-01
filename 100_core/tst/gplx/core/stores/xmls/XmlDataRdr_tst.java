@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores.xmls; import gplx.*; import gplx.core.*; import gplx.core.stores.*;
+package gplx.core.stores.xmls; import gplx.*;
+import gplx.core.stores.*;
 import org.junit.*;
 public class XmlDataRdr_tst {
 	@Test public void Read() {
@@ -93,7 +94,7 @@ class XmlDataRdr_fxt {
 		while (subRdr.MoveNextPeer())
 			list.Add(subRdr.Read(key));
 
-		String[] actlAry = list.To_str_ary();
+		String[] actlAry = list.ToStrAry();
 		Tfds.Eq_ary(actlAry, expdAry);
 	}
 	public static XmlDataRdr_fxt new_() {return new XmlDataRdr_fxt();} XmlDataRdr_fxt() {}

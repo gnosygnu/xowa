@@ -93,7 +93,7 @@ public class Hxtn_page_mgr {
 	public void Blob_tbl__insert(int blob_tid, int wiki_id, int blob_id, byte[] blob_text) {
 		byte[] key = Hxtn_blob_tbl.Make_key(temp_bfr, blob_tid, wiki_id, blob_id);
 		if (!blob_hash.Has(key)) {// multiple pages can refer to same template; only insert if not seen
-			blob_hash.Add_as_key_and_val(key);
+			blob_hash.AddAsKeyAndVal(key);
 			if (!blob_tbl.Exists(blob_tid, wiki_id, blob_id)) {
 				blob_tbl.Insert_exec(blob_tid, wiki_id, blob_id, blob_text);
 			}

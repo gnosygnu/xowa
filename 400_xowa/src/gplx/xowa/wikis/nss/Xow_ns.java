@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.nss; import gplx.*;
 import gplx.xowa.bldrs.cmds.*; import gplx.xowa.apps.utls.*;
 public class Xow_ns implements Gfo_invk {
 	public Xow_ns(int id, byte case_match, byte[] name, boolean is_alias) {
@@ -81,11 +81,11 @@ public class Xow_ns implements Gfo_invk {
 	public void		Aliases_add(String alias) {
 		if (String_.Eq(alias, name_db_str)) return;
 		if (aliases == null) aliases = Ordered_hash_.New();
-		aliases.Add_if_dupe_use_1st(alias, alias);
+		aliases.AddIfDupeUse1st(alias, alias);
 	}	private Ordered_hash aliases;
 	public Keyval[] Aliases_as_scrib_ary() {	// NOTE: intended for Scrib_lib_site; DATE:2014-02-15
 		if (aliases == null) return Keyval_.Ary_empty;
-		int len = aliases.Count();
+		int len = aliases.Len();
 		Keyval[] rv = new Keyval[len];
 		for (int i = 0; i < len; i++) {
 			String alias = (String)aliases.Get_at(i);

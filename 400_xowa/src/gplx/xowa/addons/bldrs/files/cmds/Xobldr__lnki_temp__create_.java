@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
+package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*;
 import gplx.xowa.wikis.nss.*;
 class Xobldr__lnki_temp__create_ {
 	public static int[] Ns_ids_by_aliases(Xowe_wiki wiki, String[] aliases) {
@@ -41,7 +41,7 @@ class Xobldr__lnki_temp__create_ {
 					list.Add(ns);
 			}
 		}
-		len = list.Count();
+		len = list.Len();
 		int[] rv = new int[len];
 		for (int i = 0; i < len; i++) {
 			rv[i] = ((Xow_ns)list.Get_at(i)).Id();

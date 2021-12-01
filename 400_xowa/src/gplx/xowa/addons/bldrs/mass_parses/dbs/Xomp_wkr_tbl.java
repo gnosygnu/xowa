@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
+package gplx.xowa.addons.bldrs.mass_parses.dbs; import gplx.*;
 import gplx.dbs.*;
 public class Xomp_wkr_tbl implements Db_tbl {
 	private final String fld_wkr_uid, fld_wkr_url, fld_wkr_status, fld_wkr_status_time, fld_wkr_exec_count, fld_wkr_exec_time;
@@ -22,16 +22,16 @@ public class Xomp_wkr_tbl implements Db_tbl {
 	public Xomp_wkr_tbl(Db_conn conn) {
 		this.conn = conn;
 		this.tbl_name = "xomp_wkr";
-		fld_wkr_uid			= flds.Add_int_pkey("wkr_uid");			// EX: 0
-		fld_wkr_url			= flds.Add_str("wkr_url", 255);			// EX: //MACHINE/C:/xowa/wiki/en.wikipedia.org/tmp/xomp
-		fld_wkr_status		= flds.Add_int("wkr_status");			// EX: running; waiting
-		fld_wkr_status_time	= flds.Add_str("wkr_status_time", 255);	// EX: 20160801 010203
-		fld_wkr_exec_count	= flds.Add_int("wkr_exec_count");		// EX: 1000
-		fld_wkr_exec_time	= flds.Add_int("wkr_exec_time");		// EX: 123
+		fld_wkr_uid			= flds.AddIntPkey("wkr_uid");			// EX: 0
+		fld_wkr_url			= flds.AddStr("wkr_url", 255);			// EX: //MACHINE/C:/xowa/wiki/en.wikipedia.org/tmp/xomp
+		fld_wkr_status		= flds.AddInt("wkr_status");			// EX: running; waiting
+		fld_wkr_status_time	= flds.AddStr("wkr_status_time", 255);	// EX: 20160801 010203
+		fld_wkr_exec_count	= flds.AddInt("wkr_exec_count");		// EX: 1000
+		fld_wkr_exec_time	= flds.AddInt("wkr_exec_time");		// EX: 123
 		conn.Rls_reg(this);
 	}
 	public String Tbl_name() {return tbl_name;} private final String tbl_name;
-	public Dbmeta_fld_list Flds() {return flds;} private final Dbmeta_fld_list flds = new Dbmeta_fld_list();
+	public DbmetaFldList Flds() {return flds;} private final DbmetaFldList flds = new DbmetaFldList();
 	public void Create_tbl() {conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl_name, flds));}
 
 	public int Init_wkrs(String wkr_url, int wkr_len) {

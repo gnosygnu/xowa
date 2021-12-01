@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*;
-import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.core.intls.ucas.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages; import gplx.*; import gplx.xowa.*;
+import gplx.xowa.addons.wikis.ctgs.*;
+import gplx.xowa.langs.*;
+import gplx.core.intls.ucas.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
 public class Xoctg_catpage_mgr implements Gfo_invk {
 	private final Xow_wiki wiki;
@@ -51,7 +51,7 @@ public class Xoctg_catpage_mgr implements Gfo_invk {
 	public void Free_mem_all() {cache.Clear();}
 	public Xoctg_catpage_ctg Get_by_cache_or_null(byte[] page_ttl, Xoctg_catpage_url catpage_url, Xoa_ttl cat_ttl, int limit) {
 		// DynamicPageList categories only (b/c of many members); for regular catpages, always retrieve on demand
-		Xoctg_catpage_ctg ctg = (Xoctg_catpage_ctg)cache.Get_by(cat_ttl.Full_db());
+		Xoctg_catpage_ctg ctg = (Xoctg_catpage_ctg)cache.GetByOrNull(cat_ttl.Full_db());
 		if (ctg == null) {
 			if (gplx.core.envs.Env_.Mode_testing()) return null;	// needed for dpl test
 			ctg = Get_by_db_or_null(page_ttl, catpage_url, cat_ttl, limit);
