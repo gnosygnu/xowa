@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.xwikis.sitelinks; import gplx.*;
-public class Xoa_sitelink_grp implements gplx.CompareAble {
+import gplx.objects.lists.CompareAble;
+public class Xoa_sitelink_grp implements CompareAble {
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
 	public Xoa_sitelink_grp(byte[] name, int sort) {
 		this.name = name;

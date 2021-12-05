@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Xomw_regex_parser {
 	private Bry_bfr tmp;	
 	public byte[][] Rslt() {return rslt;} private byte[][] rslt;
@@ -63,16 +64,16 @@ public class Xomw_regex_parser {
 			// look at byte
 			byte b = src[cur];
 			switch (b) {	// escape
-				case Byte_ascii.Backslash:
+				case AsciiByte.Backslash:
 					int nxt = cur + 1;
 					if (nxt >= src_end) throw Err_.new_wo_type("regex escape failed: no more chars left", "src", src, "pos", nxt);
 					byte nxt_byte = src[nxt];
 					switch (nxt_byte) {
-						case Byte_ascii.Ltr_s: // \s -> " "
-							src = Byte_ascii.Space_bry;
+						case AsciiByte.Ltr_s: // \s -> " "
+							src = AsciiByte.SpaceBry;
 							cur = src_end;
 							break;
-						case Byte_ascii.Ltr_x: // \ u -> utf8 sequence in hex-dec; EX: "\xc2\xad" -> new byte[] {194, 160}
+						case AsciiByte.Ltr_x: // \ u -> utf8 sequence in hex-dec; EX: "\xc2\xad" -> new byte[] {194, 160}
 							// read next two bytes
 							dirty = true;
 							nxt++;

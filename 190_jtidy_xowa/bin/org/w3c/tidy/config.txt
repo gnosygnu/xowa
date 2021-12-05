@@ -1,0 +1,20 @@
+# sample config file for Java HTML tidy
+
+indent=auto
+indent-spaces=2
+wrap=72
+markup=yes
+clean=yes
+output-xml=no
+input-xml=no
+show-warnings=yes
+numeric-entities=yes
+quote-marks=yes
+quote-nbsp=yes
+quote-ampersand=no
+break-before-br=no
+uppercase-tags=yes
+uppercase-attributes=yes
+smart-indent=no
+output-xhtml=yes
+char-encoding=latin1

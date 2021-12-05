@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tmpls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.parsers.*;
 import gplx.core.primitives.*;
 public interface Xot_defn_trace {
@@ -43,7 +44,7 @@ class Xot_defn_trace_brief implements Xot_defn_trace {
 		if (bb.Len() != 0) bb.Add_byte_nl();	// only add newLine if something in bb; needed for tests
 		for (int i = 0; i < count; i++) {
 			Xot_defn_trace_itm_brief itm = (Xot_defn_trace_itm_brief)hash.Get_at(i);
-			bb.Add_int_fixed(itm.Count(), 4).Add_byte(Byte_ascii.Space);
+			bb.Add_int_fixed(itm.Count(), 4).Add_byte(AsciiByte.Space);
 			bb.Add(itm.Name()).Add_byte_nl();
 		}
 	}

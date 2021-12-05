@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tmpls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.parsers.*;
 import gplx.xowa.xtns.pfuncs.*;
 public class Xot_defn_trace_dbg implements Xot_defn_trace {
@@ -21,22 +22,22 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 		if (count++ != 0) bfr.Add_byte_nl();	// do not add new line for 1st template
 		indent += 2;
 		// *invk
-		bfr.Add_byte_repeat(Byte_ascii.Space, indent).Add(Ary_invk_lbl);
-		bfr.Add_byte_repeat(Byte_ascii.Space, indent).Add(Xop_curly_bgn_lxr.Hook).Add(name);
+		bfr.Add_byte_repeat(AsciiByte.Space, indent).Add(Ary_invk_lbl);
+		bfr.Add_byte_repeat(AsciiByte.Space, indent).Add(Xop_curly_bgn_lxr.Hook).Add(name);
 		if (defn.Defn_tid() == Xot_defn_.Tid_func) {
 			byte[] argx_ary = ((Pf_func_base)defn).Argx_dat();
-			bfr.Add_byte(Byte_ascii.Colon).Add(argx_ary);
+			bfr.Add_byte(AsciiByte.Colon).Add(argx_ary);
 		}
 		int args_len = invk.Args_len();
 		for (int i = 0; i < args_len; i++) {
-			bfr.Add_byte(Byte_ascii.Pipe);
+			bfr.Add_byte(AsciiByte.Pipe);
 			Arg_nde_tkn nde = invk.Args_get_by_idx(i);
 			if (nde.KeyTkn_exists()) {
 //					bfr.Add_mid(src, nde.KeyTkn().Dat_bgn(), nde.KeyTkn().Dat_end()).Add_byte(Byte_ascii.Eq);
-				bfr.Add(nde.Key_tkn().Dat_ary()).Add_byte(Byte_ascii.Eq);
+				bfr.Add(nde.Key_tkn().Dat_ary()).Add_byte(AsciiByte.Eq);
 			}
 //				Arg_itm_tkn val_tkn = nde.ValTkn();
-//				if (val_tkn.Itm_static() == Bool_.Y_byte) {
+//				if (val_tkn.Itm_static() == BoolUtl.Y_byte) {
 //					bfr.Add_mid(src, val_tkn.Dat_bgn(), val_tkn.Dat_end());
 //				}
 //				else {
@@ -57,7 +58,7 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 		bfr.Add_byte_nl();
 		
 		// *name
-		bfr	.Add_byte_repeat(Byte_ascii.Space, indent).Add(Ary_lnk_lbl)
+		bfr	.Add_byte_repeat(AsciiByte.Space, indent).Add(Ary_lnk_lbl)
 			.Add(Xop_tkn_.Lnki_bgn)
 			.Add(ctx.Wiki().Ns_mgr().Ns_template().Name_db_w_colon())
 			.Add(defn.Name())
@@ -68,15 +69,15 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 			argKeys.Clear();
 			int caller_args = invk.Args_len();
 			int key_max = 0;
-			bfr	.Add_byte_repeat(Byte_ascii.Space, indent).Add(Ary_args_lbl);
+			bfr	.Add_byte_repeat(AsciiByte.Space, indent).Add(Ary_args_lbl);
 			for (int i = 0; i < caller_args; i++) {
 				Arg_nde_tkn arg = invk.Args_get_by_idx(i);
 				int digits = Int_.DigitCount(i + 1);
 //					byte[] val_ary = Bry_.Mid(src, arg.ValTkn().Dat_bgn(), arg.ValTkn().Dat_end());
-				bfr	.Add_byte_repeat(Byte_ascii.Space, indent + 2)
-					.Add_byte_repeat(Byte_ascii.Space, 4 - digits)
+				bfr	.Add_byte_repeat(AsciiByte.Space, indent + 2)
+					.Add_byte_repeat(AsciiByte.Space, 4 - digits)
 					.Add_int_fixed(i + 1, digits)
-					.Add_byte(Byte_ascii.Colon).Add_byte(Byte_ascii.Space)
+					.Add_byte(AsciiByte.Colon).Add_byte(AsciiByte.Space)
 					.Add(arg.Val_tkn().Dat_ary()).Add_byte_nl()
 //						.Add(val_ary).Add_byte_nl()
 					;
@@ -93,9 +94,9 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 				String s = (String)argKeys.Get_at(i);
 				String key = String_.GetStrBefore(s, "=");
 				String val = String_.GetStrAfter(s, "=");
-				bfr.Add_byte_repeat(Byte_ascii.Space, indent + 2).Add_str_u8(key)
-					.Add_byte_repeat(Byte_ascii.Space, key_max - String_.Len(key))
-					.Add_byte(Byte_ascii.Colon).Add_byte(Byte_ascii.Space).Add_str_u8(val).Add_byte_nl();
+				bfr.Add_byte_repeat(AsciiByte.Space, indent + 2).Add_str_u8(key)
+					.Add_byte_repeat(AsciiByte.Space, key_max - String_.Len(key))
+					.Add_byte(AsciiByte.Colon).Add_byte(AsciiByte.Space).Add_str_u8(val).Add_byte_nl();
 			}
 		}
 
@@ -108,8 +109,8 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 		}
 	}	private Bry_bfr bfr = Bry_bfr_.New_w_size(128); List_adp argKeys = List_adp_.New(); Xot_fmtr_prm prm_fmtr = new Xot_fmtr_prm();
 	private void Fmt(Xop_ctx ctx, byte[] src, Xop_tkn_itm root, byte[] lbl, Xot_invk caller, boolean newLineArgs) {
-		bfr.Add_byte_repeat(Byte_ascii.Space, indent).Add(lbl);
-		bfr.Add_byte_repeat(Byte_ascii.Space, indent);
+		bfr.Add_byte_repeat(AsciiByte.Space, indent).Add(lbl);
+		bfr.Add_byte_repeat(AsciiByte.Space, indent);
 		prm_fmtr.Caller_(caller).NewLineArgs_(newLineArgs);
 		root.Tmpl_fmt(ctx, src, prm_fmtr);
 		prm_fmtr.Print(bfr);
@@ -117,9 +118,9 @@ public class Xot_defn_trace_dbg implements Xot_defn_trace {
 	}
 	public void Trace_end(int trg_bgn, Bry_bfr trg) {
 		indent -= 2;
-		bfr	.Add_byte_repeat(Byte_ascii.Space, indent).Add(Ary_result_lbl);
+		bfr	.Add_byte_repeat(AsciiByte.Space, indent).Add(Ary_result_lbl);
 		if (trg_bgn < trg.Len())
-			bfr	.Add_byte_repeat(Byte_ascii.Space, indent).Add_mid(trg.Bfr(), trg_bgn, trg.Len())
+			bfr	.Add_byte_repeat(AsciiByte.Space, indent).Add_mid(trg.Bfr(), trg_bgn, trg.Len())
 				.Add_byte_nl();
 	}
 	public void Print(byte[] src, Bry_bfr bb) {

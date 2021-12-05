@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.sql_dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import org.junit.*; import gplx.core.ios.*; import gplx.core.tests.*;
+package gplx.xowa.bldrs.sql_dumps; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import org.junit.*;
+import gplx.core.tests.*;
 public class Xosql_dump_parser__tst {		
 	private final Xosql_dump_parser__fxt fxt = new Xosql_dump_parser__fxt();
 	private static final String table_def = "\n  KEY \n) ENGINE; ";
@@ -62,9 +64,9 @@ class Xosql_dump_parser__fxt {
 		bfr.Add_str_a7("CREATE TABLE tbl_0 (");
 		for (int i = 0; i < tbl_flds.length; ++i) {
 			bfr.Add_byte_nl();
-			bfr.Add_byte(Byte_ascii.Tick);
+			bfr.Add_byte(AsciiByte.Tick);
 			bfr.Add_str_a7(tbl_flds[i]);
-			bfr.Add_byte(Byte_ascii.Tick);
+			bfr.Add_byte(AsciiByte.Tick);
 			bfr.Add_byte_comma();
 		}
 		bfr.Add_str_a7("\nUNIQUE KEY idx_0 (fld_0));\n");

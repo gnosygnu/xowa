@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Array_;
+import gplx.objects.arrays.ArrayUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 
 public class Json_ary extends Json_itm_base implements Json_grp {
@@ -45,7 +45,7 @@ public class Json_ary extends Json_itm_base implements Json_grp {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Json_itm[] new_subs = new Json_itm[subs_max];
-			Array_.Copy_to(subs, 0, new_subs, 0, subs_len);
+			ArrayUtl.CopyTo(subs, 0, new_subs, 0, subs_len);
 			subs = new_subs;
 		}
 		subs[subs_len] = itm;
@@ -53,21 +53,21 @@ public class Json_ary extends Json_itm_base implements Json_grp {
 	}
 	@Override public void Print_as_json(Bry_bfr bfr, int depth) {
 		if (subs_len == 0) {	// empty grp; print on one line (rather than printing across 3)
-			bfr.Add_byte(Byte_ascii.Brack_bgn).Add_byte(Byte_ascii.Brack_end);
+			bfr.Add_byte(AsciiByte.BrackBgn).Add_byte(AsciiByte.BrackEnd);
 			return;
 		}
 		bfr.Add_byte_nl();
 		Json_grp_.Print_indent(bfr, depth);
-		bfr.Add_byte(Byte_ascii.Brack_bgn).Add_byte(Byte_ascii.Space);
+		bfr.Add_byte(AsciiByte.BrackBgn).Add_byte(AsciiByte.Space);
 		for (int i = 0; i < subs_len; i++) {
 			if (i != 0) {
 				Json_grp_.Print_nl(bfr); Json_grp_.Print_indent(bfr, depth);
-				bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space);
+				bfr.Add_byte(AsciiByte.Comma).Add_byte(AsciiByte.Space);
 			}
 			subs[i].Print_as_json(bfr, depth + 1);
 		}
 		Json_grp_.Print_nl(bfr); Json_grp_.Print_indent(bfr, depth);
-		bfr.Add_byte(Byte_ascii.Brack_end).Add_byte_nl();
+		bfr.Add_byte(AsciiByte.BrackEnd).Add_byte_nl();
 	}
 	public byte[][] Xto_bry_ary() {
 		if (subs_len == 0) return Bry_.Ary_empty;

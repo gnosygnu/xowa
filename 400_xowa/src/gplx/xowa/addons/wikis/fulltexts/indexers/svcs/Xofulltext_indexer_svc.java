@@ -13,12 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.indexers.svcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.indexers.*;
-import gplx.core.btries.*;
+package gplx.xowa.addons.wikis.fulltexts.indexers.svcs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.fulltexts.*;
 import gplx.langs.jsons.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.guis.cbks.*;
-import gplx.xowa.addons.apps.cfgs.*;
 import gplx.xowa.addons.wikis.fulltexts.indexers.specials.*;
 import gplx.xowa.addons.wikis.fulltexts.indexers.bldrs.*;
 class Xofulltext_indexer_svc implements Gfo_invk {
@@ -36,7 +36,7 @@ class Xofulltext_indexer_svc implements Gfo_invk {
 	}
 	private void Index(Xofulltext_indexer_args args) {
 		// loop wikis
-		byte[][] domain_ary = Bry_split_.Split(args.wikis, Byte_ascii.Pipe);
+		byte[][] domain_ary = Bry_split_.Split(args.wikis, AsciiByte.Pipe);
 		for (byte[] domain : domain_ary) {
 			// get wiki
 			Xow_wiki wiki = app.Wiki_mgri().Get_by_or_make_init_n(domain);

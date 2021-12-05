@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.String_;
 import gplx.langs.jsons.Json_ary;
@@ -23,7 +23,7 @@ import gplx.langs.jsons.Json_itm;
 import gplx.langs.jsons.Json_itm_;
 import gplx.langs.jsons.Json_kv;
 import gplx.langs.jsons.Json_nde;
-import gplx.objects.Object_;
+import gplx.objects.ObjectUtl;
 
 public class JsonMustacheNde implements Mustache_doc_itm {
 	private final Json_nde nde;
@@ -58,7 +58,7 @@ public class JsonMustacheNde implements Mustache_doc_itm {
 				switch (kv.Val().Tid()) {
 					// bool node -> render; EX: `{{#person}}Never shown{{/person}}`
 					case Json_itm_.Tid__bool:
-						boolean dataVal = Bool_.Cast(kv.Val().Data());
+						boolean dataVal = BoolUtl.Cast(kv.Val().Data());
 						return dataVal ? Mustache_doc_itm_.Ary__bool__y : Mustache_doc_itm_.Ary__bool__n;
 					// array node -> render; EX: `{{#repo}} <b>{{name}}</b>{{/repo}}`
 					case Json_itm_.Tid__ary:
@@ -101,7 +101,7 @@ class JsonMustacheVal implements Mustache_doc_itm {
 	public boolean Mustache__write(String mustacheKey, Mustache_bfr bfr) {
 		if (	(String_.Eq(mustacheKey, jsonKey))                                     // print if `{{match}}`; EX: `{{#prop}}{{prop}}{{/prop}}`
 			||	(String_.Eq(mustacheKey, Mustache_tkn_def.ItemString) && fromArray)) { // print if `{{.}}` and from array; EX: `{{#array}}{{.}}{{/array}}`
-			bfr.Add_bry(Bry_.new_u8(Object_.To_str(jsonVal)));
+			bfr.Add_bry(Bry_.new_u8(ObjectUtl.ToStr(jsonVal)));
 			return true;
 		}
 		else {

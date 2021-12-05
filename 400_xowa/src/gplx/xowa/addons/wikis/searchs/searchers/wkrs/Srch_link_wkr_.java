@@ -13,10 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.addons.wikis.searchs.searchers.*;
-import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.langs.cases.*;
-import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
+package gplx.xowa.addons.wikis.searchs.searchers.wkrs;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Bry_split_;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_word_row;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_word_tbl;
+import gplx.xowa.addons.wikis.searchs.parsers.Srch_text_parser;
+import gplx.xowa.addons.wikis.searchs.searchers.Srch_search_ctx;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.Srch_crt_itm;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.Srch_crt_mgr;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.Srch_crt_sql;
+import gplx.xowa.langs.cases.Xol_case_mgr;
 class Srch_link_wkr_ {
 	private static final Srch_word_count_wkr word_count_wkr = new Srch_word_count_wkr();
 	public static Srch_crt_itm Find_sql_root(Srch_search_ctx ctx) {
@@ -57,7 +73,7 @@ class Srch_link_wkr_ {
 	}
 	private static Srch_word_row[] Find_sql_root__quoted(Srch_search_ctx ctx, byte[] raw) {
 		List_adp tmp_list = List_adp_.New();
-		byte[][] ary = Bry_split_.Split(raw, Byte_ascii.Space, Bool_.Y); // TODO_OLD: splitting by space is simplistic; should call Srch2_split_words
+		byte[][] ary = Bry_split_.Split(raw, AsciiByte.Space, BoolUtl.Y); // TODO_OLD: splitting by space is simplistic; should call Srch2_split_words
 		int words_len = ary.length;
 		for (int i = 0; i < words_len; ++i) {
 			byte[] word = ary[i];
@@ -86,7 +102,7 @@ class Srch_link_wkr_ {
 	}
 	public static boolean Matches(Srch_crt_itm node, Srch_text_parser text_parser, Xol_case_mgr case_mgr, byte[] ttl) {
 		byte[] ttl_lower = case_mgr.Case_build_lower(Xoa_ttl.Replace_unders(ttl));
-		byte[][] ttl_words = text_parser.Parse_to_bry_ary(Bool_.Y, ttl);
+		byte[][] ttl_words = text_parser.Parse_to_bry_ary(BoolUtl.Y, ttl);
 		return Matches(node, ttl_lower, ttl_words);
 	}
 	private static boolean Matches(Srch_crt_itm node, byte[] ttl_lower, byte[][] ttl_words) {
@@ -130,7 +146,7 @@ class Srch_link_wkr_ {
 		}
 	}
 }
-class Srch_word_row_sorter__link_count implements gplx.core.lists.ComparerAble {
+class Srch_word_row_sorter__link_count implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Srch_word_row lhs = (Srch_word_row)lhsObj;
 		Srch_word_row rhs = (Srch_word_row)rhsObj;

@@ -13,7 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.cfgs; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.cfgs;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Err;
+import gplx.Err_;
+import gplx.Guid_adp;
+import gplx.Guid_adp_;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.Long_;
+import gplx.String_;
+import gplx.Yn;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.Db_tbl;
+import gplx.dbs.Db_tbl_owner;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
 public class Db_cfg_tbl implements Db_tbl {
 	private final String tbl_name; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_grp, fld_key, fld_val;
@@ -147,7 +171,7 @@ public class Db_cfg_tbl implements Db_tbl {
 	public DateAdp		Assert_date	(String grp, String key, DateAdp or)	{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_date		(grp, key, or); return or;} return Parse_date	(grp, key, val);}
 	public Guid_adp		Assert_guid	(String grp, String key, Guid_adp or)	{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_guid		(grp, key, or); return or;} return Parse_guid	(grp, key, val);}
 	public String		Assert_str	(String grp, String key, String or)		{String val = Select_str_or(grp, key, null)	; if (val == null) {Insert_str		(grp, key, or); return or;} return val;}
-	private boolean		Parse_yn		(String grp, String key, String val)	{try {return Yn.parse(val)				;} catch (Exception e) {throw err_parse(e, grp, key, val, Bool_.Cls_val_name);}}
+	private boolean		Parse_yn		(String grp, String key, String val)	{try {return Yn.parse(val)				;} catch (Exception e) {throw err_parse(e, grp, key, val, BoolUtl.ClsValName);}}
 	private byte		Parse_byte		(String grp, String key, String val)	{try {return Byte_.Parse(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Byte_.Cls_val_name);}}
 	private int			Parse_int		(String grp, String key, String val)	{try {return Int_.Parse(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Int_.Cls_val_name);}}
 	private long		Parse_long		(String grp, String key, String val)	{try {return Long_.parse(val)			;} catch (Exception e) {throw err_parse(e, grp, key, val, Long_.Cls_val_name);}}

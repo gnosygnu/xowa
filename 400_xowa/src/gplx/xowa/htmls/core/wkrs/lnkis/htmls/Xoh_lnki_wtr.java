@@ -13,12 +13,37 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import gplx.langs.htmls.*; import gplx.xowa.files.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.xwikis.*; import gplx.xowa.xtns.wbases.core.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.wikis.pages.lnkis.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.String_;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.langs.htmls.Gfh_bldr_;
+import gplx.langs.htmls.Gfh_utl;
+import gplx.langs.htmls.Gfh_wtr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.htmls.Xoh_consts;
+import gplx.xowa.htmls.Xow_html_mgr;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr_cfg;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr_escaper;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_tkn_grp;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.users.history.Xou_history_mgr;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
 public class Xoh_lnki_wtr {
 	private Xoae_app app; private Xowe_wiki wiki; private Xoae_page page; private Xop_ctx ctx;
 	private Xoh_html_wtr_cfg cfg;
@@ -132,7 +157,7 @@ public class Xoh_lnki_wtr {
 				int title_len = title_bry.length;
 				if (title_len > 0) {
 					bfr	.Add(Gfh_bldr_.Bry__title__nth);			// '" title=\"'
-					Gfh_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_len, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);	// escape title; DATE:2014-10-27
+					Gfh_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_len, BoolUtl.N, BoolUtl.N, BoolUtl.N, BoolUtl.Y, BoolUtl.N);	// escape title; DATE:2014-10-27
 				}
 			}
 			if (wiki.Domain_tid() == gplx.xowa.wikis.domains.Xow_domain_tid_.Tid__other) {
@@ -150,9 +175,9 @@ public class Xoh_lnki_wtr {
 			if (lnki_ttl.Anch_bgn() != -1 && !lnki_ttl.Ns().Id_is_main()) {	// anchor exists and not main_ns; anchor must be manually added b/c Xoa_ttl does not handle # for non main-ns
 				byte[] anch_txt = lnki_ttl.Anch_txt();
 				byte anch_spr 
-				= (anch_txt.length > 0 && anch_txt[0] == Byte_ascii.Hash)	// 1st char is #; occurs when page_txt has trailing space; causes 1st letter of anch_txt to start at # instead of 1st letter
-				? Byte_ascii.Space	// ASSUME: 1 space ("Help:A #b"); does not handle multiple spaces like ("Help:A   #b"); needs change to Xoa_ttl 
-				: Byte_ascii.Hash;	// Anch_txt bgns at 1st letter, so add # for caption; 
+				= (anch_txt.length > 0 && anch_txt[0] == AsciiByte.Hash)	// 1st char is #; occurs when page_txt has trailing space; causes 1st letter of anch_txt to start at # instead of 1st letter
+				? AsciiByte.Space	// ASSUME: 1 space ("Help:A #b"); does not handle multiple spaces like ("Help:A   #b"); needs change to Xoa_ttl
+				: AsciiByte.Hash;	// Anch_txt bgns at 1st letter, so add # for caption;
 				ttl_bry = Bry_.Add_w_dlm(anch_spr, ttl_bry, anch_txt);	// manually add anchor; else "Help:A#b" becomes "Help:A". note that lnki.Ttl_ary() uses .Full_txt (wiki + page but no anchor) to captialize 1st letter of page otherwise "Help:A#b" shows as "Help:A" (so Help:a -> Help:A); DATE:2013-06-21
 			}
 			Write_caption(bfr, ctx, hctx, src, lnki, ttl_bry, true, caption_wkr);
@@ -184,7 +209,7 @@ public class Xoh_lnki_wtr {
 				if (subpage_slash_at_end)		// "/" at end; only add text;		EX: [[/A/]] -> A
 					bfr.Add(leaf_txt);
 				else							// "/" absent; add slash to bgn;	EX: [[/A]]  -> /A
-					bfr.Add_byte(Byte_ascii.Slash).Add(leaf_txt);
+					bfr.Add_byte(AsciiByte.Slash).Add(leaf_txt);
 				return true;
 			case Pfunc_rel2abs.Id_dot_dot_slash:
 				if (subpage_slash_at_end)		// "/" at end; only add text;		EX: [[../A/]] -> A

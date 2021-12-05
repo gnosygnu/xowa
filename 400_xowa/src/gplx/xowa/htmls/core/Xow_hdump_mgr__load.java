@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.GfoMsg;
 import gplx.Gfo_invk;
 import gplx.GfsCtx;
@@ -59,7 +59,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 		gplx.xowa.addons.apps.cfgs.Xocfg_mgr cfg_mgr = wiki.App().Cfg();
 		Xow_hdump_mode.Cfg__reg_type(cfg_mgr.Type_mgr());
 		cfg_mgr.Bind_many_wiki(this, wiki, Cfg__read_preferred, Cfg__html_mode);
-		wiki.Hxtn_mgr().Init_by_wiki(wiki, Bool_.N);
+		wiki.Hxtn_mgr().Init_by_wiki(wiki, BoolUtl.N);
 		make_mgr.Init_by_wiki(wiki);
 	}
 	public void Load_by_xowe(Xoae_page wpg, boolean load_ctg) {
@@ -122,7 +122,7 @@ public class Xow_hdump_mgr__load implements Gfo_invk {
 				if (override_mgr__html != null)	// null when Parse is called directly
 					src = override_mgr__html.Get_or_same(hpg.Ttl().Page_db(), src);
 				hpg.Section_mgr().Add(0, 2, Bry_.Empty, Bry_.Empty).Content_bgn_(0);	// +1 to skip \n
-				src = Decode_as_bry(tmp_bfr.Clear(), hpg, src, Bool_.N);
+				src = Decode_as_bry(tmp_bfr.Clear(), hpg, src, BoolUtl.N);
 				hpg.Section_mgr().Set_content(hpg.Section_mgr().Len() - 1, src, src.length);
 				break;
 		}
@@ -213,7 +213,7 @@ class Xow_override_mgr {
 		for (int i = 0; i < urls_len; ++i) {
 			Io_url url = urls[i];
 			byte[] raw = Io_mgr.Instance.LoadFilBry(url); int bry_len = raw.length;
-			int nl_pos = Bry_find_.Find_fwd(raw, Byte_ascii.Nl, 0, bry_len); if (nl_pos == Bry_find_.Not_found) continue;
+			int nl_pos = Bry_find_.Find_fwd(raw, AsciiByte.Nl, 0, bry_len); if (nl_pos == Bry_find_.Not_found) continue;
 			byte[] ttl = Bry_.Mid(raw, 0, nl_pos);
 			byte[] src = Bry_.Mid(raw, nl_pos + 1, bry_len);				
 			hash.Add_bry_obj(ttl, src);

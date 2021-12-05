@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.syntax_highlights; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public interface Int_rng_mgr {
 	boolean Match(int v);
 	boolean Parse(byte[] src);
@@ -35,7 +36,7 @@ class Int_rng_mgr_base implements Int_rng_mgr {
 		return false;
 	}
 	public boolean Parse(byte[] src) {
-		byte[][] lines = Bry_split_.Split(src, Byte_ascii.Comma);
+		byte[][] lines = Bry_split_.Split(src, AsciiByte.Comma);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			if (!Parse_line(lines[i])) {
@@ -52,11 +53,11 @@ class Int_rng_mgr_base implements Int_rng_mgr {
 		for (int i = 0; i < src_len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					if (pos == -1) pos = i;
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					val_bgn = Bry_.To_int_or(src, pos, i, -1); if (val_bgn == -1) return false;
 					pos = -1;
 					break;

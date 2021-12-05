@@ -19,7 +19,7 @@ import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Double_;
 import gplx.Err_;
 import gplx.Math_;
@@ -167,9 +167,9 @@ class Map_math {// REF.MW:MapSources_math.php
 		int i = 0;			
 		while (true) {
 			boolean is_last = i == src_len;
-			byte b = is_last ? Byte_ascii.Space : src[i];
+			byte b = is_last ? AsciiByte.Space : src[i];
 			switch (b) {
-				case Byte_ascii.Space:
+				case AsciiByte.Space:
 					Parse_input_word(rv, src, ++word_idx, word_bgn, i);
 					++words_len;
 					i = Bry_find_.Find_fwd_while_space_or_tab(src, i, src_len);
@@ -189,10 +189,10 @@ class Map_math {// REF.MW:MapSources_math.php
 	}
 	private boolean Parse_input_word_is_compass(byte v) {
 		switch (v) {
-			case Byte_ascii.Ltr_N:
-			case Byte_ascii.Ltr_E:
-			case Byte_ascii.Ltr_S:
-			case Byte_ascii.Ltr_W:
+			case AsciiByte.Ltr_N:
+			case AsciiByte.Ltr_E:
+			case AsciiByte.Ltr_S:
+			case AsciiByte.Ltr_W:
 				return true;
 			default:
 				return false;
@@ -237,13 +237,13 @@ class Map_math {// REF.MW:MapSources_math.php
 			if (word_end - word_bgn != 1) {error = -3; return;}
 			switch (dir_id) {
 				case Dir_long_id:
-					if (word_byte == Byte_ascii.Ltr_N || word_byte == Byte_ascii.Ltr_S) {error = -12; return;}
+					if (word_byte == AsciiByte.Ltr_N || word_byte == AsciiByte.Ltr_S) {error = -12; return;}
 					break;
 				case Dir_lat_id:
-					if (word_byte == Byte_ascii.Ltr_E || word_byte == Byte_ascii.Ltr_W) {error = -12; return;}
+					if (word_byte == AsciiByte.Ltr_E || word_byte == AsciiByte.Ltr_W) {error = -12; return;}
 					break;
 				case Dir_unknown_id:
-					if (word_byte == Byte_ascii.Ltr_N || word_byte == Byte_ascii.Ltr_S)	this.dir_id = Dir_lat_id;
+					if (word_byte == AsciiByte.Ltr_N || word_byte == AsciiByte.Ltr_S)	this.dir_id = Dir_lat_id;
 					else																this.dir_id = Dir_long_id;
 					break;
 			}
@@ -251,7 +251,7 @@ class Map_math {// REF.MW:MapSources_math.php
 				double rv_0 = rv[0];
 				if (rv_0 < -90 || rv_0 > 90) {error = -13; return;}
 			}
-			if (word_byte == Byte_ascii.Ltr_S || word_byte == Byte_ascii.Ltr_W)
+			if (word_byte == AsciiByte.Ltr_S || word_byte == AsciiByte.Ltr_W)
 				rv[3] = -1;
 		}
 	}
@@ -294,21 +294,21 @@ class Map_math {// REF.MW:MapSources_math.php
 	.Add_bry_byte(Dir_long_bry			, Dir_long_id)
 	;
 	private static final byte[]
-	  Compass_N = new byte[] {Byte_ascii.Ltr_N}
-	, Compass_E = new byte[] {Byte_ascii.Ltr_E}
-	, Compass_S = new byte[] {Byte_ascii.Ltr_S}
-	, Compass_W = new byte[] {Byte_ascii.Ltr_W}
+	  Compass_N = new byte[] {AsciiByte.Ltr_N}
+	, Compass_E = new byte[] {AsciiByte.Ltr_E}
+	, Compass_S = new byte[] {AsciiByte.Ltr_S}
+	, Compass_W = new byte[] {AsciiByte.Ltr_W}
 	;
-	private static final byte Input_byte_degree = Byte_ascii.Slash;	// NOTE: ugly cheat to avoid using multi-byte char; note that all "/" are swapped out to " ", so any remaining "/" was added by the normalizer; EX:  "123° 4/5" -> "123/ 4 5"
-	private static final byte[] Input_units = new byte[] {Input_byte_degree, Byte_ascii.Apos, Byte_ascii.Quote, Byte_ascii.Space};
+	private static final byte Input_byte_degree = AsciiByte.Slash;	// NOTE: ugly cheat to avoid using multi-byte char; note that all "/" are swapped out to " ", so any remaining "/" was added by the normalizer; EX:  "123° 4/5" -> "123/ 4 5"
+	private static final byte[] Input_units = new byte[] {Input_byte_degree, AsciiByte.Apos, AsciiByte.Quote, AsciiByte.Space};
 	private static final int Input_units_len = Input_units.length;
 	private static final Btrie_slim_mgr Trie__normalize__apos = Btrie_slim_mgr.cs()
-	.Add_replace_many	(Byte_ascii.Apos_bry	, "‘", "’", "′");
+	.Add_replace_many	(AsciiByte.AposBry, "‘", "’", "′");
 	private static final Btrie_slim_mgr Trie__normalize__rest = Btrie_slim_mgr.cs()
 	.Add_replace_many	("' "					, "'")
 	.Add_replace_many	("\" "					, "\"", "''", "“", "”", "″")
-	.Add_replace_many	(Byte_ascii.Dash_bry	, "-", "−")							// NOTE: emdash and endash
-	.Add_replace_many	(Byte_ascii.Space_bry	, " ", "_", "/", "\t", "\n", "\r") 	// NOTE: " " = &nbsp;
+	.Add_replace_many	(AsciiByte.DashBry, "-", "−")							// NOTE: emdash and endash
+	.Add_replace_many	(AsciiByte.SpaceBry, " ", "_", "/", "\t", "\n", "\r") 	// NOTE: " " = &nbsp;
 	.Add_replace_many	("/ "					, "°")
 	.Add_replace_many	(" N"					, "N", "n")
 	.Add_replace_many	(" S"					, "S", "s")

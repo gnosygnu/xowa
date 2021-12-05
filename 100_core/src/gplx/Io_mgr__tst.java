@@ -14,7 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import org.junit.*;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Io_mgr__tst {
 	@Before public void init() {fxt.Clear();} private final Io_mgr__fxt fxt = new Io_mgr__fxt();
 	@Test  public void Dir_delete_empty__basic() {
@@ -86,8 +88,8 @@ class Io_mgr__fxt {
 		}
 	}
 	public void Exec_dir_delete_empty(String url)		{Io_mgr.Instance.Delete_dir_empty(Io_url_.mem_dir_(url));}
-	public void Test_itm_exists_n(String... ary)	{Test_itm_exists(Bool_.N, ary);}
-	public void Test_itm_exists_y(String... ary)	{Test_itm_exists(Bool_.Y, ary);}
+	public void Test_itm_exists_n(String... ary)	{Test_itm_exists(BoolUtl.N, ary);}
+	public void Test_itm_exists_y(String... ary)	{Test_itm_exists(BoolUtl.Y, ary);}
 	public void Test_itm_exists(boolean expd, String... ary) {
 		for (String itm : ary) {
 			Io_url url = Io_url_.new_any_(itm);

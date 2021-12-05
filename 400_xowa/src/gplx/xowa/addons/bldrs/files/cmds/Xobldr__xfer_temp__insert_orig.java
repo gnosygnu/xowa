@@ -13,10 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
-import gplx.core.stores.*; import gplx.dbs.*; import gplx.xowa.addons.bldrs.files.dbs.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.files.*; import gplx.xowa.files.exts.*; import gplx.xowa.parsers.lnkis.*;	
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.Bry_;
+import gplx.GfoMsg;
+import gplx.GfsCtx;
+import gplx.String_;
+import gplx.core.stores.DataRdr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_stmt;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.files.dbs.Xob_lnki_regy_tbl;
+import gplx.xowa.addons.bldrs.files.dbs.Xob_orig_regy_tbl;
+import gplx.xowa.addons.bldrs.files.dbs.Xob_xfer_temp_tbl;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_db_file;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.bldrs.wkrs.Xob_cmd__base;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_img_size;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.files.exts.Xof_rule_grp;
+import gplx.xowa.files.exts.Xof_rule_itm;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
 public class Xobldr__xfer_temp__insert_orig extends Xob_cmd__base {
 	private byte[] ext_rules_key = Bry_.Empty;
 	public Xobldr__xfer_temp__insert_orig(Xob_bldr bldr, Xowe_wiki wiki) {super(bldr, wiki);}
@@ -46,7 +67,7 @@ public class Xobldr__xfer_temp__insert_orig extends Xob_cmd__base {
 			if (orig_size > ext_maxs[lnki_ext]) continue;
 			int lnki_page_id = rdr.ReadInt(Xob_lnki_regy_tbl.Fld_lnki_page_id);
 			Xob_xfer_temp_tbl.Insert(trg_stmt, lnki_id, lnki_tier_id, lnki_page_id, orig_repo, orig_page_id, join_ttl, redirect_src, lnki_ext, Xop_lnki_type.Id_none, orig_media_type
-			, Bool_.Y									// orig is y
+			, BoolUtl.Y									// orig is y
 			, orig_w, orig_h
 			, orig_w, orig_h							// file_w, file_h is same as orig_w,orig_h; i.e.: make same file_w as orig_w
 			, Xof_img_size.Null, Xof_img_size.Null		// html_w, html_h is -1; i.e.: will not be displayed in page at specific size (this matches logic in Xobldr__xfer_temp__insert_thm)

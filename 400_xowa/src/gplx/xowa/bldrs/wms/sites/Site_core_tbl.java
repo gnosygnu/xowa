@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.wms.sites; import gplx.*;
 import gplx.dbs.*;
+import gplx.objects.lists.CompareAbleUtl;
 public class Site_core_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_site_domain, fld_json_completed, fld_json_date, fld_json_text;
@@ -73,7 +74,7 @@ public class Site_core_tbl implements Db_tbl {
 		try {
 			while (rdr.Move_next()) {
 				Site_core_itm itm = new_itm(rdr);
-				if (itm.Json_date().compareTo(cutoff) == CompareAble_.More_or_same) continue;	// ignore those downloaded after cutoff date
+				if (itm.Json_date().compareTo(cutoff) == CompareAbleUtl.More_or_same) continue;	// ignore those downloaded after cutoff date
 				itm.Json_text_null_();
 				list.Add(itm);
 			}

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.linkers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.linkers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
 /*	TODO.XO
@@ -276,7 +278,7 @@ public class XomwLinkRenderer {
 		}
 		byte[] colour = this.getLinkClasses(target);
 		if (colour != Bry_.Empty) {
-			classes = Bry_.Add(classes, Byte_ascii.Space_bry, colour); // XO.MW: also does "$classes ? implode(' ', $classes) : '',"
+			classes = Bry_.Add(classes, AsciiByte.SpaceBry, colour); // XO.MW: also does "$classes ? implode(' ', $classes) : '',"
 		}
 
 		this.makePreloadedLink(bfr, 

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
 public class Bool_obj_ref {
 	public boolean Val() {return val;} private boolean val;
 	public boolean Val_y() {return val;}
@@ -23,7 +24,7 @@ public class Bool_obj_ref {
 	public Bool_obj_ref Val_n_() {val = false; return this;}
 	public Bool_obj_ref Val_(boolean v) {val = v; return this;}
 	public Bool_obj_ref Val_toggle_() {val = !val; return this;}
-	@Override public String toString() {return Bool_.To_str_lower(val);}
+	@Override public String toString() {return BoolUtl.ToStrLower(val);}
         public static Bool_obj_ref n_() {return new_(false);}
         public static Bool_obj_ref y_() {return new_(true);}
         public static Bool_obj_ref new_(boolean val) {

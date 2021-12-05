@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.langs.msgs; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_msg_mgr implements Gfo_invk {
 	private final Gfo_invk owner; private final boolean owner_is_lang;
@@ -81,7 +83,7 @@ public class Xol_msg_mgr implements Gfo_invk {
 		int id = itm.Id();
 		if (id >= itms_max) {
 			int new_max = (id + 1) * 2;  
-			itms = (Xol_msg_itm[])Array_.Expand(itms, new Xol_msg_itm[new_max], itms_max);
+			itms = (Xol_msg_itm[])ArrayUtl.Expand(itms, new Xol_msg_itm[new_max], itms_max);
 			itms_max = new_max;
 		}
 		itms[id] = itm;

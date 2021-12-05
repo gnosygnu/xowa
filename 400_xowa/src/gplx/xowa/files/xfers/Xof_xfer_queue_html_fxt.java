@@ -13,10 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.dbs.*;
-import gplx.core.ios.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.files.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.files.xfers;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.ios.Io_fil;
+import gplx.dbs.Db_conn_bldr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.files.Xof_img_size;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
 public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 	private final Xof_xfer_queue queue = new Xof_xfer_queue();
 	@Override public void Clear(boolean src_repo_is_wmf) {
@@ -24,9 +38,9 @@ public class Xof_xfer_queue_html_fxt extends Xof_xfer_queue_base_fxt {
 		super.Clear(src_repo_is_wmf);
 		this.Api_size().Clear();
 	}
-	public Xof_xfer_queue_html_fxt Lnki_orig_ (String lnki_ttl)							{return Lnki_(lnki_ttl, Bool_.N, Xof_img_size.Size__neg1, Xof_img_size.Size__neg1, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
-	public Xof_xfer_queue_html_fxt Lnki_thumb_(String lnki_ttl, int lnki_w)				{return Lnki_(lnki_ttl, Bool_.Y, lnki_w, Xof_img_size.Size__neg1, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
-	public Xof_xfer_queue_html_fxt Lnki_thumb_(String lnki_ttl, int lnki_w, int lnki_h) {return Lnki_(lnki_ttl, Bool_.Y, lnki_w, lnki_h, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
+	public Xof_xfer_queue_html_fxt Lnki_orig_ (String lnki_ttl)							{return Lnki_(lnki_ttl, BoolUtl.N, Xof_img_size.Size__neg1, Xof_img_size.Size__neg1, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
+	public Xof_xfer_queue_html_fxt Lnki_thumb_(String lnki_ttl, int lnki_w)				{return Lnki_(lnki_ttl, BoolUtl.Y, lnki_w, Xof_img_size.Size__neg1, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
+	public Xof_xfer_queue_html_fxt Lnki_thumb_(String lnki_ttl, int lnki_w, int lnki_h) {return Lnki_(lnki_ttl, BoolUtl.Y, lnki_w, lnki_h, Xop_lnki_tkn.Upright_null, Xof_lnki_time.Null_as_int);}
 	public Xof_xfer_queue_html_fxt Lnki_(String lnki_ttl, boolean thumb, int lnki_w, int lnki_h, double upright, int seek_time) { // NOTE: only one xfer_itm; supports one Lnki_ per test only
 		Xowe_wiki wiki = this.En_wiki();
 		Xop_ctx ctx = wiki.Parser_mgr().Ctx();

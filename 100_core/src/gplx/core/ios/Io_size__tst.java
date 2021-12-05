@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import org.junit.*;
+package gplx.core.ios;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Long_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Io_size__tst {
 	private Io_size__fxt fxt = new Io_size__fxt();
 	@Test   public void XtoLong() {
@@ -40,11 +45,11 @@ public class Io_size__tst {
 		fxt.Test_XtoStr(1016, "1,016.000  B");	// NOTE: 1016 is not 1.016 KB
 	}
 	@Test   public void Xto_str_full() {
-		fxt.Test_Xto_str(       500, 1, "#,###", " ", Bool_.Y,             "1 KB");
-		fxt.Test_Xto_str(      1000, 1, "#,###", " ", Bool_.Y,             "1 KB");
-		fxt.Test_Xto_str(      2000, 1, "#,###", " ", Bool_.Y,             "2 KB");
-		fxt.Test_Xto_str(   1234567, 1, "#,###", " ", Bool_.Y,         "1,206 KB");
-		fxt.Test_Xto_str(1234567890, 1, "#,###", " ", Bool_.Y,     "1,205,633 KB");
+		fxt.Test_Xto_str(       500, 1, "#,###", " ", BoolUtl.Y,             "1 KB");
+		fxt.Test_Xto_str(      1000, 1, "#,###", " ", BoolUtl.Y,             "1 KB");
+		fxt.Test_Xto_str(      2000, 1, "#,###", " ", BoolUtl.Y,             "2 KB");
+		fxt.Test_Xto_str(   1234567, 1, "#,###", " ", BoolUtl.Y,         "1,206 KB");
+		fxt.Test_Xto_str(1234567890, 1, "#,###", " ", BoolUtl.Y,     "1,205,633 KB");
 	}
 	@Test   public void EqualsTest() {
 		fxt.Test_Equals("1", "1");

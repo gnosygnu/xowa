@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.files.downloads.*;
+package gplx.xowa.bldrs.css; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Xob_css_parser__import {
 //		// "//id.wikibooks.org/w/index.php?title=MediaWiki:Common.css&oldid=43393&action=raw&ctype=text/css";
 	private final Xob_css_parser__url url_parser;
@@ -28,8 +28,8 @@ class Xob_css_parser__import {
 		if (frag.Tid() != Xob_css_tkn__url.Tid_url) return Xob_css_tkn__warn.new_(tkn_bgn, frag.Pos_end(), "mirror.parser.import:url invalid; bgn=~{0}", tkn_bgn);
 		Xob_css_tkn__url url_frag = (Xob_css_tkn__url)frag;
 		byte[] src_url = url_frag.Src_url();
-		src_url = Bry_.Replace(src_url, Byte_ascii.Space, Byte_ascii.Underline);	// NOTE: must replace spaces with underlines else download will fail; EX:https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
-		int semic_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, frag.Pos_end(), src_len);
+		src_url = Bry_.Replace(src_url, AsciiByte.Space, AsciiByte.Underline);	// NOTE: must replace spaces with underlines else download will fail; EX:https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
+		int semic_pos = Bry_find_.Find_fwd(src, AsciiByte.Semic, frag.Pos_end(), src_len);
 		return Xob_css_tkn__import.new_(tkn_bgn, semic_pos + 1, src_url, url_frag.Trg_url(), url_frag.Quote_byte());
 	}
 	private static final byte[] Tkn_url_bry = Bry_.new_a7("url(");

@@ -13,12 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.langs.htmls.entitys.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.xwikis.*; 
-import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.miscs.*;
-import gplx.xowa.apps.utls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.langs.cases.*;
+package gplx.xowa;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.String_;
+import gplx.core.btries.Btrie_fast_mgr;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.core.primitives.Int_obj_val;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.langs.htmls.entitys.Gfh_entity_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.langs.cases.Xol_case_mgr;
+import gplx.xowa.parsers.amps.Xop_amp_mgr;
+import gplx.xowa.parsers.amps.Xop_amp_mgr_rslt;
+import gplx.xowa.parsers.miscs.Xop_comm_lxr;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_case_;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_mgr;
 /* TODO.XO
 	Is_known
 	Create_fragment_target
@@ -45,14 +64,14 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	public byte[] Full_txt_raw()		{return full_txt;} private byte[] full_txt = Bry_.Empty;
 	public byte[] Full_db_wo_xwiki()	{
 		byte[] rv = Bry_.Mid(full_txt, wik_bgn == -1 ? 0 : ns_bgn == -1 ? page_bgn - 1 : ns_bgn - 1, full_txt.length);
-		Bry_.Replace_reuse(rv, Byte_ascii.Space, Byte_ascii.Underline);
+		Bry_.Replace_reuse(rv, AsciiByte.Space, AsciiByte.Underline);
 		return rv;
 	}
 	public byte[] Page_txt_w_anchor()	{return Bry_.Mid(full_txt, page_bgn, qarg_bgn == -1 ? full_txt.length : qarg_bgn - 1);}
 	public byte[] Page_txt()			{return Bry_.Mid(full_txt, page_bgn, anch_bgn == -1 ? full_txt.length : anch_bgn - 1);}
 	public byte[] Page_db() {
 		byte[] rv = this.Page_txt();
-		Bry_.Replace_reuse(rv, Byte_ascii.Space, Byte_ascii.Underline);
+		Bry_.Replace_reuse(rv, AsciiByte.Space, AsciiByte.Underline);
 		return rv;
 	}
 	public String Page_db_as_str()		{return String_.new_u8(Page_db());}
@@ -135,7 +154,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	}
 	public byte[] Page_txt_wo_qargs() {	// assume that no Special page has non-ascii characters
 		int full_txt_len = full_txt.length;
-		int ques_pos = Bry_find_.Find_bwd(full_txt, Byte_ascii.Question, full_txt_len, page_bgn);
+		int ques_pos = Bry_find_.Find_bwd(full_txt, AsciiByte.Question, full_txt_len, page_bgn);
 		return Bry_.Mid(full_txt, page_bgn, ques_pos == Bry_find_.Not_found ? full_txt_len : ques_pos);
 	}
 
@@ -207,7 +226,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 
 	public boolean Is_external() {return this.wik_bgn != -1;}
 
-	public static final byte Subpage_spr = Byte_ascii.Slash;	// EX: A/B/C		
+	public static final byte Subpage_spr = AsciiByte.Slash;	// EX: A/B/C
 	public static final Xoa_ttl Null = null;
 
 	private static final int Char__bidi = 1, Char__ws = 2;
@@ -215,11 +234,11 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 	.Add_many_int(Char__bidi	, Bry_.New_by_ints(0xE2, 0x80, 0x8E), Bry_.New_by_ints(0xE2, 0x80, 0x8F), Bry_.New_by_ints(0xE2, 0x80, 0xAA), Bry_.New_by_ints(0xE2, 0x80, 0xAB), Bry_.New_by_ints(0xE2, 0x80, 0xAC), Bry_.New_by_ints(0xE2, 0x80, 0xAD), Bry_.New_by_ints(0xE2, 0x80, 0xAE))
 	.Add_many_int(Char__ws		, "\u00A0", "\u1680", "\u180E", "\u2000", "\u2001", "\u2002", "\u2003", "\u2004", "\u2005", "\u2006", "\u2007", "\u2008", "\u2009", "\u200A", "\u2028", "\u2029", "\u202F", "\u205F", "\u3000");
 
-	private final static Gfo_url_encoder url_encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
+	private final static Gfo_url_encoder url_encoder = Gfo_url_encoder_.New__html_href_mw(BoolUtl.Y).Make();
 
-	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, Byte_ascii.Space, Byte_ascii.Underline);}
+	public static byte[] Replace_spaces(byte[] raw) {return Bry_.Replace(raw, AsciiByte.Space, AsciiByte.Underline);}
 	public static byte[] Replace_unders(byte[] raw) {return Replace_unders(raw, 0, raw.length);}
-	public static byte[] Replace_unders(byte[] raw, int bgn, int end) {return Bry_.Replace(raw, bgn, end, Byte_ascii.Underline, Byte_ascii.Space);}
+	public static byte[] Replace_unders(byte[] raw, int bgn, int end) {return Bry_.Replace(raw, bgn, end, AsciiByte.Underline, AsciiByte.Space);}
 
 	public static Xoa_ttl Parse(Xow_wiki wiki, byte[] raw)					{return Parse(wiki, raw, 0, raw.length);}
 	public static Xoa_ttl Parse(Xow_wiki wiki, int ns_id, byte[] ttl)		{
@@ -264,11 +283,11 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 		while (cur != end) {
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.Colon:
+				case AsciiByte.Colon:
 					if (cur == bgn) {	// initial colon; flag; note that "  :" is not handled; note that colon_count is not incremented
 						forceLiteralLink = true;
 						++cur;
-						if (cur < end && src[cur] == Byte_ascii.Colon)
+						if (cur < end && src[cur] == AsciiByte.Colon)
 							++cur;
 						continue;	// do not add to bfr
 					}
@@ -308,11 +327,11 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 						colon_count++;		// increment colon count
 						break;
 					}
-				case Byte_ascii.Hash: 
+				case AsciiByte.Hash:
 					if (anch_bgn == -1)	// anchor begins at 1st #, not last #; EX:A#B#C has anchor of "B#C" not "C" PAGE:en.w:Grand_Central_Terminal; DATE:2015-12-31
 						anch_bgn = (txt_bb_len) + 1; 
 					break;
-				case Byte_ascii.Slash:
+				case AsciiByte.Slash:
 					if (root_bgn == -1)
 						root_bgn = (txt_bb_len) + 1;
 					if (anch_bgn == -1) {	// only set leaf if anchor found; guards against A#B/C and / setting leaf; DATE:2014-01-14
@@ -320,15 +339,15 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 						qarg_bgn = -1;	// always reset qarg; handles ttls which have question_mark which are premptively assumed to be qarg; PAGE:en.w:Portal:Organized_Labour/Did_You_Know?/1 DATE:2014-06-08
 					}
 					break;	// flag last leaf_bgn
-				case Byte_ascii.Nl:	// NOTE: for now, treat nl just like space; not sure if it should accept "a\nb" or "\nab"; need to handle trailing \n for "Argentina\n\n" in {{Infobox settlement|pushpin_map=Argentina|pushpin_label_position=|pushpin_map_alt=|pushpin_map_caption=Location of Salta in Argentina}};
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Cr:	// added \t, \r; DATE:2013-03-27
-				case Byte_ascii.Underline: if (ltr_bgn != -1) add_ws = true; ++cur;
+				case AsciiByte.Nl:	// NOTE: for now, treat nl just like space; not sure if it should accept "a\nb" or "\nab"; need to handle trailing \n for "Argentina\n\n" in {{Infobox settlement|pushpin_map=Argentina|pushpin_label_position=|pushpin_map_alt=|pushpin_map_caption=Location of Salta in Argentina}};
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Cr:	// added \t, \r; DATE:2013-03-27
+				case AsciiByte.Underline: if (ltr_bgn != -1) add_ws = true; ++cur;
 					continue;	// only mark add_ws if ltr_seen; this ignores ws at bgn; also, note "continue"
-				case Byte_ascii.Question:
+				case AsciiByte.Question:
 					if (txt_bb_len + 1 < end)	// guard against trailing ? (which shouldn't happen)
 						qarg_bgn = txt_bb_len + 1;
 					break;
-				case Byte_ascii.Amp:
+				case AsciiByte.Amp:
 					int cur2 = cur + 1;
 					if (cur2 == end) {}	// guards against terminating &; EX: [[Bisc &]]; NOTE: needed b/c Match_bgn does not do bounds checking for cur in src; src[src.length] will be called when & is last character;
 					else {
@@ -343,16 +362,16 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 										if (ltr_bgn != -1) add_ws = true;	// apply same ws rules as Space, NewLine; needed for converting multiple ws into one; EX:" &nbsp; " -> " " x> "   "; PAGEen.w:Greek_government-debt_crisis; DATE:2014-09-25
 										cur = match_pos; // set cur after ";"
 										continue;
-									case Byte_ascii.Amp:
-										b_ary = Byte_ascii.Amp_bry;		// NOTE: if &amp; convert to &; PAGE:en.w:Amadou Bagayoko?redirect=n; DATE:2014-09-23
+									case AsciiByte.Amp:
+										b_ary = AsciiByte.AmpBry;		// NOTE: if &amp; convert to &; PAGE:en.w:Amadou Bagayoko?redirect=n; DATE:2014-09-23
 										break;
-									case Byte_ascii.Quote:
-									case Byte_ascii.Lt:
-									case Byte_ascii.Gt:
+									case AsciiByte.Quote:
+									case AsciiByte.Lt:
+									case AsciiByte.Gt:
 										b_ary = amp_itm.Xml_name_bry();
 										break;
 									case Gfh_entity_itm.Char_int_null:	// &#xx;
-										int end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, match_pos, end);
+										int end_pos = Bry_find_.Find_fwd(src, AsciiByte.Semic, match_pos, end);
 										if (end_pos == Bry_find_.Not_found) {} // &# but no terminating ";" noop: defaults to current_byte which will be added below;
 										else {
 											b_ary = amp_itm.Xml_name_bry();									
@@ -369,7 +388,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 								amp_mgr.Parse_ncr(amp_rv, amp_itm.Tid() == Gfh_entity_itm.Tid_num_hex, src, end, cur2, match_pos);
 								if (amp_rv.Pass()) {
 									b_ary = gplx.core.intls.Utf16_.Encode_int_to_bry(amp_rv.Val());
-									if (b_ary.length == 1 && b_ary[0] == Byte_ascii.Hash)	// NOTE: A&#x23;B should be interpreted as A#b; PAGE:en.s:The_English_Constitution_(1894) DATE:2014-09-07
+									if (b_ary.length == 1 && b_ary[0] == AsciiByte.Hash)	// NOTE: A&#x23;B should be interpreted as A#b; PAGE:en.s:The_English_Constitution_(1894) DATE:2014-09-07
 										anch_bgn = (txt_bb_len) + 1; 
 									match_pos = amp_rv.Pos();
 								}
@@ -377,11 +396,11 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 						}
 					}
 					break;
-				case Byte_ascii.Lt:
+				case AsciiByte.Lt:
 					if (cur + 3 < end) {
-						if (	src[cur + 1] == Byte_ascii.Bang
-							&&	src[cur + 2] == Byte_ascii.Dash
-							&&	src[cur + 3] == Byte_ascii.Dash
+						if (	src[cur + 1] == AsciiByte.Bang
+							&&	src[cur + 2] == AsciiByte.Dash
+							&&	src[cur + 3] == AsciiByte.Dash
 							) {
 							int cur3 = cur + 3;
 							int find = Bry_find_.Find_fwd(src, Xop_comm_lxr.End_ary, cur3, end);
@@ -404,8 +423,8 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 					}
 					break;
 				// NOTE: DefaultSettings.php defines wgLegalTitleChars as " %!\"$&'()*,\\-.\\/0-9:;=?@A-Z\\\\^_`a-z~\\x80-\\xFF+"; the characters above are okay; those below are not
-				case Byte_ascii.Gt: case Byte_ascii.Pipe:
-				case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end: case Byte_ascii.Curly_bgn: case Byte_ascii.Curly_end:
+				case AsciiByte.Gt: case AsciiByte.Pipe:
+				case AsciiByte.BrackBgn: case AsciiByte.BrackEnd: case AsciiByte.CurlyBgn: case AsciiByte.CurlyEnd:
 					if (anch_bgn != -1) {
 						if (anchor_encoder == null) {
 							anchor_encoder = Gfo_url_encoder_.Id;
@@ -438,7 +457,7 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 			}
 			++cur;
 			if (add_ws) {	// add ws and toggle flag
-				bfr.Add_byte(Byte_ascii.Space); ++txt_bb_len;
+				bfr.Add_byte(AsciiByte.Space); ++txt_bb_len;
 				add_ws = false;
 			}
 			if (ltr_bgn == -1) ltr_bgn = txt_bb_len; // if 1st letter not seen, mark 1st letter					
@@ -484,16 +503,16 @@ public class Xoa_ttl {	// PAGE:en.w:http://en.wikipedia.org/wiki/Help:Link; REF.
 class Xoa_ttl_trie {
 	public static Btrie_fast_mgr new_() {
 		Btrie_fast_mgr rv = Btrie_fast_mgr.cs();
-		rv.Add(Byte_ascii.Colon				, Byte_obj_val.new_(Id_colon));
-		rv.Add(Byte_ascii.Hash				, Byte_obj_val.new_(Id_hash));
-		rv.Add(Byte_ascii.Slash				, Byte_obj_val.new_(Id_slash));
-		rv.Add(Byte_ascii.Space				, Byte_obj_val.new_(Id_space));
-		rv.Add(Byte_ascii.Underline			, Byte_obj_val.new_(Id_underline));
-		rv.Add(Byte_ascii.Amp				, Byte_obj_val.new_(Id_amp));
+		rv.Add(AsciiByte.Colon				, Byte_obj_val.new_(Id_colon));
+		rv.Add(AsciiByte.Hash				, Byte_obj_val.new_(Id_hash));
+		rv.Add(AsciiByte.Slash				, Byte_obj_val.new_(Id_slash));
+		rv.Add(AsciiByte.Space				, Byte_obj_val.new_(Id_space));
+		rv.Add(AsciiByte.Underline			, Byte_obj_val.new_(Id_underline));
+		rv.Add(AsciiByte.Amp				, Byte_obj_val.new_(Id_amp));
 		rv.Add(Xop_comm_lxr.Bgn_ary			, Byte_obj_val.new_(Id_comment_bgn));
-		rv.Add(Byte_ascii.Nl				, Byte_obj_val.new_(Id_newLine));
-		rv.Add(Byte_ascii.Brack_bgn			, Byte_obj_val.new_(Id_invalid));
-		rv.Add(Byte_ascii.Curly_bgn			, Byte_obj_val.new_(Id_invalid));
+		rv.Add(AsciiByte.Nl				, Byte_obj_val.new_(Id_newLine));
+		rv.Add(AsciiByte.BrackBgn, Byte_obj_val.new_(Id_invalid));
+		rv.Add(AsciiByte.CurlyBgn, Byte_obj_val.new_(Id_invalid));
 		return rv;
 	}
 	public static final byte Id_colon = 0, Id_hash = 1, Id_slash = 2, Id_space = 3, Id_underline = 4, Id_amp = 5, Id_comment_bgn = 6, Id_invalid = 7, Id_newLine = 8;

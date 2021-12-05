@@ -13,16 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*;
+package gplx.xowa.addons.bldrs.centrals; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.htmls.bridges.*;
-import gplx.xowa.addons.bldrs.centrals.cmds.*;
 public class Xobc_task_bridge implements Bridge_cmd_itm {
 	private Xoa_app app;
 	public void Init_by_app(Xoa_app app) {this.app = app;}
 	public String Exec(Json_nde data) {
 		Xobc_task_mgr task_mgr = Xobc_task_special.Task_mgr(app);
-		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Bridge_cmd_mgr.Msg__proc, null), Byte_ascii.Max_7_bit);
+		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Bridge_cmd_mgr.Msg__proc, null), AsciiByte.Max7Bit);
 		Json_nde args = data.Get_kv(Bridge_cmd_mgr.Msg__args).Val_as_nde();
 		switch (proc_id) {
 			case Proc__reload:					task_mgr.Reload(); break;

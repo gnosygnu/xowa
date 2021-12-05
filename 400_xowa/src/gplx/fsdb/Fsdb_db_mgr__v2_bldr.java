@@ -13,9 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb; import gplx.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.*; import gplx.xowa.wikis.data.*; import gplx.xowa.bldrs.infos.*;
+package gplx.fsdb;
+import gplx.Err_;
+import gplx.Guid_adp_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.fsdb.data.Fsd_bin_tbl;
+import gplx.fsdb.data.Fsd_dir_tbl;
+import gplx.fsdb.data.Fsd_fil_tbl;
+import gplx.fsdb.data.Fsd_thm_tbl;
+import gplx.fsdb.meta.Fsm_atr_tbl;
+import gplx.fsdb.meta.Fsm_bin_tbl;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.fsdb.meta.Fsm_mnt_tbl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.bldrs.infos.Xob_info_file;
+import gplx.xowa.files.origs.Xof_orig_tbl;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_layout;
 public class Fsdb_db_mgr__v2_bldr {
 	public static Fsdb_db_mgr__v2 Get_or_make(Xow_wiki wiki, boolean delete_if_exists) { 	// NOTE: must check if file exists else imports with existing v2 dbs will fail; DATE:2015-05-23
 		Xow_db_layout layout = wiki.Data__core_mgr().Props().Layout_file();
@@ -72,7 +92,7 @@ public class Fsdb_db_mgr__v2_bldr {
 		Fsm_bin_tbl dbb_tbl = new Fsm_bin_tbl(core_conn, schema_is_1, mnt_id); dbb_tbl.Create_tbl();
 		Fsd_dir_tbl dir_tbl = new Fsd_dir_tbl(core_conn, schema_is_1); dir_tbl.Create_tbl();
 		Fsd_fil_tbl fil_tbl = new Fsd_fil_tbl(core_conn, schema_is_1, mnt_id); fil_tbl.Create_tbl();
-		Fsd_thm_tbl thm_tbl = new Fsd_thm_tbl(core_conn, schema_is_1, mnt_id, Bool_.Y); thm_tbl.Create_tbl();
+		Fsd_thm_tbl thm_tbl = new Fsd_thm_tbl(core_conn, schema_is_1, mnt_id, BoolUtl.Y); thm_tbl.Create_tbl();
 		return rv;
 	}
 	public static Fsdb_db_file Make_bin_tbl(Fsdb_db_file file) {

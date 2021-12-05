@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.pfuncs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Wdata_pf_property_fmt {
 	public byte[] Separator() {return separator;} private byte[] separator;
 	public byte[] Value_template() {return value_template;} private byte[] value_template;
@@ -30,7 +31,7 @@ public class Wdata_pf_property_fmt {
 	public byte[] Reference_value_separator() {return reference_value_separator;} private byte[] reference_value_separator;
 	public byte[] Reference_separator() {return reference_separator;} private byte[] reference_separator;
 	public void Init() {
-		byte[] comma = new byte[] {Byte_ascii.Comma};
+		byte[] comma = new byte[] {AsciiByte.Comma};
 		separator = comma;
 		value_template = Bry_.new_a7("{{{value}}} {{{qualifiers}}}{{{references}}}");
 		qualifier_template = Bry_.new_a7("{{{1}}} {{{2}}}");

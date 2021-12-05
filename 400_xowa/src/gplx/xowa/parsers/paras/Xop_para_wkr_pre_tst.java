@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*;
+package gplx.xowa.parsers.paras;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 public class Xop_para_wkr_pre_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_y_();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void teardown() {fxt.Init_para_n_();}
@@ -57,7 +62,7 @@ public class Xop_para_wkr_pre_tst {
 		));
 	}
 	@Test public void Ignore_pre_in_gallery() {// PURPOSE: pre in gallery should be ignored; EX:uk.w:EP2; DATE:2014-03-11
-		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = Bool_.Y_byte;
+		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = BoolUtl.YByte;
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last
 		( "a"
 		, ""
@@ -82,10 +87,10 @@ public class Xop_para_wkr_pre_tst {
 		, "</ul>"
 		,""
 		));
-		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = Bool_.N_byte;
+		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = BoolUtl.NByte;
 	}
 	@Test public void Pre_xnde_gallery() {	// PURPOSE: <gallery> should invalidate pre; EX: en.w:Mary, Queen of Scots
-		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = Bool_.Y_byte;
+		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = BoolUtl.YByte;
 		fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());
 		String raw = String_.Concat_lines_nl_skip_last
 			( " <gallery>"
@@ -109,7 +114,7 @@ public class Xop_para_wkr_pre_tst {
 			, "  </li>"
 			, "</ul>"
 			));
-		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = Bool_.N_byte;
+		gplx.xowa.xtns.gallery.Gallery_mgr_wtr.File_found_mode = BoolUtl.NByte;
 	}
 	@Test public void Ignore_pre_in_center() {// PURPOSE: pre in gallery should be ignored; EX:uk.w:EP2; DATE:2014-03-11
 		fxt.Test_parse_page_wiki_str(String_.Concat_lines_nl_skip_last

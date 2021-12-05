@@ -13,14 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.htmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
 class Mwh_atr_parser_fxt {
 	private final Bry_bfr expd_bfr = Bry_bfr_.New(), actl_bfr = Bry_bfr_.New();
 	private final Mwh_atr_parser parser = new Mwh_atr_parser();
 	private final Mwh_doc_wkr__atr_bldr wkr = new Mwh_doc_wkr__atr_bldr();
-	public Mwh_atr_itm Make_pair(String key, String val)	{return new Mwh_atr_itm(Bry_.Empty, Bool_.Y, Bool_.N, Bool_.Y,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(val)	, -1, -1);}
-	public Mwh_atr_itm Make_name(String key)				{return new Mwh_atr_itm(Bry_.Empty, Bool_.Y, Bool_.N, Bool_.N,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(key)	, -1, -1);}
-	public Mwh_atr_itm Make_fail(int bgn, int end)			{return new Mwh_atr_itm(Bry_.Empty, Bool_.N, Bool_.N, Bool_.N, bgn, end, -1, -1, null				, -1, -1, null				, -1, -1);}
+	public Mwh_atr_itm Make_pair(String key, String val)	{return new Mwh_atr_itm(Bry_.Empty, BoolUtl.Y, BoolUtl.N, BoolUtl.Y,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(val)	, -1, -1);}
+	public Mwh_atr_itm Make_name(String key)				{return new Mwh_atr_itm(Bry_.Empty, BoolUtl.Y, BoolUtl.N, BoolUtl.N,  -1,  -1, -1, -1, Bry_.new_u8(key)	, -1, -1, Bry_.new_u8(key)	, -1, -1);}
+	public Mwh_atr_itm Make_fail(int bgn, int end)			{return new Mwh_atr_itm(Bry_.Empty, BoolUtl.N, BoolUtl.N, BoolUtl.N, bgn, end, -1, -1, null				, -1, -1, null				, -1, -1);}
 	public void Test_val_as_int(String raw, int expd) {
 		byte[] src = Bry_.new_u8(raw);
 		Mwh_atr_itm itm = new Mwh_atr_itm(src, true, false, false, 0, src.length, -1, -1, null, 0, src.length, src, -1, -1);

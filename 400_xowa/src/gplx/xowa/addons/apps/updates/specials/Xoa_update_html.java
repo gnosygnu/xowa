@@ -13,9 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
-import gplx.xowa.addons.apps.updates.dbs.*;
-import gplx.xowa.specials.*; import gplx.langs.mustaches.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
+package gplx.xowa.addons.apps.updates.specials;
+import gplx.Datetime_now;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.langs.mustaches.Mustache_doc_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.addons.apps.updates.Xoa_update_startup;
+import gplx.xowa.addons.apps.updates.dbs.Xoa_app_version_itm;
+import gplx.xowa.addons.apps.updates.dbs.Xoa_update_db_mgr_;
+import gplx.xowa.specials.Xow_special_wtr__base;
+import gplx.xowa.wikis.pages.Xopage_html_data;
+import gplx.xowa.wikis.pages.tags.Xopg_alertify_;
+import gplx.xowa.wikis.pages.tags.Xopg_tag_itm;
+import gplx.xowa.wikis.pages.tags.Xopg_tag_mgr;
+import gplx.xowa.wikis.pages.tags.Xopg_tag_wtr_;
 public class Xoa_update_html extends Xow_special_wtr__base {
 	@Override protected Io_url Get_addon_dir(Xoa_app app)			{return app.Fsys_mgr().Http_root().GenSubDir_nest("bin", "any", "xowa", "addon", "app", "update");}
 	@Override protected Io_url Get_mustache_fil(Io_url addon_dir)	{return addon_dir.GenSubFil_nest("bin", "xoa_update.mustache.html");}
@@ -27,7 +41,7 @@ public class Xoa_update_html extends Xow_special_wtr__base {
 
 		// get from internet
 		boolean web_access_enabled = gplx.core.ios.IoEngine_system.Web_access_enabled;
-		Xoa_update_db_mgr_.Download_from_inet(app, Bool_.N, db_url);
+		Xoa_update_db_mgr_.Download_from_inet(app, BoolUtl.N, db_url);
 
 		// load from db			
 		Xoa_app_version_itm[] db_itms = Xoa_update_db_mgr_.Select(db_url, Xoa_update_startup.Version_cutoff(app));

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.hdrs.sections; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.parsers.hdrs.sections; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.mediawiki.includes.parsers.headingsOld.*;
 import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.htmls.core.htmls.tidy.*;
 class Xop_section_list implements Xomw_heading_cbk {
@@ -74,7 +76,7 @@ class Xop_section_list implements Xomw_heading_cbk {
 
 			// get bgn
 			src_bgn = itm.Src_bgn();
-			if (src[src_bgn] == Byte_ascii.Nl) src_bgn++;	// skip "\n" in "\n=="
+			if (src[src_bgn] == AsciiByte.Nl) src_bgn++;	// skip "\n" in "\n=="
 
 			// get end
 			for (int i = itm.Idx() + 1; i < hash_len; i++) {

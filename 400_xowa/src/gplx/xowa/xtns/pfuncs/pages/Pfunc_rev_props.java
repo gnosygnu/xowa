@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.xtns.pfuncs.pages; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.xtns.pfuncs.*;
+import gplx.xowa.langs.kwds.*;
+import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_rev_props extends Pf_func_base {
 	public Pfunc_rev_props(int id) {this.id = id;}
 	@Override public int Id() {return id;} private final int id;
@@ -36,7 +39,7 @@ public class Pfunc_rev_props extends Pf_func_base {
 				if (argx.length > 0) {
 					Xoa_ttl argx_ttl = Xoa_ttl.Parse(ctx.Wiki(), argx);
 					if (argx_ttl == null) {	// invalid ttl; EX: {{PAGESIZE:{{{bad}}}}}
-						bfr.Add_byte(Byte_ascii.Num_0);
+						bfr.Add_byte(AsciiByte.Num0);
 						return;
 					}
 					Xoae_page argx_page = ctx.Wiki().Data_mgr().Load_page_by_ttl(argx_ttl);
@@ -45,7 +48,7 @@ public class Pfunc_rev_props extends Pf_func_base {
 						return;
 					}
 				}
-				bfr.Add_byte(Byte_ascii.Num_0);
+				bfr.Add_byte(AsciiByte.Num0);
 				break;
 			default: throw Err_.new_unhandled(id);
 		}

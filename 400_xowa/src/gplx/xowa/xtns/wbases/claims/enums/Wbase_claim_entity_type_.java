@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.claims.enums;
 
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 
 // NOTE: could not find definitive list, so using these links for now
@@ -47,17 +47,17 @@ public class Wbase_claim_entity_type_ {
 
 		// get 1st byte and uppercase it
 		byte b0 = id[0];
-		if (b0 > Byte_ascii.Ltr_Z) {
+		if (b0 > AsciiByte.Ltr_Z) {
 			b0 -= 32; // uppercases
 		}
 
 		// return item; NOTE: only doing types which have namespaces (i.e.: there is no Sense:S1 or Form:F1)
 		switch (b0) {
-			case Byte_ascii.Ltr_Q:
+			case AsciiByte.Ltr_Q:
 				return Wbase_claim_entity_type_.Itm__item;
-			case Byte_ascii.Ltr_P:
+			case AsciiByte.Ltr_P:
 				return Wbase_claim_entity_type_.Itm__property;
-			case Byte_ascii.Ltr_L:
+			case AsciiByte.Ltr_L:
 				return Wbase_claim_entity_type_.Itm__lexeme;
 			default:
 				throw Err_.new_unhandled_default(id);

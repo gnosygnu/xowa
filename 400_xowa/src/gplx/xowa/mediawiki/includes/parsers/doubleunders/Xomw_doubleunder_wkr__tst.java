@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.doubleunders; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.mediawiki.includes.parsers.doubleunders;
+import gplx.Bry_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
+import org.junit.Test;
 public class Xomw_doubleunder_wkr__tst {
 	private final Xomw_doubleunder_wkr__fxt fxt = new Xomw_doubleunder_wkr__fxt();
 	@Test public void No_match()        {fxt.Test__parse("a b c"                                    , "a b c");}
@@ -40,8 +48,8 @@ class Xomw_doubleunder_wkr__fxt {
 		Gftest.Eq__str(expd, pbfr.Rslt().To_str_and_clear(), src_str);
 		return this;
 	}
-	public  Xomw_doubleunder_wkr__fxt Test__prop_y(boolean... ary) {return Test__prop(Bool_.Y, ary);}
-	public  Xomw_doubleunder_wkr__fxt Test__prop_n(boolean... ary) {return Test__prop(Bool_.N, ary);}
+	public  Xomw_doubleunder_wkr__fxt Test__prop_y(boolean... ary) {return Test__prop(BoolUtl.Y, ary);}
+	public  Xomw_doubleunder_wkr__fxt Test__prop_n(boolean... ary) {return Test__prop(BoolUtl.N, ary);}
 	private Xomw_doubleunder_wkr__fxt Test__prop(boolean expd, boolean... ary) {
 		for (boolean v : ary)
 			Gftest.Eq__bool(expd, v);

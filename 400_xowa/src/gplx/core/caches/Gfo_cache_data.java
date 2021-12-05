@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.caches; import gplx.*; import gplx.core.*;
-import gplx.core.envs.*;
-class Gfo_cache_data implements gplx.CompareAble, Rls_able {
+package gplx.core.caches; import gplx.*;
+import gplx.objects.lists.CompareAble;
+class Gfo_cache_data implements CompareAble, Rls_able {
 	private int count = 0;
 	public Gfo_cache_data(byte[] key, Rls_able val, int size) {
 		this.key = key; this.val = val;

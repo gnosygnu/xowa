@@ -22,7 +22,7 @@ import gplx.Ordered_hash;
 import gplx.Ordered_hash_;
 import gplx.langs.jsons.Json_doc;
 import gplx.langs.jsons.Json_parser;
-import gplx.objects.errs.Err_;
+import gplx.objects.errs.ErrUtl;
 import gplx.xowa.Xoa_app;
 import gplx.xowa.Xow_wiki;
 import gplx.xowa.addons.Xoax_addon_itm;
@@ -75,7 +75,7 @@ public class SettingsAddon implements Xoax_addon_itm, Xoax_addon_itm__init, Gfo_
                 Update(m.ReadStrOr("v", null));
                 break;
             default:
-                throw Err_.New_unhandled_default(k);
+                throw ErrUtl.NewUnhandledDefault(k);
         }
         return null;
     }

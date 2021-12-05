@@ -13,12 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
+package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*;
 import gplx.core.brys.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
+import gplx.langs.htmls.docs.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.*;
 public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
-	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Pipe);
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(AsciiByte.Pipe);
 	public int Val_bgn() {return val_bgn;} private int val_bgn;
 	public int Val_end() {return val_end;} private int val_end;
 	public boolean Val_dat_exists() {return val_dat_exists;} private boolean val_dat_exists;
@@ -68,7 +69,7 @@ public class Xoh_img_xoimg_data implements Bfr_arg_clearable {
 			rdr.Init_by_wkr(err_wkr, "img.xoimg", src_bgn, src_end);
 			this.val_bgn = src_bgn;
 			this.val_end = src_end;
-			this.lnki_type = (byte)(rdr.Read_byte_to() - Byte_ascii.Num_0);
+			this.lnki_type = (byte)(rdr.Read_byte_to() - AsciiByte.Num0);
 			this.lnki_w = rdr.Read_int_to();
 			this.lnki_h = rdr.Read_int_to();
 			this.lnki_upright = rdr.Read_double_to();

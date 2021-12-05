@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
-import org.junit.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_itm;
+import org.junit.Before;
+import org.junit.Test;
 public class Xoctg_double_box__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_double_box__fxt fxt = new Xoctg_double_box__fxt();
 	@Test  public void Single() {
@@ -86,8 +97,8 @@ class Xoctg_double_box__fxt {
 		hidden_wtr.Init_by_wiki(fxt.Wiki());
 		init_ctgs.Clear();
 	}
-	public void Init_ctg_normal(String... ary) {Init_ctg(Bool_.N, ary);}
-	public void Init_ctg_hidden(String... ary) {Init_ctg(Bool_.Y, ary);}
+	public void Init_ctg_normal(String... ary) {Init_ctg(BoolUtl.N, ary);}
+	public void Init_ctg_hidden(String... ary) {Init_ctg(BoolUtl.Y, ary);}
 	public void Init_ctg(boolean hidden, String[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {

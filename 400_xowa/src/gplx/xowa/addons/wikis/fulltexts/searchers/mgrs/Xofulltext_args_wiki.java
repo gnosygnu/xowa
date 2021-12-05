@@ -14,6 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Xofulltext_args_wiki {
 	public byte[] wiki;
 	public byte[] ns_ids;
@@ -31,7 +33,7 @@ public class Xofulltext_args_wiki {
 	public void Init_by_json(String key, byte[] val) {
 		if      (String_.Eq(key, "ns_ids")) {
 			this.ns_ids = val;
-			byte[][] ns_ary = Bry_split_.Split(ns_ids, Byte_ascii.Comma, true);
+			byte[][] ns_ary = Bry_split_.Split(ns_ids, AsciiByte.Comma, true);
 			for (byte[] ns_id : ns_ary) {
 				int ns_int = Bry_.To_int(ns_id);
 				ns_hash.AddIfDupeUse1st(ns_int, ns_int);
@@ -39,8 +41,8 @@ public class Xofulltext_args_wiki {
 		}
 		else if (String_.Eq(key, "offsets"))          this.bgn = Bry_.To_int(val);
 		else if (String_.Eq(key, "limits"))           this.len = Bry_.To_int(val);
-		else if (String_.Eq(key, "expand_pages"))     this.expand_pages = Bry_.Eq(val, Bool_.Y_bry);
-		else if (String_.Eq(key, "expand_snips"))     this.expand_snips = Bry_.Eq(val, Bool_.Y_bry);
-		else if (String_.Eq(key, "show_all_snips"))   this.show_all_snips = Bry_.Eq(val, Bool_.Y_bry);
+		else if (String_.Eq(key, "expand_pages"))     this.expand_pages = Bry_.Eq(val, BoolUtl.YBry);
+		else if (String_.Eq(key, "expand_snips"))     this.expand_snips = Bry_.Eq(val, BoolUtl.YBry);
+		else if (String_.Eq(key, "show_all_snips"))   this.show_all_snips = Bry_.Eq(val, BoolUtl.YBry);
 	}
 }

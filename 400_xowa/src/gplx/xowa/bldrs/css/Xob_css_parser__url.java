@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.css; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Xob_css_parser__url {
 	private final byte[] site;
 	public Xob_css_parser__url(byte[] site) {this.site = site;}
@@ -23,12 +24,12 @@ class Xob_css_parser__url {
 		byte end_byte = src[bgn_pos];	// note that first non-ws byte should determine end_byte
 		byte quote_byte = end_byte;
 		switch (end_byte) {
-			case Byte_ascii.Quote: case Byte_ascii.Apos:	// quoted; increment position; EX: ' url("a.png")' 
+			case AsciiByte.Quote: case AsciiByte.Apos:	// quoted; increment position; EX: ' url("a.png")'
 				++bgn_pos;
 				break;
 			default:										// not quoted; end byte is ")"; EX: ' url(a.png)'
-				end_byte = Byte_ascii.Paren_end;
-				quote_byte = Byte_ascii.Null;
+				end_byte = AsciiByte.ParenEnd;
+				quote_byte = AsciiByte.Null;
 				break;
 		}
 		int end_pos = Bry_find_.Find_fwd(src, end_byte, bgn_pos, src_len);
@@ -38,9 +39,9 @@ class Xob_css_parser__url {
 			return Xob_css_tkn__warn.new_(tkn_bgn, tkn_end, "mirror.parser.url:empty; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8__by_len(src, tkn_bgn, tkn_bgn + 128));
 		byte[] url_orig = Bry_.Mid(src, bgn_pos, end_pos); int url_orig_len = url_orig.length;
 		++end_pos;	// increment end_pos so rv will be after it;
-		if (	end_byte != Byte_ascii.Paren_end) {	// end_byte is apos / quote
+		if (	end_byte != AsciiByte.ParenEnd) {	// end_byte is apos / quote
 			if	(	end_pos < src_len 
-				&&	src[end_pos] == Byte_ascii.Paren_end)
+				&&	src[end_pos] == AsciiByte.ParenEnd)
 				++end_pos;
 			else
 				return Xob_css_tkn__warn.new_(tkn_bgn, end_pos, "mirror.parser.url:base64 dangling; bgn=~{0} excerpt=~{1}", bgn_pos, String_.new_u8(url_orig));

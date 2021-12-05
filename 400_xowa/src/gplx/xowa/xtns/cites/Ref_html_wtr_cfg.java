@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns.cites; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 public class Ref_html_wtr_cfg {
 	public Bry_fmtr Itm_html() 			{return itm_html;} 			private Bry_fmtr itm_html; 			public Ref_html_wtr_cfg Itm_html_(String v) {itm_html 				= Bry_fmtr.new_(v, "itm_id", "grp_id", "grp_key"); return this;}
@@ -98,9 +100,9 @@ public class Ref_html_wtr_cfg {
 		int len = raw.length, pos = 0, bgn = -1;
 		while (true) {
 			boolean last = pos == len;
-			byte b = last ? Byte_ascii.Space : raw[pos];
+			byte b = last ? AsciiByte.Space : raw[pos];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab:
+				case AsciiByte.Space: case AsciiByte.Nl: case AsciiByte.Tab:
 					if (bgn != -1) { // guard against leading ws, or multiple ws; EX: "bos\s\s" or "\s\s"
 						list.Add(Bry_.Mid(raw, bgn, pos));
 						bgn = -1;

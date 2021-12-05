@@ -13,12 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.core.encoders.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*;
+import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.xtns.pagebanners.*;
+import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
+import gplx.xowa.wikis.nss.*;
+import gplx.xowa.xtns.pagebanners.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
@@ -63,7 +67,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		flag_bldr.Set(Flag__anch__title_missing				, !anch_title_exists);
 		flag_bldr.Set(Flag__img__cls_tid					, img_cls.Cls_tid());
 		flag_bldr.Set(Flag__anch__href_tid					, anch_href.Tid());
-		// Tfds.Dbg(flag_bldr.Encode(), Array_.To_str(flag_bldr.Val_ary()));
+		// Tfds.Dbg(flag_bldr.Encode(), ArrayUtl.To_str(flag_bldr.Val_ary()));
 		if (wkr_is_root) bfr.Add(hook);
 		Gfo_hzip_int_.Encode(2, bfr, flag_bldr.Encode());
 		if (img_wo_anch)		bfr.Add_hzip_mid(anch_page.Val(), anch_page.Val_bgn(), anch_page.Val_end());
@@ -73,7 +77,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					bfr.Add_mid(src, anch_href.Rng_bgn(), anch_href.Rng_end());
 					break;
 				case Xoh_anch_href_data.Tid__site:
-					bfr.Add_mid(src, anch_href.Site_bgn(), anch_href.Site_end()).Add_byte(Byte_ascii.Pipe).Add(anch_href.Ttl_page_db());
+					bfr.Add_mid(src, anch_href.Site_bgn(), anch_href.Site_end()).Add_byte(AsciiByte.Pipe).Add(anch_href.Ttl_page_db());
 					break;
 				case Xoh_anch_href_data.Tid__wiki:
 				case Xoh_anch_href_data.Tid__anch:
@@ -153,7 +157,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		// get site_bry; note: href_page will include site_bry and separate with pipe; EX:"en.wiktionary.org|A~"
 		byte[] site_bry = null;
 		if (anch__href_tid == Xoh_anch_href_data.Tid__site) {
-			int pipe_pos = Bry_find_.Find_fwd(href_page, Byte_ascii.Pipe);
+			int pipe_pos = Bry_find_.Find_fwd(href_page, AsciiByte.Pipe);
 			site_bry = Bry_.Mid(href_page, 0, pipe_pos);
 			href_page = Bry_.Mid(href_page, pipe_pos + 1);
 		}
@@ -250,7 +254,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					}
 					else {
 						if (anch__ns_is_custom)	// handle ns aliases; EX: "Image:Page"; EX:WP; PAGE:en.w:Wikipedia:WikiProject_Molecular_and_Cell_Biology; DATE:2016-01-11
-							ttl_full = Bry_.Add(href_ns_custom, Byte_ascii.Colon_bry, href_page);
+							ttl_full = Bry_.Add(href_ns_custom, AsciiByte.ColonBry, href_page);
 						else {
 							if (anch__href_tid == Xoh_anch_href_data.Tid__site) {	// if site, do not title-case page; EX:[[File:A.png|link=wikt:Category:en:A]]; PAGE:en.w:Portal:Trucks/Wikimedia; DATE:2016-01-11
 								Xow_ns href_ns = hctx.Wiki__ttl_parser().Ns_mgr().Ids_get_or_null(href_ns_id);
@@ -277,7 +281,7 @@ public class Xoh_img_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		byte repo_tid = file__repo_is_local ? Xof_repo_tid_.Tid__local : Xof_repo_tid_.Tid__remote;
 		byte[] fsys_root = file__repo_is_local ? hctx.Fsys__file__wiki() : hctx.Fsys__file__comm();
 
-		url_bldr.Init_by_repo(repo_tid, fsys_root, hctx.Fsys__is_wnt(), Byte_ascii.Slash, false, false, Md5_depth);
+		url_bldr.Init_by_repo(repo_tid, fsys_root, hctx.Fsys__is_wnt(), AsciiByte.Slash, false, false, Md5_depth);
 		// NOTE: set md5 / ext now b/c src_page will be changed for gui mode
 		byte[] md5 = Xof_file_wkr_.Md5(src_page);
 		Xof_ext ext = Xof_ext_.new_by_ttl_(src_page);

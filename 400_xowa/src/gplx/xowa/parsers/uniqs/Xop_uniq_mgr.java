@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.uniqs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*;
+package gplx.xowa.parsers.uniqs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Int_;
+import gplx.RandomAdp;
+import gplx.RandomAdp_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 	private final Btrie_slim_mgr general_trie = Btrie_slim_mgr.cs(); private final Btrie_rv trv = new Btrie_rv();
 	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
@@ -31,7 +40,7 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		int idx = ++nxt_idx;
 		byte[] key = tmp_bfr	
 			.Add(Bry__uniq__bgn_w_dash)          // "\u007f'\"`UNIQ-"
-			.Add(type).Add_byte(Byte_ascii.Dash) // "ref-"
+			.Add(type).Add_byte(AsciiByte.Dash) // "ref-"
 			.Add_int_variable(idx)               // "1"
 			.Add(Bry__uniq__add__end)            // "-QINU`\"'\u007f"
 			.To_bry_and_clear(); 
@@ -41,10 +50,10 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 	}
 	public void Parse(Bry_bfr bfr) {
 		if (general_trie.Count() == 0) return;
-		byte[] rv = Parse_recurse(Bool_.Y, tmp_bfr, bfr.To_bry_and_clear());
+		byte[] rv = Parse_recurse(BoolUtl.Y, tmp_bfr, bfr.To_bry_and_clear());
 		bfr.Add(rv);
 	}
-	public byte[] Parse(byte[] src) {return Parse_recurse(Bool_.Y, tmp_bfr, src);}
+	public byte[] Parse(byte[] src) {return Parse_recurse(BoolUtl.Y, tmp_bfr, src);}
 	private byte[] Parse_recurse(boolean template_parsing, Bry_bfr bfr, byte[] src) {
 		int src_len = src.length;
 		int pos = 0;
@@ -53,7 +62,7 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 
 		while (true) {
 			boolean is_last = pos == src_len;				
-			byte b = is_last ? Byte_ascii.Null : src[pos];
+			byte b = is_last ? AsciiByte.Null : src[pos];
 			Object o = general_trie.Match_at_w_b0(trv, b, src, pos, src_len);
 
 			// match not found for "\x7fUNIQ"; move on to next
@@ -99,7 +108,7 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 		RandomAdp random_gen = RandomAdp_.new_();
 		for (int i = 0; i < len; i += 7) {
 			int rand = random_int_ary == null ? random_gen.Next(Int_.Max_value) : random_int_ary[i / 7];
-			String rand_str = Int_.To_str_hex(Bool_.N, Bool_.Y, rand & 0xfffffff);	// limits value to 268435455
+			String rand_str = Int_.To_str_hex(BoolUtl.N, BoolUtl.Y, rand & 0xfffffff);	// limits value to 268435455
 			tmp_bfr.Add_str_a7(rand_str);
 		}
 		byte[] rv = tmp_bfr.To_bry(0, len);
@@ -109,7 +118,7 @@ public class Xop_uniq_mgr {	// REF.MW:/parser/StripState.php
 
 	public static final byte[]
 	  Bry__uniq__bgn		= Bry_.new_a7("\u007f'\"`UNIQ-")
-	, Bry__uniq__bgn_w_dash	= Bry_.Add(Bry__uniq__bgn, Byte_ascii.Dash_bry)
+	, Bry__uniq__bgn_w_dash	= Bry_.Add(Bry__uniq__bgn, AsciiByte.DashBry)
 	, Bry__uniq__add__end	= Bry_.new_a7("-QINU`\"'\u007f")
 	;
 }

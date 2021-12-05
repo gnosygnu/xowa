@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Err_;
 import gplx.Int_;
 import gplx.String_;
@@ -270,19 +270,19 @@ public class XophpArrayStaticTest {
 		XophpArray array;
 		// Example #1
 		array = XophpArray.New("Mac", "NT", "Irix", "Linux");
-		Gftest.Eq__bool(Bool_.Y, XophpArray.in_array("Irix", array));
-		Gftest.Eq__bool(Bool_.N, XophpArray.in_array("mac" , array));
+		Gftest.Eq__bool(BoolUtl.Y, XophpArray.in_array("Irix", array));
+		Gftest.Eq__bool(BoolUtl.N, XophpArray.in_array("mac" , array));
 
 		// Example #2
 		array = XophpArray.New(12.4d, 1.13d);
-		Gftest.Eq__bool(Bool_.N, XophpArray.in_array("12.4", array, true));
-		Gftest.Eq__bool(Bool_.Y, XophpArray.in_array( 1.13d, array, true));
+		Gftest.Eq__bool(BoolUtl.N, XophpArray.in_array("12.4", array, true));
+		Gftest.Eq__bool(BoolUtl.Y, XophpArray.in_array( 1.13d, array, true));
 
 		// Example #3
 		array = XophpArray.New(XophpArray.New('p', 'h'), XophpArray.New('p', 'r'), 'o');
-		Gftest.Eq__bool(Bool_.Y, XophpArray.in_array(XophpArray.New('p', 'h'), array));
-		Gftest.Eq__bool(Bool_.N, XophpArray.in_array(XophpArray.New('f', 'i'), array));
-		Gftest.Eq__bool(Bool_.Y, XophpArray.in_array('o', array));
+		Gftest.Eq__bool(BoolUtl.Y, XophpArray.in_array(XophpArray.New('p', 'h'), array));
+		Gftest.Eq__bool(BoolUtl.N, XophpArray.in_array(XophpArray.New('f', 'i'), array));
+		Gftest.Eq__bool(BoolUtl.Y, XophpArray.in_array('o', array));
 	}
 	@Test public void array_shift() {
 		XophpArray array;

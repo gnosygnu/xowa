@@ -18,7 +18,7 @@ package gplx.xowa.bldrs.wms.revs;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Ordered_hash;
 import gplx.core.net.Gfo_inet_conn;
 import gplx.langs.jsons.Json_doc;
@@ -38,7 +38,7 @@ class Xowm_rev_wkr__meta__wm implements Xowm_rev_wkr__meta {
 	public void Fetch_meta(String domain_str, Ordered_hash hash, int bgn, int end) {
 		for (int i = bgn; i < end; ++i) {
 			Wmapi_itm__pge itm = (Wmapi_itm__pge)hash.Get_at(i);
-			if (i != bgn) tmp_bfr.Add_byte(Byte_ascii.Pipe);
+			if (i != bgn) tmp_bfr.Add_byte(AsciiByte.Pipe);
 			tmp_bfr.Add(itm.Page_ttl());
 		}
 		byte[] json = inet_conn.Download_as_bytes_or_null(Xowm_api_mgr.Bld_api_url(domain_str, "action=query&prop=revisions&rvprop=size|ids|timestamp|user|comment&format=json&rawcontinue=titles=" + tmp_bfr.To_str_and_clear()));

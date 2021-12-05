@@ -13,24 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
-import org.junit.*;
+package gplx.core.brys;
+import gplx.Bry_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Bit_heap_wtr_tst {
 	private final Bit_heap_wtr_fxt fxt = new Bit_heap_wtr_fxt();
 	@Test  public void Add_bool() {
-		fxt.Clear().Add_bool(Bool_.Y).Test__vals(1, 1);
-		fxt.Clear().Add_bool(Bool_.N).Test__vals(1, 0);
-		fxt.Clear().Add_bool(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y).Test__vals(4,  15);
-		fxt.Clear().Add_bool(Bool_.Y, Bool_.N, Bool_.N, Bool_.Y).Test__vals(4,   9);
-		fxt.Clear().Add_bool(8, Bool_.Y).Test__vals(0, 0, 255);
+		fxt.Clear().Add_bool(BoolUtl.Y).Test__vals(1, 1);
+		fxt.Clear().Add_bool(BoolUtl.N).Test__vals(1, 0);
+		fxt.Clear().Add_bool(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y).Test__vals(4,  15);
+		fxt.Clear().Add_bool(BoolUtl.Y, BoolUtl.N, BoolUtl.N, BoolUtl.Y).Test__vals(4,   9);
+		fxt.Clear().Add_bool(8, BoolUtl.Y).Test__vals(0, 0, 255);
 	}
 	@Test  public void Add_byte() {
 		fxt.Clear().Add_byte(255).Test__vals(0, 0, 255);
 	}
 	@Test  public void Add_bool_byte() {
-		fxt.Clear().Add_bool(Bool_.N).Add_byte(255).Test__vals(1, 127, 254);
-		fxt.Clear().Add_bool(Bool_.Y).Add_byte(255).Test__vals(1, 127, 255);
-		fxt.Clear().Add_bool(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y).Add_byte(255).Test__vals(4, 15, 255);
+		fxt.Clear().Add_bool(BoolUtl.N).Add_byte(255).Test__vals(1, 127, 254);
+		fxt.Clear().Add_bool(BoolUtl.Y).Add_byte(255).Test__vals(1, 127, 255);
+		fxt.Clear().Add_bool(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y).Add_byte(255).Test__vals(4, 15, 255);
 	}
 	@Test  public void Add_byte_digits() {
 		fxt.Clear().Add_byte(4,  15).Test__vals(4,  15);
@@ -43,7 +46,7 @@ public class Bit_heap_wtr_tst {
 		fxt.Clear().Add_int_hzip(1, 100).Test__vals(0, 0, 100);
 		fxt.Clear().Add_int_hzip(1, 300).Test__vals(0, 0, 253, 1, 44);
 		fxt.Clear().Add_int_hzip(2, 100).Test__vals(0, 0, 0, 100);
-		fxt.Clear().Add_bool(Bool_.N).Add_int_hzip(1, 300).Test__vals(1, 0, 250, 3, 88);
+		fxt.Clear().Add_bool(BoolUtl.N).Add_int_hzip(1, 300).Test__vals(1, 0, 250, 3, 88);
 	}
 }
 class Bit_heap_wtr_fxt {

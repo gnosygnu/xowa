@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.ifs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_iferror extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
@@ -58,7 +60,7 @@ public class Pfunc_iferror extends Pf_func_base {
 						break;
 					case State_nde:		// <(?:strong|span|p|div)\s
 						switch (src[pos_nxt]) {
-							case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
+							case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl:
 								state = State_nde;
 								++pos_nxt;
 								break;
@@ -68,7 +70,7 @@ public class Pfunc_iferror extends Pf_func_base {
 						if (state == State_nde) {
 							valid = true;
 							switch (src[pos - 1]) {								
-								case Byte_ascii.Quote: case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
+								case AsciiByte.Quote: case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl:
 									break;
 								default:
 									valid = false;
@@ -84,14 +86,14 @@ public class Pfunc_iferror extends Pf_func_base {
 						if (state == State_class) {
 							valid = true;
 							switch (src[pos - 1]) {								
-								case Byte_ascii.Quote: case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
+								case AsciiByte.Quote: case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl:
 									break;
 								default:
 									valid = false;
 									break;
 							}
 							switch (src[pos_nxt]) {
-								case Byte_ascii.Quote: case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
+								case AsciiByte.Quote: case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl:
 									break;
 								default:
 									valid = false;

@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.listings; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.listings; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private final Bry_fmtr tmp_fmtr = Bry_fmtr.New__tmp();
@@ -90,7 +92,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			bfr.Add_byte_pipe();				// "|"
 			byte[] atr_key = atr.Key_bry(); if (atr_key == null) continue;	// skip keyless atrs; PAGE:nl.v:Rome;EX:<sleep phone='' "abc"/> DATE:2014-06-04
 			bfr.Add(atr_key);					// key
-			bfr.Add_byte(Byte_ascii.Eq);		// "="
+			bfr.Add_byte(AsciiByte.Eq);		// "="
 			bfr.Add(atr.Val_as_bry());			// val; NOTE: must use Val_as_bry(src), not Val_bry, else int or "" will not be captured; DATE:2014-05-21
 		}
 		if (xnde.CloseMode() == Xop_xnde_tkn.CloseMode_pair) {
@@ -114,7 +116,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		if (xatr_alt != null) {
 			wtr.Txt(Txt_space_paren);									// " ("
 			wtr.Nde_full_atrs(Tag_em, xatr_alt, false);					// alt
-			wtr.Txt_byte(Byte_ascii.Paren_end);							// ")"
+			wtr.Txt_byte(AsciiByte.ParenEnd);							// ")"
 		}
 		byte[] position = Bld_position(ctx);
 		if (xatr_address != null || xatr_directions != null || position != null) {
@@ -127,14 +129,14 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 					wtr.Txt(Txt_comma_space);							// ,
 				wtr.Txt(position);										// position
 				wtr.Nde_end();											// </em>
-				wtr.Txt_byte(Byte_ascii.Paren_end);						// ")"
+				wtr.Txt_byte(AsciiByte.ParenEnd);						// ")"
 			}
 		}
 		
 		if (xatr_phone != null || xatr_tollfree != null) {
 			wtr	.Txt(Txt_comma_space)
 				.Txt_raw(xtn_mgr.Phone_symbol())
-				.Txt_byte(Byte_ascii.Space)
+				.Txt_byte(AsciiByte.Space)
 				.Txt(xatr_phone)
 			;
 			if (xatr_tollfree != null) {
@@ -142,7 +144,7 @@ public class Listing_xnde implements Xox_xnde, Mwh_atr_itm_owner1 {
 					.Txt_raw(xtn_mgr.Tollfree_symbol())
 					.Txt(Txt_colon_space)
 					.Txt(xatr_tollfree)
-					.Txt_byte(Byte_ascii.Paren_end)
+					.Txt_byte(AsciiByte.ParenEnd)
 					;
 			}
 		}

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.versions; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.versions; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
 public class Xoa_version_ {
 	public static int Compare(String lhs_str, String rhs_str) {
 		String[] lhs_ary = String_.Split(lhs_str, ".");
@@ -24,13 +25,13 @@ public class Xoa_version_ {
 		int lhs_ary_len = lhs_ary.length;
 		int rhs_ary_len = rhs_ary.length;
 		int len_comp = Int_.Compare(lhs_ary_len, rhs_ary_len);
-		if (len_comp != CompareAble_.Same) return len_comp;
+		if (len_comp != CompareAbleUtl.Same) return len_comp;
 		for (int i = 0; i < lhs_ary_len; ++i) {
 			String lhs_itm = lhs_ary[i];
 			String rhs_itm = rhs_ary[i];
 			int itm_comp = Int_.Compare(Int_.Parse_or(lhs_itm, 0), Int_.Parse_or(rhs_itm, 0));
-			if (itm_comp != CompareAble_.Same) return itm_comp;
+			if (itm_comp != CompareAbleUtl.Same) return itm_comp;
 		}
-		return CompareAble_.Same;
+		return CompareAbleUtl.Same;
 	}
 }

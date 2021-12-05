@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.hdrs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.*;
 import gplx.xowa.parsers.xndes.*;
-import gplx.xowa.parsers.hdrs.sections.*;
 public class Xop_hdr_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {}
@@ -107,12 +108,12 @@ public class Xop_hdr_wkr implements Xop_ctx_wkr {
 			if (cur == end) return cur;
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					cur++;
 					last_nl = cur;
 					break;
-				case Byte_ascii.Space:
-				case Byte_ascii.Tab:
+				case AsciiByte.Space:
+				case AsciiByte.Tab:
 					cur++;
 					break;
 				default:

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_bfr;
 import gplx.Int_;
 import gplx.Object_;
@@ -79,6 +79,6 @@ public class XophpArrayItm<T> implements Bry_bfr_able {
 	}
 
 	private static final int NULL_KEY_INT = -1;
-	public static XophpArrayItm NewInt(int key, Object val)    {return new XophpArrayItm(Bool_.Y, key, Int_.To_str(key), val);}
-	public static XophpArrayItm NewStr(String key, Object val) {return new XophpArrayItm(Bool_.N, NULL_KEY_INT, key, val);}
+	public static XophpArrayItm NewInt(int key, Object val)    {return new XophpArrayItm(BoolUtl.Y, key, Int_.To_str(key), val);}
+	public static XophpArrayItm NewStr(String key, Object val) {return new XophpArrayItm(BoolUtl.N, NULL_KEY_INT, key, val);}
 }

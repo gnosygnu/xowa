@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.consoles; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Console_adp__mem implements Console_adp {
 	private final List_adp written = List_adp_.New();
 	private final Hash_adp ignored = Hash_adp_.New();
@@ -40,7 +41,7 @@ public class Console_adp__mem implements Console_adp {
 	public List_adp Written() {return written;}
 	public void tst_WrittenStr(String... expd) {
 		String[] actl = new String[written.Len()];
-		int actlLength = Array_.Len(actl);
+		int actlLength = ArrayUtl.Len(actl);
 		for (int i = 0; i < actlLength; i++)
 			actl[i] = written.Get_at(i).toString();
 		Tfds.Eq_ary(actl, expd);

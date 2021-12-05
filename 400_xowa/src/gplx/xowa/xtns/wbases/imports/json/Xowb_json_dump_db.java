@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports.json;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.DateAdp;
 import gplx.DateAdp_;
 import gplx.Datetime_now;
@@ -92,14 +92,14 @@ class Xowb_json_dump_db {
 		// extract xid
 		byte[] id = jdoc.Get_val_as_bry_or(Bry__id_key, null);
 		if (id == null)		{usr_dlg.Warn_many("", "", "wbase.json_dump:id is invalid: json=~{0}", json_bry); return;}
-		boolean jdoc_is_qid = Bry_.Has_at_bgn(id, Byte_ascii.Ltr_Q, 0);
+		boolean jdoc_is_qid = Bry_.Has_at_bgn(id, AsciiByte.Ltr_Q, 0);
 		Xow_ns ns = jdoc_is_qid ? ns_mgr.Ns_main() : ns_mgr.Ids_get_or_null(Wdata_wiki_mgr.Ns_property);
 
 		// create page entry
 		int random_int = ns.Count() + 1; ns.Count_(random_int);
 		byte[] json_zip = text_zip_mgr.Zip(text_zip_tid, json_bry);
 		Xow_db_file text_db = ns_to_db_mgr.Get_by_ns(ns.Bldr_data(), json_zip.length);
-		db_mgr.Create_page(page_tbl, text_db.Tbl__text(), ++page_id, ns.Id(), id, Bool_.N, page_modified_on, json_zip, json_bry.length, random_int, text_db.Id(), -1);
+		db_mgr.Create_page(page_tbl, text_db.Tbl__text(), ++page_id, ns.Id(), id, BoolUtl.N, page_modified_on, json_zip, json_bry.length, random_int, text_db.Id(), -1);
 
 		// insert text
 		if (jdoc_is_qid) {

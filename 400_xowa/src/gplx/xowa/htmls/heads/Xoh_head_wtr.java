@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.heads; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.langs.htmls.*;
 public class Xoh_head_wtr {
 	private int indent; private int reset_bgn, reset_end;
@@ -124,22 +127,22 @@ public class Xoh_head_wtr {
 		else
 			return false;
 	}
-	public void Write_js_global_ini_atr_val(byte[] key, boolean val)		{Write_js_global_ini_atr(key, Bool_.N, val ? Bool_.True_bry : Bool_.False_bry);}
-	public void Write_js_global_ini_atr_val(byte[] key, byte[] val)		{Write_js_global_ini_atr(key, Bool_.Y, val);}
-	public void Write_js_global_ini_atr_obj(byte[] key, byte[] val)		{Write_js_global_ini_atr(key, Bool_.N, val);}
-	public void Write_js_global_ini_atr_msg(Xowe_wiki wiki, byte[] key)	{Write_js_global_ini_atr(key, Bool_.Y, wiki.Msg_mgr().Val_by_key_obj(key));}
+	public void Write_js_global_ini_atr_val(byte[] key, boolean val)		{Write_js_global_ini_atr(key, BoolUtl.N, val ? BoolUtl.TrueBry : BoolUtl.FalseBry);}
+	public void Write_js_global_ini_atr_val(byte[] key, byte[] val)		{Write_js_global_ini_atr(key, BoolUtl.Y, val);}
+	public void Write_js_global_ini_atr_obj(byte[] key, byte[] val)		{Write_js_global_ini_atr(key, BoolUtl.N, val);}
+	public void Write_js_global_ini_atr_msg(Xowe_wiki wiki, byte[] key)	{Write_js_global_ini_atr(key, BoolUtl.Y, wiki.Msg_mgr().Val_by_key_obj(key));}
 	private void Write_js_global_ini_atr(byte[] key, boolean quote_val, byte[] val) {
 		Write_js_global_ini_atr_bgn(key);
 		if (quote_val)
-			Write_js_quote(Byte_ascii.Apos, val);
+			Write_js_quote(AsciiByte.Apos, val);
 		else
 			bfr.Add(val);
-		bfr.Add_byte(Byte_ascii.Comma);
+		bfr.Add_byte(AsciiByte.Comma);
 	}
 	public void Write_js_global_ini_atr_val(byte[] key, int val) {
 		Write_js_global_ini_atr_bgn(key);
 		bfr.Add_int_variable(val);
-		bfr.Add_byte(Byte_ascii.Comma);
+		bfr.Add_byte(AsciiByte.Comma);
 	}
 	private void Write_js_global_ini_atr_bgn(byte[] key) {
 		Write_nl_and_indent();
@@ -148,12 +151,12 @@ public class Xoh_head_wtr {
 		bfr.Add_byte_apos();
 		bfr.Add(Js_globals_ini_atr_mid);
 	}
-	public void Write_js_ary_bgn() {js_ary_idx = 0; bfr.Add_byte(Byte_ascii.Brack_bgn);}
+	public void Write_js_ary_bgn() {js_ary_idx = 0; bfr.Add_byte(AsciiByte.BrackBgn);}
 	public void Write_js_ary_itm(byte[] val) {
 		if (++js_ary_idx != 1) bfr.Add(js_ary_dlm);
-		Write_js_quote(Byte_ascii.Apos, val);
+		Write_js_quote(AsciiByte.Apos, val);
 	}	private int js_ary_idx = 0; private static final byte[] js_ary_dlm = Bry_.new_a7(", ");
-	public void Write_js_ary_end() {js_ary_idx = 0; bfr.Add_byte(Byte_ascii.Brack_end);}
+	public void Write_js_ary_end() {js_ary_idx = 0; bfr.Add_byte(AsciiByte.BrackEnd);}
 	public void Write_js_init_global(byte[] key) {	// EX: xowa.client = {};
 		Write_nl_and_indent();
 		bfr.Add(key);
@@ -171,7 +174,7 @@ public class Xoh_head_wtr {
 		Write_nl_and_indent();
 		bfr.Add(alias).Add_byte_dot().Add(key);
 		bfr.Add(Js_var_mid);
-		Write_js_quote(Byte_ascii.Apos, val);
+		Write_js_quote(AsciiByte.Apos, val);
 		bfr.Add(Js_var_end);
 	}
 	public void Write_js_xowa_var(byte[] key, boolean quote_val, byte[] val) {	// EX: var xowa.app.mode = 'gui';
@@ -179,7 +182,7 @@ public class Xoh_head_wtr {
 		bfr.Add(key);
 		bfr.Add(Js_var_mid);
 		if (quote_val)
-			Write_js_quote(Byte_ascii.Apos, val);
+			Write_js_quote(AsciiByte.Apos, val);
 		else
 			bfr.Add(val);
 		bfr.Add(Js_var_end);
@@ -190,7 +193,7 @@ public class Xoh_head_wtr {
 		bfr.Add(key);
 		bfr.Add(Js_var_mid);
 		if (quote_val)
-			Write_js_quote(Byte_ascii.Apos, val);
+			Write_js_quote(AsciiByte.Apos, val);
 		else
 			bfr.Add(val);
 		bfr.Add(Js_var_end);
@@ -205,7 +208,7 @@ public class Xoh_head_wtr {
 		for (int i = 0; i < val_len; i++) {
 			byte b = val[i];
 			if		(b == quote_byte)			bfr.Add_byte_backslash();	// escape quote
-			else if (b == Byte_ascii.Backslash) bfr.Add_byte_backslash();	// escape backslash
+			else if (b == AsciiByte.Backslash) bfr.Add_byte_backslash();	// escape backslash
 			bfr.Add_byte(b);
 		}
 		bfr.Add_byte(quote_byte);
@@ -213,7 +216,7 @@ public class Xoh_head_wtr {
 	private void Write_nl_and_indent() {
 		bfr.Add_byte_nl(); Indent();
 	}
-	private void Indent() {bfr.Add_byte_repeat(Byte_ascii.Space, indent);}
+	private void Indent() {bfr.Add_byte_repeat(AsciiByte.Space, indent);}
 	public Xoh_head_wtr Indent_add() {indent += 2; return this;}
 	public Xoh_head_wtr Indent_del() {indent -= 2; return this;}
 	private static final byte[]

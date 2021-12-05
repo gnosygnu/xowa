@@ -13,26 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.*;
+package gplx.gfui.kits.swts;
+import gplx.Gfo_evt_mgr;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_evt_mgr_owner;
+import gplx.Keyval_hash;
+import gplx.String_;
 import gplx.core.envs.Op_sys;
-import gplx.core.envs.Op_sys_;
-import gplx.core.threads.Thread_adp_;
 import gplx.gfui.controls.gxws.GxwComboBox;
 import gplx.gfui.controls.gxws.GxwElem;
-import gplx.gfui.draws.ColorAdp;
 import gplx.gfui.controls.standards.GfuiComboBox;
+import gplx.gfui.draws.ColorAdp;
 import gplx.gfui.kits.core.Swt_kit;
-
+import gplx.objects.primitives.BoolUtl;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -122,7 +120,7 @@ class Swt_combo_list {
 	public String[] Items_str_ary() {return items_str_ary;} private String[] items_str_ary = String_.Ary_empty;
 	public void Items_(String[] new_ary) {
 		int new_len = new_ary.length;
-		if (new_len == 0) Visible_(Bool_.N);	// if new_ary is empty, then hide list box; else, brief flicker as items are removed 
+		if (new_len == 0) Visible_(BoolUtl.N);	// if new_ary is empty, then hide list box; else, brief flicker as items are removed
 
 		// remove all cur-items that are no longer needed b/c new_ary is smaller
 		int cur_len = list_len;
@@ -159,7 +157,7 @@ class Swt_combo_list {
 	public void Sel_idx_nudge(boolean fwd) 	{Sel_idx_adj(fwd, 1);}
 	public void Sel_idx_jump(boolean fwd) 	{Sel_idx_adj(fwd, Jump_len);}
 	private void Sel_idx_adj(boolean fwd, int adj) {
-		if (!Visible()) Visible_(Bool_.Y);	// these are called by cursor keys; always make visible
+		if (!Visible()) Visible_(BoolUtl.Y);	// these are called by cursor keys; always make visible
 		int cur_idx = table.getSelectionIndex();
 		int new_idx = cur_idx;
 		int idx_n = list_len - 1;
@@ -233,7 +231,7 @@ class Swt_combo_text__key_down implements Listener {			// for list-box, highligh
 					if (event.stateMask == SWT.ALT) {
 						list.Visible_(true);
 					} else {
-						list.Sel_idx_nudge(Bool_.Y);
+						list.Sel_idx_nudge(BoolUtl.Y);
 					}
 					event.doit = false;
 					break;
@@ -241,27 +239,27 @@ class Swt_combo_text__key_down implements Listener {			// for list-box, highligh
 					if (event.stateMask == SWT.ALT) {
 						list.Visible_(false);
 					} else {
-						list.Sel_idx_nudge(Bool_.N);
+						list.Sel_idx_nudge(BoolUtl.N);
 					}
 					event.doit = false;
 					break;
 				case SWT.PAGE_DOWN:
 					if (no_modifier) {
-						list.Sel_idx_jump(Bool_.Y);
+						list.Sel_idx_jump(BoolUtl.Y);
 						event.doit = false;
 					}
 					else if (ctrl_modifier || alt_modifier) {
-						list.Visible_(Bool_.N);
+						list.Visible_(BoolUtl.N);
 						event.doit = false;
 					}					
 					break;
 				case SWT.PAGE_UP:
 					if (no_modifier) {
-						list.Sel_idx_jump(Bool_.N);
+						list.Sel_idx_jump(BoolUtl.N);
 						event.doit = false;
 					}
 					else if (ctrl_modifier || alt_modifier) {
-						list.Visible_(Bool_.N);
+						list.Visible_(BoolUtl.N);
 						event.doit = false;
 					}					
 					break;

@@ -13,11 +13,35 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.encoders.*; import gplx.core.threads.poolables.*;
-import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*; import gplx.langs.htmls.encoders.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.wikis.ttls.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.htmls.core.wkrs.lnkis;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.core.brys.Bry_rdr;
+import gplx.core.brys.Int_flag_bldr;
+import gplx.core.threads.poolables.Gfo_poolable_itm;
+import gplx.core.threads.poolables.Gfo_poolable_mgr;
+import gplx.langs.htmls.Gfh_bldr_;
+import gplx.langs.htmls.Gfh_utl;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.hzips.Xoh_data_itm;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_wkr;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_ctx;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_wkr;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_wkr__make;
+import gplx.xowa.htmls.core.wkrs.Xoh_hzip_bfr;
+import gplx.xowa.htmls.core.wkrs.lnkis.anchs.Xoh_anch_capt_itm;
+import gplx.xowa.htmls.core.wkrs.lnkis.anchs.Xoh_anch_cls_;
+import gplx.xowa.htmls.core.wkrs.lnkis.anchs.Xoh_anch_href_data;
+import gplx.xowa.htmls.hrefs.Xoh_href_;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(32);
 	public int Tid() {return Xoh_hzip_dict_.Tid__lnki;}
@@ -37,7 +61,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		int href_type			= flag_bldr.Set_as_int(Flag__href_type			, href.Tid());
 								  flag_bldr.Set_as_int(Flag__capt_cs0_tid		, data.Capt_itm().Cs0_tid());
 		byte text_type			= flag_bldr.Set_as_byte(Flag__text_type			, data.Text_tid());
-		// Tfds.Dbg(flag_bldr.Encode(), Array_.To_str(flag_bldr.Val_ary()), text_type);
+		// Tfds.Dbg(flag_bldr.Encode(), ArrayUtl.To_str(flag_bldr.Val_ary()), text_type);
 		int flag = flag_bldr.Encode();
 		bfr.Add(hook);
 		bfr.Add_hzip_int(1, flag);
@@ -112,11 +136,11 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 				// Gfo_url_encoder encoder = href_type == Xoh_anch_href_data.Tid__wiki ? Gfo_url_encoder_.Href : Gfo_url_encoder_.Href_qarg;	// NOTE: lnki vs lnke will encode entities differently
 				int href_end = href_bry.length;
 				if (cls_tid == Xoh_anch_cls_.Tid__ctg_xnav)	{ // NOTE: for ctg_xnav, only encode title, not its query arguments; "?" x> "%3F" or "=" x> "%3D" or "sortkey=A B" -> "sortkey=A_B"; DATE:2015-12-28
-					href_end = Bry_find_.Find_fwd(href_bry, Byte_ascii.Question, 0, href_end);
+					href_end = Bry_find_.Find_fwd(href_bry, AsciiByte.Question, 0, href_end);
 				}
 				// encoder.Encode(tmp_bfr, href_bry, 0, href_end);	// encode for href; EX: "/wiki/A's" -> "/wiki/A&27s"
 				// tmp_bfr.Add_mid(href_bry, 0, href_end);	// encode for href; EX: "/wiki/A's" -> "/wiki/A&27s"
-				tmp_bfr.Add_mid_w_swap(href_bry, 0, href_end, Byte_ascii.Space, Byte_ascii.Underline);
+				tmp_bfr.Add_mid_w_swap(href_bry, 0, href_end, AsciiByte.Space, AsciiByte.Underline);
 				if (cls_tid == Xoh_anch_cls_.Tid__ctg_xnav && href_end != -1)
 					tmp_bfr.Add_mid(href_bry, href_end, href_bry.length);
 				href_bry = tmp_bfr.To_bry_and_clear();
@@ -137,7 +161,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 					break;
 				case Xoh_lnki_data.Title__capt:
 					title_bry = !capt_has_ns && !title_missing_ns && ns_bry != null 
-						? Bry_.Add(ns_bry, Byte_ascii.Colon_bry, capt_bry) 
+						? Bry_.Add(ns_bry, AsciiByte.ColonBry, capt_bry)
 						: capt_bry;
 					break;
 			}
@@ -147,7 +171,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		bfr.Add(Gfh_bldr_.Bry__a_lhs_w_href);
 		switch (href_type) {
 			case Xoh_anch_href_data.Tid__anch:
-				bfr.Add_byte(Byte_ascii.Hash);							// "#"
+				bfr.Add_byte(AsciiByte.Hash);							// "#"
 				break;
 			case Xoh_anch_href_data.Tid__site:
 				bfr.Add(Xoh_href_.Bry__site).Add_mid(src, site_bgn, site_end);
@@ -175,7 +199,7 @@ public class Xoh_lnki_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		if (	href_type != Xoh_anch_href_data.Tid__anch) {	// anchs never have title;
 			if (title_bry != null) {
 				bfr.Add(Gfh_bldr_.Bry__title__nth);
-				Gfh_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_bry.length, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.N);
+				Gfh_utl.Escape_html_to_bfr(bfr, title_bry, 0, title_bry.length, BoolUtl.N, BoolUtl.N, BoolUtl.N, BoolUtl.Y, BoolUtl.N);
 			}
 		}
 		bfr.Add(Gfh_bldr_.Bry__lhs_end_head_w_quote);
@@ -202,7 +226,7 @@ class Xoh_lnki_hzip_ {
 	public static byte[] Bld_capt(Bry_bfr tmp_bfr, byte href_type, byte text_type, boolean capt_has_ns, int capt_cs0, byte[] ns_bry, byte[] text_0_src, int text_0_bgn, int text_0_end, byte[] capt_src, int text_1_bgn, int text_1_end) {
 		if (	href_type == Xoh_anch_href_data.Tid__anch
 			&&	text_type != Xoh_anch_capt_itm.Tid__diff )
-			tmp_bfr.Add_byte(Byte_ascii.Hash);
+			tmp_bfr.Add_byte(AsciiByte.Hash);
 		if (capt_has_ns && ns_bry != null)
 			tmp_bfr.Add(ns_bry).Add_byte_colon();
 		switch (text_type) {
@@ -210,8 +234,8 @@ class Xoh_lnki_hzip_ {
 			default:
 				switch (capt_cs0) {
 					case Xoh_anch_capt_itm.Cs0__exact: break;
-					case Xoh_anch_capt_itm.Cs0__lower: tmp_bfr.Add_byte(Byte_ascii.Case_lower(text_0_src[text_0_bgn++]));break;
-					case Xoh_anch_capt_itm.Cs0__upper: tmp_bfr.Add_byte(Byte_ascii.Case_upper(text_0_src[text_0_bgn++]));break;
+					case Xoh_anch_capt_itm.Cs0__lower: tmp_bfr.Add_byte(AsciiByte.CaseLower(text_0_src[text_0_bgn++]));break;
+					case Xoh_anch_capt_itm.Cs0__upper: tmp_bfr.Add_byte(AsciiByte.CaseUpper(text_0_src[text_0_bgn++]));break;
 				}
 				break;
 		}

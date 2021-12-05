@@ -13,14 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.xowa.xtns.wbases.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.bldrs.xmls.*; import gplx.xowa.bldrs.cmds.texts.xmls.*;
-import gplx.xowa.bldrs.css.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.bldrs.cmds.texts;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg;
+import gplx.GfsCtx;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.cmds.texts.xmls.Xob_siteinfo_parser_;
+import gplx.xowa.bldrs.css.Xoa_css_extractor;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.wikis.data.Xowd_cfg_tbl_;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
 public abstract class Xob_init_base implements Xob_cmd, Gfo_invk {
 	private Xob_bldr bldr; private Xowe_wiki wiki; private Gfo_usr_dlg usr_dlg;
-	private byte wbase_enabled = Bool_.__byte;
+	private byte wbase_enabled = BoolUtl.NullByte;
 	public Xob_init_base Ctor(Xob_bldr bldr, Xowe_wiki wiki) {this.bldr = bldr; this.wiki = wiki; this.usr_dlg = wiki.Appe().Usr_dlg(); return this;}
 	public abstract String Cmd_key();
 	public Xob_cmd Cmd_clone(Xob_bldr bldr, Xowe_wiki wiki) {return null;}
@@ -28,8 +39,8 @@ public abstract class Xob_init_base implements Xob_cmd, Gfo_invk {
 	public abstract void Cmd_run_end(Xowe_wiki wiki);
 	public void Cmd_init(Xob_bldr bldr) {		// add other cmds; EX: wikidata
 		bldr.Import_marker().Bgn(wiki);
-		if (wbase_enabled == Bool_.__byte) wbase_enabled = wiki.Domain_tid() == Xow_domain_tid_.Tid__wikidata ? Bool_.Y_byte : Bool_.N_byte;	// if wbase_enabled not explicitly set, set it to y if wiki is "www.wikidata.org"
-		if (wbase_enabled == Bool_.Y_byte)		// if wbase_enabled, auto-add wdata_wkrs bldr
+		if (wbase_enabled == BoolUtl.NullByte) wbase_enabled = wiki.Domain_tid() == Xow_domain_tid_.Tid__wikidata ? BoolUtl.YByte : BoolUtl.NByte;	// if wbase_enabled not explicitly set, set it to y if wiki is "www.wikidata.org"
+		if (wbase_enabled == BoolUtl.YByte)		// if wbase_enabled, auto-add wdata_wkrs bldr
 			this.Cmd_ini_wdata(bldr, wiki);
 	}
 	public void Cmd_bgn(Xob_bldr bldr) {}
@@ -57,7 +68,7 @@ public abstract class Xob_init_base implements Xob_cmd, Gfo_invk {
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_src_xml_fil_))				wiki.Import_cfg().Src_fil_xml_(m.ReadIoUrl("v"));
 		else if	(ctx.Match(k, Invk_src_bz2_fil_))				wiki.Import_cfg().Src_fil_bz2_(m.ReadIoUrl("v"));
-		else if	(ctx.Match(k, Invk_wdata_enabled_))				wbase_enabled = m.ReadYn("v") ? Bool_.Y_byte : Bool_.N_byte;
+		else if	(ctx.Match(k, Invk_wdata_enabled_))				wbase_enabled = m.ReadYn("v") ? BoolUtl.YByte : BoolUtl.NByte;
 		else if	(ctx.Match(k, Invk_owner))						return bldr.Cmd_mgr();
 		else return Gfo_invk_.Rv_unhandled;
 		return this;

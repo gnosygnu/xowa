@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.encoders.*;
+package gplx.xowa.xtns.scribunto.engines.process; import gplx.*;
+import gplx.core.ios.streams.*; import gplx.core.encoders.*;
+import gplx.objects.strings.AsciiByte;
 public class Process_stream_rdr {
 	public Process_stream_rdr(byte[] bry_header, byte[] bry_body) {this.bry_header = bry_header; this.bry_body = bry_body;} private byte[] bry_header, bry_body;
 	public IoStream_stream_rdr Rdr() {return rdr;} IoStream_stream_rdr rdr = new IoStream_stream_rdr();
@@ -41,14 +42,14 @@ public class Process_stream_rdr {
 				byte b = trg_bry[trg_idx];
 				if (escaped) {			// escaped mode; convert cur byte to appropriate byte
 					switch (b) {
-						case Byte_ascii.Ltr_n:		b = Byte_ascii.Nl; break;
-						case Byte_ascii.Ltr_r: 		b = Byte_ascii.Cr; break; 
-						case Byte_ascii.Backslash: 	b = Byte_ascii.Backslash; break;
+						case AsciiByte.Ltr_n:		b = AsciiByte.Nl; break;
+						case AsciiByte.Ltr_r: 		b = AsciiByte.Cr; break;
+						case AsciiByte.Backslash: 	b = AsciiByte.Backslash; break;
 						default: 					throw Err_.new_unhandled(b);
 					}
 				}
 				else {					// regular mode
-					if (b == Byte_ascii.Backslash) {
+					if (b == AsciiByte.Backslash) {
 						escaped = true;	// flip flag
 						escaped_once = true;
 						--src_len;		// add 1 to src_len; EX: "a\\nb" has 4 chars in stream, but src_len is reported as 3

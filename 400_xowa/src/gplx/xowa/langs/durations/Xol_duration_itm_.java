@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.durations; import gplx.*;
+import gplx.objects.lists.ComparerAble;
 public class Xol_duration_itm_ {
 	private static final Hash_adp_bry regy = Hash_adp_bry.ci_a7();	// ASCII:MW.consts
 	public static final byte
@@ -68,7 +69,7 @@ public class Xol_duration_itm_ {
 		return (Xol_duration_itm[])rv.ToAry(Xol_duration_itm.class);
 	}
 }
-class Xol_duration_itm_sorter implements gplx.core.lists.ComparerAble {
+class Xol_duration_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xol_duration_itm lhs = (Xol_duration_itm)lhsObj;
 		Xol_duration_itm rhs = (Xol_duration_itm)rhsObj;

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
+package gplx.langs.gfs; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfs_parser {
 	private final Btrie_fast_mgr trie = Gfs_parser_.trie_();
 	private final Gfs_parser_ctx ctx = new Gfs_parser_ctx();
@@ -66,26 +67,26 @@ class Gfs_parser_ {
 	public static Btrie_fast_mgr trie_() {
 		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_a7();	// NOTE:ci.ascii:gfs;letters/symbols only;
 		Gfs_lxr_identifier word_lxr = Gfs_lxr_identifier.Instance;
-		trie_add_rng(rv, word_lxr, Byte_ascii.Ltr_a, Byte_ascii.Ltr_z);
-		trie_add_rng(rv, word_lxr, Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z);
-		trie_add_rng(rv, word_lxr, Byte_ascii.Num_0, Byte_ascii.Num_9);
-		rv.Add(Byte_ascii.Underline, word_lxr);
-		trie_add_many(rv, Gfs_lxr_whitespace.Instance, Byte_ascii.Space, Byte_ascii.Nl, Byte_ascii.Cr, Byte_ascii.Tab);
-		trie_add_quote(rv, new byte[] {Byte_ascii.Apos});
-		trie_add_quote(rv, new byte[] {Byte_ascii.Quote});
+		trie_add_rng(rv, word_lxr, AsciiByte.Ltr_a, AsciiByte.Ltr_z);
+		trie_add_rng(rv, word_lxr, AsciiByte.Ltr_A, AsciiByte.Ltr_Z);
+		trie_add_rng(rv, word_lxr, AsciiByte.Num0, AsciiByte.Num9);
+		rv.Add(AsciiByte.Underline, word_lxr);
+		trie_add_many(rv, Gfs_lxr_whitespace.Instance, AsciiByte.Space, AsciiByte.Nl, AsciiByte.Cr, AsciiByte.Tab);
+		trie_add_quote(rv, new byte[] {AsciiByte.Apos});
+		trie_add_quote(rv, new byte[] {AsciiByte.Quote});
 		trie_add_quote(rv, Bry_.new_a7("<:[\"\n"), Bry_.new_a7("\n\"]:>"));
 		trie_add_quote(rv, Bry_.new_a7("<:['\n"), Bry_.new_a7("\n']:>"));
 		trie_add_quote(rv, Bry_.new_a7("<:{'"), Bry_.new_a7("'}:>"));
-		trie_add_comment(rv, new byte[] {Byte_ascii.Slash, Byte_ascii.Slash}, new byte[] {Byte_ascii.Nl});
-		trie_add_comment(rv, new byte[] {Byte_ascii.Slash, Byte_ascii.Star}, new byte[] {Byte_ascii.Star, Byte_ascii.Slash});
-		rv.Add(Byte_ascii.Semic, Gfs_lxr_semic.Instance);
-		rv.Add(Byte_ascii.Paren_bgn, Gfs_lxr_paren_bgn.Instance);
-		rv.Add(Byte_ascii.Paren_end, Gfs_lxr_paren_end.Instance);
-		rv.Add(Byte_ascii.Curly_bgn, Gfs_lxr_curly_bgn.Instance);
-		rv.Add(Byte_ascii.Curly_end, Gfs_lxr_curly_end.Instance);
-		rv.Add(Byte_ascii.Dot, Gfs_lxr_dot.Instance);
-		rv.Add(Byte_ascii.Comma, Gfs_lxr_comma.Instance);
-		rv.Add(Byte_ascii.Eq, Gfs_lxr_equal.Instance);
+		trie_add_comment(rv, new byte[] {AsciiByte.Slash, AsciiByte.Slash}, new byte[] {AsciiByte.Nl});
+		trie_add_comment(rv, new byte[] {AsciiByte.Slash, AsciiByte.Star}, new byte[] {AsciiByte.Star, AsciiByte.Slash});
+		rv.Add(AsciiByte.Semic, Gfs_lxr_semic.Instance);
+		rv.Add(AsciiByte.ParenBgn, Gfs_lxr_paren_bgn.Instance);
+		rv.Add(AsciiByte.ParenEnd, Gfs_lxr_paren_end.Instance);
+		rv.Add(AsciiByte.CurlyBgn, Gfs_lxr_curly_bgn.Instance);
+		rv.Add(AsciiByte.CurlyEnd, Gfs_lxr_curly_end.Instance);
+		rv.Add(AsciiByte.Dot, Gfs_lxr_dot.Instance);
+		rv.Add(AsciiByte.Comma, Gfs_lxr_comma.Instance);
+		rv.Add(AsciiByte.Eq, Gfs_lxr_equal.Instance);
 		return rv;
 	}
 	private static void trie_add_rng(Btrie_fast_mgr trie, Gfs_lxr lxr, byte bgn, byte end) {

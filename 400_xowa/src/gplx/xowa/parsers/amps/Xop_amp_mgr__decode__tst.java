@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.parsers.amps;
+import gplx.Bry_;
+import gplx.Char_;
+import gplx.String_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import org.junit.Before;
+import org.junit.Test;
 public class Xop_amp_mgr__decode__tst {
 	@Before public void init() {} private final Xop_amp_mgr_fxt fxt = new Xop_amp_mgr_fxt();
 	@Test public void Text()						{fxt.Test__decode_as_bry("a"				, "a");}
@@ -53,7 +61,7 @@ class Xop_amp_mgr_fxt {
 	}
 	public void Test__parse_tkn__txt(String raw, int expd) {
 		Xop_amp_mgr_rslt rv = Exec__parse_tkn(raw);
-		Gftest.Eq__null(Bool_.Y, rv.Tkn());
+		Gftest.Eq__null(BoolUtl.Y, rv.Tkn());
 		Gftest.Eq__int(expd, rv.Pos());
 	}
 	private Xop_amp_mgr_rslt Exec__parse_tkn(String raw) {

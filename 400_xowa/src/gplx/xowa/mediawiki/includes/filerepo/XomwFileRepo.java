@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.filerepo; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.filerepo; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.includes.filerepo.file.*;
 /*	TODO.XO:
 	* getZoneUrl
@@ -680,7 +682,7 @@ public class XomwFileRepo {
 			byte[] path = new byte[5];
 			path[0] = path[2] = hash[0];
 			path[3] = hash[1];
-			path[1] = path[4] = Byte_ascii.Slash;
+			path[1] = path[4] = AsciiByte.Slash;
 			return path;
 		}
 	}

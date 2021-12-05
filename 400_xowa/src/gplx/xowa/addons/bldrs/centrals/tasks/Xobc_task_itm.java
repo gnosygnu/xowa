@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
+package gplx.xowa.addons.bldrs.centrals.tasks; import gplx.*;
+import gplx.objects.lists.CompareAble;
 import gplx.core.gfobjs.*;
-import gplx.xowa.addons.bldrs.centrals.cmds.*; import gplx.xowa.addons.bldrs.centrals.steps.*;
-public class Xobc_task_itm implements gplx.CompareAble {
+import gplx.xowa.addons.bldrs.centrals.steps.*;
+public class Xobc_task_itm implements CompareAble {
 	private final int task_sort;
 	public Xobc_task_itm(int task_id, int task_seqn, int step_count, String task_key, String task_name) {
 		this.task_id = task_id;

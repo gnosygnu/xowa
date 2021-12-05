@@ -13,9 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.xowa.mediawiki.includes.xohtml.*;
+package gplx.xowa.mediawiki.includes.parsers.lnkes;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.Type_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.primitives.Int_obj_val;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.XophpPreg_;
+import gplx.xowa.mediawiki.includes.XomwLinker;
+import gplx.xowa.mediawiki.includes.XomwSanitizer;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserIface;
+import gplx.xowa.mediawiki.includes.parsers.Xomw_regex_space;
+import gplx.xowa.mediawiki.includes.parsers.Xomw_regex_url;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_mgr;
 /*	TODO.XO
 	* P3: $langObj->formatNum( ++$this->mAutonumber );
 	* P2: $this->getConverterLanguage()->markNoConversion( $text );
@@ -46,7 +62,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 				// REGEX:([^\]\\x00-\\x08\\x0a-\\x1F]*?); NOTE: val is key.length
 				invalid_text_chars_trie = Btrie_slim_mgr.cs();
-				New__trie_itm__by_len(invalid_text_chars_trie, Byte_ascii.Brack_end);
+				New__trie_itm__by_len(invalid_text_chars_trie, AsciiByte.BrackEnd);
 				for (int i = 0; i <= 8; i++) {		// x00-x08
 					New__trie_itm__by_len(invalid_text_chars_trie, i);
 				}
@@ -111,7 +127,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			//   whitespace             -> \p{Zs}
 
 			// search for "["
-			int lnke_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Brack_bgn, cur, src_end);
+			int lnke_bgn = Bry_find_.Find_fwd(src, AsciiByte.BrackBgn, cur, src_end);
 			if (lnke_bgn == Bry_find_.Not_found) {
 				bfr.Add_mid(src, cur, src_end);
 				break;	// no more "["; stop
@@ -153,7 +169,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 			
 			// check for "]"
-			if (src[cur] != Byte_ascii.Brack_end) {
+			if (src[cur] != AsciiByte.BrackEnd) {
 				bfr.Add_mid(src, prv, cur);
 				prv = cur;
 				continue;
@@ -186,9 +202,9 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// No link text, e.g. [http://domain.tld/some.link]
 			if (text_missing) {
 				// Autonumber; EX: "[123]"
-				tmp.Add_byte(Byte_ascii.Brack_bgn);
+				tmp.Add_byte(AsciiByte.BrackBgn);
 				tmp.Add_int_variable(autonumber++);	// TODO.XO:$langObj->formatNum( ++$this->mAutonumber );
-				tmp.Add_byte(Byte_ascii.Brack_end);
+				tmp.Add_byte(AsciiByte.BrackEnd);
 				link_type = Link_type__autonumber;
 			}
 			else {
@@ -210,7 +226,7 @@ public class Xomw_lnke_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// This means that users can paste URLs directly into the text
 			// Funny characters like � aren't valid in URLs anyway
 			// This was changed in August 2004
-			linker.makeExternalLink(bfr, url, Bry_.Mid(src, text_bgn, text_end), Bool_.N, link_type, parser.getExternalLinkAttribs(attribs), Bry_.Empty);
+			linker.makeExternalLink(bfr, url, Bry_.Mid(src, text_bgn, text_end), BoolUtl.N, link_type, parser.getExternalLinkAttribs(attribs), Bry_.Empty);
 
 			// XO.MW.UNSUPPORTED.HOOK: registers link for processing by other extensions?
 			// Register link in the output Object.

@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls.tidy; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
-import org.junit.*;
+package gplx.xowa.htmls.core.htmls.tidy;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Xow_tidy_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Xoh_tidy_mgr_fxt fxt = new Xoh_tidy_mgr_fxt();
 	@Test  public void Wrap() {
@@ -39,7 +44,7 @@ public class Xow_tidy_mgr_tst {
 		+   "<body><b>a</b>"
 		+   "</body>"
 		+ "</html>"
-		, Bool_.Y, "<b>a</b>"
+		, BoolUtl.Y, "<b>a</b>"
 		);
 	}
 	@Test  public void Unwrap_fail_bgn() {
@@ -52,7 +57,7 @@ public class Xow_tidy_mgr_tst {
 		+   "<bodyx><b>a</b>"
 		+   "</body>"
 		+ "</html>"
-		, Bool_.N, ""
+		, BoolUtl.N, ""
 		);
 	}
 	@Test  public void Unwrap_fail_end() {
@@ -65,7 +70,7 @@ public class Xow_tidy_mgr_tst {
 		+   "<body><b>a</b>"
 		+   "</bodyx>"
 		+ "</html>"
-		, Bool_.N, ""
+		, BoolUtl.N, ""
 		);
 	}
 }

@@ -154,7 +154,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		public Xohz_style_itm[] Atrs() {if (atr_ary_is_dirty) atr_ary = (Xohz_style_itm[])atr_list.To_ary(typeof(Xohz_style_itm)); return atr_ary;} private Xohz_style_itm[] atr_ary; private boolean atr_ary_is_dirty = false;
 //		private void Add(byte[] text) {
 //			if (atr_list == null) atr_list = List_adp_.New();
-//			atr_list.Add(new Xohz_style_itm(atr_list.Count(), text, Bool_.Y, Bool_.Y));
+//			atr_list.Add(new Xohz_style_itm(atr_list.Count(), text, BoolUtl.Y, BoolUtl.Y));
 //		}
 //	}
 //	class Xohz_style_itm {
@@ -170,7 +170,7 @@ import gplx.xowa.htmls.core.hzips.*;
 //		private void Itms__add(byte[] key) {
 //			if (list == null) list = List_adp_.New();
 //			ary_is_dirty = true;
-//			list.Add(new Xohz_style_val(list.Count(), key, Bool_.Y));
+//			list.Add(new Xohz_style_val(list.Count(), key, BoolUtl.Y));
 //		}
 //		public void Write(Bry_bfr bfr, byte[] key) {
 //			Gfo_hzip_int_.Encode(1, bfr, 1);

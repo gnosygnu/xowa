@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
@@ -133,7 +133,7 @@ public class Wdata_wiki_mgr implements Gfo_evt_itm, Gfo_invk {
 	public void Resolve_claim(Bry_bfr rv, Xow_domain_itm domain, Wbase_claim_base claim_itm) {
 		synchronized (thread_lock) {	// LOCK:must synchronized b/c prop_val_visitor has member bfr which can get overwritten; DATE:2016-07-06
 			if (hwtr_mgr == null) Hwtr_mgr_assert();
-			prop_val_visitor.Init(rv, hwtr_mgr.Msgs(), domain.Lang_orig_key(), Bool_.N);
+			prop_val_visitor.Init(rv, hwtr_mgr.Msgs(), domain.Lang_orig_key(), BoolUtl.N);
 			claim_itm.Welcome(prop_val_visitor);
 		}
 	}

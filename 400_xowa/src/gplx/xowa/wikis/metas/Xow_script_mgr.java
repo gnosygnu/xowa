@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis.metas; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xow_script_mgr implements Gfo_invk {
@@ -36,7 +38,7 @@ public class Xow_script_mgr implements Gfo_invk {
 		bfr.Mkr_rls();
 	}
 	public void Set(byte[] key, byte[] wiki_types_raw, byte[] script) {
-		byte[][] wiki_tid_names = Bry_split_.Split(wiki_types_raw, Byte_ascii.Tilde);
+		byte[][] wiki_tid_names = Bry_split_.Split(wiki_types_raw, AsciiByte.Tilde);
 		int len = wiki_tid_names.length;
 		int[] wiki_tids = new int[len];
 		for (int i = 0; i < len; i++)

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 class Pft_fmt_itm_hebrew_ {
 	public static int Calc_hebrew_year_num_start(int year) {
 		int year_minus_1 = year - 1;
@@ -211,7 +213,7 @@ class Pft_fmt_itm_hebrew_ {
 				} else {
 					tmp = Bry_.Add(tmp, Numeral_tbls[i][(int)(num / pow10)]);
 					if (pow10 == 1000)
-						tmp = Bry_.Add(tmp, Byte_ascii.Apos_bry);
+						tmp = Bry_.Add(tmp, AsciiByte.AposBry);
 				}
 			}
 			num = num % pow10;
@@ -219,10 +221,10 @@ class Pft_fmt_itm_hebrew_ {
 		byte[] rv = Bry_.Empty;
 		int tmp_len = tmp.length;
 		if (tmp_len == 2) {
-			rv = Bry_.Add(tmp, Byte_ascii.Apos_bry);
+			rv = Bry_.Add(tmp, AsciiByte.AposBry);
 		}
 		else {
-			rv  = Bry_.Add(Bry_.Mid(tmp, 0, tmp_len - 2), Byte_ascii.Quote_bry);
+			rv  = Bry_.Add(Bry_.Mid(tmp, 0, tmp_len - 2), AsciiByte.QuoteBry);
 			rv  = Bry_.Add(rv, Bry_.Mid(tmp, tmp_len - 2, tmp_len));
 		}
 		int rv_len = rv.length;

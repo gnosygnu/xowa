@@ -13,11 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.xowa_cmds.wiki_setups; import gplx.*; import gplx.xowa.*;
-import gplx.langs.mustaches.*;
-import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.hosts.*;
-import gplx.xowa.addons.bldrs.centrals.tasks.*;
-import gplx.xowa.parsers.*;
+package gplx.xowa.xtns.xowa_cmds.wiki_setups;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.langs.mustaches.Mustache_bfr;
+import gplx.langs.mustaches.Mustache_render_ctx;
+import gplx.langs.mustaches.Mustache_tkn_itm;
+import gplx.langs.mustaches.Mustache_tkn_parser;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.centrals.dbs.Xobc_data_db;
+import gplx.xowa.addons.bldrs.centrals.dbs.datas.Xobc_task_regy_itm;
+import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.Xobc_import_step_itm;
+import gplx.xowa.addons.bldrs.centrals.hosts.Host_eval_itm;
+import gplx.xowa.addons.bldrs.centrals.tasks.Xobc_task_key;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
 class Xop_wiki_setup_mgr {
 	private final Mustache_tkn_parser parser = new Mustache_tkn_parser();
 	private Xobc_data_db data_db;
@@ -69,7 +88,7 @@ class Xop_wiki_setup_mgr {
 			url_list_bfr.Add_str_u8(src_fil).Add_byte_nl();
 			rv[i] = new Xows_file_itm(row.Step_id, Bry_.new_u8(src_fil));
 		}
-		Array_.Sort(rv, new Xows_file_itm_sorter());
+		ArrayUtl.Sort(rv, new Xows_file_itm_sorter());
 		return rv;
 	}
 }

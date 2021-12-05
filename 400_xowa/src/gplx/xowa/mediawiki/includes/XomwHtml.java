@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import gplx.core.btries.*;
-import gplx.xowa.mediawiki.includes.xohtml.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Hash_adp_bry;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.XophpString_;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_itm;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_mgr;
 /*	TODO.XO:
 	* handle spaceSeparatedListAttributes; EX: "cls=a cls=b" -> "cls='a b'"
 	* self::dropDefaults($element, $attribs)
@@ -268,9 +275,9 @@ public class XomwHtml {
 			attribs.Set(ATR_TYPE, ATR_TYPE_SUBMIT);
 		}
 
-		bfr.Add_byte(Byte_ascii.Angle_bgn).Add(element);
+		bfr.Add_byte(AsciiByte.AngleBgn).Add(element);
 		expandAttributes(bfr, temp, attribs);
-		bfr.Add_byte(Byte_ascii.Angle_end);
+		bfr.Add_byte(AsciiByte.AngleEnd);
 	}
 
 	/**
@@ -283,7 +290,7 @@ public class XomwHtml {
 	private static void closeElementLcased(Bry_bfr bfr, byte[] element) {
 		// $element = strtolower($element); // XO: handled by caller
 
-		bfr.Add(gplx.langs.htmls.Gfh_tag_.Rhs_bgn).Add(element).Add_byte(Byte_ascii.Angle_end); // EX: "</", element, ">";
+		bfr.Add(gplx.langs.htmls.Gfh_tag_.Rhs_bgn).Add(element).Add_byte(AsciiByte.AngleEnd); // EX: "</", element, ">";
 	}
 
 //		/**
@@ -466,7 +473,7 @@ public class XomwHtml {
 
 			// Not technically required in HTML5 but we'd like consistency
 			// and better compression anyway.
-			key = Bry_.Xcase__build__all(temp.bfr, Bool_.N, key);
+			key = Bry_.Xcase__build__all(temp.bfr, BoolUtl.N, key);
 
 			// https://www.w3.org/TR/html401/index/attributes.html ("space-separated")
 			// https://www.w3.org/TR/html5/index.html#attributes-1 ("space-separated")

@@ -13,15 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
-import gplx.core.brys.*;
-import gplx.dbs.*; import gplx.xowa.htmls.core.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
-import gplx.xowa.htmls.hxtns.pages.*; import gplx.xowa.htmls.hxtns.blobs.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.dbs.Db_rdr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.mass_parses.dbs.Xomp_mgr_db;
+import gplx.xowa.addons.bldrs.mass_parses.dbs.Xomp_wkr_db;
+import gplx.xowa.htmls.hxtns.blobs.Hxtn_blob_tbl;
+import gplx.xowa.htmls.hxtns.pages.Hxtn_page_mgr;
+import gplx.xowa.htmls.hxtns.pages.Hxtn_page_tbl;
 class Xomp_make_hxtn {
 	public void Exec(Xowe_wiki wiki, Xomp_make_cmd_cfg cfg) {
 		// create mgr
 		Hxtn_page_mgr page_mgr = new Hxtn_page_mgr();
-		page_mgr.Init_by_wiki(wiki, Bool_.Y);
+		page_mgr.Init_by_wiki(wiki, BoolUtl.Y);
 		Hxtn_page_tbl page_tbl = page_mgr.Page_tbl();
 		Hxtn_blob_tbl blob_tbl = page_mgr.Blob_tbl();
 		page_mgr.Insert_bgn(true);

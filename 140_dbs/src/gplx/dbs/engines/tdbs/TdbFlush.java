@@ -13,12 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.lists.*; /*GfoNde*/ import gplx.dbs.qrys.*;
+package gplx.dbs.engines.tdbs; import gplx.dbs.*; import gplx.dbs.engines.*;
+import gplx.dbs.qrys.*;
+import gplx.objects.arrays.ArrayUtl;
 class TdbFlushWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry_flush cmd = Db_qry_flush.cast(cmdObj);
-		if (Array_.Len(cmd.TableNames()) == 0)
+		if (ArrayUtl.Len(cmd.TableNames()) == 0)
 			engine.FlushAll();
 		else {
 			for (String tblName : cmd.TableNames()) {

@@ -13,11 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
-import gplx.core.net.*;
-import gplx.xowa.htmls.*; import gplx.xowa.guis.history.*;
-import gplx.xowa.apps.*; import gplx.xowa.wikis.*; import gplx.xowa.apps.urls.*;
-import gplx.core.threads.*;
+package gplx.xowa.guis;
+import gplx.Bry_;
+import gplx.core.net.Gfo_url_parser;
+import gplx.core.threads.Gfo_thread_pool;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.apps.Xoav_wiki_mgr;
+import gplx.xowa.guis.history.Xog_history_itm;
+import gplx.xowa.guis.history.Xog_history_stack;
+import gplx.xowa.htmls.Xoh_page;
 public abstract class Xogv_tab_base {
 	private Gfo_url_parser url_parser;
 	private Xoav_wiki_mgr wiki_mgr;
@@ -36,8 +41,8 @@ public abstract class Xogv_tab_base {
 			history_stack.Add(new_itm);
 		return rv;
 	}
-	public Xoh_page Go_bwd() {return Go_by_dir(Bool_.Y);}
-	public Xoh_page Go_fwd() {return Go_by_dir(Bool_.N);}
+	public Xoh_page Go_bwd() {return Go_by_dir(BoolUtl.Y);}
+	public Xoh_page Go_fwd() {return Go_by_dir(BoolUtl.N);}
 	public Xoh_page Reload() {return Fetch_page_and_show(Cur_itm(), Cur_itm());}
 	private Xoh_page Go_by_dir(boolean bwd) {
 		Xog_history_itm old_itm = this.Cur_itm();

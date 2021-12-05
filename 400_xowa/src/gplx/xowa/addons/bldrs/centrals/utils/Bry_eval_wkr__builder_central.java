@@ -13,15 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
-import gplx.core.brys.evals.*;
+package gplx.xowa.addons.bldrs.centrals.utils;
+import gplx.Bry_bfr;
+import gplx.Bry_split_;
+import gplx.Byte_;
+import gplx.Err_;
+import gplx.Hash_adp_bry;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.core.brys.evals.Bry_eval_wkr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Bry_eval_wkr__builder_central implements Bry_eval_wkr {
 	private final byte[] wiki_dir;
 	public Bry_eval_wkr__builder_central(Io_url wiki_dir) {this.wiki_dir = wiki_dir.RawBry();}
 	public String Key() {return "builder_central";}
 	public void Resolve(Bry_bfr rv, byte[] src, int args_bgn, int args_end) {
 		// EX: "~{builder_central|download_fil|en.wikipedia.org|Xowa_enwiki_2016-05_html_ns.000_db.001.zip}" -> "/xowa/wiki/en.wikipedia.org/tmp/bldr/Xowa_enwiki_2016-05_html_ns.000_db.001.zip/download.zip"
-		byte[][] args = Bry_split_.Split(src, args_bgn, args_end, Byte_ascii.Pipe, Bool_.N);
+		byte[][] args = Bry_split_.Split(src, args_bgn, args_end, AsciiByte.Pipe, BoolUtl.N);
 		int type = hash.Get_as_byte_or(args[0], Byte_.Max_value_127);
 		if (type == Byte_.Max_value_127) throw Err_.new_wo_type("unknown eval type", "src", src);
 		byte dir_spr = gplx.core.envs.Op_sys.Cur().Fsys_dir_spr_byte();

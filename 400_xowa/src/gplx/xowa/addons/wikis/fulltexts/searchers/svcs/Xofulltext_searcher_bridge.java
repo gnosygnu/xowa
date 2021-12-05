@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.svcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.svcs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.langs.jsons.*;
 import gplx.xowa.htmls.bridges.*;
 public class Xofulltext_searcher_bridge implements Bridge_cmd_itm {
@@ -22,7 +24,7 @@ public class Xofulltext_searcher_bridge implements Bridge_cmd_itm {
 		this.svc = new Xofulltext_searcher_svc(app);
 	}
 	public String Exec(Json_nde data) {
-		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Bridge_cmd_mgr.Msg__proc, null), Byte_ascii.Max_7_bit);
+		byte proc_id = proc_hash.Get_as_byte_or(data.Get_as_bry_or(Bridge_cmd_mgr.Msg__proc, null), AsciiByte.Max7Bit);
 		Json_nde args = data.Get_kv(Bridge_cmd_mgr.Msg__args).Val_as_nde();
 		switch (proc_id) {
 			case Proc__search_run:				svc.Search_run(args); break;

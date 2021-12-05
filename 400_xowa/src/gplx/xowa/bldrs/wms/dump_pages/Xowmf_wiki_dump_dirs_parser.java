@@ -14,14 +14,15 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.wms.dump_pages; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Xowmf_wiki_dump_dirs_parser {
 	public static String[] Parse(byte[] wiki, byte[] src) {
 		List_adp rv = List_adp_.New();
 		int pos = 0;
 		while (true) {
 			int href_bgn = Bry_find_.Move_fwd(src, Tkn_href		, pos);			if (href_bgn == Bry_find_.Not_found) break;
-			int href_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, href_bgn);	if (href_end == Bry_find_.Not_found) throw Err_.new_wo_type("unable to find date_end", "wiki", wiki, "snip", Bry_.Mid_by_len_safe(src, href_bgn - 3, 25));
-			if (src[href_end - 1] != Byte_ascii.Slash) throw Err_.new_wo_type("href should end in slash", "wiki", wiki, "snip", Bry_.Mid_by_len_safe(src, href_bgn - 3, 25));
+			int href_end = Bry_find_.Find_fwd(src, AsciiByte.Quote, href_bgn);	if (href_end == Bry_find_.Not_found) throw Err_.new_wo_type("unable to find date_end", "wiki", wiki, "snip", Bry_.Mid_by_len_safe(src, href_bgn - 3, 25));
+			if (src[href_end - 1] != AsciiByte.Slash) throw Err_.new_wo_type("href should end in slash", "wiki", wiki, "snip", Bry_.Mid_by_len_safe(src, href_bgn - 3, 25));
 			pos = href_end + 1;
 			byte[] href_bry = Bry_.Mid(src, href_bgn, href_end - 1);
 			if (Bry_.Eq(href_bry, Tkn_owner)) continue;	// ignore <a href="../">

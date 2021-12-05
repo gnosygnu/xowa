@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.xowa_cmds.wiki_setups; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.xowa_cmds.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.xtns.xowa_cmds.wiki_setups; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
+import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xop_wiki_setup_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	private byte[] language;
 	private byte[][] wikis_ary;
@@ -24,7 +25,7 @@ public class Xop_wiki_setup_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, byte xatr_id) {
 		switch (xatr_id) {
 			case Xatr__language:		language		= xatr.Val_as_bry(); break;
-			case Xatr__wikis:			wikis_ary		= Bry_split_.Split(xatr.Val_as_bry(), Byte_ascii.Pipe_bry); break;
+			case Xatr__wikis:			wikis_ary		= Bry_split_.Split(xatr.Val_as_bry(), AsciiByte.PipeBry); break;
 			default:					Gfo_usr_dlg_.Instance.Warn_many("", "", "unhandled xnde atr; key=~{0}", xatr.Key_bry()); break;
 		}
 	}

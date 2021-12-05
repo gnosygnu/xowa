@@ -13,10 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.mgrs.caches; import gplx.*;
-import gplx.xowa.addons.apps.cfgs.*;
-import gplx.dbs.*;
-import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*;
+package gplx.xowa.addons.apps.cfgs.mgrs.caches;
+import gplx.Gfo_invk;
+import gplx.Gfo_usr_dlg_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
+import gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app;
+import gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_usr;
+import gplx.xowa.addons.apps.cfgs.dbs.tbls.Xocfg_itm_row;
+import gplx.xowa.addons.apps.cfgs.dbs.tbls.Xocfg_val_row;
 public class Xocfg_cache_mgr {
 	private final Hash_adp grps = Hash_adp_.New();
 	public Xocfg_cache_mgr() {
@@ -42,8 +52,8 @@ public class Xocfg_cache_mgr {
 		}
 		return grp.Get(ctx);
 	}
-	public void Set(String ctx, String key, String val)				{Set(Bool_.Y, ctx, key, val);}
-	public void Set_wo_save(String ctx, String key, String val)		{Set(Bool_.N, ctx, key, val);}
+	public void Set(String ctx, String key, String val)				{Set(BoolUtl.Y, ctx, key, val);}
+	public void Set_wo_save(String ctx, String key, String val)		{Set(BoolUtl.N, ctx, key, val);}
 	public void Set(boolean save, String ctx, String key, String val) {
 		Xocfg_cache_grp grp = Grps__get_or_load(key);
 		grp.Pub(ctx, val);	// publish first; if fail will throw error

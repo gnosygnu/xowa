@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns.wbases; import gplx.*;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.pfuncs.*;
 public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
@@ -50,7 +53,7 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 				byte[] lang_key = abrv_itm.Lang_actl().Key();
 				if (external_links_mgr_enabled && external_links_mgr.Langs_hide(lang_key, 0, lang_key.length)) continue;
 				tmp_bfr.Add(lang_key);
-				tmp_bfr.Add_byte(Byte_ascii.Colon);
+				tmp_bfr.Add_byte(AsciiByte.Colon);
 				tmp_bfr.Add(slink.Name());
 				Xoa_ttl slink_ttl = Xoa_ttl.Parse(wiki, tmp_bfr.To_bry_and_clear());
 				if (slink_ttl == null) continue;								// invalid ttl
@@ -69,7 +72,7 @@ public class Wdata_xwiki_link_wtr implements gplx.core.brys.Bfr_arg {
 	}
 	public static final byte[] Qid_null = Bry_.Empty;	// NOTE: return Empty, not null else Bry_fmtr will fail
 }
-class Xoa_ttl_sorter implements gplx.core.lists.ComparerAble {
+class Xoa_ttl_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoa_ttl lhs = (Xoa_ttl)lhsObj, rhs = (Xoa_ttl)rhsObj;
 		return Bry_.Compare(lhs.Raw(), rhs.Raw());

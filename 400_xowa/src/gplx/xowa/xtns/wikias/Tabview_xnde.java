@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wikias; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.wikias; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
@@ -78,8 +80,8 @@ public class Tabview_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 		Bry_bfr bfr = null;
 		for (int i = 0; i < src_len; ++i) {
 			byte b = src[i];
-			if (	Byte_ascii.Is_ltr(b)
-				||	Byte_ascii.Is_num(b)) {
+			if (	AsciiByte.IsLtr(b)
+				||	AsciiByte.IsNum(b)) {
 				if (bfr != null) bfr.Add_byte(b);
 			}
 			else {	// not alphanum;
@@ -107,7 +109,7 @@ class Tabview_tab_itm {
 	public final byte[] Page_body;
 
 	public static Tabview_tab_itm Parse(Xowe_wiki wiki, Xop_ctx ctx, byte[] src) {
-		byte[][] args_ary = Bry_split_.Split(src, Byte_ascii.Pipe);
+		byte[][] args_ary = Bry_split_.Split(src, AsciiByte.Pipe);
 		int args_len = args_ary.length;
 		
 		boolean cache = false, active = false;
@@ -117,7 +119,7 @@ class Tabview_tab_itm {
 			switch (i) {
 				case 0:
 					page_ttl_bry = args_itm;
-					if (Bry_.Has_at_bgn(page_ttl_bry, Byte_ascii.Angle_bgn) || Bry_.Has_at_end(page_ttl_bry, Byte_ascii.Angle_end)) return null;
+					if (Bry_.Has_at_bgn(page_ttl_bry, AsciiByte.AngleBgn) || Bry_.Has_at_end(page_ttl_bry, AsciiByte.AngleEnd)) return null;
 					Xoa_ttl page_ttl = wiki.Ttl_parse(page_ttl_bry);
 					if (page_ttl == null) return null;
 					gplx.xowa.wikis.caches.Xow_page_cache_itm page_itm = wiki.Cache_mgr().Page_cache().Get_itm_else_load_or_null(page_ttl);
@@ -127,7 +129,7 @@ class Tabview_tab_itm {
 					break;
 				case 1:
 					tab_name = args_itm;
-					if (Bry_.Has_at_bgn(tab_name, Byte_ascii.Angle_bgn) || Bry_.Has_at_end(tab_name, Byte_ascii.Angle_end)) return null;
+					if (Bry_.Has_at_bgn(tab_name, AsciiByte.AngleBgn) || Bry_.Has_at_end(tab_name, AsciiByte.AngleEnd)) return null;
 					break;
 				case 2:
 					cache = Bry_.To_bool_or(args_itm, false);

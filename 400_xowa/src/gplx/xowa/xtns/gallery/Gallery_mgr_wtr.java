@@ -13,11 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.files.*;
+package gplx.xowa.xtns.gallery;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.List_adp;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.langs.htmls.Gfh_wtr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.files.Xof_html_elem;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr_escaper;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.xndes.Xop_xatr_whitelist_mgr;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
 public class Gallery_mgr_wtr {
 	public static void Write_mgr(Bry_bfr bfr, Gallery_mgr_base mgr, Xowe_wiki wiki, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Gallery_xnde xnde) {
 		// init
@@ -80,7 +101,7 @@ public class Gallery_mgr_wtr {
 
 		// get file_found
 		boolean file_found = xfer_itm.File_exists();
-		if (File_found_mode != Bool_.__byte) file_found = File_found_mode == Bool_.Y_byte;	// TEST: override File_found
+		if (File_found_mode != BoolUtl.NullByte) file_found = File_found_mode == BoolUtl.YByte;	// TEST: override File_found
 
 		// make itm_html; 1st clause is for "missing" itms; 2nd clause is for "found" itms
 		byte[] itm_html = Bry_.Empty;
@@ -152,7 +173,7 @@ public class Gallery_mgr_wtr {
 		bfr.Add(itm_li_end_bry);
 	}
 
-	public static byte File_found_mode = Bool_.__byte;
+	public static byte File_found_mode = BoolUtl.NullByte;
 	private static byte[] Fmt_and_add(Bry_bfr tmp_bfr, Bry_fmtr fmtr, byte[] trailer, Object... fmtr_args) {
 		fmtr.Bld_bfr_many(tmp_bfr, fmtr_args);
 		if (Bry_.Len_gt_0(trailer)) {
@@ -162,7 +183,7 @@ public class Gallery_mgr_wtr {
 		return tmp_bfr.To_bry_and_clear();
 	}
 	private static void Write_ul_lhs(Bry_bfr bfr, Bry_bfr tmp_bfr, boolean hctx_is_hdump, Xop_xatr_whitelist_mgr whitelist_mgr, byte[] src, Gallery_xnde xnde, byte[] ul_id, byte[] ul_cls, byte[] ul_style, List_adp xatr_list) {
-		bfr.Add_byte(Byte_ascii.Lt).Add(Gfh_tag_.Bry__ul);
+		bfr.Add_byte(AsciiByte.Lt).Add(Gfh_tag_.Bry__ul);
 		if (hctx_is_hdump) {	// if hdump, write extra data;
 			tmp_bfr.Add_int_variable(xnde.Itm_w_orig()).Add_byte_pipe();
 			tmp_bfr.Add_int_variable(xnde.Itm_h_orig()).Add_byte_pipe();
@@ -183,7 +204,7 @@ public class Gallery_mgr_wtr {
 				Gfh_wtr.Write_atr_bry(bfr, key, val);
 			}
 		}
-		bfr.Add_byte(Byte_ascii.Gt);
+		bfr.Add_byte(AsciiByte.Gt);
 	}
 	private static final byte[]
 	  itm_li_end_bry	= Bry_.new_a7		  ( "\n    </div>"

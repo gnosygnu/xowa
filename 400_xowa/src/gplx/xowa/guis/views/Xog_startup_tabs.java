@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.guis.views; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.xowa.*;
 import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.updates.specials.*;
 public class Xog_startup_tabs {
 	private String type, custom_list, prev_list, prev_version, curr_version;
@@ -46,7 +48,7 @@ public class Xog_startup_tabs {
 			list.Add(Manual);
 
 		// if new version, add home/wiki/Main_Page
-		if (gplx.xowa.apps.versions.Xoa_version_.Compare(prev_version, curr_version) == CompareAble_.Less) {
+		if (gplx.xowa.apps.versions.Xoa_version_.Compare(prev_version, curr_version) == CompareAbleUtl.Less) {
 			startup_idx = Add_if_absent(list, Url__home_main);
 		}
 

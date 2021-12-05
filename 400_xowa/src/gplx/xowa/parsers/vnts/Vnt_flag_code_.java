@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.vnts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Vnt_flag_code_ {
 	public static final int
 	  Tid_add			=  0	// +:						EX: -{+|zh-hans:A;zh-hant:B}-	-> "A"
@@ -34,15 +35,15 @@ class Vnt_flag_code_ {
 	};
 	public static String To_str(int tid) {return Tid__names[tid];}
 	public static final Hash_adp_bry Regy = Hash_adp_bry.ci_a7()	// NOTE: match either lc or uc; EX: -{D}- or -{d}-;
-	.Add_byte_int(Byte_ascii.Plus			, Tid_add)
-	.Add_byte_int(Byte_ascii.Dash			, Tid_del)
-	.Add_byte_int(Byte_ascii.Ltr_A			, Tid_aout)
-	.Add_byte_int(Byte_ascii.Ltr_H			, Tid_hide)
-	.Add_byte_int(Byte_ascii.Ltr_R			, Tid_raw)
-	.Add_byte_int(Byte_ascii.Ltr_S			, Tid_show)
-	.Add_byte_int(Byte_ascii.Ltr_D			, Tid_descrip)
-	.Add_byte_int(Byte_ascii.Ltr_N			, Tid_name)
-	.Add_byte_int(Byte_ascii.Ltr_T			, Tid_title)
-	.Add_byte_int(Byte_ascii.Ltr_E			, Tid_err)
+	.Add_byte_int(AsciiByte.Plus			, Tid_add)
+	.Add_byte_int(AsciiByte.Dash			, Tid_del)
+	.Add_byte_int(AsciiByte.Ltr_A			, Tid_aout)
+	.Add_byte_int(AsciiByte.Ltr_H			, Tid_hide)
+	.Add_byte_int(AsciiByte.Ltr_R			, Tid_raw)
+	.Add_byte_int(AsciiByte.Ltr_S			, Tid_show)
+	.Add_byte_int(AsciiByte.Ltr_D			, Tid_descrip)
+	.Add_byte_int(AsciiByte.Ltr_N			, Tid_name)
+	.Add_byte_int(AsciiByte.Ltr_T			, Tid_title)
+	.Add_byte_int(AsciiByte.Ltr_E			, Tid_err)
 	;
 }

@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.xowa_cmds; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*; import gplx.xowa.wikis.pages.htmls.*;
+import gplx.xowa.wikis.pages.tags.*; import gplx.xowa.wikis.pages.htmls.*;
 public class Xox_xowa_html_cmd implements Xox_xnde, Mwh_atr_itm_owner2 {
 	private byte tag_pos = Xo_custom_html_pos_.Tid__head_end, tag_type = Xo_custom_html_type_.Tid__css_code;
 	public void Xatr__set(Xowe_wiki wiki, byte[] src, Mwh_atr_itm xatr, byte xatr_id) {
@@ -38,8 +40,8 @@ public class Xox_xowa_html_cmd implements Xox_xnde, Mwh_atr_itm_owner2 {
 		int raw_bgn = xnde.Tag_open_end(), raw_end = xnde.Tag_close_bgn();
 		raw_bgn = Bry_find_.Find_fwd_while_ws(src, raw_bgn, raw_end);
 		raw_end = Bry_find_.Find_bwd__skip_ws(src, raw_end, raw_bgn);
-		if (src[raw_bgn] == Byte_ascii.Nl) ++raw_bgn;
-		if (src[raw_bgn] == Byte_ascii.Nl) ++raw_bgn;
+		if (src[raw_bgn] == AsciiByte.Nl) ++raw_bgn;
+		if (src[raw_bgn] == AsciiByte.Nl) ++raw_bgn;
 		byte[] raw = Bry_.Mid(src, raw_bgn, raw_end);
 		
 		// add to custom tags

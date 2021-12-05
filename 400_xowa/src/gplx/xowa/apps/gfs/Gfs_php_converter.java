@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.gfs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.gfs; import gplx.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.phps.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfs_php_converter {
 public static byte[] Xto_php(Bry_bfr bfr, boolean escape_backslash, byte[] src) {
 		int len = src.length;
@@ -24,21 +25,21 @@ public static byte[] Xto_php(Bry_bfr bfr, boolean escape_backslash, byte[] src) 
 		while (pos < len) {
 			byte b = src[pos];
 			switch (b) {
-				case Byte_ascii.Tilde:
+				case AsciiByte.Tilde:
 					if (!dirty) {
 						bfr.Add_mid(src, 0, pos);
 						dirty = true;
 					}
 					pos = Xto_php_swap(bfr, src, len, pos + 1);
 					break;
-				case Byte_ascii.Backslash: case Byte_ascii.Dollar:
-				case Byte_ascii.Apos: case Byte_ascii.Quote:
+				case AsciiByte.Backslash: case AsciiByte.Dollar:
+				case AsciiByte.Apos: case AsciiByte.Quote:
 					if (escape_backslash) {
 						if (!dirty) {
 							bfr.Add_mid(src, 0, pos);
 							dirty = true;
 						}
-						bfr.Add_byte(Byte_ascii.Backslash);
+						bfr.Add_byte(AsciiByte.Backslash);
 						bfr.Add_byte(b);
 					}
 					else {
@@ -60,19 +61,19 @@ public static byte[] Xto_php(Bry_bfr bfr, boolean escape_backslash, byte[] src) 
 		if (pos >= len) throw Err_.new_wo_type("invalid gfs: tilde is last char", "src", String_.new_u8(src));
 		byte b = src[pos];
 		switch (b) {
-			case Byte_ascii.Tilde: {	// ~~ -> ~
-				bfr.Add_byte(Byte_ascii.Tilde);
+			case AsciiByte.Tilde: {	// ~~ -> ~
+				bfr.Add_byte(AsciiByte.Tilde);
 				return pos + 1;
 			}
-			case Byte_ascii.Curly_bgn: {
+			case AsciiByte.CurlyBgn: {
 				int num_bgn = pos + 1;
 				int num_end = Bry_find_.Find_fwd_while_num(src, num_bgn, len);	// +1 to position after {
 				if (   num_end == Bry_find_.Not_found
 					|| num_end == len
-					|| src[num_end] != Byte_ascii.Curly_end
+					|| src[num_end] != AsciiByte.CurlyEnd
 					)
 					throw Err_.new_wo_type("invalid gfs; num_end not found", "src", String_.new_u8(src));
-				bfr.Add_byte(Byte_ascii.Dollar);
+				bfr.Add_byte(AsciiByte.Dollar);
 				int arg_idx = Bry_.To_int_or(src, num_bgn, num_end, -1);
 				if (arg_idx == -1) {
 					throw Err_.new_wo_type("invalid int");
@@ -90,39 +91,39 @@ public static byte[] Xto_php(Bry_bfr bfr, boolean escape_backslash, byte[] src) 
 		for (int i = 0; i < raw_len; ++i) {
 			byte b = raw[i];
 			switch (b) {
-				case Byte_ascii.Backslash:	// unescape; EX: '\"' -> '"'
+				case AsciiByte.Backslash:	// unescape; EX: '\"' -> '"'
 					++i;
 					if (i < raw_len){
 						byte escape_byte = raw[i];
 						switch (escape_byte) {	// REF: http://php.net/manual/en/language.types.String.php
-							case Byte_ascii.Ltr_t:	escape_byte = Byte_ascii.Tab; break;
-							case Byte_ascii.Ltr_n:	escape_byte = Byte_ascii.Nl; break;
-							case Byte_ascii.Ltr_r:	escape_byte = Byte_ascii.Cr; break;
-							case Byte_ascii.Ltr_v:	escape_byte = 11; break;	// 11=vertical tab
-							case Byte_ascii.Ltr_e:	escape_byte = 27; break;	// 27=escape
-							case Byte_ascii.Ltr_f:	escape_byte = 12; break;	// 12=form fed
-							case Byte_ascii.Backslash:
-							case Byte_ascii.Quote:
-							case Byte_ascii.Apos:
-							case Byte_ascii.Dollar:	break;
+							case AsciiByte.Ltr_t:	escape_byte = AsciiByte.Tab; break;
+							case AsciiByte.Ltr_n:	escape_byte = AsciiByte.Nl; break;
+							case AsciiByte.Ltr_r:	escape_byte = AsciiByte.Cr; break;
+							case AsciiByte.Ltr_v:	escape_byte = 11; break;	// 11=vertical tab
+							case AsciiByte.Ltr_e:	escape_byte = 27; break;	// 27=escape
+							case AsciiByte.Ltr_f:	escape_byte = 12; break;	// 12=form fed
+							case AsciiByte.Backslash:
+							case AsciiByte.Quote:
+							case AsciiByte.Apos:
+							case AsciiByte.Dollar:	break;
 							// FUTURE:
 							// //\[0-7]{1,3} 	the sequence of characters matching the regular expression is a character in octal notation, which silently overflows to fit in a byte (e.g. "\400" === "\000")
 							// \ x[0-9A-Fa-f]{1,2} 	the sequence of characters matching the regular expression is a character in hexadecimal notation
 							// \ u{[0-9A-Fa-f]+} 	the sequence of characters matching the regular expression is a Unicode codepoint, which will be output to the String as that codepoint's UTF-8 representation (added in PHP 7.0.0) 
 							default:	// all else seems to be rendered literally; EX:"You do not need to put \ before a /."; PAGE:en.w:MediaWiki:Spam-whitelist; DATE:2016-09-12
-								bfr.Add_byte(Byte_ascii.Backslash);
+								bfr.Add_byte(AsciiByte.Backslash);
 								bfr.Add_byte(escape_byte);
 								continue;
 						}
 						bfr.Add_byte(escape_byte);
 					}
 					else	// if eos, just output "\"; don't fail; EX: "a\" -> "a\"
-						bfr.Add_byte(Byte_ascii.Backslash);
+						bfr.Add_byte(AsciiByte.Backslash);
 					break;
-				case Byte_ascii.Tilde:		// double up tilde; EX: '~' -> '~~'
+				case AsciiByte.Tilde:		// double up tilde; EX: '~' -> '~~'
 					bfr.Add_byte_repeat(Bry_fmtr.char_escape, 2);	// escape tilde; EX: ~u -> ~~u; DATE:2013-11-11
 					break;
-				case Byte_ascii.Dollar:			// convert php args to gfs args; EX: $1 -> ~{0}
+				case AsciiByte.Dollar:			// convert php args to gfs args; EX: $1 -> ~{0}
 					int int_bgn = i + 1;
 					int int_end = Php_text_itm_parser.Find_fwd_non_int(raw, int_bgn, raw_len);
 					if (int_bgn == int_end )	// no numbers after $; EX: "$ "; "$a"

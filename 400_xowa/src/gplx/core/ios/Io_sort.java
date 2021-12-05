@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*;
 import gplx.core.envs.*;
-import gplx.core.lists.*;
+import gplx.objects.lists.ComparerAble;
 public class Io_sort {
 	public Io_sort Memory_max_(int v) {memory_max = v; return this;} private int memory_max = Io_mgr.Len_kb;
 	public Io_url[] Split(Gfo_usr_dlg usr_dlg, Io_url_gen src_fil_gen, Io_url_gen trg_fil_gen, Io_line_rdr_key_gen key_gen) {return Split(usr_dlg, src_fil_gen, trg_fil_gen, Io_sort_split_itm_sorter.Instance, key_gen);}
@@ -45,7 +45,7 @@ public class Io_sort {
 		return (Io_url[])rv.ToAry(Io_url.class);
 	}
 	public void Merge(Gfo_usr_dlg usr_dlg, Io_url[] src_ary, ComparerAble comparer, Io_line_rdr_key_gen key_gen, Io_sort_cmd cmd) {
-		BinaryHeap_Io_line_rdr heap = load_(usr_dlg, src_ary, comparer, key_gen, memory_max); if (heap.Len() == 0) return;//throw Err_.new_wo_type(Array_.To_str(src_ary));
+		BinaryHeap_Io_line_rdr heap = load_(usr_dlg, src_ary, comparer, key_gen, memory_max); if (heap.Len() == 0) return;//throw Err_.new_wo_type(ArrayUtl.To_str(src_ary));
 		Io_line_rdr stream = null;
 		cmd.Sort_bgn();
 		while (true) {

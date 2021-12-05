@@ -13,26 +13,92 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
-import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.ios.*;
-import gplx.xowa.apps.*;
-import gplx.xowa.apps.cfgs.*; import gplx.xowa.apps.urls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.cases.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*;
-import gplx.xowa.wikis.data.*;
-import gplx.xowa.wikis.caches.*; import gplx.xowa.wikis.fsys.*;
-import gplx.xowa.users.*; import gplx.xowa.htmls.*; import gplx.xowa.users.history.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.*; import gplx.xowa.wikis.dbs.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.bins.*; import gplx.fsdb.*; import gplx.fsdb.meta.*;
-import gplx.xowa.htmls.heads.*; import gplx.xowa.htmls.core.htmls.utls.*;
-import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.ns_files.*;
-import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.hxtns.pages.*;
-import gplx.xowa.bldrs.xmls.*;
-import gplx.xowa.bldrs.setups.maints.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.utils.*;
-import gplx.xowa.guis.cbks.*;
-import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*;
-import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
+package gplx.xowa;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_itm;
+import gplx.Gfo_evt_mgr;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_log_bfr;
+import gplx.Gfo_usr_dlg_;
+import gplx.GfsCtx;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Rls_able;
+import gplx.core.brys.Bry_bfr_mkr;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.ios.Io_stream_zip_mgr;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.fsdb.Fsdb_db_mgr;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.addons.Xoax_addon_mgr;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.Xoctg_catpage_mgr;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_wtr;
+import gplx.xowa.addons.wikis.htmls.css.mgrs.Xowd_css_core_mgr;
+import gplx.xowa.apps.Xoa_stage_;
+import gplx.xowa.apps.cfgs.Xowc_parser;
+import gplx.xowa.apps.urls.Xow_url_parser;
+import gplx.xowa.bldrs.setups.maints.Xow_maint_mgr;
+import gplx.xowa.bldrs.xmls.Xob_import_cfg;
+import gplx.xowa.files.Xof_fsdb_mode;
+import gplx.xowa.files.Xow_file_mgr;
+import gplx.xowa.files.bins.Xof_bin_mgr;
+import gplx.xowa.files.origs.Xof_orig_mgr;
+import gplx.xowa.files.repos.Xow_repo_mgr;
+import gplx.xowa.files.repos.Xow_repo_mgr_;
+import gplx.xowa.guis.cbks.Xog_cbk_mgr;
+import gplx.xowa.htmls.Xoh_page_wtr_mgr;
+import gplx.xowa.htmls.Xow_html_mgr;
+import gplx.xowa.htmls.core.Xow_hdump_mgr;
+import gplx.xowa.htmls.core.htmls.utls.Xoh_lnki_bldr;
+import gplx.xowa.htmls.heads.Xow_fragment_mgr;
+import gplx.xowa.htmls.hrefs.Xoh_href_wtr;
+import gplx.xowa.htmls.hxtns.pages.Hxtn_page_mgr;
+import gplx.xowa.htmls.ns_files.Xoh_file_page_wtr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_itm_;
+import gplx.xowa.langs.cases.Xol_case_mgr;
+import gplx.xowa.langs.msgs.Xow_msg_mgr;
+import gplx.xowa.parsers.Xow_mw_parser_mgr;
+import gplx.xowa.parsers.Xow_parser_mgr;
+import gplx.xowa.parsers.utils.Xop_redirect_mgr;
+import gplx.xowa.parsers.utils.Xop_sanitizer;
+import gplx.xowa.specials.Xow_special_mgr;
+import gplx.xowa.users.Xoue_user;
+import gplx.xowa.users.history.Xou_history_cfg;
+import gplx.xowa.wikis.caches.Xow_cache_mgr;
+import gplx.xowa.wikis.data.Xow_db_file__core_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.site_stats.Xowd_site_stats_mgr;
+import gplx.xowa.wikis.dbs.Xodb_mgr;
+import gplx.xowa.wikis.dbs.Xodb_mgr_sql;
+import gplx.xowa.wikis.dbs.Xodb_mgr_txt;
+import gplx.xowa.wikis.domains.Xow_abrv_wm_;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.fsys.Xow_fsys_mgr;
+import gplx.xowa.wikis.metas.Bfmtr_eval_wiki;
+import gplx.xowa.wikis.metas.Xow_html_util;
+import gplx.xowa.wikis.metas.Xow_sys_cfg;
+import gplx.xowa.wikis.metas.Xow_user;
+import gplx.xowa.wikis.metas.Xow_wiki_props;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.wikis.nss.Xow_ns_mgr_;
+import gplx.xowa.wikis.pages.Xow_page_mgr;
+import gplx.xowa.wikis.pages.Xowe_page_mgr;
+import gplx.xowa.wikis.tdbs.Xotdb_fsys_mgr;
+import gplx.xowa.wikis.tdbs.hives.Xob_hive_mgr;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_mgr;
+import gplx.xowa.xtns.Xow_xtn_mgr;
+import gplx.xowa.xtns.pfuncs.Pf_func_;
 public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	private boolean init_in_process = false;
 	public Xowe_wiki(Xoae_app app, Xol_lang_itm lang, Xow_ns_mgr ns_mgr, Xow_domain_itm domain_itm, Io_url wiki_dir) {
@@ -94,7 +160,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xoa_ttl					Ttl_parse(byte[] ttl)								{return Xoa_ttl.Parse(this, ttl);}
 	public Xoa_ttl					Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.Parse(this, src, src_bgn, src_end);}
 	public Xoa_ttl					Ttl_parse(int ns_id, byte[] ttl)					{return Xoa_ttl.Parse(this, ns_id, ttl);}
-	public boolean						Type_is_edit() {return Bool_.Y;}
+	public boolean						Type_is_edit() {return BoolUtl.Y;}
 	public Xoa_app					App() {return app;}
 	public Xol_lang_itm				Lang() {return lang;} private Xol_lang_itm lang;
 	public Xol_case_mgr				Case_mgr() {return lang.Case_mgr();}
@@ -111,7 +177,7 @@ public class Xowe_wiki implements Xow_wiki, Gfo_invk, Gfo_evt_itm {
 	public Xof_orig_mgr				File__orig_mgr() {return file_mgr.Orig_mgr();}
 	public Xof_bin_mgr				File__bin_mgr() {return file_mgr.Fsdb_mgr().Bin_mgr();}
 	public Fsm_mnt_mgr				File__mnt_mgr() {return file_mgr.Fsdb_mgr().Mnt_mgr();}
-	public boolean						Html__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = Bool_.N;
+	public boolean						Html__hdump_enabled() {return html_mgr__hdump_enabled;}	private boolean html_mgr__hdump_enabled = BoolUtl.N;
 	public Xoh_page_wtr_mgr			Html__wtr_mgr() {return html_mgr.Page_wtr_mgr();}
 	public Xoh_lnki_bldr			Html__lnki_bldr() {return lnki_bldr;}  private final Xoh_lnki_bldr lnki_bldr;
 	public Xoh_href_wtr				Html__href_wtr() {return href_wtr;} private final Xoh_href_wtr href_wtr = new Xoh_href_wtr();

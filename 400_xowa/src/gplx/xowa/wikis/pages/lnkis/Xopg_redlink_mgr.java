@@ -13,10 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.lnkis; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.guis.cbks.js.*;
-import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.langs.vnts.*;
+package gplx.xowa.wikis.pages.lnkis;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg_;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_page;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.guis.cbks.js.Js_img_mgr;
+import gplx.xowa.guis.cbks.js.Xog_js_wkr;
+import gplx.xowa.langs.vnts.Xol_vnt_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
 public class Xopg_redlink_mgr implements Gfo_invk {
 	private final Xoa_page page; private final Xog_js_wkr js_wkr;
 	public Xopg_redlink_mgr(Xoa_page page, Xog_js_wkr js_wkr) {this.page = page; this.js_wkr = js_wkr;	}
@@ -44,8 +60,8 @@ public class Xopg_redlink_mgr implements Gfo_invk {
 		for (int i = 0; i < page_len; i += Batch_size) {
 			if (usr_dlg.Canceled()) return;
 			int end = i + Batch_size; if (end > page_len) end = page_len;
-			wiki.Data__core_mgr().Tbl__page().Select_in__ns_ttl(usr_dlg, lnki_hash, wiki.Ns_mgr(), Bool_.Y, i, end);
-			// wiki.Db_mgr().Load_mgr().Load_by_ttls(usr_dlg, lnki_hash, Bool_.Y, i, end);
+			wiki.Data__core_mgr().Tbl__page().Select_in__ns_ttl(usr_dlg, lnki_hash, wiki.Ns_mgr(), BoolUtl.Y, i, end);
+			// wiki.Db_mgr().Load_mgr().Load_by_ttls(usr_dlg, lnki_hash, BoolUtl.Y, i, end);
 		}
 
 		// cross-check page_rows against lnki_list; redlink if missing;

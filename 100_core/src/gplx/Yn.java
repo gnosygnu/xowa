@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 import gplx.core.stores.*;
+import gplx.objects.primitives.BoolUtl;
 public class Yn {
 	public static final String Y = "y", N = "n";
 	public static boolean parse_by_char_or(String v, boolean or) {
@@ -24,31 +25,31 @@ public class Yn {
 	}
 	public static boolean parse_or_n_(String v) {return parse_or(v, false);}
 	public static int parse_as_int(String v) {
-		if		(v == null)				return Bool_.__int;
-		else if (String_.Eq(v, "y"))	return Bool_.Y_int;
-		else if (String_.Eq(v, "n"))	return Bool_.N_int;
-		else							return Bool_.__int;
+		if		(v == null)				return BoolUtl.NullInt;
+		else if (String_.Eq(v, "y"))	return BoolUtl.YInt;
+		else if (String_.Eq(v, "n"))	return BoolUtl.NInt;
+		else							return BoolUtl.NullInt;
 	}
 	public static boolean parse_or(String v, boolean or) {
 		int v_int = parse_as_int(v);
 		switch (v_int) {
-			case Bool_.N_int: return false;
-			case Bool_.Y_int: return true;
-			case Bool_.__int: return or;
+			case BoolUtl.NInt: return false;
+			case BoolUtl.YInt: return true;
+			case BoolUtl.NullInt: return or;
 			default: throw Err_.new_unhandled(v_int);
 		}
 	}
 	public static boolean parse(String v) {
 		int v_int = parse_as_int(v);
-		if (v_int == Bool_.__int) Err_.new_unhandled(v);
-		return v_int == Bool_.Y_int;
+		if (v_int == BoolUtl.NullInt) Err_.new_unhandled(v);
+		return v_int == BoolUtl.YInt;
 	}
 	public static String To_str(boolean v) {return v ? "y" : "n";}
 	public static String To_nullable_str(byte v) {
 		switch (v) {
-			case Bool_.Y_byte:		return "y";
-			case Bool_.N_byte:		return "n";
-			case Bool_.__byte:		return "?";
+			case BoolUtl.YByte:		return "y";
+			case BoolUtl.NByte:		return "n";
+			case BoolUtl.NullByte:		return "?";
 			default:				throw Err_.new_unhandled(v);
 		}
 	}
@@ -56,9 +57,9 @@ public class Yn {
 		if (v != null && String_.Len(v) == 1) {
 			char c = String_.CharAt(v, 0);
 			switch (c) {
-				case 'y':			return Bool_.Y_byte;
-				case 'n':			return Bool_.N_byte;
-				case '?':			return Bool_.__byte;
+				case 'y':			return BoolUtl.YByte;
+				case 'n':			return BoolUtl.NByte;
+				case '?':			return BoolUtl.NullByte;
 			}
 		}
 		throw Err_.new_unhandled(v);
@@ -67,7 +68,7 @@ public class Yn {
 		String v = mgr.SrlStrOr(key, "");
 		return mgr.Type_rdr() ? parse_or(v, or) : or;
 	}
-	public static boolean coerce_(Object o) {String s = String_.as_(o); return s != null ? parse_or(s, false) : Bool_.Cast(o);}
+	public static boolean coerce_(Object o) {String s = String_.as_(o); return s != null ? parse_or(s, false) : BoolUtl.Cast(o);}
 	public static boolean readOrFalse_(DataRdr rdr, String key) {return read_(rdr, key, false);}
 	public static boolean readOrTrue_(DataRdr rdr, String key) {return read_(rdr, key, true);}
 	static boolean read_(DataRdr rdr, String key, boolean or) {

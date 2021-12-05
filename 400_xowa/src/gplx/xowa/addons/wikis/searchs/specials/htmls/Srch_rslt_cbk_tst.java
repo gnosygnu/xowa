@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
-import org.junit.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.guis.cbks.js.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
+package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import org.junit.*;
+import gplx.xowa.guis.cbks.js.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_rslt_cbk_tst {
 	@Before public void init() {fxt.Clear();} private Srch_rslt_cbk_fxt fxt = new Srch_rslt_cbk_fxt();
 	@Test  public void Basic() {// ISSUE#:462; DATE:2019-05-12
@@ -45,7 +48,7 @@ class Srch_rslt_cbk_fxt {
 	public Srch_rslt_row Make_rslt(int len, String ttl) {
 		byte[] ttl_bry = Bry_.new_a7(ttl);
 		++page_id;
-		byte[] key = Bry_.Add(Bry_enwiki, Byte_ascii.Pipe_bry, ttl_bry);	// NOTE: deliberately changing key to use ttl instead of id to make tests more readable
+		byte[] key = Bry_.Add(Bry_enwiki, AsciiByte.PipeBry, ttl_bry);	// NOTE: deliberately changing key to use ttl instead of id to make tests more readable
 		return new Srch_rslt_row(key, Bry_enwiki, wiki.Ttl_parse(ttl_bry), gplx.xowa.wikis.nss.Xow_ns_.Tid__main, ttl_bry, page_id, len, len, Srch_rslt_row.Page_redirect_id_null);
 	}
 	public Object[] Make_args_append(String uid, String html)	{return Object_.Ary(Xog_js_wkr__log.Proc_append_above, uid, html);}

@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
+package gplx.xowa.htmls.modules.popups; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.apps.apis.xowa.html.modules.*; import gplx.xowa.htmls.modules.popups.keeplists.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.hdrs.*;
+import gplx.xowa.htmls.modules.popups.keeplists.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.hdrs.*;
 import gplx.xowa.guis.views.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.tmpls.*;	
 public class Xow_popup_parser {
@@ -56,7 +58,7 @@ public class Xow_popup_parser {
 			tmpl_keeplist = new Xop_keeplist_wiki(wiki);
 			tmpl_ctx.Tmpl_keeplist_(tmpl_keeplist);
 		}
-		if (!Bry_.Has_at_end(raw, Byte_ascii.Nl_bry)) raw = Bry_.Add(raw, Byte_ascii.Nl_bry);
+		if (!Bry_.Has_at_end(raw, AsciiByte.NlBry)) raw = Bry_.Add(raw, AsciiByte.NlBry);
 		tmpl_keeplist.Srl().Load_by_bry(raw);
 	}
 	private boolean Canceled(Xow_popup_itm popup_itm, Xog_tab_itm cur_tab) {return popup_itm.Canceled() || cur_tab != null && cur_tab.Tab_is_loading();}
@@ -187,7 +189,7 @@ public class Xow_popup_parser {
 				wrdx_bfr.Add_byte_nl();
 		}
 		if (last_hdr_tkn != null) {
-			wrdx_bfr.Trim_end(Byte_ascii.Nl);
+			wrdx_bfr.Trim_end(AsciiByte.Nl);
 
 			// reparse hdr b/c existing hdr_tkn has Src_bgn / Src_end, but no src;
 			byte[] hdr_src = Bry_.Mid(wrdx_bfr.Bfr(), last_hdr_tkn.Bfr_bgn(), last_hdr_tkn.Bfr_end());
@@ -226,7 +228,7 @@ public class Xow_popup_parser {
 class Xow_popup_parser_ {
 	public static int Tmpl_bgn_get_(Xoae_app app, Xow_popup_itm itm, Xoa_ttl page_ttl, Xow_popup_anchor_finder hdr_finder, byte[] src, int src_len) {
 		int rv = Xop_parser_.Doc_bgn_bos; if (itm.Mode_all()) return rv;
-		byte[] anch = itm.Page_href()[0] == Byte_ascii.Hash ? Bry_.Mid(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
+		byte[] anch = itm.Page_href()[0] == AsciiByte.Hash ? Bry_.Mid(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Decode(itm.Page_href()), 1) : page_ttl.Anch_txt();
 		if (anch == null) return rv;
 		int hdr_bgn = hdr_finder.Find(src, src_len, anch, rv);	// NOTE: starting search from Xop_parser_.Doc_bgn_bos
 		return hdr_bgn == Bry_find_.Not_found ? rv : hdr_bgn;

@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.envs; import gplx.*; import gplx.core.*;
+package gplx.core.envs;
+import gplx.Char_;
+import gplx.Err_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Op_sys {
 	Op_sys(byte tid, byte sub_tid, String os_name, byte bitness, String nl_str, byte fsys_dir_spr_byte, boolean fsys_case_match) {
 		this.tid = tid; this.sub_tid = sub_tid; this.os_name = os_name; this.bitness = bitness; this.nl_str = nl_str; this.fsys_dir_spr_byte = fsys_dir_spr_byte;  this.fsys_dir_spr_str = Char_.To_str((char)fsys_dir_spr_byte); this.fsys_case_match = fsys_case_match;
@@ -26,7 +31,7 @@ public class Op_sys {
 	public String Nl_str() {return nl_str;} private final String nl_str;
 	public String Fsys_dir_spr_str() {return fsys_dir_spr_str;} private final String fsys_dir_spr_str;
 	public byte Fsys_dir_spr_byte() {return fsys_dir_spr_byte;} private final byte fsys_dir_spr_byte;
-	public String Fsys_http_frag_to_url_str(String raw) {return fsys_dir_spr_byte == Byte_ascii.Slash ? raw : String_.Replace(raw, Lnx.Fsys_dir_spr_str(), fsys_dir_spr_str);}
+	public String Fsys_http_frag_to_url_str(String raw) {return fsys_dir_spr_byte == AsciiByte.Slash ? raw : String_.Replace(raw, Lnx.Fsys_dir_spr_str(), fsys_dir_spr_str);}
 	public boolean Fsys_case_match() {return fsys_case_match;} private final boolean fsys_case_match;
 	public String Fsys_case_match_str(String s) {return String_.CaseNormalize(fsys_case_match, s);}
 	public boolean Tid_is_wnt() {return tid == Tid_wnt;}
@@ -39,7 +44,7 @@ public class Op_sys {
 	public static final byte Sub_tid_unknown = 0, Sub_tid_win_xp = 1, Sub_tid_win_7 = 2, Sub_tid_win_8 = 3;
 	public static final byte Bitness_32 = 1, Bitness_64 = 2;
 	public static final char Nl_char_lnx = '\n';
-	public static final byte Dir_spr__lnx = Byte_ascii.Slash, Dir_spr__wnt = Byte_ascii.Backslash;
+	public static final byte Dir_spr__lnx = AsciiByte.Slash, Dir_spr__wnt = AsciiByte.Backslash;
 	public static final Op_sys Lnx = new_unx_flavor_(Tid_lnx, "linux", Bitness_32);
 	public static final Op_sys Osx = new_unx_flavor_(Tid_osx, "macosx", Bitness_32);
 	public static final Op_sys Drd = new_unx_flavor_(Tid_drd, "android", Bitness_32);
@@ -51,8 +56,8 @@ public class Op_sys {
 	public static String Fsys_path_to_wnt(String v) {
 		return cur_op_sys.Tid_is_wnt() ? String_.Replace(v, Lnx.fsys_dir_spr_str, Wnt.fsys_dir_spr_str) : v; 
 	}
-	private static Op_sys new_wnt_(byte bitness, byte sub_tid)						{return new Op_sys(Tid_wnt	, sub_tid			, "windows", bitness, "\r\n", Dir_spr__wnt	, Bool_.N);}
-	private static Op_sys new_unx_flavor_(byte tid, String os_name, byte bitness)	{return new Op_sys(tid		, Sub_tid_unknown	, os_name  , bitness, "\n"  , Dir_spr__lnx	, Bool_.Y);}
+	private static Op_sys new_wnt_(byte bitness, byte sub_tid)						{return new Op_sys(Tid_wnt	, sub_tid			, "windows", bitness, "\r\n", Dir_spr__wnt	, BoolUtl.N);}
+	private static Op_sys new_unx_flavor_(byte tid, String os_name, byte bitness)	{return new Op_sys(tid		, Sub_tid_unknown	, os_name  , bitness, "\n"  , Dir_spr__lnx	, BoolUtl.Y);}
 	public static void Cur_(int tid) {
 		switch (tid) {
 			case Tid_wnt: cur_op_sys = Wnt; break;

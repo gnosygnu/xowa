@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.btries; import gplx.*; import gplx.core.*;
+package gplx.core.btries; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 public class Btrie_bwd_mgr_tst {
 	@Before public void init() {}	private Btrie_bwd_mgr trie;
@@ -38,7 +39,7 @@ public class Btrie_bwd_mgr_tst {
 	}
 	@Test public void Eos() {
 		ini_setup1();
-		tst_Match("ab", Byte_ascii.Ltr_c, 2, 123);
+		tst_Match("ab", AsciiByte.Ltr_c, 2, 123);
 	}
 	@Test public void Match_exact() {
 		ini_setup1();

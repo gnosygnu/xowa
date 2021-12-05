@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.nss; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.bldrs.cmds.*; import gplx.xowa.apps.utls.*;
 public class Xow_ns implements Gfo_invk {
 	public Xow_ns(int id, byte case_match, byte[] name, boolean is_alias) {
@@ -28,7 +29,7 @@ public class Xow_ns implements Gfo_invk {
 		}
 		else {
 			this.name_db			= v;
-			this.name_db_w_colon	= Bry_.Add(v, Byte_ascii.Colon);
+			this.name_db_w_colon	= Bry_.Add(v, AsciiByte.Colon);
 			this.name_db_str		= String_.new_u8(v);
 		}
 		this.num_str = Int_.To_str_pad_bgn_zero(id, 3);
@@ -36,8 +37,8 @@ public class Xow_ns implements Gfo_invk {
 		synchronized (url_encoder) {	// LOCK:static-obj
 			this.name_enc = url_encoder.Encode(name_db);
 		}
-		this.name_ui = Bry_.Replace(name_enc, Byte_ascii.Underline, Byte_ascii.Space);
-		this.name_ui_w_colon = Bry_.Replace(name_db_w_colon, Byte_ascii.Underline, Byte_ascii.Space);
+		this.name_ui = Bry_.Replace(name_enc, AsciiByte.Underline, AsciiByte.Space);
+		this.name_ui_w_colon = Bry_.Replace(name_db_w_colon, AsciiByte.Underline, AsciiByte.Space);
 	}
 	public boolean		Exists()				{return exists;} public Xow_ns Exists_(boolean v) {exists = v; return this;} private boolean exists;
 	public byte[]	Name_db()				{return name_db;} private byte[] name_db;

@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.lists.CompareAbleUtl;
 import org.junit.*;
 public class String__tst {
 	@Test public void LimitToFirst() {
@@ -138,15 +139,15 @@ public class String__tst {
 		tst_ConcatWith_any("a|b", "|", Object_.Ary("a", "b"));			// pass array as arg
 	}	void tst_ConcatWith_any(String expd, String delimiter, Object... array) {Tfds.Eq(expd, String_.Concat_with_obj(delimiter, array));}
 	@Test public void Compare_byteAry() {
-		tst_Compare_byteAry("a", "a", CompareAble_.Same);
-		tst_Compare_byteAry("a", "b", CompareAble_.Less);
-		tst_Compare_byteAry("b", "a", CompareAble_.More);
-		tst_Compare_byteAry("ab", "ac", CompareAble_.Less);
-		tst_Compare_byteAry("ac", "ab", CompareAble_.More);
-		tst_Compare_byteAry("a", "ab", CompareAble_.Less);
-		tst_Compare_byteAry("ab", "a", CompareAble_.More);
-		tst_Compare_byteAry("101", "1-0-1", CompareAble_.More);			// NOTE: regular String_.Compare_as_ordinals returns Less in .NET, More in Java
-		tst_Compare_byteAry("1-0-1", "101 (album)", CompareAble_.Less);	
+		tst_Compare_byteAry("a", "a", CompareAbleUtl.Same);
+		tst_Compare_byteAry("a", "b", CompareAbleUtl.Less);
+		tst_Compare_byteAry("b", "a", CompareAbleUtl.More);
+		tst_Compare_byteAry("ab", "ac", CompareAbleUtl.Less);
+		tst_Compare_byteAry("ac", "ab", CompareAbleUtl.More);
+		tst_Compare_byteAry("a", "ab", CompareAbleUtl.Less);
+		tst_Compare_byteAry("ab", "a", CompareAbleUtl.More);
+		tst_Compare_byteAry("101", "1-0-1", CompareAbleUtl.More);			// NOTE: regular String_.Compare_as_ordinals returns Less in .NET, More in Java
+		tst_Compare_byteAry("1-0-1", "101 (album)", CompareAbleUtl.Less);
 	}	void tst_Compare_byteAry(String lhs, String rhs, int expd) {Tfds.Eq(expd, String_.Compare_byteAry(lhs, rhs));}
 	@Test public void FindBwd() {	// WORKAROUND.CS:String.LastIndexOf returns -1 for multi-chars;
 		tst_FindRev("abc", "a", 0, 0);

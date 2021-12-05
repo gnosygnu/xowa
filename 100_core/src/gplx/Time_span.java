@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 import gplx.core.strings.*;
+import gplx.objects.lists.CompareAble;
+import gplx.objects.lists.CompareAbleUtl;
 public class Time_span implements CompareAble {	// NOTE: gplx.Time_span b/c System.TimeSpan
 	public long Fracs() {return fracs;} long fracs; public int FracsAsInt() {return (int)fracs;}
 	public Decimal_adp Total_days()		{return Decimal_adp_.divide_(fracs, Time_span_.Divisors[Time_span_.Idx_Hour]  * 24);}
@@ -37,7 +39,7 @@ public class Time_span implements CompareAble {	// NOTE: gplx.Time_span b/c Syst
 	}
 	public Time_span Subtract(Time_span val)	{return new Time_span(fracs - val.fracs);}
 
-	public int compareTo(Object obj)				{Time_span comp = Time_span_.cast(obj); return CompareAble_.Compare_obj(fracs, comp.fracs);}
+	public int compareTo(Object obj)				{Time_span comp = Time_span_.cast(obj); return CompareAbleUtl.Compare_obj(fracs, comp.fracs);}
 	public boolean Eq(Object o) {
 		Time_span comp = Time_span_.cast(o); if (comp == null) return false;
 		return fracs == comp.fracs;

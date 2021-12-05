@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.*;
+import gplx.xowa.xtns.scribunto.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.xowa.xtns.scribunto.engines.mocks.*;
 public class Scrib_lib_title_tst {
 	private final Mock_scrib_fxt fxt = new Mock_scrib_fxt(); private Scrib_lib lib;
@@ -71,17 +74,17 @@ public class Scrib_lib_title_tst {
 		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_makeTitle, Object_.Ary("Template", "a[b"), Scrib_invoke_func_fxt.Null_rslt_ary);	// PURPOSE: handle bad MakeTitle cmds; PAGE:en.w:Disney; DATE:2013-10-15
 	}
 	@Test  public void GetExpensiveData_absent() {
-		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.N, 0, Bool_.N));
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(BoolUtl.N, 0, BoolUtl.N));
 	}
 	@Test  public void GetExpensiveData_exists() {
 		fxt.Parser_fxt().Init_page_create("A");
-		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.Y, 0, Bool_.N));
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(BoolUtl.Y, 0, BoolUtl.N));
 	}
 	@Test  public void GetExpensiveData_cache() { // ISSUE#:597; DATE:2019-11-18
 		gplx.xowa.wikis.caches.Xow_page_cache cache_mgr = fxt.Parser_fxt().Wiki().Cache_mgr().Page_cache();
-		Gftest.Eq__bool(Bool_.N, cache_mgr.Get_itm_or_null("A") != null); // item does not exist
-		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(Bool_.N, 0, Bool_.N));
-		Gftest.Eq__bool(Bool_.Y, cache_mgr.Get_itm_or_null("A") != null); // item exists
+		Gftest.Eq__bool(BoolUtl.N, cache_mgr.Get_itm_or_null("A") != null); // item does not exist
+		fxt.Test__proc__objs__nest(lib, Scrib_lib_title.Invk_getExpensiveData, Object_.Ary("A")									, ttl_slow(BoolUtl.N, 0, BoolUtl.N));
+		Gftest.Eq__bool(BoolUtl.Y, cache_mgr.Get_itm_or_null("A") != null); // item exists
 	}
 	@Test  public void GetFileInfo() {
 		Wiki_orig_tbl__create(fxt.Core().Wiki());
@@ -144,7 +147,7 @@ public class Scrib_lib_title_tst {
 	public static void Wiki_orig_tbl__create(Xowe_wiki wiki) {
 		Xowe_wiki_.Create(wiki, 1, "dump.xml");
 		gplx.xowa.wikis.data.Xow_db_file text_db = wiki.Data__core_mgr().Dbs__make_by_tid(gplx.xowa.wikis.data.Xow_db_file_.Tid__text); text_db.Tbl__text().Create_tbl();
-		gplx.fsdb.Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
+		gplx.fsdb.Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, BoolUtl.Y);
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);
 	}
 	public static void Wiki_orig_tbl__insert(Xowe_wiki wiki, String ttl_str, int w, int h) {
@@ -170,10 +173,10 @@ public class Scrib_lib_title_tst {
 	private static String ttl_slow(boolean exists, int ttl_id, boolean redirect) {
 		return String_.Concat_lines_nl_skip_last
 		( "1="
-		, "  isRedirect=" + Bool_.To_str_lower(redirect)
+		, "  isRedirect=" + BoolUtl.ToStrLower(redirect)
 		, "  id=" + Int_.To_str(ttl_id)
 		, "  contentModel=" + Scrib_lib_title.Key_wikitext
-		, "  exists=" + Bool_.To_str_lower(exists)
+		, "  exists=" + BoolUtl.ToStrLower(exists)
 		);
 	}
 	private static String file_info_absent() {

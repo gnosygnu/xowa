@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.entitys; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
+package gplx.langs.htmls.entitys; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfh_entity_itm {	// TS:immutable
 	public Gfh_entity_itm(byte tid, int char_int, byte[] xml_name_bry) {
 		this.tid = tid;
@@ -30,22 +31,22 @@ public class Gfh_entity_itm {	// TS:immutable
 
 	public void Print_ncr(Bry_bfr bfr) {
 		switch (char_int) {
-			case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Quote: case Byte_ascii.Amp:
+			case AsciiByte.Lt: case AsciiByte.Gt: case AsciiByte.Quote: case AsciiByte.Amp:
 				bfr.Add(xml_name_bry);							// NOTE: never write actual char; EX: "&lt;" should be written as "&lt;", not "<"
 				break;
 			default:
 				bfr.Add(Escape_bgn);			// &#
 				bfr.Add_int_variable(char_int);	// 160
-				bfr.Add_byte(Byte_ascii.Semic);	// ;
+				bfr.Add_byte(AsciiByte.Semic);	// ;
 				break;
 		}			
 	}
 	public void Print_literal(Bry_bfr bfr) {
 		switch (char_int) {
-			case Byte_ascii.Lt:			bfr.Add(Gfh_entity_.Lt_bry); break; // NOTE: never write actual char; EX: "&lt;" should be written as "&lt;", not "<"; MW does same; DATE:2014-11-07
-			case Byte_ascii.Gt:			bfr.Add(Gfh_entity_.Gt_bry); break;
-			case Byte_ascii.Quote:		bfr.Add(Gfh_entity_.Quote_bry); break;
-			case Byte_ascii.Amp:		bfr.Add(Gfh_entity_.Amp_bry); break;
+			case AsciiByte.Lt:			bfr.Add(Gfh_entity_.Lt_bry); break; // NOTE: never write actual char; EX: "&lt;" should be written as "&lt;", not "<"; MW does same; DATE:2014-11-07
+			case AsciiByte.Gt:			bfr.Add(Gfh_entity_.Gt_bry); break;
+			case AsciiByte.Quote:		bfr.Add(Gfh_entity_.Quote_bry); break;
+			case AsciiByte.Amp:		bfr.Add(Gfh_entity_.Amp_bry); break;
 			default:					bfr.Add(u8_bry); break;				// write literal; EX: "[" not "&#91;"
 		}			
 	}

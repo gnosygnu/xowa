@@ -13,10 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
-import gplx.langs.htmls.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.htmls.modules.popups;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_split_;
+import gplx.Hash_adp_bry;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.lnkes.Xop_lnke_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xow_popup_wrdx_mkr {
 	private boolean skip_space;
 	private Xop_tkn_itm prv_tkn_seen, prv_tkn_added;
@@ -83,7 +95,7 @@ public class Xow_popup_wrdx_mkr {
 				Xop_lnke_tkn lnke = (Xop_lnke_tkn)tkn;
 				switch (lnke.Lnke_typ()) {
 					case Xop_lnke_tkn.Lnke_typ_brack:
-						Process_subs(cfg, data, wrdx_bfr, tkn, wtxt_bry, wtxt_len, Bool_.N);	// add subs which are caption tkns; note that Bool_.N will add all words so that captions don't get split; EX: "a [http://a.org b c d]" -> "a b c d" if words_needed == 2;
+						Process_subs(cfg, data, wrdx_bfr, tkn, wtxt_bry, wtxt_len, BoolUtl.N);	// add subs which are caption tkns; note that BoolUtl.N will add all words so that captions don't get split; EX: "a [http://a.org b c d]" -> "a b c d" if words_needed == 2;
 						add_tkn = add_subs = false;	// ignore lnke, but add any text tkns; EX: [http://a.org b c d] -> "b c d"
 						break;
 					case Xop_lnke_tkn.Lnke_typ_text:
@@ -129,7 +141,7 @@ public class Xow_popup_wrdx_mkr {
 						wrdx_bfr.Del_by_1();
 				}
 				if (	tkn_src_end < wtxt_len				// bounds check
-					&&	wtxt_bry[tkn_src_end] == Byte_ascii.Nl	// hdr_tkn will not include trailing "\n". add it; note that this behavior is by design. NOTE:hdr.trailing_nl; DATE:2014-06-17
+					&&	wtxt_bry[tkn_src_end] == AsciiByte.Nl	// hdr_tkn will not include trailing "\n". add it; note that this behavior is by design. NOTE:hdr.trailing_nl; DATE:2014-06-17
 					) {
 					wrdx_bfr.Add_mid(wtxt_bry, tkn_src_bgn, tkn_src_end + 1);	// +1 to add the trailing \n
 					add_tkn = false;
@@ -150,7 +162,7 @@ public class Xow_popup_wrdx_mkr {
 			skip_space = true;	// skip next space; note this is done with member variable to handle recursive iteration; DATE:2014-06-17
 		if (add_subs) {
 			if (xnde != null) wrdx_bfr.Add_mid(wtxt_bry, xnde.Tag_open_bgn(), xnde.Tag_open_end());		// add open tag; EX: "<span id=a>"
-			Process_subs(cfg, data, wrdx_bfr, tkn, wtxt_bry, wtxt_len, Bool_.Y);
+			Process_subs(cfg, data, wrdx_bfr, tkn, wtxt_bry, wtxt_len, BoolUtl.Y);
 			if (xnde != null) wrdx_bfr.Add_mid(wtxt_bry, xnde.Tag_close_bgn(), xnde.Tag_close_end());	// add close tag; EX: "</span>"
 		}
 		switch (tkn.Tkn_tid()) {
@@ -183,7 +195,7 @@ public class Xow_popup_wrdx_mkr {
 		return false;
 	}
 	public void Xnde_ignore_ids_(byte[] xnde_id_ignore_bry) {
-		byte[][] ary = Bry_split_.Split(xnde_id_ignore_bry, Byte_ascii.Pipe);
+		byte[][] ary = Bry_split_.Split(xnde_id_ignore_bry, AsciiByte.Pipe);
 		int ary_len = ary.length;
 		xnde_id_ignore_list.Clear();
 		for (int i = 0; i < ary_len; i++) {
@@ -195,8 +207,8 @@ public class Xow_popup_wrdx_mkr {
 	private boolean Wtxt_bfr_ends_w_2_nl(Bry_bfr wrdx_bfr, int wrdx_bfr_len) {
 		byte[] hdom_bfr_bry = wrdx_bfr.Bfr();
 		return
-			(	hdom_bfr_bry[wrdx_bfr_len - 1] == Byte_ascii.Nl	// prv 2 bytes are \n
-			&&	hdom_bfr_bry[wrdx_bfr_len - 2] == Byte_ascii.Nl
+			(	hdom_bfr_bry[wrdx_bfr_len - 1] == AsciiByte.Nl	// prv 2 bytes are \n
+			&&	hdom_bfr_bry[wrdx_bfr_len - 2] == AsciiByte.Nl
 			);
 	}
 }

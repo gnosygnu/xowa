@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*; import gplx.xowa.wikis.tdbs.metas.*;
+package gplx.xowa.xtns.pfuncs.ifs;
+import gplx.Bry_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_itm;
+import org.junit.Before;
+import org.junit.Test;
 public class Pfunc_ifexist_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {
@@ -42,7 +48,7 @@ public class Pfunc_ifexist_tst {
 	}
 	@Test public void Media_y_file_v1() {// DATE:2014-07-04
 		Xof_meta_itm meta_itm = fxt.Wiki().File_mgr().Dbmeta_mgr().Get_itm_or_new(Bry_.new_a7("A.png"));
-		meta_itm.Orig_exists_(Bool_.Y_byte);
+		meta_itm.Orig_exists_(BoolUtl.YByte);
 		fxt.Test_parse_tmpl_str_test("{{#ifexist:Media:A.png|y|n}}", "{{test}}", "y");
 	}
 }

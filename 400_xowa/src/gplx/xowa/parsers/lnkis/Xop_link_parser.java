@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lnkis; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.net.*; import gplx.xowa.wikis.xwikis.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.htmls.hrefs.*;
+import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.domains.*;
 public class Xop_link_parser {
 	public byte[] Html_xowa_ttl()	{return html_xowa_ttl;} private byte[] html_xowa_ttl;
@@ -50,10 +52,10 @@ public class Xop_link_parser {
 				break;
 			case Gfo_protocol_itm.Tid_file:		// "file:///" or "File:A.png"
 				int proto_len = Gfo_protocol_itm.Bry_file.length;							// "file:"
-				if (proto_len + 1 < raw_len && raw[proto_len + 1] == Byte_ascii.Slash) {	// next char is slash, assume xfer_itm refers to protocol; EX: file:///C/A.png
-					int slash_pos = Bry_find_.Find_bwd(raw, Byte_ascii.Slash);
+				if (proto_len + 1 < raw_len && raw[proto_len + 1] == AsciiByte.Slash) {	// next char is slash, assume xfer_itm refers to protocol; EX: file:///C/A.png
+					int slash_pos = Bry_find_.Find_bwd(raw, AsciiByte.Slash);
 					if (slash_pos != Bry_find_.Not_found)	// set xowa_title to file_name; TODO_OLD: call Xoa_url.build; note that this will fail sometimes when (a) xfer_itm is very long (File:ReallyLongName will be shortened to 128 chars) or (b) xfer_itm has invalid windows characters (EX:File:a"b"c.jpg)
-						html_xowa_ttl = Bry_.Mid(raw, slash_pos + Byte_ascii.Len_1, raw.length);
+						html_xowa_ttl = Bry_.Mid(raw, slash_pos + AsciiByte.Len1, raw.length);
 				}
 				else // next char is not slash; assume xfer_itm refers to ns; EX:File:A.png
 					raw = tmp_bfr.Add(Xoh_href_.Bry__wiki).Add(raw).To_bry_and_clear();
@@ -62,7 +64,7 @@ public class Xop_link_parser {
 				if (Bry_.Len_eq_0(raw))		// empty link should not create anchor; EX:[[File:A.png|link=|abc]]; [[File:Loudspeaker.svg|11px|link=|alt=play]]; PAGE:en.w:List_of_counties_in_New_York; DATE:2016-01-10;
 					raw = Bry_.Empty;
 				else {
-					if (raw[0] == Byte_ascii.Colon) raw = Bry_.Mid(raw, 1, raw.length);	// ignore initial colon; EX: [[:commons:A.png]]
+					if (raw[0] == AsciiByte.Colon) raw = Bry_.Mid(raw, 1, raw.length);	// ignore initial colon; EX: [[:commons:A.png]]
 					if (!Parse__ttl(tmp_bfr, wiki, wiki.Domain_bry(), raw)) {
 						tmp_bfr.Clear();
 						return null;

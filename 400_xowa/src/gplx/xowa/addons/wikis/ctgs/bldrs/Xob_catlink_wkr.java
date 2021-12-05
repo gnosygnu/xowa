@@ -13,9 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
+package gplx.xowa.addons.wikis.ctgs.bldrs;
+import gplx.Bry_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.dbs.Db_attach_itm;
+import gplx.dbs.Db_attach_mgr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.DbmetaFldItm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_link_tbl;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_cat_core_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
 class Xob_catlink_wkr {
 	public void Make_catlink_dbs(Xowe_wiki wiki, Db_conn tmp_conn, Db_conn page_conn, Db_conn cat_core_conn) {
 		// init select
@@ -94,7 +109,7 @@ class Xob_catlink_wkr {
 	}
 	public void Make_catcore_tbl(Xowe_wiki wiki, Db_conn tmp_conn, Db_conn page_conn, Db_conn cat_core_conn) {
 		Db_attach_mgr attach_mgr = new Db_attach_mgr(cat_core_conn, new Db_attach_itm("temp_db", tmp_conn), new Db_attach_itm("page_db", page_conn));
-		Xowd_cat_core_tbl cat_core_tbl = new Xowd_cat_core_tbl(cat_core_conn, Bool_.N);
+		Xowd_cat_core_tbl cat_core_tbl = new Xowd_cat_core_tbl(cat_core_conn, BoolUtl.N);
 		cat_core_conn.Meta_tbl_remake(cat_core_tbl);
 		String sql = String_.Concat_lines_nl_skip_last	// ANSI.Y
 		( "INSERT INTO cat_core (cat_id, cat_pages, cat_subcats, cat_files, cat_hidden, cat_link_db_id)"

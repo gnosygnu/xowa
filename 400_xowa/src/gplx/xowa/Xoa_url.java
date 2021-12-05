@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
-import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.xowa.apps.urls.*;
-import gplx.xowa.htmls.hrefs.*;
+package gplx.xowa;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.String_;
+import gplx.core.net.qargs.Gfo_qarg_itm;
+import gplx.core.net.qargs.Gfo_qarg_mgr_old;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.hrefs.Xoh_href_;
 public class Xoa_url {
 	public int				Tid() {return tid;} public void Tid_(int v) {this.tid = v;} private int tid;
 	public byte[]			Raw() {return raw;} private byte[] raw = Bry_.Empty;
@@ -57,14 +66,14 @@ public class Xoa_url {
 		return wiki_pos == Bry_find_.Not_found ? Bry_find_.Not_found : wiki_pos + Xoh_href_.Bry__wiki.length;
 	}
 	public boolean Eq_page(Xoa_url comp) {return Bry_.Eq(wiki_bry, comp.wiki_bry) && Bry_.Eq(page_bry, comp.page_bry) && this.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no) == comp.Qargs_mgr().Match(Xoa_url_.Qarg__redirect, Xoa_url_.Qarg__redirect__no);}
-	public String To_str()					{return String_.new_u8(To_bry(Bool_.Y, Bool_.Y));}
+	public String To_str()					{return String_.new_u8(To_bry(BoolUtl.Y, BoolUtl.Y));}
 	public byte[] To_bry_page_w_anch()		{
 		byte[] page = page_bry, anch = anch_bry;
-		byte[] anch_spr = anch == null ? null : Byte_ascii.Hash_bry;
+		byte[] anch_spr = anch == null ? null : AsciiByte.HashBry;
 		return Bry_.Add(page, anch_spr, anch);
 	}
-	public byte[] To_bry()                  {return To_bry(Bool_.Y, Bool_.Y);}
-	public byte[] To_bry_full_wo_qargs()    {return To_bry(Bool_.Y, Bool_.N);}
+	public byte[] To_bry()                  {return To_bry(BoolUtl.Y, BoolUtl.Y);}
+	public byte[] To_bry_full_wo_qargs()    {return To_bry(BoolUtl.Y, BoolUtl.N);}
 	public byte[] To_bry(boolean full, boolean show_qargs) {							// currently used for status bar; not embedded in any html
 		switch (tid) {
 			case Xoa_url_.Tid_unknown:											// unknown; should not occur?
@@ -81,8 +90,8 @@ public class Xoa_url {
 				break;
 		}
 		byte[] wiki = wiki_bry, page = page_bry, anch = anch_bry;
-		byte[] wiki_spr = vnt_bry == null ? Xoh_href_.Bry__wiki : Bry_.Add(Byte_ascii.Slash_bry, vnt_bry, Byte_ascii.Slash_bry);
-		byte[] anch_spr = anch == null ? null : Byte_ascii.Hash_bry;
+		byte[] wiki_spr = vnt_bry == null ? Xoh_href_.Bry__wiki : Bry_.Add(AsciiByte.SlashBry, vnt_bry, AsciiByte.SlashBry);
+		byte[] anch_spr = anch == null ? null : AsciiByte.HashBry;
 		if (!full) {
 			boolean tid_is_anch = tid == Xoa_url_.Tid_anch;
 			if (	wiki_is_same										// same wiki; don't show wiki; EX: "/wiki/A" -> "A" x> "en.wikipedia.org/wiki/A"

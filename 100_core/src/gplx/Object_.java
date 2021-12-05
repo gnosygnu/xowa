@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.primitives.BoolUtl;
 public class Object_ {
 	public static final String Cls_val_name = "Object";
 	public static final Object[] Ary_empty = new Object[0];
@@ -59,7 +60,7 @@ public class Object_ {
 		Class<?> c = Type_.Type_by_obj(v);
 		if		(Type_.Eq(c, String_.Cls_ref_type))		return (String)v;
 		else if	(Type_.Eq(c, Bry_.Cls_ref_type))		return String_.new_u8((byte[])v);
-		else if (Type_.Eq(c, Bool_.Cls_ref_type))		return Bool_.Cast(v) ? Bool_.True_str : Bool_.False_str;	// always return "true" / "false"
+		else if (Type_.Eq(c, BoolUtl.ClsRefType))		return BoolUtl.Cast(v) ? BoolUtl.TrueStr : BoolUtl.FalseStr;	// always return "true" / "false"
 		else if	(Type_.Eq(c, Double_.Cls_ref_type))		return Double_.To_str_loose(Double_.cast(v));
 		else												return v.toString();	
 	}

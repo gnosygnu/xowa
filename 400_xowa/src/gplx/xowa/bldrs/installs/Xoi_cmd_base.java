@@ -13,10 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.threads.*; import gplx.xowa.bldrs.*;
-import gplx.xowa.wikis.domains.*;
-import gplx.xowa.bldrs.wms.dumps.*;
+package gplx.xowa.bldrs.installs;
+import gplx.Bry_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.core.threads.Gfo_thread_cmd;
+import gplx.core.threads.Gfo_thread_cmd_;
+import gplx.core.threads.Thread_adp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.wms.dumps.Xowm_dump_type_;
 abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 	public void Ctor(Xoi_setup_mgr install_mgr, String wiki_key) {
 		this.install_mgr = install_mgr; this.wiki_key = wiki_key;
@@ -47,7 +58,7 @@ abstract class Xoi_cmd_base implements Gfo_thread_cmd {
 		try {bldr.Run();}
 		catch (Exception e) {
 			running = false;
-			install_mgr.Cmd_mgr().Working_(Bool_.N);
+			install_mgr.Cmd_mgr().Working_(BoolUtl.N);
 			throw Err_.new_exc(e, "xo", "error during import");
 		}
 		app.Usr_dlg().Prog_none("", "clear", "");

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Err_;
 import gplx.Gfo_usr_dlg_;
 import gplx.Io_url;
@@ -29,7 +29,7 @@ import gplx.langs.regxs.Regx_adp_;
 import gplx.langs.regxs.Regx_group;
 import gplx.langs.regxs.Regx_match;
 import gplx.objects.strings.unicodes.Ustring;
-import gplx.objects.strings.unicodes.Ustring_;
+import gplx.objects.strings.unicodes.UstringUtl;
 import gplx.xowa.Xoa_page_;
 import gplx.xowa.xtns.scribunto.Scrib_core;
 import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
@@ -78,10 +78,10 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		boolean plain             = args.Cast_bool_or_n(3);
 
 		// init text vars
-		Ustring text_ucs = Ustring_.New_codepoints(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
+		Ustring text_ucs = UstringUtl.NewCodepoints(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
 
 		// convert bgn from base_1 to base_0
-		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.Len_in_data());
+		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.LenInData());
 
 		/*
 		int offset = 0;
@@ -103,8 +103,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		// if plain, just do literal match of find and exit
 		if (plain) {
 			// find pos by literal match
-			Ustring find_ucs = Ustring_.New_codepoints(find_str);
-			int pos = text_ucs.Index_of(find_ucs, bgn_as_codes);
+			Ustring find_ucs = UstringUtl.NewCodepoints(find_str);
+			int pos = text_ucs.IndexOf(find_ucs, bgn_as_codes);
 
 			// if nothing found, return empty
 			if (pos == String_.Find_none)
@@ -114,7 +114,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			int bgn = pos + Base1;
 
 			// end: add find.Len_in_codes and adjust end for PHP/LUA
-			int end = bgn + find_ucs.Len_in_data() - End_adj;
+			int end = bgn + find_ucs.LenInData() - End_adj;
 
 			return rslt.Init_many_objs(bgn, end);
 		}
@@ -126,8 +126,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 
 		// add to tmp_list
 		List_adp tmp_list = List_adp_.New();
-		tmp_list.Add(text_ucs.Map_char_to_data(match.Find_bgn()) + Scrib_lib_ustring.Base1);
-		tmp_list.Add(text_ucs.Map_char_to_data(match.Find_end()) + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
+		tmp_list.Add(text_ucs.MapCharToData(match.Find_bgn()) + Scrib_lib_ustring.Base1);
+		tmp_list.Add(text_ucs.MapCharToData(match.Find_end()) + Scrib_lib_ustring.Base1 - Scrib_lib_ustring.End_adj);
 		AddCapturesFromMatch(tmp_list, match, text_str, matcher.Capt_ary(), false);
 		return rslt.Init_many_list(tmp_list);
 	}
@@ -141,8 +141,8 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		// validate / adjust
 		if (text_str == null) // if no text_str is passed, do not fail; return empty; EX:d:changed; DATE:2014-02-06 
 			return rslt.Init_many_list(List_adp_.Noop);
-		Ustring text_ucs = Ustring_.New_codepoints(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
-		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.Len_in_data());
+		Ustring text_ucs = UstringUtl.NewCodepoints(text_str); // NOTE: must count codes for supplementaries; PAGE:en.d:iglesia DATE:2017-04-23
+		int bgn_as_codes = To_java_by_lua(bgn_as_codes_base1, text_ucs.LenInData());
 
 		// run regex; NOTE add 1st match only; do not add all; PAGE:en.d:действительное_причастие_настоящего_времени DATE:2017-04-23
 		Scrib_pattern_matcher matcher = Scrib_pattern_matcher.New(core.Page_url());
@@ -173,7 +173,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 		Keyval[] capt = args.Cast_kv_ary_or_null(2);
 		int pos = args.Pull_int(3);
 
-		Ustring text_ucs = Ustring_.New_codepoints(text);
+		Ustring text_ucs = UstringUtl.NewCodepoints(text);
 		// int pos_as_codes = To_java_by_lua(pos, text_ucs.Len_in_data());
 		Regx_match match = Scrib_pattern_matcher.New(core.Page_url()).Match_one(text_ucs, regx, pos, false);
 		if (match.Rslt_none()) return rslt.Init_many_objs(pos, Keyval_.Ary_empty);
@@ -210,7 +210,7 @@ public class Scrib_lib_ustring implements Scrib_lib {
 			for (int j = 0; j < grps_len; j++) {
 				Regx_group grp = grps[j];
 				if (	j < capts_len				// bounds check	b/c null can be passed
-					&&	Bool_.Cast(capts[j].Val())	// check if true; indicates that group is "()" or "anypos" see regex converter; DATE:2014-04-23
+					&&	BoolUtl.Cast(capts[j].Val())	// check if true; indicates that group is "()" or "anypos" see regex converter; DATE:2014-04-23
 					)
 					tmp_list.Add(grp.Bgn() + Scrib_lib_ustring.Base1);	// return index only for "()"; NOTE: do not return as String; callers expect int and will fail typed comparisons; DATE:2016-01-21
 				else

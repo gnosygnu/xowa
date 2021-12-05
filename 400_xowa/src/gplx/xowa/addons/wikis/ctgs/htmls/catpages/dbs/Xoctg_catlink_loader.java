@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.dbs; import gplx.*;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
 import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
@@ -145,14 +148,14 @@ class Xoctg_catlink_loader {
 		// find \n and ignore everything after it; needed else "< 'A\nA'" will pull up "A"; NOTE: can't find logic in MediaWiki CategoryViewer.php; DATE:2016-10-11
 		// ALSO: needed for v2 else SQL will literally have WHERE cl_sortkey = 'A\nA';
 		byte[] tmp_sortkey = url_sortkey;
-		int nl_pos = Bry_find_.Find_fwd(tmp_sortkey, Byte_ascii.Nl);
+		int nl_pos = Bry_find_.Find_fwd(tmp_sortkey, AsciiByte.Nl);
 		if (nl_pos != Bry_find_.Not_found)
 			tmp_sortkey = Bry_.Mid(tmp_sortkey, 0, nl_pos);
 
 		if (version == 4) {
 			if (Bry_.Len_gt_0(url_sortkey)) {
 				// make sortkey_val
-				sortkey_val_bfr.Add_byte(Byte_ascii.Ltr_x).Add_byte_apos();
+				sortkey_val_bfr.Add_byte(AsciiByte.Ltr_x).Add_byte_apos();
 				gplx.core.encoders.Hex_utl_.Encode_bfr(sortkey_val_bfr, collation_mgr.Get_sortkey(tmp_sortkey));
 				sortkey_val_bfr.Add_byte_apos();
 			}
@@ -210,7 +213,7 @@ class Xoctg_catlink_loader {
 		return new Xoctg_catlink_loader(wiki, catpage_mgr, page_tbl, version, link_dbs_len, attach_mgr);
 	}
 }
-class Xoctg_catlink_sorter implements gplx.core.lists.ComparerAble {
+class Xoctg_catlink_sorter implements ComparerAble {
 	private final int sort_multiplier;
 	public Xoctg_catlink_sorter(boolean sort_ascending) {
 		this.sort_multiplier = sort_ascending ? 1 : -1;

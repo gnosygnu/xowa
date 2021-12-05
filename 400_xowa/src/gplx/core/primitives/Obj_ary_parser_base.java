@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives;
+import gplx.objects.arrays.ArrayUtl;
 public abstract class Obj_ary_parser_base {
 	int pos_len = 4; int[] pos;
 	protected abstract void Ary_len_(int v);
@@ -32,7 +33,7 @@ public abstract class Obj_ary_parser_base {
 				if (pos_idx == pos_len - 1) {	// -1 b/c pos[] will always be count_of_dlm + 1
 					pos_len *= 2;
 					int[] pos_new = new int[pos_len];
-					Array_.Copy(pos, pos_new);
+					ArrayUtl.Copy(pos, pos_new);
 					pos = pos_new;
 				} 
 				pos[pos_idx++] = i;

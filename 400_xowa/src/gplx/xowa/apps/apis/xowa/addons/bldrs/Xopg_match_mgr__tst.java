@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.addons.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.addons.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.apps.apis.xowa.addons.bldrs;
+import gplx.Bry_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import org.junit.Before;
+import org.junit.Test;
 public class Xopg_match_mgr__tst {
 	private final Xopg_match_mgr__fxt fxt = new Xopg_match_mgr__fxt();
 	@Before public void init() {fxt.Clear();}
@@ -56,8 +63,8 @@ class Xopg_match_mgr__fxt {
 	public void Init__set(String url) {
 		match_mgr.Set(url);
 	}
-	public void Test__match_y(String... urls) {Test__match(Bool_.Y, urls);}
-	public void Test__match_n(String... urls) {Test__match(Bool_.N, urls);}
+	public void Test__match_y(String... urls) {Test__match(BoolUtl.Y, urls);}
+	public void Test__match_n(String... urls) {Test__match(BoolUtl.N, urls);}
 	private void Test__match(boolean expd, String... urls) {
 		for (int i = 0; i < urls.length; i++) {
 			String url = urls[i];				

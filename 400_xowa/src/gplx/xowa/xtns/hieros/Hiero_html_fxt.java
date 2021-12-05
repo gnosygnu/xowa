@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.tests.*;
+package gplx.xowa.xtns.hieros;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.core.makes.tests.Xoh_make_fxt;
 class Hiero_html_fxt {
 	private final Hiero_html_mgr_fxt hiero_fxt = new Hiero_html_mgr_fxt(new Xop_fxt());
 	private final Xoh_make_fxt make_fxt = new Xoh_make_fxt();
@@ -24,8 +28,8 @@ class Hiero_html_fxt {
 		this.parser_fxt = hiero_fxt.Fxt();
 	}
 	public Hiero_html_mgr_fxt Hiero_fxt() {return hiero_fxt;}
-	public Hiero_html_fxt Hdump_n_() {return Hdump_(Bool_.N);}
-	public Hiero_html_fxt Hdump_y_() {return Hdump_(Bool_.Y);}
+	public Hiero_html_fxt Hdump_n_() {return Hdump_(BoolUtl.N);}
+	public Hiero_html_fxt Hdump_y_() {return Hdump_(BoolUtl.Y);}
 	private Hiero_html_fxt Hdump_(boolean v) {
 		this.hdump_atr = v ? " " + String_.new_u8(Hiero_hdump_wkr.HDUMP_ATR) : " ";
 		return this;

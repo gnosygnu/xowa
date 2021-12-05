@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.urls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Xoav_url_parser {
 	private static final byte[] Bry_site = Bry_.new_a7("/site/"), Bry_wiki = Bry_.new_a7("/wiki/"), Bry_http = Bry_.new_a7("http:");
 	public void Parse_xo_href(Xoav_url rv, byte[] src, byte[] cur_wiki_bry) {
@@ -28,7 +29,7 @@ public class Xoav_url_parser {
 	}
 	private int Parse_wiki(Xoav_url rv, byte[] src, int src_len, int pos) {
 		int wiki_bgn = pos + Bry_site.length;
-		int wiki_end = Bry_find_.Find_fwd(src, Byte_ascii.Slash, wiki_bgn, src_len); if (wiki_end == Bry_find_.Not_found) throw Err_.new_wo_type("could not find wiki_end", "src", String_.new_u8(src));
+		int wiki_end = Bry_find_.Find_fwd(src, AsciiByte.Slash, wiki_bgn, src_len); if (wiki_end == Bry_find_.Not_found) throw Err_.new_wo_type("could not find wiki_end", "src", String_.new_u8(src));
 		rv.Wiki_bry_(Bry_.Mid(src, wiki_bgn, wiki_end));
 		return wiki_end;
 	}

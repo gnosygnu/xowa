@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.numbers; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 public class Xol_num_fmtr_base implements Gfo_invk {
 	private final Btrie_fast_mgr dlm_trie = Btrie_fast_mgr.cs(); private final Btrie_rv trv = new Btrie_rv();
 	private Xol_num_grp[] grp_ary = Xol_num_grp.Ary_empty; int grp_ary_len;
@@ -36,7 +38,7 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 				switch (dlm_tid) {
 					case Raw_tid_dec: 
 						if (tid == Tid_raw)
-							tmp.Add_byte(Byte_ascii.Dot);	// NOTE: dec_dlm is always outputted as dot, not regional dec_spr; EX: for dewiki, 12,34 -> 12.34
+							tmp.Add_byte(AsciiByte.Dot);	// NOTE: dec_dlm is always outputted as dot, not regional dec_spr; EX: for dewiki, 12,34 -> 12.34
 						else
 							tmp.Add(dec_dlm);
 						break; 
@@ -59,8 +61,8 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 		for (int i = 0; i < src_len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:						
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					if (dec_pos == -1) {	// no decimal seen
 						if (num_bgn == -1)	// num_bgn hasn't started
 							num_bgn = i;	// set num_bgn
@@ -73,7 +75,7 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 						Gfo_num_fmt_wkr wkr = Get_or_new(i - num_bgn);
 						wkr.Fmt(src, num_bgn, i, tmp);
 						num_bgn = dec_pos = -1;	// reset vars
-						if (b == Byte_ascii.Dot			// current char is "."; NOTE: all languages treat "." as decimal separator for parse; EX: for de, "1.23" is "1,23" DATE:2013-10-21
+						if (b == AsciiByte.Dot			// current char is "."; NOTE: all languages treat "." as decimal separator for parse; EX: for de, "1.23" is "1,23" DATE:2013-10-21
 							//|| Bry_.Has_at_bgn(src, dec_dlm, i, src_len)
 							) {	// current char is languages's decimal delimiter; note this can be "," or any other multi-byte separator
 							dec_pos = i;
@@ -82,7 +84,7 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 							continue;
 						}
 					}
-					if (b == Byte_ascii.Comma)
+					if (b == AsciiByte.Comma)
 						tmp.Add(grp_dlm);
 					else
 						tmp.Add_byte(b);
@@ -110,7 +112,7 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 	public int Grps_len() {return grp_ary_len;}
 	public void Grps_add(Xol_num_grp dat_itm) {
 		standard = false;
-		this.grp_ary = (Xol_num_grp[])Array_.Resize(grp_ary, grp_ary_len + 1);
+		this.grp_ary = (Xol_num_grp[])ArrayUtl.Resize(grp_ary, grp_ary_len + 1);
 		grp_ary[grp_ary_len] = dat_itm;
 		grp_ary_len = grp_ary.length;
 		for (int i = 0; i < grp_ary_len; i++) {
@@ -139,8 +141,8 @@ public class Xol_num_fmtr_base implements Gfo_invk {
 	}
 	public static final String Invk_dec_dlm_ = "dec_dlm_", Invk_clear = "clear", Invk_grps_add = "grps_add";
 	private static final byte Raw_tid_dec = 0, Raw_tid_grp = 1;
-	private static final byte[] Dec_dlm_default = new byte[] {Byte_ascii.Dot};
-	public static final byte[] Grp_dlm_default = new byte[] {Byte_ascii.Comma};
+	private static final byte[] Dec_dlm_default = new byte[] {AsciiByte.Dot};
+	public static final byte[] Grp_dlm_default = new byte[] {AsciiByte.Comma};
 	public static final byte Tid_format = 0, Tid_raw = 1, Tid_nosep = 2;
 }
 class Gfo_num_fmt_wkr {
@@ -171,7 +173,7 @@ class Gfo_num_fmt_wkr {
 			if (dat.Repeat() && dat_repeat == -1) dat_repeat = dat_idx;
 			++dat_idx;
 		}
-		itm_ary = (Gfo_num_fmt_bldr[])Array_.Resize(itm_ary, itm_max);
+		itm_ary = (Gfo_num_fmt_bldr[])ArrayUtl.Resize(itm_ary, itm_max);
 	}
 	private Gfo_num_fmt_bldr[] itm_ary; private int itm_max;
 }

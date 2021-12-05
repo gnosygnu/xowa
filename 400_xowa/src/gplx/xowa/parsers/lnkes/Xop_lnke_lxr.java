@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lnkes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.core.net.*;
 public class Xop_lnke_lxr implements Xop_lxr {
@@ -34,7 +36,7 @@ public class Xop_lnke_lxr implements Xop_lxr {
 	public void Term(Btrie_fast_mgr core_trie) {}
 	private void Ctor_lxr_add(Btrie_fast_mgr core_trie, byte[] protocol_bry, byte tid) {
 		core_trie.Add(protocol_bry										, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_text, protocol_bry, tid));
-		core_trie.Add(Bry_.Add(Byte_ascii.Brack_bgn, protocol_bry)	, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_brack, protocol_bry, tid));
+		core_trie.Add(Bry_.Add(AsciiByte.BrackBgn, protocol_bry)	, new Xop_lnke_lxr(Xop_lnke_tkn.Lnke_typ_brack, protocol_bry, tid));
 	}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
 		if (this.tid == Gfo_protocol_itm.Tid_xowa && !ctx.Wiki().Sys_cfg().Xowa_proto_enabled()) return ctx.Lxr_make_txt_(cur_pos);

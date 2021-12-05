@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
 import gplx.dbs.sqls.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Db_qry_sql implements Db_qry {
 	public int			Tid() {return Db_qry_.Tid_sql;}
 	public boolean ReturnsRdr() {return isReader;} private boolean isReader;
@@ -42,7 +44,7 @@ public class Db_qry_sql implements Db_qry {
 		int args_idx = 0, args_len = args.length, pos = 0;
 		Bry_bfr bfr = Bry_bfr_.New_w_size(src_len);
 		while (pos < src_len) {
-			int question_pos = Bry_find_.Find_fwd(src, Byte_ascii.Question, pos);
+			int question_pos = Bry_find_.Find_fwd(src, AsciiByte.Question, pos);
 			if (question_pos == Bry_find_.Not_found)
 				question_pos = src_len;
 			bfr.Add_mid(src, pos, question_pos);
@@ -57,8 +59,8 @@ public class Db_qry_sql implements Db_qry {
 		Class<?> val_type = val.getClass();
 		if		(Type_.Eq(val_type, Int_.Cls_ref_type))
 			bfr.Add_int_variable(Int_.Cast(val));
-		else if	(Type_.Eq(val_type, Bool_.Cls_ref_type))
-			bfr.Add_int_fixed(1, Bool_.To_int(Bool_.Cast(val)));	// NOTE: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
+		else if	(Type_.Eq(val_type, BoolUtl.ClsRefType))
+			bfr.Add_int_fixed(1, BoolUtl.ToInt(BoolUtl.Cast(val)));	// NOTE: save boolean to 0 or 1, b/c (a) db may not support bit datatype (sqllite) and (b) avoid i18n issues with "true"/"false"
 		else if (Type_.Eq(val_type, Double_.Cls_ref_type))
 			bfr.Add_double(Double_.cast(val));
 		else if (Type_.Eq(val_type, Long_.Cls_ref_type))
@@ -73,7 +75,7 @@ public class Db_qry_sql implements Db_qry {
 			bfr.Add_str_a7(Decimal_adp_.cast(val).To_str());
 		else {
 			byte[] val_bry = Bry_.new_u8(Object_.Xto_str_strict_or_null(val));
-			val_bry = Bry_.Replace(val_bry, Byte_ascii.Apos_bry, Bry_escape_apos);
+			val_bry = Bry_.Replace(val_bry, AsciiByte.AposBry, Bry_escape_apos);
 			bfr.Add_byte_apos().Add(val_bry).Add_byte_apos();
 		}
 	}	private static final byte[] Bry_null = Bry_.new_u8("NULL"), Bry_escape_apos = Bry_.new_a7("''");

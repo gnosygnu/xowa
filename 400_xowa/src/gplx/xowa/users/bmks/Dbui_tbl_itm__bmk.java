@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.bmks; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*; import gplx.core.errs.*;
-import gplx.langs.jsons.*; import gplx.langs.htmls.*;
-import gplx.xowa.users.data.*; import gplx.xowa.users.bmks.*;
+import gplx.langs.htmls.*;
 import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.bridges.dbuis.fmtrs.*;
 public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	private final Xoa_app app; private final Xoud_bmk_itm_tbl tbl;
@@ -94,7 +95,7 @@ public class Dbui_tbl_itm__bmk implements Dbui_tbl_itm {
 	private Dbui_row_itm Get_ui_row(byte[] pkey, byte[] name, byte[] url, byte[] comment) {
 		Dbui_val_itm[] vals = new Dbui_val_itm[3];
 		vals[0] = new Dbui_val_itm(name, Gfh_utl.Escape_html_as_bry(tmp_bfr, name));
-		vals[1] = new Dbui_val_itm(url, url_fmtr.Bld_bry_many(tmp_bfr, Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, url)));
+		vals[1] = new Dbui_val_itm(url, url_fmtr.Bld_bry_many(tmp_bfr, Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, AsciiByte.Apos, url)));
 		vals[2] = new Dbui_val_itm(comment, Gfh_utl.Escape_html_as_bry(comment));
 		return new Dbui_row_itm(this, pkey, vals);
 	}

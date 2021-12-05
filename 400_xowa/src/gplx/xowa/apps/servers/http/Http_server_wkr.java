@@ -13,12 +13,36 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.langs.htmls.encoders.*;
-import gplx.xowa.apps.*;
-import gplx.xowa.htmls.js.*;
-import gplx.xowa.wikis.pages.*;
+package gplx.xowa.apps.servers.http;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Hash_adp_bry;
+import gplx.Io_url_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.core.ios.streams.Io_stream_rdr_;
+import gplx.core.net.Http_client_rdr;
+import gplx.core.net.Http_client_rdr_;
+import gplx.core.net.Http_client_wtr;
+import gplx.core.net.Http_client_wtr_;
+import gplx.core.net.Http_request_itm;
+import gplx.core.net.Http_request_parser;
+import gplx.core.net.Http_server_wtr;
+import gplx.core.net.Socket_adp;
+import gplx.core.primitives.Int_obj_val;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.apps.Xoa_app_mode;
 public class Http_server_wkr implements Gfo_invk {
 	private final int uid;
 	private final Http_server_mgr server_mgr;
@@ -60,7 +84,7 @@ public class Http_server_wkr implements Gfo_invk {
 				client_wtr.Rls(); // client_rdr.Rls(); socket.Rls();
 			}
 			catch (Exception e) {
-				String request_str = request == null ? "<<NULL>>" : request.To_str(tmp_bfr, Bool_.N);
+				String request_str = request == null ? "<<NULL>>" : request.To_str(tmp_bfr, BoolUtl.N);
 				server_wtr.Write_str_w_nl(String_.Format("failed to process request;\nrequest={0}\nerr_msg={1}", request_str, Err_.Message_gplx_full(e)));
 			}
 			finally {
@@ -80,12 +104,12 @@ public class Http_server_wkr implements Gfo_invk {
 	}
 	private void Serve_file(byte[] url) {
 		tmp_bfr.Clear().Add(root_dir_fsys);	// add "C:\xowa\"
-		int question_pos = Bry_find_.Find_fwd(url, Byte_ascii.Question);
+		int question_pos = Bry_find_.Find_fwd(url, AsciiByte.Question);
 		int url_bgn = Bry_.Has_at_bgn(url, Url__fsys) ? Url__fsys_len : 0;	// most files will have "/fsys/" at start, but Mathjax will not
 		int url_end = question_pos == Bry_find_.Not_found ? url.length : question_pos;	// ignore files with query params; EX: /file/A.png?key=val
-		url_encoder.Decode(tmp_bfr, Bool_.N, url, url_bgn, url_end);		// decode url to actual chars; note that XOWA stores on fsys in UTF-8 chars; "�" not "%C3"
+		url_encoder.Decode(tmp_bfr, BoolUtl.N, url, url_bgn, url_end);		// decode url to actual chars; note that XOWA stores on fsys in UTF-8 chars; "�" not "%C3"
 		byte[] path = tmp_bfr.To_bry_and_clear();
-		if (gplx.core.envs.Op_sys.Cur().Tid_is_wnt()) path = Bry_.Replace(path, Byte_ascii.Backslash, Byte_ascii.Slash);
+		if (gplx.core.envs.Op_sys.Cur().Tid_is_wnt()) path = Bry_.Replace(path, AsciiByte.Backslash, AsciiByte.Slash);
 		client_wtr.Write_bry(Xosrv_http_wkr_.Rsp__http_ok);
 		// 	client_wtr.Write_str("Expires: Sun, 17-Jan-2038 19:14:07 GMT\n");
 		String mime_type = String_.new_u8(Http_file_utl.To_mime_type_by_path_as_bry(path));
@@ -115,14 +139,14 @@ public class Http_server_wkr implements Gfo_invk {
 				page_html = Convert_page(page_html, root_dir_http, String_.new_u8(url_parser.Wiki()));
 			}
 		}
-		Xosrv_http_wkr_.Write_response_as_html(client_wtr, Bool_.N, page_html);
+		Xosrv_http_wkr_.Write_response_as_html(client_wtr, BoolUtl.N, page_html);
 	}
 	private void Process_post(Http_request_itm request) {
 		byte[] msg = request.Post_data_hash().Get_by(Key__msg).Val();
 		byte[] app_mode = request.Post_data_hash().Get_by(Key__app_mode).Val();
 		Xoa_app_mode app_mode_itm = Xoa_app_mode.parse(String_.new_u8(app_mode));
 		server_wtr.Write_str_w_nl(String_.new_u8(request.Host()) + "|POST|" + String_.new_u8(msg));
-		Object url_tid_obj = post_url_hash.Get_by_bry(request.Url()); if (url_tid_obj == null) throw Err_.new_wo_type("unknown url", "url", request.Url(), "request", request.To_str(tmp_bfr, Bool_.N));
+		Object url_tid_obj = post_url_hash.Get_by_bry(request.Url()); if (url_tid_obj == null) throw Err_.new_wo_type("unknown url", "url", request.Url(), "request", request.To_str(tmp_bfr, BoolUtl.N));
 		String rv = null;
 		switch (((Int_obj_val)url_tid_obj).Val()) {
 			case Tid_post_url_json:
@@ -176,7 +200,7 @@ class Xosrv_http_wkr_ {
 			( Bry_.Add
 			(   Rsp__http_ok
 			,   Rsp__content_type_html
-			,   Byte_ascii.Nl_bry
+			,   AsciiByte.NlBry
 			,   html
 			));
 		} catch (Exception err) {
@@ -191,8 +215,8 @@ class Xosrv_http_wkr_ {
 				( Rsp__http_redirect
 				, Rsp__location
 				, redirect
-				, Byte_ascii.Nl_bry
-				, Byte_ascii.Nl_bry // proxy servers like nginx require 2 line breaks; ISSUE#:600; DATE:2019-11-05
+				, AsciiByte.NlBry
+				, AsciiByte.NlBry // proxy servers like nginx require 2 line breaks; ISSUE#:600; DATE:2019-11-05
 				)
 			);
 		} catch (Exception err) {

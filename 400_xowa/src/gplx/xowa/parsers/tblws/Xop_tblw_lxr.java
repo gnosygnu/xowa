@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tblws; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*;
 public class Xop_tblw_lxr implements Xop_lxr {
@@ -46,14 +48,14 @@ public class Xop_tblw_lxr implements Xop_lxr {
 					}
 					else {	// \n| or \n! but no tbl
 						if (	bgn_pos != Xop_parser_.Doc_bgn_bos		// avoid ! at BOS
-							&&	src[bgn_pos] == Byte_ascii.Nl)		// handle "!" etc.
+							&&	src[bgn_pos] == AsciiByte.Nl)		// handle "!" etc.
 							return Xop_tblw_wkr.Handle_false_tblw_match(ctx, root, src, bgn_pos, cur_pos, tkn_mkr.Txt(bgn_pos + 1, cur_pos), true);	// +1 to ignore \n of "\n!", "\n!!", "\n|"; DATE:2014-02-19
 						else											// handle "!!" only
 							return ctx.Lxr_make_txt_(cur_pos);
 					}
 				}
 				if (wlxr_type == Xop_tblw_wkr.Tblw_type_th2) {											// !!; extra check to make sure \n! exists; DATE:2014-10-19
-					int prv_th_pos = Bry_find_.Find_bwd(src, Byte_ascii.Nl, bgn_pos);				// search for previous \n
+					int prv_th_pos = Bry_find_.Find_bwd(src, AsciiByte.Nl, bgn_pos);				// search for previous \n
 					boolean invalid = prv_th_pos == Bry_find_.Not_found;									// no \n; invalid
 					if (!invalid) {
 						++prv_th_pos;																	// skip \n
@@ -61,7 +63,7 @@ public class Xop_tblw_lxr implements Xop_lxr {
 						if (prv_th_pos == bgn_pos)														// invalid: "\n" is directly in front of "!!"
 							invalid = true;
 						else
-							invalid = src[prv_th_pos] != Byte_ascii.Bang;								// invalid if not "\n!"
+							invalid = src[prv_th_pos] != AsciiByte.Bang;								// invalid if not "\n!"
 					}
 					if (invalid)
 						return Xop_tblw_wkr.Handle_false_tblw_match(ctx, root, src, bgn_pos, cur_pos, tkn_mkr.Txt(bgn_pos, cur_pos), false);

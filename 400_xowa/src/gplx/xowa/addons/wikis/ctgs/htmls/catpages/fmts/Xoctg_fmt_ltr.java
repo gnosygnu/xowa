@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.core.intls.ucas.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;	
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.langs.msgs.*; import gplx.core.intls.ucas.*;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*;
 public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C cont."
 	private final Xoctg_fmt_itm_base itm_fmt;
 	private Xoctg_catpage_grp grp;
@@ -49,7 +50,7 @@ public class Xoctg_fmt_ltr implements gplx.core.brys.Bfr_arg {	// "A", "B", "C c
 			// byte[] ltr_cur = gplx.core.intls.Utf8_.Get_char_at_pos_as_bry(itm_sortkey, 0);
 			byte[] ltr_cur = ltr_extractor.Get_1st_ltr(itm_sortkey);
 			byte[] ltr_head = Bry_.Eq(ltr_prv, ltr_cur)
-				? Bry_.Add(ltr_prv, Byte_ascii.Space_bry, msg__list_continues)	// new col uses same ltr as last itm in old col; add "cont."; EX: "C cont."
+				? Bry_.Add(ltr_prv, AsciiByte.SpaceBry, msg__list_continues)	// new col uses same ltr as last itm in old col; add "cont."; EX: "C cont."
 				: ltr_cur;	// else, just use ltr; EX: "C"				
 			ltr_prv = ltr_cur;
 

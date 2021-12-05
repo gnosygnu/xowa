@@ -13,13 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import org.junit.*;
+package gplx.xowa.apps.urls;
+import gplx.Bry_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_url;
+import org.junit.Test;
 public class Xoa_url__basic__tst {
 	private final Xoa_url_fxt fxt = new Xoa_url_fxt();
 	@Test public void Eq_page() {
-		fxt.Test_eq_page(Bool_.Y, "en.wikipedia.org/wiki/A?redirect=yes", "en.wikipedia.org/wiki/A?redirect=yes");
-		fxt.Test_eq_page(Bool_.N, "en.wikipedia.org/wiki/A?redirect=no"	, "en.wikipedia.org/wiki/A?redirect=yes");
+		fxt.Test_eq_page(BoolUtl.Y, "en.wikipedia.org/wiki/A?redirect=yes", "en.wikipedia.org/wiki/A?redirect=yes");
+		fxt.Test_eq_page(BoolUtl.N, "en.wikipedia.org/wiki/A?redirect=no"	, "en.wikipedia.org/wiki/A?redirect=yes");
 	}
 }
 class Xoa_url_fxt extends Xow_url_parser_fxt { 	public void Test_eq_page(boolean expd, String lhs_str, String rhs_str) {

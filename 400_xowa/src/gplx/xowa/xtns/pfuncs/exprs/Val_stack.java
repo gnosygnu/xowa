@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.parsers.*;
+package gplx.xowa.xtns.pfuncs.exprs; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 class Val_stack {
 	public void Clear() {stack_len = 0;}
 	public int Len() {return stack_len;}
@@ -28,7 +28,7 @@ class Val_stack {
 		int stack_len_new = stack_len + 1;
 		if (stack_len_new > stack_max) {
 			stack_max = stack_len_new * 2;
-			stack = (Decimal_adp[])Array_.Resize(stack, stack_max);
+			stack = (Decimal_adp[])ArrayUtl.Resize(stack, stack_max);
 		}
 		stack[stack_len] = v;
 		stack_len = stack_len_new;

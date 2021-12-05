@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.site_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.site_cfgs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.langs.jsons.*;
 class Xoa_site_cfg_itm__extensiontags extends Xoa_site_cfg_itm__base {
 	public Xoa_site_cfg_itm__extensiontags() {
@@ -24,8 +26,8 @@ class Xoa_site_cfg_itm__extensiontags extends Xoa_site_cfg_itm__base {
 		if (i != 0) bfr.Add_byte_nl();
 		int idx_last = tag.length - 1;
 		if (	tag.length < 3
-			||	tag[0]			!= Byte_ascii.Angle_bgn
-			||	tag[idx_last]	!= Byte_ascii.Angle_end
+			||	tag[0]			!= AsciiByte.AngleBgn
+			||	tag[idx_last]	!= AsciiByte.AngleEnd
 			)
 			throw Err_.new_("site_meta", "invalid extensiontag", "tag", tag);
 		bfr.Add_mid(tag, 1, idx_last);	// convert "<pre>" to "pre"

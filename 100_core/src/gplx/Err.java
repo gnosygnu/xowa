@@ -14,7 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.errs.*;
+import gplx.core.errs.Err_msg;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
 public class Err extends RuntimeException {
 	private final boolean is_gplx;
 	private final String trace;
@@ -36,8 +38,8 @@ public class Err extends RuntimeException {
 
 	public Err Args_add(Object... args) {msgs_ary[msgs_idx - 1].Args_add(args); return this;}	// i - 1 to get current
 
-	public String To_str__full()	{return To_str(Bool_.N, Bool_.Y);}
-	public String To_str__log()		{return To_str(Bool_.Y, Bool_.Y);}
+	public String To_str__full()	{return To_str(BoolUtl.N, BoolUtl.Y);}
+	public String To_str__log()		{return To_str(BoolUtl.Y, BoolUtl.Y);}
 	public String To_str__msg_only(){
 		return msgs_idx == 0 ? "<<MISSING ERROR MESSAGE>>" : msgs_ary[0].To_str_wo_type();	// take 1st message only
 	}
@@ -79,7 +81,7 @@ public class Err extends RuntimeException {
 		if (msgs_idx == msgs_len) {
 			int new_len = msgs_len * 2;
 			Err_msg[] new_ary = new Err_msg[new_len];
-			Array_.Copy_to(msgs_ary, new_ary, 0);
+			ArrayUtl.CopyTo(msgs_ary, new_ary, 0);
 			this.msgs_ary = new_ary;
 			this.msgs_len = new_len;
 		}

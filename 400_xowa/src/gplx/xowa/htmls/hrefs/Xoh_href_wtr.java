@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.hrefs;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.core.brys.fmtrs.Bry_fmtr;
 import gplx.langs.htmls.encoders.Gfo_url_encoder;
 import gplx.langs.htmls.encoders.Gfo_url_encoder_;
@@ -30,7 +30,7 @@ import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
 import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
 
 public class Xoh_href_wtr {	// TS:do not move to app-level
-	private final Gfo_url_encoder encoder = Gfo_url_encoder_.New__html_href_mw(Bool_.Y).Make();
+	private final Gfo_url_encoder encoder = Gfo_url_encoder_.New__html_href_mw(BoolUtl.Y).Make();
 	private final Bry_bfr encoder_bfr = Bry_bfr_.Reset(255), tmp_bfr = Bry_bfr_.Reset(255);
 	public byte[] Build_to_bry(Xow_wiki wiki, byte[] ttl_bry) {
 		Xoa_ttl ttl = wiki.Ttl_parse(ttl_bry);
@@ -49,9 +49,9 @@ public class Xoh_href_wtr {	// TS:do not move to app-level
 		this.Build_to_bfr(tmp, wiki.App(), wiki.Domain_bry(), ttl);
 		int qargs_len = qargs_ary.length / 2;
 		for (int i = 0; i < qargs_len; i++) {
-			tmp.Add_byte(i == 0 ? Byte_ascii.Question : Byte_ascii.Eq);
+			tmp.Add_byte(i == 0 ? AsciiByte.Question : AsciiByte.Eq);
 			tmp.Add(qargs_ary[i]);
-			tmp.Add_byte(Byte_ascii.Eq);
+			tmp.Add_byte(AsciiByte.Eq);
 			tmp.Add(qargs_ary[i + 1]);
 		}
 		return tmp.To_bry_and_clear();
@@ -107,7 +107,7 @@ public class Xoh_href_wtr {	// TS:do not move to app-level
 		bfr.Add_bfr_and_clear(encoder_bfr);
 	}
 	private void Build_to_bfr_page(Xoa_ttl ttl, Xoh_wtr_ctx hctx, byte[] ttl_full, int page_bgn) {
-		int anch_bgn = Bry_find_.Find_fwd(ttl_full, Byte_ascii.Hash);	// NOTE: cannot use Anch_bgn b/c Anch_bgn has bug with whitespace
+		int anch_bgn = Bry_find_.Find_fwd(ttl_full, AsciiByte.Hash);	// NOTE: cannot use Anch_bgn b/c Anch_bgn has bug with whitespace
 		if (anch_bgn == Bry_find_.Not_found){	// no anchor; just add page
 			encoder.Encode(encoder_bfr, ttl_full, page_bgn, ttl_full.length);
 			if (hctx.Mode_is_file_dump()) {

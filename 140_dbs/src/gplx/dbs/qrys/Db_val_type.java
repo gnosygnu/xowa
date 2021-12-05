@@ -21,16 +21,16 @@ import gplx.Decimal_adp_;
 import gplx.Object_;
 import gplx.String_;
 import gplx.objects.lists.GfoListBase;
-import gplx.objects.primitives.Bool_;
-import gplx.objects.primitives.Byte_;
-import gplx.objects.primitives.Char_;
-import gplx.objects.primitives.Double_;
-import gplx.objects.primitives.Float_;
-import gplx.objects.primitives.Int_;
-import gplx.objects.primitives.Long_;
-import gplx.objects.primitives.Short_;
-import gplx.objects.strings.bfrs.GfoStringBuilder;
-import gplx.objects.types.Type_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.primitives.ByteUtl;
+import gplx.objects.primitives.CharUtl;
+import gplx.objects.primitives.DoubleUtl;
+import gplx.objects.primitives.FloatUtl;
+import gplx.objects.primitives.IntUtl;
+import gplx.objects.primitives.LongUtl;
+import gplx.objects.primitives.ShortUtl;
+import gplx.objects.strings.bfrs.GfoStrBldr;
+import gplx.objects.types.TypeUtl;
 
 public class Db_val_type {
 	public static final byte // not serialized
@@ -54,23 +54,23 @@ public class Db_val_type {
 	;
 	public static int ToTypeId(Object o) {
 		Class<?> type = o.getClass();
-		if      (Type_.Eq(type, Int_.Cls_ref_type))         return Tid_int32;
-		else if (Type_.Eq(type, String_.Cls_ref_type))      return Tid_nvarchar;
-		else if (Type_.Eq(type, byte[].class))              return Tid_nvarchar;
-		else if (Type_.Eq(type, Bool_.Cls_ref_type))        return Tid_bool;
-		else if (Type_.Eq(type, Byte_.Cls_ref_type))        return Tid_byte;
-		else if (Type_.Eq(type, Long_.Cls_ref_type))        return Tid_int64;
-		else if (Type_.Eq(type, Double_.Cls_ref_type))      return Tid_double;
-		else if (Type_.Eq(type, Decimal_adp_.Cls_ref_type)) return Tid_decimal;
-		else if (Type_.Eq(type, DateAdp_.Cls_ref_type))     return Tid_date;
-		else if (Type_.Eq(type, Float_.Cls_ref_type))       return Tid_float;
-		else if (Type_.Eq(type, Short_.Cls_ref_type))       return Tid_int16;
-		else if (Type_.Eq(type, Char_.Cls_ref_type))        return Tid_char;
+		if      (TypeUtl.Eq(type, IntUtl.ClsRefType))         return Tid_int32;
+		else if (TypeUtl.Eq(type, String_.Cls_ref_type))      return Tid_nvarchar;
+		else if (TypeUtl.Eq(type, byte[].class))              return Tid_nvarchar;
+		else if (TypeUtl.Eq(type, BoolUtl.ClsRefType))        return Tid_bool;
+		else if (TypeUtl.Eq(type, ByteUtl.ClsRefType))        return Tid_byte;
+		else if (TypeUtl.Eq(type, LongUtl.ClsRefType))        return Tid_int64;
+		else if (TypeUtl.Eq(type, DoubleUtl.ClsRefType))      return Tid_double;
+		else if (TypeUtl.Eq(type, Decimal_adp_.Cls_ref_type)) return Tid_decimal;
+		else if (TypeUtl.Eq(type, DateAdp_.Cls_ref_type))     return Tid_date;
+		else if (TypeUtl.Eq(type, FloatUtl.ClsRefType))       return Tid_float;
+		else if (TypeUtl.Eq(type, ShortUtl.ClsRefType))       return Tid_int16;
+		else if (TypeUtl.Eq(type, CharUtl.ClsRefType))        return Tid_char;
 		else                                                return Tid_unknown;
 	}
 	public static String ToSqlStr(String sql, GfoListBase<Object> paramList) {
 		try {
-			GfoStringBuilder sb = new GfoStringBuilder();
+			GfoStrBldr sb = new GfoStrBldr();
 			int oldPos = 0;
 			int paramIdx = 0;
 			while (true) {
@@ -91,9 +91,9 @@ public class Db_val_type {
 						break;
 				}
 				if (quote) {
-					sb.Add('\'');
+					sb.AddChar('\'');
 					sb.Add(String_.Replace(paramStr, "'", "\\'"));
-					sb.Add('\'');
+					sb.AddChar('\'');
 				} else {
 					sb.Add(paramStr);
 				}

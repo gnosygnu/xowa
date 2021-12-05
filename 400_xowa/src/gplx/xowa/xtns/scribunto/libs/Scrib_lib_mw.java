@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.xtns.scribunto.*;
 import gplx.core.primitives.*; import gplx.core.envs.*;
 import gplx.xowa.langs.funcs.*;
@@ -192,7 +196,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 			if (key_missing)	// key missing; EX: {{a|val}}
 				key_as_int = ++arg_idx;// NOTE: MW requires a key; if none, then default to int index; NOTE: must be int, not String; NOTE: must be indexed to keyless args; EX: in "key1=val1,val2", "val2" must be "1" (1st keyless arg) not "2" (2nd arg); DATE:2013-11-09
 			else {				// key exists; EX:{{a|key=val}}
-				if (key_len > 0 && tmp_bfr.Bfr()[0] != Byte_ascii.Num_0)	// do not convert zero-padded numbers to int; EX: "01" -> "01" x> 1; PAGE:ru.w:Красноказарменный_проезд; DATE:2016-11-23
+				if (key_len > 0 && tmp_bfr.Bfr()[0] != AsciiByte.Num0)	// do not convert zero-padded numbers to int; EX: "01" -> "01" x> 1; PAGE:ru.w:Красноказарменный_проезд; DATE:2016-11-23
 					key_as_int = Bry_.To_int_or(tmp_bfr.Bfr(), 0, tmp_bfr.Len(), Int_.Min_value);
 				if (key_as_int == Int_.Min_value) {		// key is not int; create str
 					key_as_str = tmp_bfr.To_str_and_clear();
@@ -202,9 +206,9 @@ public class Scrib_lib_mw implements Scrib_lib {
 					tmp_bfr.Clear();					// must clear bfr, else key will be added to val;
 				}
 			}
-//				ctx.Scribunto = Bool_.Y; // CHART
+//				ctx.Scribunto = BoolUtl.Y; // CHART
 			nde.Val_tkn().Tmpl_evaluate(ctx, src, parent_frame, tmp_bfr);
-//				ctx.Scribunto = Bool_.N;
+//				ctx.Scribunto = BoolUtl.N;
 			String val = key_missing ? tmp_bfr.To_str_and_clear() : tmp_bfr.To_str_and_clear_and_trim(); // NOTE: must trim if key_exists; DUPE:TRIM_IF_KEY
 			Keyval kv = key_is_str ? Keyval_.new_(key_as_str, val) : Keyval_.int_(key_as_int, val);
 			rv.Add(kv);
@@ -292,7 +296,7 @@ public class Scrib_lib_mw implements Scrib_lib {
 		// get argx
 		byte[] fnc_name = fnc_name_ref.Val();
 		int fnc_name_len = fnc_name.length;
-		int fnc_name_colon_pos = Bry_find_.Find_fwd(fnc_name, Byte_ascii.Colon, 0, fnc_name_len);
+		int fnc_name_colon_pos = Bry_find_.Find_fwd(fnc_name, AsciiByte.Colon, 0, fnc_name_len);
 		if (fnc_name_colon_pos == Bry_find_.Not_found) {
 			if (rv.Len() > 0) {	// some parser_functions can pass 0 args; PAGE:en.w:Paris EX:{{#coordinates}} DATE:2016-10-12
 				Keyval arg_argx = (Keyval)rv.Get_at(0);
@@ -389,25 +393,25 @@ public class Scrib_lib_mw implements Scrib_lib {
 		return rslt.Init_ary_empty();
 	}
 }
-class Scrib_lib_mw_callParserFunction_sorter implements gplx.core.lists.ComparerAble {
+class Scrib_lib_mw_callParserFunction_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Keyval lhs = (Keyval)lhsObj;
 		Keyval rhs = (Keyval)rhsObj;
 
 		// handle null kv; PAGE:en.w:Abziri DATE:2017-11-29
 		if		(lhs == null && rhs == null)
-			return CompareAble_.Same;
+			return CompareAbleUtl.Same;
 		else if (lhs == null)
-			return CompareAble_.More;
+			return CompareAbleUtl.More;
 		else if (rhs == null)
-			return CompareAble_.Less;
+			return CompareAbleUtl.Less;
 
 		Object lhs_key = lhs.Key_as_obj();
 		Object rhs_key = rhs.Key_as_obj();
 		boolean lhs_is_int = Type_.Eq(lhs_key.getClass(), Int_.Cls_ref_type);
 		boolean rhs_is_int = Type_.Eq(rhs_key.getClass(), Int_.Cls_ref_type);
 		if (lhs_is_int != rhs_is_int)									// different types (int vs String or String vs int)
-			return lhs_is_int ? CompareAble_.Less : CompareAble_.More;	// sort ints before strings
+			return lhs_is_int ? CompareAbleUtl.Less : CompareAbleUtl.More;	// sort ints before strings
 		if (lhs_is_int)													// both are ints
 			return Int_.Compare(Int_.Cast(lhs_key), Int_.Cast(rhs_key));
 		else															// both are strings

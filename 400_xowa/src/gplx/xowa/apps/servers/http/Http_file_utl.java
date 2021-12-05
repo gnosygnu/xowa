@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
+package gplx.xowa.apps.servers.http; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.files.*;
 class Http_file_utl {
 	public static byte[] To_mime_type_by_path_as_bry(byte[] path_bry) {
-		int dot_pos = Bry_find_.Find_bwd(path_bry, Byte_ascii.Dot);
+		int dot_pos = Bry_find_.Find_bwd(path_bry, AsciiByte.Dot);
 		return dot_pos == Bry_find_.Not_found ? Mime_octet_stream : To_mime_type_by_ext_as_bry(path_bry, dot_pos, path_bry.length);
 	}
 	public static byte[] To_mime_type_by_ext_as_bry(byte[] ext_bry, int bgn, int end) {
@@ -36,7 +37,7 @@ class Http_file_utl {
 		int len = Xof_ext_.Id__max;
 		for (int i = 0; i < len; ++i) {
 			rv.Add_bry_obj
-			( Bry_.Add(Byte_ascii.Dot, Xof_ext_.Bry__ary[i])
+			( Bry_.Add(AsciiByte.Dot, Xof_ext_.Bry__ary[i])
 			, Xof_ext_.Mime_type__ary[i]);
 		}
 		rv.Add_str_obj(".htm"	, Mime_html);

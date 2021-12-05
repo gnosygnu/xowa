@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*; import gplx.core.tests.*;
 public class Bry_bfr_tst {
 	private Bry_bfr bb = Bry_bfr_.New();
@@ -30,7 +31,7 @@ public class Bry_bfr_tst {
 	}
 	@Test public void Add_byte_repeat() {	// NOTE: make sure auto-expands
 		bb = Bry_bfr_.New_w_size(2);
-		tst_Add_byte_repeat(Byte_ascii.Space, 12, String_.Repeat(" ", 12));
+		tst_Add_byte_repeat(AsciiByte.Space, 12, String_.Repeat(" ", 12));
 	}	void tst_Add_byte_repeat(byte b, int len, String expd) {Tfds.Eq(expd, bb.Add_byte_repeat(b, len).To_str_and_clear());}
 	void tst_AddByte(String s, String expdStr, int expdLen) {
 		if (String_.Len(s) == 1)
@@ -178,11 +179,11 @@ public class Bry_bfr_tst {
 		Tfds.Eq(expd, bb.Add_bfr_trim_and_clear(tmp, true, true).To_str_and_clear());
 	}
 	@Test public void Add_int_pad_bgn() {
-		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3,    0, "000");
-		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3,    1, "001");
-		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3,   10, "010");
-		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3,  100, "100");
-		fxt.Test_Add_int_pad_bgn(Byte_ascii.Num_0, 3, 1000, "1000");
+		fxt.Test_Add_int_pad_bgn(AsciiByte.Num0, 3,    0, "000");
+		fxt.Test_Add_int_pad_bgn(AsciiByte.Num0, 3,    1, "001");
+		fxt.Test_Add_int_pad_bgn(AsciiByte.Num0, 3,   10, "010");
+		fxt.Test_Add_int_pad_bgn(AsciiByte.Num0, 3,  100, "100");
+		fxt.Test_Add_int_pad_bgn(AsciiByte.Num0, 3, 1000, "1000");
 	}
 	@Test public void Add_bry_escape() {
 		fxt.Test__add_bry_escape("abc"                  , "abc");            // nothing to escape
@@ -244,7 +245,7 @@ class ByteAryBfr_fxt {
 	public void Test__add_bry_escape(String src, String expd) {Test__add_bry_escape(src, 0, String_.Len(src), expd);}
 	public void Test__add_bry_escape(String src, int src_bgn, int src_end, String expd) {
 		byte[] val_bry = Bry_.new_u8(src);
-		Tfds.Eq(expd, bfr.Add_bry_escape(Byte_ascii.Apos, Byte_.Ary(Byte_ascii.Apos, Byte_ascii.Apos), val_bry, src_bgn, src_end).To_str_and_clear());
+		Tfds.Eq(expd, bfr.Add_bry_escape(AsciiByte.Apos, Byte_.Ary(AsciiByte.Apos, AsciiByte.Apos), val_bry, src_bgn, src_end).To_str_and_clear());
 	}
 	public void Test_Insert_at(String init, int pos, String val, String expd)	{Tfds.Eq(expd, bfr.Add_str_u8(init).Insert_at(pos, Bry_.new_u8(val)).To_str_and_clear());}
 	public void Test_Insert_at(String init, int pos, String val, int val_bgn, int val_end, String expd)	{Tfds.Eq(expd, bfr.Add_str_u8(init).Insert_at(pos, Bry_.new_u8(val), val_bgn, val_end).To_str_and_clear());}

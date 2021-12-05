@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.sqlite; import gplx.*;
-import gplx.dbs.engines.*;
-import gplx.dbs.qrys.*;
+package gplx.dbs.engines.sqlite;
+import gplx.Gfo_usr_dlg_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.dbs.engines.Db_engine;
+import gplx.dbs.qrys.Db_qry_sql;
+import gplx.objects.primitives.BoolUtl;
 public class Sqlite_txn_mgr {
 	private final List_adp txn_list = List_adp_.New();
 	public Sqlite_txn_mgr(Db_engine engine) {this.engine = engine;} private final Db_engine engine;
-	private boolean pragma_needed = Bool_.Y, txn_started = Bool_.N; // NOTE: txns only support 1 level; SQLite fails when nesting transactions; DATE:2015-03-11
+	private boolean pragma_needed = BoolUtl.Y, txn_started = BoolUtl.N; // NOTE: txns only support 1 level; SQLite fails when nesting transactions; DATE:2015-03-11
 	public void	Txn_bgn(String name) {
 		if (String_.Len_eq_0(name)) name = "unnamed";
 		if (pragma_needed) {

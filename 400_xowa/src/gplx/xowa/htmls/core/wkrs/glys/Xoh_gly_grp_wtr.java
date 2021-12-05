@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.glys; import gplx.*;
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
+import gplx.langs.htmls.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.core.wkrs.bfr_args.*;
 class Xoh_gly_grp_wtr implements Bfr_arg {
 	private final Bfr_arg_clearable[] arg_ary;
 	private final Bfr_arg__hatr_id ul_id = Bfr_arg__hatr_id.New_id("xogly_ul_");
@@ -34,9 +36,9 @@ class Xoh_gly_grp_wtr implements Bfr_arg {
 			ul_id.Set(id); 
 		ul_xogly.Set_args(xnde_w, xnde_h, xnde_per_row);
 		this.ul_cls = cls;
-		this.xtra_cls = xtra_cls == null ? Bry_.Empty : Bry_.Add(Byte_ascii.Space_bry, xtra_cls);
+		this.xtra_cls = xtra_cls == null ? Bry_.Empty : Bry_.Add(AsciiByte.SpaceBry, xtra_cls);
 		this.xtra_atr_bry = xtra_atr_bry;
-		this.ul_nl = ary.length == 0 ? Bry_.Empty : Byte_ascii.Nl_bry;	// TIDY: <ul></ul> should be on same line if 0 items
+		this.ul_nl = ary.length == 0 ? Bry_.Empty : AsciiByte.NlBry;	// TIDY: <ul></ul> should be on same line if 0 items
 		li_capt.Capt_(capt);
 		itm_list_wtr.Init(ary);
 		ul_style.Set_args(ul_style_max_w, ul_style_w, xtra_style_bry);			

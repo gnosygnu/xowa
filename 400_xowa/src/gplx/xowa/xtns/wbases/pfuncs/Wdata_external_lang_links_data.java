@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.pfuncs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Wdata_external_lang_links_data {
@@ -48,5 +49,5 @@ public class Wdata_external_lang_links_data {
 		}
 		tmp_bfr.Mkr_rls();
 	}
-	public static final byte[] Key_sort = new byte[] {Byte_ascii.Star};
+	public static final byte[] Key_sort = new byte[] {AsciiByte.Star};
 }

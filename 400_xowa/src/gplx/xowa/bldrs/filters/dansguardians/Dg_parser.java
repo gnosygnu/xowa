@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.filters.dansguardians; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Dg_parser {
 	private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance; private final Bry_bfr key_bldr = Bry_bfr_.Reset(32);
 	private final List_adp files = List_adp_.New(), lines = List_adp_.New(), words = List_adp_.New();
@@ -37,7 +38,7 @@ class Dg_parser {
 		int file_id = ++next_id;
 		while (line_bgn < src_len) {
 			++line_idx;
-			int line_end = Bry_find_.Find_fwd(src, Byte_ascii.Nl, line_bgn); if (line_end == Bry_find_.Not_found) line_end = src_len;
+			int line_end = Bry_find_.Find_fwd(src, AsciiByte.Nl, line_bgn); if (line_end == Bry_find_.Not_found) line_end = src_len;
 			Dg_rule line = Parse_line(rel_path, file_id, line_idx, src, line_bgn, line_end);
 			if (line.Tid() != Dg_rule.Tid_invalid)
 				lines.Add(line);
@@ -49,10 +50,10 @@ class Dg_parser {
 		int score = Dg_rule.Score_banned;
 		int brack_bgn = line_bgn;
 		if (line_end - line_bgn <= 1)			return Dg_rule.Itm_blank;	// ignore blank lines; EX: ""
-		if (src[line_bgn] == Byte_ascii.Hash)	return Dg_rule.Itm_comment;	// ignore lines starting with hash; EX: "# comment"
+		if (src[line_bgn] == AsciiByte.Hash)	return Dg_rule.Itm_comment;	// ignore lines starting with hash; EX: "# comment"
 		while (brack_bgn < line_end) {	// look for terms bracketed by "<>"
-			if (src[brack_bgn] != Byte_ascii.Lt) {Warn("dg.invalid_line.term must start with angle_bgn", rel_path, line_idx, src, line_bgn, line_end); return Dg_rule.Itm_invalid;}
-			int brack_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, brack_bgn);
+			if (src[brack_bgn] != AsciiByte.Lt) {Warn("dg.invalid_line.term must start with angle_bgn", rel_path, line_idx, src, line_bgn, line_end); return Dg_rule.Itm_invalid;}
+			int brack_end = Bry_find_.Find_fwd(src, AsciiByte.Gt, brack_bgn);
 			if (brack_end == Bry_find_.Not_found) {Warn("dg.invalid_line.angle_end not found", rel_path, line_idx, src, line_bgn, line_end); return Dg_rule.Itm_invalid;} 
 			byte[] word = Bry_.Mid(src, brack_bgn + 1, brack_end);
 			words.Add(word);
@@ -62,12 +63,12 @@ class Dg_parser {
 				break;
 			}
 			byte next = src[next_pos];
-			if (next == Byte_ascii.Comma)
+			if (next == AsciiByte.Comma)
 				brack_bgn = brack_end + 2;
 			else {
 				brack_bgn = brack_end + 1;
-				if (src[brack_bgn] != Byte_ascii.Lt) {Warn("dg.invalid_line.wrong_term_dlm", rel_path, line_idx, src, line_bgn, line_end); break;}
-				brack_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, brack_bgn);
+				if (src[brack_bgn] != AsciiByte.Lt) {Warn("dg.invalid_line.wrong_term_dlm", rel_path, line_idx, src, line_bgn, line_end); break;}
+				brack_end = Bry_find_.Find_fwd(src, AsciiByte.Gt, brack_bgn);
 				if (brack_end == Bry_find_.Not_found) {Warn("dg.invalid_line.score not found", rel_path, line_idx, src, line_bgn, line_end); break;}
 				int parse_score = Bry_.To_int_or(src, brack_bgn + 1, brack_end, Int_.Min_value);
 				if (parse_score == Int_.Min_value) {Warn("dg.invalid_line.score is invalid", rel_path, line_idx, src, line_bgn, line_end); break;}

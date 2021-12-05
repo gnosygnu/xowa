@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.bridges.dbuis.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.bridges.*; import gplx.xowa.htmls.bridges.dbuis.*;
+package gplx.xowa.htmls.bridges.dbuis.fmtrs; import gplx.*;
 import gplx.core.brys.fmtrs.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 public class Dbui_tbl_fmtr {
 	private final Dbui_head_cell_fmtr head_cell_fmtr = new Dbui_head_cell_fmtr();
@@ -59,7 +60,7 @@ class Dbui_row_fmtr implements gplx.core.brys.Bfr_arg {
 		cells_fmtr.Ctor(val_fmtr, tbl.View_btns());
 		for (int i = 0; i < len; ++i) {
 			Dbui_row_itm row = rows[i];
-			row_key_bfr.Add(tbl_key).Add_byte(Byte_ascii.Underline).Add_int_variable(i);
+			row_key_bfr.Add(tbl_key).Add_byte(AsciiByte.Underline).Add_int_variable(i);
 			byte[] row_key = row_key_bfr.To_bry_and_clear();
 			fmtr.Bld_bfr_many(bfr, row_key, row.Pkey(), cells_fmtr.Init(row_key, row));
 		}

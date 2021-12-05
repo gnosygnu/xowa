@@ -13,8 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*; import gplx.core.threads.*;
+package gplx.xowa.bldrs.installs;
+import gplx.Bry_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Keyval;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr_eval_mgr_;
+import gplx.core.threads.Gfo_thread_cmd;
+import gplx.core.threads.Gfo_thread_cmd_;
+import gplx.core.threads.Gfo_thread_cmd_download;
+import gplx.core.threads.Gfo_thread_cmd_replace;
+import gplx.core.threads.Gfo_thread_cmd_unzip;
+import gplx.core.threads.Thread_adp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
 public class Xoi_cmd_mgr implements Gfo_invk {
 	List_adp cmds = List_adp_.New();
 	public Xoi_cmd_mgr(Xoi_setup_mgr install_mgr) {this.app = install_mgr.App(); this.install_mgr = install_mgr;} private Xoae_app app; Xoi_setup_mgr install_mgr;
@@ -33,7 +52,7 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 			boolean async_prog_enabled = cmd.Async_prog_enabled();
 			int async_sleep_sum = 0;
 			while (cmd.Async_running()) {
-				if (canceled) {this.Working_(Bool_.N); return;}
+				if (canceled) {this.Working_(BoolUtl.N); return;}
 				if (async_prog_enabled) cmd.Async_prog_run(async_sleep_sum);
 				Thread_adp_.Sleep(async_sleep_interval);
 				async_sleep_sum += async_sleep_interval;	// NOTE: this is not exact
@@ -43,7 +62,7 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 		if (cmd.Async_next_cmd() != null && init_rslt != Gfo_thread_cmd_.Init_cancel_all && term_pass)
 			Run_async(cmd.Async_next_cmd());
 		else
-			this.Working_(Bool_.N);
+			this.Working_(BoolUtl.N);
 	}
 	private void Run_async(Gfo_thread_cmd cmd) {Thread_adp_.Start_by_val(cmd.Async_key(), this, Invk_process_async, cmd);}
 	private void Cmds_run() {
@@ -61,7 +80,7 @@ public class Xoi_cmd_mgr implements Gfo_invk {
 		}
 		Gfo_thread_cmd cmd = (Gfo_thread_cmd)cmds.Get_at(0);
 		cmds.Clear();
-		this.Working_(Bool_.Y);
+		this.Working_(BoolUtl.Y);
 		app.Bldr__running_(true);
 		this.Run_async(cmd);
 	}

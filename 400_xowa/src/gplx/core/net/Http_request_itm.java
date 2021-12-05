@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*; import gplx.core.*;
+package gplx.core.net; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Http_request_itm {
 	public Http_request_itm(int type, byte[] url, byte[] protocol, byte[] host, byte[] user_agent
 		, byte[] accept, byte[] accept_language, byte[] accept_encoding, boolean dnt, byte[] x_requested_with, byte[] cookie, byte[] referer
@@ -70,7 +71,7 @@ public class Http_request_itm {
 			int len = post_data_hash.Len();
 			for (int i = 0; i < len; ++i) {
 				Http_post_data_itm itm = post_data_hash.Get_at(i);
-				bfr.Add_byte_repeat(Byte_ascii.Space, 2);
+				bfr.Add_byte_repeat(AsciiByte.Space, 2);
 				bfr.Add_kv_dlm(line, String_.new_u8(itm.Key()), itm.Val());
 			}
 		}

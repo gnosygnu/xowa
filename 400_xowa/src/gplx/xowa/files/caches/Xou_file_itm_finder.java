@@ -13,9 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.ios.*;
-import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*; import gplx.xowa.guis.cbks.js.*;
+package gplx.xowa.files.caches;
+import gplx.Bry_;
+import gplx.Err_;
+import gplx.Io_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.files.Xof_img_size;
+import gplx.xowa.files.Xof_patch_upright_tid_;
+import gplx.xowa.files.Xof_url_bldr;
+import gplx.xowa.files.origs.Xof_orig_itm;
+import gplx.xowa.files.repos.Xof_repo_itm;
 public class Xou_file_itm_finder {
 	private final Xou_cache_mgr cache_mgr; private final Xof_img_size img_size = new Xof_img_size();
 	public Xou_file_itm_finder(Xou_cache_mgr cache_mgr) {this.cache_mgr = cache_mgr;}
@@ -35,7 +47,7 @@ public class Xou_file_itm_finder {
 						if (repo != null) {
 							xfer.Init_at_orig(orig.Repo(), repo.Wiki_domain(), orig.Ttl(), orig.Ext(), orig.W(), orig.H(), orig.Redirect());
 							img_size.Html_size_calc(exec_tid, xfer.Lnki_w(), xfer.Lnki_h(), (byte)xfer.Lnki_type(), Xof_patch_upright_tid_.Tid_all, xfer.Lnki_upright(), orig.Ext().Id(), orig.W(), orig.H(), Xof_img_size.Thumb_width_img);	// calc size for html
-							xfer.Init_at_gallery_end(img_size.Html_w(), img_size.Html_h(), url_bldr.To_url_trg(repo, xfer, Bool_.N), url_bldr.To_url_trg(repo, xfer, Bool_.Y));
+							xfer.Init_at_gallery_end(img_size.Html_w(), img_size.Html_h(), url_bldr.To_url_trg(repo, xfer, BoolUtl.N), url_bldr.To_url_trg(repo, xfer, BoolUtl.Y));
 						}
 					}
 				}
@@ -45,7 +57,7 @@ public class Xou_file_itm_finder {
 			if (repo == null) return false;	// unknown repo; shouldn't happen, but exit, else null ref
 			xfer.Init_at_orig((byte)cache_itm.Orig_repo_id(), repo.Wiki_domain(), cache_itm.Orig_ttl(), cache_itm.Orig_ext_itm(), cache_itm.Orig_w(), cache_itm.Orig_h(), Bry_.Empty);
 //				img_size.Html_size_calc(exec_tid, xfer.Lnki_w(), xfer.Lnki_h(), (byte)xfer.Lnki_type(), Xof_patch_upright_tid_.Tid_all, xfer.Lnki_upright(), cache_itm.Orig_ext_id(), cache_itm.Orig_w(), cache_itm.Orig_h(), Xof_img_size.Thumb_width_img);
-//				xfer.Init_at_gallery_end(img_size.Html_w(), img_size.Html_h(), url_bldr.To_url_trg(repo, cache_itm, Bool_.N), url_bldr.To_url_trg(repo, cache_itm, Bool_.Y));
+//				xfer.Init_at_gallery_end(img_size.Html_w(), img_size.Html_h(), url_bldr.To_url_trg(repo, cache_itm, BoolUtl.N), url_bldr.To_url_trg(repo, cache_itm, BoolUtl.Y));
 			xfer.Init_at_html(exec_tid, img_size, repo, url_bldr);
 			if (Io_mgr.Instance.ExistsFil(xfer.Html_view_url())) {
 				cache_itm.Update_view_stats();

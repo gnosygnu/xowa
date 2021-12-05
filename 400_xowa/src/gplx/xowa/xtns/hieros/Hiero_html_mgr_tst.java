@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
+package gplx.xowa.xtns.hieros;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Hiero_html_mgr_tst {
 	private Hiero_html_mgr_fxt fxt;
 	private final Hiero_html_fxt html_fxt = new Hiero_html_fxt();
@@ -37,8 +40,8 @@ public class Hiero_html_mgr_tst {
 	}
 	@Test  public void Glyph_1() {
 		String wtxt = html_fxt.Glyph_1__wtxt();
-		html_fxt.Test__hview(wtxt, html_fxt.Hdump_n_().Glyph_1__html(Bool_.Y));
-		html_fxt.Test__hdump(wtxt, html_fxt.Hdump_y_().Glyph_1__html(Bool_.N), html_fxt.Glyph_1__html(Bool_.Y));
+		html_fxt.Test__hview(wtxt, html_fxt.Hdump_n_().Glyph_1__html(BoolUtl.Y));
+		html_fxt.Test__hdump(wtxt, html_fxt.Hdump_y_().Glyph_1__html(BoolUtl.N), html_fxt.Glyph_1__html(BoolUtl.Y));
 	}
 	@Test  public void Mirrored() {
 		fxt.Init_hiero_A1_B1();
@@ -172,8 +175,8 @@ public class Hiero_html_mgr_tst {
 	}
 	@Test  public void Cartouche() {
 		String wtxt = html_fxt.Cartouche__wtxt();
-		html_fxt.Test__hview(wtxt, html_fxt.Hdump_n_().Cartouche__html(Bool_.Y));
-		html_fxt.Test__hdump(wtxt, html_fxt.Hdump_y_().Cartouche__html(Bool_.N), html_fxt.Cartouche__html(Bool_.Y));
+		html_fxt.Test__hview(wtxt, html_fxt.Hdump_n_().Cartouche__html(BoolUtl.Y));
+		html_fxt.Test__hdump(wtxt, html_fxt.Hdump_y_().Cartouche__html(BoolUtl.N), html_fxt.Cartouche__html(BoolUtl.Y));
 	}
 	@Test  public void Superposition_regular() {
 		fxt.Init_hiero_A1_B1();

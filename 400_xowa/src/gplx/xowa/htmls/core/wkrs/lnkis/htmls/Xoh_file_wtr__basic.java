@@ -13,12 +13,44 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import gplx.core.brys.*; import gplx.core.bits.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.files.*; 	
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.core.bits.Bitmask_;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.files.Xof_html_elem;
+import gplx.xowa.files.Xof_img_size;
+import gplx.xowa.htmls.Xow_html_mgr;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.core.wkrs.imgs.atrs.Xoh_img_cls_;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_null;
+import gplx.xowa.parsers.lnkis.Xop_link_parser;
+import gplx.xowa.parsers.lnkis.Xop_lnki_align_h_;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
+import gplx.xowa.parsers.tmpls.Arg_itm_tkn;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
+import gplx.xowa.parsers.tmpls.Xop_tkn_;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xoh_file_wtr__basic implements Gfo_invk {
 	private final Xowe_wiki wiki; private final Xow_html_mgr html_mgr; private final Xoh_html_wtr html_wtr;
 	private final Xoh_file_fmtr__basic fmtr__basic = new Xoh_file_fmtr__basic(), fmtr__hdump = new Xoh_file_fmtr__hdump();
@@ -90,7 +122,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		// PAGE:en.w:Beethoven; EX: [[:Media:De-Ludwig_van_Beethoven.ogg|listen]]); [[File:Beethoven 3.jpg|The [[Media:BeethovenWithLyreGuitar( W. J. Mahler - 1804).jpg|complete painting]]...]]
 		if		(lnki.Ns_id() == Xow_ns_.Tid__media) {
 			byte[] media_html = lnki.Caption_exists()
-				? caption_fmtr.To_bry(ctx, hctx, src, lnki.Caption_val_tkn(), Bool_.N, Xoh_lnki_text_fmtr.Null__fmt)
+				? caption_fmtr.To_bry(ctx, hctx, src, lnki.Caption_val_tkn(), BoolUtl.N, Xoh_lnki_text_fmtr.Null__fmt)
 				: lnki.Ttl().Full_db();
 			html_fmtr.Add_media(bfr, hctx.Mode_is_hdump(), img_orig_src, lnki_ttl_bry, media_html);	// NOTE: use orig_src not view_src; DATE:2014-01-19
 			page.Stat_itm().Media_count++;
@@ -131,7 +163,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		// bld audio_div
 		byte[] audio_div = html_fmtr.Bld_thumb_file_audio
 			( Bld_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href)
-			, Bld_alt(Bool_.Y, ctx, hctx, src, lnki)
+			, Bld_alt(BoolUtl.Y, ctx, hctx, src, lnki)
 			, Bld_play_btn(hctx, uid, img_orig_src, lnki_ttl, play_btn_width, play_btn_width)	// NOTE: changed max_width from 1024: DATE:2016-08-05
 			, info_btn);
 
@@ -151,7 +183,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		byte[] caption_html = Bry_.Empty, alt_html = Bry_.Empty;
 		if (video_is_thumb) {
 			caption_html = Bld_caption_div(ctx, hctx, src, lnki, uid, img_orig_src, lnki_href);
-			alt_html = Bld_alt(Bool_.Y, ctx, hctx, src, lnki);
+			alt_html = Bld_alt(BoolUtl.Y, ctx, hctx, src, lnki);
 		}
 
 		// bld video_div
@@ -183,8 +215,8 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 			if (bfr.Len() > 0) bfr.Add_byte_nl();
 
 			// write image_div
-			byte[] alt_html = alt_in_caption ? Bld_alt(Bool_.Y, ctx, hctx, src, lnki) : Bry_.Empty;
-			img_fmtr.Add_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, lnki_href, Bool_.N, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anch_ttl
+			byte[] alt_html = alt_in_caption ? Bld_alt(BoolUtl.Y, ctx, hctx, src, lnki) : Bry_.Empty;
+			img_fmtr.Add_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, lnki_href, BoolUtl.N, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anch_ttl
 				, Xoh_file_fmtr__basic.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt
 				, xfer_itm.File_exists() ? Xoh_img_cls_.Tid__thumbimage : Xoh_img_cls_.Tid__none
 				, Xoh_img_cls_.Bry__none);
@@ -210,12 +242,12 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 			}
 
 			// init vars
-			byte img_cls_tid = lnki.Border() == Bool_.Y_byte ? Xoh_img_cls_.Tid__thumbborder : Xoh_img_cls_.Tid__none;
+			byte img_cls_tid = lnki.Border() == BoolUtl.YByte ? Xoh_img_cls_.Tid__thumbborder : Xoh_img_cls_.Tid__none;
 			byte[] img_cls_other = lnki.Lnki_cls(); // PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3; DATE:2014-09-06
 
 			Arg_nde_tkn lnki_link_tkn = lnki.Link_tkn();
 			if (lnki_link_tkn == Arg_nde_tkn.Null)		// link absent; just write it
-				img_fmtr.Add_full_img(bfr, hctx, page, src, xfer_itm, uid, lnki_href, Bool_.N, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anch_ttl, Xoh_file_fmtr__basic.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
+				img_fmtr.Add_full_img(bfr, hctx, page, src, xfer_itm, uid, lnki_href, BoolUtl.N, Xoh_lnki_consts.Tid_a_cls_image, Xoh_lnki_consts.Tid_a_rel_none, anch_ttl, Xoh_file_fmtr__basic.Escape_xowa_title(lnki_ttl), xfer_itm.Html_w(), xfer_itm.Html_h(), img_view_src, alt, img_cls_tid, img_cls_other);
 			else {										// link exists; more logic; EX: [[File:A.png|thumb|link=B]]
 				// over-ride other vars based on link arg; below should be cleaned up
 				Arg_itm_tkn link_tkn = lnki_link_tkn.Val_tkn();
@@ -245,7 +277,7 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 	}
 	private byte[] Bld_caption(Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		return lnki.Caption_exists() 
-			? caption_fmtr.To_bry(ctx, hctx, src, lnki.Caption_val_tkn(), Bool_.N, Xoh_lnki_text_fmtr.Null__fmt)
+			? caption_fmtr.To_bry(ctx, hctx, src, lnki.Caption_val_tkn(), BoolUtl.N, Xoh_lnki_text_fmtr.Null__fmt)
 			: Bry_.Empty;
 	}
 	private byte[] Bld_anch_title(Bry_bfr bfr, byte[] src, Xop_lnki_tkn lnki, byte[] lnki_ttl) {
@@ -261,14 +293,14 @@ public class Xoh_file_wtr__basic implements Gfo_invk {
 		// build title="text"
 		bfr.Add(Atr_title);
 		Xoh_lnki_title_bldr.Add(bfr, src, capt_tkn);
-		bfr.Add_byte(Byte_ascii.Quote);
+		bfr.Add_byte(AsciiByte.Quote);
 		return bfr.To_bry_and_clear();
 	}
 	public byte[] Bld_alt(boolean html, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {
 		if (!lnki.Alt_exists()) return Bry_.Empty;
 		return html 
-			? alt_fmtr.To_bry(ctx, hctx, src, lnki.Alt_tkn().Val_tkn(), Bool_.Y, html_fmtr.Fmt_thumb_part_alt())
-			: alt_fmtr.To_bry(ctx, hctx, src, lnki.Alt_tkn().Val_tkn(), Bool_.N, Xoh_lnki_text_fmtr.Null__fmt);
+			? alt_fmtr.To_bry(ctx, hctx, src, lnki.Alt_tkn().Val_tkn(), BoolUtl.Y, html_fmtr.Fmt_thumb_part_alt())
+			: alt_fmtr.To_bry(ctx, hctx, src, lnki.Alt_tkn().Val_tkn(), BoolUtl.N, Xoh_lnki_text_fmtr.Null__fmt);
 	}
 	private byte[] Bld_play_btn(Xoh_wtr_ctx hctx, int uid, byte[] a_href, byte[] lnki_href, int width, int max_width) {
 		return html_fmtr.Bld_thumb_part_play(hctx.Mode_is_hdump(), uid, a_href, Xoh_file_fmtr__basic.Escape_xowa_title(lnki_href)

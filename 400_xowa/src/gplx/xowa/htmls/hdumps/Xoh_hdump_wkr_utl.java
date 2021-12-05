@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.hdumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.hdumps; import gplx.*;
 import gplx.langs.htmls.docs.*;
+import gplx.objects.strings.AsciiByte;
 public class Xoh_hdump_wkr_utl {
 	public static void Write_tag_with_val_at_atr_bgn(Bry_bfr bfr, byte[] src, Gfh_tag tag, Gfh_atr atr, byte[] val) {
 		// utility method to write tag, but put "val" at start of atr
@@ -26,7 +27,7 @@ public class Xoh_hdump_wkr_utl {
 		bfr.Add_mid(src, atr.Val_end(), tag.Src_end()); // add end of tag
 	}
 	public static byte[] Build_hdump_atr(byte[] key) {
-		return Bry_.Add(Bry__data_xowa_hdump, key, Byte_ascii.Apos_bry);
+		return Bry_.Add(Bry__data_xowa_hdump, key, AsciiByte.AposBry);
 	}
 	private static final byte[] Bry__data_xowa_hdump = Bry_.new_a7("data-xowa-hdump='");
 }

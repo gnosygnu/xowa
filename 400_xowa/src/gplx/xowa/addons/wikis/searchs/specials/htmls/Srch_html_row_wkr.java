@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
-import gplx.langs.htmls.*; import gplx.xowa.guis.cbks.js.*;
-import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
+package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*;
+import gplx.langs.htmls.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.xowa.guis.cbks.js.*;
+import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_html_row_wkr {
 	private final Srch_html_row_bldr html_row_bldr; private final Xog_js_wkr js_wkr;
 	private final Srch_rslt_row[] rows; private final int rows_len;
@@ -32,7 +34,7 @@ public class Srch_html_row_wkr {
 		// get last row
 		Srch_rslt_row last_row = rows[rows_len - 1];
 		if (last_row != null) {
-			if (Compare(new_row, last_row) == CompareAble_.More_or_same) return;	// new_row is < last_row; exit
+			if (Compare(new_row, last_row) == CompareAbleUtl.More_or_same) return;	// new_row is < last_row; exit
 		}
 
 		// find where new row goes
@@ -56,7 +58,7 @@ public class Srch_html_row_wkr {
 		for (int i = 0; i < rows_len; ++i) {
 			Srch_rslt_row cur_row = rows[i];
 			if (cur_row == null) return i;
-			if (Compare(new_row, cur_row) == CompareAble_.Less) return i;
+			if (Compare(new_row, cur_row) == CompareAbleUtl.Less) return i;
 		}
 		return -1;
 	}

@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*; import gplx.xowa.mediawiki.includes.xohtml.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_mgr;
+import org.junit.Test;
 public class XomwSanitizer_tst {
 	private final XomwSanitizer_fxt fxt = new XomwSanitizer_fxt();
 	@Test  public void Normalize__text()                  {fxt.Test__normalize_char_references("abc"                      , "abc");}
@@ -52,30 +58,30 @@ public class XomwSanitizer_tst {
 	@Test  public void Regex__clean_url() {
 		Xomw_regex_escape_invalid regex = new Xomw_regex_escape_invalid();
 		// noop
-		fxt.Test__regex_escape_invalid(regex, "https://a.org/bcd", Bool_.N, "");
+		fxt.Test__regex_escape_invalid(regex, "https://a.org/bcd", BoolUtl.N, "");
 		// symbols
-		fxt.Test__regex_escape_invalid(regex, "[]<>\"|", Bool_.Y, "%5B%5D%3C%3E%22%7C%7F");
+		fxt.Test__regex_escape_invalid(regex, "[]<>\"|", BoolUtl.Y, "%5B%5D%3C%3E%22%7C%7F");
 		// range: 00 - 32
-		fxt.Test__regex_escape_invalid(regex, "\t\n ", Bool_.Y, "%09%0A+");
+		fxt.Test__regex_escape_invalid(regex, "\t\n ", BoolUtl.Y, "%09%0A+");
 	}
 	@Test  public void Regex__ipv6_brack() {
 		Xomw_regex_ipv6_brack regex = new Xomw_regex_ipv6_brack();
 		// basic
-		fxt.Test__regex_ipv6_brack(regex, Bool_.Y, "//%5B0a.1b:12%5D:123");
+		fxt.Test__regex_ipv6_brack(regex, BoolUtl.Y, "//%5B0a.1b:12%5D:123");
 		// port: none
-		fxt.Test__regex_ipv6_brack(regex, Bool_.Y, "//%5Ba%5D");
+		fxt.Test__regex_ipv6_brack(regex, BoolUtl.Y, "//%5Ba%5D");
 		// port: multiple
-		fxt.Test__regex_ipv6_brack(regex, Bool_.Y, "//%5Ba%5D:1:2:3");
+		fxt.Test__regex_ipv6_brack(regex, BoolUtl.Y, "//%5Ba%5D:1:2:3");
 		// "//%5B" missing
-		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "abc");
+		fxt.Test__regex_ipv6_brack(regex, BoolUtl.N, "abc");
 		// ipv6: invalid
-		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "//%5Ba!%5D:1");
+		fxt.Test__regex_ipv6_brack(regex, BoolUtl.N, "//%5Ba!%5D:1");
 		// ipv6: 0-len
-		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "//%5B%5D:1");
+		fxt.Test__regex_ipv6_brack(regex, BoolUtl.N, "//%5B%5D:1");
 		// port: invalid
-		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "//%5Ba%5D:a");
+		fxt.Test__regex_ipv6_brack(regex, BoolUtl.N, "//%5Ba%5D:a");
 		// port: 0-len
-		fxt.Test__regex_ipv6_brack(regex, Bool_.N, "//%5Ba%5D:");
+		fxt.Test__regex_ipv6_brack(regex, BoolUtl.N, "//%5Ba%5D:");
 	}
 	@Test  public void Decode() {
 		// dec
@@ -134,7 +140,7 @@ class XomwSanitizer_fxt {
 	private final Bry_bfr tmp = Bry_bfr_.New();
 	public void Test__normalize_char_references(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		sanitizer.normalizeCharReferences(tmp, Bool_.Y, src_bry, 0, src_bry.length);
+		sanitizer.normalizeCharReferences(tmp, BoolUtl.Y, src_bry, 0, src_bry.length);
 		Gftest.Eq__str(expd, tmp.To_str_and_clear());
 	}
 	public void Test__regex_domain_y(Xomw_regex_find_domain regex_domain, String src_str, String expd_prot, String expd_host, String expd_rest) {
@@ -159,7 +165,7 @@ class XomwSanitizer_fxt {
 	}
 	public void Test__decode_char_references(String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
-		sanitizer.decodeCharReferences(tmp, Bool_.Y, src_bry, 0, src_bry.length);
+		sanitizer.decodeCharReferences(tmp, BoolUtl.Y, src_bry, 0, src_bry.length);
 		Gftest.Eq__str(expd, tmp.To_str_and_clear());
 	}
 	public void Test__clean_url(String src_str, String expd) {

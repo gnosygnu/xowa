@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
+package gplx.xowa.htmls.core.hzips; import gplx.*;
 import gplx.core.btries.*; import gplx.core.threads.poolables.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.escapes.*;
 import gplx.xowa.htmls.core.wkrs.hdrs.*; import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.*; import gplx.xowa.htmls.core.wkrs.glys.*; import gplx.xowa.htmls.core.wkrs.tocs.*;
@@ -63,7 +64,7 @@ public class Xoh_pool_mgr__hzip {
 		trie.Add_obj(hook, rv);
 		return rv;
 	}
-	private static byte[] New_hook_len2(boolean mode_is_b256, int b0, int b1)	{return Bry_.New_by_ints(b0, mode_is_b256 ? b1 : b1 + Byte_ascii.Bang);}
+	private static byte[] New_hook_len2(boolean mode_is_b256, int b0, int b1)	{return Bry_.New_by_ints(b0, mode_is_b256 ? b1 : b1 + AsciiByte.Bang);}
 	private static byte[] New_hook_len1(boolean mode_is_b256, int b0)			{return Bry_.New_by_ints(b0);}
 	public static final byte
 	  Hook__core	= 1

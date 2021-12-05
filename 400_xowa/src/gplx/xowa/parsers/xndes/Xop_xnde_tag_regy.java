@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*;
-import gplx.xowa.parsers.*;
-import gplx.core.btries.*;
+package gplx.xowa.parsers.xndes;
+import gplx.Err_;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.Ordered_hash;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.parsers.Xop_parser_tid_;
 public class Xop_xnde_tag_regy {
 	private boolean init_needed = true;
 	private final Btrie_slim_mgr // NOTE:ci.utf8; he.s and <section> alias DATE:2014-07-18
@@ -39,9 +44,9 @@ public class Xop_xnde_tag_regy {
 	public void Init_by_meta(Hash_adp_bry xtn_hash) {Init_by_hash(xtn_hash);}
 	private void Init_by_hash(Hash_adp_bry xtn_hash) {
 		this.init_needed = false;
-		Init_trie(trie_tmpl      , xtn_hash, Bool_.Y);
-		Init_trie(trie_wtxt_tmpl , xtn_hash, Bool_.Y);
-		Init_trie(trie_wtxt_main , xtn_hash, Bool_.N);
+		Init_trie(trie_tmpl      , xtn_hash, BoolUtl.Y);
+		Init_trie(trie_wtxt_tmpl , xtn_hash, BoolUtl.Y);
+		Init_trie(trie_wtxt_main , xtn_hash, BoolUtl.N);
 	}
 	private void Init_trie(Btrie_slim_mgr trie, Hash_adp_bry xtn_hash, boolean is_tmpl) {
 		int len = Xop_xnde_tag_.Tid__len;

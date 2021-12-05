@@ -17,7 +17,7 @@ package gplx.xowa.langs.msgs;
 
 import gplx.Bry_;
 import gplx.Bry_bfr;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.GfoMsg;
 import gplx.Gfo_invk;
 import gplx.Gfo_invk_;
@@ -106,11 +106,11 @@ public class Xow_msg_mgr implements Gfo_invk {
 			accesskey_found = Bry_.Len_gt_0(accesskey_val);
 		}
 		if (accesskey_found)
-			bfr.Add(CONST_atr_accesskey).Add(accesskey_val).Add_byte(Byte_ascii.Quote);
+			bfr.Add(CONST_atr_accesskey).Add(accesskey_val).Add_byte(AsciiByte.Quote);
 		bfr.Add(CONST_atr_title).Add(tooltip_found ? tooltip_val : Bry_.Empty);	// NOTE: if tooltip not found, make blank; don't bother showing tooltip_key
 		if (accesskey_found)
-			bfr.Add_byte(Byte_ascii.Space).Add_byte(Byte_ascii.Brack_bgn).Add(accesskey_val).Add_byte(Byte_ascii.Brack_end);
-		bfr.Add_byte(Byte_ascii.Quote);
+			bfr.Add_byte(AsciiByte.Space).Add_byte(AsciiByte.BrackBgn).Add(accesskey_val).Add_byte(AsciiByte.BrackEnd);
+		bfr.Add_byte(AsciiByte.Quote);
 		byte[] rv = bfr.To_bry_and_clear();
 		if (itm == null)
 			return rv;

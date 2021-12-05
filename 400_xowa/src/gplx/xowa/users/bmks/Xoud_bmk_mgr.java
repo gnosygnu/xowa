@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.bmks; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import gplx.dbs.*;
+package gplx.xowa.users.bmks;
+import gplx.Bry_;
+import gplx.dbs.Db_conn;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
 public class Xoud_bmk_mgr {		
 	public Xoud_bmk_itm_tbl Tbl__itm() {return tbl__itm;} private Xoud_bmk_itm_tbl tbl__itm;
 	public Xoud_bmk_dir_tbl Tbl__dir() {return tbl__dir;} private Xoud_bmk_dir_tbl tbl__dir;
@@ -25,7 +29,7 @@ public class Xoud_bmk_mgr {
 		if (!conn.Meta_tbl_exists(tbl__itm.Tbl_name())) tbl__itm.Create_tbl();
 	}
 	public void Itms__add(int owner, Xoa_url url) {
-		tbl__itm.Insert(owner, tbl__itm.Select_sort_next(owner), Xoa_ttl.Replace_unders(url.Page_bry()), url.Wiki_bry(), url.To_bry(Bool_.Y, Bool_.Y), Bry_.Empty);
+		tbl__itm.Insert(owner, tbl__itm.Select_sort_next(owner), Xoa_ttl.Replace_unders(url.Page_bry()), url.Wiki_bry(), url.To_bry(BoolUtl.Y, BoolUtl.Y), Bry_.Empty);
 	}
 	public static final int Owner_root = -1;
 }

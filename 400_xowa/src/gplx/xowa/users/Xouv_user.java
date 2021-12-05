@@ -13,12 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*;
-import gplx.xowa.users.data.*; import gplx.xowa.users.history.*;
-import gplx.xowa.files.*; import gplx.xowa.files.caches.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.langs.genders.*;
+package gplx.xowa.users;
+import gplx.Io_url;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.langs.genders.Xol_gender_;
+import gplx.xowa.users.data.Xou_db_mgr;
+import gplx.xowa.users.history.Xou_history_mgr;
+import gplx.xowa.wikis.Xoa_wiki_mgr;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
 public class Xouv_user implements Xou_user {
 	private Xoa_wiki_mgr wiki_mgr;
 	public Xouv_user(Xoa_app app, String key, Io_url user_dir) {
@@ -35,6 +39,6 @@ public class Xouv_user implements Xou_user {
 	public void Init_db(Xoa_app app, Xoa_wiki_mgr wiki_mgr, Io_url db_url) {
 		this.wiki_mgr = wiki_mgr;
 		this.user_db_mgr = new Xou_db_mgr(app);
-		user_db_mgr.Init_by_app(Bool_.Y, db_url);
+		user_db_mgr.Init_by_app(BoolUtl.Y, db_url);
 	}
 }

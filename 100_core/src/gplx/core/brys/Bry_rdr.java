@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.Bool_;
+package gplx.core.brys; import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_find_;
 import gplx.Byte_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Double_;
 import gplx.Int_;
 import gplx.String_;
@@ -50,25 +50,25 @@ public class Bry_rdr {
 	public int Move_to_end()            {this.pos = src_end; return pos;}
 	public int Move_by_one()			{return Move_by(1);}
 	public int Move_by(int v)			{this.pos += v; return pos;}
-	public int Find_fwd_lr()			{return Find_fwd(dflt_dlm	, Bool_.Y, Bool_.N, Fail_if_missing);}
-	public int Find_fwd_lr(byte find)	{return Find_fwd(find		, Bool_.Y, Bool_.N, Fail_if_missing);}
+	public int Find_fwd_lr()			{return Find_fwd(dflt_dlm	, BoolUtl.Y, BoolUtl.N, Fail_if_missing);}
+	public int Find_fwd_lr(byte find)	{return Find_fwd(find		, BoolUtl.Y, BoolUtl.N, Fail_if_missing);}
 	public int Find_fwd_lr_or(byte find, int or)
-										{return Find_fwd(find		, Bool_.Y, Bool_.N, or);}
-	public int Find_fwd_lr(String find) {return Find_fwd(Bry_.new_u8(find), Bool_.Y, Bool_.N, Fail_if_missing);}
-	public int Find_fwd_lr(byte[] find) {return Find_fwd(find		, Bool_.Y, Bool_.N, Fail_if_missing);}
-	public int Find_fwd_lr_or(String find, int or) {return Find_fwd(Bry_.new_u8(find), Bool_.Y, Bool_.N, or);}
+										{return Find_fwd(find		, BoolUtl.Y, BoolUtl.N, or);}
+	public int Find_fwd_lr(String find) {return Find_fwd(Bry_.new_u8(find), BoolUtl.Y, BoolUtl.N, Fail_if_missing);}
+	public int Find_fwd_lr(byte[] find) {return Find_fwd(find		, BoolUtl.Y, BoolUtl.N, Fail_if_missing);}
+	public int Find_fwd_lr_or(String find, int or) {return Find_fwd(Bry_.new_u8(find), BoolUtl.Y, BoolUtl.N, or);}
 	public int Find_fwd_lr_or(byte[] find, int or)
-										{return Find_fwd(find		, Bool_.Y, Bool_.N, or);}
-	public int Find_fwd_rr()			{return Find_fwd(dflt_dlm	, Bool_.N, Bool_.N, Fail_if_missing);}
-	public int Find_fwd_rr(byte find)	{return Find_fwd(find		, Bool_.N, Bool_.N, Fail_if_missing);}
-	public int Find_fwd_rr(byte[] find) {return Find_fwd(find		, Bool_.N, Bool_.N, Fail_if_missing);}
+										{return Find_fwd(find		, BoolUtl.Y, BoolUtl.N, or);}
+	public int Find_fwd_rr()			{return Find_fwd(dflt_dlm	, BoolUtl.N, BoolUtl.N, Fail_if_missing);}
+	public int Find_fwd_rr(byte find)	{return Find_fwd(find		, BoolUtl.N, BoolUtl.N, Fail_if_missing);}
+	public int Find_fwd_rr(byte[] find) {return Find_fwd(find		, BoolUtl.N, BoolUtl.N, Fail_if_missing);}
 	public int Find_fwd_rr_or(byte[] find, int or)
-										{return Find_fwd(find		, Bool_.N, Bool_.N, or);}
+										{return Find_fwd(find		, BoolUtl.N, BoolUtl.N, or);}
 	private int Find_fwd(byte find, boolean ret_lhs, boolean pos_lhs, int or) {
 		int find_pos = Bry_find_.Find_fwd(src, find, pos, src_end);
 		if (find_pos == Bry_find_.Not_found) {
 			if (or == Fail_if_missing) {	
-				err_wkr.Fail("find failed", "find", Byte_ascii.To_str(find));
+				err_wkr.Fail("find failed", "find", AsciiByte.ToStr(find));
 				return Bry_find_.Not_found;
 			}
 			else
@@ -100,7 +100,7 @@ public class Bry_rdr {
 		byte rv = src[pos];
 		++pos;
 		if (pos < src_end) {
-			if (src[pos] != to_char) {err_wkr.Fail("read byte to failed", "to", Byte_ascii.To_str(to_char)); return Byte_.Max_value_127;}
+			if (src[pos] != to_char) {err_wkr.Fail("read byte to failed", "to", AsciiByte.ToStr(to_char)); return Byte_.Max_value_127;}
 			++pos;
 		}
 		return rv;
@@ -111,7 +111,7 @@ public class Bry_rdr {
 		return Double_.parse(String_.new_a7(bry));
 	}
 	public int Read_int_to()			{return Read_int_to(dflt_dlm);}
-	public int Read_int_to_non_num()	{return Read_int_to(Byte_ascii.Null);}
+	public int Read_int_to_non_num()	{return Read_int_to(AsciiByte.Null);}
 	public int Read_int_to(byte to_char) {
 		int bgn = pos;
 		int rv = 0;
@@ -119,11 +119,11 @@ public class Bry_rdr {
 		while (pos < src_end) {
 			byte b = src[pos++];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					rv = (rv * 10) + (b - Byte_ascii.Num_0);
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+					rv = (rv * 10) + (b - AsciiByte.Num0);
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					if (negative == -1) {	// 2nd negative
 						err_wkr.Fail("invalid int", "mid", String_.new_u8(src, bgn, pos));
 						return Int_.Min_value;
@@ -133,7 +133,7 @@ public class Bry_rdr {
 					break;
 				default: {
 					boolean match = b == to_char;
-					if (to_char == Byte_ascii.Null) {// hack for Read_int_to_non_num
+					if (to_char == AsciiByte.Null) {// hack for Read_int_to_non_num
 						--pos;
 						match = true;
 					}
@@ -232,7 +232,7 @@ public class Bry_rdr {
 	public Bry_rdr Skip_ws() {
 		while (pos < src_end) {
 			switch (src[pos]) {
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+				case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 					++pos;
 					break;
 				default:
@@ -244,19 +244,19 @@ public class Bry_rdr {
 	public Bry_rdr Skip_alpha_num_under() {
 		while (pos < src_end) {
 			switch (src[pos]) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-				case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-				case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-				case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-				case Byte_ascii.Underline:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+				case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+				case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+				case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+				case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+				case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+				case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+				case AsciiByte.Underline:
 					++pos;
 					break;
 				default:

@@ -13,13 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.xowa_cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
-import gplx.xowa.htmls.*; import gplx.xowa.guis.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.pages.tags.*;
-import gplx.xowa.parsers.*;
+package gplx.xowa.xtns.xowa_cmds;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.Xoh_page_html_source_;
+import gplx.xowa.htmls.Xow_html_mgr;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
+import gplx.xowa.wikis.pages.tags.Xopg_tag_wtr;
+import org.junit.Before;
+import org.junit.Test;
 public class Xox_xowa_html_cmd_tst {
-	@Before public void init() {Xopg_tag_wtr.Loader_as_script_static = Bool_.N; fxt.Clear();} private Xox_xowa_html_cmd_fxt fxt = new Xox_xowa_html_cmd_fxt();
-	@Test  public void term() {Xopg_tag_wtr.Loader_as_script_static = Bool_.Y;}
+	@Before public void init() {Xopg_tag_wtr.Loader_as_script_static = BoolUtl.N; fxt.Clear();} private Xox_xowa_html_cmd_fxt fxt = new Xox_xowa_html_cmd_fxt();
+	@Test  public void term() {Xopg_tag_wtr.Loader_as_script_static = BoolUtl.Y;}
 	@Test public void Head_end() {
 		fxt.Test_parse_w_skin
 		( "<xowa_html pos='head_end'>test</xowa_html>"

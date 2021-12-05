@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis.nss; import gplx.*;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
-public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
+public class Xow_ns_mgr implements Gfo_invk, ComparerAble {
 	private Ordered_hash id_hash = Ordered_hash_.New();		// hash for retrieval by id
 	private Hash_adp_bry name_hash;							// hash for retrieval by name; note that ns names are case-insensitive "File:" == "fILe:"
 	private Hash_adp_bry tmpl_hash;							// hash for retrieval by name; PERF for templates
@@ -67,14 +70,14 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 		return rv == null ? this.Ns_main() : rv;
 	}
 	public Xow_ns_mgr_name_itm Names_get_w_colon_or_null(byte[] src, int bgn, int end) { // NOTE: get ns for a name with a ":"; EX: "Template:A" should return "Template" ns
-		int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, bgn, end);
+		int colon_pos = Bry_find_.Find_fwd(src, AsciiByte.Colon, bgn, end);
 		return (colon_pos == Bry_find_.Not_found)
 			? (Xow_ns_mgr_name_itm)null	// name does not have ":"; return null;
 			: (Xow_ns_mgr_name_itm)name_hash.Get_by_mid(src, bgn, colon_pos) // NOTE: can return NULL
 			;
 	}
 	public int			Tmpls_get_w_colon(byte[] src, int bgn, int end)  {	// NOTE: get length of template name with a ":"; EX: "Template:A" returns 10; PERF
-		int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, bgn, end); 
+		int colon_pos = Bry_find_.Find_fwd(src, AsciiByte.Colon, bgn, end);
 		if (colon_pos == Bry_find_.Not_found) return Bry_find_.Not_found;
 		Object o = tmpl_hash.Get_by_mid(src, bgn, colon_pos + 1);	// +1 to include colon_pos
 		return o == null ? Bry_find_.Not_found : ((byte[])o).length;
@@ -114,7 +117,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 			Rebuild_hashes__add(name_hash, ns, alias_bry);
 			if (ns.Id_is_tmpl()) {
 				byte[] alias_name = Bry_.new_u8(kv.Key());
-				alias_name = Bry_.Add(alias_name, Byte_ascii.Colon);
+				alias_name = Bry_.Add(alias_name, AsciiByte.Colon);
 				tmpl_hash.AddIfDupeUseNth(alias_name, alias_name);
 			}
 		}
@@ -129,8 +132,8 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	private void Rebuild_hashes__add(Hash_adp_bry hash, Xow_ns ns, byte[] key) {
 		Xow_ns_mgr_name_itm ns_itm = new Xow_ns_mgr_name_itm(ns, key);
 		hash.AddIfDupeUseNth(key, ns_itm);
-		if (Bry_find_.Find_fwd(key, Byte_ascii.Underline) != Bry_find_.Not_found)	// ns has _; add another entry for space; EX: Help_talk -> Help talk
-			hash.AddIfDupeUseNth(Bry_.Replace(key, Byte_ascii.Underline, Byte_ascii.Space), ns_itm);
+		if (Bry_find_.Find_fwd(key, AsciiByte.Underline) != Bry_find_.Not_found)	// ns has _; add another entry for space; EX: Help_talk -> Help talk
+			hash.AddIfDupeUseNth(Bry_.Replace(key, AsciiByte.Underline, AsciiByte.Space), ns_itm);
 	}
 	public Xow_ns_mgr Add_defaults() { // NOTE: needs to happen after File ns is added; i.e.: cannot be put in Xow_ns_mgr() {} ctor
 		Aliases_add(Xow_ns_.Tid__file		, "Image");			// REF.MW: Setup.php; add "Image", "Image talk" for backward compatibility; note that MW hardcodes Image ns as well
@@ -141,7 +144,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	}
 	public Xow_ns_mgr Add_new(int nsId, String name) {return Add_new(nsId, Bry_.new_u8(name), Xow_ns_case_.Tid__1st, false);}	// for tst_ constructor
 	public Xow_ns_mgr Add_new(int ns_id, byte[] name, byte caseMatchId, boolean alias) {
-		Bry_.Replace_all_direct(name, Byte_ascii.Space, Byte_ascii.Underline);	// standardize on _; EX: User talk -> User_talk; DATE:2013-04-21
+		Bry_.Replace_all_direct(name, AsciiByte.Space, AsciiByte.Underline);	// standardize on _; EX: User talk -> User_talk; DATE:2013-04-21
 		Xow_ns ns = new Xow_ns(ns_id, caseMatchId, name, alias);
 		switch (ns_id) {
 			case Xow_ns_.Tid__main:						ns_main = ns; break;
@@ -229,7 +232,7 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	public byte[] Bld_ttl_w_ns(Bry_bfr bfr, boolean text_form, boolean literalize, int ns_id, byte[] ttl) {
 		if (ns_id == Xow_ns_.Tid__main) return ttl;
 		Xow_ns ns = Ids_get_or_null(ns_id); if (ns == null) {Xoa_app_.Usr_dlg().Warn_many("", "", "ns_mgr:uknown ns_id; ns_id=~{0} ttl=~{1}", ns_id, ttl); return ttl;}
-		if (literalize) bfr.Add_byte(Byte_ascii.Colon);	// NOTE: add : to literalize ns; EX: [[Category:A]] will get thrown into category list; [[:Category:A]] will print
+		if (literalize) bfr.Add_byte(AsciiByte.Colon);	// NOTE: add : to literalize ns; EX: [[Category:A]] will get thrown into category list; [[:Category:A]] will print
 		bfr.Add(text_form ? ns.Name_ui_w_colon() : ns.Name_db_w_colon());
 		bfr.Add(ttl);
 		return bfr.To_bry_and_clear();
@@ -244,12 +247,12 @@ public class Xow_ns_mgr implements Gfo_invk, gplx.core.lists.ComparerAble {
 	}	private static final String Invk_add_alias_bulk = "add_alias_bulk", Invk_get_by_id_or_new = "get_by_id_or_new";
 	public static final String Invk_load = "load", Invk_clear = "clear";
 	private void Exec_add_alias_bulk(byte[] raw) {
-		byte[][] lines = Bry_split_.Split(raw, Byte_ascii.Nl);
+		byte[][] lines = Bry_split_.Split(raw, AsciiByte.Nl);
 		int lines_len = lines.length;
 		for (int i = 0; i < lines_len; i++) {
 			byte[] line = lines[i];
 			if (line.length == 0) continue;
-			byte[][] flds = Bry_split_.Split(line, Byte_ascii.Pipe);
+			byte[][] flds = Bry_split_.Split(line, AsciiByte.Pipe);
 			int cur_id = Bry_.To_int_or(flds[0], Int_.Min_value);
 			this.Aliases_add(cur_id, String_.new_u8(flds[1]));
 		}

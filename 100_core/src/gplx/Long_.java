@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.lists.CompareAbleUtl;
 public class Long_ {
 	public static final String Cls_val_name = "long";
 	public static final Class<?> Cls_ref_type = Long.class;
@@ -49,9 +50,9 @@ public class Long_ {
 		} catch (Exception e) {Err_.Noop(e); return or;}
 	}
 	public static int Compare(long lhs, long rhs) {
-		if		(lhs == rhs) 	return CompareAble_.Same;
-		else if (lhs < rhs)		return CompareAble_.Less;
-		else 					return CompareAble_.More;
+		if		(lhs == rhs) 	return CompareAbleUtl.Same;
+		else if (lhs < rhs)		return CompareAbleUtl.Less;
+		else 					return CompareAbleUtl.More;
 	}
  		private static int FindIdx(long[] ary, long find_val) {
 		int ary_len = ary.length;

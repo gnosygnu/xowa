@@ -13,9 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.menus.dom; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*; import gplx.xowa.guis.menus.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.imgs.*;
-import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.gfs.*;
+package gplx.xowa.guis.menus.dom;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.gfui.imgs.ImageAdp;
+import gplx.gfui.imgs.ImageAdp_null;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.gfui.kits.core.Gfui_mnu_grp;
+import gplx.gfui.kits.core.Gfui_mnu_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.apps.gfs.Xoa_gfs_mgr_;
+import gplx.xowa.guis.cmds.Xog_cmd_itm;
 public class Xog_mnu_bldr {
 	private Xoae_app app; private Gfui_kit kit; private Io_url img_dir;
 	public void Init_by_kit(Xoae_app app, Gfui_kit kit, Io_url img_dir) {
@@ -65,7 +77,7 @@ public class Xog_mnu_bldr {
 		Gfui_mnu_itm mnu_itm = owner_gui.Itms_add_chk_msg(sub.Gui_text(), img, app, app.Gfs_mgr(), msg_n, msg_y);
 		sub.Evt_mgr().Sub(mnu_itm);
 		Xog_cmd_itm cmd = app.Gui_mgr().Cmd_mgr().Get_or_null(sub.Key());
-		boolean v = Bool_.Cast(app.Gfs_mgr().Run_str_for(app, cmd.Cmd()));
+		boolean v = BoolUtl.Cast(app.Gfs_mgr().Run_str_for(app, cmd.Cmd()));
 		mnu_itm.Selected_(v);
 		return mnu_itm;
 	}

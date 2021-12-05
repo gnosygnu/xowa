@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.languages; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+package gplx.xowa.mediawiki.languages; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.*;
 import gplx.langs.regxs.*;
 import gplx.core.primitives.*;
 import gplx.xowa.langs.*;
@@ -3375,7 +3377,7 @@ public class XomwLanguage {
 
 		// check for negative; note that MW casts String to number and checks if less than 0
 		boolean negative = false;
-		if (numberLen > 0 && number[0] == Byte_ascii.Dash) {
+		if (numberLen > 0 && number[0] == AsciiByte.Dash) {
 			negative = true;
 			integerBgn = 1;
 		}
@@ -3386,8 +3388,8 @@ public class XomwLanguage {
 		for (int i = integerBgn; i < numberLen; i++) {
 			switch (number[i]) {
 				// update integerEnd / decimalEnd
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					if (decimalExists) {
 					}
 					else {
@@ -3395,7 +3397,7 @@ public class XomwLanguage {
 					}
 					break;
 				// switch to decimalMode
-				case Byte_ascii.Dot:
+				case AsciiByte.Dot:
 					decimalExists = true;
 					decimalBgn = i;
 					i = numberLen; // break loop
@@ -3408,7 +3410,7 @@ public class XomwLanguage {
 			// default grouping is at thousands,  use the same for ###,###,### pattern too.
 			// return strrev((String)preg_replace('/(\d{3})(?=\d)(?!\d*\.)/', '1,', strrev(number)));
 			if (negative)
-				tmp_commafy.Add_byte(Byte_ascii.Dash);
+				tmp_commafy.Add_byte(AsciiByte.Dash);
 
 			// calculate seg before 1st comma
 			int seg_0 = (integerLen) % 3;
@@ -3461,7 +3463,7 @@ public class XomwLanguage {
 			Int_2_ref match = null;
 			boolean matchContinued = false;
 			for (int i = 0; i < digitGroupingPatternLen; i++) {
-				if (digitGroupingPattern[i] == Byte_ascii.Hash) {
+				if (digitGroupingPattern[i] == AsciiByte.Hash) {
 					if (matchContinued) {
 						match.Val_1_(i + 1);
 					}
@@ -3502,13 +3504,13 @@ public class XomwLanguage {
 
 				// add comma if more digits still available
 				if (start > integerBgn) {
-					tmp_commafy.Add_byte(Byte_ascii.Comma);
+					tmp_commafy.Add_byte(AsciiByte.Comma);
 				}
 			}
 
 			// add negative if exists
 			if (negative)
-				tmp_commafy.Add_byte(Byte_ascii.Dash);
+				tmp_commafy.Add_byte(AsciiByte.Dash);
 
 			return tmp_commafy.To_reversed_bry_and_clear();
 		}

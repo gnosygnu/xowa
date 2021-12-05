@@ -14,8 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.controls.windows; import gplx.*;
-import gplx.core.lists.*; /*ComparerAble*/
 import gplx.gfui.controls.elems.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
 public class GfuiFocusOrderer {
 	public static void OrderByX(GfuiElem owner) {Order(owner, xcomparer, 0);}
 	public static void OrderByY(GfuiElem owner) {Order(owner, ycomparer, 0);}
@@ -42,16 +43,16 @@ public class GfuiFocusOrderer {
 class GfuiFocusOrderer_cls_x implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		GfuiElem lhs = (GfuiElem)lhsObj, rhs = (GfuiElem)rhsObj;
-		if (lhs.Y() < rhs.Y())				return CompareAble_.Less;
-		else if (lhs.Y() > rhs.Y())			return CompareAble_.More;
+		if (lhs.Y() < rhs.Y())				return CompareAbleUtl.Less;
+		else if (lhs.Y() > rhs.Y())			return CompareAbleUtl.More;
 		else								return Int_.Compare(lhs.X(), rhs.X());
 	}
 }
 class GfuiFocusOrderer_cls_y implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		GfuiElem lhs = (GfuiElem)lhsObj, rhs = (GfuiElem)rhsObj;
-		if (lhs.X() < rhs.X())				return CompareAble_.Less;
-		else if (lhs.X() > rhs.X())			return CompareAble_.More;
+		if (lhs.X() < rhs.X())				return CompareAbleUtl.Less;
+		else if (lhs.X() > rhs.X())			return CompareAbleUtl.More;
 		else								return Int_.Compare(lhs.Y(), rhs.Y());
 	}
 }

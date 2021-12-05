@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.langs.*;
 class Pft_fmt_itm_timezone_offset_4 implements Pft_fmt_itm {
 	private final boolean colon;
@@ -25,11 +27,11 @@ class Pft_fmt_itm_timezone_offset_4 implements Pft_fmt_itm {
 
 		// add "+" or "-"
 		if (tz_secs < 0) {
-			bfr.Add_byte(Byte_ascii.Dash);
+			bfr.Add_byte(AsciiByte.Dash);
 			tz_secs *= -1;
 		}
 		else {
-			bfr.Add_byte(Byte_ascii.Plus);
+			bfr.Add_byte(AsciiByte.Plus);
 		}
 
 		// calc total mins
@@ -38,7 +40,7 @@ class Pft_fmt_itm_timezone_offset_4 implements Pft_fmt_itm {
 		// add bfr
 		bfr.Add_int_fixed((tz_mins / 60), 2);
 		if (colon)
-			bfr.Add_byte(Byte_ascii.Colon);
+			bfr.Add_byte(AsciiByte.Colon);
 		bfr.Add_int_fixed((tz_mins % 60), 2);
 	}
 }

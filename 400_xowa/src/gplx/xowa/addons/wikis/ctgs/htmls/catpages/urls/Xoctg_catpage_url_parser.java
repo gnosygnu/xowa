@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import gplx.core.net.*; import gplx.core.net.qargs.*;
-import gplx.langs.htmls.encoders.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Hash_adp_bry;
+import gplx.core.net.qargs.Gfo_qarg_itm;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
 public class Xoctg_catpage_url_parser {
 	public static Xoctg_catpage_url Parse(Xoa_url url) {
 		Gfo_qarg_itm[] args = url.Qargs_ary();
@@ -27,7 +36,7 @@ public class Xoctg_catpage_url_parser {
 		byte[][] keys = new byte[Xoa_ctg_mgr.Tid___max][];
 		boolean[] fwds = new boolean[Xoa_ctg_mgr.Tid___max];
 		for (int i = 0; i < Xoa_ctg_mgr.Tid___max; ++i) {
-			fwds[i] = Bool_.Y;
+			fwds[i] = BoolUtl.Y;
 			keys[i] = Bry_.Empty;
 		}
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
@@ -38,27 +47,27 @@ public class Xoctg_catpage_url_parser {
 
 			// get tid from arg; EX: "pagefrom" -> Tid__page_bgn
 			byte[] key = arg.Key_bry();
-			byte tid = Key_hash.Get_as_byte_or(key, Byte_ascii.Max_7_bit);
-			if (tid == Byte_ascii.Max_7_bit) {	// if invalid, warn and skip
+			byte tid = Key_hash.Get_as_byte_or(key, AsciiByte.Max7Bit);
+			if (tid == AsciiByte.Max7Bit) {	// if invalid, warn and skip
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "catpage:unknown url arg: raw~={0} key=~{1}", url.To_bry(true, true), key);
 				continue;
 			}
 
 			// set val
 			byte[] val = arg.Val_bry();
-			Gfo_url_encoder_.Http_url.Decode(tmp_bfr, Bool_.N, val, 0, val.length);
+			Gfo_url_encoder_.Http_url.Decode(tmp_bfr, BoolUtl.N, val, 0, val.length);
 			val = tmp_bfr.To_bry_and_clear();
 
 			// set struct
 			switch (tid) {
-				case Tid__each_bgn:	Set_grp(keys, fwds, val, Bool_.Y, Xoa_ctg_mgr.Tid__subc, Xoa_ctg_mgr.Tid__file, Xoa_ctg_mgr.Tid__page); break;	// if "from", default all grps to val; DATE:2014-02-05
-				case Tid__each_end:	Set_grp(keys, fwds, val, Bool_.N, Xoa_ctg_mgr.Tid__subc, Xoa_ctg_mgr.Tid__file, Xoa_ctg_mgr.Tid__page); break;
-				case Tid__subc_bgn: Set_grp(keys, fwds, val, Bool_.Y, Xoa_ctg_mgr.Tid__subc); break;
-				case Tid__subc_end:	Set_grp(keys, fwds, val, Bool_.N, Xoa_ctg_mgr.Tid__subc); break;
-				case Tid__file_bgn:	Set_grp(keys, fwds, val, Bool_.Y, Xoa_ctg_mgr.Tid__file); break;
-				case Tid__file_end:	Set_grp(keys, fwds, val, Bool_.N, Xoa_ctg_mgr.Tid__file); break;
-				case Tid__page_bgn:	Set_grp(keys, fwds, val, Bool_.Y, Xoa_ctg_mgr.Tid__page); break;
-				case Tid__page_end:	Set_grp(keys, fwds, val, Bool_.N, Xoa_ctg_mgr.Tid__page); break;
+				case Tid__each_bgn:	Set_grp(keys, fwds, val, BoolUtl.Y, Xoa_ctg_mgr.Tid__subc, Xoa_ctg_mgr.Tid__file, Xoa_ctg_mgr.Tid__page); break;	// if "from", default all grps to val; DATE:2014-02-05
+				case Tid__each_end:	Set_grp(keys, fwds, val, BoolUtl.N, Xoa_ctg_mgr.Tid__subc, Xoa_ctg_mgr.Tid__file, Xoa_ctg_mgr.Tid__page); break;
+				case Tid__subc_bgn: Set_grp(keys, fwds, val, BoolUtl.Y, Xoa_ctg_mgr.Tid__subc); break;
+				case Tid__subc_end:	Set_grp(keys, fwds, val, BoolUtl.N, Xoa_ctg_mgr.Tid__subc); break;
+				case Tid__file_bgn:	Set_grp(keys, fwds, val, BoolUtl.Y, Xoa_ctg_mgr.Tid__file); break;
+				case Tid__file_end:	Set_grp(keys, fwds, val, BoolUtl.N, Xoa_ctg_mgr.Tid__file); break;
+				case Tid__page_bgn:	Set_grp(keys, fwds, val, BoolUtl.Y, Xoa_ctg_mgr.Tid__page); break;
+				case Tid__page_end:	Set_grp(keys, fwds, val, BoolUtl.N, Xoa_ctg_mgr.Tid__page); break;
 			}
 		}
 		return new Xoctg_catpage_url(keys, fwds);

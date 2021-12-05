@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.mustaches; import gplx.*; import gplx.langs.*;
+package gplx.langs.mustaches;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.objects.primitives.BoolUtl;
 public class Mustache_bfr {
 	private final Bry_bfr bfr;
 	public Mustache_bfr(Bry_bfr bfr) {this.bfr = bfr;}
@@ -28,7 +31,7 @@ public class Mustache_bfr {
 	public void Add_bry			(byte[] v) {
 		if (v == null) return;	// allow items to have null props
 		if (escape)
-			gplx.langs.htmls.Gfh_utl.Escape_html_to_bfr(bfr, v, 0, v.length, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y);
+			gplx.langs.htmls.Gfh_utl.Escape_html_to_bfr(bfr, v, 0, v.length, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y);
 		else
 			bfr.Add(v);
 	}

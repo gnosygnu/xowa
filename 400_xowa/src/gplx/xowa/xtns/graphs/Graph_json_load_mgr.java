@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.graphs; import gplx.*;
 import gplx.core.tests.*;
 import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.files.*;
 import gplx.xowa.htmls.*; import gplx.xowa.htmls.hdumps.*; import gplx.xowa.htmls.core.wkrs.*;
@@ -67,7 +68,7 @@ class Graph_json_load_mgr implements Xoh_hdump_wkr {
 
 			// get url_end by searching for '\"'
 			int url_bgn = find_bgn + Graph_json_save_mgr.Bry__xowa_root.length;
-			int url_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, find_bgn, src_end);
+			int url_end = Bry_find_.Find_fwd(src, AsciiByte.Quote, find_bgn, src_end);
 			if (url_end == Bry_find_.Not_found) {
 				err_wkr.Warn("Graph_json_save_mgr: missing endquote");
 				bfr.Add_mid(src, find_bgn, find_end);

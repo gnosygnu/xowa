@@ -18,7 +18,6 @@ package gplx.xowa.xtns.lst;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
 import gplx.Hash_adp_bry;
 import gplx.core.primitives.Byte_obj_val;
 import gplx.xowa.Xoae_app;

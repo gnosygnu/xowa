@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.drds; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.xowa.drds.pages.*; import gplx.xowa.wikis.*; import gplx.xowa.htmls.sections.*;
+package gplx.xowa.drds;
+import gplx.Bry_;
+import gplx.Io_mgr;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_test_;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.drds.pages.Xod_page_itm;
+import gplx.xowa.htmls.sections.Xoh_section_itm;
+import gplx.xowa.wikis.Xowv_wiki;
+import org.junit.Before;
+import org.junit.Test;
 public class Xod_app_tst {
 	private final Xod_app_tstr tstr = new Xod_app_tstr();
 	@Before		public void init() {tstr.Init_mem();}
@@ -59,7 +71,7 @@ class Xod_app_tstr {
 	}
 	public Xod_page_itm Make_page(int page_id, String ttl, String modified_on, Xoh_section_itm... section_ary) {
 		Xod_page_itm rv = new Xod_page_itm();
-		rv.Init(page_id, page_id, ttl, ttl, null, null, modified_on, Bool_.N, Bool_.N, Bool_.N, 1, null, null, null);
+		rv.Init(page_id, page_id, ttl, ttl, null, null, modified_on, BoolUtl.N, BoolUtl.N, BoolUtl.N, 1, null, null, null);
 		int len = section_ary.length;
 		for (int i = 0; i < len; ++i) {
 			Xoh_section_itm itm = section_ary[i];

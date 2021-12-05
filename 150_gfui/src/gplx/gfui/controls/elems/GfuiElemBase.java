@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.controls.elems; import gplx.Bool_;
+package gplx.gfui.controls.elems; import gplx.objects.primitives.BoolUtl;
 import gplx.Err_;
 import gplx.GfoMsg;
 import gplx.Gfo_evt_mgr;
@@ -324,7 +324,7 @@ public class GfuiElemBase implements GfuiElem {
 		underMgr = underElem.Core();
 		subElems = GfuiElemList.new_(this);
 		textMgr = GfxStringData.new_(this, underElem);
-		this.Focus_able_(Bool_.Cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
+		this.Focus_able_(BoolUtl.Cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
 		underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
 	public void ctor_kit_GfuiElemBase(Gfui_kit kit, String key, GxwElem underElem, Keyval_hash ctorArgs) {
@@ -335,7 +335,7 @@ public class GfuiElemBase implements GfuiElem {
 		underMgr = underElem.Core();
 		subElems = GfuiElemList.new_(this);
 		textMgr = GfxStringData.new_(this, underElem);
-		this.Focus_able_(Bool_.Cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
+		this.Focus_able_(BoolUtl.Cast(ctorArgs.Get_val_or(GfuiElem_.InitKey_focusAble, true)));
 //			underMgr.Size_set(SizeAdp_.new_(20, 20));	// NOTE: CS inits to 20,20; JAVA inits to 0,0
 	}
 	public GxwElem UnderElem_make(Keyval_hash ctorArgs) {return GxwElemFactory_.Instance.control_();}

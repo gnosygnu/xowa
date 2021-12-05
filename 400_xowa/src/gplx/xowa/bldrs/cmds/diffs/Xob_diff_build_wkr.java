@@ -13,10 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.diffs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
-import gplx.core.brys.*; import gplx.core.brys.fmts.*;
-import gplx.dbs.*; import gplx.dbs.metas.*; import gplx.dbs.diffs.*; import gplx.dbs.diffs.builds.*; import gplx.dbs.diffs.itms.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.bldrs.cmds.diffs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_fmt;
+import gplx.DateAdp_;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.core.brys.Bfr_arg_;
+import gplx.core.brys.fmts.Bfr_fmt_arg;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.dbs.diffs.Gdif_core;
+import gplx.dbs.diffs.Gdif_db;
+import gplx.dbs.diffs.Gfdb_diff_tbl;
+import gplx.dbs.diffs.builds.Gdif_bldr_ctx;
+import gplx.dbs.diffs.builds.Gfdb_diff_bldr;
+import gplx.dbs.diffs.builds.Gfdb_diff_wkr__db;
+import gplx.dbs.diffs.itms.Gdif_job_itm;
+import gplx.dbs.metas.Dbmeta_tbl_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.wikis.data.Xow_db_file;
 class Xob_diff_build_wkr {		
 	private final Gfdb_diff_bldr dif_bldr = new Gfdb_diff_bldr();
 	private final Xowe_wiki wiki;
@@ -27,9 +49,9 @@ class Xob_diff_build_wkr {
 		wiki.Init_by_wiki();
 		Bry_fmt url_fmt = Bry_fmt.New("").Args_(New_url_args(wiki, tbl_mapr.Name));
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		old_conn = New_conn(tmp_bfr, wiki, url_fmt, Bool_.N, old_url);
-		new_conn = New_conn(tmp_bfr, wiki, url_fmt, Bool_.N, new_url);
-		dif_conn = New_conn(tmp_bfr, wiki, url_fmt, Bool_.Y, dif_url);
+		old_conn = New_conn(tmp_bfr, wiki, url_fmt, BoolUtl.N, old_url);
+		new_conn = New_conn(tmp_bfr, wiki, url_fmt, BoolUtl.N, new_url);
+		dif_conn = New_conn(tmp_bfr, wiki, url_fmt, BoolUtl.Y, dif_url);
 		this.tbl_mapr = tbl_mapr;
 	}
 	public void Exec() {

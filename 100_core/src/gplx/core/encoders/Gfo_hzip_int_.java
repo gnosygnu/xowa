@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.encoders; import gplx.*; import gplx.core.*;
+package gplx.core.encoders; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfo_hzip_int_ {
 	public static final int Neg_1_adj = 1;
 	public static void Encode(int reqd, Bry_bfr bfr, int val) {
@@ -24,7 +25,7 @@ public class Gfo_hzip_int_ {
 		int adj = abrv ? 0 : 1;
 		int actl_len = len_in_base85 + adj;
 		if (actl_len < reqd) actl_len = reqd;
-		bfr.Add_byte_repeat(Byte_ascii.Bang, actl_len);			// fill with 0s; this asserts that there underlying array will be large enough for following write
+		bfr.Add_byte_repeat(AsciiByte.Bang, actl_len);			// fill with 0s; this asserts that there underlying array will be large enough for following write
 		byte[] bfr_bry = bfr.Bfr();								// NOTE: set bry reference here b/c Add_byte_repeat may create a new one
 		Base85_.Set_bry(val, bfr_bry, bfr_len + adj, reqd);		// calc base85 val for val; EX: 7224 -> "uu"
 		if (!abrv) {
@@ -54,8 +55,8 @@ public class Gfo_hzip_int_ {
 		return Base85_.To_int_by_bry(src, base85_bgn, base85_end - 1);
 	}
 	private static final byte 
-	  Base85_len__2 = Byte_ascii.Curly_bgn
-	, Base85_len__3 = Byte_ascii.Pipe
-	, Base85_len__4 = Byte_ascii.Curly_end
-	, Base85_len__5 = Byte_ascii.Tilde;
+	  Base85_len__2 = AsciiByte.CurlyBgn
+	, Base85_len__3 = AsciiByte.Pipe
+	, Base85_len__4 = AsciiByte.CurlyEnd
+	, Base85_len__5 = AsciiByte.Tilde;
 }

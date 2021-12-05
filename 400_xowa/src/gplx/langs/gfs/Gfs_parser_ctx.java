@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.gfs; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 class Gfs_parser_ctx {
 	public Btrie_fast_mgr Trie() {return trie;} Btrie_fast_mgr trie;
 	public Btrie_rv Trie_rv() {return trie_rv;} private final Btrie_rv trie_rv = new Btrie_rv();
@@ -86,14 +87,14 @@ class Gfs_err_mgr {
 	}
 	public static final String Fail_msg_invalid_lxr = "invalid character", Fail_msg_unknown_char = "unknown char", Fail_msg_eos = "end of stream", Fail_msg_nde_stack_empty = "node stack empty";
 	String Fail_msg(String type, Keyval_list fail_args) {
-		tmp_fail_bfr.Add_str_u8(type).Add_byte(Byte_ascii.Colon);
+		tmp_fail_bfr.Add_str_u8(type).Add_byte(AsciiByte.Colon);
 		int len = fail_args.Count();
 		for (int i = 0; i < len; i++) {
-			tmp_fail_bfr.Add_byte(Byte_ascii.Space);
+			tmp_fail_bfr.Add_byte(AsciiByte.Space);
 			Keyval kv = fail_args.Get_at(i);
 			tmp_fail_bfr.Add_str_u8(kv.Key());
-			tmp_fail_bfr.Add_byte(Byte_ascii.Eq).Add_byte(Byte_ascii.Apos);
-			tmp_fail_bfr.Add_str_u8(kv.Val_to_str_or_empty()).Add_byte(Byte_ascii.Apos);
+			tmp_fail_bfr.Add_byte(AsciiByte.Eq).Add_byte(AsciiByte.Apos);
+			tmp_fail_bfr.Add_str_u8(kv.Val_to_str_or_empty()).Add_byte(AsciiByte.Apos);
 		}
 		return tmp_fail_bfr.To_str_and_clear();
 	}
@@ -114,9 +115,9 @@ class Gfs_err_mgr {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Tab: 			bfr.Add(Esc_tab); break;
-				case Byte_ascii.Nl:		bfr.Add(Esc_nl); break;
-				case Byte_ascii.Cr: bfr.Add(Esc_cr); break;
+				case AsciiByte.Tab: 			bfr.Add(Esc_tab); break;
+				case AsciiByte.Nl:		bfr.Add(Esc_nl); break;
+				case AsciiByte.Cr: bfr.Add(Esc_cr); break;
 				default:						bfr.Add_byte(b); break;
 			}
 		}

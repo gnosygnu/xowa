@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.xowa_cmds.wiki_setups; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.xowa_cmds.*;
+package gplx.xowa.xtns.xowa_cmds.wiki_setups; import gplx.*;
+import gplx.objects.lists.ComparerAble;
 import gplx.langs.mustaches.*;
 class Xows_root_itm implements Mustache_doc_itm {
 	private final byte[] language, url_list;
@@ -90,14 +91,14 @@ class Xows_file_itm implements Mustache_doc_itm {
 		return Mustache_doc_itm_.Ary__empty;
 	}
 }
-class Xows_task_itm_sorter implements gplx.core.lists.ComparerAble {
+class Xows_task_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xows_task_itm lhs = (Xows_task_itm)lhsObj;
 		Xows_task_itm rhs = (Xows_task_itm)rhsObj;
 		return Int_.Compare(lhs.Seqn_id(), rhs.Seqn_id());
 	}
 }
-class Xows_file_itm_sorter implements gplx.core.lists.ComparerAble {
+class Xows_file_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xows_file_itm lhs = (Xows_file_itm)lhsObj;
 		Xows_file_itm rhs = (Xows_file_itm)rhsObj;

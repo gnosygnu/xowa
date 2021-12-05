@@ -13,14 +13,49 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis; import gplx.*; import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*; import gplx.core.envs.*;
-import gplx.gfui.*; import gplx.gfui.ipts.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.guis.menus.*; import gplx.xowa.guis.cmds.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.users.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.guis.bnds.*; import gplx.xowa.guis.views.*; import gplx.xowa.guis.urls.url_macros.*; import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
-import gplx.xowa.guis.views.boots.*; import gplx.xowa.guis.views.nightmodes.*;
-import gplx.gfui.layouts.swts.*;
+package gplx.xowa.guis;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_itm;
+import gplx.Gfo_evt_mgr;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_cmd;
+import gplx.Gfo_log_;
+import gplx.Gfo_log_bfr;
+import gplx.GfsCtx;
+import gplx.Io_url;
+import gplx.Keyval_;
+import gplx.Rls_able;
+import gplx.Rls_able_;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr_eval_mgr_;
+import gplx.core.envs.Op_sys;
+import gplx.gfui.RectAdp;
+import gplx.gfui.RectAdp_;
+import gplx.gfui.controls.standards.GfuiTextBox;
+import gplx.gfui.controls.standards.GfuiTextBox_;
+import gplx.gfui.controls.windows.GfuiWin;
+import gplx.gfui.ipts.IptCfgRegy;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.gfui.kits.core.Gfui_kit_;
+import gplx.gfui.kits.core.Swt_kit;
+import gplx.gfui.layouts.swts.Swt_layout_data__grid;
+import gplx.gfui.layouts.swts.Swt_layout_mgr__grid;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.apps.cfgs.Xocfg_win;
+import gplx.xowa.guis.bnds.Xog_bnd_mgr;
+import gplx.xowa.guis.cmds.Xog_cmd_mgr;
+import gplx.xowa.guis.menus.Xog_menu_mgr;
+import gplx.xowa.guis.urls.url_macros.Xog_url_macro_mgr;
+import gplx.xowa.guis.views.Xog_layout;
+import gplx.xowa.guis.views.Xog_tab_itm_read_mgr;
+import gplx.xowa.guis.views.Xog_win_itm;
+import gplx.xowa.guis.views.Xog_win_itm_;
+import gplx.xowa.guis.views.nightmodes.Xog_nightmode_mgr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.users.Xoue_user;
 public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 	public Xoa_gui_mgr(Xoae_app app) {
 		this.ev_mgr = new Gfo_evt_mgr(this);
@@ -59,7 +94,7 @@ public class Xoa_gui_mgr implements Gfo_evt_itm, Gfo_invk {
 
 		// create text
 		GfuiTextBox memo_txt = kit.New_text_box("memo_txt", memo_win, Keyval_.new_(GfuiTextBox_.Ctor_Memo, true));
-		memo_txt.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(Bool_.Y).Grab_excess_h_(Bool_.Y).Align_w__fill_().Align_h__fill_());
+		memo_txt.Layout_data_(new Swt_layout_data__grid().Grab_excess_w_(BoolUtl.Y).Grab_excess_h_(BoolUtl.Y).Align_w__fill_().Align_h__fill_());
 		memo_txt.Text_(String_.Concat_lines_nl(browser_win.Usr_dlg().Gui_wkr().Prog_msgs().Xto_str_ary()));
 
 		// show and focus

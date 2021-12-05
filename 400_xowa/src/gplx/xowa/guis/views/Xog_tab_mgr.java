@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.views;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Err_;
 import gplx.GfoMsg;
 import gplx.Gfo_evt_itm;
@@ -257,17 +257,17 @@ public class Xog_tab_mgr implements Gfo_evt_itm {
 		}
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_tabs_new_dflt__at_dflt__focus_y))						Tabs_new_dflt(Bool_.Y);
-		else if	(ctx.Match(k, Invk_tabs_new_link__at_dflt__focus_n))						Tabs_new_link(Bool_.N, m.ReadStrOr("v", null));
-		else if	(ctx.Match(k, Invk_tabs_new_link__at_dflt__focus_y))						Tabs_new_link(Bool_.Y, m.ReadStrOr("v", null));
+		if		(ctx.Match(k, Invk_tabs_new_dflt__at_dflt__focus_y))						Tabs_new_dflt(BoolUtl.Y);
+		else if	(ctx.Match(k, Invk_tabs_new_link__at_dflt__focus_n))						Tabs_new_link(BoolUtl.N, m.ReadStrOr("v", null));
+		else if	(ctx.Match(k, Invk_tabs_new_link__at_dflt__focus_y))						Tabs_new_link(BoolUtl.Y, m.ReadStrOr("v", null));
 		else if	(ctx.Match(k, Gfui_tab_mgr.Evt_tab_selected))								Tabs_selected(m.ReadStr("key"));
 		else if	(ctx.Match(k, Gfui_tab_mgr.Evt_tab_closed))									Tabs_closed(m.ReadStr("key"));
 		else if	(ctx.Match(k, Gfui_tab_mgr.Evt_tab_switched))								Tabs_switched(m.ReadStr("src"), m.ReadStr("trg"));
 		else if	(ctx.Match(k, Invk_tabs_close_cur))											Tabs_close_cur();
-		else if	(ctx.Match(k, Invk_tabs_select_bwd))										Tabs_select(Bool_.N);
-		else if	(ctx.Match(k, Invk_tabs_select_fwd))										Tabs_select(Bool_.Y);
-		else if	(ctx.Match(k, Invk_tabs_switch_cur_bwd))									Tabs_move(Bool_.N);
-		else if	(ctx.Match(k, Invk_tabs_switch_cur_fwd))									Tabs_move(Bool_.Y);
+		else if	(ctx.Match(k, Invk_tabs_select_bwd))										Tabs_select(BoolUtl.N);
+		else if	(ctx.Match(k, Invk_tabs_select_fwd))										Tabs_select(BoolUtl.Y);
+		else if	(ctx.Match(k, Invk_tabs_switch_cur_bwd))									Tabs_move(BoolUtl.N);
+		else if	(ctx.Match(k, Invk_tabs_switch_cur_fwd))									Tabs_move(BoolUtl.Y);
 
 		else if	(ctx.Match(k, Cfg__place_on_top))											tab_mgr.Btns_place_on_top_(m.ReadYn("v"));
 		else if	(ctx.Match(k, Cfg__height))													{btns__height = m.ReadInt("v"); tab_mgr.Btns_height_(btns__height);}

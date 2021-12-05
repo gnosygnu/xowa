@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.apps.servers.http;
+import gplx.Bry_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import org.junit.Test;
 public class Http_server_page__tst {
 	private final Http_server_page__fxt fxt = new Http_server_page__fxt();
 	@Test  public void Xwiki() {
@@ -33,7 +38,7 @@ class Http_server_page__fxt {
 	public void Init__xwiki(String wiki, String abrv, String domain) {
 		Xowe_wiki xwiki_wiki = fxt.App().Wiki_mgr().Get_by_or_make(Bry_.new_u8(wiki));
 		xwiki_wiki.Xwiki_mgr().Add_by_atrs(abrv, domain);
-		xwiki_wiki.Installed_by_test_(Bool_.Y);
+		xwiki_wiki.Installed_by_test_(BoolUtl.Y);
 	}
 	public void Test__make_url(boolean expd, String wiki_domain, String ttl_bry_arg, String qarg) {
 		boolean actl = page.Make_url(Bry_.new_u8(wiki_domain), Bry_.new_u8(ttl_bry_arg), Bry_.new_u8(qarg));

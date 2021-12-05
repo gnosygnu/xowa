@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.brys.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.DateAdp_;
+import gplx.core.brys.Bfr_arg_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 class Pxd_eval_year {
 	public static void Eval_at_pos_0(Pxd_parser tctx, Pxd_itm_int cur) {
 		Pxd_itm[] data_ary = tctx.Data_ary();
@@ -163,7 +166,7 @@ class Pxd_eval_seg {
 			case 1:
 			case 2:
 				if (val > -12 && val < 12) {
-					itm.Val_is_adj_(Bool_.Y);
+					itm.Val_is_adj_(BoolUtl.Y);
 					itm.Seg_idx_(DateAdp_.SegIdx_hour);
 					return true;
 				}
@@ -179,7 +182,7 @@ class Pxd_eval_seg {
 			case 1:
 			case 2:
 				if (val > -60 && val < 60) { 
-					itm.Val_is_adj_(Bool_.Y);
+					itm.Val_is_adj_(BoolUtl.Y);
 					itm.Seg_idx_(DateAdp_.SegIdx_minute);
 					return true;
 				}
@@ -193,12 +196,12 @@ class Pxd_eval_seg {
 		switch (sym.Tkn_tid()) {
 			case Pxd_itm_.Tid_sym:
 				Pxd_itm_sym sym_itm = (Pxd_itm_sym)sym;
-				if (sym_itm.Sym_byte() == Byte_ascii.Plus)
-					return Bool_.Y_byte;
+				if (sym_itm.Sym_byte() == AsciiByte.Plus)
+					return BoolUtl.YByte;
 				break;
-			case Pxd_itm_.Tid_dash: return Bool_.N_byte;
+			case Pxd_itm_.Tid_dash: return BoolUtl.NByte;
 		}
 		tctx.Err_set(Pft_func_time_log.Invalid_timezone, Bfr_arg_.New_bry("null"));
-		return Bool_.__byte;
+		return BoolUtl.NullByte;
 	}
 }

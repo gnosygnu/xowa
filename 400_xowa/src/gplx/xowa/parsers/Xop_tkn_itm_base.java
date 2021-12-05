@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.parsers; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.*;
 import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.htmls.core.htmls.*;
 public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 	public abstract byte Tkn_tid();
 	public Xop_tkn_grp Tkn_grp() {return grp == null ? this : grp;} private Xop_tkn_grp grp;	// NOTE: not sure about this; need to handle null refs when tkns are manipulated but not yet added to a group
@@ -36,7 +38,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 		int subs_pos_ary_len = subs_pos_ary.length;
 		if (pos_idx + 1 > subs_pos_ary_len)  {
 			int[] new_subs_pos_ary = new int[(pos_idx + 1) * 2];
-			Array_.Copy_to(subs_pos_ary, 0, new_subs_pos_ary, 0, subs_pos_ary.length);
+			ArrayUtl.CopyTo(subs_pos_ary, 0, new_subs_pos_ary, 0, subs_pos_ary.length);
 			subs_pos_ary = new_subs_pos_ary;
 		}
 		subs_pos_ary[pos_idx] = bgn;
@@ -56,7 +58,7 @@ public abstract class Xop_tkn_itm_base implements Xop_tkn_itm {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Xop_tkn_itm[] new_subs = new Xop_tkn_itm[subs_max];
-			Array_.Copy_to(subs, 0, new_subs, 0, subs_len);
+			ArrayUtl.CopyTo(subs, 0, new_subs, 0, subs_len);
 			subs = new_subs;
 		}
 		subs[subs_len] = sub;

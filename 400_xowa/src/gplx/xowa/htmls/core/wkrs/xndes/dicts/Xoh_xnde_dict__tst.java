@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.dicts; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
-import org.junit.*; import gplx.core.brys.*;
+package gplx.xowa.htmls.core.wkrs.xndes.dicts;
+import gplx.Bry_;
+import gplx.Tfds;
+import gplx.core.brys.Bry_rdr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.core.wkrs.Xoh_hzip_bfr;
+import org.junit.Test;
 public class Xoh_xnde_dict__tst {
 	private final Xoh_xnde_dict__fxt fxt = new Xoh_xnde_dict__fxt();
 	@Test public void Basic() {
@@ -29,7 +35,7 @@ public class Xoh_xnde_dict__tst {
 }
 class Xoh_xnde_dict__fxt {
 	private final Xoh_xnde_dict_grp grp = new Xoh_xnde_dict_grp(1);
-	private final Xoh_hzip_bfr bfr = new Xoh_hzip_bfr(32, Bool_.Y, Byte_ascii.Escape);
+	private final Xoh_hzip_bfr bfr = new Xoh_hzip_bfr(32, BoolUtl.Y, AsciiByte.Escape);
 	private final Bry_rdr rdr = new Bry_rdr();
 	public Xoh_xnde_dict__fxt() {
 		this.dump_bldr = new Xoh_xnde_dict__dump_bldr(bfr);

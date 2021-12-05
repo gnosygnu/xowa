@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
-import org.junit.*;
+package gplx.langs.htmls.encoders;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Gfo_url_encoder_tst {
 	private final Gfo_url_encoder_fxt fxt = new Gfo_url_encoder_fxt();
 	@Test public void Id__nums() 			{fxt.Encoder_id().Test__bicode("0123456789");}
@@ -43,7 +49,7 @@ public class Gfo_url_encoder_tst {
 	@Test public void Id__err()  {
 		byte[] raw = Bry_.new_a7("0%.jpg");
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		fxt.Encoder_id().Encoder().Decode(tmp_bfr, Bool_.N, raw, 0, raw.length);
+		fxt.Encoder_id().Encoder().Decode(tmp_bfr, BoolUtl.N, raw, 0, raw.length);
 		Tfds.Eq("0%.jpg", tmp_bfr.To_str_and_clear()); 
 	}
 	@Test public void Ttl__syms__diff() 	{fxt.Encoder_ttl().Test__encode(" &'=+", "_%26%27%3D%2B");}

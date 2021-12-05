@@ -13,20 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.syntax_highlights; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.syntax_highlights; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
 class Synh_xtn_nde_ {
 	public static void Make(Bry_bfr bfr, Xoae_app app, byte[] src, int src_bgn, int src_end, byte[] lang, byte[] enclose, byte[] style, boolean line_enabled, int start, Int_rng_mgr highlight_idxs) {
 		boolean enclose_is_none	= Bry_.Eq(enclose, Enclose_none);
 		if (enclose_is_none) {	// enclose=none -> put in <code>
 			bfr.Add(Bry__code_bgn);
-			if (style != null) bfr.Add(Xoh_consts.Style_atr).Add(style).Add_byte(Byte_ascii.Quote);
-			bfr.Add_byte(Byte_ascii.Gt);
+			if (style != null) bfr.Add(Xoh_consts.Style_atr).Add(style).Add_byte(AsciiByte.Quote);
+			bfr.Add_byte(AsciiByte.Gt);
 		}
 		else {
 			bfr.Add(Bry__div_bgn);
-			if (style != null) bfr.Add(Xoh_consts.Style_atr).Add(style).Add_byte(Byte_ascii.Quote);
-			bfr.Add_byte(Byte_ascii.Angle_end);
+			if (style != null) bfr.Add(Xoh_consts.Style_atr).Add(style).Add_byte(AsciiByte.Quote);
+			bfr.Add_byte(AsciiByte.AngleEnd);
 			Gfh_tag_.Bld_lhs_bgn(bfr, Gfh_tag_.Id__pre);
 			Gfh_atr_.Add(bfr, Gfh_atr_.Bry__style, Bry__style__overflow__auto);
 			if (Bry_.Len_gt_0(lang)) {
@@ -35,7 +37,7 @@ class Synh_xtn_nde_ {
 			Gfh_tag_.Bld_lhs_end_nde(bfr);
 		}
 		int text_bgn = src_bgn;
-		int text_end = Bry_find_.Find_bwd_while(src, src_end, -1, Byte_ascii.Space) + 1; // trim space from end; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
+		int text_end = Bry_find_.Find_bwd_while(src, src_end, -1, AsciiByte.Space) + 1; // trim space from end; PAGE:en.w:Comment_(computer_programming) DATE:2014-06-23
 		if (line_enabled || highlight_idxs != Int_rng_mgr_null.Instance) { // NOTE: if "highlight" specified without "line" highlight_idxs will not be null instance; add '<span style="background-color: #FFFFCC;">' below; ISSUE#:498; DATE:2019-06-22
 			bfr.Add_byte_nl();
 			byte[][] lines = Bry_split_.Split_lines(Bry_.Mid(src, text_bgn, text_end));
@@ -48,8 +50,8 @@ class Synh_xtn_nde_ {
 				if (line_enabled) { // add '<span style="-moz-user-select:none;">1 </span>' if "line" is enabled
 					bfr.Add(Xoh_consts.Span_bgn_open).Add(Xoh_consts.Style_atr).Add(Style_line).Add(Xoh_consts.__end_quote);
 					int pad = digits_max - Int_.DigitCount(line_idx);
-					if (pad > 0) bfr.Add_byte_repeat(Byte_ascii.Space, pad);
-					bfr.Add_int_variable(line_idx++).Add_byte(Byte_ascii.Space);
+					if (pad > 0) bfr.Add_byte_repeat(AsciiByte.Space, pad);
+					bfr.Add_int_variable(line_idx++).Add_byte(AsciiByte.Space);
 					bfr.Add(Xoh_consts.Span_end);
 				}
 				bfr.Add(Xoh_consts.Span_bgn_open);

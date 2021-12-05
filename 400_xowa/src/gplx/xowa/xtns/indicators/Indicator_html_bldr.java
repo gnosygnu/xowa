@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.indicators;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Ordered_hash;
@@ -34,9 +34,9 @@ import gplx.xowa.parsers.Xop_parser_;
 public class Indicator_html_bldr implements gplx.core.brys.Bfr_arg {
 	private Indicator_html_bldr_itm bldr_itm = new Indicator_html_bldr_itm();
 	private Ordered_hash list = Ordered_hash_.New();
-	public void Enabled_(boolean v) {enabled = v;} private boolean enabled = Bool_.Y;
+	public void Enabled_(boolean v) {enabled = v;} private boolean enabled = BoolUtl.Y;
 	public void Clear() {
-		enabled = Bool_.Y;
+		enabled = BoolUtl.Y;
 		list.Clear();
 	}
 	public int Count() {return list.Len();}

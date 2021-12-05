@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import org.junit.*; import gplx.xowa.files.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_file_fxt;
+import org.junit.Before;
+import org.junit.Test;
 public class Xoh_file_wtr__video__tst {
 	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Video__full__ogv__width_y() {// EX: [[File:A.ogv|320px|bcd|alt=efg]]; DATE:2016-08-05
@@ -45,7 +51,7 @@ public class Xoh_file_wtr__video__tst {
 	}
 	@Test public void Video__full__ogv__time() {
 		Xof_file_fxt file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
-		file_fxt.Exec_orig_add(Bool_.Y, "A.ogv", Xof_ext_.Id_ogv, 220, 300, "");
+		file_fxt.Exec_orig_add(BoolUtl.Y, "A.ogv", Xof_ext_.Id_ogv, 220, 300, "");
 		fxt.Wiki().File__fsdb_mode().Tid__v2__mp__y_();
 		fxt.Hctx_(gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx.Hdump);
 
@@ -64,7 +70,7 @@ public class Xoh_file_wtr__video__tst {
 	@Test public void Video__full_ogg() {// PURPOSE: ogg w/ width should default to video; otherwise dynamic-update won't be able to convert audio-button to thumb; DATE:2016-08-05
 		// NOTE: simulates app w/ fsdb
 		Xof_file_fxt file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
-		file_fxt.Exec_orig_add(Bool_.Y, "A.ogg", Xof_ext_.Id_ogv, 320, 300, "");
+		file_fxt.Exec_orig_add(BoolUtl.Y, "A.ogg", Xof_ext_.Id_ogv, 320, 300, "");
 
 		fxt.Test_parse_page_wiki_str
 		( "[[File:A.ogg|320px|bcd|alt=efg]]", String_.Concat_lines_nl_skip_last

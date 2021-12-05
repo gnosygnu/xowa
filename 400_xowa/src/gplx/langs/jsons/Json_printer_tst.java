@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
+package gplx.langs.jsons; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 public class Json_printer_tst {
 	private final Json_printer_fxt fxt = new Json_printer_fxt();
@@ -79,7 +80,7 @@ public class Json_printer_tst {
 //		}
 }
 class Json_printer_fxt {
-	private final Json_printer printer = new Json_printer().Opt_quote_byte_(Byte_ascii.Apos);
+	private final Json_printer printer = new Json_printer().Opt_quote_byte_(AsciiByte.Apos);
 	public void Test_print(String raw, String expd) {
 		Tfds.Eq_str_lines(expd, printer.Print_by_bry(Bry_.new_u8(raw)).To_str());
 	}

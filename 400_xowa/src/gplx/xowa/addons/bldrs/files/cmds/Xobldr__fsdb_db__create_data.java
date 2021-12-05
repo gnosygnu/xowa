@@ -13,18 +13,65 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*;
-import gplx.core.stores.*; import gplx.core.envs.*; import gplx.core.ios.streams.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
-import gplx.fsdb.*; import gplx.core.ios.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.bins.*;
-import gplx.fsdb.meta.*;
-import gplx.xowa.addons.bldrs.files.dbs.*; import gplx.xowa.addons.bldrs.files.utls.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.Bry_;
+import gplx.Decimal_adp_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.Int_ary_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Math_;
+import gplx.String_;
+import gplx.core.envs.System_;
+import gplx.core.ios.Io_size_;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.core.ios.streams.Io_stream_rdr_;
+import gplx.core.stores.DataRdr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.cfgs.Db_cfg_hash;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.fsdb.Fsdb_db_file;
+import gplx.fsdb.Fsdb_db_mgr;
+import gplx.fsdb.Fsdb_db_mgr_;
+import gplx.fsdb.Fsdb_db_mgr__v1;
+import gplx.fsdb.Fsdb_db_mgr__v2_bldr;
+import gplx.fsdb.meta.Fsm_atr_fil;
+import gplx.fsdb.meta.Fsm_bin_fil;
+import gplx.fsdb.meta.Fsm_cfg_mgr;
+import gplx.fsdb.meta.Fsm_mnt_itm;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.files.dbs.Xob_xfer_regy_tbl;
+import gplx.xowa.addons.bldrs.files.utls.Xob_bin_db_itm;
+import gplx.xowa.addons.bldrs.files.utls.Xob_bin_db_mgr;
+import gplx.xowa.addons.bldrs.files.utls.Xobu_poll_mgr;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_db_file;
+import gplx.xowa.bldrs.Xobldr_cfg;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.bldrs.wkrs.Xob_cmd__base;
+import gplx.xowa.files.Xof_bin_updater;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.files.bins.Xof_bin_mgr;
+import gplx.xowa.files.bins.Xof_bin_wkr__fsdb_sql;
+import gplx.xowa.files.bins.Xof_bin_wkr__http_wmf;
+import gplx.xowa.files.repos.Xof_repo_tid_;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
 public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_cmd {
 	private Db_conn bldr_conn; private Db_cfg_tbl bldr_cfg_tbl;
-	private Xof_bin_mgr src_bin_mgr; private Xof_bin_wkr__fsdb_sql src_fsdb_wkr; private boolean src_bin_mgr__cache_enabled = Bool_.N; private String src_bin_mgr__fsdb_version; private String[] src_bin_mgr__fsdb_skip_wkrs; private boolean src_bin_mgr__wmf_enabled;
+	private Xof_bin_mgr src_bin_mgr; private Xof_bin_wkr__fsdb_sql src_fsdb_wkr; private boolean src_bin_mgr__cache_enabled = BoolUtl.N; private String src_bin_mgr__fsdb_version; private String[] src_bin_mgr__fsdb_skip_wkrs; private boolean src_bin_mgr__wmf_enabled;
 	private Fsm_mnt_itm trg_mnt_itm; private Fsm_cfg_mgr trg_cfg_mgr; private Fsm_atr_fil trg_atr_fil; private Fsm_bin_fil trg_bin_fil; private long trg_bin_db_max; private String trg_bin_mgr__fsdb_version;
 	private final Xof_bin_updater trg_bin_updater = new Xof_bin_updater(); private Xob_bin_db_mgr bin_db_mgr; private int[] ns_ids; private int prv_lnki_tier_id = -1;
 	private long download_size_max = Io_mgr.Len_mb_long * 5; private int[] download_keep_tier_ids = Int_ary_.New(0);
@@ -68,7 +115,7 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 		this.trg_bin_db_max = Xobldr_cfg.Max_size__file(app);
 		Io_url trg_file_dir_v1 = String_.Eq(trg_bin_mgr__fsdb_version, "v1") ? wiki.Fsys_mgr().File_dir().GenNewNameOnly(wiki.Domain_str() + "-prv") : wiki.Fsys_mgr().File_dir();	// NOTE: convoluted way of setting trg to -prv if trg_bin_mgr__fsdb_version_v1 is set; otherwise set to "en.wikipedia.org" which will noop; DATE:2015-12-02
 		Fsdb_db_mgr trg_db_mgr = Fsdb_db_mgr_.new_detect(wiki, wiki.Fsys_mgr().Root_dir(), trg_file_dir_v1);
-		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
+		if (trg_db_mgr == null) trg_db_mgr = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, BoolUtl.Y);
 		Fsm_mnt_mgr trg_mnt_mgr = new Fsm_mnt_mgr(); trg_mnt_mgr.Ctor_by_load(trg_db_mgr);
 		trg_mnt_mgr.Mnts__get_insert_idx_(Fsm_mnt_mgr.Mnt_idx_main);		// NOTE: do not delete; mnt_mgr default to Mnt_idx_user; DATE:2014-04-25
 		this.trg_mnt_itm = trg_mnt_mgr.Mnts__get_insert();
@@ -214,13 +261,13 @@ public class Xobldr__fsdb_db__create_data extends Xob_cmd__base implements Xob_c
 					return;
 				}
 				if		(trg_bin_fil == null)									// no trg_bin_fil
-					Make_trg_bin_file(Bool_.Y, fsdb, src_rdr_len);
+					Make_trg_bin_file(BoolUtl.Y, fsdb, src_rdr_len);
 				else if (trg_bin_fil.Bin_len() + src_rdr_len > trg_bin_db_max) 	// or trg_bin_fil is out of space
-					Make_trg_bin_file(Bool_.N, fsdb, src_rdr_len);
+					Make_trg_bin_file(BoolUtl.N, fsdb, src_rdr_len);
 				else if (prv_lnki_tier_id != lnki_tier_id) {					// or tier has changed
 					if (	prv_lnki_tier_id != -1
 						&&	!bin_db_mgr.Schema_is_1())		// do not increment dbs for v1
-						Make_trg_bin_file(Bool_.Y, fsdb, src_rdr_len);
+						Make_trg_bin_file(BoolUtl.Y, fsdb, src_rdr_len);
 					prv_lnki_tier_id = lnki_tier_id;
 				}
 				trg_bin_updater.Save_bin(trg_mnt_itm, trg_atr_fil, trg_bin_fil, fsdb, src_rdr, src_rdr_len);
@@ -379,7 +426,7 @@ class Xodb_tbl_oimg_xfer_itm extends Xof_fsdb_itm {	public int 			Lnki_id()		{re
 		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_w)
 		, rdr.ReadInt(Xob_xfer_regy_tbl.Fld_orig_h)
 		, Bry_.Empty
-		, rdr.ReadByte(Xob_xfer_regy_tbl.Fld_file_is_orig) == Bool_.Y_byte
+		, rdr.ReadByte(Xob_xfer_regy_tbl.Fld_file_is_orig) == BoolUtl.YByte
 		);
 		return rv;
 	}

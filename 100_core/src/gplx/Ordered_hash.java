@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 import gplx.core.lists.*; /*EnumerAble,ComparerAble*/
+import gplx.objects.lists.ComparerAble;
 public interface Ordered_hash extends Hash_adp, List_adp__getable {
 	void Add_at(int i, Object o);
 	Ordered_hash Add_many_str(String... ary);

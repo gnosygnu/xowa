@@ -13,11 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.xtns.dynamicPageList;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.primitives.Bool_obj_val;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
 class Dpl_itm {
 	public byte[] Page_ttl() {return page_ttl;} private byte[] page_ttl;
 	public List_adp Ctg_includes() {return ctg_includes;} private List_adp ctg_includes;
@@ -27,7 +44,7 @@ class Dpl_itm {
 	public boolean No_follow() {return no_follow;} private boolean no_follow;
 	public boolean Suppress_errors() {return suppress_errors;} private boolean suppress_errors;
 	public boolean Show_ns() {return show_ns;} private boolean show_ns;
-	public byte Sort_ascending() {return sort_ascending;} private byte sort_ascending = Bool_.__byte;
+	public byte Sort_ascending() {return sort_ascending;} private byte sort_ascending = BoolUtl.NullByte;
 	public int Ns_filter() {return ns_filter;} private int ns_filter = Ns_filter_null;
 	public boolean Gallery_filesize() {return gallery_filesize;} private boolean gallery_filesize;
 	public boolean Gallery_filename() {return gallery_filename;} private boolean gallery_filename;
@@ -54,19 +71,19 @@ class Dpl_itm {
 		boolean loop = true;
 		while (loop) {										// iterate over content
 			boolean done = pos >= content_end;
-			byte b = done ? Byte_ascii.Nl : src[pos];		// get cur byte
+			byte b = done ? AsciiByte.Nl : src[pos];		// get cur byte
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab:
+				case AsciiByte.Space: case AsciiByte.Tab:
 					if	(ws_bgn_chk) ws_bgn_idx = pos;										// definite ws at bgn; set ws_bgn_idx, and keep setting until text reached; handles mixed sequence of \s\n\t where last tkn should be ws_bgn_idx
 					else			{if (ws_end_idx == -1) ws_end_idx = pos;};				// possible ws at end; may be overriden later; see AdjustWsForTxtTkn
 					break;
-				case Byte_ascii.Eq: {						// =; make key; EX: "=" in "category="
+				case AsciiByte.Eq: {						// =; make key; EX: "=" in "category="
 					if (ws_bgn_idx != -1) fld_bgn = ws_bgn_idx + 1;	// +1 to position after last known ws
 					int fld_end = ws_end_idx == -1 ? pos : ws_end_idx;
 					key_id = Dpl_itm_keys.Parse(src, fld_bgn, fld_end, Dpl_itm_keys.Key_null);
 					if (key_id == Dpl_itm_keys.Key_null) {	// unknown key; warn and set pos to end of line; EX: "unknown=";
 						Parse_missing_key(usr_dlg, page_ttl, src, fld_bgn, fld_end);
-						fld_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Nl, pos);
+						fld_bgn = Bry_find_.Find_fwd(src, AsciiByte.Nl, pos);
 						if (fld_bgn == Bry_find_.Not_found)
 							loop = false;
 						else {
@@ -75,19 +92,19 @@ class Dpl_itm {
 						}
 					}
 					else {									// known key; set pos to val_bgn
-						fld_bgn = pos + Byte_ascii.Len_1;
+						fld_bgn = pos + AsciiByte.Len1;
 					}
 					ws_bgn_chk = true; ws_bgn_idx = ws_end_idx = -1;
 					break;
 				}
-				case Byte_ascii.Nl: {						// dlm is nl; EX: "\n" in "category=abc\n"
+				case AsciiByte.Nl: {						// dlm is nl; EX: "\n" in "category=abc\n"
 					if (fld_bgn != pos) {					// ignores blank lines
 						if (ws_bgn_idx != -1) fld_bgn = ws_bgn_idx + 1;	// +1 to position after last known ws
 						int fld_end = ws_end_idx == -1 ? pos : ws_end_idx;
 						byte[] val = Bry_.Mid(src, fld_bgn, fld_end);
 						Parse_cmd(wiki, key_id, val);
 					}
-					fld_bgn = pos + Byte_ascii.Len_1;
+					fld_bgn = pos + AsciiByte.Len1;
 					ws_bgn_chk = true; ws_bgn_idx = ws_end_idx = -1;
 					break;
 				}

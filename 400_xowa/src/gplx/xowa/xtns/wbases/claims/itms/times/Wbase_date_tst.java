@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims.itms.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
-import org.junit.*; import gplx.core.brys.fmtrs.*;
-import gplx.langs.jsons.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.xtns.wbases.hwtrs.*;
+package gplx.xowa.xtns.wbases.claims.itms.times;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Int_ary_;
+import gplx.Tfds;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.xtns.wbases.hwtrs.Wdata_hwtr_msgs;
+import org.junit.Before;
+import org.junit.Test;
 public class Wbase_date_tst {
 	@Before public void init() {fxt.Clear();} private Wbase_date_fxt fxt = new Wbase_date_fxt();
 	@Test  public void Parse() {
@@ -43,7 +51,7 @@ public class Wbase_date_tst {
 		fxt.Test_xto_str("+00000123456-01-01T00:00:00Z",  4, "in 100,000 years");
 	}
 	@Test  public void Xto_str_julian() {
-		fxt.Init_calendar_is_julian_(Bool_.Y).Test_xto_str("+00000001600-01-02T00:00:00Z", Wbase_date.Fmt_ymd, "2 Jan 1600");
+		fxt.Init_calendar_is_julian_(BoolUtl.Y).Test_xto_str("+00000001600-01-02T00:00:00Z", Wbase_date.Fmt_ymd, "2 Jan 1600");
 	}
 	@Test  public void Xto_str_before_after() {
 		String date = "+00000002001-02-03T04:05:06Z";

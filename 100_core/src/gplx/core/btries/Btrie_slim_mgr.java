@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.btries; import gplx.*; import gplx.core.*;
-import gplx.core.primitives.*; import gplx.core.threads.poolables.*;
+package gplx.core.btries;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Byte_;
+import gplx.Err_;
+import gplx.String_;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.core.primitives.Int_obj_val;
+import gplx.objects.primitives.BoolUtl;
 public class Btrie_slim_mgr implements Btrie_mgr {
 	Btrie_slim_mgr(boolean case_match) {root = new Btrie_slim_itm(Byte_.Zero, null, !case_match);}	private Btrie_slim_itm root;
 	public int Count() {return count;} private int count;
@@ -220,8 +227,8 @@ public class Btrie_slim_mgr implements Btrie_mgr {
 		return dirty ? tmp_bfr.To_bry_and_clear() : src;
 	}
 	public void Clear() {root.Clear(); count = 0;}
-	public static Btrie_slim_mgr cs()				{return new Btrie_slim_mgr(Bool_.Y);}
-	public static Btrie_slim_mgr ci_a7()			{return new Btrie_slim_mgr(Bool_.N);}
-	public static Btrie_slim_mgr ci_u8()			{return new Btrie_slim_mgr(Bool_.N);}
+	public static Btrie_slim_mgr cs()				{return new Btrie_slim_mgr(BoolUtl.Y);}
+	public static Btrie_slim_mgr ci_a7()			{return new Btrie_slim_mgr(BoolUtl.N);}
+	public static Btrie_slim_mgr ci_u8()			{return new Btrie_slim_mgr(BoolUtl.N);}
 	public static Btrie_slim_mgr new_(boolean cs)		{return new Btrie_slim_mgr(cs);}
 }

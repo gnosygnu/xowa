@@ -13,10 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.dbs.*;
-import gplx.xowa.files.fsdb.*; import gplx.xowa.files.caches.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.apps.*; import gplx.xowa.wikis.*; import gplx.xowa.files.origs.*;
+package gplx.xowa.files;
+import gplx.Bry_;
+import gplx.Gfo_usr_dlg_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.caches.Xof_cache_mgr;
+import gplx.xowa.files.origs.Xof_orig_wkr;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
+import org.junit.After;
+import org.junit.Test;
 public class Xofv_file_mgr_tst {
 //		@Before public void init() {fxt.Clear();} private final Xofv_file_mgr_fxt fxt = new Xofv_file_mgr_fxt();
 	@After  public void term() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Noop;}
@@ -65,7 +71,7 @@ public class Xofv_file_mgr_tst {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
-//				.Init_cache_add(fxt.Mkr_cache().Init("comm", "A.png", Bool_.N, 220))	// add to cache
+//				.Init_cache_add(fxt.Mkr_cache().Init("comm", "A.png", BoolUtl.N, 220))	// add to cache
 //				.Init_fsys_add("mem/xowa/file/comm/thumb/7/0/A.png/220px.png")			// copy file to fsys
 //				.Exec_process_lnki()
 //				.Test_fsdb_download(0)	// skip download
@@ -75,7 +81,7 @@ public class Xofv_file_mgr_tst {
 //			fxt	.Init_orig_add(fxt.Mkr_orig().Init_comm("A.png", 440, 400))
 //				.Init_fsdb_add(fxt.Mkr_fsdb().Init_comm_thum("A.png", 220, 200))
 //				.Init_xfer_add(fxt.Mkr_xfer().Init_thumb(0, "A.png", 220, 200))
-//				.Init_cache_add(fxt.Mkr_cache().Init("commons", "A.png", Bool_.N, 220))	// add to cache
+//				.Init_cache_add(fxt.Mkr_cache().Init("commons", "A.png", BoolUtl.N, 220))	// add to cache
 //				.Exec_process_lnki()
 //				.Test_fsdb_download(1)	// do download
 //				;
@@ -118,9 +124,9 @@ class Xof_orig_itm_mkr {
 		redirect_bry = Bry_.Empty;
 	}
 	public void Setup_repos(Xofv_repo_itm repo_comm, Xofv_repo_itm repo_wiki) {this.repo_comm = repo_comm; this.repo_wiki = repo_wiki;}
-	public Xof_orig_itm_mkr Init_comm_redirect(String src, String trg, int orig_w, int orig_h) {return Init(Bool_.Y, src, trg, orig_w, orig_h);}
-	public Xof_orig_itm_mkr Init_comm(String ttl_str, int orig_w, int orig_h) {return Init(Bool_.Y, ttl_str, null, orig_w, orig_h);}
-	public Xof_orig_itm_mkr Init_wiki(String ttl_str, int orig_w, int orig_h) {return Init(Bool_.N, ttl_str, null, orig_w, orig_h);}
+	public Xof_orig_itm_mkr Init_comm_redirect(String src, String trg, int orig_w, int orig_h) {return Init(BoolUtl.Y, src, trg, orig_w, orig_h);}
+	public Xof_orig_itm_mkr Init_comm(String ttl_str, int orig_w, int orig_h) {return Init(BoolUtl.Y, ttl_str, null, orig_w, orig_h);}
+	public Xof_orig_itm_mkr Init_wiki(String ttl_str, int orig_w, int orig_h) {return Init(BoolUtl.N, ttl_str, null, orig_w, orig_h);}
 	private Xof_orig_itm_mkr Init(boolean repo_is_comm, String ttl_str, String redirect_str, int orig_w, int orig_h) {
 		repo = repo_is_comm ? repo_comm : repo_wiki;
 		this.ttl_bry = Bry_.new_u8(ttl_str); this.orig_w = orig_w; this.orig_h = orig_h;
@@ -144,8 +150,8 @@ class Xof_fsdb_mkr {
 		time = Xof_lnki_time.Null;
 		page = Xof_lnki_page.Null;
 	}
-	public Xof_fsdb_mkr Init_comm_thum(String ttl_str, int file_w, int file_h)	{return Init(Bool_.Y, Bool_.N, ttl_str, file_w, file_h);}
-	public Xof_fsdb_mkr Init_comm_orig(String ttl_str, int file_w, int file_h)	{return Init(Bool_.Y, Bool_.Y, ttl_str, file_w, file_h);}
+	public Xof_fsdb_mkr Init_comm_thum(String ttl_str, int file_w, int file_h)	{return Init(BoolUtl.Y, BoolUtl.N, ttl_str, file_w, file_h);}
+	public Xof_fsdb_mkr Init_comm_orig(String ttl_str, int file_w, int file_h)	{return Init(BoolUtl.Y, BoolUtl.Y, ttl_str, file_w, file_h);}
 	public Xof_fsdb_mkr Init(boolean repo_is_commons, boolean file_is_orig, String ttl_str, int file_w, int file_h) {
 		this.lnki_type = file_is_orig ? Xop_lnki_type.Id_none : Xop_lnki_type.Id_thumb; 
 		this.repo = repo_is_commons ? repo_comm : repo_wiki;

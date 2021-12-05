@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.flds; import gplx.*; import gplx.core.*;
+package gplx.core.flds; import gplx.*;
 import gplx.core.ios.*; import gplx.core.encoders.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfo_fld_wtr extends Gfo_fld_base {
 	public Bry_bfr Bfr() {return bfr;} public Gfo_fld_wtr Bfr_(Bry_bfr v) {bfr = v; return this;} Bry_bfr bfr;
 	public Gfo_fld_wtr() {this.bfr = Bry_bfr_.New();}
@@ -37,7 +38,7 @@ public class Gfo_fld_wtr extends Gfo_fld_base {
 		for (int i = bgn; i < end; i++) {
 			byte b = val[i];
 			byte escape_val = encode_regy[b & 0xFF];	// PATCH.JAVA:need to convert to unsigned byte
-			if (escape_val == Byte_ascii.Null) 	bfr.Add_byte(b);
+			if (escape_val == AsciiByte.Null) 	bfr.Add_byte(b);
 			else 								{bfr.Add_byte(escape_dlm); bfr.Add_byte(escape_val);}
 		}
 		return this;

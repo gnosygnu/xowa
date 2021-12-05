@@ -13,10 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.xmls; import gplx.*;
 import gplx.core.consoles.*;
-import gplx.core.ios.*;
-import gplx.core.texts.*;
+import gplx.objects.arrays.ArrayUtl;
 public class XmlFileSplitter {
 	public XmlFileSplitterOpts Opts() {return opts;} XmlFileSplitterOpts opts = new XmlFileSplitterOpts();
 	public byte[] Hdr() {return hdr;} private byte[] hdr;
@@ -82,17 +81,17 @@ public class XmlFileSplitter {
 	}
 	public byte[] SplitHdr(byte[] src, int findPos) {
 		hdr = new byte[findPos];
-		Array_.Copy_to(src, 0, hdr, 0, findPos);
+		ArrayUtl.CopyTo(src, 0, hdr, 0, findPos);
 		byte[] rv = new byte[src.length - findPos];
-		Array_.Copy_to(src, findPos, rv, 0, rv.length);
+		ArrayUtl.CopyTo(src, findPos, rv, 0, rv.length);
 		return rv;
 	}
 	public byte[][] SplitRest(byte[] src, int findPos) {
 		byte[][] rv = new byte[2][];
 		rv[0] = new byte[findPos];
-		Array_.Copy_to(src, 0, rv[0], 0, findPos);
+		ArrayUtl.CopyTo(src, 0, rv[0], 0, findPos);
 		rv[1] = new byte[src.length - findPos];
-		Array_.Copy_to(src, findPos, rv[1], 0, rv[1].length);
+		ArrayUtl.CopyTo(src, findPos, rv[1], 0, rv[1].length);
 		return rv;
 	}
 	public int FindMatchPos(byte[] src, byte[][] wordAry) {return FindMatchPos(src, wordAry, true);}

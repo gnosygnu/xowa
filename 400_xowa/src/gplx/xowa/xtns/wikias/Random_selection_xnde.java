@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wikias; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.wikias; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
@@ -84,7 +86,7 @@ public class Random_selection_xnde implements Xox_xnde, Mwh_atr_itm_owner2 {
 
 		// decorate option_bry
 		if (choicetemplate != null) {
-			option_bry = Bry_.Add(Xop_curly_bgn_lxr.Hook, choicetemplate, Byte_ascii.Pipe_bry, option_bry, Xop_curly_end_lxr.Hook);
+			option_bry = Bry_.Add(Xop_curly_bgn_lxr.Hook, choicetemplate, AsciiByte.PipeBry, option_bry, Xop_curly_end_lxr.Hook);
 		}
 		if (!Bry_.Eq(atr_before, Bry_.Empty)) option_bry = Bry_.Add(atr_before, option_bry);
 		if (!Bry_.Eq(atr_after , Bry_.Empty)) option_bry = Bry_.Add(option_bry, atr_after);

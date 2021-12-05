@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 import gplx.core.strings.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Keyval_ {
 	public static final Keyval[] Ary_empty = new Keyval[0];
 	public static Keyval[] Ary(Keyval... ary) {return ary;}
@@ -86,7 +88,7 @@ public class Keyval_ {
 	}
 	private static void Ary__to_str__nest__val(Bry_bfr bfr, int indent, boolean is_kv, int idx, Object val) {
 		if (indent > 0)
-			bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);                  // add indent; EX: "  "
+			bfr.Add_byte_repeat(AsciiByte.Space, indent * 2);                  // add indent; EX: "  "
 		String key = null;
 		if (is_kv) {
 			Keyval kv = (Keyval)val;
@@ -116,9 +118,9 @@ public class Keyval_ {
 				Ary__to_str__nest__ary(bfr, indent + 1, false, (Object[])val);
 				return;                                                         // don't add \n below
 			}
-			else if (Type_.Eq(val_type, Bool_.Cls_ref_type)) {                  // val is boolean
-				boolean val_as_bool = Bool_.Cast(val);
-				bfr.Add(val_as_bool ? Bool_.True_bry : Bool_.False_bry);        // add "true" or "false"; don't call toString
+			else if (Type_.Eq(val_type, BoolUtl.ClsRefType)) {                  // val is boolean
+				boolean val_as_bool = BoolUtl.Cast(val);
+				bfr.Add(val_as_bool ? BoolUtl.TrueBry : BoolUtl.FalseBry);        // add "true" or "false"; don't call toString
 			}
 			else
 				bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(val));       // call toString()

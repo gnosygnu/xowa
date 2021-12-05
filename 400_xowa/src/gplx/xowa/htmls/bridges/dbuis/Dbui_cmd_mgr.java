@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.bridges.dbuis; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.htmls.bridges.dbuis; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.htmls.bridges.*;
 import gplx.langs.jsons.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*;
 public class Dbui_cmd_mgr {
@@ -33,7 +35,7 @@ public class Dbui_cmd_mgr {
 	public String Save(Json_nde data)	{return Get_tbl(data).Save(data.Get_bry(Arg_row_id), data.Get_bry(Arg_row_pkey), To_hash(data.Get(Arg_vals)));}
 	public String Reorder(Json_nde data){
 		byte[] pkeys_concat = data.Get_bry(Arg_pkeys);
-		return Get_tbl(data).Reorder(Bry_split_.Split(pkeys_concat, Byte_ascii.Pipe), -1);
+		return Get_tbl(data).Reorder(Bry_split_.Split(pkeys_concat, AsciiByte.Pipe), -1);
 	}
 	private Dbui_tbl_itm Get_tbl(Json_nde data) {
 		byte[] tbl_key = data.Get_bry(Arg_tbl_key);

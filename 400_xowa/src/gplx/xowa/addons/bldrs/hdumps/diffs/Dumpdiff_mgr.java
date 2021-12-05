@@ -13,14 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.hdumps.diffs; import gplx.*; import gplx.xowa.*;
-import gplx.core.brys.*;
+package gplx.xowa.addons.bldrs.hdumps.diffs;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.core.brys.Bry_diff_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
 class Dumpdiff_mgr {
 	public void Exec(Xoae_app app, Xowe_wiki wiki, Dumpdiff_cfg cfg) {
 		// init log_tbl, wikis
 		Dumpdiff_log_tbl log_tbl = Dumpdiff_log_tbl.New(wiki);
-		Xowe_wiki cur_wiki = Get_wiki_by_dir(wiki, Bool_.Y, cfg.Cur_dir());
-		Xowe_wiki prv_wiki = Get_wiki_by_dir(wiki, Bool_.N, cfg.Prv_dir());
+		Xowe_wiki cur_wiki = Get_wiki_by_dir(wiki, BoolUtl.Y, cfg.Cur_dir());
+		Xowe_wiki prv_wiki = Get_wiki_by_dir(wiki, BoolUtl.N, cfg.Prv_dir());
 
 		// init html_loader, page_loader
 		Hdump_html_loader cur_html_loader = new Hdump_html_loader(cur_wiki);

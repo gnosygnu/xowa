@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials.xowa.popup_history; import gplx.*; import gplx.xowa.*; import gplx.xowa.specials.*;
+package gplx.xowa.specials.xowa.popup_history; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.specials.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.modules.popups.*;
 public class Popup_history_page implements Xow_special_page {
@@ -29,7 +31,7 @@ public class Popup_history_page implements Xow_special_page {
 			if (Ttl_chk(itm.Page_ttl())) continue;
 			fmtr_main.Bld_bfr_many(bfr, itm.Page_href(), itm.Page_ttl().Full_txt());
 		}
-		page.Db().Text().Text_bry_(bfr.Trim_end(Byte_ascii.Nl).To_bry_and_rls());
+		page.Db().Text().Text_bry_(bfr.Trim_end(AsciiByte.Nl).To_bry_and_rls());
 		page.Html_data().Html_restricted_n_();
 	}
 	private Bry_fmtr fmtr_main = Bry_fmtr.new_("<a href='~{href}'>~{ttl}</a>\n\n", "href", "ttl");	// NOTE: need to use anchor (as opposed to lnki or lnke) b/c xwiki will not work on all wikis

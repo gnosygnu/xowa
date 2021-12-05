@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import gplx.core.brys.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
 public class Io_size_ {
 	public static String To_str(long val) {return To_str(val, "#,##0.000");}
 	public static String To_str(long val, String val_fmt) {
@@ -92,7 +94,7 @@ public class Io_size_ {
 	public static long parse_or(String raw, long or) {
 		if (raw == null || raw == String_.Empty) return or;
 		String[] terms = String_.Split(raw, " ");
-		int termsLen = Array_.Len(terms); if (termsLen > 2) return or;
+		int termsLen = ArrayUtl.Len(terms); if (termsLen > 2) return or;
 
 		Decimal_adp val = null;
 		try {val = Decimal_adp_.parse(terms[0]);} catch (Exception exc) {Err_.Noop(exc); return or;}
@@ -113,7 +115,7 @@ public class Io_size_ {
 		return val.To_long();
 	}
 	private static int parse_unitPow_(String unitStr) {
-		int unitLen = Array_.Len(Units);
+		int unitLen = ArrayUtl.Len(Units);
 		int unitPow = -1;
 		for (int i = 0; i < unitLen; i++) {
 			if (String_.Eq(unitStr, String_.Upper(Units[i][0]))) return i;
@@ -163,7 +165,7 @@ class Io_size_fmtr_arg implements Bfr_arg {
 		}
 		long div = (long)Math_.Pow((long)1024, (long)pow);		
 		Decimal_adp val_decimal = Decimal_adp_.divide_(val, div);
-		bfr.Add_str_a7(val_decimal.To_str("#,###.000")).Add_byte(Byte_ascii.Space).Add(gplx.core.ios.Io_size_.Units_bry[pow]);
+		bfr.Add_str_a7(val_decimal.To_str("#,###.000")).Add_byte(AsciiByte.Space).Add(gplx.core.ios.Io_size_.Units_bry[pow]);
 		if (suffix != null) 
 			bfr.Add(suffix);
 	}

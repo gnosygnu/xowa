@@ -16,7 +16,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.engines.tdbs; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
 import gplx.core.criterias.*; import gplx.core.gfo_ndes.*; import gplx.dbs.qrys.*;
 import gplx.dbs.sqls.itms.*;
-import gplx.core.lists.*; /*ComparerAble*/ import gplx.core.stores.*; /*GfoNdeRdr*/
+import gplx.core.stores.*; /*GfoNdeRdr*/
+import gplx.objects.lists.ComparerAble;
 class TdbSelectWkr implements Db_qryWkr {
 	public Object Exec(Db_engine engineObj, Db_qry cmdObj) {
 		TdbEngine engine = TdbEngine.cast(engineObj); Db_qry__select_cmd cmd = (Db_qry__select_cmd)cmdObj;

@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
+package gplx.dbs.sqls.itms;
 import gplx.core.gfo_ndes.*;
-import gplx.core.lists.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
 public class Sql_order_fld_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		GfoNde lhs = (GfoNde)lhsObj; GfoNde rhs = (GfoNde)rhsObj;
@@ -23,12 +24,12 @@ public class Sql_order_fld_sorter implements ComparerAble {
 		for (int i = 0; i < items.length; i++) {
 			item = items[i];
 			lhsData = lhs.Read(item.Name); rhsData = rhs.Read(item.Name);
-			int compare = CompareAble_.Compare_obj(lhsData, rhsData);
-			if (compare == CompareAble_.Same) continue;
+			int compare = CompareAbleUtl.Compare_obj(lhsData, rhsData);
+			if (compare == CompareAbleUtl.Same) continue;
 			int ascendingVal = item.Sort == Sql_order_fld.Sort__dsc ? -1 : 1;
 			return compare * ascendingVal;
 		}
-		return CompareAble_.Same;
+		return CompareAbleUtl.Same;
 	}
 	Sql_order_fld[] items;
 	public static ComparerAble new_(Sql_order_fld[] items) {

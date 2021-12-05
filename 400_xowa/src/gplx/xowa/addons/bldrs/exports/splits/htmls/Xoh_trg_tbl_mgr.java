@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.splits.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.addons.bldrs.exports.splits.htmls;
+import gplx.Int_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
 public class Xoh_trg_tbl_mgr {
 	private final Xow_db_mgr db_mgr;
 	public Xoh_trg_tbl_mgr(Xowe_wiki wiki) {
@@ -22,7 +28,7 @@ public class Xoh_trg_tbl_mgr {
 	}
 	public Xoh_page_tbl_itm Make_new(int ns, int part) {
 		Xow_db_file db_file = db_mgr.Dbs__make_by_tid(Xow_db_file_.Tid__html_data, Int_.To_str(ns), part, Make_file_name(Repack_suffix, Xow_db_file_.Tid__html_data, ns, part));
-		Xoh_page_tbl_itm rv = new Xoh_page_tbl_itm(Bool_.Y, db_file.Id(), db_file.Conn());
+		Xoh_page_tbl_itm rv = new Xoh_page_tbl_itm(BoolUtl.Y, db_file.Id(), db_file.Conn());
 		rv.Html_tbl().Create_tbl();
 		return rv;
 	}

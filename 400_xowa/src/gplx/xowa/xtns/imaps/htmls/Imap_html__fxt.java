@@ -13,11 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.imaps.*;
-import gplx.xowa.files.*; import gplx.xowa.files.caches.*;
-import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.tests.*;
-import gplx.xowa.langs.msgs.*;
+package gplx.xowa.xtns.imaps.htmls;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.core.makes.tests.Xoh_make_fxt;
+import gplx.xowa.langs.msgs.Xol_msg_itm;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
 class Imap_html__fxt {
 	private final Xoh_make_fxt make_fxt = new Xoh_make_fxt();
 	private final Xop_fxt parser_fxt;
@@ -27,8 +32,8 @@ class Imap_html__fxt {
 		Xol_msg_itm msg = parser_fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_a7("imagemap_description"));
 		msg.Atrs_set(Bry_.new_a7("click here"), false, false);
 	}
-	public Imap_html__fxt Hdump_n_() {return Hdump_(Bool_.N);}
-	public Imap_html__fxt Hdump_y_() {return Hdump_(Bool_.Y);}
+	public Imap_html__fxt Hdump_n_() {return Hdump_(BoolUtl.N);}
+	public Imap_html__fxt Hdump_y_() {return Hdump_(BoolUtl.Y);}
 	private Imap_html__fxt Hdump_(boolean v) {
 		this.hdump = v;
 		return this;

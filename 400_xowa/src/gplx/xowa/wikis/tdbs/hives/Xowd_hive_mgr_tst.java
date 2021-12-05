@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.hives; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.wikis.tdbs.*;
 import org.junit.*;
 import gplx.xowa.wikis.nss.*;
 public class Xowd_hive_mgr_tst {
@@ -78,7 +81,7 @@ class Xowd_hive_mgr_fxt {
 		return this;
 	}
 	public Xowd_hive_mgr_fxt Update(String key, String data) {
-		mgr.Update(wiki.Ns_mgr().Ns_main(), Bry_.new_a7(key), null, Bry_.new_a7(data), 0, Byte_ascii.Pipe, true, true);
+		mgr.Update(wiki.Ns_mgr().Ns_main(), Bry_.new_a7(key), null, Bry_.new_a7(data), 0, AsciiByte.Pipe, true, true);
 		return this;
 	}
 	public Xowd_hive_mgr_fxt Create(String key, String data) {

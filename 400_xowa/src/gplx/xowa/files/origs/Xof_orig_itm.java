@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.xowa.wikis.*; import gplx.xowa.files.*;
+package gplx.xowa.files.origs;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
 public class Xof_orig_itm {
 	public Xof_orig_itm(byte repo, byte[] ttl, int ext_id, int w, int h, byte[] redirect) {
 		this.repo = repo; this.ttl = ttl; this.ext_id = ext_id;
@@ -27,7 +32,7 @@ public class Xof_orig_itm {
 	public int			W() {return w;} private final int w;
 	public int			H() {return h;} private final int h;
 	public byte[]		Redirect() {return redirect;} private final byte[] redirect;	// redirect trg; EX: A.png is redirected to B.jpg; record will have A.png|jpg|220|200|B.jpg where jpg|220|200 are the attributes of B.jpg
-	public boolean			Insert_new() {return insert_new;} public void Insert_new_y_() {insert_new = Bool_.Y;} private boolean insert_new;
+	public boolean			Insert_new() {return insert_new;} public void Insert_new_y_() {insert_new = BoolUtl.Y;} private boolean insert_new;
 
 	public int Db_row_size() {return Db_row_size_fixed + redirect.length + ttl.length;}
 	private static final int Db_row_size_fixed = (5 * 4);	// 3 ints; 2 bytes

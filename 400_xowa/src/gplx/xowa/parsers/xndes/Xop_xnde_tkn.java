@@ -13,8 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.xtns.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.htmls.*;
+package gplx.xowa.parsers.xndes;
+import gplx.Bry_bfr;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_parser_tid_;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_itm_base;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.tblws.Xop_tblw_tkn;
+import gplx.xowa.parsers.tblws.Xop_tblw_wkr;
+import gplx.xowa.parsers.tmpls.Xot_compile_data;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.xtns.Xox_xnde;
 public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_xnde;}
 	public int Tblw_tid() {return tag.Id();}	// NOTE: tblw tkns actually return xnde as Tblw_tid
@@ -91,10 +106,10 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 				}
 				break;
 			case Xop_xnde_tag_.Tid__nowiki:			// evaluate subs; add tags
-				bfr.Add_byte(Byte_ascii.Lt).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).Add_byte(Byte_ascii.Gt);
+				bfr.Add_byte(AsciiByte.Lt).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).Add_byte(AsciiByte.Gt);
 				for (int i = 0; i < subs_len; i++)
 					this.Subs_get(i).Tmpl_evaluate(ctx, src, caller, bfr);
-				bfr.Add_byte(Byte_ascii.Lt).Add_byte(Byte_ascii.Slash).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).Add_byte(Byte_ascii.Gt);
+				bfr.Add_byte(AsciiByte.Lt).Add_byte(AsciiByte.Slash).Add(Xop_xnde_tag_.Tag__nowiki.Name_bry()).Add_byte(AsciiByte.Gt);
 				break;
 			case Xop_xnde_tag_.Tid__onlyinclude:		// evaluate subs but toggle onlyinclude flag on/off
 //					boolean prv_val = ctx.Onlyinclude_enabled;
@@ -127,13 +142,13 @@ public class Xop_xnde_tkn extends Xop_tkn_itm_base implements Xop_tblw_tkn {
 					// NOTE: must check for inline else will output trailing '</xtn>' after '<xtn/>' PAGE:en.w:National_Popular_Vote_Interstate_Compact DATE:2017-04-10
 					if (tag_close_bgn == Int_.Min_value && closeMode != Xop_xnde_tkn.CloseMode_inline) {
 						cur_bfr.Add(tag.Xtn_end_tag());
-						cur_bfr.Add(Byte_ascii.Gt_bry);
+						cur_bfr.Add(AsciiByte.GtBry);
 					}
 
 					// UNIQ; DATE:2017-03-31
 					if (is_tmpl_mode) {
 						byte[] val = cur_bfr.To_bry_and_clear();
-						byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(Bool_.Y, tag.Name_bry(), val);
+						byte[] key = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(BoolUtl.Y, tag.Name_bry(), val);
 						bfr.Add(key);
 					}
 					} finally {

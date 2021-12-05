@@ -13,18 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
-import org.junit.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.xowa.wikis.domains.*;
-import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
+package gplx.xowa.addons.wikis.searchs.specials.htmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.searchs.searchers.Srch_search_qry;
+import gplx.xowa.addons.wikis.searchs.searchers.rslts.Srch_rslt_list;
+import gplx.xowa.addons.wikis.searchs.searchers.rslts.Srch_rslt_row;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import org.junit.Before;
+import org.junit.Test;
 public class Srch_html_page_bldr_tst {
 	@Before public void init() {fxt.Clear();} private Srch_html_page_bldr_fxt fxt = new Srch_html_page_bldr_fxt();
 	@Test  public void Paging() {
-		fxt.Test_paging(Bool_.Y, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A?fulltext=y&xowa_page_index=2' title='Next'>Next<img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_fwd.png' width='16' height='16'/></a>");
-		fxt.Test_paging(Bool_.N, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A?fulltext=y&xowa_page_index=0' title='Previous'><img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_bwd.png' width='16' height='16'/>Previous</a>");
-		fxt.Test_paging(Bool_.Y, 2, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A?fulltext=y&xowa_page_index=3' title='Next'>Next<img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_fwd.png' width='16' height='16'/></a>");
-		fxt.Test_paging(Bool_.N, 0, "&#160;");
+		fxt.Test_paging(BoolUtl.Y, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A?fulltext=y&xowa_page_index=2' title='Next'>Next<img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_fwd.png' width='16' height='16'/></a>");
+		fxt.Test_paging(BoolUtl.N, 1, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A?fulltext=y&xowa_page_index=0' title='Previous'><img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_bwd.png' width='16' height='16'/>Previous</a>");
+		fxt.Test_paging(BoolUtl.Y, 2, "<a href='/site/en.wikipedia.org/wiki/Special:Search/A?fulltext=y&xowa_page_index=3' title='Next'>Next<img src='file:///mem/xowa/bin/any/xowa/file/app.general/go_fwd.png' width='16' height='16'/></a>");
+		fxt.Test_paging(BoolUtl.N, 0, "&#160;");
 	}
 	@Test  public void Rows() {
 		fxt.Test_rows(new Srch_rslt_row[] {fxt.Make_row(10, "A"), fxt.Make_row(20, "B")}, String_.Concat_lines_nl_skip_last
@@ -58,7 +69,7 @@ class Srch_html_page_bldr_fxt {
 	}
 	public void Test_paging(boolean fwd, int slab_idx, String expd) {
 		byte[] search_orig = Bry_.new_a7("A");
-		Srch_search_qry qry = Srch_search_qry.New__search_page(Xow_domain_itm_.Ary_empty, wiki, app.Addon_mgr().Itms__search__special().Ns_mgr(), Bool_.N, search_orig, slab_idx, 100);
+		Srch_search_qry qry = Srch_search_qry.New__search_page(Xow_domain_itm_.Ary_empty, wiki, app.Addon_mgr().Itms__search__special().Ns_mgr(), BoolUtl.N, search_orig, slab_idx, 100);
 		html_mgr.Init_by_wiki(wiki, wiki.Lang().Num_mgr(), qry);
 		byte[] paging_link = html_mgr.Bld_paging_link(fwd);
 		Tfds.Eq(expd, String_.new_a7(paging_link));

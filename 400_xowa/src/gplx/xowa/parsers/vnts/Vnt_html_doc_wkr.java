@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.amps.*;
+package gplx.xowa.parsers.vnts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.xndes.*;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*;
 import gplx.xowa.htmls.*;
 class Vnt_html_doc_wkr implements Mwh_doc_wkr {
@@ -42,7 +42,7 @@ class Vnt_html_doc_wkr implements Mwh_doc_wkr {
 				val_bry = atr_converter.Parse_bry(vnt_itm, val_bry);
 				bfr.Add_byte_space();
 				bfr.Add(key_bry);
-				bfr.Add_byte(Byte_ascii.Eq);
+				bfr.Add_byte(AsciiByte.Eq);
 				byte quote_byte = Mwh_atr_itm_.Calc_qte_byte(itm_ary, itm_idx);
 				bfr.Add_byte(quote_byte);
 				bfr.Add(val_bry);
@@ -68,7 +68,7 @@ class Vnt_html_doc_wkr implements Mwh_doc_wkr {
 		}
 	}
 	public void On_nde_head_bgn(Mwh_doc_parser mgr, byte[] src, int nde_tid, int key_bgn, int key_end) {
-		bfr.Add_byte(Byte_ascii.Angle_bgn).Add_mid(src, key_bgn, key_end);	// EX: "<span"
+		bfr.Add_byte(AsciiByte.AngleBgn).Add_mid(src, key_bgn, key_end);	// EX: "<span"
 	}
 	public void On_nde_head_end(Mwh_doc_parser mgr, byte[] src, int nde_tid, int itm_bgn, int itm_end, boolean inline) {
 		bfr.Add(inline ? Xoh_consts.__inline : Xoh_consts.__end);			// add "/>" or ">"

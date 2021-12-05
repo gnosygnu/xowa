@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*;
 import gplx.dbs.*;
+import gplx.objects.strings.AsciiByte;
 public interface Select_in_cbk {
 	int Hash_max();
 	void Write_sql(Bry_bfr bfr, int idx);
@@ -35,7 +36,7 @@ class Select_in_wkr {
 			if (i != bgn) bfr.Add_str_a7(", ");
 			cbk.Write_sql(bfr, i);
 		}
-		bfr.Add_byte(Byte_ascii.Paren_end);
+		bfr.Add_byte(AsciiByte.ParenEnd);
 		return end;
 	}
 	public static Select_in_wkr New(Bry_bfr bfr, String tbl_name, String[] select_flds, String where_fld) {

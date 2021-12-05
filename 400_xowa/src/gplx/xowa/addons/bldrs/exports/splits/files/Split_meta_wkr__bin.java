@@ -13,11 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.files; import gplx.*;
-import gplx.xowa.addons.bldrs.exports.splits.*;
-import gplx.dbs.*;
-import gplx.fsdb.meta.*; import gplx.fsdb.data.*;
-import gplx.xowa.addons.bldrs.exports.splits.metas.*; import gplx.xowa.addons.bldrs.exports.splits.rslts.*;
+package gplx.xowa.addons.bldrs.exports.splits.files;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.dbs.Db_attach_mgr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.fsdb.data.Fsd_bin_itm;
+import gplx.fsdb.data.Fsd_bin_tbl;
+import gplx.fsdb.meta.Fsm_bin_fil;
+import gplx.fsdb.meta.Fsm_bin_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.addons.bldrs.exports.splits.Split_ctx;
+import gplx.xowa.addons.bldrs.exports.splits.metas.Split_meta_wkr_base;
+import gplx.xowa.addons.bldrs.exports.splits.metas.Split_page_list_type_;
+import gplx.xowa.addons.bldrs.exports.splits.rslts.Split_rslt_mgr;
 class Split_meta_wkr__bin extends Split_meta_wkr_base {
 	private final Fsm_bin_mgr bin_mgr;
 	private final Split_rslt_wkr__bin rslt_wkr = new Split_rslt_wkr__bin();
@@ -28,7 +42,7 @@ class Split_meta_wkr__bin extends Split_meta_wkr_base {
 	}
 	@Override public byte Tid() {return Split_page_list_type_.Tid__fsdb_bin;}
 	@Override public void On_nth_new(Split_ctx ctx, Db_conn trg_conn) {
-		this.tbl = new Fsd_bin_tbl(trg_conn, Bool_.N);
+		this.tbl = new Fsd_bin_tbl(trg_conn, BoolUtl.N);
 		DbmetaFldList trg_flds = Make_flds_for_split(tbl.Flds());
 		trg_conn.Meta_tbl_create(Dbmeta_tbl_itm.New(tbl.Tbl_name(), trg_flds));
 		this.stmt = trg_conn.Stmt_insert(tbl.Tbl_name(), trg_flds);

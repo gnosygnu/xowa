@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.addons.htmls.tocs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.htmls.Xoh_consts;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
 public class Xowe_hdr_bldr_fxt {		
 	private final Bry_bfr tmp = Bry_bfr_.New();
 	public Xop_fxt Fxt() {return fxt;} private final Xop_fxt fxt = new Xop_fxt();
@@ -23,7 +31,7 @@ public class Xowe_hdr_bldr_fxt {
 		tmp.Clear();
 	}
 	public void Test_html_toc(String raw, String expd) {
-		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.Y);
 		String actl = Bld_page_with_toc(tmp, fxt, raw);
 
 		// HACK: proc only tests TOC; remove <h#><span class="mw-> section; ugly hack, but this is only test code
@@ -31,23 +39,23 @@ public class Xowe_hdr_bldr_fxt {
 		actl = String_.Mid(actl, 0, span_pos - 5);
 
 		Tfds.Eq_str_lines(expd, actl);
-		fxt.Wtr_cfg().Toc__show_(Bool_.N);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.N);
 	}
 	public void Test_html_all(String raw, String expd) {
 		expd = Xoh_consts.Escape_apos(expd);
-		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.Y);
 		String actl = Bld_page_with_toc(tmp, fxt, raw);
 		Tfds.Eq_str_lines(expd, actl);
-		fxt.Wtr_cfg().Toc__show_(Bool_.N);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.N);
 	}
 	public void Test_html_frag(String raw, String frag) {
-		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.Y);
 		String actl = Bld_page_with_toc(tmp, fxt, raw);
 		fxt.Test_str_part_y(actl, frag);
-		fxt.Wtr_cfg().Toc__show_(Bool_.N);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.N);
 	}
-	public String toc_tbl_nl_y(String... ary) {return toc_tbl(Bool_.Y, ary);}
-	public String toc_tbl_nl_n(String... ary) {return toc_tbl(Bool_.N, ary);}
+	public String toc_tbl_nl_y(String... ary) {return toc_tbl(BoolUtl.Y, ary);}
+	public String toc_tbl_nl_n(String... ary) {return toc_tbl(BoolUtl.N, ary);}
 	public String toc_tbl(boolean nl, String... ary) {
 		return String_.Concat_lines_nl_skip_last
 		( "<div id=\"toc\" class=\"toc\">"

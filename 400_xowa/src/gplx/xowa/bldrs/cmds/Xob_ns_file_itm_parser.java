@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.cmds; import gplx.*;
 import gplx.langs.dsvs.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.wikis.nss.*;
 public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 	private byte[] ns_ids_bry; private String name; private final List_adp rslts = List_adp_.New();
@@ -58,7 +59,7 @@ public class Xob_ns_file_itm_parser extends Dsv_wkr_base {
 		}
 
 		int[] ns_ids = null;
-		if (ns_ids_bry.length == 1 && ns_ids_bry[0] == Byte_ascii.Star) {	// "*"
+		if (ns_ids_bry.length == 1 && ns_ids_bry[0] == AsciiByte.Star) {	// "*"
 			int len = ns_mgr.Ords_len();
 			ns_ids = new int[len];
 			for (int i = 0; i < len; ++i)

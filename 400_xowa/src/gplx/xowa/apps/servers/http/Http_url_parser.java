@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
+package gplx.xowa.apps.servers.http; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.net.*; import gplx.core.net.qargs.*;
-import gplx.langs.htmls.encoders.*;
-import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.pages.*;
 class Http_url_parser {
 	public byte[] Wiki() {return wiki;} public Http_url_parser Wiki_(String v) {this.wiki = Bry_.new_u8(v); return this;} private byte[] wiki;
@@ -50,7 +50,7 @@ class Http_url_parser {
 			if (url == null) return Fail(null, "invalid url; url is null");
 			int url_len = url.length;
 			if (url_len == 0) return Fail(null, "invalid url; url is empty");
-			if (url[0] != Byte_ascii.Slash) return Fail(url, "invalid url; must start with '/'");
+			if (url[0] != AsciiByte.Slash) return Fail(url, "invalid url; must start with '/'");
 
 			// parse
 			Gfo_url_parser url_parser = new Gfo_url_parser();
@@ -105,7 +105,7 @@ class Http_url_parser {
 						this.popup_mode = String_.new_u8(qarg_val);
 						break;
 					default:
-						qarg_bfr.Add_byte(qarg_bfr.Len_eq_0() ? Byte_ascii.Question : Byte_ascii.Amp);
+						qarg_bfr.Add_byte(qarg_bfr.Len_eq_0() ? AsciiByte.Question : AsciiByte.Amp);
 						qarg_bfr.Add(qarg_key);
 						qarg_bfr.Add_byte_eq();
 						qarg_bfr.Add(qarg_val);

@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.consoles; import gplx.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.core.envs.*;
+package gplx.core.consoles;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg_;
+import gplx.Gfo_usr_dlg__gui_mock;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.envs.Op_sys;
+import gplx.core.tests.Tst_chkr;
+import gplx.core.tests.Tst_mgr;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Gfo_cmd_arg_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private final Gfo_cmd_arg_mgr_fxt fxt = new Gfo_cmd_arg_mgr_fxt();
 	@Test public void Val__many() {
@@ -27,12 +39,12 @@ public class Gfo_cmd_arg_mgr_tst {
 		fxt.Init_args(fxt.Make_arg("a", Gfo_cmd_arg_itm_.Val_tid_yn), fxt.Make_arg("b", Gfo_cmd_arg_itm_.Val_tid_yn));
 		fxt.Exec_process("--a", "y", "--b", "n");
 		fxt.Test_errs_none();
-		fxt.Test_actl(fxt.Make_chkr("a", Bool_.Y), fxt.Make_chkr("b", Bool_.N));
+		fxt.Test_actl(fxt.Make_chkr("a", BoolUtl.Y), fxt.Make_chkr("b", BoolUtl.N));
 	}
 	@Test public void Dflt() {
-		fxt.Init_args(fxt.Make_arg("a", Gfo_cmd_arg_itm_.Val_tid_yn).Dflt_(Bool_.Y));
-		fxt.Exec_process("--a", "n").Test_actl(fxt.Make_chkr("a", Bool_.N));	// if val, use it
-		fxt.Exec_process()			.Test_actl(fxt.Make_chkr("a", Bool_.Y));	// if no val, use default
+		fxt.Init_args(fxt.Make_arg("a", Gfo_cmd_arg_itm_.Val_tid_yn).Dflt_(BoolUtl.Y));
+		fxt.Exec_process("--a", "n").Test_actl(fxt.Make_chkr("a", BoolUtl.N));	// if val, use it
+		fxt.Exec_process()			.Test_actl(fxt.Make_chkr("a", BoolUtl.Y));	// if no val, use default
 	}
 	@Test public void Err__key__unknown() {
 		fxt.Init_args(fxt.Make_arg("a"));
@@ -50,7 +62,7 @@ public class Gfo_cmd_arg_mgr_tst {
 		fxt.Test_errs(Gfo_cmd_arg_mgr_.Err__key__duplicate);
 	}
 	@Test public void Err__val__reqd() {
-		fxt.Init_args(fxt.Make_arg("a", Bool_.Y), fxt.Make_arg("b", Bool_.N));
+		fxt.Init_args(fxt.Make_arg("a", BoolUtl.Y), fxt.Make_arg("b", BoolUtl.N));
 		fxt.Exec_process("--b", "1");
 		fxt.Test_errs(Gfo_cmd_arg_mgr_.Err__val__required);
 	}

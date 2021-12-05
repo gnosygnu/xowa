@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
+package gplx.xowa.htmls.core.wkrs.xndes.atrs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*;
 import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.wkrs.xndes.dicts.*;
 class Xohz_atr_itm_ {
@@ -115,7 +117,7 @@ class Xohz_atr_itm__enm implements Xohz_atr_itm {	// EX: scope='col','row'
 		Xohz_atr_itm_.Dec__add__quote_bgn(bfr, key);
 		int enm_val = flag_bldr.Get_as_int(flag_idx);
 		if (enm_val == 0)
-			bfr.Add(rdr.Read_bry_to(Byte_ascii.Escape));
+			bfr.Add(rdr.Read_bry_to(AsciiByte.Escape));
 		else
 			bfr.Add(val_ary[enm_val - 1]);
 		Xohz_atr_itm_.Dec__add__quote_end(bfr);

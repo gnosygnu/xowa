@@ -13,10 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.dbs.sys.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.addons.wikis.directorys.dbs.*;
+package gplx.xowa.addons.wikis.directorys.specials.lists;
+import gplx.Bry_;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_;
+import gplx.dbs.Db_conn_bldr;
+import gplx.langs.jsons.Json_nde;
+import gplx.langs.jsons.Json_wtr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_db_mgr;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_db_utl;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_wiki_json;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_wiki_props;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_wiki_props_mgr;
+import gplx.xowa.addons.wikis.directorys.dbs.Xowdir_wiki_props_mgr_;
 class Xowdir_list_svc {
 	private final Xoa_app app;
 	private gplx.xowa.guis.cbks.Xog_cbk_trg cbk_trg = gplx.xowa.guis.cbks.Xog_cbk_trg.New_by_page(Xowdir_list_special.Prototype.Special__meta().Ttl_bry());
@@ -41,7 +56,7 @@ class Xowdir_list_svc {
 		
 		// get wiki_props from core_db.xowa_cfg
 		Xowdir_wiki_props_mgr wiki_props_mgr = Xowdir_wiki_props_mgr_.New_xowa(app, core_db_url);
-		Xowdir_wiki_props wiki_props = wiki_props_mgr.Verify(Bool_.Y, core_db_url.NameOnly(), core_db_url);
+		Xowdir_wiki_props wiki_props = wiki_props_mgr.Verify(BoolUtl.Y, core_db_url.NameOnly(), core_db_url);
 		String domain    = wiki_props.Domain();
 
 		// if same domain exists; return

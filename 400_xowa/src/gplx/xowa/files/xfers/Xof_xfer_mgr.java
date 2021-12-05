@@ -13,16 +13,46 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.xfers; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*; import gplx.gfui.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.downloads.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.bldrs.wms.*; import gplx.xowa.apps.wms.apis.*; import gplx.xowa.apps.wms.apis.origs.*;
-import gplx.xowa.wikis.tdbs.metas.*;
+package gplx.xowa.files.xfers;
+import gplx.Bry_;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.core.primitives.Int_2_ref;
+import gplx.core.primitives.String_obj_ref;
+import gplx.gfui.SizeAdp;
+import gplx.gfui.SizeAdp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.apps.wms.apis.origs.Xoapi_orig_rslts;
+import gplx.xowa.bldrs.wms.Xowmf_mgr;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_file_mgr;
+import gplx.xowa.files.Xof_file_wkr_;
+import gplx.xowa.files.Xof_html_elem;
+import gplx.xowa.files.Xof_img_size;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.files.Xof_url_bldr;
+import gplx.xowa.files.Xof_xfer_itm;
+import gplx.xowa.files.Xof_xfer_itm_;
+import gplx.xowa.files.downloads.Xof_download_wkr;
+import gplx.xowa.files.exts.Xof_rule_itm;
+import gplx.xowa.files.imgs.Xof_img_mode_;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.files.repos.Xof_repo_pair;
+import gplx.xowa.files.repos.Xowe_repo_mgr;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_itm;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_thumb;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_thumb_parser;
 public class Xof_xfer_mgr {
 	public Xof_xfer_mgr(Xof_file_mgr file_mgr, Xowmf_mgr wmf_mgr) {this.file_mgr = file_mgr; this.wmf_mgr = wmf_mgr;} private final Xof_file_mgr file_mgr; private final Xowmf_mgr wmf_mgr;
 	public Xof_xfer_rslt Rslt() {return rslt;} private Xof_xfer_rslt rslt = new Xof_xfer_rslt();
 	public boolean Force_orig() {return force_orig;} public Xof_xfer_mgr Force_orig_(boolean v) {force_orig = v; return this;} private boolean force_orig;
-	public Xof_xfer_mgr Force_orig_y_() {return Force_orig_(Bool_.Y);} public Xof_xfer_mgr Force_orig_n_() {return Force_orig_(Bool_.N);}
+	public Xof_xfer_mgr Force_orig_y_() {return Force_orig_(BoolUtl.Y);} public Xof_xfer_mgr Force_orig_n_() {return Force_orig_(BoolUtl.N);}
 	public void Atrs_by_itm(Xof_xfer_itm xfer_itm, Xof_repo_itm src_repo, Xof_repo_itm trg_repo) {
 		this.xfer_itm = xfer_itm;
 		this.lnki_w = xfer_itm.Lnki_w(); this.lnki_h = xfer_itm.Lnki_h(); this.lnki_thumbable = !xfer_itm.File_is_orig(); this.lnki_thumbtime = xfer_itm.Lnki_time(); this.lnki_page = xfer_itm.Lnki_page();

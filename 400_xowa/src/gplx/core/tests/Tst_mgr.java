@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.tests; import gplx.*;
 import gplx.core.strings.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Tst_mgr {
 	public Tst_mgr ThrowError_n_() {throwError = false; return this;} private boolean throwError = true;
 	public List_adp Results() {return results;} List_adp results = List_adp_.New();
@@ -79,9 +80,9 @@ public class Tst_mgr {
 	}
 	String To_str(Object ary) {	
 		if (ary == null) return "<NULL>";
-		int len = Array_.Len(ary);
+		int len = ArrayUtl.Len(ary);
 		for (int i = 0; i < len; i++) {
-			Object itm = Array_.Get_at(ary, i);
+			Object itm = ArrayUtl.GetAt(ary, i);
 			ary_sb.Add(Object_.Xto_str_strict_or_null_mark(itm)).Add(",");
 		}
 		return ary_sb.To_str_and_clear();

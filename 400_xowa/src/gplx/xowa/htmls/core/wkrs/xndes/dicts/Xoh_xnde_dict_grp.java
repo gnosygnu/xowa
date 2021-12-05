@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.xndes.dicts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*;
 public class Xoh_xnde_dict_grp {
@@ -53,7 +54,7 @@ public class Xoh_xnde_dict_grp {
 		while (true) {
 			if (rdr.Is(Bry__stop)) break;
 			int id = rdr.Read_hzip_int(id_len);
-			byte[] val = rdr.Read_bry_to(Byte_ascii.Nl);
+			byte[] val = rdr.Read_bry_to(AsciiByte.Nl);
 			Xoh_xnde_dict_itm itm = new Xoh_xnde_dict_itm(id, val);
 			hash.Add(val, itm);
 			list.Add(itm);

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.edits.*;
+package gplx.xowa.addons.apps.cfgs.specials.edits.objs; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.addons.apps.cfgs.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.guis.bnds.*;
 import gplx.xowa.addons.apps.cfgs.enums.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*;
@@ -29,7 +31,7 @@ public class Xoedit_itm_html {
 			case Xoitm_type_enum.Tid__bool:
 				bfr.Add_str_u8_fmt
 				( "<input id=\"{3}\" data-xocfg-key=\"{3}\" data-xocfg-type=\"{0}\" accesskey=\"d\" class=\"xocfg_data__bool{2}\" type=\"checkbox\"{1}{4}></input>"
-				, type, html_atrs, html_cls, key, Bry_.Eq(val, Bool_.Y_bry) ? " checked=\"checked\"" : "");
+				, type, html_atrs, html_cls, key, Bry_.Eq(val, BoolUtl.YBry) ? " checked=\"checked\"" : "");
 				break;
 			case Xoitm_type_enum.Tid__int:
 				bfr.Add_str_u8_fmt

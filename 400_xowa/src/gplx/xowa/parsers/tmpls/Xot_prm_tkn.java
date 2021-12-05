@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.List_adp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_itm_base;
 public class Xot_prm_tkn extends Xop_tkn_itm_base {
 	@Override public byte Tkn_tid() {return Xop_tkn_itm_.Tid_tmpl_prm;}		
 	@Override public void Tmpl_fmt(Xop_ctx ctx, byte[] src, Xot_fmtr fmtr) {fmtr.Reg_prm(ctx, src, this, prm_idx, prm_key, dflt_tkn);}
@@ -62,7 +71,7 @@ public class Xot_prm_tkn extends Xop_tkn_itm_base {
 			if (arg_nde == null) {Tmpl_write_missing(ctx, src, caller, bfr); return true;}	// EX: handles "{{{1}}}{{{2}}}" "{{test|a|keyd=b}}" -> "a{{{2}}}"
 		}
 		Arg_itm_tkn arg_val = arg_nde.Val_tkn();
-		if (arg_val.Itm_static() == Bool_.Y_byte)
+		if (arg_val.Itm_static() == BoolUtl.YByte)
 			bfr.Add_mid(src, arg_val.Dat_bgn(), arg_val.Dat_end());
 		else {// compile arg if dynamic; EX: [[MESSENGER]] "{{About|the NASA space mission||Messenger (disambiguation){{!}}Messenger}}"; {{!}} causes {{{2}}} to be dynamic and its dat_ary will be an empty-String ("")
 			Bry_bfr arg_val_bfr = Bry_bfr_.New();

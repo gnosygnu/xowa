@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.imports.json; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.imports.*;
+package gplx.xowa.xtns.wbases.imports.json; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*;
 import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.data.tbls.*;
@@ -72,8 +74,8 @@ class Xowb_json_dump_parser {
 
 			// read byte; parse if nl; otherwise move to next byte
 			byte b = bry[pos];	// NOTE: should never be out of bounds b/c json doc will end with "]\n"
-			if (b == Byte_ascii.Nl) {
-				if (pos - page_bgn == 1 && bry[page_bgn] == Byte_ascii.Brack_end)	// EOF; note that json dump ends with "]\n"
+			if (b == AsciiByte.Nl) {
+				if (pos - page_bgn == 1 && bry[page_bgn] == AsciiByte.BrackEnd)	// EOF; note that json dump ends with "]\n"
 					return -1;
 				dump_db.Parse_doc(Bry_.Mid(bry, page_bgn, pos));
 				return pos + 1;

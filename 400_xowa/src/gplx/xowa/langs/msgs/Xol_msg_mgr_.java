@@ -13,12 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.msgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.langs.phps.*; import gplx.xowa.parsers.*;
-import gplx.xowa.apps.gfs.*;
-import gplx.xowa.htmls.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.dbs.*;	
+package gplx.xowa.langs.msgs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_page;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.apps.gfs.Gfs_php_converter;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.langs.Xoa_lang_mgr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_stub;
+import gplx.xowa.langs.Xol_lang_stub_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_mkr;
 public class Xol_msg_mgr_ {
 	public static String Get_msg_val_gui_or_empty(Xoa_lang_mgr lang_mgr, Xol_lang_itm lang, byte[] pre, byte[] key, byte[] suf) {	// get from lang, else get from en; does not use get_msg_val to skip db lookups; should only be used for gui; DATE:2014-05-28
 		String rv = Get_msg_val_gui_or_null(lang_mgr, lang, pre, key, suf);
@@ -39,11 +55,11 @@ public class Xol_msg_mgr_ {
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b512();
 		Xol_msg_itm msg_itm = Get_msg_itm(tmp_bfr, wiki, lang, msg_key);
 		byte[] rv = (msg_itm.Defined_in_none())
-			? tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).To_bry_and_clear()	// NOTE: do not use key from msg_itm; msg_itms are case-insensitive, and val should match key exactly; EX: missing should return <missing> not <Missing> DATE:2016-08-01
+			? tmp_bfr.Add_byte(AsciiByte.Lt).Add(msg_key).Add_byte(AsciiByte.Gt).To_bry_and_clear()	// NOTE: do not use key from msg_itm; msg_itms are case-insensitive, and val should match key exactly; EX: missing should return <missing> not <Missing> DATE:2016-08-01
 			: Get_msg_val(tmp_bfr, wiki, msg_itm, fmt_args);
 		tmp_bfr.Mkr_rls();
 		return rv;
-	}	private static final byte[] Missing_bry = Bry_.new_a7("$"), Slash_bry = new byte[] {Byte_ascii.Slash};
+	}	private static final byte[] Missing_bry = Bry_.new_a7("$"), Slash_bry = new byte[] {AsciiByte.Slash};
 	public static byte[] Get_msg_val(Bry_bfr tmp_bfr, Xow_wiki wiki, Xol_msg_itm msg_itm, byte[][] fmt_args) {
 		byte[] msg_val = msg_itm.Val();
 		boolean has_fmt = msg_itm.Has_fmt_arg(), has_tmpl = msg_itm.Has_tmpl_txt();
@@ -67,7 +83,7 @@ public class Xol_msg_mgr_ {
 	}
 	public static Xol_msg_itm Get_msg_itm(Bry_bfr tmp_bfr, Xow_wiki wiki, Xol_lang_itm lang, byte[] msg_key) {
 		byte[] msg_key_sub_root = msg_key;
-		int slash_pos = Bry_find_.Find_bwd(msg_key, Byte_ascii.Slash);
+		int slash_pos = Bry_find_.Find_bwd(msg_key, AsciiByte.Slash);
 		if (slash_pos != Bry_find_.Not_found) {	// key is of format "key/lang"; EX: "January/en"
 			int msg_key_len = msg_key.length;
 			if (slash_pos != msg_key_len) {		// get text after slash; EX: "en"
@@ -87,7 +103,7 @@ public class Xol_msg_mgr_ {
 		if (msg_db == null) {															// [[MediaWiki:key/fallback]] still not found; search "lang.gfs";
 			Xol_msg_itm msg_in_lang = Get_msg_itm_from_gfs(wiki, lang, msg_key_sub_root);
 			if (msg_in_lang == null) {
-				msg_val = tmp_bfr.Add_byte(Byte_ascii.Lt).Add(msg_key).Add_byte(Byte_ascii.Gt).To_bry_and_clear();	// set val to <msg_key>
+				msg_val = tmp_bfr.Add_byte(AsciiByte.Lt).Add(msg_key).Add_byte(AsciiByte.Gt).To_bry_and_clear();	// set val to <msg_key>
 				msg_in_wiki.Defined_in_(Xol_msg_itm.Defined_in__none);
 			}
 			else {
@@ -135,7 +151,7 @@ public class Xol_msg_mgr_ {
 			Xoh_page hpg = new Xoh_page();
 			pg = hpg;				
 			hpg.Ctor_by_hview(wiki, Xoa_url.New(wiki, ttl), ttl, -1);
-			wiki.Html__hdump_mgr().Load_mgr().Load_by_xowh(hpg, ttl, Bool_.N);
+			wiki.Html__hdump_mgr().Load_mgr().Load_by_xowh(hpg, ttl, BoolUtl.N);
 			pg.Db().Text().Text_bry_(pg.Db().Html().Html_bry());
 		}
 		return pg.Db().Page().Exists() ? pg.Db().Text().Text_bry() : null;

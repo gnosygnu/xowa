@@ -13,16 +13,49 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.threads.*; import gplx.core.envs.*;
-import gplx.gfui.*; import gplx.gfui.draws.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.windows.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.guis.*; import gplx.xowa.guis.history.*; import gplx.xowa.guis.langs.*; import gplx.xowa.guis.urls.*; import gplx.xowa.guis.views.*; 
-import gplx.gfui.layouts.swts.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.apps.urls.*; import gplx.xowa.files.*;
-import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.wikis.pages.lnkis.*; import gplx.xowa.specials.*; import gplx.xowa.xtns.math.*; 	
-import gplx.xowa.guis.views.url_box_fmts.*;
+package gplx.xowa.guis.views;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_itm;
+import gplx.Gfo_evt_mgr;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg;
+import gplx.GfsCtx;
+import gplx.String_;
+import gplx.core.envs.Env_;
+import gplx.core.threads.Thread_adp;
+import gplx.core.threads.Thread_adp_;
+import gplx.gfui.controls.standards.GfuiBtn;
+import gplx.gfui.controls.standards.GfuiComboBox;
+import gplx.gfui.controls.standards.GfuiTextBox;
+import gplx.gfui.controls.standards.Gfui_grp;
+import gplx.gfui.controls.standards.Gfui_html;
+import gplx.gfui.controls.windows.GfuiWin;
+import gplx.gfui.draws.FontAdp;
+import gplx.gfui.kits.core.Gfui_kit;
+import gplx.gfui.layouts.swts.Swt_layout_data__grid;
+import gplx.gfui.layouts.swts.Swt_layout_mgr__grid;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoa_url_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.guis.Xoa_gui_mgr;
+import gplx.xowa.guis.history.Xog_history_itm;
+import gplx.xowa.guis.history.Xog_history_stack;
+import gplx.xowa.guis.langs.Xol_font_info;
+import gplx.xowa.guis.urls.Xog_url_wkr;
+import gplx.xowa.guis.views.url_box_fmts.Xog_urlfmtr_mgr;
+import gplx.xowa.htmls.hrefs.Xoh_href_gui_utl;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
 public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 	private Gfo_invk sync_cmd;
 	private Xog_url_box__selection_changed url_box__selection_changed;
@@ -72,8 +105,8 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_page_view_read))							Page__mode_(Xopg_view_mode_.Tid__read);
 		else if	(ctx.Match(k, Invk_page_view_edit))							Page__mode_edit_();
 		else if	(ctx.Match(k, Invk_page_view_html))							Page__mode_(Xopg_view_mode_.Tid__html);
-		else if (ctx.Match(k, Invk_page_edit_save))							Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), Bool_.N);
-		else if (ctx.Match(k, Invk_page_edit_save_draft))					Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), Bool_.Y);
+		else if (ctx.Match(k, Invk_page_edit_save))							Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), BoolUtl.N);
+		else if (ctx.Match(k, Invk_page_edit_save_draft))					Xog_tab_itm_edit_mgr.Save(tab_mgr.Active_tab(), BoolUtl.Y);
 		else if (ctx.Match(k, Invk_page_edit_preview))						Xog_tab_itm_edit_mgr.Preview(tab_mgr.Active_tab());
 		else if (ctx.Match(k, Invk_page_edit_rename))						Xog_tab_itm_edit_mgr.Rename(tab_mgr.Active_tab());
 		else if	(ctx.Match(k, Invk_page_edit_focus_box)) 					Xog_tab_itm_edit_mgr.Focus(this, Xog_html_itm.Elem_id__xowa_edit_data_box);
@@ -82,8 +115,8 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 		else if	(ctx.Match(k, Invk_page_dbg_wiki))							Xog_tab_itm_edit_mgr.Debug(this, Xopg_view_mode_.Tid__edit);
 		else if	(ctx.Match(k, Invk_page_goto))								Page__navigate_by_url_bar(m.ReadStr("v"));
 		else if	(ctx.Match(k, Invk_page_goto_recent))						Page__navigate_by_url_bar(app.Usere().History_mgr().Get_at_last());
-		else if	(ctx.Match(k, Invk_history_bwd))							{Page__navigate_by_history(Bool_.N);}
-		else if	(ctx.Match(k, Invk_history_fwd))							{Page__navigate_by_history(Bool_.Y);}
+		else if	(ctx.Match(k, Invk_history_bwd))							{Page__navigate_by_history(BoolUtl.N);}
+		else if	(ctx.Match(k, Invk_history_fwd))							{Page__navigate_by_history(BoolUtl.Y);}
 		else if	(ctx.Match(k, Invk_eval))									App__eval(m.ReadStr("cmd"));
 		else if	(ctx.Match(k, Invk_page_async_cancel_wait))					Page__async__cancel__wait();
 		else if	(ctx.Match(k, Invk_page_async_restart))						Page__async__restart();
@@ -143,7 +176,7 @@ public class Xog_win_itm implements Gfo_invk, Gfo_evt_itm {
 			page.Url().Anch_bry_(anchor_bry);						// update url
 		}
 		tab.History_mgr().Add(page);
-		app.Usere().History_mgr().Add(page.Wiki().App(), page.Url(), page.Ttl(), Bry_.Add_w_dlm(Byte_ascii.Hash, page.Url().Page_bry(), anchor_bry));
+		app.Usere().History_mgr().Add(page.Wiki().App(), page.Url(), page.Ttl(), Bry_.Add_w_dlm(AsciiByte.Hash, page.Url().Page_bry(), anchor_bry));
 	}
 	public void App__exit() {
 		kit.Kit_term();	// NOTE: Kit_term calls shell.close() which in turn is hooked up to app.Term_cbk() event; DATE:2014-09-09

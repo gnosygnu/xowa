@@ -13,22 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
-import org.junit.*;
+package gplx.langs.htmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import org.junit.Before;
+import org.junit.Test;
 public class Gfh_utl__basic__tst {
 	@Before public void init() {fxt.Clear();} private Gfh_class_fxt fxt = new Gfh_class_fxt();
 	@Test  public void Escape()	 	{
-		fxt.Test_escape_html(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, "a<b"			, "a&lt;b");	// basic
-		fxt.Test_escape_html(Bool_.Y, Bool_.Y, Bool_.N, Bool_.Y, Bool_.Y, "a<&b"		, "a&lt;&b");	// fix: & not escaped when <> present
-		fxt.Test_escape_html(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, "a<>'&\"b"	, "a&lt;&gt;&#39;&amp;&quot;b");
+		fxt.Test_escape_html(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, "a<b"			, "a&lt;b");	// basic
+		fxt.Test_escape_html(BoolUtl.Y, BoolUtl.Y, BoolUtl.N, BoolUtl.Y, BoolUtl.Y, "a<&b"		, "a&lt;&b");	// fix: & not escaped when <> present
+		fxt.Test_escape_html(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, "a<>'&\"b"	, "a&lt;&gt;&#39;&amp;&quot;b");
 	}
 	@Test  public void Escape_for_atr_val() {
-		fxt.Test_escape_for_atr("abc"		, Bool_.N, "abc");			// basic
-		fxt.Test_escape_for_atr("a'\"b"		, Bool_.Y, "a&#39;\"b");	// quote is '
-		fxt.Test_escape_for_atr("a'\"b"		, Bool_.N, "a'&quot;b");	// quote is "
+		fxt.Test_escape_for_atr("abc"		, BoolUtl.N, "abc");			// basic
+		fxt.Test_escape_for_atr("a'\"b"		, BoolUtl.Y, "a&#39;\"b");	// quote is '
+		fxt.Test_escape_for_atr("a'\"b"		, BoolUtl.N, "a'&quot;b");	// quote is "
 	}
 	@Test  public void Unescape()	 	{
-		fxt.Test_unescape_html(Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, "a&lt;&gt;&#39;&amp;&quot;b"		, "a<>'&\"b");	// basic
+		fxt.Test_unescape_html(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, "a&lt;&gt;&#39;&amp;&quot;b"		, "a<>'&\"b");	// basic
 	}
 }
 class Gfh_class_fxt {
@@ -45,7 +53,7 @@ class Gfh_class_fxt {
 		Tfds.Eq(expd, String_.new_a7(actl));
 	}
 	public void Test_escape_for_atr(String src, boolean quote_is_apos, String expd) {
-		byte[] actl = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, quote_is_apos ? Byte_ascii.Apos : Byte_ascii.Quote, src);
+		byte[] actl = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, quote_is_apos ? AsciiByte.Apos : AsciiByte.Quote, src);
 		Tfds.Eq(expd, String_.new_u8(actl));
 	}
 	public void Test_unescape_html(boolean lt, boolean gt, boolean amp, boolean quote, boolean apos, String src, String expd) {

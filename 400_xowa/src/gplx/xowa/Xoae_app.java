@@ -13,22 +13,85 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
-import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.brys.fmtrs.*; import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.threads.*; import gplx.langs.jsons.*; import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.log_msgs.*; import gplx.core.envs.*;
-import gplx.xowa.apps.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.metas.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.progs.*; import gplx.xowa.apps.gfs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.names.*; import gplx.xowa.specials.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.css.*; import gplx.xowa.bldrs.installs.*;
-import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.tabs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.users.*; import gplx.xowa.guis.*; import gplx.xowa.apps.cfgs.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.htmls.tocs.*; import gplx.xowa.apps.fmtrs.*; import gplx.xowa.htmls.*; import gplx.xowa.wikis.xwikis.sitelinks.*; import gplx.xowa.wikis.xwikis.parsers.*;
-import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.ns_files.*; import gplx.xowa.htmls.bridges.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*;
-import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.math.*;
-import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.apps.servers.tcp.*; import gplx.xowa.apps.servers.http.*;
-import gplx.xowa.bldrs.wms.*;
-import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.xwikis.*;
-import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
-import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.apps.miscs.*;
+package gplx.xowa;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_log_bfr;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg__log;
+import gplx.GfsCtx;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.core.brys.Bry_bfr_mkr;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.envs.System_;
+import gplx.core.flds.Gfo_fld_rdr;
+import gplx.core.ios.Io_download_fmt;
+import gplx.core.ios.Io_stream_zip_mgr;
+import gplx.core.log_msgs.Gfo_msg_log;
+import gplx.core.net.Gfo_inet_conn;
+import gplx.core.net.Gfo_inet_conn_;
+import gplx.core.primitives.Gfo_number_parser;
+import gplx.core.threads.Gfo_async_mgr;
+import gplx.core.threads.Gfo_thread_mgr;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.langs.jsons.Json_parser;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.addons.Xoax_addon_mgr;
+import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
+import gplx.xowa.apps.Xoa_app_mode;
+import gplx.xowa.apps.Xoa_cur;
+import gplx.xowa.apps.Xoa_shell;
+import gplx.xowa.apps.Xoa_stage_;
+import gplx.xowa.apps.Xoa_sys_cfg;
+import gplx.xowa.apps.Xoa_thread_mgr;
+import gplx.xowa.apps.apis.Xoapi_root;
+import gplx.xowa.apps.fmtrs.Xoa_fmtr_mgr;
+import gplx.xowa.apps.fsys.Xoa_fsys_eval;
+import gplx.xowa.apps.fsys.Xoa_fsys_mgr;
+import gplx.xowa.apps.gfs.Xoa_gfs_mgr;
+import gplx.xowa.apps.metas.Xoa_meta_mgr;
+import gplx.xowa.apps.miscs.Xoa_misc_mgr;
+import gplx.xowa.apps.progs.Xoa_prog_mgr;
+import gplx.xowa.apps.servers.http.Http_server_mgr;
+import gplx.xowa.apps.servers.tcp.Xosrv_server;
+import gplx.xowa.apps.site_cfgs.Xoa_site_cfg_mgr;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.css.Xoa_css_extractor;
+import gplx.xowa.bldrs.installs.Xoi_setup_mgr;
+import gplx.xowa.bldrs.wms.Xowmf_mgr;
+import gplx.xowa.files.Xof_file_mgr;
+import gplx.xowa.files.caches.Xof_cache_mgr;
+import gplx.xowa.files.imgs.Xof_img_mgr;
+import gplx.xowa.guis.Xoa_gui_mgr;
+import gplx.xowa.guis.cbks.Xog_cbk_mgr;
+import gplx.xowa.guis.tabs.Xog_tab_mgr;
+import gplx.xowa.guis.tabs.Xog_tab_mgr__swt;
+import gplx.xowa.htmls.Xoh_html_mgr;
+import gplx.xowa.htmls.bridges.Xoh_bridge_mgr;
+import gplx.xowa.htmls.hrefs.Xoh_href_parser;
+import gplx.xowa.htmls.ns_files.Xoh_ns_file_page_mgr;
+import gplx.xowa.langs.Xoa_lang_mgr;
+import gplx.xowa.langs.names.Xol_name_mgr;
+import gplx.xowa.parsers.Xoa_parser_mgr;
+import gplx.xowa.parsers.amps.Xop_amp_mgr;
+import gplx.xowa.parsers.logs.Xop_log_mgr;
+import gplx.xowa.parsers.tblws.Xop_tblw_ws_itm;
+import gplx.xowa.specials.Xoa_special_mgr;
+import gplx.xowa.specials.mgrs.Xoa_special_regy;
+import gplx.xowa.users.Xou_user;
+import gplx.xowa.users.Xou_user_mgr;
+import gplx.xowa.users.Xoue_user;
+import gplx.xowa.wikis.Xoa_wiki_mgr;
+import gplx.xowa.wikis.Xoae_wiki_mgr;
+import gplx.xowa.wikis.tdbs.hives.Xoa_hive_mgr;
+import gplx.xowa.wikis.xwikis.parsers.Xow_xwiki_itm_parser;
+import gplx.xowa.wikis.xwikis.sitelinks.Xoa_sitelink_mgr;
+import gplx.xowa.xtns.Xow_xtn_mgr;
 public class Xoae_app implements Xoa_app, Gfo_invk {
 	public Xoae_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Io_url root_dir, Io_url wiki_dir, Io_url file_dir, Io_url user_dir, Io_url css_dir, String bin_dir_name) {
 		Xoa_app_.Usr_dlg_(usr_dlg);
@@ -73,7 +136,7 @@ public class Xoae_app implements Xoa_app, Gfo_invk {
 
 		usr_dlg.Log_wkr().Log_to_session_fmt("app.ctor.end");
 	}
-	public boolean						Tid_is_edit()				{return Bool_.Y;}
+	public boolean						Tid_is_edit()				{return BoolUtl.Y;}
 	public Xoa_app_mode				Mode()						{return mode;} private final Xoa_app_mode mode;
 	public Xoa_fsys_mgr				Fsys_mgr()					{return fsys_mgr;} private final Xoa_fsys_mgr fsys_mgr;
 	public Xof_cache_mgr			File__cache_mgr()			{return file_mgr.Cache_mgr();}

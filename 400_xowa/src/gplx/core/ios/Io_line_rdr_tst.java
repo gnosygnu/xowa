@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*; import gplx.core.envs.*;
 public class Io_line_rdr_tst {
 	Io_line_rdr_fxt fxt;
@@ -66,7 +67,7 @@ class Io_line_rdr_fxt {
 	}  
 	public Io_line_rdr_fxt File_lines_pipe_(int count) {
 		for (int i = 0; i < count; i++)
-			tmp.Add_int_fixed(i, 2).Add_byte(Byte_ascii.Pipe).Add_byte_nl();
+			tmp.Add_int_fixed(i, 2).Add_byte(AsciiByte.Pipe).Add_byte_nl();
 		Io_mgr.Instance.SaveFilBry(rdr.Urls()[0], tmp.To_bry_and_clear());
 		return this;
 	}

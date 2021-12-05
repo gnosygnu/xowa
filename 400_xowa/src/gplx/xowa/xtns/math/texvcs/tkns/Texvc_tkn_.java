@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
+package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Texvc_tkn_ {
 	public static final int
 		Tid__root					=  0
@@ -50,14 +51,14 @@ public class Texvc_tkn_ {
 		return bfr.To_str_and_clear();
 	}
 	public static void Print_dbg_str__bgn(Bry_bfr bfr, int indent, Texvc_tkn tkn) {
-		if (indent > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);
+		if (indent > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent * 2);
 		bfr.Add(Bry__ary[tkn.Tid()]);
-		bfr.Add_byte(Byte_ascii.Paren_bgn);
+		bfr.Add_byte(AsciiByte.ParenBgn);
 		bfr.Add_int_variable(tkn.Src_bgn());
 		bfr.Add_byte_comma().Add_int_variable(tkn.Src_end());
 	}
 	public static void Print_dbg_str__end_head(Bry_bfr bfr) {
-		bfr.Add_byte(Byte_ascii.Paren_end);
+		bfr.Add_byte(AsciiByte.ParenEnd);
 		bfr.Add_byte_nl();
 	}
 }

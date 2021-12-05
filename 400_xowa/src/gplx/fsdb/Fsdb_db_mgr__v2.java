@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb; import gplx.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*; import gplx.xowa.files.origs.*; import gplx.xowa.wikis.data.*;
+package gplx.fsdb;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_url;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.origs.Xof_orig_tbl;
+import gplx.xowa.wikis.data.Xow_db_layout;
 public class Fsdb_db_mgr__v2 implements Fsdb_db_mgr {
 	private final Xow_db_layout layout; private final Io_url wiki_dir;
 	private final Fsdb_db_file file_main_core, file_user_core;
@@ -27,7 +36,7 @@ public class Fsdb_db_mgr__v2 implements Fsdb_db_mgr {
 		, new Xof_orig_tbl(file_user_core.Conn(), this.File__schema_is_1())
 		};
 	}		
-	public boolean				File__schema_is_1()					{return Bool_.N;}
+	public boolean				File__schema_is_1()					{return BoolUtl.N;}
 	public boolean				File__solo_file()					{return layout.Tid_is_all_or_few();}
 	public String			File__cfg_tbl_name()				{return gplx.xowa.wikis.data.Xowd_cfg_tbl_.Tbl_name;}
 	public Xof_orig_tbl[]	File__orig_tbl_ary()				{return orig_tbl_ary;}

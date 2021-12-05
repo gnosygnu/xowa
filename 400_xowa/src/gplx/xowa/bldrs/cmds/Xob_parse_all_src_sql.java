@@ -13,9 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.stores.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.dbs.*; import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.bldrs.cmds;
+import gplx.Err_;
+import gplx.List_adp;
+import gplx.String_;
+import gplx.core.stores.DataRdr;
+import gplx.core.stores.DataRdr_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_stmt;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
+import gplx.xowa.wikis.dbs.Xodb_mgr_sql;
 class Xob_dump_src_id {
 	private Xodb_mgr_sql db_mgr; private byte redirect;
 	private String page_db_url; private int size_max;
@@ -67,9 +79,9 @@ class Xob_dump_src_id {
 	}
 	private static String New_rdr__redirect_clause(byte redirect) {
 		switch (redirect) {
-			case Bool_.Y_byte:	return Sql_select__redirect_y;
-			case Bool_.N_byte:	return Sql_select__redirect_n;
-			case Bool_.__byte:	return Sql_select__redirect__;
+			case BoolUtl.YByte:	return Sql_select__redirect_y;
+			case BoolUtl.NByte:	return Sql_select__redirect_n;
+			case BoolUtl.NullByte:	return Sql_select__redirect__;
 			default:			throw Err_.new_unhandled(redirect);
 		}
 	}

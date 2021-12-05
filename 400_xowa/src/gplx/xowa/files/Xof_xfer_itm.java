@@ -13,11 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*;
-import gplx.xowa.guis.cbks.js.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.wikis.tdbs.metas.*;
-import gplx.xowa.parsers.utils.*;
+package gplx.xowa.files;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.core.primitives.Int_2_ref;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.imgs.Xof_img_mode_;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.guis.cbks.js.Js_img_wkr;
+import gplx.xowa.parsers.utils.Xop_redirect_mgr;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_itm;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_thumb;
 public class Xof_xfer_itm implements Xof_file_itm {
 	private Xof_url_bldr tmp_url_bldr = dflt_url_bldr;
 	public Xof_xfer_itm() {
@@ -70,7 +79,7 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public void					Html_img_wkr_(Js_img_wkr v)	{html_img_wkr = v;}
 	public int					Hdump_mode()				{return hdump_mode;} private int hdump_mode = Xof_fsdb_itm.Hdump_mode__null;
 
-	public void File_exists_y_() {file_exists = Bool_.Y;} public void File_exists_n_() {file_exists = Bool_.N;} public void File_exists_(boolean v) {file_exists = v;}
+	public void File_exists_y_() {file_exists = BoolUtl.Y;} public void File_exists_n_() {file_exists = BoolUtl.N;} public void File_exists_(boolean v) {file_exists = v;}
 	public void Html_orig_url_(Io_url v) {html_orig_url = v;}
 	public void Init_at_lnki(int exec_tid, byte[] wiki_abrv, byte[] ttl, byte lnki_type, double upright, int w, int h, double time, int page, int lnki_upright_patch) {
 		this.lnki_exec_tid = exec_tid; this.lnki_wiki_abrv = wiki_abrv;
@@ -133,13 +142,13 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public void			Ctor_for_html(int exec_tid, int lnki_upright_patch, Xof_img_size img_size, Xof_repo_itm repo, Xof_url_bldr url_bldr) {
 		Calc_html_size(exec_tid, lnki_upright_patch, img_size);
 		this.html_view_url = url_bldr.To_url_trg(repo, this, file_is_orig);
-		this.html_orig_url = url_bldr.To_url_trg(repo, this, Bool_.Y);
+		this.html_orig_url = url_bldr.To_url_trg(repo, this, BoolUtl.Y);
 	}
 	private void Calc_html_size(int exec_tid, int lnki_upright_patch, Xof_img_size img_size) {
 		if (!orig_ext.Id_is_media() && lnki_time != Xof_lnki_time.Null)	// file is not media, but has thumbtime; this check can't be moved to Lnki_time_() b/c it needs ext
 			lnki_time = Xof_lnki_time.Null;								// set time to null; needed else url will reference thumbtime; PAGE:en.w:Moon; EX:[[File:Lunar libration with phase Oct 2007 450px.gif|thumbtime=0:02]]; DATE:2014-07-20
 		if (orig_ext.Id_is_audio_strict())								// audio does not have html size calculated; everything else does
-			this.file_is_orig = Bool_.Y;
+			this.file_is_orig = BoolUtl.Y;
 		else {
 			img_size.Html_size_calc(exec_tid, lnki_w, lnki_h, lnki_type, lnki_upright_patch, lnki_upright, orig_ext.Id(), orig_w, orig_h, Xof_img_size.Thumb_width_img);
 			html_w = img_size.Html_w(); html_h = img_size.Html_h(); file_w = img_size.File_w();
@@ -166,13 +175,13 @@ public class Xof_xfer_itm implements Xof_file_itm {
 	public void	Init_at_html(int exec_tid, Xof_img_size img_size, Xof_repo_itm repo, Xof_url_bldr url_bldr) {
 		Calc_html_size(exec_tid, img_size);
 		this.html_view_url = url_bldr.To_url_trg(repo, this, file_is_orig);
-		this.html_orig_url = url_bldr.To_url_trg(repo, this, Bool_.Y);
+		this.html_orig_url = url_bldr.To_url_trg(repo, this, BoolUtl.Y);
 	}
 	private void Calc_html_size(int exec_tid, Xof_img_size img_size) {
 		if (!orig_ext.Id_is_media() && lnki_time != Xof_lnki_time.Null)	// file is not media, but has thumbtime; this check can't be moved to Lnki_time_() b/c it needs ext
 			lnki_time = Xof_lnki_time.Null;								// set time to null; needed else url will reference thumbtime; PAGE:en.w:Moon; EX:[[File:Lunar libration with phase Oct 2007 450px.gif|thumbtime=0:02]]; DATE:2014-07-20
 		if (orig_ext.Id_is_audio_strict())								// audio does not have html size calculated; everything else does
-			file_is_orig = Bool_.Y;
+			file_is_orig = BoolUtl.Y;
 		else {
 			img_size.Html_size_calc(exec_tid, lnki_w, lnki_h, lnki_type, Xof_patch_upright_tid_.Tid_all, lnki_upright, orig_ext.Id(), orig_w, orig_h, Xof_img_size.Thumb_width_img);
 			html_w = img_size.Html_w(); html_h = img_size.Html_h();

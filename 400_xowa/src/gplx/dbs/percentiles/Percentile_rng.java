@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.percentiles; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.percentiles;
+import gplx.Int_;
+import gplx.Math_;
+import gplx.objects.primitives.BoolUtl;
 public class Percentile_rng {
 	private long total_max; private int total_needed;
 	private int score_max, score_len_max;
@@ -38,7 +41,7 @@ public class Percentile_rng {
 		if (prv_score_bgn == Score_null) {
 			score_len = score_unit + (score_unit * score_len_adj);
 			score_bgn = score_max;
-			Rng_len_(Bool_.Y);
+			Rng_len_(BoolUtl.Y);
 		}
 		else {
 			score_len = prv_score_len;
@@ -64,7 +67,7 @@ public class Percentile_rng {
 		if		(new_score_len < 1)				new_score_len = score_len;
 		else if (new_score_len > score_len_max) new_score_len = score_len_max;
 		score_len = new_score_len;
-		Rng_len_(Bool_.N);
+		Rng_len_(BoolUtl.N);
 
 		// update times
 		long new_time = gplx.core.envs.System_.Ticks();

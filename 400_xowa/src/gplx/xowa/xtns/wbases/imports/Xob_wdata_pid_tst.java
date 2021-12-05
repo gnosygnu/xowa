@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports; import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Io_mgr;
 import gplx.Io_url_;
 import gplx.List_adp;
@@ -127,15 +127,15 @@ class Gfo_db_tester {
 class Xob_wdata_tst_utl {
 	public static String Json(String entity_id, String grp_key, String[] grp_vals) {
 		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_str_a7("{ 'entity':'").Add_str_u8(entity_id).Add_byte(Byte_ascii.Apos).Add_byte_nl();
+		bfr.Add_str_a7("{ 'entity':'").Add_str_u8(entity_id).Add_byte(AsciiByte.Apos).Add_byte_nl();
 		bfr.Add_str_a7(", 'datatype':'commonsMedia'\n");
 		bfr.Add_str_a7(", '").Add_str_u8(grp_key).Add_str_a7("':").Add_byte_nl();
 		int len = grp_vals.length;
 		for (int i = 0; i < len; i += 2) {
-			bfr.Add_byte_repeat(Byte_ascii.Space, 2);
-			bfr.Add_byte(i == 0 ? Byte_ascii.Curly_bgn : Byte_ascii.Comma).Add_byte(Byte_ascii.Space);			
-			bfr.Add_byte(Byte_ascii.Apos).Add_str_u8(grp_vals[i    ]).Add_byte(Byte_ascii.Apos).Add_byte(Byte_ascii.Colon);
-			bfr.Add_byte(Byte_ascii.Apos).Add_str_u8(grp_vals[i + 1]).Add_byte(Byte_ascii.Apos).Add_byte_nl();
+			bfr.Add_byte_repeat(AsciiByte.Space, 2);
+			bfr.Add_byte(i == 0 ? AsciiByte.CurlyBgn : AsciiByte.Comma).Add_byte(AsciiByte.Space);
+			bfr.Add_byte(AsciiByte.Apos).Add_str_u8(grp_vals[i    ]).Add_byte(AsciiByte.Apos).Add_byte(AsciiByte.Colon);
+			bfr.Add_byte(AsciiByte.Apos).Add_str_u8(grp_vals[i + 1]).Add_byte(AsciiByte.Apos).Add_byte_nl();
 		}			
 		bfr.Add_str_a7("  }").Add_byte_nl();
 		bfr.Add_str_a7("}").Add_byte_nl();

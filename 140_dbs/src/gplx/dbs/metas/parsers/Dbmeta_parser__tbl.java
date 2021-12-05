@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 public class Dbmeta_parser__tbl {
 	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	private final Dbmeta_parser__fld fld_parser = new Dbmeta_parser__fld();
@@ -23,17 +24,17 @@ public class Dbmeta_parser__tbl {
 		rdr.Skip_ws().Chk_trie_val(trie, Tid__create);
 		rdr.Skip_ws().Chk_trie_val(trie, Tid__table);
 		byte[] tbl_name = rdr.Read_sql_identifier();
-		rdr.Skip_ws().Chk(Byte_ascii.Paren_bgn);
+		rdr.Skip_ws().Chk(AsciiByte.ParenBgn);
 		Dbmeta_tbl_itm rv = Dbmeta_tbl_itm.New(String_.new_u8(tbl_name));
 		boolean loop = true;
 		while (loop) {
 			DbmetaFldItm fld = fld_parser.Parse_fld(rdr); if (fld == null) rdr.Err_wkr().Fail("unknown field", "src", src);
 			rv.Flds().Add(fld);
 			int pos = rdr.Pos();
-			byte b = pos == rdr.Src_end() ? Byte_ascii.Null : src[pos];
+			byte b = pos == rdr.Src_end() ? AsciiByte.Null : src[pos];
 			switch (b) {
-				case Byte_ascii.Comma:		rdr.Move_by_one(); break;
-				case Byte_ascii.Paren_end:	rdr.Move_by_one(); loop = false; break;
+				case AsciiByte.Comma:		rdr.Move_by_one(); break;
+				case AsciiByte.ParenEnd:	rdr.Move_by_one(); loop = false; break;
 				default:					rdr.Err_wkr().Fail("premature end of flds"); break;
 			}
 		}

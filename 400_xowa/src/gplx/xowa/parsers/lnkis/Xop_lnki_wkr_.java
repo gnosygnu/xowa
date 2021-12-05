@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lnkis; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
-import gplx.xowa.parsers.tmpls.*; import gplx.xowa.wikis.pages.lnkis.*;
+import gplx.xowa.xtns.pfuncs.ttls.*;
+import gplx.xowa.parsers.tmpls.*;
 public class Xop_lnki_wkr_ {
 	public static final int Invalidate_lnki_len = 128;
 	public static int Invalidate_lnki(Xop_ctx ctx, byte[] src, Xop_root_tkn root, Xop_lnki_tkn lnki, int cur_pos) {
@@ -32,8 +34,8 @@ public class Xop_lnki_wkr_ {
 	}
 	public static boolean Parse_ttl(Xop_ctx ctx, byte[] src, Xop_lnki_tkn lnki, int pipe_pos) {
 		int ttl_bgn = lnki.Src_bgn() + Xop_tkn_.Lnki_bgn_len;
-		ttl_bgn = Bry_find_.Find_fwd_while(src, ttl_bgn, pipe_pos, Byte_ascii.Space);		// remove \s from bgn
-		int ttl_end = Bry_find_.Find_bwd_while(src, pipe_pos, ttl_bgn, Byte_ascii.Space);	// remove \s from end
+		ttl_bgn = Bry_find_.Find_fwd_while(src, ttl_bgn, pipe_pos, AsciiByte.Space);		// remove \s from bgn
+		int ttl_end = Bry_find_.Find_bwd_while(src, pipe_pos, ttl_bgn, AsciiByte.Space);	// remove \s from end
 		++ttl_end; // +1 to place after non-ws; EX: [[ a ]]; ttl_end should go from 3 -> 4
 		return Parse_ttl(ctx, src, lnki, ttl_bgn, ttl_end);
 	}
@@ -49,7 +51,7 @@ public class Xop_lnki_wkr_ {
 			Int_obj_ref rel2abs_tid = ctx.Tmp_mgr().Pfunc_rel2abs().Val_zero_();
 			byte[] new_bry = Pfunc_rel2abs.Rel2abs(tmp_bfr, wiki.Parser_mgr().Rel2abs_ary(), ttl_bry, page_ttl.Raw(), rel2abs_tid);
 			lnki.Subpage_tid_(rel2abs_tid.Val());
-			lnki.Subpage_slash_at_end_(Bry_.Get_at_end(ttl_bry) == Byte_ascii.Slash);
+			lnki.Subpage_slash_at_end_(Bry_.Get_at_end(ttl_bry) == AsciiByte.Slash);
 			ttl_bry = new_bry;
 			tmp_bfr.Mkr_rls();
 		}
@@ -114,12 +116,12 @@ public class Xop_lnki_wkr_ {
 	}
 	public static boolean Adjust_for_brack_end_len_of_3(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int cur_pos, Xop_lnki_tkn lnki) {
 		if (	cur_pos < src_len										// bounds check
-			&&	src[cur_pos] == Byte_ascii.Brack_end					// is next char after "]]", "]"; i.e.: "]]]"; PAGE:en.w:Aubervilliers DATE:2014-06-25
+			&&	src[cur_pos] == AsciiByte.BrackEnd                    // is next char after "]]", "]"; i.e.: "]]]"; PAGE:en.w:Aubervilliers DATE:2014-06-25
 			) {
 			int nxt_pos = cur_pos + 1;
 			if (	nxt_pos == src_len									// allow "]]]EOS"
 				||	(	nxt_pos < src_len								// bounds check
-					&&	src[nxt_pos] != Byte_ascii.Brack_end			// is next char after "]]]", "]"; i.e.: not "]]]]"; PAGE:ru.w:Меркатале_ин_Валь_ди_Песа; DATE:2014-02-04
+					&&	src[nxt_pos] != AsciiByte.BrackEnd            // is next char after "]]]", "]"; i.e.: not "]]]]"; PAGE:ru.w:Меркатале_ин_Валь_ди_Песа; DATE:2014-02-04
 					)
 			) {
 				if (	lnki.Caption_exists()							// does a caption exist?
@@ -127,7 +129,7 @@ public class Xop_lnki_wkr_ {
 					&&	lnki.Ttl() != null								// only change "]]]" to "]" + "]]" if lnki is not title; otherwise [[A]]] -> "A]" which will be invalid; PAGE:en.w:Tall_poppy_syndrome DATE:2014-07-23
 					) {
 					Xop_tkn_itm caption_val_tkn = lnki.Caption_val_tkn();
-					caption_val_tkn.Subs_add(tkn_mkr.Bry_raw(cur_pos, cur_pos + 1, Byte_ascii.Brack_end_bry));	// add "]" as bry
+					caption_val_tkn.Subs_add(tkn_mkr.Bry_raw(cur_pos, cur_pos + 1, AsciiByte.BrackEndBry));	// add "]" as bry
 					caption_val_tkn.Src_end_(caption_val_tkn.Src_end() + 1);
 					return true;
 				}
@@ -137,7 +139,7 @@ public class Xop_lnki_wkr_ {
 	}
 	public static void Write_lnki(Bry_bfr bfr, Xoa_ttl ttl, boolean literal) {
 		bfr.Add(Xop_tkn_.Lnki_bgn);
-		if (literal) bfr.Add_byte(Byte_ascii.Colon);
+		if (literal) bfr.Add_byte(AsciiByte.Colon);
 		bfr.Add(ttl.Full_db());
 		bfr.Add(Xop_tkn_.Lnki_end);
 	}

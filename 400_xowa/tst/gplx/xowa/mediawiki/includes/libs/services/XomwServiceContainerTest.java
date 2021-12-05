@@ -1,16 +1,10 @@
 package gplx.xowa.mediawiki.includes.libs.services;
 
-import gplx.Err_;
 import gplx.core.tests.Gftest;
-import gplx.tests.Gftest_fxt;
 import gplx.xowa.mediawiki.XophpArray;
 import gplx.xowa.mediawiki.XophpCallback;
 import gplx.xowa.mediawiki.XophpCallbackOwner;
-import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
-
 public class XomwServiceContainerTest {
     private XomwServiceContainer container = new XomwServiceContainer();
     private XomwServiceContainerExample wiring = new XomwServiceContainerExample();

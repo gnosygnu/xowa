@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*; import gplx.core.tests.*;
 public class Bry_find__tst {
 	private Bry_find__fxt fxt = new Bry_find__fxt();
@@ -58,7 +59,7 @@ public class Bry_find__tst {
 		fxt.Test_Trim_bwd_space_tab(" \t"			, 0);
 	}
 	@Test public void Find_fwd_while_in() {
-		boolean[] while_ary = fxt.Init__find_fwd_while_in(Byte_ascii.Space, Byte_ascii.Tab, Byte_ascii.Nl);
+		boolean[] while_ary = fxt.Init__find_fwd_while_in(AsciiByte.Space, AsciiByte.Tab, AsciiByte.Nl);
 		fxt.Test__find_fwd_while_in(" \t\na", while_ary, 3);
 	}
 }

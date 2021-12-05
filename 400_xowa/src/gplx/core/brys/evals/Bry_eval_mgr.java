@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys.evals; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
+package gplx.core.brys.evals; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Bry_eval_mgr {
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	private final byte sym_escape, sym_key_end, sym_grp_bgn, sym_grp_end;
@@ -95,7 +96,7 @@ public class Bry_eval_mgr {
 		}
 		return bfr.To_bry_and_clear();
 	}
-	public static Bry_eval_mgr Dflt() {return new Bry_eval_mgr(Byte_ascii.Tilde, Byte_ascii.Pipe, Byte_ascii.Curly_bgn, Byte_ascii.Curly_end);}
+	public static Bry_eval_mgr Dflt() {return new Bry_eval_mgr(AsciiByte.Tilde, AsciiByte.Pipe, AsciiByte.CurlyBgn, AsciiByte.CurlyEnd);}
 }
 class Bry_eval_rslt {
 	public Bry_eval_rslt(byte[] bry, int pos) {

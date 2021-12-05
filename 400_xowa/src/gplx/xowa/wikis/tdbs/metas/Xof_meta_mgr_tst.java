@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.metas; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import org.junit.*;
 import gplx.core.primitives.*;
-import gplx.gfui.*; import gplx.xowa.files.*;
+import gplx.xowa.files.*;
 public class Xof_meta_mgr_tst {
 	Xof_file_regy_fxt fxt = new Xof_file_regy_fxt();
 	@Before public void init() {fxt.Ini();}
@@ -81,7 +83,7 @@ class Xof_file_regy_fxt {
 		Xof_meta_thumb[] rv = new Xof_meta_thumb[len];
 		Int_ary_parser parser = new Int_ary_parser();
 		for (int i = 0; i < len; i++) {
-			int[] size = parser.Parse_ary(ary[i], Byte_ascii.Comma);
+			int[] size = parser.Parse_ary(ary[i], AsciiByte.Comma);
 			rv[i] = new Xof_meta_thumb().Width_(size[0]).Height_(size[1]).Exists_y_();
 		}
 		return rv;

@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.core.lists.*;
+package gplx.xowa.wikis.tdbs.hives; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
+import gplx.xowa.wikis.tdbs.*;
 public class Xowd_regy_mgr {
 	public static final int Not_found = -1;
 	public Xowd_regy_mgr() {}
@@ -29,7 +32,7 @@ public class Xowd_regy_mgr {
 	}	ComparerAble comparer = Xowd_ttl_file_comparer_end.Instance; Xowd_hive_regy_itm comparer_itm = Xowd_hive_regy_itm.tmp_().Count_(1);
 	public Xowd_hive_regy_itm Create(byte[] key) {
 		int itm_idx = files_ary.length;
-		files_ary = (Xowd_hive_regy_itm[])Array_.Resize(files_ary, itm_idx + 1);
+		files_ary = (Xowd_hive_regy_itm[])ArrayUtl.Resize(files_ary, itm_idx + 1);
 		Xowd_hive_regy_itm rv = new Xowd_hive_regy_itm(itm_idx).Bgn_(key).End_(key).Count_(1);
 		files_ary[itm_idx] = rv;
 		return rv;
@@ -37,9 +40,9 @@ public class Xowd_regy_mgr {
 	public Xowd_hive_regy_itm Update_add(int fil_idx, byte[] key) {
 		Xowd_hive_regy_itm rv = files_ary[fil_idx];
 		rv.Count_(rv.Count() + 1);
-		if 		(Bry_.Compare(key, rv.Bgn()) < CompareAble_.Same)
+		if 		(Bry_.Compare(key, rv.Bgn()) < CompareAbleUtl.Same)
 			rv.Bgn_(key);
-		else if (Bry_.Compare(key, rv.End()) > CompareAble_.Same)
+		else if (Bry_.Compare(key, rv.End()) > CompareAbleUtl.Same)
 			rv.End_(key);
 		return rv;
 	}

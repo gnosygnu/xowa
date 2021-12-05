@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
+package gplx.dbs.sqls.itms;
+import gplx.objects.primitives.BoolUtl;
 public class Sql_order_fld {
 	public Sql_order_fld(String tbl, String name, byte sort) {this.Tbl = tbl; this.Name = name; this.Sort = sort;}
 	public final String Tbl;
@@ -31,5 +32,5 @@ public class Sql_order_fld {
 	}
 
 	public static final String Tbl__null = null;
-	public static final byte Sort__asc = Bool_.Y_byte, Sort__dsc = Bool_.N_byte, Sort__nil = Bool_.__byte;
+	public static final byte Sort__asc = BoolUtl.YByte, Sort__dsc = BoolUtl.NByte, Sort__nil = BoolUtl.NullByte;
 }

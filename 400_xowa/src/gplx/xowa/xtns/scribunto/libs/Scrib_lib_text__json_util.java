@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
 
-import gplx.Array_;
-import gplx.Bool_;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
-import gplx.CompareAble_;
+import gplx.objects.lists.CompareAbleUtl;
 import gplx.Double_;
 import gplx.Float_;
 import gplx.Int_;
@@ -37,13 +37,13 @@ import gplx.langs.jsons.Json_kv;
 import gplx.langs.jsons.Json_nde;
 import gplx.langs.jsons.Json_parser;
 import gplx.langs.jsons.Json_wtr;
-
+import gplx.objects.lists.ComparerAble;
 public class Scrib_lib_text__json_util {
 	private final Json_wtr wtr = new Json_wtr();
 	public void Reindex_arrays(Scrib_lib_text__reindex_data rv, Keyval[] kv_ary, boolean is_encoding) {
 		int next = 0;
 		if (is_encoding) {
-			Array_.Sort(kv_ary, KeyVal__sorter__key_is_numeric.Instance);
+			ArrayUtl.Sort(kv_ary, KeyVal__sorter__key_is_numeric.Instance);
 			next = 1;
 		}
 		boolean is_sequence = true;
@@ -75,13 +75,13 @@ public class Scrib_lib_text__json_util {
 		if (is_sequence) {
 			if (is_encoding) {
 				Object rv_as_ary = To_array_values(kv_ary);	
-				rv.Init(Bool_.N, null, rv_as_ary);
+				rv.Init(BoolUtl.N, null, rv_as_ary);
 				return;
 			} else {
 				Convert_to_base1(kv_ary);			// PHP: return $arr ? array_combine( range( 1, count( $arr ) ), $arr ) : $arr;
 			}
 		}
-		rv.Init(Bool_.Y, kv_ary, null);
+		rv.Init(BoolUtl.Y, kv_ary, null);
 	}
 	private static Object[] To_array_values(Keyval[] ary) {
 		int len = ary.length;
@@ -106,7 +106,7 @@ public class Scrib_lib_text__json_util {
 			Json_doc jdoc = parser.Parse(src);
 			if (jdoc.Root_grp().Tid() == Json_itm_.Tid__ary) {
 				this.decode_rslt_as_ary = Decode_ary_top(jdoc.Root_ary());
-				return Bool_.N_byte;
+				return BoolUtl.NByte;
 			}
 			else {
 				Json_nde root = (Json_nde)jdoc.Root_grp();
@@ -119,7 +119,7 @@ public class Scrib_lib_text__json_util {
 					int kv_int = Int_.Parse_or(kv_str, Int_.Min_value);
 					decode_rslt_as_nde[i] = kv_int == Int_.Min_value ? Keyval_.new_(kv_str, kv_val) : Keyval_.int_(kv_int, kv_val);	// use int_key if applicable; PAGE:it.s:Il_Re_Cervo; DATE:2015-12-06
 				}
-				return Bool_.Y_byte;
+				return BoolUtl.YByte;
 			}
 		}
 	}
@@ -225,13 +225,13 @@ public class Scrib_lib_text__json_util {
 		else if (Type_.Eq(type, Long_.Cls_ref_type))		wtr.Kv_long(kv.Key(), Long_.cast(kv_val));
 		else if (Type_.Eq(type, Float_.Cls_ref_type))		wtr.Kv_float(kv.Key(), Float_.cast(kv_val));
 		else if (Type_.Eq(type, Double_.Cls_ref_type))		wtr.Kv_double(kv.Key(), Double_.cast(kv_val));
-		else if (Type_.Eq(type, Bool_.Cls_ref_type))		wtr.Kv_bool(kv.Key(), Bool_.Cast(kv_val));
+		else if (Type_.Eq(type, BoolUtl.ClsRefType))		wtr.Kv_bool(kv.Key(), BoolUtl.Cast(kv_val));
 		else													wtr.Kv_str(kv.Key(), Object_.Xto_str_strict_or_null(kv_val));
 	}
 	private void Encode_ary(Object ary) {
-		int ary_len = Array_.Len(ary);
+		int ary_len = ArrayUtl.Len(ary);
 		for (int j = 0; j < ary_len; ++j)
-			wtr.Ary_itm_obj(Array_.Get_at(ary, j));
+			wtr.Ary_itm_obj(ArrayUtl.GetAt(ary, j));
 	}
 	public static final int
 		Flag__none				= 0
@@ -248,13 +248,13 @@ public class Scrib_lib_text__json_util {
 		Opt__force_assoc		= 1
 	;
 }
-class KeyVal__sorter__key_is_numeric implements gplx.core.lists.ComparerAble {
+class KeyVal__sorter__key_is_numeric implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Keyval lhs_itm = (Keyval)lhsObj;
 		Keyval rhs_itm = (Keyval)rhsObj;
 		int lhs_int = Int_.Parse_or(lhs_itm.Key(), Int_.Min_value);
 		int rhs_int = Int_.Parse_or(rhs_itm.Key(), Int_.Min_value);
-		return CompareAble_.Compare((Integer)lhs_int, (Integer)rhs_int);
+		return CompareAbleUtl.Compare((Integer)lhs_int, (Integer)rhs_int);
 	}
 	public static final KeyVal__sorter__key_is_numeric Instance = new KeyVal__sorter__key_is_numeric(); KeyVal__sorter__key_is_numeric() {}
 }

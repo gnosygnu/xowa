@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.Int_ary_;
+import gplx.objects.arrays.ArrayUtl;
 public class Bry_bfr_mkr_mgr {
 	private final Object thread_lock = new Object();
 	private final byte mgr_id; private final int reset;
@@ -88,11 +94,11 @@ public class Bry_bfr_mkr_mgr {
 	private void Expand() {
 		int new_max = used_max == 0 ? 2 : used_max * 2;
 		Bry_bfr[] new_ary = new Bry_bfr[new_max];
-		Array_.Copy_to(used, 0, new_ary, 0, used_max);
+		ArrayUtl.CopyTo(used, 0, new_ary, 0, used_max);
 		used = new_ary;
 		used_max = new_max;
 		int[] new_free = new int[used_max];
-		Array_.Copy_to(free, 0, new_free, 0, free_len);
+		ArrayUtl.CopyTo(free, 0, new_free, 0, free_len);
 		free = new_free;
 	}
 }

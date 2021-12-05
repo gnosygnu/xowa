@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls;
+import gplx.Bry_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
 public class Xoctg_catpage_url {
 	public Xoctg_catpage_url(byte[][] keys, boolean[] fwds) {this.keys = keys; this.fwds = fwds;}
 	public byte[][]		Grp_keys() {return keys;} private final byte[][]  keys;
@@ -25,7 +28,7 @@ public class Xoctg_catpage_url {
 
 		// for blank url, all fwds are true; EX: "Category:A" -> keys {"", "", ""}, fwds {true, true, true}
 		for (int i = 0; i < Xoa_ctg_mgr.Tid___max; ++i) {
-			fwds[i] = Bool_.Y;
+			fwds[i] = BoolUtl.Y;
 			keys[i] = Bry_.Empty;
 		}
 		return new Xoctg_catpage_url(keys, fwds);

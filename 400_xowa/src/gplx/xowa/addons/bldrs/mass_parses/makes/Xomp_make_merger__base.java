@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.mass_parses.makes; import gplx.*;
+import gplx.objects.lists.ComparerAble;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.addons.bldrs.mass_parses.dbs.*;
 // merges xomp.wkr_dbs into xowa.file.make.sqlite3
 // NOTE: can't do INSERT b/c (a) autonum id is same in diff worker dbs; (b): want autonum to match ns_id, page_id order
-abstract class Xomp_make_merger__base implements Xomp_make_merger, gplx.core.lists.ComparerAble {
+abstract class Xomp_make_merger__base implements Xomp_make_merger, ComparerAble {
 	private Xob_db_file trg_db;
 	protected Db_tbl trg_tbl;
 	private List_adp rows = List_adp_.New();

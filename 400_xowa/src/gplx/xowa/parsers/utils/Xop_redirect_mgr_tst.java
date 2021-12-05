@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.parsers.utils;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.parsers.tmpls.Xot_defn_tmpl;
+import org.junit.Before;
+import org.junit.Test;
 public class Xop_redirect_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xop_redirect_mgr_fxt fxt = new Xop_redirect_mgr_fxt();
 	@Test public void Basic()					{fxt.Test_redirect("#REDIRECT [[a]]", "A");}
@@ -26,7 +36,7 @@ public class Xop_redirect_mgr_tst {
 	@Test public void Ws()						{fxt.Test_redirect("\n#REDIRECT [[a]]", "A");}	// PAGE:en.w:Germany; {{Template group}} -> \n#REDIRECT [[Template:Navboxes]]
 	@Test public void U8() {
 		fxt.Init_u8();
-		fxt.Init_kwds(Bool_.N, "#REDIRECT", "#перенаправление");
+		fxt.Init_kwds(BoolUtl.N, "#REDIRECT", "#перенаправление");
 		fxt.Test_redirect("#REDIRECT [[A]]", "A");
 		fxt.Test_redirect("#reDirect [[A]]", "A");
 		fxt.Test_redirect("#перенаправление [[A]]", "A");

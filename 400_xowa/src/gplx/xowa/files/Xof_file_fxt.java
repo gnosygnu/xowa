@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*;
-import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
+package gplx.xowa.files;
+import gplx.Bry_;
+import gplx.Io_mgr;
+import gplx.Io_url_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.origs.Xof_orig_tbl;
+import gplx.xowa.files.repos.Xof_repo_tid_;
+import gplx.xowa.files.repos.Xow_repo_mgr_;
 public class Xof_file_fxt {
 	private final Xowe_wiki wiki;
 	Xof_file_fxt(Xowe_wiki wiki) {
@@ -31,12 +39,12 @@ public class Xof_file_fxt {
 		return this;
 	}
 	public Xof_file_fxt Init_cache() {
-		wiki.App().User().User_db_mgr().Init_by_app(Bool_.N, wiki.App().Fsys_mgr().Root_dir().GenSubFil_nest("user", "xowa.user.anonymous.sqlite3"));
+		wiki.App().User().User_db_mgr().Init_by_app(BoolUtl.N, wiki.App().Fsys_mgr().Root_dir().GenSubFil_nest("user", "xowa.user.anonymous.sqlite3"));
 		return this;
 	}
 	public Xof_file_fxt Init_orig() {
 		Db_conn conn = Db_conn_bldr.Instance.Get_or_new(Io_url_.mem_fil_("mem/xowa/wiki/" + wiki.Domain_str() + "/orig.xowa")).Conn();
-		Xof_orig_tbl orig_tbl = new Xof_orig_tbl(conn, Bool_.Y);
+		Xof_orig_tbl orig_tbl = new Xof_orig_tbl(conn, BoolUtl.Y);
 		orig_tbl.Create_tbl();
 		wiki.File_mgr().Orig_mgr().Init_by_wiki(wiki, Xof_fsdb_mode.New__v2__gui(), new Xof_orig_tbl[] {orig_tbl}, Xof_url_bldr.new_v2());
 		return this;

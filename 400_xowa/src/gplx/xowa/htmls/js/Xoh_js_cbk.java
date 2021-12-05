@@ -15,12 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.js;
 
-import gplx.Bool_;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Bry_split_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.GfoMsg;
 import gplx.Gfo_invk;
@@ -30,6 +29,7 @@ import gplx.Int_;
 import gplx.Object_;
 import gplx.String_;
 import gplx.core.threads.Thread_adp_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xoae_app;
 import gplx.xowa.Xoae_page;
@@ -69,7 +69,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 		Xop_ctx ctx = wiki.Parser_mgr().Ctx();
 		boolean old_para_enabled = ctx.Para().Enabled();
 		byte[] raw = Bry_.new_u8(m.Args_getAt(0).Val_to_str_or_empty());
-		boolean para_enabled = m.Args_count() < 2 ? false : Bool_.Parse(m.Args_getAt(1).Val_to_str_or_empty());
+		boolean para_enabled = m.Args_count() < 2 ? false : BoolUtl.Parse(m.Args_getAt(1).Val_to_str_or_empty());
 		try {
 			ctx.Para().Enabled_(para_enabled);
 			wiki.Parser_mgr().Main().Parse_text_to_wdom(root, ctx, ctx.Tkn_mkr(), raw, 0);
@@ -113,12 +113,12 @@ public class Xoh_js_cbk implements Gfo_invk {
 			Xoa_ttl ttl = Xoa_ttl.Parse(wiki, ttl_bry);
 			wiki.Db_mgr().Load_mgr().Load_by_ttl(tmp_page, ttl.Ns(), ttl.Page_db());
 		}
-		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.To_str(tmp_page.Id()), Int_.To_str(tmp_page.Ns_id()), String_.new_u8(tmp_page.Ttl_page_db()), Bool_.To_str_lower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.To_str(tmp_page.Text_len()));
+		return String_.Ary(tmp_page.Exists() ? "1" : "0", Int_.To_str(tmp_page.Id()), Int_.To_str(tmp_page.Ns_id()), String_.new_u8(tmp_page.Ttl_page_db()), BoolUtl.ToStrLower(tmp_page.Redirected()), tmp_page.Modified_on().XtoStr_fmt("yyyy-MM-dd HH:mm:ss"), Int_.To_str(tmp_page.Text_len()));
 	}	private static final Xowd_page_itm tmp_page = Xowd_page_itm.new_tmp();
 	private String[][] Get_titles_meta(GfoMsg m) {
 		Xowe_wiki wiki = html_itm.Owner_tab().Wiki();
 		try {
-			byte[][] ttls = Bry_split_.Split(Bry_.new_u8((String)m.ReadValAt(0)), Byte_ascii.Nl);
+			byte[][] ttls = Bry_split_.Split(Bry_.new_u8((String)m.ReadValAt(0)), AsciiByte.Nl);
 			int ttls_len = ttls.length;
 			String[][] rv = new String[ttls_len][];
 			for (int i = 0; i < ttls_len; i++) {
@@ -163,7 +163,7 @@ public class Xoh_js_cbk implements Gfo_invk {
 			wdata_mgr.Wdata_wiki().Init_assert();	// NOTE: must assert else ns_mgr won't load Property
 			int len = m.Args_count();
 			if (len < 1) return null;
-			byte[][] langs = Bry_split_.Split(m.Args_getAt(0).Val_to_bry(), Byte_ascii.Semic);
+			byte[][] langs = Bry_split_.Split(m.Args_getAt(0).Val_to_bry(), AsciiByte.Semic);
 			int langs_len = langs.length;
 			String[] rv = new String[len - 1];
 			for (int i = 1; i < len; i++) {

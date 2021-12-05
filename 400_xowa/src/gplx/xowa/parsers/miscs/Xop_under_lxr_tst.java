@@ -13,8 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+package gplx.xowa.parsers.miscs;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 public class Xop_under_lxr_tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
@@ -29,7 +40,7 @@ public class Xop_under_lxr_tst {
 		fxt.Test_parse_page_all_str("a__toc__b", "ab");
 	}
 	@Test  public void Notoc_basic() {
-		fxt.Wtr_cfg().Toc__show_(Bool_.Y);	// NOTE: must enable in order for TOC to show (and to make sure NOTOC suppresses) 
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.Y);	// NOTE: must enable in order for TOC to show (and to make sure NOTOC suppresses)
 		fxt.Test_parse_page_all_str__esc(String_.Concat_lines_nl
 		(	"__NOTOC__"
 		,	"==a=="
@@ -45,7 +56,7 @@ public class Xop_under_lxr_tst {
 		,	""
 		,	"<h2><span class='mw-headline' id='d'>d</span></h2>"
 		));
-		fxt.Wtr_cfg().Toc__show_(Bool_.N);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.N);
 	}
 	@Test  public void Ignore_pre() {
 		fxt.Init_para_y_();
@@ -59,7 +70,7 @@ public class Xop_under_lxr_tst {
 		fxt.Init_para_n_();
 	}
 	@Test  public void Toc_works() {	// PURPOSE: make sure "suppressed" pre does not somehow suppress TOC
-		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.Y);
 		fxt.Init_para_y_();
 		Bry_bfr tmp = Bry_bfr_.New();
 		String expd = String_.Concat_lines_nl
@@ -80,7 +91,7 @@ public class Xop_under_lxr_tst {
 		String actl = gplx.xowa.addons.htmls.tocs.Xowe_hdr_bldr_fxt.Bld_page_with_toc(tmp, fxt, "a\n__TOC__\n==b==\n");
 		Tfds.Eq_str_lines(expd, actl);
 		fxt.Init_para_n_();
-		fxt.Wtr_cfg().Toc__show_(Bool_.N);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.N);
 	}		
 	@Test public void Ignore_pre_after() {	// PURPOSE: "__TOC__\s\n" must be trimmed at end, else false pre; assertion only (no code exists to handle this test);  DATE:2013-07-08
 		fxt.Init_para_y_();
@@ -172,15 +183,15 @@ public class Xop_under_lxr_tst {
 	}
 	@Test public void Cs() {	// PURPOSE: cs (ascii / utf8 doesn't matter); DATE:2014-07-11
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang_itm lang = wiki.Lang();
-		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc	, Bool_.Y, "__TOC__");
+		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc	, BoolUtl.Y, "__TOC__");
 		wiki.Parser_mgr().Main().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__TOC__b"		, "ab");			// ci.pass
 		fxt.Test_parse_page_all_str("a__toc__b"		, "a__toc__b");		// ci.pass
 	}
 	@Test public void Ascii_cs_ci() {	// PURPOSE: test simultaneous cs and ci; DATE:2014-07-11
 		Xowe_wiki wiki = fxt.Wiki(); Xol_lang_itm lang = wiki.Lang();
-		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc	, Bool_.N, "__TOC__");
-		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_notoc	, Bool_.Y, "__NOTOC__");
+		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_toc	, BoolUtl.N, "__TOC__");
+		fxt.Init_lang_kwds(lang, Xol_kwd_grp_.Id_notoc	, BoolUtl.Y, "__NOTOC__");
 		wiki.Parser_mgr().Main().Init_by_lang(lang);
 		fxt.Test_parse_page_all_str("a__TOC__b"		, "ab");			// ci.pass
 		fxt.Test_parse_page_all_str("a__toc__b"		, "ab");			// ci.pass

@@ -13,12 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.syncs.core.loaders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.syncs.*; import gplx.xowa.addons.wikis.pages.syncs.core.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.*; import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.wikis.domains.*;
-import gplx.xowa.addons.wikis.pages.syncs.core.parsers.*;
+package gplx.xowa.addons.wikis.pages.syncs.core.loaders;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.core.brys.Bry_err_wkr;
+import gplx.core.btries.Btrie_rv;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.langs.htmls.docs.Gfh_atr;
+import gplx.langs.htmls.docs.Gfh_tag;
+import gplx.langs.htmls.docs.Gfh_tag_rdr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.wikis.pages.syncs.core.parsers.Xosync_hdoc_parser;
+import gplx.xowa.addons.wikis.pages.syncs.core.parsers.Xosync_img_src_parser;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_file_wkr_;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.files.imgs.Xof_img_mode_;
+import gplx.xowa.files.repos.Xof_repo_tid_;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_ctx;
+import gplx.xowa.htmls.core.wkrs.imgs.atrs.Xoh_img_src_data;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
 public class Xosync_page_loader {
 	private final Xoh_hdoc_ctx hctx = new Xoh_hdoc_ctx();
 	private final Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html();
@@ -96,7 +118,7 @@ public class Xosync_page_loader {
 		img.Init_by_wm_parse(hctx.Wiki__domain_itm().Abrv_xo(), img_src_parser.Repo_is_commons(), img_src_parser.File_is_orig(), file_ttl_bry, file_ext, img_src_parser.File_w(), img_src_parser.File_time(), img_src_parser.File_page());
 
 		// recalc src based on "file:////xowa/file/"
-		hctx.File__url_bldr().Init_by_repo(repo_tid, fsys_root, Bool_.N, Byte_ascii.Slash, Bool_.N, Bool_.N, 4);
+		hctx.File__url_bldr().Init_by_repo(repo_tid, fsys_root, BoolUtl.N, AsciiByte.Slash, BoolUtl.N, BoolUtl.N, 4);
 		hctx.File__url_bldr().Init_by_itm(img_src_parser.File_is_orig() ? Xof_img_mode_.Tid__orig : Xof_img_mode_.Tid__thumb, file_ttl_bry, Xof_file_wkr_.Md5(file_ttl_bry), Xof_ext_.new_by_ttl_(file_ttl_bry), img_src_parser.File_w(), img_src_parser.File_time(), img_src_parser.File_page());
 		Io_url html_view_url = hctx.File__url_bldr().Xto_url_by_http();
 

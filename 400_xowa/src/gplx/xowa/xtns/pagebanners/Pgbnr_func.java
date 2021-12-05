@@ -19,7 +19,7 @@ import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Double_;
 import gplx.Gfo_usr_dlg_;
 import gplx.Hash_adp_bry;
@@ -104,7 +104,7 @@ public class Pgbnr_func extends Pf_func_base {
 			}
 			if (tid == Arg__origin) {					// REF.MW:addFocus
 				double tmp_data_pos_x = Double_.NaN, tmp_data_pos_y = Double_.NaN;
-				int comma_pos = Bry_find_.Find_fwd(val, Byte_ascii.Comma);
+				int comma_pos = Bry_find_.Find_fwd(val, AsciiByte.Comma);
 				if (comma_pos != Bry_find_.Not_found) {
 					tmp_data_pos_x = Bry_.To_double_or(val, 0, comma_pos, Double_.NaN);
 					if (!Double_.IsNaN(tmp_data_pos_x)) {
@@ -177,7 +177,7 @@ public class Pgbnr_func extends Pf_func_base {
 		for (int i = 0; i < urls_len; ++i) {
 			int size = sizes[i];
 			if (i != 0) tmp_bfr.Add_byte_comma();
-			tmp_bfr.Add(urls[i]).Add_byte_space().Add_int_variable(size).Add_byte(Byte_ascii.Ltr_w); //	REF.MW: $srcset[] = "$url {$size}w";
+			tmp_bfr.Add(urls[i]).Add_byte_space().Add_int_variable(size).Add_byte(AsciiByte.Ltr_w); //	REF.MW: $srcset[] = "$url {$size}w";
 		}
 		byte[] srcset = tmp_bfr.To_bry_and_clear();
 		byte[] banner_url = itm.banner_img_src != null ? itm.banner_img_src : urls.length == 0 ? Bry_.Empty : urls[urls_len - 1];	// gets largest url
@@ -191,7 +191,7 @@ public class Pgbnr_func extends Pf_func_base {
 		if (hctx.Mode_is_hdump()) {
 			gplx.xowa.htmls.core.wkrs.tocs.Xoh_toc_wtr.Write_tag(tmp_bfr, true);
 			toc_html = tmp_bfr.To_bry_and_clear();
-			banner_file = Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, gplx.xowa.wikis.nss.Xow_ns_.Bry__file, Byte_ascii.Colon_bry
+			banner_file = Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, gplx.xowa.wikis.nss.Xow_ns_.Bry__file, AsciiByte.ColonBry
 				, Gfo_url_encoder_.Href.Encode(banner_ttl.Full_db()));	// NOTE: must encode so "'" becomes "%27", not "&#39;"; PAGE:en.v:'s-Hertogenbosch; DATE:2016-07-12
 		}
 		else {

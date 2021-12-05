@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.type_xtns; import gplx.*; import gplx.core.*;
+package gplx.core.type_xtns; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
 public abstract class ClassXtn_base {
 	public abstract Class<?> UnderClass();
 	public abstract Object ParseOrNull(String raw);
@@ -22,5 +23,5 @@ public abstract class ClassXtn_base {
 	public boolean MatchesClass(Object obj) {if (obj == null) throw Err_.new_null();
 		return Type_.Eq_by_obj(obj, UnderClass());
 	}
-	public int compareTo(Object lhs, Object rhs) {return CompareAble_.Compare_obj(lhs, rhs);}
+	public int compareTo(Object lhs, Object rhs) {return CompareAbleUtl.Compare_obj(lhs, rhs);}
 }

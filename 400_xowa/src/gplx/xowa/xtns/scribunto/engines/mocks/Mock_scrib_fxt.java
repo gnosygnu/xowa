@@ -13,9 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.mocks; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.xtns.scribunto.procs.*;
+package gplx.xowa.xtns.scribunto.engines.mocks;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Object_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.parsers.tmpls.Xot_invk_mock;
+import gplx.xowa.parsers.tmpls.Xot_invk_temp;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_frame_;
+import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
 public class Mock_scrib_fxt {		 
 	private final Mock_engine engine = new Mock_engine();
 	private final Mock_server server = new Mock_server();
@@ -63,12 +87,12 @@ public class Mock_scrib_fxt {
 	public Mock_proc_stub Init__mock_fnc_for_lib(String fnc_name, Scrib_lib lib, String proc_name, Object... proc_args) {
 		return new Mock_exec_lib(mock_mod_id_next++, fnc_name, lib, proc_name, proc_args);
 	}
-	public void Test__proc__ints      (Scrib_lib lib, String proc_name, Object[] args, int expd)		{Test__proc__kvps(lib, proc_name, Bool_.Y, Int_.To_str(expd), Scrib_kv_utl_.base1_many_(args));}
-	public void Test__proc__objs__flat(Scrib_lib lib, String proc_name, Object[] args, String expd)		{Test__proc__kvps(lib, proc_name, Bool_.Y, expd, Scrib_kv_utl_.base1_many_(args));}
-	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, Keyval[] expd)	{Test__proc__kvps(lib, proc_name, Bool_.N, Keyval_.Ary__to_str__nest(new Keyval[] {Keyval_.int_(Scrib_core.Base_1, expd)}), Scrib_kv_utl_.base1_many_(args));}
-	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, String expd)		{Test__proc__kvps(lib, proc_name, Bool_.N, expd, Scrib_kv_utl_.base1_many_(args));}
-	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {Test__proc__kvps(lib, proc_name, Bool_.Y, expd, args);}
-	public void Test__proc__kvps__nest(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {Test__proc__kvps(lib, proc_name, Bool_.N, expd, args);}
+	public void Test__proc__ints      (Scrib_lib lib, String proc_name, Object[] args, int expd)		{Test__proc__kvps(lib, proc_name, BoolUtl.Y, Int_.To_str(expd), Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__objs__flat(Scrib_lib lib, String proc_name, Object[] args, String expd)		{Test__proc__kvps(lib, proc_name, BoolUtl.Y, expd, Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, Keyval[] expd)	{Test__proc__kvps(lib, proc_name, BoolUtl.N, Keyval_.Ary__to_str__nest(new Keyval[] {Keyval_.int_(Scrib_core.Base_1, expd)}), Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__objs__nest(Scrib_lib lib, String proc_name, Object[] args, String expd)		{Test__proc__kvps(lib, proc_name, BoolUtl.N, expd, Scrib_kv_utl_.base1_many_(args));}
+	public void Test__proc__kvps__flat(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {Test__proc__kvps(lib, proc_name, BoolUtl.Y, expd, args);}
+	public void Test__proc__kvps__nest(Scrib_lib lib, String proc_name, Keyval[] args, String expd) {Test__proc__kvps(lib, proc_name, BoolUtl.N, expd, args);}
 	private static void Test__proc__kvps(Scrib_lib lib, String proc_name, boolean flat, String expd, Keyval[] args) {
 		Keyval[] actl_ary = Mock_scrib_fxt_.Test__lib_proc__core(lib, proc_name, args);
 		if (flat)
@@ -105,7 +129,7 @@ class Mock_scrib_fxt_ {
 		Bry_bfr bfr = Bry_bfr_.New();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
+			if (i != 0) bfr.Add_byte(AsciiByte.Semic);
 			Keyval kv = ary[i];
 			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(kv.Val()));
 		}

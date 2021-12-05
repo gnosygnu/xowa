@@ -13,11 +13,40 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.names.*;
-import gplx.xowa.mediawiki.*;
-import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.langs.durations.*;
-import gplx.xowa.xtns.scribunto.procs.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.DateAdp;
+import gplx.Datetime_now;
+import gplx.Err_;
+import gplx.Io_url;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Ordered_hash;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_itm_;
+import gplx.xowa.langs.Xol_lang_stub_;
+import gplx.xowa.langs.durations.Xol_duration_itm;
+import gplx.xowa.langs.durations.Xol_duration_itm_;
+import gplx.xowa.langs.durations.Xol_interval_itm;
+import gplx.xowa.langs.names.Xol_name_mgr;
+import gplx.xowa.mediawiki.XophpObject_;
+import gplx.xowa.xtns.pfuncs.times.Pft_fmt_itm;
+import gplx.xowa.xtns.pfuncs.times.Pft_fmt_itm_;
+import gplx.xowa.xtns.pfuncs.times.Pft_func_time;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
 public class Scrib_lib_language implements Scrib_lib {
 	public Scrib_lib_language(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public String Key() {return "mw.language";}
@@ -113,7 +142,7 @@ public class Scrib_lib_language implements Scrib_lib {
 			for (int i = 0; i < len; i++) {
 				byte b = lang_code[i];
 				switch (b) {	// NOTE: snippet from MW follows; also \000 assumed to be Nil --> :/\\\000&<>'\" 
-					case Byte_ascii.Colon: case Byte_ascii.Slash: case Byte_ascii.Backslash: case Byte_ascii.Null: case Byte_ascii.Amp: case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Apos: case Byte_ascii.Quote:
+					case AsciiByte.Colon: case AsciiByte.Slash: case AsciiByte.Backslash: case AsciiByte.Null: case AsciiByte.Amp: case AsciiByte.Lt: case AsciiByte.Gt: case AsciiByte.Apos: case AsciiByte.Quote:
 						valid = false;
 						i = len;
 						break;
@@ -128,7 +157,7 @@ public class Scrib_lib_language implements Scrib_lib {
 		boolean valid = true;
 		for (int i = 0; i < len; i++) {	// REF.MW: '/^[a-z0-9-]+$/i'
 			byte b = lang_code[i];
-			if (b == Byte_ascii.Dash) {}
+			if (b == AsciiByte.Dash) {}
 			else {
 				byte tid = Xol_lang_itm_.Char_tid(b);
 				switch (tid) {
@@ -171,8 +200,8 @@ public class Scrib_lib_language implements Scrib_lib {
 		if (lang == null) return rslt.Init_bry_ary(Bry_.Ary("en"));	// lang is not valid; return en; REF:/languages/Language.php|getFallbacksFor; ISSUE#:340; DATE:2019-02-01
 		return rslt.Init_bry_ary(lang.Fallback_bry_ary());
 	}
-	public boolean Lcfirst(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_1st(args, rslt, Bool_.N);}
-	public boolean Ucfirst(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_1st(args, rslt, Bool_.Y);}
+	public boolean Lcfirst(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_1st(args, rslt, BoolUtl.N);}
+	public boolean Ucfirst(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_1st(args, rslt, BoolUtl.Y);}
 	private boolean Case_1st(Scrib_proc_args args, Scrib_proc_rslt rslt, boolean upper) {
 		Xol_lang_itm lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
@@ -181,8 +210,8 @@ public class Scrib_lib_language implements Scrib_lib {
 			return rslt.Init_obj(lang.Case_mgr().Case_build_1st(bfr, upper, word, 0, word.length));
 		} finally {bfr.Mkr_rls();}
 	}
-	public boolean Lc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, Bool_.N);}
-	public boolean Uc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, Bool_.Y);}
+	public boolean Lc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, BoolUtl.N);}
+	public boolean Uc(Scrib_proc_args args, Scrib_proc_rslt rslt) {return Case_all(args, rslt, BoolUtl.Y);}
 	private boolean Case_all(Scrib_proc_args args, Scrib_proc_rslt rslt, boolean upper) {
 		Xol_lang_itm lang = lang_(args);
 		byte[] word = args.Pull_bry(1);
@@ -223,11 +252,11 @@ public class Scrib_lib_language implements Scrib_lib {
 		else {
 			// handle wikidata-style dates; EX: +00000002010-05-01T00:00:00Z; PAGE:en.w:Mountain_Province; DATE:2015-07-29; EX: +0065-12-08T00:00:00Z; {{#invoke:Wikidata|getDateValue|P569|FETCH_WIKIDATA|y|BCE}}; PAGE:en.w:Horace; DATE:2019-06-22
 			if      (  date_bry_len > 10
-					&& date_bry[0] == Byte_ascii.Plus
-					&& date_bry[date_bry_len -  1] == Byte_ascii.Ltr_Z
-					&& date_bry[date_bry_len - 10] == Byte_ascii.Ltr_T
+					&& date_bry[0] == AsciiByte.Plus
+					&& date_bry[date_bry_len -  1] == AsciiByte.Ltr_Z
+					&& date_bry[date_bry_len - 10] == AsciiByte.Ltr_T
 					) {
-				int dash_pos = Bry_find_.Find_fwd(date_bry, Byte_ascii.Dash);
+				int dash_pos = Bry_find_.Find_fwd(date_bry, AsciiByte.Dash);
 				if (dash_pos <= 0) { // handle dash as first char (dash_pos = 0) as well as no dash found (dash_pos = -1)
 					tmp_bfr.Mkr_rls();
 					return rslt.Init_fail("bad argument #2 to 'formatDate' (not a valid timestamp)");

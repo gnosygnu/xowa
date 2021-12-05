@@ -13,11 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.drds.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.drds.*;
-import gplx.core.net.*; import gplx.xowa.addons.wikis.imports.*;
-import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.sections.*;
-import gplx.xowa.wikis.pages.redirects.*;
+package gplx.xowa.drds.pages;
+import gplx.Bry_;
+import gplx.Datetime_now;
+import gplx.Err_;
+import gplx.Gfo_log_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.sections.Xoh_section_itm;
+import gplx.xowa.htmls.sections.Xoh_section_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.pages.redirects.Xopg_redirect_itm;
 public class Xod_page_mgr {
 	public Xod_page_itm Get_page(Xow_wiki wiki, Xoa_url page_url) {
 		Xod_page_itm rv = new Xod_page_itm();
@@ -36,7 +46,7 @@ public class Xod_page_mgr {
 		Xoh_page hpg = new Xoh_page();
 		hpg.Ctor_by_hview(wiki, Xoa_url.New(wiki, ttl), ttl, 1);
 		rv.Init_by_hpg(hpg);
-		wiki.Html__hdump_mgr().Load_mgr().Load_by_xowh(hpg, ttl, Bool_.Y);
+		wiki.Html__hdump_mgr().Load_mgr().Load_by_xowh(hpg, ttl, BoolUtl.Y);
 		Load_sections(rv, hpg);
 		return rv;
 	}

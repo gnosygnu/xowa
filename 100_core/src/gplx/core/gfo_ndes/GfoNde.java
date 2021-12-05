@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.gfo_ndes; import gplx.*; import gplx.core.*;
+package gplx.core.gfo_ndes; import gplx.*;
 import gplx.core.strings.*; import gplx.core.stores.*;
+import gplx.objects.arrays.ArrayUtl;
 public class GfoNde implements Gfo_invk {
 	public GfoFldList Flds() {return flds;} GfoFldList flds;
 	public Hash_adp EnvVars() {return envVars;} Hash_adp envVars = Hash_adp_.New();
@@ -45,7 +46,7 @@ public class GfoNde implements Gfo_invk {
 	boolean ChkIdx(int i) {if (i < 0 || i >= aryLen) throw Err_.new_missing_idx(i, aryLen); return true;}
 	Object[] ary; int type; int aryLen;
 	@gplx.Internal protected GfoNde(int type, String name, GfoFldList flds, Object[] ary, GfoFldList subFlds, GfoNde[] subAry) {
-		this.type = type; this.name = name; this.flds = flds; this.ary = ary; aryLen = Array_.Len(ary); this.subFlds = subFlds;
+		this.type = type; this.name = name; this.flds = flds; this.ary = ary; aryLen = ArrayUtl.Len(ary); this.subFlds = subFlds;
 		for (GfoNde sub : subAry)
 			subs.Add(sub);
 	}

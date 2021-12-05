@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.Io_url;
 import gplx.String_;
@@ -73,14 +73,14 @@ class Mustache_tkn_variable extends Mustache_tkn_base { // EX: {{variable}} -> &
 	public Mustache_tkn_variable(byte[] key) {super(Mustache_tkn_itm_.Tid__variable, key);}
 	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {
 		String key = this.Key();
-		ctx.Render_variable(bfr.Escape_(Bool_.Y), key);
+		ctx.Render_variable(bfr.Escape_(BoolUtl.Y), key);
 	}
 }
 class Mustache_tkn_escape extends Mustache_tkn_base { // EX: {{{variable}}} -> <a>
 	public Mustache_tkn_escape(byte[] key) {super(Mustache_tkn_itm_.Tid__escape, key);}
 	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {
 		String key = this.Key();
-		ctx.Render_variable(bfr.Escape_(Bool_.N), key);
+		ctx.Render_variable(bfr.Escape_(BoolUtl.N), key);
 	}
 }
 class Mustache_tkn_section extends Mustache_tkn_base { // EX: {{#section}}val{{/section}} -> val (if boolean) or valvalval (if list)
@@ -88,7 +88,7 @@ class Mustache_tkn_section extends Mustache_tkn_base { // EX: {{#section}}val{{/
 	public Mustache_tkn_section(byte[] key) {super(Mustache_tkn_itm_.Tid__section, key);}
 	@Override public Mustache_tkn_itm[] Subs_ary() {return subs_ary;}
 	@Override public void Subs_ary_(Mustache_tkn_itm[] v) {subs_ary = v;}
-	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {Render_static(Bool_.N, this, bfr, ctx);}
+	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {Render_static(BoolUtl.N, this, bfr, ctx);}
 	public static void Render_static(boolean inverted, Mustache_tkn_base tkn, Mustache_bfr bfr, Mustache_render_ctx ctx) {
 		String key = tkn.Key();
 		Mustache_tkn_itm[] subs_ary = tkn.Subs_ary();
@@ -108,14 +108,14 @@ class Mustache_tkn_inverted extends Mustache_tkn_base {	// EX: {{^section}}missi
 	public Mustache_tkn_inverted(byte[] key) {super(Mustache_tkn_itm_.Tid__inverted, key);}
 	@Override public Mustache_tkn_itm[] Subs_ary() {return subs_ary;}
 	@Override public void Subs_ary_(Mustache_tkn_itm[] v) {subs_ary = v;}
-	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {Mustache_tkn_section.Render_static(Bool_.Y, this, bfr, ctx);}
+	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {Mustache_tkn_section.Render_static(BoolUtl.Y, this, bfr, ctx);}
 }
 class Mustache_tkn_partial extends Mustache_tkn_base { // EX: {{>a}} -> abc (deferred eval)
 	private Mustache_tkn_itm template_root;
 	public Mustache_tkn_partial(byte[] key, Io_url dir) {
 		super(Mustache_tkn_itm_.Tid__partial, key);
 		Mustache_tkn_parser parser = new Mustache_tkn_parser(dir);
-		template_root = parser.Parse(String_.new_a7(Bry_.Trim_bgn(key, Byte_ascii.Space, 0)));
+		template_root = parser.Parse(String_.new_a7(Bry_.Trim_bgn(key, AsciiByte.Space, 0)));
 	}
 	@Override public void Render(Mustache_bfr bfr, Mustache_render_ctx ctx) {
 		template_root.Render(bfr, ctx);

@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import org.junit.*; import gplx.core.lists.*;
+package gplx.xowa.wikis.tdbs.hives; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
+import org.junit.*;
 public class Xowd_regy_mgr__tst implements ComparerAble {
 	@Test public void Basic() {
 		String[] slotAry = new String[] {"b", "e", "h"};  // 0=b 1=e 2=h
@@ -30,6 +32,6 @@ public class Xowd_regy_mgr__tst implements ComparerAble {
 		tst_FindSlot(slotAry, "v", "v");
 		tst_FindSlot(slotAry, "w", null);
 	}
-	public int compare(Object lhsObj, Object rhsObj) {return CompareAble_.Compare_obj(lhsObj, rhsObj);}
+	public int compare(Object lhsObj, Object rhsObj) {return CompareAbleUtl.Compare_obj(lhsObj, rhsObj);}
 	void tst_FindSlot(String[] slotAry, String s, String expd) {Tfds.Eq(expd, slotAry[gplx.xowa.wikis.tdbs.hives.Xowd_regy_mgr_.FindSlot(this, slotAry, s)]);}
 }

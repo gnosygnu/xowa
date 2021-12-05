@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views.url_box_fmts; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.guis.views.url_box_fmts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 public class Xog_urlfmtr_mgr implements Gfo_invk {
-	private Xog_urlfmtr_itm wildcard = new Xog_urlfmtr_itm(Byte_ascii.Star_bry, Bry_.new_a7("~{wiki_domain}/wiki/~{page_title}"));
+	private Xog_urlfmtr_itm wildcard = new Xog_urlfmtr_itm(AsciiByte.StarBry, Bry_.new_a7("~{wiki_domain}/wiki/~{page_title}"));
 	private final Bry_bfr bfr = Bry_bfr_.New();
 	private final Hash_adp_bry hash = Hash_adp_bry.cs();
 	public boolean Exists() {return exists;} private boolean exists = false;
@@ -25,7 +27,7 @@ public class Xog_urlfmtr_mgr implements Gfo_invk {
 	public void Parse(byte[] src) {
 		// clear
 		exists = false;
-		wildcard = new Xog_urlfmtr_itm(Byte_ascii.Star_bry, Bry_.new_a7("~{wiki_domain}/wiki/~{page_title}"));
+		wildcard = new Xog_urlfmtr_itm(AsciiByte.StarBry, Bry_.new_a7("~{wiki_domain}/wiki/~{page_title}"));
 		hash.Clear();
 
 		// exit if blank
@@ -35,14 +37,14 @@ public class Xog_urlfmtr_mgr implements Gfo_invk {
 		exists = true;
 		byte[][] lines = Bry_split_.Split_lines(src);
 		for (byte[] line : lines) {
-			byte[][] parts = Bry_split_.Split(line, Byte_ascii.Pipe);
+			byte[][] parts = Bry_split_.Split(line, AsciiByte.Pipe);
 			if (parts.length != 2) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "xog_urlfmtr:invalid_line; line=~{0}", line);
 				continue;
 			}
 			byte[] domain = parts[0];
 			Xog_urlfmtr_itm itm = new Xog_urlfmtr_itm(domain, parts[1]);
-			if (Bry_.Eq(domain, Byte_ascii.Star_bry)) {
+			if (Bry_.Eq(domain, AsciiByte.StarBry)) {
 				wildcard = itm;
 			}
 			else {
@@ -69,6 +71,6 @@ class Xog_urlfmtr_itm {
 		this.fmt = Bry_fmt.New(fmt_str, "wiki_domain", "page_title", "page_title_spaces");
 	}
 	public String Gen(Bry_bfr bfr, Xoa_url url) {
-		return fmt.Bld_many_to_str(bfr, url.Wiki_bry(), url.Page_bry(), Bry_.Replace(url.Page_bry(), Byte_ascii.Underline, Byte_ascii.Space));
+		return fmt.Bld_many_to_str(bfr, url.Wiki_bry(), url.Page_bry(), Bry_.Replace(url.Page_bry(), AsciiByte.Underline, AsciiByte.Space));
 	}
 }

@@ -13,10 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.repos; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.consoles.*;
-import gplx.xowa.apps.fsys.*; import gplx.xowa.files.exts.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.wikis.domains.*;
+package gplx.xowa.files.repos;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.core.consoles.Gfo_cmd_arg_itm_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.apps.fsys.Xoa_fsys_mgr;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.exts.Xof_rule_grp;
+import gplx.xowa.files.exts.Xof_rule_mgr;
+import gplx.xowa.files.imgs.Xof_img_mode_;
+import gplx.xowa.wikis.domains.Xow_abrv_xo_;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
 public class Xof_repo_itm implements Gfo_invk {
 	private final Xoa_fsys_mgr app_fsys; private final Xof_rule_mgr ext_rule_mgr;
 	public Xof_repo_itm(byte[] key, Xoa_fsys_mgr app_fsys, Xof_rule_mgr ext_rule_mgr, byte[] wiki_domain) {
@@ -65,11 +84,11 @@ public class Xof_repo_itm implements Gfo_invk {
 		this.wmf_fsys = String_.Has_at_bgn(root_str, "http") || String_.Has_at_bgn(root_str, "ftp");
 		if (wmf_fsys) {
 			this.root_bry = Bry_.new_u8(root_str);
-			this.dir_spr = Byte_ascii.Slash;
+			this.dir_spr = AsciiByte.Slash;
 			this.wmf_api = true;
 		}
 		else {
-			Io_url root_url = Gfo_cmd_arg_itm_.Val_as_url__rel_url_or(root_str, Bool_.Y, app_fsys.File_dir(), Io_url_.new_dir_(root_str));
+			Io_url root_url = Gfo_cmd_arg_itm_.Val_as_url__rel_url_or(root_str, BoolUtl.Y, app_fsys.File_dir(), Io_url_.new_dir_(root_str));
 			this.root_bry = root_url.RawBry();
 			this.dir_spr = root_url.Info().DirSpr_byte();
 			this.root_http = root_url.To_http_file_bry();

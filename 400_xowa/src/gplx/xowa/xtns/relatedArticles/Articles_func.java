@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.relatedArticles; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns.relatedArticles; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.xtns.pfuncs.*;
@@ -41,7 +43,7 @@ public class Articles_func extends Pf_func_base {
 		}
 	}
 	public static final Articles_func Instance = new Articles_func(); Articles_func() {}
-	private static final byte[] Const_dlm = new byte[] {Byte_ascii.Amp, Byte_ascii.Amp};
+	private static final byte[] Const_dlm = new byte[] {AsciiByte.Amp, AsciiByte.Amp};
 }
 class Articles_itm {
 	public Articles_itm(byte[] ttl, byte[] text) {

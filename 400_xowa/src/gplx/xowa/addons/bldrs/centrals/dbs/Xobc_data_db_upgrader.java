@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
-import gplx.dbs.*;
-import gplx.core.progs.*; import gplx.core.net.downloads.*; import gplx.core.gfobjs.*;
+package gplx.xowa.addons.bldrs.centrals.dbs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.addons.bldrs.centrals.*;
+import gplx.core.progs.*; import gplx.core.net.downloads.*;
 import gplx.xowa.users.data.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.*;
 import gplx.xowa.wikis.pages.tags.*;
 public class Xobc_data_db_upgrader {
@@ -58,7 +59,7 @@ public class Xobc_data_db_upgrader {
 
 		// parse manifest and get version_id
 		byte[] manifest_txt = Io_mgr.Instance.LoadFilBry(manifest_url);
-		byte[][] manifest_data = Bry_split_.Split(manifest_txt, Byte_ascii.Pipe);
+		byte[][] manifest_data = Bry_split_.Split(manifest_txt, AsciiByte.Pipe);
 		int expd_version_id = Bry_.To_int(manifest_data[0]);
 		Xobc_version_regy_itm actl_version = bc_db.Tbl__version_regy().Select_latest();
 

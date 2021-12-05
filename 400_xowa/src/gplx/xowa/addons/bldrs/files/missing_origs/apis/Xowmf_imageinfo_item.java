@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*; import gplx.xowa.addons.bldrs.files.missing_origs.*;
+package gplx.xowa.addons.bldrs.files.missing_origs.apis; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.files.*;
 public class Xowmf_imageinfo_item {
 	public byte[] Lnki_ttl() {return lnki_ttl;} private byte[] lnki_ttl;
@@ -96,7 +98,7 @@ public class Xowmf_imageinfo_item {
 	public static byte[] Normalize_minor_mime(byte[] src) {
 		// convert "image/svg+xml" to "svg+xml"
 		int src_len = src.length;
-		int slash_pos = Bry_find_.Find_fwd(src, Byte_ascii.Slash, 0, src_len);
+		int slash_pos = Bry_find_.Find_fwd(src, AsciiByte.Slash, 0, src_len);
 		if (slash_pos == Bry_find_.Not_found) {
 			throw Err_.new_wo_type("wmf_api minor_mime does not have slash;", "minor_mime", src);
 		}
@@ -107,7 +109,7 @@ public class Xowmf_imageinfo_item {
 		byte[] rv = new byte[14];
 		int rv_idx = 0;
 		for (byte b : src) {
-			if (Byte_ascii.Is_num(b)) {
+			if (AsciiByte.IsNum(b)) {
 				rv[rv_idx++] = b;
 			}
 		}

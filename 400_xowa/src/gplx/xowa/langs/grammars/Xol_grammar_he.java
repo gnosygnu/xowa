@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*;
+package gplx.xowa.langs.grammars; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.xowa.langs.*;
 public class Xol_grammar_he implements Xol_grammar {
 	public boolean Grammar_eval(Bry_bfr bfr, Xol_lang_itm lang, byte[] word, byte[] type) {
 		// if ( isset( $wgGrammarForms['he'][$case][$word] ) ) return $wgGrammarForms['he'][$case][$word]; // TODO_OLD: implement global $wgGrammarForms; WHEN: need to find he.w entries for DefaultSettings.php
@@ -29,7 +30,7 @@ public class Xol_grammar_he implements Xol_grammar {
 				word = Bry_.Mid(word, 2);
 			// Add a hyphen (maqaf) before non-Hebrew letters.
 			if	(	 Bry_.Match(word, 0, 2, Bry__maqaf__0)			// "א"
-				||	 Bry_.Compare(word, 0, 2, Bry__maqaf__1, 0, 2) == CompareAble_.More		// "ת"
+				||	 Bry_.Compare(word, 0, 2, Bry__maqaf__1, 0, 2) == CompareAbleUtl.More		// "ת"
 				)
 				word = Bry_.Add(Bry__maqaf__2, word);
 		}

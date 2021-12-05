@@ -13,10 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.xowa.files.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*;
+package gplx.xowa.xtns.graphs;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.core.tests.Gfo_test_err_mgr;
+import gplx.core.tests.Gfo_test_itm;
+import gplx.core.tests.Gfo_test_lnr_base;
+import gplx.core.tests.Gfo_test_lnr_itm_cbk;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
+import org.junit.Before;
+import org.junit.Test;
 public class Graph_json_save_mgr__tst {
 	private final Graph_json_save_mgr__fxt fxt = new Graph_json_save_mgr__fxt();
 	@Before public void init() {fxt.Clear();}
@@ -36,7 +50,7 @@ public class Graph_json_save_mgr__tst {
 			.Test__parse("a-\"wikirawupload:file:///mem/xowa/invalid-z\"");
 	}
 	@Test public void File() {
-		fxt .Expd__file(Bool_.Y, Bool_.Y, "A.png")
+		fxt .Expd__file(BoolUtl.Y, BoolUtl.Y, "A.png")
 			.Test__parse
 			( "a-\"wikirawupload:file:///mem/xowa/file/commons.wikimedia.org/orig/7/0/1/c/A.png\"-z"
 			, "a-\"wikirawupload:{XOWA_ROOT}/file/commons.wikimedia.org/orig/7/0/1/c/A.png\"-z"

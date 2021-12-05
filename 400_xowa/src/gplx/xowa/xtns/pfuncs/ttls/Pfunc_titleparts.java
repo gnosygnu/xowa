@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.primitives.*; import gplx.xowa.xtns.pfuncs.times.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+package gplx.xowa.xtns.pfuncs.ttls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.xtns.pfuncs.*;
+import gplx.core.primitives.*;
+import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_titleparts extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
@@ -49,7 +52,7 @@ public class Pfunc_titleparts extends Pf_func_base {
 		synchronized (dlms_ary) {// LOCK:static-obj; DATE:2016-07-06
 			int src_len = src.length; int dlms_ary_len = 1;	// 1 b/c dlms_ary[0] will always be -1
 			for (int i = 0; i < src_len; i++) {
-				if (src[i] == Byte_ascii.Slash) dlms_ary[dlms_ary_len++] = i;
+				if (src[i] == AsciiByte.Slash) dlms_ary[dlms_ary_len++] = i;
 			}
 			dlms_ary[dlms_ary_len] = src_len;	// put src_len into last dlms_ary; makes dlms_ary[] logic easier
 			// calc bgn_idx; must occur before adjust parts_len

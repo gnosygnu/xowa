@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.texts; import gplx.*; import gplx.core.*;
+package gplx.core.texts; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 public class CharStream {
 	public char[] Ary() {return ary;} char[] ary;
 	public int Len() {return len;} int len;
@@ -58,7 +59,7 @@ public class CharStream {
 	public static CharStream pos0_(String text) {
 		CharStream rv = new CharStream();
 		rv.ary = String_.XtoCharAry(text);
-		rv.len = Array_.Len(rv.ary);
+		rv.len = ArrayUtl.Len(rv.ary);
 		rv.MoveNext(); // bgn at pos=0
 		return rv;
 	}	CharStream(){}

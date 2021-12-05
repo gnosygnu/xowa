@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.criterias; import gplx.*; import gplx.core.*;
+package gplx.core.criterias; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
 public abstract class Criteria_bool_base implements Criteria {
 	@gplx.Internal protected void Ctor(String op_literal, Criteria lhs, Criteria rhs) {this.op_literal = op_literal; this.lhs = lhs; this.rhs = rhs;}
 	public abstract byte	Tid();
@@ -42,5 +43,5 @@ class Criteria_const implements Criteria {
 	public boolean				Matches(Object comp) {return val;} private final boolean val;
 	public void				Val_from_args(Hash_adp args) {;}
 	public void				Val_as_obj_(Object v) {throw Err_.new_unimplemented();}
-	public String			To_str() {return String_.Concat(" IS ", Bool_.To_str_lower(val));}
+	public String			To_str() {return String_.Concat(" IS ", BoolUtl.ToStrLower(val));}
 }

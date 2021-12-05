@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.metas; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
 import gplx.xowa.htmls.hrefs.*;
 public class Xow_wiki_props {
@@ -46,7 +48,7 @@ public class Xow_wiki_props {
 	public void Siteinfo_misc_(byte[] v) {
 		if (v == null) return; // exit else will fail for personal wikis which don't have a siteinfo_misc
 		this.siteinfo_misc = v;
-		int pipe_0 = Bry_find_.Find_fwd(v, Byte_ascii.Pipe);
+		int pipe_0 = Bry_find_.Find_fwd(v, AsciiByte.Pipe);
 		if (pipe_0 != Bry_find_.Not_found)
 			this.site_name = Bry_.Mid(siteinfo_misc, 0, pipe_0);
 	}

@@ -1,6 +1,6 @@
 /*
 XOWA: the XOWA Offline Wiki Application
-Copyright (C) 2012-2020 gnosygnu@gmail.com
+Copyright (C) 2012-2021 gnosygnu@gmail.com
 
 XOWA is licensed under the terms of the General Public License (GPL) Version 3,
 or alternatively under the terms of the Apache License Version 2.0.
@@ -14,24 +14,22 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.objects.strings.unicodes;
-
-import gplx.objects.errs.Err_;
-import gplx.objects.strings.String_;
-import gplx.objects.strings.char_sources.Char_source;
-
-public interface Ustring extends Char_source {
-	int Len_in_chars();
-	int Map_data_to_char(int pos);
-	int Map_char_to_data(int pos);
+import gplx.objects.errs.ErrUtl;
+import gplx.objects.strings.StringUtl;
+import gplx.objects.strings.charSources.CharSource;
+public interface Ustring extends CharSource {
+	int LenInChars();
+	int MapDataToChar(int pos);
+	int MapCharToData(int pos);
 }
-class Ustring_single implements Ustring { // 1 char == 1 codepoint
-	public Ustring_single(String src, int src_len) {
+class UstringSingle implements Ustring { // 1 char == 1 codepoint
+	public UstringSingle(String src, int srcLen) {
 		this.src = src;
-		this.src_len = src_len;
+		this.srcLen = srcLen;
 	}
 	public String Src() {return src;} private final String src;
-	public int Len_in_chars() {return src_len;} private final int src_len;
-	public int Len_in_data() {return src_len;}
+	public int LenInChars() {return srcLen;} private final int srcLen;
+	public int LenInData() {return srcLen;}
 	public String Substring(int bgn, int end) {return src.substring(bgn, end);}
 	public byte[] SubstringAsBry(int bgn, int end) {
 		String rv = src.substring(bgn, end);
@@ -41,40 +39,40 @@ class Ustring_single implements Ustring { // 1 char == 1 codepoint
 			throw new RuntimeException("failed to get bytes; src=" + src);
 		}
 	}
-	public int Index_of(Char_source find, int bgn) {return src.indexOf(find.Src(), bgn);} 
-	public boolean Eq(int lhs_bgn, Char_source rhs, int rhs_bgn, int rhs_end) {
-		if (src_len < lhs_bgn + rhs_end || rhs.Len_in_data() < rhs_bgn + rhs_end)
+	public int IndexOf(CharSource find, int bgn) {return src.indexOf(find.Src(), bgn);}
+	public boolean Eq(int lhsBgn, CharSource rhs, int rhsBgn, int rhsEnd) {
+		if (srcLen < lhsBgn + rhsEnd || rhs.LenInData() < rhsBgn + rhsEnd)
 			return false;
-		while ( --rhs_end>=0 ) 
-			if (this.Get_data(lhs_bgn++) != rhs.Get_data(rhs_bgn++))
+		while ( --rhsEnd>=0 )
+			if (this.GetData(lhsBgn++) != rhs.GetData(rhsBgn++))
 				return false;
 		return true;
 	}
-	public int Get_data(int i) {return String_.Char_at(src, i);}
-	public int Map_data_to_char(int i) {if (i < 0 || i > src_len) throw Err_.New_fmt("invalid idx; idx={0} src={1}", i, src); return i;}
-	public int Map_char_to_data(int i) {if (i < 0 || i > src_len) throw Err_.New_fmt("invalid idx; idx={0} src={1}", i, src); return i;}
+	public int GetData(int i) {return StringUtl.CharAt(src, i);}
+	public int MapDataToChar(int i) {if (i < 0 || i > srcLen) throw ErrUtl.NewFmt("invalid idx; idx={0} src={1}", i, src); return i;}
+	public int MapCharToData(int i) {if (i < 0 || i > srcLen) throw ErrUtl.NewFmt("invalid idx; idx={0} src={1}", i, src); return i;}
 }
-class Ustring_codepoints implements Ustring {
+class UstringCodepoints implements Ustring {
 	private final int[] codes;
-	public Ustring_codepoints(String src, int chars_len, int codes_len) {
+	public UstringCodepoints(String src, int charsLen, int codesLen) {
 		// set members
 		this.src = src;
-		this.chars_len = chars_len;
-		this.codes_len = codes_len;
+		this.charsLen = charsLen;
+		this.codesLen = codesLen;
 
 		// make codes[]
-		this.codes = new int[codes_len];
-		int code_idx = 0;
-		for (int i = 0; i < chars_len; i++) {
+		this.codes = new int[codesLen];
+		int codeIdx = 0;
+		for (int i = 0; i < charsLen; i++) {
 			char c = src.charAt(i); 
-			if (c >= Ustring_.Surrogate_hi_bgn && c <= Ustring_.Surrogate_hi_end) { // character is 1st part of surrogate-pair
+			if (c >= UstringUtl.SurrogateHiBgn && c <= UstringUtl.SurrogateHiEnd) { // character is 1st part of surrogate-pair
 				i++;
-				if (i == chars_len) throw Err_.New_fmt("invalid surrogate pair found; src={0}", src);
+				if (i == charsLen) throw ErrUtl.NewFmt("invalid surrogate pair found; src={0}", src);
 				int c2 = src.charAt(i); 
-				codes[code_idx++] = Ustring_.Surrogate_cp_bgn + (c - Ustring_.Surrogate_hi_bgn) * Ustring_.Surrogate_range + (c2 - Ustring_.Surrogate_lo_bgn);
+				codes[codeIdx++] = UstringUtl.SurrogateCpBgn + (c - UstringUtl.SurrogateHiBgn) * UstringUtl.SurrogateRange + (c2 - UstringUtl.SurrogateLoBgn);
 			}
 			else {
-				codes[code_idx++] = c;
+				codes[codeIdx++] = c;
 			}
 		}
 	}
@@ -83,18 +81,18 @@ class Ustring_codepoints implements Ustring {
 		int len = 0;
 		for (int i = bgn; i < end; i++) {
 			int code = codes[i];
-			len += code >= Ustring_.Surrogate_cp_bgn && code <= Ustring_.Surrogate_cp_end ? 2 : 1;
+			len += code >= UstringUtl.SurrogateCpBgn && code <= UstringUtl.SurrogateCpEnd ? 2 : 1;
 		}
 		char[] rv = new char[len];
-		int rv_idx = 0;
+		int rvIdx = 0;
 		for (int i = bgn; i < end; i++) {
 			int code = codes[i];
-			if (code >= Ustring_.Surrogate_cp_bgn && code <= Ustring_.Surrogate_cp_end) {
-				rv[rv_idx++] = (char)((code - 0x10000) / 0x400 + 0xD800);
-				rv[rv_idx++] = (char)((code - 0x10000) % 0x400 + 0xDC00);
+			if (code >= UstringUtl.SurrogateCpBgn && code <= UstringUtl.SurrogateCpEnd) {
+				rv[rvIdx++] = (char)((code - 0x10000) / 0x400 + 0xD800);
+				rv[rvIdx++] = (char)((code - 0x10000) % 0x400 + 0xDC00);
 			}
 			else {
-				rv[rv_idx++] = (char)code;
+				rv[rvIdx++] = (char)code;
 			}
 		}
 		return new String(rv);
@@ -107,18 +105,18 @@ class Ustring_codepoints implements Ustring {
 			throw new RuntimeException("failed to get bytes; src=" + src);
 		}
 	}
-	public int Index_of(Char_source find, int bgn) {
-		int find_len = find.Len_in_data();
-		int codes_len = codes.length;
+	public int IndexOf(CharSource find, int bgn) {
+		int findLen = find.LenInData();
+		int codesLen = codes.length;
 		for (int i = bgn; i < codes.length; i++) {
 			boolean found = true;
-			for (int j = 0; j < find_len; j++) {
-				int codes_idx = i + j; 
-				if (codes_idx >= codes_len) {
+			for (int j = 0; j < findLen; j++) {
+				int codesIdx = i + j;
+				if (codesIdx >= codesLen) {
 					found = false;
-					break;					
+					break;                    
 				}
-				if (codes[codes_idx] != find.Get_data(j)) {
+				if (codes[codesIdx] != find.GetData(j)) {
 					found = false;
 					break;
 				}
@@ -128,36 +126,36 @@ class Ustring_codepoints implements Ustring {
 		}
 		return -1;
 	}
-	public boolean Eq(int lhs_bgn, Char_source rhs, int rhs_bgn, int rhs_end) {
-		if (this.Len_in_data() < lhs_bgn + rhs_end || rhs.Len_in_data() < rhs_bgn + rhs_end)
+	public boolean Eq(int lhsBgn, CharSource rhs, int rhsBgn, int rhsEnd) {
+		if (this.LenInData() < lhsBgn + rhsEnd || rhs.LenInData() < rhsBgn + rhsEnd)
 			return false;
-		while ( --rhs_end>=0 ) 
-			if ((this.Get_data(lhs_bgn++) != rhs.Get_data(rhs_bgn++)))
+		while ( --rhsEnd>=0 )
+			if ((this.GetData(lhsBgn++) != rhs.GetData(rhsBgn++)))
 				return false;
 		return true;
 	}
-	public int Len_in_chars() {return chars_len;} private final int chars_len;
-	public int Len_in_data() {return codes_len;} private final int codes_len;
-	public int Get_data(int i) {return codes[i];}
-	public int Map_data_to_char(int code_pos) {
-		if (code_pos == codes_len) return chars_len; // if char_pos is chars_len, return codes_len; allows "int end = u.Map_char_to_data(str_len)"
+	public int LenInChars() {return charsLen;} private final int charsLen;
+	public int LenInData() {return codesLen;} private final int codesLen;
+	public int GetData(int i) {return codes[i];}
+	public int MapDataToChar(int codePos) {
+		if (codePos == codesLen) return charsLen; // if charPos is charsLen, return codesLen; allows "int end = u.MapCharToData(strLen)"
 
 		// sum all items before requested pos
 		int rv = 0;
-		for (int i = 0; i < code_pos; i++) {
-			rv += codes[i] < Ustring_.Surrogate_cp_bgn ? 1 : 2;
+		for (int i = 0; i < codePos; i++) {
+			rv += codes[i] < UstringUtl.SurrogateCpBgn ? 1 : 2;
 		}
 		return rv;
 	}
-	public int Map_char_to_data(int char_pos) {
-		if (char_pos == chars_len) return codes_len; // if char_pos is chars_len, return codes_len; allows "int end = u.Map_char_to_data(str_len)"
+	public int MapCharToData(int charPos) {
+		if (charPos == charsLen) return codesLen; // if charPos is charsLen, return codesLen; allows "int end = u.MapCharToData(strLen)"
 
 		// sum all items before requested pos
 		int rv = 0;
-		for (int i = 0; i < char_pos; i++) {
+		for (int i = 0; i < charPos; i++) {
 			char c = src.charAt(i); 
-			if (c >= Ustring_.Surrogate_hi_bgn && c <= Ustring_.Surrogate_hi_end){ // Surrogate_hi
-				if (i == char_pos - 1) // char_pos is Surrogate_lo; return -1 since Surrogate_lo doesn't map to a code_pos
+			if (c >= UstringUtl.SurrogateHiBgn && c <= UstringUtl.SurrogateHiEnd){ // SurrogateHi
+				if (i == charPos - 1) // charPos is SurrogateLo; return -1 since SurrogateLo doesn't map to a codePos
 					return -1;
 			}
 			else

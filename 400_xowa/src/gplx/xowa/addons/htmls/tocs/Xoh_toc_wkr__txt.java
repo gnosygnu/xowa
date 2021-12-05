@@ -13,9 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.htmls.tocs; import gplx.*; import gplx.xowa.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.htmls.tidy.*;
-import gplx.xowa.parsers.amps.*;
+package gplx.xowa.addons.htmls.tocs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.langs.htmls.Gfh_utl;
+import gplx.langs.htmls.docs.Gfh_tag;
+import gplx.langs.htmls.docs.Gfh_tag_rdr;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.htmls.core.htmls.tidy.Xow_tidy_mgr_interface;
+import gplx.xowa.parsers.amps.Xop_amp_mgr;
 class Xoh_toc_wkr__txt {
 	private final Gfh_tag_rdr tag_rdr = Gfh_tag_rdr.New__html().Skip_ws_after_slash_y_();
 	private final Bry_bfr anch_bfr = Bry_bfr_.New(), text_bfr = Bry_bfr_.New();
@@ -44,7 +62,7 @@ class Xoh_toc_wkr__txt {
 
 				// tidy html; note reusing text_bfr as temp bfr
 				text_bfr.Clear().Add(src);
-				tidy_mgr.Exec_tidy(text_bfr, Bool_.N, page_url_bry);
+				tidy_mgr.Exec_tidy(text_bfr, BoolUtl.N, page_url_bry);
 				src = text_bfr.To_bry_and_clear();
 				end = src.length;
 				tag_rdr.Init(page_url_bry, src, 0, end);
@@ -59,11 +77,11 @@ class Xoh_toc_wkr__txt {
 			anch_encoder.Encode(anch_bfr, src);
 		}
 
-		byte[] anch_bry = anch_bfr.To_bry_and_clear_and_trim(Bool_.Y, Bool_.Y, Trim__id);
+		byte[] anch_bry = anch_bfr.To_bry_and_clear_and_trim(BoolUtl.Y, BoolUtl.Y, Trim__id);
 		if (anch_hash.Has(anch_bry)) {
 			int anch_idx = 2;
 			while (true) {	// NOTE: this is not big-O performant, but it mirrors MW; DATE:2016-07-09
-				byte[] anch_tmp = Bry_.Add(anch_bry, Byte_ascii.Underline_bry, Int_.To_bry(anch_idx++));
+				byte[] anch_tmp = Bry_.Add(anch_bry, AsciiByte.UnderlineBry, Int_.To_bry(anch_idx++));
 				if (!anch_hash.Has(anch_tmp)) {
 					anch_bry = anch_tmp;
 					break;
@@ -90,7 +108,7 @@ class Xoh_toc_wkr__txt {
 			
 			// add any text before tag
 			if (pos < txt_end) {
-				byte[] anch_bry = amp_mgr.Decode_as_bry(Bry_.Trim(src, pos, txt_end, Bool_.Y, Bool_.Y, Trim__anch, Bool_.Y));	// trim \n else ".0a"; PAGE:en.w:List_of_U-boats_never_deployed DATE:2016-08-13
+				byte[] anch_bry = amp_mgr.Decode_as_bry(Bry_.Trim(src, pos, txt_end, BoolUtl.Y, BoolUtl.Y, Trim__anch, BoolUtl.Y));	// trim \n else ".0a"; PAGE:en.w:List_of_U-boats_never_deployed DATE:2016-08-13
 				anch_encoder.Encode(anch_bfr, anch_bry);
 				text_bfr.Add_mid(src, pos, txt_end);
 			}
@@ -155,10 +173,10 @@ class Xoh_toc_wkr__txt {
 
 			// print "<tag></tag>"; also, recurse
 			if (print_tag) {
-				text_bfr.Add_byte(Byte_ascii.Angle_bgn).Add(lhs_bry);
+				text_bfr.Add_byte(AsciiByte.AngleBgn).Add(lhs_bry);
 				if (span_dir != null)	// if span has dir, add it; EX: <span id='1' dir='rtl'> -> <span dir='rtl'>
 					Gfh_atr_.Add(text_bfr, Gfh_atr_.Bry__dir, span_dir);					
-				text_bfr.Add_byte(Byte_ascii.Angle_end);	// only add name; do not add atrs; EX: <i id='1'> -> <i>
+				text_bfr.Add_byte(AsciiByte.AngleEnd);	// only add name; do not add atrs; EX: <i id='1'> -> <i>
 			}
 			if (!Calc_anch_text_recurse(src, lhs_end, rhs_bgn)) return false;
 			if (print_tag && lhs_is_pair)
@@ -171,5 +189,5 @@ class Xoh_toc_wkr__txt {
 		return true;
 	}
 
-	private static final byte[] Trim__id = Bry_.mask_(256, Byte_ascii.Underline_bry), Trim__anch = Bry_.mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr);
+	private static final byte[] Trim__id = Bry_.mask_(256, AsciiByte.UnderlineBry), Trim__anch = Bry_.mask_(256, AsciiByte.Tab, AsciiByte.Nl, AsciiByte.Cr);
 }

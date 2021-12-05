@@ -17,7 +17,9 @@ package gplx;
 
 import gplx.core.primitives.Int_obj_ref;
 import gplx.langs.htmls.entitys.Gfh_entity_;
-
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Bry_ {
 	public static final String Cls_val_name = "byte[]";
 	public static final byte[] Empty = new byte[0];
@@ -103,9 +105,9 @@ public class Bry_ {
 			int line_len = line.length;
 			for (int j = 0; j < line_len; ++j) {
 				byte b = line[j];
-				if (b == Byte_ascii.Apos) {
+				if (b == AsciiByte.Apos) {
 					bfr.Add_mid(line, prv, j);
-					bfr.Add_byte(Byte_ascii.Quote);
+					bfr.Add_byte(AsciiByte.Quote);
 					dirty = true;
 					prv = j + 1;
 				}
@@ -158,7 +160,7 @@ public class Bry_ {
 		Copy_to(src, src_bgn, src_len, trg, 0);
 		return trg;
 	}
-	public static byte[] Repeat_space(int len) {return Repeat(Byte_ascii.Space, len);}
+	public static byte[] Repeat_space(int len) {return Repeat(AsciiByte.Space, len);}
 	public static byte[] Repeat(byte b, int len) {
 		byte[] rv = new byte[len];
 		for (int i = 0; i < len; i++)
@@ -401,7 +403,7 @@ public class Bry_ {
 		boolean chars_seen = false;
 		for (int i = bgn; i < end; ++i) {
 			switch (src[i]) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					break;
 				default:
 					chars_seen = true;
@@ -414,7 +416,7 @@ public class Bry_ {
 		// trim at end
 		for (int i = end - 1; i >= actl_bgn; --i) {
 			switch (src[i]) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					break;
 				default:
 					actl_end = i + 1;
@@ -438,7 +440,7 @@ public class Bry_ {
 		}
 		return rv;
 	}
-	public static final byte[] Trim_ary_ws = mask_(256, Byte_ascii.Tab, Byte_ascii.Nl, Byte_ascii.Cr, Byte_ascii.Space);
+	public static final byte[] Trim_ary_ws = mask_(256, AsciiByte.Tab, AsciiByte.Nl, AsciiByte.Cr, AsciiByte.Space);
 	public static byte[] Trim(byte[] src) {return Trim(src, 0, src.length, true, true, Trim_ary_ws, true);}
 	public static byte[] Trim(byte[] src, int bgn, int end) {return Trim(src, bgn, end, true, true, Trim_ary_ws, true);}
 	public static byte[] Trim(byte[] src, int bgn, int end, boolean trim_bgn, boolean trim_end, byte[] trim_ary, boolean reuse_bry_if_noop) {
@@ -447,7 +449,7 @@ public class Bry_ {
 		if (trim_bgn) {
 			for (int i = bgn; i < end; i++) {
 				byte b = src[i];
-				if (trim_ary[b & 0xFF] == Byte_ascii.Null) {
+				if (trim_ary[b & 0xFF] == AsciiByte.Null) {
 					txt_bgn = i;
 					i = end;
 					all_ws = false;
@@ -458,7 +460,7 @@ public class Bry_ {
 		if (trim_end) {
 			for (int i = end - 1; i > -1; i--) {
 				byte b = src[i];
-				if (trim_ary[b & 0xFF] == Byte_ascii.Null) {
+				if (trim_ary[b & 0xFF] == AsciiByte.Null) {
 					txt_end = i + 1;
 					i = -1;
 					all_ws = false;
@@ -502,17 +504,17 @@ public class Bry_ {
 		return trimmed ? Bry_.Mid(v, 0, pos + 1) : v;
 	}
 	public static int Compare(byte[] lhs, byte[] rhs) {
-		if		(lhs == null)	return CompareAble_.More;
-		else if (rhs == null)	return CompareAble_.Less;
+		if		(lhs == null)	return CompareAbleUtl.More;
+		else if (rhs == null)	return CompareAbleUtl.Less;
 		else					return Compare(lhs, 0, lhs.length, rhs, 0, rhs.length);
 	}
 	public static int Compare(byte[] lhs, int lhs_bgn, int lhs_end, byte[] rhs, int rhs_bgn, int rhs_end) {
 		int lhs_len = lhs_end - lhs_bgn, rhs_len = rhs_end - rhs_bgn;
 		int min = lhs_len < rhs_len ? lhs_len : rhs_len;
-		int rv = CompareAble_.Same;
+		int rv = CompareAbleUtl.Same;
 		for (int i = 0; i < min; i++) {
 			rv = (lhs[i + lhs_bgn] & 0xff) - (rhs[i + rhs_bgn] & 0xff);	// PATCH.JAVA:need to convert to unsigned byte
-			if (rv != CompareAble_.Same) return rv > CompareAble_.Same ? CompareAble_.More : CompareAble_.Less; // NOTE: changed from if (rv != CompareAble_.Same) return rv; DATE:2013-04-25
+			if (rv != CompareAbleUtl.Same) return rv > CompareAbleUtl.Same ? CompareAbleUtl.More : CompareAbleUtl.Less; // NOTE: changed from if (rv != CompareAble_.Same) return rv; DATE:2013-04-25
 		}
 		return Int_.Compare(lhs_len, rhs_len);	// lhs and rhs share same beginning bytes; return len comparisons
 	}
@@ -621,12 +623,12 @@ public class Bry_ {
 		if (neg == 1) ary[0] = Byte_NegSign;
 
 		for (int i = 0; i < pad; i++)		// fill ary with pad
-			ary[i + aryBgn] = Byte_ascii.To_a7_str(0);
+			ary[i + aryBgn] = AsciiByte.ToA7Str(0);
 		aryBgn += pad;						// advance aryBgn by pad
 		for (int i = neg; i < ary_len - pad; i++) {
 			int denominator = (int)(factor / 10); // cache denominator to check for divide by 0
 			int digit = denominator == 0 ? 0 : (int)((val % factor) / denominator);
-			ary[aryBgn + i] = Byte_ascii.To_a7_str(digit);
+			ary[aryBgn + i] = AsciiByte.ToA7Str(digit);
 			factor /= 10;
 		}
 		return ary;
@@ -642,10 +644,10 @@ public class Bry_ {
 		else				return new byte[] {b3};
 	}
 	public static boolean To_bool_or(byte[] raw, boolean or) {
-		return Bry_.Eq(raw, Bool_.True_bry) ? true : or;
+		return Bry_.Eq(raw, BoolUtl.TrueBry) ? true : or;
 	}
 	public static boolean To_bool_by_int(byte[] ary) {
-		int rv = To_int_or(ary, 0, ary.length, Int_.Min_value, Bool_.Y, null);
+		int rv = To_int_or(ary, 0, ary.length, Int_.Min_value, BoolUtl.Y, null);
 		switch (rv) {
 			case 0: return false;
 			case 1: return true;
@@ -655,14 +657,14 @@ public class Bry_ {
 	public static byte To_int_as_byte(byte[] ary, int bgn, int end, byte or)	{return (byte)To_int_or(ary, bgn, end, or);}
 	public static int To_int(byte[] ary) {return To_int_or_fail(ary, 0, ary.length);}
 	public static int To_int_or_fail(byte[] ary, int bgn, int end)		{
-		int rv = To_int_or(ary, bgn, end, Int_.Min_value, Bool_.Y, null);
+		int rv = To_int_or(ary, bgn, end, Int_.Min_value, BoolUtl.Y, null);
 		if (rv == Int_.Min_value) throw Err_.new_wo_type("could not parse to int", "val", String_.new_u8(ary, bgn, end));
 		return rv;
 	}
-	public static int To_int_or_neg1(byte[] ary)								{return To_int_or(ary, 0	, ary.length, -1, Bool_.Y, null);}
-	public static int To_int_or(byte[] ary, int or)								{return To_int_or(ary, 0	, ary.length, or, Bool_.Y, null);}
-	public static int To_int_or(byte[] ary, int bgn, int end, int or)			{return To_int_or(ary, bgn	, end		, or, Bool_.Y, null);}
-	public static int To_int_or__strict(byte[] ary, int or)						{return To_int_or(ary, 0	, ary.length, or, Bool_.N, null);}
+	public static int To_int_or_neg1(byte[] ary)								{return To_int_or(ary, 0	, ary.length, -1, BoolUtl.Y, null);}
+	public static int To_int_or(byte[] ary, int or)								{return To_int_or(ary, 0	, ary.length, or, BoolUtl.Y, null);}
+	public static int To_int_or(byte[] ary, int bgn, int end, int or)			{return To_int_or(ary, bgn	, end		, or, BoolUtl.Y, null);}
+	public static int To_int_or__strict(byte[] ary, int or)						{return To_int_or(ary, 0	, ary.length, or, BoolUtl.N, null);}
 	private static int To_int_or(byte[] ary, int bgn, int end, int or, boolean sign_is_valid, byte[] ignore_ary) {
 		if (	ary == null
 			||	end == bgn				// null-len
@@ -671,14 +673,14 @@ public class Bry_ {
 		for (int i = end - 1; i >= bgn; i--) {	// -1 b/c end will always be next char; EX: {{{1}}}; bgn = 3, end = 4
 			byte b = ary[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					rv += multiple * (b - Byte_ascii.Num_0);
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+					rv += multiple * (b - AsciiByte.Num0);
 					multiple *= 10;
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					return i == bgn && sign_is_valid ? rv * -1 : or;
-				case Byte_ascii.Plus:
+				case AsciiByte.Plus:
 					return i == bgn && sign_is_valid ? rv : or;
 				default:
 					boolean invalid = true;
@@ -704,17 +706,17 @@ public class Bry_ {
 		for (int i = end - 1; i >= bgn; i--) {	// -1 b/c end will always be next char; EX: {{{1}}}; bgn = 3, end = 4
 			byte b = ary[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					rv += multiple * (b - Byte_ascii.Num_0);
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+					rv += multiple * (b - AsciiByte.Num0);
 					multiple *= 10;
 					if (ws_seen)	// "number ws number" pattern; invalid ws in middle; see tests
 						return or;
 					numbers_seen = true;
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					return i == bgn ? rv * -1 : or;
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					if (numbers_seen)
 						ws_seen = true;
 					break;						
@@ -729,10 +731,10 @@ public class Bry_ {
 		for (int i = bgn; i < end; i++) {
 			byte b = ary[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					if (i != bgn) {
 						end_num = i;
 						i = end;
@@ -755,14 +757,14 @@ public class Bry_ {
 		for (int i = end - 1; i >= bgn; i--) {	// -1 b/c end will always be next char; EX: {{{1}}}; bgn = 3, end = 4
 			byte b = ary[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					rv += multiple * (b - Byte_ascii.Num_0);
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+					rv += multiple * (b - AsciiByte.Num0);
 					multiple *= 10;
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					return i == bgn ? rv * -1 : or;
-				case Byte_ascii.Plus:
+				case AsciiByte.Plus:
 					return i == bgn ? rv : or;
 				default:
 					boolean invalid = true;
@@ -1033,7 +1035,7 @@ public class Bry_ {
 	public static int Trim_end_pos(byte[] src, int end) {
 		for (int i = end - 1; i > -1; i--) {
 			switch (src[i]) {
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+				case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 					break;
 				default:
 					return i + 1;
@@ -1051,9 +1053,9 @@ public class Bry_ {
 		}
 		return ary;
 	}
-	public static byte[] Ucase__all(byte[] src)						{return Xcase__all(Bool_.Y, src, 0, -1);}
-	public static byte[] Lcase__all(byte[] src)						{return Xcase__all(Bool_.N, src, 0, -1);}
-	public static byte[] Lcase__all(byte[] src, int bgn, int end)	{return Xcase__all(Bool_.N, src, bgn, end);}
+	public static byte[] Ucase__all(byte[] src)						{return Xcase__all(BoolUtl.Y, src, 0, -1);}
+	public static byte[] Lcase__all(byte[] src)						{return Xcase__all(BoolUtl.N, src, 0, -1);}
+	public static byte[] Lcase__all(byte[] src, int bgn, int end)	{return Xcase__all(BoolUtl.N, src, bgn, end);}
 	private static byte[] Xcase__all(boolean upper, byte[] src, int bgn, int end) {
 		if (src == null) return null;
 		int len = end == -1 ? src.length : end - bgn; if (len == 0) return src;
@@ -1097,8 +1099,8 @@ public class Bry_ {
 		}
 		return dirty ? tmp.To_bry_and_clear() : src;
 	}
-	public static byte[] Ucase__1st(byte[] src)						{return Xcase__1st(Bool_.Y, src);}
-	public static byte[] Lcase__1st(byte[] src)						{return Xcase__1st(Bool_.N, src);}
+	public static byte[] Ucase__1st(byte[] src)						{return Xcase__1st(BoolUtl.Y, src);}
+	public static byte[] Lcase__1st(byte[] src)						{return Xcase__1st(BoolUtl.N, src);}
 	private static byte[] Xcase__1st(boolean upper, byte[] src) {
 		if (src == null) return null;
 		int len = src.length; if (len == 0) return src;
@@ -1126,9 +1128,9 @@ public class Bry_ {
 			byte b = src[i];
 			byte escape = Byte_.Zero;
 			switch (b) {
-				case Byte_ascii.Tab:		escape = Byte_ascii.Ltr_t; break;
-				case Byte_ascii.Nl:			escape = Byte_ascii.Ltr_n; break;
-				case Byte_ascii.Cr:			escape = Byte_ascii.Ltr_r; break;
+				case AsciiByte.Tab:		escape = AsciiByte.Ltr_t; break;
+				case AsciiByte.Nl:			escape = AsciiByte.Ltr_n; break;
+				case AsciiByte.Cr:			escape = AsciiByte.Ltr_r; break;
 				default:					if (dirty) bfr.Add_byte(b); break;
 			}
 			if (escape != Byte_.Zero) {
@@ -1170,10 +1172,10 @@ public class Bry_ {
 			bry[i] = Byte_.Zero;
 	}
 	public static byte[] Replace_nl_w_tab(byte[] src, int bgn, int end) {
-		return Bry_.Replace(Bry_.Mid(src, bgn, end), Byte_ascii.Nl, Byte_ascii.Tab);
+		return Bry_.Replace(Bry_.Mid(src, bgn, end), AsciiByte.Nl, AsciiByte.Tab);
 	}
 	public static byte[] Escape_html(byte[] src) {
-		return Escape_html(null, Bool_.N, src, 0, src.length);
+		return Escape_html(null, BoolUtl.N, src, 0, src.length);
 	}
 	public static byte[] Escape_html(Bry_bfr bfr, boolean ws, byte[] src, int src_bgn, int src_end) {	// uses PHP rules for htmlspecialchars; REF.PHP:http://php.net/manual/en/function.htmlspecialchars.php
 		boolean dirty = false;
@@ -1195,14 +1197,14 @@ public class Bry_ {
 			byte b = src[cur];
 			byte[] escaped = null;
 			switch (b) {
-				case Byte_ascii.Amp:        escaped = Gfh_entity_.Amp_bry; break;
-				case Byte_ascii.Quote:      escaped = Gfh_entity_.Quote_bry; break;
-				case Byte_ascii.Apos:       escaped = Gfh_entity_.Apos_num_bry; break;
-				case Byte_ascii.Lt:         escaped = Gfh_entity_.Lt_bry; break;
-				case Byte_ascii.Gt:         escaped = Gfh_entity_.Gt_bry; break;
-				case Byte_ascii.Nl:         if (ws) escaped = Gfh_entity_.Nl_bry; break;
-				case Byte_ascii.Cr:         if (ws) escaped = Gfh_entity_.Cr_bry; break;
-				case Byte_ascii.Tab:        if (ws) escaped = Gfh_entity_.Tab_bry; break;
+				case AsciiByte.Amp:        escaped = Gfh_entity_.Amp_bry; break;
+				case AsciiByte.Quote:      escaped = Gfh_entity_.Quote_bry; break;
+				case AsciiByte.Apos:       escaped = Gfh_entity_.Apos_num_bry; break;
+				case AsciiByte.Lt:         escaped = Gfh_entity_.Lt_bry; break;
+				case AsciiByte.Gt:         escaped = Gfh_entity_.Gt_bry; break;
+				case AsciiByte.Nl:         if (ws) escaped = Gfh_entity_.Nl_bry; break;
+				case AsciiByte.Cr:         if (ws) escaped = Gfh_entity_.Cr_bry; break;
+				case AsciiByte.Tab:        if (ws) escaped = Gfh_entity_.Tab_bry; break;
 			}
 
 			// not escaped; increment and continue

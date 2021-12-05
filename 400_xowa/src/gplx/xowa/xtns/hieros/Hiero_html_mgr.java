@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.xtns.hieros;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Io_mgr;
+import gplx.langs.htmls.Gfh_utl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
 class Hiero_html_mgr {		
 	private Bry_bfr html_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb), content_bfr = Bry_bfr_.Reset(255), tbl_content_bfr = Bry_bfr_.Reset(Io_mgr.Len_kb), temp_bfr = Bry_bfr_.Reset(255);
 	private boolean cartouche_opened = false;
@@ -52,19 +59,19 @@ class Hiero_html_mgr {
 		byte[] code = block.Get_at(0);		// block has only one code (hence the proc name: Render_block_single)
 		byte b_0 = code[0];
 		switch (b_0) {
-			case Byte_ascii.Bang: {			// new_line
+			case AsciiByte.Bang: {			// new_line
 				wtr.Tbl_eol(content_bfr);
 				if (hr_enabled)
 					wtr.Hr(content_bfr);
 				break;
 			}
-			case Byte_ascii.Lt: {			// cartouche bgn
+			case AsciiByte.Lt: {			// cartouche bgn
 				wtr.Td(content_bfr, Render_glyph(hctx, Tkn_lt));
 				cartouche_opened = true;
 				wtr.Cartouche_bgn(content_bfr);
 				break;
 			}
-			case Byte_ascii.Gt: {			// cartouche end
+			case AsciiByte.Gt: {			// cartouche end
 				wtr.Cartouche_end(content_bfr);
 				cartouche_opened = false;
 				wtr.Td(content_bfr, Render_glyph(hctx, Tkn_gt));
@@ -87,15 +94,15 @@ class Hiero_html_mgr {
 			amp = false;
 			if (v_len == 1) {
 				switch (v[0]) {
-					case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end:
-					case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end:
-					case Byte_ascii.Star: case Byte_ascii.Colon: case Byte_ascii.Bang:
+					case AsciiByte.BrackBgn: case AsciiByte.BrackEnd:
+					case AsciiByte.ParenBgn: case AsciiByte.ParenEnd:
+					case AsciiByte.Star: case AsciiByte.Colon: case AsciiByte.Bang:
 						amp = true;
 						break;
 				}
 			}
 			if (amp)
-				temp_bfr.Add_byte(Byte_ascii.Amp);
+				temp_bfr.Add_byte(AsciiByte.Amp);
 			else
 				temp_bfr.Add(v);
 		}
@@ -113,13 +120,13 @@ class Hiero_html_mgr {
 				int v_len = v.length;
 				if (v_len == 1) {
 					switch (v[0]) {
-						case Byte_ascii.Colon:
+						case AsciiByte.Colon:
 							if (height > line_max)
 								line_max = height;
 							total += line_max;
 							line_max = 0;
 							continue;
-						case Byte_ascii.Star:
+						case AsciiByte.Star:
 							if (height > line_max)
 								line_max = height;
 							continue;
@@ -144,10 +151,10 @@ class Hiero_html_mgr {
 				int v_len = v.length;
 				if (v_len == 1) {
 					switch (v[0]) {
-						case Byte_ascii.Colon:
+						case AsciiByte.Colon:
 							temp_bfr.Add_str_a7("\n            <br/>");
 							continue;
-						case Byte_ascii.Star:
+						case AsciiByte.Star:
 							temp_bfr.Add_byte_space();
 							continue;
 					}
@@ -163,18 +170,18 @@ class Hiero_html_mgr {
 	private byte[] Render_glyph(Xoh_wtr_ctx hctx, byte[] src, byte[] td_height) {
 		int src_len = src.length; if (src_len == 0) return src; // bounds check
 		byte byte_n = src[src_len - 1];
-		byte[] img_cls = byte_n == Byte_ascii.Backslash				// REF.MW:isMirrored
+		byte[] img_cls = byte_n == AsciiByte.Backslash				// REF.MW:isMirrored
 			? Bry_cls_mirrored										// 'class="mw-mirrored" '
 			: Bry_.Empty;
 		byte[] glyph = Extract_code(src, src_len);					// trim backslashes from end; REF.MW:extractCode
 		if		(Bry_.Eq(glyph, Tkn_dot_dot))						// render void block
-			return wtr.Void(Bool_.N);
+			return wtr.Void(BoolUtl.N);
 		else if (Bry_.Eq(glyph, Tkn_dot))							// render 1/2 width void block
-			return wtr.Void(Bool_.Y);
+			return wtr.Void(BoolUtl.Y);
 		else if (Bry_.Eq(glyph, Tkn_lt))
-			return wtr.Cartouche_img(hctx, Bool_.Y, glyph);
+			return wtr.Cartouche_img(hctx, BoolUtl.Y, glyph);
 		else if (Bry_.Eq(glyph, Tkn_gt))
-			return wtr.Cartouche_img(hctx, Bool_.N, glyph);
+			return wtr.Cartouche_img(hctx, BoolUtl.N, glyph);
 
 		Hiero_phoneme_itm phoneme_itm = phoneme_mgr.Get_by_key(glyph);
 		Hiero_file_itm file_itm = null;
@@ -220,16 +227,16 @@ class Hiero_html_mgr {
 		return (int)(((Max_height - margin) * scale) / 100);
 	}
 	private static byte[] Extract_code(byte[] src, int src_len) { // trim backslashes from end; REF.MW:extractCode
-		return Bry_.Trim_end(src, Byte_ascii.Backslash, src_len);	
+		return Bry_.Trim_end(src, AsciiByte.Backslash, src_len);
 	}
 	public static final int Image_margin = 1;
 	public static final int Cartouche_width = 2;
 	public static final int Max_height = 44;
 	private static final byte[] Bry_cls_mirrored = Bry_.new_a7("class=\"mw-mirrored\" ");
 	private static final byte[]
-	  Tkn_lt		= new byte[] {Byte_ascii.Lt}
-	, Tkn_gt		= new byte[] {Byte_ascii.Gt}
-	, Tkn_dot		= new byte[] {Byte_ascii.Dot}
-	, Tkn_dot_dot	= new byte[] {Byte_ascii.Dot, Byte_ascii.Dot}
+	  Tkn_lt		= new byte[] {AsciiByte.Lt}
+	, Tkn_gt		= new byte[] {AsciiByte.Gt}
+	, Tkn_dot		= new byte[] {AsciiByte.Dot}
+	, Tkn_dot_dot	= new byte[] {AsciiByte.Dot, AsciiByte.Dot}
 	;
 }

@@ -13,29 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.btries; import gplx.*; import gplx.core.*;
+package gplx.core.btries; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 public class Btrie_slim_itm_tst {
 	private Btrie_slim_itm itm = new Btrie_slim_itm(Byte_.Zero, null, false);
 	@Before public void init() {itm.Clear();}
 	@Test public void Find_nil() {
-		tst_Find(Byte_ascii.Ltr_a, null);
+		tst_Find(AsciiByte.Ltr_a, null);
 	}
 	@Test public void Add_one() {
-		run_Add(Byte_ascii.Ltr_a);
-		tst_Find(Byte_ascii.Ltr_a, "a");
+		run_Add(AsciiByte.Ltr_a);
+		tst_Find(AsciiByte.Ltr_a, "a");
 	}
 	@Test public void Add_many() {
-		run_Add(Byte_ascii.Bang, Byte_ascii.Num_0, Byte_ascii.Ltr_a, Byte_ascii.Ltr_B);
-		tst_Find(Byte_ascii.Ltr_a, "a");
+		run_Add(AsciiByte.Bang, AsciiByte.Num0, AsciiByte.Ltr_a, AsciiByte.Ltr_B);
+		tst_Find(AsciiByte.Ltr_a, "a");
 	}
 	@Test public void Del() {
-		run_Add(Byte_ascii.Bang, Byte_ascii.Num_0, Byte_ascii.Ltr_a, Byte_ascii.Ltr_B);
-		tst_Find(Byte_ascii.Ltr_a, "a");
-		run_Del(Byte_ascii.Ltr_a);
-		tst_Find(Byte_ascii.Ltr_a, null);
-		tst_Find(Byte_ascii.Num_0, "0");
-		tst_Find(Byte_ascii.Ltr_B, "B");
+		run_Add(AsciiByte.Bang, AsciiByte.Num0, AsciiByte.Ltr_a, AsciiByte.Ltr_B);
+		tst_Find(AsciiByte.Ltr_a, "a");
+		run_Del(AsciiByte.Ltr_a);
+		tst_Find(AsciiByte.Ltr_a, null);
+		tst_Find(AsciiByte.Num0, "0");
+		tst_Find(AsciiByte.Ltr_B, "B");
 	}
 	private void tst_Find(byte b, String expd) {
 		Btrie_slim_itm actl_itm = itm.Ary_find(b);

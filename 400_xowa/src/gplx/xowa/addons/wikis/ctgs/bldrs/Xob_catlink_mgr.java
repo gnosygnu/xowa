@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
+package gplx.xowa.addons.wikis.ctgs.bldrs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.dbs.*; import gplx.xowa.addons.wikis.ctgs.dbs.*;
 import gplx.xowa.addons.wikis.ctgs.enums.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.wikis.data.*;
 class Xob_catlink_mgr {
 	private Xowe_wiki wiki;
 	private Xodb_tmp_cat_db tmp_db; private Db_conn tmp_conn; private Xodb_tmp_cat_link_tbl tmp_link_tbl;
@@ -42,7 +44,7 @@ class Xob_catlink_mgr {
 		byte[] sortkey_actl = sortkey_orig;
 		if (collation_id != Xoctg_collation_enum.Tid__uca) {
 			// sortkey; handle \n
-			int nl_pos = Bry_find_.Find_fwd(sortkey_actl, Byte_ascii.Nl);
+			int nl_pos = Bry_find_.Find_fwd(sortkey_actl, AsciiByte.Nl);
 			if (nl_pos != Bry_find_.Not_found)	// some sortkeys have format of "sortkey\ntitle"; discard 2nd to conserve hard-disk space; EX: "WALES, JIMMY\nJIMMY WALES"
 				sortkey_actl = Bry_.Mid(sortkey_actl, 0, nl_pos);	// NOTE: some sortkeys have space which will sort under " "; EX: ' \nART' -> " "; SEE: s.w:Category:Art
 		}

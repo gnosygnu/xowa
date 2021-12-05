@@ -13,12 +13,37 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.specials.svcs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*; import gplx.xowa.addons.apps.updates.specials.*;
-import gplx.xowa.guis.cbks.*;
-import gplx.core.gfobjs.*;
-import gplx.xowa.addons.apps.updates.dbs.*; import gplx.xowa.addons.apps.updates.js.*;
-import gplx.xowa.addons.apps.updates.apps.*;
-import gplx.core.envs.*;
+package gplx.xowa.addons.apps.updates.specials.svcs;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_invk_cmd;
+import gplx.GfsCtx;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.Keyval;
+import gplx.String_;
+import gplx.core.envs.Env_;
+import gplx.core.envs.Op_sys;
+import gplx.core.envs.Runtime_;
+import gplx.core.envs.System_;
+import gplx.core.gfobjs.Gfobj_nde;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.addons.apps.updates.Xoa_update_startup;
+import gplx.xowa.addons.apps.updates.apps.Xoa_manifest_list;
+import gplx.xowa.addons.apps.updates.dbs.Xoa_app_version_itm;
+import gplx.xowa.addons.apps.updates.dbs.Xoa_update_db_mgr;
+import gplx.xowa.addons.apps.updates.dbs.Xoa_update_db_mgr_;
+import gplx.xowa.addons.apps.updates.js.Xojs_wkr__download;
+import gplx.xowa.addons.apps.updates.js.Xojs_wkr__replace;
+import gplx.xowa.addons.apps.updates.js.Xojs_wkr__unzip;
+import gplx.xowa.addons.apps.updates.specials.Xoa_update_special;
+import gplx.xowa.guis.cbks.Xog_cbk_trg;
 class Xoa_update_svc implements Gfo_invk {
 	private Xoa_app app;
 	private Io_url app_root_dir, update_dir, update_jar_fil, version_root;
@@ -64,7 +89,7 @@ class Xoa_update_svc implements Gfo_invk {
 		// in case of bad urls or withdrawn patches, delete update_db and force redownload
 		db_mgr.Conn().Rls_conn();
 		Io_mgr.Instance.DeleteFil(db_mgr.Url());
-		Xoa_update_db_mgr_.Download_from_inet(app, Bool_.N, db_mgr.Url());
+		Xoa_update_db_mgr_.Download_from_inet(app, BoolUtl.N, db_mgr.Url());
 	}
 	private void On_unzip_done(GfoMsg m) {
 		Xojs_wkr__unzip unzip_wkr = (Xojs_wkr__unzip)m.ReadObj("v");

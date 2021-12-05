@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.encoders; import gplx.*; import gplx.core.*;
+package gplx.core.encoders; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Hex_utl_ {
 	public static int Parse_or(byte[] src, int or) {return Parse_or(src, 0, src.length, or);}
 	public static int Parse_or(byte[] src, int bgn, int end, int or) {
@@ -21,10 +22,10 @@ public class Hex_utl_ {
 		byte b = Byte_.Max_value_127;
 		for (int i = end - 1; i >= bgn; i--) {
 			switch (src[i]) {
-				case Byte_ascii.Num_0: b =  0; break; case Byte_ascii.Num_1: b =  1; break; case Byte_ascii.Num_2: b =  2; break; case Byte_ascii.Num_3: b =  3; break; case Byte_ascii.Num_4: b =  4; break;
-				case Byte_ascii.Num_5: b =  5; break; case Byte_ascii.Num_6: b =  6; break; case Byte_ascii.Num_7: b =  7; break; case Byte_ascii.Num_8: b =  8; break; case Byte_ascii.Num_9: b =  9; break;
-				case Byte_ascii.Ltr_A: b = 10; break; case Byte_ascii.Ltr_B: b = 11; break; case Byte_ascii.Ltr_C: b = 12; break; case Byte_ascii.Ltr_D: b = 13; break; case Byte_ascii.Ltr_E: b = 14; break; case Byte_ascii.Ltr_F: b = 15; break;
-				case Byte_ascii.Ltr_a: b = 10; break; case Byte_ascii.Ltr_b: b = 11; break; case Byte_ascii.Ltr_c: b = 12; break; case Byte_ascii.Ltr_d: b = 13; break; case Byte_ascii.Ltr_e: b = 14; break; case Byte_ascii.Ltr_f: b = 15; break;
+				case AsciiByte.Num0: b =  0; break; case AsciiByte.Num1: b =  1; break; case AsciiByte.Num2: b =  2; break; case AsciiByte.Num3: b =  3; break; case AsciiByte.Num4: b =  4; break;
+				case AsciiByte.Num5: b =  5; break; case AsciiByte.Num6: b =  6; break; case AsciiByte.Num7: b =  7; break; case AsciiByte.Num8: b =  8; break; case AsciiByte.Num9: b =  9; break;
+				case AsciiByte.Ltr_A: b = 10; break; case AsciiByte.Ltr_B: b = 11; break; case AsciiByte.Ltr_C: b = 12; break; case AsciiByte.Ltr_D: b = 13; break; case AsciiByte.Ltr_E: b = 14; break; case AsciiByte.Ltr_F: b = 15; break;
+				case AsciiByte.Ltr_a: b = 10; break; case AsciiByte.Ltr_b: b = 11; break; case AsciiByte.Ltr_c: b = 12; break; case AsciiByte.Ltr_d: b = 13; break; case AsciiByte.Ltr_e: b = 14; break; case AsciiByte.Ltr_f: b = 15; break;
 				default: b = Byte_.Max_value_127; break;
 			}
 			if (b == Byte_.Max_value_127) return or;
@@ -118,7 +119,7 @@ public class Hex_utl_ {
 
 		// fill bytes from right to left
 		int hex_bgn = bfr.Len();
-		bfr.Add_byte_repeat(Byte_ascii.Null, val_len);
+		bfr.Add_byte_repeat(AsciiByte.Null, val_len);
 		byte[] bry = bfr.Bfr();
 		for (int i = 0; i < val_len; i++) {
 			int b = val % 16;
@@ -135,10 +136,10 @@ public class Hex_utl_ {
 	}
 	public static boolean Is_hex(byte itm) {
 		switch (itm) {
-			case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-			case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-			case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E: case Byte_ascii.Ltr_F:
-			case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e: case Byte_ascii.Ltr_f:
+			case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+			case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+			case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E: case AsciiByte.Ltr_F:
+			case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e: case AsciiByte.Ltr_f:
 				return true;
 			default:
 				return false;
@@ -163,18 +164,18 @@ public class Hex_utl_ {
 	}
 	private static byte To_byte_ucase(int v) {
 		switch (v) {
-			case  0: return Byte_ascii.Num_0; case  1: return Byte_ascii.Num_1; case  2: return Byte_ascii.Num_2; case  3: return Byte_ascii.Num_3; case  4: return Byte_ascii.Num_4;
-			case  5: return Byte_ascii.Num_5; case  6: return Byte_ascii.Num_6; case  7: return Byte_ascii.Num_7; case  8: return Byte_ascii.Num_8; case  9: return Byte_ascii.Num_9;
-			case 10: return Byte_ascii.Ltr_A; case 11: return Byte_ascii.Ltr_B; case 12: return Byte_ascii.Ltr_C; case 13: return Byte_ascii.Ltr_D; case 14: return Byte_ascii.Ltr_E; case 15: return Byte_ascii.Ltr_F;
+			case  0: return AsciiByte.Num0; case  1: return AsciiByte.Num1; case  2: return AsciiByte.Num2; case  3: return AsciiByte.Num3; case  4: return AsciiByte.Num4;
+			case  5: return AsciiByte.Num5; case  6: return AsciiByte.Num6; case  7: return AsciiByte.Num7; case  8: return AsciiByte.Num8; case  9: return AsciiByte.Num9;
+			case 10: return AsciiByte.Ltr_A; case 11: return AsciiByte.Ltr_B; case 12: return AsciiByte.Ltr_C; case 13: return AsciiByte.Ltr_D; case 14: return AsciiByte.Ltr_E; case 15: return AsciiByte.Ltr_F;
 			default: throw Err_.new_parse("hexstring", Int_.To_str(v));
 		}
 	}
 	private static byte To_byte_lcase(int v) {
 		switch (v) {
-			case  0: return Byte_ascii.Num_0; case  1: return Byte_ascii.Num_1; case  2: return Byte_ascii.Num_2; case  3: return Byte_ascii.Num_3;
-			case  4: return Byte_ascii.Num_4; case  5: return Byte_ascii.Num_5; case  6: return Byte_ascii.Num_6; case  7: return Byte_ascii.Num_7;
-			case  8: return Byte_ascii.Num_8; case  9: return Byte_ascii.Num_9; case 10: return Byte_ascii.Ltr_a; case 11: return Byte_ascii.Ltr_b;
-			case 12: return Byte_ascii.Ltr_c; case 13: return Byte_ascii.Ltr_d; case 14: return Byte_ascii.Ltr_e; case 15: return Byte_ascii.Ltr_f;
+			case  0: return AsciiByte.Num0; case  1: return AsciiByte.Num1; case  2: return AsciiByte.Num2; case  3: return AsciiByte.Num3;
+			case  4: return AsciiByte.Num4; case  5: return AsciiByte.Num5; case  6: return AsciiByte.Num6; case  7: return AsciiByte.Num7;
+			case  8: return AsciiByte.Num8; case  9: return AsciiByte.Num9; case 10: return AsciiByte.Ltr_a; case 11: return AsciiByte.Ltr_b;
+			case 12: return AsciiByte.Ltr_c; case 13: return AsciiByte.Ltr_d; case 14: return AsciiByte.Ltr_e; case 15: return AsciiByte.Ltr_f;
 			default: throw Err_.new_parse("hexstring", Int_.To_str(v));
 		}
 	}

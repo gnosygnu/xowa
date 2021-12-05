@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*;
+package gplx.xowa.parsers.hdrs;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 public class Xop_hdr_wkr__basic_tst {
 	@Before public void init() {fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@After public void term() {fxt.Init_para_n_();}
@@ -80,7 +85,7 @@ public class Xop_hdr_wkr__basic_tst {
 	@Test public void Err_hdr()					{fxt.Init_log_(Xop_hdr_log.Mismatched)					.Test_parse_page_wiki_str("====a== =="	, "<h2>==a== </h2>\n").tst_Log_check();}
 	@Test public void Err_end_hdr_is_1()			{fxt.Init_log_(Xop_hdr_log.Mismatched, Xop_hdr_log.Len_1).Test_parse_page_wiki_str("==a="			, "<h1>=a</h1>\n").tst_Log_check();}
 	@Test public void Html_hdr_many() {
-		fxt.Wtr_cfg().Toc__show_(Bool_.Y);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.Y);
 		fxt.Test_parse_page_wiki_str__esc(String_.Concat_lines_nl_skip_last
 		(	"==a=="
 		,	"==a=="
@@ -93,7 +98,7 @@ public class Xop_hdr_wkr__basic_tst {
 		,	"<h2><span class='mw-headline' id='a_3'>a</span></h2>"
 		,	""
 		));
-		fxt.Wtr_cfg().Toc__show_(Bool_.N);
+		fxt.Wtr_cfg().Toc__show_(BoolUtl.N);
 	}
 	@Test public void Hdr_inside_dangling_tmpl_fix() {	// PURPOSE: one-off fix to handle == inside dangling tmpl; DATE:2014-02-11
 		fxt.Test_parse_page_all_str("{{a|}\n==b=="

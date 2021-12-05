@@ -13,40 +13,48 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.xmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Gfo_xml_wtr {
 	private final Bry_bfr bfr = Bry_bfr_.Reset(255), txt_bfr = Bry_bfr_.Reset(32);
-	private byte quote_byte = Byte_ascii.Apos;
+	private byte quote_byte = AsciiByte.Apos;
 	private byte[] quote_escape = Bry_quote_1_escape;
 	private List_adp nde_stack = List_adp_.New();
 	private Gfo_xml_nde nde_cur = null;
 	private int indent = 0;
 	public void Quote_(boolean apos) {
 		if (apos) {
-			this.quote_byte = Byte_ascii.Apos;
+			this.quote_byte = AsciiByte.Apos;
 			this.quote_escape = Bry_quote_1_escape;
 		}
 		else {
-			this.quote_byte = Byte_ascii.Quote;
+			this.quote_byte = AsciiByte.Quote;
 			this.quote_escape = Bry_quote_2_escape;
 		}
 	}
-	public Gfo_xml_wtr Nde_lhs_bgn_grp(String v) {return Nde_lhs_bgn(Bool_.Y, v);}
-	public Gfo_xml_wtr Nde_lhs_bgn_itm(String v) {return Nde_lhs_bgn(Bool_.N, v);}
+	public Gfo_xml_wtr Nde_lhs_bgn_grp(String v) {return Nde_lhs_bgn(BoolUtl.Y, v);}
+	public Gfo_xml_wtr Nde_lhs_bgn_itm(String v) {return Nde_lhs_bgn(BoolUtl.N, v);}
 	private Gfo_xml_wtr Nde_lhs_bgn(boolean grp, String v) {
 		nde_cur = new Gfo_xml_nde(grp, v);
 		nde_stack.Add(nde_cur);
-		bfr.Add_byte_repeat(Byte_ascii.Space, indent);
-		bfr.Add_byte(Byte_ascii.Angle_bgn).Add_str_u8(v);
+		bfr.Add_byte_repeat(AsciiByte.Space, indent);
+		bfr.Add_byte(AsciiByte.AngleBgn).Add_str_u8(v);
 		indent += 2;
 		return this;
 	}
 	public Gfo_xml_wtr Nde_lhs_end() {
-		bfr.Add_byte(Byte_ascii.Angle_end);
+		bfr.Add_byte(AsciiByte.AngleEnd);
 		if (nde_cur.Grp()) bfr.Add_byte_nl();
 		return this;
 	}
-	public Gfo_xml_wtr Nde_lhs(String v) {return Nde_lhs(Bool_.Y, v);}
+	public Gfo_xml_wtr Nde_lhs(String v) {return Nde_lhs(BoolUtl.Y, v);}
 	private Gfo_xml_wtr Nde_lhs(boolean grp, String v) {
 		this.Nde_lhs_bgn(grp, v);
 		this.Nde_lhs_end();
@@ -55,31 +63,31 @@ public class Gfo_xml_wtr {
 	public Gfo_xml_wtr Nde_rhs() {
 		Gfo_xml_nde nde = (Gfo_xml_nde)List_adp_.Pop(nde_stack);
 		indent -= 2;
-		if (nde.Grp()) bfr.Add_byte_repeat(Byte_ascii.Space, indent);
-		bfr.Add(Bry_nde_rhs_bgn).Add_str_u8(nde.Name()).Add_byte(Byte_ascii.Angle_end);	// EX: </node>
+		if (nde.Grp()) bfr.Add_byte_repeat(AsciiByte.Space, indent);
+		bfr.Add(Bry_nde_rhs_bgn).Add_str_u8(nde.Name()).Add_byte(AsciiByte.AngleEnd);	// EX: </node>
 		bfr.Add_byte_nl();
 		return this;
 	}
 	public Gfo_xml_wtr Nde_txt_str(String name, String text) {
-		this.Nde_lhs(Bool_.N, name);
+		this.Nde_lhs(BoolUtl.N, name);
 		this.Txt_str_u8(text);
 		this.Nde_rhs();
 		return this;
 	}
 	public Gfo_xml_wtr Nde_txt_bry(String name, byte[] text) {
-		this.Nde_lhs(Bool_.N, name);
+		this.Nde_lhs(BoolUtl.N, name);
 		this.Txt_bry(text);
 		this.Nde_rhs();
 		return this;
 	}
 	public Gfo_xml_wtr Nde_txt_int(String name, int text) {
-		this.Nde_lhs(Bool_.N, name);
+		this.Nde_lhs(BoolUtl.N, name);
 		this.Txt_bry(Int_.To_bry(text));
 		this.Nde_rhs();
 		return this;
 	}
 	public Gfo_xml_wtr Atr_bgn(String key) {
-		bfr.Add_byte_space().Add_str_u8(key).Add_byte(Byte_ascii.Eq).Add_byte(quote_byte);
+		bfr.Add_byte_space().Add_str_u8(key).Add_byte(AsciiByte.Eq).Add_byte(quote_byte);
 		return this;
 	}
 	public Gfo_xml_wtr Atr_val_str_a7(String v)		{bfr.Add_str_a7(v); return this;}
@@ -95,7 +103,7 @@ public class Gfo_xml_wtr {
 	public Gfo_xml_wtr Atr_kv_str_u8(String key, String val)	{return Atr_kv_bry(key, Bry_.new_u8(val));}
 	public Gfo_xml_wtr Atr_kv_bry(String key, byte[] val) {
 		bfr.Add_byte_space().Add_str_u8(key);
-		bfr.Add_byte(Byte_ascii.Eq);
+		bfr.Add_byte(AsciiByte.Eq);
 		Atr_val_quote(val);
 		return this;
 	}
@@ -112,9 +120,9 @@ public class Gfo_xml_wtr {
 			byte[] escape = null;
 			byte b = txt[i];
 			switch (b) {
-				case Byte_ascii.Lt:		escape = Bry_escape_lt; break;
-				case Byte_ascii.Gt:		escape = Bry_escape_gt; break;
-				case Byte_ascii.Amp:	escape = Bry_escape_amp; break;
+				case AsciiByte.Lt:		escape = Bry_escape_lt; break;
+				case AsciiByte.Gt:		escape = Bry_escape_gt; break;
+				case AsciiByte.Amp:	escape = Bry_escape_amp; break;
 				default: break;
 			}
 			if (escape != null && !dirty) {

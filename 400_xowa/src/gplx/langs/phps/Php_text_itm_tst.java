@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*;
-import org.junit.*;
+package gplx.langs.phps;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Php_text_itm_tst {
 	@Before public void init() {fxt.Clear();} private Php_text_itm_fxt fxt = new Php_text_itm_fxt();
 	@Test public void Q1_basic() 						{fxt.Init_q1().Test_parse("abcde"			, "abcde");}
@@ -34,8 +42,8 @@ public class Php_text_itm_tst {
 class Php_text_itm_fxt {
 	private Php_text_itm_parser parser;
 	public void Clear() {parser = new Php_text_itm_parser();}
-	public Php_text_itm_fxt Init_q1() {parser.Quote_is_single_(Bool_.Y); return this;}
-	public Php_text_itm_fxt Init_q2() {parser.Quote_is_single_(Bool_.N); return this;}
+	public Php_text_itm_fxt Init_q1() {parser.Quote_is_single_(BoolUtl.Y); return this;}
+	public Php_text_itm_fxt Init_q2() {parser.Quote_is_single_(BoolUtl.N); return this;}
 	public void Test_parse(String raw_str, String expd) {
 		List_adp list = List_adp_.New();
 		byte[] raw = Bry_.new_u8(raw_str);

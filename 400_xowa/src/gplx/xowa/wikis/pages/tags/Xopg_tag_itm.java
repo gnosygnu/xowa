@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.wikis.pages.tags; import gplx.*;
 import gplx.langs.htmls.*;
+import gplx.objects.strings.AsciiByte;
 public class Xopg_tag_itm {
 	Xopg_tag_itm(byte tid, byte[] node, byte[] href, byte[] body, Keyval... atrs) {
 		this.tid = tid;
@@ -30,7 +31,7 @@ public class Xopg_tag_itm {
 	public byte[]		Body()		{return body;}		private final byte[] body;
 	public Keyval[]		Atrs()		{return atrs;}		private final Keyval[] atrs;
 	public void To_html(Bry_bfr bfr) {
-		bfr.Add_byte(Byte_ascii.Angle_bgn);
+		bfr.Add_byte(AsciiByte.AngleBgn);
 		bfr.Add(node);
 		To_html_atr(bfr, "data-source", "xowa");
 		int len = atrs.length;
@@ -38,26 +39,26 @@ public class Xopg_tag_itm {
 			Keyval atr = atrs[i];
 			To_html_atr(bfr, atr.Key(), atr.Val_to_str_or_empty());
 		}
-		bfr.Add_byte(Byte_ascii.Angle_end);
+		bfr.Add_byte(AsciiByte.AngleEnd);
 		if (!Bry_.Eq(node, Gfh_tag_.Bry__link)) {
 			if (body != null) {
 				bfr.Add_byte_nl();
 				bfr.Add(body);
 				bfr.Add_byte_nl();
 			}
-			bfr.Add_byte(Byte_ascii.Angle_bgn).Add_byte(Byte_ascii.Slash);
+			bfr.Add_byte(AsciiByte.AngleBgn).Add_byte(AsciiByte.Slash);
 			bfr.Add(node);
-			bfr.Add_byte(Byte_ascii.Angle_end);
+			bfr.Add_byte(AsciiByte.AngleEnd);
 		}
 		bfr.Add_byte_nl();
 	}
 	private static void To_html_atr(Bry_bfr bfr, String key, String val) {
 		bfr.Add_byte_space();
 		bfr.Add_str_a7(key);
-		bfr.Add_byte(Byte_ascii.Eq);
-		bfr.Add_byte(Byte_ascii.Quote);
+		bfr.Add_byte(AsciiByte.Eq);
+		bfr.Add_byte(AsciiByte.Quote);
 		bfr.Add_str_a7(val);
-		bfr.Add_byte(Byte_ascii.Quote);
+		bfr.Add_byte(AsciiByte.Quote);
 	}
 
 	public static final byte Tid__css_file = 0, Tid__css_code = 1, Tid__js_file = 2, Tid__js_code = 3, Tid__htm_frag = 4; 

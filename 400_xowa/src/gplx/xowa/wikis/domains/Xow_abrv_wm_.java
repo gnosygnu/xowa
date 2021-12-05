@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.domains; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*;
 public class Xow_abrv_wm_ {
 	public static Xow_abrv_wm Parse_to_abrv_or_null(byte[] src) {	// EX: parse "enwiki" to abrv_itm
@@ -45,8 +46,8 @@ public class Xow_abrv_wm_ {
 	}
 	public static Xow_domain_itm Parse_to_domain_itm(byte[] src) {	// EX: parse "enwiki" to "en.wikipedia.org" itm
 		// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
-		if (Bry_.Has(src, Byte_ascii.Underline))
-			src = Bry_.Replace_create(src, Byte_ascii.Underline, Byte_ascii.Dash);
+		if (Bry_.Has(src, AsciiByte.Underline))
+			src = Bry_.Replace_create(src, AsciiByte.Underline, AsciiByte.Dash);
 
 		return Xow_domain_itm_.parse(Xow_abrv_wm_.Parse_to_domain_bry(src));
 	}
@@ -86,14 +87,14 @@ public class Xow_abrv_wm_ {
 			case Xow_domain_tid_.Tid__wikimedia:
 				if (lang == null) {
 					lang = Bry_.Mid(src, 0, trv.Pos() + 1);	// en
-					if (Bry_.Has(lang, Byte_ascii.Underline))	// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
-						lang = Bry_.Replace_create(lang, Byte_ascii.Underline, Byte_ascii.Dash);
+					if (Bry_.Has(lang, AsciiByte.Underline))	// convert "_" to "-"; note that wmf_keys have a strict format of langtype; EX: "zh_yuewiki"; DATE:2014-10-06
+						lang = Bry_.Replace_create(lang, AsciiByte.Underline, AsciiByte.Dash);
 				}
 				return Bry_.Add
 				( lang
-				, Byte_ascii.Dot_bry							// .
+				, AsciiByte.DotBry                            // .
 				, Xow_domain_tid_.Get_type_as_bry(domain_type)	// wikipedia
-				, Byte_ascii.Dot_bry							// .
+				, AsciiByte.DotBry                            // .
 				, Xow_domain_itm_.Seg__org						// org
 				);
 		}

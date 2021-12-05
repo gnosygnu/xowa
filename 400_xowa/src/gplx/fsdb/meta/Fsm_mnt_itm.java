@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.dbs.*; import gplx.fsdb.data.*;
+package gplx.fsdb.meta;
+import gplx.String_;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.dbs.Db_conn;
+import gplx.fsdb.Fsdb_db_mgr;
+import gplx.fsdb.data.Fsd_bin_tbl;
+import gplx.fsdb.data.Fsd_fil_itm;
+import gplx.fsdb.data.Fsd_img_itm;
+import gplx.fsdb.data.Fsd_thm_itm;
+import gplx.objects.primitives.BoolUtl;
 public class Fsm_mnt_itm {
 	public Fsm_mnt_itm(int id, String name, String url_rel) {this.id = id; this.name = name; this.url_rel = url_rel;}
 	public int				Id() {return id;} private final int id;
@@ -39,7 +47,7 @@ public class Fsm_mnt_itm {
 	public Fsd_fil_itm		Select_fil_or_null(byte[] dir, byte[] fil) {return atr_mgr.Select_fil_or_null(dir, fil);}
 	public boolean				Select_thm(boolean exact, Fsd_thm_itm rv, byte[] dir, byte[] fil) {
 		Fsd_fil_itm fil_itm = atr_mgr.Select_fil_or_null(dir, fil);
-		return fil_itm == Fsd_fil_itm.Null ? Bool_.N : atr_mgr.Select_thm(exact, rv, fil_itm.Dir_id(), fil_itm.Fil_id());
+		return fil_itm == Fsd_fil_itm.Null ? BoolUtl.N : atr_mgr.Select_thm(exact, rv, fil_itm.Dir_id(), fil_itm.Fil_id());
 	}
 	public Fsd_img_itm		Insert_img(Fsm_atr_fil atr_fil, Fsm_bin_fil bin_fil, byte[] dir, byte[] fil, int ext_id, int img_w, int img_h, long bin_len, Io_stream_rdr bin_rdr) {
 		Fsd_img_itm rv = atr_fil.Insert_img(dir, fil, ext_id, img_w, img_h, bin_fil.Id(), bin_len, bin_rdr);

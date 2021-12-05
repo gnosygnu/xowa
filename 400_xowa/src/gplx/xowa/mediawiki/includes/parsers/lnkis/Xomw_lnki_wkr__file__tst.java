@@ -13,10 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.xowa.mediawiki.includes.filerepo.*; import gplx.xowa.mediawiki.includes.filerepo.file.*;
-import gplx.xowa.mediawiki.includes.media.*;
+package gplx.xowa.mediawiki.includes.parsers.lnkis;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.mediawiki.XomwEnv;
+import gplx.xowa.mediawiki.includes.XomwTitleOld;
+import gplx.xowa.mediawiki.includes.filerepo.XomwFileRepo;
+import gplx.xowa.mediawiki.includes.filerepo.file.XomwFileFinderMock;
+import gplx.xowa.mediawiki.includes.media.XomwMediaHandlerFactory;
+import gplx.xowa.mediawiki.includes.parsers.XomwParser;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
+import org.junit.Before;
+import org.junit.Test;
 public class Xomw_lnki_wkr__file__tst {
 	private final Xomw_lnki_wkr__fxt fxt = new Xomw_lnki_wkr__fxt();
 	@Before public void init() {
@@ -89,8 +103,8 @@ class Xomw_lnki_wkr__fxt {
 		file_finder = new XomwFileFinderMock(parser.Env());
 		env = parser.Env();
 		env.File_finder_(file_finder);
-		env.Magic_word_mgr().Add(Bry_.new_u8("img_thumbnail"), Bool_.Y, Bry_.Ary("thumb"));
-		env.Magic_word_mgr().Add(Bry_.new_u8("img_width"), Bool_.Y, Bry_.Ary("$1px"));
+		env.Magic_word_mgr().Add(Bry_.new_u8("img_thumbnail"), BoolUtl.Y, Bry_.Ary("thumb"));
+		env.Magic_word_mgr().Add(Bry_.new_u8("img_width"), BoolUtl.Y, Bry_.Ary("$1px"));
 		env.Message_mgr().Old_add("thumbnail-more", "enlarge", env.Language());
 		parser.Init_by_wiki(wiki);
 

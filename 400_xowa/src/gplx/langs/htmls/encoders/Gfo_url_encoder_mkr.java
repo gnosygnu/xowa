@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
+package gplx.langs.htmls.encoders;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfo_url_encoder_mkr {
 	private Gfo_url_encoder_itm[] encode_ary, decode_ary;
 	private Gfo_url_encoder anchor_encoder;
@@ -52,11 +53,11 @@ public class Gfo_url_encoder_mkr {
 		return this;
 	}
 	public Gfo_url_encoder_mkr Init_common(boolean encode_colon) {
-		Init__same__rng(Byte_ascii.Num_0, Byte_ascii.Num_9);
-		Init__same__rng(Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z);
-		Init__same__rng(Byte_ascii.Ltr_a, Byte_ascii.Ltr_z);
-		Init__same__many(Byte_ascii.Dash, Byte_ascii.Dot, Byte_ascii.Underline);
-		if (encode_colon) Init__same__many(Byte_ascii.Colon);
+		Init__same__rng(AsciiByte.Num0, AsciiByte.Num9);
+		Init__same__rng(AsciiByte.Ltr_A, AsciiByte.Ltr_Z);
+		Init__same__rng(AsciiByte.Ltr_a, AsciiByte.Ltr_z);
+		Init__same__many(AsciiByte.Dash, AsciiByte.Dot, AsciiByte.Underline);
+		if (encode_colon) Init__same__many(AsciiByte.Colon);
 		return this;
 	}
 	public Gfo_url_encoder_mkr Init__decode_mark(byte decode_mark) {

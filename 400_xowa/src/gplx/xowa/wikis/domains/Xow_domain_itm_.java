@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.primitives.*;
+package gplx.xowa.wikis.domains; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*;
 public class Xow_domain_itm_ {
 	public static final Xow_domain_itm[] Ary_empty = new Xow_domain_itm[0];
@@ -28,7 +28,7 @@ public class Xow_domain_itm_ {
 		int raw_len = raw.length;
 
 		// find 1st dot
-		int dot_0 = Bry_find_.Find_fwd(raw, Byte_ascii.Dot, 0, raw_len);
+		int dot_0 = Bry_find_.Find_fwd(raw, AsciiByte.Dot, 0, raw_len);
 
 		// 0 dots; check for "home"
 		if (dot_0 == Bry_find_.Not_found) {
@@ -38,7 +38,7 @@ public class Xow_domain_itm_ {
 		}
 
 		// find 2nd dot
-		int dot_1 = Bry_find_.Find_fwd(raw, Byte_ascii.Dot, dot_0 + 1, raw_len);
+		int dot_1 = Bry_find_.Find_fwd(raw, AsciiByte.Dot, dot_0 + 1, raw_len);
 
 		// 1 dot only -> return "wikisource.org" or other
 		if (dot_1 == Bry_find_.Not_found) {

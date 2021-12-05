@@ -13,13 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
-import gplx.xowa.wikis.domains.*;
+package gplx.xowa.htmls.core.wkrs.imgs.atrs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.core.brys.Bfr_arg_clearable;
+import gplx.core.brys.Bry_err_wkr;
+import gplx.core.brys.Bry_rdr;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.langs.htmls.docs.Gfh_atr;
+import gplx.langs.htmls.docs.Gfh_tag;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.repos.Xof_repo_tid_;
+import gplx.xowa.htmls.core.wkrs.Xoh_itm_parser;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
 public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
-	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(AsciiByte.Slash);
 	private boolean fail_throws_err;
 	private byte[] src_bry;
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
@@ -72,7 +85,7 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 			return true;
 		}
 
-		rdr.Fail_throws_err_(Bool_.Y);
+		rdr.Fail_throws_err_(BoolUtl.Y);
 
 		// get repo
 		repo_end = rdr.Find_fwd_lr();
@@ -93,12 +106,12 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 
 		// get file_w; file_page; file_time
 		if (!file_is_orig) {
-			file_w = rdr.Read_int_to(Byte_ascii.Ltr_p);					// EX: "220px"
-			rdr.Chk(Byte_ascii.Ltr_x);
-			if		(rdr.Is(Byte_ascii.Dash)) {
+			file_w = rdr.Read_int_to(AsciiByte.Ltr_p);					// EX: "220px"
+			rdr.Chk(AsciiByte.Ltr_x);
+			if		(rdr.Is(AsciiByte.Dash)) {
 				Xof_ext ext = Xof_ext_.new_by_ttl_(file_ttl_bry);
 				if (ext.Id_supports_page())
-					file_page = rdr.Read_int_to(Byte_ascii.Dot);		// EX: "220px-5.png"
+					file_page = rdr.Read_int_to(AsciiByte.Dot);		// EX: "220px-5.png"
 				else {
 					int time_bgn = rdr.Pos();
 					int time_end = rdr.Find_fwd_lr(ext.Ext_view()) - 1;	// -1 to position b/c ext doesn't have "."; 
@@ -122,7 +135,7 @@ public class Xoh_img_src_data implements Bfr_arg_clearable, Xoh_itm_parser {
 		int pos = rdr.Pos();
 		while (true) {
 			if (	pos < src_end						// no more slashes; shouldn't happen; EX: "7/0/"
-				&&	src[pos + 1] == Byte_ascii.Slash) {	// pos is slash; EX: "7/0/"
+				&&	src[pos + 1] == AsciiByte.Slash) {	// pos is slash; EX: "7/0/"
 				pos += 2;
 				continue;
 			}

@@ -13,14 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.wikis.tdbs;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import org.junit.Before;
+import org.junit.Test;
 public class Xotdb_fsys_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Xow_fsys_mgr_fxt fxt = new Xow_fsys_mgr_fxt();
 	@Test public void Basic() {
-		fxt.Zip_(Xotdb_dir_info_.Tid_page, Bool_.N).Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Tid__main, 123, "mem/xowa/wiki/en.wikipedia.org/ns/000/page/00/00/00/01/0000000123.xdat");
-		fxt.Zip_(Xotdb_dir_info_.Tid_page, Bool_.Y).Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Tid__main, 123, "mem/xowa/wiki/en.wikipedia.org/ns/000/page_zip/00/00/00/01/0000000123.zip");
+		fxt.Zip_(Xotdb_dir_info_.Tid_page, BoolUtl.N).Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Tid__main, 123, "mem/xowa/wiki/en.wikipedia.org/ns/000/page/00/00/00/01/0000000123.xdat");
+		fxt.Zip_(Xotdb_dir_info_.Tid_page, BoolUtl.Y).Url_ns_fil(Xotdb_dir_info_.Tid_page, Xow_ns_.Tid__main, 123, "mem/xowa/wiki/en.wikipedia.org/ns/000/page_zip/00/00/00/01/0000000123.zip");
 	}
 }
 class Xow_fsys_mgr_fxt {

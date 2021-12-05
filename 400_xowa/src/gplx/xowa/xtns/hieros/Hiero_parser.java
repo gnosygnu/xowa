@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.hieros; import gplx.*;
 import gplx.core.btries.*; import gplx.langs.htmls.*;
+import gplx.objects.strings.AsciiByte;
 class Hiero_parser {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private final Btrie_rv trv = new Btrie_rv();
@@ -85,17 +86,17 @@ class Hiero_parser {
 		cur_block.Add(itm.Key());
 	}
 	private void Dot() {
-		if (cur_tkn.Eq(Byte_ascii.Dot)) {		// is "."
-			cur_tkn.Add_byte(Byte_ascii.Dot);	// make ".."
+		if (cur_tkn.Eq(AsciiByte.Dot)) {		// is "."
+			cur_tkn.Add_byte(AsciiByte.Dot);	// make ".."
 			this.New_block();
 		}
 		else {
 			this.New_block();
-			cur_tkn.Add_byte(Byte_ascii.Dot);	// make "."; note that New_block clears tkn
+			cur_tkn.Add_byte(AsciiByte.Dot);	// make "."; note that New_block clears tkn
 		}
 	}
 	private void New_char(byte b) {
-		if (b == Byte_ascii.Dot) {				// is "."; NOTE: never occurs; should always hit dot block; transcribed literally from MW
+		if (b == AsciiByte.Dot) {				// is "."; NOTE: never occurs; should always hit dot block; transcribed literally from MW
 			this.New_block();
 			this.cur_tkn.Add_byte(b);			// $this->token = $char;
 		}

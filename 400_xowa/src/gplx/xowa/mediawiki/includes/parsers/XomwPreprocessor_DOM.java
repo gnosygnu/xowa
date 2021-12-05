@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-import gplx.core.btries.*;
+package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
 // THREAD.UNSAFE: caching for repeated calls
 class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
@@ -140,7 +141,7 @@ class XomwPreprocessor_DOM extends XomwPreprocessor { 	private final Bry_bfr tmp
 	}
 	@Override protected void preprocessToObj_equals(XomwPPDStack stack) {
 		stack.getCurrentPart().eqpos = accum_dom.Len();
-		accum_dom.Add_bry(Byte_ascii.Eq_bry);
+		accum_dom.Add_bry(AsciiByte.EqBry);
 	}
 	@Override protected Object preprocessToObj_term(XomwPPDStack stack) {
 		Bry_bfr root_accum = Bry_bfr_.New().Add_str_u8(((Xomw_prepro_accum__dom)stack.Get_root_accum()).To_str());

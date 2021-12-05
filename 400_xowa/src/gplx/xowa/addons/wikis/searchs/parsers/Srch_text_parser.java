@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
-import gplx.core.btries.*; import gplx.xowa.langs.cases.*;
+package gplx.xowa.addons.wikis.searchs.parsers;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.langs.cases.Xol_case_mgr;
 public class Srch_text_parser {
 	private Btrie_slim_mgr parser_trie = Btrie_slim_mgr.cs(); public Btrie_slim_mgr word_end_trie = Btrie_slim_mgr.cs(); private Btrie_slim_mgr word_bgn_trie = Btrie_slim_mgr.cs();
 	private final Btrie_rv trv = new Btrie_rv();
@@ -27,16 +34,16 @@ public class Srch_text_parser {
 	public Srch_text_parser Init_for_ttl(Xol_case_mgr case_mgr) {
 		this.case_mgr = case_mgr;
 		parser_trie.Clear(); word_end_trie.Clear();
-		parser__ws = new Srch_sym_parser__split(Bool_.Y, " ", "\t", "\n", "\r", "_");
+		parser__ws = new Srch_sym_parser__split(BoolUtl.Y, " ", "\t", "\n", "\r", "_");
 		parser__dash = new Srch_sym_parser__dash("-");
 		Parsers__reg(Parsers__make__word_end
 		( "!", "?", ",", ":", ";", "\"", "~"
 		//, "@", "&", "*", "`", "+"			// should add for symmetry of word_bgn trie but strips "@Home" to "Home" only; also, several have many "*", "`", "+"
 		));
-		Parsers__reg(new Srch_sym_parser__split(Bool_.N, "/"));
+		Parsers__reg(new Srch_sym_parser__split(BoolUtl.N, "/"));
 		Parsers__reg(parser__ws, parser__dash
-			, new Srch_sym_parser__paren_bgn(Byte_ascii.Paren_bgn, Byte_ascii.Paren_end)
-			, new Srch_sym_parser__dot("."), new Srch_sym_parser__ellipsis(Byte_ascii.Dot, ".."), new Srch_sym_parser__apos("'"));	// NOTE: [ ] { } do not exist in titles
+			, new Srch_sym_parser__paren_bgn(AsciiByte.ParenBgn, AsciiByte.ParenEnd)
+			, new Srch_sym_parser__dot("."), new Srch_sym_parser__ellipsis(AsciiByte.Dot, ".."), new Srch_sym_parser__apos("'"));	// NOTE: [ ] { } do not exist in titles
 		word_bgn_trie.Add_many_int(1
 		// , "!", "?", ",", ":", ";"		// low #; should add for symmetry of word_end trie;
 		, "\""								// adding for symmetry of word_end trie;
@@ -66,7 +73,7 @@ public class Srch_text_parser {
 	}
 	public void Parse(Srch_text_parser_wkr wkr, byte[] src_orig) {
 		word_hash.Clear();
-		Parse(Bool_.Y, src_orig, 0, src_orig.length);
+		Parse(BoolUtl.Y, src_orig, 0, src_orig.length);
 		int hash_len = word_hash.Len();
 		for (int i = 0; i < hash_len; ++i) {
 			Srch_word_itm itm = (Srch_word_itm)word_hash.Get_at(i);

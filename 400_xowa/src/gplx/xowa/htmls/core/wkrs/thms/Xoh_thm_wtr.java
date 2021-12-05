@@ -13,10 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.brys.args.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
-import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
+package gplx.xowa.htmls.core.wkrs.thms; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.brys.args.*;
+import gplx.langs.htmls.*;
+import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
 public class Xoh_thm_wtr implements gplx.core.brys.Bfr_arg {
 	private final Bfr_arg__bry			div_0_align = Bfr_arg__bry.New_empty();
 	private final Bfr_arg__int			div_1_width = new Bfr_arg__int(-1);
@@ -38,8 +41,8 @@ public class Xoh_thm_wtr implements gplx.core.brys.Bfr_arg {
 	public void Write(Bry_bfr bfr, Xoh_page hpg, Xoh_hdoc_ctx hctx, byte[] src, boolean img_is_vid, int div_0_align, int div_1_w, Xoh_img_wtr img_wtr, byte[] div_2_href
 		, Bfr_arg capt_1, boolean capt_2_exists, boolean capt_2_is_tidy, byte[] capt_2_bry, boolean capt_3_exists, byte[] capt_3_bry, boolean xowa_alt_text_exists) {
 		this.Clear();
-		this.img_is_vid_nl = img_is_vid ? Byte_ascii.Nl_bry : Bry_.Empty;
-		this.trailing_space = img_is_vid ? Bry_.Empty : Byte_ascii.Space_bry;
+		this.img_is_vid_nl = img_is_vid ? AsciiByte.NlBry : Bry_.Empty;
+		this.trailing_space = img_is_vid ? Bry_.Empty : AsciiByte.SpaceBry;
 		this.div_0_align.Set_by_val(gplx.xowa.parsers.lnkis.Xop_lnki_align_h_.To_bry(div_0_align));
 		if (!hctx.Mode_is_diff())
 			this.div_1_id.Set(img_wtr.Fsdb_itm().Html_uid());
@@ -64,11 +67,11 @@ public class Xoh_thm_wtr implements gplx.core.brys.Bfr_arg {
 			}
 		}
 		else
-			capt_2.Set_by_val(Byte_ascii.Nl_bry);	// no capt_2, so force \n betwen </div>~{capt_2}</div>
+			capt_2.Set_by_val(AsciiByte.NlBry);	// no capt_2, so force \n betwen </div>~{capt_2}</div>
 		if (capt_3_exists)
 			capt_3.Set_by_val(capt_3_bry);
 		else
-			capt_3.Set_by_val(Byte_ascii.Nl_bry);
+			capt_3.Set_by_val(AsciiByte.NlBry);
 		this.Bfr_arg__add(bfr);
 	}
 	public void Bfr_arg__add(Bry_bfr bfr) {

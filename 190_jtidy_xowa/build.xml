@@ -1,0 +1,60 @@
+<project name="jtidy" default="all">
+	<property file="src/main/resources/jtidy.properties"/>
+	<property name="target" value="target"/>
+	<property name="bin" value="${target}/bin"/>
+	<property name="jar" value="jtidy-${version}.jar"/>
+	<property name="src" value="src/main/java"/>
+	<property name="res" value="src/main/resources"/>
+	<property name="doc" value="javadoc"/>
+	<property name="srczip" value="jtidy-${version}-sources.zip"/>
+	<property name="allzip" value="jtidy-${version}.zip"/>
+	
+	<target name="clean">
+		<delete dir="${target}"/>
+	</target>
+	
+	<target name="jar" depends="clean">
+		<mkdir dir="${target}"/>
+		<mkdir dir="${bin}"/>
+		<javac srcdir="${src}" destdir="${bin}" source="1.4" target="1.4"/>
+		<jar destfile="${target}/${jar}">
+			<manifest>
+				<attribute name="Main-Class" value="org.w3c.tidy.Tidy"/>
+				<attribute name="Project-Name" value="JTidy"/>
+				<attribute name="Build-Version" value="${version}"/>
+				<attribute name="Build-Date" value="${date}"/>
+				<attribute name="Built-By" value="${user.name}"/>
+			</manifest>
+			<fileset dir="${bin}"/>
+			<fileset dir="${res}"/>
+		</jar>
+	</target>
+	
+	<target name="javadoc" depends="clean">
+		<javadoc sourcepath="${src}" destdir="${target}/${doc}" windowtitle=" JTidy ${version} " doctitle="JTidy ${version} API documentation">
+			<tag name="todo" scope="all" description="To do:"/>
+		</javadoc>
+	</target>
+	
+	<target name="src" depends="clean">
+		<zip destfile="${target}/${srczip}">
+			<fileset dir=".">
+				<include name="${src}/**"/>
+				<include name="${res}/**"/>
+				<include name="LICENSE.txt"/>
+				<include name="build.xml"/>
+			</fileset>
+		</zip>
+	</target>
+	
+	<target name="all" depends="jar, javadoc, src">
+		<zip destfile="${target}/${allzip}">
+			<fileset dir="${target}">
+				<include name="${jar}"/>
+				<include name="${doc}/**"/>
+				<include name="${srczip}"/>
+			</fileset>
+			<fileset file="LICENSE.txt"/>
+		</zip>
+	</target>
+</project>

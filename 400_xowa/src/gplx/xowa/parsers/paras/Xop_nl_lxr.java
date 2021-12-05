@@ -13,12 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.langs.*;
-import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*;
+package gplx.xowa.parsers.paras;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.core.btries.Btrie_fast_mgr;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_lxr;
+import gplx.xowa.parsers.Xop_lxr_;
+import gplx.xowa.parsers.Xop_parser_;
+import gplx.xowa.parsers.Xop_parser_tid_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.parsers.lists.Xop_list_wkr_;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_wkr_;
+import gplx.xowa.parsers.miscs.Xop_eq_tkn;
+import gplx.xowa.parsers.tblws.Xop_tblw_wkr;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
 public class Xop_nl_lxr implements Xop_lxr {
 	public int Lxr_tid() {return Xop_lxr_.Tid_nl;}
-	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(Byte_ascii.Nl, this);}
+	public void Init_by_wiki(Xowe_wiki wiki, Btrie_fast_mgr core_trie) {core_trie.Add(AsciiByte.Nl, this);}
 	public void Init_by_lang(Xol_lang_itm lang, Btrie_fast_mgr core_trie) {}
 	public void Term(Btrie_fast_mgr core_trie) {}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
@@ -73,7 +95,7 @@ public class Xop_nl_lxr implements Xop_lxr {
 				return cur_pos;
 			// case Xop_tkn_itm_.Tid_tblw_tc: case Xop_tkn_itm_.Tid_tblw_td:	// STUB: tc/td should not have attributes
 			case Xop_tkn_itm_.Tid_tblw_tb: case Xop_tkn_itm_.Tid_tblw_tr: case Xop_tkn_itm_.Tid_tblw_th:	// nl should close previous tblw's atrs range; EX {{Infobox planet}} and |-\n<tr>
-				Xop_tblw_wkr.Atrs_close(ctx, src, root, Bool_.N);
+				Xop_tblw_wkr.Atrs_close(ctx, src, root, BoolUtl.N);
 				break;
 		}
 		if (	ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt			// parse_mode is wiki
@@ -91,16 +113,16 @@ public class Xop_nl_lxr implements Xop_lxr {
 		for (int i = cur_pos; i < src_len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:	// ignore ws
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:	// ignore ws
 					break;
-				case Byte_ascii.Brack_bgn: // [
-					if (	Bry_.Has_at(src, src_len, i + 1, Byte_ascii.Brack_bgn)	// [[
+				case AsciiByte.BrackBgn: // [
+					if (	Bry_.Has_at(src, src_len, i + 1, AsciiByte.BrackBgn)	// [[
 						&&	i + 2 < src_len) {	
-						int ttl_bgn = Bry_find_.Find_fwd_while(src, i + 2, src_len, Byte_ascii.Space);
+						int ttl_bgn = Bry_find_.Find_fwd_while(src, i + 2, src_len, AsciiByte.Space);
 						Btrie_slim_mgr ctg_trie = ctx.Wiki().Ns_mgr().Category_trie();
 						Object ctg_ns = ctg_trie.Match_at(trv, src, ttl_bgn, src_len);
 						if (ctg_ns != null	// "[[Category" found
-							&& Bry_.Has_at(src, src_len, trv.Pos(), Byte_ascii.Colon)) {	// check that next char is :
+							&& Bry_.Has_at(src, src_len, trv.Pos(), AsciiByte.Colon)) {	// check that next char is :
 							return i;// return pos of 1st [
 						}
 						return Bry_find_.Not_found;

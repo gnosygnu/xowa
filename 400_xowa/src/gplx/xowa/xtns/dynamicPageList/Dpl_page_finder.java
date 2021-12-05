@@ -13,10 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.dynamicPageList; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.lists.*;
-import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
+package gplx.xowa.xtns.dynamicPageList;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.Xoctg_catpage_ctg;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.Xoctg_catpage_grp;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.Xoctg_catpage_itm;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.Xoctg_catpage_url;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm_sorter;
 class Dpl_page_finder {
 	private final Dpl_itm itm;
 	private final Xowe_wiki wiki;
@@ -80,7 +95,7 @@ class Dpl_page_finder {
 
 		// sorting
 		rv.Sort_by
-			( itm.Sort_ascending() == Bool_.__byte
+			( itm.Sort_ascending() == BoolUtl.NullByte
 			? (ComparerAble)Xowd_page_itm_sorter.IdAsc // sort not specified; use default;
 			: (ComparerAble)new Dpl_page_sorter(itm)); // sort specified
 		return rv;

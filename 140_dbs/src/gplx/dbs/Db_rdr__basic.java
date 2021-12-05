@@ -13,7 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.Float_;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.Long_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
 import java.sql.ResultSet;
 public class Db_rdr__basic implements Db_rdr {
 	protected ResultSet rdr; 
@@ -34,7 +47,7 @@ public class Db_rdr__basic implements Db_rdr {
 	public float		Read_float(String k)		{try {return Float_.cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Float_.Cls_val_name);}}
 	public double		Read_double(String k)		{try {return Double_.cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Double_.Cls_val_name);}}
 	public byte			Read_byte(String k)			{try {return Byte_.Cast(rdr.getObject(k));} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Byte_.Cls_val_name);}}
-	public boolean 		Read_bool_by_byte(String k)	{try {return Byte_.Cast(rdr.getObject(k)) == 1;} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Bool_.Cls_val_name);}}
+	public boolean 		Read_bool_by_byte(String k)	{try {return Byte_.Cast(rdr.getObject(k)) == 1;} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", BoolUtl.ClsValName);}}
 	public int			Fld_len()					{try {return rdr.getMetaData().getColumnCount();} catch (Exception e) {throw Err_.new_exc(e, "db", "field count failed", "sql", sql);}}
 	public Object 		Read_obj(String k)			{try {return rdr.getObject(k);} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "key", k, "type", Object_.Cls_val_name);}}
 	public Object 		Read_at(int i)				{try {return rdr.getObject(i + 1);} catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "idx", i, "type", Object_.Cls_val_name);}}

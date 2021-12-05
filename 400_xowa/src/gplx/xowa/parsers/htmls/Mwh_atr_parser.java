@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.htmls; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.parsers.xndes.*;	// for brys: <nowiki>, <noinclude>, <includeonly>, <onlyinclude>
 public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATTRIBS_REGEX
 	private static final byte Area__invalid = 0, Area__atr_limbo = 1, Area__key = 2, Area__eql_limbo = 3, Area__val_limbo = 4, Area__val_quote = 5, Area__val_naked = 6;
@@ -23,7 +24,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 	private final Bry_bfr key_bfr = Bry_bfr_.New(), val_bfr = Bry_bfr_.New();
 	private byte area = Area__atr_limbo;
 	private int atr_bgn = -1, key_bgn = -1, key_end = -1, eql_pos = -1, val_bgn = -1, val_end = -1;
-	private byte qte_byte = Byte_ascii.Null;
+	private byte qte_byte = AsciiByte.Null;
 	private boolean key_bfr_on = false, val_bfr_on = false, ws_is_before_val = false, qte_closed = false;
 	private int nde_uid, nde_tid;
 	public Bry_obj_ref Bry_obj() {return bry_ref;} private final Bry_obj_ref bry_ref = Bry_obj_ref.New_empty();
@@ -47,7 +48,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 						if (qte_closed)
 							Make(src, src_end);
 						else {				// dangling; EX: "a='b c=d"
-							int reset_pos = Bry_find_.Find_fwd(src, Byte_ascii.Space, val_bgn, src_end);	// try to find 1st space within quote; EX:"a='b c=d" should try to reset at c=d
+							int reset_pos = Bry_find_.Find_fwd(src, AsciiByte.Space, val_bgn, src_end);	// try to find 1st space within quote; EX:"a='b c=d" should try to reset at c=d
 							boolean reset_found = reset_pos != Bry_find_.Not_found;
 							area = Area__invalid; val_end = reset_found ? reset_pos : src_end;
 							Make(src, val_end);	// create invalid atr
@@ -73,15 +74,15 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 
 			byte b = src[pos];
 			int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(b);
-			if (b == Byte_ascii.Null) throw Err_.new_wo_type("null byte is invalid in byte array; src=", "src", String_.new_u8(src, src_bgn, src_end));
+			if (b == AsciiByte.Null) throw Err_.new_wo_type("null byte is invalid in byte array; src=", "src", String_.new_u8(src, src_bgn, src_end));
 			if (b_len > 1) {
-				b = Byte_ascii.Null; // NOTE: hacky, but if there is a Byte_ascii.Null, then it will have a b_len of 1
+				b = AsciiByte.Null; // NOTE: hacky, but if there is a Byte_ascii.Null, then it will have a b_len of 1
 			}
 			switch (area) {
 				case Area__invalid:
 					switch (b) {
 						// ws -> end invalid area
-						case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+						case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 							Make(src, pos);
 							area = Area__atr_limbo;
 							break;
@@ -93,30 +94,30 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 				case Area__atr_limbo:	// 1st area after (a) node_name, (b) attribute, (c) invalid_area
 					switch (b) {
 						// ws -> ignore; skip any ws in atr_limbo; note that once a non-ws char is encountered, it will immediately go into another area
-						case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:								
+						case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 							if (atr_bgn == -1) atr_bgn = pos;	// NOTE: atr_bgn == -1 needed for multiple spaces; ALSO: cannot move above switch b/c of <nowiki>
 							break;
 						// attribFirst -> enter Area__key; REF.MW: $attribFirst = '[:A-Z_a-z0-9]';
-						case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-						case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-						case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-						case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-						case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-						case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-						case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-						case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-						case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-						case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-						case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-						case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-						case Byte_ascii.Colon: case Byte_ascii.Underline:
-						case Byte_ascii.Null:
+						case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+						case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+						case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+						case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+						case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+						case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+						case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+						case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+						case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+						case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+						case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+						case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+						case AsciiByte.Colon: case AsciiByte.Underline:
+						case AsciiByte.Null:
 							area = Area__key;
 							if (atr_bgn == -1) atr_bgn = pos;	// NOTE: atr_bgn == -1 needed b/c of spaces
 							key_bgn = pos;
 							break;
 						// angle_bgn -> check for <nowiki>
-						case Byte_ascii.Angle_bgn:		// handle "<nowiki>"
+						case AsciiByte.AngleBgn:		// handle "<nowiki>"
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
 							if (gt_pos == Bry_find_.Not_found) {
 								area = Area__invalid; if (atr_bgn == -1) atr_bgn = pos;
@@ -133,36 +134,36 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 				case Area__key:
 					switch (b) {
 						// alphanum -> valid key chars; REF.MW: $attrib = '[:A-Z_a-z-.0-9]';
-						case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-						case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-						case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-						case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-						case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-						case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-						case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-						case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-						case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-						case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-						case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-						case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-						case Byte_ascii.Colon: case Byte_ascii.Underline: case Byte_ascii.Dash: case Byte_ascii.Dot:
+						case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+						case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+						case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+						case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+						case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+						case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+						case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+						case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+						case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+						case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+						case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+						case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+						case AsciiByte.Colon: case AsciiByte.Underline: case AsciiByte.Dash: case AsciiByte.Dot:
 							if (key_bfr_on) key_bfr.Add_byte(b);
 							break;
-						case Byte_ascii.Null:
+						case AsciiByte.Null:
 							if (key_bfr_on) key_bfr.Add_mid(src, pos, pos + b_len);
 							break;
 						// ws -> end key
-						case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+						case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 							area = Area__eql_limbo;
 							key_end = pos;
 							break;
 						// eq -> end key; go to Area_val_limbo
-						case Byte_ascii.Eq:
+						case AsciiByte.Eq:
 							area = Area__val_limbo;
 							key_end = eql_pos = pos;
 							break;	
 						// angle_bgn -> check for <nowiki>
-						case Byte_ascii.Angle_bgn:
+						case AsciiByte.AngleBgn:
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
 							if (gt_pos == Bry_find_.Not_found)	// "<" should not be in key; EX: "ke<y"
 								area = Area__invalid;
@@ -180,28 +181,28 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 				case Area__eql_limbo:
 					switch (b) {
 						// ws -> skip
-						case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space: // skip ws
+						case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space: // skip ws
 							break;
 						// eq -> enter Area__val_limbo
-						case Byte_ascii.Eq:
+						case AsciiByte.Eq:
 							eql_pos = pos;
 							area = Area__val_limbo;
 							break;
 						// attribFirst -> enter Area__key; REF.MW: $attribFirst = '[:A-Z_a-z0-9]';
-						case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-						case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-						case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-						case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-						case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-						case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-						case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-						case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-						case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-						case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-						case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-						case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-						case Byte_ascii.Colon: case Byte_ascii.Underline:
-						case Byte_ascii.Null:
+						case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+						case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+						case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+						case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+						case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+						case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+						case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+						case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+						case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+						case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+						case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+						case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+						case AsciiByte.Colon: case AsciiByte.Underline:
+						case AsciiByte.Null:
 							Make(src, pos);
 							area = Area__key;
 							atr_bgn = key_bgn = pos;
@@ -215,41 +216,41 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 				case Area__val_limbo:
 					switch (b) {
 						// ws -> skip
-						case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+						case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 							ws_is_before_val = true;
 							break;
 						// quote -> enter Area_val_quote
-						case Byte_ascii.Quote: case Byte_ascii.Apos:
+						case AsciiByte.Quote: case AsciiByte.Apos:
 							area = Area__val_quote; qte_byte = b; qte_closed = false;
 							prv_is_ws = false;
 							val_bgn = pos + 1;
 							break;
 						// alphanum -> enter Area_val_raw; REF.MW: [a-zA-Z0-9!#$%&()*,\\-.\\/:;<>?@[\\]^_`{|}~]+
-						case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-						case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-						case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-						case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-						case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-						case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-						case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-						case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-						case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-						case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-						case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-						case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-						case Byte_ascii.Bang: case Byte_ascii.Hash: case Byte_ascii.Dollar: case Byte_ascii.Percent: case Byte_ascii.Amp:
-						case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Star: case Byte_ascii.Comma: case Byte_ascii.Dash: case Byte_ascii.Dot:
-						case Byte_ascii.Backslash: case Byte_ascii.Slash: case Byte_ascii.Colon: case Byte_ascii.Semic:
-						case Byte_ascii.Question: case Byte_ascii.At:
-						case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end: case Byte_ascii.Pow: case Byte_ascii.Underline: case Byte_ascii.Tick:
-						case Byte_ascii.Curly_bgn: case Byte_ascii.Curly_end: case Byte_ascii.Pipe: case Byte_ascii.Tilde:
-						case Byte_ascii.Null:
+						case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+						case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+						case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+						case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+						case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+						case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+						case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+						case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+						case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+						case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+						case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+						case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+						case AsciiByte.Bang: case AsciiByte.Hash: case AsciiByte.Dollar: case AsciiByte.Percent: case AsciiByte.Amp:
+						case AsciiByte.ParenBgn: case AsciiByte.ParenEnd: case AsciiByte.Star: case AsciiByte.Comma: case AsciiByte.Dash: case AsciiByte.Dot:
+						case AsciiByte.Backslash: case AsciiByte.Slash: case AsciiByte.Colon: case AsciiByte.Semic:
+						case AsciiByte.Question: case AsciiByte.At:
+						case AsciiByte.BrackBgn: case AsciiByte.BrackEnd: case AsciiByte.Pow: case AsciiByte.Underline: case AsciiByte.Tick:
+						case AsciiByte.CurlyBgn: case AsciiByte.CurlyEnd: case AsciiByte.Pipe: case AsciiByte.Tilde:
+						case AsciiByte.Null:
 							area = Area__val_naked;
 							val_bgn = pos;
 							break;
 						// case Byte_ascii.Angle_end: NOTE: valid in MW; making invalid now until finding counter-example
 						// angle_bgn -> check for <nowiki>
-						case Byte_ascii.Angle_bgn:
+						case AsciiByte.AngleBgn:
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
 							if (gt_pos == Bry_find_.Not_found)
 								area = Area__invalid;	// NOTE: valid in MW; making invalid now until finding counter-example
@@ -265,7 +266,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 				case Area__val_quote: {	// EX: "'val' " in "key = 'val'"; REF.MW: \"([^<\"]*)\"
 					switch (b) {
 						// quote: check if same as opening quote
-						case Byte_ascii.Quote: case Byte_ascii.Apos:
+						case AsciiByte.Quote: case AsciiByte.Apos:
 							if (qte_closed)
 								area = Area__invalid;
 							else {
@@ -280,7 +281,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 							}
 							break;
 						// ws -> convert all ws to \s; only allow 1 ws at any point in time
-						case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:	// REF.MW:Sanitizer.php|decodeTagAttributes $value = preg_replace( '/[\t\r\n ]+/', ' ', $value );
+						case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:	// REF.MW:Sanitizer.php|decodeTagAttributes $value = preg_replace( '/[\t\r\n ]+/', ' ', $value );
 							if (qte_closed) {
 								Make(src, pos);	// NOTE: set atr_end *after* quote
 								if (atr_bgn == -1) atr_bgn = pos;	// NOTE: process ws just like Area__atr_limbo
@@ -289,12 +290,12 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 								if (!val_bfr_on) {val_bfr.Add_mid(src, val_bgn, pos); val_bfr_on = true;}	// INLINE: val_bfr.init
 								if (prv_is_ws) {}	// noop; only allow one ws at a time; EX: "a  b" -> "a b"; "a\n\nb" -> "a b"
 								else {
-									prv_is_ws = true; val_bfr.Add_byte(Byte_ascii.Space);
+									prv_is_ws = true; val_bfr.Add_byte(AsciiByte.Space);
 								}
 							}
 							break;
 						// angle_bgn -> check for <nowiki>; EX: <span title='ab<nowiki>c</nowiki>de'>
-						case Byte_ascii.Angle_bgn:
+						case AsciiByte.AngleBgn:
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
 							if (gt_pos == Bry_find_.Not_found) {	
 								// area = Area__invalid;	// "<" inside quote is invalid; EX: <span title='a<b'>c</span>
@@ -324,32 +325,32 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 				case Area__val_naked:	// no quotes; EX:a=bcd; REF.MW:([a-zA-Z0-9!#$%&()*,\\-.\\/:;<>?@[\\]^_`{|}~]+)
 					switch (b) {
 						// alphanum -> continue reading
-						case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-						case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-						case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-						case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-						case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-						case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-						case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-						case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-						case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-						case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-						case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-						case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-						case Byte_ascii.Bang: case Byte_ascii.Hash: case Byte_ascii.Dollar: case Byte_ascii.Percent: case Byte_ascii.Amp:
-						case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Star: case Byte_ascii.Comma: case Byte_ascii.Dash: case Byte_ascii.Dot:
-						case Byte_ascii.Backslash: case Byte_ascii.Slash: case Byte_ascii.Colon: case Byte_ascii.Semic:
-						case Byte_ascii.Question: case Byte_ascii.At:
-						case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end: case Byte_ascii.Pow: case Byte_ascii.Underline: case Byte_ascii.Tick:
-						case Byte_ascii.Curly_bgn: case Byte_ascii.Curly_end: case Byte_ascii.Pipe: case Byte_ascii.Tilde:
+						case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+						case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+						case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+						case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+						case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+						case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+						case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+						case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+						case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+						case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+						case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+						case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+						case AsciiByte.Bang: case AsciiByte.Hash: case AsciiByte.Dollar: case AsciiByte.Percent: case AsciiByte.Amp:
+						case AsciiByte.ParenBgn: case AsciiByte.ParenEnd: case AsciiByte.Star: case AsciiByte.Comma: case AsciiByte.Dash: case AsciiByte.Dot:
+						case AsciiByte.Backslash: case AsciiByte.Slash: case AsciiByte.Colon: case AsciiByte.Semic:
+						case AsciiByte.Question: case AsciiByte.At:
+						case AsciiByte.BrackBgn: case AsciiByte.BrackEnd: case AsciiByte.Pow: case AsciiByte.Underline: case AsciiByte.Tick:
+						case AsciiByte.CurlyBgn: case AsciiByte.CurlyEnd: case AsciiByte.Pipe: case AsciiByte.Tilde:
 							if (val_bfr_on) val_bfr.Add_byte(b);
 							break;
-						case Byte_ascii.Null:
+						case AsciiByte.Null:
 							if (val_bfr_on) val_bfr.Add_mid(src, pos, pos + b_len);
 							break;
 						// case Byte_ascii.Angle_end: NOTE: valid in MW; making invalid now until finding counter-example
 						// angle_bgn -> check for <nowiki>; EX: a=b<nowiki>c</nowiki>d
-						case Byte_ascii.Angle_bgn:
+						case AsciiByte.AngleBgn:
 							int gt_pos = Xnde_find_gt(src, pos, src_end);
 							if (gt_pos == Bry_find_.Not_found) {
 								area = Area__invalid;	// NOTE: valid in MW; making invalid now until finding counter-example
@@ -360,11 +361,11 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 							}
 							break;
 						// ws -> src_end atr
-						case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+						case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 							val_end = pos;
 							Make(src, pos);
 							break;
-						case Byte_ascii.Eq:	// EX:"a= b=c" or "a=b=c"; PAGE:en.w:2013_in_American_television
+						case AsciiByte.Eq:	// EX:"a= b=c" or "a=b=c"; PAGE:en.w:2013_in_American_television
 							if (ws_is_before_val) {		// "a= b=c"; discard 1st and resume at 2nd
 								int old_val_bgn = val_bgn;
 								area = Area__invalid; Make(src, val_bgn);	// invalidate cur atr; EX:"a="
@@ -429,8 +430,8 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 			if (val_bfr_on) val_bry = val_bfr.To_bry_and_clear();
 		}
 		int qte_tid = Mwh_atr_itm_.Mask__qte__none;
-		if (qte_byte != Byte_ascii.Null)
-			qte_tid = qte_byte == Byte_ascii.Quote ? Mwh_atr_itm_.Mask__qte_qute : Mwh_atr_itm_.Mask__qte__apos;
+		if (qte_byte != AsciiByte.Null)
+			qte_tid = qte_byte == AsciiByte.Quote ? Mwh_atr_itm_.Mask__qte_qute : Mwh_atr_itm_.Mask__qte__apos;
 		int atr_uid = atr_mgr.Add(nde_uid, nde_tid, atr_valid, false, key_exists, atr_bgn, atr_end, key_bgn, key_end, key_bry, eql_pos, qte_tid, val_bgn, val_end, val_bry);
 
 		// handle repeated atrs
@@ -444,18 +445,18 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 		}
 		
 		// reset temp variables
-		area = Area__atr_limbo; qte_byte = Byte_ascii.Null;
+		area = Area__atr_limbo; qte_byte = AsciiByte.Null;
 		atr_bgn = key_bgn = val_bgn = key_end = val_end = eql_pos = -1;
 		key_bfr_on = val_bfr_on = ws_is_before_val = qte_closed = false;
 	}
 	public int Xnde_find_gt_find(byte[] src, int pos, int end) {
 		bry_ref.Val_(Bry_.Empty);
 		byte b = src[pos];
-		if (b == Byte_ascii.Slash && pos + 1 < end) {	// if </ move pos to after /
+		if (b == AsciiByte.Slash && pos + 1 < end) {	// if </ move pos to after /
 			++pos;
 			b = src[pos];
 		}
-		int gt_pos = Bry_find_.Find_fwd(src, Byte_ascii.Gt, pos, end); if (gt_pos == Bry_find_.Not_found) return Bry_find_.Not_found;
+		int gt_pos = Bry_find_.Find_fwd(src, AsciiByte.Gt, pos, end); if (gt_pos == Bry_find_.Not_found) return Bry_find_.Not_found;
 		byte[] bry = (byte[])xnde_hash.Get_by_mid(src, pos, gt_pos); if (bry == null) return Bry_find_.Not_found;
 		bry_ref.Val_(bry);
 		return bry.length + pos;
@@ -463,7 +464,7 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 	private int Xnde_find_gt(byte[] src, int lt_pos, int end) {
 		int pos = lt_pos + 1; if (pos == end) return Bry_find_.Not_found;
 		byte b = src[pos];
-		if (b == Byte_ascii.Slash && pos + 1 < end) {
+		if (b == AsciiByte.Slash && pos + 1 < end) {
 			++pos;
 			b = src[pos];
 		}
@@ -473,10 +474,10 @@ public class Mwh_atr_parser {	// REF.MW:Sanitizer.php|decodeTagAttributes;MW_ATT
 		for (int i = match_pos; i < end; i++) {
 			b = src[i];
 			switch (b) {
-				case Byte_ascii.Gt:			return i;
-				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab: // skip any ws
+				case AsciiByte.Gt:			return i;
+				case AsciiByte.Space: case AsciiByte.Nl: case AsciiByte.Tab: // skip any ws
 					break;
-				case Byte_ascii.Slash:
+				case AsciiByte.Slash:
 					if (slash_found)		{return Bry_find_.Not_found;}	// only allow one slash
 					else					slash_found = true;
 					break;

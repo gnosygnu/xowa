@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.logs; import gplx.*; import gplx.core.*;
+package gplx.core.logs;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Gfo_log;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.objects.arrays.ArrayUtl;
 public class Gfo_log__file extends Gfo_log__base {
 	public final Gfo_log_itm_wtr fmtr;
 	private final Bry_bfr bfr = Bry_bfr_.New();
@@ -51,7 +58,7 @@ public class Gfo_log__file extends Gfo_log__base {
 		int fils_len = fils.length;
 		if (fils_len < 9) return;	// exit if less than 8 files
 		int cutoff = fils_len - 8;	
-		Array_.Sort(fils);			// sort by path
+		ArrayUtl.Sort(fils);			// sort by path
 		for (int i = 0; i < cutoff; ++i) {
 			Io_url fil = fils[i];
 			log.Info("deleting old log file", "file", fil.Raw());

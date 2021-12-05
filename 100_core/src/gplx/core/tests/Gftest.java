@@ -13,8 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.tests; import gplx.*; import gplx.core.*;
-import gplx.core.brys.*;
+package gplx.core.tests;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_split_;
+import gplx.Byte_;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.Long_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Type_ids_;
+import gplx.core.brys.Bry_bfr_able;
+import gplx.core.brys.Bry_bfr_able_;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Gftest {
 	private static final Bry_bfr bfr = Bry_bfr_.New();
 	public static void Fail(String msg_fmt, Object... msg_args) {
@@ -112,9 +127,9 @@ public class Gftest {
 		bfr.Add(Bry__line_end);
 		throw Err_.new_wo_type(bfr.To_str_and_clear());
 	}
-	public static void Eq__bool_n(boolean actl)			{Eq__bool(Bool_.N, actl, null);}
-	public static void Eq__bool_y(boolean actl)			{Eq__bool(Bool_.Y, actl, null);}
-	public static void Eq__bool_y(boolean actl, String msg_fmt, Object... msg_args)	{Eq__bool(Bool_.Y, actl, msg_fmt, msg_args);}
+	public static void Eq__bool_n(boolean actl)			{Eq__bool(BoolUtl.N, actl, null);}
+	public static void Eq__bool_y(boolean actl)			{Eq__bool(BoolUtl.Y, actl, null);}
+	public static void Eq__bool_y(boolean actl, String msg_fmt, Object... msg_args)	{Eq__bool(BoolUtl.Y, actl, msg_fmt, msg_args);}
 	public static void Eq__bool(boolean expd, boolean actl)	{Eq__bool(expd, actl, null);}
 	public static void Eq__bool(boolean expd, boolean actl, String msg_fmt, Object... msg_args) {
 		if (expd == actl) return;
@@ -142,15 +157,15 @@ public class Gftest {
 	}
 	private static void Write_fail_ary(Bry_bfr bfr, boolean[] failures, int type_id, Object expd_ary, Object actl_ary) {	
 		int len = failures.length;
-		int expd_len = Array_.Len(expd_ary);
-		int actl_len = Array_.Len(actl_ary);
+		int expd_len = ArrayUtl.Len(expd_ary);
+		int actl_len = ArrayUtl.Len(actl_ary);
 		for (int i = 0; i < len; ++i) {
 			boolean failure = failures[i];
 			int pad_len = 5 - Int_.DigitCount(i);
-			bfr.Add_int_pad_bgn(Byte_ascii.Num_0, pad_len, i).Add_byte_colon().Add_byte_space();
+			bfr.Add_int_pad_bgn(AsciiByte.Num0, pad_len, i).Add_byte_colon().Add_byte_space();
 			Write__itm(bfr, type_id, expd_ary, expd_len, i);
 			if (failure) {
-				bfr.Add(Bry__item__eq_n).Add_byte_repeat(Byte_ascii.Space, pad_len - 1);
+				bfr.Add(Bry__item__eq_n).Add_byte_repeat(AsciiByte.Space, pad_len - 1);
 				Write__itm(bfr, type_id, actl_ary, actl_len, i);
 			}
 		}
@@ -158,9 +173,9 @@ public class Gftest {
 	}
 	private static void Write__itm(Bry_bfr bfr, int type_id, Object ary, int len, int idx) {
 		if (idx < len) {
-			Object val = Array_.Get_at(ary, idx);
+			Object val = ArrayUtl.GetAt(ary, idx);
 			switch (type_id) {
-				case Type_ids_.Id__bool:	bfr.Add_yn(Bool_.Cast(val)); break;
+				case Type_ids_.Id__bool:	bfr.Add_yn(BoolUtl.Cast(val)); break;
 				case Type_ids_.Id__bry:		bfr.Add_safe((byte[])val); break;
 				case Type_ids_.Id__long:	bfr.Add_long_variable(Long_.cast(val)); break;
 				case Type_ids_.Id__int:		bfr.Add_int_variable(Int_.Cast(val)); break;
@@ -174,19 +189,19 @@ public class Gftest {
 		bfr.Add_byte_nl();
 	}
 	private static boolean[] Calc__failures(int tid, Object expd_ary, Object actl_ary) {	
-		int expd_len = Array_.Len(expd_ary);
-		int actl_len = Array_.Len(actl_ary);
+		int expd_len = ArrayUtl.Len(expd_ary);
+		int actl_len = ArrayUtl.Len(actl_ary);
 		int max_len = expd_len > actl_len ? expd_len : actl_len; if (max_len == 0) return null;
 		boolean[] rv = null;
 		for (int i = 0; i < max_len; ++i) {
-			Object expd_obj = i < expd_len ? Array_.Get_at(expd_ary, i) : null;
-			Object actl_obj = i < actl_len ? Array_.Get_at(actl_ary, i) : null;
+			Object expd_obj = i < expd_len ? ArrayUtl.GetAt(expd_ary, i) : null;
+			Object actl_obj = i < actl_len ? ArrayUtl.GetAt(actl_ary, i) : null;
 			boolean eq = false;
 			if		(expd_obj == null && actl_obj == null)	eq = true;
 			else if (expd_obj == null || actl_obj == null)	eq = false;
 			else {
 				switch (tid) {
-					case Type_ids_.Id__bool:		eq = Bool_.Cast(expd_obj) == Bool_.Cast(actl_obj); break;
+					case Type_ids_.Id__bool:		eq = BoolUtl.Cast(expd_obj) == BoolUtl.Cast(actl_obj); break;
 					case Type_ids_.Id__bry:			eq = Bry_.Eq((byte[])expd_obj, (byte[])actl_obj); break;
 					case Type_ids_.Id__long:		eq = Long_.cast(expd_obj) == Long_.cast(actl_obj); break;
 					case Type_ids_.Id__int:			eq = Int_.Cast(expd_obj) == Int_.Cast(actl_obj); break;

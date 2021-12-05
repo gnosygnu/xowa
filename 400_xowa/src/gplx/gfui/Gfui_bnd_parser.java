@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui; import gplx.*;
-import gplx.core.bits.*;
+package gplx.gfui;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.Hash_adp_bry;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.core.bits.Bitmask_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Gfui_bnd_parser {
 	private Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
 	private Hash_adp_bry
@@ -22,9 +32,9 @@ public class Gfui_bnd_parser {
 	, norm_regy = Hash_adp_bry.ci_a7()
 	;
 	private static final Gfui_bnd_tkn
-	  Itm_sym_plus		= new_sym_(Gfui_bnd_tkn.Tid_sym_plus	, new byte[] {Byte_ascii.Plus})
-	, Itm_sym_pipe		= new_sym_(Gfui_bnd_tkn.Tid_sym_pipe	, new byte[] {Byte_ascii.Pipe})
-	, Itm_sym_comma		= new_sym_(Gfui_bnd_tkn.Tid_sym_comma	, new byte[] {Byte_ascii.Comma})
+	  Itm_sym_plus		= new_sym_(Gfui_bnd_tkn.Tid_sym_plus	, new byte[] {AsciiByte.Plus})
+	, Itm_sym_pipe		= new_sym_(Gfui_bnd_tkn.Tid_sym_pipe	, new byte[] {AsciiByte.Pipe})
+	, Itm_sym_comma		= new_sym_(Gfui_bnd_tkn.Tid_sym_comma	, new byte[] {AsciiByte.Comma})
 //		, Itm_sym_ws		= new_sym_(Gfui_bnd_tkn.Tid_sym_ws		, Bry_.Empty)
 	, Itm_sym_eos		= new_sym_(Gfui_bnd_tkn.Tid_sym_eos		, Bry_.Empty)
 	;
@@ -40,34 +50,34 @@ public class Gfui_bnd_parser {
 	};
 	private byte[] src; private int src_len;
 	private List_adp tkns = List_adp_.New(); private int mod_val = Mod_val_null;
-	public String Xto_norm(String src_str) {return Convert(Bool_.Y, src_str);}
-	public String Xto_gfui(String src_str) {return Convert(Bool_.N, src_str);}
+	public String Xto_norm(String src_str) {return Convert(BoolUtl.Y, src_str);}
+	public String Xto_gfui(String src_str) {return Convert(BoolUtl.N, src_str);}
 	private String Convert(boolean src_is_gfui, String src_str) {			
 		this.src = Bry_.new_u8(src_str); this.src_len = src.length;			
 		tkns.Clear(); mod_val = Mod_val_null;
 		int pos = 0; int itm_bgn = -1, itm_end = -1; boolean is_numeric = false;
 		while (pos <= src_len) {			// loop over bytes and break up tkns by symbols
-			byte b = pos == src_len ? Byte_ascii.Nl: src[pos];	// treat eos as "\n" for purpose of separating tokens
+			byte b = pos == src_len ? AsciiByte.Nl: src[pos];	// treat eos as "\n" for purpose of separating tokens
 			Gfui_bnd_tkn sym_tkn = null;
 			switch (b) {
-				case Byte_ascii.Plus:		// simultaneous; EX: Ctrl + S
+				case AsciiByte.Plus:		// simultaneous; EX: Ctrl + S
 					sym_tkn = Itm_sym_plus;
 					break;
-				case Byte_ascii.Pipe:		// alternate; EX: Ctrl + S | Ctrl + Alt + s
+				case AsciiByte.Pipe:		// alternate; EX: Ctrl + S | Ctrl + Alt + s
 					sym_tkn = Itm_sym_pipe;
 					break;
-				case Byte_ascii.Comma:		// chorded; EX: Ctrl + S, Ctrl + T
+				case AsciiByte.Comma:		// chorded; EX: Ctrl + S, Ctrl + T
 					sym_tkn = Itm_sym_comma;
 					break;
-				case Byte_ascii.Nl:	// eos: process anything in bfr
+				case AsciiByte.Nl:	// eos: process anything in bfr
 					sym_tkn = Itm_sym_eos;
 					break;
-				case Byte_ascii.Space:
+				case AsciiByte.Space:
 					if (itm_bgn != -1)		// if word started, " " ends word; EX: "Ctrl + A"; " +" ends "Ctrl"
 						itm_end = pos;
 					++pos;
 					continue;
-				case Byte_ascii.Hash:
+				case AsciiByte.Hash:
 					if (is_numeric) throw Err_.new_wo_type("multiple numeric symbols in keycode");
 					is_numeric = true;
 					++pos;
@@ -101,7 +111,7 @@ public class Gfui_bnd_parser {
 		if (is_numeric) {	// EX: "key.#10" or "#10"
 			int tkn_bgn = itm_bgn;
 			if (src_is_gfui) {	// remove "key." in "key.#10"
-				tkn_bgn = Bry_find_.Move_fwd(src, Byte_ascii.Dot, itm_bgn, itm_end);
+				tkn_bgn = Bry_find_.Move_fwd(src, AsciiByte.Dot, itm_bgn, itm_end);
 				if (tkn_bgn == -1) throw Err_.new_wo_type("invalid keycode.dot", "keycode", Bry_.Mid(src, tkn_bgn, itm_end));
 				++tkn_bgn;		// skip #
 			}
@@ -286,7 +296,7 @@ class Gfui_bnd_tkn {
 		if (keycode != Gfui_bnd_tkn.Keycode_null) {
 			if (src_is_gfui)
 				bfr.Add(Bry_key_prefix);
-			bfr.Add_byte(Byte_ascii.Hash).Add_int_variable(keycode);
+			bfr.Add_byte(AsciiByte.Hash).Add_int_variable(keycode);
 			return;
 		}
 		byte[] bry = src_is_gfui ? bry_gfui : bry_norm;

@@ -18,7 +18,7 @@ package gplx.langs.jsons;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.String_;
 import gplx.core.intls.Utf16_;
 import gplx.langs.htmls.Gfh_utl;
@@ -107,15 +107,15 @@ public class Json_itm_str extends Json_itm_base {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Backslash:
+				case AsciiByte.Backslash:
 					b = src[++i];
 					switch (b) {	// NOTE: must properly unescape chars; EX:wd.q:2; DATE:2014-04-23
-						case Byte_ascii.Ltr_t:				bfr.Add_byte(Byte_ascii.Tab); break;
-						case Byte_ascii.Ltr_n:				bfr.Add_byte(Byte_ascii.Nl); break;
-						case Byte_ascii.Ltr_r:				bfr.Add_byte(Byte_ascii.Cr); break;
-						case Byte_ascii.Ltr_b:				bfr.Add_byte(Byte_ascii.Backfeed); break;
-						case Byte_ascii.Ltr_f:				bfr.Add_byte(Byte_ascii.Formfeed); break;
-						case Byte_ascii.Ltr_u:
+						case AsciiByte.Ltr_t:				bfr.Add_byte(AsciiByte.Tab); break;
+						case AsciiByte.Ltr_n:				bfr.Add_byte(AsciiByte.Nl); break;
+						case AsciiByte.Ltr_r:				bfr.Add_byte(AsciiByte.Cr); break;
+						case AsciiByte.Ltr_b:				bfr.Add_byte(AsciiByte.Backfeed); break;
+						case AsciiByte.Ltr_f:				bfr.Add_byte(AsciiByte.Formfeed); break;
+						case AsciiByte.Ltr_u:
 							i += 1; // +1 to skip "u"
 							int utf8_val = gplx.core.encoders.Hex_utl_.Parse_or(src, i, i + 4, -1);
 							// check for UTF surrogate-pairs; ISSUE#:487; DATE:2019-06-02
@@ -123,8 +123,8 @@ public class Json_itm_str extends Json_itm_base {
 							if (utf8_val >= Utf16_.Surrogate_hi_bgn && utf8_val <= Utf16_.Surrogate_hi_end) {
 								int lo_bgn = i + 4;   // +4 to skip 4 hex-dec chars
 								if (lo_bgn + 6 <= end // +6 to handle encoded String; EX: '\u0022'
-									&& src[lo_bgn]     == Byte_ascii.Backslash
-									&& src[lo_bgn + 1] == Byte_ascii.Ltr_u) {
+									&& src[lo_bgn]     == AsciiByte.Backslash
+									&& src[lo_bgn + 1] == AsciiByte.Ltr_u) {
 									lo_bgn = lo_bgn + 2; // +2 to skip '\' and 'u'
 									int lo = gplx.core.encoders.Hex_utl_.Parse_or(src, lo_bgn, lo_bgn + 4, -1);
 									// lo: 0xDC00-0xDFFF; 56,320-57,343
@@ -138,8 +138,8 @@ public class Json_itm_str extends Json_itm_base {
 							bfr.Add_mid(utf8_bry, 0, len);
 							i += 3; // +3 b/c for-loop will do another +1 to bring total to 4; EX: '0022'
 							break;
-						case Byte_ascii.Backslash:
-						case Byte_ascii.Slash:
+						case AsciiByte.Backslash:
+						case AsciiByte.Slash:
 						default:
 							bfr.Add_byte(b);	break;	// \?		" \ / b f n r t
 					}
@@ -153,11 +153,11 @@ public class Json_itm_str extends Json_itm_base {
 		return data_bry;
 	}
 	@Override public void Print_as_json(Bry_bfr bfr, int depth) {
-		bfr.Add_byte(Byte_ascii.Quote);
+		bfr.Add_byte(AsciiByte.Quote);
 		byte[] data_bry = this.Data_bry();
 		int data_len = data_bry.length;
 		Gfh_utl.Escape_html_to_bfr(bfr, data_bry, 0, data_len, true, true, true, true, false);	// false to apos for backwards compatibility
-		bfr.Add_byte(Byte_ascii.Quote);
+		bfr.Add_byte(AsciiByte.Quote);
 	}
 
 	public static Json_itm_str NewByDoc(Json_doc doc, int src_bgn, int src_end, boolean escaped) {return new Json_itm_str(doc, src_bgn + 1, src_end - 1, null, escaped);}

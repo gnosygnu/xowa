@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.wikis.pages.*; import gplx.xowa.guis.*; import gplx.xowa.guis.views.*;
+package gplx.xowa.apps.apis.xowa.gui.browsers;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.String_;
+import gplx.gfui.controls.standards.GfuiTextBox;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.guis.views.Xog_js_procs;
+import gplx.xowa.guis.views.Xog_tab_itm;
+import gplx.xowa.guis.views.Xog_tab_itm_;
+import gplx.xowa.guis.views.Xog_win_itm;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
 public class Xoapi_find implements Gfo_invk {
 	private Xog_find_box find_box;
 	public void Init_by_kit(Xoae_app app) {
@@ -26,8 +37,8 @@ public class Xoapi_find implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_show_by_paste)) 				find_box.Show_by_paste();
 		else if	(ctx.Match(k, Invk_exec)) 						find_box.Exec();
 		else if	(ctx.Match(k, Invk_type)) 						find_box.Exec();	// NOTE: same as exec; provided so that exec doesn't accidentally overwrite auto-type for find
-		else if	(ctx.Match(k, Invk_find_fwd)) 					find_box.Exec_by_dir(Bool_.Y);
-		else if	(ctx.Match(k, Invk_find_bwd)) 					find_box.Exec_by_dir(Bool_.N);
+		else if	(ctx.Match(k, Invk_find_fwd)) 					find_box.Exec_by_dir(BoolUtl.Y);
+		else if	(ctx.Match(k, Invk_find_bwd)) 					find_box.Exec_by_dir(BoolUtl.N);
 		else if	(ctx.Match(k, Invk_case_toggle)) 				find_box.Case_toggle();
 		else if	(ctx.Match(k, Invk_wrap_toggle)) 				find_box.Wrap_toggle();
 		else if	(ctx.Match(k, Invk_hide)) 						find_box.Hide();
@@ -51,7 +62,7 @@ class Xog_find_box {
 		app.Gui_mgr().Layout().Find_close();
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		if (tab.View_mode() == Xopg_view_mode_.Tid__read)	// do not fire find("") for edit / html, else focus issues; DATE:2015-06-10
-			Exec_find(prv_find_text, Bool_.N);
+			Exec_find(prv_find_text, BoolUtl.N);
 	}
 	public void Show_by_paste()	{
 		this.Show();
@@ -67,7 +78,7 @@ class Xog_find_box {
 	}
 	public void Exec() {
 		prv_find_text = find_box.Text(); 
-		Exec_find(prv_find_text, Bool_.Y);
+		Exec_find(prv_find_text, BoolUtl.Y);
 	}
 	private void Exec_find(String find, boolean highlight_matches) {
 		Xog_tab_itm tab = win.Tab_mgr().Active_tab(); if (tab == Xog_tab_itm_.Null) return;

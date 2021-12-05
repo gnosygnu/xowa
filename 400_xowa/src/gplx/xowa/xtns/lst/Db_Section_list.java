@@ -28,7 +28,7 @@ import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
 import gplx.xowa.parsers.tmpls.Xot_defn_tmpl;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Hash_adp_bry;
 
 public class Db_Section_list {
@@ -220,13 +220,13 @@ public class Db_Section_list {
 		try {
 			wiki.Parser_mgr().Lst__recursing_(true);
 			Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
-			page.Html_data().Indicators().Enabled_(Bool_.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
+			page.Html_data().Indicators().Enabled_(BoolUtl.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
 			xtn_root = Bld_root_nde(full_bfr, lst_page_regy, page_bry);	// NOTE: this effectively reparses page twice; needed b/c of "if {| : ; # *, auto add new_line" which can build different tokens
 		} finally {
 			wiki.Parser_mgr().Lst__recursing_(false);
 			full_bfr.Mkr_rls();
 		}
-		page.Html_data().Indicators().Enabled_(Bool_.Y);
+		page.Html_data().Indicators().Enabled_(BoolUtl.Y);
 		if (xtn_root == null) return null;
 		//html_wtr.Write_tkn_to_html(bfr, ctx, hctx, xtn_root.Root_src(), xnde, Xoh_html_wtr.Sub_idx_null, xtn_root);
                 return null;

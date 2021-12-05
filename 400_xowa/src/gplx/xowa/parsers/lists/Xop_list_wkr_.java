@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lists; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lists; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.*;
 public class Xop_list_wkr_ {
 	public static byte[] MakeSymAry(byte[] curSymAry, int curSymLen) {
 		byte[] rv = new byte[curSymLen];
@@ -23,10 +25,10 @@ public class Xop_list_wkr_ {
 	}
 	public static byte Compare_normalize(byte b) {	// convert : to ; for sake of determining levels; EX: ";:" is actually same group
 		switch (b) {
-			case Byte_ascii.Star:
-			case Byte_ascii.Hash:
-			case Byte_ascii.Semic:		return b;
-			case Byte_ascii.Colon:		return Byte_ascii.Semic;
+			case AsciiByte.Star:
+			case AsciiByte.Hash:
+			case AsciiByte.Semic:		return b;
+			case AsciiByte.Colon:		return AsciiByte.Semic;
 			default:					throw Err_.new_unhandled(b);
 		}
 	}

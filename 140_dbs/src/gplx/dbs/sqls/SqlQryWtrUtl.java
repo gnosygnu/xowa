@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sqls;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.String_;
 import gplx.dbs.sqls.wtrs.Sql_core_wtr;
 import gplx.dbs.sqls.wtrs.Sql_core_wtr__mysql;
@@ -24,7 +24,7 @@ public class SqlQryWtrUtl {
 	public static SqlQryWtr NewMysql()  {return new Sql_core_wtr__mysql();}
 	public static SqlQryWtr NewSqlite() {return new Sql_core_wtr__sqlite();}
 
-	public static final byte Like_wildcard = Byte_ascii.Percent;
+	public static final byte Like_wildcard = AsciiByte.Percent;
 	public static String QuoteArg(String s) {    // only for constructing DEBUG SQL strings
 		return "'" + String_.Replace(s, "'", "''") + "'";
 	}

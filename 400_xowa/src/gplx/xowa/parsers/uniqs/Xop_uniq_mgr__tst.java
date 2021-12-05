@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.uniqs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.parsers.uniqs;
+import gplx.Bry_;
+import gplx.Int_ary_;
+import gplx.String_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Xop_uniq_mgr__tst {
 	private final Xop_uniq_mgr__fxt fxt = new Xop_uniq_mgr__fxt();
 	@Before public void init() {fxt.Init();}
@@ -65,7 +71,7 @@ class Xop_uniq_mgr__fxt {
 		Gftest.Eq__str(expd, String_.new_a7(mgr.Uniq_bry_new()), "unique_bry");
 	}
 	public void Test__add(String raw, String expd) {
-		Gftest.Eq__str(expd, String_.new_a7(mgr.Add(Bool_.Y, Bry_.new_a7("item"), Bry_.new_a7(raw))), "add");
+		Gftest.Eq__str(expd, String_.new_a7(mgr.Add(BoolUtl.Y, Bry_.new_a7("item"), Bry_.new_a7(raw))), "add");
 	}
 	public void Test__get(String key, String expd) {
 		Gftest.Eq__str(expd, String_.new_a7(mgr.Get(Bry_.new_a7(key))), "get");

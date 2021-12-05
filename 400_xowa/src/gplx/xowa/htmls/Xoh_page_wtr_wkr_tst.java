@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
@@ -38,12 +38,12 @@ public class Xoh_page_wtr_wkr_tst {
 		fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_a7("pagetitle-view-mainpage")).Atrs_set(Bry_.new_a7("{{SITENAME}} - WikiDescription"), false, true);
 		fxt.Wiki().Msg_mgr().Get_or_make(Bry_.new_a7("pagetitle")).Atrs_set(Bry_.new_a7("~{0} - {{SITENAME}}"), true, true);
 
-		fxt.Test_BuildPagenameForTab("basic"            , "Earth"                              , Bool_.N,"Earth");
-		fxt.Test_BuildPagenameForTab("ns"               , "File:A.png"                         , Bool_.N,"File:A.png");
-		fxt.Test_BuildPagenameForTab("special"          , "Special:Search/earth"               , Bool_.N,"Special:Search/earth");
-		fxt.Test_BuildPagenameForTab("special:no qargs" , "Special:Search/earth"               , Bool_.N,"Special:Search/earth?fulltext=y");
-		fxt.Test_BuildPagenameForTab("http.page"        , "Earth - Wikipedia"                  , Bool_.Y,"Earth");
-		fxt.Test_BuildPagenameForTab("http.mainpage"    , "Wikipedia - WikiDescription"        , Bool_.Y,"Main_Page");
+		fxt.Test_BuildPagenameForTab("basic"            , "Earth"                              , BoolUtl.N,"Earth");
+		fxt.Test_BuildPagenameForTab("ns"               , "File:A.png"                         , BoolUtl.N,"File:A.png");
+		fxt.Test_BuildPagenameForTab("special"          , "Special:Search/earth"               , BoolUtl.N,"Special:Search/earth");
+		fxt.Test_BuildPagenameForTab("special:no qargs" , "Special:Search/earth"               , BoolUtl.N,"Special:Search/earth?fulltext=y");
+		fxt.Test_BuildPagenameForTab("http.page"        , "Earth - Wikipedia"                  , BoolUtl.Y,"Earth");
+		fxt.Test_BuildPagenameForTab("http.mainpage"    , "Wikipedia - WikiDescription"        , BoolUtl.Y,"Main_Page");
 	}
 	@Test public void BuildPagenameForH1() {
 		fxt.Test_BuildPagenameForH1("Full_txt"         , "Two words"           , "Two_words", null);

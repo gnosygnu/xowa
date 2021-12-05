@@ -13,13 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
-import gplx.core.criterias.*;
+package gplx.dbs.qrys;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.core.criterias.Criteria;
+import gplx.core.criterias.Criteria_;
+import gplx.dbs.Db_qry;
+import gplx.dbs.Db_qry_;
 import gplx.dbs.sqls.SqlQryWtr;
-import gplx.dbs.sqls.itms.*;
+import gplx.dbs.sqls.itms.Sql_from_clause;
+import gplx.dbs.sqls.itms.Sql_group_clause;
+import gplx.dbs.sqls.itms.Sql_join_fld;
+import gplx.dbs.sqls.itms.Sql_order_clause;
+import gplx.dbs.sqls.itms.Sql_order_fld;
+import gplx.dbs.sqls.itms.Sql_select_clause;
+import gplx.dbs.sqls.itms.Sql_select_fld;
+import gplx.dbs.sqls.itms.Sql_tbl_itm;
+import gplx.dbs.sqls.itms.Sql_where_clause;
+import gplx.objects.primitives.BoolUtl;
 public class Db_qry__select_cmd implements Db_qry {
 	public int				Tid()				{return Db_qry_.Tid_select;}
-	public boolean ReturnsRdr()		{return Bool_.Y;}
+	public boolean ReturnsRdr()		{return BoolUtl.Y;}
 	public String BaseTable()		{return from.Base_tbl.Name;}
 	public Sql_from_clause		From()				{return from;} private Sql_from_clause from;
 	public Db_qry__select_cmd From_(String tbl) {return From_(tbl, Sql_tbl_itm.Alias__null);}
@@ -62,10 +76,10 @@ public class Db_qry__select_cmd implements Db_qry {
 		return this;
 	}
 	public Sql_order_clause Order() {return order;} private Sql_order_clause order = null;
-	public Db_qry__select_cmd Order_asc_(String fld) {return Order_(fld, Bool_.Y);}
-	public Db_qry__select_cmd Order_(String fld)				{return Order_(Sql_order_fld.Tbl__null, fld, Bool_.Y);}
+	public Db_qry__select_cmd Order_asc_(String fld) {return Order_(fld, BoolUtl.Y);}
+	public Db_qry__select_cmd Order_(String fld)				{return Order_(Sql_order_fld.Tbl__null, fld, BoolUtl.Y);}
 	public Db_qry__select_cmd Order_(String fld, boolean asc)		{return Order_(Sql_order_fld.Tbl__null, fld, asc);}
-	public Db_qry__select_cmd Order_(String tbl, String fld)	{return Order_(tbl, fld, Bool_.Y);}
+	public Db_qry__select_cmd Order_(String tbl, String fld)	{return Order_(tbl, fld, BoolUtl.Y);}
 	public Db_qry__select_cmd Order_(String tbl, String fld, boolean asc) {
 		if (order == null) order = new Sql_order_clause();
 		Sql_order_fld item = new Sql_order_fld(tbl, fld, asc ? Sql_order_fld.Sort__nil : Sql_order_fld.Sort__dsc);
@@ -108,6 +122,6 @@ public class Db_qry__select_cmd implements Db_qry {
 		return this;
 	}
 	
-	public String ToSqlExec(SqlQryWtr wtr)		{return wtr.ToSqlStr(this, Bool_.N);}
-	public String		To_sql__prep(SqlQryWtr wtr)		{return wtr.ToSqlStr(this, Bool_.Y);}
+	public String ToSqlExec(SqlQryWtr wtr)		{return wtr.ToSqlStr(this, BoolUtl.N);}
+	public String		To_sql__prep(SqlQryWtr wtr)		{return wtr.ToSqlStr(this, BoolUtl.Y);}
 }

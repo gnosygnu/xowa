@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.htmls;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_bfr;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.Gfo_usr_dlg_;
 import gplx.langs.htmls.Gfh_tag_;
@@ -80,7 +80,7 @@ public class Xoh_html_wtr {
 	public Ref_html_wtr			Ref_wtr() {return ref_wtr;} private final Ref_html_wtr ref_wtr;
 
 	public void Init_by_wiki(Xowe_wiki wiki) {
-		cfg.Toc__show_(Bool_.Y).Lnki__title_(true).Lnki__visited_y_().Lnki__id_(Bool_.Y);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
+		cfg.Toc__show_(BoolUtl.Y).Lnki__title_(true).Lnki__visited_y_().Lnki__id_(BoolUtl.Y);	// NOTE: set during Init_by_wiki, b/c all tests assume these are false
 		ref_wtr.Init_by_wiki(wiki);
 		lnki_wtr.Init_by_wiki(wiki);
 	}
@@ -148,7 +148,7 @@ public class Xoh_html_wtr {
 		--stack_counter;
 	}
 	private void Html_ncr(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_amp_tkn_num tkn)	{
-		bfr.Add_byte(Byte_ascii.Amp).Add_byte(Byte_ascii.Hash).Add_int_variable(tkn.Val()).Add_byte(Byte_ascii.Semic);	// NOTE: do not literalize, else browser may not display multi-char bytes properly; EX: &#160; gets added as &#160; not as {192,160}; DATE:2013-12-09
+		bfr.Add_byte(AsciiByte.Amp).Add_byte(AsciiByte.Hash).Add_int_variable(tkn.Val()).Add_byte(AsciiByte.Semic);	// NOTE: do not literalize, else browser may not display multi-char bytes properly; EX: &#160; gets added as &#160; not as {192,160}; DATE:2013-12-09
 	}
 	private void Html_ref(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_amp_tkn_ent tkn) {
 		if (tkn.Itm_is_custom())	// used by <nowiki>; EX:<nowiki>&#60;</nowiki> -> &xowa_lt; DATE:2014-11-07
@@ -161,7 +161,7 @@ public class Xoh_html_wtr {
 		if (hctx.Mode_is_alt()) return;	// ignore apos if alt; EX: [[File:A.png|''A'']] should have alt of A; DATE:2013-10-25
 		int literal_apos = apos.Apos_lit();
 		if (literal_apos > 0)
-			bfr.Add_byte_repeat(Byte_ascii.Apos, literal_apos);
+			bfr.Add_byte_repeat(AsciiByte.Apos, literal_apos);
 		switch (apos.Apos_cmd()) {
 			case Xop_apos_tkn_.Cmd_b_bgn:			bfr.Add(Gfh_tag_.B_lhs); break;
 			case Xop_apos_tkn_.Cmd_b_end:			bfr.Add(Gfh_tag_.B_rhs); break;
@@ -181,20 +181,20 @@ public class Xoh_html_wtr {
 	}
 	private void List(Bry_bfr bfr, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_list_tkn list) {
 		if (hctx.Mode_is_alt()) {					// alt; add literally; EX: "*" for "\n*"; note that \n is added in New_line()
-			if (list.List_bgn() == Bool_.Y_byte) {	// bgn tag
+			if (list.List_bgn() == BoolUtl.YByte) {	// bgn tag
 				bfr.Add_byte(list.List_itmTyp());	// add literal byte
 			}
 			else {}									// end tag; ignore
 		}
 		else {
 			byte list_itm_type = list.List_itmTyp();
-			if (list.List_bgn() == Bool_.Y_byte) {
+			if (list.List_bgn() == BoolUtl.YByte) {
 				if (list.List_sub_first()) List_grp_bgn(bfr, ctx, hctx, src, list_itm_type);
 				List_itm_bgn(bfr, ctx, hctx, src, list_itm_type);
 			}
 			else {
 				List_itm_end(bfr, ctx, hctx, src, list_itm_type);
-				if (list.List_sub_last() == Bool_.Y_byte) List_grp_end(bfr, ctx, hctx, src, list_itm_type);
+				if (list.List_sub_last() == BoolUtl.YByte) List_grp_end(bfr, ctx, hctx, src, list_itm_type);
 			}
 		}
 	}
@@ -209,7 +209,7 @@ public class Xoh_html_wtr {
 		}
 		if (!page.Html_data().Writing_hdr_for_toc()) {
 			if (bfr.Len() > 0) bfr.Add_byte_nl();	// NOTE: do not add newLine if start 
-			if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
+			if (indent_level > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent_level * 2);
 		}
 		bfr.Add(tag);
 		++indent_level;
@@ -225,7 +225,7 @@ public class Xoh_html_wtr {
 		}
 		if (!page.Html_data().Writing_hdr_for_toc()) {
 			bfr.Add_byte_nl();
-			if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
+			if (indent_level > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent_level * 2);
 		}
 		bfr.Add(tag);
 		++indent_level;
@@ -242,7 +242,7 @@ public class Xoh_html_wtr {
 		}
 		if (!page.Html_data().Writing_hdr_for_toc()) {
 			bfr.Add_byte_nl();
-			if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
+			if (indent_level > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent_level * 2);
 		}
 		bfr.Add(tag);
 	}
@@ -258,8 +258,8 @@ public class Xoh_html_wtr {
 			default: throw Err_.new_unhandled(type);
 		}
 		if (!page.Html_data().Writing_hdr_for_toc()) {
-			bfr.Add_byte_if_not_last(Byte_ascii.Nl);
-			if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
+			bfr.Add_byte_if_not_last(AsciiByte.Nl);
+			if (indent_level > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent_level * 2);
 		}
 		bfr.Add(tag);
 	}
@@ -268,7 +268,7 @@ public class Xoh_html_wtr {
 			bfr.Add_byte_space();
 		else {
 			if (tkn.Nl_tid() == Xop_nl_tkn.Tid_char) {
-				bfr.Add_byte_if_not_last(Byte_ascii.Nl);
+				bfr.Add_byte_if_not_last(AsciiByte.Nl);
 			}
 		}
 	}
@@ -342,9 +342,9 @@ public class Xoh_html_wtr {
 			case Xop_xnde_tag_.Tid__pre: {
 				if (xnde.Tag_open_end() == xnde.Tag_close_bgn()) return; // ignore empty tags, else blank pre line will be printed; DATE:2014-03-12
 				byte[] name = tag.Name_bry();
-				bfr.Add_byte(Byte_ascii.Angle_bgn).Add(name);
+				bfr.Add_byte(AsciiByte.AngleBgn).Add(name);
 				if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(tag_id, hctx, src, xnde.Atrs_bgn(), xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
-				bfr.Add_byte(Byte_ascii.Angle_end);
+				bfr.Add_byte(AsciiByte.AngleEnd);
 				Xnde_subs_escape(bfr, ctx, hctx, src, xnde, false, true);
 				Gfh_tag_.Bld_rhs(bfr, name);
 				break;
@@ -353,12 +353,12 @@ public class Xoh_html_wtr {
 				byte[] name = tag.Name_bry();
 				int bfr_len = bfr.Len();
 				if (!page.Html_data().Writing_hdr_for_toc()) {
-					if (bfr_len > 0 && bfr.Bfr()[bfr_len - 1] != Byte_ascii.Nl) bfr.Add_byte_nl();	// NOTE: always add nl before li else some lists will merge and force long horizontal bar; EX:w:Music
+					if (bfr_len > 0 && bfr.Bfr()[bfr_len - 1] != AsciiByte.Nl) bfr.Add_byte_nl();	// NOTE: always add nl before li else some lists will merge and force long horizontal bar; EX:w:Music
 				}
 				if (xnde.Tag_visible()) {
-					bfr.Add_byte(Byte_ascii.Angle_bgn).Add(name);
+					bfr.Add_byte(AsciiByte.AngleBgn).Add(name);
 					if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(tag_id, hctx, src, xnde.Atrs_bgn(), xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
-					bfr.Add_byte(Byte_ascii.Angle_end);
+					bfr.Add_byte(AsciiByte.AngleEnd);
 				}
 				Xnde_subs(bfr, ctx, hctx, src, xnde);
 				if (xnde.Tag_visible())
@@ -430,16 +430,16 @@ public class Xoh_html_wtr {
 						return;
 					}
 				}
-				bfr.Add_byte(Byte_ascii.Angle_bgn).Add(tag.Name_bry());	// escape bgn
+				bfr.Add_byte(AsciiByte.AngleBgn).Add(tag.Name_bry());	// escape bgn
 				if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(tag_id, hctx, src, xnde.Atrs_bgn(), xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
 				switch (xnde.CloseMode()) {
 					case Xop_xnde_tkn.CloseMode_inline:
-						bfr.Add_byte(Byte_ascii.Slash).Add_byte(Byte_ascii.Angle_end);
+						bfr.Add_byte(AsciiByte.Slash).Add_byte(AsciiByte.AngleEnd);
 						break;
 					default:	// NOTE: close tag, even if dangling; EX: <center>a -> <center>a</center>
-						bfr.Add_byte(Byte_ascii.Angle_end);
+						bfr.Add_byte(AsciiByte.AngleEnd);
 						Xnde_subs(bfr, ctx, hctx, src, xnde);
-						bfr.Add_byte(Byte_ascii.Angle_bgn).Add_byte(Byte_ascii.Slash).Add(tag.Name_bry()).Add_byte(Byte_ascii.Angle_end);
+						bfr.Add_byte(AsciiByte.AngleBgn).Add_byte(AsciiByte.Slash).Add(tag.Name_bry()).Add_byte(AsciiByte.AngleEnd);
 						break;
 				}
 				break;
@@ -460,7 +460,7 @@ public class Xoh_html_wtr {
 				default:
 					if (tkn_tid == Xop_tkn_itm_.Tid_html_ncr) {					// html_entity &#32; needed for fr.wikipedia.org and many spans with <span>&#32;</span>; DATE:2013-06-18
 						Xop_amp_tkn_num ncr_tkn = (Xop_amp_tkn_num)sub;
-						if (ncr_tkn.Val() == Byte_ascii.Space
+						if (ncr_tkn.Val() == AsciiByte.Space
 							|| ncr_tkn.Val() == 160
 							) {
 
@@ -471,18 +471,18 @@ public class Xoh_html_wtr {
 					if (ws_bfr.Len() > 0) bfr.Add_bfr_and_clear(ws_bfr);		// dump ws_bfr to real bfr
 					if (at_bgn) {												// 1st non-ws tkn; add open tag; <b>
 						at_bgn = false;
-						bfr.Add_byte(Byte_ascii.Angle_bgn).Add(name);
+						bfr.Add_byte(AsciiByte.AngleBgn).Add(name);
 						if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(tag_id, hctx, src, xnde.Atrs_bgn(), xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
-						bfr.Add_byte(Byte_ascii.Angle_end);
+						bfr.Add_byte(AsciiByte.AngleEnd);
 					}
 					Write_tkn(bfr, ctx, hctx, src, xnde, i, sub);				// NOTE: never escape; <p>, <table>, <center> etc may have nested nodes
 					break;
 			}
 		}
 		if (at_bgn) {	// occurs when xnde is empty; EX: <b></b>
-			bfr.Add_byte(Byte_ascii.Angle_bgn).Add(name);
+			bfr.Add_byte(AsciiByte.AngleBgn).Add(name);
 			if (xnde.Atrs_bgn() > Xop_tblw_wkr.Atrs_ignore_check) Xnde_atrs(tag_id, hctx, src, xnde.Atrs_bgn(), xnde.Atrs_end(), xnde.Atrs_ary(), bfr);
-			bfr.Add_byte(Byte_ascii.Angle_end);
+			bfr.Add_byte(AsciiByte.AngleEnd);
 		}
 		Gfh_tag_.Bld_rhs(bfr, name);										// NOTE: inline is never written as <b/>; will be written as <b></b>; SEE: NOTE_1
 		if (ws_bfr.Len() > 0) bfr.Add_bfr_and_clear(ws_bfr);				// dump any leftover ws to bfr; handles "<b>c </b>" -> "<b>c</b> "
@@ -504,12 +504,12 @@ public class Xoh_html_wtr {
 			&&	Xoh_display_ttl_wtr.Is_style_restricted(bfr, hctx, src, atr, atr_key))
 			return;
 	
-		bfr.Add_byte(Byte_ascii.Space);	// add space before every attribute
+		bfr.Add_byte(AsciiByte.Space);	// add space before every attribute
 		if (atr_key != null) {
 			bfr.Add(atr_key);
-			bfr.Add_byte(Byte_ascii.Eq);
+			bfr.Add_byte(AsciiByte.Eq);
 		}
-		byte quote_byte = atr.Qte_byte(); if (quote_byte == Byte_ascii.Null) quote_byte = Byte_ascii.Quote;
+		byte quote_byte = atr.Qte_byte(); if (quote_byte == AsciiByte.Null) quote_byte = AsciiByte.Quote;
 		bfr.Add_byte(quote_byte);
 		if (atr.Key_tid() == Mwh_atr_itm_.Key_tid__id) {	// ids should not have spaces; DATE:2013-04-01
 			if (atr.Val_bry() == null)
@@ -571,13 +571,13 @@ public class Xoh_html_wtr {
 			bfr.Add_byte_space();
 		else {
 			if (!page.Html_data().Writing_hdr_for_toc()) {
-				bfr.Add_byte_if_not_last(Byte_ascii.Nl);
-				if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
+				bfr.Add_byte_if_not_last(AsciiByte.Nl);
+				if (indent_level > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent_level * 2);
 			}
 			bfr.Add(bgn);
 			int atrs_bgn = tkn.Atrs_bgn();
 			if (atrs_bgn != -1) Xnde_atrs(tkn.Tblw_tid(), hctx, src, atrs_bgn, tkn.Atrs_end(), tkn.Atrs_ary(), bfr); //bfr.Add_byte(Byte_ascii.Space).Add_mid(src, atrs_bgn, tkn.Atrs_end());
-			bfr.Add_byte(Byte_ascii.Angle_end);
+			bfr.Add_byte(AsciiByte.AngleEnd);
 			++indent_level;
 		}
 		int subs_len = tkn.Subs_len();
@@ -590,12 +590,12 @@ public class Xoh_html_wtr {
 		else {
 			--indent_level;
 			if (!page.Html_data().Writing_hdr_for_toc()) {
-				bfr.Add_byte_if_not_last(Byte_ascii.Nl);
-				if (indent_level > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent_level * 2);
+				bfr.Add_byte_if_not_last(AsciiByte.Nl);
+				if (indent_level > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent_level * 2);
 			}
 			bfr.Add(end);
 			if (!page.Html_data().Writing_hdr_for_toc()) {
-				bfr.Add_byte_if_not_last(Byte_ascii.Nl);
+				bfr.Add_byte_if_not_last(AsciiByte.Nl);
 			}
 		}
 	}

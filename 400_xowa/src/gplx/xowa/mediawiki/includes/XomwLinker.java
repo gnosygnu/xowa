@@ -13,13 +13,35 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*;
-import gplx.xowa.mediawiki.*;
-import gplx.core.btries.*;
-import gplx.langs.htmls.*;
-import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.linkers.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.xowa.mediawiki.includes.filerepo.file.*; import gplx.xowa.mediawiki.includes.media.*;
-import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Bry_split_;
+import gplx.Hash_adp_bry;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.XomwEnv;
+import gplx.xowa.mediawiki.XophpMath_;
+import gplx.xowa.mediawiki.XophpObject_;
+import gplx.xowa.mediawiki.includes.filerepo.file.XomwFile;
+import gplx.xowa.mediawiki.includes.linkers.XomwLinkRenderer;
+import gplx.xowa.mediawiki.includes.media.XomwMediaTransformOutput;
+import gplx.xowa.mediawiki.includes.media.XomwThumbnailImage;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserIface;
+import gplx.xowa.mediawiki.includes.parsers.lnkis.Xomw_params_frame;
+import gplx.xowa.mediawiki.includes.parsers.lnkis.Xomw_params_handler;
+import gplx.xowa.mediawiki.includes.parsers.lnkis.Xomw_params_mto;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_itm;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_mgr;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_opt_mgr;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_qry_mgr;
 /*	TODO.XO
 	* thumb = $file->getUnscaledThumb(handlerParams);
 	* P8: wfMessage
@@ -472,7 +494,7 @@ public class XomwLinker {
 		bfr.Add(prefix);
 		bfr.Add(s);
 		bfr.Add(postfix);
-		Bry_.Replace_all_direct(bfr.Bfr(), Byte_ascii.Nl, Byte_ascii.Space, rv_bgn, bfr.Len());	
+		Bry_.Replace_all_direct(bfr.Bfr(), AsciiByte.Nl, AsciiByte.Space, rv_bgn, bfr.Len());
 	}
 	// Get the link parameters for MediaTransformOutput::toHtml() from given
 	// frame parameters supplied by the Parser.
@@ -659,7 +681,7 @@ public class XomwLinker {
 			}
 		}
 		bfr.Add_str_a7("  <div class=\"thumbcaption\">").Add(zoom_icon).Add(frameParams.caption).Add_str_a7("</div></div></div>");
-		Bry_.Replace_all_direct(bfr.Bfr(), Byte_ascii.Nl, Byte_ascii.Space, rv_bgn, bfr.Len());	// XO.MW:str_replace("\n", ' ', $s);
+		Bry_.Replace_all_direct(bfr.Bfr(), AsciiByte.Nl, AsciiByte.Space, rv_bgn, bfr.Len());	// XO.MW:str_replace("\n", ' ', $s);
 	}
 //		/**
 //		* Process responsive images: add 1.5x and 2x subimages to the thumbnail, where
@@ -884,8 +906,8 @@ public class XomwLinker {
 		else {
 			// Merge the rel attributes.
 			byte[] cur_rel = cur_rel_atr.Val();
-			Bry_split_.Split(new_rel, 0, new_rel.length, Byte_ascii.Space, Bool_.N, splitter);	// $newRels = explode(' ', $newRel);
-			Bry_split_.Split(cur_rel, 0, cur_rel.length, Byte_ascii.Space, Bool_.N, splitter);	// $oldRels = explode(' ', $attribs['rel']);
+			Bry_split_.Split(new_rel, 0, new_rel.length, AsciiByte.Space, BoolUtl.N, splitter);	// $newRels = explode(' ', $newRel);
+			Bry_split_.Split(cur_rel, 0, cur_rel.length, AsciiByte.Space, BoolUtl.N, splitter);	// $oldRels = explode(' ', $attribs['rel']);
 			cur_rel_atr.Val_(splitter.To_bry());		// $attribs['rel'] = implode(' ', $combined);				
 		}
 		// XO.MW.HOOK:LinkerMakeExternalLink
@@ -1385,7 +1407,7 @@ public class XomwLinker {
 		// Some namespaces don't allow subpages,
 		// so only perform processing if subpages are allowed
 		if (context_title != null) {// && context_title.Ns().Subpages_enabled()) {
-			int hash = Bry_find_.Find_fwd(target, Byte_ascii.Hash);
+			int hash = Bry_find_.Find_fwd(target, AsciiByte.Hash);
 			byte[] suffix = null;
 			if (hash != Bry_find_.Not_found) {
 				suffix = Bry_.Mid(target, hash);
@@ -1397,10 +1419,10 @@ public class XomwLinker {
 			// bug 7425
 			target = Bry_.Trim(target);
 			// Look at the first character
-			if (target != Bry_.Empty && target[0] == Byte_ascii.Slash) {
+			if (target != Bry_.Empty && target[0] == AsciiByte.Slash) {
 				// / at end means we don't want the slash to be shown
 				int target_len = target.length;
-				int trailing_slashes_bgn = Bry_find_.Find_bwd_while(target, target_len, 0, Byte_ascii.Slash) + 1;
+				int trailing_slashes_bgn = Bry_find_.Find_bwd_while(target, target_len, 0, AsciiByte.Slash) + 1;
 				byte[] no_slash = null;
 				if (trailing_slashes_bgn != target_len) {
 					no_slash = target = Bry_.Mid(target, 1, trailing_slashes_bgn);
@@ -1409,7 +1431,7 @@ public class XomwLinker {
 					no_slash = Bry_.Mid(target, 1);
 				}
 
-				ret = Bry_.Add(context_title.getPrefixedText(), Byte_ascii.Slash_bry, Bry_.Trim(no_slash), suffix);
+				ret = Bry_.Add(context_title.getPrefixedText(), AsciiByte.SlashBry, Bry_.Trim(no_slash), suffix);
 				if (text == Bry_.Empty) {
 					text = Bry_.Add(target, suffix);
 				} // this might be changed for ugliness reasons
@@ -1423,17 +1445,17 @@ public class XomwLinker {
 					dot2_stripped = Bry_.Mid(dot2_stripped, 3);
 				}
 				if (dot2_count > 0) {
-					byte[][] exploded = Bry_split_.Split(context_title.getPrefixedText(), Byte_ascii.Slash);
+					byte[][] exploded = Bry_split_.Split(context_title.getPrefixedText(), AsciiByte.Slash);
 					int exploded_len = exploded.length;
 					if (exploded_len > dot2_count) { // not allowed to go below top level page
 						//	PORTED: ret = implode('/', array_slice($exploded, 0, -dot2_count));
 						int implode_len = exploded_len - dot2_count;
 						for (int i = 0; i < implode_len; i++) {
-							if (i != 0) tmp.Add_byte(Byte_ascii.Slash);
+							if (i != 0) tmp.Add_byte(AsciiByte.Slash);
 							tmp.Add(exploded[i]);
 						}
 						// / at the end means don't show full path
-						if (Bry_.Has_at_end(dot2_stripped, Byte_ascii.Slash)) {
+						if (Bry_.Has_at_end(dot2_stripped, AsciiByte.Slash)) {
 							dot2_stripped = Bry_.Mid(dot2_stripped, 0, dot2_stripped.length - 1);
 							if (text == Bry_.Empty) {
 								text = Bry_.Add(dot2_stripped, suffix);
@@ -1441,7 +1463,7 @@ public class XomwLinker {
 						}
 						dot2_stripped = Bry_.Trim(dot2_stripped);
 						if (dot2_stripped != Bry_.Empty) {
-							tmp.Add_bry_many(Byte_ascii.Slash_bry, dot2_stripped);
+							tmp.Add_bry_many(AsciiByte.SlashBry, dot2_stripped);
 						}
 						tmp.Add(suffix);
 						ret = tmp.To_bry_and_clear();

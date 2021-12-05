@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
+package gplx.xowa.files.fsdb.fs_roots; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
 import gplx.xowa.guis.cbks.js.*;
 public class Fs_root_core implements Xof_fsdb_mgr, Gfo_invk {	// reads images from file-system dir
 	private Xowe_wiki wiki;
@@ -59,7 +61,7 @@ public class Fs_root_core implements Xof_fsdb_mgr, Gfo_invk {	// reads images fr
 	private static final String Invk_root_dir_ = "root_dir_", Invk_orig_dir_ = "orig_dir_", Invk_thumb_dir_ = "thumb_dir_";
 	private Io_url To_url(byte[] v) {
 		if (gplx.core.envs.Op_sys.Cur().Tid_is_wnt())
-			v = Bry_.Replace(v, Byte_ascii.Slash, Byte_ascii.Backslash);
+			v = Bry_.Replace(v, AsciiByte.Slash, AsciiByte.Backslash);
 		return gplx.core.brys.fmtrs.Bry_fmtr_eval_mgr_.Eval_url(wiki.Appe().Url_cmd_eval(), v);
 	}
 	public static Fs_root_core Set_fsdb_mgr(Xow_file_mgr file_mgr, Xowe_wiki wiki) {

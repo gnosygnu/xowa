@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.kits.swts;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.GfoMsg;
 import gplx.Gfo_evt_itm;
@@ -118,7 +118,7 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	public void 		Html_js_cbks_add(String func_name, Gfo_invk invk) 				{new Swt_html_func(browser, func_name, invk);}
 	public String 		Html_js_eval_script(String script) 								{return Eval_script_as_str(script);}
 	public Object		Html_js_eval_script_as_obj(String script) 						{return Eval_script(script);}
-	public boolean 		Html_js_eval_proc_as_bool(String proc, Object... args) 			{return Bool_.Cast(Html_js_eval_proc_as_obj(proc, args));}
+	public boolean 		Html_js_eval_proc_as_bool(String proc, Object... args) 			{return BoolUtl.Cast(Html_js_eval_proc_as_obj(proc, args));}
 	public String	Html_js_eval_proc_as_str(String proc, Object... args) {return Object_.Xto_str_strict_or_null(Html_js_eval_proc_as_obj(proc, args));}
 	public String Html_js_send_json(String name, String data) {
 		String script = String_.Format("return {0}('{1}');", name, String_.Replace(data, "\n", "") );
@@ -126,26 +126,26 @@ public class Swt_html implements Gxw_html, Swt_control, FocusListener, Gfo_evt_m
 	}
 	private Object Html_js_eval_proc_as_obj(String proc, Object... args) {
 		Bry_bfr bfr = Bry_bfr_.New();
-		bfr.Add_str_a7("return ").Add_str_u8(proc).Add_byte(Byte_ascii.Paren_bgn);
+		bfr.Add_str_a7("return ").Add_str_u8(proc).Add_byte(AsciiByte.ParenBgn);
 		int args_len = args.length;
 		for (int i = 0; i < args_len; ++i) {
 			Object arg = args[i];
-			if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
+			if (i != 0) bfr.Add_byte(AsciiByte.Comma);
 			boolean quote_val = true;
-			if 		(	Type_.Eq_by_obj(arg, Bool_.Cls_ref_type)
+			if 		(	Type_.Eq_by_obj(arg, BoolUtl.ClsRefType)
 					||	Type_.Eq_by_obj(arg, Int_.Cls_ref_type)
 					||	Type_.Eq_by_obj(arg, Long_.Cls_ref_type)
 				) {
 				quote_val = false;
 			}
-			if (quote_val) bfr.Add_byte(Byte_ascii.Apos);
+			if (quote_val) bfr.Add_byte(AsciiByte.Apos);
 			if (quote_val) 
 				bfr.Add_str_u8(Escape_quote(Object_.Xto_str_strict_or_null_mark(arg)));
 			else
 				bfr.Add_obj_strict(arg);
-			if (quote_val) bfr.Add_byte(Byte_ascii.Apos);
+			if (quote_val) bfr.Add_byte(AsciiByte.Apos);
 		}
-		bfr.Add_byte(Byte_ascii.Paren_end).Add_byte(Byte_ascii.Semic);
+		bfr.Add_byte(AsciiByte.ParenEnd).Add_byte(AsciiByte.Semic);
 		return Eval_script(bfr.To_str_and_clear());
 	}
 	public static String Escape_quote(String v) {

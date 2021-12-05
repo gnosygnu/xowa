@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.apos; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.apos; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.*;
 public class Xop_apos_wkr implements Xop_ctx_wkr {
 	private final List_adp stack = List_adp_.New();	// stores all apos tkns for page; needed to recalc tkn type if apos are dangling
 	private int bold_count, ital_count; private Xop_apos_tkn dual_tkn = null;
@@ -32,7 +34,7 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 		dat.State_clear();
 	}
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, Byte_ascii.Apos);
+		cur_pos = Bry_find_.Find_fwd_while(src, cur_pos, src_len, AsciiByte.Apos);
 		int apos_len = cur_pos - bgn_pos;
 		dat.Ident(ctx, src, apos_len, cur_pos);
 		Xop_apos_tkn apos_tkn = tkn_mkr.Apos(bgn_pos, cur_pos, apos_len, dat.Typ(), dat.Cmd(), dat.Lit_apos());
@@ -86,8 +88,8 @@ public class Xop_apos_wkr implements Xop_ctx_wkr {
 			Xop_apos_tkn apos = (Xop_apos_tkn)stack.Get_at(i);
 			if (apos.Apos_tid() != Xop_apos_tkn_.Typ_bold) continue;	// only look for bold
 			int tkn_bgn = apos.Src_bgn();
-			boolean idxNeg1Space = tkn_bgn > 0 && src[tkn_bgn - 1] == Byte_ascii.Space;
-			boolean idxNeg2Space = tkn_bgn > 1 && src[tkn_bgn - 2] == Byte_ascii.Space;
+			boolean idxNeg1Space = tkn_bgn > 0 && src[tkn_bgn - 1] == AsciiByte.Space;
+			boolean idxNeg2Space = tkn_bgn > 1 && src[tkn_bgn - 2] == AsciiByte.Space;
 			if		(idxNeg1 == null && idxNeg1Space)					{idxNeg1 = apos;}
 			else if (idxNeg2 == null && idxNeg2Space)					{idxNeg2 = apos;}
 			else if (idxNone == null && !idxNeg1Space && !idxNeg2Space)	{idxNone = apos;}

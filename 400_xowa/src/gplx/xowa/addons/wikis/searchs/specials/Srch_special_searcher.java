@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.searchs.specials; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.addons.wikis.searchs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
 import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.specials.htmls.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
@@ -31,7 +33,7 @@ public class Srch_special_searcher {
 			Xow_domain_itm domain = domains_ary[i];
 			try {
 				Xowe_wiki wiki = wiki_mgr.Get_by_or_make(domain.Domain_bry()); wiki.Init_assert();
-				byte[] key = gplx.langs.htmls.Gfh_utl.Encode_id_as_bry(Bry_.Add(qry.Phrase.Orig, Byte_ascii.Pipe_bry, qry.Ns_mgr.To_hash_key(), Byte_ascii.Pipe_bry, wiki.Domain_bry()));
+				byte[] key = gplx.langs.htmls.Gfh_utl.Encode_id_as_bry(Bry_.Add(qry.Phrase.Orig, AsciiByte.PipeBry, qry.Ns_mgr.To_hash_key(), AsciiByte.PipeBry, wiki.Domain_bry()));
 				Srch_rslt_list rslt_list;
 				if (wiki.App().Mode().Tid_is_http()) {
 					Srch_rslt_cbk__synchronous cbk_synchronous = new Srch_rslt_cbk__synchronous();

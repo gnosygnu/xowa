@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.glys; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.styles.*; import gplx.langs.htmls.clses.*;
 import gplx.xowa.xtns.gallery.*;
@@ -88,7 +89,7 @@ public class Xoh_gly_grp_data implements Gfh_class_parser_wkr, Gfh_style_wkr {	/
 		int pos = 0;
 		for (int i = 0; i < 3; ++i) {
 			int bgn = pos;
-			int end = Bry_find_.Find_fwd(val, Byte_ascii.Pipe, bgn + 1, val_len);
+			int end = Bry_find_.Find_fwd(val, AsciiByte.Pipe, bgn + 1, val_len);
 			if (end == Bry_find_.Not_found) end = val_len;
 			int num = Bry_.To_int_or(val, bgn, end, -1);
 			pos = end + 1;

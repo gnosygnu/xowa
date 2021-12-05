@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.setups.maints; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.setups.*;
-public class Wmf_dump_itm implements gplx.CompareAble {
+package gplx.xowa.bldrs.setups.maints; import gplx.*;
+import gplx.objects.lists.CompareAble;
+public class Wmf_dump_itm implements CompareAble {
 	public byte[] Wiki_abrv() {return wiki_abrv;} public void Wiki_abrv_(byte[] v) {this.wiki_abrv = v;} private byte[] wiki_abrv;				// EX: enwiki
 	public DateAdp Dump_date() {return dump_date;} public void Dump_date_(DateAdp v) {this.dump_date = v;} private DateAdp dump_date;			// EX: 20140304
 	public DateAdp Status_time() {return status_time;} public void Status_time_(DateAdp v) {this.status_time = v;} private DateAdp status_time;	// EX: 2014-03-15 23:22:06

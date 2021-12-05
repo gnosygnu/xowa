@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.filerepo.file; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.filerepo.*;
+package gplx.xowa.mediawiki.includes.filerepo.file; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.filerepo.*;
 import gplx.xowa.mediawiki.includes.media.*;
-import gplx.xowa.mediawiki.includes.parsers.*; import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
+import gplx.xowa.mediawiki.includes.parsers.lnkis.*;
 public class XomwFile {
 /*	TODO.XO:
 	* P8: normalizeExtension
@@ -293,7 +295,7 @@ public class XomwFile {
 	*/
 	private byte[] getExtension() {
 		if (!XophpObject_.isset(this.extension)) {
-			int n = XophpString_.strpos(this.getName(), Byte_ascii.Dot);
+			int n = XophpString_.strpos(this.getName(), AsciiByte.Dot);
 			this.extension = normalizeExtension(
 				n != Bry_find_.Not_found ? XophpString_.substr(this.getName(), n + 1) : Bry_.Empty);
 		}
@@ -332,7 +334,7 @@ public class XomwFile {
 		if (!XophpObject_.isset(this.url)) {
 			// this.assertRepoDefined();
 			byte[] ext = this.getExtension();
-			this.url = Bry_.Add(this.repo.getZoneUrl(XomwFileRepo.Zone__public, ext), Byte_ascii.Slash_bry, this.getUrlRel());
+			this.url = Bry_.Add(this.repo.getZoneUrl(XomwFileRepo.Zone__public, ext), AsciiByte.SlashBry, this.getUrlRel());
 		}
 
 		return this.url;
@@ -400,7 +402,7 @@ public class XomwFile {
 	public byte[] getPath() {
 		if (this.path == null) {
 			// this.assertRepoDefined();
-			this.path = Bry_.Add(this.repo.getZonePath(XomwFileRepo.Zone__public), Byte_ascii.Slash_bry, this.getRel());
+			this.path = Bry_.Add(this.repo.getZonePath(XomwFileRepo.Zone__public), AsciiByte.SlashBry, this.getRel());
 		}
 
 		return this.path;
@@ -958,7 +960,7 @@ public class XomwFile {
 //				thumbName .= '-' . this.getSha1() . '.' . thumbExt;
 //			}
 //			else {
-			thumbName = Bry_.Add(thumbName, Byte_ascii.Dash_bry, name);
+			thumbName = Bry_.Add(thumbName, AsciiByte.DashBry, name);
 
 //				if (thumbExt != extension) {
 //					thumbName .= ".thumbExt";
@@ -1545,7 +1547,7 @@ public class XomwFile {
 	private byte[] getThumbRel(byte[] suffix) {
 		path = this.getRel();
 		if (suffix != null) {
-			path = Bry_.Add(path, Byte_ascii.Slash_bry, suffix);
+			path = Bry_.Add(path, AsciiByte.SlashBry, suffix);
 		}
 
 		return path;
@@ -1615,7 +1617,7 @@ public class XomwFile {
 	public byte[] getThumbPath(byte[] suffix) {
 		// this.assertRepoDefined();
 
-		return Bry_.Add(this.repo.getZonePath(XomwFileRepo.Zone__thumb), Byte_ascii.Slash_bry, this.getThumbRel(suffix));
+		return Bry_.Add(this.repo.getZonePath(XomwFileRepo.Zone__thumb), AsciiByte.SlashBry, this.getThumbRel(suffix));
 	}
 
 //		/**
@@ -1680,9 +1682,9 @@ public class XomwFile {
 	private byte[] getZoneUrl(int zone, byte[] suffix) {
 		// this.assertRepoDefined();
 		byte[] ext = this.getExtension();
-		byte[] path = Bry_.Add(this.repo.getZoneUrl(zone, ext), Byte_ascii.Slash_bry, this.getUrlRel());
+		byte[] path = Bry_.Add(this.repo.getZoneUrl(zone, ext), AsciiByte.SlashBry, this.getUrlRel());
 		if (suffix != null) {
-			path = Bry_.Add(path, Byte_ascii.Slash_bry, gplx.langs.htmls.encoders.Gfo_url_encoder_.Php_rawurlencode.Encode(suffix));
+			path = Bry_.Add(path, AsciiByte.SlashBry, gplx.langs.htmls.encoders.Gfo_url_encoder_.Php_rawurlencode.Encode(suffix));
 		}
 
 		return path;

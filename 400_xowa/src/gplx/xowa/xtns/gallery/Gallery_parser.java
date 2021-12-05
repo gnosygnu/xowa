@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.gallery; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.nss.*;
@@ -110,7 +112,7 @@ public class Gallery_parser {
 			int old_pos = cur_pos;
 			cur_pos = trv.Pos();
 			Skip_ws();
-			if (cur_byte == Byte_ascii.Eq) {	// "="
+			if (cur_byte == AsciiByte.Eq) {	// "="
 				++cur_pos;						// position after eq
 				Skip_ws();
 				cur_fld = ((Byte_obj_val)o).Val();
@@ -146,11 +148,11 @@ public class Gallery_parser {
 		while (cur_pos < end_pos) {
 			cur_byte = src[cur_pos];
 			switch (cur_byte) {
-				case Byte_ascii.Pipe:			return Mode_pipe;
-				case Byte_ascii.Nl:		return Mode_nl;
-				case Byte_ascii.Cr:
-				case Byte_ascii.Space:
-				case Byte_ascii.Tab:
+				case AsciiByte.Pipe:			return Mode_pipe;
+				case AsciiByte.Nl:		return Mode_nl;
+				case AsciiByte.Cr:
+				case AsciiByte.Space:
+				case AsciiByte.Tab:
 					++cur_pos;
 					continue;
 				default:
@@ -214,11 +216,11 @@ public class Gallery_parser {
 		while (cur_pos < end_pos) {
 			cur_byte = src[cur_pos];
 			switch (cur_byte) {
-				case Byte_ascii.Cr:
-				case Byte_ascii.Space:
-				case Byte_ascii.Tab:			++cur_pos; continue; // ignore
-				case Byte_ascii.Pipe:			return Mode_pipe;
-				case Byte_ascii.Nl:		return Mode_nl;
+				case AsciiByte.Cr:
+				case AsciiByte.Space:
+				case AsciiByte.Tab:			++cur_pos; continue; // ignore
+				case AsciiByte.Pipe:			return Mode_pipe;
+				case AsciiByte.Nl:		return Mode_nl;
 				default:						return Mode_text;
 			}
 		}

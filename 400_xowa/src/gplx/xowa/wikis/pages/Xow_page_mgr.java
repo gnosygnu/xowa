@@ -13,16 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.vnts.*;
-import gplx.xowa.guis.views.*;	import gplx.xowa.parsers.utils.*;
-import gplx.xowa.wikis.pages.dbs.*; import gplx.xowa.wikis.pages.redirects.*;
+package gplx.xowa.wikis.pages;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoa_url_;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.guis.views.Xog_tab_itm;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.msgs.Xol_msg_mgr_;
+import gplx.xowa.langs.vnts.Xol_vnt_mgr;
+import gplx.xowa.wikis.Xow_page_tid;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.pages.redirects.Xopg_redirect_itm;
 public class Xow_page_mgr implements Gfo_invk {
 	private final Xowe_wiki wiki;
 	public Xow_page_mgr(Xowe_wiki wiki) {this.wiki = wiki;}
-	public Xoae_page Load_page_by_ttl			(Xoa_ttl ttl)	{return Load_page(ttl, Bool_.N);}
-	public Xoae_page Load_page_by_ttl_for_msg	(Xoa_ttl ttl)	{return Load_page(ttl, Bool_.Y);}
+	public Xoae_page Load_page_by_ttl			(Xoa_ttl ttl)	{return Load_page(ttl, BoolUtl.N);}
+	public Xoae_page Load_page_by_ttl_for_msg	(Xoa_ttl ttl)	{return Load_page(ttl, BoolUtl.Y);}
 	private Xoae_page Load_page(Xoa_ttl ttl, boolean called_from_msg) {
 		Xoae_page rv = Xoae_page.New(wiki, ttl);
 		Load_by_ns(rv, wiki.Utl__url_parser().Parse(ttl.Raw()), ttl, called_from_msg);

@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.btries; import gplx.*; import gplx.core.*;
-import gplx.core.primitives.*;
+package gplx.core.btries;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Byte_;
+import gplx.Err_;
+import gplx.String_;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.objects.primitives.BoolUtl;
 public class Btrie_fast_mgr {
 	private ByteTrieItm_fast root;
 	public boolean CaseAny() {return root.CaseAny();} public Btrie_fast_mgr CaseAny_(boolean v) {root.CaseAny_(v); return this;}
@@ -146,8 +152,8 @@ public class Btrie_fast_mgr {
 		}
 		return dirty ? tmp_bfr.To_bry_and_clear() : src;
 	}
-	public static Btrie_fast_mgr cs()			{return new Btrie_fast_mgr(Bool_.N);}
-	public static Btrie_fast_mgr ci_a7()		{return new Btrie_fast_mgr(Bool_.Y);}
+	public static Btrie_fast_mgr cs()			{return new Btrie_fast_mgr(BoolUtl.N);}
+	public static Btrie_fast_mgr ci_a7()		{return new Btrie_fast_mgr(BoolUtl.Y);}
 	public static Btrie_fast_mgr new_(boolean case_any) {return new Btrie_fast_mgr(case_any);}
 	Btrie_fast_mgr(boolean case_any) {
 		root = new ByteTrieItm_fast(Byte_.Zero, null, case_any);

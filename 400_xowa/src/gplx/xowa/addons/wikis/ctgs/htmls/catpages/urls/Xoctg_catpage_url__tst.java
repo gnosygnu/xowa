@@ -13,20 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import org.junit.*; import gplx.core.tests.*; import gplx.xowa.apps.urls.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls;
+import gplx.Bry_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.apps.urls.Xow_url_parser;
+import org.junit.Before;
+import org.junit.Test;
 public class Xoctg_catpage_url__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_catpage_url__fxt fxt = new Xoctg_catpage_url__fxt();
 	@Test  public void Specific() {
-		fxt.Exec__parse("A?subcatfrom=B&filefrom=C&pagefrom=D"		).Test__keys("B", "C", "D").Test__fwds(Bool_.Y, Bool_.Y, Bool_.Y);
-		fxt.Exec__parse("A?subcatuntil=B&fileuntil=C&pageuntil=D"	).Test__keys("B", "C", "D").Test__fwds(Bool_.N, Bool_.N, Bool_.N);
+		fxt.Exec__parse("A?subcatfrom=B&filefrom=C&pagefrom=D"		).Test__keys("B", "C", "D").Test__fwds(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y);
+		fxt.Exec__parse("A?subcatuntil=B&fileuntil=C&pageuntil=D"	).Test__keys("B", "C", "D").Test__fwds(BoolUtl.N, BoolUtl.N, BoolUtl.N);
 	}
 	@Test  public void General() {
-		fxt.Exec__parse("A?from=B"	).Test__keys("B", "B", "B").Test__fwds(Bool_.Y, Bool_.Y, Bool_.Y);
-		fxt.Exec__parse("A?until=B"	).Test__keys("B", "B", "B").Test__fwds(Bool_.N, Bool_.N, Bool_.N);
+		fxt.Exec__parse("A?from=B"	).Test__keys("B", "B", "B").Test__fwds(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y);
+		fxt.Exec__parse("A?until=B"	).Test__keys("B", "B", "B").Test__fwds(BoolUtl.N, BoolUtl.N, BoolUtl.N);
 	}
 	@Test  public void Url_encoded() {
-		fxt.Exec__parse("A?from=B+C").Test__keys("B C", "B C", "B C").Test__fwds(Bool_.Y, Bool_.Y, Bool_.Y);
+		fxt.Exec__parse("A?from=B+C").Test__keys("B C", "B C", "B C").Test__fwds(BoolUtl.Y, BoolUtl.Y, BoolUtl.Y);
 	}
 }
 class Xoctg_catpage_url__fxt {

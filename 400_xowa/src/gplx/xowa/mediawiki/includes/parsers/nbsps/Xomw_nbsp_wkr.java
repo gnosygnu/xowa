@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.nbsps; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.nbsps; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*;
 public class Xomw_nbsp_wkr {
 	private final Btrie_rv trv = new Btrie_rv();
@@ -74,7 +76,7 @@ public class Xomw_nbsp_wkr {
 			int important_end = -1;
 			if (itm_tid == Tid__important) {
 				int space_bgn = cur + itm.Key().length;
-				int space_end = Bry_find_.Find_fwd_while(src, space_bgn, src_end, Byte_ascii.Space);
+				int space_end = Bry_find_.Find_fwd_while(src, space_bgn, src_end, AsciiByte.Space);
 				important_end = space_end + Bry__important.length;
 				if (!Bry_.Match(src, space_end, important_end, Bry__important)) {
 					continue;

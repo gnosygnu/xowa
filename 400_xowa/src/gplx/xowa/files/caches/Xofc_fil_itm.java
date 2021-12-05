@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.caches; import gplx.*;
+import gplx.objects.lists.CompareAble;
+import gplx.xowa.files.*;
 import gplx.dbs.*;
 public class Xofc_fil_itm implements CompareAble {
 	public Xofc_fil_itm(int uid, int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size, long cache_time, byte cmd_mode) {

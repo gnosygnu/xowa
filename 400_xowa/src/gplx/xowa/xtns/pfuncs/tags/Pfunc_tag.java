@@ -13,9 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.tags; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.xtns.pfuncs.tags;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.parsers.xndes.Tag_html_mkr;
+import gplx.xowa.parsers.xndes.Tag_html_mkr_;
+import gplx.xowa.parsers.xndes.Tag_html_wkr;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag;
+import gplx.xowa.xtns.pfuncs.Pf_func;
+import gplx.xowa.xtns.pfuncs.Pf_func_;
+import gplx.xowa.xtns.pfuncs.Pf_func_base;
 public class Pfunc_tag extends Pf_func_base {// REF:/includes/parser/CoreParserFunctions.php|tagObj
 	@Override public int Id() {return Xol_kwd_grp_.Id_misc_tag;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_tag().Name_(name);}
@@ -55,7 +68,7 @@ public class Pfunc_tag extends Pf_func_base {// REF:/includes/parser/CoreParserF
 
 			// add to UNIQ hash; DATE:2017-03-31
 			byte[] val = html_wkr.Tag__build(ctx.Wiki(), ctx);
-			byte[] key = wiki.Parser_mgr().Uniq_mgr().Add(Bool_.Y, tag_name, val);
+			byte[] key = wiki.Parser_mgr().Uniq_mgr().Add(BoolUtl.Y, tag_name, val);
 			bfr.Add(key);
 		}
 		finally {
@@ -79,16 +92,16 @@ public class Pfunc_tag extends Pf_func_base {// REF:/includes/parser/CoreParserF
 					int atr_bgn = 0;
 					boolean trim_bgn = false, trim_end = false;
 					switch (atr_val[0]) {
-						case Byte_ascii.Quote:
-						case Byte_ascii.Apos:
+						case AsciiByte.Quote:
+						case AsciiByte.Apos:
 							atr_bgn++;
 							trim_bgn = true;
 							break;
 					}
 					int atr_end = atr_len - 1;
 					switch (atr_val[atr_end]) {
-						case Byte_ascii.Quote:
-						case Byte_ascii.Apos:
+						case AsciiByte.Quote:
+						case AsciiByte.Apos:
 							trim_end = true;
 							break;
 					}

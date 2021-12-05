@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.pages.dbs;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.DateAdp;
 import gplx.DateAdp_;
 import gplx.xowa.Xoa_ttl;
@@ -37,8 +37,8 @@ public class Xopg_db_page {
 	public int          Redirect_to_id()    {return redirect_to_id;}    private int redirect_to_id;
 	public int          Score()             {return score;}             private int score;
 
-	public void Exists_y_()                         {this.Exists_(Bool_.Y);}
-	public void Exists_n_()                         {this.Exists_(Bool_.N);}
+	public void Exists_y_()                         {this.Exists_(BoolUtl.Y);}
+	public void Exists_n_()                         {this.Exists_(BoolUtl.N);}
 	public void Exists_(boolean v)                  {this.exists = v;}
 	public Xopg_db_page Id_(int v)                  {this.id = v; return this;}
 	public Xopg_db_page Score_(int v)               {this.score = v; return this;}

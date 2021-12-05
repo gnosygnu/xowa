@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.exprs; import gplx.*;
 import gplx.core.btries.*; import gplx.core.brys.fmtrs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.langs.msgs.*;
 import gplx.xowa.parsers.*;
 public class Pfunc_expr_shunter {
 	private final Btrie_fast_mgr trie = expression_(); private final Btrie_rv trv = new Btrie_rv();
@@ -47,7 +48,7 @@ public class Pfunc_expr_shunter {
 			if (o == null) {	// letter or unknown symbol
 				while (cur_pos < src_len) {
 					byte b = src[cur_pos++];
-					if (Byte_ascii.Is_ltr(b))
+					if (AsciiByte.IsLtr(b))
 						continue;
 					else
 						break;
@@ -66,9 +67,9 @@ public class Pfunc_expr_shunter {
 						while (loop) {
 							if (cur_pos == src_len) break;
 							switch (src[cur_pos]) {
-								case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-								case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-								case Byte_ascii.Dot:
+								case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+								case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+								case AsciiByte.Dot:
 									++cur_pos;
 									break;
 								default: loop = false; break;
@@ -81,7 +82,7 @@ public class Pfunc_expr_shunter {
 							Err_.Noop(exc); 
 							int dot_count = 0;
 							for (int i = numBgn; i < cur_pos; i++) {
-								if (src[i] == Byte_ascii.Dot) {
+								if (src[i] == AsciiByte.Dot) {
 									switch (dot_count) {
 										case 0: dot_count = 1; break;
 										case 1: 
@@ -105,7 +106,7 @@ public class Pfunc_expr_shunter {
 						break;
 					case Expr_tkn_.Tid_operator:
 						Func_tkn cur_prc = (Func_tkn)t;
-						if (Byte_ascii.Is_ltr(cur_byt)) {
+						if (AsciiByte.IsLtr(cur_byt)) {
 							int nxt_pos = Bry_find_.Find_fwd_while_letter(src, cur_pos, src_len);
 							if (nxt_pos > cur_pos)
 								return Err_set(ctx, Xol_msg_itm_.Id_pfunc_expr_unrecognised_word, Bry_.Mid(src, bgn_pos, nxt_pos));
@@ -167,9 +168,9 @@ public class Pfunc_expr_shunter {
 	public static final Decimal_adp Null_rslt = null;
 	private static Btrie_fast_mgr expression_() {	// changed to instance; DATE:2016-07-20
 		Btrie_fast_mgr rv = Btrie_fast_mgr.ci_a7();	// NOTE:ci.ascii:MW_const.en; math and expressions
-		Trie_add(rv, new Ws_tkn(Byte_ascii.Space));
-		Trie_add(rv, new Ws_tkn(Byte_ascii.Tab));
-		Trie_add(rv, new Ws_tkn(Byte_ascii.Nl));
+		Trie_add(rv, new Ws_tkn(AsciiByte.Space));
+		Trie_add(rv, new Ws_tkn(AsciiByte.Tab));
+		Trie_add(rv, new Ws_tkn(AsciiByte.Nl));
 		Trie_add(rv, Paren_bgn_tkn.Instance);
 		Trie_add(rv, Paren_end_tkn.Instance);
 		Trie_add(rv, new Func_tkn_plus("+"));

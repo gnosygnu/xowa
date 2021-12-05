@@ -13,9 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.htmls.css.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.htmls.*; import gplx.xowa.addons.wikis.htmls.css.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
+package gplx.xowa.addons.wikis.htmls.css.bldrs;
+import gplx.GfoMsg;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg;
+import gplx.GfsCtx;
+import gplx.Io_url;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.htmls.css.mgrs.Xowd_css_core_mgr;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_cmd_keys;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_schema_props;
+import gplx.xowa.wikis.data.Xowd_cfg_key_;
 public class Xob_css_cmd implements Xob_cmd {
 	private final Xob_bldr bldr; private final Xowe_wiki wiki; private final Gfo_usr_dlg usr_dlg;
 	private Io_url css_dir; private String css_key;
@@ -36,7 +48,7 @@ public class Xob_css_cmd implements Xob_cmd {
 		core_db.Tbl__css_core().Create_tbl();
 		core_db.Tbl__css_file().Create_tbl();
 		gplx.xowa.addons.wikis.htmls.css.mgrs.Xowd_css_core_mgr.Set(core_db.Tbl__css_core(), core_db.Tbl__css_file(), css_dir, css_key);
-		core_db.Tbl__cfg().Upsert_yn(Xowd_cfg_key_.Grp__wiki_schema, Xow_db_file_schema_props.Key__tbl_css_core, Bool_.Y);
+		core_db.Tbl__cfg().Upsert_yn(Xowd_cfg_key_.Grp__wiki_schema, Xow_db_file_schema_props.Key__tbl_css_core, BoolUtl.Y);
 		core_db.Conn().Txn_end();
 		usr_dlg.Plog_many("", "", Cmd_key() + ":end;");
 	}

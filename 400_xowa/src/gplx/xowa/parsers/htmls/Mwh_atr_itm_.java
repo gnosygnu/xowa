@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.htmls;
+import gplx.objects.strings.AsciiByte;
 public class Mwh_atr_itm_ {
 	public static final Mwh_atr_itm[] Ary_empty = new Mwh_atr_itm[0];
 	public static final int Atr_tid__invalid = 1, Atr_tid__repeat = 2, Atr_tid__pair = 4, Atr_tid__name = 8;	// NOTE: id order is important; see above;
@@ -43,7 +44,7 @@ public class Mwh_atr_itm_ {
 	public static byte Calc_qte_byte(int[] data_ary, int idx) {
 		int val = data_ary[idx + Mwh_atr_mgr.Idx_atr_utl];
 		int qte_tid = (val & ((1 << 3) - 1));
-		return qte_tid == Qte_tid__apos ? Byte_ascii.Apos : Byte_ascii.Quote;
+		return qte_tid == Qte_tid__apos ? AsciiByte.Apos : AsciiByte.Quote;
 	}
 	public static final byte Key_tid__generic = 0, Key_tid__id = 1, Key_tid__style = 2, Key_tid__role = 3;
 }

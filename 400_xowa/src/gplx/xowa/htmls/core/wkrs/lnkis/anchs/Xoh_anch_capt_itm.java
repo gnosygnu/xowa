@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.anchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.anchs;
 import gplx.core.brys.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.ttls.*;
+import gplx.objects.strings.AsciiByte;
 public class Xoh_anch_capt_itm {
 	public int		Cs0_tid() {return cs0_tid;} private int cs0_tid;
 	public int		Split_pos() {return split_pos;} private int split_pos;
@@ -36,13 +36,13 @@ public class Xoh_anch_capt_itm {
 					cs0_tid = Cs0__exact;
 					continue;
 				}
-				else if(href_byte >= Byte_ascii.Ltr_A && href_byte <= Byte_ascii.Ltr_Z
+				else if(href_byte >= AsciiByte.Ltr_A && href_byte <= AsciiByte.Ltr_Z
 					&&	capt_byte - href_byte == 32
 					) {
 					cs0_tid = Cs0__lower;
 					continue;
 				}
-				else if(href_byte >= Byte_ascii.Ltr_a && href_byte <= Byte_ascii.Ltr_z
+				else if(href_byte >= AsciiByte.Ltr_a && href_byte <= AsciiByte.Ltr_z
 					&&	href_byte - capt_byte == 32
 					) {
 					cs0_tid = Cs0__upper;
@@ -51,8 +51,8 @@ public class Xoh_anch_capt_itm {
 			}
 			else
 				if (href_byte == capt_byte) continue;
-			if (	capt_byte == Byte_ascii.Space			// ignore " " vs "_"
-				&&	href_byte == Byte_ascii.Underline
+			if (	capt_byte == AsciiByte.Space			// ignore " " vs "_"
+				&&	href_byte == AsciiByte.Underline
 				)
 				continue;
 			this.cs0_tid = Cs0__exact;

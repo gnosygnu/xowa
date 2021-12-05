@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.xtns.graphs;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Graph_html_tst {
 	private final Graph_html_fxt fxt = new Graph_html_fxt();
 	@Before public void init() {
@@ -41,13 +44,13 @@ public class Graph_html_tst {
 	}
 	@Test  public void Wikirawupload() {
 		String wtxt = fxt.Wikirawupload__wtxt();
-		fxt.Test__hview(wtxt, fxt.Hdump_n_().Wikirawupload__html(Bool_.Y));
-		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Wikirawupload__html(Bool_.N), fxt.Wikirawupload__html(Bool_.Y));
+		fxt.Test__hview(wtxt, fxt.Hdump_n_().Wikirawupload__html(BoolUtl.Y));
+		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Wikirawupload__html(BoolUtl.N), fxt.Wikirawupload__html(BoolUtl.Y));
 	}
 	@Test  public void Literal_XOWA_ROOT() {
 		String wtxt = fxt.Literal_XOWA_ROOT__wtxt();
-		fxt.Test__hview(wtxt, fxt.Hdump_n_().Literal_XOWA_ROOT__html(Bool_.Y));
-		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Literal_XOWA_ROOT__html(Bool_.N), fxt.Literal_XOWA_ROOT__html(Bool_.Y));
+		fxt.Test__hview(wtxt, fxt.Hdump_n_().Literal_XOWA_ROOT__html(BoolUtl.Y));
+		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Literal_XOWA_ROOT__html(BoolUtl.N), fxt.Literal_XOWA_ROOT__html(BoolUtl.Y));
 	}
 	@Test  public void Error__missing_endquote() {
 		fxt.Test__hload(String_.Concat_lines_nl_skip_last

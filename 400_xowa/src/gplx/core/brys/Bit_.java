@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Bit_ {
 	public static String ToBitStr(int val) {
     		boolean[] bits = new boolean[8];
@@ -25,7 +26,7 @@ public class Bit_ {
     		}
 		byte[] rv = new byte[8];
     		for (int i = 0; i < 8; i++)
-		rv[i] = bits[i] ? Byte_ascii.Num_1 : Byte_ascii.Num_0;
+		rv[i] = bits[i] ? AsciiByte.Num1 : AsciiByte.Num0;
     		return String_.new_a7(rv);
 	}
 	public static int Get_flag(int i) {return Int_flag_bldr_.Base2_ary[i];}

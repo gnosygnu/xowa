@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.*;
 public class Xot_fmtr_prm implements Xot_fmtr {
 	public Xot_fmtr_prm Caller_(Xot_invk v)		{this.caller = v; return this;} private Xot_invk caller;
 	public Xot_fmtr_prm NewLineArgs_(boolean v)	{this.newLineArgs = v; return this;} private boolean newLineArgs = false;
@@ -28,21 +30,21 @@ public class Xot_fmtr_prm implements Xot_fmtr {
 			if (prm_idx == -1)	{if (prm_key != null) trg.Add(prm_key);}
 			else				trg.Add_int_variable(prm_idx);
 			if (dflt_tkn != null) {
-				trg.Add_byte(Byte_ascii.Pipe);
+				trg.Add_byte(AsciiByte.Pipe);
 				dflt_tkn.Tmpl_fmt(ctx, src, this);
 			}
 			trg.Add(Bry_end);
 		}
 		else					// invk mode
 			self.Tmpl_evaluate(ctx, src, caller, trg);
-	}	private static final byte[] Bry_bgn = new byte[] {Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn, Byte_ascii.Curly_bgn}, Bry_end = new byte[] {Byte_ascii.Curly_end, Byte_ascii.Curly_end, Byte_ascii.Curly_end};
+	}	private static final byte[] Bry_bgn = new byte[] {AsciiByte.CurlyBgn, AsciiByte.CurlyBgn, AsciiByte.CurlyBgn}, Bry_end = new byte[] {AsciiByte.CurlyEnd, AsciiByte.CurlyEnd, AsciiByte.CurlyEnd};
 	public void Reg_tmpl(Xop_ctx ctx, byte[] src, Xop_tkn_itm name_tkn, int args_len, Arg_nde_tkn[] args) {
 		trg.Add(Xop_curly_bgn_lxr.Hook);
 		++depth;
 		name_tkn.Tmpl_fmt(ctx, src, this);
 		for (int i = 0; i < args_len; i++) {
 			if (depth == 1 && newLineArgs) trg.Add_byte_nl();
-			trg.Add_byte(Byte_ascii.Pipe);
+			trg.Add_byte(AsciiByte.Pipe);
 			args[i].Tmpl_fmt(ctx, src, this);
 		}
 		--depth;
@@ -54,10 +56,10 @@ public class Xot_fmtr_prm implements Xot_fmtr {
 		if (self_tkn.KeyTkn_exists()) {
 			if (arg_idx == 0) {
 				if (self_tkn.Eq_tkn().Tkn_tid() == Xop_tkn_itm_.Tid_colon)
-					trg.Add_byte(Byte_ascii.Colon);
+					trg.Add_byte(AsciiByte.Colon);
 			}
 			else
-				trg.Add_byte(Byte_ascii.Eq);
+				trg.Add_byte(AsciiByte.Eq);
 		}
 		self_tkn.Val_tkn().Tmpl_fmt(ctx, src, this);
 	}

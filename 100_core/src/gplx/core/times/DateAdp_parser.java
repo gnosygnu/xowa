@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.times; import gplx.*; import gplx.core.*;
+package gplx.core.times; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class DateAdp_parser {
 	public int[] Parse_iso8651_like(String raw_str) {Parse_iso8651_like(tmp_rv, raw_str); return tmp_rv;} int[] tmp_rv = new int[7];
 	public void Parse_iso8651_like(int[] rv, String raw_str) {
@@ -31,11 +32,11 @@ public class DateAdp_parser {
 		int pos = bgn, rv_idx = 0, int_len = 0, max_len = max_lens[rv_idx];
 		while (true) {
 			int int_val = -1;
-			byte b = pos < end ? src[pos] : Byte_ascii.Null;
+			byte b = pos < end ? src[pos] : AsciiByte.Null;
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					int_val = b - Byte_ascii.Num_0;	// convert ascii to val; EX: 49 -> 1
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+					int_val = b - AsciiByte.Num0;	// convert ascii to val; EX: 49 -> 1
 					int_len = int_bldr.Add(int_val);
 					break;
 			}

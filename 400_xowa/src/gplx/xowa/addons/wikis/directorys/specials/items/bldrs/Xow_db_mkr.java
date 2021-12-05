@@ -13,15 +13,40 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.core.ios.streams.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.site_stats.*;
-import gplx.xowa.langs.cases.*;
-import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.addons.wikis.ctgs.dbs.*;
-import gplx.xowa.addons.wikis.searchs.dbs.*;
+package gplx.xowa.addons.wikis.directorys.specials.items.bldrs;
+import gplx.Guid_adp_;
+import gplx.core.ios.streams.Io_stream_tid_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.fsdb.data.Fsd_dir_tbl;
+import gplx.fsdb.data.Fsd_fil_tbl;
+import gplx.fsdb.data.Fsd_thm_tbl;
+import gplx.fsdb.meta.Fsm_atr_tbl;
+import gplx.fsdb.meta.Fsm_bin_tbl;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.fsdb.meta.Fsm_mnt_tbl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_link_tbl;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_db_cfg_;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_db_mgr;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_db_upgrade;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_link_tbl;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_word_tbl;
+import gplx.xowa.files.origs.Xof_orig_tbl;
+import gplx.xowa.langs.cases.Xol_case_mgr_;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_layout;
+import gplx.xowa.wikis.data.Xowd_cfg_tbl_;
+import gplx.xowa.wikis.data.Xowd_core_db_props;
+import gplx.xowa.wikis.data.site_stats.Xowd_site_stats_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_cat_core_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_site_ns_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_text_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_xowa_db_tbl;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.nss.Xow_ns_mgr_;
 public class Xow_db_mkr {
 	public static Xodb_wiki_mgr Create_wiki(Xodb_wiki_data data, String wiki_name, byte[] mainpage_name, byte[] mainpage_text) {
 		// create db
@@ -31,21 +56,21 @@ public class Xow_db_mkr {
 		// create tbls: wiki
 		Xodb_wiki_db core_db = wiki_mgr.Dbs__get_core();
 		Db_conn core_conn = core_db.Conn();
-		core_db.Tbls__add(Bool_.Y
+		core_db.Tbls__add(BoolUtl.Y
 		, Xowd_cfg_tbl_.New(core_conn)
-		, new Xowd_xowa_db_tbl(core_conn, Bool_.N)
-		, new Xowd_site_ns_tbl(core_conn, Bool_.N)
-		, new Xowd_site_stats_tbl(core_conn, Bool_.N)
-		, new Xowd_page_tbl(core_conn, Bool_.N)
-		, new Xowd_text_tbl(core_conn, Bool_.N, data.Text_zip_tid())
+		, new Xowd_xowa_db_tbl(core_conn, BoolUtl.N)
+		, new Xowd_site_ns_tbl(core_conn, BoolUtl.N)
+		, new Xowd_site_stats_tbl(core_conn, BoolUtl.N)
+		, new Xowd_page_tbl(core_conn, BoolUtl.N)
+		, new Xowd_text_tbl(core_conn, BoolUtl.N, data.Text_zip_tid())
 		);
 
 		// upgrade tbl: page for categories; NOTE: should change page_tbl to do this automatically
 		core_conn.Meta_fld_append(Xowd_page_tbl.TBL_NAME, DbmetaFldItm.NewInt(Xowd_page_tbl.FLD__page_cat_db_id).DefaultValSet(-1));
 
 		// create tbls: cat; may want to do "if (props.Layout_text().Tid_is_all_or_few())"	// create in advance else will fail for v2; import wiki -> wiki loads and tries to load categories; v2 category processes and builds tbl; DATE:2015-03-22
-		core_db.Tbls__add(Bool_.Y
-		, new Xowd_cat_core_tbl(core_conn, Bool_.N)
+		core_db.Tbls__add(BoolUtl.Y
+		, new Xowd_cat_core_tbl(core_conn, BoolUtl.N)
 		, new Xodb_cat_link_tbl(core_conn)
 		);
 
@@ -72,7 +97,7 @@ public class Xow_db_mkr {
 		Xowd_site_stats_tbl.Get_by_key(core_db).Update(0, 0, 0);
 
 		// insert data: cfg
-		Xowd_core_db_props props = new Xowd_core_db_props(2, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, Bool_.N, Bool_.N);
+		Xowd_core_db_props props = new Xowd_core_db_props(2, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Xow_db_layout.Itm_all, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, BoolUtl.N, BoolUtl.N);
 		props.Cfg_save(cfg_tbl);
 
 		Xowd_cfg_tbl_.Upsert__create(cfg_tbl, data.Domain(), wiki_name, mainpage_name);
@@ -87,14 +112,14 @@ public class Xow_db_mkr {
 			, -1);
 
 		// create tbls: fsdb
-		core_db.Tbls__add(Bool_.Y
-		, new Fsm_mnt_tbl(core_conn, Bool_.N)
-		, new Fsm_atr_tbl(core_conn, Bool_.N)
-		, new Fsm_bin_tbl(core_conn, Bool_.N, Fsm_mnt_mgr.Mnt_idx_main)
-		, new Fsd_dir_tbl(core_conn, Bool_.N)
-		, new Fsd_fil_tbl(core_conn, Bool_.N, Fsm_mnt_mgr.Mnt_idx_main)
-		, new Fsd_thm_tbl(core_conn, Bool_.N, Fsm_mnt_mgr.Mnt_idx_main, Bool_.Y)
-		, new Xof_orig_tbl(core_conn, Bool_.N)
+		core_db.Tbls__add(BoolUtl.Y
+		, new Fsm_mnt_tbl(core_conn, BoolUtl.N)
+		, new Fsm_atr_tbl(core_conn, BoolUtl.N)
+		, new Fsm_bin_tbl(core_conn, BoolUtl.N, Fsm_mnt_mgr.Mnt_idx_main)
+		, new Fsd_dir_tbl(core_conn, BoolUtl.N)
+		, new Fsd_fil_tbl(core_conn, BoolUtl.N, Fsm_mnt_mgr.Mnt_idx_main)
+		, new Fsd_thm_tbl(core_conn, BoolUtl.N, Fsm_mnt_mgr.Mnt_idx_main, BoolUtl.Y)
+		, new Xof_orig_tbl(core_conn, BoolUtl.N)
 		);
 
 		// insert data: fsdb

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.langs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.envs.*;
 import gplx.gfui.draws.*;
 import gplx.xowa.langs.cases.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.grammars.*; import gplx.xowa.langs.genders.*; import gplx.xowa.langs.plurals.*; import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*; import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.durations.*; import gplx.xowa.langs.lnki_trails.*; import gplx.xowa.langs.funcs.*; import gplx.xowa.langs.specials.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.commas.*;
@@ -168,7 +170,7 @@ public class Xol_lang_itm implements Gfo_invk {
 	;
 	public static final int Tid_lower = 1, Tid_upper = 2;
 	private static byte[][] Fallbacy_bry_ary__bld(byte[] v) {
-		byte[][] rv = Bry_split_.Split(v, Byte_ascii.Comma, true); // gan -> 'gan-hant, zh-hant, zh-hans'
+		byte[][] rv = Bry_split_.Split(v, AsciiByte.Comma, true); // gan -> 'gan-hant, zh-hant, zh-hans'
 		boolean en_needed = true;
 		int rv_len = rv.length;
 		for (int i = 0; i < rv_len; i++) {

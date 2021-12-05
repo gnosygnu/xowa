@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.headings; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.headings; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.includes.parsers.*;
 public class Xomw_heading_cbk__html implements Xomw_heading_cbk {		
 	public Bry_bfr Bfr() {return bfr;} private Bry_bfr bfr; 
 	public Xomw_heading_cbk__html Bfr_(Bry_bfr bfr) {
@@ -32,9 +34,9 @@ public class Xomw_heading_cbk__html implements Xomw_heading_cbk {
 
 		// add <h2>...</h2>
 		int hdr_num = wkr.Hdr_num();
-		bfr.Add(Tag__lhs).Add_int_digits(1, hdr_num).Add(Byte_ascii.Angle_end_bry);	// <h2>
+		bfr.Add(Tag__lhs).Add_int_digits(1, hdr_num).Add(AsciiByte.AngleEndBry);	// <h2>
 		bfr.Add_mid(wkr.Src(), wkr.Hdr_lhs_end(), wkr.Hdr_rhs_bgn());
-		bfr.Add(Tag__rhs).Add_int_digits(1, hdr_num).Add(Byte_ascii.Angle_end_bry);	// </h2>
+		bfr.Add(Tag__rhs).Add_int_digits(1, hdr_num).Add(AsciiByte.AngleEndBry);	// </h2>
 	}
 	public void On_src_done(XomwParserCtx pctx, Xomw_heading_wkr wkr) {
 		// add from txt_bgn to EOS;

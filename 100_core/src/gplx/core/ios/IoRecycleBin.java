@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*;
 import gplx.core.strings.*;
+import gplx.objects.arrays.ArrayUtl;
 public class IoRecycleBin {
 	public void							Send(Io_url url) {Send_xrg(url).Exec();}
 	public IoEngine_xrg_recycleFil			Send_xrg(Io_url url) {return IoEngine_xrg_recycleFil.gplx_(url);}
@@ -36,7 +37,7 @@ public class IoRecycleBin {
 		List_adp list = List_adp_.New();
 		Io_url regyUrl = FetchRegistryUrl(url);
 		String[] lines = IoEngine_xrg_loadFilStr.new_(regyUrl).ExecAsStrAry();
-		int linesLen = Array_.Len(lines); 
+		int linesLen = ArrayUtl.Len(lines);
 		String nameAndExt = url.NameAndExt_noDirSpr() + "|";
 		for (int i = linesLen; i > 0; i--) {
 			String line = lines[i - 1];

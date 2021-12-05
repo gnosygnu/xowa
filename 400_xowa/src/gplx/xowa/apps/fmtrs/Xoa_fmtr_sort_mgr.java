@@ -14,6 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.apps.fmtrs; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
 public class Xoa_fmtr_sort_mgr implements Gfo_invk {
 	private Ordered_hash itms = Ordered_hash_.New();
 	private Xoa_fmtr_sort_wkr wkr = new Xoa_fmtr_sort_wkr();
@@ -41,11 +43,11 @@ public class Xoa_fmtr_sort_mgr implements Gfo_invk {
 	public static final String Invk_clear = "clear", Invk_add_many = "add_many", Invk_exec = "exec";
 }
 class Xoa_fmtr_sort_itm {
-	public Xoa_fmtr_sort_itm(String key, boolean asc) {this.key = key; this.comp_mult = asc ? CompareAble_.More : CompareAble_.Less;}
+	public Xoa_fmtr_sort_itm(String key, boolean asc) {this.key = key; this.comp_mult = asc ? CompareAbleUtl.More : CompareAbleUtl.Less;}
 	public int Comp_mult() {return comp_mult;} private int comp_mult;
 	public String Key() {return key;} private String key;
 }
-class Xoa_fmtr_sort_wkr implements gplx.core.lists.ComparerAble {
+class Xoa_fmtr_sort_wkr implements ComparerAble {
 	public Xoa_fmtr_sort_itm[] Itms() {return itms;} public void Itms_(Xoa_fmtr_sort_itm[] v) {itms = v; itms_len = v.length;} private Xoa_fmtr_sort_itm[] itms; private int itms_len;
 	public int compare(Object lhsObj, Object rhsObj) {
 		Gfo_invk lhs_invk = (Gfo_invk)lhsObj;
@@ -55,10 +57,10 @@ class Xoa_fmtr_sort_wkr implements gplx.core.lists.ComparerAble {
 			String itm_key = itm.Key();
 			Object lhs_val = Gfo_invk_.Invk_by_key(lhs_invk, itm_key);
 			Object rhs_val = Gfo_invk_.Invk_by_key(rhs_invk, itm_key);
-			int compare = CompareAble_.Compare_obj(lhs_val, rhs_val) * itm.Comp_mult();
-			if (compare != CompareAble_.Same)
+			int compare = CompareAbleUtl.Compare_obj(lhs_val, rhs_val) * itm.Comp_mult();
+			if (compare != CompareAbleUtl.Same)
 				return compare;
 		}
-		return CompareAble_.Same;
+		return CompareAbleUtl.Same;
 	}
 }

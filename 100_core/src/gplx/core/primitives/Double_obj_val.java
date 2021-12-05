@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives; import gplx.*;
+import gplx.objects.lists.CompareAble;
 public class Double_obj_val implements CompareAble {
 	public double Val() {return val;} double val;
 	@Override public String toString() {return Double_.To_str(val);}

@@ -13,13 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
+package gplx.xowa.users.history; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.strings.AsciiByte;
 public class Xou_history_itm {
 	private Xou_history_itm() {}
 	public Xou_history_itm(byte[] wiki, byte[] page) {
 		// remove "\n" from page for Category b/c it breaks the csv_parser; DATE:2016-10-12
-		int nl_pos = Bry_find_.Find_fwd(page, Byte_ascii.Nl);
+		int nl_pos = Bry_find_.Find_fwd(page, AsciiByte.Nl);
 		if (nl_pos != Bry_find_.Not_found) {
 			page = Bry_.Mid(page, 0, nl_pos);
 		}
@@ -52,8 +54,8 @@ public class Xou_history_itm {
 	}
 	public void Merge(Xou_history_itm merge) {
 		view_count += merge.View_count();
-		if (merge.View_bgn().compareTo(view_bgn) < CompareAble_.Same) view_bgn = merge.View_bgn();
-		if (merge.View_end().compareTo(view_end) > CompareAble_.Same) view_end = merge.View_end();
+		if (merge.View_bgn().compareTo(view_bgn) < CompareAbleUtl.Same) view_bgn = merge.View_bgn();
+		if (merge.View_end().compareTo(view_end) > CompareAbleUtl.Same) view_end = merge.View_end();
 	}
 	public static Xou_history_itm csv_(byte[] ary, Int_obj_ref pos) {
 		Xou_history_itm rv = new Xou_history_itm();
@@ -72,6 +74,6 @@ public class Xou_history_itm {
 			.Add(wiki)						.Add_byte(Bry_.Dlm_fld)
 			.Add(page)						.Add_byte(Bry_.Dlm_row);
 	}
-	public static byte[] key_(byte[] wiki, byte[] page) {return Bry_.Add(wiki, Key_dlm, page);} private static final byte[] Key_dlm = Byte_ascii.Pipe_bry;
+	public static byte[] key_(byte[] wiki, byte[] page) {return Bry_.Add(wiki, Key_dlm, page);} private static final byte[] Key_dlm = AsciiByte.PipeBry;
 	public static final byte Fld_key = 0, Fld_wiki = 1, Fld_page = 2, Fld_view_count = 3, Fld_view_bgn = 4, Fld_view_end = 5;
 }

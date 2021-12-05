@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.htmls.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.Bry_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_null;
 public class Arg_itm_tkn_null extends Xop_tkn_null implements Arg_itm_tkn {	public int Dat_bgn() {return -1;}
 	public int Dat_end() {return -1;} public Arg_itm_tkn Dat_end_(int v) {return this;}
 	public Arg_itm_tkn Dat_rng_(int bgn, int end) {return this;}
@@ -23,6 +26,6 @@ public class Arg_itm_tkn_null extends Xop_tkn_null implements Arg_itm_tkn {	publ
 	public byte[] Dat_to_bry(byte[] src) {return Bry_.Empty;}
 	public Arg_itm_tkn Subs_add_ary(Xop_tkn_itm... ary) {return this;}
 	public boolean Dat_ary_had_subst() {return false;} public void Dat_ary_had_subst_y_() {}
-	public byte Itm_static() {return Bool_.__byte;} public Arg_itm_tkn Itm_static_(boolean v) {return this;}
+	public byte Itm_static() {return BoolUtl.NullByte;} public Arg_itm_tkn Itm_static_(boolean v) {return this;}
 	public static final Arg_itm_tkn_null Null_arg_itm = new Arg_itm_tkn_null(); Arg_itm_tkn_null() {}
 }

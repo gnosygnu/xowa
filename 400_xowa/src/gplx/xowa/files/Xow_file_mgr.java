@@ -13,11 +13,37 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.cfgs.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.origs.*;
-import gplx.fsdb.*; import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*;
-import gplx.xowa.wikis.tdbs.metas.*;
+package gplx.xowa.files;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.dbs.cfgs.Db_cfg_hash;
+import gplx.fsdb.Fsdb_db_mgr;
+import gplx.fsdb.Fsdb_db_mgr_;
+import gplx.fsdb.Fsdb_db_mgr__v1;
+import gplx.fsdb.Fsdb_db_mgr__v2_bldr;
+import gplx.fsdb.meta.Fsm_mnt_itm;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.fsdb.Xof_fsdb_mgr;
+import gplx.xowa.files.fsdb.Xof_fsdb_mgr__sql;
+import gplx.xowa.files.origs.Xof_orig_itm;
+import gplx.xowa.files.origs.Xof_orig_mgr;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.files.repos.Xof_repo_pair;
+import gplx.xowa.files.repos.Xowe_repo_mgr;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_itm;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_mgr;
 public class Xow_file_mgr implements Gfo_invk {
 	private Xof_wkr_mgr wkr_mgr;
 	public Xow_file_mgr(Xowe_wiki wiki) {
@@ -36,7 +62,7 @@ public class Xow_file_mgr implements Gfo_invk {
 	} private Xof_fsdb_mode fsdb_mode = null;
 	public Xowe_wiki Wiki() {return wiki;} private Xowe_wiki wiki;
 	public byte Version() {
-		if (version == Bool_.__byte) {
+		if (version == BoolUtl.NullByte) {
 			Io_url file_dir = wiki.Fsys_mgr().File_dir();
 			if (!Io_mgr.Instance.ExistsFil(file_dir.GenSubFil(Fsdb_db_mgr__v1.Mnt_name))) {
 				version = Version_1;
@@ -119,7 +145,7 @@ public class Xow_file_mgr implements Gfo_invk {
 	}
 	public Xof_fsdb_mgr Fsdb_mgr() {return fsdb_mgr;} private Xof_fsdb_mgr fsdb_mgr = new Xof_fsdb_mgr__sql();
 	public void Clear_for_tests() {	// NOTE: must clear else fsdb_mode will be cached for multiple runs; will generally be v1, but some tests will set to v2; DATE:2015-12-22
-		version = Bool_.__byte;
+		version = BoolUtl.NullByte;
 		fsdb_mode = null;
 	}
 	public boolean Find_meta(Xof_xfer_itm xfer_itm) {
@@ -143,7 +169,7 @@ public class Xow_file_mgr implements Gfo_invk {
 	public boolean Exists(byte[] ttl_bry) {
 		if (this.Version_1_y()) {
 			Xof_meta_itm meta = meta_mgr.Get_itm_or_new(ttl_bry);
-			return meta.Orig_exists() == Bool_.Y_byte || meta.Thumbs().length != 0;
+			return meta.Orig_exists() == BoolUtl.YByte || meta.Thumbs().length != 0;
 		}
 		else
 			return orig_mgr.Find_by_ttl_or_null(ttl_bry) != Xof_orig_itm.Null;

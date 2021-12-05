@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders;
+import gplx.Bry_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import org.junit.Test;
 public class Xofulltext_finder_cbk__eval__tst {
 	private final Xofulltext_finder_cbk__eval__fxt fxt = new Xofulltext_finder_cbk__eval__fxt();
 	@Test  public void Exact() {
@@ -102,15 +106,15 @@ class Xofulltext_finder_cbk__eval__fxt {
 	private boolean case_match = false;
 	private boolean auto_wildcard_bgn = false;
 	private boolean auto_wildcard_end = false;
-	private byte wildcard_byte = Byte_ascii.Star;
-	private byte not_byte = Byte_ascii.Dash;
+	private byte wildcard_byte = AsciiByte.Star;
+	private byte not_byte = AsciiByte.Dash;
 	private final Xofulltext_finder_mgr finder = new Xofulltext_finder_mgr();
 	private final Xofulltext_finder_cbk__eval cbk = new Xofulltext_finder_cbk__eval();
 	public void Init__search(String query) {
 		finder.Init(Bry_.new_u8(query), case_match, auto_wildcard_bgn, auto_wildcard_end, wildcard_byte, not_byte);
 	}
-	public void Test__eval_y(String... texts) {Test__eval(Bool_.Y, texts);}
-	public void Test__eval_n(String... texts) {Test__eval(Bool_.N, texts);}
+	public void Test__eval_y(String... texts) {Test__eval(BoolUtl.Y, texts);}
+	public void Test__eval_n(String... texts) {Test__eval(BoolUtl.N, texts);}
 	public void Test__eval(boolean expd, String... texts) {
 		for (String text : texts) {
 			byte[] text_bry = Bry_.new_u8(text);

@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
-import gplx.core.btries.*;
-import gplx.xowa.langs.cases.*;
+package gplx.xowa.addons.wikis.searchs.parsers;
+import gplx.objects.primitives.BoolUtl;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Bry_split_;
+import gplx.objects.strings.AsciiByte;
+import gplx.Int_;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.ComparerAble;
+import gplx.xowa.langs.cases.Xol_case_mgr;
 public class Srch_highlight_mgr {
 	private final Xol_case_mgr	case_mgr;
 	private final Bry_bfr		tmp_bfr = Bry_bfr_.New_w_size(32);
@@ -26,7 +34,7 @@ public class Srch_highlight_mgr {
 		synchronized (tmp_bfr) {
 			// build array of search_words
 			byte[] srch_lc_bry = case_mgr.Case_build_lower(srch_mc_bry);
-			byte[][] srch_lc_ary = Bry_split_.Split(srch_lc_bry, Byte_ascii.Space, Bool_.Y);
+			byte[][] srch_lc_ary = Bry_split_.Split(srch_lc_bry, AsciiByte.Space, BoolUtl.Y);
 			this.srch_words_len = srch_lc_ary.length;
 			this.srch_lc_itms = new Srch_highlight_itm[srch_words_len];
 			for (int i = 0; i < srch_words_len; ++i) {
@@ -35,14 +43,14 @@ public class Srch_highlight_mgr {
 			}
 			
 			// sort to search first by longest search_word; needed for searches like "A Abc" and titles like "Abc A", else "A" will match "Abc" and "Abc" will match nothing
-			Array_.Sort(srch_lc_itms, Srch_highlight_bry_sorter.Instance);
+			ArrayUtl.Sort(srch_lc_itms, Srch_highlight_bry_sorter.Instance);
 			return this;
 		}
 	}
 	public byte[] Highlight(byte[] page_mc_bry) {
 		synchronized (tmp_bfr) {
-			byte[][]	page_mc_words = Bry_split_.Split(page_mc_bry, Byte_ascii.Space, Bool_.Y);
-			byte[][]	page_lc_words = Bry_split_.Split(case_mgr.Case_build_lower(page_mc_bry), Byte_ascii.Space, Bool_.Y);
+			byte[][]	page_mc_words = Bry_split_.Split(page_mc_bry, AsciiByte.Space, BoolUtl.Y);
+			byte[][]	page_lc_words = Bry_split_.Split(case_mgr.Case_build_lower(page_mc_bry), AsciiByte.Space, BoolUtl.Y);
 			int			page_words_len = page_lc_words.length;
 			boolean[]		page_words_done = new boolean[page_words_len];
 
@@ -62,8 +70,8 @@ public class Srch_highlight_mgr {
 					// skip: find_pos is not BOS and prv byte is not dash or paren; EX: "Za" should be skipped; "-a" and "(a" should not
 					if (find_pos > 0) {
 						byte prv_byte = page_lc_word[find_pos - 1];
-						if (	prv_byte != Byte_ascii.Dash
-							&&	prv_byte != Byte_ascii.Paren_bgn
+						if (	prv_byte != AsciiByte.Dash
+							&&	prv_byte != AsciiByte.ParenBgn
 							)
 							continue;
 					}					
@@ -105,7 +113,7 @@ class Srch_highlight_itm {
 	public final byte[] Word;
 	public final int Word_len;
 }
-class Srch_highlight_bry_sorter implements gplx.core.lists.ComparerAble {
+class Srch_highlight_bry_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Srch_highlight_itm lhs = (Srch_highlight_itm)lhsObj;
 		Srch_highlight_itm rhs = (Srch_highlight_itm)rhsObj;

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.bldrs.css; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.envs.*; import gplx.core.btries.*; import gplx.core.primitives.*;
 import gplx.xowa.files.downloads.*;
 public class Xoa_css_img_downloader {
@@ -97,15 +99,15 @@ public class Xoa_css_img_downloader {
 				// identify end byte: ' " )
 				int bgn_pos = url_pos + Bry_url_len; // set bgn_pos after "url("
 				byte bgn_byte = src[bgn_pos];
-				byte end_byte = Byte_ascii.Null;
+				byte end_byte = AsciiByte.Null;
 				boolean quoted = true;
 				switch (bgn_byte) {									// find end_byte
-					case Byte_ascii.Quote: case Byte_ascii.Apos:	// quoted; end_byte is ' or "
+					case AsciiByte.Quote: case AsciiByte.Apos:	// quoted; end_byte is ' or "
 						end_byte = bgn_byte;
 						++bgn_pos;
 						break;
 					default:										// not quoted; end byte is ")"
-						end_byte = Byte_ascii.Paren_end;
+						end_byte = AsciiByte.ParenEnd;
 						quoted = false;
 						break;
 				}
@@ -155,9 +157,9 @@ public class Xoa_css_img_downloader {
 
 				// add to bfr
 				bfr.Add_mid(src, prv_pos, bgn_pos);
-				if (!quoted) bfr.Add_byte(Byte_ascii.Quote);
+				if (!quoted) bfr.Add_byte(AsciiByte.Quote);
 				bfr.Add(img_cleaned);
-				if (!quoted) bfr.Add_byte(Byte_ascii.Quote);
+				if (!quoted) bfr.Add_byte(AsciiByte.Quote);
 				prv_pos = end_pos;
 			}
 			return bfr.To_bry_and_clear();
@@ -177,11 +179,11 @@ public class Xoa_css_img_downloader {
 		if (find_bgn < Bry_import_len) return Bry_find_.Not_found;
 		if (!Bry_.Match(src, find_bgn - Bry_import_len, find_bgn, Bry_import)) return Bry_find_.Not_found;
 		byte[] css_url = url_raw; int css_url_len = css_url.length;
-		if (css_url_len > 0 && css_url[0] == Byte_ascii.Slash) {		// css_url starts with "/"; EX: "/page" or "//site/page" DATE:2014-02-03
-			if (css_url_len > 1 && css_url[1] != Byte_ascii.Slash)		// skip if css_url starts with "//"; EX: "//site/page"
+		if (css_url_len > 0 && css_url[0] == AsciiByte.Slash) {		// css_url starts with "/"; EX: "/page" or "//site/page" DATE:2014-02-03
+			if (css_url_len > 1 && css_url[1] != AsciiByte.Slash)		// skip if css_url starts with "//"; EX: "//site/page"
 				css_url = Bry_.Add(rel_url_prefix, css_url);			// "/w/a.css" -> "//en.wikipedia.org/w/a.css"
 		}
-		css_url = Bry_.Replace(css_url, Byte_ascii.Space, Byte_ascii.Underline);	// NOTE: must replace spaces with underlines else download will fail; EX:https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
+		css_url = Bry_.Replace(css_url, AsciiByte.Space, AsciiByte.Underline);	// NOTE: must replace spaces with underlines else download will fail; EX:https://it.wikivoyage.org/w/index.php?title=MediaWiki:Container e Infobox.css&action=raw&ctype=text/css; DATE:2015-03-08
 		byte[] css_src_bry = Import_url_build(stylesheet_prefix, rel_url_prefix, css_url);
 		String css_src_str = String_.new_u8(css_src_bry);
 		download_wkr.Download_xrg().Prog_fmt_hdr_(usr_dlg.Log_many(GRP_KEY, "logo.download", "downloading import for '~{0}'", css_src_str));
@@ -195,8 +197,8 @@ public class Xoa_css_img_downloader {
 		if (Bry_find_.Find_fwd(css_url, Wikisource_dynimg_ttl) != -1) css_trg_bry = Bry_.Replace(css_trg_bry, Wikisource_dynimg_find, Wikisource_dynimg_repl);	// FreedImg hack; PAGE:en.s:Page:Notes_on_Osteology_of_Baptanodon._With_a_Description_of_a_New_Species.pdf/3 DATE:2014-09-06
 		bfr.Add(css_trg_bry).Add_byte_nl();
 		bfr.Add_byte_nl();
-		int semic_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, find_bgn + url_raw.length, src_len);
-		return semic_pos + Byte_ascii.Len_1;
+		int semic_pos = Bry_find_.Find_fwd(src, AsciiByte.Semic, find_bgn + url_raw.length, src_len);
+		return semic_pos + AsciiByte.Len1;
 	}
 	private static final byte[]
 	  Wikisource_dynimg_ttl		= Bry_.new_a7("en.wikisource.org/w/index.php?title=MediaWiki:Dynimg.css")
@@ -207,11 +209,11 @@ public class Xoa_css_img_downloader {
 		int pos_bgn = 0;
 		if (Bry_.Has_at_bgn(raw, Bry_fwd_slashes, 0, raw_len)) pos_bgn = Bry_fwd_slashes.length;
 		if (Bry_.Has_at_bgn(raw, Bry_http, 0, raw_len)) pos_bgn = Bry_http.length;
-		int pos_slash = Bry_find_.Find_fwd(raw, Byte_ascii.Slash, pos_bgn, raw_len);
+		int pos_slash = Bry_find_.Find_fwd(raw, AsciiByte.Slash, pos_bgn, raw_len);
 		if (pos_slash == Bry_find_.Not_found) return null; // first segment is site_name; at least one slash must be present for image name; EX: site.org/img_name.jpg
 		if (pos_slash == raw_len - 1) return null; // "site.org/" is invalid
 		int pos_end = raw_len;
-		int pos_question = Bry_find_.Find_bwd(raw, Byte_ascii.Question);
+		int pos_question = Bry_find_.Find_bwd(raw, AsciiByte.Question);
 		if (pos_question != Bry_find_.Not_found)
 			pos_end = pos_question;	// remove query params; EX: img_name?key=val 
 		return Bry_.Mid(raw, pos_bgn, pos_end);
@@ -235,9 +237,9 @@ public class Xoa_css_img_downloader {
 			byte b = raw_bry[i];
 			switch (b) {
 				//case Byte_ascii.Slash:
-				case Byte_ascii.Backslash: case Byte_ascii.Colon: case Byte_ascii.Star: case Byte_ascii.Question:
-				case Byte_ascii.Quote: case Byte_ascii.Lt: case Byte_ascii.Gt: case Byte_ascii.Pipe:
-					raw_bry[i] = Byte_ascii.Underline;
+				case AsciiByte.Backslash: case AsciiByte.Colon: case AsciiByte.Star: case AsciiByte.Question:
+				case AsciiByte.Quote: case AsciiByte.Lt: case AsciiByte.Gt: case AsciiByte.Pipe:
+					raw_bry[i] = AsciiByte.Underline;
 					break;
 			}
 		}

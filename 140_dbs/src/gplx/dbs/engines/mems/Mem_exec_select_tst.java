@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import org.junit.*; import gplx.dbs.sqls.itms.*;
+package gplx.dbs.engines.mems;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_null;
+import gplx.dbs.Db_qry;
+import gplx.dbs.Db_qry_;
+import gplx.dbs.sqls.itms.Sql_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Mem_exec_select_tst {
 	private final Mem_db_fxt__single fxt = new Mem_db_fxt__single();
 	@Test   public void Basic() {
@@ -33,7 +40,7 @@ public class Mem_exec_select_tst {
 		);
 
 		// order by
-		fxt.Test__select(Db_qry_.select_().From_("tbl_1").Cols_all_().Order_("fld_1", Bool_.N)
+		fxt.Test__select(Db_qry_.select_().From_("tbl_1").Cols_all_().Order_("fld_1", BoolUtl.N)
 		, String_.Ary("a_2")
 		, String_.Ary("a_1")
 		, String_.Ary("a_0")

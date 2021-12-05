@@ -13,10 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.core.ios.*;
-import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.htmls.core;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.core.ios.Io_stream_zip_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_mgr;
+import gplx.xowa.wikis.data.Xowd_core_db_props;
 public class Xow_hdump_mgr {
 	private final Xoh_page tmp_hpg = new Xoh_page(); private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
 	private final Io_stream_zip_mgr zip_mgr = new Io_stream_zip_mgr();
@@ -44,6 +52,6 @@ public class Xow_hdump_mgr {
 	}
 	public void Init_by_db(byte dflt_zip_tid, boolean dflt_hzip_enable, boolean mode_is_b256) {
 		int dflt_hzip_tid = dflt_hzip_enable ? Xoh_hzip_dict_.Hdb__hzip : Xoh_hzip_dict_.Hdb__htxt;
-		save_mgr.Init_by_db(dflt_zip_tid, dflt_hzip_tid, Bool_.N);
+		save_mgr.Init_by_db(dflt_zip_tid, dflt_hzip_tid, BoolUtl.N);
 	}
 }

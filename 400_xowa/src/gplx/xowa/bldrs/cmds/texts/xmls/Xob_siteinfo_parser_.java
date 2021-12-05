@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
+package gplx.xowa.bldrs.cmds.texts.xmls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.langs.xmls.*; // NOTE: gplx.langs.xmls does not support Android; DATE:2013-01-17
 import gplx.xowa.wikis.nss.*;
 public class Xob_siteinfo_parser_ {
@@ -55,7 +57,7 @@ public class Xob_siteinfo_parser_ {
 	private static byte[] Parse_base(byte[] url) {
 		int page_bgn = Bry_find_.Find_fwd(url, gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki, 0);
 		if (page_bgn == Bry_find_.Not_found) {							// "/wiki/" not found; EX: "http://mywiki/My_main_page"
-			page_bgn = Bry_find_.Find_bwd(url, Byte_ascii.Slash);		// ASSUME last segment is page
+			page_bgn = Bry_find_.Find_bwd(url, AsciiByte.Slash);		// ASSUME last segment is page
 			if (page_bgn == Bry_find_.Not_found) throw Err_.new_("Xob_siteinfo_parser_", "could not parse main page url", "url", url);
 			++page_bgn;													// add 1 to position after slash
 		}

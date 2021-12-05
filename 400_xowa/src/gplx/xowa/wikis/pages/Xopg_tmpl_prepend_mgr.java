@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.pages; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Xopg_tmpl_prepend_mgr {
 	private Bry_bfr[] stack = Bry_bfr_.Ary_empty; private int stack_len, stack_max;
@@ -27,7 +29,7 @@ public class Xopg_tmpl_prepend_mgr {
 		if (new_len > stack_max) {
 			stack_max += 8;
 			Bry_bfr[] new_stack = new Bry_bfr[stack_max];
-			Array_.Copy_to(stack, new_stack, 0);
+			ArrayUtl.CopyTo(stack, new_stack, 0);
 			stack = new_stack;
 		}
 		stack[stack_len] = bfr;
@@ -43,8 +45,8 @@ public class Xopg_tmpl_prepend_mgr {
 				for (int i = stack_len - 1; i > -1; --i) {						// iterate backwards over tmpl_stack;
 					Bry_bfr stack_bfr = stack[i];
 					switch (stack_bfr.Get_at_last_or_nil_if_empty()) {
-						case Byte_ascii.Null:		continue;					// bfr is empty; ignore it
-						case Byte_ascii.Nl:	add = false; i = -1; break;	// bfr ends in \n; don't add and stop; PAGE:bn.w:লিওনেল_মেসি |ko.w:도쿄_지하철_히비야_선|DATE:2014-05-27
+						case AsciiByte.Null:		continue;					// bfr is empty; ignore it
+						case AsciiByte.Nl:	add = false; i = -1; break;	// bfr ends in \n; don't add and stop; PAGE:bn.w:লিওনেল_মেসি |ko.w:도쿄_지하철_히비야_선|DATE:2014-05-27
 						default:					i = -1; break;				// bfr has char; stop
 					}
 				}
@@ -52,7 +54,7 @@ public class Xopg_tmpl_prepend_mgr {
 			else																// called from func arg; always add \n; EX:vi.w:Friedrich_II_của_Phổ; DATE:2014-04-26
 				add = true;
 			if (add)
-				bfr.Add_byte(Byte_ascii.Nl);
+				bfr.Add_byte(AsciiByte.Nl);
 		}
 		if (called_from_tmpl) --stack_len;
 	}

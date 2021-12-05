@@ -13,9 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.history; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*;
-import gplx.core.net.qargs.*; import gplx.xowa.htmls.hrefs.*;
+package gplx.xowa.users.history;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Datetime_now;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.net.qargs.Gfo_qarg_mgr_old;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_page_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.htmls.hrefs.Xoh_href_;
 public class Xou_history_mgr implements Gfo_invk {
 	private final Xou_history_html html_mgr = new Xou_history_html(); private Xou_history_sorter sorter = new Xou_history_sorter().Sort_fld_(Xou_history_itm.Fld_view_end).Ascending_(false);
 	private final Io_url history_fil;
@@ -79,7 +101,7 @@ public class Xou_history_mgr implements Gfo_invk {
 		byte[] page = Xoa_ttl.Replace_spaces(ttl.Full_txt_wo_qarg());
 		tmp_bfr.Add(page);
 		Gfo_qarg_mgr_old qarg_mgr = url.Qargs_mgr();
-		qarg_mgr.To_bry(tmp_bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, Bool_.N);
+		qarg_mgr.To_bry(tmp_bfr, gplx.langs.htmls.encoders.Gfo_url_encoder_.Href, BoolUtl.N);
 		return tmp_bfr.To_bry_and_clear();
 	}
 	public void Sort() {itms.Sort_by(sorter);}

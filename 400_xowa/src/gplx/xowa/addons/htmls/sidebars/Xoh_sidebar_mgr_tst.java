@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.htmls.sidebars;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
@@ -177,12 +177,12 @@ class Xoh_sidebar_mgr_fxt {
 	}
 	public Xowe_wiki Wiki() {return wiki;}
 	public Xoh_sidebar_itm Make__grp(String text, String title, Xoh_sidebar_itm... itms) {
-		Xoh_sidebar_itm rv = new Xoh_sidebar_itm(Bool_.N, Bry_.new_a7(text), Bry_.new_a7(text), null);
+		Xoh_sidebar_itm rv = new Xoh_sidebar_itm(BoolUtl.N, Bry_.new_a7(text), Bry_.new_a7(text), null);
 		rv.Init_by_title_and_accesskey(Bry_.new_a7(title), null, null);
 		return rv;
 	}
 	public Xoh_sidebar_itm Make__itm(String text, String title, String accesskey, String href) {
-		Xoh_sidebar_itm rv = new Xoh_sidebar_itm(Bool_.Y, Bry_.new_a7(text), Bry_.new_a7(text), Bry_.new_a7(href));
+		Xoh_sidebar_itm rv = new Xoh_sidebar_itm(BoolUtl.Y, Bry_.new_a7(text), Bry_.new_a7(text), Bry_.new_a7(href));
 		rv.Init_by_title_and_accesskey(Bry_.new_a7(title), Bry_.new_a7(accesskey), null);
 		return rv;
 	}

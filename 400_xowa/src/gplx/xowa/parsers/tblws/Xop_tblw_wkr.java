@@ -13,8 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tblws; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.miscs.*;
+package gplx.xowa.parsers.tblws;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_ctx_wkr;
+import gplx.xowa.parsers.Xop_parser_;
+import gplx.xowa.parsers.Xop_parser_tid_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.lists.Xop_list_wkr_;
+import gplx.xowa.parsers.miscs.Xop_ignore_tkn;
+import gplx.xowa.parsers.paras.Xop_nl_tkn;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
 public class Xop_tblw_wkr implements Xop_ctx_wkr {
 	private int tblw_te_ignore_count = 0;
 	public boolean Cell_pipe_seen() {return cell_pipe_seen;} public Xop_tblw_wkr Cell_pipe_seen_(boolean v) {cell_pipe_seen = v; return this;} private boolean cell_pipe_seen; // status of 1st cell pipe; EX: \n| a | b | c || -> flag pipe between a and b but ignore b and c
@@ -113,7 +130,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		if (prv_tkn != null && !prv_tkn.Tblw_xml()) {			// note that this logic is same as Atrs_close; repeated here for "perf"
 			switch (prv_tid) {
 				case Xop_tkn_itm_.Tid_tblw_tb: case Xop_tkn_itm_.Tid_tblw_tr:
-					Atrs_make(ctx, src, root, this, prv_tkn, Bool_.N);
+					Atrs_make(ctx, src, root, this, prv_tkn, BoolUtl.N);
 					break;
 			}
 		}
@@ -150,7 +167,7 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 				if		(ignore_prv) {
 					ctx.Subs_add(root, tkn_mkr.Ignore(bgn_pos, cur_pos, Xop_ignore_tkn.Ignore_tid_htmlTidy_tblw));
 					++tblw_te_ignore_count;
-					cur_pos = Bry_find_.Find_fwd_until(src, cur_pos, src_len, Byte_ascii.Nl);	// NOTE: minor hack; this tblw tkn will be ignored, so ignore any of its attributes as well; gobble up all chars till nl. see:  if two consecutive tbs, ignore attributes on 2nd; en.wikibooks.org/wiki/Wikibooks:Featured books
+					cur_pos = Bry_find_.Find_fwd_until(src, cur_pos, src_len, AsciiByte.Nl);	// NOTE: minor hack; this tblw tkn will be ignored, so ignore any of its attributes as well; gobble up all chars till nl. see:  if two consecutive tbs, ignore attributes on 2nd; en.wikibooks.org/wiki/Wikibooks:Featured books
 					return cur_pos;
 				}
 				if (auto_create) {
@@ -490,11 +507,11 @@ public class Xop_tblw_wkr implements Xop_ctx_wkr {
 		root.Subs_del_between(ctx, subs_bgn, subs_pos);
 		int atrs_bgn = prv_tblw.Src_end(), atrs_end = last_atr_tkn.Src_end();
 		if (prv_tblw.Tkn_tid() == Xop_tkn_itm_.Tid_tblw_tr)	// NOTE: if "|-" gobble all trailing dashes; REF: Parser.php!doTableStuff; $line = preg_replace( '#^\|-+#', '', $line ); DATE:2013-06-21
-			atrs_bgn = Bry_find_.Find_fwd_while(src, atrs_bgn, src.length, Byte_ascii.Dash);
+			atrs_bgn = Bry_find_.Find_fwd_while(src, atrs_bgn, src.length, AsciiByte.Dash);
 		prv_tblw.Atrs_rng_set(atrs_bgn, atrs_end);
 		if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt && atrs_bgn != -1) {
 			// NOWIKI;DATE:2018-01-16
-			// byte[] converted = ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(Bool_.N, Bry_.Mid(src, atrs_bgn, atrs_end));
+			// byte[] converted = ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(BoolUtl.N, Bry_.Mid(src, atrs_bgn, atrs_end));
 			// Mwh_atr_itm[] atrs = ctx.App().Parser_mgr().Xnde__parse_atrs(converted, 0, converted.length);
 			Mwh_atr_itm[] atrs = ctx.App().Parser_mgr().Xnde__parse_atrs_for_tblw(src, atrs_bgn, atrs_end);
 			prv_tblw.Atrs_ary_as_tblw_(atrs);

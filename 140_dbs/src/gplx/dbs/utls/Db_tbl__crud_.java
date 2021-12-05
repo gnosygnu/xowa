@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.utls; import gplx.*; import gplx.dbs.*;
-import gplx.dbs.stmts.*;
+package gplx.dbs.utls;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.stmts.Db_stmt_arg_list;
+import gplx.objects.primitives.BoolUtl;
 public class Db_tbl__crud_ {
 	public static boolean Upsert(Db_conn conn, String tbl_name, DbmetaFldList flds, String[] crt_cols, Object... objs) {
 		// init
@@ -23,7 +33,7 @@ public class Db_tbl__crud_ {
 
 		// check if exists
 		Db_stmt select_stmt = conn.Stmt_select(tbl_name, crt_cols, crt_cols);
-		Add_arg(select_stmt, flds, crt_cols, objs, Bool_.Y, 0);
+		Add_arg(select_stmt, flds, crt_cols, objs, BoolUtl.Y, 0);
 		Db_rdr rdr = select_stmt.Exec_select__rls_auto();
 		boolean exists = rdr.Move_next();
 		rdr.Rls();
@@ -32,8 +42,8 @@ public class Db_tbl__crud_ {
 		// update
 		if (exists) {
 			Db_stmt update_stmt = conn.Stmt_update(tbl_name, crt_cols, val_cols);
-			Add_arg(update_stmt, flds, val_cols, objs, Bool_.N, crt_cols_len);
-			Add_arg(update_stmt, flds, crt_cols, objs, Bool_.Y, 0);
+			Add_arg(update_stmt, flds, val_cols, objs, BoolUtl.N, crt_cols_len);
+			Add_arg(update_stmt, flds, crt_cols, objs, BoolUtl.Y, 0);
 			update_stmt.Exec_update();
 			update_stmt.Rls();
 			return false;
@@ -41,8 +51,8 @@ public class Db_tbl__crud_ {
 		// insert
 		else {
 			Db_stmt insert_stmt = conn.Stmt_insert(tbl_name, flds);
-			Add_arg(insert_stmt, flds, crt_cols, objs, Bool_.N, 0);
-			Add_arg(insert_stmt, flds, val_cols, objs, Bool_.N, crt_cols_len);
+			Add_arg(insert_stmt, flds, crt_cols, objs, BoolUtl.N, 0);
+			Add_arg(insert_stmt, flds, val_cols, objs, BoolUtl.N, crt_cols_len);
 			insert_stmt.Exec_insert();
 			insert_stmt.Rls();
 			return true;

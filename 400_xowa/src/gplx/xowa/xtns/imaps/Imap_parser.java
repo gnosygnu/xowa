@@ -13,10 +13,45 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps; import gplx.*; import gplx.xowa.*;
-import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.lnkis.files.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.xtns.imaps.itms.*;
+package gplx.xowa.xtns.imaps;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.core.primitives.Double_obj_val;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
+import gplx.xowa.parsers.tmpls.Xop_tkn_;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.xtns.imaps.itms.Imap_desc_tid;
+import gplx.xowa.xtns.imaps.itms.Imap_err;
+import gplx.xowa.xtns.imaps.itms.Imap_link_owner;
+import gplx.xowa.xtns.imaps.itms.Imap_link_owner_;
+import gplx.xowa.xtns.imaps.itms.Imap_part_;
+import gplx.xowa.xtns.imaps.itms.Imap_part_desc;
+import gplx.xowa.xtns.imaps.itms.Imap_part_dflt;
+import gplx.xowa.xtns.imaps.itms.Imap_part_img;
+import gplx.xowa.xtns.imaps.itms.Imap_part_shape;
 public class Imap_parser {
 	private Imap_xtn_mgr xtn_mgr; private Xoa_url page_url; private Gfo_usr_dlg usr_dlg = Gfo_usr_dlg_.Instance;
 	private byte[] imap_img_src;
@@ -54,12 +89,12 @@ public class Imap_parser {
 			if (itm_end == src_end) break;
 			itm_bgn = Bry_find_.Trim_fwd_space_tab(src, itm_end + 1, src_end);					// trim ws at start, and look for first char
 			if (itm_bgn == src_end) break;														// line is entirely ws and terminated by eos; EX: "\n  EOS"
-			itm_end = Bry_find_.Find_fwd_until(src, itm_bgn, src_end, Byte_ascii.Nl);			// look for \n
+			itm_end = Bry_find_.Find_fwd_until(src, itm_bgn, src_end, AsciiByte.Nl);			// look for \n
 			if (itm_end == Bry_find_.Not_found) itm_end = src_end;								// no \n; make EOS = \n
 			itm_end = Bry_find_.Trim_bwd_space_tab(src, itm_end, itm_bgn);						// trim any ws at end
 			if (itm_end - itm_bgn == 0) continue;												// line is entirely ws; continue;
 			byte b = src[itm_bgn];
-			if (b == Byte_ascii.Hash) {
+			if (b == AsciiByte.Hash) {
 				Parse_comment(itm_bgn, itm_end);
 				continue;
 			}
@@ -91,7 +126,7 @@ public class Imap_parser {
 		Btrie_slim_mgr trie = xtn_mgr.Desc_trie();
 		byte tid_desc = Imap_desc_tid.Parse_to_tid(trie, src, Bry_find_.Trim_fwd_space_tab(src, itm_bgn, itm_end), Bry_find_.Trim_bwd_space_tab(src, itm_end, itm_bgn));
 		switch (tid_desc) {
-			case Imap_desc_tid.Tid_null: return Add_err(Bool_.N, itm_bgn, itm_end, "imagemap_invalid_coord");
+			case Imap_desc_tid.Tid_null: return Add_err(BoolUtl.N, itm_bgn, itm_end, "imagemap_invalid_coord");
 			case Imap_desc_tid.Tid_none: return true;
 		}
 		if (imap_img == null || imap_img.Img_link().Lnki_type() == Xop_lnki_type.Id_thumb) return true;	// thumbs don't get desc
@@ -105,16 +140,16 @@ public class Imap_parser {
 	private boolean Parse_shape(byte shape_tid, int tid_end_pos, int itm_bgn, int itm_end, int reqd_pts) {
 		boolean shape_is_poly = shape_tid == Imap_part_.Tid_shape_poly;
 		int pos = Bry_find_.Trim_fwd_space_tab(src, tid_end_pos, itm_end);				// gobble any leading spaces
-		int grp_end = Bry_find_.Find_fwd(src, Byte_ascii.Brack_bgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
-		if (grp_end == -1) {return Add_err(Bool_.Y, itm_bgn, itm_end, "imap.parse:No valid link was found");}
+		int grp_end = Bry_find_.Find_fwd(src, AsciiByte.BrackBgn, pos, itm_end);		// find first "["; note that this is a lazy way of detecting start of lnki / lnke; MW has complicated regex, but hopefully this will be enough; DATE:2014-10-22
+		if (grp_end == -1) {return Add_err(BoolUtl.Y, itm_bgn, itm_end, "imap.parse:No valid link was found");}
 		int num_bgn = -1, comma_pos = -1, pts_len = 0;
 		while (true) {
 			boolean last = pos == grp_end;
-			byte b = last ? Byte_ascii.Space : src[pos];
+			byte b = last ? AsciiByte.Space : src[pos];
 			switch (b) {
-				case Byte_ascii.Comma:	if (comma_pos == -1) comma_pos = pos; break;
+				case AsciiByte.Comma:	if (comma_pos == -1) comma_pos = pos; break;
 				default:				if (num_bgn == -1) num_bgn = pos; break;
-				case Byte_ascii.Space: case Byte_ascii.Tab:
+				case AsciiByte.Space: case AsciiByte.Tab:
 					if (num_bgn != -1) {
 						byte[] num_bry 
 							=		comma_pos == -1			// if commas exist, treat first as decimal; echo(intval(round('1,2,3,4' * 1))) -> 1; PAGE:fr.w:Gouesnou; DATE:2014-08-12
@@ -127,7 +162,7 @@ public class Imap_parser {
 							if (shape_is_poly)	// poly code in ImageMap_body.php accepts invalid words and converts to 0; EX:"word1"; PAGE:uk.w:Стратосфера; DATE:2014-07-26
 								num = 0;
 							else
-								return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_invalid_coord");								
+								return Add_err(BoolUtl.Y, itm_bgn, itm_end, "imagemap_invalid_coord");								
 						}
 						num_bgn = -1; comma_pos = -1;
 						pts.Add(Double_obj_val.new_(num));
@@ -141,11 +176,11 @@ public class Imap_parser {
 			++pos;
 		}
 		if (reqd_pts == Reqd_poly) {
-			if		(pts_len == 0)			return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
-			else if (pts_len % 2 != 0)		return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_poly_odd");
+			if		(pts_len == 0)			return Add_err(BoolUtl.Y, itm_bgn, itm_end, "imagemap_missing_coord");
+			else if (pts_len % 2 != 0)		return Add_err(BoolUtl.Y, itm_bgn, itm_end, "imagemap_poly_odd");
 		}
 		else {
-			if		(pts_len < reqd_pts)	return Add_err(Bool_.Y, itm_bgn, itm_end, "imagemap_missing_coord");
+			if		(pts_len < reqd_pts)	return Add_err(BoolUtl.Y, itm_bgn, itm_end, "imagemap_missing_coord");
 		}
 		pos = Bry_find_.Trim_fwd_space_tab(src, pos, itm_end);
 		Imap_part_shape shape_itm = new Imap_part_shape(shape_tid, (Double_obj_val[])pts.ToAryAndClear(Double_obj_val.class));
@@ -162,7 +197,7 @@ public class Imap_parser {
 	private void Init_link_owner(Imap_link_owner link_owner, byte[] src, int bgn, int end) {
 		byte[] link_tkn_src = Bry_.Mid(src, bgn, end);
 		Xop_tkn_itm link_tkn = Parse_link(link_tkn_src);
-		if (link_tkn == null) {Add_err(Bool_.N, bgn, end, "imap.invalid link_owner"); return;}	// exit early if invalid; PAGE:de.u:PPA/Raster/TK25/51/18/12/20; DATE:2015-02-02
+		if (link_tkn == null) {Add_err(BoolUtl.N, bgn, end, "imap.invalid link_owner"); return;}	// exit early if invalid; PAGE:de.u:PPA/Raster/TK25/51/18/12/20; DATE:2015-02-02
 		link_tkn_src = imap_root.Data_mid();	// NOTE:must re-set link_tkn_src since link_tkn is expanded wikitext; i.e.: not "{{A}}" but "expanded"; PAGE:fr.w:Arrondissements_de_Lyon DATE:2014-08-12
 		Imap_link_owner_.Init(link_owner, app, wiki, link_tkn_src, link_tkn);
 	}
@@ -207,13 +242,13 @@ public class Imap_parser {
 			pos = Bry_find_.Trim_fwd_space_tab(src, pos, src_end);	// trim ws
 			if (pos == src_end) break;
 			byte b = src[pos];
-			if (b == Byte_ascii.Nl)	// new-line; end
+			if (b == AsciiByte.Nl)	// new-line; end
 				break;
 			else {
 				Object tid_obj = tid_trie.Match_bgn_w_byte(b, src, pos, src_end);
 				if (tid_obj == null) {		// not a known imap line; assume continuation of img line and skip to next line
 					Xoa_app_.Usr_dlg().Log_many("", "", "image_map extending image over multiple lines; page=~{0} imageMap=~{1}", page_url.To_str(), imap_img_src);
-					int next_line = Bry_find_.Find_fwd(src, Byte_ascii.Nl, pos);
+					int next_line = Bry_find_.Find_fwd(src, AsciiByte.Nl, pos);
 					if (next_line == Bry_find_.Not_found) next_line = src_end;
 					rv = next_line;
 					pos = rv + 1;

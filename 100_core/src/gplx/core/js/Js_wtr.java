@@ -13,22 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.js; import gplx.*; import gplx.core.*;
+package gplx.core.js;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Int_;
+import gplx.Long_;
+import gplx.Object_;
+import gplx.Type_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Js_wtr {
 	private final Bry_bfr bfr = Bry_bfr_.Reset(32);
 	private int arg_idx = 0, ary_idx = 0;
-	public byte Quote_char() {return quote_char;} public Js_wtr Quote_char_(byte v) {quote_char = v; return this;} private byte quote_char = Byte_ascii.Quote;
+	public byte Quote_char() {return quote_char;} public Js_wtr Quote_char_(byte v) {quote_char = v; return this;} private byte quote_char = AsciiByte.Quote;
 	public void Clear()							{bfr.Clear();}
 	public String To_str()						{return bfr.To_str();}
 	public String To_str_and_clear()			{return bfr.To_str_and_clear();}
 	public Js_wtr Func_init(String name) {return Func_init(Bry_.new_u8(name));}
 	public Js_wtr Func_init(byte[] name) {
-		bfr.Add(name).Add_byte(Byte_ascii.Paren_bgn);
+		bfr.Add(name).Add_byte(AsciiByte.ParenBgn);
 		arg_idx = 0;
 		return this;
 	}
 	public Js_wtr Func_term() {
-		bfr.Add_byte(Byte_ascii.Paren_end).Add_byte_semic();
+		bfr.Add_byte(AsciiByte.ParenEnd).Add_byte_semic();
 		return this;
 	}
 	public Js_wtr Prm_str(String v) {return Prm_bry(Bry_.new_u8(v));}
@@ -41,9 +50,9 @@ public class Js_wtr {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; ++i) {
 			Object itm = ary[i];
-			if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
+			if (i != 0) bfr.Add_byte(AsciiByte.Comma);
 			boolean val_needs_quotes = true;
-			if 		(	Type_.Eq_by_obj(itm, Bool_.Cls_ref_type)
+			if 		(	Type_.Eq_by_obj(itm, BoolUtl.ClsRefType)
 					||	Type_.Eq_by_obj(itm, Int_.Cls_ref_type)
 					||	Type_.Eq_by_obj(itm, Long_.Cls_ref_type)
 				) {
@@ -58,19 +67,19 @@ public class Js_wtr {
 	}
 	public Js_wtr Ary_init() {
 		ary_idx = 0;
-		bfr.Add_byte(Byte_ascii.Brack_bgn);
+		bfr.Add_byte(AsciiByte.BrackBgn);
 		return this;
 	}
 	public Js_wtr Ary_term() {
-		bfr.Add_byte(Byte_ascii.Brack_end);
+		bfr.Add_byte(AsciiByte.BrackEnd);
 		return this;
 	}
 	public void Prm_spr() {
-		if (arg_idx != 0) bfr.Add_byte(Byte_ascii.Comma);
+		if (arg_idx != 0) bfr.Add_byte(AsciiByte.Comma);
 		++arg_idx;
 	}
 	private void Ary_spr() {
-		if (ary_idx != 0) bfr.Add_byte(Byte_ascii.Comma);
+		if (ary_idx != 0) bfr.Add_byte(AsciiByte.Comma);
 		++ary_idx;
 	}
 	public Js_wtr Ary_bry(byte[] bry) {
@@ -92,11 +101,11 @@ public class Js_wtr {
 		for (int i = 0; i < len; i++) {
 			byte b = bry[i];
 			switch (b) {
-				case Byte_ascii.Backslash:	// "\"	-> "\\"; needed else js will usurp \ as escape; EX: "\&" -> "&"; DATE:2014-06-24
-				case Byte_ascii.Quote:
-				case Byte_ascii.Apos:		bfr.Add_byte(Byte_ascii.Backslash).Add_byte(b); break;
-				case Byte_ascii.Nl:			bfr.Add_byte(Byte_ascii.Backslash).Add_byte(Byte_ascii.Ltr_n); break;	// "\n" -> "\\n"
-				case Byte_ascii.Cr:			break;// skip
+				case AsciiByte.Backslash:	// "\"	-> "\\"; needed else js will usurp \ as escape; EX: "\&" -> "&"; DATE:2014-06-24
+				case AsciiByte.Quote:
+				case AsciiByte.Apos:		bfr.Add_byte(AsciiByte.Backslash).Add_byte(b); break;
+				case AsciiByte.Nl:			bfr.Add_byte(AsciiByte.Backslash).Add_byte(AsciiByte.Ltr_n); break;	// "\n" -> "\\n"
+				case AsciiByte.Cr:			break;// skip
 				default:					bfr.Add_byte(b); break;
 			}
 		}

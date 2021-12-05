@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.metas; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Xof_meta_thumb {
 	public Xof_meta_thumb() {}
 	public Xof_meta_thumb(byte exists, int width, int height, int[] seeks) {this.exists = exists; this.width = width; this.height = height; this.seeks = seeks; if (seeks == null) seeks = Int_ary_.Empty;}
@@ -27,7 +28,7 @@ public class Xof_meta_thumb {
 	public int[] Seeks() {return seeks;} public Xof_meta_thumb Seeks_(int[] v) {seeks = v; return this;} private int[] seeks = Int_ary_.Empty;
 	public Xof_meta_thumb Seeks_add(int v) {
 		int seeks_len = seeks.length;
-		seeks = (int[])Array_.Resize(seeks, seeks_len + 1);
+		seeks = (int[])ArrayUtl.Resize(seeks, seeks_len + 1);
 		seeks[seeks_len] = v;
 		return this;
 	}

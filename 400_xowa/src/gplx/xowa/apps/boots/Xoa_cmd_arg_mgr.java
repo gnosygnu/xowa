@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.core.consoles.*; import gplx.core.envs.*;
-import gplx.xowa.apps.*;
+package gplx.xowa.apps.boots;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.core.consoles.Gfo_cmd_arg_itm_;
+import gplx.core.consoles.Gfo_cmd_arg_mgr;
+import gplx.core.consoles.Gfo_cmd_arg_mgr_printer;
+import gplx.core.envs.Op_sys;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.apps.Xoa_app_mode;
 public class Xoa_cmd_arg_mgr {
 	Xoa_cmd_arg_mgr(Gfo_cmd_arg_mgr arg_mgr) {this.arg_mgr = arg_mgr;}
 	public Gfo_cmd_arg_mgr Arg_mgr() {return arg_mgr;} private final Gfo_cmd_arg_mgr arg_mgr;
@@ -83,7 +92,7 @@ public class Xoa_cmd_arg_mgr {
 		, Gfo_cmd_arg_itm_.opt_("http_server.special_pages_safelist").Example_("Random|XowaSearch|AllPages").Note_("specifies list of permitted special pages; special-page name is case-insensitive and must be separated by pipes (|); default is '' which permits all special pages")
 		, Gfo_cmd_arg_itm_.sys_("show_license").Dflt_(true)
 		, Gfo_cmd_arg_itm_.sys_("show_args").Dflt_(true)
-		, Gfo_cmd_arg_itm_.new_(Gfo_cmd_arg_itm_.Tid_system, "help", Bool_.N, Gfo_cmd_arg_itm_.Val_tid_string)
+		, Gfo_cmd_arg_itm_.new_(Gfo_cmd_arg_itm_.Tid_system, "help", BoolUtl.N, Gfo_cmd_arg_itm_.Val_tid_string)
 		);
 		return new Xoa_cmd_arg_mgr(arg_mgr);
 	}

@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
+package gplx.xowa.parsers.utils; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*;
+import gplx.xowa.htmls.hrefs.*; import gplx.xowa.parsers.tmpls.*;
+import gplx.xowa.langs.kwds.*;
 import gplx.xowa.wikis.pages.redirects.*;
 public class Xop_redirect_mgr {
 	private final Xowe_wiki wiki; private final Gfo_url_encoder url_decoder; private Hash_adp_bry redirect_hash;
@@ -47,7 +50,7 @@ public class Xop_redirect_mgr {
 		if (ttl_bgn == Bry_find_.Not_found)	return Redirect_null_ttl;
 		ttl_bgn += Xop_tkn_.Lnki_bgn.length;
 		int ttl_end = Bry_find_.Find_fwd(src, Xop_tkn_.Lnki_end, ttl_bgn); if (ttl_end == Bry_find_.Not_found)	return Redirect_null_ttl;
-		int pipe_pos = Bry_find_.Find_fwd(src, Byte_ascii.Pipe, ttl_bgn); 
+		int pipe_pos = Bry_find_.Find_fwd(src, AsciiByte.Pipe, ttl_bgn);
 		if (	pipe_pos != Bry_find_.Not_found	// if pipe exists; PAGE:da.w:Middelaldercentret; DATE:2015-11-06
 			&&	pipe_pos < ttl_end)				// and pipe is before ]]; do not take pipe from next lnki; PAGE:en.w:Template:pp-semi; DATE:2015-11-14
 			ttl_end = pipe_pos;					// end ttl at pipe
@@ -115,8 +118,8 @@ class Xop_redirect_mgr_ {
 	public static int Get_kwd_end_or_end(byte[] src, int bgn, int end) {	// get end of kwd
 		for (int i = bgn; i < end; ++i) {
 			switch (src[i]) {
-				case Byte_ascii.Nl: case Byte_ascii.Space: case Byte_ascii.Tab:
-				case Byte_ascii.Brack_bgn: case Byte_ascii.Colon:
+				case AsciiByte.Nl: case AsciiByte.Space: case AsciiByte.Tab:
+				case AsciiByte.BrackBgn: case AsciiByte.Colon:
 					return i;	// ASSUME: kwd does not have these chars
 				default:
 					break;
@@ -128,8 +131,8 @@ class Xop_redirect_mgr_ {
 		boolean colon_null = true;
 		for (int i = bgn; i < end; ++i) {
 			switch (src[i]) {
-				case Byte_ascii.Nl: case Byte_ascii.Space: case Byte_ascii.Tab: break;	// skip all ws
-				case Byte_ascii.Colon: // allow 1 colon
+				case AsciiByte.Nl: case AsciiByte.Space: case AsciiByte.Tab: break;	// skip all ws
+				case AsciiByte.Colon: // allow 1 colon
 					if (colon_null)
 						colon_null = false;
 					else
@@ -137,10 +140,10 @@ class Xop_redirect_mgr_ {
 					break;
 				default:
 					break;
-				case Byte_ascii.Brack_bgn:
+				case AsciiByte.BrackBgn:
 					int nxt_pos = i + 1;
 					if (nxt_pos >= end) return Bry_find_.Not_found;	// [ at eos
-					return src[nxt_pos] == Byte_ascii.Brack_bgn ? i : Bry_find_.Not_found;
+					return src[nxt_pos] == AsciiByte.BrackBgn ? i : Bry_find_.Not_found;
 			}
 		}
 		return Bry_find_.Not_found;

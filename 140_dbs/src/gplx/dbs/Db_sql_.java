@@ -14,6 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
 public class Db_sql_ {
 	public static String Make_by_fmt(String[] lines, Object... args) {
 		Bry_bfr bfr = Bry_bfr_.New();
@@ -32,7 +34,7 @@ public class Db_sql_ {
 
 		for (int i = 0; i < len; ++i) {
 			byte b = raw[i];
-			if (b == Byte_ascii.Apos) {
+			if (b == AsciiByte.Apos) {
 				if (bfr == null) {
 					dirty = true;
 					bfr = Bry_bfr_.New();
@@ -50,10 +52,10 @@ public class Db_sql_ {
 	}
 	public static String Prep_in_from_ary(Object ary) {	
 		Bry_bfr bfr = Bry_bfr_.New();
-		int len = Array_.Len(ary);
+		int len = ArrayUtl.Len(ary);
 		for (int i = 0; i < len; i++) {
-			if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
-			bfr.Add_byte(Byte_ascii.Question);
+			if (i != 0) bfr.Add_byte(AsciiByte.Comma);
+			bfr.Add_byte(AsciiByte.Question);
 		}
 		return bfr.To_str_and_clear();
 	}

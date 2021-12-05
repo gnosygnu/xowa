@@ -13,11 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.makes.tests; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.makes.*;
-import gplx.core.tests.*;
-import gplx.xowa.files.*; import gplx.xowa.files.caches.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.htmls.sections.*;
-import gplx.xowa.htmls.core.wkrs.lnkis.*;
+package gplx.xowa.htmls.core.makes.tests;
+import gplx.Bry_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.tests.Gfo_test_list_base;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_page_;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.files.caches.Xou_cache_finder_;
+import gplx.xowa.files.caches.Xou_cache_finder_mem;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.makes.Xoh_make_mgr;
+import gplx.xowa.htmls.core.wkrs.lnkis.Xopg_lnki_itm__hdump;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
 public class Xoh_make_fxt {
 	private final Xowe_wiki wiki;
 	private final Xoh_make_mgr make_mgr;
@@ -31,7 +48,7 @@ public class Xoh_make_fxt {
 		// init parser_fxt
 		Xoa_app_fxt.repo2_(parser_fxt.App(), wiki);	// needed else will be old "mem/wiki/repo/trg/thumb/" instead of standard "mem/file/en.wikipedia.org/thumb/"
 		wiki.Html__hdump_mgr().Init_by_db(wiki);
-		wiki.Html_mgr().Html_wtr().Cfg().Lnki__id_(Bool_.Y).Lnki__title_(Bool_.Y);
+		wiki.Html_mgr().Html_wtr().Cfg().Lnki__id_(BoolUtl.Y).Lnki__title_(BoolUtl.Y);
 	}
 	public void Clear() {
 		parser_fxt.Reset();

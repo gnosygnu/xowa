@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes.libs; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.mediawiki.includes.libs.replacers.*;
 /**
 * A collection of static methods to play with strings.
@@ -316,8 +317,8 @@ public class XomwStringUtils {
 		if (find_len != repl_len) throw Err_.new_wo_type("find and repl should be same length");
 
 		byte find_0 = find[0];
-		byte dlm_bgn = Byte_ascii.Angle_bgn;
-		byte dlm_end = Byte_ascii.Angle_end;
+		byte dlm_bgn = AsciiByte.AngleBgn;
+		byte dlm_end = AsciiByte.AngleEnd;
 		boolean repl_active = true;
 
 		// loop every char in array

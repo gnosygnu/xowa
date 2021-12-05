@@ -13,11 +13,37 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.core.envs.*; import gplx.xowa.apps.progs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.strings.*;
-import gplx.langs.htmls.entitys.*;
-import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.htmls.*;
+package gplx.xowa.parsers.xndes;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.envs.Env_;
+import gplx.langs.htmls.entitys.Gfh_entity_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_ctx_wkr;
+import gplx.xowa.parsers.Xop_parser_;
+import gplx.xowa.parsers.Xop_parser_tid_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.htmls.Mwh_atr_parser;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_wkr_;
+import gplx.xowa.parsers.logs.Xop_log_basic_wkr;
+import gplx.xowa.parsers.miscs.Xop_ignore_tkn;
+import gplx.xowa.parsers.tblws.Xop_tblw_tkn;
+import gplx.xowa.parsers.tblws.Xop_tblw_wkr;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.xtns.Xox_xnde;
 public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public boolean Pre_at_bos() {return pre_at_bos;} public void Pre_at_bos_(boolean v) {pre_at_bos = v;} private boolean pre_at_bos;
@@ -50,7 +76,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		// check for "</"
 		byte cur_byt = src[cur_pos];
 		boolean tag_is_closing = false;
-		if (cur_byt == Byte_ascii.Slash) { // "</"
+		if (cur_byt == AsciiByte.Slash) { // "</"
 			tag_is_closing = true;
 			++cur_pos;
 			if (cur_pos == src_len) return ctx.Lxr_make_txt_(src_len);	// "</" is EOS
@@ -71,32 +97,32 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (atrs_bgn_pos >= src_len) return ctx.Lxr_make_txt_(atrs_bgn_pos);	// EOS: EX: "<br"EOS
 			// check next char after tag name; EX: "<span"
 			switch (src[atrs_bgn_pos]) {	// NOTE: not sure about rules; Preprocessor_DOM.php calls preg_match on $elementsRegex which seems to break on word boundaries; $elementsRegex = "~($xmlishRegex)(?:\s|\/>|>)|(!--)~iA";
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+				case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 					++atrs_bgn_pos;			// set bgn_pos to be after ws
 					break;
-				case Byte_ascii.Slash: case Byte_ascii.Angle_end:
+				case AsciiByte.Slash: case AsciiByte.AngleEnd:
 					++atrs_bgn_pos;			// set bgn_pos to be after char
 					break;
-				case Byte_ascii.Backslash:	// NOTE: MW treats \ as /; EX: <br\>" -> "<br/>
+				case AsciiByte.Backslash:	// NOTE: MW treats \ as /; EX: <br\>" -> "<br/>
 					++tag_end_pos;
 					break;
-				case Byte_ascii.Dollar:		// handles <br$2>;
+				case AsciiByte.Dollar:		// handles <br$2>;
 				default:					// allow all other symbols by defaults; TODO_OLD: need to filter out some like <br@>
 					break;
 				// letters / numbers after tag; tag is invalid; EX: "<spanA"
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-				case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-				case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-				case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				case Byte_ascii.Percent: // EX:<ref%s>; PAGE:pl.w:Scynk_nadrzewny; DATE:2016-08-07
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+				case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+				case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+				case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+				case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+				case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+				case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+				case AsciiByte.Percent: // EX:<ref%s>; PAGE:pl.w:Scynk_nadrzewny; DATE:2016-08-07
 					tag_obj = null;	
 					break;
 			}
@@ -117,7 +143,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				}
 			}
 			else {
-				if (ctx_cur_tid_is_tblw_atr_owner) Xop_tblw_wkr.Atrs_close(ctx, src, root, Bool_.N);
+				if (ctx_cur_tid_is_tblw_atr_owner) Xop_tblw_wkr.Atrs_close(ctx, src, root, BoolUtl.N);
 				return ctx.Lxr_make_txt_(cur_pos);
 			}
 		}
@@ -138,7 +164,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		for (int i = end_name_pos; i < src_len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Lt:	// < encountered; may be inner node inside tag which is legal in wikitext; EX: "<ul style=<nowiki>#</nowiki>FFFFFF>"
+				case AsciiByte.Lt:	// < encountered; may be inner node inside tag which is legal in wikitext; EX: "<ul style=<nowiki>#</nowiki>FFFFFF>"
 					int name_bgn_pos = i + 1;
 					if (name_bgn_pos < src_len) {	// chk that name_bgn is less than src_len else arrayIndex error; EX: <ref><p></p<<ref/>; not that "<" is last char of String; DATE:2014-01-18							
 						int valid_inner_xnde_gt = atr_parser.Xnde_find_gt_find(src, name_bgn_pos, src_len); // check if <nowiki>, <noinclude>, <includeonly> or <onlyinclude> (which can exist inside tag)
@@ -159,7 +185,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						}
 					}
 					break;
-				case Byte_ascii.Gt:
+				case AsciiByte.Gt:
 					gt_pos = i;
 					i = src_len;
 					break;
@@ -216,7 +242,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				break;
 		}
 		if (ctx_cur_tid_is_tblw_atr_owner)
-			Xop_tblw_wkr.Atrs_close(ctx, src, root, Bool_.Y);	// < found inside tblw; close off tblw attributes; EX: |- id='abcd' <td>a</td> (which is valid wikitext; NOTE: must happen after <nowiki>
+			Xop_tblw_wkr.Atrs_close(ctx, src, root, BoolUtl.Y);	// < found inside tblw; close off tblw attributes; EX: |- id='abcd' <td>a</td> (which is valid wikitext; NOTE: must happen after <nowiki>
 		if (tag_is_closing)
 			return Make_xtag_end(ctx, tkn_mkr, root, src, src_len, bgn_pos, gt_pos, tag);
 		else
@@ -225,21 +251,21 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 	private static Xop_tkn_itm Make_bry_tkn(Xop_tkn_mkr tkn_mkr, byte[] src, int bgn_pos, int cur_pos) {
 		int len = cur_pos - bgn_pos;
 		byte[] bry = null;
-		if		(len == 1	&& src[bgn_pos]		== Byte_ascii.Lt)		bry = Gfh_entity_.Lt_bry;
-		else if	(len == 2	&& src[bgn_pos]		== Byte_ascii.Lt
-							&& src[bgn_pos + 1]	== Byte_ascii.Slash)	bry = Bry_escape_lt_slash;	// NOTE: should use bgn_pos, not cur_pos; DATE:2014-10-22
+		if		(len == 1	&& src[bgn_pos]		== AsciiByte.Lt)		bry = Gfh_entity_.Lt_bry;
+		else if	(len == 2	&& src[bgn_pos]		== AsciiByte.Lt
+							&& src[bgn_pos + 1]	== AsciiByte.Slash)	bry = Bry_escape_lt_slash;	// NOTE: should use bgn_pos, not cur_pos; DATE:2014-10-22
 		else															bry = Bry_.Add(Gfh_entity_.Lt_bry, Bry_.Mid(src, bgn_pos + 1, cur_pos));	// +1 to skip <
 		return tkn_mkr.Bry_raw(bgn_pos, cur_pos, bry);
 	}
 	private int Make_noinclude(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int gtPos, Xop_xnde_tag tag, int tag_end_pos, boolean tag_is_closing) {
-		tag_end_pos = Bry_find_.Find_fwd_while(src, tag_end_pos, src_len, Byte_ascii.Space);// NOTE: must skip spaces else "<noinclude />" will not work with safesubst; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-06-24
+		tag_end_pos = Bry_find_.Find_fwd_while(src, tag_end_pos, src_len, AsciiByte.Space);// NOTE: must skip spaces else "<noinclude />" will not work with safesubst; PAGE:en.w:Wikipedia:Featured_picture_candidates; DATE:2014-06-24
 		byte tag_end_byte = src[tag_end_pos];
-		if (tag_end_byte == Byte_ascii.Slash) {	// inline
+		if (tag_end_byte == AsciiByte.Slash) {	// inline
 			boolean valid = true;
 			for (int i = tag_end_pos; i < gtPos; i++) {
 				switch (src[i]) {
-					case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: break;
-					case Byte_ascii.Slash: break;
+					case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: break;
+					case AsciiByte.Slash: break;
 					default: valid = false; break;
 				}
 			}
@@ -262,9 +288,9 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 				findPos = end_lhs;
 				for (int i = end_lhs + end_bry_len; i < src_len; i++) {
 					switch (src[i]) {
-						case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: break;
-						case Byte_ascii.Slash: break;
-						case Byte_ascii.Gt: end_rhs = i + 1; i = src_len; break;	// +1 to place after Gt
+						case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: break;
+						case AsciiByte.Slash: break;
+						case AsciiByte.Gt: end_rhs = i + 1; i = src_len; break;	// +1 to place after Gt
 						default:			findPos = i    ; i = src_len; break;
 					}
 				}
@@ -282,19 +308,19 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		int open_tag_end = gtPos + 1, atrs_bgn = -1, atrs_end = -1;	// 1=adj_next_char
 		// calc (a) inline; (b) atrs
 		switch (tag_end_byte) {	// look at last char of tag; EX: for b, following are registered: "b/","b>","b\s","b\n","b\t"
-			case Byte_ascii.Slash:	// "/" EX: "<br/"; // NOTE: <pre/a>, <pre//> are allowed
+			case AsciiByte.Slash:	// "/" EX: "<br/"; // NOTE: <pre/a>, <pre//> are allowed
 				inline = true;		
 				break;
-			case Byte_ascii.Backslash:	// allow <br\>; EX:w:Mosquito
+			case AsciiByte.Backslash:	// allow <br\>; EX:w:Mosquito
 				if (tag.Inline_by_backslash())
-					src[tag_end_pos] = Byte_ascii.Slash;
+					src[tag_end_pos] = AsciiByte.Slash;
 				break;
-			case Byte_ascii.Gt:		// ">" "normal" tag; noop
+			case AsciiByte.Gt:		// ">" "normal" tag; noop
 				break;
 			default:				// "\s", "\n", "\t"
 				atrs_bgn = tag_end_pos;		// set atrs_bgn to first char after ws; EX: "<a\shref='b/>" atrs_bgn = pos(h)
 				atrs_end = gtPos;			// set atrs_end to gtPos;				EX: "<a\shref='b/>" atrs_end = pos(>)
-				if (src[gtPos - 1] == Byte_ascii.Slash) {	// adjust if inline
+				if (src[gtPos - 1] == AsciiByte.Slash) {	// adjust if inline
 					--atrs_end;
 					inline = true;
 				}
@@ -304,7 +330,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		if (ctx.Parse_tid() == Xop_parser_tid_.Tid__wtxt) {
 			// NOWIKI;DATE:2018-01-16
 			// if (atrs_bgn < atrs_end) {
-			//	byte[] converted = ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(Bool_.N, Bry_.Mid(src, atrs_bgn, atrs_end));
+			//	byte[] converted = ctx.Wiki().Parser_mgr().Uniq_mgr().Parse(BoolUtl.N, Bry_.Mid(src, atrs_bgn, atrs_end));
 			//	atrs = ctx.App().Parser_mgr().Xnde__parse_atrs(converted, 0, converted.length);
 			// }
 			// else
@@ -534,12 +560,12 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 			if (rv == src_len) break;
 			byte b = src[rv];
 			switch (b) {
-				case Byte_ascii.Space:
-				case Byte_ascii.Nl:
-				case Byte_ascii.Tab:
+				case AsciiByte.Space:
+				case AsciiByte.Nl:
+				case AsciiByte.Tab:
 					++rv;
 					break;
-				case Byte_ascii.Gt:
+				case AsciiByte.Gt:
 					found = true;
 					loop = false;
 					++rv; // add 1 to position after >
@@ -708,7 +734,7 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 						break;
 					case Xop_xnde_tag_.Tid__pre:	 // NOTE: pre must be an xtn, but does not create an xtn node (it gobbles up everything between); still need to touch the para_wkr; DATE:2014-02-20
 						ctx.Para().Process_block__xnde(tag, Xop_xnde_tag.Block_bgn);
-						if (Bry_find_.Find_fwd(src, Byte_ascii.Nl, xnde.Tag_open_end(), xnde.Tag_close_bgn()) != Bry_find_.Not_found)
+						if (Bry_find_.Find_fwd(src, AsciiByte.Nl, xnde.Tag_open_end(), xnde.Tag_close_bgn()) != Bry_find_.Not_found)
 							ctx.Para().Process_nl(ctx, root, src, xnde.Tag_open_bgn(), xnde.Tag_open_bgn());
 						ctx.Para().Process_block__xnde(tag, Xop_xnde_tag.Block_end);
 						break;
@@ -752,13 +778,13 @@ public class Xop_xnde_wkr implements Xop_ctx_wkr {
 		for (int i = cur_pos; i < src_len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Lt:	// < encountered; may be inner node inside tag which is legal in wikitext; EX: "<ul style=<nowiki>#</nowiki>FFFFFF>"
+				case AsciiByte.Lt:	// < encountered; may be inner node inside tag which is legal in wikitext; EX: "<ul style=<nowiki>#</nowiki>FFFFFF>"
 					int valid_inner_xnde_gt = ctx.App().Parser_mgr().Xnde__atr_parser().Xnde_find_gt_find(src, i + 1, src_len);
 					if (valid_inner_xnde_gt != String_.Find_none) {
 						i = valid_inner_xnde_gt;
 					}
 					break;
-				case Byte_ascii.Gt:
+				case AsciiByte.Gt:
 					gt_pos = i;
 					i = src_len;
 					break;

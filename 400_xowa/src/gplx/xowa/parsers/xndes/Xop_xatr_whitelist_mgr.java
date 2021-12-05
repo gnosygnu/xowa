@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.parsers.xndes;
 
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Hash_adp_bry;
 import gplx.List_adp;
 import gplx.List_adp_;
@@ -365,7 +365,7 @@ public class Xop_xatr_whitelist_mgr {
 						return false;
 					case Style_filter: 
 					case Style_accelerator:
-						if (Next_non_ws_byte(chk_bry, pos, chk_end) == Byte_ascii.Colon) {
+						if (Next_non_ws_byte(chk_bry, pos, chk_end) == AsciiByte.Colon) {
 							xatr.Val_bry_(Bry_.Empty);
 							return false;						
 						}
@@ -374,7 +374,7 @@ public class Xop_xatr_whitelist_mgr {
 					case Style_urls:
 					case Style_image:
 					case Style_image_set:
-						if (Next_non_ws_byte(chk_bry, pos, chk_end) == Byte_ascii.Paren_bgn) {
+						if (Next_non_ws_byte(chk_bry, pos, chk_end) == AsciiByte.ParenBgn) {
 							xatr.Val_bry_(Bry_.Empty);
 							return false;
 						}
@@ -388,16 +388,16 @@ public class Xop_xatr_whitelist_mgr {
 		for (int i = bgn; i < end; i++) {
 			byte b = raw[i];
 			switch (b) {
-				case Byte_ascii.Space:
-				case Byte_ascii.Tab:
-				case Byte_ascii.Cr:
-				case Byte_ascii.Nl:					
+				case AsciiByte.Space:
+				case AsciiByte.Tab:
+				case AsciiByte.Cr:
+				case AsciiByte.Nl:
 					break;
 				default:
 					return b;
 			}
 		}
-		return Byte_ascii.Null; 
+		return AsciiByte.Null;
 	}
 	static final byte Style_expression = 0, Style_filter = 1, Style_accelerator = 2, Style_url = 3, Style_urls = 4, Style_comment = 5, Style_image = 6, Style_image_set = 7;
 	private static final Btrie_slim_mgr style_trie = Btrie_slim_mgr.ci_a7()	// NOTE:ci.ascii:Javascript

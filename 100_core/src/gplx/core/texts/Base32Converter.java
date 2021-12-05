@@ -13,12 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.texts; import gplx.*; import gplx.core.*;
+package gplx.core.texts; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Base32Converter {
 	public static String EncodeString(String orig) {return Encode(Bry_.new_u8(orig));}
 	public static String Encode(byte[] raw) {
 		int i = 0, index = 0, digit = 0; int currByte, nextByte;
-		int rawLen = Array_.Len(raw);
+		int rawLen = ArrayUtl.Len(raw);
 		char[] ary = new char[(rawLen + 7) * 8 / 5]; int aryPos = 0;
 		while (i < rawLen) {
 			currByte = (raw[i] >= 0) ? raw[i] : raw[i] + 256; // unsign; java converts char 128+ -> byte -128

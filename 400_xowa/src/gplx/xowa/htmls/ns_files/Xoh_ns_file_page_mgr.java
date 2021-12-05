@@ -13,12 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.ns_files; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.core.primitives.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.xfers.*; import gplx.xowa.files.origs.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.files.fsdb.*; import gplx.xowa.files.fsdb.fs_roots.*;
+package gplx.xowa.htmls.ns_files;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.files.Xof_img_size;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.files.Xof_url_bldr;
+import gplx.xowa.files.fsdb.Xof_fsdb_mgr;
+import gplx.xowa.files.fsdb.fs_roots.Fs_root_core;
+import gplx.xowa.files.origs.Xof_orig_itm;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.files.repos.Xow_repo_mgr;
+import gplx.xowa.files.xfers.Xof_xfer_queue;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
 public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 	private Xoa_ttl ttl; private Xoh_file_page_wtr html_wtr; private final Xoh_file_page__other_resolutions alt_wtr = new Xoh_file_page__other_resolutions();
 	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
@@ -29,7 +51,7 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 		Xowe_wiki wiki = (Xowe_wiki)page.Commons_mgr().Source_wiki_or(cur_wiki);
 		this.ttl = ttl; this.html_wtr = html_wtr; this.repo_mgr = wiki.File__repo_mgr();
 		this.xfer_itm = wiki.Html_mgr().Html_wtr().Lnki_wtr().File_wtr().Lnki_eval(Xof_exec_tid.Tid_wiki_file, ctx, ctx.Page(), queue, ttl.Page_txt()
-		, Xop_lnki_type.Id_thumb, Xop_lnki_tkn.Upright_null, html_wtr.Main_img_w(), html_wtr.Main_img_h(), Xof_lnki_time.Null, Xof_lnki_page.Null, Bool_.N);
+		, Xop_lnki_type.Id_thumb, Xop_lnki_tkn.Upright_null, html_wtr.Main_img_w(), html_wtr.Main_img_h(), Xof_lnki_time.Null, Xof_lnki_page.Null, BoolUtl.N);
 
 		// get orig
 		Xof_orig_itm orig = wiki.File_mgr().Orig_mgr().Find_by_ttl_or_null(xfer_itm.Lnki_ttl());
@@ -60,7 +82,7 @@ public class Xoh_ns_file_page_mgr implements gplx.core.brys.Bfr_arg {
 
 		// get commons notice
 		String commons_notice =  page.Commons_mgr().Xowa_mockup()
-			? String_.Format(Str_commons_notice, gplx.langs.htmls.Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, page.Ttl().Full_db_as_str()))
+			? String_.Format(Str_commons_notice, gplx.langs.htmls.Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, AsciiByte.Apos, page.Ttl().Full_db_as_str()))
 			: "";
 		html_wtr.Html_main().Bld_bfr_many(bfr, this, commons_notice);
 	}

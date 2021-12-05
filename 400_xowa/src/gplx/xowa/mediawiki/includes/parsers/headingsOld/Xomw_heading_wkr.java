@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.headingsOld; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.langs.*;
+package gplx.xowa.mediawiki.includes.parsers.headingsOld; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Xomw_heading_wkr {
 	private Xomw_heading_cbk cbk;
 	public byte[] Src()			{return src;} private byte[] src;
@@ -42,13 +42,13 @@ public class Xomw_heading_wkr {
 		// do loop
 		int pos = src_bgn;
 		this.txt_bgn = pos == -1 ? 0 : pos;
-		byte b = Byte_ascii.Nl;
+		byte b = AsciiByte.Nl;
 		while (true) {
 			int nxt = pos + 1;
 			// check if (a) cur is \n; (b) nxt is '='
-			if (	b == Byte_ascii.Nl
+			if (	b == AsciiByte.Nl
 				&&	nxt < src_end
-				&&	src[nxt] == Byte_ascii.Eq
+				&&	src[nxt] == AsciiByte.Eq
 				) {
 				pos = Parse_hdr_nl(txt_bgn, pos, nxt + 1);
 				this.txt_bgn = pos;
@@ -68,13 +68,13 @@ public class Xomw_heading_wkr {
 		// calc lhs vars
 		this.hdr_bgn = nl_lhs;
 		this.hdr_lhs_bgn = nl_lhs == 0 ? 0 : nl_lhs + 1;	// set pos of 1st "="; note that "==" can be at BOS;
-		this.hdr_lhs_end = Bry_find_.Find_fwd_while(src, pos, src_end, Byte_ascii.Eq);
+		this.hdr_lhs_end = Bry_find_.Find_fwd_while(src, pos, src_end, AsciiByte.Eq);
 
 		// calc rhs vars
-		int nl_rhs = Bry_find_.Find_fwd_or(src, Byte_ascii.Nl, hdr_lhs_end + 1, src_end, src_end);	// if no "\n", src_end is rest of text; EX: "\n==<text>EOS
+		int nl_rhs = Bry_find_.Find_fwd_or(src, AsciiByte.Nl, hdr_lhs_end + 1, src_end, src_end);	// if no "\n", src_end is rest of text; EX: "\n==<text>EOS
 		this.hdr_end = nl_rhs;
 		this.hdr_rhs_end = Bry_find_.Find_bwd__skip_ws(src, nl_rhs, hdr_lhs_end);
-		this.hdr_rhs_bgn = Bry_find_.Find_bwd__skip(src, hdr_rhs_end - 1, hdr_lhs_end, Byte_ascii.Eq);
+		this.hdr_rhs_bgn = Bry_find_.Find_bwd__skip(src, hdr_rhs_end - 1, hdr_lhs_end, AsciiByte.Eq);
 
 		int hdr_lhs_len = hdr_lhs_end - hdr_lhs_bgn;
 		int hdr_rhs_len = hdr_rhs_end - hdr_rhs_bgn;

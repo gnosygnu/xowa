@@ -13,15 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*;
 import gplx.core.btries.*;
 import gplx.core.primitives.*;
+import gplx.objects.strings.AsciiByte;
 public class Scrib_lib_text__nowiki_util {
 	public Btrie_slim_mgr Make_trie(byte[] tag) {
 		Bry_bfr tmp = Bry_bfr_.New();
 		Btrie_slim_mgr rv = Btrie_slim_mgr.ci_u8();
-		byte[] lhs_bry = tmp.Add_bry_many(Byte_ascii.Angle_bgn_bry, tag, Byte_ascii.Angle_end_bry).To_bry_and_clear();
-		byte[] rhs_bry = tmp.Add_bry_many(Byte_ascii.Angle_bgn_bry, Byte_ascii.Slash_bry, tag, Byte_ascii.Angle_end_bry).To_bry_and_clear();
+		byte[] lhs_bry = tmp.Add_bry_many(AsciiByte.AngleBgnBry, tag, AsciiByte.AngleEndBry).To_bry_and_clear();
+		byte[] rhs_bry = tmp.Add_bry_many(AsciiByte.AngleBgnBry, AsciiByte.SlashBry, tag, AsciiByte.AngleEndBry).To_bry_and_clear();
 		rv.Add_obj(lhs_bry, Bool_obj_val.True);
 		rv.Add_obj(rhs_bry, Bool_obj_val.False);
 		return rv;

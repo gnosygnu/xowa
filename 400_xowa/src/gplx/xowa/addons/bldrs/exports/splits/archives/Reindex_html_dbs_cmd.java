@@ -13,10 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.splits.archives; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*; import gplx.dbs.qrys.*; import gplx.dbs.metas.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.htmls.core.dbs.*;
-import gplx.xowa.addons.bldrs.exports.splits.htmls.*;
+package gplx.xowa.addons.bldrs.exports.splits.archives;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_crt_;
+import gplx.dbs.Db_qry_;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.dbs.metas.Dbmeta_idx_fld;
+import gplx.dbs.qrys.Db_qry__select_cmd;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.exports.splits.htmls.Xoh_page_tbl_itm;
+import gplx.xowa.addons.bldrs.exports.splits.htmls.Xoh_src_tbl_mgr;
+import gplx.xowa.addons.bldrs.exports.splits.htmls.Xoh_trg_tbl_mgr;
+import gplx.xowa.htmls.core.dbs.Xowd_html_row;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_xowa_db_tbl;
 class Reindex_html_dbs_cmd {
 	private Db_conn core_conn;
 	private Xowd_page_tbl page_tbl;
@@ -71,9 +94,9 @@ class Reindex_html_dbs_cmd {
 		Gfo_usr_dlg_.Instance.Prog_many("", "", "inserting rows into repack table");
 		Db_qry__select_cmd select_qry = (Db_qry__select_cmd)Db_qry_.select_
 			( tbl_page, fld_page_id, fld_page_ns, fld_page_len, fld_page_score, fld_page_html_db_id)
-			.Order_(fld_page_ns, Bool_.Y)
-			.Order_(fld_page_score, Bool_.N)
-			.Order_(fld_page_len, Bool_.N)
+			.Order_(fld_page_ns, BoolUtl.Y)
+			.Order_(fld_page_score, BoolUtl.N)
+			.Order_(fld_page_len, BoolUtl.N)
 			.Where_(Db_crt_.New_eq_not(fld_page_html_db_id, -1));
 		Db_qry_.insert_("repack").Cols_("page_id", "page_ns", "page_len", "page_score", "src_db")
 			.Select_(select_qry)

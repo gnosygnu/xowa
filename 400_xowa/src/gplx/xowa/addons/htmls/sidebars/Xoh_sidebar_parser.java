@@ -13,14 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.htmls.sidebars; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.htmls.*;
-import gplx.core.btries.*;
-import gplx.langs.htmls.encoders.*;
-import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.addons.htmls.sidebars;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.Bry_split_;
+import gplx.List_adp;
+import gplx.String_;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.lnkis.Xop_link_parser;
 class Xoh_sidebar_parser {	// TS:
 	public static void Parse(Bry_bfr tmp_bfr, Xowe_wiki wiki, List_adp grps, byte[] src) {
 		// split MediaWiki:Sidebar into lines
-		byte[][] lines = Bry_split_.Split(src, Byte_ascii.Nl);
+		byte[][] lines = Bry_split_.Split(src, AsciiByte.Nl);
 
 		// init
 		Xop_link_parser link_parser = new Xop_link_parser();
@@ -33,10 +42,10 @@ class Xoh_sidebar_parser {	// TS:
 			byte[] line = lines[i];
 			int line_len = line.length;
 			if	(line_len == 0) continue;					// skip blank lines
-			if	(line[0] != Byte_ascii.Star) continue;		// skip non-list items; note that all items must begin with "*"
+			if	(line[0] != AsciiByte.Star) continue;		// skip non-list items; note that all items must begin with "*"
 
 			// if **, then itm; else * is grp
-			boolean tid_is_itm = line[1] == Byte_ascii.Star;
+			boolean tid_is_itm = line[1] == AsciiByte.Star;
 
 			// trim ws; note that tid indicates # of asterisks; EX: '** a' ->  'a'
 			byte[] raw = Bry_.Trim(line, tid_is_itm ? 2 : 1, line_len);
@@ -68,11 +77,11 @@ class Xoh_sidebar_parser {	// TS:
 
 		byte[] text_key = raw;
 		byte[] text_val = Resolve_key(wiki, text_key);
-		return new Xoh_sidebar_itm(Bool_.N, text_key, text_val, null);
+		return new Xoh_sidebar_itm(BoolUtl.N, text_key, text_val, null);
 	}
 	private static Xoh_sidebar_itm Parse_itm_or_null(Xowe_wiki wiki, byte[] raw, Xop_link_parser link_parser, Xoa_url tmp_url, Bry_bfr bfr) {
 		// separate into key|val; note that grp uses entire raw for key while itm uses raw after "|"
-		int pipe_pos = Bry_find_.Find_fwd(raw, Byte_ascii.Pipe);
+		int pipe_pos = Bry_find_.Find_fwd(raw, AsciiByte.Pipe);
 		
 		// if no pipe, warn and return; EX: should be "href|main", but only "href"
 		if (pipe_pos == Bry_find_.Not_found) {
@@ -92,7 +101,7 @@ class Xoh_sidebar_parser {	// TS:
 		byte[] href_val = Resolve_key(wiki, href_key);
 		href_val = link_parser.Parse(bfr, tmp_url, wiki, href_val, Bry_.Empty);
 
-		return new Xoh_sidebar_itm(Bool_.Y, text_key, text_val, href_val);
+		return new Xoh_sidebar_itm(BoolUtl.Y, text_key, text_val, href_val);
 	}
 	private static byte[] Resolve_key(Xowe_wiki wiki, byte[] key) {
 		byte[] val = wiki.Msg_mgr().Val_by_key_obj(key);

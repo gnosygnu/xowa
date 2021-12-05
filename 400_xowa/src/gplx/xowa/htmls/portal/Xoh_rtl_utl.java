@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.portal; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Xoh_rtl_utl {		
 	private static final int[] tmp_ary = new int[32];	// support no more than 16 items
 	private static Bry_bfr bfr = Bry_bfr_.Reset(32);
@@ -45,7 +46,7 @@ public class Xoh_rtl_utl {
 			tmp_ary[tmp_idx++] = li_end + Li_end.length;
 			pos = li_end + Li_end.length;
 		}
-		int ul_bgn_rhs = Bry_find_.Find_fwd(src, Byte_ascii.Gt, ul_bgn);
+		int ul_bgn_rhs = Bry_find_.Find_fwd(src, AsciiByte.Gt, ul_bgn);
 		if (tmp_idx < 3	// 0 or 1 li; add everything between ul
 			|| ul_bgn_rhs == Bry_find_.Not_found
 			) {

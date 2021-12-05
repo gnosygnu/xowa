@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.primitives.BoolUtl;
 public class Type_ids_ {//RF:2017-10-08
 	public static final int // SERIALIZABLE.N
 	  Id__obj            =  0
@@ -43,7 +44,7 @@ public class Type_ids_ {//RF:2017-10-08
 		if		(Type_.Eq(type, Int_.Cls_ref_type))                 return Id__int;
 		else if (Type_.Eq(type, String_.Cls_ref_type))              return Id__str;
 		else if (Type_.Eq(type, byte[].class))                    return Id__bry;
-		else if (Type_.Eq(type, Bool_.Cls_ref_type))                return Id__bool;
+		else if (Type_.Eq(type, BoolUtl.ClsRefType))                return Id__bool;
 		else if (Type_.Eq(type, Byte_.Cls_ref_type))                return Id__byte;
 		else if (Type_.Eq(type, Long_.Cls_ref_type))                return Id__long;
 		else if (Type_.Eq(type, Double_.Cls_ref_type))              return Id__double;

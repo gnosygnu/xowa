@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.portal;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
@@ -247,8 +247,8 @@ public class Xow_portal_mgr implements Gfo_invk {
 		else if	(ctx.Match(k, Invk_div_wikis_))						div_wikis_fmtr.Fmt_(m.ReadBry("v"));
 
 		else if (ctx.Match(k, Cfg__missing_class))					missing_ns_cls = m.ReadBry("v");
-		else if (ctx.Match(k, Cfg__sidebar_enabled__desktop))		Sidebar_enabled_(Bool_.Y, m.ReadYn("v"));
-		else if (ctx.Match(k, Cfg__sidebar_enabled__server))		Sidebar_enabled_(Bool_.N, m.ReadYn("v"));
+		else if (ctx.Match(k, Cfg__sidebar_enabled__desktop))		Sidebar_enabled_(BoolUtl.Y, m.ReadYn("v"));
+		else if (ctx.Match(k, Cfg__sidebar_enabled__server))		Sidebar_enabled_(BoolUtl.N, m.ReadYn("v"));
 		else if (ctx.Match(k, Cfg__divs__footer))					div_footer_fmtr.Fmt_(m.ReadBry("v"));
 		else if (ctx.Match(k, Cfg__hdumps_indicators_enabled))      indicators_pagesource_enabled = m.ReadYn("v");
 		else if (ctx.Match(k, Cfg__hdumps_indicators_wtxt))         indicators_pagesource_wtxt = m.ReadBry("v");

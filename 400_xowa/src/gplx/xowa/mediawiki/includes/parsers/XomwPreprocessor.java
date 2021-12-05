@@ -13,10 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
-import gplx.xowa.mediawiki.*;
-import gplx.core.btries.*;
-import gplx.xowa.mediawiki.includes.parsers.preprocessors.*;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_bry;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.XophpString_;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.XomwPPDPart;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.XomwPPDStack;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.XomwPPDStackElement;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.XomwPPDStackElementFlags;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.XomwPPFrame;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.XomwPPNode;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.Xomw_prepro_accum;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.Xomw_prepro_curchar_itm;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.Xomw_prepro_elem;
+import gplx.xowa.mediawiki.includes.parsers.preprocessors.Xomw_prepro_rule;
 /**
 * @ingroup Parser
 */
@@ -170,20 +192,20 @@ public abstract class XomwPreprocessor {
 	}
 	private void Elements_trie__init_by_wiki(Btrie_slim_mgr trie, Ordered_hash ignored_tags, String[] strip_list_ary, String xmlish_elem) {
 		trie.Clear();
-		Elements_trie__add(trie, Bool_.Y, "!--", "comment");
+		Elements_trie__add(trie, BoolUtl.Y, "!--", "comment");
 		// PORTED: $xmlishElements = parser->getStripList();
 		for (String itm : strip_list_ary) {
-			Elements_trie__add(trie, Bool_.N, itm, itm);
+			Elements_trie__add(trie, BoolUtl.N, itm, itm);
 		}
 		// PORTED: "$xmlishElements[] = 'noinclude';" or "$xmlishElements[] = 'includeonly';"
-		Elements_trie__add(trie, Bool_.N, xmlish_elem, xmlish_elem);
+		Elements_trie__add(trie, BoolUtl.N, xmlish_elem, xmlish_elem);
 
 		// PORTED: $xmlishRegex = implode( '|', array_merge( $xmlishElements, $ignoredTags ) );
 		int ignored_tags_len = ignored_tags.Len();
 		for (int j = 0; j < ignored_tags_len; j++) {
 			byte[] bry = (byte[])ignored_tags.Get_at(j);
 			String str = String_.new_u8(bry);
-			Elements_trie__add(trie, Bool_.N, str, str);
+			Elements_trie__add(trie, BoolUtl.N, str, str);
 		}
 	}
 	private static void Elements_trie__add(Btrie_slim_mgr trie, boolean type_is_comment, String hook, String name) {
@@ -321,16 +343,16 @@ public abstract class XomwPreprocessor {
 				for (int j = i; j < src_len; j++) {
 					byte b = src[j];
 					switch (b) {                // handle '$searchBase = "[{<\n";'
-						case Byte_ascii.Brack_bgn:
-						case Byte_ascii.Curly_bgn:
-						case Byte_ascii.Angle_bgn:
-						case Byte_ascii.Nl:
+						case AsciiByte.BrackBgn:
+						case AsciiByte.CurlyBgn:
+						case AsciiByte.AngleBgn:
+						case AsciiByte.Nl:
 							loop_stop = true;
 							break;
-						case Byte_ascii.Pipe:   // handle "findPipe"
+						case AsciiByte.Pipe:   // handle "findPipe"
 							if (findPipe)   loop_stop = true;
 							break;
-						case Byte_ascii.Eq:     // handle "findEquals"
+						case AsciiByte.Eq:     // handle "findEquals"
 							if (findEquals) loop_stop = true;
 							break;
 						default:                // handle "cur_closing"; specified by piece.close and rule.close, so "\n", "}", "]" and "}-"
@@ -342,7 +364,7 @@ public abstract class XomwPreprocessor {
 									}
 									else {// handle "}-"
 										int nxt_idx = j + 1;
-										if (nxt_idx < src_len && src[nxt_idx] == Byte_ascii.Dash)
+										if (nxt_idx < src_len && src[nxt_idx] == AsciiByte.Dash)
 											loop_stop = true;
 									}
 								}
@@ -375,20 +397,20 @@ public abstract class XomwPreprocessor {
 					if (cur_char_itm != null) {
 						cur_char = cur_char_itm.bry;
 						switch (cur_char_itm.type) {
-							case Byte_ascii.Pipe:         found = Found__pipe; break;
-							case Byte_ascii.Eq:           found = Found__equals; break;
-							case Byte_ascii.Angle_bgn:    found = Found__angle; break;
-							case Byte_ascii.Nl:           found = inHeading ? Found__line_end : Found__line_bgn; break;
+							case AsciiByte.Pipe:         found = Found__pipe; break;
+							case AsciiByte.Eq:           found = Found__equals; break;
+							case AsciiByte.AngleBgn:    found = Found__angle; break;
+							case AsciiByte.Nl:           found = inHeading ? Found__line_end : Found__line_bgn; break;
 
 							// PORTED: "elseif ( $curChar == $currentClosing )"
-							case Byte_ascii.Curly_end:    found = Found__close; break;
-							case Byte_ascii.Brack_end:    found = Found__close; break;
-							case Byte_ascii.At:           found = Found__close; break;	// NOTE: At is type for "}-"
+							case AsciiByte.CurlyEnd:    found = Found__close; break;
+							case AsciiByte.BrackEnd:    found = Found__close; break;
+							case AsciiByte.At:           found = Found__close; break;	// NOTE: At is type for "}-"
 
 							// PORTED: "elseif ( isset( $this->rules[$curChar] ) )"
-							case Byte_ascii.Curly_bgn:   {found = Found__open; rule = rule_curly; break;}
-							case Byte_ascii.Brack_bgn:   {found = Found__open; rule = rule_brack; break;}
-							case Byte_ascii.Dash:        {found = Found__open; rule = rule_langv; break;}
+							case AsciiByte.CurlyBgn:   {found = Found__open; rule = rule_curly; break;}
+							case AsciiByte.BrackBgn:   {found = Found__open; rule = rule_brack; break;}
+							case AsciiByte.Dash:        {found = Found__open; rule = rule_langv; break;}
 						}
 					}
 					else {
@@ -411,7 +433,7 @@ public abstract class XomwPreprocessor {
 				Xomw_prepro_elem element = (Xomw_prepro_elem)elements_trie.Match_at(trv, src, i + 1, src_len);
 				if (element == null) {
 					// Element name missing or not listed
-					this.preprocessToObj_literal(Byte_ascii.Lt_bry);
+					this.preprocessToObj_literal(AsciiByte.LtBry);
 					i++;
 					continue;
 				}
@@ -458,8 +480,8 @@ public abstract class XomwPreprocessor {
 						// it's a possible beneficial b/c break.
 						int bgn_pos = -1;
 						if (	ws_bgn > 0 
-							&&	Bry_.Eq(src, ws_bgn - 1, ws_bgn    , Byte_ascii.Nl_bry)
-							&&	Bry_.Eq(src, ws_end + 1, ws_end + 2, Byte_ascii.Nl_bry)
+							&&	Bry_.Eq(src, ws_bgn - 1, ws_bgn    , AsciiByte.NlBry)
+							&&	Bry_.Eq(src, ws_end + 1, ws_end + 2, AsciiByte.NlBry)
 						) {
 							// Remove leading whitespace from the end of the accumulator
 							// Sanity check first though
@@ -508,12 +530,12 @@ public abstract class XomwPreprocessor {
 				int atr_bgn = i + name.length + 1;
 
 				// Find end of tag
-				int tag_end_pos = no_more_gt ? Bry_find_.Not_found : Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, atr_bgn);
+				int tag_end_pos = no_more_gt ? Bry_find_.Not_found : Bry_find_.Find_fwd(src, AsciiByte.AngleEnd, atr_bgn);
 				if (tag_end_pos == Bry_find_.Not_found) {
 					// Infinite backtrack
 					// Disable tag search to prevent worst-case O(N^2) performance
 					no_more_gt = true;
-					this.preprocessToObj_literal(Byte_ascii.Lt_bry);
+					this.preprocessToObj_literal(AsciiByte.LtBry);
 					i++;
 					continue;
 				}
@@ -528,7 +550,7 @@ public abstract class XomwPreprocessor {
 				int tag_bgn_pos = i;
 				int atr_end = -1;
 				byte[] close = this.preprocessToObj_close_init();
-				if (src[tag_end_pos - 1] == Byte_ascii.Slash) {
+				if (src[tag_end_pos - 1] == AsciiByte.Slash) {
 					atr_end = tag_end_pos - 1;
 					inner = null;
 					i = tag_end_pos + 1;
@@ -557,11 +579,11 @@ public abstract class XomwPreprocessor {
 
 						// verify "\s*>"
 						elem_end_cur = elem_end_tmp;
-						elem_end_cur = Bry_find_.Find_fwd_while(src, elem_end_cur, src_len, Byte_ascii.Space);
+						elem_end_cur = Bry_find_.Find_fwd_while(src, elem_end_cur, src_len, AsciiByte.Space);
 						if (elem_end_cur == src_len) {	// just "\s", but no ">"
 							break;
 						}
-						if (src[elem_end_cur] == Byte_ascii.Gt) {
+						if (src[elem_end_cur] == AsciiByte.Gt) {
 							elem_end_rhs = elem_end_cur + 1;
 							elem_end_found = true;
 							break;
@@ -610,7 +632,7 @@ public abstract class XomwPreprocessor {
 					i++;
 				}
 
-				int count = XophpString_.strspn_fwd__byte(src, Byte_ascii.Eq, i, 6, src_len);
+				int count = XophpString_.strspn_fwd__byte(src, AsciiByte.Eq, i, 6, src_len);
 				if (count == 1 && findEquals) {	// EX: "{{a|\n=b=\n"
 					// DWIM: This looks kind of like a name/value separator.
 					// Let's let the equals handler have it and break the
@@ -650,7 +672,7 @@ public abstract class XomwPreprocessor {
 					search_bgn -= XophpString_.strspn_bwd__space_or_tab(src, search_bgn, -1);
 				}
 				int count = piece.count;
-				int eq_len = XophpString_.strspn_bwd__byte(src, Byte_ascii.Eq, search_bgn, -1);
+				int eq_len = XophpString_.strspn_bwd__byte(src, AsciiByte.Eq, search_bgn, -1);
 
 				Xomw_prepro_accum element = null;
 				if (eq_len > 0) {
@@ -708,7 +730,7 @@ public abstract class XomwPreprocessor {
 				// we need to add to stack only if opening brace count is enough for one of the rules
 				if (count >= rule.min) {
 					// Add it to the stack
-					XomwPPDStackElement piece = Factory__stack_element(Factory__part(), String_.new_u8(cur_char), String_.new_u8(rule.end), count, -1, i > 0 && src[i - 1] == Byte_ascii.Nl);
+					XomwPPDStackElement piece = Factory__stack_element(Factory__part(), String_.new_u8(cur_char), String_.new_u8(rule.end), count, -1, i > 0 && src[i - 1] == AsciiByte.Nl);
 					stack.push(piece);
 					this.accum = this.Accum__set(stack.getAccum());
 					XomwPPDStackElementFlags flags = stack.getFlags();
@@ -861,7 +883,7 @@ public abstract class XomwPreprocessor {
 
 		// handle "}-" separately
 		byte[] langv_end = Bry_.new_a7("}-");
-		rv.Add_obj(langv_end, new Xomw_prepro_curchar_itm(langv_end, Byte_ascii.At));
+		rv.Add_obj(langv_end, new Xomw_prepro_curchar_itm(langv_end, AsciiByte.At));
 		return rv;
 	}
 

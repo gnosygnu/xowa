@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*; import gplx.dbs.metas.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 public class Dbmeta_parser__idx {
 	private final Sql_bry_rdr rdr = new Sql_bry_rdr();
 	private final List_adp tmp_list = List_adp_.New();
@@ -31,14 +32,14 @@ public class Dbmeta_parser__idx {
 		byte[] idx_name = rdr.Read_sql_identifier();
 		rdr.Skip_ws().Chk_trie_val(trie, Tid__on);
 		byte[] tbl_name = rdr.Read_sql_identifier();
-		rdr.Skip_ws().Chk(Byte_ascii.Paren_bgn);
+		rdr.Skip_ws().Chk(AsciiByte.ParenBgn);
 		while (true) {
 			byte[] fld_bry = rdr.Read_sql_identifier(); if (fld_bry == null) throw Err_.new_("db", "index parse failed; index field is not an identifier", "src", src);
 			// TODO_OLD: check for ASC / DESC
 			Dbmeta_idx_fld fld_itm = new Dbmeta_idx_fld(String_.new_u8(fld_bry), Dbmeta_idx_fld.Sort_tid__none);
 			tmp_list.Add(fld_itm);
 			byte sym = rdr.Skip_ws().Read_byte();
-			if (sym == Byte_ascii.Paren_end) break;
+			if (sym == AsciiByte.ParenEnd) break;
 		}
 		return new Dbmeta_idx_itm(unique, String_.new_u8(tbl_name), String_.new_u8(idx_name), (Dbmeta_idx_fld[])tmp_list.ToAryAndClear(Dbmeta_idx_fld.class));
 	}

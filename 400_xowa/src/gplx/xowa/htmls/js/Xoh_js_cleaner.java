@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.js; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.js; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.entitys.*;
 public class Xoh_js_cleaner {
@@ -46,7 +48,7 @@ public class Xoh_js_cleaner {
 				else {					
 					byte[] frag = (byte[])o;
 					int frag_len = frag.length;
-					if (frag[0] == Byte_ascii.Lt) {	// jscript node; EX: <script
+					if (frag[0] == AsciiByte.Lt) {	// jscript node; EX: <script
 						if (!dirty) {bfr.Add_mid(src, bgn, pos); dirty = true;}
 						bfr.Add(Gfh_entity_.Lt_bry);
 						bfr.Add_mid(frag, 1, frag.length);
@@ -70,7 +72,7 @@ public class Xoh_js_cleaner {
 	}
 	private int Get_pos_eq(byte[] src, int pos, int end, int frag_len) {
 		if (	pos > 0								// bounds check
-			&& !Byte_ascii.Is_ws(src[pos - 1])		// previous byte is not whitespace; frag is part of word; EX: "regionSelect=2"; DATE:2014-02-06
+			&& !AsciiByte.IsWs(src[pos - 1])		// previous byte is not whitespace; frag is part of word; EX: "regionSelect=2"; DATE:2014-02-06
 			)
 			return -1;
 		boolean next_byte_is_equal = false; boolean break_loop = false;
@@ -78,8 +80,8 @@ public class Xoh_js_cleaner {
 		for (; atr_pos < end; atr_pos++) {
 			byte atr_b = src[atr_pos];
 			switch (atr_b) {
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space: break;
-				case Byte_ascii.Eq:
+				case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space: break;
+				case AsciiByte.Eq:
 					next_byte_is_equal = true;
 					++atr_pos;
 					break_loop = true;

@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.encoders.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.xdats; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.wikis.tdbs.*;
+import gplx.core.ios.streams.*; import gplx.core.encoders.*;
 public class Xob_xdat_file_wtr {
 	public static Xob_xdat_file_wtr new_file_(int fil_max, Io_url root_dir)				{return new Xob_xdat_file_wtr(fil_max, root_dir, Io_stream_tid_.Tid__raw);}
 	public static Xob_xdat_file_wtr new_by_tid_(int fil_max, Io_url root_dir, byte dir_tid, byte tid) {return new Xob_xdat_file_wtr(fil_max, root_dir.GenSubDir(Xotdb_dir_info_.Tid_name(dir_tid) + Xotdb_dir_info.Wtr_dir(tid)), tid);}
@@ -35,7 +40,7 @@ public class Xob_xdat_file_wtr {
 	public Bry_bfr Bfr() {return bfr;} Bry_bfr bfr;
 	public Xob_xdat_file_wtr Add_idx(byte data_dlm) {return Add_idx_direct(bfr.Len(), data_dlm);}
 	public Xob_xdat_file_wtr Add_idx_direct(int itm_len, byte data_dlm) {
-		if (data_dlm != Byte_ascii.Null) {	// write closing dlm for data_eny, unless Byte_.Null passed in
+		if (data_dlm != AsciiByte.Null) {	// write closing dlm for data_eny, unless Byte_.Null passed in
 			bfr.Add_byte(data_dlm);
 			++itm_len;
 		}
@@ -71,7 +76,7 @@ public class Xob_xdat_file_wtr {
 			idx_bry[idx_bry_pos + Len_base85] = Dlm_fld;
 			prv_pos = cur_pos;
 		}
-		idx_bry[idx_bry_len - 1] = Byte_ascii.Nl;
+		idx_bry[idx_bry_len - 1] = AsciiByte.Nl;
 		wtr.Write(idx_bry, 0, idx_bry_len);
 	}
 //		public void Flush(Gfo_usr_dlg usr_dlg) {
@@ -108,13 +113,13 @@ public class Xob_xdat_file_wtr {
 	public void Rls() {bfr.Rls(); idx = null;}
 	public void Url_gen_add() {Url_gen(++fil_idx);}
 	private void Url_gen(int newIdx) {fil_url = Xotdb_fsys_mgr.Url_fil(root_dir, newIdx, fil_ext);} Io_url fil_url; Io_url root_dir;
-	private void Idx_resize(int newLen) {idx = (int[])Array_.Resize(idx, newLen);}
+	private void Idx_resize(int newLen) {idx = (int[])ArrayUtl.Resize(idx, newLen);}
 	static final String GRP_KEY = "xowa.bldr.xdat_wtr";
-	private static final byte Dlm_fld = Byte_ascii.Pipe;		
+	private static final byte Dlm_fld = AsciiByte.Pipe;
 }
 class SortAlgo_quick {// quicksort
-	Object[] ary; int ary_len; gplx.core.lists.ComparerAble comparer;
-	public void Sort(Object[] ary, int ary_len, gplx.core.lists.ComparerAble comparer) {
+	Object[] ary; int ary_len; ComparerAble comparer;
+	public void Sort(Object[] ary, int ary_len, ComparerAble comparer) {
 		if (ary == null || ary_len < 2) return;
 		this.ary = ary; this.ary_len = ary_len; this.comparer = comparer;
 		Sort_recurse(0, ary_len - 1);
@@ -124,9 +129,9 @@ class SortAlgo_quick {// quicksort
 		int mid_idx = lo + (hi-lo)/2;
 		Object mid = ary[mid_idx];										// get mid itm
 		while (i <= j) {												// divide into two lists
-			while (comparer.compare(ary[i], mid) == CompareAble_.Less)	// if lhs.cur < mid, then get next from lhs	
+			while (comparer.compare(ary[i], mid) == CompareAbleUtl.Less)	// if lhs.cur < mid, then get next from lhs
 				i++;				
-			while (comparer.compare(ary[j], mid) == CompareAble_.More)	// if rhs.cur > mid, then get next from rhs	
+			while (comparer.compare(ary[j], mid) == CompareAbleUtl.More)	// if rhs.cur > mid, then get next from rhs
 				j--;
 
 			// lhs.cur > mid && rhs.cur < mid; switch lhs.cur and rhs.cur; increase i and j

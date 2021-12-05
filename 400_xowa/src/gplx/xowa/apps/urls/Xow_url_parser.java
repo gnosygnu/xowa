@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.langs.htmls.encoders.*;
+package gplx.xowa.apps.urls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
+import gplx.xowa.langs.vnts.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.files.*;
 public class Xow_url_parser {
@@ -72,12 +74,12 @@ public class Xow_url_parser {
 			int src_len = end - bgn;
 			Gfo_url gfo_url = url_parser.Parse(src, bgn, end);	// parse to plain gfo_url
 			Init_tmp_vars(gfo_url);
-			if (src[0] == Byte_ascii.Hash)				// src is anch; EX: #A
+			if (src[0] == AsciiByte.Hash)				// src is anch; EX: #A
 				Bld_anch();
 			else {
 				switch (tmp_protocol_tid) {
 					case Gfo_protocol_itm.Tid_file:
-						if (src_len > 5 && src[5] != Byte_ascii.Slash)			// src is ttl in [[File]] ns; EX: "File:A.png"
+						if (src_len > 5 && src[5] != AsciiByte.Slash)			// src is ttl in [[File]] ns; EX: "File:A.png"
 							Bld_page_by_file_ns();
 						else													// src is file:///; EX: EX: "file:///C:/A.png"
 							tmp_tid = Xoa_url_.Tid_file;
@@ -162,7 +164,7 @@ public class Xow_url_parser {
 		if (Bry_.Eq(lang, Xow_domain_tid_.Bry__commons))	// commons links will have fmt of "/wikipedia/commons"; must change to wikimedia
 			domain_type = Xow_domain_tid_.Bry__wikimedia;
 		tmp_wiki = tmp_bfr.Clear()
-			.Add(lang).Add_byte(Byte_ascii.Dot)					// add lang/type + .;	EX: "en."; "fr."; "commons."
+			.Add(lang).Add_byte(AsciiByte.Dot)					// add lang/type + .;	EX: "en."; "fr."; "commons."
 			.Add(domain_type).Add(Bry_dot_org)					// add type + .org;		EX: "wikipedia.org"; "wikimedia.org";
 			.To_bry_and_clear();
 		if (tmp_segs_len > 6 && Bry_.Eq(tmp_segs[3], Xof_url_bldr.Bry_thumb)) tmp_page = tmp_segs[6];	// if "/thumb/", set page from seg[n-1] to seg[6]; EX: using thumb example above, "A.jpg", not "220px-A.jpg"
@@ -245,7 +247,7 @@ public class Xow_url_parser {
 	}
 	private byte[] Bld_page_by_alias(byte[] bry) {
 		if (bry == null) return null;
-		int colon_pos = Bry_find_.Find_fwd(bry, Byte_ascii.Colon);						// check for colon; EX: commons:Earth
+		int colon_pos = Bry_find_.Find_fwd(bry, AsciiByte.Colon);						// check for colon; EX: commons:Earth
 		if (colon_pos == Bry_find_.Not_found) return null;									// no colon
 		Xow_wiki alias_wiki = wiki;														// default alias_wiki to cur_wiki
 		if (!tmp_wiki_is_missing)														// tmp_wiki exists; use it for alias wikis; DATE:2015-09-17
@@ -270,7 +272,7 @@ public class Xow_url_parser {
 	private byte[] Make_page_from_segs(int bgn) {
 		if (tmp_segs_len - bgn == 1) return tmp_segs[tmp_segs_len - 1];	// only 1 item; just return it; don't build bry
 		for (int i = bgn; i < tmp_segs_len; i++) {
-			if (i != bgn) tmp_bfr.Add_byte(Byte_ascii.Slash);
+			if (i != bgn) tmp_bfr.Add_byte(AsciiByte.Slash);
 			tmp_bfr.Add(tmp_segs[i]);
 		}
 		return tmp_bfr.To_bry_and_clear();
@@ -282,30 +284,30 @@ public class Xow_url_parser {
 		int args_len = url.Qargs_ary().length;
 		if (args_len > 0) {
 			for (int i = 0; i < args_len; i++) {
-				byte dlm = i == 0 ? Byte_ascii.Question : Byte_ascii.Amp;
+				byte dlm = i == 0 ? AsciiByte.Question : AsciiByte.Amp;
 				tmp_bfr.Add_byte(dlm);
 				Gfo_qarg_itm arg = url.Qargs_ary()[i];
-				tmp_bfr.Add(arg.Key_bry()).Add_byte(Byte_ascii.Eq).Add(arg.Val_bry());
+				tmp_bfr.Add(arg.Key_bry()).Add_byte(AsciiByte.Eq).Add(arg.Val_bry());
 			}
 		}
 		if (url.Anch_bry() != null)
-			tmp_bfr.Add_byte(Byte_ascii.Hash).Add(url.Anch_bry());		// add anchor;		EX: "#B"
+			tmp_bfr.Add_byte(AsciiByte.Hash).Add(url.Anch_bry());		// add anchor;		EX: "#B"
 		return tmp_bfr.To_str_and_clear();
 	}
 	private static byte[] Strip_mobile_segment(byte[] v) {// DATE:2014-05-03
-		int pos = Bry_find_.Find_fwd(v, Byte_ascii.Dot);
+		int pos = Bry_find_.Find_fwd(v, AsciiByte.Dot);
 		if (	pos == Bry_find_.Not_found		// no dot; EX: "A"
 			||	pos + 2 >= v.length				// not enough space for .m.; EX: "A.b"
 			)	
 			return v;
 		switch (v[pos + 1]) {	// check for m
-			case Byte_ascii.Ltr_M:
-			case Byte_ascii.Ltr_m:
+			case AsciiByte.Ltr_M:
+			case AsciiByte.Ltr_m:
 				break;
 			default:
 				return v;
 		}
-		if (v[pos + 2] != Byte_ascii.Dot) return v;
+		if (v[pos + 2] != AsciiByte.Dot) return v;
 		return Bry_.Add(Bry_.Mid(v, 0, pos), Bry_.Mid(v, pos + 2));	// skip ".m"
 	}
 	private static final byte[] Qarg__title = Bry_.new_a7("title");

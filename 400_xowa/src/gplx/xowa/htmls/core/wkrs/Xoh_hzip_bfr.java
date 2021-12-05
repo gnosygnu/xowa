@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.xowa.htmls.core.hzips.*;
+package gplx.xowa.htmls.core.wkrs;
+import gplx.Bry_bfr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_int;
 public class Xoh_hzip_bfr extends Bry_bfr { 	private final Xoh_hzip_int hzint = new Xoh_hzip_int();
 	private final byte stop_byte;
 	public Xoh_hzip_bfr(int bfr_max, boolean mode_is_b256, byte stop_byte) {
@@ -33,5 +35,5 @@ public class Xoh_hzip_bfr extends Bry_bfr { 	private final Xoh_hzip_int hzint = 
 		hzint.Encode(reqd, this, val);
 		return this;
 	}
-	public static Xoh_hzip_bfr New_txt(int bfr_max) {return new Xoh_hzip_bfr(bfr_max, Bool_.N, gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_.Escape);}
+	public static Xoh_hzip_bfr New_txt(int bfr_max) {return new Xoh_hzip_bfr(bfr_max, BoolUtl.N, gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_.Escape);}
 }

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.translates; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.translates; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.*;
 public class Xop_tvar_lxr implements Xop_lxr {
@@ -23,7 +25,7 @@ public class Xop_tvar_lxr implements Xop_lxr {
 	public void Term(Btrie_fast_mgr core_trie) {}
 	private static final byte[] Hook_bgn = Bry_.new_a7("<tvar|"), Close_nde = Bry_.new_a7("</>");
 	public int Make_tkn(Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, Xop_root_tkn root, byte[] src, int src_len, int bgn_pos, int cur_pos) {
-		int rhs_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, cur_pos); if (rhs_end == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
+		int rhs_end = Bry_find_.Find_fwd(src, AsciiByte.Gt, cur_pos); if (rhs_end == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
 		int lhs_bgn = Bry_find_.Find_fwd(src, Close_nde    , rhs_end); if (lhs_bgn == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
 		byte[] body = Bry_.Mid(src, rhs_end + Int_.Offset_1, lhs_bgn);
 		Xop_ctx sub_ctx = Xop_ctx.New__sub__reuse_page(ctx);

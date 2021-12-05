@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*; import gplx.core.*;
+package gplx.core.lists; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
 class StatRng_fxt {	// UNUSED:useful for stat processing
 	StatRng rng;
 	public StatRng_fxt ini_(int lo_ary_len, int hi_ary_len, int... slot_hi_ary) {
@@ -102,10 +103,10 @@ class StatRng {
 			}
 		}
 		if (val < Lo_ary_bound) {
-			Lo_ary_bound = CalcCutoff(Lo_ary, CompareAble_.More, Int_.Min_value, key, val);
+			Lo_ary_bound = CalcCutoff(Lo_ary, CompareAbleUtl.More, Int_.Min_value, key, val);
 		} 
 		if (val > Hi_ary_bound) {
-			Hi_ary_bound = CalcCutoff(Hi_ary, CompareAble_.Less, Int_.Max_value, key, val);
+			Hi_ary_bound = CalcCutoff(Hi_ary, CompareAbleUtl.Less, Int_.Max_value, key, val);
 		} 
 	}
 	int CalcCutoff(StatItm[] ary, int comp, int bgn_bound, Object key, int val) {

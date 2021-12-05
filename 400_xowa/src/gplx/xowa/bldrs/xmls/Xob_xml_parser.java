@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.xmls; import gplx.*;
 import gplx.core.btries.*; import gplx.core.ios.*; import gplx.core.times.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.nss.*;
 public class Xob_xml_parser {
 	Btrie_fast_mgr trie = Xob_xml_parser_.trie_(); Bry_bfr data_bfr = Bry_bfr_.New(); DateAdp_parser date_parser = DateAdp_parser.new_();
@@ -74,7 +75,7 @@ public class Xob_xml_parser {
 						if (title_needed) {
 							data_bfr_add = false;
 							byte[] ttl = data_bfr.To_bry_and_clear();
-							Bry_.Replace_reuse(ttl, Byte_ascii.Space, Byte_ascii.Underline);
+							Bry_.Replace_reuse(ttl, AsciiByte.Space, AsciiByte.Underline);
 							rv.Ttl_(ttl, ns_mgr);
 							title_needed = false;
 						}
@@ -115,8 +116,8 @@ public class Xob_xml_parser {
 		gt_was_inline = false;
 		while (src_pos < src_len) {
 			switch (src[src_pos]) {
-				case Byte_ascii.Slash:	gt_was_inline = true; break;
-				case Byte_ascii.Gt:		return src_pos;
+				case AsciiByte.Slash:	gt_was_inline = true; break;
+				case AsciiByte.Gt:		return src_pos;
 				default:				gt_was_inline = false; break;
 			}
 			++src_pos;

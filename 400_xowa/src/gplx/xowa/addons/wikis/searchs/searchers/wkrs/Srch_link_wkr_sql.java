@@ -13,16 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
-import gplx.dbs.*; import gplx.dbs.stmts.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.wikis.searchs.searchers.crts.*; import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;	
+package gplx.xowa.addons.wikis.searchs.searchers.wkrs;
+import gplx.Bry_;
+import gplx.Bry_fmt;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.String_;
+import gplx.dbs.Db_attach_mgr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.stmts.Db_stmt_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_link_tbl;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_word_tbl;
+import gplx.xowa.addons.wikis.searchs.searchers.Srch_search_ctx;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.Srch_crt_itm;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.Srch_crt_sql;
 public class Srch_link_wkr_sql {
 	private final Db_stmt_mgr stmt_mgr = new Db_stmt_mgr();
 	public void Clear() {stmt_mgr.Clear();}
 	public String Dbg(Srch_search_ctx ctx, Db_attach_mgr attach_mgr, Srch_crt_itm sql_root) {
-		stmt_mgr.Mode_is_stmt_(Bool_.N);
+		stmt_mgr.Mode_is_stmt_(BoolUtl.N);
 		Init(ctx, attach_mgr, sql_root);
-		stmt_mgr.Mode_is_stmt_(Bool_.Y);
+		stmt_mgr.Mode_is_stmt_(BoolUtl.Y);
 		String rv = Write(ctx, attach_mgr);
 		stmt_mgr.Clear();
 		return rv;
@@ -150,5 +164,5 @@ public class Srch_link_wkr_sql {
 	, Fmt__word_text__rng	= Bry_fmt.New(Str__word__text__bgn + Str__word__text__rng + Str__word__text__mnx  + ")\n", "uid", "and", "index", "word_bgn", "word_end", "score_bgn", "score_end")
 	, Fmt__word_text__like	= Bry_fmt.New(Str__word__text__bgn + Str__word__text__mnx + Str__word__text__like + ")\n", "uid", "and", "index", "score_bgn", "score_end", "word_like")
 	;
-	public static final byte Like_escape_byte = Byte_ascii.Pipe;
+	public static final byte Like_escape_byte = AsciiByte.Pipe;
 }

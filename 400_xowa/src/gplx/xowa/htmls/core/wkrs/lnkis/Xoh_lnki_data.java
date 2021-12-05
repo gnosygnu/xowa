@@ -13,10 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.hrefs.*;import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
-import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.htmls.core.wkrs.lnkis; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.brys.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
+import gplx.xowa.htmls.core.wkrs.lnkis.anchs.*;
+import gplx.xowa.wikis.nss.*;
 public class Xoh_lnki_data {
 	private byte[] src;
 	private int href_ns_id; private byte[] href_ns_name; private int href_ns_name_len;
@@ -74,7 +78,7 @@ public class Xoh_lnki_data {
 				this.href_bgn = 0;
 				this.href_end = href_src.length;
 				if (href_ns_id != Xow_ns_.Tid__main) {										// not main; try to remove template name;				
-					int colon_pos = Bry_find_.Find_fwd(href_src, Byte_ascii.Colon, href_bgn, href_end);
+					int colon_pos = Bry_find_.Find_fwd(href_src, AsciiByte.Colon, href_bgn, href_end);
 					this.href_ns_name = Xoa_ttl.Replace_unders(Bry_.Mid(href_src, href_bgn, colon_pos + 1));		// EX: 11="Template talk:"
 					this.href_ns_name_len = href_ns_name.length;
 				}

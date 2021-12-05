@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 import org.junit.*;
 public class z016_GfmlScopeList_tst {
 	@Before public void setup() {
@@ -38,7 +39,7 @@ public class z016_GfmlScopeList_tst {
 	GfmlDocPos docPos_(int... ary) {
 		int last = ary.length - 1;
 		int idx = ary[last];
-		int[] levels = (int[])Array_.Resize(ary, last);
+		int[] levels = (int[])ArrayUtl.Resize(ary, last);
 		return new GfmlDocPos(levels, idx);
 	}
 	void run_Add(GfmlScopeList list, GfmlScopeItm... ary) {

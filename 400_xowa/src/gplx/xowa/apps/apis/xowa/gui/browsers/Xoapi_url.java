@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.gfui.*; import gplx.gfui.envs.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.guis.views.*; import gplx.core.envs.*;
+package gplx.xowa.apps.apis.xowa.gui.browsers;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.String_;
+import gplx.core.envs.Op_sys;
+import gplx.gfui.controls.standards.GfuiComboBox;
+import gplx.gfui.envs.ClipboardAdp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.guis.views.Xog_tab_itm;
+import gplx.xowa.guis.views.Xog_tab_itm_;
+import gplx.xowa.guis.views.Xog_win_itm;
 public class Xoapi_url implements Gfo_invk {
 	private Xoae_app app;
 	public void Init_by_kit(Xoae_app app) {
@@ -27,9 +38,9 @@ public class Xoapi_url implements Gfo_invk {
 		url_box.Focus(); 
 		url_box.Sel_(0, String_.Len(this.Url_box().Text()));
 	}
-	public void Exec()					{Exec_wkr(Bool_.N, this.Url_box().Text());}
-	public void Exec_by_paste()			{Exec_wkr(Bool_.N, ClipboardAdp_.GetText());}
-	public void Exec_new_tab_by_paste() {Exec_wkr(Bool_.Y, ClipboardAdp_.GetText());}
+	public void Exec()					{Exec_wkr(BoolUtl.N, this.Url_box().Text());}
+	public void Exec_by_paste()			{Exec_wkr(BoolUtl.N, ClipboardAdp_.GetText());}
+	public void Exec_new_tab_by_paste() {Exec_wkr(BoolUtl.Y, ClipboardAdp_.GetText());}
 	public void Restore() {
 		Xog_tab_itm tab = app.Gui_mgr().Browser_win().Active_tab(); if (tab == Xog_tab_itm_.Null) return;
 		this.Url_box().Text_(tab.Page().Url().To_str());

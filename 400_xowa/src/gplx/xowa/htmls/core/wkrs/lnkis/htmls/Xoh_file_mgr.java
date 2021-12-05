@@ -13,13 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import gplx.core.primitives.*;
-import gplx.xowa.files.*; import gplx.xowa.files.xfers.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.repos.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.*; 
-import gplx.xowa.wikis.tdbs.metas.*;
-import gplx.xowa.htmls.core.htmls.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.Bry_bfr;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_cfg_download;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.files.Xof_html_elem;
+import gplx.xowa.files.Xof_patch_upright_tid_;
+import gplx.xowa.files.Xof_url_bldr;
+import gplx.xowa.files.Xof_xfer_itm;
+import gplx.xowa.files.Xow_file_mgr;
+import gplx.xowa.files.origs.Xof_orig_itm;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.files.xfers.Xof_xfer_queue;
+import gplx.xowa.htmls.Xow_html_mgr;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.tdbs.metas.Xof_meta_itm;
 public class Xoh_file_mgr {
 	private final Xowe_wiki wiki;
 	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
@@ -32,7 +51,7 @@ public class Xoh_file_mgr {
 		file_wtr.Init_by_wiki(wiki);
 	}
 	public void Init_by_page(Xoh_wtr_ctx hctx, Xoae_page page) {file_wtr.Init_by_page(hctx, page);}
-	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {Write_or_queue(bfr, page, ctx, hctx, src, lnki, file_wtr.Bld_alt(Bool_.N, ctx, Xoh_wtr_ctx.Alt, src, lnki));}
+	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki) {Write_or_queue(bfr, page, ctx, hctx, src, lnki, file_wtr.Bld_alt(BoolUtl.N, ctx, Xoh_wtr_ctx.Alt, src, lnki));}
 	public void Write_or_queue(Bry_bfr bfr, Xoae_page page, Xop_ctx ctx, Xoh_wtr_ctx hctx, byte[] src, Xop_lnki_tkn lnki, byte[] alt_text) {
 		try {
 			file_wtr.Write_file(bfr, ctx, hctx, src, lnki, this.Lnki_eval(Xof_exec_tid.Tid_wiki_page, ctx, page, lnki), alt_text);

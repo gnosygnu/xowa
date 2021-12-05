@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*;
+package gplx.xowa.addons.wikis.directorys.specials.items; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.langs.jsons.*;
-import gplx.dbs.sys.*; import gplx.xowa.addons.wikis.directorys.dbs.*; import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.langs.cases.*;
+import gplx.xowa.addons.wikis.directorys.dbs.*; import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.*;
 class Xowdir_item_mgr {
 	private final Xoa_app app;
 	private final Json_wtr json_wtr = new Json_wtr();
@@ -170,17 +170,17 @@ class Xowdir_item_mgr {
 		for (int i = 0; i < len; i++) {
 			byte b = src[i];
 			// alpha-num is valid
-			if (Byte_ascii.Is_ltr(b) || Byte_ascii.Is_num(b))
+			if (AsciiByte.IsLtr(b) || AsciiByte.IsNum(b))
 				continue;
 
 			// hyphens are only valid at start or end
-			if (b == Byte_ascii.Dash) {
+			if (b == AsciiByte.Dash) {
 				if (i != 0 || i != len - 1)
 					continue;
 			}
 
 			// allow dots; EX: en.wikipedia.org
-			if (b == Byte_ascii.Dot)
+			if (b == AsciiByte.Dot)
 				continue;
 
 			// else, invalid

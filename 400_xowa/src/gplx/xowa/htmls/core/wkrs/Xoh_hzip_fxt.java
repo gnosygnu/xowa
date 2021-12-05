@@ -13,9 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.files.caches.*;
+package gplx.xowa.htmls.core.wkrs;
+import gplx.Bry_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.langs.htmls.Gfh_utl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_page;
+import gplx.xowa.Xoa_page_;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.caches.Xou_cache_finder_;
+import gplx.xowa.files.caches.Xou_cache_finder_mem;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_mgr;
 public class Xoh_hzip_fxt {
 	private final Xowe_wiki wiki;
 	private final Xop_fxt parser_fxt = new Xop_fxt();
@@ -33,7 +50,7 @@ public class Xoh_hzip_fxt {
 	public Xow_wiki Wiki() {return wiki;}
 	public Xoa_page Page() {return hpg;}
 	public Xoh_hzip_fxt Init_mode_is_b256_(boolean v) {bfr.Mode_is_b256_(v); mode_is_b256 = v; return this;}
-	public Xoh_hzip_fxt Init_mode_diff_y_() {hzip_mgr.Hctx().Mode_is_diff_(Bool_.Y); return this;}
+	public Xoh_hzip_fxt Init_mode_diff_y_() {hzip_mgr.Hctx().Mode_is_diff_(BoolUtl.Y); return this;}
 	public void Clear() {hpg.Clear();}
 	public void Init_wiki_installed(String domain) {parser_fxt.Init_xwiki_add_user_(domain);}
 	public Xou_cache_finder_mem Init_file_mgr__mem() {
@@ -101,9 +118,9 @@ public class Xoh_hzip_fxt {
 			Io_mgr.Instance.SaveFilBry(dir.GenSubFil(fil).GenNewExt(".hzip.html"), actl);
 			Gfo_usr_dlg_.Test__show__init();
 			gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_hzip.Md5_depth = 4;
-			hzip_mgr.Hctx().Mode_is_diff_(Bool_.Y);
+			hzip_mgr.Hctx().Mode_is_diff_(BoolUtl.Y);
 			hzip_mgr.Decode(bfr, parser_fxt.Wiki(), hpg, actl);
-			hzip_mgr.Hctx().Mode_is_diff_(Bool_.N);
+			hzip_mgr.Hctx().Mode_is_diff_(BoolUtl.N);
 			gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_hzip.Md5_depth = 2;
 			Gfo_usr_dlg_.Test__show__term();
 			Io_mgr.Instance.SaveFilBry(dir.GenSubFil(fil).GenNewExt(".hzip.decode.html"), bfr.To_bry_and_clear());

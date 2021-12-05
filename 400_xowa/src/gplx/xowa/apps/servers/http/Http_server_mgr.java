@@ -28,11 +28,12 @@ The terms of each license can be found in the following files:
 GPLv3 License: LICENSE-GPLv3.txt
 Apache License: LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
+package gplx.xowa.apps.servers.http; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.apps.servers.*;
 import gplx.core.threads.*; import gplx.core.net.*; import gplx.core.primitives.*;
-import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
-import gplx.xowa.wikis.pages.*;
-import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
+import gplx.langs.htmls.encoders.*;
 public class Http_server_mgr implements Gfo_invk {
 	private final Object thread_lock = new Object();
 	private final Gfo_usr_dlg usr_dlg;
@@ -61,7 +62,7 @@ public class Http_server_mgr implements Gfo_invk {
 	} private int port = Port__default;
 	public Http_server_wkr_pool Wkr_pool() {return wkr_pool;} private final Http_server_wkr_pool wkr_pool = new Http_server_wkr_pool();
 	public Int_pool Uid_pool() {return uid_pool;} private final Int_pool uid_pool = new Int_pool();
-	public byte[] Home() {return home;} public void Home_(byte[] v) {home = Bry_.Add(Byte_ascii.Slash_bry, v);} private byte[] home = Bry_.new_a7("/home/wiki/Main_Page");
+	public byte[] Home() {return home;} public void Home_(byte[] v) {home = Bry_.Add(AsciiByte.SlashBry, v);} private byte[] home = Bry_.new_a7("/home/wiki/Main_Page");
 	private void Running_(boolean val) {
 		if (val) {
 			if (running)

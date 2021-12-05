@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.hives; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.wikis.tdbs.*;
 import gplx.core.ios.zips.*;
 import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.bldrs.sql_dumps.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.specials.*; import gplx.xowa.specials.allPages.*;
+import gplx.xowa.specials.allPages.*;
 import gplx.xowa.wikis.tdbs.xdats.*;
 public class Xob_hive_mgr {
 	public Xob_hive_mgr(Xowe_wiki wiki) {this.wiki = wiki; this.fsys_mgr = wiki.Tdb_fsys_mgr();} private Xowe_wiki wiki; Xotdb_fsys_mgr fsys_mgr;
@@ -28,7 +30,7 @@ public class Xob_hive_mgr {
 		int xdat_idx = Regy__find_file_ns(key, dir_tid, ns.Num_str());
 		Xob_xdat_file xdat_main = new Xob_xdat_file();
 		xdat_main = xdat_load_(xdat_main, dir_tid, ns, xdat_idx);
-		xdat_main.Find(xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, false);
+		xdat_main.Find(xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, AsciiByte.Tab, false);
 		int itm_idx = xdat_itm.Itm_idx();
 		Special_allpages_query_fwd(mgr, dir_tid, ns, include_redirects, count, xdat_idx, itm_idx    , xdat_main);
 		Special_allpages_query_bwd(mgr, dir_tid, ns, include_redirects, count, xdat_idx, itm_idx - 1, xdat_main);
@@ -115,7 +117,7 @@ public class Xob_hive_mgr {
 		Io_url xdat_url = fsys_mgr.Url_ns_fil(dir_tid, ns.Id(), xdat_idx);
 		byte[] xdat_bry = Io_mgr.Instance.LoadFilBry(xdat_url);
 		xdat.Parse(xdat_bry, xdat_bry.length, xdat_url);
-		xdat.Find(xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, false);
+		xdat.Find(xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, AsciiByte.Tab, false);
 		Find_nearby_add_fwd(list, dir_tid, ns, include_redirects, count, xdat_idx, xdat_itm.Itm_idx());
 	}	private Xob_xdat_itm xdat_itm = new Xob_xdat_itm(); //Int_2_ref find_nearby_rslt = new Int_2_ref();
 //		private void Find_nearby_add_bwd(List_adp list, byte dir_tid, Xow_ns ns, boolean include_redirects, int total, int fil_bgn, int row_bgn) {

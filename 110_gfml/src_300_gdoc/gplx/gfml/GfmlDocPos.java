@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
 import gplx.core.strings.*;
+import gplx.objects.lists.CompareAble;
+import gplx.objects.lists.CompareAbleUtl;
 public class GfmlDocPos implements CompareAble {
 	public String Path() {if (path == null) MakePath(); return path;} private String path;
 	public int compareTo(Object obj) {
@@ -23,14 +25,14 @@ public class GfmlDocPos implements CompareAble {
 			Less: lower level (ex: 0_1 < 0) or lower idx (ex: 0_1 < 0_0)			*/
 		GfmlDocPos comp = (GfmlDocPos)obj;
 		for (int i = 0; i < ary.length; i++) {
-			if (i >= comp.ary.length) return CompareAble_.More;				// more ary than comp and whatever ary they share are equal; must be more;
+			if (i >= comp.ary.length) return CompareAbleUtl.More;				// more ary than comp and whatever ary they share are equal; must be more;
 			int origVal = ary[i];
 			int compVal = comp.ary[i];
 			if		(origVal == compVal)	continue;						// indexes are equal; continue to next
-			else if (origVal <	compVal)	return CompareAble_.Less;
-			else if (origVal >	compVal)	return CompareAble_.More;
+			else if (origVal <	compVal)	return CompareAbleUtl.Less;
+			else if (origVal >	compVal)	return CompareAbleUtl.More;
 		}
-		if (ary.length < comp.ary.length)	return CompareAble_.Less;		// less ary than comp, and whatever ary they share are equal; must be less
+		if (ary.length < comp.ary.length)	return CompareAbleUtl.Less;		// less ary than comp, and whatever ary they share are equal; must be less
 		return Int_.Compare(idx, comp.idx);									// compare idx
 	}
 	public GfmlDocPos NewClone() {return new GfmlDocPos(ary, idx);}

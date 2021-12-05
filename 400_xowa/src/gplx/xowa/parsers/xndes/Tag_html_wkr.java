@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.langs.htmls.encoders.*;
 public interface Tag_html_wkr {
 	void Tag__process_name(byte[] name);
@@ -41,7 +42,7 @@ class Tag_html_wkr_basic implements Tag_html_wkr {
 	}
 	public void Tag__process_name(byte[] tag_name) {
 		this.tag_name = tag_name;
-		tmp_bfr.Add_byte(Byte_ascii.Lt).Add(tag_name);	// EX: "<ref"
+		tmp_bfr.Add_byte(AsciiByte.Lt).Add(tag_name);	// EX: "<ref"
 	}		
 	public void Tag__process_attr(byte[] key, byte[] val) {
 		int val_len = Bry_.Len(val);
@@ -49,28 +50,28 @@ class Tag_html_wkr_basic implements Tag_html_wkr {
 
 		// NOTE: this behavior emulates /includes/parser/CoreParserFunctions.php|tagObj; REF: $attrText .= ' ' . htmlspecialchars( $name ) . '="' . htmlspecialchars( $value ) . '"';
 		// write key
-		tmp_bfr.Add_byte(Byte_ascii.Space);	// write space between html_args
+		tmp_bfr.Add_byte(AsciiByte.Space);	// write space between html_args
 		int key_len = Bry_.Len(key);
 		if (key_len > 0) {
 			if (atrs_encode)
 				Gfo_url_encoder_.Id.Encode(tmp_bfr, key, 0, key_len);
 			else
 				tmp_bfr.Add(key);
-			tmp_bfr.Add_byte(Byte_ascii.Eq);
+			tmp_bfr.Add_byte(AsciiByte.Eq);
 		}
 
 		// write val
-		tmp_bfr.Add_byte(Byte_ascii.Quote);
+		tmp_bfr.Add_byte(AsciiByte.Quote);
 		if (atrs_encode)
 			Gfo_url_encoder_.Id.Encode(tmp_bfr, val, 0, val_len);
 		else
 			tmp_bfr.Add(val);
-		tmp_bfr.Add_byte(Byte_ascii.Quote);
+		tmp_bfr.Add_byte(AsciiByte.Quote);
 	}
 	public void Tag__process_body(byte[] body) {
-		tmp_bfr.Add_byte(Byte_ascii.Gt);
+		tmp_bfr.Add_byte(AsciiByte.Gt);
 		tmp_bfr.Add(body);
-		tmp_bfr.Add_byte(Byte_ascii.Lt).Add_byte(Byte_ascii.Slash).Add(tag_name).Add_byte(Byte_ascii.Gt);	// EX: "</ref>"
+		tmp_bfr.Add_byte(AsciiByte.Lt).Add_byte(AsciiByte.Slash).Add(tag_name).Add_byte(AsciiByte.Gt);	// EX: "</ref>"
 	}
 	public byte[] Tag__build(Xowe_wiki wiki, Xop_ctx ctx) {
 		return tmp_bfr.To_bry_and_clear();

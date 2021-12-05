@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.clses; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
-import org.junit.*;
+package gplx.langs.htmls.clses;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.Hash_adp_bry;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Gfh_class__tst {
 	private final Gfh_class__fxt fxt = new Gfh_class__fxt();
 	@Test  public void Has() {
@@ -33,8 +38,8 @@ public class Gfh_class__tst {
 	}
 }
 class Gfh_class__fxt {
-	public void Test__has__y(String src, String... ary) {Test__has(Bool_.Y, src, ary);}
-	public void Test__has__n(String src, String... ary) {Test__has(Bool_.N, src, ary);}
+	public void Test__has__y(String src, String... ary) {Test__has(BoolUtl.Y, src, ary);}
+	public void Test__has__n(String src, String... ary) {Test__has(BoolUtl.N, src, ary);}
 	public void Test__has(boolean expd, String src, String... ary) {
 		byte[] src_bry = Bry_.new_u8(src);
 		for (String itm : ary) {

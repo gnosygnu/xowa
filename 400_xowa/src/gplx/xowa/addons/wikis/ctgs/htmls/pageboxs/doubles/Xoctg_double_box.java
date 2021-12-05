@@ -13,19 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*;
-import gplx.core.brys.*; import gplx.core.brys.fmts.*; import gplx.core.brys.fmtrs.*;
-import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.users.history.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.doubles;
+import gplx.Bry_bfr;
+import gplx.Bry_fmt;
+import gplx.core.brys.Bfr_arg;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_itm;
+import gplx.xowa.users.history.Xou_history_mgr;
 public class Xoctg_double_box implements Bfr_arg {
 	public Xoctg_double_grp Grp_normal() {return grp_normal;} private final Xoctg_double_grp grp_normal = new Xoctg_double_grp();
 	public Xoctg_double_grp Grp_hidden() {return grp_hidden;} private final Xoctg_double_grp grp_hidden = new Xoctg_double_grp();
 	public void Init_by_wiki(Xow_wiki wiki) {
 		Xou_history_mgr history_mgr = wiki.App().User().History_mgr();
-		grp_normal.Init_by_wiki(wiki, history_mgr, Bool_.Y);
-		grp_hidden.Init_by_wiki(wiki, history_mgr, Bool_.N);
+		grp_normal.Init_by_wiki(wiki, history_mgr, BoolUtl.Y);
+		grp_hidden.Init_by_wiki(wiki, history_mgr, BoolUtl.N);
 	}
 	public void Write_pagebox(Bry_bfr bfr, Xoctg_pagebox_itm[] ary) {
 		grp_normal.Itms().Itms__clear();

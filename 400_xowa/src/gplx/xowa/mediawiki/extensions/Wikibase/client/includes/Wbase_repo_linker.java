@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.Wikibase.client.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.Wikibase.*; import gplx.xowa.mediawiki.extensions.Wikibase.client.*;
+package gplx.xowa.mediawiki.extensions.Wikibase.client.includes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.mediawiki.*;
 // https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/includes/RepoLinker.php
 public class Wbase_repo_linker {
@@ -21,7 +22,7 @@ public class Wbase_repo_linker {
 	private byte[] articlePath;
 //		private byte[] scriptPath;
 	public Wbase_repo_linker(byte[] baseUrl, byte[] articlePath, byte[] scriptPath) {
-		this.baseUrl = Bry_.Trim(baseUrl, 0, baseUrl.length, false, true, Bry_.mask_(256, Byte_ascii.Slash_bry), true); // getBaseUrl
+		this.baseUrl = Bry_.Trim(baseUrl, 0, baseUrl.length, false, true, Bry_.mask_(256, AsciiByte.SlashBry), true); // getBaseUrl
 		this.articlePath = articlePath;
 //			this.scriptPath = scriptPath;
 	}
@@ -32,7 +33,7 @@ public class Wbase_repo_linker {
 	}
 
 	private byte[] encodePage(byte[] page) {
-		return gplx.langs.htmls.encoders.Gfo_url_encoder_.Mw_wfUrlencode.Encode(Bry_.Replace(page, Byte_ascii.Space, Byte_ascii.Underline));
+		return gplx.langs.htmls.encoders.Gfo_url_encoder_.Mw_wfUrlencode.Encode(Bry_.Replace(page, AsciiByte.Space, AsciiByte.Underline));
 	}
 
 //		/**

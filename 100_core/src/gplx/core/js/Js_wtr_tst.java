@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.js; import gplx.*; import gplx.core.*;
+package gplx.core.js; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 public class Js_wtr_tst {
 	@Before public void Init() {fxt.Clear();} private Js_wtr_fxt fxt = new Js_wtr_fxt();
@@ -30,7 +31,7 @@ class Js_wtr_fxt {
 	private Js_wtr wtr = new Js_wtr();
 	public void Clear() {
 		wtr.Clear();
-		wtr.Quote_char_(Byte_ascii.Apos);
+		wtr.Quote_char_(AsciiByte.Apos);
 	}
 	public void Test_write_val_html(String raw, String expd) {
 		wtr.Write_val(Bry_.new_u8(raw));

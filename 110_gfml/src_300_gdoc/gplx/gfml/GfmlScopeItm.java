@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
 interface GfmlScopeItm {
 	String Key();
 	GfmlDocPos DocPos();
@@ -57,7 +58,7 @@ class GfmlScopeList {
 		GfmlScopeItm rv = null;
 		for (Object itemObj : list) {
 			GfmlScopeItm itm = (GfmlScopeItm)itemObj;
-			if (CompareAble_.Is(CompareAble_.More_or_same, pos, itm.DocPos()))
+			if (CompareAbleUtl.Is(CompareAbleUtl.More_or_same, pos, itm.DocPos()))
 				rv = itm;
 			else
 				break;	// ASSUME: insertion is done in order; first lessThan means rest will also be lessThan

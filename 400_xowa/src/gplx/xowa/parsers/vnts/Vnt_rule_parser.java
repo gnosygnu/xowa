@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.vnts; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.vnts.*;
 class Vnt_rule_parser implements gplx.core.brys.Bry_split_wkr {
 	private final Btrie_slim_mgr vnt_trie = Btrie_slim_mgr.ci_a7();
@@ -39,20 +40,20 @@ class Vnt_rule_parser implements gplx.core.brys.Bry_split_wkr {
 	}
 	public void Parse(byte[] src, int src_bgn, int src_end) {
 		this.src_end = src_end;
-		Bry_split_.Split(src, src_bgn, src_end, Byte_ascii.Semic, false, this);	// trim=false for "&#entity;" check below
+		Bry_split_.Split(src, src_bgn, src_end, AsciiByte.Semic, false, this);	// trim=false for "&#entity;" check below
 	}
 	public int Split(byte[] src, int itm_bgn, int itm_end) {	// macro=>zh-hans:text;
 		int html_entity_pos = Bry_find_.Find_bwd_while_alphanum(src, itm_end);
 		byte html_entity_byte =  src[html_entity_pos];
-		if (html_entity_byte == Byte_ascii.Hash) html_entity_byte = src[html_entity_pos - 2];		// skip #; EX: &#123;
-		if (html_entity_byte == Byte_ascii.Amp) return Bry_split_.Rv__extend;						// reject "&#entity;"; EX: "&nbsp;zh-hans;"
+		if (html_entity_byte == AsciiByte.Hash) html_entity_byte = src[html_entity_pos - 2];		// skip #; EX: &#123;
+		if (html_entity_byte == AsciiByte.Amp) return Bry_split_.Rv__extend;						// reject "&#entity;"; EX: "&nbsp;zh-hans;"
 		if (itm_end != src_end) {
 			int nxt_lang_bgn = Bry_find_.Find_fwd(src, Bry__bidi_dlm, itm_end + 1, src_end);		// look for next "=>"
 			if (nxt_lang_bgn == Bry_find_.Not_found)
 				nxt_lang_bgn = Bry_find_.Find_fwd_while_ws(src, itm_end + 1, src_end);				// skip any ws after end ";"; EX: "a:1; b:2"; NOTE: +1 to skip semic;
 			else
 				nxt_lang_bgn += 2;
-			int nxt_lang_end = Bry_find_.Find_fwd(src, Byte_ascii.Colon, nxt_lang_bgn, src_end);	// get colon;
+			int nxt_lang_end = Bry_find_.Find_fwd(src, AsciiByte.Colon, nxt_lang_bgn, src_end);	// get colon;
 			if (nxt_lang_end != Bry_find_.Not_found) {
 				nxt_lang_end = Bry_find_.Find_bwd__skip_ws(src, nxt_lang_end, src_end);				// trim
 				if (vnt_trie.Match_bgn(src, nxt_lang_bgn, nxt_lang_end) == null) return Bry_split_.Rv__extend;	// reject ";not_variant"; EX: ";border" in "zh-hans:<span style='color:blue;border:1px;'>;zh-hant:"
@@ -69,7 +70,7 @@ class Vnt_rule_parser implements gplx.core.brys.Bry_split_wkr {
 		if (vnt_obj == null)
 			return (itm_bgn == 0) ? Bry_split_.Rv__cancel : Bry_split_.Rv__extend;	// if 1st item; cancel rest; otherwise, extend
 		int lang_end = trv.Pos();
-		int text_bgn = Bry_find_.Find_fwd_while_ws(src, lang_end, itm_end); if (src[text_bgn] != Byte_ascii.Colon) return Bry_split_.Rv__extend;
+		int text_bgn = Bry_find_.Find_fwd_while_ws(src, lang_end, itm_end); if (src[text_bgn] != AsciiByte.Colon) return Bry_split_.Rv__extend;
 		++text_bgn;
 		Xol_vnt_itm vnt_itm = (Xol_vnt_itm)vnt_obj;
 		byte[] vnt_key = vnt_itm.Key();

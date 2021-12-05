@@ -13,16 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.bldrs.filters.titles; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.bldrs.*; import gplx.xowa.apps.apis.xowa.bldrs.filters.*;
+package gplx.xowa.apps.apis.xowa.bldrs.filters.titles;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.Yn;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
 public class Xoapi_title implements Gfo_invk {
 	public void Init_by_kit(Xoae_app app) {
 //			wordlist_dir = app.Fsys_mgr().Bin_xtns_dir().GenSubDir_nest("xowa", "DansGuardian");
 	}
-	public boolean		Enabled()		{return enabled;}		private boolean enabled = Bool_.Y;
+	public boolean		Enabled()		{return enabled;}		private boolean enabled = BoolUtl.Y;
 	public Io_url	Wordlist_dir()	{return wordlist_dir;}	private Io_url wordlist_dir;
 	public int		Score_init()	{return score_init;}	private int score_init = 0;
 	public int		Score_pass()	{return score_pass;}	private int score_pass = 0;
-	public boolean		Log_enabled()	{return log_enabled;}	private boolean log_enabled = Bool_.Y;
+	public boolean		Log_enabled()	{return log_enabled;}	private boolean log_enabled = BoolUtl.Y;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_enabled)) 							return Yn.To_str(enabled);
 		else if	(ctx.Match(k, Invk_enabled_)) 							enabled = m.ReadYn("v");

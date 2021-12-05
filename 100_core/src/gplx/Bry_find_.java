@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.strings.AsciiByte;
 public class Bry_find_ {
 	public static final int Not_found = -1;
 	public static int Find_fwd(byte[] src, byte lkp)								{return Find_fwd(src, lkp, 0, src.length);}
@@ -110,7 +111,7 @@ public class Bry_find_ {
 		for (int i = cur; i > -1; i--) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					rv = i;
 					break;
 				default:
@@ -124,7 +125,7 @@ public class Bry_find_ {
 		for (int i = cur; i > -1; --i) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					return i;
 			}
 		}
@@ -137,7 +138,7 @@ public class Bry_find_ {
 		for (int i = cur; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					rv = i;
 					break;
 				default:
@@ -152,7 +153,7 @@ public class Bry_find_ {
 		for (int i = cur; i >= end; i--) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					break;
 				default:
 					return i;
@@ -165,7 +166,7 @@ public class Bry_find_ {
 		for (int i = cur - 1; i >= end; i--) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab:
+				case AsciiByte.Space: case AsciiByte.Tab:
 					break;
 				default:
 					return i + 1;
@@ -178,7 +179,7 @@ public class Bry_find_ {
 		for (int i = cur; i >= end; i--) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					break;
 				default:
 					return i;
@@ -193,7 +194,7 @@ public class Bry_find_ {
 		int pos = end - 1;	// start from end - 1; handles situations where len is passed in
 		for (int i = pos; i >= bgn; --i) {
 			switch (src[i]) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					break;
 				default:
 					return i + 1;
@@ -288,7 +289,7 @@ public class Bry_find_ {
 		while (true) {
 			if (cur == end) return Bry_find_.Not_found;
 			switch (src[cur])  {
-				case Byte_ascii.Space: case Byte_ascii.Tab:
+				case AsciiByte.Space: case AsciiByte.Tab:
 					return cur;
 				default: 
 					++cur;
@@ -300,7 +301,7 @@ public class Bry_find_ {
 		while (true) {
 			if (cur == end) return Bry_find_.Not_found;
 			switch (src[cur])  {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					return cur;
 				default: 
 					++cur;
@@ -312,7 +313,7 @@ public class Bry_find_ {
 		while (true) {
 			if (cur == end) return cur;
 			switch (src[cur]) {
-				case Byte_ascii.Space: case Byte_ascii.Tab:		++cur; break;
+				case AsciiByte.Space: case AsciiByte.Tab:		++cur; break;
 				default:										return cur; 
 			}
 		}
@@ -321,7 +322,7 @@ public class Bry_find_ {
 		while (true) {
 			if (cur == end) return cur;
 			switch (src[cur]) {
-				case Byte_ascii.Space: case Byte_ascii.Tab:		++cur; break;
+				case AsciiByte.Space: case AsciiByte.Tab:		++cur; break;
 				default:										return cur; 
 			}
 		}
@@ -331,7 +332,7 @@ public class Bry_find_ {
 			int prv_cur = cur - 1;				// check byte before cur; EX: "a b " will have len of 4, and pass cur=4;
 			if (prv_cur < bgn) return cur;		// checking byte before prv; exit;
 			switch (src[prv_cur]) {
-				case Byte_ascii.Space: case Byte_ascii.Tab:		--cur; break;
+				case AsciiByte.Space: case AsciiByte.Tab:		--cur; break;
 				default:										return cur; 
 			}
 		}
@@ -341,8 +342,8 @@ public class Bry_find_ {
 			if (cur == end) return cur;
 			try {
 				switch (src[cur]) {
-					case Byte_ascii.Nl: case Byte_ascii.Cr:
-					case Byte_ascii.Space: case Byte_ascii.Tab:		++cur; break;
+					case AsciiByte.Nl: case AsciiByte.Cr:
+					case AsciiByte.Space: case AsciiByte.Tab:		++cur; break;
 					default:										return cur; 
 				}
 			} catch (Exception e) {throw Err_.new_exc(e, "core", "idx is invalid", "cur", cur, "src", src);}
@@ -351,16 +352,16 @@ public class Bry_find_ {
 	public static int Find_fwd_while_letter(byte[] src, int cur, int end) {
 		while (cur < end) {
 			switch (src[cur]) {
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-				case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-				case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-				case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+				case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+				case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+				case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+				case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+				case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+				case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
 					break;
 				default:
 					return cur;
@@ -372,7 +373,7 @@ public class Bry_find_ {
 	public static int Find_fwd_while_num(byte[] src) {return Find_fwd_while_num(src, 0, src.length);}
 	public static int Find_fwd_while_num(byte[] src, int cur, int end) {
 		while (cur < end) {
-			if (!Byte_ascii.Is_num(src[cur]))
+			if (!AsciiByte.IsNum(src[cur]))
 				return cur;
 			++cur;
 		}
@@ -382,10 +383,10 @@ public class Bry_find_ {
 		while (true) {
 			if (cur == end) return cur;
 			switch (src[cur]) {
-				case Byte_ascii.Space:
-				case Byte_ascii.Nl:
-				case Byte_ascii.Tab:
-				case Byte_ascii.Cr:
+				case AsciiByte.Space:
+				case AsciiByte.Nl:
+				case AsciiByte.Tab:
+				case AsciiByte.Cr:
 					++cur;
 					break;
 				default:
@@ -398,18 +399,18 @@ public class Bry_find_ {
 		--cur;
 		while (cur > end) {
 			switch (src[cur]) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-				case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-				case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-				case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+				case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+				case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+				case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+				case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+				case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+				case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
 					--cur;
 					break;
 				default:

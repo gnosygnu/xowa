@@ -13,9 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.thms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.core.encoders.*;
-import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.thms.divs.*; 
+package gplx.xowa.htmls.core.wkrs.thms;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.core.brys.Bry_rdr;
+import gplx.core.brys.Int_flag_bldr;
+import gplx.core.encoders.Gfo_hzip_int_;
+import gplx.core.primitives.Bry_obj_ref;
+import gplx.core.threads.poolables.Gfo_poolable_itm;
+import gplx.core.threads.poolables.Gfo_poolable_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.hzips.Xoh_data_itm;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_wkr;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_ctx;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_wkr;
+import gplx.xowa.htmls.core.wkrs.Xoh_hzip_bfr;
+import gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_data;
+import gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_hzip;
+import gplx.xowa.htmls.core.wkrs.thms.divs.Xoh_thm_caption_data;
 public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	private final Xoh_img_hzip img_hzip = new Xoh_img_hzip();
 	private final Xoh_thm_wtr wtr = new Xoh_thm_wtr();
@@ -44,7 +61,7 @@ public class Xoh_thm_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 		bfr.Add_byte(Xoh_hzip_dict_.Escape);
 		if (capt_2_exists)				bfr.Add_hzip_mid(src, capt_data.Capt_2_bgn(), capt_data.Capt_2_end());
 		if (capt_3_exists)				bfr.Add_hzip_mid(src, capt_data.Capt_3_bgn(), capt_data.Capt_3_end());
-		img_hzip.Encode1(bfr, hdoc_wkr, hctx, hpg, Bool_.N, src, data.Img_data());
+		img_hzip.Encode1(bfr, hdoc_wkr, hctx, hpg, BoolUtl.N, src, data.Img_data());
 		return this;
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {

@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.installs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.installs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 import gplx.core.consoles.*;
-import gplx.core.brys.args.*; import gplx.core.threads.*; import gplx.xowa.bldrs.setups.maints.*; import gplx.xowa.xtns.wbases.imports.*;
+import gplx.core.brys.args.*;
+import gplx.xowa.bldrs.setups.maints.*;
 import gplx.xowa.wikis.domains.*;
-import gplx.xowa.bldrs.wms.*; import gplx.xowa.bldrs.wms.dumps.*;
+import gplx.xowa.bldrs.wms.dumps.*;
 public class Xoi_cmd_wiki_tst {
 	@Test public void Run() {	// MAINT:2017-03-28
 //			Bld_import_list(Xow_domain_regy.All);
@@ -37,7 +39,7 @@ public class Xoi_cmd_wiki_tst {
 		String domain_str = ary[i];
 		byte[] domain_bry = Bry_.new_a7(domain_str);
 		Xow_domain_itm domain_itm = Xow_domain_itm_.parse(domain_bry);
-		byte[] wmf_key_bry = Bry_.Replace(Xow_abrv_wm_.To_abrv(domain_itm), Byte_ascii.Dash, Byte_ascii.Underline);
+		byte[] wmf_key_bry = Bry_.Replace(Xow_abrv_wm_.To_abrv(domain_itm), AsciiByte.Dash, AsciiByte.Underline);
 		String wmf_key = String_.new_u8(wmf_key_bry);
 		String url = "https://dumps.wikimedia.org/" + wmf_key + "/latest";
 		byte[] latest_html = null;

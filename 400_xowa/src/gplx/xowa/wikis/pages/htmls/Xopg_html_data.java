@@ -13,15 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.wikis.pages.skins.*; import gplx.xowa.wikis.pages.tags.*; import gplx.xowa.wikis.pages.lnkis.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.addons.htmls.tocs.*;
-import gplx.xowa.xtns.pagebanners.*; import gplx.xowa.xtns.indicators.*;
+package gplx.xowa.wikis.pages.htmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.addons.htmls.tocs.Xoh_toc_mgr;
+import gplx.xowa.htmls.heads.Xoh_head_mgr;
+import gplx.xowa.wikis.pages.Xopg_page_heading;
+import gplx.xowa.wikis.pages.lnkis.Xopg_lnki_list;
+import gplx.xowa.wikis.pages.skins.Xopg_xtn_skin_mgr;
+import gplx.xowa.wikis.pages.tags.Xopg_tag_mgr;
+import gplx.xowa.xtns.indicators.Indicator_html_bldr;
+import gplx.xowa.xtns.pagebanners.Pgbnr_itm;
 public class Xopg_html_data {
 	public Xopg_lnki_list		Redlink_list()		{return redlink_list;} private final Xopg_lnki_list redlink_list = new Xopg_lnki_list();
 
 	public boolean				Html_restricted() {return html_restricted;} private boolean html_restricted = true;
-	public void					Html_restricted_(boolean v) {html_restricted = v;} public void Html_restricted_n_() {Html_restricted_(Bool_.N);}  public void Html_restricted_y_() {Html_restricted_(Bool_.Y);}
+	public void					Html_restricted_(boolean v) {html_restricted = v;} public void Html_restricted_n_() {Html_restricted_(BoolUtl.N);}  public void Html_restricted_y_() {Html_restricted_(BoolUtl.Y);}
 	public byte[]				Display_ttl() {
 		return	(	display_ttl_vnt != null		// -{T}- was in document
 				&&	display_ttl == null			// {{DISPLAYTITLE}} does not exist
@@ -47,7 +57,7 @@ public class Xopg_html_data {
 	public boolean				Hdump_exists() {return hdump_exists;} private boolean hdump_exists; public void Hdump_exists_(boolean v) {this.hdump_exists = v;}
 	public byte[]				Catpage_data() {return catpage_data;} private byte[] catpage_data; public void Catpage_data_(byte[] v) {this.catpage_data = v;}
 
-	public boolean				Writing_hdr_for_toc() {return writing_hdr_for_toc;} private boolean writing_hdr_for_toc; public void Writing_hdr_for_toc_y_() {writing_hdr_for_toc = Bool_.Y;} public void Writing_hdr_for_toc_n_() {writing_hdr_for_toc = Bool_.N;}
+	public boolean				Writing_hdr_for_toc() {return writing_hdr_for_toc;} private boolean writing_hdr_for_toc; public void Writing_hdr_for_toc_y_() {writing_hdr_for_toc = BoolUtl.Y;} public void Writing_hdr_for_toc_n_() {writing_hdr_for_toc = BoolUtl.N;}
 	public Xoh_toc_mgr			Toc_mgr()	{return toc_mgr;}	private final Xoh_toc_mgr toc_mgr = new Xoh_toc_mgr();
 
 	public boolean				Lang_convert_content() {return lang_convert_content;} public void Lang_convert_content_(boolean v) {lang_convert_content = v;} private boolean lang_convert_content = true;
@@ -63,8 +73,8 @@ public class Xopg_html_data {
 	public Pgbnr_itm			Xtn_pgbnr() {return xtn_pgbnr;} public void Xtn_pgbnr_(Pgbnr_itm v) {xtn_pgbnr = v;} private Pgbnr_itm xtn_pgbnr;
 	public Xoh_head_mgr			Head_mgr() {return module_mgr;} private Xoh_head_mgr module_mgr = new Xoh_head_mgr();
 	public boolean					Skip_parse() {return skip_parse;} public void Skip_parse_(boolean v) {skip_parse = v;} private boolean skip_parse;
-	public Xopg_tag_mgr			Custom_head_tags() {return head_tags;} private final Xopg_tag_mgr head_tags = new Xopg_tag_mgr(Bool_.Y);
-	public Xopg_tag_mgr			Custom_tail_tags() {return tail_tags;} private final Xopg_tag_mgr tail_tags = new Xopg_tag_mgr(Bool_.N);
+	public Xopg_tag_mgr			Custom_head_tags() {return head_tags;} private final Xopg_tag_mgr head_tags = new Xopg_tag_mgr(BoolUtl.Y);
+	public Xopg_tag_mgr			Custom_tail_tags() {return tail_tags;} private final Xopg_tag_mgr tail_tags = new Xopg_tag_mgr(BoolUtl.N);
 	public byte[]				Custom_html() {return custom_html;} public Xopg_html_data Custom_html_(byte[] v) {custom_html = v; return this;} private byte[] custom_html;
 	public byte[]				Custom_body() {return custom_body;} public Xopg_html_data Custom_body_(byte[] v) {custom_body = v; return this;} private byte[] custom_body;
 	public byte[]				Custom_tab_name() {return custom_tab_name;} public Xopg_html_data Custom_tab_name_(byte[] v) {custom_tab_name = v; return this;} private byte[] custom_tab_name;

@@ -13,9 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.tests.*;
-import gplx.langs.jsons.*;
+package gplx.xowa.xtns.cldrs;
+import gplx.Bry_;
+import gplx.Io_mgr;
+import gplx.Io_url_;
+import gplx.Keyval;
+import gplx.String_;
+import gplx.core.tests.Gftest;
+import gplx.langs.jsons.Json_doc_wtr;
+import gplx.objects.primitives.BoolUtl;
 public class Cldr_name_loader_fxt {
 	private static final String Dir_name = "mem/CldrNames/";
 	private final Cldr_name_loader name_loader = new Cldr_name_loader(Io_url_.mem_dir_(Dir_name));
@@ -34,7 +40,7 @@ public class Cldr_name_loader_fxt {
 		
 		Json_doc_wtr wtr = new Json_doc_wtr();
 		wtr.Nde_bgn();
-		wtr.Key(Bool_.N, "languageNames");
+		wtr.Key(BoolUtl.N, "languageNames");
 		wtr.Nde_bgn();
 		for (int i = 0; i < lang_ary.length; i++) {
 			Keyval lang = lang_ary[i];

@@ -13,15 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
+package gplx.langs.jsons; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Json_wtr {
 	private final Bry_bfr bfr = Bry_bfr_.New_w_size(255);
 	private final Int_ary idx_stack = new Int_ary(4);
 	private int idx = 0;		
 	public Bry_bfr Bfr() {return bfr;}
 	public void Indent_(int v) {this.indent = v;} private int indent;
-	public byte Opt_quote_byte() {return opt_quote_byte;} public Json_wtr Opt_quote_byte_(byte v) {opt_quote_byte = v; return this;} private byte opt_quote_byte = Byte_ascii.Quote;
+	public byte Opt_quote_byte() {return opt_quote_byte;} public Json_wtr Opt_quote_byte_(byte v) {opt_quote_byte = v; return this;} private byte opt_quote_byte = AsciiByte.Quote;
 	public boolean Opt_ws() {return opt_ws;} public Json_wtr Opt_ws_(boolean v) {opt_ws = v; return this;} private boolean opt_ws = true;
 	public boolean Opt_backslash_2x() {return opt_backslash_2x;} public Json_wtr Opt_backslash_2x_(boolean v) {opt_backslash_2x = v; return this;} private boolean opt_backslash_2x = false;
 	public byte[] To_bry_and_clear() {return bfr.To_bry_and_clear();}
@@ -34,9 +37,9 @@ public class Json_wtr {
 		return this;
 	}
 	public Json_wtr Doc_nde_bgn() {return Write_grp_bgn(Sym_nde_bgn);}
-	public Json_wtr Doc_nde_end() {Write_grp_end(Bool_.Y, Sym_nde_end); return Write_nl();}
+	public Json_wtr Doc_nde_end() {Write_grp_end(BoolUtl.Y, Sym_nde_end); return Write_nl();}
 	public Json_wtr Doc_ary_bgn() {return Write_grp_bgn(Sym_ary_bgn);}
-	public Json_wtr Doc_ary_end() {Write_grp_end(Bool_.N, Sym_ary_end); return Write_nl();}
+	public Json_wtr Doc_ary_end() {Write_grp_end(BoolUtl.N, Sym_ary_end); return Write_nl();}
 	public Json_wtr Nde_bgn_ary() {return Nde_bgn(Bry_.Empty);}
 	public Json_wtr Nde_bgn(String key) {return Nde_bgn(Bry_.new_u8(key));}
 	public Json_wtr Nde_bgn(byte[] key) {
@@ -51,7 +54,7 @@ public class Json_wtr {
 		return Write_grp_bgn(Sym_nde_bgn);
 	}
 	public Json_wtr Nde_end() {
-		Write_grp_end(Bool_.Y, Sym_nde_end);
+		Write_grp_end(BoolUtl.Y, Sym_nde_end);
 		return Write_nl();
 	}
 	public Json_wtr Ary_bgn_ary() {return Ary_bgn(String_.Empty);}
@@ -74,13 +77,13 @@ public class Json_wtr {
 	public Json_wtr Ary_itm_obj(Object itm) {return Ary_itm_by_type_tid(Type_ids_.To_id_by_obj(itm), itm);}
 	public Json_wtr Ary_itm_by_type_tid(int itm_type_tid, Object itm) {
 		Write_indent_itm();
-		Write_val_obj(Bool_.Y, itm_type_tid, itm);
+		Write_val_obj(BoolUtl.Y, itm_type_tid, itm);
 		Write_nl();
 		++idx;
 		return this;
 	}
 	public Json_wtr Ary_end() {
-		Write_grp_end(Bool_.N, Sym_ary_end);
+		Write_grp_end(BoolUtl.N, Sym_ary_end);
 		return Write_nl();
 	}
 	public Json_wtr Kv_bool_as_mw(String key, boolean val)	{
@@ -88,7 +91,7 @@ public class Json_wtr {
 		return this;
 	}
 	public Json_wtr Kv_bool(String key, boolean val)		{return Kv_bool(Bry_.new_u8(key), val);}
-	public Json_wtr Kv_bool(byte[] key, boolean val)		{return Kv_raw(key, val ? Bool_.True_bry : Bool_.False_bry);}
+	public Json_wtr Kv_bool(byte[] key, boolean val)		{return Kv_raw(key, val ? BoolUtl.TrueBry : BoolUtl.FalseBry);}
 	public Json_wtr Kv_int(String key, int val)			{return Kv_raw(Bry_.new_u8(key), Int_.To_bry(val));}
 	public Json_wtr Kv_long(String key, long val)		{return Kv_raw(Bry_.new_u8(key), Bry_.new_a7(Long_.To_str(val)));}
 	public Json_wtr Kv_float(String key, float val)		{return Kv_raw(Bry_.new_u8(key), Bry_.new_a7(Float_.To_str(val)));}
@@ -132,11 +135,11 @@ public class Json_wtr {
 	public Json_wtr Kv_obj(byte[] key, Object val, int val_tid) {
 		Write_indent_itm();
 		Write_key(key);
-		Write_val_obj(Bool_.N, val_tid, val);
+		Write_val_obj(BoolUtl.N, val_tid, val);
 		Write_nl();
 		return this;
 	}
-	private Json_wtr Write_grp_bgn(byte[] grp_sym) {return Write_grp_bgn(grp_sym, Bool_.Y);}
+	private Json_wtr Write_grp_bgn(byte[] grp_sym) {return Write_grp_bgn(grp_sym, BoolUtl.Y);}
 	private Json_wtr Write_grp_bgn(byte[] grp_sym, boolean write_indent) {
 		idx_stack.Add(idx);
 		idx = 0;
@@ -163,7 +166,7 @@ public class Json_wtr {
 	private void Write_val_obj(boolean called_by_ary, int type_tid, Object obj) {
 		switch (type_tid) {
 			case Type_ids_.Id__null:				bfr.Add(Object_.Bry__null); break;
-			case Type_ids_.Id__bool:				bfr.Add_bool(Bool_.Cast(obj)); break;
+			case Type_ids_.Id__bool:				bfr.Add_bool(BoolUtl.Cast(obj)); break;
 			case Type_ids_.Id__byte:				bfr.Add_byte(Byte_.Cast(obj)); break;
 			case Type_ids_.Id__int:				bfr.Add_int_variable(Int_.Cast(obj)); break;
 			case Type_ids_.Id__long:				bfr.Add_long_variable(Long_.cast(obj)); break;
@@ -209,7 +212,7 @@ public class Json_wtr {
 				}
 			}
 			bfr.Add_byte_nl();
-			Write_grp_bgn(Sym_nde_bgn, Bool_.Y);
+			Write_grp_bgn(Sym_nde_bgn, BoolUtl.Y);
 			Json_nde sub_nde = (Json_nde)obj;
 			int sub_nde_len = sub_nde.Len();
 			for (int i = 0; i < sub_nde_len; ++i) {
@@ -219,7 +222,7 @@ public class Json_wtr {
 		}
 		else {
 			Handle_nde_as_ary_itm_0();
-			Write_grp_bgn(Sym_nde_bgn, Bool_.N);
+			Write_grp_bgn(Sym_nde_bgn, BoolUtl.N);
 			Keyval[] kvy = (Keyval[])obj;
 			int kvy_len = kvy.length;
 			for (int i = 0; i < kvy_len; ++i) {
@@ -228,7 +231,7 @@ public class Json_wtr {
 				Kv_obj(Bry_.new_u8(kv.Key()), kv_val, Type_ids_.To_id_by_obj(kv_val));
 			}
 		}
-		Write_grp_end(Bool_.Y, Sym_nde_end);
+		Write_grp_end(BoolUtl.Y, Sym_nde_end);
 	}
 	private void Write_val_itm__ary(boolean called_by_ary, int grp_type, Object obj) {
 		Ary_bgn_keyless();
@@ -241,14 +244,14 @@ public class Json_wtr {
 			}
 		}
 		else {
-			Object ary = Array_.cast(obj);	
-			int len = Array_.Len(ary);
+			Object ary = ArrayUtl.Cast(obj);
+			int len = ArrayUtl.Len(ary);
 			for (int i = 0; i < len; ++i) {
-				Object itm = Array_.Get_at(ary, i);
+				Object itm = ArrayUtl.GetAt(ary, i);
 				Ary_itm_obj(itm);
 			}
 		}
-		Write_grp_end(Bool_.N, Sym_ary_end);
+		Write_grp_end(BoolUtl.N, Sym_ary_end);
 	}
 	private void Write_str(byte[] bry) {
 		if (bry == null) {bfr.Add(Object_.Bry__null); return;}
@@ -258,17 +261,17 @@ public class Json_wtr {
 		for (int i = 0; i < len; ++i) {
 			byte b = bry[i];
 			switch (b) {
-				case Byte_ascii.Backslash:	bfr.Add_byte_repeat(Byte_ascii.Backslash, backslash_count).Add_byte(b); break; // "\"	-> "\\"; needed else js will usurp \ as escape; EX: "\&" -> "&"; DATE:2014-06-24
-				case Byte_ascii.Quote:		bfr.Add_byte_repeat(Byte_ascii.Backslash, backslash_count).Add_byte(b); break;
-				case Byte_ascii.Apos: // // "'" -> "'''"; needed else xocfg fails; DATE:2016-12-07
+				case AsciiByte.Backslash:	bfr.Add_byte_repeat(AsciiByte.Backslash, backslash_count).Add_byte(b); break; // "\"	-> "\\"; needed else js will usurp \ as escape; EX: "\&" -> "&"; DATE:2014-06-24
+				case AsciiByte.Quote:		bfr.Add_byte_repeat(AsciiByte.Backslash, backslash_count).Add_byte(b); break;
+				case AsciiByte.Apos: // // "'" -> "'''"; needed else xocfg fails; DATE:2016-12-07
 					if (opt_backslash_2x)
-						bfr.Add_byte_repeat(Byte_ascii.Backslash, 1).Add_byte(b);
+						bfr.Add_byte_repeat(AsciiByte.Backslash, 1).Add_byte(b);
 					else
 						bfr.Add_byte(b);
 					break;
-				case Byte_ascii.Nl:			bfr.Add_byte_repeat(Byte_ascii.Backslash, 2).Add_byte(Byte_ascii.Ltr_n); break;	// "\n" -> "\\n"
-				case Byte_ascii.Cr:			bfr.Add_byte_repeat(Byte_ascii.Backslash, 2).Add_byte(Byte_ascii.Ltr_r); break;	// "\r" -> "\\r"; DATE:2017-03-02
-				case Byte_ascii.Tab:		bfr.Add_byte_repeat(Byte_ascii.Backslash, 2).Add_byte(Byte_ascii.Ltr_t); break;	// "\t" -> "\\t"; DATE:2017-03-02
+				case AsciiByte.Nl:			bfr.Add_byte_repeat(AsciiByte.Backslash, 2).Add_byte(AsciiByte.Ltr_n); break;	// "\n" -> "\\n"
+				case AsciiByte.Cr:			bfr.Add_byte_repeat(AsciiByte.Backslash, 2).Add_byte(AsciiByte.Ltr_r); break;	// "\r" -> "\\r"; DATE:2017-03-02
+				case AsciiByte.Tab:		bfr.Add_byte_repeat(AsciiByte.Backslash, 2).Add_byte(AsciiByte.Ltr_t); break;	// "\t" -> "\\t"; DATE:2017-03-02
 				default:					bfr.Add_byte(b); break;
 			}
 		}
@@ -287,7 +290,7 @@ public class Json_wtr {
 	}
 	private void Write_indent() {
 		if (opt_ws && indent > 0)
-			bfr.Add_byte_repeat(Byte_ascii.Space, indent * 2);
+			bfr.Add_byte_repeat(AsciiByte.Space, indent * 2);
 	}
 	private Json_wtr Write_nl() {
 		if (opt_ws) bfr.Add_byte_nl();

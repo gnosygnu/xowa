@@ -13,13 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.syncs.*; import gplx.xowa.addons.wikis.pages.syncs.core.*;
-import gplx.core.brys.*; import gplx.core.btries.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
-import gplx.langs.htmls.*;	 import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
-import gplx.xowa.wikis.domains.*;
+package gplx.xowa.addons.wikis.pages.syncs.core.parsers;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Byte_;
+import gplx.Gfo_usr_dlg_;
+import gplx.List_adp;
+import gplx.String_;
+import gplx.core.brys.Bry_rdr;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_file_wkr_;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.files.Xof_url_bldr;
+import gplx.xowa.files.imgs.Xof_img_mode_;
+import gplx.xowa.files.repos.Xof_repo_tid_;
+import gplx.xowa.htmls.core.wkrs.imgs.atrs.Xoh_img_src_data;
+import gplx.xowa.wikis.domains.Xow_abrv_xo_;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
 public class Xosync_img_src_parser {
-	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(AsciiByte.Slash);
 	private final Xof_url_bldr url_bldr = Xof_url_bldr.new_v2();
 	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	private final byte[] wiki_abrv_commons;
@@ -119,7 +139,7 @@ public class Xosync_img_src_parser {
 		
 		// set file_ttl
 		int file_ttl_bgn = rdr.Pos();
-		int file_ttl_end = rdr.Find_fwd_lr_or(Byte_ascii.Slash, raw_len);
+		int file_ttl_end = rdr.Find_fwd_lr_or(AsciiByte.Slash, raw_len);
 		file_ttl_bry = Bry_.Mid(raw, file_ttl_bgn, file_ttl_end);
 		file_ttl_bry = gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Decode(file_ttl_bry);	// NOTE: @src is always url-encoded; file_ttl_bry is un-encoded (for MD5, database lookups, etc.)
 		this.file_ext = Xof_ext_.new_by_ttl_(file_ttl_bry); 
@@ -130,7 +150,7 @@ public class Xosync_img_src_parser {
 			// if "page", then file_page exists; EX: // "page1-320px"
 			if (rdr.Is(Bry__page)) {					
 				int file_page_bgn = rdr.Pos();
-				int file_page_end = rdr.Find_fwd_lr(Byte_ascii.Dash);
+				int file_page_end = rdr.Find_fwd_lr(AsciiByte.Dash);
 				file_page = Bry_.To_int_or_fail(raw, file_page_bgn, file_page_end);
 			}
 
@@ -145,7 +165,7 @@ public class Xosync_img_src_parser {
 			int seek_end = rdr.Find_fwd_rr_or(Bry__seek, Bry_find_.Not_found);
 			if (seek_end != Bry_find_.Not_found) {
 				int file_time_bgn = rdr.Pos();
-				int file_time_end = rdr.Find_fwd_lr(Byte_ascii.Dash);
+				int file_time_end = rdr.Find_fwd_lr(AsciiByte.Dash);
 				file_time = Bry_.To_double(raw, file_time_bgn, file_time_end);
 			}
 		}
@@ -156,7 +176,7 @@ public class Xosync_img_src_parser {
 	}
 	private boolean Parse_math() {
 		// set file_ttl_bry to rest of src + ".svg"; EX: "https://wikimedia.org/api/rest_v1/media/math/render/svg/596f8baf206a81478afd4194b44138715dc1a05c" -> "596f8baf206a81478afd4194b44138715dc1a05c.svg"
-		this.file_ttl_bry = Bry_.Add(Bry_.Mid(raw, rdr.Pos(), raw_len), Byte_ascii.Dot_bry, Xof_ext_.Bry_svg);
+		this.file_ttl_bry = Bry_.Add(Bry_.Mid(raw, rdr.Pos(), raw_len), AsciiByte.DotBry, Xof_ext_.Bry_svg);
 		this.repo_is_commons = true;
 		this.file_is_orig = true;
 		this.file_ext = Xof_ext_.new_by_id_(Xof_ext_.Id_svg);
@@ -185,7 +205,7 @@ public class Xosync_img_src_parser {
 		// init repo; either "xowa:/file/commons.wikimedia.org" or "xowa:/file/en.wikipedia.org"
 		byte repo_tid = repo_is_commons ? Xof_repo_tid_.Tid__remote : Xof_repo_tid_.Tid__local;
 		byte[] fsys_root = repo_is_commons ? img_src_bgn_remote : img_src_bgn_local;			
-		url_bldr.Init_by_repo(repo_tid, fsys_root, Bool_.N, Byte_ascii.Slash, Bool_.N, Bool_.N, 4);
+		url_bldr.Init_by_repo(repo_tid, fsys_root, BoolUtl.N, AsciiByte.Slash, BoolUtl.N, BoolUtl.N, 4);
 
 		// set other props and generate url;
 		url_bldr.Init_by_itm(file_is_orig ? Xof_img_mode_.Tid__orig : Xof_img_mode_.Tid__thumb, gplx.langs.htmls.encoders.Gfo_url_encoder_.Http_url.Encode(file_ttl_bry), Xof_file_wkr_.Md5(file_ttl_bry), Xof_ext_.new_by_ttl_(file_ttl_bry), file_w, file_time, file_page);
@@ -212,7 +232,7 @@ public class Xosync_img_src_parser {
 	}
 	private boolean Check_md5() {	// check if md5; also, skip past md5; EX: "a/a0/"
 		int pos = rdr.Pos();
-		if (!Byte_.Match_all(Byte_ascii.Slash, raw[pos + 1], raw[pos + 4])) return false;		// check slashes
+		if (!Byte_.Match_all(AsciiByte.Slash, raw[pos + 1], raw[pos + 4])) return false;		// check slashes
 		byte b_0 = raw[pos + 0], b_2 = raw[pos + 2];
 		if (b_0 != b_2) return false;														// WM repeats 1st MD5 char; EX: "a" in "a/a0"
 		if (!gplx.core.encoders.Hex_utl_.Is_hex_many(b_0, b_2, raw[pos + 3])) return false;	// check rest is hex

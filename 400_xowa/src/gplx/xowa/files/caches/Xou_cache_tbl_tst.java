@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import org.junit.*; import gplx.dbs.*;
+package gplx.xowa.files.caches;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Io_mgr;
+import gplx.Io_url_;
+import gplx.Tfds;
+import gplx.dbs.Db_cmd_mode;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.Db_conn_bldr_data;
+import gplx.dbs.Db_rdr;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Xou_cache_tbl_tst {
 	@Before public void init() {fxt.Clear();} private final Xou_cache_tbl_fxt fxt = new Xou_cache_tbl_fxt();
 	@Test public void Orig_ttl__same()			{fxt.Test_save_orig_ttl("A.png", "A.png", "");}
@@ -47,7 +59,7 @@ class Xou_cache_tbl_fxt {
 		return tbl.Select_one(Bry_.new_u8(lnki_wiki_abrv_xo), Bry_.new_u8(lnki_ttl), 1, 1, 1, 1, 1, 1, 1);
 	}
 	public void Test_save_orig_ttl(String lnki_ttl, String orig_ttl, String expd_orig_ttl) {
-		Xou_cache_itm itm = Make_itm("en.w", lnki_ttl, 1, 1, 1, 1, 1, 1, 1, 1, orig_ttl, 1, 1, 1, 1, 1, 1, 1, Bool_.Y, 1, 1, 1, 1, 1, 1);
+		Xou_cache_itm itm = Make_itm("en.w", lnki_ttl, 1, 1, 1, 1, 1, 1, 1, 1, orig_ttl, 1, 1, 1, 1, 1, 1, 1, BoolUtl.Y, 1, 1, 1, 1, 1, 1);
 		tbl.Db_save(itm);
 		Db_rdr rdr = tbl.Select_all_for_test();
 		try {

@@ -13,7 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.cfgs; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.cfgs;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Err;
+import gplx.Err_;
+import gplx.Guid_adp;
+import gplx.Guid_adp_;
+import gplx.Int_;
+import gplx.Long_;
+import gplx.String_;
+import gplx.Yn;
+import gplx.objects.primitives.BoolUtl;
 public class Db_cfg_itm {
 	public Db_cfg_itm(String grp, String key, String val) {this.grp = grp; this.key = key; this.val = val;}
 	public String		Grp() {return grp;} private final String grp;
@@ -24,11 +37,11 @@ public class Db_cfg_itm {
 	public int			To_int_or(int or)				{try {return val == null ? or : Int_.Parse_or(val, or)		;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
 	public long			To_long_or(long or)				{try {return val == null ? or : Long_.parse_or(val, or)	;} catch (Exception e) {throw err_parse(e, Long_.Cls_val_name);}}
 	public byte			To_byte_or(byte or)				{try {return val == null ? or : Byte_.Parse_or(val, or)	;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
-	public boolean		To_yn_or_n()					{return To_yn_or(Bool_.N);}
-	public boolean		To_yn_or(boolean or)			{try {return val == null ? or : Yn.parse_by_char_or(val, or);} catch (Exception e) {throw err_parse(e, Bool_.Cls_val_name);}}
+	public boolean		To_yn_or_n()					{return To_yn_or(BoolUtl.N);}
+	public boolean		To_yn_or(boolean or)			{try {return val == null ? or : Yn.parse_by_char_or(val, or);} catch (Exception e) {throw err_parse(e, BoolUtl.ClsValName);}}
 	public DateAdp		To_date_or(DateAdp or)			{try {return val == null ? or : DateAdp_.parse_gplx(val)	;} catch (Exception e) {throw err_parse(e, DateAdp_.Cls_ref_name);}}
 	public Guid_adp		To_guid_or(Guid_adp or)			{try {return val == null ? or : Guid_adp_.Parse(val)		;} catch (Exception e) {throw err_parse(e, Guid_adp_.Cls_ref_name);}}
-	public boolean  	To_bool()						{Fail_if_null(); try {return Yn.parse(val)					;} catch (Exception e) {throw err_parse(e, Bool_.Cls_val_name);}}
+	public boolean  	To_bool()						{Fail_if_null(); try {return Yn.parse(val)					;} catch (Exception e) {throw err_parse(e, BoolUtl.ClsValName);}}
 	public byte			To_byte()						{Fail_if_null(); try {return Byte_.Parse(val)				;} catch (Exception e) {throw err_parse(e, Byte_.Cls_val_name);}}
 	public int     		To_int()						{Fail_if_null(); try {return Int_.Parse(val)				;} catch (Exception e) {throw err_parse(e, Int_.Cls_val_name);}}
 	public String		To_str()						{Fail_if_null(); return val;}

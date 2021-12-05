@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*;
+package gplx.core.ios;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
 public class IoItmDir_ {
 	public static IoItmDir as_(Object obj) {return obj instanceof IoItmDir ? (IoItmDir)obj : null;}
 	public static final IoItmDir Null = null_();
@@ -24,7 +29,7 @@ public class IoItmDir_ {
 		return rv;
 	}
 	public static IoItmDir sub_(String name) {
-		IoItmDir rv = new IoItmDir(Bool_.Y);
+		IoItmDir rv = new IoItmDir(BoolUtl.Y);
 		rv.ctor_IoItmBase_url(Io_url_.mem_dir_("mem/" + name));
 		return rv;
 	}

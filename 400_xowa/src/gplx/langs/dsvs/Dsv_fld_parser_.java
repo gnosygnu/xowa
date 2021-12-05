@@ -13,17 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.dsvs; import gplx.*; import gplx.langs.*;
+package gplx.langs.dsvs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Dsv_fld_parser_ {
 	public static final Dsv_fld_parser Bry_parser = Dsv_fld_parser_bry.Instance;
 	public static final Dsv_fld_parser Int_parser = Dsv_fld_parser_int.Instance;
-	public static final Dsv_fld_parser Line_parser__comment_is_pipe = new Dsv_fld_parser_line(Byte_ascii.Pipe);
+	public static final Dsv_fld_parser Line_parser__comment_is_pipe = new Dsv_fld_parser_line(AsciiByte.Pipe);
 	public static Err err_fld_unhandled(Dsv_fld_parser parser, Dsv_wkr_base wkr, int fld_idx, byte[] src, int bgn, int end) {
 		throw Err_.new_wo_type("fld unhandled", "parser", Type_.Name_by_obj(parser), "wkr", Type_.Name_by_obj(wkr), "fld_idx", fld_idx, "val", String_.new_u8(src, bgn, end)).Trace_ignore_add_1_();
 	}
 }
 class Dsv_fld_parser_line implements Dsv_fld_parser {
-	private byte row_dlm = Byte_ascii.Nl; private final byte comment_dlm;
+	private byte row_dlm = AsciiByte.Nl; private final byte comment_dlm;
 	public Dsv_fld_parser_line(byte comment_dlm) {this.comment_dlm = comment_dlm;}
 	public void Init(byte fld_dlm, byte row_dlm) {
 		this.row_dlm = row_dlm;
@@ -51,7 +52,7 @@ class Dsv_fld_parser_line implements Dsv_fld_parser {
 	}
 }
 class Dsv_fld_parser_bry implements Dsv_fld_parser {
-	private byte fld_dlm = Byte_ascii.Pipe, row_dlm = Byte_ascii.Nl;
+	private byte fld_dlm = AsciiByte.Pipe, row_dlm = AsciiByte.Nl;
 	public void Init(byte fld_dlm, byte row_dlm) {
 		this.fld_dlm = fld_dlm; this.row_dlm = row_dlm;
 	}
@@ -81,7 +82,7 @@ class Dsv_fld_parser_bry implements Dsv_fld_parser {
 	public static final Dsv_fld_parser_bry Instance = new Dsv_fld_parser_bry(); Dsv_fld_parser_bry() {}
 }
 class Dsv_fld_parser_int implements Dsv_fld_parser {
-	private byte fld_dlm = Byte_ascii.Pipe, row_dlm = Byte_ascii.Nl;
+	private byte fld_dlm = AsciiByte.Pipe, row_dlm = AsciiByte.Nl;
 	public void Init(byte fld_dlm, byte row_dlm) {
 		this.fld_dlm = fld_dlm; this.row_dlm = row_dlm;
 	}

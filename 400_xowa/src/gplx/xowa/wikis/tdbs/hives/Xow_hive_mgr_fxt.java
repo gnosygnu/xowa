@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.hives; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis.tdbs.hives; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.wikis.tdbs.*;
 import gplx.core.encoders.*;
 import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.tdbs.xdats.*;
@@ -47,7 +49,7 @@ public class Xow_hive_mgr_fxt {
 		int ttl_bry_len = Int_.DigitCount(ttls_per_file);
 		Xob_xdat_file_wtr xdat_wtr = Xob_xdat_file_wtr.new_file_(ttls_per_file * 8, wiki.Tdb_fsys_mgr().Url_ns_dir(ns.Num_str(), Xotdb_dir_info_.Tid_ttl));
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
-		byte ltr = Byte_ascii.Ltr_A; byte[] ttl_0 = Bry_.Empty, ttl_n = Bry_.Empty;
+		byte ltr = AsciiByte.Ltr_A; byte[] ttl_0 = Bry_.Empty, ttl_n = Bry_.Empty;
 		for (int fil_idx = 0; fil_idx < files; fil_idx++) {
 			for (int ttl_idx = 0; ttl_idx < ttls_per_file; ttl_idx++) {
 				tmp_bfr.Add_byte(ltr).Add_int_fixed(ttl_idx, ttl_bry_len);
@@ -55,7 +57,7 @@ public class Xow_hive_mgr_fxt {
 				if 		(ttl_idx == 0) 					ttl_0 = ttl_bry;
 				else if (ttl_idx == ttls_per_file - 1) 	ttl_n = ttl_bry;
 				Xotdb_page_itm_.Txt_ttl_save(xdat_wtr.Bfr(), id++, 0, ttl_idx, ttl_idx % 2 == 1, 1, ttl_bry);
-				xdat_wtr.Add_idx(Byte_ascii.Null);
+				xdat_wtr.Add_idx(AsciiByte.Null);
 			}
 			xdat_wtr.Flush(wiki.Appe().Usr_dlg());
 			reg_wtr.Add(ttl_0, ttl_n, ttls_per_file);
@@ -82,7 +84,7 @@ public class Xow_hive_mgr_fxt {
 		bfr	.Add(key_bry)						.Add_byte_pipe()
 			.Add_base85_len_5(fil_idx)			.Add_byte_pipe()
 			.Add_base85_len_5(row_idx)			.Add_byte_pipe()
-			.Add_byte(type_redirect	? Byte_ascii.Num_1 : Byte_ascii.Num_0).Add_byte_pipe()
+			.Add_byte(type_redirect	? AsciiByte.Num1 : AsciiByte.Num0).Add_byte_pipe()
 			.Add_base85_len_5(itm_len)			.Add_byte_pipe()
 			.Add_base85_len_5(ns_id)			.Add_byte_pipe()
 			.Add_str_u8(ttl)					.Add_byte_nl();
@@ -100,10 +102,10 @@ class Xob_reg_wtr {
 	Bry_bfr bfr = Bry_bfr_.New(); int fil_count = 0;
 	public void Add(byte[] bgn, byte[] end, int itm_count) {
 		bfr
-		.Add_int_variable(fil_count++).Add_byte(Byte_ascii.Pipe)
-		.Add(bgn).Add_byte(Byte_ascii.Pipe)
-		.Add(end).Add_byte(Byte_ascii.Pipe)
-		.Add_int_variable(itm_count).Add_byte(Byte_ascii.Nl);		
+		.Add_int_variable(fil_count++).Add_byte(AsciiByte.Pipe)
+		.Add(bgn).Add_byte(AsciiByte.Pipe)
+		.Add(end).Add_byte(AsciiByte.Pipe)
+		.Add_int_variable(itm_count).Add_byte(AsciiByte.Nl);
 	}
 	public void Flush(Io_url url) {
 		Io_mgr.Instance.SaveFilBfr(url, bfr);

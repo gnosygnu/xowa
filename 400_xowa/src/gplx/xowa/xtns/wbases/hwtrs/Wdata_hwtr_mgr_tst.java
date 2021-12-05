@@ -13,10 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import org.junit.*;
-import gplx.langs.jsons.*; import gplx.langs.htmls.encoders.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.parsers.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.apps.apis.xowa.xtns.*;
+package gplx.xowa.xtns.wbases.hwtrs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.apps.apis.xowa.html.Xoapi_toggle_mgr;
+import gplx.xowa.apps.apis.xowa.xtns.Xoapi_wikibase;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_mgr;
+import gplx.xowa.xtns.wbases.Wdata_doc;
+import gplx.xowa.xtns.wbases.Wdata_doc_bldr;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr_fxt;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.core.Wdata_lang_sorter;
+import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
+import org.junit.Before;
+import org.junit.Test;
 public class Wdata_hwtr_mgr_tst {
 	@Before public void init() {fxt.init();} private Wdata_hwtr_mgr_fxt fxt = new Wdata_hwtr_mgr_fxt();
 	@Test  public void Stub() {}
@@ -296,8 +313,8 @@ class Wdata_hwtr_mgr_fxt {
 		doc_hwtr.Lbl_mgr().Clear();
 	}
 	public Wdata_doc_bldr Wdoc_bldr() {return wdoc_bldr;} private Wdata_doc_bldr wdoc_bldr = new Wdata_doc_bldr();
-	public Wdata_hwtr_mgr_fxt Init_resolved_pid(int pid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(Bool_.Y, pid), new Wdata_langtext_itm(Bry_.new_a7("en"), Bry_.new_a7(lbl))); return this;}
-	public Wdata_hwtr_mgr_fxt Init_resolved_qid(int qid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(Bool_.N, qid), new Wdata_langtext_itm(Bry_.new_a7("en"), Bry_.new_a7(lbl))); return this;}
+	public Wdata_hwtr_mgr_fxt Init_resolved_pid(int pid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(BoolUtl.Y, pid), new Wdata_langtext_itm(Bry_.new_a7("en"), Bry_.new_a7(lbl))); return this;}
+	public Wdata_hwtr_mgr_fxt Init_resolved_qid(int qid, String lbl) {resolved_ttls.Add(Wdata_lbl_itm.Make_ttl(BoolUtl.N, qid), new Wdata_langtext_itm(Bry_.new_a7("en"), Bry_.new_a7(lbl))); return this;}
 	public void Test_doc(Wdata_doc wdoc, String expd) {
 		doc_hwtr.Init_by_wdoc(wdoc);
 		byte[] actl = doc_hwtr.Write(wdoc);

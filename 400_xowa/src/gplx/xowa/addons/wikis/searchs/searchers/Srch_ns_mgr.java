@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.addons.wikis.searchs.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.nss.*;
@@ -94,5 +95,5 @@ public class Srch_ns_mgr {
 			return rv;
 		}
 	}
-	private static final byte[] Hash_key_all = new byte[] {Srch_search_addon.Wildcard__star}, Hash_key_main = new byte[] {Byte_ascii.Num_0};
+	private static final byte[] Hash_key_all = new byte[] {Srch_search_addon.Wildcard__star}, Hash_key_main = new byte[] {AsciiByte.Num0};
 }

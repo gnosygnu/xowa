@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.parsers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.langs.*;
 import gplx.xowa.apps.gfs.*;
 import gplx.xowa.langs.numbers.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.bldrs.*; import gplx.xowa.langs.specials.*;
 import gplx.xowa.wikis.nss.*;
@@ -24,14 +26,14 @@ public class Xol_lang_srl {
 		List_adp rv = List_adp_.New(); Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.Nl : src[pos];
+			byte b = last ? AsciiByte.Nl : src[pos];
 			switch (b) {
-				case Byte_ascii.Pipe:
+				case AsciiByte.Pipe:
 					cur_id = Bry_.To_int_or(src, fld_bgn, pos, Int_.Min_value);
 					if (cur_id == Int_.Min_value) throw Err_.new_wo_type("invalid_id", "id", String_.new_u8(src, fld_bgn, pos));					
 					fld_bgn = pos + 1;
 					break;
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					byte[] cur_name = csv_parser.Load(src, fld_bgn, pos);
 					cur_name = Xoa_ttl.Replace_spaces(cur_name);	// NOTE: *.gfs files will have names with \s instead of _; this comes from Language.php which also has same \s convention; EX: "Template talk" instead of "Template_talk"
 					Xow_ns ns = new Xow_ns(cur_id, Xow_ns_case_.Tid__1st, cur_name, false);
@@ -54,9 +56,9 @@ public class Xol_lang_srl {
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.Nl : src[pos];
+			byte b = last ? AsciiByte.Nl : src[pos];
 			switch (b) {
-				case Byte_ascii.Pipe:
+				case AsciiByte.Pipe:
 					switch (fld_idx) {
 						case 0:
 							cur_key = csv_parser.Load(src, fld_bgn, pos);
@@ -64,8 +66,8 @@ public class Xol_lang_srl {
 						case 1:
 							byte cs_byte = src[pos - 1]; 
 							switch (cs_byte) {
-								case Byte_ascii.Num_0: cur_cs = false; break;
-								case Byte_ascii.Num_1: cur_cs = true; break;
+								case AsciiByte.Num0: cur_cs = false; break;
+								case AsciiByte.Num1: cur_cs = true; break;
 								default: throw Err_.new_wo_type("case sensitive should be 0 or 1", "cs", Byte_.To_str(cs_byte)); 
 							}
 							break;
@@ -73,12 +75,12 @@ public class Xol_lang_srl {
 					fld_bgn = pos + 1;
 					++fld_idx;
 					break;
-				case Byte_ascii.Tilde:
+				case AsciiByte.Tilde:
 					byte[] word = csv_parser.Load(src, fld_bgn, pos);
 					cur_words.Add(word);
 					fld_bgn = pos + 1;
 					break;
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					if (cur_words.Len() > 0) {	// guard against blank line wiping out entries; EX: "toc|0|toc1\n\n"; 2nd \n will get last grp and make 0 entries
 						int cur_id = Xol_kwd_grp_.Id_by_bry(cur_key); if (cur_id == -1) throw Err_.new_wo_type("key does not have id", "id", cur_id);
 						Xol_kwd_grp grp = keyword_mgr.Get_or_new(cur_id);
@@ -102,13 +104,13 @@ public class Xol_lang_srl {
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.Nl : src[pos];
+			byte b = last ? AsciiByte.Nl : src[pos];
 			switch (b) {
-				case Byte_ascii.Pipe:
+				case AsciiByte.Pipe:
 					cur_key = csv_parser.Load(src, fld_bgn, pos);
 					fld_bgn = pos + 1;
 					break;
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					byte[] cur_val = csv_parser.Load(src, fld_bgn, pos);
 					Xol_msg_itm itm = msg_mgr.Itm_by_key_or_new(cur_key).Defined_in_(Xol_msg_itm.Defined_in__lang);	// NOTE: this proc should only be called when loading lang.gfs
 					Xol_msg_itm_.update_val_(itm, cur_val);
@@ -128,15 +130,15 @@ public class Xol_lang_srl {
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.Nl : src[pos];
+			byte b = last ? AsciiByte.Nl : src[pos];
 			switch (b) {
-				case Byte_ascii.Pipe:
+				case AsciiByte.Pipe:
 					cur_key = csv_parser.Load(src, fld_bgn, pos);
 					fld_bgn = pos + 1;
 					break;
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					byte[] cur_val_raw = csv_parser.Load(src, fld_bgn, pos);
-					byte[][] cur_vals = Bry_split_.Split(cur_val_raw, Byte_ascii.Tilde);
+					byte[][] cur_vals = Bry_split_.Split(cur_val_raw, AsciiByte.Tilde);
 					special_mgr.Add(cur_key, cur_vals);
 					fld_bgn = pos + 1;
 					break;
@@ -208,7 +210,7 @@ public class Xol_lang_srl {
 			bfr.Add(itm.Special()).Add_byte_pipe();											// id|
 			int aliases_len = itm.Aliases().length;
 			for (int j = 0; j < aliases_len; j++) {
-				if (j != 0) bfr.Add_byte(Byte_ascii.Tilde);
+				if (j != 0) bfr.Add_byte(AsciiByte.Tilde);
 				csv_parser.Save(bfr, itm.Aliases()[j]);										// name
 			}
 			bfr.Add_byte_nl();																// \n
@@ -237,7 +239,7 @@ public class Xol_lang_srl {
 			for (int j = 0; j < word_len; j++) {
 				Xol_kwd_itm word = grp.Itms()[j];
 				csv_parser.Save(bfr, word.Val());											// word
-				bfr.Add_byte(Byte_ascii.Tilde);												// ~
+				bfr.Add_byte(AsciiByte.Tilde);												// ~
 			}
 			bldr.Add_nl();																	// \n
 		}

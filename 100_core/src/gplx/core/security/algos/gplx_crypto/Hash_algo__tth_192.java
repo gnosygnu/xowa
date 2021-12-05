@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.security.algos.gplx_crypto; import gplx.*; import gplx.core.*; import gplx.core.security.*; import gplx.core.security.algos.*;
+package gplx.core.security.algos.gplx_crypto; import gplx.*;
+import gplx.core.security.algos.*;
 import gplx.core.consoles.*; import gplx.core.ios.streams.*; /*IoStream*/
-import gplx.core.progs.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
 	public String Key() {return KEY;} public static final String KEY = "tth192";
 	public Hash_algo Clone_hash_algo() {return new Hash_algo__tth_192();}
@@ -88,8 +89,8 @@ public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
 		if (branchRv == null || branchRv.length != blockA.length + blockB.length + 1)
 			branchRv = new byte[blockA.length + blockB.length + 1];
 		branchRv[0] = 0x01;		// branch hash mark.
-		Array_.Copy_to(blockA, branchRv, 1);
-		Array_.Copy_to(blockB, branchRv, blockA.length + 1);
+		ArrayUtl.CopyTo(blockA, branchRv, 1);
+		ArrayUtl.CopyTo(blockB, branchRv, blockA.length + 1);
 		return CalcHash(branchRv);
 	}
 	byte[] CalcHash_leaf(byte[] raw, int i) {
@@ -109,7 +110,7 @@ public class Hash_algo__tth_192 implements Hash_algo, Hash_algo_w_prog {
 		}
 
 		rv[0] = 0x00;		// leaf hash mark.
-		Array_.Copy_to(raw, rv, 1);
+		ArrayUtl.CopyTo(raw, rv, 1);
 		return CalcHash(rv);
 	}
 	byte[] CalcHash(byte[] raw) {

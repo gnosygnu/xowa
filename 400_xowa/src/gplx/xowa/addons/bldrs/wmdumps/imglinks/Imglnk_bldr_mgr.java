@@ -43,7 +43,7 @@ class Imglnk_bldr_mgr {
 		reg_tbl.Insert(conn, Xof_repo_tid_.Tid__remote, wiki.Appe().Wiki_mgr().Wiki_commons());
 		reg_tbl.Create_idx__trg_ttl();
 
-//			Imglnk_bulk_cmd__img_id.Bulk_exec(conn, Bool_.Y, wiki);
-//			Imglnk_bulk_cmd__img_id.Bulk_exec(conn, Bool_.N, wiki.Appe().Wiki_mgr().Wiki_commons());
+//			Imglnk_bulk_cmd__img_id.Bulk_exec(conn, BoolUtl.Y, wiki);
+//			Imglnk_bulk_cmd__img_id.Bulk_exec(conn, BoolUtl.N, wiki.Appe().Wiki_mgr().Wiki_commons());
 	}
 }

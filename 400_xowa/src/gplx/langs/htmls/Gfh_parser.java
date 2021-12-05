@@ -15,11 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.htmls; import gplx.*;
 import gplx.core.brys.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfh_parser {
 	public Gfh_parser() {
 		Bry_bldr bry_bldr = new Bry_bldr();
 		bry_xnde_name = bry_bldr.New_256().Set_rng_xml_identifier(Scan_valid).Set_rng_ws(Scan_stop).Val();
-		bry_atr_key = bry_bldr.New_256().Set_rng_xml_identifier(Scan_valid).Set_rng_ws(Scan_stop).Set_many(Scan_stop, Byte_ascii.Eq).Val();
+		bry_atr_key = bry_bldr.New_256().Set_rng_xml_identifier(Scan_valid).Set_rng_ws(Scan_stop).Set_many(Scan_stop, AsciiByte.Eq).Val();
 	}
 	byte[] src; int pos, end; byte[] bry_xnde_name, bry_atr_key;
 	int cur_atrs_idx = 0; int[] cur_atrs = new int[250];// define max of 50 atrs;	
@@ -31,7 +32,7 @@ public class Gfh_parser {
 		while (pos < end) {
 			byte b = src[pos++];
 			switch (b) {
-				case Byte_ascii.Lt:
+				case AsciiByte.Lt:
 					if (xnde_init) {
 						if (Parse_xnde_lhs()) {
 							if (tag_tid_is_inline)
@@ -57,13 +58,13 @@ public class Gfh_parser {
 	private boolean Parse_xnde_rhs() {
 		cur_rhs_bgn = pos - 1;	// -1 b/c "<" is already read
 		byte b = src[pos];
-		if (b != Byte_ascii.Slash) return false;
+		if (b != AsciiByte.Slash) return false;
 		++pos;
 		int name_len = cur_name_end - cur_name_bgn;
 		if (pos + name_len >= end) return false;
 		if (!Bry_.Match(src, pos, pos + name_len, src, cur_name_bgn,  cur_name_end)) return false;
 		pos += name_len;
-		if (src[pos] != Byte_ascii.Gt) return false;
+		if (src[pos] != AsciiByte.Gt) return false;
 		++pos;
 		return true;
 	}
@@ -81,18 +82,18 @@ public class Gfh_parser {
 			key_bgn = key_end = val_bgn = quote_type = -1;
 			Skip_ws();
 			byte b = src[pos];
-			if 		(b == Byte_ascii.Slash) {
+			if 		(b == AsciiByte.Slash) {
 				++pos;
 				if (pos == end) return false;
 				byte next = src[pos];
-				if (next == Byte_ascii.Gt) {
+				if (next == AsciiByte.Gt) {
 					tag_tid_is_inline = true;
 					++pos;
 					break;
 				}
 				else return false;	// NOTE: don't consume byte b/c false
 			}
-			else if (b == Byte_ascii.Gt) {
+			else if (b == AsciiByte.Gt) {
 				++pos;
 				break;
 			}
@@ -101,12 +102,12 @@ public class Gfh_parser {
 			if (rslt == Scan_invalid) return false;
 			key_end = pos;
 			Skip_ws();
-			if (src[pos++] != Byte_ascii.Eq) return false;
+			if (src[pos++] != AsciiByte.Eq) return false;
 			Skip_ws();
 			byte quote_byte = src[pos];
 			switch (quote_byte) {
-				case Byte_ascii.Quote: 	quote_type = quote_byte; break;
-				case Byte_ascii.Apos: 	quote_type = quote_byte; break;
+				case AsciiByte.Quote: 	quote_type = quote_byte; break;
+				case AsciiByte.Apos: 	quote_type = quote_byte; break;
 				default:				return false;
 			}
 			val_bgn = ++pos;	// ++pos: start val after quote
@@ -124,7 +125,7 @@ public class Gfh_parser {
 	private void Skip_ws() {
 		while (pos < end) {
 			switch (src[pos]) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					++pos;
 					break;
 				default:
@@ -141,7 +142,7 @@ public class Gfh_parser {
 				if (next != v) 	return true;
 				else			++pos;
 			}
-			else if (b == Byte_ascii.Backslash) {
+			else if (b == AsciiByte.Backslash) {
 				++pos;
 			}
 		}

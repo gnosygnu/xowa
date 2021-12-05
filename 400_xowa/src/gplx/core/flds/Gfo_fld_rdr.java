@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.flds; import gplx.*; import gplx.core.*;
+package gplx.core.flds; import gplx.*;
 import gplx.core.encoders.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfo_fld_rdr extends Gfo_fld_base {
 	private Bry_bfr bfr = Bry_bfr_.New();
 	public byte[] Data() {return data;} public Gfo_fld_rdr Data_(byte[] v) {data = v; data_len = v.length; pos = 0; return this;} private byte[] data; int data_len;
@@ -36,23 +37,23 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 	public DateAdp Read_dte() {// NOTE: fmt = yyyyMMdd HHmmss.fff
 		int y = 0, M = 0, d = 0, H = 0, m = 0, s = 0, f = 0;
 		if (pos < data_len && data[pos] == row_dlm) {++pos; ++row_idx; fld_idx = 0;} fld_bgn = pos;
-		y += (data[fld_bgn +  0] - Byte_ascii.Num_0) * 1000;
-		y += (data[fld_bgn +  1] - Byte_ascii.Num_0) *  100;
-		y += (data[fld_bgn +  2] - Byte_ascii.Num_0) *   10;
-		y += (data[fld_bgn +  3] - Byte_ascii.Num_0);
-		M += (data[fld_bgn +  4] - Byte_ascii.Num_0) *   10;
-		M += (data[fld_bgn +  5] - Byte_ascii.Num_0);
-		d += (data[fld_bgn +  6] - Byte_ascii.Num_0) *   10;
-		d += (data[fld_bgn +  7] - Byte_ascii.Num_0);
-		H += (data[fld_bgn +  9] - Byte_ascii.Num_0) *   10;
-		H += (data[fld_bgn + 10] - Byte_ascii.Num_0);
-		m += (data[fld_bgn + 11] - Byte_ascii.Num_0) *   10;
-		m += (data[fld_bgn + 12] - Byte_ascii.Num_0);
-		s += (data[fld_bgn + 13] - Byte_ascii.Num_0) *   10;
-		s += (data[fld_bgn + 14] - Byte_ascii.Num_0);
-		f += (data[fld_bgn + 16] - Byte_ascii.Num_0) *  100;
-		f += (data[fld_bgn + 17] - Byte_ascii.Num_0) *   10;
-		f += (data[fld_bgn + 18] - Byte_ascii.Num_0);
+		y += (data[fld_bgn +  0] - AsciiByte.Num0) * 1000;
+		y += (data[fld_bgn +  1] - AsciiByte.Num0) *  100;
+		y += (data[fld_bgn +  2] - AsciiByte.Num0) *   10;
+		y += (data[fld_bgn +  3] - AsciiByte.Num0);
+		M += (data[fld_bgn +  4] - AsciiByte.Num0) *   10;
+		M += (data[fld_bgn +  5] - AsciiByte.Num0);
+		d += (data[fld_bgn +  6] - AsciiByte.Num0) *   10;
+		d += (data[fld_bgn +  7] - AsciiByte.Num0);
+		H += (data[fld_bgn +  9] - AsciiByte.Num0) *   10;
+		H += (data[fld_bgn + 10] - AsciiByte.Num0);
+		m += (data[fld_bgn + 11] - AsciiByte.Num0) *   10;
+		m += (data[fld_bgn + 12] - AsciiByte.Num0);
+		s += (data[fld_bgn + 13] - AsciiByte.Num0) *   10;
+		s += (data[fld_bgn + 14] - AsciiByte.Num0);
+		f += (data[fld_bgn + 16] - AsciiByte.Num0) *  100;
+		f += (data[fld_bgn + 17] - AsciiByte.Num0) *   10;
+		f += (data[fld_bgn + 18] - AsciiByte.Num0);
 		if (data[fld_bgn + 19] != fld_dlm) throw Err_.new_wo_type("csv date is invalid", "txt", String_.new_u8__by_len(data, fld_bgn, 20));
 		fld_end = pos + 20;
 		pos = fld_end + 1; ++fld_idx;
@@ -102,10 +103,10 @@ public class Gfo_fld_rdr extends Gfo_fld_base {
 //					if (i == data_len) throw Err_.new_wo_type("escape char at end of String");
 				b = data[i];
 				byte escape_val = decode_regy[b];
-				if (escape_val == Byte_ascii.Null)	{trg.Add_byte(escape_dlm).Add_byte(b);} //throw Err_.new_fmt_("unknown escape key: key={0}", data[i]);
+				if (escape_val == AsciiByte.Null)	{trg.Add_byte(escape_dlm).Add_byte(b);} //throw Err_.new_fmt_("unknown escape key: key={0}", data[i]);
 				else								trg.Add_byte(escape_val);
 			}
-			else if (b == Byte_ascii.Null) {
+			else if (b == AsciiByte.Null) {
 				trg.Add(Bry_nil);
 			}
 			else if (b == quote_dlm) {

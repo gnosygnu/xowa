@@ -115,8 +115,8 @@ public class Xoh_thm_hzip__basic__tst {
 //			fxt.Wiki().Ns_mgr().Aliases_add(gplx.xowa.wikis.nss.Xow_ns_.Tid__portal, "WP");
 //			fxt.Wiki().Ns_mgr().Init();
 //
-//			fxt.Init_mode_is_b256_(Bool_.N);
+//			fxt.Init_mode_is_b256_(BoolUtl.N);
 //			fxt.Exec_write_to_fsys(Io_url_.new_dir_("C:\\xowa\\debug\\html\\"), "hzip.html");
-//			fxt.Init_mode_is_b256_(Bool_.N);
+//			fxt.Init_mode_is_b256_(BoolUtl.N);
 //		}
 }

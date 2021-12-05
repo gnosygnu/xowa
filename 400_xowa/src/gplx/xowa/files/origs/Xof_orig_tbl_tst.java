@@ -13,11 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import org.junit.*;
-import gplx.dbs.*; import gplx.xowa.*;
-import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
-import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.files.origs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.files.Xof_img_size;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.files.Xof_patch_upright_tid_;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
+import org.junit.Before;
+import org.junit.Test;
 public class Xof_orig_tbl_tst {
 	@Before public void init() {fxt.Clear();} private Xof_orig_tbl_fxt fxt = new Xof_orig_tbl_fxt();
 	@Test  public void Select_in() {
@@ -33,7 +53,7 @@ class Xof_orig_tbl_fxt {
 		Io_url test_url = Io_url_.mem_fil_("mem/file/en.wikipedia.org/file/orig_regy");
 		Db_conn_bldr.Instance.Reg_default_mem();
 		Db_conn conn = Db_conn_bldr.Instance.New(test_url);
-		tbl = new Xof_orig_tbl(conn, Bool_.Y);
+		tbl = new Xof_orig_tbl(conn, BoolUtl.Y);
 		tbl.Create_tbl();
 	}
 	public Xof_orig_itm Exec_insert(String ttl, int w, int h) {

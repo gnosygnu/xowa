@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*;
-import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*; import gplx.xowa.addons.wikis.searchs.searchers.cbks.*;
-import gplx.xowa.addons.wikis.searchs.gui.urlbars.*;
-import gplx.xowa.langs.cases.*;
+package gplx.xowa.addons.wikis.searchs;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.addons.*;
+import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.parsers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
 public class Srch_search_addon implements Xoax_addon_itm, Srch_search_addon_api {
 	private final Srch_search_mgr search_mgr;
 	public Srch_search_addon(Xow_wiki wiki) {
@@ -40,7 +40,7 @@ public class Srch_search_addon implements Xoax_addon_itm, Srch_search_addon_api 
 	}
 
 	public static final int Score_max = 1000000;
-	public static final byte Wildcard__star = Byte_ascii.Star;
+	public static final byte Wildcard__star = AsciiByte.Star;
 	public static Srch_search_addon Get(Xow_wiki wiki) {
 		Srch_search_addon rv = (Srch_search_addon)wiki.Addon_mgr().Itms__get_or_null(ADDON_KEY);
 		if (rv == null) {

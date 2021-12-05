@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.vnts.converts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*; import gplx.core.log_msgs.*; import gplx.langs.phps.*;
 public class Xol_mw_parse_tst {
 	private final Xol_mw_parse_fxt fxt = new Xol_mw_parse_fxt();
@@ -120,9 +121,9 @@ class Xol_mw_parse_fxt {
 		Xol_mw_parse_grp grp = new Xol_mw_parse_grp();
 		byte[] key =  line.Key().Val_obj_bry();				// EX: "zh2Hant"
 		key = Bry_.Lcase__all(key);							// EX: "zh2hant"
-		byte[][] parts = Bry_split_.Split(key, Byte_ascii.Num_2);	// EX: "zh", "hant"
+		byte[][] parts = Bry_split_.Split(key, AsciiByte.Num2);	// EX: "zh", "hant"
 		byte[] src = parts[0];
-		byte[] trg = Bry_.Add(parts[0], new byte[] {Byte_ascii.Dash}, parts[1]);
+		byte[] trg = Bry_.Add(parts[0], new byte[] {AsciiByte.Dash}, parts[1]);
 		grp.Lng_(src).Vnt_(trg);
 		Parse_itms(line, grp);
 		return grp;

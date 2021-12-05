@@ -52,8 +52,8 @@ public class Datetime_now {
 //		private static final DateAdp manual_time_dflt = DateAdp_.parse_gplx("2001-01-01 00:00:00.000");
 //		private static DateAdp manual_time;
 //		static boolean Now_enabled() {return now_enabled;} private static boolean now_enabled;
-//		static void Now_enabled_y_() {now_enabled = Bool_.Y; manual_time = manual_time_dflt;}
-//		static void Now_enabled_n_() {now_enabled = Bool_.N; now_freeze = false;}
+//		static void Now_enabled_y_() {now_enabled = BoolUtl.Y; manual_time = manual_time_dflt;}
+//		static void Now_enabled_n_() {now_enabled = BoolUtl.N; now_freeze = false;}
 	// public static void Now_set(DateAdp date) {now_enabled = true; manual_time = date;}
 	// public static void Now_freeze_y_() {now_freeze = true;} 
 //		private static boolean now_freeze;

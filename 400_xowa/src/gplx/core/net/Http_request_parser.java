@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.net; import gplx.*; import gplx.core.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
+package gplx.core.net;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.String_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.primitives.Int_obj_val;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Http_request_parser {
 	private boolean dnt;
 	private int type, content_length;
@@ -77,7 +87,7 @@ public class Http_request_parser {
 					case Tid_accept:					this.accept = Bry_.Mid(line, val_bgn, line_len); break;
 					case Tid_accept_language:			this.accept_language = Bry_.Mid(line, val_bgn, line_len); break;
 					case Tid_accept_encoding:			this.accept_encoding = Bry_.Mid(line, val_bgn, line_len); break;
-					case Tid_dnt:						this.dnt = line[val_bgn] == Byte_ascii.Num_1; break;
+					case Tid_dnt:						this.dnt = line[val_bgn] == AsciiByte.Num1; break;
 					case Tid_x_requested_with:			this.x_requested_with = Bry_.Mid(line, val_bgn, line_len); break;
 					case Tid_cookie:					this.cookie = Bry_.Mid(line, val_bgn, line_len); break;
 					case Tid_referer:					this.referer = Bry_.Mid(line, val_bgn, line_len); break;
@@ -100,7 +110,7 @@ public class Http_request_parser {
 		}
 	}
 	private void Parse_type(int tid, int val_bgn, byte[] line, int line_len) {	// EX: "POST /xowa-cmd:exec_as_json HTTP/1.1"
-		int url_end = Bry_find_.Find_bwd(line, Byte_ascii.Space, line_len); if (url_end == Bry_find_.Not_found) throw Err_.new_wo_type("invalid protocol", "line", line, "request", To_str());
+		int url_end = Bry_find_.Find_bwd(line, AsciiByte.Space, line_len); if (url_end == Bry_find_.Not_found) throw Err_.new_wo_type("invalid protocol", "line", line, "request", To_str());
 		switch (tid) {
 			case Tid_get	: this.type = Http_request_itm.Type_get; break;
 			case Tid_post	: this.type = Http_request_itm.Type_post; break;
@@ -112,7 +122,7 @@ public class Http_request_parser {
 	private void Parse_content_type(int val_bgn, byte[] line, int line_len) {	// EX: Content-Type: multipart/form-data; boundary=---------------------------72432484930026
 		// handle wolfram and other clients; DATE:2015-08-03
 		int boundary_bgn = Bry_find_.Find_fwd(line, Tkn_boundary, val_bgn, line_len); if (boundary_bgn == Bry_find_.Not_found) return; // PURPOSE: ignore content-type for GET calls like by Mathematica server; DATE:2015-08-04 // throw Err_.new_wo_type("invalid content_type", "line", line, "request", To_str());
-		int content_type_end = Bry_find_.Find_bwd(line, Byte_ascii.Semic, boundary_bgn);
+		int content_type_end = Bry_find_.Find_bwd(line, AsciiByte.Semic, boundary_bgn);
 		this.content_type = Bry_.Mid(line, val_bgn, content_type_end);
 		this.content_type_boundary = Bry_.Add(Tkn_content_type_boundary_end, Bry_.Mid(line, boundary_bgn += Tkn_boundary.length, line_len));
 	}
@@ -144,8 +154,8 @@ public class Http_request_parser {
 		pos = Assert_tkn(line, pos, line_len, Tkn_form_data);
 		pos = Assert_tkn(line, pos, line_len, Tkn_name);
 		int name_end = line_len;
-		if (line[pos] == Byte_ascii.Quote) {
-			if (line[name_end - 1] != Byte_ascii.Quote) throw Err_.new_wo_type("http.request.parser; invalid form at end", "line", line, "request", To_str());
+		if (line[pos] == AsciiByte.Quote) {
+			if (line[name_end - 1] != AsciiByte.Quote) throw Err_.new_wo_type("http.request.parser; invalid form at end", "line", line, "request", To_str());
 			++pos;
 			--name_end;
 		}
@@ -157,7 +167,7 @@ public class Http_request_parser {
 		int rv = src_pos += tkn_len;
 		return Bry_find_.Find_fwd_while_ws(src, rv, src_len);
 	}
-	private String To_str() {return Make_request_itm().To_str(tmp_bfr, Bool_.N);}
+	private String To_str() {return Make_request_itm().To_str(tmp_bfr, BoolUtl.N);}
 	private static final int Tid_get = 1, Tid_post = 2, Tid_host = 3, Tid_user_agent = 4, Tid_accept = 5, Tid_accept_language = 6, Tid_accept_encoding = 7, Tid_dnt = 8
 	, Tid_x_requested_with = 9, Tid_cookie = 10, Tid_referer = 11, Tid_content_length = 12, Tid_content_type = 13, Tid_connection = 14, Tid_pragma = 15, Tid_cache_control = 16
 	, Tid_origin = 17, Tid_accept_charset = 188, Tid_upgrade_request = 19, Tid_x_host = 20, Tid_x_real_ip = 21, Tid_sec_fetch_mode = 22, Tid_sec_fetch_site = 23;

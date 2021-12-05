@@ -13,23 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import org.junit.*;
+package gplx.xowa.htmls.core.hzips;
+import gplx.Bry_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Gfo_decimal_parser_tst {
 	private final Gfo_decimal_parser_fxt fxt = new Gfo_decimal_parser_fxt();
 	@Test  public void Positive() {
-		fxt.Test__parse("123"		, Bool_.Y,  0, 123);
-		fxt.Test__parse("12.3"		, Bool_.Y, -1, 123);
-		fxt.Test__parse("1.23"		, Bool_.Y, -2, 123);
-		fxt.Test__parse(".123"		, Bool_.Y, -3, 123);
-		fxt.Test__parse("0.123"		, Bool_.Y, -3, 123);
+		fxt.Test__parse("123"		, BoolUtl.Y,  0, 123);
+		fxt.Test__parse("12.3"		, BoolUtl.Y, -1, 123);
+		fxt.Test__parse("1.23"		, BoolUtl.Y, -2, 123);
+		fxt.Test__parse(".123"		, BoolUtl.Y, -3, 123);
+		fxt.Test__parse("0.123"		, BoolUtl.Y, -3, 123);
 	}
 	@Test  public void Negative() {
-		fxt.Test__parse("-123"		, Bool_.N,  0, 123);
-		fxt.Test__parse("-12.3"		, Bool_.N, -1, 123);
-		fxt.Test__parse("-1.23"		, Bool_.N, -2, 123);
-		fxt.Test__parse("-.123"		, Bool_.N, -3, 123);
-		fxt.Test__parse("-0.123"	, Bool_.N, -3, 123);
+		fxt.Test__parse("-123"		, BoolUtl.N,  0, 123);
+		fxt.Test__parse("-12.3"		, BoolUtl.N, -1, 123);
+		fxt.Test__parse("-1.23"		, BoolUtl.N, -2, 123);
+		fxt.Test__parse("-.123"		, BoolUtl.N, -3, 123);
+		fxt.Test__parse("-0.123"	, BoolUtl.N, -3, 123);
 	}
 }
 class Gfo_decimal_parser_fxt {

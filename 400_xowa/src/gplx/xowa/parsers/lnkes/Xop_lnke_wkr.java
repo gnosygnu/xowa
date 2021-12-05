@@ -13,9 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.net.*; import gplx.xowa.apps.urls.*;
-import gplx.xowa.apps.progs.*; import gplx.xowa.wikis.xwikis.*;	
+package gplx.xowa.parsers.lnkes;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.Byte_;
+import gplx.core.net.Gfo_protocol_itm;
+import gplx.core.net.Gfo_url_parser;
+import gplx.core.net.Gfo_url_site_data;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_ctx_wkr;
+import gplx.xowa.parsers.Xop_parser_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
 public class Xop_lnke_wkr implements Xop_ctx_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {url_parser = ctx.Wiki().Utl__url_parser().Url_parser();} Gfo_url_parser url_parser; Gfo_url_site_data site_data = new Gfo_url_site_data(); 
 	private Xoa_url xo_url_parser_url = Xoa_url.blank();
@@ -81,7 +99,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		while (true) {	// loop until lnke_end_tid char;
 			if (cur_pos == src_len) {lnke_end_tid = End_tid_eos; lnke_end = cur_pos; break;}
 			switch (src[cur_pos]) {
-				case Byte_ascii.Brack_end:
+				case AsciiByte.BrackEnd:
 					if (lnke_type_brack) {	// NOTE: check that frame begins with [ in order to end with ] 
 						lnke_end_tid = End_tid_brack; brack_end_pos = cur_pos + 1;	// 1=adj_next_char
 					}
@@ -89,17 +107,17 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 						lnke_end_tid = End_tid_invalid;
 					}
 					break;
-				case Byte_ascii.Space:		lnke_end_tid = End_tid_space; break;
-				case Byte_ascii.Nl:	lnke_end_tid = End_tid_nl; break;
-				case Byte_ascii.Gt: case Byte_ascii.Lt: 
+				case AsciiByte.Space:		lnke_end_tid = End_tid_space; break;
+				case AsciiByte.Nl:	lnke_end_tid = End_tid_nl; break;
+				case AsciiByte.Gt: case AsciiByte.Lt:
 					lnke_end_tid = End_tid_invalid;
 					break;
-				case Byte_ascii.Apos:
-					if (cur_pos + 1 < src_len && src[cur_pos + 1] == Byte_ascii.Apos)	// NOTE: '' breaks link, but not '; EX: [http://a.org''b'']]; DATE:2013-03-18
+				case AsciiByte.Apos:
+					if (cur_pos + 1 < src_len && src[cur_pos + 1] == AsciiByte.Apos)	// NOTE: '' breaks link, but not '; EX: [http://a.org''b'']]; DATE:2013-03-18
 						lnke_end_tid = End_tid_invalid;
 					break;
-				case Byte_ascii.Brack_bgn:	// NOTE: always stop lnke at "[" regardless of brack_type; EX: [http:a.org[[B]]] and http:a.org[[B]]; DATE:2014-07-11
-				case Byte_ascii.Quote:		// NOTE: quote should also stop lnke; DATE:2014-10-10
+				case AsciiByte.BrackBgn:	// NOTE: always stop lnke at "[" regardless of brack_type; EX: [http:a.org[[B]]] and http:a.org[[B]]; DATE:2014-07-11
+				case AsciiByte.Quote:		// NOTE: quote should also stop lnke; DATE:2014-10-10
 					lnke_end_tid = End_tid_symbol;
 					break;
 			}
@@ -214,22 +232,22 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 	private static int Ignore_punctuation_at_end(byte[] src, int proto_end, int lnke_end) {	// DATE:2014-10-09
 		int rv = 0;
 		int pos = lnke_end - 1; // -1 b/c pos is after char; EX: "abc" has pos of 3; need --pos to start at src[2] = 'c'
-		byte paren_bgn_chk = Bool_.__byte;
+		byte paren_bgn_chk = BoolUtl.NullByte;
 		while (pos >= proto_end) {
 			byte b = src[pos];
 			switch (b) {	// REF.MW: $sep = ',;\.:!?';
-				case Byte_ascii.Comma: case Byte_ascii.Semic: case Byte_ascii.Backslash: case Byte_ascii.Dot:
-				case Byte_ascii.Bang: case Byte_ascii.Question: 
+				case AsciiByte.Comma: case AsciiByte.Semic: case AsciiByte.Backslash: case AsciiByte.Dot:
+				case AsciiByte.Bang: case AsciiByte.Question:
 					break;
-				case Byte_ascii.Colon:	// differentiate between "http:" (don't trim) and "http://a.org:" (trim)
+				case AsciiByte.Colon:	// differentiate between "http:" (don't trim) and "http://a.org:" (trim)
 					if (pos == proto_end -1) return rv;
 					break;
-				case Byte_ascii.Paren_end:	// differentiate between "(http://a.org)" (trim) and "http://a.org/b(c)" (don't trim)
-					if (paren_bgn_chk == Bool_.__byte) {
-						int paren_bgn_pos = Bry_find_.Find_fwd(src, Byte_ascii.Paren_bgn, proto_end, lnke_end);
-						paren_bgn_chk = paren_bgn_pos == Bry_find_.Not_found ? Bool_.N_byte : Bool_.Y_byte;
+				case AsciiByte.ParenEnd:	// differentiate between "(http://a.org)" (trim) and "http://a.org/b(c)" (don't trim)
+					if (paren_bgn_chk == BoolUtl.NullByte) {
+						int paren_bgn_pos = Bry_find_.Find_fwd(src, AsciiByte.ParenBgn, proto_end, lnke_end);
+						paren_bgn_chk = paren_bgn_pos == Bry_find_.Not_found ? BoolUtl.NByte : BoolUtl.YByte;
 					}
-					if (paren_bgn_chk == Bool_.Y_byte)	// "(" found; do not ignore ")"
+					if (paren_bgn_chk == BoolUtl.YByte)	// "(" found; do not ignore ")"
 						return rv;
 					else
 						break;
@@ -265,21 +283,21 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		int prv_pos = bgn_pos - 1; 
 		byte prv_byte = src[prv_pos];
 		switch (prv_byte) {
-			case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-			case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-			case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-			case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-			case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-			case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-			case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-			case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-			case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-			case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-			case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-			case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
+			case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+			case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+			case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+			case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+			case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+			case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+			case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+			case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+			case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+			case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+			case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+			case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
 				return false;	// alpha-numerical is invalid; EX: "titel:" should not generate a lnke for "tel:"
 		}
-		if (prv_byte >= Byte_ascii.Ascii_min && prv_byte <= Byte_ascii.Ascii_max) return true;	// consider all other ASCII chars as true; EX: \t\n !, etc; 
+		if (prv_byte >= AsciiByte.AsciiMin && prv_byte <= AsciiByte.AsciiMax) return true;	// consider all other ASCII chars as true; EX: \t\n !, etc;
 		prv_pos = gplx.core.intls.Utf8_.Get_prv_char_pos0_old(src, prv_pos);
 		prv_byte = src[prv_pos];
 		boolean prv_char_is_letter = ctx.Lang().Case_mgr().Match_any_exists(prv_byte, src, prv_pos, bgn_pos);
@@ -289,7 +307,7 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		// NOTE: fmt is [xowa-cmd:^"app.setup_mgr.import_wiki('');"^ ]
 		if (lnke_type != Xop_lnke_tkn.Lnke_typ_brack) return ctx.Lxr_make_txt_(cur_pos); // NOTE: must check for [ or else C:\xowa\ will cause it to evaluate as lnke
 		int proto_end_pos = cur_pos + 1;	// +1 to skip past :
-		int lhs_dlm_pos = Bry_find_.Find_fwd(src, Byte_ascii.Quote, proto_end_pos, src_len); if (lhs_dlm_pos == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
+		int lhs_dlm_pos = Bry_find_.Find_fwd(src, AsciiByte.Quote, proto_end_pos, src_len); if (lhs_dlm_pos == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
 		int lnke_bgn_pos = lhs_dlm_pos + 1;
 		byte[] rhs_dlm_bry = Bry_quote;
 		if (lhs_dlm_pos - proto_end_pos > 0) {
@@ -299,14 +317,14 @@ public class Xop_lnke_wkr implements Xop_ctx_wkr {
 		}
 		int rhs_dlm_pos = Bry_find_.Find_fwd(src, rhs_dlm_bry, lnke_bgn_pos, src_len); if (rhs_dlm_pos == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
 		int txt_bgn = Bry_find_.Find_fwd_while_space_or_tab(src, rhs_dlm_pos + rhs_dlm_bry.length, src_len); if (txt_bgn == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
-		int txt_end = Bry_find_.Find_fwd(src, Byte_ascii.Brack_end, txt_bgn, src_len); if (txt_end == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
+		int txt_end = Bry_find_.Find_fwd(src, AsciiByte.BrackEnd, txt_bgn, src_len); if (txt_end == Bry_find_.Not_found) return ctx.Lxr_make_txt_(cur_pos);
 
 		int end_pos = txt_end + 1;	// +1 to place after ]
 		Xop_lnke_tkn tkn = tkn_mkr.Lnke(bgn_pos, end_pos, protocol, proto_tid, lnke_type, lnke_bgn_pos, rhs_dlm_pos);	// +1 to ignore [
 		ctx.Subs_add(root, tkn);
 		tkn.Subs_add(tkn_mkr.Txt(txt_bgn, txt_end));
 		return end_pos;
-	}	private static final byte[] Bry_quote = new byte[] {Byte_ascii.Quote};
+	}	private static final byte[] Bry_quote = new byte[] {AsciiByte.Quote};
 }
 /*
 NOTE_1

@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.net; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfo_protocol_itm {
 	public Gfo_protocol_itm(byte tid, String text) {
 		this.tid = tid;
@@ -21,7 +22,7 @@ public class Gfo_protocol_itm {
 		this.text_str = text;
 		int text_len = text_bry.length;
 		for (int i = 0; i < text_len; i++) {
-			if (text_bry[i] == Byte_ascii.Colon) {
+			if (text_bry[i] == AsciiByte.Colon) {
 				this.key_wo_colon_bry = Bry_.Mid(text_bry, 0, i);
 				this.key_w_colon_bry_len = i;
 				this.key_wo_colon_str = String_.new_u8(key_wo_colon_bry);

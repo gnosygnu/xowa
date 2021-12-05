@@ -13,9 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.btries.*; import gplx.core.log_msgs.*;
-import gplx.xowa.parsers.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Datetime_now;
+import gplx.Int_;
+import gplx.core.brys.Bfr_arg;
+import gplx.core.brys.Bfr_arg_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.log_msgs.Gfo_msg_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 class Pxd_parser {
 	private final Btrie_rv trv = new Btrie_rv();
 	private byte[] src; int cur_pos, tkn_bgn_pos, src_len, tkn_type;
@@ -63,24 +76,24 @@ class Pxd_parser {
 		while (cur_pos < src_len) {
 			byte b = src[cur_pos];
 			switch (b) {	
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl:
 					if (tkn_type != Pxd_itm_.Tid_ws) MakePrvTkn(cur_pos, Pxd_itm_.Tid_ws); break; // SEE:NOTE_1 for logic
-				case Byte_ascii.Dash: case Byte_ascii.Dot: case Byte_ascii.Colon: case Byte_ascii.Slash:
+				case AsciiByte.Dash: case AsciiByte.Dot: case AsciiByte.Colon: case AsciiByte.Slash:
 					if (tkn_type != b) MakePrvTkn(cur_pos, b); break;
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					if (tkn_type != Pxd_itm_.Tid_int)	MakePrvTkn(cur_pos, Pxd_itm_.Tid_int); break;
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-				case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-				case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-				case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-				case Byte_ascii.At:
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+				case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+				case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+				case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+				case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+				case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+				case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+				case AsciiByte.At:
 					MakePrvTkn(cur_pos, Pxd_itm_.Tid_null);			// first, make prv tkn
 					Object o = trie.Match_at_w_b0(trv, b, src, cur_pos, src_len);	// now match String against tkn
 					if (o == null) return false;	// unknown letter / word; exit now;
@@ -88,7 +101,7 @@ class Pxd_parser {
 					++tkns_len;
 					cur_pos = trv.Pos() - 1; // -1 b/c trie matches to next char, and ++ below
 					break;
-				case Byte_ascii.Comma: case Byte_ascii.Plus:
+				case AsciiByte.Comma: case AsciiByte.Plus:
 					MakePrvTkn(cur_pos, Pxd_itm_.Tid_null);					
 					tkns[tkns_len] = new Pxd_itm_sym(tkns_len, b);
 					++tkns_len;
@@ -227,8 +240,8 @@ class Pxd_parser_ {
 		Init_relative();
 		trie.Add_obj(Pxd_itm_unixtime.Name_const, new Pxd_itm_unixtime(-1, -1));
 		trie.Add_obj(Pxd_itm_iso8601_t.Name_const, new Pxd_itm_iso8601_t(-1, -1));
-		Init_meridian(Bool_.N, "am", "a.m", "am.", "a.m.");
-		Init_meridian(Bool_.Y, "pm", "p.m", "pm.", "p.m.");
+		Init_meridian(BoolUtl.N, "am", "a.m", "am.", "a.m.");
+		Init_meridian(BoolUtl.Y, "pm", "p.m", "pm.", "p.m.");
 	}
 	private static void Init_reg_months(String[] names) {
 		for (int i = 0; i < names.length; i++)

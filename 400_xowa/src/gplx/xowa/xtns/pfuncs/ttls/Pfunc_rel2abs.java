@@ -13,17 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.ttls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
+import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pfunc_rel2abs extends Pf_func_base {
 	@Override public boolean Func_require_colon_arg() {return true;}
 	private static final byte[] Ary_dot_slash = Bry_.new_a7("./"), Ary_dot_dot = Bry_.new_a7(".."), Ary_dot_dot_slash = Bry_.new_a7("../");
 	private static void qry_bgns_with_init() {
 		qry_bgns_with = Btrie_fast_mgr.cs();
-		qry_bgns_with.Add(Byte_ascii.Slash, Int_obj_ref.New(Id_slash));
-		qry_bgns_with.Add(Byte_ascii.Dot, Int_obj_ref.New(Id_dot));
+		qry_bgns_with.Add(AsciiByte.Slash, Int_obj_ref.New(Id_slash));
+		qry_bgns_with.Add(AsciiByte.Dot, Int_obj_ref.New(Id_dot));
 		qry_bgns_with.Add(Ary_dot_slash, Int_obj_ref.New(Id_dot_slash));
 		qry_bgns_with.Add(Ary_dot_dot, Int_obj_ref.New(Id_dot_dot));
 		qry_bgns_with.Add(Ary_dot_dot_slash, Int_obj_ref.New(Id_dot_dot_slash));
@@ -42,14 +44,14 @@ public class Pfunc_rel2abs extends Pf_func_base {
 		boolean rv = false;
 		for (int i = bgn; i < end; ++i) {
 			switch (ttl[i]) {
-				case Byte_ascii.Gt: case Byte_ascii.Pipe:	// simplified version of Xoa_ttl parse; note that Xoa_ttl accepts these if anchor is seen; this proc assumes that anything with anchor and invalid char is an invalid rel2abs; EX: "A../b#c[d" is not valid; DATE:2013-03-31
-				case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end: case Byte_ascii.Curly_bgn: case Byte_ascii.Curly_end:
+				case AsciiByte.Gt: case AsciiByte.Pipe:	// simplified version of Xoa_ttl parse; note that Xoa_ttl accepts these if anchor is seen; this proc assumes that anything with anchor and invalid char is an invalid rel2abs; EX: "A../b#c[d" is not valid; DATE:2013-03-31
+				case AsciiByte.BrackBgn: case AsciiByte.BrackEnd: case AsciiByte.CurlyBgn: case AsciiByte.CurlyEnd:
 					return false;
-				case Byte_ascii.Slash:
+				case AsciiByte.Slash:
 					if 	(	!rv &&
 							(	(i == bgn)										// bgns with "/"
-							||	(i > bgn 	&& ttl[i - 1] == Byte_ascii.Dot)	// "./"
-							||	(i < last 	&& ttl[i + 1] == Byte_ascii.Dot)	// "/."
+							||	(i > bgn 	&& ttl[i - 1] == AsciiByte.Dot)	// "./"
+							||	(i < last 	&& ttl[i + 1] == AsciiByte.Dot)	// "/."
 							)
 					) rv = true;
 					break;
@@ -82,7 +84,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 					break;								// qry is relative to src; noop
 				case Id_dot_dot:						// ".."
 					int match_end = trv.Pos();
-					if (match_end < qry_len && qry[match_end] == Byte_ascii.Dot)	// NOTE: handles "..."; if "...*" then treat as invalid and return; needed for en.wiktionary.org/wiki/Wiktionary:Requests for cleanup/archive/2006
+					if (match_end < qry_len && qry[match_end] == AsciiByte.Dot)	// NOTE: handles "..."; if "...*" then treat as invalid and return; needed for en.wiktionary.org/wiki/Wiktionary:Requests for cleanup/archive/2006
 						return qry;
 					break;
 				default:
@@ -109,17 +111,17 @@ public class Pfunc_rel2abs extends Pf_func_base {
 				}
 				else									// finished qry; EX: ../c
 					loop = false;	
-				b = Byte_ascii.Slash;					// fake a slash between ary and src
+				b = AsciiByte.Slash;					// fake a slash between ary and src
 			}
 			else										// inside ary
 				b = tmp[i - tmp_adj];
 			switch (b) {
-				case Byte_ascii.Dot:					// "."; ignore; note that dot_mode defaults to true
+				case AsciiByte.Dot:					// "."; ignore; note that dot_mode defaults to true
 					break;
 				default:								// something else besides dot or slash; reset dot_mode
 					dot_mode = false;
 					break;
-				case Byte_ascii.Slash:					// "/"; seg finished
+				case AsciiByte.Slash:					// "/"; seg finished
 					int seg_len = i - prv_slash_end; // EX: "a/b/c" prv_slash_end = 2; i = 3; len = 1
 					boolean create_seg = false;
 					switch (seg_len) {
@@ -158,7 +160,7 @@ public class Pfunc_rel2abs extends Pf_func_base {
 			tmp_is_1st = false;			
 		}
 		for (int j = 0; j < seg_pos; j += 2) {
-			if (j != 0) tmp_bfr.Add_byte(Byte_ascii.Slash);
+			if (j != 0) tmp_bfr.Add_byte(AsciiByte.Slash);
 			if (seg_ary[j] >= tmp_len) {
 				tmp = qry;
 				tmp_adj = src_len + 1;

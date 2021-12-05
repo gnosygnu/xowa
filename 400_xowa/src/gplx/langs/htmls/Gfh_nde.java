@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.htmls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfh_nde {
 	public Gfh_nde(byte[] src, boolean tag_tid_is_inline, int tag_lhs_bgn, int tag_lhs_end, int tag_rhs_bgn, int tag_rhs_end, int name_bgn, int name_end, int[] cur_atrs, int atrs_idx) {
 		this.src = src;
@@ -54,7 +55,7 @@ public class Gfh_nde {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Backslash:
+				case AsciiByte.Backslash:
 					if (!dirty) {dirty = true; tmp_bfr.Add_mid(src, bgn, i);}
 					++i;
 					tmp_bfr.Add_byte(src[i]);

@@ -13,9 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*;
-import gplx.xowa.files.*;
-import gplx.dbs.*;
+package gplx.xowa.files.caches;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Ordered_hash;
+import gplx.Rls_able;
+import gplx.String_;
+import gplx.dbs.Db_cmd_mode;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.Db_stmt_bldr;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
 public class Xou_cache_tbl implements Rls_able {
 	private String tbl_name = "file_cache"; private final DbmetaFldList flds = new DbmetaFldList();
 	private String
@@ -107,9 +126,9 @@ public class Xou_cache_tbl implements Rls_able {
 		try {
 			Db_stmt stmt = stmt_bldr.Get(itm.Db_state());
 			switch (itm.Db_state()) {
-				case Db_cmd_mode.Tid_create:	stmt.Clear(); Db_save_crt(stmt, itm, Bool_.Y);	Db_save_val(stmt, itm); stmt.Exec_insert(); break;
-				case Db_cmd_mode.Tid_update:	stmt.Clear();									Db_save_val(stmt, itm); Db_save_crt(stmt, itm, Bool_.N); stmt.Exec_update(); break;
-				case Db_cmd_mode.Tid_delete:	stmt.Clear(); Db_save_crt(stmt, itm, Bool_.N);	stmt.Exec_delete();	break;
+				case Db_cmd_mode.Tid_create:	stmt.Clear(); Db_save_crt(stmt, itm, BoolUtl.Y);	Db_save_val(stmt, itm); stmt.Exec_insert(); break;
+				case Db_cmd_mode.Tid_update:	stmt.Clear();									Db_save_val(stmt, itm); Db_save_crt(stmt, itm, BoolUtl.N); stmt.Exec_update(); break;
+				case Db_cmd_mode.Tid_delete:	stmt.Clear(); Db_save_crt(stmt, itm, BoolUtl.N);	stmt.Exec_delete();	break;
 				case Db_cmd_mode.Tid_ignore:	break;
 				default:						throw Err_.new_unhandled(itm.Db_state());
 			}

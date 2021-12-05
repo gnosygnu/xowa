@@ -13,18 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims.itms.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.wbases.claims.itms.times; import gplx.*;
 import gplx.core.brys.fmtrs.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.xtns.wbases.hwtrs.*;
 public class Wbase_date_ {
 	public static Wbase_date Parse(byte[] date, int precision, int before, int after, boolean calendar_is_julian) {// EX:+00000002001-02-03T04:05:06Z
 		int year_sign = 1;
 		switch (date[0]) {
-			case Byte_ascii.Plus:	break;
-			case Byte_ascii.Dash:	year_sign = -1; break;
+			case AsciiByte.Plus:	break;
+			case AsciiByte.Dash:	year_sign = -1; break;
 			default:				throw Err_.new_unhandled(date[0]);
 		}
-		int year_end = Bry_find_.Find_fwd(date, Byte_ascii.Dash, 1);
+		int year_end = Bry_find_.Find_fwd(date, AsciiByte.Dash, 1);
 		long year		= Long_.parse_or(String_.new_a7(date, 1, year_end), -1); if (year == -1) throw Err_.new_wo_type("parse failed", "raw", String_.new_a7(date));
 		int month		= Bry_.To_int_or(date, year_end +  1, year_end +  3, -1);
 		int day			= Bry_.To_int_or(date, year_end +  4, year_end +  6, -1);

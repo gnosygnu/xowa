@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
+package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*;
 import gplx.core.brys.*; import gplx.core.btries.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
+import gplx.objects.strings.AsciiByte;
 public class Xoh_img_cls_data implements Bfr_arg_clearable {
 	private final Btrie_rv trv = new Btrie_rv();
 	private byte[] src;
@@ -42,7 +43,7 @@ public class Xoh_img_cls_data implements Bfr_arg_clearable {
 		int src_end = atr.Val_end();
 		this.cls_tid = Xoh_img_cls_.Trie.Match_byte_or(trv, src, src_bgn, src_end, Xoh_img_cls_.Tid__manual);
 		int pos = trv.Pos();
-		if (pos < src_end && src[pos] == Byte_ascii.Space)
+		if (pos < src_end && src[pos] == AsciiByte.Space)
 			++pos;
 		if (cls_tid == Xoh_img_cls_.Tid__manual || pos < src_end) {
 			this.src = atr.Src(); // set src, else NPE when trying to write to bfr; DATE:2019-01-04

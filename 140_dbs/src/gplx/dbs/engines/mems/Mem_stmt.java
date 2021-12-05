@@ -13,8 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*; import gplx.dbs.engines.*;
-import gplx.core.stores.*;
+package gplx.dbs.engines.mems;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.DateAdp;
+import gplx.Decimal_adp;
+import gplx.Err_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.stores.DataRdr;
+import gplx.dbs.Db_qry;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.engines.Db_engine;
+import gplx.objects.primitives.BoolUtl;
 public class Mem_stmt implements Db_stmt {
 	private static final String Key_na = ""; // key is not_available; only called by procs with signature of Val(<type> v);
 	private final Ordered_hash val_list = Ordered_hash_.New();
@@ -32,79 +46,79 @@ public class Mem_stmt implements Db_stmt {
 		return this;
 	}
 	public void Rls() {this.Clear();}
-	public Db_stmt Crt_bool_as_byte(String k, boolean v)	{return Add_byte_by_bool(Bool_.Y, k, v);}
-	public Db_stmt Val_bool_as_byte(String k, boolean v)	{return Add_byte_by_bool(Bool_.N, k, v);}
-	public Db_stmt Val_bool_as_byte(boolean v)				{return Add_byte_by_bool(Bool_.N, Key_na, v);}
-	private Db_stmt Add_byte_by_bool(boolean where, String k, boolean v) {return Add_byte(where, k, v ? Bool_.Y_byte : Bool_.N_byte);}
-	public Db_stmt Crt_byte(String k, byte v)	{return Add_byte(Bool_.Y, k, v);}
-	public Db_stmt Val_byte(String k, byte v)	{return Add_byte(Bool_.N, k, v);}
-	public Db_stmt Val_byte(byte v)				{return Add_byte(Bool_.N, Key_na, v);}
+	public Db_stmt Crt_bool_as_byte(String k, boolean v)	{return Add_byte_by_bool(BoolUtl.Y, k, v);}
+	public Db_stmt Val_bool_as_byte(String k, boolean v)	{return Add_byte_by_bool(BoolUtl.N, k, v);}
+	public Db_stmt Val_bool_as_byte(boolean v)				{return Add_byte_by_bool(BoolUtl.N, Key_na, v);}
+	private Db_stmt Add_byte_by_bool(boolean where, String k, boolean v) {return Add_byte(where, k, v ? BoolUtl.YByte : BoolUtl.NByte);}
+	public Db_stmt Crt_byte(String k, byte v)	{return Add_byte(BoolUtl.Y, k, v);}
+	public Db_stmt Val_byte(String k, byte v)	{return Add_byte(BoolUtl.N, k, v);}
+	public Db_stmt Val_byte(byte v)				{return Add_byte(BoolUtl.N, Key_na, v);}
 	private Db_stmt Add_byte(boolean where, String k, byte v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "byte", "val", v);}
 		return this;
 	}
-	public Db_stmt Crt_int(String k, int v)	{return Add_int(Bool_.Y, k, v);}
-	public Db_stmt Val_int_by_bool(String k, boolean v)	{return Add_int(Bool_.N, k, v ? 1 : 0);}
-	public Db_stmt Val_int(String k, int v)	{return Add_int(Bool_.N, k, v);}
-	public Db_stmt Val_int(int v)			{return Add_int(Bool_.N, Key_na, v);}
+	public Db_stmt Crt_int(String k, int v)	{return Add_int(BoolUtl.Y, k, v);}
+	public Db_stmt Val_int_by_bool(String k, boolean v)	{return Add_int(BoolUtl.N, k, v ? 1 : 0);}
+	public Db_stmt Val_int(String k, int v)	{return Add_int(BoolUtl.N, k, v);}
+	public Db_stmt Val_int(int v)			{return Add_int(BoolUtl.N, Key_na, v);}
 	private Db_stmt Add_int(boolean where, String k, int v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "int", "val", v);}
 		return this;
 	}
-	public Db_stmt Crt_long(String k, long v)	{return Add_long(Bool_.Y, k, v);}
-	public Db_stmt Val_long(String k, long v)	{return Add_long(Bool_.N, k, v);}
-	public Db_stmt Val_long(long v)				{return Add_long(Bool_.N, Key_na, v);}
+	public Db_stmt Crt_long(String k, long v)	{return Add_long(BoolUtl.Y, k, v);}
+	public Db_stmt Val_long(String k, long v)	{return Add_long(BoolUtl.N, k, v);}
+	public Db_stmt Val_long(long v)				{return Add_long(BoolUtl.N, Key_na, v);}
 	private Db_stmt Add_long(boolean where, String k, long v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "long", "val", v);} 
 		return this;
 	}
-	public Db_stmt Crt_float(String k, float v)	{return Add_float(Bool_.Y, k, v);}
-	public Db_stmt Val_float(String k, float v)	{return Add_float(Bool_.N, k, v);}
-	public Db_stmt Val_float(float v)			{return Add_float(Bool_.N, Key_na, v);}
+	public Db_stmt Crt_float(String k, float v)	{return Add_float(BoolUtl.Y, k, v);}
+	public Db_stmt Val_float(String k, float v)	{return Add_float(BoolUtl.N, k, v);}
+	public Db_stmt Val_float(float v)			{return Add_float(BoolUtl.N, Key_na, v);}
 	private Db_stmt Add_float(boolean where, String k, float v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "float", "val", v);}
 		return this;
 	}
-	public Db_stmt Crt_double(String k, double v)	{return Add_double(Bool_.Y, k, v);}
-	public Db_stmt Val_double(String k, double v)	{return Add_double(Bool_.N, k, v);}
-	public Db_stmt Val_double(double v)				{return Add_double(Bool_.N, Key_na, v);}
+	public Db_stmt Crt_double(String k, double v)	{return Add_double(BoolUtl.Y, k, v);}
+	public Db_stmt Val_double(String k, double v)	{return Add_double(BoolUtl.N, k, v);}
+	public Db_stmt Val_double(double v)				{return Add_double(BoolUtl.N, Key_na, v);}
 	private Db_stmt Add_double(boolean where, String k, double v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "double", "val", v);} 
 		return this;
 	}
-	public Db_stmt Crt_decimal(String k, Decimal_adp v)	{return Add_decimal(Bool_.Y, k, v);}
-	public Db_stmt Val_decimal(String k, Decimal_adp v)	{return Add_decimal(Bool_.N, k, v);}
-	public Db_stmt Val_decimal(Decimal_adp v)			{return Add_decimal(Bool_.N, Key_na, v);}
+	public Db_stmt Crt_decimal(String k, Decimal_adp v)	{return Add_decimal(BoolUtl.Y, k, v);}
+	public Db_stmt Val_decimal(String k, Decimal_adp v)	{return Add_decimal(BoolUtl.N, k, v);}
+	public Db_stmt Val_decimal(Decimal_adp v)			{return Add_decimal(BoolUtl.N, Key_na, v);}
 	private Db_stmt Add_decimal(boolean where, String k, Decimal_adp v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "decimal", "val", v);} 
 		return this;
 	}
-	public Db_stmt Crt_bry(String k, byte[] v)	{return Add_bry(Bool_.Y, k, v);}
-	public Db_stmt Val_bry(String k, byte[] v)	{return Add_bry(Bool_.N, k, v);}
-	public Db_stmt Val_bry(byte[] v)			{return Add_bry(Bool_.N, Key_na, v);}
+	public Db_stmt Crt_bry(String k, byte[] v)	{return Add_bry(BoolUtl.Y, k, v);}
+	public Db_stmt Val_bry(String k, byte[] v)	{return Add_bry(BoolUtl.N, k, v);}
+	public Db_stmt Val_bry(byte[] v)			{return Add_bry(BoolUtl.N, Key_na, v);}
 	private Db_stmt Add_bry(boolean where, String k, byte[] v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "byte[]", "val", v.length);} 
 		return this;
 	}
-	public Db_stmt Crt_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.Y, k, v);}
-	public Db_stmt Val_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(Bool_.N, k, v);}
-	public Db_stmt Val_bry_as_str(byte[] v)				{return Add_bry_as_str(Bool_.N, Key_na, v);}
+	public Db_stmt Crt_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(BoolUtl.Y, k, v);}
+	public Db_stmt Val_bry_as_str(String k, byte[] v)	{return Add_bry_as_str(BoolUtl.N, k, v);}
+	public Db_stmt Val_bry_as_str(byte[] v)				{return Add_bry_as_str(BoolUtl.N, Key_na, v);}
 	private Db_stmt Add_bry_as_str(boolean where, String k, byte[] v) {return Add_str(where, k, String_.new_u8(v));}
-	public Db_stmt Crt_str(String k, String v)	{return Add_str(Bool_.Y, k, v);}
-	public Db_stmt Val_str(String k, String v)	{return Add_str(Bool_.N, k, v);}
-	public Db_stmt Val_str(String v)			{return Add_str(Bool_.N, Key_na, v);}
+	public Db_stmt Crt_str(String k, String v)	{return Add_str(BoolUtl.Y, k, v);}
+	public Db_stmt Val_str(String k, String v)	{return Add_str(BoolUtl.N, k, v);}
+	public Db_stmt Val_str(String v)			{return Add_str(BoolUtl.N, Key_na, v);}
 	private Db_stmt Add_str(boolean where, String k, String v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "String", "val", v);} 
 		return this;
 	}
-	public Db_stmt Crt_date(String k, DateAdp v)	{return Add_date(Bool_.Y, k, v);}
-	public Db_stmt Val_date(String k, DateAdp v)	{return Add_date(Bool_.N, k, v);}
+	public Db_stmt Crt_date(String k, DateAdp v)	{return Add_date(BoolUtl.Y, k, v);}
+	public Db_stmt Val_date(String k, DateAdp v)	{return Add_date(BoolUtl.N, k, v);}
 	private Db_stmt Add_date(boolean where, String k, DateAdp v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "date", "val", v);} 
 		return this;
 	}
-	public Db_stmt Crt_text(String k, String v)		{return Add_text(Bool_.Y, k, v);}
-	public Db_stmt Val_text(String k, String v)		{return Add_text(Bool_.N, k, v);}
+	public Db_stmt Crt_text(String k, String v)		{return Add_text(BoolUtl.Y, k, v);}
+	public Db_stmt Val_text(String k, String v)		{return Add_text(BoolUtl.N, k, v);}
 	private Db_stmt Add_text(boolean where, String k, String v) {
 		try {Add(k, where, v);} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "text", "val", v);} 
 		return this;
@@ -113,7 +127,7 @@ public class Mem_stmt implements Db_stmt {
 		try {
 			Bry_bfr bfr = Bry_bfr_.New();
 			gplx.core.ios.streams.Io_stream_rdr_.Load_all_to_bfr(bfr, v);
-			Add("", Bool_.N, bfr.To_str_and_clear());
+			Add("", BoolUtl.N, bfr.To_str_and_clear());
 		} catch (Exception e) {throw Err_.new_exc(e, "db", "failed to add value", "type", "rdr", "val", v);} 
 		return this;
 	}

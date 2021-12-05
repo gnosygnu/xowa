@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.caches; import gplx.*; import gplx.core.*;
+package gplx.core.caches; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.envs.*;
+import gplx.objects.lists.ComparerAble;
 public class Gfo_cache_mgr_bry extends Gfo_cache_mgr_base {
 	public Object Get_or_null(byte[] key) {return Base_get_or_null(key);}
 	public void Add(byte[] key, Object val) {Base_add(key, val);}
@@ -27,7 +28,7 @@ class Gfo_cache_itm_bry {
 	public long Touched() {return touched;} private long touched;
 	public Gfo_cache_itm_bry Touched_update() {touched = System_.Ticks(); return this;}
 }
-class Gfo_cache_itm_comparer implements gplx.core.lists.ComparerAble {
+class Gfo_cache_itm_comparer implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Gfo_cache_itm_bry lhs = (Gfo_cache_itm_bry)lhsObj;
 		Gfo_cache_itm_bry rhs = (Gfo_cache_itm_bry)rhsObj;

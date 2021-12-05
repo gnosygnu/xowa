@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.merges; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*;
+package gplx.xowa.addons.bldrs.exports.merges; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Merge_prog_checkpoint {
 	private final Bry_bfr bfr = Bry_bfr_.New();
 	private final Io_url url;
@@ -36,7 +37,7 @@ public class Merge_prog_checkpoint {
 	}
 	public int Load() {
 		byte[] bry = Io_mgr.Instance.LoadFilBryOrNull(url); if (bry == null) return 0;
-		byte[][] parts = Bry_split_.Split(bry, Byte_ascii.Pipe);
+		byte[][] parts = Bry_split_.Split(bry, AsciiByte.Pipe);
 		this.resume_fil = String_.new_u8(parts[0]);
 		this.resume_wkr = Bry_.To_int(parts[1]);
 		this.resume_db = Bry_.To_int(parts[2]);

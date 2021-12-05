@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.btries; import gplx.*; import gplx.core.*;
+package gplx.core.btries; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 public class Btrie_fast_mgr_tst {
 	private Btrie_fast_mgr_fxt fxt = new Btrie_fast_mgr_fxt();
@@ -26,7 +27,7 @@ public class Btrie_fast_mgr_tst {
 		fxt.Test_matchAtCur(" a"	, null);
 	}
 	@Test public void Bos() {
-		fxt.Test_match("bc", Byte_ascii.Ltr_a, -1, 123);
+		fxt.Test_match("bc", AsciiByte.Ltr_a, -1, 123);
 	}
 	@Test public void Match_exact() {
 		fxt.Test_matchAtCurExact("a", 1);
@@ -58,8 +59,8 @@ class Btrie_fast_mgr_fxt {
 	private Btrie_fast_mgr trie;
 	public void Clear() {
 		trie = Btrie_fast_mgr.cs();
-		Init_add(  1	, Byte_ascii.Ltr_a);
-		Init_add(123	, Byte_ascii.Ltr_a, Byte_ascii.Ltr_b, Byte_ascii.Ltr_c);
+		Init_add(  1	, AsciiByte.Ltr_a);
+		Init_add(123	, AsciiByte.Ltr_a, AsciiByte.Ltr_b, AsciiByte.Ltr_c);
 	}
 	public void Init_add(int val, byte... ary) {trie.Add(ary, val);}
 	public void Test_match(String src_str, byte b, int bgn_pos, int expd) {

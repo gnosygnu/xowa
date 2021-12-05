@@ -13,10 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.Bool_;
+package gplx.dbs.sqls.wtrs; import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.Object_;
 import gplx.String_;
@@ -56,7 +56,7 @@ public class Sql_schema_wtr {
 		int len = flds.Len();
 		for (int i = 0; i < len; ++i) {
 			DbmetaFldItm fld = flds.Get_at(i);
-			tmp_bfr.Add_byte(i == 0 ? Byte_ascii.Paren_bgn : Byte_ascii.Comma).Add_byte_space();
+			tmp_bfr.Add_byte(i == 0 ? AsciiByte.ParenBgn : AsciiByte.Comma).Add_byte_space();
 			Bld_fld(tmp_bfr, fld);
 			tmp_bfr.Add_byte_nl();
 		}
@@ -82,9 +82,9 @@ public class Sql_schema_wtr {
 		}
 		if (fld.DefaultVal() != DbmetaFldItm.DefaultValNull) {
 			tmp_bfr.Add_str_a7("DEFAULT ");
-			boolean quote = Bool_.N;
+			boolean quote = BoolUtl.N;
 			switch (fld.Type().Tid()) {
-				case DbmetaFldType.TidStr: case DbmetaFldType.TidText: quote = Bool_.Y; break;
+				case DbmetaFldType.TidStr: case DbmetaFldType.TidText: quote = BoolUtl.Y; break;
 			}
 			if (quote) tmp_bfr.Add_byte_apos();
 			tmp_bfr.Add_str_u8(Object_.Xto_str_strict_or_null(fld.DefaultVal()));
@@ -104,7 +104,7 @@ public class Sql_schema_wtr {
 			case DbmetaFldType.TidLong:		tmp_bfr.Add_str_a7("bigint"); break;
 			case DbmetaFldType.TidFloat:		tmp_bfr.Add_str_a7("float"); break;
 			case DbmetaFldType.TidDouble:	tmp_bfr.Add_str_a7("double"); break;
-			case DbmetaFldType.TidStr:		tmp_bfr.Add_str_a7("varchar(").Add_int_variable(len).Add_byte(Byte_ascii.Paren_end); break;
+			case DbmetaFldType.TidStr:		tmp_bfr.Add_str_a7("varchar(").Add_int_variable(len).Add_byte(AsciiByte.ParenEnd); break;
 			case DbmetaFldType.TidText:		tmp_bfr.Add_str_a7("text"); break;
 			case DbmetaFldType.TidBry:		tmp_bfr.Add_str_a7("blob"); break;
 			default:							throw Err_.new_unhandled(tid);

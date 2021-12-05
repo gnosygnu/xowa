@@ -13,11 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.primitives.*;
-import gplx.dbs.*;
-import gplx.xowa.wikis.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
+package gplx.xowa.files.caches;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.primitives.Bool_obj_ref;
+import gplx.dbs.Db_cmd_mode;
+import gplx.dbs.Db_conn;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xoa_repo_mgr;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_file_wkr_;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.files.Xof_url_bldr;
+import gplx.xowa.files.imgs.Xof_img_mode_;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.wikis.Xoae_wiki_mgr;
 class Xofc_fil_mgr {
 	private Xof_cache_mgr cache_mgr;		
 	private final Xofc_fil_tbl tbl = new Xofc_fil_tbl(); private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Bry_bfr key_bldr = Bry_bfr_.Reset(255);
@@ -66,8 +88,8 @@ class Xofc_fil_mgr {
 		}
 		return itm;
 	}
-	private Xofc_fil_itm Make_v1(int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size) {return Make(Bool_.Y, dir_id, name, is_orig, w, h, time, page, ext, size);}
-	public Xofc_fil_itm Make_v2(int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size) {return Make(Bool_.N, dir_id, name, is_orig, w, h, time, page, ext, size);}
+	private Xofc_fil_itm Make_v1(int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size) {return Make(BoolUtl.Y, dir_id, name, is_orig, w, h, time, page, ext, size);}
+	public Xofc_fil_itm Make_v2(int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size) {return Make(BoolUtl.N, dir_id, name, is_orig, w, h, time, page, ext, size);}
 	private Xofc_fil_itm Make(boolean schema_is_1, int dir_id, byte[] name, boolean is_orig, int w, int h, double time, int page, Xof_ext ext, long size) {
 		int id = cache_mgr.Next_id();
 		Xofc_fil_itm rv = new Xofc_fil_itm(id, dir_id, name, is_orig, w, h, time, page, ext, size, 0, Db_cmd_mode.Tid_create).Cache_time_now_();

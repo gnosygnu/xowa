@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.exports.*; import gplx.xowa.addons.bldrs.exports.packs.*;
+package gplx.xowa.addons.bldrs.exports.packs.files; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Pack_zip_name_bldr {	// en.wikipedia.org-file-ns.000-db.001.xowa -> Xowa_enwiki_2016-05_file_ns.000_db.001.zip
 	private final Io_url pack_dir;
 	private final byte[] wiki_domain, zip_name_prefix;
@@ -30,7 +31,7 @@ public class Pack_zip_name_bldr {	// en.wikipedia.org-file-ns.000-db.001.xowa ->
 		byte[] orig_bry = Bry_.new_u8(orig_url.NameOnly() + ".zip");
 
 		// swap dashes with unders; EX: "en.wikipedia.org-file-core.xowa" -> "en.wikipedia.org_file_core.zip"
-		orig_bry = Bry_.Replace(orig_bry, Byte_ascii.Dash, Byte_ascii.Underline);
+		orig_bry = Bry_.Replace(orig_bry, AsciiByte.Dash, AsciiByte.Underline);
 
 		// swap domain with xobc-style-prefix; EX: "en.wikipedia.org_file_core.zip" -> "Xowa_enwiki_2017-03_file_core.zip"
 		orig_bry = Bry_.Replace(orig_bry, wiki_domain, zip_name_prefix);
@@ -46,10 +47,10 @@ public class Pack_zip_name_bldr {	// en.wikipedia.org-file-ns.000-db.001.xowa ->
 		// get wiki_url based on wiki_dir and xobc_zip_fil; EX: "/wiki/en.wikipedia.org/", "/wiki/tmp/Xowa_enwiki_2016-09_file_core_deletion_2016-09/" -> "/wiki/en.wikipedia.org-file-core-deletion-2016.09.zip" 
 		String name_str = zip_dir.NameOnly() + ".xowa";
 		byte[] name_bry = Bry_.new_u8(name_str);
-		int pos = Bry_find__Find_fwd_idx(name_bry, Byte_ascii.Underline, 2);
+		int pos = Bry_find__Find_fwd_idx(name_bry, AsciiByte.Underline, 2);
 		name_bry = Bry_.Mid(name_bry, pos, name_bry.length);
 		name_bry = Bry_.Add(Bry_.new_u8(wiki_dir.NameOnly()), name_bry);
-		name_bry = Bry_.Replace(name_bry, Byte_ascii.Underline, Byte_ascii.Dash);
+		name_bry = Bry_.Replace(name_bry, AsciiByte.Underline, AsciiByte.Dash);
 		return wiki_dir.GenSubFil(String_.new_u8(name_bry));
 	}
 	private static int Bry_find__Find_fwd_idx(byte[] src, byte val, int find_max) {

@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.graphs; import gplx.*; import gplx.xowa.*;
-import gplx.core.tests.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.makes.tests.*;
+package gplx.xowa.xtns.graphs;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.tests.Gfo_test_itm;
+import gplx.core.tests.Gfo_test_lnr_base;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.core.makes.tests.Xoh_make_fxt;
 class Graph_html_fxt {
 	private final Xoh_make_fxt make_fxt = new Xoh_make_fxt();
 	private final Xop_fxt parser_fxt;
@@ -30,8 +37,8 @@ class Graph_html_fxt {
 		hdump_wkr_lnr = null;
 	}
 	public Xop_fxt Parser_fxt() {return parser_fxt;}
-	public Graph_html_fxt Hdump_n_() {return Hdump_(Bool_.N);}
-	public Graph_html_fxt Hdump_y_() {return Hdump_(Bool_.Y);}
+	public Graph_html_fxt Hdump_n_() {return Hdump_(BoolUtl.N);}
+	public Graph_html_fxt Hdump_y_() {return Hdump_(BoolUtl.Y);}
 	private Graph_html_fxt Hdump_(boolean v) {
 		this.hdump_atr = v ? " " + String_.new_u8(Graph_json_load_mgr.HDUMP_ATR) : "";
 		return this;

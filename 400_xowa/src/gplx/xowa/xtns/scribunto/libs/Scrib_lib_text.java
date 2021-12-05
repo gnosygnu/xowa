@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.scribunto.*;
 import gplx.core.bits.*; import gplx.core.btries.*;
 import gplx.xowa.langs.msgs.*;
 import gplx.xowa.xtns.scribunto.procs.*;
@@ -101,7 +105,7 @@ public class Scrib_lib_text implements Scrib_lib {
 			}					
 		}
 		if	(!itm_is_nde)
-			itm_as_ary = Array_.cast(itm);
+			itm_as_ary = ArrayUtl.Cast(itm);
 
 		// reindex ndes unless preserve_keys
 		int flags = args.Cast_int_or(1, 0);
@@ -140,16 +144,16 @@ public class Scrib_lib_text implements Scrib_lib {
 		for (int i = 0; i < json_len; i++) {
 			byte json_byte = json[i];
 			switch (json_byte) {
-				case Byte_ascii.Brack_bgn:
-				case Byte_ascii.Brack_end:
-				case Byte_ascii.Curly_bgn:
-				case Byte_ascii.Curly_end:
+				case AsciiByte.BrackBgn:
+				case AsciiByte.BrackEnd:
+				case AsciiByte.CurlyBgn:
+				case AsciiByte.CurlyEnd:
 					is_json_like = true;
 					is_numeric = false;
 					i = json_len;
 					break;
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					break;
 				default:
 					is_numeric = false;
@@ -161,9 +165,9 @@ public class Scrib_lib_text implements Scrib_lib {
 				return rslt.Init_obj(Bry_.To_int(json));
 			}
 			else {
-				if (Bry_.Eq(json, Bool_.True_bry))
+				if (Bry_.Eq(json, BoolUtl.TrueBry))
 					return rslt.Init_obj(true);
-				else if (Bry_.Eq(json, Bool_.False_bry))
+				else if (Bry_.Eq(json, BoolUtl.FalseBry))
 					return rslt.Init_obj(false);
 				else {
 					return rslt.Init_obj(json);
@@ -182,10 +186,10 @@ public class Scrib_lib_text implements Scrib_lib {
 	public static Keyval[] JsonDecodeStatic
 		( Scrib_proc_args args, Scrib_core core, Scrib_lib_text__json_util json_util
 		, byte[] json, int opts, int flags) {
-		// decode json to Object; note that Bool_.Y means ary and Bool_.N means ary
+		// decode json to Object; note that BoolUtl.Y means ary and BoolUtl.N means ary
 		byte rv_tid = json_util.Decode(core.App().Utl__json_parser(), json, opts);
-		if (rv_tid == Bool_.__byte) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
-		if (rv_tid == Bool_.Y_byte) {
+		if (rv_tid == BoolUtl.NullByte) throw Err_.new_("scribunto",  "mw.text.jsonEncode: Unable to decode String " + String_.new_u8(json));
+		if (rv_tid == BoolUtl.YByte) {
 			Keyval[] rv_as_kvy = (Keyval[])json_util.Decode_rslt_as_nde();
 
 			// reindex unless preserve_keys passed

@@ -14,9 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
-
-import gplx.Array_;
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Err_;
@@ -28,6 +26,7 @@ import gplx.String_;
 import gplx.Tfds;
 import gplx.core.tests.Gftest;
 import gplx.langs.regxs.Regx_adp_;
+import gplx.objects.arrays.ArrayUtl;
 import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
 import gplx.xowa.xtns.scribunto.Scrib_lib;
 import gplx.xowa.xtns.scribunto.engines.mocks.Mock_proc_stub;
@@ -141,12 +140,12 @@ public class Scrib_lib_ustring__gsub__tst {
 		Exec_gsub("abC DEF gHI JKm NOP", "%f[%a]%u+%f[%A]", Int_.Max_value, "()", "abC () gHI JKm ();2");	// based on http://lua-users.org/wiki/FrontierPattern
 	}
 	@Test public void Regx__frontier_pattern_utl() {// PURPOSE: standalone test for \0 logic in frontier pattern; note that verified against PHP: echo(preg_match( "/[\w]/us", "\0" )); DATE:2015-07-21
-		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "a"));		// \0 not matched by a
-		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "0"));		// \0 not matched by numeric 0
-		Tfds.Eq(Bool_.N, Regx_adp_.Match("\0", "[\\w]"));	// \0 not matched by word_char
-		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\W]"));	// \0 matched by !word_char
-		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\x]"));	// \0 matched by any_char
-		Tfds.Eq(Bool_.Y, Regx_adp_.Match("\0", "[\\X]"));	// \0 matched by !any_char
+		Tfds.Eq(BoolUtl.N, Regx_adp_.Match("\0", "a"));		// \0 not matched by a
+		Tfds.Eq(BoolUtl.N, Regx_adp_.Match("\0", "0"));		// \0 not matched by numeric 0
+		Tfds.Eq(BoolUtl.N, Regx_adp_.Match("\0", "[\\w]"));	// \0 not matched by word_char
+		Tfds.Eq(BoolUtl.Y, Regx_adp_.Match("\0", "[\\W]"));	// \0 matched by !word_char
+		Tfds.Eq(BoolUtl.Y, Regx_adp_.Match("\0", "[\\x]"));	// \0 matched by any_char
+		Tfds.Eq(BoolUtl.Y, Regx_adp_.Match("\0", "[\\X]"));	// \0 matched by !any_char
 	}
 	@Test public void Luacbk__basic() {
 		String text = "ad2f1e3z";
@@ -247,7 +246,7 @@ class Mock_proc__verify_args extends Mock_proc_stub {	private final Object[][] e
 	@Override public Keyval[] Exec_by_scrib(Keyval[] args) {
 		Object[] expd_args = expd_ary[++expd_idx];
 		Object rv = expd_args[0];
-		expd_args = (Object[])Array_.Extract_by_pos(expd_args, 1);
+		expd_args = (Object[])ArrayUtl.Clone(expd_args, 1);
 		Object[] actl_args = Keyval_.Ary__to_objary__val(args);
 		Gftest.Eq__ary(expd_args, actl_args, "failed lua_cbk");
 		return Keyval_.Ary(Keyval_.int_(0, rv));

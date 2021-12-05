@@ -13,11 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.addons.apps.cfgs.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.bldrs.filters.core.*;
+package gplx.xowa.bldrs.filters.dansguardians;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
+import gplx.xowa.bldrs.filters.core.Xob_ttl_filter_mgr;
+import gplx.xowa.langs.Xol_lang_itm;
 public class Dg_match_mgr {
 	private int score_init, score_fail; private boolean log_enabled, case_match;
 	private final Btrie_slim_mgr btrie = Btrie_slim_mgr.cs();
@@ -30,8 +41,8 @@ public class Dg_match_mgr {
 	public Dg_match_mgr(Io_url root_dir, int score_init, int score_fail, boolean case_match, boolean log_enabled, Io_url log_url) {
 		this.score_init = score_init; this.score_fail = score_fail; this.case_match = case_match; this.log_enabled = log_enabled;
 		if (log_enabled) log_mgr.Init(log_url);
-		ttl_filter_mgr.Load(Bool_.N, root_dir.GenSubFil("xowa.title.include.txt"));
-		ttl_filter_mgr.Load(Bool_.Y, root_dir.GenSubFil("xowa.title.exclude.txt"));
+		ttl_filter_mgr.Load(BoolUtl.N, root_dir.GenSubFil("xowa.title.include.txt"));
+		ttl_filter_mgr.Load(BoolUtl.Y, root_dir.GenSubFil("xowa.title.exclude.txt"));
 		ns_skip_mgr.Load(root_dir.GenSubFil("xowa.ns.skip.txt"));
 		Io_url dg_root_url = root_dir.GenSubDir("dansguardian");
 		Dg_file[] files = parser.Parse_dir(dg_root_url); Gfo_usr_dlg_.Instance.Plog_many("", "", "import.dg.rules: url=~{0} files=~{1}", dg_root_url, files.length);

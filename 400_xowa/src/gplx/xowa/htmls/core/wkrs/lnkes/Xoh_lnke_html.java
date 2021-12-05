@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.btries.*; import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.langs.htmls.encoders.*; import gplx.xowa.apps.urls.*;
+package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.*;
+import gplx.core.net.*; import gplx.core.net.qargs.*; import gplx.langs.htmls.encoders.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.lnkes.*;	
 import gplx.xowa.htmls.core.htmls.*;
@@ -81,7 +83,7 @@ public class Xoh_lnke_html {
 			if (lnke.Lnke_typ() == Xop_lnke_tkn.Lnke_typ_text)											// EX: 'http://a.org' -> 'http://a.org'
 				bfr.Add_mid(src, href_bgn, href_end);
 			else																						// EX: '[http://a.org]' -> '[1]'
-				bfr.Add_byte(Byte_ascii.Brack_bgn).Add_int_variable(ctx.Page().Html_data().Lnke_autonumber_next()).Add_byte(Byte_ascii.Brack_end);
+				bfr.Add_byte(AsciiByte.BrackBgn).Add_int_variable(ctx.Page().Html_data().Lnke_autonumber_next()).Add_byte(AsciiByte.BrackEnd);
 		}
 		else {																							// EX: '[http://a.org a]' -> 'a'
 			for (int i = 0; i < subs_len; i++)

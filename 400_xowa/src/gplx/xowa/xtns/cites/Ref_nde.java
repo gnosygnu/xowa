@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cites; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.cites; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.*; import gplx.xowa.xtns.*;
 import gplx.core.primitives.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.xowa.htmls.core.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
 public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	public byte[] Name() {return name;} public Ref_nde Name_(byte[] v) {name = v; return this;} private byte[] name = Bry_.Empty;
@@ -68,7 +70,7 @@ public class Ref_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		int new_len = related_len + 1;
 		int related_max = related.length;
 		if (new_len > related_max)
-			related = (Ref_nde[])Array_.Resize(related, related_max == 0 ? 1 : related_max * 2);
+			related = (Ref_nde[])ArrayUtl.Resize(related, related_max == 0 ? 1 : related_max * 2);
 		itm.Idx_minor_(idx_minor);
 		related[related_len] = itm;
 		related_len = new_len;

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.threads.poolables.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.htmls.core.hzips.*;
@@ -49,7 +51,7 @@ public class Xoh_hdr_data implements Xoh_data_itm {
 		if (span_tail.Src_end() != hdr_tail.Src_bgn()) {
 			capt_rhs_bgn = span_tail.Src_end(); capt_rhs_end = hdr_tail.Src_bgn();
 		}
-		this.anch_is_diff = !Bry_.Match_w_swap(src, capt_bgn, capt_end, src, anch_bgn, anch_end, Byte_ascii.Space, Byte_ascii.Underline);	// anch is different than capt; occurs with html and dupe-anchors; EX: "==<i>A</i>==" -> id='A'
+		this.anch_is_diff = !Bry_.Match_w_swap(src, capt_bgn, capt_end, src, anch_bgn, anch_end, AsciiByte.Space, AsciiByte.Underline);	// anch is different than capt; occurs with html and dupe-anchors; EX: "==<i>A</i>==" -> id='A'
 		this.src_end = tag_rdr.Pos();
 		return true;
 	}

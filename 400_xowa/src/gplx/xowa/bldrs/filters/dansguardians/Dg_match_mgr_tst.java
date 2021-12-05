@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*;
-import org.junit.*; import gplx.dbs.*;
+package gplx.xowa.bldrs.filters.dansguardians;
+import gplx.Bry_;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Tfds;
+import gplx.dbs.Db_conn_bldr;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Dg_match_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Dg_match_mgr_fxt fxt = new Dg_match_mgr_fxt();
 	@Test  public void One() {
@@ -29,15 +38,15 @@ class Dg_match_mgr_fxt {
 	public void Clear() {
 		Db_conn_bldr.Instance.Reg_default_mem();
 		Io_url root_dir = Io_url_.mem_dir_("mem/dg/");
-		match_mgr = new Dg_match_mgr(root_dir.GenSubDir("words"), 1, 0, Bool_.Y, Bool_.Y, root_dir.GenSubDir("log"));
+		match_mgr = new Dg_match_mgr(root_dir.GenSubDir("words"), 1, 0, BoolUtl.Y, BoolUtl.Y, root_dir.GenSubDir("log"));
 		rule_list.Clear();
 	}
 	public void Init_line(int score, String... words) {
 		Dg_rule line = new Dg_rule(-1, -1, -1, Dg_rule.Tid_rule, Bry_.new_a7("key"), score, Dg_word.Ary_new_by_str_ary(words));
 		rule_list.Add(line);
 	}
-	public void Test_match_many_y(String... words) {Test_match_many(Bool_.Y, words);}
-	public void Test_match_many_n(String... words) {Test_match_many(Bool_.N, words);}
+	public void Test_match_many_y(String... words) {Test_match_many(BoolUtl.Y, words);}
+	public void Test_match_many_n(String... words) {Test_match_many(BoolUtl.N, words);}
 	public void Test_match_many(boolean expd, String... words) {
 		int words_len = words.length;
 		for (int i = 0; i < words_len; ++i)

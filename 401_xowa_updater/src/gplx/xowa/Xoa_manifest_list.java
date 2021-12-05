@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Xoa_manifest_list {
 	private final Ordered_hash hash = Ordered_hash_.New();
 	public int Len() {return hash.Len();}
@@ -32,9 +33,9 @@ public class Xoa_manifest_list {
 		for (int i = 0; i < len; i++) {
 			Xoa_manifest_item item = (Xoa_manifest_item)hash.Get_at(i);
 			bfr.Add_str_u8(item.Src().Raw());
-			bfr.Add_byte(Byte_ascii.Tab);
+			bfr.Add_byte(AsciiByte.Tab);
 			bfr.Add_str_u8(item.Trg().Raw());
-			bfr.Add_byte(Byte_ascii.Nl);
+			bfr.Add_byte(AsciiByte.Nl);
 		}
 	}
 	public void Load(byte[] src, int src_bgn, int src_end) {
@@ -42,9 +43,9 @@ public class Xoa_manifest_list {
 		// load by "src\ttrg\n"
 		while (pos < src_end) {
 			// get pos
-			int tab_pos = Bry_find_.Find_fwd(src, Byte_ascii.Tab, pos, src_end);
+			int tab_pos = Bry_find_.Find_fwd(src, AsciiByte.Tab, pos, src_end);
 			if (tab_pos == Bry_find_.Not_found) throw Err_.new_wo_type("failed to find tab", "excerpt", Bry_.Mid(src, pos, src_end));
-			int nl_pos  = Bry_find_.Find_fwd(src, Byte_ascii.Nl, tab_pos + 1, src_end);
+			int nl_pos  = Bry_find_.Find_fwd(src, AsciiByte.Nl, tab_pos + 1, src_end);
 			if (nl_pos == Bry_find_.Not_found) throw Err_.new_wo_type("failed to find nl", "excerpt", Bry_.Mid(src, pos, src_end));
 
 			// create

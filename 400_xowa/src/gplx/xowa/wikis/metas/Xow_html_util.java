@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.metas;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.String_;
+import gplx.Yn;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
 public class Xow_html_util implements Gfo_invk {
 	public Xow_html_util(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki;
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
@@ -23,7 +32,7 @@ public class Xow_html_util implements Gfo_invk {
 	}	private static final String Invk_if_bool = "if_bool", Invk_if_yn = "if_yn";
 	String If_bool(String expr, String true_val, String false_val) {
 		Object o = wiki.Appe().Gfs_mgr().Run_str(expr);
-		try {return Bool_.Cast(o) ? true_val : false_val;}
+		try {return BoolUtl.Cast(o) ? true_val : false_val;}
 		catch (Exception e) {Err_.Noop(e); return "expr failed: " + expr;}
 	}
 	String If_yn(String expr, String true_val, String false_val) {

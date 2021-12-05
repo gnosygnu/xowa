@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.encoders; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
+package gplx.langs.htmls.encoders; import gplx.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.entitys.*;
+import gplx.objects.strings.AsciiByte;
 public interface Gfo_url_encoder_itm {
 	int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b);
 	int Decode(Bry_bfr bfr, byte[] src, int end, int idx, byte b, boolean fail_when_invalid);
@@ -70,8 +71,8 @@ class Gfo_url_encoder_itm_hex implements Gfo_url_encoder_itm {
 		}
 	}
 	public static final byte[] HexBytes = new byte[]
-	{	Byte_ascii.Num_0, Byte_ascii.Num_1, Byte_ascii.Num_2, Byte_ascii.Num_3, Byte_ascii.Num_4, Byte_ascii.Num_5, Byte_ascii.Num_6, Byte_ascii.Num_7
-	,	Byte_ascii.Num_8, Byte_ascii.Num_9, Byte_ascii.Ltr_A, Byte_ascii.Ltr_B, Byte_ascii.Ltr_C, Byte_ascii.Ltr_D, Byte_ascii.Ltr_E, Byte_ascii.Ltr_F
+	{	AsciiByte.Num0, AsciiByte.Num1, AsciiByte.Num2, AsciiByte.Num3, AsciiByte.Num4, AsciiByte.Num5, AsciiByte.Num6, AsciiByte.Num7
+	,	AsciiByte.Num8, AsciiByte.Num9, AsciiByte.Ltr_A, AsciiByte.Ltr_B, AsciiByte.Ltr_C, AsciiByte.Ltr_D, AsciiByte.Ltr_E, AsciiByte.Ltr_F
 	};
 } 
 class Gfo_url_encoder_itm_html_ent implements Gfo_url_encoder_itm {
@@ -84,23 +85,23 @@ class Gfo_url_encoder_itm_html_ent implements Gfo_url_encoder_itm {
 	public int Encode(Bry_bfr bfr, byte[] src, int end, int idx, byte b) {
 		++idx;					// b is &; get next character afterwards
 		if (idx == end) {		// & is last char; return
-			Gfo_url_encoder_itm_hex.Encode_byte(Byte_ascii.Amp, bfr, Byte_ascii.Dot);
+			Gfo_url_encoder_itm_hex.Encode_byte(AsciiByte.Amp, bfr, AsciiByte.Dot);
 			return 0;
 		}
 		b = src[idx];
 		Object o = amp_trie.Match_bgn_w_byte(b, src, idx, end);
 		if (o == null) {	// unknown entity (EX:&unknown;); return &;
 			if (encode_unknown_amp)
-				Gfo_url_encoder_itm_hex.Encode_byte(Byte_ascii.Amp, bfr, Byte_ascii.Dot);
+				Gfo_url_encoder_itm_hex.Encode_byte(AsciiByte.Amp, bfr, AsciiByte.Dot);
 			else
-				bfr.Add_byte(Byte_ascii.Amp);
+				bfr.Add_byte(AsciiByte.Amp);
 			return 0;
 		}
 		else {
 			Gfh_entity_itm itm = (Gfh_entity_itm)o;
 			byte[] bry_u8 = itm.U8_bry();	// NOTE: must utf8 encode val; EX: &nbsp; is 160 but must become 192,160
 			for (int i = 0; i < bry_u8.length; i++)
-				Gfo_url_encoder_itm_hex.Encode_byte(bry_u8[i], bfr, Byte_ascii.Dot);
+				Gfo_url_encoder_itm_hex.Encode_byte(bry_u8[i], bfr, AsciiByte.Dot);
 			return itm.Xml_name_bry().length - 1;	// -1 to ignore & in XmlEntityName
 		}			
 	}

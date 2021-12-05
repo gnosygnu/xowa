@@ -13,12 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.heads;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
 public abstract class Xoh_head_itm__base {
 	public abstract byte[] Key();
 	public abstract int Flags();
-	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} public void Enabled_y_() {this.Enabled_(Bool_.Y);} public void Enabled_n_() {this.Enabled_(Bool_.N);} private boolean enabled;
-	public void Clear() {this.Enabled_(Bool_.N);}
+	public boolean Enabled() {return enabled;} public void Enabled_(boolean v) {enabled = v;} public void Enabled_y_() {this.Enabled_(BoolUtl.Y);} public void Enabled_n_() {this.Enabled_(BoolUtl.N);} private boolean enabled;
+	public void Clear() {this.Enabled_(BoolUtl.N);}
 	public void Write_css_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {}
 	public void Write_css_text(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {}
 	public void Write_js_include(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {}

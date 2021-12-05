@@ -13,13 +13,39 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.langs.msgs.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.addons.wikis.ctgs.*;
-import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*;
-import gplx.xowa.xtns.scribunto.procs.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.interwikis.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.Bry_;
+import gplx.Err_;
+import gplx.Hash_adp;
+import gplx.Io_url;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.ctgs.Xoax_ctg_addon;
+import gplx.xowa.addons.wikis.ctgs.Xoctg_ctg_itm;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.wikis.data.site_stats.Xowd_site_stats_mgr;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.metas.Xow_wiki_props;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.wikis.xwikis.interwikis.Xow_interwiki_itm;
+import gplx.xowa.wikis.xwikis.interwikis.Xow_interwiki_map;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
 public class Scrib_lib_site implements Scrib_lib {
 	public Scrib_lib_site(Scrib_core core) {this.core = core;} private final Scrib_core core;
 	public String Key() {return "mw.site";}
@@ -138,8 +164,8 @@ public class Scrib_lib_site implements Scrib_lib {
 		rv[ 1] = Keyval_.new_("url"						, url);								// wfExpandUrl( $row['iw_url'], PROTO_RELATIVE ),
 		rv[ 2] = Keyval_.new_("isProtocolRelative"		, url_is_relative);					// substr( $row['iw_url'], 0, 2 ) === '//',
 		rv[ 3] = Keyval_.new_("isLocal"					, itm_is_local);					// isset( $row['iw_local'] ) && $row['iw_local'] == '1',
-		rv[ 4] = Keyval_.new_("isTranscludable"			, Bool_.N);							// isset( $row['iw_trans'] ) && $row['iw_trans'] == '1',
-		rv[ 5] = Keyval_.new_("isCurrentWiki"			, Bool_.N);							// in_array( $prefix, $wgLocalInterwikis ),
+		rv[ 4] = Keyval_.new_("isTranscludable"			, BoolUtl.N);							// isset( $row['iw_trans'] ) && $row['iw_trans'] == '1',
+		rv[ 5] = Keyval_.new_("isCurrentWiki"			, BoolUtl.N);							// in_array( $prefix, $wgLocalInterwikis ),
 		rv[ 6] = Keyval_.new_("isExtraLanguageLink"		, is_extralanguage_link);			// in_array( $prefix, $wgExtraInterlanguageLinkPrefixes ),
 		if (is_extralanguage_link) {
 			rv[7] = Keyval_.new_("displayText"			, "displayText_TODO");				// $displayText = wfMessage( "interlanguage-link-$prefix" ); if ( !$displayText->isDisabled() ) ...

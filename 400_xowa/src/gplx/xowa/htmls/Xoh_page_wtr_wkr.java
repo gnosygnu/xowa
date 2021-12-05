@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
@@ -214,7 +214,7 @@ public class Xoh_page_wtr_wkr {
 
 		// dump and exit if MediaWiki message;
 		if	(ns_id == Xow_ns_.Tid__mediawiki) {	// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
-			bfr.Add(Gfs_php_converter.Xto_php(tmp_bfr, Bool_.N, data_raw));
+			bfr.Add(Gfs_php_converter.Xto_php(tmp_bfr, BoolUtl.N, data_raw));
 			return;
 		}
 
@@ -286,7 +286,7 @@ public class Xoh_page_wtr_wkr {
 		if	(	ns_id == Xow_ns_.Tid__mediawiki			// if MediaWiki and wikitext, must be a message; convert args back to php; DATE:2014-06-13
 			&&	page_tid == Xow_page_tid.Tid_wikitext
 			)
-			data_raw = Gfs_php_converter.Xto_php(tmp_bfr, Bool_.N, data_raw);
+			data_raw = Gfs_php_converter.Xto_php(tmp_bfr, BoolUtl.N, data_raw);
 		int data_raw_len = data_raw.length;
 		if (mgr.Html_capable()) {
 			data_raw = wiki.Parser_mgr().Hdr__section_editable__mgr().Slice_section(page.Url(), page.Ttl(), data_raw);

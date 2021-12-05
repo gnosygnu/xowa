@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import gplx.core.ios.streams.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.strings.AsciiByte;
 public class Io_line_rdr {
 	public Io_line_rdr (Gfo_usr_dlg usr_dlg, Io_url... urls) {this.usr_dlg = usr_dlg; this.urls = urls; if (urls.length == 0) bfr_state = Bfr_state_end;} Gfo_usr_dlg usr_dlg;
 	public int Url_idx() {return url_idx;} private int url_idx;
@@ -24,7 +27,7 @@ public class Io_line_rdr {
 		urls[0] = url;
 		url_idx = 0;
 	}
-	public byte Line_dlm() {return line_dlm;} public Io_line_rdr Line_dlm_(byte v) {line_dlm = v; return this;} private byte line_dlm = Byte_ascii.Nl;
+	public byte Line_dlm() {return line_dlm;} public Io_line_rdr Line_dlm_(byte v) {line_dlm = v; return this;} private byte line_dlm = AsciiByte.Nl;
 	public byte[] Bfr() {return bfr;} private byte[] bfr;
 	public int Bfr_len() {return bfr_len;} private int bfr_len;
 	public byte Bfr_state() {return bfr_state;} private byte bfr_state = Bfr_state_bgn; static final byte Bfr_state_bgn = 0, Bfr_state_mid = 1, Bfr_state_end = 2;
@@ -41,7 +44,7 @@ public class Io_line_rdr {
 	public Io_line_rdr_key_gen Key_gen() {return key_gen;} public Io_line_rdr Key_gen_(Io_line_rdr_key_gen v) {key_gen = v; return this;} Io_line_rdr_key_gen key_gen = Io_line_rdr_key_gen_.first_pipe;
 	public void Truncate(int pos) {
 		this.Read_next();
-		int end = Bry_find_.Find_fwd(bfr, Byte_ascii.Null); if (end == -1) end = bfr.length;
+		int end = Bry_find_.Find_fwd(bfr, AsciiByte.Null); if (end == -1) end = bfr.length;
 		bfr = Bry_.Mid(bfr, pos, end);
 		bfr_len = bfr.length;
 		bfr_last_read = 0;
@@ -87,10 +90,10 @@ public class Io_line_rdr {
 		}
 		while (true) {
 			int compare = Bry_.Compare(ttl, 0, ttl.length, bfr, key_pos_bgn, key_pos_end);
-			if 		(compare == CompareAble_.Same) {	// eq; return true and move fwd; EX: "BA" and "BA"
+			if 		(compare == CompareAbleUtl.Same) {	// eq; return true and move fwd; EX: "BA" and "BA"
 				return true;
 			}
-			else if (compare <  CompareAble_.Same) {	// lt; return false; EX: ttl is "BA" but rdr is "BC"
+			else if (compare <  CompareAbleUtl.Same) {	// lt; return false; EX: ttl is "BA" but rdr is "BC"
 				return false;
 			}
 			else {										// gt; keep reading; EX: ttl is "BC" but rdr is "BA"
@@ -122,7 +125,7 @@ public class Io_line_rdr {
 //				++url_idx;
 //				bfr_state = Bfr_state_end;
 		}
-		if (old_bfr_len > 0) Array_.Copy_to(bfr, bfr_last_read, load_ary, 0, old_bfr_len);	// copy old_bfr over	
+		if (old_bfr_len > 0) ArrayUtl.CopyTo(bfr, bfr_last_read, load_ary, 0, old_bfr_len);	// copy old_bfr over
 		file_pos += read_len;
 		bfr = load_ary;
 		bfr_last_read = 0;
@@ -135,7 +138,7 @@ public class Io_line_rdr {
 		if (file_skip_line0) {
 			byte[] stream_bry = Io_mgr.Instance.LoadFilBry(url);
 			int stream_bry_len = stream_bry.length;
-			int nl_pos = Bry_find_.Find_fwd(stream_bry, Byte_ascii.Nl, 0, stream_bry_len);
+			int nl_pos = Bry_find_.Find_fwd(stream_bry, AsciiByte.Nl, 0, stream_bry_len);
 			if (nl_pos == Bry_find_.Not_found)
 				stream_bry = Bry_.Empty;
 			else

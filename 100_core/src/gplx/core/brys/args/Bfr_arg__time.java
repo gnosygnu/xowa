@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys.args; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
+package gplx.core.brys.args; import gplx.*;
+import gplx.core.brys.*;
+import gplx.objects.strings.AsciiByte;
 public class Bfr_arg__time implements Bfr_arg {
 	public Bfr_arg__time() {
 		units_len = units.length;
@@ -27,7 +29,7 @@ public class Bfr_arg__time implements Bfr_arg {
 	};
 	int[] units = new int[] {86400, 3600, 60, 1};
 	int units_len;
-	byte[] spr = new byte[] {Byte_ascii.Space};
+	byte[] spr = new byte[] {AsciiByte.Space};
 	public void Bfr_arg__add(Bry_bfr bfr) {
 		if (seconds == 0) {	// handle 0 separately (since it will always be < than units[*]
 			bfr.Add_int_fixed(0, 2).Add(segs[units_len - 1]);
@@ -44,7 +46,7 @@ public class Bfr_arg__time implements Bfr_arg {
 			}
 			if (seg > 0 || dirty) {			// dirty check allows for 0 in middle units (EX: 1h 0m 1s)  
 				if (dirty) bfr.Add(spr);
-				if (seg < 10) bfr.Add_byte(Byte_ascii.Num_0);	// 0 pad
+				if (seg < 10) bfr.Add_byte(AsciiByte.Num0);	// 0 pad
 				bfr.Add_long_variable(seg).Add(segs[i]);
 				dirty = true;
 			}

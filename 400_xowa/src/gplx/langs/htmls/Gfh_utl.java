@@ -13,16 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
-import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.langs.htmls.encoders.*;
-import gplx.langs.htmls.entitys.*;
+package gplx.langs.htmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Err;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.String_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.langs.htmls.entitys.Gfh_entity_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Gfh_utl {// TS:Gfo_url_encoder is TS
 	private static final Gfo_url_encoder encoder_id = Gfo_url_encoder_.Id;
 	public static String Encode_id_as_str(byte[] key) {return String_.new_u8(Encode_id_as_bry(key));}
 	public static byte[] Encode_id_as_bry(byte[] key) {
 		Bry_bfr tmp_bfr = Bry_bfr_.Get();
 		try {
-			byte[] escaped = Escape_html_as_bry(tmp_bfr, key, Bool_.N, Bool_.N, Bool_.N, Bool_.Y, Bool_.Y);
+			byte[] escaped = Escape_html_as_bry(tmp_bfr, key, BoolUtl.N, BoolUtl.N, BoolUtl.N, BoolUtl.Y, BoolUtl.Y);
 			return encoder_id.Encode(escaped);
 		} finally {tmp_bfr.Mkr_rls();}
 	}
@@ -46,8 +60,8 @@ public class Gfh_utl {// TS:Gfo_url_encoder is TS
 					dirty = true;
 				}
 				switch (quote_byte) {
-					case Byte_ascii.Apos: 	bfr.Add(Gfh_entity_.Apos_num_bry); break;
-					case Byte_ascii.Quote: 	bfr.Add(Gfh_entity_.Quote_bry); break;
+					case AsciiByte.Apos: 	bfr.Add(Gfh_entity_.Apos_num_bry); break;
+					case AsciiByte.Quote: 	bfr.Add(Gfh_entity_.Quote_bry); break;
 					default: 				throw Err_.new_unhandled(quote_byte);
 				}
 			}
@@ -82,11 +96,11 @@ public class Gfh_utl {// TS:Gfo_url_encoder is TS
 		for (int i = bgn; i < end; i++) {
 			byte b = bry[i];
 			switch (b) {
-				case Byte_ascii.Lt: 	if (escape_lt)		escaped = Gfh_entity_.Lt_bry; break;
-				case Byte_ascii.Gt: 	if (escape_gt)		escaped = Gfh_entity_.Gt_bry; break;
-				case Byte_ascii.Amp:	if (escape_amp)		escaped = Gfh_entity_.Amp_bry; break;
-				case Byte_ascii.Quote:	if (escape_quote)	escaped = Gfh_entity_.Quote_bry; break;
-				case Byte_ascii.Apos:	if (escape_apos)	escaped = Gfh_entity_.Apos_num_bry; break;
+				case AsciiByte.Lt: 	if (escape_lt)		escaped = Gfh_entity_.Lt_bry; break;
+				case AsciiByte.Gt: 	if (escape_gt)		escaped = Gfh_entity_.Gt_bry; break;
+				case AsciiByte.Amp:	if (escape_amp)		escaped = Gfh_entity_.Amp_bry; break;
+				case AsciiByte.Quote:	if (escape_quote)	escaped = Gfh_entity_.Quote_bry; break;
+				case AsciiByte.Apos:	if (escape_apos)	escaped = Gfh_entity_.Apos_num_bry; break;
 				default:
 					if (dirty || write_to_bfr)
 						bfr.Add_byte(b);
@@ -112,16 +126,16 @@ public class Gfh_utl {// TS:Gfo_url_encoder is TS
 			return dirty ? bfr.To_bry_and_clear() : bry;
 	}
 	private static final Btrie_slim_mgr unescape_trie = Btrie_slim_mgr.ci_a7()
-	.Add_bry_byte(Gfh_entity_.Lt_bry		, Byte_ascii.Lt)
-	.Add_bry_byte(Gfh_entity_.Gt_bry		, Byte_ascii.Gt)
-	.Add_bry_byte(Gfh_entity_.Amp_bry		, Byte_ascii.Amp)
-	.Add_bry_byte(Gfh_entity_.Quote_bry	, Byte_ascii.Quote)
-	.Add_bry_byte(Gfh_entity_.Apos_num_bry	, Byte_ascii.Apos)
+	.Add_bry_byte(Gfh_entity_.Lt_bry		, AsciiByte.Lt)
+	.Add_bry_byte(Gfh_entity_.Gt_bry		, AsciiByte.Gt)
+	.Add_bry_byte(Gfh_entity_.Amp_bry		, AsciiByte.Amp)
+	.Add_bry_byte(Gfh_entity_.Quote_bry	, AsciiByte.Quote)
+	.Add_bry_byte(Gfh_entity_.Apos_num_bry	, AsciiByte.Apos)
 	;
 	public static String Unescape_as_str(String src) {
 		Bry_bfr bfr = Bry_bfr_.Reset(255);
 		byte[] bry = Bry_.new_u8(src);
-		Unescape(Bool_.Y, bfr, bry, 0, bry.length, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y);
+		Unescape(BoolUtl.Y, bfr, bry, 0, bry.length, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y);
 		return bfr.To_str_and_clear();
 	}
 	public static byte[] Unescape(boolean write_to_bfr, Bry_bfr bfr, byte[] bry, int bgn, int end, boolean escape_lt, boolean escape_gt, boolean escape_amp, boolean escape_quote, boolean escape_apos) {
@@ -142,11 +156,11 @@ public class Gfh_utl {// TS:Gfo_url_encoder is TS
 				byte unescaped_byte = unescaped_bval.Val();
 				boolean unescape = false;
 				switch (unescaped_byte) {
-					case Byte_ascii.Lt: 	if (escape_lt)		unescape = true; break;
-					case Byte_ascii.Gt: 	if (escape_gt)		unescape = true; break;
-					case Byte_ascii.Amp:	if (escape_amp)		unescape = true; break;
-					case Byte_ascii.Quote:	if (escape_quote)	unescape = true; break;
-					case Byte_ascii.Apos:	if (escape_apos)	unescape = true; break;
+					case AsciiByte.Lt: 	if (escape_lt)		unescape = true; break;
+					case AsciiByte.Gt: 	if (escape_gt)		unescape = true; break;
+					case AsciiByte.Amp:	if (escape_amp)		unescape = true; break;
+					case AsciiByte.Quote:	if (escape_quote)	unescape = true; break;
+					case AsciiByte.Apos:	if (escape_apos)	unescape = true; break;
 				}
 				if (unescape) {
 					if (!dirty) {
@@ -194,7 +208,7 @@ public class Gfh_utl {// TS:Gfo_url_encoder is TS
 		for (int i = 0; i < len; ++i) {
 			String line_str = lines[i];
 			byte[] line_bry = Bry_.new_u8(line_str);
-			Bry_.Replace_all_direct(line_bry, Byte_ascii.Apos, Byte_ascii.Quote, 0, line_bry.length);
+			Bry_.Replace_all_direct(line_bry, AsciiByte.Apos, AsciiByte.Quote, 0, line_bry.length);
 			if (i != 0) bfr.Add_byte_nl();
 			bfr.Add(line_bry);
 		}

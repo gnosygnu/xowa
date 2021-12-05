@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.xmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.xmls; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Xpath_ {
 	public static XmlNdeList SelectAll(XmlNde owner, String xpath) {return Select(owner, xpath, Xpath_Args.all_());}
 	public static XmlNde SelectFirst(XmlNde owner, String xpath) {
@@ -38,7 +39,7 @@ public class Xpath_ {
 		return rv;
 	}
 	static void TraverseSubs(XmlNde owner, String[] parts, int depth, XmlNdeList_cls_list results, Xpath_Args args) {
-		int partsLen = Array_.Len(parts);
+		int partsLen = ArrayUtl.Len(parts);
 		if (depth == partsLen) return;
 		String name = parts[depth];
 		XmlNdeList subNdes = owner.SubNdes(); int count = subNdes.Count();

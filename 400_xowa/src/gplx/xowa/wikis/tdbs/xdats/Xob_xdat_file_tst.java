@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.xdats; import gplx.*;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*; import gplx.core.strings.*; import gplx.xowa.wikis.tdbs.hives.*;
 public class Xob_xdat_file_tst {
 	@Test public void Find() {
@@ -76,7 +78,7 @@ public class Xob_xdat_file_tst {
 		Tfds.Eq_str_lines(expd, String_.new_a7(Xob_xdat_file.Rebuid_header(Bry_.new_a7(orig), Bry_.new_a7("\n"))));		
 	}
 	Bry_bfr tmp = Bry_bfr_.New();
-	private void tst_Sort(Xob_xdat_file rdr, gplx.core.lists.ComparerAble comparer, String expd) {
+	private void tst_Sort(Xob_xdat_file rdr, ComparerAble comparer, String expd) {
 		rdr.Sort(tmp, comparer);
 		Chk_file(rdr, expd);
 	}
@@ -97,7 +99,7 @@ public class Xob_xdat_file_tst {
 		Tfds.Eq_str_lines(expd, actl);		
 	}
 	private void tst_Find(Xob_xdat_file rdr, String find, int expd, boolean exact) {
-		rdr.Find(itm, Bry_.new_u8(find), 2, Byte_ascii.Nl, exact);
+		rdr.Find(itm, Bry_.new_u8(find), 2, AsciiByte.Nl, exact);
 		int id = Bry_.To_int_or(Bry_.Mid(itm.Itm_bry(), 0, 1), -1);
 			Tfds.Eq(expd, id);
 	}

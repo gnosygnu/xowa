@@ -13,15 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.envs.*;
-import gplx.langs.htmls.encoders.*;
-import gplx.xowa.files.repos.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.imgs.*;
+package gplx.xowa.files;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.files.imgs.Xof_img_mode_;
+import gplx.xowa.files.repos.Xof_itm_ttl_;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.files.repos.Xof_repo_tid_;
 public class Xof_url_bldr {
 	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(400);
 	private final Gfo_url_encoder encoder_src_http = Gfo_url_encoder_.New__http_url().Make(); // NOTE: changed from new_html_href_mw_ to new_url_ on 2012-11-19; issues with A%2Cb becoming A%252Cb
 	private byte[] ttl; private byte[] md5; private Xof_ext ext; private boolean file_is_thumb; private int file_w;
-	private double time = Xof_lnki_time.Null; private int page = Xof_lnki_page.Null; private byte time_dlm = Byte_ascii.At;
+	private double time = Xof_lnki_time.Null; private int page = Xof_lnki_page.Null; private byte time_dlm = AsciiByte.At;
 	private byte repo_tid;
 	private byte[] root; private byte dir_spr; private boolean fsys_is_wnt; private boolean wmf_dir_hive; private boolean wmf_protocol_is_file; private int md5_dir_depth; private byte[] area;
 	public Xof_url_bldr Root_(byte[] v) {root = v; return this;}
@@ -40,18 +50,18 @@ public class Xof_url_bldr {
 	}
 	public Xof_url_bldr Init_for_src_file(Xof_repo_itm repo, byte mode, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
 		this.repo_tid = repo.Tid();
-		this.wmf_dir_hive = Bool_.Y; this.wmf_protocol_is_file = repo.Tarball();
+		this.wmf_dir_hive = BoolUtl.Y; this.wmf_protocol_is_file = repo.Tarball();
 		this.dir_spr = repo.Dir_spr(); this.root = repo.Root_bry(); this.area = repo.Mode_names()[mode];
 		this.ttl = repo.Gen_name_src(tmp_bfr, ttl); this.md5 = md5; this.ext = ext;
 		this.file_is_thumb = mode == Xof_img_mode_.Tid__thumb; this.file_w = file_w; this.time = time; this.page = page;
 		return this;
 	}
 	public Xof_url_bldr Init_for_trg_file(Xof_repo_itm repo, byte mode, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-		return Init(repo.Tid(), Bool_.N, Bool_.N, repo.Dir_spr(), repo.Root_bry()
+		return Init(repo.Tid(), BoolUtl.N, BoolUtl.N, repo.Dir_spr(), repo.Root_bry()
 			, repo.Mode_names()[mode], repo.Dir_depth(), repo.Gen_name_trg(tmp_bfr, ttl, md5, ext), md5, ext, mode, file_w, time, page);
 	}
 	public Xof_url_bldr Init_for_trg_html(Xof_repo_itm repo, byte mode, byte[] ttl, byte[] md5, Xof_ext ext, int file_w, double time, int page) {
-		return Init(repo.Tid(), Bool_.N, Bool_.N, Byte_ascii.Slash, repo.Root_http()
+		return Init(repo.Tid(), BoolUtl.N, BoolUtl.N, AsciiByte.Slash, repo.Root_http()
 			, repo.Mode_names()[mode], repo.Dir_depth(), repo.Gen_name_trg(tmp_bfr, ttl, md5, ext), md5, ext, mode, file_w, time, page);
 	}
 	private Xof_url_bldr Init(byte repo_tid, boolean wmf_dir_hive, boolean wmf_protocol_is_file, byte dir_spr
@@ -129,8 +139,8 @@ public class Xof_url_bldr {
 		if (Xof_lnki_time.Null_n(time))
 			tmp_bfr.Add_byte(time_dlm).Add_str_a7(Xof_lnki_time.X_str(time));				// add time					EX: "@5"
 		else if (page != Xof_lnki_page.Null)
-			tmp_bfr.Add_byte(Byte_ascii.Dash).Add_int_variable(page);						// add page					EX: "-5"
-		tmp_bfr.Add_byte(Byte_ascii.Dot);													// add .					EX: "."
+			tmp_bfr.Add_byte(AsciiByte.Dash).Add_int_variable(page);						// add page					EX: "-5"
+		tmp_bfr.Add_byte(AsciiByte.Dot);													// add .					EX: "."
 		if (file_is_thumb)
 			tmp_bfr.Add(ext.Ext_view());													// add view_ext				EX: ".png"
 		else
@@ -147,9 +157,9 @@ public class Xof_url_bldr {
 				tmp_bfr.Add_int_variable(file_w);											// add file_w;				EX: "220"; PAGE:en.w:Alice_Brady; DATE:2015-08-06
 				tmp_bfr.Add(Bry_px_dash);													// add px;					EX: "px-"
 				if (Xof_lnki_time.Null_n(time))
-					tmp_bfr.Add(Bry_seek).Add_str_a7(Xof_lnki_time.X_str(time)).Add_byte(Byte_ascii.Dash);// add seek;		EX: "seek%3D5-"
+					tmp_bfr.Add(Bry_seek).Add_str_a7(Xof_lnki_time.X_str(time)).Add_byte(AsciiByte.Dash);// add seek;		EX: "seek%3D5-"
 				else
-					tmp_bfr.Add_byte(Byte_ascii.Dash);										// add mid;					EX: "-"; NOTE: was "mid-"; DATE:2015-08-06
+					tmp_bfr.Add_byte(AsciiByte.Dash);										// add mid;					EX: "-"; NOTE: was "mid-"; DATE:2015-08-06
 				break;
 			case Xof_ext_.Id_tif:
 			case Xof_ext_.Id_tiff:
@@ -182,10 +192,10 @@ public class Xof_url_bldr {
 			int file_view_id = Xof_ext_.Id_view(file_ext_id);
 			switch (file_view_id) {
 				case Xof_ext_.Id_png:
-					tmp_bfr.Add_byte(Byte_ascii.Dot).Add(Xof_ext_.Bry_png);                   // add .png;			EX: "A.svg" -> "A.svg.png"		NOTE: MediaWiki always adds as lowercase
+					tmp_bfr.Add_byte(AsciiByte.Dot).Add(Xof_ext_.Bry_png);                   // add .png;			EX: "A.svg" -> "A.svg.png"		NOTE: MediaWiki always adds as lowercase
 					break;
 				case Xof_ext_.Id_jpg:                                                         // add .jpg			EX: "A.tif" -> "A.tif.jpg"		NOTE: MediaWiki always adds as lowercase
-					tmp_bfr.Add_byte(Byte_ascii.Dot).Add(Xof_ext_.Bry_jpg);
+					tmp_bfr.Add_byte(AsciiByte.Dot).Add(Xof_ext_.Bry_jpg);
 					break;
 			}
 		}
@@ -197,7 +207,7 @@ public class Xof_url_bldr {
 		else {
 			tmp_bfr.Add(bry_page);															// add "lossy-page"			EX: "lossy-page"
 			tmp_bfr.Add_int_variable(page);													// add page					EX: 123
-			tmp_bfr.Add_byte(Byte_ascii.Dash);												// add -					EX: "-"
+			tmp_bfr.Add_byte(AsciiByte.Dash);												// add -					EX: "-"
 		}
 	}
 	private Xof_url_bldr Clear() {
@@ -220,7 +230,7 @@ public class Xof_url_bldr {
 	, Bry_lossy_page1 = Bry_.new_a7("lossy-page1-"), Bry_page1 = Bry_.new_a7("page1-"), Bry_seek = Bry_.new_a7("seek%3D");
 	public static Xof_url_bldr new_v2() {
 		Xof_url_bldr rv = new Xof_url_bldr();
-		rv.time_dlm = Byte_ascii.Dash;
+		rv.time_dlm = AsciiByte.Dash;
 		return rv;
 	}
 }

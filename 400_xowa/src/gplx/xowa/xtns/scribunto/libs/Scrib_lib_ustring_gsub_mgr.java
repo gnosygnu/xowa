@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Char_;
 import gplx.Double_;
 import gplx.Err_;
@@ -33,7 +33,7 @@ import gplx.String_;
 import gplx.Type_;
 import gplx.langs.regxs.Regx_group;
 import gplx.langs.regxs.Regx_match;
-import gplx.objects.strings.unicodes.Ustring_;
+import gplx.objects.strings.unicodes.UstringUtl;
 import gplx.xowa.xtns.scribunto.Scrib_core;
 import gplx.xowa.xtns.scribunto.Scrib_kv_utl_;
 import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
@@ -70,7 +70,7 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 		this.limit = args.Cast_int_or(3, -1);
 
 		// do repl
-		String repl = Scrib_pattern_matcher.New(core.Page_url()).Gsub(this, Ustring_.New_codepoints(src_str), pat_str, 0);
+		String repl = Scrib_pattern_matcher.New(core.Page_url()).Gsub(this, UstringUtl.NewCodepoints(src_str), pat_str, 0);
 		return rslt.Init_many_objs(repl, repl_count);
 	}
 	private byte Identify_repl(Object repl_obj) {
@@ -114,16 +114,16 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 				for (int i = 0; i < len; i++) {
 					byte b = repl_bry[i];
 					switch (b) {
-						case Byte_ascii.Percent: {
+						case AsciiByte.Percent: {
 							++i;
 							if (i == len)	// % at end of stream; just add %;
 								tmp_bfr.Add_byte(b);							
 							else {
 								b = repl_bry[i];
 								switch (b) {
-									case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-									case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-										int idx = b - Byte_ascii.Num_0;
+									case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+									case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+										int idx = b - AsciiByte.Num0;
 										// REF.MW: https://github.com/wikimedia/mediawiki-extensions-Scribunto/blob/master/includes/engines/LuaCommon/UstringLibrary.php#L785-L796
 										// NOTE: 0 means take result; REF.MW:if ($x === '0'); return $m[0]; PAGE:Wikipedia:Wikipedia_Signpost/Templates/Voter/testcases; DATE:2015-08-02
 										if (idx == 0)
@@ -141,11 +141,11 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 											throw Err_.new_wo_type("invalid capture index %" + Char_.To_str(b) + " in replacement String");
 										}
 										break;
-									case Byte_ascii.Percent:
-										tmp_bfr.Add_byte(Byte_ascii.Percent);
+									case AsciiByte.Percent:
+										tmp_bfr.Add_byte(AsciiByte.Percent);
 										break;
 									default:	// not a number; add literal
-										tmp_bfr.Add_byte(Byte_ascii.Percent);
+										tmp_bfr.Add_byte(AsciiByte.Percent);
 										tmp_bfr.Add_byte(b);	
 										break;
 								}
@@ -197,7 +197,7 @@ public class Scrib_lib_ustring_gsub_mgr { // THREAD.UNSAFE:LOCAL_VALUES
 						Regx_group grp = grps[i];
 
 						// anypos will create @offset arg; everything else creates a @match arg based on grp; FOOTNOTE:CAPTURES
-						boolean anyposExists = any_pos && i < capt_ary_len && Bool_.Cast(capt_ary[i].Val());
+						boolean anyposExists = any_pos && i < capt_ary_len && BoolUtl.Cast(capt_ary[i].Val());
 						Object val = null;
 						if (anyposExists) {
 							// emptyCapture ("anypos" or `()`) must pass integer position; must normalize to base-1 b/c lua callbacks expect base-1 arguments, not base-0; ISSUE#:726; DATE:2020-05-17;

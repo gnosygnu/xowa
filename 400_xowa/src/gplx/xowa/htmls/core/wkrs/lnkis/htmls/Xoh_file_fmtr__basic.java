@@ -13,11 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import gplx.core.brys.*; import gplx.core.brys.fmtrs.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.makes.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.files.*;	
-import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_fmt;
+import gplx.String_;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.core.wkrs.bfr_args.Bfr_arg__hatr_id;
+import gplx.xowa.htmls.core.wkrs.imgs.atrs.Xoh_img_cls_;
 public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 	private final Xoh_arg_img_core img_atrs = new Xoh_arg_img_core__basic(); 
 	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(128);
@@ -55,7 +64,7 @@ public class Xoh_file_fmtr__basic implements Xoh_file_fmtr {
 
 	public byte[] Bld_thumb_part_img(Xoh_wtr_ctx hctx, Xoae_page page, byte[] src, Xof_file_itm xfer_itm, int uid, byte[] lnki_ttl, byte[] a_href, byte[] img_src, byte[] img_alt) {
 		byte[] a_title_atr = Gfh_atr_.Make(tmp_bfr, Gfh_atr_.Bry__title, xfer_itm.Lnki_ttl());
-		Add_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, a_href, Bool_.N, Xoh_lnki_consts.Tid_a_cls_image
+		Add_full_img(tmp_bfr, hctx, page, src, xfer_itm, uid, a_href, BoolUtl.N, Xoh_lnki_consts.Tid_a_cls_image
 			, Xoh_lnki_consts.Tid_a_rel_none, a_title_atr
 			, Xoh_file_fmtr__basic.Escape_xowa_title(lnki_ttl)	// NOTE: must use lnki_ttl, not xfer_itm.Lnki_ttl(); 1st observes case-sensitivity; EX:"a.ogv"; PAGE:de.d:fappieren DATE:2016-06-23
 			, xfer_itm.Html_w(), xfer_itm.Html_h(), img_src, img_alt, Xoh_img_cls_.Tid__none, null);

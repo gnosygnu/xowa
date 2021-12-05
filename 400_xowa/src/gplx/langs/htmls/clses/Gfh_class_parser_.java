@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.clses; import gplx.*; import gplx.langs.*; import gplx.langs.htmls.*;
+package gplx.langs.htmls.clses;
+import gplx.langs.htmls.*;
 import gplx.langs.htmls.docs.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfh_class_parser_ {
 	public static void Parse(Gfh_tag tag, Gfh_class_parser_wkr wkr) {
 		Gfh_atr atr = tag.Atrs__get_by_or_empty(Gfh_atr_.Bry__class);
@@ -26,9 +28,9 @@ public class Gfh_class_parser_ {
 		int pos = src_bgn;
 		while (true) {
 			boolean pos_is_last = pos == src_end;
-			byte b = pos_is_last ? Byte_ascii.Space : src[pos];
+			byte b = pos_is_last ? AsciiByte.Space : src[pos];
 			switch (b) {
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:						
+				case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 					if (tmp_bgn != -1) { // ignore empty atrs
 						if (!wkr.On_cls(src, atr_idx, src_bgn, src_end, tmp_bgn, tmp_end))
 							pos_is_last = true;

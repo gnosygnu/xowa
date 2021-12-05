@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys.evals; import gplx.*; import gplx.core.*; import gplx.core.brys.*;
+package gplx.core.brys.evals; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*; import gplx.core.tests.*;
 public class Bry_eval_mgr__tst {
 	private final Bry_eval_mgr__fxt fxt = new Bry_eval_mgr__fxt();
@@ -42,7 +43,7 @@ class Bry_eval_wkr__test implements Bry_eval_wkr {
 class Bry_eval_wkr__concat implements Bry_eval_wkr {
 	public String Key() {return "concat";}
 	public void Resolve(Bry_bfr rv, byte[] src, int src_bgn, int src_end) {
-		byte[][] ary = Bry_split_.Split(src, src_bgn, src_end, Byte_ascii.Pipe, false);
+		byte[][] ary = Bry_split_.Split(src, src_bgn, src_end, AsciiByte.Pipe, false);
 		for (byte[] itm : ary) {
 			rv.Add(itm);
 		}

@@ -17,7 +17,7 @@ package gplx.langs.mustaches;
 
 import gplx.Bry_;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err;
 import gplx.Err_;
 import gplx.Io_mgr;
@@ -64,7 +64,7 @@ public class Mustache_tkn_parser {
 			int rhs_bgn = Bry_find_.Find_fwd(src, tkn_def.Variable_rhs, lhs_end, src_end);	// next "}}"
 			if (rhs_bgn == Bry_find_.Not_found) throw Fail(lhs_bgn, "unclosed tag");		// fail if no "}}"
 			int rhs_end = rhs_bgn + tkn_def.Variable_rhs_len;
-			if (tkn_data.rhs_bgn_chk != Byte_ascii.Null) {
+			if (tkn_data.rhs_bgn_chk != AsciiByte.Null) {
 				if (src[rhs_bgn] != tkn_data.rhs_bgn_chk) throw Fail(lhs_end, "invalid check byte");
 				++rhs_end;	// skip the chk_byte; note that bottom of function will skip "}}" by adding +2 
 			}
@@ -127,9 +127,9 @@ public class Mustache_tkn_parser {
 		while (pos > stop) {
 			byte b = src[pos];
 			switch (b) {
-				case Byte_ascii.Tab:
-				case Byte_ascii.Space:	--pos; break;
-				case Byte_ascii.Nl:		return pos + 1;	// 1 char after \n
+				case AsciiByte.Tab:
+				case AsciiByte.Space:	--pos; break;
+				case AsciiByte.Nl:		return pos + 1;	// 1 char after \n
 				default:				return -1;
 			}
 		}
@@ -140,9 +140,9 @@ public class Mustache_tkn_parser {
 		while (pos < txt_end) {
 			byte b = src[pos];
 			switch (b) {
-				case Byte_ascii.Tab:
-				case Byte_ascii.Space:	++pos; break;
-				case Byte_ascii.Nl:		return pos;
+				case AsciiByte.Tab:
+				case AsciiByte.Space:	++pos; break;
+				case AsciiByte.Nl:		return pos;
 				default:				return -1;
 			}
 		}
@@ -159,7 +159,7 @@ class Mustache_tkn_data {
 		tid = b;
 		parse_grp = ws_ignore = false;
 		lhs_end_adj = 1;
-		rhs_bgn_chk = Byte_ascii.Null;
+		rhs_bgn_chk = AsciiByte.Null;
 		switch (b) {
 			default:								lhs_end_adj = 0; tid = Mustache_tkn_def.Variable; break;
 			case Mustache_tkn_def.Comment:

@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.sites; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Site_namespacealias_itm implements To_str_able {
 	public Site_namespacealias_itm(int id, byte[] alias) {
 		this.id = id; this.alias = alias;
-		this.key = Bry_.Add_w_dlm(Byte_ascii.Pipe, Int_.To_bry(id), alias);
+		this.key = Bry_.Add_w_dlm(AsciiByte.Pipe, Int_.To_bry(id), alias);
 	}
 	public byte[] Key() {return key;} private final byte[] key;
 	public int Id() {return id;} private final int id;

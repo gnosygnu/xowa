@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.mediawiki.includes.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
 import gplx.xowa.mediawiki.includes.linkers.*;
@@ -758,7 +760,7 @@ class XomwLinkHolderList {
 	public void Add(int key, XomwLinkHolderItem item) {
 		if (key >= ary_max) {
 			int new_max = ary_max * 2;
-			ary = (XomwLinkHolderItem[])Array_.Resize(ary, new_max);
+			ary = (XomwLinkHolderItem[])ArrayUtl.Resize(ary, new_max);
 			ary_max = new_max;
 		}
 		ary[key] = item;

@@ -13,10 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.xwikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.net.*; import gplx.core.brys.fmtrs.*;
+package gplx.xowa.wikis.xwikis; import gplx.*;
+import gplx.objects.lists.CompareAble;
+import gplx.core.brys.fmtrs.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*; import gplx.xowa.wikis.domains.*;
-public class Xow_xwiki_itm implements gplx.CompareAble {
+public class Xow_xwiki_itm implements CompareAble {
 	private final boolean show_in_sitelangs_base;
 	public Xow_xwiki_itm(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry, byte[] domain_name, byte[] abrv_wm) {
 		this.key_bry = key_bry; this.key_str = String_.new_u8(key_bry); 
@@ -47,7 +49,7 @@ public class Xow_xwiki_itm implements gplx.CompareAble {
 	private static boolean Calc_show_in_sitelangs(byte[] key_bry, byte[] url_fmt, int lang_id, int domain_tid, byte[] domain_bry) {
 		key_bry = Xow_domain_itm_.Alt_domain__get_subdomain_by_lang(key_bry);	// handle "nb" as alias for "no.wikipedia.org"; PAGE: nn.w:; DATE:2015-12-04
 		int key_len = key_bry.length;
-		boolean key_matches_domain_bgn = Bry_.Match(domain_bry, 0, key_len, key_bry) && key_len + 1 < domain_bry.length && domain_bry[key_len] == Byte_ascii.Dot;	// key + . matches start of domain; EX: "en" and "en.wikipedia.org"
+		boolean key_matches_domain_bgn = Bry_.Match(domain_bry, 0, key_len, key_bry) && key_len + 1 < domain_bry.length && domain_bry[key_len] == AsciiByte.Dot;	// key + . matches start of domain; EX: "en" and "en.wikipedia.org"
 		return	lang_id != Xol_lang_stub_.Id__unknown		// valid lang code
 			&&	domain_tid != Xow_domain_tid_.Tid__commons	// commons should never be considered an xwiki_lang; EX:[[commons:A]] PAGE:species:Scarabaeidae; DATE:2014-09-10
 			&&	Bry_.Len_gt_0(url_fmt)						// url_fmt exists

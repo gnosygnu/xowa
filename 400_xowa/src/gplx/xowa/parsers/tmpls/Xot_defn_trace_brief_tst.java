@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import org.junit.*; import gplx.core.strings.*;
 public class Xot_defn_trace_brief_tst {
 	Xot_defn_trace_fxt fxt = new Xot_defn_trace_fxt();
@@ -40,7 +42,7 @@ class Xot_defn_trace_fxt {
 		Xop_root_tkn root = ctx.Tkn_mkr().Root(src);
 		fxt.Parser().Parse_page_all_clear(root, ctx, ctx.Tkn_mkr(), src);
 		ctx.Defn_trace().Print(src, tmp);
-		String[] actl_ary = String_.Split(tmp.To_str_and_clear(), (char)Byte_ascii.Nl);
+		String[] actl_ary = String_.Split(tmp.To_str_and_clear(), (char)AsciiByte.Nl);
 		Tfds.Eq_ary(expd_ary, actl_ary);
 	}	private Bry_bfr tmp = Bry_bfr_.New();
 	String[] To_str(Xot_defn_trace_itm_brief[] ary) {

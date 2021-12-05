@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.math; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 class Xomath_subst_mgr {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.cs();
 	private final Bry_bfr tmp = Bry_bfr_.New();
@@ -38,11 +39,11 @@ class Xomath_subst_mgr {
 				int nxt = i + itm_src_len;
 				if (nxt < src_len) {
 					switch (src[nxt]) {	// NOTE: for now, manually list characters that are viable word end characters; NOTE: my knowledge of TeX is nil
-  							case Byte_ascii.Space:
-						case Byte_ascii.Curly_end:
-						case Byte_ascii.Brack_end:
-						case Byte_ascii.Underline:
-						case Byte_ascii.Nl: // NOTE: needed for \begin\n
+  							case AsciiByte.Space:
+						case AsciiByte.CurlyEnd:
+						case AsciiByte.BrackEnd:
+						case AsciiByte.Underline:
+						case AsciiByte.Nl: // NOTE: needed for \begin\n
 							break;
 						default:
 							if (itm.Whole_word()) {
@@ -63,7 +64,7 @@ class Xomath_subst_mgr {
 
 		// add closing dollar-sign tokens for inserted_dollars
 		for (int i = 0; i < inserted_dollars; i++)
-			tmp.Add_byte(Byte_ascii.Dollar);
+			tmp.Add_byte(AsciiByte.Dollar);
 
 		return tmp.To_bry_and_clear_and_trim();
 	}

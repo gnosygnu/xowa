@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.itms; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
-import gplx.core.gfo_ndes.*; import gplx.core.type_xtns.*;
+package gplx.dbs.sqls.itms; import gplx.*;
+import gplx.core.type_xtns.*;
+import gplx.objects.lists.CompareAbleUtl;
 public abstract class Sql_select_fld {
 	public Sql_select_fld(String tbl, String fld, String alias) {
 		this.Tbl = tbl; this.Fld = fld; this.Alias = alias;
@@ -31,8 +32,8 @@ public abstract class Sql_select_fld {
 	public static Sql_select_fld Wildcard	= Sql_select_fld_wild.Instance;
 	public static Sql_select_fld New_count	(String tbl, String fld, String alias)		{return new Sql_select_fld_count(tbl, fld, alias);}
 	public static Sql_select_fld New_sum	(String tbl, String fld, String alias)		{return new Sql_select_fld_sum(tbl, fld, alias);}
-	public static Sql_select_fld New_min	(String tbl, String fld, String alias)		{return new Sql_select_fld_minMax(CompareAble_.Less, tbl, fld, alias);}
-	public static Sql_select_fld New_max	(String tbl, String fld, String alias)		{return new Sql_select_fld_minMax(CompareAble_.More, tbl, fld, alias);}
+	public static Sql_select_fld New_min	(String tbl, String fld, String alias)		{return new Sql_select_fld_minMax(CompareAbleUtl.Less, tbl, fld, alias);}
+	public static Sql_select_fld New_max	(String tbl, String fld, String alias)		{return new Sql_select_fld_minMax(CompareAbleUtl.More, tbl, fld, alias);}
 	public static String Bld_tbl_w_fld(String tbl, String fld) {return tbl == null ? fld : tbl + "." + fld;}
 
 	// tdb related functions

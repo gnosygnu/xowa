@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.cases; import gplx.*;
-import org.junit.*; import gplx.core.strings.*;
+package gplx.xowa.langs.cases;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.Hash_adp_bry;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.strings.String_bldr;
+import gplx.core.strings.String_bldr_;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Xol_case_mgr_tst {		
 	@Before public void init() {fxt.Clear();} private Xol_case_mgr_fxt fxt = new Xol_case_mgr_fxt();
 	@Test public void Mw_parse() {
@@ -38,7 +50,7 @@ public class Xol_case_mgr_tst {
 		fxt.Lower("Ι", "ι");	// PURPOSE:test reversal; PAGE:en.d:ἀρχιερεύς DATE:2014-09-02
 	}
 	@Test  public void Turkish_redirect() {	// PURPOSE: lowercase redirect should match uppercase for asymmetric brys; PAGE:tr.w:Zvishavane DATE:2015-09-07
-		Hash_adp_bry hash = Hash_adp_bry.c__u8(Bool_.N, Xol_case_mgr_.U8());
+		Hash_adp_bry hash = Hash_adp_bry.c__u8(BoolUtl.N, Xol_case_mgr_.U8());
 		byte[] upper = Bry_.new_u8("YÖNLENDİRME");
 		byte[] lower = Bry_.new_u8("yönlendirme");
 		hash.Add(upper, upper);								// add upper to hash
@@ -78,8 +90,8 @@ class Xol_case_mgr_fxt {
 		case_mgr = Xol_case_mgr_.U8();
 		return this;
 	}
-	public Xol_case_mgr_fxt Upper(String raw_str, String expd) {return Case_build(Bool_.Y, raw_str, expd);}
-	public Xol_case_mgr_fxt Lower(String raw_str, String expd) {return Case_build(Bool_.N, raw_str, expd);}
+	public Xol_case_mgr_fxt Upper(String raw_str, String expd) {return Case_build(BoolUtl.Y, raw_str, expd);}
+	public Xol_case_mgr_fxt Lower(String raw_str, String expd) {return Case_build(BoolUtl.N, raw_str, expd);}
 	public Xol_case_mgr_fxt Case_build(boolean upper, String raw_str, String expd) {
 		byte[] raw = Bry_.new_u8(raw_str);
 		byte[] actl = case_mgr.Case_build(upper, raw, 0, raw.length);
@@ -135,8 +147,8 @@ class Xol_case_mgr_fxt {
 			sb.Add_fmt("s:{0}:\"{1}\";", itm_len, itm);
 		}
 	}
-	public void Test_reuse_1st_upper(String raw)				{Test_reuse_1st_upper(raw, null, Bool_.Y);}
-	public void Test_reuse_1st_upper(String raw, String expd)	{Test_reuse_1st_upper(raw, expd, Bool_.N);}
+	public void Test_reuse_1st_upper(String raw)				{Test_reuse_1st_upper(raw, null, BoolUtl.Y);}
+	public void Test_reuse_1st_upper(String raw, String expd)	{Test_reuse_1st_upper(raw, expd, BoolUtl.N);}
 	private void Test_reuse_1st_upper(String raw, String expd, boolean expd_is_same) {
 		byte[] raw_bry = Bry_.new_u8(raw);
 		byte[] actl_bry = case_mgr.Case_reuse_1st_upper(raw_bry);

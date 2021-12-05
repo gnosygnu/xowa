@@ -14,6 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.installs; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.strings.AsciiByte;
 public class Xoi_mirror_parser {
 	public String[] Parse(String raw_str) {
 		if (String_.Len_eq_0(raw_str)) return String_.Ary_empty;
@@ -29,7 +31,7 @@ public class Xoi_mirror_parser {
 			if (Bry_.Match(date, CONST_date_parent_dir)) continue;
 			int date_pos_last = date.length - 1;
 			if (date_pos_last == -1) return String_.Ary_empty;
-			if (date[date_pos_last] == Byte_ascii.Slash) date = Bry_.Mid(date, 0, date_pos_last);	// trim trailing /; EX: "20130101/" -> "20130101" 
+			if (date[date_pos_last] == AsciiByte.Slash) date = Bry_.Mid(date, 0, date_pos_last);	// trim trailing /; EX: "20130101/" -> "20130101"
 			rv.Add(String_.new_u8(date));
 		}
 		return rv.ToStrAry();
@@ -38,7 +40,7 @@ public class Xoi_mirror_parser {
 		int len = ary.length;
 		for (int i = len - 1; i > -1; i--) {
 			String itm = ary[i];			
-			if (CompareAble_.Is(CompareAble_.Less_or_same, itm, comp)) return itm;
+			if (CompareAbleUtl.Is(CompareAbleUtl.Less_or_same, itm, comp)) return itm;
 		}
 		return "";
 	}

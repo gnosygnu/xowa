@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.stores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.stores; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.xtns.wbases.core.*;
 public class Wbase_pid_mgr {	// EX: "en|road_map" -> 15 ("Property:P15")
 	private final Wdata_wiki_mgr wbase_mgr;
@@ -35,7 +37,7 @@ public class Wbase_pid_mgr {	// EX: "en|road_map" -> 15 ("Property:P15")
 		if (!enabled) return Wbase_pid.Id_null;
 
 		// make key; EX: "en|road_map"
-		byte[] pid_key = Bry_.Add(lang_key, Byte_ascii.Pipe_bry, pid_name);
+		byte[] pid_key = Bry_.Add(lang_key, AsciiByte.PipeBry, pid_name);
 
 		// get from cache
 		synchronized (cache)  {

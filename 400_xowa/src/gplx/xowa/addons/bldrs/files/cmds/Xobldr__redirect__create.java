@@ -13,19 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.langs.htmls.encoders.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.utils.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.addons.bldrs.files.dbs.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.Int_ary_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.files.dbs.Xob_redirect_tbl;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.cmds.Xob_dump_mgr_base;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.parsers.utils.Xop_redirect_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.dbs.Xodb_mgr_sql;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xobldr__redirect__create extends Xob_dump_mgr_base {		
 	private Db_conn conn; private Xob_redirect_tbl redirect_tbl;
 	private Xodb_mgr_sql db_mgr; private Xop_redirect_mgr redirect_mgr; private Gfo_url_encoder encoder;
 	public Xobldr__redirect__create(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki); this.Reset_db_y_();}
 	@Override public int[] Init_ns_ary() {return Int_ary_.New(Xow_ns_.Tid__file);}	// restrict to file ns
-	@Override public byte Init_redirect() {return Bool_.Y_byte;}					// restrict to redirects
+	@Override public byte Init_redirect() {return BoolUtl.YByte;}					// restrict to redirects
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
 		cfg_tbl.Delete_all();

@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.threads.poolables.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.hrefs.*;
+package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.threads.poolables.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnke_data implements Xoh_data_itm {
 	public int Tid() {return Xoh_hzip_dict_.Tid__lnke;}
@@ -34,7 +36,7 @@ public class Xoh_lnke_data implements Xoh_data_itm {
 	public boolean Title_exists() {return title_end > title_bgn;}
 	public void Clear() {
 		capt_exists = false;
-		lnke_tid = Byte_ascii.Max_7_bit;
+		lnke_tid = AsciiByte.Max7Bit;
 		src_bgn = src_end = href_bgn = href_end = capt_bgn = capt_end = auto_id = title_bgn = title_end = -1;
 	}
 	public void Init_by_decode(byte lnke_tid, int auto_id, int href_bgn, int href_end, int capt_bgn, int capt_end, boolean capt_exists, int title_bgn, int title_end) {
@@ -61,8 +63,8 @@ public class Xoh_lnke_data implements Xoh_data_itm {
 				capt_exists = true;
 				break;
 			case Xoh_lnke_dict_.Type__auto:
-				if (	src[capt_bgn]		== Byte_ascii.Brack_bgn								// is capt surround by bracks; EX: "[123]"
-					&&	src[capt_end - 1]	== Byte_ascii.Brack_end) {
+				if (	src[capt_bgn]		== AsciiByte.BrackBgn                                // is capt surround by bracks; EX: "[123]"
+					&&	src[capt_end - 1]	== AsciiByte.BrackEnd) {
 					int tmp_id = Bry_.To_int_or(src, capt_bgn + 1, capt_end - 1, -1);			// extract int; EX: "<a ...>[123]</a>"
 					if (tmp_id == -1)															// HTML tidy can reparent lnkes in strange ways; EX: "<a ...><b>[123]</b></a>" DATE:2015-08-25
 						capt_exists = true;

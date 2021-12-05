@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.*; import gplx.gfui.controls.standards.*; import gplx.xowa.htmls.hrefs.*;
+package gplx.xowa.guis.views;
+import gplx.Bry_;
+import gplx.Gfo_usr_dlg;
+import gplx.String_;
+import gplx.gfui.controls.standards.Gfui_html;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
 public class Xog_win_itm__prog_href_mgr {
 	public static void Print(Xog_win_itm win) {	// PURPOSE: print href in prog box when in content editable mode
 		String href = win.Active_html_box().Html_js_eval_proc_as_str(Xog_js_procs.Selection__get_active_for_editable_mode, Gfui_html.Atr_href, "");// get selected href from html_box
@@ -32,6 +40,6 @@ public class Xog_win_itm__prog_href_mgr {
 		Xoa_url url = Xoa_url.blank();
 		app.Html__href_parser().Parse_as_url(url, Bry_.new_u8(href), wiki, page.Ttl().Page_txt());
 		if (!app.Mode().Tid_is_http()) // if http_server, do not write to progress bar, else will show up in console output (b/c gui_wkr for http_server is console); DATE:2018-11-11
-			usr_dlg.Prog_direct(String_.new_u8(url.To_bry(!show_status_url, Bool_.Y)));
+			usr_dlg.Prog_direct(String_.new_u8(url.To_bry(!show_status_url, BoolUtl.Y)));
 	}
 }

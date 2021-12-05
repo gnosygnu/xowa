@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.sites; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Site_extension_itm implements To_str_able {
 	public Site_extension_itm(byte[] type, byte[] name, byte[] namemsg, byte[] description, byte[] descriptionmsg, byte[] author, byte[] url, byte[] version
 		, byte[] vcs_system, byte[] vcs_version, byte[] vcs_url, byte[] vcs_date, byte[] license_name, byte[] license, byte[] credits) {
 		this.type = type; this.name = name; this.namemsg = namemsg; this.description = description; this.descriptionmsg = descriptionmsg; this.author = author; this.url = url; this.version = version;
 		this.vcs_system = vcs_system; this.vcs_version = vcs_version; this.vcs_url = vcs_url; this.vcs_date = vcs_date; this.license_name = license_name; this.license = license; this.credits = credits;
-		this.key = Bry_.Add_w_dlm(Byte_ascii.Pipe, type, name);
+		this.key = Bry_.Add_w_dlm(AsciiByte.Pipe, type, name);
 	}
 	public byte[] Key() {return key;} private final byte[] key;
 	public byte[] Type() {return type;} private final byte[] type;

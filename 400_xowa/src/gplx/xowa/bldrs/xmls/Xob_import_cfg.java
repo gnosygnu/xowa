@@ -13,18 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.envs.*;
-import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.xowa.bldrs.wkrs.*;
+package gplx.xowa.bldrs.xmls;
+import gplx.Err_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.core.envs.Process_adp;
+import gplx.core.ios.Io_stream_rdr_process;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.core.ios.streams.Io_stream_rdr_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
+import gplx.xowa.bldrs.wkrs.Xob_io_utl_;
 public class Xob_import_cfg {
 	public Xob_import_cfg(Xowe_wiki wiki) {this.wiki = wiki;} private Xowe_wiki wiki; private boolean src_fil_is_bz2 = true;
 	public byte Category_version() {return category_version;} public Xob_import_cfg Category_version_(byte v) {category_version = v; return this;} private byte category_version = Xoa_ctg_mgr.Version_1;
 	public long Src_rdr_len() {return src_rdr_len;} private long src_rdr_len;
 	public Io_url Src_fil_xml() {return src_fil_xml;}
 	public Io_url Src_fil() {return src_fil;} private Io_url src_fil;
-	public Xob_import_cfg Src_fil_xml_(Io_url v) {src_fil_xml = v; src_fil_is_bz2 = Bool_.N; return this;} private Io_url src_fil_xml;
-	public Xob_import_cfg Src_fil_bz2_(Io_url v) {src_fil_bz2 = v; src_fil_is_bz2 = Bool_.Y; return this;} private Io_url src_fil_bz2;
+	public Xob_import_cfg Src_fil_xml_(Io_url v) {src_fil_xml = v; src_fil_is_bz2 = BoolUtl.N; return this;} private Io_url src_fil_xml;
+	public Xob_import_cfg Src_fil_bz2_(Io_url v) {src_fil_bz2 = v; src_fil_is_bz2 = BoolUtl.Y; return this;} private Io_url src_fil_bz2;
 	public Io_url Src_dir() {
 		if		(src_fil_xml == null && src_fil_bz2 == null)	return wiki.Fsys_mgr().Root_dir();
 		else if (src_fil_xml != null)							return src_fil_xml.OwnerDir();

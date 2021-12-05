@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.fmtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.fmtrs;
+import gplx.objects.lists.ComparerAble;
 public interface Gfo_sort_able {
-	void Sort(gplx.core.lists.ComparerAble comparer);
+	void Sort(ComparerAble comparer);
 }

@@ -13,13 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.core.btries.*;
+package gplx.xowa.parsers;
+import gplx.Bry_;
+import gplx.core.btries.Btrie_fast_mgr;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import org.junit.Test;
 public class Xop_parser_tst {
 	private final Xop_parser_fxt fxt = new Xop_parser_fxt();
 	@Test public void Parse_to_src_end() {// if empty array, return 0, else IndexError; PAGE:commons.wikimedia.org/wiki/File:England_in_the_UK_and_Europe.svg; ISSUE#:668; DATE:2020-02-17
-		fxt.Test__Parse_to_src_end("", 0, Bool_.Y, 0);
+		fxt.Test__Parse_to_src_end("", 0, BoolUtl.Y, 0);
 	}
 }
 class Xop_parser_fxt {

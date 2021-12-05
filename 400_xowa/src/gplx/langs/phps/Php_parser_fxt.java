@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.phps; import gplx.*;
 import gplx.core.tests.*; import gplx.core.log_msgs.*;
+import gplx.objects.strings.AsciiByte;
 class Php_parser_fxt {
 	Php_tkn_factory tkn_factory = new Php_tkn_factory();
 	Php_parser parser = new Php_parser();
@@ -30,8 +31,8 @@ class Php_parser_fxt {
 	public Php_tkn_comment_chkr tkn_comment_mult(int bgn, int end) 	{return new Php_tkn_comment_chkr(bgn, end).Comment_tid_(Php_tkn_comment.Tid_mult);}
 	public Php_tkn_comment_chkr tkn_comment_slash(int bgn, int end) {return new Php_tkn_comment_chkr(bgn, end).Comment_tid_(Php_tkn_comment.Tid_slash);}
 	public Php_tkn_comment_chkr tkn_comment_hash(int bgn, int end) 	{return new Php_tkn_comment_chkr(bgn, end).Comment_tid_(Php_tkn_comment.Tid_hash);}
-	public Php_tkn_quote_chkr tkn_quote_apos(int bgn, int end) 		{return new Php_tkn_quote_chkr(bgn, end).Quote_tid_(Byte_ascii.Apos);}
-	public Php_tkn_quote_chkr tkn_quote_quote(int bgn, int end) 	{return new Php_tkn_quote_chkr(bgn, end).Quote_tid_(Byte_ascii.Quote);}
+	public Php_tkn_quote_chkr tkn_quote_apos(int bgn, int end) 		{return new Php_tkn_quote_chkr(bgn, end).Quote_tid_(AsciiByte.Apos);}
+	public Php_tkn_quote_chkr tkn_quote_quote(int bgn, int end) 	{return new Php_tkn_quote_chkr(bgn, end).Quote_tid_(AsciiByte.Quote);}
 	public Php_parser_fxt Msg(Gfo_msg_itm itm, int bgn, int end) {
 		log_mgr_chkr.Add_itm(itm, bgn, end);
 		return this;
@@ -125,11 +126,11 @@ class Php_tkn_quote_chkr extends Php_tkn_chkr_base {
 	public Php_tkn_quote_chkr(int src_bgn, int src_end) {this.Src_rng_(src_bgn, src_end);}
 	@Override public Class<?> TypeOf() {return Php_tkn_quote.class;}
 	@Override public byte Tkn_tid() {return Php_tkn_.Tid_quote;}
-	public Php_tkn_quote_chkr Quote_tid_(byte v) {this.quote_tid = v; return this;} private byte quote_tid = Byte_ascii.Null;
+	public Php_tkn_quote_chkr Quote_tid_(byte v) {this.quote_tid = v; return this;} private byte quote_tid = AsciiByte.Null;
 	@Override public int Chk_tkn(Tst_mgr mgr, String path, Php_tkn actl_obj) {
 		Php_tkn_quote actl = (Php_tkn_quote)actl_obj;
 		int rv = 0;
-		rv += mgr.Tst_val(quote_tid == Byte_ascii.Null, path, "quote_tid", quote_tid, actl.Quote_tid()); 
+		rv += mgr.Tst_val(quote_tid == AsciiByte.Null, path, "quote_tid", quote_tid, actl.Quote_tid());
 		return rv;
 	}
 }

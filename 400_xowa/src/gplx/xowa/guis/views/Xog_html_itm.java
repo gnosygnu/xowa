@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.views; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.gfui.*; import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
+package gplx.xowa.guis.views; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.*; import gplx.xowa.guis.*;
+import gplx.core.primitives.*;
+import gplx.gfui.kits.core.*; import gplx.gfui.controls.elems.*; import gplx.gfui.controls.standards.*;
 import gplx.xowa.guis.menus.*; import gplx.xowa.guis.menus.dom.*; import gplx.xowa.guis.cbks.js.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.*;
+import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.js.*; import gplx.xowa.htmls.heads.*; import gplx.xowa.wikis.pages.*;
 import gplx.xowa.htmls.*;
 public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page_html_source {
 	private Xoae_app app; private final Object thread_lock = new Object();
@@ -108,7 +110,7 @@ public class Xog_html_itm implements Xog_js_wkr, Gfo_invk, Gfo_evt_itm, Xoh_page
 		Gfo_invk_.Invk_by_msg(cmd_sync, Invk_html_elem_delete, m);
 	}
 	public String	Html_elem_atr_get_str(String id, String atr_key)		{return html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_as_obj, id, atr_key);}
-	public boolean		Html_elem_atr_get_bool(String id, String atr_key)		{return Bool_.Parse(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_to_str, id, atr_key));}
+	public boolean		Html_elem_atr_get_bool(String id, String atr_key)		{return BoolUtl.Parse(html_box.Html_js_eval_proc_as_str(Xog_js_procs.Doc__atr_get_to_str, id, atr_key));}
 	
 
 	public void Html_atr_set(String elem_id, String atr_key, String atr_val) {

@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
 import org.junit.*;
 public class z015_GfmlDocPos_tst {
 	GfmlDocPos root = GfmlDocPos_.Root;
@@ -31,19 +32,19 @@ public class z015_GfmlDocPos_tst {
 	@Test public void CompareTo_same() {
 		GfmlDocPos lhs = root.NewDown(0);
 		GfmlDocPos rhs = root.NewDown(0);
-		tst_CompareTo(lhs, rhs, CompareAble_.Same);
+		tst_CompareTo(lhs, rhs, CompareAbleUtl.Same);
 	}
 	@Test public void CompareTo_diffIndex() {
 		GfmlDocPos lhs = root.NewDown(0);
 		GfmlDocPos rhs = root.NewDown(1);
-		tst_CompareTo(lhs, rhs, CompareAble_.Less);
-		tst_CompareTo(rhs, lhs, CompareAble_.More);
+		tst_CompareTo(lhs, rhs, CompareAbleUtl.Less);
+		tst_CompareTo(rhs, lhs, CompareAbleUtl.More);
 	}
 	@Test public void CompareTo_diffLevel() {
 		GfmlDocPos lhs = root;
 		GfmlDocPos rhs = root.NewDown(0);
-		tst_CompareTo(lhs, rhs, CompareAble_.Less);
-		tst_CompareTo(rhs, lhs, CompareAble_.More);
+		tst_CompareTo(lhs, rhs, CompareAbleUtl.Less);
+		tst_CompareTo(rhs, lhs, CompareAbleUtl.More);
 	}
 	void tst_Path(GfmlDocPos pos, String expdPath) {Tfds.Eq(expdPath, pos.Path());}
 	void tst_CompareTo(GfmlDocPos lhs, GfmlDocPos rhs, int expd) {Tfds.Eq(expd, lhs.compareTo(rhs));}

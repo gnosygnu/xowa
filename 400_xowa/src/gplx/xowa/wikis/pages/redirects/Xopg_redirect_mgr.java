@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.redirects; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
+package gplx.xowa.wikis.pages.redirects; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.specials.*;
 public class Xopg_redirect_mgr {
 	private final List_adp itms = List_adp_.New();
@@ -32,9 +34,9 @@ public class Xopg_redirect_mgr {
 			bfr.Add(url_bry);
 			for (int i = 0; i < url_args_len; ++i) {
 				Keyval url_arg = url_args[i];
-				bfr.Add_byte(i == 0 ? Byte_ascii.Question : Byte_ascii.Amp);
+				bfr.Add_byte(i == 0 ? AsciiByte.Question : AsciiByte.Amp);
 				bfr.Add_str_u8(url_arg.Key());
-				bfr.Add_byte(Byte_ascii.Eq);
+				bfr.Add_byte(AsciiByte.Eq);
 				bfr.Add_obj(url_arg.Val());
 			}
 			url_bry = bfr.To_bry_and_clear();

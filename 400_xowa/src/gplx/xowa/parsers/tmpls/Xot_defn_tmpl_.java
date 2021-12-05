@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tmpls;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
@@ -36,7 +36,7 @@ public class Xot_defn_tmpl_ {
 
 		// DATE:2014-06-21: always uppercase 1st; EX:{{navbox -> "Template:Navbox"; PAGE:en.w:Achilles
 		// DATE:2020-08-09: ISSUE#:784; uppercase non-ascii chars; NOTE: do not reuse byte array, else will cause Xot_defn_trace tests to fail
-		frame_ttl = Xol_case_cvt.Upper_1st(frame_ttl, 0, frame_ttl.length, Bool_.N);
+		frame_ttl = Xol_case_cvt.Upper_1st(frame_ttl, 0, frame_ttl.length, BoolUtl.N);
 
 		// DATE:2014-08-14: always use spaces
 		frame_ttl = Xoa_ttl.Replace_unders(frame_ttl);

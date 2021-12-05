@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.pages.*; import gplx.xowa.addons.wikis.pages.syncs.*; import gplx.xowa.addons.wikis.pages.syncs.core.*;
+package gplx.xowa.addons.wikis.pages.syncs.core.parsers; import gplx.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.wikis.domains.*;
 public class Xosync_hdoc_parser {
 	public byte[] Parse_hdoc(Xow_domain_itm wiki_domain, byte[] page_url, List_adp imgs, byte[] src) {
@@ -28,7 +28,7 @@ public class Xosync_hdoc_parser {
 		// loop src
 		while (true) {
 			// look for "<"
-			int find = Bry_find_.Find_fwd(src, Byte_ascii.Angle_bgn, cur, src_len);
+			int find = Bry_find_.Find_fwd(src, AsciiByte.AngleBgn, cur, src_len);
 
 			// "<" not found; add rest of src and stop
 			if (find == Bry_find_.Not_found) {
@@ -52,14 +52,14 @@ public class Xosync_hdoc_parser {
 
 		// "<" is at EOS
 		if (nxt_pos == src_len) {
-			bfr.Add_byte(Byte_ascii.Angle_bgn);
+			bfr.Add_byte(AsciiByte.AngleBgn);
 			return src_len;
 		}
 
 		// check if head or tail; EX: "<a>" vs "</a>"
 		byte nxt_byte = src[nxt_pos];
 		// skip comment; needed else comment may gobble up rest of text; see test; DATE:2016-09-10
-		if (nxt_byte == Byte_ascii.Bang) {	// assume comment; EX:"<!--"
+		if (nxt_byte == AsciiByte.Bang) {	// assume comment; EX:"<!--"
 			int end_comm = Bry_find_.Move_fwd(src, Gfh_tag_.Comm_end, nxt_pos);
 			if (end_comm == Bry_find_.Not_found) {
 				Gfo_usr_dlg_.Instance.Warn_many("", "", "end comment not found; src=~{0}", String_.new_u8(src));
@@ -67,7 +67,7 @@ public class Xosync_hdoc_parser {
 			}
 			return end_comm;
 		}
-		Gfh_tag cur = nxt_byte == Byte_ascii.Slash ? tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__any) : tag_rdr.Tag__move_fwd_head();
+		Gfh_tag cur = nxt_byte == AsciiByte.Slash ? tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__any) : tag_rdr.Tag__move_fwd_head();
 		if (cur.Tag_is_tail()) {}
 		else {
 			int cur_name_id = cur.Name_id();
@@ -111,7 +111,7 @@ public class Xosync_hdoc_parser {
 	public static void Write_img_tag(Bry_bfr bfr, Gfh_tag img_tag, int uid, byte[] img_src_val) {
 		// rewrite <img> tag with custom img_src_val
 		int atrs_len = img_tag.Atrs__len();
-		bfr.Add(Byte_ascii.Angle_bgn_bry);
+		bfr.Add(AsciiByte.AngleBgnBry);
 		bfr.Add(Gfh_tag_.Bry__img);
 		if (uid != -1) {
 			Gfh_atr_.Add(bfr, Gfh_atr_.Bry__id, Bry_.new_a7("xoimg_" + Int_.To_str(uid)));
@@ -121,7 +121,7 @@ public class Xosync_hdoc_parser {
 			// if atr is src use img_src_val; EX: ' src="//upload.wikimedia.org/..."' -> ' src="xowa:/file/..."
 			Gfh_atr_.Add(bfr, atr.Key(), Bry_.Eq(atr.Key(), Gfh_atr_.Bry__src) ? img_src_val : atr.Val());
 		}
-		bfr.Add(Byte_ascii.Angle_end_bry);
+		bfr.Add(AsciiByte.AngleEndBry);
 	}
 	private static final byte[] Bry__span__edit_section = Bry_.new_a7("mw-editsection");
 }

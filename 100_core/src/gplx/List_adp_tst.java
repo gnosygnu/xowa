@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.arrays.ArrayUtl;
 import org.junit.*;
 public class List_adp_tst {
 	@Before public void setup() {
@@ -145,12 +146,12 @@ public class List_adp_tst {
 		list_AddMany("0", "1");
 		String[] ary = (String[])list.ToAry(String.class);
 		Tfds.Eq_nullNot(ary);
-		Tfds.Eq(2, Array_.Len(ary));
+		Tfds.Eq(2, ArrayUtl.Len(ary));
 	}
 	@Test public void XtoAry_empty() {
 		String[] ary = (String[])list.ToAry(String.class);
 		Tfds.Eq_nullNot(ary);
-		Tfds.Eq(0, Array_.Len(ary));
+		Tfds.Eq(0, ArrayUtl.Len(ary));
 	}
 	@Test public void Shuffle() {
 		for (int i = 0; i < 25; i++)
@@ -190,7 +191,7 @@ public class List_adp_tst {
 	}
 	List_adp_tst run_ClearAndAdd(String... ary) {
 		list.Clear();
-		for (int i = 0; i < Array_.Len(ary); i++) {
+		for (int i = 0; i < ArrayUtl.Len(ary); i++) {
 			String val = ary[i];
 			list.Add(val);
 		}
@@ -203,14 +204,14 @@ public class List_adp_tst {
 		return this;
 	}
 	void list_AddMany(String... ary) {
-		for (int i = 0; i < Array_.Len(ary); i++) {
+		for (int i = 0; i < ArrayUtl.Len(ary); i++) {
 			String val = ary[i];
 			list.Add(val);
 		}
 	}
 	void tst_Enumerator(String... expd) {
 		int pos = 0;
-		int expdLength = Array_.Len(expd);
+		int expdLength = ArrayUtl.Len(expd);
 		for (int i = 0; i < expdLength; i++) {
 			String val = expd[i];
 			Tfds.Eq(expd[pos++], val);

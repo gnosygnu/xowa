@@ -15,15 +15,17 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.xndes; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
 public class Xop_xnde_tag {
 	public Xop_xnde_tag(int id, String name_str) {	// NOTE: should only be used by Xop_xnde_tag_
 		this.id = id;
 		this.name_bry = Bry_.new_a7(name_str);
 		this.name_str = name_str;
 		this.name_len = name_bry.length;
-		this.xtn_bgn_tag = Bry_.Add(Byte_ascii.Angle_bgn_bry, name_bry);
+		this.xtn_bgn_tag = Bry_.Add(AsciiByte.AngleBgnBry, name_bry);
 		this.xtn_end_tag = Bry_.Add(Xop_xnde_tag_.Bry__end_tag_bgn, name_bry);	// always force endtag; needed for <noinclude>
-		this.xtn_end_tag_tmp = new byte[xtn_end_tag.length]; Array_.Copy(xtn_end_tag, xtn_end_tag_tmp);
+		this.xtn_end_tag_tmp = new byte[xtn_end_tag.length]; ArrayUtl.Copy(xtn_end_tag, xtn_end_tag_tmp);
 	}
 	public int Id() {return id;} private final int id;
 	public byte[] Name_bry() {return name_bry;} private final byte[] name_bry;

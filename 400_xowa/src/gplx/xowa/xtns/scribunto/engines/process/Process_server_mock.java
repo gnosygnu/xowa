@@ -13,7 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
+package gplx.xowa.xtns.scribunto.engines.process;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Keyval;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.Type_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.scribunto.engines.Scrib_server;
 public class Process_server_mock implements Scrib_server {
 	private List_adp rsps = List_adp_.New(); private int rsps_idx = 0;
 	public void Init(String... process_args) {}
@@ -61,7 +72,7 @@ class Process_server_mock_rcvd_val implements Process_server_mock_rcvd {
 	private void Bld_recursive(Bry_bfr bfr, int depth, Keyval[] ary) {
 		int len = ary.length;
 		for (int i = 0; i < len; i++) {
-			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
+			if (i != 0) bfr.Add_byte(AsciiByte.Semic);
 			Keyval kv = ary[i];
 			Object kv_val = kv.Val();
 			if (kv_val == null) {
@@ -71,15 +82,15 @@ class Process_server_mock_rcvd_val implements Process_server_mock_rcvd {
 			Class<?> kv_val_type = kv_val.getClass();
 			boolean kv_val_is_array = Type_.Eq(kv_val_type, Keyval[].class);
 			if (print_key && !kv_val_is_array)
-				bfr.Add_str_u8(kv.Key()).Add_byte(Byte_ascii.Colon);
-			if		(Type_.Eq(kv_val_type, Bool_.Cls_ref_type))
-				bfr.Add(Bool_.Cast(kv_val) ? gplx.langs.jsons.Json_itm_.Bry__true : gplx.langs.jsons.Json_itm_.Bry__false);
+				bfr.Add_str_u8(kv.Key()).Add_byte(AsciiByte.Colon);
+			if		(Type_.Eq(kv_val_type, BoolUtl.ClsRefType))
+				bfr.Add(BoolUtl.Cast(kv_val) ? gplx.langs.jsons.Json_itm_.Bry__true : gplx.langs.jsons.Json_itm_.Bry__false);
 			else if	(kv_val_is_array) {
 				Keyval[] sub = (Keyval[])kv_val;
-				if (sub.length == 0) {bfr.Add_byte(Byte_ascii.Curly_bgn).Add_byte(Byte_ascii.Curly_end);}
+				if (sub.length == 0) {bfr.Add_byte(AsciiByte.CurlyBgn).Add_byte(AsciiByte.CurlyEnd);}
 				else {
 					bfr.Add_byte_nl();
-					bfr.Add_byte_repeat(Byte_ascii.Space, (depth + 1) * 2);
+					bfr.Add_byte_repeat(AsciiByte.Space, (depth + 1) * 2);
 					Bld_recursive(bfr, depth + 1, (Keyval[])kv_val);
 				}
 			}

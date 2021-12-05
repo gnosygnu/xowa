@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.vnts;
+import gplx.Bry_bfr;
+import gplx.objects.primitives.BoolUtl;
 class Vnt_flag_code_mgr {
 	private final boolean[] ary = new boolean[Ary_len]; private final static int Ary_len = Vnt_flag_code_.Tid__max;
 	public int Count() {return count;} private int count = 0;
@@ -27,13 +29,13 @@ class Vnt_flag_code_mgr {
 		this.Set_y(tid);
 		++count;
 	}
-	public void Set_y(int tid) {ary[tid] = Bool_.Y;}
+	public void Set_y(int tid) {ary[tid] = BoolUtl.Y;}
 	public void Set_y_many(int... vals) {
 		int len = vals.length;
 		for (int i = 0; i < len; ++i)
-			ary[vals[i]] = Bool_.Y;
+			ary[vals[i]] = BoolUtl.Y;
 	}
-	public void Set_n(int tid) {ary[tid] = Bool_.N;}
+	public void Set_n(int tid) {ary[tid] = BoolUtl.N;}
 	public void Limit(int tid) {
 		for (int i = 0; i < Ary_len; ++i)
 			ary[i] = i == tid;

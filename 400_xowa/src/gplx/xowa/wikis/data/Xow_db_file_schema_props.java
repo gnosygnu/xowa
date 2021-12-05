@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.dbs.cfgs.*; import gplx.xowa.bldrs.infos.*;
+package gplx.xowa.wikis.data;
+import gplx.String_;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.objects.primitives.BoolUtl;
 public class Xow_db_file_schema_props {
 	Xow_db_file_schema_props(boolean search__word__page_count_exists, boolean wbase__qid__src_ttl_has_spaces) {
 		this.search__word__page_count_exists = search__word__page_count_exists;
@@ -22,9 +24,9 @@ public class Xow_db_file_schema_props {
 	}
 	public boolean Search__word__page_count_exists() {return search__word__page_count_exists;} private final boolean search__word__page_count_exists;
 	public boolean Wbase__qid__src_ttl_has_spaces() {return wbase__qid__src_ttl_has_spaces;} private final boolean wbase__qid__src_ttl_has_spaces;
-	public static Xow_db_file_schema_props make_() {return new Xow_db_file_schema_props(Bool_.Y, Bool_.N);}
+	public static Xow_db_file_schema_props make_() {return new Xow_db_file_schema_props(BoolUtl.Y, BoolUtl.N);}
 	public static Xow_db_file_schema_props load_(Db_cfg_tbl cfg_tbl, int tid, String version) {
-		boolean search__word__page_count_exists = cfg_tbl.Select_yn_or(Grp, Key__col_search_word_page_count, Bool_.N);
+		boolean search__word__page_count_exists = cfg_tbl.Select_yn_or(Grp, Key__col_search_word_page_count, BoolUtl.N);
 		boolean wbase__qid__src_ttl_has_spaces = String_.In(version, "2.4.2.1", "2.4.3.1", "2.4.3.2");
 		return new Xow_db_file_schema_props(search__word__page_count_exists, wbase__qid__src_ttl_has_spaces);
 	}

@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.dbs; import gplx.*;
-import gplx.dbs.cfgs.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.addons.wikis.searchs.dbs;
+import gplx.Ordered_hash;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.Xowd_core_db_props;
 public class Srch_db_mgr {
 	private final Xow_db_mgr db_mgr;
 	public Srch_db_mgr(Xow_db_mgr db_mgr) {
@@ -86,15 +91,15 @@ public class Srch_db_mgr {
 			Srch_link_tbl tbl__link = new Srch_link_tbl(search_db.Conn()); tbl__link.Create_tbl();
 			tbl__link__ary = new Srch_link_tbl[] {tbl__link};
 			Srch_link_reg_tbl tbl__lreg = new Srch_link_reg_tbl(search_db.Conn()); tbl__lreg.Create_tbl();
-			Tbl__link__ary__new(tbl__lreg, tbl__link__ary, db_mgr, 0, Bool_.N, search_db);
+			Tbl__link__ary__new(tbl__lreg, tbl__link__ary, db_mgr, 0, BoolUtl.N, search_db);
 		} else {
 			// many_db: put in 3 db;
 			Xow_db_file word_db = db_mgr.Dbs__make_by_tid(Srch_db_mgr_.Dbtid__search_core);				
 			tbl__word = new Srch_word_tbl(word_db.Conn()); tbl__word.Create_tbl();
 			tbl__link__ary = new Srch_link_tbl[2];
 			Srch_link_reg_tbl tbl__lreg = new Srch_link_reg_tbl(word_db.Conn()); tbl__lreg.Create_tbl();
-			Tbl__link__ary__new(tbl__lreg, tbl__link__ary, db_mgr, 0, Bool_.Y, null);
-			Tbl__link__ary__new(tbl__lreg, tbl__link__ary, db_mgr, 1, Bool_.N, null);
+			Tbl__link__ary__new(tbl__lreg, tbl__link__ary, db_mgr, 0, BoolUtl.Y, null);
+			Tbl__link__ary__new(tbl__lreg, tbl__link__ary, db_mgr, 1, BoolUtl.N, null);
 		}
 	}
 	public void Update_links(int ns_id, int old_id, int new_id) {

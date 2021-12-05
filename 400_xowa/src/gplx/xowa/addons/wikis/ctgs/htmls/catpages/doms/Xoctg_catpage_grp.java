@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.ComparerAble;
+import gplx.xowa.*;
 public class Xoctg_catpage_grp {
 	private Xoctg_catpage_itm[] itms = Xoctg_catpage_itm.Ary_empty;
 	private byte[] next_sortkey = Bry_.Empty;
@@ -30,7 +33,7 @@ public class Xoctg_catpage_grp {
 	public void Next_sortkey_(byte[] v) {this.next_sortkey = v;}
 	public void Itms_(Xow_wiki wiki, Xoctg_catpage_itm[] v) {
 		this.itms = v;
-		Array_.Sort(itms, new Xoctg_catpage_itm_sorter()); // NOTE: need to reorder for page_until b/c ORDER BY DESC
+		ArrayUtl.Sort(itms, new Xoctg_catpage_itm_sorter()); // NOTE: need to reorder for page_until b/c ORDER BY DESC
 
 		// make sortkey_handle
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
@@ -43,7 +46,7 @@ public class Xoctg_catpage_grp {
 	}
 
 }
-class Xoctg_catpage_itm_sorter implements gplx.core.lists.ComparerAble {
+class Xoctg_catpage_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoctg_catpage_itm lhs = (Xoctg_catpage_itm)lhsObj;
 		Xoctg_catpage_itm rhs = (Xoctg_catpage_itm)rhsObj;

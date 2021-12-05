@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.xmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.xmls; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 public class Xob_xml_parser_ {
 	public static Btrie_fast_mgr trie_() {
 		Btrie_fast_mgr rv = Btrie_fast_mgr.cs();
@@ -23,8 +24,8 @@ public class Xob_xml_parser_ {
 		trie_add(rv, Bry_title_bgn, Id_title_bgn); trie_add(rv, Bry_title_bgn_frag, Id_title_bgn_frag); trie_add(rv, Bry_title_end, Id_title_end);
 		trie_add(rv, Bry_timestamp_bgn, Id_timestamp_bgn); trie_add(rv, Bry_timestamp_bgn_frag, Id_timestamp_bgn_frag); trie_add(rv, Bry_timestamp_end, Id_timestamp_end);
 		trie_add(rv, Bry_text_bgn, Id_text_bgn); trie_add(rv, Bry_text_bgn_frag, Id_text_bgn_frag); trie_add(rv, Bry_text_end, Id_text_end);
-		trie_add(rv, Bry_amp, Id_amp, Byte_ascii.Amp); trie_add(rv, Bry_quot, Id_quot, Byte_ascii.Quote); trie_add(rv, Bry_gt, Id_gt, Byte_ascii.Gt); trie_add(rv, Bry_lt, Id_lt, Byte_ascii.Lt);
-		trie_add(rv, Bry_tab, Id_tab, Bry_tab_ent); trie_add(rv, Bry_cr_nl, Id_cr_nl, Byte_ascii.Nl); trie_add(rv, Bry_cr, Id_cr, Byte_ascii.Nl);
+		trie_add(rv, Bry_amp, Id_amp, AsciiByte.Amp); trie_add(rv, Bry_quot, Id_quot, AsciiByte.Quote); trie_add(rv, Bry_gt, Id_gt, AsciiByte.Gt); trie_add(rv, Bry_lt, Id_lt, AsciiByte.Lt);
+		trie_add(rv, Bry_tab, Id_tab, Bry_tab_ent); trie_add(rv, Bry_cr_nl, Id_cr_nl, AsciiByte.Nl); trie_add(rv, Bry_cr, Id_cr, AsciiByte.Nl);
 		return rv;
 	}
 	public static final byte[]

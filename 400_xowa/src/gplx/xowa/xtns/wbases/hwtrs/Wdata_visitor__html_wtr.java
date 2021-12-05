@@ -13,10 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.wbases.hwtrs;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.xtns.wbases.Wdata_prop_val_visitor;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_visitor;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_string;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_value;
 class Wdata_visitor__html_wtr implements Wbase_claim_visitor {
 	private Wdata_wiki_mgr wdata_mgr; private Wdata_hwtr_msgs msgs; private Wdata_lbl_mgr lbl_mgr;
 	private Xol_lang_itm lang;
@@ -41,13 +56,13 @@ class Wdata_visitor__html_wtr implements Wbase_claim_visitor {
 	}
 	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm) {
 		tmp_bfr.Add(itm.Text());
-		tmp_bfr.Add_byte(Byte_ascii.Space).Add_byte(Byte_ascii.Brack_bgn).Add(itm.Lang()).Add_byte(Byte_ascii.Brack_end);
+		tmp_bfr.Add_byte(AsciiByte.Space).Add_byte(AsciiByte.BrackBgn).Add(itm.Lang()).Add_byte(AsciiByte.BrackEnd);
 	}
 	public void Visit_quantity(Wbase_claim_quantity itm) {
 		Wdata_prop_val_visitor.Write_quantity(tmp_bfr, wdata_mgr, lang, itm.Amount(), itm.Lbound(), itm.Ubound(), itm.Unit());
 	}
 	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {
-		Wdata_prop_val_visitor.Write_geo(Bool_.Y, tmp_bfr, lbl_mgr, msgs, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());
+		Wdata_prop_val_visitor.Write_geo(BoolUtl.Y, tmp_bfr, lbl_mgr, msgs, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());
 	}
 	public void Visit_time(Wbase_claim_time itm) {
 		itm.Write_to_bfr(tmp_bfr, tmp_time_bfr, tmp_time_fmtr, msgs, ttl);

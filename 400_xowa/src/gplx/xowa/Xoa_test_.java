@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
-import gplx.dbs.*;
-import gplx.core.net.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.bldrs.infos.*;
+package gplx.xowa;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.core.net.Gfo_inet_conn_;
+import gplx.dbs.Db_conn_bldr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.bldrs.infos.Xob_info_session;
+import gplx.xowa.wikis.data.Xowd_core_db_props;
 public class Xoa_test_ {
-	public static boolean Db_skip()			{return Bool_.N;}
-	public static boolean Db_is_mem_dflt()		{return Bool_.Y;}
+	public static boolean Db_skip()			{return BoolUtl.N;}
+	public static boolean Db_is_mem_dflt()		{return BoolUtl.Y;}
 	public static void Db_init(Io_url sqlite_url) {Db_init(Db_is_mem_dflt(), sqlite_url);}
 	public static void Init__db__edit(Xowe_wiki wiki) {
 		Db__init__mem();

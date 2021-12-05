@@ -14,7 +14,9 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.strings.*; import gplx.langs.gfs.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Int_ {
 	// -------- BASELIB_COPY --------
 	public static final String Cls_val_name = "int";
@@ -138,13 +140,13 @@ public class Int_ {
 	}
 	public static int By_hex_byte(byte b) {
 		switch (b) {
-			case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-			case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				return b - Byte_ascii.Num_0;
-			case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E: case Byte_ascii.Ltr_F:
-				return b - Byte_ascii.Ltr_A + 10;
-			case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e: case Byte_ascii.Ltr_f:
-				return b - Byte_ascii.Ltr_a + 10;
+			case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+			case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+				return b - AsciiByte.Num0;
+			case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E: case AsciiByte.Ltr_F:
+				return b - AsciiByte.Ltr_A + 10;
+			case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e: case AsciiByte.Ltr_f:
+				return b - AsciiByte.Ltr_a + 10;
 			default:
 				return -1;
 		}
@@ -152,8 +154,8 @@ public class Int_ {
 
 	public static byte[] To_bry(int v) {return Bry_.new_a7(To_str(v));}
 	public static String To_str_fmt(int v, String fmt) {return new java.text.DecimalFormat(fmt).format(v);}
-	public static String To_str_pad_bgn_space(int val, int reqd_len)   {return To_str_pad(val, reqd_len, Bool_.Y, Byte_ascii.Space);}	// EX: 1, 3 returns "  1"
-	public static String To_str_pad_bgn_zero (int val, int reqd_len)   {return To_str_pad(val, reqd_len, Bool_.Y, Byte_ascii.Num_0);}	// EX: 1, 3 returns "001"
+	public static String To_str_pad_bgn_space(int val, int reqd_len)   {return To_str_pad(val, reqd_len, BoolUtl.Y, AsciiByte.Space);}	// EX: 1, 3 returns "  1"
+	public static String To_str_pad_bgn_zero (int val, int reqd_len)   {return To_str_pad(val, reqd_len, BoolUtl.Y, AsciiByte.Num0);}	// EX: 1, 3 returns "001"
 	private static String To_str_pad(int val, int reqd_len, boolean bgn, byte pad_chr) {
 		// get val_len and pad_len; exit early, if no padding needed
 		int val_len = DigitCount(val);
@@ -166,7 +168,7 @@ public class Int_ {
 
 		// handle negative numbers; EX: -1 -> "-001", not "00-1"
 		if (val < 0) {
-			bfr.Add_byte(Byte_ascii.Dash);
+			bfr.Add_byte(AsciiByte.Dash);
 			val *= -1;
 			--val_len;
 		}
@@ -180,7 +182,7 @@ public class Int_ {
 
 		return bfr.To_str();
 	}
-	public static String To_str_hex(int v) {return To_str_hex(Bool_.Y, Bool_.Y, v);}
+	public static String To_str_hex(int v) {return To_str_hex(BoolUtl.Y, BoolUtl.Y, v);}
 	public static String To_str_hex(boolean zero_pad, boolean upper, int v) {
 		String rv = Integer.toHexString(v); 
 		int rv_len = String_.Len(rv);
@@ -189,9 +191,9 @@ public class Int_ {
 	}
 
 	public static int Compare(int lhs, int rhs) {
-		if		(lhs == rhs) 	return CompareAble_.Same;
-		else if (lhs < rhs)		return CompareAble_.Less;
-		else 					return CompareAble_.More;
+		if		(lhs == rhs) 	return CompareAbleUtl.Same;
+		else if (lhs < rhs)		return CompareAbleUtl.Less;
+		else 					return CompareAbleUtl.More;
 	}
 	public static boolean In(int v, int comp0, int comp1) {return v == comp0 || v == comp1;}
 	public static boolean In(int v, int... ary) {

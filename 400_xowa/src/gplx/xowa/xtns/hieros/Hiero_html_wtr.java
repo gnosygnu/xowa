@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.hieros; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.hieros; import gplx.*;
 import gplx.core.brys.fmtrs.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.core.htmls.*;
 class Hiero_html_wtr {
 	private Hiero_phoneme_mgr phoneme_mgr;
 	private Bry_bfr temp_bfr = Bry_bfr_.Reset(255);		
@@ -130,7 +132,7 @@ class Hiero_html_wtr {
 	));
 	public byte[] Img_phoneme(Xoh_wtr_ctx hctx, byte[] img_cls, byte[] td_height, byte[] glyph_esc, byte[] code) {
 		byte[] code_esc = Gfh_utl.Escape_html_as_bry(temp_bfr, code);
-		byte[] img_title = temp_bfr.Add(code_esc).Add_byte_space().Add_byte(Byte_ascii.Brack_bgn).Add(glyph_esc).Add_byte(Byte_ascii.Brack_end).To_bry_and_clear(); // "~{code} [~{glyph}]"
+		byte[] img_title = temp_bfr.Add(code_esc).Add_byte_space().Add_byte(AsciiByte.BrackBgn).Add(glyph_esc).Add_byte(AsciiByte.BrackEnd).To_bry_and_clear(); // "~{code} [~{glyph}]"
 		return Img(hctx, img_cls, td_height, glyph_esc, code_esc, img_title);
 	}
 	public byte[] Img_file(Xoh_wtr_ctx hctx, byte[] img_cls, byte[] td_height, byte[] glyph_esc) {return Img(hctx, img_cls, td_height, glyph_esc, glyph_esc, glyph_esc);}

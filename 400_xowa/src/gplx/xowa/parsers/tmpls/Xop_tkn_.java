@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.objects.strings.AsciiByte;
 public class Xop_tkn_ {
 	public static final byte[] 
-		Lnki_bgn = new byte[] {Byte_ascii.Brack_bgn, Byte_ascii.Brack_bgn}
-	,	Lnki_end = new byte[] {Byte_ascii.Brack_end, Byte_ascii.Brack_end}
-	,	Anchor = new byte[] {Byte_ascii.Hash}
+		Lnki_bgn = new byte[] {AsciiByte.BrackBgn, AsciiByte.BrackBgn}
+	,	Lnki_end = new byte[] {AsciiByte.BrackEnd, AsciiByte.BrackEnd}
+	,	Anchor = new byte[] {AsciiByte.Hash}
 	;
 	public static final int Lnki_bgn_len = 2, Lnki_end_len = 2;
-	public static final byte Anchor_byte = Byte_ascii.Hash;
+	public static final byte Anchor_byte = AsciiByte.Hash;
 }

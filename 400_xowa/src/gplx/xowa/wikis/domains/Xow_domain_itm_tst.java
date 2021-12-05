@@ -13,8 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.wikis.domains;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Xow_domain_itm_tst {
 	private final Xow_domain_fxt fxt = new Xow_domain_fxt();
 	@Test public void Parse_en_wikipedia() 			{fxt.Test_parse("en.wikipedia.org"				, "en"				, "en"	, Xow_domain_tid_.Tid__wikipedia);}
@@ -44,7 +49,7 @@ class Xow_domain_fxt {
 		Tfds.Eq_str(expd_actl_lang, String_.new_a7((actl.Lang_actl_key())));
 		Tfds.Eq_int(expd_tid, actl.Domain_type_id());
 	}
-	public void Test__match_lang_y(String lang_code, String... domains) {Test__match_lang(Bool_.Y, lang_code, domains);}
+	public void Test__match_lang_y(String lang_code, String... domains) {Test__match_lang(BoolUtl.Y, lang_code, domains);}
 	public void Test__match_lang(boolean expd, String lang_key_str, String[] domains) {
 		int len = domains.length;
 		for (int i = 0; i < len; ++i) {

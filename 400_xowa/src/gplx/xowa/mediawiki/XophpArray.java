@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Char_;
@@ -118,8 +118,8 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	}
 	public Object Get_by_obj(Object key) {return Get_by(Object_.Xto_str_strict_or_null(key));}
 	public Object Get_by(int key) {return Get_by(Int_.To_str(key));}
-	public boolean Get_by_bool_or(String key, boolean or) {Object rv = this.Get_by(key); return rv == null ? or : Bool_.Cast(rv);}
-	public boolean Get_by_bool(String key) {return Bool_.Cast(this.Get_by(key));}
+	public boolean Get_by_bool_or(String key, boolean or) {Object rv = this.Get_by(key); return rv == null ? or : BoolUtl.Cast(rv);}
+	public boolean Get_by_bool(String key) {return BoolUtl.Cast(this.Get_by(key));}
 	public int Get_by_int_or(String key, int or) {Object rv = this.Get_by(key); return rv == null ? or : Int_.Cast(rv);}
 	public int Get_by_int(String key) {return Int_.Cast(this.Get_by(key));}
 	public XophpArray Xet_by_ary(String key) {
@@ -288,7 +288,7 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 	}
 
 	// DEPRECATE:use XophpArray
-	public static boolean popBoolOrN(List_adp list)           {return Bool_.Cast(List_adp_.Pop_or(list, false));}
+	public static boolean popBoolOrN(List_adp list)           {return BoolUtl.Cast(List_adp_.Pop_or(list, false));}
 	public static byte[] popBryOrNull(List_adp list)       {return (byte[])List_adp_.Pop_or(list, null);}
 	public static String[] array_keys_str(Ordered_hash array) {
 		int len = array.Len();
@@ -597,13 +597,13 @@ public class XophpArray<T> implements Bry_bfr_able, Iterable<T> {
 			boolean filter = false;
 			switch (flag) {
 				case ARRAY_FILTER_USE_VAL:
-					filter = Bool_.Cast(callback.Call(itm.Val()));
+					filter = BoolUtl.Cast(callback.Call(itm.Val()));
 					break;
 				case ARRAY_FILTER_USE_KEY:
-					filter = Bool_.Cast(callback.Call(itm.Key()));
+					filter = BoolUtl.Cast(callback.Call(itm.Key()));
 					break;
 				case ARRAY_FILTER_USE_BOTH:
-					filter = Bool_.Cast(callback.Call(itm.Key(), itm.Val()));
+					filter = BoolUtl.Cast(callback.Call(itm.Key(), itm.Val()));
 					break;
 			}
 			if (filter)

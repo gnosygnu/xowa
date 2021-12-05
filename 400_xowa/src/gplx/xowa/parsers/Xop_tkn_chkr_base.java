@@ -13,16 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
-import gplx.core.tests.*;
+package gplx.xowa.parsers;
+import gplx.Byte_;
+import gplx.String_;
+import gplx.core.tests.Tst_chkr;
+import gplx.core.tests.Tst_mgr;
+import gplx.objects.primitives.BoolUtl;
 public class Xop_tkn_chkr_base implements Tst_chkr {
 	public Class<?> TypeOf() {return Xop_tkn_itm.class;}
 	public byte Tkn_tid() {return Byte_.Max_value_127;}
 	public Xop_tkn_chkr_base TypeId_dynamic(int v) {typeId = Xop_tkn_itm_.Tid__names[v]; return this;} private String typeId = null;
 	public int Src_bgn() {return src_bgn;} private int src_bgn = -1;
 	public int Src_end() {return src_end;} private int src_end = -1;
-	public byte Ignore() {return ignore;} private Xop_tkn_chkr_base Ignore_(byte v) {ignore = v; return this;} private byte ignore = Bool_.__byte;
-	public Xop_tkn_chkr_base Ignore_y_() {return Ignore_(Bool_.Y_byte);}
+	public byte Ignore() {return ignore;} private Xop_tkn_chkr_base Ignore_(byte v) {ignore = v; return this;} private byte ignore = BoolUtl.NullByte;
+	public Xop_tkn_chkr_base Ignore_y_() {return Ignore_(BoolUtl.YByte);}
 	public Xop_tkn_chkr_base Src_rng_(int bgn, int end) {src_bgn = bgn; src_end = end; return this;} 
 	public String Raw() {return raw;} public Xop_tkn_chkr_base Raw_(String v) {raw = v; return this;} private String raw;
 	public String Raw_src() {return raw_src;} public Xop_tkn_chkr_base Raw_src_(String v) {raw_src = v; return this;} private String raw_src;
@@ -39,7 +43,7 @@ public class Xop_tkn_chkr_base implements Tst_chkr {
 	int Chk_basic(Tst_mgr mgr, String path, Xop_tkn_itm actl, int err) {
 		if (typeId == null) typeId = Xop_tkn_itm_.Tid__names[this.Tkn_tid()];
 		err += mgr.Tst_val(typeId == null, path, "typeId", typeId, Xop_tkn_itm_.Tid__names[actl.Tkn_tid()]);
-		if (ignore != Bool_.__byte) err += mgr.Tst_val(ignore == Bool_.__byte, path, "ignore", ignore == Bool_.Y_byte, actl.Ignore());	// "ignore !=" to skip comparison unless explicitly toggled
+		if (ignore != BoolUtl.NullByte) err += mgr.Tst_val(ignore == BoolUtl.NullByte, path, "ignore", ignore == BoolUtl.YByte, actl.Ignore());	// "ignore !=" to skip comparison unless explicitly toggled
 		err += mgr.Tst_val(src_bgn == -1, path, "src_bgn",  src_bgn, actl.Src_bgn());
 		err += mgr.Tst_val(src_end == -1, path, "src_end", src_end, actl.Src_end());
 		if (raw != null) {

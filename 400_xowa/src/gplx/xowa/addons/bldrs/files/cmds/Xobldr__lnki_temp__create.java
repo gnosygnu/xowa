@@ -13,26 +13,61 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.files.cmds; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.files.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.files.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.xndes.*;
-import gplx.xowa.htmls.core.bldrs.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wbases.*;
-import gplx.fsdb.meta.*; import gplx.xowa.files.fsdb.*; import gplx.fsdb.*;
-import gplx.xowa.langs.vnts.*; import gplx.xowa.parsers.vnts.*;
-import gplx.xowa.parsers.lnkis.files.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.addons.bldrs.files.dbs.*; import gplx.xowa.addons.bldrs.mass_parses.parses.*; import gplx.xowa.addons.bldrs.mass_parses.parses.utls.*;
-import gplx.xowa.addons.bldrs.wmdumps.imglinks.*;
+package gplx.xowa.addons.bldrs.files.cmds;
+import gplx.Byte_;
+import gplx.GfoMsg;
+import gplx.GfsCtx;
+import gplx.Int_ary_;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.fsdb.Fsdb_db_mgr__v2;
+import gplx.fsdb.Fsdb_db_mgr__v2_bldr;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.files.dbs.Xob_lnki_temp_tbl;
+import gplx.xowa.addons.bldrs.mass_parses.parses.Xow_wiki_utl_;
+import gplx.xowa.addons.bldrs.mass_parses.parses.utls.Xomp_lnki_temp_wkr;
+import gplx.xowa.addons.bldrs.wmdumps.imglinks.Xof_orig_wkr__img_links;
+import gplx.xowa.addons.bldrs.wmdumps.imglinks.Xof_orig_wkr__img_links_;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_db_file;
+import gplx.xowa.bldrs.cmds.Xob_dump_mgr_base;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.files.fsdb.Xof_fsdb_mgr__sql;
+import gplx.xowa.htmls.core.bldrs.Xob_hdump_bldr;
+import gplx.xowa.langs.vnts.Xol_vnt_mgr;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
+import gplx.xowa.parsers.logs.Xop_log_invoke_wkr;
+import gplx.xowa.parsers.logs.Xop_log_mgr;
+import gplx.xowa.parsers.logs.Xop_log_property_wkr;
+import gplx.xowa.parsers.vnts.Vnt_convert_lang;
+import gplx.xowa.wikis.Xow_page_tid;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.nss.Xow_ns_case_;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
+import gplx.xowa.xtns.scribunto.Scrib_xtn_mgr;
 public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx.xowa.parsers.lnkis.files.Xop_file_logger {
 	private Xob_lnki_temp_tbl tbl; private boolean wdata_enabled = true, xtn_ref_enabled = true, gen_html, gen_hdump, load_all_imglinks;
 	private Xop_log_invoke_wkr invoke_wkr; private Xop_log_property_wkr property_wkr;		
 	private boolean ns_file_is_case_match_all = true; private Xowe_wiki commons_wiki;
 	private final Xob_hdump_bldr hdump_bldr = new Xob_hdump_bldr(); private Vnt_convert_lang converter_lang;
 	public Xobldr__lnki_temp__create(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
-	@Override public byte Init_redirect()	{return Bool_.N_byte;}	// lnki_temp does not look at redirect pages
+	@Override public byte Init_redirect()	{return BoolUtl.NByte;}	// lnki_temp does not look at redirect pages
 	@Override public int[] Init_ns_ary()		{return ns_ids;} private int[] ns_ids = Int_ary_.New(Xow_ns_.Tid__main);
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
@@ -78,17 +113,17 @@ public class Xobldr__lnki_temp__create extends Xob_dump_mgr_base implements gplx
 		if (!xtn_ref_enabled) gplx.xowa.xtns.cites.References_nde.Enabled = false;
 
 		// init log wkrs
-		gplx.xowa.xtns.gallery.Gallery_xnde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);
+		gplx.xowa.xtns.gallery.Gallery_xnde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(BoolUtl.Y);
 		gplx.xowa.xtns.imaps.Imap_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.parsers.xndes.Xop_xnde_wkr.Timeline_log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.scores.Score_xnde.Log_wkr = log_mgr.Make_wkr();
 		gplx.xowa.xtns.hieros.Hiero_xnde.Log_wkr = log_mgr.Make_wkr();
-		gplx.xowa.xtns.math.Xomath_xnde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(Bool_.Y);	// enabled; DATE:2015-10-10
+		gplx.xowa.xtns.math.Xomath_xnde.Log_wkr = log_mgr.Make_wkr().Save_src_str_(BoolUtl.Y);	// enabled; DATE:2015-10-10
 
 		// init fsdb
 		Xof_fsdb_mgr__sql trg_fsdb_mgr = new Xof_fsdb_mgr__sql();
 		wiki.File__fsdb_mode().Tid__v2__bld__y_();
-		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, Bool_.Y);
+		Fsdb_db_mgr__v2 fsdb_core = Fsdb_db_mgr__v2_bldr.Get_or_make(wiki, BoolUtl.Y);
 		trg_fsdb_mgr.Init_by_wiki(wiki);
 		Fsm_mnt_mgr trg_mnt_mgr = trg_fsdb_mgr.Mnt_mgr();
 		wiki.File_mgr().Init_file_mgr_by_load(wiki);										// must happen after fsdb.make

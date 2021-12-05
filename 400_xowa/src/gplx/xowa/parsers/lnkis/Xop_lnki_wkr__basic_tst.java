@@ -13,11 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import org.junit.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; import gplx.xowa.langs.funcs.*; import gplx.xowa.langs.lnki_trails.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.paras.*; import gplx.xowa.wikis.ttls.*;
+package gplx.xowa.parsers.lnkis;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.lnki_trails.Xol_lnki_trail_mgr;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.paras.Xop_para_wkr_basic_tst;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import org.junit.Before;
+import org.junit.Test;
 public class Xop_lnki_wkr__basic_tst {
 	@Before public void init() {fxt.Reset(); fxt.Init_para_n_();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Basic() {
@@ -52,7 +63,7 @@ public class Xop_lnki_wkr__basic_tst {
 	@Test public void Tail_image()		{fxt.Test_parse_page_wiki("[[Image:a|b]]c", fxt.tkn_lnki_(0, 13).Tail_bgn_(-1).Tail_end_(-1), fxt.tkn_txt_(13, 14));}	// NOTE: this occurs on some pages;
 	@Test public void Image() {
 		fxt.Test_parse_page_wiki("[[Image:a]]"				, fxt.tkn_lnki_().Ns_id_(Xow_ns_.Tid__file).Trg_tkn_(fxt.tkn_arg_val_(fxt.tkn_txt_(2, 7), fxt.tkn_colon_(7), fxt.tkn_txt_(8, 9))));
-		fxt.Test_parse_page_wiki("[[Image:a|border]]"		, fxt.tkn_lnki_().Border_(Bool_.Y_byte));
+		fxt.Test_parse_page_wiki("[[Image:a|border]]"		, fxt.tkn_lnki_().Border_(BoolUtl.YByte));
 		fxt.Test_parse_page_wiki("[[Image:a|thumb]]"		, fxt.tkn_lnki_().ImgType_(Xop_lnki_type.Id_thumb));
 		fxt.Test_parse_page_wiki("[[Image:a|left]]"			, fxt.tkn_lnki_().HAlign_(Xop_lnki_align_h_.Left));
 		fxt.Test_parse_page_wiki("[[Image:a|top]]"			, fxt.tkn_lnki_().VAlign_(Xop_lnki_align_v_.Top));

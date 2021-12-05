@@ -13,8 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
-import gplx.dbs.*; import gplx.xowa.addons.apps.cfgs.mgrs.caches.*; import gplx.xowa.addons.apps.cfgs.mgrs.dflts.*; import gplx.xowa.addons.apps.cfgs.mgrs.types.*; import gplx.xowa.addons.apps.cfgs.mgrs.execs.*;
+package gplx.xowa.addons.apps.cfgs;
+import gplx.Bry_find_;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Err_;
+import gplx.Float_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg_;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.Long_;
+import gplx.String_;
+import gplx.Yn;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.apps.cfgs.mgrs.caches.Xocfg_cache_mgr;
+import gplx.xowa.addons.apps.cfgs.mgrs.dflts.Xocfg_dflt_mgr;
+import gplx.xowa.addons.apps.cfgs.mgrs.execs.Xocfg_exec_mgr;
+import gplx.xowa.addons.apps.cfgs.mgrs.types.Xocfg_type_mgr;
 public class Xocfg_mgr implements Gfo_invk {
 	public Xocfg_mgr() {
 		this.dflt_mgr = new Xocfg_dflt_mgr(cache_mgr);
@@ -28,9 +51,9 @@ public class Xocfg_mgr implements Gfo_invk {
 		( gplx.xowa.addons.apps.cfgs.dbs.Xocfg_db_app.New_conn(app)
 		, app.User().User_db_mgr().Conn());
 	}
-	public void Sub_many_app	(Gfo_invk sub, String... keys)					{Bind_many(Bool_.N, sub, Xocfg_mgr.Ctx__app, keys);}
-	public void Bind_many_app	(Gfo_invk sub, String... keys)					{Bind_many(Bool_.Y, sub, Xocfg_mgr.Ctx__app, keys);}
-	public void Bind_many_wiki	(Gfo_invk sub, Xow_wiki wiki, String... keys)		{Bind_many(Bool_.Y, sub, wiki.Domain_itm().Abrv_xo_str(), keys);}
+	public void Sub_many_app	(Gfo_invk sub, String... keys)					{Bind_many(BoolUtl.N, sub, Xocfg_mgr.Ctx__app, keys);}
+	public void Bind_many_app	(Gfo_invk sub, String... keys)					{Bind_many(BoolUtl.Y, sub, Xocfg_mgr.Ctx__app, keys);}
+	public void Bind_many_wiki	(Gfo_invk sub, Xow_wiki wiki, String... keys)		{Bind_many(BoolUtl.Y, sub, wiki.Domain_itm().Abrv_xo_str(), keys);}
 	private void Bind_many(boolean pub, Gfo_invk sub, String ctx, String... keys) {
 		if (gplx.core.envs.Env_.Mode_testing()) return;
 		for (String key : keys) {

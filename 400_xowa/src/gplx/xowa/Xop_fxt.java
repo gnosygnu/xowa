@@ -13,18 +13,75 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa; import gplx.*;
-import gplx.core.tests.*; import gplx.core.log_msgs.*;
-import gplx.xowa.apps.cfgs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.apos.*;
-import gplx.xowa.parsers.lists.*; import gplx.xowa.parsers.paras.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*; import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.lnkes.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.xowa.files.exts.*; import gplx.xowa.files.repos.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.wikis.tdbs.hives.*;
-import gplx.xowa.wikis.pages.*;
+package gplx.xowa;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg__gui_mock;
+import gplx.Io_mgr;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.log_msgs.Gfo_msg_data;
+import gplx.core.log_msgs.Gfo_msg_itm;
+import gplx.core.log_msgs.Gfo_msg_itm_;
+import gplx.core.log_msgs.Gfo_msg_log;
+import gplx.core.tests.Tst_chkr;
+import gplx.core.tests.Tst_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.apps.cfgs.Xowc_xtn_pages;
+import gplx.xowa.files.exts.Xof_rule_grp;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.files.repos.Xofw_wiki_wkr_mock;
+import gplx.xowa.htmls.Xoh_consts;
+import gplx.xowa.htmls.Xoh_page_html_source_;
+import gplx.xowa.htmls.Xow_html_mgr;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr_cfg;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xow_find_file_mgr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_stub_;
+import gplx.xowa.langs.kwds.Xol_kwd_grp;
+import gplx.xowa.langs.kwds.Xol_kwd_mgr;
+import gplx.xowa.langs.msgs.Xol_msg_itm;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_parser;
+import gplx.xowa.parsers.Xop_parser_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_chkr_base;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.parsers.apos.Xop_apos_tkn_chkr;
+import gplx.xowa.parsers.lists.Xop_list_tkn_chkr;
+import gplx.xowa.parsers.lnkes.Xop_tkn_chkr_lnke;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn_chkr;
+import gplx.xowa.parsers.miscs.Xop_hr_lxr;
+import gplx.xowa.parsers.miscs.Xop_ignore_tkn;
+import gplx.xowa.parsers.miscs.Xop_ignore_tkn_chkr;
+import gplx.xowa.parsers.miscs.Xop_tkn_chkr_hr;
+import gplx.xowa.parsers.paras.Xop_nl_tkn;
+import gplx.xowa.parsers.paras.Xop_nl_tkn_chkr;
+import gplx.xowa.parsers.paras.Xop_para_tkn;
+import gplx.xowa.parsers.paras.Xop_para_tkn_chkr;
+import gplx.xowa.parsers.tblws.Xop_tblw_tb_tkn_chkr;
+import gplx.xowa.parsers.tblws.Xop_tblw_tc_tkn_chkr;
+import gplx.xowa.parsers.tblws.Xop_tblw_td_tkn_chkr;
+import gplx.xowa.parsers.tblws.Xop_tblw_th_tkn_chkr;
+import gplx.xowa.parsers.tblws.Xop_tblw_tr_tkn_chkr;
+import gplx.xowa.parsers.tmpls.Xop_arg_itm_tkn_chkr;
+import gplx.xowa.parsers.tmpls.Xop_arg_nde_tkn_chkr;
+import gplx.xowa.parsers.tmpls.Xot_defn_tmpl;
+import gplx.xowa.parsers.tmpls.Xot_invk_tkn_chkr;
+import gplx.xowa.parsers.tmpls.Xot_prm_chkr;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn_chkr;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import gplx.xowa.wikis.nss.Xow_ns_case_;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
+import gplx.xowa.wikis.tdbs.hives.Xow_hive_mgr_fxt;
 public class Xop_fxt {
 	public Xop_fxt() {
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();
@@ -482,7 +539,7 @@ public class Xop_fxt {
 		Xop_root_tkn root = Exec_parse_page_all_as_root(src_bry);
 		Xoh_wtr_ctx hctx = Xoh_wtr_ctx.Hdump;
 		Xoh_html_wtr html_wtr = wiki.Html_mgr().Html_wtr();
-		html_wtr.Cfg().Toc__show_(Bool_.Y);	// needed for hdr to show <span class='mw-headline' id='A'>	
+		html_wtr.Cfg().Toc__show_(BoolUtl.Y);	// needed for hdr to show <span class='mw-headline' id='A'>
 		ctx.Page().Html_data().Redlink_list().Clear();
 		html_wtr.Write_doc(tmp_bfr, ctx, hctx, src_bry, root);
             // Tfds.Dbg(tmp_bfr.To_str());

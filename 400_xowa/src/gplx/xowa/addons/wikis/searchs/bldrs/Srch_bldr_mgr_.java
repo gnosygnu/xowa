@@ -13,9 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
-import gplx.xowa.bldrs.*;
-import gplx.xowa.addons.wikis.searchs.bldrs.cmds.*;
+package gplx.xowa.addons.wikis.searchs.bldrs;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.searchs.bldrs.cmds.Xobldr__link__link_score;
+import gplx.xowa.addons.wikis.searchs.bldrs.cmds.Xobldr__page__page_score;
+import gplx.xowa.addons.wikis.searchs.bldrs.cmds.Xobldr__word__link_count;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_cmd_keys;
 public class Srch_bldr_mgr_ {
 	public static void Setup(Xowe_wiki wiki) {
 		Xoae_app app = wiki.Appe();
@@ -29,7 +35,7 @@ public class Srch_bldr_mgr_ {
 			bldr.Cmd_mgr().Add_many(wiki, gplx.xowa.addons.bldrs.wmdumps.pagelinks.bldrs.Pglnk_bldr_cmd.BLDR_CMD_KEY);
 		}
 		bldr.Cmd_mgr().Add(new Xobldr__page__page_score(bldr, wiki).Iteration_max_(page_rank_iterations));
-		bldr.Cmd_mgr().Add(new Xobldr__link__link_score(bldr, wiki).Page_rank_enabled_(page_rank_enabled).Delete_plink_db_(Bool_.Y));
+		bldr.Cmd_mgr().Add(new Xobldr__link__link_score(bldr, wiki).Page_rank_enabled_(page_rank_enabled).Delete_plink_db_(BoolUtl.Y));
 		bldr.Cmd_mgr().Add(new Xobldr__word__link_count(bldr, wiki));			
 		bldr.Cmd_mgr().Add(new gplx.xowa.bldrs.cmds.utils.Xob_delete_cmd(bldr, wiki).Patterns_ary_("*pagelinks.sql", "*pagelinks.sql.gz", "*pagelinks.sqlite3"));
 	}

@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.mass_parses.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.cases.*; import gplx.xowa.langs.names.*;
-import gplx.xowa.files.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses;
+import gplx.Io_url;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xoa_repo_mgr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_itm_;
 public class Xow_wiki_utl_ {
 	public static Xowe_wiki Clone_wiki(Xowe_wiki wiki, Io_url wiki_dir) {
 		Xoa_app app = wiki.App();
@@ -38,7 +43,7 @@ public class Xow_wiki_utl_ {
 		Xoa_repo_mgr repo_mgr = wiki.Appe().File_mgr().Repo_mgr();
 		int len = repo_mgr.Count();
 		for (int i = 0; i < len; ++i)
-			repo_mgr.Get_at(i).Fsys_is_wnt_(Bool_.N).Shorten_ttl_(Bool_.N);
+			repo_mgr.Get_at(i).Fsys_is_wnt_(BoolUtl.N).Shorten_ttl_(BoolUtl.N);
 
 	}
 }

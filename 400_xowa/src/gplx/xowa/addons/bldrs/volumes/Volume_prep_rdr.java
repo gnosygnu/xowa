@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.bldrs.volumes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Volume_prep_rdr {
 	public Volume_prep_itm[] Parse(Io_url url) {return Parse(Io_mgr.Instance.LoadFilBryOr(url, null));}
 	public Volume_prep_itm[] Parse(byte[] src) {
@@ -28,7 +29,7 @@ class Volume_prep_rdr {
 		return (Volume_prep_itm[])rv.ToAryAndClear(Volume_prep_itm.class);
 	}
 	private Volume_prep_itm Parse_line_or_null(byte[] line) {
-		byte[][] flds = Bry_split_.Split(line, Byte_ascii.Pipe);
+		byte[][] flds = Bry_split_.Split(line, AsciiByte.Pipe);
 		int flds_len = flds.length; if (flds_len == 0) return null;
 		Volume_prep_itm rv = new Volume_prep_itm();
 		for (int i = 0; i < flds_len; ++i) {

@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*;
-import gplx.langs.regxs.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.Bry_bfr;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.langs.regxs.Regx_group;
+import gplx.langs.regxs.Regx_match;
+import gplx.objects.primitives.BoolUtl;
 class Scrib_regx_grp_mgr {
 	private final List_adp capt_list = List_adp_.New();
 	private final List_adp full_list = List_adp_.New();
@@ -46,12 +56,12 @@ class Scrib_regx_grp_mgr {
 	public void Capt__add__real(int grp_idx, boolean is_empty_capture) {
 		capt_list.Add(Keyval_.int_(grp_idx, is_empty_capture));
 		open_list.Add(grp_idx);
-		full_list.Add(new Scrib_regx_grp_itm(Bool_.N, is_empty_capture, full_list.Len()));
+		full_list.Add(new Scrib_regx_grp_itm(BoolUtl.N, is_empty_capture, full_list.Len()));
 		idx_list.Add(grp_idx, full_list.Len());
 	}
 	public void Capt__add__fake(int count) {
 		for (int i = 0; i < count; i++)
-			full_list.Add(new Scrib_regx_grp_itm(Bool_.Y, Bool_.N, full_list.Len()));
+			full_list.Add(new Scrib_regx_grp_itm(BoolUtl.Y, BoolUtl.N, full_list.Len()));
 		fake_count += count;
 	}
 	public void Idx__add(Bry_bfr bfr, int regx_idx) {

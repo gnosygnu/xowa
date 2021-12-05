@@ -13,10 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.langs.htmls.encoders.*; import gplx.core.intls.ucas.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_fmt;
+import gplx.core.intls.ucas.Uca_ltr_extractor;
+import gplx.langs.htmls.encoders.Gfo_url_encoder_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.Xoctg_catpage_ctg;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.Xoctg_catpage_grp;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.urls.Xoctg_catpage_url_parser;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.langs.msgs.Xow_msg_mgr;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xoctg_fmt_grp {	// subc|page|file
 	private final byte tid;
 	private final byte[] div_id, url_arg_bgn, url_arg_end;
@@ -57,8 +72,8 @@ public class Xoctg_fmt_grp {	// subc|page|file
 	public byte[] Bld_bwd_fwd(Xow_wiki wiki, Xoa_ttl ttl, Xoctg_catpage_grp view_grp, int grp_max) {	// TEST:
 		if (view_grp.Count_all() < grp_max) return Bry_.Empty;	// NOTE: must be "<", not "<="; FOOTNOTE:LT_NOT_LTE; DATE:2019-12-14
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_k004();
-		Html_nav_bry(bfr, wiki, ttl, view_grp, grp_max, Bool_.N);
-		Html_nav_bry(bfr, wiki, ttl, view_grp, grp_max, Bool_.Y);
+		Html_nav_bry(bfr, wiki, ttl, view_grp, grp_max, BoolUtl.N);
+		Html_nav_bry(bfr, wiki, ttl, view_grp, grp_max, BoolUtl.Y);
 		return bfr.To_bry_and_rls();
 	}
 	private void Html_nav_bry(Bry_bfr bfr, Xow_wiki wiki, Xoa_ttl ttl, Xoctg_catpage_grp grp, int grp_max, boolean url_is_from) {
@@ -75,9 +90,9 @@ public class Xoctg_fmt_grp {	// subc|page|file
 			arg_idx_lbl = url_arg_end;
 			arg_sortkey = grp.Itms__get_at(0).Sortkey_handle();	// use 1st item as sortkey for "until" args
 		}
-		href_bfr.Add_byte(Byte_ascii.Question).Add(arg_idx_lbl).Add_byte(Byte_ascii.Eq);		// filefrom=
+		href_bfr.Add_byte(AsciiByte.Question).Add(arg_idx_lbl).Add_byte(AsciiByte.Eq);		// filefrom=
 		Gfo_url_encoder_.Http_url.Encode(href_bfr, arg_sortkey);								// Abc
-		href_bfr.Add_byte(Byte_ascii.Hash).Add(div_id);											// #mw-subcategories
+		href_bfr.Add_byte(AsciiByte.Hash).Add(div_id);											// #mw-subcategories
 		byte[] nav_href = href_bfr.To_bry_and_rls();
 
 		// get nav_text

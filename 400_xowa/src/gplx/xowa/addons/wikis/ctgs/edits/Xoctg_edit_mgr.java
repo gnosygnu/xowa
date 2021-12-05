@@ -13,12 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.edits; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*;
-import gplx.dbs.*;
-import gplx.xowa.parsers.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.domains.*;
-import gplx.xowa.addons.wikis.ctgs.dbs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.*;
-import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.*;
+package gplx.xowa.addons.wikis.ctgs.edits;
+import gplx.Bry_;
+import gplx.Datetime_now;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.ctgs.Xoa_ctg_mgr;
+import gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_db_;
+import gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_link_row;
+import gplx.xowa.addons.wikis.ctgs.dbs.Xodb_cat_link_tbl;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.langs.Xoctg_collation_mgr;
+import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.Xopg_db_mgr;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_cat_core_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_category_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_text_tbl;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xoctg_edit_mgr {
 	public static void Update(Xowe_wiki wiki, byte[] ttl_bry, int page_id, Xoa_ttl[] ctg_ttls) {
 		// get ttl, page, ns_id
@@ -71,7 +87,7 @@ public class Xoctg_edit_mgr {
 
 				// create cat_core row
 				cat_core_tbl.Insert_bgn();
-				cat_core_tbl.Insert_cmd_by_batch(ctg_id, 0, 0, 0, Bool_.N_byte, -1);
+				cat_core_tbl.Insert_cmd_by_batch(ctg_id, 0, 0, 0, BoolUtl.NByte, -1);
 				cat_core_tbl.Insert_end();
 			}
 

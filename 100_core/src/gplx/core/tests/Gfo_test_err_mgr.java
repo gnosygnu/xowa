@@ -13,7 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.tests; import gplx.*;
+package gplx.core.tests;
+import gplx.Gfo_usr_dlg_;
+import gplx.Gfo_usr_dlg__gui_mock;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
 public class Gfo_test_err_mgr {
 	private final List_adp expd = List_adp_.New();
 	public void Init() {
@@ -42,7 +48,7 @@ public class Gfo_test_err_mgr {
 			for (int i = 0; i < actl_len; i++) {
 				String actl_err = (String)actl.Get_at(i);
 				Object[] expd_err_ary = (Object[])expd.Get_at(i);
-				if (Bool_.Cast(expd_err_ary[0])) {
+				if (BoolUtl.Cast(expd_err_ary[0])) {
 					Gftest.Eq__bool(true, String_.Has(actl_err, (String)expd_err_ary[1]));
 				}
 				else {

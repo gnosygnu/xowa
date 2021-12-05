@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*;
-import org.junit.*; import gplx.langs.jsons.*; import gplx.xowa.wikis.nss.*;
+package gplx.xowa.bldrs.wms.sites;
+import gplx.Bry_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_parser;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.wikis.nss.Xow_ns_case_;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 public class Site_json_parser_tst {
 	private final Site_json_parser_fxt fxt = new Site_json_parser_fxt();
 	@Before public void init() {Gfo_usr_dlg_.Instance = Gfo_usr_dlg_.Test_console();}
@@ -78,10 +90,10 @@ public class Site_json_parser_tst {
 		, "}"
 		));
 		fxt.Test_namespace
-		( fxt.Make_namespace(0		, Bool_.N, null			, ""			, Bool_.N, Bool_.Y, null)
-		, fxt.Make_namespace(2		, Bool_.N, "User"		, "User"		, Bool_.Y, Bool_.N, null)
-		, fxt.Make_namespace(4		, Bool_.N, "Project"	, "Wikipedia"	, Bool_.Y, Bool_.N, null)
-		, fxt.Make_namespace(2600	, Bool_.Y, "Topic"		, "Topic"		, Bool_.N, Bool_.N, "flow-board")
+		( fxt.Make_namespace(0		, BoolUtl.N, null			, ""			, BoolUtl.N, BoolUtl.Y, null)
+		, fxt.Make_namespace(2		, BoolUtl.N, "User"		, "User"		, BoolUtl.Y, BoolUtl.N, null)
+		, fxt.Make_namespace(4		, BoolUtl.N, "Project"	, "Wikipedia"	, BoolUtl.Y, BoolUtl.N, null)
+		, fxt.Make_namespace(2600	, BoolUtl.Y, "Topic"		, "Topic"		, BoolUtl.N, BoolUtl.N, "flow-board")
 		);
 	}
 	@Test public void Statistic() {
@@ -123,8 +135,8 @@ public class Site_json_parser_tst {
 		, "}"
 		));
 		fxt.Test_interwikimap
-		( fxt.Make_interwikimap("aquariumwiki"	, Bool_.N, Bool_.N, null			, null						, null			, Bool_.N, "http://www.theaquariumwiki.com/$1"	, Bool_.N)
-		, fxt.Make_interwikimap("ar"			, Bool_.Y, Bool_.Y, "More languages", "Multilingual Wikisource"	, "العربية"		, Bool_.N, "https://ar.wikipedia.org/wiki/$1"	, Bool_.Y)
+		( fxt.Make_interwikimap("aquariumwiki"	, BoolUtl.N, BoolUtl.N, null			, null						, null			, BoolUtl.N, "http://www.theaquariumwiki.com/$1"	, BoolUtl.N)
+		, fxt.Make_interwikimap("ar"			, BoolUtl.Y, BoolUtl.Y, "More languages", "Multilingual Wikisource"	, "العربية"		, BoolUtl.N, "https://ar.wikipedia.org/wiki/$1"	, BoolUtl.Y)
 		);
 	}
 	@Test public void Namespacealias() {
@@ -250,9 +262,9 @@ public class Site_json_parser_tst {
 		, "}"
 		));
 		fxt.Test_skin
-		( fxt.Make_skin("vector"		, Bool_.Y, "Vector"		, Bool_.N)
-		, fxt.Make_skin("monobook"		, Bool_.N, "MonoBook"	, Bool_.N)
-		, fxt.Make_skin("fallback"		, Bool_.N, "Fallback"	, Bool_.Y)
+		( fxt.Make_skin("vector"		, BoolUtl.Y, "Vector"		, BoolUtl.N)
+		, fxt.Make_skin("monobook"		, BoolUtl.N, "MonoBook"	, BoolUtl.N)
+		, fxt.Make_skin("fallback"		, BoolUtl.N, "Fallback"	, BoolUtl.Y)
 		);
 	}
 	@Test public void Magicword() {
@@ -276,8 +288,8 @@ public class Site_json_parser_tst {
 		, "}"
 		));
 		fxt.Test_magicword
-		( fxt.Make_magicword("expr"				, Bool_.N, "expr")
-		, fxt.Make_magicword("currentmonth"		, Bool_.Y, "CURRENTMONTH", "CURRENTMONTH2")
+		( fxt.Make_magicword("expr"				, BoolUtl.N, "expr")
+		, fxt.Make_magicword("currentmonth"		, BoolUtl.Y, "CURRENTMONTH", "CURRENTMONTH2")
 		);
 	}
 	@Test public void Functionhook() {

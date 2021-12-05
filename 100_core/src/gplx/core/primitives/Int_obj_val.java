@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.primitives; import gplx.*; import gplx.core.*;
+package gplx.core.primitives; import gplx.*;
+import gplx.objects.lists.CompareAble;
 public class Int_obj_val implements CompareAble {
 	public Int_obj_val(int val) {this.val = val;}
 	public int Val() {return val;} private final int val;

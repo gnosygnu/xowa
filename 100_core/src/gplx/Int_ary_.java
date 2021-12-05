@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.strings.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
 public class Int_ary_ {//RF:DATE:2017-10-09
 	public static int[] Empty = new int[0];
 
@@ -61,28 +62,28 @@ public class Int_ary_ {//RF:DATE:2017-10-09
 		int[] rv = new int[reqd_len];
 		int cur_val = 0, cur_mult = 1, cur_idx = reqd_len - 1; boolean signed = false;
 		for (int i = raw_bry_len - 1; i > -2; i--) {
-			byte b = i == -1 ? Byte_ascii.Comma : raw_bry[i];
+			byte b = i == -1 ? AsciiByte.Comma : raw_bry[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					if (signed) return or;
-					cur_val += (b - Byte_ascii.Num_0) * cur_mult;
+					cur_val += (b - AsciiByte.Num0) * cur_mult;
 					cur_mult *= 10;
 					break;
-				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Tab:
+				case AsciiByte.Space: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Tab:
 					break;
-				case Byte_ascii.Comma:
+				case AsciiByte.Comma:
 					if (cur_idx < 0) return or;
 					rv[cur_idx--] = cur_val;
 					cur_val = 0; cur_mult = 1;
 					signed = false;
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					if (signed) return or;
 					cur_val *= -1;
 					signed = true;
 					break;
-				case Byte_ascii.Plus:	// noop; all values positive by default
+				case AsciiByte.Plus:	// noop; all values positive by default
 					if (signed) return or;
 					signed = true;
 					break;
@@ -122,7 +123,7 @@ public class Int_ary_ {//RF:DATE:2017-10-09
 				}
 				if (add_len + rv_idx > rv_len) {		// ary out of space; resize
 					rv_len = (add_len + rv_idx) * 2;
-					rv = (int[])Array_.Resize(rv, rv_len);
+					rv = (int[])ArrayUtl.Resize(rv, rv_len);
 				}
 				if (itm_is_rng) {
 					for (int i = rng_bgn; i <= num; i++)
@@ -138,20 +139,20 @@ public class Int_ary_ {//RF:DATE:2017-10-09
 			}
 			byte b = src[pos];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					if (num_bgn == -1)	// num_bgn not set
 						num_bgn = pos;
 					num_end = pos + 1;	// num_end is always after pos; EX: "9": num_end = 1; "98,7": num_end=2
 					break;
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:	// NOTE: parseNumList replaces ws with '', so "1 1" will become "11"
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:	// NOTE: parseNumList replaces ws with '', so "1 1" will become "11"
 					break;
-				case Byte_ascii.Comma:
+				case AsciiByte.Comma:
 					if (pos == raw_len -1) return or;	// eos; EX: "1,"
 					if (num_bgn == -1) return or;		// empty itm; EX: ","; "1,,2"
 					itm_done = true;
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					if (pos == raw_len -1) return or;	// eos; EX: "1-"
 					if (num_bgn == -1) return or;		// no rng_bgn; EX: "-2"
 					rng_bgn = Bry_.To_int_or(src, num_bgn, pos, Int_.Min_value);
@@ -166,7 +167,7 @@ public class Int_ary_ {//RF:DATE:2017-10-09
 		}
 		return (rv_idx == rv_len)	// on the off-chance that rv_len == rv_idx; EX: "1"
 			? rv
-			: (int[])Array_.Resize(rv, rv_idx);
+			: (int[])ArrayUtl.Resize(rv, rv_idx);
 		} catch (Exception e) {Err_.Noop(e); return or;}
 	}
 }

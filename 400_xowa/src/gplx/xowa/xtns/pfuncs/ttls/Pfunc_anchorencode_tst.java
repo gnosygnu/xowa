@@ -13,11 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*;
-import gplx.core.consoles.*;
+package gplx.xowa.xtns.pfuncs.ttls;
+import gplx.core.consoles.Console_adp__sys;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import org.junit.Before;
+import org.junit.Test;
 public class Pfunc_anchorencode_tst {
-	private final Pfunc_anchorenchode_fxt fxt = new Pfunc_anchorenchode_fxt(Bool_.N);
+	private final Pfunc_anchorenchode_fxt fxt = new Pfunc_anchorenchode_fxt(BoolUtl.N);
 	@Before public void init() {fxt.Reset();}
 	@Test public void Text_apos() {
 		fxt.Test("{{anchorencode:a 'b c}}", "a_'b_c");

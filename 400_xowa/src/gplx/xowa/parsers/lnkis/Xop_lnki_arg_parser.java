@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.lnkis; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.envs.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.numbers.*;
 public class Xop_lnki_arg_parser {
 	private final Btrie_fast_mgr key_trie = Btrie_fast_mgr.cs();
@@ -79,16 +80,16 @@ public class Xop_lnki_arg_parser {
 				}
 				Byte_obj_val v = (Byte_obj_val)o;
 				switch (v.Val()) {	// NOTE: d0 - d9 handle non-english numbers; EX:fa.w and ۲۰۰px; DATE:2015-07-18
-					case Key_dim_d0:	int_bfr.Add_byte(Byte_ascii.Num_0); i += (size_trie_rv.Pos() - i) - 1; break;	// -1 b/c loop will ++i
-					case Key_dim_d1:	int_bfr.Add_byte(Byte_ascii.Num_1); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d2:	int_bfr.Add_byte(Byte_ascii.Num_2); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d3:	int_bfr.Add_byte(Byte_ascii.Num_3); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d4:	int_bfr.Add_byte(Byte_ascii.Num_4); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d5:	int_bfr.Add_byte(Byte_ascii.Num_5); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d6:	int_bfr.Add_byte(Byte_ascii.Num_6); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d7:	int_bfr.Add_byte(Byte_ascii.Num_7); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d8:	int_bfr.Add_byte(Byte_ascii.Num_8); i += (size_trie_rv.Pos() - i) - 1; break;
-					case Key_dim_d9:	int_bfr.Add_byte(Byte_ascii.Num_9); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d0:	int_bfr.Add_byte(AsciiByte.Num0); i += (size_trie_rv.Pos() - i) - 1; break;	// -1 b/c loop will ++i
+					case Key_dim_d1:	int_bfr.Add_byte(AsciiByte.Num1); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d2:	int_bfr.Add_byte(AsciiByte.Num2); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d3:	int_bfr.Add_byte(AsciiByte.Num3); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d4:	int_bfr.Add_byte(AsciiByte.Num4); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d5:	int_bfr.Add_byte(AsciiByte.Num5); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d6:	int_bfr.Add_byte(AsciiByte.Num6); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d7:	int_bfr.Add_byte(AsciiByte.Num7); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d8:	int_bfr.Add_byte(AsciiByte.Num8); i += (size_trie_rv.Pos() - i) - 1; break;
+					case Key_dim_d9:	int_bfr.Add_byte(AsciiByte.Num9); i += (size_trie_rv.Pos() - i) - 1; break;
 					case Key_dim_num:	int_bfr.Add_byte(b); break;
 					case Key_space:		break;	// ignore space; EX: "100 px"
 					case Key_dim_px:	{		// 2nd px found; EX: "40pxpx"; "40px px"
@@ -125,14 +126,14 @@ public class Xop_lnki_arg_parser {
 		if (list == null && Env_.Mode_testing()) return;	// TEST: allows partial parsing of $magicWords
 		size_trie.Clear(); px_trie.Clear();
 		for (int i = 0; i < 10; i++)
-			size_trie.Add((byte)(i + Byte_ascii.Num_0), Byte_obj_val.new_(Key_dim_num));
+			size_trie.Add((byte)(i + AsciiByte.Num0), Byte_obj_val.new_(Key_dim_num));
 		int len = digit_mgr.Len(); // NOTE: add non-english numbers; EX: ۲۰۰px; DATE:2015-07-18
 		for (int i = 0; i < len; ++i) {
 			Keyval kv = digit_mgr.Get_at(i);
 			int num = (byte)Int_.Parse_or(kv.Key(), -1); if (num == -1) continue; // ignore separators; EX: "," "." 
 			size_trie.Add((byte[])kv.Val(), Byte_obj_val.new_((byte)num));	// NOTE: num corresponds to dim_d0 -> d9 below
 		}
-		size_trie.Add(Byte_ascii.Space, Byte_obj_val.new_(Key_space));
+		size_trie.Add(AsciiByte.Space, Byte_obj_val.new_(Key_space));
 		size_trie.Add(X_bry, Byte_obj_val.new_(Key_dim_x));
 		Xol_kwd_itm[] words = list.Itms();
 		int words_len = words.length;

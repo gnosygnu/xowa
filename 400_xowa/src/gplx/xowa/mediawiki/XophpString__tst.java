@@ -13,14 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.mediawiki; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.btries.*;
 public class XophpString__tst {
 	private final XophpString__fxt fxt = new XophpString__fxt();
 	@Test public void Strspn_fwd__byte() {
-		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 0, -1, 5);	// basic
-		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 1, -1, 4);	// bgn
-		fxt.Test_strspn_fwd__byte("aaaaab", Byte_ascii.Ltr_a, 1,  2, 2);	// max
+		fxt.Test_strspn_fwd__byte("aaaaab", AsciiByte.Ltr_a, 0, -1, 5);	// basic
+		fxt.Test_strspn_fwd__byte("aaaaab", AsciiByte.Ltr_a, 1, -1, 4);	// bgn
+		fxt.Test_strspn_fwd__byte("aaaaab", AsciiByte.Ltr_a, 1,  2, 2);	// max
 	}
 	@Test public void Strspn_fwd__space_or_tab() {
 		fxt.Test_strspn_fwd__space_or_tab("     a", 0, -1, 5);	// basic
@@ -28,9 +29,9 @@ public class XophpString__tst {
 		fxt.Test_strspn_fwd__space_or_tab("     a", 1,  2, 2);	// max
 	}
 	@Test public void Strspn_bwd__byte() {
-		fxt.Test_strspn_bwd__byte("aaaaab", Byte_ascii.Ltr_a, 5, -1, 5);	// basic
-		fxt.Test_strspn_bwd__byte("aaaaab", Byte_ascii.Ltr_a, 4, -1, 4);	// bgn
-		fxt.Test_strspn_bwd__byte("aaaaab", Byte_ascii.Ltr_a, 4,  2, 2);	// max
+		fxt.Test_strspn_bwd__byte("aaaaab", AsciiByte.Ltr_a, 5, -1, 5);	// basic
+		fxt.Test_strspn_bwd__byte("aaaaab", AsciiByte.Ltr_a, 4, -1, 4);	// bgn
+		fxt.Test_strspn_bwd__byte("aaaaab", AsciiByte.Ltr_a, 4,  2, 2);	// max
 	}
 	@Test public void Strspn_bwd__space_or_tab() {
 		fxt.Test_strspn_bwd__space_or_tab("     a", 5, -1, 5);	// basic

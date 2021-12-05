@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 import gplx.core.brys.*;
+import gplx.objects.strings.AsciiByte;
 public class Bry_split_ {
 	private static final Object thread_lock = new Object();
 	public static byte[][] Split(byte[] src, byte dlm)				{return Split(src, dlm, false);}
@@ -37,7 +38,7 @@ public class Bry_split_ {
 			int nxt_pos = pos + 1;
 			boolean process = true;
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: // ignore ws; assumes that flags have no ws (they are single char) and vnts have no ws (EX: zh-hans)
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: // ignore ws; assumes that flags have no ws (they are single char) and vnts have no ws (EX: zh-hans)
 					if (trim && b != dlm) process = false;			// b != dlm handles cases where ws is dlm, but trim is enabled; EX: " a \n b" -> "a", "b"
 					break; 
 			}
@@ -94,13 +95,13 @@ public class Bry_split_ {
 		List_adp rv = List_adp_.New();
 		while (true) {
 			boolean last = src_pos == src_len;
-			byte b = last ? Byte_ascii.Nl : src[src_pos];
+			byte b = last ? AsciiByte.Nl : src[src_pos];
 			int nxt_bgn = src_pos + 1; 
 			switch (b) {
-				case Byte_ascii.Cr:
-				case Byte_ascii.Nl:
-					if (	b == Byte_ascii.Cr		// check for crlf
-						&& nxt_bgn < src_len && src[nxt_bgn] == Byte_ascii.Nl) {
+				case AsciiByte.Cr:
+				case AsciiByte.Nl:
+					if (	b == AsciiByte.Cr		// check for crlf
+						&& nxt_bgn < src_len && src[nxt_bgn] == AsciiByte.Nl) {
 							++nxt_bgn;
 					}
 					if (last && (src_pos - fld_bgn == 0)) {}	// ignore trailing itms

@@ -15,7 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.wiki_cfgs; import gplx.*;
 import gplx.core.log_msgs.*;
-import gplx.langs.phps.*; import gplx.xowa.langs.bldrs.*;
+import gplx.langs.phps.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.langs.bldrs.*;
 class Xob_subpage_parser {
 	public Xob_subpage_wiki[] Parse(byte[] src) {
 		src = Bry_.Add(Bry_.new_a7("$a = array("), src, Bry_.new_a7(");"));
@@ -67,7 +69,7 @@ class Xob_subpage_parser {
 	private boolean Parse_ns_enabled(Php_itm itm) {
 		switch (itm.Itm_tid()) {
 			case Php_itm_.Tid_int:
-				return ((Php_itm_int)itm).Val_obj_int() == Bool_.Y_int;
+				return ((Php_itm_int)itm).Val_obj_int() == BoolUtl.YInt;
 			case Php_itm_.Tid_bool_false:
 				return false;
 			case Php_itm_.Tid_bool_true:

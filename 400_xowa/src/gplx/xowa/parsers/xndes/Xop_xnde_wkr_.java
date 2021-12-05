@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.xndes; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.xndes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.xtns.pfuncs.strings.*;
 class Xop_xnde_wkr_ {
 	public static void AutoClose_handle_dangling_nde_in_caption(Xop_root_tkn root, Xop_tkn_itm owner) {
 		int subs_bgn = -1, subs_len = owner.Subs_len();
@@ -42,14 +43,14 @@ class Xop_xnde_wkr_ {
 				int tid = ((Int_obj_val)o).Val();
 				switch (tid) {
 					case Find_xtn_end__tid__bgn:		// handle nested refs; PAGE:en.w:UK; DATE:2015-12-26
-						int angle_end_pos = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, i, src_end);
+						int angle_end_pos = Bry_find_.Find_fwd(src, AsciiByte.AngleEnd, i, src_end);
 
 						// if dangling, return not found; EX:"<ref>a</ref" PAGE:en.w:Leo_LeBlanc DATE:2017-04-10
 						if (angle_end_pos == Bry_find_.Not_found) {
 							Xoa_app_.Usr_dlg().Warn_many("", "", "parser.xtn: could not find angle_end: page=~{0} close_bry=~{1} excerpt=~{2}", ctx.Page().Url().To_str(), close_bry, String_.new_u8(src, open_end, src_end));
 							return Bry_find_.Not_found;
 						}
-						if (src[angle_end_pos -1] == Byte_ascii.Slash) {}
+						if (src[angle_end_pos -1] == AsciiByte.Slash) {}
 						else
 							++depth;
 						break;

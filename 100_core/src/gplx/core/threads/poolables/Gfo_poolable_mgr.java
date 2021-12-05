@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.threads.poolables; import gplx.*; import gplx.core.*; import gplx.core.threads.*;
+package gplx.core.threads.poolables; import gplx.*;
 import gplx.core.memorys.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Gfo_poolable_mgr implements Gfo_memory_itm {
 	private final Object thread_lock = new Object();
 	private final Gfo_poolable_itm prototype; private final Object[] make_args;
@@ -74,13 +75,13 @@ public class Gfo_poolable_mgr implements Gfo_memory_itm {
 		// expand pool
 		int new_pool_len = pool_len == 0 ? 2 : pool_len * 2;
 		Gfo_poolable_itm[] new_pool = new Gfo_poolable_itm[new_pool_len];
-		Array_.Copy_to(pool, 0, new_pool, 0, pool_len);
+		ArrayUtl.CopyTo(pool, 0, new_pool, 0, pool_len);
 		this.pool = new_pool;
 		this.pool_len = new_pool_len;
 
 		// expand free_ary to same len
 		int[] new_free = new int[pool_len];
-		Array_.Copy_to(free_ary, 0, new_free, 0, free_len);
+		ArrayUtl.CopyTo(free_ary, 0, new_free, 0, free_len);
 		this.free_ary = new_free;
 	}
 	@gplx.Internal protected int[] Free_ary() {return free_ary;} private int[] free_ary; private int free_len;

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.boots; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.boots; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.apps.*;
 import gplx.core.consoles.*;  import gplx.core.envs.*;
 import gplx.dbs.*;
 import gplx.gfui.kits.core.*; import gplx.xowa.guis.views.boots.*;
@@ -94,7 +96,7 @@ public class Xoa_boot_mgr {
 				// add safelisted Special pages
 				String special_pages_safelist = arg_mgr.Http__special_pages_safelist();
 				if (special_pages_safelist != null) {
-					byte[][] special_pages = Bry_split_.Split(Bry_.new_u8(special_pages_safelist), Byte_ascii.Pipe);
+					byte[][] special_pages = Bry_split_.Split(Bry_.new_u8(special_pages_safelist), AsciiByte.Pipe);
 
 					// --http_server.special_pages_safelist "" should mean ignore all
 					if (special_pages.length == 0) {

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.core.ios.*; import gplx.core.lists.*;
+package gplx.xowa.bldrs; import gplx.*;
+import gplx.objects.lists.ComparerAble;
+import gplx.core.ios.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.bldrs.wtrs.*;
 public class Xobdc_merger {

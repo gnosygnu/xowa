@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.xtns; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*;
-import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.apps.apis.xowa.xtns; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 public class Xoapi_wikibase implements Gfo_invk, Gfo_evt_mgr_owner {
 	public Xoapi_wikibase() {
 		evt_mgr = new Gfo_evt_mgr(this);
@@ -27,8 +28,8 @@ public class Xoapi_wikibase implements Gfo_invk, Gfo_evt_mgr_owner {
 		app.Cfg().Bind_many_app(this, Cfg__core_langs, Cfg__link_wikis, Cfg__sort_langs);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Cfg__core_langs))	 			{core_langs = m.ReadBryAry("v", Byte_ascii.Semic); Gfo_evt_mgr_.Pub_val(this, Evt_core_langs_changed, core_langs);}
-		else if	(ctx.Match(k, Cfg__sort_langs))	 			{sort_langs = m.ReadBryAry("v", Byte_ascii.Semic); Gfo_evt_mgr_.Pub_val(this, Evt_sort_langs_changed, sort_langs);}
+		if		(ctx.Match(k, Cfg__core_langs))	 			{core_langs = m.ReadBryAry("v", AsciiByte.Semic); Gfo_evt_mgr_.Pub_val(this, Evt_core_langs_changed, core_langs);}
+		else if	(ctx.Match(k, Cfg__sort_langs))	 			{sort_langs = m.ReadBryAry("v", AsciiByte.Semic); Gfo_evt_mgr_.Pub_val(this, Evt_sort_langs_changed, sort_langs);}
 		else if	(ctx.Match(k, Cfg__link_wikis))	 			{link_wikis = m.ReadBry("v"); Gfo_evt_mgr_.Pub_val(this, Evt_link_wikis_changed, link_wikis);}
 		else	return Gfo_invk_.Rv_unhandled;
 		return this;

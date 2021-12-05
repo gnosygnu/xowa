@@ -13,31 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.Byte_ascii;
-
-import gplx.Enm_;
+package gplx.gfui.kits.swts;
 import gplx.Gfo_evt_mgr_;
-import gplx.Gfo_invk_;
-import gplx.GfoMsg_;
-import gplx.GfsCtx;
-import gplx.String_;
-import gplx.Tfds;
 import gplx.core.bits.Bitmask_;
 import gplx.core.envs.Op_sys;
-import gplx.core.envs.Op_sys_;
 import gplx.gfui.controls.gxws.GxwElem;
 import gplx.gfui.controls.standards.Gfui_html;
 import gplx.gfui.controls.windows.GfuiWin;
-import gplx.gfui.ipts.*;
-
+import gplx.gfui.ipts.IptEvtDataKey;
+import gplx.gfui.ipts.IptEvtDataMouse;
+import gplx.gfui.ipts.IptKey_;
+import gplx.gfui.ipts.IptMouseBtn;
+import gplx.gfui.ipts.IptMouseBtn_;
+import gplx.gfui.ipts.IptMouseWheel_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
@@ -67,14 +62,14 @@ class Swt_lnr_traverse implements Listener {
 class Swt_lnr_key implements KeyListener {
 	public Swt_lnr_key(GxwElem elem) {this.elem = elem;} private GxwElem elem;
 	@Override public void keyPressed(KeyEvent ev) 	{
-		IptEvtDataKey ipt_data = To_gfui(ev, Bool_.Y);
+		IptEvtDataKey ipt_data = To_gfui(ev, BoolUtl.Y);
 
 		// cancel if handled; note order MUST be "delegate || ipt_data.Handled", not vice-versa
 		if (!elem.Host().KeyDownCbk(ipt_data) || ipt_data.Handled())
 			ev.doit = false;
 	}
 	@Override public void keyReleased(KeyEvent ev) 	{
-		IptEvtDataKey ipt_data = To_gfui(ev, Bool_.N);
+		IptEvtDataKey ipt_data = To_gfui(ev, BoolUtl.N);
 
 		// cancel if handled; note order MUST be "delegate || ipt_data.Handled", not vice-versa
 		if (!elem.Host().KeyUpCbk(ipt_data) || ipt_data.Handled())
@@ -85,11 +80,11 @@ class Swt_lnr_key implements KeyListener {
 		int val = ev.keyCode;
 		switch (val) {
 			// letters; lowercase keys are transmitted as ascii value, instead of key value; EX: "a": SWT=97; SWING=65
-			case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-			case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-			case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-			case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-			case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
+			case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+			case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+			case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+			case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+			case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
 				val -= 32; 
 				break;
 
@@ -148,7 +143,7 @@ class Swt_lnr_key implements KeyListener {
 			case SWT.F12:					val = IptKey_.F12.Val(); break;
 
 			// SWT=13; SWING=10; note that Cr maps to "enter key"
-			case Byte_ascii.Cr:				val = IptKey_.Enter.Val(); break;
+			case AsciiByte.Cr:				val = IptKey_.Enter.Val(); break;
 
 			case SWT.INSERT:				val = IptKey_.Insert.Val(); break;
 			case 127:						val = IptKey_.Delete.Val(); break;

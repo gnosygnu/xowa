@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*;
+import gplx.objects.lists.CompareAble;
 public abstract class IoItm_base implements Gfo_invk, CompareAble {
 	public abstract int TypeId(); public abstract boolean Type_dir(); public abstract boolean Type_fil();
 	public Io_url Url() {return ownerDir == null ? url : ownerDir.Url().GenSubFil(name); /*NOTE: must call .Url*/} Io_url url;		

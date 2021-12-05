@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.brys.*; import gplx.core.brys.fmts.*;	
+import gplx.core.brys.fmts.*;
+import gplx.objects.strings.AsciiByte;
 public class Bry_fmt {
 	private final Object thread_lock = new Object();
 	private byte[] src;
@@ -70,7 +71,7 @@ public class Bry_fmt {
 	private void Compile() {
 		synchronized (thread_lock) {
 			dirty = false;
-			this.itms = Bry_fmt_parser_.Parse(Byte_ascii.Tilde, Byte_ascii.Curly_bgn, Byte_ascii.Curly_end, args, keys, src);
+			this.itms = Bry_fmt_parser_.Parse(AsciiByte.Tilde, AsciiByte.CurlyBgn, AsciiByte.CurlyEnd, args, keys, src);
 			this.itms_len = itms.length;
 		}
 	}

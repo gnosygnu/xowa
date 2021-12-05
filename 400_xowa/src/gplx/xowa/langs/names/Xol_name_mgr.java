@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.names; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.lists.ComparerAble;
 import gplx.xowa.xtns.cldrs.*;
 
 public class Xol_name_mgr {
@@ -252,7 +253,7 @@ public class Xol_name_mgr {
 		return new Xol_name_mgr(new Cldr_name_loader(cldr_dir), new Language_name_loader(root_dir), root_dir);
 	}
 }
-class Hash_kv_sorter implements gplx.core.lists.ComparerAble {
+class Hash_kv_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Keyval lhs = (Keyval)lhsObj;
 		Keyval rhs = (Keyval)rhsObj;

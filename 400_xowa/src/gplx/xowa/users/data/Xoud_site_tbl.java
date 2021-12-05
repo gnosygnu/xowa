@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.data; import gplx.*;
-import gplx.dbs.*;
+package gplx.xowa.users.data;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Rls_able;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
 public class Xoud_site_tbl implements Rls_able {
 	public static final String Tbl_name = "user_site";
 	private final String tbl_name = Tbl_name; private final DbmetaFldList flds = new DbmetaFldList();
@@ -35,11 +44,11 @@ public class Xoud_site_tbl implements Rls_able {
 	public void Rls() {}
 	public void Insert(int site_id, int priority, String domain, String name, String path, String date, String xtn) {
 		Db_stmt stmt = conn.Stmt_insert(tbl_name, flds);			
-		Exec_stmt(stmt, Bool_.N, site_id, priority, domain, name, path, date, xtn);
+		Exec_stmt(stmt, BoolUtl.N, site_id, priority, domain, name, path, date, xtn);
 	}
 	public void Update(int site_id, int priority, String domain, String name, String path, String date, String xtn) {
 		Db_stmt stmt = conn.Stmt_update_exclude(tbl_name, flds, fld_site_id);
-		Exec_stmt(stmt, Bool_.Y, site_id, priority, domain, name, path, date, xtn);
+		Exec_stmt(stmt, BoolUtl.Y, site_id, priority, domain, name, path, date, xtn);
 	}
 	public void Delete(int site_id) {
 		Db_stmt stmt = conn.Stmt_delete(tbl_name, fld_site_id);

@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.durations; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 import gplx.xowa.langs.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.parsers.*;
@@ -25,7 +26,7 @@ public class Xol_duration_mgr {
 	public Xol_duration_mgr(Xol_lang_itm lang) {this.lang = lang;} private Xol_lang_itm lang;
 	public Xol_interval_itm[] Get_duration_intervals(long seconds, Xol_duration_itm[] intervals) {
 		if (intervals == null) intervals = Xol_duration_itm_.Ary_default;
-		Array_.Sort(intervals, Xol_duration_itm_sorter.Instance);
+		ArrayUtl.Sort(intervals, Xol_duration_itm_sorter.Instance);
 		int intervals_len = intervals.length;
 		long val = seconds;
 		List_adp rv = List_adp_.New();

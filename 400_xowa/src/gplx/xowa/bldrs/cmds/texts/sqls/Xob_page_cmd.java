@@ -13,13 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import gplx.dbs.*; import gplx.core.ios.*; import gplx.xowa.bldrs.cmds.*;
+package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*;
+import gplx.core.ios.*;
 import gplx.xowa.bldrs.wkrs.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.dbs.*; 
-import gplx.xowa.wikis.*; import gplx.xowa.bldrs.filters.dansguardians.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
-import gplx.xowa.parsers.utils.*; import gplx.xowa.addons.bldrs.files.cmds.*; import gplx.xowa.addons.bldrs.files.dbs.*;
+import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+import gplx.xowa.bldrs.filters.dansguardians.*;
+import gplx.xowa.parsers.utils.*;
+import gplx.xowa.addons.bldrs.files.dbs.*;
 public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gfo_invk {
 	private Xow_db_mgr db_mgr; private Db_idx_mode idx_mode = Db_idx_mode.Itm_end; private Xowd_page_tbl page_core_tbl; private Io_stream_zip_mgr text_zip_mgr; private byte text_zip_tid;
 	private Xop_redirect_mgr redirect_mgr; private Xob_redirect_tbl redirect_tbl; private boolean redirect_id_enabled;
@@ -54,7 +57,7 @@ public class Xob_page_cmd extends Xob_itm_basic_base implements Xob_page_wkr, Gf
 	}
 	public void Page_wkr__run(Xowd_page_itm page) {
 		int id = page.Id();
-		DateAdp modified = page.Modified_on(); if (modified.compareTo(modified_latest) == CompareAble_.More) modified_latest = modified;
+		DateAdp modified = page.Modified_on(); if (modified.compareTo(modified_latest) == CompareAbleUtl.More) modified_latest = modified;
 		byte[] text_raw = page.Text(); int text_raw_len = page.Text_len();
 		Xoa_ttl redirect_ttl = redirect_mgr.Extract_redirect(text_raw, text_raw_len); boolean redirect = redirect_ttl != null;
 		page.Redirected_(redirect);

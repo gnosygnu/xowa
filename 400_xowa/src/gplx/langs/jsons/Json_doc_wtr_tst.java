@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.langs.jsons;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Json_doc_wtr_tst {
 	private final Json_doc_wtr_fxt fxt = new Json_doc_wtr_fxt();
 	@Test public void Basic() {
@@ -43,7 +47,7 @@ class Json_doc_wtr_fxt {
 	public Json_doc_wtr Exec__Kv_simple(String key, String val) {
 		Json_doc_wtr doc_wtr = new Json_doc_wtr();
 		doc_wtr.Nde_bgn();
-		doc_wtr.Kv(Bool_.N, Bry_.new_u8(key), Bry_.new_u8(val));
+		doc_wtr.Kv(BoolUtl.N, Bry_.new_u8(key), Bry_.new_u8(val));
 		doc_wtr.Nde_end();
 		return doc_wtr;
 	}

@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*;
+package gplx.xowa.wikis.tdbs.xdats; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.core.ios.streams.*;
 import gplx.core.encoders.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.strings.AsciiByte;
 public class Xob_xdat_file {
 	public byte[] Src() {return src;} private byte[] src;
 	public int Src_len() {return src_len;} public Xob_xdat_file Src_len_(int v) {src_len = v; return this;} private int src_len;	// NOTE: src_len can be different than src.length (occurs when reusing brys)
@@ -47,10 +51,10 @@ public class Xob_xdat_file {
 		}
 		return rv;
 	}
-	public void Sort(Bry_bfr bfr, gplx.core.lists.ComparerAble comparer) {
+	public void Sort(Bry_bfr bfr, ComparerAble comparer) {
 		int ary_len = itm_ends.length;
 		byte[][] brys = Src_extract_brys(ary_len);
-		Array_.Sort(brys, comparer);
+		ArrayUtl.Sort(brys, comparer);
 		Src_rebuild_hdr(bfr, ary_len);
 		itm_0_bgn = (ary_len * Len_idx_itm) + Len_itm_dlm;
 		int itm_bgn = 0;
@@ -66,7 +70,7 @@ public class Xob_xdat_file {
 	}
 	public void Insert(Bry_bfr bfr, byte[] itm) {
 		int ary_len = itm_ends.length;
-		itm_ends = (int[])Array_.Resize(itm_ends, ary_len + 1);
+		itm_ends = (int[])ArrayUtl.Resize(itm_ends, ary_len + 1);
 		int prv_pos = ary_len == 0 ? 0 : itm_ends[ary_len - 1];
 		itm_ends[ary_len] = prv_pos + itm.length;
 		Src_rebuild(bfr, ary_len + 1, itm);
@@ -97,7 +101,7 @@ public class Xob_xdat_file {
 		if (insert) bfr.Add(new_itm);
 		itm_0_bgn = (ary_len * Len_idx_itm) + Len_itm_dlm;
 		src = bfr.To_bry_and_clear(); 
-	}	private static final byte Dlm_hdr_fld = Byte_ascii.Pipe, Dlm_row = Byte_ascii.Nl;
+	}	private static final byte Dlm_hdr_fld = AsciiByte.Pipe, Dlm_row = AsciiByte.Nl;
 	public void Save(Io_url url) {
 		Bry_bfr bfr = Bry_bfr_.New();
 		Srl_save_bry(bfr);
@@ -152,13 +156,13 @@ public class Xob_xdat_file {
 			while (true) {
 				slot_bgn = itm_count * Len_idx_itm;
 				if (slot_bgn >= src_len) break;
-				if (src[slot_bgn] == Byte_ascii.Nl) break;
+				if (src[slot_bgn] == AsciiByte.Nl) break;
 				int tmp_val = Base85_.To_int_by_bry(src, slot_bgn, slot_bgn + Offset_base85);
 				slot_new = slot_old + tmp_val;
 				int new_idx = itm_count + 1;
 				if (tmp_len < new_idx) {
 					tmp_len = new_idx * 2;
-					tmp = (int[])Array_.Resize(tmp, tmp_len);
+					tmp = (int[])ArrayUtl.Resize(tmp, tmp_len);
 				}
 				tmp[itm_count] = slot_new;
 				itm_count = new_idx;
@@ -183,9 +187,9 @@ public class Xob_xdat_file {
 		for (int i = 1; i < rows_len; i++) {	// i=1; skip 1st row (which is empty header)
 			byte[] row = rows[i];
 			int row_len = row.length + dlm_len;
-			bfr.Add_base85_len_5(row_len).Add_byte(Byte_ascii.Pipe);
+			bfr.Add_base85_len_5(row_len).Add_byte(AsciiByte.Pipe);
 		}
-		bfr.Add_byte(Byte_ascii.Nl);
+		bfr.Add_byte(AsciiByte.Nl);
 		for (int i = 1; i < rows_len; i++) {	// i=1; skip 1st row (which is empty header)
 			byte[] row = rows[i];
 			bfr.Add(row);
@@ -206,24 +210,24 @@ class Xob_xdat_file_ {
 			int itm_bgn = itm_0_bgn + (itm_idx == 0 ? 0 : itm_ends[itm_idx - 1]);
 			int itm_end = itm_0_bgn +                     itm_ends[itm_idx] - itm_end_adj;	// itm_end_adj to handle ttl .xdat and trailing \n
 			int fld_bgn = itm_bgn + lkp_bgn, lkp_pos = -1;
-			int comp = CompareAble_.Same;
+			int comp = CompareAbleUtl.Same;
 			for (int i = fld_bgn; i < itm_end; i++) { // see if current itm matches lkp; NOTE: that i < itm_end but will end much earlier (since itm_end includes page text)
 				byte b = src[i];
 				if (b == lkp_dlm) {	// fld is done
-					if (lkp_pos != lkp_len - 1) comp = CompareAble_.More; // lkp has more chars than itm; lkp_dlm reached early
+					if (lkp_pos != lkp_len - 1) comp = CompareAbleUtl.More; // lkp has more chars than itm; lkp_dlm reached early
 					break;
 				}
 				lkp_pos = i - fld_bgn;
 				if (lkp_pos >= lkp_len) {
-					comp = CompareAble_.Less;	// lkp has less chars than itm
+					comp = CompareAbleUtl.Less;	// lkp has less chars than itm
 					break;
 				}
 				comp = (lkp[lkp_pos] & 0xff) - (b & 0xff);	// subtract src[i] from lkp[lkp_pos] // PATCH.JAVA:need to convert to unsigned byte
-				if (comp != CompareAble_.Same) break;		// if comp != 0 then not equal; break; otherwise if bytes are the same, then comp == 0;
+				if (comp != CompareAbleUtl.Same) break;		// if comp != 0 then not equal; break; otherwise if bytes are the same, then comp == 0;
 			}
-			if		(comp >  CompareAble_.Same || (comp == CompareAble_.Same && itm_end - fld_bgn < lkp_len)) {lo = itm_idx; delta =  1;}
-			else if	(comp == CompareAble_.Same) {xdat_itm.Found_exact_y_(); return itm_idx;}
-			else if	(comp <  CompareAble_.Same) {hi = itm_idx; delta = -1;}
+			if		(comp >  CompareAbleUtl.Same || (comp == CompareAbleUtl.Same && itm_end - fld_bgn < lkp_len)) {lo = itm_idx; delta =  1;}
+			else if	(comp == CompareAbleUtl.Same) {xdat_itm.Found_exact_y_(); return itm_idx;}
+			else if	(comp <  CompareAbleUtl.Same) {hi = itm_idx; delta = -1;}
 			int itm_dif = hi - lo;
 //				if (itm_end - 1 > fld_bgn) Tfds.Dbg(comp, itm_dif, String_.new_u8(src, fld_bgn, itm_end - 1));
 			switch (itm_dif) {

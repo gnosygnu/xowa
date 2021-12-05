@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.xowa.apps.apis.xowa.html.modules.*;
+package gplx.xowa.htmls.modules.popups;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
 public class Xow_popup_html_mkr {
 	private Xoae_app app; private Xowe_wiki wiki;
 	public Bry_fmtr Fmtr_popup()		{return fmtr_popup;}			private Bry_fmtr fmtr_popup				= Bry_fmtr.new_(Dflt_html_fmtr_popup, Dflt_html_fmtr_popup_keys);
@@ -33,7 +40,7 @@ public class Xow_popup_html_mkr {
 	}
 	public byte[] Bld(Xowe_wiki cur_wiki, Xoae_page page, Xow_popup_itm popup_itm, Bry_bfr wrdx_bfr) {
 		if (output_js_clean)	cur_wiki.Html_mgr().Js_cleaner().Clean_bfr(wiki, page.Ttl(), wrdx_bfr, 0);
-		if (output_tidy)		cur_wiki.Html_mgr().Tidy_mgr().Exec_tidy(wrdx_bfr, Bool_.Y, page.Url_bry_safe());
+		if (output_tidy)		cur_wiki.Html_mgr().Tidy_mgr().Exec_tidy(wrdx_bfr, BoolUtl.Y, page.Url_bry_safe());
 		byte[] hdom_bry = wrdx_bfr.To_bry_and_clear();
 		String page_url = wrdx_bfr.Add(page.Wiki().Domain_bry()).Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__wiki).Add(gplx.langs.htmls.encoders.Gfo_url_encoder_.Href
 			.Encode(page.Ttl().Full_db()))	// NOTE: was page.Url().Raw(), but that doesn't work for Special:Search; PAGE:en.w:Earth and "Quotations"; DATE:2014-06-29

@@ -13,9 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.tblws.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
-import gplx.core.btries.*; 
+package gplx.xowa.parsers.paras;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_ctx_wkr;
+import gplx.xowa.parsers.Xop_parser_;
+import gplx.xowa.parsers.Xop_parser_tid_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.parsers.tblws.Xop_tblw_wkr;
+import gplx.xowa.parsers.tblws.Xop_tblw_ws_itm;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
 public class Xop_para_wkr implements Xop_ctx_wkr {
 	private boolean para_enabled;
 	private byte cur_mode;
@@ -49,11 +63,11 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 		}
 		this.Clear();
 	}
-	public void Process_block__bgn_y__end_n(Xop_xnde_tag tag)		{Process_block(tag, Bool_.Y, Bool_.N);}	// NOTE: disables para for rest of page; Process_block__bgn_n__end_y must be called; DATE:2014-04-18
-	public void Process_block__bgn_n__end_y(Xop_xnde_tag tag)		{Process_block(tag, Bool_.N, Bool_.Y);}
+	public void Process_block__bgn_y__end_n(Xop_xnde_tag tag)		{Process_block(tag, BoolUtl.Y, BoolUtl.N);}	// NOTE: disables para for rest of page; Process_block__bgn_n__end_y must be called; DATE:2014-04-18
+	public void Process_block__bgn_n__end_y(Xop_xnde_tag tag)		{Process_block(tag, BoolUtl.N, BoolUtl.Y);}
 	public void Process_block__xnde(Xop_xnde_tag tag, byte mode) {
-		if		(mode == Xop_xnde_tag.Block_bgn)	 Process_block(tag, Bool_.Y, Bool_.N);
-		else if (mode == Xop_xnde_tag.Block_end)	 Process_block(tag, Bool_.N, Bool_.Y);
+		if		(mode == Xop_xnde_tag.Block_bgn)	 Process_block(tag, BoolUtl.Y, BoolUtl.N);
+		else if (mode == Xop_xnde_tag.Block_end)	 Process_block(tag, BoolUtl.N, BoolUtl.Y);
 	}
 	public void Process_block_lnki_div() {	// bgn_lhs is pos of [[; end_lhs is pos of ]]
 		if (prv_ws_bgn > 0)	 // if pre at start of line; ignore it b/c of div; EX: "\n\s[[File:A.png|thumb]]" should not produce thumb; also [[File:A.png|right]]; DATE:2014-02-17
@@ -103,9 +117,9 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 					if (line_is_ws) {														// line is entirely ws
 						int next_char_pos = prv_nl_pos + 2;									// "\n\s".length
 						if (	next_char_pos < src.length									// bounds check
-							&&	src[next_char_pos] == Byte_ascii.Nl					// is "\n\s\n"; i.e.: "\n" only
+							&&	src[next_char_pos] == AsciiByte.Nl					// is "\n\s\n"; i.e.: "\n" only
 							) {
-							ctx.Subs_add(root, ctx.Tkn_mkr().Bry_raw(bgn_pos, bgn_pos, Byte_ascii.Nl_bry));	// add a "\n" tkn; note that adding a NewLine tkn doesn't work, b/c Xoh_html_wtr has code to remove consecutive \n; PAGE:en.w:Preferred_numbers DATE:2014-06-24
+							ctx.Subs_add(root, ctx.Tkn_mkr().Bry_raw(bgn_pos, bgn_pos, AsciiByte.NlBry));	// add a "\n" tkn; note that adding a NewLine tkn doesn't work, b/c Xoh_html_wtr has code to remove consecutive \n; PAGE:en.w:Preferred_numbers DATE:2014-06-24
 							prv_nl_pos = bgn_pos;
 						}
 					}
@@ -174,9 +188,9 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 					int nxt_pos = trv.Pos();
 					if (nxt_pos < src_len) {	// bounds check
 						switch (src[nxt_pos]) {	// check that next char is "end" of xnde name; guard against false matches like "<trk" PAGE:de.v:Via_Jutlandica/Gpx DATE:2014-11-29
-							case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab:		// whitespace
-							case Byte_ascii.Slash: case Byte_ascii.Gt:									// end node
-							case Byte_ascii.Quote: case Byte_ascii.Apos:								// quotes
+							case AsciiByte.Space: case AsciiByte.Nl: case AsciiByte.Tab:		// whitespace
+							case AsciiByte.Slash: case AsciiByte.Gt:									// end node
+							case AsciiByte.Quote: case AsciiByte.Apos:								// quotes
 								if (bgn_pos != Xop_parser_.Doc_bgn_bos)
 									ctx.Para().Process_nl(ctx, root, src, bgn_pos, cur_pos);
 								return ctx.Xnde().Make_tkn(ctx, tkn_mkr, root, src, src_len, txt_pos, txt_pos + 1);
@@ -216,8 +230,8 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 							for (int j = pos; j < src_len; j++) {	// check if rest of line is ws
 								byte b = src[j];
 								switch (b) {
-									case Byte_ascii.Space: case Byte_ascii.Tab: break;	// ignore space / tab
-									case Byte_ascii.Nl:
+									case AsciiByte.Space: case AsciiByte.Tab: break;	// ignore space / tab
+									case AsciiByte.Nl:
 										nl_at_eol = j;
 										j = src_len;
 										break;
@@ -275,8 +289,8 @@ public class Xop_para_wkr implements Xop_ctx_wkr {
 		for (int i = prv_nl_pos + 1; i < pos; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Tab:
-				case Byte_ascii.Space:
+				case AsciiByte.Tab:
+				case AsciiByte.Space:
 					break;
 				default:
 					ws = false;

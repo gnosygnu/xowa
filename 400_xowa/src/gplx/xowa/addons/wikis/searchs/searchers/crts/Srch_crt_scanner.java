@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 class Srch_crt_scanner {
 	private final List_adp tkns = List_adp_.New(); private byte[] src; private int src_len, pos, txt_bgn;
 	private final Srch_crt_scanner_syms trie_bldr; private final Btrie_slim_mgr trie; private final Btrie_rv trv = new Btrie_rv();
@@ -80,7 +81,7 @@ class Srch_crt_scanner {
 							else {									// end-quote found; check if it's doubled
 								int double_pos = quote_end + 1;
 								if (	double_pos < src_len
-									&&	src[double_pos] == Byte_ascii.Quote) {
+									&&	src[double_pos] == AsciiByte.Quote) {
 									if (!word_is_dirty) {
 										word_is_dirty = true;
 									}

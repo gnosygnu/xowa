@@ -69,9 +69,9 @@ public abstract class XomwGenericArrayObject extends XomwArrayObject {	/**
 	*/
 	public XomwGenericArrayObject() {
 		//	if (input != null) {
-		//		int len = Array_.Len(input);
+		//		int len = ArrayUtl.Len(input);
 		//		for (int i = 0; i < len; i++) {
-		//			Object val = Array_.Get_at(input, i);
+		//			Object val = ArrayUtl.Get_at(input, i);
 		//			this.offsetSet(i, val);
 		//		}
 		//	}

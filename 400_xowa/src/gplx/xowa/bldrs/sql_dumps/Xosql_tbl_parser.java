@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.sql_dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.ios.*;
+package gplx.xowa.bldrs.sql_dumps; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Xosql_tbl_parser {
 	public Ordered_hash Parse(byte[] raw) {
 		Ordered_hash rv = Ordered_hash_.New_bry();
@@ -22,15 +22,15 @@ class Xosql_tbl_parser {
 		return rv;
 	}
 	private void Parse_flds(Ordered_hash rv, byte[] raw) {
-		byte[][] lines = Bry_split_.Split(raw, Byte_ascii.Nl);
+		byte[][] lines = Bry_split_.Split(raw, AsciiByte.Nl);
 		int lines_len = lines.length;
 		int fld_idx = 0;
 		for (int i = 0; i < lines_len; i++) {
 			byte[] line = lines[i];
 			// get fld bgn / end; EX: "`fld_1`"
-			int bgn = Bry_find_.Find_fwd(line, Byte_ascii.Tick); if (bgn == Bry_find_.Not_found) continue;		// skip blank lines
+			int bgn = Bry_find_.Find_fwd(line, AsciiByte.Tick); if (bgn == Bry_find_.Not_found) continue;		// skip blank lines
 			bgn += Int_.Offset_1;
-			int end = Bry_find_.Find_fwd(line, Byte_ascii.Tick, bgn); if (end == Bry_find_.Not_found) continue;	// skip blank lines
+			int end = Bry_find_.Find_fwd(line, AsciiByte.Tick, bgn); if (end == Bry_find_.Not_found) continue;	// skip blank lines
 
 			// add fld
 			byte[] key = Bry_.Mid(line, bgn, end);
@@ -40,7 +40,7 @@ class Xosql_tbl_parser {
 	public byte[] Extract_flds(byte[] raw) {	// NOTE: very dependent on MySQL dump formatter
 		// get bgn of flds; assume after "CREATE TABLE"
 		int bgn = Bry_find_.Find_fwd(raw, Tkn__create_table);	if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find 'CREATE TABLE'");
-		bgn = Bry_find_.Find_fwd(raw, Byte_ascii.Nl, bgn);		if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find new line after 'CREATE TABLE'");
+		bgn = Bry_find_.Find_fwd(raw, AsciiByte.Nl, bgn);		if (bgn == Bry_find_.Not_found) throw Err_.new_wo_type("could not find new line after 'CREATE TABLE'");
 		bgn += 1;	// position after \n
 
 		// get end of flds; more involved, as need to find last field before indexes

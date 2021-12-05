@@ -13,9 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.xtns.scribunto.libs.*; import gplx.xowa.xtns.scribunto.engines.process.*; import gplx.xowa.xtns.scribunto.procs.*;
-import gplx.xowa.parsers.tmpls.*;	
+package gplx.xowa.xtns.scribunto;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.Type_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.parsers.tmpls.Xot_invk_mock;
+import gplx.xowa.parsers.tmpls.Xot_invk_temp;
+import gplx.xowa.xtns.scribunto.engines.process.Process_server_mock;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
 public class Scrib_invoke_func_fxt {
 	private Xop_fxt fxt; Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); Scrib_core core; Process_server_mock server; Scrib_lua_rsp_bldr rsp_bldr = new Scrib_lua_rsp_bldr();
 	public Xop_fxt Parser_fxt() {return fxt;}
@@ -139,7 +162,7 @@ public class Scrib_invoke_func_fxt {
 		Scrib_proc proc = lib.Procs().Get_by_key(proc_name);
 		Scrib_proc_rslt rslt = new Scrib_proc_rslt();
 		boolean exec_rslt = proc.Proc_exec(new Scrib_proc_args(Scrib_kv_utl_.base1_many_(args)), rslt);
-		Tfds.Eq(Bool_.N, exec_rslt);
+		Tfds.Eq(BoolUtl.N, exec_rslt);
 		Tfds.Eq(null, rslt.Ary());
 		Tfds.Eq(expd, rslt.Fail_msg());
 	}
@@ -156,7 +179,7 @@ public class Scrib_invoke_func_fxt {
 		Bry_bfr bfr = Bry_bfr_.New();
 		int len = ary.length;
 		for (int i = 0; i < len; ++i) {
-			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
+			if (i != 0) bfr.Add_byte(AsciiByte.Semic);
 			Keyval kv = ary[i];
 			bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(kv.Val()));
 		}
@@ -212,17 +235,17 @@ class Scrib_lua_rsp_bldr {
 		Class<?> v_type = v.getClass();
 		if		(Object_.Eq(v_type, Int_.Cls_ref_type))			Bld_int(bfr, Int_.Cast(v));
 		else if	(Object_.Eq(v_type, String_.Cls_ref_type))		Bld_str(bfr, String_.cast(v));
-		else if	(Object_.Eq(v_type, Bool_.Cls_ref_type))		Bld_bool(bfr, Bool_.Cast(v));
+		else if	(Object_.Eq(v_type, BoolUtl.ClsRefType))		Bld_bool(bfr, BoolUtl.Cast(v));
 		else if	(Object_.Eq(v_type, Double_.Cls_ref_type))		Bld_double(bfr, Double_.cast(v));
 		else if	(Object_.Eq(v_type, Keyval[].class))			Bld_kv_ary(bfr, (Keyval[])v);
 		else if	(Object_.Eq(v_type, Scrib_lua_proc.class))	Bld_fnc(bfr, (Scrib_lua_proc)v);
 		else													throw Err_.new_unhandled(Type_.Name_by_obj(v));
 	}
-	private void Bld_bool(Bry_bfr bfr, boolean v)		{bfr.Add_str_a7("b:").Add_int_fixed(v ? 1 : 0, 1).Add_byte(Byte_ascii.Semic);}
-	private void Bld_int(Bry_bfr bfr, int v)		{bfr.Add_str_a7("i:").Add_int_variable(v).Add_byte(Byte_ascii.Semic);}
-	private void Bld_double(Bry_bfr bfr, double v)	{bfr.Add_str_a7("d:").Add_double(v).Add_byte(Byte_ascii.Semic);}
+	private void Bld_bool(Bry_bfr bfr, boolean v)		{bfr.Add_str_a7("b:").Add_int_fixed(v ? 1 : 0, 1).Add_byte(AsciiByte.Semic);}
+	private void Bld_int(Bry_bfr bfr, int v)		{bfr.Add_str_a7("i:").Add_int_variable(v).Add_byte(AsciiByte.Semic);}
+	private void Bld_double(Bry_bfr bfr, double v)	{bfr.Add_str_a7("d:").Add_double(v).Add_byte(AsciiByte.Semic);}
 	private void Bld_str(Bry_bfr bfr, String v)		{bfr.Add_str_a7("s:").Add_int_variable(Bry_.new_u8(v).length).Add_str_a7(":\"").Add_str_a7(v).Add_str_a7("\";");}	// NOTE: must use Bry_.new_u8(v).length to calculate full bry len
-	private void Bld_fnc(Bry_bfr bfr, Scrib_lua_proc v)	{bfr.Add_str_a7("O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:").Add_int_variable(v.Id()).Add_byte(Byte_ascii.Semic).Add_byte(Byte_ascii.Curly_end);}
+	private void Bld_fnc(Bry_bfr bfr, Scrib_lua_proc v)	{bfr.Add_str_a7("O:42:\"Scribunto_LuaStandaloneInterpreterFunction\":1:{s:2:\"id\";i:").Add_int_variable(v.Id()).Add_byte(AsciiByte.Semic).Add_byte(AsciiByte.CurlyEnd);}
 	private void Bld_kv_ary(Bry_bfr bfr, Keyval[] ary) {
 		int len = ary.length;
 		bfr.Add_str_a7("a:").Add_int_variable(len).Add_str_a7(":{");
@@ -236,6 +259,6 @@ class Scrib_lua_rsp_bldr {
 				Bld_obj(bfr, kv.Val());
 			}
 		}
-		bfr.Add_byte(Byte_ascii.Curly_end);
+		bfr.Add_byte(AsciiByte.CurlyEnd);
 	}
 }

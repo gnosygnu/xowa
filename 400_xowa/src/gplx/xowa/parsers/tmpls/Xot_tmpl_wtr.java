@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.*;
 import gplx.core.envs.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.miscs.*;
 public class Xot_tmpl_wtr {
@@ -41,9 +43,9 @@ public class Xot_tmpl_wtr {
 				break;
 			case Xop_tkn_itm_.Tid_space:
 				if (tkn.Tkn_immutable())
-					rslt_bfr.Add_byte(Byte_ascii.Space);
+					rslt_bfr.Add_byte(AsciiByte.Space);
 				else
-					rslt_bfr.Add_byte_repeat(Byte_ascii.Space, tkn.Src_end() - tkn.Src_bgn());
+					rslt_bfr.Add_byte_repeat(AsciiByte.Space, tkn.Src_end() - tkn.Src_bgn());
 				break;
 			case Xop_tkn_itm_.Tid_xnde:
 				Xop_xnde_tkn xnde = (Xop_xnde_tkn)tkn;
@@ -65,7 +67,7 @@ public class Xot_tmpl_wtr {
 							rslt_bfr.Add_mid(src, tkn.Src_bgn(), tkn.Src_end());	// write src from bgn/end
 						else {												// NOTE: if nowiki then "deactivate" all xndes by swapping out < for &lt; nowiki_xnde_frag; DATE:2013-01-27
 							// NOWIKI;DATE:2018-01-16
-							// byte[] uniq = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(Bool_.N, Bry_.Empty, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()));
+							// byte[] uniq = ctx.Wiki().Parser_mgr().Uniq_mgr().Add(BoolUtl.N, Bry_.Empty, Bry_.Mid(src, xnde.Tag_open_end(), xnde.Tag_close_bgn()));
 							// rslt_bfr.Add(uniq);
 
 							int nowiki_content_bgn = xnde.Tag_open_end(), nowiki_content_end = xnde.Tag_close_bgn();

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.*;
 /**
@@ -115,13 +117,13 @@ public class XomwBlockLevelPass {
 	private byte[] openList(byte c) {
 		byte[] result = this.closeParagraph();
 
-		if      (c == Byte_ascii.Star)
+		if      (c == AsciiByte.Star)
 			result = Bry_.Add(result, Bry_.new_a7("<ul><li>"));
-		else if (c == Byte_ascii.Hash)
+		else if (c == AsciiByte.Hash)
 			result = Bry_.Add(result, Bry_.new_a7("<ol><li>"));
-		else if (c == Byte_ascii.Colon)
+		else if (c == AsciiByte.Colon)
 			result = Bry_.Add(result, Bry_.new_a7("<dl><dd>"));
-		else if (c == Byte_ascii.Semic) {
+		else if (c == AsciiByte.Semic) {
 			result = Bry_.Add(result, Bry_.new_a7("<dl><dt>"));
 			this.DTopen = true;
 		}
@@ -139,15 +141,15 @@ public class XomwBlockLevelPass {
 	* @return String
 	*/
 	private byte[] nextItem(byte c) {
-		if (c == Byte_ascii.Star || c == Byte_ascii.Hash) {
+		if (c == AsciiByte.Star || c == AsciiByte.Hash) {
 			return Bry_.new_a7("</li>\n<li>");
 		}
-		else if (c == Byte_ascii.Colon || c == Byte_ascii.Semic) {
+		else if (c == AsciiByte.Colon || c == AsciiByte.Semic) {
 			byte[] close = Bry_.new_a7("</dd>\n");
 			if (this.DTopen) {
 				close = Bry_.new_a7("</dt>\n");
 			}
-			if (c == Byte_ascii.Semic) {
+			if (c == AsciiByte.Semic) {
 				this.DTopen = true;
 				return Bry_.Add(close, Bry_.new_a7("<dt>"));
 			}
@@ -167,13 +169,13 @@ public class XomwBlockLevelPass {
 	*/
 	private byte[] closeList(byte c) {
 		byte[] text = null;
-		if (c == Byte_ascii.Star) {
+		if (c == AsciiByte.Star) {
 			text = Bry_.new_a7("</li></ul>");
 		}
-		else if (c == Byte_ascii.Hash) {
+		else if (c == AsciiByte.Hash) {
 			text = Bry_.new_a7("</li></ol>");
 		}
-		else if (c == Byte_ascii.Colon) {
+		else if (c == AsciiByte.Colon) {
 			if (this.DTopen) {
 				this.DTopen = false;
 				text = Bry_.new_a7("</dt></dl>");
@@ -237,7 +239,7 @@ public class XomwBlockLevelPass {
 		// PORTED.SPLIT: $textLines = StringUtils::explode("\n", $text);
 		int lineBgn = src_bgn;
 		while (lineBgn < src_end) {
-			int lineEnd = Bry_find_.Find_fwd(src, Byte_ascii.Nl, lineBgn);
+			int lineEnd = Bry_find_.Find_fwd(src, AsciiByte.Nl, lineBgn);
 			if (lineEnd == Bry_find_.Not_found)
 				lineEnd = src_end;
 
@@ -286,7 +288,7 @@ public class XomwBlockLevelPass {
 				//  for the purposes of determining whether or not we need to open/close
 				//  elements.
 				// substr($inputLine, $prefixLength);
-				prefix2 = Bry_.Replace(prefix, Byte_ascii.Semic, Byte_ascii.Colon);
+				prefix2 = Bry_.Replace(prefix, AsciiByte.Semic, AsciiByte.Colon);
 				t = Bry_.Mid(src, lineBgn + prefixLen, lineEnd);
 				this.inPre = preOpenMatch;
 			}
@@ -305,7 +307,7 @@ public class XomwBlockLevelPass {
 				bfr.Add(this.nextItem(XophpString_.substr_byte(prefix, -1)));
 				pendingPTag = PARA_STACK_NONE;
 
-				if (prefixLen > 0 && prefix[prefixLen - 1] == Byte_ascii.Semic) {
+				if (prefixLen > 0 && prefix[prefixLen - 1] == AsciiByte.Semic) {
 					// The one nasty exception: definition lists work like this:
 					// ; title : definition text
 					// So we check for : in the remainder text to split up the
@@ -315,7 +317,7 @@ public class XomwBlockLevelPass {
 						term = find_colon_no_links__before;
 						t2   = find_colon_no_links__after;
 						t = t2;
-						bfr.Add(term).Add(nextItem(Byte_ascii.Colon));
+						bfr.Add(term).Add(nextItem(AsciiByte.Colon));
 					}
 				}
 			}
@@ -345,13 +347,13 @@ public class XomwBlockLevelPass {
 					byte c = XophpString_.substr_byte(prefix, commonPrefixLen, 1);
 					bfr.Add(this.openList(c));
 
-					if (c == Byte_ascii.Semic) {
+					if (c == AsciiByte.Semic) {
 						// @todo FIXME: This is dupe of code above
 						if (findColonNoLinks(t, term, t2) != Bry_find_.Not_found) {
 							term = find_colon_no_links__before;
 							t2   = find_colon_no_links__after;
 							t = t2;
-							bfr.Add(term).Add(nextItem(Byte_ascii.Colon));
+							bfr.Add(term).Add(nextItem(AsciiByte.Colon));
 						}
 					}
 					++commonPrefixLen;
@@ -388,7 +390,7 @@ public class XomwBlockLevelPass {
 						}
 						else {
 							byte[] bq_bry = (byte[])o;
-							inBlockquote = bq_bry[1] != Byte_ascii.Slash; // is this a close tag?
+							inBlockquote = bq_bry[1] != AsciiByte.Slash; // is this a close tag?
 							bqOffset = trv.Pos();
 						}
 					}
@@ -396,7 +398,7 @@ public class XomwBlockLevelPass {
 					inBlockElem = !closeMatch;
 				}
 				else if (!inBlockElem && !this.inPre) {
-					if (XophpString_.substr_byte(t, 0) == Byte_ascii.Space
+					if (XophpString_.substr_byte(t, 0) == AsciiByte.Space
 						&& (this.lastSection == LAST_SECTION_PRE || Bry_.Trim(t) != Bry_.Empty)
 						&& !inBlockquote
 					) {
@@ -481,13 +483,13 @@ public class XomwBlockLevelPass {
 	*/
 	private int findColonNoLinks(byte[] str, byte[] before, byte[] after) {
 		int len = str.length;
-		int colonPos = XophpString_.strpos(str, Byte_ascii.Colon, 0, len);
+		int colonPos = XophpString_.strpos(str, AsciiByte.Colon, 0, len);
 		if (colonPos == Bry_find_.Not_found) {
 			// Nothing to find!
 			return Bry_find_.Not_found;
 		}
 
-		int ltPos = XophpString_.strpos(str, Byte_ascii.Angle_bgn, 0, len);
+		int ltPos = XophpString_.strpos(str, AsciiByte.AngleBgn, 0, len);
 		if (ltPos == Bry_find_.Not_found || ltPos > colonPos) {
 			// Easy; no tag nesting to worry about
 			// XOMW: MW passes before / after by reference; XO: changes member and depends on callers to update
@@ -505,11 +507,11 @@ public class XomwBlockLevelPass {
 			switch (state) {
 				case COLON_STATE_TEXT:
 					switch (c) {
-						case Byte_ascii.Angle_bgn:
+						case AsciiByte.AngleBgn:
 							// Could be either a <start> tag or an </end> tag
 							state = COLON_STATE_TAGSTART;
 							break;
-						case Byte_ascii.Colon:
+						case AsciiByte.Colon:
 							if (level == 0) {
 								// We found it!
 								find_colon_no_links__before = XophpString_.substr(str, 0, i);
@@ -520,12 +522,12 @@ public class XomwBlockLevelPass {
 							break;
 						default:
 							// Skip ahead looking for something interesting
-							colonPos = XophpString_.strpos(str, Byte_ascii.Colon, i, len);
+							colonPos = XophpString_.strpos(str, AsciiByte.Colon, i, len);
 							if (colonPos == Bry_find_.Not_found) {
 								// Nothing else interesting
 								return Bry_find_.Not_found;
 							}
-							ltPos = XophpString_.strpos(str, Byte_ascii.Angle_bgn, i, len);
+							ltPos = XophpString_.strpos(str, AsciiByte.AngleBgn, i, len);
 							if (level == 0) {
 								if (ltPos == Bry_find_.Not_found || colonPos < ltPos) {
 									// We found it!
@@ -549,11 +551,11 @@ public class XomwBlockLevelPass {
 				case COLON_STATE_TAG:
 					// In a <tag>
 					switch (c) {
-						case Byte_ascii.Angle_end:
+						case AsciiByte.AngleEnd:
 							level++;
 							state = COLON_STATE_TEXT;
 							break;
-						case Byte_ascii.Slash:
+						case AsciiByte.Slash:
 							// Slash may be followed by >?
 							state = COLON_STATE_TAGSLASH;
 							break;
@@ -564,13 +566,13 @@ public class XomwBlockLevelPass {
 					break;
 				case COLON_STATE_TAGSTART:
 					switch (c) {
-						case Byte_ascii.Slash:
+						case AsciiByte.Slash:
 							state = COLON_STATE_CLOSETAG;
 							break;
-						case Byte_ascii.Bang:
+						case AsciiByte.Bang:
 							state = COLON_STATE_COMMENT;
 							break;
-						case Byte_ascii.Angle_end:
+						case AsciiByte.AngleEnd:
 							// Illegal early close? This shouldn't happen D:
 							state = COLON_STATE_TEXT;
 							break;
@@ -581,7 +583,7 @@ public class XomwBlockLevelPass {
 					break;
 				case COLON_STATE_CLOSETAG:
 					// In a </tag>
-					if (c == Byte_ascii.Angle_end) {
+					if (c == AsciiByte.AngleEnd) {
 						level--;
 						if (level < 0) {
 							Gfo_usr_dlg_.Instance.Warn_many("", "", "Invalid input; too many close tags");
@@ -591,7 +593,7 @@ public class XomwBlockLevelPass {
 					}
 					break;
 				case COLON_STATE_TAGSLASH:
-					if (c == Byte_ascii.Angle_end) {
+					if (c == AsciiByte.AngleEnd) {
 						// Yes, a self-closed tag <blah/>
 						state = COLON_STATE_TEXT;
 					}
@@ -601,12 +603,12 @@ public class XomwBlockLevelPass {
 					}
 					break;
 				case COLON_STATE_COMMENT:
-					if (c == Byte_ascii.Dash) {
+					if (c == AsciiByte.Dash) {
 						state = COLON_STATE_COMMENTDASH;
 					}
 					break;
 				case COLON_STATE_COMMENTDASH:
-					if (c == Byte_ascii.Dash) {
+					if (c == AsciiByte.Dash) {
 						state = COLON_STATE_COMMENTDASHDASH;
 					}
 					else {
@@ -614,7 +616,7 @@ public class XomwBlockLevelPass {
 					}
 					break;
 				case COLON_STATE_COMMENTDASHDASH:
-					if (c == Byte_ascii.Angle_bgn) {
+					if (c == AsciiByte.AngleBgn) {
 						state = COLON_STATE_TEXT;
 					}
 					else {
@@ -647,10 +649,10 @@ public class XomwBlockLevelPass {
 	private static boolean[] block_chars_ary; 
 	private static boolean[] Block_chars_ary__new() {
 		boolean[] rv = new boolean[256];
-		rv[Byte_ascii.Star] = true;
-		rv[Byte_ascii.Hash] = true;
-		rv[Byte_ascii.Colon] = true;
-		rv[Byte_ascii.Semic] = true;
+		rv[AsciiByte.Star] = true;
+		rv[AsciiByte.Hash] = true;
+		rv[AsciiByte.Colon] = true;
+		rv[AsciiByte.Semic] = true;
 		return rv;
 	}
 	private static Btrie_slim_mgr openMatchTrie, closeMatchTrie, blockquoteTrie;

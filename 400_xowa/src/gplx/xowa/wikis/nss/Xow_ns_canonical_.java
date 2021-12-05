@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.nss; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.strings.AsciiByte;
 public class Xow_ns_canonical_ {
 	public static final Xow_ns[] Ary = new Xow_ns[]	// REF.MW: Namespace.php|$wgCanonicalNamespaceNames
 	{ New_itm(Xow_ns_.Tid__media					, Xow_ns_.Key__media)
@@ -123,6 +124,6 @@ public class Xow_ns_canonical_ {
 			case Xow_ns_.Tid__module_talk:				rv = Xow_ns_.Bry__module_talk; break;
 			default:									return ns.Name_db_w_colon();
 		}
-		return Bry_.Add(rv, Byte_ascii.Colon_bry);
+		return Bry_.Add(rv, AsciiByte.ColonBry);
 	}
 }

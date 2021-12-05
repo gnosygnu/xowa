@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.apps.apis.xowa.html.*;
 class Wdata_fmtr__langtext_tbl implements gplx.core.brys.Bfr_arg {
@@ -104,7 +105,7 @@ class Wdata_fmtr__alias_row implements gplx.core.brys.Bfr_arg, Wdata_fmtr__langt
 			for (int j = 0; j < vals_len; ++j) {
 				byte[] val = vals_ary[j];
 				Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_intl(itm.Lang());
-				byte[] lang_code = Byte_ascii.Dash_bry;
+				byte[] lang_code = AsciiByte.DashBry;
 				byte[] lang_code_style = lang_code_style_n;
 				if (j == 0) {
 					lang_code = lang_itm.Key();

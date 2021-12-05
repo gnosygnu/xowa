@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps; import gplx.*;
 import gplx.core.btries.*; import gplx.core.log_msgs.*;
+import gplx.objects.strings.AsciiByte;
 interface Php_lxr {
 	int Lxr_tid();
 	void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts);
@@ -35,7 +36,7 @@ class Php_lxr_declaration extends Php_lxr_base {
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_declaration;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
 		trie.Add_obj(Bry_declaration, this);
-		parser_interrupts[Byte_ascii.Lt] = Php_parser_interrupt.Char;
+		parser_interrupts[AsciiByte.Lt] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
 		boolean loop = true;
@@ -44,7 +45,7 @@ class Php_lxr_declaration extends Php_lxr_base {
 			if (cur == src_len) break;
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Nl: case AsciiByte.Cr:
 					ws_found = true;
 					++cur;
 					break;
@@ -82,7 +83,7 @@ class Php_lxr_ws extends Php_lxr_base {
 			if (cur == src_len) break;
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Nl: case AsciiByte.Tab: case AsciiByte.Cr:
 					++cur;
 					break;
 				default:
@@ -107,8 +108,8 @@ class Php_lxr_comment extends Php_lxr_base {
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_comment;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
 		trie.Add_obj(comment_bgn, this);
-		parser_interrupts[Byte_ascii.Slash] = Php_parser_interrupt.Char; 
-		parser_interrupts[Byte_ascii.Hash] = Php_parser_interrupt.Char; 
+		parser_interrupts[AsciiByte.Slash] = Php_parser_interrupt.Char;
+		parser_interrupts[AsciiByte.Hash] = Php_parser_interrupt.Char;
 	}
 	public byte Comment_tid() {return comment_tid;} private byte comment_tid;
 	public byte[] Comment_bgn() {return comment_bgn;} private byte[] comment_bgn;
@@ -132,7 +133,7 @@ class Php_lxr_var extends Php_lxr_base {
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_var;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
 		trie.Add_obj(Bry_var, this);
-		parser_interrupts[Byte_ascii.Dollar] = Php_parser_interrupt.Char;
+		parser_interrupts[AsciiByte.Dollar] = Php_parser_interrupt.Char;
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
 		boolean loop = true;
@@ -140,19 +141,19 @@ class Php_lxr_var extends Php_lxr_base {
 			if (cur == src_len) break;
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-				case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-				case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-				case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-				case Byte_ascii.Underline:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+				case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+				case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+				case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+				case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+				case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+				case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+				case AsciiByte.Underline:
 					++cur;
 					break;
 				default:
@@ -181,8 +182,8 @@ class Php_lxr_quote extends Php_lxr_base {
 	public Php_lxr_quote(byte quote_tid) {
 		this.quote_tid = quote_tid;
 		switch (quote_tid) {
-			case Byte_ascii.Apos: 		quote_bry = Quote_bry_single; break;
-			case Byte_ascii.Quote: 		quote_bry = Quote_bry_double; break;
+			case AsciiByte.Apos: 		quote_bry = Quote_bry_single; break;
+			case AsciiByte.Quote: 		quote_bry = Quote_bry_double; break;
 		}
 	}
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_quote;}
@@ -203,10 +204,10 @@ class Php_lxr_quote extends Php_lxr_base {
 			}
 			else {
 				boolean end_quote = true;
-				if (src[end - 1] == Byte_ascii.Backslash) {		// \' encountered;
+				if (src[end - 1] == AsciiByte.Backslash) {		// \' encountered;
 					int backslash_count = 1;
 					for (int i = end - 2; i > -1; i--) {		// count preceding backslashes
-						if (src[i] == Byte_ascii.Backslash)
+						if (src[i] == AsciiByte.Backslash)
 							++backslash_count;
 						else
 							break;
@@ -236,15 +237,15 @@ class Php_lxr_keyword extends Php_lxr_base {
 		if (cur < src_len) {
 			byte next_byte = src[cur];
 			switch (next_byte) {	// valid characters for end of word; EX: 'null '; 'null='; etc..
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
-				case Byte_ascii.Hash: case Byte_ascii.Slash:
-				case Byte_ascii.Quote: case Byte_ascii.Apos:
-				case Byte_ascii.Bang: case Byte_ascii.Dollar: case Byte_ascii.Percent: case Byte_ascii.Amp:
-				case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Star: case Byte_ascii.Plus:
-				case Byte_ascii.Comma: case Byte_ascii.Dash: case Byte_ascii.Dot: case Byte_ascii.Semic:
-				case Byte_ascii.Lt: case Byte_ascii.Eq: case Byte_ascii.Gt: case Byte_ascii.Question: case Byte_ascii.At:
-				case Byte_ascii.Brack_bgn: case Byte_ascii.Backslash: case Byte_ascii.Brack_end: case Byte_ascii.Pow: case Byte_ascii.Tick:
-				case Byte_ascii.Curly_bgn: case Byte_ascii.Pipe: case Byte_ascii.Curly_end: case Byte_ascii.Tilde:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
+				case AsciiByte.Hash: case AsciiByte.Slash:
+				case AsciiByte.Quote: case AsciiByte.Apos:
+				case AsciiByte.Bang: case AsciiByte.Dollar: case AsciiByte.Percent: case AsciiByte.Amp:
+				case AsciiByte.ParenBgn: case AsciiByte.ParenEnd: case AsciiByte.Star: case AsciiByte.Plus:
+				case AsciiByte.Comma: case AsciiByte.Dash: case AsciiByte.Dot: case AsciiByte.Semic:
+				case AsciiByte.Lt: case AsciiByte.Eq: case AsciiByte.Gt: case AsciiByte.Question: case AsciiByte.At:
+				case AsciiByte.BrackBgn: case AsciiByte.Backslash: case AsciiByte.BrackEnd: case AsciiByte.Pow: case AsciiByte.Tick:
+				case AsciiByte.CurlyBgn: case AsciiByte.Pipe: case AsciiByte.CurlyEnd: case AsciiByte.Tilde:
 					break;
 				default:			// num,ltr or extended utf8 character sequence; treat keyword as false match; EX: 'nulla'; 'null0'
 					return Php_parser.NotFound;
@@ -258,7 +259,7 @@ class Php_lxr_num extends Php_lxr_base {
 	@Override public int Lxr_tid() {return Php_lxr_.Tid_keyword;}
 	@Override public void Lxr_ini(Btrie_slim_mgr trie, Php_parser_interrupt[] parser_interrupts) {
 		for (int i = 0; i < 10; i++)
-			trie.Add_obj(new byte[] {(byte)(i + Byte_ascii.Num_0)}, this);
+			trie.Add_obj(new byte[] {(byte)(i + AsciiByte.Num0)}, this);
 	}
 	@Override public int Lxr_make(Php_ctx ctx, int bgn, int cur) {
 		boolean loop = true;
@@ -266,8 +267,8 @@ class Php_lxr_num extends Php_lxr_base {
 			if (cur == src_len) break;
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					++cur;
 					break;
 				default:

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.jsonConfigs.scribunto;
 
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.Gfo_usr_dlg_;
 import gplx.Io_url;
@@ -70,7 +70,7 @@ public class Jscfg_scrib_lib implements Scrib_lib {
 		if (langCode == null) {
 			language = this.core.Wiki().Lang();
 		}
-		else if (!Bry_.Eq(langCode, Byte_ascii.Underline_bry)) {
+		else if (!Bry_.Eq(langCode, AsciiByte.UnderlineBry)) {
 			language = this.core.Wiki().App().Lang_mgr().Get_by_or_null(langCode);
 		}
 		else {
@@ -86,7 +86,7 @@ public class Jscfg_scrib_lib implements Scrib_lib {
 		commons_wiki.Init_assert();
 
 		// get page
-		byte[] ttl_in_data_ns = Bry_.Add(gplx.xowa.wikis.nss.Xow_ns_.Bry__data, Byte_ascii.Colon_bry, ttl_bry);
+		byte[] ttl_in_data_ns = Bry_.Add(gplx.xowa.wikis.nss.Xow_ns_.Bry__data, AsciiByte.ColonBry, ttl_bry);
 		byte[] page = Scrib_lib_title.GetContentInternal(core, commons_wiki, ttl_in_data_ns);
 		if (page == null) {
 			throw Err_.new_wo_type("bad argument #1 to 'get' (not a valid title) " + String_.new_u8(ttl_bry));

@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.brys.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.Bry_;
+import gplx.DateAdp_;
+import gplx.Int_;
+import gplx.core.brys.Bfr_arg_;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.primitives.BoolUtl;
 class Pxd_itm_colon extends Pxd_itm_base {
 	@Override public byte Tkn_tid() {return Pxd_itm_.Tid_colon;}
 	@Override public int Eval_idx() {return 20;}
@@ -24,7 +30,7 @@ class Pxd_itm_colon extends Pxd_itm_base {
 		Pxd_itm_int itm_int = null;
 		switch (colon_count) {
 			case 1:			// hh:mm
-				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), Bool_.N);
+				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), BoolUtl.N);
 				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_hour, Bfr_arg_.New_bry("null")); return false;}
 				if (!Pxd_eval_seg.Eval_as_h(state, itm_int)) return true;
 				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), true);
@@ -35,13 +41,13 @@ class Pxd_itm_colon extends Pxd_itm_base {
 				if (!Pxd_eval_seg.Eval_as_s(state, itm_int)) return true;
 				break;
 			case 3:			// +hh:mm; DATE:2014-08-26
-				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), Bool_.N);
+				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), BoolUtl.N);
 				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_timezone, Bfr_arg_.New_bry("null")); return false;}
 				byte tz_positive_val = Pxd_eval_seg.Eval_as_tz_sym(state, tkns, itm_int);
-				if (tz_positive_val == Bool_.__byte) return true;
-				boolean tz_negative = tz_positive_val == Bool_.N_byte;
+				if (tz_positive_val == BoolUtl.NullByte) return true;
+				boolean tz_negative = tz_positive_val == BoolUtl.NByte;
 				if (!Pxd_eval_seg.Eval_as_tz_h(state, itm_int, tz_negative)) return true;
-				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), Bool_.Y);
+				itm_int = Pxd_itm_int_.GetNearest(tkns, this.Ary_idx(), BoolUtl.Y);
 				if (itm_int == null) {state.Err_set(Pft_func_time_log.Invalid_timezone, Bfr_arg_.New_bry("null")); return false;}
 				if (tz_negative) itm_int.Val_(itm_int.Val() * -1);
 				if (!Pxd_eval_seg.Eval_as_tz_m(state, itm_int, tz_negative)) return true;
@@ -119,7 +125,7 @@ class Pxd_itm_int_mhs_6 extends Pxd_itm_base implements Pxd_itm_int_interface {
 		return true;
 	}
 }
-class Pxd_itm_sorter implements gplx.core.lists.ComparerAble {
+class Pxd_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Pxd_itm lhs = (Pxd_itm)lhsObj;
 		Pxd_itm rhs = (Pxd_itm)rhsObj;
@@ -130,7 +136,7 @@ class Pxd_itm_sorter implements gplx.core.lists.ComparerAble {
 		Pxd_itm[] rv = new Pxd_itm[src_len];
 		for (int i = 0; i < src_len; i++)
 			rv[i] = src[i];
-		Array_.Sort(rv, Pxd_itm_sorter.Instance);
+		ArrayUtl.Sort(rv, Pxd_itm_sorter.Instance);
 		return rv;
 	}
 }

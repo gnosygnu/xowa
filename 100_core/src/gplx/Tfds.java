@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 import gplx.core.strings.*; import gplx.core.consoles.*; import gplx.core.tests.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static boolean SkipDb = false;
 	public static void Eq_bool	(boolean expd	, boolean   actl)										{Eq_exec_y(expd, actl, "", Object_.Ary_empty);}
@@ -80,10 +81,10 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	}
 	static void Eq_ary_wkr(Object lhsAry, Object rhsAry, boolean compareUsingEquals, String customMsg) {
 		List_adp list = List_adp_.New(); boolean pass = true;
-		int lhsLen = Array_.Len(lhsAry), rhsLen = Array_.Len(rhsAry);
+		int lhsLen = ArrayUtl.Len(lhsAry), rhsLen = ArrayUtl.Len(rhsAry);
 		for (int i = 0; i < lhsLen; i++) {
-			Object lhs = Array_.Get_at(lhsAry, i);
-			Object rhs = i >= rhsLen ? "<<N/A>>" : Array_.Get_at(rhsAry, i);
+			Object lhs = ArrayUtl.GetAt(lhsAry, i);
+			Object rhs = i >= rhsLen ? "<<N/A>>" : ArrayUtl.GetAt(rhsAry, i);
 			String lhsString = msgBldr.Obj_xtoStr(lhs); String rhsString = msgBldr.Obj_xtoStr(rhs);	// even if compareUsingEquals, method does ToStr on each itm for failMsg
 			boolean isEq = compareUsingEquals
 				? Object_.Eq(lhs, rhs)
@@ -93,7 +94,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 		}
 		for (int i = lhsLen; i < rhsLen; i++) {
 			String lhsString = "<<N/A>>";
-			String rhsString = msgBldr.Obj_xtoStr(Array_.Get_at(rhsAry, i));
+			String rhsString = msgBldr.Obj_xtoStr(ArrayUtl.GetAt(rhsAry, i));
 			Eq_ary_wkr_addItm(list, i, false, lhsString, rhsString);
 			pass = false;
 		}
@@ -146,7 +147,7 @@ public class Tfds {		// URL:doc/gplx.tfds/Tfds.txt
 	public static void Dbg(Object... ary) {Write(ary);}
 	public static void Write(Object... ary) {
 		String_bldr sb = String_bldr_.new_();
-		int aryLen = Array_.Len(ary);
+		int aryLen = ArrayUtl.Len(ary);
 		for (int i = 0; i < aryLen; i++)
 			sb.Add_many("'", Object_.Xto_str_strict_or_null_mark(ary[i]), "'", " ");
 		WriteText(sb.To_str() + String_.Lf);

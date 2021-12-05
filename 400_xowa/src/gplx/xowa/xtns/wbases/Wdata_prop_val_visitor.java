@@ -15,12 +15,12 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Decimal_adp;
 import gplx.Decimal_adp_;
 import gplx.Double_;
@@ -131,7 +131,7 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 			}
 			else {					// lo_dif, hi_dif are diff; print lo - hi; this may not be what MW does
 				bfr.Add(lang.Num_mgr().Format_num_by_decimal(lo));		// lo;		EX: 1,230
-				bfr.Add_byte(Byte_ascii.Dash);							// dash:	EX: -
+				bfr.Add_byte(AsciiByte.Dash);							// dash:	EX: -
 				bfr.Add(lang.Num_mgr().Format_num_by_decimal(hi));		// hi;		EX: 1,238
 			}
 		}
@@ -160,7 +160,7 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 		for (int i = 0; i < len; i++) {
 			byte b = bry[i];
 			switch (b) {
-				case Byte_ascii.Plus:
+				case AsciiByte.Plus:
 					if (i == 0) {
 						if (bfr == null) bfr = Bry_bfr_.New();
 					}
@@ -168,7 +168,7 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 						throw Err_.new_wo_type("invalid decimal format; plus must be at start of String", "raw", bry);
 					}
 					break;
-				case Byte_ascii.Comma:
+				case AsciiByte.Comma:
 					if (bfr == null) {
 						bfr = Bry_bfr_.New();
 						bfr.Add_mid(bry, 0, i);
@@ -182,7 +182,7 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 		}
 		return bfr == null ? bry : bfr.To_bry_and_clear();
 	}
-	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(Bool_.N, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), msgs, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());}
+	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm) {Write_geo(BoolUtl.N, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), msgs, itm.Lat(), itm.Lng(), itm.Alt(), itm.Prc(), itm.Glb());}
 	public static void Write_geo(boolean wikidata_page, Bry_bfr bfr, Wdata_lbl_mgr lbl_mgr, Wdata_hwtr_msgs msgs, byte[] lat, byte[] lng, byte[] alt, byte[] prc, byte[] glb) {
 		// 2020-09-06|ISSUE#:792|rewrite based on https://en.wikipedia.org/w/index.php?title=Module:Wd&action=edit; REF.MW: https://github.com/DataValues/Geo/blob/master/src/Formatters/LatLongFormatter.php
 		// normalize precision
@@ -218,18 +218,18 @@ public class Wdata_prop_val_visitor implements Wbase_claim_visitor { // THREAD.U
 		numDigits += 4; // +4 b/c Map_dd2dms_func.Deg_to_dms needs 4 places to evaluate MS while fracs are evaulated as numDigits
 
 		// write lat / lng
-		Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, Bool_.N, Bry_.new_a7(Double_.To_str(latitude)), numDigits);
+		Map_dd2dms_func.Deg_to_dms(bfr, BoolUtl.Y, BoolUtl.N, Bry_.new_a7(Double_.To_str(latitude)), numDigits);
 		bfr.Add_byte_comma().Add_byte_space();
-		Map_dd2dms_func.Deg_to_dms(bfr, Bool_.Y, Bool_.Y, Bry_.new_a7(Double_.To_str(longitude)), numDigits);
+		Map_dd2dms_func.Deg_to_dms(bfr, BoolUtl.Y, BoolUtl.Y, Bry_.new_a7(Double_.To_str(longitude)), numDigits);
 
 		// write globe
 		if (wikidata_page) {
 			byte[] glb_ttl = Wdata_lbl_itm.Extract_ttl(glb);
 			if (glb_ttl != null) {
 				byte[] glb_lbl = lbl_mgr.Get_text__ttl(glb_ttl, glb);
-				bfr.Add_byte_space().Add_byte(Byte_ascii.Paren_bgn);
+				bfr.Add_byte_space().Add_byte(AsciiByte.ParenBgn);
 				Wdata_hwtr_mgr.Write_link_wikidata(bfr, glb_ttl, glb_lbl);
-				bfr.Add_byte(Byte_ascii.Paren_end);
+				bfr.Add_byte(AsciiByte.ParenEnd);
 			}
 		}
 	}

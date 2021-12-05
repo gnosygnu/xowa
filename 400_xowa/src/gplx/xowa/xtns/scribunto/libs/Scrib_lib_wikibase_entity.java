@@ -13,11 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.xtns.wbases.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.stores.*;
-import gplx.xowa.xtns.scribunto.procs.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.Bry_bfr;
+import gplx.Err_;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
+import gplx.xowa.xtns.wbases.Wdata_doc;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.core.Wbase_pid;
 public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://github.com/wikimedia/mediawiki-extensions-Wikibase/blob/master/client/includes/DataAccess/Scribunto/Scribunto_LuaWikibaseEntityLibrary.php
 	private Scrib_core core;
 	private Wdata_wiki_mgr wdata_mgr;
@@ -92,7 +105,7 @@ public class Scrib_lib_wikibase_entity implements Scrib_lib { // REF.MW:https://
 
 		// print it
 		Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-		wdata_mgr.Resolve_to_bfr(bfr, core.Wiki(), prop_grp, lang, Bool_.N);
+		wdata_mgr.Resolve_to_bfr(bfr, core.Wiki(), prop_grp, lang, BoolUtl.N);
 		return rslt.Init_obj(bfr.To_bry_and_rls());
 	}
 	public boolean AddStatementUsage(Scrib_proc_args args, Scrib_proc_rslt rslt) {

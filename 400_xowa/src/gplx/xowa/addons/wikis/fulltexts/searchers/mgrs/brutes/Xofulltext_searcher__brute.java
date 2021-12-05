@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*;
 import gplx.dbs.*;
-import gplx.xowa.guis.cbks.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
@@ -30,7 +32,7 @@ public class Xofulltext_searcher__brute implements Xofulltext_searcher {
 		Db_rdr page_rdr = page_conn.Stmt_sql("SELECT * FROM page WHERE page_namespace IN (0) ORDER BY page_score DESC").Exec_select__rls_auto();
 
 		// init finder
-		finder.Init(args.search_text, args.case_match, args.auto_wildcard_bgn, args.auto_wildcard_end, Byte_ascii.Star, Byte_ascii.Dash);
+		finder.Init(args.search_text, args.case_match, args.auto_wildcard_bgn, args.auto_wildcard_end, AsciiByte.Star, AsciiByte.Dash);
 
 		// loop
 		byte[] wiki_domain = wiki.Domain_bry();

@@ -13,9 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.envs.*;
-import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
+package gplx.xowa.files.bins;
+import gplx.Bry_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.core.envs.Op_sys;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.files.Xof_url_bldr;
+import gplx.xowa.files.imgs.Xof_img_mode_;
+import gplx.xowa.files.repos.Xof_repo_tid_;
 public abstract class Xof_bin_wkr__fsys_base implements Xof_bin_wkr, Gfo_invk {
 	public Xof_bin_wkr__fsys_base() {}
 	public abstract byte Tid();
@@ -54,7 +69,7 @@ class Xof_bin_wkr__fsys_wmf extends Xof_bin_wkr__fsys_wmf_base {
 	@Override public byte Tid() {return Xof_bin_wkr_.Tid_fsys_wmf;}
 	@Override public String Key() {return Xof_bin_wkr_.Key_fsys_wmf;}
 	@Override public void Init_by_root() {
-		this.Url_bldr().Init_by_repo(Xof_repo_tid_.Tid__null, Bry_.Empty, Op_sys.Cur().Tid_is_wnt(), Op_sys.Cur().Fsys_dir_spr_byte(), Bool_.Y, Bool_.Y, Md5_dir_depth__wmf);
+		this.Url_bldr().Init_by_repo(Xof_repo_tid_.Tid__null, Bry_.Empty, Op_sys.Cur().Tid_is_wnt(), Op_sys.Cur().Fsys_dir_spr_byte(), BoolUtl.Y, BoolUtl.Y, Md5_dir_depth__wmf);
 	}
 	private static final int Md5_dir_depth__wmf = 2;
 }
@@ -62,7 +77,7 @@ class Xof_bin_wkr__fsys_xowa extends Xof_bin_wkr__fsys_wmf_base {
 	@Override public byte Tid() {return Xof_bin_wkr_.Tid_fsys_xowa;}
 	@Override public String Key() {return Xof_bin_wkr_.Key_fsys_xowa;}
 	@Override public void Init_by_root() {
-		this.Url_bldr().Init_by_repo(Xof_repo_tid_.Tid__null, Bry_.Empty, Op_sys.Cur().Tid_is_wnt(), Op_sys.Cur().Fsys_dir_spr_byte(), Bool_.N, Bool_.N, Md5_dir_depth__xowa);
+		this.Url_bldr().Init_by_repo(Xof_repo_tid_.Tid__null, Bry_.Empty, Op_sys.Cur().Tid_is_wnt(), Op_sys.Cur().Fsys_dir_spr_byte(), BoolUtl.N, BoolUtl.N, Md5_dir_depth__xowa);
 	}
 	private static final int Md5_dir_depth__xowa = 4;
 }

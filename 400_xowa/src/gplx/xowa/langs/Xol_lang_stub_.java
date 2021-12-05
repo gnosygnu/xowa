@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs; import gplx.*; import gplx.xowa.*;
-import gplx.core.lists.*;
+package gplx.xowa.langs; import gplx.*;
+import gplx.objects.lists.ComparerAble;
 public class Xol_lang_stub_ {	// lists all known stub_ary supported by MW
 	public static final byte[] Key__unknown = Bry_.Empty;
 	public static final ComparerAble Comparer_key = new Xol_sub_itm_comparer();

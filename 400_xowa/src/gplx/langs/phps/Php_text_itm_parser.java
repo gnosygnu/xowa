@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.phps; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.strings.AsciiByte;
 public class Php_text_itm_parser {
 	public static final byte Rslt_orig = 0, Rslt_dirty = 1, Rslt_fmt = 2;
 	public boolean Quote_is_single() {return quote_is_single;} public Php_text_itm_parser Quote_is_single_(boolean v) {quote_is_single = v; return this;} private boolean quote_is_single;
@@ -47,48 +48,48 @@ public class Php_text_itm_parser {
 		for (int i = 0; i < raw_len; i++) {
 			byte b = raw[i];
 			switch (b) {
-				case Byte_ascii.Backslash:
+				case AsciiByte.Backslash:
 					if (txt_bgn != -1) {tmp_list.Add(new Php_text_itm_text(txt_bgn, i)); txt_bgn = -1; rslt_val = Rslt_dirty;}
 					boolean pos_is_last = i == raw_last;
 					int next_pos = i + 1;
-					byte next_char = pos_is_last ? Byte_ascii.Null : raw[next_pos];
+					byte next_char = pos_is_last ? AsciiByte.Null : raw[next_pos];
 					if (quote_is_single) {	// NOTE: q1 is simpler than q2; REF.MW:http://php.net/manual/en/language.types.String.php; DATE:2014-08-06
 						switch (next_char) {
-							case Byte_ascii.Apos:		next_char = Byte_ascii.Apos; break;
-							case Byte_ascii.Backslash:	next_char = Byte_ascii.Backslash; break;
-							default:					next_char = Byte_ascii.Null; break;
+							case AsciiByte.Apos:		next_char = AsciiByte.Apos; break;
+							case AsciiByte.Backslash:	next_char = AsciiByte.Backslash; break;
+							default:					next_char = AsciiByte.Null; break;
 						}
 					}
 					else {
 						if (pos_is_last) throw Err_.new_wo_type("backslash_is_last_char", "raw", String_.new_u8(raw));
 						switch (next_char) {
-							case Byte_ascii.Backslash:	next_char = Byte_ascii.Backslash; break;
-							case Byte_ascii.Quote:		next_char = Byte_ascii.Quote; break;
-							case Byte_ascii.Ltr_N:
-							case Byte_ascii.Ltr_n:		next_char = Byte_ascii.Nl; break;
-							case Byte_ascii.Ltr_T:
-							case Byte_ascii.Ltr_t:		next_char = Byte_ascii.Tab; break;
-							case Byte_ascii.Ltr_R:
-							case Byte_ascii.Ltr_r:		next_char = Byte_ascii.Cr; break;					
-							case Byte_ascii.Ltr_U:
-							case Byte_ascii.Ltr_u:	{	// EX: "\u007C"
+							case AsciiByte.Backslash:	next_char = AsciiByte.Backslash; break;
+							case AsciiByte.Quote:		next_char = AsciiByte.Quote; break;
+							case AsciiByte.Ltr_N:
+							case AsciiByte.Ltr_n:		next_char = AsciiByte.Nl; break;
+							case AsciiByte.Ltr_T:
+							case AsciiByte.Ltr_t:		next_char = AsciiByte.Tab; break;
+							case AsciiByte.Ltr_R:
+							case AsciiByte.Ltr_r:		next_char = AsciiByte.Cr; break;
+							case AsciiByte.Ltr_U:
+							case AsciiByte.Ltr_u:	{	// EX: "\u007C"
 								rslt_val = Rslt_dirty;
 								Parse_utf16(tmp_list, raw, next_pos + 1, raw_len);	// +1 to skip u
 								i = next_pos + 4;	// +4 to skip utf16 seq; EX: \u007C; +4 for 007C
 								continue;
 							}
-							case Byte_ascii.Ltr_X:
-							case Byte_ascii.Ltr_x:	{	// EX: "\xc2"
+							case AsciiByte.Ltr_X:
+							case AsciiByte.Ltr_x:	{	// EX: "\xc2"
 								rslt_val = Rslt_dirty;
 								byte[] literal = Bry_.Add(CONST_utf_prefix, Bry_.Mid(raw, next_pos + 1, next_pos + 3));
 								tmp_list.Add(new Php_text_itm_utf16(i, i + 4, literal));
 								i = next_pos + 2;	// +2 to skip rest; EX: \xc2; +2 for c2
 								continue;
 							}
-							default:					next_char = Byte_ascii.Null; break;
+							default:					next_char = AsciiByte.Null; break;
 						}
 					}
-					if (next_char == Byte_ascii.Null) {
+					if (next_char == AsciiByte.Null) {
 						if (txt_bgn == -1) txt_bgn = i;
 					}
 					else {
@@ -96,7 +97,7 @@ public class Php_text_itm_parser {
 						i = next_pos;
 					}
 					break;
-				case Byte_ascii.Dollar:
+				case AsciiByte.Dollar:
 					if (txt_bgn != -1) {tmp_list.Add(new Php_text_itm_text(txt_bgn, i)); txt_bgn = -1;}
 					if (i == raw_last) {
 						//throw Err_mgr.Instance.fmt_auto_(GRP_KEY, "dollar_is_last_char", String_.new_u8(raw));
@@ -131,8 +132,8 @@ public class Php_text_itm_parser {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					break;
 				default:
 					return i;

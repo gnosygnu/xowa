@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.xowa.langs.vnts.converts.*; import gplx.xowa.parsers.vnts.*;
+package gplx.xowa.langs.vnts;
+import gplx.Bry_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.vnts.converts.Xol_convert_mgr;
+import gplx.xowa.parsers.vnts.Vnt_convert_lang;
 public class Xol_vnt_mgr implements Gfo_invk {
 	public Xol_vnt_mgr(Xol_lang_itm lang) {
 		this.lang = lang;
@@ -53,15 +63,15 @@ public class Xol_vnt_mgr implements Gfo_invk {
 	private void Limit_visibility(byte[][] ary) {
 		int regy_len = regy.Len();
 		for (int i = 0; i < regy_len; ++i)
-			regy.Get_at(i).Visible_(Bool_.N);
+			regy.Get_at(i).Visible_(BoolUtl.N);
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; ++i)
-			regy.Get_by(ary[i]).Visible_(Bool_.Y);
+			regy.Get_by(ary[i]).Visible_(BoolUtl.Y);
 	}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_get))					return Regy__get_or_new(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_init_end))				Init_end();
-		else if	(ctx.Match(k, Invk_vnt_grp_))				Limit_visibility(m.ReadBryAry("v", Byte_ascii.Pipe));
+		else if	(ctx.Match(k, Invk_vnt_grp_))				Limit_visibility(m.ReadBryAry("v", AsciiByte.Pipe));
 		else if	(ctx.Match(k, Invk_cur_vnt_))				Cur_itm_(m.ReadBry("v"));
 		else if	(ctx.Match(k, Invk_html_style_))			html__lnki_style = m.ReadStr("v");
 		else	return Gfo_invk_.Rv_unhandled;

@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.stores; import gplx.*; import gplx.core.*;
+package gplx.core.stores; import gplx.*;
 import gplx.core.strings.*; import gplx.core.type_xtns.*;
-import gplx.core.ios.streams.*;
+import gplx.objects.primitives.BoolUtl;
 public abstract class DataRdr_base implements SrlMgr {
 	public boolean Parse() {return parse;} public void Parse_set(boolean v) {parse = v;} private boolean parse;
 	public Io_url Uri() {return uri;} public void Uri_set(Io_url s) {uri = s;} Io_url uri = Io_url_.Empty;
@@ -77,12 +77,12 @@ public abstract class DataRdr_base implements SrlMgr {
 	}
 	public boolean ReadBool(String key) {
 		Object val = Read(key);
-		try {return (parse) ? Bool_.Cast(BoolClassXtn.Instance.ParseOrNull(String_.as_(val))) : Bool_.Cast(val);} 
+		try {return (parse) ? BoolUtl.Cast(BoolClassXtn.Instance.ParseOrNull(String_.as_(val))) : BoolUtl.Cast(val);}
 		catch (Exception exc) {throw Err_dataRdr_ReadFailed_err(boolean.class, key, val, exc);}
 	}
 	public boolean ReadBoolOr(String key, boolean or) {
 		Object val = Read(key); if (val == null) return or;
-		try {return (parse) ? Bool_.Parse(String_.as_(val)) : Bool_.Cast(val);} 
+		try {return (parse) ? BoolUtl.Parse(String_.as_(val)) : BoolUtl.Cast(val);}
 		catch (Exception exc) {Err_dataRdr_ReadFailed_useOr(exc, boolean.class, key, val, or); return or;}
 	}
 	public long ReadLong(String key) {

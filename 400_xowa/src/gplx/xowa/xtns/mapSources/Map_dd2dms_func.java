@@ -13,11 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.mapSources; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.kwds.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.xtns.mapSources;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Hash_adp_bry;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
+import gplx.xowa.parsers.tmpls.Xop_func_arg_itm;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.xtns.pfuncs.Pf_func;
+import gplx.xowa.xtns.pfuncs.Pf_func_base;
 public class Map_dd2dms_func extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_mapSources_dd2dms;}
 	@Override public Pf_func New(int id, byte[] name) {return new Map_dd2dms_func().Name_(name);}
@@ -45,7 +53,7 @@ public class Map_dd2dms_func extends Pf_func_base {
 		tmp_bfr.Mkr_rls();
 		Map_math map_math = Map_math.Instance;
 		if (map_math.Ctor(coord, prec, Bry_.Empty, 2))
-			bfr.Add(map_math.Get_dms(Bool_.N, plus, minus));
+			bfr.Add(map_math.Get_dms(BoolUtl.N, plus, minus));
 		else
 			map_math.Fail(ctx, src, self, bfr, this.Name());
 	}

@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.apps.cfgs.specials.edits.objs;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.String_;
@@ -113,9 +113,9 @@ public class Xoedit_itm implements Xoedit_nde, Mustache_doc_itm {
 		// contrast with <input> which uses quotes for `value` property;
 		// EX: <input value="a&quot;b"> vs <textarea>a"b</textarea>
 		boolean escapeQuotes = Xoitm_type_enum.To_uid(type) == Xoitm_type_enum.Tid__memo
-			? Bool_.N
-			: Bool_.Y;
+			? BoolUtl.N
+			: BoolUtl.Y;
 
-		return Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(val_str), Bool_.N, Bool_.N, Bool_.N, escapeQuotes, Bool_.N);
+		return Gfh_utl.Escape_html_as_bry(tmp_bfr, Bry_.new_u8(val_str), BoolUtl.N, BoolUtl.N, BoolUtl.N, escapeQuotes, BoolUtl.N);
 	}
 }

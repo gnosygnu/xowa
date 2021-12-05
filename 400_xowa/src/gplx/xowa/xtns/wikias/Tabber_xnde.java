@@ -13,9 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wikias; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.core.security.algos.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*;
+package gplx.xowa.xtns.wikias;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.Bry_split_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.core.security.algos.Hash_algo;
+import gplx.core.security.algos.Hash_algo_;
+import gplx.core.security.algos.Hash_algo_utl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_parser_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.xtns.Xox_xnde;
+import gplx.xowa.xtns.Xox_xnde_;
 public class Tabber_xnde implements Xox_xnde {
 	private byte[] id;
 	private Tabber_tab_itm[] tab_itms_ary;
@@ -36,7 +58,7 @@ public class Tabber_xnde implements Xox_xnde {
 
 			// split on "="; EX: A=B -> tab_name='A'; tab_body = 'B'
 			byte[] tab_head = null, tab_body = null;
-			int eq_pos = Bry_find_.Find_fwd(tab_itm, Byte_ascii.Eq);
+			int eq_pos = Bry_find_.Find_fwd(tab_itm, AsciiByte.Eq);
 			if (eq_pos == Bry_find_.Not_found) {
 				tab_head = tab_itm;
 				tab_body = Bry_.Empty;
@@ -46,7 +68,7 @@ public class Tabber_xnde implements Xox_xnde {
 				tab_body = Bry_.Mid(tab_itm, eq_pos + 1, tab_itm_len);
 				tab_body = Xop_parser_.Parse_text_to_html(wiki, ctx, ctx.Page(), tab_body, false);
 			}
-			tab_itms_list.Add(new Tabber_tab_itm(Bool_.N, tab_head, tab_body));
+			tab_itms_list.Add(new Tabber_tab_itm(BoolUtl.N, tab_head, tab_body));
 		}
 		tab_itms_ary = (Tabber_tab_itm[])tab_itms_list.ToAryAndClear(Tabber_tab_itm.class);
 

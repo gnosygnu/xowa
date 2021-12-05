@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pagebanners;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.String_;
@@ -34,7 +34,7 @@ public class Pgbnr_func_tst {
 	@Before public void init() {fxt.Clear();}
 	@Test public void Basic() {
 		fxt.Init__orig(true, "A.png", 500, 200); // 500 > 200 * 2 for pageBanner;
-		fxt.Test__parse(Bool_.N, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
+		fxt.Test__parse(BoolUtl.N, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner pre-content'>"
 		, " <div class='wpb-banner-image-panorama wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
@@ -53,7 +53,7 @@ public class Pgbnr_func_tst {
 		));
 	}
 	@Test public void Hdump__basic() {
-		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
+		fxt.Test__parse(BoolUtl.Y, "{{PAGEBANNER:A.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner pre-content'>"
 		, " <div class='wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"
@@ -68,7 +68,7 @@ public class Pgbnr_func_tst {
 		));
 	}
 	@Test public void Hdump__quote() {	// PAGE:en.v:Europe; DATE:2016-07-12
-		fxt.Test__parse(Bool_.Y, "{{PAGEBANNER:A\"b.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
+		fxt.Test__parse(BoolUtl.Y, "{{PAGEBANNER:A\"b.png|icon-star=Star_article}}", String_.Concat_lines_nl_apos_skip_last
 		( "<div class='ext-wpb-pagebanner pre-content'>"
 		, " <div class='wpb-topbanner'>"
 		, "		<h1 class='wpb-name'>Test page</h1>"

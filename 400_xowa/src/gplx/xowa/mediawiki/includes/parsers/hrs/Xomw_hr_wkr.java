@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.hrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.hrs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
 public class Xomw_hr_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private Bry_bfr bfr;
 	public void replaceHrs(XomwParserCtx pctx, XomwParserBfr pbfr) {	// REF.MW: text = preg_replace('/(^|\n)-----*/', '\\1<hr />', text);
@@ -29,7 +36,7 @@ public class Xomw_hr_wkr {// THREAD.UNSAFE: caching for repeated calls
 		// do separate check for "-----" at start of String;
 		int cur = 0;
 		if (Bry_.Eq(src, 0, Len__wtxt__hr__bos, Bry__wtxt__hr__bos)) {
-			cur = Replace_hr(Bool_.N, src, src_bgn, src_end, 0, Len__wtxt__hr__bos);
+			cur = Replace_hr(BoolUtl.N, src, src_bgn, src_end, 0, Len__wtxt__hr__bos);
 			dirty = true;
 		}
 
@@ -47,7 +54,7 @@ public class Xomw_hr_wkr {// THREAD.UNSAFE: caching for repeated calls
 			}
 			
 			// something found
-			cur = Replace_hr(Bool_.Y, src, cur, src_end, find_bgn, Len__wtxt__hr__mid);
+			cur = Replace_hr(BoolUtl.Y, src, cur, src_end, find_bgn, Len__wtxt__hr__mid);
 			dirty = true;
 		}
 		if (dirty)
@@ -63,7 +70,7 @@ public class Xomw_hr_wkr {// THREAD.UNSAFE: caching for repeated calls
 
 		// set dirty / cur and continue
 		cur = find_bgn + tkn_len;
-		cur = Bry_find_.Find_fwd_while(src, cur, src_end, Byte_ascii.Dash);	// gobble up trailing "-"; the "*" in "-----*" from the regex above
+		cur = Bry_find_.Find_fwd_while(src, cur, src_end, AsciiByte.Dash);	// gobble up trailing "-"; the "*" in "-----*" from the regex above
 		return cur;
 	}
 	private static final byte[]

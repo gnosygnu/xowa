@@ -13,8 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.cases; import gplx.*;
-import gplx.xowa.langs.parsers.*;
+package gplx.xowa.langs.cases;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Byte_;
+import gplx.Err_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.langs.parsers.Xol_csv_parser;
 public class Xol_case_itm_ {
 	public static final byte Tid_both = 0, Tid_upper = 1, Tid_lower = 2;
 	public static Xol_case_itm new_(int tid, String src_str, String trg_str) {return new_((byte)tid, Bry_.new_u8(src_str), Bry_.new_u8(trg_str));}
@@ -32,9 +43,9 @@ public class Xol_case_itm_ {
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = src_pos == src_len;
-			byte b = last ? Byte_ascii.Nl : src[src_pos];
+			byte b = last ? AsciiByte.Nl : src[src_pos];
 			switch (b) {
-				case Byte_ascii.Pipe:
+				case AsciiByte.Pipe:
 					switch (fld_idx) {
 						case 0:
 							boolean fail = true;
@@ -42,9 +53,9 @@ public class Xol_case_itm_ {
 								byte cmd_byte = src[src_pos - 1];
 								cur_cmd = Byte_.Zero;
 								switch (cmd_byte) {
-									case Byte_ascii.Num_0:	cur_cmd = Xol_case_itm_.Tid_both; fail = false; break;
-									case Byte_ascii.Num_1:	cur_cmd = Xol_case_itm_.Tid_upper; fail = false; break;
-									case Byte_ascii.Num_2:	cur_cmd = Xol_case_itm_.Tid_lower; fail = false; break;
+									case AsciiByte.Num0:	cur_cmd = Xol_case_itm_.Tid_both; fail = false; break;
+									case AsciiByte.Num1:	cur_cmd = Xol_case_itm_.Tid_upper; fail = false; break;
+									case AsciiByte.Num2:	cur_cmd = Xol_case_itm_.Tid_lower; fail = false; break;
 								}
 							}
 							if (fail) throw Err_.new_wo_type("cmd is invalid", "cmd", String_.new_u8(src, fld_bgn, src_pos));
@@ -54,7 +65,7 @@ public class Xol_case_itm_ {
 					++fld_idx;
 					fld_bgn = src_pos + 1;
 					break;
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					if (!(fld_idx == 0 && fld_bgn == src_pos)) {
 						byte[] cur_rhs = csv_parser.Load(src, fld_bgn, src_pos);
 						Xol_case_itm itm = Xol_case_itm_.new_(cur_cmd, cur_lhs, cur_rhs);
@@ -74,15 +85,15 @@ public class Xol_case_itm_ {
 	public static Xol_case_itm[] parse_mw_(byte[] raw) {
 		Ordered_hash hash = Ordered_hash_.New_bry();
 		int pos = 0;
-		pos = parse_mw_grp(hash, raw, Bool_.Y, pos);
-		pos = parse_mw_grp(hash, raw, Bool_.N, pos);
+		pos = parse_mw_grp(hash, raw, BoolUtl.Y, pos);
+		pos = parse_mw_grp(hash, raw, BoolUtl.N, pos);
 		return (Xol_case_itm[])hash.To_ary(Xol_case_itm.class);
 	}
 	private static int parse_mw_grp(Ordered_hash hash, byte[] raw, boolean section_is_upper, int find_bgn) {
 		byte[] find = section_is_upper ? parse_mw_upper : parse_mw_lower;
 		int raw_len = raw.length;
 		int pos = Bry_find_.Find_fwd(raw, find, find_bgn);					if (pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find section name", "name", String_.new_u8(find));
-		pos = Bry_find_.Find_fwd(raw, Byte_ascii.Curly_bgn, pos, raw_len);	if (pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find '{' after section name", "name", String_.new_u8(find));
+		pos = Bry_find_.Find_fwd(raw, AsciiByte.CurlyBgn, pos, raw_len);	if (pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find '{' after section name", "name", String_.new_u8(find));
 		int itm_bgn = 0;
 		boolean quote_off = true, itm_is_first = true;
 		byte[] cur_lhs = Bry_.Empty;
@@ -91,7 +102,7 @@ public class Xol_case_itm_ {
 			if (pos >= raw_len) break;
 			byte b = raw[pos];
 			switch (b) {
-				case Byte_ascii.Quote:
+				case AsciiByte.Quote:
 					if (quote_off) {
 						itm_bgn = pos + 1;
 						quote_off = false;
@@ -135,7 +146,7 @@ public class Xol_case_itm_ {
 						quote_off = true;
 					}
 					break;
-				case Byte_ascii.Curly_end:
+				case AsciiByte.CurlyEnd:
 					loop = false;
 					break;
 			}

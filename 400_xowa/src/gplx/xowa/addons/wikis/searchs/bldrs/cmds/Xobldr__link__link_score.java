@@ -13,11 +13,39 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.addons.wikis.searchs.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wkrs.*; import gplx.xowa.addons.bldrs.utils_rankings.bldrs.*; import gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments.*;
-import gplx.xowa.addons.wikis.searchs.dbs.*;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds;
+import gplx.Bry_fmt;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg_;
+import gplx.GfsCtx;
+import gplx.Io_mgr;
+import gplx.String_;
+import gplx.dbs.Db_attach_itm;
+import gplx.dbs.Db_attach_mgr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldType;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.bldrs.utils_rankings.bldrs.Sqlite_percentile_cmd;
+import gplx.xowa.addons.wikis.searchs.Srch_search_addon;
+import gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments.Adjustment_cmd;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_db_cfg_;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_db_mgr;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_link_tbl;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_word_tbl;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_db_file;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.bldrs.wkrs.Xob_cmd__base;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
 public class Xobldr__link__link_score extends Xob_cmd__base {
 	private int score_multiplier = 100000000;
 	private boolean page_rank_enabled = false;
@@ -110,7 +138,7 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 		Srch_db_mgr search_db_mgr = Srch_search_addon.Get(wiki).Db_mgr();
 		Srch_word_tbl word_tbl = search_db_mgr.Tbl__word();
 		if (!page_tbl.Conn().Eq(word_tbl.conn)) page_tbl.Conn().Env_vacuum();	// don't vacuum if single-db
-		// Srch_db_mgr.Optimize_unsafe_(word_tbl.conn, Bool_.Y);
+		// Srch_db_mgr.Optimize_unsafe_(word_tbl.conn, BoolUtl.Y);
 		word_tbl.conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("link_score_mnx", DbmetaFldItm.NewInt("word_id"), DbmetaFldItm.NewInt("mnx_val")));
 		int link_tbls_len = search_db_mgr.Tbl__link__len();
 		for (int i = 0; i < link_tbls_len; ++i) {
@@ -125,15 +153,15 @@ public class Xobldr__link__link_score extends Xob_cmd__base {
 				( "UPDATE  search_link"
 				, "SET     link_score = Coalesce((SELECT page_score FROM <page_db>page p WHERE p.page_id = search_link.page_id), 0)"
 				));
-			Calc_min_max(Bool_.Y, word_tbl, link_tbl, i, link_tbls_len);
-			Calc_min_max(Bool_.N, word_tbl, link_tbl, i, link_tbls_len);
+			Calc_min_max(BoolUtl.Y, word_tbl, link_tbl, i, link_tbls_len);
+			Calc_min_max(BoolUtl.N, word_tbl, link_tbl, i, link_tbls_len);
 			link_tbl.Create_idx__link_score();
 			if (!link_tbl.conn.Eq(word_tbl.conn)) link_tbl.conn.Env_vacuum();	// don't vacuum if single-db
 			word_tbl.Create_idx();
 		}
 		word_tbl.conn.Meta_tbl_delete("link_score_mnx");
 		Srch_db_cfg_.Update__bldr__link(search_db_mgr.Tbl__cfg(), search_db_mgr.Cfg(), link_score_max);
-		// Srch_db_mgr.Optimize_unsafe_(word_tbl.conn, Bool_.N);
+		// Srch_db_mgr.Optimize_unsafe_(word_tbl.conn, BoolUtl.N);
 
 		if (delete_plink_db) {
 			Xob_db_file plink_db = Xob_db_file.New__page_link(wiki);

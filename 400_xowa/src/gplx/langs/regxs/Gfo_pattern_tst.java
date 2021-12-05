@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.regxs; import gplx.*; import gplx.langs.*;
-import org.junit.*; import gplx.core.strings.*;
+package gplx.langs.regxs;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.strings.String_bldr;
+import gplx.core.strings.String_bldr_;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Gfo_pattern_tst {
 	@Before public void init() {fxt.Clear();} private Gfo_pattern_itm_fxt fxt = new Gfo_pattern_itm_fxt();
 	@Test public void Compile() {
@@ -58,8 +65,8 @@ public class Gfo_pattern_tst {
 class Gfo_pattern_itm_fxt {
 	public void Clear() {}
 	public Gfo_pattern pattern_(String raw) {return new Gfo_pattern(Bry_.new_u8(raw));}
-	public void Test_Match_y(Gfo_pattern pattern, String... itms) {Test_Match(pattern, itms, Bool_.Y);}
-	public void Test_Match_n(Gfo_pattern pattern, String... itms) {Test_Match(pattern, itms, Bool_.N);}
+	public void Test_Match_y(Gfo_pattern pattern, String... itms) {Test_Match(pattern, itms, BoolUtl.Y);}
+	public void Test_Match_n(Gfo_pattern pattern, String... itms) {Test_Match(pattern, itms, BoolUtl.N);}
 	private void Test_Match(Gfo_pattern pattern, String[] itms, boolean expd) {
 		int len = itms.length;
 		for (int i = 0; i < len; i++) {

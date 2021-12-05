@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.domains; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*;
 public class Xow_domain_uid_ {
 	public static final int
@@ -100,7 +101,7 @@ public class Xow_domain_uid_ {
 			default:							throw Err_.new_unhandled(type_id);
 		}
 		Xol_lang_stub lang = Xol_lang_stub_.Get_by_id(lang_id);
-		byte[] domain_bry = Bry_.Add(lang.Key(), Byte_ascii.Dot_bry, tid_bry, Byte_ascii.Dot_bry, Xow_domain_itm_.Seg__org);
+		byte[] domain_bry = Bry_.Add(lang.Key(), AsciiByte.DotBry, tid_bry, AsciiByte.DotBry, Xow_domain_itm_.Seg__org);
 		return Xow_domain_itm.new_(domain_bry, tid_int, lang, lang.Key());
 	}
 }

@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.threads.poolables.*; import gplx.core.brys.args.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
+package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.brys.fmtrs.*; import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.sections.*; import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_hdr_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 	private int hdr_num; private byte[] hdr_id, hdr_content, hdr_capt_rhs;
@@ -33,7 +35,7 @@ public class Xoh_hdr_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
 		if (data.Anch_is_diff())
 			hdr_id = Bry_.Mid(src, data.Anch_bgn(), data.Anch_end());
 		else
-			hdr_id = Bry_.Replace(hdr_content, Byte_ascii.Space, Byte_ascii.Underline);
+			hdr_id = Bry_.Replace(hdr_content, AsciiByte.Space, AsciiByte.Underline);
 		hdr_capt_rhs  = data.Capt_rhs_exists() ? Bry_.Mid(src, data.Capt_rhs_bgn(), data.Capt_rhs_end()) : Bry_.Empty;
 		hpg.Html_data().Toc_mgr().Add(hdr_num, hdr_content);
 		return true;

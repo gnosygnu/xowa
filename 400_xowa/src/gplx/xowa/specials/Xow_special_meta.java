@@ -13,12 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.specials; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.specials; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 public class Xow_special_meta {
 	public Xow_special_meta(int src, String key_str, String... aliases) {
 		this.src = src; this.key_str = key_str;
 		this.key_bry = Bry_.new_u8(key_str);
-		this.ttl_bry = Bry_.Add(gplx.xowa.wikis.nss.Xow_ns_.Bry__special, Byte_ascii.Colon_bry, key_bry);
+		this.ttl_bry = Bry_.Add(gplx.xowa.wikis.nss.Xow_ns_.Bry__special, AsciiByte.ColonBry, key_bry);
 		this.ttl_str = String_.new_u8(ttl_bry);
 		this.aliases = Bry_.Ary(aliases);
 	}

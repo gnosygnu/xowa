@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.urls; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.apps.urls;
+import gplx.Bry_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_url;
+import gplx.xowa.Xoa_url_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
 public class Xow_url_parser_fxt {
 	protected final Xoae_app app; protected final Xowe_wiki cur_wiki;
 	protected final Xow_url_parser parser;
@@ -64,15 +73,15 @@ public class Xow_url_parser_fxt {
 	public Xow_url_parser_fxt	Test__wiki_is_missing(boolean v)		{Tfds.Eq_bool(v, actl_url.Wiki_is_missing(), "wiki_is_missing"); return this;}
 	public Xow_url_parser_fxt	Test__page(String v) 				{Tfds.Eq_str(v, actl_url.Page_bry()	, "page"); return this;}
 	public Xow_url_parser_fxt	Test__qargs(String v) 				{Tfds.Eq_str(v, actl_url.Qargs_mgr().To_bry(), "qargs"); return this;}
-	public Xow_url_parser_fxt	Test__page_is_main_y() 				{return Test__page_is_main(Bool_.Y);}
-	public Xow_url_parser_fxt	Test__page_is_main_n() 				{return Test__page_is_main(Bool_.N);}
+	public Xow_url_parser_fxt	Test__page_is_main_y() 				{return Test__page_is_main(BoolUtl.Y);}
+	public Xow_url_parser_fxt	Test__page_is_main_n() 				{return Test__page_is_main(BoolUtl.N);}
 	public Xow_url_parser_fxt	Test__page_is_main(boolean v)			{Tfds.Eq_bool(v, actl_url.Page_is_main()	, "page_is_main"); return this;}
 	public Xow_url_parser_fxt	Test__anch(String v) 				{Tfds.Eq_str(v, actl_url.Anch_bry(), "anch"); return this;}
-	public Xow_url_parser_fxt	Test__action_is_edit_y() 			{return Test__action_is_edit_(Bool_.Y);}
-	public Xow_url_parser_fxt	Test__action_is_edit_n() 			{return Test__action_is_edit_(Bool_.N);}
+	public Xow_url_parser_fxt	Test__action_is_edit_y() 			{return Test__action_is_edit_(BoolUtl.Y);}
+	public Xow_url_parser_fxt	Test__action_is_edit_n() 			{return Test__action_is_edit_(BoolUtl.N);}
 	private Xow_url_parser_fxt	Test__action_is_edit_(boolean v)		{Tfds.Eq_bool(v, actl_url.Qargs_mgr().Match(Xoa_url_.Qarg__action, Xoa_url_.Qarg__action__edit), "action_is_edit"); return this;}
-	public Xow_url_parser_fxt	Test__to_str(String v) 				{return Test__to_str(Bool_.Y, v);}
-	public Xow_url_parser_fxt	Test__to_str(boolean full, String v)	{Tfds.Eq_str(v, actl_url.To_bry(full, Bool_.Y), "To_bry"); return this;}
+	public Xow_url_parser_fxt	Test__to_str(String v) 				{return Test__to_str(BoolUtl.Y, v);}
+	public Xow_url_parser_fxt	Test__to_str(boolean full, String v)	{Tfds.Eq_str(v, actl_url.To_bry(full, BoolUtl.Y), "To_bry"); return this;}
 	public Xow_url_parser_fxt	Test__build_str_is_same() {
 		Xow_url_parser parser = new Xow_url_parser(cur_wiki);
 		Tfds.Eq_str(actl_url.Raw(), parser.Build_str(actl_url), "build_str");

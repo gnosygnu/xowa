@@ -13,12 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*;
-import gplx.core.btries.*;
-import gplx.core.intls.*;
-import gplx.objects.strings.unicodes.*;
-import gplx.core.primitives.*;
-import gplx.objects.strings.bfrs.*;
+package gplx.xowa.mediawiki;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Byte_;
+import gplx.Char_;
+import gplx.Err_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Int_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.intls.Utf16_;
+import gplx.core.primitives.Byte_obj_ref;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.objects.strings.bfrs.GfoStrBldr;
+import gplx.objects.strings.unicodes.Ustring;
+import gplx.objects.strings.unicodes.UstringUtl;
 public class XophpString_ implements XophpCallbackOwner {
 	public static final String False = null;
 	public static boolean is_true (String s) {return s != null;} // handles code like "if ($var)" where var is an Object;
@@ -56,7 +73,7 @@ public class XophpString_ implements XophpCallbackOwner {
 	public static byte substr_byte(byte[] src, int bgn) {return substr_byte(src, bgn, src.length);}
 	public static byte substr_byte(byte[] src, int bgn, int len) {
 		int src_len = src.length;
-		if (src_len == 0) return Byte_ascii.Null;
+		if (src_len == 0) return AsciiByte.Null;
 		if (bgn < 0) bgn = src_len + bgn; // handle negative
 		if (bgn < 0) bgn = 0;	// handle out of bounds; EX: ("a", -1, -1)
 		int end = len < 0 ? src_len + len : bgn + len;
@@ -90,7 +107,7 @@ public class XophpString_ implements XophpCallbackOwner {
 		int subject_len = String_.Len(subject);
 		start = strspn__start(start, subject_len);
 		int subject_end = strspn__subject_end(start, length, subject_len);
-		return strspn__rslt(Bool_.Y, subject, mask, start, subject_end);
+		return strspn__rslt(BoolUtl.Y, subject, mask, start, subject_end);
 	}
 	// REF.PHP:https://www.php.net/manual/en/function.strcspn.php
 	public static int strcspn(String subject, Hash_adp mask)                        {return strcspn(subject, mask, Int_.Zero, Int_.Zero);}
@@ -99,7 +116,7 @@ public class XophpString_ implements XophpCallbackOwner {
 		int subject_len = String_.Len(subject);
 		start = strspn__start(start, subject_len);
 		int subject_end = strspn__subject_end(start, length, subject_len);
-		return strspn__rslt(Bool_.N, subject, mask, start, subject_end);
+		return strspn__rslt(BoolUtl.N, subject, mask, start, subject_end);
 	}
 	private static int strspn__start(int start, int subject_len) {
 		if (start < 0) { // adjust start if -1
@@ -187,8 +204,8 @@ public class XophpString_ implements XophpCallbackOwner {
 		int rv = 0;
 		for (int i = bgn; i < src_len; i++) {
 			switch (src[i]) {
-				case Byte_ascii.Space:
-				case Byte_ascii.Tab:
+				case AsciiByte.Space:
+				case AsciiByte.Tab:
 					if (rv < max) {
 						rv++;
 						continue;
@@ -226,8 +243,8 @@ public class XophpString_ implements XophpCallbackOwner {
 		int rv = 0;
 		for (int i = bgn - 1; i > -1; i--) {
 			switch (src[i]) {
-				case Byte_ascii.Space:
-				case Byte_ascii.Tab:
+				case AsciiByte.Space:
+				case AsciiByte.Tab:
 					if (rv < max) {
 						rv++;
 						continue;
@@ -289,12 +306,12 @@ public class XophpString_ implements XophpCallbackOwner {
 
 	// REF.PHP: https://www.php.net/manual/en/function.rtrim.php
 	private static final Hash_adp trim_ws_hash = Hash_adp_.New().AddManyAsKeyAndVal
-		( Int_obj_ref.New(Byte_ascii.Space)
-		, Int_obj_ref.New(Byte_ascii.Tab)
-		, Int_obj_ref.New(Byte_ascii.Nl)
-		, Int_obj_ref.New(Byte_ascii.Cr)
-		, Int_obj_ref.New(Byte_ascii.Null)
-		, Int_obj_ref.New(Byte_ascii.Vertical_tab)
+		( Int_obj_ref.New(AsciiByte.Space)
+		, Int_obj_ref.New(AsciiByte.Tab)
+		, Int_obj_ref.New(AsciiByte.Nl)
+		, Int_obj_ref.New(AsciiByte.Cr)
+		, Int_obj_ref.New(AsciiByte.Null)
+		, Int_obj_ref.New(AsciiByte.VerticalTab)
 		);
 	public static String trim (String src)             {return trim_outer( 0, src, null);}
 	public static String trim (String src, String pad) {return trim_outer( 0, src, pad);}
@@ -321,9 +338,9 @@ public class XophpString_ implements XophpCallbackOwner {
 				byte prv_byte = Byte_.Zero;
 				for (int i = 0; i < pad_len; i++) {
 					byte pad_byte = pad_bry[i];
-					if (pad_byte == Byte_ascii.Dot && i < pad_len - 1) {
+					if (pad_byte == AsciiByte.Dot && i < pad_len - 1) {
 						byte nxt_byte = pad_bry[i + 1];
-						if (nxt_byte == Byte_ascii.Dot) {
+						if (nxt_byte == AsciiByte.Dot) {
 							if (i == 0) {
 								throw new XophpException(".. found but at start of String; src=" + pad_str);
 							}
@@ -360,10 +377,10 @@ public class XophpString_ implements XophpCallbackOwner {
 		rv[0] = 0;
 		rv[1] = src_len;
 		if (type <= 0) { // trim or rtrim
-			trim_inner(Bool_.N, rv, src_bry, src_len, pad_bry, pad_len, pad_hash);
+			trim_inner(BoolUtl.N, rv, src_bry, src_len, pad_bry, pad_len, pad_hash);
 		}
 		if (type >= 0) { // trim or ltrim
-			trim_inner(Bool_.Y, rv, src_bry, src_len, pad_bry, pad_len, pad_hash);
+			trim_inner(BoolUtl.Y, rv, src_bry, src_len, pad_bry, pad_len, pad_hash);
 		}
 
 		// return String
@@ -428,11 +445,11 @@ public class XophpString_ implements XophpCallbackOwner {
 	}
 	// REF.PHP: https://www.php.net/manual/en/function.str-repeat.php
 	public static String str_repeat(String input, int multiplier) {
-		String_bfr sb = new String_bfr();
+		GfoStrBldr sb = new GfoStrBldr();
 		for (int i = 0; i < multiplier; i++) {
 			sb.Add(input);
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 
 	public static boolean is_string(Object o) {
@@ -463,7 +480,7 @@ public class XophpString_ implements XophpCallbackOwner {
 		int arg_idx = 0;
 		while (pos < len) {
 			// find next $
-			int dollar_pos = Bry_find_.Find_fwd(fmt, Byte_ascii.Dollar, pos);
+			int dollar_pos = Bry_find_.Find_fwd(fmt, AsciiByte.Dollar, pos);
 
 			// no more $
 			if (dollar_pos == Bry_find_.Not_found) {
@@ -482,8 +499,8 @@ public class XophpString_ implements XophpCallbackOwner {
 			int key_end = len;
 			byte key_bgn_byte = fmt[key_bgn];
 			// if { after $, then search forward for }
-			if (key_bgn_byte == Byte_ascii.Curly_bgn) {
-				key_end = Bry_find_.Find_fwd(fmt, Byte_ascii.Curly_end, key_bgn + 1, len);
+			if (key_bgn_byte == AsciiByte.CurlyBgn) {
+				key_end = Bry_find_.Find_fwd(fmt, AsciiByte.CurlyEnd, key_bgn + 1, len);
 
 				// no } found; fail; EX: $b = 'z'; echo("a${b");
 				if (key_end == Bry_find_.Not_found) {
@@ -526,21 +543,21 @@ public class XophpString_ implements XophpCallbackOwner {
 	private static boolean Is_identifier_char(byte b, boolean is_first) {
 		switch (b) {
 			// alpha and _ is always valid
-			case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-			case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-			case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-			case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-			case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-			case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-			case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-			case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-			case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-			case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-			case Byte_ascii.Underline:
+			case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+			case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+			case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+			case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+			case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+			case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+			case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+			case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+			case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+			case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+			case AsciiByte.Underline:
 				return true;
 			// number is only valid if !is_first
-			case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-			case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+			case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+			case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 				return !is_first;
 			default:
 				// \x80-\xff is always true;
@@ -550,14 +567,14 @@ public class XophpString_ implements XophpCallbackOwner {
 
 	// REF.PHP: https://www.php.net/manual/en/function.strrev.php
 	public static String strrev(String src) {
-		String_bfr sb = new String_bfr();
-		Ustring usrc = Ustring_.New_codepoints(src);
-		int usrc_len = usrc.Len_in_data();
+		GfoStrBldr sb = new GfoStrBldr();
+		Ustring usrc = UstringUtl.NewCodepoints(src);
+		int usrc_len = usrc.LenInData();
 		for (int i = usrc_len - 1; i > -1; i--) {
-			int c = usrc.Get_data(i);
-			sb.Add_char_by_code(c);
+			int c = usrc.GetData(i);
+			sb.AddCharByCode(c);
 		}
-		return sb.To_str_and_clear();
+		return sb.ToStrAndClear();
 	}
 
 	public static String Char_as_str(String s, int idx) {

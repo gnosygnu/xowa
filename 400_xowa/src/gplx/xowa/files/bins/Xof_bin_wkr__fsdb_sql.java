@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import gplx.dbs.*; import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.caches.*; import gplx.xowa.files.fsdb.*;
-import gplx.fsdb.*; import gplx.fsdb.data.*; import gplx.fsdb.meta.*;
+package gplx.xowa.files.bins;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.core.ios.streams.Io_stream_rdr_;
+import gplx.fsdb.data.Fsd_bin_tbl;
+import gplx.fsdb.data.Fsd_fil_itm;
+import gplx.fsdb.data.Fsd_thm_itm;
+import gplx.fsdb.meta.Fsm_bin_fil;
+import gplx.fsdb.meta.Fsm_cfg_mgr;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_fsdb_itm;
 public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 	private final Xof_bin_wkr_ids tmp_ids = new Xof_bin_wkr_ids();
 	private Xof_bin_skip_mgr skip_mgr;
@@ -44,16 +55,16 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 	public Io_stream_rdr Get_to_fsys_near(Xof_fsdb_itm rv, byte[] orig_repo, byte[] orig_ttl, Xof_ext orig_ext, double lnki_time, int lnki_page) {
 		Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
 		thm_itm.Init_by_req(Int_.Max_value, lnki_time, lnki_page);
-		boolean found = Select_thm_bin(Bool_.N, thm_itm, orig_repo, orig_ttl);
+		boolean found = Select_thm_bin(BoolUtl.N, thm_itm, orig_repo, orig_ttl);
 		if (found) {
 			tmp_ids.Init_by_thm(found, thm_itm);
-			rv.Init_by_fsdb_near(Bool_.N, thm_itm.W());
+			rv.Init_by_fsdb_near(BoolUtl.N, thm_itm.W());
 		}
 		else {
 			Fsd_fil_itm fil_itm = Select_fil_bin(orig_repo, orig_ttl);		// find orig
 			if (fil_itm == Fsd_fil_itm.Null) return Io_stream_rdr_.Noop;
 			tmp_ids.Init_by_fil(fil_itm);
-			rv.Init_by_fsdb_near(Bool_.Y, rv.Orig_w());
+			rv.Init_by_fsdb_near(BoolUtl.Y, rv.Orig_w());
 		}
 		Fsm_bin_fil bin_db = mnt_mgr.Bins__at(tmp_ids.Mnt_id(), tmp_ids.Bin_db_id());
 		return bin_db.Select_as_rdr(tmp_ids.Itm_id());
@@ -65,7 +76,7 @@ public class Xof_bin_wkr__fsdb_sql implements Xof_bin_wkr {
 			if (is_thumb) {
 				Fsd_thm_itm thm_itm = Fsd_thm_itm.new_();
 				thm_itm.Init_by_req(w, lnki_time, lnki_page);
-				boolean found = Select_thm_bin(Bool_.Y, thm_itm, dir, fil);
+				boolean found = Select_thm_bin(BoolUtl.Y, thm_itm, dir, fil);
 				tmp_ids.Init_by_thm(found, thm_itm);
 			}
 			else {

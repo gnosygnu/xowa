@@ -17,7 +17,7 @@ package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Gfo_invk_cmd;
 import gplx.GfoMsg;
 import gplx.GfsCtx;
@@ -54,8 +54,8 @@ public class Swt_win implements GxwWin, Swt_control {
 	@Override public Control Under_control() {return shell;}
 	@Override public Composite Under_composite() {return shell;}
 	@Override public Control Under_menu_control() {return shell;}
-	public Swt_win(Shell owner) 		{ctor(Bool_.Y, new Shell(owner, SWT.RESIZE | SWT.DIALOG_TRIM), owner.getDisplay());}
-	public Swt_win(Display display) 	{ctor(Bool_.N, new Shell(display), display);	}
+	public Swt_win(Shell owner) 		{ctor(BoolUtl.Y, new Shell(owner, SWT.RESIZE | SWT.DIALOG_TRIM), owner.getDisplay());}
+	public Swt_win(Display display) 	{ctor(BoolUtl.N, new Shell(display), display);	}
 	public void ShowWin() 		{shell.setVisible(true);}
 	public void HideWin() 		{shell.setVisible(false);}
 	public boolean Maximized() 	{return shell.getMaximized();} public void Maximized_(boolean v) {shell.setMaximized(v);}

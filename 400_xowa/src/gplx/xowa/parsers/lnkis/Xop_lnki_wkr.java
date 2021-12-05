@@ -13,11 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.core.primitives.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.*; import gplx.xowa.parsers.lnkis.files.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.relatedSites.*;
-import gplx.xowa.parsers.tmpls.*; import gplx.xowa.parsers.miscs.*;
+package gplx.xowa.parsers.lnkis;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.String_;
+import gplx.core.primitives.Gfo_number_parser;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_ctx_wkr;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.parsers.Xop_tkn_null;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
+import gplx.xowa.parsers.miscs.Xop_misc_log;
+import gplx.xowa.parsers.tmpls.Arg_bldr;
+import gplx.xowa.parsers.tmpls.Arg_itm_tkn;
+import gplx.xowa.parsers.tmpls.Arg_itm_tkn_null;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
+import gplx.xowa.parsers.tmpls.Xop_arg_wkr;
+import gplx.xowa.parsers.tmpls.Xop_arg_wkr_;
+import gplx.xowa.parsers.tmpls.Xop_tkn_;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.xtns.relatedSites.Sites_regy_mgr;
 public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	private Arg_bldr arg_bldr = Arg_bldr.Instance;
 	private Gfo_number_parser number_parser = new Gfo_number_parser();
@@ -125,7 +147,7 @@ public class Xop_lnki_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 
 				switch (arg_tid) {
 					case Xop_lnki_arg_parser.Tid_none:			lnki.Align_h_(Xop_lnki_type.Id_none); break;
-					case Xop_lnki_arg_parser.Tid_border:		lnki.Border_(Bool_.Y_byte); break;
+					case Xop_lnki_arg_parser.Tid_border:		lnki.Border_(BoolUtl.YByte); break;
 					case Xop_lnki_arg_parser.Tid_thumb:			lnki.Lnki_type_(Xop_lnki_type.Id_thumb); break;
 					case Xop_lnki_arg_parser.Tid_frame:			lnki.Lnki_type_(Xop_lnki_type.Id_frame); break;
 					case Xop_lnki_arg_parser.Tid_frameless:		lnki.Lnki_type_(Xop_lnki_type.Id_frameless); break;

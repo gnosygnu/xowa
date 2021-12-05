@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.amps; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.amps; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 import gplx.langs.htmls.entitys.*;
 public class Xop_amp_mgr {	// TS
@@ -63,7 +65,7 @@ public class Xop_amp_mgr {	// TS
 		int fail_pos = amp_pos + 1;	// default to fail pos; after amp;
 
 		// find semic; fail if none found
-		int semic_pos = Bry_find_.Find_fwd(src, Byte_ascii.Semic, num_bgn, src_len);
+		int semic_pos = Bry_find_.Find_fwd(src, AsciiByte.Semic, num_bgn, src_len);
 		if (semic_pos == Bry_find_.Not_found) return rv.Pass_n_(fail_pos);
 		if (semic_pos == num_bgn) return rv.Pass_n_(fail_pos); // handle "&#x;" where there is no hex/dec number; ISSUE#:494; DATE:2019-06-16
 		int num_end = semic_pos - 1;	// num_end = pos before semicolon
@@ -81,7 +83,7 @@ public class Xop_amp_mgr {	// TS
 				else							return rv.Pass_n_(fail_pos);
 			}
 			else {
-				cur = b - Byte_ascii.Num_0;
+				cur = b - AsciiByte.Num0;
 				if (cur < 0 || cur > 10)		return rv.Pass_n_(fail_pos);
 			}
 			val += cur * factor;
@@ -102,7 +104,7 @@ public class Xop_amp_mgr {	// TS
 		// scan for &
 		while (pos < end) {
 			byte b = src[pos];
-			if (b == Byte_ascii.Amp) {	// & found
+			if (b == AsciiByte.Amp) {	// & found
 				int nxt_pos = pos + 1;
 				if (nxt_pos < end) {	// check & is not eos
 					byte nxt_b = src[nxt_pos];

@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.vnts.converts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.parsers.*;
 public class Xol_convert_grp implements Gfo_invk {// group of convert_itm by vnt; EX:  zh-hant {A -> A1; B -> B1}
 	private final Ordered_hash hash = Ordered_hash_.New_bry();
@@ -34,9 +35,9 @@ public class Xol_convert_grp implements Gfo_invk {// group of convert_itm by vnt
 		Xol_csv_parser csv_parser = Xol_csv_parser.Instance;
 		while (true) {
 			boolean last = pos == len;
-			byte b = last ? Byte_ascii.Nl : raw[pos];
+			byte b = last ? AsciiByte.Nl : raw[pos];
 			switch (b) {
-				case Byte_ascii.Pipe:
+				case AsciiByte.Pipe:
 					switch (fld_idx) {
 						case 0:		src = csv_parser.Load(raw, fld_bgn, pos); break;
 						default:	throw Err_.new_unhandled(fld_idx);
@@ -44,7 +45,7 @@ public class Xol_convert_grp implements Gfo_invk {// group of convert_itm by vnt
 					fld_bgn = pos + 1;
 					++fld_idx;
 					break;
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					if (fld_bgn < pos) {	// guard against trailing new lines
 						trg = csv_parser.Load(raw, fld_bgn, pos);
 						grp.Add(src, trg);

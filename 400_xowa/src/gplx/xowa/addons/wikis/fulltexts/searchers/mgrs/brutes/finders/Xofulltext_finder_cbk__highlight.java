@@ -13,9 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.fulltexts.*; import gplx.xowa.addons.wikis.fulltexts.searchers.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.*; import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.*;
-import gplx.xowa.guis.cbks.*;
-import gplx.xowa.addons.wikis.fulltexts.searchers.caches.*;
+package gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.brutes.finders; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.addons.wikis.fulltexts.searchers.mgrs.uis.*;
 public class Xofulltext_finder_cbk__highlight implements Xofulltext_finder_cbk {
 	private Xofulltext_searcher_ui ui;
@@ -70,10 +70,10 @@ public class Xofulltext_finder_cbk__highlight implements Xofulltext_finder_cbk {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Angle_bgn:
+				case AsciiByte.AngleBgn:
 					bfr.Add(Angle_bgn_escaped);
 					break;
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					bfr.Add(gplx.langs.htmls.Gfh_tag_.Br_inl);
 					break;
 				default:

@@ -14,8 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.primitives.*; import gplx.core.strings.*;
-import gplx.core.interfaces.*;
+import gplx.core.interfaces.ParseAble;
+import gplx.core.primitives.String_obj_val;
+import gplx.core.strings.String_bldr;
+import gplx.core.strings.String_bldr_;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
 public class GfoMsg_ {
 	public static GfoMsg as_(Object obj) {return obj instanceof GfoMsg ? (GfoMsg)obj : null;}
 	public static final GfoMsg Null = new GfoMsg_base().ctor_("<<NULL MSG>>", false);
@@ -28,7 +32,7 @@ public class GfoMsg_ {
 	}
 	public static GfoMsg root_(String... ary) {return root_leafArgs_(ary);}
 	public static GfoMsg root_leafArgs_(String[] ary, Keyval... kvAry) {
-		int len = Array_.Len(ary); if (len == 0) throw Err_.new_invalid_arg("== 0", "@len", len);
+		int len = ArrayUtl.Len(ary); if (len == 0) throw Err_.new_invalid_arg("== 0", "@len", len);
 		GfoMsg root = new GfoMsg_base().ctor_(ary[0], false);
 		GfoMsg owner = root;
 		for (int i = 1; i < len; i++) {
@@ -141,7 +145,7 @@ class GfoMsg_base implements GfoMsg {
 		args.Add(Keyval_.new_(k, v));
 		return this;
 	}
-	public boolean		ReadBool(String k)						{Object rv = ReadOr(k,false); if (rv == Nil) ThrowNotFound(k); return parse ? Yn.parse_or((String)rv, false) : Bool_.Cast(rv);}
+	public boolean		ReadBool(String k)						{Object rv = ReadOr(k,false); if (rv == Nil) ThrowNotFound(k); return parse ? Yn.parse_or((String)rv, false) : BoolUtl.Cast(rv);}
 	public int		ReadInt(String k)						{Object rv = ReadOr(k, 0)	; if (rv == Nil) ThrowNotFound(k); return parse ? Int_.Parse((String)rv) : Int_.Cast(rv);}
 	public byte		ReadByte(String k)						{Object rv = ReadOr(k, 0)	; if (rv == Nil) ThrowNotFound(k); return parse ? Byte_.Parse((String)rv) : Byte_.Cast(rv);}
 	public long		ReadLong(String k)						{Object rv = ReadOr(k, 0)	; if (rv == Nil) ThrowNotFound(k); return parse ? Long_.parse((String)rv) : Long_.cast(rv);}
@@ -152,7 +156,7 @@ class GfoMsg_base implements GfoMsg {
 	public DateAdp	ReadDate(String k)						{Object rv = ReadOr(k, null); if (rv == Nil) ThrowNotFound(k); return parse ? DateAdp_.parse_gplx((String)rv) : DateAdp_.cast(rv);}
 	public Io_url	ReadIoUrl(String k)						{Object rv = ReadOr(k, null); if (rv == Nil) ThrowNotFound(k); return parse ? Io_url_.new_any_((String)rv) : Io_url_.cast(rv);}
 	public Object	CastObj(String k)						{Object rv = ReadOr(k, null); if (rv == Nil) ThrowNotFound(k); return rv;}
-	public boolean		ReadBoolOr(String k, boolean or)			{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Yn.parse_or((String)rv, or) : Bool_.Cast(rv);}
+	public boolean		ReadBoolOr(String k, boolean or)			{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Yn.parse_or((String)rv, or) : BoolUtl.Cast(rv);}
 	public int		ReadIntOr(String k, int or)				{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Int_.Parse((String)rv) : Int_.Cast(rv);}
 	public long		ReadLongOr(String k, long or)			{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Long_.parse((String)rv) : Long_.cast(rv);}
 	public float	ReadFloatOr(String k, float or)			{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Float_.parse((String)rv) : Float_.cast(rv);}
@@ -161,9 +165,9 @@ class GfoMsg_base implements GfoMsg {
 	public String	ReadStrOr(String k, String or)			{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return (String)rv;}
 	public DateAdp	ReadDateOr(String k, DateAdp or)		{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? DateAdp_.parse_gplx((String)rv) : DateAdp_.cast(rv);}
 	public Io_url	ReadIoUrlOr(String k, Io_url or)		{Object rv = ReadOr(k, or)	; if (rv == Nil) return or		; return parse ? Io_url_.new_any_((String)rv) : Io_url_.cast(rv);}
-	public boolean		ReadBoolOrFalse(String k)				{Object rv = ReadOr(k,false); if (rv == Nil) return false	; return parse ? Yn.parse_or((String)rv, false) : Bool_.Cast(rv);}
-	public boolean		ReadBoolOrTrue(String k)				{Object rv = ReadOr(k, true); if (rv == Nil) return true	; return parse ? Yn.parse_or((String)rv, true) : Bool_.Cast(rv);}
-	public boolean		ReadYnOrY(String k)						{Object rv = ReadOr(k, true); if (rv == Nil) return true	; return parse ? Yn.parse_or((String)rv, true) : Bool_.Cast(rv);}
+	public boolean		ReadBoolOrFalse(String k)				{Object rv = ReadOr(k,false); if (rv == Nil) return false	; return parse ? Yn.parse_or((String)rv, false) : BoolUtl.Cast(rv);}
+	public boolean		ReadBoolOrTrue(String k)				{Object rv = ReadOr(k, true); if (rv == Nil) return true	; return parse ? Yn.parse_or((String)rv, true) : BoolUtl.Cast(rv);}
+	public boolean		ReadYnOrY(String k)						{Object rv = ReadOr(k, true); if (rv == Nil) return true	; return parse ? Yn.parse_or((String)rv, true) : BoolUtl.Cast(rv);}
 	public boolean		ReadYn(String k)						{Object rv = ReadOr(k,false); if (rv == Nil) ThrowNotFound(k); return parse ? Yn.parse_or((String)rv, false) : Yn.coerce_(rv);}
 	public boolean		ReadYn_toggle(String k, boolean cur) {
 		Object rv = ReadOr(k, "!");
@@ -271,7 +275,7 @@ class XtoStrWkr_gplx implements XtoStrWkr {
 		String rv = null;
 		if		(Type_.Eq(type, String_.Cls_ref_type))      rv = String_.cast(o);
 		else if (Type_.Eq(type, Int_.Cls_ref_type))         return Int_.To_str(Int_.Cast(o));
-		else if (Type_.Eq(type, Bool_.Cls_ref_type))        return Yn.To_str(Bool_.Cast(o));
+		else if (Type_.Eq(type, BoolUtl.ClsRefType))        return Yn.To_str(BoolUtl.Cast(o));
 		else if (Type_.Eq(type, DateAdp_.Cls_ref_type))     return DateAdp_.cast(o).XtoStr_gplx();
 		else                                                rv = Object_.Xto_str_strict_or_empty(o);
 		return String_.Replace(rv, "'", "''");

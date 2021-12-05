@@ -13,10 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.envs.*; import gplx.core.security.algos.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*;
+package gplx.xowa.xtns.math;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_fmt;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.core.envs.Op_sys;
+import gplx.core.security.algos.Hash_algo;
+import gplx.core.security.algos.Hash_algo_;
+import gplx.core.security.algos.Hash_algo_utl;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.langs.htmls.entitys.Gfh_entity_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
 class Xomath_html_wtr {
 	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(512);
 	private final Xomath_subst_mgr subst_mgr = new Xomath_subst_mgr();
@@ -67,7 +85,7 @@ class Xomath_html_wtr {
 		}
 
 		// write html: <span>math_expr</math>
-		byte[] unique_bry = wiki.Parser_mgr().Uniq_mgr().Add(Bool_.Y, Bry__math, math_bry);
+		byte[] unique_bry = wiki.Parser_mgr().Uniq_mgr().Add(BoolUtl.Y, Bry__math, math_bry);
 		Bry_fmt fmt = is_latex ? fmt__latex : fmt__mathjax;
 		fmt.Bld_many(tmp_bfr, uid, unique_bry);
 		bfr.Add_bfr_and_clear(tmp_bfr);
@@ -81,8 +99,8 @@ class Xomath_html_wtr {
 		for (int i = 0; i < src.length; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Lt: 		escaped = Gfh_entity_.Lt_bry; break;
-				case Byte_ascii.Gt: 		escaped = Gfh_entity_.Gt_bry; break;
+				case AsciiByte.Lt: 		escaped = Gfh_entity_.Lt_bry; break;
+				case AsciiByte.Gt: 		escaped = Gfh_entity_.Gt_bry; break;
 				// case Byte_ascii.Amp:		escaped = Const_amp; break;				// TOMBSTONE:do not escape ampersand; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
 				// case Byte_ascii.Quote:	escaped = Gfh_entity_.Quote_bry; break; // TOMBSTONE:do not escape quote; PAGE:s.w:Matrix_(mathematics); DATE:2014-07-19
 				default:

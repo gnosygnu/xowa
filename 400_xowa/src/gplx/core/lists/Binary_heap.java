@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists; import gplx.*; import gplx.core.*;
+package gplx.core.lists; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.lists.ComparerAbleUtl;
 public class Binary_heap {
 	private final ComparerAble comparer;
 	private boolean is_max;
@@ -59,15 +62,15 @@ public class Binary_heap {
 	private int Max_child(int idx) {
 		int lhs = Kth_child(idx, 1);
 		int rhs = Kth_child(idx, 2);
-		int comp = ComparerAble_.Compare(comparer, heap[lhs], heap[rhs]);
-		boolean diff = is_max ? comp == CompareAble_.More : comp == CompareAble_.Less;
+		int comp = ComparerAbleUtl.Compare(comparer, heap[lhs], heap[rhs]);
+		boolean diff = is_max ? comp == CompareAbleUtl.More : comp == CompareAbleUtl.Less;
 		return diff ? lhs : rhs;
 	}
 	private void Heapify_up(int idx) {
 		Object val = heap[idx];
 		while (idx > 0) {
-			int comp = ComparerAble_.Compare(comparer, val, heap[Parent(idx)]);
-			if (!(is_max ? comp == CompareAble_.More : comp == CompareAble_.Less))
+			int comp = ComparerAbleUtl.Compare(comparer, val, heap[Parent(idx)]);
+			if (!(is_max ? comp == CompareAbleUtl.More : comp == CompareAbleUtl.Less))
 				break;
 			heap[idx] = heap[Parent(idx)];
 			idx = Parent(idx);
@@ -79,8 +82,8 @@ public class Binary_heap {
 		Object val = heap[idx];
 		while (Kth_child(idx, 1) < size) {
 			child = Max_child(idx);
-			int comp = ComparerAble_.Compare(comparer, val, heap[child]);
-			if (is_max ? comp == CompareAble_.Less : comp == CompareAble_.More)
+			int comp = ComparerAbleUtl.Compare(comparer, val, heap[child]);
+			if (is_max ? comp == CompareAbleUtl.Less : comp == CompareAbleUtl.More)
 				heap[idx] = heap[child];
 			else
 				break;

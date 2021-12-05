@@ -79,7 +79,7 @@ public class Xoh_img_make__dump__tst {
 //			  orig = "<a href='/wiki/File:A.png' class='image' title='abc'><img alt='abc' data-xoimg='0|220|110|0.5|-1|-1' src='file:///mem/xowa/file/en.wikipedia.org/thumb/7/0/A.png/220px.png' width='220' height='110'/></a>"
 //			, expd = "<a href='/wiki/File:A.png' class='image' title='abc'><img id='xoimg_0' alt='abc' src='file:///mem/xowa/file/commons.wikimedia.org/thumb/7/0/B.png/330px.png' width='330' height='110'/></a>"
 //			;
-//			fxt.Init_img_cache("en.w", "A.png", 0, 0.5, 220, 110, -1, -1, Bool_.Y, "B.png", 330, 110, -1, -1);
+//			fxt.Init_img_cache("en.w", "A.png", 0, 0.5, 220, 110, -1, -1, BoolUtl.Y, "B.png", 330, 110, -1, -1);
 //			fxt.Test__make(orig
 //			, fxt.Page_chkr().Body_(expd)
 //				.Imgs__add("en.w", "A.png", 0, 0.5, 220, 110, -1, -1)

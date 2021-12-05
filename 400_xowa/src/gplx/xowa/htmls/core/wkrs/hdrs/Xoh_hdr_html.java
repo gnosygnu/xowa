@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*;
+package gplx.xowa.htmls.core.wkrs.hdrs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.langs.htmls.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
 import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.addons.htmls.tocs.*;
@@ -46,21 +47,21 @@ public class Xoh_hdr_html {
 		if (hdr_is_valid) {													// NOTE: need to check hdr_num b/c it could be dangling
 			Xoh_html_wtr_.Para__assert_tag_starts_on_nl(bfr, hdr.Src_bgn()); 
 			bfr.Add(Bry__hdr_lhs_bgn).Add_int(hdr_num, 1, 1);				// '<h', '2'
-			bfr.Add_byte(Byte_ascii.Angle_end);								// '>'
+			bfr.Add_byte(AsciiByte.AngleEnd);								// '>'
 			if (cfg.Toc__show()) {
 				bfr.Add(Bry__span_lhs_bgn);									// "<span class='mw-headline' id='"
 				bfr.Add(toc_itm.Anch());									// 'Name_and_Etymology'
 				bfr.Add(Bry__span_lhs_end);									// "'>"
 			}
 		}	
-		if (hdr.Manual_bgn() > 0) bfr.Add_byte_repeat(Byte_ascii.Eq, hdr.Manual_bgn());	// '='
+		if (hdr.Manual_bgn() > 0) bfr.Add_byte_repeat(AsciiByte.Eq, hdr.Manual_bgn());	// '='
 
 		// write text
 		bfr.Add(hdr_text_bry);
 		
 		// write </span></h#>
 		if (hdr_is_valid) {													// NOTE: need to check hdr_num b/c it could be dangling
-			if (hdr.Manual_end() > 0) bfr.Add_byte_repeat(Byte_ascii.Eq, hdr.Manual_end());	// '='
+			if (hdr.Manual_end() > 0) bfr.Add_byte_repeat(AsciiByte.Eq, hdr.Manual_end());	// '='
 			if (cfg.Toc__show())
 				bfr.Add(Gfh_tag_.Span_rhs);									// '</span>'
 

@@ -13,7 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
+package gplx.dbs;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.Double_;
+import gplx.Float_;
+import gplx.Int_;
+import gplx.Io_url_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Long_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
 public class Db_conn_utl {
 	public static Db_conn Conn__new(String url_rel) {
 		Db_conn_bldr.Instance.Reg_default_mem();
@@ -32,7 +43,7 @@ public class Db_conn_utl {
 				String fld_name = fld.Name();
 				Object val = row[j];
 				switch (fld.Type().Tid()) {
-					case DbmetaFldType.TidBool:		stmt.Val_bool_as_byte	(fld_name, Bool_.Cast(val)); break;
+					case DbmetaFldType.TidBool:		stmt.Val_bool_as_byte	(fld_name, BoolUtl.Cast(val)); break;
 					case DbmetaFldType.TidByte:		stmt.Val_byte			(fld_name, Byte_.Cast(val)); break;
 					case DbmetaFldType.TidInt:		stmt.Val_int			(fld_name, Int_.Cast(val)); break;
 					case DbmetaFldType.TidLong:		stmt.Val_long			(fld_name, Long_.cast(val)); break;

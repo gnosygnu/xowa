@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import org.junit.*;
+package gplx.xowa.xtns.wbases.pfuncs;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import org.junit.Before;
+import org.junit.Test;
 public class Wdata_pf_noExternalLangLinks_tst {
 	@Before public void init() {fxt.Clear();} Wdata_pf_noExternalLangLinks_fxt fxt = new Wdata_pf_noExternalLangLinks_fxt();
 	@Test  public void Basic() {
@@ -36,19 +44,19 @@ class Wdata_pf_noExternalLangLinks_fxt {
 			wiki = parser_fxt.Wiki();
 			data = wiki.Parser_mgr().Ctx().Page().Wdata_external_lang_links();
 		}
-		expd_sort = expd_enabled = Bool_.__byte;
+		expd_sort = expd_enabled = BoolUtl.NullByte;
 		expd_langs = null;
 		data.Reset();
 		return this;
 	}	private Xop_fxt parser_fxt; Xoae_app app; Xowe_wiki wiki; Wdata_external_lang_links_data data;
-	public Wdata_pf_noExternalLangLinks_fxt Expd_enabled_(boolean v) {expd_enabled = v ? Bool_.Y_byte : Bool_.N_byte; return this;} private byte expd_enabled;
-	public Wdata_pf_noExternalLangLinks_fxt Expd_sort_(boolean v) {expd_sort = v ? Bool_.Y_byte : Bool_.N_byte; return this;} private byte expd_sort;
+	public Wdata_pf_noExternalLangLinks_fxt Expd_enabled_(boolean v) {expd_enabled = v ? BoolUtl.YByte : BoolUtl.NByte; return this;} private byte expd_enabled;
+	public Wdata_pf_noExternalLangLinks_fxt Expd_sort_(boolean v) {expd_sort = v ? BoolUtl.YByte : BoolUtl.NByte; return this;} private byte expd_sort;
 	public Wdata_pf_noExternalLangLinks_fxt Expd_langs_(String... v) {expd_langs = v; return this;} private String[] expd_langs;
 	public void Test_parse(String raw) {
 		byte[] expd = parser_fxt.Test_parse_tmpl_str_rv(raw);
 		Tfds.Eq(Bry_.Empty, expd);
-		if (expd_enabled != Bool_.__byte) Tfds.Eq(expd_enabled == Bool_.Y_byte, data.Enabled());
-		if (expd_sort != Bool_.__byte) Tfds.Eq(expd_sort == Bool_.Y_byte, data.Sort());
+		if (expd_enabled != BoolUtl.NullByte) Tfds.Eq(expd_enabled == BoolUtl.YByte, data.Enabled());
+		if (expd_sort != BoolUtl.NullByte) Tfds.Eq(expd_sort == BoolUtl.YByte, data.Sort());
 		if (expd_langs != null) Tfds.Eq_ary_str(expd_langs, Data_langs_xto_str_ary());
 	}
 	String[] Data_langs_xto_str_ary() {

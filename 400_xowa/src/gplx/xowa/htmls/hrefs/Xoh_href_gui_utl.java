@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.htmls.hrefs;
 
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.String_;
 import gplx.core.btries.Btrie_slim_mgr;
@@ -27,7 +27,7 @@ public class Xoh_href_gui_utl {
 	public static String Html_extract_text(String site, String page, String text_str) {
 		byte[] text_bry = Bry_.new_u8(text_str);
 		int text_len = text_bry.length;
-		int text_tid = Byte_ascii.To_a7_int(text_bry[0]);
+		int text_tid = AsciiByte.ToA7Int(text_bry[0]);
 		switch (text_tid) {
 			case Text_tid_none: return "";	// "0"
 			case Text_tid_text: return String_.new_u8(text_bry, 2, text_len);	// 2 to skip "1|"
@@ -58,7 +58,7 @@ public class Xoh_href_gui_utl {
 		int pos = bgn + Xoh_href_.Len__file;	// skip "file://"
 		Object tid_obj = href_trie.Match_bgn(src, pos, src_len);
 		if (tid_obj == null) {
-			if (src_len - pos > 0 && src[pos] == Byte_ascii.Slash) { // handle "file:///C:/dir/fil.png"
+			if (src_len - pos > 0 && src[pos] == AsciiByte.Slash) { // handle "file:///C:/dir/fil.png"
 				return pos + 1;
 			}
 			else {

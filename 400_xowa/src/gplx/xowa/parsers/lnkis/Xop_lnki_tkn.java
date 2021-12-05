@@ -13,10 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.files.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.xtns.pfuncs.ttls.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.parsers.lnkis;
+import gplx.Byte_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.htmls.core.wkrs.lnkis.htmls.Xoh_file_fmtr;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_itm_base;
+import gplx.xowa.parsers.Xop_tkn_null;
+import gplx.xowa.parsers.tmpls.Arg_itm_tkn_null;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.xtns.pfuncs.ttls.Pfunc_rel2abs;
 public class Xop_lnki_tkn extends Xop_tkn_itm_base implements gplx.xowa.wikis.pages.lnkis.Xopg_lnki_itm {
 	@Override public byte	Tkn_tid() {return tkn_tid;} private byte tkn_tid = Xop_tkn_itm_.Tid_lnki;
 	public void				Tkn_tid_to_txt() {tkn_tid = Xop_tkn_itm_.Tid_txt;}
@@ -25,7 +38,7 @@ public class Xop_lnki_tkn extends Xop_tkn_itm_base implements gplx.xowa.wikis.pa
 	public byte				Lnki_type() {return lnki_type;} private byte lnki_type = Xop_lnki_type.Id_null;
 	public int				Tail_bgn() {return tail_bgn;} public Xop_lnki_tkn Tail_bgn_(int v) {tail_bgn = v; return this;} private int tail_bgn = -1;
 	public int				Tail_end() {return tail_end;} public Xop_lnki_tkn Tail_end_(int v) {tail_end = v; return this;} private int tail_end = -1;
-	public byte				Border() {return border;} public Xop_lnki_tkn Border_(byte v) {border = v; return this;} private byte border = Bool_.__byte;
+	public byte				Border() {return border;} public Xop_lnki_tkn Border_(byte v) {border = v; return this;} private byte border = BoolUtl.NullByte;
 	public int				Align_h() {return align_h;} public Xop_lnki_tkn Align_h_(int v) {if (align_h == Xop_lnki_align_h_.Null) align_h = v; return this;} private int align_h = Xop_lnki_align_h_.Null;
 	public byte				Align_v() {return align_v;} public Xop_lnki_tkn Align_v_(byte v) {align_v = v; return this;} private byte align_v = Byte_.Max_value_127;
 	public int				W() {return w;} public Xop_lnki_tkn W_(int v) {w = v; return this;} private int w = Width_null;

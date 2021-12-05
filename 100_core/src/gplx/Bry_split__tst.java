@@ -14,40 +14,43 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import org.junit.*; import gplx.core.tests.*;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import org.junit.Test;
 public class Bry_split__tst {
 	private final Bry_split__fxt fxt = new Bry_split__fxt();
 	@Test  public void Split() {
-		fxt.Test_split("a"				, Byte_ascii.Pipe, Bool_.N, "a");					// no trim
-		fxt.Test_split("a|"				, Byte_ascii.Pipe, Bool_.N, "a");
-		fxt.Test_split("|a"				, Byte_ascii.Pipe, Bool_.N, "", "a");
-		fxt.Test_split("|"				, Byte_ascii.Pipe, Bool_.N, "");
-		fxt.Test_split(""				, Byte_ascii.Pipe, Bool_.N);
-		fxt.Test_split("a|b|c"			, Byte_ascii.Pipe, Bool_.N, "a", "b", "c");
-		fxt.Test_split(" a "			, Byte_ascii.Pipe, Bool_.Y, "a");					// trim
-		fxt.Test_split(" a |"			, Byte_ascii.Pipe, Bool_.Y, "a");
-		fxt.Test_split("| a "			, Byte_ascii.Pipe, Bool_.Y, "", "a");
-		fxt.Test_split(" | "			, Byte_ascii.Pipe, Bool_.Y, "");
-		fxt.Test_split(" "				, Byte_ascii.Pipe, Bool_.Y);
-		fxt.Test_split(" a | b | c "	, Byte_ascii.Pipe, Bool_.Y, "a", "b", "c");
-		fxt.Test_split(" a b | c d "	, Byte_ascii.Pipe, Bool_.Y, "a b", "c d");
-		fxt.Test_split(" a \n b "		, Byte_ascii.Nl  , Bool_.N, " a ", " b ");			// ws as dlm
-		fxt.Test_split(" a \n b "		, Byte_ascii.Nl  , Bool_.Y, "a", "b");				// ws as dlm; trim
-		fxt.Test_split("a|extend|b"		, Byte_ascii.Pipe, Bool_.Y, "a", "extend|b");		// extend
-		fxt.Test_split("extend|a"		, Byte_ascii.Pipe, Bool_.Y, "extend|a");			// extend
-		fxt.Test_split("a|cancel|b"		, Byte_ascii.Pipe, Bool_.Y, "a");					// cancel
+		fxt.Test_split("a"				, AsciiByte.Pipe, BoolUtl.N, "a");					// no trim
+		fxt.Test_split("a|"				, AsciiByte.Pipe, BoolUtl.N, "a");
+		fxt.Test_split("|a"				, AsciiByte.Pipe, BoolUtl.N, "", "a");
+		fxt.Test_split("|"				, AsciiByte.Pipe, BoolUtl.N, "");
+		fxt.Test_split(""				, AsciiByte.Pipe, BoolUtl.N);
+		fxt.Test_split("a|b|c"			, AsciiByte.Pipe, BoolUtl.N, "a", "b", "c");
+		fxt.Test_split(" a "			, AsciiByte.Pipe, BoolUtl.Y, "a");					// trim
+		fxt.Test_split(" a |"			, AsciiByte.Pipe, BoolUtl.Y, "a");
+		fxt.Test_split("| a "			, AsciiByte.Pipe, BoolUtl.Y, "", "a");
+		fxt.Test_split(" | "			, AsciiByte.Pipe, BoolUtl.Y, "");
+		fxt.Test_split(" "				, AsciiByte.Pipe, BoolUtl.Y);
+		fxt.Test_split(" a | b | c "	, AsciiByte.Pipe, BoolUtl.Y, "a", "b", "c");
+		fxt.Test_split(" a b | c d "	, AsciiByte.Pipe, BoolUtl.Y, "a b", "c d");
+		fxt.Test_split(" a \n b "		, AsciiByte.Nl  , BoolUtl.N, " a ", " b ");			// ws as dlm
+		fxt.Test_split(" a \n b "		, AsciiByte.Nl  , BoolUtl.Y, "a", "b");				// ws as dlm; trim
+		fxt.Test_split("a|extend|b"		, AsciiByte.Pipe, BoolUtl.Y, "a", "extend|b");		// extend
+		fxt.Test_split("extend|a"		, AsciiByte.Pipe, BoolUtl.Y, "extend|a");			// extend
+		fxt.Test_split("a|cancel|b"		, AsciiByte.Pipe, BoolUtl.Y, "a");					// cancel
 	}
 	@Test  public void Split__bry() {
 		fxt.Test_split("a|b|c|d"		, 2, 6, "|", "b", "c");
 		fxt.Test_split("a|b|c|d"		, 2, 4, "|", "b");
 	}
 	@Test  public void Empty() {
-		fxt.Test_split("a\n\nb"         , Byte_ascii.Nl, Bool_.N, "a", "", "b");
+		fxt.Test_split("a\n\nb"         , AsciiByte.Nl, BoolUtl.N, "a", "", "b");
 	}
 	@Test  public void Split_w_max() {
-		fxt.Test__split_w_max("a|b|c|d"              , Byte_ascii.Pipe, 2, "a", "b");		// max is less
-		fxt.Test__split_w_max("a"                    , Byte_ascii.Pipe, 2, "a", null);		// max is more
-		fxt.Test__split_w_max("|"                    , Byte_ascii.Pipe, 2, "", "");		    // empty itms
+		fxt.Test__split_w_max("a|b|c|d"              , AsciiByte.Pipe, 2, "a", "b");		// max is less
+		fxt.Test__split_w_max("a"                    , AsciiByte.Pipe, 2, "a", null);		// max is more
+		fxt.Test__split_w_max("|"                    , AsciiByte.Pipe, 2, "", "");		    // empty itms
 	}
 	@Test public void Split_ws() {
 		fxt.Test__split_ws("a b", "a", "b");

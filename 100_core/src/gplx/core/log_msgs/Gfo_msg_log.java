@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.log_msgs; import gplx.*; import gplx.core.*;
+package gplx.core.log_msgs;
+import gplx.Bry_;
+import gplx.objects.arrays.ArrayUtl;
 public class Gfo_msg_log {
 	public Gfo_msg_log(String root_key) {root = new Gfo_msg_root(root_key);} Gfo_msg_root root;
 	public int Ary_len() {return ary_idx;}
@@ -50,7 +52,7 @@ public class Gfo_msg_log {
 	}
 	void ary_expand() {
 		int new_max = ary_max == 0 ? 2 : ary_max * 2;  
-		ary = (Gfo_msg_data[])Array_.Expand(ary, new Gfo_msg_data[new_max], ary_max);
+		ary = (Gfo_msg_data[])ArrayUtl.Expand(ary, new Gfo_msg_data[new_max], ary_max);
 		ary_max = new_max;			
 	}
 	Gfo_msg_data[] ary = Gfo_msg_data.Ary_empty; int ary_idx, ary_max;

@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.grammars; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.grammars; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*;
-import gplx.xowa.apps.urls.*;
 public class Xol_grammar_fi implements Xol_grammar {
 	public boolean Vowel_harmony(byte[] word, int word_len) {
 		// $aou = preg_match( '/[aou][^äöy]*$/i', $word );
@@ -56,20 +57,20 @@ public class Xol_grammar_fi implements Xol_grammar {
 			aou = false;			
 		// PHP: if ( preg_match( '/[bcdfghjklmnpqrstvwxz]$/i', $word ) ) $word .= 'i';
 		switch (lower[word_len - 1]) {
-			case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g:
-			case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_j: case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m:
-			case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s:
-			case Byte_ascii.Ltr_t: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_z:
-				bfr.Add_byte(Byte_ascii.Ltr_i);
+			case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_f: case AsciiByte.Ltr_g:
+			case AsciiByte.Ltr_h: case AsciiByte.Ltr_j: case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m:
+			case AsciiByte.Ltr_n: case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s:
+			case AsciiByte.Ltr_t: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_z:
+				bfr.Add_byte(AsciiByte.Ltr_i);
 				break;
 		}
 
 		switch (tid) {
-			case Xol_grammar_.Tid_genitive:		bfr.Add_byte(Byte_ascii.Ltr_n); break;						// case 'genitive': $word .= 'n';
+			case Xol_grammar_.Tid_genitive:		bfr.Add_byte(AsciiByte.Ltr_n); break;						// case 'genitive': $word .= 'n';
 			case Xol_grammar_.Tid_elative:		bfr.Add(aou ? Bry_sta_y : Bry_sta_n); break;				// case 'elative': $word .= ( $aou ? 'sta' : 'stä' );
 			case Xol_grammar_.Tid_partitive:	bfr.Add(aou ? Bry_a_y : Bry_a_n); break;					// case 'partitive': $word .= ( $aou ? 'a' : 'ä' );
 			case Xol_grammar_.Tid_inessive:		bfr.Add(aou ? Bry_ssa_y : Bry_ssa_n); break;				// case 'inessive': $word .= ( $aou ? 'ssa' : 'ssä' );
-			case Xol_grammar_.Tid_illative:		bfr.Add_byte(word[word_len - 1]).Add_byte(Byte_ascii.Ltr_n); break;// # Double the last letter and add 'n'
+			case Xol_grammar_.Tid_illative:		bfr.Add_byte(word[word_len - 1]).Add_byte(AsciiByte.Ltr_n); break;// # Double the last letter and add 'n'
 		}
 		return true;
 	}	private static Xol_grammar_manual_regy manual_regy;

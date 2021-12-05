@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.cases; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import gplx.core.btries.*; import gplx.core.intls.*;
+package gplx.xowa.langs.cases;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.core.btries.Btrie_fast_mgr;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.intls.Gfo_case_itm;
+import gplx.core.intls.Gfo_case_mgr;
+import gplx.objects.primitives.BoolUtl;
 public class Xol_case_mgr implements Gfo_invk, Gfo_case_mgr {
 	private final Btrie_fast_mgr upper_trie = Btrie_fast_mgr.cs(), lower_trie = Btrie_fast_mgr.cs(); private Xol_case_itm[] itms;
 	public Xol_case_mgr(byte tid) {this.tid = tid;}
@@ -53,8 +65,8 @@ public class Xol_case_mgr implements Gfo_invk, Gfo_case_mgr {
 		}
 		return this;
 	}
-	public byte[] Case_reuse_upper(byte[] src, int bgn, int end) {return Case_reuse(Bool_.Y, src, bgn, end);}
-	public byte[] Case_reuse_lower(byte[] src, int bgn, int end) {return Case_reuse(Bool_.N, src, bgn, end);}
+	public byte[] Case_reuse_upper(byte[] src, int bgn, int end) {return Case_reuse(BoolUtl.Y, src, bgn, end);}
+	public byte[] Case_reuse_lower(byte[] src, int bgn, int end) {return Case_reuse(BoolUtl.N, src, bgn, end);}
 	public byte[] Case_reuse(boolean upper, byte[] src, int bgn, int end) {
 		Btrie_fast_mgr trie = upper ? upper_trie : lower_trie;
 		Btrie_rv trv = new Btrie_rv();		// TS.MEM: DATE:2016-07-12
@@ -93,9 +105,9 @@ public class Xol_case_mgr implements Gfo_invk, Gfo_case_mgr {
 		return tmp_bfr.To_bry_and_clear();
 	}
 	public byte[] Case_build_upper(byte[] src) {return Case_build_upper(src, 0, src.length);}
-	public byte[] Case_build_upper(byte[] src, int bgn, int end) {return Case_build(Bool_.Y, src, bgn, end);}
+	public byte[] Case_build_upper(byte[] src, int bgn, int end) {return Case_build(BoolUtl.Y, src, bgn, end);}
 	public byte[] Case_build_lower(byte[] src) {return Case_build_lower(src, 0, src.length);}
-	public byte[] Case_build_lower(byte[] src, int bgn, int end) {return Case_build(Bool_.N, src, bgn, end);}
+	public byte[] Case_build_lower(byte[] src, int bgn, int end) {return Case_build(BoolUtl.N, src, bgn, end);}
 	public byte[] Case_build(boolean upper, byte[] src, int bgn, int end) {
 		Btrie_fast_mgr trie = upper ? upper_trie : lower_trie;
 		Btrie_rv trv = new Btrie_rv();		// TS.MEM: DATE:2016-07-12
@@ -121,8 +133,8 @@ public class Xol_case_mgr implements Gfo_invk, Gfo_case_mgr {
 		}
 		return tmp_bfr.To_bry_and_clear();
 	}
-	public byte[] Case_build_1st_upper(Bry_bfr bfr, byte[] src, int bgn, int end) {return Case_build_1st(bfr, Bool_.Y, src, bgn, end);}
-	public byte[] Case_build_1st_lower(Bry_bfr bfr, byte[] src, int bgn, int end) {return Case_build_1st(bfr, Bool_.N, src, bgn, end);}
+	public byte[] Case_build_1st_upper(Bry_bfr bfr, byte[] src, int bgn, int end) {return Case_build_1st(bfr, BoolUtl.Y, src, bgn, end);}
+	public byte[] Case_build_1st_lower(Bry_bfr bfr, byte[] src, int bgn, int end) {return Case_build_1st(bfr, BoolUtl.N, src, bgn, end);}
 	public byte[] Case_build_1st(Bry_bfr bfr, boolean upper, byte[] src, int bgn, int end) {
 		if (bgn == end) return Bry_.Empty;	// upper "" -> ""
 		int b_len = gplx.core.intls.Utf8_.Len_of_char_by_1st_byte(src[bgn]);

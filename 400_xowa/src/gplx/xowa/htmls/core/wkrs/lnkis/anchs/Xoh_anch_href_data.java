@@ -13,12 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.anchs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.anchs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*; import gplx.core.btries.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.langs.htmls.encoders.*;
+import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 import gplx.xowa.wikis.ttls.*; import gplx.xowa.wikis.nss.*;
 public class Xoh_anch_href_data implements Xoh_itm_parser {
-	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(Byte_ascii.Slash);
+	private final Bry_rdr rdr = new Bry_rdr().Dflt_dlm_(AsciiByte.Slash);
 	public void Fail_throws_err_(boolean v) {rdr.Fail_throws_err_(v);}// TEST
 	public Gfh_atr Atr() {return atr;} private Gfh_atr atr;
 	public byte Tid() {return tid;} private byte tid;
@@ -57,14 +60,14 @@ public class Xoh_anch_href_data implements Xoh_itm_parser {
 		else {
 			ttl_end = rng_end;
 			switch (src[rng_bgn]) {
-				case Byte_ascii.Hash:
+				case AsciiByte.Hash:
 					tid = Tid__anch;
 					ttl_bgn = rng_bgn + 1;	// position ttl_bgn after #
 					break;
 				default:
 					Parse_inet(hctx, src);
 					break;
-				case Byte_ascii.Slash:
+				case AsciiByte.Slash:
 					rdr.Move_by_one();		// skip "/"
 					if (rdr.Chk(trie) == Tid__site) {	// EX: "/site/wiki/A"
 						tid = Tid__site;
@@ -93,7 +96,7 @@ public class Xoh_anch_href_data implements Xoh_itm_parser {
 		else {
 			ttl_full_txt = Bry_.Mid(src, ttl_bgn, ttl_end);
 			int ttl_full_len = ttl_full_txt.length;
-			int question_pos = Bry_find_.Find_fwd(ttl_full_txt, Byte_ascii.Question, 0, ttl_full_len); if (question_pos == -1) question_pos = ttl_full_len;
+			int question_pos = Bry_find_.Find_fwd(ttl_full_txt, AsciiByte.Question, 0, ttl_full_len); if (question_pos == -1) question_pos = ttl_full_len;
 			ttl_full_txt = Xoa_ttl.Replace_unders(ttl_full_txt, 0, question_pos);	// NOTE: only replace unders up to question mark to handle category and sortkey; EX:Category:A?pageuntil=A B; PAGE:en.w:Category:Public_transit_articles_with_unsupported_infobox_fields; DATE:2016-01-14
 			switch (tid) {
 				case Xoh_anch_href_data.Tid__anch:
@@ -103,7 +106,7 @@ public class Xoh_anch_href_data implements Xoh_itm_parser {
 					break;
 				case Xoh_anch_href_data.Tid__wiki:
 				case Xoh_anch_href_data.Tid__site:
-					int colon_pos = Bry_find_.Find_fwd(ttl_full_txt, Byte_ascii.Colon, 0, ttl_full_len);
+					int colon_pos = Bry_find_.Find_fwd(ttl_full_txt, AsciiByte.Colon, 0, ttl_full_len);
 					ttl_page_db = ttl_full_txt;
 					if (colon_pos != Bry_find_.Not_found) {
 						Xow_ns_mgr ns_mgr = ttl_parser.Ns_mgr();

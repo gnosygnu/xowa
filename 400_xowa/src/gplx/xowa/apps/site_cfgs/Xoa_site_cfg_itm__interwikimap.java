@@ -19,7 +19,7 @@ import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Bry_split_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.String_;
 import gplx.core.net.Gfo_url_parser;
@@ -52,7 +52,7 @@ class Xoa_site_cfg_itm__interwikimap extends Xoa_site_cfg_itm__base {
 			int lines_len = lines.length;
 			for (int i = 0; i < lines_len; ++i) {
 				byte[] line = lines[i]; if (Bry_.Len_eq_0(line)) continue;	// ignore blank lines
-				byte[][] flds = Bry_split_.Split(line, Byte_ascii.Pipe);
+				byte[][] flds = Bry_split_.Split(line, AsciiByte.Pipe);
 				byte[] url_fmt = flds[1];
 				byte[] domain_bry = Xow_xwiki_mgr.Get_domain_from_url(url_parser, url_fmt);
 				wiki.Xwiki_mgr().Add_by_site_interwikimap

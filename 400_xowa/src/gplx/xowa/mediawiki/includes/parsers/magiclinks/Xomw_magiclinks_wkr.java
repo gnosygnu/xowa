@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.magiclinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.magiclinks; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.xowa.mediawiki.includes.xohtml.*;
-import gplx.langs.regxs.*;
 // TODO.XO: this->getConverterLanguage()->markNoConversion($url, true),
 public class Xomw_magiclinks_wkr {
 	private final Btrie_slim_mgr regex_trie = Btrie_slim_mgr.ci_a7(); // NOTE: must be ci to handle protocols; EX: "https:" and "HTTPS:"
@@ -42,7 +43,7 @@ public class Xomw_magiclinks_wkr {
 
 		// ',;\.:!?'
 		url_separators = Bool_ary_bldr.New_u8()
-			.Set_many(Byte_ascii.Comma,Byte_ascii.Semic, Byte_ascii.Dot, Byte_ascii.Colon, Byte_ascii.Bang, Byte_ascii.Question)
+			.Set_many(AsciiByte.Comma, AsciiByte.Semic, AsciiByte.Dot, AsciiByte.Colon, AsciiByte.Bang, AsciiByte.Question)
 			.To_ary();
 
 		if (Tag__anch__rhs == null) {
@@ -120,10 +121,10 @@ public class Xomw_magiclinks_wkr {
 						byte ws_byte = src[tmp_pos];
 						switch (ws_byte) {
 							// next char after "<a" is ws -> valid
-							case Byte_ascii.Space:
-							case Byte_ascii.Tab:
-							case Byte_ascii.Cr:
-							case Byte_ascii.Nl:
+							case AsciiByte.Space:
+							case AsciiByte.Tab:
+							case AsciiByte.Cr:
+							case AsciiByte.Nl:
 								break;
 							// next char after "<a" is not ws -> invalid
 							default:
@@ -150,7 +151,7 @@ public class Xomw_magiclinks_wkr {
 					break;
 				case Regex__elem: // (<.*?>) |                    // m[2]: Skip stuff inside
 					// just find ">"
-					tmp_pos = Bry_find_.Find_fwd(src, Byte_ascii.Angle_end, tmp_pos, src_end);
+					tmp_pos = Bry_find_.Find_fwd(src, AsciiByte.AngleEnd, tmp_pos, src_end);
 					// > not found -> invalid
 					if (tmp_pos == Bry_find_.Not_found) {
 						regex_valid = false;
@@ -222,14 +223,14 @@ public class Xomw_magiclinks_wkr {
 		int url_len = url.length;
 		// If there is no left bracket, then consider right brackets fair game too
 		// XO.MW: if (strpos($url, '(') === false) {$sep .= ')';}
-		url_separators[Byte_ascii.Paren_end] = Bry_find_.Find_fwd(url, Byte_ascii.Paren_bgn, 0, url_len) == Bry_find_.Not_found;
+		url_separators[AsciiByte.ParenEnd] = Bry_find_.Find_fwd(url, AsciiByte.ParenBgn, 0, url_len) == Bry_find_.Not_found;
 		
 		int num_sep_chars = XophpString_.strspn_bwd__ary(url, url_separators, url_len, -1);
 		// Don't break a trailing HTML entity by moving the ; into $trail
 		// This is in hot code, so use substr_compare to avoid having to
 		// create a new String Object for the comparison
 		// XO.MW.NOTE: ignore semic if part of entity; EX: "http://a.org&apos;!."
-		if (num_sep_chars > 0 && XophpString_.substr_byte(url, -num_sep_chars) == Byte_ascii.Semic) {
+		if (num_sep_chars > 0 && XophpString_.substr_byte(url, -num_sep_chars) == AsciiByte.Semic) {
 			// more optimization: instead of running preg_match with a $
 			// anchor, which can be slow, do the match on the reversed
 			// String starting at the desired offset.
@@ -287,29 +288,29 @@ class Xomw_regex_html_entity {
 		while (cur >= src_end) {
 			int b_bgn = gplx.core.intls.Utf8_.Get_prv_char_pos0_old(src, cur);
 			switch (src[b_bgn]) {
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-				case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-				case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-				case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+				case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+				case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+				case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+				case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+				case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+				case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
 					letters++;
 					break;
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					numbers++;
 					break;
-				case Byte_ascii.Hash:
+				case AsciiByte.Hash:
 					// next must be &; EX: "&#" and "&#x"
 					int prv = cur - 1;
-					if (prv >= src_end && src[prv] == Byte_ascii.Amp) {
+					if (prv >= src_end && src[prv] == AsciiByte.Amp) {
 						// if hex, num | ltr is fine
 						byte hex_byte = src[cur + 1];
-						if (hex_byte == Byte_ascii.Ltr_X || hex_byte == Byte_ascii.Ltr_x) {
+						if (hex_byte == AsciiByte.Ltr_X || hex_byte == AsciiByte.Ltr_x) {
 							return numbers > 0 || letters > 1;	// 1 to ignore "x"
 						}
 						// if dec, no letters allowed
@@ -318,7 +319,7 @@ class Xomw_regex_html_entity {
 						}
 					}
 					return false;
-				case Byte_ascii.Amp:
+				case AsciiByte.Amp:
 					// if entity, no numbers
 					return letters > 0 && numbers == 0;
 				default:
@@ -371,7 +372,7 @@ class Xomw_regex_link_interrupt {
 				case Bgn__hex:
 				case Bgn__dec:
 					// match rest of sequence from above; EX: "3c;", "60;" etc.
-					end_pos = Bry_find_.Find_fwd_while(src, end_pos, src_end, Byte_ascii.Num_0);
+					end_pos = Bry_find_.Find_fwd_while(src, end_pos, src_end, AsciiByte.Num0);
 					Object end_obj = end_trie.Match_at(trv, src, end_pos, src_end);
 					if (end_obj != null) {
 						// make sure that hex-dec matches; EX: "&#x60;" and "&#3c;" are invalid

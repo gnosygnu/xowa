@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.numbers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Xol_num_grp_fmtr {
 	public boolean Mode_is_regx() {return digit_grouping_pattern == null || Bry_.Eq(digit_grouping_pattern, Digit_grouping_pattern_normal);}
 	public byte[] Digit_grouping_pattern() {return digit_grouping_pattern;} public void Digit_grouping_pattern_(byte[] v) {digit_grouping_pattern = v;} private byte[] digit_grouping_pattern;
@@ -28,8 +29,8 @@ public class Xol_num_grp_fmtr {
 			if (pos == src_len) break;
 			byte b = src[pos];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9: {
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9: {
 					int num_end = Bry_find_.Find_fwd_while_num(src, pos, src_len);
 					int num_len = num_end - pos;
 					if (num_len > grp_len) {
@@ -46,7 +47,7 @@ public class Xol_num_grp_fmtr {
 					pos = num_end;
 					break;
 				}
-				case Byte_ascii.Dot: {
+				case AsciiByte.Dot: {
 					int num_end = Bry_find_.Find_fwd_while_num(src, pos + 1, src_len);	// +1 to skip dot
 					if (dirty)
 						bfr.Add_mid(src, pos, num_end);
@@ -70,7 +71,7 @@ public class Xol_num_grp_fmtr {
 					|| (i - seg_0) % grp_len == 0	// seg_n
 					)
 				) {
-				bfr.Add_byte(Byte_ascii.Comma);	// MW: hard-coded
+				bfr.Add_byte(AsciiByte.Comma);	// MW: hard-coded
 			}
 			bfr.Add_byte(src[i]);
 		}

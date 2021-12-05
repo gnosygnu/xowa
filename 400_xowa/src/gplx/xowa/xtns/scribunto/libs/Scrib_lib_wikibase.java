@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.xtns.scribunto.*;
 import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.wbases.stores.*;
@@ -152,7 +154,7 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		byte[] entityId = args.Pull_bry(0);
 
 		// EntityId.php.extractSerializationParts expands "localRepoName:random:serialization:parts:entityId"
-		int colonPos = Bry_find_.Find_bwd(entityId, Byte_ascii.Colon);
+		int colonPos = Bry_find_.Find_bwd(entityId, AsciiByte.Colon);
 		if (colonPos != -1) {
 			entityId = Bry_.Mid(entityId, colonPos + 1);
 		}
@@ -167,17 +169,17 @@ public class Scrib_lib_wikibase implements Scrib_lib {
 		*/
 		if (entityId.length > 0) {
 			switch (entityId[0]) {
-				case Byte_ascii.Ltr_P:
-				case Byte_ascii.Ltr_Q:
+				case AsciiByte.Ltr_P:
+				case AsciiByte.Ltr_Q:
 					if (entityId.length > 1) {
 						switch (entityId[1]) {
-							case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-							case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+							case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+							case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 								boolean numeric = true;
 								for (int i = 2; i < entityId.length; i++) {
 									switch (entityId[i]) {
-										case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-										case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+										case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+										case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 											break;
 										default:
 											numeric = false;
@@ -291,18 +293,18 @@ public function formatValues( $snaksSerialization ) {
 		if (pid != null) {
 			// if pid is "P####", look-up in db by title
 			byte b0 = pid[0];
-			if (b0 == Byte_ascii.Ltr_P || b0 == Byte_ascii.Ltr_p) {
+			if (b0 == AsciiByte.Ltr_P || b0 == AsciiByte.Ltr_p) {
 				// check if rest is numeric
 				boolean numeric = true;
 				for (int i = 1; i < pid.length; i++) {
-					if (!Byte_ascii.Is_num(pid[i])) {
+					if (!AsciiByte.IsNum(pid[i])) {
 						numeric = false;
 						break;
 					}
 				}
 				if (numeric) {
 					byte[] key = pid;
-					if (b0 == Byte_ascii.Ltr_p) key[0] = Byte_ascii.Ltr_P; // uppercase key
+					if (b0 == AsciiByte.Ltr_p) key[0] = AsciiByte.Ltr_P; // uppercase key
 					Wdata_doc wdoc = entity_mgr.Get_by_xid_or_null(key); // NOTE: by_xid b/c Module passes just "p1" not "Property:P1"
 					if (wdoc != null) rv = key; // found wdoc; set rv
 				}
@@ -314,7 +316,7 @@ public function formatValues( $snaksSerialization ) {
 				int pid_int = wdata_mgr.Pid_mgr.Get_pid_or_neg1(core.Wiki().Wdata_wiki_lang(), pid);
 				if (pid_int != gplx.xowa.xtns.wbases.core.Wbase_pid.Id_null) {
 					Bry_bfr tmp_bfr = Bry_bfr_.New();
-					tmp_bfr.Add_byte(Byte_ascii.Ltr_P);
+					tmp_bfr.Add_byte(AsciiByte.Ltr_P);
 					tmp_bfr.Add_long_variable(pid_int);
 					rv = tmp_bfr.To_bry_and_clear();
 				}

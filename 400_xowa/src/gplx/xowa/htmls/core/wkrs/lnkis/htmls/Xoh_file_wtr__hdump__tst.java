@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import org.junit.*; import gplx.xowa.files.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_file_fxt;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import org.junit.Test;
 public class Xoh_file_wtr__hdump__tst {
 	private final Xoh_file_wtr__hdump__fxt fxt = new Xoh_file_wtr__hdump__fxt();
 
@@ -46,7 +53,7 @@ class Xoh_file_wtr__hdump__fxt {
 	public void Init__hctx__hzip__none() {fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hdb__htxt));}
 	public void Init__hctx__hzip__v1()   {fxt.Hctx_(Xoh_wtr_ctx.Hdump_by_hzip_tid(Xoh_hzip_dict_.Hdb__page_sync));}
 	public void Init__orig__add(String orig_ttl, int orig_w, int orig_h) {
-		file_fxt.Exec_orig_add(Bool_.Y, orig_ttl, Xof_ext_.new_by_ttl_(Bry_.new_u8(orig_ttl)).Id(), orig_w, orig_h, "");
+		file_fxt.Exec_orig_add(BoolUtl.Y, orig_ttl, Xof_ext_.new_by_ttl_(Bry_.new_u8(orig_ttl)).Id(), orig_w, orig_h, "");
 	}
 	public void Test__parse(String raw, String expd) {
 		fxt.Test_parse_page_wiki_str(raw, expd);

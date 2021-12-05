@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
+package gplx.xowa.xtns.scribunto;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Scrib_fsys_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Scrib_fsys_mgr_fxt fxt = new Scrib_fsys_mgr_fxt();
 	@Test  public void Basic() {
@@ -49,8 +55,8 @@ class Scrib_fsys_mgr_fxt {
 		}
 		return this;
 	}
-	public Scrib_fsys_mgr_fxt Test_exists_y(String... keys) {Test_exists(Bool_.Y, keys); return this;}
-	public Scrib_fsys_mgr_fxt Test_exists_n(String... keys) {Test_exists(Bool_.N, keys); return this;}
+	public Scrib_fsys_mgr_fxt Test_exists_y(String... keys) {Test_exists(BoolUtl.Y, keys); return this;}
+	public Scrib_fsys_mgr_fxt Test_exists_n(String... keys) {Test_exists(BoolUtl.N, keys); return this;}
 	private void Test_exists(boolean expd, String[] keys) {
 		int keys_len = keys.length;
 		for (int i = 0; i < keys_len; i++) {

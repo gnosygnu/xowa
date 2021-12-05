@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
+package gplx.xowa.xtns.wbases.pfuncs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.xtns.wbases.*;
 import gplx.core.envs.*;
 import gplx.core.primitives.*;
 import gplx.xowa.parsers.logs.*; import gplx.xowa.xtns.pfuncs.*; import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*;
-import gplx.xowa.langs.kwds.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Wbase_statement_mgr_ {
 	public static void Get_wbase_data(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src, Pf_func_base pfunc, boolean mode_is_statements) {
@@ -59,7 +61,7 @@ public class Wbase_statement_mgr_ {
 		int bry_len = bry.length;
 		if (bry_len < 2) return Wbase_pid.Id_null;	// must have at least 2 chars; p#
 		byte b_0 = bry[0];
-		if (b_0 != Byte_ascii.Ltr_p && b_0 != Byte_ascii.Ltr_P)	return Wbase_pid.Id_null;
+		if (b_0 != AsciiByte.Ltr_p && b_0 != AsciiByte.Ltr_P)	return Wbase_pid.Id_null;
 		num_parser.Parse(bry, 1, bry_len);
 		return num_parser.Has_err() ? Wbase_pid.Id_null : num_parser.Rv_as_int();
 	}

@@ -14,8 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.sqls.wtrs; import gplx.Bry_bfr;
-import gplx.Byte_ascii;
-import gplx.CompareAble_;
+import gplx.objects.strings.AsciiByte;
+import gplx.objects.lists.CompareAbleUtl;
 import gplx.Err_;
 import gplx.Object_;
 import gplx.String_;
@@ -95,8 +95,8 @@ public class Sql_where_wtr {
 	private void Bld_where__comp(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria_comp crt) {
 		int comp_tid = crt.Comp_mode();
 		bfr.Add_byte_space();
-		bfr.Add_byte(comp_tid < CompareAble_.Same ? Byte_ascii.Angle_bgn : Byte_ascii.Angle_end);
-		if (comp_tid % 2 == CompareAble_.Same) bfr.Add_byte_eq();
+		bfr.Add_byte(comp_tid < CompareAbleUtl.Same ? AsciiByte.AngleBgn : AsciiByte.AngleEnd);
+		if (comp_tid % 2 == CompareAbleUtl.Same) bfr.Add_byte_eq();
 		bfr.Add_byte_space();
 		val_wtr.Bld_val(bfr, ctx, crt.Val());
 	}
@@ -117,12 +117,12 @@ public class Sql_where_wtr {
 		int len = crt.Ary_len();
 		for (int i = 0; i < len; ++i) {
 			if (i == 0)
-				bfr.Add_byte(Byte_ascii.Paren_bgn);
+				bfr.Add_byte(AsciiByte.ParenBgn);
 			else
-				bfr.Add_byte(Byte_ascii.Comma).Add_byte_space();
+				bfr.Add_byte(AsciiByte.Comma).Add_byte_space();
 			val_wtr.Bld_val(bfr, ctx, ary[i]);
 		}
-		bfr.Add_byte(Byte_ascii.Paren_end);
+		bfr.Add_byte(AsciiByte.ParenEnd);
 	}
 	private void Bld_where__iomatch(Bry_bfr bfr, Sql_wtr_ctx ctx, Criteria_ioMatch crt) {
 		bfr.Add_str_a7(crt.Neg() ? " NOT IOMATCH " : " IOMATCH ");

@@ -14,15 +14,17 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.diffs; import gplx.*; import gplx.dbs.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.primitives.BoolUtl;
 public class Gfdb_rdr_utl_ {
 	public static int Compare(DbmetaFldItm[] flds, int len, Db_rdr lhs_rdr, Db_rdr rhs_rdr) {
-		int comp = CompareAble_.Same;
+		int comp = CompareAbleUtl.Same;
 		for (int i = 0; i < len; ++i) {
 			DbmetaFldItm fld = flds[i];
 			String fld_name = fld.Name();
 			int tid = fld.Type().Tid();
 			switch (tid) {
-				case DbmetaFldType.TidBool:		comp = Bool_.Compare	(lhs_rdr.Read_bool_by_byte(fld_name), rhs_rdr.Read_bool_by_byte(fld_name)); break;
+				case DbmetaFldType.TidBool:		comp = BoolUtl.Compare	(lhs_rdr.Read_bool_by_byte(fld_name), rhs_rdr.Read_bool_by_byte(fld_name)); break;
 				case DbmetaFldType.TidByte:		comp = Byte_.Compare	(lhs_rdr.Read_byte(fld_name)		, rhs_rdr.Read_byte(fld_name)); break;
 				case DbmetaFldType.TidInt:		comp = Int_.Compare		(lhs_rdr.Read_int(fld_name)			, rhs_rdr.Read_int(fld_name)); break;
 				case DbmetaFldType.TidLong:		comp = Long_.Compare	(lhs_rdr.Read_long(fld_name)		, rhs_rdr.Read_long(fld_name)); break;
@@ -32,9 +34,9 @@ public class Gfdb_rdr_utl_ {
 				case DbmetaFldType.TidBry:		comp = Bry_.Compare		(lhs_rdr.Read_bry(fld_name)			, rhs_rdr.Read_bry(fld_name)); break;
 				default:							throw Err_.new_unhandled(tid);
 			}
-			if (comp != CompareAble_.Same) return comp;
+			if (comp != CompareAbleUtl.Same) return comp;
 		}
-		return CompareAble_.Same;
+		return CompareAbleUtl.Same;
 	}
 	public static void Stmt_args(Db_stmt stmt, DbmetaFldItm[] flds, int bgn, int end, Db_rdr rdr) {
 		for (int i = bgn; i < end; ++i) {

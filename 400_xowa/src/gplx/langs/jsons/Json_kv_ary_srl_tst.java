@@ -15,13 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bool_;
 import gplx.Bry_;
 import gplx.Decimal_adp;
 import gplx.Decimal_adp_;
 import gplx.Keyval;
 import gplx.Keyval_;
 import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
 import org.junit.Test;
 
 public class Json_kv_ary_srl_tst {
@@ -49,6 +49,6 @@ class Json_kv_ary_srl_fxt {
 	public Keyval New_kv_obj(String key, Object val)        {return Keyval_.new_(key, val);}
 	public Keyval New_kv_str(String key, String val)        {return Keyval_.new_(key, val);}
 	public Keyval New_kv_int(String key, int val)           {return Keyval_.new_(key, val);}
-	public Keyval New_kv_bool(String key, boolean val)      {return Keyval_.new_(key, Bool_.To_str_lower(val));}
+	public Keyval New_kv_bool(String key, boolean val)      {return Keyval_.new_(key, BoolUtl.ToStrLower(val));}
 	public Keyval New_kv_dec(String key, Decimal_adp val)   {return Keyval_.new_(key, val.To_str());}
 }

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.pages.wtxts; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
+package gplx.xowa.wikis.pages.wtxts;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.parsers.hdrs.*;
 public class Xopg_toc_mgr {
 	private Xop_hdr_tkn[] hdrs_ary = Xop_hdr_tkn.Ary_empty; private int hdrs_max, hdrs_len;
 	public boolean Enabled() {
@@ -41,7 +42,7 @@ public class Xopg_toc_mgr {
 		int new_len = hdrs_len + 1;
 		if (new_len > hdrs_max) {
 			hdrs_max = (new_len * 2) + 1;
-			hdrs_ary = (Xop_hdr_tkn[])Array_.Resize(hdrs_ary, hdrs_max);
+			hdrs_ary = (Xop_hdr_tkn[])ArrayUtl.Resize(hdrs_ary, hdrs_max);
 		}
 		hdrs_ary[hdrs_len] = hdr;
 		hdrs_len = new_len;

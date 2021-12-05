@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
-import org.junit.*;
+package gplx.dbs.sqls.wtrs;
+import gplx.Byte_;
+import gplx.DateAdp_;
+import gplx.Decimal_adp_;
+import gplx.Short_;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Sql_val_wtr_tst {
 	private final Sql_core_wtr_fxt fxt = new Sql_core_wtr_fxt();
 	@Test  public void Null()					{fxt.Test__val(null									, "NULL");}
-	@Test  public void Bool__n()				{fxt.Test__val(Bool_.N								, "0");}
-	@Test  public void Bool__y()				{fxt.Test__val(Bool_.Y								, "1");}
+	@Test  public void Bool__n()				{fxt.Test__val(BoolUtl.N								, "0");}
+	@Test  public void Bool__y()				{fxt.Test__val(BoolUtl.Y								, "1");}
 	@Test  public void Byte()					{fxt.Test__val(Byte_.By_int(2)						, "2");}
 	@Test  public void Short()					{fxt.Test__val(Short_.By_int(3)						, "3");}
 	@Test  public void Int()					{fxt.Test__val(4									, "4");}

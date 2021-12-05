@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.title; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.title; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
 import gplx.xowa.mediawiki.languages.*;
 import gplx.xowa.mediawiki.includes.interwiki.*;
 public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
@@ -239,7 +241,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 	*/
 	private final byte[][] tmpPrefixRegex = new byte[2][];
 	public XomwMediaWikiTitleCodecParts splitTitleString(byte[] text, int defaultNamespace) {
-		byte[] dbkey = XophpString_.str_replace(Byte_ascii.Space, Byte_ascii.Underline, text);
+		byte[] dbkey = XophpString_.str_replace(AsciiByte.Space, AsciiByte.Underline, text);
 
 		// Initialisation
 		XomwMediaWikiTitleCodecParts parts = new XomwMediaWikiTitleCodecParts(dbkey, defaultNamespace);
@@ -337,7 +339,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 
 					// If there's an initial colon after the interwiki, that also
 					// resets the default namespace
-					if (dbkey != Bry_.Empty && dbkey[0] == Byte_ascii.Colon) {
+					if (dbkey != Bry_.Empty && dbkey[0] == AsciiByte.Colon) {
 						parts.ns = XomwDefines.NS_MAIN;
 						dbkey = XophpString_.substr(dbkey, 1);
 					}
@@ -348,13 +350,13 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 			break;
 		} while (true);
 
-		byte[] fragment = XophpString_.strstr(dbkey, Byte_ascii.Hash_bry);
+		byte[] fragment = XophpString_.strstr(dbkey, AsciiByte.HashBry);
 		if (null != fragment) {
-			parts.fragment = XophpString_.str_replace(Byte_ascii.Underline, Byte_ascii.Space, XophpString_.substr(fragment, 1));
+			parts.fragment = XophpString_.str_replace(AsciiByte.Underline, AsciiByte.Space, XophpString_.substr(fragment, 1));
 			dbkey = XophpString_.substr(dbkey, 0, XophpString_.strlen(dbkey) - XophpString_.strlen(fragment));
 			// remove whitespace again: prevents "Foo_bar_#"
 			// becoming "Foo_bar_"
-			dbkey = Bry_.Replace(dbkey, Byte_ascii.Underline_bry, Bry_.Empty);
+			dbkey = Bry_.Replace(dbkey, AsciiByte.UnderlineBry, Bry_.Empty);
 		}
 
 		// Reject illegal characters.
@@ -424,7 +426,7 @@ public class XomwMediaWikiTitleCodec implements XomwTitleFormatter {
 //			}
 
 		// Any remaining initial :s are illegal.
-		if (dbkey != Bry_.Empty && Byte_ascii.Colon == dbkey[0]) {
+		if (dbkey != Bry_.Empty && AsciiByte.Colon == dbkey[0]) {
 			throw new XomwMalformedTitleException("title-invalid-leading-colon", text);
 		}
 
@@ -473,7 +475,7 @@ class XomwRegexTitlePrefix {
 		int len = src.length;
 
 		// look for colon
-		int colon_pos = Bry_find_.Find_fwd(src, Byte_ascii.Colon, 0, len);
+		int colon_pos = Bry_find_.Find_fwd(src, AsciiByte.Colon, 0, len);
 
 		// if no_colon, no match; just return bry;
 		if (colon_pos == Bry_find_.Not_found) {
@@ -483,8 +485,8 @@ class XomwRegexTitlePrefix {
 		}
 
 		// colon exists; strip any flanking underlines
-		int ns_end = Bry_find_.Find_bwd_while_v2(src, colon_pos, 0, Byte_ascii.Underline);
-		int ttl_bgn = Bry_find_.Find_fwd_while(src, colon_pos + 1, len, Byte_ascii.Underline);
+		int ns_end = Bry_find_.Find_bwd_while_v2(src, colon_pos, 0, AsciiByte.Underline);
+		int ttl_bgn = Bry_find_.Find_fwd_while(src, colon_pos + 1, len, AsciiByte.Underline);
 
 		// split ns / title and return true
 		rv[0] = Bry_.Mid(src, 0, ns_end);

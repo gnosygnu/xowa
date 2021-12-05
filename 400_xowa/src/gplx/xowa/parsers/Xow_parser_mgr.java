@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.parsers; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.data_stores.*;
 import gplx.xowa.wikis.*; import gplx.core.envs.*;
 import gplx.xowa.files.*;
@@ -59,7 +61,7 @@ public class Xow_parser_mgr {
 		int new_len = tmpl_stack_ary_len + 1;
 		if (new_len > tmpl_stack_ary_max) {
 			tmpl_stack_ary_max = new_len * 2;
-			tmpl_stack_ary = (byte[][])Array_.Resize(tmpl_stack_ary, tmpl_stack_ary_max);
+			tmpl_stack_ary = (byte[][])ArrayUtl.Resize(tmpl_stack_ary, tmpl_stack_ary_max);
 		}
 		tmpl_stack_ary[tmpl_stack_ary_len] = key;
 		tmpl_stack_ary_len = new_len;

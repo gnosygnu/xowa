@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.stmts; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.stmts;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_fmt;
+import gplx.Int_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldType;
 import gplx.dbs.sqls.SqlQryWtrUtl;
+import gplx.objects.primitives.BoolUtl;
 public class Db_stmt_mgr {
 	private final List_adp fmt_list = List_adp_.New();
 	private final Db_stmt_arg_list arg_list = new Db_stmt_arg_list();
@@ -27,11 +37,11 @@ public class Db_stmt_mgr {
 	}
 	public void Add_crt_str(String key, String val) {			
 		fmt_list.Add(mode_is_stmt ? stmt_arg_placeholder : SqlQryWtrUtl.QuoteArg(val));
-		arg_list.Add(Bool_.Y, DbmetaFldType.TidStr, key, val);
+		arg_list.Add(BoolUtl.Y, DbmetaFldType.TidStr, key, val);
 	}
 	public void Add_crt_int(String key, int val) {			
 		fmt_list.Add(mode_is_stmt ? stmt_arg_placeholder : Int_.To_str(val));			
-		arg_list.Add(Bool_.Y, DbmetaFldType.TidInt, key, val);
+		arg_list.Add(BoolUtl.Y, DbmetaFldType.TidInt, key, val);
 	}
 	public void Write_fmt(Bry_fmt fmt) {
 		fmt.Bld_many(bfr, (Object[])fmt_list.ToAryAndClear(Object.class));

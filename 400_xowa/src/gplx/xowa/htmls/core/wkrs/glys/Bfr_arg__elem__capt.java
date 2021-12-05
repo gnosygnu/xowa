@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.glys; import gplx.*;
 import gplx.langs.htmls.*;
+import gplx.objects.strings.AsciiByte;
 class Bfr_arg__elem__capt implements gplx.core.brys.Bfr_arg_clearable {
 	private byte[] capt;
 	public Bfr_arg__elem__capt() {
@@ -29,7 +30,7 @@ class Bfr_arg__elem__capt implements gplx.core.brys.Bfr_arg_clearable {
 		bfr.Add_byte_nl();
 		bfr.Add(Gfh_tag_.Li_lhs_bgn);			// '<li'
 		Gfh_atr_.Add(bfr, Gfh_atr_.Bry__class, Xoh_gly_grp_data.Atr__cls__gallerycaption);	// ' class="gallerycaption"'
-		bfr.Add_byte(Byte_ascii.Angle_end);		// '>'
+		bfr.Add_byte(AsciiByte.AngleEnd);		// '>'
 		bfr.Add(capt);
 		bfr.Add(Gfh_tag_.Li_rhs);				// '</li>'
 	}

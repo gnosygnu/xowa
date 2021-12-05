@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.ios; import gplx.*;
-import gplx.core.lists.*; /*Ordered_hash_base*/
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
 public class IoItmList extends Ordered_hash_base {
 	public boolean Has(Io_url url) {return Has_base(MakeKey(url));}
 	public void Add(IoItm_base itm) {
@@ -63,8 +64,8 @@ class IoItmBase_comparer_nest implements ComparerAble {
 		IoItm_base lhsItm = (IoItm_base)lhsObj, rhsItm = (IoItm_base)rhsObj;
 		Io_url lhsUrl = lhsItm.Url(), rhsUrl = rhsItm.Url();
 		return String_.Eq(lhsUrl.OwnerDir().Raw(), rhsUrl.OwnerDir().Raw())								// is same dir
-			? CompareAble_.Compare_obj(lhsUrl.NameAndExt(), rhsUrl.NameAndExt())	// same dir: compare name
-			: CompareAble_.Compare_obj(DepthOf(lhsItm), DepthOf(rhsItm));			// diff dir: compare by depth; ex: c:\fil.txt < c:\dir\fil.txt
+			? CompareAbleUtl.Compare_obj(lhsUrl.NameAndExt(), rhsUrl.NameAndExt())	// same dir: compare name
+			: CompareAbleUtl.Compare_obj(DepthOf(lhsItm), DepthOf(rhsItm));			// diff dir: compare by depth; ex: c:\fil.txt < c:\dir\fil.txt
 	}
 	int DepthOf(IoItm_base itm) {
 		Io_url url = itm.Url();

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.site; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.site;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.*;
 /**
 * Class representing a MediaWiki site.
 *
@@ -44,7 +46,7 @@ public class XomwMediaWikiSite extends XomwSite {	private static final String PA
 	* @return String
 	*/
 	public byte[] toDBKey(byte[] title) {
-		return XophpString_.str_replace(Byte_ascii.Space_bry, Byte_ascii.Underline_bry, title);
+		return XophpString_.str_replace(AsciiByte.SpaceBry, AsciiByte.UnderlineBry, title);
 	}
 
 	/**

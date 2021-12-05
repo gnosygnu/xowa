@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
+package gplx.xowa.htmls.core.wkrs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.apps.urls.*;
-import gplx.langs.htmls.encoders.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.xndes.tags.*; import gplx.xowa.htmls.core.wkrs.xndes.dicts.*;
+import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.xndes.tags.*; import gplx.xowa.htmls.core.wkrs.xndes.dicts.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.caches.*; import gplx.xowa.apps.fsys.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.apps.metas.*;		
+import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.ttls.*;
 public class Xoh_hdoc_ctx {
 	private byte[] fsys__file, abrv__commons, abrv__wiki;
 	public byte[]					Fsys__res()			{return fsys__res;} private byte[] fsys__res;
@@ -50,8 +52,8 @@ public class Xoh_hdoc_ctx {
 		this.app = app;
 		this.fsys__root = fsys_mgr.Root_dir().To_http_file_bry();
 		this.fsys__file = fsys_mgr.File_dir().To_http_file_bry();
-		this.fsys__file__comm = Bry_.Add(fsys__file, Xow_domain_itm_.Bry__commons, Byte_ascii.Slash_bry);
-		this.fsys__file__math = Bry_.Add(fsys__file, Bry_.new_a7("math"), Byte_ascii.Slash_bry);
+		this.fsys__file__comm = Bry_.Add(fsys__file, Xow_domain_itm_.Bry__commons, AsciiByte.SlashBry);
+		this.fsys__file__math = Bry_.Add(fsys__file, Bry_.new_a7("math"), AsciiByte.SlashBry);
 		this.fsys__res = gplx.core.envs.Op_sys.Cur().Tid_is_drd() ? Fsys__res__drd : fsys__root;
 		this.fsys__is_wnt = gplx.core.envs.Op_sys.Cur().Tid_is_wnt();
 		Xou_cache_mgr usr_cache_mgr = app.User().User_db_mgr().Cache_mgr();
@@ -80,7 +82,7 @@ public class Xoh_hdoc_ctx {
 		}
 
 		this.abrv__wiki = wiki.Domain_itm().Abrv_xo();
-		this.fsys__file__wiki = Bry_.Add(fsys__file, wiki__domain_bry, Byte_ascii.Slash_bry);
+		this.fsys__file__wiki = Bry_.Add(fsys__file, wiki__domain_bry, AsciiByte.SlashBry);
 		this.page = page;
 		this.page__url = page.Url_bry_safe();
 		this.Clear();

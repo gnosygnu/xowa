@@ -13,12 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.imgs; import gplx.*; import gplx.gfui.*;
+package gplx.gfui.imgs; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
 import org.junit.*;
-import gplx.core.consoles.*;
-import gplx.core.ios.*;
 import gplx.core.security.algos.*;
-import gplx.gfui.imgs.*;
 public class ImageAdp_tst {
 	@Before public void setup() {
 		load = Tfds.RscDir.GenSubFil_nest("150_gfui", "imgs", "strawberry_java.bmp");	
@@ -36,7 +34,7 @@ public class ImageAdp_tst {
 		DateAdp beforeModifiedTime = Io_mgr.Instance.QueryFil(save).ModifiedTime();
 		img.SaveAsBmp(save);
 		DateAdp afterModifiedTime = Io_mgr.Instance.QueryFil(save).ModifiedTime();
-		Tfds.Eq_true(CompareAble_.Is(CompareAble_.More, afterModifiedTime, beforeModifiedTime));
+		Tfds.Eq_true(CompareAbleUtl.Is(CompareAbleUtl.More, afterModifiedTime, beforeModifiedTime));
 
 		Hash_algo algo = Hash_algo_.New__md5();
 		String loadHash = Hash_algo_utl.Calc_hash_as_str(algo, Io_mgr.Instance.LoadFilBry(load));

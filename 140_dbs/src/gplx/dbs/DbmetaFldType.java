@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs;
 import gplx.Err_;
 import gplx.Type_ids_;
-import gplx.objects.strings.String_;
+import gplx.objects.strings.StringUtl;
 public class DbmetaFldType {
 	public DbmetaFldType(int tid, String name, int len1, int len2) {
 		this.tid = tid;
@@ -30,7 +30,7 @@ public class DbmetaFldType {
 	public int Len2()    {return len2;} private final int len2; // scaling
 	public boolean Eq(DbmetaFldType comp) {
 		return tid == comp.tid
-			&& String_.Eq(name, comp.name)
+			&& StringUtl.Eq(name, comp.name)
 			&& len1 == comp.len1
 			&& len2 == comp.len2;
 	}

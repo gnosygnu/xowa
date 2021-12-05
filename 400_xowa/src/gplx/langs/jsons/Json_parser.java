@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Char_;
 import gplx.Err;
 import gplx.Err_;
@@ -30,7 +30,7 @@ public class Json_parser {
 	private int src_len, pos;
 	private final Gfo_number_parser num_parser = new Gfo_number_parser();
 	public Json_doc Parse_by_apos_ary(String... ary) {return Parse_by_apos(String_.Concat_lines_nl(ary));}
-	public Json_doc Parse_by_apos(String s) {return Parse(Bry_.Replace(Bry_.new_u8(s), Byte_ascii.Apos, Byte_ascii.Quote));}
+	public Json_doc Parse_by_apos(String s) {return Parse(Bry_.Replace(Bry_.new_u8(s), AsciiByte.Apos, AsciiByte.Quote));}
 	public Json_doc Parse(String src) {return Parse(Bry_.new_u8(src));}
 	public Json_doc Parse(byte[] src) {
 		this.src = src;				if (src == null) return null;
@@ -39,8 +39,8 @@ public class Json_parser {
 		Skip_ws();
 		boolean root_is_nde = true;
 		switch (src[pos]) {
-			case Byte_ascii.Curly_bgn:	root_is_nde = Bool_.Y; break;
-			case Byte_ascii.Brack_bgn:	root_is_nde = Bool_.N; break;
+			case AsciiByte.CurlyBgn:	root_is_nde = BoolUtl.Y; break;
+			case AsciiByte.BrackBgn:	root_is_nde = BoolUtl.N; break;
 			default:					return null;
 		}
 		Skip_ws();
@@ -58,12 +58,12 @@ public class Json_parser {
 		Json_nde nde = Json_nde.NewByDoc(doc, pos);
 		while (pos < src_len) {
 			Skip_ws();
-			if (src[pos] == Byte_ascii.Curly_end) 	{++pos; return nde;}
+			if (src[pos] == AsciiByte.CurlyEnd) 	{++pos; return nde;}
 			else									nde.Add(Make_kv(doc));
 			Skip_ws();
 			switch (src[pos++]) {
-				case Byte_ascii.Comma:			break;
-				case Byte_ascii.Curly_end:		return nde;
+				case AsciiByte.Comma:			break;
+				case AsciiByte.CurlyEnd:		return nde;
 				default: throw Err_.new_unhandled(src[pos - 1]);
 			}
 		}
@@ -72,7 +72,7 @@ public class Json_parser {
 	private Json_itm Make_kv(Json_doc doc) {
 		Json_itm key = Make_string(doc);
 		Skip_ws();
-		Chk(Byte_ascii.Colon);
+		Chk(AsciiByte.Colon);
 		Skip_ws();
 		Json_itm val = Make_val(doc);
 		return new Json_kv(key, val);
@@ -81,15 +81,15 @@ public class Json_parser {
 		while (pos < src_len) {
 			byte b = src[pos];
 			switch (b) {
-				case Byte_ascii.Ltr_n:		return Make_literal(Bry_null_ull	, 3, Json_itm_null.Null);
-				case Byte_ascii.Ltr_f:		return Make_literal(Bry_bool_alse	, 4, Json_itm_bool.Bool_n);
-				case Byte_ascii.Ltr_t:		return Make_literal(Bry_bool_rue	, 3, Json_itm_bool.Bool_y);
-				case Byte_ascii.Quote:		return Make_string(doc);
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				case Byte_ascii.Dash:		return Make_num(doc);
-				case Byte_ascii.Brack_bgn:	return Make_ary(doc);
-				case Byte_ascii.Curly_bgn:	return Make_nde(doc);
+				case AsciiByte.Ltr_n:		return Make_literal(Bry_null_ull	, 3, Json_itm_null.Null);
+				case AsciiByte.Ltr_f:		return Make_literal(Bry_bool_alse	, 4, Json_itm_bool.Bool_n);
+				case AsciiByte.Ltr_t:		return Make_literal(Bry_bool_rue	, 3, Json_itm_bool.Bool_y);
+				case AsciiByte.Quote:		return Make_string(doc);
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+				case AsciiByte.Dash:		return Make_num(doc);
+				case AsciiByte.BrackBgn:	return Make_ary(doc);
+				case AsciiByte.CurlyBgn:	return Make_nde(doc);
 			}
 			throw Err_.new_unhandled(Char_.To_str(b));
 		}
@@ -109,15 +109,15 @@ public class Json_parser {
 		boolean escaped = false;
 		while (pos < src_len) {
 			switch (src[pos]) {
-				case Byte_ascii.Backslash:
+				case AsciiByte.Backslash:
 					++pos;	// backslash
 					switch (src[pos]) {
-						case Byte_ascii.Ltr_u:		pos += 5; break;	// \uFFFF	1 u + 4 hex-dec; ISSUE#:486; DATE:2019-06-02
+						case AsciiByte.Ltr_u:		pos += 5; break;	// \uFFFF	1 u + 4 hex-dec; ISSUE#:486; DATE:2019-06-02
 						default:					++pos;	break;		// \?		" \ / b f n r t
 					}
 					escaped = true;
 					break;
-				case Byte_ascii.Quote:
+				case AsciiByte.Quote:
 					return Json_itm_str.NewByDoc(doc, bgn, ++pos, escaped);	// ++: quote_end
 				default:
 					++pos;
@@ -132,13 +132,13 @@ public class Json_parser {
 		while (loop) {
 			if (pos == src_len) throw Err_.new_wo_type("eos reached inside num");
 			switch (src[pos]) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					++pos;
 					break;
-				case Byte_ascii.Dot:
-				case Byte_ascii.Dash: case Byte_ascii.Plus:
-				case Byte_ascii.Ltr_E: case Byte_ascii.Ltr_e:	// e e+ e- E E+ E-
+				case AsciiByte.Dot:
+				case AsciiByte.Dash: case AsciiByte.Plus:
+				case AsciiByte.Ltr_E: case AsciiByte.Ltr_e:	// e e+ e- E E+ E-
 					++pos;
 					break;
 				default:
@@ -160,12 +160,12 @@ public class Json_parser {
 		Json_ary rv = Json_ary.NewByDoc(doc, pos++, pos);	// brack_bgn
 		while (pos < src_len) {
 			Skip_ws();
-			if (src[pos] == Byte_ascii.Brack_end) 	{++pos; return rv;}
+			if (src[pos] == AsciiByte.BrackEnd) 	{++pos; return rv;}
 			else									rv.Add(Make_val(doc));
 			Skip_ws();
 			switch (src[pos]) {
-				case Byte_ascii.Comma:			++pos; break;
-				case Byte_ascii.Brack_end:		++pos; return rv;
+				case AsciiByte.Comma:			++pos; break;
+				case AsciiByte.BrackEnd:		++pos; return rv;
 			}
 		}
 		throw Err_.new_wo_type("eos inside ary");
@@ -173,7 +173,7 @@ public class Json_parser {
 	private void Skip_ws() {
 		while (pos < src_len) {
 			switch (src[pos]) {
-				case Byte_ascii.Space: case Byte_ascii.Nl: case Byte_ascii.Tab: case Byte_ascii.Cr: ++pos; break;
+				case AsciiByte.Space: case AsciiByte.Nl: case AsciiByte.Tab: case AsciiByte.Cr: ++pos; break;
 				default: return;
 			}
 		}

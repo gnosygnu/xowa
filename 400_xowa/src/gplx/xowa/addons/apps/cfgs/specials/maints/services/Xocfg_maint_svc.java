@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.addons.apps.cfgs.specials.*; import gplx.xowa.addons.apps.cfgs.specials.maints.*;
+package gplx.xowa.addons.apps.cfgs.specials.maints.services; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.addons.apps.cfgs.dbs.*; import gplx.xowa.addons.apps.cfgs.dbs.tbls.*;
 import gplx.xowa.addons.apps.cfgs.enums.*;
 public class Xocfg_maint_svc {
@@ -45,7 +47,7 @@ public class Xocfg_maint_svc {
 			while (true) {
 				int a_bgn = Bry_find_.Find_fwd(help, anch_find_bry, help_pos, help.length);
 				if (a_bgn == Bry_find_.Not_found) break;
-				int a_end = Bry_find_.Find_fwd(help, Byte_ascii.Angle_end, a_bgn, help.length);
+				int a_end = Bry_find_.Find_fwd(help, AsciiByte.AngleEnd, a_bgn, help.length);
 				if (a_end == Bry_find_.Not_found) {
 					Gfo_usr_dlg_.Instance.Warn_many("", "", "could not find closing > after <a", "src", help);
 					break;

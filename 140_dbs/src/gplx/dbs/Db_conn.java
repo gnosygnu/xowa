@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Double_;
 import gplx.Err_;
 import gplx.Gfo_log_;
@@ -133,8 +133,8 @@ public class Db_conn {
 	public Db_rdr				Exec_rdr(String sql)										{return this.Stmt_sql(sql).Exec_select__rls_auto();}
 	public void					Exec_delete_all(String tbl)									{Stmt_delete(tbl).Exec_delete();}
 	public int					Exec_sql_args(String sql, Object... args)	{return this.Exec_qry(Db_qry_sql.dml_(String_.Format(sql, args)));}
-	public int					Exec_sql_plog_ntx(String msg, String sql) {return Exec_sql_plog(Bool_.N, msg, sql);}
-	public int					Exec_sql_plog_txn(String msg, String sql) {return Exec_sql_plog(Bool_.Y, msg, sql);}
+	public int					Exec_sql_plog_ntx(String msg, String sql) {return Exec_sql_plog(BoolUtl.N, msg, sql);}
+	public int					Exec_sql_plog_txn(String msg, String sql) {return Exec_sql_plog(BoolUtl.Y, msg, sql);}
 	public int					Exec_sql_plog(boolean txn, String msg, String sql) {			
 		Gfo_usr_dlg_.Instance.Plog_many("", "", msg);
 		if (txn) this.Txn_bgn(msg);

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.addons.bldrs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.apps.apis.xowa.addons.bldrs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.apps.urls.*;
 public class Xopg_match_mgr {
 	private String scope_raw;
@@ -50,7 +52,7 @@ public class Xopg_match_mgr {
 				byte[] wiki_domain = null, page_db = null;
 				boolean cur_is_wildcard_wiki = false;
 				if (String_.Has_at_bgn(line, "*:")) {
-					wiki_domain = Byte_ascii.Star_bry;
+					wiki_domain = AsciiByte.StarBry;
 					page_db = Bry_.Mid(Bry_.new_u8(line), 2);
 					cur_is_wildcard_wiki = true;
 				}
@@ -83,7 +85,7 @@ class Xopg_match_wiki {
 		return wildcard_exists ? true : hash.Has(page_db);
 	}
 	public void Add(byte[] page_db) {
-		if (Bry_.Eq(page_db, Byte_ascii.Star_bry)) {
+		if (Bry_.Eq(page_db, AsciiByte.StarBry)) {
 			wildcard_exists = true;
 		}
 		else {

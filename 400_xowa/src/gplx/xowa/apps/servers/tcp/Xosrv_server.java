@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
-import gplx.core.primitives.*; import gplx.core.ios.*; import gplx.core.envs.*; import gplx.core.threads.*;
+package gplx.xowa.apps.servers.tcp; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.*;
+import gplx.xowa.apps.servers.*;
+import gplx.core.primitives.*;
+import gplx.core.envs.*; import gplx.core.threads.*;
 import gplx.gfui.controls.standards.*;
 import gplx.langs.jsons.*;
 public class Xosrv_server implements Gfo_invk {
@@ -25,7 +29,7 @@ public class Xosrv_server implements Gfo_invk {
 	public int Wtr_port() {return wtr_port;} public Xosrv_server Wtr_port_(int v) {wtr_port = v; return this;} private int wtr_port = 55001;
 	public int Shutdown_interval() {return shutdown_interval;} public Xosrv_server Shutdown_interval_(int v) {shutdown_interval = v; return this;} private int shutdown_interval = -1;
 	public String Wtr_host() {return wtr_host;} private String wtr_host = "localhost";
-	public boolean Running() {return running;} public Xosrv_server Running_(boolean v) {running = v; running_str = Bool_.To_str_lower(running); return this;} private boolean running = false;
+	public boolean Running() {return running;} public Xosrv_server Running_(boolean v) {running = v; running_str = BoolUtl.ToStrLower(running); return this;} private boolean running = false;
 	public String Running_str() {return running_str;} String running_str = "false";
 	public void App_ctor(Xoae_app app) {this.app = app;}
 	public Xoae_app App() {return app;} private Xoae_app app;
@@ -73,7 +77,7 @@ public class Xosrv_server implements Gfo_invk {
 		try {
 			Object[] xowa_exec_args = xowa_exec_parser.Parse_xowa_exec(msg_text);
 			trace.Val_("js_args");
-//				xowa_exec_args = (Object[])Array_.Resize(xowa_exec_args, xowa_exec_args.length + 1);
+//				xowa_exec_args = (Object[])ArrayUtl.Resize(xowa_exec_args, xowa_exec_args.length + 1);
 //				xowa_exec_args[xowa_exec_args.length - 1] = sender;
 			Object rv_obj = Gfui_html.Js_args_exec(app.Gui_mgr().Browser_win().Active_html_itm().Js_cbk(), xowa_exec_args);
 			trace.Val_("json_write: " + Object_.Xto_str_strict_or_null_mark(rv_obj));

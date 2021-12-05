@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios.atrs; import gplx.*; import gplx.core.*; import gplx.core.ios.*;
-import org.junit.*; import gplx.core.tests.*;
-
+package gplx.core.ios.atrs;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 import java.nio.file.attribute.AclEntryPermission;
 import java.nio.file.attribute.AclEntryType;
 import java.util.HashSet;
@@ -24,19 +25,19 @@ public class Io_itm_atr_wkr__acl__tst {
 	private final Io_itm_attrib_wkr__acl__fxt fxt = new Io_itm_attrib_wkr__acl__fxt();
 	@Test public void Perm_exists() {
 		fxt.Test__Is_permitted
-		( Bool_.Y, AclEntryPermission.WRITE_DATA
+		( BoolUtl.Y, AclEntryPermission.WRITE_DATA
 		, fxt.Make__acl("Everyone", AclEntryType.ALLOW, AclEntryPermission.WRITE_DATA)
 		);
 	}
 	@Test public void Perm_missing() {
 		fxt.Test__Is_permitted
-		( Bool_.N, AclEntryPermission.WRITE_DATA
+		( BoolUtl.N, AclEntryPermission.WRITE_DATA
 		, fxt.Make__acl("Everyone", AclEntryType.ALLOW, AclEntryPermission.READ_DATA)
 		);
 	}
 	@Test public void Deny_over_allow() {
 		fxt.Test__Is_permitted
-		( Bool_.N, AclEntryPermission.WRITE_DATA
+		( BoolUtl.N, AclEntryPermission.WRITE_DATA
 		, fxt.Make__acl("Everyone", AclEntryType.ALLOW, AclEntryPermission.WRITE_DATA)
 		, fxt.Make__acl("Everyone", AclEntryType.DENY , AclEntryPermission.WRITE_DATA)
 		);
@@ -48,7 +49,7 @@ public class Io_itm_atr_wkr__acl__tst {
 		* Entry[1] | DRIVE_NAME:/    | Everyone:READ_DATA/WRITE_DATA/APPEND_DATA/READ_NAMED_ATTRS/WRITE_NAMED_ATTRS/EXECUTE/DELETE_CHILD/READ_ATTRIBUTES/WRITE_ATTRIBUTES/DELETE/READ_ACL/WRITE_ACL/WRITE_OWNER/SYNCHRONIZE:ALLOW
 		*/
 		fxt.Test__Is_permitted
-		( Bool_.N, AclEntryPermission.WRITE_DATA
+		( BoolUtl.N, AclEntryPermission.WRITE_DATA
 		, fxt.Make__acl("Everyone", AclEntryType.ALLOW, AclEntryPermission.READ_DATA)
 		, fxt.Make__acl("Everyone", AclEntryType.ALLOW, AclEntryPermission.READ_DATA, AclEntryPermission.WRITE_DATA)
 		);
@@ -60,7 +61,7 @@ public class Io_itm_atr_wkr__acl__tst {
 		* Entry[1] | C:/ | Everyone:READ_DATA
 		*/
 		fxt.Test__Is_permitted
-		( Bool_.Y, AclEntryPermission.WRITE_DATA
+		( BoolUtl.Y, AclEntryPermission.WRITE_DATA
 		, fxt.Make__acl("Administrators", AclEntryType.ALLOW, AclEntryPermission.WRITE_DATA)
 		, fxt.Make__acl("Users"         , AclEntryType.ALLOW, AclEntryPermission.READ_DATA)
 		);

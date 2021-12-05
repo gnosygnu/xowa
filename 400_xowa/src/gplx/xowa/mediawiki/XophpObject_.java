@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.mediawiki.includes.XomwTitleOld;
-
+package gplx.xowa.mediawiki;
+import gplx.Double_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.Type_;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class XophpObject_ {
 	public static final Object False = null; // handles code like "if ($var === false)" where var is an Object;
 	public static boolean is_true(Object val) {return !empty_obj(val);}
@@ -33,8 +38,8 @@ public class XophpObject_ {
 			return true;
 
 		Class<?> type = Type_.Type_by_obj(v);
-		if (Type_.Eq(type, Bool_.Cls_ref_type)) {
-			if (!Bool_.Cast(v))
+		if (Type_.Eq(type, BoolUtl.ClsRefType)) {
+			if (!BoolUtl.Cast(v))
 				return true;
 		}
 		else if (Type_.Eq(type, Int_.Cls_ref_type)) {
@@ -52,7 +57,7 @@ public class XophpObject_ {
 		}
 		else {
 			if (Type_.Is_array(type)) {
-				if (Array_.Len(Array_.cast(v)) == 0)
+				if (ArrayUtl.Len(ArrayUtl.Cast(v)) == 0)
 					return true;
 			}
 		}
@@ -69,8 +74,8 @@ public class XophpObject_ {
 		for (int i = 0; i < len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					break;
 				default:
 					return false;

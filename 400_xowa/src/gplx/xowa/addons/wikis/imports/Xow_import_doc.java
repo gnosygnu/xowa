@@ -13,9 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.imports; import gplx.*;
-import gplx.core.ios.*;
-import gplx.langs.mustaches.*;
+package gplx.xowa.addons.wikis.imports;
+import gplx.Bry_;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.ios.IoItmDir;
+import gplx.core.ios.IoItmFil;
+import gplx.core.ios.IoItmList;
+import gplx.core.ios.IoItm_base;
+import gplx.core.ios.Io_size_;
+import gplx.langs.mustaches.Mustache_bfr;
+import gplx.langs.mustaches.Mustache_doc_itm;
+import gplx.langs.mustaches.Mustache_doc_itm_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 class Xow_import_doc implements Mustache_doc_itm {
 	private final boolean is_dir, is_core_xowa;
 	private final byte[] owner_dir_enc, path, name, date, size, color;
@@ -23,7 +36,7 @@ class Xow_import_doc implements Mustache_doc_itm {
 	private final Xow_import_doc[] subs;
 	public Xow_import_doc(boolean is_dir, boolean is_core_xowa, int color, byte[] owner_dir, byte[] path, byte[] name, byte[] date, byte[] size, byte[] dir_cmd, Xow_import_doc[] subs) {
 		this.is_dir = is_dir; this.is_core_xowa = is_core_xowa;
-		this.color = color % 2 == 0 ? Byte_ascii.Num_0_bry : Byte_ascii.Num_1_bry;
+		this.color = color % 2 == 0 ? AsciiByte.Num0Bry : AsciiByte.Num1Bry;
 		this.owner_dir_enc = gplx.langs.htmls.encoders.Gfo_url_encoder_.Href.Encode(owner_dir);
 		this.path = path; this.name = name; this.date = date; this.size = size;
 		this.dir_cmd = dir_cmd;
@@ -55,7 +68,7 @@ class Xow_import_doc implements Mustache_doc_itm {
 		New_subs(owner_dir.Url(), sub_list, owner_dir.SubDirs(), dir_cmd);
 		New_subs(owner_dir.Url(), sub_list, owner_dir.SubFils(), Bry_.Empty);
 		Xow_import_doc[] subs = (Xow_import_doc[])sub_list.ToAryAndClear(Xow_import_doc.class);
-		return new Xow_import_doc(Bool_.Y, Bool_.N, 0, owner_dir.Url().OwnerDir().RawBry(), owner_dir.Url().RawBry(), Bry_.new_u8(owner_dir.Name()), Bry_.Empty, Bry_.Empty, dir_cmd, subs);
+		return new Xow_import_doc(BoolUtl.Y, BoolUtl.N, 0, owner_dir.Url().OwnerDir().RawBry(), owner_dir.Url().RawBry(), Bry_.new_u8(owner_dir.Name()), Bry_.Empty, Bry_.Empty, dir_cmd, subs);
 	}
 	private static void New_subs(Io_url owner_dir, List_adp list, IoItmList subs, byte[] dir_cmd) {
 		subs.Sort();
@@ -67,13 +80,13 @@ class Xow_import_doc implements Mustache_doc_itm {
 			Xow_import_doc trg = null;
 			if (src.Type_dir()) {
 				byte[] trg_url = src.Url().RawBry();
-				trg = new Xow_import_doc(Bool_.Y, Bool_.N, list_total + i, owner_dir_bry, trg_url, Bry_.new_u8(src.Url().NameAndExt_noDirSpr()), Bry_.Empty, Bry_.Empty, dir_cmd, Ary_empty);
+				trg = new Xow_import_doc(BoolUtl.Y, BoolUtl.N, list_total + i, owner_dir_bry, trg_url, Bry_.new_u8(src.Url().NameAndExt_noDirSpr()), Bry_.Empty, Bry_.Empty, dir_cmd, Ary_empty);
 			}
 			else {
 				IoItmFil src_as_fil = (IoItmFil)src;
 				String size_str = Io_size_.To_str(src_as_fil.Size(), "#,###");
 				boolean is_xowa_core = gplx.xowa.wikis.data.Xow_db_file__core_.Is_core_fil_name(owner_dir.NameOnly(), src.Url().NameAndExt());
-				trg = new Xow_import_doc(Bool_.N, is_xowa_core, list_total + i, owner_dir_bry, src.Url().RawBry(), Bry_.new_u8(src.Name()), Bry_.new_u8(src_as_fil.ModifiedTime().XtoStr_fmt("yyyy-MM-dd")), Bry_.new_u8(size_str), dir_cmd, Ary_empty);
+				trg = new Xow_import_doc(BoolUtl.N, is_xowa_core, list_total + i, owner_dir_bry, src.Url().RawBry(), Bry_.new_u8(src.Name()), Bry_.new_u8(src_as_fil.ModifiedTime().XtoStr_fmt("yyyy-MM-dd")), Bry_.new_u8(size_str), dir_cmd, Ary_empty);
 			}
 			list.Add(trg);
 		}

@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.addons.bldrs.mass_parses.parses.wkrs;
 
 import gplx.Bry_bfr;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.GfoMsg;
 import gplx.Gfo_invk;
@@ -220,10 +220,10 @@ public class Xomp_parse_wkr implements Gfo_invk {
 	}
 	public void Bld_stats(Bry_bfr bfr) {
 		int done_time_in_sec = (int)(done_time / 1000); if (done_time_in_sec == 0) done_time_in_sec = 1;
-		bfr.Add_int_pad_bgn(Byte_ascii.Space, 4, uid		);
-		bfr.Add_int_pad_bgn(Byte_ascii.Space, 8, (int)(done_count / done_time_in_sec));
-		bfr.Add_int_pad_bgn(Byte_ascii.Space, 8, done_count);
-		bfr.Add_int_pad_bgn(Byte_ascii.Space, 8, done_time_in_sec);
+		bfr.Add_int_pad_bgn(AsciiByte.Space, 4, uid		);
+		bfr.Add_int_pad_bgn(AsciiByte.Space, 8, (int)(done_count / done_time_in_sec));
+		bfr.Add_int_pad_bgn(AsciiByte.Space, 8, done_count);
+		bfr.Add_int_pad_bgn(AsciiByte.Space, 8, done_time_in_sec);
 		bfr.Add_byte_nl();
 	}
 	private Xomp_page_itm Get_next() {

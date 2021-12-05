@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.lists.CompareAbleUtl;
 public class Float_ {
 	public static final String Cls_val_name = "float";
 	public static final Class<?> Cls_ref_type = Float.class;
@@ -22,9 +23,9 @@ public class Float_ {
 	public static float cast(Object obj)	{try {return (Float)obj;} catch(Exception exc) {throw Err_.new_type_mismatch_w_exc(exc, float.class, obj);}}
 	public static float parse(String raw)	{try {return Float.parseFloat(raw);} catch(Exception exc) {throw Err_.new_parse_exc(exc, float.class, raw);}} 
 	public static int Compare(float lhs, float rhs) {
-		if		( lhs == rhs)	return CompareAble_.Same;
-		else if ( lhs <  rhs)	return CompareAble_.Less;
-		else	/*lhs >  rhs*/	return CompareAble_.More;
+		if		( lhs == rhs)	return CompareAbleUtl.Same;
+		else if ( lhs <  rhs)	return CompareAbleUtl.Less;
+		else	/*lhs >  rhs*/	return CompareAbleUtl.More;
 	}
 	public static String To_str(float v) {
 				int v_int = (int)v;

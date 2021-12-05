@@ -13,10 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
-import gplx.core.primitives.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.gfui.*;
-import gplx.fsdb.meta.*; import gplx.xowa.files.imgs.*;
+package gplx.xowa.files.fsdb.fs_roots;
+import gplx.Bry_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.gfui.SizeAdp;
+import gplx.gfui.SizeAdp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.imgs.Xof_img_wkr_query_img_size;
 class Fs_root_wkr {
 	private Xof_img_wkr_query_img_size img_size_wkr;
 	private Io_url orig_dir; private boolean recurse = true;
@@ -84,8 +96,8 @@ class Fs_root_wkr {
 
 			String orig_change_type = null;
 			// if url has space, replace it with underscore
-			if (Bry_.Has(fil_name_bry, Byte_ascii.Space)) {
-				fil_name_bry = Bry_.Replace(fil_name_bry, Byte_ascii.Space, Byte_ascii.Underline);
+			if (Bry_.Has(fil_name_bry, AsciiByte.Space)) {
+				fil_name_bry = Bry_.Replace(fil_name_bry, AsciiByte.Space, AsciiByte.Underline);
 				orig_change_type = "space_to_underscore";
 			}
 
@@ -121,7 +133,7 @@ class Fs_root_wkr {
 	}
 	private Db_conn Init_orig_db() {
 		Io_url orig_db = orig_dir.GenSubFil("^orig_regy.sqlite3");
-		boolean created = false; boolean schema_is_1 = Bool_.Y;
+		boolean created = false; boolean schema_is_1 = BoolUtl.Y;
 		Db_conn conn = Db_conn_bldr.Instance.Get(orig_db);
 		if (conn == null) {
 			conn = Db_conn_bldr.Instance.New(orig_db);

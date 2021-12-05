@@ -13,11 +13,47 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scores; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*; import gplx.core.envs.*; import gplx.core.security.algos.*;
-import gplx.xowa.htmls.*; import gplx.langs.htmls.entitys.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.files.*;
-import gplx.xowa.guis.views.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.logs.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.xtns.scores;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.Char_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.core.envs.Process_adp;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.core.security.algos.Hash_algo;
+import gplx.core.security.algos.Hash_algo_;
+import gplx.core.security.algos.Hash_algo_utl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_file_itm;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
+import gplx.xowa.guis.views.Xog_html_itm;
+import gplx.xowa.htmls.Xoh_cmd_itm;
+import gplx.xowa.htmls.Xoh_consts;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm_owner1;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
+import gplx.xowa.parsers.logs.Xop_log_basic_wkr;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.xtns.Xox_mgr_base;
+import gplx.xowa.xtns.Xox_xnde;
+import gplx.xowa.xtns.Xox_xnde_;
 public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 	public boolean Lang_is_abc() {return lang_is_abc;} private boolean lang_is_abc;
 	public boolean Code_is_raw() {return code_is_raw;} private boolean code_is_raw;
@@ -60,11 +96,11 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		Score_xtn_mgr score_xtn = (Score_xtn_mgr)wiki.Xtn_mgr().Get_or_fail(Score_xtn_mgr.XTN_KEY);
 		if (!score_xtn.Enabled()) {Html_write_code_as_pre(bfr, app); return;}
 		Process_adp ly_process = app.Prog_mgr().App_lilypond();
-		if (ly_process.Exe_exists() == Bool_.__byte && ly_process.Exe_url() != null) {	// TEST: ly_process.Exe_url() is null
+		if (ly_process.Exe_exists() == BoolUtl.NullByte && ly_process.Exe_url() != null) {	// TEST: ly_process.Exe_url() is null
 			boolean exists = Io_mgr.Instance.ExistsFil(ly_process.Exe_url());
-			ly_process.Exe_exists_(exists ? Bool_.Y_byte : Bool_.N_byte);
+			ly_process.Exe_exists_(exists ? BoolUtl.YByte : BoolUtl.NByte);
 		}
-		if (ly_process.Exe_exists() == Bool_.N_byte) {Html_write_code_as_pre(bfr, app); return;}
+		if (ly_process.Exe_exists() == BoolUtl.NByte) {Html_write_code_as_pre(bfr, app); return;}
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_b128();
 		tmp_bfr.Add(code).Add_byte_pipe().Add_int_bool(lang_is_abc).Add_byte_pipe().Add_int_bool(code_is_raw);
 		sha1 = Hash_algo_utl.Calc_hash_as_bry(sha1_hash, tmp_bfr.To_bry_and_rls()); // NOTE: MW transforms to base32; for now, keep sha1 as raw
@@ -78,7 +114,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		html_id_img = hcmd_id + "_img";
 		html_id_a	= hcmd_id + "_a";
 		html_a_href = ""; html_img_src = "";
-		html_img_alt = String_.new_u8(Bry_.Replace(code, Byte_ascii.Nl_bry, gplx.langs.htmls.entitys.Gfh_entity_.Nl_bry));
+		html_img_alt = String_.new_u8(Bry_.Replace(code, AsciiByte.NlBry, gplx.langs.htmls.entitys.Gfh_entity_.Nl_bry));
 		String html_img_alt_tmp = "", html_img_src_tmp = "", html_a_href_tmp = "";
 		html_img_src = png_file.To_http_file_str();			
 		html_a_href = aud_file.To_http_file_str();
@@ -184,8 +220,8 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 		byte[] rslt = Bry_.new_u8(rslt_str);	// expect 1st line to be of form "GNU LilyPond 2.16.2"
 		int bgn_pos	= Bry_find_.Find_fwd(rslt, Version_find_bgn); if (bgn_pos == Bry_find_.Not_found) return Version_unknown;
 		bgn_pos += Version_find_bgn.length + 1;	// +1 for trailing space
-		int end_pos = Bry_find_.Find_fwd(rslt, Byte_ascii.Nl, bgn_pos); if (bgn_pos == Bry_find_.Not_found) return Version_unknown;
-		if (rslt[end_pos - 1] == Byte_ascii.Cr) end_pos = end_pos - 1;
+		int end_pos = Bry_find_.Find_fwd(rslt, AsciiByte.Nl, bgn_pos); if (bgn_pos == Bry_find_.Not_found) return Version_unknown;
+		if (rslt[end_pos - 1] == AsciiByte.Cr) end_pos = end_pos - 1;
 		return Bry_.Mid(rslt, bgn_pos, end_pos);
 	}
 	public static final byte Xatr_id_lang_is_abc = 0, Xatr_id_code_is_raw = 1, Xatr_id_output_midi = 2, Xatr_id_output_ogg = 3, Xatr_id_file_midi = 4, Xatr_id_file_ogg = 5;
@@ -199,7 +235,7 @@ public class Score_xnde implements Xox_xnde, Mwh_atr_itm_owner1, Xoh_cmd_itm {
 	;
 	private static final byte[]
 	  Lang_abc = Bry_.new_a7("ABC")
-	, Abc_tagline_bgn = Bry_.new_a7("tagline ="), Abc_tagline_end = new byte[] {Byte_ascii.Nl}, Abc_tagline_repl = Bry_.new_a7("tagline = \"\"\n")
+	, Abc_tagline_bgn = Bry_.new_a7("tagline ="), Abc_tagline_end = new byte[] {AsciiByte.Nl}, Abc_tagline_repl = Bry_.new_a7("tagline = \"\"\n")
 	, Version_unknown = Bry_.new_a7("unknown"), Version_find_bgn = Bry_.new_a7("GNU LilyPond")
 	;
 	static final String GRP_KEY = "xowa.xtns.scores.itm";

@@ -14,8 +14,34 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.primitives.*;
-import gplx.core.ios.*; /*IoItmFil, IoItmDir..*/ import gplx.core.ios.streams.*; import gplx.core.ios.loaders.*; import gplx.core.ios.atrs.*;
+import gplx.core.ios.IoEngine;
+import gplx.core.ios.IoEnginePool;
+import gplx.core.ios.IoEngineUtl;
+import gplx.core.ios.IoEngine_;
+import gplx.core.ios.IoEngine_xrg_deleteDir;
+import gplx.core.ios.IoEngine_xrg_deleteFil;
+import gplx.core.ios.IoEngine_xrg_downloadFil;
+import gplx.core.ios.IoEngine_xrg_loadFilStr;
+import gplx.core.ios.IoEngine_xrg_openRead;
+import gplx.core.ios.IoEngine_xrg_openWrite;
+import gplx.core.ios.IoEngine_xrg_queryDir;
+import gplx.core.ios.IoEngine_xrg_saveFilStr;
+import gplx.core.ios.IoEngine_xrg_xferDir;
+import gplx.core.ios.IoEngine_xrg_xferFil;
+import gplx.core.ios.IoItmAttrib;
+import gplx.core.ios.IoItmDir;
+import gplx.core.ios.IoItmFil;
+import gplx.core.ios.IoRecycleBin;
+import gplx.core.ios.IoUrlInfoRegy;
+import gplx.core.ios.IoUrlInfo_;
+import gplx.core.ios.Io_fil;
+import gplx.core.ios.atrs.Io_itm_atr_req;
+import gplx.core.ios.loaders.Io_loader;
+import gplx.core.ios.streams.IoStream;
+import gplx.core.ios.streams.IoStream_;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
 public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather all cmds under gplx namespace; otherwise need to use gplx.core.ios whenever copying/deleting file
 	public Io_mgr() {evt_mgr = new Gfo_evt_mgr(this);}
 	public Gfo_evt_mgr					Evt_mgr() {return evt_mgr;} private final Gfo_evt_mgr evt_mgr;
@@ -72,7 +98,7 @@ public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather
 	public void							CopyDirSubs(Io_url src, Io_url trg) {IoEngine_xrg_xferDir.copy_(src, trg).Exec();}
 	public void							CopyDirDeep(Io_url src, Io_url trg) {IoEngine_xrg_xferDir.copy_(src, trg).Recur_().Exec();}
 	public void DeleteDirIfEmpty(Io_url url) {
-		if (Array_.Len(QueryDir_fils(url)) == 0)
+		if (ArrayUtl.Len(QueryDir_fils(url)) == 0)
 			this.DeleteDirDeep(url);
 	}
 	public void AliasDir_sysEngine(String srcRoot, String trgRoot)			{AliasDir(srcRoot, trgRoot, IoEngine_.SysKey);}
@@ -116,7 +142,7 @@ public class Io_mgr implements Gfo_evt_mgr_owner {	// exists primarily to gather
 	}
 	public byte[]						LoadFilBry_loose(Io_url url) {return Bry_.new_u8(LoadFilStr_loose(url));}
 	public String						LoadFilStr_loose(Io_url url) {
-		String rv = LoadFilStr_args(url).BomUtf8Convert_(Bool_.Y).MissingIgnored_(Bool_.Y).Exec();
+		String rv = LoadFilStr_args(url).BomUtf8Convert_(BoolUtl.Y).MissingIgnored_(BoolUtl.Y).Exec();
 		if (String_.Has(rv, "\r\n"))
 			rv = String_.Replace(rv, "\r\n", "\n");
 		return rv;

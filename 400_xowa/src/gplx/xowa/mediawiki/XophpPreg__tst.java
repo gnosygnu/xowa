@@ -13,13 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.mediawiki;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class XophpPreg__tst {
 	private final XophpPreg__fxt fxt = new XophpPreg__fxt();
-	@Test public void Basic()         {fxt.Test_split("a''b''c"          , "''", Bool_.Y, "a", "''", "b", "''", "c");}
-	@Test public void Extend()        {fxt.Test_split("a'''b'''c"        , "''", Bool_.Y, "a", "'''", "b", "'''", "c");}
-	@Test public void Eos()           {fxt.Test_split("a''"              , "''", Bool_.Y, "a", "''");}
+	@Test public void Basic()         {fxt.Test_split("a''b''c"          , "''", BoolUtl.Y, "a", "''", "b", "''", "c");}
+	@Test public void Extend()        {fxt.Test_split("a'''b'''c"        , "''", BoolUtl.Y, "a", "'''", "b", "'''", "c");}
+	@Test public void Eos()           {fxt.Test_split("a''"              , "''", BoolUtl.Y, "a", "''");}
 }
 class XophpPreg__fxt {
 	private final gplx.core.primitives.Int_list rv = new gplx.core.primitives.Int_list();

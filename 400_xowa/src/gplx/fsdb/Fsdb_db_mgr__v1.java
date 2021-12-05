@@ -13,8 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb; import gplx.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.fsdb.meta.*; import gplx.fsdb.data.*; import gplx.xowa.files.origs.*;
+package gplx.fsdb;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.fsdb.data.Fsd_bin_tbl;
+import gplx.fsdb.data.Fsd_dir_tbl;
+import gplx.fsdb.data.Fsd_fil_tbl;
+import gplx.fsdb.data.Fsd_thm_tbl;
+import gplx.fsdb.meta.Fsm_atr_tbl;
+import gplx.fsdb.meta.Fsm_bin_tbl;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.fsdb.meta.Fsm_mnt_tbl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.origs.Xof_orig_tbl;
 public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 	private final Io_url file_dir;
 	private final Fsdb_db_file orig_file, mnt_file, abc_file__main, abc_file__user, atr_file__main, atr_file__user;
@@ -25,15 +42,15 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 		this.orig_file		= get_db(file_dir.GenSubFil(Orig_name));										// EX: /xowa/enwiki/wiki.orig#00.sqlite3
 		this.mnt_file		= get_db(file_dir.GenSubFil(Mnt_name));											// EX: /xowa/enwiki/wiki.mnt.sqlite3
 		this.abc_file__main	= get_db(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_main, Abc_name));			// EX: /xowa/enwiki/fsdb.main/fsdb.abc.sqlite3
-		this.atr_file__main	= get_db(Get_atr_db_url(Bool_.Y, file_dir, Fsm_mnt_tbl.Mnt_name_main));			// EX: /xowa/enwiki/fsdb.main/fsdb.atr.00.sqlite3
+		this.atr_file__main	= get_db(Get_atr_db_url(BoolUtl.Y, file_dir, Fsm_mnt_tbl.Mnt_name_main));			// EX: /xowa/enwiki/fsdb.main/fsdb.atr.00.sqlite3
 		if (Db_conn_bldr.Instance.Get(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_user, Abc_name)) == null)		// user doesn't exist; create; DATE:2015-04-20
 			Fsdb_db_mgr__v1_bldr.Instance.Make_core_dir(file_dir, Fsm_mnt_mgr.Mnt_idx_user, Fsm_mnt_tbl.Mnt_name_user);
 		this.abc_file__user	= get_db(file_dir.GenSubFil_nest(Fsm_mnt_tbl.Mnt_name_user, Abc_name));			// EX: /xowa/enwiki/fsdb.user/fsdb.abc.sqlite3
-		this.atr_file__user	= get_db(Get_atr_db_url(Bool_.N, file_dir, Fsm_mnt_tbl.Mnt_name_user));			// EX: /xowa/enwiki/fsdb.user/fsdb.atr.00.sqlite3
+		this.atr_file__user	= get_db(Get_atr_db_url(BoolUtl.N, file_dir, Fsm_mnt_tbl.Mnt_name_user));			// EX: /xowa/enwiki/fsdb.user/fsdb.atr.00.sqlite3
 		this.orig_tbl_ary	= new Xof_orig_tbl[] {new Xof_orig_tbl(orig_file.Conn(), this.File__schema_is_1())};
 	}
-	public boolean				File__schema_is_1()					{return Bool_.Y;}
-	public boolean				File__solo_file()					{return Bool_.N;}
+	public boolean				File__schema_is_1()					{return BoolUtl.Y;}
+	public boolean				File__solo_file()					{return BoolUtl.N;}
 	public String			File__cfg_tbl_name()				{return "fsdb_cfg";}
 	public Xof_orig_tbl[]	File__orig_tbl_ary()				{return orig_tbl_ary;}
 	public Fsdb_db_file		File__mnt_file()					{return mnt_file;}
@@ -56,7 +73,7 @@ public class Fsdb_db_mgr__v1 implements Fsdb_db_mgr {
 		String mnt_name = mnt_id == Fsm_mnt_mgr.Mnt_idx_main ? Fsm_mnt_tbl.Mnt_name_main : Fsm_mnt_tbl.Mnt_name_user;
 		Io_url url = file_dir.GenSubFil_nest(mnt_name, file_name);	// EX: /xowa/enwiki/fsdb.main/fsdb.bin.0000.sqlite3
 		Db_conn conn = Db_conn_bldr.Instance.New(url);
-		Fsd_bin_tbl bin_tbl = new Fsd_bin_tbl(conn, Bool_.Y); bin_tbl.Create_tbl();
+		Fsd_bin_tbl bin_tbl = new Fsd_bin_tbl(conn, BoolUtl.Y); bin_tbl.Create_tbl();
 		return new Fsdb_db_file(url, conn);
 	}
 	private Io_url Get_atr_db_url(boolean main, Io_url file_dir, String mnt_name) {
@@ -96,7 +113,7 @@ class Fsdb_db_mgr__v1_bldr {
 		Fsdb_db_file db_atr = new_db(mnt_dir.GenSubFil(Fsdb_db_mgr__v1.Atr_name_v1b));	// create atr database in v1b style; "fsdb.atr.00.sqlite3" not "fsdb.atr#00.sqlite3"
 		Fsd_dir_tbl dir_tbl = new Fsd_dir_tbl(db_atr.Conn(), schema_is_1); dir_tbl.Create_tbl();
 		Fsd_fil_tbl fil_tbl = new Fsd_fil_tbl(db_atr.Conn(), schema_is_1, mnt_id); fil_tbl.Create_tbl();
-		Fsd_thm_tbl thm_tbl = new Fsd_thm_tbl(db_atr.Conn(), schema_is_1, mnt_id, Bool_.Y); thm_tbl.Create_tbl();
+		Fsd_thm_tbl thm_tbl = new Fsd_thm_tbl(db_atr.Conn(), schema_is_1, mnt_id, BoolUtl.Y); thm_tbl.Create_tbl();
 		// make bin_fil
 		new_db__bin(mnt_dir.GenSubFil("fsdb.bin.0000.sqlite3"));
 	}

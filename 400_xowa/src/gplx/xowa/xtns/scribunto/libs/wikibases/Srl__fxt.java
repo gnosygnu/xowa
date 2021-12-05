@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
+package gplx.xowa.xtns.scribunto.libs.wikibases; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.scribunto.libs.*;
 import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.stores.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 public class Srl__fxt {
 	private Wdata_doc_bldr wdoc_bldr;
@@ -70,13 +72,13 @@ public class Srl__fxt {
 		}
 	}
 	private void Xto_str(Bry_bfr bfr, Keyval kv, int depth) {
-		bfr.Add_byte_repeat(Byte_ascii.Space, depth * 2);
-		bfr.Add_str_u8(kv.Key()).Add_byte(Byte_ascii.Colon);
+		bfr.Add_byte_repeat(AsciiByte.Space, depth * 2);
+		bfr.Add_str_u8(kv.Key()).Add_byte(AsciiByte.Colon);
 		Object kv_val = kv.Val();
 		if		(kv_val == null) 							{bfr.Add_str_a7("null").Add_byte_nl(); return;}
 		Class<?> kv_val_cls = kv_val.getClass();
 		if 	(Type_.Eq(kv_val_cls, Keyval[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (Keyval[])kv_val, depth + 1);}
 		else if (Type_.Eq(kv_val_cls, Keyval[].class)) 	{bfr.Add_byte_nl(); Xto_str(bfr, (Keyval)kv_val, depth + 1);}
-		else bfr.Add_byte(Byte_ascii.Apos).Add_str_u8(Object_.Xto_str_strict_or_empty(kv_val)).Add_byte(Byte_ascii.Apos).Add_byte_nl();
+		else bfr.Add_byte(AsciiByte.Apos).Add_str_u8(Object_.Xto_str_strict_or_empty(kv_val)).Add_byte(AsciiByte.Apos).Add_byte_nl();
 	}
 }

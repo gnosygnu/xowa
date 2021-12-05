@@ -13,31 +13,36 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.nss; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import org.junit.*;
+package gplx.xowa.wikis.nss;
+import gplx.Bry_;
+import gplx.Int_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Xow_ns_tst {
 	@Before public void init() {fxt.Clear();} private Xow_ns_fxt fxt = new Xow_ns_fxt();
 	@Test  public void Category() {
 		fxt	.Expd_id_subjId_(Xow_ns_.Tid__category)
 			.Expd_id_talkId_(Xow_ns_.Tid__category_talk)
-			.Expd_id_subj_(Bool_.Y)
-			.Expd_id_talk_(Bool_.N)
+			.Expd_id_subj_(BoolUtl.Y)
+			.Expd_id_talk_(BoolUtl.N)
 			.Test(Xow_ns_.Tid__category)
 			;
 	}		
 	@Test  public void Category_talk() {
 		fxt	.Expd_id_subjId_(Xow_ns_.Tid__category)
 			.Expd_id_talkId_(Xow_ns_.Tid__category_talk)
-			.Expd_id_subj_(Bool_.N)
-			.Expd_id_talk_(Bool_.Y)
+			.Expd_id_subj_(BoolUtl.N)
+			.Expd_id_talk_(BoolUtl.Y)
 			.Test(Xow_ns_.Tid__category_talk)
 			;
 	}
 	@Test  public void Special() {
 		fxt	.Expd_id_subjId_(Xow_ns_.Tid__special)
 			.Expd_id_talkId_(Xow_ns_.Tid__special)
-			.Expd_id_subj_(Bool_.Y)
-			.Expd_id_talk_(Bool_.N)
+			.Expd_id_subj_(BoolUtl.Y)
+			.Expd_id_talk_(BoolUtl.N)
 			.Test(Xow_ns_.Tid__special)
 			;
 	}

@@ -13,9 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.scripts.xtns; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.scripts.*;
-import gplx.core.scripts.*;
-import gplx.xowa.addons.apps.scripts.apis.*;
+package gplx.xowa.addons.apps.scripts.xtns;
+import gplx.Bry_bfr;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.scripts.Gfo_script_engine;
+import gplx.core.scripts.Gfo_script_engine_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.apps.scripts.Xoscript_env;
+import gplx.xowa.addons.apps.scripts.apis.Xoscript_log;
+import gplx.xowa.addons.apps.scripts.apis.Xoscript_page;
+import gplx.xowa.addons.apps.scripts.apis.Xoscript_url;
 public class Xoscript_xtn_mgr {
 	private Xoscript_xtn_itm root_itm;
 	private final Io_url root_dir;
@@ -24,7 +40,7 @@ public class Xoscript_xtn_mgr {
 		this.root_dir = root_dir;
 	}
 	public void reg_xtn(String key, String file) {
-		Io_url url = Io_url_.new_fil_(Xoscript_env.Resolve_file(Bool_.N, root_dir, file));
+		Io_url url = Io_url_.new_fil_(Xoscript_env.Resolve_file(BoolUtl.N, root_dir, file));
 		Xoscript_xtn_itm itm = new Xoscript_xtn_itm(key, url, Gfo_script_engine_.New_by_ext(url.Ext()));
 		hash.Add(key, itm);
 	}

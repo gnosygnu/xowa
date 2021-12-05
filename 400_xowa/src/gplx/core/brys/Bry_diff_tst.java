@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 public class Bry_diff_tst {
 	@Before public void init() {} private final Bry_diff_fxt fxt = new Bry_diff_fxt();
@@ -31,7 +32,7 @@ class Bry_diff_fxt {
 	public void Test__diff_1st(String lhs, String rhs, String expd_lhs, String expd_rhs) {
 		byte[] lhs_src = Bry_.new_u8(lhs);
 		byte[] rhs_src = Bry_.new_u8(rhs);
-		byte[][] actl = Bry_diff_.Diff_1st(lhs_src, 0, lhs_src.length, rhs_src, 0, rhs_src.length, Byte_ascii.Pipe_bry, Byte_ascii.Angle_bgn_bry, 255);
+		byte[][] actl = Bry_diff_.Diff_1st(lhs_src, 0, lhs_src.length, rhs_src, 0, rhs_src.length, AsciiByte.PipeBry, AsciiByte.AngleBgnBry, 255);
 		if (expd_lhs == null && expd_rhs == null)
 			Tfds.Eq_true(actl == null, "actl not null");
 		else {

@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.net.qargs; import gplx.*;
 import gplx.langs.htmls.encoders.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfo_qarg_mgr_old {
 	private final List_adp list = List_adp_.New();
 	private final Hash_adp hash = Hash_adp_bry.cs();
@@ -64,7 +65,7 @@ public class Gfo_qarg_mgr_old {
 		for (int i = 0; i < ary_len; i++) {
 			byte[] key = ary[i];
 			Gfo_qarg_itm itm = Get_arg(key); if (itm == null) continue;
-			bfr.Add_byte(Byte_ascii.Amp).Add(itm.Key_bry()).Add_byte(Byte_ascii.Eq).Add(itm.Val_bry());
+			bfr.Add_byte(AsciiByte.Amp).Add(itm.Key_bry()).Add_byte(AsciiByte.Eq).Add(itm.Val_bry());
 		}
 		return bfr.To_bry_and_clear();
 	}
@@ -78,9 +79,9 @@ public class Gfo_qarg_mgr_old {
 		int len = list.Len(); if (len == 0) return;
 		for (int i = 0; i < len; ++i) {
 			Gfo_qarg_itm itm = (Gfo_qarg_itm)list.Get_at(i);
-			bfr.Add_byte(i == 0 ? Byte_ascii.Question : Byte_ascii.Amp);
+			bfr.Add_byte(i == 0 ? AsciiByte.Question : AsciiByte.Amp);
 			Write_or_encode(bfr, href_encoder, encode, itm.Key_bry());
-			bfr.Add_byte(Byte_ascii.Eq);
+			bfr.Add_byte(AsciiByte.Eq);
 			Write_or_encode(bfr, href_encoder, encode, itm.Val_bry());
 		}
 	}
@@ -89,9 +90,9 @@ public class Gfo_qarg_mgr_old {
 		int ary_len = ary.length;
 		for (int i = 0; i < ary_len; i++) {
 			Gfo_qarg_itm itm = ary[i];
-			bfr.Add_byte(i == 0 ? Byte_ascii.Question : Byte_ascii.Amp);
+			bfr.Add_byte(i == 0 ? AsciiByte.Question : AsciiByte.Amp);
 			Write_or_encode(bfr, href_encoder, encode, itm.Key_bry());
-			bfr.Add_byte(Byte_ascii.Eq);
+			bfr.Add_byte(AsciiByte.Eq);
 			Write_or_encode(bfr, href_encoder, encode, itm.Val_bry());
 		}
 	}

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*;
+package gplx.xowa.mediawiki.includes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class XomwXml {
 	// Format an XML element with given attributes and, optionally, text content.
 	// Element and attribute names are assumed to be ready for literal inclusion.
@@ -22,21 +23,21 @@ public class XomwXml {
 	// ARGS: contents defaults to ""
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
 	public static void Element(Bry_bfr bfr, byte[] element, List_adp attribs, byte[] contents, boolean allow_short_tag) {
-		bfr.Add_byte(Byte_ascii.Angle_bgn).Add(element);
+		bfr.Add_byte(AsciiByte.AngleBgn).Add(element);
 		if (attribs.Len() > 0) {
 			Expand_attributes(bfr, attribs);
 		}
 		if (contents == null) {
-			bfr.Add_byte(Byte_ascii.Angle_end);
+			bfr.Add_byte(AsciiByte.AngleEnd);
 		}
 		else {
 			if (allow_short_tag && contents == Bry_.Empty) {
 				bfr.Add_str_a7(" />");
 			}
 			else {
-				bfr.Add_byte(Byte_ascii.Angle_end);
+				bfr.Add_byte(AsciiByte.AngleEnd);
 				bfr.Add_bry_escape_html(contents);
-				bfr.Add_byte(Byte_ascii.Angle_bgn).Add_byte(Byte_ascii.Slash).Add(element).Add_byte(Byte_ascii.Angle_end);
+				bfr.Add_byte(AsciiByte.AngleBgn).Add_byte(AsciiByte.Slash).Add(element).Add_byte(AsciiByte.AngleEnd);
 			}
 		}
 	}
@@ -61,15 +62,15 @@ public class XomwXml {
 	// This opens an XML element
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
 	public static void Open_element(Bry_bfr bfr, byte[] element, List_adp attribs) {
-		bfr.Add_byte(Byte_ascii.Angle_bgn).Add(element);
+		bfr.Add_byte(AsciiByte.AngleBgn).Add(element);
 		Expand_attributes(bfr, attribs);
-		bfr.Add_byte(Byte_ascii.Angle_end);
+		bfr.Add_byte(AsciiByte.AngleEnd);
 	}
 
 	// Shortcut to close an XML element
 	// XO.MW:SYNC:1.29; DATE:2017-02-03
 	public static void Close_element(Bry_bfr bfr, byte[] element) {
-		bfr.Add_byte(Byte_ascii.Angle_bgn).Add_byte(Byte_ascii.Slash).Add(element).Add_byte(Byte_ascii.Angle_end);
+		bfr.Add_byte(AsciiByte.AngleBgn).Add_byte(AsciiByte.Slash).Add(element).Add_byte(AsciiByte.AngleEnd);
 	}
 
 	// Same as Xml::element(), but does not escape contents. Handy when the
@@ -78,6 +79,6 @@ public class XomwXml {
 	public static void Tags(Bry_bfr bfr, byte[] element, List_adp attribs, byte[] contents) {
 		Open_element(bfr, element, attribs);
 		bfr.Add(contents);
-		bfr.Add_byte(Byte_ascii.Angle_bgn).Add_byte(Byte_ascii.Slash).Add(element).Add_byte(Byte_ascii.Angle_end);
+		bfr.Add_byte(AsciiByte.AngleBgn).Add_byte(AsciiByte.Slash).Add(element).Add_byte(AsciiByte.AngleEnd);
 	}
 }

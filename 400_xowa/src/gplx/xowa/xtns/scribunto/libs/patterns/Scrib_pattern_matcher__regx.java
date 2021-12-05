@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs.patterns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.libs.*;
+package gplx.xowa.xtns.scribunto.libs.patterns; import gplx.*;
+import gplx.xowa.xtns.scribunto.libs.*;
 import gplx.objects.strings.unicodes.*;
 import gplx.langs.regxs.*;
 class Scrib_pattern_matcher__regx extends Scrib_pattern_matcher { 	private final byte[] page_url;
@@ -27,7 +28,7 @@ class Scrib_pattern_matcher__regx extends Scrib_pattern_matcher { 	private final
 
 		// run regex
 		Regx_adp regx_adp = Scrib_lib_ustring.RegxAdp_new_(page_url, pat_str);
-		Regx_match match = regx_adp.Match(src_ucs.Src(), src_ucs.Map_data_to_char(bgn_as_codes));	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
+		Regx_match match = regx_adp.Match(src_ucs.Src(), src_ucs.MapDataToChar(bgn_as_codes));	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
 		match = regx_converter.Adjust_balanced_one(match);
 		return match;
 	}
@@ -39,7 +40,7 @@ class Scrib_pattern_matcher__regx extends Scrib_pattern_matcher { 	private final
 		if (regx_adp.Pattern_is_invalid()) return src_str; // NOTE: invalid patterns should return self; EX:[^]; DATE:2014-09-02
 
 		// run regex
-		Regx_match[] rslts =  regx_adp.Match_all(src_str, src_ucs.Map_data_to_char(bgn_as_codes));	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
+		Regx_match[] rslts =  regx_adp.Match_all(src_str, src_ucs.MapDataToChar(bgn_as_codes));	// NOTE: MW calculates an offset to handle mb strings. however, java's regex always takes offset in chars (not bytes like PHP preg_match); DATE:2014-03-04
 		if (rslts.length == 0) return src_str; // PHP: If matches are found, the new subject will be returned, otherwise subject will be returned unchanged.; http://php.net/manual/en/function.preg-replace-callback.php
 		rslts = regx_converter.Adjust_balanced(rslts);
 

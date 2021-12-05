@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.stores; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns.wbases.stores; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.xtns.wbases.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.domains.*;
@@ -35,7 +37,7 @@ public class Wbase_qid_mgr {// EX: "enwiki|0|Earth" -> "Q2"
 		if (Bry_.Len_eq_0(wdata_wiki_abrv)) return null;			// "other" wikis will never call wikidata
 
 		// make key; EX: "enwiki|014|Earth"
-		byte[] key = Bry_.Add(wdata_wiki_abrv, Byte_ascii.Pipe_bry, ttl.Ns().Num_bry(), Byte_ascii.Pipe_bry, ttl.Page_db());
+		byte[] key = Bry_.Add(wdata_wiki_abrv, AsciiByte.PipeBry, ttl.Ns().Num_bry(), AsciiByte.PipeBry, ttl.Page_db());
 
 		// get from cache
 		synchronized (cache) {
@@ -58,7 +60,7 @@ public class Wbase_qid_mgr {// EX: "enwiki|0|Earth" -> "Q2"
 
 	public void Add(Bry_bfr bfr, byte[] lang_key, int wiki_tid, byte[] ns_num, byte[] ttl, byte[] qid) {// TEST:
 		Xow_abrv_wm_.To_abrv(bfr, lang_key, Int_obj_ref.New_zero().Val_(wiki_tid));
-		byte[] qids_key = bfr.Add_byte(Byte_ascii.Pipe).Add(ns_num).Add_byte(Byte_ascii.Pipe).Add(ttl).To_bry();
+		byte[] qids_key = bfr.Add_byte(AsciiByte.Pipe).Add(ns_num).Add_byte(AsciiByte.Pipe).Add(ttl).To_bry();
 		this.Add(qids_key, qid);
 	}
 }

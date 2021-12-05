@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
+package gplx.xowa.addons.wikis.searchs.searchers.crts; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 public class Srch_crt_scanner_syms {
 	public Srch_crt_scanner_syms(byte escape, byte space, byte quote, byte not, byte and, byte or, byte paren_bgn, byte paren_end, byte wild) {
 		this.escape = escape; this.space = space; this.quote = quote;
@@ -53,7 +54,7 @@ public class Srch_crt_scanner_syms {
 		escape = space = quote = not = and = or = paren_bgn = paren_end = wild = Byte_.Zero;
 		for (byte[] line : lines) {
 			int line_len = line.length;
-			int eq_pos = Bry_find_.Find_fwd(line, Byte_ascii.Eq, 0, line_len); if (eq_pos == Bry_find_.Not_found) continue;
+			int eq_pos = Bry_find_.Find_fwd(line, AsciiByte.Eq, 0, line_len); if (eq_pos == Bry_find_.Not_found) continue;
 			String key = String_.new_u8(Bry_.Mid(line, 0, eq_pos));
 			byte val = Parse__val(line, eq_pos + 1, line_len);
 			if		(String_.Eq(key, "wild"			)) wild = val;
@@ -70,8 +71,8 @@ public class Srch_crt_scanner_syms {
 	private static void To_bry__add(Bry_bfr bfr, String key, byte val) {
 		bfr.Add_str_u8(key).Add_byte_eq();
 		switch (val) {
-			case Byte_ascii.Null	: bfr.Add_str_a7("\\0"); break;
-			case Byte_ascii.Space	: bfr.Add_str_a7("\\s"); break;
+			case AsciiByte.Null	: bfr.Add_str_a7("\\0"); break;
+			case AsciiByte.Space	: bfr.Add_str_a7("\\s"); break;
 			default					: bfr.Add_byte(val); break;
 		}			
 		bfr.Add_byte_nl();
@@ -87,26 +88,26 @@ public class Srch_crt_scanner_syms {
 		Make_trie__add(trie, bldr.Paren_end()	, Srch_crt_tkn.Tid__paren_end);
 	}
 	private static void Make_trie__add(Btrie_slim_mgr rv, byte b, byte tid) {
-		if (b == Byte_ascii.Null) return;
+		if (b == AsciiByte.Null) return;
 		rv.Add_bry_byte(b, tid);
 	}
 	public static Srch_crt_scanner_syms New__dflt() {
 		return new Srch_crt_scanner_syms
-		( Byte_ascii.Backslash, Byte_ascii.Space, Byte_ascii.Quote, Byte_ascii.Dash, Byte_ascii.Plus, Byte_ascii.Comma
-		, Byte_ascii.Paren_bgn, Byte_ascii.Paren_end, Byte_ascii.Star
+		( AsciiByte.Backslash, AsciiByte.Space, AsciiByte.Quote, AsciiByte.Dash, AsciiByte.Plus, AsciiByte.Comma
+		, AsciiByte.ParenBgn, AsciiByte.ParenEnd, AsciiByte.Star
 		);
 	}
 	public static final Srch_crt_scanner_syms Dflt = New__dflt();
 	private static byte Parse__val(byte[] line, int val_bgn, int line_len) {
 		if (line_len - val_bgn == 1) return line[val_bgn];
 		if (	line_len - val_bgn == 2
-			&&	line[val_bgn] == Byte_ascii.Backslash) {
+			&&	line[val_bgn] == AsciiByte.Backslash) {
 			byte val_byte = line[val_bgn + 1];
 			switch (val_byte) {
-				case Byte_ascii.Num_0: return Byte_ascii.Null;
-				case Byte_ascii.Ltr_s: return Byte_ascii.Space;
+				case AsciiByte.Num0: return AsciiByte.Null;
+				case AsciiByte.Ltr_s: return AsciiByte.Space;
 			}
 		}
-		return Byte_ascii.Null;
+		return AsciiByte.Null;
 	}
 }

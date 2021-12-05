@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates.apps; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.updates.*;
-import gplx.core.envs.*;
+package gplx.xowa.addons.apps.updates.apps; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Xoa_manifest_wkr {
 	private final Xoa_manifest_view view;
 	private final Xoa_manifest_list list = new Xoa_manifest_list();
@@ -30,7 +30,7 @@ class Xoa_manifest_wkr {
 		byte[] src = Io_mgr.Instance.LoadFilBry(manifest_url);
 
 		// parse manifest
-		int nl_pos = Bry_find_.Find_fwd(src, Byte_ascii.Nl);
+		int nl_pos = Bry_find_.Find_fwd(src, AsciiByte.Nl);
 		if (nl_pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find nl in manifest", "manifest_url", manifest_url.Raw());
 		this.run_xowa_cmd = String_.new_u8(src, 0, nl_pos);
 		list.Load(src, nl_pos + 1, src.length);

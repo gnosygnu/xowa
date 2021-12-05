@@ -13,10 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers.cbks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.searchers.*;
-import gplx.gfui.*; import gplx.gfui.controls.standards.*;
-import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
-import gplx.xowa.apps.apis.xowa.addons.searchs.*;
+package gplx.xowa.addons.wikis.searchs.searchers.cbks;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.String_;
+import gplx.gfui.controls.standards.GfuiComboBox;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.addons.wikis.searchs.searchers.Srch_search_ctx;
+import gplx.xowa.addons.wikis.searchs.searchers.Srch_search_qry;
+import gplx.xowa.addons.wikis.searchs.searchers.rslts.Srch_rslt_cbk;
+import gplx.xowa.addons.wikis.searchs.searchers.rslts.Srch_rslt_list;
+import gplx.xowa.addons.wikis.searchs.searchers.rslts.Srch_rslt_row;
 public class Srch_rslt_cbk__url_bar implements Srch_rslt_cbk, Gfo_invk {
 	private final Xoae_app app;
 	private final GfuiComboBox url_bar;
@@ -65,12 +76,12 @@ public class Srch_rslt_cbk__url_bar implements Srch_rslt_cbk, Gfo_invk {
 			&& (rslts_in_this_pass > 0 || rslts_finished)	// at least 1 rslt, or search done
 			) {
 			rslts_shown = true;	// only auto-show dropdown once; allows user to close drop-down and not have it continually flashing
-			url_bar.List_visible_(Bool_.Y);
+			url_bar.List_visible_(BoolUtl.Y);
 		}
 		Xoa_app_.Usr_dlg().Prog_none("", "", "");
 		if (rslts_finished) {
 			if (cbo_ary.length == 0)
-				url_bar.List_visible_(Bool_.N);
+				url_bar.List_visible_(BoolUtl.N);
 			else
 				url_bar.Items__size_to_fit(cbo_ary.length);
 		}

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.thms.divs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.thms.*;
+package gplx.xowa.htmls.core.wkrs.thms.divs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
 public class Xoh_thm_caption_data {
 	public int Src_bgn() {return src_bgn;} private int src_bgn;
@@ -39,8 +41,8 @@ public class Xoh_thm_caption_data {
 		this.src_bgn = capt_head.Src_bgn();
 		if (!magnify_data.Parse(hdoc_wkr, tag_rdr, src, capt_head)) return false;
 		this.capt_1_bgn = magnify_data.Magnify_tail_div().Src_end();
-		if (src[capt_1_bgn] == Byte_ascii.Cr) ++capt_1_bgn;	// wikitext sometimes has \r\n instead of \n; PAGE:en.w:List_of_Saint_Petersburg_Metro_stations; DATE:2016-01-04
-		if (src[capt_1_bgn] != Byte_ascii.Nl) tag_rdr.Err_wkr().Fail("expected newline before caption");
+		if (src[capt_1_bgn] == AsciiByte.Cr) ++capt_1_bgn;	// wikitext sometimes has \r\n instead of \n; PAGE:en.w:List_of_Saint_Petersburg_Metro_stations; DATE:2016-01-04
+		if (src[capt_1_bgn] != AsciiByte.Nl) tag_rdr.Err_wkr().Fail("expected newline before caption");
 		++capt_1_bgn;	// skip \n
 		tag_rdr.Pos_(magnify_data.Magnify_tail_div().Src_end() + 1);	// also move tag_rdr forward one
 		Gfh_tag capt_tail = tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__div);

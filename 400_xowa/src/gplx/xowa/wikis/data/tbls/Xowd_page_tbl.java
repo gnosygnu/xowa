@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.criterias.*;
 import gplx.dbs.*;
 import gplx.dbs.qrys.*;
@@ -218,7 +221,7 @@ public class Xowd_page_tbl implements Db_tbl {
 		if (Bry_.Len_eq_0(search)) return;	// do not allow empty search
 		Criteria crt = Criteria_.And_many(Db_crt_.New_eq(fld_ns, Xow_ns_.Tid__main), Db_crt_.New_like(fld_title, ""));
 		Db_qry__select_cmd qry = Db_qry_.select_().From_(tbl_name).Cols_(fld_id, fld_len, fld_ns, fld_title).Where_(crt);	// NOTE: use fields from main index only
-		search = Bry_.Replace(search, Byte_ascii.Star, Byte_ascii.Percent);
+		search = Bry_.Replace(search, AsciiByte.Star, AsciiByte.Percent);
 		Db_rdr rdr = conn.Stmt_new(qry).Clear().Crt_int(fld_ns, Xow_ns_.Tid__main).Val_bry_as_str(fld_title, search).Exec_select__rls_auto();
 		try {
 			while (rdr.Move_next()) {
@@ -372,7 +375,7 @@ public class Xowd_page_tbl implements Db_tbl {
 	}
 	public void Update__redirect(int redirect_to_id, int page_id) {
 		conn.Stmt_update(tbl_name, String_.Ary(fld_id), fld_is_redirect, fld_redirect_id)
-			.Val_int(fld_is_redirect, Bool_.Y_int)
+			.Val_int(fld_is_redirect, BoolUtl.YInt)
 			.Val_int(fld_redirect_id, redirect_to_id)
 			.Crt_int(fld_id, page_id)
 			.Exec_update()

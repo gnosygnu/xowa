@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.tdbs;
+import gplx.Bry_;
+import gplx.Err_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
 public class Xotdb_dir_info_ {
 	public static String Tid_name(byte tid) {
 		switch (tid) {
@@ -29,11 +33,11 @@ public class Xotdb_dir_info_ {
 	}
 	public static Xotdb_dir_info[] regy_() {
 		Xotdb_dir_info[] rv = new Xotdb_dir_info[5];
-		regy_itm_(rv, Bool_.Y, Tid_page);
-		regy_itm_(rv, Bool_.Y, Tid_ttl);
-		regy_itm_(rv, Bool_.N, Tid_id);
-		regy_itm_(rv, Bool_.N, Tid_category);
-		regy_itm_(rv, Bool_.N, Tid_search_ttl);
+		regy_itm_(rv, BoolUtl.Y, Tid_page);
+		regy_itm_(rv, BoolUtl.Y, Tid_ttl);
+		regy_itm_(rv, BoolUtl.N, Tid_id);
+		regy_itm_(rv, BoolUtl.N, Tid_category);
+		regy_itm_(rv, BoolUtl.N, Tid_search_ttl);
 		return rv;
 	}
 	public static boolean Dir_name_is_tdb(String dir_name) {

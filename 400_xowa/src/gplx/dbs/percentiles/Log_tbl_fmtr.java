@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.percentiles; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Log_tbl_fmtr {
 	private final Bry_bfr bfr = Bry_bfr_.New();
 	private final List_adp itms = List_adp_.New();
@@ -54,7 +55,7 @@ class Log_fld_itm__bry extends Log_fld_itm__base {
 		int pad_len = this.len - val_bry_len;
 		bfr.Add(val_bry);
 		if (pad_len > 0)
-			bfr.Add_byte_repeat(Byte_ascii.Space, pad_len);
+			bfr.Add_byte_repeat(AsciiByte.Space, pad_len);
 	}
 }
 class Log_fld_itm__int extends Log_fld_itm__base {

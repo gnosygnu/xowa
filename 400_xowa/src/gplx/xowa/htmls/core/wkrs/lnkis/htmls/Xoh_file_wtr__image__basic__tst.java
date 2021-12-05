@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
-import org.junit.*; import gplx.xowa.files.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_file_fxt;
+import org.junit.Before;
+import org.junit.Test;
 public class Xoh_file_wtr__image__basic__tst {
 	private final Xop_fxt fxt = new Xop_fxt();
 	@Before public void init() {fxt.Reset();}
@@ -320,7 +327,7 @@ public class Xoh_file_wtr__image__basic__tst {
 	}
 	@Test public void Redirect() {// PURPOSE: redirect should use trg_lnki, not src_lnki; DATE:2016-08-10
 		Xof_file_fxt file_fxt = Xof_file_fxt.new_all(fxt.Wiki());
-		file_fxt.Exec_orig_add(Bool_.Y, "A.png", Xof_ext_.Id_png, 320, 300, "B.png");
+		file_fxt.Exec_orig_add(BoolUtl.Y, "A.png", Xof_ext_.Id_png, 320, 300, "B.png");
 		fxt.Wiki().File__fsdb_mode().Tid__v2__mp__y_();
 
 		fxt.Test_parse_page_wiki_str

@@ -13,21 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.catpages; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.ctgs.*; import gplx.xowa.addons.wikis.ctgs.htmls.*;
-import org.junit.*; import gplx.xowa.htmls.core.htmls.*; import gplx.core.intls.ucas.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.catpages; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.addons.wikis.ctgs.*;
+import org.junit.*;
+import gplx.core.intls.ucas.*;
 import gplx.xowa.addons.wikis.ctgs.htmls.catpages.doms.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.fmts.*;
 public class Xoctg_catpage_mgr__basic__tst {
 	@Before public void init() {fxt.Clear();} private Xoctg_catpage_mgr_fxt fxt = new Xoctg_catpage_mgr_fxt();
 	@Test  public void Page_itm() {
 		fxt	.Init_itms__pages("A1")
-			.Test__html__page(Xoa_ctg_mgr.Tid__page, Byte_ascii.Ltr_A, "\n            <li><a href=\"/wiki/A1\" title=\"A1\">A1</a></li>");
+			.Test__html__page(Xoa_ctg_mgr.Tid__page, AsciiByte.Ltr_A, "\n            <li><a href=\"/wiki/A1\" title=\"A1\">A1</a></li>");
 	}
 	@Test  public void Page_itm_missing() {
 		fxt.Init_itms__pages("A1");
 		Xoctg_catpage_itm itm = fxt.Ctg().Grp_by_tid(Xoa_ctg_mgr.Tid__page).Itms__get_at(0);
 		itm.Page_ttl_(Xoa_ttl.Null);
 		itm.Sortkey_handle_make(Bry_bfr_.New(), fxt.Wiki(), Bry_.Empty);
-		fxt.Test__html__page(Xoa_ctg_mgr.Tid__page, Byte_ascii.Ltr_A, "\n            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #0 might be talk/user page\">missing page (0)</li>");
+		fxt.Test__html__page(Xoa_ctg_mgr.Tid__page, AsciiByte.Ltr_A, "\n            <li class=\"xowa-missing-category-entry\"><span title=\"id not found: #0 might be talk/user page\">missing page (0)</li>");
 	}
 	@Test  public void Visited_doesnt_work_for_space() {// PURPOSE: xowa-visited not inserted for pages with space
 		byte[] page_bry = Bry_.new_a7("A 1");

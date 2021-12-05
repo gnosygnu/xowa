@@ -13,11 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.core.net.*;
-import gplx.xowa.bldrs.wkrs.*;
-import gplx.xowa.bldrs.wms.sites.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.site_cfgs.*;
+package gplx.xowa.bldrs.cmds.utils;
+import gplx.Bry_;
+import gplx.DateAdp;
+import gplx.Datetime_now;
+import gplx.GfoMsg;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg;
+import gplx.GfsCtx;
+import gplx.Io_url;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.core.net.Gfo_inet_conn;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.apps.site_cfgs.Xoa_site_cfg_loader__inet;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_cmd_keys;
+import gplx.xowa.bldrs.wkrs.Xob_cmd;
+import gplx.xowa.bldrs.wms.sites.Site_core_db;
+import gplx.xowa.bldrs.wms.sites.Site_core_itm;
+import gplx.xowa.bldrs.wms.sites.Site_json_parser;
+import gplx.xowa.bldrs.wms.sites.Site_meta_itm;
+import gplx.xowa.wikis.domains.Xow_abrv_xo_;
+import gplx.xowa.wikis.domains.Xow_domain_regy;
 public class Xob_site_meta_cmd implements Xob_cmd {
 	private final Xob_bldr bldr;
 	private String[] wikis; private Io_url db_url; private DateAdp cutoff_time;
@@ -66,7 +88,7 @@ public class Xob_site_meta_cmd implements Xob_cmd {
 			}
 			byte[] domain_bry = Bry_.new_u8(domain_str);
 			byte[] site_abrv = Xow_abrv_xo_.To_bry(domain_bry);
-			json_db.Tbl__core().Insert(site_abrv, domain_bry, Bool_.N, json_date, json_text);
+			json_db.Tbl__core().Insert(site_abrv, domain_bry, BoolUtl.N, json_date, json_text);
 		}
 
 		reqd_len = reqd_ary.length;

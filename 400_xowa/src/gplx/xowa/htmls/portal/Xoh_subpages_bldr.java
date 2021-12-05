@@ -13,11 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.portal; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.core.htmls.*;
 public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 	private final Bry_bfr html_bfr = Bry_bfr_.Reset(255), path_bfr = Bry_bfr_.Reset(255), subpage_caption_bfr = Bry_bfr_.Reset(255);
@@ -36,7 +37,7 @@ public class Xoh_subpages_bldr implements gplx.core.brys.Bfr_arg {
 
 		// split ttl by slashes; EX: "Help:A/B/C" -> "Help:A", "B", "C"
 		byte[] raw = ttl.Raw();
-		this.segs = Bry_split_.Split(raw, Byte_ascii.Slash);
+		this.segs = Bry_split_.Split(raw, AsciiByte.Slash);
 
 		// build html
 		this.wiki = wiki;

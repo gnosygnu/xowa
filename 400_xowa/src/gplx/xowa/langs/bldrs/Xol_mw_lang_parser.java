@@ -14,6 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.bldrs; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.consoles.*;
 import gplx.langs.phps.*; import gplx.core.log_msgs.*;
@@ -144,12 +146,12 @@ public class Xol_mw_lang_parser {
 						break;
 					case Tid_fallback:
 						byte[] fallback_bry = Php_itm_.Parse_bry(line.Val());
-						if (!Bry_.Eq(fallback_bry, Bool_.True_bry))	// MessagesEn.php has fallback = false; ignore
+						if (!Bry_.Eq(fallback_bry, BoolUtl.TrueBry))	// MessagesEn.php has fallback = false; ignore
 							lang.Fallback_bry_(fallback_bry);
 						break;
 					case Tid_rtl:
 						byte[] rtl_bry = Php_itm_.Parse_bry(line.Val());
-						boolean dir_rtl = Bry_.Eq(rtl_bry, Bool_.True_bry);
+						boolean dir_rtl = Bry_.Eq(rtl_bry, BoolUtl.TrueBry);
 						lang.Dir_ltr_(!dir_rtl);
 						break;
 					case Tid_separatorTransformTable:
@@ -224,7 +226,7 @@ public class Xol_mw_lang_parser {
 		for (int i = 0; i < brys_len; i+=2) {
 			byte[] kv_key = brys[i + key_dif];
 			byte[] kv_val = brys[i + val_dif];
-			Bry_.Replace_all_direct(kv_val, Byte_ascii.Underline, Byte_ascii.Space); // NOTE: siteInfo.xml names have " " not "_" (EX: "User talk"). for now, follow that convention
+			Bry_.Replace_all_direct(kv_val, AsciiByte.Underline, AsciiByte.Space); // NOTE: siteInfo.xml names have " " not "_" (EX: "User talk"). for now, follow that convention
 			int ns_id = Id_by_mw_name(kv_key);
 //				if (ns_id == Xow_ns_.Tid__null) throw Err_mgr.Instance.fmt_auto_(GRP_KEY, "namespace_names", String_.new_u8(kv_key));
 			rv[i / 2] = new Xow_ns(ns_id, Xow_ns_case_.Tid__1st, kv_val, false);	// note that Xow_ns is being used as glorified id-name struct; case_match and alias values do not matter
@@ -315,7 +317,7 @@ public class Xol_mw_lang_parser {
 				num_mgr.Separators_mgr().Set(key_bry, val_bry);
 			else throw Err_.new_unhandled(String_.new_u8(key_bry));	// NOTE: as of v1.22.2, all Messages only have a key of "." or "," DATE:2014-04-15
 		}
-	}	private static final byte[] Bry_separatorTransformTable_comma = new byte[] {Byte_ascii.Comma}, Bry_separatorTransformTable_dot = new byte[] {Byte_ascii.Dot};
+	}	private static final byte[] Bry_separatorTransformTable_comma = new byte[] {AsciiByte.Comma}, Bry_separatorTransformTable_dot = new byte[] {AsciiByte.Dot};
 	private void Parse_digitTransformTable(Php_line_assign line, Xol_num_mgr num_mgr) {
 		if (line.Val().Itm_tid() == Php_itm_.Tid_null) return;// en is null; $digitTransformTable = null;
 		Php_itm_ary ary = (Php_itm_ary)line.Val();

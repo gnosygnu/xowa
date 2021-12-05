@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.origs; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.origs; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.xowa.files.repos.*;
 import gplx.xowa.apps.wms.apis.origs.*;
 public class Xof_orig_mgr {
@@ -81,7 +83,7 @@ public class Xof_orig_mgr {
 	}
 	private void		Wkrs__clear() {wkrs = Xof_orig_wkr_.Ary_empty; wkrs_len = 0;}
 	public void			Wkrs__add(Xof_orig_wkr... v) {
-		wkrs = (Xof_orig_wkr[])Array_.Resize_add(wkrs, v);
+		wkrs = (Xof_orig_wkr[])ArrayUtl.Append(wkrs, v);
 		wkrs_len += v.length;
 	}
 	public void			Wkrs__set(Xof_orig_wkr... v) {

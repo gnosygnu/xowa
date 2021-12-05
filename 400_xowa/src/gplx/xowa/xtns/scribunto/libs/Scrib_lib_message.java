@@ -13,13 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.xtns.scribunto.*;
-import gplx.core.primitives.*; import gplx.langs.htmls.*;
-import gplx.xowa.apps.gfs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.parsers.*;
-import gplx.xowa.xtns.scribunto.procs.*;
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.Hash_adp_bry;
+import gplx.Io_url;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.String_;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.apps.gfs.Gfs_php_converter;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.msgs.Xol_msg_itm;
+import gplx.xowa.langs.msgs.Xol_msg_itm_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.xtns.scribunto.Scrib_core;
+import gplx.xowa.xtns.scribunto.Scrib_lib;
+import gplx.xowa.xtns.scribunto.Scrib_lua_mod;
+import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_args;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_mgr;
+import gplx.xowa.xtns.scribunto.procs.Scrib_proc_rslt;
 public class Scrib_lib_message implements Scrib_lib {
 	public Scrib_lib_message(Scrib_core core) {this.core = core;} private Scrib_core core;
 	public String Key() {return "mw.message";}
@@ -81,7 +102,7 @@ class Scrib_lib_message_data {
 					break; 
 				case Key_tid_rawMessage:	raw_msg_key = kv.Val_to_bry(); break;
 				case Key_tid_lang:			lang_key = kv.Val_to_bry(); break;
-				case Key_tid_useDB:			use_db = Bool_.Cast(kv.Val()); break;
+				case Key_tid_useDB:			use_db = BoolUtl.Cast(kv.Val()); break;
 				case Key_tid_title:			title_bry = kv.Val_to_bry(); break;
 				case Key_tid_params:
 					Keyval[] args_ary = (Keyval[])kv.Val();
@@ -127,7 +148,7 @@ class Scrib_lib_message_data {
 		switch (chk_tid) {
 			case Check_tid_exists		: return Bry_.Len_gt_0(msg_val);
 			case Check_tid_isBlank		: return Bry_.Len_eq_0(msg_val);	// REF.MW: $message === false || $message === ''
-			case Check_tid_isDisabled	: return Bry_.Len_eq_0(msg_val) || msg_val.length == 1 && msg_val[0] == Byte_ascii.Dash;	// REF.MW: $message === false || $message === '' || $message === '-'
+			case Check_tid_isDisabled	: return Bry_.Len_eq_0(msg_val) || msg_val.length == 1 && msg_val[0] == AsciiByte.Dash;	// REF.MW: $message === false || $message === '' || $message === '-'
 			default						: throw Err_.new_unhandled(chk_tid);
 		}
 	}

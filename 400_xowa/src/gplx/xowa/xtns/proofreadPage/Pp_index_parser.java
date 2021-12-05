@@ -13,11 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.*;
-import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.xtns.proofreadPage;
+import gplx.Bry_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_parser;
+import gplx.xowa.parsers.Xop_parser_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_itm_base;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.tmpls.Arg_itm_tkn;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
+import gplx.xowa.parsers.tmpls.Xot_invk_tkn;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag_;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.wikis.nss.Xow_ns_;
 class Pp_index_parser {
 	public static Pp_index_page Parse(Xowe_wiki wiki, Xop_ctx ctx, Xoa_ttl index_ttl, int ns_page_id) {
 		byte[] src = wiki.Cache_mgr().Page_cache().Get_src_else_load_or_null(index_ttl);
@@ -100,11 +118,11 @@ class Pp_index_page {
 		boolean add = bgn_page_ttl == Xoa_ttl.Null;		// if from is missing, default to bgn; EX: <pages index=A to="A/5"/>
 		for (int i = 0; i < list_len; i++) {			// REF.MW:ProofreadPageRenderer|renderPages
 			Xoa_ttl ttl = (Xoa_ttl)page_ttls.Get_at(i);
-			if (	ttl.Eq_page_db(bgn_page_ttl))	{add = Bool_.Y; bgn_page_ref.Val_(i);}
+			if (	ttl.Eq_page_db(bgn_page_ttl))	{add = BoolUtl.Y; bgn_page_ref.Val_(i);}
 			if (add) rv.Add(ttl);
 			if (	end_page_ttl != Xoa_ttl.Null		// if to is missing default to end;
 				&&	ttl.Eq_page_db(end_page_ttl)
-				)									{add = Bool_.N; end_page_ref.Val_(i);}
+				)									{add = BoolUtl.N; end_page_ref.Val_(i);}
 		}
 		if (bgn_page_ref.Val() == -1) bgn_page_ref.Val_(0);				// NOTE: set "from" which will be passed to {{MediaWiki:Proofreadpage_header_template}}; DATE:2014-05-21
 		if (end_page_ref.Val() == -1) end_page_ref.Val_(list_len - 1);  // NOTE: set "to"   which will be passed to {{MediaWiki:Proofreadpage_header_template}}; DATE:2014-05-21

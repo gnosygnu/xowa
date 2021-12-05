@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.tmpls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.*;
 import gplx.xowa.xtns.pfuncs.*;
 public class Xop_func_arg_itm {
 	public byte[] key;
@@ -26,14 +28,14 @@ public class Xop_func_arg_itm {
 		for (int i = 0; i < len; ++i) {
 			byte b = bry[i];
 			switch (b) {
-				case Byte_ascii.Eq:
+				case AsciiByte.Eq:
 					if (mode_is_key) {
 						mode_is_key = false;
 						key = Bry_.Mid(bry, bgn, end);
 						bgn = end = -1;
 					}
 					break;
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+				case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 					break;
 				default:
 					if (bgn == -1) bgn = i;

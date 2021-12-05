@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_find_;
@@ -72,7 +72,7 @@ public class Xoh_page_wtr_wkr_ {
 		}
 	}
 	public static void Bld_head_end(Bry_bfr html_bfr, Bry_bfr tmp_bfr, Xoae_page page) {
-		byte[] head_end = Xopg_tag_wtr.Write(tmp_bfr, Bool_.Y, Xopg_tag_wtr_cbk_.Basic, page.Html_data().Custom_head_tags());
+		byte[] head_end = Xopg_tag_wtr.Write(tmp_bfr, BoolUtl.Y, Xopg_tag_wtr_cbk_.Basic, page.Html_data().Custom_head_tags());
 		if (Bry_.Len_eq_0(head_end)) return;
 		int insert_pos = Bry_find_.Find_fwd(html_bfr.Bfr(), Gfh_tag_.Head_rhs);
 		if (insert_pos == Bry_find_.Not_found) {
@@ -82,7 +82,7 @@ public class Xoh_page_wtr_wkr_ {
 		html_bfr.Insert_at(insert_pos, head_end);
 	}
 	public static void Bld_html_end(Bry_bfr html_bfr, Bry_bfr tmp_bfr, Xoae_page page) {
-		byte[] html_end = Xopg_tag_wtr.Write(tmp_bfr, Bool_.Y, Xopg_tag_wtr_cbk_.Basic, page.Html_data().Custom_tail_tags());
+		byte[] html_end = Xopg_tag_wtr.Write(tmp_bfr, BoolUtl.Y, Xopg_tag_wtr_cbk_.Basic, page.Html_data().Custom_tail_tags());
 		if (html_end == null) return;
 		int insert_pos = Bry_find_.Find_bwd(html_bfr.Bfr(), Gfh_tag_.Html_rhs, html_bfr.Len());
 		if (insert_pos == Bry_find_.Not_found) {

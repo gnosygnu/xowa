@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.langs.*;
 class Pft_fmt_itm_seg_int implements Pft_fmt_itm {
 	public Pft_fmt_itm_seg_int(int segIdx, int len, boolean fixed_len) {this.segIdx = segIdx; this.fixed_len = fixed_len; this.len = len;} private int segIdx, len; boolean fixed_len;
@@ -106,7 +108,7 @@ class Pft_fmt_itm_iso_fmt implements Pft_fmt_itm {
 	public int TypeId() {return Pft_fmt_itm_.Tid_iso_fmt;}
 	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {
 		bfr.Add_str_a7(date.XtoStr_fmt("yyyy-MM-dd"));
-		bfr.Add_byte(Byte_ascii.Ltr_T);
+		bfr.Add_byte(AsciiByte.Ltr_T);
 		bfr.Add_str_a7(date.XtoStr_fmt("HH:mm:ss"));
 		bfr.Add_str_a7(date.XtoStr_tz());
 	}
@@ -117,7 +119,7 @@ class Pft_fmt_itm_rfc_5322 implements Pft_fmt_itm {
 	public void Fmt(Bry_bfr bfr, Xowe_wiki wiki, Xol_lang_itm lang, DateAdp date, Pft_func_formatdate_bldr bldr) {// Mon, 02 Jan 2012 10:15:01 +0000
 		int dow = date.DayOfWeek();
 		DateAdpTranslator_xapp.Translate(wiki, lang, DateAdp_.SegIdx_dayOfWeek, dow, bfr);
-		bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space);
+		bfr.Add_byte(AsciiByte.Comma).Add_byte(AsciiByte.Space);
 		bfr.Add_str_a7(date.XtoStr_fmt("dd MMM yyyy HH:mm:ss"));	// NOTE: always UTC time 
 		bfr.Add(CONST_timezone);									// NOTE: always UTC time zone
 	}	private static final byte[] CONST_timezone = Bry_.new_a7(" +0000");

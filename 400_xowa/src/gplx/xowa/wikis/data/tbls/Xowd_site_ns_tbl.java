@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*;
-import gplx.dbs.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.wikis.data.tbls;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_tbl;
+import gplx.dbs.Db_tbl_owner;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
 public class Xowd_site_ns_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_id, fld_name, fld_case, fld_count, fld_is_alias;
@@ -55,7 +66,7 @@ public class Xowd_site_ns_tbl implements Db_tbl {
 				byte[] ns_name		= rdr.Read_bry_by_str(fld_name);
 				byte ns_case_match	= rdr.Read_byte(fld_case);
 				int ns_count		= rdr.Read_int(fld_count);
-				boolean ns_is_alias	= rdr.Read_byte(fld_is_alias) == Bool_.Y_byte;
+				boolean ns_is_alias	= rdr.Read_byte(fld_is_alias) == BoolUtl.YByte;
 				ns_mgr.Add_new(ns_id, ns_name, ns_case_match, ns_is_alias);
 				if (ns_id < 0) continue;			// don't load counts for Special / Media					
 				Xow_ns ns = ns_mgr.Ids_get_or_null(ns_id);

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.lst; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.lst; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.wikis.pages.wtxts.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.hdrs.*;
 class Lst_pfunc_lsth_ {
@@ -58,7 +59,7 @@ class Lst_pfunc_lsth_ {
 
 			// get txt_end; note that this needs to handle multiple trailing \n which is included in hdr.Src_end()
 			int txt_end = Bry_find_.Find_fwd(src, Bry__hdr_end, txt_bgn);				// find "=\n"
-			txt_end = Bry_find_.Find_bwd__skip(src, txt_end, txt_bgn, Byte_ascii.Eq);	// skip bwd to get to pos before 1st "="; EX: "===\n" -> find "=="
+			txt_end = Bry_find_.Find_bwd__skip(src, txt_end, txt_bgn, AsciiByte.Eq);	// skip bwd to get to pos before 1st "="; EX: "===\n" -> find "=="
 
 			// remove ws
 			txt_bgn = Bry_find_.Find_fwd_while_ws(src, txt_bgn, txt_end);

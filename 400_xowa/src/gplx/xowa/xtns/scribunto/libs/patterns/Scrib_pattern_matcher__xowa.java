@@ -21,7 +21,7 @@ import gplx.String_;
 import gplx.langs.regxs.Regx_group;
 import gplx.langs.regxs.Regx_match;
 import gplx.objects.strings.unicodes.Ustring;
-import gplx.objects.strings.unicodes.Ustring_;
+import gplx.objects.strings.unicodes.UstringUtl;
 import gplx.xowa.xtns.scribunto.libs.Scrib_lib_ustring_gsub_mgr;
 import gplx.xowa.xtns.scribunto.libs.Scrib_regx_converter;
 import org.luaj.vm2.lib.Match_state;
@@ -32,7 +32,7 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 
 	@Override public Regx_match Match_one(Ustring src_ucs, String pat_str, int bgn_as_codes, boolean replace) {
 		regx_converter.patternToRegex(pat_str, Scrib_regx_converter.Anchor_pow, true);
-		Str_find_mgr__xowa mgr = new Str_find_mgr__xowa(src_ucs, Ustring_.New_codepoints(pat_str), bgn_as_codes, false, false);
+		Str_find_mgr__xowa mgr = new Str_find_mgr__xowa(src_ucs, UstringUtl.NewCodepoints(pat_str), bgn_as_codes, false, false);
 		mgr.Process(false);
 		
 		// convert to Regx_match
@@ -40,8 +40,8 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 		int find_end = mgr.End();
 		boolean found = find_bgn != -1;
 		if (found) {
-			find_bgn = src_ucs.Map_data_to_char(find_bgn);
-			find_end = src_ucs.Map_data_to_char(find_end);
+			find_bgn = src_ucs.MapDataToChar(find_bgn);
+			find_end = src_ucs.MapDataToChar(find_end);
 		}
 		
 		Regx_group[] groups = Make_groups(src_ucs, mgr.Captures_ary());
@@ -51,16 +51,16 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 	@Override public String Gsub(Scrib_lib_ustring_gsub_mgr gsub_mgr, Ustring src_ucs, String pat_str, int bgn_as_codes) {
 		// get src vars
 		String src_str = src_ucs.Src();
-		int src_len = src_ucs.Len_in_data();
+		int src_len = src_ucs.LenInData();
 		// TOMBSTONE:do not return early if String.empty; allows `string.gsub('', '$', 'a')` ISSUE#:731; DATE:2020-07-20
 		// if (src_len == 0) return src_str;
 		int src_max = src_len + 1;
 		
 		// get pat vars
 		regx_converter.patternToRegex(pat_str, Scrib_regx_converter.Anchor_G, true);
-		Ustring pat = Ustring_.New_codepoints(pat_str);
-		int pat_len = pat.Len_in_data();
-		final boolean pat_is_anchored = pat_len > 0 && pat.Get_data(0) == '^';
+		Ustring pat = UstringUtl.NewCodepoints(pat_str);
+		int pat_len = pat.LenInData();
+		final boolean pat_is_anchored = pat_len > 0 && pat.GetData(0) == '^';
 
 		// get match vars
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
@@ -95,7 +95,7 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 			// no match; add current byte
 			else if (src_pos < src_len) {
 				// lbuf.append( (byte) src.Get_data( src_pos++ ) );
-				tmp_bfr.Add_u8_int(src_ucs.Get_data(src_pos++));
+				tmp_bfr.Add_u8_int(src_ucs.GetData(src_pos++));
 			}
 			else
 				break;
@@ -122,8 +122,8 @@ class Scrib_pattern_matcher__xowa extends Scrib_pattern_matcher {
 			int capture_bgn = captures[i];
 			int capture_end = captures[i + 1];
 			// FOOTNOTE:REGX_GROUP
-			int bgn_in_chars = src_ucs.Map_data_to_char(capture_bgn);
-			int end_in_chars = src_ucs.Map_data_to_char(capture_end);
+			int bgn_in_chars = src_ucs.MapDataToChar(capture_bgn);
+			int end_in_chars = src_ucs.MapDataToChar(capture_end);
  			String val = String_.Mid(src_ucs.Src(), bgn_in_chars, end_in_chars);
 			groups[i / 2] = new Regx_group(true, capture_bgn, capture_end, val);
 		}

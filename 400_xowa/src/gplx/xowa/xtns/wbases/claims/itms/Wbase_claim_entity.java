@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.claims.itms;
 
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.Int_;
 import gplx.String_;
@@ -70,11 +70,11 @@ public class Wbase_claim_entity extends Wbase_claim_base {
 	private static byte[] ToId(byte entityType, byte[] numericId) {
 		switch (entityType) {
 			case Wbase_claim_entity_type_.Tid__item:
-				return Bry_.Add(Byte_ascii.Ltr_Q, numericId);
+				return Bry_.Add(AsciiByte.Ltr_Q, numericId);
 			case Wbase_claim_entity_type_.Tid__property:
-				return Bry_.Add(Byte_ascii.Ltr_P, numericId);
+				return Bry_.Add(AsciiByte.Ltr_P, numericId);
 			case Wbase_claim_entity_type_.Tid__lexeme:
-				return Bry_.Add(Byte_ascii.Ltr_L, numericId);
+				return Bry_.Add(AsciiByte.Ltr_L, numericId);
 			case Wbase_claim_entity_type_.Tid__form:
 			case Wbase_claim_entity_type_.Tid__sense:
 			default:

@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.phps; import gplx.*;
 import gplx.core.btries.*; import gplx.core.log_msgs.*;
+import gplx.objects.strings.AsciiByte;
 public class Php_parser {
 	private final Btrie_slim_mgr trie = Btrie_slim_mgr.ci_a7();	// NOTE:ci:PHP tkns are ASCII
 	private final Btrie_rv trv = new Btrie_rv();
@@ -48,8 +49,8 @@ public class Php_parser {
 		Init_lxr(list, new Php_lxr_keyword("true", Php_tkn_.Tid_true));
 		Init_lxr(list, new Php_lxr_keyword("array", Php_tkn_.Tid_ary));
 		Init_lxr(list, new Php_lxr_num());
-		Init_lxr(list, new Php_lxr_quote(Byte_ascii.Apos));
-		Init_lxr(list, new Php_lxr_quote(Byte_ascii.Quote));
+		Init_lxr(list, new Php_lxr_quote(AsciiByte.Apos));
+		Init_lxr(list, new Php_lxr_quote(AsciiByte.Quote));
 		lxrs = (Php_lxr[])list.ToAry(Php_lxr.class);
 		lxrs_len = list.Len();
 	}

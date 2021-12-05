@@ -13,10 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import gplx.core.ios.*;
-import gplx.xowa.guis.cbks.js.*; import gplx.xowa.files.repos.*;
-import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.files;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.files.repos.Xof_repo_tid_;
+import gplx.xowa.guis.cbks.js.Js_img_wkr;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
 public class Xof_fsdb_itm implements Xof_file_itm {
 	private int lnki_upright_patch;
 	public byte[]				Lnki_wiki_abrv()			{return lnki_wiki_abrv;} private byte[] lnki_wiki_abrv;
@@ -49,10 +57,10 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public int					File_w()					{return file_w;} private int file_w;
 	public long					File_size()					{return file_size;} private long file_size;
 	public boolean				Dbmeta_is_new()				{return false;}
-	public boolean				Orig_exists()				{return orig_exists;} public void Orig_exists_y_() {orig_exists = Bool_.Y;} public void Orig_exists_n_() {orig_exists = Bool_.N;} private boolean orig_exists;
-	public boolean				File_exists()				{return file_exists;} public void File_exists_y_() {file_exists = Bool_.Y;} public void File_exists_n_() {file_exists = Bool_.N;} public void File_exists_(boolean v) {file_exists = v;} private boolean file_exists;
+	public boolean				Orig_exists()				{return orig_exists;} public void Orig_exists_y_() {orig_exists = BoolUtl.Y;} public void Orig_exists_n_() {orig_exists = BoolUtl.N;} private boolean orig_exists;
+	public boolean				File_exists()				{return file_exists;} public void File_exists_y_() {file_exists = BoolUtl.Y;} public void File_exists_n_() {file_exists = BoolUtl.N;} public void File_exists_(boolean v) {file_exists = v;} private boolean file_exists;
 	public boolean 				File_exists_in_cache()		{return file_exists_in_cache;} private boolean file_exists_in_cache;
-	public boolean				File_resized()				{return file_resized;} public void File_resized_y_() {file_resized = Bool_.Y;} private boolean file_resized;
+	public boolean				File_resized()				{return file_resized;} public void File_resized_y_() {file_resized = BoolUtl.Y;} private boolean file_resized;
 	public boolean				Fsdb_insert()				{return fsdb_insert;} public void Fsdb_insert_y_() {fsdb_insert = true;} private boolean fsdb_insert;
 	public int					Hdump_mode()				{return hdump_mode;} private int hdump_mode = Hdump_mode__null;
 	public int					Xfer_idx()					{return xfer_idx;} private int xfer_idx;
@@ -82,7 +90,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	public void	Init_at_html(int exec_tid, Xof_img_size img_size, Xof_repo_itm repo, Xof_url_bldr url_bldr) {
 		Calc_html_size(exec_tid, img_size);
 		this.html_view_url = url_bldr.To_url_trg(repo, this, file_is_orig);
-		this.html_orig_url = url_bldr.To_url_trg(repo, this, Bool_.Y);
+		this.html_orig_url = url_bldr.To_url_trg(repo, this, BoolUtl.Y);
 	}
 	public void Init_at_gallery_bgn(int html_w, int html_h, int file_w) {
 		this.html_w = html_w; this.html_h = html_h; 
@@ -166,7 +174,7 @@ public class Xof_fsdb_itm implements Xof_file_itm {
 	private void Calc_html_size(int exec_tid, Xof_img_size img_size) {
 		this.Lnki_time_validate();
 		if (orig_ext.Id_is_audio_strict())								// audio does not have html size calculated; everything else does
-			file_is_orig = Bool_.Y;
+			file_is_orig = BoolUtl.Y;
 		else {
 			img_size.Html_size_calc(exec_tid, lnki_w, lnki_h, lnki_type, lnki_upright_patch, lnki_upright, orig_ext.Id(), orig_w, orig_h, Xof_img_size.Thumb_width_img);
 			if (lnki_type != Xop_lnki_type.Tid_orig_known) {	// NOTE: hdump sets html_w / html_h; don't override; needed for packed-gallery; PAGE:en.w:Mexico; DATE:2016-08-10

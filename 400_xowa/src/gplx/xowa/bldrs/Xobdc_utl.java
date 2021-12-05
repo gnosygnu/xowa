@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.core.ios.*; import gplx.core.lists.*;
+package gplx.xowa.bldrs; import gplx.*;
+import gplx.core.ios.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.wikis.tdbs.*;
 class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 	public Io_sort_filCmd_reg() {}
@@ -24,12 +25,12 @@ class Io_sort_filCmd_reg implements Io_sort_filCmd { // 123|bgn|end|1
 		Bry_.Copy_to(stream.Bfr(), key_bgn, key_end, prv_key, 0); prv_key_len = key_end - key_bgn; 
 	}	byte[] prv_key = new byte[1024]; int prv_key_len = 0;
 	public void Fil_bgn(Io_line_rdr stream) {
-		bfr.Add_int_variable(fil_idx++).Add_byte(Byte_ascii.Pipe);
-		bfr.Add_mid(stream.Bfr(), stream.Key_pos_bgn(), stream.Key_pos_end()).Add_byte(Byte_ascii.Pipe);
+		bfr.Add_int_variable(fil_idx++).Add_byte(AsciiByte.Pipe);
+		bfr.Add_mid(stream.Bfr(), stream.Key_pos_bgn(), stream.Key_pos_end()).Add_byte(AsciiByte.Pipe);
 	}	
 	public void Fil_end() {
-		bfr.Add_mid(prv_key, 0, prv_key_len).Add_byte(Byte_ascii.Pipe)
-			.Add_int_variable(itm_count).Add_byte(Byte_ascii.Nl);
+		bfr.Add_mid(prv_key, 0, prv_key_len).Add_byte(AsciiByte.Pipe)
+			.Add_int_variable(itm_count).Add_byte(AsciiByte.Nl);
 		itm_count = 0;
 	}
 	public void Flush(Io_url fil) {

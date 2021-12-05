@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
 import gplx.core.brys.fmtrs.*;
 import gplx.langs.htmls.encoders.*; import gplx.langs.htmls.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*; import gplx.xowa.xtns.wbases.core.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.apps.apis.xowa.html.*; import gplx.xowa.wikis.xwikis.*;
 class Wdata_fmtr__slink_grp implements gplx.core.brys.Bfr_arg {
@@ -152,7 +153,7 @@ class Wdata_fmtr__slink_badges implements gplx.core.brys.Bfr_arg {
 			byte[] name = Bry_.Empty, cls = Bry_.Empty;
 			if (lbl != null) {
 				name = lbl.Text();
-				cls = Bry_.Replace(lbl.Text_en(), Byte_ascii.Space_bry, Bry_.Empty);	// NOTE: use Text_en; "featured article" -> "featuredarticle"; same for "good article" -> "goodarticle"
+				cls = Bry_.Replace(lbl.Text_en(), AsciiByte.SpaceBry, Bry_.Empty);	// NOTE: use Text_en; "featured article" -> "featuredarticle"; same for "good article" -> "goodarticle"
 			}
 			fmtr_row.Bld_bfr_many(bfr, ttl, cls, name);
 		}

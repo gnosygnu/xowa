@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.parsers; import gplx.*;
 import gplx.core.primitives.*; import gplx.langs.jsons.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*;
 public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 	public Wdata_doc_parser_v1(Gfo_usr_dlg usr_dlg) {this.usr_dlg = usr_dlg;} private Gfo_usr_dlg usr_dlg;
@@ -28,7 +29,7 @@ public class Wdata_doc_parser_v1 implements Wdata_doc_parser {
 				case Json_itm_.Tid__ary:	// "entity":["item",1]
 					Json_ary kv_val_as_ary = (Json_ary)kv_val;
 					Json_itm entity_id = kv_val_as_ary.Get_at(1);
-					return Bry_.Add(Byte_ascii.Ltr_q, entity_id.Data_bry());
+					return Bry_.Add(AsciiByte.Ltr_q, entity_id.Data_bry());
 				default:
 					throw Err_.new_unhandled(kv_val.Tid());
 			}

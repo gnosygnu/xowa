@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.glys; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import org.junit.*; import gplx.core.primitives.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.xtns.gallery.*;
+package gplx.xowa.htmls.core.wkrs.glys;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.xtns.gallery.Gallery_mgr_base_;
+import org.junit.Test;
 public class Xoh_gly_itm_wtr_tst {
 	private final Xoh_gly_itm_wtr_fxt fxt = new Xoh_gly_itm_wtr_fxt();
 	@Test  public void Basic() {
@@ -39,7 +46,7 @@ class Xoh_gly_itm_wtr_fxt {
 	private final Xoh_gly_itm_wtr wtr = new Xoh_gly_itm_wtr();
 	private final Bry_bfr tmp_bfr = Bry_bfr_.New();
 	public void Init__gly(byte mode, int xnde_w, int xnde_h, int xnde_per_row, int id, int itm_w, int div_1_w, int div_3_margin, String caption) {
-		wtr.Init(Bool_.N, mode, xnde_w, xnde_h, xnde_per_row, id, 0, 0, itm_w, div_1_w, div_3_margin, Xoh_gly_itm_data.Capt_tid__p, Bry_.new_a7(caption));
+		wtr.Init(BoolUtl.N, mode, xnde_w, xnde_h, xnde_per_row, id, 0, 0, itm_w, div_1_w, div_3_margin, Xoh_gly_itm_data.Capt_tid__p, Bry_.new_a7(caption));
 	}
 	public void Init__img(String href, String xowa_title, String xoimg) {
 		wtr.Img_wtr().Init_by_gly(gplx.core.brys.args.Bfr_arg__bry.New(Bry_.new_u8(href)), Bry_.new_u8(xowa_title), gplx.core.brys.args.Bfr_arg__bry.New(Bry_.new_u8(xoimg)));

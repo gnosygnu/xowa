@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.doms; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.doms; import gplx.*;
 import gplx.langs.htmls.*;
+import gplx.objects.strings.AsciiByte;
 public class Xoh_dom_ {
 	private static final byte[] Lt_bry = Bry_.new_a7("<"), Space_bry = Bry_.new_a7(" ");
 	public static byte[] Query_val_by_where(Xoh_find rv, byte[] src, byte[] where_nde, byte[] where_key, byte[] where_val, byte[] query_key, int bgn) {
@@ -44,21 +45,21 @@ public class Xoh_dom_ {
 	}
 	public static boolean Select_tag(Xoh_find rv, byte[] src, byte[] nde, byte[] key, int rng_bgn, int rng_end) {
 		int tag_bgn = Bry_find_.Find_fwd(src, nde, 		   rng_bgn, rng_end); 					if (tag_bgn == Bry_find_.Not_found) return false;
-		int tag_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, tag_bgn, rng_end); 					if (tag_end == Bry_find_.Not_found) return false;
+		int tag_end = Bry_find_.Find_fwd(src, AsciiByte.Gt, tag_bgn, rng_end); 					if (tag_end == Bry_find_.Not_found) return false;
 		int key_bgn = Bry_find_.Find_fwd(src, key, tag_bgn, tag_end);								if (key_bgn == Bry_find_.Not_found) return false;
 		int key_end = key_bgn + key.length;
-		int val_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);					if (val_bgn == Bry_find_.Not_found) return false;
+		int val_bgn = Bry_find_.Find_fwd(src, AsciiByte.Quote, key_end, tag_end);					if (val_bgn == Bry_find_.Not_found) return false;
 		++val_bgn;
-		int val_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);					if (val_end == Bry_find_.Not_found) return false;
+		int val_end = Bry_find_.Find_fwd(src, AsciiByte.Quote, val_bgn, tag_end);					if (val_end == Bry_find_.Not_found) return false;
 		rv.Set_all(tag_bgn, tag_end, key_bgn, key_end, val_bgn, val_end);
 		return true;
 	}
 	public static boolean Find_atr_val_in_tag(Xoh_find rv, byte[] src, byte[] key, int tag_bgn, int tag_end) {
 		int key_bgn = Bry_find_.Find_fwd(src, key, tag_bgn, tag_end);								if (key_bgn == Bry_find_.Not_found) return false;
 		int key_end = key_bgn + key.length;
-		int val_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Quote, key_end, tag_end);					if (val_bgn == Bry_find_.Not_found) return false;
+		int val_bgn = Bry_find_.Find_fwd(src, AsciiByte.Quote, key_end, tag_end);					if (val_bgn == Bry_find_.Not_found) return false;
 		++val_bgn;
-		int val_end = Bry_find_.Find_fwd(src, Byte_ascii.Quote, val_bgn, tag_end);					if (val_end == Bry_find_.Not_found) return false;
+		int val_end = Bry_find_.Find_fwd(src, AsciiByte.Quote, val_bgn, tag_end);					if (val_end == Bry_find_.Not_found) return false;
 		rv.Set_all(tag_bgn, tag_end, key_bgn, key_end, val_bgn, val_end);
 		return true;
 	}

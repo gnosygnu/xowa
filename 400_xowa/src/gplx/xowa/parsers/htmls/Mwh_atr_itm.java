@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.htmls; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Mwh_atr_itm {
 	public Mwh_atr_itm
 	( byte[] src, boolean valid, boolean repeated, boolean key_exists, int atr_bgn, int atr_end
@@ -46,9 +48,9 @@ public class Mwh_atr_itm {
 	public int Qte_tid() {return qte_tid;} private final int qte_tid;
 	public byte Qte_byte() {
 		switch (qte_tid) {
-			case Mwh_atr_itm_.Qte_tid__none:	return Byte_ascii.Null;
-			case Mwh_atr_itm_.Qte_tid__apos:	return Byte_ascii.Apos;
-			case Mwh_atr_itm_.Qte_tid__qute:	return Byte_ascii.Quote;
+			case Mwh_atr_itm_.Qte_tid__none:	return AsciiByte.Null;
+			case Mwh_atr_itm_.Qte_tid__apos:	return AsciiByte.Apos;
+			case Mwh_atr_itm_.Qte_tid__qute:	return AsciiByte.Quote;
 			default:							throw Err_.new_unhandled(qte_tid);
 		}
 	}
@@ -59,5 +61,5 @@ public class Mwh_atr_itm {
 	public byte[] Val_as_bry__blank_to_null() {byte[] rv = Val_as_bry(); return Bry_.Len_eq_0(rv) ? null : rv;}
 	public int Val_as_int_or(int or) {return val_bry == null ? Bry_.To_int_or__lax(src, val_bgn, val_end, or) : Bry_.To_int_or(val_bry, or);}
 	public boolean Val_as_bool_by_int() {return Val_as_int_or(0) == 1;}
-	public boolean Val_as_bool() {return Bry_.Eq(Bry_.Lcase__all(Val_as_bry()), Bool_.True_bry);}
+	public boolean Val_as_bool() {return Bry_.Eq(Bry_.Lcase__all(Val_as_bry()), BoolUtl.TrueBry);}
 }

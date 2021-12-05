@@ -13,9 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.fsdb.fs_roots; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
-import gplx.core.primitives.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.files.*; import gplx.xowa.files.repos.*; import gplx.fsdb.meta.*;	
+package gplx.xowa.files.fsdb.fs_roots;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.core.primitives.String_obj_ref;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_ext;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.files.Xof_img_size;
+import gplx.xowa.files.Xof_url_bldr;
+import gplx.xowa.files.repos.Xof_repo_itm;
+import gplx.xowa.files.repos.Xof_repo_tid_;
 class Fs_root_mgr {
 	private final Xowe_wiki wiki;
 	private final Fs_root_wkr wkr = new Fs_root_wkr();
@@ -40,7 +51,7 @@ class Fs_root_mgr {
 
 		// gen cache_orig_url
 		if (repo == null) repo = wiki.File__repo_mgr().Repos_get_by_wiki(wiki.Domain_bry()).Trg(); // assert repo
-		Io_url cache_orig_url = url_bldr.To_url_trg(repo, fsdb_itm, Bool_.Y);
+		Io_url cache_orig_url = url_bldr.To_url_trg(repo, fsdb_itm, BoolUtl.Y);
 		fsdb_itm.Html_orig_url_(cache_orig_url);
 
 		// update html_w, html_h, html_orig_url, html_view_url
@@ -57,7 +68,7 @@ class Fs_root_mgr {
 		}
 		else {
 			// make thumb by imagemagick
-			Io_url cache_thumb_url = url_bldr.To_url_trg(repo, fsdb_itm, Bool_.N);
+			Io_url cache_thumb_url = url_bldr.To_url_trg(repo, fsdb_itm, BoolUtl.N);
 			if (!Io_mgr.Instance.ExistsFil(cache_thumb_url)) {
 				if (!wiki.Appe().File_mgr().Img_mgr().Wkr_resize_img().Resize_exec(actl_orig_url, cache_thumb_url, fsdb_itm.Html_w(), fsdb_itm.Html_h(), fsdb_itm.Orig_ext().Id(), tmp_resize_result))
 					return false;

@@ -13,10 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.searchers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
-import gplx.xowa.wikis.domains.*;
-import gplx.xowa.addons.wikis.searchs.gui.htmlbars.*;
-import gplx.xowa.addons.wikis.searchs.searchers.crts.*;
+package gplx.xowa.addons.wikis.searchs.searchers;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.wikis.searchs.searchers.crts.Srch_crt_scanner_syms;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
 public class Srch_search_qry {
 	public Srch_search_qry(byte tid, Srch_ns_mgr ns_mgr, Srch_search_phrase phrase, int slab_bgn, int slab_end) {
 		this.Tid = tid;
@@ -44,6 +45,6 @@ public class Srch_search_qry {
 		return new Srch_search_qry(Tid__search_page, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), Srch_crt_scanner_syms.Dflt, auto_wildcard, search_orig), slab_bgn, slab_end);
 	}
 	public static Srch_search_qry New__drd(Xow_wiki wiki, Srch_ns_mgr ns_mgr, byte[] search_orig, int slab_bgn, int slab_end) {
-		return new Srch_search_qry(Tid__android, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), Srch_crt_scanner_syms.Dflt, Bool_.Y, search_orig), slab_bgn, slab_end);
+		return new Srch_search_qry(Tid__android, ns_mgr, Srch_search_phrase.New(wiki.Case_mgr(), Srch_crt_scanner_syms.Dflt, BoolUtl.Y, search_orig), slab_bgn, slab_end);
 	}
 }

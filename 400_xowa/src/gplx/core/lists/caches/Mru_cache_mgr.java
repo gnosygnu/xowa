@@ -13,9 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists.caches; import gplx.*;
-import gplx.core.lists.*;
-import gplx.core.logs.*;
+package gplx.core.lists.caches;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Datetime_now;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Io_mgr;
+import gplx.Object_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.core.lists.Sorted_hash;
+import gplx.core.logs.Gfo_log_wtr;
+import gplx.objects.primitives.BoolUtl;
 public class Mru_cache_mgr {
 	private final Mru_cache_time_mgr time_mgr;
 	private final Gfo_log_wtr log_wtr;
@@ -66,7 +76,7 @@ public class Mru_cache_mgr {
 			key_hash.Del(old.Key());
 			cache_size -= old.Size();
 			if (log_wtr != null) {
-				Write(Bool_.Y, old);
+				Write(BoolUtl.Y, old);
 				log_wtr.Write(log_bfr);
 			}
 		}
@@ -77,7 +87,7 @@ public class Mru_cache_mgr {
 		int vals_len = vals.length;
 		for (int i = vals_len - 1; i >= 0; i--) {
 			Mru_cache_itm val = (Mru_cache_itm)vals[i];
-			Write(Bool_.N, val);
+			Write(BoolUtl.N, val);
 		}
 		Io_mgr.Instance.SaveFilBfr(log_wtr.Fil_dir().GenSubFil("cache_mru_final.csv"), log_bfr);
 		log_bfr.Clear();

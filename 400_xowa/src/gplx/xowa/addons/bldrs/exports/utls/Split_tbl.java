@@ -13,8 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.utls; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*;
+package gplx.xowa.addons.bldrs.exports.utls;
+import gplx.Int_;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_;
+import gplx.dbs.DbmetaFldList;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
 public interface Split_tbl {
 	String						Tbl_name();
 	boolean						Layout_is_lot();
@@ -25,39 +31,39 @@ public interface Split_tbl {
 }
 class Split_tbl__page implements Split_tbl {
 	public String				Tbl_name()		{return "page";}
-	public boolean					Layout_is_lot() {return Bool_.N;}
+	public boolean					Layout_is_lot() {return BoolUtl.N;}
 	public String[]				Fld_pkeys()		{return String_.Ary("page_id");}
 	public String				Fld_blob()		{return String_.Empty;}
-	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.xowa.wikis.data.tbls.Xowd_page_tbl(Db_conn_.Noop, Bool_.N).Flds__all(); return flds;} private DbmetaFldList flds;
+	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.xowa.wikis.data.tbls.Xowd_page_tbl(Db_conn_.Noop, BoolUtl.N).Flds__all(); return flds;} private DbmetaFldList flds;
 	public Db_conn				Wiki_conn__get_or_new(Xow_wiki wiki, int db_id)	{return wiki.Data__core_mgr().Db__core().Conn();}
 }
 class Split_tbl__fsdb_fil implements Split_tbl {
 	public String				Tbl_name()		{return "fsdb_fil";}
-	public boolean					Layout_is_lot() {return Bool_.N;}
+	public boolean					Layout_is_lot() {return BoolUtl.N;}
 	public String[]				Fld_pkeys()		{return String_.Ary("fil_id");}
 	public String				Fld_blob()		{return String_.Empty;}
-	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.fsdb.data.Fsd_fil_tbl(Db_conn_.Noop, Bool_.N, gplx.fsdb.meta.Fsm_mnt_mgr.Mnt_idx_main).flds; return flds;} private DbmetaFldList flds;
+	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.fsdb.data.Fsd_fil_tbl(Db_conn_.Noop, BoolUtl.N, gplx.fsdb.meta.Fsm_mnt_mgr.Mnt_idx_main).flds; return flds;} private DbmetaFldList flds;
 	public Db_conn				Wiki_conn__get_or_new(Xow_wiki wiki, int db_id)	{return wiki.File__mnt_mgr().Mnts__get_main().Atr_mgr().Db__core().Conn();}
 }
 class Split_tbl__fsdb_thm implements Split_tbl {
 	public String				Tbl_name()		{return "fsdb_thm";}
-	public boolean					Layout_is_lot() {return Bool_.N;}
+	public boolean					Layout_is_lot() {return BoolUtl.N;}
 	public String[]				Fld_pkeys()		{return String_.Ary("thm_id");}
 	public String				Fld_blob()		{return String_.Empty;}
-	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.fsdb.data.Fsd_thm_tbl(Db_conn_.Noop, Bool_.N, gplx.fsdb.meta.Fsm_mnt_mgr.Mnt_idx_main, Bool_.Y).flds; return flds;} private DbmetaFldList flds;
+	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.fsdb.data.Fsd_thm_tbl(Db_conn_.Noop, BoolUtl.N, gplx.fsdb.meta.Fsm_mnt_mgr.Mnt_idx_main, BoolUtl.Y).flds; return flds;} private DbmetaFldList flds;
 	public Db_conn				Wiki_conn__get_or_new(Xow_wiki wiki, int db_id)	{return wiki.File__mnt_mgr().Mnts__get_main().Atr_mgr().Db__core().Conn();}
 }
 class Split_tbl__fsdb_reg implements Split_tbl {
 	public String				Tbl_name()		{return "orig_reg";}
-	public boolean					Layout_is_lot() {return Bool_.N;}
+	public boolean					Layout_is_lot() {return BoolUtl.N;}
 	public String[]				Fld_pkeys()		{return String_.Ary("orig_ttl");}
 	public String				Fld_blob()		{return String_.Empty;}
-	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.xowa.files.origs.Xof_orig_tbl(Db_conn_.Noop, Bool_.N).flds; return flds;} private DbmetaFldList flds;
+	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.xowa.files.origs.Xof_orig_tbl(Db_conn_.Noop, BoolUtl.N).flds; return flds;} private DbmetaFldList flds;
 	public Db_conn				Wiki_conn__get_or_new(Xow_wiki wiki, int db_id)	{return wiki.File__mnt_mgr().Mnts__get_main().Atr_mgr().Db__core().Conn();}
 }
 class Split_tbl__srch_word implements Split_tbl {
 	public String				Tbl_name()		{return "search_word";}
-	public boolean					Layout_is_lot() {return Bool_.N;}
+	public boolean					Layout_is_lot() {return BoolUtl.N;}
 	public String[]				Fld_pkeys()		{return String_.Ary("word_id");}
 	public String				Fld_blob()		{return String_.Empty;}
 	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.xowa.addons.wikis.searchs.dbs.Srch_word_tbl(Db_conn_.Noop).flds; return flds;} private DbmetaFldList flds;
@@ -65,7 +71,7 @@ class Split_tbl__srch_word implements Split_tbl {
 }
 class Split_tbl__srch_link implements Split_tbl {
 	public String				Tbl_name()		{return "search_link";}
-	public boolean					Layout_is_lot() {return Bool_.N;}
+	public boolean					Layout_is_lot() {return BoolUtl.N;}
 	public String[]				Fld_pkeys()		{return String_.Ary("word_id", "page_id");}
 	public String				Fld_blob()		{return String_.Empty;}
 	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.xowa.addons.wikis.searchs.dbs.Srch_link_tbl(Db_conn_.Noop).Flds(); return flds;} private DbmetaFldList flds;
@@ -73,7 +79,7 @@ class Split_tbl__srch_link implements Split_tbl {
 }
 class Split_tbl__rndm_seq implements Split_tbl {
 	public String				Tbl_name()		{return "rndm_seq";}
-	public boolean					Layout_is_lot() {return Bool_.N;}
+	public boolean					Layout_is_lot() {return BoolUtl.N;}
 	public String[]				Fld_pkeys()		{return String_.Ary("mgr_idx", "rng_idx", "seq_idx");}
 	public String				Fld_blob()		{return String_.Empty;}
 	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.xowa.addons.wikis.pages.randoms.dbs.Rndm_seq_tbl(Db_conn_.Noop).Flds(); return flds;} private DbmetaFldList flds;
@@ -81,7 +87,7 @@ class Split_tbl__rndm_seq implements Split_tbl {
 }
 class Split_tbl__html implements Split_tbl {
 	public String				Tbl_name()		{return "html";}
-	public boolean					Layout_is_lot() {return Bool_.Y;}
+	public boolean					Layout_is_lot() {return BoolUtl.Y;}
 	public String[]				Fld_pkeys()		{return String_.Ary("page_id");}
 	public String				Fld_blob()		{return "body";}
 	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.xowa.htmls.core.dbs.Xowd_html_tbl(Db_conn_.Noop).Flds(); return flds;} private DbmetaFldList flds;
@@ -100,10 +106,10 @@ class Split_tbl__html implements Split_tbl {
 }
 class Split_tbl__fsdb_bin implements Split_tbl {
 	public String				Tbl_name()		{return "fsdb_bin";}
-	public boolean					Layout_is_lot() {return Bool_.Y;}
+	public boolean					Layout_is_lot() {return BoolUtl.Y;}
 	public String[]				Fld_pkeys()		{return String_.Ary("bin_owner_id");}
 	public String				Fld_blob()		{return "bin_data";}
-	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.fsdb.data.Fsd_bin_tbl(Db_conn_.Noop, Bool_.N).Flds(); return flds;} private DbmetaFldList flds;
+	public DbmetaFldList Flds()			{if (flds == null) flds = new gplx.fsdb.data.Fsd_bin_tbl(Db_conn_.Noop, BoolUtl.N).Flds(); return flds;} private DbmetaFldList flds;
 	public Db_conn				Wiki_conn__get_or_new(Xow_wiki wiki, int db_id)	{
 		if (db_id == -1)	// HACK: return core_conn just so that bin_tbl below can be created
 			return wiki.Data__core_mgr().Db__core().Conn();
@@ -112,7 +118,7 @@ class Split_tbl__fsdb_bin implements Split_tbl {
 			gplx.fsdb.meta.Fsm_bin_fil db_file = bin_mgr.Dbs__get_by_or_null(db_id);	// try to get existing
 			if (db_file == null) {	// none exists; create new
 				db_file = bin_mgr.Dbs__make(db_id, wiki.Domain_str() + "-file-db." + Int_.To_str_pad_bgn_zero(db_id, 4) + ".xowa");
-				new gplx.fsdb.data.Fsd_bin_tbl(db_file.Conn(), Bool_.N).Create_tbl();
+				new gplx.fsdb.data.Fsd_bin_tbl(db_file.Conn(), BoolUtl.N).Create_tbl();
 			}
 			return db_file.Conn();
 		}

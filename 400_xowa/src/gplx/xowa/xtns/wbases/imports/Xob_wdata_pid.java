@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Gfo_invk;
 import gplx.Ordered_hash;
@@ -98,7 +98,7 @@ public class Xob_wdata_pid extends Xob_itm_dump_base implements Xob_page_wkr, Gf
 		tbl__prop.Insert_cmd_by_batch(pid, claim_type.Tid());
 
 		// add langs
-		Ordered_hash list = wdoc_parser.Parse_langvals(pid, jdoc, Bool_.Y);
+		Ordered_hash list = wdoc_parser.Parse_langvals(pid, jdoc, BoolUtl.Y);
 		int len = list.Len();
 		for (int i = 0; i < len; ++i) {
 			Wdata_langtext_itm label = (Wdata_langtext_itm)list.Get_at(i);

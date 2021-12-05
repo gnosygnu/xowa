@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.mediawiki;
+import gplx.Object_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class XophpObject__tst {
 	private final XophpObject__fxt fxt = new XophpObject__fxt();
 	@Test public void Empty_obj() {
@@ -26,7 +29,7 @@ public class XophpObject__tst {
 		fxt.Test_empty_obj_y(false);         // FALSE
 		fxt.Test_empty_obj_y(new int[0]);    // array() (an empty array)
 
-		fxt.Test_empty_obj_n(Bool_.Y);
+		fxt.Test_empty_obj_n(BoolUtl.Y);
 		fxt.Test_empty_obj_n("a");
 		fxt.Test_empty_obj_n(9);
 		fxt.Test_empty_obj_n(0.8d);
@@ -36,8 +39,8 @@ public class XophpObject__tst {
 	}
 }
 class XophpObject__fxt {
-	public void Test_empty_obj_n(Object o) {Test_empty_obj(Bool_.N, o);}
-	public void Test_empty_obj_y(Object o) {Test_empty_obj(Bool_.Y, o);}
+	public void Test_empty_obj_n(Object o) {Test_empty_obj(BoolUtl.N, o);}
+	public void Test_empty_obj_y(Object o) {Test_empty_obj(BoolUtl.Y, o);}
 	public void Test_empty_obj(boolean expd, Object o) {
 		Gftest.Eq__bool(expd, XophpObject_.empty_obj(o), Object_.Xto_str_strict_or_empty(o));
 	}

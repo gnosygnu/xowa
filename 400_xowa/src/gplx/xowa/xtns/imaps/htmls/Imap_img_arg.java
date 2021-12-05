@@ -13,10 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.imaps.*;
+package gplx.xowa.xtns.imaps.htmls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.imaps.*;
 import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
 import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*; import gplx.xowa.htmls.core.wkrs.imgs.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
+import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.wkrs.lnkis.htmls.*;
+import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
 import gplx.xowa.parsers.*;
 import gplx.xowa.xtns.imaps.itms.*;
 public class Imap_img_arg implements gplx.core.brys.Bfr_arg {
@@ -46,7 +49,7 @@ public class Imap_img_arg implements gplx.core.brys.Bfr_arg {
 				byte[] img_src_tmp = Bry_.Empty; // ISSUE#:553; DATE:2019-09-25
 				img_w_tmp = img_h_tmp = 0;
 				Xoh_file_fmtr__hdump.Add_anch_n(tmp_bfr, data_xowa_title, data_xowa_image, img_src_tmp, img_w_tmp, img_h_tmp, Xoh_img_cls_.Tid__none, Bry_.Empty, img_alt, usemap);
-				bfr.Add_byte_nl().Add_byte_repeat(Byte_ascii.Space, 6);
+				bfr.Add_byte_nl().Add_byte_repeat(AsciiByte.Space, 6);
 				bfr.Add_bfr_and_clear(tmp_bfr);
 			} finally {tmp_bfr.Mkr_rls();}
 		}

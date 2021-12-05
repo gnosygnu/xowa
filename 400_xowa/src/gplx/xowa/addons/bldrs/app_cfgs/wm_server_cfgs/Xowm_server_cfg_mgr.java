@@ -17,7 +17,7 @@ package gplx.xowa.addons.bldrs.app_cfgs.wm_server_cfgs; import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.DateAdp;
 import gplx.Datetime_now;
 import gplx.Err_;
@@ -46,7 +46,7 @@ public class Xowm_server_cfg_mgr {
 		// extract cat_collation
 		int bgn_pos = Bry_find_.Find_fwd(all, Bry_.new_a7("wgCategoryCollation"));
 		if (bgn_pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find wgCategoryCollation bgn");
-		bgn_pos = Bry_find_.Move_fwd(all, Byte_ascii.Nl_bry, bgn_pos);
+		bgn_pos = Bry_find_.Move_fwd(all, AsciiByte.NlBry, bgn_pos);
 
 		int end_pos = Bry_find_.Find_fwd(all, Bry_.new_a7("\n],"), bgn_pos);
 		if (end_pos == Bry_find_.Not_found) throw Err_.new_wo_type("could not find wgCategoryCollation end");

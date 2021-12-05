@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.core; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
+package gplx.xowa.bldrs.filters.core; import gplx.*;
 import gplx.langs.dsvs.*;
+import gplx.objects.strings.AsciiByte;
 class Xob_ttl_filter_mgr_srl extends Dsv_wkr_base {
 	private byte[] ttl; private Hash_adp_bry hash;
 	public Xob_ttl_filter_mgr_srl Init(Hash_adp_bry hash) {this.hash = hash; return this;}
@@ -23,7 +24,7 @@ class Xob_ttl_filter_mgr_srl extends Dsv_wkr_base {
 		switch (fld_idx) {
 			case 0: 
 				if (end - bgn == 0) return true;					// ignore blank lines
-				if (src[bgn] == Byte_ascii.Pipe) return true;		// ignore lines starting with pipe; EX: "| some comment"
+				if (src[bgn] == AsciiByte.Pipe) return true;		// ignore lines starting with pipe; EX: "| some comment"
 				ttl = Bry_.Mid(src, bgn, end);
 				return true;
 			default: return false;

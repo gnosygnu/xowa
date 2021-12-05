@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.vnts; import gplx.*;
 import gplx.core.btries.*; import gplx.core.primitives.*; import gplx.dbs.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.vnts.*; import gplx.xowa.langs.vnts.converts.*;
 import gplx.xowa.parsers.htmls.*;
 public class Vnt_convert_lang {
@@ -72,8 +73,8 @@ public class Vnt_convert_lang {
 		while (loop) {	// scan bwd for <
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.Angle_bgn:	tag_bgn = cur; loop = false; break;
-				case Byte_ascii.Angle_end:	return false;	// ">" found; "-{}-" not inside tag
+				case AsciiByte.AngleBgn:	tag_bgn = cur; loop = false; break;
+				case AsciiByte.AngleEnd:	return false;	// ">" found; "-{}-" not inside tag
 				default:					--cur; break;
 			}
 			if (cur == prev_pos - 1) break;
@@ -84,8 +85,8 @@ public class Vnt_convert_lang {
 		while (loop) {	// scan fwd for >
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.Angle_bgn:	return false;	// "<" found; "-{}-" not inside tag
-				case Byte_ascii.Angle_end:	tag_end = cur + 1; return true;
+				case AsciiByte.AngleBgn:	return false;	// "<" found; "-{}-" not inside tag
+				case AsciiByte.AngleEnd:	tag_end = cur + 1; return true;
 				default:					++cur; break;
 			}
 			if (cur == src_len) break;
@@ -169,10 +170,10 @@ public class Vnt_convert_lang {
 			Xol_convert_wkr wkr = convert_mgr.Converter_ary()[vnt_itm.Idx()];
 			for (int j = 0; j < grp_len; ++j) {
 				Vnt_rule_undi_itm itm = grp.Get_at(j);
-				if		(action == Byte_ascii.Plus) {
+				if		(action == AsciiByte.Plus) {
 					wkr.Add(itm.Src(), itm.Trg());
 				}
-				else if (action == Byte_ascii.Dash)
+				else if (action == AsciiByte.Dash)
 					wkr.Del(itm.Src());
 			}
 		}

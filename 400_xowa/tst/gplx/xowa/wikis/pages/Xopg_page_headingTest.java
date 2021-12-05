@@ -18,7 +18,7 @@ package gplx.xowa.wikis.pages;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
-import gplx.tests.Gftest_fxt;
+import gplx.tests.GfoTstr;
 import gplx.xowa.Xop_fxt;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.wikis.pages.htmls.Xopg_html_data;
@@ -43,6 +43,6 @@ class Xopg_page_headingTstr {
         heading.Init(wiki, true, new Xopg_html_data(), Bry_.new_u8(ttlDb), Bry_.new_u8(ttlTxt), Bry_.new_u8(lang));
         Bry_bfr bfr = Bry_bfr_.New();
         heading.Bfr_arg__add(bfr);
-        Gftest_fxt.Eq__str(expd, bfr.To_str_and_clear());
+        GfoTstr.EqStr(expd, bfr.To_str_and_clear());
     }
 }

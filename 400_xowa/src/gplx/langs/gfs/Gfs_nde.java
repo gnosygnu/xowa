@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
+package gplx.langs.gfs; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Gfs_nde {
 	public byte[] Name_bry(byte[] src) {return name == null ? Bry_.Mid(src, name_bgn, name_end) : name;}
 	public byte[] Name() {return name;} public Gfs_nde Name_(byte[] v) {name = v; return this;} private byte[] name;
@@ -38,7 +39,7 @@ public class Gfs_nde {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Gfs_nde[] new_subs = new Gfs_nde[subs_max];
-			Array_.Copy_to(subs, 0, new_subs, 0, subs_len);
+			ArrayUtl.CopyTo(subs, 0, new_subs, 0, subs_len);
 			subs = new_subs;
 		}
 		subs[subs_len] = nde;
@@ -65,7 +66,7 @@ public class Gfs_nde {
 		if (new_len > args_max) {	// ary too small >>> expand
 			args_max = new_len * 2;
 			Gfs_nde[] new_args = new Gfs_nde[args_max];
-			Array_.Copy_to(args, 0, new_args, 0, args_len);
+			ArrayUtl.CopyTo(args, 0, new_args, 0, args_len);
 			args = new_args;
 		}
 		args[args_len] = nde;

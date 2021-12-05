@@ -13,30 +13,82 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.core; import gplx.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.gfui.imgs.*;
-import gplx.gfui.controls.standards.*;
-import gplx.gfui.kits.swts.*;
+package gplx.gfui.kits.core;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_invk_cmd;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg_;
+import gplx.GfsCtx;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.Keyval;
+import gplx.Keyval_hash;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.UsrDlg_;
+import gplx.UsrMsg;
+import gplx.UsrMsgWkr;
+import gplx.UsrMsgWkr_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.threads.Thread_adp_;
+import gplx.gfui.controls.customs.GfuiStatusBox;
+import gplx.gfui.controls.customs.GfuiStatusBox_;
+import gplx.gfui.controls.elems.GfuiElem;
+import gplx.gfui.controls.gxws.GxwTextFld;
+import gplx.gfui.controls.standards.GfuiBtn;
+import gplx.gfui.controls.standards.GfuiBtn_;
+import gplx.gfui.controls.standards.GfuiComboBox;
+import gplx.gfui.controls.standards.GfuiLbl;
+import gplx.gfui.controls.standards.GfuiLbl_;
+import gplx.gfui.controls.standards.GfuiTextBox;
+import gplx.gfui.controls.standards.GfuiTextBox_;
+import gplx.gfui.controls.standards.Gfui_grp;
+import gplx.gfui.controls.standards.Gfui_html;
+import gplx.gfui.controls.standards.Gfui_tab_mgr;
+import gplx.gfui.controls.windows.GfoConsoleWin;
+import gplx.gfui.controls.windows.GfuiWin;
+import gplx.gfui.controls.windows.GfuiWin_;
+import gplx.gfui.draws.ColorAdp;
+import gplx.gfui.draws.ColorAdp_;
+import gplx.gfui.imgs.ImageAdp;
+import gplx.gfui.imgs.ImageAdp_;
+import gplx.gfui.kits.swts.Swt_btn_no_border;
+import gplx.gfui.kits.swts.Swt_clipboard;
+import gplx.gfui.kits.swts.Swt_combo_ctrl;
+import gplx.gfui.kits.swts.Swt_control_;
+import gplx.gfui.kits.swts.Swt_dlg_dir;
+import gplx.gfui.kits.swts.Swt_dlg_file;
+import gplx.gfui.kits.swts.Swt_dlg_msg;
+import gplx.gfui.kits.swts.Swt_grp;
+import gplx.gfui.kits.swts.Swt_html;
+import gplx.gfui.kits.swts.Swt_img;
+import gplx.gfui.kits.swts.Swt_lbl;
+import gplx.gfui.kits.swts.Swt_lnr__menu_detect;
+import gplx.gfui.kits.swts.Swt_popup_grp;
+import gplx.gfui.kits.swts.Swt_tab_mgr;
+import gplx.gfui.kits.swts.Swt_text;
+import gplx.gfui.kits.swts.Swt_text_w_border;
+import gplx.gfui.kits.swts.Swt_win;
+import gplx.objects.primitives.BoolUtl;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Cursor;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Rectangle;
-import gplx.core.threads.*;
-import gplx.gfui.controls.customs.GfuiStatusBox;
-import gplx.gfui.controls.customs.GfuiStatusBox_;
-import gplx.gfui.controls.elems.GfuiElem;
-import gplx.gfui.controls.gxws.GxwTextFld;
-import gplx.gfui.controls.windows.GfoConsoleWin;
-import gplx.gfui.controls.windows.GfuiWin;
-import gplx.gfui.controls.windows.GfuiWin_;
-import gplx.gfui.draws.*;
 public class Swt_kit implements Gfui_kit {
 	private final Keyval_hash ctor_args = new Keyval_hash(); private final Keyval_hash ctor_args_null = new Keyval_hash();
 	private final Hash_adp kit_args = Hash_adp_.New(); private Swt_msg_wkr_stop msg_wkr_stop;
@@ -125,8 +177,8 @@ public class Swt_kit implements Gfui_kit {
 		Swt_dlg_msg dlg = (Swt_dlg_msg)New_dlg_msg(ask_fmtr.Bld_str_many(ask_bfr, fmt, args)).Init_btns_(Gfui_dlg_msg_.Btn_ok).Init_ico_(Gfui_dlg_msg_.Ico_information);
 		display.syncExec(dlg);
 	}
-	public GfuiInvkCmd New_cmd_sync	(Gfo_invk invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, Bool_.N);}
-	public GfuiInvkCmd New_cmd_async(Gfo_invk invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, Bool_.Y);}
+	public GfuiInvkCmd New_cmd_sync	(Gfo_invk invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, BoolUtl.N);}
+	public GfuiInvkCmd New_cmd_async(Gfo_invk invk) 	{return new Swt_gui_cmd(this, gui_wtr, display, invk, BoolUtl.Y);}
 	public GfuiWin New_win_utl(String key, GfuiWin owner, Keyval... args) {
 		return GfuiWin_.kit_(this, key, new Swt_win(shell), ctor_args_null);
 		}
@@ -177,7 +229,7 @@ public class Swt_kit implements Gfui_kit {
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++)
 			ctor_args.Add(args[i]);
-		boolean border_on = Bool_.Cast(ctor_args.Get_val_or(GfuiTextBox.CFG_border_on_, true));
+		boolean border_on = BoolUtl.Cast(ctor_args.Get_val_or(GfuiTextBox.CFG_border_on_, true));
 		GxwTextFld under = new Swt_text_w_border(this, Swt_control_.cast_or_fail(owner), New_color(border_on ? ColorAdp_.LightGray : ColorAdp_.White), ctor_args);
 		GfuiTextBox rv = GfuiTextBox_.kit_(this, key, under, ctor_args);
 		rv.Owner_(owner);
@@ -285,7 +337,7 @@ class Swt_shell_close_lnr implements Listener, Gfo_invk {
 	@Override public void handleEvent(Event event) {
 		if (kit.Kit_mode__term()) return;							// NOTE: will be term if called again from wait_for_sync_cmd
 		kit.Kit_mode_(Swt_kit_mode.Tid_term);						// NOTE: must mark kit as shutting down, else writing to status_bar will create stack overflow; DATE:2014-05-05
-		boolean rslt = Bool_.Cast(kit.Kit_term_cbk().Exec());		// call bgn term
+		boolean rslt = BoolUtl.Cast(kit.Kit_term_cbk().Exec());		// call bgn term
 		if (!rslt) {
 			event.doit = false;										// cbk canceled term; stop close
 			kit.Kit_mode_(Swt_kit_mode.Tid_ready);					// reset kit back to "running" mode;

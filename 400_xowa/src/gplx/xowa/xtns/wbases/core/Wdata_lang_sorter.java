@@ -13,10 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.core; import gplx.*;
-import gplx.xowa.xtns.wbases.*;
-import gplx.xowa.apps.apis.xowa.xtns.*;
-public class Wdata_lang_sorter implements Gfo_evt_itm, gplx.core.lists.ComparerAble {
+package gplx.xowa.xtns.wbases.core;
+import gplx.Bry_;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_itm;
+import gplx.Gfo_evt_mgr;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.Ordered_hash;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.apps.apis.xowa.xtns.Xoapi_wikibase;
+import gplx.xowa.xtns.wbases.Wdata_doc;
+public class Wdata_lang_sorter implements Gfo_evt_itm, ComparerAble {
 	private Hash_adp_bry hash = Hash_adp_bry.cs();
 	public Wdata_lang_sorter() {evt_mgr = new Gfo_evt_mgr(this);}
 	public Gfo_evt_mgr Evt_mgr() {return evt_mgr;} private Gfo_evt_mgr evt_mgr;
@@ -43,10 +54,10 @@ public class Wdata_lang_sorter implements Gfo_evt_itm, gplx.core.lists.ComparerA
 	public void Init_by_wdoc(Wdata_doc wdoc) {
 		if ((Bry_.Ary_eq(wdoc.Sort_langs(), langs))) return;
 		wdoc.Sort_langs_(langs);
-		Sort_wdoc_list(Bool_.Y, wdoc.Slink_list());
-		Sort_wdoc_list(Bool_.N, wdoc.Label_list());
-		Sort_wdoc_list(Bool_.N, wdoc.Descr_list());
-		Sort_wdoc_list(Bool_.N, wdoc.Alias_list());
+		Sort_wdoc_list(BoolUtl.Y, wdoc.Slink_list());
+		Sort_wdoc_list(BoolUtl.N, wdoc.Label_list());
+		Sort_wdoc_list(BoolUtl.N, wdoc.Descr_list());
+		Sort_wdoc_list(BoolUtl.N, wdoc.Alias_list());
 	}
 	private void Sort_wdoc_list(boolean is_slink, Ordered_hash list) {
 		int len = list.Len();

@@ -48,7 +48,7 @@ public class Wmf_dump_list_parser_tst {
 //			, "bd.wikimedia.org", "dk.wikimedia.org", "mx.wikimedia.org", "nyc.wikimedia.org", "nz.wikimedia.org", "pa-us.wikimedia.org", "rs.wikimedia.org", "ua.wikimedia.org"
 //			);
 //			Wmf_dump_itm[] itms = new Wmf_dump_list_parser().Parse(Io_mgr.Instance.LoadFilBry("C:\\xowa\\bin\\any\\xowa\\xtns\\xowa\\maintenance\\backup-index.html"));
-//			Array_.Sort(itms);
+//			ArrayUtl.Sort(itms);
 //			Bry_bfr sql_bfr = Bry_bfr_.New();
 //			Bry_bfr bld_bfr = Bry_bfr_.New();
 //			int itms_len = itms.length;

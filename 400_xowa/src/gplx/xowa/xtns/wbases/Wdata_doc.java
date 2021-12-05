@@ -13,11 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.langs.jsons.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*;
+package gplx.xowa.xtns.wbases;
+import gplx.Bry_;
+import gplx.Ordered_hash;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.langs.jsons.Json_doc;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
 public class Wdata_doc {
 	private final Wdata_wiki_mgr mgr;
 	public Wdata_doc(Wdata_wiki_mgr mgr, Json_doc jdoc, byte[] qid) {
@@ -30,8 +35,8 @@ public class Wdata_doc {
 
 	// NOTE: lazy instantiation b/c we don't want to parse entire json unless called; particulary necessary for {{#property}} calls;
 	public Ordered_hash Slink_list() {if (slink_list == null) slink_list = mgr.Wdoc_parser(jdoc).Parse_sitelinks(qid, jdoc);         return slink_list;} private Ordered_hash slink_list;
-	public Ordered_hash Label_list() {if (label_list == null) label_list = mgr.Wdoc_parser(jdoc).Parse_langvals(qid, jdoc, Bool_.Y); return label_list;} private Ordered_hash label_list;
-	public Ordered_hash Descr_list() {if (descr_list == null) descr_list = mgr.Wdoc_parser(jdoc).Parse_langvals(qid, jdoc, Bool_.N); return descr_list;} private Ordered_hash descr_list;
+	public Ordered_hash Label_list() {if (label_list == null) label_list = mgr.Wdoc_parser(jdoc).Parse_langvals(qid, jdoc, BoolUtl.Y); return label_list;} private Ordered_hash label_list;
+	public Ordered_hash Descr_list() {if (descr_list == null) descr_list = mgr.Wdoc_parser(jdoc).Parse_langvals(qid, jdoc, BoolUtl.N); return descr_list;} private Ordered_hash descr_list;
 	public Ordered_hash Alias_list() {if (alias_list == null) alias_list = mgr.Wdoc_parser(jdoc).Parse_aliases(qid, jdoc);           return alias_list;} private Ordered_hash alias_list;
 	public Ordered_hash Claim_list() {if (claim_list == null) claim_list = mgr.Wdoc_parser(jdoc).Parse_claims(qid, jdoc);            return claim_list;} private Ordered_hash claim_list;
 

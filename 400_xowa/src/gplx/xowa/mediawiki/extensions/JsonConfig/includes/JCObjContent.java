@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.JsonConfig.*;
+package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.arrays.ArrayUtl;
 import gplx.xowa.mediawiki.*;
 public class JCObjContent extends JCContent { //		/**
 //		* @var boolean if false, prevents multiple fields from having identical names that differ
@@ -495,9 +497,9 @@ public class JCObjContent extends JCContent { //		/**
 			XophpStdClass dataAsMap = (XophpStdClass)data;
 			return dataAsMap.Get_by_as_itm(fldStr);
 		} else if (isArray) {
-			Object dataAsAry = Array_.cast(data);	
-			if (fldInt < Array_.Len(dataAsAry))
-				return Array_.Get_at(dataAsAry, fldInt);
+			Object dataAsAry = ArrayUtl.Cast(data);
+			if (fldInt < ArrayUtl.Len(dataAsAry))
+				return ArrayUtl.GetAt(dataAsAry, fldInt);
 		}
 		return null;
 	}

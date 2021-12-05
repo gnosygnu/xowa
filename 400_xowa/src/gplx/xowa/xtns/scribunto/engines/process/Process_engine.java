@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.process; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
+package gplx.xowa.xtns.scribunto.engines.process; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
 import gplx.core.encoders.*;
-import gplx.xowa.xtns.scribunto.libs.*; import gplx.xowa.xtns.scribunto.procs.*;
+import gplx.xowa.xtns.scribunto.procs.*;
 public class Process_engine implements Scrib_engine {
 	private Scrib_core core; private Xoae_app app; private Scrib_xtn_mgr scrib_opts;
 	private Process_recv_msg rsp = new Process_recv_msg(); private Process_send_wtr msg_encoder;
@@ -87,17 +90,17 @@ public class Process_engine implements Scrib_engine {
 	private void Dispatch_bld_send(Bry_bfr bfr, Object[] ary) {
 		int len = ary.length; if (len % 2 != 0) throw Err_.new_wo_type("arguments must be factor of 2", "len", len);
 		bfr.Add(Dispatch_hdr);
-		bfr.Add_byte(Byte_ascii.Curly_bgn);
+		bfr.Add_byte(AsciiByte.CurlyBgn);
 		for (int i = 0; i < len; i++) {
 			Object itm = ary[i];
 			if (i % 2 == 0)	{
-				if (i != 0) bfr.Add_byte(Byte_ascii.Comma);
+				if (i != 0) bfr.Add_byte(AsciiByte.Comma);
 				msg_encoder.Encode_key(bfr, itm);			
 			}
 			else
 				msg_encoder.Encode_obj(bfr, itm);
 		}
-		bfr.Add_byte(Byte_ascii.Curly_end);
+		bfr.Add_byte(AsciiByte.CurlyEnd);
 		int msg_len = bfr.Len() - 16;		// 16 for Dispatch_hdr_len
 		int chk_len = (msg_len * 2) -1;		// defined by Scribunto
 		Hex_utl_.Write(bfr.Bfr(), 0,  8, msg_len);

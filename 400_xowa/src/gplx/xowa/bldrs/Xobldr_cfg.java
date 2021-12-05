@@ -13,13 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.core.ios.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.bldrs;
+import gplx.Bry_;
+import gplx.Io_mgr;
+import gplx.core.ios.Io_size_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.wikis.data.Xow_db_layout;
+import gplx.xowa.wikis.data.Xowd_core_db_props;
 public class Xobldr_cfg {
 	private static long layout_all_max		= 0;									// disable by default; may set to 200 MB in future
-	private static boolean hzip_enabled		= Bool_.Y;
-	private static boolean hzip_mode_is_b256	= Bool_.Y;
+	private static boolean hzip_enabled		= BoolUtl.Y;
+	private static boolean hzip_mode_is_b256	= BoolUtl.Y;
 
 	public static byte Zip_mode__text(Xoa_app app) {return Zip_mode(app, "xowa.bldr.db.zip_mode.text");}	// CFG: Cfg__
 	public static byte Zip_mode__html(Xoa_app app) {return Zip_mode(app, "xowa.bldr.db.zip_mode.html");}	// CFG: Cfg__

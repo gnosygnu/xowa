@@ -15,10 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.mustaches;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.List_adp;
 import gplx.List_adp_;
-
+import gplx.objects.primitives.BoolUtl;
 public class Mustache_render_ctx {
 	private final List_adp stack = List_adp_.New();
 	private Mustache_doc_itm cur;
@@ -30,7 +30,7 @@ public class Mustache_render_ctx {
 		this.cur = cur;
 		this.subs = null;
 		this.subs_idx = subs_len = 0;
-		this.cur_is_bool = Bool_.__byte;
+		this.cur_is_bool = BoolUtl.NullByte;
 		return this;
 	}
 	public boolean Render_variable(Mustache_bfr bfr, String key) {
@@ -70,19 +70,19 @@ public class Mustache_render_ctx {
 		Mustache_doc_itm sub = subs[subs_idx];
 		if (subs_idx == 0) {	// special logic to handle 1st item; note that there always be at least one item
 			if		(sub == Mustache_doc_itm_.Itm__bool__n) {
-				boolean rv = Bool_.N;
+				boolean rv = BoolUtl.N;
 				if (inverted) rv = !rv;
-				cur_is_bool = Bool_.To_byte(rv);
+				cur_is_bool = BoolUtl.ToByte(rv);
 				return rv;
 			}
 			else if	(sub == Mustache_doc_itm_.Itm__bool__y) {
-				boolean rv = Bool_.Y;
+				boolean rv = BoolUtl.Y;
 				if (inverted) rv = !rv;
-				cur_is_bool = Bool_.To_byte(rv);
+				cur_is_bool = BoolUtl.ToByte(rv);
 				return rv;
 			}
 			else
-				cur_is_bool = Bool_.__byte;
+				cur_is_bool = BoolUtl.NullByte;
 		}
 		cur = sub;
 		return true;

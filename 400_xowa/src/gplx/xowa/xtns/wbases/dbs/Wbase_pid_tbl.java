@@ -13,10 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*;
-import gplx.xowa.xtns.wbases.core.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.xtns.wbases.dbs;
+import gplx.Bry_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Rls_able;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.xtns.wbases.core.Wbase_pid;
 public class Wbase_pid_tbl implements Rls_able {
 	private final String tbl_name; private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_src_lang, fld_src_ttl, fld_trg_ttl;
@@ -67,6 +79,6 @@ public class Wbase_pid_tbl implements Rls_able {
 		return new Wbase_pid_tbl(core_db_mgr.Db__wbase().Conn(), core_db_mgr.Props().Schema_is_1());
 	}
 	public static Wbase_pid_tbl New_make(Db_conn conn) { // schema_is_1 == false b/c new wbase_db will always be latest version
-		return new Wbase_pid_tbl(conn, Bool_.N);
+		return new Wbase_pid_tbl(conn, BoolUtl.N);
 	}
 }

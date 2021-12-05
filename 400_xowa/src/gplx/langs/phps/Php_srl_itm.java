@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
 interface Php_srl_itm {
 	byte Tid();
 	int Src_bgn();
@@ -36,8 +38,8 @@ abstract class Php_srl_itm_base implements Php_srl_itm {
 	public Object Val() {return val;} Object val;
 	public void Xto_bfr(Bry_bfr bfr, int depth) {
 		Php_srl_wtr.Indent(bfr, depth);
-		bfr.Add(Php_srl_itm_.Names[this.Tid()]).Add_byte(Byte_ascii.Colon);
-		bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(this.Val())).Add_byte(Byte_ascii.Semic).Add_byte_nl();		
+		bfr.Add(Php_srl_itm_.Names[this.Tid()]).Add_byte(AsciiByte.Colon);
+		bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(this.Val())).Add_byte(AsciiByte.Semic).Add_byte_nl();
 	}
 	public void Clear() {}
 }
@@ -52,7 +54,7 @@ class Php_srl_itm_bool extends Php_srl_itm_base {
 	@Override public byte Tid() {return Php_srl_itm_.Tid_bool;}
 	public byte[] Bry_extract(byte[] raw) {return bry;} private byte[] bry;
 	public boolean Val_as_bool() {return val;} private boolean val;
-	public static Php_srl_itm_bool Bool_n = new Php_srl_itm_bool(false, new byte[] {Byte_ascii.Num_0}), Bool_y = new Php_srl_itm_bool(true, new byte[] {Byte_ascii.Num_1});
+	public static Php_srl_itm_bool Bool_n = new Php_srl_itm_bool(false, new byte[] {AsciiByte.Num0}), Bool_y = new Php_srl_itm_bool(true, new byte[] {AsciiByte.Num1});
 }
 class Php_srl_itm_int extends Php_srl_itm_base {
 	public Php_srl_itm_int(int src_bgn, int src_end, int val) {this.val = val; this.Ctor(src_bgn, src_end, val);}
@@ -98,7 +100,7 @@ class Php_srl_itm_ary extends Php_srl_itm_base {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Php_srl_itm_kv[] new_subs = new Php_srl_itm_kv[subs_max];
-			Array_.Copy_to(subs, 0, new_subs, 0, subs_len);
+			ArrayUtl.CopyTo(subs, 0, new_subs, 0, subs_len);
 			subs = new_subs;
 		}
 		subs[subs_len] = itm;
@@ -107,11 +109,11 @@ class Php_srl_itm_ary extends Php_srl_itm_base {
 	}
 	@Override public void Xto_bfr(Bry_bfr bfr, int depth) {
 		Php_srl_wtr.Indent(bfr, depth);
-		bfr.Add_byte(Byte_ascii.Ltr_a).Add_byte(Byte_ascii.Brack_bgn).Add_int_variable(subs_len).Add(CONST_ary_bgn);
+		bfr.Add_byte(AsciiByte.Ltr_a).Add_byte(AsciiByte.BrackBgn).Add_int_variable(subs_len).Add(CONST_ary_bgn);
 		for (int i = 0; i < subs_len; i++)
 			subs[i].Xto_bfr(bfr, depth + 1);
 		Php_srl_wtr.Indent(bfr, depth);
-		bfr.Add_byte(Byte_ascii.Curly_end).Add_byte_nl();
+		bfr.Add_byte(AsciiByte.CurlyEnd).Add_byte_nl();
 	}
 	private static final byte[] CONST_ary_bgn = Bry_.new_a7("]{\n");
 	Php_srl_itm_kv[] subs = Php_srl_itm_kv.Ary_empty;
@@ -132,6 +134,6 @@ class Php_srl_itm_kv {
 }
 class Php_srl_wtr {
 	public static void Indent(Bry_bfr bfr, int depth) {
-		if (depth > 0) bfr.Add_byte_repeat(Byte_ascii.Space, depth * 2);	// indent
+		if (depth > 0) bfr.Add_byte_repeat(AsciiByte.Space, depth * 2);	// indent
 	}
 }

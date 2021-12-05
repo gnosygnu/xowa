@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.wms.sites; import gplx.*;
 import gplx.dbs.*;
+import gplx.objects.strings.AsciiByte;
 class Site_specialpagealias_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_realname, fld_aliases;
@@ -43,7 +44,7 @@ class Site_specialpagealias_tbl implements Db_tbl {
 			while (rdr.Move_next()) {
 				Site_specialpagealias_itm itm = new Site_specialpagealias_itm
 				( rdr.Read_bry_by_str(fld_realname)
-				, Bry_split_.Split(rdr.Read_bry_by_str(fld_aliases), Byte_ascii.Pipe_bry)
+				, Bry_split_.Split(rdr.Read_bry_by_str(fld_aliases), AsciiByte.PipeBry)
 				);
 				list.Add(itm.Realname(), itm);
 			}
@@ -64,7 +65,7 @@ class Site_specialpagealias_tbl implements Db_tbl {
 		stmt_insert.Clear()
 			.Val_bry_as_str(fld_site_abrv			, site_abrv)
 			.Val_bry_as_str(fld_realname			, realname)
-			.Val_bry_as_str(fld_aliases				, Bry_.Add_w_dlm(Byte_ascii.Pipe_bry, aliases))
+			.Val_bry_as_str(fld_aliases				, Bry_.Add_w_dlm(AsciiByte.PipeBry, aliases))
 			.Exec_insert();
 	}
 }

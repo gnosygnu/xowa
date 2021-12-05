@@ -13,7 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Bry_rdr_old {		
 	private byte[] scope = Bry_.Empty;
 	public byte[] Src() {return src;} protected byte[] src;
@@ -33,8 +42,8 @@ public class Bry_rdr_old {
 	public byte[] Or_bry() {return or_bry;} public void Or_bry_(byte[] v) {or_bry = v;} private byte[] or_bry;
 	public int Find_fwd(byte find) {return Bry_find_.Find_fwd(src, find, pos);}
 	public int Find_fwd_ws() {return Bry_find_.Find_fwd_until_ws(src, pos, src_len);}
-	public int Find_fwd__pos_at_lhs(byte[] find_bry) {return Find_fwd__pos_at(find_bry, Bool_.N);}
-	public int Find_fwd__pos_at_rhs(byte[] find_bry) {return Find_fwd__pos_at(find_bry, Bool_.Y);}
+	public int Find_fwd__pos_at_lhs(byte[] find_bry) {return Find_fwd__pos_at(find_bry, BoolUtl.N);}
+	public int Find_fwd__pos_at_rhs(byte[] find_bry) {return Find_fwd__pos_at(find_bry, BoolUtl.Y);}
 	public int Find_fwd__pos_at(byte[] find_bry, boolean pos_at_rhs) {
 		int find_pos = Bry_find_.Find_fwd(src, find_bry, pos, src_len);
 		if (pos_at_rhs) find_pos += find_bry.length;
@@ -42,12 +51,12 @@ public class Bry_rdr_old {
 		return find_pos;
 	}
 	public byte Read_byte()			{return src[pos];}
-	public int Read_int_to_semic()	{return Read_int_to(Byte_ascii.Semic);}
-	public int Read_int_to_comma()	{return Read_int_to(Byte_ascii.Comma);}
-	public int Read_int_to_pipe()	{return Read_int_to(Byte_ascii.Pipe);}
-	public int Read_int_to_nl()		{return Read_int_to(Byte_ascii.Nl);}
-	public int Read_int_to_quote()	{return Read_int_to(Byte_ascii.Quote);}
-	public int Read_int_to_non_num(){return Read_int_to(Byte_ascii.Null);}
+	public int Read_int_to_semic()	{return Read_int_to(AsciiByte.Semic);}
+	public int Read_int_to_comma()	{return Read_int_to(AsciiByte.Comma);}
+	public int Read_int_to_pipe()	{return Read_int_to(AsciiByte.Pipe);}
+	public int Read_int_to_nl()		{return Read_int_to(AsciiByte.Nl);}
+	public int Read_int_to_quote()	{return Read_int_to(AsciiByte.Quote);}
+	public int Read_int_to_non_num(){return Read_int_to(AsciiByte.Null);}
 	public int Read_int_to(byte to_char) {
 		int bgn = pos;
 		int rv = 0;
@@ -55,11 +64,11 @@ public class Bry_rdr_old {
 		while (pos < src_len) {
 			byte b = src[pos++];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					rv = (rv * 10) + (b - Byte_ascii.Num_0);
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+					rv = (rv * 10) + (b - AsciiByte.Num0);
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					if (negative == -1)		// 2nd negative
 						return or_int;		// return or_int
 					else					// 1st negative
@@ -67,7 +76,7 @@ public class Bry_rdr_old {
 					break;
 				default: {
 					boolean match = b == to_char;
-					if (to_char == Byte_ascii.Null) {// hack for Read_int_to_non_num
+					if (to_char == AsciiByte.Null) {// hack for Read_int_to_non_num
 						--pos;
 						match = true;
 					}
@@ -77,11 +86,11 @@ public class Bry_rdr_old {
 		}
 		return bgn == pos ? or_int : rv * negative;
 	}
-	public byte[] Read_bry_to_nl()		{return Read_bry_to(Byte_ascii.Nl);}
-	public byte[] Read_bry_to_semic()	{return Read_bry_to(Byte_ascii.Semic);}
-	public byte[] Read_bry_to_pipe()	{return Read_bry_to(Byte_ascii.Pipe);}
-	public byte[] Read_bry_to_quote()	{return Read_bry_to(Byte_ascii.Quote);}
-	public byte[] Read_bry_to_apos()	{return Read_bry_to(Byte_ascii.Apos);}
+	public byte[] Read_bry_to_nl()		{return Read_bry_to(AsciiByte.Nl);}
+	public byte[] Read_bry_to_semic()	{return Read_bry_to(AsciiByte.Semic);}
+	public byte[] Read_bry_to_pipe()	{return Read_bry_to(AsciiByte.Pipe);}
+	public byte[] Read_bry_to_quote()	{return Read_bry_to(AsciiByte.Quote);}
+	public byte[] Read_bry_to_apos()	{return Read_bry_to(AsciiByte.Apos);}
 	public byte[] Read_bry_to(byte to_char) {
 		int bgn = pos;
 		while (pos < src_len) {
@@ -93,13 +102,13 @@ public class Bry_rdr_old {
 		}
 		return bgn == pos ? or_bry : Bry_.Mid(src, bgn, src_len);
 	}
-	public boolean Read_yn_to_pipe() {return Read_byte_to_pipe() == Byte_ascii.Ltr_y;}
+	public boolean Read_yn_to_pipe() {return Read_byte_to_pipe() == AsciiByte.Ltr_y;}
 	public byte Read_byte_to_pipe() {
 		byte rv = src[pos];
 		pos += 2;	// 1 for byte; 1 for pipe;
 		return rv;
 	}
-	public double Read_double_to_pipe() {return Read_double_to(Byte_ascii.Pipe);}
+	public double Read_double_to_pipe() {return Read_double_to(AsciiByte.Pipe);}
 	public double Read_double_to(byte to_char) {
 		byte[] double_bry = Read_bry_to(to_char);
 		return Double_.parse(String_.new_a7(double_bry));	// double will never have utf8
@@ -107,7 +116,7 @@ public class Bry_rdr_old {
 	public Bry_rdr_old Skip_ws() {
 		while (pos < src_len) {
 			switch (src[pos]) {
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+				case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 					++pos;
 					break;
 				default:
@@ -119,19 +128,19 @@ public class Bry_rdr_old {
 	public Bry_rdr_old Skip_alpha_num_under() {
 		while (pos < src_len) {
 			switch (src[pos]) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-				case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-				case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-				case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-				case Byte_ascii.Underline:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+				case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+				case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+				case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+				case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+				case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+				case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+				case AsciiByte.Underline:
 					++pos;
 					break;
 				default:

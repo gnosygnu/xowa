@@ -17,7 +17,7 @@ package gplx.langs.mustaches;
 
 import gplx.Bry_;
 import gplx.Byte_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.String_;
 
 class Mustache_tkn_def {
@@ -30,17 +30,17 @@ class Mustache_tkn_def {
 	, Dflt_variable_rhs = Bry_.new_a7("}}")
 	;
 	public static final byte
-	  Variable		= Byte_ascii.Curly_end		// {{=<% %>=}}
-	, Escape_bgn	= Byte_ascii.Curly_bgn		// {{{escape}}}
-	, Escape_end	= Byte_ascii.Curly_end		// {{{escape}}}
-	, Section		= Byte_ascii.Hash			// {{#section}}
-	, Grp_end		= Byte_ascii.Slash			// {{/section}}
-	, Inverted		= Byte_ascii.Pow			// {{^inverted}}
-	, Comment		= Byte_ascii.Bang			// {{!comment}}
-	, Partial		= Byte_ascii.Angle_end		// {{>partial}}
-	, Delimiter_bgn	= Byte_ascii.Eq				// {{=<% %>=}}
-	, Delimiter_end	= Byte_ascii.Curly_end		// {{=<% %>=}}
-	, Item          = Byte_ascii.Dot            // {{.}}
+	  Variable		= AsciiByte.CurlyEnd        // {{=<% %>=}}
+	, Escape_bgn	= AsciiByte.CurlyBgn        // {{{escape}}}
+	, Escape_end	= AsciiByte.CurlyEnd        // {{{escape}}}
+	, Section		= AsciiByte.Hash			// {{#section}}
+	, Grp_end		= AsciiByte.Slash			// {{/section}}
+	, Inverted		= AsciiByte.Pow			// {{^inverted}}
+	, Comment		= AsciiByte.Bang			// {{!comment}}
+	, Partial		= AsciiByte.AngleEnd        // {{>partial}}
+	, Delimiter_bgn	= AsciiByte.Eq				// {{=<% %>=}}
+	, Delimiter_end	= AsciiByte.CurlyEnd        // {{=<% %>=}}
+	, Item          = AsciiByte.Dot            // {{.}}
 	;
 	public static final String
 	  ItemString    = String_.new_u8(Byte_.To_bry(Item))

@@ -13,15 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.consoles; import gplx.*; import gplx.core.*;
-import gplx.core.envs.*;
+package gplx.core.consoles;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.core.envs.Op_sys;
+import gplx.objects.primitives.BoolUtl;
 public class Gfo_cmd_arg_itm_ {
 	public static final int Tid_general = 0, Tid_system = 1;
 	public static final int Val_tid_string = 0, Val_tid_yn = 1, Val_tid_url = 2, Val_tid_list_string = 3;
-	public static Gfo_cmd_arg_itm req_(String key)									{return new Gfo_cmd_arg_itm(Tid_general, Bool_.Y, key, Val_tid_string);}
-	public static Gfo_cmd_arg_itm opt_(String key)									{return new Gfo_cmd_arg_itm(Tid_general, Bool_.N, key, Val_tid_string);}
+	public static Gfo_cmd_arg_itm req_(String key)									{return new Gfo_cmd_arg_itm(Tid_general, BoolUtl.Y, key, Val_tid_string);}
+	public static Gfo_cmd_arg_itm opt_(String key)									{return new Gfo_cmd_arg_itm(Tid_general, BoolUtl.N, key, Val_tid_string);}
 	public static Gfo_cmd_arg_itm new_(String key, boolean reqd, int val_tid)			{return new Gfo_cmd_arg_itm(Tid_general, reqd	, key, val_tid);}
-	public static Gfo_cmd_arg_itm sys_(String key)									{return new Gfo_cmd_arg_itm(Tid_system , Bool_.N, key, Val_tid_yn);}
+	public static Gfo_cmd_arg_itm sys_(String key)									{return new Gfo_cmd_arg_itm(Tid_system , BoolUtl.N, key, Val_tid_yn);}
 	public static Gfo_cmd_arg_itm new_(int tid, String key, boolean reqd, int val_tid)	{return new Gfo_cmd_arg_itm(tid			, reqd	, key, val_tid);}
 	public static Io_url Val_as_url__rel_url_or(String raw, boolean to_dir, Io_url owner_dir, Io_url or) {
 		if (raw == null) return or;

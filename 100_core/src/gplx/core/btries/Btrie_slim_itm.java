@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.btries; import gplx.*; import gplx.core.*;
+package gplx.core.btries;
+import gplx.objects.arrays.ArrayUtl;
 public class Btrie_slim_itm {
 	private Btrie_slim_itm[] ary = Btrie_slim_itm.Ary_empty;
 	public Btrie_slim_itm(byte key_byte, Object val, boolean case_any) {this.key_byte = key_byte; this.val = val; this.case_any = case_any;}
@@ -72,7 +73,7 @@ public class Btrie_slim_itm {
 		int new_len = ary_len + 1;
 		if (new_len > ary_max) {
 			ary_max += 4;
-			ary = (Btrie_slim_itm[])Array_.Resize(ary, ary_max);
+			ary = (Btrie_slim_itm[])ArrayUtl.Resize(ary, ary_max);
 		}
 		Btrie_slim_itm rv = new Btrie_slim_itm(b, val, case_any);
 		ary[ary_len] = rv;

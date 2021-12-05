@@ -13,14 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.imaps.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.imaps.*;
-import org.junit.*; import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
+package gplx.xowa.xtns.imaps.htmls;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Imap_html__hview__tst {
 	private final Imap_html__fxt fxt = new Imap_html__fxt();
 	@Test public void Basic() {
 		String wtxt = fxt.Basic__wtxt();
-		fxt.Test__hview(wtxt, fxt.Hdump_n_().Basic__html(Bool_.Y));
-		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Basic__html(Bool_.N), fxt.Basic__html(Bool_.Y), fxt.Basic__fsdb());
+		fxt.Test__hview(wtxt, fxt.Hdump_n_().Basic__html(BoolUtl.Y));
+		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Basic__html(BoolUtl.N), fxt.Basic__html(BoolUtl.Y), fxt.Basic__fsdb());
 	}
 	@Test public void Caption_xml() {	// PURPOSE: xnde in caption was being escaped; PAGE:en.w:Council_of_Europe; DATE:2014-07-25
 		fxt.Test_html_full_frag("<imagemap>File:A.png|thumb|<b>c</b>\n</imagemap>", "<b>c</b>");
@@ -50,8 +52,8 @@ public class Imap_html__hview__tst {
 	}
 	@Test public void Desc() {
 		String wtxt = fxt.Desc__wtxt();
-		fxt.Test__hview(wtxt, fxt.Hdump_n_().Desc__html(Bool_.Y));
-		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Desc__html(Bool_.N), fxt.Desc__html(Bool_.Y), fxt.Basic__fsdb());
+		fxt.Test__hview(wtxt, fxt.Hdump_n_().Desc__html(BoolUtl.Y));
+		fxt.Test__hdump(wtxt, fxt.Hdump_y_().Desc__html(BoolUtl.N), fxt.Desc__html(BoolUtl.Y), fxt.Basic__fsdb());
 	}
 	@Test public void Lnke() {	// PURPOSE: handle shapes with lnke; PAGE:en.w:Cholesterolt DATE:2014-07-25
 		fxt.Test_html_full_str(String_.Concat_lines_nl_skip_last

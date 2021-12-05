@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public abstract class Db_conn_info__base implements Db_conn_info {
 	public Db_conn_info__base(String raw, String db_api, String database) {this.raw = raw; this.db_api = db_api; this.database = database;}
 	public abstract String Key();
@@ -28,7 +29,7 @@ public abstract class Db_conn_info__base implements Db_conn_info {
 		for (int i = 0; i < len; ++i) {
 			String itm = ary[i];
 			bfr.Add_str_u8(itm);
-			bfr.Add_byte(i % 2 == 0 ? Byte_ascii.Eq : Byte_ascii.Semic);
+			bfr.Add_byte(i % 2 == 0 ? AsciiByte.Eq : AsciiByte.Semic);
 		}
 		return bfr.To_str_and_clear();
 	}

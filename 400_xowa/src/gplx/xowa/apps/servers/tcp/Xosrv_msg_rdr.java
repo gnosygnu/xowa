@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.tcp; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
+package gplx.xowa.apps.servers.tcp; import gplx.*;
 import gplx.core.primitives.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.core.texts.*;
+import gplx.core.ios.streams.*;
+import gplx.objects.strings.AsciiByte;
 public class Xosrv_msg_rdr {
 	public Xosrv_msg_rdr(byte[] default_body_bry, IoStream rdr) {this.default_body_bry = default_body_bry; default_body_bry_len = default_body_bry.length; this.rdr = rdr;} private byte[] header_bry = new byte[24], default_body_bry; int default_body_bry_len;
 	public IoStream Rdr() {return rdr;} private IoStream rdr;
@@ -25,10 +26,10 @@ public class Xosrv_msg_rdr {
 			if (bytes_read == -1)	return Xosrv_msg.Exit;	// stream closed; should only occur when shutting down
 			else					return Xosrv_msg.fail_("header is invalid; hdr:{0}", String_.new_u8(header_bry, 0, bytes_read));
 		}
-		byte version = header_bry[0];									if (version != Byte_ascii.Num_0)	return Xosrv_msg.fail_("version must be 0; version:{0}", Byte_.To_str(version));
+		byte version = header_bry[0];									if (version != AsciiByte.Num0)	return Xosrv_msg.fail_("version must be 0; version:{0}", Byte_.To_str(version));
 		int body_len = Bry_.To_int_or(header_bry,  2, 12, -1); 	if (body_len == -1)					return Xosrv_msg.fail_("body_len is not number; body_len:{0}", String_.new_u8(header_bry,  2, 23));
 		int cksum    = Bry_.To_int_or(header_bry, 13, 23, -1);	if (cksum == -1)					return Xosrv_msg.fail_("checksum is not number; cksum:{0}", String_.new_u8(header_bry, 13, 23));
-		if (!Chk_bytes(header_bry, Byte_ascii.Pipe, 1, 12, 23)) return Xosrv_msg.fail_("message should be delimited by pipes at 1, 12 and 23; message:{0}", String_.new_u8(header_bry, 0, 24));
+		if (!Chk_bytes(header_bry, AsciiByte.Pipe, 1, 12, 23)) return Xosrv_msg.fail_("message should be delimited by pipes at 1, 12 and 23; message:{0}", String_.new_u8(header_bry, 0, 24));
 		if (cksum != (body_len * 2) + 1) return Xosrv_msg.fail_("checksum failed; body_len:{0} chksum:{1}", body_len, cksum);
 		byte[] body_bry = body_len > default_body_bry_len ? new byte[body_len] : default_body_bry;
 		rdr.Read(body_bry, 0, body_len);
@@ -42,7 +43,7 @@ public class Xosrv_msg_rdr {
 		return Xosrv_msg.new_(cmd_name, msg_id, sender, recipient, msg_date, msg_text);
 	}
 	private static byte[] Read_fld(byte[] bry, int bry_len, Int_obj_ref fld_bgn, Bool_obj_ref fail_ref, String_obj_ref fld_ref) {
-		int fld_end = Bry_find_.Find_fwd(bry, Byte_ascii.Pipe, fld_bgn.Val(), bry_len);
+		int fld_end = Bry_find_.Find_fwd(bry, AsciiByte.Pipe, fld_bgn.Val(), bry_len);
 		if (fld_end == Bry_find_.Not_found) {fail_ref.Val_y_(); return null;}
 		byte[] rv = Bry_.Mid(bry, fld_bgn.Val(), fld_end);
 		fld_bgn.Val_(fld_end + 1);	// +1 to place after pipe

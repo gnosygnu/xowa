@@ -13,9 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.strings.AsciiByte;
 public class Bry_diff_ {
-	public static byte[][] Diff_1st_line(byte[] lhs, byte[] rhs) {return Diff_1st(lhs, 0, lhs.length, rhs, 0, rhs.length, Byte_ascii.Nl_bry, Byte_ascii.Angle_bgn_bry, 255);}
+	public static byte[][] Diff_1st_line(byte[] lhs, byte[] rhs) {return Diff_1st(lhs, 0, lhs.length, rhs, 0, rhs.length, AsciiByte.NlBry, AsciiByte.AngleBgnBry, 255);}
 	public static byte[][] Diff_1st(byte[] lhs, int lhs_bgn, int lhs_end, byte[] rhs, int rhs_bgn, int rhs_end, byte[] stop, byte[] show, int diff_max) {
 		int lhs_len = lhs_end - lhs_bgn;
 		int rhs_len = rhs_end - rhs_bgn;
@@ -28,9 +30,9 @@ public class Bry_diff_ {
 		}
 		if (lhs_idx == -1 && rhs_idx == -1) {
 			switch (Int_.Compare(lhs_len, rhs_len)) {
-				case CompareAble_.Same: return null;
-				case CompareAble_.Less: lhs_idx = rhs_idx = lhs_len; break;
-				case CompareAble_.More: lhs_idx = rhs_idx = rhs_len; break;
+				case CompareAbleUtl.Same: return null;
+				case CompareAbleUtl.Less: lhs_idx = rhs_idx = lhs_len; break;
+				case CompareAbleUtl.More: lhs_idx = rhs_idx = rhs_len; break;
 			}
 		}
 		byte[] lhs_diff = Get_1st(stop, show, lhs, lhs_idx, lhs_len, diff_max);

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.htmls.modules.popups; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.threads.*;
 import gplx.core.js.*;
 import gplx.xowa.wikis.nss.*;
@@ -152,7 +154,7 @@ public class Xow_popup_mgr implements Gfo_invk, Gfo_evt_itm {
 	}
 	public static Int_obj_ref[] Ns_allowed_parse(Xowe_wiki wiki, byte[] raw) {
 		List_adp rv = List_adp_.New();
-		byte[][] ary = Bry_split_.Split(raw, Byte_ascii.Pipe);
+		byte[][] ary = Bry_split_.Split(raw, AsciiByte.Pipe);
 		int ary_len = ary.length;
 		Xow_ns_mgr ns_mgr = wiki.Ns_mgr();
 		for (int i = 0; i < ary_len; i++) {

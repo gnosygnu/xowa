@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
+package gplx.langs.jsons; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
 public class Json_kv_ary_srl {
 	public static Keyval Kv_by_itm(Json_itm itm) {
 		switch (itm.Tid()) {
@@ -26,7 +27,7 @@ public class Json_kv_ary_srl {
 	}
 	private static Object Val_by_itm(Json_itm itm) {
 		switch (itm.Tid()) {
-			case Json_itm_.Tid__bool:		return Bool_.To_str_lower(Bool_.Cast(itm.Data()));
+			case Json_itm_.Tid__bool:		return BoolUtl.ToStrLower(BoolUtl.Cast(itm.Data()));
 			case Json_itm_.Tid__int:
 			case Json_itm_.Tid__null:
 			case Json_itm_.Tid__str:

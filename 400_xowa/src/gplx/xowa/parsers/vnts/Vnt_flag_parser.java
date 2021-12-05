@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.vnts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.vnts.*;
 class Vnt_flag_parser implements gplx.core.brys.Bry_split_wkr {
 	private final Hash_adp_bry codes_regy = Vnt_flag_code_.Regy;
@@ -27,7 +28,7 @@ class Vnt_flag_parser implements gplx.core.brys.Bry_split_wkr {
 		this.codes = codes; this.langs = langs; this.vnt_regy = vnt_regy;
 		codes.Clear(); langs.Clear();
 		if (src_end != Bry_find_.Not_found)			// "|" found; EX: -{A|}-
-			Bry_split_.Split(src, src_bgn, src_end, Byte_ascii.Semic, true, this);
+			Bry_split_.Split(src, src_bgn, src_end, AsciiByte.Semic, true, this);
 		int codes_count = codes.Count(), langs_count = langs.Count();
 		if		(codes_count == 0)											codes.Set_y(Vnt_flag_code_.Tid_show);
 		else if (codes.Limit_if_exists(Vnt_flag_code_.Tid_raw))				{}

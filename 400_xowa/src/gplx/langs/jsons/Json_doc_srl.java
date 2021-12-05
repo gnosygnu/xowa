@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.jsons; import gplx.*; import gplx.langs.*;
+package gplx.langs.jsons; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Json_doc_srl {
 	private int indent = -1;
 	private Bry_bfr bfr = Bry_bfr_.Reset(255);
@@ -54,29 +55,29 @@ public class Json_doc_srl {
 	private void Write_key(boolean comma, byte[] key) {	// "key":
 		Write_indent();
 		Write_str(key);
-		bfr.Add_byte(Byte_ascii.Colon);
+		bfr.Add_byte(AsciiByte.Colon);
 	}
-	private void Write_indent() {if (ws_enabled && indent > 0) bfr.Add_byte_repeat(Byte_ascii.Space, indent);}
+	private void Write_indent() {if (ws_enabled && indent > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent);}
 	private void Write_str(byte[] v) {
 		if (v == null)
 			bfr.Add(Object_.Bry__null);
 		else
-			bfr.Add_byte(Byte_ascii.Quote).Add(v).Add_byte(Byte_ascii.Quote);
+			bfr.Add_byte(AsciiByte.Quote).Add(v).Add_byte(AsciiByte.Quote);
 	}
 	private void Write_comma(boolean comma) {
 		if (comma)
-			bfr.Add_byte(Byte_ascii.Comma);
+			bfr.Add_byte(AsciiByte.Comma);
 		else {
 			if (ws_enabled) 
-				bfr.Add_byte(Byte_ascii.Space);
+				bfr.Add_byte(AsciiByte.Space);
 		}
 		if (ws_enabled)
-			bfr.Add_byte(Byte_ascii.Space);
+			bfr.Add_byte(AsciiByte.Space);
 	}
-	private void Write_ary_bgn() {Indent_add();	Write_indent(); bfr.Add_byte(Byte_ascii.Brack_bgn); Write_new_line();}
-	private void Write_ary_end() {				Write_indent(); bfr.Add_byte(Byte_ascii.Brack_end); Write_new_line();	Indent_del();}
-	private void Write_nde_bgn() {Indent_add();	Write_indent(); bfr.Add_byte(Byte_ascii.Curly_bgn); Write_new_line();}
-	private void Write_nde_end() {				Write_indent(); bfr.Add_byte(Byte_ascii.Curly_end); Write_new_line();	Indent_del();}
+	private void Write_ary_bgn() {Indent_add();	Write_indent(); bfr.Add_byte(AsciiByte.BrackBgn); Write_new_line();}
+	private void Write_ary_end() {				Write_indent(); bfr.Add_byte(AsciiByte.BrackEnd); Write_new_line();	Indent_del();}
+	private void Write_nde_bgn() {Indent_add();	Write_indent(); bfr.Add_byte(AsciiByte.CurlyBgn); Write_new_line();}
+	private void Write_nde_end() {				Write_indent(); bfr.Add_byte(AsciiByte.CurlyEnd); Write_new_line();	Indent_del();}
 	private void Write_itm_hdr(boolean comma) {
 		Write_indent();
 		Write_comma(comma);

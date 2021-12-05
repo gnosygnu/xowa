@@ -13,9 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.data; import gplx.*;
-import gplx.dbs.*;
-import gplx.xowa.files.*;
+package gplx.fsdb.data;
+import gplx.DateAdp;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.Db_tbl;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.Xof_lnki_page;
+import gplx.xowa.files.Xof_lnki_time;
 public class Fsd_thm_tbl implements Db_tbl {
 	public final DbmetaFldList flds = new DbmetaFldList();
 	public final String fld_id, fld_owner_id, fld_w, fld_h, fld_time, fld_page, fld_bin_db_id, fld_size, fld_modified, fld_hash;
@@ -127,7 +141,7 @@ public class Fsd_thm_tbl implements Db_tbl {
 	public static final DateAdp Modified_null = null;
 	public static final String Hash_null = "", Modified_null_str = "";
 	public static boolean Match_nearest(List_adp list, Fsd_thm_itm thm, boolean schema_thm_page) {
-		int len = list.Len(); if (len == 0) return Bool_.N;
+		int len = list.Len(); if (len == 0) return BoolUtl.N;
 		list.SortBy(Fsdb_thm_itm_sorter.Instance);
 		int thm_w = thm.W(), thm_page = thm.Page(); double thm_time = thm.Time();
 		Fsd_thm_itm max = null;
@@ -140,15 +154,15 @@ public class Fsd_thm_tbl implements Db_tbl {
 				&&	thm_page		== comp_page
 				) {	// exact match
 				thm.Init_by_match(comp);
-				return Bool_.Y;
+				return BoolUtl.Y;
 			}
 			if		(comp_w > thm_w)	max = comp;
 			else if (max == null)		max = comp;
 			else break;
 		}
-		if (max == null) return Bool_.N;
+		if (max == null) return BoolUtl.N;
 		thm.Init_by_match(max);
-		return Bool_.Y;
+		return BoolUtl.Y;
 	}
 	public void Rls() {
 		stmt_insert = Db_stmt_.Rls(stmt_insert);

@@ -17,6 +17,8 @@ package gplx;
 import gplx.core.envs.Op_sys;
 import gplx.core.strings.String_bldr;
 import gplx.core.strings.String_bldr_;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.CompareAbleUtl;
 public class String_ {
 	// -------- BASELIB_COPY --------
 	public static final Class<?> Cls_ref_type = String.class;
@@ -42,7 +44,7 @@ public class String_ {
 	private static final char FORMAT_ITM_LHS = '{', FORMAT_ITM_RHS = '}';
 	public static String Format(String fmt, Object... args) {
 		// method vars
-		int args_len = Array_.Len_obj(args); 
+		int args_len = ArrayUtl.LenObjAry(args);
 		if (args_len == 0) return fmt; // nothing to format
 		int fmt_len = Len(fmt); 
 
@@ -181,9 +183,9 @@ public class String_ {
 	public static String IfNullOrEmpty(String s, String or) {return s == null || s.length() == 0 ? or : s;}	
 	public static int Compare_as_ordinals(String lhs, String rhs) {return lhs.compareTo(rhs);}
 	public static int Compare_ignoreCase(String lhs, String rhs) {
-				if		(lhs == null && rhs != null) 	return CompareAble_.Less;
-		else if (lhs != null && rhs == null) 	return CompareAble_.More;
-		else if (lhs == null && rhs == null) 	return CompareAble_.Same;
+				if		(lhs == null && rhs != null) 	return CompareAbleUtl.Less;
+		else if (lhs != null && rhs == null) 	return CompareAbleUtl.More;
+		else if (lhs == null && rhs == null) 	return CompareAbleUtl.Same;
 		else									return lhs.compareToIgnoreCase(rhs);
 		//#-
 	/*
@@ -195,9 +197,9 @@ public class String_ {
 		}
 	public static int Compare(String lhs, String rhs) {
 		int compare = lhs.compareTo(rhs);
-		if 		(compare == CompareAble_.Same) 		return CompareAble_.Same;
-		else if (compare <  CompareAble_.Same) 		return CompareAble_.Less;
-		else /* (compare  > CompareAble_.Same) */	return CompareAble_.More;
+		if 		(compare == CompareAbleUtl.Same) 		return CompareAbleUtl.Same;
+		else if (compare <  CompareAbleUtl.Same) 		return CompareAbleUtl.Less;
+		else /* (compare  > CompareAble_.Same) */	return CompareAbleUtl.More;
 	}
 	public static int Compare_byteAry(String lhs, String rhs) {
 		int lhsLen = lhs.length(), rhsLen = rhs.length();		
@@ -205,7 +207,7 @@ public class String_ {
 		int[] lhsAry = XtoIntAry(lhs, aryLen), rhsAry = XtoIntAry(rhs, aryLen);
 		for (int i = 0; i < aryLen; i++) {
 			int comp = Int_.Compare(lhsAry[i], rhsAry[i]);
-			if (comp != CompareAble_.Same) return comp;
+			if (comp != CompareAbleUtl.Same) return comp;
 		}
 		return Int_.Compare(lhsLen, rhsLen);
 	}
@@ -343,7 +345,7 @@ public class String_ {
 	}
 	public static String Concat_with_obj(String separator, Object... ary) {
 		String_bldr sb = String_bldr_.new_();
-		int aryLen = Array_.Len(ary);
+		int aryLen = ArrayUtl.Len(ary);
 		for (int i = 0; i < aryLen; i++) {
 			if (i != 0) sb.Add(separator);
 			Object val = ary[i];
@@ -520,17 +522,17 @@ public class String_ {
 	}
 	public static String[] Ary_flatten(String[][] src_ary) {
 		int trg_len = 0;
-		int src_len = Array_.Len(src_ary);
+		int src_len = ArrayUtl.Len(src_ary);
 		for (int i = 0; i < src_len; i++) {
 			String[] itm = src_ary[i];
-			if (itm != null) trg_len += Array_.Len(itm);
+			if (itm != null) trg_len += ArrayUtl.Len(itm);
 		}
 		String[] trg_ary = new String[trg_len];
 		trg_len = 0;
 		for (int i = 0; i < src_len; i++) {
 			String[] itm = src_ary[i];
 			if (itm == null) continue;
-			int itm_len = Array_.Len(itm);
+			int itm_len = ArrayUtl.Len(itm);
 			for (int j = 0; j < itm_len; j++)
 				trg_ary[trg_len++] = itm[j];
 		}

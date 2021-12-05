@@ -13,12 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.drds; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.wikis.data.*;
-import gplx.xowa.htmls.*; import gplx.xowa.wikis.data.tbls.*; 
+package gplx.xowa.drds;
+import gplx.Bry_;
+import gplx.DateAdp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.wikis.data.Xow_db_file;
 public class Xowd_data_tstr {
 	public void Wiki_(Xow_wiki wiki) {this.wiki = wiki;} private Xow_wiki wiki;
-	public void Page__insert(int page_id, String ttl_str, String modified_on) {Page__insert(page_id, ttl_str, modified_on, Bool_.N, 0, page_id, 0, 0);}
+	public void Page__insert(int page_id, String ttl_str, String modified_on) {Page__insert(page_id, ttl_str, modified_on, BoolUtl.N, 0, page_id, 0, 0);}
 	public void Page__insert(int page_id, String ttl_str, String modified_on, boolean page_is_redirect, int page_len, int random_int, int text_db_id, int html_db_id) {
 		Xoa_ttl ttl = wiki.Ttl_parse(Bry_.new_u8(ttl_str));
 		wiki.Data__core_mgr().Tbl__page().Insert(page_id, ttl.Ns().Id(), ttl.Page_db(), page_is_redirect, DateAdp_.parse_iso8561(modified_on), page_len, page_id, text_db_id, html_db_id);

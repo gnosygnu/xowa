@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.scribunto.libs.wikibases;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Keyval;
 import gplx.Keyval_;
@@ -45,17 +45,17 @@ public class Basic__tst {
 		wdata_fxt.Init_lang_fallbacks("zh-hant", "zh-hk");
 	}
 	@Test public void IsValidEntityId() {
-		IsValidEntityIdCheck(Bool_.Y, "P1");
-		IsValidEntityIdCheck(Bool_.Y, "P123");
-		IsValidEntityIdCheck(Bool_.Y, "Q1");
-		IsValidEntityIdCheck(Bool_.Y, "Q123");
-		IsValidEntityIdCheck(Bool_.Y, "A:B:Q123");
+		IsValidEntityIdCheck(BoolUtl.Y, "P1");
+		IsValidEntityIdCheck(BoolUtl.Y, "P123");
+		IsValidEntityIdCheck(BoolUtl.Y, "Q1");
+		IsValidEntityIdCheck(BoolUtl.Y, "Q123");
+		IsValidEntityIdCheck(BoolUtl.Y, "A:B:Q123");
 
-		IsValidEntityIdCheck(Bool_.N, "p1");
-		IsValidEntityIdCheck(Bool_.N, "q1");
-		IsValidEntityIdCheck(Bool_.N, "P");
-		IsValidEntityIdCheck(Bool_.N, "P1A");
-		IsValidEntityIdCheck(Bool_.N, "P01");
+		IsValidEntityIdCheck(BoolUtl.N, "p1");
+		IsValidEntityIdCheck(BoolUtl.N, "q1");
+		IsValidEntityIdCheck(BoolUtl.N, "P");
+		IsValidEntityIdCheck(BoolUtl.N, "P1A");
+		IsValidEntityIdCheck(BoolUtl.N, "P01");
 	}
 	private void IsValidEntityIdCheck(boolean expd, String val) {
 		fxt.Test_scrib_proc_bool(lib, Scrib_lib_wikibase.Invk_isValidEntityId, Object_.Ary(val), expd);

@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.miscs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.addons.htmls.tocs.*;
-import gplx.xowa.wikis.pages.wtxts.*;
 public class Xop_under_lxr implements Xop_lxr {
 	private final Object thread_lock = new Object();
 	private Btrie_mgr words_trie_ci, words_trie_cs; private final Btrie_rv trv_cs = new Btrie_rv(), trv_ci = new Btrie_rv();
@@ -131,7 +131,7 @@ class Xop_under_hook {
 	public byte[] Key() {return key;} private byte[] key;
 	public int Key_len() {return key_len;} private int key_len;
 	public static final byte Tid_std = 1, Tid_alt = 2;
-	public static final byte[] Key_std = new byte[] {Byte_ascii.Underline, Byte_ascii.Underline}, Key_alt = Bry_.new_u8("＿＿");	// ja wikis
+	public static final byte[] Key_std = new byte[] {AsciiByte.Underline, AsciiByte.Underline}, Key_alt = Bry_.new_u8("＿＿");	// ja wikis
 	public static final Xop_under_hook
 	  Itm_std = new Xop_under_hook(Tid_std, Key_std)
 	, Itm_alt = new Xop_under_hook(Tid_alt, Key_alt)

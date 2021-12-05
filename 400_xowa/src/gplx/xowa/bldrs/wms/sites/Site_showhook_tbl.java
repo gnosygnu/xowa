@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.wms.sites; import gplx.*;
 import gplx.dbs.*;
+import gplx.objects.strings.AsciiByte;
 class Site_showhook_tbl implements Db_tbl {
 	private final DbmetaFldList flds = new DbmetaFldList();
 	private final String fld_site_abrv, fld_name, fld_scribunto, fld_subscribers;
@@ -45,7 +46,7 @@ class Site_showhook_tbl implements Db_tbl {
 				Site_showhook_itm itm = new Site_showhook_itm
 				( rdr.Read_bry_by_str(fld_name)
 				, rdr.Read_bry_by_str(fld_scribunto)
-				, Bry_split_.Split(rdr.Read_bry_by_str(fld_subscribers), Byte_ascii.Pipe_bry)
+				, Bry_split_.Split(rdr.Read_bry_by_str(fld_subscribers), AsciiByte.PipeBry)
 				);
 				list.Add(itm.Name(), itm);
 			}
@@ -67,7 +68,7 @@ class Site_showhook_tbl implements Db_tbl {
 			.Val_bry_as_str(fld_site_abrv		, site_abrv)
 			.Val_bry_as_str(fld_name			, name)
 			.Val_bry_as_str(fld_scribunto		, scribunto)
-			.Val_bry_as_str(fld_subscribers		, Bry_.Add_w_dlm(Byte_ascii.Pipe, subscribers))
+			.Val_bry_as_str(fld_subscribers		, Bry_.Add_w_dlm(AsciiByte.Pipe, subscribers))
 			.Exec_insert();
 	}		
 }

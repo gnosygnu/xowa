@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.dbs; import gplx.*;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.tbls.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.utils.*;
@@ -102,7 +105,7 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 		byte[] ttl_row_bry = tmp.To_bry_and_clear();
 		tmp.Mkr_rls();
 		Xowd_hive_mgr ttl_hive = new Xowd_hive_mgr(wiki, Xotdb_dir_info_.Tid_ttl);
-		ttl_hive.Update(ns, old_ttl, new_ttl, ttl_row_bry, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Pipe, true, true);
+		ttl_hive.Update(ns, old_ttl, new_ttl, ttl_row_bry, Xotdb_page_itm_.Txt_ttl_pos, AsciiByte.Pipe, true, true);
 	}
 	private void Data_save(byte dir_tid, Xob_xdat_file xdat_file, Io_url url, Bry_bfr tmp_bfr) {
 		xdat_file.Save(url);
@@ -110,11 +113,11 @@ public class Xodb_save_mgr_txt implements Xodb_save_mgr {
 	private Xowd_page_itm tmp_page = new Xowd_page_itm(); 
 	public static final int File_idx_unknown = -1;
 }
-class Bry_comparer_fld_last implements gplx.core.lists.ComparerAble {
+class Bry_comparer_fld_last implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		byte[] lhs = (byte[])lhsObj, rhs = (byte[])rhsObj;
-		int lhs_bgn = Bry_find_.Find_bwd(lhs, Byte_ascii.Pipe); if (lhs_bgn == Bry_find_.Not_found) lhs_bgn = -1;
-		int rhs_bgn = Bry_find_.Find_bwd(rhs, Byte_ascii.Pipe); if (rhs_bgn == Bry_find_.Not_found) rhs_bgn = -1;
+		int lhs_bgn = Bry_find_.Find_bwd(lhs, AsciiByte.Pipe); if (lhs_bgn == Bry_find_.Not_found) lhs_bgn = -1;
+		int rhs_bgn = Bry_find_.Find_bwd(rhs, AsciiByte.Pipe); if (rhs_bgn == Bry_find_.Not_found) rhs_bgn = -1;
 		return Bry_.Compare(lhs, lhs_bgn + 1, lhs.length, rhs, rhs_bgn + 1, rhs.length);
 	}
 	public static final Bry_comparer_fld_last Instance = new Bry_comparer_fld_last();

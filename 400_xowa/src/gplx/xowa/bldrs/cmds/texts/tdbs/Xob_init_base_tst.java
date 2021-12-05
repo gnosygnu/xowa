@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
-import org.junit.*; import gplx.xowa.htmls.portal.*; import gplx.xowa.wikis.xwikis.*;
-import gplx.xowa.bldrs.cmds.texts.sqls.*;
+package gplx.xowa.bldrs.cmds.texts.tdbs;
+import gplx.Io_mgr;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.bldrs.cmds.texts.sqls.Xob_init_cmd;
+import gplx.xowa.htmls.portal.Xoa_available_wikis_mgr;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
+import org.junit.Before;
+import org.junit.Test;
 public class Xob_init_base_tst {
 	@Before public void init() {fxt.Clear();} private Xob_init_base_fxt fxt = new Xob_init_base_fxt();
 	@Test public void Dirty_wiki_itms() {
@@ -23,7 +32,7 @@ public class Xob_init_base_tst {
 		Xoa_available_wikis_mgr wikis_list = fxt.App().Gui_mgr().Html_mgr().Portal_mgr().Wikis();
 		Tfds.Eq("", wikis_list.Itms_as_html());			// assert
 		Xow_xwiki_itm xwiki_itm = app.Usere().Wiki().Xwiki_mgr().Add_by_atrs("en.wikipedia.org", "en.wikipedia.org");
-		xwiki_itm.Offline_(Bool_.Y);	// simulate add via Available_from_fsys; DATE:2014-09-21
+		xwiki_itm.Offline_(BoolUtl.Y);	// simulate add via Available_from_fsys; DATE:2014-09-21
 		Tfds.Eq("", wikis_list.Itms_as_html());			// still empty
 		new Xob_init_cmd(app.Bldr(), wiki).Cmd_end();	// mock "init" task
 		Tfds.Eq("\n        <li><a href=\"/site/en.wikipedia.org/\" class='xowa-hover-off'>en.wikipedia.org</a></li>", wikis_list.Itms_as_html());	// no longer empty

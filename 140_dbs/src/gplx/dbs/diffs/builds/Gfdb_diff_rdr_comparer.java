@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.diffs.builds; import gplx.*; import gplx.dbs.*; import gplx.dbs.diffs.*;
+package gplx.dbs.diffs.builds;
+import gplx.Err_;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.diffs.Gfdb_diff_tbl;
+import gplx.dbs.diffs.Gfdb_rdr_utl_;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.primitives.BoolUtl;
 class Gfdb_diff_rdr_comparer {
 	private Db_rdr old_rdr, new_rdr;
 	private boolean old_rdr_move, new_rdr_move;
@@ -21,8 +28,8 @@ class Gfdb_diff_rdr_comparer {
 	private DbmetaFldItm[] key_flds; private int key_flds_len;
 	public void Init_rdrs(Gfdb_diff_tbl tbl, Db_rdr old_rdr, Db_rdr new_rdr) {
 		this.old_rdr = old_rdr; this.new_rdr = new_rdr;
-		this.old_rdr_move = new_rdr_move = Bool_.Y;
-		this.old_rdr_done = new_rdr_done = Bool_.N;
+		this.old_rdr_move = new_rdr_move = BoolUtl.Y;
+		this.old_rdr_done = new_rdr_done = BoolUtl.N;
 		this.key_flds = tbl.Keys; key_flds_len = key_flds.length;
 	}
 	public int Compare() {
@@ -40,14 +47,14 @@ class Gfdb_diff_rdr_comparer {
 		else {
 			int comp = Gfdb_rdr_utl_.Compare(key_flds, key_flds_len, old_rdr, new_rdr);
 			switch (comp) {
-				case CompareAble_.Same:			// old == cur; move both
+				case CompareAbleUtl.Same:			// old == cur; move both
 					old_rdr_move = new_rdr_move = true;
 					return Gfdb_diff_rdr_comparer.Rslt__same;
-				case CompareAble_.Less:			// old < cur; EX: old == 2; cur == 3
+				case CompareAbleUtl.Less:			// old < cur; EX: old == 2; cur == 3
 					old_rdr_move = true;
 					new_rdr_move = false;
 					return Gfdb_diff_rdr_comparer.Rslt__new_missing;
-				case CompareAble_.More:			// old > cur; EX: old == 4; cur == 3
+				case CompareAbleUtl.More:			// old > cur; EX: old == 4; cur == 3
 					old_rdr_move = false;
 					new_rdr_move = true;
 					return Gfdb_diff_rdr_comparer.Rslt__old_missing;

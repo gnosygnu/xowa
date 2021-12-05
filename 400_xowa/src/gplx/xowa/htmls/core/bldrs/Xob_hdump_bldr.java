@@ -13,12 +13,32 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.core.brys.*; import gplx.dbs.*;
-import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.apps.apis.xowa.bldrs.imports.*;
-import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.dbs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.parsers.*;
+package gplx.xowa.htmls.core.bldrs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.Gfo_usr_dlg_;
+import gplx.GfsCtx;
+import gplx.String_;
+import gplx.core.brys.Bry_diff_;
+import gplx.dbs.Db_conn;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.bldrs.Xobldr_cfg;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.Xow_hdump_mgr;
+import gplx.xowa.htmls.core.dbs.Xowd_html_tbl;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.wikis.Xow_page_tid;
+import gplx.xowa.wikis.pages.Xopg_view_mode_;
 public class Xob_hdump_bldr implements Gfo_invk {
 	private boolean enabled, hzip_enabled, hzip_diff, hzip_b256; private byte zip_tid = Byte_.Max_value_127;
 	private Xowe_wiki wiki; private Xob_hdump_tbl_retriever html_tbl_retriever;
@@ -67,8 +87,8 @@ public class Xob_hdump_bldr implements Gfo_invk {
 
 		// run hzip diff if enabled
 		if (hzip_diff && is_wikitext) {
-			byte[] expd_bry = op_sys_is_wnt ? Bry_.Replace(tmp_bfr, orig_bry, Byte_ascii.Cr_lf_bry, Byte_ascii.Nl_bry) : orig_bry;	// tidy adds crlf if wnt
-			byte[] actl_bry = hdump_mgr.Load_mgr().Decode_as_bry(tmp_bfr, tmp_hpg, hdump_mgr.Save_mgr().Src_as_hzip(), Bool_.Y);
+			byte[] expd_bry = op_sys_is_wnt ? Bry_.Replace(tmp_bfr, orig_bry, AsciiByte.CrLfBry, AsciiByte.NlBry) : orig_bry;	// tidy adds crlf if wnt
+			byte[] actl_bry = hdump_mgr.Load_mgr().Decode_as_bry(tmp_bfr, tmp_hpg, hdump_mgr.Save_mgr().Src_as_hzip(), BoolUtl.Y);
 			byte[][] diff = Bry_diff_.Diff_1st_line(expd_bry, actl_bry);
 			if (diff != null)
 				Gfo_usr_dlg_.Instance.Warn_many("", "", String_.Format("hzip diff: page={0} lhs='{1}' rhs='{2}'", tmp_hpg.Url_bry_safe(), diff[0], diff[1]));

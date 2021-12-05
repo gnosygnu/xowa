@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.paras; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.paras; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.*;
 public class Xop_para_tkn extends Xop_tkn_itm_base {
 	public Xop_para_tkn(int pos) {this.Tkn_ini_pos(false, pos, pos);}
@@ -32,7 +34,7 @@ public class Xop_para_tkn extends Xop_tkn_itm_base {
 			if (hctx.Mode_is_alt())							// write called during alt=''
 				bfr.Add_byte_space();						// write '\s', not '\n'
 			else
-				bfr.Add_byte_if_not_last(Byte_ascii.Nl);	// write '\n'
+				bfr.Add_byte_if_not_last(AsciiByte.Nl);	// write '\n'
 		}
 		switch (para_end) {
 			case Xop_para_tkn.Tid_none:		break;
@@ -47,6 +49,6 @@ public class Xop_para_tkn extends Xop_tkn_itm_base {
 			default:						throw Err_.new_unhandled(para_bgn);
 		}
 		if (space_bgn > 0)
-			bfr.Add_byte_repeat(Byte_ascii.Space, space_bgn);
+			bfr.Add_byte_repeat(AsciiByte.Space, space_bgn);
 	}
 }

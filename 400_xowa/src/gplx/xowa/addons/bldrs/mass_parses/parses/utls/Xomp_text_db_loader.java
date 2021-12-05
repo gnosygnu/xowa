@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.mass_parses.parses.utls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.dbs.*;
 import gplx.core.ios.*;
 import gplx.xowa.wikis.data.tbls.*;
@@ -63,7 +65,7 @@ public class Xomp_text_db_loader {
 			// load if 255 in list, or last
 			if (	batch_idx % 255 == 0 
 				||	i == list_len - 1) {
-				bry.Add_byte(Byte_ascii.Paren_end);
+				bry.Add_byte(AsciiByte.ParenEnd);
 				Load_from_text_db(page_hash, zip_tid, text_db_id, bry.To_str_and_clear());
 				batch_idx = 0;
 			}

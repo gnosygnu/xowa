@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.vnts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.vnts.*;
 class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRule
 	private final Vnt_flag_parser flag_parser = new Vnt_flag_parser(); private final Vnt_flag_code_mgr flag_codes = new Vnt_flag_code_mgr(); private final Vnt_flag_lang_mgr flag_langs = new Vnt_flag_lang_mgr();
@@ -42,8 +43,8 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 		}
 		this.vnt_key = vnt_itm.Key();
 		this.display = this.title = null;
-		this.action = Byte_ascii.Null;
-		int pipe_pos = Bry_find_.Find_fwd(src, Byte_ascii.Pipe, src_bgn, src_end);
+		this.action = AsciiByte.Null;
+		int pipe_pos = Bry_find_.Find_fwd(src, AsciiByte.Pipe, src_bgn, src_end);
 		flag_parser.Parse(flag_codes, flag_langs, vnt_regy, src, src_bgn, pipe_pos);
 		int rule_bgn = pipe_pos == -1 ? src_bgn : pipe_pos + 1;
 		this.rule_raw = Bry_.Mid(src, rule_bgn, src_end);
@@ -96,8 +97,8 @@ class Vnt_convert_rule {	// REF.MW: /languages/LanguageConverter.php|ConverterRu
 					break;
 				case Vnt_flag_code_.Tid_descrip:	display = Make_descrip(); break;			// process D flag: output rules description
 				case Vnt_flag_code_.Tid_hide:		display = Bry_.Empty; break;				// process H,- flag or T only: output nothing
-				case Vnt_flag_code_.Tid_del:		display = Bry_.Empty; action = Byte_ascii.Dash; break;
-				case Vnt_flag_code_.Tid_add:		display = Bry_.Empty; action = Byte_ascii.Plus; break;
+				case Vnt_flag_code_.Tid_del:		display = Bry_.Empty; action = AsciiByte.Dash; break;
+				case Vnt_flag_code_.Tid_add:		display = Bry_.Empty; action = AsciiByte.Plus; break;
 				case Vnt_flag_code_.Tid_show:		display = Make_converted(vnt_itm); break;
 				case Vnt_flag_code_.Tid_title:		display = Bry_.Empty; title = Make_title(vnt_itm); break;
 				default:							break;									// ignore unknown flags (but see error case below)

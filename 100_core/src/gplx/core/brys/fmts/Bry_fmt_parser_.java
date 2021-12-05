@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.brys.fmts; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Bry_fmt_parser_ {
 	public static Bry_fmt_itm[] Parse(byte escape, byte grp_bgn, byte grp_end, Bfr_fmt_arg[] args, byte[][] keys, byte[] src) {
 		int src_len = src.length;
@@ -29,7 +30,7 @@ public class Bry_fmt_parser_ {
 				if (txt_bgn != -1) list.Add(new Bry_fmt_itm(Bry_fmt_itm.Tid__txt, txt_bgn, pos));
 				if (is_last) break;
 				++pos;
-				if (pos == src_len) throw Err_.new_("bry_fmtr", "fmt cannot end with escape", "escape", Byte_ascii.To_str(escape), "raw", src);
+				if (pos == src_len) throw Err_.new_("bry_fmtr", "fmt cannot end with escape", "escape", AsciiByte.ToStr(escape), "raw", src);
 				b = src[pos];
 				if		(b == escape) {
 					list.Add(new Bry_fmt_itm(Bry_fmt_itm.Tid__txt, pos, pos + 1));
@@ -37,7 +38,7 @@ public class Bry_fmt_parser_ {
 				}
 				else if (b == grp_bgn) {
 					++pos;
-					int grp_end_pos = Bry_find_.Find_fwd(src, grp_end, pos); if (grp_end_pos == Bry_find_.Not_found) throw Err_.new_("bry_fmtr", "grp_end missing", "grp_bgn", Byte_ascii.To_str(grp_bgn), "grp_end", Byte_ascii.To_str(grp_end), "raw", src);
+					int grp_end_pos = Bry_find_.Find_fwd(src, grp_end, pos); if (grp_end_pos == Bry_find_.Not_found) throw Err_.new_("bry_fmtr", "grp_end missing", "grp_bgn", AsciiByte.ToStr(grp_bgn), "grp_end", AsciiByte.ToStr(grp_end), "raw", src);
 					byte[] key_bry = Bry_.Mid(src, pos, grp_end_pos);
 					Bry_fmt_itm key_itm = (Bry_fmt_itm)keys_hash.Get_by_bry(key_bry);
 					if (key_itm == null) {
@@ -48,7 +49,7 @@ public class Bry_fmt_parser_ {
 					list.Add(key_itm);
 					pos = grp_end_pos + 1;
 				}
-				else throw Err_.new_("bry_fmtr", "escape must be followed by escape or group_bgn", "escape", Byte_ascii.To_str(escape), "group_bgn", Byte_ascii.To_str(escape), "raw", src);
+				else throw Err_.new_("bry_fmtr", "escape must be followed by escape or group_bgn", "escape", AsciiByte.ToStr(escape), "group_bgn", AsciiByte.ToStr(escape), "raw", src);
 				txt_bgn = -1;
 			}
 			else {
@@ -79,7 +80,7 @@ public class Bry_fmt_parser_ {
 		while (pos < src_len) {
 			int lhs_pos = Bry_find_.Move_fwd(src, Bry_arg_lhs, pos + 1, src_len);
 			if (lhs_pos == Bry_find_.Not_found) break;	// no more "~{"
-			int rhs_pos = Bry_find_.Find_fwd(src, Byte_ascii.Curly_end, lhs_pos, src_len);
+			int rhs_pos = Bry_find_.Find_fwd(src, AsciiByte.CurlyEnd, lhs_pos, src_len);
 			if (rhs_pos == Bry_find_.Not_found) throw Err_.new_("bry_fmt", "unable to find closing }", "src", src);
 			if (rhs_pos - lhs_pos == 0) throw Err_.new_("bry_fmt", "{} will result in empty key", "src", src);
 			byte[] key = Bry_.Mid(src, lhs_pos, rhs_pos);

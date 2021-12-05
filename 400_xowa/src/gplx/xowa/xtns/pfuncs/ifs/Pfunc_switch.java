@@ -13,9 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
+package gplx.xowa.xtns.pfuncs.ifs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.langs.kwds.Xol_kwd_mgr;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.tmpls.Arg_itm_tkn;
+import gplx.xowa.parsers.tmpls.Arg_nde_tkn;
+import gplx.xowa.parsers.tmpls.Xot_invk;
+import gplx.xowa.xtns.pfuncs.Pf_func;
+import gplx.xowa.xtns.pfuncs.Pf_func_;
+import gplx.xowa.xtns.pfuncs.Pf_func_base;
 public class Pfunc_switch extends Pf_func_base {
 	@Override public int Id() {return Xol_kwd_grp_.Id_xtn_switch;}
 	@Override public Pf_func New(int id, byte[] name) {return new Pfunc_switch().Name_(name);}
@@ -79,7 +89,7 @@ public class Pfunc_switch extends Pf_func_base {
 //			}
 	}
 	private byte[] Get_or_eval(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Bry_bfr bb, Arg_itm_tkn itm, Bry_bfr tmp) {
-		if (itm.Itm_static() == Bool_.Y_byte)
+		if (itm.Itm_static() == BoolUtl.YByte)
 			return Bry_.Trim(src, itm.Dat_bgn(), itm.Dat_end());
 		else {
 			itm.Tmpl_evaluate(ctx, src, caller, tmp);

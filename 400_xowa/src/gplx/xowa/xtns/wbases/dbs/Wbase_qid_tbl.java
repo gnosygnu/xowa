@@ -13,9 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.dbs.*;
-import gplx.xowa.wikis.data.*;
+package gplx.xowa.xtns.wbases.dbs;
+import gplx.Rls_able;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.Db_stmt_;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_mgr;
 public class Wbase_qid_tbl implements Rls_able {
 	private final Object thread_lock = new Object();
 	private final String tbl_name; private final DbmetaFldList flds = new DbmetaFldList();
@@ -55,8 +67,8 @@ public class Wbase_qid_tbl implements Rls_able {
 				if (rdr.Move_next()) {
 					rv = rdr.Read_bry_by_str(fld_trg_ttl);
 					if (rv != null) {
-						if (rv.length > 0 && rv[0] == Byte_ascii.Ltr_q)
-							rv[0] = Byte_ascii.Ltr_Q;
+						if (rv.length > 0 && rv[0] == AsciiByte.Ltr_q)
+							rv[0] = AsciiByte.Ltr_Q;
 					}
 				}
 				return rv;
@@ -77,6 +89,6 @@ public class Wbase_qid_tbl implements Rls_able {
 			);
 	}
 	public static Wbase_qid_tbl New_make(Db_conn conn, boolean src_ttl_has_spaces) {
-		return new Wbase_qid_tbl(conn, Bool_.N, src_ttl_has_spaces);
+		return new Wbase_qid_tbl(conn, BoolUtl.N, src_ttl_has_spaces);
 	}
 }

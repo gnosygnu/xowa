@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
-import org.junit.*; import gplx.xowa.langs.cases.*;
+package gplx.xowa.addons.wikis.searchs.parsers;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.langs.cases.Xol_case_mgr;
+import gplx.xowa.langs.cases.Xol_case_mgr_;
+import org.junit.Before;
+import org.junit.Test;
 public class Srch_text_parser_tst {
 	private final Srch_text_parser_fxt fxt = new Srch_text_parser_fxt();
 	@Before public void init() {fxt.Init();}
@@ -122,7 +130,7 @@ class Srch_text_parser_fxt {
 	}
 	public void Test__split(String src, Srch_word_itm... expd_words) {
 		byte[] src_bry = Bry_.new_u8(src);
-		word_parser.Parse(Bool_.Y, src_bry, 0, src_bry.length);
+		word_parser.Parse(BoolUtl.Y, src_bry, 0, src_bry.length);
 		Tfds.Eq_str_lines(To_str(expd_words), To_str(word_parser.word_hash));
 	}
 	private String To_str(Srch_word_itm[] word_ary) {

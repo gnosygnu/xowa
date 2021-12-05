@@ -13,22 +13,61 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.net.*; import gplx.core.brys.*; import gplx.core.ios.*;
-import gplx.dbs.*;
-import gplx.xowa.apps.*;	
-import gplx.xowa.guis.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.cases.*; 
-import gplx.xowa.files.*; import gplx.xowa.files.origs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.bins.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.metas.*; import gplx.xowa.wikis.data.site_stats.*; import gplx.xowa.wikis.data.*; import gplx.xowa.files.repos.*; import gplx.xowa.wikis.data.tbls.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.ttls.*; import gplx.xowa.addons.*;
-import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.bridges.dbuis.tbls.*; import gplx.xowa.htmls.hrefs.*;
-import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.fsys.*;
-import gplx.xowa.parsers.*;
-import gplx.xowa.apps.urls.*;
-import gplx.fsdb.*; import gplx.fsdb.meta.*;
-import gplx.xowa.specials.mgrs.*;
-import gplx.xowa.addons.wikis.htmls.css.bldrs.*; import gplx.xowa.addons.wikis.htmls.css.mgrs.*; import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.*; import gplx.xowa.addons.wikis.ctgs.htmls.catpages.*;
-import gplx.xowa.htmls.hxtns.pages.*;
+package gplx.xowa.wikis;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.GfsCtx;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.core.brys.Bry_bfr_mkr;
+import gplx.core.ios.Io_stream_zip_mgr;
+import gplx.core.net.Gfo_url;
+import gplx.fsdb.Fsdb_db_mgr;
+import gplx.fsdb.Fsdb_db_mgr_;
+import gplx.fsdb.Fsdb_db_mgr__v2_bldr;
+import gplx.fsdb.meta.Fsm_mnt_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.Xoax_addon_mgr;
+import gplx.xowa.addons.wikis.ctgs.htmls.catpages.Xoctg_catpage_mgr;
+import gplx.xowa.addons.wikis.ctgs.htmls.pageboxs.Xoctg_pagebox_wtr;
+import gplx.xowa.addons.wikis.htmls.css.mgrs.Xowd_css_core_mgr;
+import gplx.xowa.apps.Xoav_app;
+import gplx.xowa.apps.urls.Xow_url_parser;
+import gplx.xowa.files.Xof_fsdb_mode;
+import gplx.xowa.files.Xof_url_bldr;
+import gplx.xowa.files.bins.Xof_bin_mgr;
+import gplx.xowa.files.fsdb.Xof_fsdb_mgr__sql;
+import gplx.xowa.files.origs.Xof_orig_mgr;
+import gplx.xowa.files.origs.Xof_orig_tbl;
+import gplx.xowa.files.repos.Xow_repo_mgr;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.Xoh_page_wtr_mgr;
+import gplx.xowa.htmls.core.Xow_hdump_mgr;
+import gplx.xowa.htmls.core.htmls.utls.Xoh_lnki_bldr;
+import gplx.xowa.htmls.hrefs.Xoh_href_wtr;
+import gplx.xowa.htmls.hxtns.pages.Hxtn_page_mgr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.cases.Xol_case_mgr;
+import gplx.xowa.langs.cases.Xol_case_mgr_;
+import gplx.xowa.langs.msgs.Xow_msg_mgr;
+import gplx.xowa.parsers.Xow_mw_parser_mgr;
+import gplx.xowa.specials.mgrs.Xosp_special_mgr;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.Xowd_core_db_props;
+import gplx.xowa.wikis.data.site_stats.Xowd_site_stats_mgr;
+import gplx.xowa.wikis.domains.Xow_abrv_wm_;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import gplx.xowa.wikis.fsys.Xow_fsys_mgr;
+import gplx.xowa.wikis.metas.Xow_wiki_props;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.wikis.nss.Xow_ns_mgr_;
+import gplx.xowa.wikis.ttls.Xow_ttl_parser;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_mgr;
 public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	private final Xof_fsdb_mgr__sql fsdb_mgr; private Fsdb_db_mgr db_core_mgr;
 	private boolean init_needed = true;
@@ -57,7 +96,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		this.ctg_catpage_mgr = new Xoctg_catpage_mgr(this);
 	}
 	public Xoa_app						App() {return app;}
-	public boolean							Type_is_edit() {return Bool_.N;}
+	public boolean							Type_is_edit() {return BoolUtl.N;}
 	public byte[]						Domain_bry() {return domain_bry;} private final byte[] domain_bry;
 	public String						Domain_str() {return domain_str;} private final String domain_str;
 	public Xow_domain_itm				Domain_itm() {return domain_itm;} private final Xow_domain_itm domain_itm;
@@ -74,10 +113,10 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 	public Fsm_mnt_mgr					File__mnt_mgr() {return fsdb_mgr.Mnt_mgr();}
 	public Xoh_lnki_bldr				Html__lnki_bldr() {return lnki_bldr;}  private final Xoh_lnki_bldr lnki_bldr;
 	public Xoh_href_wtr					Html__href_wtr()  {return href_wtr;} private final Xoh_href_wtr href_wtr = new Xoh_href_wtr();
-	public boolean							Html__hdump_enabled() {return Bool_.Y;}
+	public boolean							Html__hdump_enabled() {return BoolUtl.Y;}
 	public Xow_hdump_mgr				Html__hdump_mgr() {return html__hdump_mgr;} private final Xow_hdump_mgr html__hdump_mgr;
 	public boolean							Html__css_installing() {return html__css_installing;} public void Html__css_installing_(boolean v) {html__css_installing = v;} private boolean html__css_installing;
-	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(Bool_.Y);
+	public Xoh_page_wtr_mgr				Html__wtr_mgr() {return html__wtr_mgr;} private final Xoh_page_wtr_mgr html__wtr_mgr = new Xoh_page_wtr_mgr(BoolUtl.Y);
 	public Xoctg_pagebox_wtr			Ctg__pagebox_wtr() {return ctg_pagebox_wtr;} private final Xoctg_pagebox_wtr ctg_pagebox_wtr = new Xoctg_pagebox_wtr();
 	public Xoctg_catpage_mgr			Ctg__catpage_mgr() {return ctg_catpage_mgr;} private final Xoctg_catpage_mgr ctg_catpage_mgr;
 	public Xow_msg_mgr					Msg_mgr() {return msg_mgr;} private final Xow_msg_mgr msg_mgr;
@@ -141,7 +180,7 @@ public class Xowv_wiki implements Xow_wiki, Xow_ttl_parser, Gfo_invk {
 		if (ttl.Ns().Id_is_special())
 			special_mgr.Get_by_ttl(rv, url, ttl);
 		else
-			html__hdump_mgr.Load_mgr().Load_by_xowh(rv, ttl, Bool_.Y);
+			html__hdump_mgr.Load_mgr().Load_by_xowh(rv, ttl, BoolUtl.Y);
 	}
 	public Xoa_ttl	Ttl_parse(byte[] ttl)								{return Ttl_parse(ttl, 0, ttl.length);}
 	public Xoa_ttl	Ttl_parse(byte[] src, int src_bgn, int src_end)		{return Xoa_ttl.Parse(app.Utl_amp_mgr(), app.Utl_case_mgr(), xwiki_mgr, ns_mgr, src, src_bgn, src_end);}

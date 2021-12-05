@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.metas; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.metas; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.flds.*;
 import gplx.xowa.files.*; import gplx.xowa.files.repos.*;
 import gplx.xowa.parsers.utils.*; import gplx.xowa.parsers.lnkis.*;
@@ -125,10 +127,10 @@ public class Xof_meta_itm {
 		wtr.Write_bry_escape_fld(ttl);
 		byte vrtl_repo_byte = Byte_.Max_value_127;
 		switch (vrtl_repo) {
-			case Repo_unknown:		vrtl_repo_byte = Byte_ascii.Ltr_z; break;
-			case Repo_same:			vrtl_repo_byte = Byte_ascii.Ltr_y; break;
-			case Repo_missing:		vrtl_repo_byte = Byte_ascii.Ltr_x; break;
-			default:				vrtl_repo_byte = (byte)(vrtl_repo + Byte_ascii.Num_0); break;
+			case Repo_unknown:		vrtl_repo_byte = AsciiByte.Ltr_z; break;
+			case Repo_same:			vrtl_repo_byte = AsciiByte.Ltr_y; break;
+			case Repo_missing:		vrtl_repo_byte = AsciiByte.Ltr_x; break;
+			default:				vrtl_repo_byte = (byte)(vrtl_repo + AsciiByte.Num0); break;
 		}
 		wtr.Write_byte_fld(vrtl_repo_byte);
 		wtr.Write_bry_escape_fld(ptr_ttl);
@@ -138,7 +140,7 @@ public class Xof_meta_itm {
 		int thumbs_len = thumbs.length;
 		Bry_bfr bfr = wtr.Bfr();
 		for (int i = 0; i < thumbs_len; i++) {
-			if (i != 0) bfr.Add_byte(Byte_ascii.Semic);
+			if (i != 0) bfr.Add_byte(AsciiByte.Semic);
 			Xof_meta_thumb thumb = thumbs[i];
 			thumb.Save(bfr);
 		}
@@ -150,10 +152,10 @@ public class Xof_meta_itm {
 		ttl = rdr.Read_bry_escape();
 		byte vrtl_repo_byte = rdr.Read_byte();
 		switch (vrtl_repo_byte) {
-			case Byte_ascii.Ltr_z:	vrtl_repo = Repo_unknown; break;
-			case Byte_ascii.Ltr_y:	vrtl_repo = Repo_same; break;
-			case Byte_ascii.Ltr_x:	vrtl_repo = Repo_missing; break;
-			default:				vrtl_repo = (byte)(vrtl_repo_byte - Byte_ascii.Num_0); break;
+			case AsciiByte.Ltr_z:	vrtl_repo = Repo_unknown; break;
+			case AsciiByte.Ltr_y:	vrtl_repo = Repo_same; break;
+			case AsciiByte.Ltr_x:	vrtl_repo = Repo_missing; break;
+			default:				vrtl_repo = (byte)(vrtl_repo_byte - AsciiByte.Num0); break;
 		}
 		ptr_ttl = rdr.Read_bry_escape();
 		rdr.Move_next_simple_fld();

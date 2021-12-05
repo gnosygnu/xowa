@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps;
+import gplx.objects.arrays.ArrayUtl;
 public class Php_itm_ary implements Php_itm, Php_itm_sub {
 	public Php_itm_ary() {}
 	public byte Itm_tid() {return Php_itm_.Tid_ary;}
@@ -26,7 +27,7 @@ public class Php_itm_ary implements Php_itm, Php_itm_sub {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Php_itm_sub[] new_ary = new Php_itm_sub[subs_max];
-			Array_.Copy_to(ary, 0, new_ary, 0, subs_len);
+			ArrayUtl.CopyTo(ary, 0, new_ary, 0, subs_len);
 			ary = new_ary;
 		}
 		ary[subs_len] = v;

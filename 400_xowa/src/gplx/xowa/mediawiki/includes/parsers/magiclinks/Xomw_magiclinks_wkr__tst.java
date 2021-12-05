@@ -13,8 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.magiclinks; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import org.junit.*;
+package gplx.xowa.mediawiki.includes.parsers.magiclinks;
+import gplx.Bry_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.mediawiki.XomwEnv_fxt;
+import gplx.xowa.mediawiki.includes.XomwTitleOld;
+import gplx.xowa.mediawiki.includes.parsers.XomwParser;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
+import gplx.xowa.mediawiki.includes.parsers.Xomw_regex_boundary;
+import gplx.xowa.mediawiki.includes.parsers.Xomw_regex_space;
+import gplx.xowa.mediawiki.includes.parsers.Xomw_regex_url;
+import org.junit.Test;
 public class Xomw_magiclinks_wkr__tst {
 	private final Xomw_magiclinks_wkr__fxt fxt = new Xomw_magiclinks_wkr__fxt();
 	@Test  public void Basic() {fxt.Test__parse("a https://b.org z", "a <a rel='nofollow' class='external free' href='https://b.org'>https://b.org</a> z");}
@@ -75,7 +86,7 @@ class Xomw_magiclinks_wkr__fxt {
 		this.wkr = new Xomw_magiclinks_wkr(parser, parser.Sanitizer(), parser.Linker(), new Xomw_regex_boundary(regex_space), new Xomw_regex_url(regex_space));
 		wkr.Init_by_wiki();
 	}
-	public void Test__parse(String src_str, String expd) {Test__parse(Bool_.Y, src_str, expd);}
+	public void Test__parse(String src_str, String expd) {Test__parse(BoolUtl.Y, src_str, expd);}
 	public void Test__parse(boolean apos, String src_str, String expd) {
 		byte[] src_bry = Bry_.new_u8(src_str);
 		pbfr.Init(src_bry);

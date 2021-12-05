@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.hzips; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
+package gplx.xowa.htmls.core.hzips; import gplx.*;
 import gplx.core.primitives.*; import gplx.core.encoders.*;
+import gplx.objects.strings.AsciiByte;
 public class Xoh_hzip_int {
 	private boolean mode_is_b256; private byte pad_byte; private byte[] prefix_ary;
 	public Xoh_hzip_int Mode_is_b256_(boolean v) {
@@ -24,7 +25,7 @@ public class Xoh_hzip_int {
 			prefix_ary		= prefix_ary__b256;
 		}
 		else {
-			pad_byte		= Byte_ascii.Bang;
+			pad_byte		= AsciiByte.Bang;
 			prefix_ary		= prefix_ary__b085;
 		}
 		return this;
@@ -57,12 +58,12 @@ public class Xoh_hzip_int {
 			}
 		}
 		else {
-			radix = 85; offset = Byte_ascii.Bang;				
+			radix = 85; offset = AsciiByte.Bang;
 			switch (b0) {
-				case Byte_ascii.Curly_bgn	: full_len = 3; hdr_byte_exists = true; break;
-				case Byte_ascii.Pipe		: full_len = 4; hdr_byte_exists = true; break;
-				case Byte_ascii.Curly_end	: full_len = 5; hdr_byte_exists = true; break;
-				case Byte_ascii.Tilde		: full_len = 6; hdr_byte_exists = true; break;
+				case AsciiByte.CurlyBgn: full_len = 3; hdr_byte_exists = true; break;
+				case AsciiByte.Pipe		: full_len = 4; hdr_byte_exists = true; break;
+				case AsciiByte.CurlyEnd: full_len = 5; hdr_byte_exists = true; break;
+				case AsciiByte.Tilde		: full_len = 6; hdr_byte_exists = true; break;
 			}
 		}
 		if (full_len < reqd_len) full_len = reqd_len;	// len should be padded
@@ -141,6 +142,6 @@ public class Xoh_hzip_int {
 	public static final byte prefix__b256__2 = (byte)(252 & 0xFF), prefix__b256__3 = (byte)(253 & 0xFF), prefix__b256__4 = (byte)(254 & 0xFF), prefix__b256__5 = (byte)(255 & 0xFF);
 	private static final byte[] 
 	  prefix_ary__b256 = new byte[] {0, 0, prefix__b256__2, prefix__b256__3, prefix__b256__4, prefix__b256__5}
-	, prefix_ary__b085 = new byte[] {0, 0, 0, Byte_ascii.Curly_bgn, Byte_ascii.Pipe, Byte_ascii.Curly_end, Byte_ascii.Tilde}
+	, prefix_ary__b085 = new byte[] {0, 0, 0, AsciiByte.CurlyBgn, AsciiByte.Pipe, AsciiByte.CurlyEnd, AsciiByte.Tilde}
 	;
 }

@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.heads; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.heads; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.numbers.*;
 public class Xoh_head_itm__globals extends Xoh_head_itm__base {
 	private final Xoh_head_wtr tmp_wtr = new Xoh_head_wtr();
@@ -35,11 +38,11 @@ public class Xoh_head_itm__globals extends Xoh_head_itm__base {
 		wtr.Write_js_include(Url_DOMContentLoaded_js);
 	}
 	@Override public void Write_js_head_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
-		wtr.Write_js_var(Var_xowa_root_dir			, Bool_.Y, app.Fsys_mgr().Root_dir().To_http_file_bry());
-		wtr.Write_js_var(Var_xowa_mode_is_server	, Bool_.N, app.Tcp_server().Running() ? Bool_.True_bry : Bool_.False_bry);
+		wtr.Write_js_var(Var_xowa_root_dir			, BoolUtl.Y, app.Fsys_mgr().Root_dir().To_http_file_bry());
+		wtr.Write_js_var(Var_xowa_mode_is_server	, BoolUtl.N, app.Tcp_server().Running() ? BoolUtl.TrueBry : BoolUtl.FalseBry);
 	}
 	@Override public void Write_js_tail_script(Xoae_app app, Xowe_wiki wiki, Xoae_page page, Xoh_head_wtr wtr) {
-		wtr.Write_js_xowa_var(Key__app_mode, Bool_.Y, app.Mode().Name());
+		wtr.Write_js_xowa_var(Key__app_mode, BoolUtl.Y, app.Mode().Name());
 		wtr.Write_js_alias_var	(Page__alias, Page__key);
 		wtr.Write_js_alias_kv	(Page__alias, Key__wiki		, page.Wiki().Domain_bry());
 		wtr.Write_js_alias_kv	(Page__alias, Key__ttl		, page.Ttl().Page_db());
@@ -90,8 +93,8 @@ public class Xoh_head_itm__globals extends Xoh_head_itm__base {
 		byte[] dec_spr = separator_mgr.Get_val_or_self(Xol_num_mgr.Separators_key__dec);
 		byte[] grp_spr = separator_mgr.Get_val_or_self(Xol_num_mgr.Separators_key__grp);
 		tmp_wtr.Write_js_ary_bgn();
-		tmp_wtr.Write_js_ary_itm(Bry_.Add(dec_spr, Byte_ascii.Tab_bry, Byte_ascii.Dot_bry));
-		tmp_wtr.Write_js_ary_itm(Bry_.Add(grp_spr, Byte_ascii.Tab_bry, Byte_ascii.Comma_bry));
+		tmp_wtr.Write_js_ary_itm(Bry_.Add(dec_spr, AsciiByte.TabBry, AsciiByte.DotBry));
+		tmp_wtr.Write_js_ary_itm(Bry_.Add(grp_spr, AsciiByte.TabBry, AsciiByte.CommaBry));
 		tmp_wtr.Write_js_ary_end();
 		return tmp_wtr.Bfr().To_bry_and_clear();
 	}

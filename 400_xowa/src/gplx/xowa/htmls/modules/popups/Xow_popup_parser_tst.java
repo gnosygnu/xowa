@@ -13,11 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.modules.popups; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.modules.*;
+package gplx.xowa.htmls.modules.popups; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import org.junit.*; import gplx.core.tests.*; import gplx.core.primitives.*;
-import gplx.xowa.apps.apis.xowa.html.modules.*;
 import gplx.xowa.wikis.nss.*;
-import gplx.xowa.guis.views.*;
 public class Xow_popup_parser_tst {
 	@Before public void init() {fxt.Clear();} private final Xop_popup_parser_fxt fxt = new Xop_popup_parser_fxt();
 	@Test  public void Text_chars_one() {
@@ -523,7 +523,7 @@ class Xop_popup_parser_fxt {
 	public void Test_Assert_at_end(String raw, String expd) {
 		if (test_bfr == null) test_bfr = Bry_bfr_.New();
 		test_bfr.Clear().Add_str_u8(raw);
-		Bry_bfr_.Assert_at_end(test_bfr, Byte_ascii.Nl);
+		Bry_bfr_.Assert_at_end(test_bfr, AsciiByte.Nl);
 		Tfds.Eq(expd, test_bfr.To_str_and_clear());
 	}	private Bry_bfr test_bfr;
 }

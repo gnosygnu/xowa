@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
+import gplx.objects.lists.CompareAbleUtl;
 public class Byte_ {//RF:2017-10-08
 	public static final String Cls_val_name = "byte";
 	public static final Class<?> Cls_ref_type = Byte.class;
@@ -51,9 +52,9 @@ public class Byte_ {//RF:2017-10-08
 	}
 
 	public static int Compare(byte lhs, byte rhs) {
-		if		(lhs == rhs) 	return CompareAble_.Same;
-		else if (lhs < rhs)		return CompareAble_.Less;
-		else 					return CompareAble_.More;
+		if		(lhs == rhs) 	return CompareAbleUtl.Same;
+		else if (lhs < rhs)		return CompareAbleUtl.Less;
+		else 					return CompareAbleUtl.More;
 	}
 
 	public static byte[] Ary(byte... ary) {return ary;}

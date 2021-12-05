@@ -13,13 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.imports; import gplx.*;
-import gplx.xowa.xtns.wbases.*;
-import org.junit.*;
-import gplx.dbs.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.bldrs.*;
-import gplx.xowa.bldrs.wms.sites.*;
+package gplx.xowa.xtns.wbases.imports;
+import gplx.Bry_;
+import gplx.Io_mgr;
+import gplx.Io_url_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.DbmetaFldList;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.bldrs.Xobldr_fxt;
+import gplx.xowa.bldrs.wms.sites.Site_core_db;
+import gplx.xowa.bldrs.wms.sites.Site_namespace_tbl;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import gplx.xowa.wikis.nss.Xow_ns_case_;
+import gplx.xowa.xtns.wbases.Wdata_wiki_mgr_fxt;
+import org.junit.Before;
+import org.junit.Test;
 public class Xob_wdata_qid_tst {
 	private Db_conn conn;
 	private final Xobldr_fxt fxt = new Xobldr_fxt().Ctor_mem();
@@ -50,8 +61,8 @@ public class Xob_wdata_qid_tst {
 	@Test public void Ns() {
 		Site_core_db json_db = new Site_core_db(fxt.App().Fsys_mgr().Cfg_site_meta_fil());
 		Site_namespace_tbl ns_tbl = json_db.Tbl__namespace();
-		ns_tbl.Insert(Bry_.new_a7("en.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Help"), Bool_.N, Bool_.N, Bry_.Empty);
-		ns_tbl.Insert(Bry_.new_a7("fr.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Aide"), Bool_.N, Bool_.N, Bry_.Empty);
+		ns_tbl.Insert(Bry_.new_a7("en.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Help"), BoolUtl.N, BoolUtl.N, Bry_.Empty);
+		ns_tbl.Insert(Bry_.new_a7("fr.w"), Xow_ns_.Tid__help, Xow_ns_case_.Bry__1st, Bry_.Empty, Bry_.new_a7("Aide"), BoolUtl.N, BoolUtl.N, Bry_.Empty);
 
 		fxt.Run_page_wkr(wkr
 		,	fxt.New_page_wo_date(1, "11", Wdata_wiki_mgr_fxt.New_json("q1", "links", String_.Ary("enwiki", "Help:Q1_en", "frwiki", "Aide:Q1_fr")))

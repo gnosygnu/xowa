@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.encoders; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.core.encoders;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Hex_utl__tst {
 	private final Hex_utl__fxt fxt = new Hex_utl__fxt();
 	@Test public void To_int() {
@@ -45,13 +54,13 @@ public class Hex_utl__tst {
 		fxt.Test__write("[00000000]", 1, 9, 255, "[000000FF]");
 	}
 	@Test  public void Write_bfr() {
-		fxt.Test__write_bfr(Bool_.Y,              0, "0");
-		fxt.Test__write_bfr(Bool_.Y,             15, "f");
-		fxt.Test__write_bfr(Bool_.Y,             16, "10");
-		fxt.Test__write_bfr(Bool_.Y,             32, "20");
-		fxt.Test__write_bfr(Bool_.Y,            255, "ff");
-		fxt.Test__write_bfr(Bool_.Y,            256, "100");
-		fxt.Test__write_bfr(Bool_.Y, Int_.Max_value, "7fffffff");
+		fxt.Test__write_bfr(BoolUtl.Y,              0, "0");
+		fxt.Test__write_bfr(BoolUtl.Y,             15, "f");
+		fxt.Test__write_bfr(BoolUtl.Y,             16, "10");
+		fxt.Test__write_bfr(BoolUtl.Y,             32, "20");
+		fxt.Test__write_bfr(BoolUtl.Y,            255, "ff");
+		fxt.Test__write_bfr(BoolUtl.Y,            256, "100");
+		fxt.Test__write_bfr(BoolUtl.Y, Int_.Max_value, "7fffffff");
 	}
 	@Test  public void Encode() {
 		fxt.Test__parse_hex_to_bry("E2A7BC", 226, 167, 188);

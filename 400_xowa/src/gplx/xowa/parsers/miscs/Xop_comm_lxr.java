@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.miscs; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
+package gplx.xowa.parsers.miscs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.parsers.*;
 import gplx.core.btries.*; import gplx.xowa.langs.*;
 import gplx.xowa.parsers.paras.*;
 public class Xop_comm_lxr implements Xop_lxr {
@@ -68,10 +70,10 @@ public class Xop_comm_lxr implements Xop_lxr {
 		while (loop) {										// look fwd for \n
 			if (loop_pos == src_len) break;
 			switch (src[loop_pos++]) {
-				case Byte_ascii.Space:
-				case Byte_ascii.Tab:
+				case AsciiByte.Space:
+				case AsciiByte.Tab:
 					break;
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					loop = false;
 					nl_rhs = loop_pos;
 					break;

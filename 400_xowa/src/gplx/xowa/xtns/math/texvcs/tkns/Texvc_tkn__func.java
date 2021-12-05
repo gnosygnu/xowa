@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.math.*; import gplx.xowa.xtns.math.texvcs.*;
+package gplx.xowa.xtns.math.texvcs.tkns; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.xtns.math.texvcs.funcs.*;
 public class Texvc_tkn__func implements Texvc_tkn {
 	public Texvc_tkn__func(Texvc_func_itm func_itm) {this.func_itm = func_itm;}
@@ -43,17 +44,17 @@ public class Texvc_tkn__func implements Texvc_tkn {
 			for (int i = 0; i < subs_len; ++i) {
 				Texvc_tkn sub_tkn = Subs__get_at(i);
 				if (i == 0 && (sub_tkn.Tid() == Texvc_tkn_.Tid__func) && tid != Texvc_tkn_.Tid__curly) {
-					bfr.Add_byte(Byte_ascii.Curly_bgn);
+					bfr.Add_byte(AsciiByte.CurlyBgn);
 					curly_added = true;
 				}
 				if (sub_tkn.Tid() == Texvc_tkn_.Tid__curly)
-					bfr.Add_byte(Byte_ascii.Curly_bgn);
+					bfr.Add_byte(AsciiByte.CurlyBgn);
 				sub_tkn.Print_tex_bry(bfr, src, indent + 1);
 				if (sub_tkn.Tid() == Texvc_tkn_.Tid__curly)
-					bfr.Add_byte(Byte_ascii.Curly_end);
+					bfr.Add_byte(AsciiByte.CurlyEnd);
 			}
 			if (curly_added)
-				bfr.Add_byte(Byte_ascii.Curly_end);
+				bfr.Add_byte(AsciiByte.CurlyEnd);
 		}
 	}
 	public void Print_dbg_bry(Bry_bfr bfr, int indent) {

@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.core.hzips.*;
-import gplx.xowa.wikis.ttls.*;
+package gplx.xowa.htmls.core.wkrs;
+import gplx.Bry_bfr;
+import gplx.Err_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.hzips.Xoh_data_itm;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_wkr;
 public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 	private Xoh_hzip_bfr bfr; private Xoh_hdoc_ctx hctx; private byte[] src;
 	private Xoh_page hpg;
@@ -25,11 +30,11 @@ public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 	}
 	public void On_page_end() {}
 	public void On_txt		(int rng_bgn, int rng_end)									{bfr.Add_mid(src, rng_bgn, rng_end);}
-	public void On_escape	(gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data)	{hctx.Pool_mgr__hzip().Mw__escape().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
-	public void On_xnde		(gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser data)		{hctx.Pool_mgr__hzip().Mw__xnde().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
-	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_data data)		{hctx.Pool_mgr__hzip().Mw__lnki().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
-	public boolean On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_data data)			{hctx.Pool_mgr__hzip().Mw__thm().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls(); return true;}
-	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_data data)		{hctx.Pool_mgr__hzip().Mw__gly().Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();}
+	public void On_escape	(gplx.xowa.htmls.core.wkrs.escapes.Xoh_escape_data data)	{hctx.Pool_mgr__hzip().Mw__escape().Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls();}
+	public void On_xnde		(gplx.xowa.htmls.core.wkrs.xndes.Xoh_xnde_parser data)		{hctx.Pool_mgr__hzip().Mw__xnde().Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls();}
+	public void On_lnki		(gplx.xowa.htmls.core.wkrs.lnkis.Xoh_lnki_data data)		{hctx.Pool_mgr__hzip().Mw__lnki().Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls();}
+	public boolean On_thm		(gplx.xowa.htmls.core.wkrs.thms.Xoh_thm_data data)			{hctx.Pool_mgr__hzip().Mw__thm().Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls(); return true;}
+	public void On_gly		(gplx.xowa.htmls.core.wkrs.glys.Xoh_gly_grp_data data)		{hctx.Pool_mgr__hzip().Mw__gly().Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls();}
 	public boolean Process_parse(Xoh_data_itm data) {
 		Xoh_hzip_wkr wkr = null;
 		switch (data.Tid()) {
@@ -41,7 +46,7 @@ public class Xoh_hdoc_wkr__hzip implements Xoh_hdoc_wkr {
 			case Xoh_hzip_dict_.Tid__media:		wkr = hctx.Pool_mgr__hzip().Mw__media(); break;
 			default:							throw Err_.new_unhandled(data.Tid());
 		}
-		wkr.Encode1(bfr, this, hctx, hpg, Bool_.Y, src, data).Pool__rls();
+		wkr.Encode1(bfr, this, hctx, hpg, BoolUtl.Y, src, data).Pool__rls();
 		return true;
 	}
 }

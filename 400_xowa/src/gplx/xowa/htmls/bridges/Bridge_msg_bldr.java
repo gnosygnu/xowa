@@ -13,20 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.bridges; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
-import gplx.langs.jsons.*;
+package gplx.xowa.htmls.bridges;
+import gplx.Bry_;
+import gplx.Int_;
+import gplx.Object_;
+import gplx.Type_ids_;
+import gplx.langs.jsons.Json_wtr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Bridge_msg_bldr {
 	private final Json_wtr wtr = new Json_wtr();
 	private boolean rslt_pass; private String rslt_msg;
 	private String notify_text; private String notify_status;
 	private final Gfo_tree_list data_root = new Gfo_tree_list("data");
 	public Bridge_msg_bldr() {
-		wtr.Opt_ws_(Bool_.N);
+		wtr.Opt_ws_(BoolUtl.N);
 		this.Clear();
 	}
-	public Bridge_msg_bldr Opt_quote_byte_apos_() {wtr.Opt_quote_byte_(Byte_ascii.Apos); return this;}
-	public Bridge_msg_bldr Rslt_pass_y_()			{return Rslt_pass_(Bool_.Y);}
-	public Bridge_msg_bldr Rslt_pass_n_(String v)	{Rslt_msg_(v); return Rslt_pass_(Bool_.N);}
+	public Bridge_msg_bldr Opt_quote_byte_apos_() {wtr.Opt_quote_byte_(AsciiByte.Apos); return this;}
+	public Bridge_msg_bldr Rslt_pass_y_()			{return Rslt_pass_(BoolUtl.Y);}
+	public Bridge_msg_bldr Rslt_pass_n_(String v)	{Rslt_msg_(v); return Rslt_pass_(BoolUtl.N);}
 	private Bridge_msg_bldr Rslt_pass_(boolean v)	{synchronized(wtr){this.rslt_pass = v;} return this;}
 	private Bridge_msg_bldr Rslt_msg_(String v)	{synchronized(wtr){this.rslt_msg = v;} return this;}
 	public Bridge_msg_bldr Notify_hint_(String v)	{synchronized(wtr){this.notify_hint = v;} return this;} private String notify_hint;
@@ -81,7 +87,7 @@ public class Bridge_msg_bldr {
 				Gfo_tree_data sub_kv = (Gfo_tree_data)itm;
 				String key = sub_kv.Key(); Object val = sub_kv.Val();
 				switch (sub_kv.Val_tid()) {
-					case Type_ids_.Id__bool:	wtr.Kv_bool(key, Bool_.Cast(val)); break;
+					case Type_ids_.Id__bool:	wtr.Kv_bool(key, BoolUtl.Cast(val)); break;
 					case Type_ids_.Id__int:		wtr.Kv_int(key, Int_.Cast(val)); break;
 					case Type_ids_.Id__bry:		wtr.Kv_bry(key, (byte[])val); break;
 					default:					wtr.Kv_str(key, Object_.Xto_str_strict_or_null_mark(val)); break;

@@ -13,10 +13,36 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs; import gplx.*; import gplx.xowa.*;
-import gplx.xowa.addons.wikis.searchs.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.addons.wikis.searchs.dbs.*; import gplx.xowa.addons.wikis.searchs.parsers.*;
+package gplx.xowa.addons.wikis.searchs.bldrs;
+import gplx.Bry_fmt;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.dbs.Db_attach_itm;
+import gplx.dbs.Db_attach_mgr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.searchs.Srch_search_addon;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_db_mgr;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_link_tbl;
+import gplx.xowa.addons.wikis.searchs.dbs.Srch_temp_tbl;
+import gplx.xowa.addons.wikis.searchs.parsers.Srch_text_parser;
+import gplx.xowa.addons.wikis.searchs.parsers.Srch_text_parser_wkr;
+import gplx.xowa.addons.wikis.searchs.parsers.Srch_word_itm;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
 class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 	private Xowe_wiki wiki; private Xow_db_mgr core_data_mgr; private Srch_search_addon search_addon; 
 	private Srch_text_parser title_parser;
@@ -49,10 +75,10 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		Db_conn word_conn = search_temp_tbl.conn;
 
 		// update search_word ids if they exist
-		// Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.Y);	// NOTE: fails in multi-db due to transaction
+		// Srch_db_mgr.Optimize_unsafe_(word_conn, BoolUtl.Y);	// NOTE: fails in multi-db due to transaction
 		Update_word_id(word_conn, wiki);
 		Search_word__insert(word_conn);
-		// Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.N);
+		// Srch_db_mgr.Optimize_unsafe_(word_conn, BoolUtl.N);
 
 		// create search_link
 		Db_conn page_conn = wiki.Data__core_mgr().Tbl__page().Conn();
@@ -82,7 +108,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 
 		// dump everything into a temp table in order to index it
 		page_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_tbl("page", "page_ns__page_id", "page_namespace", "page_id"));
-		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.Y);
+		Srch_db_mgr.Optimize_unsafe_(word_conn, BoolUtl.Y);
 		word_conn.Meta_tbl_remake(Dbmeta_tbl_itm.New("search_link_temp", DbmetaFldItm.NewInt("word_id"), DbmetaFldItm.NewInt("page_id"), DbmetaFldItm.NewInt("page_namespace")));
 		attach_mgr.Conn_main_(word_conn).Conn_links_(new Db_attach_itm("page_db", page_conn));
 		attach_mgr.Exec_sql_w_msg
@@ -96,14 +122,14 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		, "        JOIN <page_db>page p ON t.page_id = p.page_id"
 		));
 		word_conn.Meta_idx_create(Dbmeta_idx_itm.new_normal_by_name("search_link_temp", "main", "page_namespace", "word_id", "page_id"));
-		Srch_db_mgr.Optimize_unsafe_(word_conn, Bool_.N);
+		Srch_db_mgr.Optimize_unsafe_(word_conn, BoolUtl.N);
 		page_conn.Meta_idx_delete("page", "page_ns__page_id");
 
 		int len = search_db_mgr.Tbl__link__len();
 		for (int i = 0; i < len; ++i) {
 			Xoa_app_.Usr_dlg().Plog_many("", "", "creating search_link_temp: ~{0}", i);
 			Srch_link_tbl link_tbl = search_db_mgr.Tbl__link__ary()[i];
-			Srch_db_mgr.Optimize_unsafe_(link_tbl.conn, Bool_.Y);
+			Srch_db_mgr.Optimize_unsafe_(link_tbl.conn, BoolUtl.Y);
 			attach_mgr.Conn_main_(link_tbl.conn).Conn_links_(new Db_attach_itm("word_db", word_conn));
 			attach_mgr.Exec_sql_w_msg
 			( Bry_fmt.Make_str("filling search_link: ~{idx} of ~{len}", i, len), String_.Concat_lines_nl_skip_last
@@ -114,7 +140,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 			, "WHERE   t.page_namespace" + (i == 0 ? " = 0" : " != 0")
 			));
 			link_tbl.Create_idx__page_id();
-			Srch_db_mgr.Optimize_unsafe_(link_tbl.conn, Bool_.N);
+			Srch_db_mgr.Optimize_unsafe_(link_tbl.conn, BoolUtl.N);
 		}
 		word_conn.Meta_tbl_delete("search_link_temp");
 	}
@@ -123,7 +149,7 @@ class Srch_temp_tbl_wkr implements Srch_text_parser_wkr {
 		title_parser.Parse(this, page_ttl);
 	}
 	public void Exec_by_cmd(Xowe_wiki wiki, int commit_interval, int progress_interval) {
-		this.Init(Bool_.Y, wiki);
+		this.Init(BoolUtl.Y, wiki);
 		Xowd_page_tbl page_tbl = core_data_mgr.Tbl__page(); String fld_page_id = page_tbl.Fld_page_id(); String fld_page_ttl = page_tbl.Fld_page_title();			
 		Db_rdr page_rdr = page_tbl.Select_all__id__ttl(); int page_count = 0;
 		try {

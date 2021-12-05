@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps; import gplx.*;
 import gplx.core.encoders.*;
+import gplx.objects.strings.AsciiByte;
 class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.String.php
 	private final Bry_bfr bfr = Bry_bfr_.New();
 	public byte[] Parse(byte[] src, int src_pos, int src_end) {
@@ -22,41 +23,41 @@ class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.St
 			while (src_pos < src_end) {
 				int val = 0;
 				byte b = src[src_pos++];
-				if (b == Byte_ascii.Backslash) {
+				if (b == AsciiByte.Backslash) {
 					b = src[src_pos++];
 					switch(b) {
-						case Byte_ascii.Ltr_n:
-							val = Byte_ascii.Nl;
+						case AsciiByte.Ltr_n:
+							val = AsciiByte.Nl;
 							break;
-						case Byte_ascii.Ltr_r:
-							val = Byte_ascii.Cr;
+						case AsciiByte.Ltr_r:
+							val = AsciiByte.Cr;
 							break;
-						case Byte_ascii.Ltr_t:
-							val = Byte_ascii.Tab;
+						case AsciiByte.Ltr_t:
+							val = AsciiByte.Tab;
 							break;
-						case Byte_ascii.Ltr_v:
-							val = Byte_ascii.Vertical_tab;
+						case AsciiByte.Ltr_v:
+							val = AsciiByte.VerticalTab;
 							break;
-						case Byte_ascii.Ltr_e:
-							val = Byte_ascii.Escape;
+						case AsciiByte.Ltr_e:
+							val = AsciiByte.Escape;
 							break;
-						case Byte_ascii.Ltr_f:
-							val = Byte_ascii.Formfeed;
+						case AsciiByte.Ltr_f:
+							val = AsciiByte.Formfeed;
 							break;
-						case Byte_ascii.Dollar:
-						case Byte_ascii.Backslash:
-						case Byte_ascii.Quote:
+						case AsciiByte.Dollar:
+						case AsciiByte.Backslash:
+						case AsciiByte.Quote:
 							val = b;
 							break;
 						// octal
-						case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-						case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9: {
+						case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+						case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9: {
 							int num_bgn = src_pos - 1; // - 1 b/c pos++ above
 							int num_end = src_pos;
 							for (int i = 0; i < 3; i++) {// per REF, octal is {1,3}
 								byte n = src[src_pos];
 								num_end = src_pos;
-								if (Byte_ascii.Is_num(n)) {
+								if (AsciiByte.IsNum(n)) {
 									++src_pos;
 								}
 								else {
@@ -68,7 +69,7 @@ class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.St
 							break;
 						}
 						// hexdec
-						case Byte_ascii.Ltr_x: {
+						case AsciiByte.Ltr_x: {
 							// REF: changed from \xFF to \u1234; https://github.com/wikimedia/mediawiki/commit/0313128b1038de8f2ee52a181eafdee8c5e430f7#diff-1b04277d170b32db7f92ce812744ef6b
 							int num_bgn = src_pos;
 							int num_end = src_pos++;
@@ -86,8 +87,8 @@ class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.St
 							break;
 						}
 						// unicode
-						case Byte_ascii.Ltr_u: {
-							if (src[src_pos] == Byte_ascii.Curly_bgn) { // ignore braces in u{1234}
+						case AsciiByte.Ltr_u: {
+							if (src[src_pos] == AsciiByte.CurlyBgn) { // ignore braces in u{1234}
 								src_pos++;
 							}
 
@@ -96,7 +97,7 @@ class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.St
 							for (int i = 0; i < 8; i++) { // assume max of 8 hexdecimals
 								byte n = src[src_pos];
 								num_end = src_pos;
-								if (Byte_ascii.Is_num(n)) {
+								if (AsciiByte.IsNum(n)) {
 									++src_pos;
 								}
 								else {
@@ -104,7 +105,7 @@ class Php_quote_parser { // REF: https://www.php.net/manual/en/language.types.St
 								}
 							}
 
-							if (src[src_pos] == Byte_ascii.Curly_end) { // ignore braces in u{1234}
+							if (src[src_pos] == AsciiByte.CurlyEnd) { // ignore braces in u{1234}
 								++src_pos;
 							}
 

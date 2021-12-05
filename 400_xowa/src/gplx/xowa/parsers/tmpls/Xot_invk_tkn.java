@@ -15,13 +15,13 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tmpls;
 
-import gplx.Array_;
-import gplx.Bool_;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.Gfo_usr_dlg_;
 import gplx.Hash_adp_bry;
@@ -100,7 +100,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 		// tmpl_name does not exist in db; may be dynamic, subst, transclusion, etc..
 		if (defn == Xot_defn_.Null) {
 			// dynamic tmpl; EX:{{{{{1}}}|a}}
-			if (name_key_tkn.Itm_static() == Bool_.N_byte) {
+			if (name_key_tkn.Itm_static() == BoolUtl.NByte) {
 				Bry_bfr name_tkn_bfr = Bry_bfr_.New_w_size(name_tkn.Src_end() - name_tkn.Src_bgn());
 				if (defn_tid == Xot_defn_.Tid_subst)
 					name_tkn_bfr.Add(Get_first_subst_itm(lang.Kwd_mgr()));
@@ -120,8 +120,8 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 				Gfo_usr_dlg_.Instance.Log_many("", "", "parser.tmpl:dynamic is blank; page=~{0}", ctx.Page().Url_bry_safe()); // downgraded from warning to note; PAGE:de.d:país DATE:2016-09-07
 				return false;
 			}
-			if 		(name_ary[name_bgn] == Byte_ascii.Colon) {							// check 1st letter for transclusion
-				return Transclude(ctx, wiki, bfr, Bool_.N, name_ary, caller, src);		// transclusion; EX: {{:Name of page}}
+			if 		(name_ary[name_bgn] == AsciiByte.Colon) {							// check 1st letter for transclusion
+				return Transclude(ctx, wiki, bfr, BoolUtl.N, name_ary, caller, src);		// transclusion; EX: {{:Name of page}}
 			}
 
 			// ignore "{{Template:"; EX: {{Template:a}} is the same thing as {{a}}
@@ -156,7 +156,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					bfr.Add(Xop_curly_bgn_lxr.Hook).Add(name_ary);
 					for (int i = 0; i < args_len; i++) {
 						Arg_nde_tkn nde = args[i];
-						bfr.Add_byte(Byte_ascii.Pipe);						// add |
+						bfr.Add_byte(AsciiByte.Pipe);						// add |
 						bfr.Add_mid(src, nde.Src_bgn(), nde.Src_end());		// add entire arg; "k=v"; note that src must be added, not evaluated, else <nowiki> may be dropped and cause stack overflow; PAGE:ru.w:Близкие_друзья_(Сезон_2) DATE:2014-10-21
 					}
 					Xot_fmtr_prm.Instance.Print(bfr);
@@ -172,7 +172,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					break;
 				case Xot_defn_.Tid_func:
 					if (defn.Defn_require_colon_arg()) {
-						colon_pos =  Bry_find_.Find_fwd(name_ary, Byte_ascii.Colon);
+						colon_pos =  Bry_find_.Find_fwd(name_ary, AsciiByte.Colon);
 						if (colon_pos == Bry_find_.Not_found)
 							defn = Xot_defn_.Null;
 					}						
@@ -182,7 +182,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 					break;
 				case Xot_defn_.Tid_raw:
 				case Xot_defn_.Tid_msg:
-					int raw_colon_pos = Bry_find_.Find_fwd(name_ary, Byte_ascii.Colon);
+					int raw_colon_pos = Bry_find_.Find_fwd(name_ary, AsciiByte.Colon);
 					if (raw_colon_pos == Bry_find_.Not_found) {}										// colon missing; EX: {{raw}}; noop and assume template name; DATE:2014-02-11
 					else {																				// colon present;
 						name_ary = Bry_.Mid(name_ary, finder_subst_end + 1, name_ary_len);				// chop off "raw"; +1 is for ":"; note that +1 is in bounds b/c raw_colon was found
@@ -191,7 +191,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 						if (ns_eval2 != null) {
 							Xow_ns ns_eval_itm = ns_eval2.Ns();
 							int pre_len = ns_eval_itm.Name_enc().length;
-							if (pre_len < name_ary_len && name_ary[pre_len] == Byte_ascii.Colon)
+							if (pre_len < name_ary_len && name_ary[pre_len] == AsciiByte.Colon)
 								return SubEval(ctx, wiki, bfr, name_ary, caller, src);
 						}
 					}
@@ -233,7 +233,7 @@ public class Xot_invk_tkn extends Xop_tkn_itm_base implements Xot_invk {
 								bfr.Add(name_ary);
 								for (int i = 0; i < args_len; ++i) {
 									Arg_nde_tkn nde = this.Args_get_by_idx(i);
-									bfr.Add_byte(Byte_ascii.Pipe);
+									bfr.Add_byte(AsciiByte.Pipe);
 									// must evaluate args; "size={{{size|}}}" must become "size="; PAGE:en.w:Europe; en.w:Template:Country_data_Guernsey DATE:2016-10-13
 									nde.Tmpl_compile(ctx, src, Xot_compile_data.Noop);
 									nde.Tmpl_evaluate(ctx, src, caller, bfr);
@@ -332,7 +332,7 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 					Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(bfr);
 					//rv = defn_tmpl.Tmpl_evaluate(Xop_ctx.New__sub(wiki, ctx, ctx.Page()), invk_tmpl, rslt_bfr); // create new ctx so __NOTOC__ only applies to template, not page; PAGE:de.w:13._Jahrhundert DATE:2017-06-17
 					rv = defn_tmpl.Tmpl_evaluate(ctx, invk_tmpl, rslt_bfr);
-					prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), Bool_.Y);
+					prepend_mgr.End(ctx, bfr, rslt_bfr.Bfr(), rslt_bfr.Len(), BoolUtl.Y);
 					if (name_had_subst) {	// current invk had "subst:"; parse incoming invk again to remove effects of subst; PAGE:pt.w:Argentina DATE:2014-09-24
 						byte[] tmp_src = rslt_bfr.To_bry_and_clear();
 						if (tmp_src.length != 0)
@@ -395,7 +395,7 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 		Bry_bfr tmp_bfr = Bry_bfr_.New();
 		Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(doc);
 		rv = transclude_tmpl.Tmpl_evaluate(ctx, tmp_tmpl, tmp_bfr);
-		prepend_mgr.End(ctx, doc, tmp_bfr.Bfr(), tmp_bfr.Len(), Bool_.Y);
+		prepend_mgr.End(ctx, doc, tmp_bfr.Bfr(), tmp_bfr.Len(), BoolUtl.Y);
 		doc.Add_bfr_and_clear(tmp_bfr);
 		return rv;
 	}
@@ -411,7 +411,7 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 				}
 				break;
 			case Xow_ns_.Tid__special:
-				bfr.Add(Xop_tkn_.Lnki_bgn).Add_byte(Byte_ascii.Colon).Add(name_ary).Add(Xop_tkn_.Lnki_end);
+				bfr.Add(Xop_tkn_.Lnki_bgn).Add_byte(AsciiByte.Colon).Add(name_ary).Add(Xop_tkn_.Lnki_end);
 				return true;
 		}
 		if (transclude_tmpl == null && ctx.Tmpl_load_enabled()) {	// ttl is template not in cache, or some other ns; do load
@@ -460,7 +460,7 @@ if (Bry_.Eq(caller.Frame_ttl(), Bry_.new_a7("Template:BookCat/core"))) {
 	}	Arg_nde_tkn[] args = Arg_nde_tkn.Ary_empty; int args_max;
 	private Arg_nde_tkn[] Resize(Arg_nde_tkn[] src, int cur_len, int new_len) {
 		Arg_nde_tkn[] rv = new Arg_nde_tkn[new_len];
-		Array_.Copy_to(src, 0, rv, 0, cur_len);
+		ArrayUtl.CopyTo(src, 0, rv, 0, cur_len);
 		return rv;
 	}
 	private byte[] Get_first_subst_itm(Xol_kwd_mgr kwd_mgr) {

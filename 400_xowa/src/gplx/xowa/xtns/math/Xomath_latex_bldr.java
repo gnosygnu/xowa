@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns.math; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.envs.*;
 public class Xomath_latex_bldr {
 	public static void Async(Xoae_app app, Xoae_page page, gplx.xowa.guis.cbks.js.Xog_js_wkr js_wkr) {
@@ -55,7 +57,7 @@ public class Xomath_latex_bldr {
 		Io_url tex_fil = tmp_dir.GenSubFil("xowa_math_temp.tex");
 
 		// make tex_bry
-		byte[] tex_doc = Bry_.Replace(math, Bry_.new_a7("\n\n"), Byte_ascii.Nl_bry);	// remove completely blank lines; not sure if this is right; PAGE:en.w:Standard Model_(mathematical_formulation); EX:<math>(\mathbf{1},\mathbf\n\n{1},0)</math>
+		byte[] tex_doc = Bry_.Replace(math, Bry_.new_a7("\n\n"), AsciiByte.NlBry);	// remove completely blank lines; not sure if this is right; PAGE:en.w:Standard Model_(mathematical_formulation); EX:<math>(\mathbf{1},\mathbf\n\n{1},0)</math>
 		tex_doc = fmt__latex_doc.Bld_many_to_bry(Bry_bfr_.New(), tex_doc);
 		Io_mgr.Instance.SaveFilBry(tex_fil, tex_doc);
 

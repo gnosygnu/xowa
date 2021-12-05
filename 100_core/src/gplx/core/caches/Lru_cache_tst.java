@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.caches; import gplx.*; import gplx.core.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.core.caches;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Lru_cache_tst {
 	private final Lru_cache_fxt fxt = new Lru_cache_fxt();
 	@Test public void Get_one() {
@@ -73,7 +75,7 @@ public class Lru_cache_tst {
 	}
 }
 class Lru_cache_fxt {
-	private final Lru_cache cache = new Lru_cache(Bool_.N, "test", -1, 10);
+	private final Lru_cache cache = new Lru_cache(BoolUtl.N, "test", -1, 10);
 	public void Exec__set(String key, long size) {
 		cache.Set(key, key, size);
 	}

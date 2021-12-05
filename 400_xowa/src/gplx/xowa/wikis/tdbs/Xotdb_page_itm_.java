@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.brys.*; import gplx.core.encoders.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.wikis.tdbs; import gplx.*;
+import gplx.core.brys.*; import gplx.core.encoders.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.wikis.data.tbls.*;
 public class Xotdb_page_itm_ {
 	static final int Txt_len_id = 5, Txt_len_fil_idx = 5, Txt_len_row_idx = 5, Txt_len_type = 1, Txt_len_text_len = 5;
 	public static final int Txt_ttl_pos		= Txt_len_id + Txt_len_fil_idx + Txt_len_row_idx + Txt_len_type + Txt_len_text_len + 5;
@@ -31,7 +33,7 @@ public class Xotdb_page_itm_ {
 			( Base85_.To_int_by_bry	(bry, bgn +  0, bgn +  4)
 			, Base85_.To_int_by_bry	(bry, bgn +  6, bgn + 10)
 			, Base85_.To_int_by_bry	(bry, bgn + 12, bgn + 16)
-			,							 bry[18] == Byte_ascii.Num_1
+			,							 bry[18] == AsciiByte.Num1
 			, Base85_.To_int_by_bry	(bry, bgn + 20, bgn + 24)
 			, page.Ns_id()
 			, Bry_.Mid					(bry, bgn + 26, end)
@@ -43,7 +45,7 @@ public class Xotdb_page_itm_ {
 		bfr	.Add_base85_len_5(id)					.Add_byte_pipe()
 			.Add_base85_len_5(file_idx)				.Add_byte_pipe()
 			.Add_base85_len_5(row_idx)				.Add_byte_pipe()
-			.Add_byte(redirect ? Byte_ascii.Num_1 : Byte_ascii.Num_0).Add_byte_pipe()
+			.Add_byte(redirect ? AsciiByte.Num1 : AsciiByte.Num0).Add_byte_pipe()
 			.Add_base85_len_5(text_len)				.Add_byte_pipe()
 			.Add(ttl_wo_ns)							.Add_byte_nl()
 			;
@@ -56,7 +58,7 @@ public class Xotdb_page_itm_ {
 			( Base85_.To_int_by_bry	(bry, bgn +  0, bgn +  4)
 			, Base85_.To_int_by_bry	(bry, bgn +  6, bgn + 10)
 			, Base85_.To_int_by_bry	(bry, bgn + 12, bgn + 16)
-			,							 bry[18] == Byte_ascii.Num_1
+			,							 bry[18] == AsciiByte.Num1
 			, Base85_.To_int_by_bry	(bry, bgn + 20, bgn + 24)
 			, Base85_.To_int_by_bry	(bry, bgn + 26, bgn + 30)
 			, Bry_.Mid					(bry, bgn + 32, end)
@@ -67,7 +69,7 @@ public class Xotdb_page_itm_ {
 		bfr	.Add_base85_len_5(page.Id())					.Add_byte_pipe()
 			.Add_base85_len_5(page.Text_db_id())			.Add_byte_pipe()
 			.Add_base85_len_5(page.Tdb_row_idx())			.Add_byte_pipe()
-			.Add_byte(page.Redirected() ? Byte_ascii.Num_1 : Byte_ascii.Num_0).Add_byte_pipe()
+			.Add_byte(page.Redirected() ? AsciiByte.Num1 : AsciiByte.Num0).Add_byte_pipe()
 			.Add_base85_len_5(page.Text_len())				.Add_byte_pipe()
 			.Add_base85_len_5(page.Ns_id())					.Add_byte_pipe()
 			.Add(page.Ttl_page_db())						.Add_byte_nl();
@@ -81,6 +83,6 @@ public class Xotdb_page_itm_ {
 		if (add_nl)
 			bfr.Add_byte_nl(); // NOTE: each page row is separated by \t\n
 	}
-	public static final byte Txt_page_dlm = Byte_ascii.Tab;
+	public static final byte Txt_page_dlm = AsciiByte.Tab;
 	public static final int Txt_page_len__fixed = 1 + 5 + 1 + 5 + 1 + 1 + 1;	// \tid|date|title|text\n
 }

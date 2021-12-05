@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.xtns.scribunto.*;
 import gplx.core.primitives.*;
 import gplx.xowa.wikis.nss.*;
@@ -78,7 +80,7 @@ public class Scrib_lib_title implements Scrib_lib {
 			&& ttl.Ns().Id_is_main() 
 			&& ns_bry != null) {
 			Bry_bfr bfr = wiki.Utl__bfr_mkr().Get_b512();
-			ttl_bry = bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon).Add(ttl.Full_db_w_anch()).To_bry_and_rls();
+			ttl_bry = bfr.Add(ns_bry).Add_byte(AsciiByte.Colon).Add(ttl.Full_db_w_anch()).To_bry_and_rls();
 			ttl = wiki.Ttl_parse(ttl_bry);
 		}
 		return ttl == null
@@ -131,11 +133,11 @@ public class Scrib_lib_title implements Scrib_lib {
 		String anchor_str = args.Cast_str_or_null(2);
 		String xwiki_str = args.Cast_str_or_null(3);
 		Bry_bfr tmp_bfr = wiki.Utl__bfr_mkr().Get_k004();
-		if (xwiki_str != null) tmp_bfr.Add_str_u8(xwiki_str).Add_byte(Byte_ascii.Colon);		
+		if (xwiki_str != null) tmp_bfr.Add_str_u8(xwiki_str).Add_byte(AsciiByte.Colon);
 		if (Bry_.Len_gt_0(ns_bry))	// only prefix ns if available; EX:"Template:Title"; else will get ":Title"; DATE:2014-10-30
-			tmp_bfr.Add(ns_bry).Add_byte(Byte_ascii.Colon);
+			tmp_bfr.Add(ns_bry).Add_byte(AsciiByte.Colon);
 		tmp_bfr.Add_str_u8(ttl_str);
-		if (anchor_str != null) tmp_bfr.Add_byte(Byte_ascii.Hash).Add_str_u8(anchor_str);
+		if (anchor_str != null) tmp_bfr.Add_byte(AsciiByte.Hash).Add_str_u8(anchor_str);
 		Xoa_ttl ttl = Xoa_ttl.Parse(wiki, tmp_bfr.To_bry_and_rls());
 		if (ttl == null) return rslt.Init_obj(null);	// invalid title; exit;
 		return rslt.Init_obj(GetInexpensiveTitleData(ttl));

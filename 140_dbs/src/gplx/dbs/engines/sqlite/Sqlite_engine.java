@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.sqlite; import gplx.Bool_;
+package gplx.dbs.engines.sqlite; import gplx.objects.primitives.BoolUtl;
 import gplx.Byte_;
 import gplx.DateAdp;
 import gplx.DateAdp_;
@@ -130,7 +130,7 @@ class Db_rdr__sqlite extends Db_rdr__basic {	@Override public byte Read_byte(Str
 		try {
 			int val = rdr.getInt(k);
 			return val == 1;
-		} 	catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "i", k, "type", Bool_.Cls_val_name);}
+		} 	catch (Exception e) {throw Err_.new_exc(e, "db", "read failed", "i", k, "type", BoolUtl.ClsValName);}
 	}
 	@Override public long Read_long(String k) {
 		try {

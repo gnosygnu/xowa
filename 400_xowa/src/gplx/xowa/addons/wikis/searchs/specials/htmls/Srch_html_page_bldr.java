@@ -13,10 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.specials.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.langs.numbers.*; import gplx.langs.htmls.entitys.*;
-import gplx.xowa.addons.wikis.searchs.specials.*; import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;
+package gplx.xowa.addons.wikis.searchs.specials.htmls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.langs.htmls.entitys.Gfh_entity_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.addons.wikis.searchs.Srch_search_addon;
+import gplx.xowa.addons.wikis.searchs.searchers.Srch_search_qry;
+import gplx.xowa.addons.wikis.searchs.searchers.rslts.Srch_rslt_list;
+import gplx.xowa.addons.wikis.searchs.specials.Srch_qarg_mgr;
+import gplx.xowa.htmls.core.htmls.utls.Xoh_anchor_kv_bldr;
+import gplx.xowa.htmls.core.htmls.utls.Xoh_img_path;
+import gplx.xowa.htmls.core.htmls.utls.Xoh_lnki_bldr;
+import gplx.xowa.langs.numbers.Xol_num_mgr;
 public class Srch_html_page_bldr {
 	private final Bry_bfr tmp_bfr = Bry_bfr_.New_w_size(255);
 	private Srch_search_qry qry; private Xow_wiki wiki; private Xol_num_mgr num_mgr;
@@ -42,12 +56,12 @@ public class Srch_html_page_bldr {
 
 		byte[] rslts_hdr = fmtr_rslts.Bld_bry_many(tmp_bfr, num_mgr.Format_num(qry.Slab_bgn + List_adp_.Base1), num_mgr.Format_num(qry.Slab_end), qry.Phrase.Orig);
 		byte[] option_link = lnki_bldr.Href_(Bry_.new_a7("home"), wiki.Ttl_parse(Bry_.new_a7("Options/Search"))).Img_16x16(Xoh_img_path.Img_option).Bld_to_bry();	// HOME
-		fmtr_page.Bld_bfr_many(tmp_bfr, rslts_hdr, option_link, Bld_paging_link(Bool_.N), Bld_paging_link(Bool_.Y), html_tbls_bry);
+		fmtr_page.Bld_bfr_many(tmp_bfr, rslts_hdr, option_link, Bld_paging_link(BoolUtl.N), Bld_paging_link(BoolUtl.Y), html_tbls_bry);
 		return tmp_bfr.To_bry_and_clear();
 	}
 	public void Bld_tbl(Bry_bfr bfr, Srch_rslt_list rslt_list, byte[] cmd_key, byte[] wiki_domain, boolean searching_db, int slab_bgn, int slab_end) {
 		html_row_bldr.Init(rslt_list, slab_bgn, slab_end);
-		byte[] search_link = lnki_bldr.Href_(wiki_domain, wiki.Ttl_parse(self_lnkr.Bld_to_bry())).Caption_(wiki_domain).Img_16x16(Xoh_img_path.Img_search).Img_pos_is_left_(Bool_.Y).Bld_to_bry();
+		byte[] search_link = lnki_bldr.Href_(wiki_domain, wiki.Ttl_parse(self_lnkr.Bld_to_bry())).Caption_(wiki_domain).Img_16x16(Xoh_img_path.Img_search).Img_pos_is_left_(BoolUtl.Y).Bld_to_bry();
 		fmtr_tbl.Bld_bfr_many(bfr, search_link, searching_db ? Bld_cancel_link(wiki_domain, cmd_key) : Bry_.Empty, Bry_hdr_len, Bry_hdr_ttl, Srch_html_row_wkr.Gen_insert_key(wiki_domain), html_row_bldr);
 	}		
 	private byte[] Bld_cancel_link(byte[] domain, byte[] cmd_key) {	// DELETE: remove cancel link; clicking will blank out results; DATE:2016-06-14

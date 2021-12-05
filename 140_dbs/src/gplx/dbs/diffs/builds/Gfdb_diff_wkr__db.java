@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.diffs.builds; import gplx.*; import gplx.dbs.*; import gplx.dbs.diffs.*;
+package gplx.dbs.diffs.builds; import gplx.dbs.*; import gplx.dbs.diffs.*;
 import gplx.dbs.diffs.itms.*;
+import gplx.objects.lists.CompareAbleUtl;
 public class Gfdb_diff_wkr__db implements Gfdb_diff_wkr {
 	private DbmetaFldItm[] val_flds; private int val_flds_len;
 	private Gfdb_diff_tbl tbl; private Db_rdr old_rdr, new_rdr;
@@ -40,7 +41,7 @@ public class Gfdb_diff_wkr__db implements Gfdb_diff_wkr {
 	public void Handle_old_missing() {Insert(Gdif_db_.Tid__insert, ++uid, new_rdr, tbl.Flds);}
 	public void Handle_new_missing() {Insert(Gdif_db_.Tid__delete, ++uid, old_rdr, tbl.Flds);}
 	public void Handle_same() {
-		if (Gfdb_rdr_utl_.Compare(val_flds, val_flds_len, old_rdr, new_rdr) != CompareAble_.Same)
+		if (Gfdb_rdr_utl_.Compare(val_flds, val_flds_len, old_rdr, new_rdr) != CompareAbleUtl.Same)
 			Insert(Gdif_db_.Tid__update, ++uid, new_rdr, tbl.Flds);
 	}
 	private void Insert(byte dif_type, int uid, Db_rdr rdr, DbmetaFldItm[] flds) {

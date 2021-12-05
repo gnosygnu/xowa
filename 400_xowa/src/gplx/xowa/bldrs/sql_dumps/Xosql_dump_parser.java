@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.sql_dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
+package gplx.xowa.bldrs.sql_dumps; import gplx.*;
 import gplx.core.flds.*; import gplx.core.ios.*; import gplx.core.ios.streams.*;
+import gplx.objects.strings.AsciiByte;
 public class Xosql_dump_parser {
 	private Xosql_dump_cbk cbk;
 	private Io_url src_fil; private int src_rdr_bfr_len = 8 * Io_mgr.Len_mb;
@@ -62,36 +63,36 @@ public class Xosql_dump_parser {
 						break;
 					case Mode__row_bgn: // assert "("
 						switch (b) {
-							case Byte_ascii.Paren_bgn:		mode = Mode__fld; break;
+							case AsciiByte.ParenBgn:		mode = Mode__fld; break;
 							default:						throw Err_.new_unhandled(mode);
 						}
 						++cur_pos;
 						break;
 					case Mode__row_end:	// handle 1st char after ")";
 						switch (b) {
-							case Byte_ascii.Nl:				break;	// ignore \n
-							case Byte_ascii.Comma:			mode = Mode__row_bgn; break;	// handle ","; EX: "(1),(2)"
-							case Byte_ascii.Semic:			mode = Mode__sql_bgn; break;	// handle ";"; EX: "(1);INSERT INTO"
+							case AsciiByte.Nl:				break;	// ignore \n
+							case AsciiByte.Comma:			mode = Mode__row_bgn; break;	// handle ","; EX: "(1),(2)"
+							case AsciiByte.Semic:			mode = Mode__sql_bgn; break;	// handle ";"; EX: "(1);INSERT INTO"
 							default:						throw Err_.new_unhandled(mode);
 						}
 						++cur_pos;
 						break;
 					case Mode__fld:		// handle fld chars; EX: "(1,'ab')"
 						switch (b) {
-							case Byte_ascii.Space:			// ws: skip; EX: "(1 , 2)"; "(1,\n2)"
-							case Byte_ascii.Nl:
+							case AsciiByte.Space:			// ws: skip; EX: "(1 , 2)"; "(1,\n2)"
+							case AsciiByte.Nl:
 								break;
-							case Byte_ascii.Apos:			// apos: switch modes; NOTE: never escape apos by doubling; will fail for empty fields; EX: ", '', ''"; DATE:2013-07-06
+							case AsciiByte.Apos:			// apos: switch modes; NOTE: never escape apos by doubling; will fail for empty fields; EX: ", '', ''"; DATE:2013-07-06
 								mode = Mode__quote;
 								break;
-							case Byte_ascii.Backslash:		// backslash: switch modes;
+							case AsciiByte.Backslash:		// backslash: switch modes;
 								mode_prv = mode;
 								mode = Mode__escape;
 								break;
-							case Byte_ascii.Comma:			// comma: end fld
+							case AsciiByte.Comma:			// comma: end fld
 								Commit_fld(fld_idx++, val_bfr);
 								break;
-							case Byte_ascii.Paren_end:		// paren_end: end fld and row
+							case AsciiByte.ParenEnd:		// paren_end: end fld and row
 								Commit_fld(fld_idx++, val_bfr);
 								cbk.On_row_done();
 								fld_idx = 0;
@@ -105,16 +106,16 @@ public class Xosql_dump_parser {
 						break;
 					case Mode__quote:	// add to val_bfr until quote encountered; also, handle backslashes;
 						switch (b) {
-							case Byte_ascii.Apos:			mode = Mode__fld; break;
-							case Byte_ascii.Backslash:		mode_prv = mode; mode = Mode__escape; break;
+							case AsciiByte.Apos:			mode = Mode__fld; break;
+							case AsciiByte.Backslash:		mode_prv = mode; mode = Mode__escape; break;
 							default:						val_bfr.Add_byte(b); break;
 						}
 						++cur_pos;
 						break;
 					case Mode__escape:	// get escape_val from decode_regy; if unknown, just add original
 						byte escape_val = decode_regy[b];
-						if (escape_val == Byte_ascii.Null)
-							val_bfr.Add_byte(Byte_ascii.Backslash).Add_byte(b);
+						if (escape_val == AsciiByte.Null)
+							val_bfr.Add_byte(AsciiByte.Backslash).Add_byte(b);
 						else
 							val_bfr.Add_byte(escape_val);
 						mode = mode_prv;	// switch back to prv_mode

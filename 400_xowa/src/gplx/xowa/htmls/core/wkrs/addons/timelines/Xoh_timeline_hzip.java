@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.addons.timelines; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.addons.*;
-import gplx.core.brys.*; import gplx.core.threads.poolables.*; import gplx.xowa.wikis.ttls.*;
+package gplx.xowa.htmls.core.wkrs.addons.timelines; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.brys.*; import gplx.core.threads.poolables.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_timeline_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	public int Tid()		{return Xoh_hzip_dict_.Tid__timeline;}
@@ -30,7 +33,7 @@ public class Xoh_timeline_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	}
 	public void Decode1(Bry_bfr bfr, Xoh_hdoc_wkr hdoc_wkr, Xoh_hdoc_ctx hctx, Xoh_page hpg, Bry_rdr rdr, byte[] src, int src_bgn, int src_end, Xoh_data_itm data_itm) {
 		int timeline_bgn = src_bgn;
-		int timeline_end = Bry_find_.Find_fwd(src, Byte_ascii.Gt, src_bgn, src_end);
+		int timeline_end = Bry_find_.Find_fwd(src, AsciiByte.Gt, src_bgn, src_end);
 		if (timeline_end == -1) {
 			Gfo_log_.Instance.Warn("hzip.timeline.end_not_found", "page", hpg.Url_bry_safe(), "src_bgn", src_bgn);
 			timeline_end = timeline_bgn;

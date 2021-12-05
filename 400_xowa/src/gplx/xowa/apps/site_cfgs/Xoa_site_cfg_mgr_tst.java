@@ -13,12 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.site_cfgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import org.junit.*;
-import gplx.core.btries.*;
-import gplx.dbs.cfgs.*;
-import gplx.langs.jsons.*; import gplx.xowa.wikis.nss.*;
-import gplx.xowa.parsers.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.apps.site_cfgs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Datetime_now;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_printer;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_test_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.parsers.Xop_parser_tid_;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 public class Xoa_site_cfg_mgr_tst {
 	private final Xoa_site_cfg_mgr_fxt fxt = new Xoa_site_cfg_mgr_fxt();
 	@Before		public void init() {fxt.Init();}
@@ -105,8 +121,8 @@ class Xoa_site_cfg_mgr_fxt {
 		site_cfg_mgr.Load(wiki);
 		return this;
 	}
-	public void Test_extensiontags_y(String... ary) {Test_extensiontags(Bool_.Y, ary);}
-	public void Test_extensiontags_n(String... ary) {Test_extensiontags(Bool_.N, ary);}
+	public void Test_extensiontags_y(String... ary) {Test_extensiontags(BoolUtl.Y, ary);}
+	public void Test_extensiontags_n(String... ary) {Test_extensiontags(BoolUtl.N, ary);}
 	public void Test_extensiontags(boolean expd_exists, String... ary) {
 		Btrie_slim_mgr trie = wiki.Mw_parser_mgr().Xnde_tag_regy().Get_trie(Xop_parser_tid_.Tid__defn);
 		int len = ary.length;

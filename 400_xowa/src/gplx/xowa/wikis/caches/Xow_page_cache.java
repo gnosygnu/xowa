@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.caches;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Decimal_adp_;
 import gplx.Io_mgr;
 import gplx.String_;
@@ -33,7 +33,7 @@ public class Xow_page_cache {
 	public Xow_page_cache(Xowe_wiki wiki) {
 		this.wiki = wiki;
 		this.cache_key = "xowa.app.page_cache.'" + wiki.Domain_str() + "'." + this.hashCode();
-		this.cache = new Lru_cache(Bool_.Y, cache_key, 8 * Io_mgr.Len_mb, 16 * Io_mgr.Len_mb);
+		this.cache = new Lru_cache(BoolUtl.Y, cache_key, 8 * Io_mgr.Len_mb, 16 * Io_mgr.Len_mb);
 	}
 	public String Cache_key() {return cache_key;} private final String cache_key;
 	public void Load_wkr_(Xow_page_cache_wkr v) {this.load_wkr = v;} private Xow_page_cache_wkr load_wkr;

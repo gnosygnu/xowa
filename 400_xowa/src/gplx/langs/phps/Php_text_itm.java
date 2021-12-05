@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
+package gplx.langs.phps; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 interface Php_text_itm {
 	byte Tid();
 	int Src_bgn();
@@ -53,8 +54,8 @@ class Php_text_itm_arg implements Php_text_itm {
 	public int Src_end() {return src_end;} private int src_end;
 	public int Idx() {return idx;} private int idx;
 	public void Bld(Bry_bfr bfr, byte[] src) {
-		bfr.Add_byte(Byte_ascii.Tilde).Add_byte(Byte_ascii.Curly_bgn)
+		bfr.Add_byte(AsciiByte.Tilde).Add_byte(AsciiByte.CurlyBgn)
 		.Add_int_variable(idx - List_adp_.Base1) // php is super 1
-		.Add_byte(Byte_ascii.Curly_end);
+		.Add_byte(AsciiByte.CurlyEnd);
 	}
 }

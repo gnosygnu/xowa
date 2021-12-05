@@ -13,8 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
-import gplx.dbs.qrys.*;
+package gplx.dbs;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.Double_;
+import gplx.Err;
+import gplx.Err_;
+import gplx.Float_;
+import gplx.Int_;
+import gplx.Long_;
+import gplx.String_;
+import gplx.Type_ids_;
+import gplx.dbs.qrys.Db_qry__select_cmd;
+import gplx.dbs.qrys.Db_qry__select_in_tbl;
+import gplx.dbs.qrys.Db_qry_delete;
+import gplx.dbs.qrys.Db_qry_insert;
+import gplx.dbs.qrys.Db_qry_sql;
+import gplx.dbs.qrys.Db_qry_update;
+import gplx.dbs.qrys.Db_stmt_sql;
+import gplx.objects.primitives.BoolUtl;
 public class Db_stmt_ {
 	public static final Db_stmt Null = new Db_stmt_sql();
 	public static Db_stmt new_insert_(Db_conn conn, String tbl, String... flds) {
@@ -60,7 +77,7 @@ public class Db_stmt_ {
 	public static void Val_by_obj(Db_stmt stmt, String key, Object val) {
 		int tid = Type_ids_.To_id_by_obj(val);
 		switch (tid) {
-			case Type_ids_.Id__bool:        stmt.Val_bool_as_byte   (key, Bool_.Cast(val)); break;
+			case Type_ids_.Id__bool:        stmt.Val_bool_as_byte   (key, BoolUtl.Cast(val)); break;
 			case Type_ids_.Id__byte:        stmt.Val_byte           (key, Byte_.Cast(val)); break;
 			case Type_ids_.Id__int:         stmt.Val_int            (key, Int_.Cast(val)); break;
 			case Type_ids_.Id__long:        stmt.Val_long           (key, Long_.cast(val)); break;

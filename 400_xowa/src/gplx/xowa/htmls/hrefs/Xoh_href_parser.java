@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.hrefs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.hrefs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.primitives.*; import gplx.core.btries.*; import gplx.core.net.*;
 import gplx.xowa.langs.vnts.*;
 public class Xoh_href_parser {
@@ -23,8 +25,8 @@ public class Xoh_href_parser {
 		Object seg_obj = btrie.Match_at(trv, raw, bgn, raw.length);		// match /wiki/ or /site/ or /xcmd/
 		if (seg_obj == null) {
 			Xol_vnt_mgr vnt_mgr = wiki.Lang().Vnt_mgr();
-			if (vnt_mgr.Enabled() && raw[0] == Byte_ascii.Slash) {
-				int slash_end = Bry_find_.Find_fwd(raw, Byte_ascii.Slash, 1);
+			if (vnt_mgr.Enabled() && raw[0] == AsciiByte.Slash) {
+				int slash_end = Bry_find_.Find_fwd(raw, AsciiByte.Slash, 1);
 				if (vnt_mgr.Regy().Has(Bry_.Mid(raw, 1, slash_end))) {
 					raw = Bry_.Add(wiki.Domain_bry(), raw);
 				}

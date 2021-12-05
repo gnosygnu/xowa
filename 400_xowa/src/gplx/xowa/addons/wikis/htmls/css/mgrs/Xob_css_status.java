@@ -13,9 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.htmls.css.mgrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.htmls.*; import gplx.xowa.addons.wikis.htmls.css.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.bldrs.css.*;
+package gplx.xowa.addons.wikis.htmls.css.mgrs;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Datetime_now;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.bldrs.css.Xoa_css_extractor;
+import gplx.xowa.wikis.data.Xow_db_file_schema_props;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.Xowd_cfg_key_;
 public class Xob_css_status {
 	public int Update_tid() {return update_tid;} private int update_tid;
 	public boolean Fs_exists() {return fs_exists;} private boolean fs_exists;
@@ -49,7 +59,7 @@ public class Xob_css_status {
 		if (	core_db_mgr == null
 			||	core_db_mgr.Props() != null
 			||	!core_db_mgr.Props().Schema_is_1()
-			||	core_db_mgr.Tbl__cfg().Select_yn_or(Xowd_cfg_key_.Grp__wiki_schema, Xow_db_file_schema_props.Key__tbl_css_core, Bool_.N)
+			||	core_db_mgr.Tbl__cfg().Select_yn_or(Xowd_cfg_key_.Grp__wiki_schema, Xow_db_file_schema_props.Key__tbl_css_core, BoolUtl.N)
 			) {
 			rv.Db_exists_(false);
 			if (rv.Fs_exists())
@@ -60,7 +70,7 @@ public class Xob_css_status {
 		if (rv.Fs_exists()) {
 			DateAdp fs_timestamp = Timestamp_load(css_dir);
 			DateAdp db_timestamp = Datetime_now.Get();
-			if (db_timestamp.compareTo(fs_timestamp) == CompareAble_.More)
+			if (db_timestamp.compareTo(fs_timestamp) == CompareAbleUtl.More)
 				rv.Update_tid_db_y_();		// v2_db and later_version; update from db
 			else
 				rv.Update_tid_none_y_();	// v2_db and current version; noop

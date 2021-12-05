@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.phps; import gplx.*; import gplx.langs.*;
-import gplx.core.texts.*;
+package gplx.langs.phps; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Php_srl_parser {
 	@gplx.Internal protected Php_srl_factory Factory() {return factory;} Php_srl_factory factory = new Php_srl_factory();
 	byte[] raw; int raw_len, pos;
@@ -92,53 +92,53 @@ public class Php_srl_parser {
 		Php_srl_itm rv = null;
 		byte b = raw[pos];
 		switch (b) {
-			case Byte_ascii.Ltr_N:		// EX: 'N;'
+			case AsciiByte.Ltr_N:		// EX: 'N;'
 				rv = factory.Nil();
-				pos = Chk(raw, pos + 1, Byte_ascii.Semic);
+				pos = Chk(raw, pos + 1, AsciiByte.Semic);
 				break;
-			case Byte_ascii.Ltr_b:		// EX: 'b:0;' or 'b:1;'
-				pos = Chk(raw, pos + 1, Byte_ascii.Colon);
+			case AsciiByte.Ltr_b:		// EX: 'b:0;' or 'b:1;'
+				pos = Chk(raw, pos + 1, AsciiByte.Colon);
 				b = raw[pos];
 				switch (b) {
-					case Byte_ascii.Num_1: 	rv = factory.Bool_y(); break;
-					case Byte_ascii.Num_0:	rv = factory.Bool_n(); break;
+					case AsciiByte.Num1: 	rv = factory.Bool_y(); break;
+					case AsciiByte.Num0:	rv = factory.Bool_n(); break;
 					default:				throw err_(raw, pos, raw_len, "unknown boolean type {0}", Char_.To_str(b));
 				}
-				pos = Chk(raw, pos + 1, Byte_ascii.Semic);
+				pos = Chk(raw, pos + 1, AsciiByte.Semic);
 				break;
-			case Byte_ascii.Ltr_i:		// EX: 'i:123;'
+			case AsciiByte.Ltr_i:		// EX: 'i:123;'
 				rv = Parse_int(pos);
-				pos = Chk(raw, pos, Byte_ascii.Semic);
+				pos = Chk(raw, pos, AsciiByte.Semic);
 				break;
-			case Byte_ascii.Ltr_d:		// EX: 'd:1.23;'
-				pos = Chk(raw, pos + 1, Byte_ascii.Colon);
-				int double_end = Bry_find_.Find_fwd(raw, Byte_ascii.Semic, pos, raw_len);
+			case AsciiByte.Ltr_d:		// EX: 'd:1.23;'
+				pos = Chk(raw, pos + 1, AsciiByte.Colon);
+				int double_end = Bry_find_.Find_fwd(raw, AsciiByte.Semic, pos, raw_len);
 				String double_str = String_.new_a7(raw, pos, double_end);
 				double double_val = 0;
 				if		(String_.Eq(double_str, "INF")) double_val = Double_.Inf_pos;
 				else if (String_.Eq(double_str, "NAN")) double_val = Double_.NaN;
 				else 									double_val = Double_.parse(double_str);
 				rv = factory.Double(pos, double_end, double_val);
-				pos = Chk(raw, double_end, Byte_ascii.Semic);
+				pos = Chk(raw, double_end, AsciiByte.Semic);
 				break;
-			case Byte_ascii.Ltr_s:		// EX: 's:3:"abc";'
+			case AsciiByte.Ltr_s:		// EX: 's:3:"abc";'
 				int len_val = Parse_int(pos).Val_as_int();
-				pos = Chk(raw, pos, Byte_ascii.Colon);
-				pos = Chk(raw, pos, Byte_ascii.Quote);
+				pos = Chk(raw, pos, AsciiByte.Colon);
+				pos = Chk(raw, pos, AsciiByte.Quote);
 				int str_end = pos + len_val;
 				String str_val = String_.new_u8(raw, pos, str_end);
 				rv = factory.Str(pos, str_end, str_val);
-				pos = Chk(raw, str_end, Byte_ascii.Quote);
-				pos = Chk(raw, pos, Byte_ascii.Semic);
+				pos = Chk(raw, str_end, AsciiByte.Quote);
+				pos = Chk(raw, pos, AsciiByte.Semic);
 				break;
-			case Byte_ascii.Ltr_a:		// EX: 'a:0:{}'
+			case AsciiByte.Ltr_a:		// EX: 'a:0:{}'
 				int subs_len = Parse_int(pos).Val_as_int();
-				pos = Chk(raw, pos, Byte_ascii.Colon);
-				pos = Chk(raw, pos, Byte_ascii.Curly_bgn);
+				pos = Chk(raw, pos, AsciiByte.Colon);
+				pos = Chk(raw, pos, AsciiByte.CurlyBgn);
 				rv = Parse_array(pos, subs_len);
-				pos = Chk(raw, pos, Byte_ascii.Curly_end);
+				pos = Chk(raw, pos, AsciiByte.CurlyEnd);
 				break;
-			case Byte_ascii.Ltr_O:		// EX: 'O:42:"Scribunto_LuaStandaloneInterpreterFunction":1:{s:2:"id";i:123;}'
+			case AsciiByte.Ltr_O:		// EX: 'O:42:"Scribunto_LuaStandaloneInterpreterFunction":1:{s:2:"id";i:123;}'
 				int func_bgn = pos;
 				pos += 62; // 64= len of constant String after ":42:"Scribunto...."
 				int func_id = Parse_int_val(pos);
@@ -151,7 +151,7 @@ public class Php_srl_parser {
 	}
 	int Parse_int_val(int bgn) {
 		pos = bgn;
-		pos = Chk(raw, pos + 1, Byte_ascii.Colon);
+		pos = Chk(raw, pos + 1, AsciiByte.Colon);
 		int int_end = Skip_while_num(raw, raw_len, pos, true);
 		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.Min_value);
 		pos = int_end;
@@ -159,7 +159,7 @@ public class Php_srl_parser {
 	}
 	Php_srl_itm_int Parse_int(int bgn) {
 		pos = bgn;
-		pos = Chk(raw, pos + 1, Byte_ascii.Colon);
+		pos = Chk(raw, pos + 1, AsciiByte.Colon);
 		int int_end = Skip_while_num(raw, raw_len, pos, true);
 		int int_val = Bry_.To_int_or(raw, pos, int_end, Int_.Min_value);
 		Php_srl_itm_int rv = factory.Int(pos, int_end, int_val);
@@ -178,11 +178,11 @@ public class Php_srl_parser {
 		for (int i = bgn; i < raw_len; i++) {
 			byte b = raw[i];			
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 					break;
-				case Byte_ascii.Dot:
-				case Byte_ascii.Dash:
+				case AsciiByte.Dot:
+				case AsciiByte.Dash:
 					break;
 				default:
 					if (num_is_int && num_len < 11) {

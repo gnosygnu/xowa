@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
+package gplx.xowa.htmls.core.wkrs.imgs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
 import gplx.core.brys.*; import gplx.core.brys.fmtrs.*; import gplx.core.threads.poolables.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.encoders.*;
 import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*; import gplx.xowa.htmls.core.wkrs.imgs.atrs.*;
@@ -65,7 +68,7 @@ public class Xoh_img_wtr implements Bfr_arg, Xoh_wtr_itm {
 		img_w.Set_by_int(html_w);
 		img_h.Set_by_int(html_h);
 		if (gplx.core.envs.Op_sys.Cur().Tid_is_drd())
-			src_bry = Bry_.Replace(src_bry, Byte_ascii.Question_bry, Bry__qarg__esc);	// NOTE: if drd, always escape "?" as "%3F" PAGE:en.w:Cleopatra en.w:Cave_painting; DATE:2016-01-31
+			src_bry = Bry_.Replace(src_bry, AsciiByte.QuestionBry, Bry__qarg__esc);	// NOTE: if drd, always escape "?" as "%3F" PAGE:en.w:Cleopatra en.w:Cave_painting; DATE:2016-01-31
 		img_src.Set_by_bry(src_bry);
 		this.div_w = html_w;
 	}

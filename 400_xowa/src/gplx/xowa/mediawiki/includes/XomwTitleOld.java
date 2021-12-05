@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.mediawiki.includes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.mediawiki.*;
 import gplx.xowa.mediawiki.includes.title.*;
 /**
@@ -311,7 +312,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 		byte[] filteredText = text;
 
 		XomwTitleOld t = new XomwTitleOld(env);
-		t.mDbkeyform = XophpString_.strtr(filteredText, Byte_ascii.Space, Byte_ascii.Underline);
+		t.mDbkeyform = XophpString_.strtr(filteredText, AsciiByte.Space, AsciiByte.Underline);
 		t.mDefaultNamespace = defaultNamespace;
 
 		t.secureAndSplit(env);
@@ -1426,7 +1427,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 //			}
 
 		if (0 != this.mNamespace) {
-			p = Bry_.Add(p, this.getNsText(), Byte_ascii.Colon_bry);
+			p = Bry_.Add(p, this.getNsText(), AsciiByte.ColonBry);
 		}
 		return Bry_.Add(p, name);
 	}
@@ -1439,7 +1440,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	*/
 	public byte[] getPrefixedDBkey() {
 		byte[] s = this.prefix(this.mDbkeyform);
-		s = XophpString_.strtr(s, Byte_ascii.Space, Byte_ascii.Underline);
+		s = XophpString_.strtr(s, AsciiByte.Space, AsciiByte.Underline);
 		return s;
 	}
 	public String getPrefixedDBkeyStr() {return String_.new_u8(getPrefixedDBkey());}
@@ -1453,7 +1454,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 	public byte[] getPrefixedText() {
 		if (this.mPrefixedText == null) {
 			byte[] s = this.prefix(this.mTextform);
-			s = XophpString_.strtr(s, Byte_ascii.Underline, Byte_ascii.Space);
+			s = XophpString_.strtr(s, AsciiByte.Underline, AsciiByte.Space);
 			this.mPrefixedText = s;
 		}
 		return this.mPrefixedText;
@@ -3386,7 +3387,7 @@ public class XomwTitleOld { // implements XomwLinkTarget
 
 		this.mDbkeyform = parts.dbkey;
 		this.mUrlform = XomwGlobalFunctions.wfUrlencode(this.mDbkeyform);
-		this.mTextform = XophpString_.strtr(this.mDbkeyform, Byte_ascii.Underline, Byte_ascii.Space);
+		this.mTextform = XophpString_.strtr(this.mDbkeyform, AsciiByte.Underline, AsciiByte.Space);
 
 		// We already know that some pages won't be in the database!
 		if (this.isExternal() || this.mNamespace == XomwDefines.NS_SPECIAL) {
@@ -4905,39 +4906,39 @@ public class XomwTitleOld { // implements XomwLinkTarget
 		if (title_chars_valid == null) {
 			title_chars_valid = new boolean[128];
 			// add num and alpha
-			for (int i = Byte_ascii.Num_0; i <= Byte_ascii.Num_9; i++)
+			for (int i = AsciiByte.Num0; i <= AsciiByte.Num9; i++)
 				title_chars_valid[i] = true;
-			for (int i = Byte_ascii.Ltr_A; i <= Byte_ascii.Ltr_Z; i++)
+			for (int i = AsciiByte.Ltr_A; i <= AsciiByte.Ltr_Z; i++)
 				title_chars_valid[i] = true;
-			for (int i = Byte_ascii.Ltr_a; i <= Byte_ascii.Ltr_z; i++)
+			for (int i = AsciiByte.Ltr_a; i <= AsciiByte.Ltr_z; i++)
 				title_chars_valid[i] = true;
 
 			// add symbols: \s%!"$&'()*,-./:;=?@\^_`~+"
 			byte[] symbols = new byte[]
-			{ Byte_ascii.Space
-			, Byte_ascii.Percent
-			, Byte_ascii.Bang
-			, Byte_ascii.Quote
-			, Byte_ascii.Amp
-			, Byte_ascii.Apos
-			, Byte_ascii.Paren_bgn
-			, Byte_ascii.Paren_end
-			, Byte_ascii.Star
-			, Byte_ascii.Comma
-			, Byte_ascii.Dash
-			, Byte_ascii.Dot
-			, Byte_ascii.Slash
-			, Byte_ascii.Colon
-			, Byte_ascii.Semic
-			, Byte_ascii.Eq
-			, Byte_ascii.Question
-			, Byte_ascii.At
-			, Byte_ascii.Backslash
-			, Byte_ascii.Pow
-			, Byte_ascii.Underline
-			, Byte_ascii.Tick
-			, Byte_ascii.Tilde
-			, Byte_ascii.Plus
+			{ AsciiByte.Space
+			, AsciiByte.Percent
+			, AsciiByte.Bang
+			, AsciiByte.Quote
+			, AsciiByte.Amp
+			, AsciiByte.Apos
+			, AsciiByte.ParenBgn
+			, AsciiByte.ParenEnd
+			, AsciiByte.Star
+			, AsciiByte.Comma
+			, AsciiByte.Dash
+			, AsciiByte.Dot
+			, AsciiByte.Slash
+			, AsciiByte.Colon
+			, AsciiByte.Semic
+			, AsciiByte.Eq
+			, AsciiByte.Question
+			, AsciiByte.At
+			, AsciiByte.Backslash
+			, AsciiByte.Pow
+			, AsciiByte.Underline
+			, AsciiByte.Tick
+			, AsciiByte.Tilde
+			, AsciiByte.Plus
 			};
 			int symbols_len = symbols.length;
 			for (int i = 0; i < symbols_len; i++)

@@ -15,9 +15,10 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.lists; import gplx.Err_;
 import gplx.Hash_adp;
+import gplx.objects.lists.ComparerAble;
 public class Sorted_hash implements Hash_adp {
 	public Sorted_hash() {this.hash = new java.util.TreeMap();}	
-	public Sorted_hash(ComparerAble comparer) {this.hash = new java.util.TreeMap(comparer);}	
+	public Sorted_hash(ComparerAble comparer) {this.hash = new java.util.TreeMap(comparer);}
 	public boolean Has(Object key) {return Has_base(key);}
 	public Object GetByOrNull(Object key) {return Fetch_base(key);}
 	public Object GetByOrFail(Object key) {return Get_by_or_fail_base(key);}

@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.wikis.data.tbls; import gplx.*;
+import gplx.objects.lists.ComparerAble;
 import gplx.xowa.wikis.data.*;
 import gplx.dbs.*;
 public class Xowd_xowa_db_tbl implements Db_tbl {
@@ -88,7 +89,7 @@ public class Xowd_xowa_db_tbl implements Db_tbl {
 
 	public static Xowd_xowa_db_tbl Get_by_key(Db_tbl_owner owner) {return (Xowd_xowa_db_tbl)owner.Tbls__get_by_key(TBL_NAME);}
 }
-class Xow_db_file_sorter__id implements gplx.core.lists.ComparerAble {
+class Xow_db_file_sorter__id implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xow_db_file lhs = (Xow_db_file)lhsObj;
 		Xow_db_file rhs = (Xow_db_file)rhsObj;

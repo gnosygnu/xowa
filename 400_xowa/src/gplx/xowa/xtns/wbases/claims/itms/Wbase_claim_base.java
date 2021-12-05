@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.claims.itms; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*; import gplx.xowa.xtns.wbases.claims.*;
+package gplx.xowa.xtns.wbases.claims.itms; import gplx.*;
+import gplx.objects.lists.CompareAble;
+import gplx.xowa.xtns.wbases.claims.*;
 import gplx.xowa.xtns.wbases.claims.enums.*;
 public abstract class Wbase_claim_base implements CompareAble {
 	public Wbase_claim_base(int pid, byte snak_tid) {

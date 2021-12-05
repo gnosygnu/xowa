@@ -13,8 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import org.junit.*; import gplx.dbs.*; import gplx.xowa.files.fsdb.*; import gplx.xowa.files.repos.*;
+package gplx.xowa.files.caches;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.DateAdp_;
+import gplx.Datetime_now;
+import gplx.Io_mgr;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.dbs.Db_conn_bldr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.files.Xof_exec_tid;
+import gplx.xowa.files.Xof_ext_;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.files.repos.Xof_repo_tid_;
+import org.junit.Before;
+import org.junit.Test;
 public class Xou_cache_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Xou_cache_mgr_fxt fxt = new Xou_cache_mgr_fxt();
 	@Test  public void Update() {
@@ -63,7 +79,7 @@ class Xou_cache_mgr_fxt {
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();
 		Xoae_app app = Xoa_app_fxt.Make__app__edit();			
-		app.User().User_db_mgr().Init_by_app(Bool_.N, app.Fsys_mgr().Root_dir().GenSubFil_nest("user", "xowa.user.anonymous.sqlite3"));
+		app.User().User_db_mgr().Init_by_app(BoolUtl.N, app.Fsys_mgr().Root_dir().GenSubFil_nest("user", "xowa.user.anonymous.sqlite3"));
 		Xoa_app_fxt.repo_(app, Xoa_app_fxt.Make__wiki__edit(app, "en.wikipedia.org"));
 		Xoa_app_fxt.repo_(app, Xoa_app_fxt.Make__wiki__edit(app, "fr.wikipedia.org"));
 		this.mgr = new Xou_cache_mgr(app.Wiki_mgr(), app.Fsys_mgr().File_dir(), app.User().User_db_mgr().Db_file());

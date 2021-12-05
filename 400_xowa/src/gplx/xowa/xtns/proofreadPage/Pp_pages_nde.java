@@ -13,15 +13,55 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.proofreadPage; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*;
-import gplx.xowa.apps.cfgs.*;
-import gplx.xowa.htmls.core.htmls.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.xtns.lst.*; import gplx.xowa.wikis.pages.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.htmls.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*;
-import gplx.xowa.parsers.lnkis.files.*;
-import gplx.xowa.mediawiki.*;
+package gplx.xowa.xtns.proofreadPage;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Cancelable_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.Int_ary_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.primitives.Byte_obj_val;
+import gplx.core.primitives.Gfo_number_parser;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.core.primitives.Int_obj_val;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.apps.cfgs.Xowc_xtn_pages;
+import gplx.xowa.htmls.core.htmls.Xoh_html_wtr;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.mediawiki.XophpBool_;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_parser;
+import gplx.xowa.parsers.Xop_parser_;
+import gplx.xowa.parsers.Xop_parser_tid_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.amps.Xop_amp_mgr;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm_owner1;
+import gplx.xowa.parsers.lnkis.Xop_lnki_tkn;
+import gplx.xowa.parsers.lnkis.files.Xop_file_logger_;
+import gplx.xowa.parsers.tmpls.Xop_tkn_;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.pages.Xopg_tmpl_prepend_mgr;
+import gplx.xowa.xtns.Xox_mgr_base;
+import gplx.xowa.xtns.Xox_xnde;
+import gplx.xowa.xtns.Xox_xnde_;
+import gplx.xowa.xtns.lst.Lst_pfunc_itm;
+import gplx.xowa.xtns.lst.Lst_pfunc_lst_;
 public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 	private boolean xtn_literal = false;
 	private Xop_root_tkn xtn_root;
@@ -80,7 +120,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 		try {
 			wiki.Parser_mgr().Lst__recursing_(true);
 			Hash_adp_bry lst_page_regy = ctx.Lst_page_regy(); if (lst_page_regy == null) lst_page_regy = Hash_adp_bry.cs();	// SEE:NOTE:page_regy; DATE:2014-01-01
-			page.Html_data().Indicators().Enabled_(Bool_.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
+			page.Html_data().Indicators().Enabled_(BoolUtl.N);				// disable <indicator> b/c <page> should not add to current page; PAGE:en.s:The_Parochial_System_(Wilberforce,_1838); DATE:2015-04-29
 			byte[] page_bry = Bld_wikitext(full_bfr, wiki.Parser_mgr().Pp_num_parser(), lst_page_regy);
 			if (page_bry != null)
 				xtn_root = Bld_root_nde(full_bfr, lst_page_regy, page_bry);	// NOTE: this effectively reparses page twice; needed b/c of "if {| : ; # *, auto add new_line" which can build different tokens
@@ -88,7 +128,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			wiki.Parser_mgr().Lst__recursing_(false);
 			full_bfr.Mkr_rls();
 		}
-		page.Html_data().Indicators().Enabled_(Bool_.Y);
+		page.Html_data().Indicators().Enabled_(BoolUtl.Y);
 	}
 	public void Xtn_write(Bry_bfr bfr, Xoae_app app, Xop_ctx ctx, Xoh_html_wtr html_wtr, Xoh_wtr_ctx hctx, Xoae_page wpg, Xop_xnde_tkn xnde, byte[] src) {
 		if (xtn_literal)
@@ -325,7 +365,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			Int_obj_val page = (Int_obj_val)list.Get_at(i);
 			ttl_bfr.Add(ns_page.Name_db_w_colon())		// EX: 'Page:'
 				.Add(index_ttl_bry)						// EX: 'File.djvu'
-				.Add_byte(Byte_ascii.Slash)				// EX: '/'
+				.Add_byte(AsciiByte.Slash)				// EX: '/'
 				.Add_int_variable(page.Val());			// EX: '123'
 			rv[rv_idx++] = Xoa_ttl.Parse(wiki, ttl_bfr.To_bry_and_clear());
 		}
@@ -374,7 +414,7 @@ public class Pp_pages_nde implements Xox_xnde, Mwh_atr_itm_owner1 {
 			Xopg_tmpl_prepend_mgr prepend_mgr = ctx.Page().Tmpl_prepend_mgr().Bgn(full_bfr);
 			Lst_pfunc_itm lst_itm = Lst_pfunc_itm.New_sect_or_null(ctx, ttl.Full_db());
 			if (lst_itm != null) Lst_pfunc_lst_.Sect_include(page_bfr, lst_itm.Sec_mgr(), lst_itm.Itm_src(), cur_sect_bgn, cur_sect_end);
-			prepend_mgr.End(ctx, full_bfr, page_bfr.Bfr(), page_bfr.Len(), Bool_.Y);
+			prepend_mgr.End(ctx, full_bfr, page_bfr.Bfr(), page_bfr.Len(), BoolUtl.Y);
 			full_bfr.Add_bfr_and_clear(page_bfr);
 			full_bfr.Add(gplx.langs.htmls.entitys.Gfh_entity_.Space_bry);	// $out.= "&#32;"; REF.MW:ProofreadPageRenderer.pn
 		}			

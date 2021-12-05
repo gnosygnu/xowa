@@ -13,14 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
-import org.junit.*; import gplx.dbs.sqls.*;
+package gplx.dbs.qrys;
+import gplx.DateAdp_;
+import gplx.Decimal_adp_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.dbs.Db_qry;
+import gplx.dbs.sqls.SqlQryWtr;
+import gplx.dbs.sqls.SqlQryWtrUtl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import org.junit.Before;
+import org.junit.Test;
 public class Db_qry_sql_tst {
 	@Before public void init() {fxt.Clear();} private Db_qry_sql_fxt fxt = new Db_qry_sql_fxt();
 	@Test public void Insert() {
 		fxt.Test_qry
 		( Db_qry_insert.new_("tbl", "k1", "k2", "k3", "k4", "k5", "k6", "k7", "k8", "k9")
-		, Object_.Ary(123, Bool_.Y, 1.23d, 123L, 123f, Byte_ascii.Num_1, "123", DateAdp_.parse_iso8561("1981-04-05T14:30:30"), Decimal_adp_.parse("1.23"))
+		, Object_.Ary(123, BoolUtl.Y, 1.23d, 123L, 123f, AsciiByte.Num1, "123", DateAdp_.parse_iso8561("1981-04-05T14:30:30"), Decimal_adp_.parse("1.23"))
 		, "INSERT INTO tbl (k1, k2, k3, k4, k5, k6, k7, k8, k9) VALUES (123, 1, 1.23, 123, 123, 1, '123', '1981-04-05 14:30:30.000', 1.23)"
 		);
 	}

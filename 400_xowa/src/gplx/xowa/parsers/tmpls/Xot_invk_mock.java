@@ -13,7 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.Bry_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.Type_;
+import gplx.objects.primitives.BoolUtl;
 public class Xot_invk_mock implements Xot_invk {
 	Xot_invk_mock(byte defn_tid, int idx_adj, byte[] frame_ttl) {
 		this.defn_tid = defn_tid; this.idx_adj = idx_adj; this.frame_ttl = frame_ttl;
@@ -71,8 +78,8 @@ public class Xot_invk_mock implements Xot_invk {
 			Arg_nde_tkn_mock nde_tkn = null;
 			if		(Type_.Eq_by_obj(kv_key_obj, Int_.Cls_ref_type))					// key is int; EX: 1 => val
 				nde_tkn = new Arg_nde_tkn_mock(null, kv.Val_to_str_or_empty());			// add w/o key
-			else if	(Type_.Eq_by_obj(kv.Val(), Bool_.Cls_ref_type)) {					// val is boolean; EX: key => true || key => false
-				boolean kv_val_bool = Bool_.Cast(kv.Val());
+			else if	(Type_.Eq_by_obj(kv.Val(), BoolUtl.ClsRefType)) {					// val is boolean; EX: key => true || key => false
+				boolean kv_val_bool = BoolUtl.Cast(kv.Val());
 				if (kv_val_bool)
 					nde_tkn = new Arg_nde_tkn_mock(kv_key_str, "1");					// true => 1 (PHP behavior)
 				else

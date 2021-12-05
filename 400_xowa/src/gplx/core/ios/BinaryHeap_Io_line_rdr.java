@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.lists.*;
+package gplx.core.ios;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
 class BinaryHeap_Io_line_rdr {
 	public BinaryHeap_Io_line_rdr(ComparerAble comparer) {this.comparer = comparer;} ComparerAble comparer;
 	Io_line_rdr[] ary = Ary_empty; int ary_len = 0, ary_max = 0;
@@ -23,7 +25,7 @@ class BinaryHeap_Io_line_rdr {
 		int new_len = ary_len + 1;
 		if (new_len > ary_max) {
 			ary_max = new_len * 2;
-			ary = (Io_line_rdr[])Array_.Resize(ary, ary_max);
+			ary = (Io_line_rdr[])ArrayUtl.Resize(ary, ary_max);
 		}
 		ary[ary_len] = itm;
 		ary_len = new_len;
@@ -51,7 +53,7 @@ class BinaryHeap_Io_line_rdr {
 	private void Add_move_up(int pos) {
 		while (pos > 0) {
 			int owner = (pos - 1) / 2;
-			if (Compare(pos, owner) > CompareAble_.Less) break;
+			if (Compare(pos, owner) > CompareAbleUtl.Less) break;
 			Swap(pos, owner);
 			pos = owner;
 		}
@@ -60,9 +62,9 @@ class BinaryHeap_Io_line_rdr {
 		int idx_last = ary_len - 1;
 		while (pos < ary_len / 2) {
 			int sub = 2 * pos + 1;
-			if (sub < idx_last && Compare(sub, sub + 1) > CompareAble_.Same)
+			if (sub < idx_last && Compare(sub, sub + 1) > CompareAbleUtl.Same)
 				++sub;
-			if (Compare(pos, sub) < CompareAble_.More) break;
+			if (Compare(pos, sub) < CompareAbleUtl.More) break;
 			Swap(pos, sub);
 			pos = sub;
 		}

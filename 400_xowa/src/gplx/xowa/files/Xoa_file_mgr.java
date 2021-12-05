@@ -23,11 +23,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 ////			Xou_cache_mgr cache_mgr = new Xou_cache_mgr(null, null, null);
 ////			Xou_cache_itm cache_itm = cache_mgr.Get_or_null(fsdb_itm);
 ////			if (cache_itm == null) {
-////				fsdb_itm.Init_at_cache(Bool_.N_byte, 0, 0, null);
+////				fsdb_itm.Init_at_cache(BoolUtl.N_byte, 0, 0, null);
 ////				return false;
 ////			}
 ////			else {
-////				fsdb_itm.Init_at_cache(Bool_.Y_byte, cache_itm.Html_w(), cache_itm.Html_h(), cache_itm.File_url());
+////				fsdb_itm.Init_at_cache(BoolUtl.Y_byte, cache_itm.Html_w(), cache_itm.Html_h(), cache_itm.File_url());
 ////				return true;
 ////			}
 //			return true;

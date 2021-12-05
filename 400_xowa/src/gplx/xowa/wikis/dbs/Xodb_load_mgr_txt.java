@@ -13,15 +13,41 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.dbs; import gplx.*; import gplx.xowa.*;
-import gplx.core.primitives.*; import gplx.core.brys.*;
-import gplx.core.envs.*;
-import gplx.core.encoders.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.hives.*; import gplx.xowa.wikis.tdbs.xdats.*;
-import gplx.xowa.addons.wikis.searchs.specials.*;
-import gplx.xowa.guis.views.*;
+package gplx.xowa.wikis.dbs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.Cancelable;
+import gplx.Cancelable_;
+import gplx.Int_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.Ordered_hash;
+import gplx.RandomAdp_;
+import gplx.String_;
+import gplx.core.brys.Int_flag_bldr_;
+import gplx.core.encoders.Base85_;
+import gplx.core.envs.Env_;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.objects.lists.ComparerAble;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.searchs.specials.Srch_special_page;
+import gplx.xowa.guis.views.Gfo_usr_dlg_fmt;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_mgr_;
+import gplx.xowa.wikis.tdbs.Xotdb_dir_info_;
+import gplx.xowa.wikis.tdbs.Xotdb_fsys_mgr;
+import gplx.xowa.wikis.tdbs.Xotdb_page_itm_;
+import gplx.xowa.wikis.tdbs.hives.Xoa_hive_mgr;
+import gplx.xowa.wikis.tdbs.hives.Xowd_hive_regy_itm;
+import gplx.xowa.wikis.tdbs.hives.Xowd_regy_mgr;
+import gplx.xowa.wikis.tdbs.hives.Xowd_regy_mgr_;
+import gplx.xowa.wikis.tdbs.xdats.Xob_xdat_file;
+import gplx.xowa.wikis.tdbs.xdats.Xob_xdat_itm;
 public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	private final Xob_xdat_file tmp_xdat_file = new Xob_xdat_file(); private final Xob_xdat_itm tmp_xdat_itm = new Xob_xdat_itm();
 	private final Xowd_page_itm tmp_page = new Xowd_page_itm();
@@ -41,7 +67,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	}
 	public boolean Load_by_ttl(Xowd_page_itm rv, Xow_ns ns, byte[] ttl) {	// NOTE: ttl must be correct case; EX: "Example title"
 		if (!Env_.Mode_testing() && wiki.Init_needed()) wiki.Init_assert();	// NOTE: need to call assert as wiki_finder (and possibly elsewhere) may call load on commons_wiki without ever asserting; DATE:2013-03-19
-		if (!Load_xdat_itm(tmp_xdat_itm, ns, Xotdb_dir_info_.Tid_ttl, ttl, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, true)) return false;
+		if (!Load_xdat_itm(tmp_xdat_itm, ns, Xotdb_dir_info_.Tid_ttl, ttl, Xotdb_page_itm_.Txt_ttl_pos, AsciiByte.Tab, true)) return false;
 		Xotdb_page_itm_.Txt_ttl_load(rv, tmp_xdat_itm.Itm_bry());
 		return Bry_.Eq(rv.Ttl_page_db(), ttl);
 	}
@@ -75,7 +101,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Xow_ns ns = wiki.Ns_mgr().Ns_main();
 		int search_len = search.length;
 		byte match_tid = Srch_special_page.Match_tid_all;
-		if (search_len > 0 && search[search_len - 1] == Byte_ascii.Star) {
+		if (search_len > 0 && search[search_len - 1] == AsciiByte.Star) {
 			search = Bry_.Mid(search, 0, search_len - 1);
 			match_tid = Srch_special_page.Match_tid_bgn;
 		}
@@ -83,7 +109,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		if (bgn_idx == Xodb_save_mgr_txt.File_idx_unknown) return;
 		if (match_tid == Srch_special_page.Match_tid_all) {
 			if (!this.Load_xdat_file(cancelable, tmp_xdat_file, Xotdb_dir_info_.Tid_search_ttl, ns, bgn_idx)) return;			
-			tmp_xdat_file.Find(tmp_xdat_itm, search, 0, Byte_ascii.Pipe, true);
+			tmp_xdat_file.Find(tmp_xdat_itm, search, 0, AsciiByte.Pipe, true);
 			if (tmp_xdat_itm.Missing()) return;
 			Find_ttls__add_itms(rv, tmp_xdat_file, tmp_xdat_itm);
 		}
@@ -96,12 +122,12 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 				if (cancelable.Canceled()) return;
 				int itm_bgn_idx = 0;
 				if (i == bgn_idx) {
-					tmp_xdat_file.Find(tmp_xdat_itm, search, 0, Byte_ascii.Pipe, false);
+					tmp_xdat_file.Find(tmp_xdat_itm, search, 0, AsciiByte.Pipe, false);
 					itm_bgn_idx = tmp_xdat_itm.Itm_idx();
 				}
 				int itm_end_idx = tmp_xdat_file.Count();
 				if (i == end_idx) {
-					tmp_xdat_file.Find(tmp_xdat_itm, end_ttl, 0, Byte_ascii.Pipe, false);
+					tmp_xdat_file.Find(tmp_xdat_itm, end_ttl, 0, AsciiByte.Pipe, false);
 					itm_end_idx = tmp_xdat_itm.Itm_idx();
 				}
 				for (int j = itm_bgn_idx; j < itm_end_idx; j++) {
@@ -114,9 +140,9 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 	private void Find_ttls__add_itms(List_adp rv, Xob_xdat_file rdr, Xob_xdat_itm xdat_itm) {
 		byte[] raw = rdr.Src();
 		int itm_bgn = xdat_itm.Itm_bgn(), itm_end = xdat_itm.Itm_end();
-		int pos = Bry_find_.Find_fwd(raw, Byte_ascii.Pipe, itm_bgn, raw.length);
+		int pos = Bry_find_.Find_fwd(raw, AsciiByte.Pipe, itm_bgn, raw.length);
 		if (pos == Bry_find_.Not_found) throw wiki.Appe().Usr_dlg().Fail_many(GRP_KEY, "invalid_search_file", "search file is invalid");
-		pos += Byte_ascii.Len_1;	// pipe len
+		pos += AsciiByte.Len1;	// pipe len
 		
 		while (pos < itm_end) {
 			int page_id 	= Base85_.To_int_by_bry(raw, pos, pos + 4);
@@ -134,12 +160,12 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		return true;
 	}
 	boolean Load_by_id(Xowd_page_itm page, Xob_xdat_file xdat_file, byte[] id_bry) {
-		xdat_file.Find(tmp_xdat_itm, id_bry, 0, Byte_ascii.Pipe, true);
+		xdat_file.Find(tmp_xdat_itm, id_bry, 0, AsciiByte.Pipe, true);
 		if (tmp_xdat_itm.Missing()) return false;
 		Xotdb_page_itm_.Txt_id_load(page, tmp_xdat_itm.Itm_bry());
 		return true;
 	}
-	private boolean Load_xdat_itm(Xob_xdat_itm xdat_itm, byte regy_tid, byte[] key, boolean exact) {return Load_xdat_itm(xdat_itm, null, regy_tid, key, 0, Byte_ascii.Pipe, exact);}
+	private boolean Load_xdat_itm(Xob_xdat_itm xdat_itm, byte regy_tid, byte[] key, boolean exact) {return Load_xdat_itm(xdat_itm, null, regy_tid, key, 0, AsciiByte.Pipe, exact);}
 	private boolean Load_xdat_itm(Xob_xdat_itm xdat_itm, Xow_ns ns, byte regy_tid, byte[] key, int parse_bgn, byte parse_dlm, boolean exact) {
 		// get regy
 		Xowd_regy_mgr regy = null;
@@ -241,7 +267,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		if (ttl_end == -1) return false;
 		byte[] ttl		= Bry_.Mid				(src, bgn + 12		, ttl_end);
 		byte[] text		= Bry_.Mid				(src, ttl_end + 1	, itm_end - 1);
-		page.Init_by_tdb(-1, -1, xdat.Itm_idx(), Bool_.N, text.length, ns_id, ttl);
+		page.Init_by_tdb(-1, -1, xdat.Itm_idx(), BoolUtl.N, text.length, ns_id, ttl);
 		page.Modified_on_(Int_flag_bldr_.To_date_short(timestamp));
 		page.Text_(text);
 		return true;
@@ -287,7 +313,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Xowd_regy_mgr regy = new Xowd_regy_mgr(fsys_mgr.Url_ns_reg(ns.Num_str(), dir_tid));
 		int fil_idx = regy.Files_find(key); if (fil_idx == Xowd_regy_mgr.Regy_null) return;
 		if (!this.Load_xdat_file(Cancelable_.Never, cur_xdat_file, dir_tid, ns, fil_idx)) return;
-		cur_xdat_file.Find(cur_xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, Byte_ascii.Tab, false);
+		cur_xdat_file.Find(cur_xdat_itm, key, Xotdb_page_itm_.Txt_ttl_pos, AsciiByte.Tab, false);
 		int itm_idx = cur_xdat_itm.Itm_idx();
 		if (itm_idx == -1) itm_idx = 0;	// nothing found; return;
 		Special_allpages_query_fwd(rslt_list, rslt_nxt, rslt_count	, dir_tid, ns, include_redirects, browse_len, fil_idx, itm_idx    , cur_xdat_file, cur_xdat_itm, regy);
@@ -388,7 +414,7 @@ public class Xodb_load_mgr_txt implements Xodb_load_mgr {
 		Xoa_hive_mgr hive_mgr = wiki.Appe().Hive_mgr();
 		int fil_idx = hive_mgr.Find_fil(dir, ttl); if (fil_idx == Xowd_regy_mgr.Regy_null) return null; // sub_dir not found; EX: commonswiki if qid; fr if pid;
 		Xob_xdat_file rdr = hive_mgr.Get_rdr(dir, Xotdb_dir_info_.Bry_xdat, fil_idx);
-		rdr.Find(tmp_xdat_itm, ttl, 0, Byte_ascii.Pipe, true);
+		rdr.Find(tmp_xdat_itm, ttl, 0, AsciiByte.Pipe, true);
 		return tmp_xdat_itm.Found_exact() ? tmp_xdat_itm : null;
 	}
 	public Xodb_page_rdr Get_page_rdr(Xowe_wiki wiki) {return new Xodb_page_rdr__tdb(wiki);}
@@ -401,7 +427,7 @@ class Xob_random_itm {
 	public int Len() {return len;} private int len;
 	public Xob_random_itm(int idx, int bgn, int len) {this.idx = idx; this.bgn = bgn; this.len = len;}
 }
-class Xob_random_itm_comparer implements gplx.core.lists.ComparerAble {
+class Xob_random_itm_comparer implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		return Int_.Compare(((Xob_random_itm)lhsObj).End(), ((Xob_random_itm)rhsObj).End());
 	}

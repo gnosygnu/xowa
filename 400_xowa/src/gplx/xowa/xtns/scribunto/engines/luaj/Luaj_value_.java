@@ -13,9 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*;
-import gplx.xowa.xtns.scribunto.*;
-import org.luaj.vm2.*;
+package gplx.xowa.xtns.scribunto.engines.luaj;
+import gplx.Byte_;
+import gplx.Char_;
+import gplx.Decimal_adp;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.Float_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Long_;
+import gplx.Object_;
+import gplx.Short_;
+import gplx.String_;
+import gplx.Type_;
+import gplx.Type_ids_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.xtns.scribunto.Scrib_lua_proc;
+import org.luaj.vm2.LuaBoolean;
+import org.luaj.vm2.LuaInteger;
+import org.luaj.vm2.LuaNumber;
+import org.luaj.vm2.LuaString;
+import org.luaj.vm2.LuaTable;
+import org.luaj.vm2.LuaValue;
+import org.luaj.vm2.Varargs;
 class Luaj_value_ {
 	public static String Get_val_as_str(LuaTable owner, String key) {
 		return ((LuaString)owner.get(key)).tojstring();		
@@ -124,7 +148,7 @@ class Luaj_value_ {
 	public static LuaValue Obj_to_lua_val(Luaj_server server, Object o) {
 		if (o == null) return LuaValue.NIL;
 		Class<?> c = Type_.Type_by_obj(o);
-		if		(Object_.Eq(c, Bool_.Cls_ref_type))			return LuaValue.valueOf((Boolean)o);
+		if		(Object_.Eq(c, BoolUtl.ClsRefType))			return LuaValue.valueOf((Boolean)o);
 		else if	(Object_.Eq(c, Byte_.Cls_ref_type))			return LuaValue.valueOf((Byte)o);
 		else if	(Object_.Eq(c, Int_.Cls_ref_type))			return LuaValue.valueOf((Integer)o);
 		else if	(Object_.Eq(c, String_.Cls_ref_type))		return LuaValue.valueOf((String)o);

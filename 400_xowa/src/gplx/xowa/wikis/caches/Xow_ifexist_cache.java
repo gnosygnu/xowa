@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.caches.*;
-import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.wikis.caches;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Io_mgr;
+import gplx.Rls_able;
+import gplx.core.caches.Gfo_cache_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
 public class Xow_ifexist_cache {
 	private final Xowe_wiki wiki;
 	private final Xow_page_cache page_cache;
@@ -47,19 +54,19 @@ public class Xow_ifexist_cache {
 
 		// check cache_mgr
 		Xow_ifexist_itm found = (Xow_ifexist_itm)cache_mgr.Get_by_key(key);
-		if (found != null) return found.Exists() ? Bool_.Y_byte : Bool_.N_byte;
+		if (found != null) return found.Exists() ? BoolUtl.YByte : BoolUtl.NByte;
 
 		// check ns_loaded cache (xomp only); if ns_exists, return false, since all pages in ns are loaded, and still not found
-		if (ns_loaded_hash.Has(ttl.Ns().Id())) return Bool_.N_byte;
+		if (ns_loaded_hash.Has(ttl.Ns().Id())) return BoolUtl.NByte;
 
 		// check page_cache since full page + text could be loaded there
 		Xow_page_cache_itm itm = (Xow_page_cache_itm)page_cache.Get_itm_or_null(ttl.Full_db_as_str());
 		if		(itm == Xow_page_cache_itm.Missing)
-			return Bool_.N_byte;
+			return BoolUtl.NByte;
 		else if (itm != null)
-			return Bool_.Y_byte;
+			return BoolUtl.YByte;
 
-		return Bool_.__byte;
+		return BoolUtl.NullByte;
 	}
 	public boolean Get_by_load(Xoa_ttl ttl) {
 		byte[] key = ttl.Full_db();
@@ -88,6 +95,6 @@ class Xow_ifexist_itm implements Rls_able {
 	public boolean Exists() {return exists;} private final boolean exists;
 	public void Rls() {}
 
-	private static final Xow_ifexist_itm Itm__exists = new Xow_ifexist_itm(Bool_.Y), Itm__missing = new Xow_ifexist_itm(Bool_.N);
+	private static final Xow_ifexist_itm Itm__exists = new Xow_ifexist_itm(BoolUtl.Y), Itm__missing = new Xow_ifexist_itm(BoolUtl.N);
 	public static Xow_ifexist_itm Get(boolean exists) {return exists ? Itm__exists : Itm__missing;}
 }

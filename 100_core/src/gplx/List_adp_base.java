@@ -14,10 +14,11 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.lists.ComparerAble;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.ComparerAble;
 import gplx.core.lists.Iterator_null;
 import gplx.core.lists.Iterator_objAry;
-import gplx.core.lists.List_adp_sorter;
+import gplx.objects.lists.ComparerAbleSorter;
 public abstract class List_adp_base implements List_adp, Gfo_invk {
 	private Object[] list; private int count;
 	public List_adp_base(int capacity) {
@@ -36,7 +37,7 @@ public abstract class List_adp_base implements List_adp, Gfo_invk {
 		return list[index];
 	}
 	protected void Add_base(Object o) {
-		if (count == Array_.Len_obj(list)) Resize_expand();
+		if (count == ArrayUtl.LenObjAry(list)) Resize_expand();
 		list[count] = o;
 		count++;
 	}
@@ -55,9 +56,9 @@ public abstract class List_adp_base implements List_adp, Gfo_invk {
 		int newLen = count - delLen;
 		Object[] newList = new Object[newLen];
 		if (delBgn != 0)			// copy elements < delBgn; skip if delBgn == 0
-			Array_.Copy_to(list, 0, newList, 0, delBgn);
+			ArrayUtl.CopyTo(list, 0, newList, 0, delBgn);
 		if (delEnd != count -1 )	// copy elements > delEnd; skip if delEnd == lastIdx			
-			Array_.Copy_to(list, delEnd + 1, newList, delBgn, newLen - delBgn);
+			ArrayUtl.CopyTo(list, delEnd + 1, newList, delBgn, newLen - delBgn);
 		list = newList;
 		count = list.length;
 	}
@@ -84,7 +85,7 @@ public abstract class List_adp_base implements List_adp, Gfo_invk {
 		list[trg] = o;
 	}
 	protected void AddAt_base(int pos, Object o) {
-		if (count + 1 >= Array_.Len_obj(list)) Resize_expand();
+		if (count + 1 >= ArrayUtl.LenObjAry(list)) Resize_expand();
 		for (int i = count; i > pos; i--)
 			list[i] = list[i - 1];
 		list[pos] = o;
@@ -94,7 +95,7 @@ public abstract class List_adp_base implements List_adp, Gfo_invk {
 		Resize_expand(i);
 	}
 	public void Sort() {SortBy(null);}
-	public void SortBy(ComparerAble comparer) {List_adp_sorter.new_().Sort(list, count, true, comparer);}
+	public void SortBy(ComparerAble comparer) {new ComparerAbleSorter().Sort(list, count, true, comparer);}
 	public void Reverse() {
 		int mid = count / 2;				// no need to reverse pivot; ex: for 3 elements, only 1 and 3 need to be exchanged; 2 stays inplace
 		for (int lhs = 0; lhs < mid; lhs++) {
@@ -125,9 +126,9 @@ public abstract class List_adp_base implements List_adp, Gfo_invk {
 	private static final int Len_initial = 8;
 	public Object ToAryAndClear(Class<?> memberType) {Object rv = ToAry(memberType); this.Clear(); return rv;}
 	public Object ToAry(Class<?> memberType) {
-		Object rv = Array_.Create(memberType, count);
+		Object rv = ArrayUtl.Create(memberType, count);
 		for (int i = 0; i < count; i++)
-			Array_.Set_at(rv, i, list[i]);
+			ArrayUtl.SetAt(rv, i, list[i]);
 		return rv;
 	}
 	public String[] ToStrAryAndClear() {String[] rv = ToStrAry(); this.Clear(); return rv;}
@@ -165,7 +166,7 @@ public abstract class List_adp_base implements List_adp, Gfo_invk {
 			list[i] = (i == count - 1) ? null : list[i + 1];
 		}
 	}
-	@gplx.Internal protected int Capacity() {return Array_.Len_obj(list);}
+	@gplx.Internal protected int Capacity() {return ArrayUtl.LenObjAry(list);}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
 		if		(ctx.Match(k, Invk_len))			return count;
 		else if	(ctx.Match(k, Invk_get_at))			return Get_at(m.ReadInt("v"));

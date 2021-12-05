@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.envs;
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
@@ -42,8 +42,8 @@ import java.io.InputStreamReader;
 import gplx.core.brys.fmtrs.*; import gplx.core.strings.*;
 public class Process_adp implements Gfo_invk, Rls_able {
 	public boolean Enabled() {return enabled;} public Process_adp Enabled_(boolean v) {enabled = v; return this;} private boolean enabled = true;
-	public byte Exe_exists() {return exe_exists;} public Process_adp Exe_exists_(byte v) {exe_exists = v; return this;} private byte exe_exists = Bool_.__byte;
-	public Io_url Exe_url() {return exe_url;} public Process_adp Exe_url_(Io_url val) {exe_url = val; exe_exists = Bool_.__byte; return this;} Io_url exe_url;
+	public byte Exe_exists() {return exe_exists;} public Process_adp Exe_exists_(byte v) {exe_exists = v; return this;} private byte exe_exists = BoolUtl.NullByte;
+	public Io_url Exe_url() {return exe_url;} public Process_adp Exe_url_(Io_url val) {exe_url = val; exe_exists = BoolUtl.NullByte; return this;} Io_url exe_url;
 	public String Args_str() {return args_str;} public Process_adp Args_str_(String val) {args_str = val; return this;} private String args_str = "";
 	public Bry_fmtr Args_fmtr() {return args_fmtr;} Bry_fmtr args_fmtr = Bry_fmtr.new_("");
 	public boolean Args__include_quotes() {return args__include_quotes;} public void Args__include_quotes_(boolean v) {args__include_quotes = v;} private boolean args__include_quotes;

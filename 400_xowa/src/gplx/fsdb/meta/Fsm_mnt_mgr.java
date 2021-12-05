@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*; import gplx.xowa.files.*; import gplx.xowa.files.fsdb.*;
+package gplx.fsdb.meta;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.dbs.Db_conn;
+import gplx.dbs.cfgs.Db_cfg_hash;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.fsdb.Fsdb_db_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.files.Xof_patch_upright_tid_;
+import gplx.xowa.files.fsdb.Xof_fsdb_mgr_cfg;
 public class Fsm_mnt_mgr implements Gfo_invk {
 	private Db_cfg_tbl cfg_tbl; private Fsm_mnt_tbl mnt_tbl;
 	private Fsm_mnt_itm[] mnt_ary; private int mnt_ary_len = 0;
@@ -56,8 +66,8 @@ public class Fsm_mnt_mgr implements Gfo_invk {
 	}
 	public static void Patch_core(Db_cfg_tbl cfg_tbl) {	// NOTE: thes need to be upserts else upgrading will fail; DATE:2015-05-23
 		cfg_tbl.Upsert_int	(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_next_id					, 1);		// start next_id at 1
-		cfg_tbl.Upsert_yn	(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_schema_thm_page			, Bool_.Y);	// new dbs automatically have page and time in fsdb_xtn_tm
-		cfg_tbl.Upsert_yn	(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_patch__next_id			, Bool_.Y);	// new dbs automatically have correct next_id
+		cfg_tbl.Upsert_yn	(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_schema_thm_page			, BoolUtl.Y);	// new dbs automatically have page and time in fsdb_xtn_tm
+		cfg_tbl.Upsert_yn	(Fsm_cfg_mgr.Grp_core, Fsm_cfg_mgr.Key_patch__next_id			, BoolUtl.Y);	// new dbs automatically have correct next_id
 	}
 	public static final String Cfg_grp_core = "core", Cfg_key_mnt_insert_idx = "mnt.insert_idx";	// SERIALIZED
 }

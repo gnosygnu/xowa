@@ -14,9 +14,12 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.addons.wikis.searchs.specials; import gplx.*;
-import gplx.core.primitives.*; import gplx.xowa.langs.*;
+import gplx.core.primitives.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.ComparerAble;
+import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.domains.crts.*;
-public class Xow_domain_sorter__manual implements gplx.core.lists.ComparerAble {
+public class Xow_domain_sorter__manual implements ComparerAble {
 	private final Xow_domain_itm cur_domain;
 	private final Xow_domain_crt_itm[] ary; private final int ary_len;
 	public Xow_domain_sorter__manual(Xow_domain_itm cur_domain, Xow_domain_crt_itm[] ary) {
@@ -46,10 +49,10 @@ public class Xow_domain_sorter__manual implements gplx.core.lists.ComparerAble {
 		int len = ary.length;
 		for (int i = 0; i < len; ++i)
 			ary[i].Sort_idx_(-1);
-		Array_.Sort(ary, sorter);
+		ArrayUtl.Sort(ary, sorter);
 	}
 }
-class Xow_domain_sorter__manual_tid implements gplx.core.lists.ComparerAble {
+class Xow_domain_sorter__manual_tid implements ComparerAble {
 	private final Hash_adp sort_hash = Hash_adp_.New(); private final Int_obj_ref sort_key = Int_obj_ref.New_neg1();
 	public Xow_domain_sorter__manual_tid(int[] id_ary) {
 		int len = id_ary.length;
@@ -83,7 +86,7 @@ class Xow_domain_sorter__manual_tid implements gplx.core.lists.ComparerAble {
 		return new Xow_domain_sorter__manual_tid(id_ints);
 	}
 }
-class Xow_domain_sorter__manual_lang implements gplx.core.lists.ComparerAble {
+class Xow_domain_sorter__manual_lang implements ComparerAble {
 	private final Hash_adp sort_hash = Hash_adp_.New(); private final Int_obj_ref sort_key = Int_obj_ref.New_neg1();
 	public Xow_domain_sorter__manual_lang(int[] id_ary) {
 		int len = id_ary.length;

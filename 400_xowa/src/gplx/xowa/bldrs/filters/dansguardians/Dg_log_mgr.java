@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.filters.dansguardians; import gplx.*;
 import gplx.dbs.*;
+import gplx.objects.strings.AsciiByte;
 class Dg_log_mgr {
 	private Db_conn conn;
 	private final Dg_file_tbl		tbl_file = new Dg_file_tbl();
@@ -32,7 +33,7 @@ class Dg_log_mgr {
 		conn.Txn_bgn("dansguardian");
 	}
 	public void Insert_file(Dg_file file) {tbl_file.Insert(file.Id(), file.Rel_path(), file.Lines().length);}
-	public void Insert_rule(Dg_rule rule) {tbl_rule.Insert(rule.File_id(), rule.Id(), rule.Idx(), rule.Score(), Dg_word.Ary_concat(rule.Words(), tmp_bfr, Byte_ascii.Tilde));}
+	public void Insert_rule(Dg_rule rule) {tbl_rule.Insert(rule.File_id(), rule.Id(), rule.Idx(), rule.Score(), Dg_word.Ary_concat(rule.Words(), tmp_bfr, AsciiByte.Tilde));}
 	public void Insert_page_score(int log_tid, int page_id, int page_ns, byte[] page_ttl, int page_len, int page_score, int page_rule_count, int clude_type) {
 		tbl_page_score.Insert(log_tid, page_id, page_ns, page_ttl, page_len, page_score, page_rule_count, clude_type);
 	}

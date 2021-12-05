@@ -13,11 +13,34 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.core.brys.fmtrs.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.times.*; import gplx.xowa.xtns.wbases.claims.enums.*; import gplx.xowa.xtns.wbases.claims.itms.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.wbases.hwtrs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.commas.*;
-import gplx.xowa.parsers.*;
+package gplx.xowa.xtns.wbases;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Byte_;
+import gplx.Double_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.parsers.Xow_parser_mgr;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_entity_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_type_;
+import gplx.xowa.xtns.wbases.claims.enums.Wbase_claim_value_type_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_entity_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_globecoordinate_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_monolingualtext_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_quantity_;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_time_;
+import gplx.xowa.xtns.wbases.claims.itms.times.Wbase_date;
+import gplx.xowa.xtns.wbases.claims.itms.times.Wbase_date_;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_datavalue;
+import gplx.xowa.xtns.wbases.core.Wdata_dict_mainsnak;
 public class Wdata_prop_val_visitor_ {
 	public static String Render_snaks(Xowe_wiki wiki, byte[] page_url, Keyval[] snaks) {
 		String rv = null;
@@ -109,7 +132,7 @@ public class Wdata_prop_val_visitor_ {
 			}
 		}
 		entity_id = Wbase_claim_entity.To_xid__db(entity_tid, entity_id);	// get p/q and number; PAGE:en.v:Mongolia; EX: [numeric-id=6498663, entity-type=item]; DATE:2016-10-18
-		Wdata_prop_val_visitor.Write_entity(bfr, wdata_mgr, lang.Key_bry(), entity_id, Bool_.N);
+		Wdata_prop_val_visitor.Write_entity(bfr, wdata_mgr, lang.Key_bry(), entity_id, BoolUtl.N);
 	}
 	private static void Write_time(Bry_bfr bfr, Wdata_wiki_mgr wdata_mgr, Xowe_wiki wiki, byte[] page_url, int pid, byte snak_tid, Keyval[] kvs) {
 		byte[] time = null, calendar = null;
@@ -161,7 +184,7 @@ public class Wdata_prop_val_visitor_ {
 				case Wbase_claim_globecoordinate_.Tid__globe:			glb = To_bry_by_str(kv.Val()); break;
 			}
 		}
-		Wdata_prop_val_visitor.Write_geo(Bool_.Y, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), wdata_mgr.Hwtr_mgr().Msgs(), lat, lng, alt, prc, glb);
+		Wdata_prop_val_visitor.Write_geo(BoolUtl.Y, bfr, wdata_mgr.Hwtr_mgr().Lbl_mgr(), wdata_mgr.Hwtr_mgr().Msgs(), lat, lng, alt, prc, glb);
 	}
 	private static void Write_langtext(Bry_bfr bfr, byte[] page_url, Keyval[] kvs) {
 		byte[] text = null;

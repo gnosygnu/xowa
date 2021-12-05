@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.parsers.tmpls;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.Xoa_ttl;
 import gplx.xowa.Xowe_wiki;
 import gplx.xowa.langs.kwds.Xol_kwd_grp_;
@@ -44,7 +44,7 @@ public class Xot_invk_tkn_ {
 		if (caller.Rslt_is_redirect())			// do not prepend if page is redirect; EX:"#REDIRECT" x> "\n#REDIRECT" DATE:2014-07-11
 			caller.Rslt_is_redirect_(false);	// reset flag; needed for TEST; kludgy, but Rslt_is_redirect is intended for single use
 		else
-			ctx.Page().Tmpl_prepend_mgr().End(ctx, bfr, bfr_func.Bfr(), bfr_func.Len(), Bool_.N);
+			ctx.Page().Tmpl_prepend_mgr().End(ctx, bfr, bfr_func.Bfr(), bfr_func.Len(), BoolUtl.N);
 		bfr.Add_bfr_and_clear(bfr_func);
 	}
 	public static Xot_defn_tmpl Load_defn(Xowe_wiki wiki, Xop_ctx ctx, Xot_invk_tkn invk_tkn, Xoa_ttl ttl, byte[] name_ary) {	// recursive loading of templates
@@ -56,7 +56,7 @@ public class Xot_invk_tkn_ {
 			Xow_ns ns_tmpl = wiki.Ns_mgr().Ns_template();
 			rv = wiki.Parser_mgr().Main().Parse_text_to_defn_obj(Xop_ctx.New__sub(wiki, ctx, ctx.Page()), ctx.Tkn_mkr(), ns_tmpl, name_ary, tmpl_page_bry); // create new ctx so __NOTOC__ only applies to template, not page; PAGE:de.w:13._Jahrhundert DATE:2017-06-17
 			Xoa_ttl tmpl_page_ttl = tmpl_page_itm.Ttl();
-			byte[] frame_ttl = Bry_.Add(tmpl_page_ttl.Ns().Name_db(), Byte_ascii.Colon_bry, tmpl_page_ttl.Page_txt());	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-08-22; (3) must be local language; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
+			byte[] frame_ttl = Bry_.Add(tmpl_page_ttl.Ns().Name_db(), AsciiByte.ColonBry, tmpl_page_ttl.Page_txt());	// NOTE: (1) must have ns (Full); (2) must be txt (space, not underscore); EX:Template:Location map+; DATE:2014-08-22; (3) must be local language; Russian "Шаблон" not English "Template"; PAGE:ru.w:Королевство_Нидерландов DATE:2016-11-23
 			rv.Frame_ttl_(frame_ttl);								// set defn's frame_ttl; needed for redirect_trg; PAGE:en.w:Statutory_city; DATE:2014-08-22
 			ctx.Parse_tid_(old_parse_tid);
 			wiki.Cache_mgr().Defn_cache().Add(rv, ns_tmpl.Case_match());
@@ -66,13 +66,13 @@ public class Xot_invk_tkn_ {
 	public static void Print_not_found__by_transclude(Bry_bfr bfr, Xow_ns_mgr ns_mgr, boolean name_has_template, byte[] name_ary) {// print missing as [[Missing]]; PAGE:en.d:a DATE:2016-06-24
 		bfr.Add(Xop_tkn_.Lnki_bgn);
 		if (name_has_template)
-			bfr.Add(ns_mgr.Ns_template().Name_db()).Add_byte(Byte_ascii.Colon);
+			bfr.Add(ns_mgr.Ns_template().Name_db()).Add_byte(AsciiByte.Colon);
 		bfr.Add(name_ary);
 		bfr.Add(Xop_tkn_.Lnki_end);
 	}
 	public static void Print_not_found__w_template(Bry_bfr bfr, Xow_ns_mgr ns_mgr, byte[] name_ary) {	// print missing as [[:Template:Missing]]; REF:MW: Parser.php|braceSubstitution|$text = "[[:$titleText]]"; EX:en.d:Kazakhstan; DATE:2014-03-25
-		bfr.Add(Xop_tkn_.Lnki_bgn).Add_byte(Byte_ascii.Colon);
-		bfr.Add(ns_mgr.Ns_template().Name_db()).Add_byte(Byte_ascii.Colon);
+		bfr.Add(Xop_tkn_.Lnki_bgn).Add_byte(AsciiByte.Colon);
+		bfr.Add(ns_mgr.Ns_template().Name_db()).Add_byte(AsciiByte.Colon);
 		bfr.Add(name_ary).Add(Xop_tkn_.Lnki_end);
 	}
 }

@@ -13,33 +13,39 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.core.bits.*; import gplx.xowa.files.*; import gplx.xowa.parsers.lnkis.*;
+package gplx.xowa.files;
+import gplx.Int_;
+import gplx.Tfds;
+import gplx.core.bits.Bitmask_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.parsers.lnkis.Xop_lnki_type;
+import org.junit.Before;
+import org.junit.Test;
 public class Xof_img_size_tst {
 	private final Xof_img_size_fxt fxt = new Xof_img_size_fxt();
 	@Before public void init() {
 		fxt.Reset();
 		fxt.Orig_(400, 200);
 	}
-	@Test 	public void Lnki_lt_orig_null() 		{fxt.Lnki_type_(Xop_lnki_type.Id_null)		.Lnki_(200, 100).Test_html(200, 100, Bool_.N);}	// [[File:A.png|200px]]           -> 200,100; File_is_orig = n
-	@Test 	public void Lnki_lt_orig_thumb() 		{fxt.Lnki_type_(Xop_lnki_type.Id_thumb)		.Lnki_(200, 100).Test_html(200, 100, Bool_.N);}	// [[File:A.png|thumb|200px]]     -> 200,100; File_is_orig = n
-	@Test 	public void Lnki_lt_orig_frameless() 	{fxt.Lnki_type_(Xop_lnki_type.Id_frameless)	.Lnki_(200, 100).Test_html(200, 100, Bool_.N);}	// [[File:A.png|frameless|200px]] -> 200,100; File_is_orig = n
-	@Test 	public void Lnki_lt_orig_frame() 		{fxt.Lnki_type_(Xop_lnki_type.Id_frame)		.Lnki_(200,  -1).Test_html(400, 200, Bool_.Y);}	// [[File:A.png|frame|200px]]     -> 400,200; File_is_orig = y; frame always ignores parameters and returns orig
-	@Test 	public void Lnki_gt_orig_null() 		{fxt.Lnki_type_(Xop_lnki_type.Id_null)		.Lnki_(800, 400).Test_html(800, 400, Bool_.Y);}	// [[File:A.png|800px]]           -> 800,400; File_is_orig = n
-	@Test 	public void Lnki_gt_orig_thumb() 		{fxt.Lnki_type_(Xop_lnki_type.Id_thumb)		.Lnki_(800, 400).Test_html(400, 200, Bool_.Y);}	// [[File:A.png|thumb|800px]]     -> 400,200; File_is_orig = n
-	@Test 	public void Lnki_gt_orig_frameless() 	{fxt.Lnki_type_(Xop_lnki_type.Id_frameless)	.Lnki_(800, 400).Test_html(400, 200, Bool_.Y);}	// [[File:A.png|frameless|800px]] -> 400,200; File_is_orig = n
-	@Test 	public void Lnki_gt_orig_frame() 		{fxt.Lnki_type_(Xop_lnki_type.Id_frame)		.Lnki_(800,  -1).Test_html(400, 200, Bool_.Y);}	// [[File:A.png|frame|800px]]     -> 400,200; File_is_orig = y; frame always ignores parameters and returns orig
-	@Test 	public void Lnki_eq_orig_null() 		{fxt.Lnki_type_(Xop_lnki_type.Id_null)		.Lnki_(400, 200).Test_html(400, 200, Bool_.Y);}	// make sure File_is_orig = y
-	@Test 	public void Lnki_gt_orig_null_svg() 	{fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_null)		.Lnki_(800, 400).Test_html(800, 400, Bool_.N);}	// [[File:A.svg|800px]]           -> 800,400; File_is_orig = n
-	@Test 	public void Lnki_gt_orig_thumb_svg() 	{fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_thumb)		.Lnki_(800, 400).Test_html(800, 400, Bool_.N);}	// [[File:A.svg|thumb|800px]]     -> 800,400; File_is_orig = n
-	@Test 	public void Lnki_gt_orig_frameless_svg(){fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_frameless)	.Lnki_(800, 400).Test_html(800, 400, Bool_.N);}	// [[File:A.svg|frameless|800px]] -> 800,400; File_is_orig = n
-	@Test 	public void Lnki_gt_orig_frame_svg() 	{fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_frame)		.Lnki_(800,  -1).Test_html(400, 200, Bool_.N);}	// [[File:A.svg|frame|800px]]     -> 400,200; File_is_orig = n; frame always ignores parameters and returns orig
+	@Test 	public void Lnki_lt_orig_null() 		{fxt.Lnki_type_(Xop_lnki_type.Id_null)		.Lnki_(200, 100).Test_html(200, 100, BoolUtl.N);}	// [[File:A.png|200px]]           -> 200,100; File_is_orig = n
+	@Test 	public void Lnki_lt_orig_thumb() 		{fxt.Lnki_type_(Xop_lnki_type.Id_thumb)		.Lnki_(200, 100).Test_html(200, 100, BoolUtl.N);}	// [[File:A.png|thumb|200px]]     -> 200,100; File_is_orig = n
+	@Test 	public void Lnki_lt_orig_frameless() 	{fxt.Lnki_type_(Xop_lnki_type.Id_frameless)	.Lnki_(200, 100).Test_html(200, 100, BoolUtl.N);}	// [[File:A.png|frameless|200px]] -> 200,100; File_is_orig = n
+	@Test 	public void Lnki_lt_orig_frame() 		{fxt.Lnki_type_(Xop_lnki_type.Id_frame)		.Lnki_(200,  -1).Test_html(400, 200, BoolUtl.Y);}	// [[File:A.png|frame|200px]]     -> 400,200; File_is_orig = y; frame always ignores parameters and returns orig
+	@Test 	public void Lnki_gt_orig_null() 		{fxt.Lnki_type_(Xop_lnki_type.Id_null)		.Lnki_(800, 400).Test_html(800, 400, BoolUtl.Y);}	// [[File:A.png|800px]]           -> 800,400; File_is_orig = n
+	@Test 	public void Lnki_gt_orig_thumb() 		{fxt.Lnki_type_(Xop_lnki_type.Id_thumb)		.Lnki_(800, 400).Test_html(400, 200, BoolUtl.Y);}	// [[File:A.png|thumb|800px]]     -> 400,200; File_is_orig = n
+	@Test 	public void Lnki_gt_orig_frameless() 	{fxt.Lnki_type_(Xop_lnki_type.Id_frameless)	.Lnki_(800, 400).Test_html(400, 200, BoolUtl.Y);}	// [[File:A.png|frameless|800px]] -> 400,200; File_is_orig = n
+	@Test 	public void Lnki_gt_orig_frame() 		{fxt.Lnki_type_(Xop_lnki_type.Id_frame)		.Lnki_(800,  -1).Test_html(400, 200, BoolUtl.Y);}	// [[File:A.png|frame|800px]]     -> 400,200; File_is_orig = y; frame always ignores parameters and returns orig
+	@Test 	public void Lnki_eq_orig_null() 		{fxt.Lnki_type_(Xop_lnki_type.Id_null)		.Lnki_(400, 200).Test_html(400, 200, BoolUtl.Y);}	// make sure File_is_orig = y
+	@Test 	public void Lnki_gt_orig_null_svg() 	{fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_null)		.Lnki_(800, 400).Test_html(800, 400, BoolUtl.N);}	// [[File:A.svg|800px]]           -> 800,400; File_is_orig = n
+	@Test 	public void Lnki_gt_orig_thumb_svg() 	{fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_thumb)		.Lnki_(800, 400).Test_html(800, 400, BoolUtl.N);}	// [[File:A.svg|thumb|800px]]     -> 800,400; File_is_orig = n
+	@Test 	public void Lnki_gt_orig_frameless_svg(){fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_frameless)	.Lnki_(800, 400).Test_html(800, 400, BoolUtl.N);}	// [[File:A.svg|frameless|800px]] -> 800,400; File_is_orig = n
+	@Test 	public void Lnki_gt_orig_frame_svg() 	{fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_frame)		.Lnki_(800,  -1).Test_html(400, 200, BoolUtl.N);}	// [[File:A.svg|frame|800px]]     -> 400,200; File_is_orig = n; frame always ignores parameters and returns orig
 	@Test  public void Width_missing()				{fxt.Lnki_( -1, 100).Test_html(200, 100);}	// calc width based on height and orig
 	@Test  public void Height_missing()			{fxt.Lnki_(200,  -1).Test_html(200, 100);}
 	@Test 	public void Orig_missing() 				{fxt.Lnki_(400, 200).Orig_( -1,  -1).Test_html(400, 200);}	// no orig_size; use lnki_w and lnki_h
 	@Test 	public void Lnki_missing() 				{fxt.Lnki_( -1,  -1).Test_html(220, 110);}					// w=thumbnail default; h=calc from orig
-	@Test  public void Lnki_missing_frameless()    {fxt.Lnki_( -1,  -1).Lnki_type_(Xop_lnki_type.Id_frameless) .Test_html(220, 110, Bool_.N);}	// default to thumb width
-	@Test  public void Lnki_missing_null()         {fxt.Lnki_( -1,  -1).Lnki_type_(Xop_lnki_type.Id_null)		.Test_html(400, 200, Bool_.Y);}	// default to orig width
+	@Test  public void Lnki_missing_frameless()    {fxt.Lnki_( -1,  -1).Lnki_type_(Xop_lnki_type.Id_frameless) .Test_html(220, 110, BoolUtl.N);}	// default to thumb width
+	@Test  public void Lnki_missing_null()         {fxt.Lnki_( -1,  -1).Lnki_type_(Xop_lnki_type.Id_null)		.Test_html(400, 200, BoolUtl.Y);}	// default to orig width
 	@Test 	public void Lnki_missing__orig_missing(){fxt.Lnki_( -1,  -1).Orig_( -1,  -1).Test_html(220,  -1);}	// no lnki or orig size; default to 220 with unknown height
 	@Test  public void Prefer_height_over_width()	{fxt.Lnki_(200, 100).Test_html(200, 100);}					// prefer height; if width were preferred, size would be 200,134
 	@Test 	public void Upright() 					{fxt.Lnki_upright_(1).Lnki_(-1, -1).Orig_(440, 400).Test_html(220, 200);}
@@ -54,31 +60,31 @@ public class Xof_img_size_tst {
 		fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_type_(Xop_lnki_type.Id_null).Lnki_(128,  80).Orig_(720, 194).Test_html(128,  34);
 	}	
 	@Test  public void Lnki_gt_orig_thumb_example() {// EX:[[File:Adhanema Lasva.jpg|thumb|300px|The Firman given to the Bosnian Franciscans]]
-		fxt.Lnki_type_(Xop_lnki_type.Id_thumb).Lnki_(300,  -1).Orig_(149, 408).Test_html(149, 408, Bool_.Y);
+		fxt.Lnki_type_(Xop_lnki_type.Id_thumb).Lnki_(300,  -1).Orig_(149, 408).Test_html(149, 408, BoolUtl.Y);
 	}
 	@Test 	public void Upright_and_null_width_fails() {// PURPOSE: if width = -1, but upright is specified, ignore upright (was calculating 0 for width); DATE:2013-11-23
-		fxt.Lnki_type_(Xop_lnki_type.Id_null).Lnki_(-1, 110).Orig_(440, 220).Lnki_upright_(.50f).Test_html(220, 110, Bool_.N);
+		fxt.Lnki_type_(Xop_lnki_type.Id_null).Lnki_(-1, 110).Orig_(440, 220).Lnki_upright_(.50f).Test_html(220, 110, BoolUtl.N);
 	}
 	@Test 	public void Svg_null_width() {	// PURPOSE: if svg and only height is specified, default width to 2048 (and recalc); DATE: 2013-11-26
-		fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_(-1, 40).Orig_(1, 1).Test_html(40, 40, Bool_.N);	// NOTE: used to be 1,1
+		fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_(-1, 40).Orig_(1, 1).Test_html(40, 40, BoolUtl.N);	// NOTE: used to be 1,1
 	}
 	@Test 	public void Svg_max_width() {	// PURPOSE: large width causes int overflow; vi.w:Danh_sách_quốc_kỳ DATE:2014-04-26
-		fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_(Int_.Max_value, 90).Orig_(900, 600).Test_html(135, 90, Bool_.N);	// NOTE: used to be Int_.Max_value,90
+		fxt.Lnki_ext_(Xof_ext_.Id_svg).Lnki_(Int_.Max_value, 90).Orig_(900, 600).Test_html(135, 90, BoolUtl.N);	// NOTE: used to be Int_.Max_value,90
 	}
 	@Test 	public void Pdf_none_defaults_to_thumb() {	// PURPOSE: if no width is specified, pdf uses thumb width default, not orig width); DATE: 2013-11-27
-		fxt.Lnki_type_(Xop_lnki_type.Id_none).Lnki_ext_(Xof_ext_.Id_pdf).Lnki_(-1, -1).Orig_(440, 220).Test_html(220, 110, Bool_.N);	// NOTE: used to be 1,1
+		fxt.Lnki_type_(Xop_lnki_type.Id_none).Lnki_ext_(Xof_ext_.Id_pdf).Lnki_(-1, -1).Orig_(440, 220).Test_html(220, 110, BoolUtl.N);	// NOTE: used to be 1,1
 	}
 	@Test 	public void Frame() {	// PURPOSE: frame incorrectly defaulted to file_is_orig; [[File:MESSENGER.jpg|200x200px|framed]]; DATE:2013-12-22
-		fxt.Lnki_type_(Xop_lnki_type.Id_frame).Lnki_ext_(Xof_ext_.Id_png).Lnki_(200, 200).Orig_(2038, 1529).Test_html(200, 150, Bool_.N);
+		fxt.Lnki_type_(Xop_lnki_type.Id_frame).Lnki_ext_(Xof_ext_.Id_png).Lnki_(200, 200).Orig_(2038, 1529).Test_html(200, 150, BoolUtl.N);
 	}
 	@Test 	public void Frame_and_thumb(){ // PURPOSE: frame and thumb should be treated as frame; Enm.Has(val, Id_frame) vs val == Id_frame; PAGE:en.w:History_of_Western_Civilization; DATE:2015-04-16
-		fxt.Lnki_type_(Bitmask_.Add_byte(Xop_lnki_type.Id_frame, Xop_lnki_type.Id_thumb)).Lnki_(200,  -1).Test_html(400, 200, Bool_.Y);	// mut return same as Lnki_lt_orig_frame above
+		fxt.Lnki_type_(Bitmask_.Add_byte(Xop_lnki_type.Id_frame, Xop_lnki_type.Id_thumb)).Lnki_(200,  -1).Test_html(400, 200, BoolUtl.Y);	// mut return same as Lnki_lt_orig_frame above
 	}
 	@Test 	public void Video__use_orig_w(){ // PURPOSE: video should use orig_w; DATE:2015-08-07
-		fxt.Lnki_type_(Xop_lnki_type.Id_none).Lnki_ext_(Xof_ext_.Id_ogv).Lnki_(-1,  -1).Orig_(500, 250).Test_html(500, 250, Bool_.N);
+		fxt.Lnki_type_(Xop_lnki_type.Id_none).Lnki_ext_(Xof_ext_.Id_ogv).Lnki_(-1,  -1).Orig_(500, 250).Test_html(500, 250, BoolUtl.N);
 	}
 	@Test 	public void Video__use_thumb(){ // PURPOSE: video should use thumb_w, not orig_w; PAGE:en.w:Edward_Snowden DATE:2015-08-17
-		fxt.Lnki_type_(Xop_lnki_type.Id_thumb).Lnki_ext_(Xof_ext_.Id_ogv).Lnki_(-1,  -1).Orig_(440, 220).Test_html(220, 110, Bool_.N);
+		fxt.Lnki_type_(Xop_lnki_type.Id_thumb).Lnki_ext_(Xof_ext_.Id_ogv).Lnki_(-1,  -1).Orig_(440, 220).Test_html(220, 110, BoolUtl.N);
 	}
 }
 class Xof_img_size_fxt {

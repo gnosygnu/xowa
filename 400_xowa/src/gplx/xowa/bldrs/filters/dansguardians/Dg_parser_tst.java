@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.filters.dansguardians; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.filters.*;
+package gplx.xowa.bldrs.filters.dansguardians; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 public class Dg_parser_tst {
 	@Before public void init() {fxt.Init();} private Dg_parser_fxt fxt = new Dg_parser_fxt();
@@ -48,7 +49,7 @@ class Dg_parser_fxt {
 	}
 	private String Xto_str(Bry_bfr bfr, Dg_rule line) {
 		bfr	.Add_str_a7("score=").Add_int_variable(line.Score()).Add_byte_nl()
-			.Add_str_a7("words=").Add_str_u8(String_.Concat_with_str(";", Dg_word.Ary_concat(line.Words(), tmp_bfr, Byte_ascii.Tick))).Add_byte_nl()
+			.Add_str_a7("words=").Add_str_u8(String_.Concat_with_str(";", Dg_word.Ary_concat(line.Words(), tmp_bfr, AsciiByte.Tick))).Add_byte_nl()
 			;
 		return bfr.To_str_and_clear();
 	}

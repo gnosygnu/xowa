@@ -13,8 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.htmls.utls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.htmls.*;
-import gplx.langs.htmls.*; import gplx.xowa.htmls.hrefs.*;
+package gplx.xowa.htmls.core.htmls.utls;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.langs.htmls.Gfh_utl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.htmls.core.htmls.Xoh_wtr_ctx;
+import gplx.xowa.htmls.hrefs.Xoh_href_;
+import gplx.xowa.htmls.hrefs.Xoh_href_wtr;
 public class Xoh_lnki_bldr {
 	private final Xoa_app app; private final Xoh_href_wtr href_wtr; private final byte[] img_root_dir;
 	private final Bry_bfr tmp_bfr = Bry_bfr_.Reset(255);
@@ -30,7 +41,7 @@ public class Xoh_lnki_bldr {
 		img_pos_is_left = true;
 		return this;
 	}
-	public Xoh_lnki_bldr Id_(byte[] v) {this.id = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, v); return this;}
+	public Xoh_lnki_bldr Id_(byte[] v) {this.id = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, AsciiByte.Apos, v); return this;}
 	public Xoh_lnki_bldr Href_(Xow_wiki wiki, byte[] bry) {return Href_(wiki.Domain_bry(), wiki.Ttl_parse(bry));}
 	public Xoh_lnki_bldr Href_(byte[] domain_bry, Xoa_ttl ttl) {
 		href_wtr.Build_to_bfr(tmp_bfr, app, Xoh_wtr_ctx.Popup, domain_bry, ttl);
@@ -42,7 +53,7 @@ public class Xoh_lnki_bldr {
 		return this;
 	}
 	public Xoh_lnki_bldr Title_(byte[] title) {
-		this.title = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, Byte_ascii.Apos, title);
+		this.title = Gfh_utl.Escape_for_atr_val_as_bry(tmp_bfr, AsciiByte.Apos, title);
 		return this;
 	}
 	public Xoh_lnki_bldr Img_pos_is_left_(boolean v) {this.img_pos_is_left = v; return this;}
@@ -54,7 +65,7 @@ public class Xoh_lnki_bldr {
 		return this;
 	}
 	public Xoh_lnki_bldr Caption_(byte[] text) {
-		this.caption = Gfh_utl.Escape_html_as_bry(tmp_bfr, text, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y, Bool_.Y);
+		this.caption = Gfh_utl.Escape_html_as_bry(tmp_bfr, text, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y, BoolUtl.Y);
 		return this;
 	}
 	public Xoh_lnki_bldr Caption_direct_(byte[] v) {this.caption = v; return this;}

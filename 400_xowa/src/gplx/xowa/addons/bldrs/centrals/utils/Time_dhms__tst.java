@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.centrals.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.bldrs.*; import gplx.xowa.addons.bldrs.centrals.*;
-import org.junit.*; import gplx.core.tests.*;
+package gplx.xowa.addons.bldrs.centrals.utils;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.core.tests.Gftest;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Time_dhms__tst {
 	private final Time_dhms__fxt fxt = new Time_dhms__fxt();
 	@Test 	public void S__0()				{fxt.Test__to_str(       0, 4,           "0 s");}
@@ -30,6 +34,6 @@ public class Time_dhms__tst {
 class Time_dhms__fxt {
 	private final Bry_bfr bfr = Bry_bfr_.New();
 	public Time_dhms__fxt Test__to_str(long v, int max_places, String expd) {
-		Gftest.Eq__str(expd, Time_dhms_.To_str(bfr, v, Bool_.Y, max_places));
+		Gftest.Eq__str(expd, Time_dhms_.To_str(bfr, v, BoolUtl.Y, max_places));
 		return this;}
 }

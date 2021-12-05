@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*;
-import org.junit.*;
-import gplx.xowa.langs.kwds.*;
+package gplx.xowa.xtns.pfuncs.ifs;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.langs.kwds.Xol_kwd_grp;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import org.junit.Before;
+import org.junit.Test;
 public class Pfunc_switch_tst {		
 	@Before public void init()				{fxt.Reset();} private final Xop_fxt fxt = new Xop_fxt();
 	@Test public void Basic_a()			{fxt.Test_parse_tmpl_str_test("{{#switch:a|a=1|b=2|3}}"					, "{{test}}"			, "1");}
@@ -80,7 +87,7 @@ public class Pfunc_switch_tst {
 	@Test public void Multiple() {
 		fxt.Wiki().Lang().Kwd_mgr().Kwd_default_match_reset();
 		Xol_kwd_grp kwd_grp = fxt.Wiki().Lang().Kwd_mgr().Get_or_new(Xol_kwd_grp_.Id_xtn_default);
-		kwd_grp.Srl_load(Bool_.Y, new byte[][] {Bry_.new_a7("#default1"), Bry_.new_a7("#default2")});
+		kwd_grp.Srl_load(BoolUtl.Y, new byte[][] {Bry_.new_a7("#default1"), Bry_.new_a7("#default2")});
 		fxt.Test_parse_tmpl_str_test("{{#switch:|n=n|#default1=y}}"			, "{{test}}"			, "y");
 		fxt.Test_parse_tmpl_str_test("{{#switch:|n=n|#default2=y}}"			, "{{test}}"			, "y");
 		fxt.Test_parse_tmpl_str_test("{{#switch:a|n=n|#default=y}}"			, "{{test}}"			, "");	// #default is just a case

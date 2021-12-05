@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.setups; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
+package gplx.xowa.apps.setups; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.xowa.*;
 import gplx.xowa.apps.versions.*; import gplx.core.envs.*;
 public class Xoa_setup_mgr {
 	public static void Launch(Xoae_app app) {
@@ -31,7 +33,7 @@ public class Xoa_setup_mgr {
 		Delete_old_dir(usr_dlg, version_previous, "1.10.2.1"	, root_dir.GenSubDir_nest("bin", "any", "xowa", "html", "modules"));
 	}
 	public static void Delete_old_dir(Gfo_usr_dlg usr_dlg, String version_prv, String version_del, Io_url dir) {	// TEST:
-		if (Xoa_version_.Compare(version_prv, version_del) != CompareAble_.Less) return;
+		if (Xoa_version_.Compare(version_prv, version_del) != CompareAbleUtl.Less) return;
 		usr_dlg.Log_many("", "", "setup:checking if dir exists: version_prv=~{0} version_del=~{1} dir=~{2}", version_prv, version_del, dir.Raw());
 		if (!Io_mgr.Instance.ExistsDir(dir)) return;
 		usr_dlg.Log_many("", "", "setup:deleting dir", version_prv, version_del, dir.Raw());

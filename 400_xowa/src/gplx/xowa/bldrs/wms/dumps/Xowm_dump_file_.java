@@ -13,13 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.dumps; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.wms.*;
+package gplx.xowa.bldrs.wms.dumps; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.wikis.domains.*; import gplx.xowa.bldrs.installs.*;
 public class Xowm_dump_file_ {
 	public static Xowm_dump_file parse(byte[] src) {
 		int src_len = src.length;
-		int dash_0 = Bry_find_.Find_fwd(src, Byte_ascii.Dash, 0			, src_len); if (dash_0 == Bry_find_.Not_found) throw Err_.new_parse_type(Xowm_dump_file.class, String_.new_u8(src));
-		int dash_1 = Bry_find_.Find_fwd(src, Byte_ascii.Dash, dash_0 + 1	, src_len); if (dash_1 == Bry_find_.Not_found) throw Err_.new_parse_type(Xowm_dump_file.class, String_.new_u8(src));
+		int dash_0 = Bry_find_.Find_fwd(src, AsciiByte.Dash, 0			, src_len); if (dash_0 == Bry_find_.Not_found) throw Err_.new_parse_type(Xowm_dump_file.class, String_.new_u8(src));
+		int dash_1 = Bry_find_.Find_fwd(src, AsciiByte.Dash, dash_0 + 1	, src_len); if (dash_1 == Bry_find_.Not_found) throw Err_.new_parse_type(Xowm_dump_file.class, String_.new_u8(src));
 		byte[] domain_bry = Xow_abrv_wm_.Parse_to_domain_bry(Bry_.Mid(src, 0, dash_0));
 		return new Xowm_dump_file(String_.new_u8(domain_bry), String_.new_u8(src, dash_0 + 1, dash_1), String_.new_u8(src, dash_1 + 1, src_len));
 	}
@@ -53,19 +55,19 @@ public class Xowm_dump_file_ {
 	public static byte[] Bld_dump_dir_url(byte[] server_url, byte[] alias, byte[] date) {
 		return Bry_.Add
 		( server_url																	// "http://dumps.wikimedia.org/"
-		, Bry_.Replace(alias, Byte_ascii.Dash, Byte_ascii.Underline), Bry_slash			// "simplewiki/"
+		, Bry_.Replace(alias, AsciiByte.Dash, AsciiByte.Underline), Bry_slash			// "simplewiki/"
 		, date, Bry_slash																// "latest/"
 		);
 	}
 	public static byte[] Bld_dump_file_name(byte[] alias, byte[] date, byte[] dump_file_type, byte[] ext) {
 		return Bry_.Add
-		( Bry_.Replace(alias, Byte_ascii.Dash, Byte_ascii.Underline), Bry_dash			// "simplewiki-"
+		( Bry_.Replace(alias, AsciiByte.Dash, AsciiByte.Underline), Bry_dash			// "simplewiki-"
 		, date, Bry_dash																// "latest-"
 		, dump_file_type																// "pages-articles"
 		, ext																			// ".xml.bz2"
 		);
 	}
-	private static final byte[] Bry_dash = new byte[] {Byte_ascii.Dash}, Bry_slash = new byte[] {Byte_ascii.Slash};
+	private static final byte[] Bry_dash = new byte[] {AsciiByte.Dash}, Bry_slash = new byte[] {AsciiByte.Slash};
 	public static final byte[] Ext_xml_bz2 = Bry_.new_a7(".xml.bz2");
 	public static final byte[] Ext_sql_gz  = Bry_.new_a7(".sql.gz");
 	public static final String 

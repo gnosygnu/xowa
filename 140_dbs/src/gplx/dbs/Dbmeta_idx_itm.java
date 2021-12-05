@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs; import gplx.*;
-import gplx.dbs.metas.*; import gplx.dbs.sqls.*;
+package gplx.dbs;
+import gplx.String_;
+import gplx.dbs.metas.Dbmeta_idx_fld;
+import gplx.dbs.sqls.SqlQryWtr;
+import gplx.objects.primitives.BoolUtl;
 public class Dbmeta_idx_itm {
 	public Dbmeta_idx_itm(boolean unique, String tbl, String name, Dbmeta_idx_fld[] flds) {
 		this.tbl = tbl; this.name = name; this.unique = unique; this.Flds = flds;
@@ -30,14 +33,14 @@ public class Dbmeta_idx_itm {
 			&& tbl == comp.tbl
 			&& Dbmeta_idx_fld.Ary_eq(Flds, comp.Flds);
 	}
-	public static Dbmeta_idx_itm new_unique_by_name			(String tbl, String name, String... flds)			{return new Dbmeta_idx_itm(Bool_.Y, tbl, name, To_fld_ary(flds));}
-	public static Dbmeta_idx_itm new_normal_by_name			(String tbl, String name, Dbmeta_idx_fld... flds)	{return new Dbmeta_idx_itm(Bool_.N, tbl, name, flds);}
-	public static Dbmeta_idx_itm new_normal_by_name			(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(Bool_.N, tbl, name, To_fld_ary(flds));}
-	public static Dbmeta_idx_itm new_unique_by_tbl			(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(Bool_.Y, tbl, Bld_idx_name(tbl, name), To_fld_ary(flds));}
-	public static Dbmeta_idx_itm new_normal_by_tbl			(String tbl, String name, Dbmeta_idx_fld... flds)	{return new Dbmeta_idx_itm(Bool_.N, tbl, Bld_idx_name(tbl, name), flds);}
-	public static Dbmeta_idx_itm new_normal_by_tbl			(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(Bool_.N, tbl, Bld_idx_name(tbl, name), To_fld_ary(flds));}
-	public static Dbmeta_idx_itm new_unique_by_tbl_wo_null	(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(Bool_.Y, tbl, Bld_idx_name(tbl, name), To_fld_ary(flds));}
-	public static Dbmeta_idx_itm new_normal_by_tbl_wo_null	(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(Bool_.N, tbl, Bld_idx_name(tbl, name), To_fld_ary(flds));}
+	public static Dbmeta_idx_itm new_unique_by_name			(String tbl, String name, String... flds)			{return new Dbmeta_idx_itm(BoolUtl.Y, tbl, name, To_fld_ary(flds));}
+	public static Dbmeta_idx_itm new_normal_by_name			(String tbl, String name, Dbmeta_idx_fld... flds)	{return new Dbmeta_idx_itm(BoolUtl.N, tbl, name, flds);}
+	public static Dbmeta_idx_itm new_normal_by_name			(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(BoolUtl.N, tbl, name, To_fld_ary(flds));}
+	public static Dbmeta_idx_itm new_unique_by_tbl			(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(BoolUtl.Y, tbl, Bld_idx_name(tbl, name), To_fld_ary(flds));}
+	public static Dbmeta_idx_itm new_normal_by_tbl			(String tbl, String name, Dbmeta_idx_fld... flds)	{return new Dbmeta_idx_itm(BoolUtl.N, tbl, Bld_idx_name(tbl, name), flds);}
+	public static Dbmeta_idx_itm new_normal_by_tbl			(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(BoolUtl.N, tbl, Bld_idx_name(tbl, name), To_fld_ary(flds));}
+	public static Dbmeta_idx_itm new_unique_by_tbl_wo_null	(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(BoolUtl.Y, tbl, Bld_idx_name(tbl, name), To_fld_ary(flds));}
+	public static Dbmeta_idx_itm new_normal_by_tbl_wo_null	(String tbl, String name, String... flds)	{return new Dbmeta_idx_itm(BoolUtl.N, tbl, Bld_idx_name(tbl, name), To_fld_ary(flds));}
 	public static String Bld_idx_name(String tbl, String suffix) {return String_.Concat(tbl, "__", suffix);}
 	public static final Dbmeta_idx_itm[] Ary_empty = new Dbmeta_idx_itm[0];
 	public static Dbmeta_idx_fld[] To_fld_ary(String[] ary) {

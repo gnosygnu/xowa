@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
+package gplx.xowa.xtns.pfuncs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public abstract class Pf_func_base implements Pf_func {
 	public byte Defn_tid() {return Xot_defn_.Tid_func;}
@@ -47,7 +48,7 @@ public abstract class Pf_func_base implements Pf_func {
 			int subs_len = name_val_tkn.Subs_len();
 			if (subs_len == 0) {	// no subs; either {{#func}} or {{#func:}}
 				int src_bgn = name_tkn.Src_bgn();
-				int colon_pos = Bry_find_.Find_bwd(src, Byte_ascii.Colon, self.Src_end(), src_bgn);	// look for ":"; NOTE: used to be src_bgn - 1, but this would always search one character too many; DATE:2014-02-11
+				int colon_pos = Bry_find_.Find_bwd(src, AsciiByte.Colon, self.Src_end(), src_bgn);	// look for ":"; NOTE: used to be src_bgn - 1, but this would always search one character too many; DATE:2014-02-11
 				if (colon_pos == Bry_find_.Not_found)		// no colon; EX: {{#func}}
 					return Eval_arg_or_null_is_null;
 				else {									// colon found; EX: {{#func:}}

@@ -14,7 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfui.ipts;
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Err_;
 import gplx.Int_;
 import gplx.List_adp;
@@ -241,10 +241,10 @@ public class IptKey_ {
 	public static String To_str(int orig_val) {
 		String mod_str = "", rv = "";
 		int temp_val = orig_val;
-		boolean mod_c = Bitmask_.Has_int(temp_val, IptKey_.Ctrl.Val());	 if (mod_c) {mod_str += "c"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Ctrl.Val());}
-		boolean mod_a = Bitmask_.Has_int(temp_val, IptKey_.Alt.Val());	 if (mod_a) {mod_str += "a"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Alt.Val());}
-		boolean mod_s = Bitmask_.Has_int(temp_val, IptKey_.Shift.Val()); if (mod_s) {mod_str += "s"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Shift.Val());}
-		boolean mod_m = Bitmask_.Has_int(temp_val, IptKey_.Meta.Val());	 if (mod_m) {mod_str += "m"; temp_val = Bitmask_.Flip_int(Bool_.N, temp_val, IptKey_.Meta.Val());}
+		boolean mod_c = Bitmask_.Has_int(temp_val, IptKey_.Ctrl.Val());	 if (mod_c) {mod_str += "c"; temp_val = Bitmask_.Flip_int(BoolUtl.N, temp_val, IptKey_.Ctrl.Val());}
+		boolean mod_a = Bitmask_.Has_int(temp_val, IptKey_.Alt.Val());	 if (mod_a) {mod_str += "a"; temp_val = Bitmask_.Flip_int(BoolUtl.N, temp_val, IptKey_.Alt.Val());}
+		boolean mod_s = Bitmask_.Has_int(temp_val, IptKey_.Shift.Val()); if (mod_s) {mod_str += "s"; temp_val = Bitmask_.Flip_int(BoolUtl.N, temp_val, IptKey_.Shift.Val());}
+		boolean mod_m = Bitmask_.Has_int(temp_val, IptKey_.Meta.Val());	 if (mod_m) {mod_str += "m"; temp_val = Bitmask_.Flip_int(BoolUtl.N, temp_val, IptKey_.Meta.Val());}
 		if (String_.Len_gt_0(mod_str)) {
 			rv = "mod." + mod_str;
 			// handle modifiers only, like "mod.cs"; else will be "mod.cs+key.#0"

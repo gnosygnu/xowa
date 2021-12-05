@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.bldrs.exports.packs.splits; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.bldrs.exports.packs.splits; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.progs.*; import gplx.core.ios.zips.*; import gplx.core.ios.streams.*; import gplx.core.security.algos.*;
 import gplx.dbs.*;
 import gplx.xowa.addons.bldrs.centrals.dbs.*; import gplx.xowa.addons.bldrs.centrals.dbs.datas.imports.*; import gplx.xowa.addons.bldrs.centrals.steps.*;
@@ -98,7 +101,7 @@ class Pack_mgr {
 			byte[] raw_md5 = null;
 			try {raw_md5 = Hash_algo_utl.Calc_hash_w_prog_as_bry(hash_algo, raw_stream, Gfo_prog_ui_.Noop);}
 			finally {raw_stream.Rls();}
-			tmp_bfr.Add(raw_md5).Add_byte_space().Add_byte(Byte_ascii.Star).Add_str_a7(raw_url.NameAndExt()).Add_byte_nl();
+			tmp_bfr.Add(raw_md5).Add_byte_space().Add_byte(AsciiByte.Star).Add_str_a7(raw_url.NameAndExt()).Add_byte_nl();
 			raw_size += raw_stream.Len();
 		}
 		Io_mgr.Instance.SaveFilBfr(md5_url, tmp_bfr);
@@ -118,7 +121,7 @@ class Pack_mgr {
 		// compress raws
 		Gfo_log_.Instance.Prog("compressing raw");
 		Io_zip_compress_cmd__jre zip_cmd = new Io_zip_compress_cmd__jre();
-		raw_urls = (Io_url[])Array_.Insert(raw_urls, new Io_url[] {md5_url}, 0);	// add ".md5" to .zip
+		raw_urls = (Io_url[])ArrayUtl.Insert(raw_urls, new Io_url[] {md5_url}, 0);	// add ".md5" to .zip
 		zip_cmd.Exec_hook(Gfo_prog_ui_.Noop, raw_urls, zip_url, "", 0, 0);
 
 		// hash zip

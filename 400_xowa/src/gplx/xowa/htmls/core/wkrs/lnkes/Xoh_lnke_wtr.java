@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*;
-import gplx.core.brys.*; import gplx.core.primitives.*; import gplx.core.brys.fmtrs.*; import gplx.core.threads.poolables.*; import gplx.core.brys.args.*;
+package gplx.xowa.htmls.core.wkrs.lnkes; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.htmls.*;
+import gplx.xowa.htmls.core.wkrs.*;
+import gplx.core.brys.*;
+import gplx.core.brys.fmtrs.*; import gplx.core.threads.poolables.*; import gplx.core.brys.args.*;
 import gplx.langs.htmls.*; import gplx.xowa.htmls.core.wkrs.bfr_args.*;
 import gplx.xowa.htmls.core.hzips.*;
 public class Xoh_lnke_wtr implements gplx.core.brys.Bfr_arg, Xoh_wtr_itm {
@@ -45,6 +49,6 @@ class Xoh_lnke_wtr_arg__autonum implements Bfr_arg {
 	private int auto_id;
 	public Bfr_arg Set_by_auto_id(int auto_id) {this.auto_id = auto_id; return this;}
 	public void Bfr_arg__add(Bry_bfr bfr) {
-		bfr.Add_byte(Byte_ascii.Brack_bgn).Add_int_variable(auto_id).Add_byte(Byte_ascii.Brack_end);
+		bfr.Add_byte(AsciiByte.BrackBgn).Add_int_variable(auto_id).Add_byte(AsciiByte.BrackEnd);
 	}
 }

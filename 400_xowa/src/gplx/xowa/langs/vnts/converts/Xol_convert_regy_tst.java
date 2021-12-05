@@ -13,10 +13,27 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.vnts.converts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*; import gplx.xowa.langs.vnts.*;
-import org.junit.*;
-import gplx.xowa.langs.vnts.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.drds.*;
+package gplx.xowa.langs.vnts.converts;
+import gplx.Bry_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_test_;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.drds.Xowd_data_tstr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_itm_;
+import gplx.xowa.langs.vnts.Xol_vnt_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import org.junit.Before;
+import org.junit.Test;
 public class Xol_convert_regy_tst {
 	private final Xol_convert_regy_fxt fxt = new Xol_convert_regy_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -31,9 +48,9 @@ public class Xol_convert_regy_tst {
 	}
 	@Test public void Redlink() {		// PURPOSE: check redlink's Convert_ttl(Xowe_wiki wiki, Xoa_ttl ttl); DATE:2014-07-06
 		fxt.Init_page("Template:Test_x1", "val");
-		fxt.Test_convert_by_ttl("zh", "Template:Test_x0", Bool_.Y);	// Template:Test_xo should not be parsed to Template:Template:Test_x0; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
-		fxt.Test_convert_by_ttl("zh", "Template:Test_x1", Bool_.N);	// note that convert of trg should not find title;
-		fxt.Test_convert_by_ttl("zh", "Template:Test_x2", Bool_.N);	// test that non-convert characters return false
+		fxt.Test_convert_by_ttl("zh", "Template:Test_x0", BoolUtl.Y);	// Template:Test_xo should not be parsed to Template:Template:Test_x0; EX:Шаблон:Šablon:Jez-eng; PAGE:sr.w:ДНК DATE:2014-07-06
+		fxt.Test_convert_by_ttl("zh", "Template:Test_x1", BoolUtl.N);	// note that convert of trg should not find title;
+		fxt.Test_convert_by_ttl("zh", "Template:Test_x2", BoolUtl.N);	// test that non-convert characters return false
 	}
 	@Test public void Pfunc() {
 		fxt.Parser_fxt().Init_defn_clear();

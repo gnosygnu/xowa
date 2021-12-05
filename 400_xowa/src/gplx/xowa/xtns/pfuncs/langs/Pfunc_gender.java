@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.langs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.langs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.pfuncs.*;
 import gplx.core.primitives.*; import gplx.xowa.users.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.genders.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
@@ -46,7 +48,7 @@ public class Pfunc_gender extends Pf_func_base {
 		int user_name_len = user_name.length;
 		switch (user_name_len) {
 			case 0:		return Xol_gender_.Tid_unknown;												// EX: {{gender:|m|f}}
-			case 1:		if (user_name[0] == Byte_ascii.Dot) return Xol_gender_.Tid_unknown; break;	// EX: {{gender:.|m|f}}; TODO_OLD: should define default gender for wiki
+			case 1:		if (user_name[0] == AsciiByte.Dot) return Xol_gender_.Tid_unknown; break;	// EX: {{gender:.|m|f}}; TODO_OLD: should define default gender for wiki
 		}
 		Object o = gender_cache.Get_by_bry(user_name);
 		return o == null ? user.Gender() : ((Int_obj_val)o).Val();

@@ -13,10 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.wms.sites; import gplx.*;
-import gplx.dbs.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.bldrs.*;
+package gplx.xowa.bldrs.wms.sites;
+import gplx.Io_url;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.Db_conn_bldr_data;
+import gplx.dbs.Db_tbl;
+import gplx.dbs.Db_tbl_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.wikis.domains.Xow_abrv_xo_;
+import gplx.xowa.wikis.domains.Xow_domain_itm;
+import gplx.xowa.wikis.nss.Xow_ns_case_;
+import gplx.xowa.wikis.nss.Xow_ns_mgr;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
+import gplx.xowa.wikis.xwikis.bldrs.Xow_xwiki_itm_bldr;
 public class Site_core_db {
 	private Db_conn conn;
 	private final Site_core_tbl tbl__core;
@@ -84,7 +97,7 @@ public class Site_core_db {
 		tbl__protocol.Insert(site_abrv, site_meta.Protocol_list());
 		tbl__defaultoption.Insert(site_abrv, site_meta.Defaultoption_list());
 		tbl__language.Insert(site_abrv, site_meta.Language_list());
-		tbl__core.Update(site_abrv, Bool_.Y);
+		tbl__core.Update(site_abrv, BoolUtl.Y);
 		conn.Txn_end();
 	}
 	public void Load(Site_meta_itm site_meta, byte[] site_abrv) {
@@ -128,7 +141,7 @@ public class Site_core_db {
 		for (int i = 0; i < len; ++i) {
 			Site_namespace_itm itm = (Site_namespace_itm)hash.Get_at(i);
 			byte case_match = Xow_ns_case_.To_tid(String_.new_u8(itm.Case_tid()));
-			rv.Add_new(itm.Id(), itm.Localized(), case_match, Bool_.N);
+			rv.Add_new(itm.Id(), itm.Localized(), case_match, BoolUtl.N);
 		}
 	}
 }

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.lnkis.*;
+package gplx.xowa.htmls.core.wkrs.lnkis.htmls; import gplx.*;
 import gplx.langs.htmls.entitys.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.lnkis.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.xtns.cites.*;
 public class Xoh_lnki_title_bldr {
 	public static void Add(Bry_bfr bfr, byte[] src, Xop_tkn_itm tkn) {Add_recurse(bfr, src, tkn);}
@@ -57,13 +58,13 @@ public class Xoh_lnki_title_bldr {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Tab:		// NOTE: escape ws so that it renders correctly in tool tips
+				case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Tab:		// NOTE: escape ws so that it renders correctly in tool tips
 					bfr.Add_byte_space();
 					break;
-				case Byte_ascii.Quote:		bfr.Add(Gfh_entity_.Quote_bry); break;
-				case Byte_ascii.Lt:			bfr.Add(Gfh_entity_.Lt_bry); break;
-				case Byte_ascii.Gt:			bfr.Add(Gfh_entity_.Gt_bry); break;
-				case Byte_ascii.Amp:		bfr.Add(Gfh_entity_.Amp_bry); break;
+				case AsciiByte.Quote:		bfr.Add(Gfh_entity_.Quote_bry); break;
+				case AsciiByte.Lt:			bfr.Add(Gfh_entity_.Lt_bry); break;
+				case AsciiByte.Gt:			bfr.Add(Gfh_entity_.Gt_bry); break;
+				case AsciiByte.Amp:		bfr.Add(Gfh_entity_.Amp_bry); break;
 				default:					bfr.Add_byte(b); break;
 			}
 		}

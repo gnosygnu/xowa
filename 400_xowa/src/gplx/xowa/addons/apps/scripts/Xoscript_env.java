@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.scripts; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
-import gplx.core.envs.*;
-import gplx.core.scripts.*;
+package gplx.xowa.addons.apps.scripts;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.core.envs.Op_sys;
+import gplx.core.scripts.Gfo_script_engine;
+import gplx.objects.primitives.BoolUtl;
 public class Xoscript_env {
 	private final Gfo_script_engine engine;
 	public Xoscript_env(Gfo_script_engine engine, Io_url root_dir) {
@@ -24,7 +28,7 @@ public class Xoscript_env {
 	}
 	public Io_url Root_dir() {return root_dir;} private final Io_url root_dir;
 	public void load_script(String file) {
-		engine.Load_script(Io_url_.new_fil_(Xoscript_env.Resolve_file(Bool_.N, root_dir, file)));
+		engine.Load_script(Io_url_.new_fil_(Xoscript_env.Resolve_file(BoolUtl.N, root_dir, file)));
 	}
 	public static String Resolve_file(boolean use_file_protocol, Io_url root_dir, String file) {
 		String rv = file;

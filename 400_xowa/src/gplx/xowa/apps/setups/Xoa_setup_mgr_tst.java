@@ -13,14 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.setups; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*;
-import org.junit.*;
+package gplx.xowa.apps.setups;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Xoa_setup_mgr_tst {
 	@Before public void init() {fxt.Clear();} private Xoa_setup_mgr_fxt fxt = new Xoa_setup_mgr_fxt();
 	@Test public void Compare() {
-		fxt.Test_delete_old_dir("mem/dir/", "1.8.1.1"	, "1.8.2.1", Bool_.Y);		// version is earlier than checkpoint; delete
-		fxt.Test_delete_old_dir("mem/dir/", "1.8.2.1"	, "1.8.2.1", Bool_.N);		// version is not earlier than checkpoint; don't delete
-		fxt.Test_delete_old_dir("mem/dir/", ""			, "1.8.2.1", Bool_.Y);		// version is empty; delete;
+		fxt.Test_delete_old_dir("mem/dir/", "1.8.1.1"	, "1.8.2.1", BoolUtl.Y);		// version is earlier than checkpoint; delete
+		fxt.Test_delete_old_dir("mem/dir/", "1.8.2.1"	, "1.8.2.1", BoolUtl.N);		// version is not earlier than checkpoint; don't delete
+		fxt.Test_delete_old_dir("mem/dir/", ""			, "1.8.2.1", BoolUtl.Y);		// version is empty; delete;
 	}
 }
 class Xoa_setup_mgr_fxt {

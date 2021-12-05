@@ -13,9 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
-import org.junit.*; import gplx.core.tests.*;
-import gplx.langs.jsons.*;	
+package gplx.xowa.xtns.scribunto.libs;
+import gplx.objects.primitives.BoolUtl;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.objects.strings.AsciiByte;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Object_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.Type_;
+import gplx.core.tests.Gftest;
+import gplx.langs.jsons.Json_doc;
+import gplx.langs.jsons.Json_wtr;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.xtns.scribunto.Scrib_invoke_func_fxt;
+import org.junit.Before;
+import org.junit.Test;
 public class Scrib_lib_text_json_tst {
 	private Scrib_invoke_func_fxt fxt = new Scrib_invoke_func_fxt(); private Scrib_lib_text lib;
 	private Scrib_lib_json_fxt json_fxt = new Scrib_lib_json_fxt();
@@ -108,7 +123,7 @@ public class Scrib_lib_text_json_tst {
 	@Test public void Nde__key_int__auto() {// NOTE: based on MW
 		json_fxt.Test_json_encode(fxt, lib
 		, Scrib_lib_text__json_util.Flag__preserve_keys
-		, Kv_ary_utl.new_(Bool_.Y, new Object[]
+		, Kv_ary_utl.new_(BoolUtl.Y, new Object[]
 		{ 1
 		, "abc"
 		, true
@@ -131,7 +146,7 @@ public class Scrib_lib_text_json_tst {
 		, ", '4':false"
 		, "}"
 		)
-		, Kv_ary_utl.new_(Bool_.Y, new Object[]
+		, Kv_ary_utl.new_(BoolUtl.Y, new Object[]
 		{ 1
 		, "abc"
 		, true
@@ -150,7 +165,7 @@ public class Scrib_lib_text_json_tst {
 //		}
 	@Test public void Ary__empty() {	// NOTE: based on MW
 		json_fxt.Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none
-		, Kv_ary_utl.new_(Bool_.Y, new Object[] {})
+		, Kv_ary_utl.new_(BoolUtl.Y, new Object[] {})
 		, Json_doc.Make_str_by_apos
 		( "["
 		, "]"
@@ -159,7 +174,7 @@ public class Scrib_lib_text_json_tst {
 	}
 	@Test public void Ary__obj() {	// NOTE: based on MW
 		json_fxt.Test_json_encode(fxt, lib, Scrib_lib_text__json_util.Flag__none
-		, Kv_ary_utl.new_(Bool_.Y, 1, "abc", true)
+		, Kv_ary_utl.new_(BoolUtl.Y, 1, "abc", true)
 		, Json_doc.Make_str_by_apos
 		( "[ 1"
 		, ", 'abc'"
@@ -186,7 +201,7 @@ public class Scrib_lib_text_json_tst {
 		, "  ]"
 		, "]"
 		)
-		, Kv_ary_utl.new_(Bool_.Y, new Object[] {1, 2, 3, new Object[] {4, 5, new Object[] {6, 7, 8}, 9}})
+		, Kv_ary_utl.new_(BoolUtl.Y, new Object[] {1, 2, 3, new Object[] {4, 5, new Object[] {6, 7, 8}, 9}})
 		);
 	}
 	@Test  public void Nested__ary__nde() {
@@ -330,8 +345,25 @@ class Scrib_lib_json_fxt {
 		if		(Type_.Eq(type, Keyval[].class))
 			return Kv_ary_utl.Ary_to_str(wtr, (Keyval[])o);
 		else if	(Type_.Is_array(type))
-			return Array_.To_str_nested_obj(o);
+			return ToStrNestedObj(o);
 		else
 			return Object_.Xto_str_strict_or_null(o);
+	}
+	private static String ToStrNestedObj(Object o) {
+		Bry_bfr bfr = Bry_bfr_.New();
+		ToStrNestedAry(bfr, (Object)o, 0);
+		return bfr.To_str_and_clear();
+	}
+	private static void ToStrNestedAry(Bry_bfr bfr, Object ary, int indent) {
+		int len = ArrayUtl.Len(ary);
+		for (int i = 0; i < len; i++) {
+			Object itm = ArrayUtl.GetAt(ary, i);
+			if (itm != null && Type_.Is_array(itm.getClass()))
+				ToStrNestedAry(bfr, (Object)itm, indent + 1);
+			else {
+				if (indent > 0) bfr.Add_byte_repeat(AsciiByte.Space, indent * 2);
+				bfr.Add_str_u8(Object_.Xto_str_strict_or_null_mark(itm)).Add_byte_nl();
+			}
+		}
 	}
 }

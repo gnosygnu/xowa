@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 import gplx.core.lists.*; /*EnumerAble,ComparerAble*/
+import gplx.objects.lists.ComparerAble;
 public interface List_adp extends EnumerAble, List_adp__getable {
 	int Len();
 	Object GetAtLast();

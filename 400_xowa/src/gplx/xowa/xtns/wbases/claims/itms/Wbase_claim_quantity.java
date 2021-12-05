@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.xowa.xtns.wbases.claims.itms;
 
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Decimal_adp;
 import gplx.Decimal_adp_;
 import gplx.Gfo_usr_dlg_;
@@ -68,7 +68,7 @@ public class Wbase_claim_quantity extends Wbase_claim_base {
 		if (bry == null) return null;
 		int len = bry.length;
 		if (len == 0) return null;
-		if (bry[0] == Byte_ascii.Plus) bry = Bry_.Mid(bry, 1);
+		if (bry[0] == AsciiByte.Plus) bry = Bry_.Mid(bry, 1);
 		return Decimal_adp_.parse(String_.new_a7(bry));
 	}
 }

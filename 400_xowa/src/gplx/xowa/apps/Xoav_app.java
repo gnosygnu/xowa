@@ -13,23 +13,59 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps; import gplx.*; import gplx.xowa.*;
-import gplx.core.net.*; import gplx.core.log_msgs.*; import gplx.langs.jsons.*; import gplx.core.brys.*; import gplx.core.threads.*;
-import gplx.core.ios.*;
-import gplx.dbs.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.fsys.*; import gplx.xowa.apps.metas.*; import gplx.xowa.parsers.amps.*; import gplx.xowa.langs.cases.*; import gplx.core.intls.*; import gplx.xowa.users.data.*;
-import gplx.xowa.apps.site_cfgs.*; import gplx.xowa.apps.urls.*; import gplx.xowa.files.caches.*; import gplx.xowa.files.imgs.*;
-import gplx.xowa.bldrs.css.*;
-import gplx.xowa.apps.gfs.*;
-import gplx.xowa.htmls.hrefs.*; import gplx.xowa.htmls.core.htmls.utls.*; import gplx.xowa.htmls.bridges.*;
-import gplx.xowa.users.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.wikis.xwikis.parsers.*; import gplx.xowa.wikis.xwikis.sitelinks.*;
-import gplx.xowa.guis.cbks.*; import gplx.xowa.guis.tabs.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.bldrs.wms.*;
-import gplx.langs.htmls.encoders.*; import gplx.xowa.langs.names.*;
-import gplx.xowa.bldrs.*;
-import gplx.xowa.addons.*; import gplx.xowa.specials.mgrs.*;
-import gplx.xowa.addons.apps.cfgs.*; import gplx.xowa.apps.miscs.*;
+package gplx.xowa.apps;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg_;
+import gplx.Gfo_usr_dlg__gui_;
+import gplx.Gfo_usr_dlg__log_base;
+import gplx.Gfo_usr_dlg_base;
+import gplx.GfsCtx;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.core.brys.Bry_bfr_mkr;
+import gplx.core.ios.Io_download_fmt;
+import gplx.core.log_msgs.Gfo_msg_log;
+import gplx.core.net.Gfo_inet_conn;
+import gplx.core.net.Gfo_inet_conn_;
+import gplx.core.net.Gfo_url_parser;
+import gplx.core.threads.Gfo_thread_mgr;
+import gplx.langs.jsons.Json_parser;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.addons.Xoax_addon_mgr;
+import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
+import gplx.xowa.apps.apis.Xoapi_root;
+import gplx.xowa.apps.fsys.Xoa_fsys_mgr;
+import gplx.xowa.apps.gfs.Xoa_gfs_mgr;
+import gplx.xowa.apps.metas.Xoa_meta_mgr;
+import gplx.xowa.apps.miscs.Xoa_misc_mgr;
+import gplx.xowa.apps.site_cfgs.Xoa_site_cfg_mgr;
+import gplx.xowa.apps.urls.Xoav_url_parser;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.css.Xoa_css_extractor;
+import gplx.xowa.bldrs.wms.Xowmf_mgr;
+import gplx.xowa.files.caches.Xof_cache_mgr;
+import gplx.xowa.files.imgs.Xof_img_mgr;
+import gplx.xowa.guis.cbks.Xog_cbk_mgr;
+import gplx.xowa.guis.tabs.Xog_tab_mgr;
+import gplx.xowa.htmls.bridges.Xoh_bridge_mgr;
+import gplx.xowa.htmls.hrefs.Xoh_href_parser;
+import gplx.xowa.htmls.hrefs.Xoh_href_wtr;
+import gplx.xowa.langs.Xoa_lang_mgr;
+import gplx.xowa.langs.cases.Xol_case_mgr;
+import gplx.xowa.langs.cases.Xol_case_mgr_;
+import gplx.xowa.langs.names.Xol_name_mgr;
+import gplx.xowa.parsers.amps.Xop_amp_mgr;
+import gplx.xowa.specials.mgrs.Xoa_special_regy;
+import gplx.xowa.users.Xou_user;
+import gplx.xowa.users.Xouv_user;
+import gplx.xowa.wikis.Xoa_wiki_mgr;
+import gplx.xowa.wikis.xwikis.parsers.Xow_xwiki_itm_parser;
+import gplx.xowa.wikis.xwikis.sitelinks.Xoa_sitelink_mgr;
 public class Xoav_app implements Xoa_app, Gfo_invk {
 	public Xoav_app(Gfo_usr_dlg usr_dlg, Xoa_app_mode mode, Xog_tab_mgr tab_mgr, String plat_name, Io_url root_dir, Io_url file_dir, Io_url css_dir, Io_url http_root) {
 		Xoa_app_.Usr_dlg_(usr_dlg); this.usr_dlg = usr_dlg; this.mode = mode;
@@ -52,7 +88,7 @@ public class Xoav_app implements Xoa_app, Gfo_invk {
 		this.site_cfg_mgr = new Xoa_site_cfg_mgr(this);
 		this.bldr = new Xob_bldr(null);
 	}
-	public boolean						Tid_is_edit()				{return Bool_.N;}
+	public boolean						Tid_is_edit()				{return BoolUtl.N;}
 	public Xoa_app_mode				Mode()						{return mode;} private final Xoa_app_mode mode;
 	public Xou_user					User()						{return user;} private final Xouv_user user;
 	public Xoapi_root				Api_root()					{return api_root;} private final Xoapi_root api_root;

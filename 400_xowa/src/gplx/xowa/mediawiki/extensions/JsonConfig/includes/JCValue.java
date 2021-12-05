@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.extensions.JsonConfig.includes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.extensions.*; import gplx.xowa.mediawiki.extensions.JsonConfig.*;
-import gplx.xowa.xtns.scribunto.*;
-import gplx.xowa.mediawiki.*;
+package gplx.xowa.mediawiki.extensions.JsonConfig.includes;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.Type_;
+import gplx.Type_ids_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.XophpStdClass;
 public class JCValue {
 	private Ordered_hash value = Ordered_hash_.New();
 	private int statusVal;
@@ -100,7 +107,7 @@ public class JCValue {
 	public boolean sameAsDefault(Object o) {
 		boolean val = this.sameAsDefaultVal;
 		if (o != null) {
-			this.sameAsDefaultVal = Bool_.Cast(o);
+			this.sameAsDefaultVal = BoolUtl.Cast(o);
 		}
 		return val;
 	}
@@ -109,7 +116,7 @@ public class JCValue {
 	public boolean defaultUsed(Object o) {
 		boolean val = this.defaultUsedVal;
 		if (o != null) {
-			this.defaultUsedVal = Bool_.Cast(o);
+			this.defaultUsedVal = BoolUtl.Cast(o);
 		}
 		return val;
 	}
@@ -130,8 +137,8 @@ public class JCValue {
 	*/
 //		public String error($key = null, $fieldPath = null /*...*/)
 	public Object error(Object key, String... fieldPath) {
-		if (Type_.Type_by_obj(key) == Bool_.Cls_ref_type) {
-			this.errorVal = Bool_.Cast(key);
+		if (Type_.Type_by_obj(key) == BoolUtl.ClsRefType) {
+			this.errorVal = BoolUtl.Cast(key);
 		}
 		else if (key != null) {
 //				$args = func_get_args();

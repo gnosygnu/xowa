@@ -13,18 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.parsers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Xol_csv_parser {
 	public void Save(Bry_bfr bfr, byte[] src) {
 		int len = src.length;
 		for (int i = 0; i < len; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Cr: 					bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_r); break;
-				case Byte_ascii.Nl: 					bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_n); break;
-				case Byte_ascii.Tab: 					bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Ltr_t); break;
-				case Byte_ascii.Backslash: 				bfr.Add_byte(Byte_ascii.Backslash); bfr.Add_byte(Byte_ascii.Backslash); break;
-				case Byte_ascii.Pipe: 					bfr.Add(Bry_pipe); break;
+				case AsciiByte.Cr: 					bfr.Add_byte(AsciiByte.Backslash); bfr.Add_byte(AsciiByte.Ltr_r); break;
+				case AsciiByte.Nl: 					bfr.Add_byte(AsciiByte.Backslash); bfr.Add_byte(AsciiByte.Ltr_n); break;
+				case AsciiByte.Tab: 					bfr.Add_byte(AsciiByte.Backslash); bfr.Add_byte(AsciiByte.Ltr_t); break;
+				case AsciiByte.Backslash: 				bfr.Add_byte(AsciiByte.Backslash); bfr.Add_byte(AsciiByte.Backslash); break;
+				case AsciiByte.Pipe: 					bfr.Add(Bry_pipe); break;
 				default:								bfr.Add_byte(b); break;
 			}
 		}
@@ -35,18 +36,18 @@ public class Xol_csv_parser {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Backslash: {
+				case AsciiByte.Backslash: {
 					int nxt_pos = i + 1; if (nxt_pos == end) throw Err_.new_wo_type("backslash cannot be last character");
 					byte nxt_byte = src[nxt_pos];
 					switch (nxt_byte) {
-						case Byte_ascii.Backslash:		bfr.Add_byte(Byte_ascii.Backslash); break;
-						case Byte_ascii.Ltr_r: 			bfr.Add_byte(Byte_ascii.Cr); break;
-						case Byte_ascii.Ltr_n:			bfr.Add_byte(Byte_ascii.Nl); break;
-						case Byte_ascii.Ltr_t:			bfr.Add_byte(Byte_ascii.Tab); break;
-						case Byte_ascii.Ltr_u:
+						case AsciiByte.Backslash:		bfr.Add_byte(AsciiByte.Backslash); break;
+						case AsciiByte.Ltr_r: 			bfr.Add_byte(AsciiByte.Cr); break;
+						case AsciiByte.Ltr_n:			bfr.Add_byte(AsciiByte.Nl); break;
+						case AsciiByte.Ltr_t:			bfr.Add_byte(AsciiByte.Tab); break;
+						case AsciiByte.Ltr_u:
 							int utf_len = 1;
 							for (int j = i + 6; j < end; j += 6) {	// iterate over rest of String; EX: \u0123
-								if (j + 1 < end && src[j] == Byte_ascii.Backslash && src[j + 1] == Byte_ascii.Ltr_u)
+								if (j + 1 < end && src[j] == AsciiByte.Backslash && src[j + 1] == AsciiByte.Ltr_u)
 									++utf_len;
 								else
 									break;

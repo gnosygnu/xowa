@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
+package gplx.xowa.mediawiki.includes.parsers.lnkis; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
 import gplx.core.btries.*;
 import gplx.xowa.mediawiki.includes.parsers.quotes.*;
 import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.linkers.*;
@@ -67,10 +70,10 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		this.env = env;
 		this.wiki = wiki;
 		if (title_chars_for_lnki == null) {
-			title_chars_for_lnki = (boolean[])Array_.Clone(XomwTitleOld.Title_chars_valid());
+			title_chars_for_lnki = (boolean[])ArrayUtl.Clone(XomwTitleOld.Title_chars_valid());
 			// the % is needed to support urlencoded titles as well
-			title_chars_for_lnki[Byte_ascii.Hash] = true;
-			title_chars_for_lnki[Byte_ascii.Percent] = true;
+			title_chars_for_lnki[AsciiByte.Hash] = true;
+			title_chars_for_lnki[AsciiByte.Percent] = true;
 		}
 	}
 	public void Clear_state() {
@@ -161,7 +164,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			boolean might_be_img = false;
 			if (ttl_end > ttl_bgn) {	// at least one valid title-char found; check for "|" or "]]" EX: "[[a"
 				byte nxt_byte = src[ttl_end];
-				if      (nxt_byte == Byte_ascii.Pipe) {	// handles lnki with capt ([[A|a]])and lnki with file ([[File:A.png|b|c|d]])
+				if      (nxt_byte == AsciiByte.Pipe) {	// handles lnki with capt ([[A|a]])and lnki with file ([[File:A.png|b|c|d]])
 					cur = ttl_end + 1;
 
 					// find next "[["
@@ -245,7 +248,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// }
 
 			byte[] link = orig_link;
-			boolean no_force = orig_link[0] != Byte_ascii.Colon;
+			boolean no_force = orig_link[0] != AsciiByte.Colon;
 			if (!no_force) {
 				// Strip off leading ':'
 				link = Bry_.Mid(link, 1);
@@ -693,7 +696,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 				byte[] bry_img = Bry_.new_a7("img_");
 				for (Xomw_param_list param_list : internalParamNames) {
 					for (byte[] name : param_list.names) {
-						byte[] magic_name = Bry_.Add(bry_img, Bry_.Replace(name, Byte_ascii.Dash, Byte_ascii.Underline));
+						byte[] magic_name = Bry_.Add(bry_img, Bry_.Replace(name, AsciiByte.Dash, AsciiByte.Underline));
 						internalParamMap.Add(magic_name, param_list.type_uid, name);
 					}
 				}
@@ -740,7 +743,7 @@ public class Xomw_lnki_wkr {// THREAD.UNSAFE: caching for repeated calls
 		int w_end = Bry_find_.Find_fwd_while_num(src, src_bgn, src_end);
 		int h_bgn = -1;
 		int h_end = -1;
-		if (w_end < src_end && src[w_end] == Byte_ascii.Ltr_x) {
+		if (w_end < src_end && src[w_end] == AsciiByte.Ltr_x) {
 			h_bgn = w_end + 1;
 			h_end = Bry_find_.Find_fwd_while_num(src, h_bgn, src_end);
 		}

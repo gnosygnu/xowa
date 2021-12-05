@@ -13,9 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.langs.*; import gplx.xowa.langs.kwds.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*; import gplx.xowa.xtns.pfuncs.times.*;
+import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 public class Pft_func_date_int extends Pf_func_base {
 	public Pft_func_date_int(int id, int date_tid) {this.id = id; this.date_tid = date_tid;} private int date_tid;
 	@Override public int Id() {return id;} private int id;
@@ -70,7 +73,7 @@ public class Pft_func_date_int extends Pf_func_base {
 				break;
 			case Xol_kwd_grp_.Id_lcl_time:
 			case Xol_kwd_grp_.Id_utc_time:		// 17:29
-				bfr.Add_int_fixed(date.Hour(), 2).Add_byte(Byte_ascii.Colon).Add_int_fixed(date.Minute(), 2);
+				bfr.Add_int_fixed(date.Hour(), 2).Add_byte(AsciiByte.Colon).Add_int_fixed(date.Minute(), 2);
 				break;
 			case Xol_kwd_grp_.Id_lcl_timestamp:	
 			case Xol_kwd_grp_.Id_utc_timestamp:

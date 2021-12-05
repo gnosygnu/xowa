@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.quotes; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.xowa.parsers.htmls.*;
-import gplx.core.primitives.*;
+package gplx.xowa.mediawiki.includes.parsers.quotes;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.core.primitives.Int_list;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.XophpPreg_;
+import gplx.xowa.mediawiki.XophpString_;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
 public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private Bry_bfr tmp;
 	private final Int_list apos_pos_ary = new Int_list(32);
@@ -33,27 +41,27 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 		int cur = src_bgn;
 		int line_bgn = cur;
 		while (true) {
-			int line_end = Bry_find_.Find_fwd(src, Byte_ascii.Nl, line_bgn, src_end);
+			int line_end = Bry_find_.Find_fwd(src, AsciiByte.Nl, line_bgn, src_end);
 			if (line_end == Bry_find_.Not_found) {
 				line_end = src_end;
 			}
-			Do_quotes(bfr, Bool_.Y, src, line_bgn, line_end);
+			Do_quotes(bfr, BoolUtl.Y, src, line_bgn, line_end);
 			if (line_end == src_end)
 				break;
 			else
 				line_bgn = line_end + 1;	// 1=\n.length
 		}
-		// Bry_split_.Split(src, src_bgn, src_end, Byte_ascii.Nl, Bool_.N, this); // PORTED.SPLIT: $lines = StringUtils::explode( "\n", $text );
-		if (bfr.Match_end_byt(Byte_ascii.Nl))
+		// Bry_split_.Split(src, src_bgn, src_end, Byte_ascii.Nl, BoolUtl.N, this); // PORTED.SPLIT: $lines = StringUtils::explode( "\n", $text );
+		if (bfr.Match_end_byt(AsciiByte.Nl))
 			bfr.Del_by_1(); // REF.MW: $outtext = substr( $outtext, 0, -1 );
 		apos_pos_ary.Clear();
 	}
 	public byte[] Do_quotes(Bry_bfr tmp, byte[] src) {
-		boolean found = Do_quotes(tmp, Bool_.N, src, 0, src.length);
+		boolean found = Do_quotes(tmp, BoolUtl.N, src, 0, src.length);
 		return found ? tmp.To_bry_and_clear() : src;
 	}
 	private boolean Do_quotes(Bry_bfr bfr, boolean all_quotes_mode, byte[] src, int line_bgn, int line_end) {
-		byte[][] arr = XophpPreg_.split(apos_pos_ary, src, line_bgn, line_end, Wtxt__apos, Bool_.Y);	// PORTED.REGX: arr = preg_split("/(''+)/", text, -1, PREG_SPLIT_DELIM_CAPTURE);
+		byte[][] arr = XophpPreg_.split(apos_pos_ary, src, line_bgn, line_end, Wtxt__apos, BoolUtl.Y);	// PORTED.REGX: arr = preg_split("/(''+)/", text, -1, PREG_SPLIT_DELIM_CAPTURE);
 		if (arr == null) {
 			if (all_quotes_mode) {
 				bfr.Add_mid(src, line_bgn, line_end).Add_byte_nl();
@@ -73,7 +81,7 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// be text, and the remaining three constitute mark-up for bold text.
 			// (bug 13227: ''''foo'''' turns into ' ''' foo ' ''')
 			if (apos_len == 4) {
-				arr[i - 1] = Bry_.Add(arr[i - 1], Byte_ascii.Apos_bry);
+				arr[i - 1] = Bry_.Add(arr[i - 1], AsciiByte.AposBry);
 				arr[i] = Bry_.new_a7("'''");
 				apos_len = 3;
 			}
@@ -81,7 +89,7 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 				// If there are more than 5 apostrophes in a row, assume they're all
 				// text except for the last 5.
 				// (bug 13227: ''''''foo'''''' turns into ' ''''' foo ' ''''')
-				arr[i - 1] = Bry_.Add(arr[i - 1], Bry_.Repeat(Byte_ascii.Apos, apos_len - 5));
+				arr[i - 1] = Bry_.Add(arr[i - 1], Bry_.Repeat(AsciiByte.Apos, apos_len - 5));
 				arr[i] = Bry_.new_a7("'''''");
 				apos_len = 5;
 			}
@@ -112,12 +120,12 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 					byte[] prv = arr[i - 1];
 					byte prv__last_char = XophpString_.substr_byte(prv, -1);
 					byte prv__last_minus_1_char = XophpString_.substr_byte(prv, -2, 1);
-					if (prv__last_char == Byte_ascii.Space) {              // NOTE: prv ends in space; EX: "''prv '''"
+					if (prv__last_char == AsciiByte.Space) {              // NOTE: prv ends in space; EX: "''prv '''"
 						if (prv_ends_w_space == -1) {
 							prv_ends_w_space = i;
 						}
 					}
-					else if (prv__last_minus_1_char == Byte_ascii.Space) { // NOTE: prv ends in 1-char word; EX: "''prv a'''"
+					else if (prv__last_minus_1_char == AsciiByte.Space) { // NOTE: prv ends in 1-char word; EX: "''prv a'''"
 						prv_ends_w_word_1char = i;
 						// if $firstsingleletterword is set, we don't
 						// look at the other options, so we can bail early.
@@ -134,19 +142,19 @@ public class Xomw_quote_wkr {// THREAD.UNSAFE: caching for repeated calls
 			// If there is a single-letter word, use it!
 			if (prv_ends_w_word_1char > -1) {
 				arr[prv_ends_w_word_1char] = Wtxt__apos;
-				arr[prv_ends_w_word_1char - 1] = Bry_.Add(arr[prv_ends_w_word_1char - 1], Byte_ascii.Apos);
+				arr[prv_ends_w_word_1char - 1] = Bry_.Add(arr[prv_ends_w_word_1char - 1], AsciiByte.Apos);
 			}
 			else if (prv_ends_w_word_nchar > -1) {
 				// If not, but there's a multi-letter word, use that one.
 				arr[prv_ends_w_word_nchar] = Wtxt__apos;
-				arr[prv_ends_w_word_nchar - 1] = Bry_.Add(arr[prv_ends_w_word_nchar - 1], Byte_ascii.Apos);
+				arr[prv_ends_w_word_nchar - 1] = Bry_.Add(arr[prv_ends_w_word_nchar - 1], AsciiByte.Apos);
 			}
 			else if (prv_ends_w_space > -1) {
 				// ... otherwise use the first one that has neither.
 				// (notice that it is possible for all three to be -1 if, for example,
 				// there is only one pentuple-apostrophe in the line)
 				arr[prv_ends_w_space] = Wtxt__apos;
-				arr[prv_ends_w_space - 1] = Bry_.Add(arr[prv_ends_w_space - 1], Byte_ascii.Apos);
+				arr[prv_ends_w_space - 1] = Bry_.Add(arr[prv_ends_w_space - 1], AsciiByte.Apos);
 			}
 		}
 

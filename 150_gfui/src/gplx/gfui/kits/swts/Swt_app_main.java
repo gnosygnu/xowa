@@ -13,10 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.gfui.kits.swts; import gplx.*; import gplx.gfui.*; import gplx.gfui.kits.*;
-import gplx.Byte_ascii;
-import gplx.String_;
-
+package gplx.gfui.kits.swts;
+import gplx.objects.strings.AsciiByte;
 import org.eclipse.swt.*;
 import org.eclipse.swt.browser.*;
 import org.eclipse.swt.custom.*;
@@ -231,11 +229,11 @@ public class Swt_app_main {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				System.out.println(combo.getText());					
-				if (arg0.keyCode == Byte_ascii.Ltr_a) {
+				if (arg0.keyCode == AsciiByte.Ltr_a) {
 					combo.setItem(0, "a");
 					combo.setListVisible(true);
 				}
-				else if (arg0.keyCode == Byte_ascii.Ltr_b) {
+				else if (arg0.keyCode == AsciiByte.Ltr_b) {
 					combo.setItem(0, "b");
 					combo.setListVisible(true);
 				}

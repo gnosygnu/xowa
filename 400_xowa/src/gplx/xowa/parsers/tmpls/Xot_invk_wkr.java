@@ -13,8 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.tmpls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.funcs.*;
+package gplx.xowa.parsers.tmpls;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.langs.funcs.Xol_func_itm;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.Xop_ctx_wkr;
+import gplx.xowa.parsers.Xop_parser_tid_;
+import gplx.xowa.parsers.Xop_root_tkn;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_itm_;
+import gplx.xowa.parsers.Xop_tkn_mkr;
 public class Xot_invk_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 	public void Ctor_ctx(Xop_ctx ctx) {}
 	public void Page_bgn(Xop_ctx ctx, Xop_root_tkn root) {this.tkn_mkr = ctx.Tkn_mkr();} private Xop_tkn_mkr tkn_mkr;
@@ -59,7 +67,7 @@ public class Xot_invk_wkr implements Xop_ctx_wkr, Xop_arg_wkr {
 		nde.Key_tkn_(key_tkn).Val_tkn_(val_tkn);
 		invk.Name_tkn_(nde);
 
-		if (key_tkn.Itm_static() != Bool_.Y_byte) return;	// dynamic tkn; can't identify func/name
+		if (key_tkn.Itm_static() != BoolUtl.YByte) return;	// dynamic tkn; can't identify func/name
 		int colon_pos = -1, txt_bgn = key_tkn.Dat_bgn(), txt_end = key_tkn.Dat_end();
 
 		Xol_func_itm finder = new Xol_func_itm();	// TS.MEM: DATE:2016-07-12

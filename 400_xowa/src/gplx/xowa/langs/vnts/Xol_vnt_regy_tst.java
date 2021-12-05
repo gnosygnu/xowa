@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.vnts; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
-import org.junit.*;
+package gplx.xowa.langs.vnts;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Test;
 public class Xol_vnt_regy_tst {
 	private final Xol_vnt_regy_fxt fxt = new Xol_vnt_regy_fxt();
 	@Test public void Calc() {
@@ -24,7 +26,7 @@ public class Xol_vnt_regy_tst {
 	}
 	@Test public void Match() {
 		String[] lang_chain = fxt.Make_lang_chain_cn();	// zh;zh-hans;zh-hant;zh-cn
-		fxt.Test_match_any(Bool_.Y, lang_chain
+		fxt.Test_match_any(BoolUtl.Y, lang_chain
 		, String_.Ary("zh")
 		, String_.Ary("zh-hans")
 		, String_.Ary("zh-hant")
@@ -32,7 +34,7 @@ public class Xol_vnt_regy_tst {
 		, String_.Ary("zh", "zh-hans")
 		, String_.Ary("zh-cn", "zh-hk")
 		);
-		fxt.Test_match_any(Bool_.N, lang_chain
+		fxt.Test_match_any(BoolUtl.N, lang_chain
 		, String_.Ary_empty
 		, String_.Ary("bad")
 		, String_.Ary("zh-hk")
@@ -40,7 +42,7 @@ public class Xol_vnt_regy_tst {
 		);
 	}
 	@Test  public void Match_2() {
-		fxt.Test_match_any(Bool_.Y, String_.Ary("zh-hans")
+		fxt.Test_match_any(BoolUtl.Y, String_.Ary("zh-hans")
 		, String_.Ary("zh", "zh-hant", "zh-hans")
 		);
 	}

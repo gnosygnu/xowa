@@ -13,8 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files; import gplx.*; import gplx.xowa.*;
-import org.junit.*; import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
+package gplx.xowa.files;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.files.imgs.Xof_img_mode_;
+import gplx.xowa.files.repos.Xof_repo_tid_;
+import org.junit.Before;
+import org.junit.Test;
 public class Xof_url_bldr__tst {
 	private Xof_url_bldr__fxt fxt = new Xof_url_bldr__fxt();
 	@Before public void init() {fxt.Clear().Dir_spr_http_();}
@@ -34,8 +43,8 @@ public class Xof_url_bldr__tst {
 			.Test()
 			;
 	}
-	@Test 	public void Math__http() 	{fxt.Repo_tid_(Xof_repo_tid_.Tid__math).Fsys_is_wnt_(Bool_.N).Root_("http://test/").Ttl_("random_md5.svg").Expd_src_("http://test/random_md5").Test();}	// NOTE: strip ".svg" if online
-	@Test 	public void Math__file() 	{fxt.Repo_tid_(Xof_repo_tid_.Tid__math).Fsys_is_wnt_(Bool_.Y).Root_("file://xowa/").Ttl_("random_md5.svg").Expd_src_("file://xowa/random_md5.svg").Test();}	// NOTE: keep ".svg" if online
+	@Test 	public void Math__http() 	{fxt.Repo_tid_(Xof_repo_tid_.Tid__math).Fsys_is_wnt_(BoolUtl.N).Root_("http://test/").Ttl_("random_md5.svg").Expd_src_("http://test/random_md5").Test();}	// NOTE: strip ".svg" if online
+	@Test 	public void Math__file() 	{fxt.Repo_tid_(Xof_repo_tid_.Tid__math).Fsys_is_wnt_(BoolUtl.Y).Root_("file://xowa/").Ttl_("random_md5.svg").Expd_src_("file://xowa/random_md5.svg").Test();}	// NOTE: keep ".svg" if online
 }
 class Xof_url_bldr__fxt {
 	private final Xof_url_bldr url_bldr = new Xof_url_bldr();
@@ -46,8 +55,8 @@ class Xof_url_bldr__fxt {
 		w = Xof_img_size.Null;
 		return this;
 	}
-	public Xof_url_bldr__fxt Dir_spr_http_() {return Dir_spr_(Byte_ascii.Slash);}
-	public Xof_url_bldr__fxt Dir_spr_fsys_wnt_() {return Dir_spr_(Byte_ascii.Backslash);}
+	public Xof_url_bldr__fxt Dir_spr_http_() {return Dir_spr_(AsciiByte.Slash);}
+	public Xof_url_bldr__fxt Dir_spr_fsys_wnt_() {return Dir_spr_(AsciiByte.Backslash);}
 	public Xof_url_bldr__fxt Dir_spr_(byte v) {dir_spr = v; return this;} private byte dir_spr;
 	public Xof_url_bldr__fxt Root_(String v) {root = v; return this;} private String root;
 	public Xof_url_bldr__fxt Md5_(String v) {md5 = v; return this;} private String md5;
@@ -59,7 +68,7 @@ class Xof_url_bldr__fxt {
 	public Xof_url_bldr__fxt Fsys_is_wnt_(boolean v) {fsys_is_wnt = v; return this;} private boolean fsys_is_wnt;
 	public Xof_url_bldr__fxt Expd_src_(String v) {expd_src = v; return this;} private String expd_src;
 	public Xof_url_bldr__fxt Test() {
-		url_bldr.Init_by_repo(repo_tid, Bry_.new_u8(root), fsys_is_wnt, dir_spr, Bool_.Y, Bool_.N, 2);
+		url_bldr.Init_by_repo(repo_tid, Bry_.new_u8(root), fsys_is_wnt, dir_spr, BoolUtl.Y, BoolUtl.N, 2);
 		url_bldr.Init_by_itm (Xof_img_mode_.Tid__thumb, Bry_.new_u8(ttl), Bry_.new_u8_safe(md5), ext, w, seek, page);
 		Tfds.Eq(expd_src, url_bldr.Xto_str());
 		return this;

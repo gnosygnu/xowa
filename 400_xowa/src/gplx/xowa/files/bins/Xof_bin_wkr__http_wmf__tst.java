@@ -13,20 +13,33 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.bins; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
-import org.junit.*; import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.xowa.files.repos.*;
+package gplx.xowa.files.bins;
+import gplx.Bry_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.core.ios.streams.Io_stream_rdr;
+import gplx.core.ios.streams.Io_stream_rdr_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.files.Xof_fsdb_itm;
+import gplx.xowa.files.Xof_fsdb_itm_fxt;
+import gplx.xowa.files.repos.Xof_repo_tid_;
+import org.junit.Before;
+import org.junit.Test;
 public class Xof_bin_wkr__http_wmf__tst {
 	private final Xof_bin_wkr__http_wmf__fxt fxt = new Xof_bin_wkr__http_wmf__fxt();
 	@Before public void init() {fxt.Clear();}
 	@Test  public void Basic() {
 		fxt.Init__Http("mem/http/commons.wikimedia.org/thumb/7/70/A.png/220px-A.png", "test_data");
-		fxt.Exec__Get_as_rdr(fxt.Fsdb_itm_mkr().Lnki__en_w("A.png").Orig__commons__lnki(), Bool_.Y, 220);
+		fxt.Exec__Get_as_rdr(fxt.Fsdb_itm_mkr().Lnki__en_w("A.png").Orig__commons__lnki(), BoolUtl.Y, 220);
 		fxt.Test__Get_as_rdr__rdr("test_data");
 	}
 	@Test  public void Enwiki_fails__fallback_to_commons() {
 		fxt.Init__Http("mem/http/commons.wikimedia.org/thumb/7/70/A.png/220px-A.png", "test_data");			// put file in commons
 		Xof_fsdb_itm fsdb_itm = fxt.Fsdb_itm_mkr().Lnki__en_w("A.png").Orig__enwiki__lnki().Make();
-		fxt.Exec__Get_as_rdr(fsdb_itm, Bool_.Y, 220);														// look in enwiki
+		fxt.Exec__Get_as_rdr(fsdb_itm, BoolUtl.Y, 220);														// look in enwiki
 		fxt.Test__Get_as_rdr__rdr("test_data");																// test that enwiki tries commons again
 		Tfds.Eq_str("commons.wikimedia.org", fsdb_itm.Orig_repo_name(), "repo_name");						// test that it's now commons
 		Tfds.Eq_byte(Xof_repo_tid_.Tid__remote, fsdb_itm.Orig_repo_id(), "repo_tid");						// test that it's now commons
@@ -35,7 +48,7 @@ public class Xof_bin_wkr__http_wmf__tst {
 		String filename = String_.Repeat("A", 200) + ".png";
 		fxt.Init__Http("mem/http/commons.wikimedia.org/thumb/1/14/" + filename + "/220px-thumbnail.png", "test_data");	// add file as "thumbnail.png"
 		Xof_fsdb_itm fsdb_itm = fxt.Fsdb_itm_mkr().Lnki__en_w(filename).Orig__enwiki__lnki().Make();
-		fxt.Exec__Get_as_rdr(fsdb_itm, Bool_.Y, 220);														// look in enwiki
+		fxt.Exec__Get_as_rdr(fsdb_itm, BoolUtl.Y, 220);														// look in enwiki
 		fxt.Test__Get_as_rdr__rdr("test_data");																// test that file is there
 	}
 }

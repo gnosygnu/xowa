@@ -13,12 +13,31 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes; import gplx.*;
-import gplx.xowa.mediawiki.*;
-import gplx.core.brys.*; import gplx.core.btries.*; import gplx.core.encoders.*; import gplx.core.primitives.*; import gplx.langs.htmls.entitys.*;
-import gplx.xowa.parsers.htmls.*;
-import gplx.langs.htmls.*; import gplx.xowa.mediawiki.includes.xohtml.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.xowa.mediawiki.includes.libs.*;
+package gplx.xowa.mediawiki.includes;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Hash_adp_bry;
+import gplx.Type_;
+import gplx.core.brys.Bry_tmp;
+import gplx.core.btries.Btrie_rv;
+import gplx.core.btries.Btrie_slim_mgr;
+import gplx.core.encoders.Hex_utl_;
+import gplx.core.primitives.Bool_ary_bldr;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.langs.htmls.entitys.Gfh_entity_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.XophpPreg_;
+import gplx.xowa.mediawiki.includes.libs.XomwStringUtils;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
+import gplx.xowa.mediawiki.includes.parsers.Xomw_regex_parser;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_itm;
+import gplx.xowa.mediawiki.includes.xohtml.Xomw_atr_mgr;
+import gplx.xowa.parsers.htmls.Mwh_atr_itm;
+import gplx.xowa.parsers.htmls.Mwh_atr_parser;
+import gplx.xowa.parsers.htmls.Mwh_doc_wkr__atr_bldr;
 public class XomwSanitizer {
 	private final Mwh_doc_wkr__atr_bldr atr_bldr = new Mwh_doc_wkr__atr_bldr();
 	private final Mwh_atr_parser atr_parser = new Mwh_atr_parser();
@@ -688,9 +707,9 @@ public class XomwSanitizer {
 				Xomw_atr_itm src_atr = src.Get_by_or_null(atr_cls);
 				if (src_atr != null) {
 					// NOTE: need byte[]-creation is unavoidable b/c src_atr and trg_atr are non-null
-					mergeAttributesCombine(tmp_bfr, src_atr.Val(), Byte_ascii.Space);
+					mergeAttributesCombine(tmp_bfr, src_atr.Val(), AsciiByte.Space);
 					tmp_bfr.Add_byte_space();
-					mergeAttributesCombine(tmp_bfr, trg_atr.Val(), Byte_ascii.Space);
+					mergeAttributesCombine(tmp_bfr, trg_atr.Val(), AsciiByte.Space);
 					src_atr.Val_(tmp_bfr.To_bry_and_clear());
 					continue;
 				}
@@ -1234,7 +1253,7 @@ public class XomwSanitizer {
 		//		' ',
 		//		$text);
 		normalizeWhitespaceBry.Init(text, 0, text.length);
-		XophpPreg_.replace(normalizeWhitespaceBry, tmp_bfr_2, normalizeWhitespaceTrie, trv, Byte_ascii.Space_bry);
+		XophpPreg_.replace(normalizeWhitespaceBry, tmp_bfr_2, normalizeWhitespaceTrie, trv, AsciiByte.SpaceBry);
 		return normalizeWhitespaceBry.src;
 	}
 
@@ -1274,7 +1293,7 @@ public class XomwSanitizer {
 		Bry_bfr bfr = pbfr.Trg();
 		pbfr.Switch();
 
-		normalizeCharReferences(bfr, Bool_.N, src, src_bgn, src_end);
+		normalizeCharReferences(bfr, BoolUtl.N, src, src_bgn, src_end);
 	}
 	public byte[] normalizeCharReferences(Bry_bfr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end) {
 		// XO.MW.REGEX:
@@ -1673,7 +1692,7 @@ public class XomwSanitizer {
 	*/
 	public byte[] stripAllTags(byte[] text) {
 		// Actual <tags>
-		XomwStringUtils.delimiterReplace(tmp_bfr, Byte_ascii.Angle_bgn_bry, Byte_ascii.Angle_end_bry, Bry_.Empty, text);
+		XomwStringUtils.delimiterReplace(tmp_bfr, AsciiByte.AngleBgnBry, AsciiByte.AngleEndBry, Bry_.Empty, text);
 		text = tmp_bfr.To_bry_and_clear();
 
 		// Normalize &entities and whitespace
@@ -1708,7 +1727,7 @@ public class XomwSanitizer {
 	public byte[] cleanUrl(byte[] url) {
 		// Normalize any HTML entities in input. They will be
 		// re-escaped by makeExternalLink().			
-		url = decodeCharReferences(null, Bool_.Y, url, 0, url.length);
+		url = decodeCharReferences(null, BoolUtl.Y, url, 0, url.length);
 
 		// Escape any control characters introduced by the above step
 		// XO.MW.REGEX: $url = preg_replace_callback('/[\][<>"\\x00-\\x20\\x7F\|]/', [ __CLASS__, 'cleanUrlCallback' ], $url);
@@ -1734,7 +1753,7 @@ public class XomwSanitizer {
 			//    EX: [ABCD]:80:12
 			if (regex_ipv6_brack.Match(tmp_host.src, tmp_host.src_bgn, tmp_host.src_end)) {
 				tmp_bfr.Add_str_a7("//[").Add_mid(tmp_host.src, regex_ipv6_brack.host_bgn, regex_ipv6_brack.host_end)
-					.Add_byte(Byte_ascii.Brack_end).Add_mid(tmp_host.src, regex_ipv6_brack.segs_bgn, regex_ipv6_brack.segs_end);
+					.Add_byte(AsciiByte.BrackEnd).Add_mid(tmp_host.src, regex_ipv6_brack.segs_bgn, regex_ipv6_brack.segs_end);
 				tmp_host.Set_by_bfr(tmp_bfr);
 			}
 
@@ -2124,7 +2143,7 @@ class Xomw_regex_find_domain {
 
 		// find prot; EX: "https:"
 		prot_bgn = src_bgn;
-		prot_end = Bry_find_.Move_fwd(src, Byte_ascii.Colon, prot_bgn, src_end);
+		prot_end = Bry_find_.Move_fwd(src, AsciiByte.Colon, prot_bgn, src_end);
 		// exit if not found
 		if (prot_end == Bry_find_.Not_found) return false;
 
@@ -2134,10 +2153,10 @@ class Xomw_regex_find_domain {
 		// exit if eos
 		if (double_slash_end >= src_end) return false;
 		// exit if not "//"
-		if (  src[host_bgn    ] != Byte_ascii.Slash
-			|| src[host_bgn + 1] != Byte_ascii.Slash
+		if (  src[host_bgn    ] != AsciiByte.Slash
+			|| src[host_bgn + 1] != AsciiByte.Slash
 			) return false;
-		host_end = Bry_find_.Find_fwd(src, Byte_ascii.Slash, double_slash_end, src_end);
+		host_end = Bry_find_.Find_fwd(src, AsciiByte.Slash, double_slash_end, src_end);
 		// exit if not found
 		if (host_end == Bry_find_.Not_found) {
 			host_end = src_end;
@@ -2169,13 +2188,13 @@ class Xomw_regex_escape_invalid {
 			boolean match = false;
 			byte b = src[cur];
 			switch (b) {
-				case Byte_ascii.Brack_bgn:
-				case Byte_ascii.Brack_end:
-				case Byte_ascii.Angle_bgn:
-				case Byte_ascii.Angle_end:
-				case Byte_ascii.Quote:
-				case Byte_ascii.Pipe:
-				case Byte_ascii.Delete:
+				case AsciiByte.BrackBgn:
+				case AsciiByte.BrackEnd:
+				case AsciiByte.AngleBgn:
+				case AsciiByte.AngleEnd:
+				case AsciiByte.Quote:
+				case AsciiByte.Pipe:
+				case AsciiByte.Delete:
 					match = true;
 					break;
 				default:
@@ -2223,15 +2242,15 @@ class Xomw_regex_ipv6_brack {
 			boolean done = false;
 			byte b = src[host_end];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E: case Byte_ascii.Ltr_F:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e: case Byte_ascii.Ltr_f:
-				case Byte_ascii.Colon:
-				case Byte_ascii.Dot:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E: case AsciiByte.Ltr_F:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e: case AsciiByte.Ltr_f:
+				case AsciiByte.Colon:
+				case AsciiByte.Dot:
 					host_end++;
 					break;
-				case Byte_ascii.Percent:
+				case AsciiByte.Percent:
 					// matches "%5D"
 					segs_bgn = host_end + Bry__host_end.length;
 					if (  Bry_.Match(src, host_end, segs_bgn, Bry__host_end)
@@ -2256,7 +2275,7 @@ class Xomw_regex_ipv6_brack {
 			if (segs_end == src_end) return true;
 
 			// check if ":"
-			if (src[segs_end] == Byte_ascii.Colon) {
+			if (src[segs_end] == AsciiByte.Colon) {
 				int num_bgn = segs_end + 1;
 				int num_end = Bry_find_.Find_fwd_while_num(src, num_bgn, src_end);
 				// exit if no nums found; EX:"[ABC]:80:"
@@ -2322,7 +2341,7 @@ class Xomw_regex_url_char_cbk__normalize implements Xomw_regex_url_char_cbk {
 		int point = Hex_utl_.Parse_or(name, -1);
 		if (XomwSanitizer.validateCodepoint(point)) {
 			bfr.Add_str_a7("&#x");
-			Hex_utl_.Write_bfr(bfr, Bool_.Y, point);	// sprintf('&#x%x;', $point)
+			Hex_utl_.Write_bfr(bfr, BoolUtl.Y, point);	// sprintf('&#x%x;', $point)
 			bfr.Add_byte_semic();
 			return true;
 		}
@@ -2351,7 +2370,7 @@ class Xomw_regex_url_char_cbk__decode implements Xomw_regex_url_char_cbk {
 		// pseudo-entity source (eg "&foo;")
 		Object o = XomwSanitizer.html_entities.Get_by_bry(name);
 		if (o == null) {
-			bfr.Add_byte(Byte_ascii.Amp).Add(name).Add_byte_semic();
+			bfr.Add_byte(AsciiByte.Amp).Add(name).Add_byte_semic();
 		}
 		else {
 			Xomw_html_ent entity = (Xomw_html_ent)o;
@@ -2366,7 +2385,7 @@ class Xomw_regex_url_char_cbk__decode implements Xomw_regex_url_char_cbk {
 		return Decode_char(bfr, gplx.core.encoders.Hex_utl_.Parse_or(name, 0, name.length, -1));
 	}
 	public boolean When_amp(Bry_bfr bfr) {
-		bfr.Add_byte(Byte_ascii.Amp);
+		bfr.Add_byte(AsciiByte.Amp);
 		return true;
 	}
 	private boolean Decode_char(Bry_bfr bfr, int point) {// XO.MW:decodeChar
@@ -2394,16 +2413,16 @@ class Xomw_regex_url_char {
 		// assert static structs
 		if (Normalize__dec == null) {
 			synchronized (XomwSanitizer.class) {
-				Normalize__dec = Bool_ary_bldr.New_u8().Set_rng(Byte_ascii.Num_0, Byte_ascii.Num_9).To_ary();
+				Normalize__dec = Bool_ary_bldr.New_u8().Set_rng(AsciiByte.Num0, AsciiByte.Num9).To_ary();
 				Normalize__hex = Bool_ary_bldr.New_u8()
-					.Set_rng(Byte_ascii.Num_0, Byte_ascii.Num_9)
-					.Set_rng(Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z)
-					.Set_rng(Byte_ascii.Ltr_a, Byte_ascii.Ltr_z)
+					.Set_rng(AsciiByte.Num0, AsciiByte.Num9)
+					.Set_rng(AsciiByte.Ltr_A, AsciiByte.Ltr_Z)
+					.Set_rng(AsciiByte.Ltr_a, AsciiByte.Ltr_z)
 					.To_ary();
 				Normalize__ent = Bool_ary_bldr.New_u8()
-					.Set_rng(Byte_ascii.Num_0, Byte_ascii.Num_9)
-					.Set_rng(Byte_ascii.Ltr_A, Byte_ascii.Ltr_Z)
-					.Set_rng(Byte_ascii.Ltr_a, Byte_ascii.Ltr_z)
+					.Set_rng(AsciiByte.Num0, AsciiByte.Num9)
+					.Set_rng(AsciiByte.Ltr_A, AsciiByte.Ltr_Z)
+					.Set_rng(AsciiByte.Ltr_a, AsciiByte.Ltr_z)
 					.Set_rng(128, 255)
 					.To_ary();
 			}
@@ -2417,7 +2436,7 @@ class Xomw_regex_url_char {
 
 		while (true) {
 			// search for "&"
-			int find_bgn = Bry_find_.Find_fwd(src, Byte_ascii.Amp, cur);
+			int find_bgn = Bry_find_.Find_fwd(src, AsciiByte.Amp, cur);
 			if (find_bgn == Bry_find_.Not_found) {	// "&" not found; exit
 				if (dirty)
 					bfr.Add_mid(src, cur, src_end);
@@ -2428,12 +2447,12 @@ class Xomw_regex_url_char {
 			// get regex; (a) dec (&#09;); (b) hex (&#xFF;); (c) entity (&alpha;);
 			boolean[] regex = null;
 			// check for #;
-			if (ent_bgn < src_end && src[ent_bgn] == Byte_ascii.Hash) {
+			if (ent_bgn < src_end && src[ent_bgn] == AsciiByte.Hash) {
 				ent_bgn++;
 				if (ent_bgn < src_end) {
 					byte nxt = src[ent_bgn];
 					// check for x
-					if (nxt == Byte_ascii.Ltr_X || nxt == Byte_ascii.Ltr_x) {
+					if (nxt == AsciiByte.Ltr_X || nxt == AsciiByte.Ltr_x) {
 						ent_bgn++;
 						regex = Normalize__hex;
 					}
@@ -2447,7 +2466,7 @@ class Xomw_regex_url_char {
 
 			// keep looping until invalid regex
 			int ent_end = ent_bgn;
-			int b = Byte_ascii.Null;
+			int b = AsciiByte.Null;
 			for (int i = ent_bgn; i < src_end; i++) {
 				b = src[i] & 0xFF; // PATCH.JAVA:need to convert to unsigned byte
 				if (regex[b])
@@ -2462,7 +2481,7 @@ class Xomw_regex_url_char {
 			bfr.Add_mid(src, cur, find_bgn); // add everything before &
 
 			// invalid <- regex ended, but not at semic
-			if (b != Byte_ascii.Semic) {
+			if (b != AsciiByte.Semic) {
 				cbk.When_amp(bfr);
 				cur = find_bgn + 1;                 // position after "&"
 				continue;

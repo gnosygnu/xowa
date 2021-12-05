@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
+package gplx.xowa.htmls.core.wkrs.imgs.atrs; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 public class Xoh_img_cls_ {
 	public static final byte		// SERIALIZED
 	  Tid__none				= 0	// EX: [[File:A.png]]			-> "<img>"
@@ -48,10 +49,10 @@ public class Xoh_img_cls_ {
 		}
 		byte[] other_0 = Bry_.Empty, other_1 = Bry_.Empty;
 		if (!other_is_empty) {
-			if (cls != null) other_0 = Byte_ascii.Space_bry;
+			if (cls != null) other_0 = AsciiByte.SpaceBry;
 			other_1 = other;
 		}
-		return Bry_.Add(Bry__html_class, cls, other_0, other_1, Byte_ascii.Quote_bry);
+		return Bry_.Add(Bry__html_class, cls, other_0, other_1, AsciiByte.QuoteBry);
 	}
 	public static byte[] To_val_or_null(int tid, byte[] other) {
 		boolean other_is_empty = Bry_.Len_eq_0(other);
@@ -63,7 +64,7 @@ public class Xoh_img_cls_ {
 		}
 		byte[] other_0 = Bry_.Empty, other_1 = Bry_.Empty;
 		if (!other_is_empty) {
-			if (cls != null) other_0 = Byte_ascii.Space_bry;
+			if (cls != null) other_0 = AsciiByte.SpaceBry;
 			other_1 = other;
 		}
 		return Bry_.Add(cls, other_0, other_1);

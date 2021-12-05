@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
+package gplx.langs.gfs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 public class Gfs_parser_tst {		
 	@Before public void init() {fxt.Clear();} Gfs_parser_fxt fxt = new Gfs_parser_fxt();
@@ -165,7 +166,7 @@ class Gfs_parser_fxt {
 		for (int i = 0; i < atrs_len; i++) {
 			Gfs_nde atr = nde.Atrs_get_at(i);
 			int path_len_old = path.Len();
-			path.Add_byte(Byte_ascii.Dot).Add_byte((byte)(Byte_ascii.Ltr_a + i));
+			path.Add_byte(AsciiByte.Dot).Add_byte((byte)(AsciiByte.Ltr_a + i));
 			int path_len_new = path.Len();
 			To_str(bfr, path, src, atr);
 			path.Del_by(path_len_new - path_len_old);
@@ -174,7 +175,7 @@ class Gfs_parser_fxt {
 		for (int i = 0; i < subs_len; i++) {
 			Gfs_nde sub = nde.Subs_get_at(i);
 			int path_len_old = path.Len();
-			path.Add_byte(Byte_ascii.Dot).Add_int_variable(i);
+			path.Add_byte(AsciiByte.Dot).Add_int_variable(i);
 			int path_len_new = path.Len();
 			To_str(bfr, path, src, sub);
 			path.Del_by(path_len_new - path_len_old);
@@ -182,7 +183,7 @@ class Gfs_parser_fxt {
 	}
 	private void To_str_atr(Bry_bfr bfr, Bry_bfr path_bfr, byte[] src, byte[] name, byte[] val, int val_bgn, int val_end) {
 		if (val == null && val_bgn == -1 && val_end == -1) return;
-		bfr.Add_bfr_and_preserve(path_bfr).Add_byte(Byte_ascii.Colon);
+		bfr.Add_bfr_and_preserve(path_bfr).Add_byte(AsciiByte.Colon);
 		bfr.Add(name);
 		if (val == null)
 			bfr.Add_mid(src, val_bgn, val_end);

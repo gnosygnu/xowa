@@ -13,10 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.xtns.scribunto.engines.*;
-import org.luaj.vm2.LuaTable;
-import org.luaj.vm2.LuaThread;
-import org.luaj.vm2.LuaValue;
+package gplx.xowa.xtns.scribunto.engines.luaj; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.scribunto.*;
 import org.luaj.vm2.Varargs;
 import org.luaj.vm2.lib.VarArgFunction;
 public class Luaj_server_func_dbg extends VarArgFunction {
@@ -24,7 +23,7 @@ public class Luaj_server_func_dbg extends VarArgFunction {
 	public Luaj_server_func_dbg(Scrib_core v) {this.core = v;}	
 	public Varargs invoke(Varargs args) {
 		// init bfrs
-		byte dbg_separator = Byte_ascii.Tab; 
+		byte dbg_separator = AsciiByte.Tab;
 		Bry_bfr dbg_bfr = Bry_bfr_.New();
 		Bry_bfr html_bfr = Bry_bfr_.New();
 		dbg_bfr.Add(core.Frame_current().Frame_ttl()).Add_byte(dbg_separator);

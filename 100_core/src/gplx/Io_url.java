@@ -14,7 +14,16 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
-import gplx.core.strings.*; import gplx.core.ios.*; /*IoUrlInfo*/ import gplx.core.envs.*; import gplx.langs.htmls.*; import gplx.core.interfaces.*;
+import gplx.core.envs.Op_sys;
+import gplx.core.interfaces.ParseAble;
+import gplx.core.ios.IoUrlInfo;
+import gplx.core.strings.String_bldr;
+import gplx.core.strings.String_bldr_;
+import gplx.langs.htmls.Url_encoder_interface;
+import gplx.langs.htmls.Url_encoder_interface_same;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.CompareAble;
+import gplx.objects.lists.CompareAbleUtl;
 public class Io_url implements CompareAble, ParseAble, Gfo_invk {	//_20101005 URL:doc/Io_url.txt
 	public IoUrlInfo Info() {return info;} IoUrlInfo info;
 	public String Raw() {return raw;} final String raw;
@@ -67,7 +76,7 @@ public class Io_url implements CompareAble, ParseAble, Gfo_invk {	//_20101005 UR
 	public boolean EqNull()			{return this.Eq(Io_url_.Empty);}
 	Io_url GenSub(boolean isFil, String[] ary) {
 		String_bldr sb = String_bldr_.new_().Add(raw);
-		int len = Array_.Len(ary);
+		int len = ArrayUtl.Len(ary);
 		for (int i = 0; i < len; i++) {
 			sb.Add(ary[i]);
 			if (isFil && i == len - 1) break;	// do not add closing backslash if last term
@@ -77,7 +86,7 @@ public class Io_url implements CompareAble, ParseAble, Gfo_invk {	//_20101005 UR
 	}
 	public Object ParseAsObj(String raw) {return Io_url_.new_any_(raw);}
 	@Override public String toString()	{return raw;}
-	public int compareTo(Object obj)	{return CompareAble_.Compare_obj(raw, ((Io_url)obj).raw);}
+	public int compareTo(Object obj)	{return CompareAbleUtl.Compare_obj(raw, ((Io_url)obj).raw);}
 	@Override public boolean equals(Object obj) {return String_.Eq(raw, Io_url_.as_(obj).raw);}
 	@Override public int hashCode() {return raw.hashCode();}
 	@gplx.Internal protected Io_url(String raw, IoUrlInfo info) {this.raw = raw; this.info = info;}

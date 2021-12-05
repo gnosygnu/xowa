@@ -13,13 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
+package gplx.core.ios; import gplx.*;
 import gplx.core.type_xtns.*;
+import gplx.objects.lists.CompareAbleUtl;
 public class IoItmClassXtn extends ClassXtn_base implements ClassXtn {
 	public String Key() {return Key_const;}						public static final String Key_const = "ioItemType";
 	@Override public Class<?> UnderClass()					{return int.class;}
 	public Object DefaultValue()								{return IoItmDir.Type_Dir;}
-	public boolean Eq(Object lhs, Object rhs) {return ((IoItm_base)lhs).compareTo(rhs) == CompareAble_.Same;}
+	public boolean Eq(Object lhs, Object rhs) {return ((IoItm_base)lhs).compareTo(rhs) == CompareAbleUtl.Same;}
 	@Override public Object ParseOrNull(String raw) {
 		String rawLower = String_.Lower(raw);
 		if		(String_.Eq(rawLower, "dir")) return IoItmDir.Type_Dir;

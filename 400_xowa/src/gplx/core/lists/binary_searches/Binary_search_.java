@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.lists.binary_searches; import gplx.*; import gplx.core.*; import gplx.core.lists.*;
+package gplx.core.lists.binary_searches; import gplx.*;
+import gplx.objects.lists.CompareAble;
+import gplx.objects.lists.CompareAbleUtl;
 public class Binary_search_ {
 	public static int Search(CompareAble[] ary	, CompareAble val) {return Search(new Binary_search_grp__ary(ary)	, new Binary_search_cmp__comparable(val));}
 	public static int Search(Object[] ary		, Binary_comparer comparer, Object val) {return Search(new Binary_search_grp__ary(ary), new Binary_search_cmp__comparer(comparer, val));}
@@ -33,18 +35,18 @@ public class Binary_search_ {
 			Object hi = pos + 1 == grp_len ? null : grp.Get_at(pos + 1);
 			int adj = 0;
 			int lo_comp = cmp.Compare(lo);
-			if (lo_comp == CompareAble_.Less)		// val is < lo; search slots below
+			if (lo_comp == CompareAbleUtl.Less)		// val is < lo; search slots below
 				adj = -1;
 			else {
 				if (hi == null) return pos;			// hi is null when at last slot in ary
 				int hi_comp = cmp.Compare(hi);
 				switch (hi_comp) {
-					case CompareAble_.More:			// val is > hi; search slots above 
+					case CompareAbleUtl.More:			// val is > hi; search slots above
 						adj = 1;
 						break;
-					case CompareAble_.Same:			// val is > hi; search slots above 
+					case CompareAbleUtl.Same:			// val is > hi; search slots above
 						return pos + 1;
-					case CompareAble_.Less:			// val is > lo and < hi; return slot 
+					case CompareAbleUtl.Less:			// val is > lo and < hi; return slot
 						return pos;
 				}
 			}

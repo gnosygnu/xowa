@@ -13,10 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.hwtrs; import gplx.*;
-import gplx.xowa.xtns.wbases.*;
-import gplx.core.primitives.*;
-import gplx.xowa.xtns.wbases.core.*; import gplx.xowa.xtns.wbases.claims.*; import gplx.xowa.xtns.wbases.claims.itms.*;
+package gplx.xowa.xtns.wbases.hwtrs;
+import gplx.Bry_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.Hash_adp_bry;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.String_;
+import gplx.Yn;
+import gplx.core.primitives.Int_obj_ref;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.xtns.wbases.Wdata_doc;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp;
+import gplx.xowa.xtns.wbases.claims.Wbase_claim_grp_list;
+import gplx.xowa.xtns.wbases.claims.Wbase_references_grp;
+import gplx.xowa.xtns.wbases.claims.itms.Wbase_claim_base;
+import gplx.xowa.xtns.wbases.core.Wdata_lang_sorter;
+import gplx.xowa.xtns.wbases.core.Wdata_langtext_itm;
+import gplx.xowa.xtns.wbases.core.Wdata_sitelink_itm;
 public class Wdata_lbl_mgr {
 	private Hash_adp_bry ttl_hash = Hash_adp_bry.ci_a7();
 	private Hash_adp qid_hash = Hash_adp_.New(), pid_hash = Hash_adp_.New(); private Int_obj_ref int_hash_key = Int_obj_ref.New_neg1();
@@ -36,8 +54,8 @@ public class Wdata_lbl_mgr {
 		Wdata_lbl_itm rv_itm = Get_itm__ttl(ttl);
 		return rv_itm == null ? or : rv_itm.Text();
 	}
-	public byte[] Get_text__qid(int id) {return Get_text(Bool_.N, id);}
-	public byte[] Get_text__pid(int id) {return Get_text(Bool_.Y, id);}
+	public byte[] Get_text__qid(int id) {return Get_text(BoolUtl.N, id);}
+	public byte[] Get_text__pid(int id) {return Get_text(BoolUtl.Y, id);}
 	private byte[] Get_text(boolean is_pid, int id) {
 		Hash_adp hash = is_pid ? pid_hash : qid_hash;
 		Wdata_lbl_itm rv_itm = (Wdata_lbl_itm)hash.GetByOrNull(int_hash_key.Val_(id));
@@ -45,18 +63,18 @@ public class Wdata_lbl_mgr {
 		Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown entity; is_pid=~{0} id=~{1}", Yn.To_str(is_pid), id);	// NOTE: should not happen
 		return Wdata_lbl_itm.Make_ttl(is_pid, id);	// missing; return ttl; EX: "Property:P1", "Q1";
 	}
-	public void Queue_if_missing__ttl(byte[] ttl) {Queue_if_missing__ttl(ttl, Bool_.N);}
+	public void Queue_if_missing__ttl(byte[] ttl) {Queue_if_missing__ttl(ttl, BoolUtl.N);}
 	public void Queue_if_missing__ttl(byte[] ttl, boolean get_en) {
 		if (ttl == null) {Gfo_usr_dlg_.Instance.Warn_many("", "", "wdata.hwtr:unknown href; href=~{0}", String_.new_u8(ttl)); return;}
 		boolean has = ttl_hash.Has(ttl);
-		if (!has) Queue_add(qid_hash, Bool_.N, Qid_int(ttl), get_en);
+		if (!has) Queue_add(qid_hash, BoolUtl.N, Qid_int(ttl), get_en);
 	}
-	public void Queue_if_missing__qid(int id) {Queue_if_missing(Bool_.N, id);}
-	public void Queue_if_missing__pid(int id) {Queue_if_missing(Bool_.Y, id);}
+	public void Queue_if_missing__qid(int id) {Queue_if_missing(BoolUtl.N, id);}
+	public void Queue_if_missing__pid(int id) {Queue_if_missing(BoolUtl.Y, id);}
 	private void Queue_if_missing(boolean is_pid, int id) {
 		Hash_adp hash = is_pid ? pid_hash : qid_hash;
 		boolean has = hash.Has(int_hash_key.Val_(id));
-		if (!has) Queue_add(hash, is_pid, id, Bool_.N);
+		if (!has) Queue_add(hash, is_pid, id, BoolUtl.N);
 	}
 	private void Queue_add(Hash_adp hash, boolean is_pid, int id, boolean get_en) {
 		Wdata_lbl_itm itm = new Wdata_lbl_itm(is_pid, id, get_en);
@@ -125,14 +143,14 @@ public class Wdata_lbl_mgr {
 			int badges_len = badges.length;
 			for (int j = 0; j < badges_len; ++j) {
 				byte[] badge = badges[j];
-				this.Queue_if_missing__ttl(badge, Bool_.Y);	// badges has qid; EX: ["Q1", "Q2"]
+				this.Queue_if_missing__ttl(badge, BoolUtl.Y);	// badges has qid; EX: ["Q1", "Q2"]
 			}
 		}
 		wkr.Resolve(this, sorter);
 	}
 	public static int Qid_int(byte[] qid) {
 		byte qid_0 = qid[0];
-		if (qid_0 != Byte_ascii.Ltr_Q && qid_0 != Byte_ascii.Ltr_q) return -1;
+		if (qid_0 != AsciiByte.Ltr_Q && qid_0 != AsciiByte.Ltr_q) return -1;
 		return Bry_.To_int_or(qid, 1, qid.length, -1);
 	}
 }

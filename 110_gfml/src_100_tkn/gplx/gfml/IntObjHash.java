@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.gfml; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 class IntObjHash_base {
 	public int Count() {return count;} int count;
 	public boolean Has(int key) {return Get_by(key) != null;}
@@ -55,7 +56,7 @@ class IntObjHash_base {
 	void ExpandRootAry(int key) {
 		int newRootAryBound = (key / subAryLength) + 1;
 		Object[] newRootAry = new Object[newRootAryBound];
-		Array_.Copy(rootAry, newRootAry);
+		ArrayUtl.Copy(rootAry, newRootAry);
 		rootAry = newRootAry;
 		maxKey = (rootAry.length * subAryLength) - 1;
 	}

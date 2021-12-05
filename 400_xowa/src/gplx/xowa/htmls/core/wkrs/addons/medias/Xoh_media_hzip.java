@@ -13,9 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.addons.medias; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*; import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.addons.*;
-import gplx.core.brys.*; import gplx.core.encoders.*; import gplx.core.threads.poolables.*;
-import gplx.xowa.htmls.core.hzips.*; import gplx.xowa.htmls.core.wkrs.imgs.*;
+package gplx.xowa.htmls.core.wkrs.addons.medias;
+import gplx.Bry_bfr;
+import gplx.core.brys.Bry_rdr;
+import gplx.core.brys.Int_flag_bldr;
+import gplx.core.encoders.Gfo_hzip_int_;
+import gplx.core.threads.poolables.Gfo_poolable_itm;
+import gplx.core.threads.poolables.Gfo_poolable_mgr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.htmls.Xoh_page;
+import gplx.xowa.htmls.core.hzips.Xoh_data_itm;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_dict_;
+import gplx.xowa.htmls.core.hzips.Xoh_hzip_wkr;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_ctx;
+import gplx.xowa.htmls.core.wkrs.Xoh_hdoc_wkr;
+import gplx.xowa.htmls.core.wkrs.Xoh_hzip_bfr;
+import gplx.xowa.htmls.core.wkrs.imgs.Xoh_img_hzip;
 public class Xoh_media_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 	private final Xoh_img_hzip img_hzip = new Xoh_img_hzip();
 	private final Xoh_media_wtr wtr = new Xoh_media_wtr();
@@ -42,7 +55,7 @@ public class Xoh_media_hzip implements Xoh_hzip_wkr, Gfo_poolable_itm {
 			bfr.Add_hzip_mid(src, data.Lnki_ttl_bgn(), data.Lnki_ttl_end());
 		}
 		else {
-			img_hzip.Encode1(bfr, hdoc_wkr, hctx, hpg, Bool_.N, src, data.Img_data());
+			img_hzip.Encode1(bfr, hdoc_wkr, hctx, hpg, BoolUtl.N, src, data.Img_data());
 		}
 		return this;
 	}

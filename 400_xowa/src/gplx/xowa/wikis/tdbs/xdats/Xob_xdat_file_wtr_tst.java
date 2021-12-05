@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.tdbs.xdats; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.tdbs.*;
+package gplx.xowa.wikis.tdbs.xdats; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import org.junit.*;
 public class Xob_xdat_file_wtr_tst {
 	@Test public void Write() {
@@ -40,7 +41,7 @@ public class Xob_xdat_file_wtr_tst {
 		Tfds.Eq(expd, String_.new_u8(wtr.Bfr().Bfr(), 0, wtr.Bfr().Len()));
 	}
 	private void tst_Add_idx(Xob_xdat_file_wtr wtr, int expd) {
-		wtr.Add_idx(Byte_ascii.Nl);
+		wtr.Add_idx(AsciiByte.Nl);
 		Tfds.Eq(expd, wtr.Idx()[wtr.Idx_pos() - 1]);
 	}
 	private void tst_Flush(Xob_xdat_file_wtr wtr, String expd) {

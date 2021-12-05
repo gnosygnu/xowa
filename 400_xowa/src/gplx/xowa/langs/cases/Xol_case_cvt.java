@@ -15,17 +15,17 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.langs.cases;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
 
 public class Xol_case_cvt {
-	public static byte[] Upper_1st(byte[] src, int pos, int src_len, boolean reuse) {return Up_low_1st(src, pos, src_len, Bool_.Y, reuse);}
-	public static byte[] Upper_1st(byte[] src, int pos, int src_len) {return Up_low_1st(src, pos, src_len, Bool_.Y);}
-	public static byte[] Lower_1st(byte[] src, int pos, int src_len) {return Up_low_1st(src, pos, src_len, Bool_.N);}
+	public static byte[] Upper_1st(byte[] src, int pos, int src_len, boolean reuse) {return Up_low_1st(src, pos, src_len, BoolUtl.Y, reuse);}
+	public static byte[] Upper_1st(byte[] src, int pos, int src_len) {return Up_low_1st(src, pos, src_len, BoolUtl.Y);}
+	public static byte[] Lower_1st(byte[] src, int pos, int src_len) {return Up_low_1st(src, pos, src_len, BoolUtl.N);}
 	public static byte[] Up_low_1st(byte[] src, int pos, int src_len, boolean upper) {
-		return Up_low_1st(src, pos, src_len, upper, Bool_.Y);
+		return Up_low_1st(src, pos, src_len, upper, BoolUtl.Y);
 	}
 	public static byte[] Up_low_1st(byte[] src, int pos, int src_len, boolean upper, boolean reuse) {
 		if (src_len == 0) return Bry_.Empty;
@@ -44,8 +44,8 @@ public class Xol_case_cvt {
 			return Upper_Lower_1st(copy, 0, copyLen, b_len, upper);
 		}
 	}
-	public static byte[] Upper_1st(byte[] src, int pos, int src_len, int b_len) {return Upper_Lower_1st(src, pos, src_len, b_len, Bool_.Y);}
-	public static byte[] Lower_1st(byte[] src, int pos, int src_len, int b_len) {return Upper_Lower_1st(src, pos, src_len, b_len, Bool_.N);}
+	public static byte[] Upper_1st(byte[] src, int pos, int src_len, int b_len) {return Upper_Lower_1st(src, pos, src_len, b_len, BoolUtl.Y);}
+	public static byte[] Lower_1st(byte[] src, int pos, int src_len, int b_len) {return Upper_Lower_1st(src, pos, src_len, b_len, BoolUtl.N);}
 	private static byte[] Upper_Lower_1st(byte[] src, int pos, int src_len, int b_len, boolean upper) {
 		byte[] ucase;
 		if (upper)
@@ -68,8 +68,8 @@ public class Xol_case_cvt {
 		}
 	}
 
-	public static byte[] Uppercase(byte[] src, int src_len) {return Case_cvt(src, src_len, Bool_.Y);}
-	public static byte[] Lowercase(byte[] src, int src_len) {return Case_cvt(src, src_len, Bool_.N);}
+	public static byte[] Uppercase(byte[] src, int src_len) {return Case_cvt(src, src_len, BoolUtl.Y);}
+	public static byte[] Lowercase(byte[] src, int src_len) {return Case_cvt(src, src_len, BoolUtl.N);}
 	public static byte[] Case_cvt(byte[] src, int src_len, boolean upper) {
 		Bry_bfr tmp_bfr = null;
 		int pos = 0;

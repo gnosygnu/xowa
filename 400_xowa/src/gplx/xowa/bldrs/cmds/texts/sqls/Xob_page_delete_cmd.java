@@ -13,9 +13,25 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.sqls; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*;
-import gplx.dbs.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.bldrs.wkrs.*;
+package gplx.xowa.bldrs.cmds.texts.sqls;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Gfo_usr_dlg_;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.dbs.Db_attach_itm;
+import gplx.dbs.Db_attach_mgr;
+import gplx.dbs.Db_conn;
+import gplx.dbs.DbmetaFldItm;
+import gplx.dbs.Dbmeta_idx_itm;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.bldrs.Xob_bldr;
+import gplx.xowa.bldrs.Xob_cmd_keys;
+import gplx.xowa.bldrs.wkrs.Xob_cmd_base;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_;
 public class Xob_page_delete_cmd extends Xob_cmd_base {
 	private final Xow_wiki wiki;
 	public Xob_page_delete_cmd(Xob_bldr bldr, Xow_wiki wiki) {this.wiki = wiki;}
@@ -56,17 +72,17 @@ public class Xob_page_delete_cmd extends Xob_cmd_base {
 			Xow_db_file[] db_file_ary = core_db.Tbl__db().Select_all(wiki.Data__core_mgr().Props(), wiki.Fsys_mgr().Root_dir());
 			int len = db_file_ary.length;
 			for (int i = 0; i < len; ++i) {
-				boolean db_file_is_text = Bool_.N, db_file_is_cat = Bool_.N, db_file_is_search = Bool_.N;
+				boolean db_file_is_text = BoolUtl.N, db_file_is_cat = BoolUtl.N, db_file_is_search = BoolUtl.N;
 				Xow_db_file db_file = db_file_ary[i];
 				switch (db_file.Tid()) {
 					case Xow_db_file_.Tid__core: case Xow_db_file_.Tid__wiki_solo: case Xow_db_file_.Tid__text_solo:
 						// if mode is lot, then "core" db does not have cat, search; skip; DATE:2016-01-31
 						if (wiki.Data__core_mgr().Props().Layout_text().Tid_is_lot()) continue;
-						db_file_is_cat = db_file_is_search = Bool_.Y;	// do not set db_file_is_text to true; DATE:2016-10-18
+						db_file_is_cat = db_file_is_search = BoolUtl.Y;	// do not set db_file_is_text to true; DATE:2016-10-18
 						break;
-					case Xow_db_file_.Tid__text:		db_file_is_text = Bool_.Y; break;
-					case Xow_db_file_.Tid__cat:			db_file_is_cat = Bool_.Y; break;
-					case Xow_db_file_.Tid__search_link:	db_file_is_search = Bool_.Y; break;		// changed from search_data to search_link; DATE:2016-10-19
+					case Xow_db_file_.Tid__text:		db_file_is_text = BoolUtl.Y; break;
+					case Xow_db_file_.Tid__cat:			db_file_is_cat = BoolUtl.Y; break;
+					case Xow_db_file_.Tid__search_link:	db_file_is_search = BoolUtl.Y; break;		// changed from search_data to search_link; DATE:2016-10-19
 				}
 				db_file_cur = db_file.Url().Raw();
 				int db_id = db_file.Id();

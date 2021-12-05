@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.fsdb.meta; import gplx.*; import gplx.fsdb.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*;
+package gplx.fsdb.meta;
+import gplx.Err_;
+import gplx.Hash_adp;
+import gplx.Hash_adp_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.cfgs.Db_cfg_hash;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.fsdb.Fsdb_db_mgr;
+import gplx.objects.primitives.BoolUtl;
 public class Fsm_cfg_mgr {		
 	private final Db_cfg_tbl tbl; private final Hash_adp grp_hash = Hash_adp_.New();
 	public Fsm_cfg_mgr(Fsdb_db_mgr db_conn_mgr, Db_conn conn) {
@@ -35,10 +42,10 @@ public class Fsm_cfg_mgr {
 	public void Patch_next_id_exec(int last_id) {
 		if (last_id >= next_id)
 			next_id = last_id + 1;
-		tbl.Insert_yn(Grp_core, Key_patch__next_id, Bool_.Y);
+		tbl.Insert_yn(Grp_core, Key_patch__next_id, BoolUtl.Y);
 	}
 	public boolean Patch__page_gt_1() {return patch__page_gt_1;} private boolean patch__page_gt_1 = false;
-	public void Patch__save(String cfg_key) {tbl.Insert_yn(Fsm_cfg_mgr.Grp_core, cfg_key, Bool_.Y);}
+	public void Patch__save(String cfg_key) {tbl.Insert_yn(Fsm_cfg_mgr.Grp_core, cfg_key, BoolUtl.Y);}
 	public Db_cfg_hash Grps_get_or_load(String grp_key) {
 		Db_cfg_hash rv = (Db_cfg_hash)grp_hash.GetByOrNull(grp_key);
 		if (rv == null) {

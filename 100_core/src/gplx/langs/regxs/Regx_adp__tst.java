@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.regxs; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
 import org.junit.*; import gplx.core.tests.*;
 public class Regx_adp__tst implements TfdsEqListItmStr {
 	@Test public void Match() {
@@ -54,7 +55,7 @@ public class Regx_adp__tst implements TfdsEqListItmStr {
 		tst_Groups("-123.456", "^-?(([0-9]+)(?:\\.([0-9]+))?)", "-123.456", "123.456", "123", "456"); // NOTE: -123.456 captured even though it's not part of a group; DATE:2019-12-28
 	}
 	Regx_match[] matches_(int... bgnAry) {
-		int aryLen = Array_.Len(bgnAry);
+		int aryLen = ArrayUtl.Len(bgnAry);
 		Regx_match[] rv = new Regx_match[aryLen];
 		for (int i = 0; i < aryLen; i++)
 			rv[i] = match_(bgnAry[i]);
@@ -63,9 +64,16 @@ public class Regx_adp__tst implements TfdsEqListItmStr {
 	Regx_match match_(int bgn) {return match_(bgn, Int_.Min_value);}
 	Regx_match match_(int bgn, int len) {return new Regx_match(true, bgn, bgn + len, Regx_group.Ary_empty);}
 	void tst_Matches(String find, String input, Regx_match... expd) {
-		List_adp expdList = Array_.To_list(expd);			
+		List_adp expdList = ArrayUtlToList(expd);
 		List_adp actlList = Regx_adp_.Find_all(input, find);
 		Tfds.Eq_list(expdList, actlList, this);
+	}
+	private static List_adp ArrayUtlToList(Object ary) {
+		int aryLen = ArrayUtl.Len(ary);
+		List_adp rv = List_adp_.New();
+		for (int i = 0; i < aryLen; i++)
+			rv.Add(ArrayUtl.GetAt(ary, i));
+		return rv;
 	}
 	void tst_Groups(String text, String regx, String... expd) {
 		Regx_adp regx_mgr = Regx_adp_.new_(regx);

@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.metas.parsers; import gplx.*; import gplx.dbs.*;
 import gplx.core.brys.*; import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 abstract class Dbmeta_fld_wkr__base {
 	private byte[] hook;
 	private final Btrie_slim_mgr words_trie = Btrie_slim_mgr.ci_a7();
@@ -127,9 +128,9 @@ class Dbmeta_fld_wkr__default extends Dbmeta_fld_wkr__base {
 			}
 			byte b = src[pos]; ++pos;
 			switch (b) {
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
-				case Byte_ascii.Paren_end:
-				case Byte_ascii.Comma:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
+				case AsciiByte.ParenEnd:
+				case AsciiByte.Comma:
 					end = pos - 1;
 					loop = false;
 					break;

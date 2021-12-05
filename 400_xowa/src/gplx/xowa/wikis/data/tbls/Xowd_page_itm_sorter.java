@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data.tbls; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*; import gplx.xowa.wikis.data.*;
-import gplx.core.lists.*; /*ComparerAble*/ import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.wikis.data.tbls; import gplx.*;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
 public class Xowd_page_itm_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xowd_page_itm lhs = (Xowd_page_itm)lhsObj, rhs = (Xowd_page_itm)rhsObj;
@@ -24,7 +25,7 @@ public class Xowd_page_itm_sorter implements ComparerAble {
 		switch (compareType) {
 			case Tid_ns_ttl:	{
 				int rv = Int_.Compare(lhs.Ns_id(), rhs.Ns_id());
-				return rv == CompareAble_.Same ? Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db()) : rv;
+				return rv == CompareAbleUtl.Same ? Bry_.Compare(lhs.Ttl_page_db(), rhs.Ttl_page_db()) : rv;
 			}
 			case Tid_itm_len:	return Int_.Compare(lhs.Text_len(), rhs.Text_len());
 			case Tid_id:		return Int_.Compare(lhs.Id(), rhs.Id());
@@ -32,9 +33,9 @@ public class Xowd_page_itm_sorter implements ComparerAble {
 			case Tid_ctg_tid_sortkey:
 				gplx.xowa.addons.wikis.ctgs.Xoctg_page_xtn lhs_xtn = (gplx.xowa.addons.wikis.ctgs.Xoctg_page_xtn)lhs.Xtn();
 				gplx.xowa.addons.wikis.ctgs.Xoctg_page_xtn rhs_xtn = (gplx.xowa.addons.wikis.ctgs.Xoctg_page_xtn)rhs.Xtn();
-				if (lhs_xtn == null || rhs_xtn == null) return CompareAble_.Same;
+				if (lhs_xtn == null || rhs_xtn == null) return CompareAbleUtl.Same;
 				int tid_comparable = Byte_.Compare(lhs_xtn.Tid(), rhs_xtn.Tid());
-				if (tid_comparable != CompareAble_.Same) return tid_comparable;
+				if (tid_comparable != CompareAbleUtl.Same) return tid_comparable;
 				return Bry_.Compare(lhs_xtn.Sortkey(), rhs_xtn.Sortkey());
 			default:			throw Err_.new_unhandled(compareType);
 		}

@@ -13,9 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.wbases.dbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.wbases.*;
-import org.junit.*; import gplx.dbs.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.xtns.wbases.dbs;
+import gplx.Bry_;
+import gplx.Io_mgr;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import org.junit.Before;
+import org.junit.Test;
 public class Wbase_qid_tbl_tst {
 	private final Xowd_wbase_qid_tbl_fxt fxt = new Xowd_wbase_qid_tbl_fxt();
 	@Before public void init() {fxt.Clear();}
@@ -31,7 +40,7 @@ class Xowd_wbase_qid_tbl_fxt {
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();
 		Db_conn conn = Db_conn_bldr.Instance.New(Io_url_.mem_fil_("mem/db/wbase.xowa"));
-		this.qid_tbl = Wbase_qid_tbl.New_make(conn, Bool_.Y);	// simulate v2.4.2 with bad "spaces"
+		this.qid_tbl = Wbase_qid_tbl.New_make(conn, BoolUtl.Y);	// simulate v2.4.2 with bad "spaces"
 		qid_tbl.Create_tbl();
 	}
 	public void Exec_insert(String src_wiki, int src_ns, String src_ttl, String trg_ttl) {

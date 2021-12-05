@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.imports;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Gfo_usr_dlg;
 import gplx.Int_ary_;
 import gplx.Ordered_hash;
@@ -65,7 +65,7 @@ public class Xob_wdata_db_cmd extends Xob_dump_mgr_base implements Xob_cmd {
 	private final Json_parser json_parser = new Json_parser();
 	public Xob_wdata_db_cmd(Xob_bldr bldr, Xowe_wiki wiki) {this.Cmd_ctor(bldr, wiki);}
 	@Override public String Cmd_key() {return Xob_cmd_keys.Key_wbase_db;}
-	@Override public byte Init_redirect() {return Bool_.N_byte;}	// json will never be found in a redirect
+	@Override public byte Init_redirect() {return BoolUtl.NByte;}	// json will never be found in a redirect
 	@Override public int[] Init_ns_ary() {return Int_ary_.New(Xow_ns_.Tid__main, Wdata_wiki_mgr.Ns_property);}
 	@Override protected void Init_reset(Db_conn conn) {
 		Db_cfg_tbl cfg_tbl = gplx.xowa.wikis.data.Xowd_cfg_tbl_.New(conn);
@@ -447,10 +447,10 @@ class Xob_wdata_db_visitor implements Wbase_claim_visitor {
 	public void Init(byte[] lang_key) {this.lang_key = lang_key;}
 	public byte[] Rv() {return rv;} private byte[] rv;
 	public void Visit_str(Wbase_claim_string itm)						{rv = itm.Val_bry();}
-	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm)	{rv = Bry_.Add_w_dlm(Byte_ascii.Pipe, itm.Lang(), itm.Text());}
+	public void Visit_monolingualtext(Wbase_claim_monolingualtext itm)	{rv = Bry_.Add_w_dlm(AsciiByte.Pipe, itm.Lang(), itm.Text());}
 	public void Visit_quantity(Wbase_claim_quantity itm)				{rv = itm.Amount();}
 	public void Visit_time(Wbase_claim_time itm)						{rv = itm.Time();}
-	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm)	{rv = Bry_.Add_w_dlm(Byte_ascii.Comma, itm.Lat(), itm.Lng());}
+	public void Visit_globecoordinate(Wbase_claim_globecoordinate itm)	{rv = Bry_.Add_w_dlm(AsciiByte.Comma, itm.Lat(), itm.Lng());}
 	public void Visit_system(Wbase_claim_value itm)                     {rv = Bry_.Empty;}
 	public void Visit_entity(Wbase_claim_entity itm) {
 		Wdata_doc entity_doc = wdata_mgr.Doc_mgr.Get_by_xid_or_null(itm.Page_ttl_db());

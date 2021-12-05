@@ -15,11 +15,11 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.langs.jsons;
 
-import gplx.Array_;
-import gplx.Bool_;
+import gplx.objects.arrays.ArrayUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
-import gplx.Byte_ascii;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 import gplx.DateAdp;
 import gplx.DateAdp_;
 import gplx.Decimal_adp_;
@@ -102,7 +102,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	public boolean Get_as_bool_or(String key, boolean or) {return Get_as_bool_or(Bry_.new_u8(key), or);}
 	public boolean Get_as_bool_or(byte[] key, boolean or) {
 		byte[] rv = Get_as_bry_or(key, null);
-		return rv == null ? or : Bry_.Eq(rv, Bool_.True_bry);
+		return rv == null ? or : Bry_.Eq(rv, BoolUtl.TrueBry);
 	}
 	public DateAdp Get_as_date_by_utc(String key) {
 		byte[] rv = Get_as_bry_or(Bry_.new_u8(key), null); if (rv == null) throw Err_.new_("json", "key missing", "key", key);
@@ -178,7 +178,7 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 		if (new_len > subs_max) {	// ary too small >>> expand
 			subs_max = new_len * 2;
 			Json_itm[] new_subs = new Json_itm[subs_max];
-			Array_.Copy_to(subs, 0, new_subs, 0, subs_len);
+			ArrayUtl.CopyTo(subs, 0, new_subs, 0, subs_len);
 			subs = new_subs;
 		}
 		subs[subs_len] = (Json_itm)itm;
@@ -188,16 +188,16 @@ public class Json_nde extends Json_itm_base implements Json_grp {
 	@Override public void Print_as_json(Bry_bfr bfr, int depth) {
 		if (bfr.Len() != 0) bfr.Add_byte_nl();
 		Json_grp_.Print_indent(bfr, depth);
-		bfr.Add_byte(Byte_ascii.Curly_bgn).Add_byte(Byte_ascii.Space);
+		bfr.Add_byte(AsciiByte.CurlyBgn).Add_byte(AsciiByte.Space);
 		for (int i = 0; i < subs_len; i++) {
 			if (i != 0) {
 				Json_grp_.Print_nl(bfr); Json_grp_.Print_indent(bfr, depth);
-				bfr.Add_byte(Byte_ascii.Comma).Add_byte(Byte_ascii.Space);
+				bfr.Add_byte(AsciiByte.Comma).Add_byte(AsciiByte.Space);
 			}
 			subs[i].Print_as_json(bfr, depth + 1);
 		}
 		Json_grp_.Print_nl(bfr); Json_grp_.Print_indent(bfr, depth);
-		bfr.Add_byte(Byte_ascii.Curly_end).Add_byte_nl();
+		bfr.Add_byte(AsciiByte.CurlyEnd).Add_byte_nl();
 	}
 	private Hash_adp_bry subs_hash_init() {
 		Hash_adp_bry rv = Hash_adp_bry.cs();

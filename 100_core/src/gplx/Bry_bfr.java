@@ -15,7 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 import gplx.core.primitives.*; import gplx.core.brys.*; import gplx.core.encoders.*;
-import gplx.langs.htmls.entitys.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Bry_bfr {
 	private Bry_bfr_mkr_mgr mkr_mgr; private int reset;
 	public byte[] Bfr() {return bfr;} private byte[] bfr;
@@ -74,13 +75,13 @@ public class Bry_bfr {
 		return this;
 	}
 	public Bry_bfr ClearAndReset() {bfr_len = 0; if (reset > 0) Reset_if_gt(reset); return this;}
-	public byte Get_at_last_or_nil_if_empty() {return bfr_len == 0 ? Byte_ascii.Null : bfr[bfr_len - 1];}
+	public byte Get_at_last_or_nil_if_empty() {return bfr_len == 0 ? AsciiByte.Null : bfr[bfr_len - 1];}
 	public Bry_bfr Add_safe(byte[] val) {return val == null ? this : Add(val);}
 	public Bry_bfr Add(byte[] val) {
 		int val_len = val.length;
 		if (bfr_len + val_len > bfr_max) Resize((bfr_max + val_len) * 2);
 		Bry_.Copy_to(val, 0, val_len, bfr, bfr_len);
-		// Array_.Copy_to(val, 0, bfr, bfr_len, val_len);
+		// ArrayUtl.Copy_to(val, 0, bfr, bfr_len, val_len);
 		bfr_len += val_len;
 		return this;
 	}
@@ -89,7 +90,7 @@ public class Bry_bfr {
 		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8__by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_to(val, bgn, end, bfr, bfr_len);
-		// Array_.Copy_to(val, bgn, bfr, bfr_len, len);
+		// ArrayUtl.Copy_to(val, bgn, bfr, bfr_len, len);
 		bfr_len += len;
 		return this;
 	}
@@ -98,7 +99,7 @@ public class Bry_bfr {
 		if (len < 0) throw Err_.new_wo_type("negative len", "bgn", bgn, "end", end, "excerpt", String_.new_u8__by_len(val, bgn, bgn + 16));	// NOTE: check for invalid end < bgn, else difficult to debug errors later; DATE:2014-05-11
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_to_reversed(val, bgn, end, bfr, bfr_len);
-		// Array_.Copy_to(val, bgn, bfr, bfr_len, len);
+		// ArrayUtl.Copy_to(val, bgn, bfr, bfr_len, len);
 		bfr_len += len;
 		return this;
 	}
@@ -119,7 +120,7 @@ public class Bry_bfr {
 		int len = src.bfr_len;
 		if (bfr_len + len > bfr_max) Resize((bfr_max + len) * 2);
 		Bry_.Copy_to(src.bfr, 0, len, bfr, bfr_len);
-		// Array_.Copy_to(src.bfr, 0, bfr, bfr_len, len);
+		// ArrayUtl.Copy_to(src.bfr, 0, bfr, bfr_len, len);
 		bfr_len += len;
 		return this;
 	}
@@ -143,7 +144,7 @@ public class Bry_bfr {
 		if (trim_bgn) {
 			for (int i = 0; i < src_len; i++) {
 				byte b = src_bry[i];
-				if (trim_ary[b & 0xFF] == Byte_ascii.Null) {
+				if (trim_ary[b & 0xFF] == AsciiByte.Null) {
 					src_bgn = i;
 					i = src_len;
 					all_ws = false;
@@ -154,7 +155,7 @@ public class Bry_bfr {
 		if (trim_end) {
 			for (int i = src_len - 1; i > -1; i--) {
 				byte b = src_bry[i];
-				if (trim_ary[b & 0xFF] == Byte_ascii.Null) {
+				if (trim_ary[b & 0xFF] == AsciiByte.Null) {
 					src_end = i + 1;
 					i = -1;
 					all_ws = false;
@@ -164,24 +165,24 @@ public class Bry_bfr {
 		}
 		src_len = src_end - src_bgn;
 		Bry_.Copy_to(src.bfr, src_bgn, src_end, bfr, bfr_len);
-		// Array_.Copy_to(src.bfr, src_bgn, bfr, bfr_len, src_len);
+		// ArrayUtl.Copy_to(src.bfr, src_bgn, bfr, bfr_len, src_len);
 		bfr_len += src_len;
 		src.Clear();
 		return this;
 	}
-	public Bry_bfr Add_byte_as_a7(byte v)	{return Add_byte((byte)(v + Byte_ascii.Num_0));}
-	public Bry_bfr Add_byte_eq()			{return Add_byte(Byte_ascii.Eq);}
-	public Bry_bfr Add_byte_pipe()			{return Add_byte(Byte_ascii.Pipe);}
-	public Bry_bfr Add_byte_comma()			{return Add_byte(Byte_ascii.Comma);}
-	public Bry_bfr Add_byte_semic()			{return Add_byte(Byte_ascii.Semic);}
-	public Bry_bfr Add_byte_apos()			{return Add_byte(Byte_ascii.Apos);}
-	public Bry_bfr Add_byte_slash()			{return Add_byte(Byte_ascii.Slash);}
-	public Bry_bfr Add_byte_backslash()		{return Add_byte(Byte_ascii.Backslash);}
-	public Bry_bfr Add_byte_quote()			{return Add_byte(Byte_ascii.Quote);}
-	public Bry_bfr Add_byte_space()			{return Add_byte(Byte_ascii.Space);}
-	public Bry_bfr Add_byte_nl()			{return Add_byte(Byte_ascii.Nl);}
-	public Bry_bfr Add_byte_dot()			{return Add_byte(Byte_ascii.Dot);}
-	public Bry_bfr Add_byte_colon()			{return Add_byte(Byte_ascii.Colon);}
+	public Bry_bfr Add_byte_as_a7(byte v)	{return Add_byte((byte)(v + AsciiByte.Num0));}
+	public Bry_bfr Add_byte_eq()			{return Add_byte(AsciiByte.Eq);}
+	public Bry_bfr Add_byte_pipe()			{return Add_byte(AsciiByte.Pipe);}
+	public Bry_bfr Add_byte_comma()			{return Add_byte(AsciiByte.Comma);}
+	public Bry_bfr Add_byte_semic()			{return Add_byte(AsciiByte.Semic);}
+	public Bry_bfr Add_byte_apos()			{return Add_byte(AsciiByte.Apos);}
+	public Bry_bfr Add_byte_slash()			{return Add_byte(AsciiByte.Slash);}
+	public Bry_bfr Add_byte_backslash()		{return Add_byte(AsciiByte.Backslash);}
+	public Bry_bfr Add_byte_quote()			{return Add_byte(AsciiByte.Quote);}
+	public Bry_bfr Add_byte_space()			{return Add_byte(AsciiByte.Space);}
+	public Bry_bfr Add_byte_nl()			{return Add_byte(AsciiByte.Nl);}
+	public Bry_bfr Add_byte_dot()			{return Add_byte(AsciiByte.Dot);}
+	public Bry_bfr Add_byte_colon()			{return Add_byte(AsciiByte.Colon);}
 	public Bry_bfr Add_byte(byte val) {
 		int new_pos = bfr_len + 1;
 		if (new_pos > bfr_max) Resize(bfr_len * 2);
@@ -209,7 +210,7 @@ public class Bry_bfr {
 		bfr_len += utf8_len;
 		return this;
 	}
-	public Bry_bfr Add_bool(boolean v) {return Add(v ? Bool_.True_bry : Bool_.False_bry);}
+	public Bry_bfr Add_bool(boolean v) {return Add(v ? BoolUtl.TrueBry : BoolUtl.FalseBry);}
 	public Bry_bfr Add_int_bool(boolean v) {return Add_int_fixed(v ? 1 : 0, 1);}
 	public Bry_bfr Add_int_variable(int val) {
 		if (val < 0) {
@@ -234,7 +235,7 @@ public class Bry_bfr {
 		int aryBgn = bfr_len, aryEnd = bfr_len + arySlots;
 		if (aryEnd > bfr_max) Resize((aryEnd) * 2);
 		if (val < 0) {
-			bfr[aryBgn++] = Byte_ascii.Dash;
+			bfr[aryBgn++] = AsciiByte.Dash;
 			val *= -1;		// make positive
 			valLog *= -1;	// valLog will be negative; make positive
 			arySlots -= 1;	// reduce slot by 1
@@ -257,7 +258,7 @@ public class Bry_bfr {
 		int aryBgn = bfr_len, aryEnd = bfr_len + arySlots;
 		if (aryEnd > bfr_max) Resize((aryEnd) * 2);
 		if (val < 0) {
-			bfr[aryBgn++] = Byte_ascii.Dash;
+			bfr[aryBgn++] = AsciiByte.Dash;
 			val *= -1;		// make positive
 			arySlots -= 1;	// reduce slot by 1
 		}
@@ -273,7 +274,7 @@ public class Bry_bfr {
 		bfr_len = aryEnd;
 		return this;
 	}
-	public Bry_bfr Add_bry_comma(byte[] v) {return Add_bry(Byte_ascii.Comma, v);}
+	public Bry_bfr Add_bry_comma(byte[] v) {return Add_bry(AsciiByte.Comma, v);}
 	public Bry_bfr Add_bry(byte dlm, byte[] v) {
 		if (v == null) return this;
 		int v_len = v.length;
@@ -318,11 +319,11 @@ public class Bry_bfr {
 		return Add_bry_escape_html(val, 0, val.length);
 	}
 	public Bry_bfr Add_bry_escape_html(byte[] val, int bgn, int end) {
-		Bry_.Escape_html(this, Bool_.N, val, bgn, end);
+		Bry_.Escape_html(this, BoolUtl.N, val, bgn, end);
 		return this;
 	}
 	public Bry_bfr Add_bry_escape_xml(byte[] val, int bgn, int end) {
-		Bry_.Escape_html(this, Bool_.Y, val, bgn, end);
+		Bry_.Escape_html(this, BoolUtl.Y, val, bgn, end);
 		return this;
 	}
 	public Bry_bfr Add_str_u8_w_nl(String s) {Add_str_u8(s); return Add_byte_nl();}
@@ -371,13 +372,13 @@ public class Bry_bfr {
 	public Bry_bfr Add_kv_dlm(boolean line, String key, Object val) {
 		this.Add_str_a7(key).Add_byte_colon().Add_byte_space();
 		this.Add(Bry_.new_u8(Object_.Xto_str_strict_or_null_mark(val)));
-		this.Add_byte(line ? Byte_ascii.Nl : Byte_ascii.Tab);
+		this.Add_byte(line ? AsciiByte.Nl : AsciiByte.Tab);
 		return this;
 	}
 	public Bry_bfr Add_float(float f) {Add_str_a7(Float_.To_str(f)); return this;}
 	public Bry_bfr Add_double(double v) {Add_str_a7(Double_.To_str(v)); return this;}
-	public Bry_bfr Add_dte(DateAdp val)			{return Add_dte_segs(Byte_ascii.Space	 , val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
-	public Bry_bfr Add_dte_under(DateAdp val)	{return Add_dte_segs(Byte_ascii.Underline, val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
+	public Bry_bfr Add_dte(DateAdp val)			{return Add_dte_segs(AsciiByte.Space	 , val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
+	public Bry_bfr Add_dte_under(DateAdp val)	{return Add_dte_segs(AsciiByte.Underline, val.Year(), val.Month(),val.Day(), val.Hour(), val.Minute(), val.Second(), val.Frac());}
 	private Bry_bfr Add_dte_segs(byte spr, int y, int M, int d, int H, int m, int s, int f) {		// yyyyMMdd HHmmss.fff
 		if (bfr_len + 19      > bfr_max) Resize((bfr_len + 19) * 2);
 		bfr[bfr_len +  0] = (byte)((y / 1000) + Bry_.Ascii_zero); y %= 1000;
@@ -395,7 +396,7 @@ public class Bry_bfr {
 		bfr[bfr_len + 12] = (byte)( m		  + Bry_.Ascii_zero);
 		bfr[bfr_len + 13] = (byte)((s /   10) + Bry_.Ascii_zero); s %=  10;
 		bfr[bfr_len + 14] = (byte)( s		  + Bry_.Ascii_zero);
-		bfr[bfr_len + 15] = Byte_ascii.Dot;
+		bfr[bfr_len + 15] = AsciiByte.Dot;
 		bfr[bfr_len + 16] = (byte)((f /  100) + Bry_.Ascii_zero); f %= 100;
 		bfr[bfr_len + 17] = (byte)((f /   10) + Bry_.Ascii_zero); f %=  10;
 		bfr[bfr_len + 18] = (byte)( f		  + Bry_.Ascii_zero);
@@ -408,22 +409,22 @@ public class Bry_bfr {
 		bfr[bfr_len +  1] = (byte)((y /  100) + Bry_.Ascii_zero); y %=  100;
 		bfr[bfr_len +  2] = (byte)((y /   10) + Bry_.Ascii_zero); y %=   10;
 		bfr[bfr_len +  3] = (byte)( y		  + Bry_.Ascii_zero);
-		bfr[bfr_len +  4] = Byte_ascii.Dash;
+		bfr[bfr_len +  4] = AsciiByte.Dash;
 		bfr[bfr_len +  5] = (byte)((M /   10) + Bry_.Ascii_zero); M %=  10;
 		bfr[bfr_len +  6] = (byte)( M		  + Bry_.Ascii_zero);
-		bfr[bfr_len +  7] = Byte_ascii.Dash;
+		bfr[bfr_len +  7] = AsciiByte.Dash;
 		bfr[bfr_len +  8] = (byte)((d /   10) + Bry_.Ascii_zero); d %=  10;
 		bfr[bfr_len +  9] = (byte)( d		  + Bry_.Ascii_zero);
-		bfr[bfr_len + 10] = Byte_ascii.Ltr_T;
+		bfr[bfr_len + 10] = AsciiByte.Ltr_T;
 		bfr[bfr_len + 11] = (byte)((H /   10) + Bry_.Ascii_zero); H %=  10;
 		bfr[bfr_len + 12] = (byte)( H		  + Bry_.Ascii_zero);
-		bfr[bfr_len + 13] = Byte_ascii.Colon;
+		bfr[bfr_len + 13] = AsciiByte.Colon;
 		bfr[bfr_len + 14] = (byte)((m /   10) + Bry_.Ascii_zero); m %=  10;
 		bfr[bfr_len + 15] = (byte)( m		  + Bry_.Ascii_zero);
-		bfr[bfr_len + 16] = Byte_ascii.Colon;
+		bfr[bfr_len + 16] = AsciiByte.Colon;
 		bfr[bfr_len + 17] = (byte)((s /   10) + Bry_.Ascii_zero); s %=  10;
 		bfr[bfr_len + 18] = (byte)( s		  + Bry_.Ascii_zero);
-		bfr[bfr_len + 19] = Byte_ascii.Ltr_Z;
+		bfr[bfr_len + 19] = AsciiByte.Ltr_Z;
 		bfr_len += 20;
 		return this;
 	}
@@ -434,22 +435,22 @@ public class Bry_bfr {
 		for (int i = bgn; i < end; i++) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Nl: 	bfr[bfr_len] = Byte_ascii.Backslash; bfr[bfr_len + 1] = Byte_ascii.Ltr_n;		bfr_len += 2; break;
-				case Byte_ascii.Tab: 		bfr[bfr_len] = Byte_ascii.Backslash; bfr[bfr_len + 1] = Byte_ascii.Ltr_t;		bfr_len += 2; break;
-				case Byte_ascii.Backslash: 	bfr[bfr_len] = Byte_ascii.Backslash; bfr[bfr_len + 1] = Byte_ascii.Backslash; bfr_len += 2; break;
+				case AsciiByte.Nl: 	bfr[bfr_len] = AsciiByte.Backslash; bfr[bfr_len + 1] = AsciiByte.Ltr_n;		bfr_len += 2; break;
+				case AsciiByte.Tab: 		bfr[bfr_len] = AsciiByte.Backslash; bfr[bfr_len + 1] = AsciiByte.Ltr_t;		bfr_len += 2; break;
+				case AsciiByte.Backslash: 	bfr[bfr_len] = AsciiByte.Backslash; bfr[bfr_len + 1] = AsciiByte.Backslash; bfr_len += 2; break;
 				default:					bfr[bfr_len] = b; ++bfr_len; break;
 			}
 		}
 		return this;
 	}
-	public Bry_bfr Add_str_pad_space_bgn(String v, int pad_max) {return Add_str_pad_space(v, pad_max, Bool_.N);}
-	public Bry_bfr Add_str_pad_space_end(String v, int pad_max) {return Add_str_pad_space(v, pad_max, Bool_.Y);}
+	public Bry_bfr Add_str_pad_space_bgn(String v, int pad_max) {return Add_str_pad_space(v, pad_max, BoolUtl.N);}
+	public Bry_bfr Add_str_pad_space_end(String v, int pad_max) {return Add_str_pad_space(v, pad_max, BoolUtl.Y);}
 	Bry_bfr Add_str_pad_space(String v, int pad_max, boolean pad_end) {
 		byte[] v_bry = Bry_.new_u8(v); 
 		if (pad_end)	Add(v_bry);
 		int pad_len = pad_max - v_bry.length;
 		if (pad_len > 0) 
-			Add_byte_repeat(Byte_ascii.Space, pad_len);
+			Add_byte_repeat(AsciiByte.Space, pad_len);
 		if (!pad_end)	Add(v_bry);
 		return this;
 	}
@@ -465,7 +466,7 @@ public class Bry_bfr {
 		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
 		else if	(o_type == DateAdp.class)         Add_dte((DateAdp)o);
 		else if	(o_type == Io_url.class)			Add(((Io_url)o).RawBry());
-		else if	(o_type == Boolean.class)			Add_yn(Bool_.Cast(o));				
+		else if	(o_type == Boolean.class)			Add_yn(BoolUtl.Cast(o));
 		else if	(o_type == Double.class)			Add_double(Double_.cast(o));		
 		else if	(o_type == Float.class)			Add_float(Float_.cast(o));			
 		else										((Bfr_arg)o).Bfr_arg__add(this);
@@ -482,13 +483,13 @@ public class Bry_bfr {
 		else if	(o_type == Bry_bfr.class)			Add_bfr_and_preserve((Bry_bfr)o);
 		else if	(o_type == DateAdp.class)         Add_dte((DateAdp)o);
 		else if	(o_type == Io_url.class)			Add(((Io_url)o).RawBry());
-		else if	(o_type == Boolean.class)			Add_bool(Bool_.Cast(o));			
+		else if	(o_type == Boolean.class)			Add_bool(BoolUtl.Cast(o));
 		else if	(o_type == Double.class)			Add_double(Double_.cast(o));		
 		else if	(o_type == Float.class)			Add_float(Float_.cast(o));			
 		else										((Bfr_arg)o).Bfr_arg__add(this);
 		return this;
 	}
-	public Bry_bfr Add_yn(boolean v) {Add_byte(v ? Byte_ascii.Ltr_y : Byte_ascii.Ltr_n); return this;}
+	public Bry_bfr Add_yn(boolean v) {Add_byte(v ? AsciiByte.Ltr_y : AsciiByte.Ltr_n); return this;}
 	public Bry_bfr Add_base85_len_5(int v) {return Add_base85(v, 5);}
 	public Bry_bfr Add_base85(int v, int pad)	{
 		int new_len = bfr_len + pad;
@@ -498,7 +499,7 @@ public class Bry_bfr {
 		return this;
 	}
 	public boolean Match_end_byt(byte b)		{return bfr_len == 0 ? false : bfr[bfr_len - 1] == b;}
-	public boolean Match_end_byt_nl_or_bos()	{return bfr_len == 0 ? true : bfr[bfr_len - 1] == Byte_ascii.Nl;}
+	public boolean Match_end_byt_nl_or_bos()	{return bfr_len == 0 ? true : bfr[bfr_len - 1] == AsciiByte.Nl;}
 	public boolean Match_end_ary(byte[] val)   {return Bry_.Match(bfr, bfr_len - val.length, bfr_len, val);}
 	public Bry_bfr Insert_at(int add_pos, byte[] add_bry) {return Insert_at(add_pos, add_bry, 0, add_bry.length);}
 	public Bry_bfr Insert_at(int add_pos, byte[] add_bry, int add_bgn, int add_end) {
@@ -623,14 +624,14 @@ public class Bry_bfr {
 			case 0: return or;
 			case 1: {
 				byte b = bfr[0];
-				return Byte_ascii.Is_num(b) ? b - Byte_ascii.Num_0 : or;
+				return AsciiByte.IsNum(b) ? b - AsciiByte.Num0 : or;
 			}
 			default:
 				long rv = 0, mult = 1;
 				for (int i = bfr_len - 1; i > -1; i--) {
 					byte b = bfr[i];
-					if (!Byte_ascii.Is_num(b)) return or;
-					long dif = (b - Byte_ascii.Num_0 ) * mult;
+					if (!AsciiByte.IsNum(b)) return or;
+					long dif = (b - AsciiByte.Num0) * mult;
 					long new_val = rv + dif;
 					if (new_val > Int_.Max_value) return or;	// if number is > 2^32 consider error (int overflow); return or; DATE:2014-06-10
 					rv = new_val;
@@ -645,7 +646,7 @@ public class Bry_bfr {
 	}
 	public byte[][] To_bry_ary_and_clear() {
 		if (bfr_len == 0) return Bry_.Ary_empty;
-		Int_list line_ends = Find_all(Byte_ascii.Nl);
+		Int_list line_ends = Find_all(AsciiByte.Nl);
 
 		// create lines
 		int lines_len = line_ends.Len();
@@ -661,7 +662,7 @@ public class Bry_bfr {
 	}
 	public String[] To_str_ary_and_clear() {
 		if (bfr_len == 0) return String_.Ary_empty;
-		Int_list line_ends = Find_all(Byte_ascii.Nl);
+		Int_list line_ends = Find_all(AsciiByte.Nl);
 
 		// create lines
 		int lines_len = line_ends.Len();

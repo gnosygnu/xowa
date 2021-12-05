@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.intls.ucas; import gplx.*; import gplx.core.*; import gplx.core.intls.*;
+package gplx.core.intls.ucas; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Uca_ltr_extractor {
 	private final boolean numeric;
 	private final byte[] numeric_heading;
@@ -26,7 +27,7 @@ public class Uca_ltr_extractor {
 			// create hash of "0", "1", "2", ...
 			numeric_hash = Hash_adp_bry.cs();
 			for (int i = 0; i < 10; ++i) {
-				byte[] digit_bry = Bry_.new_by_int(Byte_ascii.Num_0 + i);
+				byte[] digit_bry = Bry_.new_by_int(AsciiByte.Num0 + i);
 				numeric_hash.Add(digit_bry, digit_bry);
 			}
 		}

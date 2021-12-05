@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
+package gplx.xowa.xtns.scribunto;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Scrib_err_filter_mgr_tst {
 	@Before public void init() {fxt.Clear();} private final Scrib_err_filter_mgr_fxt fxt = new Scrib_err_filter_mgr_fxt();
 	@Test  public void Basic() {
@@ -37,8 +41,8 @@ class Scrib_err_filter_mgr_fxt {
 	private final Scrib_err_filter_mgr err_mgr = new Scrib_err_filter_mgr();
 	public void Clear() {err_mgr.Clear();}
 	public void Exec_add(int expd, String mod, String fnc, String err, String comment) {err_mgr.Add(expd, mod, fnc, err, comment);}
-	public void Test_match_y(String mod, String fnc, String err) {Test_match(Bool_.Y, mod, fnc, err);}
-	public void Test_match_n(String mod, String fnc, String err) {Test_match(Bool_.N, mod, fnc, err);}
+	public void Test_match_y(String mod, String fnc, String err) {Test_match(BoolUtl.Y, mod, fnc, err);}
+	public void Test_match_n(String mod, String fnc, String err) {Test_match(BoolUtl.N, mod, fnc, err);}
 	private void Test_match(boolean expd, String mod, String fnc, String err) {
 		Tfds.Eq(expd, err_mgr.Match(mod, fnc, err));
 	}

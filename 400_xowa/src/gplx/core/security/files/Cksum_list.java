@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.security.files; import gplx.*;
 import gplx.core.security.algos.*;
+import gplx.objects.strings.AsciiByte;
 public class Cksum_list {
 	public Cksum_list(byte type, Cksum_itm[] itms, long itms_size) {
 		this.Type = type; this.Itms = itms; this.Itms_size = itms_size;
@@ -44,13 +45,13 @@ public class Cksum_list {
 			byte[] line = lines[i];	// EX: "d41d8cd98f00b204e9800998ecf8427e *file.txt"
 
 			// get hash
-			int space_pos = Bry_find_.Find_fwd(line, Byte_ascii.Space);
+			int space_pos = Bry_find_.Find_fwd(line, AsciiByte.Space);
 			if (space_pos == Bry_find_.Not_found) throw Err_.new_("chsum", "checksum line does not have space", "line", line);
 			byte[] hash = Bry_.Mid(line, 0, space_pos);
 
 			// get file
 			int file_bgn = space_pos + 1;
-			if (line[file_bgn] == Byte_ascii.Star) ++file_bgn;	// ignore leading *; EX: "*file.txt" -> "file.txt"
+			if (line[file_bgn] == AsciiByte.Star) ++file_bgn;	// ignore leading *; EX: "*file.txt" -> "file.txt"
 			byte[] file = Bry_.Mid(line, file_bgn);
 			Io_url file_url = GenSubFil_nest(owner_dir, file);
 			long file_size = Io_mgr.Instance.QueryFil(file_url).Size();

@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs.tags; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.htmls.core.wkrs.tags; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.htmls.core.wkrs.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*; import gplx.xowa.htmls.hdumps.*;
 import gplx.xowa.htmls.core.wkrs.lnkes.*; import gplx.xowa.htmls.core.wkrs.lnkis.*; import gplx.xowa.htmls.core.wkrs.hdrs.*;
@@ -29,7 +31,7 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 	private final Xoh_gly_grp_data	wkr__gly = new Xoh_gly_grp_data();
 	private final Xoh_form_data      wkr__form = new Xoh_form_data();
 	private Ordered_hash hdump_wkrs;
-	public byte[] Hook() {return Byte_ascii.Angle_bgn_bry;}
+	public byte[] Hook() {return AsciiByte.AngleBgnBry;}
 	public Xoh_tag_parser(Xoh_hdoc_wkr hdoc_wkr) {
 		this.hdoc_wkr = hdoc_wkr;
 	}
@@ -43,7 +45,7 @@ public class Xoh_tag_parser implements Gfh_doc_wkr {
 	public int Parse(byte[] src, int src_bgn, int src_end, int pos) {
 		tag_rdr.Pos_(pos);
 		int nxt_pos = tag_rdr.Pos() + 1; if (nxt_pos == src_end) return src_end;
-		Gfh_tag cur = src[tag_rdr.Pos() + 1] == Byte_ascii.Slash ? tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__any) : tag_rdr.Tag__move_fwd_head();
+		Gfh_tag cur = src[tag_rdr.Pos() + 1] == AsciiByte.Slash ? tag_rdr.Tag__move_fwd_tail(Gfh_tag_.Id__any) : tag_rdr.Tag__move_fwd_head();
 		int cur_end = cur.Src_end();
 		if (cur.Tag_is_tail())
 			hdoc_wkr.On_txt(pos, cur_end);

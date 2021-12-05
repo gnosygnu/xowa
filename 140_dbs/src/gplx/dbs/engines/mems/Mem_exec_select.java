@@ -13,9 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*;
-import gplx.core.criterias.*;
-import gplx.dbs.qrys.*; import gplx.dbs.sqls.itms.*;
+package gplx.dbs.engines.mems; import gplx.objects.primitives.BoolUtl;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Err_;
+import gplx.Hash_adp_bry;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.criterias.Criteria;
+import gplx.dbs.Db_qry;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.qrys.Db_qry__select_cmd;
+import gplx.dbs.qrys.Db_qry__select_in_tbl;
+import gplx.dbs.sqls.itms.Sql_join_fld;
+import gplx.dbs.sqls.itms.Sql_order_fld;
+import gplx.dbs.sqls.itms.Sql_select_clause;
+import gplx.dbs.sqls.itms.Sql_select_fld;
+import gplx.dbs.sqls.itms.Sql_select_fld_list;
+import gplx.dbs.sqls.itms.Sql_tbl_itm;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.lists.CompareAbleUtl;
+import gplx.objects.lists.ComparerAble;
 public class Mem_exec_select {
 	private final Mem_engine engine;
 	private final List_adp tmp_where_rows = List_adp_.New();
@@ -52,17 +71,17 @@ public class Mem_exec_select {
 		Mem_row[] rslt_rows = (Mem_row[])tmp_where_rows.ToAryAndClear(Mem_row.class);
 		if (qry2 != null) {
 			if (qry2.Order() != null && qry2.Order().Flds().length > 0)
-				Array_.Sort(rslt_rows, new Mem_sorter(qry2.Order().Flds()));
+				ArrayUtl.Sort(rslt_rows, new Mem_sorter(qry2.Order().Flds()));
 			int offset = qry2.Offset();
 			if (offset != Db_qry__select_cmd.Offset__disabled) {
 				Mem_row[] trg_rows = new Mem_row[rslt_rows.length - offset];
-				Array_.Copy_to(rslt_rows, offset, trg_rows, 0, trg_rows.length);
+				ArrayUtl.CopyTo(rslt_rows, offset, trg_rows, 0, trg_rows.length);
 				rslt_rows = trg_rows;
 			}
 			int limit = qry2.Limit();
 			if (limit != Db_qry__select_cmd.Limit__disabled) {
 				Mem_row[] trg_rows = new Mem_row[limit];
-				Array_.Copy_to(rslt_rows, 0, trg_rows, 0, limit);
+				ArrayUtl.CopyTo(rslt_rows, 0, trg_rows, 0, limit);
 				rslt_rows = trg_rows;
 			}
 			rslt_rows = Mem_exec_.Rows__select_flds(rslt_rows, qry2.Cols());
@@ -70,7 +89,7 @@ public class Mem_exec_select {
 		return new Mem_rdr(select, rslt_rows);
 	}
 }
-class Mem_sorter implements gplx.core.lists.ComparerAble {
+class Mem_sorter implements ComparerAble {
 	private final Sql_order_fld[] flds;
 	public Mem_sorter(Sql_order_fld[] flds) {
 		this.flds = flds;
@@ -83,10 +102,10 @@ class Mem_sorter implements gplx.core.lists.ComparerAble {
 			Sql_order_fld fld = flds[i];
 			Object lhs_val = lhs.Get_by(fld.Name);
 			Object rhs_val = rhs.Get_by(fld.Name);
-			int comp = CompareAble_.Compare_obj(lhs_val, rhs_val);
-			if (comp != CompareAble_.Same) return comp * (fld.Sort == Sql_order_fld.Sort__dsc ? -1 : 1);
+			int comp = CompareAbleUtl.Compare_obj(lhs_val, rhs_val);
+			if (comp != CompareAbleUtl.Same) return comp * (fld.Sort == Sql_order_fld.Sort__dsc ? -1 : 1);
 		}
-		return CompareAble_.Same;
+		return CompareAbleUtl.Same;
 	}
 }
 class Mem_exec_ {
@@ -97,7 +116,7 @@ class Mem_exec_ {
 		int rhs_rows_len = rhs_rows.length;
 		for (int i = 0; i < rhs_rows_len; ++i) {
 			Mem_row rhs_row = rhs_rows[i];
-			byte[] rhs_key = Rows__bld_key(bfr, Bool_.N, tbl_alias, rhs_row, join_flds, join_flds_len);
+			byte[] rhs_key = Rows__bld_key(bfr, BoolUtl.N, tbl_alias, rhs_row, join_flds, join_flds_len);
 			List_adp rhs_list = (List_adp)rhs_hash.Get_by_bry(rhs_key);
 			if (rhs_list == null) {
 				rhs_list = List_adp_.New();
@@ -109,7 +128,7 @@ class Mem_exec_ {
 		int lhs_len = lhs_rows.length;
 		for (int i = 0; i < lhs_len; ++i) {
 			Mem_row lhs_row = lhs_rows[i];
-			byte[] lhs_key = Rows__bld_key(bfr, Bool_.Y, tbl_alias, lhs_row, join_flds, join_flds_len);
+			byte[] lhs_key = Rows__bld_key(bfr, BoolUtl.Y, tbl_alias, lhs_row, join_flds, join_flds_len);
 			List_adp rhs_list = (List_adp)rhs_hash.Get_by_bry(lhs_key);
 			if (rhs_list == null) {
 				switch (join_tid) {

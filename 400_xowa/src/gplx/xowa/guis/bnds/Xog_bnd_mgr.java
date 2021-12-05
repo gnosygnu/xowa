@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.bnds; import gplx.Bool_;
+package gplx.xowa.guis.bnds; import gplx.objects.primitives.BoolUtl;
 import gplx.Err_;
 import gplx.GfoMsg;
 import gplx.Gfo_invk;
@@ -366,7 +366,7 @@ public class Xog_bnd_mgr implements Gfo_invk {
 	private void Init_itm(String cmd, int idx, int box, String ipt) {Init_itm(cmd, idx, box, IptArg_.parse_or_none_(ipt));}
 	private void Init_itm(String cmd, int idx, int box, IptArg ipt) {
 		String key = cmd + "-" + Int_.To_str(idx + List_adp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
-		Xog_bnd_itm itm = new Xog_bnd_itm(key, Bool_.Y, cmd, box, ipt);
+		Xog_bnd_itm itm = new Xog_bnd_itm(key, BoolUtl.Y, cmd, box, ipt);
 		boxs[box].Add(itm);
 		regy.Add(itm.Key(), itm);
 	}

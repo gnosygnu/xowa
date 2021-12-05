@@ -13,9 +13,24 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls.docs; import gplx.*;
-import gplx.langs.htmls.*;
-import gplx.xowa.parsers.htmls.*; import gplx.langs.htmls.styles.*; import gplx.langs.htmls.clses.*;
+package gplx.langs.htmls.docs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Byte_;
+import gplx.Hash_adp_bry;
+import gplx.Int_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.langs.htmls.Gfh_atr_;
+import gplx.langs.htmls.Gfh_tag_;
+import gplx.langs.htmls.clses.Gfh_class_;
+import gplx.langs.htmls.styles.Gfh_style_wkr__val_as_int;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.parsers.htmls.Mwh_atr_mgr;
+import gplx.xowa.parsers.htmls.Mwh_atr_parser;
+import gplx.xowa.parsers.htmls.Mwh_atr_wkr;
 public class Gfh_tag implements Mwh_atr_wkr {
 	private Gfh_tag_rdr tag_rdr;
 	private Ordered_hash atrs_hash; private boolean atrs_null; private int atrs_bgn, atrs_end;
@@ -109,8 +124,8 @@ public class Gfh_tag implements Mwh_atr_wkr {
 		return Bry_.To_double_or(src, rv.Val_bgn(), rv.Val_end(), or);
 	}
 	public Gfh_atr Atrs__get_at(int i)					{return (Gfh_atr)atrs_hash.Get_at(i);}
-	public Gfh_atr Atrs__get_by_or_fail(byte[] key)	{return Atrs__get_by_or_fail(key, Bool_.Y);}
-	public Gfh_atr Atrs__get_by_or_empty(byte[] key)	{return Atrs__get_by_or_fail(key, Bool_.N);}
+	public Gfh_atr Atrs__get_by_or_fail(byte[] key)	{return Atrs__get_by_or_fail(key, BoolUtl.Y);}
+	public Gfh_atr Atrs__get_by_or_empty(byte[] key)	{return Atrs__get_by_or_fail(key, BoolUtl.N);}
 	public Gfh_atr Atrs__get_by_or_fail(byte[] key, boolean fail_if_null) {
 		if (atrs_null) Atrs__make();
 		Gfh_atr rv = (Gfh_atr)atrs_hash.GetByOrNull(key);

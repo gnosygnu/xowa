@@ -13,8 +13,18 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.apis.xowa.gui.browsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.apis.*; import gplx.xowa.apps.apis.xowa.*; import gplx.xowa.apps.apis.xowa.gui.*;
-import gplx.xowa.guis.views.*;
+package gplx.xowa.apps.apis.xowa.gui.browsers;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.guis.views.Xog_tab_itm;
+import gplx.xowa.guis.views.Xog_tab_itm_;
+import gplx.xowa.guis.views.Xog_tab_mgr;
 public class Xoapi_tabs implements Gfo_invk {
 	private Xog_tab_mgr tab_mgr;
 	public void Init_by_kit(Xoae_app app) {
@@ -32,11 +42,11 @@ public class Xoapi_tabs implements Gfo_invk {
 		tab_mgr.Win().Page__navigate_by_url_bar(link);
 	}
 	public void Close_cur()							{tab_mgr.Tabs_close_cur();}
-	public void Select_bwd()						{tab_mgr.Tabs_select(Bool_.N);}
-	public void Select_fwd()						{tab_mgr.Tabs_select(Bool_.Y);}
+	public void Select_bwd()						{tab_mgr.Tabs_select(BoolUtl.N);}
+	public void Select_fwd()						{tab_mgr.Tabs_select(BoolUtl.Y);}
 	public void Select_by_idx(int v)				{tab_mgr.Tabs_select_by_idx(v - List_adp_.Base1);}
-	public void Move_bwd()							{tab_mgr.Tabs_move(Bool_.N);}
-	public void Move_fwd()							{tab_mgr.Tabs_move(Bool_.Y);}
+	public void Move_bwd()							{tab_mgr.Tabs_move(BoolUtl.N);}
+	public void Move_fwd()							{tab_mgr.Tabs_move(BoolUtl.Y);}
 	public void Close_others()						{tab_mgr.Tabs_close_others();}
 	public void Close_to_bgn()						{tab_mgr.Tabs_close_to_bgn();}
 	public void Close_to_end()						{tab_mgr.Tabs_close_to_end();}
@@ -44,11 +54,11 @@ public class Xoapi_tabs implements Gfo_invk {
 	public void Pin_toggle()						{if (this.Active_tab_is_null()) return; tab_mgr.Active_tab().Pin_toggle();}
 	public void Tab_bookmark_all()					{}//app.Gui_mgr().Browser_win().Tab_mgr().Tabs_close_others();}
 	public Object Invk(GfsCtx ctx, int ikey, String k, GfoMsg m) {
-		if		(ctx.Match(k, Invk_new_dflt__at_dflt__focus_y))			this.New_dflt(Bool_.Y);
-		else if	(ctx.Match(k, Invk_new_link__at_dflt__focus_n))			this.New_link(Bool_.N, m.ReadStrOr("v", null));
-		else if	(ctx.Match(k, Invk_new_link__at_dflt__focus_y))			this.New_link(Bool_.Y, m.ReadStrOr("v", null));
-		else if	(ctx.Match(k, Invk_new_href__at_dflt__focus_y))			this.New_href(Bool_.Y);
-		else if	(ctx.Match(k, Invk_new_dupe__at_dflt__focus_y)) 		this.New_dupe(Bool_.Y);
+		if		(ctx.Match(k, Invk_new_dflt__at_dflt__focus_y))			this.New_dflt(BoolUtl.Y);
+		else if	(ctx.Match(k, Invk_new_link__at_dflt__focus_n))			this.New_link(BoolUtl.N, m.ReadStrOr("v", null));
+		else if	(ctx.Match(k, Invk_new_link__at_dflt__focus_y))			this.New_link(BoolUtl.Y, m.ReadStrOr("v", null));
+		else if	(ctx.Match(k, Invk_new_href__at_dflt__focus_y))			this.New_href(BoolUtl.Y);
+		else if	(ctx.Match(k, Invk_new_dupe__at_dflt__focus_y)) 		this.New_dupe(BoolUtl.Y);
 		else if	(ctx.Match(k, Invk_close_cur)) 							this.Close_cur();
 		else if	(ctx.Match(k, Invk_select_bwd)) 						this.Select_bwd();
 		else if	(ctx.Match(k, Invk_select_fwd)) 						this.Select_fwd();

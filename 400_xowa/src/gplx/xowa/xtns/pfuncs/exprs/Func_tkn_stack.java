@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.exprs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.exprs;
+import gplx.objects.arrays.ArrayUtl;
 class Func_tkn_stack {
 	private Func_tkn[] ary = new Func_tkn[0]; private int len = 0, max = 0;
 	public void Clear() {len = 0;}
@@ -29,7 +30,7 @@ class Func_tkn_stack {
 		int new_len = len + 1;
 		if (new_len > max) {
 			max = new_len * 2;
-			ary = (Func_tkn[])Array_.Resize(ary, max);
+			ary = (Func_tkn[])ArrayUtl.Resize(ary, max);
 		}
 		ary[len] = v;
 		len = new_len;

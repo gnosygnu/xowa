@@ -13,10 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ifs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.envs.*; import gplx.core.caches.*;
-import gplx.xowa.apps.wms.apis.*; import gplx.xowa.wikis.data.tbls.*;
-import gplx.xowa.wikis.nss.*;
+package gplx.xowa.xtns.pfuncs.ifs;
+import gplx.Bry_;
+import gplx.core.envs.Env_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.nss.Xow_ns;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Pfunc_ifexist_mgr {
 	public boolean Exists(Xowe_wiki wiki, byte[] raw_bry) {
 		// validate ttl; return false if invalid
@@ -25,8 +30,8 @@ public class Pfunc_ifexist_mgr {
 
 		// try to get from cache
 		byte exists = wiki.Cache_mgr().Ifexist_cache().Get_by_cache(ttl);
-		if		(exists == Bool_.Y_byte) return true;
-		else if (exists == Bool_.N_byte) return false;
+		if		(exists == BoolUtl.YByte) return true;
+		else if (exists == BoolUtl.NByte) return false;
 
 		// not in cache; do find
 		switch (ttl.Ns().Id()) {
@@ -56,8 +61,8 @@ public class Pfunc_ifexist_mgr {
 
 		// check cache
 		byte exists = wiki.Cache_mgr().Ifexist_cache().Get_by_cache(file_ttl);
-		if		(exists == Bool_.Y_byte) return true;
-		else if (exists == Bool_.N_byte) return false;
+		if		(exists == BoolUtl.YByte) return true;
+		else if (exists == BoolUtl.NByte) return false;
 
 		// call Find_by_ns_other which will call load, but with "File:" instead of "Media:"
 		if (Find_by_ns__other(wiki, file_ttl)) return true;

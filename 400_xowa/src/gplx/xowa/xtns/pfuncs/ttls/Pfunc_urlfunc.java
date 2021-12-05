@@ -13,7 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.ttls; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.ttls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
+import gplx.xowa.xtns.pfuncs.*;
 import gplx.xowa.wikis.xwikis.*;
 import gplx.xowa.htmls.hrefs.*;
 import gplx.xowa.wikis.domains.*;
@@ -49,7 +52,7 @@ public class Pfunc_urlfunc extends Pf_func_base {
 				trg.Add(gplx.core.net.Gfo_protocol_itm.Bry_relative);           // "//"
 			trg.Add(xwiki.Domain_bry());                                        // "commons.wikimedia.org"
 			if (xwiki.Domain_tid() == Xow_domain_tid_.Tid__other)               // if other, only add /; ISSUE#:277 PAGE:en.w:Scafell_Pike DATE:2018-12-09
-				trg.Add_byte(Byte_ascii.Slash);
+				trg.Add_byte(AsciiByte.Slash);
 			else
 				trg.Add(Xoh_href_.Bry__wiki);                                   // "/wiki/"
 			trg.Add_mid(ttl_ary, xwiki.Key_bry().length + 1, ttl_ary.length);   // "A#b?c=d"; +1 for colon after "commons:"; NOTE: ugly way of getting rest of url, but ttl currently does not have Full_wo_wiki
@@ -67,7 +70,7 @@ public class Pfunc_urlfunc extends Pf_func_base {
 				trg.Add_bfr_and_clear(tmp_bfr);
 			} finally {tmp_bfr.Mkr_rls();}
 		}
-		if (qry_arg != Bry_.Empty) trg.Add_byte(Byte_ascii.Question).Add(qry_arg);
+		if (qry_arg != Bry_.Empty) trg.Add_byte(AsciiByte.Question).Add(qry_arg);
 	}
 	public Pfunc_urlfunc(int id, byte tid, boolean encode) {this.id = id; this.tid = tid; this.encode = encode;} private byte tid; boolean encode;
 	@Override public int Id() {return id;} private int id;

@@ -13,9 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.gallery; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import org.junit.*;
-import gplx.xowa.htmls.*; import gplx.xowa.files.fsdb.*;
+package gplx.xowa.xtns.gallery;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.files.fsdb.Xof_fsdb_mgr_cfg;
+import org.junit.Before;
+import org.junit.Test;
 public class Gallery_mgr_base__basic__tst {
 	private Gallery_mgr_base_fxt fxt = new Gallery_mgr_base_fxt();
 	@Before public void init() {fxt.Reset();}
@@ -181,11 +185,11 @@ public class Gallery_mgr_base__basic__tst {
 class Gallery_mgr_base_fxt {
 	public void Reset() {
 		fxt.Wiki().Xtn_mgr().Init_by_wiki(fxt.Wiki());
-		Gallery_mgr_wtr.File_found_mode = Bool_.Y_byte;
+		Gallery_mgr_wtr.File_found_mode = BoolUtl.YByte;
 	}
 	public Xop_fxt Fxt() {return fxt;} private final Xop_fxt fxt = new Xop_fxt();
 	public void Init_files_missing_y_() {
-		Gallery_mgr_wtr.File_found_mode = Bool_.N_byte;
+		Gallery_mgr_wtr.File_found_mode = BoolUtl.NByte;
 	}
 	public void Test_html_str(String raw, String expd)						{fxt.Test_html_full_str(raw, expd);}
 	public void Test_html_frag(String raw, String... expd_frags)		{fxt.Test_html_full_frag(raw, expd_frags);}	// TODO_OLD: change to wiki_str; currently uids do not get reset if wiki

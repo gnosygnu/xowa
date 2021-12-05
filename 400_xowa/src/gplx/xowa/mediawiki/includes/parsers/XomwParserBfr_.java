@@ -13,7 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.objects.primitives.BoolUtl;
 public class XomwParserBfr_ {
 	public static void Replace(XomwParserBfr pbfr, byte[] find, byte[] repl) {
 		// XO.PBFR
@@ -23,7 +28,7 @@ public class XomwParserBfr_ {
 		int src_end = src_bfr.Len();
 		Bry_bfr bfr = pbfr.Trg();
 
-		if (Replace(bfr, Bool_.N, src, src_bgn, src_end, find, repl) != null)
+		if (Replace(bfr, BoolUtl.N, src, src_bgn, src_end, find, repl) != null)
 			pbfr.Switch();
 	}
 	private static byte[] Replace(Bry_bfr bfr, boolean lone_bfr, byte[] src, int src_bgn, int src_end, byte[] find, byte[] repl) {

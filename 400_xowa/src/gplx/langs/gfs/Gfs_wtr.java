@@ -13,16 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
+package gplx.langs.gfs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfs_wtr {		
-	public byte Quote_char() {return quote_char;} public Gfs_wtr Quote_char_(byte v) {quote_char = v; return this;} private byte quote_char = Byte_ascii.Apos;
+	public byte Quote_char() {return quote_char;} public Gfs_wtr Quote_char_(byte v) {quote_char = v; return this;} private byte quote_char = AsciiByte.Apos;
 	public Bry_bfr Bfr() {return bfr;} private Bry_bfr bfr = Bry_bfr_.Reset(255);
 	public void Add_grp_bgn(byte[] key) {
 		bfr.Add(key);							// key
-		bfr.Add_byte(Byte_ascii.Curly_bgn);		// {
+		bfr.Add_byte(AsciiByte.CurlyBgn);		// {
 	}
 	public void Add_grp_end(byte[] key) {
-		bfr.Add_byte(Byte_ascii.Curly_end);		// }
+		bfr.Add_byte(AsciiByte.CurlyEnd);		// }
 	}
 	public void Add_set_eq(byte[] key, byte[] val) {
 		bfr.Add(key);							// key
@@ -30,7 +31,7 @@ public class Gfs_wtr {
 		bfr.Add_byte(quote_char);				// '
 		Write_val(val);
 		bfr.Add_byte(quote_char);				// '
-		bfr.Add_byte(Byte_ascii.Semic);			// ;
+		bfr.Add_byte(AsciiByte.Semic);			// ;
 	}
 	private void Write_val(byte[] bry) {
 		int bry_len = bry.length;

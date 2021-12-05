@@ -16,6 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.core.brys.fmtrs; import gplx.*;
 import gplx.core.brys.*;
 import gplx.core.primitives.*; import gplx.core.strings.*;
+import gplx.objects.strings.AsciiByte;
 public class Bry_fmtr {
 	public byte[] Fmt() {return fmt;} private byte[] fmt = Bry_.Empty;
 	public boolean Fmt_null() {return fmt.length == 0;}
@@ -158,8 +159,8 @@ public class Bry_fmtr {
 					else {
 						lkp_bfr.Add_byte(cur_byte);
 						switch (cur_byte) {
-							case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-							case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
+							case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+							case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
 								break;
 							default:
 								lkp_is_numeric = false;
@@ -193,8 +194,8 @@ public class Bry_fmtr {
 					}
 					else {	// ~{0}; ~~ -> ~; ~n -> newLine; ~t -> tab
 						if		(nxt_byte == char_escape)		tmp_byte = char_escape;
-						else if	(nxt_byte == char_escape_nl)	tmp_byte = Byte_ascii.Nl;
-						else if (nxt_byte == char_escape_tab)	tmp_byte = Byte_ascii.Tab;
+						else if	(nxt_byte == char_escape_nl)	tmp_byte = AsciiByte.Nl;
+						else if (nxt_byte == char_escape_tab)	tmp_byte = AsciiByte.Tab;
 						else {
 							if (fail_when_invalid_escapes) throw Err_.new_wo_type("unknown escape code", "code", Char_.By_int(nxt_byte), "fmt_pos", fmt_pos + 1);
 							else
@@ -219,12 +220,12 @@ public class Bry_fmtr {
 		}
 	}
 	int Compile_eval_cmd(byte[] fmt, int fmt_len, int eval_lhs_bgn, List_adp list) {
-		int eval_lhs_end = Bry_find_.Find_fwd(fmt, char_eval_end, eval_lhs_bgn + Byte_ascii.Len_1, fmt_len); if (eval_lhs_end == Bry_find_.Not_found) throw Err_.new_wo_type("eval_lhs_end_invalid: could not find eval_lhs_end", "snip", String_.new_u8(fmt, eval_lhs_bgn, fmt_len));
-		byte[] eval_dlm = Bry_.Mid(fmt, eval_lhs_bgn		, eval_lhs_end + Byte_ascii.Len_1);
-		int eval_rhs_bgn = Bry_find_.Find_fwd(fmt, eval_dlm		, eval_lhs_end + Byte_ascii.Len_1, fmt_len); if (eval_rhs_bgn == Bry_find_.Not_found) throw Err_.new_wo_type("eval_rhs_bgn_invalid: could not find eval_rhs_bgn", "snip", String_.new_u8(fmt, eval_lhs_end, fmt_len));
-		byte[] eval_cmd = Bry_.Mid(fmt, eval_lhs_end + Byte_ascii.Len_1, eval_rhs_bgn);
+		int eval_lhs_end = Bry_find_.Find_fwd(fmt, char_eval_end, eval_lhs_bgn + AsciiByte.Len1, fmt_len); if (eval_lhs_end == Bry_find_.Not_found) throw Err_.new_wo_type("eval_lhs_end_invalid: could not find eval_lhs_end", "snip", String_.new_u8(fmt, eval_lhs_bgn, fmt_len));
+		byte[] eval_dlm = Bry_.Mid(fmt, eval_lhs_bgn		, eval_lhs_end + AsciiByte.Len1);
+		int eval_rhs_bgn = Bry_find_.Find_fwd(fmt, eval_dlm		, eval_lhs_end + AsciiByte.Len1, fmt_len); if (eval_rhs_bgn == Bry_find_.Not_found) throw Err_.new_wo_type("eval_rhs_bgn_invalid: could not find eval_rhs_bgn", "snip", String_.new_u8(fmt, eval_lhs_end, fmt_len));
+		byte[] eval_cmd = Bry_.Mid(fmt, eval_lhs_end + AsciiByte.Len1, eval_rhs_bgn);
 		byte[] eval_rslt = eval_mgr.Eval(eval_cmd);
-		int eval_rhs_end = eval_rhs_bgn + Byte_ascii.Len_1 + eval_dlm.length;
+		int eval_rhs_end = eval_rhs_bgn + AsciiByte.Len1 + eval_dlm.length;
 		if (eval_rslt == null) eval_rslt = Bry_.Mid(fmt, eval_lhs_bgn - 2, eval_rhs_end);	// not found; return original argument
 		list.Add(Bry_fmtr_itm.dat_bry_(eval_rslt));
 		return eval_rhs_end;
@@ -233,7 +234,7 @@ public class Bry_fmtr {
 	public boolean Fmt_args_exist() {return fmt_args_exist;} private boolean fmt_args_exist;
 	boolean dirty = true;
 	int baseInt = 0;
-	public static final byte char_escape = Byte_ascii.Tilde, char_arg_bgn = Byte_ascii.Curly_bgn, char_arg_end = Byte_ascii.Curly_end, char_escape_nl = Byte_ascii.Ltr_n, char_escape_tab = Byte_ascii.Ltr_t, char_eval_bgn = Byte_ascii.Lt, char_eval_end = Byte_ascii.Gt;
+	public static final byte char_escape = AsciiByte.Tilde, char_arg_bgn = AsciiByte.CurlyBgn, char_arg_end = AsciiByte.CurlyEnd, char_escape_nl = AsciiByte.Ltr_n, char_escape_tab = AsciiByte.Ltr_t, char_eval_bgn = AsciiByte.Lt, char_eval_end = AsciiByte.Gt;
 	public static final Bry_fmtr Null = new Bry_fmtr().Fmt_("");
 	public static Bry_fmtr New__tmp() {return new Bry_fmtr().Fmt_("").Keys_();}
 	public static Bry_fmtr new_(String fmt, String... keys) {return new Bry_fmtr().Fmt_(fmt).Keys_(keys);}	// NOTE: keys may seem redundant, but are needed to align ordinals with proc; EX: fmt may be "~{A} ~{B}" or "~{B} ~{A}"; call will always be Bld(a, b); passing in "A", "B" guarantees A is 0 and B is 1;
@@ -244,18 +245,18 @@ public class Bry_fmtr {
 	public static String New_fmt_str(String key, Object[] args) {
 		tmp_bfr.Clear();
 		tmp_bfr.Add_str_u8(key);
-		tmp_bfr.Add_byte(Byte_ascii.Colon);
+		tmp_bfr.Add_byte(AsciiByte.Colon);
 		int args_len = args.length;
 		for (int i = 0; i < args_len; i++) {	// add " 0='~{0}'"
-			tmp_bfr.Add_byte(Byte_ascii.Space);
+			tmp_bfr.Add_byte(AsciiByte.Space);
 			tmp_bfr.Add_int_variable(i);
-			tmp_bfr.Add_byte(Byte_ascii.Eq);
-			tmp_bfr.Add_byte(Byte_ascii.Apos);
-			tmp_bfr.Add_byte(Byte_ascii.Tilde);
-			tmp_bfr.Add_byte(Byte_ascii.Curly_bgn);
+			tmp_bfr.Add_byte(AsciiByte.Eq);
+			tmp_bfr.Add_byte(AsciiByte.Apos);
+			tmp_bfr.Add_byte(AsciiByte.Tilde);
+			tmp_bfr.Add_byte(AsciiByte.CurlyBgn);
 			tmp_bfr.Add_int_variable(i);
-			tmp_bfr.Add_byte(Byte_ascii.Curly_end);
-			tmp_bfr.Add_byte(Byte_ascii.Apos);
+			tmp_bfr.Add_byte(AsciiByte.CurlyEnd);
+			tmp_bfr.Add_byte(AsciiByte.Apos);
 		}
 		return tmp_bfr.To_str_and_clear();
 	}	static Bry_bfr tmp_bfr = Bry_bfr_.Reset(255); 

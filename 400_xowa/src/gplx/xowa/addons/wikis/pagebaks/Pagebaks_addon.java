@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.pagebaks; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*;
-import gplx.xowa.specials.*;
+package gplx.xowa.addons.wikis.pagebaks; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.*; import gplx.xowa.addons.*;
 import gplx.langs.htmls.encoders.*;
 public class Pagebaks_addon implements Xoax_addon_itm {
 	public static void On_page_saved(Xoae_app app, Xowe_wiki wiki, Xoa_ttl ttl, byte[] text) {
@@ -35,7 +36,7 @@ public class Pagebaks_addon implements Xoax_addon_itm {
 			// #prune dir
 			// get files for pruning
 			Io_url[] fils = Io_mgr.Instance.QueryDir_fils(bak_dir);
-			Array_.Sort(fils);
+			ArrayUtl.Sort(fils);
 			
 			// calc files
 			int num_files = fils.length;

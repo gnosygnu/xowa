@@ -13,9 +13,14 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.data; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
-import gplx.core.ios.*; import gplx.core.ios.streams.*; import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.dbs.metas.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.wikis.dbs.*;
+package gplx.xowa.wikis.data;
+import gplx.core.ios.streams.Io_stream_tid_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.cfgs.Db_cfg_hash;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.dbs.Xodb_mgr_sql;
 public class Xowd_core_db_props {
 	public Xowd_core_db_props(int schema
 		, Xow_db_layout layout_text, Xow_db_layout layout_html, Xow_db_layout layout_file
@@ -52,7 +57,7 @@ public class Xowd_core_db_props {
 		return cfg_tbl.Select_int_or(Cfg_grp, Cfg_key__schema_version, 1) == 1
 			? new Xowd_core_db_props
 			( 1, Xow_db_layout.Itm_lot, Xow_db_layout.Itm_lot, Xow_db_layout.Itm_lot, cfg_tbl.Select_byte_or(Xowe_wiki.Invk_db_mgr, Xodb_mgr_sql.Invk_data_storage_format
-			, Io_stream_tid_.Tid__gzip), Io_stream_tid_.Tid__gzip, Bool_.Y, Bool_.N)
+			, Io_stream_tid_.Tid__gzip), Io_stream_tid_.Tid__gzip, BoolUtl.Y, BoolUtl.N)
 			: Cfg_load(cfg_tbl);
 	}
 	private static Xowd_core_db_props Cfg_load(Db_cfg_tbl tbl) {
@@ -64,8 +69,8 @@ public class Xowd_core_db_props {
 		, Xow_db_layout.Get_by_name(cfg_hash.Get_by(Cfg_key__layout_file).To_str())
 		, cfg_hash.Get_by(Cfg_key__zip_tid_text).To_byte()
 		, cfg_hash.Get_by(Cfg_key__zip_tid_html).To_byte()
-		, cfg_hash.Get_by(Cfg_key__hzip_enabled).To_yn_or(Bool_.N)
-		, cfg_hash.Get_by(Cfg_key__hzip_mode_is_b256).To_yn_or(Bool_.N)
+		, cfg_hash.Get_by(Cfg_key__hzip_enabled).To_yn_or(BoolUtl.N)
+		, cfg_hash.Get_by(Cfg_key__hzip_mode_is_b256).To_yn_or(BoolUtl.N)
 		);
 	}
 	private static final String Cfg_grp = gplx.xowa.wikis.data.Xowd_cfg_key_.Grp__wiki__core
@@ -79,5 +84,5 @@ public class Xowd_core_db_props {
 	, Cfg_key__hzip_mode_is_b256	= "hzip_mode_is_b256"
 	;
 
-	public static final Xowd_core_db_props Test = new Xowd_core_db_props(2, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, Bool_.Y, Bool_.Y);
+	public static final Xowd_core_db_props Test = new Xowd_core_db_props(2, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Xow_db_layout.Itm_few, Io_stream_tid_.Tid__raw, Io_stream_tid_.Tid__raw, BoolUtl.Y, BoolUtl.Y);
 }

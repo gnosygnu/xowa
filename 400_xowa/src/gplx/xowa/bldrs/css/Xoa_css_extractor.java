@@ -13,15 +13,43 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.css; import gplx.*; import gplx.xowa.*;
-import gplx.core.brys.fmtrs.*; import gplx.core.ios.*; import gplx.core.envs.*;
-import gplx.langs.htmls.encoders.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.wikis.domains.*; import gplx.xowa.wikis.data.*;
-import gplx.xowa.files.downloads.*;
-import gplx.core.net.*;
-import gplx.xowa.addons.wikis.htmls.css.mgrs.*;
-import gplx.xowa.wikis.data.fetchers.*;
+package gplx.xowa.bldrs.css;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.envs.Env_;
+import gplx.core.ios.IoEngine_xrg_downloadFil;
+import gplx.core.net.Gfo_protocol_itm;
+import gplx.core.net.Gfo_url;
+import gplx.core.net.Gfo_url_parser;
+import gplx.langs.htmls.encoders.Gfo_url_encoder;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.htmls.css.mgrs.Xowd_css_core_mgr;
+import gplx.xowa.files.downloads.Xof_download_wkr;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_file_schema_props;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.Xowd_cfg_key_;
+import gplx.xowa.wikis.data.fetchers.Xow_page_fetcher;
+import gplx.xowa.wikis.data.fetchers.Xow_page_fetcher_wiki;
+import gplx.xowa.wikis.domains.Xow_domain_itm_;
+import gplx.xowa.wikis.domains.Xow_domain_tid_;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xoa_css_extractor {
 	private Io_url home_css_dir;
 	public IoEngine_xrg_downloadFil Download_xrg() {return download_xrg;} private IoEngine_xrg_downloadFil download_xrg = Io_mgr.Instance.DownloadFil_args("", Io_url_.Empty);	
@@ -101,7 +129,7 @@ public class Xoa_css_extractor {
 		if (	core_db_mgr == null
 			||	core_db_mgr.Props() == null
 			||	core_db_mgr.Props().Schema_is_1()
-			||	!core_db_mgr.Tbl__cfg().Select_yn_or(Xowd_cfg_key_.Grp__wiki_schema, Xow_db_file_schema_props.Key__tbl_css_core, Bool_.N)
+			||	!core_db_mgr.Tbl__cfg().Select_yn_or(Xowd_cfg_key_.Grp__wiki_schema, Xow_db_file_schema_props.Key__tbl_css_core, BoolUtl.N)
 			) {
 			Xoa_app_.Usr_dlg().Warn_many("", "", "css.db not found; wiki=~{0} css_dir=~{1}", wiki.Domain_str(), wiki_html_dir.Raw());
 			return false;
@@ -188,11 +216,11 @@ public class Xoa_css_extractor {
 		byte[] commons_src = Io_mgr.Instance.LoadFilBry(commons_file);
 		int bgn_pos = Bry_find_.Find_fwd(commons_src, Bry_mw_wiki_logo);				if (bgn_pos == Bry_find_.Not_found) return false;
 		bgn_pos += Bry_mw_wiki_logo.length;
-		int end_pos = Bry_find_.Find_fwd(commons_src, Byte_ascii.Quote, bgn_pos + 1);	if (end_pos == Bry_find_.Not_found) return false;
+		int end_pos = Bry_find_.Find_fwd(commons_src, AsciiByte.Quote, bgn_pos + 1);	if (end_pos == Bry_find_.Not_found) return false;
 		byte[] src_bry = Bry_.Mid(commons_src, bgn_pos, end_pos);
 		src_bry = Xob_url_fixer.Fix(wiki_domain, src_bry, src_bry.length);
-		if (wiki_html_dir.Info().DirSpr_byte() == Byte_ascii.Backslash)
-			src_bry = Bry_.Replace(src_bry, Byte_ascii.Slash, Byte_ascii.Backslash);
+		if (wiki_html_dir.Info().DirSpr_byte() == AsciiByte.Backslash)
+			src_bry = Bry_.Replace(src_bry, AsciiByte.Slash, AsciiByte.Backslash);
 		Io_url src_fil = wiki_html_dir.GenSubFil(String_.new_u8(src_bry));
 		Io_mgr.Instance.CopyFil(src_fil, trg_fil, true);
 		return true;
@@ -204,7 +232,7 @@ public class Xoa_css_extractor {
 		logo_bgn += Logo_find_bgn.length;
 		logo_bgn = Bry_find_.Find_fwd(mainpage_html, Logo_find_end, logo_bgn);		if (logo_bgn == Bry_find_.Not_found) return null;
 		logo_bgn += Logo_find_end.length;
-		int logo_end = Bry_find_.Find_fwd(mainpage_html, Byte_ascii.Paren_end, logo_bgn, main_page_html_len);	if (logo_bgn == Bry_find_.Not_found) return null;
+		int logo_end = Bry_find_.Find_fwd(mainpage_html, AsciiByte.ParenEnd, logo_bgn, main_page_html_len);	if (logo_bgn == Bry_find_.Not_found) return null;
 		byte[] logo_bry = Bry_.Mid(mainpage_html, logo_bgn, logo_end);
 		return protocol_prefix + String_.new_u8(logo_bry);
 	}
@@ -254,7 +282,7 @@ public class Xoa_css_extractor {
 		while (true) {
 			int url_bgn = Bry_find_.Find_fwd(raw, Css_find_bgn, prv_pos);	 				if (url_bgn == Bry_find_.Not_found) break;	// nothing left; stop
 			url_bgn += css_find_bgn_len;
-			int url_end = Bry_find_.Find_fwd(raw, Byte_ascii.Quote, url_bgn, raw_len); 	if (url_end == Bry_find_.Not_found) {usr_dlg.Warn_many("", "main_page.css_parse", "could not find css; pos='~{0}' text='~{1}'", url_bgn, String_.new_u8__by_len(raw, url_bgn, url_bgn + 32)); break;}
+			int url_end = Bry_find_.Find_fwd(raw, AsciiByte.Quote, url_bgn, raw_len); 	if (url_end == Bry_find_.Not_found) {usr_dlg.Warn_many("", "main_page.css_parse", "could not find css; pos='~{0}' text='~{1}'", url_bgn, String_.new_u8__by_len(raw, url_bgn, url_bgn + 32)); break;}
 			byte[] css_url_bry = Bry_.Mid(raw, url_bgn, url_end);
 			css_url_bry = Bry_.Replace(css_url_bry, Css_amp_find, Css_amp_repl);		// &amp; -> &
 			css_url_bry = url_encoder.Decode(css_url_bry);								// %2C ->		%7C -> |
@@ -283,8 +311,8 @@ public class Xoa_css_extractor {
 	}
 	private static byte[] Url_root_fix(byte[] domain, byte[] url) {// DATE:2015-09-20
 		if (url.length < 3) return url;	// need at least 2 chars
-		if (	url[0] == Byte_ascii.Slash	// starts with "/"	EX: "/w/api.php"
-			&&	url[1] != Byte_ascii.Slash	// but not "//";	EX: "//en.wikipedia.org"
+		if (	url[0] == AsciiByte.Slash	// starts with "/"	EX: "/w/api.php"
+			&&	url[1] != AsciiByte.Slash	// but not "//";	EX: "//en.wikipedia.org"
 			)
 			return Bry_.Add(gplx.xowa.htmls.hrefs.Xoh_href_.Bry__https, domain, url);
 		else

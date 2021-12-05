@@ -13,9 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.htmls; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.primitives.*;
-import gplx.xowa.parsers.amps.*; import gplx.xowa.parsers.xndes.*;
+package gplx.xowa.parsers.htmls;
+import gplx.Bry_;
+import gplx.Bry_find_;
+import gplx.Hash_adp_bry;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.Xop_tkn_itm;
+import gplx.xowa.parsers.Xop_tkn_mkr;
+import gplx.xowa.parsers.amps.Xop_amp_mgr;
+import gplx.xowa.parsers.amps.Xop_amp_mgr_rslt;
+import gplx.xowa.parsers.xndes.Xop_xnde_tag;
 public class Mwh_doc_parser {
 	private final Mwh_doc_mgr dom_mgr = new Mwh_doc_mgr(16);
 	private final Mwh_atr_parser atr_parser = new Mwh_atr_parser();
@@ -41,10 +51,10 @@ public class Mwh_doc_parser {
 		while (pos < src_end) {
 			byte b = src[pos];
 			switch (b) {
-				case Byte_ascii.Angle_bgn:	// "<": possible nde start
+				case AsciiByte.AngleBgn:	// "<": possible nde start
 					pos = Parse_nde(pos);
 					break;
-				case Byte_ascii.Amp:		// "&": check for entity; EX: &nbsp; in sr-ec -> sr-el
+				case AsciiByte.Amp:		// "&": check for entity; EX: &nbsp; in sr-ec -> sr-el
 					Xop_amp_mgr_rslt rv = amp_mgr.Parse_tkn(tkn_mkr, src, src_end, pos, pos + 1);
 					Xop_tkn_itm rv_tkn = rv.Tkn();
 					if (rv_tkn == null)
@@ -74,24 +84,24 @@ public class Mwh_doc_parser {
 			byte b = src[pos];
 			switch (b) {
 				// valid chars for name
-				case Byte_ascii.Ltr_A: case Byte_ascii.Ltr_B: case Byte_ascii.Ltr_C: case Byte_ascii.Ltr_D: case Byte_ascii.Ltr_E:
-				case Byte_ascii.Ltr_F: case Byte_ascii.Ltr_G: case Byte_ascii.Ltr_H: case Byte_ascii.Ltr_I: case Byte_ascii.Ltr_J:
-				case Byte_ascii.Ltr_K: case Byte_ascii.Ltr_L: case Byte_ascii.Ltr_M: case Byte_ascii.Ltr_N: case Byte_ascii.Ltr_O:
-				case Byte_ascii.Ltr_P: case Byte_ascii.Ltr_Q: case Byte_ascii.Ltr_R: case Byte_ascii.Ltr_S: case Byte_ascii.Ltr_T:
-				case Byte_ascii.Ltr_U: case Byte_ascii.Ltr_V: case Byte_ascii.Ltr_W: case Byte_ascii.Ltr_X: case Byte_ascii.Ltr_Y: case Byte_ascii.Ltr_Z:
-				case Byte_ascii.Ltr_a: case Byte_ascii.Ltr_b: case Byte_ascii.Ltr_c: case Byte_ascii.Ltr_d: case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_f: case Byte_ascii.Ltr_g: case Byte_ascii.Ltr_h: case Byte_ascii.Ltr_i: case Byte_ascii.Ltr_j:
-				case Byte_ascii.Ltr_k: case Byte_ascii.Ltr_l: case Byte_ascii.Ltr_m: case Byte_ascii.Ltr_n: case Byte_ascii.Ltr_o:
-				case Byte_ascii.Ltr_p: case Byte_ascii.Ltr_q: case Byte_ascii.Ltr_r: case Byte_ascii.Ltr_s: case Byte_ascii.Ltr_t:
-				case Byte_ascii.Ltr_u: case Byte_ascii.Ltr_v: case Byte_ascii.Ltr_w: case Byte_ascii.Ltr_x: case Byte_ascii.Ltr_y: case Byte_ascii.Ltr_z:
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-				case Byte_ascii.Dot: case Byte_ascii.Dash: case Byte_ascii.Underline: case Byte_ascii.Colon:	// XML allowed punctuation
-				case Byte_ascii.Dollar:// MW: handles <br$2>;
+				case AsciiByte.Ltr_A: case AsciiByte.Ltr_B: case AsciiByte.Ltr_C: case AsciiByte.Ltr_D: case AsciiByte.Ltr_E:
+				case AsciiByte.Ltr_F: case AsciiByte.Ltr_G: case AsciiByte.Ltr_H: case AsciiByte.Ltr_I: case AsciiByte.Ltr_J:
+				case AsciiByte.Ltr_K: case AsciiByte.Ltr_L: case AsciiByte.Ltr_M: case AsciiByte.Ltr_N: case AsciiByte.Ltr_O:
+				case AsciiByte.Ltr_P: case AsciiByte.Ltr_Q: case AsciiByte.Ltr_R: case AsciiByte.Ltr_S: case AsciiByte.Ltr_T:
+				case AsciiByte.Ltr_U: case AsciiByte.Ltr_V: case AsciiByte.Ltr_W: case AsciiByte.Ltr_X: case AsciiByte.Ltr_Y: case AsciiByte.Ltr_Z:
+				case AsciiByte.Ltr_a: case AsciiByte.Ltr_b: case AsciiByte.Ltr_c: case AsciiByte.Ltr_d: case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_f: case AsciiByte.Ltr_g: case AsciiByte.Ltr_h: case AsciiByte.Ltr_i: case AsciiByte.Ltr_j:
+				case AsciiByte.Ltr_k: case AsciiByte.Ltr_l: case AsciiByte.Ltr_m: case AsciiByte.Ltr_n: case AsciiByte.Ltr_o:
+				case AsciiByte.Ltr_p: case AsciiByte.Ltr_q: case AsciiByte.Ltr_r: case AsciiByte.Ltr_s: case AsciiByte.Ltr_t:
+				case AsciiByte.Ltr_u: case AsciiByte.Ltr_v: case AsciiByte.Ltr_w: case AsciiByte.Ltr_x: case AsciiByte.Ltr_y: case AsciiByte.Ltr_z:
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+				case AsciiByte.Dot: case AsciiByte.Dash: case AsciiByte.Underline: case AsciiByte.Colon:	// XML allowed punctuation
+				case AsciiByte.Dollar:// MW: handles <br$2>;
 					++pos;
 					break;
 				// comment check
-				case Byte_ascii.Bang:
+				case AsciiByte.Bang:
 					boolean comment_found = false;
 					if (name_bgn == pos && Bry_.Eq(src, pos + 1, pos + 3, Comment_bgn)) {
 						int comment_end_pos = Bry_find_.Find_fwd(src, Comment_end, pos + 3);
@@ -109,7 +119,7 @@ public class Mwh_doc_parser {
 				default:
 					return pos;
 				// slash -> either "</b>"  or "<b/>"
-				case Byte_ascii.Slash:
+				case AsciiByte.Slash:
 					if (name_bgn == pos) {	// "</"; EX: "</b>"
 						nde_is_head = false;
 						++name_bgn;
@@ -120,7 +130,7 @@ public class Mwh_doc_parser {
 						name_end = pos;
 						++pos;
 						if (pos == src_end) return pos;		// end of doc; treat as text; EX: "<b/EOS"
-						if (src[pos] == Byte_ascii.Gt) {
+						if (src[pos] == AsciiByte.Gt) {
 							nde_end_tid = Nde_end_tid__inline;
 							++pos;
 						}
@@ -129,16 +139,16 @@ public class Mwh_doc_parser {
 					}
 					break;
 				// stops "name"
-				case Byte_ascii.Gt:
+				case AsciiByte.Gt:
 					nde_end_tid = Nde_end_tid__gt;
 					name_end = pos;
 					++pos;
 					break;
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr: case Byte_ascii.Space:
+				case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr: case AsciiByte.Space:
 					nde_end_tid = Nde_end_tid__ws;
 					name_end = pos;
 					break;
-				case Byte_ascii.Backslash:	 // MW: allows "<br\>" -> "<br/>"
+				case AsciiByte.Backslash:	 // MW: allows "<br\>" -> "<br/>"
 					nde_end_tid = Nde_end_tid__backslash;
 					name_end = pos;
 					break;
@@ -171,20 +181,20 @@ public class Mwh_doc_parser {
 						byte b = src[tmp_pos];
 						switch (b) {
 							// angle_end -> stop iterating
-							case Byte_ascii.Angle_end:
+							case AsciiByte.AngleEnd:
 								atrs_end = tmp_pos;
 								head_end = tmp_pos + 1;
 								nde_end_tid = Mwh_doc_parser.Nde_end_tid__gt;
 								loop = false;
 								break;
 							// slash -> check for "/>" or " / "
-							case Byte_ascii.Slash:
+							case AsciiByte.Slash:
 								int nxt_pos = tmp_pos + 1;
 								if		(nxt_pos == src_end) {
 									nde_end_tid = Mwh_doc_parser.Nde_end_tid__invalid;
 									loop = false;
 								}
-								else if (src[nxt_pos] == Byte_ascii.Angle_end) {
+								else if (src[nxt_pos] == AsciiByte.AngleEnd) {
 									atrs_end = tmp_pos;
 									head_end = tmp_pos + 2;
 									nde_end_tid = Mwh_doc_parser.Nde_end_tid__inline;
@@ -206,11 +216,11 @@ public class Mwh_doc_parser {
 			}
 			switch (nde_end_tid) {
 				case Nde_end_tid__inline:
-					wkr.On_nde_head_end(this, src, cur_nde_tid, nde_bgn, pos, Bool_.Y);
+					wkr.On_nde_head_end(this, src, cur_nde_tid, nde_bgn, pos, BoolUtl.Y);
 					txt_bgn = pos;
 					break;
 				case Nde_end_tid__gt:
-					wkr.On_nde_head_end(this, src, cur_nde_tid, nde_bgn, pos, Bool_.N);
+					wkr.On_nde_head_end(this, src, cur_nde_tid, nde_bgn, pos, BoolUtl.N);
 					txt_bgn = pos;
 					if (	nde_itm != null
 						&&	!nde_itm.Single_only_html()				// ignore <b>

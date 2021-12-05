@@ -13,8 +13,20 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.bnds; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.gfui.ipts.*; import gplx.xowa.guis.cmds.*;
+package gplx.xowa.guis.bnds;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.GfsCtx;
+import gplx.Int_;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.gfui.ipts.IptArg;
+import gplx.gfui.ipts.IptArg_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.guis.cmds.Xog_cmd_itm_;
 interface Xog_bnd_wkr {
 	void Bind_ipt_to_box(String box, String ipt);
 }
@@ -40,7 +52,7 @@ class Xog_bnd_temp implements Gfo_invk {
 	// private void Init_itm(String cmd, int idx, int box, String ipt) {Init_itm(cmd, idx, box, IptArg_.parse_or_none_(ipt));}
 	private void Init_itm(String cmd, int idx, int box, IptArg ipt) {
 		String key = cmd + "-" + Int_.To_str(idx + List_adp_.Base1);		// EX: xowa.widgets.url.focus-1 xowa.widgets.url.focus-2
-		Xog_bnd_itm itm = new Xog_bnd_itm(key, Bool_.Y, cmd, box, ipt);
+		Xog_bnd_itm itm = new Xog_bnd_itm(key, BoolUtl.Y, cmd, box, ipt);
 		boxs[box].Add(itm);
 		regy.Add(itm.Key(), itm);
 		app.Cfg().Bind_many_app(this, cmd);

@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*; import gplx.xowa.*; import gplx.xowa.bldrs.*; import gplx.xowa.bldrs.cmds.*; import gplx.xowa.bldrs.cmds.texts.*;
+package gplx.xowa.bldrs.cmds.texts.tdbs; import gplx.*;
 import gplx.core.ios.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.wikis.tdbs.*; import gplx.xowa.wikis.tdbs.xdats.*;
 public class Io_sort_cmd_ns implements Io_make_cmd {
 	Xob_xdat_file_wtr fil_wtr; Bry_bfr reg_bfr = Bry_bfr_.New(), key_bfr_0 = Bry_bfr_.New_w_size(512), key_bfr_n = Bry_bfr_.New_w_size(512);
@@ -36,7 +37,7 @@ public class Io_sort_cmd_ns implements Io_make_cmd {
 		if (key_bfr_0.Len() == 0) {key_bfr_0.Add_mid(bfr, key_bgn, key_end);}
 		key_bfr_n.Clear().Add_mid(bfr, key_bgn, key_end);
 		fil_wtr.Bfr().Add_mid(rdr.Bfr(), itm_bgn, itm_end);
-		fil_wtr.Add_idx(Byte_ascii.Null);
+		fil_wtr.Add_idx(AsciiByte.Null);
 		++itm_count;
 	}
 	public void Sort_end() {
@@ -46,10 +47,10 @@ public class Io_sort_cmd_ns implements Io_make_cmd {
 	}
 	private void Flush() {
 		reg_bfr
-			.Add_int_variable(fil_count++).Add_byte(Byte_ascii.Pipe)
-			.Add_bfr_and_preserve(key_bfr_0).Add_byte(Byte_ascii.Pipe)
-			.Add_bfr_and_preserve(key_bfr_n).Add_byte(Byte_ascii.Pipe)
-			.Add_int_variable(itm_count).Add_byte(Byte_ascii.Nl);
+			.Add_int_variable(fil_count++).Add_byte(AsciiByte.Pipe)
+			.Add_bfr_and_preserve(key_bfr_0).Add_byte(AsciiByte.Pipe)
+			.Add_bfr_and_preserve(key_bfr_n).Add_byte(AsciiByte.Pipe)
+			.Add_int_variable(itm_count).Add_byte(AsciiByte.Nl);
 		itm_count = 0;
 		key_bfr_0.Clear();
 		if (fil_wtr.Fil_idx() % 10 == 0)

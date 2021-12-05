@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.users.wikis; import gplx.*;
 import gplx.core.envs.*;
+import gplx.objects.strings.AsciiByte;
 class Xofs_url_itm {
 	public boolean Tid_is_xowa() {return tid_is_xowa;} public void Tid_is_xowa_(boolean v) {tid_is_xowa = v;} private boolean tid_is_xowa = true;
 	public String Raw() {return raw;} public void Raw_(String v) {raw = v;} private String raw;
@@ -45,19 +46,19 @@ class Xofs_url_itm_parser {
 		for (int i = Xowa_fa_protocol_len; i < raw_len; ++i) {
 			byte b = raw[i];
 			switch (b) {
-				case Byte_ascii.Slash:			// "xowa-fs://" defines "/" as dir separator
+				case AsciiByte.Slash:			// "xowa-fs://" defines "/" as dir separator
 					url_bfr.Add_byte(dir_spr);	// swap out to cur os dir_spr
 					break;
-				case Byte_ascii.Tilde:			// "xowa-fs://" defines "~{" as swap symbol
+				case AsciiByte.Tilde:			// "xowa-fs://" defines "~{" as swap symbol
 					int remaining = raw_len - i - 1;	// -1
-					if (remaining > 0 && raw[i + 1] == Byte_ascii.Curly_bgn) {	// "~{"
-						if (remaining > 2 && raw[i+2] == Byte_ascii.Tilde && raw[i+3] == Byte_ascii.Curly_bgn) { // "~{~{" -> "~{"
-							url_bfr.Add_byte(Byte_ascii.Tilde).Add_byte(Byte_ascii.Curly_bgn);
+					if (remaining > 0 && raw[i + 1] == AsciiByte.CurlyBgn) {	// "~{"
+						if (remaining > 2 && raw[i+2] == AsciiByte.Tilde && raw[i+3] == AsciiByte.CurlyBgn) { // "~{~{" -> "~{"
+							url_bfr.Add_byte(AsciiByte.Tilde).Add_byte(AsciiByte.CurlyBgn);
 							i += 3;
 						}
 						else {
 							int name_bgn = i + 2;	// skip "~{"
-							int name_end = Bry_find_.Find_fwd(raw, Byte_ascii.Curly_end, name_bgn);
+							int name_end = Bry_find_.Find_fwd(raw, AsciiByte.CurlyEnd, name_bgn);
 							byte[] name = (byte[])names.Get_by_mid(raw, name_bgn, name_end);
 							if (name == null) throw Err_.new_wo_type("name not found", "raw", raw_str, "name", String_.new_u8(raw, name_bgn, name_end));
 							url_bfr.Add(name);

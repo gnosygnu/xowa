@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.ctgs.htmls.pageboxs; import gplx.*;
+import gplx.objects.lists.ComparerAble;
+import gplx.xowa.*;
 import gplx.core.lists.hashs.*;
 class Xoctg_pagebox_hash {
 	private final Ordered_hash hash_by_ttl = Ordered_hash_.New_bry();
@@ -44,7 +46,7 @@ class Xoctg_pagebox_hash {
 		}
 	}
 }
-class Xoctg_pagebox_hash_sorter implements gplx.core.lists.ComparerAble {
+class Xoctg_pagebox_hash_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xoctg_pagebox_itm lhs = (Xoctg_pagebox_itm)lhsObj;
 		Xoctg_pagebox_itm rhs = (Xoctg_pagebox_itm)rhsObj;

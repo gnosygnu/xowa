@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.files.caches; import gplx.*; import gplx.xowa.*; import gplx.xowa.files.*;
+package gplx.xowa.files.caches; import gplx.*;
+import gplx.objects.lists.ComparerAble;
+import gplx.xowa.*; import gplx.xowa.files.*;
 import gplx.dbs.*; import gplx.dbs.cfgs.*;
 import gplx.xowa.files.repos.*; import gplx.xowa.files.imgs.*;
 import gplx.xowa.wikis.*; import gplx.xowa.wikis.domains.*; import gplx.xowa.users.data.*;
@@ -240,7 +242,7 @@ class Xou_cache_grp {
 	}
 	public Xou_cache_itm Get_at(int i) {return (Xou_cache_itm)list.Get_at(i);}
 }
-class Xou_cache_grp_sorter implements gplx.core.lists.ComparerAble {
+class Xou_cache_grp_sorter implements ComparerAble {
 	public int compare(Object lhsObj, Object rhsObj) {
 		Xou_cache_grp lhs = (Xou_cache_grp)lhsObj;
 		Xou_cache_grp rhs = (Xou_cache_grp)rhsObj;

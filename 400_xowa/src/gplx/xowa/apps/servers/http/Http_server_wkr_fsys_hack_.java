@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.apps.servers.http; import gplx.*; import gplx.xowa.*; import gplx.xowa.apps.*; import gplx.xowa.apps.servers.*;
+package gplx.xowa.apps.servers.http; import gplx.*;
 import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
 class Http_server_wkr_fsys_hack_ {
 	private static final byte[]
 	  Bry__file_lhs = Bry_.new_a7("file:///")
@@ -55,22 +56,22 @@ class Http_server_wkr_fsys_hack_ {
 			// get quote_bgn char before "file:///"
 			int quote_bgn = file_bgn - 1;
 			byte quote_bgn_char = html_bry[quote_bgn];
-			byte quote_end_char = Byte_ascii.Null;
+			byte quote_end_char = AsciiByte.Null;
 			boolean quote_is_ws = false;
 
 			// get quote_end char
 			switch (quote_bgn_char) {
-				case Byte_ascii.Apos:      // EX: 'file:///...'
-				case Byte_ascii.Quote:     // EX: "file:///..."
+				case AsciiByte.Apos:      // EX: 'file:///...'
+				case AsciiByte.Quote:     // EX: "file:///..."
 					quote_end_char = quote_bgn_char;
 					break;
-				case Byte_ascii.Paren_bgn: // EX: url(file:///...)
-					quote_end_char = Byte_ascii.Paren_end;
+				case AsciiByte.ParenBgn: // EX: url(file:///...)
+					quote_end_char = AsciiByte.ParenEnd;
 					break;
-				case Byte_ascii.Space:     // EX: '\sfile:///...\n'; NOTE: don't know if this is needed, but just in case it's in TemplateStyles.css
-				case Byte_ascii.Tab:
-				case Byte_ascii.Nl:
-				case Byte_ascii.Cr:
+				case AsciiByte.Space:     // EX: '\sfile:///...\n'; NOTE: don't know if this is needed, but just in case it's in TemplateStyles.css
+				case AsciiByte.Tab:
+				case AsciiByte.Nl:
+				case AsciiByte.Cr:
 					quote_is_ws = true;
 					quote_end_char = quote_bgn_char;
 					break;
@@ -79,7 +80,7 @@ class Http_server_wkr_fsys_hack_ {
 			}
 
 			// preceding char is not supported; exit; EX: '!file:///'
-			if (quote_end_char == Byte_ascii.Null) {
+			if (quote_end_char == AsciiByte.Null) {
 				bfr.Add_mid(html_bry, pos, file_end);
 				pos = file_end;
 				continue;

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.htmls; import gplx.*; import gplx.langs.*;
+package gplx.langs.htmls; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	public static final int 
 	  Id__comment		= -3
@@ -283,9 +284,9 @@ public class Gfh_tag_ {	// NOTE: not serialized; used by tag_rdr
 	, Comm_end_len = Comm_end.length
 	;
 	public static final byte[] Rhs_bgn = Bry_.new_a7("</");
-	public static void Bld_lhs_bgn(Bry_bfr bfr, byte[] tag) {bfr.Add_byte(Byte_ascii.Lt).Add(tag);}						// <tag
-	public static void Bld_lhs_bgn(Bry_bfr bfr, int tag_id) {bfr.Add_byte(Byte_ascii.Lt).Add_str_a7(To_str(tag_id));}   // <tag
-	public static void Bld_lhs_end_nde(Bry_bfr bfr)			{bfr.Add_byte(Byte_ascii.Gt);}								// >
-	public static void Bld_lhs_end_inl(Bry_bfr bfr)			{bfr.Add_byte(Byte_ascii.Slash).Add_byte(Byte_ascii.Gt);}	// "/>"
-	public static void Bld_rhs(Bry_bfr bfr, byte[] name)	{bfr.Add(Rhs_bgn).Add(name).Add_byte(Byte_ascii.Angle_end);}	// EX:"</tag_name>"
+	public static void Bld_lhs_bgn(Bry_bfr bfr, byte[] tag) {bfr.Add_byte(AsciiByte.Lt).Add(tag);}						// <tag
+	public static void Bld_lhs_bgn(Bry_bfr bfr, int tag_id) {bfr.Add_byte(AsciiByte.Lt).Add_str_a7(To_str(tag_id));}   // <tag
+	public static void Bld_lhs_end_nde(Bry_bfr bfr)			{bfr.Add_byte(AsciiByte.Gt);}								// >
+	public static void Bld_lhs_end_inl(Bry_bfr bfr)			{bfr.Add_byte(AsciiByte.Slash).Add_byte(AsciiByte.Gt);}	// "/>"
+	public static void Bld_rhs(Bry_bfr bfr, byte[] name)	{bfr.Add(Rhs_bgn).Add(name).Add_byte(AsciiByte.AngleEnd);}	// EX:"</tag_name>"
 }

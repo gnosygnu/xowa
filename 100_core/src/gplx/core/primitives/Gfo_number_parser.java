@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.core.primitives;
 
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Decimal_adp;
 import gplx.Decimal_adp_;
 import gplx.Int_;
@@ -48,9 +48,9 @@ public class Gfo_number_parser {
 			if (loop_end + 2 < end) {		// ArrayOutOfBounds check
 				byte b_2 = ary[loop_end + 2];
 				switch (b_2) {
-					case Byte_ascii.Ltr_x:
-					case Byte_ascii.Ltr_X:								// is 2nd char x?
-						if (ary[loop_end + 1] == Byte_ascii.Num_0) {	// is 1st char 0?
+					case AsciiByte.Ltr_x:
+					case AsciiByte.Ltr_X:								// is 2nd char x?
+						if (ary[loop_end + 1] == AsciiByte.Num0) {	// is 1st char 0?
 							factor = 16;
 							input_is_hex = true;
 						}
@@ -63,21 +63,21 @@ public class Gfo_number_parser {
 		for (int i = loop_bgn; i > loop_end; i--) {
 			byte cur = ary[i];
 			switch (cur) {
-				case Byte_ascii.Num_0:
-				case Byte_ascii.Num_1:
-				case Byte_ascii.Num_2:
-				case Byte_ascii.Num_3:
-				case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5:
-				case Byte_ascii.Num_6:
-				case Byte_ascii.Num_7:
-				case Byte_ascii.Num_8:
-				case Byte_ascii.Num_9:
-					num_val += (cur - Byte_ascii.Num_0) * multiplier;
+				case AsciiByte.Num0:
+				case AsciiByte.Num1:
+				case AsciiByte.Num2:
+				case AsciiByte.Num3:
+				case AsciiByte.Num4:
+				case AsciiByte.Num5:
+				case AsciiByte.Num6:
+				case AsciiByte.Num7:
+				case AsciiByte.Num8:
+				case AsciiByte.Num9:
+					num_val += (cur - AsciiByte.Num0) * multiplier;
 					multiplier *= factor;
 					has_num = true;
 					break;
-				case Byte_ascii.Dot:
+				case AsciiByte.Dot:
 					if (has_frac) return Has_err_y_();
 					frc_int = num_val;
 					num_val = 0;
@@ -85,28 +85,28 @@ public class Gfo_number_parser {
 					multiplier = 1;
 					has_frac = true;
 					break;
-				case Byte_ascii.Comma:
+				case AsciiByte.Comma:
 					if (comma_nil)
 						comma_nil = false;
 					else
 						return Has_err_y_();
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					if (has_neg) return Has_err_y_();
 					has_neg = true;
 					break;
-				case Byte_ascii.Space:
+				case AsciiByte.Space:
 					if		(i == bgn) {}	// space at bgn
 					else if (i == end - 1 && ignore_space_at_end) {}	// ignore space at end; DATE:2015-04-29
 					else
 						return Has_err_y_();
 					break;
-				case Byte_ascii.Plus:
+				case AsciiByte.Plus:
 					if (has_plus) return Has_err_y_();
 					has_plus = true;
 					break;
-				case Byte_ascii.Ltr_e:
-				case Byte_ascii.Ltr_E:
+				case AsciiByte.Ltr_e:
+				case AsciiByte.Ltr_E:
 					if (input_is_hex) {
 						num_val += 14 * multiplier;	// NOTE: 14=value of e/E
 						multiplier *= factor;
@@ -124,34 +124,34 @@ public class Gfo_number_parser {
 						has_num = false; // 2020-09-07|ISSUE#:795|scientific notation requires coefficient; set has_num to false which will fail below if no coefficient
 					}
 					break;
-				case Byte_ascii.Ltr_A:
-				case Byte_ascii.Ltr_B:
-				case Byte_ascii.Ltr_C:
-				case Byte_ascii.Ltr_D:
-				case Byte_ascii.Ltr_F:
+				case AsciiByte.Ltr_A:
+				case AsciiByte.Ltr_B:
+				case AsciiByte.Ltr_C:
+				case AsciiByte.Ltr_D:
+				case AsciiByte.Ltr_F:
 					if (input_is_hex) {
-						num_val += (cur - Byte_ascii.Ltr_A + 10) * multiplier;
+						num_val += (cur - AsciiByte.Ltr_A + 10) * multiplier;
 						multiplier *= factor;
 						has_num = true;
 					}
 					else
 						return Has_err_y_();
 					break;
-				case Byte_ascii.Ltr_a:
-				case Byte_ascii.Ltr_b:
-				case Byte_ascii.Ltr_c:
-				case Byte_ascii.Ltr_d:
-				case Byte_ascii.Ltr_f:
+				case AsciiByte.Ltr_a:
+				case AsciiByte.Ltr_b:
+				case AsciiByte.Ltr_c:
+				case AsciiByte.Ltr_d:
+				case AsciiByte.Ltr_f:
 					if (input_is_hex) {
-						num_val += (cur - Byte_ascii.Ltr_a + 10) * multiplier;
+						num_val += (cur - AsciiByte.Ltr_a + 10) * multiplier;
 						multiplier *= factor;
 						has_num = true;
 					}
 					else
 						return Has_err_y_();
 					break;
-				case Byte_ascii.Ltr_x:
-				case Byte_ascii.Ltr_X:
+				case AsciiByte.Ltr_x:
+				case AsciiByte.Ltr_X:
 					if (input_is_hex)
 						return (factor == 16) ? this : Has_err_y_();	// check for '0x'
 					else

@@ -13,9 +13,16 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.updates; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*;
-import gplx.xowa.addons.apps.cfgs.*;
-import gplx.xowa.addons.apps.updates.dbs.*;
+package gplx.xowa.addons.apps.updates;
+import gplx.Err_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Int_;
+import gplx.Io_url;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app;
+import gplx.xowa.Xoa_app_;
+import gplx.xowa.addons.apps.cfgs.Xocfg_mgr;
+import gplx.xowa.addons.apps.updates.dbs.Xoa_update_db_mgr_;
 public class Xoa_update_startup {
 	public static boolean Show_at_startup(Xoa_app app) {
 		try {
@@ -28,7 +35,7 @@ public class Xoa_update_startup {
 
 			// check online for updates
 			Io_url db_url = Xoa_update_db_mgr_.Url(app);
-			Xoa_update_db_mgr_.Download_from_inet(app, Bool_.Y, db_url);
+			Xoa_update_db_mgr_.Download_from_inet(app, BoolUtl.Y, db_url);
 			
 			// check offline for updates
 			int version_cutoff = cfg.Get_int_app_or(Cfg__version_cutoff, Xoa_app_.Version_id);

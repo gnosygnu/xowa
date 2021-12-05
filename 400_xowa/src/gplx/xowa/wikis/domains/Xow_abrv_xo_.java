@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.wikis.domains; import gplx.*; import gplx.xowa.*; import gplx.xowa.wikis.*;
+package gplx.xowa.wikis.domains; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*;
 public class Xow_abrv_xo_ {
 	public static byte[] To_bry(byte[] domain_bry) {
@@ -23,7 +24,7 @@ public class Xow_abrv_xo_ {
 	public static byte[] To_bry(byte[] domain_bry, byte[] lang_key, Xow_domain_tid type) {	// en.wikipedia.org -> en.w			
 		byte[] type_abrv = type.Abrv();
 		if		(type.Multi_lang())			// wikipedia,wiktionary,etc..
-			return Bry_.Add(lang_key, Byte_ascii.Dot_bry, type_abrv);
+			return Bry_.Add(lang_key, AsciiByte.DotBry, type_abrv);
 		else if (type_abrv.length > 0)		// commons,wbase,species,etc..
 			return type_abrv;
 		else								// home;wikia;others
@@ -33,7 +34,7 @@ public class Xow_abrv_xo_ {
 		int src_len = src.length;
 		byte[] domain_bry = src;	// default to src; handles unknown abrv like "a.wikia.com";"xowa";others
 		Xow_domain_tid type = null;
-		int dot_pos = Bry_find_.Find_fwd(src, Byte_ascii.Dot);
+		int dot_pos = Bry_find_.Find_fwd(src, AsciiByte.Dot);
 		if (dot_pos != Bry_find_.Not_found) {	// dot found; EX: "en.w"
 			type = Xow_domain_tid_.Get_abrv_as_itm(src, dot_pos + 1, src_len);
 			if (type != null) {		// type found; EX: ".w"

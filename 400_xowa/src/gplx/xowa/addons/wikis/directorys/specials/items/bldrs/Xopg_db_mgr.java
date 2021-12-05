@@ -13,13 +13,23 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.directorys.specials.items.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.directorys.*; import gplx.xowa.addons.wikis.directorys.specials.*; import gplx.xowa.addons.wikis.directorys.specials.items.*;
-import gplx.dbs.*; import gplx.dbs.cfgs.*;
-import gplx.xowa.wikis.dbs.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;	import gplx.xowa.wikis.data.site_stats.*;
-import gplx.xowa.wikis.nss.*;
-import gplx.xowa.addons.wikis.directorys.dbs.*;
-import gplx.xowa.addons.wikis.directorys.specials.items.bldrs.*;
-import gplx.xowa.addons.wikis.searchs.*; import gplx.xowa.addons.wikis.searchs.dbs.*;
+package gplx.xowa.addons.wikis.directorys.specials.items.bldrs;
+import gplx.Datetime_now;
+import gplx.Err_;
+import gplx.dbs.cfgs.Db_cfg_tbl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.addons.wikis.searchs.Srch_search_addon;
+import gplx.xowa.wikis.data.Xow_db_file;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.Xowd_cfg_key_;
+import gplx.xowa.wikis.data.site_stats.Xowd_site_stats_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_page_itm;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_site_ns_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_text_tbl;
+import gplx.xowa.wikis.nss.Xow_ns_;
 public class Xopg_db_mgr {
 	public static int Create
 		( Xowd_page_tbl page_tbl, Xowd_text_tbl text_tbl, int text_db_id, Xowd_site_ns_tbl ns_tbl, Db_cfg_tbl cfg_tbl
@@ -43,7 +53,7 @@ public class Xopg_db_mgr {
 		byte[] text_zip = text_tbl.Zip(text_raw);
 
 		// TODO.XO: should call redirect mgr
-		boolean redirect = Bool_.N;
+		boolean redirect = BoolUtl.N;
 
 		// do insert
 		page_tbl.Insert_bgn();

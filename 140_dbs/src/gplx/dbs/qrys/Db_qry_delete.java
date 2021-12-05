@@ -13,12 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.qrys; import gplx.*; import gplx.dbs.*;
-import gplx.core.criterias.*; import gplx.dbs.sqls.*;
+package gplx.dbs.qrys;
+import gplx.core.criterias.Criteria;
+import gplx.core.criterias.Criteria_;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_crt_;
+import gplx.dbs.Db_qry;
+import gplx.dbs.Db_qry_;
+import gplx.dbs.sqls.SqlQryWtr;
+import gplx.objects.primitives.BoolUtl;
 public class Db_qry_delete implements Db_qry {
 	Db_qry_delete(String base_table, Criteria where) {this.base_table = base_table; this.where = where;}
 	public int			Tid()							{return Db_qry_.Tid_delete;}
-	public boolean ReturnsRdr()					{return Bool_.N;}
+	public boolean ReturnsRdr()					{return BoolUtl.N;}
 	public String BaseTable()					{return base_table;} private final String base_table;
 	public String ToSqlExec(SqlQryWtr wtr)	{return wtr.ToSqlStr(this, false);}
 	public Criteria		Where()							{return where;} private final Criteria where;

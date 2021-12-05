@@ -13,11 +13,26 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.cldrs; import gplx.*;
-import gplx.core.primitives.*;
-import gplx.langs.phps.*;
-import gplx.langs.jsons.*;
-
+package gplx.xowa.xtns.cldrs;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Bry_find_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.core.primitives.Byte_obj_ref;
+import gplx.langs.jsons.Json_doc_wtr;
+import gplx.langs.phps.Php_evaluator;
+import gplx.langs.phps.Php_itm_ary;
+import gplx.langs.phps.Php_itm_kv;
+import gplx.langs.phps.Php_line;
+import gplx.langs.phps.Php_line_assign;
+import gplx.langs.phps.Php_parser;
+import gplx.langs.phps.Php_text_itm_parser;
+import gplx.langs.phps.Php_tkn_comment;
+import gplx.objects.primitives.BoolUtl;
 // REF.MW: /languages/data/Names.php
 class Language_names_converter {
 	private final Php_parser parser = new Php_parser();
@@ -83,9 +98,9 @@ class Language_names_converter {
 			if (i != 0) doc_wtr.Comma();
 			doc_wtr.Nde_bgn();
 			Language_name itm = ary[i];
-			doc_wtr.Kv(Bool_.N, key_code, itm.Code());
-			doc_wtr.Kv(Bool_.Y, key_name, itm.Name());
-			doc_wtr.Kv(Bool_.Y, key_note, itm.Note());
+			doc_wtr.Kv(BoolUtl.N, key_code, itm.Code());
+			doc_wtr.Kv(BoolUtl.Y, key_name, itm.Name());
+			doc_wtr.Kv(BoolUtl.Y, key_note, itm.Note());
 			doc_wtr.Nde_end();
 		}
 		doc_wtr.Ary_end();

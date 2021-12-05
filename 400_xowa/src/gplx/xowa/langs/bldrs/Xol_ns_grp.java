@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.bldrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.bldrs; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.langs.*;
 import gplx.xowa.wikis.nss.*;
 import gplx.xowa.langs.parsers.*;
 public class Xol_ns_grp implements Gfo_invk {
@@ -39,6 +41,6 @@ public class Xol_ns_grp implements Gfo_invk {
 		return this;
 	}	private static final String Invk_lang = Xol_lang_srl.Invk_lang, Invk_load_text = Xol_lang_srl.Invk_load_text;
 	private void Exec_load_text(byte[] bry) {
-		ary = (Xow_ns[])Array_.Resize_add(ary, Xol_lang_srl.Load_ns_grps(bry));
+		ary = (Xow_ns[])ArrayUtl.Append(ary, Xol_lang_srl.Load_ns_grps(bry));
 	}
 }

@@ -13,8 +13,22 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import org.junit.*; import gplx.xowa.wikis.nss.*; import gplx.xowa.wikis.data.*; import gplx.xowa.wikis.data.tbls.*;
+package gplx.xowa.xtns.pfuncs.wikis;
+import gplx.Bry_;
+import gplx.Byte_;
+import gplx.Datetime_now;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_test_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xop_fxt;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.wikis.data.Xow_db_mgr;
+import gplx.xowa.wikis.data.tbls.Xowd_cat_core_tbl;
+import gplx.xowa.wikis.data.tbls.Xowd_page_tbl;
+import gplx.xowa.wikis.nss.Xow_ns_;
+import org.junit.Before;
+import org.junit.Test;
 public class Pfunc_pagesincategory_tst {
 	private final Pfunc_pagesincategory_tstr tstr = new Pfunc_pagesincategory_tstr();
 	@Before	public void setup()	{tstr.Init(); tstr.Init_category_counts("A", 1000, 2000, 3000);}
@@ -52,7 +66,7 @@ class Pfunc_pagesincategory_tstr {
 	public void Init_category_counts(String category_title, int pages, int subcs, int files) {
 		int page_id = 1;
 		page_tbl.Insert_bgn();
-		page_tbl.Insert_cmd_by_batch(page_id, Xow_ns_.Tid__category, Bry_.new_u8(category_title), Bool_.N, Datetime_now.Get(), 1, 1, 1, 1, -1);
+		page_tbl.Insert_cmd_by_batch(page_id, Xow_ns_.Tid__category, Bry_.new_u8(category_title), BoolUtl.N, Datetime_now.Get(), 1, 1, 1, 1, -1);
 		page_tbl.Insert_end();
 		cat_core_tbl.Insert_bgn();
 		cat_core_tbl.Insert_cmd_by_batch(page_id, pages, subcs, files, Byte_.Zero, 1);

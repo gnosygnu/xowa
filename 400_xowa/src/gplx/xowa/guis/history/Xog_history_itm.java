@@ -13,11 +13,13 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.history; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
+package gplx.xowa.guis.history; import gplx.*;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Xog_history_itm {
 	private final boolean redirect_force;
 	public Xog_history_itm(byte[] wiki, byte[] page, byte[] anch, byte[] qarg, boolean redirect_force, String bmk_pos) {
-		this.key = Bry_.Add_w_dlm(Byte_ascii.Pipe, wiki, page, anch, qarg, redirect_force ? Bool_.Y_bry : Bool_.N_bry);
+		this.key = Bry_.Add_w_dlm(AsciiByte.Pipe, wiki, page, anch, qarg, redirect_force ? BoolUtl.YBry : BoolUtl.NBry);
 		this.wiki = wiki; this.page = page; this.anch = anch; this.qarg = qarg;
 		this.redirect_force = redirect_force; this.bmk_pos = bmk_pos;
 	}

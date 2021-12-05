@@ -14,6 +14,7 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.htmls.core.wkrs.xndes.tags; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.htmls.core.wkrs.*; import gplx.xowa.htmls.core.wkrs.xndes.*;
 import gplx.core.brys.*;
 import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
@@ -67,7 +68,7 @@ public class Xohz_tag {
 	}
 	public boolean Decode(Xoh_hdoc_ctx hctx, Bry_bfr bfr, Bry_rdr rdr, byte[] src, int src_bgn, int src_end) {
 		int flag = rdr.Read_hzip_int(flag_len); flag_bldr.Decode(flag);
-		bfr.Add_byte(Byte_ascii.Angle_bgn).Add(key);
+		bfr.Add_byte(AsciiByte.AngleBgn).Add(key);
 		boolean tag_is_inline			= flag_bldr.Get_as_bool(flag__tag_is_inline);
 		boolean unknown_atrs_exist		= flag_bldr.Get_as_bool(flag__unknown_atrs_exist);
 		int unknown_atrs = unknown_atrs_exist ? rdr.Read_int_to() : 0;

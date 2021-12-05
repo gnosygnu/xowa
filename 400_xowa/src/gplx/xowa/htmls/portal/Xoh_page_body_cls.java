@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.portal; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*;
+package gplx.xowa.htmls.portal; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.xowa.wikis.*; import gplx.xowa.xtns.wbases.*;
 import gplx.xowa.wikis.nss.*;
 public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
@@ -26,12 +28,12 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 				case Xow_ns_.Tid__main:
 					tmp_bfr.Add_byte_space().Add(Bry_wb_entitypage);
 					tmp_bfr.Add_byte_space().Add(Bry_wb_itempage);
-					tmp_bfr.Add_byte_space().Add(Bry_wb_itempage).Add_byte(Byte_ascii.Dash).Add(ttl.Page_db());
+					tmp_bfr.Add_byte_space().Add(Bry_wb_itempage).Add_byte(AsciiByte.Dash).Add(ttl.Page_db());
 					break;
 				case Wdata_wiki_mgr.Ns_property:
 					tmp_bfr.Add_byte_space().Add(Bry_wb_entitypage);
 					tmp_bfr.Add_byte_space().Add(Bry_wb_propertypage);
-					tmp_bfr.Add_byte_space().Add(Bry_wb_propertypage).Add_byte(Byte_ascii.Dash).Add(ttl.Page_db());
+					tmp_bfr.Add_byte_space().Add(Bry_wb_propertypage).Add_byte(AsciiByte.Dash).Add(ttl.Page_db());
 					break;
 				default:
 					Gfo_usr_dlg_.Instance.Warn_many("", "", "unexpected ns for page_body_cls; ttl=~{0}", String_.new_u8(ttl.Raw()));
@@ -56,25 +58,25 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 		for (int i = 0; i < src_len; ++i) {
 			byte b = src[i];
 			switch (b) {
-				case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Space:
-				case Byte_ascii.Bang: case Byte_ascii.Quote: case Byte_ascii.Hash: case Byte_ascii.Dollar: case Byte_ascii.Percent:
-				case Byte_ascii.Amp: case Byte_ascii.Apos: case Byte_ascii.Paren_bgn: case Byte_ascii.Paren_end: case Byte_ascii.Star:
-				case Byte_ascii.Plus: case Byte_ascii.Comma: case Byte_ascii.Dot: case Byte_ascii.Backslash: case Byte_ascii.Slash:
-				case Byte_ascii.Colon: case Byte_ascii.Semic: case Byte_ascii.Gt: case Byte_ascii.Eq: case Byte_ascii.Lt:
-				case Byte_ascii.Question: case Byte_ascii.At: case Byte_ascii.Brack_bgn: case Byte_ascii.Brack_end:
-				case Byte_ascii.Pow: case Byte_ascii.Tick:
-				case Byte_ascii.Curly_bgn: case Byte_ascii.Pipe: case Byte_ascii.Curly_end: case Byte_ascii.Tilde:
+				case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Space:
+				case AsciiByte.Bang: case AsciiByte.Quote: case AsciiByte.Hash: case AsciiByte.Dollar: case AsciiByte.Percent:
+				case AsciiByte.Amp: case AsciiByte.Apos: case AsciiByte.ParenBgn: case AsciiByte.ParenEnd: case AsciiByte.Star:
+				case AsciiByte.Plus: case AsciiByte.Comma: case AsciiByte.Dot: case AsciiByte.Backslash: case AsciiByte.Slash:
+				case AsciiByte.Colon: case AsciiByte.Semic: case AsciiByte.Gt: case AsciiByte.Eq: case AsciiByte.Lt:
+				case AsciiByte.Question: case AsciiByte.At: case AsciiByte.BrackBgn: case AsciiByte.BrackEnd:
+				case AsciiByte.Pow: case AsciiByte.Tick:
+				case AsciiByte.CurlyBgn: case AsciiByte.Pipe: case AsciiByte.CurlyEnd: case AsciiByte.Tilde:
 					if (trg_bfr == null)
-						src[i] = Byte_ascii.Underline;
+						src[i] = AsciiByte.Underline;
 					else {
 						if (bgn != -1) {
 							trg_bfr.Add_mid(src, bgn, i);
 							bgn = -1;
 						}
-						trg_bfr.Add_byte(Byte_ascii.Underline);
+						trg_bfr.Add_byte(AsciiByte.Underline);
 					}
 					break;
-				case Byte_ascii.Underline: 
+				case AsciiByte.Underline:
 					if (trg_bfr == null) {
 						trg_bfr = Bry_bfr_.New_w_size(src_len);
 						trg_bfr.Add_mid(src, 0, i);
@@ -85,12 +87,12 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 					}
 					int repeat = 0;
 					for (int j = i + 1; j < src_len; ++j) {
-						if (src[j] == Byte_ascii.Underline)
+						if (src[j] == AsciiByte.Underline)
 							++repeat;
 						else
 							break;
 					}
-					trg_bfr.Add_byte(Byte_ascii.Underline);
+					trg_bfr.Add_byte(AsciiByte.Underline);
 					i += repeat;
 					break;
 				case -62:
@@ -100,7 +102,7 @@ public class Xoh_page_body_cls {	// REF.MW:Skin.php|getPageClasses
 							trg_bfr = Bry_bfr_.New_w_size(src_len);
 							trg_bfr.Add_mid(src, 0, i);
 						}
-						trg_bfr.Add_byte(Byte_ascii.Underline);
+						trg_bfr.Add_byte(AsciiByte.Underline);
 						++i;
 						continue;
 					}

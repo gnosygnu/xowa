@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers.utils; import gplx.*; import gplx.xowa.*; import gplx.xowa.parsers.*;
-import gplx.core.btries.*; import gplx.xowa.parsers.amps.*; import gplx.core.log_msgs.*;
+package gplx.xowa.parsers.utils; import gplx.*;
+import gplx.core.btries.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.parsers.amps.*; import gplx.core.log_msgs.*;
 import gplx.langs.htmls.entitys.*;
 public class Xop_sanitizer {
 	private Btrie_slim_mgr trie = Btrie_slim_mgr.cs(), amp_trie;
@@ -52,20 +54,20 @@ public class Xop_sanitizer {
 				}
 				Btrie_itm_stub stub = (Btrie_itm_stub)o;
 				switch (stub.Tid()) {
-					case Tid_space:		bfr.Add_byte(Byte_ascii.Underline)	; ++pos		; break;
-					case Tid_percent:	bfr.Add_byte(Byte_ascii.Percent)	; ++pos		; break;
-					case Tid_colon:		bfr.Add_byte(Byte_ascii.Colon)		; pos += 3	; break;
+					case Tid_space:		bfr.Add_byte(AsciiByte.Underline)	; ++pos		; break;
+					case Tid_percent:	bfr.Add_byte(AsciiByte.Percent)	; ++pos		; break;
+					case Tid_colon:		bfr.Add_byte(AsciiByte.Colon)		; pos += 3	; break;
 					case Tid_amp:
 						++pos;
 						if (pos == end) {
-							bfr.Add_byte(Byte_ascii.Amp);
+							bfr.Add_byte(AsciiByte.Amp);
 							loop = false;
 							continue;
 						}
 						b = src[pos];
 						Object amp_obj = amp_trie.Match_bgn_w_byte(b, src, pos, end);
 						if (amp_obj == null) {
-							bfr.Add_byte(Byte_ascii.Amp);
+							bfr.Add_byte(AsciiByte.Amp);
 							bfr.Add_byte(b);
 							++pos;
 						}
@@ -85,7 +87,7 @@ public class Xop_sanitizer {
 									if (rv.Pass())
 										bfr.Add_u8_int(rv.Val());
 									else
-										bfr.Add_byte(Byte_ascii.Amp);
+										bfr.Add_byte(AsciiByte.Amp);
 									pos = rv.Pos();
 									break;
 							}

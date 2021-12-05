@@ -13,7 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.apps.cfgs.enums; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.apps.*; import gplx.xowa.addons.apps.cfgs.*;
+package gplx.xowa.addons.apps.cfgs.enums;
+import gplx.Err_;
+import gplx.Int_;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
 public class Xoitm_type_enum {
 	public static final int
 	  Tid__bool			= 0
@@ -27,7 +31,7 @@ public class Xoitm_type_enum {
 	;
 
 	public static int To_uid(String v) {
-		if		(String_.Eq(v, Bool_.Cls_val_name))			return Tid__bool;
+		if		(String_.Eq(v, BoolUtl.ClsValName))			return Tid__bool;
 		else if	(String_.Eq(v, Int_.Cls_val_name))			return Tid__int;
 		else if	(String_.Eq(v, String_.Cls_val_name))		return Tid__str;
 		else if	(String_.Eq(v, "memo"))						return Tid__memo;

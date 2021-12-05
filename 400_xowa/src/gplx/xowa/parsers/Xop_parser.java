@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.parsers; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.parsers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.btries.*;
 import gplx.xowa.langs.*; import gplx.xowa.htmls.core.htmls.*; import gplx.xowa.wikis.nss.*;
 import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.tmpls.*;
@@ -121,7 +123,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 	}
 	public int Parse_to_src_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, Btrie_fast_mgr trie, int pos, int len) {
 		if (Bry_.Len_eq_0(src)) return 0; // if empty array, return 0, else IndexError; PAGE:commons.wikimedia.org/wiki/File:England_in_the_UK_and_Europe.svg; ISSUE#:668; DATE:2020-02-17
-		byte b = pos == -1 ? Byte_ascii.Nl : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
+		byte b = pos == -1 ? AsciiByte.Nl : src[pos];	// simulate newLine at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
 		int txt_bgn = pos == -1 ? 0 : pos; Xop_tkn_itm txt_tkn = null;
 		Btrie_rv trv = new Btrie_rv();
 		while (true) {
@@ -144,7 +146,7 @@ public class Xop_parser {	// NOTE: parsers are reused; do not keep any read-writ
 		return pos;
 	}
 	public int Parse_to_stack_end(Xop_root_tkn root, Xop_ctx ctx, Xop_tkn_mkr tkn_mkr, byte[] src, int src_len, Btrie_fast_mgr trie, int pos, int end) {
-		byte b = pos == -1 ? Byte_ascii.Nl : src[pos];	// simulate \n at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
+		byte b = pos == -1 ? AsciiByte.Nl : src[pos];	// simulate \n at bgn of src; needed for lxrs which rely on \n (EX: "=a=")
 		int txt_bgn = pos == -1 ? 0 : pos; Xop_tkn_itm txt_tkn = null;
 		Xop_lxr lxr = null;
 		Btrie_rv trv = new Btrie_rv();

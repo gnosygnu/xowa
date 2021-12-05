@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.metas.parsers; import gplx.Bry_;
 import gplx.Bry_find_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.Int_;
 import gplx.String_;
@@ -36,12 +36,12 @@ public class Dbmeta_parser__fld {
 			rdr.Skip_ws();
 			if (rdr.Pos() == src_len) return fld;	// eos
 			switch (src[rdr.Pos()]) {
-				case Byte_ascii.Comma:		return fld;
-				case Byte_ascii.Paren_end:	return fld;
-				case Byte_ascii.Dash:
+				case AsciiByte.Comma:		return fld;
+				case AsciiByte.ParenEnd:	return fld;
+				case AsciiByte.Dash:
 					int nxt_pos = rdr.Pos() + 1;
-					if (src[nxt_pos] == Byte_ascii.Dash) {
-						nxt_pos = Bry_find_.Find_fwd(src, Byte_ascii.Nl, nxt_pos);
+					if (src[nxt_pos] == AsciiByte.Dash) {
+						nxt_pos = Bry_find_.Find_fwd(src, AsciiByte.Nl, nxt_pos);
 						rdr.Move_to(nxt_pos + 1);
 					}
 					else {
@@ -67,13 +67,13 @@ public class Dbmeta_parser__fld {
 		int paren_itms_count = type_itm.Paren_itms_count();
 		int len_1 = Int_.Min_value, len_2 = Int_.Min_value;
 		if (paren_itms_count > 0) {
-			rdr.Skip_ws().Chk(Byte_ascii.Paren_bgn);
+			rdr.Skip_ws().Chk(AsciiByte.ParenBgn);
 			len_1 = rdr.Skip_ws().Read_int_to_non_num(); if (len_1 == Int_.Min_value) rdr.Err_wkr().Fail("invalid fld len_1");
 			if (paren_itms_count == 2) {
-				rdr.Skip_ws().Chk(Byte_ascii.Comma);
+				rdr.Skip_ws().Chk(AsciiByte.Comma);
 				len_2 = rdr.Skip_ws().Read_int_to_non_num(); if (len_2 == Int_.Min_value) rdr.Err_wkr().Fail("invalid fld len_2");
 			}
-			rdr.Skip_ws().Chk(Byte_ascii.Paren_end);
+			rdr.Skip_ws().Chk(AsciiByte.ParenEnd);
 		}
 		return new DbmetaFldType(type_itm.Tid_ansi(), String_.new_u8(type_itm.Word()), len_1, len_2);
 	}

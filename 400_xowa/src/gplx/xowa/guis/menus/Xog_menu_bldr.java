@@ -13,8 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.guis.menus; import gplx.*; import gplx.xowa.*; import gplx.xowa.guis.*;
-import gplx.xowa.guis.cmds.*;
+package gplx.xowa.guis.menus; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 class Xog_menu_bldr {
 	private int indent = 0;
 	private Bry_bfr bfr = Bry_bfr_.Reset(0);
@@ -23,7 +23,7 @@ class Xog_menu_bldr {
 	private Xog_menu_bldr Indent_del() {indent -= 2; return this;}
 	private void Indent() {
 		if (indent > 0)
-			bfr.Add_byte_repeat(Byte_ascii.Space, indent);
+			bfr.Add_byte_repeat(AsciiByte.Space, indent);
 	}
 	public Xog_menu_bldr Add_spr() {
 		Indent();

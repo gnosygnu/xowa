@@ -13,8 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.math; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*;
-import gplx.xowa.parsers.*; import gplx.xowa.parsers.xndes.*; import gplx.xowa.parsers.logs.*;
+package gplx.xowa.xtns.math;
+import gplx.Bry_bfr;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.String_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.parsers.Xop_ctx;
+import gplx.xowa.parsers.logs.Xop_log_basic_wkr;
+import gplx.xowa.parsers.logs.Xop_log_wkr_factory;
+import gplx.xowa.parsers.xndes.Xop_xnde_tkn;
 public class Xomath_core implements Gfo_invk {
 	private final Xomath_html_wtr html_wtr = new Xomath_html_wtr();
 	private Xop_log_basic_wkr log_wkr;
@@ -25,7 +36,7 @@ public class Xomath_core implements Gfo_invk {
 		wiki.App().Cfg().Bind_many_wiki(this, wiki, Cfg__enabled, Cfg__renderer);
 	}
 	public void Log_wkr_(Xop_log_wkr_factory factory) {
-		this.log_wkr = factory.Make__generic().Save_src_str_(Bool_.Y);
+		this.log_wkr = factory.Make__generic().Save_src_str_(BoolUtl.Y);
 	}
 	public void Write(Bry_bfr bfr, Xop_ctx ctx, Xop_xnde_tkn xnde, byte[] src) {
 		if (log_wkr != null) log_wkr.Log_end_xnde(ctx.Page(), Xop_log_basic_wkr.Tid_math, src, xnde);

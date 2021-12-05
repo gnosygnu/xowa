@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.*;
 import gplx.core.log_msgs.*;
 interface Pxd_itm {
 	byte Tkn_tid();
@@ -45,10 +47,10 @@ class Pxd_itm_ {
 	, Tid_weekofyear        = 16
 	, Tid_ord_name          = 17
 	, Tid_weekdays          = 18
-	, Tid_dash 				= Byte_ascii.Dash
-	, Tid_dot 				= Byte_ascii.Dot
-	, Tid_slash 			= Byte_ascii.Slash
-	, Tid_colon 			= Byte_ascii.Colon
+	, Tid_dash 				= AsciiByte.Dash
+	, Tid_dot 				= AsciiByte.Dot
+	, Tid_slash 			= AsciiByte.Slash
+	, Tid_colon 			= AsciiByte.Colon
 	, Tid_ws				= 98
 	, Tid_sym				= 99
 	;

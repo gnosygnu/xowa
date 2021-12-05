@@ -13,8 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.brys; import gplx.*; import gplx.core.*;
+package gplx.core.brys; import gplx.*;
 import gplx.core.errs.*;
+import gplx.objects.arrays.ArrayUtl;
 public class Bry_err_wkr {
 	private String sect; private int sect_bgn;
 	public byte[] Src() {return src;} private byte[] src;
@@ -38,7 +39,7 @@ public class Bry_err_wkr {
 	private String Make_msg(String msg, int excerpt_bgn, int excerpt_end, Object[] args) {
 		int args_len = args.length;
 		args_len += 6;
-		args = (Object[])Array_.Resize(args, args_len);
+		args = (Object[])ArrayUtl.Resize(args, args_len);
 		args[args_len - 6] = "page"; args[args_len - 5] = Quote(page);
 		args[args_len - 4] = "sect"; args[args_len - 3] = Quote(sect);
 		args[args_len - 2] = "text"; args[args_len - 1] = Bry_.Escape_ws(Bry_.Mid_safe(src, excerpt_bgn, excerpt_end));

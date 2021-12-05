@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.metas.parsers; import gplx.Bool_;
+package gplx.dbs.metas.parsers; import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Int_;
 import gplx.Object_;
@@ -35,10 +35,10 @@ public class Dbmeta_parser__fld_tst {
 		fxt.Test_parse_fld("name_1 int"									, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableUnspecified));
 		fxt.Test_parse_fld("name_1 int null"							, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableNull));
 		fxt.Test_parse_fld("name_1 int not null"						, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableNotNull));
-		fxt.Test_parse_fld("name_1 int not null autoincrement"			, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableNotNull, Bool_.N, Bool_.Y));
-		fxt.Test_parse_fld("name_1 int not null primary key"			, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableNotNull, Bool_.Y, Bool_.N));
-		fxt.Test_parse_fld("name_1 int not null default -1"				, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableNotNull, Bool_.Y, Bool_.N, -1));
-		fxt.Test_parse_fld("name_1 varchar(3) not null default 'abc'"	, fxt.Make_fld("name_1", DbmetaFldType.TidStr, DbmetaFldItm.NullableNotNull, Bool_.Y, Bool_.N, "abc"));
+		fxt.Test_parse_fld("name_1 int not null autoincrement"			, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableNotNull, BoolUtl.N, BoolUtl.Y));
+		fxt.Test_parse_fld("name_1 int not null primary key"			, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableNotNull, BoolUtl.Y, BoolUtl.N));
+		fxt.Test_parse_fld("name_1 int not null default -1"				, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableNotNull, BoolUtl.Y, BoolUtl.N, -1));
+		fxt.Test_parse_fld("name_1 varchar(3) not null default 'abc'"	, fxt.Make_fld("name_1", DbmetaFldType.TidStr, DbmetaFldItm.NullableNotNull, BoolUtl.Y, BoolUtl.N, "abc"));
 	}
 	@Test public void Comment() {
 		fxt.Test_parse_fld("name_1 int --a\n"							, fxt.Make_fld("name_1", DbmetaFldType.TidInt, DbmetaFldItm.NullableUnspecified));

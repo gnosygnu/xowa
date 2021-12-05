@@ -13,9 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.specials; import gplx.*; import gplx.xowa.*; import gplx.xowa.addons.*; import gplx.xowa.addons.wikis.*; import gplx.xowa.addons.wikis.searchs.*;
-import gplx.core.net.*; import gplx.core.net.qargs.*;
-import gplx.xowa.addons.wikis.searchs.searchers.*; import gplx.xowa.addons.wikis.searchs.searchers.rslts.*;	
+package gplx.xowa.addons.wikis.searchs.specials; import gplx.*;
+import gplx.core.net.qargs.*;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.addons.wikis.searchs.searchers.*;
 public class Srch_qarg_mgr {
 	public Srch_qarg_mgr(Srch_ns_mgr ns_mgr) {this.ns_mgr = ns_mgr;}
 	public Srch_ns_mgr			Ns_mgr()		{return ns_mgr;} private final Srch_ns_mgr ns_mgr;
@@ -42,7 +43,7 @@ public class Srch_qarg_mgr {
 			}
 			else {
 				switch (tid) {
-					case Uid__search: 			this.search_raw 	= Bry_.Replace(qarg.Val_bry(), Byte_ascii.Plus, Byte_ascii.Space); break;
+					case Uid__search: 			this.search_raw 	= Bry_.Replace(qarg.Val_bry(), AsciiByte.Plus, AsciiByte.Space); break;
 					case Uid__slab_idx: 		this.slab_idx 		= Bry_.To_int_or(qarg.Val_bry(), 0); break;
 					case Uid__cancel: 			this.cancel			= qarg.Val_bry(); break;
 					default:					break;

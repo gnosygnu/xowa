@@ -13,7 +13,9 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*; import gplx.xowa.*;
+package gplx.xowa.addons.wikis.searchs.bldrs.cmds.adjustments; import gplx.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.xowa.*;
 import gplx.xowa.addons.wikis.searchs.bldrs.cmds.*;
 import gplx.dbs.*; import gplx.xowa.bldrs.*;
 import gplx.xowa.wikis.nss.*;
@@ -98,13 +100,13 @@ public class Adjustment_cmd implements Gfo_invk {
 				score_end = -1;
 			}
 		}
-		page_ary = (Page_stub[])Array_.Resize(page_ary, page_count);
+		page_ary = (Page_stub[])ArrayUtl.Resize(page_ary, page_count);
 		Save_sample(page_ary, wkr, wiki.Domain_bry(), ns.Id(), score_cur, score_end, summary_stmt, detail_stmt);
 		rdr.Rls();
 	}
 	private void Save_sample(Page_stub[] page_ary, Page_matcher_wkr wkr, byte[] domain_bry, int ns_id, int score_cur, int score_end, Db_stmt summary_stmt, Db_stmt detail_stmt) {			
 		// calc median
-		Array_.Sort(page_ary);
+		ArrayUtl.Sort(page_ary);
 		int ary_len = page_ary.length; if (ary_len == 0) return;	// occurs when ns has exact multiple of .01% pages; EX: 10,000 pages (but not 10,001, 10,002, etc..)
 		int median = Calc_median(page_ary);
 

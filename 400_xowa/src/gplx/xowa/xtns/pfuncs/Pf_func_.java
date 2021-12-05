@@ -15,13 +15,14 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.pfuncs; import gplx.*;
 import gplx.core.primitives.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*; import gplx.xowa.langs.kwds.*;
 import gplx.xowa.xtns.pfuncs.ifs.*; import gplx.xowa.xtns.pfuncs.times.*; import gplx.xowa.xtns.pfuncs.numbers.*; import gplx.xowa.xtns.pfuncs.ttls.*; import gplx.xowa.xtns.pfuncs.langs.*; import gplx.xowa.xtns.pfuncs.strings.*; import gplx.xowa.xtns.pfuncs.tags.*; import gplx.xowa.xtns.pfuncs.stringutils.*; import gplx.xowa.xtns.pfuncs.pages.*; import gplx.xowa.xtns.pfuncs.wikis.*;
 import gplx.xowa.parsers.*; import gplx.xowa.parsers.tmpls.*;
 import gplx.xowa.wikis.domains.*;
 import gplx.xowa.mediawiki.*;
 public class Pf_func_ {
-	public static final byte Name_dlm = Byte_ascii.Colon;
+	public static final byte Name_dlm = AsciiByte.Colon;
 	public static boolean Eval_arg_to_kvp(byte[][] rslt, Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, Bry_bfr tmp_bfr, int i) {
 		if (i >= self_args_len) return false;
 		// NOTE: must call Tmpl_evaluate; don't try to parse key / val by hand; EX:{{#tag:pre|a|{{#switch:a|a=id}}=c}}
@@ -43,7 +44,7 @@ public class Pf_func_ {
 	}
 	public static void Eval_arg_or(Bry_bfr bfr, Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, Arg_nde_tkn nde, byte[] or) {
 		nde.Key_tkn().Tmpl_evaluate(ctx, src, caller, bfr);	// NOTE: must add key b/c parser functions do not have keys and some usages pass in xml_tkns; EX: {{#if|<a href='{{{1}}}'|}}; "<a href" should not be interpreted as key
-		if (nde.KeyTkn_exists()) bfr.Add_byte(Byte_ascii.Eq);
+		if (nde.KeyTkn_exists()) bfr.Add_byte(AsciiByte.Eq);
 		nde.Val_tkn().Tmpl_evaluate(ctx, src, caller, bfr);
 	}
 	public static byte[] Eval_val_or(Xop_ctx ctx, byte[] src, Xot_invk caller, Xot_invk self, int self_args_len, int i, byte[] or) {
@@ -495,5 +496,5 @@ class Pf_func_bang extends Pf_func_base {
 	@Override public void Func_evaluate(Bry_bfr bfr, Xop_ctx ctx, Xot_invk caller, Xot_invk self, byte[] src) {bfr.Add_byte_pipe();}
 	@Override public Pf_func New(int id, byte[] name) {return this;}
 	public static final Pf_func_bang Instance = new Pf_func_bang();
-	Pf_func_bang() {this.Name_(Byte_ascii.Bang_bry);}
+	Pf_func_bang() {this.Name_(AsciiByte.BangBry);}
 }

@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.numbers; import gplx.*; import gplx.xowa.*; import gplx.xowa.langs.*;
+package gplx.xowa.langs.numbers; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 public class Xol_num_mgr implements Gfo_invk {
 	private boolean digits_translate;
 	protected Bry_bfr tmp_bfr = Bry_bfr_.Reset(32);
@@ -67,7 +68,7 @@ public class Xol_num_mgr implements Gfo_invk {
 	public static final String Invk_clear = "clear", Invk_separators = "separators"
 	, Invk_digits = "digits", Invk_digit_grouping_pattern = "digit_grouping_pattern", Invk_digit_grouping_pattern_ = "digit_grouping_pattern_";
 	public static final byte[]
-	  Separators_key__grp = new byte[]{Byte_ascii.Comma}
-	, Separators_key__dec = new byte[]{Byte_ascii.Dot}
+	  Separators_key__grp = new byte[]{AsciiByte.Comma}
+	, Separators_key__dec = new byte[]{AsciiByte.Dot}
 	;
 }

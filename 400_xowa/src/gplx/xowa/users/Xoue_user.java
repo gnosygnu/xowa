@@ -13,13 +13,35 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users; import gplx.*; import gplx.xowa.*;
-import gplx.core.envs.*;
-import gplx.dbs.*; import gplx.core.brys.fmtrs.*;
-import gplx.xowa.langs.*; import gplx.xowa.langs.msgs.*;
-import gplx.xowa.wikis.*; import gplx.xowa.wikis.xwikis.*; import gplx.xowa.users.history.*; import gplx.xowa.xtns.scribunto.*; import gplx.xowa.users.data.*;
-import gplx.xowa.files.*; import gplx.xowa.files.caches.*;
-import gplx.xowa.langs.genders.*;
+package gplx.xowa.users;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_split_;
+import gplx.GfoMsg;
+import gplx.Gfo_evt_mgr;
+import gplx.Gfo_evt_mgr_;
+import gplx.Gfo_evt_mgr_owner;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.String_;
+import gplx.core.brys.fmtrs.Bry_fmtr;
+import gplx.core.envs.Env_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.Xoa_ttl;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xoae_page;
+import gplx.xowa.Xow_wiki;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.genders.Xol_gender_;
+import gplx.xowa.langs.msgs.Xow_msg_mgr;
+import gplx.xowa.users.data.Xou_db_mgr;
+import gplx.xowa.users.history.Xou_history_mgr;
+import gplx.xowa.wikis.xwikis.Xow_xwiki_itm;
 public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 	public Xoue_user(Xoae_app app, Io_url user_dir) {
 		this.app = app; this.key = user_dir.NameOnly();
@@ -56,7 +78,7 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 	public void Init_by_app(Xoae_app app) {
 		Io_url user_system_cfg = fsys_mgr.App_data_cfg_dir().GenSubFil(Xou_fsys_mgr.Name_user_system_cfg);
 		if (!Io_mgr.Instance.ExistsFil(user_system_cfg)) Xou_user_.User_system_cfg_make(app.Usr_dlg(), user_system_cfg);
-		user_db_mgr.Init_by_app(Bool_.N, fsys_mgr.Root_dir().OwnerDir().GenSubFil("xowa.user." + key + ".sqlite3")); // EX: /xowa/user/xowa.user.anonymous.sqlite3
+		user_db_mgr.Init_by_app(BoolUtl.N, fsys_mgr.Root_dir().OwnerDir().GenSubFil("xowa.user." + key + ".sqlite3")); // EX: /xowa/user/xowa.user.anonymous.sqlite3
 		if (!Env_.Mode_testing()) {
 			this.Available_from_fsys();
 			// data_mgr.Init_by_app(app);
@@ -111,7 +133,7 @@ public class Xoue_user implements Xou_user, Gfo_evt_mgr_owner, Gfo_invk {
 		}
 	}
 	private void Available_from_bulk(byte[] raw) {
-		byte[][] wikis = Bry_split_.Split(raw, Byte_ascii.Nl);
+		byte[][] wikis = Bry_split_.Split(raw, AsciiByte.Nl);
 		Xowe_wiki usr_wiki = Wiki();
 		int wikis_len = wikis.length;
 		for (int i = 0; i < wikis_len; i++)

@@ -13,8 +13,12 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.users.wikis; import gplx.*; import gplx.xowa.*; import gplx.xowa.users.*;
-import org.junit.*; import gplx.core.envs.*;
+package gplx.xowa.users.wikis;
+import gplx.Tfds;
+import gplx.core.envs.Op_sys;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class Xofs_url_itm_parser_tst {		
 	@Before public void init() {fxt.Clear();} private Xofs_url_itm_parser_fxt fxt = new Xofs_url_itm_parser_fxt();
 	@Test public void Custom() 				{fxt.Test_parse_custom("/xowa/wiki/en.wikipedia.org/");}
@@ -40,12 +44,12 @@ class Xofs_url_itm_parser_fxt {
 	public Xofs_url_itm_parser_fxt Init_dir_spr_wnt() {parser.Dir_spr_(Op_sys.Wnt.Fsys_dir_spr_byte()); return this;}
 	public void Test_parse_custom(String raw) {
 		parser.Parse(itm, raw);
-		Tfds.Eq(Bool_.N, itm.Tid_is_xowa());
+		Tfds.Eq(BoolUtl.N, itm.Tid_is_xowa());
 		Tfds.Eq(raw, itm.Url());
 	}
 	public void Test_parse(String raw, String expd) {
 		parser.Parse(itm, raw);
-		Tfds.Eq(Bool_.Y, itm.Tid_is_xowa());
+		Tfds.Eq(BoolUtl.Y, itm.Tid_is_xowa());
 		Tfds.Eq(expd, itm.Url());
 	}
 }

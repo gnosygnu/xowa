@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs.bulks; import gplx.*; import gplx.dbs.*;
 import gplx.dbs.metas.*;
+import gplx.objects.strings.AsciiByte;
 public class Db_tbl_copy {
 	private final Bry_bfr bfr = Bry_bfr_.New();
 	private final Db_attach_mgr attach_mgr = new Db_attach_mgr();
@@ -34,13 +35,13 @@ public class Db_tbl_copy {
 		Dbmeta_fld_mgr flds = tbl.Flds();
 		int flds_len = flds.Len();
 		bfr.Add_str_a7("INSERT INTO ").Add_str_a7(trg_tbl).Add_byte_nl();
-		bfr.Add_byte(Byte_ascii.Paren_bgn);
+		bfr.Add_byte(AsciiByte.ParenBgn);
 		for (int i = 0; i < flds_len; ++i) {
 			DbmetaFldItm fld = flds.Get_at(i);
 			if (i != 0) bfr.Add_str_a7(", ");
 			bfr.Add_str_a7(fld.Name());
 		}
-		bfr.Add_byte(Byte_ascii.Paren_end).Add_byte_nl();
+		bfr.Add_byte(AsciiByte.ParenEnd).Add_byte_nl();
 		bfr.Add_str_a7("SELECT").Add_byte_nl().Add_byte_space();
 		for (int i = 0; i < flds_len; ++i) {
 			DbmetaFldItm fld = flds.Get_at(i);

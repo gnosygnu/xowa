@@ -15,7 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.xtns.wbases.parsers;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
@@ -78,8 +78,8 @@ abstract class Wdata_doc_parser_fxt_base {
 		Ordered_hash actl_hash = wdoc_parser.Parse_sitelinks(Q1_bry, json_parser.Parse_by_apos(raw));
 		Tfds.Eq_ary_str(actl_hash.To_ary(Wdata_sitelink_itm.class), expd);
 	}
-	public void Test_labels(String raw, Wdata_langtext_itm... expd)		{Test_langvals(raw, Bool_.Y, expd);}
-	public void Test_descriptions(String raw, Wdata_langtext_itm... expd)	{Test_langvals(raw, Bool_.N, expd);}
+	public void Test_labels(String raw, Wdata_langtext_itm... expd)		{Test_langvals(raw, BoolUtl.Y, expd);}
+	public void Test_descriptions(String raw, Wdata_langtext_itm... expd)	{Test_langvals(raw, BoolUtl.N, expd);}
 	private void Test_langvals(String raw, boolean labels_or_descriptions, Wdata_langtext_itm... expd) {
 		Ordered_hash actl_hash = wdoc_parser.Parse_langvals(Q1_bry, json_parser.Parse_by_apos(raw), labels_or_descriptions);
 		Tfds.Eq_ary_str(actl_hash.To_ary(Wdata_langtext_itm.class), expd);

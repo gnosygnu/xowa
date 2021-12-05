@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.dbs; import gplx.*;
 import gplx.dbs.qrys.*; import gplx.core.gfo_ndes.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
 public class Db_qry_fxt {
 	public static void Insert_kvo(Db_conn conn, String tblName, Keyval_list kvList) {
 		Db_qry_insert qry = Db_qry_.insert_(tblName);
@@ -37,12 +39,12 @@ public class Db_qry_fxt {
 	}
 	public static void tst_Select(Db_conn conn, String tblName, Db_mock_row... expdAry) {
 		GfoNde nde = Db_qry_fxt.SelectAll(conn, tblName);
-		int len = Array_.Len(expdAry);
+		int len = ArrayUtl.Len(expdAry);
 		for (int i = 0; i < len; i++) {
 			Db_mock_row expdRow = expdAry[i];
 			int actlIdx = (expdRow.Idx() == -1) ? i : expdRow.Idx();
 			GfoNde actlNde = nde.Subs().FetchAt_asGfoNde(actlIdx);
-			int fldLen = Array_.Len(expdRow.Dat());
+			int fldLen = ArrayUtl.Len(expdRow.Dat());
 			for (int j = 0; j < fldLen; j++) {
 				Db_mock_cell expdDat = expdRow.Dat()[j];
 				Object actlVal = expdDat.Fld() == null ? actlNde.ReadAt(j) : actlNde.Read(expdDat.Fld());
@@ -56,7 +58,7 @@ public class Db_qry_fxt {
 		while (rdr.Move_next()) {
 			for (int i = 0; i < cols_len; ++i) {
 				bfr.Add_obj(rdr.Read_at(i));
-				bfr.Add_byte(i == cols_len - 1 ? Byte_ascii.Nl : Byte_ascii.Pipe);
+				bfr.Add_byte(i == cols_len - 1 ? AsciiByte.Nl : AsciiByte.Pipe);
 			}
 		}
 		rdr.Rls();

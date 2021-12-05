@@ -13,9 +13,30 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.langs.bldrs; import gplx.*;
-import gplx.xowa.langs.*;
-import gplx.xowa.langs.kwds.*; import gplx.xowa.langs.parsers.*;
+package gplx.xowa.langs.bldrs;
+import gplx.Bry_;
+import gplx.Bry_split_;
+import gplx.Err_;
+import gplx.GfoMsg;
+import gplx.Gfo_invk;
+import gplx.Gfo_invk_;
+import gplx.GfsCtx;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.langs.Xoa_lang_mgr;
+import gplx.xowa.langs.Xol_lang_itm;
+import gplx.xowa.langs.Xol_lang_stub;
+import gplx.xowa.langs.Xol_lang_stub_;
+import gplx.xowa.langs.kwds.Xol_kwd_grp;
+import gplx.xowa.langs.kwds.Xol_kwd_grp_;
+import gplx.xowa.langs.kwds.Xol_kwd_itm;
+import gplx.xowa.langs.parsers.Xol_csv_parser;
 public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 	private final Xoa_lang_mgr lang_mgr;
 	public Xobc_utl_make_lang_kwds(Xoa_lang_mgr lang_mgr) {this.lang_mgr = lang_mgr;}		
@@ -31,12 +52,12 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 		byte[] rv = kwd_word;
 		if (!Hash_itm_applies(trailing_colons, lang_key, kwd_key, kwd_word)) {
 			int kwd_last = rv.length - 1;
-			if (kwd_last > 0 && rv[kwd_last] == Byte_ascii.Colon)
+			if (kwd_last > 0 && rv[kwd_last] == AsciiByte.Colon)
 				rv = Bry_.Mid(rv, 0, rv.length - 1);
 		}
 		if (Hash_itm_applies(prepend_hash, lang_key, kwd_key, kwd_word)) {
-			if (rv.length > 0 && rv[0] != Byte_ascii.Hash)
-				rv = Bry_.Add(Byte_ascii.Hash, rv);
+			if (rv.length > 0 && rv[0] != AsciiByte.Hash)
+				rv = Bry_.Add(AsciiByte.Hash, rv);
 		}
 		return rv;
 	}
@@ -56,7 +77,7 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 				tmp.Clear();
 				if (kwd_grp == null) {
 					kwd_grp = lang.Kwd_mgr().Get_or_new(kwd_id);
-					kwd_grp.Srl_load(Bool_.N, Bry_.Ary_empty);	// ASSUME: kwd explicitly added, but does not exist in language; default to !case_match
+					kwd_grp.Srl_load(BoolUtl.N, Bry_.Ary_empty);	// ASSUME: kwd explicitly added, but does not exist in language; default to !case_match
 				}
 
 				for (Xol_kwd_itm itm : kwd_grp.Itms())
@@ -105,17 +126,17 @@ public class Xobc_utl_make_lang_kwds implements Gfo_invk, Xol_lang_transform {
 		List_adp rv = List_adp_.New(); int fld_idx = 0;
 		while (true) {
 			boolean last = pos == src_len;	// NOTE: logic occurs b/c of \n}~-> dlm which gobbles up last \n
-			byte b = last ? Byte_ascii.Nl : src[pos];
+			byte b = last ? AsciiByte.Nl : src[pos];
 			switch (b) {
-				case Byte_ascii.Pipe:
+				case AsciiByte.Pipe:
 					cur_key = csv_parser.Load(src, fld_bgn, pos);
 					fld_bgn = pos + 1;
 					++fld_idx;
 					break;
-				case Byte_ascii.Nl:
+				case AsciiByte.Nl:
 					if (pos - fld_bgn > 0 || fld_idx == 1) {
 						byte[] cur_val = csv_parser.Load(src, fld_bgn, pos);
-						Xobcl_kwd_row row = new Xobcl_kwd_row(cur_key, Bry_split_.Split(cur_val, Byte_ascii.Tilde));
+						Xobcl_kwd_row row = new Xobcl_kwd_row(cur_key, Bry_split_.Split(cur_val, AsciiByte.Tilde));
 						rv.Add(row);
 					}
 					fld_bgn = pos + 1;
@@ -137,7 +158,7 @@ class Xobcl_kwd_lang {
 			grps_hash.Add(grp.Key(), grp);
 	}
 	public void Merge(Xobcl_kwd_row[] v) {
-		grps = (Xobcl_kwd_row[])Array_.Resize_add(grps, v);
+		grps = (Xobcl_kwd_row[])ArrayUtl.Append(grps, v);
 		for (Xobcl_kwd_row grp : v) {
 			grps_hash.AddIfDupeUseNth(grp.Key(), grp);	// NOTE: Add_if_dupe_use_nth instead of Add b/c kwds may be expanded; EX: lst is added to all langs but de requires #lst~#section~Abschnitt~; DATE:2013-06-02
 		}

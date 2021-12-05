@@ -13,7 +13,8 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.langs.gfs; import gplx.*; import gplx.langs.*;
+package gplx.langs.gfs; import gplx.*;
+import gplx.objects.strings.AsciiByte;
 interface Gfs_lxr {
 	int Lxr_tid();
 	int Process(Gfs_parser_ctx ctx, int bgn, int end);
@@ -97,7 +98,7 @@ class Gfs_lxr_semic implements Gfs_lxr {
 			case Gfs_lxr_.Tid_quote:
 			case Gfs_lxr_.Tid_paren_end:	ctx.Cur_nde_from_stack(); break;								// a();
 			case Gfs_lxr_.Tid_semic:		break;															// a;; ignore;
-			default:						ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), Byte_ascii.Semic); break;
+			default:						ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), AsciiByte.Semic); break;
 		}
 		return end;
 	}
@@ -109,7 +110,7 @@ class Gfs_lxr_dot implements Gfs_lxr {
 		switch (ctx.Prv_lxr()) {
 			case Gfs_lxr_.Tid_identifier:	ctx.Make_nde(bgn, end); break;		// a.
 			case Gfs_lxr_.Tid_paren_end:	break;								// a().
-			default:						ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), Byte_ascii.Dot); break;
+			default:						ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), AsciiByte.Dot); break;
 		}
 		return end;
 	}
@@ -120,7 +121,7 @@ class Gfs_lxr_paren_bgn implements Gfs_lxr {
 	public int Process(Gfs_parser_ctx ctx, int bgn, int end) {
 		switch (ctx.Prv_lxr()) {
 			case Gfs_lxr_.Tid_identifier:	ctx.Make_nde(bgn, end); break;						// a(;
-			default:						ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), Byte_ascii.Paren_bgn); break;
+			default:						ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), AsciiByte.ParenBgn); break;
 		}
 		return end;
 	}
@@ -133,7 +134,7 @@ class Gfs_lxr_paren_end implements Gfs_lxr {
 			case Gfs_lxr_.Tid_paren_bgn:
 			case Gfs_lxr_.Tid_quote:		break;									// "))", "abc)", "'abc')"
 			case Gfs_lxr_.Tid_identifier:	ctx.Make_atr_by_idf(); break;			// 123)
-			default:						ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), Byte_ascii.Paren_end); break;
+			default:						ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), AsciiByte.ParenEnd); break;
 		}
 		return end;
 	}
@@ -178,7 +179,7 @@ class Gfs_lxr_curly_bgn implements Gfs_lxr {
 		switch (ctx.Prv_lxr()) {
 			case Gfs_lxr_.Tid_identifier:		ctx.Make_nde(bgn, end); ctx.Stack_add(); break;		// a{;
 			case Gfs_lxr_.Tid_paren_end:		ctx.Stack_add(); break;								// a(){; NOTE: node exists but needs to be pushed onto stack
-			default:							ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), Byte_ascii.Curly_bgn); break;
+			default:							ctx.Err_mgr().Fail_invalid_lxr(ctx, bgn, this.Lxr_tid(), AsciiByte.CurlyBgn); break;
 		}
 		return end;
 	}

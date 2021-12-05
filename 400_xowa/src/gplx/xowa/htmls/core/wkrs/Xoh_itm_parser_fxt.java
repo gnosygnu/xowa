@@ -13,9 +13,17 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.htmls.core.wkrs; import gplx.*; import gplx.xowa.*; import gplx.xowa.htmls.*; import gplx.xowa.htmls.core.*;
-import gplx.core.brys.*;
-import gplx.langs.htmls.*; import gplx.langs.htmls.docs.*;
+package gplx.xowa.htmls.core.wkrs;
+import gplx.Bry_;
+import gplx.Gfo_usr_dlg_;
+import gplx.Tfds;
+import gplx.core.brys.Bry_err_wkr;
+import gplx.objects.primitives.BoolUtl;
+import gplx.xowa.Xoa_app_fxt;
+import gplx.xowa.Xoa_page_;
+import gplx.xowa.Xoae_app;
+import gplx.xowa.Xowe_wiki;
+import gplx.xowa.htmls.Xoh_page;
 public abstract class Xoh_itm_parser_fxt {
 	protected final Xoae_app app;
 	protected final Xowe_wiki wiki;
@@ -31,9 +39,9 @@ public abstract class Xoh_itm_parser_fxt {
 	public abstract Xoh_itm_parser Parser_get();
 	public void Test__parse__fail(String src_str, String expd) {
 		Gfo_usr_dlg_.Test__list__init();
-		Parser().Fail_throws_err_(Bool_.N);
+		Parser().Fail_throws_err_(BoolUtl.N);
 		Exec_parse(src_str);
-		Parser().Fail_throws_err_(Bool_.Y);
+		Parser().Fail_throws_err_(BoolUtl.Y);
 		Tfds.Eq_str(expd, Gfo_usr_dlg_.Test__list__term__get_1st());
 	}
 	public void Exec_parse(String src_str) {

@@ -15,6 +15,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.users.data; import gplx.*;
 import gplx.core.btries.*; import gplx.core.primitives.*;
+import gplx.objects.strings.AsciiByte;
 import gplx.xowa.langs.*;
 import gplx.xowa.wikis.domains.*;
 class Xoud_opt_scope {
@@ -36,7 +37,7 @@ class Xoud_opt_scope_parser {
 		list.Clear();
 		int pos = 0; int src_len = src.length;
 		while (pos < src_len) {
-			int comma_pos = Bry_find_.Find_fwd(src, Byte_ascii.Comma, pos, src_len); if (comma_pos == Bry_find_.Not_found) comma_pos = src_len;
+			int comma_pos = Bry_find_.Find_fwd(src, AsciiByte.Comma, pos, src_len); if (comma_pos == Bry_find_.Not_found) comma_pos = src_len;
 			Xoud_opt_scope itm = Parse_itm(src, pos, comma_pos);
 			if (itm == Xoud_opt_scope.App) return Ary_app;
 			list.Add(itm);
@@ -45,9 +46,9 @@ class Xoud_opt_scope_parser {
 		return (Xoud_opt_scope[])list.ToAryAndClear(Xoud_opt_scope.class);
 	}
 	public Xoud_opt_scope Parse_itm(byte[] src, int bgn, int end) {
-		int lang_dot = Bry_find_.Find_fwd(src, Byte_ascii.Dot, bgn, end);					if (lang_dot == Bry_find_.Not_found) return Warn("scope.parse.missing_lang_dot: src=~{0}", src, bgn, end);
+		int lang_dot = Bry_find_.Find_fwd(src, AsciiByte.Dot, bgn, end);					if (lang_dot == Bry_find_.Not_found) return Warn("scope.parse.missing_lang_dot: src=~{0}", src, bgn, end);
 		int lang_id = Int_.Min_value;
-		if (lang_dot == 1 && src[bgn] == Byte_ascii.Star)
+		if (lang_dot == 1 && src[bgn] == AsciiByte.Star)
 			lang_id = Xoud_opt_scope.Lang_id_wildcard;
 		else {
 			Xol_lang_stub lang_itm = Xol_lang_stub_.Get_by_key_or_null(src, bgn, lang_dot);	if (lang_itm == null) return Warn("scope.parse.invalid_lang: src=~{0}", src, bgn, end);

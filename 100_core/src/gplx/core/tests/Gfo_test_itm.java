@@ -13,8 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.tests; import gplx.*;
-import gplx.core.strings.*;
+package gplx.core.tests;
+import gplx.Byte_;
+import gplx.Int_;
+import gplx.Keyval;
+import gplx.Keyval_;
+import gplx.Long_;
+import gplx.Object_;
+import gplx.Ordered_hash;
+import gplx.Ordered_hash_;
+import gplx.String_;
+import gplx.Type_;
+import gplx.Type_ids_;
+import gplx.core.strings.String_bldr;
+import gplx.core.strings.String_bldr_;
+import gplx.objects.primitives.BoolUtl;
 public class Gfo_test_itm {
 	private final boolean is_expd;
 	private final Ordered_hash hash = Ordered_hash_.New();
@@ -33,7 +46,7 @@ public class Gfo_test_itm {
 			return (String)val_obj;
 	}
 	public void Test_bool(String key, boolean val) {
-		boolean cur = Bool_.Cast(Get_by_val(key));
+		boolean cur = BoolUtl.Cast(Get_by_val(key));
 		boolean expd = is_expd ? cur : val;
 		boolean actl = is_expd ? val : cur;
 		Gftest.Eq__bool(expd, actl);

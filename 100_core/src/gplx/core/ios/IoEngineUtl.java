@@ -13,10 +13,19 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.*; import gplx.core.*;
-import gplx.core.ios.streams.*; import gplx.core.ios.atrs.*;
-import gplx.core.consoles.*; import gplx.core.criterias.*; import gplx.core.caches.*;
-import gplx.core.envs.*;
+package gplx.core.ios;
+import gplx.Err_;
+import gplx.Io_mgr;
+import gplx.Io_url;
+import gplx.Io_url_;
+import gplx.String_;
+import gplx.core.caches.Lru_cache;
+import gplx.core.consoles.Console_adp;
+import gplx.core.criterias.Criteria;
+import gplx.core.envs.Op_sys;
+import gplx.core.ios.atrs.Io_itm_atr_req;
+import gplx.core.ios.streams.IoStream;
+import gplx.objects.primitives.BoolUtl;
 public class IoEngineUtl {
 	public int BufferLength() {return bufferLength;} public void BufferLength_set(int v) {bufferLength = v;} int bufferLength = 4096; // 0x1000	
 	public void DeleteRecycleGplx(IoEngine engine, IoEngine_xrg_recycleFil xrg) {
@@ -120,7 +129,7 @@ public class IoEngineUtl {
 			if (trgStream != null) trgStream.Rls();
 		}
 	}
-	private static final Lru_cache Dir_cache = new Lru_cache(Bool_.Y, "gplx.ios.dir_cache", 128, 256);
+	private static final Lru_cache Dir_cache = new Lru_cache(BoolUtl.Y, "gplx.ios.dir_cache", 128, 256);
 	public static boolean Query_read_only(IoEngine engine, Io_url url, int read_only_type) {
 		switch (read_only_type) {
 			case Io_mgr.Read_only__basic__file:

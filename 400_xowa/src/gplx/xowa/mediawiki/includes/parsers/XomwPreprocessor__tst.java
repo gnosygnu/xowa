@@ -13,8 +13,15 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*;
-import org.junit.*;
+package gplx.xowa.mediawiki.includes.parsers;
+import gplx.Bry_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.String_;
+import gplx.Tfds;
+import gplx.objects.primitives.BoolUtl;
+import org.junit.Before;
+import org.junit.Test;
 public class XomwPreprocessor__tst {
 	private final XomwPreprocessor__fxt fxt = new XomwPreprocessor__fxt();
 	@Before public void init() {fxt.Clear();}
@@ -108,7 +115,7 @@ public class XomwPreprocessor__tst {
 		fxt.Test__parse("a<pre bcd", "<root>a&lt;pre bcd</root>");
 	}
 	@Test public void Ext__noinclude() {	    // COVERS: "<includeonly> and <noinclude> just become <ignore> tags"
-		fxt.Init__for_inclusion_(Bool_.N);
+		fxt.Init__for_inclusion_(BoolUtl.N);
 		fxt.Test__parse("a<includeonly>b<noinclude>c</noinclude>d</includeonly>e", "<root>a<ignore>&lt;includeonly&gt;b&lt;noinclude&gt;c&lt;/noinclude&gt;d&lt;/includeonly&gt;</ignore>e</root>");
 	}
 	@Test public void Heading() {
@@ -207,20 +214,20 @@ public class XomwPreprocessor__tst {
 		));
 	}
 	@Test public void Inclusion__n() {
-		fxt.Init__for_inclusion_(Bool_.N);
+		fxt.Init__for_inclusion_(BoolUtl.N);
 		fxt.Test__parse("a<onlyinclude>b</onlyinclude>c", "<root>a<ignore>&lt;onlyinclude&gt;</ignore>b<ignore>&lt;/onlyinclude&gt;</ignore>c</root>");
 	}
 	@Test public void Inclusion__y() {
-		fxt.Init__for_inclusion_(Bool_.Y);
+		fxt.Init__for_inclusion_(BoolUtl.Y);
 		fxt.Test__parse("a<onlyinclude>b</onlyinclude>c", "<root><ignore>a&lt;onlyinclude&gt;</ignore>b<ignore>&lt;/onlyinclude&gt;c</ignore></root>");
 	}
 	@Test public void Ignored__noinclude() {	// COVERS: "Handle ignored tags"
-		fxt.Init__for_inclusion_(Bool_.N);
+		fxt.Init__for_inclusion_(BoolUtl.N);
 		fxt.Test__parse("a<noinclude>b</noinclude>c", "<root>a<ignore>&lt;noinclude&gt;</ignore>b<ignore>&lt;/noinclude&gt;</ignore>c</root>");
 	}
 }
 class XomwPreprocessor__fxt {
-	private boolean dom_enabled = Bool_.Y, hash_enabled = Bool_.Y;
+	private boolean dom_enabled = BoolUtl.Y, hash_enabled = BoolUtl.Y;
 	private boolean for_inclusion = false;
 	public XomwPreprocessor__fxt() {
 	}
@@ -230,8 +237,8 @@ class XomwPreprocessor__fxt {
 		for_inclusion = false;
 	}
 	public void Init__for_inclusion_(boolean v) {for_inclusion = v;}
-	public XomwPreprocessor__fxt Init__hash_y() {hash_enabled = Bool_.Y; return this;}
-	public XomwPreprocessor__fxt Init__dom_n () { dom_enabled = Bool_.N; return this;}
+	public XomwPreprocessor__fxt Init__hash_y() {hash_enabled = BoolUtl.Y; return this;}
+	public XomwPreprocessor__fxt Init__dom_n () { dom_enabled = BoolUtl.N; return this;}
 	public void Test__parse(String src_str, String expd) {
 		List_adp list = List_adp_.New();
 		if (hash_enabled) {

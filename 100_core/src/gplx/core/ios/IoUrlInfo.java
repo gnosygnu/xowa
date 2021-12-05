@@ -13,7 +13,7 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.core.ios; import gplx.Byte_ascii;
+package gplx.core.ios; import gplx.objects.strings.AsciiByte;
 import gplx.Char_;
 import gplx.String_;
 import gplx.core.envs.Op_sys;
@@ -38,7 +38,7 @@ class IoUrlInfo_nil implements IoUrlInfo {
 	public String Key() {return KeyConst;} public static final String KeyConst = String_.Null_mark;
 	public String EngineKey() {return "<<INVALID>>";}
 	public String DirSpr() {return "<<INVALID>>";}
-	public byte DirSpr_byte() {return Byte_ascii.Slash;}
+	public byte DirSpr_byte() {return AsciiByte.Slash;}
 	public String VolSpr() {return "<<INVALID>>";}
 	public boolean CaseSensitive() {return false;}
 	public boolean Match(String raw) {return false;}
@@ -127,7 +127,7 @@ class IoUrlInfo_wnt extends IoUrlInfo_base {
 	@Override public String Key()			{return "wnt";}
 	@Override public String EngineKey()		{return IoEngine_.SysKey;}
 	@Override public String DirSpr()			{return Op_sys.Wnt.Fsys_dir_spr_str();}
-	@Override public byte DirSpr_byte()		{return Byte_ascii.Backslash;}
+	@Override public byte DirSpr_byte()		{return AsciiByte.Backslash;}
 	@Override public boolean CaseSensitive()	{return Op_sys.Wnt.Fsys_case_match();}
 	@Override public boolean Match(String raw)	{return String_.Len(raw) > 1 && String_.CharAt(raw, 1) == ':';} // 2nd char is :; assumes 1 letter drives
 	@Override public String XtoRootName(String raw, int rawLen) {
@@ -141,7 +141,7 @@ class IoUrlInfo_lnx extends IoUrlInfo_base {
 	@Override public String Key()			{return "lnx";}
 	@Override public String EngineKey()		{return IoEngine_.SysKey;}
 	@Override public String DirSpr()			{return DirSprStr;} static final String DirSprStr = Op_sys.Lnx.Fsys_dir_spr_str();
-	@Override public byte DirSpr_byte()		{return Byte_ascii.Slash;}
+	@Override public byte DirSpr_byte()		{return AsciiByte.Slash;}
 	@Override public boolean CaseSensitive()	{return Op_sys.Lnx.Fsys_case_match();}
 	@Override public boolean Match(String raw)	{return String_.Has_at_bgn(raw, DirSprStr);}	// anything that starts with /
 	@Override public String XtoRootName(String raw, int rawLen) {
@@ -176,7 +176,7 @@ class IoUrlInfo_mem extends IoUrlInfo_base {
 	@Override public String Key()			{return key;} private String key;
 	@Override public String EngineKey()		{return engineKey;} private String engineKey;
 	@Override public String DirSpr()			{return "/";}
-	@Override public byte DirSpr_byte()		{return Byte_ascii.Slash;}
+	@Override public byte DirSpr_byte()		{return AsciiByte.Slash;}
 	@Override public boolean CaseSensitive()	{return false;}
 	@Override public String XtoRootName(String raw, int rawLen) {
 		return String_.Eq(raw, key) ? String_.DelEnd(key, 1) : null;

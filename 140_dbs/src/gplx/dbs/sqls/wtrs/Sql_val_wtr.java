@@ -13,13 +13,29 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.sqls.wtrs; import gplx.*; import gplx.dbs.*; import gplx.dbs.sqls.*;
+package gplx.dbs.sqls.wtrs;
+import gplx.Bry_bfr;
+import gplx.Byte_;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.Decimal_adp;
+import gplx.Decimal_adp_;
+import gplx.Double_;
+import gplx.Float_;
+import gplx.Int_;
+import gplx.Long_;
+import gplx.Object_;
+import gplx.Short_;
+import gplx.String_;
+import gplx.Type_ids_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
 public class Sql_val_wtr {
 //		private final Bry_bfr tmp_bfr = Bry_bfr_.New(32);
-	public byte Seq__quote = Byte_ascii.Apos, Seq__escape = Byte_ascii.Backslash;
+	public byte Seq__quote = AsciiByte.Apos, Seq__escape = AsciiByte.Backslash;
 	public void Bld_val(Bry_bfr bfr, Sql_wtr_ctx ctx, Object val) {
 		if (ctx.Mode_is_prep) {
-			bfr.Add_byte(Byte_ascii.Question);
+			bfr.Add_byte(AsciiByte.Question);
 			return;
 		}
 		if (val == null) {
@@ -28,7 +44,7 @@ public class Sql_val_wtr {
 		}
 		int tid_type = Type_ids_.To_id_by_type(val.getClass());
 		switch (tid_type) {
-			case Type_ids_.Id__bool:			Bld_val__bool		(bfr, Bool_.Cast(val)); break;
+			case Type_ids_.Id__bool:			Bld_val__bool		(bfr, BoolUtl.Cast(val)); break;
 			case Type_ids_.Id__byte:			Bld_val__byte		(bfr, Byte_.Cast(val)); break;
 			case Type_ids_.Id__short:			Bld_val__short		(bfr, Short_.cast(val)); break;
 			case Type_ids_.Id__int:			Bld_val__int		(bfr, Int_.Cast(val)); break;

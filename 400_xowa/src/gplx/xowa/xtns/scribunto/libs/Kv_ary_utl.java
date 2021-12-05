@@ -13,8 +13,10 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.scribunto.libs; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.scribunto.*;
+package gplx.xowa.xtns.scribunto.libs; import gplx.*;
 import gplx.langs.jsons.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.arrays.ArrayUtl;
 class Kv_ary_utl {
 	public static Keyval[] new_(boolean base_1, Object... vals) {
 		int len = vals.length;
@@ -43,7 +45,7 @@ class Kv_ary_utl {
 			if (Type_.Eq(val_type, Keyval[].class))
 				Ary_to_str__nde(wtr, indent, itm.Key(), (Keyval[])itm.Val());
 			else if (Type_.Is_array(val_type))
-				Ary_to_str__ary(wtr, indent, itm.Key(), Array_.cast(val));
+				Ary_to_str__ary(wtr, indent, itm.Key(), ArrayUtl.Cast(val));
 			else
 				throw Err_.new_unhandled(type_tid);
 		}
@@ -61,16 +63,16 @@ class Kv_ary_utl {
 		wtr.Nde_end();
 	}
 	private static void Ary_to_str__ary_itms(Json_wtr wtr, int indent, Object array) {
-		int len = Array_.Len(array);
+		int len = ArrayUtl.Len(array);
 		for (int j = 0; j < len; ++j) {
-			Object itm = Array_.Get_at(array, j);
+			Object itm = ArrayUtl.GetAt(array, j);
 			Class<?> itm_type = itm.getClass();
 			int itm_type_tid = Type_ids_.To_id_by_type(itm_type);
 			if (itm_type_tid == Type_ids_.Id__obj) {
 				if (Type_.Eq(itm_type, Keyval.class))
 					Ary_to_str__itm(wtr, indent + 1, (Keyval)itm);
 				else if (Type_.Is_array(itm_type))
-					Ary_to_str__ary_itms(wtr, indent + 1, Array_.cast(itm));
+					Ary_to_str__ary_itms(wtr, indent + 1, ArrayUtl.Cast(itm));
 				else
 					throw Err_.new_unhandled(itm_type);
 			}

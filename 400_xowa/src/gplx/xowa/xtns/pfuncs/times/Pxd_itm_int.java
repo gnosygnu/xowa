@@ -13,8 +13,11 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.xtns.pfuncs.times; import gplx.*; import gplx.xowa.*; import gplx.xowa.xtns.*; import gplx.xowa.xtns.pfuncs.*;
-import gplx.core.brys.*;
+package gplx.xowa.xtns.pfuncs.times;
+import gplx.DateAdp;
+import gplx.DateAdp_;
+import gplx.core.brys.Bfr_arg_;
+import gplx.objects.primitives.BoolUtl;
 interface Pxd_itm_int_interface extends Pxd_itm {
 	int Xto_int_or(int or);
 }
@@ -130,14 +133,14 @@ class Pxd_itm_int extends Pxd_itm_base implements Pxd_itm_int_interface {
 				if (val > Month_max) {									// value is not a month; assume day; DATE:2013-03-15
 					switch (data_idx) {
 						case 0:															// > 12 in slot 0
-							if (Match_sym(tctx, Bool_.Y, Pxd_itm_.Tid_dot))			// next sym is dot; assume m.d.y; EX: 22.5.70
+							if (Match_sym(tctx, BoolUtl.Y, Pxd_itm_.Tid_dot))			// next sym is dot; assume m.d.y; EX: 22.5.70
 								Eval_day_at_pos_0(tctx); 
 							else														// next sym is not dot; assume y-m-d; EX: 70-5-22
 								Eval_month_at_pos_0(tctx); 
 							break;	
 						case 1: Eval_month_at_pos_1(tctx); break;						// > 12 in slot 1; assume m.d; EX: 5.22
 						case 2:															// > 12 in slot 2
-							if (Match_sym(tctx, Bool_.N, Pxd_itm_.Tid_dot))				// prv sym is dot; assume d.m.y; EX: 22.5.70
+							if (Match_sym(tctx, BoolUtl.N, Pxd_itm_.Tid_dot))				// prv sym is dot; assume d.m.y; EX: 22.5.70
 								Eval_dmy_at_y(tctx); 
 							else														// prv sym is not dot; assume m-d-y; EX: 22.5.70
 								Eval_month_at_pos_2(tctx);

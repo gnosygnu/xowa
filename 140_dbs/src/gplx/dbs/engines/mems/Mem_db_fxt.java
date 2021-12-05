@@ -13,13 +13,28 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.dbs.engines.mems; import gplx.*; import gplx.dbs.*;
+package gplx.dbs.engines.mems;
+import gplx.Bry_bfr;
+import gplx.Bry_bfr_;
+import gplx.Io_mgr;
+import gplx.Io_url_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.Tfds;
+import gplx.dbs.Db_conn;
+import gplx.dbs.Db_conn_bldr;
+import gplx.dbs.Db_qry;
+import gplx.dbs.Db_rdr;
+import gplx.dbs.Db_stmt;
+import gplx.dbs.DbmetaFldList;
+import gplx.dbs.Dbmeta_tbl_itm;
+import gplx.objects.primitives.BoolUtl;
 class Mem_db_fxt {
 	public Mem_db_fxt() {
 		Io_mgr.Instance.InitEngine_mem();
 		Db_conn_bldr.Instance.Reg_default_mem();
 	}
-	public Db_conn			Make_conn(String url) {return Db_conn_bldr.Instance.Get_or_autocreate(Bool_.Y, Io_url_.mem_fil_(url));}
+	public Db_conn			Make_conn(String url) {return Db_conn_bldr.Instance.Get_or_autocreate(BoolUtl.Y, Io_url_.mem_fil_(url));}
 	public Dbmeta_tbl_itm	Exec__create_tbl(Db_conn conn, String tbl, String... fld_names) {
 		DbmetaFldList flds = new DbmetaFldList();
 		int len = fld_names.length;

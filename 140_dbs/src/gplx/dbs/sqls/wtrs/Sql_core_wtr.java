@@ -16,7 +16,7 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 package gplx.dbs.sqls.wtrs;
 import gplx.Bry_bfr;
 import gplx.Bry_bfr_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Err_;
 import gplx.Keyval;
 import gplx.dbs.Db_qry;
@@ -31,8 +31,8 @@ import gplx.dbs.sqls.SqlQryWtr;
 import gplx.dbs.sqls.itms.Sql_select_fld;
 public class Sql_core_wtr implements SqlQryWtr {
 	private final Bry_bfr bfr = Bry_bfr_.New_w_size(64);
-	public byte[] Seq__nl = Byte_ascii.Space_bry;
-	public byte Seq__quote = Byte_ascii.Apos, Seq__escape = Byte_ascii.Backslash;
+	public byte[] Seq__nl = AsciiByte.SpaceBry;
+	public byte Seq__quote = AsciiByte.Apos, Seq__escape = AsciiByte.Backslash;
 	public Sql_core_wtr() {
 		this.val_wtr = Make__val_wtr();
 		this.from_wtr = Make__from_wtr();

@@ -13,9 +13,21 @@ The terms of each license can be found in the source code repository:
 GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
-package gplx.xowa.mediawiki.includes.parsers.tables; import gplx.*; import gplx.xowa.*; import gplx.xowa.mediawiki.*; import gplx.xowa.mediawiki.includes.*; import gplx.xowa.mediawiki.includes.parsers.*;
-import gplx.xowa.parsers.htmls.*;
-import gplx.xowa.mediawiki.includes.libs.*; import gplx.xowa.parsers.uniqs.*;
+package gplx.xowa.mediawiki.includes.parsers.tables;
+import gplx.Bry_;
+import gplx.Bry_bfr;
+import gplx.Bry_find_;
+import gplx.Bry_split_;
+import gplx.List_adp;
+import gplx.List_adp_;
+import gplx.objects.primitives.BoolUtl;
+import gplx.objects.strings.AsciiByte;
+import gplx.xowa.mediawiki.XophpArray;
+import gplx.xowa.mediawiki.includes.XomwSanitizer;
+import gplx.xowa.mediawiki.includes.libs.XomwStringUtils;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserBfr;
+import gplx.xowa.mediawiki.includes.parsers.XomwParserCtx;
+import gplx.xowa.mediawiki.includes.parsers.XomwStripState;
 public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.UNSAFE: caching for repeated calls
 	private final Bry_bfr tmp;
 	private Bry_bfr bfr;
@@ -44,7 +56,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 
 		indent_level = 0;
 		
-		Bry_split_.Split(src, src_bgn, src_end, Byte_ascii.Nl, Bool_.N, this); // PORTED.SPLIT: $lines = StringUtils::explode("\n", $text);
+		Bry_split_.Split(src, src_bgn, src_end, AsciiByte.Nl, BoolUtl.N, this); // PORTED.SPLIT: $lines = StringUtils::explode("\n", $text);
 
 		// Closing open td, tr && table
 		while (td_history.Len() > 0) {
@@ -61,7 +73,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 		}
 
 		// Remove trailing line-ending (b/c)
-		if (bfr.Get_at_last_or_nil_if_empty() == Byte_ascii.Nl) {
+		if (bfr.Get_at_last_or_nil_if_empty() == AsciiByte.Nl) {
 			bfr.Del_by_1();
 		}
 
@@ -84,13 +96,13 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 
 		byte first_char = line[0];
 		first_2[0] = line[0];
-		first_2[1] = line_len == 1 ? Byte_ascii.Null : line[1];
+		first_2[1] = line_len == 1 ? AsciiByte.Null : line[1];
 
 		// PORTED: preg_match('/^(:*)\s*\{\|(.*)$/', $line, $matches)
 		byte[] tblw_atrs = null;
 		boolean tblw_bgn_found = false;
-		int colons_end = Bry_find_.Find_fwd_while(src, 0, line_len, Byte_ascii.Colon);
-		int tblw_bgn = Bry_find_.Find_fwd_while(line, colons_end, line_len, Byte_ascii.Space);
+		int colons_end = Bry_find_.Find_fwd_while(src, 0, line_len, AsciiByte.Colon);
+		int tblw_bgn = Bry_find_.Find_fwd_while(line, colons_end, line_len, AsciiByte.Space);
 		int tblw_atrs_bgn = tblw_bgn + 2;
 		if (Bry_.Eq(line, tblw_bgn, tblw_atrs_bgn, Wtxt__tb__bgn)) {
 			tblw_bgn_found = true;
@@ -107,7 +119,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 				tmp.Add(Html__dl__bgn);
 			tmp.Add_str_a7("<table");
 			sanitizer.fixTagAttributes(tmp, Name__table, tblw_atrs);
-			tmp.Add_byte(Byte_ascii.Angle_end);
+			tmp.Add_byte(AsciiByte.AngleEnd);
 			out_line = tmp.To_bry_and_clear();
 			td_history.Add(false);
 			last_tag_history.Add(Bry_.Empty);
@@ -134,7 +146,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 			}
 
 			if (XophpArray.popBoolOrN(td_history)) {
-				line = tmp.Add_str_a7("</").Add(last_tag).Add_byte(Byte_ascii.Angle_end).Add(line).To_bry_and_clear();
+				line = tmp.Add_str_a7("</").Add(last_tag).Add_byte(AsciiByte.AngleEnd).Add(line).To_bry_and_clear();
 			}
 			XophpArray.popBryOrNull(tr_attributes);
 			// PORTED:$outLine = $line . str_repeat( '</dd></dl>', $indent_level );
@@ -165,7 +177,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 			}
 
 			if (XophpArray.popBoolOrN(td_history)) {
-				line = tmp.Add_str_a7("</").Add(last_tag).Add_byte(Byte_ascii.Gt).Add(line).To_bry_and_clear();
+				line = tmp.Add_str_a7("</").Add(last_tag).Add_byte(AsciiByte.Gt).Add(line).To_bry_and_clear();
 			}
 
 			out_line = line;
@@ -173,20 +185,20 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 			td_history.Add(false);
 			last_tag_history.Add(Bry_.Empty);
 		}
-		else if ( first_char == Byte_ascii.Pipe
-				|| first_char == Byte_ascii.Bang
+		else if ( first_char == AsciiByte.Pipe
+				|| first_char == AsciiByte.Bang
 				|| Bry_.Eq(first_2, Wtxt__caption)
 			) {
 			// This might be cell elements, td, th or captions
 			if (Bry_.Eq(first_2, Wtxt__caption)) {
-				first_char = Byte_ascii.Plus;
+				first_char = AsciiByte.Plus;
 				line = Bry_.Mid(line, 2);
 			} else {
 				line = Bry_.Mid(line, 1);
 			}
 
 			// Implies both are valid for table headings.
-			if (first_char == Byte_ascii.Bang) {
+			if (first_char == AsciiByte.Bang) {
 				XomwStringUtils.replaceMarkup(line, 0, line.length, Wtxt__th2, Wtxt__td2); // $line = StringUtils::replaceMarkup('!!', '||', $line);
 			}
 
@@ -204,7 +216,7 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 			for (int j = 0; j < cells_len; j++) {
 				byte[] cell = cells[j];
 				previous = Bry_.Empty;
-				if (first_char != Byte_ascii.Plus) {
+				if (first_char != AsciiByte.Plus) {
 					byte[] tr_after = XophpArray.popBryOrNull(tr_attributes);
 					if (!XophpArray.popBoolOrN(tr_history)) {
 						previous = tmp.Add_str_a7("<tr").Add(tr_after).Add_str_a7(">\n").To_bry_and_clear();
@@ -221,13 +233,13 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 					previous = tmp.Add_str_a7("</").Add(last_tag).Add_str_a7(">\n").Add(previous).To_bry_and_clear();
 				}
 
-				if (first_char == Byte_ascii.Pipe) {
+				if (first_char == AsciiByte.Pipe) {
 					last_tag = Name__td;
 				}
-				else if (first_char == Byte_ascii.Bang) {
+				else if (first_char == AsciiByte.Bang) {
 					last_tag = Name__th;
 				}
-				else if (first_char == Byte_ascii.Plus) {
+				else if (first_char == AsciiByte.Plus) {
 					last_tag = Name__caption;
 				}
 				else {
@@ -237,23 +249,23 @@ public class Xomw_table_wkr implements gplx.core.brys.Bry_split_wkr {// THREAD.U
 				last_tag_history.Add(last_tag);
 
 				// A cell could contain both parameters and data
-				byte[][] cell_data = Bry_split_.Split_w_max(cell, Byte_ascii.Pipe, 2);
+				byte[][] cell_data = Bry_split_.Split_w_max(cell, AsciiByte.Pipe, 2);
 
 				// Bug 553: Note that a '|' inside an invalid link should not
 				// be mistaken as delimiting cell parameters
 				byte[] cell_data_0 = cell_data[0];
 				byte[] cell_data_1 = cell_data[1];
 				if (Bry_find_.Find_fwd(cell_data_0, Wtxt__lnki__bgn) != Bry_find_.Not_found) {
-					cell = tmp.Add(previous).Add_byte(Byte_ascii.Angle_bgn).Add(last_tag).Add_byte(Byte_ascii.Angle_end).Add(cell).To_bry_and_clear();
+					cell = tmp.Add(previous).Add_byte(AsciiByte.AngleBgn).Add(last_tag).Add_byte(AsciiByte.AngleEnd).Add(cell).To_bry_and_clear();
 				}
 				else if (cell_data_1 == null) {
-					cell = tmp.Add(previous).Add_byte(Byte_ascii.Angle_bgn).Add(last_tag).Add_byte(Byte_ascii.Angle_end).Add(cell_data_0).To_bry_and_clear();
+					cell = tmp.Add(previous).Add_byte(AsciiByte.AngleBgn).Add(last_tag).Add_byte(AsciiByte.AngleEnd).Add(cell_data_0).To_bry_and_clear();
 				}
 				else {
 					byte[] atrs = strip_state.unstripBoth(cell_data_0);
-					tmp.Add(previous).Add_byte(Byte_ascii.Angle_bgn).Add(last_tag);
+					tmp.Add(previous).Add_byte(AsciiByte.AngleBgn).Add(last_tag);
 					sanitizer.fixTagAttributes(tmp, last_tag, atrs);
-					tmp.Add_byte(Byte_ascii.Angle_end).Add(cell_data_1);
+					tmp.Add_byte(AsciiByte.AngleEnd).Add(cell_data_1);
 					cell = tmp.To_bry_and_clear();
 				}
 

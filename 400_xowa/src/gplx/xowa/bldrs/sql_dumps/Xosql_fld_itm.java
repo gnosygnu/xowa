@@ -14,7 +14,8 @@ GPLv3 License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-GPLv3.txt
 Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.bldrs.sql_dumps; import gplx.*;
-class Xosql_fld_itm implements gplx.CompareAble {
+import gplx.objects.lists.CompareAble;
+class Xosql_fld_itm implements CompareAble {
 	public Xosql_fld_itm(int uid, byte[] key, int idx) {
 		this.uid = uid;
 		this.key = key;

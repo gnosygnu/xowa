@@ -15,9 +15,9 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx.xowa.guis.history;
 
-import gplx.Bool_;
+import gplx.objects.primitives.BoolUtl;
 import gplx.Bry_;
-import gplx.Byte_ascii;
+import gplx.objects.strings.AsciiByte;
 import gplx.Ordered_hash;
 import gplx.Ordered_hash_;
 import gplx.xowa.Xoa_ttl;
@@ -30,8 +30,8 @@ public class Xog_history_mgr {
 	private final Ordered_hash hash = Ordered_hash_.New_bry(); private final Xog_history_stack stack = new Xog_history_stack();
 	public int Count() {return hash.Len();}
 	public Xoae_page Cur_page(Xowe_wiki wiki) {return Get_or_fetch(wiki, stack.Cur_itm());}
-	public Xoae_page Go_bwd(Xowe_wiki wiki) {return Go_by_dir(wiki, Bool_.N);}
-	public Xoae_page Go_fwd(Xowe_wiki wiki) {return Go_by_dir(wiki, Bool_.Y);}
+	public Xoae_page Go_bwd(Xowe_wiki wiki) {return Go_by_dir(wiki, BoolUtl.N);}
+	public Xoae_page Go_fwd(Xowe_wiki wiki) {return Go_by_dir(wiki, BoolUtl.Y);}
 	public Xoae_page Go_by_dir(Xowe_wiki wiki, boolean fwd) {
 		Xog_history_itm itm = fwd ? stack.Go_fwd() : stack.Go_bwd();
 		if (itm == Xog_history_itm.Null) return Xoae_page.Empty;
@@ -78,7 +78,7 @@ public class Xog_history_mgr {
 		return wiki.Data_mgr().Load_page_by_ttl(ttl);
 	}
 	private static byte[] Build_page_key(Xoae_page page) {return Build_page_key(page.Wiki().Domain_bry(), page.Ttl().Full_url(), page.Url().Qargs_mgr().To_bry());}
-	private static byte[] Build_page_key(byte[] wiki_key, byte[] page_key, byte[] args_key) {return Bry_.Add_w_dlm(Byte_ascii.Pipe, wiki_key, page_key, args_key);}
+	private static byte[] Build_page_key(byte[] wiki_key, byte[] page_key, byte[] args_key) {return Bry_.Add_w_dlm(AsciiByte.Pipe, wiki_key, page_key, args_key);}
 	public static Xog_history_itm new_(Xoae_page pg) {
 		byte[] wiki = pg.Wiki().Domain_bry();
 		byte[] page = pg.Ttl().Full_url();		// get page_name only (no anchor; no query args)

@@ -15,6 +15,8 @@ Apache License: https://github.com/gnosygnu/xowa/blob/master/LICENSE-APACHE2.txt
 */
 package gplx;
 import gplx.core.strings.*; import gplx.core.envs.*;
+import gplx.objects.arrays.ArrayUtl;
+import gplx.objects.strings.AsciiByte;
 public class Time_span_ {
 	public static final Time_span Zero = new Time_span(0);
 	public static final Time_span Null = new Time_span(-1);
@@ -43,9 +45,9 @@ public class Time_span_ {
 		for (int i = end - 1; i >= bgn; i--) {	// start from end; fracs should be lowest unit
 			byte b = raw[i];
 			switch (b) {
-				case Byte_ascii.Num_0: case Byte_ascii.Num_1: case Byte_ascii.Num_2: case Byte_ascii.Num_3: case Byte_ascii.Num_4:
-				case Byte_ascii.Num_5: case Byte_ascii.Num_6: case Byte_ascii.Num_7: case Byte_ascii.Num_8: case Byte_ascii.Num_9:
-					int unit_digit = Byte_ascii.To_a7_int(b);
+				case AsciiByte.Num0: case AsciiByte.Num1: case AsciiByte.Num2: case AsciiByte.Num3: case AsciiByte.Num4:
+				case AsciiByte.Num5: case AsciiByte.Num6: case AsciiByte.Num7: case AsciiByte.Num8: case AsciiByte.Num9:
+					int unit_digit = AsciiByte.ToA7Int(b);
 					unit_val = (unit_multiple == 1) ? unit_digit : unit_val + (unit_digit * unit_multiple);
 					switch (colon_pos) {
 						case 0:		val_s = unit_val; break;
@@ -55,21 +57,21 @@ public class Time_span_ {
 					}
 					unit_multiple *= 10;
 					break;
-				case Byte_ascii.Dot:
+				case AsciiByte.Dot:
 					double factor = (double)1000 / (double)unit_multiple;	// factor is necessary to handle non-standard decimals; ex: .1 -> 100; .00199 -> .001
 					val_f = (int)((double)val_s * factor);	// move val_s unit_val to val_f; logic is indirect, b/c of differing inputs: "123" means 123 seconds; ".123" means 123 fractionals
 					val_s = 0;
 					unit_multiple = 1;
 					break;
-				case Byte_ascii.Colon:
+				case AsciiByte.Colon:
 					colon_pos++;
 					unit_multiple = 1;
 					break;
-				case Byte_ascii.Dash:
+				case AsciiByte.Dash:
 					if	(i == 0 && unit_val > 0)		// only if first char && unit_val > 0 
 						sign = -1;
 					break;
-				case Byte_ascii.Space: case Byte_ascii.Tab: case Byte_ascii.Nl: case Byte_ascii.Cr:
+				case AsciiByte.Space: case AsciiByte.Tab: case AsciiByte.Nl: case AsciiByte.Cr:
 					if (fail_if_ws) return parse_null;
 					break;
 				default:
@@ -120,7 +122,7 @@ public class Time_span_ {
 		return sb.To_str();
 	}
 	@gplx.Internal protected static int[] Split_long(long fracs, int[] divisors) {
-		int divLength = Array_.Len(divisors);
+		int divLength = ArrayUtl.Len(divisors);
 		int[] rv = new int[divLength];
 		long cur = Math_.Abs(fracs);
 		for (int i = divLength - 1; i > -1; i--) {
@@ -132,7 +134,7 @@ public class Time_span_ {
 		return rv;
 	}
 	@gplx.Internal protected static long Merge_long(int[] vals, int[] divisors) {
-		long rv = 0; int valLength = Array_.Len(vals);
+		long rv = 0; int valLength = ArrayUtl.Len(vals);
 		for (int i = 0; i < valLength; i++) {
 			rv += vals[i] * divisors[i];
 		}
